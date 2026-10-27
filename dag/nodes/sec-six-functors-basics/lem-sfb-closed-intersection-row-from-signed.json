@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-closed-intersection-row-from-signed",
+ "kind": "statement",
+ "title": "Splicing a signed closed row into the augmented finite-subset row",
+ "statement": "Let i:Z→X be a scheme morphism, F a SignedClosedFamily inside Z, and A a commutative ring sheaf on X_proet. Given any SignedClosedRow S of [lem-sfb-closed-restriction-signed-refinements], there exists a Row i F.members A in the precise sense of [def-sfb-closed-intersection-augmented-row]. Its empty term is the support object in degree -1. No exactness, locality, comparison, or contraction is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09AH; agent deduction in lem-sfb-closed-intersection-vertex-contraction, proof step 2 (signed row and augmentation, including reindexing by finite subsets)"
+ },
+ "stmt_deps": [
+  "def-sfb-closed-intersection-augmented-row",
+  "lem-sfb-closed-restriction-signed-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Use the given row in nonnegative degrees, its support object E_Z in degree -1, and zero below -1. The map from degree -1 to zero is its given augmentation; all other differentials are the given ones or zero. The chain-map equation for alpha says that augmentation followed by d from zero to one is zero. The other squares vanish by the row's differential-square equation or because an object is zero. Apply this construction to morphisms using the given natural augmentation; this defines an additive functor. The empty subset is the unique subset of augmented degree -1, so its product is canonically E_Z. In nonnegative degree p, send an increasing (p+1)-tuple to its image subset. Its inverse lists a subset in increasing order. These are inverse bijections and induce the required product isomorphisms. Outside the finite range both indexing types are empty and both terms are zero. For nonempty source and target indices use the given restriction when the source is contained in the target, and zero otherwise. For the empty source and nonempty target use fromSupport; for two empty indices use the identity. A nonempty source and empty target has zero map. The unit equations follow respectively from restriction_unit, fromSupport_unit and the identity equation. The matrix formula in nonnegative degrees is the original differential formula under the bijection: the number of vertices smaller than the deleted vertex is its position. At the augmentation it is exactly augment_components and the sign is one. In all other degrees the source or target product is zero. Thus all fields of Row hold, naturally in the module, with precisely the prescribed units and signs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09AH; proof step 2 (signed row and augmentation, including reindexing by finite subsets) of lem-sfb-closed-intersection-vertex-contraction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(augment.*[Cc]ochain|[Cc]ochain.*augment|augment.*splice)",
+   "results": "5 hits: Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean, Mathlib/Algebra/Homology/Augment.lean; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Splice a degree zero chain augmentation into degree minus one of an alternating finite cochain complex",
+   "results": "8 hits: ChainComplex.augment, CochainComplex.augmentTruncate, CochainComplex.augment, CochainComplex.fromSingle₀AsComplex, CochainComplex.ConnectData.d_sub_one_zero, ChainComplex.augment_d_one_zero, CochainComplex.augment_X_zero, ChainComplex.augment_X_zero; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splice a degree zero chain augmentation into degree minus one of an alternating finite cochain complex",
+   "results": "8 hits: CochainComplex.augment, CochainComplex.fromSingle₀AsComplex, CochainComplex.augment_X_succ, CochainComplex.augment_d_zero_one, CochainComplex.ConnectData.cochainComplex, CochainComplex.ConnectData.X_negOne, CochainComplex.augment_X_zero, CochainComplex.augment_d_succ_succ; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedIntersectionVertexContraction",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; technical support-resolution subargument: Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); agent affine closed-base-change and insertion-contraction consequence extracted from old steps 1, 4 and 5 of lem-sfb-finite-closed-cover-resolution, using the existing arbitrary-ring base-change node.; proof step 2 (signed row and augmentation, including reindexing by finite subsets)",
+   "via": [
+    "lem-sfb-closed-intersection-vertex-contraction",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedIntersectionRowFromSigned",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedIntersectionRowFromSigned.lean",
+  "declaration": "AlgebraicGeometry.ClosedIntersection.row_from_signed",
+  "statement": "theorem row_from_signed {X Z : Scheme.{u}} {i : Z ⟶ X}\n    (F : SignedClosedFamily i) (A : Rings X) (S : SignedClosedRow i F A) :\n    Nonempty (Row i F.members A)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
 import all Sheaf.Paper.CompletedConstantSheafReduction
 import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Paper.ConstantQuotientTensorComparison
+import Sheaf.Paper.SignedProjectionResolutionNormalization
 
 /-! # Perfect projection for one constant quotient
 
@@ -180,6 +182,40 @@ private theorem constantResolution (T : Scheme.{t}) (n : ℕ) :
     infer_instance
   · exact proEtaleStrictPerfect_flat _ C pkg ⟨a, b, hb'⟩
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem projection_transport
+    {C E : Type*} [Category C] [Category E]
+    (L : C ⥤ E) (R : E ⥤ C) (adj : L ⊣ R)
+    (T : C × C ⥤ C) (S : E × E ⥤ E)
+    (mu : T ⋙ L ≅ (L.prod L) ⋙ S) (Q : C)
+    (H : C ⥤ C) (J : E ⥤ E) (theta : H ⋙ L ≅ L ⋙ J)
+    (eH : H ≅ (Functor.curryObj T).flip.obj Q)
+    (eJ : J ≅ (Functor.curryObj S).flip.obj (L.obj Q))
+    (hs : ∀ M : C, L.map (eH.hom.app M) ≫ mu.hom.app (M, Q) =
+      theta.hom.app M ≫ eJ.hom.app (L.obj M)) (K : E) :
+    eH.hom.app (R.obj K) ≫ derivedProjectionFormulaMate L R adj T S mu K Q =
+      (mateEquiv adj adj theta.hom).app K ≫ R.map (eJ.hom.app K) := by
+  have hc : L.map (derivedProjectionFormulaMate L R adj T S mu K Q) ≫
+      adj.counit.app (S.obj (K, L.obj Q)) = mu.hom.app (R.obj K, Q) ≫
+        S.map (Prod.mkHom (adj.counit.app K) (𝟙 (L.obj Q))) := by
+    have h := adj.map_rightAdjointProjectionMap_app_app_comp_counit
+      (T_C := Functor.curry.obj S) (T_D := Functor.curry.obj T)
+      (Functor.curry.map mu.hom ≫ (Functor.curryObjProdComp L L S).hom) K Q
+    change L.map (derivedProjectionFormulaMate L R adj T S mu K Q) ≫
+      adj.counit.app (S.obj (K, L.obj Q)) =
+      (mu.hom.app (R.obj K, Q) ≫ 𝟙 _) ≫
+        S.map (Prod.mkHom (adj.counit.app K) (𝟙 (L.obj Q))) at h
+    simpa only [Category.comp_id] using h
+  apply (adj.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [hc, adj.counit_naturality]
+  rw [← Category.assoc (L.map ((mateEquiv adj adj theta.hom).app K)),
+    mateEquiv_counit adj adj theta.hom K, Category.assoc]
+  rw [← Category.assoc, hs, Category.assoc]
+  exact congrArg (fun z ↦ theta.hom.app (R.obj K) ≫ z)
+    (eJ.hom.naturality (adj.counit.app K)).symm
+
 /-- The finite counit projection is invertible for a perfect quotient.
 Source: Stacks Tag 0944, lemma-projection-formula, and Tag 06YY
 (blueprint: lem-sp-constant-perfect-quotient-projection).
@@ -202,6 +238,37 @@ prove the claim. No bound on J, completeness of K, or compatible choices at othe
 quotient levels are required. Zero quotients and rank-zero terms are included. -/
 theorem quotientProjection_isIso (n : ℕᵒᵖ) (K : D (A := A) U) :
     IsIso ((quotientProjection d f n).app K) := by
-  sorry
+  obtain ⟨F, lo, hi, q, hq, ⟨package⟩, hb, hF⟩ := constantResolution d V n.unop
+  obtain ⟨a, b, eV, eU, hs⟩ := constantQuotientTensorComparison d f n.unop F hF q hq
+  obtain ⟨I, hI, ⟨alpha⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  have hn := SignedProjectionResolution.normalization f (exchangeConstantRing V A)
+    (exchangeConstantRing U A) (exchangeConstantIso f A) a b K
+    (DerivedCategory.Q.obj F) I hI alpha F (Iso.refl _) package ⟨lo, hi, hb⟩
+  have hp : IsIso (derivedProjectionFormulaMate (pull (A := A) f) (push (A := A) f)
+      (proEtaleRingDerivedAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso f A)) a.tensor b.tensor
+      (proEtaleCanonicalTensorComparison f (exchangeConstantRing V A)
+        (exchangeConstantRing U A) (exchangeConstantIso f A) a b) K
+      (DerivedCategory.Q.obj F)) :=
+    ⟨⟨_, hn.2.1, hn.2.2⟩⟩
+  have ht := projection_transport (pull (A := A) f) (push (A := A) f)
+    (proEtaleRingDerivedAdjunction f (exchangeConstantRing V A) (exchangeConstantRing U A)
+      (exchangeConstantIso f A)) a.tensor b.tensor
+    (proEtaleCanonicalTensorComparison f (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso f A) a b)
+    (DerivedCategory.Q.obj F) (reduction d V ⋙ quotientEvaluation V n)
+    (reduction d U ⋙ quotientEvaluation U n) (quotientTensorPull d f n) eV eU
+    (fun M ↦ by
+      simpa only [quotientTensorPull, Iso.trans_hom, NatTrans.comp_app,
+        Functor.associator_hom_app, Functor.associator_inv_app, Iso.symm_hom,
+        Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp,
+        Category.comp_id, Category.assoc] using hs M) K
+  have : IsIso ((quotientProjection d f n).app K ≫
+      (push (A := A) f).map (eU.hom.app K)) := by
+    change IsIso (((mateEquiv _ _ (quotientTensorPull d f n).hom).app K) ≫ _)
+    rw [← ht]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ ((push (A := A) f).map (eU.hom.app K))
 
 end AlgebraicGeometry.Scheme.OrderedExchange

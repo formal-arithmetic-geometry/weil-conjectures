@@ -14,11 +14,9 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
-import Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedOpenSpreading
+import Sheaf.AlgebraicGeometry.SmoothConnectedFibreNormalIntegrality
 
 /-!
 # Spreading a geometrically irreducible smooth-fibre open
@@ -47,26 +45,16 @@ Source: Stacks Project, Tag 057J, smooth specialization via Tag 056W used in Tag
 (blueprint: lem-trf-geometrically-integral-fibre-neighbourhood).
 
 Proof:
-1. By `lem-pc-smooth-flat` and `sbc-lem-smooth-geometrically-reduced`, smoothness gives
-   flatness and geometrically reduced fibres. A geometrically irreducible scheme is nonempty
-   and geometrically connected: a partition into two nonempty clopen parts contradicts
-   irreducibility after each field extension (`def-pc-geometrically-irreducible`,
-   `def-weil-irreducible-components`, `def-weil-connected-scheme`).
-2. Apply `lem-trf-geometrically-connected-fibre-open-spreading` (Stacks 055W). It gives the
-   affine elementary étale neighbourhood and quasi-compact open with geometrically connected
-   fibres and exactly the prescribed open fibre. Retain this neighbourhood and entire open.
-3. Smoothness is stable under base change (`lem-pc-proper-base-change`, clause 2) and under
-   precomposition with an open immersion (`lem-pc-open-immersion-smooth-composition`), so the
-   open's structure map is smooth. No separatedness or Noetherian hypothesis is needed.
-4. For any point of the new base and any extension K of its residue field, the corresponding
-   base-changed fibre C is smooth over Spec K. Iterated base change (`def-pc-base-change`)
-   and step 2 make C geometrically connected and nonempty. Spec K is integral and has local
-   ring and function field K (`lem-weil-pbc-spec-domain-stalks-function-field`,
-   `def-weil-affine-spectrum`); K is integrally closed in itself.
-5. Apply `lem-sbc-smooth-connected-generic-geometry-core` over Spec K, with the identity
-   cartesian generic fibre, to conclude C is integral. Since the point and field extension
-   were arbitrary, every fibre is geometrically integral. All other clauses and the equality
-   of embedded open fibres are those of step 2.
+1. Geometric irreducibility implies geometric connectedness: every field base change is
+   irreducible and therefore nonempty and connected.
+2. Apply `lem-trf-smooth-connected-open-spreading` to obtain the affine elementary étale
+   neighbourhood and quasi-compact open `V`. Its structure morphism is smooth and
+   geometrically connected, and it has precisely the prescribed embedded open fibre.
+3. Apply `lem-trf-smooth-connected-fibre-normal-integrality` to that structure morphism.
+   For every base point and every extension of its residue field, the extended fibre is
+   integral. Mathlib's field-extension criterion and fibrewise criterion turn this into
+   geometric integrality of `V` over the new base. All other witnesses and the embedded
+   fibre equality are retained from step 2.
 -/
 theorem exists_geometricallyIntegral_fibre_neighbourhood {Y S : Scheme.{u}}
     (h : Y ⟶ S) [Smooth h] [LocallyOfFinitePresentation h] [QuasiCompact h]
@@ -84,6 +72,23 @@ theorem exists_geometricallyIntegral_fibre_neighbourhood {Y S : Scheme.{u}}
               (pullback.condition (f := h) (g := a)).symm
               (a.SpecMap_residueFieldMap_fromSpecResidueField s₁).symm ≫
             eqToHom (congrArg h.fiber hs)) ⁻¹ᵁ T := by
-  sorry
+  have : GeometricallyConnected (T.ι ≫ h.fiberToSpecResidueField s) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  obtain ⟨S₁, a, s₁, hs, haff, het, hres, V, hcompact, hsmooth, hconn, hfibre⟩ :=
+    exists_smooth_geometricallyConnected_fibre_neighbourhood h s T
+  have : Smooth (V.ι ≫ pullback.snd h a) := hsmooth
+  have : GeometricallyConnected (V.ι ≫ pullback.snd h a) := hconn
+  refine ⟨S₁, a, s₁, hs, haff, het, hres, V, hcompact, ?_, hfibre⟩
+  rw [GeometricallyIntegral.iff_geometricallyIntegral_fiber]
+  intro t
+  constructor
+  refine (geometrically_iff_of_commRing (R := S₁.residueField t) (P := IsIntegral)
+    (f := (V.ι ≫ pullback.snd h a).fiberToSpecResidueField t)).mpr ?_
+  intro K _ _ Z fst snd hZ
+  have : IsIntegral (pullback ((V.ι ≫ pullback.snd h a).fiberToSpecResidueField t)
+      (Spec.map (CommRingCat.ofHom (algebraMap (S₁.residueField t) K)))) :=
+    (smooth_connected_fibre_normal_integrality (V.ι ≫ pullback.snd h a)
+      (fun _ ↦ inferInstance) t K).1
+  exact IsIntegral.of_isIso hZ.isoPullback.inv
 
 end AlgebraicGeometry

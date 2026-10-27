@@ -1,0 +1,273 @@
+{
+ "id": "lem-sf-shifted-etale-lines-locality",
+ "kind": "statement",
+ "title": "Pullback tensor and cover descent for shifted etale lines",
+ "statement": "Let $A$ be a commutative ring and $X$ any scheme [def-pc-scheme]. Use the ordinary unbounded etale derived category [def-weil-pbc-derived-categories], derived tensor [def-kun-derived-tensor], and cohomology sheaves [def-weil-derived-cohomology-sheaves]. For $n\\in\\mathbf Z$, say that a complex has line shape $n$ if it is isomorphic in the derived category to $L[n]$ for a locally constant sheaf $L$ of $A$-modules [def-constructible-locally-constant] with every separably closed geometric stalk isomorphic to $A$. Then:\n(1) A complex of line shape $n$ is tensor-invertible; its inverse has line shape $-n$.\n(2) For any scheme morphism $v:X'\\to X$, exact inverse image preserves line shape $n$, with $v^*(L[n])\\cong(v^*L)[n]$; if $M,N$ have line shapes $m,n$, then $M\\otimes_A^LN$ has line shape $m+n$.\n(3) Let $\\{u_i:U_i\\to X\\}_{i\\in I}$ be a small jointly surjective family of etale morphisms [def-weil-etale-morphism]. If every $u_i^*M$ has line shape $n$, then $M$ has line shape $n$, and one may take $L=\\mathcal H^{-n}(M)$. Also, a morphism $\\alpha$ in $D(X_{\\mathrm{et}},A)$ is invertible if every $u_i^*\\alpha$ is invertible. Empty $X$ and the empty covering family of empty $X$ are permitted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 4, descent of the single nonzero cohomology sheaf without gluing derived objects; and the tensor/pullback operations in paragraph 2. Upstream SmoothDuality/Local.lean, IsShiftedRankOneLocalSystem.isInvertible, leftDerivedUpperStar and of_jointlySurjective, and SmoothDuality/AffineSpace.lean, IsShiftedRankOneLocalSystem.tensor, give the separate parts."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "def-constructible-locally-constant",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing ordinary-etale interfaces recorded in lean.note. For M ≅ F[n], take the actual sheaf D = ihom(F, unit). The upstream tensorIhomUnitIsoOfIsLocallyConstantSheaf gives eFD : F tensor D ≅ unit. Choose a locally constant datum for F, discard its empty members, and on each remaining member choose an algebraic-closure point. nonempty_iso_unit_of_isConstant and upperStarCompSheafFiberIso identify the restricted F with the unit. For each restricted D, compose the inverse left unitor, the inverse trivialization of F, the monoidal tensorator of exact inverse image, the image of eFD and the inverse monoidal unit comparison. This is a concrete isomorphism v_i^* D ≅ unit, requiring no internal-Hom comparison.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend local constancy of D through etaleCoverOfJointlySurjective using IsLocallyConstantSheaf.of_cover. Every separably closed geometric point lifts to one of the nonempty covering members. Compose upperStarCompSheafFiberIso, the restricted-D trivialization, uliftSheafFiberIso and sheafFiberUnitIso to identify its stalk with A. This treats separably closed points directly and does not pass through field extension. The argument allows empty X and the zero ring.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upstream ObjectProperty.flat_of_tensorIso applied to eFD and to braiding followed by eFD makes F and D flat. singleFunctorObjTensorIso and singleFunctorObjUnitIso identify both degree-zero derived tensor orders with constantComplex. Take N = single(D)[-n], with the shape proved in step 2. Map the given M ≅ single(F)[n] through the derived tensor bifunctor, apply derivedTensorShiftIso in each order, map the degree-zero evaluation isomorphisms through shift, and cancel the zero shifts n + (-n) and (-n) + n. These explicit composites prove both inverse isomorphisms.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback and tensor stability are the existing upstream IsShiftedRankOneLocalSystem.leftDerivedUpperStar, leftDerivedUpperStarShiftSingleIso and tensor declarations, already exposed by the public AffineSpace import. No new proof or duplicate statement for those clauses is needed.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lemma-constructible-pullback-locally-constant"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrarily universe-indexed cover, choose above each point x of X one covering index j(x) and a point y(x) mapping to x. This yields a jointly surjective family indexed by X itself. Apply upstream IsShiftedRankOneLocalSystem.of_jointlySurjective to this family; its existing cohomology-vanishing and single-degree truncation argument gives F, its local constancy and stalk properties, and e : M ≅ single(F)[n]. Compose e with singleFunctors.shiftIso to get M ≅ single_{-n}(F). Apply homologyFunctor(-n) and singleFunctorCompHomologyFunctorIso to obtain eH : H^{-n}(M) ≅ F. Transport local constancy and stalk isomorphisms along eH, and compose e with the shifted singleFunctor image of eH.symm. The result is exactly the specified presentation by H^{-n}(M). No derived presentations are glued.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "lem-sf-derived-concentrated-single",
+    "def-constructible-locally-constant",
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For morphisms use the same point-indexed subfamily and apply upstream isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective. This theorem already proves the unbounded cohomology criterion from exact inverse image and sheaf conservativity. Empty covers and empty schemes are allowed: the point-indexed family is empty when X is empty, and none of the constructions above selects a point of X without already having one.",
+   "uses": [
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "def-weil-pbc-etale-site",
+  "lemma-constructible-pullback-locally-constant",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-sf-derived-concentrated-single",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraphs 2 and 4; T3 reuses the existing upstream ordinary-etale evaluation, flat single-object tensor, shifted local system and descent interfaces recorded in lean.note. The inverse dual is locally trivialized by canceling F in the evaluation pairing; arbitrary-universe descent is reduced to the family indexed by points of X and its witness transported to the prescribed cohomology sheaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Shifted rank one locally constant etale sheaves are stable under derived tensor and pullback and descend along etale covers as objects of the derived category",
+   "results": "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, CompHausLike.LocallyConstantModule.functor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; no declaration states all three ordinary etale shifted-line clauses, including the inverse shape. Single-degree derived-category hits are already represented by lem-sf-derived-concentrated-single.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale complex locally concentrated in one degree with rank one locally constant cohomology is globally a shift of a rank one local system",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.exists_iso_single, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no declaration states all three ordinary etale shifted-line clauses, including the inverse shape. Single-degree derived-category hits are already represented by lem-sf-derived-concentrated-single.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsLocallyConstant\"",
+   "results": "No hits; no declaration states all three ordinary etale shifted-line clauses, including the inverse shape. Single-degree derived-category hits are already represented by lem-sf-derived-concentrated-single.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsShiftedRankOneLocalSystem|IsLocallyConstantSheaf|isInvertible_shift_single",
+   "results": "No hits; no declaration states all three ordinary etale shifted-line clauses, including the inverse shape. Single-degree derived-category hits are already represented by lem-sf-derived-concentrated-single.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of shifted locally constant sheaves in derived categories along jointly surjective etale maps",
+   "results": "CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.isConstant_congr, LightCondensed.lanLightCondSet, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.mem_essImage; no declaration states all three ordinary etale shifted-line clauses, including the inverse shape. Single-degree derived-category hits are already represented by lem-sf-derived-concentrated-single.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-smooth-dualizing-complex-invertible",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-prop-sf-rf-shriek-preservation, smooth case (unit step 3), via the current thm-asd-smooth-tensor proof: Paragraph 4, descent of the single nonzero cohomology sheaf without gluing derived objects; and the tensor/pullback operations in paragraph 2. Upstream SmoothDuality/Local.lean, IsShiftedRankOneLocalSystem.isInvertible, leftDerivedUpperStar and of_jointlySurjective, and SmoothDuality/AffineSpace.lean, IsShiftedRankOneLocalSystem.tensor, give the separate parts.",
+   "via": [
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-shifted-etale-lines-locality",
+  "worker": "stage1",
+  "summary": "N5 split all three clauses using existing DAG tools, with an explicit inverse L^vee[-n], single-degree K-flat tensor calculations, exact pullback, and descent through H^{-n}(M). Checked arbitrary coefficients, arbitrary schemes, separably closed points, the zero ring, empty schemes and the empty cover. Statement unchanged; no new nodes. Upstream Local.lean and AffineSpace.lean cover most assertions but do not state the extra inverse-line-shape clause as a declaration, so no full-item ATTACH is claimed.",
+  "blueprint": "Realizes the rank-one sheaf and tensor/pullback ingredients of thm-asd-smooth-tensor proof paragraph 2 and the cohomology-sheaf descent of paragraph 4, serving sk-prop-sf-rf-shriek-preservation unit step 3 through lem-sf-smooth-dualizing-complex-invertible. The inherited blueprint.from.node is null; it is preserved as a maintainer-owned field. No change of unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "why": "General ringed-site rank-one dual, evaluation and flatness; the unit smooth-duality route needs this sheaf algebra tool and does not replace it."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General K-flatness of bounded-above flat complexes; applies to the single shifted sheaf models on the small etale site."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Ordinary sheaf tensor unit and symmetry, used for the inverse and tensor local models."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Restriction of ordinary sheaf tensor to a slice; needed to compute the common trivializing cover."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient inverse image for arbitrary scheme morphisms; this is coefficient transport, not a six-functor route change."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "General exact-functor termwise construction, including shifts and single objects, for the ordinary unbounded derived category."
+   },
+   {
+    "node": "lem-sf-etale-derived-pullback-stalk",
+    "why": "General ordinary etale derived pullback/stalk comparison in degree zero; establishes the A-linear stalk identifications."
+   },
+   {
+    "node": "lem-sfb-etale-stalk-constant-complex-exactness",
+    "why": "General exact constant-module/stalk comparison, used only on single complexes to recover the constant value module."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Existence of algebraic closures to choose a geometric point of a nonempty trivializing member and to compare separably closed points."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "General lifting of a geometric point to a jointly surjective etale cover; tests stalks of a locally trivial module."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-field-extension",
+    "why": "Natural stalk comparison under an extension of separably closed fields; bridges arbitrary separably closed points and algebraically closed test points."
+   },
+   {
+    "node": "lemma-constructible-pullback-locally-constant",
+    "why": "Pullback stability of locally constant sheaves for arbitrary scheme maps; needed by the pullback clause."
+   },
+   {
+    "node": "lem-etale-sheaf-jointly-surjective-conservative",
+    "why": "General cover detection of sheaf isomorphisms; applied to zero cohomology and to the cohomology of a derived morphism."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "General single-degree truncation criterion; produces the global sheaf H^{-n}(M) without gluing derived objects."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "General cohomological detection of unbounded derived isomorphisms; no boundedness hypothesis is introduced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Etale inverse image equals restriction to the slice site; bridges the trivializing-datum restrictions of def-constructible-locally-constant with the inverse-image stalk comparisons (added by the cc reviewer)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lemma-constructible-pullback-locally-constant",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N5-a8bc0f93f",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a8bc0f93f (reviewer sub-agent of L); spot-checked: Read the item's 10 steps in full, every cited statement, and blueprint main-20261015 thm-asd-smooth-tensor proof ¶2 and ¶4; the Stacks tags 03PR/03PT/03Q1/04FN/093Q/0B8Q/06YQ resolve to the labels the steps name. The statement is unchanged from live, there are no new nodes, the item is not dropped or superseded, there is no SGA citation and no cycle (closure of 294 nodes). The maths is sound. Inverse is L^vee[-n] via lem-pur-sheaf-line-evaluation-inverse-pair, with single-term K-flat tensors. Pullback uses module-exact inverse image for arbitrary v. The tensor of two lines has shift m+n. Descent follows blueprint ¶4: H^q(M)=0 for q≠-n by jointly-surjective conservativity, then concentrated-single with r=-n, then L=H^{-n}(M) shown locally ≅A. Morphism descent uses the unbounded cohomology criterion. Separably closed stalks come from geometric-point-field-extension. The empty X, empty-family and A=0 cases check. One repairable C3/C4 fault, used in three places: steps 1, 2 and 8 conflated the inverse image u^*L (where the stalk and cohomology comparisons apply) with the restriction L|_U (where the trivializing datum and the composite cover live), and no cited node identifies the two. FIXED by citing lem-weil-pbc-etale-inverse-image-restriction (ρ: j^{-1}G≅G|_Y, natural, hence A-linear) in steps 1, 2 and 8, with the stalk isomorphism chain written out. Step 3 also only had a cover of X while the line-evaluation node needs a trivializing cover of every object; I added the pullback of the cover with a def-weil-pbc-etale-site citation. proof_deps and split_report.tool_uses were updated. The generic tool_uses are accepted (listed in review.md).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ShiftedEtaleLinesLocality",
+  "declaration": "AlgebraicGeometry.Etale.exists_shiftedEtaleLine_inverse",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_shiftedEtaleLine_inverse",
+   "AlgebraicGeometry.Etale.shiftedEtaleLines_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ShiftedEtaleLinesLocality.lean",
+  "statement": "theorem exists_shiftedEtaleLine_inverse {M : DerivedCategoryModule A X} {n : ℤ} (hM : IsShiftedRankOneLocalSystem M n) : ∃ N : DerivedCategoryModule A X, IsShiftedRankOneLocalSystem N (-n) ∧ Nonempty (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ≅ constantComplex A X) ∧ Nonempty (((derivedTensor (ModuleCat.{u + 1} A) X).obj N).obj M ≅ constantComplex A X)",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "This module owns the two declarations listed in lean.declarations. The other clauses use the existing public upstream interfaces from WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local: AlgebraicGeometry.Etale.IsShiftedRankOneLocalSystem (the exact line-shape definition), its isInvertible, leftDerivedUpperStar, leftDerivedUpperStarShiftSingleIso and of_jointlySurjective declarations; tensor stability is AlgebraicGeometry.Etale.IsShiftedRankOneLocalSystem.tensor in SmoothDuality.AffineSpace. Both modules are public imports, directly or transitively. The new statements supply the previously absent inverse-shape assertion and arbitrary-small-family descent with the specified H^(-n)(M) witness and morphism conservativity. No duplicate definition or theorem is introduced. The preflight source-name index does not yet know these upstream public names, so they are documented here rather than listed as declarations owned by this delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2e77cd07",
+  "group": "N0",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; 8 dep records identical to live; lean.statement verbatim. The line-shape notion is the existing upstream IsShiftedRankOneLocalSystem, matching the node's inline definition and the consumer's encoding (no H4 duplicate). Clause 1: new exists_shiftedEtaleLine_inverse gives a two-sided inverse of shape -n with tensor ≅ constantComplex=𝟙_ in both orders. Clause 2: upstream leftDerivedUpperStar (any g), leftDerivedUpperStarShiftSingleIso and tensor (CommRing only), recorded in lean.note. Clause 3: new shiftedEtaleLines_descent with ι : Type w, jointly surjective etale family, witness L=H^{-n}(M) (locally constant, sep-closed stalks ≅ A, M ≅ H^{-n}(M)[n]) plus IsIso descent of morphisms; no finiteness, boundedness or Nonempty assumption. Edge cases (empty X and cover, A=0, any n, infinite covers) hold; docstrings, sorry-only, no stronger hypotheses, no pro-etale substitute. Not recompiled per instructions; worker compile and dry run clean. Advisories: plain proof-plan imports include the Sheaf BoundedAboveFlatSheafKFlat twin (WC twin only via private imports, so no module-mode clash); stalks via sheafFiber (mathlib_match of def-weil-pbc-geometric-stalks) instead of the IsAlgClosed-only pointedEtaleStalk; clause 2 recorded only in the note."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261023T103309-L-3093656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

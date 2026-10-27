@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-open-substack-unions",
+ "kind": "statement",
+ "title": "Set of open substacks and their unions under scheme pullback",
+ "statement": "Let $S$ be a scheme and $\\mathcal X$ an algebraic stack over $S$, meaning a stack in groupoids on $S$-schemes with diagonal representable by algebraic spaces and a smooth surjective scheme atlas. Stacks and representability use [def-sfb-stable-pointed-moduli-groupoids], smooth uses [def-sbc-smooth-morphisms], and universes use [def-weil-size-convention]. An open substack is a strictly full substack whose pullback by every scheme is an open subscheme. Open substacks of $\\mathcal X$, up to equivalence over $\\mathcal X$, admit a set of representatives. For every set $I$ and family of open substacks $(\\mathcal X_i\\subseteq\\mathcal X)_{i\\in I}$ there is an algebraic open substack $\\mathcal W=\\bigcup_{i\\in I}\\mathcal X_i\\subseteq\\mathcal X$, containing every $\\mathcal X_i$ and contained in every open substack containing them all. For every scheme $T$ and map $T\\to\\mathcal X$, if $T_i=T\\times_{\\mathcal X}\\mathcal X_i$ is the corresponding open subscheme of $T$, then $T\\times_{\\mathcal X}\\mathcal W$ is the open subscheme $\\bigcup_{i\\in I}T_i$. In particular, the $\\mathcal X_i\\to\\mathcal W$ are open immersions and their pullbacks form an open covering of every scheme mapping to $\\mathcal W$. The empty family gives the empty open substack.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06FJ (lemma-open-substacks), set-sizedness from the inclusion-preserving bijection with open subsets; Tag 05UQ (lemma-union-open-substacks), statement and proof, including the cartesian scheme-pullback diagrams."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-smooth-morphisms",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:P\\to\\mathcal X$ and put $R=P\\times_{\\mathcal X}P$, with projections $s,t$. By [lem-sfb-invariant-open-substack-descent], pullback identifies open substacks, up to equivalence over $\\mathcal X$, with the open subschemes $V\\subseteq P$ satisfying $s^{-1}V=t^{-1}V$. Open subschemes of the fixed scheme $P$ are specified by open subsets of its underlying set. Thus the invariant ones form a subset of its power set, a set in the universes of [def-weil-size-convention]. The inverse of the cited bijection selects one representative for each invariant open, giving the required set of representatives.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+   }
+  },
+  {
+   "text": "For the given set-indexed family put $V_i=P\\times_{\\mathcal X}\\mathcal X_i$. The cited correspondence gives $s^{-1}V_i=t^{-1}V_i$. Define the open subscheme $V\\subseteq P$ by the ordinary union $\\bigcup_i|V_i|$. Then $s^{-1}V=\\bigcup_i s^{-1}V_i=\\bigcup_i t^{-1}V_i=t^{-1}V$: each equality is the identity that membership in an inverse image of a union means membership in one inverse image. The equalities of open subspaces of $R$ can be checked after every scheme chart, where they are these same equalities of open subsets. Hence $V$ satisfies the hypothesis of [lem-sfb-invariant-open-substack-descent].",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-invariant-open-substack-descent] to $V$ to obtain an open substack $\\mathcal W$ with $P\\times_{\\mathcal X}\\mathcal W=V$. Take its strictly full representative, by including all objects isomorphic to its objects; this changes neither the fibre products nor its equivalence class. This open substack is algebraic, as can also be checked directly: it is a stack because it is a substack; for any scheme maps $T,U\\to\\mathcal W$, full faithfulness identifies $T\\times_{\\mathcal W}U$ with $T\\times_{\\mathcal X}U$, so its diagonal is representable by algebraic spaces. The scheme $V$ maps to $\\mathcal W$. For any scheme map $T\\to\\mathcal W$, the equality $V=P\\times_{\\mathcal X}\\mathcal W$ identifies $T\\times_{\\mathcal W}V\\to T$ with $T\\times_{\\mathcal X}P\\to T$. The identification sends a pair with its comparison isomorphism to the same pair over $\\mathcal X$; full faithfulness of $\\mathcal W\\to\\mathcal X$ gives its inverse. The latter projection is smooth and surjective by the final assertion of [lem-sfb-invariant-open-substack-descent]. Thus $V\\to\\mathcal W$ is a smooth surjective scheme atlas. The fibre-product identifications follow directly from the triples and comparison isomorphisms of [def-sfb-stable-pointed-moduli-groupoids]. The same defining diagonal and atlas checks apply to each given open substack $\\mathcal X_i$ and to every comparison open $\\mathcal Z$: replace $V$ by its open atlas pullback. Thus these substacks are algebraic before invoking the factorization criterion in the next step.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+   }
+  },
+  {
+   "text": "The factorization criterion in [lem-sfb-invariant-open-substack-descent], applied to $\\mathcal X_i\\to\\mathcal X$, shows that it factors through $\\mathcal W$, since its atlas pullback $V_i\\to P$ factors through $V$. For any other open substack $\\mathcal Z$ containing every $\\mathcal X_i$, let $Z=P\\times_{\\mathcal X}\\mathcal Z$. Then $V_i\\subseteq Z$ for every $i$, so $V\\subseteq Z$. Apply the same factorization criterion with $\\mathcal Y=\\mathcal W$: its atlas pullback $V\\to P$ factors through $Z$, hence $\\mathcal W\\to\\mathcal X$ factors through $\\mathcal Z$. For each object $x$ of the source substack over a scheme $T$, a factorization over $\\mathcal X$ gives an object of the target substack isomorphic to $x$ in $\\mathcal X(T)$. Strict fullness puts $x$ itself in the target substack; fullness includes every arrow between such objects. Thus these factorizations express containment of the specified substacks. This proves the least-upper-bound property.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+   }
+  },
+  {
+   "text": "Fix a scheme map $T\\to\\mathcal X$. Write $W_T=T\\times_{\\mathcal X}\\mathcal W$, $T_i=T\\times_{\\mathcal X}\\mathcal X_i$, and $Q=T\\times_{\\mathcal X}P$, with $q:Q\\to T$ and $b:Q\\to P$. These are open subschemes $W_T,T_i\\subseteq T$, and $q$ is surjective by [lem-sfb-invariant-open-substack-descent]. The definition of 2-fibre products in [def-sfb-stable-pointed-moduli-groupoids] gives $q^{-1}W_T=b^{-1}V$ and $q^{-1}T_i=b^{-1}V_i$. Since $V=\\bigcup_iV_i$, ordinary inverse-image identities, checked on scheme charts of $Q$, give $q^{-1}W_T=\\bigcup_iq^{-1}T_i=q^{-1}(\\bigcup_iT_i)$. For each point $t\\in T$, choose $z\\in Q$ above it, using the stated surjectivity. The displayed equality says $t\\in W_T$ if and only if $z\\in q^{-1}W_T$, if and only if $z\\in q^{-1}T_i$ for some $i$, if and only if $t\\in T_i$ for some $i$. Thus the open subsets, and hence their corresponding open subschemes of $T$, are equal: $W_T=\\bigcup_iT_i$. All identifications are over $T$, so this is the asserted scheme-pullback identification.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+   }
+  },
+  {
+   "text": "For a scheme $T\\to\\mathcal W$, the preceding equality says that the open subschemes $T\\times_{\\mathcal W}\\mathcal X_i=T\\times_{\\mathcal X}\\mathcal X_i$ cover $T$; the identification follows from full faithfulness and the fibre-product definition [def-sfb-stable-pointed-moduli-groupoids]. Consequently every $\\mathcal X_i\\to\\mathcal W$ is an open immersion and these immersions give exactly the covering asserted in the statement. If $I$ is empty, the preceding calculation says $W_T=\\varnothing$ for every $T\\to\\mathcal X$. An object of $\\mathcal W(T)$ would supply a section of $W_T\\to T$, impossible unless $T$ is empty; over the empty scheme the empty etale covering has exactly one descent datum, effectiveness supplies an object, and the sheaf condition for isomorphisms supplies a unique arrow between any two objects. Thus the fibre there is equivalent to the terminal groupoid. Hence $\\mathcal W$ is the empty open substack, including its required value over the empty scheme.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-invariant-open-substack-descent",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 0507 (lemma-substacks-presentation), open case and factorization criterion; Tag 06FJ (lemma-open-substacks); Tag 05UQ (lemma-union-open-substacks)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "{\"t\": \"2026-10-22T05:30:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open substacks of an algebraic stack form a set and arbitrary unions of open substacks are open substacks whose scheme pullbacks are unions of open subschemes",
+   "results": "{\"t\": \"2026-10-22T05:31:00Z\", \"tool\": \"leanfinder\", \"query\": \"The open substacks of an algebraic stack form a set and arbitrary unions of open substacks are open substacks whose scheme pullbacks are unions of open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"AlgebraicGeometry.Scheme.OpenCover\", \"AlgebraicGeometry.Scheme.zariskiTopology\", \"AlgebraicGeometry.isOpenEmbedding_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Opens.iSupOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange\"], \"digest\": \"39b391c954a3bffd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "grep",
+   "query": "OpenSubstack|openSubstack|AlgebraicStack|open.*substack|substack.*union",
+   "results": "{\"t\": \"2026-10-22T05:31:12Z\", \"tool\": \"grep\", \"query\": \"OpenSubstack|openSubstack|AlgebraicStack|open.*substack|substack.*union\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an algebraic stack arbitrary unions of open substacks exist and commute with pullback to schemes",
+   "results": "{\"t\": \"2026-10-22T05:31:12Z\", \"tool\": \"leansearch\", \"query\": \"For an algebraic stack arbitrary unions of open substacks exist and commute with pullback to schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight\", \"AlgebraicGeometry.isPullback_opens_inf\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f\", \"AlgebraicGeometry.Scheme.Hom.preimage_iSup\", \"AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange\"], \"digest\": \"e96fa442efc03e21\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open subobjects of an algebraic stack correspond to invariant open subsets of a smooth atlas and are closed under arbitrary joins",
+   "results": "{\"t\": \"2026-10-22T05:31:19Z\", \"tool\": \"leanfinder\", \"query\": \"Open subobjects of an algebraic stack correspond to invariant open subsets of a smooth atlas and are closed under arbitrary joins\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.OpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange\", \"AlgebraicGeometry.Scheme.Opens.iSupOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange\", \"AlgebraicGeometry.Scheme.GlueData.isOpen_iff\", \"AlgebraicGeometry.Scheme.Opens.exists_toScheme\"], \"digest\": \"501cc73e509bfda2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme and topology declarations do not state an algebraic-stack result"
+  },
+  {
+   "tool": "grep",
+   "query": "OpenSubstack|openSubstack|AlgebraicStack|substack",
+   "results": "{\"t\": \"2026-10-22T06:23:09Z\", \"tool\": \"grep\", \"query\": \"OpenSubstack|openSubstack|AlgebraicStack|substack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme opens, scheme gluing or manifold groupoids; none states the algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant open subsets of a smooth atlas descend to open substacks and their arbitrary union is an open substack",
+   "results": "{\"t\": \"2026-10-22T06:23:10Z\", \"tool\": \"leansearch\", \"query\": \"Invariant open subsets of a smooth atlas descend to open substacks and their arbitrary union is an open substack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.Opens.instChartedSpace\", \"StructureGroupoid.subtypeRestr_mem_maximalAtlas\", \"StructureGroupoid.restriction_in_maximalAtlas\", \"TopologicalSpace.Opens.instHasGroupoid\", \"TopologicalSpace.Opens.chart_eq\", \"restr_mem_maximalAtlas\", \"atlas\", \"TopCat.GlueData.fromOpenSubsetsGlue_isOpenEmbedding\"], \"digest\": \"4185c580b3fc15b4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme opens, scheme gluing or manifold groupoids; none states the algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "{\"t\": \"2026-10-22T06:23:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme opens, scheme gluing or manifold groupoids; none states the algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks of an algebraic stack form a set and arbitrary unions commute with pullback to schemes",
+   "results": "{\"t\": \"2026-10-22T06:23:16Z\", \"tool\": \"leanfinder\", \"query\": \"Open substacks of an algebraic stack form a set and arbitrary unions commute with pullback to schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"AlgebraicGeometry.Scheme.Hom.image_iSup₂\", \"AlgebraicGeometry.Scheme.Hom.image_iSup\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"AlgebraicGeometry.instIsOpenImmersionLeftSchemeDiscretePUnitιOverTopMorphismProperty\", \"AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty\"], \"digest\": \"4cc9d7b51694c73c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme opens, scheme gluing or manifold groupoids; none states the algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The partially ordered collection of open subobjects of an algebraic stack is closed under arbitrary joins computed on scheme charts",
+   "results": "{\"t\": \"2026-10-22T06:23:17Z\", \"tool\": \"leanfinder\", \"query\": \"The partially ordered collection of open subobjects of an algebraic stack is closed under arbitrary joins computed on scheme charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.Hom.image_iSup₂\", \"AlgebraicGeometry.Scheme.Hom.image_iSup\", \"AlgebraicGeometry.Scheme.Opens.iSupOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover\", \"AlgebraicGeometry.nonempty_isColimit_cofanMk_of\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V_self\"], \"digest\": \"852a76fecec5312a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme opens, scheme gluing or manifold groupoids; none states the algebraic-stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-open-dm-locus",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Largest open with unramified diagonal in an algebraic stack. In the largest-DM-open prerequisite, formation of the union of all candidate opens, before assembling their etale atlases.",
+   "via": [
+    "lem-sfb-algebraic-stack-open-dm-locus",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-substack-unions",
+  "worker": "stage1",
+  "summary": "Read Stacks 06FJ and 05UQ and the existing 0507 invariant-atlas-open correspondence. Reused that existing node rather than introducing a duplicate topological classification or union clause. Constructed the invariant union on a fixed smooth atlas, descended it, checked algebraicity and containment, and proved every scheme pullback is the ordinary open union by a surjective-atlas membership calculation. Checked empty, singleton, repeated, full and infinite families. No statement changes and no new nodes. Repair of the returned delivery d1998738a1a: compared the retained split with the current unsplit live item, re-read all cited statements and verified all nine quotation occurrences. Made algebraicity of each input and comparison open explicit before the factorization criterion, and repackaged against the current DAG rather than re-pushing the old side-completion head. Continued repair after the repeated promotion refusal: the initial fresh dry run passed at 08045250e82. Rechecked the current unsplit item and every cited statement; expanded the strict-fullness containment argument and the empty-cover descent check without changing the statement or proof route. Current repair of the landing refusal recorded at e4d1549d3d3: initial dry run passed at 4e3891d7f1e; compared with the current unsplit DAG and reread all four cited node statements. Expanded the pointwise test in step 5 and added the exact stack-axiom quote supporting step 6; no statement, route or dependency changes. Repair of return 135a053dfd4: initial current-DAG dry run passed at a4931ed0572. Re-read all four dependency statements and verified all ten retained citation entries. Expanded the explicit atlas base-change identification in step 3; retained the statement, route, searches and dependency sets. Repackage this revised split on the current server DAG for live promotion.",
+  "blueprint": "Supporting union prerequisite of lem-sfb-algebraic-stack-open-dm-locus, before assembly of the etale atlas; realizes the existing blueprint.from.place. The ancestor tool returns null, as in the imported ancestry. Whole-blueprint searches for open substack, invariant open and union found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-3b4f5a2cd",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-3b4f5a2cd (reviewer sub-agent of L); spot-checked: 5th delivery. Earlier verdicts: d1998738 FIX, 2513a734 PASS, e4d1549d PASS, 135a053d PASS. After each, landing was refused as 'not promoted to live'. In clones/live and clones/side-live the item is still unsplit with 0 proof steps, and there is no repair or re-split note. Compared with 135a053d, the statement, stmt_deps, proof_deps, source, proof_origin, created, chapter, unit and blueprint fields are identical, and the statement is also identical to live. Only step 3 (and the split_report) changed. Step 3 now proves T×_W V ≅ T×_X P from V = P×_X W: a pair with its comparison iso goes to the same pair over X, and full faithfulness of W→X gives the inverse. This is correct, since T×_W(W×_X P) ≅ T×_X P. So the descent node's smooth-surjective clause applies to the real atlas V→W. The four cited statements are byte-identical in the snapshot and live: invariant-open-substack-descent, stable-pointed-moduli-groupoids, weil-size-convention, sbc-smooth-morphisms. I re-read all 6 steps. Step 1: set-sizedness from the invariant opens inside P(|P|). Step 2: the invariant union. Step 3: algebraicity of W, X_i and Z. Step 4: least upper bound by factorization plus strict fullness. Step 5: W_T = ⋃T_i, checked pointwise via surjectivity of q. Step 6: open immersions and a cover; the empty family gives the terminal groupoid over the empty scheme. The cartesian squares match Stacks 05UQ (stacks-properties l.1929), proved through the 0507/06FJ route (l.1809, l.1849). Edge cases pass: X empty, I empty, singleton, repeated opens, X in the family, infinite I, BG_m. No new nodes, no SGA, no tool_uses. Maintainer notes: (1) promote this item, it has passed 4 times; (2) carried over: the descent node says 'full' but its bijection needs 'strictly full' or 'up to equivalence'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenSubstackUnions",
+  "declaration": "CategoryTheory.openModuliSubstack_unions",
+  "declarations": [
+   "CategoryTheory.OpenModuliSubstack.HasPullbackOpen",
+   "CategoryTheory.openModuliSubstack_unions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSubstackUnions.lean",
+  "statement": "theorem openModuliSubstack_unions {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) : Small.{u} (OpenModuliSubstack F) ∧ ∀ (I : Type z) (U : I → OpenModuliSubstack F), ∃ (W : OpenModuliSubstack F) (A : I → OpenModuliSubstack W.category), IsAlgebraicModuliStack W.category ∧ (∀ i : I, (U i).IsContainedIn W) ∧ (∀ Z : OpenModuliSubstack F, (∀ i : I, (U i).IsContainedIn Z) → W.IsContainedIn Z) ∧ (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ V : I → T.left.Opens, (∀ i : I, (U i).HasPullbackOpen T t (V i)) ∧ W.HasPullbackOpen T t (⨆ i : I, V i)) ∧ (∀ (i : I) (x : W.category.obj), (A i).property x ↔ (U i).property x.obj) ∧ (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) W.category), ∃ V : I → T.left.Opens, (∀ i : I, (A i).HasPullbackOpen T t (V i)) ∧ (⨆ i : I, V i) = ⊤) ∧ (IsEmpty I → ∀ x : F.obj, W.property x ↔ IsEmpty (F.p.obj x).left)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed algebraic-stack and full-open-substack notions. HasPullbackOpen only names the existing open_pullback equivalence with a specified open subscheme and its projection. Small.{u} expresses a set of representatives because strictly full substacks equivalent over F have the same object predicate; all remaining structure fields are proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-500670185",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Clause-by-clause match to node: IsAlgebraicModuliStack hyp exact; Small.{u} OpenModuliSubstack = set of strictly-full classes (all other fields Prop); W algebraic, contains U i, least upper bound via IsContainedIn; HasPullbackOpen is open_pullback specialised to V.ι, giving pinned opens with W pullback = ⨆ V i; A i open substacks of W pinned by predicate iff, covering ⨆=⊤; empty-family clause correct (open_pullback forces all objects over ∅ into every open substack). Edge cases (I empty, T empty, infinite I, stabilisers, universe z free) ok. lean.statement verbatim, sorry only, docstrings/proof steps present; added stmt_deps def-sfb-algebraic-moduli-stack/def-sfb-open-moduli-substack landed on base; only lean+stmt_deps differ from live; no duplicate or name clash in side-live Sheaf. No files changed, no compile."
+ }
+}

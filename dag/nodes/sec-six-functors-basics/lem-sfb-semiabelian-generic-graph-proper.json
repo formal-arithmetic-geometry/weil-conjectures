@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-semiabelian-generic-graph-proper",
+ "kind": "statement",
+ "title": "Proper projection of a semiabelian generic graph",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $P,Q\\to S$ be smooth separated commutative group schemes of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. The group laws, identity sections and inverse maps are morphisms satisfying the commutative group identities, and separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Write $\\eta$ for the generic point of $S$, $K=\\kappa(\\eta)$ for its residue field [def-weil-residue-field], and $P_\\eta,Q_\\eta$ for the scheme fibres [def-pc-scheme-fibre]. Given a $K$-group homomorphism $u:P_\\eta\\to Q_\\eta$, let $\\Gamma\\subseteq P\\times_SQ$ be the scheme-theoretic image [def-nagata-scheme-theoretic-image] of $P_\\eta\\xrightarrow{(1,u)}(P\\times_SQ)_\\eta\\to P\\times_SQ$ [def-pc-fibre-product]. Let $\\pi:\\Gamma\\to P$ be the first projection. Then $\\pi$ is proper [def-weil-proper-morphism].",
+ "source": {
+  "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+  "place": "G. Faltings, Finiteness Theorems for Abelian Varieties over Number Fields, in Arithmetic Geometry (1986), Chapter II, section 2, Lemma 1 proof, printed pp.10-11: the two assertions about the projection of the graph closure. Local copy WANTED; online primary-source proof read at https://www-fourier.univ-grenoble-alpes.fr/~lefourns/contenu/Zywina/Faltings.pdf ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For every geometric point of $S$, apply [lem-sfb-semiabelian-geometric-power-integrality] with $n=1$ to the torus extension in the hypothesis: its fibre is nonempty and integral, hence connected. The algebraic-closure test [lem-weil-geometrically-connected-algebraic-closure] therefore gives geometrically connected fibres of $P\\to S$. Its identity section makes $P$ nonempty. Since $S$ is integral with integrally closed local rings, [lem-sbc-smooth-connected-generic-geometry-core] gives that $P$ and $P_\\eta$ are integral. Finite presentation includes quasi-compactness, and a finitely presented algebra is finitely generated, so $P\\to S$ is of finite type. Over each Noetherian affine open $V\\subseteq S$, [lem-weil-pbc-finite-type-over-noetherian] makes $P_V$ Noetherian. Thus $P$ is locally Noetherian.",
+   "uses": [
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Geometric fibre input; Tags 0B7Q and 056T, followed by the cited smooth-family theorem and Tag 01T6."
+   }
+  },
+  {
+   "text": "Write $W=P\\times_SQ$ and $h:P_\\eta\\to W$ for the generic graph map. Its graph into $W_\\eta$ is a closed immersion: it is the inverse image of the closed diagonal of $Q_\\eta$. Also $\\operatorname{Spec}K\\to S$ is affine: its inverse image on every nonempty affine $\\operatorname{Spec}A\\subseteq S$ is $\\operatorname{Spec}\\operatorname{Frac}(A)$. Hence $W_\\eta\\to W$, and therefore $h$, are quasi-compact. By [lemma-nagata-scheme-image-ideal-qc], $h(P_\\eta)$ is dense in $\\Gamma$. By [lem-trf-reduced-scheme-image], $\\Gamma$ is reduced, since $P_\\eta$ is reduced. Its underlying space is the closure of the image of the nonempty irreducible space $P_\\eta$, hence is nonempty and irreducible. Thus $\\Gamma$ is integral. If $\\zeta$ is the generic point of $P_\\eta$, continuity gives that every point of $h(P_\\eta)$ specializes from $h(\\zeta)$; density then makes $h(\\zeta)$ the generic point $\\xi$ of $\\Gamma$. In particular $\\xi$ lies over $\\eta$.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R8 (lemma-quasi-compact-scheme-theoretic-image) and 056B (lemma-scheme-theoretic-image-reduced); the irreducibility assertion is the explicit topological closure argument."
+   }
+  },
+  {
+   "text": "The projection $W\\to P$ is separated and of finite type by [lem-pod-separated-finite-type-base-change], applied to $Q\\to S$. Restricting it to the closed subscheme $\\Gamma$ preserves these two properties directly: on affine charts the coordinate algebras of $\\Gamma$ are quotients of those of $W$, hence remain finitely generated; a closed subset of a quasi-compact inverse image is quasi-compact. The diagonal of $\\Gamma\\to P$ is the pullback of the closed diagonal of $W\\to P$ along $\\Gamma\\times_P\\Gamma\\to W\\times_PW$, since a closed immersion is a monomorphism. Pulling back a quotient algebra $B\\twoheadrightarrow B/I$ gives $C\\twoheadrightarrow C/IC$, so this diagonal is closed. Thus $\\pi$ is separated and of finite type.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QO and 01T2; affine quotient calculation for restriction to a closed subscheme, after the cited base-change theorem."
+   }
+  },
+  {
+   "text": "The morphism $W_\\eta\\to W$ is flat, since on affine charts over a nonempty $\\operatorname{Spec}A\\subset S$ it is localization by $A\\setminus\\{0\\}$. Apply [lem-sfb-scheme-image-flat-base-change] to the quasi-compact $h$ and this flat map. Its base change is the closed graph $(1,u):P_\\eta\\hookrightarrow W_\\eta$ (base changing $\\operatorname{Spec}K\\to S$ to itself is the identity). By [lemma-nagata-scheme-image-of-closed-immersion] its image is that graph. Consequently $\\Gamma_\\eta$ is exactly the graph of $u$, including its scheme structure. Set $L=\\kappa(\\xi)$. Since $\\xi$ lies over $\\eta$, its canonical morphism $a:\\operatorname{Spec}L\\to\\Gamma$ factors through $\\Gamma_\\eta$. If $a_P$ and $a_Q$ are its projections, then $a_Q=u_L(a_P)$ under this graph identification.",
+   "uses": [
+    "lem-sfb-scheme-image-flat-base-change",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I (lemma-flat-base-change-scheme-theoretic-image), followed by the scheme image of a closed immersion."
+   }
+  },
+  {
+   "text": "Let $A\\subset L$ be any discrete valuation subring with fraction field $L$, and let $b:\\operatorname{Spec}A\\to P$ extend $a_P$. Compose $b$ with $P\\to S$ to form the $S$-scheme $T=\\operatorname{Spec}A$. The pullbacks $P_T,Q_T$ are smooth by [lem-pc-proper-base-change](2), and separated of finite type by [lem-pod-separated-finite-type-base-change]. They remain of finite presentation: a presentation $B=R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ base changes to $B\\otimes_RC=C[x_1,\\ldots,x_n]/(\\bar f_1,\\ldots,\\bar f_m)$, and the quasi-compactness and quasi-separatedness conditions persist here because the morphisms are separated of finite type. Group identities persist under fibre products. Every geometric fibre is one of the original geometric fibres, so the semiabelian condition persists by its definition. The generic map of $T\\to S$ is $\\operatorname{Spec}L\\to\\eta$, and $u$ therefore gives a homomorphism $u_L:(P_T)_L\\to(Q_T)_L$. Apply [lem-sfb-trait-semiabelian-hom-extension] to obtain $v:P_T\\to Q_T$ extending $u_L$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-sfb-trait-semiabelian-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+    "place": "Chapter II section 2 Lemma 1, local extension input; apply the isolated trait theorem after the stated base-change checks. Local copy WANTED."
+   }
+  },
+  {
+   "text": "The pair $(b,\\mathrm{id}_T)$ is a section $\\widetilde b:T\\to P_T$. Compose it with $v$ and then $Q_T\\to Q$ to obtain $c:T\\to Q$. Its restriction to $\\operatorname{Spec}L$ is $u_L(a_P)=a_Q$. Therefore the pair $(b,c):T\\to P\\times_SQ=W$ has generic restriction equal to the composite of $a$ with $\\Gamma\\hookrightarrow W$. Since $A$ is a valuation ring and $\\Gamma\\hookrightarrow W$ is closed, [lemma-nagata-valuation-factor-closed] gives a factorization $\\widetilde a:T\\to\\Gamma$. It satisfies $\\pi\\widetilde a=b$, and its generic restriction is $a$, because the closed immersion into $W$ is a monomorphism. This constructs the required lift for every DVR subring $A\\subset L$.",
+   "uses": [
+    "lemma-nagata-valuation-factor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, affine closed-immersion description: the closed factorization lemma uses injectivity A into L to kill the pulled-back ideal."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-generic-dvr-properness-criterion] to $\\pi:\\Gamma\\to P$. Its target is locally Noetherian by step 1; its source is integral by step 2; it is separated of finite type by step 3; and steps 4-6 give the prescribed generic-point extension over every discrete valuation subring of its function field $L$. Every hypothesis of the criterion is thus satisfied, so $\\pi$ is proper.",
+   "uses": [
+    "lem-sfb-generic-dvr-properness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, lemma-Noetherian-dvr-valuative-proper, equivalence (1) and (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semiabelian-geometric-power-integrality",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-trf-reduced-scheme-image",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "lem-pc-proper-base-change",
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-sfb-trait-semiabelian-hom-extension",
+  "lemma-nagata-valuation-factor-closed",
+  "lem-sfb-generic-dvr-properness-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+  "place": "Agent assembly of the valuation-ring reduction in Faltings Chapter II section 2 Lemma 1, using the existing Tag 0208 generic-DVR criterion and the isolated trait homomorphism theorem. Local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The projection of the schematic closure of the graph of a generic homomorphism between semiabelian schemes over a normal base is proper",
+   "results": "{\"t\": \"2026-10-24T02:00:28Z\", \"tool\": \"leanfinder\", \"query\": \"The projection of the schematic closure of the graph of a generic homomorphism between semiabelian schemes over a normal base is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.IsProper.instSndScheme\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"784c6f85af5c90b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: proper base-change instances require a proper target; here Q may be a torus. General universally closed or integral morphism results do not prove properness of this graph projection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Graph closure of a homomorphism of semiabelian schemes has proper projection over a normal integral scheme",
+   "results": "{\"t\": \"2026-10-24T02:00:29Z\", \"tool\": \"leansearch\", \"query\": \"Graph closure of a homomorphism of semiabelian schemes has proper projection over a normal integral scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AddHom.mclosure_preimage_le\"], \"digest\": \"c8ff87a20caf0621\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: proper base-change instances require a proper target; here Q may be a torus. General universally closed or integral morphism results do not prove properness of this graph projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"closure\"",
+   "results": "{\"t\": \"2026-10-24T02:00:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: proper base-change instances require a proper target; here Q may be a torus. General universally closed or integral morphism results do not prove properness of this graph projection."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|graph.*closure|closure.*graph",
+   "results": "{\"t\": \"2026-10-24T02:00:29Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|graph.*closure|closure.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: proper base-change instances require a proper target; here Q may be a torus. General universally closed or integral morphism results do not prove properness of this graph projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of the first projection of the closure of a rational group homomorphism between smooth semiabelian group schemes",
+   "results": "{\"t\": \"2026-10-24T02:01:50Z\", \"tool\": \"leanfinder\", \"query\": \"Properness of the first projection of the closure of a rational group homomorphism between smooth semiabelian group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"ProperSMul.isProperMap_smul_pair_set\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"properSMul_of_isClosedEmbedding\", \"ProperSMul.isProperMap_smul_pair\", \"AlgebraicGeometry.IsProper.instSndScheme\"], \"digest\": \"7b96087cfc27e099\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: proper base-change instances require a proper target; here Q may be a torus. General universally closed or integral morphism results do not prove properness of this graph projection."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|graph.*closure|closure.*graph",
+   "results": "{\"t\": \"2026-10-24T02:47:29Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|graph.*closure|closure.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness and finite-morphism interfaces do not establish the graph projection is proper; the base-change projection instances require Q itself proper, whereas a semiabelian fibre may be a torus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graph closure projection of a rational homomorphism of semiabelian schemes over a normal base is proper",
+   "results": "{\"t\": \"2026-10-24T02:47:30Z\", \"tool\": \"leansearch\", \"query\": \"The graph closure projection of a rational homomorphism of semiabelian schemes over a normal base is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\"], \"digest\": \"7fbfa1e005d9cef0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness and finite-morphism interfaces do not establish the graph projection is proper; the base-change projection instances require Q itself proper, whereas a semiabelian fibre may be a torus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"closure\"",
+   "results": "{\"t\": \"2026-10-24T02:47:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness and finite-morphism interfaces do not establish the graph projection is proper; the base-change projection instances require Q itself proper, whereas a semiabelian fibre may be a torus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of the graph of a generic homomorphism of semiabelian schemes has proper first projection",
+   "results": "{\"t\": \"2026-10-24T02:47:32Z\", \"tool\": \"leanfinder\", \"query\": \"The schematic closure of the graph of a generic homomorphism of semiabelian schemes has proper first projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsProper.instSndScheme\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_fst\", \"AlgebraicGeometry.UniversallyClosed.out\"], \"digest\": \"350dac6b8b6b52fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness and finite-morphism interfaces do not establish the graph projection is proper; the base-change projection instances require Q itself proper, whereas a semiabelian fibre may be a torus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-semiabelian-hom-extension",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary replacement for the independent power-prolongation input: generic endomorphism extension; graph-closure argument, properness of the first projection.",
+   "via": [
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-generic-graph-proper",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved integrality of the schematic graph closure and identified its generic fibre by flat base change, checked separatedness/finite type, constructed each generic-DVR lift by evaluating a trait homomorphism extension on the given section, and applied the existing Tag 0208 properness criterion. One new statement-only trait extension node; all Mathlib searches logged; all citations checked against their statements. No Lean or compiler used.",
+  "blueprint": "Inherited auxiliary generic graph properness in the power-prolongation route. blueprint_refs.py ancestor returns null; this split preserves that inherited ancestry. Searches of the whole current blueprint for semiabelian, semi-abelian, graph closure, generic graph and valuation homomorphism found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Tests geometric connectedness from an algebraic-closure fibre; a generic geometric tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Gives integrality of P and its generic fibre over the normal integral base; no semiabelian homomorphism extension is used."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Only the generic reduced-scheme-image theorem Tag 056B is used; it has no trace-formula content."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Step 5 takes only clause (2), smoothness is stable under base change, for P_T and Q_T; a generic permanence fact that no node of sk-thm-sf-ctf-stability states."
+   },
+   {
+    "node": "lemma-nagata-valuation-factor-closed",
+    "why": "Step 6 takes its statement only: a map from Spec of a valuation ring whose generic restriction factors through a closed subscheme factors through it; generic scheme theory, no unit node gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-trf-reduced-scheme-image",
+  "lem-pc-proper-base-change",
+  "lemma-nagata-valuation-factor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-676aec361",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-676aec361 (reviewer sub-agent of L); spot-checked: All seven steps of the item are correct. Stacks Tag 0208 (limits.tex, (1)<=>(4)) checked; the Faltings II §2 Lemma 1 source is absent locally (WANTED, proof_origin agent). Step 1: integrality of P via power-integrality (n=1), the algebraic-closure connectedness test, the smooth-connected-generic-geometry core and finite type over Noetherian opens. Step 2: Gamma is integral (h quasi-compact since Spec K->S is affine, density by ideal-qc, reducedness by 056B), and its generic point lies over eta. Step 3: separated and of finite type, correctly elementary. Step 4: Gamma_eta is the graph of u by flat base change (081I) and the monomorphism Spec K->S. Steps 5-6: each DVR lift is built from the trait extension v and valuation-factor-closed. Step 7: the generic-DVR criterion, with every hypothesis met. New node lem-sfb-trait-semiabelian-hom-extension is true (DVR case of Faltings-Chai I.2.7). Tested on G_m powers including negative exponents, trivial groups, abelian vs toric reduction and non-complete DVRs; no counterexample. It is strictly smaller than the item, not a duplicate (rg -L over 87 semiabelian nodes), not circular, statement-only and passes B1-B9. Batch-5: lem-trf-smooth-composition, 056B lem-trf-reduced-scheme-image and the definition def-trf-schematically-dense-open are generic; none is a trace formula or Poincare duality step, so accepted. No SGA. FIX: added two undeclared off-unit tool uses to split_report.tool_uses: lem-pc-proper-base-change (clause 2, step 5) and lemma-nagata-valuation-factor-closed (step 6). Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianGenericGraphProper",
+  "declaration": "AlgebraicGeometry.semiabelian_generic_graph_proper",
+  "declarations": [
+   "AlgebraicGeometry.semiabelianFibreGraphMap",
+   "AlgebraicGeometry.semiabelian_generic_graph_proper"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianGenericGraphProper.lean",
+  "statement": "theorem semiabelian_generic_graph_proper {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (P Q : Grp (Over S)) [IsCommMonObj P.X] [IsCommMonObj Q.X] [Smooth P.X.hom] [IsSeparated P.X.hom] [LocallyOfFinitePresentation P.X.hom] [QuasiCompact P.X.hom] [Smooth Q.X.hom] [IsSeparated Q.X.hom] [LocallyOfFinitePresentation Q.X.hom] [QuasiCompact Q.X.hom] (hP : HasSemiabelianGeometricFibres P) (hQ : HasSemiabelianGeometricFibres Q) (u : (Over.pullback (S.fromSpecResidueField (genericPoint S))).mapGrp.obj P ⟶ (Over.pullback (S.fromSpecResidueField (genericPoint S))).mapGrp.obj Q) : IsProper ((semiabelianFibreGraphMap P Q (genericPoint S) u).imageι ≫ pullback.fst P.X.hom Q.X.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f619b0ff",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Item JSON = live except lean; lean.statement verbatim, one sorry. Clauses match node: IsIntegral+IsLocallyNoetherian+inline stalk IsDomain∧IsIntegrallyClosed (def-weil-pbc-normal-ring inline form); Grp (Over S)+IsCommMonObj; Smooth/IsSeparated/LFP+QuasiCompact (exact finite presentation); HasSemiabelianGeometricFibres (landed N8 def); generic fibres via Over.pullback(fromSpecResidueField η).mapGrp (underlying = Hom.fiber); graph helper pullback.lift(fiberι, u≫fiberι) real data with docstrings; Γ = Mathlib Hom.image; IsProper(imageι≫pullback.fst). No extra assumptions (Q not assumed proper, no qc base); edge cases trivial/torus/G_m powers/abelian OK; single universe u. Proof-dep imports exist in side-live, no cycle; no duplicate declaration; docstrings carry source, blueprint tag and 7-step plan. Worker and Q83 second-reading reports present. Not recompiled (no change)."
+ }
+}

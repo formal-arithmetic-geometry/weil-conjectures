@@ -1,0 +1,114 @@
+{
+ "id": "lem-coef-finite-adjunction-naturality",
+ "kind": "statement",
+ "title": "Contravariant naturality of defined finite horizontals",
+ "statement": "Fix D,l,E,X,Q,a₀,b₀,T,e,M as in [def-coef-finite-adjunction-transition-data], with a₀≤b₀, M.IsSpecified, and the scalar and origin realization equations in the displayed Lean statement. For every morphism z:K→Kprime in CoefTower.inputs and every finite level r, H_r(z) followed by finiteHorizontal(r,K) equals finiteHorizontal(r,Kprime) followed by precomposition with C(z) in RHom. There is no assertion about coefficient transitions or traces at different levels. No invertibility of the horizontal is required.",
+ "stmt_deps": [
+  "def-coef-finite-adjunction-transition-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2, finite mapping adjunctions and compatibility with reduction; original steps 10"
+ },
+ "proof": [
+  {
+   "text": "The ordered Tor interval puts both inputs in finiteTorConstructibleIntegral. Uncurry the horizontals; pairingEvaluation, hscalar and hOrigin express them through the same evaluated tower beta after trace. Apply pairingDinaturality to z and naturality of tensorEvaluation inverse.",
+   "uses": [
+    "def-coef-tower-currying-models",
+    "lem-coef-tower-evaluation-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite projection is the component of the composite of compactSupportProjection whiskered by the point equivalence, coefCurryingFiniteC.hom, and eB inverse. Naturality of this composite, integralHom inverse, and the derived braiding identifies the two transposes. Tensor functoriality and curry_pre_app finish. Identity maps and zero inputs are included.",
+   "uses": [
+    "def-coef-tower-coaugmentation-constructions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-tower-currying-models",
+  "lem-coef-tower-evaluation-pairing",
+  "def-coef-tower-coaugmentation-constructions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Same finite mapping adjunction argument, with transition and input naturality separated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact evaluation functor commutes with derived tensor products and tower transitions",
+   "results": "Ordinary evaluation and exact functor tools only; no finite mapping-adjunction compatibility theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "Generic curry naturality provides transposition only, not the normalized finite pairing calculation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "curry_natural|uncurry_natural|pairingDinaturality",
+   "results": "Generic Mathlib currying and the specified project pairingDinaturality clause; no existing horizontal square or horizontal naturality lemma.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteAdjunctionTransition",
+  "date": "2026-10-25",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Paragraph 2, finite mapping adjunction compatibility; original steps 10",
+   "via": [
+    "lem-coef-finite-adjunction-transition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteAdjunctionNaturality",
+  "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionNaturality.lean",
+  "declaration": "WeilConjectures.FiniteAdjunctionTransition.finiteAdjunctionNaturality",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-25",
+  "statement": "theorem finiteAdjunctionNaturality (_hab : a₀ ≤ b₀)\n    (_hM : M.IsSpecified l E D X Q a₀ b₀ T e)\n    (_hscalar : ∀ (r : ℕ) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)),\n      (M.integralHom r).inv.app (op K) ≫ (M.finiteHom r).hom.app (op K) =\n        scalarHom D l E X Q a₀ b₀ T e M r K)\n    (eTrace : ∀ n : ℕ,\n      (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅\n        coefTraceFiniteValue l E D X n)\n    (_hOrigin : ∀ n : ℕ,\n      (M.omegaEvaluation n).hom ≫ (M.omegaOrigin n).hom = (eTrace n).hom)\n :\n    ∀ (K K' : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory)\n      (z : K ⟶ K') (r : ℕ),\n      (H D l E X r).map z.hom.op ≫ finiteHorizontal D l E X Q a₀ b₀ T e M r K =\n        finiteHorizontal D l E X Q a₀ b₀ T e M r K' ≫\n          (coefCurryingPointHom l E r).map ((C D l E X T).map z.hom).op"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-52d21",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T123429-L-1870654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-52d21",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T123429-L-1870654",
+  "kind": "interface",
+  "note": "independent cc review: relocated construction block vs clone item module (verbatim diff); new statement signatures vs node lean.statement; finiteAdjunctionSquare/Naturality vs the item's first two conjuncts and the IsSpecified clauses of CoefCurryingModels; trace conjunct vs finiteDualizingCoefficientComparisons"
+ }
+}

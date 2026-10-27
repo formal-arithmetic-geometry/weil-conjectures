@@ -1,0 +1,413 @@
+{
+ "id": "lem-sp-tower-evaluated-representability",
+ "kind": "statement",
+ "title": "A chart-normalized tower pair represents every finite-level test functor",
+ "statement": "Fix a field $k$ of characteristic $p>0$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [sk-def-sfb-dc-setting, def-weil-l-adic-coefficient-extension]. All schemes below are separated of finite type over $k$, and all morphisms are $k$-morphisms. Put $A_n=\\mathcal O_E/\\ell^n$ for $n\\ge1$. For a scheme $T$ use the ordinary derived category $D(\\operatorname{Tow}(T,\\mathcal O_E))$ of strict varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Write $\\mathcal C_T$ for its full subcategory whose levels have bounded intrinsically constructible cohomology and finite Tor amplitude, in common intervals independent of $n$ [sk-def-sp-normalized-towers, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. No normalization is required. At level $n$ write $\\mathcal C_{T,n}=D^b_{ctf}(T_{\\mathrm{proet}},A_n)$ in the ordinary constant-ring module derived category. For each separated finite-type map $h$ choose a coefficient-independent compactification and write $F_h=Rh_{!,\\bullet}$ and $F_{h,n}=Rh_{!,A_n}$ [det-sp-tower-shriek-levels].\n\nLet $f:X\\to Y$ be smooth of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms], let $K\\in\\mathcal C_Y$, and let $G\\in\\mathcal C_X$ with $\\epsilon:F_fG\\to K$. Suppose a finite open cover of $X$ consists of coordinate charts $f|_{U_i}=p_de_i$, and that on each $U_i$ there is an isomorphism $G|_{U_i}\\simeq e_i^*p_d^*K(d)[2d]$ carrying the restricted counit\n$$F_{f|_{U_i}}G|_{U_i}=F_fj_{i!}j_i^*G\\longrightarrow F_fG\\xrightarrow{\\epsilon}K$$\nto the sum-then-ordered-integration counit of [lem-sp-tower-coordinate-adjunction]. Let $\\epsilon_n:F_{f,n}G_n\\to K_n$ be its evaluation through [det-sp-tower-shriek-levels]. Then\n$$a\\longmapsto\\epsilon_nF_{f,n}(a):\\operatorname{Hom}(M,G_n)\\xrightarrow{\\sim}\\operatorname{Hom}(F_{f,n}M,K_n)$$\nis bijective for every $M\\in\\mathcal C_{X,n}$, naturally in $M$. No assumption that $M$ lifts to a tower is imposed.\n\nEvaluation is triangulated on the ordinary derived categories and preserves the open-extension adjunction maps and restricted counit equations. On a chart the evaluated counit is the finite one; every finite ctf test object, including its open extensions, has an etale-origin representative preserving its Tor interval [det-pe-finite-tor-comparison-noetherian]. For any binary open cover $Z=U\\cup V$ in $X$, if the restricted evaluated pairs represent the finite functors on $U,V,U\\cap V$, the two finite Hom sequences for $A=j_{U\\cap V,!}M|_{U\\cap V}$, $B=j_{U!}M|_U\\oplus j_{V!}M|_V$ have the exact five-term segments indexed by $B[1],A[1],M,B,A$; their outer comparison maps are the finite restricted counit bijections. The same conclusion holds for the empty cover of the empty scheme.\n\nUnder the finite adjunction of [det-sp-reduction-exceptional] there is consequently a unique counit-preserving isomorphism $G_n\\simeq f^!_{A_n}K_n$. For a family of such pairs, any tower morphism whose counit equation is $\\epsilon_LF_f(G(u))=u\\epsilon_K$ evaluates to the corresponding finite-adjoint morphism. If the family is a tower adjunction, its unit evaluates to the finite unit under these isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels paragraph: evaluation, finite Hom induction and identification with the finite adjoint; agent-stated extraction of the retained nineteen-step proof, steps 13, 14, 15, 16"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-tower-shriek-levels",
+  "def-sbc-smooth-morphisms",
+  "lem-sp-tower-coordinate-adjunction",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-reduction-exceptional",
+  "def-sp-tower-binary-counit-predicates"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n$. By [lem-sp-tower-chart-admissibility](1), all schemes and opens used below are Noetherian and qcqs, $A_n$ is finite Noetherian, and $G,K$ are bounded below. The equivalence of [det-pe-finite-tor-comparison-noetherian] supplies an etale-origin representative of every finite ctf object, preserving any specified Tor interval. The actual open adjunction on the finite ctf categories in [lem-sp-open-proetale-counit-scalar] applies with $A=B=A_n$ and the identity coefficient map; in particular open restriction and extension by zero stay in those categories. Thus it applies also to every restricted test object and every extension used below. These are separate finite-level witnesses; no tower of witnesses is chosen.",
+   "uses": [
+    "lem-sp-tower-chart-admissibility",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-sp-open-proetale-counit-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: domains of finite test objects and of their open extensions"
+   }
+  },
+  {
+   "text": "Evaluation is exact by [det-sp-coefficient-towers-abelian](2), hence its termwise derived functor is triangulated by [lem-sf-exact-functor-derived-triangulated]. Clause (1) of [det-sp-tower-shriek-levels] gives $(F_hC)_n\\simeq F_{h,n}C_n$ on the bounded-below inputs here. The actual open adjunction maps and compact-support composition normalizations evaluate to the finite ones by [lem-sp-coefficient-tower-shriek-calculus](1),(2). Consequently applying evaluation to the given restricted counit equation gives precisely $\\epsilon_{D,n}=\\epsilon_n F_{f,n}(j_{D!}G_n|_D\\to G_n)$ under $F_{f|_D,n}=F_{f,n}j_{D!}$. This is application of a functor to an equation of morphisms, not detection of equality by evaluations.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
+    "det-sp-tower-shriek-levels",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: exact evaluation and preservation of the specified open counits"
+   }
+  },
+  {
+   "text": "On each given chart $U_i$, evaluate its counit-preserving model isomorphism. By [lem-sp-tower-coordinate-adjunction], evaluation gives the finite chart adjunction, including its sum-then-ordered-integration counit, on all of $\\mathcal C_{U_i,n}$. Its domain hypotheses hold by [lem-sp-tower-chart-admissibility] applied to $K$. Hence $\\theta^{U_i}_N:a\\mapsto\\epsilon_{U_i,n}F_{f|_{U_i},n}(a)$ is bijective for every finite ctf $N$, independently of whether $N$ is an evaluation of a tower. When $d=0$ the projection adjunction is the identity, so this includes that case.",
+   "uses": [
+    "lem-sp-tower-coordinate-adjunction",
+    "lem-sp-tower-chart-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Levels: the evaluated local counit is a finite adjunction counit"
+   }
+  },
+  {
+   "text": "For opens $D\\subseteq Z\\subseteq X$ let $v_D:j_{D!}G_n|_D\\to G_n|_Z$ be the open counit and put $\\epsilon_{D,n}=\\epsilon_{Z,n}F_{f|_Z,n}(v_D)$. Use the finite open adjunction of [lem-sp-open-proetale-counit-scalar] and finite composition normalization of [lem-sp-coefficient-tower-shriek-calculus]. If $a:N\\to G_n|_D$ has transpose $\\bar a=v_Dj_{D!}(a)$, then\n$$\\epsilon_{Z,n}F_{f|_Z,n}(\\bar a)=\\epsilon_{D,n}F_{f|_D,n}(a).$$\nThus $\\theta^Z_{j_{D!}N}$ is identified with $\\theta^D_N$. In particular representability on $Z$ implies it on every further open $D$. This shows that each subopen of a chart has the property of Step 3. Iterated restrictions give the same counit because the composite open counit is $v_Dj_{D!}(v_{D'})$, the composition normalization in the cited calculus.",
+   "uses": [
+    "lem-sp-open-proetale-counit-scalar",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing and Levels: identify the comparison maps on open extensions"
+   }
+  },
+  {
+   "text": "For a binary open cover $Z=U\\cup V$ and $M\\in\\mathcal C_{Z,n}$ choose an etale-origin representative $L$ by [det-pe-finite-tor-comparison-noetherian]. Apply the natural signed sheaf short exact sequence of [lem-weil-pbc-etale-open-cover-shriek-natural-ses] termwise to a complex representing $L$. Its arrows commute with the differential by naturality. By [lem-weil-pbc-complex-ses-triangle] it gives a triangle with first map the signed overlap inclusions and second map the sum of open counits. Apply exact $\\nu_Z^*$, using [lem-sf-exact-functor-derived-triangulated]. The open and restriction comparisons, including their actual counits, in [lem-sp-unbounded-open-counit-site-transport] identify its terms and arrows with\n$$A\\longrightarrow B\\longrightarrow M\\xrightarrow{\\delta}A[1],\\qquad A=j_{U\\cap V,!}M|_{U\\cap V},\\quad B=j_{U!}M|_U\\oplus j_{V!}M|_V.$$\nThe overlap inclusions are composites of the same counits, so their signs and their composites are preserved too. Step 1 places all these test objects and their shifts in the finite ctf categories.",
+   "uses": [
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-weil-pbc-etale-open-cover-shriek-natural-ses",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sp-unbounded-open-counit-site-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing, repeated after evaluation: the finite signed open-cover triangle; Stacks 0GKK"
+   }
+  },
+  {
+   "text": "Write $F=F_{f|_Z,n}$ and $H=G_n|_Z$. By [lem-compact-support-direct-image-triangulated], $F$ carries the triangle in Step 5 to a distinguished triangle, using $A_n=\\mathcal O_E/\\varpi_E^{en}$. Apply [lem-weil-pbc-hom-out-of-triangle-exact] to both triangles and their rotations. This gives exact rows\n$$\\operatorname{Hom}(B[1],H)\\to\\operatorname{Hom}(A[1],H)\\to\\operatorname{Hom}(M,H)\\to\\operatorname{Hom}(B,H)\\to\\operatorname{Hom}(A,H),$$\nand the row with each $\\operatorname{Hom}(T,H)$ replaced by $\\operatorname{Hom}(FT,K_n)$. The vertical maps are $\\theta_T(a)=\\epsilon_{Z,n}F(a)$, including $T=B[1],A[1]$. Every square commutes: for every triangle arrow $t:S\\to T$ one has $\\epsilon_{Z,n}F(at)=\\epsilon_{Z,n}F(a)F(t)$. For $t=\\delta$ this uses the shift identification $F(A[1])\\simeq(FA)[1]$ in the image triangle. Thus this checks the boundary square as well as the unshifted squares.",
+   "uses": [
+    "lem-compact-support-direct-image-triangulated",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: the exact five-term finite Hom ladder indexed by B[1], A[1], M, B, A"
+   }
+  },
+  {
+   "text": "Suppose the restricted evaluated pairs on $U,V,U\\cap V$ represent their finite functors. Under Step 4 the vertical maps at $A$ and $A[1]$ are the representing maps on $U\\cap V$, with tests $M|_{U\\cap V}$ and $M|_{U\\cap V}[1]$. At $B,B[1]$ they are the direct sums of the maps on $U,V$ with the corresponding tests and shifts; additivity of $F$ and the Hom functors gives these identifications. All four are isomorphisms of abelian groups. Apply [lem-weil-pbc-five-lemma] to the exact ladder of Step 6: its first vertical map is in particular surjective and its last injective. Therefore $\\theta^Z_M$ is bijective for every finite ctf $M$.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Gluing and Levels: finite five-lemma argument"
+   }
+  },
+  {
+   "text": "Prove the property for every open $Z\\subseteq X$ by strong induction on the number $r$ of sets in the restricted given cover $Z\\cap U_i$ needed to cover $Z$. For $r=0$, $Z=\\varnothing$; module sheaves and their derived objects are zero, and both Hom groups have one element. For $r=1$ use Steps 3 and 4. For $r>1$ let $V$ be the last restricted chart and $U$ the union of the others. Both $U$ and $U\\cap V$ are covered by at most $r-1$ restricted charts; their counits are the restrictions of the same $\\epsilon_n$ by Step 4. Induction gives the property there, while $V$ is covered by Step 4. Step 7 gives it on $Z$. Taking $Z=X$ proves the claimed bijection. For $b:M'\\to M$, the identity $\\theta_{M'}(ab)=\\theta_M(a)F_{f,n}(b)$ proves naturality in the test object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: finite-cover induction, including the empty scheme"
+   }
+  },
+  {
+   "text": "The finite adjunction used in [det-sp-reduction-exceptional] is the constructible adjunction $Rf_{!,A_n}\\dashv f^!_{A_n}$ on $\\Dctf$ of [sk-prop-sf-rf-shriek-preservation], whose hypotheses hold since $A_n$ is finite and killed by $\\ell^n$ and $f$ is separated of finite type. It gives a representing pair $(J,\\epsilon^J)$, $J=f^!_{A_n}K_n$, on these same finite ctf categories. Its bijection produces a unique $s:G_n\\to J$ with $\\epsilon^JF_{f,n}(s)=\\epsilon_n$. Step 8 with test $J$ gives a unique $t:J\\to G_n$ with $\\epsilon_nF_{f,n}(t)=\\epsilon^J$. Hence $st$ and $1_J$ have the same transpose under the finite adjunction, and $ts$ and $1_{G_n}$ have the same transpose under Step 8. Injectivity gives $st=1_J$ and $ts=1_{G_n}$. Thus $s$ is the unique counit-preserving isomorphism.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: identification with the finite right adjoint"
+   }
+  },
+  {
+   "text": "For a family of pairs and a tower morphism $G(u)$, evaluate its stated counit equation using Step 2 to obtain $\\epsilon_{L,n}F_{f,n}(G(u)_n)=u_n\\epsilon_{K,n}$. Conjugating by the isomorphisms of Step 9 gives $\\epsilon^J_{L_n}F_{f,n}(s_LG(u)_ns_K^{-1})=u_n\\epsilon^J_{K_n}$. This is also the defining equation for $f^!_{A_n}(u_n)$, so finite-adjunction injectivity identifies them. Finally, if the family is an adjunction, evaluate its triangle identity $\\epsilon_{FM}F(\\eta_M)=1_{FM}$. After Step 9 the evaluated $\\eta_M$ therefore transposes to $1_{F_{f,n}M_n}$; by the finite adjunction it is precisely the finite unit at $M_n$. This assertion only evaluates units at tower objects; it does not require lifts of arbitrary finite tests.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: functoriality and equality of evaluated units by their transpose equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-chart-admissibility",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sp-open-proetale-counit-scalar",
+  "det-sp-coefficient-towers-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-tower-coordinate-adjunction",
+  "lem-weil-pbc-etale-open-cover-shriek-natural-ses",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sp-unbounded-open-counit-site-transport",
+  "lem-compact-support-direct-image-triangulated",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-five-lemma",
+  "det-sp-reduction-exceptional",
+  "sk-prop-sf-rf-shriek-preservation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels paragraph, expanded using the finite signed open-cover argument of Gluing; Stacks 0GKK, 0149, 05QB, 015F"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a coefficient tower representing pair built by binary open gluing represents compact support against every finite coefficient constructible finite Tor object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)}\\n  (s : (j : D.J) → F.val.obj (Opposite.op (D.U j)))\\n  (h :\\n    ∀ (i j : D.J),\\n      F.val.map (D.f i j).op (s i) = F.val.map (CategoryTheory.CategoryStruct.comp (D.f j i).op (D.t i \", \"doc\": \"For a sheaf $ F $ on the Zariski topology and gluing data $ D $ for schemes, given compatible sections $ s_j $ over the indexing category $ J $ satisfying the sheaf condition, the constructed global s\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.GlueData.ιInvAppπApp\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (D : AlgebraicGeometry.PresheafedSpace.GlueData C) →\\n      [inst_1 : CategoryTheory.Limits.HasLimits C] →\\n        {i : D.J} →\\n          (U : TopologicalSpace.Opens ↑↑(D.U i)) →\\n            (j : CategoryTheory.Limits.WalkingMultispan (C\", \"doc\": \"For gluing data $ D $ of presheafed spaces over a category $ \\\\mathcal{C} $, this function constructs a morphism between presheaf objects associated to an open set $ U \\\\subseteq D.U(i) $ and its image/\"}\n  {\"name\": \"TopCat.Presheaf.isGluing_iff_pairwise\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {X : TopCat} {F : TopCat.Presheaf (Type u_4) X} {ι : Type u_5} {U : ι → TopologicalSpace.Opens ↑X}\\n  {sf : (i : ι) → CategoryTheory.ToType (F.obj (Opposite.op (U i)))}\\n  {s : CategoryTheory.ToType (F.obj (Opposite.op (iSup U)))},\\n  F.IsGluing U sf s ↔\\n    ∀ (i : (CategoryTheory.Pairwise ι)ᵒᵖ),\\n   \", \"doc\": \"A presheaf $ F $ satisfies the gluing condition for an open cover $\\\\{U_i\\\\}$ with sections $ s_i $ if and only if, for every index $ i $, the restriction of the global section $ s $ to $ U_i $ equals $\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.GlueData.ιInvApp_π\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (D : AlgebraicGeometry.PresheafedSpace.GlueData C)\\n  [inst_1 : CategoryTheory.Limits.HasLimits C] {i : D.J} (U : TopologicalSpace.Opens ↑↑(D.U i)),\\n  ∃ (eq :\\n    Opposite.op U =\\n      Opposite.op\\n        ((TopologicalSpace.Opens.map\\n          \", \"doc\": \"For each index $i$ in the indexing category $J$ and open subset $U$ of the topological space $U(i)$, there exists an equality $eq$ such that the composition of the morphism $D.\\\\iota\\\\text{InvApp}(U)$ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)} →\\n    (s : (j : D.J) → F.val.obj (Opposite.op (D.U j))) →\\n      (∀ (i j : D.J),\\n          F.val.map (D.f i j).op (s i) =\\n            F.val.map (CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given gluing data $ D $ for schemes and a sheaf $ F $ on the Zariski topology with values in a category of types, this constructs the value of $ F $ at the glued scheme $ D.\\text{glued} $ by applying t\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).t' x y z = AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the coherence morphism $t'$ in the glued cover data constructed from $\\\\mathcal{U}$ coincides with the morph\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D C) : Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"`F ⊣ G` represents the data of an adjunction between two functors\\n`F : C ⥤ D` and `G : D ⥤ C`. `F` is the left adjoint and `G` is the right adjoint.\\n\\nWe use the unit-counit definition of an adjunction\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : F.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) : F.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mk'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction from the data of a `CoreHomEquivUnitCounit`, i.e. a hom set\\nequivalence, unit and counit natural transformations together with proofs of the equalities\\n`homEquiv_unit` and `hom\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquiv F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between `F` and `G` out of a natural bijection between each\\n`F.obj X ⟶ Y` and `X ⟶ G.obj Y`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between functors `F` and `G` given a unit and counit for the adjunction\\nsatisfying the triangle identities.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (left : CategoryTheory.Functor C D) [left.IsLeftAdjoint] : left ⊣ left.rightAdjoint\", \"doc\": \"The adjunction associated to a functor known to be a left adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor C D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"The adjunction associated to a functor known to be a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (E : CategoryTheory.Functor C D) [E.IsEquivalence] : E ⊣ E.inv\", \"doc\": \"An equivalence `E` is left adjoint to its inverse.\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {left : CategoryTheory.Functor C D} [self : left.IsLeftAdjoint] : ∃ right, Nonempty (left ⊣ right)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftAdjoint.mk\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {left : CategoryTheory.Functor C D} (exists_rightAdjoint : ∃ right, Nonempty (left ⊣ right)) : left.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {right : CategoryTheory.Functor D C} [self : right.IsRightAdjoint] : ∃ left, Nonempty (left ⊣ right)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*adjunction|adjunction.*evaluation|eval.*[Dd]erived",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"22\", \"text\": \"  into an adjunction between `freeFunctor` and the evaluation functor at `X`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"line\": \"12\", \"text\": \"# Adjunctions involving evaluation\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"line\": \"52\", \"text\": \"/-- The adjunction showing that evaluation is a right adjoint. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"line\": \"54\", \"text\": \"def evaluationAdjunctionRight (c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"line\": \"70\", \"text\": \"  ⟨_, ⟨evaluationAdjunctionRight _ _⟩⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"line\": \"98\", \"text\": \"/-- The adjunction showing that evaluation is a left adjoint. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"line\": \"63\", \"text\": \"/-- The dependent evaluation natural transformation as the counit of the adjunction. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"line\": \"67\", \"text\": \"/-- The dependent coevaluation natural transformation as the unit of the adjunction. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"line\": \"12\", \"text\": \"import Mathlib.CategoryTheory.Adjunction.Evaluation\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite level evaluation of local adjunction counits and induction using Mayer Vietoris proves representability without lifting finite test complexes to towers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective\", \"type\": \"∀ {C : Type u_1} (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {FD : D → D → Type u_3} {CD : D → Type w}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [inst_3 : CategoryTheory.ConcreteCategory D FD]\\n  {F G : CategoryTheory.Fu\", \"doc\": \"For presheaves $F,G: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ over a preregular finitary pre-extensive category $\\\\mathcal{C}$, with $\\\\mathcal{A}$ a concrete category, a natural transformation $f: F \\\\R\"}\n  {\"name\": \"CategoryTheory.plusPlusAdjunction_counit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w)\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory\", \"doc\": \"For any sheaf $ Y $ on a category $ \\\\mathcal{C} $ with respect to a Grothendieck topology $ J $, the counit of the sheafification adjunction evaluated at $ Y $ is the natural transformation obtained b\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective\", \"type\": \"∀ {C : Type u_1} (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {FD : D → D → Type u_3} {CD : D → Type w}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [inst_3 : CategoryTheory.ConcreteCategory D FD]\\n  [inst_4 : CategoryTheory\", \"doc\": \"For a morphism $ f: F \\to G $ between sheaves on a category $ \\\\mathcal{C} $ with respect to the coherent Grothendieck topology, $ f $ is locally surjective if and only if $ f $ is locally surjective wi\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Functor/Flat\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) [F.IsRightAdjoint], CategoryTheory.RepresentablyFlat F\", \"doc\": \"Every right adjoint functor between categories is representably flat.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) → [CategoryTheory.HasWeakSheafify J (Type v)] → Type (max u v)\", \"doc\": \"A commutative square in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, satisfying the Mayer-Vietoris property that ensures compatibility with sheaf gluing conditions under $J$.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a coefficient tower representing pair built by binary open gluing represents compact support against every finite coefficient constructible finite Tor object",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.scalarRTensor_apply_tmul_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.MvPolynomial\", \"type\": \"(p : MvPolynomial σ R) (n : N) (d : σ →₀ ℕ) : scalarRTensor (p ⊗ₜ[R] n) d = coeff d p • n\", \"doc\": \"For any polynomial $ p $ in the multivariate polynomial ring $ R[\\\\sigma] $, any element $ n $ in an $ R $-module $ N $, and any finite support function $ d : \\\\sigma \\\\to_0 \\\\mathbb{N} $, the evaluation \"}\n  {\"name\": \"MvPolynomial.aevalTower_comp_C\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \": (aevalTower g y : MvPolynomial σ R →+* A).comp C = g\", \"doc\": \"The composition of the evaluation homomorphism $\\\\text{aevalTower}~g~y$ with the constant polynomial embedding $C$ is equal to the original ring homomorphism $g$. In symbols, $(\\\\text{aevalTower}~g~y) \\\\\"}\n  {\"name\": \"CategoryTheory.eval_typesGlue\", \"module\": \"Mathlib.CategoryTheory.Sites.Types\", \"type\": \"{S hs α} (f) : eval.{u} S α (typesGlue S hs α f) = f\", \"doc\": \"For a sheaf $ S $ on the category of types with respect to the canonical Grothendieck topology, a type $ \\\\alpha $, and a function $ f : \\\\alpha \\\\to S(\\\\ast) $ where $ \\\\ast $ is the terminal object, eval\"}\n  {\"name\": \"Module.DualBases.coeffs_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.Basis\", \"type\": \"(h : DualBases e ε) (m : M) (i : ι) : h.coeffs m i = ε i m\", \"doc\": \"For any element $m \\\\in M$ and index $i$, the evaluation of the coefficients function at $i$ gives $\\\\varepsilon_i(m)$, i.e., $\\\\text{coeffs}(m)(i) = \\\\varepsilon_i(m)$.\"}\n  {\"name\": \"CategoryTheory.typesGlue_eval\", \"module\": \"Mathlib.CategoryTheory.Sites.Types\", \"type\": \"{S hs α} (s) : typesGlue.{u} S hs α (eval S α s) = s\", \"doc\": \"For a sheaf $ S $ on the category of types with the canonical Grothendieck topology, a type $ \\\\alpha $, and a function $ f : \\\\alpha \\\\to S(\\\\ast) $ where $ \\\\ast $ denotes the terminal object (unit type)\"}\n  {\"name\": \"TestFunction.coe_ofSupportedIn\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \"∀ {E : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4}\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] {n : ℕ∞} {K : TopologicalSpace.Compacts E}\\n  (K_sub_Ω : ↑K ⊆ ↑Ω) (f : ContDiffMapSupportedIn E F n K), ⇑(TestFunction.o\", \"doc\": \"The canonical coercion of a test function constructed via the supported-in-compact constructor equals the original function, i.e., for a compact set $ K \\\\subseteq \\\\Omega $ and a $ C^n $-function $ f $\"}\n  {\"name\": \"finsuppTensorFinsupp_apply\", \"module\": \"Mathlib.LinearAlgebra.DirectSum.Finsupp\", \"type\": \"(f : ι →₀ M) (g : κ →₀ N) (i : ι) (k : κ) : finsuppTensorFinsupp R S M N ι κ (f ⊗ₜ g) (i, k) = f i ⊗ₜ g k\", \"doc\": \"For a commutative semiring $ R $, a semiring $ S $ with an $ R $-algebra structure, and families of $ R $-modules $\\\\{M_i\\\\}_{i \\\\in \\\\iota}$ and $\\\\{N_j\\\\}_{j \\\\in \\\\kappa}$, the canonical $ S $-linear equiv\"}\n  {\"name\": \"TestFunction.coe_ofSupportedInLM\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_3} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [inst_3 : NormedAddCommGroup F]\\n  [inst_4 : NormedSpace ℝ F] [inst_5 : NormedSpace 𝕜 F] {n : ℕ∞} [inst_6 : SMulCommClass ℝ 𝕜 F\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, normed $\\\\mathbb{R}$-modules $E$ and $F$ with $F$ also a $\\\\mathbb{K}$-module, an open set $\\\\Omega \\\\subseteq E$, a compact set $K \\\\subseteq \\\\Omega$, and a d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.evaluation, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"CategoryTheory.constantPresheafAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (D : Type u_2) [CategoryTheory.Category.{v_2, u_2} D] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) : CategoryTheory.Functor.const Cᵒᵖ ⊣ (CategoryTheory.evaluation Cᵒᵖ D).obj (Opposite.op T)\", \"doc\": \"The constant presheaf functor is left adjoint to evaluation at a terminal object.\"}\n  {\"name\": \"SSet.chainComplexFunctorAdjunction\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasCoproducts C] [CategoryTheory.Preadditive C] (n : ℕ) : (CategoryTheory.Functor.postcompose₂.obj (HomologicalComplex.eval C (ComplexShape.down ℕ) n)).obj (SSet.chainComplexFunctor C) ⊣ (CategoryTheory.evaluation SSet C).obj (S\", \"doc\": \"The adjunction `Hom(Cⁿ(-, X), F) ≃ Hom(X, F(Δ[n]))` for `R : C` and `F : SSet ⥤ C`.\"}\n  {\"name\": \"AlgebraicTopology.singularChainComplexFunctorAdjunction\", \"module\": \"Mathlib.AlgebraicTopology.SingularHomology.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasCoproducts C] [CategoryTheory.Preadditive C] (n : ℕ) : (CategoryTheory.Functor.postcompose₂.obj (HomologicalComplex.eval C (ComplexShape.down ℕ) n)).obj (AlgebraicTopology.singularChainComplexFunctor C) ⊣ (CategoryTheory.eval\", \"doc\": \"The adjunction `Hom(Cⁿ(-, X), F) ≃ Hom(X, F(Δ[n]))` for `X : C` and `F : Top ⥤ C`.\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionLeft\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) : (CategoryTheory.evaluation C D).obj c ⊣ CategoryTheory.evaluationRightAdjoint D c\", \"doc\": \"The adjunction showing that evaluation is a left adjoint.\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionRight\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) : CategoryTheory.evaluationLeftAdjoint D c ⊣ (CategoryTheory.evaluation C D).obj c\", \"doc\": \"The adjunction showing that evaluation is a right adjoint.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "grep",
+   "query": "eval.*[Tt]riangulated|[Tt]riangulated.*eval",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of strict coefficient tower chart adjunction counits represents every finite coefficient constructible finite Tor test object by open cover induction",
+   "results": "OK; 8 hits: Condensed.profiniteSolidCounit, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.ΓSpec.adjunction_counit_app', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary functor evaluation adjoints, scheme representability or sheaf Mayer-Vietoris conditions; none gives chart-normalized varying-coefficient tower counits representing all finite ctf tests."
+  },
+  {
+   "tool": "grep",
+   "query": "eval.*[Tt]riangulated|[Tt]riangulated.*eval|tower.*[Aa]djunction",
+   "results": "OK; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary functor evaluation adjoints, scheme representability or sheaf Mayer-Vietoris conditions; none gives chart-normalized varying-coefficient tower counits representing all finite ctf tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of finite coefficient compact support Hom functors from local adjunction counits on a finite open cover",
+   "results": "OK; 8 hits: CategoryTheory.Adjunction.representableBy, CategoryTheory.Functor.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, CompHausLike.LocallyConstant.counitApp, Locale.counitAppCont, CategoryTheory.Functor.rightAdjointObjIsDefined_of_adjunction, CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary functor evaluation adjoints, scheme representability or sheaf Mayer-Vietoris conditions; none gives chart-normalized varying-coefficient tower counits representing all finite ctf tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.evaluation",
+   "results": "OK; 5 hits: CategoryTheory.constantPresheafAdj, SSet.chainComplexFunctorAdjunction, AlgebraicTopology.singularChainComplexFunctorAdjunction, CategoryTheory.evaluationAdjunctionLeft, CategoryTheory.evaluationAdjunctionRight",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary functor evaluation adjoints, scheme representability or sheaf Mayer-Vietoris conditions; none gives chart-normalized varying-coefficient tower counits representing all finite ctf tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local to global bijectivity of counit Hom maps on a finite open cover using the Mayer Vietoris triangle in constructible derived categories",
+   "results": "OK; 8 hits: TopCat.Presheaf.generateEquivalenceOpensLe_counitIso, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport, PresheafOfModules.homEquivOfIsLocallyBijective",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary functor evaluation adjoints, scheme representability or sheaf Mayer-Vietoris conditions; none gives chart-normalized varying-coefficient tower counits representing all finite ctf tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gluing",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels paragraph: exact evaluation, finite local counits, repeated finite Hom gluing, uniqueness and compatibility with units",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-tower-evaluated-representability",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded the Levels proof into exact evaluation, all-test finite chart adjunctions, open-extension transpose equations, the signed finite triangle and five-term Hom ladder, strong finite-cover induction including empty covers, and explicit counit/units uniqueness. Reused existing nodes throughout; no new node is needed. No Lean declaration in WeilConjectures states the item.",
+  "blueprint": "det-sp-tower-gluing proof, Levels paragraph in full, using Local pairs and the finite repetition of Gluing; unit sk-prop-sp-tower-geometric step 6.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic etale/pro-etale equivalence on qcqs schemes and interval preservation supplies each finite test witness; it is the explicit interface required by the item. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-sp-open-proetale-counit-scalar",
+    "why": "Use only its actual open adjunction on ordinary finite ctf categories, with identity scalar map, for open-extension tests and their transpose formula. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic triangulatedness of termwise exact derived functors, needed for evaluation and site comparison. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-open-cover-shriek-natural-ses",
+    "why": "Generic signed open-cover short exact sequence with specified counits; transport it to the finite pro-etale tests. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic passage from a degreewise short exact sequence of complexes to its distinguished triangle. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-sp-unbounded-open-counit-site-transport",
+    "why": "Generic preservation of actual open adjunction counits by etale/pro-etale comparison, used to identify the signed triangle maps. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-compact-support-direct-image-triangulated",
+    "why": "Generic triangulatedness of the finite compactification functor; instantiate its uniformizer exponent at en. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic exactness of contravariant Hom, used on rotated finite triangles. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Generic five lemma on abelian groups, for the two finite Hom rows. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "det-sp-reduction-exceptional",
+    "why": "Use the stated finite adjunction already required by the item to identify representing objects; no scalar comparison theorem is used. No node internal to the tower-gluing unit replaces this general interface."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Existence of the finite constructible adjunction Rf_{!,A_n} -| f^!_{A_n} on Dctf, which det-sp-reduction-exceptional presupposes but does not state; used in Step 9 only for its representing bijection. Added by the maintainer reader (Q76 7d3ffc08)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sp-open-proetale-counit-scalar",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-etale-open-cover-shriek-natural-ses",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sp-unbounded-open-counit-site-transport",
+  "lem-compact-support-direct-image-triangulated",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-five-lemma",
+  "det-sp-reduction-exceptional",
+  "sk-prop-sf-rf-shriek-preservation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-7d3ffc080",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-7d3ffc080 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the live base, and the item is still unsplit in live and side-live. There is no repair note for this item; the 2026-10-22 note concerns its parent det-sp-tower-gluing. The ten steps keep every argument of the parent's old steps 13-16 (Q149 report, lines 159-187). Source: the Levels, Local pairs and Gluing paragraphs of sk-prop-sp-tower-geometric-gluing.proof.md and unit steps 4-5. Stacks tags 0GKK, 0149, 05QB, 015F and 09AF were checked against tags/tags. No SGA is cited. Mathematical checks: step 2 uses only clause (1) of shriek-levels, so it avoids (2a), which needs k = F̄_p. Step 3: coordinate-adjunction states the evaluated finite chart adjunction on all of C_{U,n}, including d=0. Step 4: transpose formula ε_Z F_Z(v_D j_{D!}a) = ε_{D,n} F_{f|D,n}(a) verified. Step 5: the étale natural SES, the triangle, exact ν^* and the site-transport counit equation are correct; the arrow identification follows because the degreewise counits are monomorphisms. Step 6: exactness at Hom(A[1]), Hom(M) and Hom(B) via (i), (ii) and the rotation; exponent en is right. Step 7: five lemma in Ab. Step 8: strong induction over all opens, with empty, r=1 and r>1 cases. Steps 9-10: uniqueness and the morphism/unit algebra checked. Duplicates: det-sp-representing-pair-gluing is stated only for Z/ℓ^n, and the binary-counit node is the tower version, so a split without new nodes is correct. Batch 5: lem-trf-proetale-unit-leray-chain-formula (reached via chart-admissibility, which the parent already cites) and lem-trf-site-functorial-flat-resolution (reached via open-proetale-counit-scalar and shriek-calculus) are generic tools, not steps of the trace formula or Poincaré duality, so I accept them. FIX (C4): step 9 cited det-sp-reduction-exceptional for the finite adjunction Rf_{!,A_n} ⊣ f^!_{A_n}, but that node only presupposes it. I added sk-prop-sf-rf-shriek-preservation to the step 9 text, uses and proof_deps, and declared it in split_report.tool_uses. It is already a stmt_dep of det-sp-reduction-exceptional, so the closure does not grow. Advisory: det-pe-finite-tor-comparison-noetherian has a blueprint_update that makes its equivalence conditional; it still holds here because A_n is finite, and chart-admissibility(1) states the étale-origin representatives outright.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerEvaluatedRepresentability",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerEvaluated.tower_evaluated_representability",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.openAdjunction",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.restrictedCounit",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluatedCounit",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteOpenCounit",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteOpenUnit",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.restrictionEvaluation",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteOpenComposition",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteRestrictedCounit",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.Represents",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.ChartCover",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteRestrictionComp",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteOpenCongr",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteCoverComponent",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteA",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteB",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteS",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finiteT",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluation_open_compatibility",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finite_binary_representability",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.tower_evaluated_representability",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluated_family_morphism",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluated_adjunction_unit"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerEvaluatedRepresentability.lean",
+  "statement": "theorem tower_evaluated_representability (pchar : ℕ) [Fact pchar.Prime] [CharP k pchar] (_hl : l ≠ pchar) (hc : Models l E k b o q z h cal w) (X Y : Bases k) (f : X.val.left ⟶ Y.val.left) (_over : f ≫ Y.val.hom = X.val.hom) (c : Compactification f) (d : ℕ) [SmoothOfRelativeDimension d f] (G : SpTowerCalculus.C l E b q X.val.left) (K : SpTowerCalculus.C l E b q Y.val.left) (eps : (SpTowerCalculus.F l E b o q c).obj G.obj ⟶ K.obj) (_charts : ChartCover l E k b o q z h cal w hc X Y f c d G K eps) : ∀ n : ℕ, Represents l E b c n ((spDerivedCoefficientEvaluation l E X.val.left (q.abelian X.val.left) n).obj G.obj) ((spDerivedCoefficientEvaluation l E Y.val.left (q.abelian Y.val.left) n).obj K.obj) (evaluatedCounit l E b o q c eps n) ∧ (∀ (M M' : spFiniteConstructibleTorCategory X.val.left (SpTowerShriek.R l E n)) (v : M'.obj ⟶ M.obj) (a : M.obj ⟶ (spDerivedCoefficientEvaluation l E X.val.left (q.abelian X.val.left) n).obj G.obj), (SpTowerShriek.finiteF l E b c n).map (v ≫ a) ≫ evaluatedCounit l E b o q c eps n = (SpTowerShriek.finiteF l E b c n).map v ≫ ((SpTowerShriek.finiteF l E b c n).map a ≫ evaluatedCounit l E b o q c eps n)) ∧ ∀ (hF : ∀ M : spFiniteConstructibleTorCategory X.val.left (SpTowerShriek.R l E n), spFiniteConstructibleTor Y.val.left (SpTowerShriek.R l E n) ((SpTowerShriek.finiteF l E b c n).obj M.obj)) (H : spFiniteConstructibleTorCategory Y.val.left (SpTowerShriek.R l E n) ⥤ spFiniteConstructibleTorCategory X.val.left (SpTowerShriek.R l E n)) (adj : ObjectProperty.lift _ ((spFiniteConstructibleTor X.val.left (SpTowerShriek.R l E n)).ι ⋙ SpTowerShriek.finiteF l E b c n) hF ⊣ H), ∃! s : (spDerivedCoefficientEvaluation l E X.val.left (q.abelian X.val.left) n).obj G.obj ≅ (H.obj ((evaluation l E b q Y.val.left n).obj K)).obj, (SpTowerShriek.finiteF l E b c n).map s.hom ≫ (adj.counit.app ((evaluation l E b q Y.val.left n).obj K)).hom = evaluatedCounit l E b o q c eps n",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": " Repair of returned head 1aafb427aeec H2: the three plain five-term predicates are owned by def-sp-tower-binary-counit-predicates (existing:true re-export); the binary-counit theorem is not a statement dependency. Lean statements and predicate declarations are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8410861df",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery fixes exactly the H2 fault of 1aafb427aeec: Lean modules byte-identical; item stmt_deps swap the theorem node lem-sp-tower-binary-counit-representability for new def-sp-tower-binary-counit-predicates (existing:true re-export of the landed HomFiveExact/ImageHomFiveExact/OuterBijective; H12 fields, searches, stmt_deps on base, TeX matches bodies incl. -s[1] sign; no H4 copy). §1(B) Models reproduces Construction's 29 witnesses verbatim; Nonempty theorem keeps the original hypotheses. Independent check of every clause: all finite ctf tests with no lift, naturality, ∃! counit-preserving iso for any finite adjunction, evaluation/open clauses, signed binary triangle and five-term rows, family/unit clauses; edge cases empty X, d=0, exponent 1. No hollow def, all theorems sorry, docstrings ok, statements verbatim, lines ≤99. Advisories: orphaned old Construction module; Models header says Q31."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-00ef3",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261025T162127-L-305766",
+  "kind": "proof",
+  "note": "independent cc review: delivered proofs of evaluated_family_morphism/evaluated_adjunction_unit against node lem-sp-tower-evaluated-representability step 10 and the published module; the removed imports against the plans of the 3 theorems still left with sorry (Lean byte-identical to the dcb19956 delivery, whose FIX failed to land)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluated_adjunction_unit",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluated_family_morphism",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluation_open_compatibility",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finite_binary_representability",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.tower_evaluated_representability"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.evaluation_open_compatibility",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.finite_binary_representability",
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluated.tower_evaluated_representability"
+  ]
+ }
+}

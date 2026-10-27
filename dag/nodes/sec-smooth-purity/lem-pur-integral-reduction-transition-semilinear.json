@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-integral-reduction-transition-semilinear",
+ "kind": "statement",
+ "title": "Canonical finite integral reduction transitions retain their finite scalar law",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, a scheme Y, and the completed and finite coefficient sheaves and canonical strict reduction tower [def-weil-integral-reduction-tower]. Let A_n be the constant coefficient quotient of exponent n+1 and q_n:A_(n+1) -> A_n its quotient map. For any complex P of completed-coefficient modules, degree i, site object U, scalar s in A_(n+1)(U), and section x of the higher reduction of P in degree i, the recorded transition satisfies t_n(s x)=q_n(s)t_n(x), with scalar actions before restriction to completed coefficients [def-pc-sheaf-restrict-scalars; def-pur-sheaf-tensor-product].",
+ "stmt_deps": [
+  "def-weil-integral-reduction-tower",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, change of rings and its restriction-of-scalars construction; the quotient-transition construction in def-weil-integral-reduction-tower."
+ },
+ "proof": [
+  {
+   "text": "The termwise finite transition is restriction of an actual map of sheaves of modules from the higher finite coefficient ring to the lower finite coefficient ring. In the chosen reduction-functor presentation it is conjugated by the specified equalities identifying the objects with their scalar-extension constructions. These identifications are linear over their respective finite coefficient rings, so the conjugated transition satisfies t(s x)=q(s)t(x).",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble these degreewise maps into the explicit natural transformation of complexes. The existing unique pure-tensor characterization of the recorded reduction transition identifies this transformation with that transition. Transport the scalar equation across this equality. This works for all levels including n=0, all complexes including zero, and scalars zero and one; there is no flatness hypothesis.",
+   "uses": [
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-reduction-tower",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, applied to the explicit scalar-extension map. Assemble the termwise map and identify it with the canonical transition by its unique generator characterization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "semilinear maps of sheaf module pullbacks and tensor products under a ring quotient induce transition chain maps uniquely determined by generators",
+   "results": "SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.map_generators_I; SheafOfModules.Presentation.mapRelations_mapGenerators; SheafOfModules.Presentation.map_π_eq; SheafOfModules.Presentation.mapRelations; SheafOfModules.Presentation.map_relations_I; SheafOfModules.Presentation.mapRelations_mapGenerators_assoc; SheafOfModules.map_ιFree_mapFree_hom",
+   "date": "2026-10-22",
+   "verdict": "No exact tower-transition theorem. Restriction-of-scalars and scalar-linear-map APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "No exact tower-transition theorem. Restriction-of-scalars and scalar-linear-map APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars_map_val|map_smul|restrictScalarsObj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "No exact tower-transition theorem. Restriction-of-scalars and scalar-linear-map APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical quotient transitions in a tower of scalar extensions of sheaves of modules are semilinear for the finite coefficient quotient map",
+   "results": "Submodule.Quotient.instSMul'; Module.IsTorsionBySet.semilinearMap; QuotSMulTop.map; Submodule.Quotient.isScalarTower; LinearMap.coeIsScalarTower; QuotSMulTop.map_comp_mkQ; LinearMap.extendScalarsOfIsLocalizationEquiv; SMulCon.instSMulQuotient",
+   "date": "2026-10-22",
+   "verdict": "No exact tower-transition theorem. Restriction-of-scalars and scalar-linear-map APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsWellDefined",
+  "date": "2026-10-22",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral coefficients: the finite reduction tower maps used to define strict pullback and tensor transitions retain the finite coefficient quotient action.",
+   "via": [
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-integral-derived-operations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionTransitionSemilinear",
+  "file": "lean/Sheaf/Paper/IntegralReductionTransitionSemilinear.lean",
+  "declaration": "WeilConjectures.unrestrictedIntegralTransition_smul",
+  "statement": "theorem unrestrictedIntegralTransition_smul (n : ℕ)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)\n    (U : Y.ProEtᵒᵖ) (s : (integralCoefficientCommRingSheaf l E Y (n + 1)).obj.obj U)\n    (x : (((unrestrictedIntegralFiniteComplex l E Y (n + 1)).obj P).X i).val.obj U) :\n    (((unrestrictedIntegralTransition l E Y n).app P).f i).val.app U (s • x) =\n      (integralCoefficientSheafTransition l E Y n).hom.app U s •\n        (show (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i).val.obj U from\n          (((unrestrictedIntegralTransition l E Y n).app P).f i).val.app U x)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261023T230424-L-3424882",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261023T230424-L-3424882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

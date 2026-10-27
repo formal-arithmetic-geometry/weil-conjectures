@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-etale-exact-pullback-square-pasting",
+ "kind": "statement",
+ "title": "Exact derived inverse pullback-square comparisons paste",
+ "statement": "Let A be a commutative ring. Let U,U′,U″,X,X′,X″ be schemes [def-pc-scheme] with arrows e,e′,e″,w,w′,z,z′ forming two successive Cartesian squares and their composite square [def-weil-pbc-cartesian-square]. In the ordinary unbounded derived categories of A-module sheaves on their small etale sites [def-weil-pbc-derived-categories], take the exact inverse-image functors [prop-weil-pbc-inverse-image-modules-exact], the inverse exact square comparisons [def-kun-unbounded-exchange], and the specified exact inverse-image compositors [def-pur-etale-exact-pullback-unit-composition-comparisons]. Pull back the first inverse square map along z′ and follow it by the second inverse square map. At every K this equals the inverse source compositor, then the composite inverse square map, then the image under e″ inverse image of the target compositor. No finite, Noetherian, separatedness or etaleness assumptions are required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6; coherence of exact inverse-image square comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-unbounded-exchange",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply squareUpperStarIso_paste_vert_hom to the two flipped squares and their composite. A flipped square comparison is the inverse of the original square comparison. Precompose with the inverse source compositor and postcompose with the image of the target compositor. Cancellation gives the asserted equation on ordinary sheaves.",
+   "uses": [
+    "lem-weil-pbc-square-iso-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Encode the six sheaf categories and all inverse-image functors as finite exact words. Encode the two sides as finite pasting expressions in the square cells and compositor cells. Their ordinary evaluations agree by the preceding equation. Exact-derived transformation pasting descends this equation to the entire unbounded derived categories.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each square cell, expand the word comparison formula: its derived value is precisely exactDerivedSquareUpperStarIso.inv. For the two compositor cells the same formula gives unboundedEtaleUpperStarCompIso.inv and .hom. Evaluate the descended equality at K and simplify associators and unitors. This gives the stated component equation. Identity arrows and empty schemes use the same cancellation, with no nontriviality assumption on coefficients.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "def-pur-etale-exact-pullback-unit-composition-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6; the already proved pullback-pasting argument of lem-pur-etale-normalized-mates-composition-pasting, extracted by E3 after profiling"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived pullback square comparison isomorphisms paste under successive Cartesian base change",
+   "results": "Eight generic pullback-pasting and comparison hits, including pullbackRightPullbackFstIso and ChosenPullbacksAlong.pullbackComp; none identifies the specified exact derived sheaf maps.",
+   "date": "2026-10-27",
+   "verdict": "Retain the existing project sheaf square-pasting and exact-derived finite-pasting proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"squareUpperStarIso\"",
+   "results": "Zero hits.",
+   "date": "2026-10-27",
+   "verdict": "The specified sheaf square comparison belongs to the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "exactDerivedSquareUpperStarIso.*(paste|comp)",
+   "results": "Zero Mathlib hits. The item already contains the complete argument being extracted.",
+   "date": "2026-10-27",
+   "verdict": "Reuse that proved argument without introducing a hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleNormalizedMatesCompositionPasting",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-normalized-mates-composition-pasting",
+   "place": "Step 6, exact pullback-square pasting"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleExactPullbackSquarePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleExactPullbackSquarePasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleExactPullbackSquarePasting",
+  "statement": "theorem etaleExactPullbackSquarePasting\n    (A : Type (u + 1)) [CommRing A]\n    {U U' U'' X X' X'' : Scheme.{u}}\n    {e : U ⟶ X} {e' : U' ⟶ X'} {e'' : U'' ⟶ X''}\n    {w : X' ⟶ X} {z : X'' ⟶ X'} {w' : U' ⟶ U} {z' : U'' ⟶ U'}\n    (sq : IsPullback w' e' e w) (sq' : IsPullback z' e'' e' z)\n    (sq'' : IsPullback (z' ≫ w') e'' e (z ≫ w))\n    (K : DerivedCategoryModule A X) :\n    (upperStar (ModuleCat.{u + 1} A) z').mapDerivedCategory.map ((exactDerivedSquareUpperStarIso\n        (ModuleCat.{u + 1} A) sq.toCommSq).inv.app K) ≫\n      (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq'.toCommSq).inv.app ((upperStar\n          (ModuleCat.{u + 1} A) w).mapDerivedCategory.obj K) =\n    (unboundedEtaleUpperStarCompIso A z' w').inv.app\n        ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫\n      (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq''.toCommSq).inv.app K ≫\n      (upperStar (ModuleCat.{u + 1} A) e'').mapDerivedCategory.map\n        ((unboundedEtaleUpperStarCompIso A z w).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-weil-pbc-square-iso-pasting",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T021313-L-2755214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T021313-L-2755214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

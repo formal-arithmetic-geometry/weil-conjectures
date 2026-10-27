@@ -1,0 +1,245 @@
+{
+ "id": "lem-sf-middle-exchange-projection-base-change",
+ "kind": "statement",
+ "title": "Base change of the middle exchange and projection composite",
+ "statement": "Fix distinct primes $p_0,\\ell$, an integer $a\\geq1$, $k_0=\\mathbf F_{p_0^a}$, $k=\\overline{k_0}$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_{E,m}=\\mathcal O_E/\\varpi_E^m$ for $m\\geq1$. Choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, $n\\geq1$, and a six-functor datum [def-sf-datum] with the specified canonical transformations [def-exchange-projection, def-sf-pf]. All schemes and arrows below are separated and of finite type over $k$; all inputs lie in the displayed bounded constructible finite-Tor categories. Integral pullback and tensor are completed; field operations use rationalization and common finite coefficient fields. Let $f:X\\to B$, $g:Y\\to B$, $b:B'\\to B$ be morphisms. Set $T=X\\times_BY$, with projections $p:T\\to X$, $q:T\\to Y$. Put $X'=X\\times_BB'$, $Y'=Y\\times_BB'$, $T'=X'\\times_{B'}Y'$; write $f',g',p',q'$ for the induced maps and $b_X,b_Y,b_T$ for the projections to $X,Y,T$. Let $K\\in D^b_{ctf}(X,\\Lambda)$, $L\\in D^b_{ctf}(Y,\\Lambda)$, $F=Rf_!K$, $K'=Lb_X^*K$, $L'=Lb_Y^*L$, $F'=Rf'_!K'$, $D=Lp^*K\\otimes^LLq^*L$, and $D'=Lp'^*K'\\otimes^LLq'^*L'$. Define just the middle exchange/projection morphisms\n$$\\beta_{f,g}=\\operatorname{PF}_{q,Lp^*K,L}\\circ(\\operatorname{Ex}_{f,g}(K)\\otimes1_L):Lg^*F\\otimes^LL\\longrightarrow Rq_!D,$$\n$$\\beta_{f',g'}=\\operatorname{PF}_{q',Lp'^*K',L'}\\circ(\\operatorname{Ex}_{f',g'}(K')\\otimes1_{L'}):Lg'^*F'\\otimes^LL'\\longrightarrow Rq'_!D'.$$\nLet $\\chi:Lb_T^*D\\xrightarrow{\\sim}D'$ be the canonical monoidal pullback comparison [lem-pur-derived-pullback-tensor-iso], and let\n$$\\delta:Lb_Y^*(Lg^*F\\otimes^LL)\\cong Lg'^*Lb^*F\\otimes^LL'\\xrightarrow{Lg'^*(\\operatorname{Ex}_{f,b}(K))\\otimes1}Lg'^*F'\\otimes^LL'.$$\nThe initial isomorphism is monoidality followed by the pullback-composition identification for $gb_Y=bg'$. Then the following equality holds as morphisms from $Lb_Y^*(Lg^*F\\otimes^LL)$ to $Rq'_!D'$:\n$$Rq'_!(\\chi)\\circ\\operatorname{Ex}_{q,b_Y}(D)\\circ Lb_Y^*(\\beta_{f,g})=\\beta_{f',g'}\\circ\\delta.$$\nAll exchange maps are the specified compact-support maps on the domains of [fix-lem-exchanges]; at finite pro-etale level the bounded etale-origin witnesses are retained, at the integral stage the strict reduction diagrams and completed operations are used, and at field stages the lattice and common finite-stage conventions are retained. The assertion concerns this middle square, before applying $Rg_!$, the outer projection formula or the compact-support compositor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (iii): PF for q along the base change of b to Y, together with horizontal exchange pasting; returned step 9, the middle square before the outer PF for g."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-exchange-projection",
+  "def-sf-pf",
+  "lem-pur-derived-pullback-tensor-iso",
+  "fix-lem-exchanges",
+  "def-sf-constructible-projection-mates",
+  "def-sf-compact-exchange-operation-coordinates",
+  "lem-weil-structure-direct-images-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=Lp^*K$, $P'=Lp'^*K'$, $v=Lb_Y^*$ and $w=Lb_T^*$. Write $c:wP\\xrightarrow{\\sim}P'$ for pullback composition, $r:vLg^*F\\xrightarrow{\\sim}Lg'^*Lb^*F$ for the comparison in the statement, and $\\mu_{M,N}:v(M\\otimes^LN)\\xrightarrow{\\sim}vM\\otimes^LvN$. Let $e=\\operatorname{Ex}_{f,g}(K)$, $u=\\operatorname{Ex}_{f,b}(K)$ and $e'=\\operatorname{Ex}_{f',g'}(K')$. Finally set $A=Rq'_!(c)\\circ\\operatorname{Ex}_{q,b_Y}(P):vRq_!P\\to Rq'_!P'$. The pullback comparisons in the pasting laws of [fix-lem-exchanges] and the natural monoidal comparisons of [lem-pur-derived-pullback-tensor-iso] identify $wD$ with $wP\\otimes^LLq'^*L'$; composing $c\\otimes1$ is exactly $\\chi$. In particular $\\delta=((Lg'^*u)\\otimes1_{L'})\\circ(r\\otimes1_{L'})\\circ\\mu_{Lg^*F,L}$. All objects remain in the supplied domains of the datum [def-sf-datum].",
+   "uses": [
+    "fix-lem-exchanges",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (iii), base change: PF for q and pasting of exchange over B′ → B; explicit middle-square calculation."
+   }
+  },
+  {
+   "text": "Apply horizontal exchange pasting [fix-lem-exchanges], clause 2, to the successive base changes $Y\\xrightarrow{g}B$, $Y'\\xrightarrow{b_Y}Y$ of $f$, and also to $B'\\xrightarrow{b}B$, $Y'\\xrightarrow{g'}B'$ of $f$. Both outer squares are the square for $gb_Y=bg'$; their upper-left corners are canonically $T'$. Clause 1 identifies their exchange maps through this isomorphism of square data, and clause 2 inserts the canonical pullback-composition comparisons $c,r$. Hence, as maps $vLg^*F\\to Rq'_!P'$,\n$$A\\circ v(e)=e'\\circ Lg'^*(u)\\circ r.$$\nThe two uses of pasting have the same outer source and target; this uses horizontal base-change pasting, with no interchange of compact-support direct-image factors.",
+   "uses": [
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (iii), base change: PF for q and pasting of exchange over B′ → B; explicit middle-square calculation."
+   }
+  },
+  {
+   "text": "Use the base-change square of [prop-sf-pf-coherence] with morphism $q:T\\to Y$, base map $b_Y:Y'\\to Y$, and inputs $P,L$. Its target comparison is $w(P\\otimes^LLq^*L)\\cong wP\\otimes^LLq'^*L'$. Then apply naturality of the same proposition in the first input to $c:wP\\to P'$. By the description of $\\chi$ in step 1, the resulting equality is\n$$Rq'_!(\\chi)\\circ\\operatorname{Ex}_{q,b_Y}(D)\\circ v(\\operatorname{PF}_{q,P,L})\n=\\operatorname{PF}_{q',P',L'}\\circ(A\\otimes1_{L'})\\circ\\mu_{Rq_!P,L}.$$\nHere the base-changed square is Cartesian since $T'=T\\times_Y Y'$, and both $P$ and $L$ have the required finite-Tor domains by the supplied operation datum. No inverse projection formula or properness hypothesis is used.",
+   "uses": [
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (iii), base change: PF for q and pasting of exchange over B′ → B; explicit middle-square calculation."
+   }
+  },
+  {
+   "text": "Precompose the equality of step 3 with $v(e\\otimes1_L)$. Naturality of $\\mu$ [lem-pur-derived-pullback-tensor-iso] gives\n$$\\mu_{Rq_!P,L}\\circ v(e\\otimes1_L)=(v(e)\\otimes1_{L'})\\circ\\mu_{Lg^*F,L}.$$\nFunctoriality of tensor and the equation of step 2 therefore turn its right side into\n$$\\operatorname{PF}_{q',P',L'}\\circ(e'\\otimes1_{L'})\\circ((Lg'^*u)\\otimes1_{L'})\\circ(r\\otimes1_{L'})\\circ\\mu_{Lg^*F,L}\n=\\beta_{f',g'}\\circ\\delta.$$\nIts left side is the requested left side by functoriality of $v$ and the definition of $\\beta_{f,g}$. This proves the equality at each coefficient stage directly: the cited exchange pasting and projection squares hold on the witnessed finite, completed integral, rational and common finite-field domains, and the cited monoidal comparison is the specified comparison at those stages. Thus there is no inference from equality after reduction to equality of integral morphisms.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clause (iii), base change: PF for q and pasting of exchange over B′ → B; explicit middle-square calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-datum",
+  "fix-lem-exchanges",
+  "lem-pur-derived-pullback-tensor-iso",
+  "prop-sf-pf-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (iii), base change: PF for q and pasting of exchange over B′ → B; explicit middle-square calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the composite of Cartesian compact support exchange tensored with identity and projection formula equals the corresponding composite on the base changed product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.of_comp\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {M : Type v₁} {N : Type v₂} {S : Type v₃} [inst : AddCommMonoid M] [inst_1 : AddCommMonoid N]\\n  [inst_2 : CommSemiring R] [inst_3 : CommSemiring S] [inst_4 : Algebra R S] [inst_5 : Module R M] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] {T : Type u_4\", \"doc\": \"Given linear maps $ f : M → N $ and $ h : N → O $, if $ f $ is an $ S $-base change and the composition $ h ∘ f $ is a $ T $-base change, then $ h $ itself is a $ T $-base change. This follows from th\"}\n  {\"name\": \"IsBaseChange.comp\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {M : Type v₁} {N : Type v₂} {S : Type v₃} [inst : AddCommMonoid M] [inst_1 : AddCommMonoid N]\\n  [inst_2 : CommSemiring R] [inst_3 : CommSemiring S] [inst_4 : Algebra R S] [inst_5 : Module R M] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] {T : Type u_4\", \"doc\": \"Given an $ S $-linear map $ f: M \\\\to N $ that satisfies the base change property (i.e., $ \\\\text{IsBaseChange}(S, f) $) and an $ S $-linear map $ g: N \\\\to O $ that satisfies the base change property wi\"}\n  {\"name\": \"IsBaseChange.comp_iff\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {M : Type v₁} {N : Type v₂} {S : Type v₃} [inst : AddCommMonoid M] [inst_1 : AddCommMonoid N]\\n  [inst_2 : CommSemiring R] [inst_3 : CommSemiring S] [inst_4 : Algebra R S] [inst_5 : Module R M] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] {T : Type u_4\", \"doc\": \"Given an $ S $-linear map $ f: M \\\\to N $ that is a base change and an $ S $-linear map $ h: N \\\\to O $, the composition $ h \\\\circ f $ is a $ T $-base change if and only if $ h $ itself is a $ T $-base \"}\n  {\"name\": \"IsBaseChange.finitePow\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangePi\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (ι : Type u_3)\\n  [Finite ι] {M : Type u_4} {M' : Type u_5} [inst_4 : AddCommMonoid M] [inst_5 : AddCommMonoid M'] [inst_6 : Module R M]\\n  [inst_7 : Module R M'] [inst_8 : Module S M'] [inst_9 : I\", \"doc\": \"For any finite index type $\\\\iota$ and a linear map $f : M \\\\to_R M'$ that is a base change from $R$ to $S$, the component-wise extension of $f$ to functions $\\\\iota \\\\to M$ (defined by applying $f$ point\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Tower\", \"type\": \"∀ (R : Type uR) (A : Type uA) (B : Type uB) {M : Type uM} {N : Type uN} {Q : Type uQ} [inst : CommSemiring R]\\n  [inst_1 : CommSemiring A] [inst_2 : Semiring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B]\\n  [inst_5 : AddCommMonoid M] [inst_6 : Module R M] [inst_7 : Module A M] [inst_8 : Module B M]\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, an $ A $-module $ M $ with scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, A, M) $, and $ R $-modules $ N $ and $ Q $, the composition \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"IsBaseChange.linearMapLeftRightHom_comp\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {S : Type u_2} [inst_1 : CommSemiring S] [inst_2 : Algebra R S] {M : Type u_3}\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] {N : Type u_4} [inst_5 : AddCommMonoid N] [inst_6 : Module R N]\\n  {P : Type u_5} [inst_7 : AddCommMonoid P] [inst_8 : Module R P]\", \"doc\": \"Given an $ R $-linear map $ \\\\alpha: M \\\\to P $, an $ R $-linear map $ \\\\beta: N \\\\to Q $, and an $ R $-linear map $ f: M \\\\to N $, the composition of the base change-induced linear map $ \\\\text{Hom}_R(M,N)\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\nHits concern ring-module scalar base change, pullbacks in Over categories, or ordinary sheaf pullback composition. None states the middle square combining compact-support exchange with derived projection formula on a base-changed fibre product.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley horizontal pasting and projection formula compatibility give a commutative middle exchange projection square for derived sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"module\": \"Mathlib/CategoryTheory/Sites/CompatiblePlus\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w₁}\\n  [inst_1 : CategoryTheory.Category.{max v u, w₁} D] {E : Type w₂} [inst_2 : CategoryTheory.Category.{max v u, w₂} E]\\n  (F : CategoryTheory.Functor D E)\\n  [inst_3 :\\n    ∀ (J : CategoryT\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, and a limit-preserving functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$, th\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/CompatiblePlus\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type w₁}\\n  [inst_1 : CategoryTheory.Category.{max v u, w₁} D] {E : Type w₂} [inst_2 : CategoryTheory.Category.{max v u, w₂} E]\\n  (F : CategoryTheory.Functor D E)\\n  [inst_3 :\\n    ∀ (J : CategoryT\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a contravariant functor $P: \\\\mathcal{C}^\\\\text{op} \\\\to \\\\mathcal{D}$, and a functor $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ preserving limits of m\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        J.MayerVietorisSquare →\\n          {A : Type u'} → [inst_2 : CategoryTheory.Category.{v', u'} A] → CategoryTheory.Functor\", \"doc\": \"For a presheaf $ P $ on a category $ \\\\mathcal{C} $ with a Grothendieck topology $ J $, the sheaf condition for a Mayer-Vietoris square $ S $ requires that the image of the opposite square $ S^\\\\text{op\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatTrans_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B)\\n  {G₁ : CategoryTheory.Functor (Cate\", \"doc\": \"For any presheaf $ P $ on the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $ valued in $ \\\\mathcal{A} $, the composition of the adjunction unit $ \\\\eta_1 $ applied to $ P $ with the functor $ F: \\\\mathcal\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {K : CategoryTheory.GrothendieckTopology D}\\n  {G : CategoryTheory.Functor C D} {ℱ : CategoryTheory.Functor Dᵒᵖ (Type v)} {ℱ' : CategoryTheory.Sheaf K (Type v)}\\n  (α : G.op.\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a Grothendieck topology $J$ on $\\\\mathcal{D}$, a cover-dense functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a sheaf $\\\\mathcal{F}'$ on $\\\\mathcal{D}$ wit\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback_assoc_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/Over\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u')\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {X Y Z T : C} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor (CategoryTheory.Sheaf (J.over T) A) (CategoryTheory.She\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, an object $ A $, and composable morphisms $ f: X \\\\to Y $, $ g: Y \\\\to Z $, $ h: Z \\\\to T $, the associator natural isomorphism ensures \"}\nHits concern ring-module scalar base change, pullbacks in Over categories, or ordinary sheaf pullback composition. None states the middle square combining compact-support exchange with derived projection formula on a base-changed fibre product.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\nHits concern ring-module scalar base change, pullbacks in Over categories, or ordinary sheaf pullback composition. None states the middle square combining compact-support exchange with derived projection formula on a base-changed fibre product.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|beckChevalley|BeckChevalley",
+   "results": "[grep] OK 0 hit(s)\nHits concern ring-module scalar base change, pullbacks in Over categories, or ordinary sheaf pullback composition. None states the middle square combining compact-support exchange with derived projection formula on a base-changed fibre product. Search subdirectory: Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The middle exchange projection composite for a fiber product commutes with arbitrary base change through canonical monoidal pullback comparisons",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.pullbackMap_fst\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {Y Z X : C} {f : Y ⟶ X} {g : Z ⟶ X}\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong g] {Y' Z' X' : C} {f' : Y' ⟶ X'} {g' : Z' ⟶ X'}\\n  [inst_2 : CategoryTheory.ChosenPullbacksAlong g'] {γ₁ : Y' ⟶ Y} {γ₂ : Z' ⟶ Z} {γ₃ : X' ⟶ X}\\n  (comm₁ :\\n   \", \"doc\": \"Given morphisms $ f: Y ⟶ X $, $ g: Z ⟶ X $ in a category $ \\\\mathcal{C} $ with chosen pullbacks, and compatible morphisms $ f': Y' ⟶ X' $, $ g': Z' ⟶ X' $ satisfying the commutative diagrams $ f' \\\\circ\"}\n  {\"name\": \"CategoryTheory.Over.μ_pullback_left_fst_fst'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"(g₁ : Y ⟶ X) (g₂ : Z ⟶ X) :\\n  (LaxMonoidal.μ (Over.pullback f) (.mk g₁) (.mk g₂)).left ≫\\n      pullback.fst (pullback.fst g₁ g₂ ≫ g₁) f ≫ pullback.fst g₁ g₂ =\\n    pullback.fst _ _ ≫ pullback.fst _ _\", \"doc\": \"For morphisms $g_1: Y \\to X$ and $g_2: Z \\to X$ in a category $\\\\mathcal{C}$ with pullbacks, the composition of the monoidal coherence morphism $\\\\mu$ of the pullback functor with the first projection mor\"}\n  {\"name\": \"CategoryTheory.CartesianMonoidalCategory.prodComparison_fst\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Basic\", \"type\": \": prodComparison F A B ≫ fst _ _ = F.map (fst A B)\", \"doc\": \"For a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and objects $ A, B $ in a Cartesian monoidal category $ \\\\mathcal{C} $, the composition of the product comparison morphism $ F(A \\\\times B) \\\\to F(A) \\\\ti\"}\n  {\"name\": \"CategoryTheory.CartesianMonoidalCategory.prodComparison\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Basic\", \"type\": \"(A B : C) : F.obj (A ⊗ B) ⟶ F.obj A ⊗ F.obj B\", \"doc\": \"For objects $A$ and $B$ in a Cartesian monoidal category $\\\\mathcal{C}$, and a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this is the unique morphism $F(A \\\\times B) \\\\to F(A) \\\\times F(B)$ induced by the\"}\n  {\"name\": \"CategoryTheory.Over.prodComparisonIso_pullback_Spec_inv_left_fst_fst'\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"(f : X ⟶ Y) (gA : A ⟶ Y) (gB : B ⟶ Y) :\\n  (prodComparisonIso (Over.pullback f) (.mk gA) (.mk gB)).inv.left ≫\\n      pullback.fst (pullback.fst gA gB ≫ gA) f ≫ pullback.fst _ _ =\\n    pullback.fst (pullback.snd gA f) (pullback.snd gB f) ≫ pullback.fst _ _\", \"doc\": \"In a category $\\\\mathcal{C}$ with pullbacks, for an object $X$ and morphisms $f : X \\\\to Y$, $g_A : A \\\\to Y$, $g_B : B \\\\to Y$, the composition of the inverse of the product comparison isomorphism $F(A \\\\\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackProdSndIsoProd_hom_fst\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \": (pullbackProdSndIsoProd f Z).hom ≫ prod.fst = pullback.fst _ _ ≫ prod.fst\", \"doc\": \"Given objects $X, Y, Z$ in a category $\\\\mathcal{C}$ with binary products and a morphism $f: X \\\\to Y$, the isomorphism between the pullback of the second projection $\\\\text{prod.snd}: Z \\\\times Y \\\\to Y$ \"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_snd_assoc\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.Over\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.ChosenPullbacks C] {X : C}\\n  {R S T U : CategoryTheory.Over X} (f : R ⟶ S) (g : T ⟶ U) {Z : C} (h : U.left ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.tensorHom f g).left\\n      \", \"doc\": \"In a category $\\\\mathcal{C}$ with chosen pullbacks, for any object $X \\\\in \\\\mathcal{C}$ and morphisms $f: R \\\\to S$, $g: T \\\\to U$ in the over category $\\\\mathcal{C}/X$, the composition of the left compone\"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderBaseChange\", \"doc\": \"In a category equipped with fibrations, every base change (pullback) of a fibration is again a fibration.\"}\nHits concern ring-module scalar base change, pullbacks in Over categories, or ordinary sheaf pullback composition. None states the middle square combining compact-support exchange with derived projection formula on a base-changed fibre product.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|beckChevalley|BeckChevalley",
+   "results": "No hits. Search subdirectory: Mathlib/CategoryTheory Returned results concern ordinary scheme pullbacks or site/sheafification naturality, not this compact-support derived exchange/projection identity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"baseChange\"",
+   "results": "No hits. Returned results concern ordinary scheme pullbacks or site/sheafification naturality, not this compact-support derived exchange/projection identity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Horizontal pasting for compactly supported derived base change commutes with the projection morphism",
+   "results": "Hits: CategoryTheory.Limits.pasteHorizIsPushout, CategoryTheory.Limits.leftSquareIsPullback, CategoryTheory.Limits.pasteHorizIsPullback, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst_assoc, CategoryTheory.Limits.PushoutCocone.pasteHoriz, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd, CategoryTheory.IsPullback.paste_horiz Returned results concern ordinary scheme pullbacks or site/sheafification naturality, not this compact-support derived exchange/projection identity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of compact support base change exchange and projection formula on a base changed fiber product",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t_fst_fst, AlgebraicGeometry.Scheme.Pullback.t_fst_snd Returned results concern ordinary scheme pullbacks or site/sheafification naturality, not this compact-support derived exchange/projection identity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley exchange horizontal composition and naturality of the projection morphism for derived sheaves",
+   "results": "Hits: CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc, CategoryTheory.RanIsSheafOfIsCocontinuous.fac, CategoryTheory.sheafComposeNatTrans, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map' Returned results concern ordinary scheme pullbacks or site/sheafification naturality, not this compact-support derived exchange/projection identity.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-kunneth-coherence",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Clause (iii): PF for q along the base change of b to Y, together with horizontal exchange pasting; returned step 9, the middle square before the outer PF for g.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-middle-exchange-projection-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the middle-square identity into two horizontal-pasting computations, the PF base-change square and naturality in its first input, followed by explicit tensor naturality. Reused all existing ingredients; no new nodes or statement changes. Coefficient stages are handled by the already stated identities on their actual domains.",
+  "blueprint": "Realizes clause (iii) of lem-sf-kunneth-coherence: PF for q along b_Y and horizontal pasting for the two factorizations gb_Y=bg′, before Rg_! or the outer PF.",
+  "tool_uses": [
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Generic naturality and horizontal exchange pasting on the exact coefficient domains; this is the exchange ingredient required by the unit route."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic natural monoidal pullback comparison, with completed and field-stage conventions; the unit does not restate this comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-lem-exchanges",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-650502410",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-650502410 (reviewer sub-agent of L); spot-checked: I read the item in full. Its statement and stmt_deps are unchanged; the live node is still unsplit with 0 steps, so no other group has superseded it. Source: the main-20261024 lem-sf-kunneth-coherence proof says '(iii) is the base-change clause of prop-sf-pf-coherence applied to PF_q and PF_g, together with the pasting of Ex_!'. The item is the PF_q middle square of that clause; the parent's step 4 handles PF_g and the vertical α pasting, so the item does not restate the parent. Step 2: horizontal pasting (fix-lem-exchanges clauses 1-2) applied to g∘b_Y and to b∘g', which give the same outer Cartesian square T'→X over Y'→B. This yields A∘v(e)=e'∘Lg'^*(u)∘r; I checked the directions of c and r. Step 3: the PF base-change square of prop-sf-pf-coherence for q along b_Y with inputs P, L, then naturality of PF in the first input along c. T'≅T×_YY', so the square is Cartesian, and P, L, D are ctf. Step 4: precompose with v(e⊗1) and use naturality of μ (lem-pur-derived-pullback-tensor-iso); this gives β'∘δ, matching the statement's δ exactly. The step is genuinely elementary. Edge cases: b=id reduces to identities; g=id reduces to PF base change; K or L =0 gives 0 on both sides. No new nodes. lem-sf-relative-product-base-change-factor-squares is related but is not a duplicate of this existing item. Batch-5: the flagged citation is prop-sf-pf-coherence, whose closure reaches lem-pod-derived-exact-square-composition. That node is an abstract derived-category pasting lemma (mapDerivedCategorySquareIso/CompIso) filed in the sec-poincare-duality chapter; it is not a step of Poincaré duality or of the trace formula, and the blueprint route and the parent already cite prop-sf-pf-coherence, so I accept it. Accepted tool_uses: fix-lem-exchanges (sk-prop-sf-cbc, on the unit's route) and lem-pur-derived-pullback-tensor-iso (a generic monoidal comparison already in stmt_deps). No SGA citations. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.MiddleExchangeProjectionBaseChange",
+  "declaration": "WeilConjectures.MiddleExchangeProjection.middle_exchange_projection_base_change",
+  "declarations": [
+   "WeilConjectures.MiddleExchangeProjection.Cube",
+   "WeilConjectures.MiddleExchangeProjection.compactifiedSquare",
+   "WeilConjectures.MiddleExchangeProjection.exchange",
+   "WeilConjectures.MiddleExchangeProjection.squarePull",
+   "WeilConjectures.MiddleExchangeProjection.beta",
+   "WeilConjectures.MiddleExchangeProjection.chi",
+   "WeilConjectures.MiddleExchangeProjection.delta",
+   "WeilConjectures.MiddleExchangeProjection.equation",
+   "WeilConjectures.MiddleExchangeProjection.residueUnits",
+   "WeilConjectures.MiddleExchangeProjection.integralMu",
+   "WeilConjectures.MiddleExchangeProjection.rationalMu",
+   "WeilConjectures.MiddleExchangeProjection.commonMu",
+   "WeilConjectures.MiddleExchangeProjection.higherLaw",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.category",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.origin",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.exchange",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.beta",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.external",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.chi",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.delta",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.equation",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.pull",
+   "WeilConjectures.MiddleExchangeProjection.Fixed.law",
+   "WeilConjectures.MiddleExchangeProjection.finiteLaw",
+   "WeilConjectures.MiddleExchangeProjection.middle_exchange_projection_base_change"
+  ],
+  "file": "lean/Sheaf/Paper/MiddleExchangeProjectionBaseChange.lean",
+  "statement": "theorem middle_exchange_projection_base_change (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (S : SixFunctorDatum D C E n hn) : finiteLaw D C E n hn ∧ higherLaw S.higher.integral S.higher.integralTensor S.higher.integralExchange (integralMu S) (S.toSixFunctorOperationDatum.integralFiniteTorDomain) ∧ higherLaw S.higher.rational S.higher.rationalTensor S.higher.rationalExchange (rationalMu S) (fun _ ↦ ⊤) ∧ higherLaw S.closure.commonStage S.closure.commonStageTensor S.closure.commonStageExchange (commonMu S) (fun _ ↦ ⊤)",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical middle square at finite witnessed, integral completed, rational and common finite-field stages. The owning-node helpers expand the displayed cube and composites; no arbitrary comparison is assumed. H2 repair: the higher-stage exchange coordinate map is now owned by def-sf-compact-exchange-operation-coordinates, whose module replaces the theorem-module import."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45602c347",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN f0f249da. Item module diff is only the import (DualBaseChange → CompactExchangeOperationCoordinates) and one call (dualBaseChangeHigherExchange → sixFunctorCompactExchange); signature and helpers unchanged; lean.statement verbatim. New def node def-sf-compact-exchange-operation-coordinates: body identical to DualBaseChange.lean:475-483 (eqToIso transport of A.stage.compactExchange via the compactSupport/horizontal/horizontal'/compactSupport' fields of SixFunctorExchangeData), real data, no sorry, imports only SixFunctorOperationDatumStages (def-sf-operation-stages, landed), stmt_deps def-sf-operation-stages + def-exchange-projection, docstrings carry source and blueprint tag, statement verbatim, no name clash. Mechanical finding: lem-weil-structure-direct-images-constructible supplies only theorem finiteFieldDatumPrimeUnit (IsUnit l), whose conclusion residueUnits needs for the Invertible instances of the canonical tensor comparisons; genuine theorem dependency, PASS on that point. Mathematics as read in full in f0f249da review (four coefficient clauses, cube, beta/chi/delta, equation direction, edge cases). No recompile (no file changed). Advisory: the three unowned transport copies could become abbrevs."
+ }
+}

@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "If $\\sum_{i\\le n}a_i b_i=0$, the formula just proved implies $|a_n|_E d\\le0$. Since $d>0$ and the absolute value vanishes only at $0$, $a_n=0$. The relation reduces to $\\sum_{i<n}a_i b_i=0$, and the assumed independence of the old family implies $a_i=0$ for every $i<n$. This is exactly linear independence of the enlarged family, also when the old family is empty.",
+   "text": "Since $w\\in W$ and $x\\notin W$, also $x-w\\notin W$: otherwise adding $w$ would put $x$ in $W$. Apply Mathlib LinearIndependent.finSnoc to the assumed independence of the old family and this non-membership to obtain independence of the enlarged family, also for $n=0$. This replaces the coordinatewise independence argument by its standard algebraic criterion.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -70,7 +70,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Agent auxiliary to paragraph (3), direct-image coefficient argument; the source paragraph does not state or prove this norm lemma. Elementary nearest-point residual calculation supplied here; external reference WANTED."
+  "place": "Agent auxiliary to paragraph (3), direct-image coefficient argument; the source paragraph does not state or prove this norm lemma. Elementary nearest-point residual calculation supplied here; external reference WANTED. Lean proof by T5 (2026-10-23): the same nearest-point calculation, with independence obtained directly from residual non-membership using Mathlib LinearIndependent.finSnoc."
  },
  "mathlib_searches": [
   {
@@ -406,5 +406,27 @@
   "group": "NK",
   "result": "pass",
   "note": "Every hypothesis and conclusion clause of the node maps onto the Lean: spectral absolute value via coefficientExtensionAbsoluteValue (binders match), explicit NNReal norm with scaling, ultrametric and definiteness axioms, Fin n family with linear independence and the Finset.sup orthogonality formula (empty sup = 0 gives n = 0), span W, x ∉ W, w ∈ W, minimality as sInf of a nonempty set bounded below by 0. Conclusions: x−w ≠ 0, enlarged formula for Fin.snoc, linear independence, span = W ⊔ span{x}. Same quantifier order, no extra assumptions, independent universes u and v. lean.statement verbatim (substring check), no statement_change, no duplicate in side-live lean/Sheaf or the DAG (best-approximation sibling only asserts existence). No definitions, proof only sorry, docstrings carry source place, blueprint tag and the 6 steps; report has both sections. No compile run because nothing changed. Advisory: the parent countable-basis node uses NormedSpace and will need the routine identification of ‖a‖ with coefficientExtensionAbsoluteValue at proof stage."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261023T124434-L-1400472",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

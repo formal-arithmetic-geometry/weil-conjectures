@@ -1,0 +1,317 @@
+{
+ "id": "lem-sp-proetale-scalar-balancing-chain",
+ "kind": "statement",
+ "title": "Constant-coefficient balancing and its natural inverse-image chain map",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes and $\\varphi:A\\to B$ a homomorphism of finite commutative rings. For $Z=X,Y$ use the constant coefficient sheaves $A_Z,B_Z$ and module categories [def-weil-pbc-proetale-modules], the exact identified-coefficient inverse images $f_R^*$ for $R=A,B$ [def-weil-pbc-proetale-operations], and the constant-section ring identifications $c_R:f^{-1}R_Y\\simeq R_X$ [prop-weil-pbc-proetale-constant-ring-map]. Let $a_Z:A_Z\\to B_Z$ be induced by $\\varphi$ and let $r_Z$ be scalar restriction [def-pc-sheaf-restrict-scalars]. Then $a_Xc_A=c_Bf^{-1}a_Y$. The ordinary restriction comparison $\\beta_N:r_Xf_B^*N\\simeq f_A^*r_YN$, for a $B_Y$-module sheaf $N$, is the identity on the underlying inverse-image sheaf with its transported $A_X$-action.\n\nThere is a unique natural family of $A_X$-linear sheaf isomorphisms\n$$t_M:f_A^*r_Y(M\\otimes_{A_Y}B_Y)\\xrightarrow{\\sim}r_X(f_A^*M\\otimes_{A_X}B_X)$$\nfor $A_Y$-module sheaves $M$, whose value on the inverse-image unit section of $x\\otimes s$ is $f^{-1}x\\otimes c_B(f^{-1}s)$ over $X\\times_YV$ for every $V\\in Y_{\\mathrm{proet}}$, $x\\in M(V)$ and $s\\in B_Y(V)$. Tensor products here are sheafified [def-pur-sheaf-tensor-product], and the formula concerns the images of presheaf pure tensors. The composite $t_M\\circ\\beta_{M\\otimes B_Y}$ is $B_X$-linear. Thus the displayed comparison respects the $B_X$-action transported through $\\beta$, as well as $A_X$-balancing.\n\nFor every possibly unbounded cochain complex $P$ of $A_Y$-module sheaves, the components $t_{P^i}$ and their inverses are chain maps, giving a natural chain isomorphism $t_P$ with these components [def-pc-tensor-complex-sheaves]. In particular\n$$(f_A^*d_P^i\\otimes1)t_{P^i}=t_{P^{i+1}}f_A^*(d_P^i\\otimes1).$$\nWith $B_Y[0]$ concentrated in degree zero, this is also the total-tensor comparison: its degree $i$ contains only $P^i\\otimes B_Y$. No flatness, K-flatness or torsion hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, label lemma-tensor-product-pullback: bilinear adjunction construction, specialized to constant coefficients; coefficient-action and chain normalization of returned proof Steps 1–3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-four-corners",
+  "def-sp-proetale-scalar-mate-identifications",
+  "def-weil-pbc-ring-restriction-pullback-comparison",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-sp-proetale-constant-coefficient-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=f^{-1}$ and $u(V)=X\\times_YV$. The adjuncts of $a_Xc_A$ and $c_BL(a_Y)$ are $f_*(a_X)\\rho_A$ and $\\rho_Ba_Y$, by naturality of the inverse-image adjunction [def-weil-proetale-inverse-image]. On each constant section $a\\in A$ both give the constant section $\\varphi(a)$ over $u(V)$, by [prop-weil-pbc-proetale-constant-ring-map]. These maps agree on all of $A_Y$: use the constant-preserving identification with the sheafification of the constant presheaf, and uniqueness in its sheafification universal property [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification]. Injectivity of adjunction gives $a_Xc_A=c_BL(a_Y)$. This argument uses equality of constant sections, never their distinctness, so also applies on the empty site.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "In the identified-coefficient presentation of [def-weil-pbc-proetale-operations], the underlying abelian sheaf of $f_R^*N$ is $LN$, and an $r\\in R_X$ acts through $c_R^{-1}(r)$ on $LN$. For a $B_Y$-module $N$, the action of $a\\in A_X$ on $r_Xf_B^*N$ is therefore through $c_B^{-1}a_X(a)$, whereas that on $f_A^*r_YN$ is through $L(a_Y)c_A^{-1}(a)$. Step 1 makes these ring maps equal. The identity on $LN$ is consequently an $A_X$-linear isomorphism $\\beta_N$, natural in $N$. Restriction changes neither additive sheaves nor their maps [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "The finite-product action construction in [def-weil-pbc-proetale-operations] presents the geometric inverse image $L$ as an algebraic inverse image $I_A$ with coefficient ring $A_X$ in the precise sense of [def-weil-pbc-algebraic-inverse-image]: the underlying identifications are the action-transport isomorphisms and $c_A$. The geometric adjunction and finite-limit preservation are supplied by [def-weil-proetale-inverse-image], on the compatible small sites already fixed there. Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to $M$ and $r_YB_Y$. The map $c_B$ identifies $I_A(r_YB_Y)$ with $r_XB_X$ as $A_X$-modules by Step 1. Composing the resulting natural tensor isomorphism with $1\\otimes c_B$ gives the required $A_X$-linear $t_M$. Its generalized pure-pairing equation gives the asserted formula on unit sections, because the inverse-image unit preserves products. More generally, apply that equation to the two projections from the test sheaf $|M|\\times|B_Y|$ and its pure-pairing map. Since $L$ preserves products, it identifies the entire transported pairing, for arbitrary local sections of $LM$ and $LB_Y$, with the target pure pairing. Inverting $t_M$ gives the reverse pairing identity as well. Thus balancing is respected for sheafified tensors, without asserting that the tensor sheaf has only pure sections.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "For uniqueness fix $M$ and put $S_M=f_A^*M\\otimes_{A_X}B_X$. By the module adjunction of [def-weil-pbc-proetale-operations], an $A_X$-linear map $f_A^*r_Y(M\\otimes_{A_Y}B_Y)\\to r_XS_M$ is determined by its adjunct $r_Y(M\\otimes_{A_Y}B_Y)\\to f_{*,A}r_XS_M$. Direct image is evaluated over $u(V)$ and the adjunct is evaluated on inverse-image unit sections [def-weil-proetale-inverse-image]. The required formula therefore fixes its values on every sheafified pure tensor $x\\otimes s$ over every $V$. The injectivity part of [lem-pc-sites-sheaf-tensor-bilinear-universal] makes the adjunct unique. Hence $t_M$ is unique, and its naturality also follows by applying this uniqueness to the two maps associated to a morphism $M\\to M'$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "Put $H=f_B^*(M\\otimes_{A_Y}B_Y)$, $S=f_A^*M\\otimes_{A_X}B_X$, and $g=t_M\\beta_{M\\otimes B_Y}:r_XH\\to r_XS$. For local sections $m$ of $f_A^*M$ and $s,b$ of $B_X$, the pairing identity in Step 3 identifies $g^{-1}(m\\otimes s)$ with the transported source pure tensor. In the source, multiplication on the coefficient factor satisfies $(x\\otimes s')b'=x\\otimes(s'b')$. Apply $L$ to this equality of sheaf maps on $|M|\\times|B_Y|\\times|B_Y|$. The finite-product comparison and the ring/module graph conditions of [def-weil-pbc-algebraic-inverse-image] preserve multiplication and the $B$-action; $c_B$ preserves the ring multiplication, and $\\beta$ is the identity on the underlying sheaf. The entire pairing identity from [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] therefore gives\n$$g\\bigl(g^{-1}(m\\otimes s)b\\bigr)=m\\otimes(sb).$$\nHere $m,s,b$ are arbitrary sections on $X$, not just unit images of sections on $Y$.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "The two pairings $(v,b)\\mapsto g(g^{-1}(v)b)$ and $(v,b)\\mapsto vb$ from $r_XS\\times r_XB_X$ to $r_XS$ are $A_X$-bilinear: $g,g^{-1}$ are $A_X$-linear, and the $B_X$-module axioms together with restriction along $a_X$ give separate $A_X$-linearity. By [lem-pc-sites-sheaf-tensor-bilinear-universal] they define $A_X$-linear maps $(f_A^*M\\otimes_{A_X}r_XB_X)\\otimes_{A_X}r_XB_X\\to r_XS$. Step 5 says that both send $(m\\otimes s)\\otimes b$ to $m\\otimes sb$. The injectivity assertion of [lem-pd-sheaf-trilinear-universal] makes these maps equal. The original pairings are then equal by the same bilinear universal property. Taking $v=g(h)$ proves $g(hb)=g(h)b$ for every local section $h$ of $H$ and $b$ of $B_X$. This proves the asserted $B_X$-linearity; its inverse is $B_X$-linear by substituting $h=g^{-1}(v)$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pd-sheaf-trilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "Apply the naturality of $t$ from Steps 3–4 to the module map $d_P^i:P^i\\to P^{i+1}$. It gives exactly\n$$(f_A^*d_P^i\\otimes1)t_{P^i}=t_{P^{i+1}}f_A^*(d_P^i\\otimes1).$$\nThe functors in [def-weil-pbc-proetale-operations] act termwise, and the tensor differential with a degree-zero coefficient is $d_P^i\\otimes1$ by [def-pc-tensor-complex-sheaves]. Thus these components define a chain map. Multiplying the displayed equation on the left by $t_{P^{i+1}}^{-1}$ and on the right by $t_{P^i}^{-1}$ gives the chain equation for the inverse components. Their composites are the identity in each degree, so $t_P$ is a chain isomorphism. Applying naturality to every component of a chain morphism $P\\to Q$ proves naturality in complexes. The argument treats each $i$ separately and requires no bound on $P$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction"
+   }
+  },
+  {
+   "text": "In the total tensor construction of [def-pc-tensor-complex-sheaves], the only nonzero summand in total degree $i$ for $P\\otimes B_Y[0]$ has bidegree $(i,0)$. The second differential is zero, including its sign $(-1)^i$, and the first is $d_P^i\\otimes1$. Hence Step 7 is precisely the total-tensor comparison and its inverse. The construction used only ordinary tensor isomorphisms, coefficient ring identifications and naturality; no preservation of quasi-isomorphisms by scalar extension was invoked, so no flatness, K-flatness or torsion hypothesis is needed.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; tensor totalization as stated in def-pc-tensor-complex-sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pd-sheaf-trilinear-universal",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; constant-coefficient specialization and explicit normalization of its bilinear construction; explicit coefficient-action and chain calculations by Q128"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|changeOfRings",
+   "results": "{\"t\": \"2026-10-22T05:55:47Z\", \"tool\": \"grep\", \"query\": \"pullback.*tensor|tensor.*pullback|changeOfRings\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"bb0d3ce43307be64\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme fibre tensors, Kaehler differentials, sheafification monoidality or free sheaf maps; none gives the B-linear inverse-image chain comparison with this section formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves commutes with change of scalars by a natural B linear chain isomorphism sending inverse image of x tensor s to inverse image x tensor inverse image s",
+   "results": "{\"t\": \"2026-10-22T05:55:48Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of sheaves commutes with change of scalars by a natural B linear chain isomorphism sending inverse image of x tensor s to inverse image x tensor inverse image s\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T05:55:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\"], \"digest\": \"240d9e61f86fe5dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme fibre tensors, Kaehler differentials, sheafification monoidality or free sheaf maps; none gives the B-linear inverse-image chain comparison with this section formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite constant coefficient rings A to B on small proetale sites the ordinary inverse image tensor comparison is B linear and induces a natural chain isomorphism with its pure tensor section formula",
+   "results": "{\"t\": \"2026-10-22T05:56:01Z\", \"tool\": \"leanfinder\", \"query\": \"For finite constant coefficient rings A to B on small proetale sites the ordinary inverse image tensor comparison is B linear and induces a natural chain isomorphism with its pure tensor section formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"Algebra.Extension.tensorCotangentSpace\", \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"KaehlerDifferential.tensorKaehlerEquivBase_symm_apply\"], \"digest\": \"0619cd71c202dbd3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme fibre tensors, Kaehler differentials, sheafification monoidality or free sheaf maps; none gives the B-linear inverse-image chain comparison with this section formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafified tensor balancing isomorphism for inverse image commutes with scalar restriction and its transported coefficient action and extends degreewise to unbounded cochain complexes",
+   "results": "{\"t\": \"2026-10-22T05:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"The sheafified tensor balancing isomorphism for inverse image commutes with scalar restriction and its transported coefficient action and extends degreewise to unbounded cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.Sheaf.monoidalCategory\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"PresheafOfModules.Sheafify.mul_smul\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\"], \"digest\": \"e44a62f601090d4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme fibre tensors, Kaehler differentials, sheafification monoidality or free sheaf maps; none gives the B-linear inverse-image chain comparison with this section formula"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|inverseImage.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T06:54:24Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Tt]ensor|[Tt]ensor.*pullback|inverseImage.*[Tt]ensor\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of module sheaves commutes with tensor product and change of constant coefficient rings",
+   "results": "{\"t\": \"2026-10-22T06:54:25Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of module sheaves commutes with tensor product and change of constant coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"SheafOfModules.instIsLeftAdjointPullback\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"41e42f97ac0f6ae8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T06:54:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"81c0a719217fb4bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaf modules commutes with tensor product over a constant ring naturally and preserves the pure tensor section formula",
+   "results": "{\"t\": \"2026-10-22T06:54:35Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image of sheaf modules commutes with tensor product over a constant ring naturally and preserves the pure tensor section formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"f9a1c30c38b476a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex|map.*[Tt]ensor|[Tt]ensor.*[Ii]so",
+   "results": "{\"t\": \"2026-10-22T06:56:01Z\", \"tool\": \"grep\", \"query\": \"mapHomologicalComplex|map.*[Tt]ensor|[Tt]ensor.*[Ii]so\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor comparison for inverse image of sheaves commutes with a change of constant coefficients and gives a B linear isomorphism on unbounded cochain complexes",
+   "results": "{\"t\": \"2026-10-22T06:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"A natural tensor comparison for inverse image of sheaves commutes with a change of constant coefficients and gives a B linear isomorphism on unbounded cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\"], \"digest\": \"090c039b14413e33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|def pullbackPushforwardAdjunction|def tensorObj|tensorObj_map_tmul",
+   "results": "{\"t\": \"2026-10-22T06:57:35Z\", \"tool\": \"grep\", \"query\": \"def pullback|def pullbackPushforwardAdjunction|def tensorObj|tensorObj_map_tmul\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\"], \"digest\": \"bf31e73ebac968d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback/free-module or presheaf tensor infrastructure only; not the constant-coefficient B-linear sheaf comparison and unbounded chain normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-proetale-scalar-tensor-normalization",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "det-sp-reduction-direct-image proof Step 1, tensor-pullback identification; coefficient-action, pure-section balancing and degreewise chain argument of normalization Steps 1–3",
+   "via": [
+    "lem-sp-proetale-scalar-tensor-normalization",
+    "lem-sp-direct-image-change-ring-transpose"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-proetale-scalar-balancing-chain",
+  "worker": "stage1",
+  "summary": "Reuse the existing algebraic inverse-image tensor comparison, bilinear universal property and trilinear extensionality. Prove the constant coefficient square and identity restriction comparison, construct and characterize t, check its B-action by transporting the three-variable pure-tensor identity, and extend degreewise to arbitrary complexes. No statement change and no new nodes.",
+  "blueprint": "det-sp-reduction-direct-image, proof Step 1: the pullback/tensor identification used before tensoring the counit with the coefficient identity; explicit coefficient-action and chain normalization below lem-sp-proetale-scalar-tensor-normalization.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-preserving coefficient identification for arbitrary scheme maps; supplies the canonical c_R, with its empty-source case."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generic ordinary inverse-image tensor isomorphism with a generalized pure-pairing formula; the coefficient comparison is obtained by identifying its second factor using c_B, not by changing the unit route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor universal property, used for uniqueness and to encode the two coefficient actions as linear maps."
+   },
+   {
+    "node": "lem-pd-sheaf-trilinear-universal",
+    "why": "Generic iterated tensor extensionality, used only to pass the explicitly computed coefficient action on pure triples to all tensor sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pd-sheaf-trilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-e8cc7e9e5",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-e8cc7e9e5 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full against Stacks 03EL (sites-modules.tex) and the statements of every cited node; review.md has the step-by-step checks. There are no new nodes and no SGA source; blueprint from.node is det-sp-reduction-direct-image (Step 1). Coefficient square (Step 1): both adjuncts send a constant a to the constant phi(a); uniqueness of sheafification and the prop-weil-pbc-proetale-constant-ring-map identification of Cont(pi0,Lambda)^# with the constant sheaf give equality. beta is the identity under the explicit c^{-1}-action presentation of def-weil-pbc-proetale-operations. t_M comes from lem-weil-pbc-algebraic-inverse-image-tensor-comparison applied to (M, r_Y B_Y), followed by 1⊗c_B; its test-sheaf pairing on |M|x|B_Y| covers arbitrary sections. Uniqueness and naturality follow from the adjunction and bilinear injectivity. B-linearity: I recomputed L applied to the three-variable identity, then extended to all sections by trilinear extensionality with R=A_X, A=f_A^*M, B=T=r_X B_X. The chain clause holds because Tot(P⊗B_Y[0]) has the single summand (i,0) with differential d⊗1. Edge cases f=id, X empty, B=0, non-flat Z/4->Z/2 and unbounded P all hold, with no hidden hypothesis; dropping the parent's l-power hypothesis only generalises. No duplicate found: I read def-sp-constant-scalar-pullback-comparison, lem-weil-pbc-ring-sheaf-change-adjunction, the strict-quotient scalar balancing, lem-sfb-regular-scalar-extension-multiplication and prop-weil-pbc-scalar-extension. I accept the four tool_uses, which are all generic. Batch-5 flag on lem-pd-sheaf-trilinear-universal: it is the general trilinear universal property of the iterated sheaf tensor, proved from sheaf-Hom and the bilinear universal property. Its 124-node closure contains no other PD or trace-formula node, and the item's 262-node closure contains no PD or trace node other than it. Neither assumption gives it and it is not a step of duality or the trace formula, so it is accepted as outside the assumed statements. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleScalarBalancingChain",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleScalarBalancingChain",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarBalancingBeta",
+   "AlgebraicGeometry.ProEtale.scalarBalancingMap",
+   "AlgebraicGeometry.ProEtale.IsScalarBalancing",
+   "AlgebraicGeometry.ProEtale.proEtaleScalarBalancingChain"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleScalarBalancingChain.lean",
+  "statement": "theorem proEtaleScalarBalancingChain {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) : ((proEtaleConstantRingComparison f A).hom ≫ proEtaleConstantRingMap (T := X) φ = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (proEtaleConstantRingMap (T := Y) φ) ≫ (proEtaleConstantRingComparison f B).hom) ∧ (∀ (N : proEtaleRingModules Y (proEtaleConstantRing Y B)) (V : Y.ProEt) (n : N.val.obj (Opposite.op V)), ((scalarBalancingBeta φ f).inv.app N).val.app (Opposite.op ((proEtaleBaseChange f).obj V)) (((proEtaleConstantRingAdjunction A f).unit.app ((scalarMateRestriction φ Y).obj N)).val.app (Opposite.op V) n) = ((proEtaleConstantRingAdjunction B f).unit.app N).val.app (Opposite.op V) n) ∧ ∃ t : scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f ≅ proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X, IsScalarBalancing φ f t ∧ (∀ t' : scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f ≅ proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X, IsScalarBalancing φ f t' → t' = t) ∧ (∀ (M : proEtaleRingModules Y (proEtaleConstantRing Y A)) (W : X.ProEtᵒᵖ) (b : (proEtaleConstantRing X B).obj.obj W) (h : ((proEtaleConstantRingPullback B f).obj ((proEtaleRingExtension (proEtaleConstantRingMap (T := Y) φ)).obj M)).val.obj W), (scalarBalancingMap φ f t M).val.app W (b • h) = b • (@id (((proEtaleRingExtension (proEtaleConstantRingMap (T := X) φ)).obj ((proEtaleConstantRingPullback A f).obj M)).val.obj W) ((scalarBalancingMap φ f t M).val.app W h))) ∧ ∃ T : (scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ) ≅ (proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X).mapHomologicalComplex (.up ℤ), (∀ (P : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (i : ℤ), (T.hom.app P).f i = t.hom.app (P.X i) ∧ (T.inv.app P).f i = t.inv.app (P.X i)) ∧ (∀ (P : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (i j : ℤ), (scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f).map (P.d i j) ≫ t.hom.app (P.X j) = t.hom.app (P.X i) ≫ (proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X).map (P.d i j)) ∧ ∀ P : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ, ((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).map (CochainComplex.mapBifunctorSingle₂Iso (proEtaleOrdinaryTensor Y (proEtaleConstantRing Y A)) (scalarMateCoefficient φ Y) P).hom ≫ T.hom.app P = (proEtaleTensorPullbackTotalIso f (proEtaleConstantRing Y A) (proEtaleConstantRing X A) (proEtaleConstantRingComparison f A) P (scalarMateCoefficientComplex φ Y)).inv ≫ HomologicalComplex.mapBifunctorMap (𝟙 (((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).obj P)) (((HomologicalComplex.singleMapHomologicalComplex (proEtaleConstantRingPullback A f) (.up ℤ) 0).app (scalarMateCoefficient φ Y)).hom ≫ (CochainComplex.singleFunctor (proEtaleRingModules X (proEtaleConstantRing X A)) (0 : ℤ)).map (scalarMateCoefficientPullback φ f).hom) (proEtaleOrdinaryTensor X (proEtaleConstantRing X A)) (.up ℤ) ≫ (CochainComplex.mapBifunctorSingle₂Iso (proEtaleOrdinaryTensor X (proEtaleConstantRing X A)) (scalarMateCoefficient φ X) (((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).obj P)).hom",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Returned-head repair R1/R2: cite definition owners of the scalar identifications, restriction/pullback comparison, ordinary tensor and constant-ring map. Keep the adjunction theorem for the genuine IsIso typing use. The total clause identifies T with the published canonical total comparison and the prescribed coefficient pullback, not an existentially chosen U."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22ae55e73",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 49085731679a; diffed old/new module: only import, Step-8 docstring and final conjunct changed; node statement unchanged vs live. R2 repaired: total clause now F(single2Iso_Y).hom >> T.hom.app P = (proEtaleTensorPullbackTotalIso f A_Y A_X c_A P B_Y[0]).inv >> mapBifunctorMap 1 (singleMapHomologicalComplex >> single(scalarMateCoefficientPullback)) >> single2Iso_X.hom. Checked tensorPullbackTotal = unsigned mu^-1 summands (RingedTopoiCanonicalTensorPullback:147), direction Tot(FP x FQ)->F Tot, and that scalarMateCoefficientPullback = beta at the unit then the unique normalized unit pullback = c_B. In degree i this says t = (1 x c_B) o mu, i.e. node Step 3; non-tautological. R1 repaired: scalar-mate / tensor-pullback-total / constant-ring-map now cited via definition owners (def-sp-proetale-scalar-mate-identifications plus 2 new existing:true nodes whose statements match the source verbatim and that no other node owns) plus def-weil-pbc-ring-restriction-pullback-comparison. Mechanical finding: lem-weil-pbc-ring-sheaf-change-adjunction kept for its genuine asIso typing use of proEtaleRingRestrictionPullbackInv_isIso -> PASS on that point. Hypotheses, universes, edge cases (f=id, X empty, B=0, Z/4->Z/2, unbounded P), H5/H6/H8 and statement verbatim OK. No compile (no file changed); worker compile clean. Advisory: pre-existing sorried proEtaleOrdinaryTensorPullback_existsUnique (ProEtaleCanonicalTensorPullback:128) has no DAG node carrying its proof obligation."
+ }
+}

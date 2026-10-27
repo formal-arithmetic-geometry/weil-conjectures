@@ -1,0 +1,181 @@
+{
+ "id": "lem-trf-space-finite-affine-image-selection",
+ "kind": "statement",
+ "title": "Finite affine images cover a quasi-compact algebraic space",
+ "statement": "Let S be a scheme [def-pc-scheme], X an algebraic space over S [def-trf-algebraic-space], and assume there exists a quasi-compact scheme atlas Q -> X [def-weil-pbc-quasi-compact-scheme]. For every representable surjective etale scheme atlas w:W -> X, there exist n >= 0 and affine opens V_i of W [def-weil-open-immersion], indexed by Fin n, whose composites to X are jointly surjective in the field-extension sense of [def-trf-algebraic-space-jointly-surjective-family]. They may be chosen with n=0 if W is empty. No coproduct is asserted and W need not be quasi-compact or separated.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03E4 and 03H6, finite affine image subcover of a specified scheme atlas; original refinement proof Steps 1-2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale map $q:Q\\to X$ with $Q$ a quasi-compact scheme, as supplied by the hypothesis and the scheme-test definition in [def-trf-algebraic-space]. Use the point topology of [def-a1-space-point-topology]. By [lem-a1-space-point-open-calculus], $|q|$ is continuous and surjective. Its image is quasi-compact by [lem-weil-pbc-continuous-image-quasi-compact], and its image is all of $|X|$. Thus $|X|$ is quasi-compact. This uses no quasi-compactness of the specified atlas $W$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-space-point-topology",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), continuous-surjection direction; Tag 03H6 (lemma-quasi-compact-affine-cover), start of converse."
+   }
+  },
+  {
+   "text": "Let $(V_a)_{a\\in A}$ be the affine open cover of $W$ given by its scheme structure [def-pc-scheme]. For every scheme $T\\to X$, representability of $w$ gives the etale scheme $W_T=W\\times_XT\\to T$. The pullback $V_a\\times_WW_T\\to W_T$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]. It is etale and its composite with $W_T\\to T$ is etale by clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation]. The fibre-product universal property identifies this scheme with $V_a\\times_XT$. Hence $V_a\\to X$ is representable etale by [def-trf-algebraic-space]. Its image on points is open by [lem-a1-space-point-open-calculus]. These images cover $|X|$: a point lifts to $W$ because $w$ is surjective, and the lifted point belongs to some $V_a$. Quasi-compactness from Step 1 now selects finitely many images covering $|X|$. Enumerate the selected affine opens as $W_1,\\ldots,W_n$. This is joint surjectivity in [def-trf-algebraic-space-jointly-surjective-family]. To verify the displayed field-extension formulation, fix a representative (K,s,x). Its class lies in one selected image. Equality with a representative in that open can be realized over a common extension L of K and its source field: the common-field relation is reflexive and symmetric, and transitivity follows by taking a common overfield of the two extensions over their shared intermediate field. Restrict the source section to L. The map K -> L and this restricted section give exactly the equality in IsJointlySurjective. Thus the finite topological subcover yields the stronger-looking representative formula, with no choice of representatives in a definition.",
+   "uses": [
+    "def-pc-scheme",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-a1-space-point-open-calculus",
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4 (lemma-quasi-compact-space), choice of a quasi-compact open in the given atlas; Tag 03H6 (lemma-quasi-compact-affine-cover), finite image subcover."
+   }
+  },
+  {
+   "text": "If W is empty, its surjectivity forces X to have no field-valued point classes. Choose n=0 and the empty function of opens. Joint surjectivity is vacuous: a field-valued point of X would lift through W after a field extension, impossible. In the nonempty case use the finite subcover just constructed. This gives the implication IsEmpty W -> n=0 as well as the required field-extension covering condition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03E4 and 03H6, finite affine image subcover of a specified scheme atlas; original refinement proof Steps 1-2."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03E4 and 03H6, finite affine image subcover of a specified scheme atlas; original refinement proof Steps 1-2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every specified etale scheme atlas of a quasi compact algebraic space has finitely many affine open subsets jointly surjective on points",
+   "results": "Scheme.affineOpenCover; Scheme.affineCover; isCompact_iff_finite_and_eq_biUnion_affineOpens; QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen; Scheme.isBasis_affineOpens. These supply only scheme covers and compactness tools.",
+   "date": "2026-10-26",
+   "verdict": "No algebraic-space finite image selection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsJointlySurjective\"",
+   "results": "Seven hits, all for Scheme.IsJointlySurjectivePreserving and its pullback instances/lemmas, not the algebraic-space family predicate.",
+   "date": "2026-10-26",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many affine open subsets of any etale atlas cover a quasi compact algebraic space on field valued point classes",
+   "results": "Eight hits for QuasiCompactCover and finite affine covers of schemes, including QuasiCompactCover.exists_isAffineOpen_of_isCompact.",
+   "date": "2026-10-26",
+   "verdict": "No matching statement for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finite_affine_image|finite.*affine.*selection|finite.*affine.*subatlas",
+   "results": "No Mathlib hits. Local Sheaf search found AlgebraicSpaceFiniteAffineSubatlas, requiring a specified pairwise disjoint affine-component cover and returning a compact open, rather than arbitrary atlas opens jointly surjective on field-valued points. AlgebraicSpaceFiniteAffineAtlasRefinement is the parent, with the additional coproduct and spectrum assertions. SpaceFiniteQcAtlasAssembly starts with finite local atlases and performs no selection.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate or existing statement that supplies this step."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteAffineAtlasRefinement",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Original Steps 2-3 of the item, under the algebraic-space section-algebra input descending from lem-trf-local-term-locality: Tag 03M9 affine-target paragraph, choice of a single affine surjective etale atlas by finite refinement. Finite affine image selection, original refinement Steps 1-2.",
+   "via": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "blueprint": "Extracts only Steps 1-2 of the existing finite-affine refinement; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Same generic point-topology tool already approved for the parent; used to take the finite open image subcover."
+   }
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteAffineImageSelection",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteAffineImageSelection.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_affine_image_selection",
+  "statement": "theorem exists_finite_affine_image_selection {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : ∃ (Q : Over S) (q : yoneda.obj Q ⟶ X.obj.obj), CompactSpace Q.left ∧ IsEtale q ∧ IsSurjective q) (W : Over S) (w : yoneda.obj W ⟶ X.obj.obj) (hw : IsEtale w) (hs : IsSurjective w) : ∃ (n : ℕ) (V : Fin n → W.left.Opens), (∀ i : Fin n, IsAffineOpen (V i)) ∧ IsJointlySurjective (fun i : Fin n ↦ yoneda.map (Over.homMk (U := Over.mk ((V i).ι ≫ W.hom)) (V := W) (V i).ι rfl) ≫ w) ∧ (IsEmpty W.left → n = 0)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T083111-L-2270813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T083111-L-2270813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

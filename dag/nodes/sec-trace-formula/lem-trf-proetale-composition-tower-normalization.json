@@ -82,7 +82,10 @@
     "lem-sf-comparison-pullback-exact",
     "lem-weil-extension-by-zero-exact",
     "thm-weil-pbc-finite-level-proetale",
-    "prop-weil-open-closed-recollement-adjunctions"
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-amb-open-site-evaluation-counit",
+    "lem-amb-compact-support-proper-factor",
+    "lem-kun-unbounded-exchange-agrees"
    ],
    "elementary": false,
    "source": {
@@ -103,69 +106,40 @@
    }
   },
   {
-   "text": "Fix the final compositors. The finite-level direct-image statement gives $D_{q,p}=c_{q,p}^{-1}:P_qP_p\\simeq P_{qp}$, with the identity normalization asserted there. For open extension, the two open Hom bijections give\n$$\\operatorname{Hom}(J_bJ_jM,F)\\cong\\operatorname{Hom}(M,j_p^*b_p^*F)\\cong\\operatorname{Hom}(M,a_p^*F).$$\nThe middle comparison is the canonical composite restriction, since $bj=a$. Apply the conjugate-isomorphism unit-equation statement to these two left adjoints of canonically identified restrictions. It gives the unique unit-preserving isomorphism $E_{b,j}:J_bJ_j\\simeq J_a$, whose conjugate is that restriction comparison. For an identity open it is the identity by the same uniqueness. This fixes the exact $E$ required in the item, rather than an arbitrary natural isomorphism of these functors.",
+   "text": "The bounded-below proper/open site mate is conjugate to the etale proper/open interchange, hence invertible. The identified lambda and gamma inherit invertibility on the site-comparison model. Naturality transports both along the supplied witness isomorphism to arbitrary N; no inference that adjunction preserves isomorphisms is used.",
    "uses": [
-    "lem-weil-derived-direct-image-composition",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
-    "place": "Construction, final composition of proper direct images and of open extensions"
-   }
-  },
-  {
-   "text": "Compute the composition by carrying out its Construction paragraph on the supplied models. The candidate definition identifies its source as $P_qJ_iP_rJ_jM$ and its target as $P_{qp}J_aM$. The construction first applies its displayed proper/open arrow $A_N:J_iP_rN\\to P_pJ_bN$ to $N=J_jM$. It specifies this arrow over $V$ by proper base change: with the open units inserted, its restriction is the inverse of $i_p^*P_pJ_bN\\xrightarrow{\\operatorname{Ex}^p}P_rb_p^*J_bN\\xrightarrow{P_r(\\eta_b^{-1})}P_rN$. Thus $i_p^*(A_N)\\eta_{i,P_rN}=\\lambda_N^{-1}$, using the precise exchange and unit identified in Step 4. The open Hom bijection gives $A_N=T_N$ by Step 5. The etale representative of this map is the one in Step 3, and the coefficient-mate site's equation fixes its transport as an equality of maps. Now apply $P_q$ and then the compositors fixed in Step 6. The sequence prescribed by the construction is exactly\n$$P_qJ_iP_rJ_jM\\xrightarrow{P_qT_{J_jM}}P_qP_pJ_bJ_jM\\xrightarrow{D_{q,p}\\,E_{b,j}}P_{qp}J_aM.$$\nReplacing $T$ by $\\gamma$ proves the formula. Here the composition theorem supplies preservation of witnessed inputs and its canonical composition isomorphisms; the two-arrow formula is proved by this expansion of the construction, not read into that theorem's statement.",
-   "uses": [
-    "def-compact-support-direct-image-detailed",
-    "lem-cbc-proper-open-interchange-coherence",
     "lem-sp-proper-open-coefficient-mate",
-    "thm-sf-comp-composition",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "thm-weil-pbc-finite-level-proetale"
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-proper-open-interchange-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
-    "place": "Construction, apply proper/open interchange to extension by zero and push by Rq; Stacks Tag 0F7J, lemma-shriek-composition, four-line computation"
-   }
+   "elementary": false
   },
   {
-   "text": "For invertibility, perform the same construction on the pair $r:H\\to V$, $i:V\\to\\overline V$. Compactify $i$ by $(i,\\mathrm{id})$ and $ir$ by $(b,p)$; the fibre-product open is $H$, its projection is $r$, and its source open is $\\mathrm{id}_H$. The computation in Step 7 gives $\\alpha^p_{i,r}=T$ under the identity-open proper models. The remaining identity direct-image compositor is the identity by the direct-image composition statement, and the identity open compositor is the identity by Step 6. For the pair $b,p$ choose instead $(\\mathrm{id}_{\\overline U},p)$ and $(b,\\mathrm{id}_{\\overline U})$. The square has identity vertical arrows; its exchange and open adjunct are identities by the unit--square--counit formula and open triangle identities. Equivalently its identity-square open comparison is the identity as specified by the open-square-exchange statement. Thus $\\alpha^p_{p,b}$ is the identity on the candidate $P_pJ_b$. Consequently the square comparison\n$$\\chi=(\\alpha^p_{p,b})^{-1}\\circ\\alpha^p_{i,r}:J_iP_r\\longrightarrow P_pJ_b$$\n(using $(\\mathrm{id},r)$ and $(\\mathrm{id},p)$ for proper coincidence) is $T=\\gamma$. Both $\\alpha$ factors are isomorphisms on witnessed inputs by the composition theorem, so $\\gamma$ is invertible there. This proves the last clause from composition isomorphisms, independently of any claim that taking an adjunct preserves invertibility.",
+   "text": "For L construct K=j_!L and the explicit comparison isomorphism nu^*K ~= J_j nu^*L. Apply the proved all-witness invertibility result to obtain hLambda and IsIso gamma. Apply the equality-only proEtaleCompositionTowerFormula to this hLambda and combine the two clauses by conjunction and existential introduction.",
    "uses": [
-    "def-compact-support-direct-image-detailed",
-    "lem-weil-derived-direct-image-composition",
-    "def-weil-pbc-ambient-ringed-exchange",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "lem-trf-open-square-exchange",
-    "thm-sf-comp-composition"
+    "lem-trf-proetale-composition-tower-formula",
+    "lem-cbc-proetale-extension-zero-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
-    "place": "Construction, the two proper/open specializations with identity opens and identity proper maps"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-compact-support-direct-image-detailed",
   "def-sf-etale-origin-subcategory",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-ambient-ringed-exchange",
   "def-weil-proper-morphism",
+  "lem-amb-compact-support-proper-factor",
+  "lem-amb-open-site-evaluation-counit",
   "lem-amb-unbounded-proper-open-interchange",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-cbc-proper-open-interchange-coherence",
+  "lem-kun-unbounded-exchange-agrees",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-open-comparison-unit-normalization",
   "lem-sp-proper-open-coefficient-mate",
-  "lem-trf-open-square-exchange",
-  "lem-weil-derived-direct-image-composition",
+  "lem-trf-proetale-composition-tower-formula",
   "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-compatible-compactification-triangle",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
@@ -173,13 +147,13 @@
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-transport-identifies-exchange",
   "prop-weil-open-closed-recollement-adjunctions",
-  "thm-sf-comp-composition",
   "thm-weil-pbc-finite-level-proetale"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
-  "place": "Construction, with the explicit site-transport and open-adjunction normalization of the named proper/open map; Stacks Tags 0F7B and 0F7J."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+  "place": "Construction, the displayed proper/open map, subsequent push by the proper map, and Independence and associativity; Stacks Tags 0F7B and 0F7J.",
+  "note": "H2: complete witness/invertibility proof; only canonical compositor equality split off. The original theorem statement is unchanged."
  },
  "mathlib_searches": [
   {
@@ -357,21 +331,17 @@
   ]
  },
  "tool_uses": [
-  "def-compact-support-direct-image-detailed",
   "def-sf-etale-origin-subcategory",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-ambient-ringed-exchange",
   "def-weil-proper-morphism",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-cbc-proper-open-interchange-coherence",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-open-comparison-unit-normalization",
   "lem-sp-proper-open-coefficient-mate",
-  "lem-weil-derived-direct-image-composition",
   "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-compatible-compactification-triangle",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
@@ -379,7 +349,6 @@
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-transport-identifies-exchange",
   "prop-weil-open-closed-recollement-adjunctions",
-  "thm-sf-comp-composition",
   "thm-weil-pbc-finite-level-proetale",
   "lem-amb-unbounded-proper-open-interchange"
  ],
@@ -395,19 +364,6 @@
   "module": "Sheaf.Paper.ProEtaleCompositionTowerNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.proEtaleCompositionTowerNormalization",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.towerP",
-   "AlgebraicGeometry.ProEtale.towerJ",
-   "AlgebraicGeometry.ProEtale.towerPull",
-   "AlgebraicGeometry.ProEtale.towerPullPushAdjunction",
-   "AlgebraicGeometry.ProEtale.towerPullSquare",
-   "AlgebraicGeometry.ProEtale.towerExchange",
-   "AlgebraicGeometry.ProEtale.towerOpenUnit",
-   "AlgebraicGeometry.ProEtale.towerLambda",
-   "AlgebraicGeometry.ProEtale.towerGamma",
-   "AlgebraicGeometry.ProEtale.towerOpenComposition",
-   "AlgebraicGeometry.ProEtale.towerCandidateComparison",
-   "AlgebraicGeometry.ProEtale.towerOriginComposition",
-   "AlgebraicGeometry.ProEtale.towerOpenCongr",
    "AlgebraicGeometry.ProEtale.proEtaleCompositionTowerNormalization"
   ],
   "file": "lean/Sheaf/Paper/ProEtaleCompositionTowerNormalization.lean",
@@ -416,7 +372,7 @@
   "by": "Q38",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repair of 37a2252d1a51: actual ordinary constant-module pro-etale P/J, canonical originCompositionAmbient conjugated to the three supplied candidate compactifications through the canonical common-refinement/site comparisons, and independently constructed unit-square-counit exchange, inverse-open-unit lambda, adjoint gamma, inverse finiteDirectImageComposition and adjunction open compositor. The theorem includes field/finite-type and exact coefficient data, all witnessed-input gamma invertibility, and the specified-map equality. No etale compositor alias remains."
+  "note": "Repair of 37a2252d1a51: actual ordinary constant-module pro-etale P/J, canonical originCompositionAmbient conjugated to the three supplied candidate compactifications through the canonical common-refinement/site comparisons, and independently constructed unit-square-counit exchange, inverse-open-unit lambda, adjoint gamma, inverse finiteDirectImageComposition and adjunction open compositor. The theorem includes field/finite-type and exact coefficient data, all witnessed-input gamma invertibility, and the specified-map equality. No etale compositor alias remains. H2: tower constructions moved verbatim and publicly reexported from ProEtaleCompositionTowerDefinitions; theorem body now proves witness invertibility and combines the equality-only split."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -426,5 +382,26 @@
   "result": "pass",
   "note": "Read node, 17 stmt-dep records, source (thm-sf-comp-composition Construction; Stacks 0F7B/0F7J), item module and both dependency modules, plus upstream Compactification.comp/restrict, compactSupportSiteComparison, originCompositionAmbient, the derived adjunctions and the open adjunction. Clause check: field k with l invertible, Lambda = coefficientExtensionRing with Finite from the recorded theorem, separated finite-type k-schemes and maps with no properness; d, e give (i,q),(a,qp); b/r/j are pullback.fst/e.restrict.g/e.restrict.i, with bj=a by restrict_i_fst and the Cartesian square by isPullback_restrict. towerExchange is the unit-square-counit mate; towerLambda = Ex at J_bN then P_r(eta_b^-1); towerGamma is the J_i -| i^* adjunct of lambda^-1. LHS is originCompositionAmbient conjugated by towerCandidateComparison, built from the same compactSupportSiteComparison as originComposition. RHS = P_q gamma, then finiteDirectImageComposition.inv, then P_qp(E), with E the leftAdjointUniq compositor J_bJ_j -> J_a; orientations correct. lambda/gamma invertibility holds for every witnessed N, and the formula plus gamma iso for N = J_j nu^*L. Edge cases: identities, empty U, universes (E in Type (u+1) only to match the coefficient universe). lean.statement verbatim; 14 declarations match the file; dependency modules change imports only; node fields unchanged. nt_compile --json: all 3 files clean (3.3/14.3/12.7 s). Of 5 direct importers 1 compiles; the other 4 fail identically on baseline, so no regression. Observation only: towerExchange duplicates upstream ProEtale.derivedBaseChangeMap up to the L(i^*) vs exact-pullback conjugation, so the proof will need a bridge lemma. No fixes.; reverted the delivery's change of existing node(s) lem-weil-derived-direct-image-composition, thm-sf-comp-composition (--revert-nodes; kept as on newtargets-dag)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e55e1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261025T123039-L-1827473",
+  "kind": "interface",
+  "note": "independent cc review: 13 moved tower defs byte-identical to clone 84292a05575 and item signature unchanged; formula node lean.statement = Lean signature; item node proof/proof_deps vs Lean imports and helpers; 5 direct importers compiled against delivered and fixed modules (all OK); #print axioms: sorryAx only via published sorry unboundedProperOpenInterchange plus the new formula split"
+ }
 }

@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-space-pure-dimension-flatness-representability",
+ "kind": "statement",
+ "title": "Representability of the dimension-filtered flatness condition for a pure module",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space] and the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules on small etale ringed sites [def-trf-space-quasi-coherent-module], and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $Y$ be a scheme and let $f:X\\to Y$ be of finite presentation: it is quasi-compact, has quasi-compact diagonal, and is locally of finite presentation on etale scheme charts [def-sfb-space-morphism-properties]. Let $M$ be a finitely presented quasi-coherent $\\mathcal O_X$-module, meaning that etale locally there is an exact presentation $\\mathcal O^r\\to\\mathcal O^s\\to M\\to0$ with $r,s$ finite. Assume $M$ is universally pure relative to $Y$ [def-sfb-space-universal-relative-purity]. Fix any integer $n\\geq0$. For each scheme map $b:B\\to Y$ set $X_B=X\\times_YB$ and let $M_B$ be tensor pullback. Define $P_n(b)$ by requiring that for every representable etale scheme chart $a:U\\to X_B$ and every $u\\in U$ with image $v\\in B$ satisfying $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(u)\\geq n$, the stalk $(a^*M_B)_u$ is flat over $\\mathcal O_{B,v}$. Residue fields and their induced field maps are [def-weil-residue-field], transcendence degree is [def-kun-transcendence-degree], and stalkwise base-flatness is [def-pc-scheme-module-flat-over]. There exist an algebraic space $E_n$ and a morphism $j_n:E_n\\to Y$ of finite presentation which is a monomorphism, meaning that $E_n(H)\\to\\operatorname{Hom}(H,Y)$ is injective for every scheme $H$, such that for every scheme $B$ the induced map $E_n(B)\\to\\operatorname{Hom}(B,Y)$ is a bijection onto $\\{b:B\\to Y\\mid P_n(b)\\}$. No proper-support assumption on $M$ or separatedness assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-universal-relative-purity",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-dimension-flat-condition"
+ ],
+ "proof": [
+  {
+   "text": "For every $r\\geq0$ form $F_r(B)=\\{b:B\\to Y\\mid P_r(b)\\}$. The base-change and sheaf theorem makes this an fpqc sheaf, hence an etale sheaf. Its map to $h_Y$ is injective on every test. Directly from the inequalities, $P_r$ implies $P_{r+1}$, so $F_r\\subseteq F_{r+1}$. Restricting to any base test gives exactly the functor of the pulled-back family, since iterated tensor pullbacks and fibre products have the same defining universal properties.",
+   "uses": [
+    "lem-sfb-space-dimension-flatness-base-change-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, first paragraph; 0CWS and 0CWW."
+   }
+  },
+  {
+   "text": "We will glue local representations as follows. Let $H\\subseteq A$ be an etale sheaf subfunctor of an algebraic space $A$, and choose an etale scheme covering $T_i\\to A$ on which $H\\times_A T_i$ is represented by schemes $Z_i$. Set $Z=\\coprod_i Z_i$. Given a scheme $T$ and a section of $H(T)$, injectivity into $A(T)$ identifies $T\\times_H Z$ with $\\coprod_i(T\\times_A T_i)$: the section fixes the unique lift to each represented fibre product. These are schemes, and their projection to $T$ is surjective etale by base change of the cover. The etale-sheaf atlas theorem therefore gives that $H$ is an algebraic space. If each $Z_i\\to T_i$ is of finite presentation, the resulting $H\\to A$ is of finite presentation: after any etale scheme chart of $A$, apply fppf locality of finite presentation on that scheme. Monomorphy is already the injectivity of the subfunctor. This argument applies both to scheme and to algebraic-space $A$.",
+   "uses": [
+    "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, locality reduction, using algebraic-space gluing rather than scheme effectivity."
+   }
+  },
+  {
+   "text": "It suffices to work over each affine open of $Y$, by the gluing argument in step 2. On an affine base choose the universal bound $D$ for chart residue transcendence degrees. For $r=D+1$ there is no chart point with transcendence degree at least $r$, on any base test. Thus $F_{D+1}=h_Y$, represented by the identity of $Y$. We prove representability and finite presentation for $r=D,D-1,\\ldots,0$ by descending induction. In the induction step suppose $F_{r+1}$ is represented by a finite-presentation monomorphism $A\\to Y$. It remains to represent $F_r$ over $A$ by a finite-presentation monomorphism; composing then preserves finite presentation and injectivity.",
+   "uses": [
+    "lem-sfb-space-universal-fibre-transcendence-bound",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, paragraph beginning “In particular the situation is local”."
+   }
+  },
+  {
+   "text": "Choose etale affine scheme charts $T\\to A$. The pulled-back family $X_T\\to T$ is still of finite presentation. Its module is finitely presented because tensoring a finite matrix presentation remains a finite matrix presentation. It is universally pure: a test scheme $B\\to T$ is also a test scheme over $Y$, so an impurity after this pullback would be the same impurity for $M/Y$. Finally it satisfies $P_{r+1}$ on $T$, since $T\\to Y$ factors through $A=F_{r+1}$. The universal base-change property preserves this on every further test. Accordingly it is enough, by step 2, to handle a universally pure finitely presented family on an affine scheme base with $P_{r+1}$ already true.",
+   "uses": [
+    "def-sfb-space-universal-relative-purity",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-dimension-flatness-base-change-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, passage to the universal $(r+1)$-flat base."
+   }
+  },
+  {
+   "text": "Fix a point $t\\in T$. The complete-devissage neighbourhood theorem gives an affine etale neighbourhood $(T\\prime,t\\prime)\\to(T,t)$ and finitely many etale affine charts $h_j:W_j\\to X_{T\\prime}$ covering the entire fibre at $t\\prime$. Each $W_j\\to T\\prime$ and each pulled-back module is of finite presentation, and its coordinate module has a complete algebra devissage over $t\\prime$. Write $W=\\bigcup_jh_j(W_j)$. Images of etale maps are open, so $W$ is open, and it is quasi-compact over the affine base because it is the image of the finite union of the affine $W_j$. The sheaves on the $W_j$ satisfy $P_{r+1}$ by etale restriction and base change. Already at this stage apply the complete-devissage flattening lemma with $d=r$ to each original affine $W_j$: it gives a scheme representative of its $P_r$ functor on an open neighbourhood $V_j$ of $t\\prime$. Keep these representatives for restriction below.",
+   "uses": [
+    "lem-sfb-space-complete-devissage-fibre-neighbourhood",
+    "lem-sfb-space-dimension-flatness-base-change-sheaf",
+    "lem-a1-etale-scheme-map-open-image",
+    "lem-sfb-affine-complete-devissage-dimension-flattening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, paragraph applying 0CWJ."
+   }
+  },
+  {
+   "text": "For every generalization $s$ of $t\\prime$, take $\\xi\\in\\operatorname{Ass}_{(X_{T\\prime})_s}(M_s)$. Universal purity, applied to the identity test of $T\\prime$ and $s\\leadsto t\\prime$, supplies a specialization $\\xi\\leadsto\\theta$ in the fibre at $t\\prime$. That fibre is contained in the open $W$, hence $\\xi\\in W$. Therefore every such $s$ lies in $E=\\{s\\mid\\operatorname{Ass}_{(X_{T\\prime})_s}(M_s)\\subseteq W_s\\}$. The assassin-containment theorem applies because the family and module are finitely presented and $W\\to T\\prime$ is quasi-compact. It gives an open neighbourhood of $t\\prime$ contained in $E$. Shrink to an affine open neighbourhood inside this open and all the finitely many $V_j$ of step 5. Now $W$ contains the entire relative assassin; restrict the already obtained representatives to this neighbourhood. No new complete devissage is asserted after shrinking.",
+   "uses": [
+    "def-sfb-space-universal-relative-purity",
+    "lem-sfb-space-assassin-containment-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, construction of E and shrinking; 0CVV and 05LW."
+   }
+  },
+  {
+   "text": "Apply assassin localization to $h:\\coprod_jW_j\\to X_{T\\prime}$. Its image is $W$, which contains the relative assassin. On every test scheme $B\\to T\\prime$, the criterion for the pulled-back finite disjoint union is exactly the conjunction of the criteria for its components: each chart point belongs locally to one component, with the same stalk and residue fields. Consequently $F_r|_{T\\prime}$ is the fibre product over $T\\prime$ of the finitely many dimension-$r$ flatness functors for $(W_j,M_j)$. This is equality of functors on all tests, not merely equality of loci on the base.",
+   "uses": [
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-dimension-flatness-base-change-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, use of 0CX0 and finite product reduction."
+   }
+  },
+  {
+   "text": "For each $j$, use the finite-presentation scheme monomorphism already obtained in step 5 from the affine complete-devissage flattening lemma with $d=r$, restricted in step 6 to the common neighbourhood. Their finite fibre product represents the conjunction of step 7. It is a monomorphism since every component has at most one lift; it is of finite presentation by base change and composition, applied successively. If there are no charts the conjunction is true and the representative is $T\\prime$ itself. Thus $F_r$ has finite-presentation scheme representatives on an etale covering of every chart $T$ of $A$.",
+   "uses": [
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, final product and invocation of 05UF."
+   }
+  },
+  {
+   "text": "Glue these representatives over $A$ by step 2. This yields an algebraic space representing $F_r$ and a finite-presentation monomorphism to $A$. Compose with $A\\to Y$ to finish the induction step. Descending from $D+1$ proves the claim for every $r\\leq D+1$; for larger $r$ the same bound gives $F_r=h_Y$. Finally glue over the affine open covering of the original $Y$. Taking $r=n$ gives $E_n$ and $j_n$. Its sections are, by the representation of the subfunctor $F_n$, exactly the maps $b$ satisfying the stated chart criterion, with unique lift for each such $b$.",
+   "uses": [
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "0CX1, conclusion of the descending induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-dimension-flatness-base-change-sheaf",
+  "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-universal-fibre-transcendence-bound",
+  "lem-sfb-space-separated-fp-composition",
+  "def-sfb-space-universal-relative-purity",
+  "lem-sfb-space-complete-devissage-fibre-neighbourhood",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-sfb-affine-complete-devissage-dimension-flattening",
+  "lem-sfb-space-assassin-containment-constructible",
+  "lem-sfb-space-dimension-flatness-assassin-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX1 (theorem-flat-dimension-n-representable), descending induction and complete-devissage localization. Etale algebraic-space gluing realizes the same locality step; universal purity is retained throughout."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a pure finitely presented quasi coherent module the functor of flatness in dimensions at least n is an algebraic space monomorphism of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat scheme morphisms, flat/projective modules and categorical representable flatness do not represent dimension-filtered module flattening"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of flattening in dimension at least n for a finitely presented universally pure module on an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] [FinitePresentation R M] : Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \":\\n  List.TFAE\\n    [Flat R M, ∀ I : Ideal R, Function.Injective (rTensor M I.subtype),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ x i = (0 : R ⊗[R] M) → VanishesTrivially R f x,\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i • x i = 0 → IsTrivialRelation f x,\\n      ∀ {l :\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"Module.Flat.of_forall_isTrivialRelation\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"(hfx : ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i • x i = 0 → IsTrivialRelation f x) : Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if for every natural number $ l $ and every pair of functions $ f : \\\\mathrm{Fin}(l) \\\\to R $ and $ x : \\\\mathrm{Fin}(l) \\\\to M $, the condition $ \"}\n  {\"name\": \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] {P : Type*} [AddCommGroup P] [Module R P] [FinitePresentation R P] (h₁ : P →ₗ[R] M) :\\n  ∃ (k : ℕ) (h₂ : P →ₗ[R] (Fin k →₀ R)) (h₃ : (Fin k →₀ R) →ₗ[R] M), h₁ = h₃ ∘ₗ h₂\", \"doc\": \"For a flat module $ M $ over a commutative semiring $ R $, and a finitely presented $ R $-module $ P $, every linear map $ h_1 : P \\\\to M $ can be factored as the composition of a linear map $ h_2 : P \"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat scheme morphisms, flat/projective modules and categorical representable flatness do not represent dimension-filtered module flattening"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flattening\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Lean.Elab.Tactic.BVDecide.BVDecideConfig.andFlattening\", \"module\": \"Std.Tactic.BVDecide.Syntax\", \"type\": \" (self : Lean.Elab.Tactic.BVDecide.BVDecideConfig) : Bool\", \"doc\": \"Split hypotheses of the form `h : (x && y) = true` into `h1 : x = true` and `h2 : y = true`.\\nThis has synergy potential with embedded constraint substitution. Because embedded constraint\\nsubstitution \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat scheme morphisms, flat/projective modules and categorical representable flatness do not represent dimension-filtered module flattening"
+  },
+  {
+   "tool": "grep",
+   "query": "flattening|flat.*dimension.*represent|pure.*finite.*presentation",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Data/Matrix/Block.lean\", \"line\": \"43\", \"text\": \"/-- We can form a single large matrix by flattening smaller 'block' matrices of compatible\"}\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"line\": \"388\", \"text\": \"/-- Flattening nested `iConvexComb`s.\"}\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"line\": \"400\", \"text\": \"/-- Flattening nested `iConvexComb`s.\"}\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"line\": \"413\", \"text\": \"/-- Flattening nested `iConvexComb`s.\"}\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"line\": \"495\", \"text\": \"/-- Flattening with the outer combination specialized to `convexCombPair`. -/\"}\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"line\": \"508\", \"text\": \"/-- Flattening with the inner combination specialized to `convexCombPair`. -/\"}\n  {\"file\": \"Mathlib/Combinatorics/Enumerative/Composition.lean\", \"line\": \"797\", \"text\": \"/-- If one joins a list of lists and then splits the flattening along the right composition,\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat scheme morphisms, flat/projective modules and categorical representable flatness do not represent dimension-filtered module flattening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative purity implies existence of a universal flattening stratum for nonflat points of bounded residue field transcendence degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat → GeneralizingMap (PrimeSpectrum.comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat scheme morphisms, flat/projective modules and categorical representable flatness do not represent dimension-filtered module flattening"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-support-universal-flattening",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n).",
+   "via": [
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-pure-dimension-flatness-representability",
+  "worker": "stage1",
+  "summary": "Split Tag 0CX1 into its dimension induction, sheaf gluing and six smaller geometric inputs. Reused algebra devissage, algebraic-space finite-presentation calculus and the etale-sheaf atlas theorem. Universal purity is preserved by its test-scheme definition, avoiding an unneeded quasi-finite purity lemma. Statement unchanged.",
+  "blueprint": "Current latest blueprint, sk-thm-sf-ctf-stability-direct-images.proof.md, (3), inherited alteration/stable-moduli prerequisite chain through proper-support universal flattening; this split realizes the dimension-filtered flattening input 0CX1 with its complete devissage and relative-assassin reduction."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-65ac23023",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-65ac23023 (reviewer sub-agent of L); spot-checked: Read the full source for 0CX1 (spaces-flat), 0CWS/0CWT/0CWW/0CX0/0CWJ, 05UF with its full proof, 05H4/05HH/05HX/05I0/05IA/05UC/05UE (flat), 0CVV (spaces-divisors) and 05LW (morphisms). The item statement is unchanged from base and matches 0CX1 over a scheme base, with universal purity in place of the source's purity. All 9 steps hold against the cited statements: the step-2 étale-sheaf gluing and fp locality; the step-3 descending induction from F_{D+1}=h_Y; the step-4 reduction to an étale affine chart, where universal purity carries over by its test-scheme definition (so 0CVY is not needed); the step-5/6 fibre cover W, purity giving Spec O_{t'} ⊂ E, and the constructible-neighbourhood shrink; the step-7 assassin localization with ⊔W_j giving a conjunction; and the step-8/9 finite product, gluing and composition. All six new nodes are true, statement-only, smaller than the item and not duplicates. Duplicate checks: 05I1 is pointwise; 00I0 needs global stability under generalization; 05IB assumes flatness; 0A3V and 0D4K are different bounds; the live and side-live DAGs contain no 0CVV/0CWJ/0CX0/0CWW/05UF nodes. The affine node assumes only an algebra dévissage, which 05I0 says is weaker than the geometric dévissage 05UF uses. I re-read 05UF's proof: its three cases on d_1 never use rel.dim = dim Supp(F_s), so the node is true; its stage-1 worker must adapt the proof (noted in review.md). FIX (B3): lem-sfb-space-assassin-containment-constructible cited def-weil-constructible-subset for 'locally constructible', which that node does not define; the meaning is now inline in the fix file. Accepted tool uses: lem-a1-etale-scheme-map-open-image and lem-trf-space-fibre-products-etale-covers. Batch-5 flags: all are definitions or foundational space calculus (def-trf-algebraic-space, quasi-coherent modules and module functors, complete algebra dévissage, relative assassin, fibre products; the sfb nodes reach trf only through def-trf-algebraic-space). None is a step of the trace formula or Poincaré duality, so they are accepted. Note for the maintainer: blueprint.from.node is null, inherited from the parent chain, and is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePureDimensionFlatnessRepresentability",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_pure_dimension_flatness_representative",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePureDimensionFlatnessRepresentability.lean",
+  "statement": "theorem exists_pure_dimension_flatness_representative {X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (Y : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (hf : MapIsFiniteType f) (hlfp : MapIsLocallyOfFinitePresentation f) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : X.QCoh) [hM : SheafOfModules.IsFinitePresentation M.obj] (hpure : IsUniversallyPureRelativeToScheme Y f hf hqs M inferInstance) (n : ℕ) : ∃ (E : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (j : E ⟶ schemeSpace Y), (MapIsLocallyOfFinitePresentation j ∧ MapIsQuasiCompact j.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal j.hom.hom)) ∧ (∀ B : Over (Spec (CommRingCat.of (ULift.{u} ℤ))), Function.Injective (j.hom.hom.app (op B))) ∧ ∀ (B : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (b : B ⟶ Y), (∃ e : E.obj.obj.obj (op B), j.hom.hom.app (op B) e = b) ↔ dimensionFlatCondition f M.obj n b",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a4521eb2",
+  "group": "Q110",
+  "result": "fix",
+  "note": "Lean exact vs node/Stacks 0CX1+0CWS/0CWT: fp of f = MapIsFiniteType+chartwise LFP+qc diagonal (equivalent), M QCoh+IsFinitePresentation, purity = recorded IsUniversallyPureRelativeToScheme with same binders, P_n = landed dimensionFlatCondition (actual base change, all étale charts, Cardinal trdeg, stalk flatness over O_{B,v}), conclusion ∃ E j (lfp∧qc∧qc diag) ∧ injective on all B ∧ image↔P_n = bijection via actual j; no extra hyps; edge cases n=0/empty/M=0/infinite trdeg OK. Node differs from live only in lean + added landed def stmt_dep def-sfb-space-dimension-flat-condition; lean.statement verbatim; imports present; docstrings/source/blueprint/9 steps; sorry only. Sole fault H11: 'Second reading' was a self-check → fixes/<item>.report.md = worker report verbatim + independent clause-by-clause second reading. Advisory: MapIsQuasiCompact owner def-sfb-proper-curve-moduli reached only transitively. No compile (no Lean change)."
+ }
+}

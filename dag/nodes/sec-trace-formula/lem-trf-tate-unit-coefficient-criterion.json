@@ -1,0 +1,347 @@
+{
+ "id": "lem-trf-tate-unit-coefficient-criterion",
+ "kind": "statement",
+ "title": "Unit criterion for restricted power series",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value. For $r\\ge0$ let $T_r=K\\langle X_1,\\ldots,X_r\\rangle$ be the ring of restricted series [def-trf-restricted-series-presentation], with coefficientwise addition and Cauchy multiplication. For $f=\\sum_{\\nu\\in\\mathbf N^r}c_\\nu X^\\nu$ put $\\|f\\|_G=\\sup_\\nu|c_\\nu|$. Then $f$ is a unit of $T_r$ (there exists $g\\in T_r$ with $fg=1$) if and only if $|c_0|>\\|f-c_0\\|_G$. In particular $c_0\\ne0$ in this condition. The case $r=0$ is included, with $T_0=K$ and $\\|f-c_0\\|_G=0$.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.2, Corollary 4, printed p.10 (PDF p.11): arbitrary-series unit criterion following Gauss multiplicativity and completeness. Read primary PDF online 2026-10-24; local archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-restricted-series-gauss-completion], the Gauss norm is a complete nonarchimedean submultiplicative ring norm. A nonzero restricted family attains its norm: choose a coefficient of size $b>0$; the finite nonempty set of coefficients of size $\\ge b/2$ has maximum $M\\ge b$, and all remaining coefficients have size $<b/2<M$. Thus $M$ is the global maximum. The same argument applies after deleting the constant coefficient. Coefficientwise scalar multiplication gives $\\|af\\|_G=|a|\\|f\\|_G$ for $a\\in K$ (including $a=0$).",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, Gauss norm defined by the coefficient maximum, printed pp.8-9 Primary PDF read online by Q02 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "Suppose $fg=1$. Then $f\\ne0$. Choose $a\\in K^\\times$ equal to a coefficient attaining $\\|f\\|_G$ by step 1, and put $F=a^{-1}f$, $G=ag$. By [lem-trf-tate-gauss-multiplicative], $1=\\|f\\|_G\\|g\\|_G$, so $FG=1$ and $\\|F\\|_G=\\|G\\|_G=1$. Both belong to the subring $U_r$ of [lem-trf-tate-unit-ball-polynomial-reduction]. Reduction therefore gives $\\operatorname{red}(F)\\operatorname{red}(G)=1$ in $k[X_1,\\ldots,X_r]$, where $k$ is the field supplied by that node. Apply [lem-trf-mvpolynomial-divisor-nonzero-constant] over $k$ with constant $1$: $\\operatorname{red}(F)$ is a constant polynomial. It is nonzero since it has inverse $\\operatorname{red}(G)$.",
+   "uses": [
+    "lem-trf-tate-gauss-multiplicative",
+    "lem-trf-tate-unit-ball-polynomial-reduction",
+    "lem-trf-mvpolynomial-divisor-nonzero-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Corollary 4, necessity, printed p.10; preceding Gauss multiplicativity, printed p.9 Primary PDF read online by Q02 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "The coefficient formula in [lem-trf-tate-unit-ball-polynomial-reduction] now gives $|a^{-1}c_0|=1$ and $|a^{-1}c_\\nu|<1$ for every $\\nu\\ne0$. Indeed a coefficient in $V$ has nonzero residue exactly when it is outside $\\mathfrak m$. The restricted tail $F-F(0)$ has norm $<1$: if nonzero, its norm is attained at a nonconstant coefficient by step 1, and if zero its norm is $0$. Scaling by $a$ gives $\\|f-c_0\\|_G<|a|=|c_0|$, the required strict supremum inequality.",
+   "uses": [
+    "lem-trf-tate-unit-ball-polynomial-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Corollary 4, nonzero constant reduction gives strict coefficient dominance, printed p.10 Primary PDF read online by Q02 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "Conversely suppose $\\|f-c_0\\|_G<|c_0|$. Nonnegativity gives $c_0\\ne0$. Set $h=1-c_0^{-1}f=-c_0^{-1}(f-c_0)$. Step 1 gives $\\|h\\|_G=\\|f-c_0\\|_G/|c_0|<1$. Completeness from [lem-trf-restricted-series-gauss-completion] verifies the hypothesis of [lem-trf-complete-normed-ring-geometric-inverse], which supplies $S=\\sum_{n\\ge0}h^n\\in T_r$ with $(1-h)S=S(1-h)=1$. Hence $g=c_0^{-1}S$ satisfies $fg=1$. For $r=0$ there is only the constant coefficient, the tail norm is $0$, and both directions reduce to invertibility of a nonzero element of $K$; $f=0$ satisfies neither condition.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-complete-normed-ring-geometric-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Corollary 4, sufficiency by geometric series, printed p.10 Primary PDF read online by Q02 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-gauss-multiplicative",
+  "lem-trf-tate-unit-ball-polynomial-reduction",
+  "lem-trf-mvpolynomial-divisor-nonzero-constant",
+  "lem-trf-complete-normed-ring-geometric-inverse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.2, Corollary 4 and the Gauss-norm/reduction discussion preceding Proposition 3, printed pp.8-10 (PDF pp.9-11). Primary PDF consulted online; local archival copy WANTED. Q02 expands norm attainment and verifies the inverse norm during normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isUnit.*gauss|gauss.*isUnit|TateAlgebra|restricted.*unit",
+   "results": {
+    "t": "2026-10-24T08:37:32Z",
+    "tool": "grep",
+    "query": "isUnit.*gauss|gauss.*isUnit|TateAlgebra|restricted.*unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/GaussSum.lean",
+     "Mathlib/NumberTheory/GaussSum.lean",
+     "Mathlib/Topology/Algebra/RestrictedProduct/Units.lean",
+     "Mathlib/Topology/Algebra/RestrictedProduct/Units.lean",
+     "Mathlib/Topology/Algebra/RestrictedProduct/Units.lean",
+     "Mathlib/RingTheory/PowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean",
+     "Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean"
+    ],
+    "digest": "606378081a7ecc0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal power-series inverses need not be restricted (1-X is the test); restricted-product units are a different ring. Read MvPowerSeries/Inverse.lean:138 and Restricted.lean:25-106; neither supplies the Tate unit criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a Tate algebra a series is a unit exactly when its constant term has absolute value strictly greater than every nonconstant coefficient",
+   "results": {
+    "t": "2026-10-24T08:37:32Z",
+    "tool": "leansearch",
+    "query": "In a Tate algebra a series is a unit exactly when its constant term has absolute value strictly greater than every nonconstant coefficient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPowerSeries.isUnit_iff_constantCoeff",
+     "MvPolynomial.isUnit_iff",
+     "PowerSeries.isUnit_iff_constantCoeff",
+     "PowerSeries.isUnit_constantCoeff",
+     "HahnSeries.isUnit_iff",
+     "Polynomial.isUnit_iff_coeff_isUnit_isNilpotent",
+     "Polynomial.isUnit_of_coeff_isUnit_isNilpotent",
+     "PowerSeries.order_zero_of_unit"
+    ],
+    "digest": "42cf19da835e5fb2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal power-series inverses need not be restricted (1-X is the test); restricted-product units are a different ring. Read MvPowerSeries/Inverse.lean:138 and Restricted.lean:25-106; neither supplies the Tate unit criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnit\", \"gaussNorm\"",
+   "results": {
+    "t": "2026-10-24T08:37:32Z",
+    "tool": "loogle",
+    "query": "\"IsUnit\", \"gaussNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal power-series inverses need not be restricted (1-X is the test); restricted-product units are a different ring. Read MvPowerSeries/Inverse.lean:138 and Restricted.lean:25-106; neither supplies the Tate unit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restricted power series in a Tate algebra over a complete nonarchimedean field is invertible if and only if its constant coefficient strictly dominates all the other coefficients",
+   "results": {
+    "t": "2026-10-24T08:37:35Z",
+    "tool": "leanfinder",
+    "query": "A restricted power series in a Tate algebra over a complete nonarchimedean field is invertible if and only if its constant coefficient strictly dominates all the other coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.isUnit_iff_constantCoeff",
+     "PowerSeries.isUnit_weierstrassUnit",
+     "MvPowerSeries.isUnit_iff_constantCoeff",
+     "PowerSeries.isUnit_constantCoeff",
+     "PowerSeries.heval_unit",
+     "PowerSeries.invOfUnit_eq",
+     "PowerSeries.IsWeierstrassDivisorAt.isUnit_shift",
+     "PowerSeries.invOfUnit_eq'"
+    ],
+    "digest": "7524e9277f3dcf19"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal power-series inverses need not be restricted (1-X is the test); restricted-product units are a different ring. Read MvPowerSeries/Inverse.lean:138 and Restricted.lean:25-106; neither supplies the Tate unit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility in the ring of strictly convergent power series is equivalent to the constant term having greater norm than the remaining terms",
+   "results": {
+    "t": "2026-10-24T08:38:45Z",
+    "tool": "leanfinder",
+    "query": "Invertibility in the ring of strictly convergent power series is equivalent to the constant term having greater norm than the remaining terms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.isUnit_iff_constantCoeff",
+     "MvPowerSeries.isUnit_iff_constantCoeff",
+     "PowerSeries.isUnit_constantCoeff",
+     "PowerSeries.inv_eq_inv_aux",
+     "PowerSeries.invOfUnit_eq",
+     "PowerSeries.inv_eq_zero",
+     "PowerSeries.inv_eq_iff_mul_eq_one",
+     "PowerSeries.invOfUnit"
+    ],
+    "digest": "7b5b86e7fe522c98"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: formal power-series inverses need not be restricted (1-X is the test); restricted-product units are a different ring. Read MvPowerSeries/Inverse.lean:138 and Restricted.lean:25-106; neither supplies the Tate unit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A restricted power series over a complete nonarchimedean field is a unit exactly when its constant term strictly dominates its other coefficients",
+   "results": {
+    "t": "2026-10-24T09:01:39Z",
+    "tool": "leanfinder",
+    "query": "A restricted power series over a complete nonarchimedean field is a unit exactly when its constant term strictly dominates its other coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.isUnit_weierstrassUnit",
+     "PowerSeries.isUnit_iff_constantCoeff",
+     "PowerSeries.heval_unit",
+     "PowerSeries.weierstrassUnit",
+     "MvPowerSeries.isUnit_iff_constantCoeff",
+     "PowerSeries.isUnit_constantCoeff",
+     "PowerSeries.firstUnitCoeff",
+     "PowerSeries.Unit_of_divided_by_X_pow_order"
+    ],
+    "digest": "19f9d00196a39ce4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: formal-series isUnit_iff_constantCoeff does not ensure restrictedness of the inverse (test 1-X). Conditional Gauss multiplicativity and the generic geometric-series lemma are inputs, not the full iff criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "gaussNorm_mul|isUnit_iff|isUnit_one_sub",
+   "results": {
+    "t": "2026-10-24T09:01:37Z",
+    "tool": "grep",
+    "query": "gaussNorm_mul|isUnit_iff|isUnit_one_sub",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Inverse.lean"
+    ],
+    "digest": "ad20eea1a5282546"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: formal-series isUnit_iff_constantCoeff does not ensure restrictedness of the inverse (test 1-X). Conditional Gauss multiplicativity and the generic geometric-series lemma are inputs, not the full iff criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\", \"mul\"",
+   "results": {
+    "t": "2026-10-24T09:01:38Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm\", \"mul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "MvPowerSeries.gaussNorm_mul_le",
+     "MvPowerSeries.gaussNorm_le_mul",
+     "MvPowerSeries.gaussNorm_mul_eq_mul",
+     "Polynomial.gaussNorm_mul_le",
+     "Polynomial.gaussNorm_mul"
+    ],
+    "digest": "3ab3ccf0850397c2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: formal-series isUnit_iff_constantCoeff does not ensure restrictedness of the inverse (test 1-X). Conditional Gauss multiplicativity and the generic geometric-series lemma are inputs, not the full iff criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-supremum-seminorm-calculus",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Supremum seminorm estimates on affinoid algebras. The unit criterion used to construct a maximal point of the auxiliary hypersurface 1-Yf=0 in the proof of the Tate Gauss/supremum comparison.",
+   "via": [
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-unit-coefficient-criterion",
+  "worker": "stage1",
+  "summary": "Q02 followed Bosch Section 1.2 Corollary 4, retained the statement, and supplied the normalization, reduction and geometric-series proof with all strict norm bounds explicit. Reused existing completeness and polynomial-divisor nodes. Added two statement-only analytic prerequisites and one generic Mathlib leaf; no Lean or compilation.",
+  "blueprint": "Historical analytic input beneath lem-trf-local-term-locality through the Temkin normalization chain, exactly the inherited unit-criterion prerequisite of lem-trf-affinoid-supremum-seminorm-calculus. Latest blueprint main-20261024 uses contracting correspondences; no chapter/unit route was altered."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-e9777dcec",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-e9777dcec (reviewer sub-agent of L); spot-checked: Pass with no changes. Source: the local Bosch copy is absent, so I fetched the primary heft378 PDF at the recorded URL and read §1.2. Definition 2 and the Gauss norm are on printed p.8. Multiplicativity via the reduction π: R<ζ> → k[ζ], with f̃=0 iff |f|<1, is on p.9. Prop 3 is on pp.9-10 and Cor 4 on p.10; the item is exactly Cor 4's general clause. The item's statement is byte-identical to its NC creation. Steps: Step 1's attainment argument (finite set of coefficients ≥ b/2) and the scalar norm identity are elementary and correct. In step 2, multiplicativity gives ||F||=||G||=1, which makes Bosch's implicit 'unit in R<ζ>' explicit; red is a unital hom; MvPolynomial.dvd_C_iff_exists over the field k with a=1 makes red(F) a nonzero constant. Step 3: the residue-field description plus attainment give the strict tail inequality, including for nondiscrete value groups. In step 4, c0≠0 and ||h||<1. Gauss-completion supplies NormedRing plus completeness, the geometric inverse follows, and constants are central. New nodes: Gauss multiplicativity is true without completeness and with trivial |.|, and is not the Mathlib gaussNorm_mul_eq_mul, which needs an hdom hypothesis. Every clause of the unit-ball reduction node checked, including r=0 and trivial |.|. The geometric-inverse leaf matches Normed.lean:279/333-338/345-348/350, which I read myself. Duplicates: rg -L over the gauss/residue/restricted nodes (restricted-series-gauss-completion, per-tate-*, affinoid spectral and reduction nodes, grauert-remmert, wf-series-substitution) found none and no cycle. Blueprint provenance is correct; the route is the same unit; no tool_uses are needed and there is no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateUnitCoefficientCriterion",
+  "declaration": "RestrictedSeries.tate_unit_coefficient_criterion",
+  "file": "lean/Sheaf/RingTheory/TateUnitCoefficientCriterion.lean",
+  "statement": "theorem tate_unit_coefficient_criterion (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (r : ℕ) (f : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) : (IsUnit f ↔ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (f - constants K r (MvPowerSeries.constantCoeff f.val)).val < ‖MvPowerSeries.constantCoeff f.val‖) ∧ ((MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (f - constants K r (MvPowerSeries.constantCoeff f.val)).val < ‖MvPowerSeries.constantCoeff f.val‖) → MvPowerSeries.constantCoeff f.val ≠ 0) ∧ (r = 0 → f = constants K r (MvPowerSeries.constantCoeff f.val) ∧ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (f - constants K r (MvPowerSeries.constantCoeff f.val)).val = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4f74c032",
+  "group": "Q78",
+  "result": "fix",
+  "note": "Lean statement exact vs node and Bosch §1.2 Cor 4 (source read by the stage-1 reviewer, not by me): NontriviallyNormedField+IsUltrametricDist+CompleteSpace; IsRestricted.subring radius 1 = T_r via the recorded RestrictedSeries.constants; gaussNorm norm 1 = sup|c_ν| (bounded, true sup); IsUnit in the subring ⇔ strict tail<|c0|; c0≠0 conjunct; r=0 conjunct; edge cases f=0, constants, 1−X, r=0 checked. Node differs from side-live only in lean; statement verbatim; lines ≤100; sorry only; docstrings with source place, blueprint and 4 proof steps; no duplicate in Mathlib or project Sheaf. Sole fault H11: second reading was the worker's self-pass → fixes/lem-trf-tate-unit-coefficient-criterion.report.md (worker report byte-identical + independent clause-by-clause reading). No Lean changed, no compile run."
+ }
+}

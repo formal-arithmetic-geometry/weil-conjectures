@@ -12,8 +12,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
 import Sheaf.AlgebraicGeometry.FixSiteOpenExchangeSquare
-import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 
 /-!
 # The ordinary sheaf calculation for site comparison and open exchange
@@ -325,6 +323,48 @@ theorem fixSiteOpenExchangeSheaf (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (openImmersionLowerShriekComparisonUpperStarIso
         (ModuleCat.{u + 1} Λ) j').hom.app
           ((Etale.upperStar (ModuleCat.{u + 1} Λ) gU).obj F) := by
-  sorry
+  have hsq : IsPullback gU j' j g :=
+    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  exact exchange_comparison
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) j)
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j')
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) j')
+    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) (upperStar (ModuleCat.{u + 1} Λ) j)
+    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j') (upperStar (ModuleCat.{u + 1} Λ) j')
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) g) (Etale.upperStar (ModuleCat.{u + 1} Λ) gU)
+    (upperStar (ModuleCat.{u + 1} Λ) g) (upperStar (ModuleCat.{u + 1} Λ) gU)
+    (comparisonUpperStar (ModuleCat.{u + 1} Λ) U) (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
+    (comparisonUpperStar (ModuleCat.{u + 1} Λ) X') (comparisonUpperStar (ModuleCat.{u + 1} Λ) U')
+    (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
+    (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j')
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j')
+    (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j)
+    (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) j')
+    (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) gU)
+    (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g)
+    (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j)
+    (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j')
+    (fixSiteOpenSheafExchangeIso Λ gU j' j g hsq)
+    (@asIso _ _ _ _
+      (Etale.openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)
+      (Etale.isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) hsq))
+    (upperStarCompIso (ModuleCat.{u + 1} Λ) sq.w)
+    (Etale.squareUpperStarIso (ModuleCat.{u + 1} Λ) sq.toCommSq.flip)
+    (comparison_open_inverse_unit Λ j) (comparison_open_inverse_unit Λ j')
+    (fun E ↦ by
+      -- Rewrite the witness explicitly to avoid unfolding the conjugated exchange.
+      have hu := fixSiteOpenSheafExchangeIso_unit Λ hsq E
+      have hw : upperStarCompIso (ModuleCat.{u + 1} Λ) hsq.w =
+          upperStarCompIso (ModuleCat.{u + 1} Λ) sq.w :=
+        congrArg (upperStarCompIso (ModuleCat.{u + 1} Λ)) (Subsingleton.elim _ _)
+      rw [hw] at hu
+      exact hu)
+    (fun E ↦ by
+      simpa only [asIso_hom] using
+        Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app
+          (ModuleCat.{u + 1} Λ) sq.toCommSq E)
+    (fixSiteOpenExchangeSquare Λ sq.toChosenCartesianSquare) F
 
 end AlgebraicGeometry.ProEtale

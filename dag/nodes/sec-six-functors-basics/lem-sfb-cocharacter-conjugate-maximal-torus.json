@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-cocharacter-conjugate-maximal-torus",
+ "kind": "statement",
+ "title": "Conjugating a cocharacter into a prescribed maximal torus",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field]. All groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group scheme isomorphic to $(\\mathbf G_m)^r$ for an integer $r\\geq0$, with $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]; a maximal torus is a torus subgroup maximal under inclusion. Let $G$ be smooth and connected, let $T\\subseteq G$ be a maximal torus, and let $\\mu:\\mathbf G_m\\to G$ be a homomorphism of $k$-group schemes, called a cocharacter. There exist $g\\in G(k)$ and a cocharacter $\\nu:\\mathbf G_m\\to T$ such that $g\\mu g^{-1}$ is the composite of $\\nu$ with $T\\hookrightarrow G$. Explicitly, for every commutative $k$-algebra $A$ and every $t\\in A^\\times$, one has $g_A\\mu_A(t)g_A^{-1}=\\nu_A(t)$ in $G(A)$. The trivial cocharacter and the rank-zero torus are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.10, printed pp.354--355 (conjugacy of maximal tori); Sections 12c--12f (the scheme-theoretic image of a cocharacter is a torus, possibly trivial)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-homomorphism-flat-image] to $\\mu:\\mathbf G_m\\to G$. It supplies an affine finite-type group $I$, a faithfully flat homomorphism $u:\\mathbf G_m\\to I$ and a closed subgroup inclusion $j:I\\hookrightarrow G$ with $\\mu=j\\circ u$. The source $\\mathbf G_m$ is a rank-one torus. Thus [lem-sfb-torus-homomorphism-image], applied to this very factorization, says that $I$ is a torus. This retains scheme-theoretic kernels, including inseparable kernels; no assertion about the image of $\\mu$ on $A$-points is needed.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-torus-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, printed p.75; Definition 12.14 and following paragraph, printed p.236; Theorem 17.10, printed pp.354--355. The maximal-containing-torus argument is expanded using the cited dimension and torus-coordinate statements."
+   }
+  },
+  {
+   "text": "By [lem-kun-dimension-finite-type], $\\kundim G$ is finite. For any torus subgroup $R\\subseteq G$, its split presentation identifies it with $\\operatorname{Spec}k[\\mathbf Z^r]$ by the unconditional coordinate assertion of [lem-trf-lattice-torus-coordinates-action]. The domain assertion of [lem-trf-split-lattice-torus-projection] with $K=k$ makes this coordinate ring an integral domain, also for $r=0$. In particular $R$ is reduced and irreducible: the zero ideal is prime and its closure is the entire spectrum. Its dimension is a nonnegative integer. From the strict-chain definition [def-kun-dimension], every chain in the closed subset $|R|$ is also a chain in $|G|$, so $0\\leq\\kundim R\\leq\\kundim G$.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-trf-lattice-torus-coordinates-action",
+    "lem-trf-split-lattice-torus-projection",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, printed p.75; Definition 12.14 and following paragraph, printed p.236; Theorem 17.10, printed pp.354--355. The maximal-containing-torus argument is expanded using the cited dimension and torus-coordinate statements."
+   }
+  },
+  {
+   "text": "Among all torus subgroups containing $I$, choose $S$ of greatest dimension; the family contains $I$ and its dimensions belong to the finite integer interval in step 2. We show that $S$ is maximal among all torus subgroups of $G$. Suppose $S\\subsetneq R$ for a torus $R$. By [def-weil-closed-immersion], the closed subgroup inclusion is given on the affine $R$ by an ideal $J$ of $k[R]$. If $|S|=|R|$, then $J$ belongs to every prime of $k[R]$, in particular the zero prime from step 2, so $J=0$ and the inclusion is an isomorphism, a contradiction. Hence $|S|$ is a proper closed subset of $|R|$. Append the irreducible set $|R|$ to a longest chain of nonempty irreducible closed subsets of $|S|$; all its members are closed in $|R|$. By [def-kun-dimension], this gives $\\kundim R\\geq\\kundim S+1$, contrary to the choice of $S$ because $R$ also contains $I$. Thus $S$ is a maximal torus containing $I$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, printed p.75; Definition 12.14 and following paragraph, printed p.236; Theorem 17.10, printed pp.354--355. The maximal-containing-torus argument is expanded using the cited dimension and torus-coordinate statements."
+   }
+  },
+  {
+   "text": "Both $S$ and the prescribed $T$ are now maximal tori of the same smooth connected affine finite-type group $G$ over the algebraically closed field $k$. The maximal-torus clause of [lem-sfb-borel-maximal-torus-conjugacy] gives $g\\in G(k)$ with $gSg^{-1}=T$ as subgroup schemes. Use the order $T_1=S$, $T_2=T$, so that the conjugation has exactly the orientation required in the item. Its stated equality holds after every commutative $k$-algebra extension.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, printed p.75; Definition 12.14 and following paragraph, printed p.236; Theorem 17.10, printed pp.354--355. The maximal-containing-torus argument is expanded using the cited dimension and torus-coordinate statements."
+   }
+  },
+  {
+   "text": "Conjugation $c_g(x)=g x g^{-1}$ is a group-scheme automorphism: its morphism is obtained from multiplication, inverse and the constant section $g$, and its inverse is $c_{g^{-1}}$ by the group identities in [def-sc-group-scheme]. Step 4 therefore restricts it to an isomorphism $c_g|_S:S\\xrightarrow{\\sim}T$. Compose $u:\\mathbf G_m\\to I$, the inclusion $I\\hookrightarrow S$ and $c_g|_S$ to obtain the group-scheme homomorphism $\\nu:\\mathbf G_m\\to T$. For every commutative $k$-algebra $A$ and $t\\in A^\\times$, the equality $\\mu=j u$ gives $\\nu_A(t)=g_A\\mu_A(t)g_A^{-1}$ in $G(A)$. This is the claimed factorization as morphisms and the claimed formula on all algebras. If $\\mu$ is trivial, take $g=1$ and the trivial $\\nu$ directly; rank-zero tori in the preceding argument cause no exception.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.34, printed p.75; Definition 12.14 and following paragraph, printed p.236; Theorem 17.10, printed pp.354--355. The maximal-containing-torus argument is expanded using the cited dimension and torus-coordinate statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-torus-homomorphism-image",
+  "lem-kun-dimension-finite-type",
+  "lem-trf-lattice-torus-coordinates-action",
+  "lem-trf-split-lattice-torus-projection",
+  "def-kun-dimension",
+  "def-weil-closed-immersion",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 3.34, printed p.75; Definition 12.14 and following paragraph, printed p.236; Theorem 17.10, printed pp.354--355. The maximal-containing-torus argument is expanded using the cited dimension and torus-coordinate statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every cocharacter of a smooth connected affine algebraic group over an algebraically closed field can be conjugated into any chosen maximal torus",
+   "results": "OK: 8 hits. RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.IsKilling.cartanEquivDual, LieAlgebra.IsKilling.biSup_corootSpace_eq_top, LieModule.instIsTriangularizableOfIsAlgClosed, LieAlgebra.IsKilling.coe_corootSpace_eq_span_singleton', LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.exists_isCartanSubalgebra_engel",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConj\", \"torus\"",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|[Mm]aximal[Tt]orus|conjug.*tori",
+   "results": "OK: 1 hits. Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean:418; conjugate_coe_eq for complex embeddings, not algebraic-group tori.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any torus subgroup of a finite dimensional algebraic group is contained in a maximal torus and maximal tori are conjugate",
+   "results": "OK: 8 hits. Group.conjugatesOfSet_mono, MulAction.IwasawaStructure.is_conj, frattini_le_coatom, AddSubgroup.top_addSubgroupOf, UnitAddTorus.span_mFourier_closure_eq_top, AddCommGroup.finite_of_fg_torsion, UnitAddTorus.mFourierSubalgebra_closure_eq_top, AddGroup.FG.out",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every torus subgroup S of an affine algebraic group G over an algebraically closed field is contained in a maximal torus of G",
+   "results": "OK: 8 hits. LieAlgebra.exists_isCartanSubalgebra_engel, frattini, frattini_le_coatom, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, frattini_characteristic, LieSubalgebra.ne_bot_of_isCartanSubalgebra, Sylow.is_maximal', frattini_nongenerating",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"maximal\"",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.?tor|tor.{0,30}(contain|subgroup)",
+   "results": "OK: 0 hits. ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract subgroup conjugation, Lie-algebra Cartan subalgebras, or topological tori, and do not state the algebraic-group cocharacter theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-luna-borel-attraction-charts",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.65, used in the final two paragraphs of Section 17h to trap an orbit inside an affine chart. The containment-only form of its proof avoids presupposing the Chevalley equality. Supporting input for Theorem 17.65: Theorem 17.10, printed pp.354--355 (conjugacy of maximal tori); Sections 12c--12f (the scheme-theoretic image of a cocharacter is a torus, possibly trivial).",
+   "via": [
+    "lem-sfb-luna-borel-attraction-charts",
+    "lem-sfb-chevalley-borel-intersection",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cocharacter-conjugate-maximal-torus",
+  "worker": "stage1",
+  "summary": "Statement preserved. Reused the affine homomorphism factorization, torus-image and maximal-torus conjugacy nodes. Expanded maximal containment by bounded dimension and strict chains, retaining scheme-theoretic images and all-algebra equalities. No new nodes; no project Lean attachment or Mathlib match.",
+  "blueprint": "Realizes the supporting cocharacter-conjugation input in the inherited from.place chain for direct-images proof (3), through the Luna attraction-chart argument. The latest blueprint direct-images proof (3) retains compactification and proper/open direct images. The ancestor tool returns None, as in the inherited blueprint.from.node; that field and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of the dimension of a finite-type scheme bounds dimensions of torus subgroups; no algebraic-group route is replaced."
+   },
+   {
+    "node": "lem-trf-lattice-torus-coordinates-action",
+    "why": "Only the unconditional group-algebra/Laurent-coordinate identification for a finite free lattice is used; no monoscheme hypotheses or action clause are used."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Only the integral-domain assertion for k[Z^r] is used to ensure reducedness and irreducibility of arbitrary split tori, in every characteristic."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-trf-lattice-torus-coordinates-action",
+  "lem-trf-split-lattice-torus-projection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-5dd453019",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-5dd453019 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Statement is byte-identical to the live unsplit node, so it is not weakened; one commit; no new nodes; no repair note, so the re-split rule does not apply; no SGA. Milne Thm 17.10 (pp.354-355) checked: any two maximal tori of a smooth connected G over algebraically closed k are conjugate by G(k), no reductivity. Step 1: flat-image gives mu=j∘u with u faithfully flat (def-weil-pbc-faithfully-flat-ring-map implies the exact-and-detects-zero sense the torus-image node needs), so I is a torus; t↦t^p is covered. Step 2: dim G finite (kun node, Lean-closed); only the unconditional first paragraph of lattice-coordinates is used and only the domain clause of split-lattice-projection, so tori are irreducible and reduced and 0<=dim R<=dim G. Step 3 (elementary, checked): take S of maximal dimension among tori containing I; if S⊊R then either |S|=|R|, which forces J=0 because k[R] is a domain, or appending |R| to a longest chain of |S| raises the dimension, a contradiction. Step 4: maximal-torus clause with T1=S, T2=T, orientation right. Step 5: c_g|_S∘(I⊂S)∘u=ν holds on all A-points. Tested trivial mu, trivial G, rank-0 T, char-p Frobenius cocharacter, GL_2. No duplicate found (statement search for cocharacter+conjugation and 'contained in a maximal torus'). No cycle. Batch-5: flat-tensor-preserves-injection, the lattice-coordinate identification and the k[Z^r]-domain fact are generic algebra, neither assumed statement nor a step of the trace-formula or Poincaré-duality proofs, so accepted. tool_uses (kun dimension, two trf lattice-torus nodes) accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CocharacterConjugateMaximalTorus",
+  "declaration": "AlgebraicGeometry.cocharacter_conjugate_maximal_torus",
+  "file": "lean/Sheaf/AlgebraicGeometry/CocharacterConjugateMaximalTorus.lean",
+  "statement": "theorem cocharacter_conjugate_maximal_torus {k : Type u} [Field k] [IsAlgClosed k] (G T : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (i : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (mu : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ G) : ∃ (g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X) (nu : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ T), (toUnit (StandardGroupSchemes.multiplicative k) ≫ g) * mu.hom.hom * (toUnit (StandardGroupSchemes.multiplicative k) ≫ g)⁻¹ = nu.hom.hom ≫ i.hom.hom ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ StandardGroupSchemes.multiplicative k), (toUnit (StandardGroupSchemes.affine k A) ≫ g) * (t ≫ mu.hom.hom) * (toUnit (StandardGroupSchemes.affine k A) ≫ g)⁻¹ = t ≫ nu.hom.hom ≫ i.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6338e20a9",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: k alg. closed; G affine+finite type (IsAffine, LocallyOfFiniteType, QuasiCompact), smooth, connected; T via landed IsMaximalTorus (closed ∧ IsTorus ∧ maximal; IsTorus over the algebraic closure = split since k=k̄; rank 0 allowed); mu : Grp map from recorded Laurent G_m; ∃ g : 𝟙_⟶G.X, nu : G_m⟶T with Hom-group conjugate = nu≫i as morphisms and on all A-points (A : Type u, t = unit). No extra hypotheses (no reductivity/char). stmt_deps gain only landed def nodes with lean records (allowed, acyclic); 9 dep node files byte-identical to side-live; lean.statement verbatim; report has Worker report and Second reading sections; sorry-only proof; docstrings carry the source place, blueprint id and 5 proof steps; extra plain imports are proof_dep modules (kun dimension); no duplicate node or Lean decl (grep cocharacter+maximal torus); item not bound live. No compile run since nothing changed."
+ }
+}

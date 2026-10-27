@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-rational-highest-weight-modules",
+ "kind": "statement",
+ "title": "Rational highest-weight modules and their integral weights",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra], [def-wf-semisimple-lie-algebra], and let $\\mathfrak h$ be a maximal abelian subalgebra acting diagonally in the adjoint representation. Write $R\\subset\\mathfrak h^\\vee$ for its nonzero adjoint weights, $h_\\alpha$ for its coroots (the element of $[\\mathfrak g_\\alpha,\\mathfrak g_{-\\alpha}]$ on which $\\alpha$ takes value $2$), and $\\Delta=\\{\\alpha_1,\\ldots,\\alpha_r\\}$ for a simple-root base. Set $P=\\{\\lambda\\in\\mathfrak h^\\vee:\\lambda(h_\\alpha)\\in\\mathbf Z\\text{ for every }\\alpha\\in R\\}$. The fundamental weights $\\omega_i$, defined by $\\omega_i(h_{\\alpha_j})=\\delta_{ij}$, form a $\\mathbf Z$-basis of $P$. For every $\\lambda\\in P$ with $\\lambda(h_{\\alpha_i})\\ge0$, there exist a nonzero finite-dimensional simple rational representation $L(\\lambda)$ and a vector $v_\\lambda\\ne0$ such that $$h v_\\lambda=\\lambda(h)v_\\lambda,\\qquad \\mathfrak g_\\alpha v_\\lambda=0\\quad(\\alpha\\in R^+),$$ where $R^+$ consists of the roots with nonnegative simple-root coordinates. The vectors obtained by finite products of elements of $\\mathfrak g$ acting on $v_\\lambda$ span $L(\\lambda)$ over $\\mathbf Q$. There is a direct sum decomposition into ordinary eigenspaces $$L(\\lambda)=\\bigoplus_{\\mu\\in\\Omega_\\lambda}L(\\lambda)_\\mu,\\qquad \\Omega_\\lambda\\subseteq(\\lambda-\\mathbf Z_{\\ge0}\\Delta)\\cap P,$$ with $\\Omega_\\lambda$ finite, every displayed space nonzero and $\\lambda\\in\\Omega_\\lambda$. The assertions hold over $\\mathbf Q$ itself, not merely over its algebraic closure. For $\\mathfrak g=0$ the weight $0$ gives $L(0)=\\mathbf Q$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed p.508 (split Cartan weight gradation on rational representations), p.511, proof of Corollary 23.73 (fundamental-weight choice); underlying highest-weight theorem: Serre, Complex Semisimple Lie Algebras, Chapter VII, with split rational-field form, WANTED. This input does not assert that Lemma 22.24 alone supplies fundamental weights."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-semisimple-root-decomposition] to the given maximal abelian diagonalizing $\\mathfrak h$. It supplies the reduced crystallographic root pairing for evaluation, including spanning on both sides. Apply [lem-sfb-root-base-rational-integral-spans] with $V=\\mathfrak h^\\vee$, $W=\\mathfrak h$ and the given $\\Delta$: the $h_i=h_{\\alpha_i}$ form a rational basis, and every coroot is an integral combination of them. Let $\\omega_i$ be the dual rational basis. Then $\\xi$ is integral on every coroot if and only if all $\\xi(h_i)$ are integers: one direction uses that the $h_i$ are coroots; the other evaluates on their integral combinations. Consequently $P=\\bigoplus_i\\mathbf Z\\omega_i$ by the coordinate identity $\\xi=\\sum_i\\xi(h_i)\\omega_i$. Crystallographic integrality also gives $\\mathbf Z\\Delta\\subset P$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.503 (split root system); Appendix C.21-C.26, printed pp.612-613 (simple bases); p.511 (fundamental weights); rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "Fix a dominant $\\lambda\\in P$ and write $n_i=\\lambda(h_i)\\in\\mathbf Z_{\\ge0}$. Choose normalized $e_i,f_i$ using [lem-sfb-split-semisimple-root-decomposition]. Construct the explicit rational left-ideal quotient $M=M(\\lambda)=U/I_\\lambda$ of [lem-sfb-verma-monomial-weight-basis], with generator $v$. Its monomial basis gives $v\\ne0$, the ordinary weight decomposition, finite-dimensional weight spaces, weights in $\\lambda-\\mathbf Z_{\\ge0}\\Delta$, and $M_\\lambda=\\mathbf Qv$. This construction uses $\\mathbf Q$ throughout, for all dominant integral $\\lambda$, including those on walls.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition",
+    "lem-sfb-verma-monomial-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508 and 511 (rational weight representations required for the Chevalley construction); rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "For each $i$ put $w_i=f_i^{n_i+1}v$. It has weight $\\nu_i=\\lambda-(n_i+1)\\alpha_i$. In the associative algebra acting on $M$, expand $[e_i,f_i^m]=\\sum_{a=0}^{m-1}f_i^a h_i f_i^{m-1-a}$ and use $h_if_i^bv=(n_i-2b)f_i^bv$. Summing the coefficients gives $e_if_i^mv=m(n_i-m+1)f_i^{m-1}v$, so $e_iw_i=0$. If $j\\ne i$, $[e_j,f_i]=0$ gives $e_jw_i=f_i^{n_i+1}e_jv=0$. Since the $e_j$ generate $\\mathfrak n^+$ by [lem-sfb-split-semisimple-root-decomposition], all of $\\mathfrak n^+$ kills $w_i$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508-509 (rank-one brackets); elementary commutator expansion; rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "Let $N=\\sum_i Uw_i$ and $Q=M/N$. The map $U/I_{\\nu_i}\\to M$, $u+I_{\\nu_i}\\mapsto uw_i$, is well-defined: each defining generator of the left ideal kills $w_i$ by step 3 and its weight equation. It is weight-preserving, and [lem-sfb-verma-monomial-weight-basis] therefore puts every weight of $Uw_i$ in $\\lambda-(n_i+1)\\alpha_i-\\mathbf Z_{\\ge0}\\Delta$. None equals $\\lambda$, by independence of $\\Delta$ and $n_i+1>0$. Each image is a sum of its ordinary weight spaces, hence so is $N$, and $N_\\lambda=0$. Thus $Q\\ne0$, the image $\\bar v$ survives, $Q_\\lambda=\\mathbf Q\\bar v$, and $Q$ is the direct sum of the quotients $M_\\mu/N_\\mu$. Its weight spaces are finite-dimensional and its weights remain in $\\lambda-\\mathbf Z_{\\ge0}\\Delta$.",
+   "uses": [
+    "lem-sfb-verma-monomial-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508 and 511 (rational highest-weight input); explicit quotient by singular vectors; rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "Every $e_i,f_i$ is locally nilpotent on $Q$. Here are the details of propagation from its generator. Fix $x=e_i$ or $f_i$. By [lem-sfb-split-semisimple-root-decomposition], $\\operatorname{ad}(x)$ is nilpotent on $\\mathfrak g$. It is locally nilpotent on $U$: on a fixed product $y_1\\cdots y_d$ its $k$th derivative is a sum of products of derivatives of the $y_j$ of total order $k$, and for large $k$ some factor exceeds its nilpotence bound. This extends to finite linear combinations. Moreover $x\\bar v=0$ for $x=e_i$, and $x^{n_i+1}\\bar v=0$ for $x=f_i$. For every $u\\in U$ the identity $$x^m u\\bar v=\\sum_{k=0}^m\\binom{m}{k}(\\operatorname{ad}x)^k(u)x^{m-k}\\bar v$$ follows by induction on $m$ from $xu=[x,u]+ux$. If $(\\operatorname{ad}x)^a(u)=0$ and $x^b\\bar v=0$, take $m\\ge a+b$: every summand vanishes since either $k\\ge a$ or $m-k\\ge b$. Vectors in $Q$ are of the form $u\\bar v$ because $M=U v$. This proves local nilpotence without assuming finite-dimensionality of $Q$.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508-509 (root-vector adjoint nilpotence); explicit derivation and binomial calculation; rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integrable-upper-bounded-weight-finiteness] to $Q$ with the finite set $A=\\{\\lambda\\}$. Step 4 gives the ordinary weight decomposition, finite-dimensional individual weight spaces and the upper cone bound; step 5 gives local nilpotence of every simple raising and lowering operator. The Lie algebra and normalized triples were fixed over $\\mathbf Q$ in step 2. All hypotheses of the criterion therefore hold, so $Q$ is finite-dimensional.",
+   "uses": [
+    "lem-sfb-integrable-upper-bounded-weight-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508 and 511 (finite rational highest-weight representations); integrability finiteness input; rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "Choose a proper invariant rational subspace $K\\subset Q$ of largest dimension (the zero subspace is available and dimensions lie in $\\{0,\\ldots,\\dim Q-1\\}$). Then $L=Q/K$ is nonzero and simple: any proper nonzero invariant subspace in it lifts to a proper invariant subspace strictly larger than $K$. The vector $v_\\lambda=\\bar v+K$ is nonzero since $\\bar v$ generates $Q$, and its eigenvalue and positive-root annihilation equations pass to $L$. Its iterated $\\mathfrak g$-products span $L$, since $U$ is generated as an algebra by $\\mathfrak g$. To verify the ordinary weight decomposition of this quotient, choose $h\\in\\mathfrak h$ separating the finitely many weights of $Q$. Such an $h$ exists over $\\mathbf Q$: the product of their nonzero pairwise differences is a nonzero polynomial, so it is nonzero at some rational point. Lagrange interpolation in the operator $h$ projects onto each weight space. These projections preserve $K$, whence $K=\\bigoplus_\\mu(K\\cap Q_\\mu)$ and $L=\\bigoplus_\\mu Q_\\mu/(K\\cap Q_\\mu)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508 and 511; elementary maximal-dimension quotient and spectral projectors over Q; rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  },
+  {
+   "text": "Let $\\Omega_\\lambda$ be exactly the weights whose quotient spaces in step 7 are nonzero. It is finite because the support of $Q$ is finite. Since $v_\\lambda\\ne0$, $\\lambda\\in\\Omega_\\lambda$, and every displayed eigenspace is nonzero by this choice. Steps 4 and 7 give $\\Omega_\\lambda\\subset\\lambda-\\mathbf Z_{\\ge0}\\Delta$. Step 1 gives $\\lambda\\in P$ and $\\mathbf Z\\Delta\\subset P$, so all these weights lie in $P$. Every algebra, ideal, generator and subspace in the construction was rational, proving the claimed field of definition. Finally, if $\\mathfrak g=0$, then $\\mathfrak h=0$, $R=\\Delta=\\varnothing$ and $P=0$; take $L(0)=\\mathbf Q$ with the zero action and $v_0=1$. The empty product supplies the spanning vector and the only weight is $0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.508 and 511; elementary assembly and rank-zero case; rational Verma-quotient argument supplied by Q108 (agent), underlying Serre Chapters V-VII WANTED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-verma-monomial-weight-basis",
+  "lem-sfb-integrable-upper-bounded-weight-finiteness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed pp.503,508-511, motivates the rational highest-weight input but omits its proof. Q108 supplies the Verma quotient argument; Serre, Complex Semisimple Lie Algebras, Chapters V-VII, full split-field details WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every dominant integral weight of a split semisimple rational Lie algebra is the highest weight of a finite dimensional irreducible rational representation",
+   "results": "{\"t\": \"2026-10-23T21:31:51Z\", \"tool\": \"leanfinder\", \"query\": \"Every dominant integral weight of a split semisimple rational Lie algebra is the highest weight of a finite dimensional irreducible rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsIrreducible\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\"], \"digest\": \"31575640b7daaedd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.Weight and finite_genWeightSpace_ne_bot in Mathlib/Algebra/Lie/Weights/Basic.lean (module and Weight definitions read) describe weights of an existing module. IsIrreducible in Semisimple/Defs.lean:33--46 (read) is a predicate. GeckConstruction.instIsIrreducible is one specific matrix representation, not a highest-weight existence theorem. The Loogle highestWeight hits concern Young tableaux."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verma module irreducible finite dimensional quotient for a dominant integral highest weight over the rational field",
+   "results": "{\"t\": \"2026-10-23T21:33:41Z\", \"tool\": \"leanfinder\", \"query\": \"Verma module irreducible finite dimensional quotient for a dominant integral highest weight over the rational field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsIrreducible\", \"LieModule.IsIrreducible\", \"LieModule.IsIrreducible.mk\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.nontrivial_of_isIrreducible\", \"Representation.isIrreducible_iff\", \"Representation.is_simple_module_iff_irreducible_ofModule\"], \"digest\": \"b59cc6572d5fb0fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.Weight and finite_genWeightSpace_ne_bot in Mathlib/Algebra/Lie/Weights/Basic.lean (module and Weight definitions read) describe weights of an existing module. IsIrreducible in Semisimple/Defs.lean:33--46 (read) is a predicate. GeckConstruction.instIsIrreducible is one specific matrix representation, not a highest-weight existence theorem. The Loogle highestWeight hits concern Young tableaux."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"highestWeight\"",
+   "results": "{\"t\": \"2026-10-23T21:33:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"highestWeight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SemistandardYoungTableau.highestWeight\", \"SemistandardYoungTableau.highestWeight_apply\"], \"digest\": \"67ce77560061678f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.Weight and finite_genWeightSpace_ne_bot in Mathlib/Algebra/Lie/Weights/Basic.lean (module and Weight definitions read) describe weights of an existing module. IsIrreducible in Semisimple/Defs.lean:33--46 (read) is a predicate. GeckConstruction.instIsIrreducible is one specific matrix representation, not a highest-weight existence theorem. The Loogle highestWeight hits concern Young tableaux."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieModule.Weight",
+   "results": "{\"t\": \"2026-10-23T21:34:07Z\", \"tool\": \"loogle\", \"query\": \"LieModule.Weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieModule.Weight\", \"LieModule.Weight.IsNonZero\", \"LieModule.Weight.IsZero\", \"LieModule.Weight.toFun\", \"LieModule.Weight.instFunLike\", \"LieModule.Weight.instIsEmptyOfSubsingleton\", \"LieModule.Weight.instDecidablePredIsNonZero\", \"LieModule.Weight.instFinite\"], \"digest\": \"2622c827ce7f3c10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.Weight and finite_genWeightSpace_ne_bot in Mathlib/Algebra/Lie/Weights/Basic.lean (module and Weight definitions read) describe weights of an existing module. IsIrreducible in Semisimple/Defs.lean:33--46 (read) is a predicate. GeckConstruction.instIsIrreducible is one specific matrix representation, not a highest-weight existence theorem. The Loogle highestWeight hits concern Young tableaux."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional highest weight representations of split semisimple Lie algebras over rational numbers",
+   "results": "{\"t\": \"2026-10-23T21:33:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional highest weight representations of split semisimple Lie algebras over rational numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instFintype.congr_simp\", \"LieModule.coe_genWeightSpace_of_top\", \"LieModule.Weight.instFintype\", \"instSubsingletonLieAlgebraRat\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieModule.Weight.instFinite\", \"LieModule.zero_lt_finrank_genWeightSpace\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\"], \"digest\": \"e094fc627e155371\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.Weight and finite_genWeightSpace_ne_bot in Mathlib/Algebra/Lie/Weights/Basic.lean (module and Weight definitions read) describe weights of an existing module. IsIrreducible in Semisimple/Defs.lean:33--46 (read) is a predicate. GeckConstruction.instIsIrreducible is one specific matrix representation, not a highest-weight existence theorem. The Loogle highestWeight hits concern Young tableaux."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|admissible.lattice|Serre.relation|Kostant|highest.weight|PBW",
+   "results": "{\"t\": \"2026-10-23T21:33:33Z\", \"tool\": \"grep\", \"query\": \"Chevalley|admissible.lattice|Serre.relation|Kostant|highest.weight|PBW\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Algebra/Lie/Extension.lean\"], \"digest\": \"9bd1481bfb0c1f10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule.Weight and finite_genWeightSpace_ne_bot in Mathlib/Algebra/Lie/Weights/Basic.lean (module and Weight definitions read) describe weights of an existing module. IsIrreducible in Semisimple/Defs.lean:33--46 (read) is a predicate. GeckConstruction.instIsIrreducible is one specific matrix representation, not a highest-weight existence theorem. The Loogle highestWeight hits concern Young tableaux."
+  },
+  {
+   "tool": "grep",
+   "query": "Verma|highest.weight|dominant.weight",
+   "results": "{\"t\": \"2026-10-23T22:25:12Z\", \"tool\": \"grep\", \"query\": \"Verma|highest.weight|dominant.weight\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Prod.lean\"], \"digest\": \"77da628628fe1ddd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Geck module is one particular representation; Weight.instFinite requires a Noetherian ambient module, IsIrreducible is a predicate, and highestWeight is a Young-tableau constructor. None constructs the required rational representations for arbitrary dominant weights."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominant integral highest weights admit simple representations over the rational numbers",
+   "results": "{\"t\": \"2026-10-23T22:25:12Z\", \"tool\": \"leansearch\", \"query\": \"Dominant integral highest weights admit simple representations over the rational numbers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"subsingleton_rat_module\", \"instSubsingletonLieAlgebraRat\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"Rat.numberField\", \"LieModule.instLinearWeightsOfCharZero\", \"RootPairing.instIsValuedInRatOfIsCrystallographic\"], \"digest\": \"58e4995eb2f1fbf2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Geck module is one particular representation; Weight.instFinite requires a Noetherian ambient module, IsIrreducible is a predicate, and highestWeight is a Young-tableau constructor. None constructs the required rational representations for arbitrary dominant weights."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"highestWeight\"",
+   "results": "{\"t\": \"2026-10-23T22:25:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"highestWeight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SemistandardYoungTableau.highestWeight\", \"SemistandardYoungTableau.highestWeight_apply\"], \"digest\": \"67ce77560061678f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Geck module is one particular representation; Weight.instFinite requires a Noetherian ambient module, IsIrreducible is a predicate, and highestWeight is a Young-tableau constructor. None constructs the required rational representations for arbitrary dominant weights."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional irreducible highest weight representation of a split semisimple Lie algebra over Q",
+   "results": "{\"t\": \"2026-10-23T22:25:14Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional irreducible highest weight representation of a split semisimple Lie algebra over Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsIrreducible\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieModule.IsIrreducible\", \"LieModule.Weight.instFinite\", \"LieModule.Weight.instFintype\", \"LieModule.instLinearWeightsOfCharZero\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.zero_lt_finrank_genWeightSpace\"], \"digest\": \"d3df88951782496b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Geck module is one particular representation; Weight.instFinite requires a Noetherian ambient module, IsIrreducible is a predicate, and highestWeight is a Young-tableau constructor. None constructs the required rational representations for arbitrary dominant weights."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verma module has a finite dimensional simple quotient for each dominant integral weight over a split field of characteristic zero",
+   "results": "{\"t\": \"2026-10-23T22:26:27Z\", \"tool\": \"leanfinder\", \"query\": \"Verma module has a finite dimensional simple quotient for each dominant integral weight over a split field of characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.instFinite\", \"LieModule.Weight.instFintype\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.zero_lt_finrank_genWeightSpace\", \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"RootPairing.isSimpleModule_weylGroupRootRep\"], \"digest\": \"4e378c59889dae72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Geck module is one particular representation; Weight.instFinite requires a Noetherian ambient module, IsIrreducible is a predicate, and highestWeight is a Young-tableau constructor. None constructs the required rational representations for arbitrary dominant weights."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-admissible-representation",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.508 (split Cartan weight gradation on rational representations), p.511, proof of Corollary 23.73 (fundamental-weight choice); underlying highest-weight theorem: Serre, Complex Semisimple Lie Algebras, Chapter VII, with split rational-field form, WANTED. This input does not assert that Lemma 22.24 alone supplies fundamental weights.",
+   "via": [
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-highest-weight-modules",
+  "worker": "stage1",
+  "summary": "Q108: retained the statement and its two definition dependencies; checked the live Lean source, current blueprint and existing root/representation nodes. Constructed the dominant quotient of an explicit rational Verma module, computed its singular vectors and local nilpotence, applied a conditional weight-module finiteness criterion, and took a maximal-dimension simple quotient over Q. Three statement-only prerequisites remain, each searched by two semantic phrasings, Loogle, LeanSearch and Mathlib grep. Reused the existing root-base integral-span lemma. Serre V-VII is WANTED; the assembly proof is honestly marked agent.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.508 (split Cartan weight gradation on rational representations), p.511, proof of Corollary 23.73 (fundamental-weight choice); underlying highest-weight theorem: Serre, Complex Semisimple Lie Algebras, Chapter VII, with split rational-field form, WANTED. This input does not assert that Lemma 22.24 alone supplies fundamental weights. The eight steps supply the rational highest-weight input required by the Chevalley admissible representation, within the alteration/moduli branch of the direct-image finiteness argument. The current ancestor command reports None; the existing null ancestor and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-dd4195b3f",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-dd4195b3f (reviewer sub-agent of L); spot-checked: I read the item, all eight steps and the three new statement-only nodes in full; no files changed. Statement and stmt_deps are byte-equal to the live and side-live unsplit item; there is no repair note and no parallel split. Milne iAG2017 p.503 (splitting Cartan = maximal abelian, ad diagonalizable over k) matches the hypotheses; pp.509-511 show Cor 23.73 uses highest weights without proving them, so proof_origin agent and Serre WANTED are honest; no SGA anywhere. Step 1: the root node gives a perfect evaluation pairing and a reduced crystallographic pairing, root-base with J=Δ gives the coroot basis and integral spans, hence P=⊕Zω_i and ZΔ⊂P. Step 3: I recomputed Σ(n-2(m-1-a)) = m(n-m+1), which is zero at m=n+1; [e_j,f_i]=0 and n+ generated by the e_j are in the root node. Step 4: U/I_{ν_i}→M is well defined and weight-preserving, λ is excluded by independence of Δ, so N_λ=0 and Q_λ=Qv̄. Step 5: ad x nilpotent on g → locally nilpotent derivation on U, then the binomial identity; finite-dimensionality is not assumed. Step 6: every hypothesis of the finiteness node holds with A={λ}. Step 7: maximal proper submodule by dimension; a rational separating h and Lagrange projectors split K into weight spaces. Step 8: Ω finite, λ in Ω, Ω⊂P, g=0 case handled. All three new nodes are true and none restates a clause of the item. Root decomposition: h maximal abelian forces g_0=h, so this is standard Cartan theory with rational eigenvalues. Verma: PBW, U(n^-)-free; weight η space is Qv; finite weight spaces. Finiteness: sl2 local finiteness gives integral weights with W-invariant multiplicities, and finitely many dominant μ≤η. Small cases tested: sl2, nonintegral Verma, ⊕L(n), rank 0. DAG statement search found no duplicate: chevalley-root-normalization, serre-rational-presentation, kostant-integral-pbw and simple-module-dual-highest-weight are all distinct. Each new node is self-contained, cites def-wf-*, has single-escaped TeX, five run searches each, created.item set and null blueprint ancestor. Same unit, so no tool_uses. Advisory: the root node could record LieAlgebra.IsKilling.rootSystem as mathlib_candidate; the report lists citations.json, which is only a sandbox artifact."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.RationalHighestWeightModules",
+  "declaration": "LieAlgebra.exists_rational_highestWeight_module",
+  "file": "lean/Sheaf/Algebra/Lie/RationalHighestWeightModules.lean",
+  "statement": "theorem exists_rational_highestWeight_module (g : Type u) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] [HasTrivialRadical ℚ g] (H : LieSubalgebra ℚ g) [IsLieAbelian H] (hmax : ∀ A : LieSubalgebra ℚ g, IsLieAbelian A → H ≤ A → A = H) (hsplit : (⨆ χ : Module.Dual ℚ H, (LieModule.weightSpace g (χ : H → ℚ)).toSubmodule) = ⊤) (R : Set (Module.Dual ℚ H)) (hR : ∀ α : Module.Dual ℚ H, α ∈ R ↔ α ≠ 0 ∧ LieModule.weightSpace g (α : H → ℚ) ≠ ⊥) (c : R → H) (hc : ∀ α : R, (c α : g) ∈ Submodule.span ℚ {z : g | ∃ x y : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) ∧ y ∈ LieModule.weightSpace g ((-α.1) : H → ℚ) ∧ ⁅x, y⁆ = z} ∧ α.1 (c α) = 2) (Δ : Finset R) (hbase : LinearIndependent ℚ (fun i : Δ ↦ i.1.1)) (hcoords : ∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) ∨ (∃ n : Δ → ℕ, -α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1)) (P : Submodule ℤ (Module.Dual ℚ H)) (hP : ∀ μ : Module.Dual ℚ H, μ ∈ P ↔ ∀ α : R, ∃ n : ℤ, μ (c α) = (n : ℚ)) : ∃ ω : Module.Basis Δ ℤ P, (∀ i j : Δ, (i = j → (ω i : Module.Dual ℚ H) (c j) = 1) ∧ (i ≠ j → (ω i : Module.Dual ℚ H) (c j) = 0)) ∧ ∀ lam : P, (∀ i : Δ, 0 ≤ (lam : Module.Dual ℚ H) (c i)) → ∃ (M : Type u) (_ : AddCommGroup M) (_ : Module ℚ M) (_ : LieRingModule g M) (_ : LieModule ℚ g M), FiniteDimensional ℚ M ∧ LieModule.IsIrreducible ℚ g M ∧ ∃ v : M, v ≠ 0 ∧ (∀ h : H, ⁅(h : g), v⁆ = (lam : Module.Dual ℚ H) h • v) ∧ (∀ α : R, (∃ n : Δ → ℕ, α.1 = ∑ i : Δ, (n i : ℚ) • i.1.1) → ∀ x : g, x ∈ LieModule.weightSpace g (α.1 : H → ℚ) → ⁅x, v⁆ = 0) ∧ LieSubmodule.lieSpan ℚ g ({v} : Set M) = ⊤ ∧ (∃ Ω : Finset (Module.Dual ℚ H), (lam : Module.Dual ℚ H) ∈ Ω ∧ (∀ μ ∈ Ω, μ ∈ P ∧ ∃ n : Δ → ℕ, μ = (lam : Module.Dual ℚ H) - ∑ i : Δ, (n i : ℚ) • i.1.1) ∧ (∀ μ ∈ Ω, LieModule.weightSpace M (μ : H → ℚ) ≠ ⊥) ∧ iSupIndep (fun μ : Ω ↦ (LieModule.weightSpace M (μ.1 : H → ℚ)).toSubmodule) ∧ (⨆ μ : Ω, (LieModule.weightSpace M (μ.1 : H → ℚ)).toSubmodule) = ⊤) ∧ (Subsingleton g → ∃ e : M ≃ₗ[ℚ] ℚ, e v = 1 ∧ ∀ (x : g) (m : M), ⁅x, m⁆ = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q93",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-963c4be8f",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Clause-by-clause match of Lean to node: semisimple via HasTrivialRadical; maximal abelian H with hsplit (simultaneous diagonalization over Q); R, coroots c (bracket span plus α(c α)=2) and the simple base Δ (independent, ±ℕ-coordinates) given by their defining conditions, not arbitrary; P as an integral-on-coroots ℤ-submodule; ω is a ℤ-basis of P with δ evaluations; for dominant lam: an f.d. irreducible ℚ-module with v≠0, weight equation, positive root spaces kill v, lieSpan {v}=⊤, finite Ω with lam∈Ω, Ω⊆P∩(lam−ℕΔ), nonzero ordinary weight spaces, independent with sup ⊤; g=0 gives M≃ℚ with v↦1. Edge cases g=0, lam=0, walls and universe u all covered. lean.statement matches the file signature exactly (script check). stmt_deps unchanged (2 Mathlib nodes); no definitions, only sorry; docstrings give source and blueprint plus the 8-step plan; no pro-étale substitute; no parallel landing. Not compiled because no file changed. Advisory: Basis.Defs and Dual.Defs imports may be redundant."
+ }
+}

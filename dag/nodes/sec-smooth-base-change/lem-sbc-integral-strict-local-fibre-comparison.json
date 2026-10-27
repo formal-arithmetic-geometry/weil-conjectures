@@ -2,7 +2,7 @@
  "id": "lem-sbc-integral-strict-local-fibre-comparison",
  "kind": "statement",
  "title": "Integral strict-local sections agree with geometric-fibre sections",
- "statement": "Let Λ be a commutative ring, f:X→Y integral [def-weil-finite-integral-morphism], s:Spec Omega→Y a geometric point [def-weil-geometric-point], and (g',f',f,s) Cartesian [def-weil-pbc-cartesian-square]. Let F be a sheaf of Λ-modules on X_et [def-weil-pbc-etale-sheaves]. Let A be the strict henselization at s, ρ:Spec A→Y its structural map [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map], Z=X×_Y Spec A with projection p:Z→X. There exists a module isomorphism e:Γ(Z,p^*F)≅Γ(X',g'^*F), evaluated on the identity etale object on X'. For every small-model affine pointed neighbourhood j=(V_j,v_j), r_j followed by e.hom is R_(V_j,v_j). Here r_j is the actual unit and limit-leg restriction qcqsStrictLocalSectionRestriction [lem-weil-pbc-qcqs-strict-local-module-comparison]; R is the unit for g' restricted along the lift with projections (f' followed by v_j,g') and the identity of X'. This theorem compares only sections on the two schemes and asserts no neighbourhood representative existence.",
+ "statement": "Let Λ be a commutative ring, f:X→Y integral [def-weil-finite-integral-morphism], s:Spec Ω→Y a geometric point [def-weil-geometric-point], and (g′,f′,f,s) Cartesian [def-weil-pbc-cartesian-square]. Let F be a sheaf of Λ-modules on X_et [def-weil-pbc-etale-sheaves]. Use the adopted strict localization S_(s)=Spec(strictHenselization s) with its canonical structural map strictLocalizationToBase s [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map]. Put Z=X×_Y S_(s), with projection p:Z→X. There exists a module isomorphism e:Γ(Z,p^*F)≅Γ(X′,g′^*F), evaluated on the identity etale object on X′. For every small-model affine pointed neighbourhood j=(V_j,v_j), qcqsStrictLocalSectionRestriction Λ f s F j followed by e.hom equals geometricFibreSectionRestriction Λ sq.toCommSq F V_j v_j [lem-weil-pbc-qcqs-strict-local-module-comparison]. This compares sections on two schemes and asserts no neighbourhood representative existence. This is the full-model presentation of the former small-colimit statement under the canonical colimit and structural-map comparison.",
  "stmt_deps": [
   "def-weil-pbc-etale-sheaves",
   "def-weil-finite-integral-morphism",
@@ -18,54 +18,50 @@
  },
  "proof": [
   {
-   "text": "Obtain the strict henselization local structure. Equip the geometric field with its residue-field algebra via descResidueField. The pointed-map theorem supplies the compatible ring map; construct t by Spec.map. Its pointed leg identity and the structural-map equation imply t followed by the structural map is s. Apply strictHenselizationStructuralMap_fiber_eq_closedPoint_compat from the canonical small-to-full comparison to this equation at the closed point; it puts the image of t at the closed point of the small model.",
+   "text": "Use the existing adopted proof, without changing its Lean text. The full strictHenselization has the local-ring and henselian instances from Sites.StrictHenselizationLocal and separably closed residue field. Equip Ω with the algebra from descResidueField. The full-model strictHenselizationPointedMap constructs ψ and its pointed leg equations. Define t by Spec.map of ψ followed by the separable-closure inclusion. Cofilteredness gives one representative; its pointed equation and strictHenselizationStructuralMap_eq imply t followed by strictLocalizationToBase is s. These are the adopted full-model versions of the local-structure and pointed-map facts, canonically identified with the small model by smallStrictHenselizationColimitIso.",
    "uses": [
+    "def-weil-pbc-strict-henselization-limit",
     "lem-weil-pbc-strict-henselization-local-structure",
     "lem-weil-pbc-strict-henselization-pointed-map",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "def-weil-pbc-strict-henselization-structural-map"
    ],
    "elementary": false
   },
   {
-   "text": "Construct i by pullback.lift from g′ and f′ followed by t. Its two projection equations follow by pullback.lift_fst and pullback.lift_snd. Pullback pasting yields the closed geometric fibre square. Integrality survives base change, and the integral strictly-henselian fibre restriction theorem makes the global-section map along i invertible.",
+   "text": "The adopted singleton-fibre theorem strictHenselizationStructuralMap_fiber_eq_closedPoint applied to t and the preceding equation identifies the image of the closed point with the closed point of the full strict henselization.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-closed-fiber"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct i by pullback.lift from g′ and f′ followed by t. Its two projection equations and pullback pasting identify the closed geometric fibre square. Integrality survives base change. Apply isIso_integralStrictHenselianGeometricFibreRestriction to obtain invertibility of globalSectionsUpperStarMap along i.",
    "uses": [
     "lem-sbc-integral-strict-henselian-geometric-fibre-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the required morphism r locally as the global inverse-image section map along i followed by the inverse-image composition comparison and terminal evaluation. Each factor is invertible, so take asIso r. For every small-model limit leg l apply unitSectionRestriction_comp. The graph of i followed by l agrees with geometricFibreSectionLift: the first projection follows from hi′, the first small-model projection identity and hpoint j; the second from hi and the second projection identity. Pullback hom-ext identifies the graphs. Expand unitSectionRestriction and cancel the terminal evaluation isomorphisms to get the required representative equation. This preserves the original small-model statement without the retired specialized definition or theorem.",
+   "text": "Unfold the adopted concrete strictLocalFibreRestriction: its factors are the preceding global-section map, the inverse-image composition comparison and terminal evaluation, hence all are invertible. Take asIso of this restriction. Its representative equation is exactly the adopted strictLocalFibreRestriction_compatibility, applied to t, its pointed equations, i and its two projection equations. The adopted consumer already uses this full-model formula, so the old small-model theorem and its direct graph calculation are unnecessary.",
    "uses": [
-    "lem-weil-pbc-etale-unit-section-restriction-comp",
-    "def-weil-pbc-small-strict-local-section-maps",
-    "lem-sbc-geometric-fibre-exchange-germs"
+    "lem-sbc-strict-local-fibre-restriction-compatibility"
    ],
    "elementary": false
-  },
-  {
-   "text": "Expand each former small-model qcqs restriction as unitSectionRestriction along the same small limit leg; expand the former comparison predicate as its germ equations. etaleSectionGraph is definitionally the former terminal graph. This changes only the spelling of the unit/restriction formulas and preserves every scheme, hypothesis, and conclusion.",
-   "uses": [
-    "lem-weil-pbc-etale-unit-section-restriction-comp",
-    "def-weil-pbc-small-strict-local-section-maps"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
   "lem-weil-pbc-strict-henselization-local-structure",
   "lem-weil-pbc-strict-henselization-pointed-map",
   "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+  "lem-weil-pbc-strict-henselization-closed-fiber",
   "lem-sbc-integral-strict-henselian-geometric-fibre-sections",
-  "lem-weil-pbc-etale-unit-section-restriction-comp",
-  "def-weil-pbc-small-strict-local-section-maps",
-  "lem-sbc-geometric-fibre-exchange-germs"
+  "lem-sbc-strict-local-fibre-restriction-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0EYP and 03Q9; E1 retirement, 2026-10-22: concrete local restriction and direct graph/projection calculation from the general unit-section composition theorem. The theorem signature and all existing public imports are unchanged."
+  "place": "Tags 0EYP and 03Q9; E1 listed retirement, 2026-10-22: existing adopted full-model proof in WeilConjectures.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux, preserved verbatim."
  },
  "mathlib_searches": [
   {
@@ -116,15 +112,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-universal-datum",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux",
-  "file": "lean/Sheaf/AlgebraicGeometry/IntegralFibreSectionLocalLiftAux.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IntegralFibreSectionLocalLiftAux.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_integralStrictLocalFibreComparison",
-  "statement": "theorem exists_integralStrictLocalFibreComparison (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ e : (Sheaf.Γ (pullback f (strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (strictHenselizationStructuralMap s))).obj F) ≅ ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op (Scheme.Etale.mk (𝟙 X'))), ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s), unitSectionRestriction Λ (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) F (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)) ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.smallStrictHenselizationBaseChangeMap f s j) (by change _ ≫ pullback.snd _ f = pullback.fst f (Scheme.strictHenselizationStructuralMap s) simp only [Category.assoc, Scheme.smallStrictHenselizationBaseChangeMap_snd, pullbackSymmetry_hom_comp_snd]) ≫ e.hom = geometricFibreSectionRestriction Λ sq.toCommSq F ((AffineEtale.Spec Y).obj ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2",
+  "statement": "theorem exists_integralStrictLocalFibreComparison\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ e : (Sheaf.Γ (pullback f (strictLocalizationToBase s)).smallEtaleTopology\n        (ModuleCat.{u + 1} Λ)).obj\n        ((upperStar (ModuleCat.{u + 1} Λ)\n          (pullback.fst f (strictLocalizationToBase s))).obj F) ≅\n      ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj\n        (op (Scheme.Etale.mk (𝟙 X'))),\n      ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s),\n        qcqsStrictLocalSectionRestriction Λ f s F j ≫ e.hom =\n          geometricFibreSectionRestriction Λ sq.toCommSq F\n            ((AffineEtale.Spec Y).obj\n              ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n            ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2",
   "branch": "sheaf-dag",
   "by": "P2",
   "date": "2026-10-13",
-  "note": "H2: retire the specialized Sheaf qcqs comparison; the small-model restrictions are applications of the general graph/unit construction, definitionally the former formulas."
+  "note": "E1 listed retirement, 2026-10-22: use the adopted strictLocalization / strictLocalizationToBase theorem, unchanged. The sole listed consumer is already adopted and imports this twin; its proof uses the same full-model qcqsStrictLocalSectionRestriction. The small and full presentations are canonically isomorphic by smallStrictHenselizationColimitIso and smallStrictHenselizationColimitIso_toBase. No Lean consumer retains the small-model theorem."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -139,12 +135,86 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-80776",
+  "reviewer": "C-30c91",
   "group": "E1",
   "result": "pass",
-  "landing": "20261022T022950-L-766828",
+  "landing": "20261022T032523-L-2035275",
   "kind": "interface",
-  "note": "independent cc review: Retired Sheaf StrictLocalFibreRestrictionCompatibility against retire-items row and WC twin (node lean.statement byte-equal to the twin's theorem); adapted consumer IntegralFibreSectionLocalLiftAux against live (signature/public imports identical, inlined former proof), compiled rc 0 with clean axioms; 2 node diffs against their proofs"
+  "note": "independent cc review: node lean.statement vs WeilConjectures.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux signature (byte-equal); proof steps vs WC proof; retire-items row 3025; importers of the Sheaf module (none) and citer lem-sbc-integral-fibre-section-local-lift (uses WC twin)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "E1 stage 2",
+  "old_statement": "Let Λ be a commutative ring, f:X→Y integral [def-weil-finite-integral-morphism], s:Spec Omega→Y a geometric point [def-weil-geometric-point], and (g',f',f,s) Cartesian [def-weil-pbc-cartesian-square]. Let F be a sheaf of Λ-modules on X_et [def-weil-pbc-etale-sheaves]. Let A be the strict henselization at s, ρ:Spec A→Y its structural map [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map], Z=X×_Y Spec A with projection p:Z→X. There exists a module isomorphism e:Γ(Z,p^*F)≅Γ(X',g'^*F), evaluated on the identity etale object on X'. For every small-model affine pointed neighbourhood j=(V_j,v_j), r_j followed by e.hom is R_(V_j,v_j). Here r_j is the actual unit and limit-leg restriction qcqsStrictLocalSectionRestriction [lem-weil-pbc-qcqs-strict-local-module-comparison]; R is the unit for g' restricted along the lift with projections (f' followed by v_j,g') and the identity of X'. This theorem compares only sections on the two schemes and asserts no neighbourhood representative existence.",
+  "what": "Authorized retirement from coord/retire-items.tsv replaces the obsolete small-colimit realization by the existing adopted full strictLocalization realization. The canonical colimit isomorphism intertwines both structural maps. The sole current mathematical citer is already realized by the adopted consumer and uses the full-model comparison with the full-model qcqs continuity theorem. No hypothesis or mathematical conclusion is weakened; every upstream declaration and target is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 0EYP, via Tags 03Q9, 09XK, 09ZH and 0A3I"
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-integral-fibre-section-local-lift",
+    "holds": true,
+    "note": "Already realized by WeilConjectures.AlgebraicGeometry.IntegralFibreSectionLocalLift, which imports the adopted twin privately and combines its full-model formula with exists_qcqsStrictLocalModuleComparison. No consumer adaptation is required."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Obtain the strict henselization local structure. Equip the geometric field with its residue-field algebra via descResidueField. The pointed-map theorem supplies the compatible ring map; construct t by Spec.map. Its pointed leg identity and the structural-map equation imply t followed by the structural map is s. Apply strictHenselizationStructuralMap_fiber_eq_closedPoint_compat from the canonical small-to-full comparison to this equation at the closed point; it puts the image of t at the closed point of the small model.",
+    "uses": [
+     "lem-weil-pbc-strict-henselization-local-structure",
+     "lem-weil-pbc-strict-henselization-pointed-map",
+     "def-weil-pbc-strict-henselization-structural-map",
+     "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Construct i by pullback.lift from g′ and f′ followed by t. Its two projection equations follow by pullback.lift_fst and pullback.lift_snd. Pullback pasting yields the closed geometric fibre square. Integrality survives base change, and the integral strictly-henselian fibre restriction theorem makes the global-section map along i invertible.",
+    "uses": [
+     "lem-sbc-integral-strict-henselian-geometric-fibre-sections"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Construct the required morphism r locally as the global inverse-image section map along i followed by the inverse-image composition comparison and terminal evaluation. Each factor is invertible, so take asIso r. For every small-model limit leg l apply unitSectionRestriction_comp. The graph of i followed by l agrees with geometricFibreSectionLift: the first projection follows from hi′, the first small-model projection identity and hpoint j; the second from hi and the second projection identity. Pullback hom-ext identifies the graphs. Expand unitSectionRestriction and cancel the terminal evaluation isomorphisms to get the required representative equation. This preserves the original small-model statement without the retired specialized definition or theorem.",
+    "uses": [
+     "lem-weil-pbc-etale-unit-section-restriction-comp",
+     "def-weil-pbc-small-strict-local-section-maps",
+     "lem-sbc-geometric-fibre-exchange-germs"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Expand each former small-model qcqs restriction as unitSectionRestriction along the same small limit leg; expand the former comparison predicate as its germ equations. etaleSectionGraph is definitionally the former terminal graph. This changes only the spelling of the unit/restriction formulas and preserves every scheme, hypothesis, and conclusion.",
+    "uses": [
+     "lem-weil-pbc-etale-unit-section-restriction-comp",
+     "def-weil-pbc-small-strict-local-section-maps"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-strict-henselization-local-structure",
+   "lem-weil-pbc-strict-henselization-pointed-map",
+   "def-weil-pbc-strict-henselization-structural-map",
+   "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+   "lem-sbc-integral-strict-henselian-geometric-fibre-sections",
+   "lem-weil-pbc-etale-unit-section-restriction-comp",
+   "def-weil-pbc-small-strict-local-section-maps",
+   "lem-sbc-geometric-fibre-exchange-germs"
+  ]
+ }
 }

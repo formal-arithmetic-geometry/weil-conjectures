@@ -1,0 +1,514 @@
+{
+ "id": "lem-sfb-symmetric-abel-image-geometry",
+ "kind": "statement",
+ "title": "Pointed Abel maps, their divisor images, and the universal Picard family",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], let $C/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective] of genus $g\\geq1$ [def-sc-genus], choose $P\\in C(k)$, and fix a Jacobian $J$ with its representing isomorphism [def-sc-jacobian]. There is an invertible sheaf $\\mathcal M_P$ on $C\\times_kJ$ [def-sc-invertible-module], trivial on $\\{P\\}\\times J$ and $C\\times\\{0\\}$, representing the identity of the degree-zero Picard functor. For every $k$-scheme $T$, pulling back $\\mathcal M_P$ identifies maps $T\\to J$ with isomorphism classes of fibrewise degree-zero invertible sheaves on $C\\times T$ rigidified along $P\\times T$. The morphism $f_P:C\\to J$ defined by the class $Q\\mapsto[\\mathcal O_C(Q-P)]$ is a closed immersion. For $0\\leq r\\leq g$, let $C^{(r)}$ denote the scheme of effective divisors of degree $r$ on $C$ (the Hilbert scheme of [thm-pc-hilb-curves]), and let\n$$f_P^{(r)}:C^{(r)}\\longrightarrow J,\\qquad D\\longmapsto[\\mathcal O_C(D-rP)]$$\nbe the Abel morphism [lem-sc-hilb-to-pic-morphism]. Its scheme-theoretic image $W_r$ is integral of dimension $r$, and $f_P^{(r)}:C^{(r)}\\to W_r$ is birational. In particular $W_g=J$, and $W_{g-1}$ is an effective Cartier divisor on $J$. Under the isomorphism $\\operatorname{Pic}^{r}_{C/k}\\to J$ given by tensoring with $\\mathcal O_C(-rP)$, $W_r$ is precisely the scheme-theoretic image of effective divisors of degree $r$. Divisors, their degrees and $\\mathcal O_C(D)$ are as in [def-sc-divisor].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Theorems 1.6–1.7 and Lemma 1.8, pp.88–89 (normalized universal family); §2, pp.91–93, especially Proposition 2.3 (Abel embedding); §5, p.100 and Theorem 5.1(a), p.101 (birationality onto W_r); §6, paragraph before Theorem 6.6, p.105 (W_{g-1} is a divisor)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-jacobian",
+  "def-sc-invertible-module",
+  "thm-pc-hilb-curves",
+  "lem-sc-hilb-to-pic-morphism",
+  "def-sc-divisor",
+  "def-sc-picard-functor",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "First [lem-pc-projective-proper] makes $C$ proper, [lem-sc-smooth-connected-curve-local-rings] makes it integral, and [prop-pc-xk-integral], using $P$, makes it geometrically integral. Normalize the universal Picard class. The isomorphism in [def-sc-jacobian], restricted to the rigidified description in [sk-prop-picard-pic-split], identifies $\\operatorname{Hom}_k(T,J)$ naturally with the isomorphism classes of degree-zero pairs $(\\mathcal L,\\alpha:P_T^*\\mathcal L\\simeq\\mathcal O_T)$. That result applies to this smooth proper geometrically connected curve and supplies the universal equality $\\mathcal O_T\\simeq q_*\\mathcal O_{C_T}$, including nonreduced and disconnected $T$. Evaluate the natural identification at $T=J$ and $\\mathrm{id}_J$ to obtain $(\\mathcal M_P,\\alpha_P)$. Naturality says that a map $u:T\\to J$ corresponds to $(1_C\\times u)^*(\\mathcal M_P,\\alpha_P)$; hence this is the required bijection for every $T$. The fibre at $0$ is the trivial degree-zero class because the representing isomorphism is a group isomorphism, so $\\mathcal M_P|_{C\\times\\{0\\}}\\simeq\\mathcal O_C$. This proves both normalizations and the full universal-family assertion.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "prop-pc-xk-integral",
+    "def-sc-jacobian",
+    "sk-prop-picard-pic-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Theorems 1.6–1.7 and proof of Lemma 1.8, pp.88–89."
+   }
+  },
+  {
+   "text": "Set $H_r=C^{(r)}=\\operatorname{Hilb}^r_{C/k}$. The curve is integral by [lem-sc-smooth-connected-curve-local-rings], and is geometrically integral by [prop-pc-xk-integral], applied with the given point $P$. Thus [thm-pc-hilb-curves] gives a smooth proper variety $H_r$ of dimension $r$, for every $r\\geq0$. Tensoring with $\\mathcal O_C(-rP)$ gives an isomorphism $\\operatorname{Pic}^r_{C/k}\\to J$ by [prop-pd-picard-degree-decomposition] and the chosen representing isomorphism [def-sc-jacobian]. Its inverse tensors with $\\mathcal O_C(rP)$, so it is an isomorphism on the entire functor, not just on $k$-points. Compose the divisor-to-Picard morphism of [lem-sc-hilb-to-pic-morphism] with this isomorphism to construct $a_r=f_P^{(r)}$. It sends $D$ to $[\\mathcal O_C(D-rP)]$. In comparing the Hilbert-divisor and rational-function divisor conventions, use [lem-pc-divisor-line-bundle-agrees-sc].",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "prop-pc-xk-integral",
+    "thm-pc-hilb-curves",
+    "prop-pd-picard-degree-decomposition",
+    "def-sc-jacobian",
+    "lem-sc-hilb-to-pic-morphism",
+    "lem-pc-divisor-line-bundle-agrees-sc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §1, pp.86–89, and §5 opening, p.100; Stacks Tag 0B9I for the divisor Hilbert scheme."
+   }
+  },
+  {
+   "text": "Identify $H_1$ with $C$ functorially, using the $T$-point definition of [def-pc-hilb-functor]. A finite locally free rank-one closed subscheme $D\\subset C_T$ has $D\\simeq T$: the unit $\\mathcal O_T\\to q_*\\mathcal O_D$ is a map between rank-one modules which is an isomorphism on every residue-field fibre, hence is an isomorphism locally. Consequently $D$ is the graph of a unique $T\\to C$. Conversely the graph of any $T\\to C$ is a section of the proper projection $C_T\\to T$ by [lem-weil-pbc-proper-base-change]. It is closed by [lem-weil-pbc-section-separated-closed-immersion], is finite locally free of rank one over $T$, and so is an element of the Hilbert functor. These constructions are inverse and commute with pullback. The representing property of [thm-pc-hilb-curves] therefore identifies $H_1$ with $C$, and $a_1$ with the asserted morphism $f_P:Q\\mapsto[\\mathcal O_C(Q-P)]$.",
+   "uses": [
+    "thm-pc-hilb-curves",
+    "def-pc-hilb-functor",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §2, pp.91–92: construction of the pointed Abel morphism; rank-one Hilbert-functor identification written out."
+   }
+  },
+  {
+   "text": "For a divisor $D$ of degree $r$, the $k$-points of the full fibre of $a_r$ at $a_r(D)$ are the effective divisors $E$ of degree $r$ with $\\mathcal O_C(E)\\simeq\\mathcal O_C(D)$. Indeed equality of the Abel classes cancels $-rP$ by the representing isomorphism. By [lem-sc-divisor-class-curve], this is precisely linear equivalence. Explicitly a nonzero rational-function section $s$ of $\\mathcal O_C(D)$ gives $E=D+\\operatorname{div}(s)$, and every such $E$ arises this way; two sections give the same divisor exactly when their ratio is an everywhere invertible function, hence a scalar by [lem-sc-global-functions]. Thus if $h^0(\\mathcal O_C(D))=1$, this fibre has exactly the one $k$-point $D$. It has only that underlying point: it is of finite type over $k$, its closed points are $k$-points by [lem-weil-pbc-closed-point-residue-field-base], and [lem-sc-lft-over-field-jacobson-space] makes closed points dense in every closed subset. The exact sequence of [lem-sfb-abel-differential-boundary] also shows that $(\\mathrm da_r)_D$ is injective when $h^0(\\mathcal O_C(D))=1$.",
+   "uses": [
+    "def-sc-jacobian",
+    "lem-sc-divisor-class-curve",
+    "lem-sc-global-functions",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-sfb-abel-differential-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §5, p.101 (fibres are complete linear systems), Theorem 5.1(b), pp.101–103."
+   }
+  },
+  {
+   "text": "Each $a_r$ is proper by [lem-weil-pbc-proper-over-separated], since $H_r$ is proper and $J$ is separated. Let $W_r$ be its scheme-theoretic image [def-nagata-scheme-theoretic-image]. Since $H_r$ is integral, its topological image has irreducible closure. By [lem-trf-reduced-scheme-image], $W_r$ is the reduced induced scheme on that closure; it is nonempty and irreducible, and hence integral. This argument specifies the scheme structure, including for $r=0$, rather than just the effective-divisor set.",
+   "uses": [
+    "thm-pc-hilb-curves",
+    "def-sc-jacobian",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-proper-over-separated",
+    "def-nagata-scheme-theoretic-image",
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §5, pp.100–101 (closed subvariety image); scheme structure made explicit using Stacks Tag 056B."
+   }
+  },
+  {
+   "text": "Here is the local argument at any $D$ with $h^0(\\mathcal O_C(D))=1$. Put $y=a_r(D)$. Step 4 gives the singleton full fibre and an injective tangent map. The proper finite-fibre lemma [lem-trf-proper-finite-fibre-finite-near] makes $a_r$ finite after restricting to a neighbourhood of $y$. The injective tangent map gives a surjective cotangent map by [lem-sc-point-tangent-cotangent-surjective], and hence unramifiedness at $D$ by [lem-sc-rational-unramified-cotangent-criterion]; both residue fields are $k$. By [lem-trf-unramified-locus-base-change] choose an unramified open $O$ in the original $H_r$ containing $D$. Intersect the finite neighbourhood with the complement of the closed image $a_r(H_r\\setminus O)$ under the original proper morphism. This does not remove $y$, since its entire fibre is $D$, and the restricted finite map is now everywhere unramified. Apply [lem-weil-pbc-finite-unramified-one-point-closed]: the remaining hypotheses are the same singleton fibre and the identity extension $k/k$, which is purely inseparable. It gives an open neighbourhood $V$ of $y$ such that $a_r^{-1}(V)\\to V$ is a closed immersion.",
+   "uses": [
+    "lem-trf-proper-finite-fibre-finite-near",
+    "lem-sc-point-tangent-cotangent-surjective",
+    "lem-sc-rational-unramified-cotangent-criterion",
+    "lem-trf-unramified-locus-base-change",
+    "lem-weil-pbc-finite-unramified-one-point-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Lemma 2.4, p.92, and proof of Theorem 5.1(a), p.102; local form: Stacks Tags 02UP, 0B2E, 0B2G, 04DG."
+   }
+  },
+  {
+   "text": "For $r=1$, [lem-sfb-small-degree-divisor-sections] says $h^0(\\mathcal O_C(Q))=1$ at every $Q\\in C(k)$. Step 6 therefore supplies closed-immersion neighbourhoods of every closed point of the image of $a_1$. The complement of the image is open, since $a_1$ is proper, and the inverse image there is empty. These opens cover $J$: their complement is closed, and if nonempty it would contain a closed point, by [lem-sc-lft-over-field-jacobson-space], contrary to their construction (closed fibre points are rational by [lem-weil-pbc-closed-point-residue-field-base]). Now [lem-weil-pbc-closed-finite-etale-zariski-local] implies $a_1$ is a closed immersion. Via Step 3 this is the required closed immersion $f_P:C\\hookrightarrow J$.",
+   "uses": [
+    "lem-sfb-small-degree-divisor-sections",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Proposition 2.3 and Lemma 2.4, pp.92–93."
+   }
+  },
+  {
+   "text": "For each $0\\leq r\\leq g$, choose $D$ with $h^0(\\mathcal O_C(D))=1$ by [lem-sfb-small-degree-divisor-sections]. The open $V$ in Step 6 meets $W_r$, and [lemma-nagata-scheme-image-restrict-open] identifies the scheme-theoretic image of $a_r^{-1}(V)\\to V$ with $W_r\\cap V$. Since this restricted morphism is a closed immersion, it identifies its source with its scheme-theoretic image: on affine opens both are the quotient by the kernel of the same surjection. Thus $a_r$ identifies nonempty open subschemes of the integral schemes $H_r$ and $W_r$, proving birationality. By [lem-sc-dimension-locally-algebraic] nonempty opens of each integral variety have its dimension, so $\\dim W_r=\\dim H_r=r$. For $r=0$ the chosen divisor is the zero divisor and the same argument gives the reduced point $W_0=\\{0\\}$; no positive-degree assertion was used.",
+   "uses": [
+    "lem-sfb-small-degree-divisor-sections",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lem-sc-dimension-locally-algebraic",
+    "thm-pc-hilb-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Lemma 5.2 and Theorem 5.1(a), pp.101–103; includes the zero-divisor endpoint."
+   }
+  },
+  {
+   "text": "For $r=g$, [lem-sc-hilb-to-pic-surjective] says that $H_g\\to\\operatorname{Pic}^g_{C/k}$ is surjective. Composing with the isomorphism of Step 2 makes $a_g$ surjective. The scheme $J$ is regular by [lem-weil-pbc-smooth-scheme-over-field-regular], since it is an abelian variety [def-sc-jacobian, def-sc-abelian-variety], and integral by [lem-sc-regular-connected-integral]. By [lem-trf-reduced-scheme-image] the scheme image of the reduced source $H_g$ is therefore all of $J$, not a thickening of it. Hence $W_g=J$.",
+   "uses": [
+    "lem-sc-hilb-to-pic-surjective",
+    "def-sc-jacobian",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Theorem 5.1(a), p.101; Stacks divisor-to-Picard surjectivity for degree g."
+   }
+  },
+  {
+   "text": "Finally $J$ is an abelian variety of dimension $g$ [def-sc-jacobian, def-sc-abelian-variety], and Step 9 shows that it is regular and integral; it is locally Noetherian by [lem-weil-pbc-smooth-scheme-over-field-regular]. Step 5 makes $W_{g-1}$ an integral closed subscheme of $J$; let $\\xi$ be its generic point. Step 8 gives $\\dim W_{g-1}=g-1$. By [lem-sc-scheme-stalk-dimension-generalization-chains], $\\dim\\mathcal O_{J,\\xi}$ is the supremum of the lengths of chains $W_{g-1}=Z_0\\subsetneq Z_1\\subsetneq\\cdots$ of irreducible closed subsets of $J$. It is at least $1$: $W_{g-1}\\neq J$, since their dimensions $g-1<g$ differ, and $W_{g-1}\\subsetneq J$ is such a chain. It is at most $1$. Take a chain of irreducible closed subsets of $W_{g-1}$ of length $g-1$ [def-kun-topological-krull-dimension]. Its top member is $W_{g-1}$ itself, since otherwise appending the irreducible closed set $W_{g-1}$ would give a chain of length $g$ in $W_{g-1}$. Its members are closed in $J$. If there were a chain $W_{g-1}\\subsetneq Z_1\\subsetneq Z_2$ in $J$, appending $Z_1,Z_2$ would give a chain of length $g+1$ in $J$, contrary to $\\dim J=g$. Hence $\\dim\\mathcal O_{J,\\xi}=1$. Now apply [lem-per-regular-prime-divisor-local-equations] to the integral, regular, locally Noetherian scheme $J$ and the integral closed subscheme $W_{g-1}$ whose generic point has one-dimensional local ring. It shows that the ideal of $W_{g-1}$ is an effective Cartier ideal [def-nagata-effective-cartier-ideal], so $W_{g-1}$ is an effective Cartier divisor on $J$. In genus one this says exactly that the reduced origin $W_0$ is Cartier on the smooth curve $J$. For any $r$, the final identification with the effective-divisor image in $\\operatorname{Pic}^r$ follows on schemes from Step 2: its isomorphism with $J$ takes the Abel morphism to $a_r$, and the smallest closed subscheme through which a morphism factors is carried to the smallest such closed subscheme by an isomorphism.",
+   "uses": [
+    "def-sc-jacobian",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension",
+    "lem-per-regular-prime-divisor-local-equations",
+    "def-nagata-effective-cartier-ideal",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §6, paragraph before Theorem 6.6, p.105; Stacks Tag 0BXH for the Cartier upgrade."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "prop-pc-xk-integral",
+  "def-sc-jacobian",
+  "sk-prop-picard-pic-split",
+  "thm-pc-hilb-curves",
+  "prop-pd-picard-degree-decomposition",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-pc-divisor-line-bundle-agrees-sc",
+  "def-pc-hilb-functor",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-global-functions",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-abel-differential-boundary",
+  "def-sc-abelian-variety",
+  "lem-weil-pbc-proper-over-separated",
+  "def-nagata-scheme-theoretic-image",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-sc-point-tangent-cotangent-surjective",
+  "lem-sc-rational-unramified-cotangent-criterion",
+  "lem-trf-unramified-locus-base-change",
+  "lem-weil-pbc-finite-unramified-one-point-closed",
+  "lem-sfb-small-degree-divisor-sections",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-hilb-to-pic-surjective",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-per-regular-prime-divisor-local-equations",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Lemma 1.8, Proposition 2.3 and Lemma 2.4, Theorem 5.1(a),(b) and Lemma 5.2, and §6 before Theorem 6.6; scheme-theoretic refinements via the cited Stacks results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth projective curve the Abel map from the rth symmetric power to the Jacobian is birational onto its image for r at most the genus",
+   "results": "8 hits; actual top results: WeierstrassCurve.Jacobian.PointClass, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply, WeierstrassCurve.Jacobian.NonsingularLift, WeierstrassCurve.Jacobian.toAffine, WeierstrassCurve.Jacobian.Point.fromAffine_some, WeierstrassCurve.Jacobian.Point.toAffine_of_equiv, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv, WeierstrassCurve.Jacobian.comp_equiv_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree genus minus one effective divisor locus in the Picard variety is an integral Cartier divisor and the normalized universal Picard line bundle restricts to O(Q-P)",
+   "results": "8 hits; actual top results: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, WeierstrassCurve.natDegree_preΨ', CommRing.relPic, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Submodule.unitsQuotEquivRelPic_apply_coe, WeierstrassCurve.preΨ'_four",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "0 hits; actual top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*power|Abel.?Jacobi|theta.*divisor|Picard.*scheme",
+   "results": "25 hits; actual top results: Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean, Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean, Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean, Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean, Mathlib/LinearAlgebra/TensorPower/Symmetric.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|Poincare|Poincaré|AbelianVariety|theta.*divisor",
+   "results": "3 hits; actual top results: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abel map from symmetric powers of a smooth projective curve to its Jacobian birational onto its image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] → (W : WeierstrassCurve.Jacobian F) → [inst_1 : DecidableEq F] → W.Point ≃+ W.toAffine.Point\", \"doc\": \"For a Weierstrass curve $ W $ over a field $ F $ with decidable equality, this defines an additive equivalence between the Jacobian points $ W.\\text{Point} $ and the affine points $ W.\\text{toAffine}.\\te\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] (W : WeierstrassCurve.Jacobian F) [inst_1 : DecidableEq F] (P : W.Point),\\n  (WeierstrassCurve.Jacobian.Point.toAffineAddEquiv W) P = P.toAffineLift\", \"doc\": \"For a Weierstrass curve $ W $ over a field $ F $ with decidable equality, the additive equivalence between the Jacobian points $ W.\\\\text{Point} $ and the affine points $ W.\\\\text{toAffine}.\\\\text{Point}\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.toAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve.Jacobian R → WeierstrassCurve.Affine R\", \"doc\": \"The function that maps a Jacobian of a Weierstrass curve over $ R $ to itself as an affine Weierstrass curve.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.toAffineLift_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Jacobian F} {P : Fin 3 → F} (hP : W.NonsingularLift ⟦P⟧),\\n  { point := ⟦P⟧, nonsingular := hP }.toAffineLift = WeierstrassCurve.Jacobian.Point.toAffine W P\", \"doc\": \"For a projective point $ P $ on the Jacobian of a Weierstrass curve over a field $ F $ with a nonsingular lift, the affine point obtained via the $ \\\\text{toAffineLift} $ function is equal to the affin\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P =\\n    match P with\\n    | WeierstrassCurve.Affine.Point.zero => 0\\n    | WeierstrassCurve.Affine.Point.some h =>\\n      Additive.ofMul (ClassGroup.mk (Weiers\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The type `PointClass` represents the quotient of the set of functions from the 3-element type $\\\\{0,1,2\\\\}$ to a commutative ring $R$ by the equivalence relation induced by scalar multiplication with un\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.fromAffine_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} [inst_1 : Nontrivial R] {X Y : R}\\n  (h : W'.toAffine.Nonsingular X Y),\\n  WeierstrassCurve.Jacobian.Point.fromAffine (WeierstrassCurve.Affine.Point.some h) =\\n    { point := ⟦![X, Y, 1]⟧, nonsingular := ⋯ }\", \"doc\": \"For a nontrivial commutative ring $ R $, if $ (X, Y) $ is a nonsingular affine point on a Weierstrass curve $ W' $, then the Jacobian point obtained by mapping $ (X, Y) $ via the inclusion function `f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass coordinate Jacobians and symmetric powers of sets or modules do not state the Picard-scheme or arbitrary-genus Abel theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal Poincare line bundle on a pointed curve times its Jacobian represents rigidified degree zero line bundles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Jacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \": Type r\", \"doc\": \"The Jacobian of a Weierstrass curve over a given type $ R $ is defined as the Weierstrass curve itself.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.ext_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Jacobian R} {x y : W'.Point}, x = y ↔ x.point = y.point\", \"doc\": \"For any commutative ring $ R $ and Weierstrass curve $ C $ over $ R $, two points $ x $ and $ y $ on the Jacobian of $ C $ are equal if and only if their equivalence classes in the quotient of $ R^3 $\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(P : Fin 3 → R) : W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"For any point $ P $ in the Jacobian of a Weierstrass curve over a commutative ring $ R $, the point class $ [P] $ is nonsingular if and only if the representative $ P $ is nonsingular.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"[Nontrivial R] : W'.NonsingularLift ⟦![1, 1, 0]⟧\", \"doc\": \"For any nontrivial commutative ring $ R $, the zero element of the Jacobian of a Weierstrass curve, represented by the point class $ [1, 1, 0] $, is nonsingular.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.toAffineLift_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \": toAffineLift (0 : W.Point) = 0\", \"doc\": \"The affine lift map sends the zero element of the Jacobian's points to the zero element of the affine Weierstrass curve points, i.e., $\\\\text{toAffineLift}(0) = 0$.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.ext\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Jacobian R} {x y : W'.Point}, x.point = y.point → x = y\", \"doc\": \"For any commutative ring $ R $ and Weierstrass curve $ W $ over $ R $, if two points $ x $ and $ y $ on the Jacobian of $ W $ satisfy $ x.\\text{point} = y.\\text{point} $ (i.e., they define the same equi\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Jacobian R → Type r\", \"doc\": \"Given a commutative ring $ R $ and a Weierstrass curve $ C $ over $ R $, this constructs the type of points on the Jacobian of $ C $, which in this context is the curve $ C $ itself.\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.neg_smul_equiv\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"(P : Fin 3 → R) {u : R} (hu : IsUnit u) : W'.neg (u • P) ≈ W'.neg P\", \"doc\": \"Let $W'$ be the Jacobian of a Weierstrass curve over a commutative ring $R$. For any point $P$ on $W'$ and any unit $u \\\\in R^\\\\times$, the negation of the point $u \\\\cdot P$ is projectively equivalent t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass coordinate Jacobians and symmetric powers of sets or modules do not state the Picard-scheme or arbitrary-genus Abel theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass coordinate Jacobians and symmetric powers of sets or modules do not state the Picard-scheme or arbitrary-genus Abel theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Abel.?Jacobi|Poincare.*(bundle|sheaf)|symmetric.*power|theta.*divisor",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/Additive/SmallTripling.lean\", \"line\": \"166\", \"text\": \"/-- If `A` is symmetric (`A⁻¹ = A`) and has small tripling, then `A` has small powers,\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/SmallTripling.lean\", \"line\": \"172\", \"text\": \"/-- If `A` is symmetric (`-A = A`) and has small tripling, then `A` has small powers,\"}\n  {\"file\": \"Mathlib/Data/Finset/Sym.lean\", \"line\": \"14\", \"text\": \"# Symmetric powers of a finset\"}\n  {\"file\": \"Mathlib/Data/Finset/Sym.lean\", \"line\": \"16\", \"text\": \"This file defines the symmetric powers of a finset as `Finset (Sym α n)` and `Finset (Sym2 α)`.\"}\n  {\"file\": \"Mathlib/Data/Finset/Sym.lean\", \"line\": \"20\", \"text\": \"* `Finset.sym`: The symmetric power of a finset. `s.sym n` is all the multisets of cardinality `n`\"}\n  {\"file\": \"Mathlib/Data/Finset/Sym.lean\", \"line\": \"274\", \"text\": \"/-- If `a` does not belong to the finset `s`, then the `n`th symmetric power of `{a} ∪ s` is\"}\n  {\"file\": \"Mathlib/Data/Finset/Sym.lean\", \"line\": \"275\", \"text\": \"  in 1-1 correspondence with the disjoint union of the `n - i`th symmetric powers of `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"12\", \"text\": \"# Symmetric tensor power of a semimodule over a commutative semiring\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"14\", \"text\": \"We define the `ι`-indexed symmetric tensor power of `M` as the `PiTensorProduct` quotiented by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"18\", \"text\": \"`n`th symmetric tensor power of `M`, which is the symmetric tensor power indexed by `Fin n`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"22\", \"text\": \"* `SymmetricPower.module`: the symmetric tensor power is a module over `R`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorPower/Symmetric.lean\", \"line\": \"46\", \"text\": \"inductive SymmetricPower.Rel : (⨂[R] _, M) → (⨂[R] _, M) → Prop\"}\n  {\"file\": \"Mathlib/Data/Sym/Sym2.lean\", \"line\": \"20\", \"text\": \"More generally, the symmetric square is the second symmetric power\"}\n  {\"file\": \"Mathlib/Data/Sym/Sym2.lean\", \"line\": \"45\", \"text\": \"symmetric square, unordered pairs, symmetric powers\"}\n  {\"file\": \"Mathlib/Data/Sym/Sym2.lean\", \"line\": \"839\", \"text\": \"/-! ### Equivalence to the second symmetric power -/\"}\n  {\"file\": \"Mathlib/Data/Sym/Sym2.lean\", \"line\": \"902\", \"text\": \"/-- The symmetric square is equivalent to the second symmetric power. -/\"}\n  {\"file\": \"Mathlib/Data/Finsupp/Multiset.lean\", \"line\": \"240\", \"text\": \"/-- The `n`th symmetric power of a type `α` is naturally equivalent to the subtype of\"}\n  {\"file\": \"Mathlib/Data/Finsupp/Multiset.lean\", \"line\": \"256\", \"text\": \"/-- The `n`th symmetric power of a finite type `α` is naturally equivalent to the subtype of maps\"}\n  {\"file\": \"Mathlib/Data/Sym/Basic.lean\", \"line\": \"14\", \"text\": \"# Symmetric powers\"}\n  {\"file\": \"Mathlib/Data/Sym/Basic.lean\", \"line\": \"16\", \"text\": \"This file defines symmetric powers of a type.  The nth symmetric power\"}\n  {\"file\": \"Mathlib/Data/Sym/Basic.lean\", \"line\": \"28\", \"text\": \"symmetric powers\"}\n  {\"file\": \"Mathlib/Data/Sym/Basic.lean\", \"line\": \"38\", \"text\": \"/-- The nth symmetric power is n-tuples up to permutation.  We define it\"}\n  {\"file\": \"Mathlib/Data/Sym/Basic.lean\", \"line\": \"87\", \"text\": \"/-- Construct an element of the `n`th symmetric power from a multiset of cardinality `n`.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"line\": \"34\", \"text\": \"  symmetric polynomial in terms of lower-degree elementary symmetric polynomials and power sums.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/NewtonIdentities.lean\", \"line\": \"37\", \"text\": \"  in terms of lower-degree elementary symmetric polynomials and power sums.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass coordinate Jacobians and symmetric powers of sets or modules do not state the Picard-scheme or arbitrary-genus Abel theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The effective divisor locus of degree genus minus one is a Cartier divisor on the Jacobian",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ↑(WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    ↑(WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C y))\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the invertible fractional ideal $XYIdeal'$ constructed from the nonsingular condition equals the ideal generated b\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P =\\n    match P with\\n    | WeierstrassCurve.Affine.Point.zero => 0\\n    | WeierstrassCurve.Affine.Point.some h =>\\n      Additive.ofMul (ClassGroup.mk (Weiers\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass coordinate Jacobians and symmetric powers of sets or modules do not state the Picard-scheme or arbitrary-genus Abel theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family.",
+   "via": [
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-symmetric-abel-image-geometry",
+  "worker": "stage1",
+  "summary": "Constructed the normalized universal family from the fixed representing isomorphism; wrote the Abel fibre and tangent argument, local finite/unramified closed-immersion reduction, and birational open identification. Two statement-only prerequisites isolate the section-count lemma and the Abel differential calculation; the Cartier property of W_{g-1} uses the existing regular prime-divisor node after an explicit codimension-one computation (reviewer FIX). Checked r=0, r=g, g=1 and positive characteristic; retained the original statement. Re-delivery after the L promotion returns (113c1fb6, 45f2dd4d, da0b0025): the reviewer FIX of 526b387a was lost three times and is re-applied unchanged on the current DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family. Steps 1–10 supply the pointed Abel geometry used by the curve-polarized-Jacobian faithfulness input. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "sk-prop-picard-pic-split",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "thm-pc-hilb-curves",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "prop-pd-picard-degree-decomposition",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-hilb-to-pic-morphism",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-agrees-sc",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-divisor-class-curve",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-trf-proper-finite-fibre-finite-near",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-point-tangent-cotangent-surjective",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-rational-unramified-cotangent-criterion",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-trf-unramified-locus-base-change",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-unramified-one-point-closed",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-hilb-to-pic-surjective",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic Picard/divisor or scheme-geometric tool used exactly as its statement in the displayed proof steps; it supplies a prerequisite below the fixed alteration/level-structure route, which has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme-theoretic tool for the explicit rank-one Hilbert graph identification in Step 3; proper base change makes the projection separated and a section of that projection is closed."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic scheme-theoretic tool for the explicit rank-one Hilbert graph identification in Step 3; proper base change makes the projection separated and a section of that projection is closed."
+   },
+   {
+    "node": "lem-per-regular-prime-divisor-local-equations",
+    "why": "Generic commutative-algebra/scheme tool: an integral closed subscheme of codimension one in an integral regular locally Noetherian scheme has an effective Cartier ideal; used as a black box in Step 10 for W_{g-1} in J, replacing a dropped new node that was its special case."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "prop-pc-xk-integral",
+  "sk-prop-picard-pic-split",
+  "thm-pc-hilb-curves",
+  "prop-pd-picard-degree-decomposition",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-pc-divisor-line-bundle-agrees-sc",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-global-functions",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-sc-point-tangent-cotangent-surjective",
+  "lem-sc-rational-unramified-cotangent-criterion",
+  "lem-trf-unramified-locus-base-change",
+  "lem-weil-pbc-finite-unramified-one-point-closed",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-hilb-to-pic-surjective",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-per-regular-prime-divisor-local-equations"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-da0b0025f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-da0b0025f (reviewer sub-agent of L); spot-checked: This is the fourth push of this split, rebased onto base b6490c2. The three new nodes are byte-identical to the 45f2dd4d copies, and the item differs only in split_report date and summary. So the 526b/113c/45f2 FIX was lost a third time. The item is still unsplit in both live and side-live, none of the new ids exists there, and there is no repair note. I re-read the item, its ten steps and the three new statements on this head. Steps 1-9 are sound. Step 6 meets the hypotheses of 02UP, the unramified-locus lemma and 04DG (finite, unramified, singleton fibre, k/k). Step 8 gets an open isomorphism through the scheme image restricted to an open, using that a_r is qcqs. Edge cases g=1, r=0, r=g and characteristic p all check out. The differential node (Milne III 5.1(b)) and the small-degree node (Milne III 2.3, 5.2) are true, are not clauses of the item, and have no duplicate on the new base. Fault 1 (C5): lem-sfb-regular-codimension-one-cartier is a special case of lem-per-regular-prime-divisor-local-equations, so I dropped it. Step 10 now computes dim O_{J,xi}=1 by chains (lem-sc-scheme-stalk-dimension-generalization-chains) and cites the lem-per node; proof_deps equals the union of the step uses, a tool_uses entry is added, and Steps 1-9 are unchanged. Fault 2 (B3): the Picard tangent identification in the differential node now cites lem-sc-pic-tangent-space, which is added to its stmt_deps. The added nodes create no cycle. Batch-5 check: for every flagged citation, the closure contains no nt-assume, no nt-target, no trace-transport node and no theorem of sec-trace-formula or sec-poincare-duality. The trf/pod nodes it reaches are only generic lem/def scheme or algebra tools (schematically dense open, 02UP, reduced scheme image, unramified locus, UFD lemmas, ring scalar extension). So all flags are accepted. L should land this split with the FIX applied rather than re-dispatching the bare head.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SymmetricAbelImageGeometry",
+  "declaration": "AlgebraicGeometry.exists_pointedAbel_image_geometry",
+  "declarations": [
+   "AlgebraicGeometry.pointedAbelGeometricIntegrality",
+   "AlgebraicGeometry.exists_pointedAbel_image_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricAbelImageGeometry.lean",
+  "statement": "theorem exists_pointedAbel_image_geometry {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (g : ℕ) (hg : f.genus = g) (hgpos : 1 ≤ g) (P : Spec (.of k) ⟶ C) (hP : P ≫ f = 𝟙 _) (J : Over (Spec (.of k))) [GrpObj J] (hJ : @IsJacobian k _ C f _ _ _ (pointedAbelGeometricIntegrality f) J _) (eJ : (picardFunctorDegree f 0).obj.RepresentableBy J) (heJ : IsPicardZeroMul f eJ) : ∃ (M : (pullback f J.hom).Pic) (hM : M ∈ (picardSubfunctorDegree f 0).obj (op J)), M ∈ (picardFunctorNormalized f P hP).obj (op J) ∧ eJ.homEquiv (𝟙 J) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op J) ⟨M, hM⟩ ∧ Scheme.Pic.map (baseChangeMap f η[J]) M = 1 ∧ (∀ (T : Over (Spec (.of k))) (L : (pullback f T.hom).Pic), L ∈ (picardFunctorNormalized f P hP).obj (op T) → L ∈ (picardSubfunctorDegree f 0).obj (op T) → ∃! a : T ⟶ J, Scheme.Pic.map (baseChangeMap f a) M = L) ∧ ∃ (N : C.Pic), Nonempty ((fromSkeleton C.Modules).obj N.val ≅ P.ker.toModules) ∧ (∃ fP : Over.mk f ⟶ J, IsClosedImmersion fP.left ∧ ∀ (T : Over (Spec (.of k))) (Q : T ⟶ Over.mk f), ∃ (LQ : (pullback f T.hom).Pic), Nonempty ((fromSkeleton _).obj LQ.val ≅ (pullback.lift Q.left (𝟙 T.left) Q.w).ker.toModulesᵛ) ∧ ∃ hQ : LQ * Scheme.Pic.map (pullback.fst f T.hom) N ∈ (picardSubfunctorDegree f 0).obj (op T), eJ.homEquiv (Q ≫ fP) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op T) ⟨LQ * Scheme.Pic.map (pullback.fst f T.hom) N, hQ⟩) ∧ ∀ r : ℕ, r ≤ g → ∃ (H : Over (Spec (.of k))) (eH : (hilbertPresheaf f r).RepresentableBy H) (a : H ⟶ J) (τ : (picardFunctorDegree f (r : ℤ)).obj ≅ (picardFunctorDegree f 0).obj), (∀ (T : Over (Spec (.of k))) (L : (picardSubfunctorDegree f (r : ℤ)).toFunctor.obj (op T)), ∃ hL : (@id (pullback f T.hom).Pic L.val) * Scheme.Pic.map (pullback.fst f T.hom) (N ^ r) ∈ (picardSubfunctorDegree f 0).obj (op T), τ.hom.app (op T) ((toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f (r : ℤ)).toFunctor).app (op T) L) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op T) ⟨(@id (pullback f T.hom).Pic L.val) * Scheme.Pic.map (pullback.fst f T.hom) (N ^ r), hL⟩) ∧ (∀ (T : Over (Spec (.of k))) (u : T ⟶ H), ∃ (L : (pullback f T.hom).Pic) (hL : L ∈ (picardSubfunctorDegree f (r : ℤ)).obj (op T)), Nonempty ((fromSkeleton _).obj L.val ≅ (eH.homEquiv u).val.toModulesᵛ) ∧ eJ.homEquiv (u ≫ a) = τ.hom.app (op T) ((toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f (r : ℤ)).toFunctor).app (op T) ⟨L, hL⟩)) ∧ IsIntegral a.left.image ∧ topologicalKrullDim a.left.image = (r : WithBot ℕ∞) ∧ (∃ b : H.left.PartialIso a.left.image, b.iso.hom ≫ b.target.ι = b.source.ι ≫ a.left.toImage) ∧ (r = g → IsIso a.left.imageι) ∧ (r = g - 1 → a.left.ker.IsInvertible)",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6927964e",
+  "group": "NU",
+  "result": "pass",
+  "note": "I matched every node clause against the Lean. Universal M_P: degree 0, normalized along P (picardFunctorNormalized), trivial at η[J], eJ.homEquiv(𝟙 J) is its class, and for every T and every normalized degree-0 L there is ∃! a with Pic.map M = L, a full bijection. N ≅ P.ker.toModules (O(-P)). fP is a closed immersion pinned on all T-points as O(graph)⊗pr*N. For each r ≤ g: Hilbert H via eH; τ pinned on presheaf classes as tensoring by N^r; a pinned via the dual-ideal O(D) (the lem-sc-hilb-to-pic convention). Image: IsIntegral, krullDim = r, a PartialIso compatible with toImage, IsIso imageι at r=g, ker.IsInvertible at r=g-1. Hypotheses are not stronger: eJ/heJ are exactly IsJacobian.represents, and the GeometricallyIntegral helper is derived, not assumed. Edge cases g=1, r=0, r=g, empty or nonreduced T and universes are ok. lean.statement is verbatim with one sorry; only the item's lean field changed and the dep records equal side-live. Advisory: the proof-only lem-per-regular-prime-divisor-local-equations module was deleted 2026-10-20 and the worker correctly omitted its import (stage-3 note); the DivisorModule import is public but unused. No compile was needed (no FIX)."
+ }
+}

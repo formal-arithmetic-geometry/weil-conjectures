@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-almost-filtered-set-colimits",
+ "kind": "statement",
+ "title": "Almost filtered set-colimits preserve fibre products and equalizers",
+ "statement": "Use the universe convention of [def-weil-size-convention]. Let $I$ be a small category satisfying the following two conditions: (a) for arrows $a:w\\to x$ and $b:w\\to y$ there are arrows $c:x\\to z$ and $d:y\\to z$ with $c\\circ a=d\\circ b$; (b) for parallel arrows $a,b:x\\to y$ there is $c:y\\to z$ with $c\\circ a=c\\circ b$. No nonemptiness or connectedness is required. Let $\\operatorname{colim}_I:\\operatorname{Fun}(I,\\mathbf{Set})\\to\\mathbf{Set}$ be the colimit functor [def-weil-pbc-category-colimit], with sets in the chosen containing universe. Then this functor preserves fibre products and equalizers. Explicitly, for natural transformations $A\\to B\\leftarrow C$ and $f,g:A\\rightrightarrows B$, the canonical maps $\\operatorname{colim}_I(A\\times_B C)\\to(\\operatorname{colim}_I A)\\times_{\\operatorname{colim}_I B}(\\operatorname{colim}_I C)$ and $\\operatorname{colim}_I\\operatorname{Eq}(f,g)\\to\\operatorname{Eq}(\\operatorname{colim}_I f,\\operatorname{colim}_I g)$ are bijections. Here $(A\\times_B C)(i)=\\{(a,c):a\\in A(i),\\ c\\in C(i),\\ a,c\\text{ have the same image in }B(i)\\}$ and $\\operatorname{Eq}(f,g)(i)=\\{a\\in A(i):f_i(a)=g_i(a)\\}$, with induced transition maps.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002Y (lemma-almost-directed-commutes-equalizers), with the two hypotheses of Tag 002X (lemma-split-into-directed) expanded."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-almost-filtered-components] to hypotheses (a) and (b). Write $I$ as the union of its nonempty filtered full subcategories $I_j$, $j\\in J$, with every arrow staying in one $I_j$. Both $J$ and the $I_j$ are small: their objects and arrows are subsets or quotients of the corresponding small collections for $I$. When $I$ is empty, $J$ is empty.",
+   "uses": [
+    "lem-sfb-almost-filtered-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002Y, first sentence, invoking Tag 002X (lemma-split-into-directed)."
+   }
+  },
+  {
+   "text": "For every $D:I\\to\\mathbf{Set}$ put $D_j=D|_{I_j}$. There is a canonical identification $\\operatorname{colim}_I D=\\coprod_{j\\in J}\\operatorname{colim}_{I_j}D_j$: by [def-weil-pbc-category-colimit], a cocone to $T$ is precisely one cocone $D_j\\to T$ for each $j$, since no arrow crosses parts. Their unique factorizing maps assemble to a unique map from the tagged disjoint union to $T$. A natural transformation sends $(j,[d])$ to $(j,[h(d)])$, so all diagram maps preserve these tags. This also proves the identification for empty $J$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002Y, reduction to coproducts of the component colimits, expanded using the colimit universal property."
+   }
+  },
+  {
+   "text": "On each nonempty filtered $I_j$, apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to the restricted cospan and restricted parallel pair. Their finite indexing categories have respectively three and two objects and finitely many arrows. This gives canonical bijections $\\operatorname{colim}_{I_j}(A_j\\times_{B_j}C_j)\\cong\\bar A_j\\times_{\\bar B_j}\\bar C_j$ and $\\operatorname{colim}_{I_j}\\operatorname{Eq}(f_j,g_j)\\cong\\operatorname{Eq}(\\bar f_j,\\bar g_j)$, where bars denote component colimits. The comparison maps send a representative pair to its two classes and an equalizer representative to its class.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002Y, second sentence, invoking Tag 002W (lemma-directed-commutes)."
+   }
+  },
+  {
+   "text": "For the pullback, a pair $((j,a),(k,c))$ in $(\\coprod_j\\bar A_j)\\times_{\\coprod_j\\bar B_j}(\\coprod_j\\bar C_j)$ has $j=k$ because equal elements of a tagged disjoint union have equal tags. Its remaining equality is exactly equality of the images of $a,c$ in $\\bar B_j$. Thus $(j,(a,c))\\mapsto((j,a),(j,c))$ is a bijection from $\\coprod_j(\\bar A_j\\times_{\\bar B_j}\\bar C_j)$, with inverse just described. Combining steps 2 and 3 with this bijection gives the desired pullback comparison: on a representative $(a,c)\\in A(i)\\times_{B(i)}C(i)$ it sends $[(a,c)]$ to $([a],[c])$. For $J=\\varnothing$ both sides are empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002Y, displayed fibre-product identity; details of the tagged-set bijection omitted in the source, written out here."
+   }
+  },
+  {
+   "text": "For the equalizer, the images of $(j,a)\\in\\coprod_j\\bar A_j$ under the two induced maps are $(j,\\bar f_j(a))$ and $(j,\\bar g_j(a))$. They agree exactly when $\\bar f_j(a)=\\bar g_j(a)$. Therefore the equalizer is canonically $\\coprod_j\\operatorname{Eq}(\\bar f_j,\\bar g_j)$, including empty $J$. Steps 2 and 3 identify its elements with $\\operatorname{colim}_I\\operatorname{Eq}(f,g)$. On a representative the resulting bijection is $[a]\\mapsto[a]$, hence it is exactly the canonical equalizer comparison in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002Y, displayed equalizer identity; details of the tagged-set bijection omitted in the source, written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-almost-filtered-components",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002Y (lemma-almost-directed-commutes-equalizers)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsComponentwiseFiltered|componentwise.*filtered|almost.*directed",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"grep\", \"query\": \"IsComponentwiseFiltered|componentwise.*filtered|almost.*directed\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsComponentwiseFiltered\"",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsComponentwiseFiltered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits indexed by a disjoint union of filtered categories preserve pullbacks and equalizers",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"leansearch\", \"query\": \"Colimits indexed by a disjoint union of filtered categories preserve pullbacks and equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\", \"CategoryTheory.Limits.instPreservesFiniteLimitsFunctorColimOfPreservesColimitsOfShapeOfHasFiniteLimitsOfReflectsIsomorphismsForget\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\"], \"digest\": \"fdd7a9aebf48f12c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimits of sets over a category whose connected components are filtered commute with pullbacks and equalizers",
+   "results": "{\"t\": \"2026-10-23T22:35:12Z\", \"tool\": \"leanfinder\", \"query\": \"Colimits of sets over a category whose connected components are filtered commute with pullbacks and equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"Set.instPreservesColimitsOfShapeFunctorToTypesOfIsFilteredOrEmpty\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\", \"CategoryTheory.IsVanKampenColimit\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"CategoryTheory.Limits.IsIPC\"], \"digest\": \"a95b4dcb3782eef9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every span with common source has a commuting cocone and every parallel pair can be coequalized, colimits of sets preserve pullbacks and equalizers",
+   "results": "{\"t\": \"2026-10-23T22:36:07Z\", \"tool\": \"leanfinder\", \"query\": \"If every span with common source has a commuting cocone and every parallel pair can be coequalized, colimits of sets preserve pullbacks and equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BinaryCofan.isVanKampen_mk\", \"CategoryTheory.IsVanKampenColimit\", \"CategoryTheory.FinitaryExtensive.vanKampen\", \"CategoryTheory.FinitaryExtensive.van_kampen'\", \"CategoryTheory.BinaryCofan.isVanKampen_iff\", \"CategoryTheory.IsVanKampenColimit.isUniversal\", \"CategoryTheory.Limits.hasColimit_span_of_hasColimit_pair_of_hasColimit_parallelPair\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\"], \"digest\": \"68aa0f051897beda\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "colim.*[Pp]ullback|colim.*[Ee]qualizer|[Ff]iltered.*[Ff]inite[Ll]imits|[Cc]onnected.*[Ll]imits",
+   "results": "{\"t\": \"2026-10-23T22:36:43Z\", \"tool\": \"grep\", \"query\": \"colim.*[Pp]ullback|colim.*[Ee]qualizer|[Ff]iltered.*[Ff]inite[Ll]imits|[Cc]onnected.*[Ll]imits\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Equalizers.lean\"], \"digest\": \"bb2779d7b5a1dcb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colim\", \"PreservesLimit\"",
+   "results": "{\"t\": \"2026-10-23T22:36:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"colim\\\", \\\"PreservesLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.instPreservesLimitsOfShapeFunctorColim\", \"CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsColimit_inv_comp_map_π\", \"CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsColimit_inv_comp_map_π_assoc\", \"CategoryTheory.IsSifted.colim_preservesLimitsOfShape_pempty_of_isSifted\", \"CategoryTheory.IsSifted.nonempty_of_colim_preservesLimitsOfShapeFinZero\", \"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.Limits.preservesColimitsOfShape_lim_iff_preservesLimitsOfShape_colim\", \"CategoryTheory.Limits.preservesColimit_flip_lim_iff_preservesLimit_colim\"], \"digest\": \"dd60edb592ba2f5f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered_colim_preservesFiniteLimits_of_types|IsFiltered K|preservesLimitsOfShape_colim_grothendieck",
+   "results": "{\"t\": \"2026-10-23T22:37:45Z\", \"tool\": \"grep\", \"query\": \"filtered_colim_preservesFiniteLimits_of_types|IsFiltered K|preservesLimitsOfShape_colim_grothendieck\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\", \"Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean\", \"Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean\"], \"digest\": \"8497c68f5496e59c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, with IsFiltered at :159) requires a nonempty globally filtered category. The present index may be empty or disconnected. The Grothendieck-construction instance (:72 in Limits/Preserves/Grothendieck.lean) assumes limit preservation on base and fibers and does not supply the two-condition criterion. Van Kampen and sifted-colimit hits do not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered_colim_preservesFiniteLimits_of_types|preservesLimitsOfShape_colim_grothendieck|IsComponentwiseFiltered",
+   "results": "{\"t\": \"2026-10-23T22:57:13Z\", \"tool\": \"grep\", \"query\": \"filtered_colim_preservesFiniteLimits_of_types|preservesLimitsOfShape_colim_grothendieck|IsComponentwiseFiltered\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean\"], \"digest\": \"6c8478701eb945c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, IsFiltered hypothesis at :159) covers only the filtered component. Set.functorToTypes concerns subsets of a fixed set, not arbitrary diagrams of sets. The Grothendieck-construction theorem at Limits/Preserves/Grothendieck.lean:72 assumes preservation for the base already; it does not prove the present span criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits indexed by a category with commuting span completions and coequalizable parallel arrows preserve pullbacks and equalizers",
+   "results": "{\"t\": \"2026-10-23T22:57:14Z\", \"tool\": \"leansearch\", \"query\": \"Colimits indexed by a category with commuting span completions and coequalizable parallel arrows preserve pullbacks and equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\", \"CategoryTheory.Limits.preservesFiniteColimits_of_preservesCoequalizers_and_finiteCoproducts\", \"CategoryTheory.Limits.preservesCoequalizers_of_preservesPushouts_and_binaryCoproducts\", \"CategoryTheory.Limits.preservesEqualizers_of_preservesPullbacks_and_binaryProducts\", \"CategoryTheory.Limits.hasFiniteColimits_of_hasCoequalizers_and_finite_coproducts\", \"CategoryTheory.Limits.HasColimitOfHasCoproductsOfHasCoequalizers.buildColimit\", \"CategoryTheory.Limits.preservesFiniteColimits_of_preservesInitial_and_pushouts\", \"CategoryTheory.Limits.createsColimitsOfShapeOfCreatesCoequalizersAndCoproducts\"], \"digest\": \"060e2708f18cbd07\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, IsFiltered hypothesis at :159) covers only the filtered component. Set.functorToTypes concerns subsets of a fixed set, not arbitrary diagrams of sets. The Grothendieck-construction theorem at Limits/Preserves/Grothendieck.lean:72 assumes preservation for the base already; it does not prove the present span criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colim\", \"PreservesLimit\"",
+   "results": "{\"t\": \"2026-10-23T22:57:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"colim\\\", \\\"PreservesLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.instPreservesLimitsOfShapeFunctorColim\", \"CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsColimit_inv_comp_map_π\", \"CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsColimit_inv_comp_map_π_assoc\", \"CategoryTheory.IsSifted.colim_preservesLimitsOfShape_pempty_of_isSifted\", \"CategoryTheory.IsSifted.nonempty_of_colim_preservesLimitsOfShapeFinZero\", \"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.Limits.preservesColimitsOfShape_lim_iff_preservesLimitsOfShape_colim\", \"CategoryTheory.Limits.preservesColimit_flip_lim_iff_preservesLimit_colim\"], \"digest\": \"dd60edb592ba2f5f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, IsFiltered hypothesis at :159) covers only the filtered component. Set.functorToTypes concerns subsets of a fixed set, not arbitrary diagrams of sets. The Grothendieck-construction theorem at Limits/Preserves/Grothendieck.lean:72 assumes preservation for the base already; it does not prove the present span criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimits of sets over a possibly empty disjoint union of filtered categories preserve pullbacks and equalizers",
+   "results": "{\"t\": \"2026-10-23T22:57:15Z\", \"tool\": \"leanfinder\", \"query\": \"Colimits of sets over a possibly empty disjoint union of filtered categories preserve pullbacks and equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"Set.instPreservesColimitsOfShapeFunctorToTypesOfIsFilteredOrEmpty\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.Limits.instAB5Type\", \"CategoryTheory.IsFilteredOrEmpty.isSiftedOrEmpty\", \"CategoryTheory.AB5\", \"CategoryTheory.Limits.HasFilteredColimits\"], \"digest\": \"c552fdaf821e9d02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: filtered_colim_preservesFiniteLimits_of_types (Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean:338, IsFiltered hypothesis at :159) covers only the filtered component. Set.functorToTypes concerns subsets of a fixed set, not arbitrary diagrams of sets. The Grothendieck-construction theorem at Limits/Preserves/Grothendieck.lean:72 assumes preservation for the base already; it does not prove the present span criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-site-left-adjoint-connected-limits",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Ordinary big-small etale ringed comparison for algebraic spaces. Site-theoretic input to Tag 073M: the left adjoint preserves fibre products and equalizers before preservation of the terminal sheaf is checked using an atlas. General categorical input to the comma-colimit argument: Stacks Categories 002Y, with both hypotheses of 002X written explicitly.",
+   "via": [
+    "lem-sfb-site-left-adjoint-connected-limits",
+    "lem-sfb-space-big-small-ringed-comparison",
+    "lem-sfb-stack-representable-derived-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-almost-filtered-set-colimits",
+  "worker": "stage1",
+  "summary": "Read Stacks 002X/002Y; extracted only the genuine categorical filtered-component lemma, reused the existing 002W Mathlib leaf, and proved coproduct decomposition and both tagged-set comparison bijections explicitly. Kept the mathematical statement, normalized doubled TeX backslashes, and checked empty and disconnected indices.",
+  "blueprint": "Retains the inherited chain through lem-sfb-site-left-adjoint-connected-limits: its proof step 4 needs Categories 002Y. The chain supports det-thm-sf-ctf-stability-direct-images, clause (3) alteration reduction; blueprint_refs ancestor returns None because the originating created.item is Sheaf.SixFunctors.CtfStabilityDirectImages rather than a node id. No chapter or unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-a1b8363d5",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-a1b8363d5 (reviewer sub-agent of L); spot-checked: Read Stacks categories.tex lemma-split-into-directed (002X) and lemma-almost-directed-commutes-equalizers (002Y). The item statement is the same as on base and live (still unsplit there, so not superseded). It is 002Y with the 002X hypotheses (a)/(b) word for word and is not weakened; it is not a re-split note item. New node lem-sfb-almost-filtered-components: a true, self-contained, statement-only form of 002X (nonempty parts, no crossing arrows, filtered full subcategories, empty I allowed). I checked the relation x~y via a common target: reflexive, symmetric, transitive by (a), and common targets and coequalizers from (b) stay in the class. Small cases: empty I, discrete pair, cospan, and BG for a nontrivial group, which satisfies (a) but not (b), so (b) is needed. No duplicate in the DAG (grep for 002X/002Y/labels/phrases finds only the item, its citer and the new node). No Mathlib leaf (IsFilteredOrEmpty needs pairwise targets; ConnectedComponents has no filteredness; Filtered span/cospan run the other way). Steps: step 1 cites the new node correctly. Step 2 is the coproduct decomposition from the colimit universal property, with tags preserved. Step 3 applies the 002W Mathlib leaf (colimitLimitToLimitColimit_isIso; its statement includes fibre products and equalizers) to each small filtered I_j. Steps 4 and 5 are elementary tagged-union pullback and equalizer bijections, checked on representatives against the canonical maps, J=∅ included; they write out the details that Stacks omits. The citer's step 4 uses exactly the two bijections. No route departure, no tool_uses, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlmostFilteredSetColimits",
+  "declaration": "CategoryTheory.Limits.almostFiltered_colim_pullback_equalizer_bijective",
+  "file": "lean/Sheaf/CategoryTheory/AlmostFilteredSetColimits.lean",
+  "statement": "theorem almostFiltered_colim_pullback_equalizer_bijective (I : Type u) [SmallCategory I] (hspan : ∀ (w x y : I) (a : w ⟶ x) (b : w ⟶ y), ∃ (z : I) (c : x ⟶ z) (d : y ⟶ z), a ≫ c = b ≫ d) (hparallel : ∀ (x y : I) (a b : x ⟶ y), ∃ (z : I) (c : y ⟶ z), a ≫ c = b ≫ c) : (∀ (A B C : I ⥤ Type (max u v)) (f : A ⟶ B) (g : C ⟶ B), Function.Bijective (pullbackComparison (colim : (I ⥤ Type (max u v)) ⥤ _) f g)) ∧ (∀ (A B : I ⥤ Type (max u v)) (f g : A ⟶ B), Function.Bijective (equalizerComparison f g (colim : (I ⥤ Type (max u v)) ⥤ _)))",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6326ac628",
+  "group": "Q33",
+  "result": "pass",
+  "note": "The Lean statement matches the node and Stacks 002X/002Y (categories.tex 2452-2514) clause by clause. hspan is a≫c=b≫d and hparallel is a≫c=b≫c. No nonemptiness, connectedness or filteredness is assumed, so empty and disconnected index categories are covered. Both conjuncts use Mathlib's canonical pullbackComparison/equalizerComparison for colim; functor-category limits are objectwise, which matches the node's fibre product and equalizer. I is Type u small and the sets are Type (max u v), with no universe equality imposed. The citer site-left-adjoint-connected-limits uses it at v=0, which works. The node differs from side-live only in its lean record, and that statement appears verbatim in the file. This is the first delivery and it has not landed elsewhere. Docstrings give the source place, the blueprint tag and all 5 proof steps; proof is sorry only; no definitions; no pro-etale material. Mathlib has only the IsFiltered version, so there is no duplicate. The plain import is the proof_dep's module, which is allowed. Advisory: the Second reading section is the worker's disclosed self-reread under the direct-delivery policy. No file changed, so no compile was run."
+ }
+}

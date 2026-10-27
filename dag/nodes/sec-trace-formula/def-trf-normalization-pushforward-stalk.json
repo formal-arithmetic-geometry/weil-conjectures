@@ -1,0 +1,119 @@
+{
+ "id": "def-trf-normalization-pushforward-stalk",
+ "kind": "definition",
+ "title": "Normalization pushforward ring stalk and its local-ring algebra structure",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\nu:X^\\nu\\to X$ be its componentwise reduced normalization [def-weil-pbc-reduced-normalization]. For $x\\in X$, define $C_x=(\\nu_*\\mathcal O_{X^\\nu})_x$, the ring stalk at $x$ of the direct image of the structure sheaf. Equip $C_x$ with its canonical $\\mathcal O_{X,x}$-algebra structure induced by taking the stalk at $x$ of the structure-sheaf morphism $\\mathcal O_X\\to\\nu_*\\mathcal O_{X^\\nu}$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C3B, lemma-stalk-normalization, item (1) and the canonical O_{X,x}-algebra structure. The stalk and its scalar action themselves are defined for every scheme, without the finiteness hypotheses used for the integral-closure comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the pushforward of the structure sheaf of the componentwise reduced normalization, with its algebra structure over the local ring",
+   "results": "[leansearch] OK 8 hit(s); TopCat.Presheaf.algebra_section_stalk, AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapValOpensCarrierTopStructureSheaf, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.StructureSheaf.stalkAlgebra, AlgebraicGeometry.StructureSheaf.toStalk, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the pushforward structure sheaf under the normalization is an algebra over the local ring of the scheme",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapValOpensCarrierTopStructureSheaf, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPushforwardStalk|normalization.*[Ss]talk",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n normalizationPushforwardStalk lean/WeilConjectures lean/Sheaf; rg -l normalizationPushforwardStalk dag/nodes; tools/blueprint_refs.py search normalizationPushforwardStalk",
+   "results": "Only Sheaf.AlgebraicGeometry.NormalizationSingularSkyscraper defines the abbrev normalizationPushforwardStalk and instance normalizationPushforwardStalkAlgebra. No WeilConjectures match. Only the theorem node lem-trf-normalization-singular-skyscraper records these declarations; no definition node owns them. Blueprint search: 0 blueprint nodes match normalizationPushforwardStalk. Reuse the existing declarations without writing a module.",
+   "date": "2026-10-23",
+   "verdict": "existing project declaration found"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-normalization-quotient-local-criterion",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical conductor refinement, finite normalization quotient local criterion: the numerator (ν_*O_{X^ν})_x and its canonical local-ring algebra structure in the stalk comparison. This records the inherited refinement, not an assertion in the current contracting-correspondence proof.",
+   "via": [
+    "lem-trf-finite-normalization-quotient-local-criterion",
+    "lem-trf-conductor-smooth-base-change",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationSingularSkyscraper",
+  "declaration": "AlgebraicGeometry.Scheme.normalizationPushforwardStalk",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.normalizationPushforwardStalk",
+   "AlgebraicGeometry.Scheme.normalizationPushforwardStalkAlgebra"
+  ],
+  "statement": "abbrev normalizationPushforwardStalk (X : Scheme.{u}) (x : X) : Type u",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership for the existing unconditional ring-stalk abbreviation and its canonical local-ring algebra instance (same module, lines 62–71). The scalar action is ((TopCat.Presheaf.stalkFunctor CommRingCat x).map X.fromReducedNormalization.c).hom.toAlgebra. No theorem of normalization_singular_skyscraper is used; its field, curve and finiteness hypotheses are not assumptions of these definitions."
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c12ca29bb",
+  "group": "NM",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c12ca29bb",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after landing refusal of 9a79a46ba3ab (reach: def-trf-normalization-pushforward-stalk unreached and unflagged). diff -rq vs 9a79 snapshot: only the new node's import_flags [] -> [\"unreachable\"], a report repair section and the blueprint-index timestamp. Recomputed reach with dag_queue distances_from(targets+target_former) on a side-live overlay: item and new node both unreached, so the flag is correct and cannot cause 'flagged but reached'. Item has no flag in live, but live already has ~4.9k reach mismatches and the incremental check covers new nodes only. Lean file sha256 identical to 763a/9a79; lean.statement verbatim; single sorry. All dep nodes byte-identical to live; item differs from live only by the added def stmt_dep. New node's abbrev statement verbatim in live NormalizationSingularSkyscraper; no other owner. Maths re-read: hypotheses exact, SES of conductorCokernel, RingedSpace.IsCoherent (01BV), affine and stalk comparisons pinned to the actual maps, S^{-1}Q(A)=Q(A_p), criterion Subsingleton <-> IsDomain ∧ IsIntegrallyClosed; edge cases OK. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-cech-pushforward-augmented-model",
+ "kind": "statement",
+ "title": "Adjunction-normalized augmented Cech model after derived pushforward",
+ "statement": "Let $\\mathcal X,\\mathcal V$ be topoi on small sites in the fixed universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], with sheaves of commutative rings and Grothendieck abelian module categories [def-weil-sheaf-of-modules-category, def-sp-grothendieck-abelian]. Let $f:\\mathcal X\\to\\mathcal V$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] with exact module inverse image. Let $v:V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, let $v_n:\\mathcal X/(V^{\\times(n+1)})\\to\\mathcal X$ be the slice localizations with pulled-back rings [def-pur-localized-ringed-site, def-sfb-element-site-localization], and let $N$ be a module sheaf on $\\mathcal X$. Use the actual localization adjunctions, their restriction maps and units, as in [def-sfb-coherent-cech-image-model]. Write $N_n=v_n^*N$ and use ordinary K-injective derived categories [sk-def-sfb-derived-categories]. There is a coherent nonnegative cosimplicial complex $B^{n,\\bullet}$ of modules on $\\mathcal V$, together with column isomorphisms and an augmented-total isomorphism in $D(\\operatorname{Mod}(\\mathcal V))$,\n$$\\beta_n:QB^{n,\\bullet}\\xrightarrow{\\sim}C_n:=R(fv_n)_*(N_n[0]),\\qquad \\alpha:Rf_*(N[0])\\xrightarrow{\\sim}QT(B).$$\nHere $Q$ localizes complexes at quasi-isomorphisms, $T(B)^r=\\bigoplus_{n+q=r}B^{n,q}$, and the differential is $\\delta+(-1)^n d$, where $\\delta$ is the alternating coface differential [def-sp-double-complex-total]. All indices and any added resolution degrees are nonnegative. The isomorphisms $\\beta_n$ use the canonical adjunction-normalized comparisons $Rf_*Rv_{n*}\\cong R(fv_n)_*$ of [lem-sfb-derived-composition-adjunction-normalization] (for the exact left adjoints $f^*$ and $v_n^*$) and identify all cofaces and codegeneracies with the actual Cech restriction maps. The augmentation $\\alpha$ is the derived restriction augmentation; its degree-zero column is $Rf_*$ of the localization unit $N[0]\\to Rv_{0*}v_0^*(N[0])$, whose degree-zero sheaf map is restriction of sections. These comparisons and augmentations are natural in module maps $N\\to N'$ and covering refinements $W\\to V$ over $1_{\\mathcal X}$ between epimorphic covers, as maps of entire coherent augmented models, independently of compatible resolution choices. No Cartesian coefficient identification for $f$ is required beyond exactness of its module inverse image.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FC, label lemma-injective-module-trivial-cech; agent-formulated pushforward-model extension of this augmented Cech argument, extracted from returned item steps 1, 2 and the model/refinement part of step 5. Additional composition and totalization sources are documented in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-localized-ringed-site",
+  "def-sfb-element-site-localization",
+  "def-sfb-coherent-cech-image-model",
+  "sk-def-sfb-derived-categories",
+  "def-sp-double-complex-total",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-sfb-right-derived-functor",
+  "def-sfb-cech-column-restriction-complex",
+  "def-sfb-cech-derived-augmentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the column-model theorem only to the identity ringed morphism. This supplies injective resolutions, coherent image models, and K-injective restricted resolutions with their quasi-isomorphic restriction maps. Slice module categories have K-injective resolutions by the small-site Grothendieck theorem.",
+   "uses": [
+    "lem-sfb-cech-injective-column-model",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the existing strict diagram B and augmentation of the column model: in degree n its complex is the n-th column of the coherent bicomplex, and every operator is the actual image restriction followed by f.modules. Naturality of the image functor gives the complex and cosimplicial equations. Its alternating-coface bicomplex is identified with the existing coherent bicomplex by component identities; the equality of differentials is additivity of f.modules. Applying totalFunctor gives totalIso, fixed on every diagonal inclusion.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generalized exact image-augmentation theorem directly to f. Its existing sectionwise proof does not require a Cartesian ring-map assumption. It gives a normalized b that is a quasi-isomorphism. The canonical resolution comparison is an isomorphism, so alpha followed by Q(totalIso.inv) is an isomorphism. This avoids the separate finite-total derived comparison.",
+   "uses": [
+    "lem-sfb-cech-injective-image-augmentation",
+    "def-sfb-cech-derived-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each column, use the extension/map comparison and imageIso for its termwise representative. Its restricted injective resolution is K-injective. The right-derived unit on this resolution is invertible; compose it with the inverse of the right-derived image of its restriction quasi-isomorphism. Transport the localized strict cosimplicial diagram along these column isomorphisms. Their definition proves the column-unit equation. The exact localization left adjoint implies that D.push preserves K-injectives; use the canonical right-derived composition isomorphism. Its universal-unit factorization, transported from the homotopy category through quotientCompQhIso, proves the displayed composite-unit equation for every complex. This is the same source comparison used in the adjunction-normalization theorem: its universal-unit equation uniquely fixes the comparison.",
+   "uses": [
+    "lem-sfb-cech-injective-column-model",
+    "lem-weil-pbc-element-module-extension-adjunction",
+    "lem-fin-kinjective-derived-composition",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift module maps between injective resolutions. Reuse the existing private augmentation and resolution-comparison naturality lemmas via import all to obtain the total alpha square. The existing refinement laws give the refinement square, identities and composition. Any two lifts are homotopic; apply the existing signed-total lift-independence theorem, and map the same homotopy through each additive column functor. Construct coherent maps between arbitrary column presentations by conjugating the canonical strict map with the presentation natural isomorphisms. Restriction-unit naturality proves their augmentation square.",
+   "uses": [
+    "lem-sfb-cech-augmentation-normalized-naturality",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor and refinement laws give identity and composition of both total and column transitions. The existing resolution-comparison law gives localized total isomorphisms. A reverse resolution lift is inverse on each localized column because both composites are homotopic to identities.",
+   "uses": [
+    "lem-sfb-cech-augmentation-normalized-naturality",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cech-injective-column-model",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-sfb-coherent-cech-image-model",
+  "lem-sfb-cech-injective-image-augmentation",
+  "def-sfb-cech-derived-augmentation",
+  "lem-weil-pbc-element-module-extension-adjunction",
+  "lem-fin-kinjective-derived-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-cech-augmentation-normalized-naturality",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FC; direct use of the generalized exact image augmentation, normalized restricted-resolution comparisons and canonical right-derived composition units; V4 2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A ringed topos direct image with exact inverse image has a coherent nonnegative augmented Cech resolution with columns the derived composite localization pushforwards",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective, and let $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor reflecting finite products. If a presheaf $F : \\\\m\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective. If $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor preserving finite products and $F : \\\\mathcal{C}^{\\\\text\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this functor maps a sheaf $\\\\mathcal{F}$ on $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {B : Type u₄} [inst_2 : CategoryTheory.Category.{v₄, u₄} B]\\n  (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C] [inst_4 : CategoryTheory.FinitaryExtensiv\", \"doc\": \"If $\\\\mathcal{C}$ is a preregular finitary extensive category where every effective epimorphism has a pullback, and a functor $s$ preserves finite limits, then the coherent Grothendieck topology on $\\\\m\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary derived functors, finite biproducts or sheaf conditions, not the coherent augmented Cech pushforward model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical augmented Cech descent model after derived pushforward, natural in coefficient sheaves and cover refinements",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_4} {H : Type u_1} {H' : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_4} D] [CategoryTheory.Category.{v_3, u_1} H] [CategoryTheory.Category.{v_4, u_2} H'] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (RF RF' RF'' : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (RF RF' RF'' : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {H₁ : Type u_3} {H₂ : Type u_4} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_5} D] [CategoryTheory.Category.{v_4, u_3} H₁] [CategoryTheory.Category.{v_5, u_4} H₂] {W₁ : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"If `Φ` is a localizer morphism from `W₁ : MorphismProperty C₁` to\\n`W₂ : MorphismProperty C₂`, if `L₁ : C₁ ⥤ D₁` and `L₂ : C₂ ⥤ D₂` are\\nlocalization functors for `W₁` and `W₂`, if `F : C₂ ⥤ H` is a fun\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.postcomposeShiftNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF : CategoryTheory.Functor H D) {F : CategoryTheory.Functor C D} {L : CategoryTheory.Functor C H} (α : F ⟶ L.comp RF) {A : Type u_4} [A\", \"doc\": \"The natural transformation `F ⋙ shiftFunctor D a ⟶ L ⋙ RF ⋙ shiftFunctor D a`\\ndeduced from `α : F ⟶ L ⋙ RF` when `L` commutes with the shift.\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.instCompShiftFunctorPostcomposeShiftNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF : CategoryTheory.Functor H D) {F : CategoryTheory.Functor C D} {L : CategoryTheory.Functor C H} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary derived functors, finite biproducts or sheaf conditions, not the coherent augmented Cech pushforward model."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|cosimplicial).*(derived|pushforward)|(derived|pushforward).*(cech|cosimplicial)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary derived functors, finite biproducts or sheaf conditions, not the coherent augmented Cech pushforward model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Push forward an augmented first quadrant Cech complex and identify each column with the right derived functor of the composite using exact left adjoints",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.Functor.toRightDerivedZero\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, this constructs a natural transformation from $ F $ to its 0th right-derived functor $ R^\"}\n  {\"name\": \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C)\\n \", \"doc\": \"The total right derived functor of $ F $ with respect to the morphism property $ W $ is a right derived functor of $ F $ through the localization $ L $, as witnessed by the unit natural transformation\"}\n  {\"name\": \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C)\\n \", \"doc\": \"The total left derived functor of $ F $ with respect to the morphism property $ W $, constructed via the localization functor $ L $, satisfies the universal property of a left derived functor. Specifi\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, the $ n $-th right-derived natural transformation i\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a localizer morphism $\\\\Phi$ satisfies the right derivability structure condition, then the two-square diagram formed by the localization functors $L_1$, $L_2$, the morphism $\\\\Phi$, and its localize\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a morphism between localizers (functors preserving specified morphism properties), if it satisfies the conditions of a right derivability structure (compatibility with localization or derived func\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary derived functors, finite biproducts or sheaf conditions, not the coherent augmented Cech pushforward model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical augmented Cech descent model after derived pushforward, natural in coefficient sheaves and cover refinements",
+   "results": "Actual current search: 8 hits; CategoryTheory.SimplicialObject.augmentedCechNerve, CategoryTheory.CosimplicialObject.augmentedCechConerve, SheafOfModules.pushforward, SheafOfModules.pushforwardNatTrans_app_val_app_apply, CategoryTheory.Arrow.augmentedCechConerve, CategoryTheory.Arrow.augmentedCechNerve, CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp, CategoryTheory.CosimplicialObject.augmentedCechConerve_obj. Read Mathlib/AlgebraicTopology/CechNerve.lean lines 77-115: these construct the ordinary augmented nerve, not a derived module pushforward resolution. PushforwardContinuous supplies only underived pushforward.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cech-localization-unit-totalization",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 03FC, label lemma-injective-module-trivial-cech; agent-formulated pushforward-model extension of this augmented Cech argument, extracted from returned item steps 1, 2 and the model/refinement part of step 5. Additional composition and totalization sources are documented in report.md. Serves main-20261015 direct-images.proof.md paragraph (3), the formal descent input before the partial Kummer boundary-unit calculation.",
+   "via": [
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cech-pushforward-augmented-model",
+  "worker": "stage1",
+  "summary": "Reuse the existing Cartesian-coefficient Cech lemmas only for the identity of the source topos. Push the resulting injective coherent augmented model through arbitrary ringed-topos direct image using the existing finite-total derived comparison; normalize columns by the specified composition adjunction. This proves the unchanged statement without adding nodes or a Cartesian-coefficient assumption on f.",
+  "blueprint": "main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): formal Cech descent input to the open-direct-image finiteness argument, through the recorded ancestor chain. The ancestor command returns None on the live imported chain; its existing null ancestor is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic small ringed-topos slice adjunction and exact extension by zero; required to check injectivity, not a change to the finiteness route."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic exact-adjoint injectivity theorem applied to the two slice adjunctions; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module adjunction for the actual structural ring map; needed because f has no Cartesian-coefficient assumption."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic uniqueness of lifts into bounded-below injective resolutions; supplies the homotopy before applying f_* and the signed total construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-aadeb1c00",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-aadeb1c00 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, six new steps, no new nodes, no repair note so the re-split rule does not apply), every cited statement, Stacks 03FC (sites-cohomology.tex l.1816) and blueprint main-20261015 direct-images.proof.md (3). Route: the unit closure contains every cited unit, so the 4 declared tool_uses are accepted. Steps 1-3 and 5: the Cartesian-only Q71 Cech nodes are applied correctly to id_X (Cartesian holds trivially). Injectivity of v_{n*}v_n^*I^q comes from the module slice adjunction (exact j_! ⊣ j^*) plus right adjoints preserving injectives. f_* is left exact and additive as a right adjoint. The finite-total comparison is used with F=f_*, J=K, u=id, and its hypotheses hold. The degree-zero unit normalization comes from the naturality node; the (0,q) inclusions are preserved, so no sign is introduced. Step 6: the homotopy-uniqueness lemma applies (a quasi-isomorphism, J bounded below and injective, equal composites), and the signed total homotopy matches the naturality node. FIX (C4/E1): step 4 applies lem-sfb-derived-composition-adjunction-normalization, which needs all three categories Grothendieck abelian, including Mod(X/V_n). The item assumes this only for X and V, so I added a citation of the existing lem-pur-ringed-site-grothendieck-abelian (unit sk-def-sf-operations, on route) for the slice site of pairs (U,s), with one sentence in step 4 and the id in step-4 uses and proof_deps. Edge cases checked: V=1, N=0, f=id, total degrees 0 and 1. No duplicate: the rg search over the fv_n pushforward nodes finds only Cartesian variants. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CechPushforwardAugmentedModel",
+  "declaration": "CategoryTheory.CechPushforward.cech_pushforward_augmented_model",
+  "declarations": [
+   "CategoryTheory.CechPushforward.columnFunctor",
+   "CategoryTheory.CechPushforward.columnRefinement",
+   "CategoryTheory.CechPushforward.columnTransition",
+   "CategoryTheory.CechPushforward.totalTransition",
+   "CategoryTheory.CechPushforward.IsColumnDiagram",
+   "CategoryTheory.CechPushforward.AugmentedModel",
+   "CategoryTheory.CechPushforward.ModelNaturality",
+   "CategoryTheory.CechPushforward.ComparisonLaws",
+   "CategoryTheory.CechPushforward.cech_pushforward_augmented_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CechPushforwardAugmentedModel.lean",
+  "statement": "theorem cech_pushforward_augmented_model (R : Sheaf J RingCat.{u}) (S : Sheaf L RingCat.{u}) (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_hS : ∀ (U : Xᵒᵖ) (a b : S.obj.obj U), a * b = b * a) [HasDerivedCategory.{wX} (ringedSiteModules.{u} R)] [HasDerivedCategory.{wY} (ringedSiteModules.{u} S)] [IsGrothendieckAbelian.{u} (ringedSiteModules.{u} R)] [IsGrothendieckAbelian.{u} (ringedSiteModules.{u} S)] [∀ A : Sheaf J (Type u), HasDerivedCategory.{wA} (ringedSiteModules.{u} (elementRing R A))] (f : RingedToposMorphism R S) (fInverse : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) [fInverse.Additive] [PreservesFiniteLimits fInverse] [PreservesFiniteColimits fInverse] (_adj : fInverse ⊣ f.modules) (V : Sheaf J (Type u)) [Epi (terminal.from V)] (N : ringedSiteModules.{u} R) : ∃ hs : ∀ A : Sheaf J (Type u), Abelian.HasKInjectiveResolutions (ringedSiteModules.{u} (elementRing R A)), Nonempty (InjectiveResolution N) ∧ Nonempty (CoherentCechImageModel R) ∧ ∀ D : CoherentCechImageModel R, (∀ I : InjectiveResolution N, AugmentedModel (sliceResolutions := hs) f D V I) ∧ ModelNaturality f D ∧ ComparisonLaws f D",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical coherent column and signed-total models, with composition and representative comparisons fixed by derived units. The statement uses the definition-owned helpers def-sfb-cech-column-restriction-complex and def-sfb-cech-derived-augmentation; their host theorem nodes remain proof-only. ModelNaturality fixes actual column and total transitions and all augmentation squares, without a tautological existential transport clause. The column functor evaluates Cech degree before mapping the resolution. This representation preserves the mathematical assertion and all component maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7c5f07ae",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of 18089ae7 RETURN. H2/H4 fixed: theorem nodes lem-sfb-cech-injective-column-model and lem-sfb-cech-augmentation-normalized-naturality removed from stmt_deps (kept in proof_deps); new existing:true definition nodes def-sfb-cech-column-restriction-complex (cechColumnRestrictComplex) and def-sfb-cech-derived-augmentation (QN/comparison/alpha) own the plain defs, signatures verbatim from the live files, TeX matches the bodies, H12 fields complete, no other owner in the live DAG. Added def-sfb-right-derived-functor is a landed node (allowed by stage2_delivery.py) and is really used (Rf_*, unitQ). H3 fixed: tautological ∃rho removed; beta stays pinned by the unitQ/representative equation, operators by IsColumnDiagram. Item node otherwise identical to live (only lean + added stmt_deps). Independent reading: no Cartesian hypothesis on f, exact inverse image via fInverse ⊣ f.modules, alpha IsIso with totalIso fixed on every ιTotal, composition pinned by units, ModelNaturality/ComparisonLaws real (D.refinement built by whiskering the actual image functor). Edge cases N=0, f=id, V terminal, degrees 0/1 covered. One sorry, docstrings with source and blueprint, all lean.statement fields verbatim. Notes: second reading by the same worker; landed helper docstrings name the theorem node as blueprint. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8a512",
+  "group": "V4",
+  "result": "fix",
+  "landing": "20261025T164550-L-1034685",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 8a5121f0 vs passed 724afe8f (Lean and node files byte-identical; dependency modules unchanged in clone b0070fa); change records vs #check binder evidence of the earlier review"
+ }
+}

@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-smooth-normal-ascent",
+ "kind": "statement",
+ "title": "Normality ascends along smooth morphisms",
+ "statement": "Let $g:V\\to W$ be a smooth morphism of schemes [def-sbc-smooth-morphisms]. Suppose $W$ is normal, meaning that every local ring $\\mathcal O_{W,w}$ is an integrally closed domain [def-weil-pbc-normal-ring]. Then every local ring $\\mathcal O_{V,v}$ is an integrally closed domain, so $V$ is normal. No Noetherian, quasi-compactness, connectedness, or surjectivity assumption is imposed; empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 034F, lemma-normal-local-smooth, ascent part of its proof."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix $v\\in V$ and put $w=g(v)$. Apply [lem-weil-pbc-affine-opens-basis] on $W$ to choose an affine open $B$ containing $w$, then on $V$ to the open $g^{-1}(B)$ to choose an affine open $A$ with $v\\in A\\subseteq g^{-1}(B)$. Set $R=\\mathcal O_W(B)$ and $S=\\mathcal O_V(A)$, and let $\\varphi:R\\to S$ be the section map induced by $g$. These choices concern a single point and require no finite affine cover.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F, lemma-normal-local-smooth, affine ascent paragraph; choice of affine charts via Schemes Tag 01IT, lemma-basis-affine-opens."
+   }
+  },
+  {
+   "text": "Let $j_A:A\\to V$ and $j_B:B\\to W$ be the open inclusions. Since $g(A)\\subseteq B$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $g_{A,B}:A\\to B$ with $j_B\\circ g_{A,B}=g\\circ j_A$, and $g_{A,B}$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](a). The map $\\varphi:R\\to S$ of step 1 is $g^\\sharp_B:\\mathcal O_W(B)\\to\\mathcal O_V(g^{-1}(B))$ followed by restriction to $A$. Let $\\iota_A:\\operatorname{Spec}S\\to V$, $\\iota_B:\\operatorname{Spec}R\\to W$ be the canonical open immersions of [lem-weil-pbc-affine-open-spec-points], so $\\iota_A=j_A\\circ\\alpha$, $\\iota_B=j_B\\circ\\beta$ for the isomorphisms $\\alpha:\\operatorname{Spec}S\\to A$, $\\beta:\\operatorname{Spec}R\\to B$. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $\\iota_B\\circ\\operatorname{Spec}\\varphi=g\\circ\\iota_A$, so $j_B\\circ(\\beta\\circ\\operatorname{Spec}\\varphi)=j_B\\circ(g_{A,B}\\circ\\alpha)$, and the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] gives $\\beta\\circ\\operatorname{Spec}\\varphi=g_{A,B}\\circ\\alpha$. By [lem-weil-pbc-smooth-restrict-open-subschemes](c) with $u=\\alpha$, $v=\\beta$, $\\operatorname{Spec}\\varphi$ is smooth [def-sbc-smooth-morphisms], and by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] $\\varphi$ is a smooth ring map [def-weil-pbc-smooth-ring-map], the notion used by the ring theorem in step 4. This is Morphisms 01V6 (1)$\\Rightarrow$(2) for the chosen pair; the definition alone gives only some affine pair around each point, so this step is not elementary.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6, lemma-smooth-characterize, (1) implies (2), with the affine identification of More on Morphisms Tag 02H6 as recorded in lem-weil-pbc-smooth-ring-map-iff-smooth-affine."
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p\\subset R$, the affine chart $B\\simeq\\operatorname{Spec}R$ gives a point $b\\in B$ corresponding to $\\mathfrak p$. By [lem-weil-pbc-affine-open-stalk-localization], $R_{\\mathfrak p}\\simeq\\mathcal O_{W,b}$. The latter is an integrally closed domain by the hypothesis on $W$, so the former is as well: a ring isomorphism preserves nonzero products and carries monic integral equations and their solutions in fraction fields to each other. As this holds for every prime, $R$ is normal by [def-weil-pbc-normal-ring]. This is the affine-local normality argument, with no assertion that the whole ring $R$ is a domain.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F, lemma-normal-local-smooth, Zariski locality and affine ascent; Properties lemma-locally-normal, (1) implies (2), expanded using Schemes Tag 01HV, lemma-spec-sheaves."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-over-normal-ring-normal] to the smooth ring map $\\varphi:R\\to S$ from step 2 and the normal ring $R$ from step 3. Its conclusion is that $S$ is normal: every $S_{\\mathfrak q}$ for $\\mathfrak q\\in\\operatorname{Spec}S$ is an integrally closed domain. The cited theorem assumes neither Noetherianity nor injectivity, faithful flatness, or connectedness.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F, lemma-normal-local-smooth, affine ascent paragraph invoking Algebra Tag 033C, lemma-normal-goes-up."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q_v\\subset S$ correspond to $v\\in A$. By [lem-weil-pbc-affine-open-stalk-localization], $S_{\\mathfrak q_v}\\simeq\\mathcal O_{V,v}$. Step 4 and [def-weil-pbc-normal-ring] make $S_{\\mathfrak q_v}$ an integrally closed domain, and hence so is $\\mathcal O_{V,v}$, by the ring-isomorphism argument in step 3. The point $v$ was arbitrary, giving precisely the asserted normality of $V$. If $V$ is empty the assertion is vacuous; if $W$ is empty the existence of $g$ forces $V$ to be empty. Nothing requires $g$ to be surjective, the charts to be connected, or either scheme to be quasi-compact or Noetherian.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034F, lemma-normal-local-smooth, Zariski locality and affine ascent; Properties definition-normal and lemma-locally-normal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-smooth-over-normal-ring-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 034F, lemma-normal-local-smooth, affine ascent paragraph; affine-to-stalk argument expanded using Schemes lemma-basis-affine-opens (01IT) and lemma-spec-sheaves (01HV), and Properties lemma-locally-normal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of schemes with normal target has normal source",
+   "results": "{\"t\": \"2026-10-22T05:15:52Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism of schemes with normal target has normal source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"ae9f5c8b7fecb159\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, localization of integrally closed domains, or relative normalization, not ascent of normality under a smooth scheme morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsNormal",
+   "results": "{\"t\": \"2026-10-22T05:15:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsNormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsNormal'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, localization of integrally closed domains, or relative normalization, not ascent of normality under a smooth scheme morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality ascends along smooth morphisms of arbitrary schemes",
+   "results": "{\"t\": \"2026-10-22T05:15:50Z\", \"tool\": \"leansearch\", \"query\": \"Normality ascends along smooth morphisms of arbitrary schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"3b7a7ed58e80ab4e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, localization of integrally closed domains, or relative normalization, not ascent of normality under a smooth scheme morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormal|normal_goes_up|isNormal_of_smooth",
+   "results": "{\"t\": \"2026-10-22T05:15:50Z\", \"tool\": \"grep\", \"query\": \"IsNormal|normal_goes_up|isNormal_of_smooth\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, localization of integrally closed domains, or relative normalization, not ascent of normality under a smooth scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebras over a normal ring have integrally closed local domains",
+   "results": "{\"t\": \"2026-10-22T05:16:44Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth algebras over a normal ring have integrally closed local domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isIntegrallyClosed_ofLocalizationMaximal\", \"IsIntegrallyClosed.of_isLocalization_maximal\", \"Ring.instIsDomainNormalClosure\", \"isIntegrallyClosed_of_isLocalization\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsIntegrallyClosed.of_localization_maximal\", \"Ring.DimensionLEOne.integralClosure\", \"Ring.instIsDedekindDomainNormalClosure\"], \"digest\": \"bd493af9f15a8d80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, localization of integrally closed domains, or relative normalization, not ascent of normality under a smooth scheme morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]ormal|[Ii]ntegrallyClosed",
+   "results": "{\"t\": \"2026-10-22T05:16:43Z\", \"tool\": \"grep\", \"query\": \"[Nn]ormal|[Ii]ntegrallyClosed\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"99e6cbf76d1eaf9c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smoothness, localization of integrally closed domains, or relative normalization, not ascent of normality under a smooth scheme morphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(normal|IntegrallyClosed)",
+   "results": "{\"t\": \"2026-10-22T05:40:57Z\", \"tool\": \"grep\", \"query\": \"(normal|IntegrallyClosed)\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no normality or integral-closedness ascent statement in the searched smoothness source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality ascends along smooth morphisms of schemes",
+   "results": "{\"t\": \"2026-10-22T05:40:58Z\", \"tool\": \"leansearch\", \"query\": \"Normality ascends along smooth morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"6ee2881e606118ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define smoothness or concern normalization morphisms, not normality of the source of an arbitrary smooth scheme morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-22T05:40:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no usable hit: service answered unknown identifier AlgebraicGeometry.IsSmooth; absence is supported by the semantic searches and source grep instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of schemes with normal target has normal source",
+   "results": "{\"t\": \"2026-10-22T05:40:59Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism of schemes with normal target has normal source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"ae9f5c8b7fecb159\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define smoothness or concern normalization morphisms, not normality of the source of an arbitrary smooth scheme morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebras over a normal ring have integrally closed local domains",
+   "results": "{\"t\": \"2026-10-22T05:41:18Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth algebras over a normal ring have integrally closed local domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isIntegrallyClosed_ofLocalizationMaximal\", \"IsIntegrallyClosed.of_isLocalization_maximal\", \"Ring.instIsDomainNormalClosure\", \"isIntegrallyClosed_of_isLocalization\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsIntegrallyClosed.of_localization_maximal\", \"Ring.DimensionLEOne.integralClosure\", \"Ring.instIsDedekindDomainNormalClosure\"], \"digest\": \"bd493af9f15a8d80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern localization or normal closures, not smooth normality ascent"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormal|IntegrallyClosed|normal_goes_up",
+   "results": "{\"t\": \"2026-10-22T05:41:18Z\", \"tool\": \"grep\", \"query\": \"IsNormal|IntegrallyClosed|normal_goes_up\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no normality or integral-closedness ascent statement in the searched smoothness source"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-componentwise-normalization-smooth-pullback",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: normality of X times_Y Y^nu, using Stacks 034F.",
+   "via": [
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-smooth-normal-ascent",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 034F ascent into affine chart choice, the recorded affine-local smoothness criterion, normality of the base chart ring via its prime localizations, the existing full arbitrary-ring ascent theorem 033C, and the source stalk identification. Reused all nodes; no new nodes. Corrected doubled TeX escapes only; all hypotheses and edge cases retained. Checked every cited statement and logged fresh Mathlib searches.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X Lemma 2.2, persistent-node normalization prerequisite: the smooth pullback proof needs normality of X times_Y Y^nu. Steps 1-5 supply exactly the Stacks 034F ascent used there; blueprint.from.place retained, same_as searched with no matching imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "why": "The generic arbitrary-ring normality ascent theorem 033C supplies the affine algebra input explicitly invoked by 034F; this is a tool within the inherited smooth-normalization prerequisite, and the current unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Step 2 (reviewer repair) needs the affine identification of scheme smoothness with smooth ring maps (02H6 affine case) to feed the ring theorem 033C; generic tool, no node of the current unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-73dc0e6f7",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-73dc0e6f7 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes. The item is not on the drop list and not superseded (live is still unsplit with an empty proof). The statement is byte-identical to base. Against Stacks 034F (descent.tex l.4974), 033C (algebra l.46563) and 01V6 (morphisms l.7048), steps 1, 3, 4 and 5 are correct: the affine-basis leaf, R_p≅O_{W,b} via clause (c) of the affine-open stalk leaf, the Noetherian-free ring ascent 033C node, and S_q≅O_{V,v}. One fault (C2/C4): step 2 was marked elementary and cited only def-sbc-smooth-morphisms for smoothness of O(B)→O(A) on every affine pair. That definition only points to the existential affine-local definition 01V5. The all-pairs statement is Lemma 01V6 (1)⇒(2), and step 4's lemma needs smoothness in the def-weil-pbc-smooth-ring-map sense, which no cited node supplied. FIX: step 2 is rewritten after reviewed steps 1–3 of lem-weil-pbc-smooth-zero-differentials-affine-open-etale. It now uses factors-through-open-subscheme, smooth-restrict-open-subschemes (a) and (c), affine-open-spec-points, affine-opens-induced-ring-map-spec-square and smooth-ring-map-iff-smooth-affine, with elementary=false and source 01V6. proof_deps is updated, and a tool_use is declared for iff-smooth-affine alongside the accepted 033C tool use. No cycle. Edge cases (empty schemes, a non-domain normal product k×k, open immersions, non-Noetherian rings) pass. I found no duplicate node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothNormalAscent",
+  "declaration": "AlgebraicGeometry.Scheme.normalStalks_of_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothNormalAscent.lean",
+  "statement": "theorem normalStalks_of_smooth {V W : Scheme.{u}} (g : V ⟶ W) [Smooth g] (hW : ∀ w : W, IsDomain (W.presheaf.stalk w) ∧ IsIntegrallyClosed (W.presheaf.stalk w)) : ∀ v : V, IsDomain (V.presheaf.stalk v) ∧ IsIntegrallyClosed (V.presheaf.stalk v)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94b51d5a9",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Node unchanged except lean record; statement verbatim equals file signature. {V W : Scheme.{u}} (g) [Smooth g] (recorded def-sbc-smooth-morphisms), hW stalkwise IsDomain ∧ IsIntegrallyClosed (inline def-weil-pbc-normal-ring), conclusion same for all v: every clause matches, no Noetherian/qc/connected/surjective/Nonempty/IsIntegral assumption; empty V, empty W, Spec(k×k) target and open immersions covered. Same statement exists only as private smooth_normal_stalks in TraitEtaleExtension, which cannot be imported, so the new public theorem is justified and duplicates no notion. Sole proof sorry; docstrings carry Stacks 034F, the blueprint id and the five proof steps; report sections present. No file changed, so not recompiled."
+ }
+}

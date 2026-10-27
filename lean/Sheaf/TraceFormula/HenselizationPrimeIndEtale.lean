@@ -7,15 +7,9 @@ module
 
 public import Sheaf.RingTheory.HenselizationAtPrime
 public import Sheaf.RingTheory.IndPrincipalZariski
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.Etale.Basic
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import WeilConjectures.RingTheory.PairHenselization
-import Sheaf.RingTheory.IndEtaleStability
-import WeilConjectures.RingTheory.LocalizationColimitPrincipalLocalizations
-import WeilConjectures.RingTheory.MapIntoHenselianColimit
-import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
-import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.RingTheory.PrimePairColimitIndEtaleModel
+import Sheaf.RingTheory.InitialHenselianColimitComparison
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 
 /-!
 # Ind-étaleness of a henselization at a prime
@@ -28,7 +22,22 @@ localization (blueprint: lem-trf-henselization-prime-ind-etale).
 
 universe u
 
+open CategoryTheory CategoryTheory.Limits
+
 namespace RingHom
+
+private theorem indEtale_of_bijective {R S : Type u} [CommRing R] [CommRing S]
+    (f : R →+* S) (hf : Function.Bijective f) : f.IndEtale := by
+  rw [IndEtale.iff_ind_etale]
+  exact MorphismProperty.le_ind _ _ (Etale.of_bijective hf)
+
+private theorem indEtale_of_across {R S : Type u} [CommRing R] [CommRing S]
+    (f : R →+* S) (hf : f.IndEtaleAcrossUniverses) : f.IndEtale := by
+  have h := (indEtale_of_bijective (ULift.ringEquiv (R := S)).toRingHom
+    (ULift.ringEquiv (R := S)).bijective).comp
+      (hf.comp (indEtale_of_bijective (ULift.ringEquiv (R := R)).symm.toRingHom
+        (ULift.ringEquiv (R := R)).symm.bijective))
+  simpa only [RingHom.comp_ulift_eq] using h
 
 /-- The canonical composite from `A` to an ordinary henselization of `Aₚ` is ind-étale.
 Source: Stacks Project, Algebra, Tag 04GN (2), applied to `Aₚ`; Tag 04GQ for
@@ -107,6 +116,63 @@ theorem henselization_prime_indEtale
     (hH : Algebra.IsHenselizationAtPrime A p H) :
     ((algebraMap (Localization.AtPrime p) H).comp
       (algebraMap A (Localization.AtPrime p))).IndEtale := by
-  sorry
+  classical
+  let R := Localization.AtPrime p
+  let m := IsLocalRing.maximalIdeal R
+  let P : ObjectProperty (Under (CommRingCat.of R)) := fun B ↦
+    AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map B.hom) ∧
+      Function.Bijective (Ideal.quotientMap (m.map B.hom.hom) B.hom.hom
+        Ideal.le_comap_map)
+  have hp := RingTheory.pair_henselization R m
+  let : EssentiallySmall.{u} P.FullSubcategory := hp.1
+  let : IsFiltered P.FullSubcategory := hp.2.1
+  let I := Skeleton (SmallModel.{u} P.FullSubcategory)
+  let e : I ≌ P.FullSubcategory :=
+    (skeletonEquivalence (SmallModel.{u} P.FullSubcategory)).trans
+      (equivSmallModel P.FullSubcategory).symm
+  let : IsFiltered I := IsFiltered.of_equivalence e.symm
+  let F := e.functor ⋙ P.ι
+  let c := colimit.cocone F
+  have hc := isColimitOfPreserves (Under.forget (CommRingCat.of R))
+    (colimit.isColimit F)
+  obtain ⟨_, _, _, ⟨hC, hmax⟩, hlocal, hres, _, hindC, hindA⟩ :=
+    RingTheory.prime_pair_colimit_indEtale_model A p I
+      (skeleton_skeletal _) e c hc
+  let C := c.pt.right
+  let : HenselianLocalRing C := hC
+  let : Algebra R C := c.pt.hom.hom.toAlgebra
+  let : IsLocalHom (algebraMap R C) := hlocal
+  let : IsLocalHom (algebraMap R H) := hH.1
+  have hres' : Function.Bijective (IsLocalRing.ResidueField.map (algebraMap R C)) := by
+    have hq : ∀ (J : Ideal C) (hJ : m ≤ J.comap (algebraMap R C)),
+        J = IsLocalRing.maximalIdeal C →
+        Function.Bijective (Ideal.quotientMap J (algebraMap R C) hJ) →
+        Function.Bijective (IsLocalRing.ResidueField.map (algebraMap R C)) := by
+      intro J hJ heq
+      subst J
+      have he : Ideal.quotientMap (IsLocalRing.maximalIdeal C)
+          (algebraMap R C) hJ = IsLocalRing.ResidueField.map (algebraMap R C) := by
+        apply Ideal.Quotient.ringHom_ext
+        ext x
+        rfl
+      intro hb
+      exact he ▸ hb
+    exact hq _ Ideal.le_comap_map hmax.symm hres
+  obtain ⟨f, g, _, _, _, _, hgf, hfg, _⟩ :=
+    Algebra.initial_henselian_colimit_comparison R C H hindC hres' hH.2
+  have hf : Function.Bijective f := by
+    constructor
+    · intro x y h
+      have hleft (z : C) : g (f z) = z := DFunLike.congr_fun hgf z
+      simpa only [hleft] using congrArg g h
+    · intro y
+      exact ⟨g y, DFunLike.congr_fun hfg y⟩
+  have h := (indEtale_of_bijective f.toRingHom hf).comp
+    (indEtale_of_across _ hindA)
+  have heq : f.toRingHom.comp (c.pt.hom.hom.comp (algebraMap A R)) =
+      (algebraMap R H).comp (algebraMap A R) := by
+    ext a
+    exact f.commutes (algebraMap A R a)
+  rwa [heq] at h
 
 end RingHom

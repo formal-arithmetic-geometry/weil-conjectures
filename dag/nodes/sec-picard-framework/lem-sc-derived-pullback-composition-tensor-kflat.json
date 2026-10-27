@@ -127,10 +127,10 @@
  },
  "lean": {
   "existing": true,
-  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedPullbackCompositionTensorKFlat.lean",
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionTensorKFlat.lean",
   "declaration": "AlgebraicGeometry.derivedPullbackComposition_tensor_kFlat",
-  "statement": "theorem derivedPullbackComposition_tensor_kFlat\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)\n    (hP : P.IsKFlatTensor) (hN : N.IsKFlatTensor) :\n    let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),\n        derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=\n      fun a b ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition)))) a b\n    (derivedPullback f).map ((mixedHomTensorPullbackIso g).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)) ≫\n      (mixedHomTensorPullbackIso f).hom.app\n        ((derivedPullback g).obj (DerivedCategory.Q.obj P),\n          (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≫\n      ((c f g).hom.app (DerivedCategory.Q.obj P) ⊗ₘ\n        (c f g).hom.app (DerivedCategory.Q.obj N)) =\n    (c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫\n      (mixedHomTensorPullbackIso (f ≫ g)).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)",
+  "statement": "theorem derivedPullbackComposition_tensor_kFlat\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)\n    (hP : P.IsAcyclicTensorKFlat) (hN : N.IsAcyclicTensorKFlat) :\n    let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),\n        derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=\n      fun a b ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition)))) a b\n    (derivedPullback f).map ((mixedHomTensorPullbackIso g).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)) ≫\n      (mixedHomTensorPullbackIso f).hom.app\n        ((derivedPullback g).obj (DerivedCategory.Q.obj P),\n          (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≫\n      ((c f g).hom.app (DerivedCategory.Q.obj P) ⊗ₘ\n        (c f g).hom.app (DerivedCategory.Q.obj N)) =\n    (c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫\n      (mixedHomTensorPullbackIso (f ≫ g)).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)",
   "branch": "sheaf-dag",
   "by": "F4",
   "date": "2026-10-22",
@@ -156,5 +156,16 @@
   "kind": "proof",
   "note": "independent cc review: Restored Sheaf shell (public re-export) vs quarantine/ archive and WeilConjectures twin (identical up to IsAcyclicTensorKFlat→IsKFlatTensor, defeq bodies); node lean record vs twin source verbatim; legacy-signature and import-clash probes compiled"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

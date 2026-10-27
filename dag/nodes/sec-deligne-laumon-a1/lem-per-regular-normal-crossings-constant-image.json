@@ -369,20 +369,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-4000867b0 (reviewer sub-agent of L); spot-checked: I read the item, its nine steps and all 20 cited statements (including their blueprint_update texts), the parent's use, and ILO at XVI Th. 3.1.1, XVI Cor. 3.1.3 (pp. 242-243) and XIII Prop. 3.6.2. The statement is unchanged and agrees with Cor. 3.1.3: constructibility plus R^q=0 for q>r, with B finite over F_ell. The delivery adds no new nodes, and the item's closure contains no cycle. The induction, which allows disconnected C_i, empty intersections and all twists, is correct. I checked the codimension bookkeeping C_{J∪{m}} in C, the purity sign i^!A=A(-1)[-2] (Gabber node with n=1, c=1, A=Lambda_1), the localization on the regular pair (V,E), the [-2] shift and the vanishing for q>m (tested at m=1), finite pushforward constructibility (Noetherian target, finite stalks), Serre closure, and the passage to B via the forget comparison and module local constancy. Small cases checked: r=0, one divisor, two transverse divisors, disjoint divisors, the empty scheme, B=A. Repair to step 3: it identified Ri_* with termwise i_* only on bounded-below complexes, but matching Gabber's i^! (right adjoint of the unbounded Ri_!) with the closed-support triangle's Ri^! (right adjoint of termwise i_*) needs the identification on all of D. I added the exactness/K-injective-cone argument and the reason the regular sequence has length 1; the step is now 1559 characters. Batch-5: both flagged citations are generic and accepted. lem-trf-bounded-below-derived-adjunction (reached through lem-per-gabber-regular-pair-purity) is pure homological algebra, an exact left adjoint inducing an adjunction on D^+. lem-pod-module-local-constancy-of-finite-underlying is a sheaf-over-finite-ring lemma; it is already in the existing purity node's closure and is neither a step of the trace formula or Poincare duality nor given by either assumption. No SGA is cited. The declared off-unit tool uses (Tate lines, inverse-image monoidality, closed-support triangle and similar) are accepted.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/RegularNormalCrossingsConstantImage.lean",
   "module": "Sheaf.AlgebraicGeometry.RegularNormalCrossingsConstantImage",
   "declaration": "AlgebraicGeometry.Etale.regular_normal_crossings_constant_image",
-  "declarations": [
-   "AlgebraicGeometry.Etale.normalCrossingsConstantDirectImage",
-   "AlgebraicGeometry.Etale.regular_normal_crossings_constant_image"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/RegularNormalCrossingsConstantImage.lean",
-  "statement": "theorem regular_normal_crossings_constant_image (ell : ℕ) [Fact ell.Prime] (B : Type (u + 1)) [Field B] [Finite B] [CharP B ell] {Y : Scheme.{u}} [IsNoetherian Y] (_hY : IsRegularScheme Y) (_hell : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y)) (D : Y.IdealSheafData) (_hD : IsStrictNormalCrossingsBoundary D) : (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj (normalCrossingsConstantDirectImage B D))) ∧ (∀ q : ℤ, (Nat.card ↥(irreducibleComponents D.subscheme) : ℤ) < q → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj (normalCrossingsConstantDirectImage B D))) ∧ DerivedCategory.isBoundedConstructible B Y (normalCrossingsConstantDirectImage B D)",
-  "branch": "newtargets-dag",
-  "by": "Q63",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RegularNormalCrossingsConstantImage deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -392,5 +385,16 @@
   "result": "pass",
   "note": "Only the item node (adds just its lean field) and the new module are delivered. Every clause matches: ell prime; B : Type (u+1) finite field of char ell (the project's coefficient convention); Y IsNoetherian plus IsRegularScheme; ell a unit in every stalk; D an IdealSheafData with IsStrictNormalCrossingsBoundary; j = Opens.ι D.support.compl; r = Nat.card of irreducibleComponents D.subscheme (finite, and under SNC the C_i are exactly the components); Rj_*B = rightDerivedLowerStar applied to the constant sheaf ModuleCat.of B B in degree 0; conjuncts: all R^q constructible, R^q = 0 for q > r, isBoundedConstructible. Edge cases checked: D empty (r = 0), Y empty, one or two divisors, disjoint components, B = F_ell. lean.statement verbatim; source and blueprint docstrings; all 9 proof steps in the theorem docstring; sorry only; no new nodes or stmt_dep changes. nt_compile --json rc 0, no diagnostics, 13.6 s. Advisory: (1) the item imports upstream WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison, not the recorded Sheaf module. Clean against live, where the Sheaf constructibility modules re-export upstream, but a duplicate IsConstructibleEtaleModuleSheaf clash when the side source files are compiled as siblings. Same import pattern as at least 10 landed modules; the definitions agree on Noetherian Y. Maintainer: reconcile the side source with live. (2) IsConstructibleEtaleModuleSheaf, constantSheaf and homologyFunctor owners are reached through the recorded deps, not direct stmt_deps. (3) The Second reading section is thin but present."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

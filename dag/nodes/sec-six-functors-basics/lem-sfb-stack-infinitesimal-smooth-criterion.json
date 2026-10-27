@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-stack-infinitesimal-smooth-criterion",
+ "kind": "statement",
+ "title": "Affine square-zero lifting criterion for a stack smooth over a scheme",
+ "statement": "Let $S$ be a scheme and $p:\\mathcal X\\to S$ an algebraic stack [def-pc-scheme, def-sfb-algebraic-moduli-stack]. Assume $p$ is locally of finite presentation, meaning that a smooth surjective scheme atlas has locally finitely presented structural composite [def-sbc-locally-finite-presentation]. Suppose that, for every first order thickening $i:T\\hookrightarrow T\\prime$ of affine $S$-schemes [def-sbc-first-order-thickening], the restriction functor $i^*:\\mathcal X(T\\prime)\\to\\mathcal X(T)$ is essentially surjective: for every $x\\in\\mathcal X(T)$ there exist $x\\prime\\in\\mathcal X(T\\prime)$ and an isomorphism $i^*x\\prime\\cong x$ over $T$. Then $p$ is smooth: there exists a smooth surjective scheme atlas $U\\to\\mathcal X$ with smooth composite $U\\to S$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tags 0DP0, lemma-smooth-formally-smooth, and 0DNY, lemma-reformulate-formal-smoothness; target the representable stack S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $a:U\\to\\mathcal X$ for which $b=p\\circ a:U\\to S$ is locally of finite presentation; this is the atlas supplied by the hypothesis. The atlas terminology is [def-sfb-algebraic-moduli-stack]. To prove $b$ formally smooth in [def-sbc-formally-smooth], fix any affine first order thickening $i:T\\hookrightarrow T^{\\prime}$ over $S$ and any $u:T\\to U$ over $S$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DP0, converse: choose a smooth scheme atlas and test its structural composite"
+   }
+  },
+  {
+   "text": "Apply the assumed essential surjectivity to $x=a\\circ u\\in\\mathcal X(T)$. Obtain $x^{\\prime}\\in\\mathcal X(T^{\\prime})$ and $\\alpha:i^*x^{\\prime}\\xrightarrow{\\sim}a\\circ u$. By the atlas definition [def-sfb-algebraic-moduli-stack], $Z=T^{\\prime}\\times_{\\mathcal X}U$ is an algebraic space and its projection $q:Z\\to T^{\\prime}$ is smooth. In the explicit 2-fibre product of [def-sfb-stable-pointed-moduli-groupoids], the triple $(i,u,\\alpha)$ defines a morphism $s:T\\to Z$ with $qs=i$ and $\\operatorname{pr}_U s=u$. Here $Z$ is the pullback along the chosen object $x^{\\prime}$, so the isomorphism $\\alpha$ is retained.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tags 0DP0 and 0DNY: composition of object lifts with the atlas, expanded as a 2-fibre product"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-space-affine-infinitesimal-lift] to the smooth algebraic-space map $q:Z\\to T^{\\prime}$, the same affine first order thickening $i$, the map $s$, and $\\mathrm{id}_{T^{\\prime}}$. It gives $s^{\\prime}:T^{\\prime}\\to Z$ with $qs^{\\prime}=\\mathrm{id}_{T^{\\prime}}$ and $s^{\\prime}i=s$. Put $u^{\\prime}=\\operatorname{pr}_U s^{\\prime}$. Then $u^{\\prime}i=\\operatorname{pr}_U s=u$, and $bu^{\\prime}$ is the given structural map $T^{\\prime}\\to S$, since both projections from $Z$ are over $S$. Thus every test for $b$ lifts, so $b$ is formally smooth [def-sbc-formally-smooth].",
+   "uses": [
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM (lemma-smooth-formally-smooth), smooth implies formal smoothness; applied to the base-changed atlas in the converse of Tag 0DP0"
+   }
+  },
+  {
+   "text": "The morphism $b$ is locally of finite presentation by its choice in step 1 and formally smooth by step 3. Hence $b$ is smooth by [def-sbc-smooth-morphisms], whose scheme lifting characterization is Stacks Tag 02H6. The atlas $a$ is still smooth and surjective, and its composite $b$ is smooth. This is exactly smoothness of $p$ in [def-sfb-algebraic-moduli-stack].",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DP0, final sentence; more-morphisms.tex Tag 02H6 and stacks-morphisms.tex Tag 075U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-sbc-formally-smooth",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-smooth-space-affine-infinitesimal-lift",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DP0 (lemma-smooth-formally-smooth), converse; the composition-of-lifts argument expanded through the scheme-target atlas using Tag 04AM",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is smooth if it is locally of finite presentation and formally smooth for affine square zero extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal lifting criterion for smooth morphisms of algebraic stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.of_split\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(f : P →ₐ[R] A) (g : A →ₐ[R] P ⧸ RingHom.ker f.toRingHom ^ 2) (h : f.kerSquareLift.comp g = AlgHom.id R A) :\\n  FormallySmooth R A\", \"doc\": \"If there exists an algebra homomorphism $ g : A \\\\to P / \\\\ker(f)^2 $ such that the composition of the kernel square lift with $ g $ equals the identity on $ A $, then the algebra $ A $ over $ R $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tack.*[Ff]ormallySmooth|[Ff]ormallySmooth.*[Ss]tack|[Ss]tack.*[Ii]sSmooth",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack admitting lifts of every object across affine first order thickenings and locally of finite presentation has smooth atlas over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism, ring/module or categorical results do not state this geometric stack or global Picard obstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented algebraic stack over a scheme with essentially surjective restriction across affine square zero thickenings is smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras; none states the algebraic-stack object lifting criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift objects into a smooth scheme atlas after first lifting into the algebraic stack to prove formal smoothness of the atlas composite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras; none states the algebraic-stack object lifting criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras; none states the algebraic-stack object lifting criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tack.*[Ff]ormallySmooth|[Ff]ormallySmooth.*[Ss]tack|[Ss]tack.*[Ii]sSmooth",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras; none states the algebraic-stack object lifting criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal lifting criterion for smooth morphisms of algebraic stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.of_split\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(f : P →ₐ[R] A) (g : A →ₐ[R] P ⧸ RingHom.ker f.toRingHom ^ 2) (h : f.kerSquareLift.comp g = AlgHom.id R A) :\\n  FormallySmooth R A\", \"doc\": \"If there exists an algebra homomorphism $ g : A \\\\to P / \\\\ker(f)^2 $ such that the composition of the kernel square lift with $ g $ equals the identity on $ A $, then the algebra $ A $ over $ R $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras; none states the algebraic-stack object lifting criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-stack-curve-geometry",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Smoothness part: convert line-bundle lifting on affine first order thickenings to a smooth atlas over the base.",
+   "via": [
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-infinitesimal-smooth-criterion",
+  "worker": "stage1",
+  "summary": "Q52 followed the converse of Stacks 0DP0 for a scheme target. Chose the locally finitely presented atlas from the hypothesis, lifted its test object into the stack, and used the existing smooth-algebraic-space lifting lemma on the atlas pullback to lift the test into the atlas itself. The scheme criterion then proves its composite smooth. Statement and statement dependencies unchanged; no new node or Mathlib leaf; all four steps have exact citation excerpts.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md at snapshot main-20261023-1620. This is the inherited Picard-stack infinitesimal-smoothness prerequisite in from.place, not a new route for the unit. ancestor returns None, consistent with the inherited null from.node. Searched the whole blueprint for formally smooth, infinitesimal, smooth atlas and 04AM; none duplicates this statement. Preserved the existing from.place and via provenance.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-45f9a908a",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-45f9a908a (reviewer sub-agent of L); spot-checked: Read the item in full: 4 steps, no new nodes, statement and stmt_deps unchanged, no repair note. Also read every cited statement (def-sfb-algebraic-moduli-stack, def-sfb-stable-pointed-moduli-groupoids, def-sbc-formally-smooth, def-sbc-smooth-morphisms, def-sbc-first-order-thickening, def-sbc-locally-finite-presentation, def-trf-algebraic-space, lem-sfb-smooth-space-affine-infinitesimal-lift) and Stacks stacks-more-morphisms.tex Tag 0DP0, converse direction. The proof follows the source's composition-of-lifts argument, written out for a scheme target. Step 1 fixes the lfp atlas a: U->X and a formal-smoothness test (i, u) for b = p a. Step 2: essential surjectivity gives x' and alpha; the triple (i, u, alpha) is an object of the 2-fibre product Z = T' x_X U. Z is equivalent over T' to an algebraic space with q smooth, so we get s with q s = i and pr_U s = u (h_U is discrete). Step 3 applies the space lifting lemma with X = Z, Y = T', a0 = s, b = id; all its hypotheses hold. This gives s', and u' = pr_U s' is a lift over S because h_U(T') consists of S-morphisms. Step 4: b is lfp and formally smooth, so it is smooth and p is smooth by definition. No duplicate: the Artinian stack criterion, the etale-local scheme criterion and the cited space lemma are all different statements. Batch-5 check: def-sfb-stable-pointed-moduli-groupoids reaches only def-trf-projective-bundle-morphism, a definition; the step uses the 2-fibre-product definition. lem-sfb-smooth-space-affine-infinitesimal-lift is a general fact (smooth implies formally smooth for algebraic spaces, Stacks 04AM) and reaches only def-trf-algebraic-space. Neither belongs to the trace formula, Poincare duality or their proofs, so both are accepted. No changes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackInfinitesimalSmoothCriterion",
+  "declaration": "CategoryTheory.isSmoothModuliStack_of_affine_firstOrder_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackInfinitesimalSmoothCriterion.lean",
+  "statement": "theorem isSmoothModuliStack_of_affine_firstOrder_lifting {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (hfp : ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a ∧ LocallyOfFinitePresentation U.hom) (hlift : ∀ (T T' : Over S) (i : T ⟶ T'), IsAffine T.left → IsAffine T'.left → IsFirstOrderThickening i.left → ∀ (x : F.obj), F.p.obj x = T → ∃ (x' : F.obj) (a : x ⟶ x'), F.p.IsHomLift i a) : IsSmoothModuliStack F",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00c48f8b5",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Clause-by-clause match: S scheme; F BasedCategory over Over S with IsAlgebraicModuliStack; hfp = ∃ smooth surjective atlas with LocallyOfFinitePresentation U.hom (node's existential lfp); hlift over affine T,T' with IsFirstOrderThickening i.left and ∃ x', a : x ⟶ x' over i, equivalent to i*x' ≅ x because IsModuliStack includes IsFibredInGroupoids (all arrows strongly cartesian) and IsFibered; matches the 0DNY dotted-arrow condition for target S; conclusion IsSmoothModuliStack = node's smooth-over-S. No extra hypotheses; test schemes in universe u like S. Edge cases (empty stack/T, automorphisms) covered. Node differs from live only in lean; statement verbatim; single sorry; 4 stmt_deps used; plain imports are proof_dep modules; docstrings carry source, blueprint tag and 4 steps; Worker report + Second reading by Q55 present; no duplicate on side-live. No file changed, no compile."
+ }
+}

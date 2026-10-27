@@ -1,0 +1,240 @@
+{
+ "id": "lem-pur-ordinary-derived-isomorphism-transport-transpose",
+ "kind": "statement",
+ "title": "Transposes under canonical derived transport across a scheme isomorphism",
+ "statement": "Fix the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. For a $k$-scheme $T$, put $D(T)=D(T_{\\mathrm{proet}},A)$, the ordinary unbounded derived category on its small pro-etale site. For a scheme map $u$ use $P_u=Lu^*$, $R_u=Ru_*$ and the canonical adjunction $P_u\\dashv R_u$ of [def-weil-pbc-proetale-operations], with unit $\\eta_u$ and counit $\\varepsilon_u$. Let $B,X,X'$ be separated finite-type $k$-schemes, $s:X\\xrightarrow{\\sim}X'$ an isomorphism, $q:X'\\to B$ a morphism, and $c=q\\circ s$ [def-weil-scheme-morphism-properties]. For the canonical constant-ring maps and pullback composition of [lem-pur-proetale-constant-ring-composition, lem-weil-pbc-proetale-derived-pullback-composition], write $\\alpha_{s,q}:P_c\\xrightarrow{\\sim}P_sP_q$. Let $\\kappa_{q,s}:R_c\\xrightarrow{\\sim}R_qR_s$ be precisely the finite-level direct-image compositor of [lem-weil-derived-direct-image-composition], with the canonical adjunction-compatible ringed normalization of [lem-sfb-ringed-derived-monoidal-comparisons]. The site isomorphism and exact constant-module equivalence are those of [lem-weil-proetale-isomorphism-inverse-image]. For arbitrary $K'\\in D(X')$, $K\\in D(X)$ and an isomorphism $d:P_sK'\\xrightarrow{\\sim}K$, define\n$$S_d=R_c(d)\\circ\\kappa_{q,s,P_sK'}^{-1}\\circ R_q(\\eta_{s,K'}):R_qK'\\longrightarrow R_cK.$$\nThen $S_d$ is the canonical direct-image transport along $s$ followed by $d$, and is an isomorphism. For every $M\\in D(B)$ and $u:M\\to R_qK'$, its transported transpose is\n$$\\varepsilon_{c,K}\\circ P_c(S_d\\circ u)=d\\circ P_s\\bigl(\\varepsilon_{q,K'}\\circ P_q(u)\\bigr)\\circ\\alpha_{s,q,M}:P_cM\\to K.$$\nThe identity uses the actual derived units and counits, not just unspecified equivalences between the objects, and holds for arbitrary unbounded inputs without properness or constructibility hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, label lemma-derived-pushforward-composition; agent-formulated isomorphism-transport transpose calculation in the proper symmetry paragraph of lem-sf-kunneth-coherence.proof.md; returned item's Step 6."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-derived-direct-image-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed-scalar upperStar/lowerStar adjunctions and their actual left-derived adjunctions. The private helper mapDerivedAdjunction_eq applies derived_eq_ofNatIsoLeft and the normalization equation for leftDerivedFunctorIsoMapDerivedCategory to identify the adjunction for termwise exact pullback with derivedUpperStarLowerStarAdjunction.ofNatIsoLeft. Apply the proved source-library theorem Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv to upperStarComp and lowerStarComp, whose underived conjugacy is conjugateEquiv_upperStarComp_hom. After this adjunction identification, unfolding leftDerivedUpperStarComp shows that the specified finiteDirectImageComposition.inv is exactly the conjugate of leftDerivedUpperStarComp.hom. This is proved in the private helper derivedComposition_conjugate; no ringed-presentation comparison is required.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-upper-star-comp",
+    "sk-def-sfb-finite-derived-functors",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 0D6E; fixed-scalar specialization of the proved source-library right-derived composition conjugacy theorem and the canonical derived-adjunction normalization; explicit counit naturality and triangle calculation for blueprint proper product symmetry."
+   }
+  },
+  {
+   "text": "Write F=P_s, G=P_q, H=P_c, and let a,b,c be their actual adjunctions, alpha the specified left-derived pullback compositor, and kappa the specified finite direct-image compositor. The source identity conjugateEquiv_counit and Step 1 give H(kappa.inv_E) followed by epsilon_c,E equal to alpha at R_q R_s E followed by F(epsilon_q,R_s E) followed by epsilon_s,E. Expand H(u followed by S_d) followed by epsilon_c,K. Counit naturality at d moves R_c(d) to the end. Apply this composite-counit equation with E=F K'. Naturality of alpha at R_q(eta_s,K') and at u moves alpha to M.",
+   "uses": [
+    "sk-def-sfb-finite-derived-functors",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 0D6E; fixed-scalar specialization of the proved source-library right-derived composition conjugacy theorem and the canonical derived-adjunction normalization; explicit counit naturality and triangle calculation for blueprint proper product symmetry."
+   }
+  },
+  {
+   "text": "Counit naturality for b at eta_s,K' replaces G(R_q eta_s,K') followed by epsilon_q,R_s F K' by epsilon_q,K' followed by eta_s,K'. Functoriality of F and the left triangle identity for a cancel F(eta_s,K') followed by epsilon_s,F K'. What remains is alpha_M followed by F(G(u) followed by epsilon_q,K') followed by d, exactly the asserted formula. This calculation concerns the actual adjunctions on arbitrary unbounded objects.",
+   "uses": [
+    "sk-def-sfb-finite-derived-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 0D6E; fixed-scalar specialization of the proved source-library right-derived composition conjugacy theorem and the canonical derived-adjunction normalization; explicit counit naturality and triangle calculation for blueprint proper product symmetry."
+   }
+  },
+  {
+   "text": "For invertibility, use the proved source instance ProEtale.isEquivalence_upperStar for s.hom: its proof identifies upperStar with lowerStar along the inverse scheme isomorphism. The induced termwise unbounded derived functor is an equivalence, hence fully faithful. Transfer full faithfulness along leftDerivedUpperStarIsoMapDerivedCategory to L(upperStar s.hom). Mathlib's fully-faithful-left-adjoint unit-isomorphism instance applies to the actual derivedUpperStarLowerStarAdjunction. Thus R_q of its unit is invertible, as are kappa.inv and R_c(d). Their composite, which is the unchanged definition of ordinaryDerivedIsomorphismTransport, is invertible.",
+   "uses": [
+    "sk-def-sfb-finite-derived-functors",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 0D6E; fixed-scalar specialization of the proved source-library right-derived composition conjugacy theorem and the canonical derived-adjunction normalization; explicit counit naturality and triangle calculation for blueprint proper product symmetry."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-upper-star-comp",
+  "lem-weil-derived-direct-image-composition",
+  "sk-def-sfb-finite-derived-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0D6E; fixed-scalar specialization of the proved source-library right-derived composition conjugacy theorem and the canonical derived-adjunction normalization; explicit counit naturality and triangle calculation for blueprint proper product symmetry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a morphism to a derived direct image along an isomorphism of schemes using the adjunction unit and canonical direct image compositor: its adjunction transpose is the inverse image of the old transpose followed by the coefficient comparison",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.pushforwardCongr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; TopCat.Presheaf.toPushforwardOfIso. The triangle identity and underived scheme-module restriction adjunctions are ingredients only. None computes the transpose through this canonical unbounded pro-etale direct-image transport with its K-injective compositor; the sheaf-composition conjugacy is underived.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an isomorphism s and c=c prime composed with s, the transpose of Rc(d) composed with the inverse pushforward compositor and Rc prime of the unit composed with u is d composed with Ls of the transpose of u",
+   "results": "Actual hits: CategoryTheory.Adjunction.unitAsIsoOfIso; CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit; CategoryTheory.Iso.trans; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.GlueData.t_isIso; CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit; CategoryTheory.Iso.instTransIso; CategoryTheory.Limits.CatCospanTransform.rightIso. The triangle identity and underived scheme-module restriction adjunctions are ingredients only. None computes the transpose through this canonical unbounded pro-etale direct-image transport with its K-injective compositor; the sheaf-composition conjugacy is underived.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "Actual hits: CategoryTheory.Adjunction.left_triangle_components. The triangle identity and underived scheme-module restriction adjunctions are ingredients only. None computes the transpose through this canonical unbounded pro-etale direct-image transport with its K-injective compositor; the sheaf-composition conjugacy is underived.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*counit|left_triangle|conjugateEquiv.*comp",
+   "results": "Actual hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:66; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:82; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:83; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:135; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:137; Mathlib/CategoryTheory/Adjunction/Comma.lean:135; Mathlib/CategoryTheory/Adjunction/Unique.lean:33; Mathlib/CategoryTheory/Adjunction/Unique.lean:61; Mathlib/CategoryTheory/Adjunction/Unique.lean:65; Mathlib/CategoryTheory/Adjunction/Unique.lean:73; Mathlib/CategoryTheory/Adjunction/Unique.lean:116; Mathlib/CategoryTheory/Adjunction/Evaluation.lean:53; Mathlib/CategoryTheory/Adjunction/Evaluation.lean:99; Mathlib/CategoryTheory/Adjunction/Restrict.lean:34; Mathlib/CategoryTheory/Adjunction/Quadruple.lean:94; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean:42; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean:109; Mathlib/CategoryTheory/Adjunction/Triple.lean:26; Mathlib/CategoryTheory/Adjunction/Triple.lean:66; Mathlib/CategoryTheory/Adjunction/Triple.lean:85; Mathlib/CategoryTheory/Adjunction/Triple.lean:92; Mathlib/CategoryTheory/Adjunction/Triple.lean:143; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:41; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:82; Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean:83. The triangle identity and underived scheme-module restriction adjunctions are ingredients only. None computes the transpose through this canonical unbounded pro-etale direct-image transport with its K-injective compositor; the sheaf-composition conjugacy is underived.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image transport through a scheme isomorphism intertwines adjunction transposes by counit naturality and the triangle identity",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; CategoryTheory.Functor.sheafPushforwardContinuousIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardNatIso_hom. The triangle identity and underived scheme-module restriction adjunctions are ingredients only. None computes the transpose through this canonical unbounded pro-etale direct-image transport with its K-injective compositor; the sheaf-composition conjugacy is underived.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_unit|unit_isIso|left_triangle_components",
+   "results": "Actual recorded hits: Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean. These give abstract adjunction identities or underived scheme-module comparisons; none identifies the stipulated pro-etale derived compositor and transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "Actual recorded hits: CategoryTheory.Adjunction.left_triangle_components. These give abstract adjunction identities or underived scheme-module comparisons; none identifies the stipulated pro-etale derived compositor and transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image transport through a scheme isomorphism and its adjunction transpose under canonical composition comparisons",
+   "results": "Actual recorded hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.Functor.sheafPushforwardContinuousIso, SheafOfModules.pushforwardNatIso_hom. These give abstract adjunction identities or underived scheme-module comparisons; none identifies the stipulated pro-etale derived compositor and transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a morphism through a composite adjunction using the unit of an equivalence and compute its counit transpose",
+   "results": "Actual recorded hits: CategoryTheory.unit_mateEquiv, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.unit_comp_map_eq_iff, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit, CategoryTheory.Adjunction.adjunctionOfEquivRight_unit_app, CategoryTheory.LiftLeftAdjoint.otherMap. These give abstract adjunction identities or underived scheme-module comparisons; none identifies the stipulated pro-etale derived compositor and transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction hom equivalence for composite functors is the composition of the hom equivalences and is natural in the target morphism",
+   "results": "Actual recorded hits: CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one, CategoryTheory.Functor.partialRightAdjointHomEquiv_comp, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two. These give abstract adjunction identities or underived scheme-module comparisons; none identifies the stipulated pro-etale derived compositor and transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-proper-product-transpose",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4: the passage from reassociation of the ordered tower to symmetry of the actual product morphism; the compact-support external-product interchange needed before evaluating any trace. Proper-product part: successive transposes of exchange and projection, compositor normalization, and the swapped tensor-of-counits identity (returned proof Steps 3--6). Extraction: Tag 0D6E, label lemma-derived-pushforward-composition; agent-formulated isomorphism-transport transpose calculation in the proper symmetry paragraph of lem-sf-kunneth-coherence.proof.md; returned item's Step 6.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordinary-derived-isomorphism-transport-transpose",
+  "worker": "stage1",
+  "summary": "Expanded the canonical compositor counit equation, counit naturality and the triangle cancellation. Proved invertibility using the existing derived equivalence and counit-isomorphism nodes; no new nodes and no statement change.",
+  "blueprint": "prop-pur-affine-space-composition-law proof Steps 3--4, via the proper-product symmetry paragraph of lem-sf-kunneth-coherence: explicit transport of the swapped product transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalization of the canonical unbounded ringed-topos composition adjunction; the affine-space unit does not prove this comparison."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-equivalence",
+    "why": "Generic ordinary unbounded pro-etale pullback equivalence for a scheme isomorphism, needed to prove invertibility of the actual unit."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Generic equation c_A^{qs}=c_A^s o s^{-1}(c_A^q) o alpha for the constant-ring structural maps of a composite, needed in Step 1 so that the coefficient identification of P_c is the one required by lem-weil-pbc-proetale-derived-pullback-composition; no node of the affine-space unit or its cited units states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-10449a0f5",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-10449a0f5 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged, there are no new nodes, and the item is still unsplit in live and side-live. All five steps check out. Step 1: the counit equation eps_c = eps_s P_s(eps_q) alpha P_c(kappa) follows from the adjunction-compatibility clause of lem-sfb-ringed-derived-monoidal-comparisons. Its kappa is the finite-level compositor of lem-weil-derived-direct-image-composition (that node's proof step 1), and its c_{f,g} is the alpha of lem-weil-pbc-proetale-derived-pullback-composition. lem-pur-proetale-constant-ring-composition supplies the coefficient identification that alpha requires. Steps 2 and 3 (counit naturality at d, cancelling kappa against its inverse, naturality of alpha at v, naturality of eps_q at eta_s, then the triangle identity) are correct with every index checked. Step 4: lem-weil-isomorphism-derived-pullback-equivalence applies (s is an isomorphism and ell is not char k). The Mathlib leaf lem-coef-adjunction-equivalence-counit-iso makes eps_s invertible, and the full/faithful argument makes eta_s invertible. Step 5 justifies a naming clause, and the parent lem-pur-finite-proper-product-transpose uses only the formulas. Small cases s=id, q=id, u=0 hold. No duplicate found in the DAG. Stacks 0D6E/0D6D checked at sites-cohomology.tex l.4011. No SGA. Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-weil-isomorphism-derived-pullback-equivalence. Fault (C8/route): Step 1 also uses lem-pur-proetale-constant-ring-composition, of unit sk-thm-smooth-purity, which is outside the sk-prop-an route and was undeclared. It is a generic black-box tool, so I accept it. FIX: added it to split_report.tool_uses in fixes/dag/nodes/sec-smooth-purity/lem-pur-ordinary-derived-isomorphism-transport-transpose.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryDerivedIsomorphismTransportTranspose",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ordinaryDerivedIsomorphismTransport_transpose",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ordinaryDerivedIsomorphismTransport",
+   "WeilConjectures.PurityFiniteSetting.ordinaryDerivedIsomorphismTransport_transpose"
+  ],
+  "file": "lean/Sheaf/Paper/OrdinaryDerivedIsomorphismTransportTranspose.lean",
+  "statement": "theorem ordinaryDerivedIsomorphismTransport_transpose (P : PurityFiniteSetting.{u}) {B X X' : Scheme.{u}} [B.Over (Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [X'.Over (Spec (.of P.field.k))] [IsSeparated (B ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (B ↘ Spec (.of P.field.k))] [QuasiCompact (B ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))] [QuasiCompact (X' ↘ Spec (.of P.field.k))] (s : X ≅ X') (q : X' ⟶ B) (K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X') (ModuleCat.{u + 1} P.Coefficient))) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (d : L(upperStar (ModuleCat.{u + 1} P.Coefficient) s.hom).obj K' ≅ K) : IsIso (ordinaryDerivedIsomorphismTransport P s q K' K d) ∧ ∀ (M : DerivedCategory (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient))) (u : M ⟶ R(lowerStar (ModuleCat.{u + 1} P.Coefficient) q).obj K'), L(upperStar (ModuleCat.{u + 1} P.Coefficient) (s.hom ≫ q)).map (u ≫ ordinaryDerivedIsomorphismTransport P s q K' K d) ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) (s.hom ≫ q)).counit.app K = (leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) s.hom q).hom.app M ≫ L(upperStar (ModuleCat.{u + 1} P.Coefficient) s.hom).map (L(upperStar (ModuleCat.{u + 1} P.Coefficient) q).map u ≫ (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) q).counit.app K') ≫ d.hom",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the published fixed-scalar module-sheaf presentation of the ordinary unbounded category, as in the recorded finiteDirectImageComposition. Pullback, composition and the actual derived adjunction are the existing FiniteCoefficient upperStar constructions publicly reexported by the dependencies. The helper names the exact three-factor transport from the node; it introduces no choice of map or equivalence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3bc8a0eb",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Only the new module and the node's lean field are delivered; the statement is verbatim; the node is still split, reviewed at stage 1, with no prior Lean record or repair note. Clause check: S_d = Rq(η_s K') ≫ κ.inv(Ps K') ≫ Rc(d) with κ the recorded finiteDirectImageComposition s.hom q; α = leftDerivedUpperStarComp s.hom q, composite to iterated; adjunction = derivedUpperStarLowerStarAdjunction (derivedAdjunction of the canonical upperStar/lowerStar adjunction); conclusions are IsIso of S_d and, for all M and u, Pc(u≫S_d)≫ε_c K = α_M ≫ Ps(Pq u ≫ ε_q K') ≫ d. True: upperStarComp is the conjugate of lowerStarComp, so α and κ are conjugate. Hypotheses: separated finite type over k only; s and q are plain scheme maps (weaker, still true); no properness or boundedness; universes unchanged. The fixed-scalar ModuleCat(ULift A) presentation is forced by the recorded κ and matches the Q35 composite-transpose sibling (PASS) and the parent's kappa transport. The definition carries real data; sorry only in the theorem; docstrings give Stacks 0D6D/0D6E, the blueprint tag and 5 proof steps; no duplicate found; no import cycle. Advisories: owners of the adjunction and pullback comparison (sk-def-sfb-finite-derived-functors) are not in stmt_deps, and the cited records of def-weil-pbc-proetale-operations and lem-weil-pbc-proetale-derived-pullback-composition give unused intrinsic-presentation declarations; some unused public imports. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261024T184941-L-3280643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

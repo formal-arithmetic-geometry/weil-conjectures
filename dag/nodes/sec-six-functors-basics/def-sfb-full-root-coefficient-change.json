@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-full-root-coefficient-change",
+ "kind": "definition",
+ "title": "Full-root coefficient change and affine profinite test coefficients",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $p$ be a prime, $J$ a finite set, $R,S$ commutative rings, $t:J\\to R$, $t':J\\to S$, and $f:R\\to S$ a ring homomorphism with $f(t_j)=t'_j$ for every $j$. Write $A_p(R,t)$ for the full compatible parameter-root algebra [def-sfb-full-parameter-root-tower], with its specified roots $x_{j,n}$ for all positive prime-to-$p$ orders and its power transitions for divisibility. Define the coefficient-change homomorphism $A_p(R,t)\\to A_p(S,t')$ by applying $f$ to every coefficient and sending every labelled root $x_{j,n}$ to the root with the same label and order. Concretely it is the quotient of the polynomial coefficient map; the compatibility hypothesis carries the root equations to the target root equations and preserves every power-transition relation. Its base-change specialization is the map $A_p(R,t)\\to A_p(S,f(t))$ obtained by setting $t'=f\\circ t$. For a profinite set $P$, define $R_P=R\\otimes_{\\mathbf Z}LC(P,\\mathbf Z)$, with its canonical coefficient inclusion $R\\to R_P$, $r\\mapsto r\\otimes1$. This is the affine coordinate-ring presentation of $U[P]$ for $U=\\operatorname{Spec}R$ and the profinite test construction [def-sfb-profinite-test-objects]: the affine fibre-product formula, with tensor-factor interchange, identifies $\\operatorname{Spec}R_P$ over $U$ with $\\operatorname{Spec}LC(P,\\mathbf Z)\\times_{\\operatorname{Spec}\\mathbf Z}U$, whose map to $U$ is induced by that coefficient inclusion. Thus substitution of $R_P$ and the images of $t_j$ is precisely the coefficient presentation for the profinite test object $U[P]$, rather than a different test construction. Empty $J$, empty $P$, zero rings, and order one are allowed.",
+ "stmt_deps": [
+  "def-sfb-full-parameter-root-tower",
+  "def-sfb-profinite-test-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct-image coordinate-face input: canonical coefficient substitutions and profinite tests. Explicit construction in lem-sfb-root-tower-profinite-base-change proof steps 1, 2 and 5; Stacks Tag 01I4 (schemes.tex, lemma-fibre-product-affine-schemes) for the affine U[P] tensor presentation, and Tag 097D (proetale.tex, lemma-construct-profinite)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fullRootFamilyMap|fullRootBaseMap|rootTestRing",
+   "results": "{\"t\": \"2026-10-24T11:29:02Z\", \"tool\": \"grep\", \"query\": \"fullRootFamilyMap|fullRootBaseMap|rootTestRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the three existing project definitions fullRootFamilyMap, fullRootBaseMap, rootTestRing; they have no definition-node owner."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compatible parameter root algebra changes coefficients by fixing each labelled root; R tensor locally constant integer functions on a profinite set is the coordinate ring of U[P]",
+   "results": "{\"t\": \"2026-10-24T11:29:03Z\", \"tool\": \"leansearch\", \"query\": \"The compatible parameter root algebra changes coefficients by fixing each labelled root; R tensor locally constant integer functions on a profinite set is the coordinate ring of U[P]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocallyConstant.coeFnAlgHom_apply\", \"LocallyConstant.instAlgebra\", \"LocallyConstant.mapₐ\", \"LocallyConstant.coe_algebraMap\", \"LocallyConstant.coeFnAlgHom\", \"LocallyConstant.freeOfProfinite\", \"Polynomial.instIsScalarTowerElemRootSet\", \"LocallyConstant.comapₐ\"], \"digest\": \"e07a5c7021b5276f\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the three existing project definitions fullRootFamilyMap, fullRootBaseMap, rootTestRing; they have no definition-node owner."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change map of full compatible root algebras fixing roots and profinite test ring R tensor locally constant integer functions",
+   "results": "{\"t\": \"2026-10-24T11:29:04Z\", \"tool\": \"leanfinder\", \"query\": \"Coefficient change map of full compatible root algebras fixing roots and profinite test ring R tensor locally constant integer functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.baseChange_val\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_map\", \"RootPairing.algebraMap_root'In_apply\", \"RootPairing.Hom.root_weightMap\", \"Algebra.PreSubmersivePresentation.baseChange\", \"Algebra.Generators.baseChange\", \"LinearMap.polyCharpolyAux_map_aeval\", \"RootPairing.chainCoeff_chainTopIdx_aux\"], \"digest\": \"c2a943a1275ec8f5\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the three existing project definitions fullRootFamilyMap, fullRootBaseMap, rootTestRing; they have no definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n fullRootFamilyMap|fullRootBaseMap|rootTestRing lean/WeilConjectures lean/Sheaf; rg -l fullRootFamilyMap|fullRootBaseMap|rootTestRing|full-root-coefficient-change dag/nodes",
+   "results": "No WeilConjectures hits; Sheaf.Paper.RootTowerProfiniteBaseChange defines all three. Only DAG hit is the theorem node lem-sfb-root-tower-profinite-base-change; there is no definition-node owner. No node def-sfb-full-root-coefficient-change exists.",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions: attach with existing:true, rather than duplicate any Lean declaration."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "full root coefficient; profinite test; ancestor lem-sfb-residual-root-tower-local-charts",
+   "results": "Full root coefficient: det-sp-scalar-extension-functor and sk-def-sp-tate-twist, neither defines these maps. Profinite test: def-sfb-profinite-test-objects, det-def-sfb-pullback-from-point, det-pe-condensed-point-basis, sk-def-sfb-pullback-from-point. The first supplies X[P], not the root coefficient maps or their affine ring interface. Ancestor: None.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node for the combined coefficient-change and affine profinite-test-ring interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-residual-root-tower-local-charts",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; residual chart comparison coefficients and substitution of the affine coordinate ring of U[P]. The item has no imported blueprint ancestor.",
+   "via": [
+    "lem-sfb-residual-root-tower-local-charts",
+    "lem-sfb-root-tower-punctured-face-diagram",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.RootTowerProfiniteBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.fullRootFamilyMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.fullRootFamilyMap",
+   "AlgebraicGeometry.ProEtale.fullRootBaseMap",
+   "AlgebraicGeometry.ProEtale.rootTestRing"
+  ],
+  "statement": "def fullRootFamilyMap {J R S : Type u} [Fintype J] [CommRing R] [CommRing S]\n    (p : ℕ) (t : J → R) (t' : J → S) (f : R →+* S) (ht : ∀ i, f (t i) = t' i) :\n    FullParameterRootAlgebra p t →+* FullParameterRootAlgebra p t'",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Return H2 repair: gives a definition-node owner to the three existing definitions needed by residual-root-tower-local-charts. fullRootFamilyMap is the quotient coefficient map fixing labelled roots; fullRootBaseMap is its t′=f(t) specialization; rootTestRing is R tensor_Z LocallyConstant(P,Z), the canonical affine coordinate-ring presentation of the profiniteToProEtOf test object U[P] by the affine fibre-product formula and tensor symmetry. No Lean definition or theorem is copied or added. The source module and original theorem node remain unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c0d1f6dc",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c0d1f6dc",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery of 3b6936b8ac6a, which was returned for H2 only. Lean module byte-identical (sha b8f197d1). Item changed only by adding stmt_dep def-sfb-full-root-coefficient-change. New def node: existing:true owner of fullRootFamilyMap/fullRootBaseMap/rootTestRing (RootTowerProfiniteBaseChange l.70/77/414). TeX matches the declarations, lean.statement is verbatim, and the U[P] tensor presentation agrees with profiniteToProEtOf (resolves the earlier H4 note). All §5 fields present; stmt_deps equal its citations; no duplicate owner. Item re-read clause by clause: hypotheses no stronger than the node (SNC-branch predicate characterizes the components exactly), conclusion covers the cover/units/SNC/parameters, the weakly-etale affine D_W, the pullback iso with fixed projections, the splitting spec (coefficients, roots, transitions, conditional principal opens, ring naturality) and the profinite clause. Edge cases and the single universe u OK. Only sorry is the theorem proof; docstrings carry source and blueprint; report sections present. No compile needed (no changes)."
+ }
+}

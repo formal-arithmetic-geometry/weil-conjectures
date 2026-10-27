@@ -1,0 +1,271 @@
+{
+ "id": "lem-per-flat-dimension-surjective-neighbourhoods",
+ "kind": "statement",
+ "title": "Surjective dimension-attaining open restriction of a flat morphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of locally Noetherian schemes [pqf-def-locnoeth], flat [def-weil-flat-morphism] and locally of finite type [def-weil-finite-type-morphism]. Let $d\\in\\mathbb N$. For $b\\in Y$ write $X_b=X\\times_Y\\operatorname{Spec}\\kappa(b)$ for its scheme-theoretic fibre [def-pc-scheme-fibre]. Suppose $\\dim_a(X_{f(a)})=d$ for every $a\\in X$, where the point of the fibre corresponding to $a$ is understood and $\\dim_a$ denotes the minimum of dimensions of open neighbourhoods [def-kun-topological-dimension-at-point]. For every $x\\in X$, with $y=f(x)$, there exist open subschemes $U\\subseteq X$, $V\\subseteq Y$ containing $x$, $y$, respectively, such that $f(U)=V$, $\\dim U=\\dim_xX$, and $\\dim V=\\dim_yY$. Here $\\dim$ is topological Krull dimension [def-kun-topological-krull-dimension]. The restricted morphism $h:U\\to V$, $h(a)=f(a)$, is surjective, flat and locally of finite type; $U$ and $V$ are locally Noetherian. For every $a\\in U$, the fibre $U_{h(a)}=U\\times_V\\operatorname{Spec}\\kappa(h(a))$ satisfies $\\dim_a(U_{h(a)})=d$. No relation between $\\dim U$ and $\\dim V$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AFE (lemma-rel-dimension-dimension), first proof paragraph: simultaneous dimension-attaining shrinking, openness, surjectivity and preservation of the hypotheses; parent old proof steps 1-2"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$ and put $y=f(x)$. By the minimum in [def-kun-topological-dimension-at-point], choose open neighbourhoods $U_0\\ni x$ and $V_0\\ni y$ with $\\dim U_0=\\dim_xX$ and $\\dim V_0=\\dim_yY$. The two collections of neighbourhoods are nonempty (they contain the whole spaces), and the definition includes attainment of the minimum, even when its value is $+\\infty$.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull), part (4); remark immediately following"
+   }
+  },
+  {
+   "text": "The target $Y$ is locally Noetherian and $f$ is locally of finite type, so [pqf-lem-lft-fp-locnoeth] makes $f$ locally of finite presentation. Together with the assumed flatness, [lem-weil-pbc-flat-lfp-open] therefore says that the underlying map of $f$ is open. No quasi-compactness or global finite presentation is needed.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TX (lemma-noetherian-finite-type-finite-presentation), part (1), and 01UA (lemma-fppf-open), as cited in 0AFE"
+   }
+  },
+  {
+   "text": "Set $U=U_0\\cap f^{-1}(V_0)$, an open neighbourhood of $x$ by continuity, and set $V=f(U)$. Step 2 makes $V$ open; it contains $y$ and is contained in $V_0$. The minimum defining local dimension and [lem-weil-pbc-open-subspace-dimension-monotone] give $\\dim_xX\\leq\\dim U\\leq\\dim U_0=\\dim_xX$ and $\\dim_yY\\leq\\dim V\\leq\\dim V_0=\\dim_yY$. Hence both dimensions are attained simultaneously. The restriction $h:U\\to V$ is the restriction of the continuous map and its structure-sheaf map, using the open-subscheme structure [def-weil-open-immersion]; since $f(U)=V$, it is surjective.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), first proof paragraph; Topology Tag 0055 (definition-Krull), following remark"
+   }
+  },
+  {
+   "text": "Open subschemes carry restricted structure sheaves [def-weil-open-immersion], so for $a\\in U$ and $b=h(a)$ their stalks are $\\mathcal O_{U,a}=\\mathcal O_{X,a}$ and $\\mathcal O_{V,b}=\\mathcal O_{Y,b}$, with the same induced local homomorphism. This proves flatness of $h$ directly by [def-weil-flat-morphism]. Also $U$ and $V$ are locally Noetherian [pqf-def-locnoeth]: every affine open of the open subscheme $U$ (resp. $V$) is, with the same ring of sections, an affine open of $X$ (resp. $Y$), so its ring is Noetherian by [pqf-lem-affine-open-locnoeth]; covering $U$ (resp. $V$) by its affine opens gives the defining affine cover with Noetherian rings. No claim about finite-dimensional local rings is used.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "pqf-def-locnoeth",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), preservation under shrinking; Tag 01U3 (definition-flat); Tags 01T5 and 01T6 for the open-subscheme remark in pqf-def-locnoeth"
+   }
+  },
+  {
+   "text": "To check that $h$ is locally of finite type, take any affine opens $A\\subseteq U$ and $B\\subseteq V$ with $h(A)\\subseteq B$. Since $U\\subseteq X$ and $V\\subseteq Y$ are open subschemes with restricted structure sheaves, these same $A,B$ are affine opens in $X,Y$, with unchanged rings of sections and induced ring map. Applying the forward implication of [lem-weil-pbc-lft-affine-pairs] to $f$ says that $\\mathcal O_Y(B)\\to\\mathcal O_X(A)$ is of finite type. It is exactly $\\mathcal O_V(B)\\to\\mathcal O_U(A)$. The reverse implication of that same lemma now proves that $h$ is locally of finite type.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2 (lemma-locally-finite-type-characterize), equivalence (1) with (2); used in the shrinking of Tag 0AFE"
+   }
+  },
+  {
+   "text": "For $a\\in U$ put $b=h(a)=f(a)$. The fibre homeomorphisms in [def-pc-scheme-fibre] identify $|X_b|$ with $f^{-1}(b)$ and $|U_b|$ with $h^{-1}(b)=U\\cap f^{-1}(b)$, both with the subspace topology. Thus $|U_b|$ is the open subspace of $|X_b|$ cut out by $U$, and it contains the point corresponding to $a$. These identifications preserve opens and chains of irreducible closed subsets, hence preserve the dimensions and their neighbourhood minima. Apply [lem-weil-pbc-dimension-at-point-open-subspace] to this open subspace: $\\dim_a(U_b)=\\dim_a(X_b)=d$, the last equality being the hypothesis on $f$. This proves all clauses; if $X$ is empty there is no $x$ to consider.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), first proof paragraph, preservation of relative dimension; Schemes Tag 01K1 (lemma-fibre-topological); Topology Tag 0055 (definition-Krull)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AFE (lemma-rel-dimension-dimension), first proof paragraph, with simultaneous shrinking and preservation checks expanded using 01TX, 01UA, 01T2, 01K1 and Topology 0055"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(exists|surject|restrict).*(krullDimAt|KrullDimAt)|(krullDimAt|KrullDimAt).*(exists|surject|restrict)",
+   "results": "0 hits; ; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "sub": "Topology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open neighbourhoods attaining local Krull dimensions and restriction of flat locally finite type morphism preserving fibre dimensions",
+   "results": "8 hits; topologicalKrullDim, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.Flat.instMorphismRestrict, ringKrullDim, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeResLE, Module.supportDim; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenMap\", \"topologicalKrullDim\"",
+   "results": "0 hits; ; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finite type morphism of locally Noetherian schemes can be restricted around a source point to a surjective morphism between open neighbourhoods attaining the source and target local topological dimensions, preserving constant local fibre dimension",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of dimension-minimizing source and target open neighbourhoods for an open scheme morphism, restricting to its open image with constant fibre dimension",
+   "results": "8 hits; AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsLocalAtSource.iff_exists_resLE, AlgebraicGeometry.Scheme.Hom.opensRange, AlgebraicGeometry.IsZariskiLocalAtSource.iff_exists_resLE, AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion; inspected: component openness, restriction, or ring inequalities only; no theorem states this full neighbourhood construction or global dimension formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(krullDimAt|KrullDimAt).*(exists|surject|restrict)|(exists|surject|restrict).*(krullDimAt|KrullDimAt)",
+   "sub": "Topology",
+   "results": "0 hits: ; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDimAt\", \"IsOpenMap\"",
+   "sub": "",
+   "results": "0 hits: ; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finite type morphism of locally Noetherian schemes admits surjective open restrictions around a point attaining the source and target local topological Krull dimensions",
+   "sub": "",
+   "results": "8 hits: AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open map can be restricted to surjective open neighbourhoods attaining local topological Krull dimensions",
+   "sub": "",
+   "results": "8 hits: IsOpenMap.restrictPreimage, IsOpenMap.codRestrict, IsOpenMap.restrict, IsOpenMap.mapsToRestrict, IsOpenMap.image_mem_nhds, IsOpenMap.of_nhds_le, topologicalKrullDim, IsOpenMap.subtype_map; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of dimension minimizing open neighbourhoods and restriction to the open image of a flat scheme morphism",
+   "sub": "",
+   "results": "8 hits: AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyOpen.of_flat|locallyOfFinitePresentation_of_isLocallyNoetherian|LocallyOfFiniteType.*LocallyOfFinitePresentation",
+   "sub": "AlgebraicGeometry",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "krullDimAt|topologicalKrullDimAt|dimension.*neighbourhood",
+   "sub": "Topology",
+   "results": "0 hits: ; the hits provide component openness or restriction facts, not the full simultaneous dimension-attaining neighbourhood construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-flat-constant-relative-dimension",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph of lem-per-smooth-pullback-t-exact, support dimension increase under smooth pullback: Tag 0AFE (lemma-rel-dimension-dimension), first proof paragraph: simultaneous dimension-attaining shrinking, openness, surjectivity and preservation of the hypotheses; parent old proof steps 1-2",
+   "via": [
+    "lem-per-flat-constant-relative-dimension",
+    "lem-per-smooth-local-dimension",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-flat-dimension-surjective-neighbourhoods",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies. Expanded the simultaneous shrinking into minimum-attaining opens, intersection with the target preimage, and restriction to the open image; verified both dimension equalities by two-sided inequalities. Used existing nodes for local finite presentation, openness, finite-type affine pairs and fibre local dimension; introduced no nodes. Checked all citation statements and Mathlib search results.",
+  "blueprint": "First proof paragraph of lem-per-smooth-pullback-t-exact, support dimension increase under smooth pullback: Tag 0AFE (lemma-rel-dimension-dimension), first proof paragraph: simultaneous dimension-attaining shrinking, openness, surjectivity and preservation of the hypotheses; parent old proof steps 1-2",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic invariance of local topological dimension on an open subspace, applied to the fibre; this supplies the preservation check in 0AFE without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-f1102c707",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-f1102c707 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are unchanged from the node PASSed in the Q01 parent split, and no new nodes are delivered. Source: Stacks 0AFE (morphisms.tex lemma-rel-dimension-dimension, line 5679), first proof paragraph. That paragraph shrinks to dimension-attaining opens, gets openness from 01TX and 01UA, and shrinks so that f is surjective; the item makes this explicit. Step 1: dim_x is defined as an attained minimum, including the value infinity. Step 2: pqf-lem-lft-fp-locnoeth and lem-weil-pbc-flat-lfp-open (both Mathlib leaves, hypotheses checked) make f open. Step 3: with U=U0∩f^{-1}(V0) and V=f(U), both dimension chains hold through lem-weil-pbc-open-subspace-dimension-monotone. Step 4: flatness follows from equal stalks. Step 5: locally finite type follows from both directions of lem-weil-pbc-lft-affine-pairs. Step 6: the fibre homeomorphisms of def-pc-scheme-fibre plus lem-weil-pbc-dimension-at-point-open-subspace give fibre dimension d. That last node is a declared tool use, Lean-closed in slopmaster2 and already accepted on the parent; I accept it. Edge cases checked: X empty, d=0, infinite dimensions, f not surjective, A^1 over a DVR. Searching 0AFE and dimension-attaining with rg -L found no duplicate. There is no SGA citation. FIX: Step 4 justified that U and V are locally Noetherian only through the Remark inside the definition node pqf-def-locnoeth, which is a claim inside a definition (C4). It now argues through the Mathlib leaf pqf-lem-affine-open-locnoeth (affine opens of U and V are affine opens of X and Y with the same rings), which is added to the step's uses and to proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatDimensionSurjectiveNeighbourhoods",
+  "declaration": "AlgebraicGeometry.exists_surjective_dimension_attaining_neighbourhoods_of_flat",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatDimensionSurjectiveNeighbourhoods.lean",
+  "statement": "theorem exists_surjective_dimension_attaining_neighbourhoods_of_flat {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) [Flat f] [LocallyOfFiniteType f] (d : ℕ) (hd : ∀ a : X, topologicalKrullDimAt (f.asFiber a) = (d : WithBot ℕ∞)) (x : X) : ∃ (U : X.Opens) (V : Y.Opens), x ∈ U ∧ f x ∈ V ∧ ∃ e : U ≤ f ⁻¹ᵁ V, f '' (U : Set X) = (V : Set Y) ∧ topologicalKrullDim U.toScheme = topologicalKrullDimAt x ∧ topologicalKrullDim V.toScheme = topologicalKrullDimAt (f x) ∧ Surjective (f.resLE V U e) ∧ Flat (f.resLE V U e) ∧ LocallyOfFiniteType (f.resLE V U e) ∧ IsLocallyNoetherian U.toScheme ∧ IsLocallyNoetherian V.toScheme ∧ ∀ a : U.toScheme, topologicalKrullDimAt ((f.resLE V U e).asFiber a) = (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9dce2380e",
+  "group": "Q142",
+  "result": "pass",
+  "note": "The node differs from live only in its lean record; lean.statement is verbatim in the file; no new nodes or dependency modules. Every clause matches the node: IsLocallyNoetherian X/Y, Flat, LocallyOfFiniteType, d:ℕ, hd via f.asFiber (same form as the parent FlatConstantRelativeDimension), x∈U, f x∈V, f''U=V, topologicalKrullDim U/V = topologicalKrullDimAt x/(f x), canonical f.resLE V U e (e:U≤f⁻¹ᵁV, a Prop implied by the image equality) Surjective/Flat/LFT, U and V locally Noetherian, fibre dimension d for all a:U. No extra hypotheses and no universe restriction. The statement is true by the Stacks 0AFE argument (infimum attained in WithBot ℕ∞, f open as flat+lfp). Edge cases checked: empty X, d=0, infinite dimensions, non-surjective f. No definitions; proof is sorry; source/blueprint docstrings and the 6-step proof docstring are present; report has both sections; no duplicate declaration found. Advisory only: redundant plain import of Mathlib.Topology.KrullDimension (reached publicly). No compile run (no file changed); the clean compile is the worker's report."
+ }
+}

@@ -1,0 +1,394 @@
+{
+ "id": "lem-sfb-pure-codegeneracy-word-relations",
+ "kind": "statement",
+ "title": "Completeness of pure codegeneracy word relations within the endpoint degrees",
+ "statement": "Let $\\Delta$ be the category of nonempty finite ordinals $[r]=\\{0<\\cdots<r\\}$ and nondecreasing maps [def-weil-pbc-simplicial-set]. For $r\\geq0$ and $0\\leq i\\leq r$, let $\\sigma_i^r:[r+1]\\to[r]$ be the nondecreasing surjection identifying $i$ and $i+1$. Fix integers $0\\leq b\\leq a$. A codegeneracy word from $[a]$ to $[b]$ is a finite composable sequence of these maps, including the empty word when $a=b$; its value is their composite, with composition read right to left. If two codegeneracy words from $[a]$ to $[b]$ have equal values as maps of ordered sets, one can transform one word into the other by finitely many replacements of adjacent subwords, in either direction, using only the typed relations $$\\sigma_j^r\\circ\\sigma_i^{r+1}=\\sigma_i^r\\circ\\sigma_{j+1}^{r+1}\\qquad(r\\geq0,\\ 0\\leq i\\leq j\\leq r).$$ All words and all replacements in the transformation involve only ordinals with degrees between $b$ and $a$; no coface or mixed relation is used.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0168 (lemma-face-degeneracy-category), pure-codegeneracy normal-form input to its omitted proof; the codegeneracy relation is Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-sfb-pure-codegeneracy-word"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=a-b$. Each generator lowers degree by one, so a word has exactly $k$ factors and is encoded, from left to right, by $(u_0,\\ldots,u_{k-1})$, with factor $\\sigma_{u_p}^{b+p}$ and $0\\leq u_p\\leq b+p$. This uses the ordinal category of [def-weil-pbc-simplicial-set]. The empty list is the sole word for $k=0$. On an integer $x$, a generator is $\\sigma_i^r(x)=x-\\mathbf1_{x>i}$, directly from its defining ordered adjacent collapse.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+   }
+  },
+  {
+   "text": "For an adjacent pair $(j,i)$ with $i\\leq j$, the left degree is some $r$ and $j\\leq r$. Replace $(j,i)$ by $(i,j+1)$ using the stated relation. It is typed since $i\\leq r$ and $j+1\\leq r+1$. Both pair composites send $x$ to $x-\\mathbf1_{x>i}-\\mathbf1_{x>j+1}$: on the left the second subtraction occurs precisely when $x-\\mathbf1_{x>i}>j$, equivalently $x>j+1$; on the right the second subtraction occurs precisely when $x-\\mathbf1_{x>j+1}>i$, equivalently $x>i$. Thus replacement preserves the value, also after composition with the unchanged surrounding factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+   }
+  },
+  {
+   "text": "Define the nonnegative integer $D(u)=\\sum_{p=0}^{k-1}(b+p-u_p)$. Each replacement in step 2 raises the sum of the indices by exactly one, and hence lowers $D$ by one. Induction on $D$ proves termination at an increasing list: if no adjacent pair satisfies $u_p\\geq u_{p+1}$ we are done; otherwise do that replacement and apply the induction hypothesis to its smaller deficit. For $D=0$ every $u_p=b+p$, already strictly increasing. We have therefore constructed a finite allowed path from every word to a word $t_0<\\cdots<t_{k-1}$ with the same value.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+   }
+  },
+  {
+   "text": "For an increasing word with index set $T$, its value satisfies $q(x)=x-\\#\\{t\\in T:t<x\\}$ for $0\\leq x\\leq a$. Prove this by induction on $k$, allowing all endpoints $b\\leq a$. At $k=0$ it is the identity formula. For $k>0$ put $t=t_{k-1}$ and write $q=v\\circ\\sigma_t^{a-1}$, where $v$ is the increasing word from $[a-1]$ to $[b]$ with index set $T\\setminus\\{t\\}$. If $x\\leq t$, then $\\sigma_t(x)=x$ and $t$ is not counted, giving the formula by induction. If $x>t$, then $\\sigma_t(x)=x-1\\geq t$ and all $k-1$ preceding indices are strictly below $t$, so induction gives $q(x)=(x-1)-(k-1)=x-k$, again the claimed formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+   }
+  },
+  {
+   "text": "For $0\\leq x<a$, the formula in step 4 gives $q(x+1)-q(x)=1-\\mathbf1_{x\\in T}$. Indeed, among distinct integer indices, the counts for $t<x+1$ and $t<x$ differ by one exactly when $x\\in T$. Consequently $T=\\{x\\in\\{0,\\ldots,a-1\\}:q(x)=q(x+1)\\}$. Thus equal values of two increasing words give the same index set; listing that finite set in strictly increasing order gives the same list (successively take the least remaining element), hence the identical typed word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+   }
+  },
+  {
+   "text": "Given the original two words with equal values, apply step 3 to obtain increasing words. Their values remain equal by step 2, so step 5 identifies them. Concatenate the first finite replacement path with the reverse of the second. At every replacement the sequence of factor degrees remains $b,b+1,\\ldots,a-1$ from left to right, so all intermediate ordinals have degrees between $b$ and $a$. Each move is precisely one of the given codegeneracy relations in an unchanged word context; the reverse moves are allowed by the statement. For $a=b$ both paths are empty. This proves every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0168 (lemma-face-degeneracy-category), explicit agent-written proof of the pure-codegeneracy case of its omitted proof; relation from Tag 0167 (lemma-relations-face-degeneracy), part (5)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_normal_form_P_σ|mem_isAdmissible_iff|simplicialEvalσ|standardσ",
+   "results": {
+    "t": "2026-10-23T18:44:44Z",
+    "tool": "grep",
+    "query": "exists_normal_form_P_σ|mem_isAdmissible_iff|simplicialEvalσ|standardσ",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "026ad438891118f8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: exists_normal_form_P_σ (NormalForms.lean lines 286-308) is equality in the quotient by all simplex relations; it does not assert a derivation of raw words using only codegeneracy relations. The evaluation and membership lemmas give ingredients, not this statement in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique normal forms for composites of simplex codegeneracy maps using only sigma sigma relations",
+   "results": {
+    "t": "2026-10-23T18:44:44Z",
+    "tool": "leansearch",
+    "query": "Unique normal forms for composites of simplex codegeneracy maps using only sigma sigma relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategory.δ_comp_σ_of_le",
+     "SimplexCategoryGenRel.δ_comp_σ_of_le_assoc",
+     "CategoryTheory.SimplicialObject.σ_comp_σ_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_succ'_assoc",
+     "SimplexCategoryGenRel.σ_comp_σ_nat",
+     "SimplexCategory.σ_comp_σ",
+     "SimplexCategory.δ_comp_σ_self'_assoc",
+     "SimplexCategoryGenRel.δ_comp_σ_succ"
+    ],
+    "digest": "af1c84f66632d09d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: exists_normal_form_P_σ (NormalForms.lean lines 286-308) is equality in the quotient by all simplex relations; it does not assert a derivation of raw words using only codegeneracy relations. The evaluation and membership lemmas give ingredients, not this statement in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategoryGenRel\", \"normal\"",
+   "results": {
+    "t": "2026-10-23T18:44:44Z",
+    "tool": "loogle",
+    "query": "\"SimplexCategoryGenRel\", \"normal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.exists_normal_form_P_σ"
+    ],
+    "digest": "902de5d5e2161be8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: exists_normal_form_P_σ (NormalForms.lean lines 286-308) is equality in the quotient by all simplex relations; it does not assert a derivation of raw words using only codegeneracy relations. The evaluation and membership lemmas give ingredients, not this statement in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentation of finite ordinal surjections by adjacent collapses and degeneracy degeneracy relations without using any face maps",
+   "results": {
+    "t": "2026-10-23T18:44:45Z",
+    "tool": "leanfinder",
+    "query": "Presentation of finite ordinal surjections by adjacent collapses and degeneracy degeneracy relations without using any face maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.degeneracies",
+     "SimplexCategoryGenRel.degeneracies.σ",
+     "SimplexCategoryGenRel.generators.σ",
+     "SimplexCategoryGenRel.P_δ.δ",
+     "SimplexCategoryGenRel.generators.δ",
+     "SimplexCategoryGenRel.P_σ",
+     "SimplexCategoryGenRel.P_δ"
+    ],
+    "digest": "4b1688638a759da5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: exists_normal_form_P_σ (NormalForms.lean lines 286-308) is equality in the quotient by all simplex relations; it does not assert a derivation of raw words using only codegeneracy relations. The evaluation and membership lemmas give ingredients, not this statement in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two words of elementary monotone surjections identifying adjacent entries represent the same map if and only if codegeneracy commutation relations transform one word into the other",
+   "results": {
+    "t": "2026-10-23T18:44:46Z",
+    "tool": "leanfinder",
+    "query": "Two words of elementary monotone surjections identifying adjacent entries represent the same map if and only if codegeneracy commutation relations transform one word into the other",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.standardσ_comp_standardσ",
+     "SimplexCategoryGenRel.degeneracies",
+     "SimplexCategoryGenRel.P_σ",
+     "SimplexCategoryGenRel.mem_isAdmissible_iff",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.standardσ_cons",
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "SimplexCategoryGenRel.standardσ_cons_assoc"
+    ],
+    "digest": "8a10aac2c84204e3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: exists_normal_form_P_σ (NormalForms.lean lines 286-308) is equality in the quotient by all simplex relations; it does not assert a derivation of raw words using only codegeneracy relations. The evaluation and membership lemmas give ingredients, not this statement in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normal_form_P_σ|standardσ_comp_standardσ|mem_isAdmissible_iff",
+   "results": {
+    "t": "2026-10-23T19:17:07Z",
+    "tool": "grep",
+    "query": "exists_normal_form_P_σ|standardσ_comp_standardσ|mem_isAdmissible_iff",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "0d8609d13965819d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient normal forms and identities do not state a derivation of raw paths using only codegeneracy relations with bounded intermediate degrees; read NormalForms.lean 286-308 and 334-338, Basic.lean 53-75, and project SimplexPresentationFaithful.lean 170-192."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique normal forms of words in adjacent monotone surjections using only codegeneracy commutation relations",
+   "results": {
+    "t": "2026-10-23T19:17:08Z",
+    "tool": "leansearch",
+    "query": "Unique normal forms of words in adjacent monotone surjections using only codegeneracy commutation relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "Monoid.PushoutI.NormalWord.cons.congr_simp",
+     "HNNExtension.NormalWord",
+     "HNNExtension.NormalWord.mk.inj",
+     "HNNExtension.NormalWord.mk.injEq",
+     "Monoid.PushoutI.NormalWord.ext",
+     "HNNExtension.NormalWord.prod_injective",
+     "Monoid.PushoutI.NormalWord.Pair.noConfusion"
+    ],
+    "digest": "caa20d8b75b9cdc0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient normal forms and identities do not state a derivation of raw paths using only codegeneracy relations with bounded intermediate degrees; read NormalForms.lean 286-308 and 334-338, Basic.lean 53-75, and project SimplexPresentationFaithful.lean 170-192."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategoryGenRel\", \"normal\"",
+   "results": {
+    "t": "2026-10-23T19:17:08Z",
+    "tool": "loogle",
+    "query": "\"SimplexCategoryGenRel\", \"normal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.exists_normal_form_P_σ"
+    ],
+    "digest": "902de5d5e2161be8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient normal forms and identities do not state a derivation of raw paths using only codegeneracy relations with bounded intermediate degrees; read NormalForms.lean 286-308 and 334-338, Basic.lean 53-75, and project SimplexPresentationFaithful.lean 170-192."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two words of finite ordinal codegeneracies with the same value are connected using only codegeneracy relations",
+   "results": {
+    "t": "2026-10-23T19:17:09Z",
+    "tool": "leanfinder",
+    "query": "Two words of finite ordinal codegeneracies with the same value are connected using only codegeneracy relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.degeneracies",
+     "SimplexCategoryGenRel.standardσ",
+     "SimplexCategoryGenRel.P_σ",
+     "SimplexCategoryGenRel.P_δ",
+     "SimplexCategoryGenRel.faces",
+     "SimplexCategoryGenRel.degeneracies.σ",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.IsAdmissible.simplicialEvalσ_succ_getElem"
+    ],
+    "digest": "41203cd3a869e760"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient normal forms and identities do not state a derivation of raw paths using only codegeneracy relations with bounded intermediate degrees; read NormalForms.lean 286-308 and 334-338, Basic.lean 53-75, and project SimplexPresentationFaithful.lean 170-192."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completeness of the presentation of the category of finite ordinal surjections by sigma sigma relations on raw paths with bounded intermediate degrees",
+   "results": {
+    "t": "2026-10-23T19:18:16Z",
+    "tool": "leanfinder",
+    "query": "Completeness of the presentation of the category of finite ordinal surjections by sigma sigma relations on raw paths with bounded intermediate degrees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instCategorySimplexCategoryGenRel",
+     "SimplexCategoryGenRel",
+     "SimplexCategoryGenRel.P_σ",
+     "SimplexCategoryGenRel.mk",
+     "SimplexCategoryGenRel.generators",
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "SimplexCategoryGenRel.P_δ",
+     "SimplexCategoryGenRel.exists_P_σ_P_δ_factorization"
+    ],
+    "digest": "1c32ee77fe0d00aa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: quotient normal forms and identities do not state a derivation of raw paths using only codegeneracy relations with bounded intermediate degrees; read NormalForms.lean 286-308 and 334-338, Basic.lean 53-75, and project SimplexPresentationFaithful.lean 170-192."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-truncated-simplex-presentation",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts. Supporting categorical input: recognition of a truncated simplicial object from the face and degeneracy identities; bounded-degree version of Stacks 0168 and 016B. Pure-word input: Completeness of pure codegeneracy word relations within the endpoint degrees.",
+   "via": [
+    "lem-sfb-truncated-simplex-presentation",
+    "lem-sfb-split-polynomial-boundary-attachment",
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pure-codegeneracy-word-relations",
+  "worker": "stage1",
+  "summary": "Reconstructed the omitted pure-codegeneracy argument explicitly: typed adjacent rewriting, bounded integer deficit induction, direct evaluation formula for increasing words, recovery of the sorted index list, and reversal of paths. Every auxiliary calculation is elementary and written out; no new nodes. Existing project and Mathlib normal forms concern the quotient by all relations and do not attach to this bounded raw-word statement. The statement is unchanged.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), via the existing alteration/cotangent-resolution chain recorded in blueprint.from.place: supplies the pure-codegeneracy component needed by lem-sfb-truncated-simplex-presentation. Steps 1-6 fill the omitted pure-codegeneracy case of Stacks 0168 using only the relation 0167(5). No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-377a57824",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-377a57824 (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, six steps, no new nodes. Source: the item's relation is Stacks 0167(5) (lemma-relations-face-degeneracy) with n=r+1; the typed bounds check out. Stacks 0168 (lemma-face-degeneracy-category) leaves its proof omitted, so the agent-written pure-codegeneracy argument is the right content under D5, and proof_origin is marked agent. The only citation is def-weil-pbc-simplicial-set, a mathlib-status definition whose first sentence gives the ordinal category Δ; that is all step 1 uses. I checked every step by hand: (2) both sides of the relation evaluate to x-1_{x>i}-1_{x>j+1}, and the bounds i<=r, j+1<=r+1 hold; (3) the deficit D drops by exactly 1 per move, the induction has its base case, and the terminal word is strictly increasing; (4) the evaluation formula q(x)=x-#{t<x} holds by induction on k, using the rightmost factor sigma^{a-1}_{t_{k-1}}, with both cases checked; (5) q(x+1)-q(x)=1-1_{x in T} and T is contained in [0,a-1], so T is recovered from q; (6) reversing one path finishes, and factor degrees stay b..a-1 throughout. Edge cases a=b, k=1 and b=0 are fine. My own finite enumeration (b<=3, k<=4, 125 values) found each value's words in a single component under the typed moves, with value preserved by every move. Duplicate search with rg -L over dag/nodes: the coface sibling lem-sfb-pure-coface-word-relations, the full-presentation nodes lem-sc-module-cup-godement-simplex-presentation-faithful and lem-trf-simplex-word-evaluation-descent, lem-weil-pbc-simplex-degeneracy-factorization and lem-sc-simplex-morphism-property-generators all state different things. Mathlib's exists_normal_form_P_sigma works in the quotient category, so it is not a match. The parent lem-sfb-truncated-simplex-presentation uses exactly the stated degree-bounded clause. No SGA source, no route issue, no tool_uses, and this is not a re-split item. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PureCodegeneracyWordRelations",
+  "declaration": "SimplexCategory.CodegeneracyWord.related_of_eval_eq",
+  "file": "lean/Sheaf/AlgebraicTopology/PureCodegeneracyWordRelations.lean",
+  "statement": "theorem related_of_eval_eq {a b : ℕ} (hba : b ≤ a) (w v : CodegeneracyWord a b) (h : w.eval = v.eval) : Related w v",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3447b7f94",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Item lem-sfb-pure-codegeneracy-word-relations and new node def-sfb-pure-codegeneracy-word read in full against Stacks 0167(5)/0168. Clause by clause: CodegeneracyWord nil/snoc gives typed words with the empty word only at a=a; eval composes right to left; Step.context replaces i.castSucc,j by j.succ,i, which is sigma_j∘sigma_i = sigma_i∘sigma_{j+1} for i<=j<=r, the same orientation as Mathlib σ_comp_σ, inside arbitrary before/after words; Related = EqvGen Step; intermediate degrees stay in [b,a] by typing; no coface letters. hba matches the node and is redundant, not stronger. Edge cases a=b, b=0, r=0, i=j, j=r covered; universes are plain Type. Only lean and stmt_deps changed against live. No CodegeneracyWord in Mathlib or project trees; SimplexCategoryGenRel works modulo all relations, so the new node is needed. Definitions carry real data; only the item theorem is sorry. Docstrings give source and blueprint; the six proof steps were re-checked; lean.statement fields are verbatim; report has Worker report and Second reading by Q70. Not recompiled: no file changed."
+ }
+}

@@ -1,0 +1,384 @@
+{
+ "id": "lem-sf-triple-compactification-normal-form",
+ "kind": "statement",
+ "title": "Separate compactification normal forms for the two triple product composites",
+ "statement": "Fix distinct primes $p_0,\\ell$, an integer $a\\geq1$, $k_0=\\mathbf F_{p_0^a}$, $k=\\overline{k_0}$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_{E,m}=\\mathcal O_E/\\varpi_E^m$ for $m\\geq1$. Choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, $n\\geq1$, and a six-functor datum [def-sf-datum] with the specified canonical transformations [def-exchange-projection, def-sf-pf]. All schemes and arrows below are separated and of finite type over $k$; all inputs lie in the displayed bounded constructible finite-Tor categories. Integral pullback and tensor are completed; field operations use rationalization and common finite coefficient fields. For any $u:U\\to B$, $v:V\\to B$ with projections $\\pi_U,\\pi_V$ on $U\\times_BV$, write $u\\times_Bv=u\\pi_U=v\\pi_V$, $P\\boxtimes Q=L\\pi_U^*P\\otimes^L_\\Lambda L\\pi_V^*Q$, and define the specified morphism\n$$\\lambda_{u,v}(P,Q)=\\alpha_{v,\\pi_V}\\circ Rv_!\\bigl(\\operatorname{PF}_{\\pi_V,L\\pi_U^*P,Q}\\circ(\\operatorname{Ex}_{u,v}(P)\\otimes1_Q)\\bigr)\\circ\\Psi_v(Ru_!P,Q),$$\nwhere $\\Psi_v(F,Q)=Rv_!(\\sigma_{Q,Lv^*F})\\circ\\operatorname{PF}_{v,Q,F}\\circ\\sigma_{F,Rv_!Q}$ and $\\alpha$ is the supplied compact-support compositor. Let $f_i:X_i\\to B$ and $K_i\\in D^b_{ctf}(X_i,\\Lambda)$ for $i=1,2,3$, and choose compactifications $f_i=a_i j_i$ with open $j_i:X_i\\hookrightarrow\\bar X_i$ and proper $a_i:\\bar X_i\\to B$. Put $P_i=j_{i!}K_i$, $V=X_1\\times_BX_2\\times_BX_3$, $\\bar V=\\bar X_1\\times_B\\bar X_2\\times_B\\bar X_3$, $u=j_1\\times_Bj_2\\times_Bj_3$, and $c:\\bar V\\to B$. Define $\\Theta_L(f;K)=\\lambda_{f_1\\times_Bf_2,f_3}(K_1\\boxtimes K_2,K_3)\\circ(\\lambda_{f_1,f_2}(K_1,K_2)\\otimes1)$ and $\\Theta_R(f;K)=\\lambda_{f_1,f_2\\times_Bf_3}(K_1,K_2\\boxtimes K_3)\\circ(1\\otimes\\lambda_{f_2,f_3}(K_2,K_3))$. Define $\\Theta_L(a;P),\\Theta_R(a;P)$ by the same formulas on the proper compactifications.\n\nFor two opens $j,k$ over $B$, let $e_{j,k}:(j_!K)\\boxtimes(k_!L)\\to(j\\times_Bk)_!(K\\boxtimes L)$ be the normalized open external tensor comparison of [lem-sf-open-external-tensor-normalization] at finite coefficients, and its completed, rationalized and common-stage forms of [lem-sf-integral-open-product-diagram-normalization] at the other stages. On $\\bar V$, set\n$$e_L=e_{j_1\\times j_2,j_3}\\circ(e_{j_1,j_2}\\boxtimes1),\\qquad\ne_R=e_{j_1,j_2\\times j_3}\\circ(1\\boxtimes e_{j_2,j_3}),$$\nwith extension-by-zero composition and tensor associators inserted. These are isomorphisms from $P_1\\boxtimes P_2\\boxtimes P_3$ to $u_!(K_1\\boxtimes K_2\\boxtimes K_3)$, restrict to the identity on $V$, and satisfy $e_L=e_R$ under the associators. Under the specified compactification comparisons for all input and output direct images, the two separate normal-form identities hold:\n$$\\Theta_L(f;K)=Rc_*(e_L)\\circ\\Theta_L(a;P),\\qquad\n\\Theta_R(f;K)=Rc_*(e_R)\\circ\\Theta_R(a;P).$$\nAll displayed comparisons respect refinement of the chosen compactifications. At integral coefficients the comparisons are images under functorial $R\\lim$ of morphisms and equalities in the derived category of the actual strict finite-reduction diagrams, with derived pointwise tensor over $m\\mapsto A_{E,m}$. Their finite reductions are bounded constructible with bounded etale-origin witnesses, without requiring transition maps between the witnesses. At field stages the equalities use rationalization and scalar extension from a common finite field. No injectivity of reduction on integral derived Hom sets is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Reduction to proper f,g in the symmetry paragraph, extended to three factors for clause (ii): returned steps 5--8, including coefficient passage in the derived strict-diagram category."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-exchange-projection",
+  "def-sf-pf",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-sf-integral-open-product-diagram-normalization"
+ ],
+ "proof": [
+  {
+   "text": "First take $\\Lambda=A_{E,n}$. For $ij=12,23$, put $X_{ij}=X_i\\times_BX_j$, $\\bar X_{ij}=\\bar X_i\\times_B\\bar X_j$, $j_{ij}=j_i\\times_Bj_j$, $a_{ij}:\\bar X_{ij}\\to B$, $D_{ij}=K_i\\boxtimes K_j$, $Q_{ij}=P_i\\boxtimes P_j$ and $H_{ij}=j_{ij!}D_{ij}$. The maps $a_{ij}$ and $c$ are proper: each is a composite of base changes of the $a_i$. The product opens are the open subschemes obtained by intersecting the inverse images of the $X_i\\subset\\bar X_i$ under the product projections; hence $j_{ij}$ and $u$ are open immersions. The required complexes are in the finite-Tor constructible domains: open extension preserves the input intervals, pullback preserves them, and tensor adds the two Tor intervals. Bounded constructible inputs have bounded etale-origin witnesses, so the compactification comparisons apply.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-open-ctf",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "Write $e_{ij}:Q_{ij}\\xrightarrow{\\sim}H_{ij}$ for the normalized binary open comparison. Apply the binary compactification identity to $(f_i,f_j)$, using precisely $a_i j_i,a_j j_j$. In compactification coordinates this gives\n$$\\lambda_{f_i,f_j}(K_i,K_j)=Ra_{ij*}(e_{ij})\\,\\lambda_{a_i,a_j}(P_i,P_j).$$\nThe same identity applies to $(f_1\\times_Bf_2,f_3)$ using $a_{12}j_{12},a_3j_3$, and to $(f_1,f_2\\times_Bf_3)$ using $a_1j_1,a_{23}j_{23}$. Thus its outer proper inputs are respectively $(H_{12},P_3)$ and $(P_1,H_{23})$.",
+   "uses": [
+    "lem-sf-product-compactification-identity",
+    "lem-sf-open-external-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "The proper comparison $\\lambda_{a,b}$ is natural in both inputs. Indeed its defining factors are natural transformations: exchange, projection, the signed symmetry, and the direct-image compositor. Composing their naturality squares gives, for $s:C\\to C'$ on the source of $a$ and $t:N\\to N'$ on the source of $b$,\n$$\\lambda_{a,b}(C',N')\\,(Ra_*s\\otimes Rb_*t)\n=R(a\\times_Bb)_*(s\\boxtimes t)\\,\\lambda_{a,b}(C,N).$$\nHere $a,b$ are proper, so the proper identifications of the supplied six-functor datum identify the shriek factors with these star factors. This argument asserts naturality only; it uses no triple-product coherence theorem.",
+   "uses": [
+    "def-sf-datum",
+    "def-exchange-projection",
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "For the left parenthesization, substitute the $ij=12$ equality of step 2 into the inner factor, and its outer equality into the outer factor. In the resulting composite the middle part is\n$$\\lambda_{a_{12},a_3}(H_{12},P_3)\\,(Ra_{12*}e_{12}\\otimes1).$$\nStep 3 with $s=e_{12}$ and $t=1$ replaces this by\n$$Rc_*(e_{12}\\boxtimes1)\\,\\lambda_{a_{12},a_3}(Q_{12},P_3).$$\nConsequently\n$$\\Theta_L(f;K)=Rc_*\\!\\left(e_{j_{12},j_3}\\,(e_{12}\\boxtimes1)\\right)\\Theta_L(a;P)=Rc_*(e_L)\\Theta_L(a;P).$$\nFunctoriality of $Rc_*$ combines the two displayed output maps. The extension-composition and fibre-product identifications in this calculation are the supplied compactification ones; their associativity is clause (A4).",
+   "uses": [
+    "def-sf-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "For the right parenthesization substitute the $ij=23$ and the corresponding outer equalities of step 2. Its middle part becomes\n$$\\lambda_{a_1,a_{23}}(P_1,H_{23})\\,(1\\otimes Ra_{23*}e_{23}).$$\nStep 3 with $s=1$ and $t=e_{23}$ gives\n$$Rc_*(1\\boxtimes e_{23})\\,\\lambda_{a_1,a_{23}}(P_1,Q_{23}).$$\nTherefore\n$$\\Theta_R(f;K)=Rc_*\\!\\left(e_{j_1,j_{23}}\\,(1\\boxtimes e_{23})\\right)\\Theta_R(a;P)=Rc_*(e_R)\\Theta_R(a;P).$$\nThis calculation establishes the right normal form separately; it does not identify the two proper triple composites.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "The binary open maps are isomorphisms and restrict to identity. Apply their three-open associativity clause to $j_1,j_2,j_3$. It says exactly that $e_L=e_R$, with the normalized extension compositors inserted, and that both restrictions are identity on $K_1\\boxtimes K_2\\boxtimes K_3$. Pullback monoidality, including its associativity compatibility, identifies the nested external products used in steps 4 and 5 with the displayed triple products. Thus their sources and targets are precisely those in the item.",
+   "uses": [
+    "lem-sf-open-external-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "The finite binary identity is compatible with refinement of each chosen compactification. Apply its refinement squares to the two applications in step 2 for either parenthesization. The exchange factors commute with these comparisons, and the projection factors are independent of compactification through these comparisons. Whisker these commuting squares by the remaining factors and paste them. Their common middle comparisons cancel, so the entire left and right normal-form squares commute. The open associativity identity is between the same normalized maps already appearing in these squares; it introduces no choice of an additional comparison.",
+   "uses": [
+    "lem-sf-product-compactification-identity",
+    "fix-lem-exchanges",
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "Now take $\\Lambda=\\mathcal O_E$. Work with the actual strict reduction diagrams $K_{i,\\bullet}$ over $m\\mapsto A_{E,m}$ and their derived pointwise tensor. The integral open-product diagram theorem supplies $e^\\bullet_{ij}$ and the binary compactification identity as actual morphisms and equalities in the derived diagram category, together with its three-open associativity equality. Apply that theorem four times, to $(1,2),(2,3),(12,3),(1,23)$, using the same product compactifications as step 2. It also supplies the bounded constructible finite reductions and bounded etale-origin witnesses for these expressions. Only the actual diagrams carry transitions; the witnesses at different $m$ need not do so.",
+   "uses": [
+    "lem-sf-integral-open-product-diagram-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "In that derived diagram category repeat the substitutions of steps 4 and 5. Naturality of the diagram exchange/projection composite follows by composing the naturality squares of its canonical factors, just as in step 3; these are actual system transformations, with their canonical pullback/tensor and direct-image compositors. Thus the middle maps are respectively $R_c^{\\mathcal T}(e_{12}^\\bullet\\boxtimes1)$ and $R_c^{\\mathcal T}(1\\boxtimes e_{23}^\\bullet)$. Composing with the two outer open maps gives the diagram versions of $e_L$ and $e_R$. They agree by the diagram associativity clause. This proves both normal-form equalities before any evaluation or limit is taken. Its realization hypotheses hold for the finitely many expressions here: integral finite Tor amplitude supplies intervals independent of $m$; open extension preserves them and tensor adds them, as in step 1. Each proper source has finite dimension $d$, so etale direct-image vanishing gives the uniform bound $2d$, and the direct-image Tor theorem gives $[a,b+2d]$ for every $m$. Use $d=0$ for an empty source. The operation/reduction comparisons give normalized transitions. If a coherent etale presentation is needed, apply the derived system comparison to the actual reduction system: its counit supplies that presentation since every level has bounded etale origin. It does not require transitions on the witnesses originally chosen. For the coefficient hypotheses, the DVR theorem gives $0<|\\varpi_E|<1$ and a non-zero-divisor $\\varpi_E$. Representatives of compatible residue classes are Cauchy, since successive differences lie in $\\varpi_E^m\\mathcal O_E$. Completeness of $E$ gives a limit in the closed unit ball $\\mathcal O_E$ representing every residue class. Injectivity follows from $|\\varpi_E|^m\\to0$. Thus $\\mathcal O_E\\cong\\lim_m A_{E,m}$. These verify the coefficient hypotheses of that comparison.",
+   "uses": [
+    "lem-sf-integral-open-product-diagram-normalization",
+    "lem-sf-integral-compactification-system-realization",
+    "def-weil-finite-tor-amplitude",
+    "lem-kun-dimension-finite-type",
+    "lem-sf-etale-direct-image-vanishing",
+    "thm-sf-direct-image-tor-amplitude",
+    "lem-fix-operation-reduction",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "Apply functorial $R\\lim$ to these diagram maps and equalities. The open-product diagram theorem identifies the binary maps with the required completed $e$, exchange/PF composites and their compactification comparisons. The system-realization theorem intertwines all their whiskerings, including nested compact-support and tensor expressions, with the completed operations. Therefore the limits of the two equations in step 9 are exactly the two integral normal forms, and the limit of the diagram open associativity equality is $e_L=e_R$. A functor preserves identities and isomorphisms, giving the remaining open normalization assertions. This uses images of already equal diagram arrows, not injectivity of finite reduction on any integral Hom set.",
+   "uses": [
+    "lem-sf-integral-open-product-diagram-normalization",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "For integral refinement, the normalized proper/open comparison satisfies its horizontal, vertical and base-change pasting equations in the derived strict-tower category, including refinement squares. Its semilinear realization satisfies these equations before scalar restriction or evaluation. The refinement squares for exchange commute by the refinement clause of the exchange theorem; those for projection commute by independence of compactification in projection coherence. Paste the binary squares as in step 7 and apply their contextual realization comparisons and $R\\lim$. This gives the refinement squares of both completed normal forms, with the prescribed compactification maps.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sf-integral-compactification-system-realization",
+    "fix-lem-exchanges",
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  },
+  {
+   "text": "For $E$-coefficients apply rationalization to the integral equations. For $\\overline{\\mathbf Q}_\\ell$ choose a common finite coefficient field representing the finite list of inputs and maps, and apply its scalar-extension functor. The open-product coefficient theorem identifies these images with the prescribed open and binary compactification maps. Operation/coefficient comparisons preserve the tensor associators, units, counits and hence the ordered composites defining $\\Theta_L$ and $\\Theta_R$. Functoriality carries both normal forms, open associativity and the refinement squares to the field stages. The scalar-extension cocycle makes their classes independent of enlarging the common field. No reduction of rational coefficients to $A_{E,m}$ is used.",
+   "uses": [
+    "lem-sf-integral-open-product-diagram-normalization",
+    "lem-fix-operation-reduction",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Triple-product clause (ii), compactification reduction and naturality of the specified binary composite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-datum",
+  "def-weil-finite-tor-amplitude",
+  "fix-lem-exchanges",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-open-product-diagram-normalization",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-sf-product-compactification-identity",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-open-ctf",
+  "lem-weil-l-adic-extension-complete",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-sf-pf-coherence",
+  "thm-sf-direct-image-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Explicit double application of the binary compactification normal form in the reduction-to-proper paragraph and triple-product clause (ii)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Triple compactly supported derived external product comparison factors as proper triple product followed by extension by zero on product compactifications",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompactlySupportedContinuousMap.compLinearMap\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"{β : Type u_3} →\\n  {γ : Type u_4} →\\n    {δ : Type u_5} →\\n      [inst : TopologicalSpace β] →\\n        [inst_1 : TopologicalSpace γ] →\\n          [inst_2 : TopologicalSpace δ] →\\n            [inst_3 : AddCommMonoid δ] →\\n              [inst_4 : ContinuousAdd δ] →\\n                {R : Type u_6} →\\n        \", \"doc\": \"Given a cocompact continuous map $ g : \\\\beta \\\\to \\\\gamma $, this constructs an $ R $-linear map from the space of compactly supported continuous functions $ C_c(\\\\gamma, \\\\delta) $ to $ C_c(\\\\beta, \\\\delta\"}\n  {\"name\": \"CompactlySupportedContinuousMap.compLeft\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"{α : Type u_2} →\\n  {β : Type u_3} →\\n    [inst : TopologicalSpace α] →\\n      [inst_1 : TopologicalSpace β] →\\n        [inst_2 : Zero β] →\\n          {γ : Type u_5} →\\n            [inst_3 : TopologicalSpace γ] →\\n              [inst_4 : Zero γ] → C(β, γ) → CompactlySupportedContinuousMap α β → CompactlySu\", \"doc\": \"The function $\\\\text{compLeft}$ takes a continuous map $g : \\\\beta \\\\to \\\\gamma$ and a compactly supported continuous map $f : \\\\alpha \\\\to \\\\beta$, and returns a compactly supported continuous map $\\\\alpha \\\\\"}\n  {\"name\": \"CompactlySupportedContinuousMap.comp_assoc\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"∀ {α : Type u_2} {β : Type u_3} {γ : Type u_4} [inst : TopologicalSpace α] {δ : Type u_5} [inst_1 : TopologicalSpace β]\\n  [inst_2 : TopologicalSpace γ] [inst_3 : TopologicalSpace δ] [inst_4 : Zero δ]\\n  (f : CompactlySupportedContinuousMap γ δ) (g : CocompactMap β γ) (h : CocompactMap α β),\\n  (f.comp\", \"doc\": \"For compactly supported continuous maps $ f : C_c(\\\\gamma, \\\\delta) $, cocompact continuous maps $ g : \\\\beta \\\\to_{\\\\text{co}} \\\\gamma $, and $ h : \\\\alpha \\\\to_{\\\\text{co}} \\\\beta $, the composition of maps s\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic\", \"type\": \"∀ {J₁ : Type u₁} {J₂ : Type u₂} {C : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} J₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} J₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.MonoidalCategory C] {I₁ : Type u₃} {I₂ : Type u₄}\\n  [inst_4 : CategoryTheory.Category.{\", \"doc\": \"For categories $J₁, J₂, C$ and functors $F₁ : I₁ → J₁$, $G₁ : J₁ → C$, $F₂ : I₂ → J₂$, $G₂ : J₂ → C$, the inverse of the natural isomorphism between the composition $(G₁ × G₂) ∘ (F₁ × F₂)$ and the ext\"}\n  {\"name\": \"CategoryTheory.IsSifted.factorization_prodComparison_colim\", \"module\": \"Mathlib/CategoryTheory/Limits/Sifted\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.SmallCategory C] (X Y : CategoryTheory.Functor C (Type u)),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.Limits.HasColimit.isoOfNatIso\\n          ((CategoryTheory.MonoidalCategory.externalProductCompDiagIso C (Type u)).app (X, Y)).symm).hom\\n      (C\", \"doc\": \"For sifted colimits in a Cartesian monoidal category, the product comparison morphism $\\\\text{colim}(X \\\\times Y) \\\\to \\\\text{colim}(X) \\\\times \\\\text{colim}(Y)$ factors as the composition of three canonica\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.prodCompExternalProduct_hom_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic\", \"type\": \"∀ {J₁ : Type u₁} {J₂ : Type u₂} {C : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} J₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} J₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.MonoidalCategory C] {I₁ : Type u₃} {I₂ : Type u₄}\\n  [inst_4 : CategoryTheory.Category.{\", \"doc\": \"For categories $J₁, J₂, C$ and functors $F₁ : I₁ → J₁$, $G₁ : J₁ → C$, $F₂ : I₂ → J₂$, $G₂ : J₂ → C$, the component of the natural isomorphism at any object $X = (X₁, X₂) ∈ I₁ × I₂$ is the identity mo\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\nHits concern topological compactifications, ordinary adic completion of modules, or pointwise external tensor of diagrams (Monoidal/ExternalProduct/Basic.lean:29-46). None states the geometric triple compactification comparison of specified derived shriek maps, including the strict-diagram passage.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero external tensor product comparison commutes with iterated pushforward products and derived completion of finite coefficient reduction diagrams",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\nHits concern topological compactifications, ordinary adic completion of modules, or pointwise external tensor of diagrams (Monoidal/ExternalProduct/Basic.lean:29-46). None states the geometric triple compactification comparison of specified derived shriek maps, including the strict-diagram passage.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\nHits concern topological compactifications, ordinary adic completion of modules, or pointwise external tensor of diagrams (Monoidal/ExternalProduct/Basic.lean:29-46). None states the geometric triple compactification comparison of specified derived shriek maps, including the strict-diagram passage.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|extensionByZero.*tensor|tensor.*extensionByZero",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Projective.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Topology.Compactification.StoneCech\"}\n  {\"file\": \"Mathlib/Topology/Category/Stonean/Adjunctions.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Topology.Compactification.StoneCech\"}\n  {\"file\": \"Mathlib/Topology/Category/Stonean/Adjunctions.lean\", \"line\": \"16\", \"text\": \"to sets, using the Stone-Cech compactification. This allows to conclude that the monomorphisms in\"}\n  {\"file\": \"Mathlib/Topology/Category/Stonean/Adjunctions.lean\", \"line\": \"28\", \"text\": \"/-- The object part of the compactification functor from types to Stonean spaces. -/\"}\n  {\"file\": \"Mathlib/Topology/Category/Stonean/Adjunctions.lean\", \"line\": \"36\", \"text\": \"/-- The equivalence of homsets to establish the adjunction between the Stone-Cech compactification\"}\n  {\"file\": \"Mathlib/Topology/Category/Stonean/Adjunctions.lean\", \"line\": \"48\", \"text\": \"/-- The Stone-Cech compactification functor from types to Stonean spaces. -/\"}\n  {\"file\": \"Mathlib/Topology/Category/CompHaus/Projective.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Topology.Compactification.StoneCech\"}\n  {\"file\": \"Mathlib/Topology/Category/CompHaus/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Topology.Compactification.StoneCech\"}\n  {\"file\": \"Mathlib/Topology/Category/CompHaus/Basic.lean\", \"line\": \"75\", \"text\": \"/-- (Implementation) The object part of the compactification functor from topological spaces to\"}\n  {\"file\": \"Mathlib/Topology/Category/CompHaus/Basic.lean\", \"line\": \"107\", \"text\": \"/-- The Stone-Cech compactification functor from topological spaces to compact Hausdorff spaces,\"}\n  {\"file\": \"Mathlib/Topology/Category/LightProfinite/Sequence.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Topology.Compactification.OnePoint.Basic\"}\n  {\"file\": \"Mathlib/Topology/Category/LightProfinite/Sequence.lean\", \"line\": \"14\", \"text\": \"This file defines the light profinite set `ℕ∪{∞}`, defined as the one point compactification of\"}\n  {\"file\": \"Mathlib/Topology/Category/LightProfinite/Sequence.lean\", \"line\": \"52\", \"text\": \"/-- The one point compactification of the natural numbers as a light profinite set. -/\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"12\", \"text\": \"/-! # Stone-Čech compactification\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"14\", \"text\": \"Construction of the Stone-Čech compactification using ultrafilters.\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"25\", \"text\": \"injective, so one cannot always think of `α` as being “inside” its compactification `StoneCech α`.\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"52\", \"text\": \"  it the Stone-Čech compactification of α (viewed as a discrete space). -/\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"228\", \"text\": \"/-- Auxiliary construction towards the Stone-Čech compactification of a topological space.\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Topology.Compactification.OnePoint.Basic\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"line\": \"13\", \"text\": \"# One-point compactification of Euclidean space is homeomorphic to the sphere.\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"line\": \"23\", \"text\": \"/-- A homeomorphism from the one-point compactification of a hyperplane in Euclidean space to the\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Sphere.lean\", \"line\": \"32\", \"text\": \"/-- A homeomorphism from the one-point compactification of a finite-dimensional real vector space to\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Basic.lean\", \"line\": \"14\", \"text\": \"# The one-point compactification\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Basic.lean\", \"line\": \"16\", \"text\": \"We construct the one-point compactification of an arbitrary topological space `X` and prove some\"}\nHits concern topological compactifications, ordinary adic completion of modules, or pointwise external tensor of diagrams (Monoidal/ExternalProduct/Basic.lean:29-46). None states the geometric triple compactification comparison of specified derived shriek maps, including the strict-diagram passage.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Three factor compactification formula for canonical compactly supported derived Kunneth comparisons at finite and completed adic coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.piEquivOfFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [DecidableEq ι] →\\n                [Fintype ι] → AdicCompletion I ((j : \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, this constructs a linear equivalence between the $ I $-adic completion of the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"AdicCompletion.piEquivFin\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (n : ℕ) → AdicCompletion I (Fin n → R) ≃ₗ[AdicCompletion I R] Fin n → AdicCompletion I R\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a natural number $ n $, this constructs a linear equivalence between the $ I $-adic completion of the product $ \\\\prod_{i=1}^n R $ (viewed as functions\"}\n  {\"name\": \"CompHausLike.isIsoSigmaComparison\", \"module\": \"Mathlib.Topology.Category.CompHausLike.SigmaComparison\", \"type\": \": IsIso <| sigmaComparison X σ\", \"doc\": \"The morphism comparing the product of a compact Hausdorff-like space constructed from a disjoint union with the product of its components is an isomorphism. This isomorphism maps elements through cont\"}\n  {\"name\": \"Filter.coprodᵢ_cocompact\", \"module\": \"Mathlib.Topology.Compactness.Compact\", \"type\": \"{X : ι → Type*} [∀ d, TopologicalSpace (X d)] :\\n  (Filter.coprodᵢ fun d => Filter.cocompact (X d)) = Filter.cocompact (∀ d, X d)\", \"doc\": \"The product filter of the cocompact filters on each space $X_i$ is equal to the cocompact filter on the product space $\\\\prod_{i : \\\\iota} X_i$.\"}\n  {\"name\": \"TopologicalSpace.Compacts.coe_prod\", \"module\": \"Mathlib.Topology.Sets.Compacts\", \"type\": \"(K : Compacts α) (L : Compacts β) : (K ×ˢ L : Compacts (α × β)) = (K : Set α) ×ˢ (L : Set β)\", \"doc\": \"For any compact subsets $ K \\\\subseteq \\\\alpha $ and $ L \\\\subseteq \\\\beta $, the canonical coercion of their product $ K \\\\times L $ (as a compact subset of $ \\\\alpha \\\\times \\\\beta $) to a set is equal to t\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X : Scheme} [CompactSpace X] : QuasiCompact X.toSpecΓ\", \"doc\": \"For any scheme $X$ that is a compact topological space, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is quasi-compact. This morphism arises as the unit of the \"}\n  {\"name\": \"instCompactSpaceMultiplicative\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"[CompactSpace X] : CompactSpace (Multiplicative X)\", \"doc\": \"If $X$ is a compact space, then the multiplicative type tag $\\\\text{Multiplicative}\\\\, X$ is also a compact space, inheriting the topology from $X$.\"}\nHits concern topological compactifications, ordinary adic completion of modules, or pointwise external tensor of diagrams (Monoidal/ExternalProduct/Basic.lean:29-46). None states the geometric triple compactification comparison of specified derived shriek maps, including the strict-diagram passage.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "0 actual hits; top names/files: .  Read the returned types: hits concern ordinary sheaf pushforward, homological-complex associators or compact support for continuous maps; none gives the stated geometric triple compactification identity with strict coefficient diagrams.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|extensionByZero.*tensor|tensor.*extensionByZero",
+   "results": "25 actual hits; top names/files: Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/Tactic/Linter/DirectoryDependency.lean, Mathlib/Combinatorics/Hindman.lean, Mathlib/Topology/Category/Profinite/Projective.lean, Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/Stonean/Adjunctions.lean.  Read the returned types: hits concern ordinary sheaf pushforward, homological-complex associators or compact support for continuous maps; none gives the stated geometric triple compactification identity with strict coefficient diagrams.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Three factor compactification formula for compactly supported derived Kunneth maps at finite and completed integral coefficients",
+   "results": "8 actual hits; top names/files: CompactlySupportedContinuousMap.compLinearMap, CompactlySupportedContinuousMap.comp, CompHaus.instEnoughProjectives, CompactlySupportedContinuousMap.compMulHom, Filter.coprodᵢ_cocompact, CompactlySupportedContinuousMap.compAddMonoidHom, ContDiffMapSupportedIn.compact_supp, CompactlySupportedContinuousMap.compNonUnitalAlgHom.  Read the returned types: hits concern ordinary sheaf pushforward, homological-complex associators or compact support for continuous maps; none gives the stated geometric triple compactification identity with strict coefficient diagrams.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived compactly supported Kunneth comparison for three factors equals the proper compactification comparison followed by extension by zero external tensor maps",
+   "results": "8 actual hits; top names/files: HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.ιOrZero_mapBifunctorAssociatorX_hom, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.associator.  Read the returned types: hits concern ordinary sheaf pushforward, homological-complex associators or compact support for continuous maps; none gives the stated geometric triple compactification identity with strict coefficient diagrams.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of iterated external product shriek pushforward maps under open extension and strict adic reduction diagrams",
+   "results": "8 actual hits; top names/files: AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardNatTrans_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc.  Read the returned types: hits concern ordinary sheaf pushforward, homological-complex associators or compact support for continuous maps; none gives the stated geometric triple compactification identity with strict coefficient diagrams.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-kunneth-coherence",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Reduction to proper f,g in the symmetry paragraph, extended to three factors for clause (ii): returned steps 5--8, including coefficient passage in the derived strict-diagram category.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-triple-compactification-normal-form",
+  "worker": "stage1",
+  "summary": "NR: assembled both triple compactification normal forms by two binary substitutions and naturality; used existing open associativity and strict-diagram coefficient normalization; checked domains and refinements. No statement changes and no new nodes.",
+  "blueprint": "lem-sf-kunneth-coherence.proof.md, reduction to proper f,g in (i), applied separately to the two parenthesizations in (ii); coefficient passage carried out in the derived strict-diagram category.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Proper base-change and composition give the proper product structural maps; this is geometric permanence, not a replacement of the Kunneth route."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Open extension preserves the constructible and finite-Tor domains for the product-compactification inputs."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Projection pullbacks preserve the finite-Tor constructible domains needed for the external products."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Tensor adds Tor intervals, typing the iterated external products; this does not use Kunneth coherence."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Bounded constructible finite inputs have etale-origin witnesses for compactification comparisons."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Monoidality and associativity compatibility of pullback identify nested external products; used solely as a tensor tool."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Its contextual comparison clause identifies nested diagram words and their canonical maps with the completed operations."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Coefficient transport preserves the canonical tensor and adjunction maps used in the field-stage composites."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the finitely many proper sources gives uniform direct-image bounds, independent of coefficient level."
+   },
+   {
+    "node": "lem-sf-etale-direct-image-vanishing",
+    "why": "The bound 2d supplies exactly the uniform vanishing hypothesis for direct-image Tor amplitude at every quotient level."
+   },
+   {
+    "node": "thm-sf-direct-image-tor-amplitude",
+    "why": "Common finite-Tor intervals after proper pushforwards check the nested realization domains, without using a Kunneth theorem."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "A coherent etale-origin system is constructed by its derived counit from the actual reduction system; no witness transitions are assumed."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The valuation ring is a DVR, so its uniformizer is a non-zero-divisor in the system comparison."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Completeness of the finite coefficient field gives completeness of its valuation ring for the uniformizer-adic topology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-open-ctf",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-fix-operation-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-etale-direct-image-vanishing",
+  "thm-sf-direct-image-tor-amplitude",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-l-adic-extension-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-fa08cee26",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-fa08cee26 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, every cited statement and the main-20261015 lem-sf-kunneth-coherence proof in full. The item makes explicit the source's 'reduction to proper by independence of the compactification', applied separately to both triple parenthesizations; the parent lem-sf-kunneth-coherence (ii) uses exactly this. It is a first split (the base had an empty proof, there is no re-split note) and creates no new nodes, which is legitimate because the result is a calculation from existing nodes. Checks: (1) I recomputed steps 4–5. Applying the binary identity lem-sf-product-compactification-identity at (12) and (12,3), then naturality of λ_{a12,a3} along Ra12*e12⊗1, gives Rc_*(e_{j12,j3}(e12⊠1))Θ_L(a;P) = Rc_*(e_L)Θ_L(a;P); the right-hand side is symmetric. Step 3's naturality is elementary, since λ is a composite of natural σ, PF, Ex and α. (2) e_L = e_R, the restriction to the identity and the isomorphism claims are verbatim in the three-open clause of lem-sf-open-external-tensor-normalization. (3) Domains: properness of the products, j_!/pullback/tensor Tor intervals and the witnesses are all checked by cited nodes. (4) Integral case: the hypotheses of the system realization are verified. Uniform Tor bounds come from finite dimension, UDV(2d) and the direct-image Tor theorem ([a,b+2d]). Coherent étale witnesses come from the counit isomorphism of lem-pur-coefficient-system-derived-comparison, a genuine construction. O_E ≅ lim A_{E,m} follows from DVR plus completeness. Both identities hold in the derived diagram category; c_V covers nested compact-support expressions and Rlim carries them over without any faithfulness. Refinements follow from lem-cbc-strict-tower-proper-open-calculus and the field stages from lem-fix-operation-reduction. (5) Edge cases: a point, the empty scheme, n=1 and signed shifts all behave correctly. No duplicates (lem-sf-proper-triple-counit-transpose is proper-only), no cycle, no SGA, and every off-route statement is declared in tool_uses. (6) Batch-5 flags: integral-compactification-system-realization, product-compactification-identity and prop-sf-pf-coherence are all already in the closure of the item's unchanged stmt_deps, and the full closure adds 0 trf/PD nodes (258 = 258). The flagged paths end in generic lemmas: lem-trf-adjoint-composition-coherence (status mathlib) and lem-pod-derived-exact-square-composition (abstract derived pasting). Neither is a trace-formula or Poincaré-duality step, so I accept all three citations. No fixes."
+ }
+}

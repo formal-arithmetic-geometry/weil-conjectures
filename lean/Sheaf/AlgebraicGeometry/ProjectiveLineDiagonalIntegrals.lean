@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalData
 import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalCartier
 import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalChernComponents
 import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalTraceCalculation
+import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
 
 /-!
 # The two integrals of the projective-line diagonal class
@@ -95,8 +96,9 @@ theorem projectiveLine_diagonal_integrals (N : ℕ) (hN : 0 < N)
     simpa using hS.map
       ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
         (ProjectiveLine S ↘ S)).appTop.hom
-  obtain ⟨κ, c, c₁, t, hc, hκ, hκc, hκc₁, hκt⟩ :=
-    ordinary_supported_kummer (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N hN A hA hT
+  obtain ⟨κ, hκ, _⟩ :=
+    ordinary_supported_kummer_uniqueBoundary
+      (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) N hN A hA hT
       (pullback.diagonal (ProjectiveLine S ↘ S)) hI
   refine ⟨hI, κ, ?_, ?_⟩
   · simpa [hT] using hκ

@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-space-connective-nonnegative-free-model",
+ "kind": "statement",
+ "title": "Etale local finite free models in nonnegative degrees",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $B$ be an algebraic space over $S$ with its small etale structure sheaf [def-trf-algebraic-space], and use its module sheaves [def-weil-sheaf-of-modules-category] and unbounded module derived category [def-weil-abstract-derived-category]. Tensor pullback is [def-trf-space-etale-module-functors], and its left derived functor is computed by K-flat resolutions. Let $K\\in D(\\mathcal O_B)$ be perfect, meaning etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Suppose that for every scheme morphism $g:T\\to B$, the cohomology sheaves $\\mathcal H^i(Lg^*K)$ vanish for $i<0$ [def-weil-derived-cohomology-sheaves]. Then there is a small jointly surjective family of etale maps $u_\\alpha:U_\\alpha\\to B$ from affine schemes $U_\\alpha=\\operatorname{Spec}A_\\alpha$ [def-weil-affine-spectrum], and for each $\\alpha$ an integer $b_\\alpha\\geq0$, a complex $P_\\alpha^\\bullet$ on $(U_\\alpha)_{\\mathrm{et}}$ and an isomorphism $Lu_\\alpha^*K\\simeq Q(P_\\alpha^\\bullet)$ in $D(\\mathcal O_{U_\\alpha})$. Here $P_\\alpha^i=0$ outside $[0,b_\\alpha]$, and $P_\\alpha^i=\\mathcal O_{U_\\alpha}^{r_{\\alpha,i}}$ for finite ranks $r_{\\alpha,i}$; its differentials are matrices over $A_\\alpha$. The symbol $Q$ is localization at quasi-isomorphisms. No uniform bound on the ranks or $b_\\alpha$, and no Noetherian hypothesis, is required.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: the last two paragraphs, forming Coker(M^{-1} -> M^0), proving it finite locally free, and trivializing it on affine opens."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-affine-spectrum",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale scheme atlas of $B$ and refine by affine opens using [def-trf-algebraic-space] and [lem-weil-pbc-affine-opens-basis]. On every member, apply the local perfectness condition in [def-weil-pbc-strict-perfect-coefficient-package] and refine again by affine opens. The etale chart calculus [lem-sfb-space-derived-etale-chart-calculus] identifies these restrictions with derived pullbacks and supplies the composition identifications. Thus we obtain affine etale charts $u:U=\\operatorname{Spec}A\\to B$ with $Lu^*K\\simeq Q(F^\\bullet)$, where $F^\\bullet$ is bounded and each $F^i$ has specified split maps to and from $\\mathcal O_U^{N_i}$. Open restrictions are etale by [lem-weil-pbc-etale-composition-cancellation]; composition with a representable etale chart is checked on scheme base changes. The small-site convention [def-weil-size-convention] makes all these covering families set-indexed in the prescribed universe.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  },
+  {
+   "text": "For one such affine chart, let $e_i=i_ip_i$ be the idempotent on $\\mathcal O_U^{N_i}$ from the split package. A homomorphism between finite free structure sheaves is determined by its values on the standard basis, hence is a matrix over $\\Gamma(U,\\mathcal O_U)=A$. Put $M^i=\\operatorname{im}(e_i:A^{N_i}\\to A^{N_i})$; $A^{N_i}=\\operatorname{im}(e_i)\\oplus\\operatorname{im}(1-e_i)$. The matrices $i_{i+1}d^ip_i$ induce differentials on these summands, and their successive composites are zero by $p_ii_i=1$ and $d^{i+1}d^i=0$. The exact affine realization $a_A$ of [lem-sfb-affine-etale-derived-module-realization] identifies the resulting complex with $F^\\bullet$: both images of each idempotent are its split image. Apply [lem-weil-pbc-finite-projective-standard-free-cover] to each of the finitely many nonzero $M^i$ and take common principal-open refinements. Finite intersections are principal opens $D(f_1\\cdots f_t)$. On each refined chart all terms become finite free, and the differential remains a matrix. Henceforth write $M^\\bullet$ for this bounded finite free complex and $C^\\bullet=\\widetilde{M^\\bullet}$ for its Zariski associated complex; $a_A(M^\\bullet)=\\epsilon_U^*C^\\bullet$ represents $Lu^*K$. The affine equivalence [lem-pc-affine-qcoh-derived-equivalence] ensures that $Q(C^\\bullet)$ belongs to the Zariski derived subcategory with quasi-coherent cohomology, as needed for the derived topology comparison in step 3.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-trf-algebraic-space",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  },
+  {
+   "text": "Let $A\\to D$ be any commutative algebra, and $h:\\operatorname{Spec}D\\to U$. The universal hypothesis, applied to $uh$, and the composition comparison of [lem-sfb-space-derived-etale-chart-calculus] give $\\mathcal H^j(Lh_{\\mathrm{et}}^*Lu^*K)=0$ for $j<0$. The derived pullback comparison of [lem-sfb-derived-etale-zariski-equivalence] identifies this object with $\\epsilon_{\\operatorname{Spec}D}^*Lh^*C^\\bullet$. Since $C^\\bullet$ is bounded and finite free, [lem-pc-flat-complex-derived-pullback] computes the latter Zariski pullback termwise. The affine pullback formula [lem-weil-pbc-module-pullback-affine-sections], natural in the module and thus compatible with differentials, identifies it with $\\widetilde{M^\\bullet\\otimes_A D}$. Consequently its etale extension is $a_D(M^\\bullet\\otimes_A D)$. Exactness, faithfulness, and the cohomology clause of [lem-sfb-affine-etale-derived-module-realization] imply $H^j(M^\\bullet\\otimes_A D)=0$ for every $j<0$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  },
+  {
+   "text": "For an arbitrary $A$-module $N$ form the commutative square-zero algebra $D=A\\oplus N$, with $(a,n)(a',n')=(aa',an'+a'n)$ and unit $(1,0)$. As complexes of $A$-modules, $M^\\bullet\\otimes_A D=M^\\bullet\\oplus(M^\\bullet\\otimes_A N)$: the differential respects the displayed summands. Kernels and images of a block-diagonal map are the corresponding direct sums. Applying degree $-1$ cohomology to the vanishing proved in step 3 therefore gives $H^{-1}(M^\\bullet\\otimes_A N)=0$ for every module $N$. Taking $D=A$ in step 3 also gives $H^j(M^\\bullet)=0$ for all $j<0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  },
+  {
+   "text": "The modules $M^i$ are free, hence flat: tensor with $A^r$ is the finite direct sum of $r$ copies of the identity and preserves exact sequences. Apply [lem-pc-module-flat-opcycles-tor-criterion] with $a=0$ and the universal degree-minus-one vanishing from step 4. It proves that $Z=\\operatorname{coker}(M^{-1}\\to M^0)$ is flat. The displayed map is between finite free modules, so $Z$ has a finite presentation, including when one of these ranks is zero. By [lem-weil-pbc-finitely-presented-flat-module-projective], $Z$ is finite projective.",
+   "uses": [
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  },
+  {
+   "text": "Define $E^j=0$ for $j<0$, $E^0=Z$, and $E^j=M^j$ for $j>0$, with the induced differential $Z\\to M^1$. It is well defined since $d^0d^{-1}=0$. The chain map $q:M^\\bullet\\to E^\\bullet$ is the quotient in degree zero, the identity in positive degrees and zero in negative degrees. In degree zero, $\\ker(Z\\to M^1)=\\ker d^0/\\operatorname{im}d^{-1}$, so $H^0(q)$ is an isomorphism. In positive degrees the kernels and images agree, and in negative degrees both cohomologies vanish by step 4. Thus $q$ is a quasi-isomorphism. Exactness of $a_A$ [lem-sfb-affine-etale-derived-module-realization] makes $a_A(q)$ a quasi-isomorphism too. Localization [def-weil-abstract-derived-category] gives an isomorphism $Lu^*K\\simeq Q(a_A(E^\\bullet))$ in the derived category, not merely separate cohomology isomorphisms.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-projective-standard-free-cover] to $Z$ and refine this chart by the resulting principal opens. Exact etale restriction and its composition comparisons [lem-sfb-space-derived-etale-chart-calculus] restrict the derived isomorphism of step 6. After choosing a basis of each localized $Z$, all terms of the resulting complex $P^\\bullet$ are finite free structure modules. Its differentials are matrices over the affine coordinate ring, by their values on the standard basis. If $d$ is an upper support bound for the original bounded complex, take $b=\\max(0,d)$; then $P^j=0$ outside $[0,b]$. All refinements cover their parent, so their composites remain jointly surjective and small as in step 1. The bounds and ranks are chosen separately on each chart. The construction permits the empty space, zero complex, zero ranks, and arbitrary commutative coordinate rings; no Noetherian or uniform-bound assumption was used.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: reduction to an affine scheme and the final cokernel/trivialization argument; perfectness is already a hypothesis here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-size-convention",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08JX, lemma-cohomology-perfect-complex, final cokernel argument; agent-written square-zero algebra verification converts the scheme-test hypothesis to the existing module flat-opcycle criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A universally connective perfect complex on an algebraic space has etale locally a bounded finite free model concentrated in nonnegative degrees",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: K-projectivity and cohomological truncation do not supply finite locally free terms after universally connective pullback"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Projective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] {P : C} [CategoryTheory.Projective P] {K : CochainComplex C ℤ} {i : ℤ} (π : K ⟶ (CochainComplex.singleFunctor C i).obj P) [K.IsStrictlyLE i] [QuasiIsoAt π i] : CategoryTheory.IsSplitEpi π\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) : Prop\", \"doc\": \"A cochain complex `K` is K-projective if any morphism `K ⟶ L`\\nwith `L` acyclic is homotopic to zero.\"}\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)] : K.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKProjective_of_iso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K₁ K₂ : CochainComplex C ℤ} (e : K₁ ≅ K₂) [K₁.IsKProjective] : K₂.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKProjective_iff_of_iso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K₁ K₂ : CochainComplex C ℤ} (e : K₁ ≅ K₂) : K₁.IsKProjective ↔ K₂.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : ChainComplex C ℕ) [∀ (n : ℕ), CategoryTheory.Projective (K.X n)] : CochainComplex.IsKProjective (HomologicalComplex.extend K ComplexShape.embeddingDownNat)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) [hK : K.IsKProjective] (n : ℤ) : K⟦n⟧.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKProjective_shift_iff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℤ) (n : ℤ) : K⟦n⟧.IsKProjective ↔ K.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKProjective_of_op\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K : CochainComplex C ℤ} (hK : ((CochainComplex.opEquivalence C).functor.obj (Opposite.op K)).IsKInjective) : K.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.IsKProjective.homotopyZero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_2} [CategoryTheory.Category.{u_3, u_2} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (hL : HomologicalComplex.Acyclic L) [K.IsKProjective] : Homotopy f 0\", \"doc\": \"A choice of homotopy to zero for a morphism from a\\nK-projective cochain complex to an acyclic cochain complex.\"}\n  {\"name\": \"CochainComplex.IsKProjective.mk\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K : CochainComplex C ℤ} (nonempty_homotopy_zero : ∀ {L : CochainComplex C ℤ} (f : K ⟶ L), HomologicalComplex.Acyclic L → Nonempty (Homotopy f 0)) : K.IsKProjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Abelian C} {K : CochainComplex C ℤ} [self : K.IsKProjective] {L : CochainComplex C ℤ} (f : K ⟶ L) : HomologicalComplex.Acyclic L → Nonempty (Homotopy f 0)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: K-projectivity and cohomological truncation do not supply finite locally free terms after universally connective pullback"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(connective|nonnegative)|TorAmplitude|tor.amplitude",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: K-projectivity and cohomological truncation do not supply finite locally free terms after universally connective pullback"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded finite projective complex whose arbitrary base changes have no negative cohomology can be represented in nonnegative degrees",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \": R.cochainComplex.IsGE 0\", \"doc\": \"The cochain complex constructed from a projective resolution via the embedding of natural number indices into integers is supported in non-negative degrees. Specifically, for any projective resolution\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.cochainComplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Extend\", \"type\": \": CochainComplex C ℤ\", \"doc\": \"Given a projective resolution $R$ of an object $Z$ in a category $\\\\mathcal{C}$ with zero objects and morphisms, this constructs a cochain complex in $\\\\mathcal{C}$ by extending the chain complex $R.com\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.complex\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Projective.Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n        {Z : C} → CategoryTheory.ProjectiveResolution Z → ChainComplex C ℕ\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero object and zero morphisms, and a projective resolution of an object $Z \\\\in \\\\mathcal{C}$, this constructs the corresponding chain complex in $\\\\mathcal{C}$ index\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CategoryTheory.projectiveDimension_ne_top_iff\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Dimension\", \"type\": \"(X : C) : projectiveDimension X ≠ ⊤ ↔ ∃ n, HasProjectiveDimensionLE X n\", \"doc\": \"The projective dimension of an object $X$ in an abelian category is finite if and only if there exists a natural number $n$ such that $X$ has projective dimension at most $n$.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt_1\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Extend\", \"type\": \": R.cochainComplex.IsStrictlyGE 0\", \"doc\": \"The cochain complex associated to an injective resolution is strictly supported in degrees $\\\\geq 0$, meaning all non-zero terms occur in non-negative degrees when extended from natural number indices \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \": R.cochainComplex.IsKProjective\", \"doc\": \"The cochain complex constructed from a projective resolution in an abelian category satisfies the K-projective property, meaning it is acyclic and has lifting properties with respect to quasi-isomorph\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: K-projectivity and cohomological truncation do not supply finite locally free terms after universally connective pullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Truncation of a perfect complex with nonnegative Tor amplitude has finite locally free terms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: K-projectivity and cohomological truncation do not supply finite locally free terms after universally connective pullback"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-connective-perfect-sections-affine",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: application of Tag 08JX after proving universal absence of negative cohomology. Supporting input: Etale local finite free models in nonnegative degrees.",
+   "via": [
+    "lem-sfb-space-connective-perfect-sections-affine",
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-connective-nonnegative-free-model",
+  "worker": "stage1",
+  "summary": "Q23: retained the statement, all its hypotheses and its existing blueprint ancestry; reused existing affine etale/derived comparisons, flat-opcycle and finite-projective lemmas. Gave explicit idempotent matrices, square-zero algebra tests, canonical truncation quasi-isomorphism and local trivialization. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: application of Tag 08JX after proving universal absence of negative cohomology. Supporting input: Etale local finite free models in nonnegative degrees. This split supplies the nonnegative local finite free model prerequisite by the cokernel route of Stacks 08JX; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Refine the scheme chart and local perfect presentations by affine opens; generic scheme topology, not a replacement of a unit step. No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Open restrictions and compositions refine etale charts; generic morphism calculus. No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Trivialize the finitely many projective terms and then the flat finitely presented zero-degree cokernel on principal opens; this is precisely the algebra input in Stacks 08JX. No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The termwise tilde complex has quasi-coherent cohomology, so it lies in the domain of the derived topology equivalence; generic affine realization. No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Compute arbitrary scheme pullback on the bounded finite free Zariski complex; generic K-flat computation. No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Identify termwise affine pullback with scalar extension, naturally in the differential; generic affine module calculation. No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-pc-module-flat-opcycles-tor-criterion",
+    "why": "Turn universal degree-minus-one tensor vanishing into flatness of the zero-degree cokernel; the generic algebra tool used by Stacks 08JX (0653). No statement of the assigned unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "why": "Recognize the flat finite-presentation cokernel as finite projective (00NX); generic commutative algebra. No statement of the assigned unit supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-3c9eef057",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-3c9eef057 (reviewer sub-agent of L); spot-checked: I read the whole item and all seven steps; the delivery has no new nodes and leaves the statement and stmt_deps unchanged. The source is Stacks quot.tex 08JX (lemma-cohomology-perfect-complex), final cokernel argument, checked together with more-algebra 0653 (last-one-flat) and 00NX. The steps are correct. Step 1 builds affine étale charts from the strict-perfect package and chart calculus. Step 2 turns the idempotent matrices into a free A-complex and trivializes it on principal opens. Step 3 gets H^j(M⊗D)=0 for every A-algebra D, using the étale/Zariski pullback comparison, termwise flat pullback, and the exact, faithful realization a_D with its cohomology clause. Step 4 uses the square-zero algebra D=A⊕N to get H^{-1}(M⊗N)=0 for every module N. This is a valid agent-written substitute for Stacks' Tor-amplitude argument and is marked by=agent. Step 5 applies lem-pc-module-flat-opcycles-tor-criterion at a=0, and finite presentation plus flatness makes the cokernel projective. Step 6 is a correct truncation quasi-isomorphism, giving an isomorphism in the derived category. Step 7 trivializes Z, with b=max(0,d). Edge cases checked: an acyclic two-term complex, A[-3], Z--2-->Z (correctly excluded by the hypothesis), the empty space and the zero ring. There is no duplicate: lem-pc-affine-flat-connective-truncation and the pc flat-model nodes are related tools but different statements. There is no cycle. The 8 declared generic tool_uses are accepted. Batch-5: the three listed citations reach sec-trace-formula only through algebraic-space and quasi-coherent definitions and other foundations (def-trf-algebraic-space, def-trf-space-quasi-coherent-module, étale relations, fppf descent). None of these is a step of the trace formula or of Poincaré duality, so I accept all three."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceConnectiveNonnegativeFreeModel",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_nonnegative_finiteFree_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceConnectiveNonnegativeFreeModel.lean",
+  "statement": "theorem exists_etale_nonnegative_finiteFree_model {S : Scheme.{u}} (B : AlgebraicSpace S) [HasDerivedCategory.{w} B.SmallModules] [∀ T : Over S, HasDerivedCategory.{w} (schemeSpace T).SmallModules] (K : B.DerivedModules) (hperfect : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} B.smallStructureSheaf K) (hconnective : ∀ (T : Over S) (g : schemeSpace T ⟶ B) (i : ℤ), i < 0 → IsZero ((DerivedCategory.homologyFunctor (schemeSpace T).SmallModules i).obj ((spaceDerivedPullback g).obj K))) : ∃ (I : Type u) (A : I → CommRingCat.{u}) (s : ∀ a : I, Spec (A a) ⟶ S) (v : ∀ a : I, schemeSpace (Over.mk (s a)) ⟶ B), (∀ a : I, IsEtale (v a).hom.hom) ∧ IsJointlySurjective (fun a : I ↦ (v a).hom.hom) ∧ ∀ a : I, ∃ (b : ℤ) (P : CochainComplex (schemeSpace (Over.mk (s a))).SmallModules ℤ), 0 ≤ b ∧ (∀ n : ℤ, n < 0 ∨ b < n → IsZero (P.X n)) ∧ Nonempty ((spaceDerivedPullback (v a)).obj K ≅ DerivedCategory.Q.obj P) ∧ ∃ (r : ℤ → ℕ) (e : ∀ n : ℤ, P.X n ≅ ∏ᶜ fun _ : Fin (r n) ↦ SheafOfModules.unit (schemeSpace (Over.mk (s a))).smallStructureRings) (m : ∀ n : ℤ, Matrix (Fin (r (n + 1))) (Fin (r n)) (A a)), ∀ (n : ℤ) (W : (schemeSpace (Over.mk (s a))).SmallEtaleModelᵒᵖ) (x : (P.X n).val.obj W) (j : Fin (r (n + 1))), (((P.d n (n + 1) ≫ (e (n + 1)).hom) ≫ Pi.π (fun _ : Fin (r (n + 1)) ↦ SheafOfModules.unit (schemeSpace (Over.mk (s a))).smallStructureRings) j ).val.app W x) = ∑ k : Fin (r n), (((Scheme.ΓSpecIso (A a)).inv ≫ Scheme.Γ.map (chartToScheme (Over.mk (s a)) (𝟙 _) ((schemeSpace (Over.mk (s a))).smallEtaleInclusion.obj W.unop)).op ).hom (m n j k)) • (((e n).hom ≫ Pi.π (fun _ : Fin (r n) ↦ SheafOfModules.unit (schemeSpace (Over.mk (s a))).smallStructureRings) k ).val.app W x)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing equivalent small affine ringed model retains the original section universe. The conclusion specifies an actual derived isomorphism, finite-free bases, and the matrix formula on every small-model chart. Added only landed definition dependencies for the scheme embedding, small model, derived-module calculus, canonical pullback, and joint surjectivity; no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfa846005",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read the item node, all 14 stmt_dep records and the dependency Lean (IsPerfectOnRingedSiteOfUniverses, SmallModules/smallStructureSheaf, DerivedModules/chartToScheme, spaceDerivedPullback, IsJointlySurjective, AlgebraicSpace.IsEtale), plus the single module. lean.statement is verbatim in the file. The record changes only lean and stmt_deps; the 5 added stmt_deps are landed definition nodes owning used declarations. Every clause matches the node: perfectness is the recorded package definition; connectivity is tested on all T : Over S and g : schemeSpace T ⟶ B, i<0, via homologyFunctor; the family I : Type u of Spec (A a) charts is étale and jointly surjective; each chart has b ≥ 0 with support in [0,b], a derived isomorphism to Q.obj P, finite-product free terms, and matrix differentials through the canonical A → O(W) map with correct orientation; there is no uniform bound or Noetherian hypothesis. Edge cases (empty B, zero complex, zero ring, Fin 0, non-vacuity) checked. No duplicate found. sorry only, docstrings and report sections present. Not recompiled (no change); relied on the delivery's own compile and dry run."
+ }
+}

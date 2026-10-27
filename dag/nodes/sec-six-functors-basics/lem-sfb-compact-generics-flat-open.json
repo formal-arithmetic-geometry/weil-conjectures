@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-compact-generics-flat-open",
+ "kind": "statement",
+ "title": "A flat open neighbourhood of a quasi-compact generic-point subspace",
+ "statement": "Let $C$ be a reduced quasi-compact quasi-separated scheme [def-pc-scheme, def-pc-reduced-scheme, def-weil-pbc-scheme-conventions]. Suppose the set $C_{\\mathrm{gen}}$ of generic points of the irreducible components [def-weil-irreducible-components], with the subspace Zariski topology, is quasi-compact. Let $h:Z\\to C$ be of finite presentation [def-sbc-locally-finite-presentation], meaning locally of finite presentation, quasi-compact and quasi-separated. There exists a quasi-compact open subscheme $U\\subseteq C$ containing $C_{\\mathrm{gen}}$, dense in $C$, such that $h^{-1}(U)\\to U$ is flat [def-weil-flat-morphism]. No Noetherianity or irreducibility assumption is made.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Lemma (3.5), printed p.12 (its proof chooses an open neighbourhood of all generic points before taking a quasi-compact subneighbourhood) Read online at the source URL; local PDF WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Fix a component generic point $\\eta\\in C_{\\mathrm{gen}}$ and choose an affine open $W_0=\\operatorname{Spec}R\\subseteq C$ containing it, using [lem-weil-pbc-affine-opens-basis]. If $K=\\overline{\\{\\eta\\}}$ is its component, then $K\\cap W_0$ is a component of $W_0$: an irreducible subset containing it has irreducible closure in $C$ containing $K$, so maximality of $K$ forces that subset into $K\\cap W_0$. Thus the prime $\\mathfrak p$ corresponding to $\\eta$ is minimal by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. The ring $R$ is reduced by [def-pc-reduced-scheme]. By [lem-weil-pbc-minimal-prime-reduced-localization-field], $R_{\\mathfrak p}$ is a field, and [lem-weil-pbc-affine-open-stalk-localization] identifies it with $\\mathcal O_{C,\\eta}$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00ES (lemma-irreducible, part (3)) and 00EU (lemma-minimal-prime-reduced-ring); Schemes Tags 01IT and 01HV. Rydh (3.5), first sentence."
+   }
+  },
+  {
+   "text": "For this $\\eta$ and $W_0$, apply [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] to the scheme $W_0$ and its point $\\eta$. The inverse system consists of the affine opens $W\\subseteq W_0$ containing $\\eta$, ordered by reverse inclusion, with distinguished initial stage $W_0$. It is a nonempty directed set, the transitions are affine, the stages are quasi-compact and quasi-separated, and its limit is $S=\\operatorname{Spec}\\mathcal O_{C,\\eta}$ (restriction to an open does not change the stalk). Put $X_0=h^{-1}(W_0)$ and $f_0:X_0\\to W_0$. By [lem-weil-pbc-qcqs-morphism-permanence](3), $f_0$ is of finite presentation; by (2), $X_0$ is quasi-compact and quasi-separated since $W_0$ is. Its pullback to $S$ is flat by [lem-pc-flat-field], because step 1 makes $S$ the spectrum of a field. This verifies all finiteness and limit hypotheses needed for descent, without requiring $C$ to be irreducible or Noetherian.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-flat-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWT (lemma-morphism-glueing-near-closed-point), proof local-ring limit; Tag 01YW; Situation 081D. This expands Rydh (3.5) / EGA IV_3 Corollary 11.3.2 locally at a generic point."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-flat-finite-presentation] with base stages the $W$ of step 2, $S_0=Y_0=W_0$, $Y_i=W_i$, and $X_0=h^{-1}(W_0)$. The limit morphism is the flat morphism of step 2 and $f_0$ is locally of finite presentation. It follows that for some stage $W_\\eta\\subseteq W_0$ containing $\\eta$, the base change $X_0\\times_{W_0}W_\\eta\\to W_\\eta$ is flat. This is exactly the restriction $h^{-1}(W_\\eta)\\to W_\\eta$, since pulling back along an open inclusion takes the inverse-image open subscheme. In particular $W_\\eta$ is an affine open of $C$.",
+   "uses": [
+    "lem-weil-pbc-descend-flat-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 04AI (lemma-descend-flat-finite-presentation), with Situation 081D."
+   }
+  },
+  {
+   "text": "The opens $W_\\eta\\cap C_{\\mathrm{gen}}$ cover the subspace $C_{\\mathrm{gen}}$. Its assumed quasi-compactness gives finitely many $\\eta_1,\\ldots,\\eta_n$ whose opens cover it. Set $U=\\bigcup_{j=1}^nW_{\\eta_j}$. This is open and contains $C_{\\mathrm{gen}}$. Each $W_{\\eta_j}$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; hence $U$ is quasi-compact: restrict any open cover of $U$ to each of these finitely many opens, choose a finite subcover for each, and take their union. For any $z\\in h^{-1}(U)$, choose $j$ with $h(z)\\in W_{\\eta_j}$. The local-ring map for the restriction to $U$ is the same as for the flat restriction to $W_{\\eta_j}$, because stalks on open subspaces are the ambient stalks. Thus it is flat; [def-weil-flat-morphism] gives flatness of $h^{-1}(U)\\to U$. If $C_{\\mathrm{gen}}$ is empty, this construction uses the empty finite family and $U=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT (affine open basis) and affine quasi-compactness; Rydh (3.5), second sentence; elementary finite-subcover and open-restriction stalk argument."
+   }
+  },
+  {
+   "text": "For any $c\\in C$, [lem-sc-irreducible-components-cover] supplies a component $K$ containing $c$, and [lem-sc-scheme-sober] supplies its generic point $\\eta$. This point lies in $U$, and $c\\in K=\\overline{\\{\\eta\\}}\\subseteq\\overline U$. Hence $\\overline U=C$, proving density. In particular if $C_{\\mathrm{gen}}=\\varnothing$ then $C=\\varnothing$, so the empty case in step 4 has all required properties.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004W (lemma-irreducible), parts (3)-(4); Schemes Tag 01IS (lemma-scheme-sober); Rydh (3.5), density of the generic-point neighbourhood."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-flat-field",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-flat-morphism",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Expansion of Rydh Lemma (3.5), printed p.12 (primary online PDF read, local copy WANTED), following its generic-stalk/flat-neighbourhood/finite-subcover route. The flat-neighbourhood inference is proved by Tags 0GWT, 01YW and 04AI instead of leaving the EGA IV_3 Corollary 11.3.2 invocation implicit; that corollary was also read in the local EGA PDF, printed p.133."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.flat|genericFlat|flat.*locus|flatLocus",
+   "results": "{\"t\": \"2026-10-23T22:14:24Z\", \"tool\": \"grep\", \"query\": \"generic.flat|genericFlat|flat.*locus|flatLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, localization and universal openness assuming flatness do not construct a quasi-compact flat neighbourhood of all generic points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T22:14:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat\"], \"digest\": \"b7cbcb8abfee37a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, localization and universal openness assuming flatness do not construct a quasi-compact flat neighbourhood of all generic points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic flatness near every generic point of a reduced base for a morphism of finite presentation",
+   "results": "{\"t\": \"2026-10-23T22:14:24Z\", \"tool\": \"leansearch\", \"query\": \"Generic flatness near every generic point of a reduced base for a morphism of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"AlgebraicGeometry.Flat.flat_appLE\", \"RingHom.Flat.propertyIsLocal\", \"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"RingHom.Flat\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.ofLocalizationPrime\"], \"digest\": \"80bdec4c97a1808b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, localization and universal openness assuming flatness do not construct a quasi-compact flat neighbourhood of all generic points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism over a reduced quasi compact quasi separated scheme with quasi compact generic points is flat over a quasi compact dense open",
+   "results": "{\"t\": \"2026-10-23T22:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely presented morphism over a reduced quasi compact quasi separated scheme with quasi compact generic points is flat over a quasi compact dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"a8bfda43d790d60f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, localization and universal openness assuming flatness do not construct a quasi-compact flat neighbourhood of all generic points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme with compact minimal prime spectrum has a dense quasi compact open of flatness for each finitely presented morphism",
+   "results": "{\"t\": \"2026-10-23T22:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced scheme with compact minimal prime spectrum has a dense quasi compact open of flatness for each finitely presented morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"a6fa232d92edbe0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness definitions, localization and universal openness assuming flatness do not construct a quasi-compact flat neighbourhood of all generic points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism over a reduced scheme is flat over an open neighbourhood of all generic points",
+   "results": "{\"t\": \"2026-10-23T22:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely presented morphism over a reduced scheme is flat over an open neighbourhood of all generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"ad243e34c7b30896\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; these describe flatness, flat descent, flat implies universally open, generic-point topology, or localized modules, and none gives a flat neighbourhood of all component generic points. The grep returned no matches."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.flat|genericFlat|flat.*locus|flatLocus",
+   "results": "{\"t\": \"2026-10-23T22:47:23Z\", \"tool\": \"grep\", \"query\": \"generic.flat|genericFlat|flat.*locus|flatLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; these describe flatness, flat descent, flat implies universally open, generic-point topology, or localized modules, and none gives a flat neighbourhood of all component generic points. The grep returned no matches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic flatness near every component generic point of a reduced base for a finitely presented morphism",
+   "results": "{\"t\": \"2026-10-23T22:47:24Z\", \"tool\": \"leansearch\", \"query\": \"Generic flatness near every component generic point of a reduced base for a finitely presented morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"RingHom.Flat.propertyIsLocal\", \"Module.Flat.of_isLocalizedModule\", \"genericPoints.ofComponent\", \"Module.flat_of_isLocalized_span\", \"genericPoints.isGenericPoint\", \"AlgebraicGeometry.Flat.stalkMap\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"a1cd19c45f4b5a45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; these describe flatness, flat descent, flat implies universally open, generic-point topology, or localized modules, and none gives a flat neighbourhood of all component generic points. The grep returned no matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T22:47:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat\"], \"digest\": \"b7cbcb8abfee37a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; these describe flatness, flat descent, flat implies universally open, generic-point topology, or localized modules, and none gives a flat neighbourhood of all component generic points. The grep returned no matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spreading flatness from the generic local rings of a reduced scheme to a quasi compact dense open for a finite presentation morphism",
+   "results": "{\"t\": \"2026-10-23T22:48:01Z\", \"tool\": \"leanfinder\", \"query\": \"Spreading flatness from the generic local rings of a reduced scheme to a quasi compact dense open for a finite presentation morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"7eec8659e7e95b93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; these describe flatness, flat descent, flat implies universally open, generic-point topology, or localized modules, and none gives a flat neighbourhood of all component generic points. The grep returned no matches."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subtrusive-fp-flat-proper-refinement",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the sentence applying Theorem (3.10) to the finitely presented affine cover; Theorem (3.10) supporting input: Lemma (3.5), printed p.12 (its proof chooses an open neighbourhood of all generic points before taking a quasi-compact subneighbourhood)",
+   "via": [
+    "lem-sfb-subtrusive-fp-flat-proper-refinement",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compact-generics-flat-open",
+  "worker": "stage1",
+  "summary": "Checked Rydh (3.5) against the primary online PDF and EGA IV_3 11.3.2 in the local PDF. Kept the statement unchanged. Expanded the generic local-field and flat-neighbourhood arguments using existing nodes, checked qcqs hypotheses for limit descent, and wrote the finite-subcover and density arguments. No new nodes are needed. All cited statements were read and verbatim quotations are recorded in citations.json. No exact project Lean attachment or Mathlib match was found.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the sentence applying Theorem (3.10) to the finitely presented affine cover; Theorem (3.10) supporting input: Lemma (3.5), printed p.12 (its proof chooses an open neighbourhood of all generic points before taking a quasi-compact subneighbourhood); steps 1-3 justify its flat-neighbourhood input, step 4 takes the finite quasi-compact subneighbourhood and step 5 proves density. The ancestor tool returns null; this metadata is retained. Read the latest direct-images proof, clause (3); did not alter the inherited unit or the target.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "why": "Generic scheme limit tool realizing the local flat-neighbourhood input of Rydh (3.5); the unit has no such local-ring limit statement."
+   },
+   {
+    "node": "lem-weil-pbc-descend-flat-finite-presentation",
+    "why": "Generic finite-presentation descent tool applied to affine neighbourhoods, proving the EGA flat-neighbourhood inference in Rydh (3.5); the unit has no such descent lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-descend-flat-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-7b00f7d34",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-7b00f7d34 (reviewer sub-agent of L); spot-checked: Read the whole item, its 5 steps and all 13 cited statements; there are no new nodes and the statement and stmt_deps are unchanged. Step 1: K∩W0 is a component of W0 (closure/maximality argument checked), 00ES(3) gives a minimal prime, the reduced R gives R_p a field (00EU), and 01HV(c) gives the stalk. Step 2: the 0GWT limit node applied to W0 (W0 is the least stage, stages qcqs, transitions affine, limit Spec O_{C,η}); qcqs-permanence (3) makes f0 finitely presented and (2) makes X0 qcqs; flat-field gives a flat limit morphism. Step 3: 04AI in 081D with S0=Y0=W0, all hypotheses met; the flat stage is h^{-1}(W_η)→W_η. Steps 4-5 are genuinely elementary: finite subcover of the quasi-compact C_gen, stalkwise flatness, density through 004W/01IS, and the empty case is consistent. Source: Rydh (3.5) has no local copy (WANTED); EGA IV_3 11.3.2 read on printed p.133 of the local PDF, and the 0GWT/04AI route is equivalent. Reducedness and quasi-compactness of C_gen are genuinely needed (k[ε] counterexample; Min need not be compact). No SGA citation, no cycle (closure of 203 nodes excludes the item), and no duplicate: the trf/pur/sbc generic-flatness nodes all need an irreducible base. Accepted tool_uses: lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods and lem-weil-pbc-descend-flat-finite-presentation (unit sk-thm-p1), generic tools the unit lacks. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactGenericsFlatOpen",
+  "declaration": "AlgebraicGeometry.exists_compact_dense_open_flat_of_compact_genericPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactGenericsFlatOpen.lean",
+  "statement": "theorem exists_compact_dense_open_flat_of_compact_genericPoints {C Z : Scheme.{u}} [IsReduced C] [CompactSpace C] [QuasiSeparatedSpace C] [CompactSpace (genericPoints C)] (h : Z ⟶ C) [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] : ∃ U : C.Opens, IsCompact (U : Set C) ∧ genericPoints C ⊆ (U : Set C) ∧ Dense (U : Set C) ∧ Flat (h ∣_ U)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f27222bf5",
+  "group": "NF",
+  "result": "fix",
+  "note": "Lean statement matches node and Rydh (3.5) clause by clause: IsReduced/CompactSpace/QuasiSeparatedSpace C, CompactSpace (genericPoints C) (= Mathlib genericPoints, subspace topology), LFP+QC+QS h; conclusion ∃ U : C.Opens, IsCompact ∧ genericPoints ⊆ U ∧ Dense ∧ Flat (h ∣_ U). No extra hypotheses; single universe u; edge cases (empty C, empty Z, infinitely many components) fine. lean.statement verbatim; only item lean record changed; docstrings with source/blueprint and 5-step plan; sorry only. No duplicate in Mathlib/project (integral-base generic flatness only). Sole fault H11: delivered 'Second reading by NF' was explicitly not a reading → fixes/lem-sfb-compact-generics-flat-open.report.md keeps the Worker report verbatim and adds a real clause-by-clause second reading. No Lean change, no compile."
+ }
+}

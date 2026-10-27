@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-space-immersion-affine-tests",
+ "kind": "statement",
+ "title": "Immersions of algebraic spaces: affine tests and Zariski locality",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and use algebraic spaces over $S$ [def-trf-algebraic-space] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. An immersion means a representable morphism whose every scheme base change is a closed immersion followed by an open immersion [def-weil-closed-immersion, def-weil-open-immersion]. For any $f:X\\to Y$, the following are equivalent: $f$ is an immersion; every affine scheme $V\\to Y$ has $X\\times_YV$ represented by a scheme and $X\\times_YV\\to V$ is an immersion; there is a covering of $Y$ by open subspaces $Y_a$ such that each $X\\times_YY_a\\to Y_a$ is an immersion. Immersions are preserved by arbitrary algebraic-space base change. No representability of $f$ is assumed before testing these conditions.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M4 (lemma-closed-immersion-local), immersion case (1), (3), (5); base change: spaces.tex Tag 02YW (lemma-base-change-immersions)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-a1-space-open-subspace",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "First prove arbitrary base-change stability directly from the scheme-test definition, without invoking an immersion-locality criterion. If $f:X\\to Y$ is an immersion and $Y'\\to Y$ is any algebraic-space map, the fibre product $X'=X\\times_YY'$ exists as an algebraic space. For every scheme $T\\to Y'$, the universal property gives $X'\\times_{Y'}T\\simeq X\\times_YT$, over $T$. The right side is a scheme and its projection to $T$ is an immersion by the definition of $f$. Thus $X'\\to Y'$ is representable and is an immersion. This also proves the affine-test condition from the immersion condition. Restricting to any Zariski open cover proves the forward locality implication (and the one-member cover $Y$ proves existence of such a cover).",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M4 (lemma-closed-immersion-local), (1) implies (2) implies (3) and (1) implies (5); spaces.tex Tag 02YW (lemma-base-change-immersions), scheme-test argument."
+   }
+  },
+  {
+   "text": "Assume the affine-test condition and fix an arbitrary scheme $T\\to Y$. Put $E=X\\times_YT$, an algebraic space, and take a small affine open cover $T=\\bigcup_iT_i$, available from the definition of a scheme. Put $E_i=E\\times_TT_i$. The hypothesis applied to $T_i\\to Y$ says that $E_i$ is represented by a scheme and $E_i\\to T_i$ is an immersion. The functor $E$ is an fppf sheaf; since Zariski coverings are fppf coverings, it is a Zariski sheaf. Each $E_i\\to E$ is a subfunctor inclusion representable by open immersions: for a scheme $W\\to E$ its pullback is $W\\times_TT_i\\to W$, a base change of the open immersion $T_i\\to T$. For any such $W$, the inverse images of the opens $T_i$ cover $W$, and the restricted sections lie in $E_i$ by the fibre-product universal property. These are exactly the representability, open-inclusion and covering hypotheses of the scheme representability criterion. Apply it to the functor $E$ on $S$-schemes to conclude that $E$ is a scheme. Its values and the affine cover are small in the fixed size convention. This recovers representability without assuming it for $f$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M4, affine tests imply scheme tests; direct Zariski gluing via schemes.tex Tag 01JJ (lemma-glue-functors), in place of the stronger etale-atlas intermediate condition."
+   }
+  },
+  {
+   "text": "For the scheme morphism $E\\to T$ just constructed, each restriction over $T_i$ is the immersion $E_i\\to T_i$. Apply the scheme near-image locality lemma: the opens $T_i$ cover $T$, so they cover the image of $E\\to T$ as required. It follows that $E\\to T$ is an immersion. Since $T\\to Y$ was arbitrary, all scheme tests are immersions and $f$ is an immersion by its definition. This proves the reverse affine-test implication.",
+   "uses": [
+    "lem-zl-immersion-near-image-locality",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M4, (3) implies (1), using schemes.tex Tag 01JJ and morphisms.tex Tag 0FCZ (lemma-check-immersion)."
+   }
+  },
+  {
+   "text": "Finally suppose a Zariski open cover $(Y_a\\subseteq Y)_a$ has immersion restrictions $X_a=X\\times_YY_a\\to Y_a$. Fix any scheme $T\\to Y$ and put $E=X\\times_YT$. By the meaning of an open subspace and a Zariski covering, $T_a=T\\times_YY_a$ are open subschemes covering $T$. The sheaf $E_a=E\\times_TT_a\\simeq X_a\\times_{Y_a}T_a$ is a scheme, and $E_a\\to T_a$ is an immersion by the assumed scheme-test property of $X_a\\to Y_a$. Each $E_a\\to E$ is representable by open immersions: its pullback by $W\\to E$ is the inverse-image open $W\\times_TT_a\\subseteq W$. These opens cover every test $W$ because the $T_a$ cover $T$. Also $E$ is an fppf, hence Zariski, sheaf. The scheme representability criterion therefore applies to $(E_a\\subseteq E)_a$ and gives a scheme representing $E$. Now apply near-image locality to $E\\to T$ and the open cover $(T_a)_a$ to conclude that $E\\to T$ is an immersion. All scheme tests have been verified, so $f$ is an immersion. Empty covers cause no exception: then the target test scheme is empty; the empty family in the representability criterion gives the empty scheme, and near-image locality explicitly permits the empty index set. No quasi-compactness, separatedness of $Y$, or finiteness of either cover was used.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-schemes-criterion",
+    "lem-zl-immersion-near-image-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M4, (5) implies (1), expanded by schemes.tex Tag 01JJ and morphisms.tex Tag 0FCZ; spaces.tex Tag 02YU (definition-immersion) for open subspaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-pc-schemes-criterion",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-zl-immersion-near-image-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M4 (lemma-closed-immersion-local), restricted to (1),(3),(5); direct Zariski representability argument using 01JJ and 0FCZ. Base-change argument is the definition underlying spaces.tex Tag 02YW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Immersions of algebraic spaces can be checked on all affine scheme base changes and are stable under base change",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.IsImmersion.toIsPreimmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib IsImmersion and its base-change instance are for schemes; no algebraic-space affine-test or representability criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability by schemes and immersion of an algebraic space morphism can be tested on affine targets",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.IsImmersion.toIsPreimmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion, AlgebraicGeometry.IsImmersion.instToImage, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib IsImmersion and its base-change instance are for schemes; no algebraic-space affine-test or representability criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"IsStableUnderBaseChange\"",
+   "results": "1 hits; declarations/files: AlgebraicGeometry.IsImmersion.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib IsImmersion and its base-change instance are for schemes; no algebraic-space affine-test or representability criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Immersions and quasi compact morphisms of algebraic spaces are stable under base change and detected by affine scheme tests",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib IsImmersion and its base-change instance are for schemes; no algebraic-space affine-test or representability criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "03KG|03M4|02L8|0423|AlgebraicSpace",
+   "results": "0 hits; declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib IsImmersion and its base-change instance are for schemes; no algebraic-space affine-test or representability criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsZariskiLocalAtTarget.*IsImmersion|isZariskiLocalAtTarget|isStableUnderBaseChange|isImmersion_iff_exists",
+   "results": "5 hits; 21, 24, 111, 112, 115.  Log digest 0922fcf24086e34d. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Immersions of algebraic spaces are detected after base change to affine schemes and locally on a Zariski cover of the target",
+   "results": "8 hits; AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty, AlgebraicGeometry.IsImmersion.toIsPreimmersion, AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists.  Log digest 6f5a85e660666576. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary morphism of algebraic spaces is representable by schemes if all affine target pullbacks are schemes and immersions",
+   "results": "8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.HasAffineProperty.of_isPullback, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.IsImmersion.instMapDescScheme, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback.  Log digest b0d03ef7ca1e71b6. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"IsZariskiLocalAtTarget\"",
+   "results": "1 hits; AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget.  Log digest 6dd0d5e1e729eee2. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space immersion can be tested on affine schemes and on an open cover",
+   "results": "8 hits; AlgebraicGeometry.IsOpenImmersion.of_openCover_source, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Scheme.affineBasisCover, AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion, AlgebraicGeometry.isOpenImmersion_eq_inf, AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF, AlgebraicGeometry.Scheme.AffineOpenCover.  Log digest ca09178747c37cee. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|03M4|02YW",
+   "results": "0 hits; .  Log digest 4f53cda18c2baa0c. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "IsZariskiLocalAtTarget|iff_of_openCover|isImmersion_iff_exists",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean.  Log digest 193ecc7029589c27. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is a locally closed immersion if its base changes over a Zariski open covering are immersions",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.isImmersion_iff, AlgebraicGeometry.IsImmersion.mk, AlgebraicGeometry.isImmersion_eq_inf.  Log digest 044d41989323253b. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsImmersion, IsZariskiLocalAtTarget",
+   "results": "0 hits; . loogle: unknown identifier 'IsImmersion' Log digest 4f53cda18c2baa0c. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion of schemes is Zariski local on the target: a scheme morphism is an immersion if and only if its restrictions over an open cover of the target are immersions",
+   "results": "8 hits; AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget, AlgebraicGeometry.isEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.isOpenEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.IsZariskiLocalAtTarget, AlgebraicGeometry.IsLocalAtSource.of_isOpenImmersion, AlgebraicGeometry.IsZariskiLocalAtSource.of_isOpenImmersion.  Log digest 4f0bb3a6a13b5628. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_of_openCover",
+   "results": "5 hits; 40, 56, 88, 164, 283.  Log digest b935d54fffe45f77. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "IsZariskiLocalAtTarget|isImmersion_iff_exists",
+   "results": "5 hits; 21, 24, 111, 112, 115.  Log digest 0922fcf24086e34d. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The property IsImmersion of scheme morphisms satisfies IsZariskiLocalAtTarget and iff_of_openCover",
+   "results": "8 hits; AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget, AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.isEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.isOpenEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.IsZariskiLocalAtSource.of_isOpenImmersion, AlgebraicGeometry.IsLocalAtSource.of_isOpenImmersion, AlgebraicGeometry.IsZariskiLocalAtTarget.  Log digest 9d3e0110b3f5ee3f. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"iff_of_openCover\"",
+   "results": "0 hits; .  Log digest 4f53cda18c2baa0c. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "instance : IsZariskiLocalAtTarget @IsImmersion",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean.  Log digest 6f53bb6dc6bf2afd. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "^lemma isImmersion_iff_exists ",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean.  Log digest 8a5e1408e667601a. Read scheme Immersion.lean:111,155,161 and Basic.lean:164; these concern schemes. Reused existing DAG leaves rather than creating scheme-locality duplicates.",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-space item: scheme locality/base-change facts are already represented by existing DAG nodes; representability is established separately in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasi-compact-immersion-locality",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Descent of the universal locally closed equality loci for arbitrary Picard sheaf sections. Supporting input: Tag 0424 proof, hypotheses (1) and (2) of 041J, using the immersion case of 03M4.",
+   "via": [
+    "lem-sfb-space-quasi-compact-immersion-locality",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-immersion-affine-tests",
+  "worker": "stage1",
+  "summary": "Kept the statement text unchanged; added the existing open-subspace definition to statement dependencies. Recovered representability on every scheme test by the existing open-subfunctor representability criterion before invoking the existing scheme near-image immersion locality lemma. Base-change stability is proved by the scheme-test definition. No new nodes: the candidate scheme-locality leaf was already subsumed by lem-zl-immersion-near-image-locality. Checked project Lean, all-DAG/blueprint searches and logged Mathlib searches.",
+  "blueprint": "Newest blueprint det-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), and the inherited alteration/Picard equality-locus supporting chain: this split supplies the affine-test and Zariski-local immersion input used in Tag 0424. The blueprint ancestor tool reports None, so the inherited from.node=null and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic definition of space and scheme representability; no change to the six-functor unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre products to form and identify test objects; no replacement of a unit step."
+   },
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "Generic meaning of an open subspace, used only to construct inverse-image open covers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-659d32632",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-659d32632 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement matches Stacks 03M4 (spaces-morphisms.tex l.1990: items (1), (3) and (5), immersion case) and 02YW (spaces.tex l.1976). The definition of immersion matches spaces.tex 02YU. The statement text is unchanged from the base, and adding def-a1-space-open-subspace to stmt_deps is correct. Step 1 (elementary, correctly) gives base change by the fibre-product identity X'×_{Y'}T≅X×_YT. Step 2 checks each hypothesis of 01JJ (lem-pc-schemes-criterion, Lean-closed) on E=X×_YT with an affine open cover: the Zariski sheaf property via lem-pc-zariski-coverings-are-fppf, open inclusions via open-immersion base change, the covering condition, and representability from the affine tests. It uses no affine intersections. Step 3 applies 0FCZ (lem-zl-immersion-near-image-locality). Step 4 uses open-subspace pullbacks, which cover T by joint surjectivity (spaces-properties l.508 and the cited fibre-product lemma), then 01JJ and 0FCZ again. The empty-cover case is handled. There is no cycle, no SGA citation and no duplicate; proof_deps equals the union of the step uses. I accept the three tool_uses (generic definitions and fibre products). Batch-5 flag on def-a1-space-open-subspace→def-trf-algebraic-space: both are general definitions, not steps of the proofs of the trace formula or Poincaré duality, so this is not a RETURN. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceImmersionAffineTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.immersion_iff_affine_scheme_tests",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.immersion_iff_affine_scheme_tests",
+   "AlgebraicGeometry.AlgebraicSpace.immersion_iff_exists_open_subspace_cover",
+   "AlgebraicGeometry.AlgebraicSpace.immersion_presheafMap_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceImmersionAffineTests.lean",
+  "statement": "theorem immersion_iff_affine_scheme_tests {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) : IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) f.hom.hom ↔ ∀ (V : Over S), IsAffine V.left → ∀ a : yoneda.obj V ⟶ Y.obj.obj, ∃ (U : Over S) (p : U ⟶ V) (q : yoneda.obj U ⟶ X.obj.obj), IsPullback q (yoneda.map p) f.hom.hom a ∧ IsImmersion p.left",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Three declarations jointly state the affine-test equivalence, the open-subspace-cover equivalence, and arbitrary algebraic-space base-change stability. Immersion is the existing IsRepresentableWith interface specialized to scheme IsImmersion; no separate representability assumption and no duplicate definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e405a2f3a",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery of 40e2f35f5861 (RETURN H2). Diff against that snapshot: only def-trf-algebraic-space-jointly-surjective-family added to stmt_deps and public import Sheaf.AlgebraicGeometry.AlgebraicSpaceJointSurjectivity added; signatures, docstrings and lean record byte-identical; Repair section added to report. Read independently against Stacks 03M4 (1)(3)(5), 02YU, 02YW: IsRepresentableWith IsImmersion includes representability (none assumed first); affine-test clause asserts existence of a representing scheme; open-subspace cover uses OpenSubspace + IsJointlySurjective with index Type (u+1), same shape as landed sibling quasiCompact_iff_exists_open_subspace_cover; base change over arbitrary g with projection to Y'. Edge cases (empty scheme/test/cover, infinite covers) covered; no extra assumptions; universes bound; sorry only; lean.statement verbatim in file; all 8 stmt_deps have records; not landed by another group. No compile run (no file changed); worker reports clean compiles. Advisory only: statement text does not cite the two added stmt_deps inline."
+ }
+}

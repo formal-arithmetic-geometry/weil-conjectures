@@ -1,0 +1,161 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraph 2, last sentence, and paragraph 3, perfect-factor membership."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraph 2, last sentence, and paragraph 3, perfect-factor membership."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalHomDualConstructibleModels",
+  "date": "2026-10-26",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2, last sentence: locally constant perfect P has dual P^vee; paragraph 3: the perfect factors lie in Dctf. The explicit ordinary-module presentation comparison is expanded by the cited parent node.",
+   "via": [
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sfb-ordinary-scalar-model-bounded-descent",
+ "title": "Ordinary scalar bounded models descend to bounded constructibility",
+ "statement": "Let A be a commutative topological ring whose canonical scalar realizations C_T [def-sfb-finite-constant-model-data] are additive and exact for all schemes T. Let S be quasi-compact and locally Noetherian, and Q an object of D(A_S). Suppose a pro-etale cover U_i -> S carries scalar cochain models F_i with Q|U_i isomorphic to C_(U_i)(F_i), where every F_i is bounded (the bounds may depend on i), and every scalar H^q(F_i) is finitely presented over A. Then Q is bounded constructible in the finite constant local-model sense [sk-def-sfb-constructible]. This applies to one arbitrary object, with no dual or projectivity hypothesis.",
+ "stmt_deps": [
+  "def-sfb-finite-constant-model-data",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "A quasi-compact locally Noetherian scheme is quasi-separated. Choose a finite affine open cover and refine the given pro-etale cover to a finite affine family. Empty schemes admit the empty finite cover.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sfb-finite-affine-proetale-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the given scalar models to that refinement. Coefficient localization and exact restriction preserve the canonical constant scalar maps and identify iterated realization with realization on the refining schemes.",
+   "uses": [
+    "lem-sfb-coefficient-sections-localization",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of a continuous function at the point identifies the scalar ring with A, with its universe lift. The equivalence of ordinary scalar modules and internal abelian-group scalar modules identifies the model functor with finiteConstantScalarExtension. It transports finite matrix presentations, cohomology and zero terms.",
+   "uses": [
+    "def-sfb-finite-constant-model-data",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite list of original scalar intervals has a common minimum and maximum, enlarged to contain zero. Apply localModel_cohomology_descent to these transported exact models and finitely presented homology modules. It gives boundedness and constructibility of Q on the single stratum S. For the empty cover all sheaves are zero and [0,0] works.",
+   "uses": [
+    "lem-sfb-local-model-cohomology-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-finite-affine-proetale-refinement",
+  "lem-sfb-coefficient-sections-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sfb-finite-constant-model-data",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-local-model-cohomology-descent"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a locally bounded perfect complex on a quasi compact scheme has bounded constructible cohomology",
+   "results": [
+    "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "Topology.IsLocallyConstructible.isConstructible"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No finite scalar local-model descent theorem for internal pro-etale module objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant scalar models have constructible cohomology on a scheme",
+   "results": [
+    "CompHausLike.LocallyConstantModule.functor",
+    "CondensedMod.ofSheafCompHaus"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Discrete condensed module constructions do not identify these ordinary scalar models with the finiteConstantScalarExtension descent interface."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ff]inite|[Ff]inite.*homology",
+   "results": [
+    "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Generic exact-functor homology APIs do not supply the module-category and derived-dual identifications."
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryScalarModelBoundedDescent",
+  "file": "lean/Sheaf/Paper/OrdinaryScalarModelBoundedDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryScalarModel_bounded_descent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ordinaryScalarModel_bounded_descent"
+  ],
+  "statement": "theorem ordinaryScalarModel_bounded_descent (S : Scheme.{u}) [CompactSpace S] [IsLocallyNoetherian S] (Q : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj A) S))) (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S) (F : 𝒰.I₀ → CochainComplex (ModuleCat.{u + 1} A) ℤ) (hexact : ∀ T : Scheme.{u}, PreservesFiniteLimits (FiniteConstantModel.modelFunctor A T) ∧ PreservesFiniteColimits (FiniteConstantModel.modelFunctor A T)) (hbounded : ∀ i : 𝒰.I₀, ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((F i).X q)) (hmodel : ∀ i : 𝒰.I₀, Nonempty (((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj A) (𝒰.f i)).mapDerivedCategory).obj Q ≅ DerivedCategory.Q.obj (((FiniteConstantModel.modelFunctor A (𝒰.X i)).mapHomologicalComplex (.up ℤ)).obj (F i)))) (hfp : ∀ (i : 𝒰.I₀) (q : ℤ), Module.FinitePresentation A ((F i).homology q)) : constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj A) S Q",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T205856-L-3384397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T205856-L-3384397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

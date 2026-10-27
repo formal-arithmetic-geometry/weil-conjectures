@@ -1,0 +1,270 @@
+{
+ "id": "lem-coef-sequential-varying-ring-realization",
+ "kind": "statement",
+ "title": "Sequential derived realization retaining varying coefficient-ring actions",
+ "statement": "Let $T$ be a scheme and fix compatible universes and a small skeleton of its small pro-etale site [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $B_n$ for $n\\geq1$ and $R$ be sheaves of commutative rings on that site, with homomorphisms $q_{m,n}:B_m\\to B_n$ for $m\\geq n$ and $\\pi_n:R\\to B_n$ satisfying $q_{n,n}=1$, $q_{r,n}=q_{m,n}q_{r,m}$ and $q_{m,n}\\pi_m=\\pi_n$. Write $\\operatorname{Res}_{m,n}$ and $\\operatorname{Res}_n$ for exact restriction of scalars along these maps, both on module sheaves and termwise on cochain complexes and their derived categories [def-pc-sheaf-restrict-scalars, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $M_n\\in D(\\operatorname{Mod}(B_n))$ and $\\tau_{m,n}:M_m\\to\\operatorname{Res}_{m,n}M_n$ satisfy $\\tau_{n,n}=1$ and $\\tau_{r,n}=\\operatorname{Res}_{r,m}(\\tau_{m,n})\\tau_{r,m}$ under the canonical composition identifications. Set $\\operatorname{Tow}_R(T)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R))$, the category of strict inverse sequences with compatible levelwise maps [def-weil-pbc-adic-coefficient-datum].\n\nThere exist integer-indexed cochain complexes $C_n$ of $B_n$-module sheaves, isomorphisms $i_n:[C_n]\\xrightarrow{\\sim}M_n$ in $D(\\operatorname{Mod}(B_n))$, and $B_{n+1}$-linear chain maps $t_n:C_{n+1}\\to\\operatorname{Res}_{n+1,n}C_n$ such that $\\operatorname{Res}_{n+1,n}(i_n)[t_n]=\\tau_{n+1,n}i_{n+1}$. The composite chain map $t_{m,n}:C_m\\to\\operatorname{Res}_{m,n}C_n$ obtained from the adjacent maps satisfies $\\operatorname{Res}_{m,n}(i_n)[t_{m,n}]=\\tau_{m,n}i_m$ for every $m\\geq n$. Any prescribed pair $(C_1,i_1)$ may be retained.\n\nThere is a cochain complex $S\\in\\operatorname{Ch}(\\operatorname{Tow}_R(T))$ whose degree-$d$ inverse sequence has terms $\\operatorname{Res}_n C_n^d$, whose adjacent arrows are $\\operatorname{Res}_{n+1}(t_n)$ followed by scalar-restriction composition, and whose differential has components $d_{C_n}^d$. Its evaluations are these complexes, including all chain transitions, not merely their homology. In particular its localization $\\mathcal M_\\bullet=[S]\\in D(\\operatorname{Tow}_R(T))$ has derived evaluations canonically isomorphic to $\\operatorname{Res}_nM_n$, carrying every evaluated transition to $\\operatorname{Res}_m(\\tau_{m,n})$. No boundedness, constructibility, or invertibility of transition-adjoints is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Paragraph 2, implicit coherent-realization prerequisite for applying normalized DVR effectivity; returned normalized-realization proof Steps 5--6. Background: Stacks derived.tex, Tag 05RT (lemma-acyclic), via the quasi-isomorphism calculus of fractions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A_n=\\operatorname{Mod}(B_n)$ and $\\mathcal A_R=\\operatorname{Mod}(R)$. These categories are abelian by the small-site hypothesis. Restriction is the same underlying abelian sheaf with the action precomposed by the ring map; it is additive and preserves finite limits and finite colimits. The exact-functor localization theorem therefore gives the stipulated termwise functors on unbounded derived categories and their natural cochain comparison isomorphisms. For $R\\to B_m\\to B_n$, the two restricted actions on a section $x$ are both $r\\cdot x=\\pi_n(r)x$, since $q_{m,n}\\pi_m=\\pi_n$. Similarly, successive $B$-restrictions have action $b\\cdot x=q_{r,n}(b)x$. Thus the ordinary restriction compositors are identity on underlying sheaves and chain maps. Their canonical derived compositors respect the cochain comparisons by the exact-restriction composition lemma. In the subsequent equations suppress precisely these comparisons, not the coefficient actions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), restriction functor preceding lemma-adjointness-tensor-restrict; exact localization as in derived.tex Tag 015F (lemma-right-derived-exact-functor)."
+   }
+  },
+  {
+   "text": "Write $Q_n$ for cochain localization into $D(\\mathcal A_n)$. Choose a complex $C_1$ and an isomorphism $i_1:Q_1C_1\\xrightarrow{\\sim}M_1$; if the pair is prescribed, start with that very pair. Such representatives exist because the objects of the derived localization are complexes, up to the localization equivalence. The induction invariant at stage $n$ consists of the chosen pairs $(C_j,i_j)$ for $1\\leq j\\leq n$ and chain maps $t_j$ for $1\\leq j<n$ satisfying $\\operatorname{Res}_{j+1,j}(i_j)Q_{j+1}(t_j)=\\tau_{j+1,j}i_{j+1}$. The invariant has no arrow condition at $n=1$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category), objects of the localization; agent-written induction setup."
+   }
+  },
+  {
+   "text": "Suppose the invariant holds at $n$. Choose a complex $A$ of $B_{n+1}$-modules and an isomorphism $a:Q_{n+1}A\\xrightarrow{\\sim}M_{n+1}$. The arrow\n$$g=\\operatorname{Res}_{n+1,n}(i_n)^{-1}\\tau_{n+1,n}a:Q_{n+1}A\\longrightarrow Q_{n+1}(\\operatorname{Res}_{n+1,n}C_n)$$\nis in $D(\\mathcal A_{n+1})$. Quasi-isomorphisms in $K(\\mathcal A_{n+1})$ admit a right calculus of fractions, so the right-fraction representation lemma supplies an object $P$, a quasi-isomorphism $s:P\\to A$ in the homotopy category and $f:P\\to\\operatorname{Res}_{n+1,n}C_n$ there with $g=Q(f)Q(s)^{-1}$. By definition of the homotopy category, choose actual chain maps representing $s$ and $f$; $s$ is a quasi-isomorphism since its homotopy class induces isomorphisms on cohomology. Set $C_{n+1}=P$, $t_n=f$, and $i_{n+1}=aQ(s)$. Then $i_{n+1}$ is invertible and\n$$\\operatorname{Res}_{n+1,n}(i_n)Q(t_n)=\\operatorname{Res}_{n+1,n}(i_n)gQ(s)=\\tau_{n+1,n}i_{n+1}.$$\nThe target $\\operatorname{Res}_{n+1,n}C_n$ and all previously chosen complexes and maps were fixed throughout. Recursion and choice over the positive integers yield all the desired pairs and adjacent maps. Every roof is taken inside the $B_{n+1}$-module category, so $t_n$ has the required $B_{n+1}$-linearity. In Lean, DerivedCategory.right_fac supplies the chain-level roof directly, so no separate quotient-map lifting is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), applied to K(Mod(B_{n+1})); categories.tex Tag 04VI (lemma-morphisms-right-localization), singleton case; agent-written recursive assembly."
+   }
+  },
+  {
+   "text": "Define $t_{n,n}=1$ and, for $m\\geq n$, define\n$$t_{m+1,n}=\\operatorname{Res}_{m+1,m}(t_{m,n})t_m.$$\nThese are chain maps, with target identified by the restriction compositors of Step 1. Associativity of composition gives $t_{r,n}=\\operatorname{Res}_{r,m}(t_{m,n})t_{r,m}$. Induct on $m-n$ to check the derived transition equation: the base is $1=\\tau_{n,n}$, and the induction step, using Step 3 and the given cocycle, is\n$$\\begin{aligned}\n\\operatorname{Res}_{m+1,n}(i_n)Q(t_{m+1,n})\n&=\\operatorname{Res}_{m+1,m}(\\operatorname{Res}_{m,n}(i_n)Q(t_{m,n}))Q(t_m)\\\\\n&=\\operatorname{Res}_{m+1,m}(\\tau_{m,n})\\operatorname{Res}_{m+1,m}(i_m)Q(t_m)\\\\\n&=\\operatorname{Res}_{m+1,m}(\\tau_{m,n})\\tau_{m+1,m}i_{m+1}\n=\\tau_{m+1,n}i_{m+1}.\n\\end{aligned}$$\nHere the first equality includes exactly the cochain-compatible derived compositor of Step 1. In Lean, Nat.leRec defines these composites and its self/successor equations drive the identity, composition, and localization inductions.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Paragraph 2, implicit realization prerequisite: all composite coefficient transitions; agent-written calculation from the supplied cocycle."
+   }
+  },
+  {
+   "text": "Restrict the constructed complexes to $R$ and write $E_n=\\operatorname{Res}_n C_n$. Define $u_{m,n}:E_m\\to E_n$ as $\\operatorname{Res}_m(t_{m,n})$ followed by the identity-on-underlying-sheaves restriction compositor. On sections in every degree it is $R$-linear: $t_{m,n}(\\pi_m(r)x)=q_{m,n}(\\pi_m(r))t_{m,n}(x)=\\pi_n(r)t_{m,n}(x)$. The identities and composition law for $t_{m,n}$ give $u_{n,n}=1$ and $u_{r,n}=u_{m,n}u_{r,m}$. Thus, for every degree $d$, the objects $E_n^d$ and arrows $u_{m,n}^d$ define an actual functor $S^d:\\mathbf N_{\\geq1}^{\\mathrm{op}}\\to\\mathcal A_R$, hence an object of $\\operatorname{Tow}_R(T)$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Paragraph 2, implicit realization prerequisite: restrict the actual B_n-actions and chain maps to the common coefficient sheaf; agent-written construction."
+   }
+  },
+  {
+   "text": "Define $d_S^d:S^d\\to S^{d+1}$ by components $d_{E_n}^d$. The chain-map equation for $u_{m,n}$ is precisely $d_{E_n}^du_{m,n}^d=u_{m,n}^{d+1}d_{E_m}^d$, so these components are a natural transformation of inverse sequences. Its square is zero since $(d_{E_n})^2=0$ at every level, and morphisms of inverse sequences are equal when their components are equal. Therefore $(S^d,d_S^d)_{d\\in\\mathbf Z}$ is a cochain complex in $\\operatorname{Tow}_R(T)$. Evaluation gives $E_n$ and $u_{m,n}$ as actual complexes and chain maps, by construction. In Lean this is the private transpose construction, whose asFunctor is definitionally the original diagram of complexes.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Paragraph 2, implicit realization prerequisite: interchange the complex and sequence indices; agent-written differential and naturality check."
+   }
+  },
+  {
+   "text": "The tower category is abelian and every evaluation $\\operatorname{ev}_n$ is additive and exact by the levelwise-abelian theorem, applied to $\\mathcal A_R$. Exact-functor derived factorization therefore gives\n$$D(\\operatorname{ev}_n)([S])\\cong[\\operatorname{ev}_n S]=[E_n]\\cong\\operatorname{Res}_n(Q_nC_n)\\xrightarrow{\\operatorname{Res}_n(i_n)}\\operatorname{Res}_nM_n.$$\nThese are the canonical evaluation comparisons for the chosen realization. The strict transition $\\operatorname{ev}_m\\to\\operatorname{ev}_n$ on towers is a natural transformation; its termwise chain map on $S$ is exactly $u_{m,n}$. It descends through localization since naturality with an inverted quasi-isomorphism also gives naturality with its inverse. Consequently the evaluated transition under the displayed comparisons is $[u_{m,n}]$, followed by the restricted $i_n$. By Step 4 this equals $\\operatorname{Res}_m(\\tau_{m,n})$ preceded by the restricted $i_m$, with the restriction compositor on the target. This proves the transition clause in the derived category, not just after cohomology. The construction used neither boundedness nor any invertibility condition on the transitions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02MZ (lemma-inverse-systems-abelian), and derived.tex Tag 015F (lemma-right-derived-exact-functor); agent-written transition comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-exact-restriction-composition",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Paragraph 2, coherent-realization prerequisite made explicit by right-fraction induction, using Stacks Tags 05RT, 04VI, 03DA, 02MZ and 015F. Lean realization: Mathlib DerivedCategory.right_fac, Nat.leRec composite transitions, explicit transposition, and exact-restriction localization comparisons; the prescribed first representative is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence in derived categories of modules over varying ring sheaves has compatible chain complex representatives retaining each ring action",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Sheaf.H; AlgebraicGeometry.Scheme.Modules.inv_app; localCohomology.diagram; DerivedCategory.instLinear; SheafOfModules.unitHomEquiv_symm_comp; CategoryTheory.Abelian.Ext.homLinearEquiv_symm_apply; SheafOfModules.instAbelian; DerivedCategory.instLinearCochainComplexIntQ",
+   "date": "2026-10-22",
+   "verdict": "no match: Essential surjectivity for one object or arrow and recursive cochain constructions do not simultaneously lift a countable diagram over varying ring sheaves while fixing its earlier targets and retaining the finite actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"EssSurj\"",
+   "results": "[loogle] OK 6 hit(s); DerivedCategory.instEssSurjCochainComplexIntQ; DerivedCategory.instEssSurjHomotopyCategoryIntUpQh; DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; DerivedCategory.Plus.instEssSurjPlusQh; DerivedCategory.Plus.instEssSurjArrowPlusMapArrowQh; HomotopyCategory.Plus.instEssSurjInjectiveObjectPlusCompMapHomotopyCategoryPlusιQh",
+   "date": "2026-10-22",
+   "verdict": "no match: Essential surjectivity for one object or arrow and recursive cochain constructions do not simultaneously lift a countable diagram over varying ring sheaves while fixing its earlier targets and retaining the finite actions."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|varying.*ring|sequential.*(complex|realiz)|tower.*realiz",
+   "results": "[grep] OK 0 hit(s); No hits; Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: Essential surjectivity for one object or arrow and recursive cochain constructions do not simultaneously lift a countable diagram over varying ring sheaves while fixing its earlier targets and retaining the finite actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a countable inverse sequence of derived module objects to complexes using roofs without replacing earlier targets",
+   "results": "[leansearch] OK 8 hit(s); ModuleCat.HasLimit.productLimitCone_isLimit_lift; CategoryTheory.ShortComplex.LeftHomologyData.liftH; Module.DirectLimit.lift_of; CategoryTheory.ProjectiveResolution.lift; ComplexShape.Embedding.liftExtend; CategoryTheory.ShortComplex.Exact.liftFromProjective; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.ShortComplex.Exact.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: Essential surjectivity for one object or arrow and recursive cochain constructions do not simultaneously lift a countable diagram over varying ring sheaves while fixing its earlier targets and retaining the finite actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successively represent each derived morphism by a roof to realize an inverse sequence by chain maps over varying rings",
+   "results": "[leanfinder] OK 8 hit(s); ChainComplex.mkHomAux; CochainComplex.mkAux; CochainComplex.HomComplex.Cochain.InductionUp.limitSequence; CochainComplex.HomComplex.Cochain.InductionUp.sequence; CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo; ChainComplex.mkAux_eq_shortComplex_mk_d_comp_d; ChainComplex.mkAux; ChainComplex.mkHom_f_succ_succ",
+   "date": "2026-10-22",
+   "verdict": "no match: Essential surjectivity for one object or arrow and recursive cochain constructions do not simultaneously lift a countable diagram over varying ring sheaves while fixing its earlier targets and retaining the finite actions."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|varying.*ring|sequential.*(complex|realiz)|tower.*realiz",
+   "results": "[grep] OK 0 hit(s); No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: object and arrow essential surjectivity, bounded roof factorizations, and cochain recursion do not state the simultaneous varying-ring sequence realization with fixed first representative."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent consecutive derived morphisms by roofs with fixed targets and recursively assemble a sequence of complexes",
+   "results": "[leansearch] OK 8 hit(s); ChainComplex.mk; CochainComplex.mkHom; ChainComplex.mk'; CochainComplex.mkAux; CochainComplex.mkHomAux; ChainComplex.mkAux; CategoryTheory.ComposableArrows.IsComplex.rec; CochainComplex.mk'",
+   "date": "2026-10-22",
+   "verdict": "no match: object and arrow essential surjectivity, bounded roof factorizations, and cochain recursion do not state the simultaneous varying-ring sequence realization with fixed first representative."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"EssSurj\"",
+   "results": "[loogle] OK 6 hit(s); DerivedCategory.instEssSurjCochainComplexIntQ; DerivedCategory.instEssSurjHomotopyCategoryIntUpQh; DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; DerivedCategory.Plus.instEssSurjPlusQh; DerivedCategory.Plus.instEssSurjArrowPlusMapArrowQh; HomotopyCategory.Plus.instEssSurjInjectiveObjectPlusCompMapHomotopyCategoryPlusιQh",
+   "date": "2026-10-22",
+   "verdict": "no match: object and arrow essential surjectivity, bounded roof factorizations, and cochain recursion do not state the simultaneous varying-ring sequence realization with fixed first representative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize an inverse sequence in derived categories over varying ring sheaves by cochain maps while fixing the first complex",
+   "results": "[leanfinder] OK 8 hit(s); CochainComplex.HomComplex.Cochain.InductionUp.limitSequence; CochainComplex.mkHomAux; CochainComplex.HomComplex.Cochain.InductionUp.sequence; CochainComplex.cm5b.I; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; CochainComplex.cm5b; DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-22",
+   "verdict": "no match: object and arrow essential surjectivity, bounded roof factorizations, and cochain recursion do not state the simultaneous varying-ring sequence realization with fixed first representative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a countable inverse diagram of derived modules over varying sheaves of rings to strict complexes using right fractions without changing earlier targets",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.right_fac_of_isStrictlyLE; localCohomology.diagram; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; HomologicalComplex.evalCompCoyonedaCorepresentative; HomologicalComplex.separatingFamily; ComplexShape.Embedding.HasLift",
+   "date": "2026-10-22",
+   "verdict": "no match: object and arrow essential surjectivity, bounded roof factorizations, and cochain recursion do not state the simultaneous varying-ring sequence realization with fixed first representative."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-compact-support-normalized-realization",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-integral-compact-support",
+   "place": "Paragraph 2, implicit coherent-realization prerequisite for applying normalized DVR effectivity; returned normalized-realization proof Steps 5--6. Background: Stacks derived.tex, Tag 05RT (lemma-acyclic), via the quasi-isomorphism calculus of fractions.",
+   "via": [
+    "lem-coef-compact-support-normalized-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-sequential-varying-ring-realization",
+  "worker": "stage1",
+  "summary": "Seven explicit steps: exact scalar restriction, fixed-first-complex induction setup, right-fraction induction over B_{n+1}, composite-transition calculation, strict R-sequences, differential naturality and derived evaluation. All non-elementary ingredients reuse existing DAG nodes; no new nodes. Normalized doubled TeX backslashes in the statement without changing its mathematical content.",
+  "blueprint": "lem-coef-integral-compact-support, proof paragraph 2: the coefficient maps make a normalized tower to which DVR effectivity is applied. These steps supply the implicit simultaneous chain realization, refining the returned normalized-realization Steps 5--6; the chapter and unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-b4e0cfa7b",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-b4e0cfa7b (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery adds no new nodes. The statement equals the base statement once the doubled backslashes are undone, so there is no math change and no statement_change is needed. I checked the types of Res, τ and the cocycle, and the small cases: one level, equal indices, zero rings, identity coefficient maps, unbounded complexes. I re-derived all 7 steps. Step 3 is the roof induction: lem-pc-right-fraction-representation gives s:P→A and f:P→Res C_n with the target fixed, and Res(i_n)Q(f)=τ a Q(s). Step 4 is the composite calculation using the cocycle with r=m+1. Step 5 checks R-linearity through q_{m,n}π_m=π_n. Step 6 builds the complex of towers. Step 7 is derived evaluation via the exact-functor factorization and localization descent of ev_m→ev_n. Source checks: Stacks derived 05RT (l.3670), 015F (l.5884), categories 04VI (l.4619), sites-modules 03DA (l.1337), homology 02MZ (l.7616), and blueprint main-20261015 lem-coef-integral-compact-support proof paragraph 2. Route: the only split statements cited are in sk-def-sf-operations, which the unit cites; all other cited nodes are mathlib tools, so no tool_uses are needed. proof_deps equals the union of the step uses. There is no SGA. Duplicate candidates: lem-sp-semilinear-kflat-tower-model goes the opposite direction (from D(Tow), specific rings, K-flat), and lem-pe-kflat-scalar-tower-realization is a single K-flat complex; neither is a duplicate. Advisory: the Stacks label of lem-pc-right-fraction-representation is wrong (04VI is lemma-morphisms-right-localization); I did not edit that node."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequentialVaryingRingRealization",
+  "declaration": "AlgebraicGeometry.Scheme.SequentialVaryingRing.realization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.restrictionComp",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.derivedComp",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.derivedId",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.coneComplexComp",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.restrictedTower",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.evaluationIso",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.evaluatedTransition",
+   "AlgebraicGeometry.Scheme.SequentialVaryingRing.realization"
+  ],
+  "file": "lean/Sheaf/Paper/SequentialVaryingRingRealization.lean",
+  "statement": "theorem realization (M : ∀ n : ℕ, reductionDerivedCategory T (B.obj (op n))) (τ : ∀ (m n : ℕ) (h : n ≤ m), M m ⟶ (reductionDerivedRestrict T (B.map (homOfLE h).op)).obj (M n)) (hτid : ∀ n : ℕ, τ n n le_rfl ≫ (Functor.mapDerivedCategoryNatIso (eqToIso (congrArg (reductionRestrict T) (B.map_id (op n))))).hom.app (M n) ≫ (derivedId T (B.obj (op n))).hom.app (M n) = 𝟙 (M n)) (hτcomp : ∀ (r m n : ℕ) (hnm : n ≤ m) (hmr : m ≤ r), τ r m hmr ≫ (reductionDerivedRestrict T (B.map (homOfLE hmr).op)).map (τ m n hnm) ≫ (derivedComp T (B.map (homOfLE hmr).op) (B.map (homOfLE hnm).op) (B.map (homOfLE (hnm.trans hmr)).op) (B.map_comp (homOfLE hmr).op (homOfLE hnm).op).symm).hom.app (M n) = τ r n (hnm.trans hmr)) (C₀ : CochainComplex (reductionModules T (B.obj (op 0))) ℤ) (i₀ : DerivedCategory.Q.obj C₀ ≅ M 0) : ∃ (C : ∀ n : ℕ, CochainComplex (reductionModules T (B.obj (op n))) ℤ) (i : ∀ n : ℕ, DerivedCategory.Q.obj (C n) ≅ M n) (t : ∀ (m n : ℕ) (h : n ≤ m), C m ⟶ ((reductionRestrict T (B.map (homOfLE h).op)).mapHomologicalComplex (.up ℤ)).obj (C n)), C 0 = C₀ ∧ HEq (i 0) i₀ ∧ (∀ n : ℕ, HEq (t n n le_rfl) (𝟙 (C n))) ∧ (∀ (r m n : ℕ) (hnm : n ≤ m) (hmr : m ≤ r), t r n (hnm.trans hmr) = t r m hmr ≫ ((reductionRestrict T (B.map (homOfLE hmr).op)).mapHomologicalComplex (.up ℤ)).map (t m n hnm) ≫ (Functor.mapHomologicalComplexCompIso (restrictionComp T (B.map (homOfLE hmr).op) (B.map (homOfLE hnm).op) (B.map (homOfLE (hnm.trans hmr)).op) (B.map_comp (homOfLE hmr).op (homOfLE hnm).op).symm) (.up ℤ)).hom.app (C n)) ∧ (∀ (m n : ℕ) (h : n ≤ m), DerivedCategory.Q.map (t m n h) ≫ (reductionRestrict T (B.map (homOfLE h).op)).mapDerivedCategoryFactors.inv.app (C n) ≫ (reductionDerivedRestrict T (B.map (homOfLE h).op)).map (i n).hom = (i m).hom ≫ τ m n h) ∧ ∃ (S : CochainComplex (reductionTowerCategory T (reductionModuleRing T c.pt)) ℤ) (hS : S.asFunctor = restrictedTower T B c C t), ∀ (m n : ℕ) (h : n ≤ m), evaluatedTransition T B c S m n h ≫ (evaluationIso T B c M C i t S hS n).hom = (evaluationIso T B c M C i t S hS m).hom ≫ (reductionDerivedRestrict T (c.π.app (op m))).map (τ m n h) ≫ (derivedComp T (c.π.app (op m)) (B.map (homOfLE h).op) (c.π.app (op n)) (c.w (homOfLE h).op)).hom.app (M n)",
+  "branch": "sheaf-dag",
+  "by": "Q151",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f0d626a4",
+  "group": "Q151",
+  "result": "pass",
+  "note": "First S2 delivery; only the item node lean field and the new module SequentialVaryingRingRealization.lean changed; statement verbatim, all 8 declarations present. Clause check: B : ℕᵒᵖ ⥤ CommRingCat sheaves (map_id/map_comp = q laws), Cone B = (R, π) with c.w, Res = SheafOfModules.restrictScalars and its mapHomologicalComplex/mapDerivedCategory, hτid/hτcomp through canonical derivedId/derivedComp (Iso.refl and exactDerivedRestrictionComposition), ∃ C i t with C 0 = C₀ and HEq (i 0) i₀ for the prescribed pair, HEq t n n = 𝟙 (types differ only by B.map_id, since Res along 𝟙 is defeq to the identity) and a composition law forcing iterated adjacent composites, derived equation for all m ≥ n, ∃ S with S.asFunctor = restrictedTower (actual complexes and transitions), canonical evaluationIso/evaluatedTransition, final equation with Resₘ(τ) ≫ derivedComp(c.w). No extra hypotheses or universe restriction; edge cases m = n, first level, zero rings, arbitrary unbounded complexes. Not recompiled (no file changed); worker reports clean 9.3 s. Advisories: exactDerivedRestriction* plain defs owned by proof_dep theorem lem-pur-exact-restriction-composition (stmt_deps unchanged), unused private proof-prerequisite imports, second reading by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261023T231831-L-3649480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

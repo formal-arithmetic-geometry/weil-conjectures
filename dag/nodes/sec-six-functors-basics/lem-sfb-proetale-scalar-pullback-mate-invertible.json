@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-proetale-scalar-pullback-mate-invertible",
+ "kind": "statement",
+ "title": "Derived scalar restriction and geometric pullback have invertible inverse mates",
+ "statement": "For an arbitrary homomorphism a:A→B of discrete commutative rings and a scheme morphism f:X→Y [def-pc-scheme], on either small etale or pro-etale site use the ordinary unbounded derived categories [def-weil-pbc-derived-categories]. The inverse scalar-adjunction mate of the canonical exact restriction/pullback square is invertible, with no coefficient flatness or boundedness assumption. The square is induced termwise by the canonical ordinary restriction/pullback square and transported through the exact geometric derived comparison. Scalar extension and restriction use [lem-pur-derived-change-of-rings]; the geometric functors use [def-weil-pbc-proetale-operations]. The fixed scalar adjunctions and their normalized localization data are those of [def-weil-pbc-witness-compatibility].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite rings paragraph, transport of scalar direct-image mates; canonical pullback/scalar and site comparison maps (Stacks 07A4, 0G7E, 09A6)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary restriction/pullback square is conjugate to the pointwise coextension/direct-image identity. Iterated mates and the restriction/coextension triangle give an invertible ordinary scalar mate.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback preserves flat-term K-flat resolutions, stalkwise on the etale site and by the local relation criterion under representably flat base change on the pro-etale site. Compute the derived mate using the normalized scalar adjunction units on these resolutions.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport invertibility through uniqueness of scalar left adjoints and the canonical exact inverse-image comparison. All transports are by natural isomorphisms.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-witness-compatibility",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Canonical comparison normalization used in the finite rings paragraph.",
+  "note": " A4 repair restores the reviewed concrete data module and preserves this helper node attachment."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension commutes with exact inverse image as the inverse mate of scalar restriction",
+   "results": "ModuleCat.extendRestrictScalarsAdj and its sectionwise Hom equivalence; no derived site mate result.",
+   "date": "2026-10-25",
+   "verdict": "Only the ordinary module adjunction is present; derived sheaf argument required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived scalar-change mate for direct image commutes with etale proetale comparison",
+   "results": "etale algebra and ordinary adjunction results, no fixed canonical site scalar mate.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; use normalized flat-resolution localization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(IsIso|isIso)|isIso.*mateEquiv",
+   "results": "No matching specialization. Generic mate identities apply but do not assert scalar pullback invertibility.",
+   "date": "2026-10-25",
+   "verdict": "The site and flat-resolution hypotheses require the proved specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleProEtaleScalarMate",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-proetale-scalar-mate",
+   "place": "Canonical comparison helpers needed for the scalar direct-image mate equation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedScalarRestrictionPullbackMate",
+  "file": "lean/Sheaf/Paper/DerivedScalarRestrictionPullbackMate.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleScalarPullbackMate_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proEtaleScalarPullbackMate_isIso",
+   "AlgebraicGeometry.ProEtale.etaleScalarPullbackMate_isIso"
+  ],
+  "statement": "theorem proEtaleScalarPullbackMate_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) : IsIso (((mateEquiv (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) a)) (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) a))).symm (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso a f).hom)).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d8a7",
+  "group": "T7",
+  "result": "fix",
+  "landing": "20261025T181149-L-4084036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-160a9",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T000911-L-4147139",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs b8b6a6cb2792 delivery (Lean and node JSONs byte-identical; only report/change-record retry note) and vs live 9176a4f74a2 (no touched file changed since; all imports exist); axioms clean; 8 delivered modules built in sandbox; 53 direct importers compiled: 45 pass incl. EtaleOpenScalarCoherence, 1 pre-existing missing-olean failure, 7 over 60 s with no error and equally slow against the published build"
+ }
+}

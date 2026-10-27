@@ -12,6 +12,21 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+public import Mathlib.CategoryTheory.Monoidal.Action.Basic
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.Order.CompletePartialOrder
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
 /-! # Extension by zero through the schematic closure
 

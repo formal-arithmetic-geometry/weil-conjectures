@@ -1,0 +1,153 @@
+{
+ "id": "lem-pod-scalar-hom-cochain-pairing",
+ "kind": "statement",
+ "title": "Ordinary scalar-Hom chain pairing on point models",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell$, finite extensions $E,L/\\mathbf Q_\\ell$, and an embedding $\\iota:E\\to L$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}(D.k)$, $R=\\operatorname{ULift}(\\mathcal O_E)$, $S=\\operatorname{ULift}(\\mathcal O_L)$, and let $\\sigma:R\\to S$ be the lifted coefficient inclusion. Let $B,B'$ be the completed integral coefficient sheaves on $s$ [def-weil-completed-integral-coefficients], with coefficient map $\\phi:B\\to B'$. For a cochain complex $P$ of $R$-modules, put $P_L=S\\otimes_R P$, $K=\\operatorname{model}_E(P)$, $H=\\operatorname{model}_E(\\operatorname{Hom}^\\bullet_R(P,R[0]))$, $K_L=\\operatorname{model}_L(P_L)$ and $J_L=\\operatorname{model}_L(\\operatorname{Hom}^\\bullet_S(P_L,S[0]))$ [def-pur-hom-complex, def-pod-point-derived-hom-models, lem-pod-point-completed-evaluation]. Let $F$ denote ordinary termwise scalar extension along $\\phi$ [def-weil-integral-scalar-extension]. Choose isomorphisms $h:H\\cong\\mathcal Hom^\\bullet(K,B[0])$ and $h_L:J_L\\cong\\mathcal Hom^\\bullet(K_L,B'[0])$, normalized on constant-module generators by $h(b\\otimes f)(c\\otimes x)=bc\\,f(x)$ and its $L$ analogue, in every pair of degrees summing to zero. Choose an isomorphism $k:FK\\cong K_L$ normalized by $k(a\\otimes(b\\otimes x))=\\phi(b)a\\otimes(1\\otimes x)$ and $k^{-1}(b\\otimes(a\\otimes x))=\\operatorname{scalar}(a)b\\otimes(1\\otimes x)$. These formulas use the recorded sheafified tensor generators and coefficient scalar maps of lem-pod-point-completed-evaluation. Then there is a cochain map $\\gamma:FH\\to J_L$ such that for every $p+j=0$, every object $U$ of the pro-etale site, homogeneous sections $f\\in H^j(U)$ and $z\\in K^p(U)$, and $a,b\\in B'(U)$, one has $h_L(\\gamma(a\\otimes f))(k(b\\otimes z))=\\phi(h(f)(z))ab$. No boundedness or projectivity is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: internal Hom at the geometric point is computed over the coefficient ring; completed scalar transpose argument, steps 2--6 of lem-pod-completed-hom-scalar-transpose. Hom differential and derived adjunction: literature/stacks-project/sites-cohomology.tex, section-hom-complexes and lemma-internal-hom."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-hom-complex",
+  "def-pod-point-derived-hom-models",
+  "lem-pod-point-completed-evaluation",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "For module complexes, use the ordinary scalar dual chain map beta of lem-pod-perfect-dual-scalar-calculus. It sends a tensor f evaluated at b tensor x to i(f(x))*a*b. Its cochain identity follows from d(f)=d_target f-(-1)^j f d_source, because scalar coefficients have degree zero. This construction does not require boundedness or projectivity.",
+   "uses": [
+    "lem-pod-perfect-dual-scalar-calculus",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: internal Hom at the geometric point is computed over the coefficient ring; completed scalar transpose argument, steps 2--6 of lem-pod-completed-hom-scalar-transpose. Hom differential and derived adjunction: literature/stacks-project/sites-cohomology.tex, section-hom-complexes and lemma-internal-hom."
+   }
+  },
+  {
+   "text": "Realize beta as a constant module-sheaf morphism. Reassociate ordinary scalar extension using the specified tensor maps and k for the source model, and the corresponding balanced tensor reassociation for the dual module. The forward reassociation and its inverse send generators to the formulas in the statement; balancing proves they are inverse and natural in all module maps, hence commute with differentials. Sheafification preserves the inverse identities.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-integral-scalar-extension",
+    "def-pod-point-derived-hom-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: internal Hom at the geometric point is computed over the coefficient ring; completed scalar transpose argument, steps 2--6 of lem-pod-completed-hom-scalar-transpose. Hom differential and derived adjunction: literature/stacks-project/sites-cohomology.tex, section-hom-complexes and lemma-internal-hom."
+   }
+  },
+  {
+   "text": "On generators b tensor f and c tensor x, the h and h_L normalizations identify both evaluations with the same scalar product. Extend in each variable by the universal property of the two sheafified tensor products. Compatibility with restrictions descends the equality through sheafification; this proves the formula for arbitrary sections of the models, not just presheaf pure tensors.",
+   "uses": [
+    "lem-pod-point-completed-evaluation",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: internal Hom at the geometric point is computed over the coefficient ring; completed scalar transpose argument, steps 2--6 of lem-pod-completed-hom-scalar-transpose. Hom differential and derived adjunction: literature/stacks-project/sites-cohomology.tex, section-hom-complexes and lemma-internal-hom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-perfect-dual-scalar-calculus",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-pod-point-derived-hom-models",
+  "lem-pod-point-completed-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: internal Hom at the geometric point is computed over the coefficient ring; completed scalar transpose argument, steps 2--6 of lem-pod-completed-hom-scalar-transpose. Hom differential and derived adjunction: literature/stacks-project/sites-cohomology.tex, section-hom-complexes and lemma-internal-hom. H3: separate the ordinary chain construction from its derived normalization; sources supply the constructions and the evaluation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a constant module sheaf commutes with extension of the coefficient ring, normalized on pure tensors",
+   "results": "ModuleCat extension/restriction adjunction and extendScalarsId/extendScalarsComp formulas; no theorem about the specified point sheaf Hom model.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use existing tensor and point-model APIs for the construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_injective",
+   "results": "CategoryTheory.MonoidalClosed.uncurry_injective.",
+   "date": "2026-10-26",
+   "verdict": "Abstract injectivity is useful after identifying representative evaluations; it does not construct the model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|tensorPresentation_hom_ext",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean and extension pseudofunctor formulas; no point sheaf completed Hom normalization.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars internal Hom of complexes evaluation chain map",
+   "results": "HomologicalComplex.smul_f_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt and evalAt_apply; HomologicalComplex.eval_map.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module adjunction and evaluation formulas, not the sheaf chain/derived normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedHomScalarTranspose",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Second sentence: internal Hom at the geometric point is computed over the coefficient ring; completed scalar transpose argument, steps 2--6 of lem-pod-completed-hom-scalar-transpose. Hom differential and derived adjunction: literature/stacks-project/sites-cohomology.tex, section-hom-complexes and lemma-internal-hom.",
+   "via": [
+    "lem-pod-point-scalar-hom-evaluation",
+    "lem-pod-completed-hom-scalar-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointScalarHomCochainPairing",
+  "file": "lean/Sheaf/Paper/PointScalarHomCochainPairing.lean",
+  "declaration": "WeilConjectures.PointScalarHomCochain.scalar_hom_cochain_pairing",
+  "statement": "theorem scalar_hom_cochain_pairing :\n  let F₀ :=\n    ((integralOrdinaryScalar l E L ι (Spec (.of D.k))).mapHomologicalComplex (.up ℤ));\n  let σ : PointCompletedEvaluation.R l E →+* PointCompletedEvaluation.R l L :=\n    (ULift.ringEquiv.symm.toRingHom.comp\n  ((integralScalarIntegerInclusion l E L ι).comp ULift.ringEquiv.toRingHom));\n  let P₁ :=\n    (((ModuleCat.extendScalars σ).mapHomologicalComplex (.up ℤ)).obj P);\n  ∀ (h : PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P) ≅\n    PointDerivedHom.sheafHom.{u, u} D.k (PointCompletedEvaluation.B D l E)\n      (PointCompletedEvaluation.model D l E P) (PointCompletedEvaluation.coefficient D l E))\n  (hL : PointCompletedEvaluation.model D l L (PointCompletedEvaluation.dual l L P₁) ≅\n    PointDerivedHom.sheafHom.{u, u} D.k (PointCompletedEvaluation.B D l L)\n      (PointCompletedEvaluation.model D l L P₁) (PointCompletedEvaluation.coefficient D l L))\n  (k : (F₀).obj (PointCompletedEvaluation.model D l E P) ≅\n    PointCompletedEvaluation.model D l L P₁),\n  let v₀ :=\n    ((fun (j p : ℤ) (hpj : p + j = 0) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n    (f : ((PointCompletedEvaluation.model D l E\n      (PointCompletedEvaluation.dual l E P)).X j).val.obj U)\n    (z : ((PointCompletedEvaluation.model D l E P).X p).val.obj U) ↦\n  (PointCompletedEvaluation.sheafValue D l E (p + j) hpj).val.app U\n      (PointDerivedHom.homValue.{u, u} D.k (PointCompletedEvaluation.B D l E)\n        (PointCompletedEvaluation.model D l E P) (PointCompletedEvaluation.coefficient D l E)\n        j p U ((h.hom.f j).val.app U f) z)));\n  let v₁ :=\n    ((fun (j p : ℤ) (hpj : p + j = 0) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n    (f : ((PointCompletedEvaluation.model D l L\n      (PointCompletedEvaluation.dual l L P₁)).X j).val.obj U)\n    (z : ((PointCompletedEvaluation.model D l L P₁).X p).val.obj U) ↦\n  (PointCompletedEvaluation.sheafValue D l L (p + j) hpj).val.app U\n      (PointDerivedHom.homValue.{u, u} D.k (PointCompletedEvaluation.B D l L)\n        (PointCompletedEvaluation.model D l L P₁) (PointCompletedEvaluation.coefficient D l L)\n        j p U ((hL.hom.f j).val.app U f) z)));\n  ∀ (hk : (∀ (p : ℤ) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n        (b : (PointCompletedEvaluation.B D l E).obj.obj U)\n        (a : (PointCompletedEvaluation.B D l L).obj.obj U) (x : P.X p),\n        (k.hom.f p).val.app U\n          (integralOrdinaryTensorSection l E L ι (Spec (.of D.k))\n            ((PointCompletedEvaluation.model D l E P).X p) U a\n            (PointCompletedEvaluation.generator D l E _ U b x)) =\n          PointCompletedEvaluation.generator D l L _ U\n            (((integralCompletedScalarMap l E L ι (Spec (.of D.k))).hom.app U b)*a)\n            ((1 : PointCompletedEvaluation.R l L) ⊗ₜ[PointCompletedEvaluation.R l E,\n              σ] x)) ∧\n      (∀ (p : ℤ) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n        (b : (PointCompletedEvaluation.B D l L).obj.obj U)\n        (a : PointCompletedEvaluation.R l L) (x : P.X p),\n        (k.inv.f p).val.app U\n          (PointCompletedEvaluation.generator D l L _ U b\n            (a ⊗ₜ[PointCompletedEvaluation.R l E, σ] x)) =\n          integralOrdinaryTensorSection l E L ι (Spec (.of D.k))\n            ((PointCompletedEvaluation.model D l E P).X p) U\n            (PointDerivedHom.scalar.{u, u} D.k (PointCompletedEvaluation.B D l L)\n              (PointCompletedEvaluation.alpha D l L) U a * b)\n            (PointCompletedEvaluation.generator D l E _ U 1 x)))\n    (hh : ∀ (p j : ℤ) (hpj : p + j = 0) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n    (b c : (PointCompletedEvaluation.B D l E).obj.obj U)\n    (f : (PointCompletedEvaluation.dual l E P).X j) (x : P.X p),\n    v₀ j p hpj U\n      (PointCompletedEvaluation.generator D l E _ U b f)\n      (PointCompletedEvaluation.generator D l E _ U c x) =\n      b * c * PointDerivedHom.scalar.{u, u} D.k (PointCompletedEvaluation.B D l E)\n        (PointCompletedEvaluation.alpha D l E) U\n        ((PointCompletedEvaluation.moduleValue l E (p + j) hpj).hom\n          ((f.v p (p + j) rfl).hom x)))\n    (hhL : ∀ (p j : ℤ) (hpj : p + j = 0) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n    (b c : (PointCompletedEvaluation.B D l L).obj.obj U)\n    (f : (PointCompletedEvaluation.dual l L P₁).X j) (x : (P₁).X p),\n    v₁ j p hpj U\n      (PointCompletedEvaluation.generator D l L _ U b f)\n      (PointCompletedEvaluation.generator D l L _ U c x) =\n      b * c * PointDerivedHom.scalar.{u, u} D.k (PointCompletedEvaluation.B D l L)\n        (PointCompletedEvaluation.alpha D l L) U\n        ((PointCompletedEvaluation.moduleValue l L (p + j) hpj).hom\n          ((f.v p (p + j) rfl).hom x))),\n  ∃ gamma : (F₀).obj\n      (PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P)) ⟶\n      PointCompletedEvaluation.model D l L\n        (PointCompletedEvaluation.dual l L P₁),\n    (∀ (p j : ℤ) (hpj : p + j = 0) (U : (Spec (.of D.k)).ProEtᵒᵖ)\n      (f : ((PointCompletedEvaluation.model D l E\n        (PointCompletedEvaluation.dual l E P)).X j).val.obj U)\n      (z : ((PointCompletedEvaluation.model D l E P).X p).val.obj U)\n      (a b : (PointCompletedEvaluation.B D l L).obj.obj U),\n      v₁ j p hpj U\n        ((gamma.f j).val.app U\n          (integralOrdinaryTensorSection l E L ι (Spec (.of D.k))\n            ((PointCompletedEvaluation.model D l E\n              (PointCompletedEvaluation.dual l E P)).X j) U a f))\n        ((k.hom.f p).val.app U\n          (integralOrdinaryTensorSection l E L ι (Spec (.of D.k))\n            ((PointCompletedEvaluation.model D l E P).X p) U b z)) =\n      (integralCompletedScalarMap l E L ι (Spec (.of D.k))).hom.app U\n        (v₀ j p hpj U f z) * a * b)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T065907-L-3287331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T065907-L-3287331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

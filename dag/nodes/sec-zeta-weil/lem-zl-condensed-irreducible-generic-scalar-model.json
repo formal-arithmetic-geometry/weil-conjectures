@@ -1,0 +1,225 @@
+{
+ "id": "lem-zl-condensed-irreducible-generic-scalar-model",
+ "kind": "statement",
+ "title": "Generic scalar models on prescribed w-contractible covers of irreducible affines",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and put $R=\\Gamma(*,\\Lambda)$. For a scheme $T$ [def-pc-scheme], let $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] on its small pro-etale site [def-weil-pbc-proetale-site], and write $D(T,\\Lambda)=D(T_{\\mathrm{proet}},\\Lambda_T)$ for the ordinary unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Dualizable means admitting evaluation and coevaluation for derived tensor with unit $\\Lambda_T[0]$, satisfying both triangle identities. Put $L_T(P)=\\Lambda_T\\otimes^L_{\\underline R}\\underline P$ for the canonical scalar realization [def-zl-condensed-scalar-realization], where underlines are discrete constant sheaves. A perfect ring complex is isomorphic to a bounded complex of finitely generated projective modules [def-pc-perfect-ring-complex].\n\nLet $X$ be nonempty irreducible affine, and let $\\eta:\\operatorname{Spec}\\Omega\\to X$ be a geometric generic point, with $\\Omega$ algebraically closed [def-weil-geometric-point, def-weil-irreducible-components]. Let $K\\in D(X,\\Lambda)$ be dualizable. There exist a perfect $P\\in D(R)$ and an isomorphism $\\alpha:K|_\\eta\\simeq L_\\eta(P)$. For every such $P,\\alpha$ and every affine faithfully flat ind-etale morphism $u:U\\to X$ with $U$ w-contractible [def-weil-pbc-faithfully-flat-ring-map, def-weil-pbc-ind-etale-algebra, sk-def-pe-wlocal], there exists a derived isomorphism $K|_U\\simeq L_U(P)$ with this same $P$.\n\nMore precisely, put $S=\\pi_0U$, $S_\\eta=\\pi_0(U\\times_X\\eta)$ with the profinite quotient topologies [lem-pe-spectral-components-profinite]. On a profinite slice use the analogous module-sheaf derived category and scalar realization with coefficients restricted from $\\Lambda$. Let $\\pi_U^*$ be the component inverse-image equivalence on dualizable objects [lem-zl-condensed-wcontractible-lisse-evaluation]. There exists a dualizable $M\\in D(S,\\Lambda)$ with $\\pi_U^*M\\simeq K|_U$. For $r:S_\\eta\\to S$, the induced generic-fiber isomorphism gives $r^*M\\simeq L_{S_\\eta}(P)$. There exists a continuous section $s:S\\to S_\\eta$ of $r$, and inverse image along any such section identifies $M\\simeq L_S(P)$. All these are isomorphisms of derived objects with the canonical pulled-back coefficient rings. No assumption of reducedness or coefficient flatness is made.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13, irreducible case, diagram (4.4) and paragraph following it; Lemma 4.1 and Proposition 4.3(3)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-condensed-scalar-realization",
+  "sk-def-pe-wlocal",
+  "def-weil-geometric-point",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-pe-spectral-components-profinite",
+  "lem-zl-condensed-wcontractible-lisse-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Pull K to the geometric point, preserving dualizability, and apply the geometric-field perfect model step.",
+   "uses": [
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-geometric-field-perfect-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the simultaneous component square system. Lift K restricted to U through its normalized corner using contractible_corner_lisse_lift. Construct the ordinary corner scalar comparison from beta and coefficient_eq by module linearity, with no additional existence assumption. For the scheme comparison, lift upperStarFromPointComp using the proved condensedPointModule_comparison_linear and precompose with extendScalarsIsoComapInv. Its underlying map is definitionally the required schemeUnderlying composite.",
+   "uses": [
+    "lem-zl-component-derived-pullback-square",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-contractible-corner-lisse-lift",
+    "def-zl-condensed-generic-scalar-model-data",
+    "lem-zl-condensed-point-module-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the square, beta, genericRestriction, the fixed alpha and the scalar comparisons. Full faithfulness of the normalized generic-fibre corner gives its unique preimage delta; the isoEquiv inverse identity proves generic_induced.",
+   "uses": [
+    "lem-zl-condensed-generic-fiber-corner-fully-faithful",
+    "lem-zl-component-derived-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Faithful flatness gives going-down. Each component of U has a generalization over the generic point; the fibre-product point theorem lifts it to the geometric fibre. Thus its component map is surjective. W-contractibility makes pi_0 U extremally disconnected, so projectivity supplies a continuous section. For each section take its normalized SectionComparison, define gamma as the inverse identity comparison followed by the pullback of delta and the scalar comparison, and cancel the identity isomorphism to prove the sections equation. Apply the U corner to gamma and compose with beta inverse and scalarU to obtain model.",
+   "uses": [
+    "lem-zl-condensed-slice-section-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-condensed-geometric-field-perfect-model",
+  "lem-zl-component-derived-pullback-square",
+  "lem-zl-condensed-contractible-corner-lisse-lift",
+  "def-zl-condensed-generic-scalar-model-data",
+  "lem-zl-condensed-generic-fiber-corner-fully-faithful",
+  "lem-zl-condensed-slice-section-comparison",
+  "lem-zl-condensed-point-module-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13, irreducible case, (4.4); normalized module descent assembled in Lean by K2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable condensed coefficient complex on an irreducible affine scheme is the scalar extension of its perfect geometric generic stalk on any weakly contractible ind etale cover",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lisse sheaves with condensed coefficients on irreducible schemes descend the geometric generic perfect model using a section of the connected component map",
+   "results": "CondensedSet.LocallyConstant.functorFullyFaithful; CondensedMod.isDiscrete_tfae; instCategoryLightCondensed; Condensed; LightCondensed.IsDiscrete; LightCondensed; LightCondensed.lanLightCondSet; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.HasRightDual",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(condensed|lisse)|condensed.*generic|scalar.*w[Cc]ontract",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the condensed-coefficient derived cone/scalar calculus, generic-model descent, or prescribed henselian model-lifting statement"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(condensed|lisse)|condensed.*generic|scalar.*w[Cc]ontract",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary/discrete condensed sheaves and do not assert the derived generic-fiber scalar-model theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect constant generic fibers of dualizable condensed sheaves extend to a prescribed weakly contractible affine cover",
+   "results": "LightCondensed.IsDiscrete; Condensed; CondensedSet.LocallyConstant.functorFullyFaithful; CategoryTheory.constantSheaf; LightCondensed; Condensed.discrete; instHasLimitsOfShapeCondensed; Condensed.ofSheafCompHaus",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary/discrete condensed sheaves and do not assert the derived generic-fiber scalar-model theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, DerivedCategory",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary/discrete condensed sheaves and do not assert the derived generic-fiber scalar-model theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable sheaf of modules over a condensed ring on an irreducible affine scheme is scalar realization of a perfect complex on every weakly contractible ind etale cover",
+   "results": "CondensedMod.IsSolid; Condensed.free; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CondensedMod.isDiscrete_tfae; CondensedMod.ofSheafStonean; CondensedMod.ofSheafCompHaus; CondensedMod; CondensedMod.ofSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary/discrete condensed sheaves and do not assert the derived generic-fiber scalar-model theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous section of a surjection of profinite component spaces trivializes a dualizable condensed complex with constant generic perfect model",
+   "results": "Condensed.profiniteFree; CompHausLike.LocallyConstant.counit; CompHausLike.LocallyConstant.counit_app_val; CondensedMod.isDiscrete_tfae; LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite; LightCondMod.epi_iff_locallySurjective_on_lightProfinite; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary/discrete condensed sheaves and do not assert the derived generic-fiber scalar-model theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-dualizable-local-perfect-models",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. Local perfect-model proof: Theorem 4.13, irreducible case, diagram (4.4) and paragraph following it; Lemma 4.1 and Proposition 4.3(3)",
+   "via": [
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-condensed-irreducible-generic-scalar-model",
+  "worker": "stage1",
+  "summary": "Statement preserved. Reused the existing generic-fiber component section and coefficient-compatible topos equivalence, lisse evaluation, derived component square, and ringed derived composition comparisons. The proof obtains the generic perfect complex at the one-point profinite slice, fixes that same complex, and pulls the generic comparison back along any component section. No new nodes or Mathlib leaves are needed.",
+  "blueprint": "Realizes the local-model input to the field-stage projection-formula paragraph of prop-zl-smooth-proper-relative-purity through lem-zl-adic-hom-tensor-lisse-criterion and lem-zl-t-admissible-dualizable-truncations. Precisely the irreducible-case subargument of HRS Theorem 4.13 in the parent lem-zl-condensed-dualizable-local-perfect-models; does not replace any geometric purity or weight argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "why": "Generic coefficient-compatible identification of the small pro-etale topos of an algebraically closed field with the profinite topos, used only to evaluate the generic stalk at the one-point slice. The purity unit supplies no alternative for this coefficient interface."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic derived pullback composition and identity comparisons, applied to profinite slice geometric morphisms and their canonical coefficient restrictions; needed to pull a scalar realization back along a component section. No purity or weight step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-fa3415f85",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-fa3415f85 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 4 steps, the statement of every cited node, and HRS arXiv:2305.18131 Lemma 4.1(1)(2), Proposition 4.3(1)-(3) and the irreducible case of Theorem 4.13 (diagram (4.4), section paragraph, p.12). There are no new nodes and the statement is unchanged. The four steps follow HRS exactly. Step 1 obtains the generic perfect model at the one-point extremally disconnected set (A_*=R) through geometric-field-proetale-evaluation and wcontractible-lisse-evaluation. Step 2: the hypotheses of generic-fiber-components-section (nonempty irreducible affine X, Omega algebraically closed, affine ind-etale u, w-contractible U) all hold in the item. Step 3 applies component-derived-pullback-square to g:V->U with h=r and descends delta by full faithfulness of pi_V^* (directions checked). Step 4 uses the composition and identity comparisons for r∘s=id and q∘s=q to give the same P for every u and every section. Small cases checked: X a point, P=0 or Lambda=0, infinitely many components, nonreduced X. Faithful flatness is unused but harmless; nothing is weakened. No cycle, no SGA, and no duplicate (searched generic/component/scalar titles and statements; the nearest candidates state different claims). Tool uses accepted: geometric-field-proetale-evaluation and ringed-derived-monoidal-comparisons, both generic. Batch-5: def-trf-geometric-morphism, reached via generic-fiber-components-section -> affine-component-site-projection, is the general definition of a geometric morphism. It is not part of the trace formula or Poincaré duality, so the citation stands. FIX (C1): step 3 identified g^*(K|_U) with K|_V and with h^*(K|_eta) through the pullback composition comparisons (u∘g=eta∘h) without citing them, and left h^*L_eta(P)≃L_V(P) implicit. The corrected step 3 cites lem-sfb-ringed-derived-monoidal-comparisons (already in proof_deps) and writes out both identifications. Fixed file: fixes/dag/nodes/sec-zeta-weil/lem-zl-condensed-irreducible-generic-scalar-model.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedIrreducibleGenericScalarModel",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_irreducible_generic_scalar_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensed_irreducible_generic_scalar_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedIrreducibleGenericScalarModel.lean",
+  "statement": "theorem condensed_irreducible_generic_scalar_model (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) [IsAffine X] [Nonempty X] [IrreducibleSpace X] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (η : Spec (.of Ω) ⟶ X) (hη : ∀ x : Spec (.of Ω), η x = genericPoint X) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (hK : Nonempty (HasRightDual K)) : (∃ P : DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ.X)), DerivedCategory.IsPerfectRingComplex P ∧ Nonempty ((CondensedRing.upperStar Λ.X η).mapDerivedCategory.obj K ≅ (condensedScalarRealization Λ.X (Spec (.of Ω))).obj P)) ∧ (∀ (P : DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ.X))), DerivedCategory.IsPerfectRingComplex P → ∀ (α : (CondensedRing.upperStar Λ.X η).mapDerivedCategory.obj K ≅ (condensedScalarRealization Λ.X (Spec (.of Ω))).obj P) (U : Scheme.{u}) [IsAffine U] (f : U ⟶ X), f.appTop.hom.FaithfullyFlat → RingHom.IndEtaleAcrossUniverses f.appTop.hom → IsWContractibleRing Γ(U, ⊤) → Nonempty (CondensedGenericScalarModel.CoverModel Λ f Ω η K P α))",
+  "branch": "newtargets-dag",
+  "by": "K2",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Data declarations are unchanged and publicly re-exported from CondensedGenericScalarModelData. The proof constructs the descent of the fixed alpha and its pullback along every section, using four strictly simpler compatibility steps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b765010f7",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node. Hypotheses: commutative condensed ring; X nonempty irreducible affine; geometric generic point with Omega algebraically closed and hη, matching the def-weil-geometric-point inline record; K dualizable as Nonempty HasRightDual, the convention of lisse-proetale-locality; f.appTop FaithfullyFlat and IndEtaleAcrossUniverses; IsWContractibleRing Γ(U,⊤). Quantifiers: ∀ P perfect and ∀ α come before U and f, so the same P serves every cover. CoverModel is pinned to canonical data: Corner, Slice and Square are the published pinned witnesses. generic_induced fixes delta as node step 3's chain (θ⁻¹, g*β, genericRestriction built from schemeComposition and pullback.condition, h*α, then scalarV and scalarH, both pinned by their underlying maps). sections fixes γ as s*delta through a SectionComparison pinned like SliceIdentity and SliceComposition (test projection, adjunction mate, underlying maps). model is the existential K|U ≅ L_U(P), as in the node. Edge cases: X a point, P=0, Λ=0, infinitely many components, nonreduced X; explicit universes u and u+1. H2: only the lean field changed, statement verbatim, 14 declarations listed. H5/H6: no hollow defs, theorem proof is sorry. H8: docstrings present, main docstring gives the 4 steps. H9: lines within 100 characters, plain imports are exactly the proof_dep modules. No recompile because there is no FIX; the worker reports 40-41 s clean compiles. Advisory only: the statement uses ComponentDerivedSquare witnesses (owned by theorem lem-zl-component-derived-pullback-square, a proof_dep), affineComponentSpace (lem-zl-component-relative-profinite-site) and Evaluation.D/profiniteCoefficient (def-zl-condensed-lisse-evaluation-model), whose owners are not in stmt_deps; stage 2 cannot add them."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0223e",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T101212-L-3670642",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed against the clone's original (byte-identical), item node statement and stmt_deps unchanged; the 4 new sorried statements read against the pinned Corner/Slice structures and HRS Lemma 4.1(2), Prop 4.3(3), Thm 4.13 (4.4); item proof steps (splitting, delta, gamma) read against CoverModel fields"
+ }
+}

@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-radical-normalization-projective-etale",
+ "kind": "statement",
+ "title": "Projective normalization and unit locus of a radical curve extension",
+ "statement": "Let $K$ be a field and $C$ a smooth projective integral $K$-curve, with $F=K(C)$. Let $U\\subseteq C$ be an open subscheme, $n\\geq1$ an integer invertible in $K$, and $a_1,\\ldots,a_r\\in F^\\times$ a finite list such that each $a_j$ and $a_j^{-1}$ is regular on $U$. Choose $\\alpha_j$ in an algebraic closure of $F$ with $\\alpha_j^n=a_j$, and put $L=F(\\alpha_1,\\ldots,\\alpha_r)$. Assume $L/F$ is finite. Let $\\nu:Y\\to C$ be the normalization of $C$ in $L$. Then $Y$ is a normal integral projective $K$-curve, $\\nu$ is finite and surjective, and $\\nu^{-1}(U)\\to U$ is etale. The canonical generic morphism $\\operatorname{Spec}L\\to Y$ identifies $K(Y)$ with the specified extension $L/F$, compatibly with the morphism to $C$. Here normal means that every local ring is an integrally closed domain. No geometric integrality of $C$ and no roots of unity in $K$ are assumed. The cases $r=0$, $n=1$, and $U=\\varnothing$ are included.\n\nNotions: [def-weil-field], [def-pc-smooth-projective-curve], [def-pc-integral-scheme], [def-sc-function-field], [def-pc-field-extension], [def-weil-algebraic-closure], [def-fin-normalization-extension], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism], [def-kun-projective], [def-pc-curve].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence, unit-root algebra in the proof; pione.tex Tag 0BQL, lemma-finite-etale-covering-normal-unramified; morphisms.tex Tags 035B, lemma-ubiquity-nagata, and 0AVK, lemma-nagata-normalization-finite-general. Returned item proof steps 2--4: affine normalization, finite-over-projective embedding, and unit-root generic component."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-smooth-projective-curve",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-kun-projective",
+  "def-pc-curve"
+ ],
+ "proof": [
+  {
+   "text": "The curve $C$ is Noetherian, by finite type over the Noetherian scheme $\\operatorname{Spec}K$. It is regular, with regular local rings, by [lem-weil-pbc-smooth-scheme-over-field-regular], so $C$ is normal by [rem-pc-regular-normal](1). On every nonempty affine open $V=\\operatorname{Spec}A\\subseteq C$, [lem-sc-integral-function-field-affine-fraction] identifies $A$ with a domain in $F$ and $F$ with its fraction field. The affine stalk identifications give normality of every $A_{\\mathfrak p}$; [lem-weil-pbc-normal-domain-of-local-normal] therefore makes $A$ an integrally closed domain. These assertions hold without geometric integrality or perfection of $K$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0569, lemma-regular-normal; algebra.tex Tag 030B, lemma-normality-is-local; morphisms.tex Tag 01T6, lemma-finite-type-noetherian. Regularity over an arbitrary field: varieties.tex Tag 056S, lemma-smooth-regular."
+   }
+  },
+  {
+   "text": "By [def-fin-normalization-extension], $\\nu^{-1}(V)=\\operatorname{Spec}A_L$, where $A_L$ is the integral closure of $A$ in the specified field $L$. By [lem-weil-pbc-integral-closure-finite-extension-normal], $A_L$ is a normal domain with fraction field $L$. Its prime localizations are normal domains by [lem-weil-pbc-localization-normal-domain], so every stalk of $Y$ is a normal domain. These affine charts are nonempty and reduced. The canonical morphism $\\operatorname{Spec}L\\to Y$ belongs to every such chart and is its generic point, because $\\operatorname{Frac}A_L=L$. Hence its image is dense in every chart and therefore in $Y$. Thus $Y$ is nonempty, reduced and irreducible, so integral. Moreover [lem-sbc-normalization-generic-field] identifies this very generic morphism with $\\operatorname{Spec}K(Y)\\to Y$. Its composite to $C$ is the original map induced by $F\\hookrightarrow L$, giving the required compatibility of function fields.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sbc-normalization-generic-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034L, lemma-integral-closure-in-normal; Tag 00GY, lemma-localize-normal-domain; morphisms.tex Tag 035P, lemma-description-normalization. Generic-field compatibility also follows from the cited project declaration."
+   }
+  },
+  {
+   "text": "Since $C$ is integral of finite type over $K$ and $L/F$ is finite, [lem-fin-normalization-extension-finite] gives finiteness of $\\nu$. On the affine charts of step 2, $A\\hookrightarrow A_L$ is injective and integral. By [pqf-lem-lying-over], every prime of $A$ lifts to a prime of $A_L$. These charts cover $C$, so $\\nu$ is surjective.",
+   "uses": [
+    "lem-fin-normalization-extension-finite",
+    "pqf-lem-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035B, lemma-ubiquity-nagata, and 0AVK, lemma-nagata-normalization-finite-general, applied to the finite generic field extension; algebra.tex Tag 00GU, lemma-integral-going-up, and Tag 00GQ, lemma-integral-overring-surjective."
+   }
+  },
+  {
+   "text": "For every affine chart $V=\\operatorname{Spec}A$ used above, the injective integral map $A\\hookrightarrow A_L$ satisfies $\\dim A_L=\\dim A$ by [lem-weil-pbc-integral-injective-dimension-equal]. Apply [lem-pc-dimension-affine-open-cover] to the covering of $C$ by these $V$ and the covering of $Y$ by their inverse images. The two suprema coincide; thus $\\dim Y=\\dim C=1$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-pc-dimension-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OK, lemma-integral-sub-dim-equal; properties.tex Tag 04MU, lemma-dimension; schemes.tex Tag 01HV, lemma-spec-sheaves; algebra.tex Tag 00KG, lemma-dimension-height."
+   }
+  },
+  {
+   "text": "Apply [lem-fin-finite-over-projective] with $S=\\operatorname{Spec}K$, $T=C$ and $h=\\nu$. The base is affine and Noetherian, the structure map of $C$ has the stipulated finite projective-space embedding, and $\\nu$ is finite by step 3. Its affine-base conclusion gives a closed immersion $Y\\hookrightarrow\\mathbf P^N_K$ for some finite $N$. Thus $Y$ is projective in exactly the convention of [def-kun-projective]; [lem-pc-projective-proper] makes its structure map proper, hence separated and of finite type by [def-weil-proper-morphism]. Together with steps 2 and 4 (integral, dimension exactly $1$) it is a curve over $K$ in the sense of [def-pc-curve], hence a normal integral projective $K$-curve.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "def-kun-projective",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "def-pc-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I, lemma-finite-projective, and Tag 01WE, lemma-H-projective-composition; the cited node supplies the finite projective-space conclusion over an affine Noetherian base."
+   }
+  },
+  {
+   "text": "Fix a nonempty affine open $V=\\operatorname{Spec}A\\subseteq U$. All $a_j$ lie in $A^\\times$, and $n$ is a unit in $A$. Put $B_0=A$ and recursively $B_j=B_{j-1}[T_j]/(T_j^n-a_j)$. At each stage the images of $n$ and $a_j$ remain units, so [lem-sfb-unit-binomial-finite-etale] makes $\\operatorname{Spec}B_j\\to\\operatorname{Spec}B_{j-1}$ finite etale, with a free module basis of length $n$. Inductively composing these morphisms, [lem-weil-pbc-finite-composition] and [lem-weil-pbc-etale-composition-cancellation](2) show that $\\operatorname{Spec}B_r\\to V$ is finite etale. For $r=0$ this is the identity of $V$.",
+   "uses": [
+    "lem-sfb-unit-binomial-finite-etale",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence, explicit unit-root algebra in the proof; morphisms.tex Tags 01WK, lemma-composition-finite, and 02GN, lemma-composition-etale."
+   }
+  },
+  {
+   "text": "The chosen roots define an $F$-algebra homomorphism $B_r\\otimes_A F\\to L$ sending $T_j$ to $\\alpha_j$. Its image is $F[\\alpha_1,\\ldots,\\alpha_r]$. The iterated monic bases from step 6 show that this image is finite-dimensional over $F$; it is a domain because it lies in $L$. By [lem-weil-pbc-finite-dimensional-domain-is-field] it is a field, hence equals $F(\\alpha_1,\\ldots,\\alpha_r)=L$. Thus the map is surjective. Apply [lem-sfb-finite-etale-normal-generic-components] to $\\operatorname{Spec}B_r\\to V$: the base $V$ is normal integral and Noetherian by step 1. The generic algebra is the finite product of the component fields stated there. A homomorphism from this finite product onto the field $L$ selects exactly one factor (its orthogonal idempotents map to $0$ or $1$ with exactly one mapping to $1$), and that factor maps isomorphically to $L$. The same cited node says its normalization over $V$ is finite etale. This normalization is $\\operatorname{Spec}A_L=\\nu^{-1}(V)$, with the specified $A$-map, by [def-fin-normalization-extension].",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-sfb-finite-etale-normal-generic-components",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL, lemma-finite-etale-covering-normal-unramified, including its component argument; morphisms.tex Tag 02GL, lemma-etale-over-field."
+   }
+  },
+  {
+   "text": "For each affine $V\\subseteq U$ from step 6, step 7 gives $\\nu^{-1}(V)\\to V$ etale. The inclusion $V\\hookrightarrow U$ is etale and its composite with that map is etale by [lem-weil-pbc-etale-composition-cancellation](1),(2). The opens $\\nu^{-1}(V)$ cover $\\nu^{-1}(U)$, so [lem-weil-pbc-etale-local-on-source] gives $\\nu^{-1}(U)\\to U$ etale. If $U=\\varnothing$, the same criterion with the empty covering gives the assertion. When $r=0$, the generic map in step 7 is $F\\to F$; when $n=1$, every root algebra is its base ring. All preceding steps apply to these cases. No argument adjoins roots of unity or changes the constant field.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP, lemma-open-immersion-etale; 02GN, lemma-composition-etale; 02GJ, lemma-etale-characterize."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sbc-normalization-generic-field",
+  "lem-fin-normalization-extension-finite",
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-fin-finite-over-projective",
+  "def-kun-projective",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "def-pc-curve",
+  "lem-sfb-unit-binomial-finite-etale",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BQL, with unit-root presentations from etale-cohomology.tex Tag 03PL and the cited existing finiteness, projectivity and dimension nodes; assembly written by Q30."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a smooth projective integral curve in a field generated by nth roots of rational functions is finite surjective projective and etale where the functions are units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {n : ℕ} (m k : ℕ) (hn : n = m + k) (p : Polynomial.MonicDegreeEq R n),\\n  Algebra.Etale R (Polynomial.UniversalCoprimeFactorizationRing m k hn p)\", \"doc\": \"The ring obtained by localizing the universal factorization ring presentation with respect to the Jacobian determinant of the presentation, ensuring invertibility of the Jacobian to facilitate coprime\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field factor of a tower of finite etale unit root algebras is the normalization of a normal curve in its generic field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {n : ℕ} (m k : ℕ) (hn : n = m + k) (p : Polynomial.MonicDegreeEq R n),\\n  Algebra.Etale R (Polynomial.UniversalCoprimeFactorizationRing m k hn p)\", \"doc\": \"The ring obtained by localizing the universal factorization ring presentation with respect to the Jacobian determinant of the presentation, ensuring invertibility of the Jacobian to facilitate coprime\"}\n  {\"name\": \"StandardEtalePair.instAlgebraRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (P : StandardEtalePair R) → Algebra R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the quotient ring $ P.\\\\text{Ring} $ inherits a canonical $ R $-algebra structure from the polynomial ring $ R[X,Y] $, induced b\"}\n  {\"name\": \"Ring.instIsGaloisFractionRingNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S] [PerfectField (FractionRing R)],\\n  IsGalois (FractionRing R) (FractionRing (Ring.NormalClosure R S))\", \"doc\": \"The fraction field of the integral closure of a commutative ring $ S $ in a field $ E $ forms a Galois extension over $ K $.\"}\n  {\"name\": \"Algebra.instIsStandardEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.IsStandardEtale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, the quotient ring $ R[X, Y]/(f, Yg - 1) $ is a standard étale algebra over $ R $. This means it is isomorphic to a localiz\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Pp]rojective|[Pp]rojective.*normalization|normalization.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]ummer|[Rr]adical.*[Ee]tale|[Ee]tale.*[Rr]adical",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerPolynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"14\", \"text\": \"# Kummer Extensions\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"17\", \"text\": \"Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"49\", \"text\": \"TODO: relate Kummer extensions of degree 2 with the class `Algebra.IsQuadraticExtension`.\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"170\", \"text\": \"scoped[KummerExtension] notation3 \\\"K[\\\" n \\\"√\\\" a \\\"]\\\" => AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"172\", \"text\": \"attribute [nolint docBlame] KummerExtension.«termK[_√_]»\"}\n  {\"file\": \"Mathlib/Data/Nat/Multiplicity.lean\", \"line\": \"25\", \"text\": \"* `Nat.Prime.multiplicity_choose`: Kummer's Theorem. The multiplicity of `p` in `n.choose k` is the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite projective normalization of an integral smooth curve in a multiradical extension is etale where each radicand is invertible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a smooth projective integral curve in a finite field extension is finite surjective projective and etale over the unit locus of radical generators",
+   "results": "8 hits: WeierstrassCurve.IsIntegral.integral, AlgebraicGeometry.Scheme.Hom.normalizationDesc, WeierstrassCurve.integralModel, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalization, WeierstrassCurve.exists_isIntegral, AlgebraicGeometry.Scheme.Hom.toNormalization; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal domain A with fraction field K and a finite etale A algebra B, a field quotient L of B tensor K has integral closure of A in L equal to a direct factor of B",
+   "results": "8 hits: Algebra.isInvariant_of_isGalois, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.to_isFractionRing, integralClosure.isFractionRing_of_finite_extension, IsIntegralClosure.isFractionRing_of_finite_extension, galRestrict, galLift, galRestrict'; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, integralClosure",
+   "results": "1 hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Ee]tale|[Ee]tale.*integralClosure|normalization.*[Ee]tale",
+   "results": "5 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral closure of a normal domain in a field quotient of the generic fibre of a finite etale algebra is a direct factor of that algebra",
+   "results": "8 hits: Ring.instIsIntegrallyClosedNormalClosure, integralClosure, IsIntegralClosure.of_isIntegrallyClosed, Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, integralClosure.isIntegralClosure, Ring.NormalClosure, IsIntegrallyClosed.instIsIntegralClosure; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A direct field factor of a finite etale algebra over the fraction field extends to a finite etale integral closure over a normal domain",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Ring.instFiniteNormalClosure, Ring.instFiniteNormalClosure_1, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.exists_subalgebra_fg, Ring.instIsGaloisFractionRingNormalClosure, galLift, IsIntegralClosure.isFractionRing_of_finite_extension; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*etale.*(factor|normal)|[Ee]tale.*(factor|[Ii]ntegralClosure)",
+   "results": "2 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean; read returned types; no match for the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Re-split of lem-sfb-tame-radical-curve-normalization, returned proof steps 2--4: Projective normalization and unit locus of a radical curve extension.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-radical-normalization-projective-etale",
+  "worker": "stage1",
+  "summary": "Repaired the side/live-DAG landing return by rebasing the retained approved split through deliver.py onto the current server DAG, comparing every cited statement with the retained return snapshot, and revalidating all 26 citation quotes. The live item remains unsplit, with its statement, definition dependencies and provenance unchanged. The eight-step proof uses affine integral closures, lying over, dimension equality, finite-over-projective over the affine field base, and the selected generic field factor of an iterated unit-root finite etale algebra. No new nodes.",
+  "blueprint": "Realizes the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite, through the existing ancestry: de Jong section 3.5 normalization of the invariant Kummer cover; specifically the returned parent steps 2--4 named in the item source. Steps 1--5 supply projective normalization and its specified generic field; steps 6--8 supply the unit locus. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-scheme normality theorem; the unit uses normalization of a radical curve and has no replacement for this input."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Generic affine-cover dimension formula; the unit uses normalization of a radical curve and has no replacement for this input."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic finite-over-projective tool over the affine field base; the unit uses normalization of a radical curve and has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Regularity of a smooth scheme over an arbitrary field; the older curve node cites an algebraically closed convention, so this general statement is used."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projective implies proper, supplying the separated finite-type requirements of being a curve; generic geometry tool below the same unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-fin-finite-over-projective",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-b61cd3249",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b61cd3249 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct; one notation fault (B3) is repaired. I read the item's eight steps and every cited statement in full. The statement is true; I tested it on P1_Q with a=t, on P1 over Q(i) viewed over Q with a=-1, on a repeated radicand, and on the cases r=0, n=1 and U empty. Step 1: smooth over an arbitrary field gives regular, hence normal, and local normality makes each chart ring A normal. Step 2: A_L is a normal domain with fraction field L; its spectrum contains the point (0) in every chart, so Y is integral; lem-sbc-normalization-generic-field gives the generic-field identification. Step 3: finite by lem-fin-normalization-extension-finite, surjective by lying-over. Step 4: dimension 1 by integral-injective-dimension-equal and the affine-cover formula. Step 5: lem-fin-finite-over-projective over the affine base Spec K gives a closed immersion into P^N_K, which is def-kun-projective; proper gives separated and of finite type. Step 6: the iterated unit-binomial algebras are finite etale. Step 7: B_r⊗F maps onto L, an idempotent selects the factor F_i≅L, and lem-sfb-finite-etale-normal-generic-components gives finite etale normalization; this matches Stacks 0BQL (pione.tex 2430-2457). Step 8: etale is local on the source, and U empty uses the empty cover. I read Stacks 03PL (etale-cohomology.tex 2842 ff.); no SGA is cited. The five declared tool_uses are generic and accepted. There are no new nodes. I compared the closest existing nodes (orbit-kummer-normal-model, two-root-normal-model, the sbc root-normalization family) and none duplicates the item. Fault B3: the conclusion 'K-curve' had no definition node. The earlier run e3c25b9f fixed this, but the re-push changed only split_report.summary and lost that fix. I re-applied it on the current head: def-pc-curve is added to the statement's notions, to stmt_deps, to step 5's uses and text, and to proof_deps, and the new summary is kept. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-radical-normalization-projective-etale.json; the full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.RadicalNormalizationProjectiveEtale",
+  "declaration": "AlgebraicGeometry.radical_normalization_projective_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/RadicalNormalizationProjectiveEtale.lean",
+  "statement": "theorem radical_normalization_projective_etale (K : Type u) [Field K] (C : Scheme.{u}) (q : C ⟶ Spec (.of K)) [IsSmoothProjectiveCurve q] (U : C.Opens) (n : ℕ) (hn : 1 ≤ n) (hnK : IsUnit (n : K)) (r : ℕ) (a : Fin r → C.functionFieldˣ) (hreg : ∀ (j : Fin r) (x : C), x ∈ U → (a j : C.functionField) ∈ Set.range (algebraMap (C.presheaf.stalk x) C.functionField) ∧ (a j : C.functionField)⁻¹ ∈ Set.range (algebraMap (C.presheaf.stalk x) C.functionField)) (Ω : Type u) [Field Ω] [Algebra C.functionField Ω] [IsAlgClosure C.functionField Ω] (α : Fin r → Ω) (hα : ∀ j : Fin r, α j ^ n = algebraMap C.functionField Ω (a j)) (L : IntermediateField C.functionField Ω) (hL : L = IntermediateField.adjoin C.functionField (Set.range α)) [FiniteDimensional C.functionField L] : (∀ y : C.normalizationIn L, IsDomain ((C.normalizationIn L).presheaf.stalk y) ∧ IsIntegrallyClosed ((C.normalizationIn L).presheaf.stalk y)) ∧ IsIntegralCurve (C.fromNormalizationIn L ≫ q) ∧ IsHProjective (C.fromNormalizationIn L ≫ q) ∧ IsFinite (C.fromNormalizationIn L) ∧ Surjective (C.fromNormalizationIn L) ∧ Etale (C.fromNormalizationIn L ∣_ U) ∧ ∃ e : Spec (.of L) ≅ Spec (C.normalizationIn L).functionField, e.hom ≫ (C.normalizationIn L).fromSpecFunctionField = (C.fromSpecOfAlgebraFunctionField L).toNormalization",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae3b6d31f",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: IsSmoothProjectiveCurve q; U arbitrary C.Opens; 1≤n, IsUnit (n:K); a : Fin r → F^×; hreg = a_j and a_j⁻¹ in the stalk image at each x∈U, equivalent to regular on U for integral C and vacuous for U=∅; specified closure Ω, roots α, L = adjoin(range α), FiniteDimensional. Conclusions: stalks are integrally closed domains, IsIntegralCurve(ν≫q), IsHProjective(ν≫q) (def-kun-projective), IsFinite ν, Surjective ν, Etale(ν∣_U), and the generic iso e is unique because fromSpecFunctionField is a mono. Dependency declarations read in side-live/Mathlib. Edge cases r=0, n=1, U=⊥ covered; no extra assumptions. lean.statement is verbatim in the file; node changes only in lean; no new definitions, body is sorry, docstrings carry source and blueprint; private imports exist. No findings; not recompiled since no file changed."
+ }
+}

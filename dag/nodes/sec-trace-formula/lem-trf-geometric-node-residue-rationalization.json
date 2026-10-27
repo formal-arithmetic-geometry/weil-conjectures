@@ -1,0 +1,342 @@
+{
+ "id": "lem-trf-geometric-node-residue-rationalization",
+ "kind": "statement",
+ "title": "Rationalizing a geometric node over its finite separable residue field",
+ "statement": "Let $k$ be a field and let $C$ be a finite-type $k$-scheme [def-weil-finite-type-morphism]. Assume that for every algebraically closed extension $\\Omega/k$ [def-weil-algebraic-closure], the base change $C_\\Omega$ [def-pc-base-change] is empty or equidimensional of dimension $1$ [def-weil-pure-dimension], and every nonsmooth point [def-sbc-smooth-morphisms] of $C_\\Omega$ has maximal-ideal-adic completed local ring $\\Omega[[u,v]]/(uv)$ as a ring [def-weil-pbc-adic-completion] [def-weil-pbc-multivariate-power-series]. Let $x\\in C$ be any nonsmooth point, with residue field $F=\\kappa_C(x)$ [def-weil-residue-field], equipped with its structural map from $k$. Then $x$ is closed in $C$ [def-weil-closed-points] and $F/k$ is finite separable [def-pc-field-extension] [def-weil-pbc-separable-algebraic-extension]. Put $D=C_F$, and let $z:\\operatorname{Spec}F\\to D$ be the point induced by the residue-point map $\\operatorname{Spec}F\\to C$ and the identity of $\\operatorname{Spec}F$. Then $D$ is finite type over $F$ and has topological Krull dimension $1$ [def-kun-topological-krull-dimension]; the point $z$ is closed, lies over $x$, and is $F$-rational (the structural map $F\\to\\kappa_D(z)$ is an isomorphism). For every algebraic closure $\\overline F/F$, the point $\\bar z\\in D_{\\overline F}$ induced by $z$ is nonsmooth and has $\\widehat{\\mathcal O}_{D_{\\overline F},\\bar z}\\cong\\overline F[[u,v]]/(uv)$ as a ring.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), first proof, residue-field paragraph, expanded through Tag 0C59 (lemma-nodal-family) and Morphisms Tag 02G7 (morphisms.tex, lemma-unramified-over-field). The dimension check is the affine base-change argument of the returned item, steps 1-4."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-pc-base-change",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-residue-field",
+  "def-weil-closed-points",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:C\\to\\operatorname{Spec}k$ and $Z=\\operatorname{Sing}(f)$. The morphism $f$ is flat by [lem-pc-flat-field]. Choose the finite affine cover in the definition of finite type. Each coordinate algebra is finitely presented over $k$ by [lem-weil-pbc-finite-type-noetherian-finite-presentation], since the only ideals of a field are $0$ and $k$, so $k$ is Noetherian. Thus $f$ is locally of finite presentation. The geometric-fibre assumptions are exactly those of [lem-trf-nodal-family-fitting-singular]: $\\operatorname{Spec}k$ has one point and its geometric fibres are the stated $C_\\Omega$. That lemma gives $|Z|=$ the nonsmooth locus, $Z\\to\\operatorname{Spec}k$ unramified, and the same support identification after every base change.",
+   "uses": [
+    "lem-pc-flat-field",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C59 (lemma-nodal-family), with Algebra Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation)"
+   }
+  },
+  {
+   "text": "The point $x$ belongs to $Z$. On an affine chart $\\operatorname{Spec}A$ containing $x$, write $Z=\\operatorname{Spec}(A/I)$ and let $\\mathfrak p$ represent $x$, so $I\\subseteq\\mathfrak p$. The algebra $A/I$ is finite type over $k$: the images of a finite generating set of $A$ still generate. Thus $Z\\to\\operatorname{Spec}k$ is locally of finite type. Apply [lem-trf-unramified-over-field-local-criterion] to $Z$: $x$ is closed in $Z$ and $\\kappa_Z(x)/k$ is finite separable. Moreover $\\mathcal O_{Z,x}=A_{\\mathfrak p}/IA_{\\mathfrak p}$ has residue field $A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}=\\kappa_C(x)=F$. The closed immersion $Z\\hookrightarrow C$ is a homeomorphism onto a closed subset, so a point closed in $Z$ is closed in $C$. This proves both assertions about $x$ and $F/k$.",
+   "uses": [
+    "lem-trf-unramified-over-field-local-criterion",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7 (lemma-unramified-over-field), applied to the singular subscheme of Curves Tag 0C59"
+   }
+  },
+  {
+   "text": "The residue-point morphism $r:\\operatorname{Spec}F\\to C$ and the identity of $\\operatorname{Spec}F$ agree over $\\operatorname{Spec}k$. The fibre-product property defines $z:\\operatorname{Spec}F\\to D=C_F$ with projection to $C$ equal to $r$ and projection to $\\operatorname{Spec}F$ the identity. In particular its image lies over $x$. At this image, the maps on residue fields are $a:F\\to\\kappa_D(z)$ and $b:\\kappa_D(z)\\to F$, with $ba=1$. Since a unital homomorphism between fields is injective, $b$ is injective; for $t\\in\\kappa_D(z)$, $b(a(b(t)))=b(t)$ implies $a(b(t))=t$. Hence $a$ is an isomorphism. On the chart above, $r$ sends $I$ to zero because $I\\subseteq\\mathfrak p$, so $r$ factors through $Z$; consequently $z$ factors through $Z_F$.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-residue-field",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), first proof, residue-field replacement, expanded by the fibre-product universal property"
+   }
+  },
+  {
+   "text": "By finite-type stability under arbitrary base change [lem-sfb-finite-type-composition-base-change], $D/F$ is finite type. The first-Fitting base-change identification in [lem-trf-nodal-family-fitting-singular] identifies $Z_F$ with the singular subscheme of $D/F$. For every algebraically closed extension $\\Omega/F$, associativity of fibre products identifies $D_\\Omega$ with $C_\\Omega$. Hence $D/F$ satisfies the same geometric-fibre hypotheses. It is flat by [lem-pc-flat-field] and locally finitely presented by the same finite-type-algebra argument as in step 1 (now over the field $F$). The nodal-family lemma therefore gives $Z_F\\to\\operatorname{Spec}F$ unramified. It is locally of finite type, since on each affine chart it is the quotient of a finitely generated $F$-algebra. By [lem-trf-unramified-over-field-local-criterion] its point $z$ is closed in $Z_F$, and hence closed in $D$, since $Z_F\\hookrightarrow D$ is a closed immersion. This does not assume $C/k$ separated.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-trf-nodal-family-fitting-singular",
+    "def-pc-base-change",
+    "lem-pc-flat-field",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-trf-unramified-over-field-local-criterion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 (lemma-nodal-family), 0C5B (lemma-base-change-nodal-family), with Morphisms Tags 01T4 and 02G7"
+   }
+  },
+  {
+   "text": "Fix any algebraic closure $\\overline F/F$. The morphism $z$ base changes to $\\bar z:\\operatorname{Spec}\\overline F\\to D_{\\overline F}$ and, since $z$ factors through $Z_F$, $\\bar z$ factors through $Z_{\\overline F}$. The base-change and support clauses of [lem-trf-nodal-family-fitting-singular] show that this point is nonsmooth. Under the canonical identification $D_{\\overline F}=C_{\\overline F}$, the structural embedding $k\\to F\\to\\overline F$ makes $\\overline F$ an algebraically closed extension of $k$. Apply the hypothesis at this particular nonsmooth point: $\\widehat{\\mathcal O}_{D_{\\overline F},\\bar z}\\cong\\overline F[[u,v]]/(uv)$ as rings. No compatibility with a chosen coefficient-field embedding is asserted or needed.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 and 0C5B, geometric-fibre condition and base-change singular support; Tag 0CBY residue-field paragraph"
+   }
+  },
+  {
+   "text": "Put $E=D_{\\overline F}=C_{\\overline F}$. The point $\\bar z$ makes $E$ nonempty. Thus the hypothesis says that every irreducible component of $E$ has dimension $1$. To see $\\dim E=1$ directly, take any chain of nonempty irreducible closed subsets of $E$. Its largest member lies in an irreducible component by [lem-sc-irreducible-components-cover], and the chain is a chain of closed subsets of that component, so its length is at most $1$. Conversely $E$ has a component (apply the same lemma to $\\{\\bar z\\}$); since its dimension is $1$, it contains a chain of length $1$, also closed in $E$ because components are closed. Therefore $\\dim E=1$.",
+   "uses": [
+    "def-weil-pure-dimension",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 04MU (lemma-dimension), dimension convention; elementary chain argument from pure dimension"
+   }
+  },
+  {
+   "text": "Choose a finite affine cover $U_i=\\operatorname{Spec}B_i$ of the finite-type $F$-scheme $D$. The rings $B_i$ are finite type over $F$ by the finite-type definition. By [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], the inverse images of the $U_i$ form an affine open cover of $E$ with rings $B_i\\otimes_F\\overline F$. The first (ring) assertion of [lem-pc-dim-base-change] applies to each $B_i$, with no integrality or algebraic-closedness assumption on $F$: $\\dim(B_i\\otimes_F\\overline F)=\\dim B_i$. Both $D$ and $E$ are nonempty, by $z$ and $\\bar z$. Apply [lem-pc-dimension-affine-open-cover] to these covers, and identify its dimension with topological Krull dimension using [lem-pc-scheme-dimension-local-rings]. Equality term by term gives $\\dim D=\\sup_i\\dim B_i=\\sup_i\\dim(B_i\\otimes_F\\overline F)=\\dim E=1$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3 (lemma-dimension-preserved-field-extension), with Properties Tag 04MU (lemma-dimension) and affine fibre products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-field",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-first-fitting-singular-subscheme",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-unramified-over-field-local-criterion",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-pc-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-pure-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, first proof residue-field paragraph, expanded using Tags 0C59, 0C5B, 02G7, 00FP, 00P3 and 04MU; explicit rational-point and dimension arguments by Q57."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically nodal finite type curve over a field, every nonsmooth point has finite separable residue field and its residue-field rational lift is closed on a dimension one curve with geometric nodal completion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Field ↑(X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (K : Type u) [inst : Field K] (X : AlgebraicGeometry.Scheme)\\n  (f : AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map\\n        (AlgebraicGeometry.Scheme.descResidueField (AlgebraicGeom\", \"doc\": \"For a field $ K $, a scheme $ X $, and a morphism $ f : \\\\operatorname{Spec}(K) \\\\to X $, the composition of the morphism induced by the residue field at the closed point of $ \\\\operatorname{Spec}(K) $ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {X : AlgebraicGeometry.Scheme} →\\n      {x : ↥X} →\\n        (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing }) →\\n          [IsLocalHom (CommRingCat.Hom.hom f)] →\\n            X.residueField x ⟶ { carrier := K, commRing := \", \"doc\": \"Let $X$ be a scheme, $x$ a point in $X$, and $K$ a field. Given a local ring homomorphism $f \\\\colon \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$, this function constructs the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"Let $X$ be a scheme and $x$ a point in its underlying topological space. Let $\\\\mathcal{O}_{X,x}$ be the local ring at $x$, and let $k(x)$ be its residue field. The residue map is the canonical project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X) (s : ↥(AlgebraicGeometry.Spec (X.residueField x))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Spec.map (X.residue x)).base) s =\\n    IsLocalRing.closedPoint ↑(X.presheaf.stalk x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to \\\\kappa(x)$ m\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of a singular point on a curve by base change to its separable residue field preserves the geometric node and the dimension of the curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9 : \", \"doc\": \"Given an injective ring homomorphism $ f : A \\to B $, a point $ (f(x), f(y)) $ on the base change of an affine Weierstrass curve $ W $ to $ B $ is nonsingular if and only if the corresponding point $ (\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Jacobian R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9\", \"doc\": \"Given an injective algebra homomorphism $ f : A \\\\to B $, a point $ P $ on the Jacobian of a Weierstrass curve $ W' $ over $ A $ is nonsingular if and only if its image $ f \\\\circ P $ is nonsingular on \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  (F : Type u) →\\n    (K : Type v) →\\n      [inst : CommRing R] →\\n        [inst_1 : Field F] →\\n          [inst_2 : Field K] →\\n            {W' : WeierstrassCurve.Affine R} →\\n              [inst_3 : DecidableEq F] →\\n                [inst_4 : DecidableEq K] →\\n                  [inst_5 : Al\", \"doc\": \"Given fields $F$ and $K$ equipped with an $R$-algebra structure and satisfying the scalar tower compatibility condition $R \\to F \\to K$, this function defines a group homomorphism from the set of points\"}\n  {\"name\": \"WeierstrassCurve.baseChange_integralModel_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W], (WeierstrassCurve.integralModel R W).baseChange K = W\", \"doc\": \"For an integral Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, the base change of its integral model over $ R $ to $ K $ recovers the original curve $ W $, i.e., \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Unramified, Algebra.IsSeparable",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Unramified'\n",
+   "date": "2026-10-22",
+   "verdict": "No conclusion: the initial Loogle query used an unknown identifier; corrected in the subsequent FormallyUnramified query."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, Algebra.IsSeparable",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsSeparableCarrierResidueFieldCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f] [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X) : Algebra.IsSeparable ↑(Y.residueField (f x)) ↑(X.residueField x)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinaryDouble|ordinary_double|splitNode",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*[Ss]eparab|[Ss]eparab.*residueField|[Uu]nramified.*[Ff]ield",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"161\", \"text\": \"    Algebra.IsSeparable (Y.residueField (f.base x)) (X.residueField x) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"111\", \"text\": \"      Function.Injective f ∧ ∀ x, (f.residueFieldMap x).hom.IsPurelyInseparable,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"152\", \"text\": \"      ((SpecToEquivOfField (SeparableClosure (S.residueField s)) _).2\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]imension.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Dd]imension|[Nn]odal",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"166\", \"text\": \"lemma smoothOfRelativeDimension_isStableUnderBaseChange :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"167\", \"text\": \"    MorphismProperty.IsStableUnderBaseChange (@SmoothOfRelativeDimension n) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"170\", \"text\": \"    (isStandardSmoothOfRelativeDimension_isStableUnderBaseChange n)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"173\", \"text\": \"alias isSmoothOfRelativeDimension_isStableUnderBaseChange :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"174\", \"text\": \"  smoothOfRelativeDimension_isStableUnderBaseChange\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonsmooth point on a geometrically nodal curve is closed with finite separable residue field and becomes rational after extension to its residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the residue field at $ x $ is the quotient of the local ring $ \\\\mathcal{O}_{X,x} $ (the stalk of the structure sheaf at $ x $) by its unique maximal ideal, \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : X.presheaf.obj (op ⊤) ⟶ X.residueField x\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens) (x : ↥X) (hx : x ∈ U), X.evaluation U x hx = X.evaluation U x hx\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the residue field at $x$ is the quotient of the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) by its unique maximal ideal, viewed as \"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : Algebra.IsSeparable (ResidueField R) (ResidueField S)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"instIsSeparableResidueFieldOfQuotientIdeal\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Instances\", \"type\": \"[p.IsMaximal] [q.IsMaximal] [Algebra.IsSeparable (A ⧸ p) (B ⧸ q)] : Algebra.IsSeparable p.ResidueField q.ResidueField\", \"doc\": \"If the quotient rings $ A/p $ and $ B/q $ are separable algebras, then the residue fields of the maximal ideals $ p $ and $ q $ are also separable algebras.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"IsSepClosed\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"(k : Type u) → [Field k] → Prop\", \"doc\": \"A field $ k $ is separably closed, meaning it has no nontrivial finite separable field extensions.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement: residue-field and unramifiedness facts, Weierstrass special cases and smooth base-change results do not give the geometric nodal rationalization and dimension conclusion. The FormallyUnramified residue-field instance was read at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:158-169."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinaryDoublePoint|ordinary_double_point|residue.*rational",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "No match for the full geometric-nodal statement. The hits give local unramified residue-field separability, residue-field definitions, or special Weierstrass curves; none gives the singular-subscheme nodal input, the chosen geometric lift and the dimension conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A singular point of a geometrically nodal curve is closed with finite separable residue field and its residue field lift is rational",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.LocallyRingedSpace.residueField, IsSepClosed.casesOn, AlgebraicGeometry.Scheme.evaluation.congr_simp, IsLocalRing.closedPoint, AlgebraicGeometry.Scheme.SpecMap_residue_apply, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, IsSepClosed. ",
+   "date": "2026-10-23",
+   "verdict": "No match for the full geometric-nodal statement. The hits give local unramified residue-field separability, residue-field definitions, or special Weierstrass curves; none gives the singular-subscheme nodal input, the chosen geometric lift and the dimension conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "Search succeeded; 12 hits: Lagrange.nodalWeight, Lagrange.nodal, Lagrange.nodal_monic, Lagrange.natDegree_nodal, Lagrange.degree_nodal, Lagrange.nodal_empty, Lagrange.nodal_ne_zero, Lagrange.eval_nodal_at_node. ",
+   "date": "2026-10-23",
+   "verdict": "No match for the full geometric-nodal statement. The hits give local unramified residue-field separability, residue-field definitions, or special Weierstrass curves; none gives the singular-subscheme nodal input, the chosen geometric lift and the dimension conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Singular points of a nodal curve have separable residue fields; rationalizing a point preserves dimension one and its geometric nodal completion",
+   "results": "Search succeeded; 8 hits: Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.isSeparable_residueField_iff, instIsSeparableResidueFieldOfQuotientIdeal, WeierstrassCurve.reduction, Algebra.isUnramifiedAt_iff_map_eq, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Jacobian.Point.nonsingular, instIsSeparableQuotientIdealOfResidueField. ",
+   "date": "2026-10-23",
+   "verdict": "No match for the full geometric-nodal statement. The hits give local unramified residue-field separability, residue-field definitions, or special Weierstrass curves; none gives the singular-subscheme nodal input, the chosen geometric lift and the dimension conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically nodal finite type curve, a nonsmooth point has finite separable residue field and becomes a rational geometric node after residue field base change",
+   "results": "Search succeeded; 8 hits: Algebra.instIsSeparableResidueFieldOfFormallyUnramified, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.isSeparable_residueField_iff, WeierstrassCurve.reduction, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.isUnramifiedAt_iff_map_eq, instIsSeparableResidueFieldOfQuotientIdeal. ",
+   "date": "2026-10-23",
+   "verdict": "No match for the full geometric-nodal statement. The hits give local unramified residue-field separability, residue-field definitions, or special Weierstrass curves; none gives the singular-subscheme nodal input, the chosen geometric lift and the dimension conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-point-finite-separable-splitting",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input in the first proof of Stacks 0CBY, second paragraph: finite separability of the singular fibre point and replacement by its residue-field rational point; returned item proof steps 1-4.",
+   "via": [
+    "lem-trf-nodal-point-finite-separable-splitting",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometric-node-residue-rationalization",
+  "worker": "stage1",
+  "summary": "Split into the existing Fitting-singular unramified theorem, local residue-field criterion, explicit fibre-product rational lift, closedness via the base-changed singular subscheme, geometric completion at the chosen point, and affine scalar-extension dimension calculation. Statement unchanged; no new nodes. Checked cited statements, edge cases, attachment search, and recorded Mathlib searches.",
+  "blueprint": "The current latest lem-trf-local-term-locality proof uses contracting correspondences rather than the historical nodal alteration route. This existing auxiliary item retains its assigned Stacks 0CBY residue-field input, as specified by blueprint.from.place, and makes its finite-separable residue rationalization and dimension check explicit. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Finite type survives arbitrary field base change; a generic scheme tool, with no separatedness requirement. This unit supplies nodal geometry rather than this general finite-type theorem."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Only its finite-type algebra dimension equality is used, not its curve clause; the nodal unit has no algebra scalar-extension dimension theorem."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Computes scheme dimension by an affine cover so the ring dimension equality applies; this general dimension tool is not a replacement for any step of the unit."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies the affine-cover dimension convention with the topological dimension requested in the item; a generic scheme dimension tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Identifies inverse images of affine chart opens in a field base change; a general fibre-product tool, not an alternative nodal argument."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies the base-changed affine coordinate rings with tensor products for the dimension calculation; a general affine scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-f9ed704bc",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-f9ed704bc (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against the statement of every cited node. No new nodes and no repair note; nothing changed. Source checked: Stacks 0CBY, first proof, para 2 (κ(x)/κ(s) finite separable because Sing(f)→S is unramified) and 02G7. Step 1: flat by lem-pc-flat-field; locally of finite presentation because finite type over the Noetherian field k. The item's hypotheses match those of lem-trf-nodal-family-fitting-singular; its parenthetical asks only for a ring isomorphism. Step 2: the local criterion applies to Z, which is locally of finite type as a quotient of finite-type charts. κ_Z(x)=κ_C(x) since I⊆p, and x is closed in C via the closed immersion. Step 3: the b∘a=id residue argument is correct and elementary; z factors through Z_F. Step 4: D/F is finite type by lem-sfb-finite-type-composition-base-change. Sing(D/F)=Z_F by base change, D_Ω=C_Ω, so Z_F is unramified and z is closed with no separatedness used. Step 5: z̄ factors through Sing(D_F̄), so it is nonsmooth; the hypothesis at Ω=F̄ gives the completed local ring. Step 6: dim E=1 by an elementary chain/component argument. Step 7: affine charts give B_i⊗F̄, the ring clause of lem-pc-dim-base-change applies, and both schemes are nonempty for the affine-cover lemma. Edge cases checked: empty or smooth C, split node over k̄, nonsplit node over an imperfect k, nonseparated C. No cycle (the closure contains neither the item nor its citer), no SGA, no duplicate found. Accepted tool_uses: six generic scheme-dimension and fibre-product tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricNodeResidueRationalization",
+  "declaration": "AlgebraicGeometry.geometric_node_residue_rationalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricNodeResidueRationalization.lean",
+  "statement": "theorem geometric_node_residue_rationalization {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (hgeom : ∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω], (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).IsPureDimension 1 ∧ ∀ y : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))), y ∉ (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).presheaf.stalk y)) ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).presheaf.stalk y) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X (1 : Fin 2)}))) (x : C) (hx : x ∉ f.smoothLocus) : x ∈ closedPoints C ∧ (f.residueFieldAlgebraMap x).Finite ∧ @Algebra.IsSeparable k (C.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra ∧ ∃ z : Spec (C.residueField x) ⟶ pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x))), z ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x))) = C.fromSpecResidueField x ∧ z ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x))) = 𝟙 (Spec (C.residueField x)) ∧ LocallyOfFiniteType (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) ∧ QuasiCompact (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) ∧ topologicalKrullDim (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) = 1 ∧ z (IsLocalRing.closedPoint (C.residueField x)) ∈ closedPoints (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) ∧ pullback.fst f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x))) (z (IsLocalRing.closedPoint (C.residueField x))) = x ∧ Function.Bijective ((pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))).residueFieldAlgebraMap (z (IsLocalRing.closedPoint (C.residueField x)))) ∧ ∀ (Ω : Type u) [Field Ω] [Algebra (C.residueField x) Ω] [IsAlgClosure (C.residueField x) Ω] (zbar : pullback (C := Scheme.{u}) (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) Ω)))), pullback.fst (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) Ω))) zbar = z (IsLocalRing.closedPoint (C.residueField x)) → zbar ∉ (pullback.snd (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) Ω)))).smoothLocus ∧ Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) Ω)))).presheaf.stalk zbar)) ((pullback (C := Scheme.{u}) (pullback.snd f (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x)))) (Spec.map (CommRingCat.ofHom (algebraMap (C.residueField x) Ω)))).presheaf.stalk zbar) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X (1 : Fin 2)}))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ccf227c0",
+  "group": "Q60",
+  "result": "fix",
+  "note": "Lean statement matches node and Stacks 0CBY/0C59/0C5B/02G7 clause by clause. Hypotheses: finite type = LocallyOfFiniteType ∧ QuasiCompact; IsPureDimension 1 = empty-or-pure; smoothLocus nonsmooth; AdicCompletion(maxIdeal) ≃+* Ω[[u,v]]/(uv). Conclusions: closedPoints; finite separable via residueFieldAlgebraMap (STATE RESIDUE FIELD convention, as sibling unramified-over-field-local-criterion); ∃ z pinned by both pullback projections; D finite type and topologicalKrullDim 1; z closed over x; F→κ_D(z) bijective; ∀ zbar over z in D_Ω (one point because z is F-rational) nonsmooth with ring-iso completion. Universes all u, forced by Scheme.{u}. Edge cases ok: empty, smooth, F=k, imperfect k / char 2, nonseparated. Node differs from live only in lean; lean.statement verbatim; no defs; sorry; docstrings with source, blueprint tag and 7 steps; imports exist. Sole fault H11: second reading was a same-worker self-check → fixes/<item>.report.md = worker report verbatim + independent second reading. No Lean change, no compile."
+ }
+}

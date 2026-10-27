@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-coefficient-map-geometric-squares",
+ "kind": "statement",
+ "title": "Scheme-isomorphism squares for arbitrary finite coefficient maps",
+ "statement": "For finite commutative rings A,B and any ring homomorphism phi:A->B, schemes T,X,Z,S, a map f:T->X, a closed immersion i:Z->X, a quasi-compact structure map aX:X->S with fixed compactification c, and a representative-normalized pro-etale scalar tensorator mu on X, all eight geometric properties of [def-sf-finite-free-coefficient-comparison-data] hold: DirectGeometry(phi,f), HomGeometry(phi,X), ClosedGeometry(phi,i), ExceptionalGeometry(phi,c,unit), ProDirectGeometry(phi,f), ProClosedGeometry(phi,i), ProHomGeometry(phi,X,mu), and ProOmegaGeometry(phi,c). This asserts equalities of the canonical maps, not invertibility of scalar comparisons or flatness of phi. Hom and direct/closed squares retain exactly the finite-Tor constructible domains of those definitions; the dualizing square evaluates at the regular unit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Final paragraph: the constructions use only pullback, tensor, evaluation and natural adjunction maps, hence commute with scheme isomorphisms."
+ },
+ "stmt_deps": [
+  "def-sf-finite-free-coefficient-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the two small sites by a scheme isomorphism and its inverse. This gives exact module equivalences preserving constant ring actions and K-flat representatives. The scalar/geometric tensor square is the pure-tensor balancing equality before localization; hence it holds after deriving for every coefficient homomorphism, including nonflat quotients.",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the direct-image square under inverse image/direct image. Naturality of the counit and the scalar/geometric square give the same transpose. Transpose again for closed support under its actual direct-image/right-adjoint adjunction. The image comparison inverse terms cancel on the isomorphism domain; reindexing preserves that domain, and both inverse extensions are zero off it. The compact-support comparison is the proper/open composite; apply the same naturality calculation and take its counit mate for ExceptionalGeometry.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "det-sp-unique-right-adjoint",
+    "def-per-exceptional-coefficient-maps",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For Hom apply tensor--Hom transposition: both paths are scalar extension of pulled-back evaluation. The normalized tensorators are the same descended balancing maps, so uniqueness of transpose gives the specified equality. Evaluating the compact-support mate at the regular unit gives the dualizing equality.",
+   "uses": [
+    "lem-coef-monoidal-square-hom-transport",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The site/scalar and site/geometric balancing squares commute. Taking right mates includes the site counit and identifies rnuScalar and rnuPull. Substitution in proClosedMap/proClosedPull and proOmegaMap/proOmegaPull transfers the etale squares. On finite-Tor constructible inputs use bounded etale origin when needed. The evaluation transpose also proves the pro-etale Hom equality for every representative-normalized tensorator.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "det-sp-unique-right-adjoint",
+  "def-per-exceptional-coefficient-maps",
+  "lem-exc-closed-ambient",
+  "lem-coef-monoidal-square-hom-transport",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-duality-pairing",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-finite-duality-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Final paragraph: the constructions use only pullback, tensor, evaluation and natural adjunction maps, hence commute with scheme isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteFree.*(coeff|[Ss]heaf)|[Cc]oeff.*finiteFree",
+   "results": "{\"t\": \"2026-10-24T20:33:33Z\", \"tool\": \"grep\", \"query\": \"finiteFree.*(coeff|[Ss]heaf)|[Cc]oeff.*finiteFree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The categorical search hits do not construct the specified finite coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of coefficients commutes with direct image internal Hom and exceptional pullback on sheaves",
+   "results": "{\"t\": \"2026-10-24T20:33:35Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free change of coefficients commutes with direct image internal Hom and exceptional pullback on sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"3cb83630760f5994\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The categorical search hits do not construct the specified finite coefficient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(naturality|baseChange)|finiteFree.*Comparison",
+   "results": "{\"t\": \"2026-10-24T20:55:32Z\", \"tool\": \"grep\", \"query\": \"scalar.*(naturality|baseChange)|finiteFree.*Comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/RingTheory/Extension/Basic.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean\", \"Mathlib/RingTheory/Flat/Stability.lean\"], \"digest\": \"46b2024947328da5\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The categorical search hits do not construct the specified finite coefficient maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical finite coefficient extension comparison maps on etale and pro etale derived categories preserve evaluation and composition",
+   "results": "{\"t\": \"2026-10-24T20:55:32Z\", \"tool\": \"leansearch\", \"query\": \"canonical finite coefficient extension comparison maps on etale and pro etale derived categories preserve evaluation and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc\", \"CategoryTheory.lanEvaluationIsoColim\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"SheafOfModules.evaluationPreservesLimit\", \"CategoryTheory.Limits.instPreservesFiniteColimitsFunctorObjEvaluationOfHasFiniteColimits\", \"CategoryTheory.expComparison_ev\"], \"digest\": \"d0899c15ccd99eec\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The categorical search hits do not construct the specified finite coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical scalar extension internal hom comparison commutes with pullback along isomorphisms",
+   "results": "{\"t\": \"2026-10-24T20:55:33Z\", \"tool\": \"leanfinder\", \"query\": \"canonical scalar extension internal hom comparison commutes with pullback along isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.coev_naturality_assoc\", \"ModuleCat.homEquiv_extendScalarsComp\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.ExponentiableMorphism.coev_naturality\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.ExponentiableMorphism.ev_naturality\"], \"digest\": \"906c0c848fbe8dd5\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match. The categorical search hits do not construct the specified finite coefficient maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeCoefficientExtension",
+  "date": "2026-10-25",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Final paragraph: the constructions use only pullback, tensor, evaluation and natural adjunction maps, hence commute with scheme isomorphisms.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientMapGeometricSquares",
+  "file": "lean/Sheaf/Paper/CoefficientMapGeometricSquares.lean",
+  "declaration": "WeilConjectures.FiniteFreeCoefficients.coefficient_map_geometric_squares",
+  "statement": "theorem coefficient_map_geometric_squares\n    (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {T X Z S : Scheme.{u}} (f : T ⟶ X)\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    {aX : X ⟶ S} [QuasiCompact aX] (c : Compactification aX)\n    (μ : Sites.TensorComparison true φ X) (hμ : Sites.NormalizedTensor true φ X μ) :\n    Sites.DirectGeometry φ f ∧ Sites.HomGeometry φ X ∧\n    Sites.ClosedGeometry φ i ∧ Sites.ExceptionalGeometry φ c (𝟙_ _) ∧\n    Sites.ProDirectGeometry φ f ∧ Sites.ProClosedGeometry φ i ∧\n    Sites.ProHomGeometry φ X μ ∧ Sites.ProOmegaGeometry φ c",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-578f7",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T060844-L-2378303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-578f7",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T060844-L-2378303",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published signature (byte-identical); moved Data defs vs old item text (verbatim) and vs published type hashes (all 129 equal); 2 new sorried statements vs node and item clause 3; 13 direct importers compiled against delivered modules"
+ }
+}

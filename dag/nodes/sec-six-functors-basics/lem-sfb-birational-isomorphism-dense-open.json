@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-birational-isomorphism-dense-open",
+ "kind": "statement",
+ "title": "Birational locally finitely presented separated maps are isomorphisms over a dense open",
+ "statement": "Let $f:Y\\to X$ be a separated morphism of schemes [def-pc-scheme, def-weil-proper-morphism] that is locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose $X$ and $Y$ each have finitely many irreducible components [def-weil-irreducible-components] and $f$ is birational: it maps the generic points of the irreducible components of $Y$ bijectively onto those of $X$ [def-sc-generic-point], and the induced homomorphism $\\mathcal O_{X,f(\\eta)}\\to\\mathcal O_{Y,\\eta}$ is an isomorphism for each such $\\eta$ [def-weil-locally-ringed-space-morphism]. Then there is a dense open subset $V\\subseteq X$ such that $f^{-1}(V)\\to V$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAJ, lemma-birational-isomorphism-over-dense-open, separated and locally-finite-presentation alternatives."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-birational-common-dense-opens] to $f$. Its finite-component, locally-finite-presentation and generic-local-ring hypotheses are exactly the hypotheses here; it requires no reducedness. Obtain dense open subschemes $U\\subseteq Y$ and $V\\subseteq X$ for which $g=f|_U:U\\xrightarrow{\\sim}V$. Put $W=f^{-1}(V)$ with its open subscheme structure. Since $f(U)\\subseteq V$, the inclusion of $U$ in $Y$ factors as the open inclusion $j:U\\hookrightarrow W$ followed by $W\\hookrightarrow Y$.",
+   "uses": [
+    "lem-sfb-birational-common-dense-opens",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, alternative (2); formation of the restricted target"
+   }
+  },
+  {
+   "text": "The restriction p = f ∣_ V is separated by [lem-weil-pbc-separated-base-change]. Its composite with the open inclusion j : U → W is g, an isomorphism and hence a closed immersion. The Mathlib lemma IsClosedImmersion.of_comp (the general form of [lem-weil-pbc-section-separated-closed-immersion]) therefore makes j a closed immersion. Equivalently, composing j with the inverse of g gives a section of p, whose closed immersion property transfers back to j along g. By [def-weil-closed-immersion], the range of j is closed in W. Scheme.opensRange_homOfLE identifies that range with the preimage of U under W → Y.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KU (lemma-separated-permanence), 01KT (lemma-section-immersion); separated-case shortening of the argument in Morphisms 0BAJ"
+   }
+  },
+  {
+   "text": "Pull back the dense subset U of Y along the open map W → Y, using Dense.preimage. This makes the range of j dense in W. Since Step 2 makes it closed, every point of W belongs to U, and U = W as open subsets of Y. The open subscheme structures agree by [def-weil-open-immersion]; rewriting Scheme.Hom.resLE with this equality identifies g with f ∣_ V. The open V is dense in X. No nonemptiness hypothesis is used, so empty schemes are covered.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ, conclusion; elementary density argument after the closed-section calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-birational-common-dense-opens",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAJ, lemma-birational-isomorphism-over-dense-open, separated and locally-finite-presentation case; common opens from 0BAC(2), followed by closedness of the section (schemes.tex, Tags 01KU and 01KT). Lean implementation uses IsClosedImmersion.of_comp directly on j and p, followed by Dense.preimage and equality of source opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated birational morphism locally of finite presentation between schemes with finitely many irreducible components is an isomorphism over a dense open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsSeparated\", \"doc\": \"Every isomorphism of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it is both an open immersion and a surjective morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] [AlgebraicGeometry.IsReduced X]\\n  [S.IsSeparated] {f : X.PartialMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap ↔ AlgebraicGeometry.Scheme.PartialMap.IsOver S f\", \"doc\": \"Let $X$ and $Y$ be schemes over a base scheme $S$, with $X$ being reduced and $S$ being separated. For any partial map $f$ from $X$ to $Y$, the rational map obtained from $f$ is over $S$ if and only i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsDominant\", \"doc\": \"Every isomorphism of schemes is a dominant morphism, meaning the property of being dominant holds for all isomorphisms in the category of schemes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Birational is defined by some partial isomorphism and does not assert that the given generically stalkwise isomorphic morphism is an isomorphism on the whole inverse image of a dense target open. Restriction lemmas already assume an isomorphism; normalization lemmas concern integral morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Birational scheme morphisms induce an isomorphism on the whole inverse image of some dense open subset of the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_equiv\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  (f.restrict U hU hU').equiv f\", \"doc\": \"For schemes $X$ and $Y$, given a partial map $f: X ⇀ Y$ and a dense open subset $U \\\\subseteq X$ contained in the domain of $f$, the restriction of $f$ to $U$ is equivalent to $f$ itself as a partial m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preimageIso\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [CategoryTheory.IsIso f] → (U : Y.Opens) → ↑((TopologicalSpace.Opens.map f.base).obj U) ≅ ↑U\", \"doc\": \"Given schemes $\\\\mathcal{X}$ and $\\\\mathcal{Y}$, an isomorphism $f : \\\\mathcal{X} \\\\to \\\\mathcal{Y}$, and an open subset $U \\\\subseteq \\\\mathcal{Y}$, the preimage $f^{-1}(U)$ equipped with its induced scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  (f.restrict U hU hU').toRationalMap = f.toRationalMap\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ and $U$ is a dense open subset of $X$ contained in the domain of $f$, then the rational map obtained by restricting $f$ to $U$ is equal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) [inst : IrreducibleSpace ↥X] {U : X.Opens} (hU : Dense ↑U)\\n  (hU' : U ≤ f.domain), (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsOverRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f] (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU hU')\", \"doc\": \"If a partial map between schemes over a base scheme $ S $ is restricted to a dense open subset of its domain, then the restricted map also satisfies the condition of being over $ S $. This means the s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_hom\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  (f.restrict U hU hU').hom = CategoryTheory.CategoryStruct.comp (X.homOfLE hU') f.hom\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ with domain containing a dense open subset $U \\\\subseteq X$, then the morphism associated to the restriction of $f$ to $U$ is the compos\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] (U : Y.Opens), CategoryTheory.IsIso (f ∣_ U)\", \"doc\": \"If $ f : X \\to Y $ is an isomorphism of schemes and $ U $ is an open subset of $ Y $, then the restriction of $ f $ to $ U $ is also an isomorphism between the corresponding open subsets of $ X $ and $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Birational is defined by some partial isomorphism and does not assert that the given generically stalkwise isomorphic morphism is an isomorphism on the whole inverse image of a dense target open. Restriction lemmas already assume an isomorphism; normalization lemmas concern integral morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Prop\", \"doc\": \"`X` and `Y` are birational if there exists a partial isomorphism between them.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : Y.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.trans\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (h₁ : X.Birational Y) (h₂ : Y.Birational Z) : X.Birational Z\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X : AlgebraicGeometry.Scheme} (sX : X ⟶ S) : AlgebraicGeometry.Scheme.BirationalOver sX sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) : Prop\", \"doc\": \"`X` and `Y` are birational over `S` if there exists a partial isomorphism between them\\nthat is compatible with the structure maps to `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X U : AlgebraicGeometry.Scheme} (f : U ⟶ X) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsDominant f] : U.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational over `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} {sX : X ⟶ S} {sY : Y ⟶ S} (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.BirationalOver sY sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.isRationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.Scheme.IsRationalOver sY] (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.IsRationalOver sX\", \"doc\": \"If a scheme `X` is `S`-birational to an `S`-rational scheme `Y`, then `X` is `S`-rational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso_isOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.PartialIso.IsOver sX sY (AlgebraicGeometry.Scheme.BirationalOver.partialIso sX sY h)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Birational is defined by some partial isomorphism and does not assert that the given generically stalkwise isomorphic morphism is an isomorphism on the whole inverse image of a dense target open. Restriction lemmas already assume an isomorphism; normalization lemmas concern integral morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated birational morphism of finite presentation is an isomorphism over a dense open of the target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSeparated f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSeparated f) →\\n        ((isClosedImmersion_diagonal :\\n              AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)) →\\n       \", \"doc\": \"A recursor for the predicate that a morphism of schemes is separated, allowing definitions by cases on the proof that the diagonal morphism $\\\\Delta_f: X \\\\to X \\\\times_Y X$ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace X] : QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Birational is defined by some partial isomorphism and does not assert that the given generically stalkwise isomorphic morphism is an isomorphism on the whole inverse image of a dense target open. Restriction lemmas already assume an isomorphism; normalization lemmas concern integral morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|dense.*[Ii]so|[Ii]so.*dense",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"101\", \"text\": \"    (((fst G G).left ⁻¹ᵁ U).isOpen.dense ?_) ?_ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"86\", \"text\": \"instance : Functor.IsOneHypercoverDense.{u} (AffineEtale.Spec S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"88\", \"text\": \"  isOneHypercoverDense_toOver_Spec _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"110\", \"text\": \"  Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"119\", \"text\": \"  Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"69\", \"text\": \"instance isOneHypercoverDense_toOver_Spec :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"70\", \"text\": \"    Functor.IsOneHypercoverDense.{u} (CostructuredArrow.toOver P Scheme.Spec S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"73\", \"text\": \"  Functor.IsOneHypercoverDense.of_hasPullbacks fun X ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"138\", \"text\": \"    X.PartialMap Y := ⟨⊤, dense_univ, X.topIso.hom ≫ f⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"170\", \"text\": \"    f.IsOver S ↔ f.compHom (Y ↘ S) = (X ↘ S).toPartialMap.restrict _ f.dense_domain (by simp) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"306\", \"text\": \"    f.dense_domain.inter_of_isOpen_left g.dense_domain f.domain.2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"line\": \"247\", \"text\": \"  have : MorphismProperty.RespectsIso (topologically DenseRange) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"12\", \"text\": \"# Birationality and Rationality of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"15\", \"text\": \"birationality and rationality.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"19\", \"text\": \"- `Scheme.PartialIso X Y`: an isomorphism between a dense open subscheme of `X` and a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"21\", \"text\": \"- `Scheme.Birational X Y`: `X` and `Y` are birational, i.e. there exists a `PartialIso X Y`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.Dominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"62\", \"text\": \"      ((f.comp g).dense_domain.inter_of_isOpen_right hU U.2) inf_le_left := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Birational is defined by some partial isomorphism and does not assert that the given generically stalkwise isomorphic morphism is an isomorphism on the whole inverse image of a dense target open. Restriction lemmas already assume an isomorphism; normalization lemmas concern integral morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally finitely presented morphism with bijective generic points and isomorphic generic local rings is an isomorphism over a dense open of its target",
+   "results": "8 hits; AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.instIsZariskiLocalAtTargetStalkwiseBijectiveCoeRingHom, AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective, AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.isLocalIso_iff, AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource",
+   "date": "2026-10-22",
+   "verdict": "No match: results give IsLocalIso, stalkwise isomorphism criteria, restrictions of partial maps, or restrictions of morphisms already known to be isomorphisms. None deduces an isomorphism over a dense target open from the generic-stalk hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|generic.*[Ii]so|[Ii]so.*generic",
+   "results": "13 hits; Mathlib/AlgebraicGeometry/Birational/Dominant.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/RationalMap.lean, Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: Birational/Birational.lean defines partial isomorphisms and birational schemes, rather than the generic-stalk criterion for a specified morphism; FunctionField.lean concerns generic points of integral schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Birational separated morphism locally of finite presentation is an isomorphism over a dense open",
+   "results": "8 hits; AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.IsOpenImmersion.isIso",
+   "date": "2026-10-22",
+   "verdict": "No match: isProper_eq, isProper_iff, locallyOfFinitePresentation_of_isOpenImmersion, RationalMap.dense_domain, IsLocalIso and IsOpenImmersion.isIso do not give the generic-stalk shrinking statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Birational\", \"IsIso\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: zero hits for the Birational/IsIso combination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A birational morphism of schemes restricts to an isomorphism from the full inverse image of a dense open subset when it is separated and locally of finite presentation",
+   "results": "8 hits; AlgebraicGeometry.Scheme.PartialMap.restrict_equiv, AlgebraicGeometry.Scheme.PartialMap.instIsOverRestrict, AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.Scheme.PartialMap.toPartialMap_toRationalMap_restrict, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated, AlgebraicGeometry.instIsIsoSchemeMorphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "No match: results give IsLocalIso, stalkwise isomorphism criteria, restrictions of partial maps, or restrictions of morphisms already known to be isomorphisms. None deduces an isomorphism over a dense target open from the generic-stalk hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0BAJ, lemma-birational-isomorphism-over-dense-open, separated and locally-finite-presentation alternatives; used for 0BFP(1).",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-birational-isomorphism-dense-open",
+  "worker": "stage1",
+  "summary": "Statement unchanged; common dense opens from the new statement-only sfb node for Stacks 0BAC(2) (replacing the dropped lem-per-birational-common-dense-opens), the 01KU separated-base-change Mathlib leaf and the 01KT closed-section Mathlib leaf. Three steps identify the common source open with the entire inverse image using closedness and density. One new node (reviewer FIX).",
+  "blueprint": "Realizes the inherited from.place: Stacks 0BFP repair, isomorphism over a dense open used for 0BFP(1), in the codimension-zero part of lem-sfb-normal-modification-codimension-one. ancestor reports None, as in the existing inherited blueprint.from.node; no blueprint ancestor is invented.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-89be1ad5a",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-89be1ad5a (reviewer sub-agent of L); spot-checked: Mechanical finding confirmed. Step 1 cited lem-per-birational-common-dense-opens, which is on the 2026-10-19 drop list (side-live coord/route-pivot-dropped.txt l.1434). The item itself is live and not dropped; its citer lem-sfb-normal-modification-codimension-one is live; the per duplicate lem-per-birational-isomorphism-dense-open is dropped (l.1437). No live node states Stacks 0BAC in general: the sbc generic-fibre spread nodes need an integral affine base, and sbc affine-birational-fraction-ring-equiv needs integral schemes. FIX: I added a new unsplit statement-only node lem-sfb-birational-common-dense-opens (Stacks 0BAC(2), morphisms.tex l.13072, with Def 01RO; the dropped statement verbatim; created.item = this item, same unit). I repointed Step 1 and proof_deps to it, removed the dropped node from proof_origin, and set tool_uses to [] because the node is in the item's own unit. The statement is unchanged from the base, which was unsplit (no re-split note). I read the 0BAJ statement and proof (l.13370) and the 0BAC(2) proof. Step 2 is correct: p = f|_{f^{-1}V} is separated by base change (01KU leaf); s = j∘g^{-1} is a section, hence a closed immersion (01KT leaf), so U is closed in W. Step 3 is correct: U is dense in Y, hence dense in the open W, so U = W. Edge cases checked: empty schemes, the identity on a non-reduced scheme, a dense open immersion, the doubled origin (shows separatedness is needed), and Stacks Example 0BAD(1) (shows lfp is needed). No SGA, and none of the forbidden Artin–Gabber machinery is used. Maintainer note: the suggested merge with the per duplicate is moot because that node is dropped; later 0BAC(2) citers should cite the new sfb node.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalIsomorphismDenseOpen",
+  "declaration": "AlgebraicGeometry.exists_dense_open_isIso_of_separated_birational",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalIsomorphismDenseOpen.lean",
+  "statement": "theorem exists_dense_open_isIso_of_separated_birational {X Y : Scheme.{u}} (f : Y ⟶ X) [IsSeparated f] [LocallyOfFinitePresentation f] (hX : (irreducibleComponents X).Finite) (hY : (irreducibleComponents Y).Finite) (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ η : Y, η ∈ genericPoints Y → IsIso (f.stalkMap η)) : ∃ V : X.Opens, Dense (V : Set X) ∧ IsIso (f ∣_ V)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25e27fafb",
+  "group": "NP",
+  "result": "pass",
+  "note": "Lean matches the node and Stacks 0BAJ (separated + locally finitely presented alternatives): f : Y ⟶ X with IsSeparated and LocallyOfFinitePresentation; both irreducible-component sets finite; Set.BijOn f on genericPoints (Sober:277); IsIso f.stalkMap at every generic point of Y (full local rings, correct direction); conclusion ∃ V : X.Opens, Dense ∧ IsIso (f ∣_ V), the full inverse image. No extra hypotheses or universe restriction. Edge cases: empty schemes, non-reduced identity, doubled origin, 0BAD(1). Node differs from live only in lean; statement verbatim; existing:false; module name new; stmt_dep records OK (irreducible components via mathlib_match); item not dropped and proof_deps live. Docstrings carry the source place, blueprint id and the three proof steps; no definitions; sorry only. Advisory: 3 non-public imports are unused by the statement but transitive through Morphisms.Proper. No compile (no changes)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261023T124506-L-1408390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "id": "lem-pe-clopen-restriction-canonical-localization",
+ "kind": "statement",
+ "title": "Canonical closed restriction by clopen idempotent localization",
+ "statement": "Let $R$ be a commutative ring, $P$ a profinite space (compact Hausdorff and totally disconnected), and $g:\\operatorname{Spec}R\\to P$ a continuous map [def-weil-affine-spectrum]. For a closed subset $Z\\subseteq P$, index by its clopen neighborhoods $U$ in reverse inclusion. Let $e_U$ be the unique idempotent with $D(e_U)=g^{-1}(U)$ [lem-weil-pbc-spec-clopen-idempotent], and form\n$$R_Z=\\varinjlim_{U\\supseteq Z}R[1/e_U]$$\nin commutative $R$-algebras [def-weil-ring-localization-away, def-weil-pbc-category-colimit], with the unique $R$-algebra transition maps when $V\\subseteq U$. These maps exist and define a small nonempty directed diagram. The subset $M_Z=\\{e_U:U\\supseteq Z\\text{ clopen}\\}$ is multiplicative, and the canonical maps induce an $R$-algebra isomorphism $R_Z\\cong M_Z^{-1}R$, where the latter is the ring of fractions with denominators in $M_Z$ [lem-weil-pbc-ring-localization-universal-property]. Contraction of primes identifies $\\operatorname{Spec}R_Z$ homeomorphically with $g^{-1}(Z)$, with its subspace topology. If $q\\in\\operatorname{Spec}R_Z$ corresponds to $x\\in g^{-1}(Z)$, the canonical map $R_x\\to(R_Z)_q$ is an isomorphism [def-weil-pbc-localization-at-prime]. For closed $Z\\subseteq Z'$, inclusion of neighborhood diagrams induces a canonical map $R_{Z'}\\to R_Z$; these maps compose, their spectrum maps are the inclusions $g^{-1}(Z)\\subseteq g^{-1}(Z')$, and their localized maps become the identity on $R_x$ under the displayed canonical isomorphisms whenever $g(x)\\in Z$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097C, lemma-construct, proof: canonical colimit of idempotent localizations; the explicit localization and natural local-ring identifications expand the blueprint Preliminaries."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Let $I_Z=\\{U\\subseteq P:U\\text{ is clopen},\\ Z\\subseteq U\\}$, with one arrow $U\\to V$ when $V\\subseteq U$. It is a set of subsets of $P$, hence small in the ambient universe fixed by the size convention. It is nonempty since $P\\in I_Z$. For $U,V\\in I_Z$, the clopen $U\\cap V$ is again in $I_Z$ and receives arrows from both. There are no distinct parallel arrows in this poset category. Thus the diagram index is nonempty and directed (and filtered).",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: clopen neighbourhood index, made explicit"
+   }
+  },
+  {
+   "text": "Continuity of $g$ makes $g^{-1}(U)$ clopen, so the clopen-idempotent bijection supplies its unique $e_U$. The product $e_Ue_V$ is idempotent, and primality gives $D(e_Ue_V)=D(e_U)\\cap D(e_V)=g^{-1}(U\\cap V)$. Uniqueness therefore gives $e_{U\\cap V}=e_Ue_V$; similarly $e_P=1$ since $D(1)=\\operatorname{Spec}R$. Hence $M_Z$ contains $1$ and is closed under multiplication. When $V\\subseteq U$, the same formula gives $e_Ue_V=e_V$.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: clopen idempotents; product and unit formulas from uniqueness"
+   }
+  },
+  {
+   "text": "For $V\\subseteq U$, $e_Ue_V=e_V$ implies that the image of $e_U$ in $R[1/e_V]$ is $1$, by multiplying by the inverse of $e_V$. The localization universal property gives a unique $R$-algebra map $\\rho_{UV}:R[1/e_U]\\to R[1/e_V]$. Its formula is $a/e_U^n\\mapsto(a/1)(e_U/1)^{-n}$. Identity maps and composites are the required maps because they agree on $R$, and uniqueness for localization at the powers of $e_U$ makes them equal. Thus these maps define the claimed diagram.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization, applied to powers of the idempotents"
+   }
+  },
+  {
+   "text": "Put $L=M_Z^{-1}R$ and let $\\lambda:R\\to L$ be its localization map. Since every $e_U$ is inverted in $L$, the universal property gives $R$-algebra maps $\\kappa_U:R[1/e_U]\\to L$. They form a cocone: $\\kappa_V\\rho_{UV}$ and $\\kappa_U$ agree on $R$, hence are equal. For any cocone $\\mu_U:R[1/e_U]\\to A$ in commutative $R$-algebras, write $f:R\\to A$ for its structure map. For every $U$, $f(e_U)=\\mu_U(e_U/1)$ is a unit. Hence there is a unique $R$-algebra map $h:L\\to A$ with $h\\lambda=f$. For each $U$, $h\\kappa_U$ and $\\mu_U$ agree on $R$, so localization uniqueness gives $h\\kappa_U=\\mu_U$. Conversely any cocone factorization is an $R$-algebra map and thus must be this $h$. Consequently $(L,\\kappa_U)$ is a colimit: this also proves existence without assuming any general colimit-existence theorem. Uniqueness of colimits identifies the specified $R_Z$ canonically with $L$, intertwining every coprojection and the map from $R$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization; expansion of Tag 097C, proetale.tex lemma-construct, last sentence"
+   }
+  },
+  {
+   "text": "A point of $Z$ lies in every $U\\in I_Z$. Conversely, if $p\\in P\\setminus Z$, the clopen basis theorem applied to the open $P\\setminus Z$ gives a clopen $W$ with $p\\in W\\subseteq P\\setminus Z$. Then $U=P\\setminus W$ belongs to $I_Z$ and does not contain $p$. Thus $\\bigcap_{U\\in I_Z}U=Z$. All hypotheses of the basis theorem are exactly the compact Hausdorff and total disconnectedness hypotheses on $P$.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZZ, lemma-profinite-refine-open-covering, via its clopen-basis consequence"
+   }
+  },
+  {
+   "text": "Apply the arbitrary-multiplicative-localization spectrum theorem to $L=M_Z^{-1}R$. Contraction is a homeomorphism onto the subspace of primes $x$ disjoint from $M_Z$. Such an $x$ satisfies $e_U\\notin x$ for every $U\\in I_Z$, equivalently $g(x)\\in U$ for every $U\\in I_Z$, equivalently $g(x)\\in Z$ by step 5. Through the canonical $R$-algebra isomorphism of step 4 this is precisely the asserted homeomorphism $\\operatorname{Spec}R_Z\\simeq g^{-1}(Z)$, given by contraction, with the stated subspace topology.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization; applied to the explicit localization from step 4"
+   }
+  },
+  {
+   "text": "Let $q\\in\\operatorname{Spec}R_Z$ and let $x$ be its contraction. Under step 4 the structure map $\\lambda_Z:R\\to R_Z$ is a localization at $M_Z$: its fractions and equality relation give conditions (a), (b), (c) in the cited localization-prime theorem. Apply clause (2) of that theorem with $A=R$, $A'=R_Z$, $W=M_Z$, $\\mathfrak q'=q$, $\\mathfrak q=x$. It gives exactly the canonical isomorphism $\\alpha_{Z,x}:R_x\\xrightarrow{\\sim}(R_Z)_q$, $a/s\\mapsto\\lambda_Z(a)/\\lambda_Z(s)$ for $s\\notin x$. In particular the assertion concerns the induced local map itself, not an unspecified abstract isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00C9, item-localization-localization; Tag 00E3, lemma-spec-localization; canonical local-ring formula of lem-weil-pbc-localization-prime-residue-field-iso (2)"
+   }
+  },
+  {
+   "text": "For closed $Z\\subseteq Z'$, every clopen neighbourhood of $Z'$ is a clopen neighbourhood of $Z$. Restrict the $R_Z$ cocone to $I_{Z'}$ and use the colimit property to obtain $\\phi_{Z',Z}:R_{Z'}\\to R_Z$. Under step 4 it is the unique map $M_{Z'}^{-1}R\\to M_Z^{-1}R$ fixing $R$, since $M_{Z'}\\subseteq M_Z$; in fractions it sends $a/e$ to $a/e$. Identity and composite maps fix $R$ and therefore coincide with the corresponding canonical maps by localization uniqueness. For a prime $q$ of $R_Z$ its inverse image $q'$ in $R_{Z'}$ contracts to the same prime $x$ in $R$. The homeomorphisms of step 6 consequently identify the spectrum map with the inclusion $g^{-1}(Z)\\subseteq g^{-1}(Z')$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries: canonical restriction maps for inclusions; Tag 00CP uniqueness makes their compatibility explicit"
+   }
+  },
+  {
+   "text": "Keep $q,q',x$ as in step 8, so $g(x)\\in Z$. If $b\\notin q'$, then $\\phi_{Z',Z}(b)\\notin q$ by the definition $q'=\\phi_{Z',Z}^{-1}(q)$; hence the localization universal property constructs the induced map $\\phi_q:(R_{Z'})_{q'}\\to(R_Z)_q$. For each $a/s\\in R_x$ ($s\\notin x$), the formula in step 7 gives\n$$\\phi_q\\bigl(\\alpha_{Z',x}(a/s)\\bigr)=\\phi_q\\bigl(\\lambda_{Z'}(a)/\\lambda_{Z'}(s)\\bigr)=\\lambda_Z(a)/\\lambda_Z(s)=\\alpha_{Z,x}(a/s).$$\nEvery element of $R_x$ is such a fraction. Thus $\\phi_q\\alpha_{Z',x}=\\alpha_{Z,x}$ and $\\alpha_{Z,x}^{-1}\\phi_q\\alpha_{Z',x}=\\operatorname{id}_{R_x}$, which proves the required naturality.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization, applied to the localizations at q and q-prime; explicit compatibility of the canonical fraction formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+  "place": "Preliminaries expanded using Stacks 097C (lemma-construct), 00CP, 00E3, 00C9 and 08ZZ; canonical colimit and naturality details written out by Q69."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The filtered colimit of localizations at clopen neighborhoods of a closed subset of a profinite component space is localization at the multiplicative set of their idempotents and has unchanged prime local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R],\\n  (PrimeSpectrum.piLocalizationToMaximal R).comp (PrimeSpectrum.toPiLocalization R) = MaximalSpectrum.toPiLocalization R\", \"doc\": \"The composition of the ring homomorphism from a commutative semiring $ R $ to the product of localizations at all prime ideals, followed by the ring homomorphism restricting to the product of localiza\"}\n  {\"name\": \"Localization.AtPrime.mapPiEvalRingHom\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"{ι : Type u_4} →\\n  {R : ι → Type u_5} →\\n    [inst : (i : ι) → CommSemiring (R i)] →\\n      {i : ι} →\\n        (I : Ideal (R i)) →\\n          [inst_1 : I.IsPrime] → Localization.AtPrime (Ideal.comap (Pi.evalRingHom R i) I) →+* Localization.AtPrime I\", \"doc\": \"Given an indexed family of commutative semirings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$ and a prime ideal $I$ in the component semiring $R_i$, this constructs the unique ring homomorphism from the localization of th\"}\n  {\"name\": \"PrimeSpectrum.PiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [CommSemiring R] → Type u_1\", \"doc\": \"For a commutative semiring $ R $, this is the product over all prime ideals $ P $ in the prime spectrum of $ R $ of the localization of $ R $ at the submonoid consisting of elements not in $ P $. Each\"}\n  {\"name\": \"MaximalSpectrum.toPiLocalizationEquiv\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → [DiscreteTopology (PrimeSpectrum R)] → R ≃+* MaximalSpectrum.PiLocalization R\", \"doc\": \"When the prime spectrum of a commutative semiring $ R $ is equipped with the discrete topology, the canonical ring homomorphism from $ R $ to the product of its localizations at maximal ideals is bije\"}\n  {\"name\": \"PrimeSpectrum.toPiLocalization_bijective\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [DiscreteTopology (PrimeSpectrum R)],\\n  Function.Bijective ⇑(PrimeSpectrum.toPiLocalization R)\", \"doc\": \"If the prime spectrum of a commutative ring $ R $ is equipped with the discrete topology, then the canonical ring homomorphism from $ R $ to the product of localizations of $ R $ at each prime ideal i\"}\n  {\"name\": \"MaximalSpectrum.PiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [CommSemiring R] → Type u_1\", \"doc\": \"The product of localizations of a commutative semiring $ R $ at each maximal ideal in its maximal spectrum, where each localization inverts all elements outside the corresponding maximal ideal.\"}\n  {\"name\": \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃ e f, e * f = 0 ∧ e + f = 1 ∧ s = ↑(PrimeSpectrum.basicOpen e) ∧ sᶜ = ↑(PrimeSpectrum.basicOpen f)\", \"doc\": \"For any clopen set $ s $ in the Zariski topology on the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $, there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot f = 0 $, $ e \"}\n  {\"name\": \"PrimeSpectrum.piLocalizationToMaximal\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [inst : CommSemiring R] → PrimeSpectrum.PiLocalization R →+* MaximalSpectrum.PiLocalization R\", \"doc\": \"The ring homomorphism induced by component-wise evaluation, mapping the product of localizations at all prime ideals of a commutative semiring $ R $ to the product of localizations at maximal ideals. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned localization spectrum theorems assume an already constructed localization; none identifies this prescribed neighborhood colimit with M_Z localization and proves its natural local-ring formulas. Upstream Restriction.range_algebraMap_specComap supplies only the spectrum range for its component-quotient diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical restriction algebra defined by idempotent localizations has prime spectrum the inverse image of a closed subset of a profinite space and natural isomorphisms on local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.toPiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [inst : CommSemiring R] → R →+* PrimeSpectrum.PiLocalization R\", \"doc\": \"The canonical ring homomorphism from a commutative semiring $ R $ to the product of localizations of $ R $ at each prime ideal in its prime spectrum, constructed via the algebra structure. This map se\"}\n  {\"name\": \"PrimeSpectrum.localization_away_isOpenEmbedding\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (S : Type v) [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (r : R)\\n  [IsLocalization.Away r S], Topology.IsOpenEmbedding (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"The induced map from the prime spectrum of the localization $ S = R_r $ (the localization of a commutative semiring $ R $ at the powers of an element $ r $) to the prime spectrum of $ R $, defined by \"}\n  {\"name\": \"PrimeSpectrum.toPiLocalization_bijective\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [DiscreteTopology (PrimeSpectrum R)],\\n  Function.Bijective ⇑(PrimeSpectrum.toPiLocalization R)\", \"doc\": \"If the prime spectrum of a commutative ring $ R $ is equipped with the discrete topology, then the canonical ring homomorphism from $ R $ to the product of localizations of $ R $ at each prime ideal i\"}\n  {\"name\": \"PrimeSpectrum.localization_comap_isEmbedding\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} (S : Type v) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Submonoid R)\\n  [IsLocalization M S], Topology.IsEmbedding (PrimeSpectrum.comap (algebraMap R S))\", \"doc\": \"When $ S $ is the localization of a commutative semiring $ R $ at a submonoid $ M $, the induced map from the prime spectrum $ \\\\operatorname{Spec}(S) $ to $ \\\\operatorname{Spec}(R) $, defined by taking\"}\n  {\"name\": \"PrimeSpectrum.localization_away_comap_range\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (S : Type v) [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (r : R)\\n  [IsLocalization.Away r S], Set.range (PrimeSpectrum.comap (algebraMap R S)) = ↑(PrimeSpectrum.basicOpen r)\", \"doc\": \"The image of the preimage map induced by the canonical homomorphism from a commutative semiring $ R $ to its localization at an element $ r $ is precisely the basic open set $ D(r) $ in the Zariski to\"}\n  {\"name\": \"PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R],\\n  (PrimeSpectrum.piLocalizationToMaximal R).comp (PrimeSpectrum.toPiLocalization R) = MaximalSpectrum.toPiLocalization R\", \"doc\": \"The composition of the ring homomorphism from a commutative semiring $ R $ to the product of localizations at all prime ideals, followed by the ring homomorphism restricting to the product of localiza\"}\n  {\"name\": \"IsLocalization.AtPrime.primeSpectrumOrderIso\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    (S : Type u_2) →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          (I : Ideal R) →\\n            [hI : I.IsPrime] →\\n              [IsLocalization.AtPrime S I] → PrimeSpectrum S ≃o ↑(Set.Iic { asIdeal := I, isPrime := hI })\", \"doc\": \"For a commutative semiring $ R $ localized at the complement of a prime ideal $ I $, this establishes an order isomorphism between the prime spectrum of the localized ring $ S $ and the closed interva\"}\n  {\"name\": \"PrimeSpectrum.piLocalizationToMaximal\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [inst : CommSemiring R] → PrimeSpectrum.PiLocalization R →+* MaximalSpectrum.PiLocalization R\", \"doc\": \"The ring homomorphism induced by component-wise evaluation, mapping the product of localizations at all prime ideals of a commutative semiring $ R $ to the product of localizations at maximal ideals. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned localization spectrum theorems assume an already constructed localization; none identifies this prescribed neighborhood colimit with M_Z localization and proves its natural local-ring formulas. Upstream Restriction.range_algebraMap_specComap supplies only the spectrum range for its component-quotient diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"PrimeSpectrum\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"IsLocalization.primeSpectrumOrderIso\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \" {R : Type u_1} [CommSemiring R] (M : Submonoid R) (S : Type u_2) [CommSemiring S] [Algebra R S] [IsLocalization M S] : PrimeSpectrum S ≃o { p // Disjoint ↑M ↑p.asIdeal }\", \"doc\": \"The prime spectrum of the localization of a ring at a submonoid `M` are in\\norder-preserving bijection with subset of the prime spectrum of the ring consisting of\\nprime ideals disjoint from `M`.\"}\n  {\"name\": \"IsLocalization.coe_primeSpectrumOrderIso_apply_coe_asIdeal\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \" {R : Type u_1} [CommSemiring R] (M : Submonoid R) (S : Type u_2) [CommSemiring S] [Algebra R S] [IsLocalization M S] (a✝ : PrimeSpectrum S) : ↑(↑((IsLocalization.primeSpectrumOrderIso M S) a✝)).asIdeal = ⇑(algebraMap R S) ⁻¹' ↑a✝.asIdeal\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \" {R : Type u_1} [CommSemiring R] (M : Submonoid R) (S : Type u_2) [CommSemiring S] [Algebra R S] [IsLocalization M S] (a✝ : { p // Disjoint ↑M ↑p.asIdeal }) : ↑((RelIso.symm (IsLocalization.primeSpectrumOrderIso M S)) a✝).asIdeal = ⋂ s, ⋂ (_ : ↑(↑a✝).asIdeal ⊆ ⇑(algebraMap R S) ⁻¹' ↑s), ↑s\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.AtPrime.primeSpectrumOrderIso\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] (S : Type u_2) [CommSemiring S] [Algebra R S] (I : Ideal R) [hI : I.IsPrime] [IsLocalization.AtPrime S I] : PrimeSpectrum S ≃o ↑(Set.Iic { asIdeal := I, isPrime := hI })\", \"doc\": \"The prime spectrum of the localization of a commutative ring R at a prime ideal I are in\\norder-preserving bijection with the interval $(-∞, I]$ in the prime spectrum of R.\"}\n  {\"name\": \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \" {R : Type u_5} [CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_6) [CommSemiring S] [Algebra R S] [IsLocalization.AtPrime S p] : Subsingleton (PrimeSpectrum S)\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.AtPrime.coe_primeSpectrumOrderIso_apply_coe_asIdeal\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] (S : Type u_2) [CommSemiring S] [Algebra R S] (I : Ideal R) [hI : I.IsPrime] [IsLocalization.AtPrime S I] (a✝ : PrimeSpectrum S) : ↑(↑((IsLocalization.AtPrime.primeSpectrumOrderIso S I) a✝)).asIdeal = ⇑(algebraMap R S) ⁻¹' ↑a✝.asIdeal\", \"doc\": \"\"}\n  {\"name\": \"IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \" {R : Type u_1} [CommSemiring R] (S : Type u_2) [CommSemiring S] [Algebra R S] (I : Ideal R) [hI : I.IsPrime] [IsLocalization.AtPrime S I] (a✝ : ↑(Set.Iic { asIdeal := I, isPrime := hI })) : ↑((RelIso.symm (IsLocalization.AtPrime.primeSpectrumOrderIso S I)) a✝).asIdeal = ⋂ s, ⋂ (_ : ↑↑(({p | p.IsPri\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} {S : Type v} [CommSemiring R] [CommSemiring S] [Algebra R S] {f : R} {p : PrimeSpectrum R} (h : (PrimeSpectrum.basicOpen f).carrier = {p}) : IsLocalization.Away f S ↔ IsLocalization.AtPrime S p.asIdeal\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned localization spectrum theorems assume an already constructed localization; none identifies this prescribed neighborhood colimit with M_Z localization and proves its natural local-ring formulas. Upstream Restriction.range_algebraMap_specComap supplies only the spectrum range for its component-quotient diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "Restriction|RestrictClopen|clopen.*localiz|idempotent.*colimit",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"116\", \"text\": \"`RingHom.ofLocalizationSpan_iff_finite`, but this has less restrictions when applying. -/\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"170\", \"text\": \"`RingHom.ofLocalizationSpanTarget_iff_finite`, but this has less restrictions when applying. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Morita/Basic.lean\", \"line\": \"93\", \"text\": \"-- restriction in the universe.\"}\n  {\"file\": \"Mathlib/RingTheory/Morita/Basic.lean\", \"line\": \"94\", \"text\": \"-- Or alternatively, @alreadydone has sketched an argument on how the universe restriction can be\"}\n  {\"file\": \"Mathlib/RingTheory/NonUnitalSubring/Basic.lean\", \"line\": \"739\", \"text\": \"/-- Restriction of a ring homomorphism to its range interpreted as a `NonUnitalSubring`.\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"224\", \"text\": \"/-- The restriction map from `FreeCommRing α` to `FreeCommRing s` where `s : Set α`, defined\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"226\", \"text\": \"def restriction (s : Set α) [DecidablePred (· ∈ s)] : FreeCommRing α →+* FreeCommRing s :=\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"229\", \"text\": \"section Restriction\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"234\", \"text\": \"theorem restriction_of (p) : restriction s (of p) = if H : p ∈ s then of ⟨p, H⟩ else 0 :=\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"237\", \"text\": \"end Restriction\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"line\": \"47\", \"text\": \"`S ⊗[R] Ω[R[Xᵢ⁄R]]` intersects the kernel of the projection trivially, then the restriction of\"}\n  {\"file\": \"Mathlib/RingTheory/NonUnitalSubsemiring/Basic.lean\", \"line\": \"673\", \"text\": \"/-- Restriction of a non-unital ring homomorphism to its range interpreted as a\"}\n  {\"file\": \"Mathlib/RingTheory/NonUnitalSubsemiring/Defs.lean\", \"line\": \"332\", \"text\": \"/-- Restriction of a non-unital ring homomorphism to a non-unital subsemiring of the codomain. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"230\", \"text\": \"restriction to `ker(I/I² → ⊕ S dyᵢ)` is the connecting homomorphism in the Jacobi-Zariski sequence.\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"line\": \"114\", \"text\": \"/-- A map from the base change of a graded algebra is the same as a map to the scalar restriction.\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/TensorProduct.lean\", \"line\": \"146\", \"text\": \"`R`-algebra `𝒜` to its base change to `S` and then restricted back to `R`. (The restriction does\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Maps.lean\", \"line\": \"708\", \"text\": \"restricted back to `R` is `p` if and only if `p` is the restriction of a prime in `S`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Basic.lean\", \"line\": \"773\", \"text\": \"2. `B ↦ B`, a functor `S-Alg ⥤ R-Alg` (the restriction).\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"line\": \"274\", \"text\": \"def restriction (p : R[X]) : Polynomial (Subring.closure (↑p.coeffs : Set R)) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"line\": \"284\", \"text\": \"theorem coeff_restriction {p : R[X]} {n : ℕ} : ↑(coeff (restriction p) n) = coeff p n := by\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"line\": \"286\", \"text\": \"  simp only [restriction, coeff_monomial, finsetSum_coeff, mem_support_iff, Finset.sum_ite_eq',\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"line\": \"293\", \"text\": \"theorem coeff_restriction' {p : R[X]} {n : ℕ} : (coeff (restriction p) n).1 = coeff p n := by\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"line\": \"297\", \"text\": \"theorem support_restriction (p : R[X]) : support (restriction p) = support p := by\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/RankOne.lean\", \"line\": \"27\", \"text\": \"* `RankOne.restrict_RankOne` is the `RankOne` instance for the restriction of a valuation to its\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/Basic.lean\", \"line\": \"465\", \"text\": \"/-- The restriction of a valuation so that it takes values in its `valueGroup₀`. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned localization spectrum theorems assume an already constructed localization; none identifies this prescribed neighborhood colimit with M_Z localization and proves its natural local-ring formulas. Upstream Restriction.range_algebraMap_specComap supplies only the spectrum range for its component-quotient diagram."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ring localization at the idempotents of clopen neighborhoods identifies the spectrum with a closed component subset and preserves local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : IsLocalRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a local ring. This localization inverts all elemen\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : Inhabited (Localizations R P)\", \"doc\": \"For any prime ideal $ P $ in the prime spectrum of a commutative ring $ R $, the localization of $ R $ at $ P $ is non-empty, as it contains the multiplicative identity element $ 1 $.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.Localizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : Type u\", \"doc\": \"For a prime ideal $ P $ in the prime spectrum of a commutative ring $ R $, the localization of $ R $ at the submonoid of elements not in $ P $, resulting in a ring where all elements outside $ P $ bec\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) (x : U) :\\n  IsLocalization.AtPrime (Localizations R x) (x : PrimeSpectrum.Top R).asIdeal\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ is equipped with a canonical $ R $-algebra structure. Th\"}\n  {\"name\": \"Localization.AtPrime.isLocalRing\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \": IsLocalRing (Localization P.primeCompl)\", \"doc\": \"For a semiring $ R $ and a prime ideal $ P $, the localization of $ R $ at the complement of $ P $ forms a local ring. This means the localized ring has a unique maximal ideal, which corresponds to th\"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": { e : R × R // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Jacobson\", \"type\": \"[IsJacobsonRing R] : JacobsonSpace (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a Jacobson ring, then the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Jacobson space. This means that every closed irreducible subset of $ \\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceObj\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(R : CommRingCat.{u}) : LocallyRingedSpace\", \"doc\": \"For a commutative ring $ R $, this constructs the locally ringed space $ \\\\operatorname{Spec}(R) $ by equipping the prime spectrum with the Zariski topology and the structure sheaf $ \\\\mathcal{O}_{\\\\oper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned localization spectrum theorems assume an already constructed localization; none identifies this prescribed neighborhood colimit with M_Z localization and proves its natural local-ring formulas. Upstream Restriction.range_algebraMap_specComap supplies only the spectrum range for its component-quotient diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*localiz|idempotent.*colimit|localization_comap_isEmbedding",
+   "results": "9 hit(s); Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual idempotents, existing localization spectrum/stalk statements, or unrelated colimits; no hit states the prescribed neighbourhood colimit, its multiplicative system identification and its inclusion/local-ring naturality together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at the idempotents of clopen neighborhoods of a closed subset of a profinite space has spectrum the inverse image of that subset and canonical isomorphisms on local rings",
+   "results": "8 hit(s); PrimeSpectrum.localization_away_comap_range, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.isClopen_iff_zeroLocus, PrimeSpectrum.mulZeroAddOneEquivClopens, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, AlgebraicGeometry.Spec.locallyRingedSpaceObj, AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual idempotents, existing localization spectrum/stalk statements, or unrelated colimits; no hit states the prescribed neighbourhood colimit, its multiplicative system identification and its inclusion/local-ring naturality together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"PrimeSpectrum\"",
+   "results": "8 hit(s); IsLocalization.primeSpectrumOrderIso, IsLocalization.coe_primeSpectrumOrderIso_apply_coe_asIdeal, IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal, IsLocalization.AtPrime.primeSpectrumOrderIso, IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes, IsLocalization.AtPrime.coe_primeSpectrumOrderIso_apply_coe_asIdeal, IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal, PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual idempotents, existing localization spectrum/stalk statements, or unrelated colimits; no hit states the prescribed neighbourhood colimit, its multiplicative system identification and its inclusion/local-ring naturality together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of localizations at clopen neighborhood idempotents of a closed subset of a profinite space is localization at those idempotents with spectrum the closed inverse image and unchanged local rings",
+   "results": "8 hit(s); PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply, PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm, PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens, PrimeSpectrum.isIdempotentElemEquivClopens, PrimeSpectrum.mulZeroAddOneEquivClopens, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual idempotents, existing localization spectrum/stalk statements, or unrelated colimits; no hit states the prescribed neighbourhood colimit, its multiplicative system identification and its inclusion/local-ring naturality together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed diagram of localizations at idempotents indexed by neighborhoods is a colimit localization at the multiplicative set of those idempotents",
+   "results": "8 hit(s); localCohomology.hasColimitDiagram, IsLocalization.Away.quotient_of_isIdempotentElem, Condensed.isColimitLocallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheaf, IsLocalization.away_of_isIdempotentElem_of_mul, IsLocalization.away_of_isIdempotentElem, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheafDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give individual idempotents, existing localization spectrum/stalk statements, or unrelated colimits; no hit states the prescribed neighbourhood colimit, its multiplicative system identification and its inclusion/local-ring naturality together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-pe-wc-cover-second-stage",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-wc-cover",
+ "blueprint": {
+  "from": {
+   "node": "det-pe-wc-cover-second-stage",
+   "place": "Preliminaries: clopen idempotents, closed restriction spectrum and unchanged local rings (old split steps 1–3 and the inclusion maps in step 4).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pe-clopen-restriction-canonical-localization",
+  "worker": "stage1",
+  "summary": "Expanded the canonical neighbourhood diagram and its multiplicative idempotent system; exhibited the ring of fractions itself as the colimit; used existing profinite-basis, spectrum-embedding and local-ring comparison nodes; proved inclusion functoriality and localized naturality on fractions. No statement changes and no new nodes.",
+  "blueprint": "det-pe-wc-cover-second-stage.proof.md, Preliminaries: e_U exists; closed Z is the intersection of clopen neighbourhoods; Spec(C_Z) is pi^{-1}(Z); (C_Z)_x=C_x; C_{f(A)} to C_{f(A-prime)} exists for nested images.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic localization at a contracted prime, clause (2), supplies the canonical local-ring isomorphism for M_Z^{-1}R. The unit has no separate general localization theorem; this retains its idempotent-localization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-30110579d",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-30110579d (reviewer sub-agent of L); spot-checked: PASS: no faults found; review.md has the step-by-step checks and no fixes/ files were written. The delivery is a first split of the Q96-created item, with no new nodes. Compared with the Q96 copy, the statement, stmt_deps, blueprint and created fields are unchanged; proof_deps equals the union of the steps' uses. All nine steps were checked against the cited statements. (1) The index poset is small, nonempty and directed. (2) The clopen-idempotent node gives existence and uniqueness, so e_{U∩V}=e_Ue_V, e_P=1 and e_Ue_V=e_V for V⊆U. (3) The transition maps come from the universal property (00CP) in the right direction. (4) M_Z^{-1}R is shown directly to be the colimit in R-algebras. (5) The clopen-basis complement argument gives ∩I_Z=Z. (6) The localization-spectrum embedding (00E3) gives the homeomorphism onto g^{-1}(Z). (7) Clause (2) of lem-weil-pbc-localization-prime-residue-field-iso gives the canonical isomorphism R_x≅(R_Z)_q; its declared tool_use (generic localization, unit sk-thm-p1) is accepted. (8) The inclusion maps and their spectrum maps are proved. (9) The local naturality is computed on fractions, not asserted. The steps match the main-20261015 det-pe-wc-cover-second-stage Preliminaries and Stacks 097C lemma-construct (proetale.tex l.864-878), and no SGA source is cited. Edge cases checked: Z=P, Z empty (e=0, zero ring), R=0, non-injective U↦e_U, closed non-open Z, Z=Z'. Advisory for the maintainer: lem-weil-pbc-restriction-spectrum-range and lem-weil-pbc-restriction-algebraMap-surjective (unsplit, sk-thm-properbasechange) are g=π special cases of parts of this item. They predate this delivery and are not its fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ClopenRestrictionCanonicalLocalization",
+  "declaration": "WContractification.ClopenRestriction.canonical_localization",
+  "declarations": [
+   "WContractification.ClopenRestriction.Index",
+   "WContractification.ClopenRestriction.preimage",
+   "WContractification.ClopenRestriction.idempotent",
+   "WContractification.ClopenRestriction.diagram",
+   "WContractification.ClopenRestriction.algebra",
+   "WContractification.ClopenRestriction.denominators",
+   "WContractification.ClopenRestriction.inclusion",
+   "WContractification.ClopenRestriction.restriction",
+   "WContractification.ClopenRestriction.canonical_localization",
+   "WContractification.ClopenRestriction.restriction_naturality"
+  ],
+  "file": "lean/Sheaf/RingTheory/ClopenRestrictionCanonicalLocalization.lean",
+  "statement": "theorem canonical_localization [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] (g : C(PrimeSpectrum R, P)) (Z : Set P) (hZ : IsClosed Z) : Nonempty (Index Z) ∧ IsFiltered (Index Z) ∧ (denominators g Z : Set R) = Set.range (fun U : Index Z ↦ idempotent g U.unop.val) ∧ IsLocalization (denominators g Z) (algebra g Z) ∧ (∃ E : algebra g Z ≃ₐ[R] Localization (denominators g Z), ∀ (U : Index Z) (κ : RestrictClopen (preimage g U.unop.val) →ₐ[R] Localization (denominators g Z)), E.toAlgHom.comp (colimit.ι (diagram g Z) U).hom = κ) ∧ (∃ H : PrimeSpectrum (algebra g Z) ≃ₜ (g ⁻¹' Z), ∀ q, (H q).val = PrimeSpectrum.comap (algebraMap R (algebra g Z)) q) ∧ (∀ q : PrimeSpectrum (algebra g Z), ∃ α : Localization.AtPrime (q.asIdeal.comap (algebraMap R (algebra g Z))) ≃ₐ[R] Localization.AtPrime q.asIdeal, α.toRingHom = Localization.localRingHom (q.asIdeal.comap (algebraMap R (algebra g Z))) q.asIdeal (algebraMap R (algebra g Z)) rfl)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two theorem declarations together state all clauses. Construction helpers reuse upstream RestrictClopen and its canonical maps; the colimit and its inclusion-induced maps are constructed explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e4f2f49e",
+  "group": "ND",
+  "result": "pass",
+  "note": "Only the node lean field and the new module ClopenRestrictionCanonicalLocalization.lean change vs live; lean.statement is verbatim. All clauses checked: Index = opposite of the clopen-neighbourhood subtype (correct arrow direction); e_U = isIdempotentElemEquivClopens.symm of the preimage (D(e)=g^{-1}U); transitions = upstream RestrictClopen.map; R_Z = the actual colimit in CommAlgCat R; Nonempty+IsFiltered; the M_Z carrier equals the range (multiplicative); IsLocalization plus E pinned on every leg (∀κ, satisfiable); H homeomorphism normalized to contraction; α = localRingHom; restriction = colimit.pre with id/comp laws, spectrum-inclusion and local-identity naturality (hx/hx' satisfiable). Matches Stacks 097C lemma-construct. Edge cases Z=∅ (0∈M_Z), Z=P, R=0, P=∅ and empty preimage covered. A shared universe u for R,P is the node's own size convention (step 1), and the citers use one universe. No hollow defs, only sorry proofs, docstrings with source/blueprint and steps 1-9, Worker report and Second reading present, no pro-etale substitute. Not recompiled (no fix written); relies on the worker's clean compile. Advisory: pre-existing overlap with lem-weil-pbc-restriction-spectrum-range/algebraMap-surjective (g=π special cases), as noted at stage 1."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261023T105139-L-3512820",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WContractification.ClopenRestriction.canonical_localization",
+   "WContractification.ClopenRestriction.restriction_naturality"
+  ],
+  "sorry_after": []
+ }
+}

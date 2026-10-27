@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-finite-projection-operation-presentation",
+ "kind": "statement",
+ "title": "Finite operation projection in intrinsic tensor coordinates",
+ "statement": "Fix a finite-field datum $D$, coefficient datum $C$ with prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, and $m\\ge0$. Let $F$ be finite six-functor operations at exponent $m+1$ [def-sf-operation-stages]. For finite-type schemes $X,Y$ over the specified algebraic closure, a separated finite-type $f:X\\to Y$, a compactification $c$, arbitrary bounded constructible $K$ with coefficients $A=\\mathcal O_E/\\varpi_E^{m+1}$ on $X$, and finite-Tor bounded constructible $L$ on $Y$, the intrinsic counit/open arrow finiteReductionProjection of [def-exchange-projection], evaluated in the normalized intrinsic derived tensor models is isomorphic to the ambient arrow underlying CompactSupportFiniteProjection.component for $F,f,c,K,L$ [def-sf-constructible-projection-mates]. Both inputs already have finite coefficients. No integral lift of either input, comparison between levels, or separated structure morphism is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Expand the intrinsic compactification projection into its proper right-adjoint projection followed by proper image of the open projection isomorphism. Arrow.isoMk with identity source removes the latter. The tensorPullback_eq field identifies the proper component with finiteScalarProperProjection.",
+   "uses": [
+    "def-exchange-projection",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteScalarProperProjection_presentation to c.g and the intrinsic extension-by-zero input. It compares the single proper counit factor, without any compactification or operation datum.",
+   "uses": [
+    "lem-sf-finite-scalar-proper-projection-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize finiteOpenIso and apply the exact derived composition comparisons. Apply the inverse realization and cancel its unit. This identifies the input with fixed-scalar extension by zero of the inverse realization of K. Naturality of the fixed proper projection gives its arrow isomorphism under this input comparison.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fixed compactification projection is the fixed proper projection followed by two isomorphisms: proper image of inverse open projection and of the pullback compositor. Arrow.isoMk inserts these factors; map the resulting arrow isomorphism through realization.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The definition of component conjugates the realized fixed projection by sourceComparison.hom and targetComparison.inv. Arrow.isoMk on the inverse comparisons commutes by cancellation of sourceComparison. Compose all five arrow isomorphisms.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-sf-finite-scalar-proper-projection-presentation",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "B7 proper-factor reduction of the arrow-isomorphism statement: remove and insert the two open tails by their existing isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Changing tensor model and constant scalar realization conjugates the derived proper open compact support projection morphism",
+   "results": "Eight unrelated LightCondensed tensor/projectivity and monoidal sheafification results. No compact-support projection presentation comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isoMk",
+   "results": "CategoryTheory.Arrow.isoMk and its four component equations. It constructs the final arrow isomorphism from endpoint isomorphisms and a commuting square.",
+   "date": "2026-10-26",
+   "verdict": "Useful for combining comparisons; does not supply the geometric presentation square."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Pp]resentation|[Pp]resentation.*projection",
+   "results": "Seven unrelated hits in Data/QPF/Multivariate/Constructions/Prj, Data/Matrix/PEquiv, RepresentationTheory/Rep/Basic, RepresentationTheory/Intertwining and CategoryTheory/Limits/Presentation.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStageProjectionReduction",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite operation projection in intrinsic tensor coordinates",
+   "via": [
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionOperationPresentation",
+  "file": "lean/Sheaf/Paper/FiniteProjectionOperationPresentation.lean",
+  "declaration": "WeilConjectures.finiteProjection_operationPresentation",
+  "statement": "theorem finiteProjection_operationPresentation\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {m : ℕ}\n    (F : SixFunctorFiniteOperations D C E (m + 1)\n      (Nat.succ_le_succ (Nat.zero_le m)))\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left)\n    (K : sixFunctorFiniteCategory D C E (m + 1)\n      (Nat.succ_le_succ (Nat.zero_le m)) X)\n    (L : finiteTorConstructibleCategory C.l E (m + 1)\n      (Nat.succ_le_succ (Nat.zero_le m)) Y.obj.left) :\n    Nonempty (Arrow.mk (finiteReductionProjection C.l E m c K.obj L.obj) ≅\n      Arrow.mk (CompactSupportFiniteProjection.component F f c K L).hom)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T070736-L-3650845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T222557-L-669784",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

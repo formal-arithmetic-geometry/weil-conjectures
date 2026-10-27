@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-tate-twisted-projection-comparison",
+ "kind": "definition",
+ "title": "Tate-twisted canonical projection comparison",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] with its pulled-back coefficient rings [sk-def-sfb-pulled-back-coefficients], ordinary unbounded internal-module derived functors $Lf^*,Rf_*$ [sk-def-sfb-module-derived-pushpull] and existing derived tensor [sk-def-sfb-derived-tensor-hom]. Given $f:X\\to S$, internal coefficient modules $L_S,L_X$ [def-sfb-diagonal-coefficient-category], and a specified isomorphism $e:Lf^*(L_S[2])\\simeq L_X[2]$, define $T_Z(A)=(A\\otimes L_Z)[2]$, where $L_Z$ is placed in degree zero. Define the twisted projection comparison\n$$\\Pi_{f,e,A}:T_S(Rf_*A)\\longrightarrow Rf_*T_X(A)$$\nas the inverse tensor-shift comparison, followed by the published canonical projection mate (in [def-sfb-proetale-rational-localizing-projection-helpers]) with arguments $A,L_S[2]$, followed by $Rf_*$ of $1_A\\otimes e$ and the tensor-shift comparison on $X$. All comparisons are the existing tensor and derived-functor comparisons; $e$ is retained exactly, with no replacement by an unspecified line isomorphism. The unshifted fixed-line tensor functor is the existing definition of [def-sfb-rational-localizing-twist]. The fixed native tensor and shift structures use the shared bundle of [def-sfb-projective-diagonal-pullback].",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-rational-localizing-twist"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.md",
+  "place": "clause 2 and proof step 10, inverse of the normalized Tate-twisted projection map"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical diagonal tensor comparison for internal derived modules is the closed projection mate; the Tate twisted projection comparison is induced by the normalized Cartesian Tate line.",
+   "results": "8 hits, including CategoryTheory.expComparison and generic algebraic tensors; none states either construction.",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap' (it belongs to the project, not Mathlib).",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match; reuse the project projection mate."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalTensor|TateTwistedProjection|rightAdjointProjectionMap",
+   "results": "msearch.py Mathlib grep: 0 hits. Project rg finds the existing generic projection-map machinery; no concrete diagonalTensorMap or twistProjectionMap. Blueprint searches diagonal tensor comparison and twisted projection comparison found only different finite-coefficient or unrelated results.",
+   "date": "2026-10-22",
+   "verdict": "Define the missing concrete comparison using the existing machinery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-unit-counit",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "clause 2 and proof step 10, inverse of the normalized Tate-twisted projection map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.TateTwistedProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.twistProjectionMap",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.twist",
+   "AlgebraicGeometry.ProEtale.RationalP1.tensorShift_existsUnique",
+   "AlgebraicGeometry.ProEtale.RationalP1.tensorShiftIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectionMateFamily",
+   "AlgebraicGeometry.ProEtale.RationalP1.ProjectionMateNormalized",
+   "AlgebraicGeometry.ProEtale.RationalP1.projectionMate_existsUnique",
+   "AlgebraicGeometry.ProEtale.RationalP1.projectionMateMap",
+   "AlgebraicGeometry.ProEtale.RationalP1.twistProjectionMap"
+  ],
+  "file": "lean/Sheaf/Paper/TateTwistedProjection.lean",
+  "statement": "def twistProjectionMap {X S : Scheme.{u}} (f : X ⟶ S) (LS : Modules Λ S) (LX : Modules Λ X) (e : (moduleObjectDerivedPullback Λ f).obj (((DerivedCategory.singleFunctor (Modules Λ S) 0).obj LS) ⟦(2 : ℤ)⟧) ≅ ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj LX) ⟦(2 : ℤ)⟧) (A : DerivedCategory (Modules Λ X)) : (twist Λ S LS).obj ((moduleObjectDerivedPushforward Λ f).obj A) ⟶ (moduleObjectDerivedPushforward Λ f).obj ((twist Λ X LX).obj A)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Section 1(B): retained DAG binding points to a withdrawn source module; the live source reader reports Module source unavailable. Restore the canonical construction described by this unchanged node, with fixed-map normalization and real definition data."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e328197e9",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of the 69f9 H2 RETURN. Lean signature and body are byte-identical; only imports changed (5 definition modules made public imports, DiagonalTowerCoefficients made a plain proof import). stmt_deps drop det-prop-diagonal-tower-coefficients and -trace (both kept in proof_deps) and cite def-sfb-diagonal-coefficient-reference, -trace-limit-characterization, -trace-models plus three new existing:true ownership nodes (system-interface, completed-endpoints, normalized-source). check_existing is clean on all three; statements are verbatim with live; the prose matches the live declarations and the source places exist. No cycle, no theorem stmt_dep, no Lean moved. Seven dependency modules and records are unchanged from 69f9. H3 substance accepted at 69f9 still holds. Advisories: diagonalSurface in the signature is owned only by det-prop-diagonal-tower-system but is reached through the closure; second readings are self-readings; inherited ∃ CommShift in unitCounit_exact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261024T184814-L-3195131",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.RationalP1.projectionMate_existsUnique",
+   "AlgebraicGeometry.ProEtale.RationalP1.tensorShift_existsUnique"
+  ],
+  "sorry_after": []
+ }
+}

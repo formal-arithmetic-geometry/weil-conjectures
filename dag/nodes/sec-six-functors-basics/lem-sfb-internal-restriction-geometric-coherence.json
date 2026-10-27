@@ -1,0 +1,524 @@
+{
+ "id": "lem-sfb-internal-restriction-geometric-coherence",
+ "kind": "statement",
+ "title": "Finite limits and coherent base and coefficient comparisons for internal restriction",
+ "statement": "Fix a universe $\\mathcal V$ and a $\\mathcal V$-small site $(C,J)$ with finite limits [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Put $\\mathscr E=\\operatorname{Sh}(C,J)$. For a sheaf of groups $K$ with $\\mathcal V$-small values, let $\\mathscr E^K$ be the category of sheaves of sets $X$ with a natural left action $K\\times X\\to X$ satisfying the identity and associativity laws; its maps are equivariant sheaf maps. For any group-sheaf morphism $\\theta:L\\to K$, define $\\operatorname{Res}_\\theta$ by precomposing the action with $\\theta$, and define $I_K:\\mathscr E\\to\\mathscr E^K$ by trivial action. The forgetful functor $\\mathscr E^K\\to\\mathscr E$ creates finite limits: the terminal sheaf has its unique action, products have componentwise action and equalizers have the restricted action. Both $\\operatorname{Res}_\\theta$ and $I_K$ preserve finite limits. Actions of the terminal group sheaf $1$ are canonically ordinary sheaves, and $I_K$ is restriction along $K\\to1$. On sheaves and maps the identifications $\\operatorname{Res}_\\theta I_K=I_L$, $\\operatorname{Res}_{\\mathrm{id}}=\\mathrm{id}$ and $\\operatorname{Res}_\\psi\\operatorname{Res}_\\theta=\\operatorname{Res}_{\\theta\\psi}$ are the literal identifications of the unchanged underlying objects with their actions, for every sheaf of groups $H$ and morphism $\\psi:H\\to L$. If these restriction functors are equipped with right adjoints, they define geometric morphisms $q_\\theta:\\mathscr E^L\\to\\mathscr E^K$ and $p_K:\\mathscr E^K\\to\\mathscr E$ [def-weil-pbc-ringed-topos-morphism]; the identity on inverse images specifies $p_Kq_\\theta\\cong p_L$, and the identity and composition comparisons satisfy their coherence equations. The right adjoint of $I_K$ is the subsheaf whose sections over $U$ are the $x$ such that $k\\cdot x|_V=x|_V$ for every $V\\to U$ and $k\\in K(V)$. For any sheaf of commutative rings $R$ put $R_K=I_KR$. With identity structural ring maps, these are ringed morphisms between $(\\mathscr E,R)$ and $(\\mathscr E^K,R_K)$. Every map $\\varphi:R\\to R'$ gives maps $\\varphi_K:R_K\\to R'_K$ with components $\\varphi_U$. The identity-topos ringed morphisms $(\\mathscr E,R')\\to(\\mathscr E,R)$ and $(\\mathscr E^K,R'_K)\\to(\\mathscr E^K,R_K)$ commute with $p_K$ and $q_\\theta$: their inverse-image comparisons are identities and both composite structural maps have components $\\varphi_U$. On extension-of-scalars module pullbacks [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product] their comparisons send $r'\\otimes m$ to $r'\\otimes m$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written categorical infrastructure; re-split of lem-sfb-action-topos-geometric-restriction, former steps 3, 7, 11. The full original arguments and their existing sources are retained in the repair report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-scalar-extension-constraint-data",
+  "def-sfb-internal-set-actions",
+  "def-sfb-internal-action-site-basic"
+ ],
+ "proof": [
+  {
+   "text": "For a finite diagram $D$ of sheaves, define $T(U)=\\{(x_i)\\in\\prod_i D_i(U):D(a)(x_i)=x_j\\text{ for every }a:i\\to j\\}$, with coordinatewise restrictions. A matching family in $T$ glues uniquely in each $D_i$; the glued sections satisfy every arrow equation because their two sides agree on the cover. Thus $T$ is a sheaf by [def-weil-pbc-sites-and-cohomology]. Sending a cone to its tuple of components gives its unique map to $T$, so $T$ is the underlying limit. For the empty diagram this is the singleton sheaf. Products have no arrow conditions, and for a parallel pair the condition is its equalizer equation. In Lean, use the already proved Mod.createsLimit and CreatesLimitsOfShape instance from [lem-sfb-modobj-forget-creates]; its arbitrary-cone construction gives this same limit without rebuilding the tuple sheaf.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-modobj-forget-creates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure"
+   }
+  },
+  {
+   "text": "For a diagram of $K$-objects, put $k\\cdot(x_i)=(k\\cdot x_i)$ on the preceding tuple sheaf. Equivariance of every diagram arrow preserves its defining equations; naturality and the action laws hold in every coordinate. All projections are equivariant. If a cone has equivariant components, its unique tuple map is equivariant by equality of coordinates. Conversely equivariance of the projections forces this action uniquely. For any other underlying limit cone, its unique comparison with the tuple limit transports this action uniquely. This proves creation of finite limits. In particular the terminal action is unique, product actions are componentwise, and equalizers have the restricted action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure"
+   }
+  },
+  {
+   "text": "Restriction along $\\theta$ leaves the tuple sheaf and all cone maps unchanged, and its action is $l\\cdot(x_i)=(\\theta(l)\\cdot x_i)$. This is exactly the tuple limit action for the restricted diagram. Hence $\\operatorname{Res}_\\theta$ preserves finite limits. For a diagram in $\\mathscr E$, the tuple action obtained after trivial inflation is again trivial, so $I_K$ preserves finite limits as well. Formally both composites with the forgetful functors are the unchanged forgetful functor, or the identity in the trivial-inflation case. Creation reflects limit cones, so preservesLimitsOfShape_of_reflects_of_preserves proves both preservation claims, including the empty diagram.",
+   "uses": [
+    "lem-sfb-modobj-forget-creates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure"
+   }
+  },
+  {
+   "text": "The action of the unique section of the terminal group sheaf is the identity by the unit law. Forgetting this action and restoring it are inverse on objects and maps, identifying $\\mathscr E^1$ with $\\mathscr E$; restriction along $K\\to1$ is $I_K$. For $x\\in X(U)$ and $h\\in H(U)$ successive restriction acts by $\\theta_U(\\psi_U(h))\\cdot x=(\\theta\\psi)_U(h)\\cdot x$. Identity restriction acts by $k\\cdot x$, and restriction of a trivial action acts by $x$. All three functor identifications in the statement are therefore identity maps on the underlying sheaves, are equivariant, and commute with every sheaf map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure"
+   }
+  },
+  {
+   "text": "For a $K$-object $X$, let $F(X)(U)$ be the fixed sections specified in the statement. Restriction preserves this condition by composing test arrows, and an equivariant map sends fixed sections to fixed sections. To check gluing, glue a matching family of fixed sections $x_i$ to $x\\in X(U)$. For $V\\to U$ and $k\\in K(V)$, pull the cover back to $V_i=V\\times_U U_i$. On $V_i$, the two sections $k\\cdot x|_V$ and $x|_V$ agree by the defining condition for $x_i$, applied to $V_i\\to U_i$ and $k|_{V_i}$. Separatedness of $X$ makes them equal on $V$. Thus $x$ is fixed and $F(X)$ is a subsheaf. The pullbacks used here exist and cover by the site axioms [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure"
+   }
+  },
+  {
+   "text": "For $A\\in\\mathscr E$ an equivariant map $u:I_KA\\to X$ satisfies $k\\cdot u_V(a|_V)=u_V(a|_V)$ for all $a\\in A(U)$, $V\\to U$, and $k\\in K(V)$. Naturality therefore factors $u$ uniquely through $F(X)$. Conversely every sheaf map $A\\to F(X)$ composed with its inclusion in $X$ is equivariant, using the fixed-section condition with $V=U$. These operations keep the same component maps, so they are inverse and commute with precomposition in $A$ and postcomposition in $X$. Apply [lem-weil-pbc-adjunction-of-natural-bijection] to get $I_K\\dashv F$. Its counit is the fixed-subsheaf inclusion, specifying the claimed right adjoint.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections; fixed-section bijection written by the agent"
+   }
+  },
+  {
+   "text": "The small-site presentations in [lem-sfb-internal-action-sheaf-equivalence] show that $\\mathscr E^K$ and $\\mathscr E^L$ are sheaf topoi (the same site and small-value assumptions are in force). Now equip restriction functors with the stipulated right adjoints; for $I_K$ one can use step 6. Their finite-limit preservation from step 3 gives geometric morphisms $q_\\theta$ and $p_K$ by [def-weil-pbc-ringed-topos-morphism], before introducing structural rings. No existence theorem for a right adjoint of arbitrary $\\operatorname{Res}_\\theta$ is being asserted or used here. For the literal action-site precompositions used in the Lean ringed realization, left exactness also follows directly: composing with sheafToPresheaf is ordinary presheaf precomposition, which preserves limits, and sheafToPresheaf reflects them. Construct RingData with the stipulated right adjoint and its actual adjunction, the identity structural map, and the original sectionwise ring operations. Apply [lem-weil-pbc-ringed-topos-induced-modules] to obtain the additive module direct image with its normalized underlying sheaf and scalar law; withModules assembles the required RingedToposMorphism without changing the given adjunction.",
+   "uses": [
+    "lem-sfb-internal-action-sheaf-equivalence",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-ringed-topos-induced-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-composite-adjunction] to equip each composite inverse image with its composite adjunction. By step 4 its left adjoint is literally the specified single restriction, or trivial inflation. Conjugating the identity of these left adjoints using [def-weil-pbc-adjunction-conjugate] gives an invertible right-adjoint comparison, hence the isomorphism $p_Kq_\\theta\\cong p_L$ and the restriction identity and composition comparisons. Their coherence can be checked under the conjugation bijection: on inverse images every path is the identity on the same action, by $\\theta(\\psi(h))=(\\theta\\psi)(h)$ and associativity of composition. On Hom sets, the adjunction of any triple composite is the same sequence of three Hom bijections, regardless of parentheses. Conjugation preserves identities and reverses composition by the cited statement. Consequently every identity or associativity coherence diagram also commutes on the right adjoints. The same argument with trivial inflation proves the compatibility of these comparisons over $\\mathscr E$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0 (lemma-compose-counits); conjugation identities in Mathlib/CategoryTheory/Adjunction/Mates.lean:275,319,350,425"
+   }
+  },
+  {
+   "text": "Finite-limit preserving $I_K$ transports the ring operations of $R$ to the same operations with trivial action. Also $\\operatorname{Res}_\\theta R_K=R_L$. Thus the identity structural ring maps equip $p_K$ and $q_\\theta$ with ringed structures [def-weil-pbc-ringed-topos-morphism]. For $\\varphi:R\\to R\\prime$, the components $\\varphi_U$ are ring homomorphisms, commute with restrictions, and are equivariant for trivial actions; they define $\\varphi_K$ and $\\varphi_L$. The identity geometric morphisms with these structural maps have the direction $(\\mathscr E,R\\prime)\\to(\\mathscr E,R)$ and $(\\mathscr E^K,R\\prime_K)\\to(\\mathscr E^K,R_K)$. In each square with $p$ or $q$, step 4 supplies the identity inverse-image comparison. The structural maps for either composite are $\\mathrm{id}\\circ\\varphi_U$ and $\\varphi_U\\circ\\mathrm{id}$, hence coincide. This is precisely the ring compatibility of the square; its identity and composition coherences follow from equality of these component maps.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 01D3 (definition-ringed-topos), including composition of ringed-topos morphisms"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ringed-topoi-module-adjunction] the module pullback for an identity-topos coefficient map is $R\\prime\\otimes_R M$; for $p_K$ or $q_\\theta$ the structural map is the identity. Apply [lem-sfb-internal-restriction-module-tensor] under the geometric morphisms of step 7: their module pullbacks are trivial inflation and action restriction, and their tensor comparisons are the identity on presheaf pure tensors. Regard $R\\prime$ as an $R$-module via $\\varphi$, with trivial action. For $q_\\theta$ the two scalar-square functors therefore have models $\\operatorname{Res}_\\theta(R\\prime_K\\otimes_{R_K}M)$ and $R\\prime_L\\otimes_{R_L}\\operatorname{Res}_\\theta M$; their comparison sends $r\\prime\\otimes m$ to $r\\prime\\otimes m$, with action $l(r\\prime\\otimes m)=r\\prime\\otimes\\theta(l)m$ on either side. For $p_K$ replace restriction by $I_K$: both sides carry trivial action and the same formula holds. These are extension-of-scalars sheaf tensors by [def-pur-sheaf-tensor-product]. The cited tensor comparison identifies their base presheaf tensor maps; the unique factorization in [def-weil-presheaf-modules-sheafification] gives the same maps after sheafification. This also verifies naturality and coherence: each composite is the same map on presheaf pure tensors, which generate the sectionwise tensor modules, so its sheafification is uniquely determined.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-internal-restriction-module-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), Tag 03EK (section-tensor-product), Tag 03CY (lemma-sheafification-presheaf-modules); internal-action comparison supplied by the cited existing node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-internal-action-sheaf-equivalence",
+  "lem-sfb-internal-restriction-module-tensor",
+  "lem-sfb-modobj-forget-creates",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topos-induced-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/InternalRestrictionGeometricCoherence.lean",
+  "place": "G2 stage-3 proofs: existing internal-module limit creation, literal action and presentation identities, universal fixed-section subfunctor and its Hom adjunction, stipulated ring data and induced modules, Mathlib conjugation identities. The original scalar-square step remains to be proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Action.*(limit|Limit)|res.*[Cc]omp|trivial.*[Aa]ction",
+   "results": {
+    "note": "",
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/MarkovCategory/Positive.lean",
+     "Mathlib/CategoryTheory/Adhesive/Basic.lean",
+     "Mathlib/CategoryTheory/PathCategory/Basic.lean",
+     "Mathlib/CategoryTheory/PathCategory/Basic.lean",
+     "Mathlib/CategoryTheory/PathCategory/Basic.lean",
+     "Mathlib/CategoryTheory/PathCategory/Basic.lean",
+     "Mathlib/CategoryTheory/PathCategory/Basic.lean",
+     "Mathlib/CategoryTheory/Functor/Flat.lean"
+    ],
+    "subdirectory": "CategoryTheory",
+    "digest": "593f8a28859457bf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "Action, PreservesFiniteLimits",
+   "results": {
+    "note": "loogle: unknown identifier 'PreservesFiniteLimits'",
+    "hits": 0,
+    "top": [],
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of internal group sheaf actions preserves finite limits and commutes with trivial inflation and coefficient ring maps",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "SheafOfModules.restrictScalars_obj_val",
+     "PresheafOfModules.restrictScalarsCompToPresheaf",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.restrictScalars_map_val",
+     "SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+     "ModuleCat.preservesLimit_restrictScalars"
+    ],
+    "subdirectory": "",
+    "digest": "3a4a9f602f8d106b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of internal group actions preserves finite limits and trivial action",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "Action.Functor.mapActionPreservesLimit_of_preserves",
+     "Action.instPreservesFiniteLimitsForgetOfHasFiniteLimits",
+     "Action.preservesLimitsOfSize_of_preserves",
+     "Action.instHasFiniteLimits",
+     "Action.Functor.instPreservesFiniteLimitsMapActionOfHasFiniteLimits",
+     "Action.preservesLimit_of_preserves",
+     "Action.instPreservesLimitForgetOfHasLimitComp",
+     "AddAction.instAddAction"
+    ],
+    "subdirectory": "",
+    "digest": "e522c911a8631c0a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "grep",
+   "query": "resId|resComp|PreservesFiniteLimits|trivial",
+   "results": {
+    "note": "",
+    "hits": 20,
+    "top": [
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Continuous.lean",
+     "Mathlib/CategoryTheory/Action/Continuous.lean",
+     "Mathlib/CategoryTheory/Action/Continuous.lean"
+    ],
+    "subdirectory": "CategoryTheory/Action",
+    "digest": "97ad365b6213365b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "Action, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": {
+    "note": "",
+    "hits": 4,
+    "top": [
+     "Action.instPreservesFiniteLimitsForgetOfHasFiniteLimits",
+     "Action.Functor.instPreservesFiniteLimitsMapActionOfHasFiniteLimits",
+     "CategoryTheory.FintypeCat.instPreservesFiniteLimitsActionFintypeCatForgetHomSubtypeFunObjFiniteV",
+     "FDRep.instPreservesFiniteLimitsRepForget₂HomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGVIntertwiningMapVρOfIsNoetherianRing"
+    ],
+    "subdirectory": "",
+    "digest": "02c8a2a9c53012d7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite limits of sheaves carrying a group object action are computed in underlying sheaves and restriction commutes with coefficient change",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+     "SheafOfModules.Finite.hasFiniteLimits",
+     "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+     "PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf",
+     "SheafOfModules.createsLimit",
+     "SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+     "SheafOfModules.hasLimit",
+     "PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf"
+    ],
+    "subdirectory": "",
+    "digest": "c861e1454a3e7a37"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Action finite-limit and resComp hits concern an external monoid; scalar restriction hits concern a map of ring sheaves, not internal group restriction with its geometric and coefficient squares"
+  },
+  {
+   "tool": "grep",
+   "query": "resId|resComp|PreservesFiniteLimits|trivial",
+   "results": {
+    "note": "",
+    "hits": 20,
+    "top": [
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Monoidal.lean",
+     "Mathlib/CategoryTheory/Action/Continuous.lean",
+     "Mathlib/CategoryTheory/Action/Continuous.lean",
+     "Mathlib/CategoryTheory/Action/Continuous.lean"
+    ],
+    "subdirectory": "CategoryTheory/Action",
+    "digest": "e7bd3b2d5754b9f9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: external monoid actions and limits of module sheaves do not state restriction for arbitrary internal group sheaves with coherent ringed and scalar squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of internal group sheaf actions preserves finite limits and defines coherent geometric morphisms",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "Action.instHasFiniteLimits",
+     "CategoryTheory.preservesFiniteLimits_presheafToSheaf",
+     "CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits",
+     "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+     "Action.instPreservesFiniteLimitsForgetOfHasFiniteLimits",
+     "CategoryTheory.Sheaf.ΓRes",
+     "CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification",
+     "SheafOfModules.Finite.hasFiniteLimits"
+    ],
+    "subdirectory": "",
+    "digest": "279f0ffb269b0e84"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: external monoid actions and limits of module sheaves do not state restriction for arbitrary internal group sheaves with coherent ringed and scalar squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "Action, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": {
+    "note": "",
+    "hits": 4,
+    "top": [
+     "Action.instPreservesFiniteLimitsForgetOfHasFiniteLimits",
+     "Action.Functor.instPreservesFiniteLimitsMapActionOfHasFiniteLimits",
+     "CategoryTheory.FintypeCat.instPreservesFiniteLimitsActionFintypeCatForgetHomSubtypeFunObjFiniteV",
+     "FDRep.instPreservesFiniteLimitsRepForget₂HomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGVIntertwiningMapVρOfIsNoetherianRing"
+    ],
+    "subdirectory": "",
+    "digest": "02c8a2a9c53012d7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: external monoid actions and limits of module sheaves do not state restriction for arbitrary internal group sheaves with coherent ringed and scalar squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a morphism of internal group sheaves preserves finite limits and commutes with trivial actions and scalar extension",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+     "SheafOfModules.Finite.forgetPreservesFiniteLimits",
+     "SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+     "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+     "PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.restrictScalars_map_val"
+    ],
+    "subdirectory": "",
+    "digest": "5f53ed5d4b49ddf5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: external monoid actions and limits of module sheaves do not state restriction for arbitrary internal group sheaves with coherent ringed and scalar squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of sets with an action of a group object: finite limits created by forgetting the action, invariants adjoint to trivial action, coherence of scalar change squares",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "SheafOfModules.Finite.forgetPreservesFiniteLimits",
+     "SheafOfModules.createsLimit",
+     "SheafOfModules.Finite.hasFiniteLimits",
+     "SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf",
+     "SheafOfModules.hasLimit",
+     "PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf",
+     "SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+     "instHasFiniteLimitsLightCondMod"
+    ],
+    "subdirectory": "",
+    "digest": "fe8addcfa85fe079"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: external monoid actions and limits of module sheaves do not state restriction for arbitrary internal group sheaves with coherent ringed and scalar squares"
+  },
+  {
+   "tool": "grep",
+   "query": "internal.*[Aa]ction|[Aa]ction.*internal|GroupObject|group object",
+   "results": {
+    "note": "",
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Preadditive/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Preadditive/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Preadditive/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Preadditive/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+     "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean"
+    ],
+    "subdirectory": "CategoryTheory",
+    "digest": "4f80f8fee31f238b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: external monoid actions and limits of module sheaves do not state restriction for arbitrary internal group sheaves with coherent ringed and scalar squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-action-topos-geometric-restriction",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), dense-lattice restriction input: geometric realization of restriction of internal group actions, before taking derived invariants. Separate argument: Finite limits and coherent base and coefficient comparisons for internal restriction; extracted from the parent proof steps 3, 7, 11.",
+   "via": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-restriction-geometric-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and expanded the tuple-limit construction, restriction identities, fixed-subsheaf gluing and adjunction, conditional geometric comparisons, conjugation coherence, and coefficient-square tensor normalization. Reused existing action-site, adjunction and tensor nodes; no new nodes or Lean. The geometric and coefficient coherence is checked on the specified maps rather than inferred merely from existence of isomorphisms.",
+  "blueprint": "Current main-20261015 direct-images proof, paragraph (3), categorical infrastructure for dense-lattice restriction. The node has no imported blueprint ancestor; its recorded null ancestor and via chain are retained. Steps 1–3 realize parent step 3; steps 4–8 realize parent step 7; steps 9–10 realize parent step 11.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor-formula pullback for ringed topoi, needed to identify coefficient extension in step 10; the unit does not replace this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-70fd9c257",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-70fd9c257 (reviewer sub-agent of L); spot-checked: This is a one-commit, one-level split. It adds no new nodes and leaves the statement and stmt_deps unchanged from the Q21 re-split that created this node; the item has no repair note of its own. The item takes over former parent steps 3, 7 and 11. I compared it with the original arguments in Q21's report: nothing was dropped or shortened. Steps 1-3 carry old step 3 (tuple limit sheaf, finite-limit creation, preservation by Res_theta and I_K). Steps 4, 7 and 8 carry old step 7 (E^1=E, the literal Res identities, conditional geometric morphisms, conjugation coherence). Steps 9 and 10 carry old step 11 (phi-squares in direction (E,R')->(E,R) with both structural composites phi_U; pure-tensor comparison via lem-sfb-internal-restriction-module-tensor and the sheafification factorization). The fixed-subsheaf adjoint is now proved directly in steps 5-6. I re-did the gluing on V x_U U_i using cover axiom (iii) and separatedness, and checked that it agrees with coinduction along K->1. I read every cited statement in full and each one says what its step takes from it. Minor points accepted: step 7 applies the ringed-topos definition through the equivalence E^K ~ Sh(C_K), and step 8 gets whiskering coherence from hom-bijection uniqueness rather than from a clause of the conjugate node. proof_deps equals the union of the step uses. There is no cycle and no SGA citation. An rg -L duplicate search found no duplicate: sheaf-product-fixed-adjunction is module-valued and internal-abelian-finite-limit-creation is about abelian group objects. Edge cases tested: empty diagram and empty cover, K=1, theta=id, theta: K->1, nonconstant K, zero R', non-flat phi. I accept the declared tool use of lem-weil-pbc-ringed-topoi-module-adjunction. Advisory: the recorded Loogle query failed and is labelled no match; the LeanFinder query covers that search kind."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalRestrictionGeometricCoherence",
+  "declaration": "CategoryTheory.InternalActionSite.internalRestriction_finiteLimits",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.restrictionGroupMap_isMonHom",
+   "CategoryTheory.InternalActionSite.restrictSetActions",
+   "CategoryTheory.InternalActionSite.trivialSetActions_map",
+   "CategoryTheory.InternalActionSite.trivialSetActions",
+   "CategoryTheory.InternalActionSite.internalRestriction_finiteLimits",
+   "CategoryTheory.InternalActionSite.internalRestriction_identities",
+   "CategoryTheory.InternalActionSite.internalRestriction_fixedAdjoint",
+   "CategoryTheory.InternalActionSite.internalRestriction_terminal",
+   "CategoryTheory.InternalActionSite.internalRestriction_presentedIdentities",
+   "CategoryTheory.InternalActionSite.RestrictionRingedRealization",
+   "CategoryTheory.InternalActionSite.internalRestriction_ringed",
+   "CategoryTheory.InternalActionSite.internalRestriction_baseCoherence",
+   "CategoryTheory.InternalActionSite.internalRestriction_comparisonCoherence",
+   "CategoryTheory.InternalActionSite.internalRestriction_coefficients",
+   "CategoryTheory.InternalActionSite.RestrictionScalarSquare",
+   "CategoryTheory.InternalActionSite.internalRestriction_scalarSquares"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalRestrictionGeometricCoherence.lean",
+  "statement": "theorem internalRestriction_finiteLimits (θ : L ⟶ K) : (∀ (D : Type) [SmallCategory D] [FinCategory D], Nonempty (CreatesLimitsOfShape D (Mod.forget (groupSheaf J K hK) : SetActions J K hK ⥤ Sheaf J.toGrothendieck (Type u)))) ∧ PreservesFiniteLimits (restrictSetActions J hK hL θ) ∧ PreservesFiniteLimits (trivialSetActions J hK)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations collectively state all clauses: internal-action finite limits and literal identities, terminal actions, the section-characterized fixed right adjoint, conditional ringed realizations, normalized mate coherence, coefficient squares and scalar-extension pure-tensor comparisons. Existing parent-module construction declarations are reused, never its geometricRestriction theorem. The two existing:true definition nodes own the reused action/precomposition vocabulary and scalarExtensionConstraintTmul helper; def-sfb-internal-action-site-basic owns the labeled site, projection and coefficients. No theorem-owner statement dependency is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14dfd2aff",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of returned 364e2fec (H2/H12). Lean byte-identical (cmp) to the head whose clause matching was accepted; re-read finite limits, identities (ψ≫θ), fixed adjoint (all U⟶V in Cᵒᵖ, all k∈K(V), counit=inclusion), terminal equivalence, presented identities: correct, all sorry, real data. Item change is only stmt_deps: theorem lem-pd-sheaf-scalar-extension-constraint-coherence → def-sfb-scalar-extension-constraint-data + def-sfb-internal-set-actions + def-sfb-internal-action-site-basic; lean.statement verbatim. New existing:true nodes: all 16 resp. 3 declarations exist in side-live; statements verbatim (abbrev SetActions / abbrev ScalarExtensionConstraintModules); TeX matches code (Mod over sectionwise group monoid, label change, precomposition lift, restriction/inflation, ModulePullback/PrecompositionPullback/CoefficientChange fields; sheafification-unit pure tensors, independent universes); stmt_deps all present def nodes, no cycle via parent theorem. No compile (no file changed); worker scompile clean. MAINTAINER NOTE: Q112 d1e299fa (S2 PASS, unlanded) creates the same id def-sfb-internal-set-actions (8 decls, action category only). This node is the near-superset (adds restriction/inflation/precomposition/CoefficientChange; omits only the Prop law lemmas groupOperations_naturality/groupMonoid_laws) → land this first and rebind Q112; if Q112 lands first, Q145 must rebase and extend. Advisory: could also list the law lemmas incl. restrictionSite_laws."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T081847-L-2091769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,8 +9,9 @@ public import Sheaf.AlgebraicGeometry.GroupoidScheme
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.AffineGroupoidCoordinateIdentities
+import Sheaf.RingTheory.TwistedTensorInvariantCoefficients
+import Sheaf.RingTheory.InvariantCoefficientsReconstruction
 
 /-!
 # Descent of a basis along an affine groupoid
@@ -71,6 +72,19 @@ theorem affineGroupoid_basis_descent (A B : CommRingCat.{u})
       ∀ j : Fin r, b j = x j) ∧
     ∃ f : (A ⊗[RingHom.eqLocus (Spec.preimage s).hom (Spec.preimage t).hom] A) ≃+* B,
       ∀ a a₂ : A, f (a ⊗ₜ a₂) = (Spec.preimage s).hom a * (Spec.preimage t).hom a₂ := by
-  sorry
+  obtain ⟨hεσ, hετ, _, _, _, F, _, _, _, hΔσ, hΔτ⟩ :=
+    affineGroupoid_coordinate_identities A B s t e i c _hG
+  have hinv := (RingHom.twistedTensor_invariant_coefficients
+    (Spec.preimage s).hom (Spec.preimage t).hom
+    (Spec.preimage (F.inv ≫ c)).hom hΔσ hΔτ r _hr x _hbasis).2
+  have hexp : ∀ b : B, ∃! a : Fin r → A,
+      ∑ j, (Spec.preimage s).hom (a j) * (Spec.preimage t).hom (x j) = b := by
+    intro b
+    obtain ⟨a, ha, huniq⟩ := _hbasis b
+    exact ⟨a, ha.symm, fun a' ha' ↦ huniq a' ha'.symm⟩
+  obtain ⟨b, hb, f, hf, _⟩ := RingHom.invariantCoefficients_reconstruction
+    (Spec.preimage s).hom (Spec.preimage t).hom (Spec.preimage e).hom
+    hεσ hετ r _hr x hexp (fun a d hd j ↦ hinv a d hd.symm j)
+  exact ⟨⟨b, hb⟩, ⟨f, hf⟩⟩
 
 end AlgebraicGeometry

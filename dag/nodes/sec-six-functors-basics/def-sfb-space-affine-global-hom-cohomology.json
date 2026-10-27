@@ -1,0 +1,155 @@
+{
+ "id": "def-sfb-space-affine-global-hom-cohomology",
+ "kind": "definition",
+ "title": "Normalized all-degree cohomology of global internal Hom",
+ "status": "split",
+ "statement": "Use the scalar derived sections and compositors of [def-sfb-space-affine-global-sections] and [def-sfb-space-affine-sections-compositors], and retain their data S,A,Y≅Spec A,X,f. Use the fixed internal Hom and ambient unbounded derived category of [def-sfb-space-derived-module-calculus], the sheaf Hom complex [def-pur-hom-complex], independent-coefficient K-flatness [def-pc-kflat-complex], and the fixed K-injective replacement and localized Hom comparisons [def-coef-hom-representative-evaluation]. For cochain complexes P,I define the complex Γ_{X,A}Hom(P,I). After forgetting A-scalars, its canonical comparison with the ordinary morphism Hom complex is the unique chain isomorphism whose (n,p,q)-component, p+n=q, sends a section s to the module map corresponding to its projection s→Hom(P^p,I^q) under Hom(O,Hom(P^p,I^q))=Hom(P^p,I^q). Define the induced additive cohomology comparison using the localization homology-factor isomorphism and the exact forgetful functor's homology comparison. The fixed resolution I(M) is K-injective; Hom(P,I(M)) is K-injective when P is K-flat; the derived-sections complex unit is invertible on all K-injectives. Therefore the localized internal-Hom comparison and that inverse unit identify G_X RHom(QP,QM) with QΓ_{X,A}Hom(P,I(M)). The ordinary Hom-complex cohomology equivalence is the standard map through cocycle classes, shifted homotopy maps, the fully faithful localization into a K-injective target, and the canonical shift comparison. Define c_{L,M,n}:H^n G_X RHom(L,M)≃+Hom_D(L,M\\lbrack n\\rbrack) to be the unique family natural contravariantly in L and covariantly in M that, for every K-flat P and every M, is the above representative comparison followed by that standard Hom-complex cohomology equivalence and the shifted inverse of QM→QI(M). This normalization specifies the maps in all integer degrees and for every ambient derived object; it imposes no quasi-coherence or boundedness condition. On D(A), define the canonical map H^n RHom_A(K,M)→Hom_{D(A)}(K,M\\lbrack n\\rbrack) by: a cohomology element determines a map A in degree n to RHom_A(K,M) using projectivity of A and evaluation at 1; identify A in degree n with the tensor unit shifted by -n; tensor this map with K, evaluate using the canonical symmetry and internal-Hom evaluation, and transport from K\\lbrack -n\\rbrack→M to K→M\\lbrack n\\rbrack by the shift equivalence. This gives the normalized ordinary-module identification used in the affine trace statement.",
+ "stmt_deps": [
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-derived-module-calculus",
+  "def-pur-hom-complex",
+  "def-pc-kflat-complex",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/spaces-perfect.tex; literature/stacks-project/spaces-duality.tex",
+  "place": "Tags 03EL, 0B6C, 07A4, 08JA and 0A8Z; spaces-perfect Tag 071Q; global trace comparison preceding Tag 0E58"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar-valued derived global sections of module sheaves with canonical cup product, composition with direct image, and cohomology of global internal Hom",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \": (SheafedSpace C)ᵒᵖ ⥤ C\", \"doc\": \"The functor $\\\\Gamma$ that maps each sheafed space over a category $\\\\mathcal{C}$ to its global sections (the value of its sheaf at the terminal object) in $\\\\mathcal{C}$, constructed as the composition \"}\n  {\"name\": \"SheafOfModules.sectionsFunctor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ Type _\", \"doc\": \"The functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of types, which maps each sheaf of modules to its global sections (families of elements satisfying compa\"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M N : X.Modules) : Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"SheafOfModules.sectionsFunctor_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) (M : SheafOfModules R), (SheafOfModules.sectionsFunctor R).obj M = M.sections\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections functor from the category of sheaves of modules over $R$ to the category of types \"}\n  {\"name\": \"ModuleCat.Tilde.smul_section_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(r : R) (U : Opens (PrimeSpectrum.Top R)) (s : (tildeInModuleCat M).obj (op U)) (x : U) : (r • s).1 x = r • (s.1 x)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and its associated sheaf $ \\\\widetilde{M} $ over $ \\\\operatorname{Spec}(R) $, scalar multiplication by an element $ r \\\\in R $ acts on sections of $ \\\\\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_apply_coe\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules R) (f : unit R ⟶ M) (X : Cᵒᵖ) : (M.unitHomEquiv f).val X = f.val.app X (1 : R.val.obj X)\", \"doc\": \"For any sheaf of modules $ M $ over a sheaf of rings $ R $ and any natural transformation $ f : \\\\text{unit}(R) \\\\to M $, the component of the canonical equivalence $ \\\\text{Hom}(\\\\text{unit}(R), M) \\\\cong\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules R) : (unit R ⟶ M) ≃ M.sections\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and a sheaf of modules $ M $ over $ R $, there is a canonical equivalence between the set of natural transform\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match. Ordinary sections and pullback adjunctions are reused; no declaration gives these scalar-valued unbounded constructions with their specified normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived global sections cup product as the adjoint of tensor of counits for scalar pullback, cohomology of global internal Hom and compatibility with pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match. Ordinary sections and pullback adjunctions are reused; no declaration gives these scalar-valued unbounded constructions with their specified normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Gg]lobal|[Gg]lobal.*[Cc]up|[Gg]lobal.*[Hh]om",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/StructureGroupoid.lean\", \"line\": \"76\", \"text\": \"definition a global map which is a homeomorphism when restricted to its source subset (and its\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean\", \"line\": \"55\", \"text\": \"Here we ask for a map sending a global section `σ` of `V` to a global section `∇ σ` of `Hom(TM, V)`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"498\", \"text\": \"      (Scheme.isoOfEq _ (fromOfGlobalSections_preimage_basicOpen _ _ _ hn hr)).hom ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"520\", \"text\": \"  simp only [fromOfGlobalSections, toBasicOpenOfGlobalSections, CommRingCat.ofHom_comp,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"line\": \"234\", \"text\": \"/-- For sheaves of types, the global sections functor is isomorphic to the covariant hom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"966\", \"text\": \"theorem globalSectionsIso_hom (R : CommRingCat) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"967\", \"text\": \"    (globalSectionsIso R).hom = CommRingCat.ofHom (algebraMap _ _) :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match. Ordinary sections and pullback adjunctions are reused; no declaration gives these scalar-valued unbounded constructions with their specified normalization."
+  },
+  {
+   "tool": "rg",
+   "query": "rg -n 'affineDerivedSections|affineDerivedCup|affineGlobalHomCohomology|moduleDerivedHomClass' lean/WeilConjectures lean/Sheaf",
+   "results": "Only affine-scheme derived-sections truncation/homology lemmas (AffineDerivedSectionsTruncationIso, AffineDerivedSectionsTruncatedBottom, AffineDerivedSectionsHomologyComparison and their consumers). No algebraic-space scalar cup, compositor, or normalized all-degree map. The general DerivedInternalHomSectionsModel is reused for the Hom representative infrastructure; its externalDerivedEquiv and global cochain implementation are private.",
+   "date": "2026-10-23",
+   "verdict": "No existing scalar-valued construction with these normalizations."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "scalar sections",
+   "results": "20 nodes, including supported cup products, six-functor pairings, coefficient descent and comparison nodes; none defines scalar-valued global sections on the small affine etale model with these comparisons.",
+   "date": "2026-10-23",
+   "verdict": "No duplicate DAG definition."
+  },
+  {
+   "tool": "grep",
+   "query": "exact new definition ids in dag/nodes; lem-sfb-space-affine-global-trace-adjunction in lean/WeilConjectures",
+   "results": "No exact new definition ids and no occurrence of the item id in upstream Lean source.",
+   "date": "2026-10-23",
+   "verdict": "No duplicate."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-global-trace-adjunction",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Derived global form of the sheafy trace comparison in the first and third paragraphs of Tag 0E5V; includes evaluation normalization. Canonical construction needed to state the evaluation and all-degree normalization.",
+   "via": [
+    "lem-sfb-space-affine-global-trace-adjunction",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineGlobalHomCohomology",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affineGlobalHomCohomology",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineHomSectionsComplex",
+   "AlgebraicGeometry.AlgebraicSpace.AffineHomSectionsComplexNormalization",
+   "AlgebraicGeometry.AlgebraicSpace.affineHomSectionsComplex_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.affineHomSectionsComplexIso",
+   "AlgebraicGeometry.AlgebraicSpace.affineHomSectionsCohomology",
+   "AlgebraicGeometry.AlgebraicSpace.affineHomResolution_isKInjective",
+   "AlgebraicGeometry.AlgebraicSpace.affineExternalDerivedEquiv",
+   "AlgebraicGeometry.AlgebraicSpace.affineSectionsComplexUnit_isIso",
+   "AlgebraicGeometry.AlgebraicSpace.affineHomRepresentativeComparison",
+   "AlgebraicGeometry.AlgebraicSpace.affineCoefficientHomResolution_isKInjective",
+   "AlgebraicGeometry.AlgebraicSpace.AffineGlobalHomCohomologyNormalization",
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalHomCohomology_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalHomCohomology",
+   "AlgebraicGeometry.AlgebraicSpace.moduleCohomologyClass",
+   "AlgebraicGeometry.AlgebraicSpace.moduleShiftedUnitIso",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDerivedHomClass"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineGlobalHomCohomology.lean",
+  "statement": "def affineGlobalHomCohomology",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-124c4b2ff",
+  "group": "Q74",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-124c4b2ff",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Clause-by-clause check of affineGlobalTraceAdjunction against the node and Stacks 0E58/0GG4/0E59/071Q: A is any commutative ring, Y presented by e : Y.left ≅ Spec A, f qcqs via MapIsQuasiCompact on f and its diagonal, supplied a ⊣ F.functor through QCohDirectImagePresentation, unrestricted H_X, target ordinaryModuleDerivedInternalHom. The natural iso's pairing conjunct (cup ≫ G(ev) ≫ t through braiding and ihom.ev) determines τ uniquely; the degree-n conjunct for all n is u ↦ G_Y(ε[n]∘Rf_*u) followed by the affine iso. The three new def nodes (affine global sections, sections compositors, global Hom cohomology) are real or ∃!-normalized constructions with sorry-only theorems and source/blueprint docstrings. lean.statement fields verbatim, declarations present, added stmt_deps are definitions, no name clashes in side-live, live item unchanged. Edge cases A=0, X empty, n in ℤ, L or W zero, f=id: fine. Advisory only: keep the HomComplex/ev sign conventions in stage 3; overlap with Q103 def-sfb-affine-scalar-projection-data (different, non-reusable interface over Spec A); generic infrastructure owners (def-trf-space-etale-module-functors, def-pur-sheaf-hom, etc.) not in the new nodes' stmt_deps; two proof-only plain imports. No compile rerun: no files changed."
+ }
+}

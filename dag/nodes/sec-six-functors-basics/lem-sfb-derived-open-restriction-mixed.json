@@ -1,0 +1,191 @@
+{
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "The composition isomorphism, equality Rq_*Rr_* = R(qr)_*; Canonicity and associativity, restriction normalization of all comparison maps. Extracted from returned Step 2."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-affine-space-rational",
+ "id": "lem-sfb-derived-open-restriction-mixed",
+ "kind": "statement",
+ "title": "Canonical derived open restriction and direct-image composition",
+ "statement": "Canonical derived open restriction and direct-image composition. For every commutative condensed coefficient ring Λ and schemes and maps as in the following Lean statement, {X Y Z X' Y' Z' : Scheme.{u}}\n    {f : X ⟶ Y} {g : Y ⟶ Z} {f' : X' ⟶ Y'} {g' : Y' ⟶ Z'}\n    {i : X' ⟶ X} {j : Y' ⟶ Y} {a : Z' ⟶ Z}\n    [IsOpenImmersion i] [IsOpenImmersion j] [IsOpenImmersion a]\n    (sqf : IsPullback i f' f j) (sqg : IsPullback j g' g a) :\n    DirectImageRestrictionComposition Λ sqf.toCommSq sqg.toCommSq. The canonical maps and predicates are those of [def-sfb-derived-direct-image-open-coherence-data].",
+ "stmt_deps": [
+  "def-sfb-derived-direct-image-open-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified upperStarComp and upperStarLowerStarAdjunction of [sk-def-sfb-module-pushforward-pullback]. Allow a named composite by preceding the pullback compositor with equality transport. The source upperStarComp_hom_app_comp_upperStarComp_hom_app proves associativity for these flexible compositors. Lift it through exact derivation using mapDerivedCategoryNatIso_trans, the two whiskering laws, and mapDerivedCategoryCompIso_assoc. These calculations are proved private helpers in the item module.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define exactSquare as the inverse source pullback compositor followed by the target compositor. Apply the exact associativity equation to the triples (i,f,g), (f′,j,g), and (f′,g′,a), with common composite i(fg). Cancel the intermediate isomorphisms to obtain the vertical square-pasting equation. Preservation of composition, inversion and equality transport identifies exactSquare with the inverse of the specified derivedOpenCoherencePullbackSquare of [def-sfb-derived-direct-image-open-coherence-data]. Invert the component equation by composing with the appropriate invertible source and target maps; this gives equality of the conjugate-whiskered TwoSquares.",
+   "uses": [
+    "def-sfb-derived-direct-image-open-coherence-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the conjugate of the inverse exact-derived compositor with directImageComposition of [def-sfb-derived-direct-image-open-coherence-data]. Apply the existing proved source theorem Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv (CompConjugate.lean) to the specified upperStar/lowerStar adjunctions and upperStarComp. Its ordinary conjugate hypothesis is exactly conjugateIsoEquiv_upperStarComp. Equality of isomorphism homs and then inverses gives the needed normalization; rightDerivedFunctorCompIso' unfolds to the inverse of directImageComposition. No additional resolution comparison is postulated.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-derived-direct-image-open-coherence-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply mateEquiv to the equality of TwoSquares using the direct derived adjunction for fg and the composite derived adjunction for g′ then f′. The conjugate-whiskering identities and mateEquiv_hcomp of [lem-weil-pbc-mate-pasting] turn its two sides into the two routes of the claimed mixed direct-image/restriction diagram. Replace the two conjugates by directImageComposition using the preceding normalization, and identify the square mates with the actual derivedDirectImageOpenRestriction. Evaluation at K removes identity associator components and proves DirectImageRestrictionComposition. Only commutativity of the given pullback squares is used.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-sfb-derived-direct-image-open-coherence-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-derived-direct-image-open-coherence-data",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "Composition isomorphism and Canonicity and associativity; formal pullback compositor and mate calculation using the existing source CompConjugate theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For successive morphisms of ringed pro etale topoi derived direct image composition is associative and compatible with restriction to open subtopoi",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: underived module pushforward/restriction and generic derived-functor comparisons do not state this normalized unbounded pro-etale restriction/composition compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of sheaves of modules commutes with restriction to an open subset, with composition coherent under further open restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: underived module pushforward/restriction and generic derived-functor comparisons do not state this normalized unbounded pro-etale restriction/composition compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "12 hits: CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc, CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: underived module pushforward/restriction and generic derived-functor comparisons do not state this normalized unbounded pro-etale restriction/composition compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedComp|rightDerived.*[Cc]omp|[Cc]omp.*rightDerived",
+   "results": "17 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: underived module pushforward/restriction and generic derived-functor comparisons do not state this normalized unbounded pro-etale restriction/composition compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Rr]estrict|[Rr]estrict.*pushforward|pushforwardComp",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: underived module pushforward/restriction and generic derived-functor comparisons do not state this normalized unbounded pro-etale restriction/composition compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward_assoc",
+   "results": "1 hits: SheafOfModules.pushforward_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: underived module pushforward/restriction and generic derived-functor comparisons do not state this normalized unbounded pro-etale restriction/composition compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward composition associative open restriction sheaves modules",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforward_assoc|rightDerivedNatTrans_comp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: read underived pushforwardComp/pushforward_assoc and generic rightDerivedNatTrans_comp; these do not state the unbounded pro-etale module restriction comparison and both normalized coherence equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward composition associativity and open restriction for sheaves of modules",
+   "results": "8 hits: SheafOfModules.pushforward_assoc, SheafOfModules.comp_val_assoc, PresheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforward, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforward",
+   "date": "2026-10-17",
+   "verdict": "no match: read underived pushforwardComp/pushforward_assoc and generic rightDerivedNatTrans_comp; these do not state the unbounded pro-etale module restriction comparison and both normalized coherence equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "12 hits: CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc, CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: read underived pushforwardComp/pushforward_assoc and generic rightDerivedNatTrans_comp; these do not state the unbounded pro-etale module restriction comparison and both normalized coherence equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of sheaves of modules composition is associative and commutes with open restriction on unbounded derived categories",
+   "results": "8 hits: SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp_hom_app_val_app, PresheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-17",
+   "verdict": "no match: read underived pushforwardComp/pushforward_assoc and generic rightDerivedNatTrans_comp; these do not state the unbounded pro-etale module restriction comparison and both normalized coherence equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of composition comparison for right derived pushforward and restriction to open subtopoi",
+   "results": "8 hits: TopCat.Presheaf.Pushforward.comp_inv_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: read underived pushforwardComp/pushforward_assoc and generic rightDerivedNatTrans_comp; these do not state the unbounded pro-etale module restriction comparison and both normalized coherence equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedDirectImageOpenCoherence",
+  "date": "2026-10-25",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-affine-space-rational-induction",
+   "place": "Composition isomorphism and canonicity; separate argument extracted from derived direct-image coherence",
+   "via": [
+    "lem-sfb-derived-direct-image-open-coherence"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedOpenRestrictionMixed",
+  "file": "lean/Sheaf/Paper/DerivedOpenRestrictionMixed.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenRestrictionMixed",
+  "statement": "theorem derivedOpenRestrictionMixed\n    {X Y Z X' Y' Z' : Scheme.{u}}\n    {f : X ⟶ Y} {g : Y ⟶ Z} {f' : X' ⟶ Y'} {g' : Y' ⟶ Z'}\n    {i : X' ⟶ X} {j : Y' ⟶ Y} {a : Z' ⟶ Z}\n    [IsOpenImmersion i] [IsOpenImmersion j] [IsOpenImmersion a]\n    (sqf : IsPullback i f' f j) (sqg : IsPullback j g' g a) :\n    DirectImageRestrictionComposition Λ sqf.toCommSq sqg.toCommSq",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d4c3a",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T162521-L-467981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T202800-L-3483011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

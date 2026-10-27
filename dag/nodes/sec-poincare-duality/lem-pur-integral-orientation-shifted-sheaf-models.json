@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-integral-orientation-shifted-sheaf-models",
+ "kind": "statement",
+ "title": "Integral orientation source and exceptional unit have shifted sheaf tower models",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ embedded in an algebraic closure, and an algebraically closed field $k$ of characteristic $p\\ne\\ell$ [def-pur-conventions]. Let $X,Y$ be separated finite-type $k$-schemes and let $f=\\bar f\\circ j:X\\to Y$ be smooth of pure relative dimension $d\\ge0$, with $j$ open and $\\bar f$ proper [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms, def-weil-compactifications-refinements]. Fix the actual strict coefficient tower categories [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian], simultaneous reduction, normalized equivalences and a realized integral/tower adjunction package R [det-sp-integral-adjunction-bijection]. Write $r_X,r_Y$ for its simultaneous reductions and $G$ for its tower right adjoint. Let $T\\in D^b_{ctf}(X,\\mathcal O_E)$ and $U\\in D^b_{ctf}(Y,\\mathcal O_E)$ be representatives with specified isomorphisms $T\\simeq\\mathbf1_X(d)[2d]$ and $U\\simeq\\mathbf1_Y$, using the completed coefficients and integral Tate line [def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed, def-coefficient-twists-detailed]. Then there exist objects $L,W$ of the abelian category of strict coefficient tower sheaves on X with isomorphisms $r_X(T)\\simeq L[0][2d]$ and $G(r_Y(U))\\simeq W[0][2d]$ in its ordinary derived category. Here $L[0]$ and $W[0]$ mean the degree-zero single embeddings [lem-weil-pbc-derived-single-fully-faithful]. There is no statement about maps or injectivity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (1), shifted rank-one tower sheaves; source comparison from integral-adjunction-bijection Purity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed",
+  "def-weil-compactifications-refinements",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-unique-right-adjoint",
+  "det-sp-tower-gamma",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof": [
+  {
+   "text": "Apply the entire-system comparison of [lem-sp-twisted-pullback-reduction-tower] to the integral coefficient unit, twist d and shift 2d. Pullback of the coefficient unit is the unit; use the tensor unitor and the given identification of T with the shifted integral Tate line. Signed-line scalar/tensor comparison identifies the ordered tensor presentation with the single Tate sheaf tower. The comparison retains every quotient transition, so this yields a sheaf tower L and an isomorphism r_X(T) ≅ L[2d].",
+   "uses": [
+    "lem-sp-twisted-pullback-reduction-tower",
+    "def-coefficient-twists-detailed",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The diagonal entire-tower orientation of [det-sp-tower-gamma](1) identifies the shifted Tate sheaf tower with the exceptional tower image of the coefficient tower. Apply reduction to the given identification of U with the integral coefficient unit. The unit reduction comparison identifies r_Y(U) with that coefficient tower. Functoriality of G transports this identification to G(r_Y(U)), giving its shifted sheaf presentation (take W=L). No map between T and this target enters either construction.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "lem-sp-twisted-pullback-reduction-tower",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-twisted-pullback-reduction-tower",
+  "def-coefficient-twists-detailed",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (1), shifted rank-one tower sheaves; source comparison from integral-adjunction-bijection Purity paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The simultaneous derived reduction of an integral Tate line and the smooth exceptional image of the coefficient unit are shifted degree zero sheaf towers",
+   "results": "BDeRhamPlus; BDeRham; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-26",
+   "verdict": "No match; none supplies the entire coefficient-tower shifted sheaf models."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, CategoryTheory.Functor.Faithful",
+   "results": "DerivedCategory.instFaithfulSingleFunctor",
+   "date": "2026-10-26",
+   "verdict": "The generic fully faithful single embedding is available; it does not identify these geometric objects."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*[Ff]aithful|strictRingSystem_hom_ext",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean:93; Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean:14,37,45",
+   "date": "2026-10-26",
+   "verdict": "Generic faithfulness only, no integral smooth orientation shifted-sheaf presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous reduction of an integral Tate line is a shifted sheaf tower and smooth exceptional inverse image of the unit has the same shift",
+   "results": "CategoryTheory.Triangulated.TStructure.le_shift; CategoryTheory.shiftShiftNeg; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; DerivedCategory.instLinearShiftFunctorInt; CategoryTheory.Equivalence.commShiftInverse; CategoryTheory.DifferentialObject.shiftFunctorAdd_inv_app_f; CategoryTheory.Equivalence.IsTriangulated.symm; DerivedCategory.instHasShiftInt",
+   "date": "2026-10-26",
+   "verdict": "Pullback preserves the unit and generic shifts are available, but the geometric entire-tower models require the cited project comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrientationReductionInjectivity",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 3: integral tower comparison, source and target shifted Tate sheaf presentations before rank-one uniqueness",
+   "via": [
+    "lem-pur-integral-orientation-reduction-injectivity",
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrientationShiftedSheafModels",
+  "file": "lean/Sheaf/Paper/IntegralOrientationShiftedSheafModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpIntegralOrientation.shifted_sheaf_models",
+  "statement": "theorem shifted_sheaf_models\n    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (_iE : E →ₐ[Padic l] Ω)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [(j ≫ p).IsOver (Spec (.of D.k))] [SmoothOfRelativeDimension d (j ≫ p)]\n    (T : sfIntegralConstructibleCategory l E X)\n    (U : sfIntegralConstructibleCategory l E Y)\n    (_hT : T.obj ≅ ((DerivedCategory.singleFunctor _ 0).obj\n      (integralTwistLine l E X (d : ℤ)))⟦2 * (d : ℤ)⟧)\n    (_hU : U.obj ≅ (DerivedCategory.singleFunctor _ 0).obj\n      (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))) :\n    ∃ L W : spCoefficientTowers l E X,\n      Nonempty\n        (((SpIntegralAdjunction.reduce l E X (q.abelian X) RX R.reductionX).obj T).obj ≅\n          ((@DerivedCategory.singleFunctor _ _ _ (q.abelian X).hasDerived 0).obj\n            L)⟦2 * (d : ℤ)⟧) ∧\n      Nonempty\n        ((G.obj ((SpIntegralAdjunction.reduce l E Y (q.abelian Y) RY\n          R.reductionY).obj U)).obj ≅\n          ((@DerivedCategory.singleFunctor _ _ _ (q.abelian X).hasDerived 0).obj\n            W)⟦2 * (d : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e25d3",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261025T203347-L-2808092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e25d3",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261025T203347-L-2808092",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new shifted_sheaf_models lemma/node against tower_gamma Purity.orientation (in R), SpReductionTower derived reduction, unit sk-lem-finite (realized empty), clone node diff (proof/proof_deps/proof_origin only), scratch #print axioms"
+ }
+}

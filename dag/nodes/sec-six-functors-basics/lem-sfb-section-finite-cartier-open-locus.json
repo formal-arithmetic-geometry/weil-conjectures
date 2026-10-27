@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-section-finite-cartier-open-locus",
+ "kind": "statement",
+ "title": "Open finite Cartier zero-divisor locus for a line-module morphism",
+ "statement": "Let $T$ be any scheme [def-pc-scheme], and let $p:Y\\to T$ be proper, flat and finitely presented [def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $U\\subseteq Y$ be an open subscheme [def-weil-open-immersion] smooth of relative dimension one over $T$ [def-sbc-smooth-morphisms]. Let $M,N$ be invertible $\\mathcal O_Y$-modules [def-sc-invertible-module] and let $a:M\\to N$ be an $\\mathcal O_Y$-linear morphism. Define its zero scheme $Z(a)\\subseteq Y$ by the locally principal ideal $(b)$ wherever generators $m,n$ satisfy $a(m)=bn$ [def-pc-zero-scheme]. Fix an integer $d\\geq0$. There is a unique open subscheme $T_d(a,U)\\subseteq T$ such that, for every scheme morphism $h:T'\\to T$, $h$ factors through $T_d(a,U)$ if and only if the pulled-back zero scheme $Z(a)\\times_TT'$ is contained in $U_{T'}$, is a relative effective Cartier divisor on $Y_{T'}/T'$ [def-pc-relative-effective-cartier], and is finite locally free of rank $d$ over $T'$, meaning that it is finite and the pushforward of its structure sheaf is locally isomorphic to $\\mathcal O_{T'}^{\\oplus d}$ [def-pc-finite-locally-free]. Formation of this open commutes with arbitrary base change. Equivalently its field-valued points are exactly those where the fibre zero scheme is an effective Cartier divisor of length $d$ supported in the fibre of $U$. Empty zero schemes and $d=0$ are allowed. No reducedness or Noetherian hypothesis on $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 062Y (lemma-fibre-Cartier), especially (3), applied to the coefficient of a morphism of invertible modules. Properness removes the image of the closed complement of the relative Cartier neighbourhood and the image of Z(a) intersect (Y minus U). Finiteness and local freeness use more-morphisms.tex Tag 02LS (lemma-characterize-finite) and morphisms.tex Tag 02KB (lemma-finite-flat). This is an agent-formulated open-locus consequence, not the statement of any single tag."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-pc-zero-scheme",
+  "def-pc-relative-effective-cartier",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Put $Z=Z(a)$. Changing bases of $M,N$ multiplies the coefficient $b$ by a unit, so the ideals $(b)$ glue and $Z$ is locally principal. The morphism $a$ is the section of $N\\otimes M^{-1}$ to which [def-pc-zero-scheme] applies. For any base change, the local identity $(B/(b))\\otimes_A A'=(B\\otimes_A A')/(b\\otimes1)$ identifies its zero scheme with $Z\\times_TT'$. This uses no flatness of $A'$. We will use this identity for all subsequent pullbacks. Let $G\\subseteq |T|$ be the set of points $t$ where $Z_t$ is an effective Cartier divisor on $Y_t$ and is contained in $U_t$.",
+   "uses": [
+    "def-pc-zero-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Local form of zero schemes; arbitrary scalar-extension quotient identity."
+   }
+  },
+  {
+   "text": "Fix $t\\in G$. For every $z\\in Z_t$, apply [lem-pc-recd-fibre-cartier-local] to $p:Y\\to T$, $Z$, and $z$. Flatness and local finite presentation are hypotheses of the item; local principality is Step 1. Obtain an open $V_z\\subseteq Y$ on which $Z$ is relative effective Cartier. On $Y\\setminus |Z|$ its ideal is the unit ideal, so the empty divisor is relative effective Cartier there. Let $W$ be the union of these opens. It contains the entire fibre $Y_t$, and $Z\\cap W$ is relative effective Cartier because the generator and flatness conditions are local on the source [def-pc-relative-effective-cartier]. The closed sets $Y\\setminus W$ and $|Z|\\cap(Y\\setminus U)$ have closed images under $p$, by the universally closed clause of [def-weil-proper-morphism]. Neither image contains $t$. Their complementary intersection $V\\subseteq T$ is an open neighbourhood of $t$, with $Y_V\\subseteq W$ and $Z_V\\subseteq U_V$. Thus $Z_V$ is relative effective Cartier on $Y_V/V$.",
+   "uses": [
+    "lem-pc-recd-fibre-cartier-local",
+    "def-pc-relative-effective-cartier",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062Y, lemma-fibre-Cartier (3); proper closed-image shrinking."
+   }
+  },
+  {
+   "text": "On $V$ of Step 2, restrict to the smooth relative curve $U_V/V$. The divisor $Z_V$ is closed in $U_V$ and relative effective Cartier there. The implication (2) to (3) of [lem-pc-cartier-criterion] gives local quasi-finiteness, flatness and local finite presentation of $Z_V\\to V$, without a Noetherian assumption. Moreover $Y_V\\to V$ is proper by [lem-weil-pbc-proper-base-change], and its closed subscheme $Z_V$ is proper over $V$ by [lem-weil-pbc-closed-immersion-proper]. Apply [pqf-lem-proper-lqf-finite] and then [lem-sc-finite-pushforward-locally-free]. Consequently $Z_V\\to V$ is finite locally free. Its fibres are Cartier by [lem-pc-recd-pullback], applied to the flat finitely presented $Y_V/V$. Hence $V\\subseteq G$. These neighbourhoods show that $G$ is open, and cover it by loci with the stated Cartier and finite locally free properties. Those properties agree on overlaps because the divisor is always the restriction of the same $Z$.",
+   "uses": [
+    "lem-pc-cartier-criterion",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "pqf-lem-proper-lqf-finite",
+    "lem-sc-finite-pushforward-locally-free",
+    "lem-pc-recd-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0B9D (pic.tex lemma-divisors-on-curves); Tags 02LS, 02KB, 056Q."
+   }
+  },
+  {
+   "text": "Write $q:Z_G\\to G$. It is finite locally free by Step 3 (finiteness and the local free algebra description are local on the base). Apply [lem-weil-pbc-finite-locally-free-degree-locally-constant] to obtain the open and closed degree-$d$ piece $G_d$ of $G$. Set $T_d(a,U)=G_d$, with its open subscheme structure in $T$. On $G_d$ the algebra $q_*\\mathcal O_{Z_G}$ is locally isomorphic to $\\mathcal O^{\\oplus d}$: by [lem-sc-finite-pushforward-locally-free] it is $\\mathcal O^{\\oplus e}$ on an open neighbourhood of each $t\\in G_d$, and by the algebra base-change isomorphism (2) of [lem-weil-pbc-affine-pushforward-base-change] its fibre algebra $\\Gamma(Z_t,\\mathcal O)$ is $\\kappa(t)^{\\oplus e}$, so $e=d$. This is the rank-$d$ description used in Steps 5 and 7. Its residue fibres are exactly the Cartier zero schemes supported in $U$ with $\\dim_{\\kappa(t)}\\Gamma(Z_t,\\mathcal O)=d$. This is the length meant here; it includes the residue-field degrees of the closed points. In particular it is not merely the number of geometric support points.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-sc-finite-pushforward-locally-free",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Section 02K9, Tags 02KA, 04MH, degree decomposition."
+   }
+  },
+  {
+   "text": "Suppose $h:T'\\to T$ factors through $G_d$. By [lem-pc-recd-pullback], the base change of $Z_{G_d}$ is relative effective Cartier on $Y_{T'}/T'$. Its support remains in $U_{T'}$. A finite morphism has affine inverse images [def-weil-finite-integral-morphism]. On affine opens of $G_d$ and $T'$, the pulled-back finite scheme is $\\operatorname{Spec}(B\\otimes_A A')$; if $B\\simeq A^{\\oplus d}$ as a module, its new algebra is $(A')^{\\oplus d}$. Such charts cover the base, so it is finite with locally free structure algebra of rank $d$. Equivalently, this is the algebra base-change isomorphism in [lem-weil-pbc-affine-pushforward-base-change]. Thus all requested properties hold for every factoring $h$, including nonflat $h$.",
+   "uses": [
+    "lem-pc-recd-pullback",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 056Q; morphisms.tex Tag 02KD, lemma-base-change-finite-locally-free."
+   }
+  },
+  {
+   "text": "Conversely suppose $Z'=Z\\times_TT'$ has all the asserted properties. Fix $t'\\in T'$, put $t=h(t')$, $k=\\kappa(t)$ and $K=\\kappa(t')$. Its fibre $Z'_ {t'}=Z_t\\times_kK$ is Cartier: use [lem-pc-recd-pullback] for $Y_{T'}/T'$ and $Z'$. The required flatness and finite presentation of this ambient family follow on affine charts from tensor associativity (scalar extension of an exact tensor functor is exact) and extension of a finite list of algebra generators and relations. On every affine chart $\\operatorname{Spec}C$ of $Y_t$ trivializing the two lines, multiplication by $b\\otimes1$ on $C\\otimes_kK$ is injective. The map $C\\to C\\otimes_kK$ is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat]. Injectivity reflection [lem-trf-faithfully-flat-ltensor-injective-reflection], applied to $C\\xrightarrow{b}C$, gives injectivity before extension. Thus $Z_t$ is Cartier. Surjectivity of this spectrum map [lem-weil-pbc-faithfully-flat-surjective-spectrum] also shows $Z_t\\subseteq U_t$: any point in the complement would lift to a point of $Z'_ {t'}$ outside $U_{t'}$. Hence $t\\in G$.",
+   "uses": [
+    "lem-pc-recd-pullback",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-trf-faithfully-flat-ltensor-injective-reflection",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 056Q; algebra.tex Tags 00HP, 00HQ, faithfully flat field-extension reflection."
+   }
+  },
+  {
+   "text": "At the point $t$ of Step 6, Step 3 already makes $Z_t$ finite over $k$. The affine scalar-extension computation of Step 5 identifies its $K$-fibre algebra with $K\\otimes_k\\Gamma(Z_t,\\mathcal O)$. By [lem-pc-finrank-field-base-change], its dimension is unchanged. Since the given $Z'\\to T'$ has rank $d$, this dimension is $d$, so $t\\in G_d$. This holds for every $t'$, hence $h$ has image in $G_d$ and factors uniquely through the open subscheme [def-weil-open-immersion] (restrict the topological map and its structure-sheaf map). Combined with Step 5 this proves the universal property. Any other open with that property has exactly these residue-field points, so is the same open subscheme. For any $T_1\\to T$, a test map $T'\\to T_1$ factors through $G_d\\times_TT_1$ exactly when its composite to $T$ does, exactly when the twice-pulled-back zero scheme has the required properties. Associativity of the fibre product identifies these with the properties of the pulled-back data. This proves arbitrary base-change compatibility and the field-valued formulation. For $d=0$ the algebra is locally the zero module, giving the empty scheme; all arguments also apply to an empty base or empty $U$.",
+   "uses": [
+    "lem-pc-finrank-field-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Morphisms Section 02K9; affine field dimension invariance and the defining property of an open subscheme."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-zero-scheme",
+  "lem-pc-recd-fibre-cartier-local",
+  "def-pc-relative-effective-cartier",
+  "def-weil-proper-morphism",
+  "lem-pc-cartier-criterion",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "pqf-lem-proper-lqf-finite",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-pc-recd-pullback",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-trf-faithfully-flat-ltensor-injective-reflection",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-pc-finrank-field-base-change",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent assembly of Tag 062Y(3), proper closed-image shrinking, pic.tex Tag 0B9D, more-morphisms.tex Tag 02LS and morphisms.tex Tag 02KB. The universal property is checked by arbitrary quotient base change and residue-field reflection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a section of a line bundle on a proper flat relative curve the locus where its zero scheme is a relative effective Cartier divisor finite locally free of degree d supported in a given smooth open is open and commutes with base change",
+   "results": "OK 8 hits; returned names/files: Algebra.isOpen_smoothLocus, AlgebraicGeometry.Scheme.image_zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified ring loci and topological zeroLocus lemmas do not give the universal open locus of finite locally free Cartier zero schemes for a line-module morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"zeroLocus\"",
+   "results": "OK 12 hits; returned names/files: AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.RingedSpace.zeroLocus_isClosed, AlgebraicGeometry.RingedSpace.zeroLocus_empty_eq_univ, AlgebraicGeometry.RingedSpace.zeroLocus_singleton, AlgebraicGeometry.RingedSpace.mem_zeroLocus_iff, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.Scheme.zeroLocus_univ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified ring loci and topological zeroLocus lemmas do not give the universal open locus of finite locally free Cartier zero schemes for a line-module morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*(cartier|divisor)|zeroScheme|zero_scheme|regularSection",
+   "results": "OK 0 hits; returned names/files: . Mathlib source subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified ring loci and topological zeroLocus lemmas do not give the universal open locus of finite locally free Cartier zero schemes for a line-module morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base locus where the zero divisor of a section of an invertible sheaf on a proper family is finite flat of fixed rank is open",
+   "results": "OK 8 hits; returned names/files: AlgebraicGeometry.RingedSpace.zeroLocus_isClosed, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_isClosed, AlgebraicGeometry.RingedSpace.zeroLocus_singleton, AlgebraicGeometry.Scheme.codisjoint_zeroLocus, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_def, AlgebraicGeometry.Scheme.zeroLocus_mono",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified ring loci and topological zeroLocus lemmas do not give the universal open locus of finite locally free Cartier zero schemes for a line-module morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Cc]artier|[Cc]artier.*locus|zeroScheme|zero_scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological zero loci, smooth or free loci, or flat open maps, and do not state the proper-family Cartier zero-scheme universal locus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness on the base of the fixed length relative effective Cartier divisor locus of a section of an invertible sheaf",
+   "results": "8 hits: AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.Scheme.zeroLocus_def, AlgebraicGeometry.RingedSpace.basicOpen, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.basicOpen, AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological zero loci, smooth or free loci, or flat open maps, and do not state the proper-family Cartier zero-scheme universal locus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Cartier\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological zero loci, smooth or free loci, or flat open maps, and do not state the proper-family Cartier zero-scheme universal locus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle section on a proper flat finitely presented scheme, the locus of finite flat Cartier zero schemes of rank d supported in a smooth curve open is open and stable under arbitrary base change",
+   "results": "8 hits: Algebra.isOpen_smoothLocus, AlgebraicGeometry.UniversallyOpen.of_flat, Algebra.isOpen_etaleLocus, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.Polynomial.isOpen_imageOfDf, Module.isOpen_freeLocus, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Flat.instMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological zero loci, smooth or free loci, or flat open maps, and do not state the proper-family Cartier zero-scheme universal locus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The parameter set where a regular section of a line bundle on a proper family vanishes in a finite locally free subscheme of fixed degree is represented by an open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.basicOpen, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.Scheme.mem_zeroLocus_iff, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological zero loci, smooth or free loci, or flat open maps, and do not state the proper-family Cartier zero-scheme universal locus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-abel-nonspecial-chart",
+  "date": "2026-10-23",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Relative nonspecial Abel chart with prescribed fibre divisor. Generic supporting input: openness of the finite flat Cartier zero-divisor locus for the evaluation section, Deligne 4.5 second open locus.",
+   "via": [
+    "lem-sfb-relative-abel-nonspecial-chart",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-section-finite-cartier-open-locus",
+  "worker": "stage1",
+  "summary": "Q46: constructed the open by local fibre-Cartier spreading, proper closed-image shrinking, finite locally free degree decomposition, and proved the universal property including nonflat base change and field-extension reflection. Reused existing nodes throughout; no new nodes. Statement unchanged. No exact project Lean attachment found.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3); generic Cartier open-locus input to the Deligne Lemma 4.5 Abel chart in the recorded ancestor chain. The imported created.item chain has no surviving blueprint ancestor (blueprint_refs ancestor returns None); retained its existing explicit from.place and via.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-recd-fibre-cartier-local",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-pc-cartier-criterion",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "pqf-lem-proper-lqf-finite",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-trf-faithfully-flat-ltensor-injective-reflection",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   },
+   {
+    "node": "lem-pc-finrank-field-base-change",
+    "why": "Generic scheme-theoretic or module-theoretic input used exactly in the steps indicated; the current unit provides no local Cartier, finite-morphism, rank, or faithful-flatness replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-recd-fibre-cartier-local",
+  "lem-pc-cartier-criterion",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "pqf-lem-proper-lqf-finite",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-pc-recd-pullback",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-trf-faithfully-flat-ltensor-injective-reflection",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-pc-finrank-field-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-78b661ef1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-78b661ef1 (reviewer sub-agent of L); spot-checked: The item proof is correct apart from one gap in Step 4. Step 4 cuts out G_d only by fibre degree, while Steps 5 and 7 use that the pushforward of the structure sheaf is locally O^{⊕d}. The FIX adds the link: by lem-sc-finite-pushforward-locally-free the pushforward is locally O^{⊕e}, and by lem-weil-pbc-affine-pushforward-base-change (2) its fibre algebra at t is κ(t)^{⊕e}, so e=d. Both nodes go into the step's uses; both were already in proof_deps, and only the proof field changes. Source checks: Stacks 062Y(3) at divisors.tex lines 4191-4212 matches lem-pc-recd-fibre-cartier-local; Stacks 0B9D at pic.tex lines 407-425 gives (2)⇔(3) with no Noetherian or proper hypothesis, and Step 3 uses only (2)⇒(3); 02LS and 02KB/04MH match the cited nodes. Steps 1-7 hold. Step 1 identifies the base change by a quotient, so it needs no flatness, and it correctly avoids the flat-only lem-pc-zero-scheme-properties. Step 2 shrinks to a base neighbourhood using universal closedness on two closed sets. Step 3 gets finiteness from proper plus locally quasi-finite, and local freeness from finite, flat and lfp. Step 6 reflects the Cartier property to the field fibre by faithful flatness of C→C⊗_kK and by surjectivity on spectra. Step 7 gets dimension invariance from lem-pc-finrank-field-base-change, and uniqueness and base change follow. Small cases checked: empty base, a an isomorphism (giving T_0), a=0 on a smooth fibre (excluded), U empty, nonreduced base with nonflat h. Statement, source, stmt_deps and blueprint are unchanged against live, and live is still unsplit. There is no repair note, so the re-split rule does not apply. No SGA citation. No new nodes; no duplicate found (lem-pc-zero-scheme-recd is a different, curve-over-a-field Abel–Jacobi statement). Batch-5: lem-trf-faithfully-flat-ltensor-injective-reflection is a status-mathlib leaf of pure commutative algebra (Stacks 05A5, Module.FaithfullyFlat.lTensor_injective_iff_injective). It is not part of the trace formula or of Poincaré duality, so the citation is accepted. The worker's tool_uses list only generic scheme and algebra inputs, and the unit gives none of them, so they are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionFiniteCartierOpenLocus",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_finiteCartierZeroLocusOpen",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IdealSheafData.FiniteCartierZeroSchemeCondition",
+   "AlgebraicGeometry.Scheme.IdealSheafData.IsFiniteCartierZeroLocusOpen",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_finiteCartierZeroLocusOpen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionFiniteCartierOpenLocus.lean",
+  "statement": "theorem existsUnique_finiteCartierZeroLocusOpen {Y T : Scheme.{u}} (p : Y ⟶ T) [IsProper p] [Flat p] [LocallyOfFinitePresentation p] (U : Y.Opens) [SmoothOfRelativeDimension 1 (U.ι ≫ p)] (M N : Y.Modules) [M.IsInvertible] [N.IsInvertible] (a : M ⟶ N) (d : ℕ) : ∃! V : T.Opens, a.zeroLocus.IsFiniteCartierZeroLocusOpen p U d V ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T), (a.zeroLocus.comap (pullback.fst p h)).IsFiniteCartierZeroLocusOpen (pullback.snd p h) (pullback.fst p h ⁻¹ᵁ U) d (h ⁻¹ᵁ V)) ∧ (∀ (K : Type u) [Field K] (h : Spec (.of K) ⟶ T), (∃ j : Spec (.of K) ⟶ V.toScheme, j ≫ V.ι = h) ↔ (∀ y : (Limits.pullback p h : Scheme.{u}), y ∈ (a.zeroLocus.comap (pullback.fst p h)).support → y ∈ pullback.fst p h ⁻¹ᵁ U) ∧ (a.zeroLocus.comap (pullback.fst p h)).IsInvertible ∧ IsFinite ((a.zeroLocus.comap (pullback.fst p h)).subschemeι ≫ pullback.snd p h) ∧ ((a.zeroLocus.comap (pullback.fst p h)).subschemeι ≫ pullback.snd p h).finrankΓ = d)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1833d38c",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Lean exact against node: p IsProper/Flat/LocallyOfFinitePresentation, SmoothOfRelativeDimension 1 on U.ι≫p only, M N IsInvertible, a arbitrary, recorded Hom.zeroLocus; ∃! V : T.Opens with universal property for all h (IdealSheafData.comap = scheme-theoretic pullback via comapIso, nonflat h covered), support⊆U ∧ IsRelativeEffectiveCartier ∧ IsFiniteLocallyFreeOfDegree d (02KB = locally O^d), base-change clause on h⁻¹V, K-point clause (IsInvertible, IsFinite redundant but true, finrankΓ = dim_K counts residue degrees). Edge cases: empty T/Y/T'/U, d=0, a iso, a=0, nonreduced base, non-algebraically-closed K covered; universes u, no extra hypotheses; lean.statement verbatim; node differs from live only in lean; helpers combine recorded predicates with docstrings; only sorry; 7 proof steps in docstring. Sole fault H11: second reading is the worker's self-review -> fixes/lem-sfb-section-finite-cartier-open-locus.report.md (worker report verbatim + independent clause-by-clause reading). No Lean change, no compile."
+ }
+}

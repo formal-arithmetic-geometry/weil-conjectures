@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-ring-complex-cech-augmentation-hom",
+ "kind": "statement",
+ "title": "Augmentation Hom bijection between two localization models",
+ "statement": "For a commutative ring A with an ordinary derived category [def-weil-abstract-derived-category] on its one-object bottom site, a finitely generated ideal I, and two augmented complexes (T,εT),(K,εK) satisfying the ordered localization model predicate [def-weil-pbc-ring-complex-cech-data] for I, composition with Q(εK) gives a bijection Hom_D(QT,QK)→Hom_D(QT,Q(A[0])). No K-flatness and no map of rings are assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A6R; original node proof step 3, finite localization filtration"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Let S be the shift-and-isomorphism closure of Q(T) and let P be its right orthogonal. The localized orthogonality theorem says that P contains every degree-zero module on which an element of I acts invertibly. Mathlib makes P a strictly full triangulated subcategory because S is shift stable. Apply the cone filtration theorem to K to put Q(Cone(epsilon_K)) in P. Shift stability also puts its shift by minus one in P. Since Q(T) belongs to S, Hom from Q(T) into either of those cone objects is zero.",
+   "uses": [
+    "lem-weil-pbc-ring-complex-cech-localized-orthogonality",
+    "lem-weil-pbc-ring-complex-cech-cone-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image under Q of the mapping-cone triangle is distinguished. For two maps f,g:Q(T)->Q(K) with equal composites with Q(epsilon_K), apply coyoneda_exact2 to the inverse rotation and to f-g. It factors f-g through the cone shifted by minus one. Its first factor vanishes by Step 1, so f-g=0 and f=g. This proves injectivity.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For g:Q(T)->Q(A[0]), the composite into the cone is zero by Step 1. Apply coyoneda_exact2 to the augmentation triangle to obtain f with g=f composed with Q(epsilon_K). This is surjectivity; pair it with Step 2.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-complex-cech-localized-orthogonality",
+  "lem-weil-pbc-ring-complex-cech-cone-filtration",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A6R, lemma-local-cohomology-adjoint; the finite-localization orthogonality and cone filtration are split into separate statements; the inverse-rotation and augmentation triangle Hom arguments are complete Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmented localization Cech complex is the coreflection onto complexes supported on an ideal and commutes with derived scalar extension",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; localCohomology; localCohomology.ofSelfLERadical; Ext; CochainComplex.cm5b.I; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.Q",
+   "date": "2026-10-25",
+   "verdict": "No matching augmented localization-model transport or torsion-coreflection Hom bijection."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.tensorEquiv",
+   "results": "IsLocalization.Away.tensorEquiv",
+   "date": "2026-10-25",
+   "verdict": "Termwise tensor/localization isomorphism only; not either augmented derived statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*(coreflect|quasiIso)|localCohomology.*adj",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No augmented localization-model theorem; tensorEquiv supplies only termwise algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived Hom from an ideal torsion complex to its augmented Cech localization complex equals derived Hom to the ring",
+   "results": "HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic; DerivedCategory.Q; DerivedCategory.homologyFunctorFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+   "date": "2026-10-25",
+   "verdict": "No matching augmented localization-model transport or torsion-coreflection Hom bijection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite augmented localization Cech complex is the right adjoint for complexes with ideal power torsion cohomology",
+   "results": "localCohomology.diagram; localCohomology; localCohomology.ofSelfLERadical; localCohomology.ofDiagram; LightCondMod.LocallyConstant.adjunction; CondensedMod.LocallyConstant.adjunction; localCohomology.hasColimitDiagram; localCohomology.isoSelfLERadical",
+   "date": "2026-10-25",
+   "verdict": "No matching augmented localization-model transport or torsion-coreflection Hom bijection."
+  },
+  {
+   "tool": "grep",
+   "query": "RingComplexHasCechModel; local.cohomology; augmentation.*bijective; tensorEquiv",
+   "results": "Read RingComplexCechData, SemilinearExtension, ExtendedCechReflectorCore, FlatRingedCechLocalComparison, Mathlib LocalCohomology and Localization/BaseChange. The reflector is for derived completeness and RHom; the flat unit theorem assumes flatness and quotient compatibility. Neither gives the torsion coreflection or arbitrary scalar transport here.",
+   "date": "2026-10-25",
+   "verdict": "No existing declaration states either new step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexCechBaseChange",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 0A6R; original node proof step 3, finite localization filtration",
+   "via": [
+    "lem-weil-pbc-ring-complex-cech-base-change",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexCechAugmentationHom",
+  "file": "lean/Sheaf/Paper/RingComplexCechAugmentationHom.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_cech_augmentation_hom_bijective",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_cech_augmentation_hom_bijective"
+  ],
+  "statement": "theorem ringComplex_cech_augmentation_hom_bijective\n    (A : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]\n    (I : {I : Ideal A // I.FG})\n    (T K : CochainComplex (RingSiteModules A) ℤ)\n    (εT : T ⟶ ringComplexSingle A) (εK : K ⟶ ringComplexSingle A)\n    (hT : RingComplexHasCechModel A I.val T εT)\n    (hK : RingComplexHasCechModel A I.val K εK) :\n    Function.Bijective\n      (fun f : DerivedCategory.Q.obj T ⟶ DerivedCategory.Q.obj K ↦\n        f ≫ DerivedCategory.Q.map εK)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T124328-L-1975342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T143036-L-924354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

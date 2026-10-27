@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-homogeneous-quotient-proj",
+ "kind": "definition",
+ "title": "The image grading and canonical Proj morphism of a homogeneous quotient",
+ "status": "split",
+ "statement": "Let $R$ and $A$ be commutative rings with an $R$-algebra structure [def-weil-pbc-algebra-hom-quotient], and let $\\mathcal A=(A_n)_{n\\geq0}$ be a nonnegative grading by $R$-submodules [def-sfb-nonnegative-graded-algebra]. Let $I\\subseteq A$ be a homogeneous ideal, meaning that every homogeneous component of an element of $I$ lies in $I$. Write $q:A\\to A/I$ for the quotient algebra homomorphism. Define $(A/I)_n=q(A_n)$ as an actual $R$-submodule of $A/I$. These image submodules admit a unique graded-algebra decomposition; the quotient grading is that unique decomposition. The canonical graded ring homomorphism is $q$ itself with these source and target gradings. The quotient-induced Proj morphism $\\operatorname{Proj}(A/I)\\to\\operatorname{Proj}(A)$ [def-pc-proj] is the map of schemes induced by this graded homomorphism: on positive homogeneous standard opens its comorphism sends $a/f^e$ to $q(a)/q(f)^e$. The irrelevant-ideal condition for this Proj morphism follows from surjectivity of $q$. This includes $I=A$ and the zero quotient.",
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sfb-nonnegative-graded-algebra",
+  "def-pc-proj"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/constructions.tex",
+  "place": "Tag 00JL, section-graded, paragraph on graded ideals and graded quotient rings; Tag 01MY, lemma-morphism-proj (2), map on standard affine charts."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a graded commutative ring by a homogeneous ideal has the image grading and an induced closed immersion on Proj",
+   "results": "8 hits: IsClosedImmersion.spec_of_quotient_mk, HomogeneousIdeal.irrelevant, Proj, Ideal.isHomogeneous_iff_forall_subset, ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous, Proj.instIsOpenImmersionAwayι, Ideal.isHomogeneous_iff_subset_iInter, ProjectiveSpectrum.mk.congr_simp. No quotient grading construction.",
+   "date": "2026-10-24",
+   "verdict": "no match: existing quotient-grading constructions are restricted to polynomial algebras; the input here is an arbitrary graded commutative algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of any nonnegative graded commutative algebra by a homogeneous ideal has the grading given by images of its homogeneous submodules",
+   "results": "8 hits: MvPolynomial.IsHomogeneous.HomogeneousSubmodule.gcommSemiring, HomogeneousIdeal, HomogeneousIdeal.irrelevant, Ideal.IsHomogeneous, GradedAlgebra, MvPolynomial.gradedAlgebra, instMulHomogeneousIdeal, Ideal.mul_homogeneous_element_mem_of_mem. No quotient grading.",
+   "date": "2026-10-24",
+   "verdict": "no match: existing quotient-grading constructions are restricted to polynomial algebras; the input here is an arbitrary graded commutative algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|Quotient",
+   "results": "Mathlib RingTheory/GradedAlgebra: 5 hits, all the unrelated localization quotient in HomogeneousLocalization.lean (37,42,282,293,296). Direct rg in WeilConjectures and Sheaf finds CoordinateQuotientGrading and ProjectiveClosedSubschemeHomogeneousIdeal: only polynomial quotients, the former over a field. No arbitrary graded R-algebra quotient grading. DAG rg finds def-sfb-coordinate-quotient-grading with the same field/polynomial restriction. blueprint_refs.py search homogeneous quotient: zero blueprint nodes.",
+   "subdirectory": "RingTheory/GradedAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: existing quotient-grading constructions are restricted to polynomial algebras; the input here is an arbitrary graded commutative algebra"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-proj-ideal-single-degree",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Stacks 0802 affine proof: the quotient grading and canonical Proj map for the prescribed homogeneous ideal, and for the finite same-degree subideal. The ancestor command returns None for the inherited 085M prerequisite chain.",
+   "via": [
+    "lem-sfb-affine-proj-ideal-single-degree",
+    "lem-sfb-space-proj-finite-degree-equations",
+    "lem-sfb-space-blowup-finite-degree-ideal-descent",
+    "lem-sfb-space-compose-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HomogeneousQuotientProj",
+  "declaration": "AlgebraicGeometry.homogeneousQuotientPiece",
+  "declarations": [
+   "AlgebraicGeometry.homogeneousQuotientPiece",
+   "AlgebraicGeometry.existsUnique_homogeneousQuotientGrading",
+   "AlgebraicGeometry.homogeneousQuotientGrading",
+   "AlgebraicGeometry.homogeneousQuotientMap",
+   "AlgebraicGeometry.homogeneousQuotientProjι"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HomogeneousQuotientProj.lean",
+  "statement": "def homogeneousQuotientPiece (I : HomogeneousIdeal 𝒜) (d : ℕ) : Submodule R (A ⧸ I.toIdeal)",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c4105314",
+  "group": "Q56",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c4105314",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read Stacks 0802, item, new node def-sfb-homogeneous-quotient-proj, all stmt_dep records and both modules. Every clause matches the node: R/A in independent universes with an arbitrary R→A0, HomogeneousIdeal I, CompactSpace (Proj 𝒜), LocallyOfFinitePresentation of the quotient closed immersion (qc+qs automatic), ∃ d>0, Fin r → 𝒜 d in I, H.toIdeal = span of the R-span, iso over P commuting with both closed immersions (equality of closed subschemes). The new node's pieces are the actual images. Its ∃! GradedAlgebra .choose is canonical because Decomposition is Subsingleton, so it is not hollow. Its map is the canonical Proj.map of the surjection. It is not a duplicate: the existing quotient gradings cover only polynomial rings. Record fields follow §5 and both statements are verbatim in the files. The item only gains the new stmt_dep. Docstrings and sorry-only proofs are fine. Edge cases (empty P, I=A, I=0, even gradings) are covered. Advisory only: two stmt_dep modules are imported publicly but not needed. No fixes; no recompile."
+ }
+}

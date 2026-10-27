@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-relative-group-weil-extension",
+ "kind": "statement",
+ "title": "Weil extension into a smooth separated relative group scheme",
+ "statement": "Let $S$ be a normal Noetherian scheme [def-pc-scheme], meaning it has a finite affine cover by spectra of Noetherian rings and every local ring is an integrally closed domain. Let $p:Z\\to S$ be smooth [def-sbc-smooth-morphisms], and let $H\\to S$ be a smooth separated group scheme. Here a group scheme has multiplication, identity and inverse morphisms over $S$ satisfying the group identities; separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Let $U\\subseteq Z$ be an open subscheme and $u:U\\to H$ an $S$-morphism. Suppose $U_s\\subseteq Z_s$ is dense for every $s\\in S$, where the fibres are base changes to $\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre], and suppose $U$ contains every $z\\in Z$ with $\\dim\\mathcal O_{Z,z}\\leq1$ [def-weil-pbc-krull-dimension-ring]. Then there is a unique $S$-morphism $\\bar u:Z\\to H$ restricting to $u$. Neither $Z$ nor $H$ is required to be quasi-compact, and the group need not be commutative or have connected fibres.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §4.4 Theorem 1, printed pp.109–110 (PDF pp.115–116), applied locally on the source; primary scan read online, local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Work first on an affine open $T\\subseteq Z$ mapping into an affine open $S_0\\subseteq S$. Its restricted structural map is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Since $S_0$ is normal, [lem-sfb-smooth-normal-ascent] makes $T$ normal. Since $S_0$ is reduced and locally Noetherian, [lem-trf-smooth-reduced-dense-pullback] makes $T$ reduced and locally Noetherian; being affine it is Noetherian. Put $U_T=U\\cap T$. It is dense in $T$: every generic point of an affine irreducible component has a zero-dimensional local ring and hence lies in $U_T$. This argument also applies to every open subset of $T$. The local-ring dimension condition is unchanged on open restriction.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Put $P=T\\times_{S_0}T$ with projections $p_1,p_2$ and diagonal $a:T\\to P$. Both projections are smooth by [lem-pc-proper-base-change]. The open $D=U_T\\times_{S_0}U_T=p_1^{-1}(U_T)\\cap p_2^{-1}(U_T)$ is dense in $P$: [lem-trf-smooth-reduced-dense-pullback] makes each inverse image dense, and the intersection of two dense opens is dense. Define the $S_0$-morphism $g:D\\to H_{S_0}$ by $g(z_1,z_2)=u(z_1)u(z_2)^{-1}$, using the given multiplication and inverse. We have $a^{-1}D=U_T$, and $g\\circ a=e\\circ p$ there, by the inverse identity. The target is separated over $S_0$: its diagonal is the restriction of the given closed diagonal, still a closed immersion because restricting a quotient on affine charts is a quotient.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-section-rational-extension] with $B=S_0$, the normal Noetherian $T$ of step 1, $X=P$, $q=p_1$, section $a$, target $Y=H_{S_0}$, $v=g$, and $b=e\\circ p$. The dense domain and equality along $a$ are step 2; $a^{-1}D=U_T$ contains all the required points by hypothesis. Obtain an open $V\\subseteq P$ containing $a(T)$ and a morphism $v:V\\to H_{S_0}$ agreeing with $g$ on $V\\cap D$. This is precisely the codimension argument of the source; it is isolated in the cited lemma, not assumed from the definition of a rational map.",
+   "uses": [
+    "lem-sfb-smooth-section-rational-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Let $W=V\\cap p_2^{-1}(U_T)$ and $f=p_1|_W:W\\to T$. It is smooth by [lem-pc-proper-base-change] and [lem-weil-pbc-smooth-restrict-open-subschemes], hence flat and locally of finite presentation by [lem-pc-smooth-flat], and open by [lem-weil-pbc-flat-lfp-open]. It is surjective: for $z\\in T$ over $s\\in S_0$, the fibre $V_z$ is a nonempty open of $T_s\\times_{\\kappa(s)}\\operatorname{Spec}\\kappa(z)$, since it contains the diagonal point. The projection of this latter scheme to $T_s$ is open by [lem-sc-scheme-over-field-universally-open]. Thus the image of $V_z$ is a nonempty open meeting the dense $U_{T,s}$; a point over that intersection lies in $W_z$. (The open $U_{T,s}$ is dense in the open $T_s\\subset Z_s$ by the original fibrewise density.) Consequently $f$ is an fpqc cover in the sense of [def-weil-pbc-fpqc-covering]: on each affine open of $T$, affine opens of its inverse image have open images covering it, so quasi-compactness selects finitely many.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sc-scheme-over-field-universally-open",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Define $h:W\\to H_{S_0}$ by $h(z_1,z_2)=v(z_1,z_2)u(z_2)$. On $f^{-1}(U_T)$ both coordinates lie in $U_T$, so $v=g$ and $h=(u\\circ p_1)u(z_2)^{-1}u(z_2)=u\\circ f$, with parentheses moved by associativity. No commutativity is used. On $C=W\\times_T W$ compare $h\\circ\\operatorname{pr}_1$ and $h\\circ\\operatorname{pr}_2$. The schemes $W$ and $C$ are reduced and locally Noetherian, and the inverse image of $U_T$ is dense in each, by two successive applications of [lem-trf-smooth-reduced-dense-pullback]: $W\\to T$ and $C\\to W$ are smooth, the latter by [lem-pc-proper-base-change]. Over that dense open the two maps equal $u$ after the common map to $T$. Therefore [lem-sfb-relative-separated-dominant-ext] makes them equal everywhere on $C$.",
+   "uses": [
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-pc-proper-base-change",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "The compatibility from step 5 and the fpqc covering from step 4 allow [lem-weil-pbc-fpqc-representable-descent] to descend $h$ uniquely to $\\bar u_T:T\\to H$. It is an $S$-morphism: its structural composite and $p|_T$ agree after $f$, so the uniqueness clause of that same descent statement, with target $S$, identifies them. Restricting the covering to $U_T$, the identity $h=u\\circ f$ shows $\\bar u_T|_{U_T}=u|_{U_T}$, again by uniqueness in descent. The restricted covering is fpqc by the same finite-affine-image argument as in step 4.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Perform the construction on all such affine neighbourhoods $T$ of $Z$. On an overlap $T\\cap T\\prime$, the two morphisms agree on $U\\cap T\\cap T\\prime$, dense because it contains all generic points; the overlap is reduced by step 1. Relative separatedness and [lem-sfb-relative-separated-dominant-ext] give equality on the overlap. Thus [lem-weil-pbc-scheme-morphism-gluing] glues them to an $S$-morphism $\\bar u:Z\\to H$ restricting to $u$. Two extensions agree by the same relative separatedness lemma on the dense open $U$ in the reduced $Z$. All covers may be infinite. If $Z$ is empty, its unique morphism is the required extension; empty fibres caused no condition in step 4.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-pc-proper-base-change",
+  "lem-sfb-smooth-section-rational-extension",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sc-scheme-over-field-universally-open",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §4.4, proof of Theorem 1, printed pp.109–110 (PDF pp.115–116), reduction to the diagonal; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read online; local copy WANTED. The local PDF is absent; argument written from the online primary-source proof with its diagonal step extracted as a generic section lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weil extension theorem: a rational map from a smooth scheme over a normal noetherian base to a smooth separated group scheme defined in codimension one extends everywhere",
+   "results": "{\"t\": \"2026-10-24T07:02:25Z\", \"tool\": \"leanfinder\", \"query\": \"Weil extension theorem: a rational map from a smooth scheme over a normal noetherian base to a smooth separated group scheme defined in codimension one extends everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\"], \"digest\": \"284a3710005e1cf7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map from a smooth scheme over a normal Noetherian base to a smooth separated group scheme extends if defined at all codimension one points",
+   "results": "{\"t\": \"2026-10-24T07:02:42Z\", \"tool\": \"leansearch\", \"query\": \"A rational map from a smooth scheme over a normal Noetherian base to a smooth separated group scheme extends if defined at all codimension one points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\"], \"digest\": \"9d50d039e02c9692\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-24T07:02:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*[Ee]xtension|[Ee]xtension.*[Gg]roup|Neron|Néron",
+   "results": "{\"t\": \"2026-10-24T07:02:43Z\", \"tool\": \"grep\", \"query\": \"Weil.*[Ee]xtension|[Ee]xtension.*[Gg]roup|Neron|Néron\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension for maps into relative algebraic groups: morphisms from a fibrewise dense open of a smooth scheme extend across codimension two over a DVR",
+   "results": "{\"t\": \"2026-10-24T07:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"Hartogs extension for maps into relative algebraic groups: morphisms from a fibrewise dense open of a smooth scheme extend across codimension two over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\"], \"digest\": \"f221c5111a3cad98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*[Ee]xtension|[Ee]xtension.*[Gg]roup|Neron|Néron",
+   "results": "{\"t\": \"2026-10-24T07:45:25Z\", \"tool\": \"grep\", \"query\": \"Weil.*[Ee]xtension|[Ee]xtension.*[Gg]roup|Neron|Néron\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide rational-map representatives, smooth charts, or equality of existing morphisms; none gives regularity near a smooth section or Weil extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil extension theorem for rational maps into a relative smooth separated group scheme",
+   "results": "{\"t\": \"2026-10-24T07:45:26Z\", \"tool\": \"leansearch\", \"query\": \"Weil extension theorem for rational maps into a relative smooth separated group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\"], \"digest\": \"517692308de02e9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide rational-map representatives, smooth charts, or equality of existing morphisms; none gives regularity near a smooth section or Weil extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-24T07:45:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide rational-map representatives, smooth charts, or equality of existing morphisms; none gives regularity near a smooth section or Weil extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a smooth scheme over a normal Noetherian scheme to a smooth separated group scheme extends if defined in codimension one",
+   "results": "{\"t\": \"2026-10-24T07:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a smooth scheme over a normal Noetherian scheme to a smooth separated group scheme extends if defined in codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\"], \"digest\": \"3d81cdff1095ac7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide rational-map representatives, smooth charts, or equality of existing morphisms; none gives regularity near a smooth section or Weil extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension across codimension two for morphisms into smooth algebraic groups",
+   "results": "{\"t\": \"2026-10-24T07:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"Hartogs extension across codimension two for morphisms into smooth algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\"], \"digest\": \"06899d9e88ee4ae5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide rational-map representatives, smooth charts, or equality of existing morphisms; none gives regularity near a smooth section or Weil extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-dvr-point-criterion",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Supporting extension step: BLR §10.1 Proposition 2, converse, invokes §4.4 Theorem 1 to extend the fibrewise dense rational map across codimension at least two.",
+   "via": [
+    "lem-sfb-neron-dvr-point-criterion",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-group-weil-extension",
+  "worker": "stage1",
+  "summary": "Read BLR §4.4 Theorem 1 and its proof online; retained the full normal Noetherian base and non-quasi-compact group. Split by the diagonal difference map, a generic section regularity lemma, a smooth fpqc cover, explicit cocycle equality and descent. Reused existing smooth normality, openness, relative separatedness, gluing and fpqc leaves; no SGA route.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), supporting trait-extension prerequisite below the alteration route recorded in blueprint.from.via; realizes BLR §4.4/1 invoked by §10.1 Proposition 2.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Reducedness, local Noetherianity and inverse-image density for smooth scheme maps; a generic geometric tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), stability of smooth scheme morphisms under base change, is used as a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-e14ca865c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-e14ca865c (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new node lem-sfb-smooth-section-rational-extension and every cited statement in full; no fixes. Item statement and stmt_deps unchanged, no target weakened; hypotheses match BLR §4.4 Thm 1 (normal Noetherian S, smooth Z, smooth separated group with no commutativity or connectedness, fibrewise-dense domain, defined at every z with dim O_{Z,z}<=1). BLR is not in literature/; proof_origin.by=agent with a WANTED note. Steps check out: (1) T normal by smooth-normal-ascent, reduced and Noetherian by the trf node, U_T dense through generic points. (2) D dense via the trf node twice; g=u(z1)u(z2)^{-1} gives g∘a=e∘p; H_{S0} separated over S0. (3) Every hypothesis of the new node instantiated (B=S0, q=p1, section a, b=e∘p, a^{-1}D=U_T). (4) W→T smooth hence flat, lfp and open; surjective via the universally-open field projection and fibrewise density; fpqc by quasi-compactness of affines. (5) h=v·u(p2) equals u∘f on f^{-1}U_T using associativity only; cocycle on W×_T W from the relative-separated lemma over a dense open. (6) fpqc descent, with S-linearity and restriction to U from its uniqueness clause. (7) Gluing over an arbitrary cover; uniqueness from U dense in reduced Z; Z empty is trivial. New node: statement only, self-contained, no group law, local near a section, not a restatement or duplicate (checked against group-rational-divisorial-indeterminacy (field base), relative-weil-codimension-extension (Dedekind base, cites the item) and others). Truth checked independently for arbitrary separated Y and possibly non-catenary normal T: Hartogs on affine Y' gives pure codim-1 pole sets; the completion R̂≅Â[[y]] with depth Â>=2 gives dim R̂/P'>=d+1, so the pole set meets the section at a proper generization; descending on dimension reaches a codim<=1 point in T°, contradiction. Small cases checked (dim T<=1, relative dimension 0, T°=T). Batch-5 flag lem-trf-smooth-reduced-dense-pullback: a generic smooth-pullback reducedness and density fact; its 132-node closure has no other trace-formula or Poincare node and it is not a step of either assumed proof, so accepted. Declared tool_uses (trf node; lem-pc-proper-base-change clause 2) accepted. No cycle. Cosmetic only: T\\prime in step 7."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeGroupWeilExtension",
+  "declaration": "AlgebraicGeometry.existsUnique_relative_group_weil_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeGroupWeilExtension.lean",
+  "statement": "theorem existsUnique_relative_group_weil_extension (S : Scheme.{u}) [IsNoetherian S] (_hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (Z : Scheme.{u}) (p : Z ⟶ S) [Smooth p] (H : Over S) [GrpObj H] [Smooth H.hom] [IsSeparated H.hom] (U : Z.Opens) (f : U.toScheme ⟶ H.left) (_hf : f ≫ H.hom = U.ι ≫ p) (_hdense : ∀ s : S, Dense ((p.fiberι s) ⁻¹' (U : Set Z))) (_hcodim : ∀ z : Z, ringKrullDim (Z.presheaf.stalk z) ≤ 1 → z ∈ U) : ∃! g : Z ⟶ H.left, g ≫ H.hom = p ∧ U.ι ≫ g = f",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fa5c56b4",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Lean theorem existsUnique_relative_group_weil_extension matches node and BLR §4.4 Thm 1 clause by clause: IsNoetherian S + stalkwise IsDomain∧IsIntegrallyClosed (no global integrality), Smooth p, H : Over S with GrpObj/Smooth/IsSeparated (relative), S-morphism f on U, fibrewise density via preimage under fiberι, ringKrullDim stalk ≤1 → z∈U, ∃! g over S restricting to f. No qc/finite-type/commutativity/connectedness assumptions; single universe u; autoImplicit false. Only sorry, no defs, docstrings with source place, blueprint id and all 7 proof steps; statement field verbatim; stmt_deps unchanged (only lean differs from live node); no Mathlib/project duplicate. Edge cases (empty Z/fibres, U=Z, disconnected S) fine. No findings; no compile needed."
+ }
+}

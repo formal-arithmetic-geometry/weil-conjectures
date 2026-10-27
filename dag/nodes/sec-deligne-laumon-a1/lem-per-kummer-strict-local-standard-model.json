@@ -11,11 +11,188 @@
   "def-trf-fs-log-blowup",
   "def-per-kummer-log-morphism",
   "def-per-fs-log-smooth-etale",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-per-fs-log-group-action",
+  "def-per-strict-log-morphism",
+  "def-per-fs-log-pullback",
+  "def-per-log-morphism-identity",
+  "def-trf-log-regular-pair"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $v$ is finite, $V=\\operatorname{Spec}B$ for a finite $A$-algebra. Apply [lem-weil-pbc-finite-over-henselian-local-product] to write $B=\\prod_iB_i$, with $B_i$ local henselian and finite over $A$, and with finite residue extensions of $k=A/\\mathfrak m$. These residue fields are separably closed by [lem-kun-sep-closed-finite-extension-sep-closed]. Thus each nonzero factor gives a strictly local $V_i$; zero factors are omitted, and $B=0$ gives the empty union. Restricting the log structure gives fs log schemes. All the subsequent arguments concern one nonzero factor $B_i$, denoted $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-kun-sep-closed-finite-extension-sep-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72; finite strict-local decomposition: Stacks Tag 04GH, algebra.tex lemma-finite-over-henselian (1)--(2)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-very-tame-equivariant-sharp-chart] to $T$ with the trivial group. Its hypotheses hold with order one and trivial characteristic action, so it supplies a pointed etale neighbourhood carrying a chart $P\\simeq\\overline M_{T,t}$. Choose the neighbourhood affine. Its specified closed point is rational by [lem-weil-pbc-etale-residue-field-extension-separable], since the base residue field is separably closed. The pointed section of [lem-weil-pbc-henselian-etale-retraction] pulls its chart back to a global sharp chart on $T$. Apply [lem-per-kummer-fixed-sharp-chart-refinement] to $V_i\\to T$ at its closed point with this $P$. Choose both neighbourhoods affine. The same residue-field and pointed-retraction results give a section of $U\\to T$ through its selected point and then a section, through the selected point, of the pulled-back source neighbourhood over $V_i$. Pull back the chart $Q$ by this second section. The resulting comparison $V_i\\to S=\\operatorname{Spec}(A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q])$ is etale: sections between etale schemes over the same base are etale and etale morphisms compose and base change, by [lem-trf-space-chartwise-etale-permanence] applied to schemes. These operations preserve the specified characteristic charts and $h$, with invertible annihilator $n$ for $C=Q^{\\rm gp}/P^{\\rm gp}$.",
+   "uses": [
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-per-kummer-fixed-sharp-chart-refinement",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, local standard charts; VI 3.7(a), p.75, sharp charts."
+   }
+  },
+  {
+   "text": "Put $D=A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$. The finiteness and surjectivity assertions of [lem-per-kummer-saturated-pushout-algebra], with $R=P$ and $a=1$, show that $D$ is finite over $A$ and $S\\to T$ is surjective. For each nonzero $q\\in Q$ choose $m>0$ and $p\\in P$ with $mq=h(p)$. Sharpness and injectivity imply $p\\ne0$: if $mq=0$, saturation makes $-q=(m-1)q$ a unit inverse, so $q=0$. Since the chart is characteristic at the closed point, $a(p)\\in\\mathfrak m$. Thus every nonconstant monomial in $D/\\mathfrak mD$ is nilpotent, and its quotient by them is $k$. This closed fibre has one point and residue field $k$. The henselian decomposition [lem-weil-pbc-finite-over-henselian-local-product] therefore makes $D$ local henselian with residue $k$, hence strictly henselian. It is Noetherian by [lem-weil-pbc-finite-algebra-noetherian].",
+   "uses": [
+    "lem-per-kummer-saturated-pushout-algebra",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72; sharp standard fibre and Stacks Tag 04GH."
+   }
+  },
+  {
+   "text": "The comparison $D\\to B$ of step 2 is finite: any finite set generating $B$ as an $A$-module also generates it as a $D$-module. It is etale and local. By [lem-weil-pbc-henselian-finite-etale-equivalence], it is determined by its finite etale closed fibre over $k$. By [lem-weil-pbc-etale-algebra-over-field-product] that fibre is a product of finite separable extensions of the separably closed field $k$, hence a product of copies of $k$. It is nonzero and local since $B$ is local, so it is precisely $k$. The equivalence, including full faithfulness, identifies $B$ with $D$ over $D$. The comparison is strict by the two charts, hence is an isomorphism of log schemes. This proves the claimed ordinary-fibre-product standard model and its surjectivity. Steps 1--4 have established this part for every finite Kummer etale cover of a strictly local base, independently of the remaining assertions.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, strict-local cartesian square; Stacks Tag 04GK, algebra.tex lemma-henselian-cat-finite-etale."
+   }
+  },
+  {
+   "text": "By [lem-sbc-strict-local-roots-of-unity], $\\mu_n(A)$ is cyclic of order $n$ and every nontrivial root minus one is a unit. The group $C$ is finitely generated (as a quotient of the groups generated by finite monoid generating sets) and killed by $n$. Apply [lem-sbc-finitely-generated-abelian-group-structure]: its free part is zero and each nontrivial cyclic summand has order dividing $n$. A primitive $n$th root therefore gives characters separating points of $C$, and exactly $|C|$ characters. For each $\\gamma\\in\\Gamma=\\operatorname{Hom}(C,\\mu_n(A))$, the rule $z^q\\mapsto\\gamma([q])z^q$ fixes all $z^{h(p)}$, so defines an $A$-algebra automorphism of $B$. Multiplying the chart section $q$ by the same unit defines the compatible log automorphism. Its inverse is the rule for $\\gamma^{-1}$, and composition multiplies characters.",
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2--2.3, p.72, diagonalizable group and character formula (2.a)."
+   }
+  },
+  {
+   "text": "Compute the fs diagonal by [lem-per-kummer-saturated-pushout-algebra]. The group completion of $Q\\oplus_PQ$ is $Q^{\\rm gp}\\oplus C$ under $(q_1,q_2)\\mapsto(q_1+q_2,[q_2])$. Its integralization has saturation $Q\\oplus C$: if a positive multiple of $(u,c)$ lies in the integralization, then a positive multiple of $u$ lies in $Q$, whence $u\\in Q$ by saturation; conversely $n(u,c)=(nu,0)$ comes from $(nu,0)$. Consequently the fs product has chart $Q\\oplus C$ and ring $B[C]$ over the first factor. Evaluation gives $B[C]\\simeq\\prod_{\\gamma\\in\\Gamma}B$. Indeed, for each cyclic summand of order $d\\mid n$, $B[t]/(t^d-1)$ is the product of the quotients $(t-\\zeta)$: distinct roots have unit differences by step 5, so the linear polynomials are pairwise coprime. Their product is $t^d-1$: divide successively by the monic linear factors, using unit root differences to preserve the remaining roots, and compare monic degrees. Apply [lem-pc-crt-principal-ideal-product] to identify their ideal intersection with $(t^d-1)$, and [lem-pc-crt-ideal-quotient-product] to split its quotient; evaluation identifies each linear quotient with $B$. Taking the finite products for the cyclic summands proves the displayed evaluation isomorphism. In each factor the chart $(q,c)$ becomes $z^q\\gamma(c)$; the extra group $C$ maps to units and logification gives precisely the chart log structure of $V_i$. The second projection is $z^q\\mapsto\\gamma([q])z^q$. Thus this is exactly the asserted canonical map $\\coprod_\\gamma V_i\\simeq V_i\\times_T^{\\rm fs}V_i$.",
+   "uses": [
+    "lem-per-kummer-saturated-pushout-algebra",
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-pc-crt-principal-ideal-product",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, displayed Galois fs diagonal; VI 2.3, formula (2.a)."
+   }
+  },
+  {
+   "text": "For a log automorphism $g$ over $T$, its graph $(1,g)$ is a map to the fs product. By step 6 this is a map to $\\coprod_\\Gamma V_i$ over $V_i$ through the first projection. The inverse images of the summands are open and closed and partition $V_i$. A local scheme is connected (any nonempty closed subset contains its closed point), so exactly one summand is used. On that summand the first projection is the identity, forcing the graph to be $(1,\\gamma)$ for precisely one character. This also proves uniqueness, including when $C=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72, connected-cover consequence of the fs Galois diagonal."
+   }
+  },
+  {
+   "text": "There is a $C$-grading on $\\mathbf Z[Q]$ with monomial degree $[q]$. Its degree-zero monoid is $Q\\cap P^{\\rm gp}=P$: if $q\\in Q\\cap P^{\\rm gp}$, some positive multiple belongs to $P$, so saturation of $P$ inside $P^{\\rm gp}$ gives $q\\in P$. Tensoring the direct-sum decomposition over $\\mathbf Z[P]$ with $A$ gives $B=\\bigoplus_{c\\in C}B_c$ with $B_0=A$; this uses distributivity of tensor products over finite direct sums, without flatness. A character acts on $B_c$ by its scalar value at $c$. If $c\\ne0$, select $\\gamma$ with $\\gamma(c)\\ne1$ as in step 5. The scalar $\\gamma(c)-1$ is a unit, so a fixed element has zero $c$-component. Hence $B^\\Gamma=A$, and a fixed unit of $B$ lies in $A^\\times$: its inverse is fixed too. At the closed log stalk, sharpness of the chart gives $M_{V_i,v_i}=Q\\oplus B^\\times$, by the pushout defining an associated log structure. An element $(q,u)$ is fixed precisely when $\\gamma(q)\\gamma(u)=u$ for every $\\gamma$. All $\\gamma$ act trivially on the residue field $k$; reducing this equality shows $\\gamma([q])=1$ for all $\\gamma$, so $q\\in P$. Then $u$ is fixed and belongs to $A^\\times$. Thus the closed-stalk fixed log monoid is $P\\oplus A^\\times=M_{T,t}$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, pp.72--73, P=Q intersect Pgp and invariant formulas."
+   }
+  },
+  {
+   "text": "The ring calculation in step 8 holds after every scalar extension $A\\to A'$: the $C$-grading still has degree zero $A'$, and the root differences remain units. In particular it applies to every affine etale $U=\\operatorname{Spec}A'$ over $T$. Since $v_i$ is finite, its inverse image is $\\operatorname{Spec}(A'\\otimes_AB)$ by [lem-weil-pbc-finite-morphism-permanence]. The canonical maps on sections therefore give $\\mathcal O_T\\simeq(v_{i*}\\mathcal O_{V_i})^\\Gamma$ on an affine etale basis and hence as sheaves. This also identifies fixed units after each strict-local base change; no exactness of arbitrary tensor products is being used.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, p.73, structure-sheaf invariants."
+   }
+  },
+  {
+   "text": "For the log sheaf, fix any geometric point $\\bar s$ of $T$ and strictly localize there: $T'=\\operatorname{Spec}A'$ is strictly henselian by [lem-weil-pbc-strict-henselization-local-structure] and Noetherian by [lem-sc-strict-henselization-noetherian]. The map $T'\\to T$ is strict with its pulled-back log structure, so [lem-per-fs-product-finite-comparison] identifies the fs base change with the ordinary finite base change $V'=V_i\\times_TT'$. It is Kummer etale by [lem-per-kummer-etale-fs-base-change-stability]. Decompose $V'=\\coprod_jW_j$ as in step 1. The fs diagonal of step 6 base changes, by its universal property, to $\\coprod_\\Gamma V'\\simeq V'\\times_{T'}^{\\rm fs}V'$. The group is transitive on the $W_j$: for any two factors the ordinary product has a nonempty closed fibre, and [lem-per-fs-product-finite-comparison] makes its fs product surjective over it; the diagonal then supplies a group element taking one factor to the other. For a chosen $W$, let $H$ be its stabilizer. Restricting the diagonal gives $\\coprod_H W\\simeq W\\times_{T'}^{\\rm fs}W$. Steps 2--7, which use no invariant-sheaf assertion, apply to $W\\to T'$ and identify it as a sharp standard cover with its own full character group $\\Gamma_W$. Every automorphism is in $H$: its connected graph factors through precisely one summand of the restricted diagonal, just as in step 7. Thus $H$ is exactly $\\Gamma_W$ acting on $W$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-per-fs-product-finite-comparison",
+    "lem-per-kummer-etale-fs-base-change-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2--2.3, pp.72--73, strict-local computation at arbitrary geometric points."
+   }
+  },
+  {
+   "text": "By [lem-trf-finite-base-strict-localization], the factors $W_j$ are the geometric strict localizations of $V_i$ at the points above $\\bar s$, so their closed log stalks are the original log stalks. By [lem-weil-pbc-sets-finite-pushforward-stalk], the stalk of $v_{i*}M_{V_i}$ at $\\bar s$ is the product of the log stalks at the closed geometric points of the factors $W_j$ in step 10. Stalks commute with the finite equalizer defining $\\Gamma$-invariants by [lem-weil-pbc-sets-etale-stalk-finite-limits]. For a transitive action on the factors, a fixed tuple is uniquely its component at $W$, invariant under $H$: transport that component by $\\gamma$ to the factor $\\gamma W$, and $H$-invariance is exactly independence of the choice of $\\gamma$. Step 8, applied to the sharp model of $W$ already established in step 10, gives $(M_{W,w})^H=M_{T',s'}$. Strict pullback identifies this closed characteristic-and-unit log stalk with $M_{T,\\bar s}$; the maps in the calculation are the original pullback maps on charts and units. Hence $M_T\\to(v_{i*}M_{V_i})^\\Gamma$ is bijective at every geometric stalk. By [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] it is an isomorphism of sheaves of sets, and its inverse respects monoid operations since the map does. This proves the log-sheaf assertion and completes every clause.",
+   "uses": [
+    "lem-trf-finite-base-strict-localization",
+    "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "lem-weil-pbc-sets-etale-stalk-finite-limits",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, p.73, log-sheaf invariants; Stacks Tag 03QP, etale-cohomology.tex proposition-finite-higher-direct-image-zero (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-per-kummer-fixed-sharp-chart-refinement",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-per-kummer-saturated-pushout-algebra",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-pc-crt-principal-ideal-product",
+  "lem-pc-crt-ideal-quotient-product",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-per-fs-product-finite-comparison",
+  "lem-per-kummer-etale-fs-base-change-stability",
+  "lem-trf-finite-base-strict-localization",
+  "lem-weil-pbc-sets-finite-pushforward-stalk",
+  "lem-weil-pbc-sets-etale-stalk-finite-limits",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2--2.3, pp.72--73: detailed chart, saturation, character and stalk argument expanding the stated results; local chart refinement is isolated as an unsplit input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +228,73 @@
    "results": "{\"t\": \"2026-10-19T00:07:40Z\", \"tool\": \"leanfinder\", \"query\": \"Standard logarithmic Kummer cover monoid chart diagonalizable group invariants equal base ring and log monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.logEmbeddingQuot_apply\", \"NumberField.Units.logEmbeddingEquiv_apply\", \"NumberField.mixedEmbedding.logMap_torsion_smul\", \"NumberField.Units.logEmbedding_fundSystem\", \"NumberField.Units.dirichletUnitTheorem.logEmbedding_ker\", \"NumberField.mixedEmbedding.logMap_eq_logEmbedding\", \"NumberField.Units.logEmbedding\", \"NumberField.Units.logEmbeddingQuot\"], \"digest\": \"3d4cb949086c3255\"}; Read the returned types: ordinary scheme pullbacks, ordinary etale algebras, Kummer field extensions, manifold charts, or number-field logarithms do not state the logarithmic claim. No fs-log match.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Kummer etale covers of strictly local fs log schemes have sharp standard monoid charts and character group invariants",
+   "results": "{\"t\": \"2026-10-24T01:30:04Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Kummer etale covers of strictly local fs log schemes have sharp standard monoid charts and character group invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"StandardEtalePair.instEtaleRing\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"dabe1df6b2c8b7bd\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KummerEtale|kummer_etale|LogScheme",
+   "results": "{\"t\": \"2026-10-24T01:30:28Z\", \"tool\": \"grep\", \"query\": \"KummerEtale|kummer_etale|LogScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strictly henselian fs log scheme finite Kummer etale standard cover",
+   "results": "{\"t\": \"2026-10-24T01:30:29Z\", \"tool\": \"leansearch\", \"query\": \"Strictly henselian fs log scheme finite Kummer etale standard cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePresentation.mk\", \"Field.henselian\", \"Algebra.IsStandardEtale\", \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.FormallyEtale.of_isSeparable_aux\"], \"digest\": \"d39b038242032241\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "{\"t\": \"2026-10-24T01:30:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic etale morphism with Kummer characteristic map admits compatible sharp charts with etale scheme comparison",
+   "results": "{\"t\": \"2026-10-24T01:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic etale morphism with Kummer characteristic map admits compatible sharp charts with etale scheme comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePair.HasMap.map\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"25b4f11fe040cd9a\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.etale|sharp.*chart|Kummer.*chart",
+   "results": "{\"t\": \"2026-10-24T01:33:37Z\", \"tool\": \"grep\", \"query\": \"log.etale|sharp.*chart|Kummer.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log etale Kummer morphism compatible sharp characteristic monoid charts with prescribed base chart",
+   "results": "{\"t\": \"2026-10-24T01:33:37Z\", \"tool\": \"leansearch\", \"query\": \"Log etale Kummer morphism compatible sharp characteristic monoid charts with prescribed base chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.of_isLocalization\"], \"digest\": \"fa9ef14108cb8f28\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogEtale\"",
+   "results": "{\"t\": \"2026-10-24T01:33:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Kummer logarithmic etale morphism can be presented etale locally by a sharp monoid injection with invertible finite group cokernel",
+   "results": "{\"t\": \"2026-10-24T01:33:38Z\", \"tool\": \"leanfinder\", \"query\": \"A Kummer logarithmic etale morphism can be presented etale locally by a sharp monoid injection with invertible finite group cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.hasMap\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\", \"StandardEtalePresentation.lift_bijective\"], \"digest\": \"bef29ba162ef75c3\"}; Read returned types: ordinary etale algebras, schemes, and number-field Kummer theory do not supply compatible sharp fs logarithmic charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-kummer-g-cover-fs-base-change",
@@ -83,5 +323,104 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-kummer-strict-local-standard-model",
+  "worker": "stage1",
+  "summary": "Expanded the strict-local Kummer model into henselian decomposition, a sharp-chart refinement, finite etale degree-one comparison, saturated diagonal, explicit character action, and ring/log invariant calculations. Reused existing monoid and stalk tools; one new general chart-refinement statement, no clause relabeling and no change to the item statement.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3, regular-pair purity ancestry recorded in blueprint.from.place: the finite Kummer G-cover local model underlying the very tame quotient. Latest blueprint checked; the auxiliary ILO VI geometry occurs through the recorded ancestry rather than as an explicit new unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   },
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   },
+   {
+    "node": "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "why": "Generic henselian, scheme, finite-group, chart, or geometric-stalk tool used exactly as its statement specifies; this perverse unit contains no replacement for this auxiliary local-cover calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-finite-base-strict-localization",
+  "lem-weil-pbc-sets-finite-pushforward-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-c3982e017",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-c3982e017 (reviewer sub-agent of L); spot-checked: I read the whole split. The item statement is unchanged and matches ILO VI 2.2–2.3 (pp.72–73, PDF 78–79): the standard cartesian square, the fs Galois diagonal, (2.a), P = Q ∩ P^gp, and the O/M invariants. Log regularity is not added, and the empty cover is allowed. All 11 steps check against the cited statements. S1: 04GH decomposition with separably closed residue fields. S2: the trivial-group sharp chart descends to T by an étale retraction, the new node is applied, and the pullback by sections is étale. S3: saturated-pushout lemma with R = P and a = id; sharpness gives p ≠ 0, so the closed fibre is k and D is strictly henselian. S4: finite étale equivalence over D, the fibre is local and equal to k, so D ≅ B. S6: (Q ⊕_P Q)^sat = Q ⊕ C (both inclusions verified), then CRT with unit root differences, valid over B with nilpotents. S7: connectedness. S8: C-grading with B_0 = A and no flatness; the fixed closed stalk is P ⊕ A^×. S10: transitivity on the factors and stabilizer H = Γ_W, not circular. S11: stalks of a finite pushforward and of finite limits for sheaves of sets. Small cases tested: empty cover, trivial log, the log point with k[t]/t^n. No cycle, and proof_deps equal the union of the step uses. New node lem-per-kummer-fixed-sharp-chart-refinement: true (Kummer h with h^gp injective, finite cokernel of invertible order, units adjusted by n-divisibility, Kato chart criterion). It is self-contained, has 5 real searches, and is the étale-local input of VI 2.2 (Stix 3.1.4) and 3.7(a). It is not a duplicate: kummer-etale-local-chart-criterion has no sharp or prescribed chart, and the pointwise-diagonal, cospan and saturated-pushout nodes are different statements. It is not a restated clause of the item. Batch 5: def-trf-fs-log-blowup is a general definition, and lem-trf-space-chartwise-etale-permanence and lem-trf-finite-base-strict-localization are generic Stacks tools. All the listed closure paths reach sec-trace-formula only through that definition, and none is a trace-formula or Poincaré step, so all are accepted. Dropped 2026-10-19 route: fs-product-finite-comparison, kummer-etale-fs-base-change-stability and very-tame-equivariant-sharp-chart are generic fs-log lemmas with no Qbar, adic, duality, Gabber finiteness or alteration content. The item is neither artin-gabber-affine-curve nor one of its children. BFS from nt-target-*: the item is reached through the live sfb chain (lem-sfb-field-log-smooth-gabber-modification → gabber-absolute-equivariant-modification, stage 2 landed today → kummer-boundary-restriction, landed today), and all three flagged nodes are reached without the item. The delivery adds only its new node to the closure, so the finding is not upheld. Maintainer notes: route-pivot-dropped.txt is stale for the item and this chain (line 1667), and the earlier route RETURNs of Q52 and Q78 conflict with this. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerStrictLocalStandardModel",
+  "declaration": "AlgebraicGeometry.kummer_strict_local_standard_model",
+  "declarations": [
+   "AlgebraicGeometry.kummerGlobalTest",
+   "AlgebraicGeometry.kummerGlobalPoint",
+   "AlgebraicGeometry.kummerGlobalLogGerm",
+   "AlgebraicGeometry.KummerStrictLocalChart",
+   "AlgebraicGeometry.KummerStrictLocalChart.toFSLogChart",
+   "AlgebraicGeometry.KummerStrictLocalChart.cokernel",
+   "AlgebraicGeometry.KummerStrictLocalChart.characters",
+   "AlgebraicGeometry.KummerStrictLocalChart.monomialClass",
+   "AlgebraicGeometry.kummerScalarGerm",
+   "AlgebraicGeometry.KummerStrictLocalChart.HasCharacterFormula",
+   "AlgebraicGeometry.KummerStrictLocalChart.HasInvariantSheaves",
+   "AlgebraicGeometry.KummerStrictLocalChart.HasGaloisDiagonal",
+   "AlgebraicGeometry.KummerStrictLocalChart.HasStandardCharacterDescription",
+   "AlgebraicGeometry.kummer_strict_local_standard_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerStrictLocalStandardModel.lean",
+  "statement": "theorem kummer_strict_local_standard_model (V T : FineSaturatedLogScheme.{u}) (v : EtaleLogHom V T) [IsAffine T.scheme] [IsStrictlyHenselianLocalRing Γ(T.scheme, ⊤)] [IsFinite v.base] (hk : v.IsKummer) (he : v.IsLogEtale) : ∃ (m : ℕ) (W : Fin m → FineSaturatedLogScheme.{u}) (ι : ∀ i : Fin m, EtaleLogHom (W i) V) (f : ∀ i : Fin m, EtaleLogHom (W i) T) (c : ∀ i : Fin m, KummerStrictLocalChart (f i)), Nonempty (IsColimit (Cofan.mk V.scheme (fun i ↦ (ι i).base))) ∧ (∀ i, (ι i).IsStrict ∧ (ι i).CompEq v (f i)) ∧ (∀ i j, (c i).P = (c j).P ∧ HEq (c i).a (c j).a) ∧ ∀ i, IsAffine (W i).scheme ∧ IsStrictlyHenselianLocalRing Γ((W i).scheme, ⊤) ∧ (c i).HasStandardCharacterDescription",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cb85a316",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery after e5e1d63f H2 RETURN. Lean file byte-identical (sha256 8352f6eb). Item node diff is stmt_deps only: theorem nodes lem-trf-log-fan-chart-blowup and lem-sfb-log-morphism-operations replaced by new existing:true def nodes def-per-fs-log-pullback (LogFanChartBlowup Square/IsFSPullback, l.168/176, statement verbatim) and def-per-log-morphism-identity (LogMorphismOperations EtaleLogMap.id/toFSHom/EtaleLogHom.id, l.103-141); def-trf-log-regular-pair added for strictLocalRing/strictLocalGerm. All stmt_deps are now definition nodes. New node prose matches the Lean; no duplicate owner in side-live; no cycle. Maths re-read against ILO VI 2.1-2.3: locally Noetherian is inside FineSaturatedLogScheme; all clauses and edge cases (m=0, trivial log, k[t]/t^n, char p) are fine. Advisory: inherited blueprint ids in the reused docstrings. Nothing compiled because no file was changed."
+ }
 }

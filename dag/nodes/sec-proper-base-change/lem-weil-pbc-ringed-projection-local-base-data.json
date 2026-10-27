@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-local-base-data",
+ "kind": "statement",
+ "title": "Existence of the localized restriction and tensor package",
+ "statement": "Fix schemes X,Y, a morphism f:X to Y, coefficient sheaf rings RY,RX and an isomorphism c:f-inverse RY isomorphic to RX. For every Global datum g and object V of Y.ProEt, the restriction and tensor fields of Local(f,RY,RX,c,g,V) exist: the two exact localized restrictions, the localized module operation and derived adjunction, both localized tensor models and shifts, the ordinary and derived tensor comparisons, and their restriction comparisons with shifts.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4; the restriction/tensor part of the local construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual ordinary localized operation, coefficient section equation, ordinary pure-unit tensor comparison and resolving-class preservation using localOrdinaryResolving_exists.",
+   "uses": [
+    "lem-weil-pbc-projection-local-ordinary-resolving"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4; the restriction/tensor part of the local construction."
+   }
+  },
+  {
+   "text": "For each restriction construct its exact Restriction data using localizedSystemExact and tensorOverIso. tensorOverIso_naturality gives naturality. K-flat restriction follows from ringedSite_restriction_exact_kflat; flatness of the terms follows by pulling a covering sieve and its local equational solutions to the slice. Restriction preserves coproducts through its faithful abelian-sheaf forgetful functor and the cocontinuous slice forgetful functor. Construct each slice tensor model and normalized shifts with tensorModelWithShifts_nonempty, and apply exactTensorComparison_exists to each restriction.",
+   "uses": [
+    "lem-weil-pbc-projection-exact-tensor-comparison",
+    "lem-weil-pbc-ringed-projection-global-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-total-tensor-comparison",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4; the restriction/tensor part of the local construction."
+   }
+  },
+  {
+   "text": "Ordinary tensor naturality for the localized pullback follows from its pure-unit equation by module adjunction and pure-tensor extensionality. Apply exactTensorComparison_exists to construct its normalized tensor comparison and both shifts. operationDerivedAdjunction supplies the normalized counit and its shift for the actual derived adjunction.",
+   "uses": [
+    "lem-weil-pbc-projection-exact-tensor-comparison",
+    "lem-weil-pbc-ringed-projection-tensor-comparison",
+    "lem-weil-pbc-ringed-projection-global-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4; the restriction/tensor part of the local construction."
+   }
+  },
+  {
+   "text": "Fill all LocalBaseData fields from these constructions. The structure and the original public theorem statement are unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; Cohomology on Sites, Tags 08FI, 0FN5 and 07A4; the restriction/tensor part of the local construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projection-local-ordinary-resolving",
+  "lem-weil-pbc-projection-exact-tensor-comparison",
+  "lem-weil-pbc-ringed-projection-global-model",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-total-tensor-comparison",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-ringed-projection-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04J0, 06YU, 07A4, 0G7E and 0FNH. Construct both normalized restriction tensor comparisons; reduce only the ordinary localized pullback, then assemble."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalData",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-projection-local-data",
+   "place": "Restriction and tensor fields of the Local construction.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-data"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionLocalBaseData",
+  "file": "lean/Sheaf/Paper/RingedProjectionLocalBaseData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localBaseData_exists",
+  "statement": "theorem localBaseData_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) (g : Global f R_Y R_X c) (V : Y.ProEt) : Nonempty (LocalBaseData g V)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T050630-L-247165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "independent cc review: item localBaseData_exists + new hole localOrdinaryResolving_exists against LocalBaseData/Local fields and node; Models+Transport and Model+ZeroCompletion concatenations vs published originals (verbatim); public decl type hashes published vs sandbox (identical); 12 delivered modules + 30 direct importers compiled in sandbox (all OK)"
+ }
+}

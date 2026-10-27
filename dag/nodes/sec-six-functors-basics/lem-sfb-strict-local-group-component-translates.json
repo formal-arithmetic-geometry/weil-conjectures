@@ -1,0 +1,352 @@
+{
+ "id": "lem-sfb-strict-local-group-component-translates",
+ "kind": "statement",
+ "title": "Integral translates cover a smooth group with connected generic fibre",
+ "statement": "Let $D$ be a strictly henselian discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-henselian-terminology], $F=\\operatorname{Frac}D$ and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $M$ be a smooth separated group scheme locally of finite type over $S$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; group schemes have multiplication, identity and inverse morphisms satisfying the group diagrams, and separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $M_F$ is geometrically connected, meaning connected after every extension of $F$ [def-pc-base-change, def-weil-connected-scheme]. Suppose the identity components of the geometric fibres are represented by an open subgroup $Q\\subseteq M$ [def-weil-open-immersion]; thus $Q_F=M_F$. For $m\\in M(D)$, write $mQ$ for the image of $Q$ under left multiplication by $m$. Then\n$$M=\\bigcup_{m\\in M(D)}mQ$$\nas an open covering. Consequently, for every local homomorphism $D\\to C$ to a nonzero commutative local ring, every $z\\in M(C)$ has an expression $z=m_Cu$ with $m\\in M(D)$ and $u\\in Q(C)$. Here points mean sections of the respective group schemes and $m_C$ denotes base change of the section $m$. No finite-type or Néron mapping property of $M$ is assumed beyond the stated local finite type.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Agent-extracted component input to BLR 10.1 Proposition 7, printed pp.292–293 (PDF pp.298–299); ingredients read locally in Stacks varieties.tex Tag 056U (lemma-smooth-separable-closed-points-dense) and more-algebra.tex Tag 0H74 (lemma-lift-smooth-henselian). Primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local BLR PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=D/\\mathfrak m$ and $G=M_k$. Strict henselianity says that $k$ is separably closed and $(D,\\mathfrak m)$ is henselian. Smooth base change makes $G/k$ smooth. It is locally of finite type: on affine charts, base changing finitely many algebra generators of a locally finite-type chart of $M/S$ still gives finitely many generators. A field is Noetherian (its only ideals are $0$ and the unit ideal), so $G$ is locally Noetherian by pqf-lem-locnoeth-lft. Each affine open $W$ has Noetherian coordinate ring by pqf-lem-affine-open-locnoeth, hence Noetherian underlying space by lem-sc-affine-noetherian-underlying-space. Its connected components are open by lem-sfb-noetherian-connected-components-open. For $x\\in G$, the connected component of $x$ in any affine open neighbourhood $W$ is therefore an open neighbourhood of $x$ in $G$ contained in the connected component of $x$ in $G$. Thus every connected component of $G$ is open. Give each such component its open-subscheme structure.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-pc-proper-base-change",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-connected-components-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF (lemma-locally-Noetherian-locally-connected) and 04ME (lemma-locally-connected), affine-neighbourhood argument; smooth base change: morphisms.tex Tag 01VB; local Noetherianity: Tag 01T6"
+   }
+  },
+  {
+   "text": "Let $\\bar k/k$ be an algebraic closure and $C_e$ the connected component of the identity in $G$, now an open $k$-subscheme. The projection $X_{\\bar k}\\to X$ is surjective for every $k$-scheme $X$: apply lem-pc-field-extension-surjective and lem-weil-pbc-surjective-base-change. In particular $Q_k$ is connected, since $(Q_k)_{\\bar k}=Q_{\\bar k}$ is the assumed geometric identity component and its continuous image is all of $Q_k$. It contains the identity, so $Q_k\\subseteq C_e$. Conversely $C_e$ is geometrically connected by lem-weil-separably-closed-geometrically-connected. Its base change is connected and contains the identity, so $(C_e)_{\\bar k}\\subseteq Q_{\\bar k}$. Surjectivity of $(C_e)_{\\bar k}\\to C_e$ implies $C_e\\subseteq Q_k$. Consequently $Q_k=C_e$ as open subschemes of $G$: both structure sheaves are restrictions of $\\mathcal O_G$ to the same open set.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-separably-closed-geometrically-connected",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0363 (lemma-separably-closed-field-connected-components), geometric connectedness over a separably closed field; Tag 01S1 (morphisms-lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "For any connected component $C$ of $G$, its open subscheme is smooth over $k$ by lem-weil-pbc-smooth-restrict-open-subschemes. It is nonempty by the definition of a component. By lem-pc-dense-separable-points it has a closed point $a$ with $\\kappa(a)/k$ finite separable. Because $k$ is separably closed, this extension is $k$ itself; hence $a$ determines a $k$-point of $C$, and thus of $G$. This applies to every component, with no finiteness assumption on the collection of components.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056U (lemma-smooth-separable-closed-points-dense), applied to the nonempty smooth open component C"
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $V=\\operatorname{Spec}B\\subseteq M$ of the image of $a:\\operatorname{Spec}k\\to M$. The point factors through $V$ by lem-weil-pbc-morphism-factors-through-open-subscheme. Restriction to $V$ is smooth over $S=\\operatorname{Spec}D$ by lem-weil-pbc-smooth-restrict-open-subschemes, so $B$ is a smooth $D$-algebra by lem-weil-pbc-smooth-ring-map-iff-smooth-affine. The point corresponds to a $D$-algebra map $B\\to k=D/\\mathfrak m$. Apply lem-trf-henselian-smooth-algebra-lifting with $R=A=D$, its smooth algebra $B$, and $I=\\mathfrak m$. It gives a $D$-algebra map $B\\to D$ reducing to the prescribed point. Taking spectra and composing with $V\\hookrightarrow M$ gives $m\\in M(D)$ with $m_k=a$. Thus every component C has such a lifted point.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-henselian-smooth-algebra-lifting",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74 (lemma-lift-smooth-henselian); affine smoothness and restriction: morphisms.tex Tag 01V6 (lemma-smooth-characterize)"
+   }
+  },
+  {
+   "text": "Left multiplication by any section $m$ is an $S$-isomorphism of $M$ with inverse left multiplication by $m^{-1}$, by the group diagrams. It therefore sends the open subscheme $Q$ to an open subscheme $mQ$. For the lifted point of a component $C$ in step 4, its special-fibre map is left multiplication by $a$. A homeomorphism takes a maximal connected subset to the maximal connected subset of its image point (apply the inverse homeomorphism for maximality). Thus it takes $C_e$ onto $C$, because it takes the identity to $a$. Step 2 gives $(mQ)_k=aQ_k=C$. Since the components partition $G$ and the projection $G=M_k\\to M$ is a homeomorphism onto the set-theoretic fibre over the closed point [def-pc-scheme-fibre], the union of all the $mQ$ contains every point of $M$ over $\\mathfrak m$. It also contains every point of $M$ over $(0)$: take the identity section, use $Q_F=M_F$ and the same fibre homeomorphism for $M_F\\to M$ [def-pc-scheme-fibre]. A DVR has only the primes $(0)$ and $\\mathfrak m$: a nonzero prime contains a nonzero element, which is a unit times a power of a uniformizer by lem-weil-pbc-dvr-unit-times-uniformizer-power (a DVR is a principal ideal domain, hence Noetherian, with maximal ideal generated by a nonzero uniformizer), hence contains the uniformizer and equals $\\mathfrak m$. Every point of $M$ lies over one of these primes. The open subschemes $mQ$ therefore cover $M$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-open-immersion",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Connected components and homeomorphisms; elementary group-diagram translation argument, using the assumed open subgroup and equality Q_F=M_F"
+   }
+  },
+  {
+   "text": "Let $D\\to C$ be the stated local map and let $c$ be the closed point of $\\operatorname{Spec}C$ (it exists since $C\\ne0$). Choose $m\\in M(D)$ with $z(c)\\in mQ$ using the open cover just proved. Then $z^{-1}(mQ)$ is an open subset of $\\operatorname{Spec}C$ containing $c$, and is all of $\\operatorname{Spec}C$: a basic neighbourhood $D(f)$ of the maximal ideal has $f$ outside that ideal, hence $f$ a unit and $D(f)=\\operatorname{Spec}C$. By lem-weil-pbc-morphism-factors-through-open-subscheme, $z$ factors through $mQ$. Composing this factorization with the inverse translation gives $u\\in Q(C)$. The group identity for the translation and its inverse yields $z=m_Cu$, as required.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Open-subscheme factorization; elementary local-spectrum basic-open argument and group identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-pc-proper-base-change",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-separably-closed-geometrically-connected",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "def-weil-affine-spectrum",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly from Tags 056U and 0363; more-algebra.tex Tag 0H74; topology.tex Tags 04MF and 04ME. BLR local PDF unavailable; no claim to have read its scan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Henselian.*Smooth|Smooth.*Henselian|connectedComponent.*translate|translate.*connectedComponent",
+   "results": "{\"t\": \"2026-10-24T07:54:59Z\", \"tool\": \"grep\", \"query\": \"Henselian.*Smooth|Smooth.*Henselian|connectedComponent.*translate|translate.*connectedComponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing and its field instance are definitions; Algebra.FormallySmooth.exists_lift assumes a nilpotent ideal and does not lift arbitrary residue-field points over a henselian DVR. NonarchimedeanGroup and minimal-action results concern topological groups, not algebraic special-fibre components or integral sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral points over a strictly henselian local ring lift points of every connected component of the special fibre of a smooth group scheme",
+   "results": "{\"t\": \"2026-10-24T07:54:59Z\", \"tool\": \"leansearch\", \"query\": \"Integral points over a strictly henselian local ring lift points of every connected component of the special fibre of a smooth group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHenselianRingMaximalIdeal\", \"HenselianLocalRing\", \"Algebra.FormallySmooth.exists_lift\", \"HenselianLocalRing.mk\", \"HenselianLocalRing.toIsLocalRing\", \"Field.henselian\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"HenselianLocalRing.recOn\"], \"digest\": \"832e244ef7ab0fef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing and its field instance are definitions; Algebra.FormallySmooth.exists_lift assumes a nilpotent ideal and does not lift arbitrary residue-field points over a henselian DVR. NonarchimedeanGroup and minimal-action results concern topological groups, not algebraic special-fibre components or integral sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T07:54:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing and its field instance are definitions; Algebra.FormallySmooth.exists_lift assumes a nilpotent ideal and does not lift arbitrary residue-field points over a henselian DVR. NonarchimedeanGroup and minimal-action results concern topological groups, not algebraic special-fibre components or integral sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth group over a strictly henselian discrete valuation ring with geometrically connected generic fibre is covered by translates of its identity component by integral sections",
+   "results": "{\"t\": \"2026-10-24T07:55:01Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth group over a strictly henselian discrete valuation ring with geometrically connected generic fibre is covered by translates of its identity component by integral sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"Field.henselian\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"HenselianLocalRing.TFAE\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"krullTopology_mem_nhds_one_iff\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"6b61689021c74a8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing and its field instance are definitions; Algebra.FormallySmooth.exists_lift assumes a nilpotent ideal and does not lift arbitrary residue-field points over a henselian DVR. NonarchimedeanGroup and minimal-action results concern topological groups, not algebraic special-fibre components or integral sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth group over a strictly henselian local ring translates of an open subgroup with full generic fibre cover the whole group scheme",
+   "results": "{\"t\": \"2026-10-24T08:01:03Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth group over a strictly henselian local ring translates of an open subgroup with full generic fibre cover the whole group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NonarchimedeanGroup.exists_openSubgroup_separating\", \"NonarchimedeanRing.mul_subset\", \"NonarchimedeanRing.left_mul_subset\", \"IsOpen.iUnion_smul\", \"NonarchimedeanAddGroup.exists_openAddSubgroup_separating\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\", \"krullTopology_mem_nhds_one_iff\"], \"digest\": \"f1f61422c144d213\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing and its field instance are definitions; Algebra.FormallySmooth.exists_lift assumes a nilpotent ideal and does not lift arbitrary residue-field points over a henselian DVR. NonarchimedeanGroup and minimal-action results concern topological groups, not algebraic special-fibre components or integral sections."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*smooth|smooth.*hensel|connectedComponent.*translate|translate.*connectedComponent",
+   "results": "{\"t\": \"2026-10-24T08:34:20Z\", \"tool\": \"grep\", \"query\": \"hensel.*smooth|smooth.*hensel|connectedComponent.*translate|translate.*connectedComponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern smoothness definitions, ordinary covers, HenselianLocalRing or elliptic reduction, not integral sections and the fibrewise identity subgroup cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Algebra.Smooth",
+   "results": "{\"t\": \"2026-10-24T08:34:20Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, Algebra.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern smoothness definitions, ordinary covers, HenselianLocalRing or elliptic reduction, not integral sections and the fibrewise identity subgroup cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme over a strictly henselian discrete valuation ring with connected generic fibre is covered by translates of its open identity component by integral sections",
+   "results": "{\"t\": \"2026-10-24T08:34:23Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth group scheme over a strictly henselian discrete valuation ring with connected generic fibre is covered by translates of its open identity component by integral sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"AlgebraicGeometry.Scheme.Cover.sigma_I₀\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀\"], \"digest\": \"8c87f5b03ea7a909\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern smoothness definitions, ordinary covers, HenselianLocalRing or elliptic reduction, not integral sections and the fibrewise identity subgroup cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth group scheme over a strictly henselian local ring is covered by integral translates of its fibrewise connected identity subgroup when its generic fibre is connected",
+   "results": "{\"t\": \"2026-10-24T08:35:39Z\", \"tool\": \"leansearch\", \"query\": \"Smooth group scheme over a strictly henselian local ring is covered by integral translates of its fibrewise connected identity subgroup when its generic fibre is connected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"5108ddd5c6b065e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern smoothness definitions, ordinary covers, HenselianLocalRing or elliptic reduction, not integral sections and the fibrewise identity subgroup cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction on points of a smooth group over a henselian local ring is surjective and integral translations of the neutral fibre component cover the special fibre",
+   "results": "{\"t\": \"2026-10-24T08:35:40Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction on points of a smooth group over a henselian local ring is surjective and integral translations of the neutral fibre component cover the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"AlgebraicGeometry.pointsPi_surjective\", \"HenselianLocalRing.TFAE\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"HenselianLocalRing\", \"surjective_fontaineTheta\"], \"digest\": \"39d1c058b85d7ee8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern smoothness definitions, ordinary covers, HenselianLocalRing or elliptic reduction, not integral sections and the fibrewise identity subgroup cover."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-integral-coset-specialization",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), existing alteration-route trait-extension prerequisite; BLR 10.1 Proposition 7 proof, printed pp.292–293 (PDF pp.298–299), strict-local coset quotient and compatibility with ramification-one extensions; 3.6 Definition 1, printed p.78, includes separable residue extension; supporting input: Integral translates cover a smooth group with connected generic fibre",
+   "via": [
+    "lem-sfb-torus-integral-coset-specialization",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-local-group-component-translates",
+  "worker": "stage1",
+  "summary": "Six-step proof using existing DAG nodes only: affine Noetherian components give open special components; separably closed geometric connectedness identifies Q_k; smooth separable points and henselian algebra lifting provide integral representatives; translations cover both fibres; local spectra give the point factorization. Statement unchanged; no new nodes.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration-route trait-extension input; this auxiliary component argument is not itself present in the blueprint. The inherited creation chain has no blueprint ancestor (blueprint_refs.py ancestor returns None); retain its null ancestor and existing precise from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic Proper and smooth morphisms are stable under base change input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic Finite type over a locally Noetherian base input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic Affine opens of a locally Noetherian scheme input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Generic An affine scheme with Noetherian coordinate ring has Noetherian underlying space input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic A Noetherian space has finitely many open connected components input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "Generic A field extension induces a surjective morphism of spectra input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic Base change of a surjective morphism is surjective input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "Generic Over a separably closed field connected implies geometrically connected input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic Smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic Density of rationally defined closed points input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic A morphism with image in an open subscheme factors uniquely through it input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic A ring map is smooth iff the morphism of spectra is smooth input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic Smooth algebra homomorphisms lift across a henselian pair input to the special-fibre, henselian lifting or open-factorization argument; the current unit has no replacement statement. Does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-8395628cc",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-8395628cc (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full; it is a plain split with no new nodes and the statement is unchanged. I read every cited node's statement and the hypotheses match. Step 1: components of the lft special fibre are open, via local Noetherianity and affine Noetherian spaces. Step 2: Q_k = C_e, by surjectivity of base change to the algebraic closure and Stacks 0363 (connected over a separably closed field implies geometrically connected). Step 3: Stacks 056U gives a k-point on each component. Step 4: the henselian lifting lemma (Stacks 0H74) applies with R=A=D and I=m. Step 5: translates cover both fibres. Step 6: the closed-point open argument gives z=m_C u. Small cases checked: connected special fibre, constant Z/n, infinitely many components, imperfect separably closed k. No duplicate: lem-sfb-smooth-trait-principal-translate-cover is a different finite-type, affine-cover result. Batch 5: lem-trf-henselian-smooth-algebra-lifting is Stacks 0H74, a general henselian-pair algebra lemma, not part of the trace formula or Poincaré duality. Its 275-node closure contains no other sec-trace-formula, sec-poincare-duality or nt- node, so the citation is acceptable. FIX (C1, step 5): it used two facts without citation. I cited def-pc-scheme-fibre for the homeomorphism of M_k and M_F onto the set-theoretic fibres, and lem-weil-pbc-dvr-unit-times-uniformizer-power for the inline claim about DVR elements. Both are added to proof_deps. The corrected item file is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.StrictLocalGroupComponentTranslates",
+  "declaration": "AlgebraicGeometry.strictLocalGroup_component_translates",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/StrictLocalGroupComponentTranslates.lean",
+  "statement": "theorem strictLocalGroup_component_translates (D : Type u) [CommRing D] [IsDomain D] [IsDiscreteValuationRing D] [IsStrictlyHenselianLocalRing D] (F : Type u) [Field F] [Algebra D F] [IsFractionRing D F] (M Q : Over (Spec (.of D))) [GrpObj M] [GrpObj Q] [Smooth M.hom] [LocallyOfFiniteType M.hom] [IsClosedImmersion (pullback.diagonal M.hom)] (i : Q ⟶ M) [IsMonHom i] [IsOpenImmersion i.left] (_hgeneric : ∀ (K : Type u) [Field K] (ψ : F →+* K), ConnectedSpace (pullback M.hom (Spec.map (CommRingCat.ofHom (ψ.comp (algebraMap D F)))) : Scheme.{u})) (_hcomponents : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (φ : D →+* Ω), (pullback.fst M.hom (Spec.map (CommRingCat.ofHom φ))) ⁻¹' Set.range i.left = connectedComponent ((sectionBaseChange M.hom (η[M]).left (η[M]).w (Over.mk (Spec.map (CommRingCat.ofHom φ)))) (default : Spec (.of Ω)))) : (∀ m : 𝟙_ (Over (Spec (.of D))) ⟶ M, IsOpen (Set.range (((toUnit Q ≫ m) * i).left))) ∧ (⋃ m : 𝟙_ (Over (Spec (.of D))) ⟶ M, Set.range (((toUnit Q ≫ m) * i).left)) = Set.univ ∧ ∀ (C : Type u) [CommRing C] [IsLocalRing C] [Nontrivial C] (φ : D →+* C) [IsLocalHom φ] (z : Over.mk (Spec.map (CommRingCat.ofHom φ)) ⟶ M), ∃ (m : 𝟙_ (Over (Spec (.of D))) ⟶ M) (u : Over.mk (Spec.map (CommRingCat.ofHom φ)) ⟶ Q), z = (toUnit (Over.mk (Spec.map (CommRingCat.ofHom φ))) ≫ m) * (u ≫ i)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-148a3d688",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read node, 10 stmt_dep records (IsStrictlyHenselianLocalRing Henselian.lean:122, sectionBaseChange Picard/Defs.lean:91), module, report (Worker report + Second reading by Q50, a self-review pass). Hypotheses match the node: DVR+strict henselian, Frac, GrpObj M over Spec D, Smooth+LFT, closed diagonal, connected generic fibre after every extension of F, Q open GrpObj sub with IsMonHom+open immersion, preimage of Q in every geometric fibre = connected component of the real base-changed unit. Conclusions match: each translate open, union over all D-sections = univ, C-point factorization z=m_C*u with m on the left. No extra assumptions; universe u throughout. Statement verbatim in file; node diff lean-only; no defs, sorry only; docstrings carry source and blueprint tag; imports exist; no duplicate found. No compile (no change)."
+ }
+}

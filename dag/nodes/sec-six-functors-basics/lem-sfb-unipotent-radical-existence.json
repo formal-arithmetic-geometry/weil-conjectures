@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-unipotent-radical-existence",
+ "kind": "statement",
+ "title": "Existence of the unipotent radical of a smooth connected affine group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a smooth connected affine $F$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with smoothness and connectedness as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Closed normal subgroup schemes mean [def-sc-group-scheme-subgroup]. For smooth affine groups, unipotent means that there exists a faithful finite-dimensional matrix representation, a closed immersion into $\\operatorname{GL}_n$, in which every point over every algebraically closed extension field is a unipotent matrix, satisfying $(u-I)^N=0$ for some $N\\geq1$ [def-sfb-solvable-group-structure]. There exists a smooth connected closed normal unipotent subgroup scheme $U\\subseteq H$ containing every smooth connected closed normal unipotent subgroup scheme of $H$, as a closed subgroup scheme. Thus $U$ is unique as a closed subgroup scheme of $H$; it is called the unipotent radical $R_u(H)$. The statement includes $H=1$, for which $U=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 6.46, printed p.135, existence of the largest connected normal unipotent subgroup variety; Proposition 6.42, printed p.134; matrix interpretation in Corollary 14.12 and Section 14(c), printed pp.283, 286--287."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Call a subgroup a candidate if it has all the properties required of $U$. The trivial group $1=\\operatorname{Spec}F$ is a candidate: its structure morphism is the identity, hence is finitely presented and has the unique lift in every infinitesimal lifting problem, so is smooth [def-sbc-smooth-morphisms]; its underlying space is one point, hence connected [def-weil-connected-scheme], and its coordinate algebra is generated over $F$ by the empty set [def-weil-finite-type-morphism]. Write $H=\\operatorname{Spec}A$. The identity section is closed because its coordinate homomorphism $A\\to F$ is surjective (it is the identity on the scalar copy of $F$), using [def-weil-closed-immersion]. On every algebra its image is the identity subgroup, hence normal [def-sc-group-scheme-subgroup]. The representation $1\\hookrightarrow\\operatorname{GL}_1$ given by the matrix $(1)$ is closed (its equation is $t-1=0$), faithful, and unipotent by [def-sfb-solvable-group-structure].",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-connected-scheme",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup",
+    "def-sfb-solvable-group-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.42, printed p.134, initial trivial subgroup; expanded directly from the definitions."
+   }
+  },
+  {
+   "text": "Every candidate is solvable by [lem-sfb-smooth-unipotent-solvable]. The geometric-connectedness clause of [lem-sfb-solvable-normal-subgroup-products] applies to the given smooth connected $H$, so $H$ is geometrically connected. The dimension clauses of that node say that candidate dimensions are nonnegative integers at most $\\dim H$, and that a proper closed inclusion between smooth connected groups strictly increases dimension. Thus the nonempty set of attained dimensions is a subset of the finite set $\\{0,\\ldots,\\dim H\\}$. Choose its largest integer and a candidate $U$ attaining it. Also $F$ is perfect: a minimal polynomial of any element algebraic over $F$ splits into linear factors over the algebraically closed $F$ [def-weil-algebraic-closure], so that element already lies in $F$. Thus all algebraic extensions of $F$ are trivial, in particular separable, as required by the perfect-field hypothesis used next.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.21, printed pp.284--285; Proposition 6.42, printed p.134, greatest-dimension choice; Theorem 16.33, printed pp.335--336, perfect-field hypothesis."
+   }
+  },
+  {
+   "text": "Let $V$ be any candidate. Both $U$ and $V$ are smooth connected normal solvable subgroups of the smooth geometrically connected affine finite-type group $H$. Apply [lem-sfb-solvable-normal-subgroup-products] to obtain the smooth connected closed normal solvable subgroup $P=UV\\subseteq H$, containing $U$ and $V$, with its stated fppf-local product description. Apply [lem-sfb-perfect-solvable-unipotent-torus] to $P$ over the perfect field $F$. This gives a smooth connected closed normal unipotent subgroup $P_u\\subseteq P$ and the fppf quotient $q:P\\to P/P_u$. That node's containment assertion applies to the smooth unipotent subgroups $U,V\\subseteq P$, so both lie in $P_u$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-perfect-solvable-unipotent-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 6.41, printed p.134, product argument; product geometry in Theorem 5.52 and Proposition 5.54, printed p.112; unipotence tested using Theorem 16.33(a)--(c), printed pp.335--336."
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $B$ and $x\\in P(B)$, the product description in [lem-sfb-solvable-normal-subgroup-products] gives a faithfully flat finitely presented $B$-algebra $C$ and $x_C=uv$ with $u\\in U(C)$ and $v\\in V(C)$. Their containment in $P_u$ gives $q(x)_C=q(u)q(v)=1$. The represented fppf quotient in [lem-sfb-perfect-solvable-unipotent-torus] is a sheaf, so equality of these sections descends to $q(x)=1$. By the kernel condition in the definition of an fppf quotient [def-sfb-solvable-group-structure], this says $x\\in P_u(B)$. It holds for all $B$ and is natural in $B$; equivalently the functor-of-points inclusion $P_u\\subseteq P$ is equality. Hence $P=P_u$ is unipotent. Together with step 3, $P$ is a candidate; this proves product closure without assuming an unipotent radical already exists for $H$.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "def-sfb-solvable-group-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 6.41 and Proposition 6.42, printed p.134; Theorem 16.33(b)--(c), printed p.336; fppf quotient meaning in Section 5(j), printed pp.116--118. Explicit local-product calculation."
+   }
+  },
+  {
+   "text": "The inclusion $U\\subseteq P$ cannot be proper: otherwise [lem-sfb-solvable-normal-subgroup-products] gives $\\dim U<\\dim P$, contradicting the greatest candidate dimension chosen in step 2. Thus $P=U$ as closed subgroup schemes, and $V\\subseteq P=U$. Since $V$ was arbitrary, $U$ contains every candidate. If $U'$ has the same largest-subgroup property, then $U'\\subseteq U$ and $U\\subseteq U'$; the corresponding ideals in the affine coordinate ring of $H$ have both reverse inclusions, so are equal [def-weil-closed-immersion]. This proves uniqueness as a closed subgroup scheme. Calling this unique subgroup $R_u(H)$ gives the asserted name. For $H=1$, every candidate lies in $1$, and step 1 shows that $1$ itself is a candidate, so $R_u(1)=1$.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.42, printed p.134, product and maximality argument; Section 6.46, printed p.135, the name unipotent radical; Corollary 14.8, printed p.282."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-solvable-group-structure",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "def-weil-algebraic-closure",
+  "lem-sfb-perfect-solvable-unipotent-torus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 6.41 and Proposition 6.42, p.134, applied to Section 6.46, p.135; unipotent product closure supplied by Theorem 16.33(a)--(c), pp.335--336, using the already split solvable-product and solvable-structure inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unipotentRadical|unipotent_radical|[Uu]nipotent",
+   "results": "{\"t\": \"2026-10-24T00:06:28Z\", \"tool\": \"grep\", \"query\": \"unipotentRadical|unipotent_radical|[Uu]nipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle gives only unipotent biproduct automorphisms; semantic hits are radicals or nilpotent ideals of Lie algebras and abstract/topological normal subgroups. None asserts existence of a smooth connected unipotent radical in affine group schemes. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of the largest connected normal unipotent subgroup variety of an affine algebraic group",
+   "results": "{\"t\": \"2026-10-24T00:06:29Z\", \"tool\": \"leansearch\", \"query\": \"Existence of the largest connected normal unipotent subgroup variety of an affine algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OpenNormalAddSubgroup.instMaxOfContinuousAdd\", \"Subgroup.normal_unop\", \"Subgroup.normalCore_eq_iSup\", \"AddSubgroup.sup_normal\", \"OpenNormalSubgroup.instSemilatticeSupOpenNormalSubgroup\", \"LieModule.maxNilpotentSubmodule\", \"NormalizerCondition\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\"], \"digest\": \"bb5e7fd78ef5ebe4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle gives only unipotent biproduct automorphisms; semantic hits are radicals or nilpotent ideals of Lie algebras and abstract/topological normal subgroups. None asserts existence of a smooth connected unipotent radical in affine group schemes. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T00:06:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle gives only unipotent biproduct automorphisms; semantic hits are radicals or nilpotent ideals of Lie algebras and abstract/topological normal subgroups. None asserts existence of a smooth connected unipotent radical in affine group schemes. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected affine algebraic group over an algebraically closed field has a largest smooth connected normal unipotent closed subgroup, its unipotent radical",
+   "results": "{\"t\": \"2026-10-24T00:06:36Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected affine algebraic group over an algebraically closed field has a largest smooth connected normal unipotent closed subgroup, its unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.radical\", \"LieAlgebra.maxNilpotentIdeal\", \"LieAlgebra.HasCentralRadical\", \"LieAlgebra.maxNilpotentIdeal_le_radical\", \"LieAlgebra.radicalIsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.maxNilpotentIdealIsNilpotent\"], \"digest\": \"eea56fb27c9aa583\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle gives only unipotent biproduct automorphisms; semantic hits are radicals or nilpotent ideals of Lie algebras and abstract/topological normal subgroups. None asserts existence of a smooth connected unipotent radical in affine group schemes. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unipotent radical is the greatest smooth connected normal unipotent algebraic subgroup",
+   "results": "{\"t\": \"2026-10-24T00:06:37Z\", \"tool\": \"leanfinder\", \"query\": \"The unipotent radical is the greatest smooth connected normal unipotent algebraic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.maxNilpotentIdeal_le_radical\", \"LieAlgebra.radical\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.radicalIsSolvable\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.maxNilpotentIdeal\", \"LieAlgebra.HasCentralRadical\", \"LieAlgebra.LieIdeal.solvable_iff_le_radical\"], \"digest\": \"592f704b663bbf6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle gives only unipotent biproduct automorphisms; semantic hits are radicals or nilpotent ideals of Lie algebras and abstract/topological normal subgroups. None asserts existence of a smooth connected unipotent radical in affine group schemes. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotentRadical|unipotent_radical|[Uu]nipotent",
+   "results": "{\"t\": \"2026-10-24T00:38:12Z\", \"tool\": \"grep\", \"query\": \"unipotentRadical|unipotent_radical|[Uu]nipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern biproduct isomorphisms, abstract/topological groups, or Lie-algebra ideals rather than smooth affine group schemes; the AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a largest smooth connected normal unipotent algebraic subgroup",
+   "results": "{\"t\": \"2026-10-24T00:38:12Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a largest smooth connected normal unipotent algebraic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OpenNormalAddSubgroup.instMaxOfContinuousAdd\", \"LieModule.maxNilpotentSubmodule\", \"Subgroup.normal_unop\", \"OpenNormalSubgroup.instSemilatticeSupOpenNormalSubgroup\", \"LieAlgebra.maxNilpotentIdeal\", \"Subgroup.instTop\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\", \"NormalizerCondition\"], \"digest\": \"c9e4ce91e3b8674b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern biproduct isomorphisms, abstract/topological groups, or Lie-algebra ideals rather than smooth affine group schemes; the AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T00:38:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern biproduct isomorphisms, abstract/topological groups, or Lie-algebra ideals rather than smooth affine group schemes; the AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field has a greatest connected normal unipotent subgroup, the unipotent radical",
+   "results": "{\"t\": \"2026-10-24T00:38:18Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group over an algebraically closed field has a greatest connected normal unipotent subgroup, the unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.radical\", \"LieAlgebra.HasCentralRadical\", \"LieAlgebra.maxNilpotentIdeal\", \"frattini_nilpotent\", \"LieAlgebra.maxNilpotentIdeal_le_radical\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.radicalIsSolvable\", \"LieAlgebra.maxNilpotentIdealIsNilpotent\"], \"digest\": \"c56afc85491621fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern biproduct isomorphisms, abstract/topological groups, or Lie-algebra ideals rather than smooth affine group schemes; the AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A maximal connected unipotent normal subgroup of an affine group contains every connected unipotent normal subgroup",
+   "results": "{\"t\": \"2026-10-24T00:38:35Z\", \"tool\": \"leanfinder\", \"query\": \"A maximal connected unipotent normal subgroup of an affine group contains every connected unipotent normal subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini\", \"frattini_characteristic\", \"frattini_le_coatom\", \"upperCentralSeriesAux\", \"NormalizerCondition\", \"Group.IsVirtuallyNilpotent\", \"frattini_nilpotent\", \"normalizerCondition_of_isNilpotent\"], \"digest\": \"c47befff16700132\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern biproduct isomorphisms, abstract/topological groups, or Lie-algebra ideals rather than smooth affine group schemes; the AlgebraicGeometry grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-normal-subgroup-reductive",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Argument of 23.24 and the final paragraph completing 23.18, printed p.492, in the general form of a surjective reductive homomorphism with an isomorphism on maximal tori and lifted simple root groups; rank comparison and Weyl conjugation use 21.51 and 21.39, and the big cells use 21.84. This is a supporting criterion, not the isogeny existence theorem. Supporting kernel-finiteness step: Milne Corollary 17.85 and Corollary 21.53, applied to the reduced identity component of a closed normal subgroup. Supporting structural lemma: Corollary 21.53, printed p.441: every connected normal subgroup variety of a reductive group is reductive. Group variety means smooth algebraic group; smoothness of M is retained explicitly. Present supporting input: Section 6.46, largest smooth connected normal unipotent subgroup of M, used in proof steps 1--4.",
+   "via": [
+    "lem-sfb-connected-normal-subgroup-reductive",
+    "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+    "lem-sfb-torus-simple-root-isomorphism-criterion",
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-radical-existence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Milne 6.41--6.46, 14.7--14.12, 14.21 and 16.33. Reused the existing smooth-unipotent-solvable, solvable-normal-subgroup-products and perfect-solvable-unipotent-torus nodes. The proof constructs a product, checks its unipotence by the solvable structure theorem and fppf-local multiplication, then uses bounded dimensions to obtain containment and uniqueness. No new nodes and no Lean attachment; all searches run through msearch.py and recorded.",
+  "blueprint": "Preserves the inherited from.node=null and via chain printed by blueprint_refs.py ancestor; the supporting input is Milne 6.46 in the proof of lem-sfb-connected-normal-subgroup-reductive, steps 1--4, under the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route. Latest blueprint main-20261024 has no node stating this unipotent-radical existence input; blueprint searches for unipotent radical, unipotent and solvable give no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-19002c0e6",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-19002c0e6 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 6.41–6.46 (pp.134–135) and 16.33(a)–(c) (pp.335–336). The statement is unchanged from the base and matches 6.46 over F̄, with smooth unipotence in matrix form as in 14.12. The delivery creates no new nodes. The item was unsplit in both live clones, so no other group has superseded it, and there is no re-split repair note. Steps: (1) the trivial group is a candidate, a direct definition check; (2) every candidate is solvable (lem-sfb-smooth-unipotent-solvable), dimensions are bounded by dim H (products node), a candidate U of largest dimension is chosen, and F̄ is perfect; (3) for any candidate V, the products node gives P=UV smooth, connected, normal and solvable, and the 16.33 node applied to P puts U and V inside P_u by its containment clause; (4) the fppf-local product description plus the kernel clause of def-sfb-solvable-group-structure gives P=P_u, so P is a candidate; (5) the strict-dimension clause gives U=P⊇V, and uniqueness follows from inclusion of ideals. The product step differs from Milne: he uses closure of unipotence under extensions (6.45), while the delivery uses the 16.33 node, which is valid. There is no cycle: none of the cited closures reaches the item. Edge cases checked: H=1, G_a^n, a torus, upper triangular matrices, and α_p/μ_p, which are not smooth. No node in the DAG already states the result, all cited statement nodes are in the same unit, no tool_uses are needed and there is no SGA citation. Batch-5: the three reached sec-trace-formula nodes (def-trf-scheme-cover-descent-datum, lem-trf-fppf-covering-base-change, lem-trf-smooth-fpqc-base-descent) are a general descent definition and Mathlib-leaf fppf/fpqc facts, not steps of the trace-formula or Poincaré proofs, so they are allowed. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnipotentRadicalExistence",
+  "declaration": "AlgebraicGeometry.exists_unipotent_radical",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnipotentRadicalExistence.lean",
+  "statement": "theorem exists_unipotent_radical {F : Type u} [Field F] [IsAlgClosed F] (H : Grp (Over (Spec (.of F)))) (hH : SolvableGroupStructure.IsAlgebraic H) (hsm : Smooth H.X.hom) (hc : ConnectedSpace H.X.left) : ∃ (U : Grp (Over (Spec (.of F)))) (i : U ⟶ H), Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ IsClosedSubgroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ SolvableGroupStructure.IsUnipotent U ∧ (∀ (V : Grp (Over (Spec (.of F)))) (j : V ⟶ H), Smooth V.X.hom → ConnectedSpace V.X.left → IsClosedSubgroupScheme j.hom.hom → IsNormalSubgroupScheme j.hom.hom → SolvableGroupStructure.IsUnipotent V → ∃ f : V ⟶ U, f ≫ i = j) ∧ (∀ (V : Grp (Over (Spec (.of F)))) (j : V ⟶ H), Smooth V.X.hom → ConnectedSpace V.X.left → IsClosedSubgroupScheme j.hom.hom → IsNormalSubgroupScheme j.hom.hom → SolvableGroupStructure.IsUnipotent V → (∀ (W : Grp (Over (Spec (.of F)))) (l : W ⟶ H), Smooth W.X.hom → ConnectedSpace W.X.left → IsClosedSubgroupScheme l.hom.hom → IsNormalSubgroupScheme l.hom.hom → SolvableGroupStructure.IsUnipotent W → ∃ f : W ⟶ V, f ≫ j = l) → ∃ e : V ≅ U, e.hom ≫ i = j)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d18b5de8e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Statement matches node and Milne iAG 6.46 (p.135, read). Hypotheses: IsAlgClosed F, H : Grp(Over Spec F), IsAlgebraic (affine+LOFT+QC), Smooth, ConnectedSpace. None stronger. Conclusion: U smooth, connected, IsClosedSubgroupScheme, IsNormalSubgroupScheme, IsUnipotent, all recorded defs (no copies). Greatestness ∃ f : V ⟶ U, f ≫ i = j; uniqueness ∃ e : V ≅ U over H. H=1 covered. Only `lean` differs from live node; statement verbatim; stmt_dep public imports plus proof-dep import PerfectSolvableUnipotentTorus (other two proof deps lean:null). Docstrings have source, blueprint id and 5 steps; single sorry; lines ≤100. H4: no existing unipotent-radical declaration in Sheaf/WeilConjectures; worker's Mathlib searches empty. Worker dry run 6a6467fa012 clean after ENOSPC tool failures. No fixes."
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-space-square-zero-lift-linearization",
+ "kind": "statement",
+ "title": "Linearization of square-zero lifts to an arbitrary algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $j:T_0\\hookrightarrow T$ a first order thickening of $S$-schemes [def-sbc-first-order-thickening], with ideal $\\mathcal J$. Regard $\\mathcal J$ as a sheaf of $\\mathcal O_{T_0}$-modules, since $\\mathcal J^2=0$, on the small etale site of $T_0$. Write $\\Omega^1_{X/S}$ for the relative differential module on the small etale site of $X$, representing $S$-derivations of its structure sheaf. Module sheaves are as in [def-weil-sheaf-of-modules-category]; pullback $g^*M$ means $\\mathcal O_{T_0}\\otimes_{g^{-1}\\mathcal O_X}g^{-1}M$. Fix an $S$-map $a:T\\to X$, put $a_0=aj$, and set $L_X(a_0)=\\{b:T\\to X\\text{ over }S\\mid bj=a_0\\}$. There is a canonical bijection\n$$\\delta_a:L_X(a_0)\\xrightarrow{\\sim} M_X(a_0):=\\operatorname{Hom}_{\\mathcal O_{T_0}}(a_0^*\\Omega^1_{X/S},\\mathcal J).$$\nIt sends $a$ to zero. Under the derivation interpretation, $\\delta_a(b)$ is $b^\\sharp-a^\\sharp$, on the etale sites identified along $j$; its inverse replaces $a^\\sharp$ by $a^\\sharp+D$. For every $S$-morphism $u:X\\to Y$ of algebraic spaces, postcomposition obeys\n$$\\delta_{ua}(ub)=u_*\\delta_a(b),$$\nwhere $u_*:M_X(a_0)\\to M_Y(ua_0)$ is the $\\Gamma(T_0,\\mathcal O_{T_0})$-linear map taking a relative derivation $D$ to $D\\circ u^\\sharp$. These maps satisfy $(v\\circ u)_*=v_*\\circ u_*$ and $(\\mathrm{id}_X)_*=\\mathrm{id}$. No local finite presentation, smoothness, affineness, or group structure is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), and 04D0 (lemma-action-by-derivations), with the target thickening X in X. Naturality under postcomposition is the chain rule for the difference of ring-sheaf maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-first-order-thickening",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-first-order-ringed-description] to $T_0\\hookrightarrow T$. Work on the common small etale topos, with exact sequence $0\\to\\mathcal J\\to\\mathcal O_T\\xrightarrow{q}\\mathcal O_{T_0}\\to0$. The $\\mathcal O_T$-action on $\\mathcal J$ factors through $q$, since two lifts of a scalar differ by a section of $\\mathcal J$ and $\\mathcal J^2=0$. By the maps clause of [lem-sfb-space-square-zero-ringed-realization], applied over $S$ to source thickening $T_0\\subset T$ and trivial target thickening $X\\subset X$, the lifts $b$ correspond exactly to maps of ring sheaves $\\beta:a_0^{-1}\\mathcal O_X\\to\\mathcal O_T$ over $S$ with $q\\beta=a_0^\\sharp$. In particular all their ring maps have the same inverse-image functor. Put $A=a_0^\\sharp$ and $\\alpha=a^\\sharp$, so $q\\alpha=A$.",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-space-square-zero-ringed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening X in X"
+   }
+  },
+  {
+   "text": "For a lift $b$, put $D=\\beta-\\alpha$. The equality $q\\beta=q\\alpha$ makes $D$ uniquely a map into the kernel $\\mathcal J$. On local sections $x,y$ of $a_0^{-1}\\mathcal O_X$, expansion of $\\beta(x)\\beta(y)=(\\alpha(x)+D(x))(\\alpha(y)+D(y))$ gives\n$$D(xy)=A(x)D(y)+A(y)D(x),$$\nbecause $D(x)D(y)=0$ and the action factors through $q$. Additivity follows by subtraction, and $D$ vanishes on the inverse image of the base ring because both maps are over $S$. Thus it is a relative derivation. These equalities are identities of sheaf maps: subtraction and multiplication commute with every restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening X in X"
+   }
+  },
+  {
+   "text": "Identify these derivations with $M_X(a_0)$. By [lem-trf-topos-inverse-image-differentials], $a_0^{-1}\\Omega^1_{X/S}$ represents differentials of $a_0^{-1}\\mathcal O_X$ relative to the inverse image of the base ring; the universal derivation property on sheaves is [lem-trf-sheafified-module-differentials-cokernel]. For the $a_0^{-1}\\mathcal O_X$-module $\\mathcal J$ acted on through $A$, a derivation therefore gives a unique linear map $\\ell:a_0^{-1}\\Omega^1_{X/S}\\to\\mathcal J$. It gives a unique $\\mathcal O_{T_0}$-linear map from $a_0^*\\Omega^1_{X/S}=\\mathcal O_{T_0}\\otimes_{a_0^{-1}\\mathcal O_X}a_0^{-1}\\Omega^1_{X/S}$ by $t\\otimes\\omega\\mapsto t\\ell(\\omega)$. Conversely restrict such a map to $1\\otimes\\omega$ and compose with the universal derivation. The tensor balancing relation proves these operations well-defined and inverse. This is the tensor pullback adjunction [lem-weil-pbc-ringed-topoi-module-adjunction]. Define $\\delta_a(b)$ to be this homomorphism.",
+   "uses": [
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0619 (equation-D); Tags 08TP (lemma-differentials-sheafify), 08TQ (lemma-pullback-differentials), 03D7 (lemma-adjoint-pullback-pushforward-modules)"
+   }
+  },
+  {
+   "text": "Conversely take $m\\in M_X(a_0)$ and its derivation $D$ from step 3. Define $\\beta=\\alpha+D$, with $D$ included into $\\mathcal O_T$. It is additive and unital ($D(1)=0$), agrees with $\\alpha$ on base scalars, and satisfies\n$$\\beta(x)\\beta(y)=\\alpha(x)\\alpha(y)+\\alpha(x)D(y)+\\alpha(y)D(x)=\\alpha(xy)+D(xy)=\\beta(xy).$$\nHere the missing quadratic term is zero by $\\mathcal J^2=0$. Also $q\\beta=A$. The maps clause of [lem-sfb-space-square-zero-ringed-realization] now gives a unique $S$-map $b:T\\to X$ with $bj=a_0$ and $b^\\sharp=\\beta$. It applies to the trivial target thickening, whose zero ideal is square-zero; it imposes no presentation or smoothness hypothesis.",
+   "uses": [
+    "lem-sfb-space-square-zero-ringed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening X in X"
+   }
+  },
+  {
+   "text": "Starting with $b$, the constructed inverse has ring map $\\alpha+(b^\\sharp-\\alpha)=b^\\sharp$, hence is $b$ by the uniqueness clause of [lem-sfb-space-square-zero-ringed-realization]. Starting with $m$, subtraction from $\\alpha+D$ returns $D$, and the mutually inverse universal-derivation and tensor correspondences of step 3 return $m$. Thus $\\delta_a$ is a bijection with the specified inverse. Its value at $a$ is zero since $a^\\sharp-a^\\sharp=0$.",
+   "uses": [
+    "lem-sfb-space-square-zero-ringed-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening X in X"
+   }
+  },
+  {
+   "text": "For $u:X\\to Y$ pull $u^\\sharp$ back to the common topos of $T_0$ and $T$. The formula for a composite ring map gives\n$$(ub)^\\sharp-(ua)^\\sharp=(b^\\sharp-a^\\sharp)\\circ a_0^{-1}u^\\sharp.$$\nPrecomposition preserves additivity, Leibniz relative to $(ua_0)^\\sharp$, and vanishing on the base. Hence step 3 identifies the right side with the stated $u_*\\delta_a(b)$. For $t\\in\\Gamma(T_0,\\mathcal O_{T_0})$ and derivations $D,E$, evaluating at any local section $y$ gives $(D+E)(u^\\sharp y)=D(u^\\sharp y)+E(u^\\sharp y)$ and $(tD)(u^\\sharp y)=tD(u^\\sharp y)$; so $u_*$ is linear. Precomposition with the identity does nothing, and associativity of composition gives $D\\circ u^\\sharp\\circ v^\\sharp$ for both $(vu)_*(D)$ and $v_*u_*(D)$. The representing correspondences are injective, so these equalities of derivations prove all stated equalities in $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening X in X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-first-order-ringed-description",
+  "lem-sfb-space-square-zero-ringed-realization",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0618 (lemma-difference-derivation), 0619 (equation-D), 04D0 (lemma-action-by-derivations), with trivial target thickening X in X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary algebraic space X over S, lifts across a square zero thickening with a fixed lift form the module Hom of pulled back relative differentials into the ideal, naturally in X",
+   "results": "Actual search returned 8 hits: derivationToSquareZeroOfLift, KaehlerDifferential.endEquivAuxEquiv, Algebra.Extension.CotangentSpace.map, Algebra.Extension.homInfinitesimal, derivationToSquareZeroEquivLift, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivationToSquareZeroEquivLift\"",
+   "results": "Actual search returned 3 hits: derivationToSquareZeroEquivLift, derivationToSquareZeroEquivLift_apply_coe_apply, derivationToSquareZeroEquivLift_symm_apply_apply_coe. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an arbitrary algebraic space, first order lifts relative to a fixed lift are Hom from relative differentials to the square zero ideal, naturally under postcomposition",
+   "results": "Actual search returned 8 hits: derivationToSquareZeroEquivLift, derivationToSquareZeroEquivLift_symm_apply_apply_coe, liftOfDerivationToSquareZero, derivationToSquareZeroOfLift, derivationToSquareZeroOfLift_apply, DualNumber.lift, derivationToSquareZeroEquivLift_apply_coe_apply, DualNumber.coe_lift_symm_apply. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The difference from a fixed lift of a morphism to an algebraic space across a square zero thickening is a derivation, and postcomposition induces a linear map on these differences",
+   "results": "Actual search returned 8 hits: derivationToSquareZeroOfLift, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero, derivationToSquareZeroOfLift_apply, PresheafOfModules.DifferentialsConstruction.derivation', derivationOfSectionOfKerSqZero, derivationToSquareZeroEquivLift_apply_coe_apply, derivationOfSectionOfKerSqZero_apply_coe. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "derivationToSquareZeroEquivLift|linearMapEquivDerivation",
+   "results": "Actual search returned 8 hits: Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Unramified/Basic.lean, Mathlib/RingTheory/Unramified/Basic.lean. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327. These are ring-level statements, not the algebraic-space lift correspondence or its etale descent.",
+   "date": "2026-10-23",
+   "verdict": "no match: affine ring results do not specialize in one line to arbitrary algebraic spaces and arbitrary test schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifts of a morphism to an algebraic space across a square zero thickening differ by a derivation represented by pulled back relative differentials",
+   "results": "derivationToSquareZeroEquivLift; derivationToSquareZeroOfLift; derivationToSquareZeroOfLift_apply; derivationToSquareZeroEquivLift_symm_apply_apply_coe; derivationToSquareZeroEquivLift_apply_coe_apply; liftOfDerivationToSquareZero_apply; liftOfDerivationToSquareZero_mk_apply; liftOfDerivationToSquareZero_mk_apply'. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327: these give the ring-level equivalence, not algebraic-space realization. The second phrasing also returns formally unramified schemes and presheaf differentials, not the arbitrary-space result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero thickening of any test scheme has morphism lifts to an algebraic space classified by relative derivations on its small etale topos",
+   "results": "AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instFormallyUnramified; PresheafOfModules.DifferentialsConstruction.isUniversal'; AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified; PresheafOfModules.Derivation.Universal.fac; Algebra.Etale.formallyEtale; AlgebraicGeometry.IsEtale. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327: these give the ring-level equivalence, not algebraic-space realization. The second phrasing also returns formally unramified schemes and presheaf differentials, not the arbitrary-space result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms to an arbitrary algebraic space lifting a fixed map through a square zero closed immersion form a torsor under relative derivations",
+   "results": "liftOfDerivationToSquareZero; AlgebraicGeometry.IsClosedImmersion.lift; AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc; derivationToSquareZeroOfLift; derivationToSquareZeroEquivLift_symm_apply_apply_coe; derivationToSquareZeroEquivLift; liftOfDerivationToSquareZero_apply; derivationToSquareZeroOfLift_apply. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327: these give the ring-level equivalence, not algebraic-space realization. The second phrasing also returns formally unramified schemes and presheaf differentials, not the arbitrary-space result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivationToSquareZeroEquivLift\"",
+   "results": "derivationToSquareZeroEquivLift; derivationToSquareZeroEquivLift_apply_coe_apply; derivationToSquareZeroEquivLift_symm_apply_apply_coe. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327: these give the ring-level equivalence, not algebraic-space realization. The second phrasing also returns formally unramified schemes and presheaf differentials, not the arbitrary-space result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivationToSquareZeroEquivLift|linearMapEquivDerivation|pullback.*ifferentials",
+   "results": "Mathlib/RingTheory/Derivation/Basic.lean; Mathlib/RingTheory/Derivation/ToSquareZero.lean; Mathlib/RingTheory/Unramified/Basic.lean; Mathlib/RingTheory/Unramified/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean. Read Mathlib/RingTheory/Derivation/ToSquareZero.lean:116 and Mathlib/RingTheory/Kaehler/Basic.lean:327: these give the ring-level equivalence, not algebraic-space realization. The second phrasing also returns formally unramified schemes and presheaf differentials, not the arbitrary-space result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-space-square-zero-kernel-module",
+  "date": "2026-10-23",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Invertible multiplication on a smooth commutative group space. Supporting infinitesimal input: Square-zero infinitesimal points of a group space form a module. General map-lifting input: difference derivations and their functoriality, before using the group multiplication.",
+   "via": [
+    "lem-sfb-group-space-square-zero-kernel-module",
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-square-zero-lift-linearization",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0618, 0619, 04D0 and the 05ZN ringed realization input. Reused five existing nodes, wrote out the square-zero calculations, tensor correspondence, inverse identities and postcomposition law. No new nodes or statement correction.",
+  "blueprint": "Realizes the inherited proof-(3) infinitesimal prerequisite: arbitrary-space square-zero lift differences, followed by functoriality before group multiplication. The newest blueprint direct-image proof (3) states the compactification route, not this auxiliary lemma; whole-blueprint searches find no matching node. The ancestor tool reports None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-topos-inverse-image-differentials",
+    "why": "Generic inverse-image comparison for relative differentials, used on the small etale topos; the unit has no replacement."
+   },
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Generic sheaf universal-derivation property needed to represent derivations, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor pullback adjunction on module sheaves used to pass to the displayed Hom group."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-2a7d9d7f4",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-2a7d9d7f4 (reviewer sub-agent of L); spot-checked: Read in full. The statement is unchanged from base, and the item was unsplit on live and side-live with no repair note. No new nodes. Checked against Stacks 0618, 0619 and 04D0, with the 05ZN proof, at spaces-more-morphisms.tex l.3689-3780 and l.1601: the target thickening is X⊂X, so C_{X/X}=0, and the sign α=a^♯+D agrees with Stacks. Step 1 applies the maps clause of lem-sfb-space-square-zero-ringed-realization (thickenings T_0⊂T and X⊂X over S, g=a_0); every hypothesis was checked. Step 2: the derivation computation was redone; the quadratic term vanishes since J^2=0 and the action factors through q. Step 3: lem-trf-topos-inverse-image-differentials (08TQ) plus lem-trf-sheafified-module-differentials-cokernel (08TP) give representability. The tensor correspondence is lem-weil-pbc-ringed-topoi-module-adjunction with u = the identity topos of T_0 and c=A; the step's explicit formulas fix this unambiguously. Steps 4 and 5: the inverse and the bijection come from the uniqueness in the realization clause. Step 6: chain rule, linearity and functoriality are fine. Edge cases checked: J=0, X=S, A^1 over dual numbers (sign +), T_0 empty. No cycle; proof_deps equal the union of uses. No duplicate found: other nodes cover schemes or special settings only. Accepted the three declared tool_uses as generic site and module results. Batch-5 finding: the sfb nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space. The two trf differential nodes are general Stacks 08TP/08TQ sheaf algebra and are not part of the trace-formula or Poincaré statements or proofs, so they are outside the assumptions. The null blueprint.from.node is inherited from base."
+ }
+}

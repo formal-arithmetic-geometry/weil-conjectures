@@ -17,138 +17,69 @@
   "def-pur-hom-complex",
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-pod-point-derived-hom-evaluation",
-  "lem-sf-point-fibre-derived-tensor"
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pod-point-perfect-ordinary-evaluation"
  ],
  "proof": [
   {
-   "text": "Put $L(M)=B\\otimes_{\\underline R}\\underline M$. The valuation-ring lemma makes $R$ a PID, hence Noetherian by the PID lemma. Constant sheafification is exact by the constant-module section lemma, and $B$ is flat over $\\underline R$ by the completed-constant reduction lemma. Consequently $L$ is exact. Sections $\\Gamma(s,-)$ on $B$-modules are exact by the point-sections theorem. The sheaf-tensor universal property gives the adjunction $L\\dashv\\Gamma(s,-)$: $h$ corresponds to $x\\mapsto h_s(1\\otimes x)$; the inverse sends $t$ to $b\\otimes x\\mapsto b\\,t(x)|_U$. These formulas respect balancing and restrictions and are inverse on the generators $1\\otimes x$.",
+   "text": "Apply the integral-point coefficient adjunction lemma to the specified $R,B,L$. It supplies exact $L$, exact $\\Gamma$, the constant-value identification $\\Gamma B=R$, and the actual generator formulas for their adjunction. Thus all coefficient hypotheses of the perfect-model and ordinary point-Hom results hold.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-pid-noetherian-normal",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-point-proetale-sections-exact",
-    "def-pur-sheaf-tensor-product"
+    "lem-pod-integral-point-coefficient-adjunction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093J, 093M (lemma-constant-exact, lemma-completion-flat); extension/sections adjunction on generators"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Third paragraph, actual adjunction/evaluation comparison at integral point coefficients: returned item steps 1-2, exact extension and sections and the constant-value unit"
    }
   },
   {
-   "text": "The scheme $s=\\operatorname{Spec}k$ is nonempty, connected, separated and of finite type over $k$. Clause (1) of connected-constant $H^0$ therefore identifies $\\Gamma(s,(R/\\varpi^m)_s)=R/\\varpi^m$ through the constant-value map, for every $m\\geq1$. Limits of sheaves are computed sectionwise, so $\\Gamma(s,B)=\\varprojlim_mR/\\varpi^m=R$; the last equality is the ring isomorphism given by the quotient maps in the integers-profinite-tower lemma. Thus all three extra hypotheses (exact $L$, exact $\\Gamma$, and this constant-value identification) of point-sections reconstruction and point-derived-Hom evaluation hold. The adjunction is exactly their displayed adjunction, not an abstractly chosen one.",
+   "text": "Apply the projective dual/tensor model lemma to $P$. It gives the canonical $J\\cong R\\mathcal Hom_B(C,B)$, all three required constructible-complete memberships, $B\\in D^b_c(s,R)$, and bounded flat K-flat models with finite Tor amplitude. Put $D=\\operatorname{Tot}(C\\otimes_BJ)$ and let $e:D\\to B$ be ordinary evaluation through this Hom identification. Its module-side unit is the specified $P\\xrightarrow{\\sim}\\Gamma C$.",
    "uses": [
-    "lem-pod-connected-constant-h0",
-    "def-weil-completed-integral-coefficients",
-    "lem-sfb-integers-profinite-tower"
+    "lem-pod-point-projective-dual-tensor-models"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence, point coefficients: verification of the actual sections/extension comparison"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Third paragraph, actual adjunction/evaluation comparison: returned item steps 3-4, finite-projective dual/tensor realization and canonical internal-Hom model"
    }
   },
   {
-   "text": "Each $P^i$ is a summand of a finite free module. Applying duals and tensor products to its splitting shows that $(P^i)^\\vee$ and $P^i\\otimes_R(P^j)^\\vee$ are finite projective. Hence $P$, $P^\\vee$, and $T=\\operatorname{Tot}(P\\otimes_RP^\\vee)$ are bounded finite-projective complexes; their cohomology is finitely generated because $R$ is Noetherian. Point-sections reconstruction therefore gives $L(P),L(P^\\vee),L(T)\\in D^b_c(s,R)$, including derived completeness and a uniform bound for all reductions. The termwise balancing isomorphism $(b\\otimes x)\\otimes(b'\\otimes f)\\mapsto bb'\\otimes(x\\otimes f)$ identifies $C\\otimes_B J$ with $L(T)$. Each term of $C$ and $J$ is a summand of a finite sum of $B$, hence flat, so the bounded-above-flat K-flat lemma says their total tensor computes $C\\otimes_B^LJ$. This proves all three membership assertions. The same reconstruction applied to $R[0]$ gives $B\\in D^b_c(s,R)$. Its unit and that for $P$ are the actual maps $r\\mapsto r$ and $x\\mapsto1\\otimes x$.",
+   "text": "Use the ordinary perfect-model evaluation lemma. The explicit adjunction and scalar bijection construct the coefficient isomorphism and q on the actual Hom model; its local formulas give the signed evaluation maps. Its square holds for every sections balancing map with the specified unit formula, hence for the beta furnished by completion normalization.",
    "uses": [
-    "lem-pod-point-sections-reconstruction",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-pur-sheaf-tensor-product"
+    "lem-pod-point-perfect-ordinary-evaluation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence, perfect point models: dual and tensor models and their derived-complete constructibility"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: ordinary point-Hom evaluation, returned item step 5"
    }
   },
   {
-   "text": "Apply the bounded-summand-of-finite-free internal-Hom model with first complex $C$ and second complex $B[0]$. Its boundedness hypotheses hold because $P$ is bounded. It identifies $R\\mathcal Hom_B(C,B)$ with $\\mathcal Hom_B^\\bullet(C,B)$. The natural map $B\\otimes_{\\underline R}\\underline{\\operatorname{Hom}_R(P^i,R)}\\to\\mathcal Hom_B(L(P^i),B)$ sends $b\\otimes f$ to $(b'\\otimes x\\mapsto bb'f(x))$. For $P^i=R^r$ this is the identity on $B^r$; applying the inclusion and projection of a finite-free splitting makes it an isomorphism for $P^i$. These identifications commute with precomposition by $d_P$ and with multiplication, so, using $d(f)=d_Bf-(-1)^{\\deg f}fd_C$, they form an isomorphism of Hom complexes $J\\cong\\mathcal Hom_B^\\bullet(C,B)$. It is the canonical arrow specified by evaluation. Thus $J\\to R\\mathcal Hom_B(C,B)$ is the claimed isomorphism.",
+   "text": "Choose the canonical integral completed tensor data. Completion normalization supplies good models, the balanced tower isomorphism, the completion-unit isomorphisms, the pairing identity chi followed by completed evaluation equals localized ordinary evaluation, and the inverse tensorator identity. Tower balancing uniqueness identifies its rho with the fixed towerBalancing. The finite-projective adjunction-unit theorem makes the given unit a chain isomorphism. Cancel the inverse tensorator, use naturality of the exact-sections factor isomorphism, apply the ordinary evaluation square, and use localization tensorator naturality. This gives exactly the asserted derived square for the specified completion maps.",
    "uses": [
-    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "def-pur-hom-complex"
+    "lem-pod-point-evaluation-completion-normalization",
+    "lem-sf-point-integral-completed-tensor-comparisons",
+    "lem-pod-point-finite-projective-adjunction-units"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free; finite-summand calculation of its terms"
-   }
-  },
-  {
-   "text": "Let $D=C\\otimes_B J$ denote the ordinary tensor model from step 3, and write $e:D\\to B$ for ordinary derived evaluation using step 4. Apply point-derived-Hom evaluation with $c=P$; its K-flat requirement holds by step 3, and all its exactness and coefficient hypotheses were checked in steps 1–2. Comparing its K-injective model to the Hom model in step 4 gives exactly $q_P$, since both send $h$ to $x\\mapsto h_s(1\\otimes x)$. Let $\\beta:P\\otimes_R\\Gamma(s,J)\\to\\Gamma(s,D)$ be the sections balancing map using the unit of $P$. The cited evaluation clause gives $\\Gamma(s,e)\\beta=\\operatorname{ev}_{P,R}(1\\otimes q_P)$. Explicitly, for $x\\in P^p$ and $h$ of degree $j$, both sides take $x\\otimes h$ to $(-1)^{pj}h_s(1\\otimes x)$. This also fixes the order of the two tensor factors and the sign.",
-   "uses": [
-    "lem-pod-point-derived-hom-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence, ordinary derived Hom/evaluation before completion"
-   }
-  },
-  {
-   "text": "Put $A_m=(R/\\varpi^m)_s$. Because $C,J$ are bounded flat models, there is a termwise tower isomorphism $D\\otimes_B A_m\\cong(C\\otimes_B A_m)\\otimes_{A_m}(J\\otimes_B A_m)$, sending $(c\\otimes j)\\otimes a$ to $(c\\otimes1)\\otimes(j\\otimes a)$. It commutes with quotient transitions. Thus its strict-cone derived limit is exactly $C\\widehat\\otimes_R^LJ$ as defined by the integral operations. The identity-extension finite-free-completed comparison supplies isomorphisms $\\chi_D:D\\to C\\widehat\\otimes_R^LJ$ and $\\chi_B:B\\to R\\varprojlim_m A_m$, since both objects are complete by step 3. In these models each is the map with product component the family of quotient maps and shifted-product component zero.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1; specified strict-cone normalization from the cited comparison"
-   }
-  },
-  {
-   "text": "Let $e_m:D\\otimes_B A_m\\to A_m$ be the reduction of $e$. For local homogeneous generators the two composites with reduction send $(b\\otimes x)\\otimes(b'\\otimes f)$ to the class of $(-1)^{\\deg x\\deg f}bb'f(x)$. Hence the quotient squares commute strictly, and the $e_m$ are a morphism of strict towers. On both products it commutes with $1-s$, so the induced cone map $\\widehat e=R\\varprojlim_m e_m$ satisfies $\\widehat e\\,\\chi_D=\\chi_B e$: the product components agree by those quotient squares and both shifted-product components of the units are zero. The completed evaluation is $\\widehat{\\operatorname{ev}}=\\chi_B^{-1}\\widehat e$, by the completed tensor/internal-Hom adjunction (completion of ordinary evaluation into a complete target). Consequently $\\widehat{\\operatorname{ev}}\\,\\chi_D=e$ as derived morphisms; this is equality of the specified cone maps before localization.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10 and Lemma 3.4.11: completed evaluation; strict quotient/cone computation"
-   }
-  },
-  {
-   "text": "The perfect models have finite Tor amplitude: their tensors with a degree-zero module have terms only in their fixed finite degree intervals. Thus the point-tensor theorem applies to $C,J$. On these models its canonical comparison $\\tau$ is the inverse of $\\Gamma(s,\\chi_D)\\beta$: balancing gives the ordinary sections tensor map, and the integral coefficient construction then applies the quotient-tower completion map. This description uses the same quotient maps in step 6 and hence the same zero shifted-product component; the inverse on an ordinary pure tensor is induced by $1\\otimes x$ and $h$, so no alternate tensor or completion isomorphism is being substituted. Applying sections to step 7 and precomposing with $\\beta$ now yields $\\Gamma(s,\\widehat{\\operatorname{ev}})\\Gamma(s,\\chi_D)\\beta=\\Gamma(s,e)\\beta=\\operatorname{ev}_{P,R}(1\\otimes q_P)$. Substitute $\\Gamma(s,\\chi_D)\\beta=\\tau^{-1}$ and compose with $\\tau$. This is exactly the displayed equality of the statement in $D(R)$.",
-   "uses": [
-    "lem-sf-point-fibre-derived-tensor",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence, completed evaluation at the point; ancestor thm-pod-identification-of-the-comparison third paragraph, identification of the actual comparison map"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Third paragraph, identification of the actual comparison map at integral coefficients: returned item steps 6-8, strict quotient/cone pairing square and inverse tensorator"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-pid-noetherian-normal",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-point-proetale-sections-exact",
-  "def-pur-sheaf-tensor-product",
-  "lem-pod-connected-constant-h0",
-  "def-weil-completed-integral-coefficients",
-  "lem-sfb-integers-profinite-tower",
-  "lem-pod-point-sections-reconstruction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-  "def-pur-hom-complex",
-  "lem-pod-point-derived-hom-evaluation",
-  "def-pur-integral-derived-operations",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-sf-point-fibre-derived-tensor"
+  "lem-pod-integral-point-coefficient-adjunction",
+  "lem-pod-point-projective-dual-tensor-models",
+  "lem-pod-point-perfect-ordinary-evaluation",
+  "lem-pod-point-evaluation-completion-normalization",
+  "lem-sf-point-integral-completed-tensor-comparisons",
+  "lem-pod-point-finite-projective-adjunction-units"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-  "place": "Second sentence; expanded using Stacks 093J, 093M, 08JI and Bhatt–Scholze 3.4.10–3.5.1"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+  "place": "Third paragraph, the adjunction/evaluation comparison; ordinary chain-level part of parent proof step 3; Stacks Tags 0A8X and 08J7."
  },
  "mathlib_searches": [
   {
@@ -244,57 +175,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pod-point-completed-evaluation",
   "worker": "stage1",
-  "summary": "No statement change and no new nodes. Verified exact extension/sections hypotheses; used existing reconstruction and bounded finite-projective Hom models; computed evaluation with its Koszul sign and checked completion compatibility on both components of the specified strict-cone unit.",
-  "blueprint": "thm-pod-identification-of-the-comparison, third paragraph: actual reverse global-duality comparison; via lem-pod-global-duality-map-identification, perfect point evaluation before and after completion. The point-dualizing proof second sentence supplies the local source.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-weil-pbc-pid-noetherian-normal",
-    "why": "Generic A principal ideal domain is a Noetherian normal domain used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-weil-pbc-constant-module-section-properties",
-    "why": "Generic Constant section properties used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Generic Completed constant coefficients and finite reduction used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Generic Sections over an algebraically closed point are exact on the pro-etale site used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-pod-connected-constant-h0",
-    "why": "Generic Degree-zero cohomology of the constant coefficients on a connected scheme used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-sfb-integers-profinite-tower",
-    "why": "Generic $\\cO_E$ is the profinite limit of its finite quotients $\\cO_E/\\pi_E^n$ used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
-    "why": "Generic Bounded-above finite-projective sheaf Hom model used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   },
-   {
-    "node": "lem-sf-point-fibre-derived-tensor",
-    "why": "Generic The point fibre functor preserves derived tensor at all coefficient stages used for the indicated coefficient/model verification; the point-evaluation argument remains in this unit."
-   }
-  ]
+  "summary": "Repair of the batch5 re-split return: statement unchanged; distribute all eight old arguments over three comparable statement-only unsplit nodes and retain the ordinary-evaluation square and final assembly here. Original argument text and its child assignment are retained in report.md.",
+  "blueprint": "thm-pod-identification-of-the-comparison third paragraph, actual evaluation-induced integral point comparison, via lem-pod-global-duality-map-identification; local point-dualizing proof second sentence.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
@@ -310,12 +196,12 @@
   "lem-sf-point-fibre-derived-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q19-a69a30852",
-  "group": "Q19",
+  "reviewer": "NT-cc-Q07-d604105a6",
+  "group": "Q07",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-a69a30852 (reviewer sub-agent of L); spot-checked: Audited the full item, all eight proof steps, cited node statements, blueprint route, coefficient category, strict-cone maps, sources, hypotheses, and edge cases. Step 7 was incorrectly marked elementary; its strict-tower cone compatibility and identification with completed evaluation are a substantive argument. Corrected DAG JSON is under fixes/dag/nodes/sec-six-functors/lem-pod-point-completed-evaluation.json. No new nodes, duplicate, cycle, or statement error found.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-d604105a6 (reviewer sub-agent of L); spot-checked: Re-split accepted with two small repairs. Repair note checked: batch5 re-split, 8 steps totalling 6598 characters. The 8 old step texts quoted in the report are byte-identical to the live base proof, and the item's statement and stmt_deps are unchanged. The old steps are spread over three comparable statement-only children: coefficient adjunction (old steps 1-2: Noetherian R, Stacks 093M flatness, 093J exactness, point sections, connected H0 giving ΓB=R, adjunction formulas); dual/tensor models (old steps 3-4 and the Tor part of 8: finite-projective dual and tensor, a uniform Tor bound for support [a-b,b-a], the Stacks 08JI Hom model whose signed differential matches def-pur-hom-complex); completion normalization (old steps 6-7 and the τ part of 8: strict tower balancing, χ with quotient and zero coordinates per lem-weil-finite-free-completed-scalar-comparison at L=E, êχ_D=e for any pairing, τ^{-1}=Γ(χ_D)β, consistent with def-sf-point-fibre-tensor-models). Old step 5 stays as parent step 3, still citing lem-pod-point-derived-hom-evaluation (hypotheses and the (-1)^{pj} sign checked). The parent proof is 2080 characters and no child restates it. Edge cases tested: P=0, P=R[0], P=R[-r], e=0. No duplicates found among the existing nodes (sections-reconstruction, bounded-free-rhom-model, finite-projective-tensor-hom, integral-completed-tensor-comparisons). FIX 1: parent step 4 now states why the child's adjunction-defined completed pairing ê equals ev̂ (both correspond to the canonical J→RHom(C,B)), cites def-weil-derived-pullback-tensor-hom, and credits ΓB=R to step 1. FIX 2 (B3): child 1 now cites def-pc-flat-sheaf-modules for flatness of B. Maintainer note: NH's post-base node lem-pod-point-integral-evaluation-normalization overlaps child 1 and this item's κ content; it is not re-pointed because that would risk a cycle, and its split should cite this item. No SGA.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PointCompletedEvaluation",
@@ -337,14 +223,14 @@
    "WeilConjectures.PointCompletedEvaluation.total",
    "WeilConjectures.PointCompletedEvaluation.towerBalancing_existsUnique",
    "WeilConjectures.PointCompletedEvaluation.towerBalancing",
-   "WeilConjectures.PointCompletedEvaluation.roosBalancing",
    "WeilConjectures.PointCompletedEvaluation.completedEvaluation",
    "WeilConjectures.PointCompletedEvaluation.moduleValue",
    "WeilConjectures.PointCompletedEvaluation.sheafValue",
    "WeilConjectures.PointCompletedEvaluation.model",
    "WeilConjectures.PointCompletedEvaluation.tau",
    "WeilConjectures.PointCompletedEvaluation.Result",
-   "WeilConjectures.PointCompletedEvaluation.point_completed_evaluation"
+   "WeilConjectures.PointCompletedEvaluation.point_completed_evaluation",
+   "WeilConjectures.PointCompletedEvaluation.extension_spec"
   ],
   "file": "lean/Sheaf/Paper/PointCompletedEvaluation.lean",
   "statement": "theorem point_completed_evaluation (hl : l ≠ D.p) : ∃ S : PointIntegralTensorData D l hl E, Nonempty (PointIntegralTensorCanonical D l hl E S) ∧ ∀ (P : CochainComplex (ModuleCat.{u + 1} (R l E)) ℤ) (a b : ℤ), P.IsStrictlyGE a → P.IsStrictlyLE b → (∀ i : ℤ, Module.Projective (R l E) (P.X i) ∧ Module.Finite (R l E) (P.X i)) → Result D l E hl S P",
@@ -362,5 +248,26 @@
   "result": "pass",
   "note": "Read all 12 statement dependencies and their Lean (PointDerivedHom Statement/EvaluationCompatible, IntegralHom.homModelMap, PointIntegralTensorData/Canonical with First/Second/Comparison/UnitModel, completedScalarIdentityUnit_existsUnique, finiteTorConstructibleIntegral, integralOperationsGoodComplex, moduleHomComplex). Every clause matches: bounded finite-projective P with no extra assumptions; rigid extension functor equal to the dependency's L; canonical J->RHom iso via homIso normalized b(x)f |-> bb'f(x) and homModelMap; constructibility of C, J and the tensor; chi_Q fixed to completedScalarIdentityUnit (both cone coordinates); q_P and unit P->Gamma(C) normalized on 1(x)x; tau pinned by PointIntegralTensorCanonical on the good models; final equality of derived morphisms. Koszul sign (-1)^{pj} verified to give a chain map under Mathlib conventions. Edge cases covered. Only the item's lean field changed; statement verbatim; 24 declarations match; docstrings and blueprint tags present; 3 sorrys, all named theorems; nothing hollow. nt_compile: exit 0, no diagnostics, 21.0 s. Non-blocking: completedEvaluation is a canonical local helper (completion of ordinary evaluation then chi_B inverse), since no integral evaluation declaration exists in the dependency; the second-reading section was written by the delivering worker."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c68ff",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261026T065140-L-2717919",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointCompletedEvaluation.Result vs published Result (scratch OldPCE copy, result_iff + towerBalancing/completedEvaluation/tau equalities, recompiled against current build incl. A7's new PointEvaluationCompletionNormalization); PointProjectiveDualTensorModels aliases vs old bodies (rfl); importer CompletedHomScalarTranspose compiled against fixed set and published parent; Lean/nodes byte-identical to c03b7 delivery"
+ }
 }

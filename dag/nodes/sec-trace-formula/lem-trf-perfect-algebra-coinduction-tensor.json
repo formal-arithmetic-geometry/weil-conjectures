@@ -15,107 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-derived-coinduction-adjunction]. For arbitrary $K$ it supplies $C_B(K)$, $U C_B(K)=R\\operatorname{Hom}_R(B,K)$, the adjunction $U\\dashv C_B$, and its evaluation-at-$1$ counit. In particular $D_B=C_B(R[0])$ is a genuine object of $D(B)$; to identify the comparison required in the statement we will exhibit a $B$-linear representative whose counit composite is tensor evaluation.",
+   "text": "For the given ring map, apply [lem-trf-coinduction-tensor-comparison-model]. It supplies a canonical natural transformation $\\sigma_K:K\\otimes_R^{\\mathbf L}D_B\\to C_B(K)$ with exactly the tensor-counit adjunct required here. Choose a K-flat representative $F$ of $K$ by [lem-pc-kflat-resolution] on the small one-object site, and K-injective resolutions $R[0]\\to J$ and $q:F\\otimes_RJ\\to I$ by [def-pur-derived-internal-hom]. Using its specified identification $QI\\cong K$, the model lemma identifies the source with $F\\otimes_R\\operatorname{Hom}_R^\\bullet(B[0],J)$, the target with $\\operatorname{Hom}_R^\\bullet(B[0],I)$, and $\\sigma_K$ with the localization of the $B$-linear chain map $t(f\\otimes h)(b)=q(f\\otimes h(b))$. It also identifies its scalar restriction with ordinary Hom/tensor evaluation.",
    "uses": [
-    "lem-trf-derived-coinduction-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tags 0A70 and 0A71, ordinary unbounded coinduction adjunction and its scalar restriction"
-   }
-  },
-  {
-   "text": "Choose a complex representing $K$ and a K-flat resolution $F$ of it by [lem-pc-kflat-resolution], specialized to the small one-object ringed site. Choose K-injective resolutions $R[0]\\to J$ and $q:F\\otimes_R J\\to I$ using [def-pur-derived-internal-hom]. Since $F$ is K-flat, $F\\to F\\otimes_R J$ is a quasi-isomorphism by [def-pc-module-kflat-complex]; thus $I$ represents $K$. Set $V=\\operatorname{Hom}_R^\\bullet(B,J)$ with its coinduction $B$-action. By Step 1, $V$ represents $D_B$ and $\\operatorname{Hom}_R^\\bullet(B,I)$ represents $C_B(K)$. By [lem-pc-derived-tensor-second-factor-functor], $F\\otimes_R V$ represents $K\\otimes_R^{\\mathbf L}D_B$, even though $V$ need not be K-flat.",
-   "uses": [
+    "lem-trf-coinduction-tensor-comparison-model",
     "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "def-pc-module-kflat-complex",
-    "lem-trf-derived-coinduction-adjunction",
-    "lem-pc-derived-tensor-second-factor-functor"
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS and 0A94; K-flat and K-injective resolutions, specialized to ordinary modules"
-   }
-  },
-  {
-   "text": "Define $t:F\\otimes_R V\\to\\operatorname{Hom}_R^\\bullet(B,I)$ by $t(f\\otimes h)(b)=q(f\\otimes h(b))$. This is balanced and $B$-linear: $t(f\\otimes bh)(b')=q(f\\otimes h(b'b))=(b\\,t(f\\otimes h))(b')$. For homogeneous $f$ of degree $a$, the differential of its value is $q(df\\otimes h(b)+(-1)^a f\\otimes dh(b))$, exactly the total-tensor differential; there is no contribution from $d_B$ since $B$ is in degree zero. Evaluation at $1$ gives $q(f\\otimes h(1))$. Hence under Step 2's identifications its counit composite is precisely tensoring $K$ with $D_B\\to R[0]$. By the adjunction in [lem-trf-derived-coinduction-adjunction], $Qt$ is the comparison specified in the item. Forgetting the $B$-action leaves the usual Hom/tensor evaluation comparison, with the same formula and these K-flat/K-injective models.",
-   "uses": [
-    "lem-trf-derived-coinduction-adjunction"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tags 0A70 and 0A71; explicit verification of evaluation normalization"
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), explicit tensor-counit adjunct on K-flat and K-injective representatives."
    }
   },
   {
-   "text": "By [def-pc-perfect-ring-complex], choose a bounded complex $P$ of finitely generated projective $R$-modules with $QP\\simeq B[0]$. Since $P$ is bounded above and projective, [lem-pc-ring-derived-map-representative] realizes this isomorphism by a chain map $p:P\\to B[0]$. Its localization is an isomorphism, so it induces isomorphisms on every cohomology module and is a quasi-isomorphism, using [lem-weil-pbc-unbounded-derived-iso-cohomology]. This construction gives an actual map for precomposition below; no $B$-action or algebra structure on $P$ is needed.",
+   "text": "Apply [lem-trf-perfect-source-evaluation-quasi-isomorphism] to $M=B[0]$ and the complexes $F,J,I,q$ just chosen. Its perfect-source hypothesis is precisely the assumption on $B[0]$: $F$ is K-flat, $J,I$ are K-injective, and $q:F\\otimes_RJ\\to I$ is a quasi-isomorphism by the chosen resolutions. Its specified map is exactly the scalar restriction of $t$, so $U(\\sigma_K)$ is an isomorphism in $D(R)$. Conservativity of scalar restriction in [lem-trf-derived-coinduction-adjunction] makes $\\sigma_K$ an isomorphism in $D(B)$. The naturality, independence of representatives, tensor-counit normalization and underlying evaluation identification supplied in the first step therefore give the claimed natural isomorphism with every stated clause. Neither extracted lemma imposes any extra boundedness, flatness or Noetherian hypothesis.",
    "uses": [
-    "def-pc-perfect-ring-complex",
-    "lem-pc-ring-derived-map-representative",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Perfect complexes and Tag 0A66 (projective source Hom); derived.tex Tag 05RT for the cohomology criterion"
-   }
-  },
-  {
-   "text": "For any complex $N$, put $D=\\operatorname{Hom}_R^\\bullet(P,R[0])$. The degreewise normalized isomorphisms of [lem-pc-perfect-ring-hom-tensor-degrees] assemble to a chain isomorphism $A_N:D\\otimes N\\simeq\\operatorname{Hom}^\\bullet_R(P,N)$ by [lem-pc-perfect-ring-hom-tensor-differential]. Thus the composite $F\\otimes\\operatorname{Hom}(P,N)\\xrightarrow{1\\otimes A_N^{-1}}F\\otimes D\\otimes N\\xrightarrow{\\text{symmetry}}D\\otimes F\\otimes N\\xrightarrow{A_{F\\otimes N}}\\operatorname{Hom}(P,F\\otimes N)$ is a chain isomorphism. It is exactly $e(f\\otimes h)(x)=f\\otimes h(x)$: for degrees $|f|=a,|\\lambda|=r,|n|=s$, the symmetry and final normalization give $(-1)^{ar+r(a+s)}=(-1)^{rs}$, the input normalization of $A_N(\\lambda\\otimes n)$. Boundedness and finite projectivity are used only for $P$; no bound on $F,N$ is used. This is a direct composition of the two cited normalized statements, not an assertion that an arbitrary tensor-Hom isomorphism is evaluation.",
-   "uses": [
-    "lem-pc-perfect-ring-hom-tensor-degrees",
-    "lem-pc-perfect-ring-hom-tensor-differential"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism, case (1); explicit normalized finite-projective calculation"
-   }
-  },
-  {
-   "text": "Precomposition with $p$ gives a square with top $t$, bottom $\\operatorname{Hom}(P,q)\\circ e$ for $N=J$, left vertical $1_F\\otimes p^*:F\\otimes\\operatorname{Hom}(B,J)\\to F\\otimes\\operatorname{Hom}(P,J)$, and right vertical $p^*:\\operatorname{Hom}(B,I)\\to\\operatorname{Hom}(P,I)$. The square commutes: both composites evaluate on $f,h,x$ to $q(f\\otimes h(p(x)))$. Both $p^*$ maps are quasi-isomorphisms by [lem-pur-rhom-well-defined], with identity as its K-injective-target comparison and $p$ as its source quasi-isomorphism. Tensoring the first with $F$ preserves that property by [def-pc-module-kflat-complex]. The bottom map is a quasi-isomorphism: $e$ is an isomorphism by Step 5, and $\\operatorname{Hom}(P,q)$ is one by the canonical, covariantly natural Hom model of [lem-pod-projective-hom-evaluation-model], since $q$ is a quasi-isomorphism and $P$ is bounded above projective. On cohomology the two vertical maps and bottom map are isomorphisms, so commutativity implies that $t$ is a quasi-isomorphism. Its underlying $R$-map is therefore an isomorphism in $D(R)$, and conservativity in [lem-trf-derived-coinduction-adjunction] makes $Qt$ an isomorphism in $D(B)$.",
-   "uses": [
-    "lem-pur-rhom-well-defined",
-    "def-pc-module-kflat-complex",
-    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-perfect-source-evaluation-quasi-isomorphism",
     "lem-trf-derived-coinduction-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A66 and Tag 0ATK case (1); sites-cohomology.tex Tag 0A95 for precomposition into K-injectives"
-   }
-  },
-  {
-   "text": "The comparison is natural and independent of these resolutions because it is the adjunct of the canonical tensor-counit map, by Step 3. More explicitly, for $u:K\\to K'$ in $D(R)$, the two naturality composites have the same adjunct $u\\circ(1_K\\otimes\\epsilon_R)$, by functoriality of tensor [lem-pc-derived-tensor-second-factor-functor] and the adjunction [lem-trf-derived-coinduction-adjunction]; its Hom bijection therefore makes them equal. The formula in Step 3 identifies the underlying scalar comparison with ordinary perfect evaluation, proving the final clause as well. Only $P$ was bounded and finite projective. The complexes representing $K$, its K-flat resolution, and its K-injective replacement were arbitrary unbounded complexes; neither flatness of $B/R$ nor Noetherianity was used.",
-   "uses": [
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-trf-derived-coinduction-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZE and Tags 0A70, 0A71; naturality of the evaluation-normalized comparison"
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), case (1); explicit projective-source comparison of K-flat/K-injective models."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-module-kflat-complex",
-  "def-pc-perfect-ring-complex",
   "def-pur-derived-internal-hom",
-  "lem-pc-derived-tensor-second-factor-functor",
   "lem-pc-kflat-resolution",
-  "lem-pc-perfect-ring-hom-tensor-degrees",
-  "lem-pc-perfect-ring-hom-tensor-differential",
-  "lem-pc-ring-derived-map-representative",
-  "lem-pod-projective-hom-evaluation-model",
-  "lem-pur-rhom-well-defined",
+  "lem-trf-coinduction-tensor-comparison-model",
   "lem-trf-derived-coinduction-adjunction",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  "lem-trf-perfect-source-evaluation-quasi-isomorphism"
  ],
  "proof_origin": {
   "by": "agent",
@@ -263,55 +193,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-perfect-algebra-coinduction-tensor",
   "worker": "stage1",
-  "summary": "Kept the imported statement and its unbounded hypotheses unchanged. Gave seven explicit steps using a B-linear chain map and a commuting projective-source comparison square, with signs checked by the existing normalized tensor-Hom nodes. Created one genuine smaller auxiliary node for ordinary unbounded derived coinduction, its counit and scalar identification. Retained imported searches and added the actual Q70 searches.",
+  "summary": "Repair of the 5374-character proof: extracted two comparable independent arguments as new statement-only unsplit nodes, retaining the target statement verbatim. The first constructs the comparison and its normalized model without perfectness; the second proves the underlying evaluation is invertible for an arbitrary perfect source complex. The item now assembles their results using conservative scalar restriction. The report preserves all seven original steps and maps them to the new tasks. Rebased the retained Q92 repair against the current live DAG after the side-completion landing refusal: the seven-step baseline is unchanged, both extracted nodes remain absent live, and every current citation and its hypotheses were re-read; no citation substitution or statement change is necessary. Current-DAG repair after return b5bba9a7e0c: examined the newly present coinduction total-Hom and shift-scalar nodes, documented why neither duplicates the tensor comparison, and expanded every citation quote to the full assertion used. The current live baseline and all cited statements were re-read; the unchanged mathematical split remains applicable. Repair resumed 2026-10-23 after another side-completion landing refusal: compared the retained returned content with the live seven-step baseline, re-read all current assembly citations and new-node statement dependencies, and made the QI identification and the perfect-source substitution hypotheses explicit in the assembly. No statement or dependency changes are required; the delivery tool rebuilds on current origin/sheaf-dag.",
   "blueprint": "Clauses (1) and (2), normal-cone specialization argument, specifically the sentence \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; technical algebraic duality input reached through trace specialization, relative duality, and algebraic shriek calculus in the recorded via chain. This node proves the perfect-algebra tensor/coinduction input for the one-variable refinement and open-immersion calculation.",
   "tool_uses": [
    {
-    "node": "def-pc-module-kflat-complex",
-    "why": "Generic ordinary-module derived algebra input: K-flat complexes of modules over a commutative ring. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "def-pc-perfect-ring-complex",
-    "why": "Generic ordinary-module derived algebra input: Perfect complexes over a commutative ring. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of K-flat representatives on the one-object ringed site, used only to choose the input model; the trace unit contains no such algebraic tool."
    },
    {
     "node": "def-pur-derived-internal-hom",
-    "why": "Generic ordinary-module derived algebra input: Derived internal Hom on a ringed site. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pc-derived-tensor-second-factor-functor",
-    "why": "Generic ordinary-module derived algebra input: Derived tensor over R with a complex of A-modules. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic ordinary-module derived algebra input: Existence of K-flat resolutions on a ringed site. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pc-perfect-ring-hom-tensor-degrees",
-    "why": "Generic ordinary-module derived algebra input: Signed tensor-dual evaluation is invertible in each degree. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pc-perfect-ring-hom-tensor-differential",
-    "why": "Generic ordinary-module derived algebra input: Signed tensor-dual evaluation commutes with differentials. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pc-ring-derived-map-representative",
-    "why": "Generic ordinary-module derived algebra input: Maps from bounded projective complexes are represented by chain maps. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pod-projective-hom-evaluation-model",
-    "why": "Generic ordinary-module derived algebra input: Projective Hom-complex model with its derived evaluation. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-pur-rhom-well-defined",
-    "why": "Generic ordinary-module derived algebra input: The Hom complex into K-injective complexes respects quasi-isomorphisms. It does not replace the curve/trace route; the current unit has no generic statement of this input."
-   },
-   {
-    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "why": "Generic ordinary-module derived algebra input: Isomorphisms in the unbounded derived category detected by cohomology. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+    "why": "Generic K-injective resolution and derived Hom construction on a small ringed site, specialized to the one-object site."
    }
   ]
  },
@@ -329,12 +223,12 @@
   "lem-weil-pbc-unbounded-derived-iso-cohomology"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q70-60c44cdf4",
-  "group": "Q70",
+  "reviewer": "NT-cc-Q92-b5a72b26c",
+  "group": "Q92",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-60c44cdf4 (reviewer sub-agent of L); spot-checked: Reviewed the item, auxiliary node, cited statements, source tags, unit route, edge cases, duplicate candidates, Mathlib searches, and route-pivot constraints. No mathematical or structural fault found; review.md records the checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-b5a72b26c (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, Stacks dualizing.tex 0A70/0A71/0BZE (lines 2211/2235/2365) and more-algebra.tex 0ATK(1) (line 28653), and repair note lem-trf-perfect-algebra-coinduction-tensor (released, 2026-10-22). Re-split: the live item still has the 7-step proof and neither new node exists live. Old steps 1-3 and 7 became lem-trf-coinduction-tensor-comparison-model; old steps 4-6 became lem-trf-perfect-source-evaluation-quasi-isomorphism; conservativity of U stays in parent step 2. The nodes are comparable (about 2.7k characters of argument each), neither restates the item, and the 1635-character assembly is correct. Model node: I represents K because F is K-flat. t is B-linear, since t(f⊗bh)(b')=q(f⊗h(b'b)). t is a chain map because B sits in degree 0. Its counit composite is q(f⊗h(1)), so Qt is the adjunct; naturality follows by adjunction. Perfect-source node: the signs hold for general M (both sides carry −(−1)^{a+b}q(f⊗h(dx))). It is true by replacing M with a bounded finite-projective P, using the precomposition square and the five lemma, reducing to M=R[n] where t is q shifted; this is 0ATK(1) at chain level. Tested on M=0, R[n] and Z→F_p. Since the previous head 6ec10c23 only the item's step 1 and step 2 wording changed (an explicit QI≅K and an explicit list of hypotheses), both correct; both new nodes are byte-identical. Duplicates: rg -L over the snapshot for 0ATK/0BZE/0A70/0A71/coinduction found no duplicate; I also read the candidates new in this base: sfb-coextension-iso-evaluation-formula, sc-sheaf-coinduction-counit, trf-algebraic-diagonal-class-normalization, pbc-derived-module-underlying-comparison. No SGA is cited, there is no cycle, and the inherited tool_uses are accepted. FIX (B3/C4): the model node cited 'K-injective resolution' only to def-pur-derived-internal-hom, which does not define the term. It now cites [def-pur-kinjective-complex] at that phrase and in stmt_deps: fixes/dag/nodes/sec-trace-formula/lem-trf-coinduction-tensor-comparison-model.json, identical to the fix of runs 7a97/b5bb/6ec1. Maintainer note: third promotion-loop re-delivery; this fix has been lost at every landing.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.PerfectAlgebraCoinductionTensor",
@@ -359,5 +253,16 @@
   "result": "pass",
   "note": "Compile reproduced clean (nt_compile.py --json, 6.0 s; probe confirms diagnostics are shown and the only sorryAx is the theorem's). Only the item's lean field changed; lean.statement verbatim; the 4 dependency nodes are unchanged; both report sections present. All node clauses match: ring map in the dependency's shared universe, IsPerfectRingComplex of B[0] as an R-module, C_B = upstream right-derived coextensionScalars with the node's B-action, D_B = coinductionComplex of any K-injective resolution of R[0], tensor via the second-factor dependency interface, θ a natural iso on all of D(R) normalized through the canonical derived adjunction counit, with an evaluation map (x⊗h(b)) checked to be a well-defined chain map, which fixes θ uniquely. Source 0BZE finite-type situation implied by perfectness. Edge cases (identity, B=0, non-flat quotient, unbounded) covered. Helpers have real data and no duplicates; docstrings and imports follow the brief. Non-blocking notes: the scalar-restriction clause is implied rather than a separate conjunct; lem-trf-derived-coinduction-adjunction should later reuse the same upstream declarations."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

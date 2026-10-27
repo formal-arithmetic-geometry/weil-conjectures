@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-regular-local-separable-residue-adic-smooth",
+ "kind": "statement",
+ "title": "Regular local algebras with separable residue field are adically formally smooth",
+ "statement": "Let $k$ be a field, and let $(A,\\mathfrak m)$ be a commutative Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring], with unique maximal ideal $\\mathfrak m$ and residue field $K=A/\\mathfrak m$. Suppose that $A$ is a regular local ring [def-weil-regular-scheme] and that $K/k$ is separable [def-weil-pbc-separable-field-extension] (every finitely generated intermediate field is separably generated). Then $k\\to A$ is formally smooth for the $\\mathfrak m$-adic topology [def-weil-pbc-formally-smooth-adic]. Neither $A$ nor $K/k$ is assumed to be of finite type, and $A$ need not be complete.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EJ, lemma-regular-implies-fs (statement and proof); invoked in Tag 07EL, theorem-regular-fs, characteristic-zero case and the final positive-characteristic lifting argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\widehat A$ and $\\mathfrak n=\\mathfrak mB$. The completion-regularity theorem makes $B$ Noetherian local and regular with maximal ideal $\\mathfrak n$. Since $\\mathfrak m$ is finitely generated, the completion modulo ideal theorem makes $B$ complete for $\\mathfrak n$ and identifies $B/\\mathfrak n$ with $K$ as $k$-algebras. In particular its residue extension is the given separable $K/k$.",
+   "uses": [
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EJ, lemma-regular-implies-fs, first paragraph; Tag 07ED, lemma-formally-smooth-completion."
+   }
+  },
+  {
+   "text": "The field-lifting lemma makes $K$ formally smooth over $k$ for the zero ideal, by the definition of adic formal smoothness. Apply the complete-target lifting theorem with source $K$, source ideal $0$, target $B$, and $I=J=\\mathfrak n$, to the identity $K\\to B/\\mathfrak n=K$. Here $J^1\\subseteq I$, $\\bigcap_{a\\ge1}(J+I^a)=\\mathfrak n$, and the source zero ideal maps to $0=q(I)$. Obtain a $k$-algebra section $s:K\\to B$ of the residue map.",
+   "uses": [
+    "lem-sfb-separable-field-square-zero-lifting",
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C34, lemma-lift-residue-field, proof; Tag 07EJ, coefficient-compatible coordinates via Tag 0C35."
+   }
+  },
+  {
+   "text": "By the definition of regular local ring choose $d=\\dim B$ generators $t_1,\\ldots,t_d$ of $\\mathfrak n$. Apply the existing complete regular coefficient-coordinate theorem with coefficient field $K$ and section $s$. It gives an isomorphism $\\theta:K[[T_1,\\ldots,T_d]]\\xrightarrow{\\sim}B$, taking $T_i$ to $t_i$. It is a $k$-algebra isomorphism since $s$ is $k$-linear, and it identifies the variable ideal $V=(T_1,\\ldots,T_d)$ with $\\mathfrak n$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-trf-regular-complete-coefficient-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C35, lemma-power-series-over-residue-field; algebra.tex Tag 0C0S, lemma-regular-complete-containing-coefficient-field, clause (2) and its proof."
+   }
+  },
+  {
+   "text": "We verify adic smoothness of $P=K[[T_1,\\ldots,T_d]]$ explicitly. Take a $k$-algebra $D$, $J^2=0$, and $g:P\\to D/J$ with $g(V^r)=0$, $r\\ge1$. Lift $g|_K$ to $a:K\\to D$ by the field-lifting lemma, and choose $b_i\\in D$ reducing to $g(T_i)$. Put $H=(b_1,\\ldots,b_d)$. Every degree-$r$ monomial in the $b_i$ maps to zero, so $H^r\\subseteq J$ and $H^{2r}=0$. Thus $D$ is $H$-adically complete: all quotients from exponent $2r$ onward equal $D$. Power-series evaluation with coefficients $a$ and variables $b_i$ gives a $k$-algebra map $f:P\\to D$. For $F=\\sum c_\\nu T^\\nu$, its image is the finite sum $\\sum_{|\\nu|<2r}a(c_\\nu)b^\\nu$. Reducing this sum gives $g(F)$: the discarded tail lies in $V^{2r}$ and every monomial of degree at least $r$ maps to zero. Therefore $qf=g$. This proves the required lifting property for $P$, and composing maps with $\\theta$ and $\\theta^{-1}$ gives it for $B$ and $\\mathfrak n$.",
+   "uses": [
+    "lem-sfb-separable-field-square-zero-lifting",
+    "lem-weil-pbc-power-series-adic-evaluation",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EJ, second paragraph: coefficient lifting, polynomial lifting, and completion. The evaluation formulation writes their composite on every power series; compare Tag 07NL, lemma-power-series-ring-over-Cohen-fs, proof."
+   }
+  },
+  {
+   "text": "Finally take any test $g:A\\to D/J$ killing $\\mathfrak m^r$. It factors through $A/\\mathfrak m^r$. The completion modulo powers theorem identifies this quotient with $B/\\mathfrak m^rB$, with its canonical map from $A$. Hence $g$ extends to $\\widehat g:B\\to D/J$ killing $\\mathfrak n^r=(\\mathfrak mB)^r=\\mathfrak m^rB$. Step 4 lifts $\\widehat g$ to $B\\to D$; restricting along $A\\to B$ lifts $g$. This is precisely formal smoothness of $k\\to A$ for the $\\mathfrak m$-adic topology.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ED, lemma-formally-smooth-completion, implication (2) implies (1), used in the first sentence of Tag 07EJ; algebra.tex Tag 05GG, lemma-hathat-finitely-generated."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-sfb-separable-field-square-zero-lifting",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "def-weil-regular-scheme",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EJ, lemma-regular-implies-fs, using Tags 0C34 and 0C35. Polynomial lifting and completion are written as the equivalent explicit nilpotent power-series evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A regular Noetherian local algebra with separable residue field is formally smooth in the maximal ideal adic topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal smoothness of regular local rings over a field with separable residue extension without finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsRegularLocalRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmoothAdic|regular.*separable.*smooth|formallySmooth.*regular",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local algebra with separable residue field is adically formally smooth",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Unramified.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyUnramified K L\", \"doc\": \"If $ K $ is a separable algebra over $ L $, then $ K $ is formally unramified over $ L $. This follows from the fact that separability implies the vanishing of Kähler differentials, which characterize\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[EssFiniteType K L] {v : ι → L} (hb : AlgebraicIndependent K v)\\n  [Algebra.IsSeparable (IntermediateField.adjoin K (Set.range v)) L] : Algebra.FormallySmooth K L\", \"doc\": \"Let $ K \\\\to L $ be an algebra of essential finite type. If there exists a transcendence basis $ \\\\{v_i\\\\} $ for $ L $ over $ K $ such that the extension $ K(\\\\{v_i\\\\}) \\\\to L $ is separable, then $ K \\\\to L\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmoothAdic|regular.*separable.*smooth|formallySmooth.*regular",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no regular-local separable-residue criterion for adic formal smoothness; the hits concern smooth or discrete formally smooth algebras and finite-presentation local tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local ring with separable residue field is adically formally smooth without finite type hypotheses",
+   "results": "Hits read: Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.of_perfectField, RingHom.FormallySmooth, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: no regular-local separable-residue criterion for adic formal smoothness; the hits concern smooth or discrete formally smooth algebras and finite-presentation local tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsRegularLocalRing\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no regular-local separable-residue criterion for adic formal smoothness; the hits concern smooth or discrete formally smooth algebras and finite-presentation local tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular local Noetherian algebra over a field with separable residue field is formally smooth for the maximal ideal adic topology",
+   "results": "Hits read: Algebra.Smooth.formallySmooth, Algebra.IsSmoothAt, Algebra.instSmoothOfIsStandardSmooth, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.smooth_iff, Algebra.Smooth, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: no regular-local separable-residue criterion for adic formal smoothness; the hits concern smooth or discrete formally smooth algebras and finite-presentation local tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular local k algebra with separable residue extension is infinitesimally smooth for continuous maps to discrete square zero quotients",
+   "results": "Hits read: Algebra.Smooth, Algebra.IsSmoothAt, Algebra.Smooth.formallySmooth, Algebra.instSmoothOfIsStandardSmooth, Algebra.FormallyEtale.instFormallySmooth, RingHom.IsStandardSmooth.smooth, Algebra.Etale, RingHom.Smooth",
+   "date": "2026-10-23",
+   "verdict": "no match: no regular-local separable-residue criterion for adic formal smoothness; the hits concern smooth or discrete formally smooth algebras and finite-presentation local tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "date": "2026-10-23",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Adic formal smoothness ascends and descends through a smooth complete local map. Descent after completion: the geometrically regular closed fibre is adically formally smooth (the reverse field implication of Stacks 07EL). Supporting input: Tag 07EL uses Tag 07EJ to lift over the base field in characteristic zero and over the prime field in positive characteristic.",
+   "via": [
+    "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "lem-sfb-adic-formal-smoothness-descent",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-local-separable-residue-adic-smooth",
+  "worker": "stage1",
+  "summary": "Proved Tag 07EJ by completion, a coefficient section over k, complete regular coordinates, explicit square-zero evaluation, and restriction of lifts. Reused existing generic tools. Added only the general separable-field square-zero lifting lemma (0322), since existing algebraic-only and characteristic-zero-only nodes do not cover arbitrary separable residue extensions. Statement unchanged; searches verified against local Mathlib sources.",
+  "blueprint": "Supports the inherited chain from det-thm-sf-ctf-stability-direct-images proof (3), the alteration input via geometrically regular closed fibres and Tag 07EL. The current latest blueprint proof was read. blueprint_refs ancestor returns None for this inherited chain; retained from.node=null and the exact existing place/via. No equivalent blueprint statement found in whole-blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic commutative algebra input to the Stacks 07EJ proof; no same-unit node supplies this statement. Preserves completion and coefficient-compatible power-series route."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "Generic commutative algebra input to the Stacks 07EJ proof; no same-unit node supplies this statement. Preserves completion and coefficient-compatible power-series route."
+   },
+   {
+    "node": "lem-trf-regular-complete-coefficient-coordinates",
+    "why": "Generic commutative algebra input to the Stacks 07EJ proof; no same-unit node supplies this statement. Preserves completion and coefficient-compatible power-series route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic commutative algebra input to the Stacks 07EJ proof; no same-unit node supplies this statement. Preserves completion and coefficient-compatible power-series route."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic commutative algebra input to the Stacks 07EJ proof; no same-unit node supplies this statement. Preserves completion and coefficient-compatible power-series route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-712ae254e",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-712ae254e (reviewer sub-agent of L); spot-checked: I read Stacks 07EJ, 0C34, 0C35, 0322 and 0C0S(2). The item statement is unchanged and matches 07EJ (Noetherian regular local, K/k separable in the 030O sense, no completeness or finite type). The five steps follow the 07EJ route, with the composition and completion argument written out as an explicit nilpotent evaluation, and I checked the hypotheses of every cited node at its use. Step 1: completion-regular-local, and 05GG mod-ideal gives B complete with B/n≅K as k-algebras. Step 2: the new lemma gives the n=0 case of the definition; 07NJ applies with I=J=n, t=1, J closed. This correctly avoids the algebraic-only trf coefficient-section node. Step 3: 0C0S coordinates via the section s; θ is k-linear and the case d=0 is covered. Step 4: H^r⊆J and H^{2r}=0, so D is H-complete; evaluation with N=2r and the tail in V^{2r} gives qf=g on every power series. Step 5: 05GG mod-power, extend through π_r, lift, restrict. New node lem-sfb-separable-field-square-zero-lifting: true by 0322 (char p (1)⇔(6); char 0 always). It is statement-only and self-contained, and its edge cases (D=0, the purely inseparable counterexample) check. It is not a duplicate: the existing nodes cover only char 0, separable algebraic, or F_p. It is strictly smaller than the item. Batch-5: lem-trf-regular-complete-coefficient-coordinates is the generic Cohen-structure fact 0C0S(2). Its 22-node closure is pure commutative algebra with no trace-formula or Poincaré content, and it is already cited outside trf, so the citation is accepted. The generic off-unit tool_uses are accepted. No SGA source is used, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalSeparableResidueAdicSmooth",
+  "declaration": "Algebra.formallySmoothAdic_of_isRegularLocalRing_of_separable_residueField",
+  "file": "lean/Sheaf/RingTheory/RegularLocalSeparableResidueAdicSmooth.lean",
+  "statement": "theorem formallySmoothAdic_of_isRegularLocalRing_of_separable_residueField (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [IsRegularLocalRing A] (hsep : IsSeparableExtension k (IsLocalRing.ResidueField A)) : FormallySmoothAdic k A (IsLocalRing.maximalIdeal A)",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c963c36e",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Checked against Stacks 07EJ, clause by clause. k field; A CommRing+Algebra k; [IsRegularLocalRing A] (extends IsLocalRing and IsNoetherianRing; ring clause of the def-weil-regular-scheme mathlib_match); canonical maximalIdeal and ResidueField with the induced k-algebra; hsep uses the recorded IsSeparableExtension (030O, transcendental allowed); conclusion is the recorded FormallySmoothAdic k A (maximalIdeal A) with test algebras in Type (max u v). No finite-type, completeness or characteristic assumptions; universes u, v independent. Dependency nodes identical to live; item differs only in lean (first binding, not a rebind); lean.statement verbatim. Docstrings carry source, blueprint id and the 5 proof steps; proof is only sorry; all imports exist. Duplicate search: regularLocal_iff_smoothAtPrime assumes finite type, so no duplicate. Not recompiled (no file changed). No findings."
+ }
+}

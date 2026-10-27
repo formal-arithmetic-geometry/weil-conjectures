@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-quasiseparated-space-sober",
+ "kind": "statement",
+ "title": "Sobriety of a quasi-separated algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with point topology [def-a1-space-point-topology]. Assume its diagonal $X\\to X\\times_S X$ is quasi-compact on scheme tests, meaning that inverse images of quasi-compact opens are quasi-compact. Then $|X|$ is sober: every nonempty irreducible closed subset is the closure of exactly one point. Here irreducibility is [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03K6, proposition-reasonable-sober; quasi-separated implies decent by Tag 03JX, lemma-bounded-fibres, with definition-very-reasonable."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Let $T\\subseteq|X|$ be nonempty, irreducible and closed. By [lem-sfb-space-reduced-closed-support] choose its reduced closed subspace $i:Z\\hookrightarrow X$, whose point space is homeomorphic to $T$. The square of $\\Delta_{Z/S}$ and $\\Delta_{X/S}$ over $Z\\times_S Z\\to X\\times_S X$ is cartesian: for each pair of $Z$-valued points their images in $X$ agree exactly when they agree, since $i$ is a subfunctor inclusion. Consequently every scheme test of $\\Delta_{Z/S}$ is itself the test of $\\Delta_{X/S}$ obtained by composing with $Z\\times_S Z\\to X\\times_S X$. It is quasi-compact by the hypothesis on $X$. Thus $Z$ satisfies the relative diagonal condition.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K6, proposition-reasonable-sober: passage to the reduced closed subspace; the monomorphism diagonal square replaces the general Tag 03KF inheritance statement."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-quasiseparated-space-dense-scheme-open] to $Z$. This gives a scheme $V$ whose point space is an open dense subset of $T$. It is nonempty, since $T$ is nonempty and it is dense. It is irreducible: two nonempty open subsets of $V$ are nonempty open subsets of $T$, so they meet by irreducibility of $T$. By [lem-weil-pbc-scheme-sober], applied to the whole space $|V|$ as a closed irreducible subset of itself, choose $\\eta\\in V$ whose closure in $V$ is all of $V$.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K6, proposition-reasonable-sober: apply Tag 086U to the closed subspace, then Schemes Tag 01IS to its dense open scheme."
+   }
+  },
+  {
+   "text": "View $\\eta$ in $T\\subseteq|X|$. Its closure $C$ in $|X|$ lies in $T$ because $T$ is closed. Since the subspace closure of $\\{\\eta\\}$ in $V$ is $V$, we have $V\\subseteq C$. The set $C$ is closed in $T$ and contains its dense subset $V$, so $C=T$. This proves existence of a generic point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K6, proposition-reasonable-sober: the final closure argument."
+   }
+  },
+  {
+   "text": "For uniqueness, write $p\\leadsto q$ for $q\\in\\overline{\\{p\\}}$. Suppose $x,y$ both have closure $T$, so $x\\leadsto y$ and $y\\leadsto x$. Choose a surjective etale scheme atlas $a:U\\to X$ [def-trf-algebraic-space]; since $a$ is representable and surjective on every scheme base change, $|a|$ is surjective [lem-a1-space-point-open-calculus], so choose $u\\in U$ above $y$. By [lem-sfb-quasiseparated-space-etale-specializations] lift $x\\leadsto y$ to $v\\leadsto u$ with $a(v)=x$, and then lift $y\\leadsto x$ to $w\\leadsto v$ with $a(w)=y$. Transitivity gives $w\\leadsto u$, so the same cited lemma gives $w=u$. Thus $u\\leadsto v$ and $v\\leadsto u$. Their singleton closures in the scheme $U$ coincide; this closure is irreducible (any nonempty open subset of it contains its dense point). Scheme sobriety [lem-weil-pbc-scheme-sober] gives $u=v$, whence $y=x$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-quasiseparated-space-etale-specializations",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K3, lemma-kolmogorov, used at the start of Tag 03K6; specialization lifting and absence of fibre specializations are Tags 03IL and 03K5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "lem-weil-pbc-scheme-sober",
+  "def-trf-algebraic-space",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-quasiseparated-space-etale-specializations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03K6, proposition-reasonable-sober, with the uniqueness proof of Tag 03K3, lemma-kolmogorov."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated algebraic space is sober and specializations lift to etale scheme charts with no distinct comparable points in one fibre",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Specialization lifting for etale charts of quasi separated algebraic spaces and sobriety of their point topology",
+   "results": "OK 8 hits: Specialization, PrimeSpectrum.instQuasiSeparatedSpace, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, QuasiSober.mk, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ss]peciali[sz]|[Ss]ober).*(algebraic.?space|[Ee]tale)|(algebraic.?space|[Ee]tale).*([Ss]peciali[sz]|[Ss]ober)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Specializes\", \"Etale\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme atlas of a quasi separated algebraic space every generalization of an image point lifts to a generalization of the chosen scheme point and comparable points in a fibre coincide; the space is sober",
+   "results": "OK 8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Scheme.le_iff_specializes, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|QuasiSober.*Scheme|Scheme.*QuasiSober",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sobriety of the point topology of a quasi separated algebraic space",
+   "results": "OK 8 hits: QuasiSober, QuasiSober.mk, quasiSober_iff, QuasiSober.sober, SpectralSpace.toQuasiSober, TopologicalSpace.IsOpenCover.quasiSober_iff_forall, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, R1Space.quasiSober",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSober\", \"Scheme\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi separated algebraic space has a sober underlying topological space",
+   "results": "OK 8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty irreducible closed subset of a quasi separated algebraic space is the closure of a unique point",
+   "results": "OK 8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, PrimeSpectrum.quasiSober, IsIrreducible.closure_genericPoint, quasiSober_iff, QuasiSober.sober, IsIrreducible.isGenericPoint_genericPoint, IsIrreducible.isGenericPoint_genericPoint_closure, IsIrreducible.genericPoint_closure_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-topological-dimension-local-rings",
+  "date": "2026-10-23",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space.",
+   "via": [
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiseparated-space-sober",
+  "worker": "stage1",
+  "summary": "Followed Stacks 03K6 and 03K3: reduced closed support, inherited relative diagonal condition, dense open scheme, scheme generic point and explicit closure argument; uniqueness proved by lifting two specializations to an atlas. Reused the existing reduced-support, scheme sobriety and etale-specialization nodes; added only the strictly different dense-open-scheme theorem. The statement is unchanged.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the existing alteration and algebraic-space dimension branch recorded in blueprint.from.place. Current latest blueprint proof (3) was read; sobriety supplies the generic-point interpretation in the supporting Tag 0A4J comparison, not a new six-functor route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Scheme sobriety supplies the generic point of the dense open scheme and antisymmetry in the atlas; it is a general scheme tool, not a substitute for any unit step."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General point-class calculus of algebraic spaces (Stacks 03H5, lemma-characterize-surjective): a representable surjective atlas is surjective on point classes. Used only to pick a chart point above y in the uniqueness step; no node of sk-thm-sf-ctf-stability states it, and it is already cited throughout sec-six-functors-basics. Added by the Q16 maintainer reader in place of the definition def-trf-algebraic-space-jointly-surjective-family, which does not state this implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-sober",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-3865a6f31",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-3865a6f31 (reviewer sub-agent of L); spot-checked: Read decent-spaces.tex 03JX (lemma-bounded-fibres), definition-very-reasonable, 086U (theorem-decent-open-dense-scheme), 03K5, 03IL, 03K3 (lemma-kolmogorov) and the full 03K6 proof (proposition-reasonable-sober). The tag labels were checked in tags/tags. The item statement is the same as in clones/live, where the item is still unsplit; there is no repair note. The item assumes only the relative diagonal over S. That is enough for decency: over each affine S' ⊆ S the absolute diagonal factors through the relative one and the closed immersion S' → S'×_Z S', so X is Zariski locally quasi-separated, and (ζ) gives decent. So 03K6 applies and the statement is true as written. Step 1: the reduced closed support node with q = id gives |Z| ≅ T. The cartesian square of diagonals is correct because i is a monomorphism, so Z has the relative quasi-compact diagonal. Step 2: the new node applied to Z, plus 01IS (Mathlib leaf); nonemptiness and irreducibility of V are argued correctly. Step 3: the closure argument is elementary and correct. Step 4: the specialization directions v⇝u, w⇝v, then w = u and u = v (by 01IS) were checked against the cited etale-specializations statement, which has the same hypothesis and any etale scheme-source map. C4 fault, repaired: the choice of a point u above y needs |a| surjective, but the step cited def-trf-algebraic-space-jointly-surjective-family, which only defines joint surjectivity on point classes. The FIX cites lem-a1-space-point-open-calculus instead (Stacks 03H5: a representable map surjective on every scheme base change is surjective on |·|; already widely cited in sec-six-functors-basics; no cycle) and records it in tool_uses. The FIX changes only step 4 uses and proof_deps. New node: statement only and self-contained. It is a correct specialization of 086U via 03JX (ζ), and the union of the open scheme pieces over affine opens of S is a dense open scheme. It is not a restatement of the item. rg -L found no duplicate (searched 086U, 03K6, 03K3, schematic locus, dense open subscheme/subspace, sober). Batch-5 flags: def-trf-algebraic-space, def-a1-space-point-topology and def-trf-algebraic-space-jointly-surjective-family are general definitions. lem-sfb-space-reduced-closed-support (03IQ) and lem-a1-space-point-open-calculus reach sec-trace-formula only through general algebraic-space lemmas (fibre products, descent, gluing), not steps of the trace formula or Poincaré duality, so all are accepted. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-quasiseparated-space-sober.json.; 1 file(s) fixed by the reviewer"
+ }
+}

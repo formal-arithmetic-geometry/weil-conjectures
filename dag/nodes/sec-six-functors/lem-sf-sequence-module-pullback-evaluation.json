@@ -1,0 +1,178 @@
+{
+ "id": "lem-sf-sequence-module-pullback-evaluation",
+ "kind": "statement",
+ "title": "Inverse image commutes with finite evaluation on ringed sequence sites",
+ "statement": "Let C and D be sites, F : C → D continuous, and let its product with the identity of the natural-number poset be continuous for the vertical sequence topologies [def-coef-ringed-sequence-site]. Let A and B be ring sheaves on the sequence sites and φ : A → F_* B. Fix n and identify their n-th slices with S and T. Let ψ : S → F_* T be the sliced ring map. Given adjunctions L ⊣ φ_* and L_n ⊣ ψ_* and an isomorphism d : φ_* ev_n ≅ ev_n ψ_*, the inverse mate of d under these two adjunctions is invertible. Thus L commutes with finite evaluation up to the canonical mate isomorphism. All module and ring carriers lie in a universe containing the object and morphism universes of the sites.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+ },
+ "proof": [
+  {
+   "text": "Construct a right adjoint to evaluation at n: at (m,U), use the module of functions PLift(n ≤ m) → M(U), with scalars restricted through the horizontal ring map. This gives M(U) for n ≤ m and the zero module otherwise. Restriction uses the vertical restriction of M; the sheaf condition is tested at every vertical slice. The unit is horizontal restriction and the counit evaluates at the reflexive inequality. Check both triangle identities sectionwise.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+   }
+  },
+  {
+   "text": "Take the mate of d under the evaluation/coextension adjunctions. At each vertical object, conjugate the bijective section map of d on the coextension at level n by evaluation of functions on PLift(n ≤ n). The mate at level m acts pointwise by this bijection on functions PLift(n ≤ m) → M(FU), since horizontal restriction has identity underlying carrier maps. It is bijective both when n ≤ m and when the function domain is empty. Forgetting to presheaves of abelian groups and reflecting isomorphisms gives invertibility.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+   }
+  },
+  {
+   "text": "The iterated-mates identity identifies the preceding mate with the conjugate of the inverse mate under L ⊣ φ_* and L_n ⊣ ψ_*. Conjugation reflects invertibility, proving the assertion.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "K6: Construction 4.1; arbitrary comparison isomorphism via pointwise bijectivity of its coextension mate, followed by the existing iterated-mates argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules on a sequence diagram of ringed sites commutes with evaluation, by the coextension right adjoints and iterated mates",
+   "results": "Search executed by msearch.py; library has specialized private coextension arguments in VaryingRingOperations.",
+   "date": "2026-10-24",
+   "verdict": "No reusable public independent-universe sequence evaluation result."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv _ _ _",
+   "results": "0 hits; unqualified name not recognized by search service. Local search found the iterated-mates API.",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies categorical mates, not the ringed sequence-site coextension."
+  },
+  {
+   "tool": "grep",
+   "query": "sequenceModulePullbackEvaluation|coMate_isIso|inverseMate_isIso_of_iterated",
+   "results": "msearch.py returned 0 hits; rg located private helpers in VaryingRingOperations.",
+   "date": "2026-10-24",
+   "verdict": "Specialized proof must be generalized to independent universes."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-24",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": levelwise exactness of the simultaneous sequence-site pullback used in tensor/composition normalization.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SequenceModulePullbackEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/SequenceModulePullbackEvaluation.lean",
+  "declaration": "WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso",
+  "statement": "theorem sequenceModulePullbackEvaluation_isIso\n    {D : Type d} [Category.{w} D]\n    [UnivLE.{d, r}] [UnivLE.{w, r}] [UnivLE.{max d w, r}]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (F : C ⥤ D) [F.IsContinuous J K]\n    [((𝟭 ℕ).prod F).IsContinuous (coefficientSequenceTopology J)\n      (coefficientSequenceTopology K)]\n    (A : Sheaf (coefficientSequenceTopology J) RingCat.{r})\n    (B : Sheaf (coefficientSequenceTopology K) RingCat.{r}) (n : ℕ)\n    (φ : A ⟶ (((𝟭 ℕ).prod F).sheafPushforwardContinuous RingCat.{r}\n      (coefficientSequenceTopology J) (coefficientSequenceTopology K)).obj B)\n    (S : Sheaf J RingCat.{r}) (T : Sheaf K RingCat.{r})\n    (hA : ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{r} J\n      (coefficientSequenceTopology J)).obj A = S)\n    (hB : ((Prod.sectR n D).sheafPushforwardContinuous RingCat.{r} K\n      (coefficientSequenceTopology K)).obj B = T)\n    (ψ : S ⟶ (F.sheafPushforwardContinuous RingCat.{r} J K).obj T)\n    (L : SheafOfModules.{r} A ⥤ SheafOfModules.{r} B)\n    (Ln : SheafOfModules.{r} S ⥤ SheafOfModules.{r} T)\n    (adj : L ⊣ SheafOfModules.pushforward φ)\n    (adjn : Ln ⊣ SheafOfModules.pushforward ψ)\n    (d : SheafOfModules.pushforward.{r} φ ⋙\n        SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hA.symm) ≅\n      SheafOfModules.pushforward (F := Prod.sectR n D) (eqToHom hB.symm) ⋙\n        SheafOfModules.pushforward ψ) :\n    IsIso ((mateEquiv adj adjn).symm d.hom).natTrans",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261024T214355-L-605196",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8293a",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T023440-L-566781",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/dep/adapted modules vs clone originals; original AmbientPullbackTensorCoherence and SemilinearOperationsExistence compiled against delivered SequenceModulePullbackEvaluation; axioms of proved decls; node JSON diffs vs clone; strengthened mate theorem checked mathematically"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "K6 stage 2",
+  "old_statement": "Let C and D be sites, F : C → D continuous, and let its product with the identity of the natural-number poset be continuous for the vertical sequence topologies [def-coef-ringed-sequence-site]. Let A and B be ring sheaves on the sequence sites and φ : A → F_* B. Fix n and identify their n-th slices with S and T. Let ψ : S → F_* T be the sliced ring map. Given adjunctions L ⊣ φ_* and L_n ⊣ ψ_* and an isomorphism d : φ_* ev_n ≅ ev_n ψ_* which is identity on section carriers, the inverse mate of d under these two adjunctions is invertible. Thus L commutes with finite evaluation up to the canonical mate isomorphism. All module and ring carriers lie in a universe containing the object and morphism universes of the sites.",
+  "what": "The identity-on-section-carriers premise is unnecessary and expensive to elaborate for coefficient equality transports. The coextension mate acts pointwise by the bijection induced by any comparison isomorphism. The conclusion and all other hypotheses stay unchanged.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-semilinear-operations-existence",
+    "holds": true,
+    "note": "The conclusion is unchanged and applies to the previously identity-on-sections comparison. Dropping an unnecessary premise preserves this use."
+   },
+   {
+    "id": "lem-sf-ambient-pullback-tensor-coherence",
+    "holds": true,
+    "note": "The conclusion is unchanged and applies to the previously identity-on-sections comparison. Dropping an unnecessary premise preserves this use."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Construct a right adjoint to evaluation at n: at (m,U), use the module of functions PLift(n ≤ m) → M(U), with scalars restricted through the horizontal ring map. This gives M(U) for n ≤ m and the zero module otherwise. Restriction uses the vertical restriction of M; the sheaf condition is tested at every vertical slice. The unit is horizontal restriction and the counit evaluates at the reflexive inequality. Check both triangle identities sectionwise.",
+    "uses": [
+     "def-coef-ringed-sequence-site"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+     "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+    }
+   },
+   {
+    "text": "Take the mate of d under the two evaluation/coextension adjunctions. Since d is identity on sections, its mate is identity on every coextension section carrier. Its image in presheaves of abelian groups is therefore an isomorphism, and the faithful module-sheaf forgetful functor reflects isomorphisms.",
+    "uses": [],
+    "elementary": false,
+    "source": {
+     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+     "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+    }
+   },
+   {
+    "text": "The iterated-mates identity identifies the preceding mate with the conjugate of the inverse mate under L ⊣ φ_* and L_n ⊣ ψ_*. Conjugation reflects invertibility, proving the assertion.",
+    "uses": [],
+    "elementary": false,
+    "source": {
+     "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+     "place": "Construction 4.1, finite evaluation of strict varying-ring systems; explicit right-coextension and iterated-mates argument supplied here."
+    }
+   }
+  ]
+ }
+}

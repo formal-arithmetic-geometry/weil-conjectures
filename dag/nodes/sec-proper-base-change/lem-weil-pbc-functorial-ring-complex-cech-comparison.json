@@ -16,38 +16,43 @@
  ],
  "proof": [
   {
-   "text": "The Godement ring model has its augmented ordered localization Cech model. Resolve it over a section ring by a K-flat complex. The normalized semilinear maps to every restriction ring extend to scalar-extension chain maps preserving the augmentation. The augmented Cech base-change theorem makes these maps quasi-isomorphisms.",
+   "text": "Give each one-object ring module category its standard derived category. Obtain the Godement Cech model for every ring and finitely generated ideal. Form the generated ideal in the concrete global section ring and take a K-flat resolution p:P to its Godement complex; transport its augmented Cech model backwards along p.",
    "uses": [
     "lem-weil-pbc-ring-complex-godement-cech",
-    "lem-weil-pbc-ring-complex-cech-base-change",
-    "def-weil-pbc-ring-complex-semilinear-extension",
-    "lem-pc-kflat-resolution"
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-ring-complex-cech-data",
+    "def-weil-pbc-global-section-scalar-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Sheafify degreewise, preserving quasi-isomorphisms by exact module sheafification. Fraction base change identifies the localization terms and maps with the finite ordered tensor of the one-element localization complexes; the alternating signs are the tensor differential signs. Both maps preserve the augmented ring term. Invert the quasi-isomorphisms in the derived category.",
+   "text": "The constructed global scalar-extension comparison q:T(P) to the family sheaf model is an augmented quasi-isomorphism. Independently the ordered scalar Cech comparison gives an augmented derived isomorphism from ringedExtendedCech to T(P).",
    "uses": [
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "def-weil-pbc-ringed-extended-cech",
-    "def-weil-pbc-functorial-ring-complex-sheaf"
+    "lem-weil-pbc-global-section-ring-family-base-change",
+    "lem-weil-pbc-global-section-scalar-cech-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose the latter isomorphism with asIso(Q.map q). Functor.map_comp and the augmentation equation for q identify its composite augmentation with the Cech augmentation. The combination is complete Lean code.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ring-complex-godement-cech",
-  "lem-weil-pbc-ring-complex-cech-base-change",
-  "def-weil-pbc-ring-complex-semilinear-extension",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "def-weil-pbc-ringed-extended-cech",
-  "def-weil-pbc-functorial-ring-complex-sheaf"
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-global-section-scalar-extension",
+  "lem-weil-pbc-global-section-ring-family-base-change",
+  "lem-weil-pbc-global-section-scalar-cech-model"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "X7",
+  "date": "2026-10-26",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099D(c),(d), lemma-all-rings, and 099E, lemma-global-extended-cech-complex, final paragraph"
+  "place": "Tags 099D(c),(d), 099E final paragraph; restores the original V6 scalar model and isolates proof imports from the public interface"
  },
  "mathlib_searches": [
   {
@@ -121,14 +126,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "X7",
   "result": "pass",
-  "landing": "20261018T110337-L-342298",
+  "landing": "20261026T003226-L-155006",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

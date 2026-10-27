@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q52
 -/
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
-import Mathlib.LinearAlgebra.FreeModule.PID
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+public import Mathlib.LinearAlgebra.FreeModule.PID
 
 /-!
 # Splitting a fine monoid over its sharpening
@@ -14,6 +16,8 @@ Source: Illusie--Laszlo--Orgogozo, Exposé VIII, 3.1.11 and 3.1.26, printed pp. 
 agent algebraic refinement with the explicit torsion-free sharp-group hypothesis
 (blueprint: lem-trf-fine-monoid-unit-splitting).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

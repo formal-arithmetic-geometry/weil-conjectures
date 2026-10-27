@@ -1,0 +1,189 @@
+{
+ "id": "lem-trf-fp-sheaf-tensor-product",
+ "kind": "statement",
+ "title": "Tensor products of finitely presented scheme module sheaves are finitely presented",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $F,G$ be sheaves of $\\mathcal O_X$-modules on its Zariski site [def-weil-sheaf-of-modules-category]. A sheaf $H$ is finitely presented if every point has an open neighbourhood $U$ with an exact sequence $\\mathcal O_U^m\\to\\mathcal O_U^n\\to H|_U\\to0$ for finite nonnegative integers $m,n$. If $F$ and $G$ are finitely presented, then their sheaf tensor product $F\\otimes_{\\mathcal O_X}G$ [def-pur-sheaf-tensor-product] is finitely presented.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CE, modules-lemma-tensor-product-permanence, clause (4), specialized from ringed spaces to schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For two finitely presented R-modules M and N, use Mathlib Module.finitePresentation_iff_exists_presentation to obtain presentations p and q with finite generator and relation types. Module.Presentation.tensor constructs the presentation with generators p.G × q.G and relations (p.R × q.G) ⊕ (p.G × q.R). These types are finite, so Module.Presentation.finitePresentation gives finite presentation of M ⊗_R N. This is the private helper finitePresentation_tensor; it has a complete proof and uses no new assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CE, lemma-tensor-product-permanence (4), via affine module presentations; affine comparison from Schemes Tags 01I7, 01IA and 01IB."
+   }
+  },
+  {
+   "text": "On Spec R, put M = Γ(F,top) and N = Γ(G,top). Finite presentation of their sections follows from [lem-weil-pbc-finite-presentation-affine-sections], with the scalar ring transported along Γ(Spec R,top) ≅ R by finitePresentation_sections_top. Since finite presentation implies quasi-coherence, [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies tilde M with F and tilde N with G. By [lem-weil-pbc-affine-tilde-tensor], tilde(M ⊗_R N) is isomorphic to F ⊗ G. Step 1 gives finite generators and relations for M ⊗_R N. Mathlib presentationTilde applies the colimit-preserving tilde functor to their finite presentation, and its generator and relation index types remain those finite sets. Presentation.isFinitePresentation and transport along the comparison isomorphism give finite presentation of F ⊗ G on Spec R.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-affine-tilde-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CE, lemma-tensor-product-permanence (4), via affine module presentations; affine comparison from Schemes Tags 01I7, 01IA and 01IB."
+   }
+  },
+  {
+   "text": "Take the cover of X by all affine opens, represented by the open immersions Spec Γ(X,U) → X. Restriction preserves the finite presentations of F and G: it preserves colimits and the structure module [lem-weil-pbc-module-restriction-open-immersion-colimits], as implemented by isFinitePresentation_restrictFunctor. By [lem-weil-pbc-module-restriction-tensor-comparison], restriction of F ⊗ G is isomorphic to the tensor of the restricted factors. Step 2 and invariance under isomorphism therefore make every such restriction finitely presented. The restriction/pullback comparison and isFinitePresentation_of_isOpenImmersion glue these local finite presentations over the affine cover. No flatness is used; empty schemes and empty finite generator/relation types are permitted.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CE, lemma-tensor-product-permanence (4), via affine module presentations; affine comparison from Schemes Tags 01I7, 01IA and 01IB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CE(4): the finite tensor-presentation argument is implemented using Mathlib Module.Presentation.tensor; for schemes use existing affine tilde comparison and affine locality instead of a new sheaf stalk kernel chase. Complete Lean proof by R8, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation|FinitePresentation",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension of ordinary modules, finite generation, presheaf tensor definitions and sheaf finite-presentation predicates do not assert tensor permanence for arbitrary finitely presented sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of finitely presented sheaves of modules is finitely presented",
+   "results": "8 hits: instFinitePresentationTensorProduct, Module.Finite.tensorProduct, Module.Relations.tensor, PresheafOfModules.Monoidal.tensorObj_obj, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.isFinitePresentation, FGModuleCat.tensorObj_obj, Module.FinitePresentation.prod",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension of ordinary modules, finite generation, presheaf tensor definitions and sheaf finite-presentation predicates do not assert tensor permanence for arbitrary finitely presented sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "5 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension of ordinary modules, finite generation, presheaf tensor definitions and sheaf finite-presentation predicates do not assert tensor permanence for arbitrary finitely presented sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of two finitely presented sheaves of modules on a scheme is finitely presented",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, instFinitePresentationTensorProduct, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension of ordinary modules, finite generation, presheaf tensor definitions and sheaf finite-presentation predicates do not assert tensor permanence for arbitrary finitely presented sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring locally finitely presented modules on a ringed space preserves local finite presentation",
+   "results": "8 hits: instFinitePresentationTensorProduct, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar extension of ordinary modules, finite generation, presheaf tensor definitions and sheaf finite-presentation predicates do not assert tensor permanence for arbitrary finitely presented sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of two locally finitely presented sheaves of modules on a scheme is finitely presented",
+   "results": "8 hits: instFinitePresentationTensorProduct, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned sheaf results define finite presentation or construct presentation data from an already given cokernel; ordinary module base change and finite generation do not prove sheaf tensor permanence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally cokernels of maps between finite free module sheaves are closed under tensor products",
+   "results": "8 hits: SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned sheaf results define finite presentation or construct presentation data from an already given cokernel; ordinary module base change and finite generation do not prove sheaf tensor permanence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-invertible-fp-tensor-models",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Extracted subargument: The line-bundle approximation inside the fibrewise ampleness input: dual inverse, common finite-presentation stage, tensor presentation, and limit evaluation comparison (old item steps 1--3 and the opening of step 4). In particular: finite presentation of the tensor of the two finite-stage module models (Stacks 01CE(4)).",
+   "via": [
+    "lem-trf-invertible-fp-tensor-models",
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fp-sheaf-tensor-product",
+  "worker": "stage1",
+  "summary": "Read Stacks 01CE(4) and its displayed presentation of a tensor product. Wrote the finite free tensor basis maps and the explicit stalk kernel chase, citing existing closed sheaf universal-property/stalk/restriction nodes and the existing Mathlib right-exactness leaf. The project theorem isFinitePresentation_tensorObj requires an invertible factor, so is not an attachment. No new nodes and no statement changes.",
+  "blueprint": "Realizes the finite-presentation-of-tensor subargument (Stacks 01CE(4)) in the line-bundle finite-stage approximation below lem-trf-local-term-locality, at the exact place retained in blueprint.from.place; it does not replace the contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-c25531a08",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-c25531a08 (reviewer sub-agent of L); spot-checked: I read Stacks 01CE(4) (modules.tex:2440) and its proof. The statement, unchanged, matches the source: it is specialized to schemes, with no flatness or Noetherian hypothesis. No new nodes. All 4 steps are correct and each cited node's statement says what the step takes from it. Step 1: restriction (sectionwise, preserves colimits) plus stalk-exactness clause (5) keep both presentations exact on the common neighbourhood U. Step 2: the maps f⊗1, 1⊗g and p⊗q come from the bilinear universal-property node. The iso O^a⊗O^b≅O^{ab} is written out, both composites are checked, and the ranks ms+nr and ns are correct. Step 3: stalk-tensor naturality, right exactness (Mathlib leaf, both orders) and the two-lift kernel chase; I rechecked the chase myself and it is correct. Step 4: stalk-exactness clause (5) is applied at B⊗D and at the last term followed by 0, and the restriction-tensor comparison gives (F⊗G)|_U. The cited nodes are Mathlib leaves or closed on slopmaster2, so no tool_uses are needed. There is no cycle; the only citer is the parent lem-trf-invertible-fp-tensor-models. Duplicate search (01CE, tensor plus finitely presented) found only pullback, invertible, affine-tilde, stack and pro-étale variants, none a duplicate. Edge cases checked: zero ranks, empty X, and Z/2⊗Z/2 on Spec Z (non-flat). No re-split note applies. review_split.py fails on this snapshot because it does not follow the chapter symlinks; I checked by hand that every cited id exists. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.FinitePresentationTensorProduct",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_tensorProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/FinitePresentationTensorProduct.lean",
+  "statement": "theorem isFinitePresentation_tensorProduct {X : Scheme.{u}} (F G : X.Modules) [F.IsFinitePresentation] [G.IsFinitePresentation] : (F ⊗ G).IsFinitePresentation",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3ec6b9de",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Lean exact vs Stacks 01CE(4) scheme specialization: X.Modules = ringedSiteModules; F ⊗ G = SheafOfModules.monoidalCategory X.sheaf (Invertible.lean:128), same term as recorded cochainModulesMonoidal up to the Prop IsMonoidal proof; Mathlib IsFinitePresentation = local finite cokernel presentation (ranks 0 allowed); no extra hyps; item node differs from live only in lean, statement verbatim; no duplicate (isFinitePresentation_tensorObj needs IsInvertible). Edge cases empty X, zero ranks, non-flat factors covered. Sole fault H11: second reading is the worker's own pass → fixes/lem-trf-fp-sheaf-tensor-product.report.md (worker report verbatim + independent clause-by-clause reading). No Lean change, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T094509-L-235074",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

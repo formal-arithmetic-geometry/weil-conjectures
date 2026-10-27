@@ -1,0 +1,101 @@
+{
+ "id": "def-pur-coefficient-first-compact-projection",
+ "kind": "definition",
+ "title": "Coefficient-first ordinary etale compact-support projection map",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and let $f:X\\to Y$ be a morphism of schemes admitting a chosen compactification $c=(j,p)$ [def-asd-compactifiable]. Use the ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories], derived tensor [def-kun-derived-tensor], compact support $Rf_!=Rp_*Dj_!$ for this compactification [def-amb-etale-compact-support], and constant-coefficient derived inverse image $Lf^*$ [prop-weil-pbc-inverse-image-modules-exact]. For arbitrary $Q\\in D(Y_{\\mathrm{et}},A)$ and $M\\in D(X_{\\mathrm{et}},A)$, let $P^r_{f;M,Q}:Rf_!M\\otimes_A^L Q\\to Rf_!(M\\otimes_A^L Lf^*Q)$ be the composite of the counit-defined proper projection map [def-kun-projection-formula-map], $Rp_*$ of the inverse canonical open-extension tensor comparison [lem-pur-etale-open-derived-tensor], and the canonical pullback-composition identification. With $\\sigma$ the canonical signed derived symmetry [lem-kun-tensor-sym], define the coefficient-first compact-support projection map by\n$$\\Pi_{f;Q,M}:=Rf_!(\\sigma_{M,Lf^*Q})\\circ P^r_{f;M,Q}\\circ\\sigma_{Q,Rf_!M}:Q\\otimes_A^L Rf_!M\\longrightarrow Rf_!(Lf^*Q\\otimes_A^L M).$$\nThis defines the map on arbitrary unbounded inputs; no invertibility, boundedness, constructibility or finite-Tor condition is part of the definition.",
+ "stmt_deps": [
+  "def-asd-compactifiable",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-amb-etale-compact-support",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraphs 1--2, actual counit normalization and transposing the base-change trace equation; old Steps 2,4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient first compact support derived projection map",
+   "results": "HasCompactSupport.deriv; ContDiffMapSupportedIn.compact_supp; Algebra.PreSubmersivePresentation.ofHasCoeffs_map; ContDiffMapSupportedIn.coe_of_support_subset; ContDiffMapSupportedIn.structureMapLM; ContDiffMapSupportedIn.hasCompactSupport; TestFunction.coe_ofSupportedIn; CompactlySupportedContinuousMap.coe_mk",
+   "date": "2026-10-22",
+   "verdict": "no matching Mathlib definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical projection map tensor compact support direct image coefficient first",
+   "results": "CompactlySupportedContinuousMap.compLinearMap; TensorProduct.finsuppLeft'_apply; TensorProduct.finsuppLeft'; TensorProduct.finsuppRight_apply; PiTensorProduct.tprod_eq_tprodCoeff_one; TensorProduct.finsuppLeft_apply; PiTensorProduct.tprodCoeff; TensorProduct.finsuppRight_apply_tmul",
+   "date": "2026-10-22",
+   "verdict": "no matching Mathlib definition"
+  },
+  {
+   "tool": "grep",
+   "query": "compactProjectionMapCoeffFirst|projectionMapOfCompactification",
+   "results": "No hits in Mathlib. Local rg in lean/WeilConjectures and lean/Sheaf finds the canonical right-coefficient projectionMapOfCompactification/projectionMap upstream and the exact coefficient-first definition in Sheaf.AlgebraicGeometry.CompactProjectionExchange:136; other hits are consumers. DAG/blueprint searches find no independent definition node for this general ordinary-etale coefficient-first map. FiniteSiteTensorProjection instead records a pro-etale coefficient-specialized map and depends downstream on this item.",
+   "date": "2026-10-22",
+   "verdict": "existing project definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integration-transpose-base-change",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraphs 1--2: the canonical coefficient-first projection map used to define integration before transposing the base-change trace equation",
+   "via": [
+    "lem-pur-integration-transpose-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactProjectionExchange",
+  "declaration": "AlgebraicGeometry.Etale.compactProjectionMapCoeffFirst",
+  "statement": "noncomputable def compactProjectionMapCoeffFirst {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasCompactification f]\n    (Q : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj Q).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj M) ⟶\n      (R(f)_![ModuleCat.{u + 1} Λ]).obj\n        (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj Q)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "The existing plain definition at CompactProjectionExchange.lean:136 is the signed symmetry, the canonical compactification projectionMap, and Rf_! of signed symmetry. Its body does not use compactProjectionMapCoeffFirst_baseChangeMap. This definition-only node records the exact existing map, as requested by the return at immutable head a10a832a7d8f; no duplicate Lean definition or theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6077a140f",
+  "group": "NU",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6077a140f",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at a10a832a. The item Lean file is byte-identical. The item node changes only stmt_deps: lem-asd-compact-projection-exchange is replaced by the new def node def-pur-coefficient-first-compact-projection, and the theorem stays in proof_deps. Against live, the only stmt_deps change is adding that node. The new node is existing:true on the unchanged module CompactProjectionExchange; the record signature matches compactProjectionMapCoeffFirst verbatim (noncomputable prefix gives only a note). Its body (σ ≫ projectionMap ≫ Rf_!σ, with projectionMapOfCompactification = proper projection, inverse open comparison, pullback-composition iso) matches the node TeX. H12 fields are all correct (status split, three search kinds, created/blueprint/lean_audit, indent=1 layout). Its stmt_deps all exist and are upstream, so there is no cycle, and no competing owner exists. The item statement was re-checked against the node: hypotheses, C, ht, hP/hP', G0/c/γ/a/e, main equation, conditional iso, naturality, uniqueness, transport with both triangles. No hollow defs, all proofs sorry, no pro-étale substitute; edge cases covered. Advisory only: base-era theorem-node owners of C and the monoidal comparison. No file changed, nothing compiled."
+ }
+}

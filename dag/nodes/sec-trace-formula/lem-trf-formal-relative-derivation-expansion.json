@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-formal-relative-derivation-expansion",
+ "kind": "statement",
+ "title": "Adic polynomial approximation for relative derivations of formal power series",
+ "statement": "Let $F$ be a field, $m,r\\ge0$, $S=F[[t_1,\\ldots,t_m]]$ and $T=F[[z_1,\\ldots,z_r]]$ [def-weil-pbc-multivariate-power-series], with variable ideals $\\mathfrak a=(t_1,\\ldots,t_m)$ and $\\mathfrak b=(z_1,\\ldots,z_r)$. Let $\\psi:S\\to T$ be an $F$-algebra homomorphism with $\\psi(\\mathfrak a)\\subseteq\\mathfrak b$. Let $E:S\\to T$ be an $F$-linear map satisfying $E(uv)=\\psi(u)E(v)+\\psi(v)E(u)$ for all $u,v\\in S$. Write $\\partial_j$ for the termwise formal partial derivative [def-trf-formal-power-series-partial-derivative]. Then $E(\\mathfrak a^N)\\subseteq\\mathfrak b^{N-1}$ for every $N\\ge1$. For $h\\in S$, let $H_N=\\sum_{|\\alpha|<N}h_\\alpha t^\\alpha$ be its finite polynomial truncation, regarded in $S$. For every $N\\ge1$ and every $j$ one has\n$$h-H_N\\in\\mathfrak a^N,\\qquad \\partial_j(h-H_N)\\in\\mathfrak a^{N-1},\\qquad E(h-H_N)\\in\\mathfrak b^{N-1},\\qquad\\psi(\\partial_j(h-H_N))\\in\\mathfrak b^{N-1}.$$\nMoreover\n$$E(H_N)=\\sum_{j=1}^m\\psi(\\partial_jH_N)E(t_j),\\qquad E(h)-\\sum_{j=1}^m\\psi(\\partial_jh)E(t_j)\\in\\mathfrak b^{N-1}.$$\nThe target filtration is separated, $\\bigcap_{N\\ge0}\\mathfrak b^N=0$, and the exact identity is\n$$E(h)=\\sum_{j=1}^m\\psi(\\partial_jh)E(t_j).$$\nAll assertions include $m=0$ or $r=0$; an empty sum is zero.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph: Chain-rule detail underlying the formal Jacobian coordinate change: finite polynomial Leibniz calculation, order-lowering error bounds, and separated passage to the full series. The explicit auxiliary statement supplies details omitted there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with coefficient ring $F$, base ideal $J=0$, and respectively $d=m$ and $d=r$. For $k\\ge1$, membership in the variable ideal's $k$th power is equivalent to vanishing of the coefficients of total degree $<k$: the exponents $k-|\\alpha|$ are positive, so the required coefficient ideal is $0$. There are finitely many multi-indices of degree $<N$ (each coordinate is $<N$), and $h-H_N$ has all these coefficients zero. Hence $h-H_N\\in\\mathfrak a^N$. If $v\\in\\bigcap_{k\\ge0}\\mathfrak b^k$, its coefficient at any $\\beta$ vanishes by taking $k=|\\beta|+1$. A power series is its coefficient family [def-weil-pbc-multivariate-power-series], so $v=0$. This proves the asserted separatedness, without any completeness theorem.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph, chain rule with details omitted; explicit agent-written adic argument."
+   }
+  },
+  {
+   "text": "First $E(1)=E(1\\cdot1)=2E(1)$, hence $E(1)=0$ and $F$-linearity gives $E(c)=0$ for $c\\in F$. For each $k\\ge1$, an element of $\\mathfrak a^k$ is a finite sum of products of $k$ elements of $\\mathfrak a$; scalar coefficients can be absorbed into the first factor. Thus $\\psi(\\mathfrak a^k)\\subseteq\\mathfrak b^k$, and the same inclusion for $k=0$ is automatic. Iterating the given Leibniz rule gives\n$$E(u_1\\cdots u_N)=\\sum_{i=1}^N\\left(\\prod_{\\ell\\ne i}\\psi(u_\\ell)\\right)E(u_i).$$\nFor $u_i\\in\\mathfrak a$, each summand belongs to $\\mathfrak b^{N-1}$; additivity proves $E(\\mathfrak a^N)\\subseteq\\mathfrak b^{N-1}$. In particular this applies to the tail from Step 1. Only finite sums have been differentiated, so no continuity hypothesis has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph, chain rule with details omitted; explicit agent-written adic argument."
+   }
+  },
+  {
+   "text": "Put $w=h-H_N$. For $N\\ge2$ and $|\\alpha|<N-1$, the coefficient formula [def-trf-formal-power-series-partial-derivative] gives\n$$[t^\\alpha]\\partial_jw=(\\alpha_j+1)[t^{\\alpha+e_j}]w=0,$$\nsince $|\\alpha+e_j|<N$. The coefficient criterion of [lem-weil-pbc-power-series-combined-ideal-coefficients] with $J=0$ therefore gives $\\partial_jw\\in\\mathfrak a^{N-1}$. For $N=1$ this is membership in $S=\\mathfrak a^0$. Step 2 then gives $\\psi(\\partial_jw)\\in\\mathfrak b^{N-1}$. Along with Steps 1 and 2 these are all four required tail estimates.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph, chain rule with details omitted; explicit agent-written adic argument."
+   }
+  },
+  {
+   "text": "For a monomial $t^\\alpha$, induct on $|\\alpha|$. The degree-zero case is $E(1)=0$. If $\\alpha=\\gamma+e_i$, expand $E(t^\\gamma t_i)=\\psi(t^\\gamma)E(t_i)+\\psi(t_i)E(t^\\gamma)$ and insert the induction formula. The $j=i$ term gains one copy of $\\psi(t^\\gamma)E(t_i)$; all other exponents are unchanged. Thus\n$$E(t^\\alpha)=\\sum_{j:\\alpha_j>0}\\alpha_j\\psi(t^{\\alpha-e_j})E(t_j).$$\nThe coefficient formula of [def-trf-formal-power-series-partial-derivative] identifies $\\partial_j(t^\\alpha)$ with $\\alpha_jt^{\\alpha-e_j}$ if $\\alpha_j>0$ and with zero otherwise. Multiply by $h_\\alpha\\in F$ and sum over the finite set $|\\alpha|<N$. Linearity and the fact that $\\psi$ fixes $F$ give exactly $E(H_N)=\\sum_j\\psi(\\partial_jH_N)E(t_j)$. Integer coefficients mean repeated addition in $F$.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph, chain rule with details omitted; explicit agent-written adic argument."
+   }
+  },
+  {
+   "text": "Additivity of $E$, $\\psi$ and the formal partial derivatives [def-trf-formal-power-series-partial-derivative], followed by Step 4, gives\n$$E(h)-\\sum_j\\psi(\\partial_jh)E(t_j)=E(w)-\\sum_j\\psi(\\partial_jw)E(t_j).$$\nEach term on the right belongs to $\\mathfrak b^{N-1}$ by Steps 2 and 3 and closure of an ideal under multiplication and finite sums. The left side is independent of $N$. Taking $N=k+1$ for every $k\\ge0$ and applying Step 1 proves it is zero. This gives the exact identity. If $m=0$, $S=F$ [def-weil-pbc-multivariate-power-series], $E=0$ by Step 2 and $H_N=h$; there are no partial-derivative clauses. If $r=0$, $T=F$ and $\\mathfrak b=0$, and the coefficient/separatedness argument still holds (already $N=2$ gives zero error). The proof also includes $N=1$, where every error bound is in $\\mathfrak b^0=T$. No integer was inverted, so positive characteristic is included.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph, chain rule with details omitted; explicit agent-written adic argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph, chain rule with details omitted; explicit agent-written adic argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every relative derivation from a finite variable formal power series ring into a formal power series ring along a homomorphism sending variables into the maximal ideal lowers powers of the variable ideal by one and equals the sum of partial derivatives times values on variables",
+   "results": "LeanFinder: MvPolynomial.mkDerivation, mkDerivationEquiv, leibniz_iff_X and Derivation.apply_aeval_eq′ concern polynomial algebras; KaehlerDifferential.mvPolynomialBasis_repr_comp_D also has polynomial source. None supplies the formal-series filtration and limit argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derivation from a multivariate formal power series algebra into another power series algebra relative to a local algebra homomorphism is determined by its values on the variables using polynomial truncation and adic continuity",
+   "results": "LeanFinder: MvPolynomial.derivation_ext and derivation_ext_iff, Polynomial.derivation_ext, Derivation.ext_of_adjoin_eq_top. Variables generate only the polynomial subalgebra algebraically, so these do not specialize in one line to the whole formal-series ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Derivation",
+   "results": "Loogle finds MvPowerSeries.pderiv, coeff_pderiv, pderiv_X, pderiv_coe and pderiv_pow. The existing definition node records their derivation laws. No relative-derivation expansion or adic error theorem appears.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv|derivation|trunc|order",
+   "results": "Mathlib/RingTheory/MvPowerSeries: order and substitution primitives, including HasSubst.truncTotal and le_weightedOrder_subst. No relative derivation expansion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chain|subst|continuous|ideal|order",
+   "results": "Mathlib/RingTheory/MvPowerSeries/Derivative.lean: the sole text hit is subst in the proof of pderiv_X. Read lines 45-165: pderiv, coeff_pderiv, pderiv_coe, trunc_pderiv and Leibniz; none proves the claimed adic relative expansion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous relative derivation on formal power series is the sum of partial derivatives times its values on the variables",
+   "results": "LeanSearch: MvPolynomial.pderiv, mkDerivation, mkDerivationₗ, PowerSeries.derivative and derivativeFun. These define partial derivatives or treat polynomial/univariate source; no complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An F-linear relative derivation between finite variable formal power series rings along a local homomorphism equals the sum of partial derivatives times the values on variables",
+   "results": "MvPolynomial.mkDerivationₗ_monomial; MvPolynomial.mkDerivation_monomial; MvPolynomial.mkDerivationₗ_X; Derivation.apply_aeval_eq'; MvPolynomial.mkDerivation_X; MvPolynomial.mkDerivationₗ; MvPolynomial.mkDerivation; MvPolynomial.leibniz_iff_X; polynomial-source or univariate derivative facts, no complete finite-variable relative formal-series expansion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivation|pderiv|truncTotal|ideal",
+   "results": "Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean; Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean; Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean; Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean; Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean; Mathlib/RingTheory/MvPowerSeries/Derivative.lean; Mathlib/RingTheory/MvPowerSeries/Derivative.lean; Mathlib/RingTheory/MvPowerSeries/Derivative.lean; read Derivative.lean lines 45-165 and polynomial Derivation.lean: no complete relative formal-series expansion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative derivation of formal power series is determined by its values on the variables by adic polynomial approximation",
+   "results": "MvPolynomial.derivation_ext; Polynomial.derivation_ext; Polynomial.derivation_ext_iff; MvPolynomial.mkDerivation; MvPolynomial.derivation_ext_iff; MvPolynomial.derivation_eq_of_forall_mem_vars; MvPolynomial.mkDerivationₗ_X; Polynomial.derivative'; polynomial-source or univariate derivative facts, no complete finite-variable relative formal-series expansion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Derivation",
+   "results": "MvPowerSeries.pderiv; MvPowerSeries.pderiv_X_self; MvPowerSeries.pderiv_X_of_ne; MvPowerSeries.pderiv_one; MvPowerSeries.pderiv_X; MvPowerSeries.pderiv_C; MvPowerSeries.pderiv_coe; MvPowerSeries.pderiv_pow; these supply formal partial derivatives and their elementary identities, not the relative-derivation filtration and approximation statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any derivation on a formal power series ring lowers the maximal ideal filtration by one and therefore satisfies a chain rule for local algebra homomorphisms",
+   "results": "PowerSeries.derivative; Derivation.apply_aeval_eq'; Derivation.compAlgebraMap; liftOfDerivationToSquareZero; PowerSeries.termD⁄dX; liftOfDerivationToSquareZero_mk_apply'; Derivation.apply_aeval_eq; algebraMap.coe_deriv; polynomial-source or univariate derivative facts, no complete finite-variable relative formal-series expansion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv|derivation|chain",
+   "results": "8; 15; 17; 23; 27; read Derivative.lean lines 45-165 and polynomial Derivation.lean: no complete relative formal-series expansion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-jacobian-coordinate-chain-rule",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Chain-rule detail underlying the formal Jacobian coordinate change: finite polynomial Leibniz calculation, order-lowering error bounds, and separated passage to the full series.",
+   "via": [
+    "lem-trf-formal-jacobian-coordinate-chain-rule",
+    "lem-trf-formal-jacobian-minor-invariance",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-relative-derivation-expansion",
+  "worker": "stage1",
+  "summary": "Proved the complete relative-derivation expansion using the existing combined-ideal coefficient criterion and coefficientwise formal partial derivatives. Finite Leibniz expansions give the ideal-power bound and polynomial identity, followed by explicit tail errors and separatedness. No new nodes, statement changes, Lean edits or builds. Fresh logged Mathlib searches found only polynomial-source or formal-partial-derivative primitives.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry and coordinate-change chain through the nodal point criterion. Supplies the polynomial Leibniz calculation, one-order tail control and separated passage omitted at Stacks 0C4B, final coordinate-change paragraph. The latest ancestor proof itself concerns contracting local terms and contains no direct formal-coordinate paragraph; this is an inherited auxiliary branch, not a claim that the newest ancestor text directly states the present lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient criterion for algebraic powers of a finite-variable power-series ideal, specialized to base ideal zero to prove truncation and separatedness; no existing node of this unit states the full coefficient equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-aae85fe52",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-aae85fe52 (reviewer sub-agent of L); spot-checked: The item statement and stmt_deps are unchanged against clones/live; only the proof and split fields were added. The item is still unsplit live and has no re-split note, so it is not superseded. There are no new nodes; proof_deps equals the union of the steps' uses. Read in full: the combined-ideal coefficient criterion (used with J=0, where every exponent n-|E| is at least 1), the multivariate power-series definition and the partial-derivative coefficient formula. Steps 1-5 are each correct: truncation and separatedness by coefficients; E(1)=0 and E(a^N)⊆b^{N-1} from a finite iterated Leibniz rule with no continuity assumed; the ∂_j tail bound from (α_j+1)[t^{α+e_j}]w; the monomial induction, which I checked algebraically; and the error identity plus separatedness giving the exact formula. The m=0, r=0 and N=1 cases are handled. I tested z^2 substitution, characteristic p with t^p, and point derivations. The parent lem-trf-formal-jacobian-coordinate-chain-rule applies the item with E=∂_{x_i}∘φ and ψ=φ, which satisfies the hypotheses. Source Stacks 0C4B is confirmed via tags/tags line 15221; its proof says 'chain rule ... details omitted', so proof_origin by:agent fits, and no SGA is used. lem-trf-power-series-adic-gradient-control overlaps only in the tail estimates and is not a duplicate; a DAG statement search found no other duplicate. The sk-thm-p1 coefficient-criterion tool_use is generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalRelativeDerivationExpansion",
+  "declaration": "MvPowerSeries.formal_relative_derivation_expansion",
+  "file": "lean/Sheaf/RingTheory/FormalRelativeDerivationExpansion.lean",
+  "statement": "theorem formal_relative_derivation_expansion (F : Type u) [Field F] (m r : ℕ) (ψ : MvPowerSeries (Fin m) F →ₐ[F] MvPowerSeries (Fin r) F) (E : MvPowerSeries (Fin m) F →ₗ[F] MvPowerSeries (Fin r) F) (hψ : ∀ f : MvPowerSeries (Fin m) F, f ∈ Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F)) → ψ f ∈ Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) (hE : ∀ f g : MvPowerSeries (Fin m) F, E (f * g) = ψ f * E g + ψ g * E f) : (∀ N : ℕ, 1 ≤ N → ∀ f : MvPowerSeries (Fin m) F, f ∈ (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))) ^ N → E f ∈ (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) ^ (N - 1)) ∧ (∀ (h : MvPowerSeries (Fin m) F) (N : ℕ), 1 ≤ N → (h - (truncTotal N h : MvPowerSeries (Fin m) F) ∈ (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))) ^ N) ∧ (∀ j : Fin m, pderiv F j (h - (truncTotal N h : MvPowerSeries (Fin m) F)) ∈ (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))) ^ (N - 1)) ∧ (E (h - (truncTotal N h : MvPowerSeries (Fin m) F)) ∈ (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) ^ (N - 1)) ∧ (∀ j : Fin m, ψ (pderiv F j (h - (truncTotal N h : MvPowerSeries (Fin m) F))) ∈ (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) ^ (N - 1)) ∧ (E (truncTotal N h : MvPowerSeries (Fin m) F) = ∑ j : Fin m, ψ (pderiv F j (truncTotal N h : MvPowerSeries (Fin m) F)) * E (X j)) ∧ (E h - ∑ j : Fin m, ψ (pderiv F j h) * E (X j) ∈ (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) ^ (N - 1))) ∧ (⨅ N : ℕ, (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) ^ N) = ⊥ ∧ (∀ h : MvPowerSeries (Fin m) F, E h = ∑ j : Fin m, ψ (pderiv F j h) * E (X j))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7256b942",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Only change is the item's lean record; its other fields equal side-live, with no new nodes, dependency repairs or statement_change. lean.statement matches the file signature exactly. Every clause matches the node; nothing stronger assumed (no continuity, no extra instances, one bound universe); ∀ j only on the derivative clauses, so m=0 is not vacuous; N-1 only under 1≤N; ⨅ 𝔟^N = ⊥ is intersection. Dependencies: MvPowerSeries existing record; partial derivative via mathlib_match MvPowerSeries.pderiv (coefficient formula read, matches node); truncTotal keeps the degree<N coefficients, so it is H_N; proof-dependency import of PowerSeriesCombinedIdealCoefficients is fine. Edge cases m=0, r=0, N=1 and char p are covered. Docstrings carry the source place 0C4B, the blueprint id and the five proof steps; single sorry, no definitions, no name clash; report has both sections. No file changed, so nothing compiled."
+ }
+}

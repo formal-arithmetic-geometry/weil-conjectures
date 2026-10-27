@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-artin-versal-base-change-smooth",
+ "kind": "statement",
+ "title": "Versality gives smooth representable base changes",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] in the universes of [def-weil-size-convention]. Let $\\mathcal F$ be fibred in groupoids on the big fppf site [def-pc-fppf-site]. A category fibred in groupoids assigns a groupoid $\\mathcal F(T)$ to each scheme $T$ over the base, with pullback functors and coherent identity and composition isomorphisms. Assume that for every base scheme $T$ and $a,b\\in\\mathcal F(T)$ the presheaf $T'\\mapsto\\operatorname{Isom}(a|_{T'},b|_{T'})$ is represented by an algebraic space over $T$ [def-trf-algebraic-space]. Assume also that for every diagram of base algebras $A\\to B\\leftarrow B'$ with $B'\\to B$ surjective and square-zero kernel, restriction gives an equivalence $\\mathcal F(\\operatorname{Spec}(A\\times_B B'))\\simeq\\mathcal F(\\operatorname{Spec}A)\\times_{\\mathcal F(\\operatorname{Spec}B)}\\mathcal F(\\operatorname{Spec}B')$, where the right side retains the specified isomorphism over $B$ and arrows compatible with it. Assume limit preservation: for every small directed inverse system of affine base schemes with limit $T$, objects over $T$ descend to a stage, isomorphisms between stage objects descend to a sufficiently late common stage, and equality of such isomorphisms over $T$ holds at a sufficiently late common stage. Let $U,V$ be schemes locally of finite type over $\\mathbf Z$, with $x\\in\\mathcal F(U)$ and $y\\in\\mathcal F(V)$. A point $u\\in U$ is of finite type if $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-finite-type-morphism, def-weil-residue-field]. For $x\\in\\mathcal F(U)$, versality at $u$ means: for every surjection $A'\\to A$ of Artinian local base algebras with common residue field identified with $\\kappa(u)$ and nilpotent kernel, every map $\\operatorname{Spec}A\\to U$ reducing to $u$, and every $y'\\in\\mathcal F(\\operatorname{Spec}A')$ with a specified isomorphism $y'|_A\\cong x|_A$, there is a lift $\\operatorname{Spec}A'\\to U$ and an isomorphism $y'\\cong x|_{A'}$ inducing the specified one. Artinian means that descending chains of ideals stabilize; local means having a unique maximal ideal, and all maps respect the residue-field identifications. The functor sending a scheme $T$ to triples $(a:T\\to U,b:T\\to V,\\alpha:a^*x\\cong b^*y)$ is represented by an algebraic space $Z$, with projections $p:Z\\to U$ and $q:Z\\to V$. If $u_0$ is a finite type point of $U$, $x$ is versal at $u_0$, and $z_0$ is a finite type point of $Z$ over $u_0$, then there is an open subspace $O\\subseteq Z$ containing $z_0$ such that $q|_O:O\\to V$ is smooth. A finite type point of an algebraic space is a point admitting a closed lift in an etale scheme neighbourhood. Smoothness of spaces is tested on etale scheme charts by [def-sbc-smooth-morphisms]. In particular, let $j:U\\hookrightarrow V$ be a first order thickening [def-sbc-first-order-thickening] with a specified isomorphism $x\\cong j^*y$, and let $i:U\\to Z$ be the induced map, with $p\\circ i=\\operatorname{id}_U$ and $q\\circ i=j$. Then $i$ sends every finite type point $u_0$ of $U$ to a finite type point $i(u_0)$ of $Z$ over $u_0$; if moreover $x$ is versal at $u_0$, then $q$ is smooth on an open neighbourhood of $i(u_0)$.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0CXM (lemma-base-change-versal), using its parenthetical limit-preserving case; thickening-section specialization exactly as in the proof of Tag 0CXU, paragraph defining z_0=i(u_0)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-first-order-thickening",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-artin-limit-preservation-versality"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-limit-preserving-isom-space-lft] to the stated limit-preserving fibred groupoid: its representable Isom spaces give the triples space $Z$ and locally finite type projections, including their composites with etale scheme charts. The scheme $V$ is locally Noetherian: its affine coordinate rings are finitely generated over the Noetherian ring $\\mathbf Z$, hence Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Thus [pqf-def-locnoeth] applies. By the definition of a finite type point of $Z$, choose an etale chart $e:W\\to Z$ with a closed point $w_0$ mapping to $z_0$, and shrink $W$ to an affine neighbourhood of $w_0$. Write $r=pe$, $f=qe$, $k=\\kappa(u_0)$ and $L=\\kappa(w_0)$. Both $r$ and $f$ are locally of finite type. We use the field of the chosen chart point, without identifying it with any field assigned to $z_0$.",
+   "uses": [
+    "lem-sfb-limit-preserving-isom-space-lft",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXM (lemma-base-change-versal), first paragraph."
+   }
+  },
+  {
+   "text": "The closed point gives a finite type map $\\operatorname{Spec}L\\to W$ by [lem-trf-closed-point-residue-immersion] and the definition of finite type. Compose with $r:W\\to U$ using [lem-sfb-stack-finite-type-calculus]. This composite factors as $\\operatorname{Spec}L\\to\\operatorname{Spec}k\\to U$. Cancellation [lemma-nagata-finite-type-to-separated-target](a) makes $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ locally of finite type. Since both spectra have a single point, this says $L$ is a finitely generated $k$-algebra, and [lem-weil-pbc-zariski-lemma] makes $L/k$ finite. Consequently [lem-sfb-artin-pointwise-versal-field-extension] applies to versality at the single point $u_0$ and gives the prescribed-isomorphism lifting property for $x$ at the field-valued point $r(w_0):\\operatorname{Spec}L\\to U$. The square-zero gluing hypothesis is precisely the Rim--Schlessinger hypothesis needed there; successive square-zero extensions give the nilpotent Artinian version.",
+   "uses": [
+    "lem-trf-closed-point-residue-immersion",
+    "lem-sfb-stack-finite-type-calculus",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-sfb-artin-pointwise-versal-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXM (lemma-base-change-versal), application of Tag 07XG (lemma-versal-change-of-field)."
+   }
+  },
+  {
+   "text": "Test $f:W\\to V$ on a small extension $B'\\twoheadrightarrow B$ with residue field $L$, a map $a:\\operatorname{Spec}B\\to W$ restricting to $w_0$, and a map $b':\\operatorname{Spec}B'\\to V$ extending $fa$. The triple $ea$ consists of $ra$, $fa$ and $\\alpha:(ra)^*x\\cong(fa)^*y$. Put $\\eta=(b')^*y$. Use the lifting property from [lem-sfb-artin-pointwise-versal-field-extension] with the prescribed isomorphism $\\eta|_B\\xrightarrow{\\alpha^{-1}}(ra)^*x$. It supplies $c':\\operatorname{Spec}B'\\to U$ extending $ra$ and $\\theta:\\eta\\cong(c')^*x$ restricting to $\\alpha^{-1}$. Therefore $(c',b',\\theta^{-1})$ is a $B'$-point $t'$ of the representing space $Z$, restricting exactly to $ea$. The small extension has square-zero kernel by the definition in [lem-sfb-smooth-fixed-residue-artinian-test]. Apply [lem-sfb-etale-space-infinitesimal-lifting] to $e:W\\to Z$, $t'$ and $a$; the result is $a':\\operatorname{Spec}B'\\to W$ with $ea'=t'$ and restriction $a$. Its composite with $f$ is $b'$ by the second component of the triple. Thus all the fixed-residue small-extension tests for $f$ at $w_0$ hold.",
+   "uses": [
+    "lem-sfb-artin-pointwise-versal-field-extension",
+    "lem-sfb-smooth-fixed-residue-artinian-test",
+    "lem-sfb-etale-space-infinitesimal-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXM proof, fibre-product deformation square; its smoothness argument written directly on triples."
+   }
+  },
+  {
+   "text": "By [lem-sfb-smooth-fixed-residue-artinian-test], since $V$ is locally Noetherian and $f$ locally of finite type, there is an open $N\\subseteq W$ containing $w_0$ with $N\\to V$ smooth. By [lem-a1-space-etale-open-image], the image of $N\\to Z$ is an open subspace $O$ containing $z_0$, and $N\\to O$ is surjective etale. To check $O\\to V$ on any etale scheme chart $T\\to O$, form the scheme $T\\times_O N$. It covers $T$ etale by [lem-trf-space-fibre-products-etale-covers]. Its map to $N$ is etale, so its composite to $V$ is smooth, since etale maps are smooth and smooth maps compose [lem-sfb-stack-chartwise-smooth-etale-calculus]. Smoothness descends to $T\\to V$ by [lem-trf-etale-source-smoothness]. This proves the required smoothness of $q|_O$ by the chart definition, with no assumption that $Z$ itself is a scheme.",
+   "uses": [
+    "lem-sfb-smooth-fixed-residue-artinian-test",
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXM (lemma-base-change-versal), last paragraph; etale descent to the image open."
+   }
+  },
+  {
+   "text": "For the specialization, the triple $(\\operatorname{id}_U,j,x\\cong j^*y)$ defines $i:U\\to Z$ with $pi=\\operatorname{id}_U$ and $qi=j$. The identity of $U$ is locally of finite type, so [lem-sfb-space-lft-cancellation], applied to $i$ followed by $p$, makes $i$ locally of finite type. For every finite type point $u_0$, the canonical map $\\operatorname{Spec}\\kappa(u_0)\\to U$ is of finite type by hypothesis; composing it with $i$ is locally of finite type by [lem-sfb-stack-finite-type-calculus]. Hence [lem-sfb-space-finite-type-point-characterization] makes $i(u_0)$ a finite type point of $Z$ in exactly the closed-chart sense used in the statement. It lies over $u_0$ because $pi=\\operatorname{id}_U$. If $x$ is versal there, apply the already proved assertion to $z_0=i(u_0)$. This yields the claimed smooth open neighbourhood. The first-order-thickening assumption is needed for the surrounding application of 0CXU; this point argument works for every such compatible section triple.",
+   "uses": [
+    "lem-sfb-space-lft-cancellation",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-space-finite-type-point-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), paragraph defining z_0=i(u_0)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-limit-preserving-isom-space-lft",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-sfb-stack-finite-type-calculus",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-sfb-artin-pointwise-versal-field-extension",
+  "lem-sfb-smooth-fixed-residue-artinian-test",
+  "lem-sfb-etale-space-infinitesimal-lifting",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-etale-source-smoothness",
+  "lem-sfb-space-lft-cancellation",
+  "lem-sfb-space-finite-type-point-characterization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tags 0CXM (lemma-base-change-versal) and 0CXU (lemma-SGE-implies-openness-versality), section-triple specialization; diagram chase written out on represented triples."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a limit preserving category fibred in groupoids with representable diagonal the base change of a versal family is smooth at a finite type point",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base change of a smooth scheme morphism assumes smoothness; the lemma deduces it from versality for a fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\", \"smooth\"",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base change of a smooth scheme morphism assumes smoothness; the lemma deduces it from versality for a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|RimSchlessinger",
+   "sub": "",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base change of a smooth scheme morphism assumes smoothness; the lemma deduces it from versality for a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable base change of a versal morphism to a category fibred in groupoids is smooth",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.Smooth.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Smooth R A] : Smooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the tensor product $ B \\\\otimes_R A $ is a smooth algebra over $ B $.\"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \": IsStableUnderBaseChange @IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"RingHom.Smooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange Smooth\", \"doc\": \"Smoothness of a ring homomorphism is preserved under base change. Specifically, if $ R \\\\to S $ is a smooth homomorphism of commutative rings with compatible algebra structures and scalar tower conditi\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmoothOfRelativeDimension n R S] : IsStandardSmoothOfRelativeDimension n T (T ⊗[R] S)\", \"doc\": \"Let $S$ and $T$ be commutative $R$-algebras over a commutative ring $R$. If $S$ is a standard smooth $R$-algebra of relative dimension $n$, then the base change $T \\\\otimes_R S$ is a standard smooth $T\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base change of a smooth scheme morphism assumes smoothness; the lemma deduces it from versality for a fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally versal deformation induces smooth representable fibre products near the marked point",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base change of a smooth scheme morphism assumes smoothness; the lemma deduces it from versality for a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Versal morphisms to a fibred category have smooth representable base changes near finite type points",
+   "sub": "",
+   "results": "Read hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth base-change results assume smoothness; no versal fibred-groupoid theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a formally versal object of a category fibred in groupoids is smooth near a point",
+   "sub": "",
+   "results": "Read hits: RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.FormallySmooth.of_restrictScalars, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.Smooth.formallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth base-change results assume smoothness; no versal fibred-groupoid theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\", \"smooth\"",
+   "sub": "",
+   "results": "Read hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth base-change results assume smoothness; no versal fibred-groupoid theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "FiberedCategory|AlgebraicSpace|RimSchlessinger",
+   "sub": "AlgebraicGeometry",
+   "results": "Read hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth base-change results assume smoothness; no versal fibred-groupoid theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0).",
+   "via": [
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-versal-base-change-smooth",
+  "worker": "stage1",
+  "summary": "Expanded the representable versal-base-change argument through an actual etale chart and Artinian triples. Added four proper prerequisites, reused existing local finite type and etale lifting tools, and proved the section-point specialization. Corrected the source proof residue-field typo by using kappa(w_0).",
+  "blueprint": "The existing ancestor is null (blueprint_refs.py ancestor prints None). Retained the inherited long alteration/moduli/Artin chain in from.place and via. This realizes its final supporting input: Tag 0CXU, Z and base-change-versal at i(u_0); latest detailed direct-images proof (3) is now a compactification argument, while this inherited branch belongs to the existing alteration prerequisites.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-closed-point-residue-immersion",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic algebraic-space, finite-type, residue-field, or infinitesimal smoothness tool used in the Stacks 0CXM chart argument; does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-trf-closed-point-residue-immersion",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-82043d9e0",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-82043d9e0 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item and all four new nodes in full against Stacks 0CXM/0CXU, 0CXI, 07XG, 02HX (with 02HS) and 06EF. The item statement is unchanged and the base change Z→V is the 2-fibre product of 0CXM over Spec Z. Step 1 (lft Isom-space node, V locally Noetherian via finite-type-algebra-noetherian and pqf-def-locnoeth) checked. Step 2 (closed-point immersion, then composition, then nagata cancellation (a), then Zariski) gives L=κ(w_0) finite over κ(u_0). Correcting 0CXM's l=κ(z_0) to κ(w_0) is right. Step 3: the α direction is right: θ restricts to α^{-1}, so (c',b',θ^{-1}) restricts to ea; unique étale lift; f a'=b'. Step 4: 02HX(4)⇒(1) hypotheses checked; open image O; T×_O N étale cover; smoothness descends. Step 5: lft cancellation with p∘i=id, then 06EF (ii)⇒(i). New nodes: none is false, a duplicate or a restated clause. The pointwise 07XG node is stronger than lem-sfb-artin-versal-field-lifting, which needs versality at every point. The fixed-residue 02HX node is not the all-residue lem-weil-pbc-smooth-artinian-lifting-at-point. Small case: k[t]/t² with k[s]/s³→k[s]/s² is correctly rejected. Batch-5 flags: every flagged citation is a generic algebraic-space or scheme tool, or the definition def-trf-algebraic-space; none is a trace-formula or Poincaré step, so all are accepted. The eight declared tool_uses are accepted. No SGA. Advisory: lem-sfb-artin-noetherian-versal-base-change (Q22, unsplit, on base) is the Λ-Noetherian generalization of this item; its split should reuse these four nodes and this proof."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinVersalBaseChangeSmooth",
+  "declaration": "AlgebraicGeometry.ArtinCriterion.versal_base_change_smooth",
+  "declarations": [
+   "AlgebraicGeometry.ArtinCriterion.familyObject",
+   "AlgebraicGeometry.ArtinCriterion.HasSquareZeroGluing",
+   "AlgebraicGeometry.ArtinCriterion.SpaceFiniteTypePoint",
+   "AlgebraicGeometry.ArtinCriterion.SpaceSmoothNear",
+   "AlgebraicGeometry.ArtinCriterion.versal_base_change_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinVersalBaseChangeSmooth.lean",
+  "statement": "theorem versal_base_change_smooth (F : BasedCategory.{v, w} (Over Base.{u})) (hFibred : IsFibredInGroupoids F) (hDiagonal : HasAlgebraicSpaceDiagonal F) (hGluing : HasSquareZeroGluing F) (hLimits : IsLimitPreserving F) (U V : Scheme.{u}) (hU : LocallyOfFiniteType (specULiftZIsTerminal.from U)) (hV : LocallyOfFiniteType (specULiftZIsTerminal.from V)) (x : BasedFunctor (discreteModuli (yoneda.obj (integerScheme U))) F) (y : BasedFunctor (discreteModuli (yoneda.obj (integerScheme V))) F) : ∃ (Z : AlgebraicSpace Base.{u}) (p : Z.obj.obj ⟶ yoneda.obj (integerScheme U)) (q : Z.obj.obj ⟶ yoneda.obj (integerScheme V)) (e : BasedFunctor (discreteModuli Z.obj.obj) (moduliTwoFiberProduct x y)), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst x y)) (discreteModuliMap p)) ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberSnd x y)) (discreteModuliMap q)) ∧ (∀ (u₀ : U), FiniteTypePoint U u₀ → IsVersalAt F U (familyObject x) u₀ → ∀ (z₀ : Point Z.obj.obj), SpaceFiniteTypePoint Z z₀ → mapPoint p z₀ = schemePointMap (𝟙 (yoneda.obj (integerScheme U))) u₀ → SpaceSmoothNear Z (integerScheme V) q z₀) ∧ ∀ (j : U ⟶ V), IsFirstOrderThickening j → ∀ σ : x ≅ (discreteModuliMap (yoneda.map (overMap j))).comp y, ∃ i : yoneda.obj (integerScheme U) ⟶ Z.obj.obj, i ≫ p = 𝟙 (yoneda.obj (integerScheme U)) ∧ i ≫ q = yoneda.map (overMap j) ∧ Nonempty (ModuliTwoIso ((discreteModuliMap i).comp e) (moduliTwoFiberLift (BasedFunctor.id (discreteModuli (yoneda.obj (integerScheme U)))) (discreteModuliMap (yoneda.map (overMap j))) σ)) ∧ ∀ u₀ : U, FiniteTypePoint U u₀ → SpaceFiniteTypePoint Z (schemePointMap i u₀) ∧ (IsVersalAt F U (familyObject x) u₀ → SpaceSmoothNear Z (integerScheme V) q (schemePointMap i u₀))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed ArtinCriterion limit-preservation, scheme finite-type-point and versality predicates, and the existing total-category and algebraic-space vocabulary. Four helpers unpack the family evaluation, unrestricted square-zero gluing, closed-chart finite-type points and smooth open neighbourhoods already specified by this node. The square-zero gluing hypothesis does not use the narrower finite-type-Artinian RimSchlessinger predicate. The added statement dependencies own the reused landed vocabulary; no statement or proof plan changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5e19199c",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read item, all 17 stmt_deps' declarations, new node, module, report against Stacks 0CXM/0CXU/07XL/07XF. All clauses match: HasSquareZeroGluing (all rings, surjective, ker^2=0, total-category IsPushout over any base pushout) is equivalent to the groupoid equivalence incl. arrows; HasAlgebraicSpaceDiagonal; landed IsLimitPreserving/FiniteTypePoint/IsVersalAt (prescribed-iso extension b≫d=c); Z pinned by equivalence with moduliTwoFiberProduct and ModuliTwoIso for both p and q; SpaceFiniteTypePoint = closed lift on étale chart; SpaceSmoothNear = open subspace with all étale charts smooth; section i pinned to moduliTwoFiberLift id j σ, finite-type image unconditional, smoothness under versality. No extra hypotheses, universes bound, statement verbatim, stmt_deps all used, helpers real, sorry only. New existing:true def node owns 11 ArtinCriterion decls previously only theorem-owned (as prescribed by the Q88 RETURN); no def-node owner on base/live. Maintainer notes: equivalent parallel notions def-sfb-fibred-groupoid-limit-preserving (Q06), def-sfb-pointwise-versal-lifting (Q05) and ArtinVersality.* (Q50) landed 12:56 CST, after the base (04:26 UTC), so they need unifying later; stage 3 needs an IsVersalAt↔IsVersalAtField bridge for proof dep lem-sfb-artin-pointwise-versal-field-extension. No compile (no file changed)."
+ }
+}

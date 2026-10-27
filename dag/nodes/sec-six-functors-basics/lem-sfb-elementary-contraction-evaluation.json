@@ -1,0 +1,439 @@
+{
+ "id": "lem-sfb-elementary-contraction-evaluation",
+ "kind": "statement",
+ "title": "Evaluation under one rational-component contraction",
+ "statement": "Let $T$ be any scheme [def-pc-scheme]. Let $(Y\\to T,t_1,\\ldots,t_r,t)$ and $(X\\to T,s_1,\\ldots,s_r)$ be stable ordered pointed families of genus $g\\geq2$, with the conventions of [def-sfb-stable-pointed-moduli-groupoids] and [def-sfb-stable-pointed-curve]. Suppose $q:Y\\to X$ is a $T$-morphism with $q t_i=s_i$ and put $\\Delta=q t$. Assume each geometric fibre of $q$ is either an isomorphism or contracts just one smooth rational component containing $t$ and having exactly three special points when $t$ is counted, and is an isomorphism elsewhere; the special points mean the branches of nodes and all markings on the normalized component. Put $D=\\sum s_i(T)$, $E=\\sum t_i(T)$, $\\mathcal J=\\ker(\\mathcal O_X\\to\\Delta_*\\mathcal O_T)$ and $\\mathcal K=\\operatorname{coker}(\\mathcal O_X\\xrightarrow{(1,1)}\\mathcal J^\\vee\\oplus\\mathcal O_X(D))$, where $\\mathcal J^\\vee=\\mathcal Hom(\\mathcal J,\\mathcal O_X)$ and the maps are multiplication and the divisor inclusion. Divisor modules use [def-pc-divisor-line-bundle]. There are canonical identifications $q_*\\mathcal O_Y=\\mathcal O_X$, $q_*\\mathcal O_Y(-E)=\\mathcal O_X(-D)$, $q_*\\mathcal O_Y(t-E)=\\mathcal J^\\vee\\otimes\\mathcal O_X(-D)$ and $q_*\\mathcal O_Y(t)=\\mathcal K\\otimes\\mathcal O_X(-D)$. Under the last identification, evaluation is a surjection $q^*(\\mathcal K\\otimes\\mathcal O_X(-D))\\twoheadrightarrow\\mathcal O_Y(t)$. Equivalently it is an invertible quotient $q^*\\mathcal K\\twoheadrightarrow\\mathcal O_Y(t)\\otimes q^*\\mathcal O_X(D)$. The corresponding map $Y\\to\\operatorname{Proj}_X(\\operatorname{Sym}\\mathcal K)$, interpreted by the invertible-quotient convention [lem-trf-projective-bundle-quotient-geometry], sends the ordered sections to the quotient lifts from the two summands. On geometric fibres it is the identity off the exceptional component and identifies that component with the exceptional projective line by its complete degree-one linear system; in the isomorphism case it is an isomorphism on the entire fibre. The identifications and quotient maps commute with arbitrary base change and with every isomorphism of contraction diagrams, including automorphisms over the identity of $X$.",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Local PDF WANTED; primary-author scan consulted online.",
+  "url": "https://www.dam.brown.edu/people/mumford/alg_geom/papers/1976b--DetDiv%2BKnudsenSequel-GT.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stable-pointed-curve",
+  "def-pc-divisor-line-bundle",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "proof": [
+  {
+   "text": "The stable-family definitions give proper, flat finitely presented nodal families; projectivity implies properness, and properness of $Y/T$ with separatedness of $X/T$ makes $q$ proper. Work on a geometric fibre. The branch lemma identifies the complement's normalized branches with those of $X$ at $x=q(A)$, so $A$ has one or two attachments, all transverse and distinct. Its other old special points are old markings. Since it has three special points including $t$, the possibilities are a tail with one attachment and exactly one $t_i$, or a bridge with two attachments and no $t_i$. The tail image is smooth and equals $s_i$; the bridge image is a node. The same branch lemma identifies the remaining curve with $X$ in the tail case and with its partial normalization at $x$ in the bridge case. The exceptional component cannot be the whole connected fibre, because its genus would be zero instead of $g\\geq2$.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-projective-bundle-proper",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-trf-nodal-contraction-normalization-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "Set $F_0=\\mathcal O_Y$, $F_E=\\mathcal O_Y(-E)$, $F_{-t}=\\mathcal O_Y(-t)$, $F_N=\\mathcal O_Y(t-E)$ and $F_t=\\mathcal O_Y(t)$. Each marked section lies in the relative smooth locus. Restrict the curve to that open locus and apply the smooth-curve-section Cartier lemma; properness makes the sections closed in the full curve, so being Cartier near their images and having unit ideal elsewhere proves they are Cartier on the full curve. Thus these are invertible divisor modules. If $m$ is the number of old markings on a contracted component, then $m\\in\\{0,1\\}$ and their exceptional degrees are respectively $0,-m,-1,1-m,1$. Apply the line-cohomology lemma to each: all five direct images are finitely presented and $T$-flat, all first higher direct images vanish, and their formation commutes with every base change on $T$. For $F_t$ the exceptional degree is one, so evaluation $q^*q_*F_t\\twoheadrightarrow F_t$ is surjective. The degree condition is vacuous on isomorphism fibres. Apply the dual-section-ideal lemma to $(X/T,\\Delta)$: $\\mathcal J^\\vee(-D)$ is also finitely presented and $T$-flat and commutes with base change (locally the divisor factor is free of rank one).",
+   "uses": [
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-nodal-section-dual-flat",
+    "def-pc-divisor-line-bundle",
+    "lem-trf-smooth-curve-section-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "There are natural maps $\\alpha:\\mathcal O_X\\to q_*F_0$ and $\\beta:\\mathcal O_X(-D)\\to q_*F_E$: pull back a function, respectively a function vanishing on all $s_i$; it then vanishes on all $t_i$. Check them on geometric fibres, using the closed-union ring identity to describe functions as functions on the remaining curve and on $A$ with equal attachment values. For $F_0$, a function on $A\\simeq\\mathbf P^1$ is constant. At a tail this is determined by its one boundary value; at a bridge the two branch values must agree. These are exactly functions on $X$. For $F_E$, a tail has $F_E|_A=\\mathcal O(-1)$ and thus no section on $A$; the remaining function must vanish at the attachment, giving $\\mathcal O_X(-s_i)$ there. At a bridge $E$ avoids $A$, so the same equal-value rule as for $F_0$ applies. Away from the exceptional image the assertion is the given isomorphism and the same old divisor; in the isomorphism case it is tautological. Here the polynomial descriptions $H^0(\\mathbf P^1,\\mathcal O)=\\Omega$ and $H^0(\\mathbf P^1,\\mathcal O(-1))=0$ follow by writing sections on its two affine charts and matching on their overlap.",
+   "uses": [
+    "lem-trf-closed-union-pushout",
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "The fibre identifications make $\\alpha,\\beta$ isomorphisms over $T$. Explicitly, at $x\\in X$ over $a\\in T$, Nakayama applied to the finite cokernel first gives surjectivity from surjectivity on the geometric fibre (field extension is faithful). The target is flat over $\\mathcal O_{T,a}$ by step 2. Tensoring a surjection onto a flat module therefore preserves its kernel sequence, so the kernel has zero fibre. This kernel is finite: choose finitely many source generators; the target's finite presentation makes the relations among their images finitely generated, and their image generates the kernel. Nakayama now kills the kernel. Thus $q_*F_0=\\mathcal O_X$ and $q_*F_E=\\mathcal O_X(-D)$ through these actual maps. The same argument will apply to the comparison in step 7, whose target is $T$-flat by step 2. Left exactness of direct image applied to $0\\to F_{-t}\\to F_0\\to t_*\\mathcal O_T\\to0$ identifies $q_*F_{-t}$ with $\\ker(\\mathcal O_X\\to\\Delta_*\\mathcal O_T)=\\mathcal J$; kernels are computed sectionwise, and $q t=\\Delta$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "Multiplication of divisor modules gives $F_{-t}\\otimes F_N\\to F_E$. With step 4 it defines a canonical map $\\mu:q_*F_N\\to\\mathcal Hom(\\mathcal J,\\mathcal O_X(-D))=\\mathcal J^\\vee\\otimes\\mathcal O_X(-D)$ by $b\\mapsto(a\\mapsto ab)$. The equality on the right is checked after locally trivializing $\\mathcal O_X(-D)$. This map uses the already constructed identification $q_*F_{-t}=\\mathcal J$, rather than presuming that pulling back $\\mathcal J$ is invertible. Away from the exceptional image, and on an isomorphism fibre, it is the multiplication isomorphism for the Cartier divisor $t$.",
+   "uses": [
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "For a geometric tail, write $x=s_i=\\Delta$. The remaining curve is $X$, while $F_N|_A=\\mathcal O_A(t-t_i)$ is trivial: choose a rational coordinate with zero at $t_i$ and pole at $t$, whose divisor is $t_i-t$. A section on $A$ is determined by its boundary value at the attachment, since that point is disjoint from $t,t_i$. Thus forgetting the exceptional section identifies $q_*F_N$ locally at $x$ with $\\mathcal O_X$ through its remaining-curve value. On $X$, $\\mathcal J=\\mathcal O_X(-x)$ and locally $D=x$. Multiplication takes that remaining-curve value $b$ to the homomorphism $a\\mapsto ab$ from $\\mathcal O_X(-x)$ to itself. This is exactly the isomorphism $\\mathcal O_X\\to\\mathcal J^\\vee(-D)$. All other old markings are disjoint from $x$ and contribute the same invertible factor on both sides. Hence $\\mu$ is an isomorphism on every tail fibre.",
+   "uses": [
+    "lem-trf-closed-union-pushout",
+    "lem-sfb-nodal-section-dual-flat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "For a geometric bridge, $E$ avoids $A$, and $F_N|_A=\\mathcal O_A(t)$. A section of this line is uniquely determined by its values at the two attachment points: choose their coordinates $0,\\infty$, so sections have the form $aU+bV$ and the two values give $b,a$. Consequently the closed-union description identifies $q_*F_N$ with $\\nu_*\\mathcal O_{\\widetilde X}$ near $x$, where $\\nu$ separates the two branches of $X$ at $x$. The dual-section-ideal lemma identifies $\\mathcal J^\\vee$ with precisely this multiplier module, and $D$ avoids $x$. Under these identifications, multiplication sends a branch function $b$ to $a\\mapsto ab$, so $\\mu$ is the identity of this module. Combining with steps 5--6 proves it is an isomorphism on every geometric fibre. Apply the finite-kernel/Nakayama argument of step 4, using step 2's flat target, to obtain $q_*\\mathcal O_Y(t-E)\\cong\\mathcal J^\\vee(-D)$ on $X$.",
+   "uses": [
+    "lem-trf-closed-union-pushout",
+    "lem-sfb-nodal-section-dual-flat",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "The disjoint Cartier divisors $t$ and $E$ give the exact sequence $0\\to F_E\\xrightarrow{(1,1)}F_N\\oplus F_0\\xrightarrow{(b,c)\\mapsto b-c}F_t\\to0$. Check it off $t\\cup E$, near $t$ where $E$ is empty, and near $E$ where $t$ is empty: one of the two summand inclusions is then an isomorphism, the difference is surjective, and its kernel is the displayed diagonal. The direct-image long exact sequence and $R^1q_*F_E=0$ from step 2 make its pushforward short exact. Module sheaves have enough injectives, so the right-derived delta-functor applies to the left exact direct image. Using steps 4 and 7, its first arrow is $\\mathcal O_X(-D)\\to\\mathcal J^\\vee(-D)\\oplus\\mathcal O_X$, with components multiplication and the divisor inclusion: on the first component the image of $f$ acts on $a\\in\\mathcal J$ as $a\\mapsto af$. This is the defining sequence of $\\mathcal K$ tensored by $\\mathcal O_X(-D)$, so its cokernel is $\\mathcal K(-D)$. Thus the induced cokernel isomorphism is $q_*F_t\\cong\\mathcal K(-D)$, retaining the negative $D$ twist.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "Transport step 2's surjective evaluation along the cokernel isomorphism and tensor with the invertible module $q^*\\mathcal O_X(D)$. This gives $q^*\\mathcal K\\twoheadrightarrow F_t\\otimes q^*\\mathcal O_X(D)$. The quotient-geometry theorem attaches the required $X$-map into $\\operatorname{Proj}_X(\\operatorname{Sym}\\mathcal K)$. At each old section $t_i$, the $F_N$ inclusion in $F_t$ vanishes because of the factor $-E$; hence the quotient factors through the cokernel of the $\\mathcal J^\\vee$ summand. At $t$, the $F_0$ inclusion in $F_t$ vanishes, so it factors through the cokernel of the $\\mathcal O_X(D)$ summand. The expansion lemma states that these are the invertible quotients defining the ordered lifts. Factorization of the surjective quotient through these lines gives exactly those quotient classes, including the harmless sign in $b-c$. Thus every old label and the last label is sent to its prescribed lift.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-sfb-section-ideal-proj-expansion",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "On a geometric fibre the expansion lemma identifies the target with $X$ off the exceptional image. The constructed map is over $X$, hence is the identity on that open. On $A$, $q^*\\mathcal O_X(D)$ is a constant line, so the quotient line has degree one. The evaluation supplies its complete two-dimensional space of sections: on a bridge the two attachment values are independent by step 7; on a tail any section of $\\mathcal O_A(t)$ extends near the exceptional image, since its one boundary value is matched by a regular function on the remaining curve. The closed-union description gives these extensions explicitly. In coordinates a basis gives $[U:V]\\mapsto[U:V]$, after changing bases by an invertible matrix. Thus $A$ identifies with the target's exceptional projective line by its complete degree-one system. On an isomorphism fibre, $\\Delta$ is smooth and disjoint from $D$; the expansion lemma says the target is $X$ itself, so the map over $X$ is an isomorphism of the entire fibre.",
+   "uses": [
+    "lem-sfb-section-ideal-proj-expansion",
+    "lem-trf-closed-union-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  },
+  {
+   "text": "Every comparison just used is a specified map: pullback of functions for $\\alpha,\\beta$, a kernel for $\\mathcal J$, multiplication for $\\mu$, the diagonal and difference for the exact sequence, its induced cokernel map, and adjunction evaluation for the quotient. Direct-image base change for the five modules is supplied by the line-cohomology lemma; base change of the dual and its multiplication inclusion is supplied by the dual-section-ideal lemma. Cartier divisor ideals and their inclusions pull back for these smooth disjoint sections. These facts carry the defining maps to the same maps after every $T'\\to T$, and therefore carry their inverse isomorphisms and the cokernel identification to the corresponding ones. The expansion lemma and quotient-geometry theorem give the same compatibility for the target and its lifts. For an isomorphism of contraction diagrams all function pullbacks and multiplication squares commute, the section ideals are carried to the same ideals, and the difference map remains $(b,c)\\mapsto b-c$. Adjunction evaluation is natural, so the resulting quotient classes agree. Naturality of the quotient classification then makes the $X$-maps agree. This also applies to automorphisms over $1_X$; no choice of a coordinate on $A$ entered any construction.",
+   "uses": [
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-nodal-section-dual-flat",
+    "lem-sfb-section-ideal-proj-expansion",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Lemma 2.5 (printed p.178), with Section 1, Corollary 1.5 (p.167)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-curve",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-trf-nodal-contraction-normalization-branches",
+  "lem-sfb-rational-contraction-line-cohomology",
+  "lem-sfb-nodal-section-dual-flat",
+  "def-pc-divisor-line-bundle",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-trf-closed-union-pushout",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-sfb-section-ideal-proj-expansion",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Lemma 2.5, multiplication and exact-row argument, with geometric tail/bridge checks supplied here; Corollary 1.5 and Knudsen arXiv:1106.1588 Main Lemma. Both local PDFs WANTED; indexed primary-author scan and arXiv v2 read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an elementary contraction of stable pointed curves the pushforward of the line bundle of the last section is the Knudsen stabilizing module twisted by the negative old marking divisor and is generated by evaluation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))) (i : n),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.homOfVector f v)))\\n      (AlgebraicGeometry.AffineSpace.coord S i) =\\n   \", \"doc\": \"For a scheme $ S $ and an index $ i $, applying the sheaf component of the morphism induced by a vector $ v $ (constructed via $ \\\\text{homOfVector} $) to the $ i $-th coordinate function $ \\\\text{coord\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {S X : AlgebraicGeometry.Scheme} →\\n    (X ⟶ S) → (n → ↑(X.presheaf.obj (Opposite.op ⊤))) → (X ⟶ AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"Given a morphism $ f : X \\\\to S $ and a vector $ v $ consisting of global sections of the structure sheaf of $ X $, this function constructs the corresponding morphism from $ X $ to the affine space $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace.homOfVector g v) =\\n    AlgebraicGeometry.AffineSpace.homOfVector (CategoryTheory.CategoryStruct.comp f g)\\n     \", \"doc\": \"For schemes $X, Y$ over a base scheme $S$, given a vector $v$ of global sections of the structure sheaf of $Y$, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to S$, the composition $f \\\\circ \\\\text{homOfVecto\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T) (i : n),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.map n f)))\\n      (AlgebraicGeometry.AffineSpace.coord T i) =\\n    AlgebraicGeometry.AffineSpace.coord S i\", \"doc\": \"For schemes $S$ and $T$, a morphism $f: S \\to T$, and an index $i$, applying the induced morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T$ to the $i$-th coordinate function on $T$ yields the $i$-th coordinat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M N : X.Modules} (f : X ⟶ Y) (φ : M ⟶ N) (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforward f).map φ) U =\\n    AlgebraicGeometry.Scheme.Modules.Hom.app φ ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pushforward components, ring ideal contraction and differentials do not compute the direct images under a rational-component contraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct images of divisor line bundles under contraction of a rational tail give the dual of the section ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.under_map_eq_map_under\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"{C D : Type*} [CommSemiring C] [Semiring D] [Algebra A C] [Algebra C D] [Algebra A D] [Algebra B D]\\n  [IsScalarTower A C D] [IsScalarTower A B D] (h₁ : (map (algebraMap A C) (under A P)).IsMaximal)\\n  (h₂ : map (algebraMap B D) P ≠ ⊤) : under C (map (algebraMap B D) P) = map (algebraMap A C) (under A\", \"doc\": \"Given compatible algebra homomorphisms $ A \\\\to C $, $ B \\\\to D $, and $ A \\\\to B $, if $ P \\\\subseteq B $ is an ideal with maximal contraction in $ A $ and $ P $ has non-top image in $ D $, then the cont\"}\n  {\"name\": \"FractionalIdeal.dual\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \"(I : FractionalIdeal B⁰ L) : FractionalIdeal B⁰ L\", \"doc\": \"Let $A$ be an integrally closed domain with fraction field $K$, let $L/K$ be a finite separable field extension, and let $B$ be the integral closure of $A$ in $L$. For a fractional ideal $I$ of $B$ in\"}\n  {\"name\": \"IsLocalization.map_comap\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \"(J : Ideal S) : Ideal.map (algebraMap R S) (Ideal.comap (algebraMap R S) J) = J\", \"doc\": \"For any ideal $ J $ in $ S $, the image of the contraction of $ J $ under the canonical algebra homomorphism $ R \\\\to S $ is equal to $ J $. This asserts that $ \\\\text{Ideal.map}(\\\\text{algebraMap}(R,S))\"}\n  {\"name\": \"Ideal.under_def\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": P.under A = Ideal.comap (algebraMap A B) P\", \"doc\": \"The contraction of an ideal $ P $ in $ A $ under the canonical algebra homomorphism from $ A $ to $ B $ is the preimage of $ P $ under this homomorphism.\"}\n  {\"name\": \"Ideal.map_under_le_under_map\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"{C D : Type*} [CommSemiring C] [Semiring D] [Algebra A C] [Algebra C D] [Algebra A D] [Algebra B D]\\n  [IsScalarTower A C D] [IsScalarTower A B D] : map (algebraMap A C) (under A P) ≤ under C (map (algebraMap B D) P)\", \"doc\": \"Given compatible algebra homomorphisms between commutative semirings $A \\\\to C$, $A \\\\to B$, and $B \\\\to D$, and an ideal $P$ in $B$, the image of the contraction of $P$ under $A \\\\to B$ via $A \\\\to C$ is \"}\n  {\"name\": \"Ideal.under_liesOver_of_liesOver\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"[𝔓.LiesOver p] : (𝔓.under B).LiesOver p\", \"doc\": \"If an ideal $\\\\mathfrak{P}$ in $B$ lies over a prime ideal $p$ in $A$, then the contraction of $\\\\mathfrak{P}$ in $A$ under the algebra homomorphism $A \\\\to B$ also lies over $p$.\"}\n  {\"name\": \"FractionalIdeal.coe_dual\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \"(hI : I ≠ 0) : (dual A K I : Submodule B L) = Iᵛ\", \"doc\": \"For a non-zero fractional ideal $ I $ of a Dedekind domain $ A $, the dual of $ I $ as a submodule coincides with the valuation dual $ I^\\\\vee $. This equality holds under the condition that $ I $ is n\"}\n  {\"name\": \"FractionalIdeal.dual_involutive\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \": Function.Involutive (dual A K : FractionalIdeal B⁰ L → FractionalIdeal B⁰ L)\", \"doc\": \"The dual operation on fractional ideals is an involution, meaning that applying it twice recovers the original fractional ideal: for any fractional ideal $ I $, $ \\\\text{dual}(\\\\text{dual}(I)) = I $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pushforward components, ring ideal contraction and differentials do not compute the direct images under a rational-component contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The multiplication pairing identifies the pushforward of O(last marking minus old markings) with the dual ideal of the contracted section tensor O(minus old markings)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"sectionOfRetractionKerToTensorAux\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebr\", \"doc\": \"An $ R $-algebra homomorphism from $ S $ to $ P $ constructed by adjusting a given section $ \\\\sigma: S \\\\to P $ with a term involving the Kähler differential derivation $ d $ and a linear map $ l: S \\\\o\"}\n  {\"name\": \"sectionOfRetractionKerToTensor\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebr\", \"doc\": \"An $ R $-algebra homomorphism from $ S $ to $ P $ constructed by adjusting a given section $ \\\\sigma: S \\\\to P $ with a term involving the Kähler differential derivation $ d $ and a linear map $ l: S \\\\o\"}\n  {\"name\": \"sectionOfRetractionKerToTensorAux_algebraMap\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebraMap P S)))\\n  (hl : l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id) (σ : \", \"doc\": \"For any element $x$ in the semiring $P$, the constructed $R$-algebra homomorphism from $S$ to $P$ satisfies $\\\\sigma'(\\\\mathrm{algebraMap}(P,S)(x)) = x - l(1 \\\\otimes d(x))$, where $\\\\sigma'$ adjusts the \"}\n  {\"name\": \"sectionOfRetractionKerToTensorAux_prop\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebraMap P S))),\\n  l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id →\\n    ∀ (x \", \"doc\": \"For elements $x, y$ in a ring $P$ with a ring homomorphism $\\\\text{algebraMap}: P \\\\to S$, if $\\\\text{algebraMap}(x) = \\\\text{algebraMap}(y)$, then $x - l(1 \\\\otimes d x) = y - l(1 \\\\otimes d y)$ in the mod\"}\n  {\"name\": \"sectionOfRetractionKerToTensor_algebraMap\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebraMap P S)))\\n  (hl : l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id) [inst\", \"doc\": \"For any element $x$ in $P$, the constructed $R$-algebra homomorphism evaluates on the image of the algebra map $\\\\mathrm{algebraMap}(P,S)$ as $x - l(1 \\\\otimes d(\\\\sigma(x)))$, where $l$ is a linear map \"}\n  {\"name\": \"tensorKaehlerQuotKerSqEquiv_tmul_D\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] [inst_5 : Algebra R S] [inst_6 : IsScalarTower R P S] (s : S) (t : P),\\n  (tensorKaehlerQuotKerSqEquiv R P S)\\n      (s ⊗ₜ[P ⧸ RingHom.ker (alg\", \"doc\": \"For elements $s$ and $t$ in the appropriate algebraic structures, the tensor product of $s$ with the differential of the quotient map applied to $t$ equals the tensor product of $s$ with the different\"}\n  {\"name\": \"Algebra.Generators.cotangentSpaceBasis_repr_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  (P : Algebra.Generators R S ι) (r : S) (x : P.Ring) (i : ι),\\n  (P.cotangentSpaceBasis.repr (r ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) x)) i =\\n    r * (MvPolynomial.aeval P.val) ((MvPolynom\", \"doc\": \"For a commutative ring $ R $, a set of generators $ \\\\iota $, and an algebra extension $ P = R[\\\\iota] $, the representation of the tensor product $ r \\\\otimes d(x) $ in the cotangent space basis $ \\\\{1 \\\\\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux_monomial\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  (Q : Algebra.Generators S T ι) (n : ι →₀ ℕ) (r : S),\\n  (Algebra.Generators\", \"doc\": \"For any monomial in the polynomial ring generated by $ Q $ with exponent vector $ n $ and coefficient $ r $, the auxiliary linear map $ \\\\delta_{\\\\text{Aux}} $ evaluates to the product of the generators\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pushforward components, ring ideal contraction and differentials do not compute the direct images under a rational-component contraction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"contraction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pushforward components, ring ideal contraction and differentials do not compute the direct images under a rational-component contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "contraction.*(section|divisor)|pushforward.*(marking|sectionIdeal)|Knudsen",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pushforward components, ring ideal contraction and differentials do not compute the direct images under a rational-component contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Knudsen contraction pushforward divisor of last marking evaluation quotient symmetric algebra Proj",
+   "results": "OK: 8 hits; AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.SpecMap_awayMap_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj, ideal pushforward, and cokernel functoriality do not compute the contraction direct images or their evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pushforward of the divisor line bundle of the last marked section under a stable curve contraction is the cokernel of the diagonal into the dual section ideal and the old marking divisor with the negative old divisor twist",
+   "results": "OK: 8 hits; CategoryTheory.NonPreadditiveAbelian.σ, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.IdealSheafData.map_bot, CategoryTheory.Limits.cokernel.map, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap, AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj, ideal pushforward, and cokernel functoriality do not compute the contraction direct images or their evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushforward\"",
+   "results": "OK: 12 hits; AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit, AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit_obj, AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit_map, AlgebraicGeometry.StructureSheaf.toPushforwardStalk, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapObjFunctorOppositeOpensCarrierTopIsSheafGrothendieckTopologyStructureSheaf, AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj, ideal pushforward, and cokernel functoriality do not compute the contraction direct images or their evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "Knudsen|rationalComponent|rational_component|stablyReflexive|stably_reflexive",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj, ideal pushforward, and cokernel functoriality do not compute the contraction direct images or their evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|stableCurve|stable_curve|higherDirectImage",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj, ideal pushforward, and cokernel functoriality do not compute the contraction direct images or their evaluation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor.",
+   "via": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-elementary-contraction-evaluation",
+  "worker": "stage1",
+  "summary": "Wrote the multiplication and pushforward exact-row proof, retaining the old-divisor twist; filled the identity, tail and bridge checks omitted in Lemma 2.5. Isolated the general line-bundle cohomology lemma and flat dual-section-ideal lemma as two smaller statement-only nodes; reused existing nodal gluing, branches, Nakayama and quotient classification. No change of statement. Recorded genuine Mathlib searches and per-step literal quotations.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. The 11 steps supply the elementary evaluation prerequisite of the Knudsen forgetful universal-curve comparison: source pp.167--168 and Lemma 2.5, with all geometric-fibre checks and functorialities explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Projective stable families are proper; generic projective-bundle fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Properness of the map between proper families, needed by the branch description."
+   },
+   {
+    "node": "lem-trf-nodal-contraction-normalization-branches",
+    "why": "Identify the remaining curve and the attachment branches on a geometric fibre; generic nodal-curve tool, not a replacement of the Knudsen route."
+   },
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Scheme-theoretic boundary is reduced transverse nodes; needed for equal-value gluing."
+   },
+   {
+    "node": "lem-trf-closed-union-pushout",
+    "why": "The ring fibre-product identity proves the explicit geometric-fibre section calculations."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Promote a fibre isomorphism between finitely presented base-flat modules to an isomorphism; elementary stalk argument written out."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Direct-image derived functors on module sheaves exist and yield a long exact sequence."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Push the explicitly constructed short exact divisor sequence using its long exact sequence."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Construct and identify the map into symmetric Proj from its actual invertible quotient."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Tensor the evaluation quotient by the inverse old-marking twist; invertibility and pullback identities."
+   },
+   {
+    "node": "lem-weil-pbc-flat-quotient-tensor-injective",
+    "why": "Exactness after tensoring a kernel sequence onto a base-flat module; used in the Nakayama isomorphism test, not merely the definition of flatness."
+   },
+   {
+    "node": "lem-trf-smooth-curve-section-cartier",
+    "why": "Smooth sections of a nodal family are Cartier after restricting to the smooth locus; supplies genuine invertible divisor modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-trf-nodal-contraction-normalization-branches",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-closed-union-pushout",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-trf-smooth-curve-section-cartier"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-4dcc711f3",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-4dcc711f3 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps and both new nodes in full, with every cited statement. Source checks: Knudsen arXiv:1106.1588 read from its PDF (Main Lemma (1)-(3), Prop 3.1, Cor 3.2: J stably reflexive, J^vee/R = A via epsilon, Delta^*(J^vee/O) invertible), which supports lem-sfb-nodal-section-dual-flat. The Knudsen II scan was unreachable (connection refused), so Cor 1.5 and Lemma 2.5 were checked by computation: tail case K(-D) = O + k(x) = q_*O_Y(t) and J^vee(-D) = O; bridge case m_x^vee = normalization = q_*O(t-E). The sequence 0->O(-E)->O(t-E)+O->O(t)->0 pushes forward to the K sequence twisted by O(-D), so the -D twist is right. Exceptional degrees 0,-m,-1,1-m,1 are all >= -1. The Nakayama and flatness steps check out (flat-quotient-tensor-injective with N = kappa(a), finite kernel). Step 9: the summand cokernels are exactly the expansion lifts. Step 10: K(x) -> H^0(A, O(t)) is surjective, giving the complete degree-one system. Both new nodes are general lemmas rather than clauses of the item, are not duplicates (section-ideal-proj-expansion lacks J^vee flatness and the quotient sequence; perfect-base-change needs a flat map), are statement-only with 3 search kinds, and carry correct created and blueprint fields. Small cases tested: smooth section, node over a field, identity q, D=E=0, empty T. Batch-5: the closure diff adds 9 nodes, all generic (two new nodes plus Stacks 0C4J/0E38/00E0 curve geometry and Temkin App. B branch normalization). projective-bundle-proper, smooth-curve-section-cartier and def-trf-nodal-geometric-fibres were already in the base closure. None is a step of the trace formula or Poincare duality, so all are accepted. Tool uses accepted as generic. No SGA citations. No re-split note. Minor: node 2 assumes proper, which is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ElementaryContractionEvaluation",
+  "declaration": "AlgebraicGeometry.ElementaryContraction.Diagram.elementary_contraction_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ElementaryContraction.Diagram",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.projection",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.marking",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.last",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.delta",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.fiberMap",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Exceptional",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.IsElementary",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.oldIdealX",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.oldIdealY",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.ideal",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.idealι",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.multiplication",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.diagonal",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.expansionModule",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.line",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.image",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.includeOld",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.pair",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Comparisons",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.evaluation",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.pullTensor",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.pullPair",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.quotient",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.quotientLine",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.projectiveFiberMap",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Geometry",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Result",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change.interchange",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change.Modules",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change.Modules.image",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change.Modules.line",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change.Modules.quotientLine",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.Change.Compatible",
+   "AlgebraicGeometry.ElementaryContraction.Diagram.elementary_contraction_evaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ElementaryContractionEvaluation.lean",
+  "statement": "theorem elementary_contraction_evaluation (h : D.IsElementary) : ∃ (C : D.Comparisons) (R : D.Result C), ∀ (D' : Diagram.{u}) (A : D.Change D'), ∃ (C' : D'.Comparisons) (R' : D'.Result C') (M : A.Modules), A.Compatible M C C' R.oldCartierX R'.oldCartierX",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Auxiliary records expand this node only: ordered stable contraction hypotheses, canonical kernel/cokernel and divisor maps, normalized comparisons, projective quotient geometry, and cartesian base-change equations. The four direct images retain the -D twist. All definitions have real data; only the main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5442795",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, StablePointedModuli (genus_at_least_two), IsStablePointedCurve, ProjectiveBundleQuotientGeometry (TautologicalQuotient pinned by chart/generator, Classifies, ∃! theorem), module_pullback_tensor (proved, pinned by pure-tensor formula), moduleBaseChangeMap. Every clause rendered: IsElementary over all alg-closed Ω:Type u with identity-or-Exceptional; Exceptional = smooth genus-0 reduced component, contains t, encard 3 normalized special points, fibre = Z, iso off x. J = kernel of unitToPushforwardObjUnit Δ; K = cokernel of biprod.lift(mult, divisor incl). Four comparisons normalized by pullback of functions, inclusion squares, multiplication formula and cokernel_left/right with the b-c sign (checked f-f=0). Evaluation Epi; untwisted invertible quotient explicit; Proj map via Classifies; old/last lifts as summand vanishing (equivalent to the lift classes); exceptional fibre ≅ ℙ¹ with O(1) and identity_fibers. Change = arbitrary labelled cartesian squares incl. automorphisms over 1_X; Change.Modules determined by inclusion/pairing/cokernel equations; Compatible = moduleBaseChangeMap isos plus commuting squares. Edge cases r=0, empty or non-reduced T, any characteristic, tail/bridge fibre dim 2, one universe u: ok. No hollow defs, one sorry, docstrings with source and all 11 steps, statement verbatim, declarations complete, only lean differs from live, no duplicate, lines ≤100. No compile (no change). Advisory: second reading is a self-reading; pullTensor via a determined choose."
+ }
+}

@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-ringed-acyclic-resolution-derived-maps",
+ "kind": "statement",
+ "title": "Acyclic resolutions compute derived section maps on ringed sites",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites with terminal objects in a common coefficient universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], equipped with sheaves of commutative rings $A,B$. Let $f:(\\operatorname{Sh}(\\mathcal C),A)\\to(\\operatorname{Sh}(\\mathcal D),B)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism]. Assume the two module categories [def-weil-sheaf-of-modules-category] have enough injectives [def-sp-enough-injectives]. Let $M$ be a $B$-module, $N$ an $A$-module and $\\phi:M\\to f_*N$ a module map. Suppose $r:M[0]\\to K$ and $s:N[0]\\to L$ are augmented resolutions, zero in negative degrees, with every term acyclic for the respective global-section functor, meaning $R^p\\Gamma(\\mathcal D,K^q)=R^p\\Gamma(\\mathcal C,L^q)=0$ for $p>0$ [def-sp-injective-resolutions, def-sp-acyclic]. Let $u:K\\to f_*L$ be a chain map with $u r=(f_*s)\\phi[0]$. Write $Q$ for localization at quasi-isomorphisms [def-weil-abstract-derived-category]. Use the bounded-below derived category $D^+(\\operatorname{Ab})$ [def-weil-pbc-bounded-derived-subcategories]. There are canonical isomorphisms in this category,\n$$c_r:Q\\Gamma(\\mathcal D,K)\\xrightarrow{\\sim}R\\Gamma(\\mathcal D,M),\\qquad c_s:Q\\Gamma(\\mathcal C,L)\\xrightarrow{\\sim}R\\Gamma(\\mathcal C,N).$$\nThey are the acyclic-resolution comparisons: if $K\\to I$ extends $r$ into an injective resolution of $M$, $c_r$ is its image on derived sections followed by the injective-resolution computation; likewise for $c_s$. These comparisons are independent of the extensions. Under $\\Gamma(\\mathcal D,f_*L)=\\Gamma(\\mathcal C,L)$ one has an equality of derived morphisms\n$$c_s\\,Q\\Gamma(u)=\\operatorname{res}_f(\\phi)\\,c_r,$$\nwhere $\\operatorname{res}_f(\\phi)$ is $R\\Gamma$ of the map $M[0]\\to Rf_*(N[0])$ induced by $\\phi$, followed by the canonical composition comparison $R\\Gamma(\\mathcal D,Rf_*N)\\cong R\\Gamma(\\mathcal C,N)$. In particular the canonical coefficient-compatible pullback maps are computed by augmentation-preserving maps between these acyclic resolutions, as morphisms in the derived category before taking any cohomology. For $f=\\mathrm{id}$ the same formula gives naturality for all augmentation-preserving maps of resolutions. No exactness of $f^*$ or injectivity of the terms of $K,L$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, and section-derived-functors; derived.tex Tag 015E, lemma-leray-acyclicity. Agent formulation of the normalized derived-map version of acyclic-resolution computation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-acyclic",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sfb-coefficient-module-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\Gamma(\\mathcal D,-)$ and $H=\\Gamma(\\mathcal C,-)$, valued in abelian groups. They are additive and left exact: kernels of module sheaves are sectionwise, and sections over the terminal object preserve these kernels. Choose nonnegative injective resolutions $i:M[0]\\to J$ and $j:N[0]\\to I$. The bounded-below injective complexes $I,J$ are K-injective. The small ringed-site module categories admit K-injective resolutions, so use their total derived functors and canonical units. Write $\\rho_J:RG(M[0])\\xrightarrow{\\sim}QGJ$ and $\\rho_I:RH(N[0])\\xrightarrow{\\sim}QHI$ for the unit-normalized resolution computations.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); sites-cohomology.tex section-derived-functors"
+   }
+  },
+  {
+   "text": "The augmentation $r$ is a degreewise monomorphic quasi-isomorphism: its degree-zero component identifies $M$ with the kernel of $K^0\\to K^1$, and its other components have zero source. Extend $i$ across $r$ into $J$ to obtain $a:K\\to J$ with $ar=i$; likewise obtain $b:L\\to I$ with $bs=j$. Any two extensions into the fixed target are homotopic, by uniqueness along a quasi-isomorphism. Both $a,b$ are quasi-isomorphisms, since on cohomology their composites with the quasi-isomorphisms $r,s$ are $i,j$.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift), part (2), and uniqueness preceding that lemma"
+   }
+  },
+  {
+   "text": "Injective module sheaves are section-acyclic, by the injective-pushforward global-acyclicity lemma with the identity ringed-topos morphism. Thus the source and target terms of $a$ are $G$-acyclic, and those of $b$ are $H$-acyclic. The acyclic quasi-isomorphism lemma gives quasi-isomorphisms $G(a)$ and $H(b)$. Consequently\n$$c_r=\\rho_J^{-1}\\,QG(a),\\qquad c_s=\\rho_I^{-1}\\,QH(b)$$\nare isomorphisms in $D^+(\\operatorname{Ab})$. These are precisely the comparisons specified in the statement, since $a,b$ extend the augmentations into injective resolutions.",
+   "uses": [
+    "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E (lemma-leray-acyclicity); sites-cohomology.tex Tags 072Z (lemma-direct-image-injective-sheaf), 0731(3) (lemma-limp-acyclic)"
+   }
+  },
+  {
+   "text": "Applying an additive functor to a chain homotopy again gives a chain homotopy. Since localization factors through the homotopy category, $QG(a)$ and $QH(b)$ are independent of the extensions. To compare $i:M[0]\\to J$ with another nonnegative injective resolution $i':M[0]\\to J'$, represent $Qi'(Qi)^{-1}$ by a chain map $t:J\\to J'$ using the K-injective Hom bijection. Then $ti\\simeq i'$ and hence $ta\\simeq a'$ by uniqueness after precomposition with $r$. The normalized derived-map computation gives $\\rho_{J'}=QG(t)\\rho_J$. Thus\n$$\\rho_{J'}^{-1}QG(a')=\\rho_{J'}^{-1}QG(t)QG(a)=\\rho_J^{-1}QG(a).$$\nThe identical argument with $H,s,I$ gives independence for $c_s$.",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 013P (lemma-morphisms-lift), 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Choose a quasi-isomorphism $\\lambda:f_*I\\to T$ with $T$ bounded below and termwise injective. Each $f_*I^q$ is $G$-acyclic by the ringed-topos injective-pushforward lemma, without flatness. The terms of $T$ are also $G$-acyclic by that lemma for the identity morphism. Apply the acyclic quasi-isomorphism lemma, taking a common lower bound for $f_*I,T$, to see that $E=QG(\\lambda)$ is invertible. Put $\\rho_T:RG(Qf_*I)\\xrightarrow{\\sim}QGT$. The normalized derived-composition comparison identifies\n$$RG(Qf_*I)\\longrightarrow QHI=QG(f_*I)$$\nwith $E^{-1}\\rho_T$. Indeed, apply its K-injective representative formula to $I$ and $\\lambda$, taking the second ringed-topos morphism to be global sections to $(\\operatorname{Set},\\mathbf Z)$. Its module direct image is exactly $G$; the formula for the comparison in the other direction is $QG(\\lambda)=E$.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), K-injective normalization; Tags 072Z, 0731(3), and 015E"
+   }
+  },
+  {
+   "text": "Let $w=(f_*j)\\phi[0]:M[0]\\to f_*I$. Under the resolution computation $Rf_*N\\cong Qf_*I$, the morphism induced by $\\phi$ is $Qw$: this is naturality of the derived unit $Qf_*\\Rightarrow Rf_*Q$ at $j$. By the K-injective Hom bijection, choose $\\beta:J\\to T$ representing\n$$Q\\beta=Q\\lambda\\,Qw\\,(Qi)^{-1}.$$\nThe same bijection implies $\\beta i\\simeq\\lambda w$. With $V=QG(\\beta)$, computation of derived morphisms on the resolutions $i,\\lambda$, followed by Step 5's normalized composition comparison, gives the precise coordinate formula\n$$\\rho_I\\,\\operatorname{res}_f(\\phi)\\,\\rho_J^{-1}=E^{-1}V.$$\nHere the functor computing $Rf_*$ is module direct image; no injectivity claim about $f_*I$ is used.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined) and sites-cohomology.tex section-derived-functors; Tag 0D6E normalization from Step 5"
+   }
+  },
+  {
+   "text": "The two maps $\\lambda(f_*b)u,\\beta a:K\\to T$ agree up to homotopy after precomposition with $r$: using $ur=(f_*s)\\phi[0]$, $bs=j$, and $ar=i$, their composites are $\\lambda(f_*j)\\phi[0]=\\lambda w$ and $\\beta i\\simeq\\lambda w$. The target $T$ is bounded below and termwise injective. Uniqueness along the quasi-isomorphism $r$ therefore makes these maps homotopic. Apply $G$ to that homotopy and localize. Naturality of the section identity $Gf_*=H$ then gives the equality of derived morphisms\n$$E\\,QH(b)\\,Q\\Gamma(u)=V\\,QG(a).$$",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P uniqueness, Tag 014X (lemma-additive-exact-homotopy-category); sites-cohomology.tex section-derived-functors"
+   }
+  },
+  {
+   "text": "Multiply the last equality by $\\rho_I^{-1}E^{-1}$ on the left. Substitution of Steps 3 and 6 yields\n$$c_s\\,Q\\Gamma(u)=\\rho_I^{-1}E^{-1}VQG(a)=\\operatorname{res}_f(\\phi)\\,c_r.$$\nAll terms lie in $D^+(\\operatorname{Ab})$: the section complexes and injective replacements used are bounded below. Step 4 supplies all comparison independence. Substitution $f=\\mathrm{id}$ gives naturality for every augmentation-preserving map; substitution of a specified coefficient-compatible pullback and its coefficient map gives the asserted computation. These are substitutions in the derived equality, before applying any cohomology functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of the preceding seven steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Normalized derived-map assembly from section-derived-functors, Tags 072Z, 0731(3), 0D6E, and derived.tex Tags 013P, 014X, 015E, 070Y."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi, a chain map between bounded below global section acyclic resolutions computes the canonical derived pullback map on sections in the derived category of abelian groups",
+   "results": "8 hits; top results: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback, CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: general derived natural transformations and ordinary right-derived group computations do not give the acyclic-resolution comparison and change-of-ringed-site formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural derived global sections pullback computed by acyclic resolutions on ringed sites",
+   "results": "8 hits; top results: CategoryTheory.Sheaf.Γ, CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, CategoryTheory.Sheaf.ΓObjEquivSections_naturality, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.LocallyRingedSpace.Γ_def",
+   "date": "2026-10-23",
+   "verdict": "no match: general derived natural transformations and ordinary right-derived group computations do not give the acyclic-resolution comparison and change-of-ringed-site formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"NatTrans\"",
+   "results": "12 hits; top results: CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: general derived natural transformations and ordinary right-derived group computations do not give the acyclic-resolution comparison and change-of-ringed-site formula"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|Leray|[Rr]esolution",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general derived natural transformations and ordinary right-derived group computations do not give the acyclic-resolution comparison and change-of-ringed-site formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below complex of acyclic objects computes the total right derived functor",
+   "results": "8 hits; top results: CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.HasRightDerivedFunctor.mk, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-23",
+   "verdict": "no match: general derived natural transformations and ordinary right-derived group computations do not give the acyclic-resolution comparison and change-of-ringed-site formula"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Aa]cyclic|[Aa]cyclic.*rightDerived|rightDerived.*[Rr]esolution",
+   "results": "1 hits; top results: Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general derived natural transformations and ordinary right-derived group computations do not give the acyclic-resolution comparison and change-of-ringed-site formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"NatTrans\"",
+   "results": "12 hits: CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits give higher-derived maps on injective resolutions or formal derived natural transformations, not the full ringed-topos acyclic-resolution derived-map identity"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|Leray|rightDerived",
+   "results": "6 hits: Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits give higher-derived maps on injective resolutions or formal derived natural transformations, not the full ringed-topos acyclic-resolution derived-map identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between global section acyclic resolutions on ringed sites computes the canonical total derived global sections map without flatness of ringed inverse image",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits give higher-derived maps on injective resolutions or formal derived natural transformations, not the full ringed-topos acyclic-resolution derived-map identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical total derived global sections morphism for a ringed topos morphism is computed by any augmentation preserving map of acyclic resolutions",
+   "results": "8 hits: CategoryTheory.Sheaf.Γ, AlgebraicGeometry.PresheafedSpace.Γ, AlgebraicGeometry.Scheme.Hom.appTop, TopCat.Presheaf.toSheafify, AlgebraicGeometry.isIso_toSpecΓ, AlgebraicGeometry.ΓSpec.toSpecΓ_unop, AlgebraicGeometry.LocallyRingedSpace.Γ, AlgebraicGeometry.toSpecΓ",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits give higher-derived maps on injective resolutions or formal derived natural transformations, not the full ringed-topos acyclic-resolution derived-map identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Leray acyclic complex computation of a total right derived functor and derived functor composition on nonflat ringed topoi",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app_assoc, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits give higher-derived maps on injective resolutions or formal derived natural transformations, not the full ringed-topos acyclic-resolution derived-map identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-object-fppf-derived-sections",
+  "date": "2026-10-23",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero; supporting input: 0DHE proof: compare small-etale and big-fppf sections at the base and every flat face, with one compatible resolution; Acyclic resolutions compute derived section maps on ringed sites",
+   "via": [
+    "lem-sfb-flat-object-fppf-derived-sections",
+    "lem-sfb-fppf-face-heart-derived-unit",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-acyclic-resolution-derived-maps",
+  "worker": "stage1",
+  "summary": "Reuse existing resolution, homotopy, acyclic-quasi-isomorphism and normalized composition nodes. Construct comparison isomorphisms and prove the map identity through a common injective target; no new nodes, no statement change.",
+  "blueprint": "Supports the inherited direct-image proof (3) through the small-etale/big-fppf comparison in lem-sfb-flat-object-fppf-derived-sections. Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md; the ancestor command reports null, retained from the live created-item chain. This split supplies the normalization of maps between the compatible acyclic resolutions; no unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic resolution/derived-comparison tool: Existence of K-injective resolutions of sheaves of modules. The unit uses this formal homological input and supplies no different ringed-resolution construction."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic resolution/derived-comparison tool: Lifts along a quasi-isomorphism into a bounded below complex of injectives are unique up to homotopy. The unit uses this formal homological input and supplies no different ringed-resolution construction."
+   },
+   {
+    "node": "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "why": "Generic resolution/derived-comparison tool: Leray's acyclicity lemma: a left exact functor preserves quasi-isomorphisms between bounded-below complexes of acyclic objects. The unit uses this formal homological input and supplies no different ringed-resolution construction."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic resolution/derived-comparison tool: Computation of unbounded derived morphisms on arbitrary K-injective resolutions. The unit uses this formal homological input and supplies no different ringed-resolution construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic resolution/derived-comparison tool: Canonical composition comparison for unbounded ringed-topos direct images. The unit uses this formal homological input and supplies no different ringed-resolution construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-112c8c4d6",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-112c8c4d6 (reviewer sub-agent of L); spot-checked: Live item is still unsplit (clones/live, side-live) and there is no repair note, so the delivery is not superseded. The delivery has 0 new nodes. The statement and stmt_deps are byte-identical to live. proof_deps equals the union of the step uses, there is no cycle (587-node closure), and there is no SGA citation. I read Stacks 013P/015E/014X/070Y (derived.tex) and 0D6E/072Z/0731 (sites-cohomology.tex), and the statements of all 16 cited nodes. Step 1: small site plus commutative rings gives K-injective resolutions; rho is the def-sfb unit iso, the same as c_a. Step 2: r is a degreewise-mono quasi-isomorphism, the lift comes from the Mathlib leaf, uniqueness from its own node, and a,b are quasi-isomorphisms because H(a)H(r)=H(i). Step 3: Leray-acyclicity with common bound 0 (injectives are acyclic via the global-acyclic node at id); the direction of c_r is correct. Step 4: homotopy clause (a), and t via the K-injective Hom bijection; ti≃i' gives ta≃a'; the transition clause gives rho_J'=QG(t)rho_J. Step 5: lambda from the bounded-below Mathlib leaf; 0D6E node with g=(Sh(D),B)→(Set,Z), whose direct image is Gamma, with I and T both K-injective; the normalization gives the comparison E^{-1}rho_T. Step 6: unit naturality at j gives Qw, and the derived-map computation with resolutions i, lambda gives rho_I res rho_J^{-1}=E^{-1}V; I recomputed this. Step 7: lambda(f_*b)ur=lambda w and beta a r=beta i≃lambda w; uniqueness into bounded-below injective T, then G f_*=H by adjunction. Step 8: the algebra closes. Edge cases: point Z, K=Z[0], L=[Q→Q/Z]; zero modules. No injectivity of f_*I and no flatness or exactness of f^* is used. I accept all 5 declared tool_uses as generic homological algebra. Redundancies (no change needed): the enough-injectives hypothesis, and the Step-5 acyclicity argument, which duplicates the composition node's quasi-isomorphism clause."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedAcyclicResolutionDerivedMaps",
+  "declaration": "CategoryTheory.ringedAcyclicResolutionDerivedMaps",
+  "file": "lean/Sheaf/CategoryTheory/RingedAcyclicResolutionDerivedMaps.lean",
+  "statement": "theorem ringedAcyclicResolutionDerivedMaps {C D : Type u} [SmallCategory C] [SmallCategory D] [HasTerminal C] [HasTerminal D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) [EnoughInjectives (coefficientModules A)] [EnoughInjectives (coefficientModules B)] [HasDerivedCategory.{w} (coefficientModules A)] [HasDerivedCategory.{w} (coefficientModules B)] [HasDerivedCategory.{w} AddCommGrpCat.{u}] (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) : ∃ (t : f.modules ⋙ coefficientSections B ≅ coefficientSections A) (zC : ∀ M : coefficientModules A, (coefficientSections A).obj M → (⊤_ (Sheaf J (Type u)) ⟶ (sheafCompose J (forget AddCommGrpCat)).obj ((SheafOfModules.toSheaf _).obj M))) (zD : ∀ M : coefficientModules B, (coefficientSections B).obj M → (⊤_ (Sheaf K (Type u)) ⟶ (sheafCompose K (forget AddCommGrpCat)).obj ((SheafOfModules.toSheaf _).obj M))), (∀ (M : coefficientModules A) (x : (coefficientSections A).obj M) (U : Cᵒᵖ) (s : (⊤_ (Sheaf J (Type u))).obj.obj U), (zC M x).hom.app U s = (Sheaf.ΓRes ((SheafOfModules.toSheaf _).obj M) U) x) ∧ (∀ (M : coefficientModules B) (x : (coefficientSections B).obj M) (U : Dᵒᵖ) (s : (⊤_ (Sheaf K (Type u))).obj.obj U), (zD M x).hom.app U s = (Sheaf.ΓRes ((SheafOfModules.toSheaf _).obj M) U) x) ∧ (∀ (M : coefficientModules A) (x : (coefficientSections B).obj (f.modules.obj M)), (f.adj.homEquiv _ _) (terminal.from (f.inverse.obj (⊤_ (Sheaf K (Type u)))) ≫ zC M (t.hom.app M x)) = zD (f.modules.obj M) x ≫ f.underlying.hom.app M) ∧ ∃ (RG : DerivedCategory (coefficientModules B) ⥤ DerivedCategory AddCommGrpCat.{u}) (RH : DerivedCategory (coefficientModules A) ⥤ DerivedCategory AddCommGrpCat.{u}) (Rf : DerivedCategory (coefficientModules A) ⥤ DerivedCategory (coefficientModules B)) (ηG : (coefficientSections B).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG) (ηH : (coefficientSections A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RH) (ηf : f.modules.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ Rf), RG.IsRightDerivedFunctor ηG (HomologicalComplex.quasiIso (coefficientModules B) (.up ℤ)) ∧ RH.IsRightDerivedFunctor ηH (HomologicalComplex.quasiIso (coefficientModules A) (.up ℤ)) ∧ Rf.IsRightDerivedFunctor ηf (HomologicalComplex.quasiIso (coefficientModules A) (.up ℤ)) ∧ (∀ I : CochainComplex (coefficientModules B) ℤ, I.IsKInjective → IsIso (ηG.app I)) ∧ (∀ I : CochainComplex (coefficientModules A) ℤ, I.IsKInjective → IsIso (ηH.app I) ∧ IsIso (ηf.app I)) ∧ ∃! κ : Rf ⋙ RG ≅ RH, (∀ I : CochainComplex (coefficientModules A) ℤ, ηG.app ((f.modules.mapHomologicalComplex (.up ℤ)).obj I) ≫ RG.map (ηf.app I) ≫ κ.hom.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso t (.up ℤ)).hom.app I) ≫ ηH.app I) ∧ ∀ (M : coefficientModules B) (N : coefficientModules A) (φ : M ⟶ f.modules.obj N) (P : CochainComplex (coefficientModules B) ℤ) (S : CochainComplex (coefficientModules A) ℤ) [P.IsStrictlyGE 0] [S.IsStrictlyGE 0] (r : (CochainComplex.singleFunctor (coefficientModules B) 0).obj M ⟶ P) (s : (CochainComplex.singleFunctor (coefficientModules A) 0).obj N ⟶ S) [QuasiIso r] [QuasiIso s], (∀ q : ℤ, (coefficientSections B).rightAcyclic (P.X q)) → (∀ q : ℤ, (coefficientSections A).rightAcyclic (S.X q)) → ∀ u : P ⟶ (f.modules.mapHomologicalComplex (.up ℤ)).obj S, r ≫ u = (CochainComplex.singleFunctor (coefficientModules B) 0).map φ ≫ (HomologicalComplex.singleMapHomologicalComplex f.modules (.up ℤ) 0).inv.app N ≫ (f.modules.mapHomologicalComplex (.up ℤ)).map s → ∃ (hM : (DerivedCategory.TStructure.t (C := AddCommGrpCat.{u})).plus (RG.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (coefficientModules B) 0).obj M)))) (hN : (DerivedCategory.TStructure.t (C := AddCommGrpCat.{u})).plus (RH.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (coefficientModules A) 0).obj N)))) (hP : (DerivedCategory.TStructure.t (C := AddCommGrpCat.{u})).plus (DerivedCategory.Q.obj (((coefficientSections B).mapHomologicalComplex (.up ℤ)).obj P))) (hS : (DerivedCategory.TStructure.t (C := AddCommGrpCat.{u})).plus (DerivedCategory.Q.obj (((coefficientSections A).mapHomologicalComplex (.up ℤ)).obj S))), ∃! c : ((⟨DerivedCategory.Q.obj (((coefficientSections B).mapHomologicalComplex (.up ℤ)).obj P), hP⟩ : DerivedCategory.Plus AddCommGrpCat.{u}) ≅ ⟨RG.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (coefficientModules B) 0).obj M)), hM⟩) × ((⟨DerivedCategory.Q.obj (((coefficientSections A).mapHomologicalComplex (.up ℤ)).obj S), hS⟩ : DerivedCategory.Plus AddCommGrpCat.{u}) ≅ ⟨RH.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (coefficientModules A) 0).obj N)), hN⟩), (∀ (I : CochainComplex (coefficientModules B) ℤ) [I.IsStrictlyGE 0] [∀ q : ℤ, Injective (I.X q)] (i : (CochainComplex.singleFunctor (coefficientModules B) 0).obj M ⟶ I) [QuasiIso i] (a : P ⟶ I), r ≫ a = i → c.1.hom.hom ≫ RG.map (DerivedCategory.Q.map i) = DerivedCategory.Q.map (((coefficientSections B).mapHomologicalComplex (.up ℤ)).map a) ≫ ηG.app I) ∧ (∀ (I : CochainComplex (coefficientModules A) ℤ) [I.IsStrictlyGE 0] [∀ q : ℤ, Injective (I.X q)] (j : (CochainComplex.singleFunctor (coefficientModules A) 0).obj N ⟶ I) [QuasiIso j] (b : S ⟶ I), s ≫ b = j → c.2.hom.hom ≫ RH.map (DerivedCategory.Q.map j) = DerivedCategory.Q.map (((coefficientSections A).mapHomologicalComplex (.up ℤ)).map b) ≫ ηH.app I) ∧ DerivedCategory.Q.map (((coefficientSections B).mapHomologicalComplex (.up ℤ)).map u) ≫ DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso t (.up ℤ)).hom.app S) ≫ c.2.hom.hom = c.1.hom.hom ≫ RG.map (DerivedCategory.Q.map ((CochainComplex.singleFunctor (coefficientModules B) 0).map φ ≫ (HomologicalComplex.singleMapHomologicalComplex f.modules (.up ℤ) 0).inv.app N) ≫ ηf.app ((CochainComplex.singleFunctor (coefficientModules A) 0).obj N)) ≫ κ.hom.app (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (coefficientModules A) 0).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The universal derived pairs and their units specify RGamma and Rf without a new derived-functor definition. The global-sections identification is normalized by adjunction on global elements, and the composition isomorphism by its unit equation. The two resolution comparisons are unique isomorphisms in DerivedCategory.Plus, characterized on every extension into every nonnegative injective resolution. The final equality is written through the faithful inclusion of D+(Ab) into D(Ab)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8851065bd",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Item differs from live only in lean + stmt_deps gain of the landed def-sfb-coefficient-module-global-sections (allowed); dep records identical to side-live; statement verbatim. Clause audit: t pinned by ΓRes + adjunction (unique since f⁻¹ left exact); RG/RH/Rf universal pairs with units iso on K-injectives, as in def-sfb-right-derived-functor and the landed composition theorem; κ unique, normalized for every complex, direction as in node; c_r,c_s unique isos in DerivedCategory.Plus, checked on every injective extension (gives independence), directions correct; final equality is c_s QΓ(u)=res_f(φ)c_r in D(Ab), derived form. Hypotheses: acyclicity via rightAcyclic, IsStrictlyGE 0, QuasiIso augmentations; no flatness, exactness of f^* or injectivity of P,S. Edge cases zero, ℤ[0], f=id, ℤ→F_p ok; empty site excluded by the node's own terminal-object hypothesis. Docstrings carry source, blueprint id and 8 steps; one sorry. No file changed, so no compile; worker reports clean compile. Advisory only: redundant EnoughInjectives binders, kept because the node states them."
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projective line twisted unit and Kummer Chern adjoint commute with arbitrary scheme base change",
+   "results": "Eight hits concerning base change of projective Weierstrass curve formulae; none concerning derived etale exchange.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived projective line twisted unit naturality base change adjunction mate",
+   "results": "Found CategoryTheory.unit_mateEquiv, unit_mateEquiv_symm and mateEquiv; no normalized shifted-line or Chern component theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic mate identity is a needed step, not the entire statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "One exact generic mate-unit identity.",
+   "date": "2026-10-26",
+   "verdict": "Does not include the derived finite-line normalization or identify its square."
+  },
+  {
+   "tool": "grep",
+   "query": "chern.*baseChange|twisted.*unit.*baseChange",
+   "results": "No Mathlib hits. Local library search found OrdinaryFiniteP1KummerBaseChange, which instead concerns the constant unit and the negative-twist evaluation adjunct, and OrdinaryFiniteP1KummerMaps, whose naturality clause requires Noetherian bases.",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem. Separate positive-twist component equations remain necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-chern-adjunct-base-change",
+   "place": "Chern adjunct base-change proof, split into the Chern-map square and the formal mate step",
+   "via": [
+    "lem-sp-finite-p1-chern-adjunct-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sp-finite-p1-chern-map-base-change",
+ "kind": "statement",
+ "title": "Base change of the normalized projective-line Chern map",
+ "statement": "For finite A killed by N and normalized transport t, if c and cprime satisfy the actual scalar Kummer Chern specifications on the projective lines over S and Sprime, then the inverse-image of c followed by the normalized shifted-line comparison equals the normalized constant comparison followed by cprime.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-nagata-projective-space-base-change",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "By adjunction and line_normalization at a=1, the root-to-scalar generator map commutes with the prescribed coefficient-line pullback. By roots_normalization and the monomorphism μ_N→G_m, the prescribed roots comparison is the canonical one. The integral constant generator likewise commutes with pullback: transpose the proved coefficient_unit identity of SupportedDerivedUnitForget.",
+   "uses": [
+    "lem-asd-supported-derived-unit-forget"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove exact-functor naturality of the Ext realization by the coefficient comparison isomorphism and the integral-generator pullback identity (class_ext_pullback). The cached canonical Ext equivalence has the standard composition formula and Mathlib mapExactFunctor_hom gives its exact inverse-image formula. Naturality of the left-derived/exact-derived isomorphism and its transported shift comparison identify this with normalized derived pullback. All cancellations are proved over arbitrary schemes before specializing to projective lines.",
+   "uses": [
+    "lem-sp-derived-pullback-ext-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual pullbackMapTwistIso for m=1 identifies f*O(1) on P1_S with O(1) on P1_Sprime; The Picard skeleton description and this actual isomorphism identify their Picard classes. Apply the existing general Picard/H1 pullback theorem.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-sp-picard-cohomology-arbitrary-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Kummer boundary naturality to this Picard equality. Use cohomologyMap_map, the coefficient-root square, and the canonical-root comparison from step 1 to conclude equality of the specified scalar Kummer classes.",
+   "uses": [
+    "lem-sp-kummer-boundary-arbitrary-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the public arbitrary-base bijectivity of ordinaryFiniteClass. Apply the canonical cached Ext equivalence to an Ext representative, use step 2 to compute the class of its normalized derived pullback, and apply the defining realization equation. The class equality from step 4 and injectivity then identify that normalized arrow with the specified target arrow. Cancellation of the unit comparison gives the required square.",
+   "uses": [
+    "lem-sp-ordinary-finite-class-arbitrary-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-asd-supported-derived-unit-forget",
+  "lem-sp-derived-pullback-ext-hom",
+  "lem-sp-kummer-boundary-arbitrary-pullback",
+  "lem-sp-ordinary-finite-class-arbitrary-base",
+  "lem-sp-picard-cohomology-arbitrary-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+   "place": "Proof: Both defining components commute with base change, so the isomorphism does too; the Kummer description by the class of O(1)."
+  },
+  "why": "Use the existing arbitrary-scheme Kummer and Picard naturality theorems and the actual O(1) pullback isomorphism; the supported hyperplane calculation is unnecessary. All remaining comparison identities are proved in Lean."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1ChernMapBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1ChernMapBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_chern_map_baseChange",
+  "statement": "theorem ordinaryFiniteP1_chern_map_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hS' : IsUnit (N : Γ(S', ⊤)))\n    (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)\n    (c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧)\n    (hc : ordinaryFiniteP1ChernSpec A N hA S\n      ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n        hS.map (ProjectiveLine S ↘ S).appTop.hom) c)\n    (hc' : ordinaryFiniteP1ChernSpec A N hA S'\n      ((map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸\n        hS'.map (ProjectiveLine S' ↘ S').appTop.hom) c') :\n    (ordinaryFinitePullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)).map c ≫\n        (ordinaryFiniteShiftedLinePullback A N hA t\n          (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n          ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n            hS.map (ProjectiveLine S ↘ S).appTop.hom)).hom =\n      (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)).hom ≫ c' ",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T024107-L-638596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 9 adapted unclaimed modules vs published clone, DAG nodes, change record; 10 delivered files + 43 direct importers compiled in sandbox (all OK, max 50.8 s), axioms clean"
+ }
+}

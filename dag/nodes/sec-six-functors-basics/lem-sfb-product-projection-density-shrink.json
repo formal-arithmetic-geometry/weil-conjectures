@@ -1,0 +1,420 @@
+{
+ "id": "lem-sfb-product-projection-density-shrink",
+ "kind": "statement",
+ "title": "Projection-density shrinking for an open in a smooth square",
+ "statement": "Let $B$ be a field or a discrete valuation ring [def-weil-field, def-sc-discrete-valuation-ring], put $S=\\operatorname{Spec}B$ [def-weil-affine-spectrum], and let $X\\to S$ be smooth, separated and of finite type [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Let $Z\\subseteq P=X\\times_SX$ be open [def-weil-open-immersion], and suppose $Z_s$ is dense in $P_s$ for every $s\\in S$. There is a smooth separated finite-type open subscheme $A\\subseteq X$, with $A_s$ dense in $X_s$ for every $s\\in S$, such that for every $a\\in A$ both $Z\\times_{X,p_1|_Z}\\operatorname{Spec}\\kappa(a)$ and $Z\\times_{X,p_2|_Z}\\operatorname{Spec}\\kappa(a)$ are dense in the respective fibres of $p_1,p_2:P\\to X$ [def-weil-residue-field]. In particular $Z\\cap(A\\times_SA)$ is dense in every fibre of both projections $A\\times_SA\\to A$. If $B$ is a discrete valuation ring with fraction field $F$ and $Z_F=P_F$, one can choose $A$ to contain $X_F$. No multiplication on $X$ is part of the data.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.2 Proposition 2, proof, construction of T_1,T_2 and Omega_1,Omega_2 before defining U prime, printed pp.115-116 (PDF pp.121-122); uses 2.5 Lemma 1(a); primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-open-immersion",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The base $S$ is Noetherian: a field has only two ideals, while a discrete valuation ring is a principal ideal ring. Thus $X$ is Noetherian by the finite-type theorem. Each $p_i:P\\to X$ is a smooth base change of $X\\to S$, and is of finite presentation: smoothness gives local finite presentation; finite type gives quasi-compactness; separatedness gives quasi-separatedness since its diagonal is a closed immersion, whose inverse images of affine opens are affine. The quasi-compact and quasi-separated conditions are preserved by base change. The scheme $P$ and all fibres in use are Noetherian by finite type and base change.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Put $C=|P|\\setminus|Z|$. Apply the smooth closed-fibre codimension-locus theorem to each $p_i$, with closed subset $C$ and $c=1$. Its constructible set $G_{i,1}$ consists exactly of parameters whose fibre of $C$ contains no irreducible component. Equivalently $Z_a$ is dense in $(P,p_i)_a$: an open is dense precisely when it contains every component generic point. Indeed a dense open contains such a generic point because a neighbourhood meeting only that component can be obtained by removing the other finitely many components; conversely containing the generic points makes its closure contain every component. Consequently $T_i=X\\setminus G_{i,1}$ is constructible, and it is exactly the set of bad parameters for $p_i$.",
+   "uses": [
+    "lem-sfb-smooth-closed-fibre-codimension-locus",
+    "def-weil-constructible-subset",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  },
+  {
+   "text": "For the fibre inclusion $X_s\\to X$, the residue-field formula reduces to $\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(s)=\\kappa(x)$. Thus the residue fields agree, and iterated base change identifies the projection fibre calculated in $P_s\\to X_s$ with that in $P\\to X$. Fix $s\\in S$ and a component generic point $\\xi$ of $X_s$. Every component generic point $y$ of the $p_i$-fibre above $\\xi$ is a component generic point of $P_s$. To check this without any identification of scheme products with topological products, use the fibre homeomorphism. A generalization of $y$ in $P_s$ maps to a generalization of $\\xi$, hence maps to $\\xi$ itself; in that fibre, $y$ has no proper generalization. Thus $y$ has no proper generalization in $P_s$, as required. Density and openness of $Z_s$ put all these generic points in $Z_s$ by the preceding finite-component criterion. That criterion in the projection fibre now proves $\\xi\\notin T_i$. This applies also to empty projection fibres. In particular every component generic point of either base fibre is good for both projections.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  },
+  {
+   "text": "For a field base, every generalization of a component generic point of $X$ equals that point, hence is good by step 3. For a DVR base, the generic fibre $X_F=D(\\pi)$ is open, so a component generic point in it also has no proper generalization in $X$. At a component generic point $\\xi$ of the special fibre, the local-ring assertion of the smooth-trait spreading lemma gives $\\mathcal O_{X,\\xi}$ a DVR structure. Its canonical spectrum map has image all generalizations of $\\xi$. A DVR has exactly its zero and maximal primes: every nonzero prime ideal, being principal with nonzero generator $u\\varpi^n$, contains the uniformizer. The spectrum therefore has two points, with distinct images in $X$: the canonical map induces local-ring isomorphisms, whereas one source local ring is a field and the other is a nonfield DVR. Besides $\\xi$ there is exactly one generalization $\\gamma$; it has no proper generalization and lies over the generic point of $S$ (otherwise it would contradict genericity of $\\xi$ in $X_k$). Thus $\\gamma$ is a component generic point of $X_F$. Both $\\xi$ and $\\gamma$ are good by step 3. We have proved that every generalization of every fibre component generic point is outside $T_i$.",
+   "uses": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-pc-scheme-fibre",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Set $H_i=\\overline{T_i}$ in $X$. No fibre component generic point $\\xi$ belongs to $H_i$. Here is the closure argument, which is needed because closure need not commute with passage to a fibre. Write the constructible $T_i$ as a finite union $\\bigcup_j(U_j\\cap F_j)$, with $U_j$ open and $F_j$ closed. If $\\xi\\in H_i$, it belongs to $\\overline{U_j\\cap F_j}$ for some $j$. Decompose $F_j$ into its finitely many irreducible components. For a component $E$, the intersection $U_j\\cap E$ is either empty or dense in $E$. Thus $\\overline{U_j\\cap F_j}$ is precisely the union of the components $E$ which meet $U_j$. One of these $E$ contains $\\xi$. Its generic point $e$ lies in $U_j\\cap F_j\\subset T_i$, and $e$ generalizes $\\xi$. This contradicts step 4. Hence $H_i$ avoids every component generic point in every fibre.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005K, lemma-generic-point-in-constructible, finite locally closed decomposition; the closure argument is written out using Noetherian finite components."
+   }
+  },
+  {
+   "text": "Define $A=X\\setminus(H_1\\cup H_2)$. It is open. In every fibre it contains all component generic points by step 5, so $A_s$ is dense in $X_s$ by the finite-component criterion. The restriction $A\\to S$ is smooth by the open-immersion smooth-composition theorem. It is separated: its diagonal is the restriction of the closed diagonal of $X\\to S$ to $A\\times_S A$. It is of finite type: opens of a Noetherian scheme are quasi-compact; indeed an ascending-open maximality argument turns any open covering into a finite subcover. Every inverse image in $A$ of an affine open of $X$ is open in the Noetherian scheme $A$, hence quasi-compact. Locally, an open immersion is covered by basic localizations $R\\to R_f$, generated by $f^{-1}$, hence is locally of finite type. Compose with $X\\to S$. This includes $X=\\varnothing$ and fibres which are empty.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  },
+  {
+   "text": "For $a\\in A$ we have $a\\notin T_i\\subset H_i$ for both $i$. By the definition of $T_i$ this gives the two asserted densities in the full $p_i$-fibres $X_{\\kappa(a)}$. The fibre of $A\\times_S A\\to A$ above $a$ is the open subscheme $A_{\\kappa(a)}$ of that full fibre. A dense subset meets every nonempty open, so restricting the dense open $Z_a$ to this open fibre leaves a dense subset of the open fibre. This proves the density assertion for $Z\\cap(A\\times_S A)$ for both projections.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Finally suppose $B$ is a DVR and $Z_F=P_F$. Every parameter in $X_F$ is then good, so $T_i\\subset X_k$ for both $i$. The special fibre is closed: it is the inverse image of the vanishing set of the uniformizer. Therefore $H_i=\\overline{T_i}\\subset X_k$. The very same $A$ consequently contains all of $X_F$, proving the additional clause without modifying the construction.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-closed-immersion",
+  "lem-sfb-smooth-closed-fibre-codimension-locus",
+  "def-weil-constructible-subset",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-pc-base-change",
+  "lem-sfb-smooth-trait-local-rational-spreading",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.2 Proposition 2, proof, printed pp.115-116 (PDF pp.121-122), construction of the two bad loci and their closure complements; primary scan inspected online; local copy WANTED. The BLR route is retained and its closure assertion is expanded explicitly; the local literature PDF is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth finite type scheme over a field or discrete valuation ring, a fibrewise dense open in its square becomes dense in every projection fibre after removing a fibrewise nowhere dense subset of the factors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Dense\", \"fiber\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*(fiber|fibre)|(fiber|fibre).*dense",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise dense open in the square of a smooth scheme over a discrete valuation ring is projectionwise dense over a fibrewise dense open of each factor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \": IsJointlySurjectivePreserving @IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"exists_open_dense_of_open_dense_subtype\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"(hs : Dense s) {u : Set s} (huo : IsOpen u) (hud : Dense u) : ∃ v : Set X, IsOpen v ∧ Dense v ∧ Subtype.val ⁻¹' v = u\", \"doc\": \"If $ s $ is a dense subset of a topological space $ X $, and $ u $ is an open and dense subset of $ s $ (in the subspace topology), then there exists an open dense subset $ v $ of $ X $ such that $ u \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U V : X.Opens} (hU : Dense (X := X) U) (hU' : U ≤ V) : IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [IsDominant f] : DenseRange f\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsDominant f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map $ f_{\\\\text{base}} $ has dense image in $ Y $, then $ f $ is a dominant morphism.\"}\n  {\"name\": \"IsOpenQuotientMap.dense_preimage_iff\", \"module\": \"Mathlib.Topology.Maps.OpenQuotient\", \"type\": \"(h : IsOpenQuotientMap f) {s : Set Y} : Dense (f ⁻¹' s) ↔ Dense s\", \"doc\": \"For an open quotient map $ f : X \\\\to Y $, a subset $ s \\\\subseteq Y $ is dense in $ Y $ if and only if the preimage $ f^{-1}(s) $ is dense in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a fibrewise dense open in a product of smooth schemes over a trait, remove the closure of parameters with nondense fibres to obtain projectionwise dense opens",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens},\\n  Dense ↑U → ∀ (hU' : U ≤ V), AlgebraicGeometry.IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth finite type scheme over a field or discrete valuation ring, a fibrewise dense open in its square is dense in both projection fibres after shrinking each factor to a fibrewise dense open",
+   "results": "OK 8 hit(s); logged returned names/files: [\"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_\\u03b9\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*(fiber|fibre)|(fiber|fibre).*dense",
+   "results": "OK 0 hit(s); logged returned names/files: []",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dense open in a smooth product over a field or trait becomes dense in each projection fibre after removing a fibrewise nowhere dense closed subset of the factors",
+   "results": "OK 8 hit(s); logged returned names/files: [\"DenseRange.piMap\", \"dense_pi\", \"Dense.prod\", \"IsDenseEmbedding.prodMap\", \"Dense.preimage\", \"dense_iInter_of_isOpen_nat\", \"DenseRange.prodMap\", \"IsDenseInducing.prodMap\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Dense\", \"fiber\"",
+   "results": "OK 0 hit(s); logged returned names/files: []",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"specializes\"",
+   "results": "OK 0 hit(s); logged returned names/files: []",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth finitely presented morphism of schemes and a quasi-compact open subscheme of the source, the set of base points where that open is not dense in the fibre is constructible",
+   "results": "OK 8 hit(s); logged returned names/files: [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"PrimeSpectrum.isConstructible_range_comap\", \"PrimeSpectrum.isConstructible_basicOpen\", \"AlgebraicGeometry.instIsDominant\\u03b9CoborderRange\", \"PrimeSpectrum.isConstructible_comap_image\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink a smooth scheme over a trait around every generic point of its special and generic fibres so a given dense open in its square is dense in all fibres of both projections",
+   "results": "OK 8 hit(s); logged returned names/files: [\"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsDominant\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map dominance, constructible images and topological products do not state the projection-fibre shrinking theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-birational-law-strictification",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 5.2 Proposition 2, proof, construction of T_1,T_2 and Omega_1,Omega_2 before defining U prime, printed pp.115-116 (PDF pp.121-122); uses 2.5 Lemma 1(a)",
+   "via": [
+    "lem-sfb-birational-law-strictification",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-product-projection-density-shrink",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Followed BLR 5.2 Proposition 2 using existing constructible codimension loci and existing DVR local rings at special-fibre generic points. Expanded the constructible-closure argument and checked both full projection fibres, restricted square, empty cases and retention of the full generic fibre. No new nodes or Mathlib leaves.",
+  "blueprint": "The current latest blueprint (main-20261024) has no projection-density counterpart. The inherited chain has no blueprint ancestor (tools/blueprint_refs.py ancestor prints None). This node remains a generic algebraic-geometric tool below the imported six-functor stability route; it realizes BLR 5.2 Proposition 2, construction of T_1,T_2 and the complements of their closures, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme/topology foundation used in the explicitly written BLR projection-density argument; the unit has no replacement for this foundational fact, and no six-functor route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-closed-immersion",
+  "def-weil-constructible-subset",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-pc-base-change",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-eb3e176aa",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-eb3e176aa (reviewer sub-agent of L); spot-checked: Statement is byte-identical to live (first split, no proof before, no new nodes, no cycle in the 429-node closure). BLR 5.2 Prop 2 has no local copy and the proof is by:agent and self-contained, so I checked each step against the cited statements and the BLR route. S1 smooth (proper-base-change (2)), qcqs and finite-presentation projections over a Noetherian X. S2 the last clause of the smooth-closed-fibre-codimension-locus lemma (c=1, C=P\\Z) gives exactly the parameters whose fibre is good; the bad locus T_i is constructible by closure under complements. S3 a generic point of a projection fibre over a component generic point of X_s has no proper generalization in P_s, so it lies in Z_s; checked by sobriety. S4 O_{X,xi} is a DVR by the unconditional local-ring clause of the smooth-trait spreading lemma (instantiated with identities). Its two primes map to xi and to one generic point of X_F; X_F=D(pi) is open. S5 is the closure argument of 005K, written out from the finite locally closed decomposition and correct. S6 smooth, separated and finite-type open; S7 density restricts to the open fibre A_{kappa(a)}; S8 T_i lies in the closed X_k, so A contains X_F. Small cases checked: X empty, field base, A^1 over a DVR with Z=P\\V(pi,x_1) (shrinking really needed), mixed-dimension fibres. No duplicate found (rg -L over dag/nodes). Batch-5: lem-trf-generic-fibre-dimension-neighborhood (Stacks 05F7) and lem-trf-flat-module-torsionfree-domain (flat implies torsion-free over a domain) are generic algebra. They are not part of the trace formula or Poincare duality and neither assumption gives them, so they are accepted. tool_uses are generic foundations, accepted. No changes."
+ }
+}

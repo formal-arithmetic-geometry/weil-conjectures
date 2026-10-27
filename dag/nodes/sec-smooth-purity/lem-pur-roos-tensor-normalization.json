@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-roos-tensor-normalization",
+ "kind": "statement",
+ "title": "Tensor comparison normalized by the actual derived-limit units",
+ "statement": "Let A and B be abelian categories with countable products and inverse-tower limits, derived categories for both categories and their inverse-tower categories, and K-injective resolutions of towers [def-weil-abstract-derived-category]. Assume the two ordinary limit functors are additive. Let F:A→B be additive, exact, and preserve inverse-tower limits, and suppose its termwise tower functor T is exact and preserves K-injective complexes. Let κA and κB identify the strict Roos functors [def-weil-strict-roos-model] with the actual total right-derived limits, normalized by the ordinary-limit inclusions and the universal right-derived units through the canonical degreewise limit-cone isomorphisms. Let θ be the canonical additive Roos map [lem-pur-roos-comparison-horizontal-coherence]. Let τ be the composite of the inverse exact-postcomposition derived comparison, the derived ordinary limit-preservation isomorphism, and the exact-precomposition derived comparison. Then, on every strict tower complex K, F on the derived category applied to κA(K), followed by τ at QK, equals the exact-functor localization factor at Roos(K), followed by Qθ(K), followed by κB(TK), followed by the target derived limit applied to the inverse localization factor of T. This is equality of the specified morphisms; no invertibility of the countable product comparison is needed.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "lem-pur-roos-comparison-horizontal-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), ordinary-limit inclusion and product-cone model. Agent-written normalized tensor comparison for Step 4 of lem-pur-compact-support-scalar-limit-reduction; the source does not state this full auxiliary."
+ },
+ "proof": [
+  {
+   "text": "The canonical additive Roos comparison carries the mapped ordinary-limit inclusion to limit.post followed by the target ordinary-limit inclusion. Its augmentation coordinate formula in [lem-pur-roos-comparison-horizontal-coherence] gives (0,Fπ). The universal property of the target limit identifies the second coordinate, including zero complexes and zero functors.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using the degreewise limit-cone isomorphism of [lem-sf-strict-roos-derived-limit-comparison], compose with every limit projection in each degree. The resulting equation is the defining projection formula for preservesLimitIso. Therefore limit.post commutes with the cochain realization of the ordinary limit-preservation isomorphism.",
+   "uses": [
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the full unit equation for the three defining derived-composite factors of τ. The right-derived-natural-transformation equations and exact-functor localization factors yield the normalized square [lem-pur-derived-square-normalization-naturality]. On a K-injective tower the source derived unit is invertible. Thus its Roos inclusion is invertible by the assumed normalization of κA. Cancel its image under derived F, use the ordinary inclusion square and degreewise limit comparison from the preceding steps, and apply the normalization of κB. This proves the required equality on K-injectives.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both sides form natural transformations, by the naturality of the additive Roos comparison in [lem-pur-roos-comparison-horizontal-coherence]. Choose a quasi-isomorphism from any complex to a K-injective resolution [def-weil-abstract-derived-category]. The target transformation functor inverts that quasi-isomorphism. Naturality and cancellation extend the equality from the K-injective resolution to the original complex.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-pur-derived-square-normalization-naturality",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stage 3 B3, 2026-10-27: fully proved abstract calculation for the tensor normalization clause of the parent. The private proof of the canonical composite unit normalization reuses the already proved tensorSquare_normalized calculation from ScalarLimitTensorComposition, without importing that consumer or changing its module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving countable products commutes with the Roos complex and derived inverse limit, compatibly with the derived functor units",
+   "results": "8 hits, including mapDerivedCategoryFactors and mapDerivedCategoryFactorsh_hom_app. None states the Roos/derived-limit normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing project Roos construction and derived-functor unit APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "12 hits, including piComparison_comp_π and map_lift_piComparison; these supply the canonical product-coordinate identities.",
+   "date": "2026-10-27",
+   "verdict": "Useful coordinate lemmas; no complete Roos/derived-limit normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompMapDerivedCategoryIso|roosAdditiveComparison",
+   "results": "0 hits in the msearch Mathlib grep. The adopted source library has the derived composition isomorphisms, and Sheaf has the strict additive Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib theorem for the full comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 (Qbar-stage), independence of finite coefficient-extension models; auxiliary scalar-limit proof Step 4, normalization of the tensor/product comparison.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RoosTensorNormalization",
+  "file": "lean/Sheaf/CategoryTheory/RoosTensorNormalization.lean",
+  "declaration": "CategoryTheory.RoosTensor.roosTensorNormalization",
+  "declarations": [
+   "CategoryTheory.RoosTensor.roosTensorNormalization"
+  ],
+  "statement": "theorem roosTensorNormalization\n    (κA : roosF (A := A) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙\n      (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor)\n    (κB : roosF (A := B) ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙\n      (lim : (ℕᵒᵖ ⥤ B) ⥤ B).rightDerivedFunctor)\n    (hA : ∀ K, DerivedCategory.Q.map (roosι K) ≫ κA.hom.app K =\n      DerivedCategory.Q.map\n        (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval K.asFunctor,\n          HomologicalComplex.isLimitConeOfHasLimitEval K.asFunctor⟩).hom ≫\n        (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctorUnitQ K)\n    (hB : ∀ K, DerivedCategory.Q.map (roosι K) ≫ κB.hom.app K =\n      DerivedCategory.Q.map\n        (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval K.asFunctor,\n          HomologicalComplex.isLimitConeOfHasLimitEval K.asFunctor⟩).hom ≫\n        (lim : (ℕᵒᵖ ⥤ B) ⥤ B).rightDerivedFunctorUnitQ K)\n    (K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :\n    let T := (Functor.whiskeringRight ℕᵒᵖ A B).obj F\n    let τ := (Functor.rightDerivedFunctorCompMapDerivedCategoryIso\n      (lim : (ℕᵒᵖ ⥤ A) ⥤ A) F).symm ≪≫\n      Functor.rightDerivedFunctorNatIso (preservesLimitNatIso (J := ℕᵒᵖ) F) ≪≫\n      Functor.mapDerivedCategoryCompRightDerivedFunctorIso T\n        (lim : (ℕᵒᵖ ⥤ B) ⥤ B)\n    F.mapDerivedCategory.map (κA.hom.app K) ≫ τ.hom.app (DerivedCategory.Q.obj K) =\n      F.mapDerivedCategoryFactors.hom.app (roosF.obj K) ≫\n        DerivedCategory.Q.map (roosAdditiveComparison F K) ≫\n        κB.hom.app ((roosTowerAction F).obj K) ≫\n        (lim : (ℕᵒᵖ ⥤ B) ⥤ B).rightDerivedFunctor.map\n          (T.mapDerivedCategoryFactors.inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T094336-L-216544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T094336-L-216544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

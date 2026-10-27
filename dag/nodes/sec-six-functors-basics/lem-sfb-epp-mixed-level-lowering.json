@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-epp-mixed-level-lowering",
+ "kind": "statement",
+ "title": "Mixed level lowering",
+ "statement": "Let $p$ be prime and let $A\\to B\\to C$ be injective local maps of complete discrete valuation rings [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring], with fraction fields $K\\subseteq L\\subseteq M$ [def-pc-field-extension], and $M/L$ finite. Write $k_R=R/\\mathfrak m_R$ for a residue field. Assume $\\mathfrak m_AB=\\mathfrak m_B$ and $\\operatorname{char}(k_A)=p$. For any injective local map $R\\to S$ of discrete valuation rings with fraction fields $E\\subseteq Q$ and finite field extension $E'/E$, let $R'$ be the integral closure of $R$ in $E'$ and $S'$ that of $S$ in $(Q\\otimes_E E')_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. Call $E'/E$ a weak solution if, for every maximal ideal $q$ of $S'$, its contraction $n$ in $R'$ is maximal, $R'_n,S'_q$ are discrete valuation rings, and $nS'_q=qS'_q$ [def-weil-pbc-localization-at-prime]. Reduction is quotient by nilpotents; finite means finite-dimensional; local means pulling back the maximal ideal. For a finite extension $K_1/K$ put $A_1=\\operatorname{IntCl}_{{K_1}}(A)$, $L_1=(L\\otimes_KK_1)_{\\mathrm{red}}$, $M_1=(M\\otimes_KK_1)_{\\mathrm{red}}$, and let $B_1,C_1$ be the integral closures of $B,C$ in these reduced algebras [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. A finite separable extension is totally ramified with respect to a complete DVR when its integral closure is a DVR with unchanged residue field and ramification index equal to the field degree; the ramification index $e$ is defined by $\\mathfrak m_R S=\\mathfrak m_S^e$. A field extension is normal if every irreducible polynomial over the base with a root in the extension splits there. If $B$ contains a primitive $p$th root of unity $\\zeta$, put $w=1-\\zeta$ and $P(Z)=((1+wZ)^p-1)/w^p\\in L[Z]$. For a degree-$p$ extension $M/L$ of mixed characteristic, finite level means that some generator $z$ has $\\xi=P(z)\\in L$ and $w^p\\xi\\in\\mathfrak m_B$. Its level is the minimum of $\\max(0,-v_B(P(z)))/v_B(w)$ over such generators with $P(z)\\in L$, where $v_B$ is the integer valuation taking a uniformizer to $1$ (and $v_B(0)=+\\infty$). Assume $\\operatorname{char}(K)=0$, $B$ contains a primitive $p$th root of unity, $M/L$ has finite level $l>0$, and $k_A=\\bigcap_{n\\geq0}k_B^{p^n}$ inside $k_B$. There is a finite separable totally ramified $K_1/K$ such that either it is a weak solution for $A\\to C$, or $L_1,M_1$ are fields, $\\mathfrak m_{A_1}B_1=\\mathfrak m_{B_1}$, and $M_1/L_1$ has finite level $l'\\leq\\max(0,l-1,2l-p)$ [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F5, lemma-lowering-the-level, including its definition of level immediately before the lemma."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-epp-coefficient-constants-rigidity]. Thus $k_A$ is perfect and $\\zeta\\in A$, so $w,P$ are defined over $K$. Choose the common uniformizer $\\pi$ of $A,B$, put $e=v_B(w)>0$, and choose a generator $z$ attaining the minimum level. Write $\\xi=P(z)\\in L$ and $n=-v_B(\\xi)=el>0$. The finite-level condition and minimality give $n<pe$. Put $h=\\max(0,l-1,2l-p)$ and $m=n-eh=\\min(n,e,pe-n)$. These are integers with $m\\geq1$.",
+   "uses": [
+    "lem-sfb-epp-coefficient-constants-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F5, opening and the definition of level preceding it; descent of the coefficient root by constants rigidity."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-epp-truncated-pole-normal-form] with these $n,m,\\xi$. In each alternative set $z_c=z+c+wzc$. The identity and estimates of [lem-sfb-epp-kummer-pole-calculus] give $P(z_c)=\\eta:=\\xi+P(c)+w^p\\xi P(c)$ and $1+wc\\ne0$. In alternative (i), $z_c$ still generates $M/L$. In alternative (ii), $z_c$ generates the base-changed algebra over $L_r$, since $z=(z_c-c)/(1+wc)$. In both alternatives $P(c)$ and $\\eta$ have pole at most $n$, measured using $v(\\pi)=1$. Apply [lem-per-complete-dvr-finite-normalization] to $B\\to C$: $C$ is the integral closure of $B$ in $M$, and is finite over $B$. Thus, in every subsequent base-changed algebra, integral closure from $C$ equals that from $B$: integrality over $B$ implies integrality over $C$, and the converse follows by transitivity since $C$ is integral over $B$.",
+   "uses": [
+    "lem-sfb-epp-truncated-pole-normal-form",
+    "lem-sfb-epp-kummer-pole-calculus",
+    "lem-per-complete-dvr-finite-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F5, reduction by translations and final uniformizer-root calculation."
+   }
+  },
+  {
+   "text": "First take alternative (i). Minimality of $n$ implies $v_B(\\eta)=-n$, so the displayed $a\\in A$ is a unit. If $p\\mid n$, perfectness gives $a=a_0^p+\\pi a_1$ with $a_0,a_1\\in A$. Put $b=-a_0\\pi^{-n/p}$. Translate $z_c$ by $b$ once more. By [lem-sfb-epp-kummer-pole-calculus], the new parameter is congruent to $\\eta+b^p-b$ modulo $\\pi^{-n+m}B$. Its leading residue cancels, since in characteristic $p$ the residue of $(-a_0)^p$ equals $-\\bar a$. Also $n/p<n$ and $m\\geq1$. The new parameter therefore has valuation greater than $-n$, contradicting minimality. Consequently $p\\nmid n$.",
+   "uses": [
+    "lem-sfb-epp-kummer-pole-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F5, case J empty, minimality argument."
+   }
+  },
+  {
+   "text": "Choose a root $y$ of $P(Y)=-\\pi^{-n}a$ and set $K_1=K(y)$. The parameter has pole $n<pe$ and unit leading coefficient. By [lem-sfb-epp-kummer-branch-classification], $K_1/K$ is separable of degree $p$ and totally ramified. Apply [lem-sfb-epp-totally-ramified-base-change]: $L_1$ is a field and $B_1$ is a complete DVR weakly unramified over $A_1$. In the $\\pi$-normalized valuation of $L_1$, the monic integral polynomial $P$ gives $v(y)=-n/p$: if $v(y)<0$ its leading term has strictly smallest valuation, and $v(y)\\geq0$ would make $P(y)$ integral. Hence $1+wy\\ne0$.",
+   "uses": [
+    "lem-sfb-epp-kummer-branch-classification",
+    "lem-sfb-epp-totally-ramified-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09F3 (B), 09ER; Tag 09F5, constant principal-part extension."
+   }
+  },
+  {
+   "text": "The element $z_c+y+wz_cy$ generates $M\\otimes_KK_1$ over $L_1$. Its parameter is $\\delta=\\eta-\\pi^{-n}a-w^p\\eta\\pi^{-n}a$. The first two terms differ by an element of $\\pi^{-n+m}B_1$, and the last term has valuation at least $pe-2n\\geq-n+m$ by [lem-sfb-epp-kummer-pole-calculus]. Thus $v_{B_1}(\\delta)\\geq-p(n-m)$ and $v_{B_1}(w)=pe$. Apply [lem-sfb-epp-kummer-branch-classification]. If the algebra splits, every normalized branch is $B_1$, giving a weak solution. Otherwise it is a degree-$p$ field extension, with finite level at most $p(n-m)/(pe)=h$. This proves the required alternative in case (i).",
+   "uses": [
+    "lem-sfb-epp-kummer-pole-calculus",
+    "lem-sfb-epp-kummer-branch-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F5, case J empty, final parameter estimate; Tag 09F3, normalized branches."
+   }
+  },
+  {
+   "text": "Now take alternative (ii), and use its $K_r$ as $K_1$. Its stated degree and normalization show that it is finite separable totally ramified; $L_r$ is a field and $A_r\\to B_r$ is weakly unramified. Write $q=p^r$. The translated parameter has pole at most $nq<peq$ and $v_r(w)=eq$. By [lem-sfb-epp-kummer-branch-classification], its algebra is split or a degree-$p$ field. If split, every normalized branch is $B_r$, giving a weak solution. In the field case with $v_r(\\eta)\\geq-(n-m)q$, its finite level is at most $(n-m)q/(eq)=h$. In the remaining case $p\\mid d$ and the leading residue is not a $p$th power, so the same classification gives ramification index one over $B_r$, again a weak solution. The identification of integral closures in step 2 shows that these branch conclusions concern the stated $C_1$. In each weak-solution case, the maximal-ideal equality composes: $\\mathfrak m_{A_1}C_{1,q}=\\mathfrak m_{B_1}C_{1,q}=\\mathfrak m_{C_{1,q}}$.",
+   "uses": [
+    "lem-sfb-epp-truncated-pole-normal-form",
+    "lem-sfb-epp-kummer-branch-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F5, final paragraph, alternatives after telescoping; Tag 09F3 (C)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-epp-coefficient-constants-rigidity",
+  "lem-sfb-epp-truncated-pole-normal-form",
+  "lem-sfb-epp-kummer-pole-calculus",
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-sfb-epp-kummer-branch-classification",
+  "lem-sfb-epp-totally-ramified-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F5, lemma-lowering-the-level; corrected field labels, signs and exponents recorded in report.md. Constants descent fills an implicit coefficient-field point using Tag 09E8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A degree p mixed characteristic extension of finite level l over a weakly unramified coefficient DVR has level at most max zero l minus one and twice l minus p after finite separable totally ramified coefficient extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.inertiaDeg_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. If $ p \\neq 0 $ and there are no zero divisors in the scalar multiplication fro\"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.trans\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h₁ : IsUnramifiedAtInfinitePlaces k K] [h₂ : IsUnramifiedAtInfinitePlaces K F], IsUnramifiedAtInfinite\", \"doc\": \"If the field extensions $ K/k $ and $ F/K $ are both unramified at all infinite places, then the composite extension $ F/k $ is also unramified at all infinite places. This means that the property of \"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"NumberField.InfinitePlace.isUnramified_iff_mult_le\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra k K]\\n  {w : NumberField.InfinitePlace K},\\n  NumberField.InfinitePlace.IsUnramified k w ↔ w.mult ≤ (w.comap (algebraMap k K)).mult\", \"doc\": \"For a number field $ K $ and its subfield $ k $, an infinite place $ w $ of $ K $ is unramified over $ k $ if and only if the multiplicity of $ w $ is less than or equal to the multiplicity of the ind\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.top\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h : IsUnramifiedAtInfinitePlaces k F], IsUnramifiedAtInfinitePlaces K F\", \"doc\": \"If the field extension $ k/F $ is unramified at all infinite places, then the extension $ K/F $ is also unramified at all infinite places. This means that the property of being unramified in archimede\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: degree and ramification-index bounds do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epp ramification level lowering inequality for a Kummer extension with residue perfect core equal the coefficient residue",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}\n  {\"name\": \"Ideal.ramificationIdx_lt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] {f : R →+* S} {p : Ideal R} {P : Ideal S} {n : ℕ},\\n  ¬Ideal.map f p ≤ P ^ n → Ideal.ramificationIdx f p P < n\", \"doc\": \"Given a ring homomorphism $ f $, prime ideals $ p $ and $ P $, if the image of $ p $ under $ f $ is not contained in the $ n $-th power of $ P $, then the ramification index of $ f $ with respect to $\"}\n  {\"name\": \"Ideal.ramificationIdx_algebra_tower\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] [IsDedekindDomain S]\\n  [IsDedekindDomain T] {p : Ideal R} {P : Ideal S} {Q : Ideal T} [hpm : P.I\", \"doc\": \"In a tower of Dedekind domain extensions $ R \\\\subseteq S \\\\subseteq T $, if $ \\\\mathfrak{p} \\\\subseteq R $, $ \\\\mathfrak{P} \\\\subseteq S $, and $ \\\\mathfrak{Q} \\\\subseteq T $ are prime ideals with $ \\\\mathfra\"}\n  {\"name\": \"Ideal.ramificationIdxIn_eq_ramificationIdx\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B],\\n  p.ramificationIdxIn B = Ideal.\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $A$ and a ring extension $A \\\\to B$, the ramification index of $\\\\mathfrak{p}$ in $B$ (defined as the supremum of all natural numbers $n$ such that\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial ℤ}\\n  (hQ : Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificati\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there exists a canonical equivalence between the set of prime ideals of $\"}\n  {\"name\": \"Ideal.ramificationIdxIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [IsDedekindDomain B]\\n  {p : Ideal A} [p.IsPrime], p ≠ ⊥ → ∀ [IsDomain A] [Module.IsTorsionFree A B], \", \"doc\": \"Let $ A $ be an integral domain and $ B $ a Dedekind domain that is torsion-free as an $ A $-module. For any non-zero prime ideal $ \\\\mathfrak{p} $ of $ A $, the ramification index of $ \\\\mathfrak{p} $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: degree and ramification-index bounds do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A degree p mixed characteristic extension of finite level l over a weakly unramified coefficient DVR has level at most max zero l minus one and twice l minus p after finite separable totally ramified coefficient extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Field.finInsepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": ℕ\", \"doc\": \"The finite inseparable degree of the field extension $ E $ over $ F $, defined as the finite rank of $ E $ as a module over the separable closure of $ F $ in $ E $, where infinite ranks are assigned t\"}\n  {\"name\": \"IsPurelyInseparable.elemExponent_le_of_pow_mem\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"{a : L} {n : ℕ} (h : a ^ ringExpChar K ^ n ∈ (algebraMap K L).range) : elemExponent K a ≤ n\", \"doc\": \"For a purely inseparable element $ a $ over a field $ K $, if $ a^{p^n} $ lies in the image of the canonical embedding $ K \\\\to L $, where $ p $ is the exponential characteristic of $ K $, then the ele\"}\n  {\"name\": \"Field.instNeZeroSepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": NeZero (sepDegree F E)\", \"doc\": \"The separable degree of a field extension $ E/F $ is non-zero.\"}\n  {\"name\": \"IsPurelyInseparable.instOfHasExponent\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"[HasExponent K L] : IsPurelyInseparable K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ has a purely inseparable exponent $ n $, meaning that for every element $ \\\\alpha \\\\in L $, $ \\\\alpha^{p^n} $ lies in $ K $, where $ p $ is the character\"}\n  {\"name\": \"IsPurelyInseparable.elemExponent_def\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"(a : L) : a ^ ringExpChar K ^ elemExponent K a ∈ (algebraMap K L).range\", \"doc\": \"For any element $a$ in a purely inseparable field extension $L$ over $K$, there exists a minimal natural number $n$ such that $a^{p^n}$ lies in the image of the canonical embedding $K \\\\to L$, where $p\"}\n  {\"name\": \"IntermediateField.isPurelyInseparable_tower_top\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F K] : IsPurelyInseparable M K\", \"doc\": \"If the field extension $ K $ over $ F $ is purely inseparable, then the extension $ K $ over any intermediate field $ M $ (where $ F \\\\subseteq M \\\\subseteq K $) is also purely inseparable. This means e\"}\n  {\"name\": \"IsPurelyInseparable.hasExponent_of_finiteDimensional\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"[IsPurelyInseparable K L] [FiniteDimensional K L] : HasExponent K L\", \"doc\": \"If $ L $ is a finite-dimensional purely inseparable field extension of $ K $, then $ L $ has a purely inseparable exponent. That is, there exists an integer $ n $ such that for every element $ \\\\alpha \"}\n  {\"name\": \"FiniteField.instFiniteExtension_1\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Module.Finite k (Extension k p n)\", \"doc\": \"The finite field extension of degree $ n $ over $ k $ is finitely generated as a module over $ k $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: degree and ramification-index bounds do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsGalois",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: degree and ramification-index bounds do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.*level|ramification.*level|[Kk]ummer",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"829\", \"text\": \"-- `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` in `NumberTheory.KummerDedekind`\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerExtension\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"13\", \"text\": \"(We put these in a separate file because of the `KummerExtension` import.)\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean\", \"line\": \"52\", \"text\": \"$K^\\\\times / (K^\\\\times)^n$ by the long exact sequence from Kummer theory and Hilbert's theorem 90,\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"38\", \"text\": \"* In Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind:\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: degree and ramification-index bounds do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.*level|ramification.*level|epp",
+   "results": "Actual msearch log: {\"t\": \"2026-10-24T07:04:36Z\", \"tool\": \"grep\", \"query\": \"lower.*level|ramification.*level|epp\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"410a93be9a576780\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general ramification and field-theory results do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epp mixed characteristic degree p extension lowering the ramification level by a finite totally ramified coefficient extension",
+   "results": "Actual msearch log: {\"t\": \"2026-10-24T07:04:39Z\", \"tool\": \"leanfinder\", \"query\": \"Epp mixed characteristic degree p extension lowering the ramification level by a finite totally ramified coefficient extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.ramificationIdx_algebra_tower\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.ramificationIdx_tower\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\"], \"digest\": \"9fa4fb31c302ba39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general ramification and field-theory results do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epp theorem lower finite level Kummer extension of mixed characteristic discrete valuation fields",
+   "results": "Actual msearch log: {\"t\": \"2026-10-24T07:08:08Z\", \"tool\": \"leansearch\", \"query\": \"Epp theorem lower finite level Kummer extension of mixed characteristic discrete valuation fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.termK[_√_]\", \"finiteExts\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"NumberField.InfinitePlace.even_finrank_of_not_isUnramified\", \"IntermediateField.finInsepDegree_bot'\", \"Field.finInsepDegree_mul_finInsepDegree_of_isAlgebraic\", \"IsUnramifiedAtInfinitePlaces.bot\"], \"digest\": \"10d1dd614ae2f29a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general ramification and field-theory results do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epp truncated pole normal form using Cohen residue sections and telescoping p power chains",
+   "results": "Actual msearch log: {\"t\": \"2026-10-24T07:10:59Z\", \"tool\": \"leansearch\", \"query\": \"Epp truncated pole normal form using Cohen residue sections and telescoping p power chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.trunc_succ\", \"PowerSeries.trunc_one_left\", \"PowerSeries.trunc_coe_eq_self\", \"PowerSeries.trunc_trunc_of_le\", \"MvPowerSeries.trunc'_trunc'_pow\", \"Polynomial.trunc_toLaurent\", \"PowerSeries.trunc_trunc_pow\", \"MvPowerSeries.trunc'_expand\"], \"digest\": \"f29881c39bdebe9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general ramification and field-theory results do not give the finite-level lowering inequality."
+  },
+  {
+   "tool": "grep",
+   "query": "principal.?part|pole.*normal|ArtinSchreier|Epp",
+   "results": "Actual msearch log: {\"t\": \"2026-10-24T07:11:00Z\", \"tool\": \"grep\", \"query\": \"principal.?part|pole.*normal|ArtinSchreier|Epp\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"410a93be9a576780\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general ramification and field-theory results do not give the finite-level lowering inequality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-finite-coefficient-triple",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F5, lemma-lowering-the-level, including its definition of level immediately before the lemma.",
+   "via": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-mixed-level-lowering",
+  "worker": "stage1",
+  "summary": "Followed 09F5 through a truncated pole normal form, then proved the constant principal-part and nonconstant cases with explicit valuation estimates. Reused 09ER, extracted four strictly smaller algebra inputs, checked actual search results and corrected source slips without changing the item statement.",
+  "blueprint": "Historical auxiliary Epp branch recorded in blueprint.from; latest direct-image proof (3) no longer states this algebra input. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-per-complete-dvr-finite-normalization",
+    "why": "Identifies the given complete upper DVR C with the finite normalization of B in M, so branch classification applies to the C1 in the item; the unit has no such valuation-theoretic normalization statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-complete-dvr-finite-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NE-e2fff97d0",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-e2fff97d0 (reviewer sub-agent of L); spot-checked: Read Stacks 09EZ, 09F2, 09F3, the level definition and all of 09F5 (more-algebra.tex l.34747-35365), the item, all four new nodes and every cited statement. Item statement unchanged; it matches 09F5 (1)-(5) plus the completeness the parent supplies. Steps: (1) constants-rigidity gives k_A perfect and zeta in A; m=n-eh=min(n,e,pe-n)>=1, checked on small cases. (2) normal form at these n,m; group law; 1+wc!=0; lem-per-complete-dvr-finite-normalization's uniqueness clause makes C the integral closure of B, so IntCl(C,.)=IntCl(B_1,.). (3) minimality forces p not dividing n; the residue cancellation holds also for p=2. (4) the classification's p-not-dividing-d case makes K_1 totally ramified; the hypotheses of 09ER hold; v(y)=-n/p. (5) v_{B_1}(delta)>=-p(n-m), so split gives a weak solution and a field gives level<=h. (6) K_r: split gives a weak solution; the first valuation alternative gives level<=h; p|d with non-p-th-power residue gives index one and a weak solution. New nodes checked true: constants rigidity (finite intermediate field: index 1, residue field = k via the separable p^s-power argument, then 09E8), pole calculus (09F2 shape, v(p)=(p-1)e, valuation bounds), Kummer classification (unit 1+w^p eta, etale when eta integral, valuation of the root, U=t^{d/p}T reduction to U^p-a), truncated normal form (whole J-induction and root-adjunction calculus, including cross terms (p-1)e-n>=m-n and composition of translations). None is a duplicate (rg for 09F2/09F3/09F5/09EZ) or a restatement of the item. Tool use accepted: lem-per-complete-dvr-finite-normalization, generic complete-DVR algebra already cited by about ten sfb nodes. Batch 5: lem-trf-localization-maximal-contraction is a Mathlib leaf (Localization.AtPrime.under_maximalIdeal), outside both assumptions, so acceptable. Artin-Gabber finding: lem-per-complete-dvr-finite-normalization is used at step 2 only as pure algebra (09F8/09EM/032W Nagata), with none of the excluded tools, so justified. No fixes."
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-pur-intrinsic-scalar-normalization-formulas",
+ "kind": "statement",
+ "title": "Ordinary and integral image formulas for the intrinsic scalar compositor",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, an arbitrary scheme $Y$, and finite coefficient subfields $E\\le L\\le M$ of $\\Omega$ [def-weil-l-adic-numbers, def-weil-algebraic-closure, def-weil-finite-subextension-directed-set]. Use the specified small coefficient models and their conjugated inclusions [lem-route-coefficient-inclusion-laws]; the universe of $Y$ is independent of that of $\\Omega$. For each $F$ let $R_F=\\widehat{\\mathcal O}_{F,Y}$ be the completed coefficient sheaf [def-weil-completed-integral-coefficients], let $\\mathcal D_F=D(\\operatorname{Mod}(R_F))$ [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category], and let $I_F:\\mathcal I_F\\hookrightarrow\\mathcal D_F$ be the full intrinsic integral constructible inclusion [def-weil-derived-complete-integral-detailed], with inherited coherent shifts and inclusion comparison $\\beta_{F,n,Z}:I_F(Z[n])\\cong(I_F Z)[n]$ [lem-weil-integral-constructible-triangulated]. It is fully faithful.\n\nWrite $U_{FL}:\\mathcal I_F\\to\\mathcal I_L$ for the actual restricted completed scalar extension [def-weil-integral-scalar-extension] with characteristic proof parameter zero, and $Q_F:\\mathcal I_F\\to C_F=\\mathcal I_F[1/\\varpi_F]$ for raw rationalization [def-weil-rationalization-karoubi]. Use the actual rational transitions $T_{FL}$ and normalized integral shifts $\\tau_{FL,n}$ of [lem-general-algebraically-closed-coefficient-stages]. Let $\\chi_{FL}:C_{FL}^{\\mathrm{ord}}I_F\\cong I_LU_{FL}$ be the specified sfIntegralOrdinaryComparison [def-zl-normalized-integral-scalar-comparison], where $C_{FL}^{\\mathrm{ord}}$ is ordinary derived extension of $R_F\\to R_L$. Ordinary extension $M\\mapsto M\\otimes_{R_F}R_L$ on module sheaves (the change of rings of [def-pur-sheaf-tensor-product]) is additive and exact, and $C_{FL}^{\\mathrm{ord}}$ is its exact termwise induced derived functor [lem-weil-pbc-exact-functor-derived-factorization]. Its associator $\\alpha:C_{LM}^{\\mathrm{ord}}C_{EL}^{\\mathrm{ord}}\\cong C_{EM}^{\\mathrm{ord}}$ is the inverse exact-derived composition comparison followed by the derived image of ordinary balanced tensor multiplication; on ordinary local tensor generators this multiplication is $c\\otimes(b\\otimes x)\\mapsto c\\,j(b)\\otimes x$, where $j:R_L\\to R_M$ is the coefficient map.\n\nThe following are identities for the specified constructions, with composition read right to left. If $b:U_{LM}U_{EL}\\cong U_{EM}$ is the specified sfIntegralScalarComp [lem-weil-scalar-extension-composition], followed by the coefficient-inclusion composition equality, then\n$$I_M(b_K)=\\chi_{EM,K}\\circ\\alpha_{I_EK}\\circ C_{LM}^{\\mathrm{ord}}(\\chi_{EL,K}^{-1})\\circ\\chi_{LM,U_{EL}K}^{-1}.$$\nWriting $h_{FL,n,K}:C_{FL}^{\\mathrm{ord}}I_F(K[n])\\cong(C_{FL}^{\\mathrm{ord}}I_FK)[n]$ for the composite ordinary derived and inclusion comparison, the prescribed integral shift satisfies\n$$\\beta_{L,n,U_{FL}K}\\circ I_L(\\tau_{FL,n,K})=\\chi_{FL,K}[n]\\circ h_{FL,n,K}\\circ\\chi_{FL,K[n]}^{-1}.$$\nFinally, the specified rational associator $a_{ELM}$ of [lem-general-algebraically-closed-coefficient-stages] has\n$$a_{ELM,Q_EK}=Q_M(b_K).$$\nThese identities are interpreted after the actual endpoint equalities for the rational functors and for the composed coefficient inclusions, equivalently by heterogeneous equality. They hold for all integral objects $K$, for every $n\\in\\mathbf Z$, and also when indices repeat. There is no finite-field datum, geometric base-field, invertibility, dimension or Noetherian assumption on $Y$, and no idempotent completion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Exact derived scalar composition; intrinsic normalization in SfScalarExtensionComposition.lean:823-850, 977-1020 and GeneralAlgebraicallyClosedCoefficientStages.lean:266-300, 538-586."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "lem-route-coefficient-inclusion-laws",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-zl-normalized-integral-scalar-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Apply integralOrdinaryScalar_additive and integralOrdinaryScalar_exact to the specified coefficient inclusion. These existing declarations already establish additivity and preservation of finite limits and colimits for the actual ordinary scalar functor.",
+   "uses": [
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact derived scalar composition; intrinsic normalization in SfScalarExtensionComposition.lean:823-850, 977-1020 and GeneralAlgebraicallyClosedCoefficientStages.lean:266-300, 538-586."
+   }
+  },
+  {
+   "text": "Apply the chosen witness specification of integralOrdinaryScalarComp_existsUnique to N, V, c, b, x. Unfolding only the name integralOrdinaryScalarComp identifies its chosen isomorphism with the one in the statement, and gives exactly balanced multiplication.",
+   "uses": [
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact derived scalar composition; intrinsic normalization in SfScalarExtensionComposition.lean:823-850, 977-1020 and GeneralAlgebraicallyClosedCoefficientStages.lean:266-300, 538-586."
+   }
+  },
+  {
+   "text": "On the specified index models first generalize only the final coefficient map to an arbitrary kappa and the composition equality to e: j.comp i = kappa. Eliminate e, so the endpoint eqToIso becomes reflexive; simplify it and apply the chosen specification of sfIntegralScalarComp_existsUnique. The full-subcategory inclusion maps a morphism to its underlying morphism. Instantiate the proved private index_integral_transport lemma with the actual final inclusion and coefficientInclusion_laws. Keeping the field models fixed avoids expensive definitional conversions during specialization.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-route-coefficient-inclusion-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact derived scalar composition; intrinsic normalization in SfScalarExtensionComposition.lean:823-850, 977-1020 and GeneralAlgebraicallyClosedCoefficientStages.lean:266-300, 538-586."
+   }
+  },
+  {
+   "text": "integralTransitionCommShift is the chosen coherent shift from integralScalarCommShift_existsUnique. Its chosen witness specification evaluated at n and K is precisely the asserted heterogeneous identity, including the inherited inclusion comparison.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact derived scalar composition; intrinsic normalization in SfScalarExtensionComposition.lean:823-850, 977-1020 and GeneralAlgebraicallyClosedCoefficientStages.lean:266-300, 538-586."
+   }
+  },
+  {
+   "text": "On the specified index models generalize the final coefficient map to kappa, the composition equality to e: j.comp i = kappa, and the rational isomorphism to any a heterogeneously equal to scalarAssociator. Replace a by scalarAssociator using that equality, then eliminate e. Both endpoint eqToIso terms become reflexive. Expand scalarAssociator and the object map of the actual raw rationalization, and apply the chosen component specification of sfRationalScalarComp_existsUnique. Instantiate this private normalization lemma with the actual associator via associator_existsUnique and coefficientInclusion_laws. The actual endpoint transports and repeated indices are retained.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages",
+    "lem-weil-scalar-extension-composition",
+    "lem-route-coefficient-inclusion-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+    "place": "Exact derived scalar composition; intrinsic normalization in SfScalarExtensionComposition.lean:823-850, 977-1020 and GeneralAlgebraicallyClosedCoefficientStages.lean:266-300, 538-586."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-route-coefficient-inclusion-laws",
+  "lem-general-algebraically-closed-coefficient-stages"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md",
+  "place": "Existing chosen-witness specifications in IntegralScalarExtension.lean, ScalarExtensionComposition.lean, SfScalarExtensionComposition.lean and GeneralAlgebraicallyClosedCoefficientStages.lean; equality elimination with the index models fixed in the private normalization lemmas of IntrinsicScalarNormalizationFormulas.lean.",
+  "group": "M2",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The intrinsic completed integral scalar associator is the ordinary tensor associator conjugated by ordinary to completed comparisons and its rational version is its localization image",
+   "results": "8 hits: TensorProduct.tensorTensorTensorAssoc, TensorProduct.assoc_tensor'', TensorProduct.assoc_tensor', TensorProduct.assoc_tensor, TensorProduct.AlgebraTensorModule.assoc, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProduct_naturality, Algebra.TensorProduct.assoc_aux_1",
+   "date": "2026-10-27",
+   "verdict": "no match: tensor associators, monoidal localization, and ordinary adic completion do not state the component specifications of these intrinsic completed scalar constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ScalarLocalization\", \"NatIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: tensor associators, monoidal localization, and ordinary adic completion do not state the component specifications of these intrinsic completed scalar constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedIso|sfIntegralOrdinaryComparison|ScalarComp_existsUnique",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: tensor associators, monoidal localization, and ordinary adic completion do not state the component specifications of these intrinsic completed scalar constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A completed derived scalar compositor has the specified ordinary comparison conjugation formula and rationalization integral image formula",
+   "results": "8 hits: Derivation.coe_restrictScalars, fderivWithin_restrictScalars_comp, Derivation.instSMul.congr_simp, Derivation.restrictScalars_apply, AdicCompletion.instSMul.congr_simp, Derivation.restrictScalars.congr_simp, Derivation.coe_smul, Derivation.coe_to_linearMap_comp",
+   "date": "2026-10-27",
+   "verdict": "no match: tensor associators, monoidal localization, and ordinary adic completion do not state the component specifications of these intrinsic completed scalar constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After applying the fully faithful intrinsic inclusion the completed coefficient tensor compositor equals chi inverse, ordinary extension of chi inverse, ordinary associator, then chi; its rational component is tensor with one",
+   "results": "8 hits: CategoryTheory.Localization.Monoidal.tensor_comp, CategoryTheory.ObjectProperty.ι_δ, CategoryTheory.ObjectProperty.ιOfLE_δ, CategoryTheory.ObjectProperty.ιOfLE_μ, rTensor.inverse_comp_rTensor, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, AdicCompletion.tensor_map_id_left_eq_map, rTensor.inverse_of_rightInverse_comp_rTensor",
+   "date": "2026-10-27",
+   "verdict": "no match: tensor associators, monoidal localization, and ordinary adic completion do not state the component specifications of these intrinsic completed scalar constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chosen completed scalar extension compositor is conjugation of the ordinary derived tensor associator by quotient completion comparisons and its rationalization has the same components",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_id_comp_assoc, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module associators, adic module completion and generic fully faithful shift transport do not state the three fixed intrinsic scalar normalization identities. The generic shift hits are already represented by lem-pur-fully-faithful-composite-shift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ScalarLocalization\", \"NatIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module associators, adic module completion and generic fully faithful shift transport do not state the three fixed intrinsic scalar normalization identities. The generic shift hits are already represented by lem-pur-fully-faithful-composite-shift."
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntegralOrdinaryComparison|sfIntegralScalarComp|sfRationalScalarComp|normalized_shift_existsUnique",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module associators, adic module completion and generic fully faithful shift transport do not state the three fixed intrinsic scalar normalization identities. The generic shift hits are already represented by lem-pur-fully-faithful-composite-shift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral scalar extension composition is defined by conjugating ordinary derived tensor associativity and rationalization preserves its components",
+   "results": "8 hits: ModuleCat.extendScalarsComp, Algebra.Extension.Hom.comp, PolynomialLaw.comp_toFun', ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', Valuation.HasExtension.instIsScalarTowerInteger, ModuleCat.extendScalars_assoc_assoc, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module associators, adic module completion and generic fully faithful shift transport do not state the three fixed intrinsic scalar normalization identities. The generic shift hits are already represented by lem-pur-fully-faithful-composite-shift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between functors into a fully faithful subcategory is obtained by conjugation with ordinary tensor comparison isomorphisms and compatible shifts",
+   "results": "8 hits: CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.Functor.CommShift.OfComp.iso, CategoryTheory.Functor.shiftFunctorIso_ofHasShiftOfFullyFaithful, CategoryTheory.Functor.CommShift.ofComp, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app, CategoryTheory.Functor.CommShift.ofComp_compatibility, CategoryTheory.Functor.FullyFaithful.hasShift.map_zero_inv_app, CategoryTheory.Functor.commShiftIso_eq_ofInduced",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module associators, adic module completion and generic fully faithful shift transport do not state the three fixed intrinsic scalar normalization identities. The generic shift hits are already represented by lem-pur-fully-faithful-composite-shift."
+  },
+  {
+   "tool": "grep",
+   "query": "def extendScalarsComp|theorem extendScalars_assoc|def ofComp|map_iso_hom_app",
+   "results": "3 hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary module associators, adic module completion and generic fully faithful shift transport do not state the three fixed intrinsic scalar normalization identities. The generic shift hits are already represented by lem-pur-fully-faithful-composite-shift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-intrinsic-associator-shift-square",
+  "date": "2026-10-27",
+  "group": "NC"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 common-stage shift clause: normalization formulas for the intrinsic tensor associator and integral transition shift, required when shifting a common-stage representative.",
+   "via": [
+    "lem-pur-intrinsic-associator-shift-square",
+    "lem-pur-general-pair-shift-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-intrinsic-scalar-normalization-formulas",
+  "worker": "stage1",
+  "summary": "Kept the full statement and its hypotheses. Proved ordinary exactness and balanced-tensor descent, expanded the specified full-faithful compositor lift and normalized shift using two existing Mathlib leaves, and verified the actual rational component by pure-tensor naturality and equality transport. No new nodes and no attachment; inherited searches are retained with attribution in the report.",
+  "blueprint": "Retained order-1462 common-stage shift clause under def-weil-algebraically-closed-coefficients: supplies the intrinsic normalization input for lem-pur-intrinsic-associator-shift-square. Steps 1-3 realize the exact-derived scalar composition of current def-sfb-derived-extend-comp-iso.proof.md; step 4 specifies its ordinary-to-completed integral shift, and steps 5-6 retain the actual raw rational components and inclusion equalities. The current filtered-colimit model is det-def-sfb-filtered-two-colimit-model; no change to its unit route is made."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NR-7039c7f30",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-7039c7f30 (reviewer sub-agent of L); spot-checked: I read the item's statement and all six steps in full against the Lean constructions they name. Identity 1 matches sfIntegralScalarComp_existsUnique (SfScalarExtensionComposition.lean:823-850). α matches integralOrdinaryDerivedScalarComp (ScalarExtensionComposition.lean:671), which is compIso.symm followed by mapDerivedCategoryNatIso of the generator map c⊗(b⊗x)↦c·j(b)⊗x. Identity 2 matches integralScalarCommShift_existsUnique and normalized_shift_existsUnique (CommShift.ofComp with e=χ.symm, GeneralAlgebraicallyClosedCoefficientStages.lean:133-166, 266-304). Identity 3 matches scalarAssociator = sfRationalScalarComp followed by eqToIso, with the HEq of Q_M(b) (lines 538-580; SfScalarExtensionComposition.lean:977-1020). All directions check when read right to left. Small cases checked: repeated fields, K=0, n=0 and negative n, and the parameter p=0, which needs only ℓ≠0. Step by step: finite-free gives R_L ≅ R_F^d, so ordinary extension is exact and the exact-functor leaf applies. The balanced inverse is a two-sided inverse and the localization leaf's clause (2) lifts it. The fullyFaithfulCancelRight leaf gives identity 1. The CommShift.ofComp leaf formula, after substitution, gives identity 2, and the step proves uniqueness. Pure-tensor naturality gives identity 3, with equality elimination in step 6. Every cited statement says what its step takes. The unit route is OK; no tool_uses are needed. There are no new nodes and no cycle. A whole-DAG search found no duplicate. lem-route-integral-transition-comm-shift-exists-unique is the finite-field ∃! neighbour of identity 2 only, not a duplicate. FIX (B3): the statement names sfIntegralScalarComp but cited no node owning it. Its Lean owner, per the docstrings at lines 847 and 1016, is lem-weil-scalar-extension-composition, a split node of the same unit. I added that citation to the statement and to stmt_deps; it creates no cycle. Advisory: the source path goes through the moving literature/blueprint/latest symlink.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntrinsicScalarNormalizationFormulas",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.intrinsicIntegralScalarAssociator_image",
+  "declarations": [
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.intrinsicOrdinaryScalar_exact",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.intrinsicOrdinaryScalarComp_tensor",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.intrinsicIntegralScalarAssociator_image",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.intrinsicIntegralTransition_shift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.intrinsicRationalScalarAssociator_image"
+  ],
+  "file": "lean/Sheaf/Paper/IntrinsicScalarNormalizationFormulas.lean",
+  "statement": "theorem intrinsicIntegralScalarAssociator_image (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y) : HEq ((sfIntegralConstructible l (Coefficient.{u} l Ω M) Y).ι.map ((sfIntegralScalarComp l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω M) (coefficientInclusion l Ω L M k) ≪≫ eqToIso (congrArg (fun i ↦ sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω M) i Y) ((coefficientInclusion_laws l Ω).2 E L M h k))).hom.app K)) ((sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M) (coefficientInclusion l Ω L M k) Y).inv.app ((integralTransition l Ω Y E L h).obj K) ≫ (integralOrdinaryDerivedScalar l (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M) (coefficientInclusion l Ω L M k) Y).map ((sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y).inv.app K) ≫ (integralOrdinaryDerivedScalarComp l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y (Coefficient.{u} l Ω M) (coefficientInclusion l Ω L M k)).hom.app K.obj ≫ (sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω M) ((coefficientInclusion l Ω L M k).comp (coefficientInclusion l Ω E L h)) Y).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "All three specified normalization formulas, ordinary exactness and local tensor-generator multiplication, using the published intrinsic categories and actual canonical coefficient transports. The integral compositor b is written inline as sfIntegralScalarComp followed by eqToIso of the coefficient-inclusion composition law (the construction SfStrictDirectImageScalar.integralAssociator of def-sf-strict-direct-image-integral-coherence; not cited, so not redefined: maintainer review fix, H4). HEq retains endpoint identifications. Scheme universe u and closure universe v are independent.",
+  "fixed_by": "NT-stage2-cc-c91de76b5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c91de76b5",
+  "group": "NA",
+  "result": "fix",
+  "note": "Re-delivery c91de76b: the Lean is byte-identical to the returned head 237bd88e; the node differs from base only in lean. The 237b FIX was refused only for the whole-node <id>.json file name. Mathematics re-checked: identity 1 = sfIntegralScalarComp_existsUnique spec followed by eqToIso of coefficientInclusion_laws.2, as HEq; identity 2 = integralScalarCommShift_existsUnique predicate word for word, for all n : ℤ; identity 3 holds since associator is HEq to scalarAssociator = sfRationalScalarComp ≪≫ eqToIso, whose components are HEq to Q_M of sfIntegralScalarComp. No extra hypotheses; universes u and v independent; repeated indices, K=0, empty Y and n≤0 covered; all theorems sorry; docstrings OK; report has both required sections. FIX (H4): the helper intrinsicIntegralScalarAssociator duplicates SfStrictDirectImageScalar.integralAssociator (def-sf-strict-direct-image-integral-coherence, not cited) and FiniteRestrictionCoefficientCore.integralAssociator. It is removed and the composite inlined in the two statements. Fixes: IntrinsicScalarNormalizationFormulas.lean; <item>.lean-record.json (declarations without the helper; statement equal to the stage2_delivery.declarations() extraction; note updated); <item>.report.md with a correction section. nt_compile.py refused the path outside the side lean tree; a /tmp copy compiled clean with lcompile.py (10.6 s, exit 0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T112409-L-1579193",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

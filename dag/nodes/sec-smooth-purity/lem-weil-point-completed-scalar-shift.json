@@ -23,7 +23,8 @@
   "def-weil-integral-scalar-extension",
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-pc-kflat-resolution",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-completed-scalar-shift-coordinates"
  ],
  "proof": [
   {
@@ -260,20 +261,17 @@
   "module": "Sheaf.Paper.CompletedScalarShift",
   "declaration": "WeilConjectures.completedScalarComparison_commutesWithShift",
   "declarations": [
-   "WeilConjectures.completedScalarShiftLevelIso",
-   "WeilConjectures.completedScalarShiftProductIso",
-   "WeilConjectures.completedScalarShiftConeFormula",
    "WeilConjectures.completedScalarShiftChainEquation",
    "WeilConjectures.completedScalarShiftOrdinaryNormalization",
-   "WeilConjectures.completedScalarShiftIntegralNormalization",
    "WeilConjectures.completedScalarShiftRepresentativeProperty",
    "WeilConjectures.completedScalarComparison_commutesWithShift"
   ],
   "file": "lean/Sheaf/Paper/CompletedScalarShift.lean",
-  "statement": "theorem completedScalarComparison_commutesWithShift (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{t}) : ∃ (eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ) (eE : (completedDerivedScalarExtension l E L ι Y).CommShift ℤ) (eL : (integralScalarExtensionOfUniverses l E L ι Y).CommShift ℤ), completedScalarShiftRepresentativeProperty ι Y eC eE eL",
+  "statement": "theorem completedScalarComparison_commutesWithShift\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L]\n    [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{t}) :\n    ∃ (eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ)\n      (eE : (completedDerivedScalarExtension l E L ι Y).CommShift ℤ)\n      (eL : (integralScalarExtensionOfUniverses l E L ι Y).CommShift ℤ),\n      completedScalarShiftRepresentativeProperty ι Y eC eE eL",
   "branch": "newtargets-dag",
-  "by": "Q98",
-  "date": "2026-10-17"
+  "by": "NE",
+  "date": "2026-10-22",
+  "note": "Ownership extraction requested by the stage-2 return: the finite-level and product shift maps, cone-coordinate predicate, and strict normalization predicate now belong to def-pur-completed-scalar-shift-coordinates, publicly imported by this module. All names, signatures and bodies are unchanged. The three predicates used together by this theorem remain here; the theorem signature and every existing proof are unchanged."
  },
  "reviewed_proof": {
   "date": "2026-10-21",
@@ -285,5 +283,16 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

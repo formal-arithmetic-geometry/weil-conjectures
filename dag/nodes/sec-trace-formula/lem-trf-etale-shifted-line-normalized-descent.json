@@ -29,75 +29,46 @@
    }
   },
   {
-   "text": "Choose sheaves $P$ on $X$ and $Q$ on $S$ and isomorphisms $F[-m]\\cong P[0]$, $C[-m]\\cong Q[0]$, as the hypotheses allow. Fixed-coefficient inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]. Its termwise derived functor commutes with shifts and takes $Q[0]$ to $(a^*Q)[0]$ by [lem-sf-exact-functor-derived-triangulated]. Shift every given map by $[-m]$ and conjugate with these fixed isomorphisms. Full faithfulness of the single-complex functor [lem-weil-pbc-derived-single-fully-faithful] identifies the resulting maps, their compositions and their inverses with unique ordinary sheaf maps. Thus $\\theta$ becomes an isomorphism $\\vartheta:i_1^*P\\to Q$ and $\\lambda_i$ becomes an isomorphism $l_i:P|_{X_i}\\to a_i^*(Q|_{S_i})$ normalized by $i_1^*l_i=\\vartheta|_{S_i}$. These identifications commute with restriction: termwise inverse image of a single complex is the single complex of the inverse image, also on morphisms. The supplied inverse-image compositors are used throughout. Undoing the shift is an inverse equivalence, so all sheaf equalities proved below give precisely the required derived equalities.",
+   "text": "Apply [lem-trf-etale-shifted-line-comparison-existence] to obtain a normalized global comparison kappa with every prescribed local restriction.",
+   "uses": [
+    "lem-trf-etale-shifted-line-comparison-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express each local comparison followed by inverse base change as the pullback of kappa. Naturality of the derived pullback compositor shows that both overlap restrictions equal the pullback along their common composite. Taking inverses gives the inverse clause.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Shift C to its chosen degree-zero sheaf. Fullness of affine-line inverse image and full faithfulness of the single-complex functor make the derived pullback full on endomorphisms of C in that degree. Commutation with shifts gives the same lifting for C itself. The ratio of two normalized comparisons lifts to an endomorphism on the base. The section compositor identifies its section restriction with that base endomorphism, so normalization makes it the identity. This proves uniqueness among all normalized global comparisons.",
+   "uses": [
+    "new-lem-pur-etale-a1-pullback-full",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image and its single-complex comparison preserve the hypothesis that C lies in the specified single degree, after every base change. Reading the restriction of kappa at the section is the identity by sectionRestrictionIso_restrict and normalization. Apply the same full-on-endomorphisms rigidity over the new base to identify any normalized local comparison with that restriction. No etale hypothesis on that base change is needed for this final uniqueness argument.",
    "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XS, lemma-negative-exts, part (2); Tag 015F, lemma-right-derived-exact-functor; blueprint sk-thm-dnc.proof.md, opening paragraph: morphisms between these complexes are sheaf morphisms"
-   }
-  },
-  {
-   "text": "Put $S_{ij}=S_i\\times_SS_j$ and $X_{ij}=X\\times_SS_{ij}$. From the fibre-product definition of affine space [def-sbc-affine-space], $X\\times_SS_i\\cong\\mathbf A^1_{S_i}$ and $X_{ij}\\cong\\mathbf A^1_{S_{ij}}$: an arrow into either side is exactly an arrow into the new base together with an arrow into $\\operatorname{Spec}\\mathbf Z[t]$ over $\\operatorname{Spec}\\mathbf Z$. The two descriptions therefore have the same projections and the same section $t=1$. By [lem-weil-pbc-etale-covering-base-change], the $X_i\\to X$ form an etale covering family, and pulling the $S_i\\to S$ back to any $S_j$ again gives an etale cover. Consequently all the restrictions and overlaps used below are small-etale restrictions and the argument of Step 1 applies with base $S_{ij}$.",
-   "uses": [
-    "def-sbc-affine-space",
-    "lem-weil-pbc-etale-covering-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, base change to S_i times_S S_j"
-   }
-  },
-  {
-   "text": "On $X_{ij}$ write $l_i,l_j$ for the two restrictions, using the prescribed compositors, and form $r_{ij}=l_j\\circ l_i^{-1}$, an automorphism of $a_{ij}^*(Q|_{S_{ij}})$. Normalization gives $i_1^*r_{ij}=\\vartheta|_{S_{ij}}\\circ(\\vartheta|_{S_{ij}})^{-1}=1$. Step 1 over $S_{ij}$ gives $r_{ij}=1$, whence $l_j=r_{ij}l_i=l_i$. Their inverses agree too: multiply $l_j=l_i$ on the left by $l_j^{-1}$ and on the right by $l_i^{-1}$. These are equalities of sheaf maps, hence also of the original derived maps by Step 2.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, the two normalized local isomorphisms differ by an automorphism, which is the identity"
-   }
-  },
-  {
-   "text": "Apply [lem-amb-etale-sheaf-hom-family-gluing] to the sheaves $P,a^*Q$, the covering family $X_i\\to X$ of Step 3, and the maps $l_i$ of Step 4. Its compatibility condition on every etale object $W$ mapping to two cover members holds: the two arrows give an arrow $W\\to X_{ij}$ by the fibre-product universal property, and restricting $l_i=l_j$ along it gives exactly the required equality with the canonical localization identifications. This yields a unique sheaf map $k:P\\to a^*Q$ restricting to every $l_i$. Apply the same node to the inverse maps to obtain $h:a^*Q\\to P$. Both $hk$ and $1_P$ restrict to $1_{P|_{X_i}}$, and both $kh$ and $1_{a^*Q}$ restrict to $1_{(a^*Q)|_{X_i}}$; the uniqueness clause of the gluing node gives $hk=1_P$ and $kh=1_{a^*Q}$. Thus $k$ is an isomorphism. Step 2 returns an isomorphism $\\kappa:F\\to a^*C$ with all the required restrictions.",
-   "uses": [
-    "lem-amb-etale-sheaf-hom-family-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EM, lemma-internal-hom, via Sites Tag 04TQ, lemma-glue-maps; blueprint sk-thm-dnc.proof.md, Gluing, glue maps and inverses"
-   }
-  },
-  {
-   "text": "The sheaf maps $i_1^*k$ and $\\vartheta$ on $S$ restrict to the same map on every $S_i$, since $k|_{X_i}=l_i$ and the latter were normalized. Uniqueness in [lem-amb-etale-sheaf-hom-family-gluing], now on the cover $S_i\\to S$, gives $i_1^*k=\\vartheta$, hence $i_1^*\\kappa=\\theta$. For any other normalized global isomorphism $\\kappa'$, Step 2 turns its ratio $\\kappa'\\kappa^{-1}$ into a sheaf automorphism of $a^*Q$ whose restriction along $i_1$ is the identity. Step 1 gives that ratio equal to the identity, so $\\kappa'=\\kappa$ without assuming any local restriction for $\\kappa'$. Any other normalized local comparison on any cover equals the restriction of $\\kappa$ by the same ratio argument over its base. This proves independence of both comparisons and cover. If $S$ is empty, the gluing node explicitly allows its empty cover, and the same uniqueness statements apply. For $A=0$ all module sheaves are zero and the argument still applies; no step used a nonzero coefficient, reduced base, invertible exponent, or finite-type hypothesis.",
-   "uses": [
-    "lem-amb-etale-sheaf-hom-family-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing, unique isomorphism normalized at t=1; explicit global uniqueness and degenerate cases"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sbc-affine-space",
-  "lem-amb-etale-sheaf-hom-family-gluing",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-etale-shifted-line-comparison-existence",
   "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-etale-covering-base-change",
   "new-lem-pur-etale-a1-pullback-full",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Opening paragraph and Gluing, expanded using existing ordinary-etale affine-line fullness (Stacks 0A3H), derived fully faithful single complexes (06XS), exact functors (015F), and sheaf-map gluing (03EM/04TQ)."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Gluing: comparison existence separated from overlap naturality, unit-section rigidity, and independence. Lean proves the rigidity by affine-line fullness on sheaves in one degree and compatibility with shifts."
  },
  "mathlib_searches": [
   {
@@ -255,5 +226,27 @@
   "group": "N8",
   "result": "pass",
   "note": "Read the node, the sk-thm-dnc Gluing source, the module and all used declarations. Every node clause is rendered: sheaf_rigidity; hC/hF shifted lisse rank-one; θ given; étale cover with normalized localIso (sectionRestrictionIso = refl is exactly i1*λ_i = θ|S_i); overlap agreement and inverses on X_i×_X X_j; ∃κ Normalized, restricting to each λ_i, unique among all normalized κ', and every normalized μ over any étale T is the restriction (independence). No extra hypotheses; empty S, A=0 and any m covered; u+1 coefficient universe forced by the recorded DerivedCategoryModule. Statement verbatim; node otherwise unchanged vs live. Helpers are real compositor composites; 2 sorries with proof docstrings. No duplicate: AffineLine existsUnique_iso_leftDerivedUpperStar_of_etale is field-based with HasInvertibleExponent; FiniteRingSectionDeformation/NoetherianEtaleSectionSpecialization are specialized. Advisory: the inverse clause is redundant."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261023T231835-L-3650574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

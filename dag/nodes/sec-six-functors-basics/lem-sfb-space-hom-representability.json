@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-space-hom-representability",
+ "kind": "statement",
+ "title": "Representability of the relative morphism functor for algebraic spaces",
+ "statement": "Algebraic spaces and their morphisms are as in [def-trf-algebraic-space], over schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. For morphisms of algebraic spaces, flatness and local finite presentation are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Finite presentation means local finite presentation, quasi-compactness and quasi-separatedness (the diagonal is quasi-compact). Finite type means quasi-compact and locally of finite type on etale charts [def-weil-finite-type-morphism]. Proper means separated, of finite type and universally closed; separated means the diagonal is a closed immersion, and universally closed means closed on underlying topological spaces after every algebraic-space base change [def-weil-proper-morphism]. Let $B$ be an algebraic space over a scheme $S$, and let $Z\\to B$ and $W\\to B$ be morphisms of algebraic spaces. Assume $Z\\to B$ is proper, flat and of finite presentation, and $W\\to B$ is separated and of finite presentation. The functor on schemes $U$ over $B$ given by $U\\mapsto\\operatorname{Hom}_U(Z\\times_BU,W\\times_BU)$ is represented by an algebraic space $M\\to B$, locally of finite presentation. Thus its representing bijections are natural in every $U\\to B$; the products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D1C, quot-proposition-Mor."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Set $A=Z\\times_BW$, an algebraic space and a fibre product in the category of algebraic spaces by the current statement of [lem-trf-space-fibre-products-etale-covers]. The projection $A\\to Z$ is the base change of $W\\to B$, so it is of finite presentation by [lem-sfb-space-flat-proper-fp-locality], and separated by [lem-sfb-space-separated-fp-composition]. The given properness of $Z\\to B$ includes separatedness, as explicitly defined in the locality node; $Z\\to B$ is also of finite presentation by hypothesis. Applying the two composition clauses of [lem-sfb-space-separated-fp-composition] to $A\\to Z\\to B$, we obtain that $A\\to B$ is separated and of finite presentation.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1C, quot-proposition-Mor: verification of the hypotheses of quot-proposition-hilb for the product; spaces-morphisms Tags 03KL, 03KQ, 03XQ and 03XR."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-hilbert-representability] to $A\\to B$ from step 1. It provides an algebraic space $H\\to B$ locally of finite presentation representing the closed subspaces $D\\subset A_T$ proper, flat and of finite presentation over $T$. The categorical fibre-product assertion of [lem-trf-space-fibre-products-etale-covers] identifies $A_T=(Z\\times_BW)\\times_BT$ with $Z_T\\times_TW_T$: in either case a map into this product is a pair of maps into $Z,W$ together with a map into $T$ having the same composite into $B$. The projection-induced identifications and their inverses commute with maps of $T$, since their components do. Thus these are exactly the Hilbert families used by the graph construction, with representing bijections natural on schemes over $B$.",
+   "uses": [
+    "lem-sfb-space-hilbert-representability",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D01, quot-proposition-hilb, applied in the proof of Tag 0D1C."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-graphs-open-in-hilbert], sending $f:Z_T\\to W_T$ to its actual graph gives a natural injection $\\gamma:\\operatorname{Mor}_B(Z,W)\\to\\mathcal H$. Its image on any scheme test family $D\\subset A_T$ is represented by the open $V_D\\subset T$ where $\\operatorname{pr}_1|_D$ becomes an isomorphism after base change. The hypotheses are precisely properness, flatness and finite presentation of $Z\\to B$ and separatedness of $W\\to B$; all are given. In particular, no scheme hypothesis on $Z$ or $W$ has been introduced. For a graph in this image, the inverse formula is $\\operatorname{pr}_2|_D\\circ(\\operatorname{pr}_1|_D)^{-1}$.",
+   "uses": [
+    "lem-sfb-space-graphs-open-in-hilbert"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb and quot-lemma-Mor-into-Hilb-open."
+   }
+  },
+  {
+   "text": "To work on all $S$-schemes, replace each relative functor $F$ by $T\\mapsto\\coprod_{b\\in B(T)}F(T,b)$, with restriction $(b,x)\\mapsto(b|_{T'},x|_{T'})$. Step 2 identifies the total Hilbert functor with $H(T)$. The graph map preserves $b$, so its image defines a subfunctor $M\\subset H$. Step 3 identifies its inverse image along every scheme $T\\to H$ with the open subscheme $V_D\\subset T$. Therefore it is an open subspace of $H$, and is automatically an algebraic space by [def-a1-space-open-subspace]. This argument uses scheme tests, not an assumption that $H$ is a scheme. Give $M$ the structure map $M\\hookrightarrow H\\to B$. Taking the fibre over a fixed $b:T\\to B$ in the total-functor bijection is legitimate because the graph map preserves $b$; its inverse also preserves $b$. Since $\\gamma_T$ is injective with this image, this gives bijections $\\operatorname{Hom}_B(T,M)\\simeq\\operatorname{Hom}_T(Z_T,W_T)$ for every $T\\to B$. They are natural: the Hilbert representing bijections and graph map are natural, so their restrictions to the image and the inverse bijections commute with every test-scheme base change.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-sfb-space-graphs-open-in-hilbert"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1C, quot-proposition-Mor, the open-subspace inference; spaces.tex lemma-representable-over-space and spaces-properties.tex Tag 03BZ, lemma-open-subspaces."
+   }
+  },
+  {
+   "text": "The open immersion $j:M\\hookrightarrow H$ is locally of finite presentation: on scheme charts it is an inclusion of an open subscheme, covered near each point by principal affine opens $\\operatorname{Spec}R_a\\subset\\operatorname{Spec}R$, and $R_a\\cong R[t]/(at-1)$ has a finite presentation. This verifies the chartwise definition [def-sbc-locally-finite-presentation], using the scheme-test description in [def-a1-space-open-subspace]. Since $H\\to B$ is locally of finite presentation by step 2, the locally-finite-presentation composition clause of [lem-sfb-space-separated-fp-composition] gives that $M\\to B$ is locally of finite presentation, as required.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-a1-space-open-subspace",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1C, final local-finite-presentation conclusion; spaces-morphisms.tex Tag 06CN (lemma-open-immersion-locally-finite-presentation) and Tag 03XQ, with the principal-open finite presentation written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-hilbert-representability",
+  "lem-sfb-space-graphs-open-in-hilbert",
+  "def-a1-space-open-subspace",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D1C, quot-proposition-Mor, via Tags 0D01 and 0D1A--0D1B; explicit ambient-product and open-restriction verifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a proper flat finitely presented algebraic space to a separated finitely presented algebraic space are represented by an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of relative Hom functor for proper flat source and separated target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If a morphism $ g: Y \\to S $ is separated, then the first projection morphism from the pullback of $ f: X \\to S $ and $ g $ is also separated.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hom\", \"representable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|HomScheme|Mor_B|Hom.*functor.*represent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative morphism functor for proper flat algebraic spaces is an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of morphisms from a proper flat finitely presented algebraic space to a separated finitely presented algebraic space",
+   "results": "msearch leanfinder: OK, 8 hits; top results: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsSeparated.instMap, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: results are scheme morphism properties, scheme Zariski gluing, or abstract relative representability; none states the algebraic-space relative Hom theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Hom representability as an open subspace of the Hilbert functor of graphs",
+   "results": "msearch leanfinder: OK, 8 hits; top results: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.opensDiagram, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι",
+   "date": "2026-10-22",
+   "verdict": "no match: results are scheme morphism properties, scheme Zariski gluing, or abstract relative representability; none states the algebraic-space relative Hom theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative morphism functor of a proper flat finitely presented algebraic space is an algebraic space",
+   "results": "msearch leansearch: OK, 8 hits; top results: CategoryTheory.MorphismProperty.relative, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.toUniversallyClosed, CategoryTheory.MorphismProperty.relative.rep, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Flat.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: results are scheme morphism properties, scheme Zariski gluing, or abstract relative representability; none states the algebraic-space relative Hom theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-descent-isom-spaces",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal.",
+   "via": [
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-hom-representability",
+  "worker": "stage1",
+  "group": "Q51",
+  "summary": "Checked Stacks 0D1C and its Hilbert/graph proof; retained the statement and supplied five proof steps using three statement-only supporting nodes for algebraic spaces. Repair of returned head 695145c8467: compared the retained split with the current unsplit DAG item, re-read every cited statement, and checked the new same-tag candidates lem-sfb-projective-hom-graph-parameter and lem-a1-space-monic-diagonal-tests. Their restricted scheme/projective and monomorphism statements do not subsume the retained supporting statements. Made the structure map M -> H -> B and passage to the fibre over each T -> B explicit in step 4. Reused the unchanged recorded Mathlib searches after reading their results. deliver.py rebuilds this overlay on current origin/sheaf-dag; the retained statement, dependencies and Hilbert/graph route are unchanged.",
+  "blueprint": "Realizes the inherited place: the relative Mor functors in quot-lemma-spaces-diagonal, through the Hilbert and graph argument of quot-proposition-Mor. The ancestor command reports None; retained the inherited null from.node and extended its via chain on the new nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products is needed to form the ambient product; it does not replace the unit route."
+   },
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "The statement explicitly defines representable open subfunctors and asserts their algebraicity; used to conclude from the graph image without assuming the Hilbert space is a scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-35f9f98d7",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-35f9f98d7 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of this split. ce4318e9, 5f7b0f90 and 695145c8 were all PASSed and then refused at landing because the side completion was never promoted; there is no repair note. I compared every file as JSON with 695145c8. The three new nodes are identical, and so are the item statement, stmt_deps and steps 1, 2, 3 and 5. The only change is step 4: it now gives M the structure map M→H→B and gets the relative bijections by taking the fibre over each b:T→B. This is correct and elementary, and matches the pairs (f,h) in quot.tex lines 3115-3137. I re-read the route against quot.tex. The item is 0D1C (line 3198) with the same hypotheses, and its source proof is 0D1B plus 0D01. Step 1 gets A=Z×_BW→B separated and of finite presentation from the fibre-product node, finite-presentation base change in the locality node, and 03KL/03KQ/03XQ. Step 2 is the Hilbert node, which is 0D01 with the 0CZY functor and needs only finite presentation and separatedness. Step 3 is the graph node, which is 0D1A plus 0D1B; it needs only W→B separated, and the open locus is where pr1 is an isomorphism. Step 4 makes M an open subspace of H, an algebraic space by def-a1-space-open-subspace; H is never treated as a scheme. Step 5 shows an open immersion is locally finitely presented (R[t]/(at-1)) and uses the lfp composition clause. Edge cases are correct: empty Z gives M=B; Z=W=B gives B; empty W gives the open locus where Z_T is empty. No SGA is used. Duplicate search of the current DAG found nothing new. lem-sfb-stack-separation-composition (DM stacks, proper diagonal) overlaps only partly with the separated-composition clause and has no finite-presentation clauses; maintainer note only. Batch-5 flag: def-trf-algebraic-space (Stacks 025Y) is a general definition. lem-trf-space-fibre-products-etale-covers (02X2/041F) is foundational algebraic-space calculus, not part of the trace-formula or Poincaré-duality statements or proofs. Both were already in the item's base stmt_deps. Accepted. No changes."
+ }
+}

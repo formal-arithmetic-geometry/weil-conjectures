@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-model-orientation-chart-descent",
+ "kind": "statement",
+ "title": "Descent of the orientation equation from compatible affine charts",
+ "statement": "Fix a finite purity datum P [def-pur-conventions] and composable separated finite-type smooth morphisms f:X->Y,g:Y->Z of pure relative ranks d,e over finite-type k-schemes. Use the actual sigma, diagonal orientations vartheta and ordered Tate multiplication mu [def-pur-composition-model-orientation-coordinates]. Assume the beta-delta-kappa equation on every affine finite-type smooth pair of ranks d,e, for every finite Tate transport. Assume that the shift-removed total Tate power on X is concentrated in degree zero, its H^0 is a rank-one locally free coefficient sheaf, and restriction of automorphisms of that power is injective on every Zariski covering. Then sigma followed by vartheta_(gf) equals the tensor of vartheta_f and Lf*vartheta_g followed by mu. The assertion includes empty X.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "stmt_deps": [
+  "def-pur-composition-model-orientation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "In the equality of Step 6 substitute $\\vartheta_h=\\beta_h\\delta_h\\alpha_h^{-1}$ and $\\alpha_{gf}\\kappa=\\sigma(\\alpha_f\\otimes Lf^*\\alpha_g)$ from the chart statement. This yields\n$$\\vartheta_{gf}\\sigma(\\alpha_f\\otimes Lf^*\\alpha_g)=\\mu(\\vartheta_f\\otimes Lf^*\\vartheta_g)(\\alpha_f\\otimes Lf^*\\alpha_g).$$\nThe rightmost tensor of $\\alpha$ maps is an isomorphism, so cancel it. This proves $(**)$ on every covering chart. Compatibility of the given maps with further open restriction means these are restrictions of the two global arrows in $(**)$, with a common global source and target.",
+   "uses": [
+    "lem-pur-composition-compatible-dnc-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  },
+  {
+   "text": "Let $A=\\vartheta_{gf}\\sigma$ and $B=\\mu(\\vartheta_f\\otimes Lf^*\\vartheta_g)$, two isomorphisms from $\\omega_f\\otimes^LLf^*\\omega_g$ to $T_X$. They are isomorphisms by the specified orientations, Step 1 and the tensor-mate lemma. Step 7 gives $A|_U=B|_U$, so $(AB^{-1})|_U=1$ on every chart. Apply the automorphism injectivity of Step 8 to obtain $AB^{-1}=1$ and hence $A=B$ globally. If $X$ is empty use the empty cover in the same degree-zero gluing theorem: its equalizer has one element, so every endomorphism of $L[0]$ equals its identity, and shift removal gives the asserted equality for $T_X$ as well. No nonemptiness or connectedness assumption is used.",
+   "uses": [
+    "lem-pur-composition-tensor-mate",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-composition-compatible-dnc-charts",
+  "lem-pur-composition-tensor-mate",
+  "lem-pur-degree-zero-derived-map-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing affine orientations zero section multiplicativity and detection of automorphisms of shifted Tate lines",
+   "results": "Orientation.map; CharacterModule.dual_zero; FractionalIdeal.dual_zero; Module.Basis.orientation; DomAddAct.mk_zero; instMulZeroClassOrderDual; OrderDual.instMulActionWithZero; AffineMap.zero_linear. None concerns the specified sheaf orientations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical smooth dualizing orientations respect composition and descend from affine charts",
+   "results": "inTangentCoordinates_eq; inTangentCoordinates; SmoothBumpCovering.comp_embeddingPiTangent_mfderiv; SingularManifold.comap_f; tangentCoordChange_comp; ModelWithCorners.coe_extChartAt_transContinuousLinearEquiv; ContinuousLinearEquiv.toTransContinuousLinearEquiv; mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm'. These are manifold coordinate results, not etale sheaf comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*orientation|orientation.*descent|compositionSourceFixed",
+   "results": "0 hits in the Mathlib search service.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositionModelOrientationDescent",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–2; Descent of the orientation equation from compatible affine charts",
+   "via": [
+    "lem-pur-composition-model-orientation-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModelOrientationChartDescent",
+  "file": "lean/Sheaf/Paper/ModelOrientationChartDescent.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.model_orientation_chart_descent",
+  "statement": "theorem model_orientation_chart_descent (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (aZ : Z ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] (hchart : ∀ (U V T : Scheme.{u}) [IsAffine U] [IsAffine V] [IsAffine T] (f' : U ⟶ V) (g' : V ⟶ T) [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f'] [IsSeparated g'] [LocallyOfFiniteType g'] [QuasiCompact g'] [SmoothOfRelativeDimension d f'] [SmoothOfRelativeDimension e g'] (aT : T ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aT] [QuasiCompact aT], ModelChartOrientationEquation P d e f' g' aT) (hdetect : ModelOrientationDetection.{u, w} P X (d + e)) : letI := P.noetherian aZ letI := P.noetherian (g ≫ aZ) letI := Dnc.compactifiable P f (g ≫ aZ) letI := Dnc.compactifiable P g aZ letI := Dnc.compactifiable P (f ≫ g) aZ letI := (DiagonalPasting.geometryProperties d e f g).2.2.2.2 letI : IsNoetherianRing P.Coefficient := isNoetherian_of_finite _ _ letI := ProEtale.upperStarPreservesFlat_moduleCat P.Coefficient ProEtale.CompositionTensorMate.sigma P.Coefficient f g ≫ (P.modelOrientation (d + e) (f ≫ g) aZ).hom = (P.compatibleTensorIso (P.modelOrientation d f (g ≫ aZ)) ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.mapIso (P.modelOrientation e g aZ))).hom ≫ (P.modelOrientationMu d e f (g ≫ aZ)).hom",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositionModelOrientationDefinitions.lean vs clone item module (definitions verbatim, only blueprint tags), item theorem statement vs clone (byte-identical), five split statements vs original conclusion conjuncts and PurityCompositionCoherence source normalization, item node fields vs clone (only proof/proof_deps/proof_origin/lean/tool_uses)"
+ }
+}

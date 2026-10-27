@@ -1,0 +1,324 @@
+{
+ "id": "lem-sf-adic-affine-finiteness-descent",
+ "kind": "statement",
+ "title": "Conditional descent of native adic finiteness from affine schemes",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure], with the absolute-value topology extending that of each finite subextension [def-weil-l-adic-coefficient-extension], and an algebraically closed field $K$ with $\\operatorname{char}K\\ne\\ell$. For every $K$-scheme $V$, on a small representative of its small pro-etale site [def-weil-pbc-proetale-site], let $B_V$ be the sheaf whose sections over $W\\to V$ are continuous functions $|W|\\to\\Omega$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-vector space. Let $\\mathcal A(V)=\\operatorname{Mod}(B_V)$ be the category of sheaves of modules [def-weil-sheaf-of-modules-category]. Call an object constructible if Zariski locally it has a finite partition by locally closed constructible subschemes [def-weil-locally-closed-subset, def-weil-constructible-subset] on each of which it is pro-etale locally isomorphic to $B^{\\oplus r}$, for a finite rank $r$ allowed to depend on the covering member. Write $D^b_c(\\mathcal A(V))$ for objects of the ordinary derived category [def-weil-abstract-derived-category] with cohomology zero outside a finite integer interval and constructible in every degree. For a scheme morphism $g:X\\to Y$, let $g_*:\\mathcal A(X)\\to\\mathcal A(Y)$ be the ordinary sheaf direct image, with its $B_Y$-action given by precomposition of functions $B_Y\\to g_*B_X$, and let $Rg_*$ be its total right derived functor [def-sfb-right-derived-functor].\n\nAssume the following affine hypothesis for this $K$ and $\\ell$: for every affine $K$-scheme $Y$ locally of finite type over $K$ [def-weil-finite-type-morphism], every affine scheme $X$, every locally finite-type morphism $g:X\\to Y$, and every constructible $M\\in\\mathcal A(X)$, one has $Rg_*(M[0])\\in D^b_c(\\mathcal A(Y))$.\n\nThen for every quasi-compact, quasi-separated [def-weil-quasi-separated-morphism], locally finite-type morphism $f:X\\to Y$ with $Y$ quasi-compact and locally of finite type over $K$, the actual derived direct image satisfies\n$$Rf_*(L)\\in D^b_c(\\mathcal A(Y))\\qquad\\text{for every }L\\in D^b_c(\\mathcal A(X)).$$",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+  "place": "Conditional extraction of finiteLowerStar_of_bounded (142-148), finiteLowerStar_of_openCover (188-253), FiniteFor.finsetSup and FiniteFor.of_quasiSeparatedSpace (337-397), finiteFor_of_isAffine (440-448), and target localization and boundedness (450-566). Only the finite-affine-cover descent argument is used; the affine finiteness hypothesis is left explicit."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First establish the ambient facts without invoking any affine finiteness theorem. The field $K$ is Noetherian (its only ideals are zero and the whole ring), so $\\operatorname{Spec}K$ is locally Noetherian. By [pqf-lem-locnoeth-lft], $Y$ is locally Noetherian. On the small site chosen in the statement, [prop-pur-kinjective-resolutions-exist] applies to the commutative ring sheaf $B_T$: $\\mathcal A(T)$ is Grothendieck abelian and has K-injective resolutions, for every scheme $T$. Direct image of module sheaves is additive and left exact: its sectionwise definition preserves addition, finite products and kernels. Consequently [lem-pc-right-derived-functor-triangulated] makes $Rg_*$ triangulated for every $g:T\\to Y$. The bounded constructible subcategory of the target is triangulated by [lem-sf-native-adic-bounded-constructible-triangulated]. In the following, $P(g)$ means that $Rg_*$ sends every object of $D^b_c(\\mathcal A(T))$ into $D^b_c(\\mathcal A(Y))$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-native-adic-bounded-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "Devissage, finiteLowerStar and its IsTriangulated instance (94-115); field/noetherian application as in finiteFor_of_isAffine (444)."
+   }
+  },
+  {
+   "text": "A sheaf-level finiteness assertion for a fixed $g$ implies $P(g)$. Indeed, let $C$ have cohomology in $[a,b]$. The canonical truncation triangle [lem-weil-pbc-truncation-triangle] has terms $\\tau_{\\le q-1}C$, $\\tau_{\\le q}C$, $H^q(C)[-q]$. By [lem-weil-pbc-truncation-cohomology], $\\tau_{\\le a-1}C\\cong0$ and $\\tau_{\\le b}C\\cong C$: the displayed maps induce isomorphisms on every cohomology sheaf. The sheaf hypothesis puts $Rg_*(H^q(C)[0])$ in $D^b_c$, and step 1 puts its shift $Rg_*(H^q(C)[-q])$ there too. Apply $Rg_*$ to these triangles and induct from $q=a$ to $b$; two-out-of-three puts $Rg_*C$ in $D^b_c$. The zero complex is the empty-interval case. In particular, if $Y$ and $T$ are affine and $g:T\\to Y$ is locally of finite type, the affine hypothesis in the statement gives $P(g)$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-sf-native-adic-bounded-constructible-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "finiteLowerStar_of_bounded (142-148), applied conditionally to the affine hypothesis."
+   }
+  },
+  {
+   "text": "For an open immersion $j:U\\hookrightarrow T$, [lem-weil-proetale-weakly-etale-localization](1) identifies $U_{\\mathrm{proet}}$ with the localized site $T_{\\mathrm{proet}}/U$, and under it $B_T|_U=B_U$: both have as sections over $W\\to U$ the locally finite continuous functions on the same space $|W|$, with the same restrictions. Restriction of module sheaves to this slice is exact by [lem-sfb-ringed-site-restriction-kflat]; an exact functor preserves kernels, images and quotients, so $H^n(C|_U)\\cong H^n(C)|_U$ for every complex $C$ and every $n$. Since $j^{-1}B_T=B_U$, the module pullback $B_U\\otimes_{j^{-1}B_T}j^{-1}M$ of [lem-sf-native-adic-constructible-pullback] is $M|_U$, so that node makes every $H^n(C)|_U$ constructible; vanishing outside an interval is kept. Thus restriction preserves bounded constructible complexes. Suppose $T=U\\cup V$ and $P(g|_U)$, $P(g|_V)$ and $P(g|_{U\\cap V})$ hold. For each $C\\in D^b_c(\\mathcal A(T))$, apply [lem-sf-native-adic-mayer-vietoris-triangle]. Its middle term is a finite sum of bounded constructible objects, and its third term is bounded constructible. Triangulated closure from step 1 therefore puts its first term $Rg_*C$ in $D^b_c$. This proves $P(g)$. For $T=\\varnothing$, the only object of $T_{\\mathrm{proet}}$ is $\\varnothing$, covered by the empty family, so the sheaf condition makes every module sheaf, and hence every complex, zero; $P(g)$ holds as well.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sf-native-adic-constructible-pullback",
+    "lem-sf-native-adic-mayer-vietoris-triangle",
+    "lem-sf-native-adic-bounded-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "finiteLowerStar_of_openCover (175-243), FiniteFor.sup (270-295), and FiniteFor.of_isEmpty (312-316)."
+   }
+  },
+  {
+   "text": "We will use step 3 in the following explicit finite induction. Fix $g:T\\to Y$ and a class $\\mathscr P$ of opens of $T$ closed under binary intersections. Suppose $P(g|_O)$ holds for every $O\\in\\mathscr P$. Claim: it holds on every finite union of members of $\\mathscr P$. Induct strongly on the number $n$ of opens. For $n=0$ use the empty-source case of step 3. For $n>0$, write the union as $O_1\\cup V$, with $V=\\bigcup_{i=2}^n O_i$. The induction hypothesis gives $P(g|_V)$. Its overlap with $O_1$ equals $\\bigcup_{i=2}^n(O_1\\cap O_i)$, a union of at most $n-1$ members of $\\mathscr P$, so the same induction hypothesis gives $P$ on that overlap. Step 3 then gives $P$ on the original union. Repeated or empty members do not change this argument. This is just finite induction using the cited two-open triangle, not a new finiteness input.",
+   "uses": [
+    "lem-sf-native-adic-mayer-vietoris-triangle",
+    "lem-sf-native-adic-bounded-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "FiniteFor.finsetSup, lines 337-362; complete strong-induction argument."
+   }
+  },
+  {
+   "text": "Now fix an affine target $Y$ and a quasi-compact quasi-separated locally finite-type $g:T\\to Y$. The source $T$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. Whenever $O\\subseteq T$ is quasi-compact open, its inclusion is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), hence finite type by [lem-weil-pbc-qc-open-immersion-finite-type]; composing with $g$ remains finite type by [lem-sfb-finite-type-composition-base-change]. In particular all affine open restrictions of $g$ satisfy the affine hypothesis of step 2. Suppose $O$ is quasi-compact and contained in an affine open $A$ of $T$. Cover $O$ by finitely many affine opens using [lem-pqf-finite-affine-cover-qc-open]. All their binary intersections, and all further finite intersections, are affine: apply [lem-weil-pbc-affine-source-morphism-separated] to $A\\to\\operatorname{Spec}\\mathbf Z$, then [lem-weil-pbc-separated-affine-open-intersection] to affine opens of $A$. The class of affine opens of $A$ contained in $O$ is therefore intersection-closed, and step 2 gives $P$ on each of them. Step 4 gives $P(g|_O)$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "FiniteFor.of_isAffineHom_diagonal (366-370) and the hPF argument of FiniteFor.of_quasiSeparatedSpace (383-393)."
+   }
+  },
+  {
+   "text": "For this same $T$, take $\\mathscr P$ to be the quasi-compact opens contained in some affine open of $T$. This class is closed under intersections. To check the quasi-compactness assertion explicitly, cover $O,O'\\in\\mathscr P$ by finite affine families using [lem-pqf-finite-affine-cover-qc-open]. Every pairwise intersection of members of these two covers is quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1), since $T$ is quasi-separated. Their finite union is $O\\cap O'$, so it is quasi-compact (each open cover has a finite subcover on each of the finitely many pieces). Moreover $O\\cap O'$ is still contained in the affine open containing $O$. Step 5 proves $P$ on every member of $\\mathscr P$. Finally [lem-weil-pbc-qcqs-finite-affine-open-cover] covers $T$ by finitely many affine opens, each belonging to $\\mathscr P$. Step 4 proves $P(g)$ on $T$. No intersection of arbitrary affine opens of $T$ has been asserted affine.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "FiniteFor.of_quasiSeparatedSpace, lines 372-397: intersection-closed class P and the outer finite union."
+   }
+  },
+  {
+   "text": "Return to the given $f:X\\to Y$ and $L\\in D^b_c(\\mathcal A(X))$. The quasi-compact scheme $Y$ has a finite affine open cover $Y=\\bigcup_{i=1}^r V_i$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. Put $X_i=X\\times_YV_i=f^{-1}(V_i)$, with open inclusion $j_i:X_i\\hookrightarrow X$ and projection $f_i:X_i\\to V_i$. The morphism $f$ is finite type by definition; [lem-sfb-finite-type-composition-base-change](2) makes $f_i$ finite type, and [lem-weil-pbc-qcqs-morphism-permanence](3) preserves its quasi-separatedness. Each $V_i$ is locally finite type over $K$, by restriction of the local finite-type condition to an open subscheme. Step 6 therefore applies to $f_i$. By step 3, restriction and [lem-sf-native-adic-constructible-pullback] give $j_i^*L\\in D^b_c(\\mathcal A(X_i))$. Hence $R(f_i)_*j_i^*L\\in D^b_c(\\mathcal A(V_i))$. Now apply [lem-weil-pbc-ringed-derived-slice-localization] to the morphism of ringed sites defined by $f$: the continuous functor $u:Y_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$, $W\\mapsto W\\times_YX$, with the precomposition ring map $B_Y\\to f_*B_X$ of the statement, and to the object $V_i$ of $Y_{\\mathrm{proet}}$, for which $u(V_i)=X_i$. It gives $j_{V_i}^*Rf_*L\\cong R(f_{V_i})_*j_{X_i}^*L$, where $f_{V_i}$ is the localized morphism $X_{\\mathrm{proet}}/X_i\\to Y_{\\mathrm{proet}}/V_i$ with the restricted ring map. Under the identifications of [lem-weil-proetale-weakly-etale-localization](1) of these two slices with $(X_i)_{\\mathrm{proet}}$ and $(V_i)_{\\mathrm{proet}}$, with $B_X|_{X_i}=B_{X_i}$ and $B_Y|_{V_i}=B_{V_i}$ as in step 3, the localized functor sends $W\\to V_i$ to $W\\times_YX=W\\times_{V_i}X_i\\to X_i$, which is the functor defining $f_i$, and the restricted ring map is the precomposition map $B_{V_i}\\to f_{i*}B_{X_i}$. Hence $(Rf_*L)|_{V_i}\\cong R(f_i)_*j_i^*L$ in $D(\\mathcal A(V_i))$, including the coefficient action defined by precomposition.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-sf-native-adic-constructible-pullback",
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "Target localization, lines 450-494, using adicDerivedBaseChangeIso; applied here to the whole bounded constructible complex."
+   }
+  },
+  {
+   "text": "Write $C=Rf_*L$. By the exactness of restriction used in step 3, $H^n(C)|_{V_i}\\cong H^n(C|_{V_i})$, which is constructible by step 7. Constructibility is Zariski local by its definition in the statement: for any point choose a member $V_i$ containing it, then a neighbourhood and finite partition witnessing constructibility there; that neighbourhood is also open in $Y$. Thus every $H^n(C)$ is constructible. For each $i$ choose integers $a_i\\le b_i$ outside which $H^n(C|_{V_i})=0$. If the finite cover is nonempty, put $a=\\min_i a_i$ and $b=\\max_i b_i$. For $n<a$ or $n>b$, the sheaf $F=H^n(C)$ restricts to zero on every $V_i$. For any object $W\\to Y$ of $Y_{\\mathrm{proet}}$, the open immersions $W\\times_YV_i\\to W$ form a Zariski open cover of $W$, hence a pro-etale covering [def-weil-pbc-proetale-site], and $F(W\\times_YV_i)=F|_{V_i}(W\\times_YV_i\\to V_i)=0$; the sheaf condition embeds $F(W)$ into the product of these zero groups, so $F=0$. If $Y$ is empty, $\\mathcal A(Y)$ is zero as in step 3 and any finite interval works. Therefore $C$ is bounded with constructible cohomology, which is precisely the conclusion.",
+   "uses": [
+    "lem-sfb-ringed-site-restriction-kflat",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+    "place": "IsAdicConstructibleSheaf.of_openCover (450-460), exists_isLE_rightDerivedFunctor_lowerStar (518-552), and bounded_rightDerivedFunctor_lowerStar (560-566); here lower and upper bounds are glued simultaneously."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-sf-native-adic-bounded-constructible-triangulated",
+  "lem-sf-native-adic-constructible-pullback",
+  "lem-sf-native-adic-mayer-vietoris-triangle",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-proetale-weakly-etale-localization",
+  "pqf-lem-locnoeth-lft",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Conditional native-coefficient reconstruction of the finite-affine-cover argument in LowerStar.lean (142-148, 175-397, 440-566), serving prop-functor-package clause 3; no unconditional affine finiteness input is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteLowerStar|finiteFor_of_isAffine|adicDerivedBaseChangeIso|IsAdicConstructibleSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general scheme descent and constructible-image results do not state conditional finiteness descent for these adic module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine local to global descent bounded constructible derived pushforward pro etale adic sheaves",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal; AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd; SheafOfModules.pushforward_obj_val; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong; CategoryTheory.Functor.sheafAdjunctionContinuous; TopCat.Sheaf.instIsLeftAdjointPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: general scheme descent and constructible-image results do not state conditional finiteness descent for these adic module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general scheme descent and constructible-image results do not state conditional finiteness descent for these adic module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If derived pushforward finiteness holds between affine schemes then finite affine cover descent gives bounded constructible pushforward on quasi compact quasi separated schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.Scheme.Hom.finite_app; AlgebraicGeometry.Scheme.Hom.finiteType_appLE; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: general scheme descent and constructible-image results do not state conditional finiteness descent for these adic module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris and finite affine covers propagate bounded constructible l-adic direct image from affine source and target to qcqs schemes",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.finiteType_appLE; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover",
+   "date": "2026-10-22",
+   "verdict": "no match: general scheme descent and constructible-image results do not state conditional finiteness descent for these adic module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conditional affine finiteness implies bounded constructible derived pushforward for quasi compact quasi separated schemes with l-adic coefficients",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.instQuasiCompactOfIsAffineHom Mathlib.AlgebraicGeometry.Morphisms.Affine; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact; AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd Mathlib.AlgebraicGeometry.Morphisms.Descent; AlgebraicGeometry.HasAffineProperty.affineAnd_le_isAffineHom Mathlib.AlgebraicGeometry.Morphisms.AffineAnd; AlgebraicGeometry.HasAffineProperty.mk Mathlib.AlgebraicGeometry.Morphisms.Basic; AlgebraicGeometry.quasiSeparatedSpace_of_isAffine Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated; AlgebraicGeometry.IsFinite.toIsAffineHom Mathlib.AlgebraicGeometry.Morphisms.Finite; AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris finite affine covers extend constructible adic sheaf pushforward finiteness to qcqs morphisms",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsFinite.finite_app Mathlib/AlgebraicGeometry/Morphisms/Finite; AlgebraicGeometry.Scheme.Hom.finiteType_appLE Mathlib/AlgebraicGeometry/Morphisms/FiniteType; AlgebraicGeometry.Scheme.Hom.finite_app Mathlib/AlgebraicGeometry/Morphisms/Finite; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop Mathlib/AlgebraicGeometry/Morphisms/Finite; AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE Mathlib/AlgebraicGeometry/Morphisms/FiniteType; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine Mathlib/AlgebraicGeometry/AffineTransitionLimit; AlgebraicGeometry.LocallyOfFiniteType Mathlib/AlgebraicGeometry/Morphisms/FiniteType; AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset Mathlib/AlgebraicGeometry/Morphisms/FiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLowerStar|FiniteFor|IsAdicConstructibleSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition scheme lemmas and generic condensed-sheaf constructions do not state conditional native adic finiteness descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conditional bounded constructible direct image for locally finite continuous l-adic module sheaves descends from affine schemes by finite open covers",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-transition scheme lemmas and generic condensed-sheaf constructions do not state conditional native adic finiteness descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-proper-sheaf-finiteness",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause 3, compact support applied to localization, via the native proper factor in lem-zl-morphism-open-closed-reduction: finite-affine-cover descent of the underlying adic finiteness input before forgetting Frobenius is reversed. The created.item chain terminates at a maintainer seed; blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-proper-sheaf-finiteness",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-affine-finiteness-descent",
+  "worker": "stage1",
+  "summary": "Kept the conditional affine hypothesis and the statement unchanged. Wrote cohomological truncation devissage, the two-open Mayer-Vietoris step, strong induction for finite intersection-stable families, the two-stage quasi-separated source-cover argument, and finite target-cover gluing of both cohomological bounds. Reused existing geometry nodes and constructible pullback; added only two native coefficient-specific structural statements (triangulated closure and the two-open Mayer-Vietoris triangle); open restriction, cover detection and open derived base change are cited from the existing generic ringed-site nodes (maintainer-reader repair, 2026-10-22, which dropped lem-sf-native-adic-open-derived-localization), with logged Mathlib searches.",
+  "blueprint": "The inherited creation chain ends at a maintainer seed, so blueprint_refs.py ancestor returns None. The split realizes the finite-affine-cover part of native proper finiteness serving prop-functor-package clause 3 (current blueprint package proof); steps 1-2 give devissage, 3-6 give the source-cover reduction, and 7-8 give target localization and finite bounds. It does not change the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated used for the conditional cover argument; the native six-functors unit supplies no replacement for this scheme or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used for the conditional cover argument; the native six-functors unit supplies no replacement for this scheme or derived-category tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used for the conditional cover argument; the native six-functors unit supplies no replacement for this scheme or derived-category tool."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic exactness of restriction of module sheaves over an arbitrary ring sheaf to a slice site (steps 3, 8); no node of the six-functors route states it for an arbitrary coefficient ring sheaf, and the native B is not a constant ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-truncation-triangle",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-ringed-site-restriction-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-298f83bc7",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-298f83bc7 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 3 new nodes, the 19 cited statements, the sk-thm-sf-package route, and LowerStar.lean 94-415 / BaseChange.lean:118. The route is the Lean dévissage, the affine theorem (sorry) stays a hypothesis, and no SGA is used. The statement is unchanged from the base; coefficient category Mod(B_V), native locally finite functions. Steps checked: (1) K Noetherian, pqf-lem-locnoeth-lft, K-injectives, triangulated Rg_*. (2) Truncation induction a..b with empty interval. (3)/(4) two-open MV plus strong induction on intersection-closed 𝒫, base n=0 and n=1 checked. (5) Affine intersections are taken only inside an affine A via A→Spec Z separated, never on T (E1 avoided). (6) qc of O∩O' via the quasi-separated affine-cover criterion (1). (7) Finite type and quasi-separatedness preserved by base change; V_i lft over K. (8) Gluing of the bounds. New nodes: bounded-constructible-triangulated is true (lisse kernel-strata, lisse-extension, long exact sequence), not a duplicate, kept. mayer-vietoris-triangle is true for arbitrary C; the only existing MV triangles are Zariski O_X or the j_! form in lem-sp-ringed-topos-binary-descent, so it is kept. FIX (C5/D): open-derived-localization only specializes existing generic nodes. Its base change is lem-weil-pbc-ringed-derived-slice-localization (sk-thm-properbasechange, on route) plus the slice identification of lem-weil-proetale-weakly-etale-localization(1). Exactness of restriction is lem-sfb-ringed-site-restriction-kflat. H^n commutation follows from exactness, and cover detection is the sheaf axiom. Dropped it and rewrote steps 3, 4, 7, 8 with these citations: j^*M=M|_U from j^{-1}B_T=B_U, the empty site, the functor u=(−)×_Y X with the precomposition ring map, and Zariski covers being pro-étale coverings. Step 8 is now non-elementary. proof_deps recomputed; no cycle. Added tool_use lem-sfb-ringed-site-restriction-kflat. Accepted tool_uses: right-derived-triangulated, truncation-triangle, kinjective-resolutions. One fault in total. Minor note: step 5 leaves 'Y lft over K' implicit, which is harmless since step 6 is only applied to the V_i.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdicAffineFinitenessDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.adicAffineFinitenessDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdicAffineFinitenessDescent.lean",
+  "statement": "theorem adicAffineFinitenessDescent (l : ℕ) [Fact l.Prime] (K : Type u) [Field K] [IsAlgClosed K] (_hK : ringChar K ≠ l) (h_affine : ∀ (A B : Scheme.{u}) [IsAffine A] [IsAffine B] (t : B ⟶ Spec (CommRingCat.of K)) [LocallyOfFiniteType t] (g : A ⟶ B) [LocallyOfFiniteType g] (M : AdicSheaf l A), IsAdicConstructibleSheaf M → DerivedCategory.TStructure.t.bounded ((adicLowerStar l g).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj M)) ∧ _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l B) ((adicLowerStar l g).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj M))) {X Y : Scheme.{u}} (s : Y ⟶ Spec (CommRingCat.of K)) [LocallyOfFiniteType s] [CompactSpace Y] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f] (L : DerivedCategory (AdicSheaf l X)) (hL : DerivedCategory.TStructure.t.bounded L) (hLc : _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l X) L) : DerivedCategory.TStructure.t.bounded ((adicLowerStar l f).rightDerivedFunctor.obj L) ∧ _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y) ((adicLowerStar l f).rightDerivedFunctor.obj L)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50b3dc678",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read item node, all 10 stmt_deps records, source LowerStar.lean (94-148, 430-470) and the native Module/Constructible/ConstantSheaf/UpperStar declarations. Clause match: PadicAlgCl l (algebraic closure, not completion); adicConstantSheaf = locallyFiniteFunctions (rfl); AdicSheaf = Mod(B_V) over Scheme.ProEt (recorded site, no substitute); IsAdicConstructibleSheaf = Zariski-local finite stratification by immersions with constructible ranges, lisse with per-member rank; D^b_c = t.bounded and homologyProperty for every n; adicLowerStar along precomposition map, actual rightDerivedFunctor; h_affine has exactly the node's hypotheses (affine A, B; B lft over K; g lft; M constructible; degree 0) matching upstream finiteLowerStar_singleFunctor_of_isAffine; conclusion for qc+qs+lft f, Y compact and lft over K, every bounded constructible L. No separatedness or extra assumption. Edge cases (empty schemes, rank 0, char 0, negative degrees) covered; single universe u. lean.statement is verbatim; imports exist (stmt modules public, 6 recorded proof-dep modules plain); docstrings have source, blueprint and 8 steps; sorry-only; no definitions. Live item has no lean record, not superseded. Advisory: native decls are owned by def-sf-native-weil-derived-framework (not a stmt_dep; node defines the notions inline, siblings use the same decls); upstream rightDerivedFunctor used instead of the recorded rightDerivedFunctorOfQuasiIsoResolutions (same universal functor). Not recompiled (no change); worker reports a clean scompile."
+ }
+}

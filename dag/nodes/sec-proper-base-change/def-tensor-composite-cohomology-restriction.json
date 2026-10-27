@@ -1,0 +1,125 @@
+{
+ "id": "def-tensor-composite-cohomology-restriction",
+ "kind": "definition",
+ "title": "Constructed cohomology restriction with tensor-composition coefficients",
+ "statement": "For schemes A, B, C [def-pc-scheme], maps a:A→B, b:B→C, c:A→C with a≫b=c, a C-module G and a degree q, construct the ordinary module-cohomology map from H^q(B,b^*G) to H^q(A,c^*G) [def-weil-pbc-module-cohomology-fmap]. Its coefficient map is the adjunct, under the fixed chosen tensor adjunction [def-pc-module-pullback], of the normalized tensor-composition isomorphism [lem-sc-etale-qcoherent-presheaf-functorial] followed by equality transport along a≫b=c. Name that coefficient-object equality and prove the defining equation. This is a construction of the existing canonical map, with no new choice.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8 and 01FB, coefficient maps on cohomology; descent.tex Tag 03DR, normalized tensor composition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Apply the tensor-pullback object function at G to the equality a≫b=c, obtaining the named equality of coefficient objects. Compose the normalized tensor-composition morphism with its equality transport; take its adjunct using the existing chosen tensor adjunction and apply moduleCohomologyFMap in degree q. The formula with the named equality proof is reflexivity. For the direct congrArg formula, use proof irrelevance to identify the equality proofs and apply congruence to the adjoint coefficient and cohomology construction before specializing any module. This works also for identity arrows, arbitrary q, and the zero coefficient module: no cancellation or geometric hypothesis is used.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-pc-module-pullback",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8 and 01FB, coefficient maps on cohomology; descent.tex Tag 03DR, normalized tensor composition."
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback map induced by tensor composition coefficient isomorphism and equality transport",
+   "results": "8 hits, all groupCohomology chain or cocycle maps and comparison formulae. No scheme-module cohomology restriction with this chosen normalized tensor adjunction.",
+   "date": "2026-10-26",
+   "verdict": "Use the project canonical cohomology map and normalized tensor composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tensorSectionsComp",
+   "results": "0 hits; project identifier unknown to Mathlib search.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib replacement for the fixed normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorCompositeCohomologyRestriction|tensorSectionsComp|moduleCohomologyFMap",
+   "results": "0 Mathlib hits. Read the existing project definitions of tensorSectionsComp and moduleCohomologyFMap.",
+   "date": "2026-10-26",
+   "verdict": "Factor the existing formula; no new mathematical prerequisite."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitAffineComparisonTransportNaturality",
+  "date": "2026-10-26",
+  "group": "H5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The classical torsion constructibility input, expanded through smooth proper curves: canonical affine coherent cohomology restrictions in the structural-unit coefficient transport. This construction is the restriction identification in new-unit-affine-comparison-canonical-naturality.",
+   "via": [
+    "new-unit-affine-comparison-canonical-naturality",
+    "new-unit-affine-comparison-transport",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorCompositeCohomologyRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorCompositeCohomologyRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorCompositeCohomologyRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorCompositeCoefficient_eq",
+   "AlgebraicGeometry.Scheme.Modules.tensorCompositeCohomologyRestriction",
+   "AlgebraicGeometry.Scheme.Modules.tensorCompositeCohomologyRestriction_eq"
+  ],
+  "statement": "def tensorCompositeCohomologyRestriction {A B C : Scheme.{u}}\n    (a : A ⟶ B) (b : B ⟶ C) (c : A ⟶ C) (w : a ≫ b = c)\n    (G : C.Modules) (q : ℕ) :\n    AddCommGrpCat.of ((RingedSpace.moduleCohomology B.toRingedSpace q).obj\n      ((tensorPullback b).obj G)) ⟶\n    AddCommGrpCat.of ((RingedSpace.moduleCohomology A.toRingedSpace q).obj\n      ((tensorPullback c).obj G))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d01b4",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T082110-L-2132403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d01b4",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T082110-L-2132403",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (identical) and its node; affineRealizationRestriction new body vs old (same map via the proved tensorCompositeCohomologyRestriction_eq) and the change record; new node lean.statement vs TensorCompositeCohomologyRestriction; #print axioms clean; SLOW importer AffineCohomologyEtaleModuleRealization timed against the published build at the same time (88.5 s published vs 73.6 s delivered: load, not this delivery)"
+ }
+}

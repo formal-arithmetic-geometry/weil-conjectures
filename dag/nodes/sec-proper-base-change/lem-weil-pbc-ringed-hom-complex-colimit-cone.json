@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-ringed-hom-complex-colimit-cone",
+ "kind": "statement",
+ "title": "The Hom-complex cone of an arbitrary sequential colimit is limiting",
+ "statement": "Let C be a small category, J a Grothendieck topology, O a sheaf of commutative rings, F a sequential diagram of O-module cochain complexes, and N any O-module cochain complex. The cone with point Hom(colim F,N), and legs given by precomposition with colimit inclusions F_m -> colim F, is a limit of the diagram m -> Hom(F_m,N) over the opposite natural numbers. The Hom complex and its projections are those of [def-pur-hom-complex] and [lem-sc-hom-complex-projections]. No boundedness, finite-freeness, Koszul hypothesis, or unit compatibility is involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, lemma-colim-and-lim-of-duals; Section 0A8X, section-hom-complexes; for finite evaluation also lemma-dual-perfect-complex and more-algebra.tex Tag 0913."
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate F at every source degree p. Evaluation preserves colimits of complexes. Package the existing sheaf tensor-Hom adjunction and its source naturality as a parametrized adjunction. Tensoring on the right preserves colimits by symmetry and closure. The parametrized-adjunction limit-preservation theorem therefore proves that internal sheaf Hom into N^(p+n), with its actual homObjMap precomposition maps, sends the evaluated colimit to a limit.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a cone s over Hom(F_m,N) in degree n, project each leg to Hom(F_m^p,N^(p+n)). The componentwise precomposition formula makes these into cones over the limits from the first step. Lift each of them, and combine those lifts by the Hom-complex product universal property. Factorization and uniqueness follow after every product projection and every tower projection. Thus the canonical degree-n cone is limiting.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone legs are already chain maps by functoriality of Hom. Limits of complexes are created degreewise, so the degreewise limiting cones from the previous step prove that the original cone of complexes is limiting.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, Hom-of-colimit and finite-duality steps",
+  "note": "V4: the ordinary-complex refinement is proved by a private abstract product-cone argument, instantiated with the actual sheaf Hom functor and parametrized tensor-Hom adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom sends colimits in its first variable to limits, and tensor by a finite free complex agrees with Hom from its dual",
+   "results": "Eight results include dualTensorHomEquiv, ihom.adjunction, tensorLeft preservation of colimits, and HomologicalComplex evaluation preserving colimits. No full sheaf-complex comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use generic closed-category and degreewise limit API; no exact finite Koszul comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed monoidal category internal Hom from a colimit is the limit of internal Homs, and internal Hom from a dualizable object is tensor with its dual",
+   "results": "Eight results include closedOfHasLeftDual and the evaluation/coevaluation identities. None gives finite Koszul complexes or the strict tower.",
+   "date": "2026-10-26",
+   "verdict": "No exact strict finite Koszul evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfShape\", \"internalHom\"",
+   "results": "ihom.instPreservesLimitsOfShapeOppositeObjFunctorFlipInternalHom in Mathlib.CategoryTheory.Monoidal.Closed.Braided.",
+   "date": "2026-10-26",
+   "verdict": "Used for sheaf Hom from a colimit; not a full complex or Koszul comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*[Ee]val|[Ee]val.*dual|homComplex.*[Cc]olimit; homComplexFunctorObjIsoInternalHom; Koszul evaluation",
+   "results": "Module dual evaluation and HomComplexInternalHomComparison are available; no Hom-complex colimit cone theorem or strict finite Koszul evaluation theorem. Blueprint searches for colim-and-lim-of-duals and Koszul evaluation return no imported blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of either intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulColimitHomOrdinaryLimit",
+  "date": "2026-10-26",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedHomComplexColimitCone",
+  "file": "lean/Sheaf/CategoryTheory/RingedHomComplexColimitCone.lean",
+  "declaration": "CategoryTheory.ringedHomComplexColimitCone_isLimit",
+  "statement": "theorem ringedHomComplexColimitCone_isLimit\n    (F : ℕ ⥤ ringedSiteComplex O) (N : ringedSiteComplex O) :\n    Nonempty (IsLimit (ringedHomComplexColimitCone O F N))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringedHomComplexColimitCone",
+   "CategoryTheory.ringedHomComplexColimitCone_isLimit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T212006-L-4187679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T212006-L-4187679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

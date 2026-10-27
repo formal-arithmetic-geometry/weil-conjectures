@@ -1,0 +1,199 @@
+{
+ "id": "lem-sf-supported-trace-contractions",
+ "kind": "statement",
+ "title": "Compact-support coordinate contractions without a diagonal class",
+ "statement": "Let \\(A\\) be a finite commutative ring and \\(f:X\\to Y\\) proper. Use all the canonical maps and notation of [def-sf-supported-diagonal-calculus]. Let \\(J\\) be a lisse rank-one sheaf of \\(A\\)-modules on \\(Y\\), \\(n\\in\\mathbb Z\\), \\(L=J[2n]\\), and \\(e:B\\simeq f^*L\\). For any trace-diagonal datum \\(d=(t,\\delta)\\), define \\(t_1,t_2\\) from \\(t\\) as in that definition. For all \\(M\\in D_A(X)\\) and \\(K\\in D_A(Y)\\),\n\\[F(C_B(M));\\epsilon_t(FM)=D(E_B(M));F(\\pi_{p_1,M,p_2^*B}^{-1};(\\mathrm{id}_M\\otimes t_1);\\rho_M),\\]\n\\[C_B(H_BK);H_B(\\epsilon_t(K))=P_2(c_H\\otimes\\mathrm{id}_{p_2^*B});\\pi_{p_2,H_BK,p_2^*B}^{-1};(\\mathrm{id}_{H_BK}\\otimes t_2);\\rho_{H_BK}.\\]\nHere \\(\\rho\\) is the canonical right unitor and semicolons denote composition in application order. No condition on \\(\\delta\\) or on either integral is assumed, and \\(\\delta\\) does not occur in these formulas. The equalities hold on the full unbounded categories.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Compact-support coordinate contractions without a diagonal class; both coordinate triangle computations"
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "For the first coordinate, apply firstExtraction to the arbitrary objects B and M. This is the Kunneth path identity before a trace is chosen. Postcompose it with d.trace tensor the identity and the left unitor. Symmetry naturality and the braided unit identity turn the final symmetry followed by trace into identity tensor d.trace followed by the right unitor.",
+   "uses": [
+    "lem-sf-supported-first-extraction",
+    "lem-kun-tensor-sym",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the remaining inverse f projection followed by the scalar trace. Transport projectionTraceNormalization through rightDerivedLowerShriekIsoRightDerivedLowerStar. Projection coincidence, naturality of the comparison, tensor naturality and right-unitor naturality prove the supported normalization. Cancel the projection isomorphism, combine the two F maps, and use the definition of traceFirst. The counit component is its specified inverse-projection, trace, left-unitor composite. This proves the first equality without using e or the line assumption.",
+   "uses": [
+    "lem-asd-source-proper-projection-coincidence",
+    "def-sp-unbounded-proper-shriek-star-comparison",
+    "lem-sfb-etale-projection-trace-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical self-symmetry of shiftedLine J n is identity. Apply secondExtraction with that equality and e. Postcompose the resulting identity with B tensor f* of (d.trace tensor identity followed by the left unitor). Naturality and left unitality of the pullback tensor comparison, symmetry naturality and the right-unitor tensor identity normalize extractionShuffle followed by this map to identity tensor (f*d.trace followed by the pullback unit comparison), then the right unitor. Functoriality combines this with the inverse coordinate and inverse exchange factors to give exactly traceSecond. The other path is the given counit inside the coefficient-first twisted pullback.",
+   "uses": [
+    "lem-sfb-etale-even-line-self-symmetry",
+    "lem-sf-supported-second-extraction",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-kun-tensor-sym",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-supported-first-extraction",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit",
+  "lem-asd-source-proper-projection-coincidence",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "lem-sfb-etale-projection-trace-normalization",
+  "lem-sfb-etale-even-line-self-symmetry",
+  "lem-sf-supported-second-extraction",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Two coordinate computations, factoring off the canonical isomorphism identities before choosing the scalar trace; Lean assembly by M3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized diagonal kernel coordinate trace integrals imply adjunction triangle identities",
+   "results": "ProbabilityTheory.Kernel.IsReversible, ProbabilityTheory.Kernel.partialTraj_self, ProbabilityTheory.Kernel.copy, ProbabilityTheory.Kernel.lintegral_id_prod, ProbabilityTheory.Kernel.id_comp, ProbabilityTheory.Kernel.IsProper.lintegral_mul, ProbabilityTheory.parallelProd_posterior_comp_copy_comp, ProbabilityTheory.Kernel.comp_id",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Ii]ntegr|sectionComposite",
+   "results": "",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula naturality with a diagonal section and tensor product",
+   "results": "CategoryTheory.CartesianMonoidalCategory.tensorHom_fst, CategoryTheory.NatTrans.tensor_naturality, CategoryTheory.MonoidalCategory.externalProductCompDiagIso_hom_app_app, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.Abelian.LeftResolution.π_naturality, CategoryTheory.Limits.prod.diag_map, CategoryTheory.Limits.pullbackDiagonalMapIso.hom_snd, CategoryTheory.Abelian.LeftResolution.π_naturality_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper direct image compact support forget supports comparison commutes projection formula base change",
+   "results": "TopCat.Sheaf.pushforwardForgetIso, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left, HasCompactSupport.comp_isClosedEmbedding, IsProperMap, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_preservesPullback_of_right, Function.support_comp_eq_preimage, HasCompactSupport.comp_homeomorph",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of tensor projection formula with a section whose composite is identity",
+   "results": "Bimod.TensorBimod.π_tensor_id_actRight, id_tensor_π_preserves_coequalizer_inv_desc, Algebra.FormallyUnramified.comp_sec, SemimoduleCat.MonoidalCategory.rightUnitor_naturality, CategoryTheory.Functor.Monoidal.tensorHom_app_snd, π_tensor_id_preserves_coequalizer_inv_desc, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, CategoryTheory.CartesianMonoidalCategory.tensorHom_snd",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*section|section.*projection",
+   "results": "Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/Algebra/Module/Presentation/Cokernel.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper compactly supported direct image tensor projection exchange comparison",
+   "results": "LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, le_comap_range_rTensor",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfDiagonalKernelIntegrals",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; The first triangle after proper base change, projection formula and composition, and the second triangle sentence identifying G epsilon_K as integration in the first coordinate.",
+   "via": [
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfSupportedTraceContractions",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfSupportedTraceContractions.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.contractions",
+  "statement": "theorem contractions {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ) {B : DerivedCategoryModule A X}\n    (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))\n    (d : TraceDiagonalDatum A f B) :\n    (∀ M : DerivedCategoryModule A X,\n      (push A f).map (comparison A f B M).hom ≫ (SfDiagonalKernel.counit A d).app ((push A f).obj\n        M) =\n        (directComparison A f).hom.app (kernel A f B M) ≫\n          (push A f).map\n            ((orderedProjection A (pullback.fst f f) M\n                ((CoordinateTrace.pull A (pullback.snd f f)).obj B)).inv ≫\n              ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n                (SfDiagonalKernel.traceFirst A d) ≫\n                (unitRightUnitor (ModuleCat.{u + 1} A) X M).hom)) ∧\n    (∀ K : DerivedCategoryModule A Y,\n      (comparison A f B ((CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj\n        B).obj K)).hom ≫\n          (CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B).map\n            ((SfDiagonalKernel.counit A d).app K) =\n        (push A (pullback.snd f f)).map\n            (((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).map\n              (coordinateTwisted A f (CoordinateTrace.shiftedLine A J n) K e).hom).app\n                ((CoordinateTrace.pull A (pullback.snd f f)).obj B)) ≫\n          (orderedProjection A (pullback.snd f f) ((CoordinateTrace.pull A f ⋙ (derivedTensor\n            (ModuleCat.{u + 1} A) X).obj B).obj K)\n              ((CoordinateTrace.pull A (pullback.snd f f)).obj B)).inv ≫\n            ((derivedTensor (ModuleCat.{u + 1} A) X).obj\n                ((CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n                  K)).map\n              (SfDiagonalKernel.traceSecond A d (CoordinateTrace.shiftedLine A J n) e) ≫\n              (unitRightUnitor (ModuleCat.{u + 1} A) X\n                ((CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n                  K)).hom)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   }
+  ],
+  "blueprint": "The two coordinate triangle computations before normalized diagonal integration."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fda89",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261026T222540-L-666663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T235918-L-1468120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

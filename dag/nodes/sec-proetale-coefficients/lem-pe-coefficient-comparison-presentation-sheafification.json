@@ -1,0 +1,128 @@
+{
+ "id": "lem-pe-coefficient-comparison-presentation-sheafification",
+ "kind": "lemma",
+ "title": "Affine-presentation sheafification for coefficient-sized comparison",
+ "statement": "For X, a commutative ring A in max(v,u+1), an A-module sheaf G on the coefficient-sized etale model of def-weil-pbc-site-comparison-morphism, and an affine etale presentation P of det-pe-classical-definition-continuity-map indexed in universe u+1, the unit from the presheaf left Kan extension of G along the opposite comparison inclusion to its pro-etale sheafification is invertible both at AsSmall.up(P.cone.pt) and at every AsSmall.up(P.diagram.obj i). This asserts only pointwise invertibility of sheafification, not that any section cocone is a colimit.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-describe-pullback-from-etale and lemma-limit-pullback (Tag 099S); finite-presentation limit criterion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-definition-continuity-map"
+ ],
+ "proof": [
+  {
+   "text": "On the original affine pro-etale basis, restrict the coefficient-sized Kan extension along AffineProEt.toProEt followed by AsSmall.up. For a universe-u cofiltered affine etale diagram, Scheme.preservesColimit_yoneda gives the colimit of the representable Hom presheaves. Lift these Hom sets through ULift, obtaining exactly the representables of the coefficient-sized model. The fully faithful Kan-extension colimit criterion of CategoryTheory/Pro/PresheafColimit then proves relative filtered-colimit preservation of this restriction. Only universe-u diagrams are used in this sheaf-condition argument.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction further to affine etale objects identifies the Kan extension with the given etale sheaf using the invertible Kan-extension unit. Apply Presheaf.isSheaf_of_generates_of_isRelativelyPresentable to AffineProEt.minimalPrecoverage: its covers are finite and relatively presentable, and filtered colimits of the displayed coefficient-sized modules commute with finite limits. Thus the restricted Kan extension is a sheaf on the affine basis.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-basis inclusion followed by AsSmall.up is a dense subsite of the coefficient-sized pro-etale model: compose the two covering-sieve equivalences, and use cover density under composition with an equivalence. The dense-subsite sheafification-unit theorem now makes the actual toSheafify map invertible at every affine pro-etale basis object.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each affine etale stage is a basis object. For the vertex choose a stage i and restrict the original cone along Over.forget i. This functor is initial. Full faithfulness of Spec identifies its affine global-sections cocone with a ring colimit. The structure maps from the ring of stage i are etale because maps between etale X-schemes are etale. Apply ind_etale_small_index to their universe-(u+1) presentation; proAffineEtale_iff_appTop then proves that the projection to i is pro-affine-etale. Compose with the affine etale structure map of stage i. Apply the basis result to this vertex and to each stage, giving the required conjunction with the original universe-(u+1) presentation unchanged.",
+   "uses": [
+    "lem-pe-ind-etale-small-index"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-pe-ind-etale-small-index"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-describe-pullback-from-etale and lemma-limit-pullback; B9 formal proof generalizing the affine-basis Kan-extension proof in WeilConjectures/SixFunctors/ProEtale/Comparison/FullyFaithful to the coefficient-sized models, and shrinking only for vertex basis membership"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of an etale sheaf on the proetale site sends affine cofiltered limits of etale schemes to filtered colimits of modules",
+   "results": "['AlgebraicGeometry.Scheme.Etale.forget', 'AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful', 'Condensed.lanSheafProfinite', 'CondensedMod.ofSheafProfinite', 'LightCondMod.ofSheafLightProfinite', 'Condensed.profiniteSolid', 'LightProfinite.hasSheafify', 'AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit']",
+   "date": "2026-10-26",
+   "verdict": "The closest geometric theorem is Scheme.preservesColimit_yoneda, whose index is universe u. The source comparison continuity and affine-basis sheafification theorems fix coefficient hom-universe u+1. Neither gives the required simultaneous index/coefficient sizes. Generic colimit transport lemmas are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_comparisonUpperStar_mapCocone|coefficient.*continuous|preservesColimit_yoneda",
+   "results": "['Mathlib/NumberTheory/Padics/MahlerBasis.lean', 'Mathlib/Topology/ContinuousMap/Polynomial.lean', 'Mathlib/CategoryTheory/Presentable/Basic.lean', 'Mathlib/CategoryTheory/Presentable/Basic.lean', 'Mathlib/CategoryTheory/Presentable/Basic.lean', 'Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean', 'Mathlib/Analysis/Analytic/Composition.lean', 'Mathlib/RingTheory/MvPowerSeries/PiTopology.lean']",
+   "date": "2026-10-26",
+   "verdict": "The closest geometric theorem is Scheme.preservesColimit_yoneda, whose index is universe u. The source comparison continuity and affine-basis sheafification theorems fix coefficient hom-universe u+1. Neither gives the required simultaneous index/coefficient sizes. Generic colimit transport lemmas are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimit",
+   "results": "['CategoryTheory.Limits.PreservesColimit', 'CategoryTheory.Limits.preservesColimit_subsingleton', 'CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit', 'CategoryTheory.Limits.PreservesColimitsOfShape.mk', \"CategoryTheory.Limits.PreservesColimit.mk'\", 'CategoryTheory.Limits.instHasColimitCompOfPreservesColimit', 'CategoryTheory.Limits.reflectsColimit_of_reflectsIsomorphisms', 'CategoryTheory.Limits.preservesColimit_of_iso_diagram']",
+   "date": "2026-10-26",
+   "verdict": "The closest geometric theorem is Scheme.preservesColimit_yoneda, whose index is universe u. The source comparison continuity and affine-basis sheafification theorems fix coefficient hom-universe u+1. Neither gives the required simultaneous index/coefficient sizes. Generic colimit transport lemmas are used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonContinuity",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "classicality detail: continuity of etale inverse images, affine-presentation sheafification for coefficient-sized comparison",
+   "via": [
+    "lem-pe-coefficient-comparison-continuity",
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonPresentationSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonPresentationSheafification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_presentation_toSheafify_isIso",
+  "statement": "theorem coefficientComparison_presentation_toSheafify_isIso (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (G : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n    (P : AffinePresentation X I) :\n    let L := (Scheme.smallModelComparisonInclusion.{u, v} X).op.lan.obj G.obj\n    let η := toSheafify (Scheme.coefficientProEtaleModelTopology.{u, v} X) L\n    IsIso (η.app (op (AsSmall.up.obj P.cone.pt))) ∧\n      ∀ i : I, IsIso (η.app (op (AsSmall.up.obj (P.diagram.obj i))))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T202345-L-2710045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T001027-L-4163018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

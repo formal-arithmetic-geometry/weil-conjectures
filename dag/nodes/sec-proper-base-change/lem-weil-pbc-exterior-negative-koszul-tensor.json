@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-exterior-negative-koszul-tensor",
+ "kind": "statement",
+ "title": "Algebraic exterior Koszul tower versus ordered negative tensor tower",
+ "statement": "For every commutative ring A and a finite list a : Fin r → A, the exterior power complexes K_m(a) of [def-weil-pbc-intrinsic-completion] are isomorphic to B_m(a) of [def-weil-pbc-finite-negative-koszul-tensor]. The isomorphisms commute with each consecutive diagonal transition and carry each degree-zero exterior unit to the recursive tensor unit. The empty list and the zero ring are included.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-negative-koszul-tensor",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0664, lemma-join-sequences-koszul-complex, the decomposition by the ordered first generator."
+ },
+ "proof": [
+  {
+   "text": "For the empty list the exterior-power basis is empty in positive degree and is A in degree zero. Extend by zero to integers, giving the unit-complex isomorphism; naturality of exteriorPower.zeroEquiv proves its transition identity.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-finite-negative-koszul-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on r. Compose the first-generator splitting with tensor of identity on the first factor and the inductive tail isomorphism. The monoidal composition identity combines the two transition squares. The total tensor (0,0) summand formula combines the two unit identities.",
+   "uses": [
+    "lem-weil-pbc-koszul-adjoin-generator",
+    "def-weil-pbc-finite-negative-koszul-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-negative-koszul-tensor",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-adjoin-generator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0664 and algebraization.tex Tag 0A0E, finite free dual identification; coordinate details expanded by E9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex of concatenation is tensor product",
+   "results": "8 hits, including HomologicalComplex.tensorObj, tensorHom, HasTensor and associator. No Koszul comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct theorem; the total tensor infrastructure applies."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"tensor\"",
+   "results": "exteriorPower.toTensorPower and toTensorPower_apply_ιMulti only; neither is a Koszul complex comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "0 Mathlib hits through msearch. Local searches read completedKoszulPower, ringedKoszulDualTower and the Hom-complex API.",
+   "date": "2026-10-26",
+   "verdict": "No matching implementation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompletedKoszulCoefficientComparison",
+  "date": "2026-10-26",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite Koszul model of derived completion in def-weil-pbc-completed-pullback; Tag 0A0E identifies the negative finite complex with the dual of the positive one. This node isolates algebraic exterior koszul tower versus ordered negative tensor tower.",
+   "via": [
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilExteriorKoszulTensorComparison",
+  "file": "lean/Sheaf/Paper/WeilExteriorKoszulTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exteriorNegativeKoszulTensorComparison",
+  "statement": "theorem exteriorNegativeKoszulTensorComparison\n    {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin r → A) :\n    ∃ e : ∀ m : ℕ, completedKoszulPower (A := A) r a m ≅\n        finiteNegativeKoszulTensor r a m,\n      (∀ m, completedKoszulTransition (A := A) r a m ≫ (e m).hom =\n        (e (m + 1)).hom ≫ finiteNegativeKoszulTransition r a m) ∧\n      (∀ m, finiteKoszulExteriorUnitZero r a m ≫ (e m).hom.f 0 =\n        finiteNegativeKoszulUnitZero r a m)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T201802-L-2618116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T201802-L-2618116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

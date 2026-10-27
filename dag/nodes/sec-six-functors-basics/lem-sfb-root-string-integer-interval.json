@@ -1,0 +1,101 @@
+{
+ "id": "lem-sfb-root-string-integer-interval",
+ "kind": "statement",
+ "title": "The integer indices in an independent root string form an interval",
+ "statement": "Let $I$ be finite, let $M,N$ be vector spaces over the field $\\mathbf Q$ [def-weil-field], and let $P:\\mathrm{RootPairing}\\ I\\ \\mathbf Q\\ M\\ N$ be a crystallographic root pairing in the Mathlib sense: injective root and coroot families with a perfect bilinear pairing, root-coroot value $2$, simultaneous reflection permutations, and integral root-coroot pairings. Write $a_i=P.\\mathrm{root}(i)$. Let $i,j\\in I$ with $a_i,a_j$ linearly independent over $\\mathbf Q$. Put $p=P.\\mathrm{chainBotCoeff}(i,j)$ and $q=P.\\mathrm{chainTopCoeff}(i,j)$, the largest nonnegative integers with $a_j-pa_i$ and $a_j+qa_i$ roots, respectively. Then for every integer $z$, $$a_j+za_i\\in\\operatorname{range}(P.\\mathrm{root})\\quad\\Longleftrightarrow\\quad -p\\le z\\le q.$$",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C, root systems; the exact interval assertion is Mathlib/LinearAlgebra/RootSystem/Chain.lean:186--192 (root_add_zsmul_mem_range_iff), hypotheses at :35--46,133--136 and coefficient definitions at :110--128."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite reduced crystallographic root system the roots on a line beta plus integer multiples of alpha form one consecutive root string with no gaps",
+   "results": "{\"t\": \"2026-10-23T22:54:32Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite reduced crystallographic root system the roots on a line beta plus integer multiples of alpha form one consecutive root string with no gaps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.setOf_root_add_zsmul_mem_eq_Icc\", \"RootPairing.setOf_root_sub_zsmul_mem_eq_Icc\", \"RootPairing.setOf_root_add_zsmul_eq_Icc_of_linearIndependent\", \"RootPairing.Iic_chainTopCoeff_eq\", \"RootPairing.root_add_zsmul_mem_range_iff\", \"RootPairing.one_le_chainTopCoeff_of_root_add_mem\", \"RootPairing.one_le_chainBotCoeff_of_root_add_mem\", \"RootPairing.Iic_chainBotCoeff_eq\"], \"digest\": \"37239b6a4e3422e3\"} Read the hits and Mathlib/LinearAlgebra/RootSystem/Chain.lean:35--46,133--136,186--205. root_add_zsmul_mem_range_iff gives exactly the claimed interval; the root and coroot families and pairing are those of RootPairing.",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.root_add_zsmul_mem_range_iff, with the explicit linear-independence hypothesis in scope at Chain.lean:133--136."
+  },
+  {
+   "tool": "grep",
+   "query": "root.*(chain|zsmul)|chain.*root|mem.*root.*iff",
+   "results": "{\"t\": \"2026-10-23T22:54:33Z\", \"tool\": \"grep\", \"query\": \"root.*(chain|zsmul)|chain.*root|mem.*root.*iff\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\"], \"digest\": \"c664264c6d33ba56\"} Read the hits and Mathlib/LinearAlgebra/RootSystem/Chain.lean:35--46,133--136,186--205. root_add_zsmul_mem_range_iff gives exactly the claimed interval; the root and coroot families and pairing are those of RootPairing.",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.root_add_zsmul_mem_range_iff, with the explicit linear-independence hypothesis in scope at Chain.lean:133--136."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.chainBotCoeff, RootPairing.chainTopCoeff",
+   "results": "{\"t\": \"2026-10-23T22:54:33Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.chainBotCoeff, RootPairing.chainTopCoeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_add_chainTopCoeff_le_three\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_chainTopIdx\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.chainBotCoeff_sub_chainTopCoeff\"], \"digest\": \"0990ad2828c2a81b\"} Read the hits and Mathlib/LinearAlgebra/RootSystem/Chain.lean:35--46,133--136,186--205. root_add_zsmul_mem_range_iff gives exactly the claimed interval; the root and coroot families and pairing are those of RootPairing.",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.root_add_zsmul_mem_range_iff, with the explicit linear-independence hypothesis in scope at Chain.lean:133--136."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Roots in an alpha string through beta are exactly the consecutive integers between minus the bottom coefficient and the top coefficient",
+   "results": "{\"t\": \"2026-10-23T22:54:34Z\", \"tool\": \"leansearch\", \"query\": \"Roots in an alpha string through beta are exactly the consecutive integers between minus the bottom coefficient and the top coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.setOf_root_add_zsmul_mem_eq_Icc\", \"RootPairing.root_add_zsmul_mem_range_iff\", \"RootPairing.setOf_root_sub_zsmul_mem_eq_Icc\", \"RootPairing.root_sub_nsmul_mem_range_iff_le_chainBotCoeff\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"RootPairing.Base.root_mem_span_int\", \"RootPairing.Iic_chainTopCoeff_eq\", \"RootPairing.root_sub_zsmul_mem_range_iff\"], \"digest\": \"792a5c6761a1e647\"} Read the hits and Mathlib/LinearAlgebra/RootSystem/Chain.lean:35--46,133--136,186--205. root_add_zsmul_mem_range_iff gives exactly the claimed interval; the root and coroot families and pairing are those of RootPairing.",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.root_add_zsmul_mem_range_iff, with the explicit linear-independence hypothesis in scope at Chain.lean:133--136."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma root_add_zsmul_mem_range_iff|lemma setOfPred_root_add_zsmul_mem_eq_Icc",
+   "results": "{\"t\": \"2026-10-23T22:57:33Z\", \"tool\": \"grep\", \"query\": \"lemma root_add_zsmul_mem_range_iff|lemma setOfPred_root_add_zsmul_mem_eq_Icc\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\"], \"digest\": \"61902032881f7f3f\"} Read the hits and Mathlib/LinearAlgebra/RootSystem/Chain.lean:35--46,133--136,186--205. root_add_zsmul_mem_range_iff gives exactly the claimed interval; the root and coroot families and pairing are those of RootPairing.",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.root_add_zsmul_mem_range_iff, with the explicit linear-independence hypothesis in scope at Chain.lean:133--136."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RootPairing.root_add_zsmul_mem_range_iff",
+  "file": "Mathlib/LinearAlgebra/RootSystem/Chain.lean",
+  "line": 186,
+  "how": "exact: lines 186--192; specialize the coefficient ring to Q. Finite index, crystallographic pairing, and linear independence are exactly the hypotheses at lines 35--46 and 133--136. Definitions chainTopCoeff and chainBotCoeff are at lines 110--128; the nonnegative endpoint characterization is at lines 137--164."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-adjoint-weyl-signs",
+  "date": "2026-10-24",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, Chevalley bases and Theorem 23.71, pp.508--509. Agent-formulated root-string consequence needed in the omitted details of Theorem 23.72; Theorem 23.71 itself states bracket magnitudes, not this Weyl-operator identity. Root-string calculation: consecutive integral roots in an independent-root string, before multiplying the successive Chevalley bracket constants.",
+   "via": [
+    "lem-sfb-chevalley-adjoint-weyl-signs",
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

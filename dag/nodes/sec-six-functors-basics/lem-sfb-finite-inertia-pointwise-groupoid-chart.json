@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+ "kind": "statement",
+ "title": "Pointwise finite-flat groupoid chart with one identified stabilizer",
+ "statement": "Work over a field $k$ [def-weil-field], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], algebraic spaces mean [def-trf-algebraic-space], and stacks, representability and 2-fibre products mean [def-sfb-stable-pointed-moduli-groupoids]. Representable morphism properties are tested after scheme base change on etale scheme charts. Flatness, local finite presentation, etaleness and properness use [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-etale-morphism, def-weil-proper-morphism]. A stack morphism is separated if its relative diagonal is proper. The inertia stack $I_{\\mathcal A}$ has objects $(a,\\alpha)$ with $a\\in\\mathcal A(T)$ and $\\alpha\\in\\operatorname{Aut}(a)$, and arrows given by conjugating isomorphisms. Its projection forgets $\\alpha$. Finite inertia means that every scheme base change of this projection is a finite scheme morphism [def-weil-finite-integral-morphism]. The set $|\\mathcal A|$ consists of field-valued objects up to isomorphism after common field extension, with the atlas topology [lem-sfb-stack-point-topology]. A scheme groupoid $(U,R,s,t,e,i,c)$ has the laws of [def-a1-groupoid-scheme]. Its quotient $[U/R]$ is the fppf stackification of the groupoid of $T$-points, using [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description]. Finite locally free means finite, flat and locally of finite presentation [def-pc-finite-locally-free]. Let $\\mathcal X/k$ have finite inertia, and let $x\\in|\\mathcal X|$. There exist affine $k$-schemes $U,R$, a scheme groupoid $(U,R,s,t,e,i,c)$ with $s,t$ finite locally free, a morphism $h:\\mathcal V=[U/R]\\to\\mathcal X$ representable by algebraic spaces and etale, and $v\\in|\\mathcal V|$ mapping to $x$, such that $h$ identifies the stabilizer group schemes at $v$ and $x$. This identification is understood after choosing a common field over which the two points and their comparison isomorphism are represented; it is an isomorphism of group schemes, not just of their rational points.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), specialized to finite inertia; its hypotheses follow from Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5), and finite morphisms being separated and locally quasi-finite (morphisms.tex Tags 01WN, 02NU)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-stack-point-topology",
+  "def-a1-groupoid-scheme",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-finite-locally-free",
+  "def-sfb-moduli-inertia",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-inertia-flat-quasifinite-presentation] to obtain $p:U\\to\\mathcal X$, $u\\in U$ over $x$, and the scheme self-relation $R=U\\times_{\\mathcal X}U$ with separated, flat, locally finitely presented, locally quasi-finite projections. The stabilizer fibre $G_u$ is the scheme base change of $I_{\\mathcal X}\\to\\mathcal X$ along the object $p(u):\\operatorname{Spec}\\kappa(u)\\to\\mathcal X$: on every test scheme over this field, both descriptions are the automorphisms of that object. Thus $G_u$ is finite by the finite-inertia hypothesis.",
+   "uses": [
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first paragraph: scheme presentation and finiteness of G_u"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-etale-groupoid-affine-stabilizer-splitting] to $(U,R)$ and $u$. Its separatedness, flatness, local finite presentation and local quasi-finiteness hypotheses are provided by step 1, and $G_u$ is finite. Obtain affine $U'$, an etale $q:U'\\to U$, a point $u'$ with the same residue field, and an open subgroupoid $P\\subset R'=U'\\times_U R\\times_U U'$ finite, flat and locally finitely presented over $U'$ in both projections, containing the entire stabilizer fibre over $u'$. The canonical identification $R'\\simeq U'\\times_{\\mathcal X}U'$ sends a triple $(a,r,b)$ to the objects $a,b$ and the isomorphism between $p(q(a))$ and $p(q(b))$ specified by $r$; the inverse reads off those same three entries. It respects identity, inverse and composition. This supplies the fibre-product detail omitted in the source.",
+   "uses": [
+    "lem-sfb-etale-groupoid-affine-stabilizer-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU4, second paragraph, using spaces-more-groupoids.tex Tag 0DTE (lemma-splitting-affine-scheme)"
+   }
+  },
+  {
+   "text": "Put $p'=pq:U'\\to\\mathcal X$. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $p'$ is representable, flat and locally of finite presentation. Its image $D\\subseteq|\\mathcal X|$ is open by [lem-sfb-stack-point-topology-flat-lfp-open]. Choose a smooth surjective atlas $A\\to\\mathcal X$. The open subset $D_A\\subseteq A$ lying above $D$ is invariant under $A\\times_{\\mathcal X}A$, since the two projections of a field-valued arrow represent the same point of $\\mathcal X$. By [lem-sfb-invariant-open-substack-descent] it defines an open algebraic substack $\\mathcal W\\subseteq\\mathcal X$. That lemma's factorization criterion makes $p'$ factor through $\\mathcal W$, and $U'\\to\\mathcal W$ is surjective: each field-valued object of $\\mathcal W$ has its point in the image of $U'$, so lifts after a common field extension. Flatness and local finite presentation follow by base change to $\\mathcal W$. Apply clause (2) of [lem-sfb-fppf-groupoid-stack-presentations] to get $[U'/R']\\simeq\\mathcal W$, compatibly with $p'$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-fppf-groupoid-stack-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU4, replacement by the open image; algebraic.tex Tag 04WY (remark-flat-fp-presentation); stacks-properties.tex Tags 04XL (lemma-topology-points), 06FJ (lemma-open-substacks), and 0507 (lemma-substacks-presentation)"
+   }
+  },
+  {
+   "text": "The projections of $R'$ are flat and locally of finite presentation: they are the base changes of $p'$. Apply [lem-sfb-open-subgroupoid-etale-quotient] to the open subgroupoid $P\\subset R'$ to obtain an algebraic stack $\\mathcal V=[U'/P]$ and a representable etale map $\\mathcal V\\to[U'/R']\\simeq\\mathcal W$. The open immersion $\\mathcal W\\to\\mathcal X$ is representable etale: its scheme base changes are open immersions, hence etale by [lem-weil-pbc-open-immersion-etale]. Composition is representable etale by [lem-sfb-stack-chartwise-smooth-etale-calculus], giving $h:\\mathcal V\\to\\mathcal X$. Since $U'$ is affine and $P\\to U'$ is finite, $P$ is affine by [lem-weil-pbc-finite-morphism-permanence](b). Both projections of $P$ are finite locally free by [def-pc-finite-locally-free]. Thus $(U',P)$ supplies the required affine groupoid.",
+   "uses": [
+    "lem-sfb-open-subgroupoid-etale-quotient",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU4, final paragraph: Tag 0DU2 (lemma-quasi-splitting-etale), affineness and finite-flat projections"
+   }
+  },
+  {
+   "text": "Let $v$ be the image of $u'$ in $\\mathcal V$. Then $h(v)=x$, represented over $\\kappa(u')=\\kappa(u)$ by $p(q(u'))$. Clause (1) of [lem-sfb-fppf-groupoid-stack-presentations] identifies the self-relation of $U'\\to[U'/P]$ with $P$ and that of $U'\\to[U'/R']$ with $R'$. Pulling these identifications back along the pair $(u',u')$ identifies the stabilizer map with $P_{(u',u')}\\to R'_{(u',u')}=G_{u'}$. This is an open subscheme inclusion whose underlying image is all of $G_{u'}$ by the splitting property of step 2. An open subscheme with the entire underlying space has the same restricted structure sheaf, so this inclusion is an isomorphism of schemes, including all nilpotents. Composition of arrows restricts from $R'$ to $P$, so the isomorphism respects multiplication, identity and inverse. The equivalence with the full open substack $\\mathcal W\\subset\\mathcal X$ preserves these automorphism groups. This proves the required isomorphism of stabilizer group schemes over the common representing field.",
+   "uses": [
+    "lem-sfb-fppf-groupoid-stack-presentations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU4, last sentence: containment of the whole stabilizer, not only its rational points"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "lem-sfb-etale-groupoid-affine-stabilizer-splitting",
+  "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-open-subgroupoid-etale-quotient",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), finite-inertia specialization; with the first part of lemma-etale-local-quasi-DM, Tag 0DTE and Tag 0DU2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with finite inertia has at every point a representable etale neighbourhood presented by an affine finite locally free groupoid and identifying the stabilizer at that point",
+   "results": "[leanfinder] OK 8 hit(s); top results: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, Algebra.Etale.finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite inertia stacks admit etale affine finite flat groupoid charts preserving one geometric stabilizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T] (x : T),\\n  {γ | γ +ᵥ x = x}.Finite\", \"doc\": \"For any properly discontinuous additive action of a group $\\\\Gamma$ on a topological space $T$, and for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \": {γ : Γ | γ • x = x}.Finite\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $T$, then for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is finite\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \"(A : C) [IsConnected A] : Finite (Aut A)\", \"doc\": \"In a pre-Galois category, the automorphism group of any connected object is a finite group.\"}\n  {\"name\": \"Ideal.inertia_le_stabilizer\", \"module\": \"Mathlib.RingTheory.Ideal.Pointwise\", \"type\": \"{R : Type*} [Ring R] (P : Ideal R) [MulSemiringAction M R] : P.toAddSubgroup.inertia M ≤ MulAction.stabilizer M P\", \"doc\": \"For a ring $ R $ equipped with a multiplicative semiring action by a monoid $ M $, and an ideal $ P $ of $ R $, the inertia subgroup of $ P $ (elements $ \\\\sigma \\\\in M $ satisfying $ \\\\sigma \\\\cdot x - x\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"[ProperlyDiscontinuousSMul Γ T] (x : T) : (MulAction.stabilizer Γ x : Set Γ).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : AddGroup Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : AddAction Γ T]\\n  [ProperlyDiscontinuousVAdd Γ T] (x : T), (↑(AddAction.stabilizer Γ x)).Finite\", \"doc\": \"For any point $x$ in a topological space $T$ under a properly discontinuous additive action by an additive group $\\\\Gamma$, the stabilizer subgroup of $x$ is finite, i.e., $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\ga\"}\n  {\"name\": \"MulAction.stabilizer_finite\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"(hs₀ : s.Nonempty) (hs : s.Finite) : (stabilizer G s : Set G).Finite\", \"doc\": \"If a group $ G $ acts on a set $ \\\\alpha $, and $ s \\\\subseteq \\\\alpha $ is a non-empty finite subset, then the stabilizer subgroup of $ s $ in $ G $ is finite.\"}\n  {\"name\": \"AddAction.stabilizer_finite\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {s : Set G}, s.Nonempty → s.Finite → (↑(AddAction.stabilizer G s)).Finite\", \"doc\": \"Let $ G $ be an additive group acting on a type $ \\\\alpha $, and let $ s \\\\subseteq G $ be a non-empty finite subset. Then the stabilizer subgroup of $ s $, consisting of all elements $ g \\\\in G $ satisf\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Groupoid\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.inertia|pointwise.*stabilizer|quasi.DM",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/Additive/VerySmallDoubling.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Pointwise.Stabilizer\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/Blocks.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Pointwise.Stabilizer\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with finite inertia has a pointwise stabilizer preserving etale neighbourhood given by an affine finite locally free groupoid",
+   "results": "OK; 8 hits; AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack with finite inertia has pointwise etale affine finite flat groupoid charts preserving the stabilizer",
+   "results": "OK; 8 hits; AlgebraicGeometry.Scheme.etalePretopology, Algebra.Etale, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, Ideal.Quotient.map_ker_stabilizer_subtype, Ideal.Quotient.ker_stabilizerHom, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, HasGroupoid, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsEtale\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.inertia|pointwise.*stabilizer|quasi.DM",
+   "results": "OK; 2 hits; Mathlib/GroupTheory/GroupAction/Blocks.lean, Mathlib/Combinatorics/Additive/VerySmallDoubling.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ring etaleness, ordinary subgroupoids or topological stabilizers; none states this algebraic-stack or scheme-groupoid result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-etale-affine-charts",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4.",
+   "via": [
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DU4. Created only the preliminary flat locally quasi-finite scheme-relation input; reused newly landed finite-stabilizer splitting and open-subgroupoid quotient etaleness statements, plus existing flat presentation, openness, open-substack descent and permanence statements. Wrote out the 2-fibre-product identification and full stabilizer scheme comparison. Statement unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/moduli chain at the first sentence of Tag 0DUE, namely its pointwise finite-flat chart input 0DU4. The current latest sk-thm-sf-ctf-stability does not repeat this historical subargument. The ancestor command reports null; inherited from.node and via are retained. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic scheme fact finite over affine is affine; no groupoid or alteration route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Scheme chart test for etaleness of an open substack inclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-104ea9d2c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-104ea9d2c (reviewer sub-agent of L); spot-checked: Read Stacks 0DU2, 0DU3 (first part), 0DU4, 06MF and 0CL0, and checked the tags. With finite inertia, 0DU4's hypotheses follow (0CL0: separated, lqf inertia, i.e. quasi-DM with separated diagonal, and finite G_x); the item statement is unchanged and matches 0DU4 with no weakening. Step 1: the new node gives the source's first paragraph (06MF chart, separated R, 03XX scheme), and G_u is finite as the inertia pullback. Step 2: the splitting node (0DTE/04RK(2)) has all its hypotheses met, and the R' identification is written out. Step 3: open image, invariant atlas open, open substack W, and clause (2) giving [U'/R'] ≃ W; hypotheses checked. Step 4: 0DU2-node, open immersion étale, composite étale, P affine by permanence (b), projections finite locally free. Step 5: the stabilizer map is the base change of the open P ⊂ R', surjective by splitting, so it is a scheme isomorphism (μ_p checked). New node lem-sfb-finite-inertia-flat-quasifinite-presentation: true, self-contained, a real lemma (06MF + 03XX). It is not a duplicate: the DM sibling dm-finite-inertia-affine-relation needs DM and a given étale chart. Three search kinds recorded. The item generalizes the DM node dm-pointed-finite-groupoid-neighbourhood, as the non-DM parent requires. Tool uses on two pbc Mathlib leaves accepted. Batch-5 flags: all of them reach sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-projective-bundle-morphism; they are general stack foundations, outside both assumptions, so accepted. Live and side-live have the item unsplit, with no repair note. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteInertiaPointwiseGroupoidChart",
+  "declaration": "CategoryTheory.exists_finiteInertia_pointwise_groupoid_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteInertiaPointwiseGroupoidChart.lean",
+  "statement": "theorem exists_finiteInertia_pointwise_groupoid_chart (k : Type u) [Field k] (X : BasedCategory.{v, w} (Over (Spec (.of k)))) (hX : IsAlgebraicModuliStack X) (hfinite : IsRepresentableFiniteModuliMap (moduliInertiaProjection X)) (x : ModuliPoints X) : ∃ (U R : Over (Spec (.of k))) (s t : R ⟶ U) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left), IsAffine U.left ∧ IsAffine R.left ∧ IsGroupoidScheme s.left t.left e i c ∧ s.left.IsFiniteLocallyFree ∧ t.left.IsFiniteLocallyFree ∧ ∃ (V : BasedCategory.{u + 1, u + 1} (Over (Spec (.of k)))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) V), Nonempty (SchemeGroupoidQuotientPresentation s t e i c V a) ∧ IsAlgebraicModuliStack V ∧ ∃ h : BasedFunctor V X, IsRepresentableByAlgebraicSpaces h ∧ IsEtaleModuliMap h ∧ ∃ z : ModuliFieldObject V, moduliPointMap h (Quot.mk _ z) = x ∧ ∀ (T : Over (V.p.obj z.val).left) (b : Functor.Fiber V.p (Over.mk (T.hom ≫ (V.p.obj z.val).hom))) (β : b.val ⟶ z.val), V.p.IsHomLift (Over.homMk T.hom rfl : Over.mk (T.hom ≫ (V.p.obj z.val).hom) ⟶ V.p.obj z.val) β → Function.Bijective ((moduliFiberMap h (Over.mk (T.hom ≫ (V.p.obj z.val).hom))).mapAut (X := b))",
+  "branch": "sheaf-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing inertia projection, representable finite scheme tests and fppf quotient presentation. Stabilizers are identified by the canonical automorphism map on every scheme over the field representative, retaining nonreduced tests. Five landed owning definition nodes are appended to stmt_deps. No statement correction or new notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1da21a459",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Read item node, Stacks 0DU4 (finite-inertia specialization via 0CL0), delivered module and all used declarations (IsAlgebraicModuliStack, IsRepresentableFiniteModuliMap+moduliInertiaProjection, IsGroupoidScheme, IsFiniteLocallyFree=finite+flat+lfp, SchemeGroupoidQuotientPresentation, IsRepresentableByAlgebraicSpaces, IsEtaleModuliMap, ModuliFieldObject/ModuliPoints/moduliPointMap, moduliFiberMap.mapAut). Every hypothesis/conclusion clause matches; stabilizer clause is bijectivity of Aut maps on all T over the field representative (group-scheme iso incl. nonreduced T), same idiom as landed DmStabilizerIsomorphismOpenLocus; e,i,c over k forced by laws; V.{u+1,u+1} only existential, no restriction on X. No extra DM/noetherian/universe assumptions. Node diff vs live: lean record + 5 appended stmt_deps, all with base Lean records owning the used declarations. lean.statement verbatim in file; only sorry; docstrings with source+blueprint; report sections present; no duplicate found. Upstream redundancy IsGroupoidScheme vs Scheme.IsGroupoid noted, harmless. Not recompiled (no change)."
+ }
+}

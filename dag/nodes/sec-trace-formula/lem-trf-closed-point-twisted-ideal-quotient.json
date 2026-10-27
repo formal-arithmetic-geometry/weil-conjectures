@@ -1,0 +1,276 @@
+{
+ "id": "lem-trf-closed-point-twisted-ideal-quotient",
+ "kind": "statement",
+ "title": "Twisted boundary-ideal quotient and its residue-one section",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $x\\in X$ a point with closed singleton, $U\\subseteq X$ an affine open containing $x$, and $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module] with free generator $e$ on $U$. Put $Z=X\\setminus U$ and $Z'=Z\\cup\\{x\\}$. For either closed subset $T$, let $\\mathcal I_T(V)=\\{b\\in\\mathcal O_X(V):b(t)=0\\text{ in }\\kappa(t)\\text{ for all }t\\in T\\cap V\\}$ be its reduced vanishing ideal [lem-weil-pbc-reduced-induced-closed-subscheme, def-weil-residue-field]. Write $\\mathcal I=\\mathcal I_Z$, $\\mathcal J=\\mathcal I_{Z'}$, and $\\mathcal Q=\\mathcal I/\\mathcal J$, the sheafification of the sectionwise quotient in the category of module sheaves [def-weil-sheaf-of-modules-category]. Then $\\mathcal I$ and $\\mathcal J$ are quasi-coherent ideal sheaves [pqf-def-coherent], $\\mathcal J\\subseteq\\mathcal I$, $\\mathcal I|_U=\\mathcal O_U$, $\\mathcal I|_{X\\setminus\\{x\\}}=\\mathcal J|_{X\\setminus\\{x\\}}$, and $\\mathcal J_x=\\mathfrak m_x\\subseteq\\mathcal I_x=\\mathcal O_{X,x}$ [def-weil-pbc-module-stalk]. For every integer $n\\ge1$, put $\\mathcal M_n=\\mathcal L^{\\otimes n}$ [def-pur-sheaf-tensor-product]. The canonical sequence\n$$0\\longrightarrow\\mathcal J\\otimes\\mathcal M_n\\longrightarrow\\mathcal I\\otimes\\mathcal M_n\\xrightarrow{\\pi_n}\\mathcal Q\\otimes\\mathcal M_n\\longrightarrow0$$\nis short exact, and the canonical map $\\iota_n:\\mathcal I\\otimes\\mathcal M_n\\to\\mathcal M_n$ is injective. There exists a global section $q_n\\in\\Gamma(X,\\mathcal Q\\otimes\\mathcal M_n)$ whose restriction to $U$ is $\\pi_n(e^{\\otimes n})$, using $\\mathcal I|_U=\\mathcal O_U$, and whose restriction to $X\\setminus\\{x\\}$ is zero. The canonical quotient identification $(\\mathcal Q\\otimes\\mathcal M_n)_x\\cong(\\mathcal M_n)_x/\\mathfrak m_x(\\mathcal M_n)_x$, induced by $\\iota_n$, takes $(q_n)_x$ to the class of $e_x^{\\otimes n}$; in its generator coordinate this is $1\\in\\kappa(x)$, in particular nonzero.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-residue-field",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-marked-ideal-order"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-reduced-induced-closed-subscheme](1) to the closed subsets $Z$ and $Z^{\\prime}$: both ideals are quasi-coherent, with exactly the residue-vanishing description in the statement. Since $Z\\subseteq Z^{\\prime}$, vanishing on $Z^{\\prime}$ implies vanishing on $Z$, so $\\mathcal J\\subseteq\\mathcal I$. On every open $W\\subseteq U$, $Z\\cap W=\\varnothing$, and hence $\\mathcal I(W)=\\mathcal O_X(W)$. Put $V=X\\setminus\\{x\\}$, which is open by the closed-point hypothesis. On every open $W\\subseteq V$, $Z^{\\prime}\\cap W=Z\\cap W$, so $\\mathcal I(W)=\\mathcal J(W)$. These equalities commute with restrictions and give the asserted equalities of restricted sheaves.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+   }
+  },
+  {
+   "text": "Use the germ description [def-weil-pbc-module-stalk] and $\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ [def-weil-residue-field]. We already have $\\mathcal I_x=\\mathcal O_{X,x}$. If a germ comes from $\\mathcal J$, its residue is zero, so it belongs to $\\mathfrak m_x$. Conversely, represent any $a\\in\\mathfrak m_x$ by a section $b$ on a neighbourhood $W\\subseteq U$ of $x$. Its residue at $x$ is zero. Since $Z^{\\prime}\\cap W=\\{x\\}$, this is precisely the condition $b\\in\\mathcal J(W)$. Thus $\\mathcal J_x=\\mathfrak m_x$. The quotient $\\mathcal Q$ is the cokernel of the ideal inclusion in [def-weil-sheaf-of-modules-category]. By [lem-weil-pbc-module-stalk-exact](1),(3),(5), its canonical sequence is short exact, $\\mathcal Q_x\\cong\\mathcal O_{X,x}/\\mathfrak m_x$, and $\\mathcal Q_y=0$ for $y\\in V$, because $\\mathcal J_y=\\mathcal I_y$. A section all of whose germs are zero vanishes on a neighbourhood of each point and hence is zero by sheaf locality; consequently $\\mathcal Q|_V=0$.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-residue-field",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+   }
+  },
+  {
+   "text": "Here is the local tensor calculation, directly from [def-pur-sheaf-tensor-product]. On any open $W$ with a free generator $f$ of $\\mathcal L|_W$, induction on $n$ gives the generator $f^{\\otimes n}$ of $\\mathcal M_n|_W$. For every module sheaf $\\mathcal F$, the coefficient map on local pure tensors is $a\\otimes(b f^{\\otimes n})\\mapsto ba$, with inverse $a\\mapsto a\\otimes f^{\\otimes n}$. The balancing relation proves that the first map is well-defined, and both composites are the identity on pure tensors, hence on finite sums. These maps commute with restriction. They therefore extend over sheafification [def-weil-pbc-sheafification]: by [lem-weil-pbc-stalk-sheafification-space] every germ of a section of the sheafified tensor product is the image of a germ of a local presheaf tensor, and two local presheaf tensors with the same image have the same germ; so local tensor representatives are sent to the displayed coefficients, which agree on overlaps and glue in $\\mathcal F$; the two inverse identities remain true locally and hence globally on $W$. Thus $(\\mathcal F\\otimes\\mathcal M_n)|_W\\cong\\mathcal F|_W$, naturally in $\\mathcal F$. Such $W$ cover $X$ by [def-sc-invertible-module].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-module",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CA, section-tensor-product, definition by sheafification; explicit rank-one coordinate calculation"
+   }
+  },
+  {
+   "text": "Apply the coordinate isomorphisms of Step 3 to $\\mathcal F=\\mathcal J,\\mathcal I,\\mathcal Q,\\mathcal O_X$ on each trivializing $W$. Naturality identifies the two maps of the twisted sequence with $\\mathcal J|_W\\to\\mathcal I|_W\\to\\mathcal Q|_W$, and identifies $\\iota_n$ with $\\mathcal I|_W\\hookrightarrow\\mathcal O_W$. For each $y\\in W$, these identifications give the short exact stalk sequence of Step 2 and an injective inclusion. Since the $W$ cover $X$, [lem-weil-pbc-module-stalk-exact](5) proves exactness everywhere, while (1),(3),(5) applied with zero end terms give the stated monomorphism and epimorphism assertions. This proves short exactness and injectivity of $\\iota_n$ without assuming that taking sections preserves epimorphisms. The same coordinates with $\\mathcal F=\\mathcal Q$ show $(\\mathcal Q\\otimes\\mathcal M_n)|_V=0$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$. On $U$, the generator $e^{\\otimes n}$ defines a section of $\\mathcal I\\otimes\\mathcal M_n$ because $\\mathcal I|_U=\\mathcal O_U$; let $a_U$ be its image under $\\pi_n$. On $V$ choose the zero section. Their restrictions to $U\\cap V$ agree, since the quotient twist is zero there by Step 4. The opens $U,V$ cover $X$: a point outside $V$ equals $x$ and lies in $U$. The sheaf gluing axiom, part of [def-weil-sheaf-of-modules-category], now gives $q_n$ with exactly the two required restrictions. This uses no lift on global sections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+   }
+  },
+  {
+   "text": "At $x$, the $e^{\\otimes n}$ coordinate of Step 3 identifies $(\\mathcal I\\otimes\\mathcal M_n)_x$ with $\\mathcal O_{X,x}$ and $(\\mathcal J\\otimes\\mathcal M_n)_x$ with $\\mathfrak m_x$, by Step 2. In the target $(\\mathcal M_n)_x$, $\\iota_n$ sends $a\\otimes b e_x^{\\otimes n}$ to $ab e_x^{\\otimes n}$. Thus its image is all of $(\\mathcal M_n)_x$, and the image of the twisted $\\mathcal J$ is exactly $\\mathfrak m_x(\\mathcal M_n)_x$. Clause (3) of [lem-weil-pbc-module-stalk-exact] applied to the twisted quotient map gives the asserted canonical quotient identification, induced by this very map $\\iota_n$. By restriction to $U$ and the germ rule [def-weil-pbc-module-stalk], $(q_n)_x$ is the image of $e_x^{\\otimes n}$. Its coefficient modulo $\\mathfrak m_x$ is $1$ in the field $\\kappa(x)$ [def-weil-residue-field], so is nonzero.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-module-stalk",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, proof, first paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"cokernel\"",
+   "results": "2 hits. Read the returned statements: no exact match or one-line specialization. CokernelCofork.tensor and isColimitTensor describe tensor cokernel coforks, not the reduced-ideal quotient at a point or its global distinguished section. Read Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean:34-58.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme X, a closed point x in an affine open U trivializing an invertible sheaf L, the reduced ideals of X minus U and of its union with x have quotient supported at x; tensoring by L to the n gives an exact sequence and a global quotient section with residue one",
+   "results": "8 hits. Read the returned statements: no exact match or one-line specialization. Hits concern AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishingIdeal|tensor.*[Ee]xact|[Ee]xact.*tensor",
+   "results": "25 hits. Read the returned statements: no exact match or one-line specialization. Read Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:560-630: vanishingIdeal is the reduced closed-subset ideal construction, with no twisted quotient section. Search restricted to AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Twisting the quotient of two reduced closed subset ideal sheaves by a line bundle has a global section with residue one at a closed point",
+   "results": "8 hits. Read the returned statements: no exact match or one-line specialization. Hits concern AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.residue, ModuleCat.Tilde.exists_const, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.LocallyRingedSpace.Γevaluation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf tensor preserves the exact sequence of boundary vanishing ideals and the cokernel is a skyscraper residue fibre with a distinguished global generator",
+   "results": "8 hits. Read the returned statements: no exact match or one-line specialization. Hits concern SheafOfModules.generatorsOfIsCokernelFree_π, Algebra.Generators.H1Cotangent.exact_δ_map, exact_of_isLocalized_span, Algebra.Generators.CotangentSpace.exact, Algebra.Generators.Cotangent.exact, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed point x and open U containing x in a scheme, tensor the quotient of reduced boundary ideals by a line bundle power and glue the local generator to zero, obtaining a global section with residue one",
+   "results": "8 hits; read returned statements: AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.evaluation, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.exists_const, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation. No statement gives the twisted ideal quotient and its distinguished glued section. Read Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:560-610 and ResidueField.lean:45-96; the hits provide ideal and residue constructions only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishingIdeal|closedPoint.*quotient|quotient.*closedPoint",
+   "results": "25 hits; read returned statements: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean. No statement gives the twisted ideal quotient and its distinguished glued section. Read Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:560-610 and ResidueField.lean:45-96; the hits provide ideal and residue constructions only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of reduced ideal sheaves of the complement of an open and its union with a closed point, twisted by an invertible sheaf, has a global section equal to a local generator modulo the maximal ideal",
+   "results": "8 hits; read returned statements: AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData.ideal, AlgebraicGeometry.LocallyRingedSpace.coe_toΓSpecSheafedSpace_hom_base_hom_apply_asIdeal, ModuleCat.Tilde.exists_const, AlgebraicGeometry.StructureSheaf.germ_toOpen, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, ModuleCat.Tilde.const, AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply. No statement gives the twisted ideal quotient and its distinguished glued section. Read Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:560-610 and ResidueField.lean:45-96; the hits provide ideal and residue constructions only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, SheafOfModules",
+   "results": "0 hits; read returned statements: . No statement gives the twisted ideal quotient and its distinguished glued section. Read Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:560-610 and ResidueField.lean:45-96; the hits provide ideal and residue constructions only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of two quasi-coherent ideals supported at one closed point, tensored with a locally free rank one sheaf, admits a global section whose stalk generates the residue fibre",
+   "results": "8 hits; read returned statements: AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, Ideal.Fiber.exists_smul_eq_one_tmul, Ideal.ResidueField.exists_smul_eq_tmul_one, ModuleCat.Tilde.isUnit_toStalk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, ModuleCat.Tilde.stalkToFiberLinearMap. No statement gives the twisted ideal quotient and its distinguished glued section. Read Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:560-610 and ResidueField.lean:45-96; the hits provide ideal and residue constructions only.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ideal-twist-vanishing-implies-ample",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited fibrewise ampleness input below lem-trf-local-term-locality: the 0B5P construction invoked through the proper curve degree criterion; returned item steps 2-4, reduced boundary ideals, exact twisted quotient and residue-one gluing.",
+   "via": [
+    "lem-trf-ideal-twist-vanishing-implies-ample",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-closed-point-twisted-ideal-quotient",
+  "worker": "stage1",
+  "summary": "Verified the entire statement against Stacks 0B5P and 01J3. Kept all hypotheses and conclusions. Expanded the ideal stalk calculation, explicit local rank-one tensor coordinates, stalkwise exactness, two-open gluing, and canonical residue-one coordinate. Reused existing nodes throughout; no new nodes or hollow restatements. The existing untwisted Lean declaration does not state this item.",
+  "blueprint": "Realizes the inherited ampleness input below lem-trf-local-term-locality, through lem-trf-ideal-twist-vanishing-implies-ample: Stacks 0B5P first paragraph, reduced boundary ideals, exact twisted quotient, and the residue-one section. Read the current latest blueprint ancestor; this is a subordinate construction and does not change the contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction and residue description of reduced closed-subset ideals, explicitly invoked in 0B5P; the unit has no replacement construction."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic exactness and cokernel calculation for module sheaves on a ringed space; used to check the locally trivialized sequence and the canonical stalk quotient, not to replace a geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-326573fd8",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-326573fd8 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged vs live, unsplit there, no repair note, no new nodes), all 6 steps, every cited statement, and Stacks 0B5P (coherent.tex, lemma-quasi-compact-h1-zero-invertible, proof first paragraph), which the item faithfully expands. Steps 1, 2 and 4-6 are correct: J_x=m_x via a representative on W⊆U with Z'∩W={x}; Q|_V=0 by stalks plus locality; stalkwise exactness via stalk-exact (5) on trivializing W; two-open gluing on U∪V=X; the quotient identification induced by ι_n via clause (3) sends (q_n)_x to the class of e_x^{⊗n}, giving 1 in κ(x). Edge cases checked: U=X; X={x}; Spec k[ε]/ε²; non-rational closed point; n=1. Parent lem-trf-ideal-twist-vanishing-implies-ample uses it consistently. Not a duplicate of lem-pqf-h1-closed-point-ideal-quotient (untwisted, about every global lift). Tool uses accepted: reduced-induced-closed-subscheme and module-stalk-exact are generic. FIX (C4): Step 3 extends the tensor coordinates over sheafification using the local-representative description, which def-pur-sheaf-tensor-product does not state. Added def-weil-pbc-sheafification and lem-weil-pbc-stalk-sheafification-space (Mathlib leaf) to Step 3's uses with one sentence of text, set elementary=false, and updated proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPointTwistedIdealQuotient",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.closedPoint_twisted_ideal_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointTwistedIdealQuotient.lean",
+  "statement": "theorem closedPoint_twisted_ideal_quotient (X : Scheme.{u}) (x : X) (hx : IsClosed ({x} : Set X)) (U : X.affineOpens) (hxU : x ∈ U.1) (L : X.Modules) [L.IsInvertible] (e : Γ(L, U.1)) (he : IsFreeGenerator e) : (boundary U.1).toModules.IsQuasicoherent ∧ (boundaryPoint U.1 x hx).toModules.IsQuasicoherent ∧ boundaryPoint U.1 x hx ≤ boundary U.1 ∧ (∀ (W : X.Opens), W ≤ U.1 → (boundary U.1).idealOfOpens W = ⊤) ∧ (∀ (W : X.Opens), x ∉ W → (boundary U.1).idealOfOpens W = (boundaryPoint U.1 x hx).idealOfOpens W) ∧ HilbertSamuel.stalkIdeal (boundary U.1) x = ⊤ ∧ HilbertSamuel.stalkIdeal (boundaryPoint U.1 x hx) x = IsLocalRing.maximalIdeal (X.presheaf.stalk x) ∧ (∀ (n : ℕ), 1 ≤ n → (∃ h : (inclusion U.1 x hx ▷ L.tensorPow n) ≫ projection U.1 x hx (L.tensorPow n) = 0, (ShortComplex.mk (inclusion U.1 x hx ▷ L.tensorPow n) (projection U.1 x hx (L.tensorPow n)) h).ShortExact) ∧ (∀ W : X.Opens, Function.Injective ((multiplication U.1 (L.tensorPow n)).app W)) ∧ ∃ (q : Γ(quotient U.1 x hx ⊗ L.tensorPow n, ⊤)), (∃ t : Γ((boundary U.1).toModules ⊗ L.tensorPow n, U.1), (multiplication U.1 (L.tensorPow n)).app U.1 t = powerSection e n ∧ (quotient U.1 x hx ⊗ L.tensorPow n).presheaf.map (homOfLE (le_top : U.1 ≤ ⊤)).op q = (projection U.1 x hx (L.tensorPow n)).app U.1 t) ∧ (∀ (W : X.Opens), x ∉ W → (quotient U.1 x hx ⊗ L.tensorPow n).presheaf.map (homOfLE (le_top : W ≤ ⊤)).op q = 0) ∧ ∃ θ : (quotient U.1 x hx ⊗ L.tensorPow n).presheaf.stalk x ≃ₗ[X.presheaf.stalk x] ((L.tensorPow n).presheaf.stalk x ⧸ fibreRelations x (L.tensorPow n)), (∀ v : ((boundary U.1).toModules ⊗ L.tensorPow n).presheaf.stalk x, θ ((projection U.1 x hx (L.tensorPow n)).stalkLinearMap x v) = (fibreRelations x (L.tensorPow n)).mkQ ((multiplication U.1 (L.tensorPow n)).stalkLinearMap x v)) ∧ θ ((quotient U.1 x hx ⊗ L.tensorPow n).presheaf.germ ⊤ x (by trivial) q) = (fibreRelations x (L.tensorPow n)).mkQ ((L.tensorPow n).presheaf.germ U.1 x hxU (powerSection e n)) ∧ ∃ c : ((L.tensorPow n).presheaf.stalk x ⧸ fibreRelations x (L.tensorPow n)) ≃+ X.residueField x, (∀ r : X.presheaf.stalk x, c ((fibreRelations x (L.tensorPow n)).mkQ (r • (L.tensorPow n).presheaf.germ U.1 x hxU (powerSection e n))) = X.residue x r) ∧ c (θ ((quotient U.1 x hx ⊗ L.tensorPow n).presheaf.germ ⊤ x (by trivial) q)) = 1 ∧ θ ((quotient U.1 x hx ⊗ L.tensorPow n).presheaf.germ ⊤ x (by trivial) q) ≠ 0)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.boundary",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.boundaryPoint",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.inclusion",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.quotient",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.powerSection",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.projection",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.multiplication",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.fibreRelations",
+   "AlgebraicGeometry.Scheme.Modules.ClosedPointTwist.closedPoint_twisted_ideal_quotient"
+  ],
+  "note": "Uses the already landed HilbertSamuel.stalkIdeal to express the two ideal stalk equalities; its owning definition node is added to stmt_deps. All helper constructions specialize existing ideal, cokernel and tensor constructions. The isomorphisms are characterized on all representatives, hence are canonical."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3601bf97",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Stacks 0B5P: hypotheses exact (Scheme.{u}, closed singleton, affineOpens, IsInvertible, IsFreeGenerator), no extra assumptions; boundary/boundaryPoint = Mathlib vanishingIdeal, Q = cokernel; qcoh, J≤I, idealOfOpens=⊤ on W≤U, equality on W∌x, stalkIdeal = ⊤ / maximalIdeal; ShortExact of whiskered sequence; ι_n injective on all opens; q_n pinned via unique t (ι injective) and zero on W∌x; θ uniquely characterized by representative formula (π_x surjective), c pinned by residue formula, c(θ q_x)=1, ≠0. Deps read in source (tensorPow, IsFreeGenerator, toModules/idealOfOpens, stalkLinearMap, stalkIdeal owned by definition node def-trf-marked-ideal-order, newly added stmt_dep, acyclic). Not dup of untwisted exists_closedPoint_ideal_quotient_section. lean.statement verbatim, sorry only, docstrings with source/blueprint/6 steps, both report sections present. Edge cases U=X, X={x}, nonreduced, n=1, nonrational point. No fix, nothing compiled. Advisory: node text does not cite def-trf-marked-ideal-order."
+ }
+}

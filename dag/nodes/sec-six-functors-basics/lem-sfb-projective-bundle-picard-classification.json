@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-projective-bundle-picard-classification",
+ "kind": "statement",
+ "title": "Invertible modules on projective bundles over arbitrary schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $E$ a finite locally free $\\mathcal O_S$-module of constant rank $r\\geq2$ [def-amb-finite-locally-free-module]. Let $p:P=\\mathbf P_S(E)\\to S$ be the bundle of one-dimensional quotients with tautological invertible module $\\mathcal O_P(1)$ [lem-trf-projective-bundle-quotient-geometry]. For every invertible $\\mathcal O_P$-module $L$ [def-sc-invertible-module], there are a unique locally constant function $d:|S|\\to\\mathbf Z$ and an invertible $\\mathcal O_S$-module $N$, unique up to isomorphism, such that $L\\simeq\\mathcal O_P(d)\\otimes p^*N$ [def-pc-module-pullback]. Here $\\mathcal O_P(d)$ is defined on $p^{-1}(d^{-1}(m))$ as $\\mathcal O_P(1)^{\\otimes m}$, using the dual line for negative $m$, and glued across these disjoint open subsets. Equivalently every point of $S$ has an open neighbourhood $U$ on which $L|_{P_U}\\simeq\\mathcal O_{P_U}(m)$ for an integer $m$. Tensor products add the functions $d$ and tensor the modules $N$. Under any base change $h:T\\to S$ this description pulls back to $(d\\circ|h|,h^*N)$. In particular, over a field every invertible module on $\\mathbf P^{r-1}$ is a unique integer twist of $\\mathcal O(1)$.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75: Picard decomposition for locally Noetherian connected bases. Arbitrary-base formulation is the agent extension by finite-presentation descent, using literature/stacks-project/limits.tex, Tag 0B8W (lemma-descend-invertible-modules), and the field normalization in literature/stacks-project/divisors.tex, Tag 0BXJ (lemma-Pic-projective-space-UFD), with projective dimension at least one."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-locally-constant-line-twist"
+ ],
+ "proof": [
+  {
+   "text": "Finite local freeness of E gives local freeness, hence quasi-coherence. For any normalized tautological quotient D apply the local-normal-form theorem to obtain local twists for every invertible L and its unique field normal form. Apply local-twist descent to those local forms to get the unique global degree and coefficient class. Both sides of local_iff hold for every invertible L, so the two implications follow from existence and the local theorem.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-sfb-projective-bundle-local-normal-form",
+    "lem-sfb-projective-bundle-local-twist-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the restriction clause of locallyConstantLineTwist_identities to the degree function composed with p on the inverse image of its degree-m open stratum. Membership is exactly the required equality of degrees.",
+   "uses": [
+    "lem-sfb-locally-constant-line-twist-identities"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two decompositions tensor their isomorphisms and use tensorμ to exchange the middle two factors. Combine the two twist factors by the addition clause of the twist identities, using pointwise addition of locally constant functions. Combine the two pulled-back coefficient factors by the inverse of module_pullback_tensor. Tensor products of invertible coefficient modules are invertible.",
+   "uses": [
+    "lem-sfb-locally-constant-line-twist-identities",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a pullback square first pull back the decomposition isomorphism and split its tensor product by module_pullback_tensor. Pullback of the glued twist is given by the last twist identity. The square equality identifies the two composed degree functions pointwise. For the coefficient line, compare successive pullback with pullback along each composite, use the square equality, then compare to the other successive pullback. The explicit tensor pullback is naturally isomorphic to the ordinary module pullback by uniqueness of left adjoints, so it preserves invertibility. These isomorphisms prove the displayed base-change decomposition.",
+   "uses": [
+    "lem-sfb-locally-constant-line-twist-identities",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-sfb-projective-bundle-local-normal-form",
+  "lem-sfb-projective-bundle-local-twist-descent",
+  "lem-sfb-locally-constant-line-twist-identities",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-tensor-dual-invertible",
+  "lem-pc-module-pullback-identity-composition",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75; reduction into local normal forms (steps 1-4), local-twist descent (steps 5-8) and the generic twist calculus (steps 5 and 9). The main Lean proof combines them and constructs the tensor and base-change isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard group of a projective bundle over a scheme is Pic of the base plus locally constant integer degree",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.functor\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": CommSemiRingCat.{u} ⥤ CommGrpCat.{u}\", \"doc\": \"The functor from the category of commutative semirings to the category of commutative groups, which sends each commutative semiring $ R $ to its Picard group $ \\\\mathrm{Pic}(R) $ and each ring homomorp\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R : Type u) [CommSemiring R] : Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"CommRing.Pic.mk_eq_one\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Free R M] : Pic.mk R M = 1\", \"doc\": \"If $ M $ is a free $ R $-module, then the corresponding element in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element, i.e., $ \\\\mathrm{Pic.mk}(R, M) = 1 $.\"}\n  {\"name\": \"CommRing.Pic.instCoeSortType\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": CoeSort (Pic R) (Type u)\", \"doc\": \"There is a canonical coercion from elements of the Picard group $\\\\mathrm{Pic}(R)$ to their corresponding invertible $R$-modules, where each element $M \\\\in \\\\mathrm{Pic}(R)$ is represented by its underl\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [IsLocalRing R] : Subsingleton (Pic R)\", \"doc\": \"For any commutative local ring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is trivial, containing only one element. This follows because every invertible $ R $-module is isomorphic to $ R $ itself, as\"}\n  {\"name\": \"CommRing.Pic.mk.congr_simp\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (M : Type u_5) [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M], CommRing.Pic.mk R M = CommRing.Pic.mk R M\", \"doc\": \"For any commutative semiring $ R $ and invertible $ R $-module $ M $, the Picard group element constructed from $ M $ is equal to itself, i.e., $[M] = [M]$ in the Picard group $ \\\\mathrm{Pic}(R) $.\"}\n  {\"name\": \"CommRing.Pic.ext_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{M N : Pic R} : M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For any two elements $ M $ and $ N $ in the Picard group $ \\\\mathrm{Pic}(R) $, $ M = N $ if and only if there exists an $ R $-linear isomorphism between the corresponding invertible modules $ M $ and $\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff_free\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M = 1 ↔ Free R M\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-semimodule $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element if and only if $ M $ is a free $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring Picard groups, projectivization of vector spaces, smooth charts, or unrelated sections; none states this scheme-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"Projective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring Picard groups, projectivization of vector spaces, smooth charts, or unrelated sections; none states this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of relative projective space over a scheme is Pic of the base plus locally constant integer degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"CommRing.relPic_eq_top\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [Subsingleton (CommRing.Pic A)], CommRing.relPic R A = ⊤\", \"doc\": \"If the Picard group of $ A $ is a subsingleton (i.e., contains only the trivial invertible module), then the relative Picard subgroup $ \\\\mathrm{relPic}(R,A) $ of $ R $ with respect to $ A $ coincides \"}\n  {\"name\": \"instCommGroupPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → CommGroup (CommRing.Pic R)\", \"doc\": \"For any commutative semiring $ R $, its Picard group $ \\\\mathrm{Pic}(R) $, which consists of isomorphism classes of invertible semimodules over $ R $ under tensor product, forms an abelian group. The g\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [CommSemiring R] → Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"Submodule.range_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], (Submodule.unitsToPic R A).range = CommRing.relPic R A\", \"doc\": \"The image of the monoid homomorphism from invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the relative Picard subgroup $ \\\\mathrm{relPic}(R, A) $, whi\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} → [inst : CommSemiring R] → CommRing.Pic R → Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (M : Type u_5) [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M] [Module.Free R M], CommRing.Pic.mk R M = 1\", \"doc\": \"If $ M $ is a free $ R $-module, then the corresponding element in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element, i.e., $ \\\\mathrm{Pic.mk}(R, M) = 1 $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring Picard groups, projectivization of vector spaces, smooth charts, or unrelated sections; none states this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on a projective bundle over an arbitrary scheme is a twist O d tensored with a line bundle from the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type u_5) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → [Module.Invertible R M] → CommRing.Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} → [inst : CommSemiring R] → CommRing.Pic R → Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}\n  {\"name\": \"CommRing.Pic.mk_eq_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M] {N : CommRing.Pic R}, CommRing.Pic.mk R M = N ↔ Nonempty (M ≃ₗ[R] N.AsModule)\", \"doc\": \"For a commutative semiring $ R $, two invertible $ R $-modules $ M $ and $ N $ represent the same element in the Picard group $ \\\\mathrm{Pic}(R) $ if and only if $ M $ and $ N $ are isomorphic as $ R $\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [CommSemiring R] → Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"CommRing.Pic.mk_eq_mk_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} {N : Type u_6} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : Module.Invertible R M] [inst_6 : Module.Invertible R N],\\n  CommRing.Pic.mk R M = CommRing.Pic.mk R N ↔ Nonempty (M ≃ₗ[R] \", \"doc\": \"For a commutative semiring $ R $, the equality $ [M] = [N] $ in the Picard group $ \\\\mathrm{Pic}(R) $ holds if and only if there exists an $ R $-linear isomorphism between the invertible $ R $-semimodu\"}\n  {\"name\": \"CommRing.Pic.ext_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M N : CommRing.Pic R}, M = N ↔ Nonempty (M.AsModule ≃ₗ[R] N.AsModule)\", \"doc\": \"For any two elements $ M $ and $ N $ in the Picard group $ \\\\mathrm{Pic}(R) $, $ M = N $ if and only if there exists an $ R $-linear isomorphism between the corresponding invertible modules $ M $ and $\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M], CommRing.Pic.mk R M = 1 ↔ Nonempty (M ≃ₗ[R] R)\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-module $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is the identity element if and only if $ M $ is isomorphic to $ R $ as\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_apply\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  (M : CommRing.Pic R), (CommRing.Pic.mapAlgebra R A) M = CommRing.Pic.mk A (TensorProduct R A M.AsModule)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an element $ [M] $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ sends $ [M] $ t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring Picard groups, projectivization of vector spaces, smooth charts, or unrelated sections; none states this scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*[Pp]rojective|[Pp]rojective.*Picard|Pic.*projectiveSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ring Picard groups, projectivization of vector spaces, smooth charts, or unrelated sections; none states this scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*[Pp]rojective|[Pp]rojective.*Picard|Pic.*projectiveSpace",
+   "results": "{\"t\": \"2026-10-23T09:48:37Z\", \"tool\": \"grep\", \"query\": \"Picard.*[Pp]rojective|[Pp]rojective.*Picard|Pic.*projectiveSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-23T09:48:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every line bundle on a projective bundle is a twist times a pulled back line bundle",
+   "results": "{\"t\": \"2026-10-23T09:48:38Z\", \"tool\": \"leansearch\", \"query\": \"Every line bundle on a projective bundle is a twist times a pulled back line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bundle.Pullback\", \"VectorBundle.pullback\", \"Pullback.continuous_proj\", \"instTopologicalSpacePullback\", \"Pullback.continuous_lift\", \"LinearAlgebra.Projectivization.termℙ\", \"instAddCommMonoidPullback\", \"Trivialization.pullback_source\"], \"digest\": \"b937c113bc089968\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of a projective bundle is Picard group of base plus locally constant integer twists",
+   "results": "{\"t\": \"2026-10-23T09:48:50Z\", \"tool\": \"leanfinder\", \"query\": \"Picard group of a projective bundle is Picard group of base plus locally constant integer twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mk\", \"CommRing.Pic.AsModule\", \"CommRing.Pic\", \"CommRing.Pic.mk_eq_mk_iff\", \"CommRing.Pic.mk_eq_iff\", \"instCommGroupPic\", \"CommRing.Pic.instAddCommGroupAsModule\", \"CommRing.Pic.instCoeSortType\"], \"digest\": \"4dba2a44dcacca1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-frames-pgl",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Projective frames and projective linear transformations over schemes. General Picard decomposition underlying the tautological-line and local-matrix arguments; not an automorphism or frame-torsor statement.",
+   "via": [
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-bundle-picard-classification",
+  "worker": "stage1",
+  "summary": "Proved field classification by chart cocycles; spread a generator over Noetherian bases using H1 vanishing; descended arbitrary affine bases to Noetherian stages; glued coefficient lines by scalar transition functions, proving uniqueness, tensor compatibility and arbitrary base change. Two statement-only generic inputs added; existing descent and cohomology nodes reused. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Projective frames and projective linear transformations over schemes. General Picard decomposition underlying the tautological-line and local-matrix arguments; not an automorphism or frame-torsor statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic Glueing morphisms and sheaves of modules along an open covering used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic Projective space is proper over its base used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "Generic Monomial cohomology of twists on projective space used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic Projective bundles of arbitrary quasi-coherent modules classify invertible quotients used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic Noetherian approximation of an affine scheme used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic Fibre products commute with limits along affine transition morphisms used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lem-trf-invertible-affine-limit-descent",
+    "why": "Generic Invertible modules descend along affine transition limits used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic Pullback of modules commutes with tensor products, compatibly with sections used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic Identity and composition for tensor-formula module pullback used only for its stated local algebra, projective geometry, cohomology, limit or gluing interface; no result of this unit supplies that tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-963a6dd7b",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-963a6dd7b (reviewer sub-agent of L); spot-checked: First split of lem-sfb-projective-bundle-picard-classification. It is unsplit on base, live and side-live, and the statement is unchanged. Sources read at the cited places: EGA II Remarque 4.2.7 (printed p.75 = PDF p.72), Stacks 0BDA, 0BXJ including its cocycle proof, and 07VK. I checked every step. Step 1: units of k[t,t^-1,z] are c·t^a. Step 2: the triple-overlap exponents agree, the c_{i0} rescaling gives the def-pc-projective-space-twist transitions, n=1 goes through the P^1 classification (def-sc-p1-standard convention matches), and n=r-1>=1 avoids the false n=0 reading of 0BXJ. Step 3: properness, chart flatness, H^1(P^n,O)=0, the section lift, the Nakayama unit argument, then removing the closed image of the non-generation locus. Step 4: Noetherian approximation, constant P^n_Z limit through lem-weil-pbc-limit-fibre-products, and 0B8W descent with qcqs stages and affine transitions. Steps 5-8: p_*O_P=O_S on all opens, descent of the unit cocycle to N, uniqueness of d and of the class of N. Step 9: base change via representable-unique, plus tensor and dual compatibility. New node lem-sfb-affine-space-invertible-trivial (Pic A^n_k=0, n>=0) is true (0BDA(2)) and not a duplicate (lem-pur-affine-punctured-line-algebra covers only n=1). New node lem-sfb-proper-flat-fibre-section-lifting is true by cohomology and base change (R^1f_*F vanishes near s, so phi^0 is surjective). It is distinct from lem-trf-infinitesimal-vanishing-section-lifting (no flatness, needs every J^n/J^{n+1} vanishing), lem-trf-ample-fibre-section-lifting and lem-sfb-relative-acyclic-direct-image; advisory only. Both new nodes are statement-only, cite their notions, carry three search kinds, and are strictly smaller than the item. Batch-5: lem-trf-invertible-affine-limit-descent is generic Stacks 0B8W limit descent, outside the trace-formula and Poincare-duality assumptions and their proofs, so it is accepted. The declared tool_uses are generic black-box interfaces and accepted. No SGA source is used. FIX (C1, citations only): step 3 now cites lem-weil-pbc-module-pullback-tensor for F_s = L_s(-m) = O; step 4 now cites lemma-nagata-projective-space-base-change-proper and def-weil-proper-morphism for the qcqs hypothesis of the descent lemma. proof_deps and statement are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundlePicardClassification",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_picard_classification",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveBundlePicardClassification.Decomposes",
+   "AlgebraicGeometry.ProjectiveBundlePicardClassification.IsLocallyTwist",
+   "AlgebraicGeometry.ProjectiveBundlePicardClassification.HasPicardClassification",
+   "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_picard_classification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundlePicardClassification.lean",
+  "statement": "theorem projective_bundle_picard_classification (S : Scheme.{u}) (E : S.Modules) (r : ℕ) [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r) : ∃ hE : E.IsQuasicoherent, ∀ D : @TautologicalQuotient S E hE, HasPicardClassification (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE).relProjHom D.line D.invertible",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3732a9cfa",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read node, new def node, 5 base stmt_deps, both modules, report, upstream TautologicalQuotient/IsFiniteLocallyFreeOfRank/IsInvertible/dualEvaluation/TensorInverse.zpow. Every clause rendered (unique LocallyConstant d, N unique up to iso, twist_restrict, local_iff/locally_twist, tensor d+d'/N⊗N', base_change on arbitrary IsPullback with d∘h and h^*N, field ∃! m). Quasi-coherence is a conclusion; r≥2 only; no extra hypotheses; .{u,u,u} not restrictive; ∀ D non-vacuous by quotient-geometry ∃ D. Truth: ℤ-indexed product of direct images restricts to A^m on each stratum; tensor and base-change isos glue over disjoint strata. Edge cases: empty S, infinitely many strata, negative m, r=1 excluded as in node. New node def-sfb-locally-constant-line-twist not duplicated (no ℤ-power or variable twist of Scheme.Modules upstream, in Sheaf or DAG), reuses zpow/dual, real data, §5 fields OK. Item changed only in lean + stmt_deps (adds new node). Statements verbatim, lines ≤100, docstrings with source/blueprint, 9-step proof docstring, sorry only. Not recompiled per instruction. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T094510-L-235261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

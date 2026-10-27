@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-semisimple-lie-ideal-complement",
+ "kind": "statement",
+ "title": "Complementary ideals in a semisimple Lie algebra",
+ "statement": "Let $F$ be a field of characteristic zero [def-weil-field] and let $L$ be a finite-dimensional $F$-Lie algebra [def-wf-lie-algebra]. Assume that $L$ is semisimple in the sense of [def-wf-semisimple-lie-algebra], namely every solvable Lie ideal of $L$ is zero. For every Lie ideal $I\\subseteq L$, there exists a Lie ideal $J\\subseteq L$ such that $I\\cap J=0$ and $I+J=L$ (sum and intersection of subspaces).",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.475 (PDF p.487), final paragraph under The Casimir operator: the kernel ideal has a complementary ideal, obtained using the Killing form; characteristic-zero and finite-dimensional hypotheses at the start of §22c."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every ideal in a finite dimensional characteristic zero Lie algebra with no nonzero solvable ideals has a complementary ideal",
+   "results": "Executed search: 8 hits; InvariantForm.orthogonal_isCompl and orthogonal_isCompl_toSubmodule concern atomic ideals; IsKilling.instSemisimple is related, not the complement statement.",
+   "date": "2026-10-23",
+   "verdict": "no match in these hits; precise Loogle query below matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieIdeal.isCompl_killingCompl",
+   "results": "Executed search: 1 hits; LieIdeal.isCompl_killingCompl, Mathlib.Algebra.Lie.Killing: for any ideal I, IsCompl I I.killingCompl under IsKilling and Module.Finite.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every ideal of a semisimple Lie algebra over a characteristic zero field has a complementary Lie ideal",
+   "results": "Executed search: 8 hits; IsSemisimple.instHasTrivialRadical; InvariantForm.orthogonal_isCompl (atomic ideal); IsKilling.instSemisimple; LieSubmodule.isCompl_toSubmodule.",
+   "date": "2026-10-23",
+   "verdict": "no exact hit; precise Loogle query matches"
+  },
+  {
+   "tool": "grep",
+   "query": "isCompl_killingCompl|instance HasTrivialRadical.instIsKilling|hasTrivialRadical_iff_no_solvable_ideals",
+   "results": "Executed search: 6 hits; Mathlib/Algebra/Lie/Killing.lean:142-143 isCompl_killingCompl; CartanCriterion.lean:258-259 HasTrivialRadical.instIsKilling; Semisimple/Basic.lean:67-69 hasTrivialRadical_iff_no_solvable_ideals. Directory: Algebra/Lie.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Killing orthogonal complement of a Lie ideal is a complementary ideal in a finite dimensional Lie algebra with nondegenerate Killing form",
+   "results": "8 hits: LieAlgebra.InvariantForm.orthogonal_isCompl, LieAlgebra.InvariantForm.orthogonal_isCompl_toSubmodule, LieIdeal.killingCompl, LieIdeal.toSubmodule_killingCompl, LieAlgebra.IsKilling.killingCompl_top_eq_bot, LieIdeal.mem_killingCompl, LieIdeal.le_killingCompl_top_of_isLieAbelian, LieAlgebra.InvariantForm.restrict_orthogonal_nondegenerate. Killing-complement definition and membership API found; precise complement theorem is the Loogle match recorded above.",
+   "date": "2026-10-23",
+   "verdict": "related definitions; Loogle gives the exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsKilling|isCompl_killingCompl|hasTrivialRadical_of_no_solvable_ideals",
+   "results": "8 hits: Mathlib/Algebra/Lie/Killing.lean, Mathlib/Algebra/Lie/Killing.lean, Mathlib/Algebra/Lie/Killing.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/Algebra/Lie/Derivation/Killing.lean, Mathlib/Algebra/Lie/Semisimple/Basic.lean, Mathlib/Algebra/Lie/Semisimple/Basic.lean. Read Mathlib/Algebra/Lie/Killing.lean:142-143, CartanCriterion.lean:258-259, Semisimple/Basic.lean:63-69.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LieIdeal.isCompl_killingCompl",
+  "file": "Mathlib/Algebra/Lie/Killing.lean",
+  "how": "Specializes in one line: choose J = I.killingCompl and use LieIdeal.isCompl_killingCompl I (Killing.lean:142-143); IsCompl says exactly intersection zero and sum top. The semisimple predicate is HasTrivialRadical F L, precisely as recorded by def-wf-semisimple-lie-algebra via hasTrivialRadical_iff_no_solvable_ideals (Semisimple/Basic.lean:67-69). The required IsKilling F L is inferred by LieAlgebra.HasTrivialRadical.instIsKilling (CartanCriterion.lean:258-259, hypotheses at 49 and 198); a field and Module.Finite supply IsDomain, Module.Free and IsNoetherian. Thus no extra hypothesis or comparison theorem is needed. The theorem gives an actual ideal, not just a vector-space complement.",
+  "line": 142
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-lie-surjective-image",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group. Prerequisite: Surjective images of semisimple Lie algebras in characteristic zero. Supporting ideal decomposition: for an ideal I in a finite-dimensional semisimple Lie algebra in characteristic zero, choose a complementary ideal J, as in Milne §22c p.475, final paragraph.",
+   "via": [
+    "lem-sfb-semisimple-lie-surjective-image",
+    "lem-sfb-semisimple-group-casimir-trace",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,317 @@
+{
+ "id": "lem-per-qe-rotthaus-finite-boundary",
+ "kind": "statement",
+ "title": "Rotthaus criterion from finitely many contracted principal boundaries",
+ "statement": "Let $B$ be a commutative Noetherian Nagata ring [def-weil-pbc-noetherian-ring, def-weil-pbc-nagata-ring], $x\\in B$, and assume $B$ is $(x)$-adically complete [def-weil-pbc-adically-complete-ring]. Assume additionally that $B/xB$ is a G-ring [def-weil-pbc-g-ring]. Let $\\mathfrak n$ be a maximal ideal and set $C=\\varprojlim_j B_{\\mathfrak n}/x^jB_{\\mathfrak n}$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion]. Let $\\mathfrak s$ be a minimal singular prime of $C$, meaning $C_{\\mathfrak s}$ is not regular local and every localization at a strictly smaller prime is regular local [def-weil-regular-scheme]. Let $\\Gamma(\\mathfrak n)$ be the finite sets $\\gamma\\subseteq\\operatorname{Max}B$ containing $\\mathfrak n$. Put $B_\\gamma=(B\\setminus\\bigcup_{\\mathfrak a\\in\\gamma}\\mathfrak a)^{-1}B$, $D_\\gamma=\\varprojlim_j B_\\gamma/x^jB_\\gamma$, and $\\mathfrak s_\\gamma=\\mathfrak s\\cap D_\\gamma$ under the canonical map $D_\\gamma\\to C$. Let $E_\\gamma$ be the integral closure [def-weil-pbc-integral-closure] of $D_\\gamma/\\mathfrak s_\\gamma$ in its fraction field. Define\n$$\\Delta_\\gamma(x)=\\{\\mathfrak Q\\cap B:\\mathfrak Q\\text{ is a prime minimal over }xE_\\gamma\\},\\qquad \\Delta(x)=\\bigcup_{\\gamma\\in\\Gamma(\\mathfrak n)}\\Delta_\\gamma(x).$$\nIf $\\operatorname{ht}\\mathfrak s_\\gamma>0$ for every $\\gamma$ and $\\Delta(x)$ is finite, then $\\mathfrak s\\cap B\\ne(0)$. Heights are local Krull dimensions [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, citing Nishimura–Nishimura Theorem 1.9 and Proposition 1.18; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring",
+  "def-per-rotthaus-boundary-system"
+ ],
+ "proof": [
+  {
+   "text": "Argue by contradiction, assuming $\\mathfrak s\\cap B=0$. Then $B$ injects into the domain $C/\\mathfrak s$, so $B$ is a domain and $\\mathfrak s_\\gamma\\cap B=0$ for every $\\gamma$. If $x=0$, then $D_\\gamma=B_\\gamma$; a prime of this localization contracting to zero is zero (if $a/u$ belongs to it, then so does $a$, hence $a=0$). This contradicts positive height. Thus $x\\ne0$ and $x\\notin\\mathfrak s_\\gamma$. Also $x$ lies in every maximal ideal of $B$ by [lem-weil-pbc-adic-complete-jacobson-radical], hence is not a unit because $\\mathfrak n$ exists.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+    "place": "Theorem 1.9, reduction preceding Lemma 1.10; zero case written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-per-bounded-formal-singular-primes-stabilize] to $A=B$: Noetherianity, the Nagata property, completeness and the G-ring property of $B/xB$ are hypotheses; Step 1 gives the zero contraction and $x\\ne0$, and the stated singular prime and boundary set agree literally. Obtain $\\gamma_0$ with $\\mathfrak s_\\gamma=\\mathfrak s_\\delta D_\\gamma$ for $\\gamma_0\\subseteq\\gamma\\subseteq\\delta$. Restrict to these finite subsets; their boundary union is still finite. Contraction compatibility follows by composing the canonical maps to $C$.",
+   "uses": [
+    "lem-per-bounded-formal-singular-primes-stabilize"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+    "place": "Proposition 1.18, p.460, regularity case."
+   }
+  },
+  {
+   "text": "Apply [lem-per-bounded-normalization-limit-finite] to this restricted family. Step 1 supplies the domain and nonzero nonunit conditions, Step 2 supplies extension and contraction compatibility, and the finite boundary hypothesis persists. Its normalization rings are exactly the given $E_\\gamma$. Thus $B\\to T=\\varprojlim_{\\gamma\\supseteq\\gamma_0}E_\\gamma$ is injective and module-finite, and every minimal prime of $xT$ contracts into the restricted boundary union. By [lem-weil-pbc-finite-algebra-is-integral], $T$ is integral over $B$.",
+   "uses": [
+    "lem-per-bounded-normalization-limit-finite",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+    "place": "Lemmas 1.10–1.17, pp.457–460."
+   }
+  },
+  {
+   "text": "Choose a prime $P$ minimal over $xB$ by [lem-weil-pbc-minimal-prime-over-proper-ideal]; Step 1 ensures that ideal is proper. By [lem-weil-pbc-integral-injective-lying-over] a prime $q'$ of $T$ contracts to $P$. Since $x\\in q'$, [lem-weil-pbc-prime-contains-minimal-prime] gives $xT\\subseteq q\\subseteq q'$ with $q$ minimal over $xT$. Then $x\\in q\\cap B\\subseteq P$, so minimality of $P$ forces $q\\cap B=P$. Step 3's boundary assertion gives a finite $\\gamma\\supseteq\\gamma_0$ and a prime $Q$ minimal over $xE_\\gamma$ whose contraction to $B$ is $P$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-per-bounded-normalization-limit-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+    "place": "End of proof of Theorem 1.9, p.460; lying-over and minimal-prime selection made explicit."
+   }
+  },
+  {
+   "text": "Put $q_\\gamma=Q\\cap D_\\gamma$. It contains $x$ and $\\mathfrak s_\\gamma$, and contracts to $P$. The projection in [lem-weil-pbc-adic-completion-mod-power] for $N=1$ identifies $D_\\gamma/xD_\\gamma$ with $B_\\gamma/xB_\\gamma$. Hence primes of $D_\\gamma$ containing $x$ correspond to primes of $B$ containing $x$ and disjoint from the denominators of $B_\\gamma$: inverse images under the quotient maps give the first correspondence; for localization, $a/u$ belongs to a prime exactly when $a/1$ does, giving the second. These operations preserve and reflect inclusion. If a prime $r\\subseteq q_\\gamma$ contains $x$, its contraction lies between $xB$ and $P$, hence equals $P$ by minimality. The correspondence then gives $r=q_\\gamma$. Thus $q_\\gamma$ is minimal over $xD_\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+    "place": "End of proof of Theorem 1.9, p.460; principal-quotient argument replaces a catenary height comparison."
+   }
+  },
+  {
+   "text": "The ring $B_\\gamma$ is Noetherian by [lem-weil-pbc-localization-noetherian], and $D_\\gamma$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. Therefore [lem-sfb-krull-principal-ideal-height-bound] gives $\\operatorname{ht}q_\\gamma\\le1$. But $x\\notin\\mathfrak s_\\gamma$ by Step 1 and $x\\in q_\\gamma$, so $\\mathfrak s_\\gamma\\subsetneq q_\\gamma$. Positive height of $\\mathfrak s_\\gamma$ supplies a prime $r\\subsetneq\\mathfrak s_\\gamma$ by the definition of height; the chain $r\\subsetneq\\mathfrak s_\\gamma\\subsetneq q_\\gamma$ has length two, a contradiction. Consequently $\\mathfrak s\\cap B\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-sfb-krull-principal-ideal-height-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+    "place": "End of proof of Theorem 1.9, p.460; final height contradiction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-per-bounded-formal-singular-primes-stabilize",
+  "lem-per-bounded-normalization-limit-finite",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-sfb-krull-principal-ideal-height-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+  "place": "Assembly from Proposition 1.18 and the normalization-limit portion of Theorem 1.9; final contradiction by principal ideal height, without catenarity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-rotthaus-finite-boundary: Rotthaus Hilfssatz finite contracted height one primes in normalizations of semilocal completion quotients force a singular prime to meet the original ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"module\": \"Mathlib/RingTheory/DedekindDomain/PID\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] (S : Type u_2) [inst_2 : CommRing S] [inst_3 : Algebra R S]\\n  [Module.IsTorsionFree R S] [Module.Finite R S] (p : Ideal R),\\n  p ≠ ⊥ →\\n    ∀ [inst_6 : p.IsPrime] {Sₚ : Type u_3} [inst_7 : CommRing Sₚ] [inst_8 : Algebra S Sₚ]\\n      [IsLocalizat\", \"doc\": \"If $ P $ is a nonzero prime ideal in the localized ring $ S_P $, then $ P $ is a normalized prime factor of the ideal generated by $ p $ in $ S_P $, where $ p $ is the image of the algebra map from $ \"}\n  {\"name\": \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [p.IsPrime] (q : Ideal S) [inst_4 : q.IsPrime] [q.LiesOver p] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R q],\\n  ∃ s ∉ q, ∀ (q' : Ideal S), q'.IsPrime → q' ≠ q → q'.LiesOver p → s\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra of essential finite type. For a prime ideal $ \\\\mathfrak{p} \\\\subseteq R $ and a prime ideal $ \\\\mathfrak{q} \\\\subseteq S $ lying over \"}\n  {\"name\": \"primesOver_finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {A : Type u_4} [inst : CommRing A] (p : Ideal A) [hpm : p.IsMaximal] (B : Type u_5) [inst_1 : CommRing B]\\n  [IsDedekindDomain B] [inst_3 : Algebra A B] [IsDomain A] [Module.IsTorsionFree A B] [Algebra.IsIntegral A B],\\n  (p.primesOver B).Finite\", \"doc\": \"In a Dedekind domain $ A $ with field of fractions $ K $, let $ L $ be a finite extension of $ K $, and let $ B $ be the integral closure of $ A $ in $ L $. For any nonzero prime ideal $ \\\\mathfrak{p} \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.Support.finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (k : K), (IsDedekindDomain.HeightOneSpectrum.Support R k).Finite\", \"doc\": \"For any element $ k $ in the fraction field $ K $ of a Dedekind domain $ R $, the support of $ k $, defined as the set of height one prime ideals of $ R $ containing $ k $, is a finite set.\"}\n  {\"name\": \"one_le_primesOver_ncard\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {A : Type u_4} [inst : CommRing A] (p : Ideal A) [hpm : p.IsMaximal] (B : Type u_5) [inst_1 : CommRing B]\\n  [IsDedekindDomain B] [inst_3 : Algebra A B] [IsDomain A] [Module.IsTorsionFree A B] [Algebra.IsIntegral A B],\\n  1 ≤ (p.primesOver B).ncard\", \"doc\": \"In the context of a Dedekind domain $ A $ and its integral extension $ B $, for any non-zero prime ideal $ p $ of $ A $, the set of prime ideals of $ B $ lying over $ p $ has at least one element.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (a : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),\\n  ∃ b ∈ nonZeroDivisors R, a * ↑b ∈ Is\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ \\\\mathfrak{p} $ and element $ a $ in the $ \\\\mathfrak{p} $-adic completion of $ K $, there exists a non-zero elemen\"}\n  {\"name\": \"primesOver_ncard_ne_zero\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {A : Type u_4} [inst : CommRing A] (p : Ideal A) [hpm : p.IsMaximal] (B : Type u_5) [inst_1 : CommRing B]\\n  [IsDedekindDomain B] [inst_3 : Algebra A B] [IsDomain A] [Module.IsTorsionFree A B] [Algebra.IsIntegral A B],\\n  (p.primesOver B).ncard ≠ 0\", \"doc\": \"The set of prime ideals in $ B $ lying over the ideal $ p $ is non-empty, i.e., there exists at least one prime ideal $ P \\\\subseteq B $ such that $ P $ contracts to $ p $ in the base ring.\"}\n  {\"name\": \"Ideal.card_primesOverFinset_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R]\\n  [inst_7 : Algebra R K] [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S\", \"doc\": \"For a maximal ideal $ p $ in a commutative ring $ A $, a Dedekind domain $ B $ with an $ A $-algebra structure, and under the condition that there are no zero divisors in scalar multiplication between\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Dedekind prime finiteness, height inequalities or unrelated complex boundaries, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Dedekind prime finiteness, height inequalities or unrelated complex boundaries, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Rotthaus|Hilfssatz",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Dedekind prime finiteness, height inequalities or unrelated complex boundaries, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-rotthaus-finite-boundary: Rotthaus Hilfssatz finite contracted height one primes in normalizations of semilocal completion quotients force a singular prime to meet the original ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.primeHeight_lt_top\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"(I : Ideal R) [I.FiniteHeight] [I.IsPrime] : I.primeHeight < ⊤\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $R$ with finite height, the height of $\\\\mathfrak{p}$ is less than infinity, i.e., $\\\\mathfrak{p}.\\\\text{height} < \\\\infty$.\"}\n  {\"name\": \"Ideal.height_le_ringKrullDim_quotient_add_one\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"{r : R} {p : Ideal R} [p.IsPrime] (hrp : r ∈ p) : p.height ≤ ringKrullDim (R ⧸ span { r }) + 1\", \"doc\": \"If a prime ideal $\\\\mathfrak{p}$ in a commutative ring $R$ contains an element $r$, then the height of $\\\\mathfrak{p}$ is at most the Krull dimension of the quotient ring $R/(r)$ plus one, i.e., $\\\\opera\"}\n  {\"name\": \"Ideal.height_le_ringKrullDim_quotient_add_encard\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"{p : Ideal R} [p.IsPrime] (s : Set R) (hs : s ⊆ p) : p.height ≤ ringKrullDim (R ⧸ span s) + s.encard\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $R$ and a subset $S \\\\subseteq \\\\mathfrak{p}$, the height of $\\\\mathfrak{p}$ satisfies $\\\\operatorname{ht}(\\\\mathfrak{p}) \\\\leq \\\\dim(R/\\\\langle S\\\\rangle\"}\n  {\"name\": \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"{p I : Ideal R} [p.IsPrime] (h : I ≤ p) : p.height ≤ ringKrullDim (R ⧸ I) + I.spanFinrank\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ R $ containing an ideal $ I $, the height of $ p $ satisfies $ \\\\operatorname{ht}(p) \\\\leq \\\\dim(R/I) + \\\\operatorname{rank}(I) $, where $ \\\\dim(R/I) $ denot\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_le_one\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : R) : v.valuation K r ≤ 1\", \"doc\": \"For any element $ r $ in the Dedekind domain $ R $, the valuation $ v(r) $ associated with a height one prime ideal is less than or equal to 1.\"}\n  {\"name\": \"Ideal.finiteHeight_iff_lt\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"{I : Ideal R} : Ideal.FiniteHeight I ↔ I = ⊤ ∨ I.height < ⊤\", \"doc\": \"An ideal $ I $ in a commutative ring $ R $ has finite height if and only if $ I $ is the entire ring $ R $ or the height of $ I $ is less than infinity (i.e., its height is a finite natural number).\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation_le_one\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(x : R) : v.intValuation x ≤ 1\", \"doc\": \"For any element $x$ in the Dedekind domain $R$, the integer valuation at the height one prime ideal $v$ of $x$ is less than or equal to 1.\"}\n  {\"name\": \"Ideal.finiteHeight_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"(I : Ideal R) : I.FiniteHeight\", \"doc\": \"In a commutative Noetherian ring, every ideal has finite height. This means that for any ideal $ I $ in such a ring, there exists a finite chain of prime ideals contained in $ I $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Dedekind prime finiteness, height inequalities or unrelated complex boundaries, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-rotthaus-finite-boundary: A generic formal singular component cannot have finitely many principal boundary contractions in all semilocal completions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ComplexShape.Embedding.BoundaryLE.false_of_isTruncGE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Boundary\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {e : c.Embedding c'} {j : ι},\\n  e.BoundaryLE j → ∀ [e.IsTruncGE], False\", \"doc\": \"If an embedding $ e $ between complex shapes satisfies the BoundaryLE condition at some index $ j $ and also satisfies the IsTruncGE truncation condition, then a contradiction arises. This means no su\"}\n  {\"name\": \"ComplexShape.Embedding.BoundaryGE.false_of_isTruncLE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Boundary\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {e : c.Embedding c'} {j : ι},\\n  e.BoundaryGE j → ∀ [e.IsTruncLE], False\", \"doc\": \"If an embedding between complex shapes satisfies the truncation condition (IsTruncLE), then the BoundaryGE predicate cannot hold for any index in the target complex shape. In other words, assuming bot\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.exists₁\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₁ : ι₁},\\n  e₁.BoundaryLE i₁ → ∃ i₂, ac.Boundary i₁ i₂\", \"doc\": \"For any index $i_1$ in $\\\\iota_1$ satisfying the boundary condition for the embedding $e_1$, there exists an index $i_2$ in $\\\\iota_2$ such that $i_1$ and $i_2$ are related by the boundary relation of t\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.exists₂\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₂ : ι₂},\\n  e₂.BoundaryGE i₂ → ∃ i₁, ac.Boundary i₁ i₂\", \"doc\": \"For complementary embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$ of complex shapes, if an index $i_2 \\\\in \\\\iota_2$ satisfies the boundary condition $\\\\text{BoundaryGE}(i_2)$ for $e_2$, then there exis\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"Polynomial.not_quasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : Ideal (Polynomial R)) [inst_1 : P.IsPrime], ¬Algebra.QuasiFiniteAt R P\", \"doc\": \"For any prime ideal $ P $ in the polynomial ring $ R[X] $, the localization of $ R[X] $ at the complement of $ P $ is not a quasi-finite algebra over the base commutative ring $ R $. This means the lo\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₂ : ι₂} (h : e₂.BoundaryGE i₂),\\n  ac.Boundary (ComplexShape.Embedding.AreComplementary.Boundary.indexOfBou\", \"doc\": \"Given complementary embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$ of complex shapes, and an index $i_2 \\\\in \\\\iota_2$ satisfying the boundary condition $\\\\text{BoundaryGE}(i_2)$ for $e_2$, there exist\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern Dedekind prime finiteness, height inequalities or unrelated complex boundaries, not this statement; Loogle and the targeted source grep return no quasi-excellence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Rotthaus|Hilfssatz|quasi.?excellent|Nishimura|IsGRing|alteration",
+   "results": "{\"t\": \"2026-10-24T03:50:52Z\", \"tool\": \"grep\", \"query\": \"Rotthaus|Hilfssatz|quasi.?excellent|Nishimura|IsGRing|alteration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: whole-Mathlib grep returned no occurrences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-rotthaus-finite-boundary: Rotthaus criterion finite contractions of primes over a principal ideal in normalizations of completed semilocal quotients",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"primesOver_finite\", \"instFintypeElemIdealPrimesOver\", \"Ideal.card_primesOverFinset_le_finrank\", \"one_le_primesOver_ncard\", \"primesOver_ncard_ne_zero\", \"primesOverFinset\", \"Ideal.map_algebraMap_eq_finset_prod_pow\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration proves the finite-boundary criterion, including with the restored G-ring quotient hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Prime\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration proves the finite-boundary criterion, including with the restored G-ring quotient hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "Rotthaus|Hilfssatz|Nishimura",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration proves the finite-boundary criterion, including with the restored G-ring quotient hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-rotthaus-finite-boundary: Noetherian complete Nagata rings finite boundary contractions of formal primes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_prime_ne_bot\", \"minimalPrimes.finite_of_isNoetherianRing\", \"IsNoetherianRing.of_prime\", \"associatedPrimes.finite\", \"IsNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"Ideal.finite_minimalPrimes_of_isNoetherianRing\", \"isNoetherian_adjoin_finset\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration proves the finite-boundary criterion, including with the restored G-ring quotient hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-rotthaus-finite-boundary: A prime in the completion of a semilocal Nagata ring algebraizes if the normalized principal divisor has finitely many contractions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt\", \"Algebra.ZariskisMainProperty\", \"primesOver_finite\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.QuasiFinite.iff_finite_primesOver\", \"Algebra.QuasiFinite.finite_primesOver\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration proves the finite-boundary criterion, including with the restored G-ring quotient hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-rotthaus-finite-boundary: in a principal adically complete Nagata ring whose quotient is a G ring bounded normalized boundary primes force a minimal singular formal prime to meet the base ring nontrivially",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"PreTilt.exists_smodEq_untiltAux\", \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"Ideal.Quotient.nontrivial_of_liesOver_of_isPrime\", \"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration proves the finite-boundary criterion, including with the restored G-ring quotient hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-complete-pair-lifting",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, citing Nishimura–Nishimura Theorem 1.9 and Proposition 1.18.",
+   "via": [
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-rotthaus-finite-boundary",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the referenced Proposition 1.18 needs the quotient to be a Nagata G-ring; restored the G-ring hypothesis supplied by both parent completion arguments (their quotient is quasi-excellent). Split eventual extension and finite normalization limit as two statement-only nodes. The six-step assembly makes the zero case, lying-over, minimal-prime choices and principal-quotient height contradiction explicit; no catenarity is used. Read actual cited statements and logged Mathlib results; no attachment or Mathlib match.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, citing Nishimura–Nishimura Theorem 1.9 and Proposition 1.18.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   },
+   {
+    "node": "lem-sfb-krull-principal-ideal-height-bound",
+    "why": "Generic commutative-algebra tool for the completion argument; this does not replace the affine perverse route, and no node of this unit supplies the stated algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-sfb-krull-principal-ideal-height-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-3e4716b19",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-3e4716b19 (reviewer sub-agent of L); spot-checked: I read the whole split: the item, both new unsplit nodes and the statement of every cited node. I read Kurano–Shimomoto (kurano40.pdf, fetched) §5 in full, including Theorem 5.3 (p.11) and how Theorem 5.1 applies it. The added premise 'B/xB is a G-ring' is not printed in KS 5.3. KS 5.3 has no proof of its own and points to Nishimura–Nishimura Thm 1.9 + Prop 1.18; the worker says 1.18 needs A/xA to be a Nagata P-ring, which I could not check at the page. KS's only use has B/xB quasi-excellent, and both citers (qe-complete-pair-lifting step 10, gabber-adic-quasi-excellence step 9) get B_L/xB_L quasi-excellent from their counterexample-reduction nodes, so every use still holds. The change is named under 'Statement corrected', and conclusion and Delta are unchanged. Maintainer note: those citer steps should name the G-ring premise when next touched. All six steps check out. Step 1: the zero-contraction contradiction makes B a domain; x=0 contradicts positive height; x is a nonunit via the Jacobson-radical leaf. Steps 2–3: every hypothesis of the two new nodes matches literally; restriction and contraction compatibility hold by composing the canonical maps. Step 4: minimal prime P over xB, lying-over in the integral extension T, a minimal prime of xT contracting to P, then the boundary clause. Step 5: D/xD ≅ B_γ/xB_γ (mod-power leaf, N=1), so q_γ is minimal over xD_γ. Step 6: Krull gives ht ≤ 1 against the chain r ⊊ s_γ ⊊ q_γ; no catenarity is used. I tested both new nodes on small cases: local A, and p_γ=0 over a normal excellent A where T=A. Neither restates the item. I searched dag/nodes for duplicates (Γ(n), prime sequence, eventually extended, Nishimura) and found none. Nishimura–Nishimura II is not in the literature folder, so both new nodes' source pages were not checked. Nothing involved is on the drop list, no lem-per-gabber-rotthaus twin exists, no SGA is cited, and the generic pbc/sfb tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RotthausFiniteBoundary",
+  "declaration": "RingTheory.Rotthaus.finite_boundary_nonzero_contraction",
+  "file": "lean/Sheaf/RingTheory/RotthausFiniteBoundary.lean",
+  "statement": "theorem finite_boundary_nonzero_contraction (B : Type u) [CommRing B] [IsNoetherianRing B] (hNagata : IsNagataRing B) (x : B) [IsAdicComplete (Ideal.span {x}) B] (hG : IsGRing (B ⧸ Ideal.span {x})) (n : MaximalSpectrum B) (s : PrimeSpectrum (LocalCompletion x n)) (hs : ¬ IsRegularLocalRing (Localization.AtPrime s.asIdeal)) (hmin : ∀ t : PrimeSpectrum (LocalCompletion x n), t.asIdeal < s.asIdeal → IsRegularLocalRing (Localization.AtPrime t.asIdeal)) (hheight : ∀ (γ : Finset (MaximalSpectrum B)) (hn : n ∈ γ), 0 < ringKrullDim (Localization.AtPrime (contractedPrime x n s γ hn).asIdeal)) (hfinite : (boundary x n s).Finite) : s.asIdeal.comap (algebraMap B (LocalCompletion x n)) ≠ ⊥",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1f26448",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read the item, the new node def-per-rotthaus-boundary-system and both modules against KS Thm 5.3 and every stmt_dep record. All clauses are faithful: Noetherian, IsNagataRing, IsAdicComplete span{x}, IsGRing of B/xB, MaximalSpectrum n, C = AdicCompletion of B_n, minimal singular s via IsRegularLocalRing, Γ(n) = Finset with n∈γ, semilocalization by ⨅ primeCompl, canonical D_γ→C via principalRingMap∘liftAlgHom, s_γ by comap, E_γ = integralClosure in FractionRing, Δ by minimalPrimes of span{x} contracted to B, height as ringKrullDim of the localization > 0, conclusion comap ≠ ⊥. No stronger hypotheses; x=0, unit x, empty γ and local B covered; one universe u. Helper defs have real data and source/blueprint docstrings; statements verbatim; theorem proof is sorry; no duplicates in Mathlib or the project trees; node diff is only lean and the added stmt_dep. Maintainer note: the item is unreached once the drop list is excluded (its citers qe-complete-pair-lifting and gabber-adic-quasi-excellence lead to the targets only through dropped gabber-absolute-equivariant-modification); it has no twin."
+ }
+}

@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-point-blowdown-factorization",
+ "kind": "statement",
+ "title": "Factorization through a regular surface point blowdown",
+ "statement": "Let $T$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth], regular of dimension two [def-weil-regular-scheme, def-kun-topological-krull-dimension]. Let $x\\in T$ be a reduced closed point and let $b:W=\\operatorname{Bl}_xT\\to T$ be its blowup [def-nagata-global-blowup], with exceptional fibre $E=b^{-1}(x)$. For any scheme $Z$ [def-pc-scheme] and morphism $f:W\\to Z$ whose topological image $f(E)$ is one point, there is a unique morphism $g:T\\to Z$ such that $f=gb$.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5J (lemma-factor-through-contraction), applied to the exceptional curve of a regular surface point blowup."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-global-blowup",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $f(E)=\\{z\\}$. In particular $E\\ne\\varnothing$. The blowup is an isomorphism over $T\\setminus\\{x\\}$ by [thm-nagata-global-blowup-complement]. Hence $b$ is surjective, with singleton fibres away from $x$ and fibre $E$ over $x$. It is proper by [lemma-nagata-blowup-proper]: the ideal of the reduced closed point is quasi-coherent and locally finitely generated because $T$ is Noetherian. Properness includes universal closedness [def-weil-proper-morphism], so $b$ is a closed map. Finally [lem-sfb-regular-point-blowup-functions] gives the canonical sheaf isomorphism $\\beta:\\mathcal O_T\\xrightarrow{\\sim}b_*\\mathcal O_W$, including its restriction compatibility. The auxiliary result applies also when $x$ has local dimension less than two.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-regular-point-blowup-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), proof"
+   }
+  },
+  {
+   "text": "Define a set map $g:T\\to Z$ by $g(x)=z$ and, for $t\\ne x$, $g(t)=f(w)$ for the unique $w$ above $t$. Thus $f=g\\circ b$. For an open $V\\subseteq Z$, put $A=g^{-1}V$. Then $b^{-1}A=f^{-1}V$ is open and surjectivity gives $T\\setminus A=b(W\\setminus f^{-1}V)$. The right side is closed because $b$ is closed. Thus $A$ is open and $g$ is continuous. Surjectivity also proves uniqueness of this underlying map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), proof"
+   }
+  },
+  {
+   "text": "For each open $V\\subseteq Z$, set $U=g^{-1}V$ and define $g^\\sharp_V=\\beta_U^{-1}\\circ f^\\sharp_V:\\mathcal O_Z(V)\\to\\mathcal O_T(U)$, using $f^{-1}V=b^{-1}U$. These are unital ring homomorphisms. For $V_1\\subseteq V_2$, restriction commutes with $f^\\sharp$ and with $\\beta$ and hence with $\\beta^{-1}$, so the displayed maps form a sheaf morphism $\\mathcal O_Z\\to g_*\\mathcal O_T$. By the definition of composition of ringed-space morphisms, $g^\\sharp$ satisfies $f^\\sharp_V=\\beta_{g^{-1}V}\\circ g^\\sharp_V$ on every $V$. Consequently $(g,g^\\sharp)\\circ b=f$ as morphisms of ringed spaces.",
+   "uses": [
+    "lem-sfb-regular-point-blowup-functions",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), proof"
+   }
+  },
+  {
+   "text": "For each $t\\in T$, choose $w\\in W$ with $b(w)=t$, and put $y=g(t)=f(w)$. Passing the equality of ringed-space morphisms to stalks gives $f^\\sharp_w=b^\\sharp_w\\circ g^\\sharp_t$. If $a$ is in the maximal ideal of $\\mathcal O_{Z,y}$, locality of $f^\\sharp_w$ makes $f^\\sharp_w(a)$ a nonunit. Were $g^\\sharp_t(a)$ a unit, its image under the unital ring homomorphism $b^\\sharp_w$ would be a unit, a contradiction. Thus $g^\\sharp_t(a)$ is a nonunit, hence belongs to the maximal ideal of the local ring $\\mathcal O_{T,t}$. Every stalk map of $g$ is local, so $g$ is a morphism of schemes.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), proof"
+   }
+  },
+  {
+   "text": "Let $h:T\\to Z$ satisfy $h\\circ b=f$. Surjectivity of $b$ gives $h=g$ on points. For every open $V\\subseteq Z$, composition gives $\\beta_{g^{-1}V}\\circ h^\\sharp_V=f^\\sharp_V=\\beta_{g^{-1}V}\\circ g^\\sharp_V$. Cancel the isomorphism $\\beta_{g^{-1}V}$ to obtain $h^\\sharp_V=g^\\sharp_V$. Equality on all opens gives $h=g$ as ringed-space morphisms and hence as scheme morphisms. This proves existence and uniqueness.",
+   "uses": [
+    "lem-sfb-regular-point-blowup-functions",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-regular-point-blowup-functions",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5J (lemma-factor-through-contraction), proof; the first paragraph is isolated as a regular-functions auxiliary lemma, with the lower local-dimensional cases retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism constant on the exceptional curve of a blowup of a regular surface factors uniquely through the blowdown",
+   "results": "{\"t\": \"2026-10-22T04:21:06Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism constant on the exceptional curve of a blowup of a regular surface factors uniquely through the blowdown\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\"], \"digest\": \"ef78d7768195ce9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative uniqueness and equality on dominant opens do not provide factorization through a point blowdown."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of contracting a minus one curve on a Noetherian surface",
+   "results": "{\"t\": \"2026-10-22T04:21:03Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of contracting a minus one curve on a Noetherian surface\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"b243a190f5dc8864\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative uniqueness and equality on dominant opens do not provide factorization through a point blowdown."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T04:22:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative uniqueness and equality on dominant opens do not provide factorization through a point blowdown."
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*contract|blowdown|exceptional.*curve",
+   "results": "{\"t\": \"2026-10-22T04:21:03Z\", \"tool\": \"grep\", \"query\": \"factor.*contract|blowdown|exceptional.*curve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative uniqueness and equality on dominant opens do not provide factorization through a point blowdown."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism constant on the exceptional fibre of the blowup of a regular surface factors uniquely through the blowdown",
+   "results": "{\"t\": \"2026-10-22T04:46:11Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism constant on the exceptional fibre of the blowup of a regular surface factors uniquely through the blowdown\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\"], \"digest\": \"b5210d7a820d1810\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*contract|blowdown|exceptional.*curve",
+   "results": "{\"t\": \"2026-10-22T04:46:49Z\", \"tool\": \"grep\", \"query\": \"factor.*contract|blowdown|exceptional.*curve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T04:46:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of the contraction of the exceptional fibre of a surface point blowup",
+   "results": "{\"t\": \"2026-10-22T04:46:50Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of the contraction of the exceptional fibre of a surface point blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.under_liesOver_of_liesOver\", \"AlgebraicGeometry.universally_isZariskiLocalAtSource\", \"Ideal.over_under\", \"AlgebraicGeometry.universally_isLocalAtSource\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ\", \"AlgebraicGeometry.instIsPreimmersionFiberι\"], \"digest\": \"dff2775f93a2b418\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern stalks, localizations or valuative uniqueness and give no blowup structure-sheaf isomorphism or blowdown factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-point-blowdown-factorization",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0C5J by quotient topology and the canonical structure-sheaf map. One smaller unsplit regular-functions lemma; construction on opens, locality at every stalk, and uniqueness are explicit. Kept the statement, including arbitrary targets and possible lower-dimensional components.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; realizes the complete point-blowdown prerequisite of common-nodal-model step 4.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "General blowup geometry; used for properness or the complement isomorphism, without replacing the unit route."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "General blowup geometry; used for properness or the complement isomorphism, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-blowup-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-e32c123e1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-e32c123e1 (reviewer sub-agent of L); spot-checked: The proof follows Stacks resolve.tex 0C5J (proper surjective blowup gives quotient topology; O_T->b_*O_W iso by 0AGS(4) at n=0; descend map and sheaf map; check locality) through 5 steps, all checked. Step 1: the complement-iso, Nagata blowup-proper, proper=>closed and new-node citations say what is used; f(E)={z} gives E nonempty, hence surjectivity. Step 2: T\\A=b(W\\f^{-1}V) is correct, so g is continuous and unique on points. Step 3: g#=beta^{-1}f# with composition per def-weil-locally-ringed-space-morphism. Step 4: locality of every stalk map from locality of f. Step 5: uniqueness by cancelling beta. New node lem-sfb-regular-point-blowup-functions is true. Local dimension 2: flat base change 02KH plus 0AGS(4) n=0. Dimension 1: DVR (00PD), invertible centre, identity blowup. Dimension 0: empty fibre, excluded by the nonempty-fibre hypothesis that the item supplies. It is strictly smaller than the item, not a restated clause, and statement-only with def nodes. No duplicate: grep for 0AGS/0AGQ/0C5J and b_*O patterns, and I read lem-sfb-regular-point-blowup-geometry, lem-per-regular-point-blowup-acyclic, lem-per-regular-surface-rational and the local-surface nodes; none states O_T=b_*O_W. No SGA; the item statement is unchanged. Nagata tool_uses are accepted: the in-chapter geometry node needs integral, local-dim-2 hypotheses the item lacks. FIX: the new node's source.place pointed to report.md ('Agent global sheaf formulation'); I replaced it with exact locations 0AGS(4) n=0, 02KH lemma-flat-base-change-cohomology and 00PD lemma-characterize-dvr. Advisory: existing lem-sc-regular-dim1-dvr records 00DV for 00PD.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointBlowdownFactorization",
+  "declaration": "AlgebraicGeometry.existsUnique_factor_through_point_blowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointBlowdownFactorization.lean",
+  "statement": "theorem existsUnique_factor_through_point_blowup (T : Scheme.{u}) [CompactSpace T] (hregular : IsRegularScheme T) (hdim : topologicalKrullDim T = 2) (x : T) (hx : IsClosed ({x} : Set T)) (Z : Scheme.{u}) (f : (Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowup ⟶ Z) (himage : ∃ z : Z, f '' ((Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowupMap ⁻¹' {x}) = {z}) : ∃! g : T ⟶ Z, (Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowupMap ≫ g = f",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12b9ec2d7",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Lean statement matches node/Stacks 0C5J clause by clause: IsRegularScheme (locally Noetherian + regular) + CompactSpace, topologicalKrullDim T = 2, reduced closed point via vanishingIdeal ⟨{x},hx⟩, actual IdealSheafData.blowup/blowupMap, arbitrary Z and f, ∃ z, f '' b⁻¹{x} = {z}, ∃! g, b ≫ g = f. No extra hypotheses or universe restriction. Edge cases (empty T, dim-1 component, isolated x with empty fibre, empty Z) consistent. Statement field verbatim, imports per §3 rule 7, docstrings carry source, blueprint and all 5 proof steps, sorry only, no name clash, no duplicate. Not recompiled (unchanged). Advisory: blowupMap has no own DAG node, same as other landed citers."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261023T132354-L-2260984",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.existsUnique_factor_through_point_blowup"
+  ],
+  "sorry_after": []
+ }
+}

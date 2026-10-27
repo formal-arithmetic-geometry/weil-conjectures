@@ -1,0 +1,194 @@
+{
+ "id": "lem-pur-finite-reduction-exceptional-model-counit",
+ "kind": "statement",
+ "title": "The finite exceptional mate has the purity counit normalization",
+ "status": "split",
+ "statement": "Let P be a finite purity setting with coefficient prime ell and extension E. Let n,m be natural numbers with m <= n. Write N=P at level n+1 and M=P at level m+1, and Q_T for the actual quotient scalar extension from N to M. Let X,Y be separated finite-type P.field.k-schemes, f:X -> Y a separated finite-type morphism over that field, and K in D^b_ctf(Y,N.Ring). Use the standing exceptional functors G_N,G_M of [thm-pur-composition-coherence], support functors F_N,F_M and counits epsilon_N,epsilon_M of [def-pur-smooth-trace], and the quotient and scalar adjunction of [def-pur-finite-reduction-root-charts]. Let e:Q_X(G_N K) ~= G_M(Q_Y K) be the full inclusion of the specified invertible finite exceptional mate b of [lem-coef-finite-exceptional] at K. Let q at G_N K be the scalar adjunct of F_N of the scalar unit followed by the canonical compact-support restriction comparison of [lem-sf-compact-support-restriction-of-scalars]. Then q(G_N K) followed by F_M(e.hom) followed by epsilon_M(Q_Y K) equals Q_Y(epsilon_N(K)). No smoothness, nonempty-scheme or quotient-flatness assumption is required.",
+ "stmt_deps": [
+  "def-pur-finite-reduction-root-charts",
+  "thm-pur-composition-coherence",
+  "def-pur-smooth-trace",
+  "lem-coef-finite-exceptional",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, exceptional coefficient compatibility, and Step 4, the adjunction counit reduces"
+ },
+ "proof": [
+  {
+   "text": "At the positive exponents n+1 and m+1, form the full-subcategory object represented by K. The specified b of lem-coef-finite-exceptional is invertible; apply the full inclusion on X to its component to construct e. Its endpoints are definitionally the purity compositionExceptional endpoints at these levels. No arbitrary witness of an isomorphism is selected.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "thm-pur-composition-coherence",
+    "def-pur-finite-reduction-root-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "The specified right adjoint, canonical scalar comparison, and final two paragraphs identifying adjunction maps"
+   }
+  },
+  {
+   "text": "Take the counit equation of finite_exceptional at that object and apply the full inclusion. To identify the included counits, use AdjunctionNormalized from adjunction_existsUnique: expand fixedHom, cancel the fixedExceptionalIso right-adjoint comparison, and use the intrinsic realization unit/counit identities. The bounded-etale-origin input furnished by compositionInput_bounded makes the positive branch of smoothExceptionalCounit apply. Thus each included finite counit is the published smoothExceptionalCounit.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "thm-pur-composition-coherence",
+    "def-pur-smooth-trace",
+    "def-sf-specified-exceptional-hom-chain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "The specified right adjoint, canonical scalar comparison, and final two paragraphs identifying adjunction maps"
+   }
+  },
+  {
+   "text": "Expand supportMap into finiteImageIso inverse, the coefficient compact-support comparison, and finiteImageIso. Transport its open adjunction through the intrinsic realization; equality with sfIntrinsicOpenAdjunction follows from their sectionwise restriction-unit normalization and left-adjoint uniqueness. The proper comparison is the prescribed restriction/direct-image map on K-injective representatives. Pasting identifies this supportMap with the scalar adjunct of compact support of the scalar unit followed by sfCompactSupportRestriction.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-pur-finite-reduction-root-charts",
+    "def-pur-smooth-trace",
+    "def-pur-finite-compact-support-scalar-data",
+    "def-sp-coefficient-mate-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "The specified right adjoint, canonical scalar comparison, and final two paragraphs identifying adjunction maps"
+   }
+  },
+  {
+   "text": "Substitute the counit and compact-support identifications in the included equation, with associativity of composition. The finite scalar and full-subcategory functors have the displayed underlying morphisms, so the resulting equation is precisely the assertion, also at equal indices and on empty schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Step 2, exceptional coefficient compatibility, and Step 4, the adjunction counit reduces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-exceptional",
+  "thm-pur-composition-coherence",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-smooth-trace",
+  "def-sf-specified-exceptional-hom-chain",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sp-coefficient-mate-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, exceptional coefficient compatibility, and Step 4, the adjunction counit reduces"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison isomorphism between scalar extension of exceptional inverse image preserving adjunction counit under coefficient reduction",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, counit, homEquiv, Counit.map; Adjunction.counitAsIsoOfIso; Kan-extension and coreflective counits. None identifies the specified derived-site realizations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite coefficient exceptional scalar mate is compatible with the canonical compact-support and exceptional counits after intrinsic realization",
+   "results": "8 hits, including CategoryTheory.mateEquiv_counit and mateEquiv_counit_symm in CategoryTheory/Adjunction/Mates. These give the formal mate equation, but not the realization and compact-support identifications.",
+   "date": "2026-10-25",
+   "verdict": "formal mate identity only"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|rightAdjointUniq.*counit in Mathlib/CategoryTheory/Adjunction/Mates.lean and Unique.lean; finiteReductionExceptional and coefficient/mate/counit searches in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has mateEquiv_counit and rightAdjointUniq_hom_app_counit. The project has FiniteExceptional.finite_exceptional and its adjunction normalization, but no identification with the purity scalar-adjunct support and smoothExceptionalCounit formula.",
+   "date": "2026-10-25",
+   "verdict": "no existing normalization statement"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionComparisons",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Steps 2 and 4: exceptional finite reduction and compatibility of the adjunction counit",
+   "via": [
+    "def-pur-finite-reduction-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteReductionExceptionalFiniteModel",
+  "file": "lean/Sheaf/Paper/FiniteReductionExceptionalFiniteModel.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionExceptionalFiniteModel_counit",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteReductionExceptionalFiniteModel",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionExceptionalFiniteModel_counit"
+  ],
+  "statement": "theorem finiteReductionExceptionalFiniteModel_counit\n    (K : Scheme.proEtaleDerivedCategory Y (P.finiteReductionSetting (n + 1)\n      (Nat.succ_pos n)).Ring)\n    (hK : finiteTorConstructible P.coefficients.l P.extension (n + 1) (Nat.succ_pos n) Y K) :\n    let N := P.finiteReductionSetting (n + 1) (Nat.succ_pos n)\n    let M := P.finiteReductionSetting (m + 1) (Nat.succ_pos m)\n    let red := N.finiteReduction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h)\n    let adj := N.finiteReductionAdjunction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h)\n    let c := @HasCompactification.compactification X Y f\n      (hasCompactification_of_finiteType_over_field P.field.k X Y f)\n    ((adj Y).homEquiv _ _).symm\n        ((N.smoothCompactSupport f).map\n            ((adj X).unit.app ((N.compositionExceptional f).obj K)) ≫\n          (Scheme.sfCompactSupportRestriction c\n            (N.finiteReductionRingHom (m + 1) (Nat.succ_pos m)\n              (Nat.succ_le_succ h))).hom.app\n            ((red X).obj ((N.compositionExceptional f).obj K))) ≫\n      (M.smoothCompactSupport f).map\n        (P.finiteReductionExceptionalFiniteModel n m h f K hK).hom ≫\n      M.smoothExceptionalCounit f ((red Y).obj K) =\n    (red Y).map (N.smoothExceptionalCounit f K)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pur-finite-reduction-exceptional-model-counit",
+  "worker": "stage3",
+  "summary": "Isolates normalization of an explicitly constructed and already invertible finite exceptional mate; the ambient isIso statement follows by uniqueness. Checked equal indices, zero object, empty schemes, and no quotient flatness.",
+  "blueprint": "Steps 2 and 4, finite exceptional and counit compatibility",
+  "tool_uses": [
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "Uses the already specified finite exceptional scalar isomorphism and its counit equation as a generic six-operation tool; does not replace any purity unit step."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Identifies the actual proper/open scalar restriction comparison appearing in the stated counit normalization."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T180905-L-4048848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T180905-L-4048848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

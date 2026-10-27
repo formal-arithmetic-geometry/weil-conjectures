@@ -1,0 +1,343 @@
+{
+ "id": "lem-trf-point-quotient-tower-homotopy",
+ "kind": "statement",
+ "title": "Homotopical quotient-section tower functors",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ and a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$ and let $g:s\\to s$ be any scheme automorphism [def-weil-scheme-morphism-properties]. On a small skeleton of $s_{\\mathrm{proet}}$ in the module universe [def-weil-pbc-proetale-site], write $S_n=(A_n)_s$, $R=\\lim_nS_n$, $\\pi_n:R\\to S_n$, and $\\rho_n:S_{n+1}\\to S_n$ [def-weil-completed-integral-coefficients]. Let $\\mathcal P$ be the category of flat-term K-flat $R$-complexes and all chain maps [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. For $P\\in\\mathcal P$ set $P_n=P\\otimes_RS_n$, $t_n=1\\otimes\\rho_n$, $C_n=\\operatorname{Res}_{\\pi_n}g_n^*P_n$, and let $v_n:C_{n+1}\\to C_n$ be induced by $G(t_n)$ and $\\rho_n$, where $G=g^{-1}$ and $g_n^*M=GM\\otimes_{GS_n}S_n$ uses the structure map $c_n:GS_n\\to S_n$ [def-weil-inverse-image-pullback-comparison, def-pur-sheaf-tensor-product, def-pc-sheaf-restrict-scalars]. Let $\\Gamma=\\Gamma(s,-)$ with its constant $\\mathcal O_E$-action [lem-weil-point-proetale-sections-exact], and let $\\mathcal A=\\operatorname{Fun}(\\mathbf Z_{\\ge1}^{\\mathrm{op}},\\operatorname{Mod}(\\mathcal O_E))$ be the category of strict module towers [def-weil-inverse-system].\n\nThe constructions\n$$D(P)=(\\Gamma P_n,\\Gamma t_n)_n,\\qquad B(P)=(\\Gamma C_n,\\Gamma v_n)_n,$$\nwith maps $D(f)_n=\\Gamma(f\\otimes1)$ and $B(f)_n=\\Gamma(g_n^*(f\\otimes1))$, are additive functors $\\mathcal P\\to\\operatorname{CoCh}(\\mathcal A)$. The category $\\mathcal A$ is abelian, with kernels, cokernels and cohomology computed levelwise. A chain map of its complexes is a quasi-isomorphism exactly when every level is one [def-weil-abstract-derived-category]. Both functors send every quasi-isomorphism in $\\mathcal P$ to a quasi-isomorphism in $\\operatorname{CoCh}(\\mathcal A)$, without assuming any $S_n$ is flat over $R$.\n\nFor chain maps $f,f':P\\to P'$ and a homotopy $h$ with $f-f'=d_{P'}h+hd_P$, the degree $-1$ maps with components $\\Gamma(h\\otimes1)$ and $\\Gamma(g_n^*(h\\otimes1))$ commute with every tower transition and are homotopies from $D(f')$ to $D(f)$ and from $B(f')$ to $B(f)$. Thus $QD,QB$, where $Q:\\operatorname{CoCh}(\\mathcal A)\\to D(\\mathcal A)$ is localization, factor through the homotopy category of $\\mathcal P$.\n\nFor $N=[P]\\in D(R)$, $D(P)$ represents levelwise exact sections of the entire coherent reduction tower $N_\\bullet$ of [def-weil-pbc-adic-coefficient-datum], with $A=\\mathcal O_E$, $I=(\\varpi)$, transported to $D(\\operatorname{Tow}_R(s))$ by restriction along the coefficient presentation isomorphisms $e_s$ and $\\bar e_n$ of [lem-weil-pbc-integral-coefficient-presentation-comparison]; its $n$th evaluation is sections of $N\\otimes_R^LS_n$, and its quotient augmentation is represented by $\\Gamma(x\\mapsto x\\otimes1)$. The complex $B(P)$ represents sections of the finite pullback quotient tower on the same representative, with the displayed coefficient-induced transitions. These identifications retain the whole strict diagram, rather than only its separate derived evaluations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), common-representative quotient towers; returned strict-quotient proof steps 5-7 and coherent-source identification in step 9"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-trf-point-quotient-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-tower-category-levelwise-abelian] to $\\operatorname{Mod}(\\mathcal O_E)$. This gives the asserted abelian category $\\mathcal A$ and its levelwise kernels and cokernels. Images are kernels of cokernels, so $H^i(T)_n=\\ker(d^i_n)/\\operatorname{im}(d^{i-1}_n)=H^i(T_n)$ for a tower complex $T$. A map of towers is invertible exactly when all its components are: the inverses commute with transitions by multiplying its naturality squares by these inverses. Applying this to $H^i(f)$ and using the definition of quasi-isomorphism proves the levelwise criterion. In Lean use the functor-category abelian instances, the homology isomorphism of exact evaluation on short complexes, whiskered by the short-complex functor, and HomologicalComplex.quasiIso_iff_evaluation.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02MZ, lemma-inverse-systems-abelian; cohomology and inverse-map calculation"
+   }
+  },
+  {
+   "text": "First work before sections. By the sheaf tensor definition, $t_n^i$ sends $x\\otimes a$ to $x\\otimes\\rho_n(a)$, and $f_n^i=f^i\\otimes1$ sends it to $f^i(x)\\otimes a$. Thus $t_n^{P\\prime}f_{n+1}=f_nt_n^P$: both send $x\\otimes a$ to $f(x)\\otimes\\rho_n(a)$. The same calculation with $f=d_P$ gives a complex of strict towers. Identity, composition and addition of maps hold on pure tensors. These are equalities of the presheaf tensor maps, hence of their sheafifications. Restriction along $\\pi_n$ gives $R$-linear transitions because $\\rho_n\\pi_{n+1}=\\pi_n$. Additive sections, with scalars restricted along the constant map $\\mathcal O_E\\to\\Gamma(s,R)$, give precisely $D(P)$ and $D(f)$. This proves the asserted additive functor $D$. Reuse the canonical unrestrictedIntegralComplexFunctor and unrestrictedIntegralTransition of [def-weil-integral-reduction-tower]; their strict diagram is already constructed. Additivity follows degreewise and levelwise from the additive quotient, restriction and sections functors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-inverse-system",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-integral-reduction-tower",
+    "def-trf-point-quotient-tower-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; strict-diagram calculation for blueprint clause (3)"
+   }
+  },
+  {
+   "text": "Reuse the published integralOperationsPullbackTowerFunctor of [lem-pur-integral-operations-well-defined]. Its finite coefficient functor, restriction and reduction are additive; the transition is the uniquely generator-normalized candidate already constructed there. This gives B as a functor with its actual coefficient-induced transitions; check addition on every degree and level. No separate choice of a tower or transition is made.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-inverse-image-pullback-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), strict finite-pullback transitions; agent balanced-map calculation"
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism f between good representatives, apply the K-flat quasi-isomorphism invariance in [lem-pur-derived-change-of-rings] to each actual quotient projection. The existing finiteReduction_quasiIso proof in [lem-pur-integral-operations-well-defined] is this specialization. The specified constant-coefficient finite pullback is exact by [lem-pur-coefficient-pullback-exact], so it preserves this quasi-isomorphism. Exact scalar restriction and exact point sections [lem-weil-point-proetale-sections-exact] preserve it as well. Apply Step 1 to assemble these levelwise results into quasi-isomorphisms of both entire tower complexes. No flatness of a quotient over the completed ring is used.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-coefficient-pullback-exact",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side; exact point sections and scalar transport"
+   }
+  },
+  {
+   "text": "Write $h^i:P^i\\to P\\prime^{i-1}$ for the given homotopy. The transition calculation of Step 2 applies to each $h^i$, without using a chain-map identity, and gives $t_n^{P\\prime}(h^i\\otimes1)=(h^i\\otimes1)t_n^P$. The calculation of Step 3 likewise applies to $G(h^i\\otimes1)$ and the coefficient-induced transitions. Thus, after sections, these degree $-1$ maps are morphisms of towers. Tensor, inverse image, scalar extension and sections are additive and respect composition. Applying them to $f^i-f\\prime^i=d_{P\\prime}^{i-1}h^i+h^{i+1}d_P^i$ gives, in $\\mathcal A$, $D(f)-D(f\\prime)=dD(h)+D(h)d$ and $B(f)-B(f\\prime)=dB(h)+B(h)d$. These are the asserted homotopies with the stated direction and components. For the actual Lean transitions, first identify unrestrictedIntegralTransition with the termwise unrestrictedModuleStep by its tensor-normalized uniqueness. Its naturality applies to every h(i,j), with no chain-map requirement. Identify integralOperationsPullbackTransition with its constructed candidate by its generator-normalized uniqueness; the finite pullback mate naturality gives the corresponding square for every h(i,j). NatTrans.ofOpSequence assembles these adjacent squares into genuine tower maps. The zero and homotopy equations are the level additive functors mapHomotopy equations, checked by natural-transformation extensionality.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-integral-reduction-tower",
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), common-representative homotopy calculation"
+   }
+  },
+  {
+   "text": "The localization $Q$ factors through the homotopy category by [def-weil-abstract-derived-category]. By Step 5, replacing a chain map in $\\mathcal P$ by a homotopic map replaces its image under either $D$ or $B$ by a homotopic map. Hence $QD$ and $QB$ assign equal morphisms to equivalent chain maps and define functors on the quotient of $\\mathcal P$ by chain homotopy. Their identity and composition laws follow from those already proved for $D$ and $B$. Explicitly use DerivedCategory.Q_map_eq_of_homotopy and CategoryTheory.Quotient.lift with its canonical lift.isLift isomorphism for each functor.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RR, section-derived-categories; quotient universal property"
+   }
+  },
+  {
+   "text": "Let $F(P)$ be the strict reduction tower defined in [def-weil-pbc-adic-coefficient-datum]. For $N=[P]$, that definition computes $N_\\bullet$ by this very tower on one K-flat representative, not by separately chosen representatives at different levels. The datum applies: $\\mathcal O_E$ is Noetherian, $\\mathcal O_E/\\varpi$ is a finite field of characteristic $\\ell$, hence torsion, and each $\\mathcal O_E/\\varpi^n$ is finite and perfect, resolved by $0\\to\\mathcal O_E\\xrightarrow{\\varpi^n}\\mathcal O_E\\to0$. Its ring sheaves are its Cont-presentations $L_n$ of $\\mathcal O_E/\\varpi^n$ and $B_s=\\varprojlim_nL_n$, not $S_n$ and $R$; [lem-weil-pbc-integral-coefficient-presentation-comparison] gives ring-sheaf isomorphisms $e_s:B_s\\to R$ and $\\bar e_n:L_n\\to S_n$ with $\\pi_ne_s=\\bar e_n\\pi_n^{B}$, compatible with the quotient transitions, and exact inverse restriction equivalences. Restricting $P$ along $e_s$ gives a flat-term K-flat $B_s$-complex $P^\\flat$, since tensoring with a transported acyclic complex gives the same underlying complex. The balanced maps $x\\otimes a\\mapsto x\\otimes\\bar e_n(a)$, well defined because $\\pi_ne_s=\\bar e_n\\pi_n^B$ and inverse to $x\\otimes b\\mapsto x\\otimes\\bar e_n^{-1}(b)$, identify $F(P^\\flat)_n$ with $P\\otimes_RS_n$ restricted along $\\bar e_n$, compatibly with differentials and with the transitions $1\\otimes q_{n+1,n}$ and $t_n$ since $\\rho_n\\bar e_{n+1}=\\bar e_nq_{n+1,n}$. So the transported coherent tower of $N$ is represented by the strict tower $F(P)_n=P\\otimes_RS_n$ with transitions $t_n$. Define sections on $R$-module towers degreewise and levelwise, with constant $\\mathcal O_E$-scalars. It is exact: kernels and cokernels are levelwise by [lem-weil-tower-category-levelwise-abelian], and sections at each level are exact by [lem-weil-point-proetale-sections-exact]. Its derived functor is therefore computed on every complex by the termwise construction [lem-sf-exact-functor-derived-triangulated]. Applied to $F(P)$ it is exactly $D(P)$, including every transition. Clause (2) of [lem-pur-derived-change-of-rings] identifies each evaluation with sections of $N\\otimes_R^LS_n$. The maps $a_n(x)=x\\otimes1$ commute with differentials and satisfy $t_na_{n+1}=a_n$, since $\\rho_n(1)=1$; sections therefore give the stated strict quotient augmentation. Finally exactness of $g_n^*$ from Step 4 means the finite pullback of this representative is computed by $g_n^*P_n$. Step 3 constructs precisely its coefficient-induced transitions, so its section complex is $B(P)$. All identifications are made on these complexes of towers themselves and thus in their derived categories; none infers an identification of coherent diagrams from evaluations alone. The strict quotient augmentation is checked before localization using unrestrictedTowerUnit_condition and the tensor-normalized transition, then assembled with NatTrans.ofOpSequence and whiskered by sections. Its finite-evaluation corollary uses unrestrictedTowerResolutionIso of [lem-weil-integral-reduction-tower-well-defined] on the identity K-flat resolution of P, followed by the canonical exact-restriction and sections localization factorization isomorphisms. Apply [lem-trf-point-quotient-tower-strict-comparison] for the normalized isomorphism of complexes of whole towers, and [lem-trf-pbc-iso-restriction-kflat] for the coefficient-transported K-flat representative. The published completedReductionTower_properties makes the universal counit invertible on this representative. The completed-tower image of the restriction localization factor, this counit, the tower-restriction localization factor, Q(r), and the sections localization factor are all invertible. Compose the corresponding canonical factor isomorphisms, using the published counit-isomorphism lemma; the resulting gamma.hom is definitionally the prescribed literal composite. The ordinary strict comparison is the remaining subproblem, before sections and localization. The completed assembly is the extracted coherentSource theorem of [lem-trf-point-quotient-tower-coherent-source], publicly re-exported by the item. The unchanged tower definitions are [def-trf-point-quotient-tower-data].",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-trf-point-quotient-tower-coherent-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), coherent-source identification; Stacks Tag 015F, lemma-right-derived-exact-functor, and Tag 06YT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-inverse-system",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-integral-reduction-tower",
+  "def-trf-point-quotient-tower-data",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-coefficient-pullback-exact",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-trf-point-quotient-tower-coherent-source"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "DAG proof of lem-trf-point-quotient-tower-homotopy; existing canonical quotient and pullback constructions; Mathlib homology, homotopy, exact-derived and quotient APIs",
+  "place": "Exact coefficient pullback, transition naturality, homotopy descent and strict augmentation; normalized strict presentation comparison and K-flat coefficient transport followed by the universal-counit derived assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomotopy|complexOfFunctorsToFunctorToComplex|quasiIso.*(iff|eval)|mapHomologicalComplex",
+   "results": "OK 25 hits; ; hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean. The hits provide additive homotopy functors, localizations, or tensor exactness for flat modules; none gives both completed-sheaf quotient tower functors, their quasi-isomorphism preservation without flat quotient rings, and their coherent source identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat quotient coefficient towers preserve quasi isomorphisms and chain homotopies",
+   "results": "UNAVAILABLE 0 hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; hits: . Service unavailable, no absence conclusion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Homotopy",
+   "results": "OK 0 hits; loogle: unknown identifier 'HomologicalComplex.Homotopy'; hits: . The hits provide additive homotopy functors, localizations, or tensor exactness for flat modules; none gives both completed-sheaf quotient tower functors, their quasi-isomorphism preservation without flat quotient rings, and their coherent source identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On flat term K flat complexes, the simultaneous towers of quotient sections and automorphism pullback quotient sections preserve quasi isomorphisms and homotopies as complexes of towers",
+   "results": "OK 8 hits; ; hits: CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplexUpToQuasiIso.quotientCompQhIso, CategoryTheory.compatiblePreservingOfFlat, Module.Flat.trans, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization, DerivedCategory.quotientCompQhIso, Rep.standardComplex.quasiIso_forget₂_εToSingle₀. The hits provide additive homotopy functors, localizations, or tensor exactness for flat modules; none gives both completed-sheaf quotient tower functors, their quasi-isomorphism preservation without flat quotient rings, and their coherent source identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent derived reduction tower is represented by tensoring one K flat complex with all quotient coefficient rings, and exact sections identifies its complex of towers",
+   "results": "OK 8 hits; ; hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.lTensor_exact. The hits provide additive homotopy functors, localizations, or tensor exactness for flat modules; none gives both completed-sheaf quotient tower functors, their quasi-isomorphism preservation without flat quotient rings, and their coherent source identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomotopyCategory",
+   "results": "OK 12 hits; ; hits: CategoryTheory.Functor.mapHomotopyCategory, CategoryTheory.instAdditiveHomotopyCategoryMapHomotopyCategory, CategoryTheory.instFaithfulHomotopyCategoryMapHomotopyCategoryOfFull, CategoryTheory.instFullHomotopyCategoryMapHomotopyCategoryOfFaithful, CategoryTheory.instLinearHomotopyCategoryMapHomotopyCategory, CategoryTheory.NatIso.mapHomotopyCategory, CategoryTheory.NatTrans.mapHomotopyCategory, CategoryTheory.Functor.mapHomotopyCategoryCompIso. The hits provide additive homotopy functors, localizations, or tensor exactness for flat modules; none gives both completed-sheaf quotient tower functors, their quasi-isomorphism preservation without flat quotient rings, and their coherent source identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient section towers of K flat sheaf complexes preserve quasi isomorphisms and chain homotopies under automorphism pullback",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplexUpToQuasiIso.quotientCompQhIso, HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso, DerivedCategory.isIso_Qh_map_iff, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, HomotopyCategory.quasiIso_eq_quasiIso_map_quotient, HomotopyCategory.quotient_map_mem_quasiIso_iff, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh. Read the homotopy-category and derived-localization constructions in Mathlib/Algebra/Homology/HomotopyCategory.lean:232-248, DerivedCategory/Basic.lean:87-117 and Localization.lean:343-369. They give generic additive homotopy/localization infrastructure, not the strict sheaf quotient-section and finite-pullback tower constructions or their coherent-reduction identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomotopyCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapHomotopyCategory, CategoryTheory.instAdditiveHomotopyCategoryMapHomotopyCategory, CategoryTheory.instFaithfulHomotopyCategoryMapHomotopyCategoryOfFull, CategoryTheory.instFullHomotopyCategoryMapHomotopyCategoryOfFaithful, CategoryTheory.instLinearHomotopyCategoryMapHomotopyCategory, CategoryTheory.NatIso.mapHomotopyCategory, CategoryTheory.NatTrans.mapHomotopyCategory, CategoryTheory.Functor.mapHomotopyCategoryCompIso. Read the homotopy-category and derived-localization constructions in Mathlib/Algebra/Homology/HomotopyCategory.lean:232-248, DerivedCategory/Basic.lean:87-117 and Localization.lean:343-369. They give generic additive homotopy/localization infrastructure, not the strict sheaf quotient-section and finite-pullback tower constructions or their coherent-reduction identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat complexes quotient coefficient reduction towers exact sections preserve quasi isomorphisms",
+   "results": "8 hits: HomotopyCategory.quotient_map_mem_quasiIso_iff, QuasiIso, CategoryTheory.ShortComplex.QuasiIso.isIso, quasiIso_comp, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplex.instRespectsIsoQuasiIso, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, quasiIso_of_isIso. Read the homotopy-category and derived-localization constructions in Mathlib/Algebra/Homology/HomotopyCategory.lean:232-248, DerivedCategory/Basic.lean:87-117 and Localization.lean:343-369. They give generic additive homotopy/localization infrastructure, not the strict sheaf quotient-section and finite-pullback tower constructions or their coherent-reduction identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*(eval|iff)|mapHomotopyCategory|complexOfFunctorsToFunctorToComplex",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean. Read the homotopy-category and derived-localization constructions in Mathlib/Algebra/Homology/HomotopyCategory.lean:232-248, DerivedCategory/Basic.lean:87-117 and Localization.lean:343-369. They give generic additive homotopy/localization infrastructure, not the strict sheaf quotient-section and finite-pullback tower constructions or their coherent-reduction identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact functor applied termwise to coherent strict inverse diagrams of quotient complexes preserves homotopies and detects levelwise quasi isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors. Read the homotopy-category and derived-localization constructions in Mathlib/Algebra/Homology/HomotopyCategory.lean:232-248, DerivedCategory/Basic.lean:87-117 and Localization.lean:343-369. They give generic additive homotopy/localization infrastructure, not the strict sheaf quotient-section and finite-pullback tower constructions or their coherent-reduction identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategory|def map|PreservesHomology",
+   "results": "5 hits: 232, 238, 240, 245, 248. Read the homotopy-category and derived-localization constructions in Mathlib/Algebra/Homology/HomotopyCategory.lean:232-248, DerivedCategory/Basic.lean:87-117 and Localization.lean:343-369. They give generic additive homotopy/localization infrastructure, not the strict sheaf quotient-section and finite-pullback tower constructions or their coherent-reduction identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-transport-strict-quotient",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), common-representative quotient towers; returned strict-quotient proof steps 5-7 and coherent-source identification in step 9",
+   "via": [
+    "lem-trf-point-transport-strict-quotient",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-point-quotient-tower-homotopy",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Seven steps construct and check both strict tower functors, levelwise cohomology, K-flat quasi-isomorphism preservation without flat quotients, explicit transition-compatible homotopies, and the coherent-source/augmentation identification. Reused all non-elementary facts from existing nodes; no new nodes.",
+  "blueprint": "Ancestor prop-trf-rational-frobenius-integral-model proof clause (3): the common-representative strict quotient towers and coherent-source identification named by blueprint.from.place. Steps 1-4 supply the homotopical construction; Steps 5-6 homotopy descent; Step 7 identifies the entire coherent reduction tower.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic abelian inverse-system theorem used to compute tower cohomology; it does not replace the coefficient-transport route."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact point sections for arbitrary ring-sheaf modules, used to retain strict reductions after sections."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Site equivalence and natural constant-ring structure maps for the given automorphism, used in the balanced transitions and exact finite pullback."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat change-of-rings theorem for the nonflat quotient ring sheaves, used levelwise on the one common representative."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor computation in derived categories, used for exact sections on the entire strict tower category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-122e395d3",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-122e395d3 (reviewer sub-agent of L); spot-checked: FIX for one repairable C1/E4 fault, in the statement and Step 7. All 7 steps were read against the full statements of every cited node. Findings: (1) Steps 1-6 are correct. K-flat change of rings (1) on both complexes means no flatness of S_n is needed. The v_n balancing rho_n c_{n+1} = c_n G(rho_n) checks out from lem-weil-proetale-isomorphism-inverse-image(3). g_n^* is exact because c_n is an isomorphism. Gamma is exact because k is algebraically closed. Homotopies descend through the K(A) clause of def-weil-abstract-derived-category. (2) Old parent steps 5-7 and the source half of step 9 (Q135 archive) are all carried by the new steps; nothing was dropped. (3) Fault: the coherent tower of def-weil-pbc-adic-coefficient-datum lives over that node's Cont-presented quotient sheaves and their limit B_s, not over S_n=(A_n)_s and R. The item silently identified the two and never checked the datum's hypotheses. Repaired: Step 7 and the statement now cite the on-route node lem-weil-pbc-integral-coefficient-presentation-comparison (e_s, ē_n, compatible with transitions). Step 7 now checks the datum's hypotheses (O_E Noetherian, O_E/ϖ torsion, finite perfect quotients) and writes out the explicit balanced transport of F(P♭) to P⊗_R S_n. The node is added to stmt_deps, the step's uses and proof_deps, and the statement is not weakened. (4) No duplicates: lem-cbc-strict-coefficient-augmentation-homotopicality covers only the generic D-part before Gamma, and the quotient-augmentation and completion-cone nodes differ. (5) Edge cases checked: P=0, g=id, n=1, unbounded P, non-flat S_n. No SGA citation. Declared tool_uses accepted (generic sections, inverse image and change of rings; two Mathlib leaves).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointQuotientTowerHomotopy",
+  "declaration": "WeilConjectures.PointQuotientTower.homotopical",
+  "declarations": [
+   "WeilConjectures.PointQuotientTower.homotopical",
+   "WeilConjectures.PointQuotientTower.homotopies",
+   "WeilConjectures.PointQuotientTower.homotopyDescent",
+   "WeilConjectures.PointQuotientTower.quotientAugmentation",
+   "WeilConjectures.PointQuotientTower.evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/PointQuotientTowerHomotopy.lean",
+  "statement": "theorem homotopical (_hl : l ≠ D.p) (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g] : Nonempty (Abelian (ℕᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))) ∧ (∀ n : ℕ, PreservesFiniteLimits ((evaluation ℕᵒᵖ (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).obj (op n)) ∧ PreservesFiniteColimits ((evaluation ℕᵒᵖ (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).obj (op n)) ∧ ∀ i : ℤ, Nonempty (HomologicalComplex.homologyFunctor _ (.up ℤ) i ⋙ (evaluation ℕᵒᵖ (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).obj (op n) ≅ (((evaluation ℕᵒᵖ (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)))).obj (op n)).mapHomologicalComplex (.up ℤ)) ⋙ HomologicalComplex.homologyFunctor _ (.up ℤ) i)) ∧ (∀ (X Y : CochainComplex (ℕᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))) ℤ) (f : X ⟶ Y), QuasiIso f ↔ ∀ n : ℕ, QuasiIso (((HomologicalComplex.complexOfFunctorsToFunctorToComplex).map f).app (op n))) ∧ ((integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ source D l E).Additive ∧ ((integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ target D l E g).Additive ∧ (∀ (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (f : P.obj ⟶ P'.obj), QuasiIso f → QuasiIso ((source D l E).map f) ∧ QuasiIso ((target D l E g).map f))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The five theorem declarations of this module, together with coherentSource of lem-trf-point-quotient-tower-coherent-source, state the node: additive quasi-isomorphism invariance and levelwise abelianness, specified compatible homotopies, homotopy descent, strict quotient augmentation, the normalized whole-diagram coherent-source comparison, and its derived finite-evaluation corollary. The helper constructions use the published quotient/pullback towers and exact point sections; no new coefficient or tensor notion is introduced. For compile-time control after folding derived-functor definitions, the unchanged tower constructions are extracted to Sheaf.Paper.PointQuotientTowerData (owned by def-trf-point-quotient-tower-data) and coherentSource to Sheaf.Paper.PointQuotientTowerCoherentSource (owned by lem-trf-point-quotient-tower-coherent-source); the item publicly re-exports both. Its primary homotopical declaration and the other four pre-existing proofs remain in the item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-765e0f52e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Q16 lem-trf-point-quotient-tower-homotopy 765e0f52: one new module; node differs from live only in lean; statement verbatim; all 23 declarations present. Clause-by-clause match: arbitrary IsIso g, l≠p, flat-term K-flat full subcategory with no bounds and no flatness of S_n; levelwise abelian, homology and quasi-iso criterion; additive D and B preserving quasi-isos; homotopies pinned componentwise to sourceLevel/targetLevel maps of h (Mathlib Homotopy f f' = node's f−f'=dh+hd); homotopy-category factorization via Quotient.functor iso (not vacuous); coherentSource canonical: r pinned on generators b⊗x ↦ ē_n(b)⊗x, γ.hom equal to the explicit counit/factorization composite in D(Tow); hypotheses on q and e = the ∃! normalizations of IntegralCoefficientPresentation.comparison. quotientAugmentation HEq has definitionally equal types (scalarReductionExistence and unrestrictedIntegralReductionExistence are the same term). No hollow defs, only sorry proofs, docstrings carry source and 7 proof steps, no pro-étale substitute, universes match the dependencies, consumer not imported. No compile run (no file changed); worker reports clean ~7 s. Advisories: integralOperations*/unrestricted*/scalarReductionDerived*/pointIntegralSections owners outside stmt_deps (stmt_deps unchanged from stage 1, as Q15 5821bc63); evaluation corollary is a bare Nonempty iso beside the pinned whole-diagram comparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "independent cc review: E4 PointQuotientTowerHomotopy f148: verbatim extraction of 17 defs to PointQuotientTowerData + proved coherentSource (via proved pbcIsoRestriction_isKFlat, published towerCounit_isIso, new true hole strictPresentationComparison) against lem-trf-point-quotient-tower-homotopy and the 4 new nodes; sandbox compile of all 5 modules OK, axioms clean apart from sorryAx from the new hole; item 0 importers"
+ }
+}

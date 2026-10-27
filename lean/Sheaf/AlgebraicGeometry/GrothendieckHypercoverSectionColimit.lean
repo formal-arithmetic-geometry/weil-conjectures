@@ -5,6 +5,7 @@ Authors: SHEAF group A4
 -/
 module
 public import Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionColimit
+public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 import all Sheaf.UpstreamExtra.WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 import Sheaf.AlgebraicGeometry.FiniteSplitHypercoverTruncation
 public import Sheaf.UpstreamExtra.WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts

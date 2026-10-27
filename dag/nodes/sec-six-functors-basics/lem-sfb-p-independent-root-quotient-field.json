@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-p-independent-root-quotient-field",
+ "kind": "statement",
+ "title": "Finite root quotients of p-independent elements are fields",
+ "statement": "Let $p$ be prime, let $k$ be a field of characteristic $p$ [def-weil-field], and let $b_1,\\ldots,b_r\\in k$, where $r\\geq0$. Put $k^p=\\{a^p:a\\in k\\}$. Assume the monomials $\\prod_{i=1}^r b_i^{e_i}$ with $0\\leq e_i<p$ are linearly independent over $k^p$. For every integer $n\\geq1$, the commutative $k$-algebra $$C_n=k[T_1,\\ldots,T_r]/(T_1^{p^n}-b_1,\\ldots,T_r^{p^n}-b_r)$$ [def-weil-pbc-mv-polynomial-ring] is a field. The classes of $\\prod_iT_i^{e_i}$ with $0\\leq e_i<p^n$ form a $k$-basis of $C_n$, and every $z\\in C_n$ satisfies $z^{p^n}\\in k$ under the canonical inclusion. For $r=0$ this means $C_n=k$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation paragraph: the residue fields of the finite root algebras in the displayed construction"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module",
+  "def-sfb-parameter-root-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $q=p^n>0$ and write $t_i$ for the class of $T_i$. Apply [lem-sfb-simultaneous-root-algebra-api] with $R=k$, exponent $q$, and tuple $(b_i)$. It gives the asserted $k$-basis $t^E$, $0\\leq E_i<q$, including $t^0=1$. Hence $k\\to C_n$ is injective: the basis coefficient of $a\\cdot1$ at $E=0$ is $a$. In particular $0\\ne1$ in $C_n$. The same node identifies the empty-tuple quotient with $k$, proving the stated $r=0$ convention.",
+   "uses": [
+    "lem-sfb-simultaneous-root-algebra-api"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof p-base preparation paragraph; explicit finite-stage algebra argument, step 1"
+   }
+  },
+  {
+   "text": "Since $p\\cdot1=0$ in $k$, it is also zero in its quotient algebra $C_n$. By [def-weil-ring-frobenius], $x\\mapsto x^q$ is a ring endomorphism of $C_n$. For the unique basis expansion $z=\\sum_E a_Et^E$, the defining relations $t_i^q=b_i$ therefore give $$z^q=\\sum_E a_E^q\\prod_i(t_i^q)^{E_i}=\\sum_E a_E^q b^E.$$ The right side is the image of a scalar $c\\in k$. This proves the power-in-$k$ assertion for every $z$, including zero.",
+   "uses": [
+    "lem-sfb-simultaneous-root-algebra-api",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof p-base preparation paragraph; explicit finite-stage algebra argument, step 2"
+   }
+  },
+  {
+   "text": "If $z\\ne0$, at least one $a_E\\ne0$ by uniqueness of the expansion. The hypothesis is exactly the $p$-independence hypothesis of [lem-sfb-p-independent-higher-power-monomials]. Its conclusion at height $n$ says that the monomials $b^E$, $E_i<q$, are independent over $k^q$. If $c=\\sum_E a_E^q b^E$ were zero, every $a_E^q$ would be zero. A nonzero field element has nonzero positive powers (multiply by the corresponding power of its inverse), so all $a_E$ would vanish, a contradiction. Thus $c\\ne0$.",
+   "uses": [
+    "lem-sfb-p-independent-higher-power-monomials",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof p-base preparation paragraph; explicit finite-stage algebra argument, step 3"
+   }
+  },
+  {
+   "text": "For $z\\ne0$, take $c\\ne0$ as above. The element $w=c^{-1}z^{q-1}\\in C_n$ satisfies $zw=c^{-1}z^q=c^{-1}c=1$, since $q\\geq1$. Commutativity gives $wz=1$ as well. Together with $0\\ne1$ from step 1, this is precisely the field criterion of [def-weil-field].",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof p-base preparation paragraph; explicit finite-stage algebra argument, step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-simultaneous-root-algebra-api",
+  "def-weil-ring-frobenius",
+  "lem-sfb-p-independent-higher-power-monomials",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, proof p-base preparation paragraph. Explicit argument supplying the finite residue-field assertion, using the existing simultaneous monic quotient basis and Frobenius."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "p[Bb]asis|p_[Bb]asis|pIndependent|p_independent",
+   "results": "{\"t\": \"2026-10-24T04:39:27Z\", \"tool\": \"grep\", \"query\": \"p[Bb]asis|p_[Bb]asis|pIndependent|p_independent\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"Mathlib/FieldTheory/LinearDisjoint.lean\"], \"digest\": \"0dc6050e3391b37d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The monomials in p power roots of a finite subset of a p basis are a basis of the purely inseparable extension",
+   "results": "{\"t\": \"2026-10-24T04:39:28Z\", \"tool\": \"leansearch\", \"query\": \"The monomials in p power roots of a finite subset of a p basis are a basis of the purely inseparable extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"separableClosure.isPurelyInseparable\", \"IsPurelyInseparable.instOfHasExponent\", \"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"isPurelyInseparable_iff_pow_mem\", \"IsPurelyInseparable\", \"isPurelyInseparable_iff_natSepDegree_eq_one\", \"IsPurelyInseparable.isAlgebraic\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\"], \"digest\": \"24d65fa9113c2f63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "loogle",
+   "query": "ExpChar, IsPurelyInseparable, finrank",
+   "results": "{\"t\": \"2026-10-24T04:39:28Z\", \"tool\": \"loogle\", \"query\": \"ExpChar, IsPurelyInseparable, finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'finrank'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a p independent family in a field of characteristic p the algebra adjoining p power roots has degree p to the number of generators and is a field",
+   "results": "{\"t\": \"2026-10-24T04:39:32Z\", \"tool\": \"leanfinder\", \"query\": \"Given a p independent family in a field of characteristic p the algebra adjoining p power roots has degree p to the number of generators and is a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finInsepDegree_eq_pow\", \"IsPRadical.isPurelyInseparable\", \"perfectClosure\", \"perfectClosure.isPurelyInseparable\", \"IsPurelyInseparable.finrank_eq_pow\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\", \"IsPurelyInseparable.instOfHasExponent\", \"IntermediateField.adjoin_eq_adjoin_pow_expChar_of_isSeparable\"], \"digest\": \"e59487fa65693cea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, Module.finrank",
+   "results": "{\"t\": \"2026-10-24T04:40:16Z\", \"tool\": \"loogle\", \"query\": \"IsPurelyInseparable, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsPurelyInseparable.finInsepDegree_eq\", \"IsPurelyInseparable.finrank_eq_pow\"], \"digest\": \"266fcf5852b5659e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining p to the n roots of a finite part of a p basis gives a field of degree p to the n times the cardinality",
+   "results": "{\"t\": \"2026-10-24T04:40:18Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining p to the n roots of a finite part of a p basis gives a field of degree p to the n times the cardinality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.Emb.Cardinal.two_le_deg\", \"FiniteField.finrank_zmod_extension\", \"FiniteField.finrank_extension\", \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"IsGalois.of_separable_splitting_field_aux\", \"AdjoinRoot.powerBasis_dim\", \"Field.finSepDegree\", \"finInsepDegree_eq_pow\"], \"digest\": \"5a99790165b5657e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_eq_pow|mapPowExpCharPowOfIsSeparable|irreducible_X_pow|irreducible.*pow|isDomain_of",
+   "results": "{\"t\": \"2026-10-24T04:42:21Z\", \"tool\": \"grep\", \"query\": \"finrank_eq_pow|mapPowExpCharPowOfIsSeparable|irreducible_X_pow|irreducible.*pow|isDomain_of\", \"sub\": \"FieldTheory/PurelyInseparable\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"5a15af7051ee6474\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: power-of-p degree and perfect-closure results assume a field extension already exists; they do not show the specified p-independent root quotient is a field or give its degree."
+  },
+  {
+   "tool": "grep",
+   "query": "def iterateFrobenius|theorem iterateFrobenius_def|lemma iterateFrobenius_def|def frobenius|theorem frobenius_def",
+   "results": "{\"t\": \"2026-10-24T05:09:25Z\", \"tool\": \"grep\", \"query\": \"def iterateFrobenius|theorem iterateFrobenius_def|lemma iterateFrobenius_def|def frobenius|theorem frobenius_def\", \"sub\": \"Algebra/CharP\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Frobenius.lean\"], \"digest\": \"6215c53391be83d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "loogle",
+   "query": "iterateFrobenius",
+   "results": "{\"t\": \"2026-10-24T05:09:26Z\", \"tool\": \"loogle\", \"query\": \"iterateFrobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"iterateFrobenius\", \"iterateFrobenius_one\", \"iterateFrobenius_zero\", \"iterateFrobenius_zero_apply\", \"iterateFrobenius_add\", \"iterateFrobenius_one_apply\", \"LinearMap.iterateFrobenius\", \"iterateFrobenius_def\"], \"digest\": \"49b5f86940c1c64d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative ring of prime characteristic p the map x to x raised to p to the n is a ring homomorphism",
+   "results": "{\"t\": \"2026-10-24T05:09:27Z\", \"tool\": \"leanfinder\", \"query\": \"In a commutative ring of prime characteristic p the map x to x raised to p to the n is a ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iterateFrobenius\", \"frobenius\", \"iterateFrobenius_def\", \"iterate_frobenius\", \"iterateFrobeniusEquiv_def\", \"frobenius_def\", \"LinearMap.iterateFrobenius_def\", \"RingHom.map_iterateFrobenius\"], \"digest\": \"12bfc16a5b079510\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map x to x to the p power n is a ring homomorphism in characteristic p",
+   "results": "{\"t\": \"2026-10-24T05:11:12Z\", \"tool\": \"leansearch\", \"query\": \"The map x to x to the p power n is a ring homomorphism in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frobenius\", \"iterateFrobenius\", \"frobenius_def\", \"LinearMap.iterateFrobenius_def\", \"iterate_frobenius\", \"IsPurelyInseparable.iterateFrobenius\", \"iterateFrobenius_def\", \"LinearMap.frobenius_def\"], \"digest\": \"1378ec851663e567\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "grep",
+   "query": "pthRootAlgebra|pIndependent|p_independent|quotient.*isField|isField.*quotient",
+   "results": "{\"t\": \"2026-10-24T05:14:25Z\", \"tool\": \"grep\", \"query\": \"pthRootAlgebra|pIndependent|p_independent|quotient.*isField|isField.*quotient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/GoingUp.lean\", \"Mathlib/RingTheory/Ideal/GoingUp.lean\", \"Mathlib/RingTheory/Ideal/Int.lean\", \"Mathlib/RingTheory/Ideal/Int.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Basic.lean\"], \"digest\": \"43ad765ed3990ab9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining p power roots of p independent field elements by polynomial quotient gives a field with the bounded monomial basis",
+   "results": "{\"t\": \"2026-10-24T05:14:25Z\", \"tool\": \"leansearch\", \"query\": \"Adjoining p power roots of p independent field elements by polynomial quotient gives a field with the bounded monomial basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.powerBasisAux'\", \"AdjoinRoot.powerBasis\", \"IsAdjoinRootMonic.powerBasis\", \"AdjoinRoot.powerBasisAux\", \"AdjoinRoot.powerBasis'\", \"IsAdjoinRootMonic.basis\", \"AdjoinRoot.instField\", \"AdjoinRoot.isAdjoinRootMonic\"], \"digest\": \"68bde17b83e284a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, IsField",
+   "results": "{\"t\": \"2026-10-24T05:14:25Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, IsField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The multivariable quotient by T i to the p power n minus b i is a field when the b i are p independent and has basis the bounded monomials",
+   "results": "{\"t\": \"2026-10-24T05:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"The multivariable quotient by T i to the p power n minus b i is a field when the b i are p independent and has basis the bounded monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectClosure\", \"AlgebraicClosure.Vars\", \"PerfectClosure.mk\", \"MvPolynomial.R\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\"], \"digest\": \"fbc83ba2f6ef13db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A purely inseparable root algebra of p independent elements at arbitrary Frobenius height is a field of degree p to the height times number of roots",
+   "results": "{\"t\": \"2026-10-24T05:15:04Z\", \"tool\": \"leanfinder\", \"query\": \"A purely inseparable root algebra of p independent elements at arbitrary Frobenius height is a field of degree p to the height times number of roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPRadical.isPurelyInseparable\", \"IsPurelyInseparable.finrank_eq_pow\", \"finInsepDegree_eq_pow\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\", \"IsPurelyInseparable.finInsepDegree_eq\", \"IsPurelyInseparable.HasExponent\", \"IsPurelyInseparable.elemExponent\", \"IsPurelyInseparable.insepDegree_eq\"], \"digest\": \"8406695aa0cad50a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Frobenius and monic power bases are available components, but the arbitrary-height p-independent quotient field and its basis are not a one-line specialization. Reused the existing DAG nodes for components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-perfect-residue-algebraic-tower",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Perfect-residue algebraic preparation for the local Epp input. Finite-stage input: Finite root quotients of p-independent elements are fields.",
+   "via": [
+    "lem-sfb-dvr-perfect-residue-algebraic-tower",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-p-independent-root-quotient-field",
+  "worker": "stage1",
+  "summary": "Proved the unchanged finite root quotient statement in four steps: existing simultaneous monic basis, explicit Frobenius scalar calculation, higher-height independence, and explicit inverses. Created one strictly smaller field-only independence input, not a quotient-field clause. Added quotient and basis definition dependencies; no Lean attachment.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Perfect-residue algebraic preparation for the local Epp input. Finite-stage input: Finite root quotients of p-independent elements are fields. Steps supply the finite residue-field calculation used by the historical Epp p-base preparation. The latest direct-image proof does not state this auxiliary result; no blueprint or unit route was changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-a2f3f6cf7",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-a2f3f6cf7 (reviewer sub-agent of L); spot-checked: I read the full item, the new node lem-sfb-p-independent-higher-power-monomials and every cited statement. The cited nodes are simultaneous-root-algebra-api (same unit), def-weil-ring-frobenius (Mathlib leaf) and def-weil-field, plus the definition nodes for polynomial rings, quotient algebras and free modules. Sources: Stacks 09II (more-algebra.tex l.35961ff, the A' root-tower paragraph) and 07P1 (l.11344). The item's hypothesis matches 07P1 exactly. Step 1: the API gives the actual quotient's basis for exponent q=p^n>0 and identifies the empty tuple with k, which gives injectivity and 0≠1. Step 2: Frobenius iterated n times is a ring endomorphism, so z^q=Σa_E^q b^E lies in k. Step 3: the new node at height n, with circularity avoided because the inverse is taken in k, not in C_n. Step 4: the explicit inverse c^{-1}z^{q-1}, correctly marked elementary. The citer dvr-perfect-residue-algebraic-tower step 2 uses exactly the clauses supplied. The new node is true; I re-did the digit induction E=D+pF and checked n=0, r=0, F_p(s), repeated and perfect cases. It is self-contained, statement-only and unsplit. It does not restate any clause of the item and is more than a two-line fact. A DAG search (frobenius-image-field-tower-degree, the complement-monomial basis node and the pbc p-independent nodes) finds no duplicate. The separable Mathlib candidates were rightly rejected. Route: same unit plus leaves; there are no tool_uses and no SGA citations. Minor: characteristic p is not cited to def-pc-field-characteristic, as in the unchanged base statement; no fix needed."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PIndependentRootQuotientField",
+  "declaration": "Algebra.ParameterRoot.isField_of_pIndependent",
+  "file": "lean/Sheaf/FieldTheory/PIndependentRootQuotientField.lean",
+  "statement": "theorem isField_of_pIndependent (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (r : ℕ) (b : Fin r → k) (hb : LinearIndependent (frobenius k p).fieldRange (fun e : Fin r → Fin p ↦ ∏ i, b i ^ (e i).val)) (n : ℕ) (hn : 1 ≤ n) : IsField (Algebra.pthRootAlgebra (p ^ n) r k b) ∧ (∃ B : Module.Basis (Fin r → Fin (p ^ n)) k (Algebra.pthRootAlgebra (p ^ n) r k b), ∀ e, B e = ∏ i, (Ideal.Quotient.mk _ (MvPolynomial.X i) : Algebra.pthRootAlgebra (p ^ n) r k b) ^ (e i).val) ∧ (∀ z : Algebra.pthRootAlgebra (p ^ n) r k b, ∃ a : k, algebraMap k (Algebra.pthRootAlgebra (p ^ n) r k b) a = z ^ (p ^ n)) ∧ (r = 0 → Function.Bijective (algebraMap k (Algebra.pthRootAlgebra (p ^ n) r k b)))",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the statement cites the landed definition node def-sfb-parameter-root-algebra and uses Algebra.pthRootAlgebra directly, with root classes written as Ideal.Quotient.mk _ (MvPolynomial.X i). The simultaneous-root algebra theorem API remains only a proof dependency. Frobenius fieldRange is exactly the p-th-power subfield; the empty-tuple clause states bijectivity of the canonical coefficient map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71e60cd04",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Re-delivery of 3978be65c243 (H2 RETURN). The snapshot diff shows the only changes are stmt_deps (lem-sfb-simultaneous-root-algebra-api replaced by the landed def-sfb-parameter-root-algebra; the theorem stays in proof_deps) and the Lean statement written with Algebra.pthRootAlgebra (p ^ n) r k b and Ideal.Quotient.mk _ (MvPolynomial.X i), definitionally the old ParameterRoot.Ring/root abbrevs. Node text, proof and source are unchanged. All clauses checked: Fact p.Prime, CharP, LinearIndependent over (frobenius k p).fieldRange indexed by Fin r → Fin p, 1 ≤ n, IsField, specified monomial basis, z^(p^n) in the image of k, r=0 bijective. Edge cases r=0, n=1, z=0, p=2 covered. lean.statement is verbatim in the file, a single sorry, docstrings carry the source and blueprint. The def node record is identical to live; the item is not landed live. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,188 @@
+{
+ "id": "lem-trf-hom-product-stabilization-factorization",
+ "kind": "statement",
+ "title": "Hom-product image stabilization gives uniform transition factorizations",
+ "statement": "Let $R$ be a commutative ring, $I$ a small nonempty directed partially ordered set, and $(M_i,f_{ij})_{i\\in I}$ a directed system of $R$-modules, so $f_{ii}=\\mathrm{id}$ and $f_{ik}=f_{jk}\\circ f_{ij}$ whenever $i\\le j\\le k$. Put $P=\\prod_{s\\in I}M_s$, the module of all families with componentwise operations. Suppose that for every $i\\in I$ there is $j\\ge i$ such that for every $k\\ge j$ the images of the precomposition maps $\\operatorname{Hom}_R(M_j,P)\\to\\operatorname{Hom}_R(M_i,P)$ and $\\operatorname{Hom}_R(M_k,P)\\to\\operatorname{Hom}_R(M_i,P)$ are equal. Then for every $i\\in I$ there is $j\\ge i$ such that for every $k\\ge i$ there is an $R$-linear map $h_{i,k}:M_k\\to M_j$ with $f_{ij}=h_{i,k}\\circ f_{ik}$. No finite-presentation or countability assumption on the modules or on $I$ is imposed. A directed system is regarded as a diagram in the category of modules, in the terminology of [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059E (proposition-ML-characterization), proof of (5) implies (3); the proof uses only the displayed Hom-image hypothesis and directed-system identities, without the finite-presentation assumptions of the surrounding proposition."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i\\in I$ and choose $j\\ge i$ from the image-stabilization hypothesis. Define $e_j:M_j\\to P$ by $(e_j(x))_s=x$ when $s=j$, and $0\\in M_s$ otherwise; define $\\pi_j:P\\to M_j$ by $\\pi_j((x_s)_s)=x_j$. Both maps preserve addition and scalar multiplication coordinatewise: at $s=j$ the required identities are those in $M_j$, and elsewhere they are $0+0=0$ and $r0=0$. Thus they are $R$-linear and $\\pi_j\\circ e_j=\\mathrm{id}_{M_j}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, proof of (5) implies (3)."
+   }
+  },
+  {
+   "text": "For any $\\ell\\ge j$, the map $e_j\\circ f_{ij}:M_i\\to P$ lies in the image of precomposition from $\\operatorname{Hom}_R(M_j,P)$, witnessed by $e_j$. The assumed equality of images therefore gives an $R$-linear map $a_\\ell:M_\\ell\\to P$ with $a_\\ell\\circ f_{i\\ell}=e_j\\circ f_{ij}$. Set $g_\\ell=\\pi_j\\circ a_\\ell:M_\\ell\\to M_j$. Composition preserves linearity directly, and $g_\\ell\\circ f_{i\\ell}=\\pi_j\\circ e_j\\circ f_{ij}=f_{ij}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, proof of (5) implies (3)."
+   }
+  },
+  {
+   "text": "Now let $k\\ge i$ be arbitrary. Directedness gives $\\ell\\in I$ with $\\ell\\ge j$ and $\\ell\\ge k$. Apply Step 2 at $\\ell$ and put $h_{i,k}=g_\\ell\\circ f_{k\\ell}:M_k\\to M_j$. This map is $R$-linear, and the directed-system identity gives $h_{i,k}\\circ f_{ik}=g_\\ell\\circ f_{k\\ell}\\circ f_{ik}=g_\\ell\\circ f_{i\\ell}=f_{ij}$. The same $j$ works for every $k\\ge i$, including $k$ incomparable with $j$. Only the stated image equality, coordinatewise module operations, directedness and the transition identities were used; finite presentation and countability are unnecessary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E, proposition-ML-characterization, proof of (5) implies (3)."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059E, proposition-ML-characterization, proof of (5) implies (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|factor.*[Hh]om.*prod",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|factor.*[Hh]om.*prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\"], \"digest\": \"d09e4c6984d40638\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: range identities, colimit representatives and inverse-system predicates do not give uniform factorization from Hom-product image stabilization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stabilization of images of Hom into a product implies uniform factorization of maps in a directed system of modules",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"leansearch\", \"query\": \"Stabilization of images of Hom into a product implies uniform factorization of maps in a directed system of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.directLimitIsColimit\", \"DirectLimit.Module.hom_ext_iff\", \"ModuleCat.directLimitIsColimit_desc\", \"ModuleCat.monoFactorisation\", \"ModuleCat.image.fac\", \"DirectLimit.Module.hom_ext\", \"ModuleCat.directLimitDiagram\", \"CategoryTheory.Limits.Image.imageFactorisation\"], \"digest\": \"d322cd93bb10d539\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: range identities, colimit representatives and inverse-system predicates do not give uniform factorization from Hom-product image stabilization"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.range, LinearMap.comp",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.range, LinearMap.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.range_comp\", \"LinearMap.range_comp_le_range\", \"LinearMap.range_comp_of_range_eq_top\", \"LinearMap.subtype_comp_rangeRestrict\", \"LinearMap.range_le_ker_iff\", \"LinearMap.submoduleImage_apply_of_le\", \"LinearMap.ker_eq_range_of_comp_eq_id\", \"LinearMap.range_eq_ker_of_leftInverse\"], \"digest\": \"3a0be28329bc5e56\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: range identities, colimit representatives and inverse-system predicates do not give uniform factorization from Hom-product image stabilization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the inverse system Hom from modules into the product of all stages is Mittag Leffler, every stage has a later transition factoring through every outgoing transition",
+   "results": "{\"t\": \"2026-10-22T06:45:39Z\", \"tool\": \"leanfinder\", \"query\": \"If the inverse system Hom from modules into the product of all stages is Mittag Leffler, every stage has a later transition factoring through every outgoing transition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"Module.DirectLimit.exists_of₂\", \"Module.DirectLimit.exists_eq_of_of_eq\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"Module.DirectLimit.exists_of\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"InverseSystem.globalEquiv_compatibility\", \"InverseSystem.limit\"], \"digest\": \"92f93013d4c0e58c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: range identities, colimit representatives and inverse-system predicates do not give uniform factorization from Hom-product image stabilization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventually constant images of precomposition linear maps to a product give a transition that factors through all later stages",
+   "results": "{\"t\": \"2026-10-22T06:45:49Z\", \"tool\": \"leanfinder\", \"query\": \"Eventually constant images of precomposition linear maps to a product give a transition that factors through all later stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.CC_exact\", \"Profinite.NobelingProof.CC_comp_zero\", \"InverseSystem.piLTLim_apply\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AlgebraicTopology.DoldKan.P_is_eventually_constant\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\", \"Profinite.NobelingProof.GoodProducts.max_eq_eval_unapply\", \"Profinite.NobelingProof.πs'\"], \"digest\": \"6f8aeef3678540f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: range identities, colimit representatives and inverse-system predicates do not give uniform factorization from Hom-product image stabilization"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|factor.*[Hh]om.*prod",
+   "results": "{\"t\": \"2026-10-23T14:55:03Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|factor.*[Hh]om.*prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"], \"digest\": \"76050359384e102d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern cofiltered Type-valued systems, adic completion, and unrelated factors; none states the Hom-product factorization result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stabilizing images of precomposition on Hom into the product of a directed family of modules gives a uniform factorization through every outgoing map",
+   "results": "{\"t\": \"2026-10-23T14:55:04Z\", \"tool\": \"leansearch\", \"query\": \"Stabilizing images of precomposition on Hom into the product of a directed family of modules gives a uniform factorization through every outgoing map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.image.factorThruImage_preComp\", \"ModuleCat.image.fac\", \"ModuleCat.directLimitIsColimit\", \"DirectLimit.Module.hom_ext_iff\", \"ModuleCat.directLimitIsColimit_desc\", \"ModuleCat.monoFactorisation\", \"DirectLimit.Module.hom_ext\", \"ModuleCat.directLimitDiagram\"], \"digest\": \"d2e56f88be3175b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern image factorizations and universal properties of direct limits, not the stated stabilization implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.range, LinearMap.comp",
+   "results": "{\"t\": \"2026-10-23T14:55:04Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.range, LinearMap.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.range_comp\", \"LinearMap.range_comp_le_range\", \"LinearMap.range_comp_of_range_eq_top\", \"LinearMap.subtype_comp_rangeRestrict\", \"LinearMap.range_le_ker_iff\", \"LinearMap.submoduleImage_apply_of_le\", \"LinearMap.ker_eq_range_of_comp_eq_id\", \"LinearMap.range_eq_ker_of_leftInverse\"], \"digest\": \"3a0be28329bc5e56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: range and kernel identities do not assert factorization of transitions from eventual equality of Hom-product images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stabilization of images of Hom into the product of all modules in a directed system implies uniform factorization of transition maps",
+   "results": "{\"t\": \"2026-10-23T14:55:05Z\", \"tool\": \"leanfinder\", \"query\": \"Stabilization of images of Hom into the product of all modules in a directed system implies uniform factorization of transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectLimit.Module.of_f\", \"DirectLimit.Module.hom_ext_iff\", \"DirectLimit.Module.lift_of\", \"Module.DirectLimit.exists_eq_of_of_eq\", \"DirectLimit.Module.lift_apply\", \"Module.DirectLimit.of_f\", \"Module.DirectLimit.map_apply_of\", \"Module.DirectLimit.exists_of₂\"], \"digest\": \"e2403233d383d3f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern direct-limit representatives, lifts and transition compatibility, not the Hom-product stabilization implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a direct system of modules stable images of maps to a product give a later transition that factors through every transition with the same source",
+   "results": "{\"t\": \"2026-10-23T14:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a direct system of modules stable images of maps to a product give a later transition that factors through every transition with the same source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectLimit.Module.lift_of\", \"DirectLimit.Module.of_f\", \"Module.DirectLimit.lift\", \"DirectLimit.Module.lift_apply\", \"Module.DirectLimit.lift_of\", \"DirectLimit.Module.lift\", \"Module.DirectLimit.of_f\", \"Module.DirectLimit.lift_unique\"], \"digest\": \"a504858b284235b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern direct-limit representatives, lifts and transition compatibility, not the Hom-product stabilization implication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ml-countable-colimit",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 059X/059W countable-extraction sentence, specifically Tag 059E proof of (5) implies (3), the product-coordinate factorization argument in returned item Step 2.",
+   "via": [
+    "lem-trf-ml-countable-colimit",
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-hom-product-stabilization-factorization",
+  "worker": "stage1",
+  "summary": "Q106 checked Tag 059E (5) implies (3), project declarations and both phrasings of Mathlib searches. Three elementary steps explicitly construct the coordinate inclusion and projection, extract a lift from the image equality, and handle arbitrary indices using a common upper bound. No additional hypotheses, new nodes or external proof dependencies are needed. The statement is unchanged.",
+  "blueprint": "This item is a supporting algebra lemma in the inherited ancestry through lem-trf-ml-countable-colimit to lem-trf-local-term-locality. Its three steps expand Tag 059E (5) implies (3) identified in blueprint.from.place. The latest ancestor blueprint states the contracting-local-term theorem and does not itself contain the later algebra expansion; no chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-6f9b5d5de",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-6f9b5d5de (reviewer sub-agent of L); spot-checked: I read the item in full, with Stacks algebra.tex l.21000-21104 (Tag 059E, proposition-ML-characterization, proof of (5)=>(3)), def-weil-pbc-category-colimit and both citers. The delivery is one commit touching only the item and the report, with no new nodes. The statement, stmt_deps, source and blueprint are unchanged from live, where the item is still unsplit with 0 steps, so nothing supersedes it. Step 1 defines the coordinate insertion e_j and projection pi_j and checks pi_j e_j = id; this is elementary. Step 2: for l >= j, the map e_j f_ij lies in the image from Hom(M_j,P), so the stated image equality (used only for l >= j) gives a_l, and g_l = pi_j a_l satisfies g_l f_il = f_ij. Step 3: for any k >= i, a common upper bound l >= j,k gives h = g_l f_kl, and the transition identity f_kl f_ik = f_il holds since i <= k <= l. This also covers k incomparable with j, a case the source's last sentence leaves out. Marking all steps elementary is justified (C1/C2 fine) and proof_deps = [] is correct. Leaving out finite presentation is faithful because this implication never uses it. I checked the singleton poset, zero modules and the zero ring, the diamond poset and non-surjective transitions. The citers lem-trf-ml-countable-colimit step 2 and lem-trf-mittag-leffler-eventual-domination step 1 use exactly the stated conclusion with N = P. I found no duplicate in the DAG; lem-trf-mittag-leffler-hom-systems gives only the hypothesis. Only Stacks is cited, so there is no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomProductStabilizationFactorization",
+  "declaration": "Module.exists_factorization_of_hom_product_images_stabilize",
+  "file": "lean/Sheaf/RingTheory/HomProductStabilizationFactorization.lean",
+  "statement": "theorem exists_factorization_of_hom_product_images_stabilize (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{w} R) (hstable : ∀ i : I, ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k), Set.range (fun a : F.obj j →ₗ[R] (∀ s : I, F.obj s) ↦ a.comp (F.map (homOfLE hij)).hom) = Set.range (fun a : F.obj k →ₗ[R] (∀ s : I, F.obj s) ↦ a.comp (F.map (homOfLE (hij.trans hjk))).hom)) : ∀ i : I, ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hik : i ≤ k), ∃ h : F.obj k →ₗ[R] F.obj j, (F.map (homOfLE hij)).hom = h.comp (F.map (homOfLE hik)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34dcadcad",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Read the node, the Stacks 059E (5)=>(3) proof (algebra.tex 21000-21104), the stmt_dep def-weil-pbc-category-colimit (Mathlib leaf, imported, used only for diagram vocabulary) and the module. Clause match: CommRing R; nonempty directed PartialOrder I in its own universe; F : I ⥤ ModuleCat.{w} R with f_ij = F.map (homOfLE _); full product ∀ s, F.obj s; image equality as Set.range of precompositions for all k ≥ j (not stronger); conclusion ∀ i ∃ j ≥ i ∀ k ≥ i ∃ h, f_ij = h ∘ f_ik, quantifier order preserved and k not restricted to k ≥ j. No extra instances or finiteness; universes independent and bound. Edge cases (singleton, k=i, k incomparable with j, zero ring/modules, large I) covered; empty I excluded as in the node. lean.statement verbatim in file; node otherwise equal to live; no new nodes; no duplicate in side-live lean/Sheaf or DAG; hypothesis has the same form as sibling hom_images_stabilize_of_isMittagLeffler. One sorry theorem, no definitions; source/blueprint docstrings and 3-step proof present; report has Worker report and Second reading sections. Nothing changed, so not compiled. No findings."
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "id": "lem-sf-native-finite-tor-preservation",
+ "kind": "statement",
+ "title": "Native finite-ring finite-Tor preservation for compact support and exceptional inverse image",
+ "statement": "Let $k$ be a field, $\\Lambda$ a finite commutative ring, $a_Y:Y\\to\\operatorname{Spec} k$ a finite-type structure map, and assume some positive integer annihilates $\\Lambda$ and is invertible on $Y$. Use the fixed-$\\operatorname{ModuleCat}(\\Lambda)$ presentations of bounded constructibility and finite Tor amplitude [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. (i) For any scheme morphism $f:X\\to Y$, any compactification $c$ [def-weil-compactifications-refinements], and any $K$ in the finite-Tor constructible category of $X$, its compact-support direct image $Rp_*j_!K$ [def-compact-support-direct-image-detailed] lies in the finite-Tor constructible category of $Y$. (ii) If $f$ is quasi-compact and has a compactification, its canonical comparison-transported etale exceptional inverse image $\\nu_X^* f^\\times R\\nu_{Y,*}$ [def-weil-exceptional-inverse-image] preserves the finite-Tor constructible category. No interval or numerical dimension bound is part of this statement.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Exceptional-adjunction sentence, restriction to small categories; proved native source APIs CompactifFiniteTor.lean:68 and UpperShriekFiniteness.lean:211."
+ },
+ "stmt_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For (i), choose a bounded constructible etale representative of K, which is already supplied by the native boundedConstructible predicate, and transfer its Tor interval by the exact tensor comparison. The etale compact support preserves constructibility and finite Tor amplitude. Transport its value through the fixed compact-support comparison. This is the complete adopted proof of constructibleFiniteTor_rightDerivedLowerShriekOfCompactification in CompactifFiniteTor.lean:68--84; the etale preservation proof is in the same file at lines 41--58.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For (ii), the adopted source theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek provides a uniform widening of the cohomology and Tor interval in the native etale-origin presentation. Choose a joint constructible/Tor interval for the input by exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor, apply that theorem, and read its widened joint interval back as finite-Tor membership. This is the complete proof of constructibleFiniteTor_rightDerivedUpperShriek at UpperShriekFiniteness.lean:211--222. The finite-type target makes it quasi-compact, so the required bounded-below etale exceptional datum is inferred.",
+   "uses": [
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-open-ctf",
+  "cor-sf-direct-image-ctf-proetale",
+  "thm-sf-preservation-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Reuse the two already proved adopted source declarations, without restating their predicates in intrinsic coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.prop_of_iso",
+   "results": {
+    "t": "2026-10-25T09:44:35Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.ObjectProperty.prop_of_iso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.ObjectProperty.prop_of_iso"
+    ],
+    "digest": "317c90d851a7c1e8"
+   },
+   "date": "2026-10-25",
+   "verdict": "No Mathlib site-specific match. Exact native finite-ring results already exist in the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor_rightDerivedUpperShriek",
+   "results": {
+    "t": "2026-10-25T09:44:35Z",
+    "tool": "grep",
+    "query": "constructibleFiniteTor_rightDerivedUpperShriek",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No Mathlib site-specific match. Exact native finite-ring results already exist in the adopted source library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient compact support and exceptional inverse image preserve bounded constructible complexes with finite Tor amplitude",
+   "results": {
+    "t": "2026-10-25T09:46:31Z",
+    "tool": "leansearch",
+    "query": "Finite coefficient compact support and exceptional inverse image preserve bounded constructible complexes with finite Tor amplitude",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside",
+     "HomologicalComplex.instIsSupportedOfIsStrictlySupported",
+     "ofCompactSupport",
+     "HomologicalComplex.IsSupported.mk",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "HomologicalComplex.instIsStrictlySupportedOppositeOpOp",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange"
+    ],
+    "digest": "1548ce782f78744d"
+   },
+   "date": "2026-10-25",
+   "verdict": "No Mathlib site-specific match. Exact native finite-ring results already exist in the adopted source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteExceptionalDomain",
+  "date": "2026-10-25",
+  "group": "D9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Exceptional-adjunction sentence: both functors preserve the small finite-Tor constructible categories.",
+   "via": [
+    "lem-sf-package-exceptional-coherence-realization",
+    "lem-sf-package-finite-exceptional-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifFiniteTor",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/CompactifFiniteTor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification",
+   "AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedUpperShriek"
+  ],
+  "statement": "theorem constructibleFiniteTor_rightDerivedLowerShriekOfCompactification {X Y : Scheme.{u}}\n    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    [HasInvertibleExponent Λ Y] {f : X ⟶ Y} (c : Compactification f)\n    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}\n    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :\n    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y\n      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).obj K)",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-25",
+  "note": "Clause (ii) is constructibleFiniteTor_rightDerivedUpperShriek in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness, lines 211--222. Both declarations are already proved, with no source file modified; the module publicly imports the UpperShriekFiniteness declaration through AmbientAdjointClass."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T122756-L-1806152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T122756-L-1806152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

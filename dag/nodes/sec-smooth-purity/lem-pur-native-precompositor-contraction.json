@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-native-precompositor-contraction",
+ "kind": "statement",
+ "title": "Native contraction before the compositor cancellation",
+ "statement": "At either native site and any finite commutative coefficient ring, for composable compactifiable quasi-compact f and g, install the published derived braidings and use the existing CompositeIntegrationData [def-pur-composite-integration-operations]. For every permitted K, put L=Lf tensor Pf Lg. The transported actual composite counit equals Fgf(beta(Pgf K,L)), then Fgf(L tensor pullComp_K inverse), then alpha_(L tensor Pf Pg K) inverse, then Fg(qf(L,Pg K)), then qg(Ff L,K), then (Fg(qf(Lf,Lg)) followed by Fg(tf tensor Lg), Fg(lambda_Lg), tg) tensor identity_K, then lambda_K. This is the explicitly typed PrecompositorContraction identity. It does not use projection_comp or any projection map of fg.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+ },
+ "stmt_deps": [
+  "def-pur-composite-integration-operations"
+ ],
+ "proof": [
+  {
+   "text": "Expand the composite counit using Adjunction.comp_counit_app and substitute the supplied counit formulas. Move the g-twist symmetry through the f counit by naturality. Native pullback tensor naturality and braided compatibility identify the source with the sigma of tensorAction_trace_contraction.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+   }
+  },
+  {
+   "text": "Apply tensorAction_trace_contraction using the two native projection natural transformations and action_f. All five permitted pairs follow from twist closure, tensor_f, pull_g and push_closed. Expand its first contraction and use Fg functoriality to obtain the four trace factors.",
+   "uses": [
+    "lem-pur-tensor-action-trace-contraction",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-tensor-action-trace-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace; explicit typed native calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientCounit|tensorAction_trace_contraction|projectionMap_rightUnitality",
+   "results": "Existing tensorAction_trace_contraction is proved; Etale.projectionMap_rightUnitality is available; no native precompositor contraction or both-site inverse projection package found.",
+   "date": "2026-10-25",
+   "verdict": "Existing lemmas cover constituent steps, not the native source-identification or both-site projection package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive twisted pullback counits contract two traces through inverse projection formula before compositor cancellation",
+   "results": "8 hits, including ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app and ExponentiableMorphism.pushforwardComp_hom_counit_assoc; no match.",
+   "date": "2026-10-25",
+   "verdict": "Pullback counits in Cartesian categories do not supply the twisted tensor-action formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"comp\"",
+   "results": "12 hits, including Adjunction.comp_counit_app and monoidal adjunction counit lemmas.",
+   "date": "2026-10-25",
+   "verdict": "comp_counit_app is a constituent step; none gives the native contraction or projection package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of twisted pullback adjunction counits factors through inverse projection formula and composite trace",
+   "results": "8 hits: chosen-pullback composition counits, exponentiable pushforward counits and scheme module pullback composition.",
+   "date": "2026-10-25",
+   "verdict": "No match for either remaining native-map identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositeIntegrationCounit",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Expanded Step 6, final canonical reassociations; native typed operation presentation and component calculations.",
+   "via": [
+    "lem-pur-composite-integration-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeIntegrationContraction",
+  "file": "lean/Sheaf/Paper/NativeIntegrationContraction.lean",
+  "declaration": "WeilConjectures.PurityIntegration.nativePrecompositorContraction",
+  "declarations": [
+   "WeilConjectures.PurityIntegration.PrecompositorContraction",
+   "WeilConjectures.PurityIntegration.nativeContractionAssertion",
+   "WeilConjectures.PurityIntegration.nativePrecompositorContraction"
+  ],
+  "statement": "theorem nativePrecompositorContraction (b : Bool) (R : Type (u + 1)) [CommRing R] [Finite R] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f] [QuasiCompact g] : nativeContractionAssertion b R f g",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositeIntegrationOperations vs clone's CompositeIntegrationCounit (verbatim relocation, diff), item proof vs node steps, new sorry statements IntegrationProjectionLaws/PrecompositorContraction vs native projection/compositor laws and Etale.projectionMap_rightUnitality; importers ProjectionPurityAgreement and AffineOrderedIntegrationTransposes compiled against delivered modules (exit 0)"
+ }
+}

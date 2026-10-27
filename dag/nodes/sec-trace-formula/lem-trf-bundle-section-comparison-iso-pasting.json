@@ -1,0 +1,129 @@
+{
+ "id": "lem-trf-bundle-section-comparison-iso-pasting",
+ "kind": "statement",
+ "title": "Pasting a section comparison with a source isomorphism",
+ "statement": "Let A be a finite commutative ring. Let p:X→S, q:U→S, r:W→T admit compactifications, with q and r quasi-compact. Let h:U≅X be over S, v:T→S, and a:W→U give Cartesian squares for q and p. Suppose z:S→X, w:S→U, b:T→W satisfy w h=z and b a=v w. Then pullback along v of the identity-base section comparison induced by h, followed by the section comparison induced by a, equals the section comparison induced by a h. All comparisons are the specified maps of [def-trf-bundle-section-orientation-data]; the statement has no orientation or normalization hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; parent orientation node proof Step 3"
+ },
+ "stmt_deps": [
+  "def-trf-bundle-section-orientation-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the section comparisons. Compact-support exchange horizontal pasting identifies the inverse exchange for the pasted Cartesian square with the two inverse exchanges, including inverse-image compositors.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply mateEquiv_vcomp and conjugate-equivalence identity coherence. Pullback compositor associativity pastes the section squares. Naturality and composition of constant-unit pullback cancel the identity base comparison and give the asserted component equation.",
+   "uses": [
+    "def-trf-bundle-section-orientation-data",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-trf-bundle-section-orientation-data",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, expanded at the indicated parent step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mate of a composite commuting square equals composite mates for adjunctions",
+   "results": "mateEquiv_square and mateEquiv give formal categorical tools, not this scheme section-component identity.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction composed with the identity adjunction has the same counit under canonical unitors",
+   "results": "Adjunction.comp_counit_app and Adjunction.id_counit give formal identity laws; no specified bundle section comparison.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso and its hom/inv lemmas; no scheme section comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriekBaseChangeMap.*(comp|trans)|[Rr]ank[Zz]ero",
+   "results": "Only rank-zero linear-algebra hits in Mathlib. Library search finds VectorTraceGeometry.zero_isIso, unboundedEtaleCompactSupport_baseChange_comp/id, and bundleSectionComparison definitions; no existing statement of this component identity.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation",
+  "date": "2026-10-25",
+  "group": "J2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Step 4, Pasting a section comparison with a source isomorphism",
+   "via": [
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BundleSectionComparisonIsoPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/BundleSectionComparisonIsoPasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.bundleSectionComparison_iso_pasting",
+  "statement": "theorem bundleSectionComparison_iso_pasting\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X U W S T : Scheme.{u}} (p : X ⟶ S) (q : U ⟶ S) (r : W ⟶ T)\n    [HasCompactification p] [HasCompactification q] [HasCompactification r]\n    [QuasiCompact q] [QuasiCompact r]\n    (h : U ≅ X) (hp : h.hom ≫ p = q) (v : T ⟶ S) (a : W ⟶ U)\n    (sq : IsPullback a r q v) (sq' : IsPullback (a ≫ h.hom) r p v)\n    (z : S ⟶ X) (w : S ⟶ U) (b : T ⟶ W) (hz : w ≫ h.hom = z)\n    (hw : b ≫ a = v ≫ w) (hw' : b ≫ (a ≫ h.hom) = v ≫ z) :\n    (ordinaryFinitePullback A v).map\n        ((leftDerivedUpperStarId (ModuleCat.{u + 1} A) S).inv.app\n            ((ordinaryFinitePullback A z).obj\n              ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) p).obj\n                (ordinaryFiniteUnit A S))) ≫\n          bundleSectionComparison A p q h.hom (𝟙 S)\n            (IsPullback.of_horiz_isIso\n              (CommSq.mk (hp.trans (Category.comp_id _).symm)))\n            z w (hz.trans (Category.id_comp _).symm)) ≫\n        bundleSectionComparison A q r a v sq w b hw =\n      bundleSectionComparison A p r (a ≫ h.hom) v sq' z b hw'",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T143446-L-1017800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T143446-L-1017800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

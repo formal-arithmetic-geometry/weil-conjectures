@@ -1,0 +1,47 @@
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-sf-weil-dual-realization-comparison.json`: statement; split into six steps using four existing statements. Statement and statement dependencies unchanged. No new nodes; no Mathlib leaves.
+- `citations.json`: ten step/node pairs, each with a quotation verified as a verbatim substring of that node's statement.
+- `searches.jsonl`: unmodified records produced by the required msearch wrapper; seven searches in this attempt. The item preserves the inherited Q64 searches and appends these actual Q121 searches.
+
+## Attachments
+
+None. Searched the entire project `lean/WeilConjectures/` for the item id, dual realization, and the related Hom/dualizing names. Read `WeilSheaf/DerivedHom.lean` and `WeilSheaf/VerdierDual.lean` (especially lines 108–143). The Hom construction and the simp lemma `verdierDual_obj_obj` do not assert the comparison or its evaluation compatibility. `objectProperty_derivedHom_dualizingComplex` and the native biduality theorem have `sorry`; neither is an attachment for this item.
+
+## Wanted literature
+
+None. The source used for the assembly is the available current blueprint, not an unavailable external theorem.
+
+## Faults and changes
+
+The imported item had no proof, and its blueprint ancestry has `from.node: null`. The ancestor command confirms that value; I retained it, filled the precise `from.place`, and supplied the split report's blueprint description. The proof is an agent-written native refinement of the blueprint, and `proof_origin.by` records that fact. No mathematical statement correction or route change was needed. All four comparison/duality statements already exist in the item's own unit, `sk-prop-sf-biduality-general`; no off-unit tool use is required.
+
+The point requiring care was the premise of the realization Hom comparison: it assumes its internal Hom belongs to the common-stage category, rather than proving that preservation itself. Step 1 therefore first invokes `thm-coef-qbar-verdier`. The native exceptional comparison, rather than an arbitrary isomorphism between dualizing objects, supplies the fixed counit-normalized map h in step 2. The proof never infers naturality from a faithfulness assertion about the derived forgetful functor.
+
+## Unfinished work
+
+None at the level of this split. Its existing dependencies remain their own obligations; this delivery proves the assembly from their statements and does not claim to prove the dependencies or to finish a Lean proof.
+
+## Mathlib and duplicate searches
+
+The required wrapper was run with the item's own id for LeanFinder (two different phrasings), LeanSearch, Loogle (`"derivedHom"` and `"expComparison"`), and Mathlib grep (two different patterns). I read the returned hits. `LightCondensed.ihomPoints` and its naturality lemmas are underived light condensed internal Hom results; `Rep.MonoidalClosed.linearHomEquivComm` concerns ordinary representation modules. The sheafification and forgetful hits from LeanSearch have no constructible coefficient-realization or derived Weil assertion. I read `Mathlib/Condensed/Light/InternallyProjective.lean` and `Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:43–110`: the latter's exponential comparison assumes Cartesian monoidal categories, whereas the item's structure is the derived tensor of module sheaves. No hit is this statement or a one-line specialization. Both phrasing searches returned real results, not an unavailable service.
+
+The whole-DAG search by realization and the whole imported blueprint searches by `dual realization` and `evaluation` located the already existing coefficient duality statements and the explicit native comparisons. The exact `dual realization` search returned no imported blueprint match. I opened the four statements actually used, and reused them; the broader fixed-pair equivariance statement does not replace the native derived comparisons. No node was created, so there are no new/existing tag pairs requiring a Not duplicates list.
+
+## Review by Q121
+
+I read the chapter record `sec-six-functors` and unit `sk-prop-sf-biduality-general`, the target instructions in GOAL.md, and the current blueprint files `main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-coef-qbar-verdier.proof.md` and `cor-coef-verdier-weil-equivariance.proof.md`. The first source's final paragraph identifies omega, internal Hom and exceptional adjunctions, and descends scalar-compatible evaluation; the second describes the internal-Hom comparison and transposition of evaluation. They motivate this native assembly but do not identify the actual derived category of equivariant sheaves with fixed pairs in an ordinary derived category. The four existing nodes supply exactly the needed native refinements. I read their full statements, not just their names or proofs. No SGA source is used.
+
+Step 1 uses `lem-sf-weil-native-closed-forgetful` for the restriction to bounded constructible underlying objects, `lem-sf-adic-qbar-constructible-realization` for the equivalence and inverse counit, and `thm-coef-qbar-verdier` for the anti-equivalence identified with internal Hom into the common-stage exceptional dualizing object. Thus M_K, omega_Y and D_Y M_K have the required typing before invoking the conditional Hom comparison. The geometric fiber Y is the separated finite-type k-scheme of the item's setup, the prime is invertible, and all coefficient categories are the raw common-stage ones named by these nodes. No discrete Omega presentation or Karoubi completion is substituted.
+
+Step 2 uses `lem-sf-weil-native-exceptional-forgetful`. I checked its separated finite-type morphism and scheme hypotheses against a_0: X to Spec k_0 and its assumed native right adjoint. Its final specialization to the structure map and its scalar-unit identification at the point give precisely h, including compatibility with units and counits. No existence of a native right adjoint is newly asserted, and no unbounded ambient exceptional adjoint is assumed.
+
+Step 3 uses the natural isomorphisms in `lem-sf-weil-native-closed-forgetful` and the evaluation-transpose isomorphism in `lem-sf-adic-qbar-constructible-realization`. Both statements explicitly assert evaluation compatibility. The first applies to the ambient native Hom, even before proving that Hom constructible; the second applies only after step 1 verified the three-object constructibility premise. Alpha has source UH_XK, beta has source rho D_Y M_K, and the middle Hom map precomposes with j_K and postcomposes with h. Thus the composite in step 4 has the asserted direction. Its inverse for the middle factor is Hom(j_K inverse,h inverse), a two-line bifunctor calculation. Bounded constructibility follows by the displayed isomorphism; that elementary inference needs no new lemma.
+
+Step 5 uses the same two natural comparisons and the fixed equivalence counit's naturality. I wrote out the equation Uu composed with j_K equals j_L composed with rho(m_u), and checked that postcomposing the two proposed naturality composites by beta_K gives Hom(j_L composed with rho(m_u),h) composed with alpha_L. This proves naturality directly for every native derived arrow. In particular extension classes are not reduced to degree-zero equivariant maps, and the proof requires neither derived faithfulness nor fullness of U.
+
+Step 6 uses exactly the evaluation clauses of the same two nodes; their verbatim statements are quoted separately for this step. Evaluation naturality with the two isomorphisms j_K and h gives h e_K (1 tensor j_K) = ev ((beta_K c_K) tensor 1). Substituting beta_K c_K = Hom(j_K,h) alpha_K and the realized evaluation identity gives the second equality displayed in the proof. Both sides have domain UH_XK tensor rho M_K and codomain rho omega_Y, with the stated tensor comparisons inserted. This verifies the particular composite, not merely the existence of some duality comparison.
+
+I checked the empty scheme and zero complex: all comparison maps are the unique isomorphisms of zero objects, and the evaluation equation has zero source. At the point and for a finite-dimensional Frobenius module the construction is ordinary duality, with precomposition by j and postcomposition by h in the stated directions. For a nontrivial Jordan Frobenius block it does not demand semisimplicity. The naturality equation also applies to shifted objects and nonzero extension arrows because its inputs are derived arrows; no bounded complex of projective equivariant objects is assumed. As a normalization check, replacing h by lambda h would replace c_K by lambda c_K and both sides of the evaluation identity by lambda, confirming the direction of h; the statement fixes h through the counit and does not make this replacement.
+
+I checked delivery-errors B–E point by point. There are no new nodes to violate statement-only, definition, source-tag, or Mathlib-leaf requirements. Existing statement dependencies and the entire item statement are retained. Every non-elementary input is one of the four cited nodes, every cited statement says what is used, no proof-internal construction is borrowed, and no new clause of the item is merely renamed. The only elementary steps are composition/inversion of the displayed isomorphisms, their explicitly calculated naturality, and the evaluation equation from the cited evaluation identities. Each proof step is below 2000 characters; the whole proof is 2866 characters. No long-step obligation or hidden separate comparison lemma remains.

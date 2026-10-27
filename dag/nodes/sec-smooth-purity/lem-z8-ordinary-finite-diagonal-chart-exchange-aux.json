@@ -1,0 +1,112 @@
+{
+ "id": "lem-z8-ordinary-finite-diagonal-chart-exchange-aux",
+ "kind": "statement",
+ "title": "Recorded diagonal chart transport equals the generic chart transport",
+ "statement": "The coefficient transport along either diagonal projection chart agrees with the generic transport for the same chart, projection and shifted-line comparison. This is only an identification of constructions, without an exchange or trace equation.\n\ntheorem ordinaryFiniteDiagonalChartMap_eq_generic (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n    derivedChartCoefficientMap (ModuleCat.{u + 1} A)\n      (projectiveLineDiagonalChart S a).val.hom (projectiveLineDiagonalProjection S a)\n      (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)\n      (projectiveLineDiagonalChart S a).property\n      ((ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧)\n      ((ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n      (ordinaryFiniteShiftedLinePullback A N hA t\n        (projectiveLineDiagonalChart S a).val.hom\n        ((map_natCast\n          ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n            (ProjectiveLine S ↘ S)).appTop.hom N) ▸\n          hS.map ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n            (ProjectiveLine S ↘ S)).appTop.hom)).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The selected projection chart transport in the supported diagonal construction"
+ },
+ "stmt_deps": [
+  "def-z8-ordinary-finite-p1-diagonal-components",
+  "lem-z8-etale-chart-exchange-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Expand the recorded diagonal chart map and its chart transport. The resulting four factors are direct image of the adjunction unit, the direct-image composition comparison, the equality comparison and direct image of the shifted coefficient comparison. Expand the generic chart coefficient map to the same four factors. The recorded ordinary adjunction is the canonical derived adjunction by its defining equation, and the recorded ordinary pullback and pushforward are the canonical derived functors. Replacing these aliases identifies each factor; composition congruence gives the equality. No projective-line trace or triangle identity is used.",
+   "uses": [
+    "def-z8-ordinary-finite-p1-diagonal-components",
+    "lem-z8-etale-chart-exchange-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "The selected projection chart transport in the supported diagonal construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-z8-ordinary-finite-p1-diagonal-components",
+  "lem-z8-etale-chart-exchange-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The selected projection chart transport in the supported diagonal construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteChartTransport|derivedChartCoefficientMap",
+   "results": "0 Mathlib hits; project-specific constructions.",
+   "date": "2026-10-27",
+   "verdict": "Use project defining equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.congrArg",
+   "results": "Unknown identifier; congrArg is a Lean core equality operation.",
+   "date": "2026-10-27",
+   "verdict": "Construction comparison uses core equality congruence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction chart coefficient composite is unchanged by replacing a recorded adjunction with its defining derived adjunction",
+   "results": "8 generic adjoint uniqueness and composition hits; none identifies the two project-specific chart constructions.",
+   "date": "2026-10-27",
+   "verdict": "Use the displayed constructor equations and composition congruence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "group": "Z8",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-z8-ordinary-finite-diagonal-chart-exchange",
+   "place": "Identify the recorded chart transport before applying generic chart exchange",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteDiagonalChartExchangeAux.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalChartMap_eq_generic",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalChartMap_eq_generic"
+  ],
+  "statement": "theorem ordinaryFiniteDiagonalChartMap_eq_generic (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    ordinaryFiniteP1DiagonalChartMap A N hA t S hS a =\n    derivedChartCoefficientMap (ModuleCat.{u + 1} A)\n      (projectiveLineDiagonalChart S a).val.hom (projectiveLineDiagonalProjection S a)\n      (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)\n      (projectiveLineDiagonalChart S a).property\n      ((ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧)\n      ((ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧)\n      (ordinaryFiniteShiftedLinePullback A N hA t\n        (projectiveLineDiagonalChart S a).val.hom\n        ((map_natCast\n          ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n            (ProjectiveLine S ↘ S)).appTop.hom N) ▸\n          hS.map ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫\n            (ProjectiveLine S ↘ S)).appTop.hom)).hom",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

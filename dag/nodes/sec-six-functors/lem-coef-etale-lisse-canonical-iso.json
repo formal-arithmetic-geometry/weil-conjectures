@@ -1,0 +1,136 @@
+{
+ "id": "lem-coef-etale-lisse-canonical-iso",
+ "kind": "statement",
+ "title": "Canonical lisse coefficient-Hom comparison is invertible",
+ "statement": "Let l, E, m≤n, A, B and φ be as in [def-weil-l-adic-coefficient-extension, def-sf-etale-finite-coefficient-hom-arrow]. Let S be a scheme and K,N objects of the unbounded derived category of A-modules on S_et [def-weil-pbc-derived-categories], with K dualizable and etale locally isomorphic to A^r[0] (r≥0) [def-sf-finite-free-hom-evaluation-coordinates], and N bounded constructible with Tor amplitude in [c,d], c≤d [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Then the canonical comparison RHom_A(K,N)⊗^L_A B→RHom_B(K⊗^L_A B,N⊗^L_A B) is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-weil-pbc-derived-categories",
+  "def-sf-finite-free-hom-evaluation-coordinates",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "proof": [
+  {
+   "text": "Let U be a member of the trivializing covering. The pullback of N to U is bounded constructible with Tor amplitude in [c,d], so it has a bounded flat model P [lem-sf-flat-model]. By [lem-coef-etale-finite-free-hom-local-identity] the source and target coordinates are invertible and the local comparison followed by the target coordinates equals the source coordinates; hence the local comparison is invertible.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-coef-etale-finite-free-hom-local-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "By [lem-coef-etale-perfect-hom-restriction] for the dualizable K, the pullback of the global comparison, followed by invertible Hom restriction maps and the scalar pullback isomorphism, equals the local comparison; so the pullback of the global comparison to every member of the covering is invertible.",
+   "uses": [
+    "lem-coef-etale-perfect-hom-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "Geometric stalks are conservative and every geometric point lifts to the covering [lemma-weil-pbc-geometric-stalk-conservative]; hence the global comparison is an isomorphism. The existential comparison arrows equal the canonical ones by the heterogeneous equalities of the two lemmas, the types being definitionally equal.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-flat-model",
+  "lem-coef-etale-finite-free-hom-local-identity",
+  "lem-coef-etale-perfect-hom-restriction",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical lisse coefficient Hom comparison",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso derived internal Hom coefficient",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLisseCanonicalIso",
+   "results": "Only this declaration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Paragraphs 2--3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLisseCanonicalIso",
+  "file": "lean/Sheaf/Paper/EtaleLisseCanonicalIso.lean",
+  "declaration": "WeilConjectures.etaleLisseCanonicalIso",
+  "statement": "theorem etaleLisseCanonicalIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) [Finite (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))] (m : ℕ) (hmn : m ≤ n) (S : Scheme.{u}) (K N : finiteHomEtale l E S n) (hKdual : IsDualizable K) (htrivK : ∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : V.I₀, ∃ r : ℕ, Nonempty ((L(Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (V.f i))).obj K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj ((lisseHomConstantFunctor (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (V.X i)).obj (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (Fin r → ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))))) (hNbc : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S N) (c d : ℤ) (hcd : c ≤ d) (hNtor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S c d N) : IsIso (etaleFiniteHomCanonical l E S hmn K N)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

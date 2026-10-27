@@ -1,0 +1,541 @@
+{
+ "id": "lem-sfb-field-ringed-scalar-adjunction-transport",
+ "kind": "statement",
+ "title": "Scalar adjunction and restriction transport for the field presentation",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure, $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Work on sites small in compatible coefficient universes [def-weil-size-convention, def-weil-pbc-proetale-site]. Put $\\underline G(P)=C(P,G)$ for profinite $P$, and $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over finite quotients [lem-weil-pbc-profinite-test-object-functor]. For a commutative condensed ring $R$ put $R_T=p_T^*R$, use internal module categories and ordinary unbounded derived categories, and write $\\mathcal A_G(R)$ for internal $R$-modules with $\\underline G$-action [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories, def-sfb-condensed-action-module].\n\nSuppose given a ringed-topos equivalence over the condensed topos whose induced exact additive module equivalences $E_R:\\operatorname{Mod}_{R_s}\\simeq\\mathcal A_G(R)$ have the normalized formula $(E_RN)(P)=N(\\bar s[P])$, naturally in $P$ and in $R$. For every map $\\varphi:R\\to R'$ these equivalences admit scalar data of [def-sfb-field-action-scalar-transport-data]. In detail the comparison $E_R\\operatorname{Res}_s\\cong\\operatorname{Res}_G E_{R'}$ is the identity on sections: restriction changes only the scalar action via $\\varphi_P$. Ordinary scalar extension is identified by this comparison and its left-adjoint comparison, preserving all Hom transposes, units and counits [sk-def-sfb-change-of-scalars]. The local transposition is $m\\mapsto1\\otimes m$ and evaluation is $r'\\otimes m\\mapsto r'f(m)$, also after module sheafification. The tensor and tensor-unit comparisons are the balanced pure-tensor comparison and the identity on the regular module.\n\nWriting $S_T=R'_T\\otimes^L_{R_T}-$ and $S_G=R'\\otimes^L_R-$ in the action categories, the induced comparison $D(E_{R'})S_s\\cong S_GD(E_R)$ is obtained by applying this same tensor comparison to K-flat representatives. Ringed equivalence preserves K-flatness in both directions: its tensor comparison and exact inverse identify tensor with each acyclic complex. Derived scalar extension is the K-flat derived pullback along the identity-topos coefficient morphism, left adjoint to exact scalar restriction. Both derived adjunction bijections are localizations of the same chain-level transposition; the field comparison and the forgotten-module comparison therefore preserve the derived units and counits, with the total-left-derived counit and shift normalization in the cited scalar-data definition. This holds for arbitrary non-flat $\\varphi$.\n\nMoreover, for every qcqs $k$-scheme $X$ with structure morphism $a:X\\to s$, the canonical comparison\n$$\\rho_a:Ra_{*,R}\\operatorname{Res}_X\\xrightarrow{\\sim}\\operatorname{Res}_sRa_{*,R'}$$\nis the direct-image composition comparison for the two factorizations of the identical composite ringed-topos morphism, with scalar restriction viewed as direct image on the identity topos. Its normalization is the K-injective resolution comparison, equivalently the total-right-derived-unit comparison, and its ordinary comparison is identity on the underlying sections [sk-def-sfb-module-derived-pushpull]. For the total derived geometric section functors $\\mathcal K_R$ of [lem-sfb-condensed-galois-global-descent], the analogous normalized comparison $\\mathcal K_R\\operatorname{Res}_X\\cong\\operatorname{Res}_G\\mathcal K_{R'}$ is the transport of $\\rho_a$ through the ordinary identity on geometric sections. These specify a single comparison, rather than an arbitrary automorphism of isomorphic derived objects.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10; Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 5, 6, 10. Agent formulation; complete inherited argument and citation mapping retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "def-sfb-field-action-scalar-transport-data",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-condensed-galois-global-descent",
+  "def-sfb-field-action-internal-pure-tensor",
+  "def-sfb-field-action-topos-normalization",
+  "def-sfb-geometric-section-functors"
+ ],
+ "proof": [
+  {
+   "text": "Use the action-site presentation to regard $\\mathcal A_G(R)$ as modules over the trivially acted-on ring on a small topos. The internal/section-ring equivalence preserves scalar restriction and extension, including their adjunctions. In the given field presentation, restricting an $R'$-module changes $r\\cdot m$ to $\\varphi_P(r)m$ and changes neither sections nor restriction or action maps. Thus $b:E_R\\operatorname{Res}_s\\cong\\operatorname{Res}_G E_{R'}$ has identity components in the normalized coordinates. Restriction is exact by the scalar adjunction package. Forgetting the action is the exact module inverse image associated to restriction from $\\underline G$ to the trivial group, with its specified ring identification. These identifications supply small ringed-site presentations for all the scalar and forgetting comparisons used below.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Identity-topos coefficient morphisms; sites-modules.tex Tags 03CU and 03CZ (tensor/restriction adjunctions)"
+   }
+  },
+  {
+   "text": "The ordinary adjunction has forward formula $h\\mapsto(m\\mapsto h(1\\otimes m))$ and inverse $f\\mapsto(r'\\otimes m\\mapsto r'f(m))$. The latter is balanced because $r'\\varphi(r)f(m)=r'f(rm)$; both formulas commute with restrictions and the $G$-action. Their two composites are identities on pure tensors and on $m$. Module sheafification extends these maps uniquely, so the formulas remain inverse on sheaves. The given equivalence is the module pullback $e^*$ of a ringed-topos equivalence $e$, and $e^*$ has the canonical natural tensor comparison $e^*(M\\otimes N)\\cong e^*M\\otimes e^*N$ of the ringed module-pullback tensor theorem; its inverse has the inverse comparison. The equivalence and its inverse preserve colimits. For $h=e$ with $A=R_s\\to B=R'_s$, the scalar comparison theorem gives the invertible coequalizer comparison $\\chi_e$ preserving $p\\mapsto1\\otimes p$. Applying these comparisons to the two balancing arrows in the relative tensor coequalizer therefore gives inverse tensor comparisons, determined by these generators; the regular-module comparison is the given ring comparison, hence identity in normalized coordinates. For scalar extension this gives $E_{R'}\\operatorname{Ext}_s\\cong\\operatorname{Ext}_G E_R$. Under $b$, both adjunction transposes send $h$ to $h(1\\otimes -)$, so every Hom transpose agrees. Taking $h$ or its transpose to be an identity proves the asserted unit and counit equations, including after forgetting action.",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "sites-modules.tex Tags 03CU, 03CZ, 03EL (lemma-tensor-product-pullback); algebra.tex Tag 05DQ"
+   }
+  },
+  {
+   "text": "Let $E=E_R$ and let $V$ be its exact inverse. The module-pullback tensor comparison of step 2 for $e$, and its inverse for the inverse equivalence, extends to total complexes: equivalences preserve the coproducts in each total degree. If $P$ is K-flat and $A$ is an acyclic complex on the action side, $VA$ is acyclic and\n$$A\\otimes_R EP\\cong E(VA\\otimes_{R_s}P)$$\nis acyclic. This is exactly the K-flat test. Apply the same argument to $V$ for the converse. The degree-zero version with short exact sequences shows preservation of flat terms. Thus $E$ and $V$ carry flat-term K-flat resolutions to such resolutions; this agrees with the ringed pullback K-flatness theorem applied to $e$ and to its inverse, whose structural ring maps are isomorphisms, so $u^*M=S\\otimes_{u^{-1}R}u^{-1}M\\cong u^{-1}M$ by $s\\otimes m\\mapsto sm$. The resolving-class localization identifies these representatives with the entire unbounded derived category; no boundedness or coefficient flatness enters this argument.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); Tags 06YS and 0G7D (flat-term K-flat resolving class)"
+   }
+  },
+  {
+   "text": "Apply the sheaf-ring coefficient-adjunction theorem on the field, action, and underlying condensed sites. For the identity-topos morphism with ring map $R\\to R'$, its pullback is ordinary scalar extension and its direct image is exact restriction. Its derived pullback is computed on flat-term K-flat resolutions and has its universal computation counit; its adjunction to termwise restriction has the chain formulas of step 2. The internal/section-ring comparisons identify these with the internal scalar functors. Since $E_R$ is an exact inverse image and $E_R(R_s')=R'$ naturally in coefficients, the scalar comparison theorem for inverse images applies: on a resolution $P$, the comparison\n$$D(E_{R'})S_s(QP)\\cong S_GD(E_R)(QP)$$\nis the localization of the ordinary balanced comparison in step 2. Step 3 verifies that both sides are computed on these same resolutions. The scalar comparison theorem identifies this map with the adjunction mate of $D(b)$, so it preserves the actual derived adjunction, rather than merely identifying the two objects. Its hypotheses allow arbitrary ring maps.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY, 07A6; derived.tex Tags 0FND and 09T5; inverse-image scalar comparison via Tag 03EL"
+   }
+  },
+  {
+   "text": "Apply the same inverse-image scalar comparison theorem to the action-forgetting morphism of step 1. It identifies the forgotten scalar-extension comparison with the mate of its literal underlying-module restriction comparison. In both the field and forgetting squares, equality of all Hom transposes follows from that mate equation. In particular the derived units are the transposes of identity maps, and the derived counits are inverse transposes of identity maps. On representatives these are respectively $p\\mapsto1\\otimes p$ and $r'\\otimes p\\mapsto r'g(p)$ for a resolution map $g:P\\to\\operatorname{Res}N$; hence they have the specified total-derived normalization. For shifts, termwise restriction has the identity signed comparison. The chain formulas commute with $[n]$: the differential on each shifted complex is $(-1)^n d$, and all maps are additive of degree zero. The left-adjoint shift is characterized by transposition against this fixed restriction shift. Consequently the two mate comparisons preserve that shift and both adjunction maps, exactly as required by the scalar-data definition.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-field-action-scalar-transport-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0FPI (lemma-adjoints-push-pull-compatibility); derived.tex Tag 0FND"
+   }
+  },
+  {
+   "text": "For $T=X,s$, let $i_T:(T,R'_T)\\to(T,R_T)$ be the identity-topos coefficient morphism. The definition $p_X^*=\\pi_X^*p^*$ and $\\pi_s a=\\pi_X$ give $a^{-1}p_s^*\\cong p_X^*$ naturally in the coefficient ring, hence the identical composite $a_Ri_X=i_sa_{R'}$. Underived direct images on both sides are the same sections, with the action restricted via $\\varphi$. Let $\\kappa$ be the canonical right-derived composition isomorphism. Define\n$$\\rho_a=\\kappa_{i_s,a_{R'}}\\circ\\kappa_{a_R,i_X}^{-1}:\nRa_{*,R}\\,D(\\operatorname{Res}_X)\\longrightarrow D(\\operatorname{Res}_s)Ra_{*,R'}.$$\nHere the exact-functor identification replaces $Ri_{T*}$ by $D(\\operatorname{Res}_T)$. The composition theorem supplies invertibility and the precise K-injective resolution formula. Its computation-unit normalization is inherited from the two total right derived composition maps. Compatibility of these compositors with the canonical adjunctions is the ringed derived comparison theorem. This proves the requested normalization without assuming that scalar restriction carries K-injectives to K-injectives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-pullback-from-point",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), with identity-topos coefficient changes"
+   }
+  },
+  {
+   "text": "Write $F_R=E_Ra_{*,R}$. The geometric-section identification gives $(F_RM)(P)=\\Gamma(X^s[P],M|_{X^s[P]})$, with its actual scalar and $G$-actions. The exact equivalence $E_R$ and its inverse preserve K-injectives; thus its right derived functor is $D(E_R)$, and the normalized composition comparison identifies $\\mathcal K_R=RF_R$ with $D(E_R)Ra_{*,R}$. Conjugate $\\rho_a$ by these comparisons and then by $D(b)$. The resulting isomorphism is\n$$\\mathcal K_R\\operatorname{Res}_X\\cong\\operatorname{Res}_G\\mathcal K_{R'}.$$\nBefore deriving, each factor is identity on $\\Gamma(X^s[P],M|_{X^s[P]})$, so its composite is the ordinary geometric-section scalar comparison. The canonical composition and exact-equivalence identifications retain their computation units; composing their equations proves the required total-right-derived-unit equation for this composite. Uniqueness in the total derived universal property fixes it. Together with steps 1--5 this provides the scalar data and all the asserted normalized comparisons.",
+   "uses": [
+    "lem-sfb-geometric-sections-adjunction",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-derived-categories",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E; Bhatt--Scholze Example 4.1.10, geometric-section presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-sfb-field-action-scalar-transport-data",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-geometric-sections-adjunction",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A6, 0FPI and 0D6E, together with sites-modules.tex Tags 03CU, 03CZ, 03EL. Agent assembly for the conditional normalized field presentation; Bhatt--Scholze Example 4.1.10 supplies only its geometric context."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A ringed topos equivalence transports ordinary and derived change of scalars including units counits and K flat complexes",
+   "results": {
+    "t": "2026-10-22T06:05:50Z",
+    "tool": "leanfinder",
+    "query": "A ringed topos equivalence transports ordinary and derived change of scalars including units counits and K flat complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardCongr",
+     "CategoryTheory.Equivalence.sheafCongr",
+     "CategoryTheory.Equivalence.transportAndSheafify",
+     "CategoryTheory.Equivalence.transportIsoSheafToPresheaf",
+     "CategoryTheory.Equivalence.sheafCongr.unitIso",
+     "CategoryTheory.Equivalence.sheafCongr.functor",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv"
+    ],
+    "digest": "2a150d623a478d0a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary module scalar adjunctions and sheaf congruences do not give simultaneous unbounded field/action scalar transport with its normalized geometric restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact monoidal equivalence commutes with derived scalar extension and canonical scalar restriction direct image comparisons",
+   "results": {
+    "t": "2026-10-22T06:06:07Z",
+    "tool": "leanfinder",
+    "query": "Exact monoidal equivalence commutes with derived scalar extension and canonical scalar restriction direct image comparisons",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "ModuleCat.extendScalars_comp_id_assoc",
+     "ModuleCat.extendScalars_id_comp_assoc",
+     "ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+     "ModuleCat.ExtendRestrictScalarsAdj.counit",
+     "ModuleCat.homEquiv_extendScalarsId",
+     "ModuleCat.extendScalars_id_comp"
+    ],
+    "digest": "7369e8220cce0a28"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary module scalar adjunctions and sheaf congruences do not give simultaneous unbounded field/action scalar transport with its normalized geometric restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"restrictScalars\"",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"restrictScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap",
+     "PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap",
+     "PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat",
+     "PresheafOfModules.restrictScalarsObj",
+     "PresheafOfModules.restrictScalars",
+     "PresheafOfModules.instFaithfulRestrictScalars",
+     "PresheafOfModules.instAdditiveRestrictScalars",
+     "PresheafOfModules.restrictScalars_obj"
+    ],
+    "digest": "a41e5e369182a35c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary module scalar adjunctions and sheaf congruences do not give simultaneous unbounded field/action scalar transport with its normalized geometric restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings transported along an equivalence of ringed topoi",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "leansearch",
+    "query": "Derived change of rings transported along an equivalence of ringed topoi",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(equiv|equivalence).*(KFlat|kFlat|extendScalars)|restrictScalars.*(derived|Derived)",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "grep",
+    "query": "(equiv|equivalence).*(KFlat|kFlat|extendScalars)|restrictScalars.*(derived|Derived)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Algebra/Basic.lean",
+     "Mathlib/Algebra/Algebra/Basic.lean",
+     "Mathlib/Algebra/Algebra/Basic.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean"
+    ],
+    "digest": "dd19615bbb83f231"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ordinary module scalar adjunctions and sheaf congruences do not give simultaneous unbounded field/action scalar transport with its normalized geometric restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "(equivalence|Equivalence).*(KFlat|kFlat|extendScalars)|restrictScalars.*(derived|Derived)",
+   "results": {
+    "t": "2026-10-23T04:18:52Z",
+    "tool": "grep",
+    "query": "(equivalence|Equivalence).*(KFlat|kFlat|extendScalars)|restrictScalars.*(derived|Derived)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module/sheaf scalar adjunctions or flat modules; none supplies the conditional field/action comparison, its unbounded derived normalization and geometric restriction together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of sheaf module categories commutes with derived extension of scalars and scalar restriction",
+   "results": {
+    "t": "2026-10-23T04:18:53Z",
+    "tool": "leansearch",
+    "query": "Equivalence of sheaf module categories commutes with derived extension of scalars and scalar restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+     "PresheafOfModules.restrictScalarsObj",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.hom_ext",
+     "ModuleCat.restrictScalarsEquivalenceOfRingEquiv",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "digest": "4f7c50e7a429cfa5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module/sheaf scalar adjunctions or flat modules; none supplies the conditional field/action comparison, its unbounded derived normalization and geometric restriction together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"mate\"",
+   "results": {
+    "t": "2026-10-23T04:18:53Z",
+    "tool": "loogle",
+    "query": "\"Adjunction\", \"mate\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module/sheaf scalar adjunctions or flat modules; none supplies the conditional field/action comparison, its unbounded derived normalization and geometric restriction together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact tensor equivalence preserves K flat complexes and commutes with derived change of rings",
+   "results": {
+    "t": "2026-10-23T04:18:58Z",
+    "tool": "leanfinder",
+    "query": "Exact tensor equivalence preserves K flat complexes and commutes with derived change of rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.rTensor_exact",
+     "Module.Flat.lTensor_exact",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.FaithfullyFlat.iff_exact_iff_rTensor_exact"
+    ],
+    "digest": "f4c1d768d71d324e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module/sheaf scalar adjunctions or flat modules; none supplies the conditional field/action comparison, its unbounded derived normalization and geometric restriction together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed topos equivalence transports extension and restriction of scalars and their derived adjunction units and counits",
+   "results": {
+    "t": "2026-10-23T04:18:59Z",
+    "tool": "leanfinder",
+    "query": "Ringed topos equivalence transports extension and restriction of scalars and their derived adjunction units and counits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app"
+    ],
+    "digest": "fb791814a3710dfb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module/sheaf scalar adjunctions or flat modules; none supplies the conditional field/action comparison, its unbounded derived normalization and geometric restriction together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-action-derived-section-transport",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 5, 6, 10.",
+   "via": [
+    "lem-sfb-field-action-derived-section-transport",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-ringed-scalar-adjunction-transport",
+  "worker": "stage1",
+  "summary": "Conditional field scalar transport proved using explicit ordinary balanced generators, exact-equivalence K-flat tests, existing normalized scalar mate theorems, and right-derived ringed composition for non-flat restriction. No new nodes; all cited statements read and citation extracts supplied. No Lean declaration covers the complete item. Statement unchanged.",
+  "blueprint": "The nearest imported blueprint ancestor is null, as blueprint_refs.py ancestor reports. Realizes the inherited Paragraph (3) geometric/coefficient normalization and extracted steps 5, 6, 10 named in blueprint.from.place; fills ordinary scalar adjunctions, derived comparisons and direct-image restriction normalization. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic internal-to-section-ring equivalence identifies the actual scalar adjunctions; not a replacement for any unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving-class localization justifies descent from flat-term K-flat representatives."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized unbounded sheaf-ring scalar adjunction, valid without flatness."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic exact-inverse-image scalar mate theorem, applied to the given equivalence and action forgetting."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic K-injective-normalized composition of ringed-topos direct images, needed for non-flat coefficient restriction."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic compatibility of canonical ringed derived compositors with adjunctions and computation maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Generic exact equivalence preserves K-injectives and its derived category identification."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic ordinary tensor comparison for ringed-topos module pullback, applied to the given ringed equivalence (Q109 review FIX)."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic K-flat preservation by ringed module pullback, applied to the equivalence and its inverse (Q109 review FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-f83b203f4",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-f83b203f4 (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged from base and from clones/live and side-live, where it is still unsplit; no new nodes; no re-split note) and all 7 steps against every cited statement. No cycle; no SGA. B-S Ex. 4.1.10 (line 1684) is context only, and the report says so. The Stacks tags 06YY, 07A6, 0FPI, 0D6E, 03CU, 03CZ, 03EL are checked. Fault (C4/E5) in steps 2 and 3: 'the equivalence and its inverse preserve colimits; applying them to the balancing arrows' (and A⊗EP≅E(VA⊗P)) needs E to commute with the absolute sheaf tensor, and colimit preservation does not give that. FIX: step 2 now cites lem-weil-pbc-ringed-topoi-module-pullback-tensor and lem-sfb-kflat-scalar-comparison-normalization (χ_e). Step 3 now cites lem-weil-pbc-ringed-topoi-module-pullback-tensor and lem-weil-pbc-ringed-pullback-preserves-kflat, applied to e and its inverse with iso ring maps. proof_deps and two generic tool_uses were added; the statement is untouched. Step 4: the K-flat mate theorem applied to h=e is correct for any φ. Step 5: q_θ for θ:1→G is the exact pullback; the shift is by definition the left-adjoint shift induced by restriction. Step 6: the ρ_a direction is checked; a^{-1}p_s^*≅p_X^* comes from π_s a=π_X, and the 2-iso clause of the ringed derived comparisons covers it; no K-injective preservation by Res is assumed. Step 7: F_R=E_R a_* is the equivariant geometric-section functor; K_R=RF_R≅D(E_R)Ra_* holds by K-injective preservation. Small cases: trivial G, R'=0, non-flat Z→Z/2, X empty. Batch 5: action-topos-geometric-restriction and geometric-sections-adjunction reach lem-pd-sheaf-trilinear-universal, the generic trilinear property of the sheaf tensor. kflat-scalar-comparison-normalization reaches lem-pod-derived-exact-square-composition, generic pasting of derived squares. Neither is a step of PD or the trace formula, so all three are accepted. The added nodes are already in the closure and have no batch-5 reach. No duplicates found (derived-section-scalar-transport, ringed-equivalence-resolving-tensor-descent and normed-inverse-image-scalar-transport differ).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldRingedScalarAdjunctionTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldActionTransport.field_ringed_scalar_adjunction_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.fieldScalarCoefficientComm",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.fieldScalarPushAdditive",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.IsActionTensorKFlat",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.FieldBalancedTensor",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.ScalarRepresentativeNormalization",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.DirectImageScalarComparison",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.DirectImageScalarComparison.ordinary",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.GeometricScalarComparison",
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.field_ringed_scalar_adjunction_transport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldRingedScalarAdjunctionTransport.lean",
+  "statement": "theorem field_ringed_scalar_adjunction_transport {R R' : Coefficients.{u}} (φ : R ⟶ R') [CategoryTheory.CondensedBar.ActionAbelian R (ks ≃ₐ[k] ks)] [CategoryTheory.CondensedBar.ActionAbelian R' (ks ≃ₐ[k] ks)] [ForgetData k ks R] [ForgetData k ks R'] (e : FieldData k ks R) (e' : FieldData k ks R') (h : FieldActionToposNormalization k ks) (over : fieldFunctor k ks e ⋙ fieldActionActionSets k ks R ≅ fieldActionFieldSets k R ⋙ h.equivalence.functor ⋙ fieldActionActionUnderlying k ks) (over' : fieldFunctor k ks e' ⋙ fieldActionActionSets k ks R' ≅ fieldActionFieldSets k R' ⋙ h.equivalence.functor ⋙ fieldActionActionUnderlying k ks) : Nonempty (FieldBalancedTensor k ks R e) ∧ Nonempty (FieldBalancedTensor k ks R' e') ∧ (∀ P : CochainComplex (Modules R.toMon (Spec (.of k))) ℤ, (∀ A : CochainComplex (Modules R.toMon (Spec (.of k))) ℤ, A.Acyclic → (CochainComplex.mapBifunctor A P (curriedTensor _)).Acyclic) ↔ IsActionTensorKFlat k ks R (((fieldFunctor k ks e).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ P : CochainComplex (Modules R'.toMon (Spec (.of k))) ℤ, (∀ A : CochainComplex (Modules R'.toMon (Spec (.of k))) ℤ, A.Acyclic → (CochainComplex.mapBifunctor A P (curriedTensor _)).Acyclic) ↔ IsActionTensorKFlat k ks R' (((fieldFunctor k ks e').mapHomologicalComplex (.up ℤ)).obj P)) ∧ ∃ c : ScalarTransport k ks φ e e', ScalarRepresentativeNormalization k ks φ e e' c ∧ ∀ (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (a : X ⟶ Spec (.of k)) (d : GeometricData k ks X a R.toMon) (d' : GeometricData k ks X a R'.toMon), ∃ ρ : DirectImageScalarComparison φ a, Nonempty (GeometricScalarComparison k ks φ e e' c X a d d' ρ)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81bcb5e66",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery after b5bf RETURN H2. The item node differs from live only in stmt_deps and lean: three new def nodes (def-sfb-field-action-internal-pure-tensor, def-sfb-field-action-topos-normalization, def-sfb-geometric-section-functors) replace the theorem stmt_deps lem-pe-internal-section-tensor-comparison, lem-sfb-field-action-topos-coefficients and lem-sfb-geometric-sections-adjunction. The item module diff vs b5bf is only the imports and renames to abbrev aliases whose bodies are exactly comparison_internalTmul, FieldActionTopos.Normalization and GeometricSectionsAdjunction.fieldSets/actionSets/actionUnderlying, so the maths reviewed in b5bf is unchanged. Each new node statement matches its body and source (Stacks 03EK/00YV, B-S 4.1.9-4.1.10). Their stmt_deps all exist in live and none is a theorem node; none of the three ids exists in live (no parallel creation); the internal pure tensor is generic over the site, so def-pd-section-module-operations-data (ProEt only) is not a duplicate. lean.statement is verbatim in every file, all declarations are present, docstrings carry source and blueprint, there are no hollow defs and the only sorry is the item theorem. No fix, so no compile. Advisory carried over: the field/field' isos are unpinned (not blocking)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T142422-L-324832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.field_ringed_scalar_adjunction_transport"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.FieldActionTransport.field_ringed_scalar_adjunction_transport"
+  ]
+ }
+}

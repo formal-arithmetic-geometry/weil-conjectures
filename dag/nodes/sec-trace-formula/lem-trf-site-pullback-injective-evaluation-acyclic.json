@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Put $F=g^{-1}I$. The continuous-cocontinuous adjunction theorem [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] identifies the underlying set sheaf of $F$ with $V\\mapsto I(u(V))$, including restriction maps. This identification also respects the abelian group operations: apply the same inverse-image functor to the addition, zero and negation maps of $I$; its finite-product comparison identifies addition with the componentwise addition on $I(u(V))$. Thus $F(V)=I(u(V))$ as abelian groups, naturally in $V$.",
+   "text": "Put $F=g^{-1}I$. By [lem-weil-pbc-continuous-cocontinuous-topos-adjunction], the inverse image on set sheaves is naturally identified with $L$, where $L\\mathcal G(V)=\\mathcal G(u(V))$ with induced restrictions, and $L$ preserves finite limits. Apply this identification to the addition, zero and negation maps of $I$. The product comparison is componentwise, so its components satisfy $e_V(a+b)=e_V(a)+e_V(b)$, $e_V(0)=0$ and $e_V(-a)=-e_V(a)$. For $h:V'\\to V$, naturality gives $I(u(h))e_V=e_{V'}F(h)$. Thus the bijective components form a natural isomorphism of abelian presheaves $e:F\\xrightarrow{\\sim}I\\circ u^{op}$.",
    "uses": [
     "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
    ],
@@ -27,31 +27,21 @@
    }
   },
   {
-   "text": "Fix any covering $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ of $\\mathcal C$. By continuity [def-weil-pbc-sites-and-cohomology](3), $u(\\mathcal U)=\\{u(U_t)\\to u(U)\\}_{t\\in T}$ is a covering of $\\mathcal D$. For a tuple $\\mathbf t=(t_0,\\ldots,t_n)$ write $W_{\\mathbf t}=U_{t_0}\\times_U\\cdots\\times_U U_{t_n}$ and $P_{\\mathbf t}=u(U_{t_0})\\times_{u(U)}\\cdots\\times_{u(U)}u(U_{t_n})$, with the choices of [def-weil-pbc-site-cech-complex]. The canonical comparison $c_{\\mathbf t}:u(W_{\\mathbf t})\\to P_{\\mathbf t}$ is invertible by induction on $n$: for $n=0$ it is the identity (up to the chosen product isomorphism); to append $t_n$, apply continuity (3)(b) to the original covering and the map $W_{(t_0,\\ldots,t_{n-1})}\\to U$, then use the preceding comparison. For each projection $\\delta_j$ omitting one factor, $c_{\\mathbf t\\setminus t_j}\\,u(\\delta_j)=\\delta_j\\,c_{\\mathbf t}$, because both sides have the same projections to every remaining factor and the product universal property makes such a map unique.",
+   "text": "Fix a covering $\\mathcal U$ of $\\mathcal C$. Continuity [def-weil-pbc-sites-and-cohomology](3) supplies its image-cover and fixed-cover base-change hypotheses. By [lem-trf-continuous-cover-nerve-comparison], $u(\\mathcal U)$ is a covering and its tuple comparisons $c_{\\mathbf t}:u(W_{\\mathbf t})\\xrightarrow{\\sim}P_{\\mathbf t}$ commute with every omitting-factor projection. The given $I$ is injective in $\\operatorname{Ab}(\\mathcal D)$, so [lem-weil-pbc-site-injective-cech-acyclic] gives $\\check H^p(u(\\mathcal U),I)=0$ for every $p>0$. Apply [lem-trf-cover-nerve-cech-vanishing-transport] with these $c_{\\mathbf t}$, $G=I$, $F=g^{-1}I$ and $e$ from step 1: its coefficient comparison has exactly the direction $F\\to I\\circ u^{op}$. Its cover, face and coefficient hypotheses are therefore all supplied, and it gives $\\check H^p(\\mathcal U,F)=0$. Both sites are small in the common universe containing their covering indices and the abelian-group values, as required by the injective-vanishing lemma. Since $\\mathcal U$ was arbitrary, this holds for every source covering and $p>0$.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6X, proof: continuity sends a covering and all its iterated fibre products to the corresponding covering nerve; Sites Tag 00WV (definition-continuous)."
-   }
-  },
-  {
-   "text": "In degree $n\\ge0$, step 1 identifies $\\check{\\mathcal C}^n(\\mathcal U,F)$ with $\\prod_{\\mathbf t\\in T^{n+1}}I(u(W_{\\mathbf t}))$. Applying $I(c_{\\mathbf t}^{-1})$ componentwise gives an isomorphism to $\\prod_{\\mathbf t\\in T^{n+1}}I(P_{\\mathbf t})=\\check{\\mathcal C}^n(u(\\mathcal U),I)$. These are the groups and restriction differentials of [def-weil-pbc-site-cech-complex]. The projection identity of step 2, contravariance of $I$, and the restriction formula of step 1 show that each omitting-factor restriction commutes with these isomorphisms. Hence their alternating sums commute too, so we obtain an isomorphism of Cech complexes (both are zero in negative degrees). Its inverse induces inverse maps on kernels modulo images. Consequently $\\check H^p(\\mathcal U,F)\\cong\\check H^p(u(\\mathcal U),I)$. Since $I$ is an injective abelian sheaf on $\\mathcal D$ and $u(\\mathcal U)$ is a covering, [lem-weil-pbc-site-injective-cech-acyclic] makes the right side zero for every $p>0$. The common universe contains both small sites, their covering indices and the abelian-group values, as required by that lemma.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-site-injective-cech-acyclic"
+    "lem-trf-continuous-cover-nerve-comparison",
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-trf-cover-nerve-cech-vanishing-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6X, proof: equality of Cech cohomology under the nerve identification; its cited module-injective vanishing Tag 03FC specializes here to abelian-injective vanishing Tag 03AW (lemma-injective-trivial-cech)."
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, comparison of covering nerves and Cech cohomology followed by injective Cech vanishing (abelian case of Tag 03AW)."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] on $\\mathcal C$ with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$, $\\mathrm{Cov}$ the site's entire set of coverings, and the abelian sheaf $F$. All covering objects and all their iterated fibre products belong to $\\mathcal B$. The coverings in $\\mathrm{Cov}$ are cofinal, since any covering refines itself using the identity map on its index set and on each member. The required positive Cech vanishing for every covering is step 3. The criterion therefore gives $H^p(U,F)=0$ for every object $U$ and every $p>0$, with $H^p$ the ordinary right derived functor of evaluation specified in its statement. Substituting $F=g^{-1}I$ proves the assertion.",
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] on $\\mathcal C$ with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$, $\\mathrm{Cov}$ the site's entire set of coverings, and the abelian sheaf $F$. All covering objects and all their iterated fibre products belong to $\\mathcal B$. The coverings in $\\mathrm{Cov}$ are cofinal, since any covering refines itself using the identity map on its index set and on each member. The required positive Cech vanishing for every covering is step 2. The criterion therefore gives $H^p(U,F)=0$ for every object $U$ and every $p>0$, with $H^p$ the ordinary right derived functor of evaluation specified in its statement. Substituting $F=g^{-1}I$ proves the assertion.",
    "uses": [
     "lem-weil-pbc-site-cech-vanishing-criterion"
    ],
@@ -65,8 +55,9 @@
  "proof_deps": [
   "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-site-cech-complex",
+  "lem-trf-continuous-cover-nerve-comparison",
   "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-trf-cover-nerve-cech-vanishing-transport",
   "lem-weil-pbc-site-cech-vanishing-criterion"
  ],
  "proof_origin": {
@@ -192,10 +183,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-site-pullback-injective-evaluation-acyclic",
   "worker": "stage1",
-  "summary": "Kept the statement and all five statement dependencies. Expanded Stacks 0D6X in four steps: the precomposition formula on abelian sheaves, preservation of the covering nerve by the definition of continuity, the explicit Cech-complex isomorphism and injective Cech vanishing, and the general-site Cech criterion with all objects and all coverings. Reused existing general-site nodes, with no new nodes. Checked the common universe, empty coverings and product choices. No assertion that inverse image preserves injectivity or total acyclicity is used.",
+  "summary": "Rebased the retained NW split onto the current shared-DAG item, preserving its statement, statement dependencies and maintainer fields. Re-read every cited statement and Stacks source. The initial dry run found the newly landed module-injective Cech node sharing Tag 0D6X. The coefficient-free nerve node now states the same induction under the weaker fixed-cover base-change hypotheses actually used, with fresh logged searches; the existing module node requires global continuity. Parent step 2 explicitly obtains those local hypotheses from continuity. Kept both independent statement-only work items, the short three-step assembly and the full original argument in report.md. Updated citations and duplicate analysis. No Lean changes or Mathlib leaves.",
   "blueprint": "Serves lem-trf-local-term-locality, current main-20261015 proof clause (1)/(2), normal-cone specialization, through the inherited Orgogozo/ph-etale comparison chain. This is precisely the pulled-back-injective evaluation-acyclicity input of the bounded-below 0DD8 objectwise comparison, not a change of the unit route.",
   "tool_uses": [
    {
@@ -218,12 +209,12 @@
   "lem-weil-pbc-site-cech-vanishing-criterion"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q110-a0afc440b",
-  "group": "Q110",
+  "reviewer": "NT-cc-NW-f11e2a72c",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-a0afc440b (reviewer sub-agent of L); spot-checked: Read the complete split and cited statements; checked Stacks 0D6X, 00XR, 00WV, 03AW and 03F9. All four steps, coefficients, variance, edge cases and generic tool uses hold. No new nodes, duplicate, cycle or repair needed. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-f11e2a72c (reviewer sub-agent of L); spot-checked: Re-split (keep_plan, released 2026-10-22) done correctly; I read the item, both new nodes, every cited statement and Stacks 0D6X (l.9278-9307). I checked the base proof in clones/live: its 4 steps match the report's retained text. Old step 2 (image cover, induction on tuple length, uniqueness by projections) becomes lem-trf-continuous-cover-nerve-comparison, now under fixed-cover base-change hypotheses that def(3)(a),(b) supply in item step 2. Old step 3's complex comparison becomes lem-trf-cover-nerve-cech-vanishing-transport, for arbitrary abelian presheaves with e: F ≅ G∘u^op and face-compatible c_t; the direction matches step 1. Old steps 1 and 4 stay as assembly applications. Nothing was shortened or dropped. The new nodes are of comparable size (about 1000 and 1100 characters of old argument), and the assembly is 2287 characters. Both new statements are true: the induction W_t ≅ W_t'×_U U_tn uses the hypothesis with a = W_t'→U, every index-map equation follows by uniqueness of projections, and naturality of e plus the inverted face equation give a chain isomorphism. Small cases (T empty, repeated indices, zero coefficients, p = 0 excluded) hold. Injective Cech vanishing applies to I in Ab(D) within the universe bounds; the 03F9 criterion holds with all objects and all coverings by identity refinement; the existing tool_uses are generic and accepted. Both nodes are statement-only and self-contained, with three kinds of search recorded and blueprint.from set. Not duplicates: Q91's lem-trf-continuous-precomposition-injective-module-cech holds only for module-injective coefficients under global continuity. Maintainer note: its future split can cite these two nodes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.Sites.PullbackInjectiveEvaluationAcyclic",
@@ -244,5 +235,16 @@
   "result": "pass",
   "note": "Matched every clause of the node and Stacks 0D6X: small sites in one universe u via IsSiteForCoverings; continuity as the two recorded conjuncts, same shape as IsSpecialCocontinuousForCoverings and the topos-adjunction dependency; cocontinuity clause (1) only, as f.IsCocontinuous; g^{-1}I as the sheafification of f.op ⋙ I.obj, Stacks 00XO's formula, on the source site; ordinary rightDerived of evaluation at U; p:ℕ with 0<p; IsZero. No stronger hypotheses and no unbound universes. Edge cases checked: empty category, empty covering, p=0 excluded, zero sheaf, non-terminal U. No duplicate declaration found. No definitions, proof is sorry, source/blueprint docstrings with all four proof steps, node unchanged apart from the lean field, lean.statement verbatim in the module, report has Worker report and Second reading by Q48. nt_compile.py --json on the snapshot module exited 0 in 2.9 s with no errors or warnings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

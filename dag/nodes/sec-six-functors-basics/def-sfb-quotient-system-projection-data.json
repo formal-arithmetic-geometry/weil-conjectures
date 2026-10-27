@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-quotient-system-projection-data",
+ "kind": "definition",
+ "title": "Normalized coefficient-system scalar and projection presentation",
+ "status": "split",
+ "statement": "Let $f$ be a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism] on sites small in the coefficient universe [def-weil-size-convention]. Use module-sheaf categories [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories [def-weil-abstract-derived-category], and internal module objects [det-def-sfb-module-objects-definition]. Fix the ambient strict reduction models [lem-weil-pbc-reduction-pullback-derived-tower]. Use the strict coefficient-system category and normalized scalar models of [def-sfb-quotient-system-scalar-data]. Let $f^*$ be an exact inverse-image module functor with its specified strong monoidal presentation and canonical tensor comparison $k$, put $Q_X=f^*Q_Y$, and fix scalar models $\\mathcal B_Y,\\mathcal B_X$ over the ambient reduction models. Fix the normalized ambient derived direct images $G,G^{Tow}$ and adjunctions [lem-weil-pbc-augmented-diagram-projection-mate]. A coefficient projection presentation consists of an ordinary coefficient-linear isomorphism $f_Q^*\\circ s_{Q_Y}\\cong s_{Q_X}\\circ f^*$, a derived isomorphism $F_Q\\mathcal B_Y\\cong\\mathcal B_XF$, a right adjoint $G_Q$ of the actual exact module-object pullback $F_Q$, and an isomorphism $d:U_YG_Q\\cong G^{Tow}U_X$. It is normalized when the ordinary comparison at every level is $k_{Q_n,M}$ on underlying left-module free objects, the derived comparison is its conjugation by the universal scalar counits on every flat-term K-flat representative, and $d$ satisfies $\\varepsilon_{Tow}F^{Tow}(d_N)=U_X(\\varepsilon_{Q,N})a_{G_QN}$, where $a:F^{Tow}U_Y\\cong U_XF_Q$ is the localization of the ordinary restriction/pullback equality. No existence assertion is part of this definition.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-module-objects-definition",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "def-sfb-quotient-system-scalar-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4, 07A6, 0D6D and 0D6E; scalar-extension and composite-adjunction presentations on small ringed diagram sites"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal left derived functor of free coefficient modules on a constant strict tower, with a canonical restriction comparison normalized on K-flat complexes",
+   "results": "8 hits: ordinary projective leftDerived, isoLeftDerivedObj, and generic IsLeftDerivedFunctor/totalLeftDerived/leftDerivedLift declarations.",
+   "date": "2026-10-22",
+   "verdict": "The generic universal-property API is reused; none gives the normalized strict coefficient-system model."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits: the predicate, its generic Kan-extension constructor, uniqueness, totalLeftDerived, leftDerivedLift and natural transformations. An earlier Mod.free query was rejected as an unknown search-index identifier.",
+   "date": "2026-10-22",
+   "verdict": "No normalized coefficient-system projection presentation; generic derived functor definitions are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient projection mate data for strict semilinear module systems, normalized scalar pullback and direct image comparisons on unbounded derived categories",
+   "results": "8 hits: linear exact derived functors, linear localization and Ext, with no varying-ring system presentation.",
+   "date": "2026-10-22",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarModel|IsNormalizedLift|QuotientProjection|universal.*coefficient.*reduction|coefficient.*scalar.*model; searches of Mathlib derived functors, WeilConjectures module objects, Sheaf reduction modules, dag/nodes and blueprint_refs search coefficient system projection",
+   "results": "Mathlib generic derived universal properties and upstream Mod/mapMod/free/forget exist and are reused. The ambient ReductionPullbackDerivedTower model is recorded and reused. No existing normalized coefficient-system scalar and projection presentation; blueprint_refs returned 0 matches for the query.",
+   "date": "2026-10-22",
+   "verdict": "The missing data presentation is supplied without duplicating the ambient reduction or internal module definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quotient-system-projection-lift",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Integral reduction/direct-image comparison: the canonical coefficient-valued scalar and adjunction presentation before evaluation",
+   "via": [
+    "lem-sfb-quotient-system-projection-lift",
+    "lem-sfb-integral-ambient-tower-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "module": "Sheaf.SixFunctors.QuotientSystemProjectionData",
+  "declaration": "CategoryTheory.QuotientProjection.IsNormalizedLift",
+  "declarations": [
+   "CategoryTheory.QuotientProjection.ComparisonData",
+   "CategoryTheory.QuotientProjection.towerPullbackAdditive",
+   "CategoryTheory.QuotientProjection.towerPullbackLimits",
+   "CategoryTheory.QuotientProjection.towerPullbackColimits",
+   "CategoryTheory.QuotientProjection.pullback",
+   "CategoryTheory.QuotientProjection.pullbackAdditive",
+   "CategoryTheory.QuotientProjection.pullbackLimits",
+   "CategoryTheory.QuotientProjection.pullbackColimits",
+   "CategoryTheory.QuotientProjection.pullbackRestriction",
+   "CategoryTheory.QuotientProjection.Lift",
+   "CategoryTheory.QuotientProjection.Lift.Y",
+   "CategoryTheory.QuotientProjection.Lift.X",
+   "CategoryTheory.QuotientProjection.Lift.ordinaryTau",
+   "CategoryTheory.QuotientProjection.Lift.tau",
+   "CategoryTheory.QuotientProjection.Lift.G",
+   "CategoryTheory.QuotientProjection.Lift.adj",
+   "CategoryTheory.QuotientProjection.Lift.d",
+   "CategoryTheory.QuotientProjection.IsNormalizedLift"
+  ],
+  "file": "lean/Sheaf/SixFunctors/QuotientSystemProjectionData.lean",
+  "statement": "def IsNormalizedLift (L : Lift Q f k MY MX P) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f706d6d3",
+  "group": "Q127",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f706d6d3",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read item node, 3 new def nodes, all 4 modules, deps AugmentedProjectionDirectImage/augmentedDiagramProjectionMate (identical signature f,k,Q,MY,MX,tau,htau,P), Comparison/moduleUnit, CochainComparisonMonoidalEquations (CoreMonoidal mk' with k.mu.symm exists, so the ∃ m conjunct is true), StrictRingSystem. Every clause is rendered: beta = unit≫G(tauQ)≫G(B ε) with its transpose equation; restrictedBeta = augmentedDiagramProjection before evaluation; evaluated Q_n-linear adjunct via EvaluationLift plus IsLeftDerivedFunctor clauses; augmentation identity; iso conditional. Lift data is pinned up to unique compatible iso: ScalarModel by universal property and representative pin, ordinaryTau = k.mu, tau on flat K-flat reps, d by counit transpose, EvaluationPullbackData via underlying/free pin, gamma by counit, so ∀ normalized L → assertions is sound. No extra assumptions; universes independent and bound; statements verbatim; docstrings with source and blueprint; only sorry is the theorem; no hollow defs. Advisory: Mod(ℕᵒᵖ⥤Modules R) Q used instead of StrictRingSystem (stage 3 needs the equivalence); d pinned by counit rather than via diagramRingRestrictionPushforward (different model); evaluated-restriction clause follows from the strict equality; probably unused plain imports. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-smooth-marking-isomorphism-fibre-comparison",
+ "kind": "statement",
+ "title": "Smooth labelled isomorphism fibres of a forgetful tower",
+ "statement": "Let $k$ be a field, $g\\geq2$ and $n\\geq0$ integers. Use the stable ordered pointed moduli groupoids of [def-sfb-stable-pointed-moduli-groupoids] and their forgetful-and-stabilizing maps $F_r:\\overline{\\mathcal M}_{g,r+1}\\to\\overline{\\mathcal M}_{g,r}$. Suppose given $k$-schemes $T_r$ and maps $a_r:T_r\\to\\overline{\\mathcal M}_{g,r}$, for $0\\leq r\\leq n$, and maps $q_r:T_{r+1}\\to T_r$, for $r<n$, with specified 2-cartesian squares $a_rq_r\\simeq F_ra_{r+1}$. Denote the corresponding stable families by $(X_r\\to T_r,s_{1,r},\\ldots,s_{r,r})$ and put $q=q_0\\circ\\cdots\\circ q_{n-1}:T_n\\to T_0$ (the identity for $n=0$).\n\nLet $F/k$ be any field extension and $C/F$ a smooth projective geometrically connected genus-$g$ curve with ordered distinct $F$-rational points $p_1,\\ldots,p_n$. For an $F$-scheme $B$, put $C_B=C\\times_F B$. There is a bijection, natural under pullback in $B$, between the set of pairs $(m,\\alpha)$ with $m:B\\to T_n$ a $k$-map and $\\alpha:(X_n\\times_{T_n}B,s_{1,n,B},\\ldots,s_{n,n,B})\\xrightarrow{\\sim}(C_B,p_{1,B},\\ldots,p_{n,B})$ an isomorphism preserving every label, and the set of pairs $(m_0,\\beta)$ with $m_0:B\\to T_0$ a $k$-map and $\\beta:X_0\\times_{T_0}B\\xrightarrow{\\sim}C_B$ an unpointed $B$-isomorphism. The first coordinate on the second side is $m_0=q\\circ m$; $\\beta$ is the isomorphism induced by forgetting all markings and stabilizing, using the specified squares. The inverse has marking sections $\\beta^{-1}\\circ p_{i,B}$ under these identifications. These are sets of actual morphism-and-isomorphism pairs; no quotient by $\\operatorname{Aut}(C_B)$ or by permutations is taken.\n\nFields, field extensions, schemes, smoothness, projectivity and fibre products use [def-weil-field], [def-pc-field-extension], [def-pc-scheme], [def-sbc-smooth-morphisms], [def-kun-projective] and [def-pc-fibre-product]. Genus, labelled stable families, 2-fibre products and forgetting/stabilizing have the meanings fixed above and in [def-sfb-stable-pointed-moduli-groupoids] and [lem-sfb-knudsen-pointed-forgetful-universal-curve].",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 2, contraction and stabilization, especially Corollary 2.6, printed p.179, and the universal-curve interpretation, p.162. Local PDF WANTED; agent formulation of the iterated smooth-locus isomorphism-functor comparison.",
+  "url": "https://www.dam.brown.edu/people/mumford/alg_geom/papers/1976b--DetDiv%2BKnudsenSequel-GT.pdf"
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-pc-fibre-product",
+  "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\chi_r(m):a_r(q_rm)\\xrightarrow{\\sim}F_r(a_{r+1}(m))$ for the specified comparison. Unpack one 2-cartesian square over $B$: its comparison functor sends $m:B\\to T_{r+1}$ to $(q_rm,a_{r+1}(m),\\chi_r(m))$ and is an equivalence with the groupoid of triples $(b,Y,\\theta:a_r(b)\\xrightarrow{\\sim}F_rY)$. For a fixed triple, essential surjectivity gives an isomorphism from a comparison object to it. The first component is in the discrete groupoid $h_{T_r}(B)$, so it forces $q_rm=b$; its second component is an isomorphism $\\gamma:a_{r+1}(m)\\xrightarrow{\\sim}Y$ with $F_r(\\gamma)\\chi_r(m)=\\theta$. Two such choices give, by full faithfulness, an arrow between their maps in $h_{T_{r+1}}(B)$. Since this is the discrete representable groupoid, the maps are equal and that arrow is the identity; its image forces the two $\\gamma$ to agree. This argument keeps the comparison $\\theta$ fixed, so no automorphism of the target family is discarded. Thus this is a unique actual pair $(m,\\gamma)$, not just an isomorphism class. This is the definition of 2-cartesianness applied to the explicit groupoids in the cited definition.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Corollary 2.6 and smooth disjoint-section case; agent assembly from the cited universal-curve statement and the specified 2-cartesian squares. Local PDF WANTED."
+   }
+  },
+  {
+   "text": "For $(m_n,\\alpha_n)$ on the pointed side, set $m_r=q_r\\cdots q_{n-1}m_n$. Starting at $r=n-1$, define $\\alpha_r=\\delta_r F_r(\\alpha_{r+1})\\chi_r(m_{r+1})$, where $\\delta_r:F_r(C_B,p_{1,B},\\ldots,p_{r+1,B})\\xrightarrow{\\sim}(C_B,p_{1,B},\\ldots,p_{r,B})$ is the canonical forgetting identification. The target is $(C_B,p_{1,B},\\ldots,p_{r,B})$: the cited smooth-locus clause says forgetting a disjoint last marking leaves the underlying smooth curve unchanged. Each stage is a stable family because it is the image under $F_r$, and the same clause identifies its target with this truncation. Thus the recursion is defined all the way down, and gives $(m_0,\\beta)=(q m_n,\\alpha_0)$. For $n=0$ it gives the original pair. Smoothness and disjointness needed here hold for the fixed smooth curve and its distinct sections after pullback to $B$; this is the smooth disjoint-section case under arbitrary base change in the cited theorem.",
+   "uses": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Corollary 2.6 and smooth disjoint-section case; agent assembly from the cited universal-curve statement and the specified 2-cartesian squares. Local PDF WANTED."
+   }
+  },
+  {
+   "text": "Conversely start with $(m_0,\\beta)$ and put $\\alpha_0=\\beta$. Suppose $(m_r,\\alpha_r)$ has been constructed. On $a_r(m_r)=X_r\\times_{T_r}B$ choose the extra section $\\sigma_{r+1}=\\alpha_r^{-1}p_{r+1,B}$. This family is smooth, its previous sections map to $p_{1,B},\\ldots,p_{r,B}$, and $\\sigma_{r+1}$ is disjoint from them. Apply the cited universal-curve theorem to this family and section. It gives a stable $(r+1)$-pointed object with underlying curve unchanged, identified by $\\alpha_r$ with $C_{r+1}=(C_B,p_{1,B},\\ldots,p_{r+1,B})$; write $\\delta_r:F_rC_{r+1}\\xrightarrow{\\sim}C_r$ for the canonical forgetting identification. Apply step 1 to $(m_r,C_{r+1},\\delta_r^{-1}\\alpha_r)$. It gives the unique $(m_{r+1},\\alpha_{r+1})$ with $q_rm_{r+1}=m_r$ and $\\delta_r F_r(\\alpha_{r+1})\\chi_r(m_{r+1})=\\alpha_r$. Iterate for $r=0,\\ldots,n-1$. This proves existence without needing to classify curves by coarse moduli points.",
+   "uses": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Corollary 2.6 and smooth disjoint-section case; agent assembly from the cited universal-curve statement and the specified 2-cartesian squares. Local PDF WANTED."
+   }
+  },
+  {
+   "text": "The forward recursion applied to the constructed inverse recovers every $\\alpha_r$ by the compatibility equation in step 3 and every $m_r$ by $q_rm_{r+1}=m_r$; in particular it recovers $(m_0,\\beta)$. Starting instead from a pointed pair, its truncations in step 2 already satisfy those same equations. At each stage step 1 gives only one possible pair over $(m_r,C_{r+1},\\delta_r^{-1}\\alpha_r)$, so induction shows the inverse construction recovers the original $(m_n,\\alpha_n)$ exactly. Under the resulting identifications of underlying curves with $X_0\\times_{T_0}B$, its $i$th marking is $\\beta^{-1}p_{i,B}$, by the section formula in step 3. Distinct labels are retained throughout: changing $\\alpha_n$ by a nonidentity automorphism cannot preserve its unpointed pair, since the two-sided inverse just proved would then recover two different pairs from the same input.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Corollary 2.6 and smooth disjoint-section case; agent assembly from the cited universal-curve statement and the specified 2-cartesian squares. Local PDF WANTED."
+   }
+  },
+  {
+   "text": "For a morphism $u:B'\\to B$ of $F$-schemes, precomposition sends $m_r$ to $m_ru$, and pulling back $\\alpha_r$, $\\delta_r$ and the specified $\\chi_r$ pulls back the recursion equation of step 2, using the canonical associativity identifications of fibre products from the definition. The contraction/stabilization comparisons commute with this pullback by the cited theorem. Moreover $u^*(\\alpha_r^{-1}p_{r+1,B})=(u^*\\alpha_r)^{-1}p_{r+1,B'}$. Hence the pulled-back inverse candidate satisfies precisely the equation defining the unique pair of step 1 over $B'$, and is that inverse. Both maps therefore commute with every pullback, including nonreduced or empty bases. When $n=0$ both are identities. No permutation or automorphism quotient occurs in any construction.",
+   "uses": [
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 2, Corollary 2.6 and smooth disjoint-section case; agent assembly from the cited universal-curve statement and the specified 2-cartesian squares. Local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-knudsen-pointed-forgetful-universal-curve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 2, Corollary 2.6 and smooth disjoint-section case; agent assembly from the cited universal-curve statement and the specified 2-cartesian squares. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth curve of genus at least two with fixed ordered markings the isomorphism fibre of an iterated universal curve tower equals the unpointed isomorphism fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  ↑((AlgebraicGeometry.Scheme.Hom.fiberHomeo f y) x) =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberι f y).base) x\", \"doc\": \"For any morphism $f: X \\\\to Y$ of schemes and any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is homeomorphic to its image in $X$ equipped with the subspace topology. This constructs an explicit homeomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↑(⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y})),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberι f y).base)\\n      ((AlgebraicGeometry.Scheme.Hom.fiberHomeo f y).symm x) =\\n    ↑x\", \"doc\": \"For any morphism $f: X \\\\to Y$ of schemes and any point $y \\\\in Y$, the inverse of the fiber homeomorphism at $y$ composed with the fiber inclusion map yields the identity on the preimage $f^{-1}(\\\\{y\\\\})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberHomeo\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (y : ↥Y) → ↥(AlgebraicGeometry.Scheme.Hom.fiber f y) ≃ₜ ↑(⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' {y})\", \"doc\": \"For any morphism $f: X \\\\to Y$ of schemes and any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is homeomorphic to its image in $X$ equipped with the subspace topology. This constructs an explicit homeomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (x : ↥X) → ↥(AlgebraicGeometry.Scheme.Hom.fiber f ((CategoryTheory.ConcreteCategory.hom f.base) x))\", \"doc\": \"The function maps a point $ x $ in scheme $ X $ to the fiber of the morphism $ f $ over $ f(x) $, which is the set of all points in $ X $ mapping to $ f(x) $ under $ f $, equipped with the subspace to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.fiberι f ((CategoryTheory.ConcreteCategory.hom f.base) x)).base)\\n      (AlgebraicGeometry.Scheme.Hom.asFiber f x) =\\n    x\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any point $ x \\\\in X $, the composition of the inclusion map of the fiber $ f^{-1}(f(x)) $ into $ X $ with the fiber construction at $ x $ yields $ x $ i\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  (CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullback.fst f g).base)\\n      (AlgebraicGeometry.Scheme.Pullback.carrierEquiv.sym\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in $\\\\operatorname{Spec}(T.\\\\tensor)$, the first projection map from the pullback scheme $X \\\\times_S Y$ to $X$ sends the point corre\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_snd\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  (CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullback.snd f g).base)\\n      (AlgebraicGeometry.Scheme.Pullback.carrierEquiv.sym\", \"doc\": \"For any pullback triplet $T$ with morphisms $f: X \\to S$ and $g: Y \\to S$, and for any point $p$ in the spectrum of the tensor product $T.tensor$, applying the second projection morphism of the pullback\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: topological fibre homeomorphisms, scheme gluing isomorphisms and Over.mapForget do not compare the labelled stable-curve lifting functors or their stabilization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting distinct labelled smooth sections identifies the pointed lifting functor of a universal curve tower with the original unpointed lifting functor",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stabilization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: topological fibre homeomorphisms, scheme gluing isomorphisms and Over.mapForget do not compare the labelled stable-curve lifting functors or their stabilization"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*mark|pointed.*isomorph|stabili[sz].*curve",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: topological fibre homeomorphisms, scheme gluing isomorphisms and Over.mapForget do not compare the labelled stable-curve lifting functors or their stabilization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural bijection of marked curve isomorphism functors under iterated Knudsen forgetful stabilization over the smooth locus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.isoCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  ↑D.glued.toPresheafedSpace ≅\\n    D.toLocallyRingedSpaceGlueData.toSheafedSpaceGlueData.toPresheafedSpaceGlueData.toTopGlueData.glued\", \"doc\": \"The underlying topological space (carrier) of the glued scheme $ D.\\\\text{glued} $ is isomorphic to the topological space obtained by gluing via successive applications of forgetful functors (scheme $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰)\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x : ↥(AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).glued),\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰) x)\", \"doc\": \"For any point $x$ in the glued scheme constructed from an open cover $\\\\mathcal{U}$ of a scheme $X$, the stalk map induced by the canonical morphism from the glued scheme to $X$ is an isomorphism in th\"}\n  {\"name\": \"CategoryTheory.Over.mapForget\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"{T : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} T] →\\n    {X Y : T} →\\n      (f : X ⟶ Y) → (CategoryTheory.Over.map f).comp (CategoryTheory.Over.forget Y) ≅ CategoryTheory.Over.forget X\", \"doc\": \"For any objects $X$ and $Y$ in a category $\\\\mathcal{T}$ and a morphism $f : X \\\\to Y$, the composition of the functor $\\\\text{map}\\\\, f : \\\\text{Over}\\\\, X \\\\to \\\\text{Over}\\\\, Y$ induced by $f$ with the forg\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.isoLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → D.glued.toLocallyRingedSpace ≅ D.toLocallyRingedSpaceGlueData.glued\", \"doc\": \"The glued scheme constructed from gluing data, when mapped through the forgetful functor to locally ringed spaces, is isomorphic to the glued locally ringed space obtained by applying the forgetful fu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.mapSpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {R S : CommRingCat} →\\n    (φ : R ⟶ S) →\\n      CategoryTheory.Arrow.mk (AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ)) ≅\\n        CategoryTheory.Arrow.mk\\n          (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (MvPolynomial.map (CommRingCat.Hom.hom φ))))\", \"doc\": \"For a ring homomorphism $\\\\varphi: R \\\\to S$ and a type $n$, the isomorphism in the arrow category asserts that the composition of the isomorphism $\\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} \\\\cong \\\\operatorn\"}\n  {\"name\": \"CategoryTheory.Under.mapForget\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"{T : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} T] →\\n    {X Y : T} →\\n      (f : X ⟶ Y) → (CategoryTheory.Under.map f).comp (CategoryTheory.Under.forget X) ≅ CategoryTheory.Under.forget Y\", \"doc\": \"For any morphism $f: X \\to Y$ in a category $\\\\mathcal{T}$, the composition of the induced functor $\\\\text{map}(f)$ from the under category of $X$ to the under category of $Y$ with the forgetful functor \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: topological fibre homeomorphisms, scheme gluing isomorphisms and Over.mapForget do not compare the labelled stable-curve lifting functors or their stabilization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth genus at least two curve with ordered distinct sections has a natural bijection between its pointed isomorphism fibre in a universal curve tower and its unpointed isomorphism fibre",
+   "results": "AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply; WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv; AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm; WeierstrassCurve.exists_variableChange_of_j_eq; AlgebraicGeometry.Scheme.Hom.fiberHomeo; AlgebraicGeometry.Scheme.Hom.asFiber; WeierstrassCurve.Projective.comp_equiv_comp; WeierstrassCurve.Jacobian.comp_equiv_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological scheme fibres, genus-one Weierstrass curves, cartesian arrows, or Galois fibre functors; none states the stable marked moduli comparison or specializes to its geometric stabilization clause in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*mark|pointed.*isomorph|stabili[sz].*curve",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological scheme fibres, genus-one Weierstrass curves, cartesian arrows, or Galois fibre functors; none states the stable marked moduli comparison or specializes to its geometric stabilization clause in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian universal stable curve tower identifies labelled smooth curve lifts with unpointed lifts",
+   "results": "CategoryTheory.Functor.IsCartesian.universal_property; CategoryTheory.CartesianMonoidalCategory.lift; CategoryTheory.Functor.IsStronglyCartesian.universal_property; CategoryTheory.Functor.IsCartesian.map; CategoryTheory.Functor.IsStronglyCartesian.universal_property'; CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift; CategoryTheory.Functor.IsStronglyCartesian.map; CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological scheme fibres, genus-one Weierstrass curves, cartesian arrows, or Galois fibre functors; none states the stable marked moduli comparison or specializes to its geometric stabilization clause in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stabilization\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological scheme fibres, genus-one Weierstrass curves, cartesian arrows, or Galois fibre functors; none states the stable marked moduli comparison or specializes to its geometric stabilization clause in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated pullbacks of moduli groupoids forgetting smooth disjoint marked sections give bijections of isomorphism fibres",
+   "results": "CategoryTheory.PreGaloisCategory.fiberPullbackEquiv; CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_fst_apply; CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_snd_apply; CategoryTheory.Functor.IsFibered.pullbackPullbackIso; CategoryTheory.Pseudofunctor.CoGrothendieck.instHasFibersForget; ContMDiffFiberwiseLinear.hasGroupoid; Bundle.pullbackTotalSpaceEmbedding; CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological scheme fibres, genus-one Weierstrass curves, cartesian arrows, or Galois fibre functors; none states the stable marked moduli comparison or specializes to its geometric stabilization clause in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stable-pointed-level-parameter",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Returned proof Step 5: iterated 2-cartesian squares identify labelled-isomorphism pairs over a smooth curve with unpointed-isomorphism pairs; inverse, naturality and absence of automorphism quotients.",
+   "via": [
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-marking-isomorphism-fibre-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the given 2-cartesian squares on B-points, proved uniqueness of actual lifting pairs from discreteness, and constructed mutually inverse forgetting and marking recursions with their pullback compatibility. No new nodes: the existing Knudsen theorem already supplies the non-elementary stabilization and base-change input. Statement unchanged. Repair of return L (head 6280d7093bf): rechecked the current live moduli definition and Knudsen statement, retained the projective-bundle convention and all hypotheses, and made the canonical forgetting isomorphisms delta_r explicit in both recursions and their base-change comparison. All retained citations remain verbatim. Revalidated against the current live DAG on 2026-10-23; corrected the step-4 uniqueness triple to use delta_r^{-1} alpha_r, exactly as in step 3. The statement and all dependencies remain unchanged.",
+  "blueprint": "The ancestor recorded in blueprint.from has node=null; its exact place identifies det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction, and the returned level-parameter proof Step 5. These five steps realize that smooth marked isomorphism-fibre comparison without changing the chapter/unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-3a7eba8c6",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-3a7eba8c6 (reviewer sub-agent of L); spot-checked: PASS, no fixes. One commit containing the item and the report (with Review by Q154), no new nodes. clones/live and clones/side-live still show the item unsplit. The statement, stmt_deps, source and blueprint are unchanged; the only citer, level-parameter Step 3, uses exactly the stated bijection. The only change against the PASSed 9564 head is in Step 4: the uniqueness triple is now (m_r, C_{r+1}, δ_r^{-1}α_r), which is correctly typed and matches Step 3, so this is not an A6 identical re-push. I read both cited statements in full (the moduli-groupoid definition: 2-product arrow equation, discrete h_Q, labelled arrows, associativity; Knudsen: mutually inverse contraction/stabilization natural under base change, identity on the smooth disjoint-section locus, stability under base change). Step 1 recomputed: surjectivity comes from essential surjectivity with discrete h_{T_r} forcing q_r m = b; injectivity comes from the arrow (id, γ'^{-1}γ) plus full faithfulness into the discrete h_{T_{r+1}}. Steps 2 and 3: α_r = δ_r F_r(α_{r+1}) χ_r is well typed; δ_r comes from the smooth disjoint-section clause; every (C_B, p_1..p_r) is stable since g ≥ 2 and distinct rational points give disjoint sections; the induction has an explicit base and step. Step 4: the two-sided inverse and the formula β^{-1}p_i hold. Step 5: naturality via χ as a 2-morphism, Knudsen base-change naturality and uniqueness over B'. Edge cases checked: n = 0, n = 1, empty B, nontrivial Aut(C_B), nonreduced B'. proof_deps equal the union of the step uses, both nodes are in the same unit (no tool_use), there is no cycle and no SGA. No duplicate: the universal-curve-tower node builds the tower but does not state this comparison. Knudsen II Cor 2.6 is WANTED and proof_origin is agent, which is honest. Advisory: C is projective in the def-kun sense and the moduli groupoids use the projective-bundle convention; this is fine for curves over a field. Maintainer note: this is the third PASS of the same mathematics (6280d, 9564, 3a7eb); landing was refused twice because the side completion was not promoted, so please promote or land rather than re-dispatch."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothMarkingIsomorphismFibreComparison",
+  "declaration": "AlgebraicGeometry.smooth_marking_isomorphism_fibre_comparison",
+  "declarations": [
+   "AlgebraicGeometry.SmoothMarkingComparison.Contraction",
+   "AlgebraicGeometry.SmoothMarkingComparison.schemeMap",
+   "AlgebraicGeometry.SmoothMarkingComparison.squareComparison",
+   "AlgebraicGeometry.SmoothMarkingComparison.stepContraction",
+   "AlgebraicGeometry.SmoothMarkingComparison.Tower",
+   "AlgebraicGeometry.SmoothMarkingComparison.Tower.baseToZero",
+   "AlgebraicGeometry.SmoothMarkingComparison.Tower.curveToZero",
+   "AlgebraicGeometry.SmoothMarkingComparison.IsoPair",
+   "AlgebraicGeometry.SmoothMarkingComparison.fixedCurveMap",
+   "AlgebraicGeometry.SmoothMarkingComparison.IsPullbackPair",
+   "AlgebraicGeometry.smooth_marking_isomorphism_fibre_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothMarkingIsomorphismFibreComparison.lean",
+  "statement": "theorem smooth_marking_isomorphism_fibre_comparison (k F : Type u) [Field k] [Field F] [Algebra k F] (g n : ℕ) (hg : 2 ≤ g) (D : SmoothMarkingComparison.Tower (Spec (.of k)) g n) (C : Scheme.{u}) (f : C ⟶ Spec (.of F)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] [GeometricallyConnected f] (hgenus : @Scheme.arithmeticGenus F _ C ⟨f⟩ = g) (p : Fin n → (Spec (.of F) ⟶ C)) (hp : ∀ i, p i ≫ f = 𝟙 _) (hdistinct : Function.Injective p) : ∃ e : ∀ B : Over (Spec (.of F)), SmoothMarkingComparison.IsoPair (Spec.map (CommRingCat.ofHom (algebraMap k F))) (D.family (Fin.last n)) C f p hp B ≃ SmoothMarkingComparison.IsoPair (Spec.map (CommRingCat.ofHom (algebraMap k F))) (D.family 0) C f Fin.elim0 (fun i ↦ Fin.elim0 i) B, (∀ (B : Over (Spec (.of F))) (x : SmoothMarkingComparison.IsoPair (Spec.map (CommRingCat.ofHom (algebraMap k F))) (D.family (Fin.last n)) C f p hp B), (e B x).map = x.map ≫ D.baseToZero (Fin.last n) ∧ x.iso.inv ≫ pullback.fst (D.family (Fin.last n)).projection x.map.left ≫ D.curveToZero (Fin.last n) = (e B x).iso.inv ≫ pullback.fst (D.family 0).projection (e B x).map.left) ∧ (∀ (B : Over (Spec (.of F))) (y : SmoothMarkingComparison.IsoPair (Spec.map (CommRingCat.ofHom (algebraMap k F))) (D.family 0) C f Fin.elim0 (fun i ↦ Fin.elim0 i) B) (i : Fin n), f.baseChangeSection (p i) (hp i) B.hom ≫ y.iso.inv ≫ pullback.fst (D.family 0).projection y.map.left = ((D.family (Fin.last n)).pullback ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k F)))).obj B) ((e B).symm y).map).sections i ≫ pullback.fst (D.family (Fin.last n)).projection ((e B).symm y).map.left ≫ D.curveToZero (Fin.last n)) ∧ (∀ (B B' : Over (Spec (.of F))) (a : B' ⟶ B) (x : SmoothMarkingComparison.IsoPair (Spec.map (CommRingCat.ofHom (algebraMap k F))) (D.family (Fin.last n)) C f p hp B) (x' : SmoothMarkingComparison.IsoPair (Spec.map (CommRingCat.ofHom (algebraMap k F))) (D.family (Fin.last n)) C f p hp B'), SmoothMarkingComparison.IsPullbackPair a x x' ↔ SmoothMarkingComparison.IsPullbackPair a (e B x) (e B' x'))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdce15c87",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read item node, worker report, module (one sorry), the Knudsen module, StablePointedModuliGroupoids, ModuliChartNormalization.moduliTwoFiberLift, IsConnectedCurve and arithmeticGenus. Node delta: lean only plus stmt_dep def-sfb-moduli-chart-normalization (landed with a lean record, no cycle, cited for reused moduliTwoFiberLift; brief §5 allows it). lean.statement matches the file verbatim; all 11 declarations exist. Contraction matches the Knudsen existential witnesses field for field (no Nonempty choice). Tower: comparison is a ModuliTwoIso a_r∘q_r ≅ F_r∘a_{r+1}, and cartesian means the moduliTwoFiberLift comparison functor is an equivalence. IsoPair keeps the actual k-map, iso to C_B, base equation and labelled markings. Conclusion: map = m ≫ q; β pinned by the projection equation through curveToZero (stepContraction lies over q_r); inverse markings β⁻¹p_i; naturality as an iff of a functional pullback relation. Curve hypotheses no stronger than the node; genus via arithmeticGenus is consistent. Edge cases n=0, n=1, empty or nonreduced B, Aut(C_B), any characteristic and the single universe u all OK. No hollow defs; source, blueprint and proof docstrings present; citer level-parameter Step 3 uses exactly this bijection. Advisory: the inverse-marking conjunct is implied by the first conjunct plus markings. No compile (no file changed)."
+ }
+}

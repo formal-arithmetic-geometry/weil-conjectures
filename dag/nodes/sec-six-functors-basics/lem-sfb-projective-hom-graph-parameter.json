@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-projective-hom-graph-parameter",
+ "kind": "statement",
+ "title": "Projective Hom graph parameter and generic point closure",
+ "statement": "Let $S$ be a Noetherian integral scheme with function field $K$ and generic point $\\eta$. Let $W\\to S$ be H-projective, flat and finitely presented, and let $Q\\to S$ be H-projective. Choose a closed immersion $W\\times_SQ\\hookrightarrow\\mathbf P^N_S$. The functor $T\\mapsto\\operatorname{Hom}_T(W\\times_ST,Q\\times_ST)$ is represented by a scheme $M=\\coprod_P M_P$, where $P$ ranges over numerical Hilbert polynomials for the chosen embedding. There are H-projective finite-type $S$-schemes $H_P$ and open immersions $M_P\\hookrightarrow H_P$, and a universal evaluation $W\\times_SM\\to Q\\times_SM$ whose representing bijections commute with arbitrary base change. For every $K$-morphism $u:W_\\eta\\to Q_\\eta$, its corresponding point $m:\\operatorname{Spec}K\\to M$ lies in one $M_P$. Its reduced closure $R\\subset M$ is a closed subscheme of that $M_P$, integral, separated and of finite type and locally of finite presentation over $S$. There is a canonical identification $R_\\eta=\\operatorname{Spec}K$ compatible with $m$, and $k(R)=K$. Restricting universal evaluation to $R$ extends $u$ on this generic fibre. No nodal-fibre, normality or no-rational-maps assumption is made.\n\nNoetherian means quasi-compact and locally Noetherian [pqf-def-locnoeth]. Schemes, integrality, function fields, H-projectivity, flatness, finite presentation, properness and separatedness, finite type, fibre products, and closed and open immersions use [def-pc-scheme], [def-pc-integral-scheme], [def-sc-function-field], [def-kun-projective], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-pc-fibre-product], [def-weil-closed-immersion] and [def-weil-open-immersion]. Reduced closure means the topological closure endowed with the reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme]. The morphism functor is [def-sfb-relative-morphisms-presheaf]. A numerical Hilbert polynomial is the polynomial eventually equal to the dimension of the degree-$n$ homogeneous coordinate space of a geometric fibre. Quasi-projective here means open in an H-projective $S$-scheme.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A (lemma-Mor-into-Hilb) and 0D1B (lemma-Mor-into-Hilb-open), combined with the existing projective Hilbert-polynomial representability theorem; de Jong, Families of curves and alterations, section 3.9, printed p.609. Agent-formulated strengthening recording the generic closure before the properness test."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sfb-relative-morphisms-presheaf",
+  "def-sfb-projective-fibre-hilbert-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=W\\times_SQ$ with the embedding given in the statement. Apply [lem-sfb-projective-hilbert-polynomial-representability]: $S$ is Noetherian and $E$ is a closed subscheme of the specified projective space, so its Hilbert functor is represented by $H=\\coprod_PH_P$, with $H_P$ H-projective, separated and finite type over $S$. Its universal closed family and classifying bijections commute with arbitrary base change. This theorem explicitly requires no flatness of $E$; none is inferred from $Q$.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "0D1A, graph ambient; projective Hilbert input as stated in the cited representability node"
+   }
+  },
+  {
+   "text": "By [lem-kun-projective-implies-proper], $W\\to S$ is proper and $Q\\to S$ is proper, hence separated by the definition of properness. The other two graph-open hypotheses on $W$ are exactly its assumed flatness and finite presentation. Thus [lem-sfb-graphs-open-in-hilbert] applies to $Z=W,X=Q$. On the represented Hilbert functor of Step 1 it gives an open subscheme $M\\subset H$ representing $T\\mapsto\\operatorname{Hom}_T(W_T,Q_T)$, its universal evaluation, and the natural classifying bijections under arbitrary base change. The proper-Hilbert and projective-Hilbert functors here agree: each closed subscheme of $E_T$ is proper over $T$ because $E_T$ is proper. Indeed $E\\to S$ is H-projective by the chosen embedding, hence proper; apply proper base change and the closed-subscheme clause of [lem-weil-pbc-closed-immersion-proper]. Both functors impose precisely flatness and finite presentation in addition.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "0D1A (lemma-Mor-into-Hilb) and 0D1B (lemma-Mor-into-Hilb-open), hypotheses and representing-scheme consequence"
+   }
+  },
+  {
+   "text": "Set $M_P=M\\cap H_P$. Each $H_P$ is both open and closed in the coproduct $H$, so $M=\\coprod_PM_P$ and $M_P\\hookrightarrow H_P$ is open. The image $x$ of the single point of $\\operatorname{Spec}K$ under the classifying map $m$ belongs to exactly one component $M_P$; the morphism factors through this open because its whole image lies there. As $M_P$ is also closed in $M$, the topological closure $C=\\overline{\\{x\\}}$ in $M$ is contained in $M_P$ and agrees with its closure there.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "0D1B; elementary component decomposition and factorization through an open"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-reduced-induced-closed-subscheme] on the closed subset $C$ to construct $R\\hookrightarrow M$. Its restriction to the open-and-closed $M_P$ is the same reduced induced closed subscheme, by the affine radical-ideal formula and uniqueness in that node. Thus $R\\hookrightarrow M_P$ is closed. The closure of one point is nonempty and irreducible: if it is contained in a union of two closed subsets, $x$ belongs to one of them, and then its entire closure does. Since $R$ is reduced, the equivalence in [def-pc-integral-scheme] proves that $R$ is integral, with generic point $x$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01J3 (lemma-reduced-closed-subscheme); properties.tex 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "Each $H_P$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $H_P\\to S$ is finite type and $S$ is Noetherian. Its underlying space has the minimal condition on closed subsets by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], hence the descending-chain condition: the range of any strictly descending chain would have no minimal member. By [lem-sfb-noetherian-space-compact-subsets], every subset is quasi-compact. In particular every inverse image of an affine open of $H_P$ under $M_P\\hookrightarrow H_P$ is quasi-compact. This open immersion is therefore quasi-compact and is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The closed immersion $R\\to M_P$ is finite type by [lem-weil-pbc-closed-immersion-proper]. Apply finite-type composition twice to obtain that $R\\to S$ is finite type. Finally $S$ is locally Noetherian, so [pqf-lem-lft-fp-locnoeth] makes $R\\to S$ locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type); topology.tex 04ZA; locally finite presentation over a locally Noetherian base"
+   }
+  },
+  {
+   "text": "The inclusion $i:R\\to H_P$ is a monomorphism: it is the composite of a closed immersion with an open immersion, each identifying the source with a subscheme. Consequently $R\\times_{H_P}R=R$. The pullback of the closed diagonal $H_P\\to H_P\\times_SH_P$ along $i\\times_Si$ is therefore exactly $\\Delta_{R/S}:R\\to R\\times_SR$. It is closed by [lem-weil-pbc-closed-immersion-base-change]. This proves separatedness over $S$ by [def-weil-proper-morphism]. Here the closedness of the diagonal of $H_P/S$ is supplied by Step 1; no separatedness of $S$ over a ground field is assumed.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01JP (fibre-product universal property), 01KK (separated diagonal); morphisms.tex 01QR (base change of closed immersions)"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $V=\\operatorname{Spec}A$ of $S$ and an affine open $U=\\operatorname{Spec}B$ of $M_P$ over $V$ containing $x$. Such affines cover $R$: every nonempty open of $R=\\overline{\\{x\\}}$ contains $x$, and every affine open of the integral $S$ contains $\\eta$. By [lem-sc-integral-function-field-affine-fraction] on $S$, identify $K=\\operatorname{Frac}A$. The point $m$ gives an $A$-algebra map $\\phi:B\\to K$. Its kernel $\\mathfrak p$ is prime, and the closure of $x$ in $U$ is $V(\\mathfrak p)$: the point is the prime $\\mathfrak p$, whose specializations are precisely primes containing it. The affine radical-ideal description in [lem-weil-pbc-reduced-induced-closed-subscheme] therefore gives $R\\cap U=\\operatorname{Spec}(B/\\mathfrak p)$. The map $m$ factors through this chart via the injection $B/\\mathfrak p\\hookrightarrow K$. These factorizations agree on overlaps because their composites into $M$ are $m$ and closed immersions are monomorphisms; they define $m_R:\\operatorname{Spec}K\\to R$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01J3 affine formula for the reduced closure of a point; morphisms.tex 01RV, function field on an integral affine open"
+   }
+  },
+  {
+   "text": "Write $D=B/\\mathfrak p\\subset K$ on each chart from Step 7. This subring contains the image of $A$, and that image is injective because the composite $A\\to D\\to K$ is the canonical inclusion. Inverting $A\\setminus\\{0\\}$ in $D$ gives exactly $K$: it is a subring of $K$ and contains every fraction $a/b$ from $\\operatorname{Frac}A=K$. More explicitly, $D\\otimes_AK\\to K$ sends $d\\otimes(a/b)$ to $da/b$, and its inverse sends $a/b$ to $1\\otimes(a/b)$; the first composite is the identity, while the second is the identity because every $d\\in D\\subset K$ is a fraction from $A$. By [lem-weil-pbc-fibre-product-affine-spectra] these are precisely the affine charts of $R_\\eta$, and [lem-weil-pbc-open-fibre-product] identifies them with the inverse images of $R\\cap U$. Every such chart contains the image of $m_R$, and overlaps use the same map into $K$, so their identifications glue to $R_\\eta\\simeq\\operatorname{Spec}K$, with $m_R$ on the generic fibre the inverse isomorphism. Also $\\operatorname{Frac}D=K$, since $A\\subset D\\subset K=\\operatorname{Frac}A$. Apply [lem-sc-integral-function-field-affine-fraction] to the nonempty affine open $R\\cap U$ of the integral $R$ to identify $k(R)=K$ canonically over $K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines), 01JR (lemma-open-fibre-product); morphisms.tex 01RV"
+   }
+  },
+  {
+   "text": "Pull back the evaluation of Step 2 along $R\\hookrightarrow M$. By the classifying bijection, its pullback along $m_R$ is $u$, because the composite $\\operatorname{Spec}K\\xrightarrow{m_R}R\\to M$ is the original point $m$. Step 8 identifies this pullback with the generic fibre $R_\\eta=\\operatorname{Spec}K$. The restricted evaluation therefore extends precisely $u$. The construction used neither nodal fibres nor normality nor a prohibition on rational maps.",
+   "uses": [
+    "lem-sfb-graphs-open-in-hilbert"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "0D1B, universal evaluation and arbitrary base change; de Jong 3.9, printed p.609"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-graphs-open-in-hilbert",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sfb-projective-hilbert-polynomial-representability",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A--0D1B for Hilbert graphs, supplemented by schemes.tex 01J3/01I4/01JQ/01JR and morphisms.tex 01RV/01T3/01T6. Agent-explicit generic closure calculation expands de Jong 3.9, printed p.609 (publisher PDF read online)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Hom functor between projective schemes over a noetherian integral base with flat finitely presented source is represented by open Hilbert schemes and closure of a rational generic point has generic fibre equal to the function field",
+   "results": "{\"t\": \"2026-10-22T06:11:07Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Hom functor between projective schemes over a noetherian integral base with flat finitely presented source is represented by open Hilbert schemes and closure of a rational generic point has generic fibre equal to the function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"9ee29599a6951d31\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Proj constructions, properness of Proj, rational maps and morphism-category operations; none represents the relative Hom functor or identifies its generic point closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "{\"t\": \"2026-10-22T06:10:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Proj constructions, properness of Proj, rational maps and morphism-category operations; none represents the relative Hom functor or identifies its generic point closure."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|[Hh]om[Ss]cheme|[Mm]orphism.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-22T06:10:52Z\", \"tool\": \"grep\", \"query\": \"HilbertScheme|[Hh]om[Ss]cheme|[Mm]orphism.*[Ff]unctor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"48fc3084da7a4f82\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Proj constructions, properness of Proj, rational maps and morphism-category operations; none represents the relative Hom functor or identifies its generic point closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor of morphisms from a flat projective scheme to a projective scheme is representable by a union of quasi projective schemes",
+   "results": "{\"t\": \"2026-10-22T06:10:52Z\", \"tool\": \"leansearch\", \"query\": \"The functor of morphisms from a flat projective scheme to a projective scheme is representable by a union of quasi projective schemes\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of maps from a proper flat finitely presented scheme to a projective scheme is the open locus of graphs in a Hilbert scheme",
+   "results": "{\"t\": \"2026-10-22T06:11:06Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of maps from a proper flat finitely presented scheme to a projective scheme is the open locus of graphs in a Hilbert scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\"], \"digest\": \"7f65189ce37cbbf3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Proj constructions, properness of Proj, rational maps and morphism-category operations; none represents the relative Hom functor or identifies its generic point closure."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|[Hh]om[Ss]cheme|[Mm]orphism.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-23T04:33:06Z\", \"tool\": \"grep\", \"query\": \"HilbertScheme|[Hh]om[Ss]cheme|[Mm]orphism.*[Ff]unctor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"48fc3084da7a4f82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness, rational-map extensions, open-immersion identifications and closed-subscheme categories do not represent the relative Hom functor and prove its generic closure assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative Hom scheme is the open subscheme of the Hilbert scheme consisting of graphs",
+   "results": "{\"t\": \"2026-10-23T04:33:07Z\", \"tool\": \"leansearch\", \"query\": \"A relative Hom scheme is the open subscheme of the Hilbert scheme consisting of graphs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.Scheme.Hom\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme\", \"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.Scheme.Hom.toPartialMap_hom\", \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"AlgebraicGeometry.isAffineHom_iff\"], \"digest\": \"39431678decc0e92\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness, rational-map extensions, open-immersion identifications and closed-subscheme categories do not represent the relative Hom functor and prove its generic closure assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "{\"t\": \"2026-10-23T04:33:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness, rational-map extensions, open-immersion identifications and closed-subscheme categories do not represent the relative Hom functor and prove its generic closure assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative morphisms from a flat projective scheme to a projective scheme are represented by the open locus of graphs in the projective Hilbert scheme",
+   "results": "{\"t\": \"2026-10-23T04:33:08Z\", \"tool\": \"leanfinder\", \"query\": \"Relative morphisms from a flat projective scheme to a projective scheme are represented by the open locus of graphs in the projective Hilbert scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\"], \"digest\": \"55bcd97c3a54b069\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness, rational-map extensions, open-immersion identifications and closed-subscheme categories do not represent the relative Hom functor and prove its generic closure assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of maps between projective schemes is represented by open Hilbert schemes and the closure of a generic rational point has the same function field",
+   "results": "{\"t\": \"2026-10-23T04:36:34Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of maps between projective schemes is represented by open Hilbert schemes and the closure of a generic rational point has the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"4fb312d4ac7d8a78\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj properness, rational-map extensions, open-immersion identifications and closed-subscheme categories do not represent the relative Hom functor and prove its generic closure assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-hom-closure",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source. Re-split task: returned steps 1--3: projective graph ambient, Hilbert graph-open, and integral generic closure",
+   "via": [
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-hom-graph-parameter",
+  "worker": "stage1",
+  "summary": "Reused projective Hilbert representability and the graph-open theorem. Gave the component argument, reduced closure, finite type/local finite presentation, separated diagonal, affine kernel and generic-fibre/function-field calculation explicitly. No new nodes. Corrected the reduced-closure notion citation to the existing reduced induced closed subscheme theorem; all mathematical hypotheses and conclusions are unchanged. Searched current library, whole DAG/blueprint, and Mathlib.",
+  "blueprint": "Inherited null nearest ancestor and via chain retained, as computed by blueprint_refs.py ancestor. Realizes the inherited de Jong 3.9 prerequisite of the alteration branch of det-thm-sf-ctf-stability-direct-images (3), before its separate properness criterion; graph parameter and generic closure only.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme-theoretic input used exactly as stated; the unit supplies no alternative projective morphisms are proper."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic input used exactly as stated; the unit supplies no alternative reduced induced closed subscheme structure on a closed subset: existence and uniqueness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-cc851469b",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-cc851469b (reviewer sub-agent of L); spot-checked: Read the item, all 26 cited node statements and Stacks quot.tex 0D1A/0D1B (l.3140/3176). The delivery is one commit with the item and the report and has no new nodes. On the base the item was unsplit with no repair note, so this is a first split, and nothing on live supersedes it. The statement's only change is a notion citation: def-weil-pbc-scheme-reduction (reduction of a whole scheme, the wrong notion) is replaced by lem-weil-pbc-reduced-induced-closed-subscheme in the text and in stmt_deps. The parent high-genus-hom-closure step 0 still uses the item unchanged. Step checks: (1) the Hilbert representability node needs no flatness of E and gives H_P H-projective, separated and of finite type. (2) The graph-open hypotheses come from projective implies proper; the Hilbert functors agree because closed subschemes of E_T are proper (proper base change plus closed-immersion-proper (c)). (3) Elementary clopen-component argument. (4) Reduced induced structure plus point closure gives integral. (5) Noetherian H_P has DCC, so M_P→H_P is a quasi-compact open immersion and of finite type; composition gives finite type and lft over a locally Noetherian base gives lfp. (6) An immersion is a monomorphism, so Δ_{R/S} is a pullback of Δ_{H_P/S}. (7)-(8) R∩U=Spec(B/p) with A⊂B/p⊂K=Frac A, so D⊗_A K=K; R_η=Spec K and k(R)=K. I confirmed this independently: x is K-rational and hence closed in M_η. (9) The classifying bijection gives that the pullback of the evaluation along m_R is u. Edge cases checked: S=Spec K, W empty, Q empty. proof_deps equals the union of step uses, step sources are present and there is no SGA citation. Accepted tool_uses: lem-kun-projective-implies-proper and lem-weil-pbc-reduced-induced-closed-subscheme. Batch-5 flags: lem-trf-unramified-locus-base-change (Stacks 0475) and lem-trf-standard-graded-hilbert-function (Stacks 00K1) are generic algebraic-geometry and algebra facts, outside both assumptions and their proofs, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveHomGraphParameter",
+  "declaration": "AlgebraicGeometry.exists_projective_hom_graph_parameter",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveHomGraphParameter.lean",
+  "statement": "theorem exists_projective_hom_graph_parameter (S : Scheme.{u}) [IsLocallyNoetherian S] [CompactSpace S] [IsIntegral S] {W Q : Scheme.{u}} (f : W ⟶ S) (g : Q ⟶ S) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] [IsHProjective g] (N : ℕ) (i : pullback f g ⟶ ℙ(ULift.{u} (Fin (N + 1)); S)) [IsClosedImmersion i] (hi : i ≫ (ℙ(ULift.{u} (Fin (N + 1)); S) ↘ S) = pullback.fst f g ≫ f) : ∃ (M : Over S) (e : (relativeMorphismsPresheaf f g).RepresentableBy M) (MP HP : NumericalHilbertPolynomial → Over S) (μ : ∀ P, MP P ⟶ M) (j : ∀ P, MP P ⟶ HP P), Nonempty (IsColimit (Cofan.mk M μ)) ∧ (∀ P, IsHProjective (HP P).hom ∧ LocallyOfFiniteType (HP P).hom ∧ QuasiCompact (HP P).hom ∧ IsOpenImmersion (j P).left) ∧ (∀ (P : NumericalHilbertPolynomial) (T : Over S) (a : T ⟶ M), HasProjectiveFibreHilbertPolynomial (pullback.fst f g ≫ f) i T (relativeMorphismGraph f g T (e.homEquiv a)).ker P.1 ↔ ∃! b : T ⟶ MP P, b ≫ μ P = a) ∧ ∃ ev : pullback M.hom f ⟶ Q, ev = (e.homEquiv (𝟙 M)).left ∧ (∀ (T : Over S) (a : T ⟶ M), (e.homEquiv a).left = ((Over.pullback f).map a).left ≫ ev) ∧ (∀ uη : (relativeMorphismsPresheaf f g).obj (op (Over.mk (S.fromSpecStalk (genericPoint S)))), ∃ (m : Over.mk (S.fromSpecStalk (genericPoint S)) ⟶ M), e.homEquiv m = uη ∧ ∃ (P : NumericalHilbertPolynomial) (mP : Over.mk (S.fromSpecStalk (genericPoint S)) ⟶ MP P) (I : M.left.IdealSheafData), mP ≫ μ P = m ∧ I = Scheme.IdealSheafData.vanishingIdeal (.closure (Set.range m.left)) ∧ ∃ (hR : IsIntegral I.subscheme) (a : Over.mk (S.fromSpecStalk (genericPoint S)) ⟶ Over.mk (I.subschemeι ≫ M.hom)) (c : I.subscheme ⟶ (MP P).left), IsClosedImmersion c ∧ c ≫ (μ P).left = I.subschemeι ∧ IsSeparated (I.subschemeι ≫ M.hom) ∧ LocallyOfFiniteType (I.subschemeι ≫ M.hom) ∧ QuasiCompact (I.subschemeι ≫ M.hom) ∧ LocallyOfFinitePresentation (I.subschemeι ≫ M.hom) ∧ a.left ≫ I.subschemeι = m.left ∧ IsPullback a.left (𝟙 (Spec S.functionField)) (I.subschemeι ≫ M.hom) (S.fromSpecStalk (genericPoint S)) ∧ (∃ eK : I.subscheme.functionField ≅ S.functionField, Spec.map eK.hom ≫ I.subscheme.fromSpecStalk (genericPoint I.subscheme) = a.left) ∧ ((Over.pullback f).map a).left ≫ ((Over.pullback f).map (Over.homMk I.subschemeι rfl)).left ≫ ev = uη.left)",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a1e43009",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read the item, all 15 stmt_dep records, the delivered module and report (both required sections present), and the live Lean of relativeMorphismsPresheaf/relativeMorphismGraph, NumericalHilbertPolynomial/HasProjectiveFibreHilbertPolynomial, exists_projective_hilbert_polynomial_representation and graphs_open_in_hilbert. Node diff vs live: lean added, plus stmt_dep def-sfb-projective-fibre-hilbert-polynomial (landed, used). lean.statement verbatim; one sorry; docstrings have source, blueprint and 9 steps; no name collision. Hypotheses match exactly: Noetherian integral S; W H-projective, flat, LFP (=fp since H-projective gives qcqs); Q H-projective; closed immersion i over S via hi. Conclusions: RepresentableBy M of the recorded presheaf; coproduct cofan over numerical polynomials; components pinned by an iff with the graph-kernel Hilbert polynomial (holds trivially for T empty); H_P H-projective, LOFT, QC with open j; ev = homEquiv 𝟙 with its pullback identity; R = vanishingIdeal(closure range m) subscheme, integral, closed in M_P, separated/LOFT/QC/LOFP over S; IsPullback gives R_eta = Spec K compatible with m; eK normalized by Spec.map eK.hom ≫ fromSpecStalk = a.left; final evaluation equality. Math of R_eta/k(R) checked (A ⊆ B/p ⊆ K = Frac A). Edge cases W=∅, Q=∅, unrealizable P, N=0, T=∅ fine; single universe u. Advisories: Second reading by Q67 is an author self-reading (dispatcher policy; Worker report maps every clause); base change rendered by RepresentableBy naturality, as in the landed graphs-open node. No file changed, no compile run."
+ }
+}

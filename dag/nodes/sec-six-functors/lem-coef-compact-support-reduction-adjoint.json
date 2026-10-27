@@ -1,0 +1,249 @@
+{
+ "id": "lem-coef-compact-support-reduction-adjoint",
+ "kind": "statement",
+ "title": "Finite compact-support reduction transitions have the specified invertible tensor adjoint",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $\\varpi$, and positive integers $m\\geq n$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes, $f:X\\to Y$ separated of finite type, and $c=(j,p)$ a fixed compactification [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. For $T=X,Y$ use its small pro-etale site and let $B_{T,s}=(R/\\varpi^s)_T$ for $s=m,n$ [def-weil-pbc-proetale-site]. Write $D_T(B_{T,s})=D(\\operatorname{Mod}(B_{T,s}))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], $\\operatorname{Res}_T:D_T(B_{T,n})\\to D_T(B_{T,m})$ for quotient scalar restriction [def-pc-sheaf-restrict-scalars], $L_T=-\\otimes^L_{B_{T,m}}B_{T,n}$ for derived scalar extension, and $\\eta_T$ for the unit of $L_T\\dashv\\operatorname{Res}_T$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Put $F_s=Rp_{*,s}j_!$ [def-compact-support-direct-image-detailed], and use the canonical comparison $\\sigma:F_m\\operatorname{Res}_X\\xrightarrow{\\sim}\\operatorname{Res}_YF_n$ [lem-sf-compact-support-restriction-of-scalars]. Let $V\\in D_X(B_{X,m})$ and $W\\in D_X(B_{X,n})$ be intrinsically bounded constructible [def-weil-finite-torsion-constructibility], and let $\\beta:L_XV\\xrightarrow{\\sim}W$ be an isomorphism. Put $\\rho=\\operatorname{Res}_X(\\beta)\\eta_{X,V}$ and $\\tau=\\sigma_WF_m(\\rho)$.\n\nLet $\\gamma_V:L_YF_mV\\to F_nL_XV$ be the canonical compact-support tensor comparison of [def-coef-compact-support-tensor-comparison], characterized by $\\operatorname{Res}_Y(\\gamma_V)\\eta_{Y,F_mV}=\\sigma_{L_XV}F_m(\\eta_{X,V})$. Then the tensor/restriction adjoint of the actual map $\\tau$ is exactly $F_n(\\beta)\\gamma_V$; equivalently,\n$$\\operatorname{Res}_Y(F_n(\\beta)\\gamma_V)\\eta_{Y,F_mV}=\\sigma_WF_m(\\rho).$$\nBoth $\\gamma_V$ and $F_n(\\beta)$ are isomorphisms. This assertion concerns ordinary finite-level derived scalar extension and imposes no flatness of $R/\\varpi^n$ over $R/\\varpi^m$ and no Tor-amplitude hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Paragraph 2, the specified coefficient maps: identification of their tensor/restriction adjoints and finite-comparison invertibility; returned normalized-realization proof Steps 3--4."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-finite-torsion-constructibility",
+  "def-coef-compact-support-tensor-comparison",
+  "def-weil-compact-support-reduction-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "For every integer $q$, the isomorphism $\\beta:L_XV\\xrightarrow{\\sim}W$ induces $\\mathcal H^q(L_XV)\\cong\\mathcal H^q(W)$. Thus the same finite cohomological support and the same finite stratifications with locally constant finite module stalks that witness intrinsic bounded constructibility of $W$ witness it for $L_XV$ [def-weil-finite-torsion-constructibility]. In particular the actual ordinary derived reduction of $V$, not a separately chosen reduction object, satisfies the bounded-constructible hypothesis needed below. In Lean, apply the isomorphism-closure clause of [lem-weil-proetale-dbc-triangulated] to beta inverse, using the definition of intrinsic bounded constructibility.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Paragraph 2, input finite coefficient maps; verification of the bounded actual reduction"
+   }
+  },
+  {
+   "text": "Apply [lem-finite-compact-support-scalar-comparison] with ground field $K_0=k$, input $K=V$, upper level $m$ and lower level $n$, and the given compactification $c$. Its hypotheses are exactly $\\ell$ invertible in $k$, positive $n\\le m$, separated finite-type $f$ between finite-type $k$-schemes, bounded constructibility of $V$, and bounded constructibility of its actual reduction $L_XV$ from Step 1. The theorem makes the scalar-adjunction transpose of $\\sigma_{L_XV}F_m(\\eta_{X,V})$ invertible. By [def-coef-compact-support-tensor-comparison], this is precisely $\\gamma_V$: both are the unique arrow mapped to that same composite by the tensor-presentation Hom bijection. Hence $\\gamma_V$ is an isomorphism. The cited theorem imposes no flatness or Tor-amplitude condition.",
+   "uses": [
+    "lem-finite-compact-support-scalar-comparison",
+    "def-coef-compact-support-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, following Tag 0GL5, lemma-projection-formula-Rf-lower-shriek; bounded pro-etale form supplied by lem-finite-compact-support-scalar-comparison"
+   }
+  },
+  {
+   "text": "Use the defining equation for $\\gamma_V$ [def-coef-compact-support-tensor-comparison] and naturality in the argument of the specified restriction comparison [lem-sf-compact-support-restriction-of-scalars]. Naturality at the $B_{X,n}$-linear arrow $\\beta:L_XV\\to W$ reads $\\operatorname{Res}_Y(F_n(\\beta))\\sigma_{L_XV}=\\sigma_WF_m(\\operatorname{Res}_X(\\beta))$. Therefore, using functoriality and associativity,\n$$\\begin{aligned}\\operatorname{Res}_Y(F_n(\\beta)\\gamma_V)\\eta_{Y,F_mV}&=\\operatorname{Res}_Y(F_n(\\beta))\\operatorname{Res}_Y(\\gamma_V)\\eta_{Y,F_mV}\\\\&=\\operatorname{Res}_Y(F_n(\\beta))\\sigma_{L_XV}F_m(\\eta_{X,V})\\\\&=\\sigma_WF_m(\\operatorname{Res}_X(\\beta))F_m(\\eta_{X,V})\\\\&=\\sigma_WF_m(\\operatorname{Res}_X(\\beta)\\eta_{X,V})=\\sigma_WF_m(\\rho)=\\tau.\\end{aligned}$$",
+   "uses": [
+    "def-coef-compact-support-tensor-comparison",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Paragraph 2, identification of the specified coefficient maps; expansion of the tensor-unit defining equation and restriction naturality"
+   }
+  },
+  {
+   "text": "The scalar adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] sends an arrow $a:L_YF_mV\\to F_nW$ to $\\operatorname{Res}_Y(a)\\eta_{Y,F_mV}$. Step 3 and injectivity of this Hom bijection show that the adjoint of the actual $\\tau$ is exactly $F_n(\\beta)\\gamma_V$. Finally $F_n(\\beta)$ has inverse $F_n(\\beta^{-1})$, since the two composites are $F_n(1)=1$. It is therefore an isomorphism, and together with Step 2 this proves both claimed invertibilities (and the invertibility of their composite).",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, coefficient-ring specialization; unit formula for the Hom bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "lem-finite-compact-support-scalar-comparison",
+  "def-coef-compact-support-tensor-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Paragraph 2, specified coefficient maps; explicit naturality calculation using the existing finite compact-support scalar-comparison theorem (Stacks Tags 0GL5, 0GL6, 07A6); C3 formalization uses the existing isomorphism-closure theorem for Step 1 and the adjunction Hom-equivalence unit formula for Step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite compact support tensor coefficient comparison is the scalar adjoint of restriction comparison applied to the unit and is invertible on constructible reduction",
+   "results": "[leanfinder] OK 8 hit(s); Finsupp.linearCombination_one_tmul; Rep.finsuppTensorRight_inv_hom; Rep.finsuppTensorLeft_inv_hom; TensorProduct.directSumRight'_restrict; Rep.finsuppTensorRight; Rep.finsuppTensorLeft; Rep.leftRegularTensorTrivialIsoFree_hom_hom; Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right",
+   "date": "2026-10-22",
+   "verdict": "no match: Abstract adjunction formulas and tensor identities do not prove finite compact-support comparison invertibility or its specified geometric normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.mkOfHomEquiv; CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.homEquiv'; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: Abstract adjunction formulas and tensor identities do not prove finite compact-support comparison invertibility or its specified geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(tensor|adjoint)|lowerShriek|coefficientComparison",
+   "results": "[grep] OK 0 hit(s); No hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: Abstract adjunction formulas and tensor identities do not prove finite compact-support comparison invertibility or its specified geometric normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transpose of compact support of a scalar unit followed by restriction is the tensor comparison and respects isomorphisms",
+   "results": "[leansearch] OK 8 hit(s); Module.Dual.transpose_comp; LinearMap.restrictScalars_trans; Module.Dual.transpose; CategoryTheory.GlueData.t_isIso; Matrix.transposeLinearEquiv; LinearMap.toMatrix_transpose; Matrix.comp_transpose; TensorProduct.finsuppScalarRight_symm_apply_single",
+   "date": "2026-10-22",
+   "verdict": "no match: Abstract adjunction formulas and tensor identities do not prove finite compact-support comparison invertibility or its specified geometric normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient change for compact support with finite quotient rings is invertible for bounded constructible complexes with constructible reduction",
+   "results": "[leanfinder] OK 8 hit(s); ChevalleyThm.chevalley_polynomialC; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE; ChevalleyThm.chevalley_mvPolynomialC; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: Abstract adjunction formulas and tensor identities do not prove finite compact-support comparison invertibility or its specified geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(tensor|adjoint)|lowerShriek|coefficientComparison",
+   "results": "{\"t\": \"2026-10-22T06:50:51Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*(tensor|adjoint)|lowerShriek|coefficientComparison\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas or ordinary module change of rings do not assert invertibility of the specified finite compact-support scalar comparison; reuse the existing DAG theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support commutes with change of finite quotient coefficients on bounded constructible complexes",
+   "results": "{\"t\": \"2026-10-22T06:50:52Z\", \"tool\": \"leansearch\", \"query\": \"Derived compact support commutes with change of finite quotient coefficients on bounded constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.deriv\", \"HasCompactSupport.fderiv\", \"ofCompactSupport\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"HasCompactSupport.iteratedFDeriv\", \"DerivedCategory.quotientCompQhIso\", \"HasCompactSupport.div\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"c62ef6445cc02476\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas or ordinary module change of rings do not assert invertibility of the specified finite compact-support scalar comparison; reuse the existing DAG theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": "{\"t\": \"2026-10-22T06:50:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv'\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"d4686c3e2e7585d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas or ordinary module change of rings do not assert invertibility of the specified finite compact-support scalar comparison; reuse the existing DAG theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical finite coefficient change comparison for compact support is invertible and is the scalar extension restriction adjoint of the transition map",
+   "results": "{\"t\": \"2026-10-22T06:51:02Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical finite coefficient change comparison for compact support is invertible and is the scalar extension restriction adjoint of the transition map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"ModuleCat.homEquiv_extendScalarsComp\", \"Finsupp.supportedEquivFinsupp\", \"ModuleCat.homEquiv_extendScalarsId\", \"Finsupp.supportedEquivFinsupp_apply_apply\", \"TopModuleCat.freeAdj\", \"LocallyConstant.congrRightₗ\", \"LocallyConstant.congrLeftₗ\"], \"digest\": \"ce87ed32260484f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas or ordinary module change of rings do not assert invertibility of the specified finite compact-support scalar comparison; reuse the existing DAG theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings for proper direct image composed with open extension by zero, compatibility of tensor restriction adjunction and natural coefficient isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:51:40Z\", \"tool\": \"leanfinder\", \"query\": \"Change of rings for proper direct image composed with open extension by zero, compatibility of tensor restriction adjunction and natural coefficient isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"LightCondensed.ihomPoints_symm_comp\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\"], \"digest\": \"3b39031b5a3b735d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas or ordinary module change of rings do not assert invertibility of the specified finite compact-support scalar comparison; reuse the existing DAG theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_apply|homEquiv_naturality_right",
+   "results": "{\"t\": \"2026-10-22T06:52:03Z\", \"tool\": \"grep\", \"query\": \"homEquiv_apply|homEquiv_naturality_right\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Quadruple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Limits.lean\"], \"digest\": \"d6b823a970177fe7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction formulas or ordinary module change of rings do not assert invertibility of the specified finite compact-support scalar comparison; reuse the existing DAG theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-compact-support-normalized-realization",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-integral-compact-support",
+   "place": "Paragraph 2, the specified coefficient maps: identification of their tensor/restriction adjoints and finite-comparison invertibility; returned normalized-realization proof Steps 3--4.",
+   "via": [
+    "lem-coef-compact-support-normalized-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-compact-support-reduction-adjoint",
+  "worker": "stage1",
+  "summary": "Verified the finite-level adjoint identity by writing out restriction-comparison naturality and the defining tensor-unit equation. Reused lem-finite-compact-support-scalar-comparison for invertibility, after deriving bounded constructibility of the actual reduction from beta. No statement change, new node, Tor-amplitude assumption, or flatness assumption.",
+  "blueprint": "Realizes paragraph 2 of lem-coef-integral-compact-support.proof.md: the specified finite coefficient maps have the canonical invertible tensor adjoints; Steps 1--2 check the actual reduction domain and invoke the existing coefficient-comparison theorem, Steps 3--4 identify the actual transition transpose.",
+  "tool_uses": [
+   {
+    "node": "lem-finite-compact-support-scalar-comparison",
+    "why": "Generic finite-level compact-support coefficient comparison for arbitrary fields and intrinsically bounded constructible inputs with bounded actual reduction; the current unit has no replacement for this finite coefficient tool."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Uses naturality of the canonical restriction comparison already specified in the item, to compute the actual transition map; no new route through a different geometric theorem."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Uses the normalized scalar-extension/restriction Hom bijection to identify the unique adjoint; generic coefficient adjunction already in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-finite-compact-support-scalar-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-f26d08830",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-f26d08830 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full. The item is not dropped, and it is still unsplit and unreviewed live, so no other group has superseded it. Statement and stmt_deps are byte-identical to live. There are no new nodes and no SGA citations. Step 1: β is an isomorphism, so H^q(β) carry the finite-support and stratification witnesses of def-weil-finite-torsion-constructibility from W to the actual reduction L_XV; this is correctly elementary. Step 2 applies lem-finite-compact-support-scalar-comparison. I checked its Lean record finiteCompactSupportScalarComparison: K is at the upper level, the hypothesis is on its pbcDerivedExtend reduction, and the map is homEquiv.symm(F(unit) ≫ sfCompactSupportRestriction). The step renames the levels to m≥n, with k an arbitrary field with ℓ invertible. By uniqueness in def-coef-compact-support-tensor-comparison (presentations (L_XV,η_X) and (L_YF_mV,η_Y), same lem-sf comparison), that map is γ_V, so γ_V is invertible. No Tor or flatness hypothesis is used. Step 3: naturality of σ at β gives Res(F_nβ)σ_{LV}=σ_W F_m(Res β); I checked the whole four-equality chain down to τ. Step 4: injectivity of the lem-pur Hom bijection identifies the adjoint, and F_n(β^{-1}) inverts F_n(β). The source, lem-coef-integral-compact-support.proof.md paragraph 2, cites lem-fix-compact-support-coefficient-change. That node needs finite Tor amplitude and the finite-field datum, which the item's statement excludes, so it is correctly not used; it is narrower, not a duplicate. The parent normalized-realization's Step 2 uses the item exactly as stated. Tool use of the off-route scalar comparison (unit sk-prop-sf-cbc, Lean landed) is accepted. The other two declared tool uses are in sk-def-sf-operations, which is on the unit's route. Edge cases checked: m=n, the zero object, infinite Tor dimension. Advisory only: 'f a k-morphism' is implicit in Step 2."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportReductionAdjoint",
+  "declaration": "AlgebraicGeometry.Scheme.coefCompactSupportReductionAdjoint",
+  "file": "lean/Sheaf/Paper/CompactSupportReductionAdjoint.lean",
+  "statement": "theorem coefCompactSupportReductionAdjoint (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (k : Type u) [Field k] (_hl : IsUnit (l : k)) (m n : ℕ) (hmn : n ≤ m) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (V : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1))) (W : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (n + 1))) (_hV : intrinsicFiniteTorsionConstructible l E (m + 1) (Nat.le_add_left 1 m) X V) (_hW : intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.le_add_left 1 n) X W) (β : (pbcDerivedExtend (compactSupportLevelSheafQuotient l E X m n hmn)).obj V ≅ W) : ((pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E Y m n hmn)).unit.app ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).obj V) ≫ (pbcDerivedRestrict (compactSupportLevelSheafQuotient l E Y m n hmn)).map (intrinsicCompactSupportCoefficientComparison (compactSupportLevelQuotient l E m n hmn) c V ≫ (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map β.hom) = (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1))).map ((pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E X m n hmn)).unit.app V ≫ (pbcDerivedRestrict (compactSupportLevelSheafQuotient l E X m n hmn)).map β.hom) ≫ (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n hmn)).hom.app W) ∧ IsIso (intrinsicCompactSupportCoefficientComparison (compactSupportLevelQuotient l E m n hmn) c V) ∧ IsIso ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map β.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q121",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce2025c53",
+  "group": "Q121",
+  "result": "pass",
+  "note": "All hypotheses and the three conclusion clauses (unit equation, IsIso γ, IsIso F_n(β)) match the node; levels m+1/n+1 with n≤m match the tower-data A_n=R/ϖ^(n+1); σ = sfCompactSupportRestriction, the same map inside γ's definition; Step-2 tool finiteCompactSupportScalarComparison has identical hypotheses. Item node changes only lean plus one landed definition-node stmt_dep (def-weil-compact-support-reduction-tower-data, declarations used); no other node differs from live; lean.statement verbatim; single universe u; sorry only; docstrings carry source and blueprint id; no duplicate; parent CompactSupportNormalizedRealization uses the same γ. Edge cases m=n, m=n=0, empty schemes, zero objects fine. No file changed, no compile. Advisory: f.IsOver makes the k-morphism convention explicit, as in the cited theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T142955-L-910061",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

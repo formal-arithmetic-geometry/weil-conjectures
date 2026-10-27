@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-bounded-pseudocoherent-stalkwise-perfect",
+ "kind": "statement",
+ "title": "Bounded-below pseudo-coherent complexes are perfect if all prime localizations are perfect",
+ "statement": "Let $B$ be any commutative ring and let $K\\in D(B)$ [def-weil-abstract-derived-category] be pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Suppose there is an integer $c$ such that $H^i(K)=0$ for every $i<c$. For each prime ideal $\\mathfrak q\\subset B$, let $B_{\\mathfrak q}$ be the localization of $B$ at $B\\setminus\\mathfrak q$ [def-weil-pbc-localization-at-prime], and form $K_{\\mathfrak q}=K\\otimes_B^{\\mathbf L}B_{\\mathfrak q}$ by K-flat resolutions [def-pc-module-kflat-complex]. If $K_{\\mathfrak q}$ is perfect over $B_{\\mathfrak q}$ for every $\\mathfrak q$, then $K$ is perfect over $B$, that is, isomorphic to a bounded complex of finitely generated projective $B$-modules [def-pc-perfect-ring-complex]. The bounds of the perfect complexes at different primes need not be uniform. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068W, lemma-check-perfect-stalks, implication (2) to (1) under the bounded-below hypothesis in its final sentence."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-module-kflat-complex",
+  "def-pc-perfect-ring-complex",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free representative $F^\\bullet$ of $K$ by pseudo-coherence. A finite free module is flat: tensoring a module injection with $B^n$ gives the same injection in each of its $n$ coordinates. The bounded-flat K-flat lemma therefore applies to $F^\\bullet$, and also to the bounded-above finite-free complex $F^\\bullet\\otimes_BB_{\\mathfrak q}$ over $B_{\\mathfrak q}$. The fixed-second-factor derived-tensor functor thus computes $K_{\\mathfrak q}$ by $F^\\bullet\\otimes_BB_{\\mathfrak q}$ and computes the two residue extensions by their ordinary tensor complexes. Put $k=\\kappa(\\mathfrak q)=\\operatorname{Frac}(B/\\mathfrak q)$; the map $B\\to k$ factors through $B_{\\mathfrak q}$ because every element outside $\\mathfrak q$ maps to a nonzero element of $k$. Degreewise the maps $(x\\otimes u)\\otimes v\\mapsto x\\otimes uv$ and $x\\otimes v\\mapsto(x\\otimes1)\\otimes v$ are inverse balanced linear maps and commute with the differentials. Consequently they give an isomorphism $K\\otimes_B^{\\mathbf L}k\\simeq K_{\\mathfrak q}\\otimes_{B_{\\mathfrak q}}^{\\mathbf L}k$ in $D(k)$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068W, lemma-check-perfect-stalks, final proof paragraph; Tags 064K, 066W and 0BYP for its inputs."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$. By hypothesis $K_{\\mathfrak q}$ is perfect. Apply preservation of perfect complexes under derived scalar extension to $B_{\\mathfrak q}\\to\\kappa(\\mathfrak q)$. Together with step 1 this makes $K\\otimes_B^{\\mathbf L}\\kappa(\\mathfrak q)$ perfect. By the definition of perfect, choose a bounded finite-projective representative of this fibre and a lower bound $a_{\\mathfrak q}$ for its terms. Its cohomology is zero in degrees $i<a_{\\mathfrak q}$, since the representing term in degree $i$ is zero. In particular $d_i=\\dim_{\\kappa(\\mathfrak q)}H^i(K\\otimes_B^{\\mathbf L}\\kappa(\\mathfrak q))=0$ for $i<a_{\\mathfrak q}$. The chosen integer can depend on $\\mathfrak q$.",
+   "uses": [
+    "lem-sc-perfect-pullback-perfect-residue",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068W, lemma-check-perfect-stalks, final proof paragraph; Tags 064K, 066W and 0BYP for its inputs."
+   }
+  },
+  {
+   "text": "Apply the bounded-below residue-model lemma to $R=B$, the prime $\\mathfrak q$, and $a=a_{\\mathfrak q}$. Its pseudo-coherence and bounded-below hypotheses are exactly the hypotheses on $K$; step 2 supplies its residue-dimension vanishing. It yields $f_{\\mathfrak q}\\notin\\mathfrak q$ and a bounded finite-free representative of $K\\otimes_B^{\\mathbf L}B_{f_{\\mathfrak q}}$. Finite free modules are finitely generated projective, so this localized object is perfect. Thus every prime lies in a principal open $D(f_{\\mathfrak q})$ on which $K$ has a perfect scalar extension.",
+   "uses": [
+    "lem-sfb-bounded-pseudocoherent-residue-model",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068W, lemma-check-perfect-stalks, final proof paragraph; Tags 064K, 066W and 0BYP for its inputs."
+   }
+  },
+  {
+   "text": "The principal opens $D(f_{\\mathfrak q})$ cover $\\operatorname{Spec}B$. Quasi-compactness of the spectrum gives a finite subcover $D(f_1),\\ldots,D(f_r)$, and the principal-cover criterion says these $f_j$ generate the unit ideal. Each $K\\otimes_B^{\\mathbf L}B_{f_j}$ is perfect by step 3. The principal-cover gluing lemma therefore gives that $K$ is perfect over $B$, with the bounded finite-projective meaning in the statement. The gluing lemma allows $r=0$, so the empty spectrum (the zero ring) is included. Only the finite cover, not any prescribed uniform bound on the primewise representatives, is used.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-perfect-ring-principal-cover-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 068W, final proof paragraph; Tag 066Y, lemma-glue-perfect; Tag 00E8, lemma-quasi-compact; Tag 00E0, lemma-Zariski-topology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sc-perfect-pullback-perfect-residue",
+  "def-pc-perfect-ring-complex",
+  "lem-sfb-bounded-pseudocoherent-residue-model",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-perfect-ring-principal-cover-glue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068W, lemma-check-perfect-stalks, bounded-below final paragraph, with the (2) to (4) residue argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below pseudo coherent complex of modules is perfect if its localization at every prime ideal is perfect",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"exact_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {L : Type u_4} [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : Module R M] [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : AddCommMonoid L]\\n  [inst_6 : Module R L] (Mₚ : (P : Ideal R) → [P.IsMaximal] → Type u_6)\\n  [inst_7 : (P \", \"doc\": \"If for every maximal ideal $ J $ in a commutative semiring $ R $, the localized maps $ F_J $ and $ G_J $ (obtained by localizing at the submonoid $ R \\\\setminus J $) form an exact sequence, then the or\"}\n  {\"name\": \"exact_of_localized_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {L : Type u_4} [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : Module R M] [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : AddCommMonoid L]\\n  [inst_6 : Module R L] (f : M →ₗ[R] N) (g : N →ₗ[R] L),\\n  (∀ (J : Ideal R) [inst_7 : J\", \"doc\": \"If for every maximal ideal $ J $ in a ring $ R $, the localized functions $ f $ and $ g $ (at the complement of $ J $) form an exact sequence (i.e., the image of $ f $ equals the kernel of $ g $ in th\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module projectivity localization and cohomological support results do not state perfection of a pseudo-coherent complex; Frobenius PerfectRing and PerfectField are different notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local perfection at all prime localizations implies global perfection for a cohomologically bounded pseudo coherent complex over an arbitrary commutative ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.instPerfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (O : Type u₂) [inst : CommRing O] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p],\\n  PerfectRing (PreTilt O p) p\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo a prime $ p $, defined as the perfection of the quotient ring $ O/(p) $, is a perfect ring with respect to $ p $. This means every element in the pretilt\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module projectivity localization and cohomological support results do not state perfection of a pseudo-coherent complex; Frobenius PerfectRing and PerfectField are different notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"localization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module projectivity localization and cohomological support results do not state perfection of a pseudo-coherent complex; Frobenius PerfectRing and PerfectField are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|perfect.*stalk|perfect.*localiz|localiz.*perfect",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"360\", \"text\": \"  have : PerfectField ((Spec (.of K)).presheaf.stalk (f (genericPoint X))) :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module projectivity localization and cohomological support results do not state perfection of a pseudo-coherent complex; Frobenius PerfectRing and PerfectField are different notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex with bounded below cohomology and perfect localizations at every prime is a bounded complex of finite projective modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.projective_of_localization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Projective\", \"type\": \"(H : ∀ (I : Ideal R) (_ : I.IsMaximal), Module.Projective (Localization.AtPrime I) (LocalizedModule I.primeCompl M))\\n  [Module.FinitePresentation R M] : Module.Projective R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely presented $ R $-module. If for every maximal ideal $ I $ of $ R $, the localization of $ M $ at $ I $ is a projective module over the localized rin\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"[Module.Flat A B] (p : Ideal A) [p.IsPrime] (P : Ideal B) [P.IsPrime] [P.LiesOver p] :\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"IsLocalizedModule.AtPrime\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.AtPrime\", \"type\": \"{R M M' : Type*} [CommSemiring R] (P : Ideal R) [P.IsPrime] [AddCommMonoid M] [AddCommMonoid M'] [Module R M]\\n  [Module R M'] (f : M →ₗ[R] M')\", \"doc\": \"Given a commutative semiring $ R $, $ R $-modules $ M $ and $ M' $, a prime ideal $ P $ of $ R $, and an $ R $-linear map $ f: M \\\\to M' $, this predicate holds when $ M' $ is the localization of $ M $\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"module\": \"Mathlib.RingTheory.RingHom.Finite\", \"type\": \"{R S : Type*} [CommRing R] {P : Ideal R} [CommRing S] [Algebra R S] [Module.Finite R S] [P.IsPrime] :\\n  Module.Finite (Localization.AtPrime P) (Localization (Algebra.algebraMapSubmonoid S P.primeCompl))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a finitely generated $ R $-module, and let $ P $ be a prime ideal of $ R $. The localization of $ S $ at the image of $ P^c $ (the complement of $ P\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughProjectives C] (Z : C) (n : ℕ),\\n  CategoryTheory.Projective ((CategoryTheory.ProjectiveResolution.ofComplex Z).X n)\", \"doc\": \"In an abelian category with enough projective objects, for any object $Z$ and natural number $n$, the $n$-th term $(P_n)$ of the projective resolution constructed via $\\\\text{ProjectiveResolution.ofCom\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: module projectivity localization and cohomological support results do not state perfection of a pseudo-coherent complex; Frobenius PerfectRing and PerfectField are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|perfect.*stalk|perfect.*localiz|localiz.*perfect",
+   "results": "Executed by Q43; 1 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern module projectivity, t-structure bounds, exactness, or Frobenius perfection, not the stated perfection criterion for complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex with bounded below cohomology and perfect localizations at every prime is a bounded complex of finite projective modules",
+   "results": "Executed by Q43; 8 hits: Module.projective_of_localization_maximal, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, instFlatAtPrime, IsLocalizedModule.AtPrime, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex. ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern module projectivity, t-structure bounds, exactness, or Frobenius perfection, not the stated perfection criterion for complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"localization\"",
+   "results": "Executed by Q43; 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern module projectivity, t-structure bounds, exactness, or Frobenius perfection, not the stated perfection criterion for complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below pseudo coherent complex of modules is perfect if its localization at every prime ideal is perfect",
+   "results": "Executed by Q43; 8 hits: exact_of_isLocalized_maximal, exact_of_localized_maximal, DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern module projectivity, t-structure bounds, exactness, or Frobenius perfection, not the stated perfection criterion for complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local perfection at all prime localizations implies global perfection for a cohomologically bounded pseudo coherent complex over an arbitrary commutative ring",
+   "results": "Executed by Q43; 8 hits: PreTilt.instPerfectRing, BDeRham, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern module projectivity, t-structure bounds, exactness, or Frobenius perfection, not the stated perfection criterion for complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ring-relative-perfect-fibre-criterion",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Relative perfection from lower bounds on the complex and its fibres. Affine algebra input in the proof of Tag 0GFK, via perfect.tex Tag 0GEH: More on Algebra Tag 0GHJ. Local-to-global prerequisite of Tag 0GHJ, final paragraph: bounded-below pseudo-coherence and perfect stalks give perfection over the polynomial algebra.",
+   "via": [
+    "lem-sfb-ring-relative-perfect-fibre-criterion",
+    "lem-sfb-space-relative-perfect-fibre-criterion",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-pseudocoherent-stalkwise-perfect",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Assembled existing K-flat tensor computation, perfect scalar extension, bounded-below principal-neighborhood residue models, spectral quasi-compactness and finite principal-cover gluing. Wrote the residue comparison explicitly on finite-free representatives. No new nodes and no uniform primewise bound or Noetherian hypothesis.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the inherited relative-perfection route, specifically the final paragraph of Stacks 0GHJ used by the parent lem-sfb-ring-relative-perfect-fibre-criterion. The ancestor command returns None; the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic algebraic input computing residue scalar extensions on the finite-free model; this unit supplies no replacement for K-flat computation."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary-module derived-tensor computation with specified target coefficients, needed for the residue comparison."
+   },
+   {
+    "node": "lem-sc-perfect-pullback-perfect-residue",
+    "why": "Generic scalar-extension preservation of ring-perfect complexes for the residue map."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-ring-principal-cover-glue",
+    "why": "Generic algebraic finite principal-cover gluing, precisely the input cited in the final paragraph of 068W."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sc-perfect-pullback-perfect-residue",
+  "lem-weil-pbc-perfect-ring-principal-cover-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-7a58c8260",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-7a58c8260 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its 4 steps; there are no new nodes. Live is still unsplit and the statement is byte-identical to live, so the delivery is not superseded; there is no repair note. Checked against Stacks more-algebra 068W (lemma-check-perfect-stalks), its bounded-below final paragraph and its (2)=>(4) sentence, plus 0BYP, 066W, 066Y and Algebra 00E8. The statement matches 068W (2)=>(1) for bounded-below K over any ring, with no added uniformity or Noetherian hypothesis. Step 1: finite-free F is K-flat by 064K over B and over B_q, and the second-factor derived tensor gives K(x)^L kappa(q) = K_q (x)^L_{B_q} kappa(q). Step 2: 066W applied to B_q -> kappa(q) makes the residue fibre perfect, giving a lower bound a_q that may depend on q. Step 3: the residue-model node (0BYP, same unit) applies with c and a_q and gives f_q not in q with a bounded finite-free model of K(x)^L B_{f_q}. Step 4: quasi-compactness of Spec B gives a finite cover whose f_j generate the unit ideal, and 066Y glue gives K perfect. B=0 is covered by r=0. The derived scalar extensions in the cited nodes are all computed on K-flat models, so they agree. Duplicate check: 068V (lem-weil-pbc-pseudocoherent-maximal-fibre-perfect) needs a uniform amplitude, so it is not the same statement; no other duplicate found. Four generic tool_uses accepted: 064K K-flat, second-factor tensor, 066W, 066Y. The null from.node is inherited from base, not a fault of this delivery. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BoundedPseudoCoherentStalkwisePerfect",
+  "declaration": "DerivedCategory.isPerfectRingComplex_of_boundedBelow_pseudoCoherent_stalkwisePerfect",
+  "file": "lean/Sheaf/RingTheory/BoundedPseudoCoherentStalkwisePerfect.lean",
+  "statement": "theorem isPerfectRingComplex_of_boundedBelow_pseudoCoherent_stalkwisePerfect {B : Type u} [CommRing B] [HasDerivedCategory.{w} (ModuleCat.{u} B)] [∀ q : PrimeSpectrum B, HasDerivedCategory.{wq} (ModuleCat.{u} (Localization.AtPrime q.asIdeal))] (K : DerivedCategory (ModuleCat.{u} B)) (hK : IsPseudoCoherent K) (hbounded : ∃ c : ℤ, ∀ i : ℤ, i < c → IsZero ((homologyFunctor (ModuleCat.{u} B) i).obj K)) (hlocal : ∀ q : PrimeSpectrum B, IsPerfectRingComplex (((Classical.choose (exists_derivedTensor_second_factor_functor (algebraMap B (Localization.AtPrime q.asIdeal))).2).obj ((HomologicalComplex.single (ModuleCat.{u} (Localization.AtPrime q.asIdeal)) (ComplexShape.up ℤ) 0).obj (ModuleCat.of (Localization.AtPrime q.asIdeal) (Localization.AtPrime q.asIdeal)))).obj K)) : IsPerfectRingComplex K",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da7fef83f",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Lean matches Stacks 068W (2)=>(1) bounded-below: any CommRing B, IsPseudoCoherent K, ∃c cohomological lower bound, ∀ q : PrimeSpectrum, K-flat derived scalar extension to Localization.AtPrime via exists_derivedTensor_second_factor_functor at B_q[0], primewise IsPerfectRingComplex with bounds inside each q, conclusion IsPerfectRingComplex K; no extra hypotheses; B=0, K=0 and universes (u for ring and modules, w/wq free) OK. Theorem stmt_dep lem-pc-derived-tensor-second-factor-functor: the statement uses the functor T the theorem constructs (Classical.choose), as landed IsPerfect.scalarExtension does; no def node owns it -> PASS on that point. Only the item node changed (lean + that stmt_dep); statement verbatim; docstrings with 068W, blueprint id and 4 steps; no defs, sorry proof, lines <=100; no duplicate (068V needs uniform amplitude). Sole fault H11: delivered Second reading was a declared self-audit -> FIX fixes/lem-sfb-bounded-pseudocoherent-stalkwise-perfect.report.md (Worker report verbatim + independent clause-by-clause second reading). No Lean change, no compile needed."
+ }
+}

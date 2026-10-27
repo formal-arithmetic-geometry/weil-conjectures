@@ -1,0 +1,45 @@
+# Q52 — lem-sfb-sheaf-dg-acyclic-hull
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-sheaf-dg-acyclic-hull.json` (statement, now split, no Mathlib match); `citations.json` (one verbatim statement quotation for every step citation); this report. `searches.jsonl` is the actual search-command log. No new nodes and no Mathlib leaves.
+2. Attachments: none. Searching `lean/WeilConjectures/` for the exact blueprint tag, acyclic hull, dg hull, dg enhancement, Drinfeld and dg quotient found no declaration of the item. The unrelated determinant wedge quotient imports do not concern dg modules.
+3. WANTED: none. The required source is available in `literature/stacks-project/sdga.tex`.
+4. What needed work: the item had no proof. The source proves existence with the adjoint functor theorem and proves its unit/cokernel descriptions by a presentation argument. Rather than hiding either argument, this split constructs the same left adjoint explicitly on two copies of the underlying module sheaves. This is an agent-written proof and is recorded as such. It does not change the statement or its hypotheses. The source calls the map from N to FG(N) a counit; for G left adjoint to F it is the unit. Our proof uses the explicit inclusion and the natural Hom bijection, without relying on that terminology. No statement dispute is needed.
+5. Unfinished work: none in this one-level split. No Lean was written and no compiler, Lake or build tool was run. The inherited chapter and unit records were read but not modified.
+
+## Source and route
+
+I read Stacks Tags 0FSK (`lemma-dg-hull`), 0FSL (`lemma-dg-hull-acyclic`), including the presentation argument and its omitted final deduction, and the application in 0FSS. The source uses right modules. The proof here supplies the left-module formula directly, so no unproved equivalence with graded-opposite modules is needed. The underlying pair in degree n is N^n plus N^(n−1), with differential (x,y) ↦ (0,x). The action is a(x,y) = (ax − (−1)^p d(a)y, (−1)^p ay), for a homogeneous of degree p. In particular the action is not the naive componentwise action.
+
+I read the chapter record, the unit record, and the current `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md` and its direct-images proof. The latest symlink points to main-20261024. This is the existing acyclic-test prerequisite below that unit, not a replacement of its direct-image route. The inherited blueprint ancestor is null, as confirmed by `tools/blueprint_refs.py ancestor`; its precise inherited place and via chain are preserved. Searches of the whole blueprint for `dg hull`, `differential graded hull` and `acyclic hull` found no matching blueprint statement. No unit realization field is due because this item does not state the unit.
+
+## Mathlib search results
+
+All fresh searches used the required msearch command, and their actual summaries were appended to the item's existing searches. LeanFinder's first phrasing returned CM5b factorization and K-injective/K-projective declarations. The second phrasing returned ordinary differential-object/complex equivalences, tensor algebra grading, and bicomplex constructors. LeanSearch returned general functor-preservation lemmas and ordinary module forgetful functors. Loogle returned no hits for the dg adjunction pattern, and grep returned no dg hull / DifferentialGraded / DGModule hits. I read the relevant code in `CategoryTheory/Preadditive/Injective/Preserves.lean:49–66`, `CategoryTheory/DifferentialObject.lean:104–112`, and `Algebra/Homology/Factorizations/CM5b.lean:70–122`. None constructs a sheaf dg hull with the d(a) correction to the action. The general preservation theorem also assumes enough injectives and preservation of injectives, so it cannot replace the explicit construction or be used circularly in this injectivity-test prerequisite.
+
+## Not duplicates
+
+No new nodes are proposed. The whole-DAG tag search found 0FSK/0FSL only in this item and its parent `lem-sfb-sheaf-dg-injectivity-tests`. The parent needs an injectivity-test equivalence; this item constructs the hull used to obtain its test arrows. It is not an equivalent statement. Keyword searches also found unrelated filtered-module and dg-cone nodes, none stating this adjunction. The existing sheaf-module and dg-module definitions are reused.
+
+## Review by Q52
+
+I checked the explicit formulas against the source's claimed adjunction, acyclic values and preservation of monomorphisms, rather than taking the source's final omitted argument as a black box. All eight steps are elementary because each writes its construction, coordinate calculation, or cancellation argument in full. The longest step has fewer than 700 characters. There is no appeal to a general adjoint functor theorem, a resolution theorem, a presentation theorem, exactness of an unspecified forgetful functor, or preservation of kernels. Thus no new statement node is needed.
+
+Step 1 uses exactly the universe convention from `def-weil-size-convention` and the sectionwise module and restriction data of `def-weil-sheaf-of-modules-category`. The pair sheaves glue coordinate by coordinate. Only a finite pair is taken in each integer degree, so there is no size or infinite-product assumption.
+
+Step 2 uses the algebra multiplication and derivation identity in `def-sfb-sheaf-dg-module-localization`. I checked the degrees of both coordinates and expanded associativity for homogeneous a and b; the two correction terms match precisely the two terms in d(ab). The formula only uses associativity, not graded commutativity of A.
+
+Step 3 uses the dg module Leibniz identity and the definition of a degree-zero action-preserving chain map in that same node. Its two coordinates verify the Leibniz identity, and applying u to both coordinates proves functoriality. The equality involving u(d(a)y) requires only that u is graded A-linear, which is one of its actual hypotheses.
+
+Step 4 again uses that node's module Leibniz identity, now in M, to check A-linearity of the adjunction extension. I checked the cancellation of the two d(a)f(y) terms and verified that f(y) has degree n−1, so d_Mf(y) has the right degree. The check is valid for arbitrary unbounded graded N.
+
+Step 5 uses the definition of dg maps to commute t, and later v, with the differential. The decomposition (x,y) = (x,0) + D(y,0) proves uniqueness, and the two displayed composition identities prove naturality in both variables. It does not merely assert the adjunction after constructing a candidate object.
+
+Step 6 uses the underlying complex/cohomology convention of the dg-module node and the sectionwise module-sheaf definition. The kernel and image are identified by explicit inverse and lift maps. Thus the conclusion is equality of image and kernel sheaves, not an unjustified passage from section cohomology to sheaf cohomology. The splitting/lift exists on every open. I do not assert that (x,y) ↦ (y,0) is an A-linear dg contracting homotopy; only its role on underlying module sheaves is used.
+
+Step 7 uses only the module-sheaf definition and the graded action definition from those two cited nodes. I wrote the kernel sheaf directly and checked stability under the A action. For a categorical monomorphism u, its kernel inclusion j satisfies uj = u0, so j = 0. As its components are actual subset inclusions, every component kernel is zero. This establishes sectionwise injectivity from the stated categorical hypothesis, without assuming it as a hidden lemma.
+
+Step 8 uses the definition of dg maps from the dg-module node and the componentwise formula already established for G(u). Cancellation on sections gives equality of any two maps into its source, exactly the categorical monomorphism conclusion. No exactness assumption on G is used.
+
+For C4, I opened every cited node and copied the actual sentences used into citations.json. All citations are to definitions which really supply the objects and identities used; every additional assertion is proved in its step, rather than taken from an unquoted proof of another node. For C1, the coordinate action, adjunction, cohomology and kernel computations are all present, so no non-elementary fact is uncited. The cross-unit citations are definitions, hence do not replace the unit route and need no statement-tool declaration.
+
+I checked the B–E checklist: no new unsplit statement with a concealed proof, no new unnamed notion or duplicate, no invented Mathlib search, no false leaf claim, no new clause node replacing a proof, no circular dependency, and no missing site or coefficient hypothesis. In small cases N = 0 and the empty space give the zero hull; when d_A = 0 the signed action reduces to the expected action on the second summand; in characteristic two the signs reduce consistently; an ordinary algebra concentrated in degree zero gives the familiar adjacent-degree disk. Negative degrees, nonzero d_A, and noncommutative A are covered by the written formulas, with no boundedness or flatness assumption.

@@ -3,7 +3,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group D2 -/
 module
 
-public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
+public import Sheaf.Paper.FiniteDiscreteCoefficientEncodingData
 import Sheaf.Paper.FiniteDiscreteRestrictionEncoding
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Mathlib.Algebra.Category.ModuleCat.Biproducts

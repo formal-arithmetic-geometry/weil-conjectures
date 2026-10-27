@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-space-etale-conservative-geometric-points",
+ "kind": "statement",
+ "title": "Geometric stalks are conservative on the etale topos of an algebraic space",
+ "statement": "Work in [def-weil-size-convention]. Let $X$ be an algebraic space over a scheme $S$ [def-trf-algebraic-space]. For every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$, with $\\Omega$ algebraically closed, define $F_{\\bar x}$ as the colimit of the sets $F(U)$ over pointed etale scheme neighbourhoods $(U,\\bar u)$ of $\\bar x$. This defines a functor $\\operatorname{Sh}(X_{\\mathrm{et}})\\to\\operatorname{Sets}$ preserving finite limits and all small colimits. A map $F\\to G$ of sheaves of sets is a monomorphism, respectively an epimorphism, respectively an isomorphism, if and only if every geometric stalk map is injective, respectively surjective, respectively bijective. Consequently two sheaf maps agree if their maps on all geometric stalks agree. These assertions include the empty algebraic space, whose sheaf topos has just one object up to isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04K5 (theorem-exactness-stalks), with the geometric stalk/point construction of section-points; sites.tex, point stalk functors preserve finite limits and colimits."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-space-pointed-set-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\bar x$ and use [lem-sfb-space-pointed-etale-neighbourhoods-cofiltered]. Restrictions define $D_F:\\mathcal N_{\\bar x}^{op}\\to\\mathbf{Set}$; a sheaf map acts on each representative section, and hence on the colimit, giving the stalk functor. The cited neighbourhood lemma supplies a small filtered opposite index. For any finite diagram of sheaves, [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] computes its limit at $U$ as the limit of section sets. Applying [lem-weil-pbc-filtered-colimits-commute-finite-limits] therefore identifies the stalk of this limit with the limit of the stalks, including the empty diagram. This proves finite-limit preservation.",
+   "uses": [
+    "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 04JW (lemma-cofinal-etale), 04JY (definition-stalk), 04K1 (lemma-stalk-exact); sites.tex Tag 00W2 (lemma-limit-sheaf); categories.tex Tag 002W (lemma-directed-commutes)."
+   }
+  },
+  {
+   "text": "For a set $A$ put $L(U)=\\operatorname{Hom}_X(\\operatorname{Spec}\\Omega,U)$ and $P_A(U)=\\operatorname{Map}(L(U),A)$, with restriction by precomposition. This is a sheaf: for a covering $\\{U_i\\to U\\}$, every $l\\in L(U)$ lifts to an $l_i\\in L(U_i)$ by [lem-weil-pbc-etale-cover-geometric-point-lift], since the covering is a jointly surjective etale family of schemes. Matching functions glue by $a(l)=a_i(l_i)$; two choices give a lift to $U_i\\times_U U_j$ by [def-pc-fibre-product], so matching makes this independent of choices and unique. This verifies exactly the sheaf condition, even when $L(U)$ is empty. The universal property of the colimit gives inverse natural bijections $\\operatorname{Map}(F_{\\bar x},A)\\cong\\operatorname{Hom}(F,P_A)$: send $b$ to $s\\mapsto(l\\mapsto b([U,l,s]))$; send $\\alpha$ to $[U,l,s]\\mapsto\\alpha_U(s)(l)$. Naturality of $\\alpha$ says the latter respects each restriction relation. Thus the stalk functor is left adjoint to $A\\mapsto P_A$.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "spaces-properties.tex Tag 04K0 (lemma-stalk-gives-point); sites.tex Tag 00Y8 (lemma-point-pushforward-sheaf), with the adjunction and gluing written out."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to the adjunction in step 2. For every small diagram admitting a colimit in the sheaf category, its image cocone is a colimit cocone of sets. This proves preservation of all small colimits in the categorical sense, without substituting an objectwise presheaf colimit for the sheaf colimit.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1)."
+   }
+  },
+  {
+   "text": "If $a:F\\to G$ is mono, its diagonal $d:F\\to F\\times_G F$ is invertible: the two projections agree since their composites with $a$ agree, and either projection is inverse to $d$. By step 1, $d_{\\bar x}$ is the diagonal $F_{\\bar x}\\to F_{\\bar x}\\times_{G_{\\bar x}}F_{\\bar x}$, so it is bijective. The diagonal of a set map is bijective exactly when that map is injective. Thus every $a_{\\bar x}$ is injective. The required sheaf fibre product exists by the cited limits node.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "sites.tex Tag 00YL (lemma-exactness-stalks), proof of (1); Tag 00W2 (lemma-limit-sheaf)."
+   }
+  },
+  {
+   "text": "Conversely assume every $a_{\\bar x}$ injective. If $s,t\\in F(U)$ have $a(s)=a(t)$, choose for each $u\\in U$ an algebraic closure of $\\kappa(u)$ and its geometric point $\\bar u$ of $U$, using [lem-pc-algebraic-closure-exists-unique] and [def-weil-geometric-point]. Compose to $\\bar x$ on $X$. The germs of $s,t$ in $F_{\\bar x}$ are equal. By [lem-weil-pbc-filtered-colimit-sets-elementwise](3) and the cofiltered-neighbourhood node, they become equal on some pointed refinement $V\\to U$. This is etale by [lem-trf-space-chartwise-etale-permanence], since both $V,U$ are etale over $X$, and its image contains $u$. The family of all such refinements is a covering of $U$ by [def-trf-algebraic-space]; it is a set in the fixed small-site universe. Sheaf separatedness gives $s=t$. Thus all component maps of $a$ are injective, which makes $a$ mono: equality after $a$ of two natural transformations is equality at each section. For $U$ empty the empty covering gives the same separatedness argument.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K5 (theorem-exactness-stalks), injectivity proof expanded using the filtered-colimit description after Tag 04JY."
+   }
+  },
+  {
+   "text": "If $a$ is epi, [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] supplies local lifts of every $t\\in G(U)$. Given a stalk element, represent it by $(U,\\bar u,t)$ using [lem-weil-pbc-filtered-colimit-sets-elementwise] and the cofiltered-neighbourhood node. Choose a covering $\\{U_i\\to U\\}$ and sections lifting $t|_{U_i}$. By [lem-weil-pbc-etale-cover-geometric-point-lift], $\\bar u$ lifts to some $U_i$ with the same field. The corresponding lifted section represents a preimage of the original stalk element. Hence $a_{\\bar x}$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K5 (theorem-exactness-stalks), surjectivity; etale-cohomology.tex Tag 03PR (lemma-geometric-lift-to-cover); sites.tex Tag 00WN (lemma-mono-epi-sheaves)."
+   }
+  },
+  {
+   "text": "Assume instead all $a_{\\bar x}$ surjective, and take $t\\in G(U)$. For each $u\\in U$, choose $\\bar u$ using the algebraic-closure and geometric-point nodes as in step 5 and put $\\bar x=\\bar u\\to X$. Choose a preimage in $F_{\\bar x}$ of the germ of $t$. The elementwise filtered-colimit node represents it on a pointed neighbourhood $V$ and represents equality of its image with $t$ on a common pointed refinement $W\\to V,U$. Thus there is $s\\in F(W)$ with $a(s)=t|_W$. The map $W\\to U$ is etale by the permanence node and hits $u$. All such refinements form a covering by the small-site covering definition. For empty $U$ take the empty covering. This gives local surjectivity, hence $a$ is epi by the cited epi characterization.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K5 (theorem-exactness-stalks), surjectivity proof expanded using the filtered-colimit description after Tag 04JY."
+   }
+  },
+  {
+   "text": "An isomorphism gives bijective stalk maps by functoriality. Conversely bijective stalks give both sectionwise injectivity (step 5) and local surjectivity (step 7). For $t\\in G(U)$ choose local lifts $s_i\\in F(U_i)$. On $U_i\\times_U U_j$ their images are both the restriction of $t$, so sectionwise injectivity makes the lifts agree. The sheaf condition glues them uniquely to $s\\in F(U)$ with $a(s)=t$; this equality is checked on the covering by separatedness of $G$. Thus every component of $a$ is bijective. The component inverses are natural by applying the naturality identity of $a$ and cancelling its bijective components. Hence $a$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04K5 (theorem-exactness-stalks); sites.tex Tag 00WN (lemma-mono-epi-sheaves), bijectivity assertion expanded by gluing."
+   }
+  },
+  {
+   "text": "For maps $a,b:F\\to G$ agreeing on all stalks, let $e:E\\to F$ be their equalizer, which exists by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Step 1 identifies $e_{\\bar x}$ with the equalizer of the equal maps $a_{\\bar x},b_{\\bar x}$, hence a bijection. Step 8 makes $e$ invertible; from $ae=be$ obtain $a=b$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "sites.tex Tag 00YL (lemma-exactness-stalks), proof of (3); Tag 00W2 (lemma-limit-sheaf)."
+   }
+  },
+  {
+   "text": "If $X=\\varnothing$, every scheme $U\\to X$ is empty, and the empty family covers it by the jointly-surjective covering definition in [def-trf-algebraic-space]. The sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] forces $F(U)$ to be a singleton, since both products indexed by the empty covering are singletons. Every sheaf is therefore uniquely isomorphic to the singleton sheaf and every morphism is invertible; parallel morphisms agree. There are no geometric points, so all the stalkwise tests are vacuous, as required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Small etale site and Tag 04K5 (theorem-exactness-stalks); sites.tex Tag 00VR (definition-sheaf), empty covering."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-geometric-point",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 04JW, 04JY, 04K0, 04K1 and 04K5; adjunction expanded from sites.tex Tag 00Y8, and detection proved directly by germ representatives and sheaf gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric point stalk functors on the small etale site of an algebraic space preserve finite limits and jointly detect isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space has enough geometric points in its small etale topos",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"Type (u + 1)\", \"doc\": \"A topological space equipped with a sheaf of commutative rings such that every stalk is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Point\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*enough.*point|geometric.*conservative",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves on an algebraic space is injective or surjective if and only if every geometric stalk map is",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [inst_2 : CategoryTheory.Limits.HasColimits C] [CategoryTheory.Limits.HasLimits C]\\n  [CategoryT\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, if a morphism $f: X \\\\to Y$ has an injective underlying continuous map (base map) and for every point $x \\\\in X$ the induced stalk map $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.mono_of_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.SurjectiveOnStalks f],\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → CategoryTheory.Mono f\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] {f : X ⟶ Y} [CompactSpace ↥X],\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n      Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (Algebrai\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that the underlying topological space of $X$ is compact. If the continuous map underlying $f$ is open and injective, and the induced ring homomorphis\"}\n  {\"name\": \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ and a presheaf $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$ is injective on all stalks $\\\\mathcal{F}_x \\\\to \\\\mathcal{G}_x$ for every $\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"For sheaves $F$ and $G$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, if a morphism $f : F \\\\to G$ has bijective stalk maps $\\\\text{stalk}(f_x) : \\\\text{stalk}(F_x) \\\\to \\\\text{stalk}\"}\n  {\"name\": \"TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"Let $F$ and $G$ be sheaves on a topological space $X$ with values in a category $\\\\mathcal{C}$. For an open subset $U \\\\subseteq X$, if a morphism $f: F \\\\to G$ induces bijective maps on stalks $(\\\\text{s\"}\n  {\"name\": \"TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"Let $F$ be a sheaf and $G$ a presheaf on a topological space $X$ with values in a category $\\\\mathcal{C}$. For a morphism $f : F \\\\to G$ and an open set $U \\\\subseteq X$, if for every point $x \\\\in U$ the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern schemes as locally ringed spaces, scheme etale over-categories, ordinary slice functors, or unrelated localizations; none states this ringed-etale-topos assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The small etale topos of an algebraic space has enough geometric points",
+   "results": "msearch: 8 hits; AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.mem_smallGrothendieckTopology, AlgebraicGeometry.Scheme.smallGrothendieckTopologyOfLE.congr_simp, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallGrothendieckTopologyOfLE_eq_toGrothendieck_smallPretopology",
+   "date": "2026-10-23",
+   "verdict": "No match for the algebraic-space statement: scheme or topological-space assertions do not cover algebraic spaces; generic site points do not construct the geometric points or establish their conservativity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks of sheaves of sets on an algebraic space preserve finite limits and all colimits and detect monomorphisms epimorphisms and isomorphisms",
+   "results": "msearch: 8 hits; AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi, AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono, AlgebraicGeometry.SheafedSpace.hom_stalk_ext, AlgebraicGeometry.SheafedSpace.instPreservesColimitsOfShapeTopCatForgetOfSmallOfHasLimitsOfShapeOpposite, AlgebraicGeometry.SheafedSpace.instPreservesColimitsTopCatForgetOfHasLimits, TopCat.Presheaf.stalkFunctor_preserves_mono, AlgebraicGeometry.SheafedSpace.instHasColimitsOfHasLimits, AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ",
+   "date": "2026-10-23",
+   "verdict": "No match for the algebraic-space statement: scheme or topological-space assertions do not cover algebraic spaces; generic site points do not construct the geometric points or establish their conservativity."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|geometric.*conservative|etale.*enough.*point",
+   "results": "msearch: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "No match for the algebraic-space statement: scheme or topological-space assertions do not cover algebraic spaces; generic site points do not construct the geometric points or establish their conservativity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point",
+   "results": "msearch: 12 hits; CategoryTheory.GrothendieckTopology.Point, CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFiber, CategoryTheory.GrothendieckTopology.Point.initiallySmall, CategoryTheory.GrothendieckTopology.Point.isCofiltered, CategoryTheory.GrothendieckTopology.Point.uniqueFiberObj, CategoryTheory.GrothendieckTopology.Point.isTerminalFiberObj, CategoryTheory.GrothendieckTopology.Point.presheafFiber",
+   "date": "2026-10-23",
+   "verdict": "No match for the algebraic-space statement: scheme or topological-space assertions do not cover algebraic spaces; generic site points do not construct the geometric points or establish their conservativity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves on the etale site of an algebraic space is mono epi or iso exactly when its maps on geometric fibers are injective surjective or bijective",
+   "results": "msearch: 8 hits; AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso, AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono, AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.SurjectiveOnStalks.mono_of_injective, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instMono",
+   "date": "2026-10-23",
+   "verdict": "No match for the algebraic-space statement: scheme or topological-space assertions do not cover algebraic spaces; generic site points do not construct the geometric points or establish their conservativity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tags 04KH and 04KJ, stalk detection of local ring and local-morphism conditions before reconstruction.",
+   "via": [
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-conservative-geometric-points",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Repaired concurrent dependency reversal: the broader geometric-points node now cites this item, so removed it entirely from this proof. Added only cofilteredness of pointed scheme neighbourhoods over an algebraic space (04JW); proved finite-limit preservation, the explicit skyscraper adjunction, colimit preservation and stalk detection by local representatives and gluing. All other non-elementary inputs reuse existing nodes.",
+  "blueprint": "Inherited from.place: supporting geometric-stalk input for Tags 04KH/04KJ before reconstruction, along det-thm-sf-ctf-stability-direct-images (3). Read latest sk-thm-sf-ctf-stability and its direct-images proof: the latest text no longer expands this alteration/moduli subroute. This split supplies the inherited local prerequisite without changing chapter or unit routes. blueprint_refs.py ancestor returns None, so the inherited from.node=null and via chain are retained. Searches for 04K5 and conservative geometric found no imported blueprint duplicate. The new cofilteredness lemma realizes the 04JW input to the inherited geometric-stalk route; the larger geometric-points node is now a user, never a dependency.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale permanence: a pointed refinement between two scheme objects etale over X is etale; the unit has no independent permanence result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-0174d4534",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-0174d4534 (reviewer sub-agent of L); spot-checked: I read the item's statement (unchanged from base) and all 10 steps, plus the statement of every node they cite. I checked them against Stacks spaces-properties.tex: 04JW (l.3101), 04JY (l.3247), 04K1 (lemma-stalk-exact(4)) and 04K5 (l.3523). Steps: (1) finite-limit preservation via the new node's filtered index, 00W2 and 002W; (2) skyscraper sheaf and adjunction, where the 03PR lift applies because the coverings of X_et are jointly surjective étale scheme families; (3) colimits via 0038; (4) mono implies injective stalks via the diagonal; (5) and (7) germ refinements are étale by the permanence node (scheme source and scheme target) and cover U pointwise; (6) epi to stalk surjection via 00WN and 03PR; (8) gluing gives iso; (9) equalizer; (10) empty space. All correct, including empty U and empty X. The uses lists and proof_deps are consistent. New node: statement-only and self-contained, true by Stacks 04JW and its proof. The diagonal is representable, so U1 x_X U2 is a scheme; the equalizer is étale and nonempty; nonemptiness holds because x̄ lifts to an étale chart (proof of 04K0). It restates no clause of the parent. Duplicate checks: the scheme-base lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered does not cover an algebraic-space base, and rg -L found no other duplicate. Batch-5: lem-trf-space-chartwise-etale-permanence is generic étale permanence (03FR-03FV, 041F); it is not the trace formula, Poincaré duality or a step of their proofs, and the tool_use for it is accepted. def-trf-algebraic-space is a general definition. Both are accepted. No SGA source, no re-split note, unit and chapter unchanged. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeometricStalksConservative",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleGeometricStalks_conservative",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricStalksConservative.lean",
+  "statement": "theorem etaleGeometricStalks_conservative {S : Scheme.{u}} (X : AlgebraicSpace S) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), PreservesFiniteLimits (X.pointedSetStalk.{u, w} x) ∧ PreservesColimitsOfSize.{max (u + 1) w, max (u + 1) w} (X.pointedSetStalk.{u, w} x)) ∧ (∀ (F G : Sheaf X.etaleTopology (Type (max (u + 1) w))) (α : F ⟶ G), (Mono α ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), Function.Injective ((X.pointedSetStalk x).map α)) ∧ (Epi α ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), Function.Surjective ((X.pointedSetStalk x).map α)) ∧ (IsIso α ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), Function.Bijective ((X.pointedSetStalk x).map α))) ∧ (∀ (F G : Sheaf X.etaleTopology (Type (max (u + 1) w))) (α β : F ⟶ G), (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), (X.pointedSetStalk x).map α = (X.pointedSetStalk x).map β) → α = β) ∧ ((∀ U : X.EtaleSite, IsEmpty ((X.etaleForget).obj U)) → ∀ F G : Sheaf X.etaleTopology (Type (max (u + 1) w)), Nonempty (F ≅ G))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of aea8c34a8f27: imports the independently owned AlgebraicSpaceSetStalk definition module and cites the landed def-sfb-space-pointed-set-stalk. Maintenance commit 6e7012a34c11da3d54605a9b5eeade06e600de0e has landed the extraction and downstream consumer adaptation separately. The abelian-neighbourhood dependency enters through the definition node. No downstream theorem dependency, mathematical statement change or theorem signature change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0637b9d4",
+  "group": "NV",
+  "result": "pass",
+  "note": "Node diff vs live: only lean added and stmt_dep def-sfb-space-pointed-set-stalk (landed owner of pointedSetStalk); statement/proof unchanged. Checked every clause: X : AlgebraicSpace S with no extra hypotheses; geometric points quantify over all IsAlgClosed Ω : Type u, b and x; pointedSetStalk is the real colimit over PointedEtale (étale charts with lift); PreservesFiniteLimits and PreservesColimitsOfSize.{max(u+1) w} in the sheaf category; Mono/Epi/IsIso iff Injective/Surjective/Bijective in both directions; equality detection; explicit empty-space clause (all charts empty, equivalent to X empty) gives all sheaves isomorphic. Universes explicit (coefficients max(u+1) w, no equality forced); true for all u, w. No duplicate: downstream geometricStalk_mono_epi_iso_iff has only the 3 tests and cites this item; no downstream import or cycle. One theorem, one sorry, docstrings with source and blueprint and all 10 proof steps, lean.statement verbatim, report sections present. No compile run (no file changed); worker dry-run e54ecb5ea9f compiled."
+ }
+}

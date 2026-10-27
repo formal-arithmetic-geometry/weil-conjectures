@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-coefficient-scalar-tensor-representative-left-path",
+ "kind": "lemma",
+ "title": "The localized left scalar tensor representative path",
+ "statement": "For internal complexes P,Q and normalized coefficient comparison data, the scalar complex equation only on P tensor Q identifies the prefactored left representative path with the derived internal scalar tensorator followed by the tensor of the factor scalar complex comparisons, factor localization comparisons, and factor ordinary scalar comparisons, and then the section tensor localization map. The factor scalar equations and htensor are not used in this step.",
+ "stmt_deps": [
+  "def-sfb-coefficient-scalar-tensor-representative-basic-data",
+  "def-sfb-coefficient-scalar-tensor-representative-hypotheses"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4, localization comparison and tensor representative compatibility."
+ },
+ "proof": [
+  {
+   "text": "Use the proved scalar total path, then apply the internal derived tensor counit square. Normalize the S-side localization tensor map and apply naturality of tensorComparison and qTensor to obtain the displayed tensor path. Neither factor scalar equation nor htensor is used.",
+   "uses": [
+    "lem-sfb-coefficient-scalar-tensor-representative-total-path",
+    "lem-sfb-coefficient-tensor-localization",
+    "lem-sfb-coefficient-scalar-tensor-internal-complex",
+    "def-sfb-coefficient-scalar-tensor-representative-hypotheses"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-coefficient-scalar-tensor-representative-total-path",
+  "lem-sfb-coefficient-tensor-localization",
+  "lem-sfb-coefficient-scalar-tensor-internal-complex",
+  "def-sfb-coefficient-scalar-tensor-representative-hypotheses"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4, localization comparison and tensor representative compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized natural scalar extension comparison under an equivalence commutes with tensor products on pure tensors and hence on direct sum total cochain complexes",
+   "results": "Eight hits, including HomologicalComplex.ιTensorObj and elementary ModuleCat scalar extension formulas. No theorem for these internal-section comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "Use coproduct inclusions and the existing scalar normalization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapBifunctorComparison",
+   "results": "Zero hits; the identifier is in the adopted source extension rather than the Mathlib index.",
+   "date": "2026-10-27",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*tensor.*(ordinary|total)|mapBifunctorComparison_naturality",
+   "results": "Remote Mathlib search has zero hits. Local adopted source provides mapBifunctorComparison and summand formulas; geometric SectionOplaxTotalComparison supplies a model for the coproduct argument.",
+   "date": "2026-10-27",
+   "verdict": "The scalar ordinary and total squares need explicit proofs from the prescribed normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRepresentativeInternal",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-scalar-tensor-representative-pasting",
+   "place": "the first half of the categorical pasting argument"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarTensorRepresentativeLeftPath",
+  "file": "lean/Sheaf/Paper/CoefficientScalarTensorRepresentativeLeftPath.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensorRepresentative_leftPath",
+  "statement": "theorem coefficientScalarTensorRepresentative_leftPath\n    (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z)\n    (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)\n    (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :\n    let := internalScalarMonoidal a Z\n    let := d.m\n    let := d.b.ordinaryAdjunction.isLeftAdjoint\n    let F := Mod.extendScalars (coefficientMap a Z)\n    let ER := (ModuleRingedComparison.equivalence R Z).functor\n    let ES := (ModuleRingedComparison.equivalence S Z).functor\n    let ED := (ModuleRingedComparison.derivedEquivalence R Z).functor\n    let ESD := (ModuleRingedComparison.derivedEquivalence S Z).functor\n    let B := d.b.extension\n    let BD := d.b.derived\n    let Fc := F.mapHomologicalComplex (.up ℤ)\n    let ERc := ER.mapHomologicalComplex (.up ℤ)\n    let ESc := ES.mapHomologicalComplex (.up ℤ)\n    let Bc := B.mapHomologicalComplex (.up ℤ)\n    let EP := ERc.obj P\n    let EQ := ERc.obj Q\n    let o : Fc ⋙ ESc ≅ ERc ⋙ Bc := NatIso.mapHomologicalComplex d.o (.up ℤ)\n    let ℓR : DerivedCategory.Q ⋙ ED ≅ ERc ⋙ DerivedCategory.Q :=\n      ER.mapDerivedCategoryFactors\n    let ℓS : DerivedCategory.Q ⋙ ESD ≅ ESc ⋙ DerivedCategory.Q :=\n      ES.mapDerivedCategoryFactors\n    let τR := ModuleRingedComparison.tensorComparison R Z\n    let τS := ModuleRingedComparison.tensorComparison S Z\n    let tensorR := ModuleRingedComparison.tensor R Z\n    let tensorS := ModuleRingedComparison.tensor S Z\n    let qR (K L : CochainComplex (ModuleRingedComparison.modules R Z) ℤ) :\n        tensorR.obj (DerivedCategory.Q.obj K, DerivedCategory.Q.obj L) ⟶\n          DerivedCategory.Q.obj (K ⊗ L) := (ModuleRingedComparison.qTensor R Z).app (K, L)\n    let qS (K L : CochainComplex (ModuleRingedComparison.modules S Z) ℤ) :\n        tensorS.obj (DerivedCategory.Q.obj K, DerivedCategory.Q.obj L) ⟶\n          DerivedCategory.Q.obj (K ⊗ L) := (ModuleRingedComparison.qTensor S Z).app (K, L)\n    let c := fun K ↦ coefficientInternalScalarComplex a Z K\n    let β := fun K ↦ SheafOfModules.scalarPairComplexComparison B d.b.extension_additive\n      BD d.b.counit K\n    let δb : Bc.obj (EP ⊗ EQ) ⟶ Bc.obj EP ⊗ Bc.obj EQ :=\n      coefficientSectionScalarTotal a Z d.b d.m EP EQ\n    (ESD.map (c (P ⊗ Q)) ≫ ℓS.hom.app (Fc.obj (P ⊗ Q)) ≫\n        DerivedCategory.Q.map (o.hom.app (P ⊗ Q)) =\n      d.p.hom.app (DerivedCategory.Q.obj (P ⊗ Q)) ≫\n        BD.map (ℓR.hom.app (P ⊗ Q)) ≫ β (ERc.obj (P ⊗ Q))) →\n    d.p.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) ≫\n      BD.map (τR.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n      BD.map (tensorR.map (Prod.mkHom (ℓR.hom.app P) (ℓR.hom.app Q))) ≫\n      BD.map (qR EP EQ) ≫ β (EP ⊗ EQ) ≫ DerivedCategory.Q.map δb =\n    ESD.map (((internalScalarTensorComparison a Z).app (DerivedCategory.Q.obj P)).app\n        (DerivedCategory.Q.obj Q)) ≫\n      τS.hom.app ((internalScalarExtension a Z).obj (DerivedCategory.Q.obj P),\n        (internalScalarExtension a Z).obj (DerivedCategory.Q.obj Q)) ≫\n      tensorS.map (Prod.mkHom (ESD.map (c P)) (ESD.map (c Q))) ≫\n      tensorS.map (Prod.mkHom (ℓS.hom.app (Fc.obj P)) (ℓS.hom.app (Fc.obj Q))) ≫\n      tensorS.map (Prod.mkHom (DerivedCategory.Q.map (o.hom.app P))\n        (DerivedCategory.Q.map (o.hom.app Q))) ≫ qS (Bc.obj EP) (Bc.obj EQ)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

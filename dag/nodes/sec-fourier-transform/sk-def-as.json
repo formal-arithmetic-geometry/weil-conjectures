@@ -45,48 +45,87 @@
  "chapter": "sec-fourier-transform",
  "unit": "sk-def-as",
  "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.artinSchreierSheaf"
+   ]
+  },
   "slopmaster2": {
    "state": "closed",
    "decls": [
     {
-     "name": "AlgebraicGeometry.Etale.artinSchreierTranslation_comp_artinSchreierMap",
+     "name": "AlgebraicGeometry.Etale.artinSchreierSheaf",
      "module": "WeilConjectures.FourierTransform.ArtinSchreier",
      "lines": [
-      188,
-      191
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.artinSchreierTranslationAction",
-     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-     "lines": [
-      358,
-      368
+      437,
+      443
      ],
      "kind": "def",
      "sorry": false
     },
     {
-     "name": "AlgebraicGeometry.Etale.artinSchreierTranslationAction_zero",
-     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "name": "AlgebraicGeometry.AffineSpace.isFinite_artinSchreierMap",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier",
      "lines": [
-      370,
-      373
+      112,
+      125
      ],
      "kind": "theorem",
      "sorry": false
     },
     {
-     "name": "AlgebraicGeometry.Etale.artinSchreierTranslationAction_add",
-     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "name": "AlgebraicGeometry.AffineSpace.etale_artinSchreierMap",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier",
      "lines": [
-      375,
-      382
+      127,
+      140
      ],
      "kind": "theorem",
      "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.AffineSpace.isIso_artinSchreierTorsorMap",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier",
+     "lines": [
+      230,
+      316
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.artinSchreierSheafZMod",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      506,
+      516
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.artinSchreierSheafOf",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      464,
+      472
+     ],
+     "kind": "def",
+     "sorry": false,
+     "partial": "`sk-def-as`; blueprint: `def-fd-artin-schreier-sheaf`"
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.artinSchreierSheafZModPullbackIso",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      534,
+      548
+     ],
+     "kind": "def",
+     "sorry": false,
+     "partial": "`sk-def-as`; blueprint: `def-fd-kernel`"
     }
    ],
    "missing": [],
@@ -125,5 +164,15 @@
   "group": "Q27",
   "result": "pass",
   "note": "Re-delivery of 155fabd7 H2 RETURN. Lean byte-identical to the returned head (sha 1e672ee9/038cbf4d); item statement = live; only stmt_deps changed. Theorem stmt_deps replaced by definition owners: new def-fd-artin-schreier-function-cover existing:true on unchanged ArtinSchreierTraceCoverMap (artinSchreierFunctionCover/Projection/Root/BaseConstants/FibreMap; statement matches each body, no primality/etaleness, deps def-sbc-affine-space/def-pc-fibre-product/def-weil-scheme-over-base) and def-a1-common-stage-coefficient-unit (pullbackTensorCommonUnit); added def-weil-derived-pullback-tensor-hom (commonStageDerivedTensor) and def-weil-weil-sheaf-complex (sfWeilPrimeInvertible). Trace-cover theorem kept in proof_deps. check_existing and check_new_node clean against side-live; item still S2-open live; no other owner of the cover decls. Maths as read in the prior review, no substance fault. Advisory: centralizer ≃* LocallyConstant clause not pinned to translation; second-reading section is self-check; artinSchreierMap has no DAG owner. No compile (Lean unchanged, no fix)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $k$ be a finite field with $q$ elements, $\\Lambda$ a commutative ring\nin which $q$ is invertible, and $\\Psi:(k,+)\\to\\Lambda^\\times$ an additive\ncharacter. The Artin–Schreier map $\\mathrm{AS}_q:\\Aone_k\\to\\Aone_k$,\n$x\\mapsto x^q-x$, satisfies $\\mathrm{AS}_q\\circ\\sigma_a=\\mathrm{AS}_q$\nfor the translations $\\sigma_a:x\\mapsto x+a$ ($a\\in k$), which therefore\nact on $(\\mathrm{AS}_q)_*\\Lambda$. The *Artin–Schreier sheaf*\n$\\mathcal L_\\Psi$ on $\\Aone_k$ is the $\\Psi$-isotypic component\n\n$$\n\\mathcal L_\\Psi:=\\operatorname{im}\\bigl(e_\\Psi\\mid(\\mathrm{AS}_q)_*\\Lambda\\bigr),\\qquad\ne_\\Psi=\\frac1q\\sum_{a\\in k}\\Psi(-a)\\,\\sigma_a ,\n$$\n\non which each $\\sigma_a$ acts by $\\Psi(a)$. For a $k$-scheme $X$ and\n$f\\in\\Gamma(X,\\mathcal O_X)$, viewed as $f:X\\to\\Aone_k$, put\n$\\mathcal L_{\\Psi,f}:=f^*\\mathcal L_\\Psi$. For the character $\\psi$ of\n[sk-def-char] write $\\mathcal L_{\\psi,f}$, $\\mathcal L_{\\psi(af)}:=\\mathcal L_{\\psi,af}$\nfor $a\\in k_0$, and on $\\Aone$, $\\mathcal L_\\psi=\\mathcal L_{\\psi,x}$ and\n$\\mathcal L_{\\psi(ax)}=\\mathcal L_{\\psi,ax}$.\n\nFor an admissible condensed coefficient ring $\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$\n([sk-def-sf-setting]) the same idempotent is applied on the pro-étale site, to\n$(\\mathrm{AS}_q)_*\\Lambda_{\\Aone_k}$ with\n$\\Lambda_{\\Aone_k}=p^*_{\\Aone_k}\\Lambda$ ([sk-def-sfb-pulled-back-coefficients]);\n$\\mathcal L_\\Psi$ is then a $\\Lambda_{\\Aone_k}$-module with a finite constant\nlocal model of rank one ([sk-def-sfb-constructible]). This is the\nArtin–Schreier sheaf for $\\Lambda=\\mathcal O_E,E,\\Qlb$; for finite $\\Lambda$ it\nis the pro-étale incarnation of the étale sheaf above.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

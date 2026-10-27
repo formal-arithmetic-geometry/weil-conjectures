@@ -1,0 +1,165 @@
+{
+ "id": "lem-sp-left-koszul-roos-exchange",
+ "kind": "statement",
+ "title": "Signed double Roos exchange in the canonical left tensor model",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $T$. Use the coefficient category, left-Koszul completion $C$, unit $u$, strict Roos functor $\\mathsf R$ and four row/column coordinates of [def-sp-power-torsion-limit-models]. Let $\\eta:\\mathrm{id}\\to C$ have components $u_P$, and let $Q$ be any strict tower of unbounded complexes. Write $\\mathrm{col}(Q)_j=\\mathsf R_n(L_j\\otimes Q_n)$. There is an isomorphism $\\beta:\\mathsf R_n C(Q_n)\\cong\\mathsf R_j\\mathrm{col}(Q)_j$ which multiplies the $(p,q)$ coordinate, after interchanging the indices, by $(-1)^{pq}$. After applying $\\mathsf R_n(\\eta)$ and then $\\beta$, the four coordinates are the outer unshifted coordinate followed by the Koszul inclusion, the outer shifted coordinate followed by that inclusion, zero, zero. There is also an isomorphism of strict $j$-towers $\\gamma:(L_j\\otimes\\mathsf R_nQ_n)_j\\cong\\mathrm{col}(Q)$ such that $\\mathsf R_n(\\eta)\\,\\beta\\,\\mathsf R_j(\\gamma^{-1})=u_{\\mathsf R_nQ_n}$. This assertion assumes neither torsion nor completeness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "stmt_deps": [
+  "def-sp-power-torsion-limit-models",
+  "def-sp-completed-uniformizer-section",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "proof": [
+  {
+   "text": "Apply signed_double_roos_tensor_exchange to the completed coefficient sheaf, using exact countable products. Identify its rearranged Roos functor on tower complexes with the shifted-cone functor of the models; identify its right tensor tower with the left tower by signed symmetry. The two projections of the Roos cone are preserved under the first identification, and tensor symmetry changes only the internal tensor degrees.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sp-signed-double-roos-tensor-exchange",
+    "def-sp-power-torsion-limit-models",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  },
+  {
+   "text": "The generic interchange has signs 1,1,1,-1 on the four Roos coordinates. Conjugating by tensor symmetry on both sides leaves these four signs unchanged. Its augmentation clause gives the four specified coordinates, since the canonical unit has zero inner shifted coordinate. Its finite two-term Koszul tensor exchange gives gamma; its strict augmentation identity then gives exactly R(eta) beta R(gamma inverse)=u on the Roos complex.",
+   "uses": [
+    "lem-sp-signed-double-roos-tensor-exchange",
+    "def-sp-power-torsion-limit-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-sp-power-torsion-limit-models",
+  "lem-sp-signed-double-roos-tensor-exchange",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of unbounded complexes using Koszul complexes and homotopy inverse limits",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "HomologicalComplex.instHasLimit",
+     "DerivedCategory",
+     "HomologicalComplexUpToQuasiIso",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed interchange of two Roos homotopy inverse limits and finite Koszul tensor exchange preserving augmentation maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.rightUnitor'_inv_comm",
+     "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+     "AlgebraicTopology.DoldKan.N₂Γ₂_inv_app_f_f",
+     "CategoryTheory.Idempotents.DoldKan.hη",
+     "AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "Rep.standardComplex.εToSingle₀_comp_eq",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete|[Kk]oszul|[Rr]oos",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+     "Mathlib/RingTheory/Regular/RegularSequence.lean",
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerTorsionSheafLimitComplete",
+  "date": "2026-10-25",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7.",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerTorsionKoszulRoosExchange",
+  "file": "lean/Sheaf/Paper/PowerTorsionKoszulRoosExchange.lean",
+  "declaration": "WeilConjectures.PowerTorsionLimit.left_koszul_roos_exchange",
+  "statement": "theorem left_koszul_roos_exchange\n    (η : 𝟭 (CochainComplex (integralTowerModules l E T) ℤ) ⟶ completion l E T)\n    (hη : ∀ P, η.app P = unit l E T P)\n    (Q : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E T) ℤ) :\n    ∃ (β : (roos l E T).obj (Q ⋙ completion l E T) ≅\n        (roos l E T).obj (columns l E T Q)),\n        (∀ (p q : Bool) (k : ℤ) (n j : ℕ),\n          β.hom.f k ≫ columnCoordinate l E T Q p q k n j =\n            if p && q then -rowCoordinate l E T Q p q k n j\n            else rowCoordinate l E T Q p q k n j) ∧\n        (∀ (k : ℤ) (n j : ℕ),\n          (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫\n              columnCoordinate l E T Q false false k n j =\n            coordinateZero l E T Q k n ≫\n              (koszulRepresentativeAugmentation\n                (completedIntegralCommRingSheafUnrestricted l E T)\n                (Q.obj (op n)) (uniformizer l E T) j).f k ∧\n          (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫\n              columnCoordinate l E T Q true false k n j =\n            coordinateOne l E T Q k n ≫\n              (koszulRepresentativeAugmentation\n                (completedIntegralCommRingSheafUnrestricted l E T)\n                (Q.obj (op n)) (uniformizer l E T) j).f (k - 1) ∧\n          (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫\n              columnCoordinate l E T Q false true k n j = 0 ∧\n          (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫\n              columnCoordinate l E T Q true true k n j = 0) ∧\n        ∃ γ : (tensorTower l E T).obj ((roos l E T).obj Q) ≅ columns l E T Q,\n          (roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η) ≫\n              β.hom ≫ (roos l E T).map γ.inv =\n            unit l E T ((roos l E T).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; moved Models defs diffed verbatim vs old item module; 3 new sorry statements read against nodes and the inherited item statement (sign (-1)^{pq} recomputed, nilpotent s^r=0 argument, K-flat span); #print axioms on scratch compile of all 5 modules (sorryAx only via the new steps)"
+ }
+}

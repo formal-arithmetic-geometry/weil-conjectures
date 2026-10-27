@@ -1,0 +1,169 @@
+{
+ "id": "def-sfb-cotangent-transitivity-triangle-data",
+ "kind": "definition",
+ "title": "Standard cotangent transitivity triangle data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix commutative rings in a common universe, derived categories of their modules [def-weil-abstract-derived-category], and a standard polynomial cotangent coherence datum $C$ [def-trf-cotangent-resolution-data]. For a ring map $h:R\\to S$, define $K_C(h)$ to be the alternating differential complex of its recorded standard resolution, with terms $S\\otimes_{P_n}\\Omega^1_{P_n/R}$ in degree $-n$. A commutative ring square induces the recorded semilinear chain map on these complexes. For composable ring maps $A\\xrightarrow{f}P\\xrightarrow{g}B$, let $F_C(f,g)=B\\otimes_P K_C(f)$, with tensor product [def-weil-pbc-module-tensor-product] taken term by term. Tensor extension on complexes is equipped with its ordinary tensor/restriction adjunction. Define $u:QF_C(f,g)\\to L_{B/A}$ as the image under $Q$ of the tensor-adjoint transpose of the standard map for the square $(1_A,g):f\\to gf$. Define $v:L_{B/A}\\to L_{B/P}$ as the standard map for $(f,1_B):gf\\to g$, followed by the canonical identity-restriction identifications. For any commutative diagram of triples with maps $a:A\\to A'$, $p:P\\to P'$, $b:B\\to B'$, define the semilinear map $F_C(f,g)\\to\\operatorname{Res}_b F_C(f',g')$ by tensor adjunction from the standard map $K_C(f)\\to\\operatorname{Res}_p K_C(f')$, the tensor-adjunction unit for $g'$, and the restriction-composition identifications; on tensor generators it sends $b_0\\otimes x$ to $b(b_0)\\otimes p_*(x)$. Its derived map is obtained by applying $Q$ and the canonical exact-restriction comparison. Given any boundary $\\delta:L_{B/P}\\to QF_C(f,g)[1]$, define the transitivity triangle data to be $QF_C(f,g)\\xrightarrow{u}L_{B/A}\\xrightarrow{v}L_{B/P}\\xrightarrow{\\delta}QF_C(f,g)[1]$. This defines a triangle for a supplied boundary; it does not assert that such a boundary makes it distinguished.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PN, 08QL and 08QX; section-triangle, equation-triangle; standard polynomial differential models of the two functoriality arrows and their tensor extension."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "transitivityFirstComplex|transitivityTriangle|standardComplex",
+   "results": {
+    "t": "2026-10-24T11:31:55Z",
+    "tool": "grep",
+    "query": "transitivityFirstComplex|transitivityTriangle|standardComplex",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No full Mathlib match: hits are naive cotangent modules and their maps, or no hits. The exact real constructions already exist in Sheaf.RingTheory.CotangentTransitivityTriangle; register them without copying."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Standard polynomial cotangent complexes and the first two maps of the transitivity triangle for composable ring maps",
+   "results": {
+    "t": "2026-10-24T11:31:56Z",
+    "tool": "leansearch",
+    "query": "Standard polynomial cotangent complexes and the first two maps of the transitivity triangle for composable ring maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.CotangentSpace.map_comp",
+     "Algebra.Extension.Cotangent.map_comp",
+     "Algebra.Extension.H1Cotangent.map_comp",
+     "Algebra.Extension.CotangentSpace.map_cotangentComplex",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Generators.Cotangent.surjective_map_ofComp",
+     "Algebra.Extension.cotangentComplex"
+    ],
+    "digest": "205719ac59525d56"
+   },
+   "date": "2026-10-24",
+   "verdict": "No full Mathlib match: hits are naive cotangent modules and their maps, or no hits. The exact real constructions already exist in Sheaf.RingTheory.CotangentTransitivityTriangle; register them without copying."
+  },
+  {
+   "tool": "loogle",
+   "query": "transitivityTriangle, cotangentComplex",
+   "results": {
+    "t": "2026-10-24T11:31:56Z",
+    "tool": "loogle",
+    "query": "transitivityTriangle, cotangentComplex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'transitivityTriangle'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No full Mathlib match: hits are naive cotangent modules and their maps, or no hits. The exact real constructions already exist in Sheaf.RingTheory.CotangentTransitivityTriangle; register them without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n transitivityFirstComplex|transitivityTriangle|tensorComplexAdj lean/WeilConjectures lean/Sheaf; rg -l recorded declarations dag/nodes; tools/blueprint_refs.py search cotangent transitivity",
+   "results": "No matching declarations in WeilConjectures. Sheaf/RingTheory/CotangentTransitivityTriangle.lean defines all nine constructions, standardComplex through transitivityTriangle; Sheaf/Topology/SheafCotangentComparison.lean uses them. DAG search finds only lem-trf-cotangent-transitivity-triangle, whose lean record owns its theorem, not these definitions. No definition node owns the data. Blueprint search: 0 blueprint nodes match cotangent transitivity.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing project definitions under a new definition node; do not copy them or cite the existence theorem as their definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-algebra-small-extension-control",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: the first arrow of Tag 0DZF: obstruction vanishing and adjustment of a chosen lift, for one small extension; standard complexes, tensor first term and first two arrows in the transitivity triangle used to express the obstruction connecting-image equation.",
+   "via": [
+    "lem-sfb-flat-algebra-small-extension-control",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentTransitivityTriangle",
+  "declaration": "Algebra.CotangentResolution.transitivityTriangle",
+  "declarations": [
+   "Algebra.CotangentResolution.standardComplex",
+   "Algebra.CotangentResolution.standardComplexMap",
+   "Algebra.CotangentResolution.tensorComplexAdj",
+   "Algebra.CotangentResolution.transitivityFirstComplex",
+   "Algebra.CotangentResolution.transitivityFirstMap",
+   "Algebra.CotangentResolution.transitivitySecondMap",
+   "Algebra.CotangentResolution.transitivityFirstComplexMap",
+   "Algebra.CotangentResolution.transitivityFirstBaseChange",
+   "Algebra.CotangentResolution.transitivityTriangle"
+  ],
+  "statement": "def transitivityTriangle (C : Coherence.{u}) {A P B : CommRingCat.{u}}\n    (f : A ⟶ P) (g : P ⟶ B)\n    (δ : cotangentComplex C (Arrow.mk g) ⟶\n      (DerivedCategory.Q.obj (transitivityFirstComplex C f g))⟦(1 : ℤ)⟧)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Registers the nine already constructed definitions standardComplex through transitivityTriangle, not exists_transitivity_triangles. The boundary is an input; distinguishedness and naturality belong to the separate proof-dependency theorem. Added to repair H2 of returned delivery e299ddc95614."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d309419cf",
+  "group": "Q73",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d309419cf",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery after H2 return e299ddc95614. Delta = item stmt_deps (theorem nodes lem-trf-cotangent-transitivity-triangle and lem-trf-cotangent-flat-base-change replaced by new def-sfb-cotangent-transitivity-triangle-data) + CotangentFlatBaseChange import made non-public; statement/proof/proof_deps/lean record unchanged; FlatAlgebraLiftingData module and def node unchanged. New def node: existing:true on the nine real defs standardComplex…transitivityTriangle (read in full, no choose), lean.statement verbatim, text matches u/v/first-complex map/arbitrary boundary, source 08PN/08QL/08QX; double listing with the theorem node follows the def-trf-cotangent-resolution-data precedent. Math reread: Base/Lift/Isomorphic/Classes/T match 08SP/08S7; cocycle (red b·ε(c))⊗i verified as the derivation tδ0−tδ1; connecting-image equation pins o via 08QQ adjunction bijection; groupMap existence/uniqueness by 08SF; localized lifts exist in universe u and are unique up to marked iso; edge cases I=0, B=0, 0∈S, S={1}, any char covered. Live def-sfb-marked-flat-algebra-deformations (Q22) is the absolute Art_k groupoid, not the relative lift notion: no H4. Sorry only in theorems; docstrings present. Advisories (∃δ boundary ambiguity, unpinned action sign) carried over, non-blocking. No compile (no change)."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "def-weil-pbc-finite-perfect-adic-tower-data",
+ "kind": "definition",
+ "title": "Data of normalized algebraic adic towers and their local realization",
+ "statement": "For an adic coefficient datum d on A [def-weil-pbc-adic-coefficient-datum], record quotient derived objects E_n, consecutive arrows to scalar restriction, left adjoints to level and consecutive exact restriction, invertibility of the consecutive adjoint transposes, and perfectness of E_0 [def-pc-perfect-ring-complex]. Define exact constant realization with the coefficient universe lift, its derived functor, completed constant realization followed by slice restriction [def-weil-pbc-ringed-derived-restriction], the actual restricted strict tower, and a local tower with an isomorphism of these whole diagrams. Also define the model diagram of a supplied algebraic tower and composition of a pro-etale object of an etale chart with its chart morphism. These are the unchanged data previously declared with the extraction theorem; no existence assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AW and 09C6, normalized algebraic quotient system and its constant realization; Tags 0940 and 0941, levelwise strict diagram."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AW and 09C6, normalized algebraic quotient system and its constant realization; Tags 0940 and 0941, levelwise strict diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized tower of locally constant perfect complexes over finite quotient rings admits compatible pro-etale local trivializations by an algebraic stalk tower",
+   "results": "8 hits, all etale algebra definitions or elementary etale morphism results, with no normalized derived tower or stalk extraction theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Use the project finite-ring and normalized Isom APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Sieve\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adicTower|compatible.*trivial",
+   "results": "6 hits in CategoryTheory.Shift.Adjunction and manifold local frames, unrelated to normalized algebraic quotient towers.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded locally constant perfect complex over a finite ring has finite locally constant sheaf of derived isomorphisms with a fixed geometric stalk complex",
+   "results": "8 hits: condensed locally constant functors, generic constant sheaf invariance and counit criteria; no finite-ring derived Isom-sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools only; the project finite-ring derived mapping-sheaf theorems are needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicTowerExtraction",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tags 09AW and 09C6, normalized algebraic quotient system and its constant realization; Tags 0940 and 0941, levelwise strict diagram.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicTowerData",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicTowerData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FinitePerfectAdicAlgebraTower",
+  "statement": "structure FinitePerfectAdicAlgebraTower {A : Type t} [CommRing A]\n    (d : AdicCoefficientDatum A)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicAlgebraDerived",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicConstant",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicConstant_exact",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicDerivedConstant",
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicAlgebraTower",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicLocalRealization",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicRestrictedTower",
+   "AlgebraicGeometry.Scheme.FinitePerfectAdicLocalTower",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicModelDiagram",
+   "AlgebraicGeometry.Scheme.finitePerfectAdicChartObject"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3fd",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261027T050617-L-244429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3fd",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261027T050617-L-244429",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerData vs clone item lines 1-133 (verbatim move); new sorry statements vs Stacks 09C6/09BV and completedAdicReduction (K-flat, normalized); node stmt_deps vs declarations used; 3 direct importers compiled OK against delivered modules"
+ }
+}

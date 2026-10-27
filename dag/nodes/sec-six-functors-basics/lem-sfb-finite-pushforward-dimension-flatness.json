@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-finite-pushforward-dimension-flatness",
+ "kind": "statement",
+ "title": "Finite direct image preserves dimension-filtered base flatness",
+ "statement": "Let $S,W,Z$ be schemes [def-pc-scheme], let $W\\to S$ be locally of finite type [def-weil-finite-type-morphism], let $h:Z\\to W$ be finite [def-weil-finite-integral-morphism], and let $G$ be a finite-type quasi-coherent $\\mathcal O_Z$-module [pqf-def-coherent]. Put $E=h_*G$, with $E(V)=G(h^{-1}V)$ and scalars restricted along $h^\\sharp$. Then $E$ is quasi-coherent of finite type, and for every scheme $T\\to S$ there is a canonical isomorphism $E_T\\simeq h_{T,*}G_T$, where subscripts denote fibre products and tensor pullback [def-pc-fibre-product], [def-pc-module-pullback]. For every $w\\in W_T$ with image $t\\in T$, $(E_T)_w$ is flat over $\\mathcal O_{T,t}$ if and only if $(G_T)_z$ is flat over $\\mathcal O_{T,t}$ for every $z\\in h_T^{-1}(w)$; an empty fibre imposes no condition. For every $n\\geq0$, it follows that $G_T$ is flat at every $z\\in Z_T$ with $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(z)\\geq n$ if and only if $E_T$ is flat at every $w\\in W_T$ with $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(w)\\geq n$. Flatness, residue fields and transcendence degree are [def-pc-scheme-module-flat-over], [def-weil-residue-field], [def-kun-transcendence-degree]. The same equivalence holds with these pointwise conditions tested on all etale scheme charts [def-weil-etale-morphism], or on one surjective etale scheme atlas, of $Z_T$ and $W_T$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05UF (lemma-flat-dimension-n-representable), second main paragraph, comparison through i_1 and pi_1; affine base-change input: coherent.tex Tag 02KG (lemma-affine-base-change); stalk input: algebra.tex Tag 00HT (lemma-flat-localization); chart criterion: spaces-flat.tex Tag 0CWS (lemma-pre-flat-dimension-n)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Finite $h$ is affine by definition. Thus affine base change gives that $E=h_*G$ is quasi-coherent and identifies its pullback along $W_T\\to W$ canonically with $h_{T,*}G_T$ for every $T\\to S$. To check finite type, work on $V=\\operatorname{Spec}A\\subset W$ with $h^{-1}V=\\operatorname{Spec}B$. The affine finite-type criterion makes $M=\\Gamma(h^{-1}V,G)$ a finite $B$-module. Choose $A$-module generators $b_i$ of $B$ and $B$-module generators $m_j$ of $M$. Every element of $M$ is an $A$-linear combination of the finitely many $b_im_j$. Since $E(V)=M$, the same affine criterion proves that $E$ is of finite type.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KG, lemma-affine-base-change; properties.tex Tag 01PB, lemma-finite-type-module"
+   }
+  },
+  {
+   "text": "Fix $T\\to S$ and $w\\in W_T$ over $t\\in T$. Finite base change makes $h_T$ finite; tensor pullback preserves quasi-coherence and finite type, so the previous step applies on $T$. Put $R=\\mathcal O_{T,t}$. Choose an affine neighbourhood $V=\\operatorname{Spec}A$ of $w$ and write $h_T^{-1}V=\\operatorname{Spec}B$, $p\\subset A$ for $w$, and $M=\\Gamma(h_T^{-1}V,G_T)$. Put $C=(A\\setminus p)^{-1}B$ and $N=(A\\setminus p)^{-1}M$. The affine module-stalk presentation identifies $(E_T)_w$ with $A_p\\otimes_A M=N$, compatibly with the action of $R\\to A_p$. For a point $z$ above $w$, corresponding to $q\\subset B$, it identifies $(G_T)_z$ with $M_q$, compatibly with the same base action. Here the tensor-to-fraction identification sends $(a/s)\\otimes m$ to $am/s$ and $m/s$ to $(1/s)\\otimes m$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UF, lemma-flat-dimension-n-representable, finite-direct-image paragraph; schemes.tex Tags 01HV and 01IA for stalks"
+   }
+  },
+  {
+   "text": "The localized algebra $C$ is finite over the local ring $A_p$: the fractions $b_i/1$ of the finite generators of $B$ still generate, by clearing the common scalar denominator. Base change of a ring localization identifies $C$ with $B\\otimes_A A_p$. Every maximal ideal $Q$ of $C$ therefore contracts to $pA_p$. The localization-prime statement says that $q=Q\\cap B$ is prime, disjoint from the image of $A\\setminus p$, and $Q=qC$. The preimage of $Q$ in $A$ is $p$, since $Q\\cap A_p=pA_p$. Thus $q$ is precisely a point $z\\in h_T^{-1}(w)$. This argument needs neither a surjective map $h_T$ nor a nonempty fibre.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-localization-quotient-by-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization; the maximal-contraction input of Tag 00GU, lemma-integral-going-up, specialized to finite algebras over A_p"
+   }
+  },
+  {
+   "text": "For any $q\\subset B$ over $p$, all scalar denominators from $A\\setminus p$ avoid $q$. Localizing $N$ further at the image of $B\\setminus q$ gives $M_q$: the maps are $(m/s)/(b/1)\\mapsto m/(sb)$ and $m/b\\mapsto(m/1)/(b/1)$. The equivalence relation on fractions verifies these formulas are inverse and $R$-linear. If $Q$ is maximal in $C$ and $q=Q\\cap B$, every element of $C\\setminus Q$ is $b/s$ with $b\\notin q$; inverting these is the same as inverting $b/1$, since $s/1$ is already a unit. Consequently $N_Q=M_q$ as $R$-modules as well.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CM, definition-localization-module (Tag 07JZ), fraction equivalence relation; explicit two-stage localization calculation"
+   }
+  },
+  {
+   "text": "If $(E_T)_w=N$ is $R$-flat, localizing this $C$-module at the image of $B\\setminus q$ preserves $R$-flatness. Step 4 identifies the result with $(G_T)_z=M_q$ for every point over $w$. Conversely, if all these stalks are $R$-flat, Step 3 assigns such a point to every maximal $Q\\subset C$, and Step 4 identifies $N_Q$ with its stalk. The maximal-localization flatness test gives that $N$ is $R$-flat. This also proves the empty-fibre case: there are then no maximal ideals of $C$ by Step 3, so the same test applies with a vacuous hypothesis. Thus the claimed stalk equivalence holds for every $w$.",
+   "uses": [
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-sfb-base-flatness-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization; Mathlib/RingTheory/Flat/Localization.lean:66-73"
+   }
+  },
+  {
+   "text": "Finite $h_T$ is integral. Its affine residue-field extensions $\\kappa(w)\\to\\kappa(z)$ are therefore algebraic. The transcendence-degree tower formula and its algebraicity criterion give $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(z)=\\operatorname{trdeg}_{\\kappa(t)}\\kappa(w)$. Suppose $E_T$ satisfies the threshold condition and take $z$ above $w$ with degree at least $n$: the degree equality and Step 5 give flatness at $z$. Conversely, for $w$ of degree at least $n$, every point above it has the same degree and is flat by the condition on $G_T$; Step 5 gives flatness at $w$, including when that fibre is empty. This proves the threshold equivalence for every $n\\geq0$.",
+   "uses": [
+    "pqf-lem-finite-integral-lft",
+    "lem-a1-integral-residue-extension-algebraic",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UF, finite-direct-image paragraph; groupoids.tex Tag 03BL, final paragraph; fields.tex Tag 030H, lemma-transcendence-degree-tower"
+   }
+  },
+  {
+   "text": "Finally $W_T\\to T$ is locally of finite type by base change. So is $Z_T\\to T$: on any affine base chart, choose a finite-type affine chart $\\operatorname{Spec}A$ of $W_T$; its inverse image has coordinate algebra $B$ finite as an $A$-module. A finite set of module generators of $B$, together with a finite set of algebra generators of $A$ over the base chart, generates $B$ as a base algebra. The pullbacks of $E$ and $G$ are finite-type quasi-coherent modules by Step 2. Apply the dimension-flatness chart criterion separately to $(W_T,E_T)$ and $(Z_T,G_T)$: on each, the intrinsic pointwise condition is equivalent to testing all etale scheme charts and also to testing any one surjective etale scheme atlas. Substituting these two equivalences into Step 6 gives exactly the last clause. The identity chart shows directly that no pointwise condition is lost for schemes.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-space-dimension-flatness-base-change-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CWS, lemma-pre-flat-dimension-n, conditions (1)-(3); flat.tex lemma-pre-flat-dimension-n"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-module-localization",
+  "lem-a1-integral-residue-extension-algebraic",
+  "lem-kun-transcendence-degree-tower",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "lem-sfb-base-flatness-maximal-localizations",
+  "lem-sfb-space-dimension-flatness-base-change-sheaf",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-quotient-by-prime",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-finite-integral-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05UF, lemma-flat-dimension-n-representable, finite-direct-image paragraph, expanded using Tags 02KG, 00HT and 0CWS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes a quasi coherent module is flat over a base in dimensions at least n if and only if its direct image is, after every base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat morphism and localized-module results do not give finite direct-image stalk comparison with fibre transcendence thresholds and arbitrary base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphism pushforward preserves and reflects relative module flatness in a fixed range of fibre transcendence degrees",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"Module.Flat.of_shrink\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} M] [Flat R (Shrink.{v'} M)] : Flat R M\", \"doc\": \"Given a commutative semiring $ R $ and a small $ R $-module $ M $, if the shrink of $ M $ (a type in bijection with $ M $) is flat over $ R $, then $ M $ itself is flat over $ R $. This follows from t\"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat morphism and localized-module results do not give finite direct-image stalk comparison with fibre transcendence thresholds and arbitrary base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"stalk\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Module.rankAtStalk_eq_of_le_of_finite_of_flat\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} (M : Type uM) [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] [Module.Finite R M] {p q : PrimeSpectrum R} (hpq : p ≤ q) : Module.rankAtStalk M p = Module.rankAtStalk M q\", \"doc\": \"\"}\n  {\"name\": \"Module.rankAtStalk_eq_of_le_of_finite_of_flat'\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} (M : Type uM) [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] [Module.Finite R M] {p q : Ideal R} [hp : p.IsPrime] [hq : q.IsPrime] (hpq : p ≤ q) : Module.rankAtStalk M { asIdeal := p, isPrime := hp } = Module.rankAtStalk M { asIdeal := q, isPrime := hq }\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (H : ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) : AlgebraicGeometry.Flat f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X) : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"\"}\n  {\"name\": \"Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant\", \"module\": \"Mathlib.RingTheory.Flat.LocallyFree\", \"type\": \" {R : Type u_1} [CommRing R] (M : Type u_2) [AddCommGroup M] [Module R M] [Module.Finite R M] [Module.Flat R M] (p : Ideal R) [p.IsPrime] (h : ∀ (m : Ideal R) [inst : m.IsMaximal], Module.rankAtStalk M { asIdeal := m, isPrime := ⋯ } = Module.rankAtStalk M { asIdeal := p, isPrime := ⋯ }) : ∃ a ∉ p, M\", \"doc\": \"Let `M` be a finite flat `R`-module, `p` be a prime ideal of `R`. If `rankAtStalk M` is\\nconstant, then there exists `a ∉ p` such that `M` is free after localization away from `a`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat morphism and localized-module results do not give finite direct-image stalk comparison with fibre transcendence thresholds and arbitrary base change"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pushforward.*flat|pushforward.*flat|flat.*pushforward",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat morphism and localized-module results do not give finite direct-image stalk comparison with fibre transcendence thresholds and arbitrary base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a module over the base tested at all points above a point of a finite algebra map with algebraic residue field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"RingHom.flat_algebraMap_iff\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).Flat ↔ Module.Flat R S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, the canonical algebra homomorphism from $ R $ to $ S $ is flat if and only if $ S $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat morphism and localized-module results do not give finite direct-image stalk comparison with fibre transcendence thresholds and arbitrary base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite direct image of a quasi coherent module preserves relative flatness at points of each fibre dimension after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"(R : Type u) → (M : Type v) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property that $ M $ is a faithfully flat module over the commutative ring $ R $, meaning it is flat and the functor $ -\\\\otimes_R M $ is faithful.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat scheme morphisms or general algebraic flatness; none states finite quasi-coherent direct-image stalk equivalence with dimension thresholds and etale chart tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism pushforward of a quasi coherent module is flat over the base if and only if the module is flat at every point above it",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat scheme morphisms or general algebraic flatness; none states finite quasi-coherent direct-image stalk equivalence with dimension thresholds and etale chart tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat scheme morphisms or general algebraic flatness; none states finite quasi-coherent direct-image stalk equivalence with dimension thresholds and etale chart tests."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pushforward.*flat|pushforward.*flat|flat.*pushforward",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"line\": \"105\", \"text\": \"/-- If `B` is a faithfully flat `A`-algebra, the preimage of the pushforward of any\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat scheme morphisms or general algebraic flatness; none states finite quasi-coherent direct-image stalk equivalence with dimension thresholds and etale chart tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for finite scheme maps preserves module flatness in dimensions at least n",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern flat scheme morphisms or general algebraic flatness; none states finite quasi-coherent direct-image stalk equivalence with dimension thresholds and etale chart tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-complete-devissage-dimension-flattening",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata.",
+   "via": [
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-pushforward-dimension-flatness",
+  "worker": "stage1",
+  "summary": "Expanded finite-direct-image preservation into affine finite generation/base change, explicit localized stalk coordinates, maximal contraction, fraction comparison, flatness reflection, transcendence thresholds, and etale chart tests. Reused existing geometric statements and added one generic Mathlib maximal-localization flatness leaf. No statement change.",
+  "blueprint": "The inherited ancestry has no imported blueprint node (blueprint_refs.py ancestor returns None). This realizes the compactification/direct-image prerequisite in the latest sec-six-functors-basics/sk-thm-sf-ctf-stability proof, proper direct image paragraph; the concrete subargument is the i_1/pi_1 comparison in Stacks Tag 05UF. The inherited from.place already specifies that entire prerequisite chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic Localizing a flat module over an algebra input used for the affine finite-direct-image calculation; the unit has no substitute for this algebraic/geometric tool. This supports the inherited prerequisite route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+    "why": "Generic Affine quasi-coherent stalks are tensor products of sections with the stalk ring input used for the affine finite-direct-image calculation; the unit has no substitute for this algebraic/geometric tool. This supports the inherited prerequisite route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic Affine base change: pushforward of a quasi-coherent module along an affine morphism commutes with arbitrary base change input used for the affine finite-direct-image calculation; the unit has no substitute for this algebraic/geometric tool. This supports the inherited prerequisite route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Generic The pullback of a finite type module is of finite type input used for the affine finite-direct-image calculation; the unit has no substitute for this algebraic/geometric tool. This supports the inherited prerequisite route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic The pullback of a quasi-coherent module is quasi-coherent input used for the affine finite-direct-image calculation; the unit has no substitute for this algebraic/geometric tool. This supports the inherited prerequisite route rather than replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC) input used for the affine finite-direct-image calculation; the unit has no substitute for this algebraic/geometric tool. This supports the inherited prerequisite route rather than replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-91f42ad3b",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-91f42ad3b (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new node and every cited statement in full. Steps 1-2: affine base change (lem-weil-pbc-affine-pushforward-base-change), the affine finite-type criterion and the stalk presentation give (E_T)_w=A_p⊗M=N and (G_T)_z=M_q, with the O_{T,t}-action through the stalk maps. Step 3: C is finite over A_p, so maximal Q contract to pA_p. The localization-prime node is used in its stated direction and q lies over p. Step 4: the fraction comparison N_Q=M_q is correct. Step 5: localization preserves flatness in one direction; the new maximal-localization leaf gives the converse; an empty fibre gives C=0. Step 6: finite ⇒ integral ⇒ algebraic residue extensions, so the trdeg tower gives equal degrees and the threshold equivalence. Step 7: locally finite type of W_T and Z_T, plus the one-atlas clause of lem-sfb-space-dimension-flatness-base-change-sheaf on the identity atlas. New leaf: checked against Mathlib Flat/Localization.lean:53-73 (Module.flat_of_isLocalized_maximal), exact. It is not a duplicate: lem-pc-affine-sections-flat-over-base tests all primes over A_p. Stacks 05UF lines 7848-7862 read; tags 02KG/00HT/0CWS exist; no SGA; no cycle. Batch-5: the sheaf node's closure reaches only general algebraic-space, descent and Proj trf nodes, with no trace-formula or Poincaré-duality steps, and the parent already cites it, so accepted. tool_uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardDimensionFlatness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePushforward_dimension_flatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardDimensionFlatness.lean",
+  "statement": "theorem finitePushforward_dimension_flatness {S W Z : Scheme.{u}} (f : W ⟶ S) [LocallyOfFiniteType f] (h : Z ⟶ W) [IsFinite h] (G : Z.Modules) (hG : G.IsQuasiCoherentFiniteType) : ((pushforward h).obj G).IsQuasiCoherentFiniteType ∧ ∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso (moduleBaseChangeMap h (pullback.snd h (pullback.fst f g)) (pullback.fst f g) (pullback.fst h (pullback.fst f g)) (pullback.condition (f := h) (g := pullback.fst f g)) G) ∧ (∀ w : (Limits.pullback (C := Scheme.{u}) f g), @Module.Flat (T.presheaf.stalk ((pullback.snd f g) w)) ((RingedSpace.moduleStalkFunctor (Limits.pullback (C := Scheme.{u}) f g).toRingedSpace w).obj ((tensorPullback (pullback.fst f g)).obj ((pushforward h).obj G))) _ _ (Module.compHom _ ((pullback.snd f g).stalkMap w).hom) ↔ ∀ z : (Limits.pullback (C := Scheme.{u}) h (pullback.fst f g)), (pullback.snd h (pullback.fst f g)) z = w → @Module.Flat (T.presheaf.stalk (((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g)) z)) ((RingedSpace.moduleStalkFunctor (Limits.pullback (C := Scheme.{u}) h (pullback.fst f g)).toRingedSpace z).obj ((tensorPullback (pullback.fst h (pullback.fst f g))).obj G)) _ _ (Module.compHom _ (((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g)).stalkMap z).hom)) ∧ (∀ n : ℕ, ((∀ z : (Limits.pullback (C := Scheme.{u}) h (pullback.fst f g)), (n : Cardinal.{u}) ≤ @Algebra.trdeg (T.residueField (((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g)) z)) ((Limits.pullback h (pullback.fst f g)).residueField z) _ _ (((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g)).residueFieldMap z).hom.toAlgebra → @Module.Flat (T.presheaf.stalk (((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g)) z)) ((RingedSpace.moduleStalkFunctor (Limits.pullback (C := Scheme.{u}) h (pullback.fst f g)).toRingedSpace z).obj ((tensorPullback (pullback.fst h (pullback.fst f g))).obj G)) _ _ (Module.compHom _ (((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g)).stalkMap z).hom)) ↔ (∀ w : (Limits.pullback (C := Scheme.{u}) f g), (n : Cardinal.{u}) ≤ @Algebra.trdeg (T.residueField ((pullback.snd f g) w)) ((Limits.pullback (C := Scheme.{u}) f g).residueField w) _ _ ((pullback.snd f g).residueFieldMap w).hom.toAlgebra → @Module.Flat (T.presheaf.stalk ((pullback.snd f g) w)) ((RingedSpace.moduleStalkFunctor (Limits.pullback (C := Scheme.{u}) f g).toRingedSpace w).obj ((tensorPullback (pullback.fst f g)).obj ((pushforward h).obj G))) _ _ (Module.compHom _ ((pullback.snd f g).stalkMap w).hom))) ∧ ((∀ (U : Scheme.{u}) (a : U ⟶ (Limits.pullback (C := Scheme.{u}) h (pullback.fst f g))), Etale a → (∀ x : U, (n : Cardinal.{u}) ≤ @Algebra.trdeg (T.residueField ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))) x)) (U.residueField x) _ _ ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))).residueFieldMap x).hom.toAlgebra → @Module.Flat (T.presheaf.stalk ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))) x)) ((RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj ((tensorPullback a).obj ((tensorPullback (pullback.fst h (pullback.fst f g))).obj G))) _ _ (Module.compHom _ ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))).stalkMap x).hom))) ↔ (∀ (V : Scheme.{u}) (b : V ⟶ (Limits.pullback (C := Scheme.{u}) f g)), Etale b → (∀ y : V, (n : Cardinal.{u}) ≤ @Algebra.trdeg (T.residueField ((b ≫ (pullback.snd f g)) y)) (V.residueField y) _ _ ((b ≫ (pullback.snd f g)).residueFieldMap y).hom.toAlgebra → @Module.Flat (T.presheaf.stalk ((b ≫ (pullback.snd f g)) y)) ((RingedSpace.moduleStalkFunctor V.toRingedSpace y).obj ((tensorPullback b).obj ((tensorPullback (pullback.fst f g)).obj ((pushforward h).obj G)))) _ _ (Module.compHom _ ((b ≫ (pullback.snd f g)).stalkMap y).hom)))) ∧ (∀ (U V : Scheme.{u}) (a : U ⟶ (Limits.pullback (C := Scheme.{u}) h (pullback.fst f g))) (b : V ⟶ (Limits.pullback (C := Scheme.{u}) f g)), Etale a → Surjective a → Etale b → Surjective b → ((∀ x : U, (n : Cardinal.{u}) ≤ @Algebra.trdeg (T.residueField ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))) x)) (U.residueField x) _ _ ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))).residueFieldMap x).hom.toAlgebra → @Module.Flat (T.presheaf.stalk ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))) x)) ((RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj ((tensorPullback a).obj ((tensorPullback (pullback.fst h (pullback.fst f g))).obj G))) _ _ (Module.compHom _ ((a ≫ ((pullback.snd h (pullback.fst f g)) ≫ (pullback.snd f g))).stalkMap x).hom)) ↔ (∀ y : V, (n : Cardinal.{u}) ≤ @Algebra.trdeg (T.residueField ((b ≫ (pullback.snd f g)) y)) (V.residueField y) _ _ ((b ≫ (pullback.snd f g)).residueFieldMap y).hom.toAlgebra → @Module.Flat (T.presheaf.stalk ((b ≫ (pullback.snd f g)) y)) ((RingedSpace.moduleStalkFunctor V.toRingedSpace y).obj ((tensorPullback b).obj ((tensorPullback (pullback.fst f g)).obj ((pushforward h).obj G)))) _ _ (Module.compHom _ ((b ≫ (pullback.snd f g)).stalkMap y).hom)))))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-808bd9e80",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: E=h_*G is quasi-coherent of finite type; IsIso of moduleBaseChangeMap on the iterated fibre product Z×_W(W×_S T) with the tensor pullbacks; stalkwise flatness over T.stalk via Module.compHom along stalkMap, with the fibre quantified as ∀ z, b z = w → … (an empty fibre is vacuous); the threshold uses ∀ n:ℕ and (n:Cardinal) ≤ Algebra.trdeg with residueFieldMap; the all-étale-charts iff and the any-surjective-étale-atlas iff are both present. Hypotheses are exactly LocallyOfFiniteType, IsFinite and IsQuasiCoherentFiniteType; everything is in universe u. Truth checked: N_Q = M_q over the maximal ideals of the finite A_p-algebra C; finite ⇒ algebraic residue extensions ⇒ equal trdeg; étale charts are faithfully flat on stalks and keep trdeg. lean.statement is verbatim; only `lean` changed; docstrings carry the source tags, the blueprint id and all 7 steps; proof is sorry; no definitions; inline pointwise flatness is not an H4 duplicate (IsFlatOver is a global predicate, moduleFlatAt is theorem-owned, dimensionFlatCondition is for algebraic spaces). Advisories: (1) moduleBaseChangeMap and moduleStalkFunctor are used but their owners def-sfb-module-base-change-map and def-pc-module-stalk-functor are not in stmt_deps; (2) the report calls moduleBaseChangeMap section-normalized, but upstream it uses Classical.choose adjunctions; IsIso does not depend on that choice, so the clause is canonical; (3) the second reading was written by the same worker. No recompile, per instruction; worker reports clean compiles in 16.1 s and 8.6 s."
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Strict augmentation argument, order 1248; The finite strict completed Koszul tensor augmentation",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The finite strict completed Koszul tensor augmentation",
+ "statement": "For the actual completed coefficient datum and fixed reconstruction models [def-weil-pbc-koszul-reconstruction-models], let a finite list a generate I. The strict Koszul total tensor tower functor, transposed to complexes of towers, admits a unique natural transformation beta to the ordinary strict quotient tensor tower. For every complex P and positive quotient level n+1 its composite with the actual Koszul tensor unit equals the ordinary quotient tensor unit. Its component vanishes on each total summand with nonzero exterior degree. There is no K-flatness condition and no derived-limit assertion. The source tower and all total summand injections are explicit constructions from the fixed models.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proof of lemma-naive-completion; More on Algebra, sequence-Koszul-complexes (Tag 091N)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "new-y2-completed-koszul-tensor-quotient-augmentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the strict existence component to obtain a natural transformation satisfying the unit and nonzero-summand equations.",
+   "uses": [
+    "new-y2-completed-koszul-tensor-quotient-augmentation-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the strict uniqueness component to the obtained transformation and any other transformation satisfying the same equations.",
+   "uses": [
+    "new-y2-completed-koszul-tensor-quotient-augmentation-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-y2-completed-koszul-tensor-quotient-augmentation-exists",
+  "new-y2-completed-koszul-tensor-quotient-augmentation-unique"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, strict coefficient augmentation and its normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural chain map from Koszul tower Roos fibre to quotient tower Roos fibre with quasi-isomorphism and augmentation unit",
+   "results": "8 hits about normalized Moore complexes and general chain factorizations; no completed Koszul tower augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\"",
+   "results": "12 hits giving mapping-cocone definitions and cochain constructors, not the finite completed augmentation or its cone vanishing.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "proZero.*[Rr]oos|[Rr]oos.*proZero",
+   "results": "Search service returned 0 hits. Local search found the AdicResidue coefficient augmentation and tensor cone comparison, whose coefficient-slice and dual Koszul models differ from the assigned exterior completed models.",
+   "date": "2026-10-27",
+   "verdict": "no exact model match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed Koszul tensor quotient augmentation with strict transitions and pro zero mapping cones",
+   "results": "8 hits, including ChainComplex.augment and mappingCone.map, with no completed coefficient or strict tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulQuotientRoosAugmentation",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorQuotientAugmentation",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorQuotientAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientAugmentation",
+  "statement": "theorem completedKoszulTensorQuotientAugmentation\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :\n    ∃! β : completedKoszulTensorTower T d r a ⟶\n        (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ),\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (β.app P)).app (op n)).f (p + q) = 0)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientAugmentation"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222724-L-686395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cba2b",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261027T021420-L-2772620",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/Exists/Unique modules and 4 nodes vs clone 0c18f18; moved defs verbatim; importer ConeProZero compiled OK against delivered set; axioms checked"
+ }
+}

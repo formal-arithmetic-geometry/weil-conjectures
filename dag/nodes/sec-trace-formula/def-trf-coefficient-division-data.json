@@ -1,0 +1,126 @@
+{
+ "id": "def-trf-coefficient-division-data",
+ "kind": "definition",
+ "title": "Concrete coefficient series, restricted matrices and finite tests",
+ "statement": "Use the exponent vectors, generated diagrams, first-vertex supports, degree prefixes and essential variables of [def-trf-supported-homogeneous-division]. For a commutative ring $A$, a field $L$, $m,n,s\\in\\mathbf N$, coefficients $c_{i\\gamma}\\in A$ and a ring map $T:A\\to L[[W_1,\\ldots,W_m]]$, put\n$$[W^\\delta Z^\\gamma]f_i=[W^\\delta]T(c_{i\\gamma}).$$\nHere series mean [def-weil-pbc-multivariate-power-series] and polynomials mean [def-weil-pbc-mv-polynomial-ring]. For any finite variable set $S$ put $E_t(S)=\\{e\\in\\mathbf N^S:|e|=t\\}$. Assign the division index $(i,\\beta)$ the exponent $\\alpha_i+\\beta$, and a remainder index its exponent. For any linearly ordered vertex index set, define a square matrix on $E_t(S)$ by taking, at column $e$, the coefficient vector of a supported-family index assigned to $e$ when one exists, and zero otherwise. Use classical choice to select such an index; for ordered vertex families it is unique. In the prefix $I_q=\\{i:|\\alpha_i|\\le q\\}$ with essential variables $S_q$, define\n$$h_{i,q}=\\sum_{e\\in E_{|\\alpha_i|}(S_q)}c_{i,\\iota_*e}Z^e\\quad(i\\in I_q),$$\nwhere $\\iota_*e$ extends $e$ by zero to the original $Z$ variables. Denote its square division matrix by $M_{q,t}$. For $B:\\mathbf N\\to\\mathbf N$, let\n$$F_B=\\{c_{i,\\alpha_i}:i\\in\\operatorname{Fin}(s)\\}\\cup\\{\\det M_{q,t}:0\\le q\\le d_{\\max},\\ 0\\le t\\le B(q)\\},\\qquad d_{\\max}=\\max(\\{0\\}\\cup\\{|\\alpha_i|\\}_i).$$\nDeterminants mean [def-weil-endomorphism-determinant]. For global coefficients on a scheme $N$, define\n$$S(\\alpha,c)=\\{b\\in N:\\ (c_{i\\gamma})_b\\in\\mathfrak m_b^{|\\alpha_i|-|\\gamma|}\\text{ whenever }|\\gamma|<|\\alpha_i|\\},$$\nwhere $(c_{i\\gamma})_b$ is the germ and $\\mathfrak m_b$ the maximal ideal of the local ring [def-weil-residue-field]. These are the eight existing concrete constructions extracted unchanged from the uniform-division module; no mathematical meaning changes.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Bierstone--Milman, Invent. Math. 128 (1997), Lemma 7.7 pp.263--264, Theorem 8.1 pp.273--275, and completion of Theorem 9.6 p.282. BM read online at https://mahalex.net/teaching/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; ILO VIII 2.3.11--2.3.13 is the route reference."
+ },
+ "stmt_deps": [
+  "def-trf-supported-homogeneous-division",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-endomorphism-determinant",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multivariate Taylor coefficient orders on a maximal ideal power locus, triangular supported homogeneous division matrices, finite determinant tests and restriction to essential variables",
+   "results": "{\"t\": \"2026-10-26T08:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Multivariate Taylor coefficient orders on a maximal ideal power locus, triangular supported homogeneous division matrices, finite determinant tests and restriction to essential variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.order\", \"MvPowerSeries.IsHomogeneous\", \"MvPolynomial.coeffs\", \"MvPowerSeries.nat_le_order\", \"MvPowerSeries.le_order\", \"MvPowerSeries.coeff_of_lt_order\", \"PowerSeries.IsWeierstrassDivisorAt\", \"FormalMultilinearSeries.order\"], \"digest\": \"c018f36e1d568f13\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: returned order, coefficient and unit APIs support individual calculations but do not state the coefficient-family matrix or supported-division comparison here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite open tests for supported homogeneous division of multivariate Taylor series and constancy of orders",
+   "results": "{\"t\": \"2026-10-26T08:01:44Z\", \"tool\": \"leanfinder\", \"query\": \"Finite open tests for supported homogeneous division of multivariate Taylor series and constancy of orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.nat_le_order\", \"MvPowerSeries.order_eq_nat\", \"MvPowerSeries.le_order\", \"MvPowerSeries.homogeneousComponent_of_lt_order_eq_zero\", \"MvPowerSeries.order_le\", \"HasFiniteFPowerSeriesAt.finite\", \"MvPowerSeries.order_expand\", \"MvPowerSeries.nat_le_weightedOrder\"], \"digest\": \"1ca1289b914db450\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: returned order, coefficient and unit APIs support individual calculations but do not state the coefficient-family matrix or supported-division comparison here"
+  },
+  {
+   "tool": "grep",
+   "query": "isUnit_iff_constantCoeff|nat_le_order|coeff_monomial_mul|finiteDivisionTest",
+   "results": "{\"t\": \"2026-10-26T08:12:46Z\", \"tool\": \"grep\", \"query\": \"isUnit_iff_constantCoeff|nat_le_order|coeff_monomial_mul|finiteDivisionTest\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Order.lean\", \"Mathlib/RingTheory/PowerSeries/Order.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\"], \"digest\": \"266665e30c131e8f\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: returned order, coefficient and unit APIs support individual calculations but do not state the coefficient-family matrix or supported-division comparison here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientLocusUniformDivision",
+  "date": "2026-10-26",
+  "group": "U8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 completion of Theorem 9.6, p.282, using Theorem 8.1 and Lemma 7.7. Returned steps 9--10. Stage-3 detail: Concrete coefficient series, restricted matrices and finite tests.",
+   "via": [
+    "lem-trf-coefficient-locus-uniform-division",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoefficientDivisionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientDivisionData.lean",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.coefficientDivisionMatrix",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.coefficientEssentialFinite",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientFamilySeries",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientDegreeExponents",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientColumnExponent",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientDivisionMatrix",
+   "AlgebraicGeometry.HilbertCoefficient.restrictedCoefficientForms",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientDivisionTests",
+   "AlgebraicGeometry.HilbertCoefficient.coefficientFamilyOrderLocus"
+  ],
+  "statement": "def coefficientDivisionMatrix {σ ι : Type} [Finite σ] [LinearOrder ι] {A : Type u} [CommRing A] (α : ι → σ →₀ ℕ) (H : ι → MvPolynomial σ A) (t : ℕ) : Matrix ↥(coefficientDegreeExponents σ t) ↥(coefficientDegreeExponents σ t) A",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-63a57",
+  "group": "U8",
+  "result": "fix",
+  "landing": "20261026T092819-L-3469853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-63a57",
+  "group": "U8",
+  "result": "fix",
+  "landing": "20261026T092819-L-3469853",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (statement identical); 8 moved defs vs change-record Old/New (verbatim); 3 sorry statements vs SupportedHomogeneousDivision/extra-variables/stabilization defs (true); new node stmt_deps vs declarations used in their Lean statements"
+ }
+}

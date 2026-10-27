@@ -1,0 +1,565 @@
+{
+ "id": "sk-p-geometry",
+ "kind": "statement",
+ "title": "Components, images, and equal Lie algebras",
+ "statement": "Fix an algebraically closed field $L$ of characteristic zero. In this statement an algebraic group is a group scheme of finite type over $L$ [def-sc-group-scheme, def-weil-finite-type-morphism], as in the standing convention of the current blueprint's sk-i-cartier. Connected components refer to the underlying topological space [def-weil-connected-scheme]; the identity component has its open-and-closed subscheme structure. Write $\\operatorname{Lie}(G)=T_{G/L,1}$ for the tangent space at the identity [def-sc-scheme-tangent-space]. For a closed subgroup scheme $K\\hookrightarrow G$ [def-sc-group-scheme-subgroup], equality $\\operatorname{Lie}(K)=\\operatorname{Lie}(G)$ means that the differential of this inclusion identifies the two tangent spaces, using the canonical Lie algebra and differential of [def-wf-lie-algebra-derivation].\n\nAn algebraic group $G$ has finitely many connected components. Its\nidentity component $G^\\circ$ is an open, closed, irreducible normal\nsubgroup, and the other components are its cosets. The image of a\nhomomorphism of algebraic groups is a closed subgroup. If $G$ is connected\nand $K\\subseteq G$ is a closed subgroup scheme with $\\Lie(K)=\\Lie(G)$,\nthen $K=G$.\n\n*Complement.* For closed subgroups of $\\GL(V)$ the image on $L$-points of a\nregular homomorphism $G\\to K$ is the set of $L$-points of a closed\nsubgroup of $K$, taken with its reduced structure; and if $G$ is connected\nand a closed subgroup $J\\subseteq G$ has $\\dim J=\\dim G$, then $J=G$.\n\nIn the image assertion, for a homomorphism $f:G\\to H$ the underlying image $f(|G|)$ is closed in $|H|$ and its reduced induced closed subscheme is a subgroup scheme; its $L$-points are exactly $f(G(L))$ [lem-weil-pbc-reduced-induced-closed-subscheme, def-weil-field-valued-points]. Matrix groups and their regular homomorphisms in the complement use [sk-d-geometry].",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/_section.md",
+  "place": "node sk-p-geometry, order 3699",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 054K"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-field-valued-points",
+  "sk-d-geometry",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the Noetherian scheme $\\operatorname{Spec}L$ makes $G$ Noetherian. Hence there are finitely many irreducible components. Each irreducible component is connected and is contained in one connected component: the union of two intersecting connected subsets is connected. Conversely every point lies on an irreducible component. Thus every connected component is a union of members of this finite family, and there are finitely many connected components.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "First paragraph, finiteness"
+   }
+  },
+  {
+   "text": "Cartier smoothness applies to $G$ over the characteristic-zero field $L$. Its local rings are therefore regular and hence domains. If distinct irreducible components met at $x$, choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$. Their intersections with $U$ are distinct irreducible components of $U$, hence correspond to distinct minimal primes $\\mathfrak p,\\mathfrak q\\subseteq\\mathfrak m_x$. The prime correspondence for $A_{\\mathfrak m_x}\\cong\\mathcal O_{G,x}$ sends them to distinct minimal primes of this domain, impossible since its sole minimal prime is $(0)$. The finite irreducible components are consequently disjoint. Each is closed and its complement is a finite union of closed components, so each is open. A connected subset cannot cross such a partition; hence these are exactly the connected components. In particular the identity component $C$ is irreducible.",
+   "uses": [
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "lem-sc-components-open-injection",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "First paragraph, disjointness and irreducibility"
+   }
+  },
+  {
+   "text": "Give $C$ its open subscheme structure. The general identity-component theorem supplies geometric irreducibility of $C$ and its subgroup scheme structure; it applies to a group scheme locally of finite type over the algebraically closed field $L$. For each component $D$, a nonempty affine open of $D$ has a closed point, and the affine Nullstellensatz makes that point $L$-rational. Choose it as $g$. Translation is an isomorphism sending $1$ to $g$, so it sends the whole connected component $C$ onto $D$. Thus the components are precisely the cosets $gC$. To check normality as a subgroup scheme, decompose $G\\times_L C$ into the open pieces $gC\\times_L C$. Each is isomorphic to $C\\times_L C$, which is irreducible by geometric irreducibility. The conjugation map $(a,c)\\mapsto aca^{-1}$ sends each such piece to a connected subset containing $1$ (take $c=1$), hence into $C$. It therefore factors through the open subscheme $C$. The factorization proves scheme-theoretic normality, including points with values in arbitrary $L$-algebras.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sc-translation-automorphism",
+    "lem-sc-irreducible-product-over-field",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "First paragraph, subgroup, cosets and normality"
+   }
+  },
+  {
+   "text": "Let $f:G\\to H$ be a homomorphism, and let $J$ be the reduced induced closed subscheme on $\\overline{f(|G|)}\\subseteq H$. Regard a group scheme as an absolute groupoid with object scheme $\\operatorname{Spec}L$: both structure maps are the map to $\\operatorname{Spec}L$, and composition is multiplication. The groupoid image-closure theorem over the perfect field $L$ gives $J$ the restricted group operations, with $J\\hookrightarrow H$ a homomorphism. This is precisely a closed subgroup scheme. Cartier makes $G$ reduced; the reduced-source factorization theorem therefore factors $f$ through $J$. Denote the factor by $q:G\\to J$. Since the closed immersion $J\\hookrightarrow H$ is a monomorphism, compatibility of $q$ with the group laws follows from compatibility of $f$. The image $S=q(|G|)$ is dense in $J$ by its construction.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-sfb-perfect-field-groupoid-image-closure",
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Second paragraph, closure is a subgroup"
+   }
+  },
+  {
+   "text": "The schemes $G,H,J$ are of finite type over $L$: locally $J$ is defined by a quotient of a finite-type coordinate algebra of $H$, and it is quasi-compact as a closed subset of the Noetherian scheme $H$. They are Noetherian. The map $q$ is locally of finite type: for affine charts $\\operatorname{Spec}B\\subseteq G$ mapping to $\\operatorname{Spec}A\\subseteq J$, any finite set of $L$-algebra generators for $B$ also generates it as an $A$-algebra. Its inverse images of affine opens are open in Noetherian $G$, hence quasi-compact. Since $J$ is locally Noetherian, $q$ is locally of finite presentation. Apply Chevalley to $q$: $J$ is quasi-compact and separated, hence quasi-separated, so $S$ is constructible. Choose a nonempty affine open $A_0\\subseteq J$. The set $S\\cap A_0$ is dense and constructible in $A_0$. Part (2) of the affine constructible-open lemma gives a nonempty open $U\\subseteq A_0$ contained in $S\\cap A_0$. Thus $U$ is open in $J$ and $U\\subseteq S$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-sc-group-scheme-separated-field",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-weil-pbc-constructible-open-restriction",
+    "lem-wf-affine-constructible-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Second paragraph, Chevalley and an open piece"
+   }
+  },
+  {
+   "text": "Put $P=q(G(L))\\subseteq J(L)$, a subgroup. For every $u\\in U(L)$ the fibre $G_u$ is nonempty since $U\\subseteq S$. It is of finite type over $L$, by base change of the finite-type morphism $q$. A nonempty affine open in this fibre has a closed point; the affine Nullstellensatz identifies its residue field with $L$. Hence $u$ lifts to $G(L)$, and $U(L)\\subseteq P$. The same argument applied to a nonempty affine open in $U$ shows $U(L)\\ne\\varnothing$; choose $u_0$ in it. Set $W=u_0^{-1}U$, an open neighbourhood of $1$ in $J$. Translation is an isomorphism, and $W(L)=u_0^{-1}U(L)\\subseteq P$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sc-translation-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Second paragraph, passage from scheme image to L-points"
+   }
+  },
+  {
+   "text": "In the subspace topology on $J(L)$ one has $P=\\bigcup_{p\\in P}pW(L)$, so $P$ is open. Every coset $aP$ is open by translation; the complement of $P$, the union of its other cosets, is therefore open too. Thus $P$ is closed in $J(L)$. Cartier makes $G$ smooth, so rational-point density gives $\\overline{G(L)}=|G|$. Continuity of $q$ implies $q(|G|)\\subseteq\\overline{q(G(L))}$, so $P$ is dense in $J$ and in $J(L)$. Consequently $P=J(L)$. This uses translations on rational points only; it does not assume that the Zariski topology on the scheme product is the product of the two underlying topological spaces.",
+   "uses": [
+    "lem-sc-translation-automorphism",
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Second paragraph, open subgroup and its cosets"
+   }
+  },
+  {
+   "text": "It remains to check the underlying scheme image. The complement $J\\setminus S$ is constructible, being the complement of a constructible subset of a Noetherian space. If nonempty, one of its locally closed pieces is nonempty. Choose a nonempty affine open in that locally closed subscheme, then a closed point in that affine open. Its residue field is $L$ by the affine Nullstellensatz, so its image gives an $L$-point of $J\\setminus S$. This contradicts $P=J(L)$ and $P\\subseteq S$. Thus $S=|J|$. The original homomorphism has closed underlying image, equipped with the reduced subgroup structure $J$, and its image on $L$-points is exactly $J(L)$. This proves both the image assertion and the matrix-group complement, with no affineness assumption on the groups in the first assertion.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Second paragraph, closedness as a scheme subset"
+   }
+  },
+  {
+   "text": "Suppose now that $G$ is connected and $K\\hookrightarrow G$ is the given closed subgroup scheme with bijective differential at $1$. The schemes $G$ and $K$ are smooth by Cartier (a closed subgroup of a finite-type group is finite type). For each of the two groups, the Lie algebra of the smooth Lie-local-dimension theorem is $L$-linearly equivalent, after the canonical identity residue-field identification, to its dual-number tangent space at the identity ($T_{K/L,1}$, resp. $T_{G/L,1}$) used in the statement; so the vector-space dimensions agree. Apply the smooth Lie-local-dimension theorem and the identity-local-dimension theorem to each group. They give\n$\\dim K=\\dim\\mathcal O_{K,1}=\\dim_L\\operatorname{Lie}(K)=\\dim_L\\operatorname{Lie}(G)=\\dim\\mathcal O_{G,1}=\\dim G$.\nThe middle equality is induced by the differential of the inclusion, not by an unspecified identification of abstract Lie algebras. By the component argument above, connected $G$ is irreducible. Its dimension is finite by finite type over $L$.",
+   "uses": [
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-ag-smooth-lie-local-dimension",
+    "lem-ag-lie-identity-tangent-equiv",
+    "lem-ag-group-identity-local-dimension",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Third paragraph, equality of dimensions from equal Lie algebras"
+   }
+  },
+  {
+   "text": "If the closed support of $K$ were proper in irreducible $G$, it would be nowhere dense: a nonempty open in an irreducible space is dense. The finite-dimensional Noetherian dimension-drop lemma would give $\\dim K<\\dim G$, contradicting the preceding equality. Thus $K$ and $G$ have the same underlying support. Both are reduced by Cartier, and uniqueness of the reduced induced closed subscheme on that support identifies $K$ with $G$ as closed subschemes. For the dimension version of the complement, start instead with the assumed equality $\\dim J=\\dim G$; the same support argument and Cartier reducedness apply directly. This also covers zero-dimensional connected groups.",
+   "uses": [
+    "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+    "place": "Third paragraph, dimension drop and reduced scheme equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-translation-automorphism",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-perfect-field-groupoid-image-closure",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sc-group-scheme-separated-field",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-wf-affine-constructible-open",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pc-rational-points-dense",
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-lie-identity-tangent-equiv",
+  "lem-ag-group-identity-local-dimension",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/sk-p-geometry.proof.md",
+  "place": "All three paragraphs, expanded using Stacks 047N, 0B7R, 04Q8 and 054J; existing generic DAG tools are cited explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group has finitely many components and its connected identity component is irreducible normal; homomorphism images are closed and equal Lie algebras imply equal connected groups",
+   "results": "Subgroup.connectedComponentOfOne; Subgroup.Normal.pathComponentOne; instLieGroupOfTopWithTopENat; instLieGroupOfNatWithTopENatOfIsTopologicalGroup; LieGroup; instLieGroupOfNatWithTopENat; instLieGroupOfSomeENatTopOfLEInfty; instLieAddGroupOfTopWithTopENat",
+   "date": "2026-10-24",
+   "verdict": "no match: topological/manifold groups and general scheme closed maps do not assert this algebraic-group bundle"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"lie\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: topological/manifold groups and general scheme closed maps do not assert this algebraic-group bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|isClosed_range_of_isMonHom|finrank_lie",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: topological/manifold groups and general scheme closed maps do not assert this algebraic-group bundle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of algebraic groups has closed image and the identity component is irreducible",
+   "results": "AlgebraicGeometry.isAffineHom_of_isInducing; AlgHom.fieldRange_le_normalClosure; MonoidHom.isClosed_range_coe; AlgebraicGeometry.Scheme.Hom.isClosedMap; algebraicClosure.map_le_of_algHom; AlgHom.mem_range; AlgHom.range; Subalgebra.map_topologicalClosure_le",
+   "date": "2026-10-24",
+   "verdict": "no match: topological/manifold groups and general scheme closed maps do not assert this algebraic-group bundle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup of a connected algebraic group with identical tangent space at identity equals the group",
+   "results": "Subgroup.connectedComponentOfOne; OpenNormalSubgroup.instIsClosedCoePathComponentOne; Subgroup.pathComponentOne; Subgroup.coe_pathComponentOne; OpenSubgroup.toSubgroup_top; Subgroup.Normal.pathComponentOne; Subgroup.isClosed_of_isOpen; OpenNormalSubgroup.pathComponentOne_carrier",
+   "date": "2026-10-24",
+   "verdict": "no match: topological/manifold groups and general scheme closed maps do not assert this algebraic-group bundle"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3699,
+ "blueprint_uses": [
+  "sk-i-cartier"
+ ],
+ "blueprint_lean": [
+  "Matrix.GeneralLinearGroup.isPrime_identityComponent",
+  "Matrix.GeneralLinearGroup.normal_zeroLocus_identityComponent",
+  "Matrix.GeneralLinearGroup.finiteIndex_zeroLocus_identityComponent",
+  "Matrix.GeneralLinearGroup.toPrimeSpectrum_mem_connectedComponentIn_iff",
+  "AlgebraicGeometry.isClosed_range_of_isMonHom",
+  "AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq"
+ ],
+ "blueprint_lean_not_found": [
+  "Matrix.GeneralLinearGroup.isPrime_identityComponent",
+  "Matrix.GeneralLinearGroup.normal_zeroLocus_identityComponent",
+  "Matrix.GeneralLinearGroup.finiteIndex_zeroLocus_identityComponent",
+  "Matrix.GeneralLinearGroup.toPrimeSpectrum_mem_connectedComponentIn_iff",
+  "AlgebraicGeometry.isClosed_range_of_isMonHom",
+  "AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-p-geometry",
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-geometry",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "sk-p-geometry",
+  "worker": "stage1",
+  "summary": "Q02: split the full current scope over algebraically closed characteristic-zero L in ten explicit steps with no new nodes. Restore the missing context, distinguish scheme images from rational-point images, and derive equal-Lie equality through smooth local and global dimension. Reuse general identity-component, Cartier and groupoid closure tools rather than narrower Qbar_l matrix interfaces.",
+  "blueprint": "Paragraph 1: steps 1-3 realize Noetherian finiteness, Cartier/regular-domain disjointness, identity subgroup, cosets and scheme-theoretic normality. Paragraph 2: steps 4-8 realize closure subgroup, Chevalley, nonempty open piece, rational fibres, translations/cosets and scheme closedness. Paragraph 3: steps 9-10 realize Lie-dimension equality, strict dimension drop, reduced scheme equality and the dimension complement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-cartier-characteristic-zero-smooth",
+    "why": "General Cartier smoothness and reducedness are needed for arbitrary finite-type group schemes over L; the matrix-only Cartier node has the narrower Qbar_l hypotheses."
+   },
+   {
+    "node": "lem-sfb-locally-algebraic-group-identity-component",
+    "why": "Provides geometric irreducibility and the subgroup structure of the identity component for general group schemes, used after the unit's Cartier/regular-local component argument."
+   },
+   {
+    "node": "lem-sfb-perfect-field-groupoid-image-closure",
+    "why": "The generic perfect-field image-closure theorem supplies the reduced subgroup structure on the closure; this is exactly the closure step of the unit, before its Chevalley argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool used in step(s) 1, 5: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Generic tool used in step(s) 1: Noetherian spaces have finitely many irreducible components. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Generic tool used in step(s) 1: Every irreducible subset lies in an irreducible component; the components cover the space. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic tool used in step(s) 2: A scheme smooth over a field is regular. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic tool used in step(s) 2: Regular local rings are domains. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-components-open-injection",
+    "why": "Generic tool used in step(s) 2: Components meeting an open subset inject into components of that open subset. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Generic tool used in step(s) 2: Irreducible components of the spectrum of a ring are the zero loci of minimal primes. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-primes-of-localization",
+    "why": "Generic tool used in step(s) 2: Primes of prime and principal localizations. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic tool used in step(s) 2: Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic tool used in step(s) 3, 6, 8: Closed points in closed subsets of quasi-compact Kolmogorov spaces. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic tool used in step(s) 3, 6, 8: Residue fields of closed points and the vanishing principle. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Generic tool used in step(s) 3, 6, 7: Translations are automorphisms. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-irreducible-product-over-field",
+    "why": "Generic tool used in step(s) 3: Product of geometrically irreducible schemes over a field is irreducible. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic tool used in step(s) 3: A morphism with image in an open subscheme factors uniquely through it. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "Generic tool used in step(s) 4: Groupoid laws for prescribed scheme morphisms. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic tool used in step(s) 4: A map from a reduced scheme factors through a closed subscheme exactly set-theoretically. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic tool used in step(s) 5: Morphisms of finite type. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic tool used in step(s) 5: An open subscheme of a Noetherian scheme is Noetherian. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic tool used in step(s) 5: Locally finite type over a locally Noetherian target is locally finitely presented. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic tool used in step(s) 5: A group scheme over a field is separated. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-chevalley-constructible-image",
+    "why": "Generic tool used in step(s) 5: Chevalley's theorem: images of constructible sets. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-open-restriction",
+    "why": "Generic tool used in step(s) 5: A constructible subset meets an open subspace in a constructible subset. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "Generic tool used in step(s) 5: Chevalley constructibility and open pieces of constructible sets. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic tool used in step(s) 6: Finite-type morphisms are stable under composition and base change. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic tool used in step(s) 7: Rational points on smooth schemes over separably closed fields. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-ag-smooth-lie-local-dimension",
+    "why": "Generic tool used in step(s) 9: Lie dimension equals local dimension at a smooth identity. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic tool used in step(s) 9: Local dimension at a group identity equals global dimension. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic tool used in step(s) 9: Finiteness of the dimension of a finite type scheme. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-sc-hilbert-nowhere-dense-dimension-drop",
+    "why": "Generic tool used in step(s) 10: Nowhere-dense closed subsets have smaller dimension. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic tool used in step(s) 10: Reduced induced closed subscheme structure on a closed subset: existence and uniqueness. No hypothesis specific to that other unit is used; the argument still follows the geometry unit's component / constructibility / dimension route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-perfect-field-groupoid-image-closure",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-translation-automorphism",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sc-group-scheme-separated-field",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-wf-affine-constructible-open",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pc-rational-points-dense",
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-hilbert-nowhere-dense-dimension-drop",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-ae87a3e10",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-ae87a3e10 (reviewer sub-agent of L); spot-checked: Read all of the delivery: the item's restated statement and its 10 steps, 0 new nodes, and the unit record. Sources: blueprint main-20261023-1620 and main-20261024, whose sk-p-geometry files are identical; the sk-i-cartier convention (L algebraically closed of char 0, algebraic group = finite-type group scheme); and the statements of all 41 cited nodes. The statement change only restores the appendix context and makes explicit that Lie(K)=Lie(G) means the inclusion differential is bijective, and that the image is the closed underlying set with its reduced structure. It is not a weakening. I checked the α_p, ℝ-squaring and constant-ℤ counterexamples, and the citers sk-p-comparison and sk-p-product still work. Steps 1-8 and 10 check against the cited statements: Cartier smoothness (047N), regular local rings are domains, minimal primes via 00ES/00E3/01HV, identity component (0B7R), normality via 038F and 01HI, closure subgroup via the 04Q8 groupoid result with U=Spec L, reduced-source factorization (0356), Chevalley (054J) plus 005J and affine-constructible-open (2), rational fibres via 005E and the Nullstellensatz, rational-point density, strict dimension drop (02P2), and the uniqueness clause of 01J3. Elementary gaps I accept: separated implies quasi-separated, choosing finitely generated affine charts, nonempty fibres over rational points. The general Cartier, identity-component and 04Q8 nodes are needed because lem-ag-cartier-reduced is matrix-only over Q̄_ℓ; I accept them as tool_uses. No cycle, no SGA, no parallel supersession; the matrix sub-lemmas are special cases, not duplicates. FIX (C4/C1): step 9 equated dim T_{K/L,1} with the Lie of lem-ag-smooth-lie-local-dimension without citing lem-ag-lie-identity-tangent-equiv (unit sk-i-cartier, on route, no cycle), the node that identifies the two. The corrected item is in fixes/dag/nodes/sec-algebraic-groups-lie-algebras/sk-p-geometry.json, which adds the citation and one sentence to step 9 and to proof_deps and changes nothing else.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.Geometry",
+  "declaration": "AlgebraicGeometry.algebraicGroup_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/Geometry.lean",
+  "statement": "theorem algebraicGroup_geometry (L : Type u) [Field L] [IsAlgClosed L] [CharZero L] (G : Over (Spec (.of L))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : Finite (ConnectedComponents G.left) ∧ IsOpenImmersion (GrpObj.identityComponentι G).left ∧ IsClosedImmersion (GrpObj.identityComponentι G).left ∧ IrreducibleSpace (GrpObj.identityComponent G).left ∧ IsNormalSubgroupScheme (GrpObj.identityComponentι G) ∧ (∀ x : G.left, ∃ g : 𝟙_ (Over (Spec (.of L))) ⟶ G, connectedComponent x = (GrpObj.mulLeft G g).left '' connectedComponent (GrpObj.onePoint G)) ∧ (∀ (H : Over (Spec (.of L))) [GrpObj H] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (f : G ⟶ H) [IsMonHom f], IsClosed (Set.range f.left) ∧ IsReduced f.left.image ∧ Set.range f.left.imageι = Set.range f.left ∧ ∃ _ : GrpObj (Over.mk (f.left.imageι ≫ H.hom)), IsClosedSubgroupScheme (Over.homMk (U := Over.mk (f.left.imageι ≫ H.hom)) (V := H) f.left.imageι) ∧ Set.range (fun x : 𝟙_ (Over (Spec (.of L))) ⟶ G ↦ x ≫ f) = Set.range (fun x : 𝟙_ (Over (Spec (.of L))) ⟶ Over.mk (f.left.imageι ≫ H.hom) ↦ x ≫ Over.homMk (V := H) f.left.imageι)) ∧ (∀ [ConnectedSpace G.left] (K : Over (Spec (.of L))) [GrpObj K] (i : K ⟶ G) [IsClosedSubgroupScheme i], (Function.Bijective (GrpObj.differential i) → IsIso i.left) ∧ (topologicalKrullDim K.left = topologicalKrullDim G.left → IsIso i.left))",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca6e0599c",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery of 5767 (RETURN H2: missing stmt_dep def-wf-lie-algebra-derivation, owner of GrpObj.Lie/differential). The item node changes only stmt_deps (+def-wf-lie-algebra-derivation), the Lie sentence citation and a statement_change record whose old_statement equals the prior text verbatim. The Lean module is byte-identical to 5767 and the lean record is unchanged; the signature equals lean.statement. Upstream checked: GrpObj.differential (Lie/Differential.lean:92) needs IsMonHom, which IsClosedSubgroupScheme supplies, and Differential publicly imports the owner's Lie.Bracket. All clauses re-checked: components, G° open/closed/irreducible/normal, rational cosets, closed reduced image with GrpObj and equal L-point ranges, and bijective differential or equal Krull dimension → IsIso. Edge cases: empty, dim 0, GL_0; char 0, algebraic closure and quasi-compactness retained. Citers are blueprint units only, so the citation-only change holds. No hollow definitions, one sorry, docstrings present. Not recompiled (identical file). No findings.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q48 stage 2",
+  "old_statement": "Fix an algebraically closed field $L$ of characteristic zero. In this statement an algebraic group is a group scheme of finite type over $L$ [def-sc-group-scheme, def-weil-finite-type-morphism], as in the standing convention of the current blueprint's sk-i-cartier. Connected components refer to the underlying topological space [def-weil-connected-scheme]; the identity component has its open-and-closed subscheme structure. Write $\\operatorname{Lie}(G)=T_{G/L,1}$ for the tangent space at the identity [def-sc-scheme-tangent-space]. For a closed subgroup scheme $K\\hookrightarrow G$ [def-sc-group-scheme-subgroup], equality $\\operatorname{Lie}(K)=\\operatorname{Lie}(G)$ means that the differential of this inclusion identifies the two tangent spaces.\n\nAn algebraic group $G$ has finitely many connected components. Its\nidentity component $G^\\circ$ is an open, closed, irreducible normal\nsubgroup, and the other components are its cosets. The image of a\nhomomorphism of algebraic groups is a closed subgroup. If $G$ is connected\nand $K\\subseteq G$ is a closed subgroup scheme with $\\Lie(K)=\\Lie(G)$,\nthen $K=G$.\n\n*Complement.* For closed subgroups of $\\GL(V)$ the image on $L$-points of a\nregular homomorphism $G\\to K$ is the set of $L$-points of a closed\nsubgroup of $K$, taken with its reduced structure; and if $G$ is connected\nand a closed subgroup $J\\subseteq G$ has $\\dim J=\\dim G$, then $J=G$.\n\nIn the image assertion, for a homomorphism $f:G\\to H$ the underlying image $f(|G|)$ is closed in $|H|$ and its reduced induced closed subscheme is a subgroup scheme; its $L$-points are exactly $f(G(L))$ [lem-weil-pbc-reduced-induced-closed-subscheme, def-weil-field-valued-points]. Matrix groups and their regular homomorphisms in the complement use [sk-d-geometry].",
+  "what": "Repair H2 from the independent review of returned head 5767f2c88869: the Lean signature uses GrpObj.Lie and GrpObj.differential, owned by def-wf-lie-algebra-derivation, but the statement text and stmt_deps cited only the scheme tangent-space API. Add the missing existing Lie API citation and dependency. This is citation bookkeeping only: no hypothesis, conclusion, object, proof, or blueprint unit assertion changes.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/_section.md",
+   "place": "Equal Lie algebras clause; canonical tangent/differential convention of def-wf-lie-algebra-derivation in sk-d-tangent."
+  },
+  "citers": [
+   {
+    "id": "sk-i-restriction",
+    "holds": true,
+    "note": "The identity-component and normality facts it cites are unchanged; the new Lie API citation changes no mathematical assertion."
+   },
+   {
+    "id": "sk-p-comparison",
+    "holds": true,
+    "note": "Its connected stabilizer argument still applies the identical equal-inclusion-differential criterion, now explicitly citing its existing Lie convention."
+   },
+   {
+    "id": "sk-p-product",
+    "holds": true,
+    "note": "Its multiplication-image and equal-Lie arguments use the same closed-image and connected equality clauses; only the Lie API citation was added."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sc-group-scheme",
+   "def-weil-finite-type-morphism",
+   "def-weil-connected-scheme",
+   "def-sc-scheme-tangent-space",
+   "def-sc-group-scheme-subgroup",
+   "lem-weil-pbc-reduced-induced-closed-subscheme",
+   "def-weil-field-valued-points",
+   "sk-d-geometry"
+  ]
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "An algebraic group $G$ has finitely many connected components. Its\nidentity component $G^\\circ$ is an open, closed, irreducible normal\nsubgroup, and the other components are its cosets. The image of a\nhomomorphism of algebraic groups is closed. If $G$ is connected and\n$J\\subseteq G$ is a closed subgroup scheme with $\\dim J=\\dim G$, then\n$J=G$.\n\nFor closed subgroups $G\\subseteq\\GL(V)$ and $G'\\subseteq\\GL(W)$, the\nimage $f(G(L))$ of a regular homomorphism $f\\colon G\\to G'$ is the set of\n$L$-points of a closed subgroup of $G'$, taken with its reduced\nstructure. If $G\\subseteq\\GL(V)$ is a connected closed subgroup and\n$K\\subseteq G$ is a closed subgroup with $\\Lie(K)=\\Lie(G)$, then $K=G$.",
+  "proof": [
+   {
+    "text": "Since $G$ is Noetherian, it has finitely many irreducible components. By\n[sk-i-cartier], the scheme $G$ is smooth, and since a regular local ring is\na domain, distinct irreducible components of $G$ do not meet. Hence the\nirreducible components are open and closed, and they are exactly the\nconnected components. Multiplication and inversion map the component\ncontaining $1$ to itself, so it is a subgroup, and conjugation preserves\nit. Translations identify the other components with its cosets.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $f\\colon G\\to G'$ be a homomorphism. By continuity of multiplication\nand inversion, the closure $J$ of its image is a subgroup. Chevalley's\ntheorem ([Stacks 054K](https://stacks.math.columbia.edu/tag/054K)) says\nthat $f(G)$ is constructible, and a dense constructible subset contains a\nnonempty open subset of its closure. Thus the subgroup $f(G)(L)$ contains\nthe $L$-points of a nonempty open $U\\subseteq J$. Translating $U$ by the\ninverse of one of its points in the image, we obtain an open neighbourhood\nof $1$ contained in the image, and translating further by points of the\nimage, we see that the image is open in $J$. Its complement is a union of\ncosets of this open subgroup, hence open as well. Therefore the image is\nclosed, and since it is dense in $J$, it is equal to $J$. For closed\nsubgroups $G\\subseteq\\GL(V)$ and $G'\\subseteq\\GL(W)$, take $J$ with its\nreduced structure: since $J\\times J$ is reduced and multiplication and\ninversion preserve $J(L)$, they restrict to $J$, so $J$ is a closed\nsubgroup of $G'$, and $f(G(L))=J(L)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Next, let $J\\subseteq G$ be as in the dimension criterion, with $G$\nconnected. By the first part, $G$ is irreducible. Since a proper closed\nsubset of the irreducible variety $G$ has smaller dimension, $J$ and $G$\nhave the same underlying closed subset. Both are reduced by\n[sk-i-cartier], and hence they are equal as schemes.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Finally, let $K\\subseteq G\\subseteq\\GL(V)$ be as in the last assertion.\nBy Cartier's theorem [sk-i-cartier],\n$\\dim K=\\dim\\Lie(K)=\\dim\\Lie(G)=\\dim G$, so $K=G$ by the dimension\ncriterion.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
+}

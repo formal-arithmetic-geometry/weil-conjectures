@@ -226,22 +226,51 @@ def commit_inverse(root, prepared, expected, message):
         if changed & set(prepared):
             raise TipMoved('tip moved on recovery paths: prepare and retry')
     previous = {}
+    extra, moved_prev = [], None
     try:
         for path, data in prepared.items():
             p = pathlib.Path(root) / path
             previous[path] = p.read_bytes() if p.is_file() else None
             if data is None: p.unlink(missing_ok=True)
             else: p.parent.mkdir(parents=True, exist_ok=True); p.write_bytes(data)
-        git(root, 'add', '-A', '--', *prepared)
-        if git(root, 'diff', '--cached', '--name-only', '--', *prepared).strip():
-            git(root, 'commit', '-q', '-m', message + TRAILER, '--', *prepared)
+        # 2026-10-26: a module the take-out removes from lean/ (a restored or new module) takes every library module
+        # whose imports reach it to quarantine/ in the same commit (tools/red_rework.py take_out_importers); left behind
+        # they failed the next build with "bad import" (20:45 take-out of the cluster restore, 21:05 build: 11)
+        if any(x.startswith('lean/') for x in prepared):
+            try:
+                import red_rework
+                r = red_rework.take_out_importers(f"importers of the modules removed by: {message[:200]}")
+            except Exception as exc:  # noqa: BLE001
+                r = None
+                print(f"commit_inverse: importer take-out failed ({exc!r}); the inverse commits alone"[:400], flush=True)
+            if r is not None:
+                extra, moved, moved_prev, before = r
+                for path, data in before.items():
+                    previous.setdefault(path, data)
+                message += f"; {len(moved)} importer(s) of removed modules moved to quarantine/ as rework"
+        # 2026-10-24: a path that is neither on disk nor tracked (already in quarantine) made `git add` fail on every
+        # retry; leave it out
+        allp = list(dict.fromkeys([*prepared, *extra]))
+        tracked = set(git(root, 'ls-files', '--', *allp).decode().splitlines())
+        paths = [x for x in allp if (pathlib.Path(root) / x).exists() or x in tracked]
+        if paths:
+            git(root, 'add', '-A', '--', *paths)
+        if paths and git(root, 'diff', '--cached', '--name-only', '--', *paths).strip():
+            git(root, 'commit', '-q', '-m', message + TRAILER, '--', *paths)
     except BaseException:
         for path, data in previous.items():
             p = pathlib.Path(root) / path
             if data is None: p.unlink(missing_ok=True)
-            else: p.write_bytes(data)
-        subprocess.run(['git', '-C', str(root), 'reset', '-q', '--', *prepared], capture_output=True)
+            else: p.parent.mkdir(parents=True, exist_ok=True); p.write_bytes(data)
+        subprocess.run(['git', '-C', str(root), 'reset', '-q', '--', *list(dict.fromkeys([*prepared, *extra]))],
+                       capture_output=True)
         raise
+    if moved_prev:
+        try:
+            import red_rework
+            red_rework._record(moved_prev, f"red build rework: importers of modules removed by: {message[:200]}")
+        except Exception as exc:  # noqa: BLE001
+            print(f"commit_inverse: landing record of the importer take-out failed ({exc!r})"[:400], flush=True)
 
 
 

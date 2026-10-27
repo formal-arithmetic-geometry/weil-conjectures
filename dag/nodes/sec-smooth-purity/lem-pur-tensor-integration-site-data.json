@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-tensor-integration-site-data",
+ "kind": "statement",
+ "title": "Single-exponent normalized tensor integration compatibility",
+ "statement": "Let l be prime, E a finite extension of Q_l and A its finite coefficient quotient at level n+1. Let S be Noetherian with l invertible, choose r with l^(r+1)A=0, and let F be a rank d vector bundle on S. For every bounded constructible ordinary etale A-complex K of finite Tor amplitude, there exists TensorCompatibilityData of [def-pur-vector-tensor-site-equations] for the independently constructed vectorIntegration and its fixed vectorSite comparison: actual inverse projection isomorphisms, the two coefficient integration formulas, their projection/integration/transpose comparison squares, ordinary adjunct invertibility and its integration-normalized gamma formula. There is no second exponent and no exponent transition in this assertion. This records the already stated vectorTensorComparison separately from the larger node lem-pur-vector-integration-site-comparison, whose combined proof plan depends on exponent transport.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 1--5: the actual inverse-projection integration, its ordinary adjunct and its bounded-origin site comparison. Blueprint paragraphs 1--2, transpose the integration and prove its local affine-space normalization; Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints."
+ },
+ "stmt_deps": [
+  "def-pur-vector-tensor-site-equations",
+  "def-pur-proetale-vector-integration",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The shifted locally free Tate coefficient is bounded, and exact inverse image followed by its tensor sends K to a bounded J. Ordinary vector-bundle purity supplies an inverse to the specified coefficient-first projection and the invertibility of the adjunct of its inverse-projection integration.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "thm-amb-vector-bundle-purity",
+    "def-pur-finite-site-tensor-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper comparison is the counit mate and the open comparison the adjoint extension comparison. Their tensor squares follow by unit/counit naturality; pasting them and conjugating with the signed tensor symmetries gives the actual coefficient-first projection square. This identity is formal for these module functors and does not use an exponent-transport theorem. Since the ordinary projection and comparison are invertible, the pro-etale projection is invertible. For the independent vector trace comparison, apply orderedIntegration_comparison on every trivializing open, move the fixed pullback and compact-support comparisons by naturality, and use uniqueness of the two normalized global integrations. This is the already proved local-to-global argument and uses no exponent comparison. Invert the projection square, insert this trace comparison and then the right unitor. This gives the integration square.",
+   "uses": [
+    "def-sf-compact-support-site-comparison-construction",
+    "def-pur-finite-site-tensor-projection",
+    "def-pur-proetale-vector-integration",
+    "lem-kun-tensor-sym",
+    "lem-pur-ordered-integration-comparison",
+    "def-pur-proetale-frame-integration",
+    "def-amb-vector-integration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold boundedSiteTranspose. Use the integration square and naturality of the comparison unit followed by Hom naturality in its target to obtain comparison of the ordinary adjunct followed by boundedSiteRho. Ordinary normalization identifies that adjunct with the signed symmetry followed by the integration-normalized gamma. These are exactly the remaining TensorCompatibilityData fields.",
+   "uses": [
+    "def-pur-bounded-site-transpose-arrows",
+    "def-pur-vector-purity-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "def-pur-bounded-site-transpose-arrows",
+  "def-pur-finite-site-tensor-projection",
+  "def-pur-proetale-frame-integration",
+  "def-pur-proetale-vector-integration",
+  "def-pur-vector-purity-normalization",
+  "def-sf-compact-support-site-comparison-construction",
+  "lem-asd-finite-etale-twist-line",
+  "lem-kun-tensor-sym",
+  "lem-pur-ordered-integration-comparison",
+  "thm-amb-vector-bundle-purity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 1--5: the actual inverse-projection integration, its ordinary adjunct and its bounded-origin site comparison. Blueprint paragraphs 1--2, transpose the integration and prove its local affine-space normalization; Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integration under a morphism of finite Tate lines, inverse projection formula, and adjunction transpose",
+   "results": "8 hits, including TopCat.Presheaf.pushforwardToOfIso, ContinuousLinearMap.integral_id_map, Module.Dual.transpose and transpose_dualTensorHom. None states finite-site coefficient integration transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv, homEquiv_unit, homEquiv_counit. These supply generic Hom calculus but not the geometric root-transition equations or their coefficient integration data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*[Ee]xponent|[Ee]xponent.*[Cc]ounit|[Tt]ensor.*[Ii]ntegrat",
+   "results": "0 hits in Mathlib. Local Sheaf search finds vectorTensorComparison and vectorExponentIndependence in VectorIntegrationSiteComparison; they are reused through separate acyclic statement records.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationExponentTransposeTransport",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Proof, inverse diagonal identification: root-normalized vector-bundle integration at the normal-bundle endpoint; Single-exponent normalized tensor integration compatibility",
+   "via": [
+    "lem-pur-integration-exponent-transpose-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.VectorIntegrationSiteComparison",
+  "file": "lean/Sheaf/Paper/VectorIntegrationSiteComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorTensorComparison",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "statement": "theorem vectorTensorComparison (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (l : Γ(S, ⊤))) (r : ℕ)\n    (hA : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0) (d : ℕ)\n    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]\n    (K : Etale.DerivedCategoryModule (Scheme.finiteTateCoefficient l E n) S)\n    (hK : Etale.DerivedCategory.constructibleFiniteTor\n      (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n)) S K) :\n    TensorCompatibility l E n S hS r hA d F K hK"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorTensorComparison"
+  ],
+  "sorry_after": []
+ }
+}

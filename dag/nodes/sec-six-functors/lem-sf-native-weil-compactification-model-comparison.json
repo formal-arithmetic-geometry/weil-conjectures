@@ -1,0 +1,261 @@
+{
+ "id": "lem-sf-native-weil-compactification-model-comparison",
+ "kind": "statement",
+ "title": "Native Weil compactification models under proper refinement",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the native abelian Weil categories $\\mathcal W_S$, their ordinary derived categories, bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(S)$, and actual equivariant operations of [def-sf-native-weil-derived-framework]. Let $h:X\\to Y$ be a separated finite-type morphism of finite-type $k_0$-schemes [def-weil-proper-morphism, def-weil-finite-type-morphism], with $Y$ quasi-compact and quasi-separated [def-weil-quasi-separated-morphism]. A compactification $c=(j:X\\hookrightarrow\\overline X,r:\\overline X\\to Y)$ means a quasi-compact open immersion [def-weil-open-immersion] and a proper map with $rj=h$ [def-weil-compactifications-refinements]. Put $F_c=Rr_*J_j$, with $J_j$ termwise native extension by zero. For compactifications $c_1,c_2$ and any proper $Y$-map $v:\\overline X_1\\to\\overline X_2$ with $vj_1=j_2$, there are natural isomorphisms on $\\mathrm{WC}^{\\mathrm{der}}(X)$\n$$J_{j_2}\\cong Rv_*J_{j_1},\\qquad\nF_{c_2}\\cong Rr_{2*}Rv_*J_{j_1}\\cong R(r_2v)_*J_{j_1}=F_{c_1}.$$\nMoreover, for any two compactifications there exists a natural isomorphism $F_{c_2}\\cong F_{c_1}$ as functors $\\mathrm{WC}^{\\mathrm{der}}(X)\\to D(\\mathcal W_Y)$; in particular every $F_c$ is naturally isomorphic to the framework's chosen model $Rh_{0!}$. All components and inverses lie in the native equivariant derived categories. Absolute separatedness over $k_0$ is not assumed; no independence of these isomorphisms from refinement choices or cocycle assertion is part of the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, label lemma-shriek-composition, compactification calculation; agent adaptation to the native category of def-sf-native-weil-derived-framework, not a claim that the torsion etale Stacks statement proves the native coefficient case."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-compactifications-refinements",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "All the compactification ambient schemes are finite type over $k_0$: each $r_i$ is finite type by the definition of proper, and its composite with the finite-type structure map of $Y$ is finite type by [lem-sfb-finite-type-composition-base-change]. Thus the native operations in [def-sf-native-weil-derived-framework] apply to $X,\\overline X_i,Y$. The open immersions $j_i$ are quasi-compact by the compactification hypotheses. In particular [lem-sf-native-weil-basic-comparisons](b) supplies their termwise derived functors $J_{j_i}$ on the bounded constructible source, and (a) supplies the identity and composite direct-image comparisons. None of these statements requires absolute separatedness.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-weil-basic-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined, setup; native operations supplied by the cited framework and basic comparisons"
+   }
+  },
+  {
+   "text": "For the given proper refinement $v$, take the square with top edge $j_1:X\\to\\overline X_1$, bottom edge $j_2:X\\to\\overline X_2$, left edge $\\operatorname{id}_X$, and right edge $v$. Its commutativity is exactly $vj_1=j_2$. The identity is proper directly from the definition (its diagonal is an isomorphism, it is finite type, and every base change is an identity, hence closed); $v$ is proper by hypothesis. Apply [lem-sf-native-weil-open-proper-interchange] to this square. It gives $J_{j_2}R(\\operatorname{id}_X)_*\\cong Rv_*J_{j_1}$ on $\\mathrm{WC}^{\\mathrm{der}}(X)$. Compose with the inverse of $J_{j_2}$ whiskered with the identity-direct-image comparison of [lem-sf-native-weil-basic-comparisons](a) to obtain $\\alpha_v:J_{j_2}\\xrightarrow{\\sim}Rv_*J_{j_1}$. The interchange lemma explicitly permits a non-Cartesian square, so no assertion that $v^{-1}(j_2X)=j_1X$ has entered the argument.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sf-native-weil-open-proper-interchange",
+    "lem-sf-native-weil-basic-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined), refinement square; native version is the cited interchange node"
+   }
+  },
+  {
+   "text": "Apply the functor $Rr_{2*}$ to $\\alpha_v$ and use [lem-sf-native-weil-basic-comparisons](a), with $u=v$ and the second map $r_2$, in the inverse direction. This gives natural isomorphisms $F_{c_2}=Rr_{2*}J_{j_2}\\cong Rr_{2*}Rv_*J_{j_1}\\cong R(r_2v)_*J_{j_1}=Rr_{1*}J_{j_1}=F_{c_1}$, since $v$ is a $Y$-map. Explicitly the first arrow has component $Rr_{2*}(\\alpha_v(K))$, with inverse $Rr_{2*}(\\alpha_v(K)^{-1})$; the second arrow is the composite-direct-image comparison evaluated at $J_{j_1}K$. Hence the two displayed isomorphisms are natural in $K$. The composite-direct-image comparison holds on the entire native derived category, so no extra boundedness or constructibility of $Rv_*J_{j_1}K$ is required here.",
+   "uses": [
+    "lem-sf-native-weil-basic-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined, displayed comparison along a morphism of compactifications"
+   }
+  },
+  {
+   "text": "For arbitrary $c_1,c_2$, apply [prop-nagata-compactification-category](i) with base $S=Y$ and morphism $h$. Its hypotheses are precisely the quasi-compactness and quasi-separatedness of $Y$ and the separated finite-type property of $h$. It supplies a compactification $d$ and proper $Y$-refinements $w_i:d\\to c_i$. Apply the preceding refinement calculation to obtain natural isomorphisms $\\gamma_i:F_{c_i}\\xrightarrow{\\sim}F_d$. Then $\\gamma_1^{-1}\\circ\\gamma_2:F_{c_2}\\xrightarrow{\\sim}F_{c_1}$ is the required comparison. Taking $c_1$ to be the framework's chosen Nagata compactification $(a,p)$ identifies $F_{c_1}$ with $Rh_{0!}$ by [def-sf-native-weil-derived-framework]. This choice is a compactification in the present sense: $p$ is proper over $Y$, and its open immersion $a$ is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target] applied to the triangle $X\\xrightarrow{a}\\overline X\\xrightarrow{p}Y$, since $pa=h$ is quasi-compact (finite type) and $p$ is separated, hence quasi-separated [def-weil-quasi-separated-morphism] (its diagonal is a closed immersion, which is affine and so quasi-compact). Every arrow used above and its inverse is already a native equivariant derived morphism by the cited basic comparisons and interchange lemma; applying native functors, composing and inverting preserves that property. This constructs an isomorphism for each choice of common refinement and makes no independence or cocycle claim.",
+   "uses": [
+    "prop-nagata-compactification-category",
+    "def-sf-native-weil-derived-framework",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined, cofiltered compactification argument; Tag 0ATU, flat.tex lemma-compactifications-cofiltered (a)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-weil-basic-comparisons",
+  "lem-sf-native-weil-open-proper-interchange",
+  "prop-nagata-compactification-category",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7I lemma-shriek-well-defined, proper-refinement/common-refinement calculation, adapted to native coefficients using existing native interchange and composition statements; no torsion-to-adic identification is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between proper pushforward after extension by zero for two compactifications in the derived category of native pro etale Weil sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"module\": \"Mathlib/Condensed/Light/Functors\", \"type\": \"lightProfiniteToLightCondSet ≅ LightProfinite.toTopCat.comp topCatToLightCondSet\", \"doc\": \"The natural isomorphism establishing that the Yoneda embedding from light profinite spaces to light condensed sets is naturally isomorphic to the composition of the canonical inclusion functor from li\"}\n  {\"name\": \"TopCat.Sheaf.pushforwardForgetIso\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : TopCat} →\\n      (f : X ⟶ Y) →\\n        (TopCat.Sheaf.pushforward C f).comp (TopCat.Sheaf.forget C Y) ≅\\n          (TopCat.Sheaf.forget C X).comp (TopCat.Presheaf.pushforward C f)\", \"doc\": \"For a continuous map $ f : X \\to Y $, the composition of the pushforward functor for sheaves on $ X $ followed by the forgetful functor to presheaves on $ Y $ is naturally isomorphic to the composition\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"The hom component of the natural isomorphism between the composition of the sheaf pushforward cocontinuous functor and the sheaf-to-presheaf inclusion, and the composition of the presheaf inclusion wi\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/Continuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          (A : Type u) →\\n            [inst_2 : CategoryTheory.Category.{t, u} A] →\\n              (J : CategoryTheory.Gr\", \"doc\": \"The natural isomorphism asserting that composing the sheaf pushforward functor induced by a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with the inclusion functor from sheaves to presheaves i\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the inverse of the natural isomorphism between the composition of the sheaf pushforward functor $ G_* $ with the inclusion of sheaves in\"}\n  {\"name\": \"PresheafOfModules.pushforward₀CompToPresheaf\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          (R : CategoryTheory.Functor Dᵒᵖ RingCat) →\\n            (PresheafOfModules.pushforward₀ F R).comp (PresheafOfM\", \"doc\": \"The natural isomorphism asserting that composing the pushforward functor $ F_* $ with the forgetful functor to presheaves of abelian groups is naturally isomorphic to composing the forgetful functor w\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf pushforward or right-derived-functor isomorphisms do not supply the native bounded-constructible proper/open interchange or compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241; those require already supplied sheaf isomorphisms and do not state this native Weil assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"iso\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_2} H] {F F' : CategoryTheory.Functor C H} (e : F ≅ F') (W : CategoryTheory.MorphismProperty C) : F.HasRightDerivedFunctor W ↔ F'.HasRightDerivedFunctor W\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_1} D] [CategoryTheory.Category.{v_3, u_2} H] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"The natural isomorphism `RF ≅ RF'` on right derived functors that is\\ninduced by a natural isomorphism `F ≅ F'`.\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatIso_inv\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F' ⟶\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] {RF RF' : CategoryTheory.Functor D H} {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (α' : F ⟶ L.c\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived\", \"type\": \" {C : Type u₁} {D : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} H] {L : CategoryTheory.Functor C D} {W : CategoryTheory.MorphismProperty C} [L.IsLocalization W] {F : CategoryTheory.Functor C H} (RF : CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"If `Φ` is a localizer morphism from `W₁ : MorphismProperty C₁` to\\n`W₂ : MorphismProperty C₂`, if `L₁ : C₁ ⥤ D₁` and `L₂ : C₂ ⥤ D₂` are\\nlocalization functors for `W₁` and `W₂`, if `F : C₂ ⥤ H` is a fun\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf pushforward or right-derived-functor isomorphisms do not supply the native bounded-constructible proper/open interchange or compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241; those require already supplied sheaf isomorphisms and do not state this native Weil assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|WeilComplex|compactification.*(iso|compar|refine)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/Basic.lean\", \"line\": \"22\", \"text\": \"  `X → OnePoint X`; when `X` is already compact, the compactification adds an isolated point\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf pushforward or right-derived-functor isomorphisms do not supply the native bounded-constructible proper/open interchange or compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241; those require already supplied sheaf isomorphisms and do not state this native Weil assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of compact support direct image from compactification for Frobenius equivariant sheaves",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two compactifications of a separated finite type morphism give naturally isomorphic derived functors proper direct image composed with open extension by zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.lanPresheafExt\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F G : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)} →\\n  (FintypeCat.toLightProfinite.op.comp F ≅ FintypeCat.toLightProfinite.op.comp G) →\\n    (LightCondensed.lanPresheaf F ≅ LightCondensed.lanPresheaf G)\", \"doc\": \"This definition shows that the `lanPresheaf` construction is functorial. Given two presheaves $F, G: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\mathbf{Type}_u$, a natural isomorphism $i: F \\\\circ \\\\texttt\"}\n  {\"name\": \"Condensed.lanPresheafExt\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F G : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} →\\n  (FintypeCat.toProfinite.op.comp F ≅ FintypeCat.toProfinite.op.comp G) →\\n    (Condensed.lanPresheaf F ≅ Condensed.lanPresheaf G)\", \"doc\": \"Given presheaves $ F, G : \\text{Profinite}^\\\\text{op} \\\\to \\\\text{Type} $ and an isomorphism $ i : \\\\text{toProfinite}^\\\\text{op} \\\\circ F \\\\cong \\\\text{toProfinite}^\\\\text{op} \\\\circ G $, the left Kan extension\"}\n  {\"name\": \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"module\": \"Mathlib/Condensed/Light/Functors\", \"type\": \"lightProfiniteToLightCondSet ≅ LightProfinite.toTopCat.comp topCatToLightCondSet\", \"doc\": \"The natural isomorphism establishing that the Yoneda embedding from light profinite spaces to light condensed sets is naturally isomorphic to the composition of the canonical inclusion functor from li\"}\n  {\"name\": \"Condensed.lanPresheafNatIso\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} →\\n  ((S : Profinite) → CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op)) → (Condensed.lanPresheaf F ≅ F)\", \"doc\": \"Given a presheaf $ F : \\\\text{Profinite}^{\\\\text{op}} \\\\to \\\\text{Type} $ satisfying colimit conditions on discrete quotients, the canonical isomorphism between the left Kan extension of $ F $ and $ F $ i\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Condensed.lanPresheafIso\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{S : Profinite} →\\n  {F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} →\\n    CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op) →\\n      ((Condensed.lanPresheaf F).obj (Opposite.op S) ≅ F.obj (Opposite.op S))\", \"doc\": \"Given a presheaf $ F $ on profinite spaces and a colimit condition on the mapped cocone of $ F $, the left Kan extension of $ F $ evaluated at an object $ S $ is isomorphic to $ F $ evaluated at $ S $\"}\n  {\"name\": \"LightCondensed.lanPresheafIso\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{S : LightProfinite} →\\n  {F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)} →\\n    CategoryTheory.Limits.IsColimit (F.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone)) →\\n      ((LightCondensed.lanPresheaf F).obj (Opposite.op S) ≅ F.obj (Opposite.op S))\", \"doc\": \"Given a light profinite space $ S $ and a contravariant functor $ F : \\text{LightProfinite}^{\\text{op}} \\to \\text{Type} $, if the cocone constructed from $ S $'s limit cone is a colimit for the composed d\"}\n  {\"name\": \"LightCondensed.lanPresheafNatIso\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)} →\\n  ((S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (F.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))) →\\n    (LightCondensed.lanPresheaf F ≅ F)\", \"doc\": \"Given a contravariant functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type} $ and a light profinite space $ S $, if the cocone constructed from $ S $'s limit cone is a colimit for the compos\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf pushforward or right-derived-functor isomorphisms do not supply the native bounded-constructible proper/open interchange or compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241; those require already supplied sheaf isomorphisms and do not state this native Weil assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "def rightDerivedNatIso|def pushforwardComp|def pushforwardNatIso|theorem rightDerivedNatIso",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"231\", \"text\": \"def pushforwardComp :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"544\", \"text\": \"def pushforwardCompModulesSpecToSheafIso :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"133\", \"text\": \"noncomputable def rightDerivedNatIso (τ : F ≅ F') :\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean\", \"line\": \"194\", \"text\": \"def pushforwardComp {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"139\", \"text\": \"noncomputable def pushforwardComp :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"228\", \"text\": \"noncomputable def pushforwardNatIso (α : F ≅ G) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"417\", \"text\": \"noncomputable def pushforwardCompForgetToSheafModuleCat\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"line\": \"103\", \"text\": \"noncomputable def pushforwardCompToPresheaf :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"line\": \"149\", \"text\": \"noncomputable def pushforwardComp :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"line\": \"70\", \"text\": \"noncomputable def pushforwardCompCoyonedaFreeYonedaCorepresentableBy (X : C) :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf pushforward or right-derived-functor isomorphisms do not supply the native bounded-constructible proper/open interchange or compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241; those require already supplied sheaf isomorphisms and do not state this native Weil assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleWeilSheaf|WeilComplex|compactification.*(iso|compar|refine)",
+   "results": "OK 1 hits: Mathlib/Topology/Compactification/OnePoint/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general pushforward/derived isomorphisms require the input geometric comparison, and condensed or compact-support-function results do not state the native Weil compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of compact support direct image from compactification for Frobenius equivariant sheaves",
+   "results": "OK 8 hits: hasCompactSupport_def, HasCompactSupport.deriv, TestFunctionClass.map_hasCompactSupport, hasCompactSupport_norm_iff, HasCompactSupport.comp_isClosedEmbedding, CondensedSet.LocallyConstant.functorFullyFaithful, HasCompactSupport.comp_homeomorph, HasCompactSupport.iteratedFDeriv",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general pushforward/derived isomorphisms require the input geometric comparison, and condensed or compact-support-function results do not state the native Weil compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"iso\"",
+   "results": "OK 12 hits: CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.rightDerivedNatIso, CategoryTheory.Functor.rightDerivedNatIso_hom, CategoryTheory.Functor.rightDerivedNatIso_inv, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general pushforward/derived isomorphisms require the input geometric comparison, and condensed or compact-support-function results do not state the native Weil compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between proper pushforward after extension by zero for two compactifications in the derived category of native pro etale Weil sheaves",
+   "results": "OK 8 hits: SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso_hom, CategoryTheory.Functor.sheafPushforwardContinuousIso, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, LightCondensed.lanPresheafExt, TopCat.Sheaf.pushforwardForgetIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general pushforward/derived isomorphisms require the input geometric comparison, and condensed or compact-support-function results do not state the native Weil compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241."
+  },
+  {
+   "tool": "grep",
+   "query": "def rightDerivedNatIso|def pushforwardComp|def pushforwardNatIso|theorem rightDerivedNatIso",
+   "results": "OK 10 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general pushforward/derived isomorphisms require the input geometric comparison, and condensed or compact-support-function results do not state the native Weil compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two compactifications of a separated finite type morphism give naturally isomorphic derived functors proper direct image composed with open extension by zero",
+   "results": "OK 8 hits: Condensed.profiniteSolidCounit, Condensed.lanPresheafExt, Condensed.lanPresheafNatIso_hom_app, LightCondensed.lanPresheafExt, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, Condensed.profiniteSolidification, Condensed.lanSheafProfinite, LightCondensed.lanPresheafIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general pushforward/derived isomorphisms require the input geometric comparison, and condensed or compact-support-function results do not state the native Weil compactification comparison. Read RightDerived.lean 123-143 and PushforwardContinuous.lean 127-148, 223-241."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-shriek-composition",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Returned proof step 2: proper-refinement comparison and common-refinement comparison of native compactification models; prop-functor-package clause 3. The parent ancestor is None, as blueprint_refs.py reports; its original seeded provenance is retained.",
+   "via": [
+    "lem-sf-native-weil-shriek-composition",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-compactification-model-comparison",
+  "worker": "stage1",
+  "summary": "Four-step split with no new nodes: verify finite-type ambient schemes, apply native proper/open interchange to the identity/refinement square, whisker and compose native derived direct images, and use a common refinement. Read each cited statement, checked native coefficient categories and non-Cartesian allowance, and retained the weaker existential comparison without coherence. No statement change or whole-item Lean attachment.",
+  "blueprint": "Realizes the existing breadcrumb: compactification comparisons for prop-functor-package clause (2), used in its clause (3) composition argument through lem-sf-native-weil-shriek-composition. The created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor reports None); retain from.node=null, the recorded place and via. Whole-blueprint searches found no matching native comparison node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition ensures compactification ambient schemes are finite type over k0; it replaces no unit proof step."
+   },
+   {
+    "node": "prop-nagata-compactification-category",
+    "why": "Generic geometry of compactifications supplies a common proper refinement over the qcqs base Y; the six-functor unit explicitly uses the Nagata compactification category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-composition-base-change",
+  "prop-nagata-compactification-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-666753499",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-666753499 (reviewer sub-agent of L); spot-checked: Read the item's four steps against Stacks more-etale 0F7I (lemma-shriek-well-defined) and the full statements of every cited node. The split has no new nodes and the statement is unchanged. Step 1: proper includes finite type and finite-type maps compose, so each compactification's ambient scheme is finite type over k0; basic-comparisons (a)/(b) were checked verbatim. Step 2: the substitution into native open-proper-interchange (U'=U=X, p'=id, p=v, j'=j1, j=j2) satisfies its hypotheses, and that node allows non-Cartesian squares; the fact that X is clopen in v^{-1}(X) confirms the result is true. Step 3: whiskering plus (a) with r2 v = r1 is correct. Step 4: prop-nagata-compactification-category (i) applies with S=Y qcqs and h separated of finite type, and the direction of gamma_1^{-1} gamma_2 is correct. Fault C1/C4, repaired: the framework's chosen compactification is defined (def-weil-compactifications-refinements) with only an open immersion, but step 4 identified it with an F_c without showing that immersion is quasi-compact. Step 4 now adds that pa=h is quasi-compact and p is separated, hence quasi-separated, so a is quasi-compact by lemma-nagata-open-immersion-qc-over-separated-target, a Mathlib leaf; both ids are added to uses and proof_deps. Duplicate search over the 0F7I nodes found only étale-torsion, finite and site coefficient versions, none for the native W category. Tool uses accepted: lem-sfb-finite-type-composition-base-change and prop-nagata-compactification-category. Batch-5 flags: basic-comparisons and open-proper-interchange reach lem-trf-geometric-inverse-image-exact only through native-adic-pullback-exact-lisse; that node is the general exactness of inverse image along a geometric morphism, not part of the trace formula or Poincaré duality, and the cited nodes are basic native six-functor infrastructure, so both flags are accepted as generic. Edge cases checked: empty X, the identity refinement, an extra proper component, and Y non-separated over k0.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeCompactificationModelComparison",
+  "declaration": "AlgebraicGeometry.nativeWeilCompactificationModelComparison",
+  "declarations": [
+   "AlgebraicGeometry.nativeWeilCompactificationModelComparison",
+   "AlgebraicGeometry.nativeWeilCompactificationRefinementComparisons"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/NativeCompactificationModelComparison.lean",
+  "statement": "theorem nativeWeilCompactificationModelComparison (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (h : X ⟶ Y) [h.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] : (∀ (c₁ c₂ : Compactification h) [QuasiCompact c₁.i] [QuasiCompact c₂.i] (v : Compactification.Refinement c₁ c₂), nativeWeilCompactificationRefinementComparisons k₀ l h c₁ c₂ v) ∧ (∀ (c₁ c₂ : Compactification h) [QuasiCompact c₁.i] [QuasiCompact c₂.i], Nonempty ((WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l h c₂ ≅ (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l h c₁)) ∧ (∀ (c : Compactification h) [QuasiCompact c.i], Nonempty ((WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l h c ≅ WeilComplex.derivedLowerShriek k₀ l h ⋙ (WeilComplex.objectProperty k₀ l Y).ι))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper predicate expands the complete displayed refinement chain using the existing native operations and canonical compactification base structures. Its definition is explicit; the theorem is the only postponed proof. Q18 reviewed the stage-1 split, not a Lean attachment."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5478f3505",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim in file. Hypotheses match: X,Y finite type over k0, Y qcqs, h separated+lft+qc+IsOver, no absolute separatedness; [QuasiCompact c.i] redundant (h qc, g separated). Refinement c1 c2 direction checked (hom: c1.Z→c2.Z, i_hom, hom_g; isProper instance). Helper is a real Prop with four conjuncts: J2≅Rv*J1, F_c2≅Rr2*Rv*J1≅R(v≫r2)*J1, and functor equality with F_c1 via hom_g (IsOver is a Prop). Outer clauses: arbitrary c1,c2 comparison and comparison with derivedLowerShriek⋙ι; all restricted along WeilComplex.objectProperty.ι. Existential as the node states, consistent with the Nonempty interchange dep. Same operations as NativeOpenProperInterchange; letI Compactification.over equals the framework's local instance. Public imports match stmt_dep records; proof-dep modules imported plainly. Docstrings carry source and blueprint; 4-step proof plan; sorry only in the theorem; lines ≤100. Edge cases (empty X, identity refinement, extra proper component, non-separated Y, universes) ok. Advisory only: no Main-declarations list; standard second-reading placeholder. No files changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261024T185104-L-3392694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.nativeWeilCompactificationModelComparison"
+  ],
+  "sorry_after": []
+ }
+}

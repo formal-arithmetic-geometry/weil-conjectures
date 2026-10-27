@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+ "kind": "statement",
+ "title": "Polynomial root coordinates before reductivity is known",
+ "statement": "Let $V$ be a finite-dimensional rational vector space and $R\\subset V\\setminus\\{0\\}$ a reduced crystallographic root system spanning $V$, with coroot functionals $\\bar c_\\alpha$ and weight lattice $P=\\{v\\in V:\\bar c_\\alpha(v)\\in\\mathbf Z\\text{ for every }\\alpha\\in R\\}$ in the conventions of [lem-sfb-root-datum-lattice-embedding]. Let $\\mathfrak g,\\mathfrak h,h_\\delta,e_\\alpha,\\rho,W,\\Omega,\\Lambda$ satisfy the Chevalley-basis and faithful-representation conditions of [lem-sfb-chevalley-admissible-representation]: $\\mathfrak g$ is split semisimple over $\\mathbf Q$, $\\rho$ is faithful on finite-dimensional $W$, the nonzero weight spaces $W_\\lambda$ have weights $\\Omega\\subset P$ with $\\mathbf Z\\Omega=P$, and the full lattice $\\Lambda=\\bigoplus_{\\lambda\\in\\Omega}(\\Lambda\\cap W_\\lambda)$ is stable under every $D_{\\alpha,m}=\\rho(e_\\alpha)^m/m!$, with $\\rho(e_\\alpha)$ nilpotent. Fix a simple-root base $\\Delta$, meaning a subset $\\Delta\\subseteq R$ which is a basis of $V$ such that every root has integral coordinates in $\\Delta$ all nonnegative or all nonpositive. Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $W_F=\\Lambda\\otimes_{\\mathbf Z}F$, and $T=D_F(P)=\\operatorname{Spec}F[P]$, where $F[P]$ has basis $e^\\lambda$, multiplication $e^\\lambda e^\\mu=e^{\\lambda+\\mu}$, comultiplication $e^\\lambda\\mapsto e^\\lambda\\otimes e^\\lambda$, counit $e^\\lambda\\mapsto1$, and antipode $e^\\lambda\\mapsto e^{-\\lambda}$. Embed $T$ in $\\operatorname{GL}(W_F)$ by its weight characters on the summands $(\\Lambda\\cap W_\\lambda)\\otimes F$. Define the finite polynomial matrices $x_\\alpha(a)=\\sum_{m\\geq0}(D_{\\alpha,m}\\otimes1)a^m$ for every commutative $F$-algebra. Group schemes and closed subgroups have the meanings of [def-sc-group-scheme, def-sc-group-scheme-subgroup], and $\\mathbf G_a,\\mathbf G_m$ those of [def-sc-gm-ga].  Put $R^+=R\\cap\\sum_{\\delta\\in\\Delta}\\mathbf Z_{\\geq0}\\delta$, $N=|R^+|$, and fix any order on $R^+$ refining nondecreasing height (the sum of the simple-root coefficients). Write $p_+(b)=\\prod_{\\beta\\in R^+}x_\\beta(b_\\beta)$ and $p_-(a)=\\prod_{\\beta\\in R^+}x_{-\\beta}(a_\\beta)$, using this order. Each $p_\\pm:\\mathbf A_F^N\\to\\operatorname{GL}(W_F)$ is a closed immersion [def-weil-closed-immersion], and its image $U_\\pm$ is a closed subgroup scheme. For every rational linear functional $q:V\\to\\mathbf Q$ strictly positive on $\\Delta$ and separating the distinct weights in $\\Omega$, order the weight summands by decreasing $q(\\lambda)$. Then $U_+$ consists of block upper unitriangular matrices and $U_-$ of block lower unitriangular matrices, with identity diagonal blocks on the weight summands. Here block upper (respectively lower) unitriangular means identity diagonal blocks and zero blocks below (respectively above) the diagonal. The assertions are scheme-theoretic over every commutative $F$-algebra, in every characteristic, and do not assume reductivity of a generated group. When $R=\\varnothing$, both images are the identity subgroup and $N=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510-511. Agent-stated supporting lemma: Closedness and uniqueness of the ordered one-sign exponential products on an admissible full-weight lattice; integral root-string collection, without an ambient reductive group."
+ },
+ "stmt_deps": [
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-chevalley-admissible-representation",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical rational pairing of $V$ with $V^\\vee$ for the given roots and coroots. By [lem-sfb-root-base-rational-integral-spans], the simple coroots form a rational basis and their integer span $L^\\vee$ is the span of all coroots. Thus $P=\\operatorname{Hom}_{\\mathbf Z}(L^\\vee,\\mathbf Z)$ inside $V$: integrality on the simple coroots is equivalent to integrality on all coroots. Apply [lem-sfb-root-base-reflection-induction] to the dual root pairing, with predicate that a coroot is primitive in $L^\\vee$. The simple coroots are primitive since they are an integer basis; negation preserves primitivity; a simple reflection is an integral involution of $L^\\vee$ and therefore preserves primitivity. These verify all three induction hypotheses. Hence every coroot is primitive, so for each $\\alpha$ there is $\\nu_\\alpha\\in P$ with $\\bar c_\\alpha(\\nu_\\alpha)=1$.",
+   "uses": [
+    "lem-sfb-root-base-rational-integral-spans",
+    "lem-sfb-root-base-reflection-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.21-C.22, printed p.612, and C.35-C.38, pp.615-616; dual-base argument, expanded by agent."
+   }
+  },
+  {
+   "text": "Choose a $\\mathbf Z$-basis of each weight summand of $\\Lambda$ and concatenate them. Set $E_\\alpha=\\rho(e_\\alpha)$ and $H_\\alpha=\\rho(h_\\alpha)$. All $E_{\\pm\\alpha}$ are integral and $[E_\\alpha,E_{-\\alpha}]=H_\\alpha$; on the $\\lambda$ summand $H_\\alpha$ is multiplication by the integer $\\bar c_\\alpha(\\lambda)$, by the stated Chevalley representation conditions [lem-sfb-chevalley-admissible-representation]. If $E_\\alpha$ vanished modulo a prime $p$, this commutator would vanish, so every $\\bar c_\\alpha(\\lambda)$ for $\\lambda\\in\\Omega$ would be divisible by $p$. Since $\\mathbf Z\\Omega=P$, the same would hold on $P$, contradicting step 1. Therefore $E_\\alpha\\otimes F\\ne0$ in positive characteristic. In characteristic zero this follows from faithfulness and $e_\\alpha\\ne0$. This applies to both signs, without any reductive group.",
+   "uses": [
+    "lem-sfb-chevalley-admissible-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "The bracket relation with $\\mathfrak h$ gives $D_{\\alpha,m}W_\\lambda\\subseteq W_{\\lambda+m\\alpha}$: iterating $[h,E_\\alpha]=\\alpha(h)E_\\alpha$ gives eigenvalue $\\lambda(h)+m\\alpha(h)$. Intersect with the integral weight summands and base change; thus this remains a statement about the original weight labels over every $F$-algebra, even when differentiated weights coincide. For $m>0$ and $\\alpha>0$, $q(\\lambda+m\\alpha)>q(\\lambda)$, so the associated matrix block is strictly above the diagonal in decreasing $q$ order. The term $m=0$ is the identity. Products remain block upper unitriangular because a succession of positive shifts still has positive $q$ value. Replacing every root by its negative proves the lower assertion.",
+   "uses": [
+    "lem-sfb-chevalley-admissible-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "The divided-power multiplication identity $D_{\\alpha,i}D_{\\alpha,j}=\\binom{i+j}{i}D_{\\alpha,i+j}$ holds as an equality of integral matrices, since both sides agree over $\\mathbf Q$. Comparing coefficients with the binomial theorem gives $x_\\alpha(s)x_\\alpha(t)=x_\\alpha(s+t)$ over $\\mathbf Z[s,t]$. In particular $x_\\alpha(0)=1$ and $x_\\alpha(s)^{-1}=x_\\alpha(-s)$ after every base change. These identities also show that every factor of $p_\\pm$ is invertible, so the polynomial matrices define the asserted morphisms into $\\operatorname{GL}(W_F)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "For each positive root $\\beta$ choose a nonzero matrix entry $c_\\beta$ of $E_\\beta\\otimes F$, possible by step 2, in a block from weight $\\lambda$ to weight $\\lambda+\\beta$. In that entry of $p_+(b)$, expansion of the finite product gives\n$$c_\\beta b_\\beta+Q_\\beta((b_\\gamma)_{\\operatorname{ht}\\gamma<\\operatorname{ht}\\beta}).$$\nIndeed a selected monomial with exponents $m_\\gamma$ shifts weight by $\\sum m_\\gamma\\gamma=\\beta$. If its total degree is one it must be the $\\beta$ term, and if its total degree exceeds one, positivity of height forces every participating root to have strictly smaller height than $\\beta$. Consequently $Q_\\beta$ is obtained by multiplying the indicated integral matrices and retaining just these finitely many monomials; its reduction is an actual polynomial over $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "Recursively by height define a polynomial in the ambient matrix entries by\n$$r_\\beta(M)=c_\\beta^{-1}\\bigl(M_{i_\\beta j_\\beta}-Q_\\beta((r_\\gamma(M))_{\\operatorname{ht}\\gamma<\\operatorname{ht}\\beta})\\bigr).$$\nAt height one the polynomial $Q_\\beta$ is zero; at each larger height the right side uses only polynomials already defined. Step 5 proves by this induction that $r_\\beta(p_+(b))=b_\\beta$ as a polynomial identity. Thus the pullback $F[\\operatorname{GL}(W_F)]\\to F[b_\\beta]$ contains every coordinate $b_\\beta$ and is surjective. Its affine spectrum map is a closed immersion by the affine characterization in [def-weil-closed-immersion]. The identical recursion, using entries of $E_{-\\beta}\\otimes F$ and shifts $-\\beta$, proves this for $p_-$. The constants inverted are nonzero elements of $F$, never integers assumed invertible in $F$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion, equivalence of (1) and (2); combined with the agent polynomial recursion above."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-chevalley-nonopposite-exponential-commutator] to two distinct roots of the chosen sign. Its hypotheses are exactly the given Chevalley basis, nilpotent representation operators and divided-power stable full lattice. Every new factor has root $i\\alpha+j\\beta$ with $i,j>0$, so its positive height (using $-R^+$ for the negative sign) strictly exceeds each exchanged root's height. Apply the displayed identity with $(u,v)$ replaced by $(-u,-v)$, which is allowed since it holds for all elements of every test algebra, and multiply it on the left by $x_\\beta(v)x_\\alpha(u)$; with step 4 this gives $$x_\\alpha(u)x_\\beta(v)=x_\\beta(v)x_\\alpha(u)\\prod_{(i,j)\\in S_{\\alpha,\\beta}}x_{i\\alpha+j\\beta}(c_{\\alpha,\\beta;i,j}(-u)^i(-v)^j).$$ Thus two adjacent factors are exchanged, and the finitely many new factors, all of strictly higher height, stand to the right of both exchanged factors. Same-root factors combine by step 4. All these are polynomial identities over every test algebra.",
+   "uses": [
+    "lem-sfb-chevalley-nonopposite-exponential-commutator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "Collect any finite word of one sign by ascending height. Inductively, the word has a prefix containing the already collected roots of heights less than $h$ in the specified order, followed by factors of height at least $h$. Move the finitely many height-$h$ factors to the front of that tail in the specified order, using step 7, and combine equal roots. Each exchange creates only factors of height greater than $h$, so it creates no new height-$h$ factor; moving each of the finitely many such factors across the finite intervening word terminates. The resulting tail has height greater than $h$. The initial prefix is empty at $h=1$, and after the maximal root height there is no tail. This proves the induction and produces an ordered product with polynomial parameters. Apply it to the concatenation of two ordered products and to the reversed word with negated parameters. Both multiplication and inverse therefore preserve the image on every $F$-algebra, including algebras with nilpotents.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "By step 6 the image $U_\\pm$ is the closed subscheme identified with $\\mathbf A_F^N$ by $p_\\pm$. Its points over an arbitrary $F$-algebra are exactly the uniquely parametrized ordered products, because a closed immersion is an isomorphism onto its closed image. Step 8 and the zero tuple show that these subsets contain the identity and are closed under products and inverses. This is precisely the closed-subgroup criterion in [def-sc-group-scheme-subgroup]; the polynomial collected parameters give its structure morphisms, and their group identities follow from the injective matrix realization. Together with step 3 this proves every assertion scheme-theoretically.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  },
+  {
+   "text": "If $R=\\varnothing$, then $N=0$ and both products are empty products equal to the identity. The source is $\\operatorname{Spec}F$ and the identity subgroup is closed by the equations $M_{ij}=\\delta_{ij}$ in the general-linear coordinate algebra; its block diagonal is the identity. The arguments for nonempty $R$ used no restriction on the characteristic, on nilpotents in a test algebra, or on the chosen height-refining order.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "lem-sfb-chevalley-admissible-representation",
+  "lem-sfb-chevalley-nonopposite-exponential-commutator",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-root-base-reflection-induction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153) and omitted details of Theorem 23.72, printed pp.510-511; agent expansion of the one-sign root-coordinate argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Chevalley root exponential products give closed affine-space coordinates on the positive and negative unipotent matrix subgroups",
+   "results": "{\"t\": \"2026-10-23T22:14:59Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered Chevalley root exponential products give closed affine-space coordinates on the positive and negative unipotent matrix subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.f\", \"RootPairing.GeckConstruction.h\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.u\", \"RootPairing.GeckConstruction.ω\", \"RootPairing.GeckConstruction.ω_mul_f\"], \"digest\": \"94b6cf7a7ec83fc9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction and root-pairing results concern Lie algebras or root combinatorics; AffineBasis coordinates concern affine linear spaces. No hit states closed polynomial root coordinates for a matrix group on an arbitrary admissible integral lattice. Polynomial expand/roots hits are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential of positive root vectors on a full weight integral lattice parametrizes a unipotent subgroup scheme in every characteristic",
+   "results": "{\"t\": \"2026-10-23T22:15:33Z\", \"tool\": \"leanfinder\", \"query\": \"The exponential of positive root vectors on a full weight integral lattice parametrizes a unipotent subgroup scheme in every characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.GeckConstruction.span_range_h'_eq_top\", \"RootPairing.EmbeddedG2.toIsValuedIn\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.EmbeddedG2.allRoots_eq_map_allCoeffs\"], \"digest\": \"d01372bb268b1d45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction and root-pairing results concern Lie algebras or root combinatorics; AffineBasis coordinates concern affine linear spaces. No hit states closed polynomial root coordinates for a matrix group on an arbitrary admissible integral lattice. Polynomial expand/roots hits are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley commutator collection yields affine coordinates on unipotent root products",
+   "results": "{\"t\": \"2026-10-23T22:15:30Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley commutator collection yields affine coordinates on unipotent root products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closureCommutatorRepresentatives\", \"CommutatorRing\", \"AffineBasis.coords\", \"RootPairing.GeckConstruction.e_lie_u\", \"AffineBasis.coord\", \"AffineBasis.coord_smul\", \"AffineBasis.coords_apply\", \"LieAlgebra.rootSpace\"], \"digest\": \"62453f6df3eb2786\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction and root-pairing results concern Lie algebras or root combinatorics; AffineBasis coordinates concern affine linear spaces. No hit states closed polynomial root coordinates for a matrix group on an arbitrary admissible integral lattice. Polynomial expand/roots hits are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"exp\"",
+   "results": "{\"t\": \"2026-10-23T22:18:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.SubExpr.Pos.root\", \"Lean.SubExpr.isRoot\", \"Lean.SubExpr.mkRoot\", \"Lean.SubExpr.Pos.isRoot\", \"Lean.SubExpr.GoalsLocation.rootExpr\", \"Mathlib.Tactic.ClickSuggestions.GrwInfo.rootExpr\", \"Mathlib.Tactic.ClickSuggestions.RwInfo.rootExpr\", \"Polynomial.rootMultiplicity_expand\"], \"digest\": \"54f966ea9816bacf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction and root-pairing results concern Lie algebras or root combinatorics; AffineBasis coordinates concern affine linear spaces. No hit states closed polynomial root coordinates for a matrix group on an arbitrary admissible integral lattice. Polynomial expand/roots hits are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|unipotent|exponential",
+   "results": "{\"t\": \"2026-10-23T22:16:52Z\", \"tool\": \"grep\", \"query\": \"Chevalley|unipotent|exponential\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction and root-pairing results concern Lie algebras or root combinatorics; AffineBasis coordinates concern affine linear spaces. No hit states closed polynomial root coordinates for a matrix group on an arbitrary admissible integral lattice. Polynomial expand/roots hits are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|unipotent|exponential",
+   "results": "{\"t\": \"2026-10-23T22:57:06Z\", \"tool\": \"grep\", \"query\": \"Chevalley|unipotent|exponential\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root combinatorics, general closed-immersion criteria and polynomial presentation inverses do not state ordered root-matrix coordinates in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley root subgroup ordered multiplication is a closed immersion of affine space into the general linear group",
+   "results": "{\"t\": \"2026-10-23T22:57:06Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley root subgroup ordered multiplication is a closed immersion of affine space into the general linear group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\"], \"digest\": \"cf7ed46a3eff3a86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root combinatorics, general closed-immersion criteria and polynomial presentation inverses do not state ordered root-matrix coordinates in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"exp\"",
+   "results": "{\"t\": \"2026-10-23T22:57:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootPairing\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root combinatorics, general closed-immersion criteria and polynomial presentation inverses do not state ordered root-matrix coordinates in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Chevalley root exponential products on an admissible full weight lattice define closed affine space coordinates in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T22:57:07Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered Chevalley root exponential products on an admissible full weight lattice define closed affine space coordinates in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.chainTopCoeff\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.chainBotCoeff\", \"RootPairing.Iic_chainTopCoeff_eq\", \"RootPairing.EmbeddedG2.allRoots_eq_map_allCoeffs\", \"RootPairing.Iic_chainBotCoeff_eq\", \"RootPairing.setOf_root_add_zsmul_mem_eq_Icc\", \"RootPairing.setOf_root_sub_zsmul_mem_eq_Icc\"], \"digest\": \"95714f4799c15cfd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root combinatorics, general closed-immersion criteria and polynomial presentation inverses do not state ordered root-matrix coordinates in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangular polynomial parametrization of positive root matrices has a polynomial inverse on its closed image",
+   "results": "{\"t\": \"2026-10-23T22:57:35Z\", \"tool\": \"leanfinder\", \"query\": \"A triangular polynomial parametrization of positive root matrices has a polynomial inverse on its closed image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"xInTermsOfW\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\", \"Matrix.GeneralLinearGroup.fixpointPolynomial\", \"matPolyEquiv_symm_X\", \"MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix\", \"Polynomial.isCoveringMapOn_eval\", \"matPolyEquiv_symm_map_eval\"], \"digest\": \"6870a085941bac63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: root combinatorics, general closed-immersion criteria and polynomial presentation inverses do not state ordered root-matrix coordinates in arbitrary characteristic."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-exponential-big-cell",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, Theorem 23.72 proof, pp.510-511: omitted details needed to use the weight-character torus rather than the full diagonal torus. The open-cell strengthening is an agent-stated construction lemma. Supporting calculation: Closedness and uniqueness of the ordered one-sign exponential products on an admissible full-weight lattice; integral root-string collection, without an ambient reductive group.",
+   "via": [
+    "lem-sfb-chevalley-exponential-big-cell",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+  "worker": "stage1",
+  "summary": "Retained the statement. Proved root-operator nonvanishing modulo every prime from primitive coroots and full weight generation, constructed polynomial coordinate retractions by height, and collected same-sign words using one new integral two-root commutator input. All identities hold over arbitrary test algebras; no ambient reductivity is used.",
+  "blueprint": "Current latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), supporting algebraic-group construction along the recorded admissible-direct-image alteration chain; immediate place is Milne 23h omitted one-sign coordinate calculation in Theorem 23.72."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-9f72d4107",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-9f72d4107 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps and the new node in full, plus Milne §23h pp.508-511 (Theorem 23.71; (152)-(153); the proof of 23.72 omits the details, so proof_origin by=agent is correct) and C.21-C.38. Live and side-live still have the item unsplit and there is no repair note, so this is a first split; the statement and stmt_deps are unchanged and fit how its citer exponential-big-cell step 2 uses it. Steps: (1) Coroots are primitive. The spans lemma makes the simple coroots a basis of the coroot lattice L^vee, and reflection induction on the dual pairing holds (simple coroots are a basis, negation and integral reflections preserve primitivity). Since P = Hom(L^vee, Z), each coroot takes value 1 on some element of P. (2) If E_alpha were 0 mod p, then H_alpha = [E_alpha, E_-alpha] would be 0 mod p, so the coroot would be divisible by p on Omega and hence on Z Omega = P, contradicting step 1. (3) Weight shifts and decreasing-q order give the triangularity. (4) Additivity of x_alpha comes from the binomial identity for divided powers. (5)-(6) Height recursion: degree-2 monomials only involve lower heights, giving retractions r_beta, so the pullback is surjective and def-weil-closed-immersion gives a closed immersion. (7) FAULT, repaired: multiplying the commutator identity by x_beta(v)x_alpha(u) gives x_a x_b = C x_b x_a, which puts the new higher factors to the left and breaks the step-8 collection invariant. The FIX substitutes (-u,-v) and left-multiplies, giving x_a(u)x_b(v) = x_b(v)x_a(u) times the product of x_{ia+jb}(c(-u)^i(-v)^j), with the new factors on the right. (8) With that, collection by height terminates. (9) The closed-subgroup criterion of def-sc-group-scheme-subgroup holds. (10) R empty is handled. Tested on A1, on A2 (the E13 entry is b_a b_b + c b_{a+b}), and mod 2 and 3. New node: it is the Chevalley commutator formula (Steinberg Lemma 15), true over Z[u,v] for any rep with a divided-power-stable lattice, and the alpha, beta independence makes the weight grading work. Checked on A1xA1 (commutator 1) and A2 (I+uvE13). It is statement-only, self-contained and strictly smaller than the item. Searching dag/nodes found no duplicate (rank-two-straightening is additive straightening in U; opposite-rational-collection is opposite signs with localization). No cycle. Batch-5 flag: lem-trf-fg-torsionfree-group-free is a generic Mathlib-status lemma (f.g. torsion-free abelian groups are free), not part of the trace formula or Poincare proof, and it was already reached by the item's base stmt_deps; the closure diff contains 0 trf nodes, so accepted. Route is in-unit, proof_deps equal the union of the uses, no tool_uses. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-chevalley-unipotent-polynomial-coordinates.json, step 7 text only.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ChevalleyUnipotentPolynomialCoordinates",
+  "declaration": "AlgebraicGeometry.ChevalleyCoordinates.unipotent_polynomial_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.ChevalleyCoordinates.weightTorus",
+   "AlgebraicGeometry.ChevalleyCoordinates.dividedMatrix",
+   "AlgebraicGeometry.ChevalleyCoordinates.rootMatrix",
+   "AlgebraicGeometry.ChevalleyCoordinates.orderedProduct",
+   "AlgebraicGeometry.ChevalleyCoordinates.parameterPoint",
+   "AlgebraicGeometry.ChevalleyCoordinates.unipotent_polynomial_coordinates"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ChevalleyUnipotentPolynomialCoordinates.lean",
+  "statement": "theorem unipotent_polynomial_coordinates (V : Type u) [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V] (R : Set V) (c : R → Module.Dual ℚ V) (hfinite : R.Finite) (hne : ∀ a : R, (a : V) ≠ 0) (hspan : Submodule.span ℚ R = ⊤) (htwo : ∀ a : R, c a a = 2) (hint : ∀ a b : R, ∃ n : ℤ, c a b = (n : ℚ)) (hreflect : ∀ a : R, Set.BijOn (fun v : V ↦ v - c a v • (a : V)) R R) (hreduced : ∀ a : R, R ∩ (Submodule.span ℚ ({(a : V)} : Set V) : Set V) = {(a : V), -(a : V)}) (P : Submodule ℤ V) (hP : ∀ v : V, v ∈ P ↔ ∀ a : R, ∃ n : ℤ, c a v = (n : ℚ)) (g : Type u) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] (hsemi : LieAlgebra.HasTrivialRadical ℚ g) (H : LieSubalgebra ℚ g) (hab : IsLieAbelian H) (hmax : ∀ K : LieSubalgebra ℚ g, H ≤ K → IsLieAbelian K → K = H) (θ : H ≃ₗ[ℚ] Module.Dual ℚ V) (e : R → g) (he : ∀ a : R, e a ≠ 0 ∧ ∀ h : H, ⁅(h : g), e a⁆ = θ h a • e a) (hdecomp : DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun a : R ↦ Submodule.span ℚ ({e a} : Set g)))) (r : ℕ) (simple : Module.Basis (Fin r) ℚ V) (hsimple : ∀ i, simple i ∈ R) (hbase : ∀ a : R, (∀ i, ∃ n : ℤ, simple.repr a i = (n : ℚ)) ∧ ((∀ i, 0 ≤ simple.repr a i) ∨ (∀ i, simple.repr a i ≤ 0))) (B : Module.Basis (Fin r ⊕ R) ℚ g) (hB : (∀ i, B (Sum.inl i) = (θ.symm (c ⟨simple i, hsimple i⟩) : g)) ∧ (∀ a : R, B (Sum.inr a) = e a)) (neg : R → R) (hneg : ∀ a : R, (neg a : V) = -(a : V)) (hopposite : ∀ a : R, ⁅e a, e (neg a)⁆ = (θ.symm (c a) : g)) (hbracket : ∀ a b k : R, (a : V) + (b : V) = (k : V) → ∃ p : ℕ, (b : V) - p • (a : V) ∈ R ∧ (∀ n : ℕ, (b : V) - n • (a : V) ∈ R → n ≤ p) ∧ ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e a, e b⁆ = ((ε : ℚ) * (p + 1 : ℚ)) • e k) (hzero : ∀ a b : R, (a : V) + (b : V) ≠ 0 → (a : V) + (b : V) ∉ R → ⁅e a, e b⁆ = 0) (W : Type u) [AddCommGroup W] [Module ℚ W] [LieRingModule g W] [LieModule ℚ g W] [FiniteDimensional ℚ W] (hfaithful : LieModule.IsFaithful ℚ g W) (Λ : Submodule ℤ W) [Submodule.IsLattice ℚ Λ] [Module.Free ℤ Λ] (Ω : Finset V) (hweights : ∀ μ ∈ Ω, μ ∈ P ∧ LieModule.weightSpace W (fun h : H ↦ θ h μ) ≠ ⊥) (hweightSum : DirectSum.IsInternal (fun μ : Ω ↦ (LieModule.weightSpace W (fun h : H ↦ θ h μ)).toSubmodule)) (hgenerate : Submodule.span ℤ (Ω : Set V) = P) (hlatticeSum : DirectSum.IsInternal (fun μ : Ω ↦ ((LieModule.weightSpace W (fun h : H ↦ θ h μ)).toSubmodule.restrictScalars ℤ).comap Λ.subtype)) (hnil : ∀ a : R, IsNilpotent (LieModule.toEnd ℚ g W (e a))) (hstable : ∀ (a : R) (m : ℕ) (w : W), w ∈ Λ → ((Nat.factorial m : ℚ)⁻¹ • (LieModule.toEnd ℚ g W (e a)) ^ m) w ∈ Λ) (d : ℕ) (b : Module.Basis (ULift.{u} (Fin d)) ℤ Λ) (weight : ULift.{u} (Fin d) → Ω) (hhomogeneous : ∀ j, (b j : W) ∈ LieModule.weightSpace W (fun h : H ↦ θ h (weight j))) (N : ℕ) (β : Fin N ≃ {a : R // ∀ i, 0 ≤ simple.repr a i}) (horder : ∀ i j : Fin N, i ≤ j → (∑ k, simple.repr (β i).val k) ≤ ∑ k, simple.repr (β j).val k) (F : Type u) [Field F] [IsAlgClosed F] : ∃ (pPlus pMinus : StandardGroupSchemes.affine F (MvPolynomial (Fin N) F) ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) F) (torusEmbedding : weightTorus P F ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) F), IsClosedImmersion pPlus.left ∧ IsClosedImmersion pMinus.left ∧ IsClosedImmersion torusEmbedding.left ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (χ : AddMonoidAlgebra F P →ₐ[F] A), (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (StandardGroupSchemes.map F χ ≫ torusEmbedding) : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A) = Matrix.diagonal (fun j ↦ χ (AddMonoidAlgebra.single ⟨(weight j).val, (hweights _ (weight j).property).1⟩ 1))) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (a : Fin N → A), (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (parameterPoint F N A a ≫ pPlus) : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A) = orderedProduct Λ d b (fun α : R ↦ LieModule.toEnd ℚ g W (e α)) hstable N (fun i ↦ (β i).val) A a ∧ (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (parameterPoint F N A a ≫ pMinus) : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A) = orderedProduct Λ d b (fun α : R ↦ LieModule.toEnd ℚ g W (e α)) hstable N (fun i ↦ neg (β i).val) A a) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], ∃ UPlus UMinus : Subgroup (GL (ULift.{u} (Fin d)) A), (UPlus : Set (GL (ULift.{u} (Fin d)) A)) = Set.range (fun a : Fin N → A ↦ GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (parameterPoint F N A a ≫ pPlus)) ∧ (UMinus : Set (GL (ULift.{u} (Fin d)) A)) = Set.range (fun a : Fin N → A ↦ GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (parameterPoint F N A a ≫ pMinus))) ∧ (∀ (q : V →ₗ[ℚ] ℚ), (∀ i, 0 < q (simple i)) → Set.InjOn q (Ω : Set V) → ∀ (A : Type u) [CommRing A] [Algebra F A] (a : Fin N → A) (i j : ULift.{u} (Fin d)), (q (weight i) ≤ q (weight j) → orderedProduct Λ d b (fun α : R ↦ LieModule.toEnd ℚ g W (e α)) hstable N (fun k ↦ (β k).val) A a i j = (1 : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A) i j) ∧ (q (weight j) ≤ q (weight i) → orderedProduct Λ d b (fun α : R ↦ LieModule.toEnd ℚ g W (e α)) hstable N (fun k ↦ neg (β k).val) A a i j = (1 : Matrix (ULift.{u} (Fin d)) (ULift.{u} (Fin d)) A) i j)) ∧ (R = ∅ → N = 0 ∧ ∀ (A : Type u) [CommRing A] [Algebra F A] (a : Fin N → A), GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (parameterPoint F N A a ≫ pPlus) = 1 ∧ GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) F A (parameterPoint F N A a ≫ pMinus) = 1)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The root and representation hypotheses are unpacked from the recorded admissible-representation interface. A homogeneous integral basis is an auxiliary coordinate choice. The closed-image subgroup assertion uses exactly the all-algebras criterion of IsClosedSubgroupScheme, rather than adding an arbitrary group law. All helper definitions have explicit data; the only postponed proof is the node theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dc8caf38",
+  "group": "O1",
+  "result": "pass",
+  "note": "Statement verbatim with file; node unchanged except the lean record. Hypotheses are the admissible-representation dependency's conclusions as binders: neg/hopposite is equivalent; the Δ-indexed basis B follows from the other hypotheses; Module.Free is automatic. dividedMatrix/rootMatrix give the integral finite x_α (factorials inverted only over Q, so every characteristic works); orderedProduct follows any height-refining order; p- uses the same order with neg. p± are pinned on all A-points via parameterPoint=Spec(aeval a) and are closed immersions; the per-A Subgroup-range clause is the equivalent criterion documented in def-sc-group-scheme-subgroup and in IsClosedSubgroupScheme's docstring. Block-unitriangular clauses are correct for toMatrix columns and the weight shift D_{α,m}W_λ⊆W_{λ+mα}, with equal q giving equal weight. R=∅ gives N=0 and identity. Torus closed-immersion clause is true (ZΩ=P) and matches the node's word 'Embed'. Single universe u is not substantive (dependency is universe-polymorphic; no statement citers). No duplicate (BorelRootProductCoordinates is the reductive Borel version); helpers have real data and docstrings; only the theorem is sorry, with the 10-step plan. No changes, so no compile."
+ }
+}

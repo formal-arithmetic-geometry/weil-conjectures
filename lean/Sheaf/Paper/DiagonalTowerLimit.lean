@@ -6,21 +6,23 @@ Authors: SHEAF group NV
 module
 
 public import Sheaf.Paper.DiagonalTowerSystem
+public import Sheaf.Paper.DiagonalTowerLimitInterface
+public import Sheaf.Paper.DiagonalLimitAssembly
 public import Sheaf.Paper.ProEtaleTateTwistsOfUniverses
 public import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import Sheaf.CategoryTheory.RingedToposMorphism
-import Sheaf.Paper.PurTwistSheafLocallyFree
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.FormalClosedSupportIILimits
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 public import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.AdicCompletionReduction
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+
+import all Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
+import all Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import all Sheaf.Paper.FormalClosedSupportIILimits
+import Sheaf.Paper.PurTwistSheafLocallyFree
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.LineEvaluationInversePair
+import Sheaf.Algebra.Homology.FlatSingleDerivedNormalization
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # The completed diagonal class
@@ -44,341 +46,109 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
+set_option genSizeOf false
+set_option genInjectivity false
 
-universe u v w a b
+universe u v w a b c vc r
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The existing commutative-ring sheafification at the fixed coefficient universe.
-Naming this specialization avoids an unresolved maximum in instance synthesis.
-Source: blueprint completed coefficient convention, clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-instance (priority := 2200) diagonalCompletedRingSheafify (X : Scheme.{u}) :
-    HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{u, u} X
+attribute [local irreducible] diagonalCompletedSource diagonalOrdinaryRlim
+  diagonalSourceLimitMap diagonalTargetLimitMap diagonalRootLimitComparison
+  diagonalFiniteCycleNormalization DiagonalArrowCompatibility
+  diagonalCompleteDataAssertion DiagonalLimitDataSpec
+attribute [local irreducible] diagonalSingleLimitComparison diagonalExactFunctorExtImage
+attribute [local irreducible] CategoryTheory.Abelian.Ext
 
-/-- Additivity of this specific limit functor, from its binary-product preservation.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
-instance diagonalLimitAdditive (A : Type a) [Category.{v} A] [Abelian A]
-    [HasLimitsOfShape ℕᵒᵖ A] : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive :=
-  Functor.additive_of_preserves_binary_products _
+@[instance_reducible] private def diagonalResidueInvertible (ℓ : ℕ) [Fact ℓ.Prime]
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))] :
+    ∀ x : X, Invertible (ℓ : X.residueField x) := by
+  classical
+  have hℓ : IsUnit (ℓ : k) := isUnit_iff_ne_zero.mpr (by
+    rw [Ne, CharP.cast_eq_zero_iff k p]
+    exact fun h ↦ hpℓ (((Fact.out : ℓ.Prime).eq_one_or_self_of_dvd p h).resolve_left
+      (Fact.out : p.Prime).ne_one))
+  let φ := ((Scheme.ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom
+  have hX : IsUnit (ℓ : Γ(X, ⊤)) := by simpa only [map_natCast] using hℓ.map φ
+  intro x
+  let ψ := (X.residue x).hom.comp (X.presheaf.germ ⊤ x trivial).hom
+  exact (show IsUnit (ℓ : X.residueField x) from by
+    simpa only [map_natCast] using hX.map ψ).invertible
 
-/-- A total right derived functor with its universal unit and K-injective computation.
-Source: blueprint clause 1, total derived functors on strict towers
-(blueprint: det-prop-diagonal-tower-limit). -/
-structure DiagonalRightDerived
-    {A : Type a} [Category.{v} A] [Abelian A]
-    {B : Type b} [Category.{u} B] [Abelian B]
-    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
-    (F : A ⥤ B) [F.Additive] where
-  R : DerivedCategory A ⥤ DerivedCategory B
-  η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R
-  universal : R.IsRightDerivedFunctor η (HomologicalComplex.quasiIso A (.up ℤ))
-  computation : ∀ P : CochainComplex A ℤ, P.IsKInjective → IsIso (η.app P)
-  [shift : R.CommShift ℤ]
-  triangulated : R.IsTriangulated
 
-attribute [instance] DiagonalRightDerived.shift
-
-/-- The total derived limit, including its canonical projections to the derived levels.
-The normalization is an equation on complexes and fixes the maps, not just their types.
-Source: blueprint clauses 1 and 3, Stacks 0940
-(blueprint: det-prop-diagonal-tower-limit). -/
-structure DiagonalRlim
-    (A : Type a) [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
-    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] extends
-    DiagonalRightDerived (lim : (ℕᵒᵖ ⥤ A) ⥤ A) where
-  projection : ∀ n : ℕ,
-    R ⟶ ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory
-  normalization : ∀ (P : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (n : ℕ),
-    η.app P ≫ (projection n).app (DerivedCategory.Q.obj P) ≫
-      ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategoryFactors.hom.app P =
-      DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app P)
-
-/-- Scalar forgetting preserves tower limits by the existing scalar adjunction.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
-instance diagonalForgetTowerLimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    PreservesLimitsOfShape ℕᵒᵖ (diagonalForget ℓ X) :=
-  (diagonalScalarAdjunction ℓ X).rightAdjoint_preservesLimits.preservesLimitsOfShape
-
-/-- Modules over the existing completed coefficient sheaf.
-Source: blueprint completed coefficient convention, clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-abbrev DiagonalCompleted (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :=
-  SheafOfModules.{u + 1} (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X ℓ))
-
-/-- The existing abelian structure on completed coefficient modules, named once so
-all derived expressions share its sheafification witnesses.
-Source: blueprint completed coefficient convention, clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-instance (priority := 2000) diagonalCompletedAbelian
-    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Abelian (DiagonalCompleted ℓ X) :=
-  inferInstance
-
-/-- The n-th component of the canonical completed coefficient pullback map.
-Source: blueprint clause 1, completed source coefficients
-(blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedCoefficientComponent (ℓ : ℕ) [Fact ℓ.Prime]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
-        (Scheme.purTwistZlCompletion Y ℓ) ⟶ Scheme.purTwistFiniteRing X ℓ n :=
-  (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
-      (Scheme.purTwistZlProjection Y ℓ n) ≫
-    Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
-      (CommRingCat.of.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ (n + 1)))))
-
-/-- The finite components respect the prescribed quotient transitions.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit).
-Proof: the limit projections commute with every tower arrow. The constant-sheaf
-inverse-image comparison is natural in a ring homomorphism, because it is adjoint
-to the constant-section map. Apply this naturality to each quotient transition;
-functoriality of inverse image then gives the displayed cone equation. -/
-theorem diagonalCompletedCoefficient_naturality (ℓ : ℕ) [Fact ℓ.Prime]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) {b a : ℕᵒᵖ} (g : b ⟶ a) :
-    diagonalCompletedCoefficientComponent ℓ f b.unop ≫
-      (Scheme.purTwistZlTower X ℓ).map g =
-        diagonalCompletedCoefficientComponent ℓ f a.unop := by
-  sorry
-
-/-- The canonical map from inverse-image to completed coefficients on the source.
-Its actual data is the limit lift of the finite constant-section comparisons.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedCoefficientMap (ℓ : ℕ) [Fact ℓ.Prime]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
-      (Scheme.purTwistZlCompletion Y ℓ) ⟶ Scheme.purTwistZlCompletion X ℓ :=
-  limit.lift (Scheme.purTwistZlTower X ℓ)
-    { pt := (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
-        (Scheme.purTwistZlCompletion Y ℓ)
-      π := { app n := diagonalCompletedCoefficientComponent ℓ f n.unop
-             naturality _ _ g := (Category.id_comp _).trans
-               (diagonalCompletedCoefficient_naturality ℓ f g).symm } }
-
-/-- The supported completed constant with its canonical completed-coefficient action.
-Use the completed coefficient sheaf on the diagonal, restricted along the actual
-coefficient structure map before ringed direct image.
-Source: blueprint Delta_* Z_l in clauses 1 and 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedSource (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
-    DiagonalCompleted ℓ (diagonalSurface Y) :=
-  (Scheme.proEtaleRingedDirectImage (diagonalImmersion Y)
-    (Scheme.purTwistZlCompletion (diagonalSurface Y) ℓ)).obj
-      ((SheafOfModules.restrictScalars
-        ((sheafCompose (Scheme.ProEt.topology (ProjectiveLine Y))
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-            (diagonalCompletedCoefficientMap ℓ (diagonalImmersion Y)))).obj
-              (SheafOfModules.unit
-                (Scheme.purTwistRing (ProjectiveLine Y)
-                  (Scheme.purTwistZlCompletion (ProjectiveLine Y) ℓ))))
-
-/-- Restrict the completed action to constant scalars, then to constant sections.
-The two constant-ring presentations are identified by constantCommuteCompose.
-Source: blueprint clause 3 and Stacks 099I
-(blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedRestriction (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    DiagonalCompleted ℓ X ⥤ DiagonalMod ℓ X :=
-  letI := Scheme.purTwistForgetPreservesSheafification X
-  SheafOfModules.restrictScalars
-    ((sheafCompose (Scheme.ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-        (Scheme.purTwistZlCompletionMap X ℓ)) ⋙
-  SheafOfModules.restrictScalars
-    ((constantCommuteCompose (Scheme.ProEt.topology X)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).app
-        (CommRingCat.of.{u + 1} (ULift.{u + 1} ℤ_[ℓ]))).inv ⋙
-  constantRingModuleRestriction.{u + 1, u} (Scheme.ProEt.topology X) (ULift.{u + 1} ℤ_[ℓ])
-
-/-- Constant-scalar restriction is additive and exact.
-Source: blueprint clause 3, coefficient comparison (blueprint: det-prop-diagonal-tower-limit).
-Proof: all three factors retain the underlying additive sheaf. Kernels are sectionwise
-and cokernels are additive sheafifications, so finite limits, finite colimits and sums
-of morphisms are unchanged. The constant-ring equivalence extends the scalar action
-uniquely by local gluing (lem-cbc-constant-ring-module-sheaves). -/
-theorem diagonalCompletedRestriction_exact (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    (diagonalCompletedRestriction ℓ X).Additive ∧
-    PreservesFiniteLimits (diagonalCompletedRestriction ℓ X) ∧
-    PreservesFiniteColimits (diagonalCompletedRestriction ℓ X) := by
-  sorry
-
-/-- The additive part of coefficient restriction. Source: blueprint clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-instance diagonalCompletedRestrictionAdditive (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    (diagonalCompletedRestriction ℓ X).Additive :=
-  (diagonalCompletedRestriction_exact ℓ X).1
-
-/-- The left exact part of coefficient restriction. Source: blueprint clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-instance diagonalCompletedRestrictionLimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    PreservesFiniteLimits (diagonalCompletedRestriction ℓ X) :=
-  (diagonalCompletedRestriction_exact ℓ X).2.1
-
-/-- The right exact part of coefficient restriction. Source: blueprint clause 3
-(blueprint: det-prop-diagonal-tower-limit). -/
-instance diagonalCompletedRestrictionColimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
-    PreservesFiniteColimits (diagonalCompletedRestriction ℓ X) :=
-  (diagonalCompletedRestriction_exact ℓ X).2.2
-
-/-- Ordinary tensor with the signed completed Tate line.
-Source: blueprint clause 2 (blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedSheafTwist (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) (d : ℤ) :
-    DiagonalCompleted ℓ X ⥤ DiagonalCompleted ℓ X :=
-  SheafOfModules.siteSheafTensorRight
-    (A := Scheme.purTwistZlCompletion X ℓ)
-    (WeilConjectures.coefficientTwistLine X
-      (R := Scheme.purTwistZlCompletion X ℓ) (Scheme.purTwistZlModule X ℓ) d)
-
-/-- Tensor with the published signed Tate line, on objects and morphisms.
-Source: blueprint clause 2; sk-def-sp-tate-twist, final formula
-(blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedTwist (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
-    [HasDerivedCategory.{w} (DiagonalCompleted ℓ X)] (d : ℤ) :
-    DerivedCategory (DiagonalCompleted ℓ X) ⥤ DerivedCategory (DiagonalCompleted ℓ X) :=
-  (𝟭 _).prod' ((Functor.const _).obj
-    ((DerivedCategory.singleFunctor _ 0).obj
-      (WeilConjectures.coefficientTwistLine X
-        (R := Scheme.purTwistZlCompletion X ℓ) (Scheme.purTwistZlModule X ℓ) d))) ⋙
-  SheafOfModules.siteDerivedTensorIndependentCoefficients
+private theorem diagonalLineLimits (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
+    (P : SheafOfModules.{u + 1}
+      (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X ℓ)))
+    [HasDerivedCategory.{u + 1} (SheafOfModules.{u + 1}
+      (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X ℓ)))]
+    (hP : ∀ U : X.ProEt, ∃ s : Sieve U, s ∈ Scheme.ProEt.topology X U ∧
+      ∀ (V : X.ProEt) (f : V ⟶ U), s f →
+        Nonempty (P.over V ≅ SheafOfModules.unit
+          ((Scheme.purTwistRing X (Scheme.purTwistZlCompletion X ℓ)).over V))) :
+    (SheafOfModules.siteSheafTensorRight (A := Scheme.purTwistZlCompletion X ℓ) P).Additive ∧
+    PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight
+      (A := Scheme.purTwistZlCompletion X ℓ) P) ∧
+    PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight
+      (A := Scheme.purTwistZlCompletion X ℓ) P) ∧
+    (∃ (_ : ((𝟭 _).prod' ((Functor.const _).obj
+      ((DerivedCategory.singleFunctor _ 0).obj P)) ⋙
+        SheafOfModules.siteDerivedTensorIndependentCoefficients
+          (Scheme.ProEt.topology X) (Scheme.purTwistZlCompletion X ℓ)).CommShift ℤ),
+      CondensedRing.ClosedSupportLimitFunctorProperties
+        ((𝟭 _).prod' ((Functor.const _).obj
+          ((DerivedCategory.singleFunctor _ 0).obj P)) ⋙
+            SheafOfModules.siteDerivedTensorIndependentCoefficients
+              (Scheme.ProEt.topology X) (Scheme.purTwistZlCompletion X ℓ))) := by
+  classical
+  open SheafOfModules MonoidalCategory in
+  obtain ⟨_, hAdd, _, hLim, hCol, _, _, hflat, _, _, _, e, _, _, a, b, _⟩ :=
+    LineEvaluation.evaluation_inverse_pair.{u + 1, u, u + 1} (Scheme.purTwistZlCompletion X ℓ) P hP
+  let eqv := CategoryTheory.Equivalence.mk
+    (MonoidalCategory.tensorRight P)
+    (MonoidalCategory.tensorRight (SheafOfModules.LineEvaluation.dual.{u + 1, u, u + 1}
+      (Scheme.purTwistZlCompletion X ℓ) P)) a.symm b
+  have : (MonoidalCategory.tensorRight P).IsEquivalence := eqv.isEquivalence_functor
+  let iso := SheafOfModules.siteSheafTensorRightIso
+    (Scheme.purTwistZlCompletion X ℓ) P
+  have hAdd' : (SheafOfModules.siteSheafTensorRight
+      (A := Scheme.purTwistZlCompletion X ℓ) P).Additive :=
+    Functor.additive_of_iso iso.symm
+  have : (SheafOfModules.siteSheafTensorRight
+      (A := Scheme.purTwistZlCompletion X ℓ) P).IsEquivalence :=
+    Functor.isEquivalence_of_iso iso.symm
+  refine ⟨hAdd', inferInstance, inferInstance, ?_⟩
+  have := hAdd
+  have := hLim
+  have := hCol
+  obtain ⟨_, _, _, _, _, _, _, _, s, ht, chi, _, _, eta, _, _, _⟩ :=
+    SheafOfModules.FlatSingleDerivedNormalization.flat_single_derived_normalization
+      (Scheme.purTwistZlCompletion X ℓ) P hflat
+  let := s
+  have := ht
+  let D := SheafOfModules.FlatSingleDerivedNormalization.derived
+    (Scheme.purTwistZlCompletion X ℓ) P
+  have : D.IsEquivalence := Functor.isEquivalence_of_iso eta.symm
+  let eP := (DerivedCategory.singleFunctorIsoCompQ _ 0).app P
+  let T := SheafOfModules.siteDerivedTensorIndependentCoefficients
     (Scheme.ProEt.topology X) (Scheme.purTwistZlCompletion X ℓ)
-
-/-- Simultaneous derived quotient with its canonical quotient units on arbitrary inputs.
-The normalization with the left-derived counit specifies the actual quotient map.
-Source: blueprint clause 3, derived finite reductions; Stacks 099M
-(blueprint: det-prop-diagonal-tower-limit). -/
-structure DiagonalCompletedReduction (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
-    [HasDerivedCategory.{w} (DiagonalCompleted ℓ X)]
-    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ X)] where
-  derived : DiagonalDerivedReduction ℓ (𝟭 (DiagonalCompleted ℓ X))
-  unit : ∀ n : ℕ, 𝟭 (DerivedCategory (DiagonalCompleted ℓ X)) ⟶
-    derived.T ⋙ ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ X)).obj (op n)).mapDerivedCategory
-  normalization : ∀ (P : CochainComplex (DiagonalCompleted ℓ X) ℤ) (n : ℕ),
-    (unit n).app (DerivedCategory.Q.obj P) ≫
-      ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ X)).obj (op n)).mapDerivedCategory.map
-        (derived.ε.app P) ≫
-      ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ X)).obj (op n)).mapDerivedCategoryFactors.hom.app
-        ((derived.ordinary.E.mapHomologicalComplex (.up ℤ)).obj P) =
-      DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex (derived.ordinary.π n) (.up ℤ)).app P)
-
-/-- The degree-zero supported completed coefficient object.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
-abbrev diagonalCompletedDomain (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
-    [HasDerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y))] :
-    DerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y)) :=
-  (DerivedCategory.singleFunctor _ 0).obj (diagonalCompletedSource ℓ Y)
-
-/-- The published completed Tate line shifted by two.
-Source: blueprint clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
-abbrev diagonalCompletedCodomain (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
-    [HasDerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y))] :
-    DerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y)) :=
-  ((DerivedCategory.singleFunctor _ 0).obj
-    (Scheme.purTwistZlModule (diagonalSurface Y) ℓ))⟦(2 : ℤ)⟧
-
-/-- Exact derived restriction from completed to constant coefficients.
-Source: blueprint clause 3 (blueprint: det-prop-diagonal-tower-limit). -/
-abbrev diagonalCompletedUnderlying (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
-    [HasDerivedCategory.{w} (DiagonalCompleted ℓ X)]
-    [HasDerivedCategory.{w} (DiagonalMod ℓ X)] :=
-  (diagonalCompletedRestriction ℓ X).mapDerivedCategory
-
-/-- The ordinary limit cone maps to its total derived limit through the derived unit.
-This is the canonical comparison with zero nullhomotopy on the Roos model.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalOrdinaryRlim
-    {A : Type a} [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
-    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
-    (L : DiagonalRlim A) (H : ℕᵒᵖ ⥤ A) :
-    (DerivedCategory.singleFunctor A 0).obj (limit H) ⟶
-      L.R.obj ((DerivedCategory.singleFunctor (ℕᵒᵖ ⥤ A) 0).obj H) :=
-  (DerivedCategory.singleFunctorIsoCompQ A 0).hom.app (limit H) ≫
-    DerivedCategory.Q.map
-      ((HomologicalComplex.singleMapHomologicalComplex
-        (lim : (ℕᵒᵖ ⥤ A) ⥤ A) (.up ℤ) 0).inv.app H) ≫
-    L.η.app ((HomologicalComplex.single (ℕᵒᵖ ⥤ A) (.up ℤ) 0).obj H) ≫
-    L.R.map ((DerivedCategory.singleFunctorIsoCompQ (ℕᵒᵖ ⥤ A) 0).inv.app H)
-
-/-- The supported integral constant has a unique coefficient-unit map into the
-supported completed constant. On every constant integer section it is n times one.
-Source: blueprint clauses 1 and 3, completed source convention
-(blueprint: det-prop-diagonal-tower-limit).
-Proof: on the diagonal site send an integer n to n times one in the diagonal
-completed ring. Ring restrictions preserve one and integer multiples, so these maps
-form a presheaf morphism. The sheafification adjunction extends it uniquely from
-the constant presheaf. Apply direct image along the diagonal. Every section of the
-constant sheaf is locally a constant integer, so the displayed equations determine
-the resulting additive sheaf map uniquely. -/
-theorem diagonalCompletedGenerator_existsUnique (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
-    ∃! γ : diagonalIntegralSource Y ⟶
-        (diagonalForget ℓ (diagonalSurface Y)).obj
-          ((diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj
-            (diagonalCompletedSource ℓ Y)),
-      ∀ (U : (diagonalSurface Y).ProEtᵒᵖ) (n : ℤ),
-        HEq (γ.hom.app U
-          ((toSheafify (Scheme.ProEt.topology (ProjectiveLine Y))
-            ((Functor.const (ProjectiveLine Y).ProEtᵒᵖ).obj
-              (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app
-                (op ((Scheme.proEtaleBaseChange (diagonalImmersion Y)).obj U.unop))
-                  (ULift.up n)))
-          (n • (1 : (Scheme.purTwistZlCompletion (ProjectiveLine Y) ℓ).obj.obj
-            (op ((Scheme.proEtaleBaseChange (diagonalImmersion Y)).obj U.unop)))) := by
-  sorry
-
-/-- The unique coefficient-unit map, determined on locally constant integers.
-Source: blueprint completed source convention
-(blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalCompletedGenerator (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :=
-  (diagonalCompletedGenerator_existsUnique ℓ Y).exists.choose
-
-/-- The source endpoint identification induced by the ordinary limit comparison
-and the already normalized derived source counit.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalSourceLimitMap (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
-    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]
-    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]
-    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]
-    [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))]
-    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))
-    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)) ≅
-      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj (diagonalIntegralSource Y)))
-    (L : DiagonalRlim (DiagonalMod ℓ (diagonalSurface Y)))
-    (s : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj
-      (diagonalCompletedSource ℓ Y) ≅ limit (D.ordinary.E.obj (diagonalIntegralSource Y))) :
-    (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj (diagonalCompletedDomain ℓ Y) ⟶
-      L.R.obj (D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y))) :=
-  ((diagonalCompletedRestriction ℓ (diagonalSurface Y)).mapDerivedCategorySingleFunctor 0).hom.app
-      (diagonalCompletedSource ℓ Y) ≫
-    (DerivedCategory.singleFunctor _ 0).map s.hom ≫
-    diagonalOrdinaryRlim L (D.ordinary.E.obj (diagonalIntegralSource Y)) ≫
-    L.R.map a.inv
-
-/-- The target endpoint identification induced by the ordinary root limit,
-the canonical shift comparison, and the existing signed Kummer identification.
-Source: blueprint clauses 1 and 3 (blueprint: det-prop-diagonal-tower-limit). -/
-def diagonalTargetLimitMap (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
-    [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]
-    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))]
-    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]
-    [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))]
-    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))
-    (H : DiagonalSystems ℓ (diagonalSurface Y))
-    (b : D.T.obj (((DerivedCategory.singleFunctor _ 0).obj
-      (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)
-    (L : DiagonalRlim (DiagonalMod ℓ (diagonalSurface Y)))
-    (t : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj
-      (Scheme.purTwistZlModule (diagonalSurface Y) ℓ) ≅ limit H) :
-    (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj (diagonalCompletedCodomain ℓ Y) ⟶
-      L.R.obj (D.T.obj (((DerivedCategory.singleFunctor _ 0).obj
-        (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧)) :=
-  ((diagonalCompletedUnderlying ℓ (diagonalSurface Y)).commShiftIso (2 : ℤ)).hom.app
-      ((DerivedCategory.singleFunctor _ 0).obj (Scheme.purTwistZlModule (diagonalSurface Y) ℓ)) ≫
-    (shiftFunctor _ (2 : ℤ)).map
-      (((diagonalCompletedRestriction ℓ (diagonalSurface Y)).mapDerivedCategorySingleFunctor
-          0).hom.app (Scheme.purTwistZlModule (diagonalSurface Y) ℓ) ≫
-        (DerivedCategory.singleFunctor _ 0).map t.hom ≫ diagonalOrdinaryRlim L H) ≫
-    (L.R.commShiftIso (2 : ℤ)).inv.app ((DerivedCategory.singleFunctor _ 0).obj H) ≫
-    L.R.map b.inv
+  let c : D ≅ (𝟭 _).prod' ((Functor.const _).obj
+      ((DerivedCategory.singleFunctor _ 0).obj P)) ⋙ T :=
+    NatIso.ofComponents (fun M ↦ T.mapIso (Iso.prod (Iso.refl M) eP.symm))
+      (by
+        intro M N f
+        change T.map (CategoryTheory.Prod.mkHom f (𝟙 _)) ≫
+          T.map (CategoryTheory.Prod.mkHom (𝟙 N) eP.inv) =
+          T.map (CategoryTheory.Prod.mkHom (𝟙 M) eP.inv) ≫
+            T.map (CategoryTheory.Prod.mkHom f (𝟙 _))
+        rw [← T.map_comp, ← T.map_comp]
+        congr 1
+        ext <;> simp)
+  let := Functor.CommShift.ofIso c ℤ
+  have := Functor.CommShift.ofIso_compatibility c ℤ
+  have := Functor.isTriangulated_of_iso c
+  have := Functor.isEquivalence_of_iso c
+  exact ⟨inferInstance, CondensedRing.limitProperties _ (fun _ ↦ inferInstance)⟩
 
 /-- Both signed Tate twists are exact, preserve all products, and carry every
 homotopy-limit triangle and its canonical comparison to a homotopy-limit triangle.
@@ -406,7 +176,321 @@ theorem diagonalCompletedTwist_limits (ℓ : ℕ) [Fact ℓ.Prime]
     PreservesFiniteColimits (diagonalCompletedSheafTwist ℓ X d) ∧
     (∃ (_ : (diagonalCompletedTwist ℓ X d).CommShift ℤ),
       CondensedRing.ClosedSupportLimitFunctorProperties (diagonalCompletedTwist ℓ X d)) := by
-  sorry
+  classical
+  let := diagonalResidueInvertible ℓ k p hpℓ X
+  let R := Scheme.purTwistZlCompletion X ℓ
+  let L := Scheme.purTwistZlModule X ℓ
+  obtain ⟨I, U, f, hc, he⟩ :=
+    (Scheme.pur_twist_sheaf_locally_free.{u, u} X ℓ (ULift.{u} ℚ_[ℓ])).2.1.1
+  have hU : (Scheme.ProEt.topology X).CoversTop U := by
+    let hT : IsTerminal (Scheme.ProEt.mk (𝟙 X)) := MorphismProperty.Over.mkIdTerminal _ _
+    rw [GrothendieckTopology.coversTop_iff_of_isTerminal _ _ hT]
+    rw [← Sieve.ofArrows_eq_ofObjects hT U f]
+    exact Precoverage.generate_mem_toGrothendieck hc
+  have hL : ∀ V : X.ProEt, ∃ s : Sieve V, s ∈ Scheme.ProEt.topology X V ∧
+      ∀ (W : X.ProEt) (f : W ⟶ V), s f →
+        Nonempty (L.over W ≅ SheafOfModules.unit ((Scheme.purTwistRing X R).over W)) := by
+    intro V
+    refine ⟨Sieve.ofObjects U V, hU V, ?_⟩
+    rintro W f ⟨i, ⟨g⟩⟩
+    obtain ⟨e⟩ := he i
+    exact ⟨((SheafOfModules.overFunctorMap (Scheme.purTwistRing X R) g).app L).symm ≪≫
+      (SheafOfModules.overMap (Scheme.purTwistRing X R) g).mapIso e ≪≫
+        SheafOfModules.overMapUnitIso (R := Scheme.purTwistRing X R) g⟩
+  rcases hd with rfl | rfl
+  · exact diagonalLineLimits ℓ X L hL
+  · exact diagonalLineLimits ℓ X (SheafOfModules.LineEvaluation.dual.{u + 1, u, u + 1} R L)
+      (SheafOfModules.LineEvaluation.evaluation_inverse_pair.{u + 1, u, u + 1} R L hL).1
+
+
+/-- The generic direct-image assertion, sharing its categorical structures.
+Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
+def diagonalDirectImageAssertion
+    {A : Type a} [Category.{v} A] [Abelian A]
+    {B : Type b} [Category.{u} B] [Abelian B]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
+    [HasLimitsOfShape ℕᵒᵖ A] [HasLimitsOfShape ℕᵒᵖ B]
+    (F : A ⥤ B) [F.Additive] : Prop :=
+    ∃ (LX : DiagonalRlim A) (LY : DiagonalRlim B)
+      (Rf : DiagonalRightDerived (F))
+      (Rt : DiagonalRightDerived ((Functor.whiskeringRight ℕᵒᵖ
+        A B).obj
+          (F)))
+      (e : ∀ n : ℕ, Rt.R ⋙
+        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory ≅
+        ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory ⋙ Rf.R)
+      (c : LX.R ⋙ Rf.R ≅ Rt.R ⋙ LY.R)
+      (c₀ : (lim : (ℕᵒᵖ ⥤ A) ⥤ A) ⋙
+          F ≅
+        (Functor.whiskeringRight ℕᵒᵖ A B).obj
+          (F) ⋙ lim),
+      (∀ H : (ℕᵒᵖ ⥤ A),
+        c₀.hom.app H = limit.post H
+          (F)) ∧
+      (∀ P : CochainComplex ((ℕᵒᵖ ⥤ A)) ℤ,
+        Rf.η.app (((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex
+          (.up ℤ)).obj P) ≫ Rf.R.map (LX.η.app P) ≫ c.hom.app (DerivedCategory.Q.obj P) =
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c₀.hom (.up ℤ)).app P) ≫
+          LY.η.app ((((Functor.whiskeringRight ℕᵒᵖ
+            A B).obj
+              (F)).mapHomologicalComplex
+                (.up ℤ)).obj P) ≫ LY.R.map (Rt.η.app P)) ∧
+      (∀ (P : CochainComplex ((ℕᵒᵖ ⥤ A)) ℤ), P.IsKInjective → ∀ n : ℕ,
+        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map (Rt.η.app P) ≫
+          (e n).hom.app (DerivedCategory.Q.obj P) ≫
+          Rf.R.map (((evaluation ℕᵒᵖ A).obj
+            (op n)).mapDerivedCategoryFactors.hom.app P) =
+        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategoryFactors.hom.app
+          ((((Functor.whiskeringRight ℕᵒᵖ A B).obj
+            (F)).mapHomologicalComplex
+              (.up ℤ)).obj P) ≫ Rf.η.app (P.asFunctor.obj (op n))) ∧
+      ∀ (M : DerivedCategory ((ℕᵒᵖ ⥤ A))) (n : ℕ),
+        c.hom.app M ≫ (LY.projection n).app (Rt.R.obj M) ≫ (e n).hom.app M =
+          Rf.R.map ((LX.projection n).app M)
+
+section DirectImageProof
+
+set_option backward.defeqAttrib.useBackward true
+
+private theorem diagonalRightDerived_exists
+    {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    [Abelian.HasKInjectiveResolutions A]
+    {B : Type b} [Category.{u} B] [Abelian B] [HasDerivedCategory.{w} B]
+    (F : A ⥤ B) [F.Additive] : Nonempty (DiagonalRightDerived F) := by
+  obtain ⟨R, η, hu, hc, s, ht⟩ := CategoryTheory.RingedStrictTowerProof.totalDerivedData F
+  let := s
+  exact ⟨⟨R, η, hu, hc, ht⟩⟩
+
+private theorem diagonalRlim_exists
+    (A : Type a) [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
+    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)] : Nonempty (DiagonalRlim A) := by
+  obtain ⟨L⟩ := diagonalRightDerived_exists (lim : (ℕᵒᵖ ⥤ A) ⥤ A)
+  have := L.universal
+  let β (n : ℕ) :
+      (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+        DerivedCategory.Q ⋙ ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory :=
+    Functor.whiskerRight (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ))
+        DerivedCategory.Q ≫ ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategoryFactors.inv
+  let π (n : ℕ) := L.R.rightDerivedDesc L.η
+    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ)) _ (β n)
+  refine ⟨{ L with projection := π, normalization := ?_ }⟩
+  intro P n
+  rw [← Category.assoc, Functor.rightDerived_fac_app]
+  dsimp [β]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+
+private theorem diagonalIsoNormalization
+    {C : Type a} [Category.{v} C] {U V W Z T : C}
+    (a : U ≅ V) (b : Z ≅ T) (u : U ⟶ W) (e : W ⟶ Z) (f : V ⟶ T)
+    (h : (a.inv ≫ u) ≫ e = f ≫ b.inv) : u ≫ e ≫ b.hom = a.hom ≫ f := by
+  have h' := congrArg (fun z ↦ a.hom ≫ z ≫ b.hom) h
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id,
+    Category.comp_id] using h'
+
+private theorem diagonalEvaluationComparison
+    {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    {B : Type b} [Category.{u} B] [Abelian B] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
+    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
+    (F : A ⥤ B) [F.Additive]
+    (Rf : DiagonalRightDerived F)
+    (Rt : DiagonalRightDerived ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)) :
+    ∃ e : ∀ n : ℕ, Rt.R ⋙ ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory ≅
+        ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory ⋙ Rf.R,
+      ∀ (P : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (n : ℕ),
+        ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map (Rt.η.app P) ≫
+            (e n).hom.app (DerivedCategory.Q.obj P) ≫
+            Rf.R.map (((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategoryFactors.hom.app P) =
+          ((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategoryFactors.hom.app
+            ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)).obj P) ≫
+            Rf.η.app
+            ((((evaluation ℕᵒᵖ A).obj (op n)).mapHomologicalComplex (.up ℤ)).obj P) := by
+  let FT := (Functor.whiskeringRight ℕᵒᵖ A B).obj F
+  let EA (n : ℕ) := (evaluation ℕᵒᵖ A).obj (op n)
+  let EB (n : ℕ) := (evaluation ℕᵒᵖ B).obj (op n)
+  let α (n : ℕ) :
+      (FT ⋙ EB n).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+        DerivedCategory.Q ⋙ (Rt.R ⋙ (EB n).mapDerivedCategory) :=
+    Functor.whiskerLeft (FT.mapHomologicalComplex (.up ℤ))
+        (EB n).mapDerivedCategoryFactors.inv ≫
+      Functor.whiskerRight Rt.η (EB n).mapDerivedCategory
+  let β (n : ℕ) :
+      (FT ⋙ EB n).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+        DerivedCategory.Q ⋙ ((EA n).mapDerivedCategory ⋙ Rf.R) :=
+    Functor.whiskerLeft ((EA n).mapHomologicalComplex (.up ℤ)) Rf.η ≫
+      Functor.whiskerRight (EA n).mapDerivedCategoryFactors.inv Rf.R
+  have hα (n : ℕ) : (Rt.R ⋙ (EB n).mapDerivedCategory).IsRightDerivedFunctor
+      (α n) (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ)) := by
+    apply (CategoryTheory.derives (FT ⋙ EB n)).isRightDerivedFunctor_of_isIso
+    intro I
+    have := Rt.computation I.obj I.property
+    change IsIso ((EB n).mapDerivedCategoryFactors.inv.app _ ≫
+      (EB n).mapDerivedCategory.map (Rt.η.app I.obj))
+    infer_instance
+  have hβ (n : ℕ) : ((EA n).mapDerivedCategory ⋙ Rf.R).IsRightDerivedFunctor
+      (β n) (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ)) := by
+    apply (CategoryTheory.derives (FT ⋙ EB n)).isRightDerivedFunctor_of_isIso
+    intro I
+    have := I.property
+    have hi : CochainComplex.IsKInjective
+        (((EA n).mapHomologicalComplex (.up ℤ)).obj I.obj) :=
+      tower_evaluation_isKInjective A I.obj (op n)
+    have := Rf.computation (((EA n).mapHomologicalComplex (.up ℤ)).obj I.obj) hi
+    change IsIso (Rf.η.app (((EA n).mapHomologicalComplex (.up ℤ)).obj I.obj) ≫
+      Rf.R.map ((EA n).mapDerivedCategoryFactors.inv.app I.obj))
+    infer_instance
+  let e (n : ℕ) := Functor.rightDerivedUnique _ _ (α n) (β n)
+    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ))
+  refine ⟨e, ?_⟩
+  intro P n
+  have he := Functor.rightDerivedNatTrans_app _ _ (α n) (β n)
+    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ)) (𝟙 _) P
+  change ((EB n).mapDerivedCategoryFactors.inv.app _ ≫
+      (EB n).mapDerivedCategory.map (Rt.η.app P)) ≫
+        (e n).hom.app (DerivedCategory.Q.obj P) = 𝟙 _ ≫
+          (Rf.η.app
+            ((((evaluation ℕᵒᵖ A).obj (op n)).mapHomologicalComplex (.up ℤ)).obj P) ≫
+            Rf.R.map ((EA n).mapDerivedCategoryFactors.inv.app P)) at he
+  rw [Category.id_comp] at he
+  exact diagonalIsoNormalization
+    ((EB n).mapDerivedCategoryFactors.app
+      ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)).obj P))
+    (Rf.R.mapIso ((EA n).mapDerivedCategoryFactors.app P))
+    ((EB n).mapDerivedCategory.map (Rt.η.app P))
+    ((e n).hom.app (DerivedCategory.Q.obj P))
+    (Rf.η.app (((EA n).mapHomologicalComplex (.up ℤ)).obj P)) he
+
+private theorem diagonalMapComposite
+    {C : Type a} [Category.{v} C] {D : Type b} [Category.{u} D]
+    (F : C ⥤ D) {X Y Z : C} {T : D}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (r : F.obj Z ⟶ T)
+    (k : F.obj X ⟶ T) (hfg : f ≫ g = h) (hk : F.map h ≫ r = k) :
+    F.map f ≫ F.map g ≫ r = k := by
+  calc
+    F.map f ≫ F.map g ≫ r = F.map (f ≫ g) ≫ r := by
+      rw [F.map_comp, Category.assoc]
+    _ = F.map h ≫ r := by rw [hfg]
+    _ = k := hk
+
+private theorem diagonalProjectionDiagram
+    {C : Type a} [Category.{v} C] {O A B D E G H I J K V : C}
+    (a : O ⟶ A) (b : A ⟶ B) (c : B ⟶ D)
+    (d : O ⟶ J) (t : J ⟶ E) (v : E ⟶ D)
+    (p : D ⟶ G) (q : E ⟶ H) (r : H ⟶ G)
+    (e : G ⟶ I) (s : I ⟶ K) (z : H ⟶ V) (n : V ⟶ K)
+    (m : J ⟶ V) (x : A ⟶ K) (k : B ⟶ I)
+    (hc : a ≫ b ≫ c = d ≫ t ≫ v) (hn : v ≫ p = q ≫ r)
+    (he : r ≫ e ≫ s = z ≫ n) (hY : t ≫ q ≫ z = m)
+    (hF : d ≫ m ≫ n = a ≫ x) (hX : b ≫ k ≫ s = x) :
+    (a ≫ b) ≫ c ≫ p ≫ e ≫ s = (a ≫ b) ≫ k ≫ s := by
+  calc
+    (a ≫ b) ≫ c ≫ p ≫ e ≫ s = d ≫ t ≫ v ≫ p ≫ e ≫ s := by
+      simpa only [Category.assoc] using congrArg (fun l ↦ l ≫ p ≫ e ≫ s) hc
+    _ = d ≫ t ≫ q ≫ r ≫ e ≫ s := by
+      simpa only [Category.assoc] using congrArg (fun l ↦ d ≫ t ≫ l ≫ e ≫ s) hn
+    _ = d ≫ t ≫ q ≫ z ≫ n := congrArg (fun l ↦ d ≫ t ≫ q ≫ l) he
+    _ = d ≫ m ≫ n := by
+      simpa only [Category.assoc] using congrArg (fun l ↦ d ≫ l ≫ n) hY
+    _ = a ≫ x := hF
+    _ = (a ≫ b) ≫ k ≫ s := by rw [← hX, Category.assoc]
+
+private theorem diagonalDirectImage_of_preservesKInjective
+    {A : Type a} [Category.{v} A] [Abelian A] [HasLimitsOfShape ℕᵒᵖ A]
+    {B : Type b} [Category.{u} B] [Abelian B] [HasLimitsOfShape ℕᵒᵖ B]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
+    [Abelian.HasKInjectiveResolutions A]
+    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
+    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ B)]
+    (F : A ⥤ B) [F.Additive] [PreservesLimitsOfShape ℕᵒᵖ F]
+    [((Functor.whiskeringRight ℕᵒᵖ A B).obj F).PreservesKInjectiveComplexes] :
+    diagonalDirectImageAssertion F := by
+  obtain ⟨LX⟩ := diagonalRlim_exists A
+  obtain ⟨LY⟩ := diagonalRlim_exists B
+  obtain ⟨Rf⟩ := diagonalRightDerived_exists F
+  obtain ⟨Rt⟩ := diagonalRightDerived_exists ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)
+  have := LX.universal
+  have := LY.universal
+  have := Rf.universal
+  have := Rt.universal
+  obtain ⟨e, he⟩ := diagonalEvaluationComparison F Rf Rt
+  let c₀ := preservesLimitNatIso F (J := ℕᵒᵖ)
+  let FT := (Functor.whiskeringRight ℕᵒᵖ A B).obj F
+  let FTc := FT.mapHomologicalComplex (.up ℤ)
+  obtain ⟨c, hc⟩ := towerComparison_existsLimitIso F Rf.R Rt.R LX.R LY.R
+    Rf.η Rt.η LX.η LY.η Rf.computation Rt.computation LX.computation
+    (fun P hP ↦ by
+      have := hP
+      exact LY.computation _ inferInstance) c₀
+  refine ⟨LX, LY, Rf, Rt, e, c, c₀, fun _ ↦ rfl, hc,
+    (fun P _ n ↦ he P n), ?_⟩
+  intro M n
+  have := towerComparison_limPreservesKInjective (A := A)
+  obtain ⟨α, hα, hαapp⟩ := towerComparison_existsComposite
+    (lim : (ℕᵒᵖ ⥤ A) ⥤ A) F LX.R Rf.R LX.η Rf.η LX.computation
+    (fun I hI ↦ by
+      have := hI
+      exact Rf.computation _ inferInstance)
+  have := hα
+  let γ₁ : LX.R ⋙ Rf.R ⟶ ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory ⋙ Rf.R :=
+    c.hom ≫ Functor.whiskerLeft Rt.R (LY.projection n) ≫ (e n).hom
+  let γ₂ : LX.R ⋙ Rf.R ⟶ ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory ⋙ Rf.R :=
+    Functor.whiskerRight (LX.projection n) Rf.R
+  have hγ : γ₁ = γ₂ := by
+    apply Functor.rightDerived_ext (LX.R ⋙ Rf.R) α
+      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (.up ℤ))
+    apply NatTrans.ext
+    funext X
+    let limπ := (NatTrans.mapHomologicalComplex
+      (lim.π (op n) : (lim : (ℕᵒᵖ ⥤ A) ⥤ A) ⟶
+        (evaluation ℕᵒᵖ A).obj (op n)) (.up ℤ)).app X
+    let limπ' := (NatTrans.mapHomologicalComplex
+      (lim.π (op n) : (lim : (ℕᵒᵖ ⥤ B) ⥤ B) ⟶
+        (evaluation ℕᵒᵖ B).obj (op n)) (.up ℤ)).app (FTc.obj X)
+    let cX := (NatTrans.mapHomologicalComplex c₀.hom (.up ℤ)).app X
+    have hchain : cX ≫ limπ' = (F.mapHomologicalComplex (.up ℤ)).map limπ := by
+      apply HomologicalComplex.hom_ext
+      intro i
+      exact preservesLimitIso_hom_π F (X.X i) (op n)
+    have hF := diagonalMapComposite DerivedCategory.Q cX limπ'
+      ((F.mapHomologicalComplex (.up ℤ)).map limπ)
+      (Rf.η.app ((((evaluation ℕᵒᵖ A).obj (op n)).mapHomologicalComplex (.up ℤ)).obj X))
+      (Rf.η.app (((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (.up ℤ)).obj X) ≫
+        Rf.R.map (DerivedCategory.Q.map limπ)) hchain (Rf.η.naturality limπ)
+    have hX := congrArg Rf.R.map (LX.normalization X n)
+    simp only [Functor.map_comp] at hX
+    have hmain :
+        (Rf.η.app (((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (.up ℤ)).obj X) ≫
+          Rf.R.map (LX.η.app X)) ≫ γ₁.app (DerivedCategory.Q.obj X) =
+        (Rf.η.app (((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (.up ℤ)).obj X) ≫
+          Rf.R.map (LX.η.app X)) ≫ γ₂.app (DerivedCategory.Q.obj X) := by
+      apply (cancel_mono (Rf.R.map
+        (((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategoryFactors.hom.app X))).mp
+      simpa only [γ₁, γ₂, NatTrans.comp_app, Functor.whiskerLeft_app,
+        Functor.whiskerRight_app, Category.assoc] using diagonalProjectionDiagram
+        (Rf.η.app (((lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (.up ℤ)).obj X))
+        (Rf.R.map (LX.η.app X)) (c.hom.app (DerivedCategory.Q.obj X))
+        (DerivedCategory.Q.map cX) (LY.η.app (FTc.obj X)) (LY.R.map (Rt.η.app X))
+        ((LY.projection n).app (Rt.R.obj (DerivedCategory.Q.obj X)))
+        ((LY.projection n).app (DerivedCategory.Q.obj (FTc.obj X)))
+        (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategory.map (Rt.η.app X))
+        ((e n).hom.app (DerivedCategory.Q.obj X))
+        (Rf.R.map (((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategoryFactors.hom.app X))
+        (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategoryFactors.hom.app (FTc.obj X))
+        (Rf.η.app ((((evaluation ℕᵒᵖ A).obj (op n)).mapHomologicalComplex (.up ℤ)).obj X))
+        (DerivedCategory.Q.map limπ') (Rf.R.map (DerivedCategory.Q.map limπ))
+        (Rf.R.map ((LX.projection n).app (DerivedCategory.Q.obj X)))
+        (hc X) ((LY.projection n).naturality (Rt.η.app X))
+        (he X n) (LY.normalization (FTc.obj X) n) hF hX
+    exact (congrArg (fun z ↦ z ≫ γ₁.app (DerivedCategory.Q.obj X)) (hαapp X)).trans
+      (hmain.trans
+        (congrArg (fun z ↦ z ≫ γ₂.app (DerivedCategory.Q.obj X)) (hαapp X)).symm)
+  exact NatTrans.congr_app hγ M
+
+end DirectImageProof
 
 /-- Derived direct image on the constant-coefficient tower category is levelwise and
 commutes with the total derived limit, for morphisms of the pro-etale sites
@@ -434,44 +518,32 @@ theorem diagonalTower_directImage (ℓ : ℕ) [Fact ℓ.Prime]
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ Y)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ X)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ Y)] :
-    ∃ (LX : DiagonalRlim (DiagonalMod ℓ X)) (LY : DiagonalRlim (DiagonalMod ℓ Y))
-      (Rf : DiagonalRightDerived (lowerStar
-        (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f))
-      (Rt : DiagonalRightDerived ((Functor.whiskeringRight ℕᵒᵖ
-        (DiagonalMod ℓ X) (DiagonalMod ℓ Y)).obj
-          (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f)))
-      (e : ∀ n : ℕ, Rt.R ⋙
-        ((evaluation ℕᵒᵖ (DiagonalMod ℓ Y)).obj (op n)).mapDerivedCategory ≅
-        ((evaluation ℕᵒᵖ (DiagonalMod ℓ X)).obj (op n)).mapDerivedCategory ⋙ Rf.R)
-      (c : LX.R ⋙ Rf.R ≅ Rt.R ⋙ LY.R)
-      (c₀ : (lim : DiagonalSystems ℓ X ⥤ DiagonalMod ℓ X) ⋙
-          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f ≅
-        (Functor.whiskeringRight ℕᵒᵖ (DiagonalMod ℓ X) (DiagonalMod ℓ Y)).obj
-          (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f) ⋙ lim),
-      (∀ H : DiagonalSystems ℓ X,
-        c₀.hom.app H = limit.post H
-          (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f)) ∧
-      (∀ P : CochainComplex (DiagonalSystems ℓ X) ℤ,
-        Rf.η.app (((lim : DiagonalSystems ℓ X ⥤ DiagonalMod ℓ X).mapHomologicalComplex
-          (.up ℤ)).obj P) ≫ Rf.R.map (LX.η.app P) ≫ c.hom.app (DerivedCategory.Q.obj P) =
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c₀.hom (.up ℤ)).app P) ≫
-          LY.η.app ((((Functor.whiskeringRight ℕᵒᵖ
-            (DiagonalMod ℓ X) (DiagonalMod ℓ Y)).obj
-              (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f)).mapHomologicalComplex
-                (.up ℤ)).obj P) ≫ LY.R.map (Rt.η.app P)) ∧
-      (∀ (P : CochainComplex (DiagonalSystems ℓ X) ℤ), P.IsKInjective → ∀ n : ℕ,
-        ((evaluation ℕᵒᵖ (DiagonalMod ℓ Y)).obj (op n)).mapDerivedCategory.map (Rt.η.app P) ≫
-          (e n).hom.app (DerivedCategory.Q.obj P) ≫
-          Rf.R.map (((evaluation ℕᵒᵖ (DiagonalMod ℓ X)).obj
-            (op n)).mapDerivedCategoryFactors.hom.app P) =
-        ((evaluation ℕᵒᵖ (DiagonalMod ℓ Y)).obj (op n)).mapDerivedCategoryFactors.hom.app
-          ((((Functor.whiskeringRight ℕᵒᵖ (DiagonalMod ℓ X) (DiagonalMod ℓ Y)).obj
-            (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f)).mapHomologicalComplex
-              (.up ℤ)).obj P) ≫ Rf.η.app (P.asFunctor.obj (op n))) ∧
-      ∀ (M : DerivedCategory (DiagonalSystems ℓ X)) (n : ℕ),
-        c.hom.app M ≫ (LY.projection n).app (Rt.R.obj M) ≫ (e n).hom.app M =
-          Rf.R.map ((LX.projection n).app M) := by
-  sorry
+    diagonalDirectImageAssertion
+      (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f) := by
+  have _hpℓ := hpℓ
+  have : IsGrothendieckAbelian.{u + 1} (DiagonalMod ℓ X) :=
+    GrothendieckTopology.isGrothendieckAbelian_sheaf_proEtTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) X
+  have : IsGrothendieckAbelian.{u + 1} (DiagonalMod ℓ Y) :=
+    GrothendieckTopology.isGrothendieckAbelian_sheaf_proEtTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) Y
+  have : IsGrothendieckAbelian.{u + 1} (DiagonalSystems ℓ X) :=
+    CategoryTheory.RingedStrictTowerProof.tower_grothendieck (DiagonalMod ℓ X)
+  have : IsGrothendieckAbelian.{u + 1} (DiagonalSystems ℓ Y) :=
+    CategoryTheory.RingedStrictTowerProof.tower_grothendieck (DiagonalMod ℓ Y)
+  let L := upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f
+  let F := lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f
+  let LT := (Functor.whiskeringRight ℕᵒᵖ (DiagonalMod ℓ Y) (DiagonalMod ℓ X)).obj L
+  have : PreservesFiniteLimits LT :=
+    ⟨fun _ _ _ ↦ whiskeringRight_preservesLimitsOfShape (C := ℕᵒᵖ) L⟩
+  have : PreservesFiniteColimits LT :=
+    ⟨fun _ _ _ ↦ whiskeringRight_preservesColimitsOfShape (C := ℕᵒᵖ) L⟩
+  have : LT.PreservesHomology := {}
+  have : ((Functor.whiskeringRight ℕᵒᵖ (DiagonalMod ℓ X)
+      (DiagonalMod ℓ Y)).obj F).PreservesKInjectiveComplexes :=
+    ((upperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[ℓ])) f).whiskerRight ℕᵒᵖ).preservesKInjectiveComplexes
+  exact diagonalDirectImage_of_preservesKInjective F
 
 /-- The completed diagonal class is the limit of the simultaneous reduction of the
 positive Cartier boundary. Its endpoints are the supported completed constant and the
@@ -523,103 +595,7 @@ theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime]
     (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))
     (hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D)
     (hsystem : DiagonalCycleSystemSpec ℓ Y hY D) :
-  ∃ (H : DiagonalSystems ℓ (diagonalSurface Y))
-    (roots : H ⋙ diagonalForget ℓ (diagonalSurface Y) ≅
-      Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) ℓ (Fact.out : ℓ.Prime))
-    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)) ≅
-      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj (diagonalIntegralSource Y)))
-    (b : D.T.obj (((DerivedCategory.singleFunctor _ 0).obj
-      (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)
-    (c : Ext (D.ordinary.E.obj (diagonalIntegralSource Y)) H 2),
-    a.hom = diagonalDerivedSingleCounit ℓ
-      (diagonalScalarExtension ℓ (diagonalSurface Y)) D (diagonalIntegralSource Y) ∧
-    c.hom = a.inv ≫ D.T.map (diagonalIntegralBoundary Y).hom ≫ b.hom ∧
-    (∀ n : ℕ,
-      ∃ (s : (D.ordinary.E.obj (diagonalIntegralSource Y)).obj (op n) ≅
-          (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj
-            ((lowerStar (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n))
-              (diagonalImmersion Y)).obj
-                (geoCartierConstant (diagonalResidue.{u} ℓ n) (ProjectiveLine Y))))
-        (t : H.obj (op n) ≅ (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj
-          (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-            (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y))),
-        DiagonalSourceNormalization ℓ Y D.ordinary n s ∧
-        HEq ((diagonalForget ℓ (diagonalSurface Y)).map t.hom)
-          (roots.hom.app (op n) ≫
-            cartierProRootMap (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-              (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y)
-              (pow_pos (Fact.out : ℓ.Prime).pos _) (diagonalSurface_power_unit ℓ Y hY n)) ∧
-        (Ext.mk₀ s.inv).comp
-          ((c.mapExactFunctor ((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj
-            (op n))).comp (Ext.mk₀ t.hom) (add_zero 2)) (zero_add 2) =
-          (cartierResidueReducedPro ℓ (Fact.out : ℓ.Prime) (n + 1) (diagonalImmersion Y)
-            (diagonalImmersion_cartier Y) (diagonalSurface_power_unit ℓ Y hY n)).mapExactFunctor
-               (diagonalFiniteToPadic ℓ n (diagonalSurface Y))) ∧
-    ∃ (L : DiagonalRlim (DiagonalMod ℓ (diagonalSurface Y)))
-      (M : DiagonalCompletedReduction ℓ (diagonalSurface Y))
-      (s₀ : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj
-          (diagonalCompletedSource ℓ Y) ≅
-        limit (D.ordinary.E.obj (diagonalIntegralSource Y)))
-      (t₀ : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj
-          (Scheme.purTwistZlModule (diagonalSurface Y) ℓ) ≅ limit H),
-      (∀ n : ℕ,
-        diagonalCompletedGenerator ℓ Y ≫ (diagonalForget ℓ (diagonalSurface Y)).map
-          (s₀.hom ≫ limit.π (D.ordinary.E.obj (diagonalIntegralSource Y)) (op n)) =
-        (diagonalScalarAdjunction ℓ (diagonalSurface Y)).unit.app (diagonalIntegralSource Y) ≫
-          (diagonalForget ℓ (diagonalSurface Y)).map
-            ((D.ordinary.π n).app (diagonalIntegralSource Y))) ∧
-      HEq ((diagonalForget ℓ (diagonalSurface Y)).map t₀.hom)
-        (preservesLimitIso (diagonalForget ℓ (diagonalSurface Y)) H ≪≫
-          HasLimit.isoOfNatIso roots).inv ∧
-      IsIso (diagonalSourceLimitMap ℓ Y D a L s₀) ∧
-      IsIso (diagonalTargetLimitMap ℓ Y D H b L t₀) ∧
-      (∀ P : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y)),
-        IsIso (ℓ • 𝟙 P) → Subsingleton (P ⟶ diagonalCompletedDomain ℓ Y)) ∧
-      (∀ P : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y)),
-        IsIso (ℓ • 𝟙 P) → Subsingleton (P ⟶ diagonalCompletedCodomain ℓ Y)) ∧
-      (∃! δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y,
-        (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map δ ≫
-          diagonalTargetLimitMap ℓ Y D H b L t₀ =
-          diagonalSourceLimitMap ℓ Y D a L s₀ ≫
-            L.R.map (D.T.map (diagonalIntegralBoundary Y).hom)) ∧
-      ∀ (δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y),
-        (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map δ ≫
-          diagonalTargetLimitMap ℓ Y D H b L t₀ =
-          diagonalSourceLimitMap ℓ Y D a L s₀ ≫
-            L.R.map (D.T.map (diagonalIntegralBoundary Y).hom) →
-        ∀ n : ℕ,
-          ∃ (s : (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj
-              ((M.derived.T ⋙ ((evaluation ℕᵒᵖ
-                (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj
-                  (diagonalCompletedDomain ℓ Y)) ≅
-              (((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj
-                (op n)).mapDerivedCategory).obj
-                (D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y))))
-            (t : (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj
-              ((M.derived.T ⋙ ((evaluation ℕᵒᵖ
-                (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj
-                  (diagonalCompletedCodomain ℓ Y)) ≅
-              (((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj
-                (op n)).mapDerivedCategory).obj
-                (D.T.obj (((DerivedCategory.singleFunctor _ 0).obj
-                  (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧))),
-            (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map
-                ((M.unit n).app (diagonalCompletedDomain ℓ Y)) ≫ s.hom =
-              diagonalSourceLimitMap ℓ Y D a L s₀ ≫ (L.projection n).app
-                (D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y))) ∧
-            (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map
-                ((M.unit n).app (diagonalCompletedCodomain ℓ Y)) ≫ t.hom =
-              diagonalTargetLimitMap ℓ Y D H b L t₀ ≫ (L.projection n).app
-                (D.T.obj (((DerivedCategory.singleFunctor _ 0).obj
-                  (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧)) ∧
-            (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map
-                ((M.derived.T ⋙ ((evaluation ℕᵒᵖ
-                  (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).map
-                    δ) =
-              s.hom ≫ (((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj
-                (op n)).mapDerivedCategory).map (D.T.map (diagonalIntegralBoundary Y).hom) ≫
-                  t.inv := by
+  DiagonalCompletedLimitSpec ℓ Y hY D := by
   sorry
 
 end AlgebraicGeometry.ProEtale

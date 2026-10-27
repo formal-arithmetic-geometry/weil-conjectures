@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-snc-finite-tame-root-model",
+ "kind": "statement",
+ "title": "Finite tame pro-etale sheaves have finite root-level etale models",
+ "statement": "Let $k$ be a field of characteristic a positive prime $p$, let $V=\\operatorname{Spec}B$ be regular Noetherian and separated of finite type over $k$, and let $t_1,\\ldots,t_r$ be equations of the labelled branches of a reduced strict normal crossings boundary, with $r\\geq0$ [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary]. Put $f=\\prod_i t_i$ (empty product $1$) and $V^\\circ=\\operatorname{Spec}B[1/f]$. Let $F_0$ be a sheaf of sets on $V^\\circ_{\\mathrm{proet}}$ that becomes constant with finite, possibly empty, values on a pro-etale covering [def-weil-pbc-proetale-site], [def-weil-pbc-constant-sheaf]. Assume that at every geometric point $\\bar v$ of $V$, its pullback to the punctured full prime-to-$p$ parameter-root tower of $\\mathcal O_{V,\\bar v}^{\\mathrm{sh}}$ is finite constant: here only the parameters vanishing at $\\bar v$ are rooted, transitions for $m\\mid n$ send the $m$th root to the $n/m$th power of the $n$th root, and puncturing inverts their product [def-sc-ring-strict-henselization], [def-sfb-strict-local-kummer-tame-module].\n\nThen $F_0$ is the pro-etale sheaf represented by a finite etale $P\\to V^\\circ$; this representation identifies sheaf maps and geometric fibres with the corresponding maps and fibres of finite etale covers [def-weil-pbc-finite-etale-category], [def-weil-geometric-point]. At every $v\\in V$, the vanishing $t_i$ extend to a regular system of parameters in $\\mathcal O_{V,v}$ [def-weil-pbc-regular-system-of-parameters]. There are $n>0$ prime to $p$ and a finite etale $Z\\to\\operatorname{Spec}B_n$, where $B_n=B[x_1,\\ldots,x_r]/(x_i^n-t_i)_i$, whose restriction after inverting $f$ is identified with the pullback of $P$. For every $B$-algebra $H$, putting $H_n=H\\otimes_B B_n$, the scheme $E_n=Z\\times_{\\operatorname{Spec}B_n}\\operatorname{Spec}H_n$ is finite etale over $\\operatorname{Spec}H_n$, and its restriction $E_n\\times_{\\operatorname{Spec}H_n}\\operatorname{Spec}H_n[1/f]$ represents the pullback of $F_0$ to $\\operatorname{Spec}H_n[1/f]$. These assertions include $r=0$ and the empty sheaf, with no condition on the degree of $P$. Pullbacks use [def-weil-proetale-inverse-image].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i)-(iii), printed pp.133-134, finite root-cover extension; Bhatt-Scholze Lemmas 5.1.2 and 5.1.4, p.34, finite-frame argument. Agent-formulated finite-set consequence."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-ring-strict-henselization",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-geometric-point",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-snc-root-chart-maps",
+  "def-a1-proetale-set-restriction",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=V^\\circ$. For $d\\geq0$ let $T_d=\\operatorname{Isom}(\\underline{\\{1,\\ldots,d\\}},F_0)$ on $X_{\\mathrm{proet}}$; isomorphisms glue uniquely, so $T_d$ is a sheaf. On a trivializing member $U$ with model a finite set $S$, a map $\\underline{\\{1,\\ldots,d\\}}\\to F_0$ is $d$ sections, since a finite constant sheaf is the coproduct of $d$ copies of the final sheaf; after a common covering refinement these sections and the inverse images are constant, and the inverse equations are exactly those of a bijection. Thus $T_d|_U$ is the constant sheaf of the finite set of bijections $\\{1,\\ldots,d\\}\\to S$, empty unless $d=|S|$ and a singleton for $d=|S|=0$. So each $T_d$ is locally constant, hence $T_d\\simeq\\nu_X^*H_d$ for an etale set sheaf $H_d$ by local classicality. Let $T=\\coprod_dT_d$ (sheaf coproduct). As $\\nu_X^*$ is a left adjoint, $T\\simeq\\nu_X^*H$ with $H=\\coprod_dH_d$, compatibly with the summand inclusions. $T$ restricts on $U$ to the constant sheaf of the nonempty set of orderings of $S$, so $T$ is locally classical with sections on a pro-etale covering, and the sections clause gives an etale covering $\\{Y_i\\to X\\}$ with $T(Y_i)\\neq\\varnothing$. For etale $Y$, $\\nu_{X,*}$ is evaluation at $Y$, so the comparison unit gives $H(Y)\\simeq T(Y)$ and $H_d(Y)\\simeq T_d(Y)$, naturally in $Y$ and compatibly with the inclusions $H_d\\to H$. A section of the etale sheaf coproduct $H$ over $Y_i$ lies, on an etale covering $\\{Y'\\to Y_i\\}$, in single summands $H_d(Y')$: sheafification is locally surjective, because the subsheaf of locally-presheaf sections receives the presheaf map, and the universal property makes it everything. Hence $T_d(Y')\\neq\\varnothing$, i.e. $F_0|_{Y'}\\simeq\\underline{\\{1,\\ldots,d\\}}$ on these etale members $Y'$. So $F_0$ has finite constant models on an etale covering of $X$.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "lem-weil-pbc-proetale-comparison-unit-sets",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 5.1.2 and 5.1.4, printed p.34; explicit finite-frame argument analogous to Corollary 5.1.5"
+   }
+  },
+  {
+   "text": "Apply local classicality also to $F_0$ itself, obtaining $F_0\\simeq\\nu_X^*G$ for an etale set sheaf $G$. On each etale trivializing member $U$ of step 1, comparison and restriction commute: both right adjoints evaluate a sheaf at the same etale $U$-scheme, hence their left adjoints agree. Constants are inverse images from sets and are preserved by these left adjoints. Full faithfulness of $\\nu_U^*$ therefore identifies $G|_U$ with the finite constant model of $F_0|_U$. Apply finite-locally-constant sets descent to $G$: it supplies a finite etale $P\\to X$ and $G\\simeq h_P$.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "lem-weil-pbc-proetale-comparison-unit-sets",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-finite-locally-constant-sets-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, lemma-characterize-finite-locally-constant; Bhatt-Scholze Lemma 5.1.2"
+   }
+  },
+  {
+   "text": "The inclusion of the etale site in the pro-etale site preserves finite limits and coverings. Both sites are subcanonical. Apply representable inverse image to this inclusion: $\\nu_X^*h_P\\simeq h_P$ on the pro-etale site, so step 2 represents $F_0$ there. Yoneda identifies all maps between these represented sheaves with $X$-morphisms between their finite etale schemes. At a geometric point, the comparison-stalk isomorphism reduces the fibre assertion to $G$. On the etale splitting cover of step 1 both the stalk of $G$ and the geometric fibre of $P$ are the same finite set of labels; evaluation of a section at the point is this identification. These local identifications agree on overlaps because evaluation commutes with restriction, giving the asserted natural fibre identification.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-pur-site-representable-algebraic-pullback",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-cbc-proetale-comparison-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3, lemma-pullback-representable-sheaf; categories.tex Tag 001P; proetale.tex Tags 0GLZ and 0993"
+   }
+  },
+  {
+   "text": "Fix $v\\in V$. The SNC parameter criterion gives parameters $u_1,\\ldots,u_d$ in $A=\\mathcal O_{V,v}$ with boundary ideal $(u_1\\cdots u_s)$. The regular-local factorization lemma says that these $u_j$ are distinct prime elements. Since the $t_i$ are equations of the labelled reduced branches, the principal ideals $(t_i)$ for the vanishing labels are precisely the distinct minimal primes $(u_j)$ of this product ideal: in a domain a prime containing a product contains a factor. Equality of nonzero principal ideals in a domain gives $t_i=a_i u_{\\sigma(i)}$ for units $a_i$. Replacing the corresponding parameters by these unit multiples preserves generation of the maximal ideal and its number of generators. It follows from the definition of a regular system of parameters that the vanishing $t_i$ extend to one. Off the boundary the list is empty.",
+   "uses": [
+    "lem-sfb-snc-boundary-parameter-criterion",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tags 0BI9 and 0BIA, definition-strict-normal-crossings and lemma-strict-normal-crossings, local branch equations"
+   }
+  },
+  {
+   "text": "For any scheme map $a:T\\to X$ and finite etale $Q\\to X$, the pro-etale inverse image of $h_Q$ is $h_{Q\\times_XT}$: apply the representable inverse-image theorem to the base-change functor defining $a^{-1}$. Its finite-limit and covering conditions are precisely those recorded in the inverse-image definition, and subcanonicality holds for both pro-etale sites. In particular apply this to each punctured strict-local full parameter-root tower. The hypothesis says that the resulting represented sheaf is finite constant. A finite constant sheaf is a finite coproduct of final sheaves; the finite-coproduct comparison identifies it with the sheaf represented by the corresponding finite disjoint union of the tower. Yoneda turns this isomorphism into a scheme isomorphism. Consequently the pullback of $P$ to every one of the towers in the root-extension lemma is a finite disjoint union of copies of that tower.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-site-representable-algebraic-pullback",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3; proetale.tex Tag 09A5 and finite coproduct comparison for disjoint open-and-closed summands"
+   }
+  },
+  {
+   "text": "Apply the SNC tame root-extension lemma to $V$, the given labelled equations, and $P$. The regularity, Noetherianity, separated finite type over $k$, and positive characteristic hypotheses are those of the item. Step 4 verifies its parameter hypothesis, and step 5 verifies its exact tower-splitting hypothesis, with the same active labels and power transition maps. It gives $n>0$ prime to $p$ and finite etale $Z\\to\\operatorname{Spec}B_n$, together with $Z[1/f]\\simeq P\\times_X\\operatorname{Spec}B_n[1/f]$. No degree condition is used by that lemma.",
+   "uses": [
+    "lem-sfb-snc-tame-root-etale-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1(i)-(iii), printed pp.133-134; finite-root consequence supplied by the cited node"
+   }
+  },
+  {
+   "text": "For an arbitrary $B$-algebra $H$, base change of $Z$ is finite by finite-morphism permanence and etale by etale base change. Therefore $E_n\\to\\operatorname{Spec}H_n$ is finite etale. Pull the isomorphism of step 6 back to $\\operatorname{Spec}H_n[1/f]$. Associativity of fibre products, or its two projection equations, identifies its right side with $P\\times_X\\operatorname{Spec}H_n[1/f]$. The representable inverse-image comparison identifies the sheaf of this last scheme with the pullback of $F_0$. Thus it is the restriction $E_n[1/f]$ that represents this sheaf. Nothing here requires $H$ to be Noetherian or flat.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-proetale-inverse-image",
+    "lem-pur-site-representable-algebraic-pullback",
+    "lem-weil-pbc-proetale-subcanonical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL and 02GO; sites.tex Tag 04D3"
+   }
+  },
+  {
+   "text": "If $r=0$, then $f=1$, $B_n=B$, and $n=1$, $Z=P$ work. If $F_0$ is empty, use $P=\\varnothing$, $n=1$, $Z=\\varnothing$; the frame of its empty fibre remains the unique empty ordering, so the descent argument includes it. If $V$ is empty all constructions are the unique empty covers. Arbitrary finite fibre cardinalities and disconnected schemes were allowed throughout, and no step requires the degree of $P$ to be prime to $p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1; empty and zero-boundary cases of the construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-pbc-proetale-comparison-unit-sets",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-finite-locally-constant-sets-descent",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-pur-site-representable-algebraic-pullback",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-sfb-snc-boundary-parameter-criterion",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-sfb-snc-tame-root-etale-extension",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Finite-frame assembly from Lemmas 5.1.2 and 5.1.4, Stacks 03RV and 04D3, and the existing SNC finite-root extension node following ILO IX Proposition 2.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant pro etale sheaf tame along a strict normal crossings boundary is represented at a finite parameter root level by a finite etale scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: etale algebra and condensed-set results do not supply finite pro-etale frames plus an SNC root-extension model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite frames descend a finite pro etale local system to the etale site and a simultaneous Kummer root extension model",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: etale algebra and condensed-set results do not supply finite pro-etale frames plus an SNC root-extension model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: etale algebra and condensed-set results do not supply finite pro-etale frames plus an SNC root-extension model."
+  },
+  {
+   "tool": "grep",
+   "query": "(ProEtale|pro.etale).*(finite.*constant|finite.*etale)|(frame|Kummer).*(etale|sheaf)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: etale algebra and condensed-set results do not supply finite pro-etale frames plus an SNC root-extension model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant pro etale sheaves of sets have finite etale models after tame parameter root base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondSet.{u})\\n  (h : ∀ S : LightProfinite.{u}, IsColimit <| X.val.mapCocone (coconeRightOpOfCone S.asLimitCone)) :\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Type (u + 1)) : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor_obj_val\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : CompHausLike.HasExplicitFiniteCoproducts P] [inst_1 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (X : Type (max u w)),\\n  ((C\", \"doc\": \"For any predicate $P$ on topological spaces with explicit finite coproducts and pullbacks, and under the condition that effective epimorphisms in $\\\\mathbf{CompHausLike}_P$ are surjective on underlying\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_2 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCateg\", \"doc\": \"For a ring $ R $ and a compact Hausdorff-like predicate $ P $ with explicit finite coproducts and pullbacks, and where effective epimorphisms are surjective on underlying sets, the underlying presheaf\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(X : Type u) : LightCondSet.{u}\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: etale algebra and condensed-set results do not supply finite pro-etale frames plus an SNC root-extension model."
+  },
+  {
+   "tool": "grep",
+   "query": "(ProEtale|pro.etale).*(finite.*constant|finite.*etale)|(Kummer|tame).*(root|etale|sheaf)",
+   "results": "OK: 1 hits: Mathlib/FieldTheory/KummerExtension.lean; ",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern condensed objects or ring-theoretic etale/Kummer algebras, not finite tame pro-etale sheaf root models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally constant sheaf of sets on the pro etale site is represented by a finite etale scheme and a tame cover extends after Kummer base change",
+   "results": "OK: 8 hits: CondensedSet.LocallyConstant.functorFullyFaithful, LightCondensed.IsDiscrete, Condensed.lanSheafProfinite, Condensed.locallyConstantPresheaf, LightCondensed.lanLightCondSet, SheafOfModules.IsFiniteType.mk, Condensed.isColimitLocallyConstantPresheafDiagram, AlgebraicGeometry.Scheme.smallEtaleTopology; ",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern condensed objects or ring-theoretic etale/Kummer algebras, not finite tame pro-etale sheaf root models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"Etale\"",
+   "results": "OK: 0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern condensed objects or ring-theoretic etale/Kummer algebras, not finite tame pro-etale sheaf root models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant pro etale sheaf of sets tame along a strict normal crossings boundary extends to a finite etale cover after adjoining prime to p roots of the parameters",
+   "results": "OK: 8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.hasMap_X, StandardEtalePresentation, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmooth.exists_etale_mvPolynomial; ",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern condensed objects or ring-theoretic etale/Kummer algebras, not finite tame pro-etale sheaf root models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves of sets on the pro etale site descend to finite etale covers; tame ramification is killed by simultaneous prime to characteristic parameter roots",
+   "results": "OK: 8 hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.IsEtaleAt.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.instForallOfFinite; ",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern condensed objects or ring-theoretic etale/Kummer algebras, not finite tame pro-etale sheaf root models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-finite-fibre-classification",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 2, 3: Finite tame pro-etale sheaves have finite root-level etale models",
+   "via": [
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-finite-tame-root-model",
+  "worker": "stage1",
+  "summary": "Q59: assembled finite-frame etale descent, finite-set representability, exact tower splitting, SNC branch parameters, the existing root-extension lemma and arbitrary base change. No new nodes. Clarified that the punctured restriction of E_n represents the pulled-back sheaf.",
+  "blueprint": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 2, 3: Finite tame pro-etale sheaves have finite root-level etale models",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "why": "Generic classicality and etale local sections for set sheaves; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-comparison-unit-sets",
+    "why": "Generic full faithfulness of comparison; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-sets-descent",
+    "why": "Generic finite-set representability; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic subcanonicality; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-subcanonical",
+    "why": "Generic subcanonicality; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-site-representable-algebraic-pullback",
+    "why": "Generic representable inverse image; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-cbc-proetale-comparison-stalk",
+    "why": "Generic comparison of set stalks; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic primality of parameter branches; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "why": "Generic finite coproducts of representables; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic finite base change; used below the finite tame boundary calculation, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic etale base change; used below the finite tame boundary calculation, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-pbc-proetale-comparison-unit-sets",
+  "lem-weil-pbc-finite-locally-constant-sets-descent",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-pur-site-representable-algebraic-pullback",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-f6ee6c520",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-f6ee6c520 (reviewer sub-agent of L); spot-checked: Read all 8 steps and every cited statement. Sources checked: Bhatt-Scholze printed p.34 (Lemmas 5.1.1, 5.1.2, 5.1.4, Corollary 5.1.5); ILO IX 2.1, used only through lem-sfb-snc-tame-root-etale-extension; no SGA anywhere. There are no new nodes. The statement change only makes explicit that the punctured restriction E_n x Spec H_n[1/f] represents the pullback. That is not a weakening, and the only citer (fibre-classification step 2) uses exactly this. Two faults, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-snc-finite-tame-root-model.json. (1) E5/C4 in step 1: a section of the pro-etale coproduct sheaf T = coprod T_d lies in single summands only pro-etale locally, so 'refine by these covering members' gives a pro-etale covering, not the etale covering that step 2's etale descent needs. Repaired by rewriting step 1 with nodes the item already cites plus the sheafification definition. Each T_d is locally constant (its local value is the set of bijections onto S), hence T_d = nu^*H_d. Since nu^* is a left adjoint, T = nu^*(coprod H_d). The unit iso gives H(Y) = T(Y) and H_d(Y) = T_d(Y) for etale Y. A section of the etale coproduct lies in one summand on an etale covering (local surjectivity of sheafification from its universal property), giving F_0 = constant [d] on etale members. (2) The route-pivot list (artin-gabber section, 2026-10-19) drops lem-per-snc-boundary-parameter-criterion, which step 4 cited. It is repointed to the identical-statement, same-unit node lem-sfb-snc-boundary-parameter-criterion (NC; no cycle; nothing in its closure is on the dropped list), and its tool_uses entry is removed. Step 4 otherwise checked: (t_i) = (u_sigma(i)) as height-one primes, the units are absorbed into the parameters, and V(f) is the boundary. Steps 2-3, 5-7 checked against the comparison, unit, descent, representable-pullback (finite limits, coverings, subcanonical), qcqs finite-coproduct (the tower is affine), Yoneda, root-extension (all hypotheses), and finite/etale base-change statements. Step 8 edge cases (r=0, empty sheaf, empty V, p | deg) checked. Batch-5: the closure meets sec-trace-formula only in def-trf-strict-normal-crossings-boundary (a definition) and the regular-local UFD algebra lemmas, which are neither trace-formula nor Poincare-duality content, so I accept them. The flag on lem-sfb-snc-tame-root-etale-extension reaches only that definition, so I accept it too. Worker tool_uses for generic pro-etale and site tools accepted. proof_deps equals the union of step uses; every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCFiniteTameRootModel",
+  "declaration": "AlgebraicGeometry.ProEtale.SNCTameExtension.exists_finite_tame_root_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SNCTameExtension.scalarRootProjection",
+   "AlgebraicGeometry.ProEtale.SNCTameExtension.scalarRootOpen",
+   "AlgebraicGeometry.ProEtale.SNCTameExtension.scalarRootToOpen",
+   "AlgebraicGeometry.ProEtale.SNCTameExtension.exists_finite_tame_root_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCFiniteTameRootModel.lean",
+  "statement": "theorem exists_finite_tame_root_model (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (B : Type u) [CommRing B] (b : Spec (.of B) ⟶ Spec (.of k)) [LocallyOfFiniteType b] [QuasiCompact b] [IsSeparated b] (_hB : IsRegularScheme (Spec (.of B))) (r : ℕ) (t : Fin r → B) (D : (Spec (.of B)).IdealSheafData) (_hD : IsStrictNormalCrossingsBoundary D) (_hproduct : D = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of B)).inv (∏ i, t i)})) (_hreduced : ∀ i, _root_.IsReduced (B ⧸ Ideal.span ({t i} : Set B))) (_hdistinct : Function.Injective (fun i ↦ PrimeSpectrum.zeroLocus ({t i} : Set B))) (_hbranches : Set.range (fun i ↦ PrimeSpectrum.zeroLocus ({t i} : Set B)) = Set.image (Set.image Subtype.val) (irreducibleComponents (D.support : Set (Spec (.of B))))) (F₀ : Sheaf (Scheme.ProEt.topology (Spec (.of (Localization.Away (∏ i, t i))))) (Type (u + 1))) (_hlocal : ∃ (I : Type (u + 1)) (U : I → (Spec (.of (Localization.Away (∏ i, t i)))).ProEt), (Scheme.ProEt.topology _).CoversTop U ∧ ∀ i, ∃ S : Type (u + 1), Finite S ∧ Nonempty ((Scheme.proEtaleSetRestriction _ (U i)).obj F₀ ≅ (constantSheaf (Scheme.ProEt.topology (U i).left) (Type (u + 1))).obj S)) (_htame : ∀ (q : PrimeSpectrum B) (K H : Type u) [Field K] [Algebra (IsLocalRing.ResidueField (Localization.AtPrime q.asIdeal)) K] [IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime q.asIdeal)) K] [Algebra (Localization.AtPrime q.asIdeal) K] [IsScalarTower (Localization.AtPrime q.asIdeal) (IsLocalRing.ResidueField (Localization.AtPrime q.asIdeal)) K] [CommRing H] [Algebra (Localization.AtPrime q.asIdeal) H], Algebra.StrictHenselizationPresentationIn (Localization.AtPrime q.asIdeal) K H → ∃ S : Type (u + 1), Finite S ∧ Nonempty ((Scheme.proEtaleSheafInverseImage (localPuncture p t q H) (Type (u + 1))).obj F₀ ≅ (constantSheaf (Scheme.ProEt.topology _) (Type (u + 1))).obj S)) : (∀ q : PrimeSpectrum B, ∃ (_hnoeth : IsNoetherianRing (Localization.AtPrime q.asIdeal)) (s : List (Localization.AtPrime q.asIdeal)), IsLocalRing.IsRegularSystemOfParameters s ∧ ((active t q).map (algebraMap B (Localization.AtPrime q.asIdeal))).Sublist s) ∧ ∃ (P : Scheme.{u}) (π : P ⟶ Spec (.of (Localization.Away (∏ i, t i)))) (_hfinite : IsFinite π) (_hetale : Etale π), ∃ eP : F₀.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.ProEt.mk π), (∀ (Q : Scheme.{u}) (ρ : Q ⟶ Spec (.of (Localization.Away (∏ i, t i)))) [IsFinite ρ] [Etale ρ] (G : Sheaf (Scheme.ProEt.topology _) (Type (u + 1))) (eQ : G.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.ProEt.mk ρ)) (η : F₀ ⟶ G), ∃! g : Scheme.ProEt.mk π ⟶ Scheme.ProEt.mk ρ, η.hom ≫ eQ.hom = eP.hom ≫ uliftYoneda.{u + 1}.map g) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Spec (.of (Localization.Away (∏ i, t i)))), ∃ e : Scheme.proEtaleGeometricSetStalk y F₀ ≅ ULift.{u + 1} (Over.mk y ⟶ Over.mk π), ∀ (N : Scheme.ProEtaleGeometricNeighbourhood y) (s : F₀.obj.obj (op N.right)), (e.hom ((colimit.ι (Scheme.proEtaleGeometricStalkDiagram y F₀) (op N)) s)).down = N.hom ≫ (Scheme.ProEt.forget _).map ((eP.hom.app (op N.right) s).down)) ∧ ∃ n : ℕ, 0 < n ∧ n.Coprime p ∧ ∃ (Z : Scheme.{u}) (ζ : Z ⟶ Spec (.of (MvPolynomial (Fin r) B ⧸ Ideal.span (Set.range (fun i ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i)))))), IsFinite ζ ∧ Etale ζ ∧ (∃ e : pullback ζ (pullback.snd (puncture t) (finiteProjection t n)) ≅ pullback π (pullback.fst (puncture t) (finiteProjection t n)), e.hom ≫ pullback.snd _ _ = pullback.snd _ _) ∧ ∀ (H : Type u) [CommRing H] [Algebra B H], IsFinite (pullback.snd ζ (scalarRootProjection t n H)) ∧ Etale (pullback.snd ζ (scalarRootProjection t n H)) ∧ ∃ h : WeaklyEtale (pullback.snd (pullback.snd ζ (scalarRootProjection t n H)) (scalarRootOpen t n H)), Nonempty (((Scheme.proEtaleSheafInverseImage (scalarRootToOpen t n H) (Type (u + 1))).obj F₀).obj ≅ uliftYoneda.{u + 1}.obj (@Scheme.ProEt.mk _ _ (pullback.snd (pullback.snd ζ (scalarRootProjection t n H)) (scalarRootOpen t n H)) h))",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reuses the seven existing active-label root-chart definitions through def-sfb-snc-root-chart-maps, the restriction functor through def-a1-proetale-set-restriction, and the geometric stalk through def-weil-proetale-geometric-stalk. Both root extension and local classicality remain proof dependencies only. Scalar extension and puncture are canonical fibre products; branch hypotheses and the theorem signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a67059c2",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Re-delivery after H2/H12 RETURN on 529442faf55f. Lean module byte-identical except the duplicate copyright header was removed; statement verbatim. stmt_deps now cite definition owners: new existing:true def-sfb-snc-root-chart-maps (the 7 plain root-chart defs in the unchanged SNCTameRootEtaleExtension, checked against live source and tameRootRelations; full generality; stmt_deps def-pc-scheme and def-sfb-strict-local-kummer-tame-module) and the landed def-a1-proetale-set-restriction. Both theorems stay in proof_deps. Prior full math audit still applies (hypotheses, conclusions, edge cases, universes, H5/H6/H8). Item unlanded live, no supersession. Advisories: the SNCBoundaryParameterCriterion import (dry run accepted); citer fibre-classification must check branch hypotheses. No compile, since no file changed."
+ }
+}

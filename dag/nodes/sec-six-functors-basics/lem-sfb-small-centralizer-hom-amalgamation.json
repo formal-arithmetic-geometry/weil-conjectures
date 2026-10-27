@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-small-centralizer-hom-amalgamation",
+ "kind": "statement",
+ "title": "Small centralizers and their homomorphism amalgamation",
+ "statement": "Let $A$ be a nonzero commutative ring and $(G,T=D_A(M))$ a split realization of a finite reduced root datum $(M,\\Phi,M^\\vee,\\Phi^\\vee)$ [def-sfb-pinned-split-root-realization]. The root system $\\Phi$ admits a base $\\Delta$ in that definition. Fix any such base and generators of its free root modules. For $J\\subseteq\\Delta$, put $L_J=M\\cap\\operatorname{span}_{\\mathbf Q}(J)$ inside $M\\otimes_{\\mathbf Z}\\mathbf Q$, put $S_J=D_A(M/L_J)\\subseteq T$ [def-sfb-ring-diagonalizable-group], and let $G_J=Z_G(S_J)$ denote the functor of elements commuting with $S_J$ after every algebra extension. This functor is a closed reductive subgroup containing $T$, and $(G_J,T)$ is a split realization with roots $\\Phi_J=\\Phi\\cap\\operatorname{span}_{\\mathbf Q}(J)$, their original coroots in $M^\\vee$, base $J$, and the inherited simple-root generators. If $I\\subseteq J$, there is the natural inclusion $G_I\\subseteq G_J$. In particular $G_\\varnothing=T$, $G_\\Delta=G$, and $G_J$ has semisimple rank $|J|$.\n\nLet $H$ be any affine $A$-group scheme (an affine scheme over $\\operatorname{Spec}A$ with multiplication, identity and inverse satisfying the group diagrams). Suppose given homomorphisms $g_J:G_J\\to H$ for all $J\\subseteq\\Delta$ with $|J|\\leq2$, such that $g_J|_{G_I}=g_I$ whenever $I\\subseteq J$ and $|J|\\leq2$. Then there is a unique homomorphism $g:G\\to H$ restricting to every $g_J$. These assertions hold over arbitrary, possibly disconnected or nonreduced, $A$, and include $\\Delta=\\varnothing$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary 6.2.7, printed p.204, together with the torus-centralizer description and inherited pinnings in Step 1 of the proof of the Isogeny Theorem, pp.204--205; the empty-base case is the torus case preceding Step 1. Read online; local PDF WANTED. No Stacks tag states this reductive-group theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "The root system $\\Phi$ has a base. The root-datum axioms of [def-sfb-pinned-split-root-realization] give the data of [lem-sfb-crystallographic-positive-base] with $I=\\Phi$, $N=M^\\vee$, $\\alpha$ the inclusion, $\\beta:\\gamma\\mapsto\\gamma^\\vee$ (injective, being a bijection onto $\\Phi^\\vee$) and $\\sigma_\\gamma$ the permutation induced by the reflection of $\\gamma$. Since $\\Phi$ is finite and $0\\notin\\Phi$, choose $f\\in M^\\vee\\otimes\\mathbf Q$ outside the finitely many hyperplanes $\\{f(\\gamma)=0\\}$ and clear denominators to get an additive $f:M\\to\\mathbf Z$ nonzero on $\\Phi$. Let $D$ be the set of roots $\\gamma$ with $f(\\gamma)>0$ that are not a sum of two roots with positive $f$-values. That node makes $D$ linearly independent over $\\mathbf Z$, hence over $\\mathbf Q$. By induction on $f(\\gamma)$, every root with $f(\\gamma)>0$ is a sum of elements of $D$: otherwise $\\gamma=\\gamma'+\\gamma''$ with $0<f(\\gamma'),f(\\gamma'')<f(\\gamma)$. The reflection of $\\gamma$ sends $\\gamma$ to $-\\gamma$, so $\\Phi=-\\Phi$ and every root is a nonnegative or nonpositive integral combination of $D$. Thus $D$ is a base in the sense of that definition; $D=\\varnothing$ when $\\Phi=\\varnothing$. From now on $\\Delta$ is any fixed base, with fixed generators $X_\\alpha$ of the free modules $\\mathfrak g_\\alpha$, $\\alpha\\in\\Delta$, so that $G$ is a pinned split realization.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-crystallographic-positive-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Existence of a base for the root system of a split reductive group, used before Corollary 6.2.7, p.204; standard positive-indecomposable construction (Mathlib RootPairing base existence). Added by the maintainer reader Q132 review."
+   }
+  },
+  {
+   "text": "For $J\\subseteq\\Delta$, $M/L_J$ is finitely generated, and torsion-free: $nm\\in L_J$ implies $m\\in\\operatorname{span}_{\\mathbf Q}(J)$ and hence $m\\in L_J$. By [lem-trf-fg-torsionfree-group-free] it has a finite integral basis. The group-algebra description [def-sfb-ring-diagonalizable-group] therefore identifies $S_J$ with a product of multiplicative groups. The Hopf map $A[M]\\to A[M/L_J]$ is surjective, so the duality statement [lem-sfb-relative-diagonalizable-character-duality] makes it a closed subgroup of $T$. A root $\\gamma$ restricts trivially to $S_J$ exactly when its image in $M/L_J$ is zero: compare the basis monomials $e_{\\bar\\gamma}$ and $e_0$ in the group algebra. This is exactly $\\gamma\\in\\Phi_J$. The base-coordinate definition says a root is in this rational span exactly when every coefficient outside $J$ is zero; consequently its positive or negative integral expansion uses only $J$. Thus $J$ is a base of this subsystem.",
+   "uses": [
+    "lem-trf-fg-torsionfree-group-free",
+    "def-sfb-ring-diagonalizable-group",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 6.2.7 setup and Isogeny Theorem Step 1, pp.204--205; explicit saturated-lattice argument. Read online; local archival copy WANTED. No Stacks tag states this reductive-group result."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-torus-centralizer-normalizer] to the smooth affine finitely presented $G$ and the closed split torus $S_J$ from step 2. This represents $G_J$ as a smooth affine finitely presented closed subgroup, commutes with arbitrary base change, and identifies its Lie algebra with the $S_J$-invariants. Apply [lem-sfb-relative-torus-automorphism-fixed-group] to conjugation by $S_J$ on $G$: the fixed functor is precisely this centralizer, and since $G$ is reductive, so is $G_J$. The commutative torus $T$ lies in $G_J$; it remains maximal on every geometric fibre since a larger torus there would already be a larger torus in $G$. In the prescribed $M$-weight decomposition of $\\mathfrak g$, restriction of weights along $M\\to M/L_J$ keeps exactly weights in $L_J$, by [lem-sfb-relative-torus-bundle-weights]. Hence\n$$\\operatorname{Lie}(G_J)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\gamma\\in\\Phi_J}\\mathfrak g_\\gamma.$$\nThis equality and its base-change compatibility identify the geometric roots, not merely their differentials; all retained root modules remain the given free rank-one modules.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-relative-torus-automorphism-fixed-group",
+    "lem-sfb-relative-torus-bundle-weights",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.2.4, pp.64--66, and torus-centralizer discussion preceding Remark 3.1.5, p.83; Isogeny Theorem Step 1, pp.204--205. Read online; local archival copy WANTED. No Stacks tag states this reductive-group result."
+   }
+  },
+  {
+   "text": "By [lem-sfb-split-root-subgroup-weyl-calculus], the root exponentials in the reductive subgroup $G_J$ containing $T$ agree with the original ones, as do their coroots. Together with steps 2--3, this gives precisely the split realization and inherited generators required by [def-sfb-pinned-split-root-realization]. Its root-span dimension is $|J|$ because $J$ is independent and spans $\\Phi_J$, so the rank formula in that calculus gives the asserted semisimple rank. If $I\\subseteq J$, the quotient $M/L_I\\to M/L_J$ shows $S_J\\subseteq S_I$, hence commuting with $S_I$ implies commuting with $S_J$ after every extension; this gives the natural subgroup inclusion. Since $L_\\varnothing=0$, $S_\\varnothing=T$ and the self-centralizing-torus assertion in the calculus gives $G_\\varnothing=T$. Every root is trivial on $S_\\Delta$, so equivariance of its exponential makes $S_\\Delta$ commute with every root group and with $T$. Their generation of $G$ as a sheaf makes it commute with $G$, so $G_\\Delta=G$. For $\\Delta=\\varnothing$ these equalities already give $G=T$; take $g=g_\\varnothing$, and uniqueness is immediate.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Isogeny Theorem Step 1, pp.204--205; Theorem 4.1.4, Corollary 5.1.9 and the open-cell generation of Section 6.2, p.198. Read online; local archival copy WANTED. No Stacks tag states this reductive-group result."
+   }
+  },
+  {
+   "text": "Assume $\\Delta$ is nonempty. Write $f_T=g_\\varnothing$, $f_\\alpha=g_{\\{\\alpha\\}}|_{U_\\alpha}$ and $h_\\alpha=g_{\\{\\alpha\\}}(n_\\alpha)$. These expressions are defined: step 4 and [lem-sfb-split-root-subgroup-weyl-calculus] put $U_{\\pm\\alpha}$ and $n_\\alpha$ in $G_{\\{\\alpha\\}}$. For distinct simple roots set $q_{\\alpha\\beta}=g_{\\{\\alpha,\\beta\\}}|_{U_{\\Psi_{\\alpha\\beta}}}$. All roots in $\\Psi_{\\alpha\\beta}$ vanish on $S_{\\{\\alpha,\\beta\\}}$, so their root groups lie in that centralizer; their product subgroup does too by the product assertion in the calculus. Compatibility of the given $g_J$ says $q_{\\alpha\\beta}|_{U_\\alpha}=f_\\alpha$, $q_{\\alpha\\beta}|_{U_\\beta}=f_\\beta$, and gives the common map $f_T$ on $T$. The linked choices in each $G_J$ agree with those in $G$.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 6.2.7 deduced from Theorem 6.2.4, p.204; construction of the supplied relation data. Read online; local archival copy WANTED. No Stacks tag states this reductive-group result."
+   }
+  },
+  {
+   "text": "Inside $G_{\\{\\alpha\\}}$, apply the homomorphism $g_{\\{\\alpha\\}}$ to the identities of [lem-sfb-split-root-subgroup-weyl-calculus], after an arbitrary $A$-algebra extension. Conjugation by $t$ on $U_\\alpha$ gives $f_T(t)f_\\alpha(u)f_T(t)^{-1}=f_\\alpha(tut^{-1})$; conjugation by $n_\\alpha$ on $T$ gives $h_\\alpha f_T(t)h_\\alpha^{-1}=f_T(s_\\alpha(t))$. The square and cubic relations give $h_\\alpha^2=f_T(\\alpha^\\vee(-1))$ and $(h_\\alpha f_\\alpha(\\exp_\\alpha(X_\\alpha)))^3=1$. Inside $G_{\\{\\alpha,\\beta\\}}$, the elements $n_\\alpha,n_\\beta$ have images $h_\\alpha,h_\\beta$ by compatibility. Applying this homomorphism to $(n_\\alpha n_\\beta)^{m_{\\alpha\\beta}}=t_{\\alpha\\beta}$ therefore gives $(h_\\alpha h_\\beta)^{m_{\\alpha\\beta}}=f_T(t_{\\alpha\\beta})$. For $c\\in\\Psi_{\\alpha\\beta}\\setminus\\{\\alpha\\}$, both $u\\in U_c$ and $n_\\alpha u n_\\alpha^{-1}$ lie in $U_{\\Psi_{\\alpha\\beta}}$. Applying the same homomorphism yields $h_\\alpha q_{\\alpha\\beta}(u)h_\\alpha^{-1}=q_{\\alpha\\beta}(n_\\alpha u n_\\alpha^{-1})$. Interchanging $\\alpha,\\beta$ gives the other conjugation identity. These are all the hypotheses, including the two distinct rank-two checks, of [lem-sfb-pinned-root-relations-hom-criterion].",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-pinned-root-relations-hom-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, relations (6.2.2)--(6.2.6), pp.201--202, checked inside the supplied small centralizers. Read online; local archival copy WANTED. No Stacks tag states this reductive-group result."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pinned-root-relations-hom-criterion] to the data of steps 5--6 and the given affine $H$. It yields a homomorphism $g:G\\to H$ with those torus and simple-root restrictions and the values $h_\\alpha$ on $n_\\alpha$. For nonempty $J\\subseteq\\Delta$, $|J|\\leq2$, compare $g|_{G_J}$ and $g_J$. They agree on $T$, each simple-root group for $\\alpha\\in J$, and each $n_\\alpha$, by their definitions and compatibility with $g_{\\{\\alpha\\}}$. Step 4 identifies these as the canonical data of the pinned split group $G_J$, so the uniqueness part of the criterion, applied to $G_J$ itself, gives $g|_{G_J}=g_J$. The empty restriction is already $f_T=g_\\varnothing$. Finally any other extension has exactly the same torus map, simple-root maps and $n_\\alpha$ values, so the same uniqueness assertion for $G$ identifies it with $g$. All equations used are identities on arbitrary algebra-valued points; no argument passes from geometric equality to equality over a possibly nonreduced base.",
+   "uses": [
+    "lem-sfb-pinned-root-relations-hom-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4 and its uniqueness preamble, pp.201--203; Corollary 6.2.7, p.204. Read online; local archival copy WANTED. No Stacks tag states this reductive-group result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fg-torsionfree-group-free",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-relative-torus-automorphism-fixed-group",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-pinned-root-relations-hom-criterion",
+  "lem-sfb-crystallographic-positive-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly following Conrad Corollary 6.2.7 and Theorem 6.2.4, pp.201--205, with saturated-lattice and invariant-weight calculations expanded. Online source read; local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphism from a split reductive group scheme determined by compatible maps on simple rank one and rank two centralizers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting.toMonoidHom\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → {S : GroupExtension N E G} → S.Splitting → G →* E\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ (a group homomorphism such that the composition $G \\\\xrightarrow{s} E \\\\xrightarrow{\\\\pi} G$ is the identity), this const\"}\n  {\"name\": \"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"{F : Type u_1} →\\n  {K : Type u_2} →\\n    (A : Type u_3) →\\n      [inst : Field F] →\\n        [inst_1 : Field K] →\\n          [inst_2 : Field A] →\\n            [inst_3 : Algebra F K] →\\n              [inst_4 : Algebra F A] →\\n                [Algebra.IsAlgebraic F K] →\\n                  (L : Type u_4) →\\n   \", \"doc\": \"Given a field extension $ L $ of $ F $ where every element of $ K $ has its minimal polynomial over $ F $ splitting in $ L $, there is a canonical equivalence between the set of $ F $-algebra homomorp\"}\n  {\"name\": \"GroupExtension.Splitting.conjAct\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] →\\n        {E : Type u_3} → [inst_2 : Group E] → {S : GroupExtension N E G} → S.Splitting → G →* MulAut N\", \"doc\": \"The group homomorphism $ G \\\\to \\\\mathrm{Aut}(N) $ obtained by composing the splitting $ s : G \\\\to E $ with the conjugation action homomorphism $ E \\\\to \\\\mathrm{Aut}(N) $, where $ \\\\mathrm{Aut}(N) $ denot\"}\n  {\"name\": \"GroupExtension.Splitting.mk.inj\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} {inst : Group N} {inst_1 : Group E} {inst_2 : Group G}\\n  {S : GroupExtension N E G} {toMonoidHom : G →* E}\\n  {rightInverse_rightHom : Function.RightInverse (↑toMonoidHom).toFun ⇑S.rightHom} {toMonoidHom_1 : G →* E}\\n  {rightInverse_rightHom_1 : Function.\", \"doc\": \"If two splittings of the group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ are equal as structures, then their underlying group homomorphisms $G \\\\to E$ must be equal. Specifically, given splittings $S$ and \"}\n  {\"name\": \"GroupExtension.Splitting.instMonoidHomClass\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : Group N] [inst_1 : Group E] [inst_2 : Group G]\\n  (S : GroupExtension N E G), MonoidHomClass S.Splitting G E\", \"doc\": \"The type of splittings of the group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ is equipped with the structure of monoid homomorphisms from $G$ to $E$, ensuring each splitting preserves multiplication and i\"}\n  {\"name\": \"SemidirectProduct.lift_unique\", \"module\": \"Mathlib/GroupTheory/SemidirectProduct\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} {H : Type u_3} [inst : Group N] [inst_1 : Group G] [inst_2 : Group H]\\n  {φ : G →* MulAut N} (F : N ⋊[φ] G →* H),\\n  F = SemidirectProduct.lift (F.comp SemidirectProduct.inl) (F.comp SemidirectProduct.inr) ⋯\", \"doc\": \"Given groups $N$ and $G$ with a homomorphism $\\\\phi: G \\\\to \\\\text{Aut}(N)$, any group homomorphism $F: N \\\\rtimes_\\\\phi G \\\\to H$ is uniquely determined by its restrictions to the canonical inclusions of $\"}\n  {\"name\": \"SemidirectProduct.hom_ext\", \"module\": \"Mathlib/GroupTheory/SemidirectProduct\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} {H : Type u_3} [inst : Group N] [inst_1 : Group G] [inst_2 : Group H]\\n  {φ : G →* MulAut N} {f g : N ⋊[φ] G →* H},\\n  f.comp SemidirectProduct.inl = g.comp SemidirectProduct.inl →\\n    f.comp SemidirectProduct.inr = g.comp SemidirectProduct.inr → f = g\", \"doc\": \"If two group homomorphisms $ f, g : N \\rtimes_\\\\phi G \\\\to H $ satisfy $ f \\\\circ \\\\text{inl} = g \\\\circ \\\\text{inl} $ and $ f \\\\circ \\\\text{inr} = g \\\\circ \\\\text{inr} $, where $ \\\\text{inl} : N \\\\to N \\\\rtimes_\\\\p\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autMap_unique\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  [inst_2 : CategoryTheory.PreGaloisCategory.IsConnected A] [inst_3 : CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (f : A ⟶ B) (σ : CategoryTheory.Aut A) (τ : CategoryTheory.Aut B),\\n  C\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reductive\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.two.*centraliz|centraliz.*amalgam|pinning.*hom",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend compatible group scheme maps from rank two Levi subgroups to split reductive group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] (f : X.PartialMap Y) [f.IsOver S] : f.toRationalMap.IsOver S\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"AddGroupExtension.Equiv.ofAddMonoidHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : AddGroup N] →\\n      [inst_1 : AddGroup G] →\\n        {E : Type u_3} →\\n          [inst_2 : AddGroup E] →\\n            {S : AddGroupExtension N E G} →\\n              {E' : Type u_4} →\\n                [inst_3 : AddGroup E'] →\\n                  {S' : AddGroup\", \"doc\": \"Given two additive group extensions $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and $0 \\\\to N \\\\to E' \\\\to G \\\\to 0$, and an additive monoid homomorphism $f : E \\\\to+ E'$ satisfying $f \\\\circ \\\\text{inl} = \\\\text{inl}'$ and \"}\n  {\"name\": \"AddGroupExtension.Splitting.rightHom_splitting\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : AddGroup N] [inst_1 : AddGroup E] [inst_2 : AddGroup G]\\n  {S : AddGroupExtension N E G} (s : S.Splitting) (g : G), S.rightHom (s g) = g\", \"doc\": \"For any additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and any splitting $s : G \\\\to E$, it holds that for all $g \\\\in G$, the composition of the right homomorphism and the splitting satisfies $\\\\t\"}\n  {\"name\": \"GroupExtension.Splitting.conjAct\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \": G →* MulAut N\", \"doc\": \"The group homomorphism $ G \\\\to \\\\mathrm{Aut}(N) $ obtained by composing the splitting $ s : G \\\\to E $ with the conjugation action homomorphism $ E \\\\to \\\\mathrm{Aut}(N) $, where $ \\\\mathrm{Aut}(N) $ denot\"}\n  {\"name\": \"AddGroupExtension.Splitting.rightHom_comp_splitting\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : AddGroup N] [inst_1 : AddGroup E] [inst_2 : AddGroup G]\\n  {S : AddGroupExtension N E G} (s : S.Splitting), S.rightHom.comp ↑s = AddMonoidHom.id G\", \"doc\": \"For any additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and its splitting $s : G \\\\to E$, the composition of the projection homomorphism $E \\\\to G$ with the splitting $s$ equals the identity homomo\"}\n  {\"name\": \"AlgebraicGeometry.instIsOverHomOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{U V : X.Opens} (h : U ≤ V) : (X.homOfLE h).IsOver X\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, this function constructs the morphism from the restricted scheme $X|_U$ to $X|_V$ by lifting through the canoni\"}\n  {\"name\": \"GroupExtension.Equiv.ofMonoidHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"(f : E →* E') (comp_inl : f.comp S.inl = S'.inl) (rightHom_comp : S'.rightHom.comp f = S.rightHom) : S.Equiv S'\", \"doc\": \"Given two group extensions with the same normal subgroup $N$ and quotient group $G$, if there exists a monoid homomorphism $f : E \\\\to E'$ that commutes with the inclusion maps $N \\\\to E$ and $N \\\\to E'$\"}\n  {\"name\": \"GroupExtension.Splitting.coe_monoidHom_mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"(s : G →* E) (hs : Function.RightInverse s S.rightHom) : (mk s hs : G →* E) = s\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a group homomorphism $s : G \\\\to E$ that splits the projection (i.e., $\\\\pi \\\\circ s = \\\\text{id}_G$), the canonical coercion of the splitting $s$ t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.two.*centraliz|centraliz.*amalgam|pinning.*hom",
+   "results": "{\"t\": \"2026-10-24T10:57:51Z\", \"tool\": \"grep\", \"query\": \"rank.two.*centraliz|centraliz.*amalgam|pinning.*hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract root pairings, abstract groups, Lie algebras, or general schemes; none states the asserted group-scheme theorem over arbitrary rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend compatible group scheme maps from rank two Levi subgroups to split reductive group",
+   "results": "{\"t\": \"2026-10-24T10:57:52Z\", \"tool\": \"leansearch\", \"query\": \"Extend compatible group scheme maps from rank two Levi subgroups to split reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"AddGroupExtension.Equiv.ofAddMonoidHom\", \"AddGroupExtension.Splitting.rightHom_splitting\", \"GroupExtension.Splitting.conjAct\", \"AddGroupExtension.Splitting.rightHom_comp_splitting\", \"AlgebraicGeometry.instIsOverHomOfLE\", \"GroupExtension.Equiv.ofMonoidHom\", \"GroupExtension.Splitting.coe_monoidHom_mk\"], \"digest\": \"abab98f77b90b9a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract root pairings, abstract groups, Lie algebras, or general schemes; none states the asserted group-scheme theorem over arbitrary rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Reductive\"",
+   "results": "{\"t\": \"2026-10-24T10:57:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"Reductive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract root pairings, abstract groups, Lie algebras, or general schemes; none states the asserted group-scheme theorem over arbitrary rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible maps on rank two Levi subgroups amalgamate uniquely to a reductive group scheme homomorphism",
+   "results": "{\"t\": \"2026-10-24T10:57:53Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible maps on rank two Levi subgroups amalgamate uniquely to a reductive group scheme homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SemidirectProduct.lift_unique\", \"RootPairing.Hom.mk.inj\", \"HNNExtension.hom_ext\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk.inj\", \"HNNExtension.hom_ext_iff\", \"RootPairing.Hom.ext\", \"SemidirectProduct.hom_ext\", \"Rack.toEnvelGroup.univ_uniq\"], \"digest\": \"935dc4df1bf1a1b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern abstract root pairings, abstract groups, Lie algebras, or general schemes; none states the asserted group-scheme theorem over arbitrary rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-central-isogeny-lifting",
+  "date": "2026-10-24",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation.",
+   "via": [
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-small-centralizer-hom-amalgamation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused relative torus centralizers, fixed-group reductivity, weight restriction and integral-basis nodes. Added the arbitrary-ring root/Weyl geometry and explicit relation criterion as two statement-only prerequisites. Verified every relation in an actual rank-one or rank-two centralizer, and used criterion uniqueness again to recover all prescribed restrictions, including the torus case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fg-torsionfree-group-free",
+    "why": "Finite integral basis of the torsion-free quotient lattice, a generic algebra tool independent of the constructible-sheaf route."
+   },
+   {
+    "node": "lem-sfb-relative-diagonalizable-character-duality",
+    "why": "Closed immersion of the split subtorus defined by the surjective quotient of character groups."
+   },
+   {
+    "node": "lem-sfb-relative-torus-centralizer-normalizer",
+    "why": "Representability, smoothness and invariant tangent module over arbitrary bases."
+   },
+   {
+    "node": "lem-sfb-relative-torus-automorphism-fixed-group",
+    "why": "Reductivity of the torus fixed subgroup for conjugation."
+   },
+   {
+    "node": "lem-sfb-relative-torus-bundle-weights",
+    "why": "Full torus invariant summands and their arbitrary-base-change compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-relative-torus-automorphism-fixed-group",
+  "lem-sfb-relative-torus-bundle-weights"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-1f3a44c43",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-1f3a44c43 (reviewer sub-agent of L); spot-checked: Item, both new nodes and all cited statements read in full. Conrad's Reductive group schemes is not under literature/ (WANTED), so the cited places (Thm 4.1.4, Cor 5.1.9, Prop 5.1.16, §6.2, Thm 6.2.4, Cor 6.2.7) could not be read locally; every claim was checked independently instead, including SL_2 calculations over an arbitrary ring: linked-generator uniqueness (which needs Y to be a generator, since in char 2, c=0 also normalizes T), n^2=alpha^vee(-1), (n x(1))^3=1, and the s_alpha formula. Steps 1-6 are correct: saturated L_J; S_J closed split torus; centralizer and fixed-group nodes give a smooth reductive G_J with Lie(G_J)=Lie(T)+sum over Phi_J, via the bundle-weights invariant clause; inclusion direction I subset J gives G_I in G_J; G_empty=T; G_Delta=G also with a central torus; every relation of the criterion is derived inside G_{alpha} or G_{alpha,beta}; uniqueness is applied to G_J and to G. The two new nodes are statement-only, self-contained, not restatements (D1) and not duplicates of the Noetherian/local/field nodes (canonical-root-exponential, local-split-root-data-weyl-lifts, low-rank-pinned-root-hom). FIX (C1/E): the item statement asserts that Phi admits a base, the parent uses that clause, and no step proved it. A new step 1 cites the Mathlib leaf lem-sfb-crystallographic-positive-base, instantiated from the root-datum axioms, with a generic f, induction on f(gamma) and Phi=-Phi. The non-spanning case means the spanning-only node lem-sfb-reduced-rational-root-pairing-base cannot be used. Old steps renumbered 2-7 with cross-references updated, proof_deps updated, every step under 2000 characters; the whole corrected item is in fixes/dag/nodes/sec-six-functors-basics/. Batch-5: lem-trf-fg-torsionfree-group-free is a pure-algebra Mathlib leaf; the other flags reach only generic trf defs or descent lemmas (fppf-is-fpqc, algebraic-space def, smooth fpqc descent); none is a trace-formula or Poincare-duality step, so all are accepted. The declared tool_uses are accepted as generic.; 1 file(s) fixed by the reviewer"
+ }
+}

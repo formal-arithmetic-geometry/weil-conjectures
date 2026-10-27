@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-l1-l2-fourier-realization",
+ "kind": "statement",
+ "title": "The Fourier integral realizes the Plancherel transform on L1 intersect L2",
+ "statement": "Over $\\mathbf R,\\mathbf C$ [def-weil-field], let $m\\geq1$, and use Lebesgue measure. Let $L^2(\\mathbf R^m;\\mathbf C)$ be measurable square-integrable functions modulo almost-everywhere equality, with $\\|u\\|_2^2=\\int|u|^2$. The Fourier integral on Schwartz functions (smooth functions whose derivatives decrease faster than every inverse polynomial), with kernel $e^{-2\\pi i x\\cdot\\xi}$, extends to a complex-linear isometric bijection $\\mathcal F_2:L^2\\to L^2$. Thus $\\|\\mathcal F_2u-\\mathcal F_2v\\|_2=\\|u-v\\|_2$ for all $u,v\\in L^2$. If $u\\in L^1\\cap L^2$, the absolutely convergent integral $h(\\xi)=\\int e^{-2\\pi i x\\cdot\\xi}u(x)\\,dx$ represents $\\mathcal F_2u$ almost everywhere; in particular $h\\in L^2$.",
+ "source": {
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "§2, p.3, Fourier transform and the s=0 case of (2.1); Lemma 2.7 proof, p.5, using the integral representatives of L2 Fourier transforms of fixed-support functions. The L1/L2 compatibility is made explicit as agent-stated supporting input. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-l2-fourier-isometry-test-duality] to obtain the complex-linear isometric bijection $\\mathcal F_2$ extending the specified Schwartz Fourier integral. Linearity and isometry give $\\|\\mathcal F_2u-\\mathcal F_2v\\|_2=\\|\\mathcal F_2(u-v)\\|_2=\\|u-v\\|_2$. This proves the extension and distance clauses.",
+   "uses": [
+    "lem-sfb-l2-fourier-isometry-test-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Fourier/LpSpace.lean",
+    "place": "50-55 and 99-105; linearity of the isometric equivalence."
+   }
+  },
+  {
+   "text": "For $u\\in L^1\\cap L^2$, fix its measurable representative $u_0$ and a measurable representative $w$ of $\\mathcal F_2u$. The identity $|e^{-2\\pi i x\\cdot\\xi}u_0(x)|=|u_0(x)|$ proves absolute convergence of $h(\\xi)$ at every $\\xi$. Apply [lem-sfb-bilinear-fourier-moment-regularity] with $a=b=m$, $L(x,\\xi)=x\\cdot\\xi$, $f=u_0$ and $r=0$: its only moment assumption is $u_0\\in L^1$, so $h$ is continuous. Then [lem-sfb-continuous-local-integrability] on $U=\\mathbf R^m$ makes $h$ locally integrable, while [lem-sfb-lp-local-integrability] at $p=2$ makes $w$ locally integrable.",
+   "uses": [
+    "lem-sfb-bilinear-fourier-moment-regularity",
+    "lem-sfb-continuous-local-integrability",
+    "lem-sfb-lp-local-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+    "place": "507-514 at r=0; LocallyIntegrable.lean:351-358,566-569."
+   }
+  },
+  {
+   "text": "Let $\\psi$ be any real smooth compactly supported function, and put $\\phi=\\psi+i0$. By [lem-sfb-schwartz-test-inclusion-integrability], $\\phi$ is Schwartz and integrable. Apply [lem-sfb-l1-bilinear-fourier-duality] with $f=u_0$, $q=\\phi$ and $L(x,\\xi)=x\\cdot\\xi$. Its two integrability hypotheses hold; symmetry of the dot product gives $J_{L^{\\mathrm t}}\\phi=\\mathcal F\\phi$. Thus $\\int h\\phi=\\int u_0\\mathcal F\\phi$. The forward test identity of [lem-sfb-l2-fourier-isometry-test-duality] for $u,u_0,w,\\phi$ gives $\\int\\phi w=\\int(\\mathcal F\\phi)u_0$. Commuting complex products yields $\\int\\psi h=\\int\\psi w$.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-l1-bilinear-fourier-duality",
+    "lem-sfb-l2-fourier-isometry-test-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Fourier/FourierTransform.lean",
+    "place": "242-248 with the symmetric dot-product form, and LpSpace.lean:120-129 evaluated on the Schwartz test."
+   }
+  },
+  {
+   "text": "Put $f=h-w$. Step 2 and $|h-w|\\leq|h|+|w|$ show local integrability of $f$: intersect the two neighborhoods at each point. On the compact support of any test $\\psi$, take a finite cover by such neighborhoods; boundedness of $\\psi$ makes $\\psi h$ and $\\psi w$ integrable. Therefore step 3 and linearity of the integral give $\\int\\psi f=0$. Apply [lem-sfb-smooth-test-ae-separation] to $U=\\mathbf R^m$ and $f$. Its openness, local integrability and all real smooth compact-test hypotheses have just been checked. Hence $h=w$ almost everywhere. Since $w$ represents $\\mathcal F_2u$, the continuous function $h$ is square integrable and represents that same class, proving every remaining clause.",
+   "uses": [
+    "lem-sfb-smooth-test-ae-separation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Distribution/AEEqOfIntegralContDiff.lean",
+    "place": "205-213, applied to the locally integrable difference; agent assembly of the test identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-l2-fourier-isometry-test-duality",
+  "lem-sfb-bilinear-fourier-moment-regularity",
+  "lem-sfb-continuous-local-integrability",
+  "lem-sfb-lp-local-integrability",
+  "lem-sfb-schwartz-test-inclusion-integrability",
+  "lem-sfb-l1-bilinear-fourier-duality",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "Supporting proof for Demailly §2 p.3 and Rellich Lemma 2.7 p.5, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; assembled from the cited Mathlib statements, not a separately printed proof in Demailly. The local PDF remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Plancherel Fourier transform of an integrable square integrable function equals its Fourier integral almost everywhere",
+   "results": {
+    "t": "2026-10-24T03:37:25Z",
+    "tool": "leanfinder",
+    "query": "The Plancherel Fourier transform of an integrable square integrable function equals its Fourier integral almost everywhere",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Integrable.fourierInv_fourier_eq",
+     "MeasureTheory.Integrable.fourier_fourierInv_eq",
+     "MeasureTheory.Integrable.fourier_inversion",
+     "MeasureTheory.Integrable.fourier_inversion_inv",
+     "Continuous.fourierInv_fourier_eq",
+     "Continuous.fourier_fourierInv_eq",
+     "MeasureTheory.Lp.instFourierTransformInv",
+     "Continuous.fourier_inversion"
+    ],
+    "digest": "609753d5ac2a5c86"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full realization: MeasureTheory.Lp.fourierTransformₗᵢ (Mathlib/Analysis/Fourier/LpSpace.lean:50) gives the linear isometric extension, but SchwartzMap.toLp_fourier_eq (:100) assumes Schwartz input and Lp.fourier_toTemperedDistribution_eq (:120) is distribution equality. Integral inversion (Mathlib/Analysis/Fourier/Inversion.lean:165) requires integrability of the transform and continuity at the point. The almost-everywhere agreement for arbitrary L1 intersect L2 requires an additional comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a function in L1 intersect L2 its integral Fourier transform represents the unitary L2 extension of the Schwartz Fourier transform",
+   "results": {
+    "t": "2026-10-24T03:37:26Z",
+    "tool": "leanfinder",
+    "query": "For a function in L1 intersect L2 its integral Fourier transform represents the unitary L2 extension of the Schwartz Fourier transform",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SchwartzMap.toLp_fourier_eq",
+     "SchwartzMap.toLp_fourierTransform_eq",
+     "SchwartzMap.toLp_fourierInv_eq",
+     "SchwartzMap.toLp_fourierTransformInv_eq",
+     "MeasureTheory.Lp.instFourierTransform",
+     "MeasureTheory.Lp.fourier_toTemperedDistribution_eq",
+     "MeasureTheory.Lp.fourierTransformₗᵢ",
+     "SchwartzMap.fourier_evalCLM_eq"
+    ],
+    "digest": "9242d5a4b05f2f36"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full realization: MeasureTheory.Lp.fourierTransformₗᵢ (Mathlib/Analysis/Fourier/LpSpace.lean:50) gives the linear isometric extension, but SchwartzMap.toLp_fourier_eq (:100) assumes Schwartz input and Lp.fourier_toTemperedDistribution_eq (:120) is distribution equality. Integral inversion (Mathlib/Analysis/Fourier/Inversion.lean:165) requires integrability of the transform and continuity at the point. The almost-everywhere agreement for arbitrary L1 intersect L2 requires an additional comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"ae\"",
+   "results": {
+    "t": "2026-10-24T03:37:24Z",
+    "tool": "loogle",
+    "query": "\"fourier\", \"ae\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "fourierCoeffOn_congr_ae",
+     "fourierCoeff_congr_ae",
+     "Real.fourierInv_congr_ae",
+     "Real.fourier_congr_ae",
+     "VectorFourier.fourierIntegral_congr_ae",
+     "MeasureTheory.AEStronglyMeasurable.fourierPowSMulRight",
+     "MeasureTheory.AEStronglyMeasurable.fourierSMulRight"
+    ],
+    "digest": "6f45e434bdf42041"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full realization: MeasureTheory.Lp.fourierTransformₗᵢ (Mathlib/Analysis/Fourier/LpSpace.lean:50) gives the linear isometric extension, but SchwartzMap.toLp_fourier_eq (:100) assumes Schwartz input and Lp.fourier_toTemperedDistribution_eq (:120) is distribution equality. Integral inversion (Mathlib/Analysis/Fourier/Inversion.lean:165) requires integrability of the transform and continuity at the point. The almost-everywhere agreement for arbitrary L1 intersect L2 requires an additional comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "fourier.*(ae|coe|integrable)|fourier_toTemperedDistribution_eq|norm_fourier_eq",
+   "results": {
+    "t": "2026-10-24T03:37:24Z",
+    "tool": "grep",
+    "query": "fourier.*(ae|coe|integrable)|fourier_toTemperedDistribution_eq|norm_fourier_eq",
+    "sub": "Analysis/Fourier",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/PoissonSummation.lean",
+     "Mathlib/Analysis/Fourier/PoissonSummation.lean",
+     "Mathlib/Analysis/Fourier/PoissonSummation.lean",
+     "Mathlib/Analysis/Fourier/PoissonSummation.lean"
+    ],
+    "digest": "d7493cb04ced8048"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full realization: MeasureTheory.Lp.fourierTransformₗᵢ (Mathlib/Analysis/Fourier/LpSpace.lean:50) gives the linear isometric extension, but SchwartzMap.toLp_fourier_eq (:100) assumes Schwartz input and Lp.fourier_toTemperedDistribution_eq (:120) is distribution equality. Integral inversion (Mathlib/Analysis/Fourier/Inversion.lean:165) requires integrability of the transform and continuity at the point. The almost-everywhere agreement for arbitrary L1 intersect L2 requires an additional comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For integrable L2 functions the Plancherel Fourier transform agrees almost everywhere with the integral transform",
+   "results": {
+    "t": "2026-10-24T03:37:24Z",
+    "tool": "leansearch",
+    "query": "For integrable L2 functions the Plancherel Fourier transform agrees almost everywhere with the integral transform",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SchwartzMap.norm_fourierTransformCLM_toL2_eq",
+     "MeasureTheory.Lp.fourier_toTemperedDistribution_eq",
+     "SchwartzMap.integral_norm_sq_fourier",
+     "MeasureTheory.Lp.inner_fourier_eq",
+     "SchwartzMap.inner_fourierTransformCLM_toL2_eq",
+     "MeasureTheory.Lp.fourierTransformₗᵢ",
+     "MeasureTheory.Integrable.fourier_fourierInv_eq",
+     "Continuous.fourier_fourierInv_eq"
+    ],
+    "digest": "301e3123ac97b67d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full realization: MeasureTheory.Lp.fourierTransformₗᵢ (Mathlib/Analysis/Fourier/LpSpace.lean:50) gives the linear isometric extension, but SchwartzMap.toLp_fourier_eq (:100) assumes Schwartz input and Lp.fourier_toTemperedDistribution_eq (:120) is distribution equality. Integral inversion (Mathlib/Analysis/Fourier/Inversion.lean:165) requires integrability of the transform and continuity at the point. The almost-everywhere agreement for arbitrary L1 intersect L2 requires an additional comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Fourier transform on L2 is a complex linear isometric equivalence extending the Schwartz Fourier transform and agrees with the Fourier transform of tempered distributions",
+   "results": {
+    "t": "2026-10-24T03:55:06Z",
+    "tool": "leanfinder",
+    "query": "The Fourier transform on L2 is a complex linear isometric equivalence extending the Schwartz Fourier transform and agrees with the Fourier transform of tempered distributions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.Lp.fourier_toTemperedDistribution_eq",
+     "SchwartzMap.toLp_fourierTransform_eq",
+     "SchwartzMap.toLp_fourier_eq",
+     "MeasureTheory.Lp.instFourierTransform",
+     "MeasureTheory.Lp.fourierInv_toTemperedDistribution_eq",
+     "SchwartzMap.toLp_fourierTransformInv_eq",
+     "MeasureTheory.Lp.instFourierPair",
+     "SchwartzMap.toLp_fourierInv_eq"
+    ],
+    "digest": "bb06c088e9dd797f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: LpSpace.lean:50 supplies the isometry, :99 its Schwartz restriction, and :120 distribution compatibility. The L1 integral must still be compared on smooth tests and separated almost everywhere; inversion hits assume additional continuity or integrability of the transformed function."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral Fourier transform of an integrable square integrable function equals the Plancherel Fourier transform almost everywhere",
+   "results": {
+    "t": "2026-10-24T03:55:28Z",
+    "tool": "leansearch",
+    "query": "The integral Fourier transform of an integrable square integrable function equals the Plancherel Fourier transform almost everywhere",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Real.fourierIntegral",
+     "MeasureTheory.Lp.inner_fourier_eq",
+     "Continuous.fourier_fourierInv_eq",
+     "MeasureTheory.Integrable.fourier_fourierInv_eq",
+     "SchwartzMap.inner_fourierTransformCLM_toL2_eq",
+     "MeasureTheory.Integrable.fourierInv_fourier_eq",
+     "SchwartzMap.norm_fourierTransformCLM_toL2_eq",
+     "Real.fourierIntegral_real_eq_integral_exp_smul"
+    ],
+    "digest": "7ced133385e41d04"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: LpSpace.lean:50 supplies the isometry, :99 its Schwartz restriction, and :120 distribution compatibility. The L1 integral must still be compared on smooth tests and separated almost everywhere; inversion hits assume additional continuity or integrability of the transformed function."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-euclidean-fixed-support-rellich",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean Rellich compactness with a fixed compact support. Supporting Euclidean Fourier proof: Lemma 2.7, p.5, identifying the displayed integral with the L2 Fourier transform before applying Ascoli.",
+   "via": [
+    "lem-sfb-euclidean-fixed-support-rellich",
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-l1-l2-fourier-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement. One new Mathlib leaf supplies the L2 isometry and forward test identity; reused six existing Mathlib leaves for integral regularity, local integrability, test inclusion, bilinear transposition and ae separation. Wrote the comparison of the integral representative with the specified L2 image explicitly, without assuming that the Fourier integral is already in L2. No new unsplit obligation or Lean changes.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3); inherited analytic subchain through Demailly Lemma 2.7 fixed-support Rellich. Steps construct the Plancherel extension, obtain the continuous integral, compare its smooth tests, then separate almost everywhere. Whole-blueprint searches for Fourier, Plancherel and Schwartz found no matching Euclidean L2 statement. blueprint_refs.py ancestor reports None through the inherited created.item chain; retained its null ancestor rather than inventing an imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-596b9ad71",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-596b9ad71 (reviewer sub-agent of L); spot-checked: Read the item and the new leaf in full, the statements of all 7 cited nodes (all in unit sk-thm-sf-ctf-stability, so no tool_uses are needed), and the Mathlib source of the new leaf. Sources: LpSpace.lean:47-55 (fourierTransformₗᵢ is a ℂ-linear isometric equivalence), :99-105 (toLp_fourier_eq) and :118-129 (fourier_toTemperedDistribution_eq); TemperedDistribution.lean:169-177 (toTemperedDistribution_apply, T_f g = ∫ g•f) and :482 (fourier_apply, 𝓕T g = T(𝓕g)). Evaluated on φ, these give exactly ∫φw₀ = ∫(𝓕φ)u₀, with the negative phase and no conjugation. Item statement unchanged; Demailly is WANTED and the proof is correctly marked agent. Step 1 (isometry, linearity) is elementary. Step 2: moment-regularity with r=0 and L = dot product makes h continuous; continuous-local-integrability on U=ℝ^m and Lp-local-integrability at p=2 make h and w locally integrable. Step 3: bilinear duality with f=u₀, q=φ and the symmetric dot product gives ∫hφ = ∫u₀𝓕φ, and the leaf gives the same right-hand side for w, so ∫ψh = ∫ψw. Step 4 checks local integrability and integrability of ψh and ψw before applying ae-separation, giving h = w a.e., hence h ∈ L² and h represents F₂u. All hypotheses checked; nothing circular. New leaf: B1–B8 hold, and the logged searches show real hits. Duplicate grep over dag/nodes for fourierTransformₗᵢ, toLp_fourier_eq, fourier_toTemperedDistribution_eq and Plancherel: the inverse-test leaf gives only the inverse identity (its tests 𝒢φ are not compactly supported), and the other hits are Schwartz-only Parseval, the inverse-moment sibling or finite-field Plancherel, so none is a duplicate. The leaf is strictly smaller than the item, and the L1∩L2 comparison stays in steps 2–4, so this is not D1 relabelling. Small cases checked: u=0, φ=0, Schwartz u, interval indicator, null-set changes, non-real scalars. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.L1L2FourierRealization",
+  "declaration": "MeasureTheory.exists_l1_l2_fourier_realization",
+  "file": "lean/Sheaf/Analysis/L1L2FourierRealization.lean",
+  "statement": "theorem exists_l1_l2_fourier_realization (m : ℕ) (hm : 1 ≤ m) : ∃ F₂ : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m))) ≃ₗᵢ[ℂ] Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m))), (∀ φ : SchwartzMap (EuclideanSpace ℝ (Fin m)) ℂ, F₂ (φ.toLp 2) = (𝓕 φ).toLp 2) ∧ (∀ u v : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m))), ‖F₂ u - F₂ v‖ = ‖u - v‖) ∧ (∀ (u : Lp ℂ 2 (volume : Measure (EuclideanSpace ℝ (Fin m)))) (u₀ : EuclideanSpace ℝ (Fin m) → ℂ), u₀ =ᵐ[volume] (u : EuclideanSpace ℝ (Fin m) → ℂ) → Integrable u₀ volume → (∀ ξ : EuclideanSpace ℝ (Fin m), Integrable (fun x : EuclideanSpace ℝ (Fin m) ↦ Complex.exp ((↑(-2 * Real.pi * ⟪x, ξ⟫) : ℂ) * Complex.I) * u₀ x) volume) ∧ (𝓕 u₀ =ᵐ[volume] (F₂ u : EuclideanSpace ℝ (Fin m) → ℂ)) ∧ MemLp (𝓕 u₀) 2 volume)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6c097196",
+  "group": "ND",
+  "result": "pass",
+  "note": "Only the item's lean field changed against live; def-weil-field is unchanged; lean.statement is verbatim in the file. The ∃ F₂ ≃ₗᵢ[ℂ] with the Schwartz-extension clause pins F₂ by density (witness Lp.fourierTransformₗᵢ, toLp_fourier_eq). The distance clause is exact. L1∩L2 is expressed as an integrable a.e. representative u₀ of u : Lp 2. Absolute convergence holds at every ξ with kernel exp(-2πi⟪x,ξ⟫), matching Real.fourier_eq'. 𝓕 u₀ =ᵐ F₂ u and MemLp (𝓕 u₀) 2 are present. m≥1 matches the node, and there are no extra hypotheses or universes. Docstrings have the source place, blueprint id and 4 proof steps; lines ≤97 chars; no definitions; proof is sorry; the report has Worker report and Second reading sections (the second reading is a self-check, advisory). No compile, as no file was changed."
+ }
+}

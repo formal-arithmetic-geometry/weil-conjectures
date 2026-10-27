@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-natural-rational-representation-data",
+ "kind": "definition",
+ "title": "Natural rational actions and their generic coactions",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be an affine $k$-group scheme [def-sc-group-scheme], and let $V$ be a $k$-vector space. All these objects and commutative test algebras have one fixed universe. Put $V_R=R\\otimes_k V$ with the scalar extension and induced maps of [def-weil-module-base-change]. A natural rational representation consists of group homomorphisms $\\rho_R:G(R)\\to\\operatorname{Aut}_R(V_R)$ for every commutative $k$-algebra $R$, compatible with every $k$-algebra map $\\alpha:R\\to S$: $(\\alpha\\otimes1)\\rho_R(g)=\\rho_S(G(\\alpha)g)(\\alpha\\otimes1)$. Use the affine spectrum/global-sections identification [def-weil-affine-spectrum] to define the generic point $\\eta\\in G(k[G])$ by the identity of $k[G]=\\Gamma(G,\\mathcal O_G)$, and the point $g_x\\in G(R)$ associated to $x:k[G]\\to R$ by $\\operatorname{Spec}R\\xrightarrow{\\operatorname{Spec}(x)}\\operatorname{Spec}k[G]\\simeq G$. Define the generic coaction $c_\\rho:V\\to V\\otimes_k k[G]$ as the composite $v\\mapsto1\\otimes v\\mapsto\\rho_{k[G]}(\\eta)(1\\otimes v)\\mapsto\\operatorname{swap}(\\rho_{k[G]}(\\eta)(1\\otimes v))$. These are the actual natural-action data, affine points and linear map; no equivalence theorem or coaction law is part of this definition.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4(a), printed pp.83--84, Remark 4.1, generic element and equation (25). Definition interface for the existing natural-action structure and its explicit generic-element construction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-module-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural rational representation of an affine group scheme as actions natural in test algebras and generic coaction",
+   "results": "8 hits: AffineScheme, isAffine_affineScheme, AffineBasis.instMulAction, IsAffine.recOn, AffineScheme.of, Rep.linearizationOfMulActionIso, Rep.ofAlgebraAut, AffineBasis.coe_smul. None is a natural test-algebra action or generic coaction.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; reuse the exact existing Sheaf definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural rational representation of an affine group scheme as actions natural in test algebras and generic coaction",
+   "results": "8 hits: AffineSpace.coord, AffineSpace.functor_obj_obj, AffineSpace, AffineSpace.functor, AffineSpace.toSpecMvPolyIntEquiv, AffineSpace.homOverEquiv, AffineSpace.instIsAffine, AffineSpace.homOfVector. None defines natural rational representations.",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; exact existing Sheaf declaration is recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "NaturalRepresentation|genericCoaction|coordinatePoint",
+   "results": "msearch grep: 0 Mathlib hits. Direct rg of WeilConjectures and Sheaf finds NaturalRepresentation, genericPoint, coordinatePoint and genericCoaction in Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary; no definition node records these declarations.",
+   "date": "2026-10-24",
+   "verdict": "Exact project declaration found: existing:true, no new Lean definition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalized-algebra-weight-line-simple",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Section 22(e), statement 22.54, printed p.481, infinitesimally simple representations in characteristic p. The displayed coefficients there must be coefficients of fundamental weights, equivalently pairings with simple coroots, not coefficients of simple roots. See report.md Source error. Corroboration read online: J. C. Jantzen, Moment graphs and representations, Sem. Congres 24 (2010), sections 5.1--5.2, printed pp.302--303, Curtis theorem, https://math.au.dk/~jantzen/grnbl.pdf. Full book reference WANTED: Jantzen (2003), Part II, sections 3.14--3.15. Supporting input to infinitesimal simplicity: Agent formulation of the normalized-algebra variant of Clifford theory, Exercise 4-2 (printed p.97), combined with the Grassmannian construction in 7.29, torus weight decomposition in Theorem 12.12 (printed pp.234--235), and Borel fixed point Corollary 17.3 (printed p.353). This precise operator-algebra formulation is an agent lemma, not a verbatim theorem of Milne. Definition interface for the rational representation and weight condition in the present item.",
+   "via": [
+    "lem-sfb-normalized-algebra-weight-line-simple",
+    "lem-sfb-restricted-module-infinitesimal-simplicity",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.NaturalRepresentation",
+  "declarations": [
+   "AlgebraicGeometry.RationalRepresentation.NaturalRepresentation",
+   "AlgebraicGeometry.RationalRepresentation.genericPoint",
+   "AlgebraicGeometry.RationalRepresentation.coordinatePoint",
+   "AlgebraicGeometry.RationalRepresentation.genericCoaction"
+  ],
+  "statement": "structure NaturalRepresentation",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership of unchanged existing real-data declarations, as explicitly requested in H2 for returned head 51a28d545474. No theorem conclusion is assumed and no duplicate declaration or module is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7cb726a2",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7cb726a2",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 51a28d545474. The Lean file is byte-identical to that version, whose mathematics was already found faithful; I re-checked it clause by clause and lean.statement matches the file verbatim. The item node changes only lean and stmt_deps. The two theorem stmt_deps (comodule dictionary, central-torus weight blocks) are replaced by two new existing:true definition nodes. def-sfb-natural-rational-representation-data owns NaturalRepresentation, genericPoint, coordinatePoint and genericCoaction; def-sfb-character-scalar-evaluation owns characterScalar. Both node statements match the live declarations exactly (Milne Remark 4.1 p.84; Ch.12), carry all required fields, and cite dependencies that all exist. No other definition node owns these declarations. The earlier advisory is addressed: def-sc-gm-ga, def-sc-group-scheme-subgroup, def-sbc-smooth-morphisms, def-weil-connected-scheme and def-weil-finite-type-morphism are now cited. Only sorry, docstrings present, no hollow defs. No file changed, so no compile."
+ }
+}

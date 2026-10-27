@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-supported-extension-derived-complete",
+ "kind": "statement",
+ "title": "Finite open/closed support extensions and site restriction preserve completeness",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Finite open/closed support extensions and site restriction preserve completeness. The precise assertion, including all universes and canonical-unit conditions, is:\n\ntheorem supported_extension_derived_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X S : Scheme.{u}} {tree : QcqsOpenClosedTree X} (p : tree.Path S)\n    (N : AdicCompletion.Modules l E S)\n    (hN : IsDerivedComplete l E S ((DerivedCategory.singleFunctor _ 0).obj N))\n    (U : X.ProEt) :\n    IsDerivedComplete l E U.left ((DerivedCategory.singleFunctor _ 0).obj\n      ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) U.hom).obj\n        ((p.extension (DerivedNakayama.integerRing l E)).obj N)))\n\nDefinitions and statement dependencies: [def-sfb-qcqs-open-closed-tree] [sk-def-pe-derived-completion].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, Lemma 3.4.14, Proposition 3.5.1; support calculation also uses Stacks proetale.tex Tags 09AA, 09AH, 09BM, 09BN. Specialization of steps 1--5 of lem-sfb-supported-image-derived-completeness."
+ },
+ "stmt_deps": [
+  "def-sfb-qcqs-open-closed-tree",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "A zero derived object is complete because the exact completion functor maps zero to zero and the unit is then an isomorphism. Completeness is invariant under isomorphism directly from its K-flat representative definition.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an immersion, the strict comparison carries the restriction of the ambient unit to the unit of the restricted object. Transport along supportPullbackIsoUpperStar and cancel the invertible comparison. Complementary support restrictions jointly detect isomorphisms, so an object is complete whenever both restrictions are.",
+   "uses": [
+    "lem-sfb-strict-completion-restriction-comparison",
+    "lem-sfb-condensed-support-derived-localization",
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For open extension use its invertible restriction unit and zero closed restriction. For closed extension use its invertible restriction counit and zero open restriction. The exactness instance is closedSupport_lowerStarExact. Both extensions are complete by the preceding joint-detection argument.",
+   "uses": [
+    "lem-sfb-condensed-support-derived-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the finite path: the root extension is identity, and each branch applies the corresponding extension result. mapDerivedCategorySingleFunctor identifies the derived extension of a degree-zero complex with the ordinary module extension in degree zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Finally apply the strict completion comparison to the weakly etale morphism of the pro-etale site object U. Its exact inverse image maps the invertible ambient unit to an invertible unit; the degree-zero comparison identifies its argument with the actual restricted supported module.",
+   "uses": [
+    "lem-sfb-strict-completion-restriction-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-completion-triangle-comparison",
+  "lem-sfb-strict-completion-restriction-comparison",
+  "lem-sfb-condensed-support-derived-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12 and Lemma 3.4.14, specialized to the normalized integral coefficient presentations; Stacks 09AH for the support iteration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernels and images of derived complete modules remain derived complete",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.toIsPrecomplete\", \"IsPrecomplete.top\", \"AdicCompletion.map_exact\", \"IsPrecomplete\", \"IsAdicComplete\", \"IsAdicComplete.toIsHausdorff\", \"AdicCompletion.instIsHausdorff\", \"Hausdorffification.instIsHausdorff\"]}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedComplete",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsDerivedComplete'\", \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|complete_heart_kernels",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageDerivedCompleteness",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-supported-image-derived-completeness",
+   "place": "steps 3--5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedKernelImageExtensionComplete",
+  "file": "lean/Sheaf/Paper/SupportedKernelImageExtensionComplete.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_extension_derived_complete",
+  "statement": "theorem supported_extension_derived_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X S : Scheme.{u}} {tree : QcqsOpenClosedTree X} (p : tree.Path S)\n    (N : AdicCompletion.Modules l E S)\n    (hN : IsDerivedComplete l E S ((DerivedCategory.singleFunctor _ 0).obj N))\n    (U : X.ProEt) :\n    IsDerivedComplete l E U.left ((DerivedCategory.singleFunctor _ 0).obj\n      ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) U.hom).obj\n        ((p.extension (DerivedNakayama.integerRing l E)).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T094926-L-3274518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T094926-L-3274518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "def-sfb-proper-curve-moduli",
+ "kind": "definition",
+ "title": "The moduli category of proper algebraic-space curves and its infinitesimal automorphisms",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use the algebraic spaces over $S$ of [def-trf-algebraic-space]. Write $h_T$ for the representable presheaf of an $S$-scheme $T$. For a map of presheaves $F\\to G$, its point map is the map on field-valued point classes induced by applying the map to representatives; point classes and their atlas topology are [def-a1-space-point-topology]. A map of algebraic spaces is quasi-compact if its pullback along every affine scheme mapping to the target has compact underlying point space. Its diagonal is the canonical map into its sheaf fibre product with itself. For $X$ an algebraic space and $f:X\\to h_T$, separated means that its diagonal is representable by closed immersions, and universally closed means that after every scheme base change the induced point map is closed [def-weil-proper-morphism]. Flatness, locally finite type and locally finite presentation are tested on every representable etale scheme chart of $X$, using the corresponding scheme properties [def-weil-flat-morphism], [def-weil-proper-morphism], [def-sbc-locally-finite-presentation]. A proper family of curves over $T$ consists of $X$ and $f$, with $f$ flat, proper (separated, quasi-compact, locally finite type and universally closed), of finite presentation (quasi-compact, quasi-separated and locally of finite presentation), and with every geometric fibre of topological Krull dimension at most one [def-weil-geometric-fibre], [def-kun-topological-krull-dimension]. Here quasi-separated means quasi-compact diagonal, and geometric fibres are tested on algebraically closed fields [def-weil-field], [def-weil-algebraic-closure] in the universe of the big site. The total category $\\mathfrak C_S$ has objects these families together with their bases $T$, and an arrow over $T'\\to T$ is a cartesian square of the underlying presheaves. Identity and composition are the actual identity and composite maps; identity squares are cartesian and pasting cartesian squares is cartesian. The projection remembers $T$ and the base arrow.\n\nFor a field $\\Omega$ and $a:\\operatorname{Spec}\\Omega\\to S$, put $D=\\operatorname{Spec}(\\operatorname{DualNumber}\\Omega)$ [def-sc-dual-numbers], with its structure map $p:D\\to\\operatorname{Spec}\\Omega$ and reduction $i:\\operatorname{Spec}\\Omega\\to D$ induced respectively by inclusion and projection of the dual-number ring. For any presheaf $F$ over $h_{\\operatorname{Spec}\\Omega}$, its constant dual-number thickening is the presheaf fibre product $F_D=F\\times_{h_{\\operatorname{Spec}\\Omega}}h_D$, with canonical reduction map $F\\to F_D$. Say it has trivial infinitesimal automorphisms if every natural automorphism of $F_D$ preserving its projection to $h_D$ and restricting to the identity along this reduction map is the identity. No condition of fixing the projection to $F$ is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-dual-numbers"
+ ],
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DMJ, section-stack-curves, using quot.tex Tag 0D4Z (situation-curves); the dual-number test is the first proof paragraph of Tag 0E6G. Algebraic-space morphism conventions: spaces-morphisms.tex Tags 03HE, 03HL, 03ML, 03XP, 03ZM and 06LR."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of proper flat finitely presented families of algebraic space curves and infinitesimal automorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) [Flat f] [Surjective f] : Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; returned scheme properties are reused, not redefined"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category fibred in groupoids of flat proper finitely presented algebraic spaces with geometric fibres of dimension at most one, cartesian morphisms and identity-reducing dual-number automorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; returned scheme properties are reused, not redefined"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep CurveStack|ProperCurveFamily|ProperCurveModuli|OpenSubstack|OpenModuliSubstack|HasUnramifiedModuliDiagonal|DeligneMumford AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n CurveStack|curveStack|ModuliStack|OpenSubstack|UnramifiedDiagonal|Infinitesimal.*Aut|infinitesimal.*Aut lean/WeilConjectures lean/Sheaf; rg -l open substack|algebraic stack|flat proper finitely presented dag/nodes/sec-six-functors-basics dag/nodes/sec-trace-formula; blueprint_refs.py search stack of curves; blueprint_refs.py search open substack",
+   "results": "Project: StablePointedModuliGroupoids supplies IsModuliStack, HasAlgebraicSpaceDiagonal, SpaceMapIsEtale, SpaceMapIsSurjective, IsDeligneMumfordModuliStack, but no open-substack or proper-curve category. MarkedInfinitesimalAutomorphisms defines scheme-only marked automorphisms; it cannot handle algebraic-space geometric objects. DAG: the corresponding curve-stack theorems exist but do not define the missing category or open-substack interface; stable-pointed-moduli-groupoids defines the general stack/DM vocabulary, which is reused. blueprint_refs.py: 0 blueprint nodes match each query. No standalone definition node matches either missing notion.",
+   "date": "2026-10-22",
+   "verdict": "no duplicate notion; use recorded stack, space and point definitions"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-stack-infinitesimal-dm-locus",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Definition of the curve moduli category and its open DM locus.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperCurveModuli",
+  "declaration": "AlgebraicGeometry.ProperCurveModuli",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.mapPoint",
+   "AlgebraicGeometry.AlgebraicSpace.MapIsQuasiCompact",
+   "AlgebraicGeometry.AlgebraicSpace.MapToSchemeIsLocally",
+   "AlgebraicGeometry.AlgebraicSpace.MapToSchemeIsSeparated",
+   "AlgebraicGeometry.AlgebraicSpace.MapToSchemeIsUniversallyClosed",
+   "AlgebraicGeometry.AlgebraicSpace.IsProperCurveFamily",
+   "AlgebraicGeometry.ProperCurveFamily",
+   "AlgebraicGeometry.ProperCurveModuli",
+   "AlgebraicGeometry.ProperCurveModuli.Hom",
+   "AlgebraicGeometry.ProperCurveModuli.hom_operations",
+   "AlgebraicGeometry.ProperCurveModuli.forget",
+   "AlgebraicGeometry.ProperCurveModuli.category",
+   "AlgebraicGeometry.ProperCurveFamily.dualBase",
+   "AlgebraicGeometry.ProperCurveFamily.dualProjection",
+   "AlgebraicGeometry.ProperCurveFamily.dualReduction",
+   "AlgebraicGeometry.ProperCurveFamily.infinitesimalReduction",
+   "AlgebraicGeometry.ProperCurveFamily.HasTrivialInfinitesimalAutomorphisms"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperCurveModuli.lean",
+  "statement": "structure ProperCurveModuli (S : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63e1a6e29",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63e1a6e29",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item Lean matches node and Stacks 0DSW/0E6G clause by clause: ProperCurveModuli.category (algebraic-space families: flat/LFT/LFP on etale charts, closed-immersion diagonal, qc, qs, universally closed on points, geometric fibre topologicalKrullDim<=1; cartesian-square arrows); largest open with HasUnramifiedModuliDiagonal (relative diagonal over S, both projections pinned); IsDeligneMumfordModuliStack conjunct; point iff via SchemePointIn up to iso over Spec Ω and HasTrivialInfinitesimalAutomorphisms (automorphisms over D=Spec Ω[ε] restricting to id along the canonical lift; projection to C not fixed); final clause tests all geometric ProperCurveFamily objects and concludes containment and DM. Edge cases (empty curve/open, nonreduced, any char, transcendental Ω) kept; single universe u; no arbitrary maps; sorries only in true Prop fields (hom_operations, moduliTwoFiberSnd_projection) that are in the node statements; docstrings and verbatim statements OK; no live duplicate (marked scheme-only notion agrees for n=0, presheaf generalization needed for spaces). Maintainer notes: Q18 nodal-curve-stack-smooth (RETURNed) defines the same stack as CurveModuli; its re-delivery must reuse ProperCurveModuli/OpenModuliSubstack. Released S1 re-split note (proof 4234 chars) does not affect the statement. Advisory: def-weil-open-immersion not cited in def-sfb-open-moduli-substack."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261023T103401-L-3115220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProperCurveModuli.hom_operations"
+  ],
+  "sorry_after": []
+ }
+}

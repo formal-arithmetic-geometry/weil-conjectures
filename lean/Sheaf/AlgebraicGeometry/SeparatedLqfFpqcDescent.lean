@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
-import WeilConjectures.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 import Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent
 
@@ -66,6 +65,15 @@ theorem isEffective_of_isSeparated_isLocallyQuasiFinite_fpqc
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage T) {V : Over T'}
     [IsSeparated V.hom] (hV : V.hom.IsLocallyQuasiFinite)
     (D : Over.DescentDatum f V) : D.IsEffective := by
-  sorry
+  obtain ⟨hquasiFinite, hfiniteType⟩ := V.hom.isLocallyQuasiFinite_iff.mp hV
+  have : LocallyQuasiFinite V.hom := hquasiFinite
+  have : LocallyOfFiniteType V.hom := hfiniteType
+  apply isEffective_of_indQuasiAffine_fpqc f hf ?_ D
+  intro U hU K hK
+  have : IsAffine U.toScheme := hU
+  have : CompactSpace K.toScheme := isCompact_iff_compactSpace.mp hK
+  have : QuasiCompact (K.ι ≫ Limits.pullback.snd V.hom U.ι) :=
+    quasiCompact_of_compactSpace _
+  exact IsQuasiAffineHom.of_locallyQuasiFinite _
 
 end CategoryTheory.Over.DescentDatum

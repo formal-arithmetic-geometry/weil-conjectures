@@ -1,0 +1,102 @@
+{
+ "id": "def-pur-support-boundary-normalization",
+ "kind": "definition",
+ "title": "Snake-normalized support boundary and unit-induced section comparison",
+ "status": "split",
+ "statement": "Use the kernel-of-restriction construction of supported sections [def-pur-support-cohomology] and the cochain derived-category convention [def-weil-abstract-derived-category]. For a site $(\\mathcal C,J)$, a commutative coefficient ring $A$, and an arrow $j:W\\to V$, a family $\\delta^q:H^q(W,-)\\to H^{q+1}_{V\\setminus W}(V,-)$ of natural $A$-linear boundary maps on bounded-below complexes is snake-normalized if, for every bounded-below complex $I$ of injective $A$-module sheaves, the termwise sequence\n$$0\\to\\ker(I(V)\\to I(W))\\to I(V)\\to I(W)\\to0$$\nis short exact and its cochain snake connecting map in every integer degree $q$ equals $\\delta^q$ transported to this injective model by the canonical right-derived comparison maps. This defines a predicate on a given boundary family, not an existence assertion about it.\n\nFor any scheme $T$ and its etale/pro-etale comparison adjunction $\\nu_T^*\\dashv\\nu_{T,*}$ [def-weil-pbc-site-comparison-morphism], any ring $A$ and any etale $T$-object $V$, define the section comparison $F(V)\\to(\\nu_T^*F)(V)$ by evaluating the adjunction unit $F\\to\\nu_{T,*}\\nu_T^*F$ at $V$. Define its bounded-below derived comparison by right-derived base change, and its degree-$q$ section-hypercohomology comparison by applying $H^q$, for every $q\\in\\mathbf Z$. These are specified maps, with no finite-type hypothesis on $T$ and no finiteness hypothesis on $A$.",
+ "stmt_deps": [
+  "def-pur-support-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP, label section-cohomology-support, injective kernel sequence and its cochain connecting maps; etale/pro-etale unit comparison refinement in literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md, final site-comparison sentence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Define normalized support boundary as the injective complex snake boundary and the adjunction unit comparison on sections from etale to proetale sheaves",
+   "results": "[leansearch] OK 8 hit(s); CompHausLike.LocallyConstant.adjunction_unit, CompHausLike.LocallyConstant.adjunction, CategoryTheory.Sheaf.adjunction_unit_app_val, stalkSkyscraperSheafAdjunction, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, CompHausLike.LocallyConstant.counit, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; none defines the required support normalization or etale/pro-etale section comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"supportBoundaryNormalization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportBoundaryNormalization|finiteComparisonSection(Hypercohomology|Unit)?",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-coordinate-boundary-geometric-pullback",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Geometric-fibre coordinate-boundary sentence and final etale-origin comparison sentence: fixed snake sign and the unit-induced comparison on the open complement.",
+   "via": [
+    "lem-pur-coordinate-boundary-geometric-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportComparisonBoundary",
+  "declaration": "AlgebraicGeometry.supportBoundaryNormalization",
+  "declarations": [
+   "AlgebraicGeometry.supportBoundaryNormalization",
+   "AlgebraicGeometry.ProEtale.finiteComparisonSectionUnit",
+   "AlgebraicGeometry.ProEtale.finiteComparisonSection",
+   "AlgebraicGeometry.ProEtale.finiteComparisonSectionHypercohomology"
+  ],
+  "statement": "def supportBoundaryNormalization {C : Type (u + 1)} [Category.{u} C]\n    (J : GrothendieckTopology C) (A : Type (u + 1)) [CommRing A]\n    {V W : C} (j : W ⟶ V)\n    (δ : Sheaf.SupportSequenceBoundary J (ModuleCat.{u + 1} A) j ⊤) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Records only the existing plain definitions needed for the general-site boundary sign and section comparison. No application or choice of exists_support_comparison_boundary is used. The four signatures have no finite-type premise."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4224c450",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4224c450",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 170df082 (H2 + H11). Both fixed: (1) theorem stmt_dep lem-pur-support-comparison-boundary replaced by new def node def-pur-support-boundary-normalization (definition, split, existing:true on Sheaf.AlgebraicGeometry.SupportComparisonBoundary; 4 declarations present in live; statement verbatim lines 206-209; text matches the Lean predicate and unit/base-change/H^q comparison; deps are live definitions, no cycle; no other owner; source Stacks 09XP section-cohomology-support confirmed). (2) Second reading by NW is now a 9-point clause-by-clause reading; Worker report present. Lean diff vs the returned head: coordinatePullbackIdentity HasExt→IsGrothendieckAbelian (abstract helper only, instance-found, HasExt is Prop, no new theorem hypothesis); new coordinateSectionMap composes the same evaluation maps in the same order, real data, docstrings, listed in declarations. Theorem signature byte-identical; lean.statement verbatim. Mathematics re-checked: unrestricted alg-closed Ω, Kummer pullback on both sites with the same m and u⊗1, h*α=α', χ(α')=h*M∘c⁻¹, site agreement at Y and Spec Ω plus SupportHomSquareCoherent; existentials pinned. Advisory: base-era theorem stmt_dep lem-pur-supported-hom-pullback used only for structures; existing module docstrings name the theorem node. No compile run (no file changed); worker reports clean per-file compiles."
+ }
+}

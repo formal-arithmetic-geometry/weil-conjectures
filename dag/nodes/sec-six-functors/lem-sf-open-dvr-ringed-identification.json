@@ -1,0 +1,211 @@
+{
+ "id": "lem-sf-open-dvr-ringed-identification",
+ "kind": "statement",
+ "title": "DVR open extension identifies with the actual ringed extension",
+ "statement": "Fix l,E and an open immersion j:X→Y. Every projection-normalized OpenDvrOpenModel O [def-sf-open-dvr-open-model] has derived open extension O.jShriek naturally isomorphic to the actual ringedOpen l E j [def-sf-integral-system-canonical-bridge]. This compares functors on the ambient derived categories, independently of completeness, Tor bounds and constructibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, open-factor normalization: passage from the projection-normalized DVR model to the specified ringed extension."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-open-dvr-open-model"
+ ],
+ "proof": [
+  {
+   "text": "At each finite quotient transpose the model finite restriction map through the sheaf adjunction induced by open postcomposition and base change. Apply the sheafification Hom equivalence to compare this transpose with the canonical constant direct-image map. Naturality of the constant-section unit along the site counit and O.finite_constants make the two maps equal on every constant generator.",
+   "uses": [
+    "def-sf-open-dvr-open-model",
+    "def-weil-proetale-inverse-image",
+    "lem-sf-open-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the completed model ring map through the same open sheaf adjunction. The O.ring_projection equations and naturality of the adjunction unit reduce its composite with every finite projection to the equality of step 1. The uniqueness clause of sfCompletedCoefficientMap_existsUnique identifies this completed transpose with the specified completed coefficient direct-image map.",
+   "uses": [
+    "def-sf-open-dvr-open-model",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the adjunction from ordinary open restriction to sectionwise direct image with the inverse coefficient equivalence. The modules_functor equality, pushforwardComp and step 2 identify its right adjoint with actual completed-ring module direct image. Uniqueness of left adjoints identifies actual integralOrdinaryPull with ordinary restriction followed by O.modules.inverse. Transport the right adjoint of O.modules.functor followed by O.extension.ordinary along that comparison. A second application of left-adjoint uniqueness compares this ordinary extension with PurCompactSupport.openExtension. Localize the ordinary natural isomorphism and compose with mapDerivedCategoryCompIso to obtain O.jShriek isomorphic to ringedOpen. No completeness, boundedness, constructibility or nonempty-open hypothesis occurs.",
+   "uses": [
+    "def-sf-open-dvr-open-model",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-sf-open-operation-models",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-dvr-open-model",
+  "def-weil-proetale-inverse-image",
+  "lem-sf-open-operation-models",
+  "def-weil-derived-direct-image",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, open-factor normalization: passage from the projection-normalized DVR model to the specified ringed extension. F9: full Lean proof via constant-section sheafification, projection uniqueness, ordinary adjoint uniqueness twice, and exact localization; no split-off obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scalar equivalence and open extension by zero identifies the derived extension functor for completed coefficient sheaves",
+   "results": "Eight algebraic scalar-extension and extension-by-zero linear-map hits, no ringed-site comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturally isomorphic right adjoints give naturally isomorphic left adjoints and their exact derived functors",
+   "results": "Adjunction.derived, rightDerivedNatIso and derived unit/counit results. These are generic tools, not the coefficient-normalized right-adjoint identification.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "open.*restrictScalars|restrictScalars.*open|leftAdjointUniq",
+   "results": "25 generic leftAdjointUniq or localization restriction hits. Local Sheaf search found open slice presentations, but no identification for the supplied OpenDvrOpenModel.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenReconstructionEffectivity",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence, open-factor normalization: passage from the projection-normalized DVR model to the specified ringed extension.",
+   "via": [
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrRingedIdentification",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrRingedIdentification.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.openDvr_ringed_identification",
+  "statement": "theorem openDvr_ringed_identification {X Y : Scheme.{u}} (j : X ⟶ Y)\n    [IsOpenImmersion j] (O : OpenDvrOpenModel l E j) :\n    Nonempty (O.jShriek ≅ ringedOpen l E j)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.openDvr_ringed_identification"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sf-open-reconstruction-effectivity",
+  "worker": "W9",
+  "summary": "A strict part of the open-factor argument, separated from effectivity and completeness. Searched the blueprint for ordinary open, open reduction and DVR ringed; no duplicate found.",
+  "blueprint": "Maps-used sentence, open-factor normalization: passage from the projection-normalized DVR model to the specified ringed extension."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T164715-L-1056292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034706-L-3674777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "K7 stage 2",
+  "old_statement": "Fix l,E and an open immersion j:X→Y. Every projection-normalized OpenDvrOpenModel O [def-sf-open-quotient-koszul-models] has derived open extension O.jShriek naturally isomorphic to the actual ringedOpen l E j [def-sf-integral-system-canonical-bridge]. This compares functors on the ambient derived categories, independently of completeness, Tor bounds and constructibility.",
+  "what": "The open-model definition attachment has been separated from the coefficient/completion attachment; this citation is updated to the same unchanged Lean interface.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+   "place": "Maps-used sentence, open-factor normalization: passage from the projection-normalized DVR model to the specified ringed extension."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-compact-support-scalar-projection-identification",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-qcqs-compact-support-image-complete-open",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-reconstruction-effectivity",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sf-integral-system-canonical-bridge",
+   "def-sf-open-quotient-koszul-models"
+  ],
+  "old_proof": [
+   {
+    "text": "At each finite quotient transpose the model finite restriction map through the sheaf adjunction induced by open postcomposition and base change. Apply the sheafification Hom equivalence to compare this transpose with the canonical constant direct-image map. Naturality of the constant-section unit along the site counit and O.finite_constants make the two maps equal on every constant generator.",
+    "uses": [
+     "def-sf-open-quotient-koszul-models",
+     "def-weil-proetale-inverse-image",
+     "lem-sf-open-operation-models"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Transpose the completed model ring map through the same open sheaf adjunction. The O.ring_projection equations and naturality of the adjunction unit reduce its composite with every finite projection to the equality of step 1. The uniqueness clause of sfCompletedCoefficientMap_existsUnique identifies this completed transpose with the specified completed coefficient direct-image map.",
+    "uses": [
+     "def-sf-open-quotient-koszul-models",
+     "def-weil-derived-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Compose the adjunction from ordinary open restriction to sectionwise direct image with the inverse coefficient equivalence. The modules_functor equality, pushforwardComp and step 2 identify its right adjoint with actual completed-ring module direct image. Uniqueness of left adjoints identifies actual integralOrdinaryPull with ordinary restriction followed by O.modules.inverse. Transport the right adjoint of O.modules.functor followed by O.extension.ordinary along that comparison. A second application of left-adjoint uniqueness compares this ordinary extension with PurCompactSupport.openExtension. Localize the ordinary natural isomorphism and compose with mapDerivedCategoryCompIso to obtain O.jShriek isomorphic to ringedOpen. No completeness, boundedness, constructibility or nonempty-open hypothesis occurs.",
+    "uses": [
+     "def-sf-open-quotient-koszul-models",
+     "def-sf-integral-system-canonical-bridge",
+     "lem-sf-open-operation-models",
+     "def-pur-integral-compact-support-coefficient-data"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sf-open-quotient-koszul-models",
+   "def-weil-proetale-inverse-image",
+   "lem-sf-open-operation-models",
+   "def-weil-derived-direct-image",
+   "def-sf-integral-system-canonical-bridge",
+   "def-pur-integral-compact-support-coefficient-data"
+  ]
+ }
+}

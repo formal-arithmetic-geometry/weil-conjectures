@@ -7,10 +7,7 @@ module
 
 public import Sheaf.Paper.SystemTensorMateArrows
 
-import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-import Sheaf.Paper.SemilinearDerivedSections
-import Sheaf.SixFunctors.OpenTensorNormalization
-import Sheaf.SixFunctors.ProperOpenProjectionMate
+import Sheaf.Paper.SystemClopenAlphaTensorSquare
 
 /-!
 # Proper/open tensor-mate interchange on varying coefficient systems
@@ -27,6 +24,7 @@ arrows module. Neither the proper/open arrow nor the projection arrow is inverte
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -35,6 +33,127 @@ universe u
 open CategoryTheory AlgebraicGeometry
 
 namespace WeilConjectures.SystemTensorMate
+
+private theorem mate_tensor_interchange
+    {A B C F : Type*} [Category A] [Category B] [Category C] [Category F]
+    (Pr : C ⥤ A) (Rr : A ⥤ C) (Pp : F ⥤ B) (Rp : B ⥤ F)
+    (ar : Pr ⊣ Rr) (ap : Pp ⊣ Rp) (Pi : F ⥤ C) (Pk : B ⥤ A)
+    (J : C ⥤ F) (K : A ⥤ B)
+    (TA : A × A ⥤ A) (TB : B × B ⥤ B) (TC : C × C ⥤ C) (TF : F × F ⥤ F)
+    (mr : TC ⋙ Pr ⟶ (Pr.prod Pr) ⋙ TA)
+    (mp : TF ⋙ Pp ⟶ (Pp.prod Pp) ⋙ TB) (a : J ⋙ Pp ⟶ Pr ⋙ K)
+    (di : ∀ G Q, TF.obj (J.obj G, Q) ⟶ J.obj (TC.obj (G, Pi.obj Q)))
+    (dk : ∀ M N, TB.obj (K.obj M, N) ⟶ K.obj (TA.obj (M, Pk.obj N)))
+    (c : ∀ Q, Pk.obj (Pp.obj Q) ⟶ Pr.obj (Pi.obj Q))
+    (dn : ∀ {M M'} (f : M ⟶ M') N,
+      TB.map (Prod.mkHom (K.map f) (𝟙 N)) ≫ dk M' N =
+        dk M N ≫ K.map (TA.map (Prod.mkHom f (𝟙 (Pk.obj N)))))
+    (sq : ∀ G Q,
+      Pp.map (di G Q) ≫ a.app (TC.obj (G, Pi.obj Q)) ≫
+          K.map (mr.app (G, Pi.obj Q)) =
+        mp.app (J.obj G, Q) ≫
+          TB.map (Prod.mkHom (a.app G) (𝟙 (Pp.obj Q))) ≫
+          dk (Pr.obj G) (Pp.obj Q) ≫
+          K.map (TA.map (Prod.mkHom (𝟙 (Pr.obj G)) (c Q))))
+    (M : A) (Q : F) :
+    di (Rr.obj M) Q ≫
+        J.map (ar.homEquiv _ _ (mr.app (Rr.obj M, Pi.obj Q) ≫
+          TA.map (Prod.mkHom (ar.counit.app M) (𝟙 _)))) ≫
+        (mateEquiv ar ap (TwoSquare.mk J Pr Pp K a)).natTrans.app
+          (TA.obj (M, Pr.obj (Pi.obj Q))) =
+      TF.map (Prod.mkHom ((mateEquiv ar ap (TwoSquare.mk J Pr Pp K a)).natTrans.app M)
+          (𝟙 Q)) ≫
+        ap.homEquiv _ _ (mp.app (Rp.obj (K.obj M), Q) ≫
+          TB.map (Prod.mkHom (ap.counit.app (K.obj M)) (𝟙 _))) ≫
+        Rp.map (dk M (Pp.obj Q) ≫ K.map (TA.map (Prod.mkHom (𝟙 M) (c Q)))) := by
+  let g := (mateEquiv ar ap (TwoSquare.mk J Pr Pp K a)).natTrans
+  have gc (N : A) :
+      Pp.map (g.app N) ≫ ap.counit.app (K.obj N) =
+        a.app (Rr.obj N) ≫ K.map (ar.counit.app N) :=
+    mateEquiv_counit ar ap (TwoSquare.mk J Pr Pp K a) N
+  let pr : TC.obj (Rr.obj M, Pi.obj Q) ⟶
+      Rr.obj (TA.obj (M, Pr.obj (Pi.obj Q))) := ar.homEquiv _ _ (mr.app (Rr.obj M, Pi.obj Q) ≫
+    TA.map (Prod.mkHom (ar.counit.app M) (𝟙 _)))
+  have an := a.naturality pr
+  dsimp only [Functor.comp_map] at an
+  have mn := mp.naturality (Prod.mkHom (g.app M) (𝟙 Q))
+  change Pp.map (TF.map (Prod.mkHom (g.app M) (𝟙 Q))) ≫
+    mp.app (Rp.obj (K.obj M), Q) = mp.app (J.obj (Rr.obj M), Q) ≫
+      TB.map (Prod.mkHom (Pp.map (g.app M)) (Pp.map (𝟙 Q))) at mn
+  let t := dk M (Pp.obj Q) ≫ K.map (TA.map (Prod.mkHom (𝟙 M) (c Q)))
+  have cn := ap.counit.naturality t
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map] at cn
+  simp only [t, Functor.map_comp, Category.assoc] at cn
+  have pp := (ap.homEquiv _ _).symm_apply_apply
+    (mp.app (Rp.obj (K.obj M), Q) ≫
+      TB.map (Prod.mkHom (ap.counit.app (K.obj M)) (𝟙 (Pp.obj Q))))
+  rw [Adjunction.homEquiv_counit] at pp
+  have pc := (ar.homEquiv _ _).symm_apply_apply
+    (mr.app (Rr.obj M, Pi.obj Q) ≫
+      TA.map (Prod.mkHom (ar.counit.app M) (𝟙 (Pr.obj (Pi.obj Q)))))
+  rw [Adjunction.homEquiv_counit] at pc
+  change Pr.map pr ≫ ar.counit.app _ = _ at pc
+  apply (ap.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  change Pp.map (di (Rr.obj M) Q) ≫ Pp.map (J.map pr) ≫
+    Pp.map (g.app _) ≫ ap.counit.app _ = _
+  rw [gc]
+  erw [reassoc_of% an, ← K.map_comp, pc, K.map_comp]
+  erw [reassoc_of% (sq (Rr.obj M) Q)]
+  rw [cn]
+  erw [reassoc_of% pp]
+  have mn' : Pp.map (TF.map (Prod.mkHom (g.app M) (𝟙 Q))) ≫
+      mp.app (Rp.obj (K.obj M), Q) = mp.app (J.obj (Rr.obj M), Q) ≫
+        TB.map (Prod.mkHom (Pp.map (g.app M)) (𝟙 (Pp.obj Q))) := by
+    simpa using mn
+  rw [reassoc_of% mn']
+  have ht : TB.map (Prod.mkHom (Pp.map (g.app M)) (𝟙 (Pp.obj Q))) ≫
+      TB.map (Prod.mkHom (ap.counit.app (K.obj M)) (𝟙 (Pp.obj Q))) =
+      TB.map (Prod.mkHom (a.app (Rr.obj M)) (𝟙 (Pp.obj Q))) ≫
+        TB.map (Prod.mkHom (K.map (ar.counit.app M)) (𝟙 (Pp.obj Q))) := by
+    erw [← TB.map_comp, ← TB.map_comp]
+    congr 1
+    ext
+    · exact gc M
+    · simp
+  erw [reassoc_of% ht]
+  congr 2
+  erw [reassoc_of% (dn (ar.counit.app M) (Pp.obj Q))]
+  simp only [← K.map_comp, ← TA.map_comp, prod_comp,
+    Category.id_comp, Category.comp_id]
+
+private theorem delta_naturality_left
+    {l : ℕ} [Fact l.Prime] {E : Type (u + 1)} [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (o : TensorOperations l E)
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    {H H' : D l E U} (f : H ⟶ H') (N : D l E X) :
+    (o.T X).map (Prod.mkHom ((o.J j).map f) (𝟙 N)) ≫ (o.delta j H' N).hom =
+      (o.delta j H N).hom ≫
+        (o.J j).map ((o.T U).map (Prod.mkHom f (𝟙 ((o.P j).obj N)))) := by
+  have h :
+      o.deltaInv j H N ≫ (o.T X).map (Prod.mkHom ((o.J j).map f) (𝟙 N)) =
+        (o.J j).map ((o.T U).map (Prod.mkHom f (𝟙 ((o.P j).obj N)))) ≫
+          o.deltaInv j H' N := by
+    apply ((o.derivedOpenAdj j).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_left]
+    simp only [TensorOperations.deltaInv, Equiv.apply_symm_apply]
+    have hn := (o.mu j).inv.naturality (Prod.mkHom ((o.J j).map f) (𝟙 N))
+    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.prod_obj,
+      Functor.prod_map] at hn
+    rw [Category.assoc, ← hn]
+    simp only [← Category.assoc, ← Functor.map_comp]
+    congr 2
+    apply Prod.hom_ext
+    · exact ((o.derivedOpenAdj j).unit.naturality f).symm
+    · simpa only [prod_comp_snd, Prod.mkHom, Category.id_comp,
+        Category.comp_id] using (o.P j).map_id N
+  haveI := o.deltaInv_isIso j H N
+  haveI := o.deltaInv_isIso j H' N
+  have h' := congrArg
+    (fun z ↦ (o.delta j H N).hom ≫ z ≫ (o.delta j H' N).hom) h
+  simpa only [TensorOperations.delta, Iso.symm_hom, asIso_inv,
+    TensorOperations.deltaInv_isIso, Category.assoc, IsIso.inv_hom_id_assoc,
+    IsIso.hom_inv_id, Category.comp_id] using h'
 
 /-- Proper/open tensor-mate interchange for arbitrary unbounded varying-ring systems.
 
@@ -90,6 +209,14 @@ theorem system_clopen_tensor_compatibility
           ((o.delta k H ((o.P p).obj Q)).hom ≫
             (o.J k).map ((o.T A).map
               (CategoryTheory.Prod.mkHom (𝟙 H) ((o.square k r p i h).hom.app Q)))) := by
-  sorry
+  exact mate_tensor_interchange
+    (o.P r) (pushDerived l E r) (o.P p) (pushDerived l E p)
+    (o.derivedAdj r) (o.derivedAdj p) (o.P i) (o.P k) (o.J i) (o.J k)
+    (o.T A) (o.T B) (o.T C) (o.T F) (o.mu r).hom (o.mu p).hom
+    (o.alpha k r p i h)
+    (fun G N ↦ (o.delta i G N).hom) (fun M N ↦ (o.delta k M N).hom)
+    (fun N ↦ (o.square k r p i h).hom.app N)
+    (fun f N ↦ delta_naturality_left o k f N)
+    (system_clopen_alpha_tensor_square K l _hl E o k r p i h) H Q
 
 end WeilConjectures.SystemTensorMate

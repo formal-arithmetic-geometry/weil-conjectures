@@ -8,18 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackQCoh
 import WeilConjectures.Blowup.Principalization
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
-import WeilConjectures.Mathlib.Algebra.Module.Torsion
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
-import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Mathlib.RingTheory.QuotSMulTop
+import Sheaf.AlgebraicGeometry.UniversalExactAffinePowerReduction
+import Sheaf.AlgebraicGeometry.OpenSupportQuotientLocalExact
 
 /-!
 # Strict transforms of universally exact sequences
@@ -39,6 +32,7 @@ set_option autoImplicit false
 universe u
 
 open CategoryTheory CategoryTheory.Limits
+open scoped Pointwise
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -63,6 +57,54 @@ noncomputable def moduleStrictTransformMap {X S : Scheme.{u}} (f : X ⟶ S)
         ((tensorPullback (pullback.fst f I.blowupMap)).map a)).symm)
     ((tensorPullback (pullback.fst f I.blowupMap)).map a)
     (kernel.lift_ι _ _ _).symm
+
+private theorem quotSMulTop_map_injective_of_divisibility
+    {R M N : Type u} [CommRing R] [AddCommGroup M] [Module R M]
+    [AddCommGroup N] [Module R N] (r : R) (i : M →ₗ[R] N)
+    (hdiv : ∀ m : M, (∃ x : N, r • x = i m) → ∃ y : M, r • y = m) :
+    Function.Injective (QuotSMulTop.map r i) := by
+  apply (injective_iff_map_eq_zero (QuotSMulTop.map r i)).mpr
+  intro x hx
+  obtain ⟨m, rfl⟩ := Submodule.mkQ_surjective (r • (⊤ : Submodule R M)) x
+  change (Submodule.Quotient.mk (i m) : QuotSMulTop r N) = 0 at hx
+  change (Submodule.Quotient.mk m : QuotSMulTop r M) = 0
+  rw [Submodule.Quotient.mk_eq_zero] at hx
+  obtain ⟨n, -, hn⟩ :=
+    (Submodule.mem_smul_pointwise_iff_exists (i m) r (⊤ : Submodule R N)).mp hx
+  obtain ⟨m', hm'⟩ := hdiv m ⟨n, hn⟩
+  exact (Submodule.Quotient.mk_eq_zero _).mpr
+    ((Submodule.mem_smul_pointwise_iff_exists m r (⊤ : Submodule R M)).mpr
+      ⟨m', Submodule.mem_top, hm'⟩)
+
+private theorem exists_principal_affine_chart {B Y : Scheme.{u}} (q : Y ⟶ B)
+    (J : B.IdealSheafData) (hJ : J.IsLocallyPrincipal) (y : Y) :
+    ∃ (A R : CommRingCat.{u}) (ρ : A →+* R) (v : Spec A ⟶ B)
+      (_ : IsOpenImmersion v) (z : Spec R ⟶ Y) (_ : IsOpenImmersion z) (a : A),
+      y ∈ Set.range z ∧ z ≫ q = Spec.map (CommRingCat.ofHom ρ) ≫ v ∧
+      z ⁻¹ᵁ (q ⁻¹ᵁ J.support.compl) = PrimeSpectrum.basicOpen (ρ a) := by
+  obtain ⟨V, hyV, ⟨a, ha⟩⟩ := hJ (q y)
+  have hVaff : IsAffineOpen V.1 := V.2
+  obtain ⟨Z, hZ, hyZ, hZV⟩ :=
+    exists_isAffineOpen_mem_and_subset (U := q ⁻¹ᵁ V.1) (x := y) hyV
+  let ρ := (q.appLE V.1 Z hZV).hom
+  have hcomp : hZ.fromSpec ≫ q = Spec.map (CommRingCat.ofHom ρ) ≫ hVaff.fromSpec :=
+    (IsAffineOpen.SpecMap_appLE_fromSpec q hVaff hZ hZV).symm
+  have hV : hVaff.fromSpec ⁻¹ᵁ J.support.compl = PrimeSpectrum.basicOpen a := by
+    apply TopologicalSpace.Opens.ext
+    ext x
+    have hxV : hVaff.fromSpec x ∈ V.1 := by
+      change hVaff.fromSpec x ∈ (V.1 : Set B)
+      exact hVaff.range_fromSpec ▸ (Set.mem_range_self x)
+    change hVaff.fromSpec x ∉ J.support ↔ x ∈ PrimeSpectrum.basicOpen a
+    rw [J.mem_support_iff_of_mem hxV, ha, B.zeroLocus_span, B.zeroLocus_singleton]
+    simp only [Set.mem_compl_iff, not_not]
+    change x ∈ hVaff.fromSpec ⁻¹ᵁ B.basicOpen a ↔ x ∈ PrimeSpectrum.basicOpen a
+    rw [hVaff.fromSpec_preimage_basicOpen]
+  refine ⟨Γ(B, V.1), Γ(Y, Z), ρ, hVaff.fromSpec, inferInstance,
+    hZ.fromSpec, inferInstance, a, ?_, hcomp, ?_⟩
+  · rwa [hZ.range_fromSpec]
+  · rw [← Scheme.Hom.comp_preimage, hcomp, Scheme.Hom.comp_preimage, hV]
+    rfl
 
 /-- Strict transforms preserve a short exact sequence which remains short exact after
 all scheme base changes to the base. The centre is a finite-type quasi-coherent ideal,
@@ -115,6 +157,40 @@ theorem moduleStrictTransform_shortExact_of_universallyShortExact
     ∃ w : moduleStrictTransformMap f I C.f ≫ moduleStrictTransformMap f I C.g = 0,
       (ShortComplex.mk (moduleStrictTransformMap f I C.f)
         (moduleStrictTransformMap f I C.g) w).ShortExact := by
-  sorry
+  obtain ⟨w, -⟩ := hbase I.blowup I.blowupMap
+  let H := ShortComplex.mk
+    ((tensorPullback (pullback.fst f I.blowupMap)).map C.f)
+    ((tensorPullback (pullback.fst f I.blowupMap)).map C.g) w
+  change ∃ w : openSupportQuotientMap (moduleStrictTransformOpen f I) H.f ≫
+      openSupportQuotientMap (moduleStrictTransformOpen f I) H.g = 0,
+    (ShortComplex.mk (openSupportQuotientMap (moduleStrictTransformOpen f I) H.f)
+      (openSupportQuotientMap (moduleStrictTransformOpen f I) H.g) w).ShortExact
+  apply openSupportQuotient_shortExact_of_affine
+  intro y
+  obtain ⟨A, R, ρ, v, hv, z, hz, a, hy, hzq, hzU⟩ :=
+    exists_principal_affine_chart (pullback.snd f I.blowupMap)
+      (I.comap I.blowupMap) I.isInvertible_comap_blowupMap.isLocallyPrincipal y
+  let : Algebra A R := ρ.toAlgebra
+  have hopen : (pullback.snd f I.blowupMap) ⁻¹ᵁ
+      (I.comap I.blowupMap).support.compl = moduleStrictTransformOpen f I := by
+    rw [Scheme.IdealSheafData.support_comap]
+    rfl
+  have hchart := universalExact_affine_power_reduction f I.blowupMap C hC hbase
+    A R v z hzq a
+  obtain ⟨_, _, _, he₁, he₂, he₃, _, _, hi, hij, hj, hp⟩ := hchart
+  refine ⟨R, z, hz, algebraMap A R a, hy, ?_, he₁, he₂, he₃, ?_⟩
+  · rw [← hopen]
+    exact hzU
+  · have hpow : ∀ n : ℕ, Function.Injective
+        (QuotSMulTop.map ((algebraMap A R a) ^ n)
+          ((universalExactAffineSections f I.blowupMap R z).map C.f).hom) := by
+      intro n
+      have h := hp n
+      repeat' rcases h with ⟨_, h⟩
+      exact quotSMulTop_map_injective_of_divisibility _ _ h
+    exact (principalSupportQuotient_exact (algebraMap A R a)
+      ((universalExactAffineSections f I.blowupMap R z).map C.f)
+      ((universalExactAffineSections f I.blowupMap R z).map C.g)
+      hi hij hj hpow).2.2.2.2.2.2
 
 end AlgebraicGeometry.Scheme.Modules

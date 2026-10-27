@@ -42,15 +42,10 @@
    }
   },
   {
-   "text": "Apply exchange/tensor coherence to the identity-topos coefficient square for $p$. Its counit mate is $\\chi_p$; tensor symmetries give the ordered proper projection square. The mixed open scalar/tensor square gives its open counterpart; its fixed $q_\\varphi$ is $\\beta_j$, since $\\beta_j$ is normalized degreewise on K-flat models and so satisfies the open normalization predicate whose unique solution is $q_\\varphi$; likewise its $r_\\varphi$ is the exact-pullback identification $\\lambda^{\\mathrm{ex}}_j$, and its $\\gamma$ is the inverse of the open tensor map. Substitute $P_f=Rp_*O_j\\circ P_p$ and the formula for $q_f$; naturality moves $\\chi_p$ past $Q(O_j)$. The two squares yield exactly the stated projection equation.",
+   "text": "Factor the ordered compact-support projection as the ordered proper counit projection followed by proper direct image of the ordered open projection, including the compactification pullback compositor. The intermediate signed symmetry and its inverse cancel. Expand compactScalarMap. Naturality of scalarMate moves the scalar comparison past the open factor. Substitute the open scalar square, then the direct-image scalar square. Naturality of the ordered proper projection in its sheaf input moves the remaining open scalar component to the source tensor factor. Functoriality recombines this component with scalarMate into compactScalarMap. These are the actual maps of the statement on all derived inputs.",
    "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-amb-proper-coproducts-projection",
-    "lem-coef-etale-open-scalar-coherence",
-    "lem-pur-etale-open-derived-tensor",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-coef-etale-open-tensor",
-    "def-pur-open-coefficient-normalizations"
+    "lem-pur-etale-direct-scalar-projection",
+    "lem-pur-etale-open-scalar-projection"
    ],
    "elementary": false,
    "source": {
@@ -114,45 +109,44 @@
    }
   },
   {
-   "text": "The monoidal unit is multiplication $a\\otimes b\\mapsto\\varphi(a)b$. Its tensor and pullback unit equations are the cited monoidal coherence. Open balancing is identity on the open, while proper projection at the unit is identity. Substituting these unit identities in the preceding pasted squares proves the coefficient-unit compatibility.",
+   "text": "Scalar tensor left unitality is proved by representative normalization and localization. The scalar/pullback binary tensor square, together with geometric and scalar left-unit laws, implies its unit equation: composite_left_unit supplies both composite unit laws and tensorIso_preserves_unit recovers unit compatibility of the invertible comparison. The raw tensor choice equals the site tensor comparison by siteTensorIso_existsUnique. These two results prove etaleCompactScalarUnit. The main coherence theorem is now obtained by the proper/open factorization and the two constituent scalar squares in Step 2.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-coef-etale-open-tensor",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-pur-scalar-left-unit",
+    "lem-pur-etale-scalar-pullback-unit-coherence"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 and the tensor-unit case of projection"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; unit normalization in the scalar/pullback tensor square"
    }
   }
  ],
  "proof_deps": [
   "def-pur-open-coefficient-normalizations",
   "def-weil-pbc-direct-image",
-  "lem-amb-proper-coproducts-projection",
   "lem-amb-unbounded-compact-support-comparisons",
   "lem-asd-proper-finite-coefficient-extension",
-  "lem-coef-etale-open-scalar-coherence",
   "lem-coef-etale-open-tensor",
   "lem-pur-etale-direct-image-scalar-composition",
   "lem-pur-etale-direct-image-scalar-exchange",
-  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-direct-scalar-projection",
   "lem-pur-etale-open-scalar-composition",
   "lem-pur-etale-open-scalar-exchange",
+  "lem-pur-etale-open-scalar-projection",
+  "lem-pur-etale-scalar-pullback-unit-coherence",
+  "lem-pur-scalar-left-unit",
   "lem-sf-proper-open-coefficient-refinement",
   "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-sp-proper-open-coefficient-mate",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "S2",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; finer assembly of normalized proper/open constituent nodes, Tags 0F7I, 0F7J, 0F7L"
+  "place": "Tag 0GL6 and preceding projection lemma; actual ordered proper/open factorization and naturality pasting; existing composition, restriction and unit proofs retained"
  },
  "mathlib_searches": [
   {
@@ -435,16 +429,27 @@
   "note": "The listed declarations state the full package: canonical open-unit normalization, natural scalar map on each compactification, all-input isomorphism and ordered projection coherence, bounded-below-pair refinement and composition, all-input open restriction, and multiplication-unit coherence. The scalar tensor, scalar unit and componentwise compact-support map reuse the already published canonical helpers of ExceptionalCoefficients, not its exceptional-pullback comparison theorem. The new definition node def-pur-open-coefficient-normalizations records precisely the two plain proper/open helper definitions used by the statement. The refinement theorem stays only in proof_deps. The landed exceptional coefficient node remains a genuine statement dependency because tensorIso and unitIso are selected from its uniquely normalized existence theorems; its exceptional-pullback comparison is not assumed."
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-6993d",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261022T022048-L-433470",
+  "landing": "20261026T002529-L-95931",
   "kind": "interface",
-  "note": "independent cc review: Old vs new public declaration blocks (moved 14 byte-identical, headers unchanged); tensorDomainMap old δ≫κ≫v vs compactScalarProjectionTarget(=δ≫κ)≫v; node statement_change old texts vs live; sandbox build of 9 delivered modules + 5 direct importers (all compile, item 37.1 s alone); #print axioms (sorryAx only inherited from mateMap / EtaleCompactScalarCoherence)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-22",
   "by": "T1 stage 2",

@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-relative-frobenius-function-field-image",
+ "kind": "statement",
+ "title": "Function-field image of iterated relative Frobenius over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$ [def-weil-field], [def-weil-algebraic-closure], [def-pc-field-characteristic], let $C$ be a smooth proper integral $k$-curve of dimension one [def-sc-curves], [def-pc-integral-scheme], and let $n\\geq0$ be an integer. Put\n$$T=C^{(p^n)}=C\\times_{\\operatorname{Spec}k,\\operatorname{Spec}(\\varphi_n)}\\operatorname{Spec}k,\\qquad \\varphi_n(a)=a^{p^n},$$\nwith structure morphism the second projection [def-pc-base-change]. Let $F_{C/k,n}:C\\to T$ be the morphism with projections the $n$-fold absolute Frobenius $F_C^n$ [def-weil-absolute-frobenius-scheme] and the structure morphism of $C$. For $n=0$ use the canonical identification $T\\cong C$ and the identity morphism. The image of the induced function-field embedding [def-sc-function-field], [def-pc-field-extension] is exactly\n$$F_{C/k,n}^*k(T)=k(C)^{p^n}:=\\{x^{p^n}:x\\in k(C)\\}\\subseteq k(C).$$",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0CCG (remark-n-fold-relative-frobenius), defining projection formula, and curves.tex Tag 0CCY (lemma-inseparable-deg-p-smooth), identification of the Frobenius image field with kK^p; over algebraically closed k use the affine power calculation, for all n including n=0."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-characteristic",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-pc-base-change",
+  "def-weil-absolute-frobenius-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $q=p^n$ and $a:C\\to\\operatorname{Spec}k$ for the structure map. By the ring Frobenius formula, $\\varphi_n:c\\mapsto c^q$ is a unital homomorphism. It is injective: $c^q=d^q$ gives $(c-d)^q=0$, hence $c=d$ in the field. It is surjective because, for each $b\\in k$, the nonconstant polynomial $Z^q-b$ has a root in the algebraically closed field $k$. Thus $\\sigma=\\varphi_n$ is a field automorphism. This includes $n=0$, when $q=1$ and $\\sigma=\\operatorname{id}$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GR (lemma-algebraically-closed), condition (3), applied to Z^(p^n)-b; varieties.tex Tag 03SM, Frobenius ring formula."
+   }
+  },
+  {
+   "text": "Put $u=F_C^n$ and $s=\\operatorname{Spec}(\\sigma)$. Absolute Frobenius is the identity on underlying spaces, so $u$ is a homeomorphism. The identity $au=sa$ follows on local functions from $a^\\sharp(c^q)=a^\\sharp(c)^q$, the naturality of ring Frobenius. Apply [lem-sfb-automorphism-twist-curve-lift] to $C,a,\\sigma,u$. It gives that $T$ is a smooth proper integral curve, that the first projection $\\pi:T\\to C$ is an isomorphism, and that the unique pair morphism $v:C\\to T$ has injective generic-stalk pullback with $v^*\\beta=u^*$, where $\\beta=\\pi^*:k(C)\\xrightarrow{\\sim}k(T)$. By its two projections $v$ is exactly the morphism $F_{C/k,n}$ in the statement.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-ring-frobenius",
+    "lem-sfb-automorphism-twist-curve-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 03SM (definition-absolute-frobenius), 0CC7 (lemma-frobenius-endomorphism-identity), and 0CCG (remark-n-fold-relative-frobenius); automorphism-base-change specialization, with curves.tex Tag 0CCY (lemma-inseparable-deg-p-smooth), first paragraph."
+   }
+  },
+  {
+   "text": "Let $K=k(C)=\\mathcal O_{C,\\eta}$. Each $x\\in K$ is represented by a section $g$ on some neighbourhood of the generic point $\\eta$. The absolute Frobenius fixes $\\eta$ and sends $g$ to $g^p$; hence its induced stalk map sends the germ $x$ to $x^p$. Iterating gives $u^*(x)=x^{p^n}=x^q$, with the zeroth iterate the identity. This is a calculation on germs, independent of the chosen representative.",
+   "uses": [
+    "def-sc-function-field",
+    "def-weil-absolute-frobenius-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 03SM (definition-absolute-frobenius), 0CC7 (lemma-frobenius-endomorphism-identity), and 0CCG (remark-n-fold-relative-frobenius); automorphism-base-change specialization, with curves.tex Tag 0CCY (lemma-inseparable-deg-p-smooth), first paragraph."
+   }
+  },
+  {
+   "text": "Since $\\beta$ is surjective, every $y\\in k(T)$ is $\\beta(x)$ for some $x\\in K$. Consequently $F_{C/k,n}^*(y)=v^*\\beta(x)=u^*(x)=x^q$, so its image is contained in $K^q$. Conversely each $x^q$ equals $v^*(\\beta(x))$ and belongs to that image. This proves equality. For $n=0$ the same computation is $x\\mapsto x$, and the identity-base-change clause of [lem-sfb-automorphism-twist-curve-lift] gives exactly the stipulated identification $T\\cong C$.",
+   "uses": [
+    "lem-sfb-automorphism-twist-curve-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 03SM (definition-absolute-frobenius), 0CC7 (lemma-frobenius-endomorphism-identity), and 0CCG (remark-n-fold-relative-frobenius); automorphism-base-change specialization, with curves.tex Tag 0CCY (lemma-inseparable-deg-p-smooth), first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-frobenius",
+  "def-weil-algebraic-closure",
+  "def-weil-absolute-frobenius-scheme",
+  "lem-sfb-automorphism-twist-curve-lift",
+  "def-sc-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 03SM, 0CC7 and 0CCG; the generic-stalk argument using the existing automorphism-twist comparison, compatible with curves.tex Tag 0CCY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The function field embedding of iterated relative Frobenius on a smooth integral curve over an algebraically closed field has image exactly the p^n power subfield",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsPurelyInseparable.iterateFrobenius\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"(K : Type u_2) →\\n  (L : Type u_3) →\\n    [inst : Field K] →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] →\\n          [inst_3 : IsPurelyInseparable.HasExponent K L] →\\n            (p : ℕ) → [ExpChar K p] → {n : ℕ} → IsPurelyInseparable.exponent K L ≤ n → L →+* K\", \"doc\": \"Given a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, this function defines the ring homomorphism $ L \\\\to K $ obtained by raising elements t\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_iterateFrobenius\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (K : Type u_2) {L : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] {n : ℕ}\\n  (hn : IsPurelyInseparable.exponent K L ≤ n) (a : L),\\n  (algebraMap K L) ((IsPurelyInseparable.iterateFrobenius K L p hn\", \"doc\": \"For a purely inseparable field extension $L/K$ with exponential characteristic $p$ and exponent $\\\\leq n$, the canonical algebra homomorphism from $K$ to $L$ applied to the iterated Frobenius homomorph\"}\n  {\"name\": \"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] [inst_5 : Field F]\\n  [inst_6 : Algebra F K] [inst_7 : Algebra F L] [inst_8 : IsScalarTower F K L] [inst_9 : ExpCha\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, and for any element $ a \\\\in L $, the image of the $ n $-th iterate of the Frobenius endo\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobenius_algebraMap\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ {K : Type u_2} (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] {n : ℕ}\\n  (hn : IsPurelyInseparable.exponent K L ≤ n) (a : K),\\n  (IsPurelyInseparable.iterateFrobenius K L p hn) ((algebraMap K L\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, and for any element $ a \\\\in K $, the iterated Frobenius homomorphism $ \\\\operatorname{Fro\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] [inst_5 : Field F]\\n  [inst_6 : Algebra F K] [inst_7 : Algebra F L] [inst_8 : IsScalarTower F K L] [inst_9 : ExpCha\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, the $ n $-th iterate of the Frobenius endomorphism applied to the image of an element $ \"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Exponent\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : IsPurelyInseparable.HasExponent K L] (p : ℕ) [inst_4 : ExpChar K p] [inst_5 : Field F]\\n  [inst_6 : Algebra F K] [inst_7 : Algebra F L] [inst_8 : IsScalarTower F K L] [inst_9 : ExpCha\", \"doc\": \"For a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, applying the $ n $-th iterate of the Frobenius endomorphism to the image of an element $\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L] (a : L), (FiniteField.frobeniusAlgEquivOfAlgebraic K L) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ and an algebraic field extension $ L/K $, the Frobenius automorphism in the Galois group $ \\\\mathrm{Gal}(L/K) $ is defined by raising elements of $ L $ to the power of the card\"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  {a : FractionRing (WittVector p k)},\\n  a ≠ 0 → ∃ b, b ≠ 0 ∧ ∃ m, (IsFractionRing.ringEquivOfRingEquiv (WittVector.frobeniusEquiv p k)) b * a = ↑p ^ m * b\", \"doc\": \"For any non-zero element $ a $ in the fraction field of Witt vectors over a perfect field $ k $ of characteristic $ p $, there exist a non-zero element $ b $ and an integer $ m $ such that $ \\\\varphi(b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field iterateFrobenius and perfect-closure results concern abstract field maps; they do not identify the geometric function-field embedding of the relative Frobenius twist"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"functionField\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: field iterateFrobenius and perfect-closure results concern abstract field maps; they do not identify the geometric function-field embedding of the relative Frobenius twist"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|Frobenius).*(functionField|function.field)|functionField.*(frobenius|Frobenius)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: field iterateFrobenius and perfect-closure results concern abstract field maps; they do not identify the geometric function-field embedding of the relative Frobenius twist"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Frobenius pulls back functions by a tensor b maps to a to the p power times b and its function field image over a perfect field is the power subfield",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"frobenius\", \"module\": \"Mathlib.Algebra.CharP.Lemmas\", \"type\": \": R →+* R\", \"doc\": \"The Frobenius endomorphism on a commutative semiring of characteristic $ p $ is the ring homomorphism that maps each element $ x $ to its $ p $-th power $ x^p $, utilizing the identity $ (x + y)^p = x\"}\n  {\"name\": \"LinearMap.frobenius\", \"module\": \"Mathlib.Algebra.CharP.Frobenius\", \"type\": \"[Algebra R S] : S →ₛₗ[frobenius R p] S\", \"doc\": \"The Frobenius endomorphism on a commutative semiring $ S $ of characteristic $ p $, extended to a semilinear map on an $ R $-algebra $ S $ by raising elements to the $ p $-th power and preserving the \"}\n  {\"name\": \"PerfectClosure.frobenius_mk\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"(x : ℕ × K) :\\n  (frobenius (PerfectClosure K p) p : PerfectClosure K p → PerfectClosure K p) (mk K p x) = mk _ _ (x.1, x.2 ^ p)\", \"doc\": \"For any natural number $n$ and element $a \\\\in K$ in a field $K$ of characteristic $p$, the Frobenius endomorphism $\\\\text{Frob}_p$ on the perfect closure $K^{\\\\text{perf}}$ satisfies $\\\\text{Frob}_p([(n,\"}\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"frobeniusEquiv_def\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"(x : R) : frobeniusEquiv R p x = x ^ p\", \"doc\": \"For a perfect ring $ R $ of characteristic $ p $, the Frobenius ring equivalence is defined by mapping each element $ x \\\\in R $ to its $ p $-th power $ x^p $.\"}\n  {\"name\": \"frobeniusEquiv_apply\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"∀ (R : Type u_1) (p : ℕ) [inst : CommSemiring R] [inst_1 : ExpChar R p] [inst_2 : PerfectRing R p] (a : R),\\n  (frobeniusEquiv R p) a = (frobenius R p) a\", \"doc\": \"For any element $ a $ in a perfect ring $ R $ of characteristic $ p $, the Frobenius ring equivalence $ \\\\text{{frobeniusEquiv}} $ satisfies $ \\\\text{{frobeniusEquiv}}(a) = a^p $, coinciding with the Fr\"}\n  {\"name\": \"PerfectRing.bijective_frobenius\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"∀ {R : Type u_1} {p : ℕ} {inst : CommSemiring R} {inst_1 : ExpChar R p} [self : PerfectRing R p],\\n  Function.Bijective ⇑(frobenius R p)\", \"doc\": \"In a perfect ring $ R $ of characteristic $ p $, the Frobenius endomorphism (which maps each element $ x $ to its $ p $-th power $ x^p $) is a bijective function.\"}\n  {\"name\": \"iterateFrobeniusEquiv_eq_pow\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \": iterateFrobeniusEquiv R p n = frobeniusEquiv R p ^ n\", \"doc\": \"In a perfect ring of exponential characteristic $ p $, the $ n $-th iterate of the Frobenius endomorphism (mapping $ x $ to $ x^{p^n} $) coincides with the $ n $-th power of the Frobenius ring equival\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field iterateFrobenius and perfect-closure results concern abstract field maps; they do not identify the geometric function-field embedding of the relative Frobenius twist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the image of the field map of a Frobenius twist with the subfield of pth powers over an algebraically closed base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsPerfectClosure\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommSemiring K] →\\n      [inst_1 : CommSemiring L] → (K →+* L) → (p : ℕ) → [inst : ExpChar L p] → [PerfectRing L p] → Prop\", \"doc\": \"Given a ring homomorphism $ i : K \\\\to L $ between commutative semirings with exponential characteristic $ p $, the proposition that $ L $ is a perfect closure of $ K $, meaning $ i $ satisfies the $ p\"}\n  {\"name\": \"perfectClosure.perfectRing\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] (p : ℕ) [inst_3 : ExpChar E p]\\n  [PerfectRing E p], PerfectRing (↥(perfectClosure F E)) p\", \"doc\": \"If $ E $ is a perfect ring with exponential characteristic $ p $, then the perfect closure of $ F $ in $ E $, which is the intermediate field generated by taking all $ p $-th roots of elements in $ F \"}\n  {\"name\": \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L] (a : L), (FiniteField.frobeniusAlgEquivOfAlgebraic K L) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ and an algebraic field extension $ L/K $, the Frobenius automorphism in the Galois group $ \\\\mathrm{Gal}(L/K) $ is defined by raising elements of $ L $ to the power of the card\"}\n  {\"name\": \"perfectClosure.map_le_of_algHom\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {K : Type w} [inst_3 : Field K]\\n  [inst_4 : Algebra F K] (i : E →ₐ[F] K), IntermediateField.map i (perfectClosure F E) ≤ perfectClosure F K\", \"doc\": \"For any algebra homomorphism $ i : E \\\\to K $ over $ F $, the image of the perfect closure of $ F $ in $ E $ under $ i $ is contained within the perfect closure of $ F $ in $ K $.\"}\n  {\"name\": \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra.IsAlgebraic K L], ⇑(FiniteField.frobeniusAlgEquivOfAlgebraic K L) = fun x => x ^ Fintype.card K\", \"doc\": \"The Frobenius automorphism of the algebraic field extension $ L/K $, viewed as an element of the Galois group $ \\\\mathrm{Gal}(L/K) $, coincides with the field automorphism that raises each element of $\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) (R : Type u_2) [inst : Field K] [inst_1 : Fintype K] [inst_2 : CommRing R] [inst_3 : Algebra K R]\\n  (p : ℕ) [inst_4 : ExpChar R p] [inst_5 : PerfectRing R p] (a : R),\\n  (FiniteField.frobeniusAlgEquiv K R p) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ of cardinality $ q $ and a commutative ring $ R $ with exponential characteristic $ p $, the Frobenius endomorphism defined by raising elements to the $ q $-th power is an alg\"}\n  {\"name\": \"map_mem_perfectClosure_iff\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {K : Type w} [inst_3 : Field K]\\n  [inst_4 : Algebra F K] (i : E →ₐ[F] K) {x : E}, i x ∈ perfectClosure F K ↔ x ∈ perfectClosure F E\", \"doc\": \"For any $ F $-algebra homomorphism $ i : E \\\\to K $ and element $ x \\\\in E $, the image $ i(x) $ lies in the perfect closure of $ F $ in $ K $ if and only if $ x $ lies in the perfect closure of $ F $ i\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"(K : Type u_1) →\\n  (R : Type u_2) →\\n    [inst : Field K] →\\n      [Fintype K] →\\n        [inst_2 : CommRing R] →\\n          [inst_3 : Algebra K R] → (p : ℕ) → [inst_4 : ExpChar R p] → [PerfectRing R p] → R ≃ₐ[K] R\", \"doc\": \"The algebra equivalence from a $ K $-algebra $ R $ to itself defined by the Frobenius endomorphism raising elements to the power of the cardinality $ \\\\#K $ of the finite field $ K $. This equivalence \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field iterateFrobenius and perfect-closure results concern abstract field maps; they do not identify the geometric function-field embedding of the relative Frobenius twist"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|Frobenius).*(functionField|function.field)|functionField.*(frobenius|Frobenius)",
+   "results": "{\"t\": \"2026-10-23T04:23:36Z\", \"tool\": \"grep\", \"query\": \"(frobenius|Frobenius).*(functionField|function.field)|functionField.*(frobenius|Frobenius)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Frobenius/perfect-field declarations do not identify the geometric function-field embedding. IsAlgClosed.perfectRing supplies only scalar perfectness; here this follows directly from the definition by roots of Z^(p^n)-b."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Frobenius on a curve over a perfect field induces a function field embedding with image the p power subfield",
+   "results": "{\"t\": \"2026-10-23T04:23:37Z\", \"tool\": \"leansearch\", \"query\": \"Relative Frobenius on a curve over a perfect field induces a function field embedding with image the p power subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.frobenius\", \"FiniteField.Extension.frob\", \"IsPurelyInseparable.iterateFrobenius\", \"frobeniusEquiv_def\", \"frobenius\", \"PerfectRing.bijective_frobenius\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"IsPurelyInseparable.iterateFrobenius_algebraMap\"], \"digest\": \"0c6b837347d1afe4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Frobenius/perfect-field declarations do not identify the geometric function-field embedding. IsAlgClosed.perfectRing supplies only scalar perfectness; here this follows directly from the definition by roots of Z^(p^n)-b."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"functionField\"",
+   "results": "{\"t\": \"2026-10-23T04:23:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"frobenius\\\", \\\"functionField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Frobenius/perfect-field declarations do not identify the geometric function-field embedding. IsAlgClosed.perfectRing supplies only scalar perfectness; here this follows directly from the definition by roots of Z^(p^n)-b."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The function field embedding of iterated relative Frobenius on a smooth integral curve over an algebraically closed field has image exactly the p^n power subfield",
+   "results": "{\"t\": \"2026-10-23T04:23:44Z\", \"tool\": \"leanfinder\", \"query\": \"The function field embedding of iterated relative Frobenius on a smooth integral curve over an algebraically closed field has image exactly the p^n power subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base\", \"IsPurelyInseparable.algebraMap_iterateFrobenius\", \"IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"IsPurelyInseparable.iterateFrobenius_algebraMap\", \"WittVector.exists_frobenius_solution_fractionRing\", \"IsPurelyInseparable.iterateFrobenius\"], \"digest\": \"7b8c60130c4deb08\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Frobenius/perfect-field declarations do not identify the geometric function-field embedding. IsAlgClosed.perfectRing supplies only scalar perfectness; here this follows directly from the definition by roots of Z^(p^n)-b."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the image of the field map of a Frobenius twist with the subfield of pth powers over an algebraically closed base field",
+   "results": "{\"t\": \"2026-10-23T04:23:45Z\", \"tool\": \"leanfinder\", \"query\": \"Identify the image of the field map of a Frobenius twist with the subfield of pth powers over an algebraically closed base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.perfectRing\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"perfectClosure\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.frobeniusAlgEquiv_apply\", \"IsPurelyInseparable.algebraMap_iterateFrobenius\"], \"digest\": \"5c38ea74670dd0a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Frobenius/perfect-field declarations do not identify the geometric function-field embedding. IsAlgClosed.perfectRing supplies only scalar perfectness; here this follows directly from the definition by roots of Z^(p^n)-b."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-purely-inseparable-curve-frobenius",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. Affine image-subfield identification used in Stacks 0CCY/0CCZ, with the n-fold map of 0CCG (returned item step 3, tensor formula, extraction of roots of scalars, and passage to fractions).",
+   "via": [
+    "lem-sfb-purely-inseparable-curve-frobenius",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-frobenius-function-field-image",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Reused the existing automorphism-twist curve lift instead of creating an affine tensor-image lemma: algebraic closedness makes the scalar Frobenius an automorphism, and surjectivity of the first-projection field isomorphism reduces the image equality to the absolute Frobenius formula on germs. Checked n=0 and all hypotheses of the cited lift. No new nodes. Repair of the promotion refusal: rebased the retained split onto the current DAG, re-read all five cited statements, and updated the twist-lift quotations and step 2 to its clarified generic-stalk pullback statement; all hypotheses and the proof route remain valid.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), high-genus-cover auxiliary argument, inseparable/separable factorization and Stacks 0CCY/0CCZ. Realizes the returned parent step 3 image-field identification; the node-level stalk argument gives the same identification without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-3946fa94e",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-3946fa94e (reviewer sub-agent of L); spot-checked: Re-delivery after a promotion refusal. Compared with the prior head d63941ad202e, only step 2's wording and the split_report changed. Step 2 now says smooth proper integral and generic-stalk pullback, matching the clarified statement of lem-sfb-automorphism-twist-curve-lift. That node is split and L-reviewed in the snapshot, identical to side-live, and still unsplit on live. This is a promotion matter, not a mathematical fault. The item is unsplit with an empty proof on live and side-live, has no repair note and has no new nodes. Source checks: Stacks varieties 0CCG gives X^{(p^n)} = X x_{S,F_S^n} S and F_{X/S,n} = (F_X^n, id), which matches T and the projections (F_C^n, a). Stacks curves 0CCY gives image kK^p; for algebraically closed k this equals K^{p^n}. Step 1: phi_n is bijective (injective in a field; Z^q - b has a root). Step 2: u is a homeomorphism; au = sa holds on global sections; every hypothesis of the twist lift holds; v = F_{C/k,n}; v^*beta = u^*. Step 3: the germ map at eta is x -> x^q. Step 4: beta is surjective, so the image is K^q, with both inclusions shown. n=0 is covered by the lift's identity clause. Small cases checked: P^1 over F_p-bar and n=0. An imperfect base is excluded by the hypothesis. proof_deps equal the union of the step uses. No circularity and no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.RelativeFrobeniusFunctionFieldImage",
+  "declaration": "AlgebraicGeometry.relative_frobenius_function_field_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/RelativeFrobeniusFunctionFieldImage.lean",
+  "statement": "theorem relative_frobenius_function_field_image (k : Type u) [Field k] [IsAlgClosed k] (p : ℕ) (hp : p.Prime) (hk : (p : k) = 0) (C : Scheme.{u}) (a : C ⟶ Spec (.of k)) [IsCurve a] [Smooth a] [IsProper a] [IsIntegral C] (hCdim : topologicalKrullDim C = 1) (n : ℕ) : ∃ (_ : IsIntegral (pullback a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))))), ∃ hC : (p : Γ(C, ⊤)) = 0, ∃! F : C ⟶ pullback a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))), F ≫ pullback.fst a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = C.iterateFrobenius hp hC n ∧ F ≫ pullback.snd a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = a ∧ (n = 0 → IsIso (pullback.fst a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n)))) ∧ F ≫ pullback.fst a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = 𝟙 C) ∧ ∃ hη : F (genericPoint C) = genericPoint (pullback a (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) : Scheme.{u}), Function.Injective (F.functionFieldMap hη).hom ∧ Set.range (F.functionFieldMap hη).hom = Set.range (fun x : C.functionField ↦ x ^ (p ^ n))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d0a8c293",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records (identical to side-live), the module, the report and Stacks 0CCG/0CCY. T = pullback a (Spec.map iterateFrobeniusOfPrime k hp hk n) with structure map pullback.snd; F is the unique lift with projections C.iterateFrobenius and a (extra conjuncts inside ∃! do not weaken it, since the projections determine F). The n=0 clause (IsIso fst and F≫fst=𝟙) is stated. The image clause is Set.range of the canonical generic-stalk Hom.functionFieldMap = Set.range (x ↦ x^(p^n)), exact set equality. Hypotheses: IsAlgClosed k, p prime with (p:k)=0 (equivalent to char p), IsCurve+Smooth+IsProper+IsIntegral C+dim 1, the same convention as the landed twist lift; nothing stronger. One universe, forced by C ⟶ Spec k. lean.statement verbatim. Imports: stmt deps public, proof dep plain. Docstrings carry the source place, blueprint id and the 4 proof steps; the only proof is sorry. No duplicate statement exists. Edge cases n=0, p=0/1, empty or reducible C, P^1 checked. Not recompiled per instructions; no findings."
+ }
+}

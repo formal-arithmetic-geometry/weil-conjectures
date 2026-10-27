@@ -16,23 +16,20 @@
  ],
  "proof": [
   {
-   "text": "Put $A=R\\mathcal Hom_{\\mathcal O_X}(K,L)$ [def-pur-derived-internal-hom]. The category of opens of each space is small in a universe containing its underlying set, and its structure sheaf is commutative, as required by the ringed-site tools below. For any open $U\\subseteq X$, [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies $A|_U$ with $R\\mathcal Hom_{\\mathcal O_U}(K|_U,L|_U)$, compatibly with successive restrictions. By the closed adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal], this internal Hom is a right adjoint to $K|_U\\otimes^{\\mathbf L}-$ (using the tensor symmetry to put the fixed argument first). Thus clause (2) of [lem-sfb-derived-internal-hom-sections-model], applied on $U$, gives for every integer $i$:\n$$H^i(U,A|_U)\\cong\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,L|_U[i]).$$\nHere $H^i(U,-)$ is derived evaluation at the whole space $U$. By [lem-sfb-unbounded-sections-localization], it is also derived evaluation of $A$ at the open $U$ of $X$. These are comparisons of abelian groups. They commute with restrictions: on a complex representative of $K$ and a K-injective representative of $L$, the comparison sends the class of a degree-$i$ cocycle of the global Hom complex to its derived morphism; the restricted target remains K-injective by [lem-pur-kinjective-restrict-localized], and restricting that cocycle restricts precisely the same local module maps, and the internal-Hom restriction comparison is compatible with successive restrictions. No boundedness is needed.",
+   "text": "Work in a universe containing the opens and module values; the structure sheaves are commutative, as required by the ringed-site tools. Put $A=R\\mathcal Hom_{\\mathcal O_X}(K,L)$ [def-pur-derived-internal-hom]. By [lem-trf-open-ext-hypercohomology-comparison], for every integer $i$ the presheaf $V\\mapsto H^i(f^{-1}V,A)$ is canonically isomorphic to the local shifted-Hom presheaf in the statement, with its canonical restriction maps. Inverse images of open inclusions are open inclusions, so the restriction compatibility applies to all opens of $Y$. For $W\\subseteq V$ in $Y$, let $j:f^{-1}W\\hookrightarrow f^{-1}V$. Apply the comparison square at $j$. Before the canonical shift identification, its right restriction is $a\\mapsto e_K^{-1};S_j(a);e_{L[i]}$ from [def-trf-ringed-derived-open-hom-restriction], applied to $K,L[i]$. Thus it uses exactly the canonical restrictions of the statement, also for nonzero $i$.",
    "uses": [
+    "lem-trf-open-ext-hypercohomology-comparison",
     "def-pur-derived-internal-hom",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "lem-sfb-unbounded-sections-localization",
-    "lem-pur-kinjective-restrict-localized"
+    "def-trf-ringed-derived-open-hom-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D66 (2): translate with Tags 08DK and 08DL; ringed-site versions 08JA and 08JB"
+    "place": "Tag 0D66 (2), internal-Hom translation using Tag 08DK"
    }
   },
   {
-   "text": "Put $B=Rf_*A$. By [lem-trf-unbounded-direct-image-section-presheaf], for every integer $i$ the presheaf $P_i(V)=H^i(f^{-1}V,A)$ is canonically isomorphic to $V\\mapsto H^i(V,B)$, and $P_i^\\#$ is the underlying abelian sheaf of $\\mathcal H^i(B)$. For $i<0$, Step 1 and the hypothesis say $P_i(V)=0$ for all $V\\in\\mathcal B$. Every map from $P_i$ to an abelian sheaf $F$ is zero: for any open $W$ and $s\\in P_i(W)$, its image restricts to zero on the covering of $W$ by basis members contained in $W$, so the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology] makes its image zero on $W$. By the universal property [def-weil-pbc-sheafification], maps from $P_i^\\#$ to $F$ are therefore unique. Set $F=P_i^\\#$; its identity equals its zero endomorphism, so $P_i^\\#=0$. Consequently $\\mathcal H^i(B)=0$ for all $i<0$.",
+   "text": "Put $B=Rf_*A$. By [lem-trf-unbounded-direct-image-section-presheaf], for every integer $i$ the presheaf $P_i(V)=H^i(f^{-1}V,A)$ is canonically isomorphic to $V\\mapsto H^i(V,B)$, and $P_i^\\#$ is the underlying abelian sheaf of $\\mathcal H^i(B)$. For $i<0$, Step 1 and the hypothesis say $P_i(V)=0$ for all $V\\in\\mathcal B$. Every map from $P_i$ to an abelian sheaf $F$ is zero: for any open $W$ and $s\\in P_i(W)$, its image restricts to zero on the covering of $W$ by basis members contained in $W$, so the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology] makes its image zero on $W$. By the universal property [def-weil-pbc-sheafification], maps from $P_i^\\#$ to $F$ are therefore unique. Set $F=P_i^\\#$; its identity equals its zero endomorphism, so $P_i^\\#=0$. Hence the underlying abelian sheaf of $\\mathcal H^i(B)$ has zero sections on every open. Its module sections are the same groups, so $\\mathcal H^i(B)=0$ for all $i<0$.",
    "uses": [
     "lem-trf-unbounded-direct-image-section-presheaf",
     "def-weil-pbc-sites-and-cohomology",
@@ -45,32 +42,18 @@
    }
   },
   {
-   "text": "Step 2 places $B$ in $D^+(\\mathcal O_Y)$, since this full subcategory consists of objects with cohomology vanishing below some degree [def-weil-pbc-bounded-derived-subcategories]. The category of $\\mathcal O_Y$-modules is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] with lower bound $0$ to obtain $B\\cong QJ$, where every $J^n$ is injective, $J^n=0$ for $n<0$, and $J$ is K-injective. For each open $V$, the K-injective computation of the unbounded right derived functor [def-sfb-right-derived-functor] applied to evaluation at $V$ identifies $H^i(V,B)$ with $H^i(\\Gamma(V,J))$.",
+   "text": "By Step 2, $B=Rf_*A$ has $\\mathcal H^i(B)=0$ for $i<0$. Apply [lem-trf-connective-hypercohomology-sheaf] on the ringed space $Y$. It gives $H^i(V,B)=0$ for every open $V$ and $i<0$, and a canonical isomorphism of abelian presheaves $V\\mapsto H^0(V,B)$ with the underlying abelian sheaf of $\\mathcal H^0(B)$.",
    "uses": [
-    "def-weil-pbc-bounded-derived-subcategories",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-sfb-right-derived-functor"
+    "lem-trf-connective-hypercohomology-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D66 (1), third sentence of proof; Tags 013K and 070J for the nonnegative injective model"
+    "place": "Tag 0D66 (1), connective derived-section calculation"
    }
   },
   {
-   "text": "The section complex $\\Gamma(V,J)$ is zero below degree $0$, hence has zero cohomology for $i<0$. In degree $0$, since $J^{-1}=0$, its cohomology is $\\ker(\\Gamma(V,J^0)\\to\\Gamma(V,J^1))$. Kernels in the category of module sheaves are computed sectionwise [def-weil-sheaf-of-modules-category], so this is $\\Gamma(V,\\ker(J^0\\to J^1))=\\Gamma(V,\\mathcal H^0(B))$. For $V'\\subseteq V$, both maps restrict the same section of $J^0$ whose differential is zero. These identifications therefore give an isomorphism of abelian presheaves $V\\mapsto H^0(V,B)$ with the underlying abelian sheaf of $\\mathcal H^0(B)$, rather than merely unrelated isomorphisms of groups at each open.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D66 (1), third and fourth sentences of proof: degree-zero section calculation"
-   }
-  },
-  {
-   "text": "For every open $V\\subseteq Y$, combine the comparisons of Steps 1 and 2 with Step 4:\n$$\\operatorname{Hom}(K|_{f^{-1}V},L|_{f^{-1}V}[i])\\cong H^i(f^{-1}V,A)\\cong H^i(V,B).$$\nThe right side is zero for $i<0$. In degree $0$ these comparisons commute with restriction, and identify the Hom presheaf in the statement with $V\\mapsto\\Gamma(V,\\mathcal H^0(B))$. It is therefore a sheaf of abelian groups. This also handles $V=\\varnothing$: module sheaves have the zero group of sections there by the empty-cover equalizer axiom [def-weil-pbc-sites-and-cohomology], so the sheaf condition includes the empty cover. No closure of $\\mathcal B$ under intersections is needed: all uses of the basis were its coverings of each open by basis members contained in it.",
+   "text": "For every open $V\\subseteq Y$, combine the comparisons of Steps 1 and 2 with Step 3:\n$$\\operatorname{Hom}(K|_{f^{-1}V},L|_{f^{-1}V}[i])\\cong H^i(f^{-1}V,A)\\cong H^i(V,B).$$\nThe right side is zero for $i<0$. In degree $0$ these comparisons commute with restriction, and identify the Hom presheaf in the statement with $V\\mapsto\\Gamma(V,\\mathcal H^0(B))$. It is therefore a sheaf of abelian groups. This also handles $V=\\varnothing$: module sheaves have the zero group of sections there by the empty-cover equalizer axiom [def-weil-pbc-sites-and-cohomology], so the sheaf condition includes the empty cover. No closure of $\\mathcal B$ under intersections is needed: all uses of the basis were its coverings of each open by basis members contained in it.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
@@ -83,19 +66,12 @@
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "def-sfb-right-derived-functor",
-  "def-weil-pbc-bounded-derived-subcategories",
+  "def-trf-ringed-derived-open-hom-restriction",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-derived-internal-hom-sections-model",
-  "lem-sfb-unbounded-sections-localization",
-  "lem-trf-unbounded-direct-image-section-presheaf",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  "lem-trf-connective-hypercohomology-sheaf",
+  "lem-trf-open-ext-hypercohomology-comparison",
+  "lem-trf-unbounded-direct-image-section-presheaf"
  ],
  "proof_origin": {
   "by": "document",
@@ -215,35 +191,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-derived-basis-local-ext-sheaf",
   "worker": "stage1",
-  "summary": "Followed Stacks 0D66(2) through its internal-Hom reduction to (1). Reused existing restriction, derived-section and bounded-below injective-model nodes. Added only the genuinely more general unbounded ringed-space direct-image/sheafification comparison 0D5X. Wrote out basis vanishing using the sheafification universal property and the degree-zero section calculation, including restriction compatibility and empty opens. The item statement is unchanged.",
+  "summary": "Rebased the retained re-split onto the current shared DAG after the side-completion landing return. Preserved every live field except proof, proof_deps and split_report, the unchanged statement, both statement-only supporting nodes, all twelve actual search records and the complete inherited argument in report.md. Re-read all assembly citations and extraction inputs. Clarified the restriction formula with a separate inclusion index j and the actual target L[i] before shift identification, and made explicit that vanishing of the underlying abelian cohomology sheaf implies vanishing as a module sheaf. The four-step assembly is under 3000 characters and distributes the original two arguments of comparable size.",
   "blueprint": "Realizes the supporting BBD descent component of lem-trf-local-term-locality via lem-trf-derived-basis-local-hom-glue: 0D66(2) on the quotient ringed-space map. No chapter or unit route is changed.",
   "tool_uses": [
    {
-    "node": "lem-pur-kinjective-restrict-localized",
-    "why": "Ensures that the same K-injective representative restricts to a valid local model for the cocycle comparison. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
     "node": "def-pur-derived-internal-hom",
     "why": "Defines the generic internal Hom object used in the Stacks reduction. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Supplies unbounded internal Hom restriction compatible with successive localizations. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "why": "Supplies the tensor-Hom right adjunction required by the existing section-model lemma. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "lem-sfb-derived-internal-hom-sections-model",
-    "why": "Identifies all-degree derived sections of internal Hom with shifted derived morphisms. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "lem-sfb-unbounded-sections-localization",
-    "why": "Identifies derived evaluation at an open with derived global sections on that open. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
    },
    {
     "node": "def-weil-pbc-sites-and-cohomology",
@@ -254,24 +210,8 @@
     "why": "Its universal property proves that a presheaf zero on a basis sheafifies to zero. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
    },
    {
-    "node": "def-weil-pbc-bounded-derived-subcategories",
-    "why": "Recognizes vanishing in negative degrees as bounded-below membership. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "why": "Supplies enough injectives on the arbitrary target ringed space. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "lem-weil-pbc-dplus-injective-representative",
-    "why": "Provides the nonnegative injective representative and its K-injectivity. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "def-sfb-right-derived-functor",
-    "why": "Supplies the termwise K-injective computation of derived evaluation. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
-   },
-   {
-    "node": "def-weil-sheaf-of-modules-category",
-    "why": "Supplies sectionwise kernels and the underlying abelian sheaf. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+    "node": "def-trf-ringed-derived-open-hom-restriction",
+    "why": "Fixes the canonical composition-conjugated open restriction used by the current statement; Step 1 checks the comparison on the inverse image of each open inclusion. This is a generic restriction definition, not a replacement for the unit route."
    }
   ]
  },
@@ -288,15 +228,16 @@
   "lem-sc-ringed-space-module-sheaves-enough-injectives",
   "lem-weil-pbc-dplus-injective-representative",
   "def-sfb-right-derived-functor",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-ringed-derived-open-hom-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q43-9e8730d95",
-  "group": "Q43",
+  "reviewer": "NT-cc-Q04-baed98dc4",
+  "group": "Q04",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-9e8730d95 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement, and made no changes. Item: its statement is Stacks 0D66(2) exactly (cohomology.tex lemma-vanishing-and-glueing, read in full): arbitrary ringed spaces, arbitrary basis, unbounded K and L, nothing weakened. It is a real lemma used by the parent's Step 3, not a restated clause of the parent. Step 1 makes 08DK precise: the internal-Hom restriction node, the closed adjunction plus the symmetry, clause (2) of the derived-internal-Hom sections-model node, the slice-localization node and K-injective restriction. Together these give an isomorphism of presheaves with H^i(f^-1V, RHom(K,L)). Step 2 is the vanishing-on-a-basis argument: equalizer axiom plus the sheafification universal property, so P_i^#=0. It needs neither intersections of basis opens nor a basis on X. Step 3 uses D^+ membership, enough injectives on Y and the dplus representative with n=0 and K-injective J, so H^i(V,B)=H^i(J(V)). Step 4: J^-1=0 and kernels are sectionwise, so H^0(V,B)=Gamma(V,H^0 B), compatibly with restriction. Step 5 chains these; the empty open is covered. New node lem-trf-unbounded-direct-image-section-presheaf: exactly Stacks 0D5X together with the 0D5W Leray comparison (read at cohomology.tex 7917-7956), with the same hypotheses. Tested on a point and on f=id, including negative q. It is statement-only and self-contained, and has LeanFinder, LeanSearch, Loogle and grep searches. My own rg over the DAG (0D5X, 0D5W, 0D6I, 0BKJ, Leray, sheafification and direct image) and over the main and master blueprints found only scheme, pro-etale, qcoh or single-sheaf versions, so the node is not a duplicate. The off-unit generic tools declared in split_report.tool_uses are accepted. No SGA source. Not a target node, so base-change and coefficient checks do not apply."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-baed98dc4 (reviewer sub-agent of L); spot-checked: Fourth head of the released 2026-10-22 re-split (keep_plan). f6bdecca, d281939a and 4aba30d2 were all PASSed; their landings were refused only because the side completion was not promoted to the live DAG. Not superseded: live and side-live still carry the old 5-step proof, and neither new id exists there. Delta from 4aba30d2: both new nodes are byte-identical. The item changes only by two true wording edits: Step 1 uses j for the inclusion and e_{L[i]} for the pair (K,L[i]), matching def-trf-ringed-derived-open-hom-restriction; Step 2 states that zero abelian sections give H^i(B)=0 as a module sheaf. Statement, stmt_deps, lean and blueprint are unchanged. Sources re-read: Stacks cohomology.tex 0D66 lemma-vanishing-and-glueing (both parts and the proof), 08DK lemma-section-RHom-over-U, 08DL; no SGA. The item is 0D66(2) verbatim. lem-trf-open-ext-hypercohomology-comparison (old Step 1) holds by 08DK for (K,L[i]), with the restriction square on cocycles of Hom^•(K,I) and K-injective restriction; tested on a point, the empty open, K=0 and L[1]. lem-trf-connective-hypercohomology-sheaf (old Steps 3-4) holds via a nonnegative injective K-injective model, J^{-1}=0 and sectionwise kernels; tested on F[0], positive cohomology, the empty open and F[1], which fails the hypothesis. Both nodes are statement-only and self-contained, carry three kinds of search and correct blueprint fields, and are of comparable size; neither restates a parent clause. Parent: Step 2 is the elementary basis-sheafification argument using the equalizer axiom and the universal property only. Step 3 applies node 2. Step 4 chains three restriction-compatible presheaf isomorphisms and handles the empty open. Assembly 2917 characters (cap 3000); proof_deps equals the union of uses. Duplicate check with rg -L for 08DK/08DL/0D66 and the connective pattern found only fixed-site/global H^0 nodes, object-level RHom restriction nodes, scheme/complex evaluation nodes and the dplus representative; none is a duplicate. Accepted tool_uses (generic definitions): def-pur-derived-internal-hom, def-weil-pbc-sites-and-cohomology, def-weil-pbc-sheafification, def-trf-ringed-derived-open-hom-restriction. Maintainer note: the item's node-level tool_uses still lists the old step tools, so the merge should refresh it; the landing refusals are the promotion loop, not a delivery fault."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.DerivedBasisLocalExtSheaf",
@@ -316,5 +257,16 @@
   "result": "pass",
   "note": "Re-delivery after 2afec1ee RETURN (H2 theorem stmt_dep). Item now cites new existing:true def node def-trf-ringed-derived-open-hom-restriction instead of theorem lem-sc-derived-hom-mayer-vietoris; its lean.statement is verbatim in published WeilConjectures/AlgebraicGeometry/DerivedHomMayerVietoris.lean (olean present), all 8 listed declarations exist and are exactly those the item uses, prose matches the canonical e.inv≫S_i.map≫e.hom body, source places 08BW/0D66 exist, no other def node owns it. Item Lean byte-identical to previously reviewed file; re-read vs Stacks 0D66(2): ringed-space morphism, IsTopologicalBasis, unbounded K/L, Subsingleton negative Ext on basis→all opens, AddCommGrpCat sheaf pinned by ≃+ and derivedOpenHomRestriction; universes explicit; edge cases fine; sorry only; docstrings OK. nt_compile --json clean 6.9 s."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

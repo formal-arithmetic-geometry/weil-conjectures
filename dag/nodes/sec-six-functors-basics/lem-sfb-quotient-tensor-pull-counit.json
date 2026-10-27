@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-quotient-tensor-pull-counit",
+ "kind": "statement",
+ "title": "The geometric tensor/counit equation on cochains",
+ "statement": "Let R be a commutative condensed ring and f:X→Y any scheme morphism. For arbitrary integer-indexed cochain complexes P,Q of internal R_Y-modules, use the functor L, computePull and totalPull of [lem-sfb-quotient-tensor-flat-model-maps] and the native comparison t of [new-proetale-derived-module-pullback-monoidal]. Write Q for the fixed cochain localization functor, μ for its tensorator, and FP,FQ for the termwise geometric pullbacks. Then L(μ(P,Q)) followed by computePull(P tensor Q) and Q(totalPull(P,Q)) equals t(QP,QQ) followed by computePull(P) tensor computePull(Q) and μ(FP,FQ). This is an equation of actual counit maps for arbitrary cochains; no invertibility or K-flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 0G7E (lemma-pullback-K-flat); the tensor comparison is characterized by the two-variable derived counit equation."
+ },
+ "stmt_deps": [
+  "lem-sfb-quotient-tensor-flat-model-maps",
+  "new-proetale-derived-module-pullback-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "The mapHomotopyCategoryFactors maps are identities. Thus the prescribed computePull is exactly the ordinary functor's rightExact_cochainCounit, including both quotientCompQhIso factors.",
+   "uses": [
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a generic additive exact strong monoidal left adjoint F preserving flat objects and K-flat quasi-isomorphisms, apply leftDerivedTensorComparison_app_app_comp_tensorHom to the homotopy quotients of P,Q. Use the proved transport_tensor_counit and tensorator_Q helpers to conjugate this equation by the quotientCompQhIso isomorphisms at P,Q,P tensor Q and their images. Naturality of the comparison at the inverse isomorphisms and naturality of quotientCompQhIso at the ordinary oplax cochain tensorator give the desired cochain equation.",
+   "uses": [
+    "lem-derived-right-exact-tensor-comparison",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize to geometric module pullback with its canonical monoidal and oplax structures. It is exact, a left adjoint, preserves flat objects and preserves K-flat quasi-isomorphisms. Identify its native comparison with leftDerivedTensorComparison and its ordinary tensorator with totalPull. Substitute the cochain counit identification from step 1.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-tensor-flat-model-maps",
+  "lem-derived-right-exact-tensor-comparison",
+  "new-proetale-derived-module-pullback-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 and Tag 0G7E; quotient-to-homotopy transport of the native derived comparison counit equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived monoidal functor tensor comparison equation on cochain complexes with localization counits",
+   "results": "Eight hits; none states this cochain tensor/counit equation. The repository provides the homotopy equation and proved quotient transport helpers.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; reuse the existing library equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedTensorComparison\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "The needed comparison API is in the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison.*counit",
+   "results": "msearch grep: 0 hits. Local repository search finds leftDerivedTensorComparison_app_app_comp_tensorHom and the right-exact tensor comparison transport helpers.",
+   "date": "2026-10-27",
+   "verdict": "Use the recorded repository declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientTensorLeftFlatComputation",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sfb-quotient-tensor-left-flat-computation",
+   "place": "Proof step 2: the geometric tensor/counit calculation on cochain representatives.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientTensorPullCounit",
+  "file": "lean/Sheaf/Paper/QuotientTensorPullCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.pull_tensor_counit",
+  "statement": "theorem pull_tensor_counit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P Q : CochainComplex (Modules R Y) ℤ) :\n    (L R f).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫\n        IntegralQuotient.computePull f (P ⊗ Q) ≫\n        DerivedCategory.Q.map (totalPull f R P Q) =\n      ((CondensedRing.leftDerivedUpperStarTensor R f).app\n        (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj Q) ≫\n        (IntegralQuotient.computePull f P ⊗ₘ IntegralQuotient.computePull f Q) ≫\n        Functor.LaxMonoidal.μ DerivedCategory.Q\n          ((pullComplex f R).obj P) ((pullComplex f R).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T112330-L-1571776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T112330-L-1571776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

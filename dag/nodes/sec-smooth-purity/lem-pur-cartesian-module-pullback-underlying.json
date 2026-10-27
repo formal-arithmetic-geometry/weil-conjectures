@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-cartesian-module-pullback-underlying",
+ "kind": "statement",
+ "title": "Underlying geometric inverse image for an invertible structural ring map",
+ "statement": "Let f be a geometric morphism of small ringed topoi with commutative sheaf rings R and S and invertible structural ring map. If P is any left adjoint of the specified induced module direct image f.modules, there is a natural isomorphism P followed by the underlying-sheaf functor to the geometric inverse image of underlying sheaves. Under this isomorphism the supplied module adjunction Hom equivalence is the supplied geometric Hom equivalence. The precise normalization is the Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D1--03D3, module inverse image and its adjunction; uniqueness of left adjoints."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-topos-induced-modules"
+ ],
+ "proof": [
+  {
+   "text": "Lift the sectionwise commutative rings to commutative ring sheaves. Transport their additive and scalar operations through the invertible structural ring map. The geometric module construction and its algebraic inverse-image realization provide a module inverse image whose underlying sheaf functor is geometric inverse image. Construct its adjunction using the normalized geometric Hom equivalence. Uniqueness of left adjoints gives the natural isomorphism from P. The unit equation for the unique comparison proves the displayed normalization for every module map.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction",
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-weil-pbc-algebraic-inverse-image-of-module-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-algebraic-inverse-image-of-module-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D1--03D3; direct construction and uniqueness of left adjoints."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationAdjunctionNormalization",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; Proof step 5: ordinary inverse-image evaluation isomorphism and mate normalization.",
+   "via": [
+    "lem-pur-algebra-diagram-evaluation-adjunction-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartesianModulePullbackUnderlying",
+  "file": "lean/Sheaf/CategoryTheory/CartesianModulePullbackUnderlying.lean",
+  "declaration": "CategoryTheory.cartesianModulePullbackUnderlying",
+  "statement": "theorem cartesianModulePullbackUnderlying\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {K : GrothendieckTopology C} {L : GrothendieckTopology D}\n    {R : Sheaf K RingCat.{u}} {S : Sheaf L RingCat.{u}}\n    (hR : ∀ U (a b : R.obj.obj U), a * b = b * a)\n    (hS : ∀ U (a b : S.obj.obj U), a * b = b * a)\n    (f : RingedToposMorphism R S) [IsIso f.ringMap]\n    (P : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) (adj : P ⊣ f.modules) :\n    ∃ e : P ⋙ diagramCoefficientUnderlying R ≅ diagramCoefficientUnderlying S ⋙ f.inverse,\n      ∀ M H (a : P.obj M ⟶ H),\n        (diagramCoefficientUnderlying S).map (adj.homEquiv M H a) ≫ f.underlying.hom.app H =\n          f.adj.homEquiv _ _ (e.inv.app M ≫ (diagramCoefficientUnderlying R).map a)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "underlying sheaf of module inverse image with isomorphic structural ring map",
+   "results": "Search submitted through msearch; ordinary uniqueness of left adjoints does not construct the normalized module inverse image.",
+   "date": "2026-10-25",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq; unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-25",
+   "verdict": "used for comparison after constructing the module adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "ringUnderlying|leftAdjointUniq",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-25",
+   "verdict": "ordinary site pullback and uniqueness, no normalized geometric module statement"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "independent cc review: dda572889e4d vs passed delivery 983832b9a42f (diff -r: only module/node rename + one local irreducible attr) and vs clone original module/node (Defs interface line-diffed; item node field-diffed: only lean/proof/proof_deps/proof_origin); 0 importers by grep"
+ }
+}

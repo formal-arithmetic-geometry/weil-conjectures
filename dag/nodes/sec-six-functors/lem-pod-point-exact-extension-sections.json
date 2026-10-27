@@ -1,0 +1,273 @@
+{
+ "id": "lem-pod-point-exact-extension-sections",
+ "kind": "statement",
+ "title": "Exact completed extension and sections adjunction at a point",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$ and use its small pro-etale site [def-weil-pbc-proetale-site]. Let $(R,B)$ be either $(A_{E,n},(A_{E,n})_s)$, where $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, or $(\\mathcal O_E,\\widehat{\\mathcal O}_{E,s})$, using the constant and completed coefficient sheaves [def-weil-pbc-constant-sheaf, def-weil-completed-integral-coefficients]. For an arbitrary $R$-module $M$, let $\\underline M$ be its constant module sheaf [def-sf-site-constant-module-functor] and define $L_RM=B\\otimes_{\\underline R}\\underline M$ by sheaf tensor product [def-pur-sheaf-tensor-product]. Then $L_R:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(B)$ and $\\Gamma_s:F\\mapsto F(s)$ are exact, and the constant-value map $R\\to\\Gamma_s B$ is an isomorphism of rings. There is a natural adjunction\n$$\\operatorname{Hom}_B(L_RM,F)\\cong\\operatorname{Hom}_R(M,\\Gamma_s F)$$\nfor all $M$ and all $B$-module sheaves $F$ [def-weil-sheaf-of-modules-category]. It sends $h$ to $m\\mapsto h_s(1\\otimes m)$; the inverse sends $t:M\\to F(s)$ to the sheaf map whose local rule over $U$ is $b\\otimes m\\mapsto b\\,t(m)|_U$. Applied termwise to complexes, these rules commute with the differentials and identify chain maps and chain homotopies. No constructibility or finite-generation hypothesis is imposed on $M$ or $F$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EI (lemma-sheafification-exact) and 093M (lemma-completion-flat), specialized to the completed point coefficients; explicit extension/sections adjunction from the second sentence of the main-20261015 point-duality proof (agent elaboration)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-site-constant-module-functor",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pod-point-derived-hom-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pod-integral-point-coefficient-adjunction] to the given finite-field datum and coefficient extension. It supplies the exact integral extension functor with exactly the published objects and maps, exact integral sections, the normalized ordinary adjunction, and both integral and finite constant-value bijections. For finite coefficients write n=m+1 using n>=1 to match its finite index. The remaining work is finite extension and the componentwise complex and homotopy equivalences.",
+   "uses": [
+    "lem-pod-integral-point-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03EI and 03EK; universal properties and exact module sheafification"
+   }
+  },
+  {
+   "text": "Construct the Hom equivalence from constant module presheaves to a module presheaf by evaluation at the final object. Its inverse restricts a final-object section along the unique structure map to each object; naturality and finality prove the inverse identities. Compose with the module sheafification Hom equivalence [def-weil-presheaf-modules-sheafification] for the constant-module construction [def-sf-site-constant-module-functor]. Compose the resulting adjunction with the proved sheafified tensor/restriction adjunction used in [lem-pur-sheaf-ring-coefficient-ordinary-adjunction]. Scalar restriction followed by point sections agrees with the published sections functor. This gives the adjunction for the prescribed extension objects and maps. Its forward rule is evaluation on 1 tensor m. For the inverse rule, naturality gives the formula on 1 tensor m over every object and B-linearity gives the formula on b tensor m.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-sf-site-constant-module-functor",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03EI and 03EK; universal properties and exact module sheafification"
+   }
+  },
+  {
+   "text": "Constant module presheaves preserve finite limits and finite colimits objectwise. Exact module sheafification [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] therefore makes the published constant module functor exact. At finite level the coefficient map is the identity of the constant ring sheaf. Restriction along that identity has its tautological natural isomorphism to the identity functor. Transport the tensor adjunction of step 2 through this isomorphism; uniqueness of left adjoints identifies its tensor functor with the identity. Hence finite extension, the composite of constant modules and that tensor functor, is exact.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-sf-site-constant-module-functor",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03EI and 03EK; universal properties and exact module sheafification"
+   }
+  },
+  {
+   "text": "The algebraic closure in the finite-field datum is algebraically closed. Apply the arbitrary-module exact sections clause of [lem-weil-point-proetale-sections-exact] to the finite coefficient sheaf. Compose its final-object evaluation with restriction along the constant-value scalar map. Restriction preserves finite limits and colimits, giving the required exact finite sections functor.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03EI and 03EK; universal properties and exact module sheafification"
+   }
+  },
+  {
+   "text": "For either exact ordinary adjunction, use Adjunction.mapHomologicalComplex from the source library to obtain the equivalence on unbounded cochain maps. Its degree-i component is definitionally the ordinary Hom equivalence. Given an actual homotopy H, apply the ordinary Hom equivalence to H.hom i j in every pair of degrees. Additivity sends sums to sums, and its two naturality laws carry the two differential composites to the corresponding composites. Thus the homotopy equation and the off-shape zero condition hold. The inverse ordinary Hom equivalence gives the inverse homotopy construction, and the inverse identities hold componentwise. Package these witnesses together with exactness, the constant-value bijection, and the ordinary adjunction into ExactExtensionSections. No boundedness or finiteness assumption enters.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03EI and 03EK; universal properties and exact module sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-integral-point-coefficient-adjunction",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sf-site-constant-module-functor",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "K9 stage 3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Reuse lem-pod-integral-point-coefficient-adjunction for integral coefficients and the scalar bijections. Finite case: Tags 03CY, 03EI and 03EK, with identity tensor identified by adjoint uniqueness. Complex and actual homotopy comparison: additive adjunction applied degreewise, using WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact extension of constant modules to completed coefficient sheaves on a geometric point left adjoint to global sections and coefficient ring sections",
+   "results": "Profinite.NobelingProof.succ_exact; CondensedMod.LocallyConstant.adjunction; LightCondensed.freeForgetAdjunction; LightCondMod.LocallyConstant.adjunction; Condensed.freeForgetAdjunction; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf adjunction, algebraic completion or localization; does not identify the concrete completed point functors and comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[cC]onstant|[cC]onstant.*[sS]ections|globalSections.*[aA]djunction",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean; Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf adjunction, algebraic completion or localization; does not identify the concrete completed point functors and comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed constant coefficient sheaf at algebraically closed point exact scalar extension global sections adjunction",
+   "results": "CategoryTheory.constantSheafΓAdj; stalkSkyscraperSheafAdjunction; CategoryTheory.constantSheafAdj; CategoryTheory.Sheaf.Γ; CategoryTheory.HasGlobalSectionsFunctor; CategoryTheory.Sheaf.ΓHomEquiv; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'; CategoryTheory.Sheaf.coneΓ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf adjunction, algebraic completion or localization; does not identify the concrete completed point functors and comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction, CategoryTheory.globalSectionsFunctor",
+   "results": "; loogle: unknown identifier 'CategoryTheory.globalSectionsFunctor'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf adjunction, algebraic completion or localization; does not identify the concrete completed point functors and comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant module extension to an adically completed coefficient sheaf is exact and adjoint to evaluation on an algebraically closed point",
+   "results": "AdicCompletion.eval_of; CondensedMod.LocallyConstant.adjunction; AdicCompletion.map_exact; LightCondMod.LocallyConstant.adjunction; AdicCompletion.eval_apply; AdicCompletion.eval_comp_of; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AdicCompletion.factor_eval_eq_evalₐ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf adjunction, algebraic completion or localization; does not identify the concrete completed point functors and comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "pointExactExtensionSections|pointHomRationalDescent|completed.*constantSheaf",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf adjunction, algebraic completion or localization; does not identify the concrete completed point functors and comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars from constant module sheaves to completed coefficients is exact and left adjoint to global sections on a geometric point",
+   "results": "CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; Condensed.freeForgetAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; LightCondensed.freeForgetAdjunction; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CondensedMod.LocallyConstant.functor; Condensed.free",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf and algebraic scalar adjunctions do not state exactness and ring-section normalization for these completed pro-etale point coefficients; ordinary ring adic completion flatness is not flatness of the inverse-limit constant sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafΓAdj|extendScalars.*Adj|preservesFiniteLimits.*constantSheaf",
+   "results": "Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean; Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf and algebraic scalar adjunctions do not state exactness and ring-section normalization for these completed pro-etale point coefficients; ordinary ring adic completion flatness is not flatness of the inverse-limit constant sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact constant sheaf module scalar extension global sections adjunction",
+   "results": "CategoryTheory.constantSheafΓAdj; SheafOfModules.PullbackConstruction.adjunction; ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj; CategoryTheory.Sheaf.Γ; PresheafOfModules.sheafificationAdjunction; CategoryTheory.constantSheafAdj; CategoryTheory.HasGlobalSectionsFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf and algebraic scalar adjunctions do not state exactness and ring-section normalization for these completed pro-etale point coefficients; ordinary ring adic completion flatness is not flatness of the inverse-limit constant sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheafΓAdj",
+   "results": "CategoryTheory.constantSheafΓAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf and algebraic scalar adjunctions do not state exactness and ring-section normalization for these completed pro-etale point coefficients; ordinary ring adic completion flatness is not flatness of the inverse-limit constant sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat adic completion of constant ring sheaf gives exact functor from arbitrary modules to sheaf modules and evaluation adjunction",
+   "results": "AdicCompletion.flat_of_isNoetherian; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; comonadicExtendScalars; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.IsSolid; LightCondensed.freeForgetAdjunction; Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf and algebraic scalar adjunctions do not state exactness and ring-section normalization for these completed pro-etale point coefficients; ordinary ring adic completion flatness is not flatness of the inverse-limit constant sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*flat|flat.*completion|constantSheaf.*[Ee]xact|pointExactExtensionSections",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/Smooth/Flat.lean; Mathlib/RingTheory/Smooth/Flat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic constant sheaf and algebraic scalar adjunctions do not state exactness and ring-section normalization for these completed pro-etale point coefficients; ordinary ring adic completion flatness is not flatness of the inverse-limit constant sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-dualizing-complex",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; returned proof step 3, establishment of the exact extension/sections adjunction",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-point-exact-extension-sections",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing exact sheafification, completed flatness, exact point sections and normalized continuous coefficient sections. Gave both explicit adjunction maps, inverse and naturality checks, and the degreewise chain-map and homotopy equations. No new nodes.",
+  "blueprint": "Second sentence of the proof of lem-pod-point-dualizing-complex, specifically computation over the point coefficient ring; supplies its exact extension/sections adjunction without constructibility restrictions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Foundational coefficient/site tool used only for the DVR Noetherian and finite-residue hypotheses. No theorem of this unit supplies this foundational fact; the point-duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Foundational coefficient/site tool used only for flatness of the completed constant coefficient sheaf. No theorem of this unit supplies this foundational fact; the point-duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Foundational coefficient/site tool used only for exact sections for arbitrary modules over the actual point ring sheaf. No theorem of this unit supplies this foundational fact; the point-duality route is unchanged."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Foundational coefficient/site tool used only for the normalized finite constant-section identification. No theorem of this unit supplies this foundational fact; the point-duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Foundational coefficient/site tool used only for the integral inverse-limit/continuous-functions identification. No theorem of this unit supplies this foundational fact; the point-duality route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-23e2ae44b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-23e2ae44b (reviewer sub-agent of L); spot-checked: PASS: the delivery is correct and needs no fixes. Read in full: the item, all 6 steps, the 17 cited statements, Stacks 03EI/093M/03CY/03EK and proetale 0982/098H, BS 4.2.11/4.2.12/6.8.2(1), and blueprint main-20261015 lem-pod-point-dualizing-complex. Shape: one commit, item and report only, no new nodes. The statement is unchanged and is still unsplit live and side-live, so nothing supersedes it. There is no repair note and no SGA citation. S1: the constant-module construction M -> M_ is exact, by the exact sheafification Mathlib leaf plus the underlying-sheaf clause of the constant-module definition. S2: L_R is exact. At finite level the multiplication map b(x)x -> bx is an isomorphism. Integrally O_E is a PID, hence Noetherian, and completed-constant-sheaf-reduction with T=s, A=O_E, I=(varpi) gives flatness of exactly the inverse-limit sheaf of def-weil-completed-integral-coefficients (same site and same constant sheaf). S3: point sections on the small site are exact for every ring sheaf, since k=Fbar_q is algebraically closed; restricting scalars to R keeps exactness. S4: finite level uses finite quotients plus finite-constant-sections at X=V=s, a ring isomorphism normalized on constants. Integrally s is Noetherian and the continuous-coefficients node identifies B(s) with continuous O_E-valued functions on a point. Its 'canonical' isomorphism is the reduction map (BS 6.8.2(1) proof: Map_cont(S,O_E)=lim Map_cont(S,O_E/varpi^n)), so it is compatible with constants and R->B(s) is a ring isomorphism. S5: checked the adjunction construction line by line. The map g_t is R_-linear by uniqueness of the extended action; (b,x)->b g_t(x) is balanced; both inverse checks hold via sheafification uniqueness and B-linearity; naturality is explicit. S6: chain maps and homotopies are identified degree by degree with only adjacent terms, so unbounded complexes are fine. Edge cases checked: M=0, F=0, n=1, infinite M, F(s)=0 (no conservativity is claimed). Duplicate search: def-pod-point-derived-hom-models and the A8 adjunction/sheaf-hom-maps lemmas assume the adjunction formula rather than prove it, so neither duplicates the item. Route: the only off-unit citation is lem-pur-proetale-finite-constant-sections (sk-prop-a1-kummer), used as a black-box tool. The other cited nodes are in units the unit cites. All 5 declared tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointExactExtensionSections",
+  "declaration": "WeilConjectures.PointDerivedHom.point_exact_extension_sections",
+  "declarations": [
+   "WeilConjectures.PointDerivedHom.ExactExtensionSections",
+   "WeilConjectures.PointDerivedHom.point_exact_extension_sections"
+  ],
+  "file": "lean/Sheaf/Paper/PointExactExtensionSections.lean",
+  "statement": "theorem point_exact_extension_sections (D : FiniteFieldDatum.{t}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) (integral : Bool) : ExactExtensionSections.{t, u} D.k (coefficientSheaf.{t, u} D.k l E n integral) (coefficientMap.{t, u} D.k l E n integral)",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed PointDerivedHomModels constructions; the predicate bundles exactness, the normalized ordinary adjunction, and componentwise equivalences of chain maps and actual chain homotopies. Site and coefficient universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2e00d3b1",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read item node, all 9 stmt_dep records, the Lean module and the PointDerivedHomModels declarations used. Hypotheses match exactly (l≠p, 1≤n, finite E, independent universes t/u). integral:Bool covers both (R,B) pairs: constant O_E/ϖ^n (no index shift) and the recorded completed sheaf with integralConstantToCompletionOfUniverses. L pinned on objects and maps to changeOfRings of the constant module sheaf. Conclusion: L and Γ_s exact, constant-value map at the point bijective, adjunction pinned by ExplicitAdjunction (both local formulas), degreewise equivalences of chain maps and actual Homotopy types for unbounded complexes. No finiteness or constructibility hypothesis. Added stmt_dep def-pod-point-derived-hom-models is landed and acyclic (BFS over 1329 prerequisites). Statement verbatim; imports per rule 7; docstrings and proof plan present; single sorry. H4: point-duality siblings assume the adjunction, extension_existsUnique only gives the functor, so no duplicate. Citer lem-pod-point-integral-evaluation-normalization uses exactly these clauses. Advisory: the second-reading section is a self-check under direct-delivery mode."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261024T190258-L-4013162",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

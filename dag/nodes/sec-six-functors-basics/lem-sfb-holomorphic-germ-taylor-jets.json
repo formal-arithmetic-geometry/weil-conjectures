@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-holomorphic-germ-taylor-jets",
+ "kind": "statement",
+ "title": "Finite Taylor jets of holomorphic germs",
+ "statement": "For an integer $d\\geq0$, let $G_d$ be the commutative $\\mathbf C$-algebra of germs at $0\\in\\mathbf C^d$ of holomorphic complex-valued functions: representatives are functions on open neighbourhoods of $0$, and two representatives agree when they agree on some smaller open neighbourhood. Holomorphic means locally representable by a convergent complex power series; operations and scalar multiplication are pointwise [lem-sfb-complex-analytic-function-operations]. Let $z_i\\in G_d$ be the coordinate germs, let $\\mathfrak q=\\{g\\in G_d:g(0)=0\\}$, and let $P_d=\\mathbf C[T_1,\\ldots,T_d]$ [def-weil-pbc-mv-polynomial-ring] with $J=(T_1,\\ldots,T_d)$. Then $\\mathfrak q=(z_1,\\ldots,z_d)$, and, for every integer $r\\geq1$, polynomial evaluation $T_i\\mapsto z_i$ induces an isomorphism of $\\mathbf C$-algebras\n$$e_r:P_d/J^r\\xrightarrow{\\sim}G_d/\\mathfrak q^r.$$\nIts inverse sends the class of $g$ to the class of its Taylor polynomial $\\sum_{|\\alpha|<r}(\\partial^\\alpha g)(0)T^\\alpha/\\alpha!$, where $\\alpha\\in\\mathbf N^d$, $|\\alpha|=\\sum_i\\alpha_i$, $\\alpha!=\\prod_i\\alpha_i!$ and $\\partial^\\alpha$ is the iterated coordinate derivative. The maps $e_r$ commute with reduction from exponent $r+1$ to $r$. For $d=0$, $G_0=P_0=\\mathbf C$ and both ideals are zero.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally. Serre GAGA no.4, printed p.6, holomorphic germs identified with convergent series, and no.6 Proposition 3, printed p.10, affine-space completion calculation. Finite-jet formulation is the Taylor-truncation refinement of that calculation; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Also Frenkel, Cartan seminar 1951-52 exp.10, sections 1 and 4 (convergent-series ring)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-complex-analytic-function-operations",
+  "def-sfb-holomorphic-germ-algebra"
+ ],
+ "proof": [
+  {
+   "text": "If $d=0$, the space $\\mathbf C^0$ is a singleton, so a germ is exactly its value in $\\mathbf C$. The polynomial definition gives $P_0=\\mathbf C$ because the only monomial is $1$. Thus $\\mathfrak q=J=0$, every $e_r$ is the identity, and the Taylor polynomial has only its constant term. Henceforth assume $d>0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-holomorphic-coordinate-division] with its number of normal variables equal to $d$ and its number of parameter variables equal to $0$. For every $g\\in G_d$ it gives $g-g(0)=\\sum_{i=1}^d z_i h_i$ with $h_i\\in G_d$. Each $z_i$ vanishes at zero, and every multiple and finite sum of such germs does too. Conversely, if $g(0)=0$, the displayed equality puts $g$ in $(z_1,\\ldots,z_d)$. This proves $\\mathfrak q=(z_1,\\ldots,z_d)$.",
+   "uses": [
+    "lem-sfb-holomorphic-coordinate-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "Iterate that same division finitely. For a word $w=(i_1,\\ldots,i_k)\\in\\{1,\\ldots,d\\}^k$, put $z_w=z_{i_1}\\cdots z_{i_k}$. Induct on $k\\geq1$ to obtain $g=p_k(z)+\\sum_{|w|=k}z_w h_w$, where $p_k\\in P_d$ has only monomials of total degree less than $k$. The base is step 2 with $p_1=g(0)$. For the induction step write $h_w=h_w(0)+\\sum_i z_i h_{w,i}$ by [lem-sfb-holomorphic-coordinate-division], and set $p_{k+1}=p_k+\\sum_{|w|=k}h_w(0)T_{i_1}\\cdots T_{i_k}$. The new remainder is $\\sum_{w,i}z_wz_i h_{w,i}$, as required. All sums are finite. In particular $g-p_r(z)\\in\\mathfrak q^r$.",
+   "uses": [
+    "lem-sfb-holomorphic-coordinate-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "Coordinate derivatives of germs are well-defined: equal representatives on an open neighbourhood have the same difference quotients and hence derivatives there. The first clause of [lem-sfb-complex-analytic-inverse-toolkit] supplies a strict derivative for each analytic representative at each point; setting the second point equal to the base point in its defining estimate gives the ordinary derivative. By [lem-sfb-complex-analytic-derivative-rules] this derivative is analytic on the open domain. Evaluation of a continuous linear map at a fixed coordinate vector is continuous complex-linear, so [lem-sfb-complex-analytic-function-operations] makes each coordinate derivative analytic too. Repetition therefore permits all finite ordered coordinate derivatives. Their sum and product rules and $\\partial_i z_j=\\delta_{ij}$ follow from [lem-sfb-complex-analytic-derivative-rules].",
+   "uses": [
+    "lem-sfb-complex-analytic-inverse-toolkit",
+    "lem-sfb-complex-analytic-derivative-rules",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\mathbf N^d$ and apply $\\alpha_i$ derivatives in coordinate $i$, in a fixed coordinate order. Repeatedly applying the preceding product rule to $z_w h$, with $|w|=r$, gives terms in which $|\\alpha|$ derivatives are distributed among the $r$ coordinate factors and $h$. If $|\\alpha|<r$, some coordinate factor is undifferentiated in each term, so every term vanishes at zero. Step 2 and the definition of an ideal product express every element of $\\mathfrak q^r$ as a finite sum of such $z_w h$: expand the $r$ factors from $\\mathfrak q$ using their coordinate expressions. Thus $\\partial^\\alpha u(0)=0$ for $u\\in\\mathfrak q^r$ and $|\\alpha|<r$. For a monomial $z^\\beta$, the same rules give $\\partial^\\alpha z^\\beta(0)=\\alpha!$ if $\\beta=\\alpha$ and $0$ otherwise. Applying this to step 3 gives $[T^\\alpha]p_r=\\partial^\\alpha g(0)/\\alpha!$ for $|\\alpha|<r$; the factorial is nonzero in $\\mathbf C$.",
+   "uses": [
+    "lem-sfb-complex-analytic-derivative-rules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "From the finite-monomial definition [def-weil-pbc-mv-polynomial-ring], every polynomial $p$ is its sum of monomials of degrees less than $r$ plus its sum of monomials of degrees at least $r$. Every high-degree monomial is divisible by a product of $r$ variables: choose $r$ occurrences from its total list of variable factors. Hence the high-degree part lies in $J^r$. Conversely, expanding a product of $r$ elements of $J$ gives only monomials of degree at least $r$, since each factor is a sum of variable multiples. Thus $p\\in J^r$ exactly when all its coefficients in degrees less than $r$ vanish. In particular every class modulo $J^r$ has a unique representative supported in degrees less than $r$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "The polynomial universal property [def-weil-pbc-mv-polynomial-ring] gives the $\\mathbf C$-algebra map $e:p\\mapsto p(z)$. Step 2 implies $e(J^r)\\subseteq\\mathfrak q^r$, so $[p]\\mapsto[e(p)]$ is well-defined and preserves all algebra operations. Step 3 proves surjectivity. If $e(p)\\in\\mathfrak q^r$, step 5 gives $\\alpha![T^\\alpha]p=0$ for every $|\\alpha|<r$; step 6 then gives $p\\in J^r$. Hence the induced map is injective as well. Its inverse preserves the algebra operations because the bijection does. By steps 3 and 5 its inverse on $[g]$ is precisely the asserted Taylor polynomial class. If $g$ changes by an element of $\\mathfrak q^r$, step 5 shows every coefficient used in this formula is unchanged, proving explicitly that the inverse formula is independent of the germ representative and the quotient representative.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  },
+  {
+   "text": "Reduction from exponent $r+1$ to $r$ sends $[p]$ to $[p]$ on the polynomial side and $[g]$ to $[g]$ on the germ side. Each composite in the desired square therefore sends $[p]$ to $[p(z)]$ modulo $\\mathfrak q^r$, so the square commutes. Equivalently the Taylor polynomials at the two levels differ only by degree-$r$ monomials, which lie in $J^r$ by step 6.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-holomorphic-coordinate-division",
+  "lem-sfb-complex-analytic-inverse-toolkit",
+  "lem-sfb-complex-analytic-derivative-rules",
+  "lem-sfb-complex-analytic-function-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf, no.4 printed p.6 and no.6 Proposition 3 affine-space case printed p.10. Agent-written finite-jet refinement using the existing coordinate-division and analytic-calculus nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Holomorphic germs at the origin of complex finite dimensional space are isomorphic to convergent power series by Taylor expansion",
+   "results": "8 hits: cauchyPowerSeries, Complex.taylorSeries_eq_of_entire, hasFPowerSeriesAt_iff, Complex.hasSum_taylorSeries_of_entire, Complex.taylorSeries_eq_on_emetric_ball, Differentiable.hasFPowerSeriesOnBall, DiffContOnCl.hasFPowerSeriesOnBall, Complex.taylorSeries_eq_on_ball. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every analytic function on complex n space has a unique convergent multivariable Taylor series at the origin",
+   "results": "8 hits: AnalyticAt.hasFPowerSeriesAt, AnalyticOnNhd.hasFTaylorSeriesUpToOn, CPolynomialAt, AnalyticOn.hasFPowerSeriesOnSubball, Complex.hasSum_taylorSeries_on_ball, AnalyticAt, CPolynomialOn, HasFPowerSeriesOnBall.hasSum_iteratedFDeriv. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasFPowerSeriesAt\", \"sum\"",
+   "results": "6 hits: HasFPowerSeriesAt.eventually_hasSum_sub, HasFPowerSeriesAt.eventually_hasSum, HasFPowerSeriesAt.tendsto_partialSum, HasFPowerSeriesAt.isBigO_sub_partialSum_pow, HasFPowerSeriesAt.eventually_hasSum_of_comp, HasFPowerSeriesAt.tendsto_partialSum_prod_of_comp. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "Taylor.*germ|germ.*Taylor|convergentPowerSeries|ConvergentPowerSeries",
+   "results": "0 hits: . Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Holomorphic germs in finitely many complex variables modulo the rth power of the vanishing ideal equal polynomials of total degree less than r via Taylor truncation",
+   "results": "8 hits: PowerSeries.isWeierstrassDivisionAt_iff, PowerSeries.IsWeierstrassDivisorAt.mod', PowerSeries.IsWeierstrassDivisionAt, PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self, PowerSeries.IsWeierstrassDivisorAt.mod, PowerSeries.IsWeierstrassDivision, PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem, PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taylor polynomial induces an isomorphism from analytic germs modulo the power of the maximal ideal to the truncated polynomial ring",
+   "results": "8 hits: Polynomial.taylorEquiv, Polynomial.taylorEquiv_symm, Polynomial.toAlgHom_taylorEquiv, Polynomial.coe_taylorEquiv, Polynomial.taylor, Polynomial.taylor_injective, AnalyticOnNhd.hasFTaylorSeriesUpToOn, Polynomial.taylor_apply. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AnalyticAt\", \"order\"",
+   "results": "12 hits: analyticOrderNatAt_of_not_analyticAt, analyticOrderAt_of_not_analyticAt, AnalyticAt.analyticOrderAt_eq_zero, AnalyticAt.analyticOrderAt_ne_zero, AnalyticAt.analyticOrderAt_sub_eq_one_of_deriv_ne_zero, AnalyticAt.analyticOrderAt_eq_one_of_zero_deriv_ne_zero, AnalyticAt.analyticOrderAt_deriv_add_one, AnalyticAt.analyticOrderAt_comp. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "germ.*(ideal|[Tt]aylor)|[Tt]aylor.*(quotient|ideal)|analytic.*maximalIdeal",
+   "results": "0 hits: . Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Taylor/order statements, general multilinear Taylor expansions and formal-series division do not state finite multivariable holomorphic germ-ring quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "([Tt]aylor.*germ|germ.*[Tt]aylor|[Aa]nalytic.*[Ii]deal|[Hh]olomorphic.*[Qq]uotient)",
+   "results": "{\"t\": \"2026-10-24T02:43:39Z\", \"tool\": \"grep\", \"query\": \"([Tt]aylor.*germ|germ.*[Tt]aylor|[Aa]nalytic.*[Ii]deal|[Hh]olomorphic.*[Qq]uotient)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Complex/OpenMapping.lean\"], \"digest\": \"9702e80fd5a7844f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Holomorphic germs modulo the rth power of their vanishing ideal are isomorphic to polynomials modulo the rth power of the variables ideal",
+   "results": "{\"t\": \"2026-10-24T02:43:40Z\", \"tool\": \"leansearch\", \"query\": \"Holomorphic germs modulo the rth power of their vanishing ideal are isomorphic to polynomials modulo the rth power of the variables ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.polynomialQuotientEquivQuotientPolynomial\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"AdjoinRoot.Polynomial.quotQuotEquivComm\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"AdjoinRoot.quotEquivQuotMap\", \"IsLocalization.Away.mvPolynomialQuotientEquiv.congr_simp\", \"AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot\"], \"digest\": \"9941c039a8fe6706\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AnalyticAt\", \"ideal\"",
+   "results": "{\"t\": \"2026-10-24T02:43:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"AnalyticAt\\\", \\\"ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Taylor jets identify the quotient of holomorphic germs by a power of the maximal ideal with the truncated multivariate polynomial algebra",
+   "results": "{\"t\": \"2026-10-24T02:43:41Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Taylor jets identify the quotient of holomorphic germs by a power of the maximal ideal with the truncated multivariate polynomial algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFiniteFPowerSeriesAt.cpolynomialAt\", \"taylorWithin\", \"HasFTaylorSeriesUpTo.zero_eq'\", \"HasFTaylorSeriesUpTo\", \"CPolynomialAt\", \"HasFTaylorSeriesUpToOn\", \"taylorWithinEval\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\"], \"digest\": \"c61700628e00beb9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "grep",
+   "query": "([Gg]erm.*[Ii]deal|[Ii]deal.*[Gg]erm|[Aa]nalytic.*[Jj]et|[Jj]et.*[Aa]nalytic)",
+   "results": "{\"t\": \"2026-10-24T02:45:07Z\", \"tool\": \"grep\", \"query\": \"([Gg]erm.*[Ii]deal|[Ii]deal.*[Gg]erm|[Aa]nalytic.*[Jj]et|[Jj]et.*[Aa]nalytic)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\"], \"digest\": \"8c960a91bb0f6332\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite jets at the origin of analytic functions of several complex variables have unique polynomial representatives of total degree less than r",
+   "results": "{\"t\": \"2026-10-24T02:45:08Z\", \"tool\": \"leansearch\", \"query\": \"Finite jets at the origin of analytic functions of several complex variables have unique polynomial representatives of total degree less than r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AnalyticOn.hasFTaylorSeriesUpToOn\", \"HasFPowerSeriesWithinOnBall.iteratedFDerivWithin\", \"AnalyticAt.unique_eventuallyEq_zpow_smul_nonzero\", \"HasFiniteFPowerSeriesAt.cpolynomialAt\", \"AnalyticOn.hasFPowerSeriesOnSubball\", \"HasFPowerSeriesAt\", \"CPolynomialAt\", \"AnalyticAt.unique_eventuallyEq_pow_smul_nonzero\"], \"digest\": \"4f898a81735fccdf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T02:45:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.FiniteType.iff_quotient_mvPolynomial\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"MvPolynomial.quotientEquivQuotientMvPolynomial\", \"MvPolynomial.quotient_map_C_eq_zero\", \"MvPolynomial.quotientEquivQuotientMvPolynomial_leftInverse\", \"MvPolynomial.quotientEquivQuotientMvPolynomial_rightInverse\"], \"digest\": \"5db1d35c2d51cb4c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite jet algebra of complex analytic germs at zero is the quotient of a multivariate polynomial ring by the power of its coordinate ideal",
+   "results": "{\"t\": \"2026-10-24T02:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"The finite jet algebra of complex analytic germs at zero is the quotient of a multivariate polynomial ring by the power of its coordinate ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isWeierstrassDivisionAt_zero\", \"PowerSeries.idealX\", \"PowerSeries.HasSubst.ideal\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassDivisionAt\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\"], \"digest\": \"f5d02104e2e726d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Taylor differentiability and polynomial or formal-power-series quotients do not identify holomorphic germ ideal-power quotients; grep hits concern open quotient maps or scheme structure-sheaf germs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-local-completion-comparison",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback. The canonical local completion comparison. Analytic local-coordinate input: Finite Taylor jets of holomorphic germs.",
+   "via": [
+    "lem-sfb-analytic-local-completion-comparison",
+    "lem-sfb-analytic-pullback-exact",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-holomorphic-germ-taylor-jets",
+  "worker": "stage1",
+  "summary": "NI: statement retained verbatim. Reused the existing holomorphic coordinate-division lemma and Mathlib analytic-calculus leaves. Finite iteration of coordinate division constructs the polynomial remainder; repeated product rules identify Taylor coefficients and detect the kernel. Checked zero dimension, exponent one, higher exponents, quotient independence, and reduction compatibility. No new nodes. Serre GAGA read online; absent locally, so the explicit finite-jet refinement is marked agent-written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), GAGA prerequisite chain recorded in blueprint.from.place: the finite analytic coordinate quotients used for the local completion comparison. The inherited null ancestor and via chain are retained; latest blueprint searched for Taylor, holomorphic, and coordinate division; no equivalent blueprint node found."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NI-d0362082b",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-d0362082b (reviewer sub-agent of L); spot-checked: PASS. The 8-step proof is correct and complete, and no fixes are written. The delivery is one commit with the item and its report; it adds no new nodes and there is no repair note for this item. The statement is unchanged and matches what the parent lem-sfb-analytic-local-completion-comparison uses in its steps 3-4. Step 2 applies lem-sfb-holomorphic-coordinate-division (on base, same unit) with parameter dimension 0, which its statement allows; this gives q=(z_i). Step 3 iterates that division finitely; I checked the base case and that each update adds only monomials of degree k. Step 4 gets derivatives from clause (1) of the inverse toolkit; derivative-rules makes Df analytic on the open domain and function-operations makes each coordinate derivative analytic. Step 5 applies the Leibniz rule to z_w h with |w|=r and |α|<r, and computes ∂^α z^β(0)=α!δ. It fixes the order of the partial derivatives, so the item's ∂^α is order-independent without a Schwarz lemma. Steps 6-8 cover the monomial description of J^r, injectivity and surjectivity, the Taylor inverse with its independence of representatives, and compatibility with reduction. I tested d=0; d=1 with r=1 and r=2 (e^z gives 1+T); d=2, r=3 with z1z2 and z1^2; and a monomial of degree exactly r. All agree with the statement. Serre GAGA no.4 and no.6 Prop 3 are absent from literature/ and correctly recorded as WANTED, with proof_origin agent; no SGA is cited. A DAG search for holomorphic/germ/Taylor finds no duplicate: weierstrass-division, rp-taylor-sum-on-disc, monomial-local-completion and trf-etale-chart-taylor-iso state different results. All cited nodes are in the item's unit apart from the generic polynomial-ring leaf, so no tool_uses are needed. Delivery-errors A-F have no failures."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.HolomorphicGermTaylorJets",
+  "declaration": "Complex.holomorphic_germ_taylor_jets",
+  "declarations": [
+   "Complex.holomorphicJetPolynomialIdeal",
+   "Complex.orderedCoordinateDerivative",
+   "Complex.holomorphicTaylorPolynomial",
+   "Complex.holomorphic_germ_taylor_jets"
+  ],
+  "file": "lean/Sheaf/Analysis/Complex/HolomorphicGermTaylorJets.lean",
+  "statement": "theorem holomorphic_germ_taylor_jets (d : ℕ) : holomorphicGermVanishingIdeal d = Ideal.span (Set.range (holomorphicGermCoordinate d)) ∧ (∃ e : (r : ℕ) → 1 ≤ r → (MvPolynomial (Fin d) ℂ ⧸ holomorphicJetPolynomialIdeal d ^ r) ≃ₐ[ℂ] (HolomorphicGerm d ⧸ holomorphicGermVanishingIdeal d ^ r), (∀ (r : ℕ) (hr : 1 ≤ r) (p : MvPolynomial (Fin d) ℂ), e r hr (Ideal.Quotient.mk _ p) = Ideal.Quotient.mk _ (MvPolynomial.aeval (holomorphicGermCoordinate d) p)) ∧ (∀ (r : ℕ) (hr : 1 ≤ r) (f : analyticAtZeroSubalgebra d), (e r hr).symm (Ideal.Quotient.mk _ (holomorphicGermMk d f)) = Ideal.Quotient.mk _ (holomorphicTaylorPolynomial d r f)) ∧ (∀ (r : ℕ) (hr : 1 ≤ r) (x : MvPolynomial (Fin d) ℂ ⧸ holomorphicJetPolynomialIdeal d ^ (r + 1)), Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ r)) (e (r + 1) (Nat.le_trans hr (Nat.le_succ r)) x) = e r hr (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ r)) x))) ∧ (d = 0 → (∃ eg : HolomorphicGerm d ≃ₐ[ℂ] ℂ, ∀ f : analyticAtZeroSubalgebra d, eg (holomorphicGermMk d f) = f.val 0) ∧ (∃ ep : MvPolynomial (Fin d) ℂ ≃ₐ[ℂ] ℂ, ∀ p : MvPolynomial (Fin d) ℂ, ep p = MvPolynomial.constantCoeff p) ∧ holomorphicGermVanishingIdeal d = ⊥ ∧ holomorphicJetPolynomialIdeal d = ⊥)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c68065bf9",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item Complex.holomorphic_germ_taylor_jets matches every clause of the node: q = span of the coordinate germs; for r≥1 a family of ℂ-algebra isos P/J^r ≃ G/q^r fixed on every class as aeval at the coordinates; inverse fixed on every analytic representative as the Taylor polynomial (each multi-index of total degree < r listed once; iterated fderiv in fixed coordinate order gives the true derivatives at 0); reduction square via Ideal.Quotient.factor (pow_le_pow_right (le_succ r)), direction r+1→r correct; d=0 handled by fixed equivalences to ℂ and q=J=⊥. New def node def-sfb-holomorphic-germ-algebra is real data (AnalyticAt-at-0 subalgebra modulo kernel of the Filter.Germ map; evaluation; coordinates; vanishing ideal), not hollow, and not a duplicate (searched side-live dag/lean and Mathlib). lean.statement is verbatim in both files, all declarations exist, stmt_deps are on base or delivered here, the only sorry is the item theorem with the full 8-step docstring, docstrings carry source places and blueprint tags, no universes, no extra hypotheses. Report has Worker report and Second reading by NC (done by the same worker, as it says; noted, not blocking). No compile run, no files changed."
+ }
+}

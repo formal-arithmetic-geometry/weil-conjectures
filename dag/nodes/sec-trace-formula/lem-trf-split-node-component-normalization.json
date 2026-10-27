@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-split-node-component-normalization",
+ "kind": "statement",
+ "title": "Completed normalization branches and component ideals at a split node",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure]. Let $(A,\\mathfrak m)$ be a reduced local $k$-algebra (no nonzero nilpotents), essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra], of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring], with a fixed isomorphism $\\widehat A\\cong R:=k[[u,v]]/(uv)$ of complete local $k$-algebras. Completions are maximal-ideal-adic [def-weil-pbc-adic-completion] and formal power series are [def-weil-pbc-multivariate-power-series]. For any reduced ring $E$, write $Q(E)$ for its localization at all non-zero-divisors, where $s$ is a non-zero-divisor when $se=0$ implies $e=0$, and let $\\widetilde E$ be its integral closure in $Q(E)$ [def-weil-pbc-integral-closure].\nThe map $R\\to N:=k[[u]]\\times k[[v]]$ is $h\\mapsto(h(u,0),h(0,v))$. Its image is the pairs having equal constant term, $N=R+R(1,0)$ is finite integral over $R$, $Q(R)=k((u))\\times k((v))$, and $\\widetilde R=N$. Here $k((u))$ and $k((v))$ are the fraction fields of the indicated one-variable power-series domains.\nPut $D=\\widetilde A$. Then $D$ is finite over $A$, and $D\\otimes_A\\widehat A\\cong N$ compatibly with $A\\to\\widehat A$. There are exactly two maximal ideals $\\mathfrak n_u,\\mathfrak n_v$ of $D$ over $\\mathfrak m$, both with residue field $k$, and the completed maps $\\widehat A\\to\\widehat{D_{\\mathfrak n_u}},\\widehat{D_{\\mathfrak n_v}}$ are, respectively, $u\\mapsto t,v\\mapsto0$ and $u\\mapsto0,v\\mapsto t$ into $k[[t]]$.\nFor each minimal prime $P$ of $A$ (a prime minimal among prime ideals), put $D_P=\\widetilde{A/P}$. There are compatible identifications $Q(A)=\\prod_P\\operatorname{Frac}(A/P)$ and $D=\\prod_PD_P$; on scheme affine charts these identifications commute with localization [def-weil-pbc-localization-at-prime]. Under $\\widehat A=R$, the completed quotient is $\\widehat{A/P}=R/P\\widehat A$, and exactly one of the following occurs: $A$ is a domain, $P=0$ is its only minimal prime and $P\\widehat A=0$; or $A$ has exactly two minimal primes whose extended ideals are $(u)$ and $(v)$. In the first case both normalization points belong to that component; in the second case each belongs to a different component, with exactly one point on each $\\operatorname{Spec}D_P$ over $\\mathfrak m/P$. Thus the completions of the reduced components are respectively $R$, or the two rings $k[[u]]$ and $k[[v]]$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBW (lemma-split-node), Remark trivial-quadratic-extension, and Tag 0E38 (lemma-closed-subscheme-nodal-curve), together with varieties.tex Tag 0C3V (lemma-normalization-same-after-completion). Explicit local algebra formulation of the old proof."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=W^{-1}B$ with $B$ a finite-type $k$-algebra, as permitted by the hypothesis. A field is Noetherian since its only ideals are zero and the whole field. The finite-type and localization Noetherian permanence statements therefore make $A$ Noetherian. All subsequent Noetherian local completion results apply to $(A,\\mathfrak m)$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Apply the formal-node axes calculation to the fixed presentation of $R$. It gives the injective axis map, identifies $R$ with its equal-constant-term image $S\\subset N$, and identifies $Q(R)$ with $k((u))\\times k((v))$ compatibly with the inclusions of $R$ and $N$. The equal-constant normalization theorem, applied to this $S$ inside $L=k((u))\\times k((v))$, says that $N=S+S\\epsilon$ with $\\epsilon=(1,0)$, so $N=R+R(1,0)$ is finite over $R$, and that the integral closure of $S$ in $L$ is exactly $N$; in particular $N$ is integral over $R$. Transporting through the two compatible identifications gives $\\widetilde R=N$ inside the specified total fraction ring, with the specified structural map.",
+   "uses": [
+    "lem-trf-formal-node-axes-total-fractions",
+    "lem-trf-equal-constant-normalization-residue-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I."
+   }
+  },
+  {
+   "text": "The normalization-completion theorem applies directly to the reduced, essentially finite-type, one-dimensional local $k$-algebra $A$. It makes $D$ finite over $A$ and canonically identifies $C:=D\\otimes_A R$ with $\\widetilde R=N$, compatibly with $A\\to R$ and the inclusions into total fraction rings. The finite-algebra Noetherian theorem makes $D$ Noetherian. Every maximal ideal of $D$ lies over $\\mathfrak m$ by the finite-algebra local-radical statement. Conversely a prime $\\mathfrak q$ of $D$ over $\\mathfrak m$ is maximal: $D/\\mathfrak q$ is a domain that is a finite-dimensional vector space over the field $A/\\mathfrak m$, and multiplication by a nonzero element is an injective, hence surjective, linear endomorphism. So the primes of $D$ over $\\mathfrak m$ are exactly its maximal ideals. The finite-extension completion theorem, applied with base prime $\\mathfrak m$, now gives\n$$N=C=\\prod_{\\mathfrak n\\mid\\mathfrak m}\\widehat{D_{\\mathfrak n}}$$\nas $R$-algebras. The factors are nonzero local rings, and their residue fields are those of $D_{\\mathfrak n}$, by the local-completion local-ring theorem, since localizations of the Noetherian ring $D$ are Noetherian.",
+   "uses": [
+    "lem-trf-curve-normalization-completion",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3V (lemma-normalization-same-after-completion); algebra.tex Tags 00FN, 07N9 (lemma-completion-finite-extension), 05GI and 05GG."
+   }
+  },
+  {
+   "text": "A local ring has only the idempotents $0,1$: if $a^2=a$, one of $a,1-a$ is a unit and forces the other to be zero. Consequently a finite product of nonzero local rings has one primitive idempotent for each factor. The displayed $N=k[[u]]\\times k[[v]]$ has precisely two such idempotents $(1,0),(0,1)$, so the preceding product has exactly two factors. Label the corresponding ideals $\\mathfrak n_u,\\mathfrak n_v$ so that projection to their completed local rings is projection to the $u$- and $v$-factor of $N$. The factor isomorphisms are $R$-linear, hence the completed maps send $(u,v)$ to $(t,0)$ and $(0,t)$ respectively. Their residue fields are $k$, so the preceding residue-field comparison gives $D/\\mathfrak n_u=D/\\mathfrak n_v=k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBW (lemma-split-node) and Remark trivial-quadratic-extension; elementary idempotent identification following the preceding completion decomposition."
+   }
+  },
+  {
+   "text": "The reduced-Noetherian total-fractions theorem identifies $Q(A)$ with the finite product of $A_P$ over the minimal primes $P$. Its assertion that $PA_P=0$ identifies $A_P$ with $\\operatorname{Frac}(A/P)$: every nonzero element of $A/P$ is represented by an element outside $P$, which is inverted in $A_P$. Integrality of a tuple over $A$ is equivalent to integrality of its coordinates over $A/P$. Indeed, a monic polynomial over $A$ projects to each quotient; conversely choose a monic annihilating polynomial for each coordinate over $A/P$, lift its coefficients to $A$, and multiply the finitely many lifted polynomials. In each coordinate one factor vanishes. Thus $D=\\prod_P D_P$. Each $D_P$ is finite over $A$, being a direct summand of the finite module $D$, and embeds $A/P$ into its fraction field. The identifications respect localization: on fractions all maps send $a/s$ to the coordinate fractions. Integral closure commutes with localization by the cited localization theorem. Localizing a finite product retains precisely those field factors whose minimal prime misses the multiplicative set; the other factors become zero. Applying the same total-fractions theorem to the reduced Noetherian localized ring identifies these retained factors with its total fractions. This proves the requested compatibility on affine charts.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LX (lemma-total-ring-fractions-no-embedded-points), 00EU (lemma-minimal-prime-reduced-ring), 0307 (lemma-integral-closure-localize), and 00FN."
+   }
+  },
+  {
+   "text": "For each $P$ put $C_P=D_P\\otimes_A R$. These are the factors of $D\\otimes_A R=N$. Each $C_P$ is nonzero: the nonzero finite $A$-algebra $D_P$ has a maximal ideal, all such ideals lie over $\\mathfrak m$, and the finite-extension completion theorem expresses $C_P$ as a nonempty product of completed local rings. These completions are nonzero by the local-completion residue-field assertion (use Noetherian permanence for $D_P$ and its localizations). Let $e_P\\in D$ be the idempotent selecting $D_P$. Its image in $N$ is therefore nonzero. These images are orthogonal and sum to $1$. Since idempotents in each power-series domain are only $0,1$, they partition the two coordinates of $N$ into nonempty subsets. Thus there are either one or two minimal primes. In the one-prime case $A\\hookrightarrow Q(A)=\\operatorname{Frac}(A/P)$ has kernel $P$, so $P=0$ and $A$ is a domain. In the two-prime case the two $C_P$ are exactly the separate factors of $N$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), component-versus-branch argument; algebra.tex Tag 07N9 and the local completion residue-field statements."
+   }
+  },
+  {
+   "text": "It remains to identify the extended component ideals, rather than just count them. The completion map $A\\to R$ is flat by the local faithfully-flat completion theorem. By the definition of flatness, tensoring the injection $A/P\\hookrightarrow D_P$ with $R$ is injective. Since $(A/P)\\otimes_A R=R/PR$ (send $\\bar a\\otimes r$ to $ar$ modulo $PR$), the kernel of $R\\to C_P$ is exactly $PR$. If there are two minimal primes, the preceding coordinate partition identifies these kernels as $(v)$ for the $u$-factor and $(u)$ for the $v$-factor. If there is one prime it is zero, so its extended ideal is zero. The local-completion quotient theorem applied to $A\\twoheadrightarrow A/P$ identifies $\\widehat{A/P}=R/PR$ with its actual completed quotient map. These are consequently $R$ in the domain case, and $k[[u]],k[[v]]$ in the two-component case.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), completed quotient maps; algebra.tex Tags 00MC (lemma-completion-faithfully-flat), 00HB (definition-flat), 00MA (lemma-completion-tensor)."
+   }
+  },
+  {
+   "text": "Finally the factor $D_P=e_PD$ corresponds on spectra to the component selected by $e_P$. The completed normalization point indexed by a coordinate belongs to this factor exactly when the image of $e_P$ in that coordinate is $1$: modulo the corresponding maximal ideal this idempotent has the same value, since the completion map preserves residue fields. With one $P$ its image is $(1,1)$, so both points belong to that component. With two $P$ the images are $(1,0)$ and $(0,1)$, so each component has exactly one of the two normalization points. A maximal ideal of any $D_P$ over $\\mathfrak m/P$ gives, by projection $D\\to D_P$, a maximal ideal of $D$ over $\\mathfrak m$, and conversely. The preceding exhaustive list of two points therefore proves also the asserted uniqueness on each component.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve); elementary reading of the component idempotents in the already established completed factor decomposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-formal-node-axes-total-fractions",
+  "lem-trf-equal-constant-normalization-residue-quotient",
+  "lem-trf-curve-normalization-completion",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-local-completion-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4A, 0CBW, 0E38, and varieties.tex Tag 0C3V; explicit component-idempotent and flat-kernel arguments assembled from existing DAG inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of the complete local node k[[u,v]]/(uv) is the product k[[u]] times k[[v]], and the minimal primes of an algebraic nodal curve partition these two completed branches",
+   "results": "{\"t\": \"2026-10-22T06:11:17Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of the complete local node k[[u,v]]/(uv) is the product k[[u]] times k[[v]], and the minimal primes of an algebraic nodal curve partition these two completed branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsMinimal\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\"], \"digest\": \"5efe24755bfdffd1\"}; Integral-closure base change, relative normalization instances, and Weierstrass division do not compute the split-node normalization or assign its two branches to algebraic components.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Prod\"",
+   "results": "{\"t\": \"2026-10-22T06:11:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}; Integral-closure base change, relative normalization instances, and Weierstrass division do not compute the split-node normalization or assign its two branches to algebraic components.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|split.node|normalization.*component|integralClosure.*[Pp]rod|[Pp]rod.*integralClosure",
+   "results": "{\"t\": \"2026-10-22T06:11:02Z\", \"tool\": \"grep\", \"query\": \"nodal|split.node|normalization.*component|integralClosure.*[Pp]rod|[Pp]rod.*integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"ade0a395b1389cee\"}; Integral-closure base change, relative normalization instances, and Weierstrass division do not compute the split-node normalization or assign its two branches to algebraic components.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of a reduced one dimensional local ring with completed local equation xy zero decomposes into two formal branches, either on one component or on two",
+   "results": "{\"t\": \"2026-10-22T06:11:02Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of a reduced one dimensional local ring with completed local equation xy zero decomposes into two formal branches, either on one component or on two\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Service unavailable; no absence conclusion drawn from this call.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completions of the normalization rings over a split ordinary double point are two one variable power series rings; quotient by a minimal prime retains one or both branches",
+   "results": "{\"t\": \"2026-10-22T06:11:21Z\", \"tool\": \"leanfinder\", \"query\": \"The completions of the normalization rings over a split ordinary double point are two one variable power series rings; quotient by a minimal prime retains one or both branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.exists_isWeierstrassDivision\"], \"digest\": \"a5d8e9d714dfda91\"}; Integral-closure base change, relative normalization instances, and Weierstrass division do not compute the split-node normalization or assign its two branches to algebraic components.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a reduced algebraic local nodal curve commutes with completion and its completed minimal prime components partition the two formal branches",
+   "results": "{\"t\": \"2026-10-23T09:25:57Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a reduced algebraic local nodal curve commutes with completion and its completed minimal prime components partition the two formal branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\"], \"digest\": \"31a13a7256d4f41e\"}; No declaration computing this nodal completion and component partition. Power-series, relative-normalization, and almost-integral-closure hits do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|split.node|integralClosure.*[Cc]omplet|[Cc]omplet.*integralClosure",
+   "results": "{\"t\": \"2026-10-23T09:26:45Z\", \"tool\": \"grep\", \"query\": \"nodal|split.node|integralClosure.*[Cc]omplet|[Cc]omplet.*integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/IsIntegral.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean\"], \"digest\": \"1420a8e211ef1b97\"}; No declaration computing this nodal completion and component partition. Power-series, relative-normalization, and almost-integral-closure hits do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of a nodal local algebra after completion is a product of power series rings",
+   "results": "{\"t\": \"2026-10-23T09:26:45Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of a nodal local algebra after completion is a product of power series rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure\", \"integralClosure.isIntegralClosure\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"integralClosure\", \"integralClosure.AlgebraIsIntegral\", \"IsIntegralClosure\", \"integralClosure_le_completeIntegralClosure\", \"instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure\"], \"digest\": \"d9e6e749a7fb1960\"}; No declaration computing this nodal completion and component partition. Power-series, relative-normalization, and almost-integral-closure hits do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-23T09:26:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No declaration computing this nodal completion and component partition. Power-series, relative-normalization, and almost-integral-closure hits do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of a reduced local ring with completion k power series x y modulo xy have extensions zero if irreducible or the two axis ideals if reducible",
+   "results": "{\"t\": \"2026-10-23T09:30:32Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal primes of a reduced local ring with completion k power series x y modulo xy have extensions zero if irreducible or the two axis ideals if reducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.idealX\", \"isReduced_ofLocalizationMaximal\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.span_X_isPrime\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"isStronglyTranscendental_mk_of_mem_minimalPrimes\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\"], \"digest\": \"100e9706af12030f\"}; No declaration computing this nodal completion and component partition. Power-series, relative-normalization, and almost-integral-closure hits do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-normalization-adjunction",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Re-split argument: Old steps 4--6: equal-constant-term normalization, componentwise integral closure and completed branch partition.",
+   "via": [
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-split-node-component-normalization",
+  "worker": "stage1",
+  "summary": "Reused existing formal-node axes and normalization-completion results. Proved finite integral normalization, recovered the two points through completed local factors, and established algebraic-component branch partition with idempotents and flat base-change kernels. No new nodes; no statement changes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Re-split argument: Old steps 4--6: equal-constant-term normalization, componentwise integral closure and completed branch partition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic finite-algebra completion decomposition identifies actual normalization points and completed factors."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic total-fractions product supplies component fraction fields; the unit does not replace this commutative-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic exact quotient-completion theorem identifies the completed reduced component and its structural map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-local-completion-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-48ce14b8e",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-48ce14b8e (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full, every cited statement, Stacks 0C3V (varieties) and 0CBW (curves), and the 0E38 and 0C4A tag labels. The statement is unchanged, there are no new nodes and no SGA is cited. The mathematics is correct. Checked: the decomposition (f,g)=(c,g)+(f-c,f(0)-c)e; the use of 0C3V via lem-trf-curve-normalization-completion with exactly the item's hypotheses; the 07N9 product and the 05GI residue fields; the idempotent count; D=prod D_P by lifting and multiplying monic polynomials; the partition of the images of e_P in k[[u]]xk[[v]] into {(1,1)} or {(1,0),(0,1)}; flatness giving ker(R->C_P)=PR, which is (v) or (u); 00MA for the completion of A/P; and the per-component point count. Edge cases: k[x,y]/(xy), the irreducible nodal cubic, characteristic 2. Two repairs. (1) C5/inline re-proof: step 2 re-proved the existing reviewed same-unit node lem-trf-equal-constant-normalization-residue-quotient (integral closure of S in L is P, P=S+S eps). Step 2 now cites it with the axes node. finite-algebra-is-integral and power-series-normal-domain are dropped, together with the stale tool_uses entry. No cycle. (2) Step 3 used 07N9's primes over m as maximal ideals without saying why. Added that D/q is a finite-dimensional domain over A/m, hence a field. Tool uses accepted as generic sk-thm-p1 algebra: completion-finite-extension, reduced-noetherian-total-ring-fractions, local-completion-quotient.; 1 file(s) fixed by the reviewer"
+ }
+}

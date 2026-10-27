@@ -1,0 +1,270 @@
+{
+ "id": "lem-per-prelog-chart-fs-universal",
+ "kind": "statement",
+ "title": "Universal property of the integral saturated chart construction",
+ "statement": "Let $A$ be a Noetherian commutative ring, $S$ a finitely generated commutative monoid, written additively, and $\\beta:S\\to(A,\\cdot)$ a monoid homomorphism. Use group completion as in [def-trf-fs-log-blowup], put $S^{\\rm int}=\\operatorname{im}(S\\to S^{\\rm gp})$, and put\n$$S^{\\rm fs}=\\{u\\in S^{\\rm gp}:\\exists n>0,\\ nu\\in S^{\\rm int}\\}.$$\nSuppose $S^{\\rm fs}$ is finitely generated. For a commutative monoid $T$, $\\mathbf Z[T]$ is the ring of finite sums of monomials $z^t$, with $z^tz^{t'}=z^{t+t'}$. Set $B=A\\otimes_{\\mathbf Z[S]}\\mathbf Z[S^{\\rm fs}]$ [def-weil-pbc-module-tensor-product], where $z^s\\mapsto\\beta(s)$, and suppose $B$ is Noetherian. Give $C=\\operatorname{Spec}B$ [def-weil-affine-spectrum] the associated log structure of the chart $S^{\\rm fs}\\to B$, $u\\mapsto1\\otimes z^u$, as in [lem-trf-associated-log-universal-stalks]. Then $C$ is an fs log scheme. For every locally Noetherian fs log scheme $(T,M_T)$, composition with $C\\to\\operatorname{Spec}A$ and the chart $S\\to M_C$ gives a natural bijection\n$$\\operatorname{Hom}_{\\log}(T,C)\\simeq\\{(v,\\lambda):v:T\\to\\operatorname{Spec}A\\text{ a scheme map},\\ \\lambda:S\\to\\Gamma(T,M_T)\\text{ a monoid map},\\ \\alpha_T\\lambda=v^\\sharp\\beta\\}.$$\nHere $v^\\sharp$ is the induced map on global regular functions; the scheme $\\operatorname{Spec}A$ in the right hand side carries no specified log structure. Naturality is with respect to fs log morphisms of $T$ and restriction to open subschemes of $\\operatorname{Spec}A$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.1.17, p.101 (saturation); X proof of Theorem 3.5, Step 6, p.164 ((Pint)sat and the chart of the fs product). This universal-property formulation is agent supplied, not a quotation; WANTED Kato, Logarithmic structures of Fontaine--Illusie, section 1, integralization and saturation."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "lem-trf-associated-log-universal-stalks",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=S^{\\rm gp}$ and $P=S^{\\rm fs}$. The image $S^{\\rm int}$ generates $G$ as a group. Every element of $G$ is a difference of elements of this image, so the group completions of $S^{\\rm int}$ and of the intervening submonoid $P\\subset G$ identify with $G$. If $nu$ and $mv$ belong to $S^{\\rm int}$, then $nm(u+v)$ belongs to $S^{\\rm int}$; thus $P$ is a submonoid. If $ku\\in P$ for $k>0$, then $nku\\in S^{\\rm int}$ for some $n>0$, whence $u\\in P$. It follows that $P$ is integral and saturated. Its assumed finite generation makes it fs. All of these checks take place in $G$, allowing torsion.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164; agent-supplied universal-property argument, step 1"
+   }
+  },
+  {
+   "text": "The affine scheme $C=\\operatorname{Spec}B$ is locally Noetherian: the single affine open $C$ has the Noetherian coordinate ring $B$. Apply the associated-log construction to $P\\to B$, $u\\mapsto1\\otimes z^u$. Its geometric stalk is the prescribed pushout of $P$ and local units, so the canonical map from $P$ is a chart in the definition of fs log schemes. Since $P$ is fs by Step 1, this makes $C$ an fs log scheme, including when $B=0$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-affine-spectrum",
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164; agent-supplied universal-property argument, step 2"
+   }
+  },
+  {
+   "text": "Given a pair $(v,\\lambda)$ on the right, put $H=\\Gamma(T,M_T)$. The sections lemma makes $H$ integral and saturated. The map $\\lambda$ extends by the group-completion relations to $\\lambda^{\\rm gp}:G\\to H^{\\rm gp}$. For $u\\in P$ choose $n>0$ with $nu$ the image of some $s\\in S$. Then $n\\lambda^{\\rm gp}(u)=j(\\lambda(s))$, where $j:H\\hookrightarrow H^{\\rm gp}$. Saturation gives $\\lambda^{\\rm gp}(u)\\in j(H)$, and injectivity of $j$ defines a unique $\\widetilde\\lambda(u)\\in H$. The equality in the group completion proves additivity and extension of $\\lambda$. Uniqueness follows since the induced group homomorphism is already fixed on the generators from $S$; it does not require uniqueness of arbitrary $n$th roots in $H$.",
+   "uses": [
+    "lem-per-fs-log-sections-saturated",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164; agent-supplied universal-property argument, step 3"
+   }
+  },
+  {
+   "text": "Write $D=\\Gamma(T,\\mathcal O_T)$ and $\\mu=\\alpha_T\\widetilde\\lambda:P\\to(D,\\cdot)$. Extend $\\mu$ linearly to $\\mathbf Z[P]\\to D$. The formula\n$$r\\!\\left(a\\otimes\\sum_u b_uz^u\\right)=v^\\sharp(a)\\sum_u b_u\\mu(u)$$\nis additive and tensor-balanced because $\\mu(s)=v^\\sharp\\beta(s)$ for $s\\in S$. The module tensor universal property therefore gives $r:B\\to D$. Products of pure monomials are sent to products by additivity of $\\widetilde\\lambda$; $1$ goes to $1$, so $r$ is a ring map. Pure tensors generate, proving uniqueness with these values. The affine-spectrum adjunction for the arbitrary scheme $T$ gives a unique scheme map $f:T\\to C$ inducing $r$. Its composite to $\\operatorname{Spec}A$ is $v$ because both induce $v^\\sharp$ on $A$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164; agent-supplied universal-property argument, step 4"
+   }
+  },
+  {
+   "text": "Step 1 makes $P$ finitely generated and integral, and $\\beta_C:P\\to\\Gamma(C,\\mathcal O_C)$, $u\\mapsto1\\otimes z^u$, is a monoid homomorphism. The logification lemma for finitely generated integral charts gives the log structure $L_C(P,\\beta_C)$ whose geometric stalk at $\\bar c$ is canonically $P\\oplus_{E}\\mathcal O_{C,\\bar c}^\\times$ with $E$ the preimage of the local units; so its canonical map from $P$ is a chart, and the associated-log lemma identifies it, compatibly with $P$, with the log structure $M_C$ of the statement. Step 4 says exactly that $\\alpha_T\\widetilde\\lambda=f^\\sharp\\beta_C$. For the scheme map $a=f:T\\to C$ and $K=M_T$, the bijection of the logification lemma gives a unique homomorphism $f^\\flat:f^{-1}M_C\\to M_T$ compatible with the structural maps and $f^\\sharp$ whose map on $P$ is $\\widetilde\\lambda$, that is, a unique log morphism $F=(f,f^\\flat):T\\to C$ above $f$ with chart-section map $\\widetilde\\lambda$. Its restriction to $S$ is the original $\\lambda$, so this construction is a right inverse to the stated map.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164; agent-supplied universal-property argument, step 5"
+   }
+  },
+  {
+   "text": "Conversely, let $F:T\\to C$ be a log morphism and extract $(v,\\lambda)$. Its $P$ chart map must be the extension of $\\lambda$ in Step 3, by the uniqueness there. Its underlying ring map sends $a\\otimes z^u$ to $v^\\sharp(a)\\alpha_T\\widetilde\\lambda(u)$, so Step 4 recovers the underlying scheme map. The bijection of the logification lemma, for this underlying map and this $P$ map, then recovers the log map. This proves the two constructions inverse. Under a log morphism $h:T'\\to T$, the pullback of $\\widetilde\\lambda$ extends the pulled-back $S$ map, so uniqueness in Step 3 identifies it with the new extension; the $P$ map of the composite $Fh$ is this pullback by the definition of composition, so the displayed tensor formula and the uniqueness in the logification lemma identify the resulting morphism with $Fh$. For an open $U\\subseteq\\operatorname{Spec}A$, restrict to $v^{-1}(U)$ and to $C\\times_{\\operatorname{Spec}A}U$: the logification lemma restricts $L_C(P,\\beta_C)$ to $L_{C_U}(P,\\beta_{C_U})$ on the open $C_U=C\\times_{\\operatorname{Spec}A}U$, chart restrictions and the same formula agree there, and uniqueness identifies the morphisms. This proves both required naturalities.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164; agent-supplied universal-property argument, step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-per-fs-log-sections-saturated",
+  "def-weil-pbc-module-tensor-product",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-per-integral-chart-logification-thickening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; VIII 3.1.17, p.101; X proof of Theorem 3.5, Step 6, p.164. The universal-property proof is supplied by Q112, not quoted from ILO; Kato section 1 remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"saturation\", \"MonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"saturation\\\", \\\"MonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of fsification of a prelog scheme with ring tensor monoid algebra saturation",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of fsification of a prelog scheme with ring tensor monoid algebra saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isLocalizedModule_iff_isBaseChange\", \"TensorAlgebra.instRing\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"Polynomial.UniversalFactorizationRing.fromTensor\", \"IsLocalization.tensor\", \"AlgebraicGeometry.pullbackSpecIso\", \"IsLocalization.tensorRight\", \"AlgebraicGeometry.Spec.full\"], \"digest\": \"8d3ae3b0443aba5b\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturating and integralizing a finitely generated monoid chart represents maps from fine saturated log schemes",
+   "results": "{\"t\": \"2026-10-24T00:34:21Z\", \"tool\": \"leanfinder\", \"query\": \"Saturating and integralizing a finitely generated monoid chart represents maps from fine saturated log schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\"], \"digest\": \"084253f8e1ff4e2f\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint from fine saturated logarithmic schemes constructed using Spec A tensor Z monoid saturation",
+   "results": "{\"t\": \"2026-10-24T00:34:26Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint from fine saturated logarithmic schemes constructed using Spec A tensor Z monoid saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"AlgebraicGeometry.instReflectiveLocallyRingedSpaceOppositeCommRingCatToLocallyRingedSpace\", \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.Scheme.kerAdjunction\"], \"digest\": \"28f443d65c5c1976\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|saturat.*chart|chart.*saturat|KummerMorphism",
+   "results": "{\"t\": \"2026-10-24T00:38:00Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|saturat.*chart|chart.*saturat|KummerMorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary schemes, field extensions, perfect closures and ordinary monoid pushouts do not give the stated logarithmic or sharp-monoid assertion. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|saturat.*chart|chart.*saturat|KummerMorphism",
+   "results": "{\"t\": \"2026-10-24T01:31:03Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|saturat.*chart|chart.*saturat|KummerMorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: ordinary affine-spectrum adjunction, normalization, localization and tensor descriptions of ordinary scheme pullbacks do not include the logarithmic chart extension. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of fsification of a prelog scheme with ring tensor monoid algebra saturation",
+   "results": "{\"t\": \"2026-10-24T01:31:04Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of fsification of a prelog scheme with ring tensor monoid algebra saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isLocalizedModule_iff_isBaseChange\", \"TensorAlgebra.instRing\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"Polynomial.UniversalFactorizationRing.fromTensor\", \"IsLocalization.tensor\", \"AlgebraicGeometry.pullbackSpecIso\", \"IsLocalization.tensorRight\", \"AlgebraicGeometry.Spec.full\"], \"digest\": \"8d3ae3b0443aba5b\"}; Read returned signatures: ordinary affine-spectrum adjunction, normalization, localization and tensor descriptions of ordinary scheme pullbacks do not include the logarithmic chart extension. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"saturation\", \"MonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T01:31:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"saturation\\\", \\\"MonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: ordinary affine-spectrum adjunction, normalization, localization and tensor descriptions of ordinary scheme pullbacks do not include the logarithmic chart extension. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to the inclusion of fine saturated log schemes constructed by saturating affine charts",
+   "results": "{\"t\": \"2026-10-24T01:31:05Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint to the inclusion of fine saturated log schemes constructed by saturating affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.Scheme.kerAdjunction\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.instReflectiveLocallyRingedSpaceOppositeCommRingCatToLocallyRingedSpace\"], \"digest\": \"6407525d9695bf91\"}; Read returned signatures: ordinary affine-spectrum adjunction, normalization, localization and tensor descriptions of ordinary scheme pullbacks do not include the logarithmic chart extension. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integralization and saturation of a monoid chart with base change of monoid algebras represents morphisms from fine saturated log schemes",
+   "results": "{\"t\": \"2026-10-24T01:31:06Z\", \"tool\": \"leanfinder\", \"query\": \"Integralization and saturation of a monoid chart with base change of monoid algebras represents morphisms from fine saturated log schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\"], \"digest\": \"1615682ebf11bc4c\"}; Read returned signatures: ordinary affine-spectrum adjunction, normalization, localization and tensor descriptions of ordinary scheme pullbacks do not include the logarithmic chart extension. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-fs-product-finite-comparison",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current blueprint lem-per-artin-gabber-affine-curve, Step 3, duality symmetry of the middle perverse t-structure; auxiliary chart construction in its existing regular-pair purity descendants. ILO X, proof of Theorem 3.5, Step 6, p.164, the chart (Pint)sat of the fs product.",
+   "via": [
+    "lem-per-fs-product-finite-comparison",
+    "lem-per-kummer-g-cover-fs-base-change",
+    "lem-per-gabber-abelian-stage-toric-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-prelog-chart-fs-universal",
+  "worker": "stage1",
+  "summary": "Q112 checked ILO VI 1.1, VIII 3.1.17 and X Theorem 3.5 Step 6. Statement retained. The proof explicitly extends S maps in the group completion, constructs the tensor-ring map and applies the affine adjunction and the arbitrary-scheme-map chart bijection of the existing logification lemma lem-per-integral-chart-logification-thickening. One statement-only supporting node isolates the sheaf saturation fact; it does not restate fsification. Searches found no Mathlib match. Reviewer FIX: the delivered chart-morphism node duplicated the bijection clause of lem-per-integral-chart-logification-thickening and was dropped.",
+  "blueprint": "Current blueprint lem-per-artin-gabber-affine-curve, Step 3, duality symmetry of the middle perverse t-structure; auxiliary chart construction in its existing regular-pair purity descendants. ILO X, proof of Theorem 3.5, Step 6, p.164, the chart (Pint)sat of the fs product. Current ancestor Step 3 has duality symmetry rather than the historical regular-pair wording in the imported provenance; this auxiliary descendant supplies the fs chart construction without changing that route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "Associated-log construction and its exact stalk/chart statement, independent of the perverse route; no in-unit statement gives this generic logification tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-associated-log-universal-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-b5cff0f8f",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-b5cff0f8f (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, and ILO VI 1.1 p.69, VIII 3.1.17 p.101 and X Thm 3.5 Step 6 p.164 (the source of (P^int)^sat). No SGA. Statement retained. Tested on S=N, S=<2,3> in Z, non-integral S, a group S and B=0. Step 1 is elementary and correct. Step 2: B Noetherian gives locally Noetherian, the associated-log stalk formula gives the chart, and P is fs. Step 3: the extension is unique because the S-image generates G, not because n-th roots are unique; torsion is allowed. Step 4: balancing holds since mu(s)=v#beta(s), and the LRS adjunction applies to any T. Steps 5-6 are mathematically correct. C5 duplicate: new node lem-per-chart-log-morphism-universal is the fixed-scheme-map bijection already stated by the existing same-unit node lem-per-integral-chart-logification-thickening ('for every scheme map a:S->T and log structure K, homs a^{-1}L_T(P,beta)->K ... correspond bijectively to v:P->Gamma(S,K) with alpha_K v=a#beta', for finitely generated integral P, with an etale restriction clause). Step 1 makes P fs, so it applies. FIX: dropped the new node. Step 5 now cites the logification lemma plus lem-trf-associated-log-universal-stalks (to identify L_C(P,beta_C) with M_C compatibly with P). Step 6 cites the logification lemma, with composition and C_U restriction made explicit. proof_deps and summary updated. The added node is already reachable from targets (0 new closure, no cycle, same unit). lem-per-fs-log-sections-saturated is true (stalks cancellative and saturated, local roots glue by cancellativity); I found no duplicate in the DAG and it is not an item clause. Batch-5: def-trf-fs-log-blowup is the general log-structure/fs definition, not a trace-formula or Poincare step, so it is OK. tool_use lem-trf-associated-log-universal-stalks accepted (generic logification, already in the item's base statement).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrelogChartFsUniversal",
+  "declaration": "AlgebraicGeometry.prelogChart_fs_universal",
+  "declarations": [
+   "AlgebraicGeometry.prelogChartMonoid",
+   "AlgebraicGeometry.prelogChartInclusion",
+   "AlgebraicGeometry.prelogChartCoefficientAlgebra",
+   "AlgebraicGeometry.prelogChartSaturationAlgebra",
+   "AlgebraicGeometry.prelogChartRing",
+   "AlgebraicGeometry.prelogChartRingCommRing",
+   "AlgebraicGeometry.prelogChartCoefficient",
+   "AlgebraicGeometry.prelogChartMonomial",
+   "AlgebraicGeometry.prelogChartBeta",
+   "AlgebraicGeometry.prelogChartProjection",
+   "AlgebraicGeometry.prelogChartLogScheme",
+   "AlgebraicGeometry.prelogChartSection",
+   "AlgebraicGeometry.prelogChartExtract",
+   "AlgebraicGeometry.prelogChartCompatible",
+   "AlgebraicGeometry.prelogChartPullbackPair",
+   "AlgebraicGeometry.prelogChart_fs_universal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PrelogChartFsUniversal.lean",
+  "statement": "theorem prelogChart_fs_universal (A : Type (max u v)) [CommRing A] [IsNoetherianRing A] (S : Type v) [CommMonoid S] (hS : Monoid.FG S) (β : S →* A) (hP : Monoid.FG (prelogChartMonoid S)) [IsNoetherianRing (prelogChartRing β)] : ∃ (L : EtaleLogStructure (Spec (.of (prelogChartRing β)))) (η : associatedLogPresheaf (prelogChartBeta β) ⟶ L.monoidSheaf.obj) (hN : IsLocallyNoetherian (Spec (.of (prelogChartRing β)))) (hfs : L.IsFineSaturated), IsAssociatedLogPresentation (prelogChartBeta β) L η ∧ (∀ T : FineSaturatedLogScheme.{max u v}, Function.Injective (prelogChartExtract β L η hN hfs T) ∧ Set.range (prelogChartExtract β L η hN hfs T) = {q | prelogChartCompatible β T q}) ∧ (∀ (T' T : FineSaturatedLogScheme.{max u v}) (h : EtaleLogHom T' T) (F : EtaleLogHom T (prelogChartLogScheme β L hN hfs)) (H : EtaleLogHom T' (prelogChartLogScheme β L hN hfs)), h.CompEq F H → prelogChartExtract β L η hN hfs T' H = prelogChartPullbackPair h (prelogChartExtract β L η hN hfs T F)) ∧ ∀ (U : (Spec (.of A)).Opens) (T : FineSaturatedLogScheme.{max u v}), Set.BijOn (prelogChartExtract β L η hN hfs T) {F | Set.range F.base.base ⊆ (prelogChartProjection β).base ⁻¹' (U : Set _)} {q | prelogChartCompatible β T q ∧ Set.range q.1.base ⊆ (U : Set _)}",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical tensor-ring and chart constructions are real definitions. The theorem specifies the associated log presentation and the injective forward map with exact compatible range, log-morphism naturality, and its restriction to every base open. Multiplicative monoids encode the additive convention. Reuses FineFan.saturation rather than defining another saturation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-afa3378cf",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps (FineSaturatedLogBlowup, AssociatedLogUniversalStalks, FineFanBlowup, Mathlib TensorProduct/Spec), the source place and the module. Hypotheses match the node with nothing stronger: A Noetherian, S FG, beta, S^fs = FineFan.saturation of mrange GrothendieckGroup.of (the root set is already a submonoid, torsion allowed), hP FG, B = Mathlib TensorProduct with lift-beta and mapDomain actions, B Noetherian. C's log structure is pinned by IsAssociatedLogPresentation (sheafification UP + structural formula), so the existential is not hollow. hN/hfs give fs. The forward map is the actual F.base composed with the projection plus the global sectionMap composed with the chart; range = alpha_T lambda = v# beta, checked via the structural formula and tensor balancing; injective + range give the bijection. CompEq naturality is correct. The U-open BijOn is correct but follows formally (advisory). Universes: S:v, A:max u v, ULift transport, no equality forced. Edge cases: trivial S, groups/idempotents, <2,3>, B=0, empty T, U empty/whole/non-affine. Statement verbatim, 16/16 declarations, single sorry, docstrings OK. Node copy changes only lean + an added landed def-trf-fine-fan-blowup stmt_dep (no cycle); dependency records identical to live; not landed/superseded. Advisory: prelogChartInclusion duplicates theorem-owned normalizationMonoidMap; logIdealTensorRing is single-universe. Nothing compiled (no file changed)."
+ }
+}

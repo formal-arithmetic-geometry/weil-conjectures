@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-lattice-cubical-multiplication-roof",
+ "kind": "statement",
+ "title": "Cubical diagonal compares multiplication evaluation roofs",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $r\\geq0$, and put $D=\\mathbf Z^r$, $\\mathcal M=\\operatorname{Mod}_R$ and $\\mathcal E=\\mathcal A_R(D)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $t:\\mathcal M\\to\\mathcal E$ for trivial action and $\\Gamma$ for invariants [lem-sfb-condensed-derived-restriction-calculus]. Use ordinary derived categories and localization $Q$ [def-weil-abstract-derived-category]. For equivariant cochain complexes use the finite Koszul complex of [lem-sfb-discrete-lattice-koszul-resolution] and its total $K(P)^n=\\bigoplus_{a+b=n}K_R(P^b;T)^a$, with differential $d_K+(-1)^a d_P$. Let $B$ be a flat commutative equivariant $R$-algebra as in [lem-sfb-lattice-flat-twisted-chain-pairing], with the explicitly specified complex $K_B$, chain map $\\star$ and unit $u$. Use $L,\\varepsilon,E_B$ and $c_a$ of [lem-sfb-lattice-cubical-augmentation-evaluation]. Extend the integral diagonal of [lem-sfb-integral-cubical-chain-diagonal] $R$-linearly:\n$$\\Delta[v,I]=\\sum_{A\\sqcup C=I}\\epsilon(A,C)[v,A]\\otimes[v+u_A,C],\\qquad u_A=\\sum_{i\\in A}u_i.$$\nIt is an equivariant counital chain map $L\\to L\\otimes_R L$. With the signed total tensor and its associators let $\\tau$ interchange the middle $tK_B$ and $L$ in $tK_B\\otimes tK_B\\otimes L\\otimes L$; the sign on degrees $q,-p$ is $(-1)^{pq}$. Then the following are equal as chain maps from $t(K_B\\otimes_R K_B)\\otimes_R L$ to $B$:\n$$E_B\\circ(t\\star\\otimes1)=m_B\\circ(E_B\\otimes E_B)\\circ\\tau\\circ(1\\otimes\\Delta).$$\nFor homogeneous components $x_A,y_C$ of degrees $p,q$ both sides vanish unless $A\\sqcup C=I$ and otherwise have coefficient\n$$c_{p+q}\\epsilon(A,C)T^v(x_A)T^{v+u_A}(y_C).$$\nThis includes the sign identity $c_{p+q}=(-1)^{pq}c_pc_q$. Moreover $(\\varepsilon\\otimes\\varepsilon)\\Delta=\\varepsilon$ identifies the augmentation denominators of the corresponding two evaluation roofs, so their equality holds in the ordinary derived category with the ordinary K-flat tensor representatives. The unit equation is\n$$E_B\\circ(tu\\otimes1)=\\eta_B\\circ\\varepsilon,$$\nwhere $\\eta_B:tR[0]\\to B$ is the original algebra unit. For $r=0$ these maps reduce to multiplication and unit; for $r=1$ the diagonal is $[v,\\varnothing]\\otimes[v,\\{1\\}]+[v,\\{1\\}]\\otimes[v+u_1,\\varnothing]$, and the products are $x^0\\star y^1=x^0y^1$, $x^1\\star y^0=x^1T_1(y^0)$. No division, characteristic restriction or nonzero-ring assumption enters these identities.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; agent-formulated lattice expansion, returned proof step 12, unit part of step 13 and step 14: diagonal/evaluation equality, roof denominators and low-rank normalization. The blueprint supplies the route, not this structural calculation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "lem-sfb-lattice-cubical-augmentation-evaluation",
+  "lem-sfb-integral-cubical-chain-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the cell-normalized augmentation, diagonal and evaluation and the three counit identities from the normalized-roof construction. No data are defined by choosing from a mere existence assertion.",
+   "uses": [
+    "lem-sfb-lattice-cubical-normalized-roof",
+    "def-sfb-lattice-cubical-multiplication-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite numerator comparison to this normalized roof and P. This supplies the multiplication and unit equations and the first supported coefficient. Rewrite the second numerator by the chain-map multiplication equation to obtain the identical supported coefficient.",
+   "uses": [
+    "lem-sfb-lattice-cubical-numerator-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the common denominator, its two quasi-isomorphisms and the K-flat tensor representatives from the tensor-representative theorem. Map the denominator and numerator equalities into the localization. Since Q(a) and Q(b) are invertible, cancel Q(a) to prove inv(Q(a));Q(f)=inv(Q(b));Q(g). This cancellation is proved explicitly in Lean for any functor which inverts the two denominators.",
+   "uses": [
+    "lem-sfb-lattice-cubical-tensor-representatives",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the triangular-number identity over natural numbers using evenness of n(n+1). Applying pow_add and rearranging powers of -1 proves c_(p+q)=(-1)^(pq)c_p c_q. For rank zero and rank one simplify P.coordinates and P.unitCoordinates: empty products act by identity, singleton products by the generator. For a singleton cube, its powerset is {empty,singleton}; expanding the normalized diagonal gives precisely the two rank-one terms, because the empty and singleton partition signs are one. Assemble the unchanged conjunction.",
+   "uses": [
+    "lem-sfb-lattice-flat-twisted-chain-pairing",
+    "lem-sfb-integral-cubical-chain-diagonal",
+    "lem-sfb-lattice-cubical-augmentation-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lattice-cubical-multiplication-data",
+  "lem-sfb-lattice-cubical-normalized-roof",
+  "lem-sfb-lattice-cubical-numerator-comparison",
+  "lem-sfb-lattice-cubical-tensor-representatives",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-lattice-flat-twisted-chain-pairing",
+  "lem-sfb-integral-cubical-chain-diagonal",
+  "lem-sfb-lattice-cubical-augmentation-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "H2 stage-3 Lean decomposition of the existing cubical proof: three strict steps, with localization cancellation, sign and low-rank formulas proved in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The counital cubical lattice diagonal identifies twisted Koszul product evaluation with multiplication of two evaluations as derived roofs",
+   "results": "{\"t\": \"2026-10-22T06:02:30Z\", \"tool\": \"leanfinder\", \"query\": \"The counital cubical lattice diagonal identifies twisted Koszul product evaluation with multiplication of two evaluations as derived roofs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"Coalgebra.sum_counit_tmul_eq\", \"Coalgebra.sum_counit_tmul_map_eq\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"TensorProduct.counit_tmul\", \"Coalgebra.sum_map_tmul_counit_eq\", \"Coalgebra.sum_tmul_counit_eq\"], \"digest\": \"faec3ce406ca75ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract coalgebra counits and simplicial face formulas do not compare the internal cubical lattice diagonal with the signed Koszul product evaluation roofs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T06:02:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Triplet\", \"CochainComplex.HomComplex.Triplet.p\", \"CochainComplex.HomComplex.Triplet.q\", \"CochainComplex.HomComplex.Triplet.mk\", \"CochainComplex.HomComplex.Triplet.hpq\", \"CochainComplex.HomComplex.Cochain.diff\", \"CochainComplex.HomComplex.Cocycle.diff\", \"CochainComplex.HomComplex.Cochain\"], \"digest\": \"670eafd4b3f0f9c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract coalgebra counits and simplicial face formulas do not compare the internal cubical lattice diagonal with the signed Koszul product evaluation roofs"
+  },
+  {
+   "tool": "grep",
+   "query": "cubical.*diagonal|koszul.*(cup|diagonal)|diagonal.*koszul",
+   "results": "{\"t\": \"2026-10-22T06:02:31Z\", \"tool\": \"grep\", \"query\": \"cubical.*diagonal|koszul.*(cup|diagonal)|diagonal.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract coalgebra counits and simplicial face formulas do not compare the internal cubical lattice diagonal with the signed Koszul product evaluation roofs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counital cubical lattice diagonal identifies twisted Koszul product evaluation with multiplication of two evaluations as derived roofs",
+   "results": "{\"t\": \"2026-10-22T06:02:32Z\", \"tool\": \"leansearch\", \"query\": \"The counital cubical lattice diagonal identifies twisted Koszul product evaluation with multiplication of two evaluations as derived roofs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bialgebra.counit_mul\", \"CategoryTheory.Functor.instMonoidalProdDiag\", \"TensorProduct.counit_tmul\", \"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"DFinsupp.comul_comp_lapply\", \"CategoryTheory.Limits.prod.diag_map_assoc\", \"Finsupp.comul_comp_lapply\", \"CategoryTheory.Pi.closedCounit\"], \"digest\": \"ce56df5c89a25612\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract coalgebra counits and simplicial face formulas do not compare the internal cubical lattice diagonal with the signed Koszul product evaluation roofs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed cubical chain diagonal duality with twisted shuffle cup product evaluation and augmentation unit",
+   "results": "{\"t\": \"2026-10-22T06:02:43Z\", \"tool\": \"leanfinder\", \"query\": \"Signed cubical chain diagonal duality with twisted shuffle cup product evaluation and augmentation unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.AlternatingCofaceMapComplex.objD\", \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\", \"CategoryTheory.SimplicialObject.diagonal\"], \"digest\": \"b95d9b87c03c1298\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract coalgebra counits and simplicial face formulas do not compare the internal cubical lattice diagonal with the signed Koszul product evaluation roofs"
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|koszul.*(cup|diagonal|eval)|diagonal.*koszul",
+   "results": "{\"t\": \"2026-10-22T12:01:44Z\", \"tool\": \"grep\", \"query\": \"cubical|koszul.*(cup|diagonal|eval)|diagonal.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no cubical or Koszul cup/diagonal/evaluation implementation found in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubical lattice diagonal signed Koszul cup product evaluation is compatible with multiplication and augmentation",
+   "results": "{\"t\": \"2026-10-22T12:01:44Z\", \"tool\": \"leansearch\", \"query\": \"Cubical lattice diagonal signed Koszul cup product evaluation is compatible with multiplication and augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DFinsupp.comul_comp_lapply\", \"Bialgebra.comul_mul\", \"CochainComplex.HomComplex.Cochain.smul_v\", \"Bialgebra.mul_compr₂_comul\", \"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"Finsupp.comul_comp_lapply\", \"Bialgebra.counit_mul\", \"Pi.comul_comp_single\"], \"digest\": \"00244c22a005f273\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary bar/simplicial differentials, exterior powers, abstract coalgebras or tensor signs; none states the internal lattice diagonal/evaluation roof identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T12:01:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no HomComplex tensor hit; no cubical evaluation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cubical lattice diagonal signed Koszul cup product evaluation is compatible with multiplication and augmentation",
+   "results": "{\"t\": \"2026-10-22T12:01:55Z\", \"tool\": \"leanfinder\", \"query\": \"Cubical lattice diagonal signed Koszul cup product evaluation is compatible with multiplication and augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.d_of\", \"exteriorPower.toTensorPower_apply_ιMulti\", \"Rep.barComplex.d_single\", \"AlgebraicTopology.AlternatingCofaceMapComplex.objD\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\", \"exteriorPower.pairingDual_apply_apply_eq_one\", \"ComplexShape.TensorSigns.ε'\", \"ExteriorAlgebra.liftAlternating_ι_mul\"], \"digest\": \"5eb19a77a404962f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary bar/simplicial differentials, exterior powers, abstract coalgebras or tensor signs; none states the internal lattice diagonal/evaluation roof identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted shuffle product on Koszul cochains is dual to the lattice cubical chain diagonal with the Koszul tensor sign",
+   "results": "{\"t\": \"2026-10-22T12:02:38Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted shuffle product on Koszul cochains is dual to the lattice cubical chain diagonal with the Koszul tensor sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.AlternatingCofaceMapComplex.objD\", \"inhomogeneousCochains.d\", \"inhomogeneousCochains.d_hom_apply\", \"AlgebraicTopology.AlternatingCofaceMapComplex.map\", \"inhomogeneousCochains.d_eq\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"HomologicalComplex.unit_tensor_d₁\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\"], \"digest\": \"054b2dd446de0928\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary bar/simplicial differentials, exterior powers, abstract coalgebras or tensor signs; none states the internal lattice diagonal/evaluation roof identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 paragraph (3), ordinary open direct image, descendant lattice expansion: returned step 12 (diagonal/evaluation equality), unit part of step 13, and step 14 (common augmentation denominator and low-rank normalization).",
+   "via": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-cubical-multiplication-roof",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint paragraph (3) and the exact statements of the three lattice inputs, plus exact conservative forgetting and derived localization. Proved the numerator equality on supported summands with the full Koszul sign, proved the two denominator quasi-isomorphisms by explicit tensor contraction and compared their roofs by inverses in the localization. Proved unit and ranks zero/one directly. Statement unchanged; no new nodes or attachments. Five fresh logged Mathlib searches find no match. Repair of return at head 41270566351: reapplied the retained split to the current unsplit DAG through the delivery tool; reread all five proof dependencies and checked that their full statements equal all 15 saved citation quotes. Made the signed interchange and the second denominator homotopy inverse explicit in step 4. Statement and dependencies unchanged; earlier searches and citations retained.",
+  "blueprint": "Current main-20261015 direct-images proof, paragraph (3), ordinary open direct image; descendant lattice expansion returned step 12, unit portion of 13, and step 14. Steps 1–3 realize diagonal/evaluation equality; 4–5 its roof denominators; 6 unit and low-rank normalization. Ancestor tool reports null, retained in blueprint.from.node; no blueprint node states this calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-30ca0eb2e",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-30ca0eb2e (reviewer sub-agent of L); spot-checked: This is a re-delivery of the head 41270566. A reader PASSed that head, but landing refused it because of a side-project completion that had not been promoted to the live DAG, so the return was not a mathematical fault. Compared with that head, the statement, stmt_deps, proof_deps, blueprint record, source, and steps 1-3, 5 and 6 are byte-identical. There are no new nodes, no unit changes and no tool_uses. Only step 4 changed. The earlier sentence 'conjugating by τ' became an explicit signed middle interchange ρ: X⊗L⊗L≅Y with bρ=1_X⊗(ε⊗ε). This holds because b kills every component of nonzero cube degree, and in degree 0 the interchange sign is 1. The homotopy inverse of b is ρ(1⊗s⊗s): composing gives 1 by εs=1, and the other composite is ρ(1⊗e⊗e)ρ⁻¹, which is homotopic to 1 through H̃. Forgetting the action is exact and detects exactness, so b is an equivariant quasi-isomorphism. The change is correct and only makes the old sentence precise. I reread the cited statements: integral diagonal (counit identities), flat twisted pairing (⋆, unit, K-flatness), augmentation evaluation (E_P sign, εs=1, 1⊗ε a quasi-isomorphism, L K-flat), restriction calculus, and the derived-category localization. Most are unchanged node files. Koszul-resolution changed only outside its statement. The derived-category, condensed-ring, size-convention and module-objects nodes could not be diffed because the earlier snapshot lacks their chapter directories. I read the derived-category definition myself (localization at quasi-isomorphisms, as step 5 uses). I rechecked the sign identity c_{p+q}=(-1)^{pq}c_pc_q and the case r=2, A={2}, C={1}, where both sides are +. Wrong-size and overlapping supports give 0 on both sides, and R=0, B=0 and characteristic 2 are covered. The roof algebra Q(f)Q(a)^{-1}=Q(g)Q(b)^{-1} holds. There are no SGA citations and no duplicates, and the parent still needs the separate derived-counit node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeCubicalMultiplicationRoof",
+  "declaration": "Profinite.DiscreteLattice.CubicalMultiplication.lattice_cubical_multiplication_roof",
+  "declarations": [
+   "Profinite.DiscreteLattice.CubicalMultiplication.lattice_cubical_multiplication_roof"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeCubicalMultiplicationRoof.lean",
+  "statement": "theorem lattice_cubical_multiplication_roof [IsCommMonObj B.X] (hflat : exactFunctor (Modules R.toMon) (Modules R.toMon) (tensorLeft B.X.V)) : ∃ F : Roof (koszul R r K B) (lattice R r J C) (algebra R r B), (∀ v : Fin r → ℤ, cell R r J C 0 v ∅ ≫ (F.augmentation.f 0).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ (Equivariant R.toMon r))).hom.hom = 𝟙 _) ∧ (∀ (n : ℤ) (v : Fin r → ℤ) (I : Finset (Fin r)), (I.card : ℤ) = -n → cell R r J C n v I ≫ (F.diagonal.f n).hom = ∑ A ∈ I.powerset, IntegralLatticeCubical.partitionSign r A (I \\ A) • cellTensor R r J C n v (v + IntegralLatticeCubical.directionSum r A) A (I \\ A)) ∧ (∀ (p : ℕ) (A : Subsets r (p : ℤ)) (v : Fin r → ℤ) (I : Subsets r (p : ℤ)), (coefficient R r K B p A ⊗ₘ cell R r J C (-(p : ℤ)) v I.val) ≫ inclusion R r (koszul R r K B) (lattice R r J C) p (-(p : ℤ)) 0 ≫ (F.evaluation.f 0).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).hom.hom = if A = I then CubicalEvaluation.cSign p • ((ρ_ B.X.V).hom ≫ B.X.ρ (Multiplicative.ofAdd v)) else 0) ∧ F.Identities (star R r K B P) (unit R r K B P) (mul R r B) (eta R r B) ∧ (∀ p q : ℕ, CubicalEvaluation.cSign (p + q) = (-1 : ℤ) ^ (p * q) * CubicalEvaluation.cSign p * CubicalEvaluation.cSign q) ∧ (∀ (p q : ℕ) (A : Subsets r (p : ℤ)) (A' : Subsets r (q : ℤ)) (v : Fin r → ℤ) (I : Subsets r ((p : ℤ) + q)), supported R r J C K B p q A A' v I ≫ ((F.f (star R r K B P)).f 0).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).hom.hom = value R r B p q A A' v I ∧ supported R r J C K B p q A A' v I ≫ ((F.comparison ≫ F.g (mul R r B)).f 0).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).hom.hom = value R r B p q A A' v I) ∧ QuasiIso F.a ∧ QuasiIso F.b ∧ F.Localized DerivedCategory.Q.{u + 2} (star R r K B P) (mul R r B) ∧ (∀ W : CochainComplex (Equivariant R.toMon r) ℤ, (W = koszul R r K B ⊗ koszul R r K B ∨ W = (koszul R r K B ⊗ koszul R r K B) ⊗ lattice R r J C ∨ W = (koszul R r K B ⊗ lattice R r J C) ⊗ (koszul R r K B ⊗ lattice R r J C)) → ∀ V : CochainComplex (Equivariant R.toMon r) ℤ, V.Acyclic → (W ⊗ V).Acyclic) ∧ (∀ W V : CochainComplex (Equivariant R.toMon r) ℤ, (W = koszul R r K B ⊗ koszul R r K B ∨ W = (koszul R r K B ⊗ koszul R r K B) ⊗ lattice R r J C ∨ W = (koszul R r K B ⊗ lattice R r J C) ⊗ (koszul R r K B ⊗ lattice R r J C)) → (V = koszul R r K B ⊗ koszul R r K B ∨ V = (koszul R r K B ⊗ koszul R r K B) ⊗ lattice R r J C ∨ V = (koszul R r K B ⊗ lattice R r J C) ⊗ (koszul R r K B ⊗ lattice R r J C)) → IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q.{u + 2} W V)) ∧ (r = 0 → productCoordinate R r K B P 0 0 ⟨∅, rfl⟩ ⟨∅, rfl⟩ ⟨∅, rfl⟩ = (MonObj.mul (X := B.X)).hom ∧ P.unit.f 0 ≫ (K.coordinates B.X 0).hom ≫ biproduct.π _ ⟨∅, rfl⟩ = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ (Modules R.toMon))).hom ≫ (MonObj.one (X := B.X)).hom) ∧ (r = 1 → ∀ i : Fin r, productCoordinate R r K B P 0 1 ⟨∅, rfl⟩ ⟨{i}, by simp⟩ ⟨{i}, by simp⟩ = (MonObj.mul (X := B.X)).hom ∧ productCoordinate R r K B P 1 0 ⟨{i}, by simp⟩ ⟨∅, rfl⟩ ⟨{i}, by simp⟩ = (𝟙 B.X.V ⊗ₘ B.X.ρ (generator i)) ≫ (MonObj.mul (X := B.X)).hom) ∧ (r = 1 → ∀ (i : Fin r) (v : Fin r → ℤ), cell R r J C (-1) v {i} ≫ (F.diagonal.f (-1)).hom = cellTensor R r J C (-1) v v ∅ {i} + cellTensor R r J C (-1) v (v + IntegralLatticeCubical.unitVector r i) {i} ∅)",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The original theorem statement is unchanged. The roof data and coordinate definitions are relocated verbatim to LatticeCubicalMultiplicationData and publicly reexported here, permitting three independent strict proof-step modules without an import cycle. The parent proves localization cancellation, signs, low-rank formulas and the assembly; the three named structural statements remain sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71eb68840",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_deps, the Lean of the evaluation, pairing and integral-diagonal dependencies in side-live, the module and the report (Worker report and Second reading by Q36 present; the second reading is a self-reading). One commit on side-live 1bcb300 adding module, report and lean record; lean.statement byte-equal to the signature; all 23 declarations present; single sorry. The existential Roof bundle is fully pinned: ε on vertex cells, Δ = Σ partitionSign(A,I\\A)[v,A]⊗[v+u_A,I\\A] on all cells, E_B = if A=I then c_p T^v else 0 on all degree-0 summands (the dependency formula at b=0). Cells form a coproduct and Koszul degrees outside 0..r vanish. J is quantified for every DiscreteComparison, whose action field makes the formulas equivariant (consistent with the NJ dependency FIX); a central unit rescaling of J preserves all equations. star/unit come from the unique monoidal structure of the trivial functor plus the pinned Pairing (sign = inversions, twist T_A = ε(A,C)). τ = tensorμ with the WeilConjectures Koszul braiding, giving (-1)^{pq}. m_B and η_B are B's own. Counit laws, main equation, both numerator coefficient formulas, sign identity, comparison≫b = a, QuasiIso a and b, localized roof at Q.{u+2}, K-flat clauses, unit equation and r=0/r=1 formulas match the node; hypotheses equal the pairing dependency's. Hand-checked ∂Δ = Δ∂ at r=1 and bidegree (1,0); R=0, B=0 and characteristic 2 covered. No compile (unchanged). Advisories: global irreducible attributes, priority-3000 instance aliases, 5-step docstring covering 6 node steps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-10630",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T082044-L-2126363",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; relocated defs diffed verbatim vs published item; three split sorry statements matched against the original conjuncts and CubicalModel coproduct pinning; item node proof_deps vs Lean uses"
+ }
+}

@@ -218,24 +218,55 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-bb26e3114 (reviewer sub-agent of L); spot-checked: Reviewed item, all four dependencies, blueprint route, source statements, proof steps, Mathlib searches, tool uses, cycles, coefficient category, and edge cases. No repairs or new nodes are needed; review.md records the checks."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleTensorHomAdjunctionOfPreserves",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleTensorHomAdjunctionOfPreserves",
   "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleTensorHomAdjunctionOfPreserves.lean",
-  "statement": "def boundedConstructibleTensorHomAdjunctionOfPreserves (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (hT : ∀ A B : BoundedConstructible (condensedRingObj Λ X.left), boundedConstructible (condensedRingObj Λ X.left) (((derivedTensor Λ X.left).obj A.obj).obj B.obj)) (hH : ∀ A B : BoundedConstructible (condensedRingObj Λ X.left), boundedConstructible (condensedRingObj Λ X.left) (((derivedHom Λ X.left).obj (op A.obj)).obj B.obj)) (K : BoundedConstructible (condensedRingObj Λ X.left)) : (boundedConstructible (condensedRingObj Λ X.left)).lift ((boundedConstructible _).ι ⋙ (derivedTensor Λ X.left).obj K.obj) (fun A ↦ hT K A) ⊣ (boundedConstructibleHomOfPreserves Λ ℓ X hH).obj (op K)",
-  "branch": "newtargets-dag",
-  "by": "NB",
-  "date": "2026-10-18",
+  "statement": "def boundedConstructibleTensorHomAdjunctionOfPreserves (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (hT : ∀ A B : BoundedConstructible (condensedRingObj Λ X.left), boundedConstructible (condensedRingObj Λ X.left) (((derivedTensor Λ X.left).obj A.obj).obj B.obj)) (hH : ∀ A B : BoundedConstructible (condensedRingObj Λ X.left), boundedConstructible (condensedRingObj Λ X.left) (((derivedHom Λ X.left).obj (op A.obj)).obj B.obj)) (K : BoundedConstructible (condensedRingObj Λ X.left)) : (boundedConstructible (condensedRingObj Λ X.left)).lift ((boundedConstructible _).ι ⋙ (derivedTensor Λ X.left).obj K.obj) (hT K) ⊣ (boundedConstructibleHomOfPreserves ℓ X Λ hH).obj (op K)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.BoundedConstructibleTensorHomAdjunctionOfPreserves deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Section 1(B): the recorded module was deleted and scompile --source confirms it is unavailable. Restore the general preservation-based restriction along the fully faithful inclusions, using the current boundedConstructibleHomOfPreserves interface (whose argument order changed). All definition data is Adjunction.restrictFullyFaithful applied to the actual ambient derivedTensorHomAdjunction, the tensor lift comparison and the existing Hom comparison. The module publicly exposes the existing ell-adic boundedConstructibleTensorHomAdjunction used for the chosen adjunction in this item; no new adjunction choice or counit is introduced."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-01ed0ab89",
-  "group": "NB",
+  "reviewer": "NT-stage2-cc-bdfa19332",
+  "group": "Q40",
   "result": "pass",
-  "note": "Clause-by-clause match: setting binders identical to def-sfb-dc-hom record; Λ arbitrary commutative condensed ring; hT/hH are exactly the two nodes' pairwise preservation hypotheses; left = ObjectProperty.lift (ι ⋙ derivedTensor K) per def-sfb-dc-tensor mathlib_match; right = recorded boundedConstructibleHomOfPreserves.obj (op K); body = derivedTensorHomAdjunction.restrictFullyFaithful with liftCompιIso.symm and ObjCompatibility.symm (canonical, no choice, 0 sorry, standard axioms). Node delta lean only; statement verbatim; source/blueprint docstrings present; universes single u, nothing stronger. Not a duplicate: per the worker report, upstream boundedConstructibleTensorHomAdjunction needs IsEllAdicFinitenessCoefficient (local copy relies on unrestricted preservation). nt_compile --json: item rc 0 clean 8.4 s. Unit probe reduced goal to η ≫ map 𝟙 ≫ 𝟙 ≫ 𝟙 = η (identity comparisons; final erw step hit a hom-type mismatch at ~57 s, not closed); counit symmetric by Mathlib formula. Maintainer note: NB's 'Second reading' is a labeled author self-check; this review is the independent reading."
+  "note": "Read item, 6 stmt_dep records, both delivered modules, upstream BoundedConstructible/UpperShriek/HomOfPreserves decls, source sk-thm-sf-tensor-hom chain. Hypotheses (ℓ prime, char k prime ≠ ℓ, sep. finite-type Over Spec k, original condensed BoundedConstructible over padicAlgClRingObj) exact; U⊣G, F⊣V, K⊗−⊣H from recorded stmt_dep declarations (restricted-functors record lists boundedConstructibleTensorHomAdjunction); P natural iso in stated direction; Equiv chain factors checked type by type (homCongr (P.app B).symm = precomposition with P_B); Φ and pairing match node formulas; theorem gives naturality, curry(pairing) and h≫Φ equalities. §1(B) restoration of deleted def-sfb-dc-tensor-hom-adjunction module matches deleted original (restrictFullyFaithful of ambient adjunction), adapted to current HomOfPreserves arg order; real data. lean.statement verbatim for both; docstrings/blueprint tags/proof steps present; only sorry; no duplicate (pod hom-chain is D^b_ctf). Edge cases f=id, K/L=0, B=E,D, h=1 fine; no universe restriction. Cosmetic: restored module lacks copyright header. No compile (no change)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $X$ and $\\Lambda$ be as in [def-sfb-dc-tensor] and [def-sfb-dc-hom]. For\n$K\\in D_{\\mathrm{cons}}(X,\\Lambda)$, the adjunction\n\n$$\nK\\otimes^{\\mathrm L}-\\dashv\\RHom(K,-)\\qquad\\text{on }D_{\\mathrm{cons}}(X,\\Lambda)\n$$\n\nis the restriction along the fully faithful inclusion of the ambient tensor–hom adjunction for\n$K$.",
+  "proof": [
+   {
+    "text": "On $D(\\Mod_{\\Lambda_X})$, the functor $\\RHom_{\\Lambda_X}(K,-)$ is right adjoint to\n$K\\otimes^{\\mathrm L}_{\\Lambda_X}-$ ([det-def-sfb-derived-tensor-hom]). Both functors preserve\nbounded constructible complexes, and their restrictions commute with the inclusion\n([def-sfb-dc-tensor], [def-sfb-dc-hom]). So the Hom-bijections restrict to $D_{\\mathrm{cons}}(X,\\Lambda)$.",
+    "uses": [
+     "det-def-sfb-derived-tensor-hom",
+     "def-sfb-dc-tensor",
+     "def-sfb-dc-hom"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

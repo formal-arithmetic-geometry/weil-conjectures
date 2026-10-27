@@ -1,0 +1,140 @@
+{
+ "id": "lem-pod-canonical-coefficient-unit-roos-normalization",
+ "kind": "statement",
+ "title": "The coefficient inverse-image identification normalizes the strict Roos augmentation",
+ "statement": "Fix prime ell, finite E/Q_ell and an isomorphism g:X to Y. Let K_T=R_T[0] be the regular completed integral complex. The coefficient model maps are the specified maps of [lem-pod-canonical-coefficient-model-maps]. Let I_g be the exact sectionwise inverse-image functor on completed modules [lem-weil-proetale-isomorphism-inverse-image]. Define c:I_g(K_Y) isomorphic to K_X by the single-complex comparison followed by the single functor applied to u_R inverse; this is coefficientIntegralInverseIso. Let a:I_g(K_Y) to Roos(g^* red K_Y) be the specified zero-homotopy inverseImageRoosComparisonComplex [def-weil-inverse-image-pullback-comparison], and let eta_g:K_X to that Roos complex be the normalized constantWeilChainUnit [def-weil-constant-weil-structure]. Then c.inv composed with a equals eta_g as chain maps, including both cone coordinates.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 03D6 and 08TC; the parent coefficient-comparison proof and the proved regular-unit APIs of lean/Sheaf/Paper/ConstantWeilStructure.lean."
+ },
+ "stmt_deps": [
+  "lem-pod-canonical-coefficient-model-maps",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-constant-weil-structure",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "The inverse of c sends the regular unit section to the regular unit section: expand the two single-object identifications and use that the inverse coefficient ring map preserves one.",
+   "uses": [
+    "lem-pod-canonical-coefficient-model-maps",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every n the composite with inverseImageReductionTheta is pullbackUnitLevel. Apply regular-source extensionality at the terminal pro-etale object; use the defining theta tensor formula, the reduction formula on the unit, and naturality of the pullback unit section along the comma arrow.",
+   "uses": [
+    "lem-pod-canonical-coefficient-model-maps",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the normalized unit with chainUnitCandidate by its uniqueness theorem. Mapping-cocone extensionality reduces the desired equation to the first product coordinate and the shifted second coordinate. Product extensionality and the preceding level equations prove the first; both shifted coordinates are zero by the explicit zero-homotopy lift formula.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-canonical-coefficient-model-maps",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CanonicalCoefficientUnitNormalization.lean",
+  "place": "D7, 2026-10-27: a fully proved part of the coefficient comparison; separated after profiling the monolithic proof. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived inverse limit comparison commutes with quotient projections mapping cocone augmentation and multiplication",
+   "results": "LightProfinite.lightToProfinite_map_proj_eq; InverseSystem.invLimEquiv_symm_apply_coe; CategoryTheory.liftedLimitMapsToOriginal_inv_map_π; InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; LightProfinite.proj_comp_transitionMap; LightProfinite.isoMapCone; LightProfinite.proj_comp_transitionMapLE",
+   "date": "2026-10-26",
+   "verdict": "no direct match; use the proved regular-module APIs of ConstantWeilStructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift_f_fst",
+   "results": "loogle: unknown identifier 'CochainComplex.mappingCocone.lift_f_fst'",
+   "date": "2026-10-26",
+   "verdict": "no direct match; use the proved regular-module APIs of ConstantWeilStructure"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(comp|hom_ext|lift_f_fst)",
+   "results": "No hits. Local source inspection supplied the needed comparison and cone lemmas.",
+   "date": "2026-10-26",
+   "verdict": "no direct match; use the proved regular-module APIs of ConstantWeilStructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme isomorphism the regular coefficient inverse image and finite pullback commute with quotient projections via their canonical tensor multiplication and normalized Roos augmentation",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.pullbackSpecIso",
+   "date": "2026-10-26",
+   "verdict": "No exact match: these are structure-sheaf and fibre-product isomorphisms, rather than the specified completed coefficient augmentation and finite quotient maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalCoefficientPullbackReduction",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Proof Step 7: normalization of the coefficient pullback comparison and its finite quotient projections.",
+   "via": [
+    "lem-pod-canonical-coefficient-pullback-reduction",
+    "lem-pod-frobenius-fixes-unit-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalCoefficientUnitNormalization",
+  "file": "lean/Sheaf/Paper/CanonicalCoefficientUnitNormalization.lean",
+  "declaration": "WeilConjectures.coefficientUnit_roos",
+  "statement": "theorem coefficientUnit_roos {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :\n    (coefficientIntegralInverseIso l E g).inv ≫\n      inverseImageRoosComparisonComplex l E g (constantWeilIntegralComplex l E Y) =\n    constantWeilChainUnit l E g",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.coefficientIntegralInverseIso",
+   "WeilConjectures.coefficientUnit_roos"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0442d",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222616-L-673941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0442d",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222616-L-673941",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules + item node and 4 new nodes against the clone's item (moved block byte-identical), the 2 direct importers compiled against the delivery in a sandbox (both OK), #print axioms (sorryAx only via published constantWeilIntegralRoosComparison/Lambda)"
+ }
+}

@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-adequate-algebra-pushforward",
+ "kind": "statement",
+ "title": "Adequately affine pushforward of universally adequate algebra maps",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal X,\\mathcal Y$ be algebraic stacks over $k$ [def-sfb-algebraic-moduli-stack], and let $f:\\mathcal X\\to\\mathcal Y$ be adequately affine [def-sfb-adequately-affine-morphism]. Let $u:\\mathcal A\\to\\mathcal B$ be a morphism of arbitrary quasi-coherent commutative $\\mathcal O_{\\mathcal X}$-algebras [def-sfb-stack-quasi-coherent-algebra]. Suppose $u$ is universally adequate, meaning that every section of $\\mathcal B$ on every smooth scheme test of $\\mathcal X$ has a positive power lifting to $\\mathcal A$ after an etale covering, in the sense of [def-sfb-adequately-affine-morphism]. Then $f_*\\mathcal A\\to f_*\\mathcal B$ on the smooth-etale site of $\\mathcal Y$ is universally adequate. Neither surjectivity nor injectivity of $u$, finite generation of the algebras, nor Noetherianity of the stacks is assumed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Lemma 4.1.7, implication (2) implies (1), proof before the locally Noetherian finite-type variants, printed pp.17--18; explicitly concludes that f_*A to f_*B is universally adequate. Primary arXiv:1005.2398v3 read online at https://arxiv.org/html/1005.2398v3#S4.SS1; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-adequately-affine-morphism",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Factor $u$ as $\\mathcal A\\xrightarrow{q}\\mathcal C\\xrightarrow{j}\\mathcal B$ using [lem-sfb-stack-algebra-smooth-image]. Thus $q$ is a surjection and $j$ is injective on smooth tests. The map $j$ is universally adequate: on each smooth test any local lift $a$ of a power under $u$ gives the lift $q(a)$ under $j$. Since $f$ is adequately affine, its defining lifting property applies to $q$, so $f_*q:f_*\\mathcal A\\to f_*\\mathcal C$ is universally adequate [def-sfb-adequately-affine-morphism].",
+   "uses": [
+    "lem-sfb-stack-algebra-smooth-image",
+    "def-sfb-adequately-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1005.2398v3#S4.SS1",
+    "place": "Lemma 4.1.7, proof of (2) implies (1)"
+   }
+  },
+  {
+   "text": "It remains to lift powers of sections through $f_*j$. It suffices to do so for every affine smooth test $V\\to\\mathcal Y$, since an arbitrary test is covered by affine opens. Put $\\mathcal Z=\\mathcal X\\times_{\\mathcal Y}V$; it is algebraic by [lem-sfb-algebraic-stack-fibre-products] and quasi-compact by the quasi-compactness clause of $f$ [def-sfb-stack-qcqs-morphism]. Choose a smooth surjective atlas $p:U\\to\\mathcal Z$ with $U$ a quasi-compact scheme, by [lem-sfb-algebraic-stack-quasicompact-surjection]. The projection $\\mathcal Z\\to\\mathcal X$ is smooth, and so is $U\\to\\mathcal X$, by [lem-sfb-stack-smooth-permanence]. For $b\\in\\Gamma(\\mathcal Z,\\mathcal B|_{\\mathcal Z})$, use universal adequacy of $j$ on this smooth test $U$: there is an etale covering with local sections of $\\mathcal C$ lifting positive powers of $b|_U$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-algebraic-stack-quasicompact-surjection",
+    "lem-sfb-stack-smooth-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1005.2398v3#S4.SS1",
+    "place": "Lemma 4.1.7, proof of (2) implies (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-covering-sieve-finite-affine-refinement] to the covering sieve of this etale covering of $U$ (take the base scheme to be $U$ and the etale object to be its identity). Obtain finitely many affine etale tests $W_i\\to U$, jointly surjective, each factoring through a member of the chosen covering. Pull back the corresponding lift to obtain $c_i\\in\\Gamma(W_i,\\mathcal C|_{W_i})$ with $j(c_i)=b|_{W_i}^{n_i}$, $n_i>0$. Set $N=\\prod_i n_i$ and $d_i=c_i^{N/n_i}$. Then $j(d_i)=b|_{W_i}^{N}$. For an empty cover set $N=1$; the empty atlas then covers the empty stack. Each $W_i\\to\\mathcal Z$ and each relation space $R_{ij}=W_i\\times_{\\mathcal Z}W_j\\to\\mathcal X$ is smooth by [lem-sfb-stack-smooth-permanence], since etale maps are smooth in [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+    "lem-sfb-stack-smooth-permanence",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1005.2398v3#S4.SS1",
+    "place": "Lemma 4.1.7, proof of (2) implies (1)"
+   }
+  },
+  {
+   "text": "On $R_{ij}$ the images under $j$ of the two restrictions of $d_i,d_j$ both equal the restriction of $b^N$. The smooth-pullback injectivity in [lem-sfb-stack-algebra-smooth-image] therefore makes those restrictions equal. By [lem-sfb-smooth-cover-section-descent], the compatible $d_i$ descend to $d\\in\\Gamma(\\mathcal Z,\\mathcal C|_{\\mathcal Z})$, and equality can be checked on the same cover, so $j(d)=b^N$. The direct-image formula in [def-sfb-adequately-affine-morphism] identifies this with a power lift on $V$. Thus $f_*j$ has power lifts on every affine smooth test, and hence is universally adequate on all smooth tests by taking an affine open covering.",
+   "uses": [
+    "lem-sfb-stack-algebra-smooth-image",
+    "lem-sfb-smooth-cover-section-descent",
+    "def-sfb-adequately-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1005.2398v3#S4.SS1",
+    "place": "Lemma 4.1.7, proof of (2) implies (1)"
+   }
+  },
+  {
+   "text": "Combine the two maps without assuming either is surjective on sections. For any smooth test $T$ and section $b\\in(f_*\\mathcal B)(T)$, the just-proved adequacy of $f_*j$ gives an etale cover $T_i\\to T$ and $c_i\\in(f_*\\mathcal C)(T_i)$ with $j(c_i)=b|_{T_i}^{N_i}$. Adequacy of $f_*q$ gives etale covers $T_{ij}\\to T_i$ and $a_{ij}\\in(f_*\\mathcal A)(T_{ij})$ with $q(a_{ij})=c_i|_{T_{ij}}^{M_{ij}}$. Consequently $u(a_{ij})=b|_{T_{ij}}^{N_iM_{ij}}$, with positive exponent. The composite covering is etale, by the covering-composition axiom [def-weil-pbc-sites-and-cohomology]. This is exactly universal adequacy of $f_*u$ [def-sfb-adequately-affine-morphism].",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sfb-adequately-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1005.2398v3#S4.SS1",
+    "place": "Lemma 4.1.7, proof of (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-algebra-smooth-image",
+  "def-sfb-adequately-affine-morphism",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-algebraic-stack-quasicompact-surjection",
+  "lem-sfb-stack-smooth-permanence",
+  "lem-weil-pbc-etale-covering-sieve-finite-affine-refinement",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-smooth-cover-section-descent",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1005.2398v3#S4.SS1",
+  "place": "Alper Lemma 4.1.7, (2) implies (1), image reduction and injective equalizer argument; expanded using Stacks smooth-test image and section descent. Local Alper PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adequately affine pushforward preserves universally adequate maps of quasi coherent algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  P f →\\n    ∀ [AlgebraicGeometry.IsAffine X] [AlgebraicG\", \"doc\": \"If a morphism $ f $ between affine schemes $ X $ and $ Y $ satisfies property $ P $, then the induced ring homomorphism $ f^\\\\#: \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ on global sectio\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q],\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.sourceAffineLocally fun {R S} [CommRing R]\", \"doc\": \"A morphism of schemes with affine target satisfies property $ P $ if and only if for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ satisfies property $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [i : AlgebraicGeometry.IsAffine Y], P.toProperty f ↔ P f\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes where $ Y $ is affine, the application of the converted property $ P.\\\\text{toProperty} $ to $ f $ is logically equivalent to the direct application of the ori\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "adequatelyAffine|universallyAdequate|universally_adequate|adequately_affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power surjective algebra maps on algebraic stacks remain power surjective under adequately affine direct image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"module\": \"Mathlib.RingTheory.SurjectiveOnStalks\", \"type\": \"{S' T' : Type*} [CommRing S'] [CommRing T'] [Algebra R S] [Algebra R T] [Algebra R S'] [Algebra R T'] {f : S →ₐ[R] S'}\\n  (Hf : f.SurjectiveOnStalks) {g : T →ₐ[R] T'} (Hg : g.SurjectiveOnStalks) :\\n  (Algebra.TensorProduct.map f g).SurjectiveOnStalks\", \"doc\": \"If algebra homomorphisms $ f : S \\\\to S' $ and $ g : T \\\\to T' $ over a commutative semiring $ R $ are surjective on stalks, then the induced algebra homomorphism $ S \\\\otimes_R T \\\\to S' \\\\otimes_R T' $ i\"}\n  {\"name\": \"Algebra.algebraMapSubmonoid_powers\", \"module\": \"Mathlib.Algebra.Algebra.Basic\", \"type\": \"{S : Type*} [Semiring S] [Algebra R S] (r : R) :\\n  Algebra.algebraMapSubmonoid S (.powers r) = Submonoid.powers (algebraMap R S r)\", \"doc\": \"For any element $ r $ in a commutative semiring $ R $ and an $ R $-algebra $ S $, the image of the submonoid generated by the powers of $ r $ under the canonical algebra homomorphism $ R \\to S $ is equ\"}\n  {\"name\": \"Submodule.map_pow\", \"module\": \"Mathlib.Algebra.Algebra.Operations\", \"type\": \"{A'} [Semiring A'] [Algebra R A'] (f : A →ₐ[R] A') (n : ℕ) : map f.toLinearMap (M ^ n) = map f.toLinearMap M ^ n\", \"doc\": \"For any algebra homomorphism $ f : A \\\\to A' $ over a commutative semiring $ R $, and for any natural number $ n $, the image of the $ n $-th power of a submodule $ M $ under the linear map induced by \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.iff_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \"[IsAffine X] [IsAffine Y] : SurjectiveOnStalks f ↔ RingHom.SurjectiveOnStalks (f.app ⊤).hom\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is surjective on stalks if and only if the corresponding ring homomorphism between their global sections is surjective on stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"For any closed immersion $ f: X \\\\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.mono_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \"[SurjectiveOnStalks f] (hf : Function.Injective f) : Mono f\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.SurjectiveOnStalks f] (x : ↥X),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is surjective on stalks, then for every point $ x \\\\in X $, the induced map on the stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is surjec\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adequately affine morphism a universally adequate algebra homomorphism has universally adequate pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  P f →\\n    ∀ [AlgebraicGeometry.IsAffine X] [AlgebraicG\", \"doc\": \"If a morphism $ f $ between affine schemes $ X $ and $ Y $ satisfies property $ P $, then the induced ring homomorphism $ f^\\\\#: \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ on global sectio\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q],\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.sourceAffineLocally fun {R S} [CommRing R]\", \"doc\": \"A morphism of schemes with affine target satisfies property $ P $ if and only if for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ satisfies property $ \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  outParam AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; scheme morphisms and general module-sheaf adjunctions do not give the stated algebraic-stack theorem or its smooth-chart identifications in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequately-affine-composition",
+  "date": "2026-10-23",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B",
+   "via": [
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-algebra-pushforward",
+  "worker": "stage1",
+  "summary": "Followed Alper image-factorization and injective smooth-descent proof. Retained arbitrary algebras and non-Noetherian stacks. Made finite common-exponent gluing explicit and separated quasi-coherent image exactness from the nonexact big-fppf inclusion. Created three statement-only supporting lemmas after DAG, blueprint, project Lean and recorded Mathlib searches.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/moduli prerequisite chain recorded in blueprint.from.place; this node supplies the Alper 4.1.7 pushforward input to adequate-affineness composition. The ancestor command returns null for this inherited chain; retained null and the entire inherited via list."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-ff4c38e4a",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-ff4c38e4a (reviewer sub-agent of L); spot-checked: This is a first split. Statement and stmt_deps are byte-identical to base and live, and the item is still unsplit on live, so it has not been superseded. I checked the proof against Alper arXiv:1005.2398v3, Lemma 4.1.7 (2)⇒(1), and Def. 3.4.3/4.1.1.\n\nSteps:\n- Step 1: the image factorization A→C→B, then adequate affineness of f applied to the surjection q. j(q(a))=u(a) gives that j is universally adequate.\n- Step 2: reduction to an affine smooth test V. Z=X×_YV is algebraic (04T2) and quasi-compact (f is qcqs), with a quasi-compact atlas U. Z→X and U→X are smooth by the new permanence node.\n- Step 3: finite affine étale refinement (Lean lemma with W=id_U, U compact), then the common exponent N=∏n_i with d_i=c_i^{N/n_i}.\n- Step 4: smooth-source injectivity on R_ij, then 076S descent and equality checked on the cover.\n- Step 5: composing the two power lifts.\nThis replaces Alper's 3.4.5 global lift with étale-local lifts glued over Z. The route is valid and uses only smooth-test injectivity.\n\nNew nodes, all true and statement-only:\n- stack-algebra-smooth-image: 06WV(2)-(4) and 0GQF, with Γ=Hom(O,−) left exact.\n- smooth-cover-section-descent: 076S with F=O. Checked on the identity cover and on the empty stack.\n- stack-smooth-permanence: 075V/075W. The existing lem-sfb-stack-chartwise-smooth-etale-calculus covers only representable morphisms, so this is a generalization, not a duplicate.\nNo other node duplicates them (equalizer/descent/image grep over the snapshot DAG).\n\nBatch-5 flags: each listed citation reaches sec-trace-formula only through definitions and algebraic-space/fppf foundations (fibre products 04T2, quasi-compact atlas 04YC, def-trf-algebraic-space). None is a trace-formula or Poincaré-duality step, so all are accepted. The item's own stmt_dep def-sfb-adequately-affine-morphism already reached those definitions.\n\nNo SGA. Advisories: the 04YC citation in step 2 is redundant with the qcqs definition; the cross-unit Lean étale-refinement tool (sk-prop-h2) may need recording in tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateAlgebraPushforward",
+  "declaration": "CategoryTheory.isUniversallyAdequateModuliDirectImage_of_isAdequatelyAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateAlgebraPushforward.lean",
+  "statement": "theorem isUniversallyAdequateModuliDirectImage_of_isAdequatelyAffine {k : Type u} [Field k] {X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))} {Y : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))} (f : BasedFunctor X Y) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (hf : IsAdequatelyAffineMorphism f hX hY) {A B : ModuliAlgebraSheaf X hX.1.1} (u : A ⟶ B) (hA : IsQuasicoherentModuliAlgebra A) (hB : IsQuasicoherentModuliAlgebra B) (hu : IsUniversallyAdequateModuliDirectImage (BasedFunctor.id X) u) : IsUniversallyAdequateModuliDirectImage f u",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded universal-adequacy predicate at BasedFunctor.id X for the input map; X ×_X T is canonically T, with matching section rings and restriction maps. No second definition of adequacy or extra hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d54101f1",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Item record = live except lean field; lean.statement verbatim. Clause-by-clause: Field k; X,Y BasedCategory over Spec k with IsAlgebraicModuliStack, independent universes; hf IsAdequatelyAffineMorphism; arbitrary ModuliAlgebraSheaf A B with IsQuasicoherentModuliAlgebra, no surj/inj/finiteness/Noetherian hyps; hu = IsUniversallyAdequateModuliDirectImage (BasedFunctor.id X) u — unfolded: tests = smooth scheme tests of X, sections on X×_X T ≃ discrete T with terminal id_T, = Γ(T,t*A), exact match with node; conclusion = dependency predicate for f. Edge cases (empty cover/test, N>0, zero algebras, f=id) fine. No defs, sorry only, docstrings with source place/blueprint/5 proof steps, report has Worker report + Second reading. Advisory: 3 transitively redundant plain imports. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,287 @@
+{
+ "id": "lem-trf-tate-gauss-fraction-stability",
+ "kind": "statement",
+ "title": "Stability of the Gauss fraction field of a Tate algebra",
+ "statement": "Let $k$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value, and stable in the sense of [def-trf-stable-nonarchimedean-field]. Let $e\\ge0$ and $T=k\\langle U_1,\\ldots,U_e\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation], with $G(\\sum_\\nu a_\\nu U^\\nu)=\\sup_\\nu|a_\\nu|$. Then $T$ is an integral domain, $G$ is multiplicative, and the formula $|a/b|_F=G(a)/G(b)$, for $a,b\\in T$ and $b\\ne0$, defines a real-valued multiplicative nonarchimedean absolute value on $F=\\operatorname{Frac}(T)$ extending that of $k$. With this absolute value, $F$ is stable [def-trf-stable-nonarchimedean-field]. No completeness of $F$ is asserted.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 5.1.2/1, printed p.193 (scan PDF p.199), and Stability Theorem 5.3.2/1, printed p.213 (scan PDF p.219). Primary scan read 2026-10-24; e=0 is the identity case.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-trf-stable-nonarchimedean-field"
+ ],
+ "proof": [
+  {
+   "text": "If $e=0$, the restricted-series ring consists of constants, so $T=k$, $G=|\\cdot|_k$ and $F=k$; every assertion is the given field and stability hypothesis [def-trf-stable-nonarchimedean-field]. Hence assume $e\\ge1$. By [lem-trf-restricted-series-gauss-completion] the coefficient supremum is finite, definite, invariant under negation, normalized at $1$ and ultrametric. By [lem-trf-tate-gauss-multiplicative], $G(ab)=G(a)G(b)$. If $ab=0$ and both factors were nonzero, definiteness would give $0=G(a)G(b)>0$. Constants give $1\\ne0$, so $T$ is an integral domain.",
+   "uses": [
+    "def-trf-stable-nonarchimedean-field",
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-tate-gauss-multiplicative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.1.2/1, printed p.193; zero-variable case from the definitions."
+   }
+  },
+  {
+   "text": "Define $|a/b|_F=G(a)/G(b)$ for $b\\ne0$. Its denominator is positive. If $a/b=c/d$, then $ad=cb$, and multiplicativity gives $G(a)G(d)=G(c)G(b)$, proving independence of representatives. For products, $G(ac)/G(bd)=(G(a)/G(b))(G(c)/G(d))$. For sums, $$\\frac{G(ad+cb)}{G(bd)}\\le\\frac{\\max(G(a)G(d),G(c)G(b))}{G(b)G(d)}=\\max\\left(\\frac{G(a)}{G(b)},\\frac{G(c)}{G(d)}\\right).$$ Definiteness follows from $a/b=0\\iff a=0$; normalization and negation follow from those of $G$. For a constant $u$, $G(u)=|u|_k$, so the fraction norm extends the given absolute value and is nontrivial. This verifies every absolute-value axiom directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.1.2/1, printed p.193, extended to fractions by the displayed calculation."
+   }
+  },
+  {
+   "text": "Let $P\\subset T$ be the subring of finite-support coefficient families, namely the polynomial ring in the $U_i$, and let $R\\subset F$ be its fraction field. The coefficient embedding is injective and preserves multiplication; its norm is the maximum of its finitely many coefficient absolute values. Thus the restricted absolute value on $R$ is exactly the Gauss absolute value in [lem-trf-gauss-rational-function-stability]. That node applies because $k$ is complete, nontrivially valued and stable and $e\\ge1$, and proves that $R$ is stable. Here $R$ is the rational function field, not the fraction field of all restricted series.",
+   "uses": [
+    "lem-trf-gauss-rational-function-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Sections 5.3.3–5.3.4, concluding paragraph printed p.220; reduction described in Section 5.3.2, printed p.214."
+   }
+  },
+  {
+   "text": "For $a/b\\in F$, $b\\ne0$, let $p_N,q_N\\in P$ be the total-degree truncations of $a,b$. They converge in $G$ by [lem-trf-restricted-series-gauss-completion]. For all sufficiently large $N$, $G(q_N-b)<G(b)$, whence the two ultrametric inequalities imply $G(q_N)=G(b)>0$. Moreover $G(p_N)\\le G(a)$ because truncation removes coefficients. The identity $$\\frac ab-\\frac{p_N}{q_N}=\\frac{(a-p_N)q_N+p_N(q_N-b)}{bq_N}$$ therefore gives $$\\left|\\frac ab-\\frac{p_N}{q_N}\\right|_F\\le\\max\\left(\\frac{G(a-p_N)}{G(b)},\\frac{G(a)G(q_N-b)}{G(b)^2}\\right)\\longrightarrow0.$$ Thus $R$ is dense in $F$, with exactly the isometric inclusion of step 3. The calculation also covers $a=0$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Section 5.3.2, paragraph preceding Proposition 3, printed p.214; explicit rational-truncation estimate supplied here."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tate-fraction-weak-stability] to the present $k,T,F$. Its assumptions require completeness and nontriviality of $k$, both given; it requires neither stability of $k$ nor separability of a finite extension. Consequently every finite spectral extension of $F$ has the two-sided coordinate-norm bounds displayed there. Together with the stable dense valued subfield $R$ from steps 3–4, these are exactly the hypotheses of [lem-trf-dense-weak-stability-transfer] with $K=R$. It follows that $F$ is stable. This conclusion concerns the spectral norm on every finite extension and asserts no completeness of $F$.",
+   "uses": [
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-dense-weak-stability-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Theorem 5.3.1/1 and Proposition 5.3.2/3, printed pp.212–214; completion criterion Proposition 3.6.2/3, printed p.158."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-gauss-multiplicative",
+  "lem-trf-gauss-rational-function-stability",
+  "lem-trf-tate-fraction-weak-stability",
+  "lem-trf-dense-weak-stability-transfer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Source-guided assembly of BGR 5.3.2/3 from 5.3.1/1, 3.6.2/3 and Sections 5.3.3–5.3.4; explicit fraction and density calculations. Primary scan read online, archival PDF absent locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]tab.*[Gg]auss|[Gg]auss.*[Ff]raction|[Tt]ate.*[Ss]tab|[Cc]artesian.*[Nn]orm",
+   "results": {
+    "t": "2026-10-24T14:00:13Z",
+    "tool": "grep",
+    "query": "[Ss]tab.*[Gg]auss|[Gg]auss.*[Ff]raction|[Tt]ate.*[Ss]tab|[Cc]artesian.*[Nn]orm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/InnerProductSpace/Continuous.lean",
+     "Mathlib/Analysis/Complex/ValueDistribution/FirstMainTheorem.lean",
+     "Mathlib/Data/List/Sort.lean",
+     "Mathlib/Data/List/Sort.lean"
+    ],
+    "digest": "63d976b78adb2456"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic completions, Laurent series or general Gauss bounds, not stability of Gauss fraction fields of restricted series."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Gauss valued fraction field of a finite variable Tate algebra over a complete stable nonarchimedean field is stable",
+   "results": {
+    "t": "2026-10-24T14:00:13Z",
+    "tool": "leansearch",
+    "query": "The Gauss valued fraction field of a finite variable Tate algebra over a complete stable nonarchimedean field is stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.isFractionRing",
+     "PowerSeries.gaussNorm",
+     "LaurentSeries.RatFuncAdicCompl",
+     "LaurentSeries.instIsFractionRingPowerSeries",
+     "FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial",
+     "LaurentSeries.instLaurentSeriesComplete",
+     "LaurentSeries.powerSeriesRingEquiv_coe_apply",
+     "IsNonarchimedeanLocalField.instCompleteSpace"
+    ],
+    "digest": "dcb1e64fb172e010"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic completions, Laurent series or general Gauss bounds, not stability of Gauss fraction fields of restricted series."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\", \"IsMul\"",
+   "results": {
+    "t": "2026-10-24T14:00:13Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm\", \"IsMul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic completions, Laurent series or general Gauss bounds, not stability of Gauss fraction fields of restricted series."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of stability: the fraction field of a Tate algebra with Gauss absolute value is stable if its complete ground field is stable",
+   "results": {
+    "t": "2026-10-24T14:00:15Z",
+    "tool": "leanfinder",
+    "query": "Transitivity of stability: the fraction field of a Tate algebra with Gauss absolute value is stable if its complete ground field is stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.RatFuncAdicCompl",
+     "Valued.completable",
+     "LaurentSeries.ratfuncAdicComplPkg",
+     "LaurentSeries.LaurentSeriesPkg",
+     "LaurentSeries.instUniformSpaceRatFuncAdicCompl",
+     "LaurentSeries.ratfuncAdicComplRingEquiv_apply",
+     "LaurentSeries.comparePkg_eq_extension"
+    ],
+    "digest": "d1d7d467c879aa1f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic completions, Laurent series or general Gauss bounds, not stability of Gauss fraction fields of restricted series."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability theorem for the rational fraction field of restricted convergent power series over a stable complete nonarchimedean field",
+   "results": {
+    "t": "2026-10-24T14:00:16Z",
+    "tool": "leanfinder",
+    "query": "Stability theorem for the rational fraction field of restricted convergent power series over a stable complete nonarchimedean field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentSeries.RatFuncAdicCompl",
+     "LaurentSeries.ratfuncAdicComplPkg",
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.LaurentSeriesPkg",
+     "LaurentSeries.instUniformSpaceRatFuncAdicCompl",
+     "LaurentSeries.exists_ratFunc_val_lt",
+     "LaurentSeries.comparePkg_eq_extension",
+     "LaurentSeries.mem_integers_of_powerSeries"
+    ],
+    "digest": "5511ba1b3216d103"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern adic completions, Laurent series or general Gauss bounds, not stability of Gauss fraction fields of restricted series."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Gauss fraction field of the finite variable Tate algebra over a complete stable nonarchimedean field is stable in the orthogonal spectral basis sense",
+   "results": {
+    "t": "2026-10-24T15:07:09Z",
+    "tool": "leanfinder",
+    "query": "The Gauss fraction field of the finite variable Tate algebra over a complete stable nonarchimedean field is stable in the orthogonal spectral basis sense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers",
+     "Module.Basis.ofIsCoprimeDifferentIdeal_apply",
+     "Module.Basis.ofIsCoprimeDifferentIdeal",
+     "Algebra.SubmersivePresentation.basisKaehlerOfIsCompl",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "NumberField.mixedEmbedding.fractionalIdealLatticeBasis",
+     "Field.Emb.Cardinal.wellOrderedBasis"
+    ],
+    "digest": "b66797bd47d7bc06"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentSeries completions and arithmetic basis declarations do not state stability of a Gauss fraction field of restricted series."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-fraction-orthogonal-spectral-norm",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra.",
+   "via": [
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-gauss-fraction-stability",
+  "worker": "stage1",
+  "summary": "Preserved the full statement, including e=0 and the absence of completeness for F. Reused the existing Gauss multiplicativity and restricted-series norm/truncation nodes. Read primary BGR pages and split stability through the distinct rational function subfield, its density (proved explicitly), weak stability without a stable-base assumption, and a generic dense-field transfer. Added three statement-only nodes, each searched with all required search kinds.",
+  "blueprint": "Historical analytic support beneath lem-trf-local-term-locality along the inherited normalization ancestry; specifically BGR 5.3.2 stability used by the orthogonal spectral fraction norm. Latest blueprint contracting-local-term proof checked; its unit and chapter route are untouched."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-1519f2bbb",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-1519f2bbb (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, plus the cited statements: def-trf-stable-nonarchimedean-field, lem-trf-restricted-series-gauss-completion, lem-trf-tate-gauss-multiplicative, lem-trf-incomplete-spectral-algebra-norm and def-trf-restricted-series-presentation. The split follows BGR's proof of 5.3.2: rational-field stability (5.3.3–5.3.4), density, weak stability of Q(T_n) (5.3.1/1) and the completion criterion (3.6.2/3). The statement is unchanged and e=0 is handled. Step 1 (domain and multiplicativity) and step 2 (fraction absolute value: independence of representatives, product, ultrametric sum, extends |.|_k) check line by line. In step 4 the identity (a-p)q+p(q-b)=aq-pb and the bound using G(q_N)=G(b) are correct. In step 5 the hypotheses match the transfer node exactly: same spectral norm and coordinate bounds, R stable, dense, nontrivial compatible values. None of the new nodes restates the item. Rational-field stability is about R, not F, and is a specialization of BGR 5.3.4 to complete k. Weak stability is strictly weaker and needs no stability of k (degree-1 case checked). The transfer node is generic BGR 3.6.2/3; the K=F case and the basis-perturbation argument were checked. No duplicates found by rg -L over dag/nodes (weak stability, stable-field citers, Gauss, rational function field, BGR numbers); analytic-type23-stability is a different statement. Blueprint from/via are correct, all nodes are in unit sk-i-curve-zero, and there are no tool_uses and no SGA. The BGR PDF is not in local literature, so the source pages were not opened; I checked the places against BGR's known content. The worker's proof_origin=agent with WANTED is correct; confirm the pages once the PDF arrives. No fixes."
+ }
+}

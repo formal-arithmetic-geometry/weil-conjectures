@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-integral-scalar-pullback-completion-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil-structures paragraph: pullback exchange and its scalar compatibility; parent DAG proof step 7, identifying the normalized whole-system scalar comparison with the specified tensor/completion map.",
+   "via": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lifting the scalar counit square to the prescribed lambda and mu coordinates",
+ "statement": "With the same coefficient, scheme, completeness, constructibility and comparison-system data as follows, the completed scalar comparison has the prescribed realization coordinates. Fix a prime ell, finite Q_ell-extensions E and L and an embedding iota [def-weil-l-adic-coefficient-extension], a scheme map f:X -> Y with ell invertible in residue fields [def-weil-scheme-morphism-properties], and a constructible derived-complete K on Y [def-weil-derived-complete-integral-detailed]. Let alpha be scalarPullbackCompleted for the specified completed operations [def-pur-integral-derived-operations, def-weil-integral-scalar-extension, lem-pur-integral-operations-scalar-extension], using any proof that F_E K is complete. For any simultaneous representative-normalized comparison system C, let lambda:S_X F_E K -> L_L,X(V_X U_E R_E,Y K) and mu:F_L S_Y K -> L_L,X(V_X U_E R_E,Y K) be the prescribed realization isomorphisms [def-sf-integral-comparison-system-data]. Then alpha ; mu = lambda as morphisms of the ambient integral derived category. No global coherence or choice of a comparison system is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: pullback exchange and its scalar compatibility; parent DAG proof step 7, identifying the normalized whole-system scalar comparison with the specified tensor/completion map."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension",
+  "def-sf-integral-comparison-system-data",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the actual entire-system counit square. For any realization a:X -> L(P) and system arrow t:P -> Q, counit naturality gives R(a ; L(t)) ; epsilon_Q = R(a) ; epsilon_P ; t. Use this to combine each primitive scalar/pullback counit with its next system map; these are the counit coordinates of lambda and of the target realization before kappa inverse.",
+   "uses": [
+    "lem-sf-integral-scalar-pullback-counit-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction Hom bijection is injective. The preceding equality of counit coordinates therefore says alpha followed by the target realization equals lambda followed by L(kappa). Compose with L(kappa inverse), and use functoriality and the inverse identities. The target realization followed by L(kappa inverse) is precisely mu.",
+   "uses": [
+    "def-sf-integral-comparison-system-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-scalar-pullback-counit-compatibility",
+  "def-sf-integral-comparison-system-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: pullback exchange and its scalar compatibility; parent DAG proof step 7, identifying the normalized whole-system scalar comparison with the specified tensor/completion map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalized integral pullback scalar comparison agrees with the scalar tensor and completion comparison on constructible sheaves",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary module pullback or adic completion results do not identify the specified whole-system and completed pro-etale scalar maps."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackCompleted|integralComparisonScalar",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary module pullback or adic completion results do not identify the specified whole-system and completed pro-etale scalar maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical scalar extension comparison for completed integral pullback is realized by the same balanced tensor map on the entire quotient tower",
+   "results": "8 hits: LinearEquiv.extendScalarsOfIsLocalizationEquiv, AdicCompletion.instIsScalarTower, AbstractCompletion.compare, AlgHom.extendScalars, AdicCompletion.ofTensorProduct_tmul, algHomEquivSigma, IsAdicComplete.StrictMono.of_lift, AdicCompletion.instIsScalarTower_1",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary module pullback or adic completion results do not identify the specified whole-system and completed pro-etale scalar maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AutomorphismConstructibleStageEquivalence",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralScalarPullbackCompletionNormalization",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackCompletionNormalization.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackCompletion_normalization",
+  "statement": "theorem integralScalarPullbackCompletion_normalization\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (C : IntegralComparisonSystem.{u} l)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (K : sfIntegralConstructibleCategory l E Y)\n    (hF : IsSfDerivedComplete l E X ((integralDerivedPullback l E f).obj K.obj)) :\n    (scalarPullbackCompleted l E L ι f K.obj K.property.1 hF).hom ≫\n        (integralComparisonMu l E L ι C f K).hom =\n      (integralComparisonLambda l E L ι C f K).hom",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T065236-L-2766700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T065236-L-2766700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

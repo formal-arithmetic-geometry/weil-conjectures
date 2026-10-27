@@ -17,14 +17,15 @@
  ],
  "proof": [
   {
-   "text": "Write $a:V\\to X$ for the structure morphism and put $R=V\\times_S X$, $s=\\operatorname{pr}_V:R\\to V$, and $t=\\operatorname{pr}_V\\circ\\varphi:R\\to V$. The map $s$ is the base change of $p$ along $V\\to S$; via $\\varphi$, so is $t$. Since $X$ and $S$ are affine, [lem-weil-pbc-morphism-affine-schemes-affine] makes $p$ affine. Thus [lem-weil-pbc-affine-morphism-permanence](1),(3) and [lem-weil-pbc-flat-morphism-base-change] show that $s,t$ are affine, quasi-compact and flat. By [lem-galois-descent-datum-diagonal-identity], the pullback $\\Delta^*\\varphi:V\\to V$ of $\\varphi$ along the diagonal $\\Delta:X\\to X\\times_S X$ is $\\mathrm{id}_V$ (pulling the cocycle back along $X\\to X\\times_S X\\times_S X$ gives $\\alpha=\\alpha\\circ\\alpha$ for this automorphism $\\alpha$). Under the identifications of that node, $\\varphi\\circ(\\mathrm{id}_V,a)=(a,\\mathrm{id}_V)\\circ\\Delta^*\\varphi$. Consequently the map $e:V\\to R$ given by $(\\mathrm{id}_V,a)$ satisfies $s e=t e=\\mathrm{id}_V$.",
+   "text": "Write R = V ×_S X, s = pr_V, q = pr_X and t = descentRelationTarget D. The transport law gives t ≫ V.hom = q. Define inversion i by the pullback lift of (t, s ≫ V.hom). Naturality [lem-pd-transport-left-naturality], the cocycle law [def-pd-descent-datum], and the identity law [lem-galois-descent-datum-diagonal-identity] give i ≫ s = t, i ≫ t = s and i ≫ i = id. Thus i is an isomorphism. Since p is between affines, [lem-weil-pbc-morphism-affine-schemes-affine] makes it affine. Base change [lem-weil-pbc-affine-morphism-permanence, lem-weil-pbc-flat-morphism-base-change] makes s affine and flat; composition with i gives these properties for t. Both maps are quasi-compact by affineness. The section e = (id_V,V.hom) has e ≫ s = id and, by the same naturality and identity laws, e ≫ t = id.",
    "uses": [
     "def-pc-fibre-product",
     "def-pd-descent-datum",
     "lem-galois-descent-datum-diagonal-identity",
     "lem-weil-pbc-morphism-affine-schemes-affine",
     "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-flat-morphism-base-change"
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pd-transport-left-naturality"
    ],
    "elementary": false,
    "source": {
@@ -44,82 +45,49 @@
    }
   },
   {
-   "text": "Choose an affine open $Q\\subset V$ containing the prescribed point $v$ by [lem-weil-pbc-affine-opens-basis]. It is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], and $s^{-1}(Q)$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. Hence $K=\\sigma(Q)$ is quasi-compact: pull any open cover back along the continuous map $t$, choose a finite subcover of $s^{-1}(Q)$, and take its images. Also $K$ is closed under generalization. Indeed, if $y=t(r)\\in K$ and $y'\\leadsto y$, flatness of $t$ and [lem-weil-pbc-flat-generalizations-lift] give $r'\\leadsto r$ with $t(r')=y'$. The open $s^{-1}(Q)$ contains $r'$ because it contains $r$, so $y'\\in K$. Cover $K$ by affine opens of $V$ using the affine basis and take a finite subcover. Each affine open is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so their finite union is a quasi-compact open $H\\subset V$ containing $K$. In particular $Q\\subset K\\subset H$.",
+   "text": "Choose an affine open $Q$ containing $v$ by [lem-weil-pbc-affine-opens-basis]; it is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-a1-flat-relation-qc-image-intersections] to $Q$. Thus $K=\\sigma(Q)$ is quasi-compact and closed under generalization, and there is a quasi-compact open $H$ containing $K$. Step 2 gives $v\\in Q\\subseteq K$ and invariance of $K$.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
-    "lem-weil-pbc-flat-generalizations-lift",
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-a1-flat-relation-qc-image-intersections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0APA, lemma-first-observation, quasi-compactness and generalization stability of the saturation; finite affine covering."
+    "place": "Tag 0APA: apply the quasi-compact image interface to Q."
    }
   },
   {
-   "text": "Let $Z=|V|\\setminus H$ and $T=\\sigma(Z)$. Step 2 gives $Z\\subset T$ and $s^{-1}(T)=t^{-1}(T)$. The subsets $K$ and $T$ are disjoint: if $y=t(r)$ were in both with $s(r)\\in Z$, invariance of $K$ would give $s(r)\\in K\\subset H$, a contradiction. The subset $s^{-1}(Z)$ is closed. By [lem-weil-pbc-closed-subset-closed-subscheme] choose a closed immersion $j:C\\to R$ with exactly this image. The morphism $h=t\\circ j:C\\to V$ is affine: for each affine open $L\\subset V$, $t^{-1}(L)$ is affine, and [def-weil-closed-immersion] makes $j^{-1}(t^{-1}(L))$ affine. This is the affine-morphism definition [pqf-def-affine-morphism]. By [lem-weil-pbc-affine-morphism-permanence](3), $h$ is quasi-compact and its image is $T$. Therefore [lem-sc-picard-closure-specialization] gives, for every $y\\in B=\\overline T$, a point $y'\\in T$ with $y'\\leadsto y$. No constructibility or finite-presentation hypothesis on $T$ is needed.",
+   "text": "Apply [lem-a1-flat-relation-invariant-open-complement] to these $s,t,K,H$. Its saturation axiom and common section are supplied by steps 1–2. For $Z=V\\setminus H$ and $T=\\sigma(Z)$ it gives the invariant open $W=V\\setminus\\overline T$ with $v\\in K\\subseteq W\\subseteq H$.",
    "uses": [
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "def-weil-closed-immersion",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-sc-picard-closure-specialization"
+    "lem-a1-flat-relation-invariant-open-complement"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0APB, lemma-second-observation, closed subset image; Tag 02JQ, morphisms-lemma-reach-points-scheme-theoretic-image (closure formulation)."
+    "place": "Tag 0APB: apply the saturated-complement interface."
    }
   },
   {
-   "text": "The closed subset $B$ is invariant. If $s(r)=y\\in B$, choose $y'\\in T$ with $y'\\leadsto y$ by step 4. Flatness of $s$ and [lem-weil-pbc-flat-generalizations-lift] give $r'\\leadsto r$ with $s(r')=y'$. Invariance of $T$ implies $t(r')\\in T$, and continuity gives $t(r')\\leadsto t(r)$, hence $t(r)\\in B$. Conversely, starting with $t(r)\\in B$, use the same specialization assertion and flatness of $t$ to lift a generalization into $t^{-1}(T)=s^{-1}(T)$; its image under $s$ specializes to $s(r)$, proving $s(r)\\in B$. Thus $s^{-1}(B)=t^{-1}(B)$. Further, $K\\cap B=\\varnothing$: if $y\\in K\\cap B$, a generalization $y'\\in T$ supplied by step 4 belongs to $K$ by step 3, contradicting $K\\cap T=\\varnothing$. Put $W=V\\setminus B$. It is an invariant open with $v\\in Q\\subset K\\subset W$, and $W\\subset H$ since $Z\\subset T\\subset B$.",
+   "text": "Put $E=\\sigma(H)$. By step 2, $E$ is invariant and $W\\subseteq H\\subseteq E$. Apply [lem-a1-flat-relation-qc-image-intersections] again, now to $H$. It gives a quasi-compact containing open $H_2$ and expresses $E$ as the intersection of the nonempty set of quasi-compact opens of $H_2$ containing $E$, all quasi-compact open in $V$.",
    "uses": [
-    "lem-weil-pbc-flat-generalizations-lift"
+    "lem-a1-flat-relation-qc-image-intersections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0APB, lemma-second-observation, closure invariance and the open complement; both inclusions written out."
+    "place": "Tag 0APA: apply the same image interface to H."
    }
   },
   {
-   "text": "Now put $E=\\sigma(H)$. It is invariant by step 2, and $W\\subset H\\subset E$. Since $H$ is quasi-compact open, [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open] makes $s^{-1}(H)$ quasi-compact, and pulling back an open cover shows that its continuous image $E$ is quasi-compact. If $y=t(r)\\in E$ and $y'\\leadsto y$, [lem-weil-pbc-flat-generalizations-lift] lifts $y'$ to $r'\\leadsto r$; the open $s^{-1}(H)$ contains $r'$, hence $y'\\in E$. Thus $E$ is closed under generalization. The affine basis [lem-weil-pbc-affine-opens-basis] and compactness give a finite union $H_2$ of affine opens of $V$ containing $E$. Each constituent is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so this is a quasi-compact open; neither $W$ nor $E$ is asserted quasi-compact open.",
-   "uses": [
-    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
-    "lem-weil-pbc-flat-generalizations-lift",
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-affine-scheme-qcqs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0APA, lemma-first-observation, applied to H after the bounded invariant open of Tag 0APB."
-   }
-  },
-  {
-   "text": "The open subscheme $H_2$ is quasi-separated. To check this without assuming that intersections of affines are affine, cover $H_2$ by affine opens of $V$ contained in $H_2$, using [lem-weil-pbc-affine-opens-basis]. Their pairwise intersections are quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1) for the given quasi-separated scheme $V$. Clause (2) of that node applied to this cover of $H_2$ proves the assertion. Hence [lem-weil-pbc-qcqs-scheme-spectral] makes $|H_2|$ spectral. The subset $E$ remains quasi-compact in $H_2$ and is closed under generalization there. Its set of generalizations is therefore itself, so [lem-weil-pbc-spectral-generalizations-of-quasi-compact] identifies $E$ with the intersection of all quasi-compact opens of $H_2$ containing $E$. This family is a set and nonempty, since it contains $H_2$. Each member is also open and quasi-compact in $V$: openness composes for open subspaces, and the induced topology on each member is the same. This gives the required nonempty set-indexed family of quasi-compact opens of $V$.",
-   "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0APA, lemma-first-observation, spectral containing open; Tag 094L and Tag 0A31 (lemma-make-spectral-space)."
-   }
-  },
-  {
-   "text": "Finally $s^{-1}(F)=t^{-1}(F)$ is exactly $\\varphi^{-1}(X\\times_S F)=F\\times_S X$ for any subset $F\\subset |V|$, by the definitions of $s$ and $t$. Apply $\\varphi$ to obtain the two asserted equalities for $F=W$ and $F=E$. For $W$ both inverse images are open subschemes, and equality of their underlying opens is equality of the induced open subschemes [def-weil-open-immersion]. For $E$ only subsets are used. Steps 5--7 provide $v\\in W\\subset E$ and the intersection description, so all clauses hold. If $V$ is empty the assertion quantified over $v$ is vacuous.",
+   "text": "The complement lemma supplies equality of inverse images of the underlying subset of W; extensionality of opens turns this into the required equality of inverse-image opens. Saturation supplies equality of the inverse images of E. The image lemma gives E as an intersection of subsets which are open and compact in V. Replace each such open subset by the corresponding element of V.Opens. This identifies its nonempty family with the family of U : V.Opens contained in H₂, compact, and containing E. Extensionality gives the required doubly indexed intersection. No change of a target statement or definition is involved.",
    "uses": [
     "def-weil-open-immersion"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0APF and Tag 0APK, more-groupoids-lemma-ind-quasi-affine, translation to clauses (a),(b)."
+    "place": "Tag 0APF; More Groupoids Tag 0APK, translation (a),(b)."
    }
   }
  ],
@@ -130,18 +98,12 @@
   "lem-weil-pbc-morphism-affine-schemes-affine",
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pd-transport-left-naturality",
   "lem-pd-descent-orbit-saturated",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
-  "lem-weil-pbc-flat-generalizations-lift",
   "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "def-weil-closed-immersion",
-  "pqf-def-affine-morphism",
-  "lem-sc-picard-closure-specialization",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "lem-a1-flat-relation-qc-image-intersections",
+  "lem-a1-flat-relation-invariant-open-complement",
   "def-weil-open-immersion"
  ],
  "proof_origin": {
@@ -256,33 +218,28 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-fpqc-invariant-intersection-neighbourhoods",
   "worker": "stage1",
-  "summary": "Proved the invariant neighbourhood construction through source/target maps, singleton orbit saturation and unions, quasi-compact generalization-stable saturations, the invariant closure of the saturated complement, and a spectral-space intersection description. Reused existing nodes for every geometric and topological input; no new nodes or statement change.",
-  "blueprint": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, groupoid paragraph and translation (a),(b): construct v in W in E, with W and E invariant.",
+  "summary": "Repair of the 2026-10-22 re-split return: extracted two independent statement-only lemmas covering old steps 3–7. Retained the item statement verbatim and old steps 1–2 as direct applications of existing results; replaced the long image and complement arguments with their short assembly, using the image lemma twice. All eight old arguments and their citations are preserved verbatim in report.md. Each new statement was searched using leanfinder, leansearch, loogle and Mathlib grep. No Lean changes or compilation.",
+  "blueprint": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, groupoid paragraph and translation (a),(b): construct v in W in E, with W and E invariant. The same Gabber input is now factored into relation construction, the first observation (used twice), the second observation, and translation (a),(b).",
   "tool_uses": [
    {
     "node": "lem-pd-descent-orbit-saturated",
     "why": "Generic singleton transport-orbit saturation; unions give subset saturation. It supplies no invariant open or intersection neighbourhood, and no node of this unit states this relation fact."
-   },
-   {
-    "node": "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
-    "why": "Generic spectral-space description of generalizations of a quasi-compact subset, applied after constructing E. This unit has no replacement topology interface."
    }
   ]
  },
  "tool_uses": [
-  "lem-pd-descent-orbit-saturated",
-  "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+  "lem-pd-descent-orbit-saturated"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NM-b9bc34ffd",
-  "group": "NM",
+  "reviewer": "NT-cc-Q47-caedb15eb",
+  "group": "Q47",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-b9bc34ffd (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, the parent's use of it, the statements of all 22 cited nodes, and the Stacks sources (groupoids.tex 03LO/0APA/0APB, more-groupoids.tex 0APK (a),(b), topology 0A31, morphisms 02JQ). The statement matches the 0APK translation exactly, with affine flat surjective p, V quasi-separated, v in W in E, W an open invariant subscheme, and E an intersection of a nonempty family of quasi-compact opens that is set-theoretically invariant. Nothing is weakened. Steps 2-8 are correct and follow 0APA/0APB. The proof writes out the generalization-stability of sigma(Q) and sigma(H), K disjoint from T, both directions of invariance of the closure of T, and K disjoint from that closure (0APB leaves this implicit). It sets W = V minus that closure, with Q in K in W in H in E = sigma(H), and gets the spectral intersection description on the quasi-compact, quasi-separated H2. I checked the edge cases: V empty, p = id, H = V, and V not quasi-compact. There are no new nodes and no duplicates (rg for 0APA/0APB/03LO/0APK and invariant/saturation wording). I accept the two declared tool_uses, orbit-saturated and spectral-generalizations. picard-closure-specialization is closed in Lean, so it is a tool. Fix (C5/C1): step 1 re-derived inline that the diagonal pullback of phi is the identity, which the existing Lean-closed node lem-galois-descent-datum-diagonal-identity states exactly. I added it to step 1's uses and to proof_deps and cut the inline argument down to a gloss, in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-fpqc-invariant-intersection-neighbourhoods.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-caedb15eb (reviewer sub-agent of L); spot-checked: Re-split delivery answering the 2026-10-22 re-split note (8 steps, 6646 chars). The statement and stmt_deps are byte-identical to the base; only proof, proof_deps and split_report change. Old steps 1-2 stay byte-identical in the assembly as applications of existing nodes. Old steps 3, 6 and 7 become lem-a1-flat-relation-qc-image-intersections (Stacks 0APA proof plus 0A31), which the assembly applies twice. Old steps 4-5 become lem-a1-flat-relation-invariant-open-complement (Stacks 0APB proof plus 02JQ). Old step 8 is the elementary translation. Nothing is dropped. The two new nodes carry about 2.8k and 1.7k characters of old argument, so they are comparable in size, and neither restates the item. The assembly is 2953 characters, within the 3000 limit. I proved both new statements myself from groupoids.tex 3623-3680, topology 0A31 and morphisms 02JQ. Edge cases checked: H empty, H=V, K empty, the identity relation, V not quasi-compact. The extra hypotheses (s flat in the image node, H quasi-compact in the complement node) are harmless. The assembly hypotheses check out: V quasi-separated; s, t flat, quasi-compact and affine with a common section from step 1; saturation from step 2 via lem-pd-descent-orbit-saturated, a declared tool use that I accept. Every cited statement says what its step takes. rg over dag/nodes for 0APA/0APB/03LO and for invariant-open, intersection and generalization wording found no duplicate. Notions cite defining nodes; all four search kinds are recorded; blueprint from and via are correct. Maintainer note: the report's warning that lem-weil-pbc-flat-generalizations-lift is reversed is wrong. 'v specializing to f(t)' means v is a generalization of f(t), so the node states generalization lifting correctly, and the worker's Spec Z[1/2] counterexample misreads the direction. That node must not be changed. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -306,5 +263,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261022T143635-L-1268613",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

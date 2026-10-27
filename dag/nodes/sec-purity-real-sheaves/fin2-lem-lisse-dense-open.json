@@ -130,7 +130,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-p-real-purity",
  "split_report": {
@@ -204,5 +215,26 @@
   "landing": "20261019T112517-L-3948997",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be of finite type over $k$ and let $F$ be either a\nconstructible\n$\\Lambda$-sheaf on $X_{{\\mathrm{et}}}$ for a finite ring $\\Lambda$, or a constructible\n$\\Lambda_X$-module $F\\in\\Cons(X,\\Lambda)$ on $X_{\\mathrm{proét}}$ for $\\Lambda=E$ or $\\Qlb$\n([sk-lem-coefficient-heart]). Then there is an open\nsubscheme $U\\hookrightarrow X$ with\n$\\dim(X\\setminus U)<\\dim X$ on which the restriction $F|_U$ is\nlisse (finite locally constant, respectively locally free of finite rank for the\npro-étale topology).",
+  "proof": [
+   {
+    "text": "If $X$ is empty, take $U=X$.\nOtherwise let $C_1,\\ldots,C_t$ be all its irreducible components,\nusing [lem-weil-pbc-noetherian-finite-components].\nFor each component of maximal dimension, first remove all other\ncomponents. This gives an irreducible open $O_i$ of $X$\ncontaining its generic point $\\eta_i$. By the finite partition\nin [def-weil-pbc-constructible-complexes] (finite $\\Lambda$), respectively the finite\nstratification with lisse restrictions of [sk-lem-coefficient-heart]\n($\\Lambda=E,\\Qlb$), the stratum containing\n$\\eta_i$ contains a nonempty open $V_i\\subset O_i$.\nThe restriction to $V_i$ is lisse.\nThe $V_i$ are disjoint opens of $X$, so their finite union $U$\nis open and $F|_U$ is lisse.\nThe closed complement meets every maximal-dimensional component in\na proper closed subset. For finite-type schemes over a field such\na subset has strictly smaller dimension, by the dimension formula\nfor finitely generated algebras. The other components already have\nsmaller dimension. Hence $\\dim(X\\setminus U)<\\dim X$.",
+    "uses": [
+     "lem-weil-pbc-noetherian-finite-components",
+     "def-weil-pbc-constructible-complexes",
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

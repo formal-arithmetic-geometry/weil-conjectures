@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-space-flat-relative-pseudocoherence",
+ "kind": "statement",
+ "title": "Relative and absolute pseudo-coherence agree for flat finitely presented space morphisms",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived tensor uses K-flat resolutions and $R\\Gamma$ uses K-injective resolutions [def-pur-ringed-site-zeroth-hypercohomology]. A perfect object is etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Pseudo-coherent on a space means that etale locally on affine scheme charts the object is represented by a bounded-above complex of finite free structure modules; pseudo-coherent in $D(A)$ means quasi-isomorphic to a bounded-above finite-free $A$-complex [def-pc-ring-pseudo-coherent-complex]. For a locally finite type morphism $g:Z\\to T$ of algebraic spaces, an object $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ is pseudo-coherent relative to $T$ if for every integer $m$ and every commutative square $U\\to V$, $U\\to Z$, $V\\to T$ with $U,V$ schemes and the vertical maps etale, $L|_U$ is $m$-pseudo-coherent relative to $V$. Here on scheme charts use [def-sfb-relative-pseudo-coherent-complex]: locally factor $U\\to V$ as a closed immersion into finite-dimensional affine space over $V$; its derived pushforward admits locally a strictly perfect approximation inducing cohomology isomorphisms above $m$ and a surjection in degree $m$. The affine covers, factorizations and approximations may depend on $m$. Let $S$ be a scheme, let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ which is flat and locally of finite presentation, and let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Flatness and local finite presentation are tested on etale scheme charts. Then $K$ is pseudo-coherent relative to $Y$ if and only if $K$ is pseudo-coherent on $X$. No quasi-compactness, separatedness, properness or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DII, lemma-relative-pseudo-coherent-is-moot."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Consider any presentation diagram $fa=bh$, with schemes $U,V$, etale $a:U\\to X$, $b:V\\to Y$, and $h:U\\to V$. Flatness and local finite presentation are etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties]. Thus [lem-sfb-space-etale-presentation-property-criterion] makes $h$ flat and locally of finite presentation, and also supplies a presentation with $a$ surjective. These properties imply local finite type: on affines a finitely presented algebra is finitely generated. By [lem-sfb-space-derived-etale-chart-calculus], $a^*K$ has quasi-coherent cohomology and is exact restriction to the slice site. The equivalence [lem-sfb-derived-etale-zariski-equivalence] therefore gives $E_U\\in D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{Zar}})$ and its canonical identification $\\epsilon_U^*E_U\\cong a^*K$. This is the scheme object meant by $K|_U$ in the relative definition.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DII proof: etale localization; Tag 0CSW remark-match-relative-pseudo-coherence; spaces-morphisms.tex Tag 03MJ; spaces-perfect.tex Tags 08F4 and 071Q"
+   }
+  },
+  {
+   "text": "For each such $h$, apply [lem-sfb-flat-ambient-relative-pseudocoherence] to $U\\xrightarrow{\\mathrm{id}_U}U\\xrightarrow{h}V$ and $E_U$. The identity is a closed immersion: on each affine its ring map is the identity surjection with zero kernel. Its direct-image functor on module sheaves is the identity, so applying it to a K-injective resolution computes $R(\\mathrm{id}_U)_*E_U\\cong E_U$. Hence $E_U$ is pseudo-coherent relative to $V$ if and only if it is pseudo-coherent on the Zariski scheme $U$. The ambient lemma imposes no boundedness or quasi-compactness condition on $E_U$ or $U$.",
+   "uses": [
+    "lem-sfb-flat-ambient-relative-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UU, lemma-check-relative-pseudo-coherence-on-charts, with identity closed immersion, for all integers m"
+   }
+  },
+  {
+   "text": "Suppose $K$ is pseudo-coherent relative to $Y$. In a presentation with $a:U\\to X$ surjective, the definition gives relative $m$-pseudo-coherence of $E_U$ for every $m$, hence relative pseudo-coherence. Step 2 makes $E_U$ absolutely pseudo-coherent. By [def-pur-pseudo-coherent-complex], it has bounded-above finite-free models on a Zariski open cover of $U$. The exact tensor pullback $\\epsilon_U^*$ of [lem-sfb-derived-etale-zariski-equivalence] preserves quasi-isomorphisms and finite free structure modules, so these become etale-local models of $a^*K$. They give local models on every object $W\\to X$ of the small etale site: [lem-trf-space-fibre-products-etale-covers] makes $W\\times_XU\\to W$ a surjective etale scheme cover; pull back the chosen open cover of $U$ to it. On these refinements, pullback is the exact slice restriction of [lem-sfb-space-derived-etale-chart-calculus], so it preserves the models. To meet the chain-map form of [def-sfb-space-pseudocoherent-complex], represent $K$ by a K-injective complex $I$ [def-pur-kinjective-complex] on the small etale model. Its restriction to every object of the site is again K-injective [lem-pur-kinjective-restrict-localized], so each of the above derived-category isomorphisms $F\\to I|_{W'}$ is the class of a chain map [lem-sc-kinjective-quasi-iso-comparison], which is then a quasi-isomorphism. Covering transitivity, applied to the sieves generated by these refinements, now gives exactly the local finite-free condition of [def-sfb-space-pseudocoherent-complex] on $X$ with $P=I$. No common upper bound is chosen.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "def-pur-pseudo-coherent-complex",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-sfb-space-pseudocoherent-complex",
+    "def-pur-kinjective-complex",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DII proof and definition-relative-pseudo-coherence; spaces-perfect.tex Tags 071Q and 08HE; perfect.tex Tags 08E5 and 08E7; spaces-topologies.tex Tag 041F; sites-cohomology.tex Tag 08FI (lemma-restrict-K-injective-to-open); derived.tex Tag 070I (lemma-K-injective)"
+   }
+  },
+  {
+   "text": "Conversely, suppose $K$ is pseudo-coherent on $X$. For an arbitrary presentation of step 1, restrict the local finite-free models in [def-sfb-space-pseudocoherent-complex] to the slice site of $U$. By the exact restriction of [lem-sfb-space-derived-etale-chart-calculus] they give local bounded-above finite-free models $P^\\bullet$ of $a^*K$. For each integer $m$, the stupid truncation $P^{\\ge m}\\to P$ is a map from a bounded finite-free complex: it is the identity in degrees $\\ge m$ and zero below. On cohomology it is an isomorphism above $m$, and in degree $m$ it is the quotient $\\ker d^m\\twoheadrightarrow\\ker d^m/\\operatorname{im}d^{m-1}$. Thus $a^*K$ is $m$-pseudo-coherent on $U_{\\mathrm{et}}$ for every $m$. By [lem-sfb-etale-pseudocoherence-descent], applied to $E_U$ and $\\epsilon_U^*E_U\\cong a^*K$ from step 1, $E_U$ is pseudo-coherent on $U_{\\mathrm{Zar}}$. Step 2 makes it pseudo-coherent relative to $V$, hence relatively $m$-pseudo-coherent for every $m$ by [def-sfb-relative-pseudo-coherent-complex]. Since the presentation was arbitrary, the quantified definition in the statement proves relative pseudo-coherence of $K$ over $Y$. The local models, refinements and truncations may depend on $m$.",
+   "uses": [
+    "def-sfb-space-pseudocoherent-complex",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DII proof: converse; spaces-perfect.tex Tag 08HE lemma-descend-pseudo-coherent; sites-cohomology.tex Tag 08FT definition-pseudo-coherent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-pseudocoherent-complex",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "def-pur-kinjective-complex",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sc-kinjective-quasi-iso-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DII, lemma-relative-pseudo-coherent-is-moot: etale localization followed by more-morphisms.tex Tag 09UU; scheme/site transition spelled out using spaces-perfect.tex Tags 071Q and 08HE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism of algebraic spaces relative pseudo coherence is equivalent to absolute pseudo coherence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat finite presentation converts relative pseudo coherent derived complexes to pseudo coherent complexes on the source algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative and absolute pseudo coherence agree for flat locally finitely presented morphisms of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*pseudo.?coher|pseudo.?coher.*flat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary sheaf finite presentation, scheme morphism properties or etale site definitions, not relative pseudo-coherence for derived complexes on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|pseudocoher",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary sheaf finite presentation, scheme morphism properties or etale site definitions, not relative pseudo-coherence for derived complexes on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat morphisms of finite presentation of algebraic spaces, relative pseudo coherent complexes are exactly pseudo coherent complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary sheaf finite presentation, scheme morphism properties or etale site definitions, not relative pseudo-coherence for derived complexes on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherence of a quasi coherent derived complex for a flat locally finitely presented morphism of algebraic spaces is equivalent to pseudo coherence on the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary sheaf finite presentation, scheme morphism properties or etale site definitions, not relative pseudo-coherence for derived complexes on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived sheaf complex on an algebraic space is pseudo coherent if and only if its restrictions to etale scheme charts are pseudo coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (b : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.obj b).obj = CategoryTheory.Cat.of (Opposite.unop b.as).Modules\", \"doc\": \"For any scheme $X$ considered as an object in the locally discrete opposite category of schemes, the pseudofunctor assigns the category of modules over $X$. Specifically, applying the pseudofunctor to\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary sheaf finite presentation, scheme morphism properties or etale site definitions, not relative pseudo-coherence for derived complexes on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-tests-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0DII, lemma-relative-pseudo-coherent-is-moot.",
+   "via": [
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-relative-pseudocoherence",
+  "worker": "stage1",
+  "summary": "Checked Tag 0DII against the unchanged imported statement. Reused the existing flat-ambient scheme comparison at the identity closed immersion, the existing etale presentation and derived chart calculus, and the existing Zariski-etale pseudo-coherence comparison. Wrote both localization directions, including the finite-free stupid-truncation calculation and refinement of a source atlas over arbitrary etale objects. Added no nodes and made no mathematical statement change. All citations were read and quoted verbatim.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3): supports the existing coherent-duality prerequisite chain recorded in blueprint.from.place. This item supplies the 0DII localization comparison used in the 0GFL perfect-test criterion; its steps realize exactly the etale-localization and 09UU scheme-reduction sentences. Whole-blueprint searches found no node stating this comparison; the existing null ancestor and via chain are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-17736dd01",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-17736dd01 (reviewer sub-agent of L); spot-checked: I read the item, which has 0 new nodes and a statement byte-identical to the base (diffed against clones/live; the item is still unsplit live, so it is not superseded). I checked it against Stacks 0DII and its proof, 0CSW, 0CSY and 09UU (1)<=>(3), and it is not weakened. I read the full statements of all 10 proof_deps. Step 1 is correct: the source-target node lists flat and lfp, and the space criterion makes every h flat and lfp and gives a presentation with a surjective. The chart calculus and the etale-Zariski equivalence give E_U with eps^*E_U ~ a^*K, which matches 0CSW. Step 2 is correct: the flat-ambient lemma (09UU) applies with i = id_U and h, and since the item's definition quantifies over every m and every square, the all-m form of that lemma is enough. Step 4 is correct: the stupid truncation of a bounded-above finite-free model is strictly perfect, an isomorphism on H^j for j > m and surjective on H^m. That is exactly the hypothesis of lem-sfb-etale-pseudocoherence-descent, and step 2 then finishes. Step 3 had one gap (E5/C1): def-sfb-space-pseudocoherent-complex asks for chain-map quasi-isomorphisms F -> P|_U into a single representing complex P, but the step only gives isomorphisms in the derived category. For bounded-above F the local-actual lemma 08FR does not apply. FIX: represent K by a K-injective complex I (def-pur-kinjective-complex); its restrictions to objects of the site stay K-injective (lem-pur-kinjective-restrict-localized, 08FI); and Hom_K -> Hom_D is bijective into a K-injective complex (lem-sc-kinjective-quasi-iso-comparison, 070I). So each local model is an actual quasi-isomorphism and the definition holds with P = I. These three nodes are added to step 3's uses and to proof_deps, and the tags to the step's source; the statement is unchanged. I found no cycle, no duplicate (searched 0DII, 09UU and relative-pseudo-coherent), and no SGA source. Batch-5 check: all seven flagged closures are generic and accepted. The trf hits are the definitions of algebraic spaces and quasi-coherent space modules, smooth composition, fibre products and etale covers of spaces (02X2/041F), and the Zariski-etale functor square. None is a step of the trace-formula or Poincare-duality proofs, and the item belongs to the ctf-stability coherent-duality chain. Accepted tool uses: lem-trf-space-fibre-products-etale-covers, def-pur-pseudo-coherent-complex, and the two K-injective nodes added by the fix.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatRelativePseudoCoherence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.pseudoCoherentRelativeTo_iff_of_flat_locallyOfFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatRelativePseudoCoherence.lean",
+  "statement": "theorem pseudoCoherentRelativeTo_iff_of_flat_locallyOfFinitePresentation [hD : ∀ Z : Scheme.{u}, HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hflat : MapIsFlat f) (hlfp : MapIsLocallyOfFinitePresentation f) [HasDerivedCategory.{w} X.SmallModules] (K : X.DerivedModules) (hK : X.derivedQCohProperty K) : (∀ (m : ℤ) (U : X.EtaleSite) (V : Y.EtaleSite) (h : U.obj.left ⟶ V.obj.left) (comm : U.obj.hom ≫ f.hom.hom = yoneda.map h ≫ V.obj.hom), @Scheme.IsMPseudoCoherentRelativeTo hD _ _ h.left (@instLocallyOfFiniteTypeOfLocallyOfFinitePresentation _ _ h.left (hlfp U.obj.left V.obj.left U.obj.hom V.obj.hom h U.property V.property comm)) m (derivedSchemeRestriction X U K)) ↔ X.IsPseudoCoherent K",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Relative pseudo-coherence is expanded directly: for each integer and every compatible pair of etale scheme charts, the recorded Scheme.IsMPseudoCoherentRelativeTo holds on derivedSchemeRestriction. The local finite type proof is derived from the existing chart local-finite-presentation hypothesis, not added. The two additional stmt_deps are already landed definition nodes owning the space morphism predicates and derived scheme-chart restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac268af0b",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Checked against Stacks 0DII, 0CSY and lemma-qcoh-relative-pseudo-coherence-characterize(1). S, X/Y over S and f match; hflat/hlfp are the MapIsLocally chart tests; K has quasi-coherent cohomology via derivedQCohProperty. Left side: for all m and every EtaleSite square with comm, Scheme.IsMPseudoCoherentRelativeTo h.left of derivedSchemeRestriction (canonical R eps_* a^*); local finite type derived from hlfp, not assumed. Right side: X.IsPseudoCoherent. Universes u/w/wS bound; hD threaded explicitly. Node diff vs live: lean record plus two landed owner stmt_deps (def-sfb-space-morphism-properties, def-sfb-space-derived-module-calculus) covering the declarations used. Statement verbatim; docstrings with source, blueprint and 4 proof steps; sorry only; no space-level duplicate; first S2 delivery. No findings; nothing compiled."
+ }
+}

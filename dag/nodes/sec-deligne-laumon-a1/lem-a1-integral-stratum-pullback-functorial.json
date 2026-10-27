@@ -1,0 +1,118 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8-6.5.9 and Remark 6.5.10; agent synthesis of returned proof Steps 1-2, the restriction/composition part of Step 4, and the integral exactness part of Step 7 (no assertion here of global t-exactness)."
+ },
+ "stmt_deps": [
+  "def-a1-integral-stratum-chart-restrictions-data"
+ ],
+ "proof_origin": {
+  "kind": "agent synthesis of the recorded proof",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Proposition 6.6.11; Lemmas 6.5.8-6.5.9 and Remark 6.5.10; agent synthesis of returned proof Steps 1-2, the restriction/composition part of Step 4, and the integral exactness part of Step 7 (no assertion here of global t-exactness)."
+  },
+  "note": "J7 formalization decomposition; no mathematical route change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact integral stratum restrictions and pro etale perfect charts compatible with completed pullback and distinguished triangles",
+   "results": "8 hits including Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.Scheme.Etale and AlgebraicGeometry.pullbackRestrictIsoRestrict. No completed integral derived chart or normalized shift/scalar API.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem or data interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete integral constructible complexes admit finite stratified perfect charts with exact restriction and completed pullback",
+   "results": "8 hits on manifold local charts and immersions. None concerns completed integral derived sheaves. Loogle query Functor.IsTriangulated returned unknown identifier.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem or data interface."
+  },
+  {
+   "tool": "grep",
+   "query": "integralDerivedPullback.*[Ll]inear|integralDerivedPullback_additive|stratum_chart; blueprint_refs.py search stratum chart",
+   "results": "msearch grep: 0 hits. Local rg finds only the assigned theorem for Charts and ExactRestriction; existing integralOperations_preserve_constructible proves the preservation conjunct. The blueprint search has zero matching blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "Preserve existing data by extraction; split only the missing charts and functorial steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratumChartRestrictions",
+  "date": "2026-10-25",
+  "group": "J7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Proposition 6.6.11; Lemmas 6.5.8-6.5.9 and Remark 6.5.10; agent synthesis of returned proof Steps 1-2, the restriction/composition part of Step 4, and the integral exactness part of Step 7 (no assertion here of global t-exactness).",
+   "via": [
+    "lem-a1-integral-stratum-chart-restrictions",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-a1-integral-stratum-pullback-functorial",
+ "title": "Linearity and triangulated compatibility of normalized integral pullback",
+ "kind": "statement",
+ "statement": "Fix l prime and E/Q_l finite. Let h:W→X be a morphism of Noetherian finite-dimensional schemes with l invertible in global sections on both. Given a normalized integral/completed comparison c of [lem-a1-integral-pullback-completed-comparison], the specified ambient integralDerivedPullback is additive. For every a in O_E and morphism f:K→L of integral constructible objects in the adic presentation, its image of scalar multiplication by a followed by coefficient transport of f is scalar multiplication by a on the pulled object followed by the pulled morphism. With exactly c.derivedShift it takes every distinguished triangle whose vertices are sfIntegralConstructible to a distinguished triangle. The charts and normalization conventions are [def-a1-integral-stratum-chart-restrictions-data]. This asserts no existence of charts or preservation of constructibility.",
+ "proof": [
+  {
+   "text": "Finally use [lem-a1-integral-pullback-completed-comparison] for $h$ to identify the specified $Lh^*$ on derived-complete objects with the strict-tower completed pullback. It is an $R$-linear comparison. By [lem-cbc-completed-pullback-triangles], the latter has coherent integer-shift isomorphisms and preserves distinguished triangles of derived-complete objects with that shift comparison. Transport its shift comparison through $\\gamma_h$: the comparison for $K[r]$ followed by the completed shift map followed by $\\gamma_{h,K}[r]^{-1}$ is the shift map for the specified $Lh^*$, by the shift clause of the first cited lemma. Naturality then identifies the last arrow of the image of a triangle with the transported last arrow, so the specified functor preserves distinguished triangles. Its $R$-linearity can also be read on representatives: finite-coefficient inverse image, product, the transition map $1-s$, and both coordinates of the shifted cone commute with multiplication by every $r\\in R$. Step 7 ensures that this is a functor between the integral constructible subcategories, rather than just the ambient derived-complete categories.",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-cbc-completed-pullback-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4); proetale.tex Tag 099N, lemma-pushforward-Noetherian-case (2),(5); exactness of the strict completed construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-cbc-completed-pullback-triangles"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStratumChartRestrictionsFunctorial",
+  "file": "lean/Sheaf/Paper/IntegralStratumChartRestrictionsFunctorial.lean",
+  "declaration": "WeilConjectures.IntegralStratumCharts.integral_stratum_pullback_functorial",
+  "statement": "theorem integral_stratum_pullback_functorial {X W : Scheme.{u}} (h : W ⟶ X) [IsNoetherian X] [IsNoetherian W] (_hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hWdim : ∃ n : ℕ, topologicalKrullDim W ≤ n) (_hXl : IsUnit (l : Γ(X, ⊤))) (_hWl : IsUnit (l : Γ(W, ⊤))) (c : IntegralCompletedComparison.Comparison l E h) : (integralDerivedPullback l E h).Additive ∧ (∀ (a : Padic.coefficientExtensionIntegers l E) (K L : (constructible l E X).FullSubcategory) (f : K ⟶ L), (integralDerivedPullback l E h).map ((integralScalarDerivedAction l E X a).app ((ImmersionCompletedPullback.transport l E X).obj K.obj) ≫ (ImmersionCompletedPullback.transport l E X).map f.hom) = (integralScalarDerivedAction l E W a).app ((IntegralCompletedComparison.integral l E h).obj K.obj) ≫ (IntegralCompletedComparison.integral l E h).map f.hom) ∧ (fun [shift : (integralDerivedPullback l E h).CommShift ℤ] ↦ ∀ T : Triangle (DerivedCategory (integralTowerModules l E X)), T ∈ distTriang _ → sfIntegralConstructible l E X T.obj₁ → sfIntegralConstructible l E X T.obj₂ → sfIntegralConstructible l E X T.obj₃ → (integralDerivedPullback l E h).mapTriangle.obj T ∈ distTriang _) (shift := c.derivedShift)",
+  "declarations": [
+   "WeilConjectures.IntegralStratumCharts.integral_stratum_pullback_functorial"
+  ],
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc3f",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T123202-L-1840578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc3f",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T123202-L-1840578",
+  "kind": "interface",
+  "note": "independent cc review: 13 extracted data decls and item signature byte-diffed vs clone (identical); item proof vs integralOperations_preserve_constructible + integralPullback_completedComparison + the two new children; sandbox compile of Data/Charts/Functorial/item + direct importer ConstructiblePullbackTExact, exit 0; axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

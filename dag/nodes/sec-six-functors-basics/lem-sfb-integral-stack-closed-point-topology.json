@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-integral-stack-closed-point-topology",
+ "kind": "statement",
+ "title": "Closed-point topology of integral representable stack morphisms",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\mathcal V$ be an algebraic stack of finite type over $k$ with quasi-compact separated diagonal [def-sfb-algebraic-moduli-stack, def-weil-finite-type-morphism, def-sfb-stack-qcqs-morphism], and let $h:\\mathcal N\\to\\mathcal V$ be a representable integral morphism of algebraic stacks. Here integral means that for every scheme $T\\to\\mathcal V$ the $2$-fibre product $\\mathcal N\\times_{\\mathcal V}T$ is a scheme integral over $T$ [def-weil-finite-integral-morphism]. Point spaces and their topologies are [lem-sfb-stack-point-topology]. The continuous map $|h|$ sends closed subsets to closed subsets. If $v\\in|\\mathcal V|$ is a closed point, then every $n\\in|\\mathcal N|$ with $h(n)=v$ is a closed point of $|\\mathcal N|$. No finite-type or Noetherian hypothesis is imposed on $\\mathcal N$, and $h$ need not be surjective.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CHU (definition-integral) and 0512 (lemma-characterize-representable-universally-closed), with spaces-morphisms.tex Tag 0415 (lemma-integral-universally-closed). Closed-fibre assertion: Tag 0H27 (lemma-residual-space-closed), Tag 0H22 (lemma-every-point-residual-gerbe-locally-Noetherian), and morphisms.tex Tag 02NT (lemma-integral-fibres), applied after a field presentation of the closed residual gerbe. The finite-type stabilizer has finitely many connected components, so its orbits on the zero-dimensional integral field fibre are finite closed subsets. This spells out the assertion used when Alper Lemma 8.3.1 says that its open immersion preserves closed points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-stack-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:U\\to\\mathcal V$ and put $X_U=\\mathcal N\\times_{\\mathcal V}U$. By hypothesis $X_U$ is a scheme integral over $U$, so $X_U\\to U$ is closed by the integral/universally-closed criterion. If $C\\subseteq|\\mathcal N|$ is closed, its inverse image $C_U$ in $|X_U|$ is closed by continuity. The base-change image assertion gives $|p|^{-1}(|h|(C))=\\operatorname{im}(C_U\\to|U|)$, which is closed. The atlas criterion on $\\mathcal V$ therefore makes $|h|(C)$ closed. This proves the first assertion without a finiteness assumption on $\\mathcal N$.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XL (lemma-topology-points) and 04XH (lemma-points-cartesian); morphisms.tex Tag 01WM (lemma-integral-universally-closed); the atlas argument of stacks-morphisms.tex Tag 0512."
+   }
+  },
+  {
+   "text": "Fix a closed point $v$ of $|\\mathcal V|$. Let $i:\\mathcal Z\\hookrightarrow\\mathcal V$ be the reduced closed substack with $|\\mathcal Z|=\\{v\\}$. It is locally of finite type over $k$ by closed-immersion calculus. Its reduced smooth scheme charts are locally of finite type over $k$, hence locally Noetherian: a field is Noetherian since its only ideals are $0$ and the whole field, and the locally-Noetherian finite-type lemma applies to these charts. Thus the singleton field-cover lemma supplies a representable surjective flat locally finitely presented map $a:\\operatorname{Spec}K\\to\\mathcal Z$. Only the target substack $\\mathcal Z$, not $\\mathcal N$, is being declared locally Noetherian.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-stack-closed-immersion-calculus",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-singleton-stack-flat-lfp-field-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0509 (lemma-reduced-closed-substack); stacks-morphisms.tex Tags 06FV, 06FT and 06R6; Tag 06MP (lemma-unique-point-better); morphisms.tex Tag 01T6."
+   }
+  },
+  {
+   "text": "Put $\\mathcal M=\\mathcal N\\times_{\\mathcal V}\\mathcal Z$ and $X=\\mathcal N\\times_{\\mathcal V}\\operatorname{Spec}K=\\mathcal M\\times_{\\mathcal Z}\\operatorname{Spec}K$. Closed-immersion calculus makes $\\mathcal M\\to\\mathcal N$ a closed immersion, and the base-change image assertion identifies $|\\mathcal M|$ with $|h|^{-1}(\\{v\\})$. The scheme $X$ is integral over $K$, hence affine, say $X=\\operatorname{Spec}B$. Every point of $X$ is closed: if primes $\\mathfrak p\\subseteq\\mathfrak q$ of $B$ are comparable, both contract to $0$ in $K$, so integral incomparability makes them equal. Thus every prime is maximal and its Zariski closure is its singleton. The projection $q:X\\to\\mathcal M$ is surjective flat locally finitely presented by base change of $a$. Its point map is an open continuous surjection, hence a quotient map.",
+   "uses": [
+    "lem-sfb-stack-closed-immersion-calculus",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "pqf-lem-incomparability",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 0501, 0H20, 04XH and 04XL; stacks-morphisms.tex Tag 06Q4; morphisms.tex Tag 02NT (lemma-integral-fibres), whose proof is integral incomparability."
+   }
+  },
+  {
+   "text": "For $x\\in X$ put $L=\\kappa(x)$ and $E=\\operatorname{Spec}L\\times_{\\mathcal M}X$. Since $X=\\mathcal M\\times_{\\mathcal Z}\\operatorname{Spec}K$, associating fibre products identifies $E=\\operatorname{Spec}L\\times_{\\mathcal Z}\\operatorname{Spec}K$. This also equals $\\operatorname{Spec}L\\times_{\\mathcal V}\\operatorname{Spec}K$: the closed immersion $i$ is fully faithful, so an isomorphism of the two images in $\\mathcal V(T)$ is uniquely an isomorphism in $\\mathcal Z(T)$. Thus $E$ is the base change of $\\Delta_{\\mathcal V/k}$ by $\\operatorname{Spec}(L\\otimes_kK)$, and is quasi-compact by the assumed quasi-compactness of that diagonal and its defining scheme test. Choose an affine surjective etale scheme chart $W\\to E$ by the quasi-compact-space atlas lemma. The map $E\\to\\operatorname{Spec}L$ is a base change of $a$, hence locally finitely presented. Chartwise calculus makes $W\\to\\operatorname{Spec}L$ locally of finite type. Since $W$ is affine it is of finite type over $L$ and is Noetherian by the finite-type-over-Noetherian lemma. Its topological space is Noetherian by the Noetherian-space topology lemma. The base-change image assertion and surjectivity of $W\\to E$ show that the image of $W\\to X$ is exactly $|q|^{-1}(\\{|q|(x)\\})$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-closed-immersion-calculus",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-space-topology",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian); spaces-properties.tex Tag 03H6 (lemma-quasi-compact-affine-cover); stacks-morphisms.tex Tag 06Q4; morphisms.tex Tag 01T6; spaces-properties.tex Tag 04ZF (Noetherian topology). The fibre-product identification is direct from the triples definition."
+   }
+  },
+  {
+   "text": "The Noetherian topological space $W$ has finitely many irreducible components. Each component has a generic point $\\eta$ because $W$ is a scheme. If $w$ lies in that component, then $w\\in\\overline{\\{\\eta\\}}$, and continuity of $W\\to X$ gives $f(w)\\in\\overline{\\{f(\\eta)\\}}=\\{f(\\eta)\\}$, the last equality holding because every point of $X$ is closed by step 3. The image of each component is therefore one point. Consequently $|q|^{-1}(\\{|q|(x)\\})=f(|W|)$ is a finite set of closed points, hence closed in $X$. This argument uses no Noetherian hypothesis on $X$.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-scheme-sober",
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Topology Tag 0052 (finite irreducible-component decomposition); schemes.tex Tag 01IS (lemma-scheme-sober); continuity is Tag 04XL. The specialization calculation is the explicit finite-image argument."
+   }
+  },
+  {
+   "text": "Since $|q|$ is a quotient surjection, the closedness of $|q|^{-1}(\\{|q|(x)\\})$ proves that $|q|(x)$ is closed in $|\\mathcal M|$. Surjectivity provides such an $x$ over each point of $\\mathcal M$, so every point of $\\mathcal M$ is closed. The closed immersion $\\mathcal M\\to\\mathcal N$ sends these closed singletons to closed singletons in $|\\mathcal N|$. As its image is exactly $|h|^{-1}(\\{v\\})$, this proves the second assertion, including the case of an empty fibre.",
+   "uses": [
+    "lem-sfb-stack-closed-immersion-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0H20 (lemma-subspace-induced-topology), combined with the quotient topology of Tag 04XL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "pqf-lem-integral-univclosed",
+  "lem-sfb-stack-closed-immersion-calculus",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-singleton-stack-flat-lfp-field-cover",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "pqf-lem-incomparability",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-space-topology",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Assembly from Tags 04XH, 04XL, 0509 and 06MP; finite-image specialization argument using schemes.tex 01IS, Topology 0052 and morphisms.tex 02NT. This replaces the informal stabilizer-orbit explanation in the item source by an explicit field-relation chart calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral representable morphism of algebraic stacks is universally closed and every point over a closed point is closed",
+   "results": "{\"t\": \"2026-10-23T10:59:58Z\", \"tool\": \"leanfinder\", \"query\": \"An integral representable morphism of algebraic stacks is universally closed and every point over a closed point is closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.isProper_eq\"], \"digest\": \"7a461fdbbb28b01d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable integral map to a quasi separated finite type algebraic stack is closed and points over closed points are closed",
+   "results": "{\"t\": \"2026-10-23T11:08:14Z\", \"tool\": \"leanfinder\", \"query\": \"A representable integral map to a quasi separated finite type algebraic stack is closed and points over closed points are closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\"], \"digest\": \"0ddce7e2eb6204a4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism to a quasi separated finite type algebraic stack has closed points over closed points even when its source is not noetherian",
+   "results": "{\"t\": \"2026-10-23T11:09:21Z\", \"tool\": \"leanfinder\", \"query\": \"An integral morphism to a quasi separated finite type algebraic stack has closed points over closed points even when its source is not noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\"], \"digest\": \"7e3fcac73d3b02ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral representable morphism of algebraic stacks has closed topological fibres and is universally closed",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"leansearch\", \"query\": \"Integral representable morphism of algebraic stacks has closed topological fibres and is universally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.universallyClosed_iff\"], \"digest\": \"8f98b147c1b744fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsIntegralHom\"",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsIntegralHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"df17c6f04d0a0783\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|integral.*stack|stack.*integral",
+   "results": "{\"t\": \"2026-10-23T11:08:13Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|integral.*stack|stack.*integral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*[Cc]losed|[Cc]losed.*integral|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T11:25:59Z\", \"tool\": \"grep\", \"query\": \"integral.*[Cc]losed|[Cc]losed.*integral|AlgebraicStack\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\"], \"digest\": \"1fdc4b013f3e0d7e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|gerbe|singleton.*stack",
+   "results": "{\"t\": \"2026-10-23T13:00:33Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|gerbe|singleton.*stack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|integral.*stack|stack.*integral",
+   "results": "{\"t\": \"2026-10-23T13:00:33Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|integral.*stack|stack.*integral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced singleton algebraic stack of finite type over a field admits an fppf presentation by the spectrum of a field",
+   "results": "{\"t\": \"2026-10-23T13:00:34Z\", \"tool\": \"leansearch\", \"query\": \"A reduced singleton algebraic stack of finite type over a field admits an fppf presentation by the spectrum of a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"StandardEtalePresentation\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"Algebra.IsStandardEtale.mk\"], \"digest\": \"245454f8ecc6388f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-23T13:00:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral morphisms of algebraic stacks preserve closed subsets and have closed points above closed points",
+   "results": "{\"t\": \"2026-10-23T13:00:34Z\", \"tool\": \"leansearch\", \"query\": \"Integral morphisms of algebraic stacks preserve closed subsets and have closed points above closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"PrimeSpectrum.isClosedMap_comap_of_isIntegral\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\"], \"digest\": \"2b5646ed7318a96a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\"",
+   "results": "{\"t\": \"2026-10-23T13:00:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"df17c6f04d0a0783\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic stack locally of finite type over a field with one point and quasi compact diagonal admits a flat locally finitely presented surjective field presentation",
+   "results": "{\"t\": \"2026-10-23T13:00:35Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced algebraic stack locally of finite type over a field with one point and quasi compact diagonal admits a flat locally finitely presented surjective field presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"Algebra.IsStandardSmooth.out\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"eddda8b21fd0dc90\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral representable morphism of algebraic stacks is closed and points over closed points are closed",
+   "results": "{\"t\": \"2026-10-23T13:00:36Z\", \"tool\": \"leanfinder\", \"query\": \"An integral representable morphism of algebraic stacks is closed and points over closed points are closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsIntegral\"], \"digest\": \"79d23c12d085b729\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A singleton finite type gerbe has a field fppf cover and its field self relation is finite type",
+   "results": "{\"t\": \"2026-10-23T13:00:37Z\", \"tool\": \"leanfinder\", \"query\": \"A singleton finite type gerbe has a field fppf cover and its field self relation is finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.singleton\", \"CategoryTheory.Precoverage.finite\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.Hom.cover_X\", \"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Cover.sigma_I₀\", \"CategoryTheory.Precoverage.ofArrows_mem_finite\"], \"digest\": \"e820ed7559389a20\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented field point of an algebraic stack with quasi compact diagonal has finite type field base changes admitting a finite type etale scheme cover",
+   "results": "{\"t\": \"2026-10-23T13:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented field point of an algebraic stack with quasi compact diagonal has finite type field base changes admitting a finite type etale scheme cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"6feac99a810f1c35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism from a field to an algebraic stack with quasi compact diagonal has finite type field fibres",
+   "results": "{\"t\": \"2026-10-23T13:18:17Z\", \"tool\": \"leansearch\", \"query\": \"A locally finitely presented morphism from a field to an algebraic stack with quasi compact diagonal has finite type field fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\"], \"digest\": \"21cfc7fb232f3ca4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T13:18:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCompact\\\", \\\"LocallyOfFinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\"], \"digest\": \"632bb001358d2c8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|field.*relation.*chart|stack.*diagonal",
+   "results": "{\"t\": \"2026-10-23T13:18:18Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|field.*relation.*chart|stack.*diagonal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a field spectrum to a stack with quasi compact diagonal is quasi compact and a finitely presented field fibre admits a noetherian etale atlas",
+   "results": "{\"t\": \"2026-10-23T13:18:19Z\", \"tool\": \"leanfinder\", \"query\": \"A map from a field spectrum to a stack with quasi compact diagonal is quasi compact and a finitely presented field fibre admits a noetherian etale atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsEtale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"22d1a99dfceeea53\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable integral maps to finite type algebraic stacks send closed sets to closed sets and all their points over closed target points are closed even for non Noetherian sources",
+   "results": "{\"t\": \"2026-10-23T13:29:22Z\", \"tool\": \"leanfinder\", \"query\": \"Representable integral maps to finite type algebraic stacks send closed sets to closed sets and all their points over closed target points are closed even for non Noetherian sources\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsIntegralHom\"], \"digest\": \"5590f4a3a4d31be7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, ring spectra or site coverings; none states the algebraic-stack assertion. Scheme integral closedness is reused through existing pqf-lem-integral-univclosed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-integral-comparison-finite",
+  "date": "2026-10-23",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: closedness of the integral factor and closedness of points over closed target points, without assuming the normalization finite type.",
+   "via": [
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-stack-closed-point-topology",
+  "worker": "stage1",
+  "summary": "No exact project attachment or Mathlib stack theorem found. Kept the statement and all imported provenance. Proved closedness by an integral scheme base change and the atlas topology. For points, reused the reduced closed singleton substack and its flat lfp field cover. Integral incomparability makes the field fibre T1; a quasi-compact field relation admits a Noetherian affine chart, whose finite irreducible components have singleton images. Quotient topology finishes. No new nodes, finite-type assumption on the source, smoothness of stabilizers, or surjectivity of h is introduced.",
+  "blueprint": "Inherited from.place records the prerequisite of Alper Lemma 8.3.1 in the alteration/moduli subroute of det-thm-sf-ctf-stability-direct-images proof (3). Read latest blueprint 7284bb09daf97437d544c51882b325f9c52cd345 unit and direct-image proof; neither has a separate integral-stack topology node. The ancestor tool returns null, retained as inherited. Steps 1 and 2--6 give respectively the closed-map and closed-fibre inputs without changing the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-52b31c09b",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-52b31c09b (reviewer sub-agent of L); spot-checked: Item-only S1 split: a 6-step proof with no new nodes, statement unchanged and true; read in full. Step 1: X_U→U is closed (01WM), and the surjectivity of |N×_V U|→|N|×|U| gives |p|^{-1}h(C)=im(C_U), so h(C) is closed by the atlas criterion. Step 2: the reduced closed substack Z with |Z|={v} (0509) is locally of finite type over k (closed-immersion calculus), so its charts are locally Noetherian (01T6); the 06MP field cover a: Spec K→Z applies. Step 3: X=N×_V Spec K is affine and integral over K, so all its points are closed by incomparability; q is flat, lfp and surjective by base change, hence open and a quotient map. Step 4: E=Spec L×_Z Spec K=Spec L×_V Spec K (Z is a monomorphism), the pullback of Δ_{V/k} along affine Spec(L⊗K), so E is quasi-compact; an affine étale chart W is of finite type over L, hence Noetherian (03H6, 01T6, 04ZF); im(W→X)=q^{-1}(q(x)). Step 5: W has finitely many components, each mapping to one closed point, so the fibre is finite and closed. Step 6: quotient map plus closed immersion give the claim; the empty fibre is vacuous. All cited statements and Stacks tags checked (0CHU, 0512, 0415, 0H27, 0H22, 02NT, 04XH, 04XL, 0509, 06MP, 06MM, 01IS, 0052). proof_deps equals the union of step uses. No SGA. No duplicate found (the universally-closed test node covers DM stacks only; the residual-substack, singleton and closed-specialization nodes are different). Batch-5: all 8 flagged citations are general stack/space foundations whose closure reaches only generic trf/pod definitions and foundation lemmas, with no trace-formula or Poincaré-duality theorem nodes; accepted. Advisory only: f is not named in step 5, and the separated-diagonal hypothesis is unused."
+ }
+}

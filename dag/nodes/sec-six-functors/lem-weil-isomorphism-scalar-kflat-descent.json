@@ -1,0 +1,295 @@
+{
+ "id": "lem-weil-isomorphism-scalar-kflat-descent",
+ "kind": "statement",
+ "title": "K-flat preservation and descent of a supplied scalar chain comparison",
+ "statement": "Let $g:X\\to Y$ be a scheme isomorphism [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and compatible small skeletons in the module universe [def-weil-pbc-proetale-site, def-weil-size-convention], and write $F=g^{-1}$ for inverse image [def-weil-proetale-inverse-image]. Use sheaves of modules [def-weil-sheaf-of-modules-category], sheafified balanced tensor [def-pur-sheaf-tensor-product], and cochain complexes with the direct-sum total tensor [def-pc-tensor-complex-sheaves].\n\nFor $W=X,Y$ let $j_W:R_W\\to S_W$ be a morphism of commutative ring sheaves and let $c_R:FR_Y\\simeq R_X$, $c_S:FS_Y\\simeq S_X$ be ring isomorphisms with $c_SFj_Y=j_Xc_R$. Write $G_R,G_S$ for the exact module inverse-image functors with actions transported along these isomorphisms, also applied termwise and on ordinary unbounded derived categories [def-weil-abstract-derived-category]. A good complex means K-flat with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Put\n$$U(P)=G_RP\\otimes_{R_X}S_X,\\qquad V(P)=G_S(P\\otimes_{R_Y}S_Y).$$\nAssume supplied a natural isomorphism $b:U\\simeq V$ on good $R_Y$-complexes, natural for chain maps and compatible with chain homotopies (with $U,V$ acting termwise on the homotopy maps). Then $G_RP$, $Q=P\\otimes_{R_Y}S_Y$ and $Z=U(P)$ are good over $R_X,S_Y,S_X$, respectively. Both $U,V$ preserve quasi-isomorphisms between good complexes and induce functors on their homotopy category.\n\nLet $C_W=-\\otimes^L_{R_W}S_W$ denote ordinary derived change of rings, computed by K-flat resolutions [lem-pur-derived-change-of-rings], and let brackets denote localization to the relevant derived category. There is a unique natural isomorphism\n$$\\beta:C_XG_R\\xrightarrow{\\sim}G_SC_Y$$\nwhose component on every flat-term K-flat resolution $P\\to K$ is $[b_P]$ under the canonical representative identifications\n$$C_XG_RK\\simeq[Z],\\qquad G_SC_YK\\simeq[G_SQ].$$\nThese identifications include the quasi-isomorphism $G_RP\\to G_RK$. The components agree for any two resolutions under the canonical K-flat comparison isomorphisms, compatibly with a third resolution. No flatness of $j_W$, boundedness, derived completeness, or constructibility is required. This assertion descends the supplied $b$; it does not construct a chain comparison or any quotient-tower comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7D, lemma-factor-through-K-flat, and the derived tensor construction following lemma-derived-tor-quasi-isomorphism-other-side; agent preservation-and-localization assembly (returned item Steps 2, 6 and 7)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topos-kflat-pullback] three times: to the ringed-topos morphism $(g,c_R)$, to the identity topos of $Y$ with ring map $j_Y$, and to the identity topos of $X$ with ring map $j_X$. The first pullback is $G_R$: extension along the ring isomorphism $c_R$ is action transport, via $m\\otimes r\\mapsto r m$ with inverse $m\\mapsto m\\otimes1$. The other two pullbacks are termwise scalar extension. Consequently $G_RP$, $Q$ and $Z$ are K-flat with flat terms. All sites are small in the stipulated module universe. The cited theorem requires flat terms on the input, which $P$ and then $G_RP$ have; it requires no flatness of the coefficient map. In Lean, obtain the operation-preserving presentation of the actual pro-etale inverse image from lem-sp-proetale-algebraic-inverse-image and its finite-limit preservation from det-pe-topos-functoriality-inverse-image. Transport the functor equality through changeOfRings, including the equality transports on maps. For scalar extension use the identity algebraic inverse image and the supplied model object/map equations.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat), applied to coefficient changes and transported inverse image"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], the exact additive functors $G_R,G_S$ preserve all quasi-isomorphisms termwise and have natural derived representative identifications. For a quasi-isomorphism $f:P\\to P'$ between good complexes, apply clause (1) of [lem-pur-derived-change-of-rings] to $G_Rf$ over $R_X$ and to $f$ over $R_Y$. Step 1 supplies the required K-flat endpoints. This proves that $U(f)$ and $V(f)=G_S(f\\otimes1)$ are quasi-isomorphisms. The functors also pass to homotopy classes: if $f-f'=dh+hd$, their images satisfy the same equation with homotopies $G_Rh\\otimes1$ and $G_S(h\\otimes1)$, respectively. Additivity and commutation with the differential prove these equalities degree by degree. The supplied homotopy compatibility makes $b$ a natural isomorphism on this homotopy category.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), change-of-rings construction; derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Use lem-pc-kflat-resolution to resolve every complex by a good complex. In the homotopy category, let the resolving predicate mean goodness of the underlying complex. Lift every morphism between good homotopy objects to a chain map using fullness of the homotopy quotient. The supplied chain naturality gives naturality of the conjugated comparison on this resolving class. Apply lem-sc-nattrans-from-resolving-class to extend it to the whole homotopy category; the source functor inverts quasi-isomorphisms because it factors through the derived category. This avoids constructing a second localization model or the two-variable tensor descent.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sc-nattrans-from-resolving-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YU (definition-derived-tor); categories.tex Tag 04VG (lemma-properties-left-localization)"
+   }
+  },
+  {
+   "text": "Put $A=C_XG_R$ and $B=G_SC_Y$. On $\\mathcal P$, clause (2) of [lem-pur-derived-change-of-rings] and [lem-weil-pbc-exact-functor-derived-factorization] supply natural isomorphisms $a_P:A([P])\\xrightarrow{\\sim}[U(P)]$ and $d_P:B([P])\\xrightarrow{\\sim}[V(P)]$. For $a_P$, first use the exact representative $G_RP$, then compute $C_X$ on this K-flat complex; for $d_P$, compute $C_Y$ on $P$ and then apply the exact representative comparison for $G_S$. Thus $t_P=d_P^{-1}[b_P]a_P$ is a natural isomorphism $A\\ell\\cong B\\ell$. Naturality follows by composing the three natural squares, for every homotopy class of chain maps. The normalization uses the supplied $b$, without constructing another tensor comparison.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and its representative construction); derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "Apply the fully faithful restriction along DerivedCategory.Qh, supplied by lem-weil-pbc-localization-universal-property, to descend the transformation constructed from the resolving class. It is invertible on good complexes by its formula; naturality along resolutions proves invertibility on every complex, and essential surjectivity of DerivedCategory.Q proves invertibility everywhere. For uniqueness, compare on each good resolution and cancel the image of its quasi-isomorphism, then use Localization.natTrans_ext along DerivedCategory.Q. No arbitrary choice enters the resulting uniquely normalized isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization); natural-transformation form: Mathlib CategoryTheory.Localization.liftNatIso and natTrans_ext"
+   }
+  },
+  {
+   "text": "For any good resolution $s:P\\to K$, the exactness result [lem-weil-pbc-exact-functor-derived-factorization] makes $G_Rs$ a quasi-isomorphism, so clause (2) of [lem-pur-derived-change-of-rings] computes $C_XG_RK$ using $G_RP$. More explicitly set $a_s=a_P A([s])^{-1}:A([K])\\xrightarrow{\\sim}[U(P)]$ and $d_s=d_P B([s])^{-1}:B([K])\\xrightarrow{\\sim}[V(P)]$. Naturality of $\\beta$ gives $d_s\\beta_{[K]}a_s^{-1}=[b_P]$. If $s':P'\\to K$ is another resolution, the source comparison is $a_{s'}a_s^{-1}$ and the target comparison is $d_{s'}d_s^{-1}$. Substituting the displayed formula gives $(d_{s'}d_s^{-1})[b_P]=[b_{P'}](a_{s'}a_s^{-1})$. These are the canonical K-flat comparisons of the cited change-of-rings theorem, since each is formed from its representative maps and the inverses of the resolution isomorphisms. For a third resolution the composites cancel the intermediate $a_s$ and $d_s$, proving the cocycle compatibility. Nothing used boundedness, completeness, constructibility or flatness of $j_W$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and canonical resolution comparison); derived.tex Tag 015F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 0G7E for preservation, 06YS and the resolving-class fraction argument for descent, 06YU for representative comparisons; categories.tex 04VG for localization full faithfulness. P6 implements the resolving-class route and the cancellation equations in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural scalar extension chain isomorphism for exact inverse image descends on flat term K flat resolutions to the ordinary unbounded derived category independently of representatives",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state preservation and normalized descent of an arbitrary supplied scalar chain isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"NatIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state preservation and normalized descent of an arbitrary supplied scalar chain isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "[kK].?[fF]lat|mapDerivedCategory.*[iI]so",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"line\": \"68\", \"text\": \"      F.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C₁).hom.app K) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"65\", \"text\": \"          (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app (Q.obj S.X₁) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state preservation and normalized descent of an arbitrary supplied scalar chain isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of coefficient rings along a scheme isomorphism preserves K flat complexes and localizes any natural tensor comparison to derived scalar extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": RespectsIso Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, then composing $ f $ with a ring isomorphism on either the source or target preserves the flatness property. Specifically, for\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] (U) : IsIso (f.app U)\", \"doc\": \"For any isomorphism $ f : X \\to Y $ of schemes, and for every open subset $ U $ of $ Y $, the induced ring homomorphism $ f_{\\\\#}(U) : \\\\mathcal{O}_Y(U) \\to \\\\mathcal{O}_X(f^{-1}(U)) $ is an isomorphism of\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"RingHom.FaithfullyFlat.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": RespectsIso FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, T $, if a ring homomorphism $ f : R \\\\to S $ is faithfully flat, then composing $ f $ with a ring isomorphism $ e : S \\\\cong T $ results in a faithfully flat homomorphism $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]\", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T],\\n  KaehlerDifferential.tensorKaehlerEquivOfForma\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state preservation and normalized descent of an arbitrary supplied scalar chain isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between scalar extension functors descend through the localization of the homotopy category of K flat sheaf complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, this constructs the induced natural transformat\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"Given additive functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories and a natural transformation $\\\\alpha : F \\\\Rightarrow G$, this constructs the induced natural transformation betw\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addi\", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, there exists an induced natural transformation \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $F,G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, a natural transformation $\\\\alpha : F \\\\Rightarrow G$, and an object $X \\\\in \\\\mathcal{C}$ with injective resolution $\"}\n  {\"name\": \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Qh\", \"doc\": \"The canonical functor $ Q^h $ from the homotopy category of integer-indexed chain complexes to the derived category preserves the $ R $-linear structure. This means: (1) For any two chain complexes $ \"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H $, the left-derived n\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"For additive functors $F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories and natural transformations $\\\\alpha : F \\\\Rightarrow G$, $\\\\beta : G \\\\Rightarrow H$, the right-derived natural tr\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, this constructs the induced natural transformat\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state preservation and normalized descent of an arbitrary supplied scalar chain isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat complexes with flat terms preserved by ringed topos pullback and natural scalar comparison descends to unbounded derived categories",
+   "results": "OK 8 hit(s): CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exact-functor and generic localization hits cover only cited tools, not good sheaf-complex preservation plus normalized scalar descent"
+  },
+  {
+   "tool": "grep",
+   "query": "[kK].?[fF]lat|mapDerivedCategory",
+   "results": "OK 10 hit(s): Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exact-functor and generic localization hits cover only cited tools, not good sheaf-complex preservation plus normalized scalar descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image ringed topos preserves flat term K flat complexes and descends natural scalar extension isomorphisms",
+   "results": "OK 8 hit(s): Algebra.FormallyUnramified.flat_of_restrictScalars, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_of_affine_subset, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.instMorphismRestrict, RingHom.Flat, Module.Flat.localizedModule",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exact-functor and generic localization hits cover only cited tools, not good sheaf-complex preservation plus normalized scalar descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "OK 3 hit(s): CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exact-functor and generic localization hits cover only cited tools, not good sheaf-complex preservation plus normalized scalar descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary natural isomorphism on flat term K flat sheaf resolutions determines uniquely a natural isomorphism between derived change of rings followed by exact inverse image",
+   "results": "OK 8 hit(s): CategoryTheory.RepresentablyFlat.of_iso, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.LocalizerMorphism.Derives.isIso, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.RepresentablyCoflat.of_iso, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exact-functor and generic localization hits cover only cited tools, not good sheaf-complex preservation plus normalized scalar descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "First cohomology-transport arrows in def-weil-global-geometric-frobenius: the integral inverse-image component has a coefficient-compatible ordinary tensor model (returned parent proof Steps 1–2 and the K-flat setup of Step 4). Extracted returned tensor-model proof Steps 2, 6 and 7 (preservation, representative identification and localization).",
+   "via": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-isomorphism-scalar-kflat-descent",
+  "worker": "stage1",
+  "summary": "Q34: preserve good models by the existing general ringed-topos pullback theorem, use existing K-flat resolving localization and ordinary change of rings, and descend the supplied natural isomorphism with explicit representative and triple-resolution formulas. No statement changes or new nodes.",
+  "blueprint": "Realizes the preservation, representative-identification and localization part extracted from the integral inverse-image component of the first cohomology-transport arrows of def-weil-global-geometric-frobenius; retains the returned parent Steps 2, 6 and 7 route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "General ringed-topos K-flat preservation applies to the three ordinary pullbacks; this unit has no replacement for this coefficient-independent homological tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Ordinary derived scalar extension and its canonical K-flat model comparisons are generic tools used by the integral transport construction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact module inverse image acts termwise on all derived representatives; this is a generic localization tool, not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Only its resolving-subcategory localization equivalence is used, to descend the supplied comparison; the unit does not provide this generic unbounded ringed-site result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-1152ea1ec",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-1152ea1ec (reviewer sub-agent of L); spot-checked: PASS: I read the whole item. There are no new nodes and the statement is unchanged from the base, so only the proof is new; it was a statement-only Q36 extraction with no repair note, so the re-split rule does not apply. Step 1: each of the three uses of lem-weil-pbc-ringed-topos-kflat-pullback (Stacks 0G7E, sites-cohomology l.3508, read; no flatness of the ring map needed) is valid. For (g^{-1}, c_R), u^*P ≅ G_RP because c_R is an isomorphism; j_Y gives Q and j_X gives Z. The statement claims goodness only for G_RP, Q and Z. Step 2: quasi-isomorphisms are preserved by clause (1) of change-of-rings on K-flat endpoints together with exactness of G_R and G_S (exact-functor leaf); homotopies pass through termwise. Step 3: the equivalence W^{-1}P → D in site-derived-tensor-descent makes ℓ a localization; this uses that node's statement, not its proof. Step 4: a_P and d_P come from φ and change-of-rings (2) with identity resolutions, natural on homotopy classes. Step 5: clause (2) of the localization leaf gives a unique β, an isomorphism because t^{-1} descends too; uniqueness also uses clause (3). Step 6: I recomputed d_s β_K a_s^{-1} = [b_P] from β_K = B[s] β_P A[s]^{-1}; the two-resolution square and the cocycle follow by substitution. Edge cases checked: identity data, a non-flat ring map such as Z→Z/2, unbounded complexes. Searched the DAG: no node states this supplied-b descent. I accept the 4 generic other-unit tool_uses in split_report. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsomorphismScalarKFlatDescent",
+  "declaration": "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.scalar_kflat_descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.good",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.inverseR",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.inverseS",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.U",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.V",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.A",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.B",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.goodHomotopy",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.sourceIso",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.targetIso",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.HomotopyCompatible",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.Normalized",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.ResolutionCoherent",
+   "AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent.scalar_kflat_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IsomorphismScalarKFlatDescent.lean",
+  "statement": "theorem scalar_kflat_descent [IsIso g] (comm : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map jY ≫ cS.hom = cR.hom ≫ jX) (b : (good RY).ι ⋙ U g RY RX SX jX cR CX ≅ (good RY).ι ⋙ V g RY SY SX jY cS CY) (hb : HomotopyCompatible g RY SY RX SX jY jX cR cS CY CX b) : ∃ hGR : ∀ P : CochainComplex (proEtaleRingModules Y RY) ℤ, good RY P → good RX (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).obj P), (∀ (P : CochainComplex (proEtaleRingModules Y RY) ℤ) (_ : good RY P), good SY ((CY.E.mapHomologicalComplex (.up ℤ)).obj P) ∧ good SX ((U g RY RX SX jX cR CX).obj P)) ∧ (∀ (P P' : (good RY).FullSubcategory) (f : P ⟶ P'), QuasiIso f.hom → QuasiIso ((U g RY RX SX jX cR CX).map f.hom) ∧ QuasiIso ((V g RY SY SX jY cS CY).map f.hom)) ∧ (∃ (UH VH : CategoryTheory.Quotient (goodHomotopy RY) ⥤ HomotopyCategory (proEtaleRingModules X SX) (.up ℤ)), Nonempty (CategoryTheory.Quotient.functor (goodHomotopy RY) ⋙ UH ≅ (good RY).ι ⋙ U g RY RX SX jX cR CX ⋙ HomotopyCategory.quotient _ (.up ℤ)) ∧ Nonempty (CategoryTheory.Quotient.functor (goodHomotopy RY) ⋙ VH ≅ (good RY).ι ⋙ V g RY SY SX jY cS CY ⋙ HomotopyCategory.quotient _ (.up ℤ))) ∧ (∀ (P K : CochainComplex (proEtaleRingModules Y RY) ℤ) (s : P ⟶ K) (_ : QuasiIso s), QuasiIso (((inverseR g RY RX cR).mapHomologicalComplex (.up ℤ)).map s)) ∧ (∃! β : A g RY RX SX jX cR CX ≅ B g RY SY SX jY cS CY, Normalized g RY SY RX SX jY jX cR cS CY CX hGR b β) ∧ ResolutionCoherent g RY SY RX SX jY jX cR cS CY CX hGR b",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the published identified-coefficient pro-etale operations and the complete recorded sheaf DerivedChangeOfRingsCochainModel universal pairs, rather than their ordinary-ModuleCat specialization. The universal pairs are explicit parameters specifying C_X,C_Y and their canonical counits; their existence is the recorded change-of-rings theorem. Helpers are transparent predicates, composites and representative isomorphisms for this statement. The only added stmt_dep is the already landed def-weil-pbc-proetale-operations, whose recorded public module exports the exact arbitrary-ring-sheaf pullback used here. No statement correction, extra mathematical hypothesis, coefficient-map flatness, completion or bound is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01313a82f",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement unchanged; the only stmt_deps change adds landed def-weil-pbc-proetale-operations (allowed). Every clause matches the node: IsIso g; comm = F(jY)≫cS = cR≫jX; G_R,G_S = canonical proEtaleRingModulePullback; good = IsKFlatIndependentCoefficients ∧ termwise IsFlatOnSite; U,V via the pinned DerivedChangeOfRingsCochainModel.E; b on the good full subcategory plus termwise HomotopyCompatible; goodness of G_R P, Q and Z; quasi-iso preservation; homotopy functors; ∃! β with Normalized over every resolution P→K; ResolutionCoherent square and cocycles. sourceIso and targetIso are canonical (inverse of the resolution map, exact-functor factor iso, K-flat counit). Universes u/u+1/u+2 with no extra equality. Docstrings carry source place, blueprint tag and all six proof steps; the only sorry is the main theorem; statement field verbatim; no line over 100 characters. Advisory only: the cocycle conjuncts are formal identities, mirroring the node's Step 6. No compile run (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261024T190559-L-4131642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

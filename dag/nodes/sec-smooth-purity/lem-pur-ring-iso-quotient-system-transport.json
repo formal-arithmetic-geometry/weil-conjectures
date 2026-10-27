@@ -1,0 +1,354 @@
+{
+ "id": "lem-pur-ring-iso-quotient-system-transport",
+ "kind": "statement",
+ "title": "Coherent quotient-system transport along compatible coefficient isomorphisms",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology]. Let $(R_n,q^R_{m,n})$ and $(S_n,q^S_{m,n})$, $m\\ge n\\ge1$, be inverse systems of commutative ring sheaves [def-weil-inverse-system]. Let $\\alpha_n:R_n\\xrightarrow{\\sim}S_n$ satisfy $q^S_{m,n}\\alpha_m=\\alpha_nq^R_{m,n}$. Put $R=\\lim_nR_n$, $S=\\lim_nS_n$, and let $\\alpha:R\\xrightarrow{\\sim}S$ be the induced ring-sheaf isomorphism. Limits are sheaf limits. Use module sheaves [def-weil-sheaf-of-modules-category] and restriction of scalars [def-pc-sheaf-restrict-scalars]. Let $\\mathscr S_R$ have objects $R_n$-module sheaves $M_n$ with semilinear transitions $M_m\\to\\operatorname{Res}_{q^R_{m,n}}M_n$ satisfying the identity and cocycle; its morphisms are componentwise module maps commuting with transitions. Define $\\mathscr S_S$ similarly.\n\nTransport by $T_n=(\\alpha_n^{-1})_*$ on levels and by the unchanged underlying transition maps is an additive exact equivalence $\\mathscr S_R\\simeq\\mathscr S_S$. Its termwise extension induces an equivalence of their ordinary unbounded derived categories [def-weil-abstract-derived-category], normalized on the localization functors by termwise scalar transport, not just an equivalence between the families of evaluated derived objects.\n\nWrite $T=(\\alpha^{-1})_*$. For a flat-term K-flat $R$-complex $P$ [def-pc-kflat-complex], all maps\n$$T_n(P\\otimes_RR_n)\\xrightarrow{\\sim}(TP)\\otimes_SS_n,\\qquad p\\otimes r_n\\longmapsto p\\otimes\\alpha_n(r_n)$$\nare isomorphisms of the actual strict semilinear reduction systems, including every transition and the augmentation $p\\mapsto p\\otimes1$. They descend, independently of $P$, to a natural isomorphism on the derived system categories for the derived reduction functors [lem-pur-derived-change-of-rings]. For each level they identify the extension/restriction adjunctions, with unit $p\\mapsto p\\otimes1$ and counit $m\\otimes r_n\\mapsto r_nm$, after coefficient transport. They identify iterated quotient reduction, equal-index units and the three-index cocycle; thus they preserve the condition that all transition-adjoint derived reduction maps are isomorphisms. These assertions concern maps of systems before any inverse limit; no reconstruction of arbitrary systems from their limit is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "def-pur-section-invariant, finite-clopen expansion: coherent coefficient-ring transport, reduction units, transitions and counits used in retained steps 2-3 and 5; agent strict-system lemma. Stacks Tag 03D7, sites-modules-lemma-adjoint-pullback-pushforward-modules; Tag 015F, derived-lemma-right-derived-exact-functor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "text": "Use the universal property of the two limiting cones to construct e and its projection equations. Construct strict transport directly by inverse scalar restriction at every level. The commuting coefficient square gives an identity-on-sections restriction comparison; compose it with the transported strict transition. Identities, cocycles and morphisms have their original section maps. Inverse scalar restriction gives identity-on-sections inverse comparisons, hence an additive equivalence of the actual strict system categories.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "The additive strict equivalence preserves finite limits and colimits. Apply the exact derived-category functor to it and its inverse. Its specified localization comparison is mapDerivedCategoryFactors. Its level comparison is the exact derived square of the identity-on-sections strict evaluation comparison. This construction uses no vertical sequence-site theorem.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "For every commuting coefficient square, invert the inverse mate of the scalar restriction comparison. The inverse mate is invertible because both coefficient transports are equivalences. Its Hom transpose is the recorded adjunction transpose. Apply the normalized unit formula, then linearity and cancellation of the coefficient isomorphism, to obtain alpha(r) tensor x from r tensor x. The derived inverse mate has the representative formula by the given cochain transpose equations and the exact derived-square factorization. Thus both adjunctions, including units and counits, are identified.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "lem-pur-adjunction-mate-transpose",
+    "lem-pur-derived-mate-comparison",
+    "lem-pod-derived-exact-square-composition",
+    "lem-pur-system-scalar-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "Construct ordinary reduction with level n the ordinary scalar model of the cone projection. Its transition is the adjoint transpose of the canonical scalar compositor. The normalized scalar unit and tensor compositor compute it on every r tensor x. Unit tensors generate maps out of scalar extension, so these formulas prove the strict identity and composition laws, naturality, and the comparison between strict reductions. Every comparison fixes the augmentation at r = 1.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-scalar-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "Resolve every cochain complex by a flat-term K-flat complex. Ordinary reduction inverts quasi-isomorphisms on these inputs by the scalar models and detection by system evaluation. Apply the resolving-class criterion to its homotopy-category functor, then transfer its pointwise right Kan extension along the full homotopy quotient and localization comparison to cochains. This constructs the universal system-valued derived reduction and its pointwise existence. Use the existing generic comparison-from-resolutions theorem in ConstantTowerNormalization to compare its evaluations with the given scalar derived models on resolving inputs. Naturality along a resolution extends the normalized representative formula to every complex. Postcomposition by the strict derived equivalence preserves the right Kan universal property. Precomposition by the coefficient equivalence on complexes and transport along its localization factorization gives the other universal pair. Uniqueness of these right Kan extensions gives the whole-system derived transport isomorphism and its formula on every representative; no separate tensor/K-flat transport theorem is needed. Every chosen functor and comparison is specified by its universal pair or normalization.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-system-derived-evaluation",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "lem-cbc-derived-constant-tower-normalization",
+    "lem-derived-exact-equivalence-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "The ordinary restriction unit and compositor squares agree on sections. Their exact derived squares satisfy the same unit and compositor identities by localization and exact-square composition. Uniqueness of normalized adjunction comparisons therefore gives the ordinary and derived scalar unit and associator transport equations. The adjoint form of the three-index transition law follows by transposing the actual restriction-form transition composition and the normalized adjunction compositor. Iterated K-flat change of rings is unnecessary.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "lem-pod-derived-exact-square-composition",
+    "lem-pur-normalized-adjunction-composition",
+    "lem-pur-system-derived-transition-coherence",
+    "lem-pur-system-derived-transition-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "The strict transition square commutes on sections. Localize it and use the evaluation, scalar and restriction factorization isomorphisms to obtain its derived square; equality is detected after precomposition with localization. Transpose that square through the recorded scalar adjunctions to obtain the displayed transport of adjoint transitions. The recorded derived transition unit gives equal-index adjoint units. The transport square conjugates each adjoint transition by isomorphisms and an equivalence, hence preserves and reflects invertibility, level by level. No inverse limit of a system is used.",
+   "uses": [
+    "lem-pur-system-derived-transition",
+    "lem-pur-system-derived-transition-coherence",
+    "lem-pur-system-derived-transition-unit",
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; sites-cohomology.tex Tags 06YS, 06YY and 07A6; derived.tex Tag 015F"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-system-level-left-extension-basic",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-pur-derived-mate-comparison",
+  "lem-pod-derived-exact-square-composition",
+  "lem-pur-system-scalar-generators",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-cbc-derived-constant-tower-normalization",
+  "lem-derived-exact-equivalence-squares",
+  "lem-pur-normalized-adjunction-composition",
+  "lem-pur-system-derived-transition-coherence",
+  "lem-pur-system-derived-transition-unit",
+  "lem-pur-system-derived-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "H8 direct strict-system construction, normalized inverse mates, resolving-class comparison and uniqueness of right Kan extensions; Stacks 03D7, 03EK, 015F, 06YS, 06YY, 07A6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms of inverse sequences of ring sheaves induce an equivalence of semilinear module systems preserving derived reduction adjunction units counits and transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a functor $F$ between sheaf of modules categories over ring sheaves $R$ and $S$, the composition of $\\\\iota_{\\\\text{Free}}(i)$ with the inverse of $\\\\text{mapFree}(F,\\\\eta,I)$ followed by a morphism $\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For any sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and for any index type $ I $, applying the inverse of the canonical equivalen\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For any presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheaf of modules $ F $ over the sheafified ring $ R $, there \"}\n  {\"name\": \"SheafOfModules.freeHomEquiv_symm_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For any sheaves of modules $M$ and $N$ over a sheaf of rings $R$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, an index type $I$, a family of global sections $s: I \\\\to \\\\Gamma(M)$, and a \"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_symm_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  {M N : SheafOfModules R} (s : M.sections) (p : M ⟶ N),\\n  CategoryTheory.Categor\", \"doc\": \"For any sheaf of modules $M$ and $N$ over a sheaf of rings $R$, any global section $s$ of $M$, and any morphism $p: M \\to N$, the composition of the inverse unit hom equivalence applied to $s$ followed\"}\n  {\"name\": \"PresheafOfModules.sheafifyHomEquiv'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"equivalence\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"If `e : C ≌ D`, then the pushforwards along `e.functor` and `e.inverse` forms an equivalence.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(system|tower)|restrictScalars.*(NatIso|natIso|congr)|ring.*iso.*(tower|sequence)",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Algebra/Ring/CompTypeclasses.lean\", \"line\": \"20\", \"text\": \"semilinear map; instead, the typeclass system directly finds the appropriate `RingHom` to use.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"196\", \"text\": \"    exact ((σ.restrictScalars P.Ring).comp mapTen).congr_arg (eTen.symm_apply_apply x)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"92\", \"text\": \"      l.restrictScalars P.toExtension.Ring, LinearMap.ext fun x ↦ congr($hl x)⟩\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"115\", \"text\": \"    (PresheafOfModules.isoMk (fun U ↦ (ModuleCat.restrictScalarsCongr (by subst e; rfl)).app _)\"}\n  {\"file\": \"Mathlib/Algebra/Star/Subalgebra.lean\", \"line\": \"911\", \"text\": \"    show f.restrictScalars R x = g.restrictScalars R x from DFunLike.congr_fun h x\"}\n  {\"file\": \"Mathlib/RingTheory/RingHomProperties.lean\", \"line\": \"150\", \"text\": \"    suffices e.toLinearMap.restrictScalars R = f'.toLinearMap from congr($this x)\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"line\": \"483\", \"text\": \"    rw [← @AlgHom.coe_restrictScalars' R R', ← AlgHom.coe_comp]; congr 1; ext\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"169\", \"text\": \"def restrictScalarsCongr\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"177\", \"text\": \"lemma restrictScalarsCongr_symm\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"179\", \"text\": \"  (restrictScalarsCongr e).symm = restrictScalarsCongr e.symm := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"182\", \"text\": \"lemma restrictScalarsCongr_hom_app\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"185\", \"text\": \"  (restrictScalarsCongr e).hom.app M x = x := rfl\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of derived categories of coherent diagrams of modules over isomorphic diagrams of rings compatible with extension of scalars and adjunction counits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((Condensed.forget R).map\\n      ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app ((CondensedMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}\n  {\"name\": \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_counitIso\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.Preregular C]\\n  [inst_3 : CategoryTheory.FinitaryExtensive C] [inst_4 : ∀ (X : C), CategoryTheory.Projective X],\\n  CategoryTheory.Presheaf.coherentExt\", \"doc\": \"In a preregular finitary extensive category $\\\\mathcal{C}$ where all objects are projective, the counit isomorphism of the equivalence between the category of coherent sheaves and the category of exten\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        DerivedCategory.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp DerivedCategory.Q\", \"doc\": \"An isomorphism establishing that postcomposing single-term cochain complex functors with the quotient functor to the derived category is naturally equivalent to first quotienting to the homotopy categ\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough projectives, the composition of the inverse isomorphism $ (L_0F \\\\Rightarrow F)^{-1} $ and the natural\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) → DerivedCategory.singleFunctor C n ≅ (CochainComplex.singleFunctor C n).comp DerivedCategory.Q\", \"doc\": \"For each integer $ n $, the single-term complex functor from category $ \\\\mathcal{C} $ to its derived category is naturally isomorphic to the composition of the single-term cochain complex functor (con\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of diagrams of sheaves of rings transports semilinear module systems and their canonical reduction adjunction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.isoMk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {M₁ M₂ : PresheafOfModules R} →\\n        (app : (X : Cᵒᵖ) → M₁.obj X ≅ M₂.obj X) →\\n          autoParam\\n              (∀ ⦃X Y : Cᵒᵖ⦄ (f : X ⟶ Y),\\n                CategoryTheory.Category\", \"doc\": \"Given a category $\\\\mathcal{C}$, a presheaf of rings $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathbf{Ring}$, and two presheaves of modules $M_1, M_2 : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathbf{Mod}_R$, this constru\"}\n  {\"name\": \"TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.EqualizerProducts\", \"type\": \"(α : F ≅ G) : diagram F U ≅ diagram.{v'} G U\", \"doc\": \"Given a natural isomorphism $\\\\alpha: F \\\\cong G$ between presheaves $F$ and $G$ on a topological space $X$, the equalizer diagrams encoding the sheaf condition for $F$ and $G$ are isomorphic. This isom\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": (e.sheafCongr J K A).functor ⋙ sheafToPresheaf K A ⋙ e.op.congrLeft.inverse ≅ sheafToPresheaf J A\", \"doc\": \"A natural isomorphism between the composition of functors $\\\\text{Sh}(\\\\mathcal{C}, J, \\\\mathcal{A}) \\\\xrightarrow{\\\\simeq} \\\\text{Sh}(\\\\mathcal{D}, K, \\\\mathcal{A}) \\\\xrightarrow{\\\\iota} \\\\text{PSh}(\\\\mathcal{D}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsIso φ] : IsIso (φ.app U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the induced map $\\\\phi_U$ on sections over $U$ is an isomorphism of abelian groups.\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": freeFunctor ⋙ pullback φ ≅ freeFunctor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[F.Final] : IsIso (pullbackObjUnitToUnit φ)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(α : F ≅ G) : pushforward.{v} φ ≅ pushforward.{v} (φ ≫ (Functor.sheafPushforwardContinuousNatTrans α.hom _ _ _).app S)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsEquivalence|mapDerivedCategory|StrictRingSystem",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean, Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean. Read relevant ChangeOfRings, PushforwardContinuous and ExactFunctor sources; none states the entire coherent semilinear system and reduction-adjunction assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of ring diagrams induces an equivalence of derived categories of semilinear module systems compatible with reduction",
+   "results": "Hits: CategoryTheory.Iso.toLinearEquivₛ, LinearEquiv.toModuleIsoₛ, CategoryTheory.Iso.semiRingCatIsoToRingEquiv, CategoryTheory.Iso.toLinearEquiv, MoritaEquivalence.mk, CategoryTheory.Iso.toLinearEquiv_apply, ModuleCat.restrictScalarsEquivalenceOfRingEquiv, CategoryTheory.Functor.linear_of_iso. Read relevant ChangeOfRings, PushforwardContinuous and ExactFunctor sources; none states the entire coherent semilinear system and reduction-adjunction assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"equivalence\"",
+   "results": "Hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app. Read relevant ChangeOfRings, PushforwardContinuous and ExactFunctor sources; none states the entire coherent semilinear system and reduction-adjunction assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms of inverse systems of sheaves of rings give exact equivalences of semilinear module systems and preserve derived scalar reduction adjunctions",
+   "results": "Hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.ofSheafProfinite, CondensedMod.IsSolid, LightCondMod.ofSheafLightProfinite, SheafOfModules.toSheafCompSheafToPresheafIso, CondensedMod.IsSolid.isIso_solidification_map, Condensed.instAB4StarCondensedMod. Read relevant ChangeOfRings, PushforwardContinuous and ExactFunctor sources; none states the entire coherent semilinear system and reduction-adjunction assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficients along an isomorphism of sheaves of rings commutes with tensor products and induces an equivalence on derived categories of diagrams",
+   "results": "Hits: SheafOfModules.pushforwardCongr, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, SheafOfModules.pushforwardNatIso, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_map, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardCongr_symm. Read relevant ChangeOfRings, PushforwardContinuous and ExactFunctor sources; none states the entire coherent semilinear system and reduction-adjunction assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-clopen-derived-decomposition",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "def-pur-section-invariant, finite-clopen expansion: coherent coefficient-ring transport, reduction units, transitions and counits used in retained steps 2-3 and 5; agent strict-system lemma. Stacks Tag 03D7, sites-modules-lemma-adjoint-pullback-pushforward-modules; Tag 015F, derived-lemma-right-derived-exact-functor.",
+   "via": [
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ring-iso-quotient-system-transport",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Wrote eight steps constructing the actual strict-system transport, localizing the exact equivalence, proving the tensor/augmentation transition square, deriving the system-valued reduction by the K-flat criterion, and checking adjunction and quotient cocycle formulas. Reused existing DAG nodes throughout; no new nodes or Lean changes.",
+  "blueprint": "def-pur-section-invariant finite-clopen expansion, retained steps 2-3 and 5 via lem-pur-finite-clopen-derived-decomposition step 5: normalized coefficient and whole quotient-system transport.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-system-derived-evaluation",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-system-derived-transition",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-system-derived-transition-coherence",
+    "why": "Generic strict-system, K-flat, or scalar-adjunction tool on small ringed sites; this purity-conventions unit supplies no replacement, and its coefficient-transport route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-system-derived-transition",
+  "lem-pur-system-derived-transition-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-000cc4415",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-000cc4415 (reviewer sub-agent of L); spot-checked: PASS. First stage-1 split of the item: Q120 created it on 2026-10-22 with an empty proof; there is no repair note and no earlier run of this item. The delivery has 8 steps and no new nodes, no Lean and no fixes. I read the statement of every cited node and of the stmt_deps, plus the StrictRingSystem definition. Step 1 (semilinearity: alpha_n^{-1} q^S = q^R alpha_m^{-1}) and step 4 (balancing, S_n-linearity, the transition square and the augmentation for c_n) are elementary and I recomputed them. Step 2 is right: the sequence-site equivalence keeps underlying sections, so lem-pur-ring-iso-derived-transport on the sequence site gives the strict-system transport. Step 3 descends the exact equivalence through the localization. Step 5 meets every hypothesis of lem-pur-left-derived-from-kflat-class: resolutions from lem-pc-kflat-resolution, levelwise quasi-isomorphisms from lem-pur-derived-change-of-rings(1), system quasi-isomorphisms from lem-pur-system-derived-evaluation, and T preserves flat-term K-flat complexes; the Kan-extension comparison holds. Steps 6 and 8 identify the ordinary and derived adjunctions, with Res_{b_n} T_n = T Res_{a_n}, and the derived transitions through lem-pur-system-derived-transition and its coherence lemma. Step 7 checks the iterated-reduction formulas, the three-index cocycle and the unit. Small cases: identity alpha, a conjugation automorphism of Z_p[sqrt d]/p^n, and a non-flat Z/4 to Z/2 reduction. Source: def-pur-section-invariant is a definition only, so the proof is agent-written as recorded; the Stacks tags resolve; no SGA. No duplicate in the DAG. Advisory: lem-pur-quotient-system-flat-models, in the same unit, gives the system-valued derived reduction and could be cited in step 5. The tool_uses are accepted: on-route sk-def-sf-operations nodes and the generic lem-pc-kflat-resolution."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingIsoQuotientSystemTransport",
+  "declaration": "SheafOfModules.QuotientIsoTransport.ringIsoQuotientSystemTransport",
+  "declarations": [
+   "SheafOfModules.QuotientIsoTransport.Modules",
+   "SheafOfModules.QuotientIsoTransport.transport",
+   "SheafOfModules.QuotientIsoTransport.derivedSquare",
+   "SheafOfModules.QuotientIsoTransport.ScalarSquare",
+   "SheafOfModules.QuotientIsoTransport.Reduction",
+   "SheafOfModules.QuotientIsoTransport.adjointTransition",
+   "SheafOfModules.QuotientIsoTransport.CoherentTransport",
+   "SheafOfModules.QuotientIsoTransport.ringIsoQuotientSystemTransport",
+   "SheafOfModules.QuotientIsoTransport.ScalarComparisonData",
+   "SheafOfModules.QuotientIsoTransport.ScalarSquareConditions",
+   "SheafOfModules.QuotientIsoTransport.ReductionComparisonData",
+   "SheafOfModules.QuotientIsoTransport.ReductionConditions",
+   "SheafOfModules.QuotientIsoTransport.Reduction.additive",
+   "SheafOfModules.QuotientIsoTransport.TransportComparisonData",
+   "SheafOfModules.QuotientIsoTransport.CoherentTransportConditions",
+   "SheafOfModules.QuotientIsoTransport.moduleWeakSheafify",
+   "SheafOfModules.QuotientIsoTransport.transportAdditive",
+   "SheafOfModules.QuotientIsoTransport.transportLimits",
+   "SheafOfModules.QuotientIsoTransport.transportColimits"
+  ],
+  "file": "lean/Sheaf/Paper/RingIsoQuotientSystemTransport.lean",
+  "statement": "theorem ringIsoQuotientSystemTransport (R S : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (a : R ≅ S) (c : Cone R) (hc : IsLimit c) (d : Cone S) (hd : IsLimit d) (A : SystemScalarAssignment (J := J)) : ∃ e : c.pt ≅ d.pt, (∀ n : ℕ, e.hom ≫ d.π.app (op n) = c.π.app (op n) ≫ (a.app (op n)).hom) ∧ Nonempty (CoherentTransport R S a c d e A)",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The additional landed statement dependency supplies the actual strict system category, exact and derived evaluations, normalized scalar models and canonical tensor coherence. The helper structures only package the clauses of this node; no second system category or tensor construction is introduced. H8: generic dependent record packaging and named predicates preserve every original data field and normalization clause while avoiding concrete recursor elaboration; see coord/changes/ring-iso-quotient-system-normalization-records.md. H8: inverse scalar transport is a named definition with proved additive and finite limit/colimit instances; its body is unchanged restriction along the inverse coefficient isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eba1703fc",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read the node, the 8-step proof and source place, the item module, the report, and the dep Lean (SystemLevelLeftExtensionBasic incl. the concrete systemTensorCoherence, SystemScalarModel, SystemDerivedTransition). All 8 dep records are byte-identical to live; the only item stmt_dep change adds the landed def-pur-system-level-left-extension-basic; no new nodes. Every node clause is rendered: limit iso e with projection equation; additive exact strict-system equivalence pinned by level equality and HEq-unchanged transitions and morphisms; derived equivalence = mapDerivedCategory with localization HEq mapDerivedCategoryFactors; Reduction pinned (tmul transitions, IsLeftDerivedFunctor counit, iso on flat-term K-flat P); reduction iso pinned on tmul (augmentation at r=1); derivedReduction pinned via the universal counit; projection and quotient ScalarSquares (restriction identity, tmul, ε, ordinary and derived Hom identities, types checked with b∘e=a_n∘π); unit and assoc compatibility vs canonical systemTensorCoherence; equal-index unit and cocycle of adjoint transitions (refl case checked on tmul); transport square; iff isIso. A : SystemScalarAssignment is normalized and unique up to unique iso, not arbitrary. No free or hollow data; sorry only; docstrings present; statement verbatim; universes u,v,w independent. Advisory: SystemScalarModel/systemModelTmul, systemDerivedTransition, systemTensorCoherence, IsFlatOnSite owners not direct stmt_deps (reached via the left-extension dep); lem-pur-ring-iso-derived-transport now has module NormalizedRingIsoDerivedTransport (proof dep). No recompile per the 2026-10-21 instruction; worker reports a clean compile in 20.9-33.8 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93935",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T051848-L-4168525",
+  "kind": "interface",
+  "note": "independent cc review: delivered RingIsoQuotientSystemTransport (renamed scratch copy) against the published old module: a compiled converter proves the OLD published statement from the new theorem (axioms propext/Classical.choice/Quot.sound); node proof_deps against the imports/declarations used; change record against the 0 importers"
+ }
+}

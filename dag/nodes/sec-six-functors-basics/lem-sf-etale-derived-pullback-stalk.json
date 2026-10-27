@@ -18,67 +18,43 @@
  ],
  "proof": [
   {
-   "text": "Put $P=u^*$, $S=s_{\\bar v}$ and $R=s_{u\\circ\\bar v}$. For an $A_T$-module sheaf $M$, [prop-weil-pbc-inverse-image-modules-exact] identifies the underlying abelian sheaf of $PM$ with $u^{-1}M$, naturally in $M$. Apply [lem-weil-pbc-inverse-image-stalk-germ] to obtain the canonical additive isomorphism $c_M:S(PM)\\xrightarrow{\\sim}R(M)$, natural in module morphisms. It is $A$-linear: for $a\\in A$, let $m_a:M\\to M$ be multiplication by its constant section. Naturality of the abelian comparison gives $c_M\\circ S(Pm_a)=R(m_a)\\circ c_M$. The action-transport and constant-ring identification in [prop-weil-pbc-inverse-image-modules-exact] identify $Pm_a$ with multiplication by $a$ on $PM$; [lem-sfb-etale-stalk-constant-complex-exactness] identifies constant-ring stalks with $A$ with its ordinary action. Thus this equation is precisely $c_M(ax)=a c_M(x)$. Consequently $c:SP\\xrightarrow{\\sim}R$ is a natural isomorphism of functors to $A$-modules.",
+   "text": "Use the existing canonical coefficient-category-valued upperStarCompSheafFiberIso for ModuleCat A [lemma-openclosed-stalk-upperstar]. It is already a natural isomorphism of module-valued functors P followed by S and R, so its components are additive and A-linear without passing through abelian sheaves or reconstructing their actions.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-sfb-etale-stalk-constant-complex-exactness"
+    "lemma-openclosed-stalk-upperstar"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1, lemma-stalk-pullback (3), with the constant-module action of prop-weil-pbc-inverse-image-modules-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "For any unbounded cochain complex $C$, define $(c_C)^n=c_{C^n}$. Naturality of the comparison of [lem-weil-pbc-inverse-image-stalk-germ], after the module identification just made, applied to $d_C^n:C^n\\to C^{n+1}$ says $c_{C^{n+1}}\\circ SP(d_C^n)=R(d_C^n)\\circ c_{C^n}$. This is the chain-map equation. The inverse components satisfy the reverse equation by multiplying this equality by the two inverses, so $c_C$ is a chain isomorphism. For a chain map $h:C\\to E$, the same naturality applied to each $h^n$ gives $c_E\\circ SP(h)=R(h)\\circ c_C$ degree by degree. These are exactly the degreewise canonical stalk comparisons, and their additivity and $A$-linearity are those established in step 1.",
+   "text": "Apply Functor.mapHomologicalComplexCompIso to this comparison. Its components in degree n are the canonical stalk comparisons. Naturality of the module-valued comparison for each differential proves the chain-map equation; naturality for each component of a chain map proves naturality on complexes.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lemma-openclosed-stalk-upperstar"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1, lemma-stalk-pullback (3), with the constant-module action of prop-weil-pbc-inverse-image-modules-exact"
-   }
+   "elementary": true
   },
   {
-   "text": "The functor $P$ is additive and exact by [prop-weil-pbc-inverse-image-modules-exact]. The stalk functors $S$ and $R$ are additive and exact by [lem-sfb-etale-stalk-constant-complex-exactness], applied to the two image geometric points. The composite $SP$ therefore preserves finite limits and finite colimits, by applying the two preservation properties successively. Apply [lem-weil-pbc-exact-functor-derived-factorization] to $P,S,R$ and $SP$. Their termwise functors preserve quasi-isomorphisms and induce $D(P),D(S),D(R)$ and $D(SP)$, with the comparison $a_{H,C}:D(H)(QC)\\xrightarrow{\\sim}Q(C(H)C)$ for each $H$. In particular every complex, including an unbounded one, represents its image by termwise application.",
+   "text": "Use the existing exact additive inverse-image and sheaf-fiber instances. The exact-derived factorization [lem-weil-pbc-exact-functor-derived-factorization] for P, S and R applies without boundedness assumptions. Whisker the factorization for P by D(S), compose with the factorization for S, and then with the localization of the chain comparison. Associators yield e: Q followed by D(P) followed by D(S) is naturally isomorphic to C(R) followed by Q.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sfb-etale-stalk-constant-complex-exactness",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor (3)-(4); stalk exactness is sites-modules.tex Tag 04EQ, lemma-stalk-exact-modules (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-exact-derived-natural-iso] to $c:SP\\xrightarrow{\\sim}R$ and [lem-sfb-exact-derived-composition] to $(P,S)$. Define the desired isomorphism to be $\\alpha=D(c)\\circ\\mu_{P,S}^{-1}:D(S)D(P)\\xrightarrow{\\sim}D(R)$. To check its prescribed representative, put $\\beta_C=a_{S,C(P)C}\\circ D(S)(a_{P,C})$. The composition lemma gives $\\beta_C\\circ\\mu_{P,S,QC}=a_{SP,C}$, whereas the natural-isomorphism lemma gives $a_{R,C}\\circ D(c)_{QC}=Q(c_C)\\circ a_{SP,C}$. Substitution yields $a_{R,C}\\circ\\alpha_{QC}=Q(c_C)\\circ\\beta_C$. Thus under the termwise representing identifications, $\\alpha$ is exactly the localization of the chain isomorphism of step 2. Both cited lemmas give natural isomorphisms on the entire derived categories, so this comparison is natural for every derived morphism. All hypotheses used were exactness and the scheme morphism and geometric-point hypotheses; no boundedness, finiteness, or extra condition on $u$ has entered.",
+   "text": "Apply Localization.liftNatIso, the natural-isomorphism localization construction of [lem-sfb-exact-derived-natural-iso], directly to e. Regard D(P) followed by D(S) as a lifting of Q followed by that same composite with identity factorization; use the canonical exact-derived lifting for D(R). The component formula for liftNatTrans gives alpha at Q(C) as D(S)(a_P,C), followed by a_S,C(P)(C), followed by Q(c_C), followed by the inverse of a_R,C. Compose with a_R,C and cancel its inverse. This is exactly the required normalization equation, and the lifted isomorphism is natural on the entire derived category.",
    "uses": [
-    "lem-sfb-exact-derived-natural-iso",
-    "lem-sfb-exact-derived-composition"
+    "lem-sfb-exact-derived-natural-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization (3), applied with the natural-transformation enhancement explicitly stated in the two cited nodes"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-sfb-etale-stalk-constant-complex-exactness",
+  "lemma-openclosed-stalk-upperstar",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-sfb-exact-derived-natural-iso",
-  "lem-sfb-exact-derived-composition"
+  "lem-sfb-exact-derived-natural-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Termwise extension of Tag 03Q1 (lemma-stalk-pullback) (3), using Tag 015F and localization as in Tag 04VG; explicit scalar-linearity and localization normalization supplied here"
+  "place": "F8: canonical module-valued stalk comparison of Tag 03Q1(3), extended termwise and descended directly with the normalized exact-derived factorizations (Tag 015F) and natural-transformation localization universal property (Tag 04VG). The generic stalk comparison is used as a site-level tool, preserving the assigned unit route."
  },
  "mathlib_searches": [
   {
@@ -230,5 +206,27 @@
   "group": "Q40",
   "result": "pass",
   "note": "Re-delivery of 9182a5b22d8b (RETURN H2) applies exactly the prescribed fix: the spurious theorem stmt_dep lem-sfb-etale-derived-tensor-stalk and its public import are removed, and the upstream Point.sheafFiber_additive is activated as a local instance. Node differs from the live base only in lean; stmt_deps equal the 7 base entries; the theorem signature is byte-identical and lean.statement is verbatim. Re-checked against Stacks 03Q1 (1),(3) + 015F/04VG: arbitrary f, geometric point, D(S)∘D(P) order, image point v≫f, alpha pinned on every Q.obj C via the canonical degreewise upperStarCompSheafFiberIso (canonical composite, not arbitrary), unbounded complexes, no extra hypotheses. Edge cases A=0, empty U, f=id, non-flat f OK. Proof is sorry only, docstrings carry source/blueprint/proof steps, no new defs, not dropped, report sections present. Not recompiled (no file changed); the prior review compiled this exact variant cleanly in 27.9 s. Advisory (base-era): prop-weil-pbc-inverse-image-modules-exact is a proof-only theorem stmt_dep."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261022T143619-L-1224460",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

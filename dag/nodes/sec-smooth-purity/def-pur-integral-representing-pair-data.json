@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-integral-representing-pair-data",
+ "kind": "definition",
+ "title": "Data and interfaces for integral supplied-system representing pairs",
+ "statement": "Fix a prime ell, a normed finite extension E of Q_ell, schemes X,Y, a compactification c of f:X to Y, coefficient reduction/limit calculi RX,RY, and strict Brown finite-comparison and transport data S,G,H,D as in the parent representing-pair statement. Define reduction_W as the completed-coefficient equivalence followed by the actual reduction and the quotient-coordinate equivalence; totalLimit_W is the inverse quotient-coordinate equivalence followed by the actual sequence limit and the inverse completed-coefficient equivalence. Their adjunction is the composite of these three adjunctions. Coordinate support is reduction_X followed by D.compact.functor and totalLimit_Y; supportPresentation beta is the whiskered normalized beta followed by the inverse quotient-equivalence unit, and alpha is the actual composite adjunction counit on D.compact(reduction_X K). Brown output is site direct image, Brown right adjoint, then site inverse image. Supplied bundles a normalized strict derived system with bounded constructible finite evaluations, transition-compatible exceptional identifications, either an actual Brown identification or concentration in a single degree, integral total limit, and invertible evaluated reconstruction counit. Pair records the resulting theta with its evaluations and good-truncation normalization, the Brown-domain and reconstruction properties, and the linear Hom equivalences for coordinate support with their actual transpose and both trace equations. Family adds input and trace naturality and the common-degree recognition square. Family adds the actual alpha_transport equation and transports those Hom and trace equations to the published integralSupport. All eighteen original constructions and structure signatures are retained verbatim under the original namespace, with no additional mathematical assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Displayed integral Hom chain and final unit/counit paragraph; refinement of representing-pair Steps 1--7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-brown-tower-finite-site-comparison",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "def-weil-proetale-constructible-sheaf",
+  "def-kun-truncations",
+  "def-pur-adic-exceptional-system-realization",
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-pur-integral-support-coordinate-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Displayed integral Hom chain and final unit/counit paragraph; refinement of representing-pair Steps 1--7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport natural linear Hom equivalences along a natural isomorphism of functors",
+   "results": "NatTrans.naturality_1, NatTrans.naturality_2, generic functor and adjunction APIs.",
+   "date": "2026-10-25",
+   "verdict": "No project-specific coordinate family or alpha transport; generic naturality is used in the combination proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv, comp_homEquiv, homEquiv_unit, homEquiv_counit.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction API only; no supplied exceptional-system recognition or canonical support comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homCongr|homLinearEquiv|unit.*naturality; project representing pair, supportPresentation, alpha_transport",
+   "results": "Linear.homCongr and InducedCategory.homLinearEquiv provide the transport of linear Hom groups. The project has no separate coordinate Family existence theorem or alpha_transport theorem. blueprint_refs search integral representing returned no blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the generic Hom transport; separate the analytic coordinate construction from published support transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralRepresentingPair",
+  "date": "2026-10-25",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Displayed integral Hom chain and final unit/counit paragraph; refinement of representing-pair Steps 1--7.",
+   "via": [
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralRepresentingPairData",
+  "file": "lean/Sheaf/Paper/PurIntegralRepresentingPairData.lean",
+  "declaration": "WeilConjectures.PurIntegralRepresentingPair.Family",
+  "statement": "structure Family (hD : BrownTowerComparison.Transport S G H D (finite := D.finite))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurIntegralRepresentingPair.reduction",
+   "WeilConjectures.PurIntegralRepresentingPair.totalLimit",
+   "WeilConjectures.PurIntegralRepresentingPair.adjunction",
+   "WeilConjectures.PurIntegralRepresentingPair.support",
+   "WeilConjectures.PurIntegralRepresentingPair.supportPresentation",
+   "WeilConjectures.PurIntegralRepresentingPair.alpha",
+   "WeilConjectures.PurIntegralRepresentingPair.brown",
+   "WeilConjectures.PurIntegralRepresentingPair.exceptionalLevel",
+   "WeilConjectures.PurIntegralRepresentingPair.levelMap",
+   "WeilConjectures.PurIntegralRepresentingPair.Supplied",
+   "WeilConjectures.PurIntegralRepresentingPair.Supplied.object",
+   "WeilConjectures.PurIntegralRepresentingPair.transpose",
+   "WeilConjectures.PurIntegralRepresentingPair.SingleDegreeNormalization",
+   "WeilConjectures.PurIntegralRepresentingPair.finiteCoordinates",
+   "WeilConjectures.PurIntegralRepresentingPair.finiteCounit",
+   "WeilConjectures.PurIntegralRepresentingPair.Pair",
+   "WeilConjectures.PurIntegralRepresentingPair.Family"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b101",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T162035-L-221287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b101",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T162035-L-221287",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Lean/node files vs the approved head 478450ea1374 (byte-identical); Data module vs current published item declarations (verbatim); change record Users vs computed users (V6, Z9); both direct importers compiled against the delivered modules (exit 0 on rerun)"
+ }
+}

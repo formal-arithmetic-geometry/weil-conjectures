@@ -1,0 +1,194 @@
+{
+ "id": "lem-pur-legacy-rational-self-extension-unit",
+ "kind": "statement",
+ "title": "The legacy rational scalar extension along the identity coefficient map has a natural unit isomorphism",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and any scheme $Y$, without a structure map to $k$. Let $\\mathcal A_E^{\\mathrm{old}}$ be the full subcategory of the completed integral module derived category consisting of derived-complete objects whose reductions modulo every positive uniformizer power are finite-torsion constructible with cohomology in one finite interval independent of the power [def-weil-derived-complete-integral-detailed]. Use precisely the presentation $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,E,Y)$ and the reduction functors $\\mathrm{integralDerivedReduction}$. Let $C_E^{\\mathrm{old}}=\\mathcal A_E^{\\mathrm{old}}[1/\\varpi_E]$ be its raw Hom scalar localization [def-weil-rationalization-karoubi], namely $\\mathrm{rationalConstructibleCategory}(D,\\ell,\\ell\\ne p,E,Y)$. Let $U_E:C_E^{\\mathrm{old}}\\to C_E^{\\mathrm{old}}$ be the actual functor $\\mathrm{rationalScalarExtension}(D,\\ell,\\ell\\ne p,E,Y,E,\\mathrm{AlgHom.id})$, namely completed integral self-extension followed by raw rationalization. Then there exists a natural isomorphism $u_E:U_E\\xrightarrow{\\sim}\\mathrm{id}_{C_E^{\\mathrm{old}}}$. No identification with a different integral constructibility predicate is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Identity-extension comparison in retained owning proof argument 6; explicit legacy source lean/Sheaf/Paper/ScalarExtensionComposition.lean:1032-1060 and 1333-1337 (integralConstructibleScalarUnit_existsUnique and rationalConstructibleScalarUnit), used by lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:393-398 (unitor). Agent formulation of this smaller input obligation."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\widehat{\\mathcal O}_{E,Y}$. Ordinary derived extension along $R\\xrightarrow{1}R$ has a natural multiplication isomorphism $m_K:K\\otimes_R^LR\\xrightarrow{\\sim}K$: on a K-flat representative $P$ it is $x\\otimes r\\mapsto rx$, with inverse $x\\mapsto x\\otimes1$. The tensor relation gives $(rx)\\otimes1=x\\otimes r$, so both composites are identities. These formulas commute with restrictions and differentials, hence give sheaf-complex isomorphisms. They commute with every map of representatives and with the quasi-isomorphisms inverted in derived change of rings, giving the asserted natural derived isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side, and Tag 06YY, lemma-derived-base-change; tensor definition in sites-modules.tex Tag 03EK, section-tensor-product. The multiplication calculation is elementary."
+   }
+  },
+  {
+   "text": "Let $T$ be the actual completed integral self-extension restricted to $\\mathcal A_E^{\\mathrm{old}}$, so its raw rationalization is $U_E$. Every underlying $K$ is derived complete by the stated legacy predicate. Apply the finite-free completed-scalar comparison with $L=E$ and the identity inclusion: its natural isomorphism is $\\chi_K:K\\otimes_R^LR\\xrightarrow{\\sim}T(K)$, with exactly the strict reduction tower used by the actual integral scalar extension. Define $t_K=m_K\\circ\\chi_K^{-1}:T(K)\\to K$, with inverse $\\chi_K\\circ m_K^{-1}$. Both objects already belong to the legacy full subcategory; therefore these ambient arrows are arrows of that full subcategory, and their inverse and naturality equations hold there unchanged. This gives $t:T\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal A_E^{\\mathrm{old}}}$. No change of constructibility predicate is involved.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-integral-scalar-extension",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12, Proposition 3.5.1 and Definition 3.5.2, pp. 22-24; apply the existing finite-free comparison in its identity case. Actual legacy functor formulas: lean/Sheaf/Paper/RationalizationKaroubi.lean:133-153."
+   }
+  },
+  {
+   "text": "Raw rationalization has the same objects. Define $(u_E)_K=1\\otimes t_K$ and $(u_E^{-1})_K=1\\otimes t_K^{-1}$. For an integral arrow $f:K\\to L$ and scalar $a\\in E$, the specified identity coefficient map makes $U_E(a\\otimes f)=a\\otimes T(f)$; in the actual localization coordinates this uses $\\mathrm{rationalCoefficientEquiv}^{-1}(\\mathrm{id}(\\mathrm{rationalCoefficientEquiv}(a)))=a$. Thus $ (u_E)_L\\circ U_E(a\\otimes f)=a\\otimes(t_L\\circ T(f))=a\\otimes(f\\circ t_K)=(a\\otimes f)\\circ(u_E)_K$. Additivity extends this equality to all localized arrows, which are finite sums of pure tensors. Bilinear composition gives both inverse equations from $t_Kt_K^{-1}=1$ and $t_K^{-1}t_K=1$. Hence these components define the required natural isomorphism $u_E:U_E\\xrightarrow{\\sim}\\mathrm{id}_{C_E^{\\mathrm{old}}}$.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8 rationalization; explicit raw Hom localization and scalar-extension formulas of def-weil-rationalization-karoubi. Agent calculation of naturality and inverse equations, matching lean/Sheaf/Paper/ScalarExtensionComposition.lean:1204-1231 and 1333-1337."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 3.4.10 and 3.5.2, Lemma 3.4.12 and Proposition 3.5.1; assembly of the existing identity-case completed-scalar comparison with explicit raw-localization tensor calculations. Legacy source: lean/Sheaf/Paper/ScalarExtensionComposition.lean:1032-1060, 1204-1231, 1333-1337."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rationalConstructibleScalarUnit|completed.*[Uu]nit|extendScalars.*[Ii]d",
+   "results": "25 hits: Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: ordinary module self-extension and functor-composition unitors do not supply the completed-derived legacy self-extension unit or its rationalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The self extension of scalars functor on completed integral constructible derived categories and its rationalization has a canonical tensor unit natural isomorphism to identity",
+   "results": "8 hits: ModuleCat.extendScalarsId, ModuleCat.extendScalars_comp_id, ModuleCat.ExtendScalars.map'_id, ModuleCat.extendScalarsId_hom_app_one_tmul, HomologicalComplex.rightUnitor', CategoryTheory.expUnitIsoSelf, CategoryTheory.MonoidalClosed.unitNatIso, CategoryTheory.MonoidalClosed.unitIsoSelf",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: ordinary module self-extension and functor-composition unitors do not supply the completed-derived legacy self-extension unit or its rationalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightUnitor",
+   "results": "12 hits: CategoryTheory.Functor.rightUnitor, CategoryTheory.Functor.rightUnitor_hom_app, CategoryTheory.Functor.rightUnitor_inv_app, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.triangleIso_assoc, CategoryTheory.Functor.triangle, CategoryTheory.Equivalence.trans_counitIso, CategoryTheory.Equivalence.trans_unitIso",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: ordinary module self-extension and functor-composition unitors do not supply the completed-derived legacy self-extension unit or its rationalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral scalar extension along the identity coefficient field on derived complete complexes, followed by raw rationalization, is naturally isomorphic to the identity functor",
+   "results": "8 hits: DerivedCategory.singleFunctorsPostcompQIso_hom_hom, CategoryTheory.Idempotents.DoldKan.η, AlgebraicTopology.DoldKan.Γ₀'CompNondegComplexFunctor, CategoryTheory.Functor.mapHomologicalComplexIdIso, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: ordinary module self-extension and functor-composition unitors do not supply the completed-derived legacy self-extension unit or its rationalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalConstructibleScalarUnit|derived.*[Cc]omplet.*[Uu]nit|extendScalarsId",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-27",
+   "verdict": "No match for the item: ordinary module units, classical adic completion, and generic derived-category identities do not state the actual legacy completed extension and raw rationalization unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a derived complete sheaf complex with its coefficient ring and taking the inverse limit of uniformizer reductions is naturally identity, including on localized Hom spaces",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, TensorProduct.directLimitRight, TensorProduct.directLimitLeft, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, SheafOfModules.hasLimit, ModuleCat.Tilde.stalkIso, HomologicalComplex.leftUnitor",
+   "date": "2026-10-27",
+   "verdict": "No match for the item: ordinary module units, classical adic completion, and generic derived-category identities do not state the actual legacy completed extension and raw rationalization unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsId",
+   "results": "9 hits: ModuleCat.extendScalarsId, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.homEquiv_extendScalarsId",
+   "date": "2026-10-27",
+   "verdict": "No match for the item: ordinary module units, classical adic completion, and generic derived-category identities do not state the actual legacy completed extension and raw rationalization unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral self extension along the identity coefficient field on derived complete complexes is naturally isomorphic to identity after raw Hom scalar localization",
+   "results": "8 hits: DerivedCategory.singleFunctorsPostcompQIso_hom_hom, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id, DerivedCategory.singleFunctorsPostcompQIso_inv_hom, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "No match for the item: ordinary module units, classical adic completion, and generic derived-category identities do not state the actual legacy completed extension and raw rationalization unit."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived[Cc]omplet|[Dd]erived.[Cc]omplet|[Cc]ompleted.*[Ss]calar",
+   "results": "1 hits: Mathlib/NumberTheory/LSeries/ZMod.lean",
+   "date": "2026-10-27",
+   "verdict": "No match for the item: ordinary module units, classical adic completion, and generic derived-category identities do not state the actual legacy completed extension and raw rationalization unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex of sheaves is fixed by the canonical map to the homotopy inverse limit of its reductions modulo powers of a uniformizer",
+   "results": "8 hits: BDeRhamPlus, BDeRham, localCohomology.diagram, IsAdicComplete.of_lift, localCohomology.ofDiagram, IsAdicComplete.StrictMono.of_lift, AdicCompletion.eval_of, IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-27",
+   "verdict": "No match for the item: ordinary module units, classical adic completion, and generic derived-category identities do not state the actual legacy completed extension and raw rationalization unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-general-legacy-hom-coordinates",
+  "date": "2026-10-27",
+  "group": "NN"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained owning argument 6, actual directed Hom system for the old rational stages; the identity extension comparison underlying the reflexive stage faithfulness, also present in the old argument 5 scalar data.",
+   "via": [
+    "lem-pur-general-legacy-hom-coordinates"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-legacy-rational-self-extension-unit",
+  "worker": "stage1",
+  "summary": "Kept the statement and the precise legacy predicate. Constructed ordinary derived multiplication, inverted the existing actual strict-tower comparison on legacy complete inputs, restricted by fullness, and wrote out naturality and inverse equations on every raw localized Hom. No new nodes, no replacement by a modern coefficient category, and no attachment claimed from sorried legacy declarations.",
+  "blueprint": "Identity-extension comparison in the retained owning argument 6 of def-weil-algebraically-closed-coefficients, inherited through lem-pur-general-legacy-hom-coordinates. Latest sk-thm-sfb-qlbar-two-colimit, clause 4, is the finite-stage categorical context; its modern coefficient category is not identified with the legacy stages."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NR-3056affe2",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-3056affe2 (reviewer sub-agent of L); spot-checked: Shape: one commit touching only the item and the report, no new nodes. The statement, stmt_deps, source, created and blueprint fields are identical to the live copy, which is still unsplit. proof_deps equals the union of the step uses. Statement vs Lean: in RationalizationKaroubi.lean:133-160 the object map is constructibleIntegralScalarExtension with the scalar factor e_L^-1(ι(e_E a)); for ι=id this is a. In IntegralScalarExtension.lean:43 that extension is the strict Roos construction of def-weil-integral-scalar-extension. The coefficient category is the raw Hom localization of def-weil-derived-complete-integral-detailed, with no other predicate substituted. Step 1: multiplication iso K⊗^L_R R≅K on K-flat P; the presheaf tensor is already a sheaf; naturality comes from clause (2) of lem-pur-derived-change-of-rings. Stacks 06YT, 06YY and 03EK checked in tags. Step 2: lem-weil-finite-free-completed-scalar-comparison with L=E. Its hypotheses hold for any Y and derived t-complete K, given by the legacy predicate. The map R→S is the identity, since integralCompletedScalarMap is fixed by its projections. The comparison's target is exactly T, and invertibility and naturality are in its statement, not its proof. It is reviewed (NQ 2026-10-21), and its closure does not reach the item. t=m∘χ^-1 lives in the full subcategory. Step 3: u=1⊗t; naturality holds on pure tensors and extends to finite sums; inverses by bilinear composition; correctly marked elementary. All cited statements are in unit sk-def-sf-operations, so no tool_uses. BS Def 3.4.10, Lemma 3.4.12, Prop 3.5.1 and Def 3.5.2 checked on pp. 22-24; no SGA. Edge cases tested: Y empty, K=0, a field point with K=R; non-complete K is excluded, which is where χ fails. Duplicate candidates, none of which state the item: def-trf-completed-scalar-identity-unit (chain map, not inverted), def-per-scalar-extension-unit and lem-pur-coefficient-scalar-units (ordinary units only), lem-weil-scalar-extension-composition (composition), def-sf-completed-scalar-comparison-data (χ data). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarExtensionComposition",
+  "declaration": "WeilConjectures.rationalConstructibleScalarUnit",
+  "statement": "noncomputable def rationalConstructibleScalarUnit :\n    rationalScalarExtension D l hl E Y E (AlgHom.id (Padic l) E) ≅\n      𝟭 (rationalConstructibleCategory D l hl E Y)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Existing natural isomorphism on exactly the requested legacy boundedConstructibleDerivedCompleteIntegralCategory and raw rationalConstructibleCategory, for the actual rationalScalarExtension along AlgHom.id. Its result is the witness of the asserted existence; no identification with sfIntegralConstructibleCategory or sfRationalConstructibleCategory is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc7d912f1",
+  "group": "NL",
+  "result": "pass",
+  "note": "existing:true WeilConjectures.rationalConstructibleScalarUnit (ScalarExtensionComposition.lean:1333): signature verbatim = lean.statement; hypotheses and clauses match the node (D, l prime, hl, finite E, any Y, legacy boundedConstructibleDerivedCompleteIntegralCategory/rationalConstructibleCategory, actual rationalScalarExtension along AlgHom.id). The witness is a canonical composite (rationalOrdinaryComparison^-1 then rationalOrdinaryScalarUnit, both pinned by existsUnique), matching proof steps 2-3. No other node owns it (scalar-composition node now records Sf*). The legacy presentation is the one the item prescribes (stage-1 reviewed); no predicate identification is claimed. Node differs from live only by the lean record; report sections present; dry run OK; no files changed, no compile."
+ }
+}

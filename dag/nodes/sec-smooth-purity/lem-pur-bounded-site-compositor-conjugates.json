@@ -1,0 +1,270 @@
+{
+ "id": "lem-pur-bounded-site-compositor-conjugates",
+ "kind": "statement",
+ "title": "Bounded site comparison of compositor and refinement conjugates",
+ "statement": "Fix the finite coefficient datum [def-pur-conventions]: $k$ is an algebraic closure of a finite field of characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite, $n\\ge1$ and $A=\\mathcal O_E/\\varpi_E^n$. All schemes are finite-type $k$-schemes and every morphism to which compact support is applied is separated and finite type [def-weil-scheme-morphism-properties]. No absolute separatedness is assumed. For each such $h:S\\to T$ choose $c_h=(j_h:S\\hookrightarrow\\overline S,r_h:\\overline S\\to T)$ [def-weil-compactifications-refinements]. On ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], put $C_V=\\nu_V^*$ [def-sf-comparison-derived-pullback], $F_h^e=Rr_{h,e,*}j_{h,!}^e$ and $F_h^p=Rr_{h,p,*}j_{h,!}^p$. Use the specified proper-mate/open comparison $B_h:C_TF_h^e\\xrightarrow{\\sim}F_h^pC_S$ [lem-pur-compact-support-site-coherence], the ordinary etale right adjoint $G_h^e$ [thm-amb-etale-exceptional-adjoint], the transported $G_h^p=Rh^!$ [def-weil-exceptional-inverse-image], and their counits $\\varepsilon_h^e,\\varepsilon_h^p$. Write $a_{h,L}=\\rho_L:C_SG_h^eL\\xrightarrow{\\sim}G_h^pC_TL$ for the comparison induced by the site-adjunction unit, with the bounded-origin Hom normalization of [lem-pur-bounded-site-adjunction-transpose]. Only bounded-below etale inputs, bounded-below exceptional images, and bounded-below intermediate etale objects of the displayed composites are used; all pro-etale exceptional Hom bijections are the bounded etale-origin ones.\n\nLet $f:X\\to Y$ and $g:Y\\to Z$ be composable, $h=g\\circ f$, with compatible chosen compactification towers. Let $\\alpha^\\sigma:F_g^\\sigma F_f^\\sigma\\to F_h^\\sigma$ be their specified compact-support compositors, $\\sigma=e,p$, and let $t^\\sigma:G_h^\\sigma\\to G_f^\\sigma G_g^\\sigma$ be their right-adjoint conjugates [def-pur-chosen-compactification-compositors, def-weil-pbc-adjunction-conjugate], using the composite adjunction [def-weil-pbc-composite-adjunction]. Explicitly, $t^\\sigma_K$ is the transpose under $F_g^\\sigma F_f^\\sigma\\dashv G_f^\\sigma G_g^\\sigma$ of $\\varepsilon^\\sigma_{h,K}\\circ\\alpha^\\sigma_{G_h^\\sigma K}$. Then\n$$ (G_f^p(a_{g,K}))\\circ a_{f,G_g^eK}\\circ C_X(t^e_K)\n=t^p_{C_ZK}\\circ a_{h,K}. $$\nFor two compactifications $c,c'$ of $f$ and a specified proper refinement, let $r^\\sigma:F_f^{\\sigma,c}\\to F_f^{\\sigma,c'}$ be its specified comparison and $q^\\sigma:G_f^{\\sigma,c'}\\to G_f^{\\sigma,c}$ its conjugate. Then\n$$a^c_{f,K}\\circ C_X(q^e_K)=q^p_{C_YK}\\circ a^{c'}_{f,K}.$$\nBoth equalities hold for every $K$ for which the bounded-below inputs and intermediate exceptional images specified above exist. They identify the actual chosen arrows, preserve identity comparisons, and commute with every further compatible composition or refinement: the comparison of a pasted left-adjoint diagram has as its conjugate the corresponding pasted right-adjoint diagram, with the canonical composite-adjunction associators inserted. No tensor projection, Cartesian exchange, smoothness or purity assertion is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 3: transitive ordinary counits and exceptional composition; extracted returned proof Step 5"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "lem-pur-compact-support-site-coherence",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-exceptional-inverse-image",
+  "lem-pur-bounded-site-adjunction-transpose",
+  "def-pur-chosen-compactification-compositors",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Each chosen Stage already carries its finite nonnegative dimension bound, including the empty-scheme case. Apply the isomorphism clause of [lem-pur-bounded-site-adjunction-transpose] with that bound to construct the specified rho comparison. For a single stage, expand the normalized boundedSiteTranspose: the inverse compact-support site comparison composed with the inverse boundary component is C of the inverse bounded-to-ambient etale compatibility. Naturality of the comparison-adjunction unit and target naturality of the ordinary etale Hom bijection then identify the transpose of B inverse followed by C(z) with C of the ordinary etale transpose followed by rho. This uses the specified unit and boundary, with no ambient pro-etale exceptional adjunction.",
+   "uses": [
+    "lem-pur-bounded-site-adjunction-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; explicit bounded-origin Hom-bijection calculation"
+   }
+  },
+  {
+   "text": "Prove source and target naturality of the recursive ordinary etale Hom bijections by induction on a word, starting with ordinary adjunction naturality and the bounded-to-ambient compatibility. Prove target naturality of the recursive pro-etale transpose similarly. Induct on a parenthesized word W to obtain transpose_W(B_W inverse followed by C(z)) = C(homEquiv_W(z)) followed by rho_W for every bounded etale source J, admissible etale target K, and z : F_W^e J to K. At a composite first use the last-word formula, cancel the mapped first-word boundary with its inverse, use target naturality to move the last rho through the first transpose, and apply the first-word formula. This is the order of the composite Hom bijection in [def-weil-pbc-composite-adjunction]. All required intermediate bounds are projections of Word.Admissible.",
+   "uses": [
+    "lem-pur-bounded-site-adjunction-transpose",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; explicit bounded-origin Hom-bijection calculation"
+   }
+  },
+  {
+   "text": "Induct on the left-pasting syntax to prove C(etaleMap_D) followed by B_V = B_U followed by proMap_D. The refinement and compositor cases are exactly the specified squares of [lem-pur-compact-support-site-coherence]. Vertical composition uses functoriality. Before-whiskering cancels the inserted boundary and its inverse; after-whiskering uses boundary naturality. Identity, associator and unitor components are identities. Apply the word transpose formula to etaleMap_D followed by the target-word counit; this square identifies the two inputs of the transpose. Consequently C(etaleConjugate_D) followed by rho_U = rho_V followed by proConjugate_D.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence",
+    "lem-pur-bounded-site-adjunction-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; explicit bounded-origin Hom-bijection calculation"
+   }
+  },
+  {
+   "text": "Define a private recursively pasted etale right arrow: use etaleConjugate for primitive refinements/compositors, reverse vertical composition, apply the first right functor for before-whiskering, evaluate at the last right image for after-whiskering, and use identities for unitors and associators. First prove for any z : F_V^e J to K that homEquiv_U(etaleMap_D followed by z) = homEquiv_V(z) followed by this recursive right arrow. For a primitive diagram this follows by expressing z as the target counit precomposed with the image of its transpose, then using naturality of etaleMap_D and source naturality of homEquiv. Induct on pastings: the vertical case applies the two induction hypotheses; the two whiskering cases use target and source naturality respectively; associators merely reassociate the same Hom-equivalence functions. At z equal to the target counit, its transpose is identity, so etaleConjugate_D equals the recursively pasted etale right arrow.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; explicit bounded-origin Hom-bijection calculation"
+   }
+  },
+  {
+   "text": "Prove naturality of rho_W by induction on words; the single-stage case is naturality of the site-adjunction unit, and the composite case uses functoriality and both induction hypotheses. Compare the recursive etale and pro-etale pasted right arrows by induction on D. Primitive cases are the conjugate comparison proved above. The vertical case uses the two comparisons and functoriality. Before-whiskering uses rho naturality for the first word and the induction hypothesis for D. After-whiskering uses the induction hypothesis at the last etale exceptional image, then cancels the last rho with its inverse under the first right functor. Identity, associator and unitor cases reduce to identity components and functoriality. Thus C of the recursive etale right arrow followed by rho_U equals rho_V followed by rightMap_D.",
+   "uses": [
+    "lem-pur-bounded-site-adjunction-transpose",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; explicit bounded-origin Hom-bijection calculation"
+   }
+  },
+  {
+   "text": "Replace the recursive etale right arrow by etaleConjugate_D in the comparison of the preceding step. This proves the second asserted conjunct. Compare it with the entire-conjugate equation from the left site square and cancel the invertible rho_V on the left; this gives proConjugate_D = rightMap_D, the first conjunct. Every boundedness hypothesis used was one of Word.Admissible or Paste.IntermediateBounds. No tensor, Cartesian exchange, smoothness or purity assertion is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; explicit bounded-origin Hom-bijection calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-bounded-site-adjunction-transpose",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-compact-support-site-coherence"
+ ],
+ "proof_origin": {
+  "by": "C4",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0B65 and 0DV0; direct naturality calculations for the actual bounded-origin Hom chains, followed by word and pasting induction. Implements blueprint lem-pur-co-smooth-etale-locality proof Step 3 and thm-pur-composition-coherence proof Steps 1--2 without invoking the generic mate-pasting theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale compact support comparison carries right adjoint conjugates of composition and refinement maps under bounded exceptional adjunctions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedSet.compactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CondensedSet.condensedSetToCompactlyGenerated ⊣ CondensedSet.compactlyGeneratedToCondensedSet\", \"doc\": \"The adjunction between the category of compactly generated spaces and the category of condensed sets, obtained by restricting the adjunction between topological spaces and condensed sets through the f\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n    \", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}\n  {\"name\": \"LightCondSet.topCatAdjunction\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"lightCondSetToTopCat ⊣ topCatToLightCondSet\", \"doc\": \"The adjunction between the category $\\\\mathbf{Top}$ of topological spaces and the category $\\\\mathbf{LightCondSet}$ of light condensed sets, where the left adjoint functor $\\\\topCatToLightCondSet$ constr\"}\n  {\"name\": \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit\", \"doc\": \"The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed\"}\n  {\"name\": \"LightCondSet.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"LightCondSet.LocallyConstant.functor ⊣ LightCondensed.underlying (Type u)\", \"doc\": \"There is an adjunction between the functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces and the underlying functor that evaluates light condensed sheaves at the \"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_counit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective and given the existence of explicit finite coproducts and pullbacks in the category of compact Hausdorff-like spaces, the counit of the \"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent natural comparison between compactified pushforwards transports their right adjoint compositors and refinement conjugates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {I J K : C} →\\n      (f : I ⟶ J) →\\n        (g : J ⟶ K) →\\n          [inst_1 : CategoryTheory.ChosenPullbacksAlong f] →\\n            [inst_2 : CategoryTheory.ChosenPullbacksAlong g] →\\n              [inst_3 : CategoryTheory.ChosenPullbacksA\", \"doc\": \"Given composable morphisms $f : I \\\\to J$ and $g : J \\\\to K$ in a category $\\\\mathcal{C}$, if $f$, $g$, and their composition $g \\\\circ f$ are all exponentiable, then the pushforward functor associated wi\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the unit of the pullback-pushforward adjunction for the composite $f \\\\circ g$ satisfies a naturality condition: t\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, a presheaf of rings $ R : \\\\mathcal{E}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and natural transformations $ \\\\phi: R \\\\to \"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.comp_pushforward\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For exponentiable morphisms $ f: I \\\\to J $ and $ g: J \\\\to K $ in a category $ \\\\mathcal{C} $, the pushforward functor associated with the composition $ f \\\\circ g $ is equal to the composition of the pu\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with chosen pullbacks, and let $f: I \\\\to J$ and $g: J \\\\to K$ be composable exponentiable morphisms. For an exponentiable morphism $p$, let $p^*$ be the pullback functor\"}\n  {\"name\": \"CategoryTheory.Monad.left_comparison\", \"module\": \"Mathlib/CategoryTheory/Monad/Adjunction\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R),\\n  L.comp (CategoryTheory.Monad.comparison h) = h.toMonad.free\", \"doc\": \"Given adjoint functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ R : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ with adjunction $ h : L \\\\dashv R $, composing $ L $ with the comparison functor to the Eilenberg-Moor\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) : (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂)\", \"doc\": \"Given two adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂` both between categories `C`, `D`, there is a\\nbijection between natural transformations `L₂ ⟶ L₁` and natural transformations `R₁ ⟶ R₂`. This is\\ndefined as\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) : (CategoryTheory.conjugateEquiv adj₁ adj₁) (CategoryTheory.CategoryStruct.id L₁) = CategoryTheory.CategoryStruc\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁) [CategoryTheory.IsIso α] : CategoryTheory.IsIso ((CategoryTheory.conjugateE\", \"doc\": \"If `α` is an isomorphism between left adjoints, then its conjugate transformation is an\\nisomorphism. The converse is given in `conjugateEquiv_of_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁) [CategoryTheory.IsIso ((CategoryTheory.conjugateEquiv adj₁ adj₂) α)] : Cate\", \"doc\": \"If `α` is a natural transformation between left adjoints whose conjugate natural transformation\\nis an isomorphism, then `α` is an isomorphism. The converse is given in `conjugateEquiv_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) : (CategoryTheory.conjugateEquiv adj₁ adj₁).symm (CategoryTheory.CategoryStruct.id R₁) = CategoryTheory.Category\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : R₁ ⟶ R₂) [CategoryTheory.IsIso α] : CategoryTheory.IsIso ((CategoryTheory.conjugateE\", \"doc\": \"If `α` is an isomorphism between right adjoints, then its conjugate transformation is an\\nisomorphism. The converse is given in `conjugateEquiv_symm_of_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : R₁ ⟶ R₂) [CategoryTheory.IsIso ((CategoryTheory.conjugateEquiv adj₁ adj₂).symm α)] :\", \"doc\": \"If `α` is a natural transformation between right adjoints whose conjugate natural transformation is\\nan isomorphism, then `α` is an isomorphism. The converse is given in `conjugateEquiv_symm_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R) (α : CategoryTheory.Functor.id C ⟶ L) (c : C) : ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id) α).app c = CategoryTheory.CategoryStruct.comp (α.app (R.obj c)) (adj.counit.app c)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R) (α : R ⟶ CategoryTheory.Functor.id C) (c : C) : ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id).symm α).app c = CategoryTheory.CategoryStruct.comp (adj.unit.app c) (α.app (L.obj c))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_leftUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (CategoryTheory.Adjunction.id.comp adj)) L.leftUnitor.hom = R.rightUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_rightUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (adj.comp CategoryTheory.Adjunction.id)) L.rightUnitor.hom = R.leftUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ≅ L₁) : ((CategoryTheory.conjugateIsoEquiv adj₁ adj₂) α).hom = (CategoryTheory.co\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugate.*comp|comp.*conjugate|mate.*paste|mate.*comp",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"66\", \"text\": \"  (conjugateEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm τ₀₁₂\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"74\", \"text\": \"  (conjugateIsoEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm e₀₁₂.symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"82\", \"text\": \"lemma conjugateEquiv_leftAdjointCompIso_inv (e₀₁₂ : G₂₁ ⋙ G₁₀ ≅ G₂₀) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"83\", \"text\": \"    conjugateEquiv (adj₀₁.comp adj₁₂) adj₀₂\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"132\", \"text\": \"lemma leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"64\", \"text\": \"    conjugateIsoEquiv_symm_apply_inv, Iso.refl_inv, NatTrans.comp_app, whiskerLeft_app,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"65\", \"text\": \"    conjugateEquiv_symm_apply_app, NatTrans.id_app, Functor.map_id, Category.id_comp,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"115\", \"text\": \"  simp only [Functor.id_obj, Functor.comp_obj, rightAdjointUniq, conjugateIsoEquiv_apply_hom,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"116\", \"text\": \"    Iso.refl_hom, conjugateEquiv_apply_app, NatTrans.id_app, Functor.map_id, Category.id_comp]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"139\", \"text\": \"  simp only [id_obj, comp_obj, mateEquiv, Equiv.coe_fn_mk, comp_app, rightUnitor_inv_app,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"159\", \"text\": \"section mateEquivVComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"169\", \"text\": \"/-- The mates equivalence commutes with vertical composition. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"170\", \"text\": \"theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"195\", \"text\": \"end mateEquivVComp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Site comparison of exceptional inverse images preserves compact support compositor conjugates and refinement identities",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasCompactSupport.comp_isClosedEmbedding\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β},\\n  HasCompactSupport f → ∀ {g : α' → α}, Topology.IsClosedEmbedding g → HasCompactSupport (f ∘ g)\", \"doc\": \"If $ f : X \\\\to \\\\beta $ has compact support and $ g : X' \\\\to X $ is a closed embedding of topological spaces, then the composition $ f \\\\circ g : X' \\\\to \\\\beta $ also has compact support. This follows be\"}\n  {\"name\": \"HasCompactSupport.comp_homeomorph\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {X : Type u_9} {Y : Type u_10} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {M : Type u_11}\\n  [inst_2 : Zero M] {f : Y → M}, HasCompactSupport f → ∀ (φ : X ≃ₜ Y), HasCompactSupport (f ∘ ⇑φ)\", \"doc\": \"If $ f : Y \\\\to M $ has compact support and $ \\\\phi : X \\\\to Y $ is a homeomorphism, then the composition $ f \\\\circ \\\\phi $ has compact support.\"}\n  {\"name\": \"HasCompactMulSupport.inv\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"{α β : Type*} [TopologicalSpace α] [DivisionMonoid β] {f : α → β} (hf : HasCompactMulSupport f) :\\n  HasCompactMulSupport (f⁻¹)\", \"doc\": \"If a function $ f: \\\\alpha \\\\to \\\\beta $ has compact multiplicative support (i.e., the closure of $ \\\\{x \\\\in \\\\alpha \\\\mid f(x) \\\\ne 1\\\\} $ is compact), then its inverse function $ f^{-1} $ also has compact m\"}\n  {\"name\": \"HasCompactMulSupport.comp_isClosedEmbedding\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"(hf : HasCompactMulSupport f) {g : α' → α} (hg : IsClosedEmbedding g) : HasCompactMulSupport (f ∘ g)\", \"doc\": \"If $ f $ has compact multiplicative support and $ g : \\\\alpha' \\\\to \\\\alpha $ is a closed embedding, then the composition $ f \\\\circ g $ also has compact multiplicative support. This means the closure of \"}\n  {\"name\": \"HasCompactMulSupport.inv'\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {α : Type u_9} {β : Type u_10} [inst : TopologicalSpace α] [inst_1 : DivisionMonoid β] {f : α → β},\\n  HasCompactMulSupport f → HasCompactMulSupport f⁻¹\", \"doc\": \"For a function $ f $ from a topological space $ \\\\alpha $ to a division monoid $ \\\\beta $, if the closure of the set $ \\\\{x \\\\in \\\\alpha \\\\mid f(x) \\\\neq 1\\\\} $ is compact, then the same holds for the inverse\"}\n  {\"name\": \"HasCompactMulSupport.comp_homeomorph\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"{M} [One M] {f : Y → M} (hf : HasCompactMulSupport f) (φ : X ≃ₜ Y) : HasCompactMulSupport (f ∘ φ)\", \"doc\": \"If $ f : Y \\\\to M $ has compact multiplicative support (i.e., the closure of $ \\\\{ y \\\\in Y \\\\mid f(y) \\\\ne 1 \\\\} $ is compact) and $ \\\\varphi : X \\\\to Y $ is a homeomorphism, then the composition $ f \\\\circ \\\\\"}\n  {\"name\": \"Function.support_comp_eq_preimage\", \"module\": \"Mathlib.Algebra.Notation.Support\", \"type\": \"∀ {ι : Type u_1} {κ : Type u_2} {M : Type u_3} [inst : Zero M] (g : κ → M) (f : ι → κ),\\n  Function.support (g ∘ f) = f ⁻¹' Function.support g\", \"doc\": \"The support of the composition $ g \\\\circ f $ is equal to the preimage under $ f $ of the support of $ g $, i.e., $ \\\\mathrm{supp}(g \\\\circ f) = f^{-1}(\\\\mathrm{supp}(g)) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \":\\n  conjugateEquiv ((pullbackPushforwardAdjunction g).comp (pullbackPushforwardAdjunction f))\\n      (pullbackPushforwardAdjunction (f ≫ g)) (pullbackComp f g).inv =\\n    (pushforwardComp f g).hom\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_vcomp|conjugateEquiv_comp",
+   "results": "Returned: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: generic mateEquiv_vcomp (line 170), mateEquiv_hcomp (line 209), conjugateEquiv_comp (line 350) in Mathlib/CategoryTheory/Adjunction/Mates.lean are already covered by existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport of adjunction transposes along comparison functors preserves composition of right adjoint conjugates",
+   "results": "Returned: CategoryTheory.conjugateEquiv_symm_comp, CategoryTheory.conjugateEquiv_comp, CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Functor.isRightAdjoint_comp, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.Adjunction.comp",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: conjugateEquiv_comp, conjugateEquiv_symm_comp, Adjunction.comp and monadic comparison adjunctions are generic categorical results, not the specified site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Returned: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: conjugateEquiv and its identity/isomorphism laws supply generic categorical facts already represented in the DAG, not the normalized site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded etale proetale site comparison preserves right adjoint conjugates of compact support compositors and refinements",
+   "results": "Returned: CompHausLike.LocallyConstant.adjunction, CondensedSet.compactlyGeneratedAdjunction, LightCondSet.topCatAdjunction, LightCondSet.LocallyConstant.adjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: returned condensed-space adjunctions and sheaf adjunctions, not compactified pushforwards or their bounded-origin geometric conjugates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent comparison functors between derived categories carry compactified pushforward adjunction transposes to exceptional composition and refinement maps",
+   "results": "Returned: CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction construction and derived counit/unit factorization lemmas do not state the compactification site comparison or its compositor and refinement conjugate identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-site-counit-projection-transport",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Step 1, final paragraph (smooth base-change and co-projection factors), and Step 2 (tensor formula as projection mate); Step 3: transitive ordinary counits and exceptional composition; extracted returned proof Step 5",
+   "via": [
+    "lem-pur-finite-site-counit-projection-transport",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-bounded-site-compositor-conjugates",
+  "worker": "stage1",
+  "summary": "Expanded the specified compositor and refinement conjugates by compatible counit arrows, successive bounded-origin transposes, and an explicit finite-word induction. Reused existing site-coherence, bounded transpose, dimension, and categorical pasting nodes; no new nodes and no change of statement.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1 final paragraph and Step 2: compatibility of the exceptional composition constituents. The immediate source is lem-pur-co-smooth-etale-locality proof Step 3, transitivity of ordinary counits.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-08813e27b",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-08813e27b (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, first split, 8 steps, no new nodes) and every cited statement (bounded-site-adjunction-transpose, compact-support-site-coherence, adjunction-conjugate, composite-adjunction, mate-pasting leaf, kun dimension nodes, chosen-compactification-compositors). Step 2: recomputed z_p D_J = C_Z(z_e) from naturality of alpha^p, the composition square and the counit identity at J = h^x K. Steps 3-4: the g-transpose is compatible through D_J; a_g^{-1} is applied; the f-transpose holds at target P; the composite bijection runs g then f; t^e and t^p are recovered by source naturality; the first displayed equation is exact. Step 5: the refinement square with r: F^c -> F^{c'} and the counit at c' give a^c C(q^e) = q^p a^{c'}; the contravariant direction is right. Step 6 is elementary. Step 7: the word induction is properly set up and the types of D_W and a_W check. Step 8: pasting via site coherence plus Step 7 and injectivity; mate-pasting clauses 1-3 on the etale side. Source: main-20261015 lem-pur-co-smooth-etale-locality Step 3 ('counits for the ordinary composite are transitive'); Stacks 0B65 and 0DV0 labels checked in tags/tags; no SGA. Edge cases: K = 0, empty schemes (bound 0), c = c', one-arrow and identity words, successive refinements. No duplicate: lem-sf-finite-exceptional-compositor-coefficients is the coefficient-change analogue. Route: lem-kun-dimension-finite-type is Lean-closed. FIX (C3/C4): step 1 identified def-kun-dimension with the transpose node's dimension without citing def-kun-topological-krull-dimension; added it to the text, uses and proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedSiteCompositorConjugates",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.boundedSiteCompositorConjugates",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Stage",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Stage.arrow",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.leftPlus",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.left",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.proLeft",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.right",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.proRight",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.adjunction",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.boundaryIso",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.IntermediateBounds",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.Admissible",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.rho",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.transpose",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.homEquiv",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Word.counit",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste.etaleMap",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste.proMap",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste.IntermediateBounds",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste.etaleConjugate",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste.proConjugate",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.Paste.rightMap",
+   "AlgebraicGeometry.ProEtale.BoundedSiteConjugates.boundedSiteCompositorConjugates"
+  ],
+  "file": "lean/Sheaf/Paper/BoundedSiteCompositorConjugates.lean",
+  "statement": "theorem boundedSiteCompositorConjugates {X Y : Over (Spec (.of P.field.k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] {U V : Word P X Y} (D : Paste U V) (K : DerivedCategory.Plus (Sheaf Y.left.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (hU : U.Admissible K.obj) (hV : V.Admissible K.obj) (hD : D.IntermediateBounds K.obj) : D.proConjugate K.obj hV = D.rightMap K.obj hU hV hD ∧ (coherenceSiteFunctor P.Coefficient X.left).map (D.etaleConjugate K.obj hV) ≫ (U.rho K.obj hU).hom = (V.rho K.obj hV).hom ≫ D.rightMap K.obj hU hV hD",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The node is stated for every finite parenthesized compact-support word and every compatible refinement/compositor paste. Real helper definitions retain the chosen left arrows and construct the bounded-origin conjugate and the separately pasted right arrow. The two displayed formulas are the primitive compositor/refinement instances of the main comparison equation. Identity and canonical associator/unitor constructors are included; no ambient pro-etale exceptional adjunction is assumed. Dimension bounds are auxiliary finite data as supplied by exists_topologicalKrullDim_le. No statement correction or new independent notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b86664040",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Read item node, all stmt_dep Lean (CompactSupportSiteCoherence diagram maps, chosen compositors existing:true, BoundedSiteAdjunctionTranspose transpose/rho/counit/theorem, sfFiniteExceptionalAt, compactSupportSiteComparison vs compactExchangeTransportComparison: same B up to PlusCompatibility). Hypotheses: Over Spec k, LFT/QC structure maps, separatedness only on f.left, any adjunction for f^x (covers canonical), auxiliary dimension bound always exists. etaleMap/proMap equal the recorded refinement/compositor maps with node directions; etaleConjugate = composite homEquiv of eps_V∘alpha; proConjugate = a_V^-1 ≫ iterated bounded-origin transpose of alpha^p ≫ B^-1 ≫ C(eps^e), equal to the true pro-etale conjugate by the landed counit identity (advisory note, not C-image of the etale conjugate). Conjunct 2 for compositor/refinement constructors is exactly the two displayed equations; conjunct 1 is a genuine pasting/identity/associator clause; vertical/before/after checked by hand. Admissible/IntermediateBounds are exactly the stipulated D+ witnesses. Statement verbatim; only lean field changed; docstrings with source/blueprint and 8 steps; only sorry; plain imports are proof_dep modules; no live landing by another group. Not recompiled (no FIX); worker compile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T094935-L-3275345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

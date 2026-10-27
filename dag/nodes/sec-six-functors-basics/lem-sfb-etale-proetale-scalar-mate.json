@@ -61,7 +61,8 @@
   {
    "text": "The map $\\beta^A_J$ is invertible by [sk-thm-pe-direct-image-comparison], since $f$ is qcqs and $J\\in D^+$. Precompose $U=V$ with $T_Y^p((\\beta^A_J)^{-1})$; functoriality cancels the adjacent inverse pair and gives exactly the displayed assertion. The same comparison theorem applies over $B$ at $T_X^eJ\\in D^+$ as assumed. Neither scalar mate is inverted.",
    "uses": [
-    "sk-thm-pe-direct-image-comparison"
+    "sk-thm-pe-direct-image-comparison",
+    "lem-sfb-scalar-site-comparison-normalized-data"
    ],
    "elementary": true,
    "source": {
@@ -75,12 +76,13 @@
   "def-weil-pbc-proetale-operations",
   "lem-sfb-etale-proetale-scalar-counit-transposes",
   "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "lem-sfb-scalar-site-comparison-normalized-data",
   "sk-thm-pe-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Finite rings paragraph; short assembly of the separate statement-only scalar/pullback cube and common counit-transpose computation"
+  "place": "Finite rings paragraph; proved cube and counit-transpose assembly, with canonical comparison data shared to avoid an import cycle."
  },
  "mathlib_searches": [
   {
@@ -294,7 +296,7 @@
   "by": "Q13",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Item-local helpers (brief: helpers in the owning node's module). delta = published pbcComparisonReduction (def-weil-pbc-witness-compatibility), fixed-ring presentation Sheaf _ (ModuleCat.{u+1} R) on both sites. beta = directImageComparisonAmbient, the mate of the exact inverse-image square on the ambient derived categories with nu^* = mapDerivedCategory; the recorded directImageComparison of sk-thm-pe-direct-image-comparison is stated on D+ (R+, ULift of a Type u ring) and cannot type the ambient composite; its invertibility on bounded-below inputs is the postponed directImageComparisonAmbient_isIso. The etale c (scalarPullbackEtaleIso) is the same canonical comparison as the published Etale.scalarPullbackIso / Etale.scalarMate (lem-pur-etale-scalar-mate-projection); that module clashes on import with ProEtale.Derived.RestrictScalars (duplicate AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv, checked with nt_compile.py 2026-10-18), so the item uses the mate form; identifying the two is a Lean-level stage-3 bridge, not a DAG prerequisite.",
+  "note": "Item-local helpers (brief: helpers in the owning node's module). delta = published pbcComparisonReduction (def-weil-pbc-witness-compatibility), fixed-ring presentation Sheaf _ (ModuleCat.{u+1} R) on both sites. beta = directImageComparisonAmbient, the mate of the exact inverse-image square on the ambient derived categories with nu^* = mapDerivedCategory; the recorded directImageComparison of sk-thm-pe-direct-image-comparison is stated on D+ (R+, ULift of a Type u ring) and cannot type the ambient composite; its invertibility on bounded-below inputs is the postponed directImageComparisonAmbient_isIso. The etale c (scalarPullbackEtaleIso) is the same canonical comparison as the published Etale.scalarPullbackIso / Etale.scalarMate (lem-pur-etale-scalar-mate-projection); that module clashes on import with ProEtale.Derived.RestrictScalars (duplicate AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv, checked with nt_compile.py 2026-10-18), so the item uses the mate form; identifying the two is a Lean-level stage-3 bridge, not a DAG prerequisite. T7: canonical comparison definitions and their proved invertibility and normalization helpers are relocated to Sheaf.Paper.EtaleProEtaleScalarMateData, publicly reexported by the original module. This breaks the import cycle with the already-proved cube and counit-transpose modules. Every public type and defining expression is preserved.",
   "fixed_by": "NT-stage2-cc-fefeb1c0a"
  },
  "reviewed_lean": {
@@ -306,14 +308,31 @@
   "note": "Read node, 13 stmt_dep records, parent det-prop-scalar-six-direct-image, module, report and the exact upstream declarations. Every clause matches: qcqs f, A,B:Type(u+1) CommRing, J in D+ with T_X J in D+, delta=pbcComparisonReduction (published canonical mate, direction checked), beta=mate of the exact inverse-image square inverted only under hJ, gamma^t=mateEquiv over the canonical scalar/pullback iso (inverse of the restriction-square mate, invertibility a postponed named theorem); composition order and endpoints equal the node's display. No hollow defs, 3 theorem sorries, docstrings carry source/blueprint and the proof steps, no line over 100 chars, statement verbatim, only the lean record added. nt_compile clean (23.4 s, 28.0 s). H4 finding: scalarPullbackEtaleIso and the etale mate duplicate published Etale.scalarPullbackIso/Etale.scalarMate (lem-pur-etale-scalar-mate-projection, used by the parent). Switching to them fails: PurEtaleScalarMateProjection clashes on import with ProEtale.Derived.RestrictScalars (duplicate upperStarIsoLowerStarInv; verified with import-pair tests), so the local helper is forced. Identifying the two forms is a stage-3 Lean step, not a DAG gap. Ambient beta helper accepted: the recorded directImageComparison is D+/ULift only. FIX is documentation only: docstring at scalarPullbackEtaleIso plus lean.note; fixed module compiles clean (29.6 s), statement byte-identical."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-e3ef4",
-  "group": "C4",
+  "reviewer": "C-160a9",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261020T233102-L-892381",
+  "landing": "20261026T000911-L-4147139",
   "kind": "interface",
-  "note": "independent cc review: delivered files vs earlier PASSed head 56a146233 (Lean and nodes byte-identical; only the change record Users row and report differ), live base hunks vs packet; compiled the 3 delivered modules + 5 direct importers (live text) in sandbox at timeout 560"
+  "note": "independent cc review: delivered files vs b8b6a6cb2792 delivery (Lean and node JSONs byte-identical; only report/change-record retry note) and vs live 9176a4f74a2 (no touched file changed since; all imports exist); axioms clean; 8 delivered modules built in sandbox; 53 direct importers compiled: 45 pass incl. EtaleOpenScalarCoherence, 1 pre-existing missing-olean failure, 7 over 60 s with no error and equally slow against the published build",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbient_isIso",
+   "AlgebraicGeometry.ProEtale.etaleProEtale_scalar_mate",
+   "AlgebraicGeometry.ProEtale.scalarPullbackReverse_isIso"
+  ],
+  "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

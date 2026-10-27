@@ -1,0 +1,326 @@
+{
+ "id": "lem-pur-fixed-pair-right-adjoint-comparison",
+ "kind": "statement",
+ "title": "Counit-normalized comparison with an arbitrary right adjoint on fixed pairs",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories, $Q:\\mathcal C\\to\\mathcal C$ and $P:\\mathcal D\\to\\mathcal D$ endofunctors, and $F:\\mathcal C\\to\\mathcal D$ left adjoint to $G:\\mathcal D\\to\\mathcal C$, with counit $\\varepsilon:FG\\to\\mathrm{id}$. Use the fixed-pair categories of [def-weil-endofunctor-fixed-pair-category]: an object of $\\mathcal C^Q$ is $(M,\\theta_M:QM\\xrightarrow{\\sim}M)$, and its morphisms $v$ satisfy $v\\theta_M=\\theta_NQ(v)$; similarly for $\\mathcal D^P$. All composition in the following formulas is ordinary right-to-left composition. Let $\\beta:PF\\xrightarrow{\\sim}FQ$ be a natural isomorphism and let $e:QG\\xrightarrow{\\sim}GP$ be its inverse's adjunction mate [def-weil-pbc-adjunction-mate], so that\n$$\\varepsilon_{PK}\\circ F(e_K)=P(\\varepsilon_K)\\circ\\beta_{GK}^{-1}.$$\nLet $\\widetilde F:\\mathcal C^Q\\to\\mathcal D^P$ send $(M,\\theta_M)$ to $(FM,F(\\theta_M)\\beta_M)$ and act as $F$ on carrier morphisms. Suppose $\\widetilde G:\\mathcal D^P\\to\\mathcal C^Q$ is a right adjoint to $\\widetilde F$, its carrier functor is $G$, and its adjunction counit has carrier $\\varepsilon_K$ at every fixed pair $(K,\\theta)$. Write $\\vartheta_{K,\\theta}:QGK\\xrightarrow{\\sim}GK$ for the structure of $\\widetilde G(K,\\theta)$. Then\n$$\\vartheta_{K,\\theta}=G(\\theta)\\circ e_K.$$\nFor every other right adjoint $J$ of $\\widetilde F$, with counit $\\kappa$, there is a unique counit-compatible natural isomorphism $\\alpha:J\\xrightarrow{\\sim}\\widetilde G$. At each $(K,\\theta)$ its carrier satisfies\n$$\\varepsilon_K\\circ F(\\operatorname{For}(\\alpha_{K,\\theta}))=\\operatorname{For}(\\kappa_{K,\\theta}).$$\nThus $J(K,\\theta)$ is canonically isomorphic in $\\mathcal C^Q$ to $(GK,G(\\theta)e_K)$, without imposing any prior carrier identification on $J$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "The smooth dualizing formula used by lem-a1-local-boundary-duality: identify the assumed Weil right adjoint with the counit-normalized geometric lift before applying purity (parent old step 2 and the counit-transpose portion of old step 3); expanded categorical/Weil argument of the parent split, old steps 1-3; prop-weil-operations.proof.md, sentences 1 and 3"
+ },
+ "stmt_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Fix $B=(K,\\theta)$ and abbreviate $\\vartheta=\\vartheta_{K,\\theta}$. By the fixed-pair morphism condition [def-weil-endofunctor-fixed-pair-category], the counit $\\widetilde F\\widetilde G B\\to B$, whose carrier is $\\varepsilon_K$ by hypothesis, satisfies $$\\varepsilon_K\\circ F(\\vartheta)\\circ\\beta_{GK}=\\theta\\circ P(\\varepsilon_K).$$ Compose on the right with $\\beta_{GK}^{-1}$, which exists by hypothesis, to obtain $$\\varepsilon_K\\circ F(\\vartheta)=\\theta\\circ P(\\varepsilon_K)\\circ\\beta_{GK}^{-1}:FQGK\\longrightarrow K.$$ This uses no cancellation of $F$ or of $\\varepsilon_K$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and the equivalence of clauses (1)–(3); explicit fixed-pair calculation by Q48."
+   }
+  },
+  {
+   "text": "The candidate $G(\\theta)\\circ e_K:QGK\\to GK$ has exactly the same counit composite. Indeed naturality of the original counit at $\\theta:PK\\to K$ and the given mate equation [def-weil-pbc-adjunction-mate] give $$\\begin{aligned}\\varepsilon_K\\circ F(G(\\theta)\\circ e_K)&=\\varepsilon_K\\circ FG(\\theta)\\circ F(e_K)\\\\&=\\theta\\circ\\varepsilon_{PK}\\circ F(e_K)\\\\&=\\theta\\circ P(\\varepsilon_K)\\circ\\beta_{GK}^{-1}.\\end{aligned}$$ All maps have source $FQGK$ and target $K$; in particular $\\varepsilon_{PK}$, rather than $\\varepsilon_K$, occurs before applying the mate equation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and the equivalence of clauses (1)–(3); explicit fixed-pair calculation by Q48."
+   }
+  },
+  {
+   "text": "Use the natural Hom bijection of $F\\dashv G$ with $X=QGK$ and $Y=K$. By [lem-weil-pbc-adjunction-of-natural-bijection], its inverse is $b\\mapsto\\varepsilon_K\\circ F(b)$, hence is injective. Steps 1 and 2 therefore imply $$\\vartheta_{K,\\theta}=G(\\theta)\\circ e_K.$$ The right side is invertible because $\\theta$ and $e_K$ are isomorphisms and a functor sends an inverse to an inverse. Thus $\\widetilde G(K,\\theta)$ has precisely the asserted structure, with no extra equivalence hypothesis on $P$ or $Q$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and the equivalence of clauses (1)–(3); explicit fixed-pair calculation by Q48."
+   }
+  },
+  {
+   "text": "Apply [det-sp-unique-right-adjoint] in the categories $\\mathcal C^Q$ and $\\mathcal D^P$, with its $F=\\widetilde F$, its first right adjoint $G=J$ with counit $\\kappa$, and its second right adjoint $J=\\widetilde G$ with the given lifted counit $\\widetilde\\varepsilon$. It gives a natural isomorphism $\\alpha:J\\xrightarrow{\\sim}\\widetilde G$, unique among counit-compatible natural transformations, characterized at $B=(K,\\theta)$ by $$\\widetilde\\varepsilon_B\\circ\\widetilde F(\\alpha_B)=\\kappa_B.$$ This is uniqueness of the isomorphism itself, not merely of an isomorphism class; no carrier identification of $J$ has been used.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+    "place": "Transposes, Naturality, Inverse and Uniqueness, specialized to the fixed-pair categories."
+   }
+  },
+  {
+   "text": "Apply the forgetful functor [def-weil-endofunctor-fixed-pair-category] to the equation in step 4. It preserves composition, $\\widetilde F$ acts by $F$ on carrier maps, and the carrier of $\\widetilde\\varepsilon_B$ is $\\varepsilon_K$ by hypothesis. Therefore $$\\varepsilon_K\\circ F(\\operatorname{For}(\\alpha_B))=\\operatorname{For}(\\kappa_B).$$ Step 3 identifies the target of $\\alpha_B$ as $(GK,G(\\theta)e_K)$, so $\\alpha_B$ is the required canonical isomorphism in $\\mathcal C^Q$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), adjunction maps and the equivalence of clauses (1)–(3); explicit fixed-pair calculation by Q48."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037 (definition-adjoint), counit transpose formula; Q48 expands the fixed-pair counit calculation, then applies the existing categorical uniqueness node following its four blueprint paragraphs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction lifted to categories of fixed pairs has right adjoint structure uniquely determined by the counit and the mate of the equivariance exchange; compare any right adjoint with this lift",
+   "results": "Returned: CategoryTheory.LiftRightAdjoint.otherMap, CategoryTheory.LiftLeftAdjoint.otherMap, Rep.instIsRightAdjointCoindFunctor, CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv, CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, CategoryTheory.Adjunction.rightAdjointOfEquiv_map, Rep.instIsRightAdjointActionModuleCatRes, CategoryTheory.FunctorToTypes.adj. Read the returned signatures: generic adjoint uniqueness/lifting and ordinary scheme-module adjunctions (or Witt-vector isocrystals), not the stated fixed-pair comparison or geometric purity square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare an arbitrary right adjoint of the lifted functor on fixed pairs with a geometric right adjoint; its fixed structure is G(theta) composed with the mate exchange",
+   "results": "Returned: CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison, CategoryTheory.LiftRightAdjoint.constructRightAdjoint, CategoryTheory.LiftRightAdjoint.otherMap, CategoryTheory.LiftRightAdjoint.constructRightAdjointObj, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.CommSq.right_adjoint_hasLift_iff, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.isRightAdjoint. Read the returned signatures: generic adjoint uniqueness/lifting and ordinary scheme-module adjunctions (or Witt-vector isocrystals), not the stated fixed-pair comparison or geometric purity square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FixedPoints\", \"Adjunction\"",
+   "results": "Returned: no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FixedPoints|fixedPair|fixed.pair|equivariant.*adjunction",
+   "results": "Returned: Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean, Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean, Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean, Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean, Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean. SingleObj.lean:21,62-71 concerns fixed elements of a monoid action, not categories of invertibly structured pairs and their adjunctions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|fixedPair|fixed.pair|mapOfNatIsoAdjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint structure on fixed pairs is determined by the counit and the mate of the exchange isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Bicategory.RightAdjoint.adj",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_assoc",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans",
+     "CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\", \"Adjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction on categories of invertible endofunctor algebras with prescribed carrier counit uniquely determines the right adjoint structure as G(theta) composed with the mate",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv_functor_obj_str",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.unitIso",
+     "CategoryTheory.Monad.adj",
+     "CategoryTheory.LiftLeftAdjoint.otherMap",
+     "CategoryTheory.Monad.comparison_obj_a"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|homEquiv_counit|counit_naturality",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction of invertible algebras over endofunctors with exchange isomorphism and its mate",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Endofunctor.Adjunction.Coalgebra.toAlgebraOf",
+     "CategoryTheory.Adjunction.counitAsIsoOfIso",
+     "CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+     "CategoryTheory.Endofunctor.Adjunction.Algebra.toCoalgebraOf",
+     "CategoryTheory.Adjunction.unitAsIsoOfIso",
+     "CategoryTheory.Endofunctor.Algebra.isoMk_inv_f",
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.Endofunctor.Adjunction.Algebra.toCoalgebraOf_obj_str"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq_hom_app_counit\"",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor lifted to fixed objects of endofunctors, the right adjoint equivariance is forced by its counit; comparison with any right adjoint is the counit compatible natural isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv",
+     "CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv_apply",
+     "CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv_symm_apply",
+     "CategoryTheory.LiftLeftAdjoint.instIsReflexivePairMapAppCounitOtherMap",
+     "CategoryTheory.Monad.comparison_obj_a",
+     "CategoryTheory.LiftLeftAdjoint.otherMap",
+     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_apply",
+     "CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_symm_apply"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-pair comparison; generic mate/adjoint results are used through existing nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-smooth-dualizing-complex",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The smooth dualizing formula used by lem-a1-local-boundary-duality: identify the assumed Weil right adjoint with the counit-normalized geometric lift before applying purity (parent old step 2 and the counit-transpose portion of old step 3)",
+   "via": [
+    "lem-pur-weil-smooth-dualizing-complex"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-fixed-pair-right-adjoint-comparison",
+  "worker": "stage1",
+  "summary": "Five explicit steps: extract the fixed-pair counit equation, compute the candidate counit composite using naturality and the mate equation, apply injectivity of the adjunction transpose, use the existing Mathlib uniqueness leaf, and forget the comparison equation. No statement changes, no new nodes, and no Lean attachment claim.",
+  "blueprint": "Categorical detail of the smooth dualizing identification invoked in lem-a1-local-boundary-duality, opening paragraph, through lem-pur-weil-smooth-dualizing-complex; realizes the counit-normalized right-adjoint comparison needed before transporting purity. The imported from.node is null, as also reported by blueprint_refs ancestor; retained the existing via and specific from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-9d3ef9ff3",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-9d3ef9ff3 (reviewer sub-agent of L); spot-checked: Item-only split, no new nodes, first split of a Q80-created helper; no repair note and the item is not on a dropped list. The statement is unchanged and matches its use in parent lem-pur-weil-smooth-dualizing-complex step 2. Mate direction checked against def-weil-pbc-adjunction-mate with L1=L2=F, R1=R2=G, G_def=Q, H=P, alpha=beta^-1: its transpose clause gives exactly eps_PK∘F(e_K)=P(eps_K)∘beta^-1_GK. Step 1 is the fixed-pair morphism condition (P-side) for the counit with carrier eps_K, then precomposition with beta^-1. Step 2 is naturality of eps at theta:PK->K plus the mate equation. Step 3 uses the inverse Hom bijection eps_Y∘F(-) from lem-weil-pbc-adjunction-of-natural-bijection; it is injective, so vartheta=G(theta)e_K. Step 4 instantiates det-sp-unique-right-adjoint with first adjoint J and second adjoint G~; the direction and the counit equation match. Step 5 applies For. proof_deps equals the union of uses. Small cases: identity P,Q,beta gives vartheta=G(theta); F=G=id with nontrivial beta gives theta beta^-1, and F~G~(K,theta)=(K,theta) confirms the direction. Not a duplicate: lem-sf-fixed-pair-adjunction-lift constructs the canonical lift and does not determine an arbitrary carrier-normalized lift. All cited nodes are definitions or Mathlib leaves, so no tool_uses are needed. No SGA is cited. Sources (Stacks categories.tex 0037; blueprint sk-prop-sp-unique-adjoint-categorical.proof.md) read and consistent. Maintainer note: blueprint.from.node=null is inherited because the ancestor resolves to None; this is not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairRightAdjointComparison",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_rightAdjoint_comparison",
+  "file": "lean/Sheaf/CategoryTheory/FixedPairRightAdjointComparison.lean",
+  "statement": "theorem fixedPair_rightAdjoint_comparison {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D] {Q : C ⥤ C} {P : D ⥤ D} {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) (β : F ⋙ P ≅ Q ⋙ F) (e : G ⋙ Q ≅ P ⋙ G) (hMate : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ β.inv)).natTrans = e.hom) (Gtilde : IsoAlgebra P ⥤ IsoAlgebra Q) (lifted : mapOfNatIso β ⊣ Gtilde) (hCarrier : Gtilde ⋙ forget Q = forget P ⋙ G) (hCounit : ∀ B : IsoAlgebra P, F.map ((eqToIso hCarrier).inv.app B) ≫ (lifted.counit.app B).hom.f = adj.counit.app B.carrier) : (∀ B : IsoAlgebra P, Q.map ((eqToIso hCarrier).inv.app B) ≫ (Gtilde.obj B).str.hom ≫ (eqToIso hCarrier).hom.app B = e.hom.app B.carrier ≫ G.map B.str.hom) ∧ (∀ (J : IsoAlgebra P ⥤ IsoAlgebra Q) (adjJ : mapOfNatIso β ⊣ J), ∃! α : J ≅ Gtilde, (∀ B : IsoAlgebra P, (mapOfNatIso β).map (α.hom.app B) ≫ lifted.counit.app B = adjJ.counit.app B) ∧ (∀ B : IsoAlgebra P, F.map ((α.hom.app B).hom.f ≫ (eqToIso hCarrier).hom.app B) ≫ adj.counit.app B.carrier = (adjJ.counit.app B).hom.f) ∧ (∀ B : IsoAlgebra P, Nonempty (J.obj B ≅ mk (G.obj B.carrier) (e.app B.carrier ≪≫ G.mapIso B.str))))",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4a41a50d",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Item node unchanged except lean; lean.statement verbatim; imports public (stmt_deps) and plain (proof deps). IsoAlgebra = the recorded full subcategory of IsIsoStr algebras. Mate typing traced: mateEquiv adj adj (TwoSquare.mk β.inv) : G⋙Q ⟶ P⋙G = e.hom, and mateEquiv_counit gives the node's ε_PK∘F(e_K)=P(ε_K)∘β⁻¹_GK. mapOfNatIso β = (FM, F(θ)β_M). hCarrier is functor equality, as the node says; hCounit is ε_K after eqToIso transport. Conjunct 1 = ϑ = G(θ)∘e_K. ∃! α : J ≅ Gtilde with fixed-pair counit compatibility; the carrier predicate follows from it and the Nonempty predicate is α-independent, so the uniqueness is exact. Universes independent, no extra hypotheses, no defs, sorry only, docstrings carry the source place and 5 steps. Not a duplicate of IsoAlgebraAdjunction.mapOfNatIsoAdjunction. Not compiled per the 2026-10-21 rule; the worker's scompile was clean. Advisory: the final clause is Nonempty, but the canonical iso is determined by α and conjunct 1."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261022T144454-L-1749377",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_rightAdjoint_comparison"
+  ],
+  "sorry_after": []
+ }
+}

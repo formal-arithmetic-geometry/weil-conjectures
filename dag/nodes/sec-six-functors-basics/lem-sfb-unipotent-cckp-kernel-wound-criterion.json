@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-unipotent-cckp-kernel-wound-criterion",
+ "kind": "statement",
+ "title": "Canonical central p-torsion kernel and its wound criterion",
+ "statement": "Let $k$ be a field of characteristic $p>0$, with $p$ prime [def-weil-field]. Groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup], and smooth and connected mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a(R)=(R,+)$ [def-sc-gm-ga] and $\\mathbb A^1_k=\\operatorname{Spec}k[x]$ [def-weil-affine-spectrum, def-weil-polynomial-ring]. A smooth connected unipotent $k$-group is called $k$-wound if every $k$-scheme morphism $\\mathbb A^1_k\\to H$ is constant with value in $H(k)$. Here unipotent means having a faithful finite-dimensional matrix representation with unipotent geometric points [def-sfb-solvable-group-structure]. The condition $[p]_H=0$ for a commutative group means that on every commutative $k$-algebra the sum of $p$ copies of each section is zero. Let $U$ be smooth, connected and unipotent. There is a largest smooth connected central subgroup $F\\subseteq U$ with $[p]_F=0$: every smooth connected central subgroup killed by $p$ is contained in $F$. Centrality means that its sections commute with all sections of $U$ after every commutative algebra extension. This subgroup is commutative, is uniquely determined as a closed subgroup of $U$, and is called the cckp-kernel. Woundness and the cckp-kernel condition are the predicates of [def-sfb-wound-cckp-kernel]. Its formation commutes with every separable field extension $K/k$ [def-weil-pbc-separable-field-extension]: scalar extension is the pullback of [def-sfb-tori-multiplicative-type], and $F_K$ is the cckp-kernel of $U_K$. Moreover $U$ is $k$-wound if and only if $F$ is $k$-wound. The trivial group $U=1$ is allowed, with $F=1$. No perfectness hypothesis is imposed.",
+ "source": {
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Brian Conrad, The structure of solvable groups over general fields (2014), Definition 2.1, printed p.10; Definition 3.1 and the paragraph following it, printed p.15; Proposition 3.2, printed pp.15--16, equivalence (1) and (3). Read online at https://math.stanford.edu/~conrad/papers/appbnew.pdf. WANTED locally: this document. No Stacks tag is claimed for this Tits structure theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-sfb-wound-cckp-kernel",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-affine-group-centre-base-change], $Z=Z(U)$ is a closed commutative affine finite-type group. Multiplication by $p$ is a homomorphism on $Z$ (commutativity lets one rearrange the $p$ factors). By [lem-sc-kernel-subgroup] its kernel $H=\\ker([p]_Z)$ is a closed subgroup. Apply [lem-sfb-separable-point-scheme-core] to $H$ and write $J=H^{\\natural}$. Functoriality and compatibility with products restrict multiplication, inverse and identity to $J$, and its inclusion in $H$ is a homomorphism. The core is geometrically reduced, so [lem-sfb-geometrically-reduced-group-smooth] makes $J$ smooth. Its sections are central in $U$ and killed by $p$, because the same is true in $H$. In particular $J$ is commutative.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-separable-point-scheme-core",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Definition 3.1 and Proposition 3.2, printed pp.15--16; read online https://math.stanford.edu/~conrad/papers/appbnew.pdf; agent assembly using the general separable-point core construction."
+   }
+  },
+  {
+   "text": "Let $F=J^0$, the open and closed identity subgroup supplied by [lem-sfb-finite-type-group-identity-subgroup]. It is smooth by restriction of the smooth structure map of $J$, connected, central and killed by $p$. Let $B\\subseteq U$ be any smooth connected central subgroup killed by $p$. It factors through $H$, by the stated universal descriptions of the centre and kernel. By [sbc-lem-smooth-geometrically-reduced], $B$ is geometrically reduced, so $B^{\\natural}=B$ and core functoriality factors $B\\to H$ through $J$. The image is connected and contains the identity, hence lies in the open and closed subscheme $J^0$ and factors through it. Thus $B\\subseteq F$. This proves largestness, and two largest closed subgroups contain each other, so are equal. For $U=1$ the construction gives $H=J=F=1$.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "def-sbc-smooth-morphisms",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-separable-point-scheme-core",
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sc-kernel-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Definition 3.1 and Proposition 3.2, printed pp.15--16; read online https://math.stanford.edu/~conrad/papers/appbnew.pdf; agent assembly using the general separable-point core construction."
+   }
+  },
+  {
+   "text": "Let $K/k$ be separable. The centre commutes with scalar extension by [lem-sfb-affine-group-centre-base-change]. The $p$-fold multiplication map also commutes with it, and the defining fibre product of its kernel therefore gives $H_K=\\ker([p]_{Z(U_K)})$. By [lem-sfb-separable-point-scheme-core], $J_K=(H_K)^{\\natural}$. The subgroup $F_K$ is open and closed in $J_K$, contains the identity, and is connected: apply [lem-sbc-connected-rational-point-geometrically-connected] to $F$, with its identity section. Consequently it is exactly the identity component of $J_K$: any connected subset containing the identity lies in this clopen subset, while $F_K$ itself is connected. The group $U_K$ is again smooth (base change of the smooth structure map, [def-sbc-smooth-morphisms]), connected by [lem-sbc-connected-rational-point-geometrically-connected] applied to $U$ with its identity section, and unipotent: base change of the closed immersion $U\\to\\mathcal U_n$ of [lem-sfb-geometric-unipotence-unitriangular-embedding] is a faithful representation of $U_K$ by unitriangular matrices, so every geometric point of $U_K$ is unipotent. Steps 1--2 over $K$ now identify $F_K$ with the cckp-kernel of $U_K$. This uses the actual separable-core base-change assertion, not an assumption that reduction commutes with arbitrary field extension.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-separable-point-scheme-core",
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Definition 3.1 and Proposition 3.2, printed pp.15--16; read online https://math.stanford.edu/~conrad/papers/appbnew.pdf; agent assembly using the general separable-point core construction."
+   }
+  },
+  {
+   "text": "If $U$ is $k$-wound, compose any morphism $\\mathbb A^1_k\\to F$ with the inclusion in $U$. Its composite is constant at its value at $0$. Since the inclusion is a monomorphism on all test schemes, the original morphism equals the constant morphism with that same $F(k)$-value. Hence $F$ is $k$-wound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Definition 3.1 and Proposition 3.2, printed pp.15--16; read online https://math.stanford.edu/~conrad/papers/appbnew.pdf; agent assembly using the general separable-point core construction."
+   }
+  },
+  {
+   "text": "Conversely suppose $U$ is not $k$-wound. Choose a nonconstant $f:\\mathbb A^1_k\\to U$ and translate so $f(0)=1$. Extend to a separable closure $s=k_s$; nonconstancy persists since a nonconstant coordinate polynomial stays nonconstant under an injective field extension. By [lem-sfb-geometric-unipotence-unitriangular-embedding] embed $U$ into $\\mathcal U_n$ over $k$. Use the filtration $\\mathcal U_n=U^{(0)}\\supseteq\\cdots\\supseteq U^{(m)}=1$ of [lem-sfb-unitriangular-coordinate-filtration]. Its conjugation formula gives $[\\mathcal U_n,U^{(r)}]\\subseteq U^{(r+1)}$. If the current pointed nonconstant curve $a:\\mathbb A^1_s\\to U_s$ is not central, some $g\\in U(s)$ does not commute with its image. Indeed the commutator $U_s\\times\\mathbb A^1_s\\to U_s$ is then not identically $1$; write a nonzero pulled-back affine coordinate as a polynomial in the line variable with coefficients in $s[U]$. Smoothness makes $s[U]$ reduced by [sbc-lem-smooth-geometrically-reduced], and [lem-pc-rational-points-dense] ensures a nonzero coefficient is nonzero at some $g\\in U(s)$. Replace $a(t)$ by $g^{-1}a(t)^{-1}ga(t)$. It is pointed and not identically $1$, hence nonconstant, and it moves one step deeper in the matrix filtration. After at most $m$ replacements a nonconstant curve must therefore be central; otherwise it would land in $U^{(m)}=1$. Denote the resulting central pointed curve by $c$.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Definition 3.1 and Proposition 3.2, printed pp.15--16; read online https://math.stanford.edu/~conrad/papers/appbnew.pdf; agent assembly using the general separable-point core construction."
+   }
+  },
+  {
+   "text": "Choose $e$ with $p^e\\geq n$. For every $s$-algebra and every strictly upper triangular $n\\times n$ matrix $N$, $N^n=0$ and $(I+N)^{p^e}=I+N^{p^e}=I$. Thus the $p^e$-power map of $U_s$ is identically $1$. Choose the largest $j\\geq0$ for which $b=c^{p^j}$ is not identically $1$. It is central, pointed, nonconstant and killed by $p$, so it factors through $H_s$. The affine line is geometrically reduced (every scalar extension has coordinate ring a polynomial ring over a field), so core functoriality factors $b$ through $(H_s)^{\\natural}=J_s$. Its connected image containing $1$ lies in $J_s^0=F_s$, by step 3. The group $F$ is smooth, connected, commutative, killed by $p$; its faithful unipotent representation is the restriction of that of $U$. Apply [lem-sfb-commutative-p-torsion-vector-wound-factor] to $F$. Its canonical vector factor $V\\subseteq F$ has the property that every pointed $s$-morphism from the affine line to $F_s$ factors through $V_s$. Our nonconstant $b$ forces $V_s\\ne1$, so in $V\\simeq\\mathbf G_a^d$ we have $d>0$ and $V\\ne1$. The same cited statement says $V=1$ if and only if $F$ is $k$-wound. Hence $F$ is not $k$-wound, proving the converse by contrapositive. For $U=1$ both sides of the wound equivalence hold directly.",
+   "uses": [
+    "lem-sfb-separable-point-scheme-core",
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "lem-sfb-commutative-p-torsion-vector-wound-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+    "place": "Definition 3.1 and Proposition 3.2, printed pp.15--16; read online https://math.stanford.edu/~conrad/papers/appbnew.pdf; agent assembly using the general separable-point core construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-separable-point-scheme-core",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "lem-pc-rational-points-dense",
+  "lem-sfb-commutative-p-torsion-vector-wound-factor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+  "place": "Definition 3.1, Proposition 3.2 (1) iff (3), pp.15--16; construction made explicit through Conrad, Finiteness theorems, Lemma 3.1.1. Sources read online; PDFs WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical largest smooth connected central subgroup killed by p of a unipotent algebraic group commutes with separable field extension and is wound exactly when the group is wound",
+   "results": "{\"t\": \"2026-10-24T09:12:34Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical largest smooth connected central subgroup killed by p of a unipotent algebraic group commutes with separable field extension and is wound exactly when the group is wound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"JacobsonNoether.exists_pow_mem_center_of_inseparable\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable'\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"upperCentralSeriesAux\", \"lowerCentralSeries_succ_eq_bot\", \"Group.IsNilpotent.nilpotent\", \"nilpotent_center_quotient_ind\"], \"digest\": \"87cacfc9eef54bc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Subgroup.center\", \"Characteristic\"",
+   "results": "{\"t\": \"2026-10-24T09:12:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Subgroup.center\\\", \\\"Characteristic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AddSubgroup.centerCharacteristic\", \"Subgroup.centerCharacteristic\"], \"digest\": \"6b98c18fbb577522\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "cckp|wound|unipotent.*central",
+   "results": "{\"t\": \"2026-10-24T09:12:35Z\", \"tool\": \"grep\", \"query\": \"cckp|wound|unipotent.*central\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected unipotent group in positive characteristic is wound if and only if its maximal central smooth connected p torsion subgroup is wound",
+   "results": "{\"t\": \"2026-10-24T09:12:35Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected unipotent group in positive characteristic is wound if and only if its maximal central smooth connected p torsion subgroup is wound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.isMulTorsionFree_iff_torsion_eq_bot\", \"AddCommGroup.isAddTorsionFree_iff_torsion_eq_bot\", \"CommGroup.torsion\", \"AddCommGroup.torsion\", \"LieGroup.recOn\", \"Group.IsNilpotent\", \"WittVector.isocrystal_classification\", \"isTorsion_of_finite\"], \"digest\": \"e47b76eb0a93aac6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tits cckp kernel and wound group criterion over an arbitrary field of characteristic p",
+   "results": "{\"t\": \"2026-10-24T09:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"Tits cckp kernel and wound group criterion over an arbitrary field of characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"Subgroup.mem_strictPeriods_iff\", \"Subgroup.IsArithmetic\", \"Subgroup.strictPeriods\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"RootPairing.IsG2\", \"RootPairing.instIsAnisotropicOfIsCrystallographic\", \"Subgroup.periods\"], \"digest\": \"c2c6c3705b7631e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract-group centres, torsion or central series, division rings, affine linear algebra or modular-form subgroups; none states the smooth algebraic-group construction or its wound criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "cckp|wound|unipotent.*central",
+   "results": "{\"t\": \"2026-10-24T09:46:53Z\", \"tool\": \"grep\", \"query\": \"cckp|wound|unipotent.*central\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected unipotent group is wound if and only if its largest smooth connected central exponent p subgroup is wound",
+   "results": "{\"t\": \"2026-10-24T09:46:54Z\", \"tool\": \"leansearch\", \"query\": \"Smooth connected unipotent group is wound if and only if its largest smooth connected central exponent p subgroup is wound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieGroup.recOn\", \"AddSubgroup.exponent_top\", \"Submonoid.exponent_top\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"smoothLeftMul\", \"Group.isNilpotent_top\", \"Group.IsNilpotent.nilpotent'\", \"Subgroup.exponent_top\"], \"digest\": \"0a25fd0ca755d262\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unipotent\", \"center\"",
+   "results": "{\"t\": \"2026-10-24T09:46:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"unipotent\\\", \\\"center\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical central p torsion kernel of a smooth connected unipotent group and wound criterion",
+   "results": "{\"t\": \"2026-10-24T09:46:59Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical central p torsion kernel of a smooth connected unipotent group and wound criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsVirtuallyNilpotent\", \"isNilpotent_of_ker_le_center\", \"nilpotencyClass_le_of_ker_le_center\", \"frattini_nilpotent\", \"Sylow.le_center_or_le_commutator\", \"Group.isNilpotent_iff\", \"of_quotient_center_nilpotent\", \"Group.IsNilpotent\"], \"digest\": \"bc8c9d113842ddd4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tits cckp kernel maximal central smooth connected p torsion subgroup commutes with separable extensions",
+   "results": "{\"t\": \"2026-10-24T09:47:01Z\", \"tool\": \"leanfinder\", \"query\": \"Tits cckp kernel maximal central smooth connected p torsion subgroup commutes with separable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"JacobsonNoether.exists_pow_mem_center_of_inseparable\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable'\", \"Field.absoluteGaloisGroupAbelianization\", \"ValuationSubring.inertiaSubgroup\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"galBasis\", \"MonoidHom.ker_transferSylow_isComplement'\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\"], \"digest\": \"ebdc9b863cf3f342\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-unipotent-central-vector-subgroup",
+  "date": "2026-10-24",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical central p-torsion kernel, before taking its vector factor.",
+   "via": [
+    "lem-sfb-split-unipotent-central-vector-subgroup",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-cckp-kernel-wound-criterion",
+  "worker": "stage1",
+  "summary": "Construct the kernel of multiplication by p in the scheme-theoretic centre, take its separable-point core and identity component, prove maximality and separable base change, and follow the commutator-curve/p-power argument for the wound criterion. One new general scheme lemma, no new clause-restatements, no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical central p-torsion kernel, before taking its vector factor. Steps 1--3 supply the canonical central kernel used before the vector-factor construction; steps 4--6 supply the wound equivalence. The ancestry command returns node=None on the live imported chain, retained verbatim.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Applied to the identity component with its rational identity to identify its base changes as identity components; no in-unit statement covers arbitrary ground fields."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Detect a nonzero commutator coefficient by a rational point over a separably closed field; the in-unit rational-point subspace test assumes an algebraically closed field and concerns linear representations."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smooth subgroup and ambient group coordinate algebras are geometrically reduced; used for core functoriality and density detection, without any alternate unit route."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "The scheme-theoretic fibre over the identity is a closed subgroup; the construction of the p-kernel needs this general group-scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-rational-points-dense",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-kernel-subgroup"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-0af1aefa1",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-0af1aefa1 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-separable-point-scheme-core and every cited statement in full. The Conrad sources are not in literature/. I checked against CGP B.3.1–B.3.2 and C.4.1, which they reproduce, so proof_origin agent and the WANTED lines are correct. The statement is unchanged and correct. Steps 1–2: centre, then kernel of [p], then the separable-point core, then identity component; maximality via B^natural=B and the clopen J^0. Step 4: cancel against the monomorphism. Step 5: the commutator descent through the unitriangular filtration terminates, and g is found through reducedness plus density of rational points over k_s. Step 6: (I+N)^{p^e}=I, then the largest nontrivial p-power curve factors through J_s and lands in F_s=J_s^0, then the vector-factor node's statement gives V≠1, so F is not wound. All of this checks from the cited statements. The new node (CGP C.4.1) is true: tested on the empty scheme, a purely inseparable point, alpha_p, a geometrically reduced X and A^1. It is self-contained, statement-only, has three search kinds and no duplicate (separable-point-closure-universal-density and galois-stable-affine-line-generated-subgroup differ), and is strictly smaller than the item. Repair: step 3 applied steps 1–2 over K without showing U_K is smooth, connected and unipotent. I added one sentence: smoothness by base change, connectedness by the rational-section lemma, unipotence from the base-changed closed immersion into U_n. The two added uses were already in proof_deps. All four declared tool_uses accepted (connected-rational-point, rational-points-dense, smooth-geometrically-reduced, kernel-subgroup). Batch-5: the three listed closures reach lem-trf-finite-type-component-open-qc (generic topology), lem-trf-flat-tensor-preserves-injection (Mathlib flatness) and lem-trf-fppf-covering-base-change (Mathlib site fact). These are generic tools, not steps of the trace formula or Poincaré duality, so accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnipotentCckpKernelWoundCriterion",
+  "declaration": "AlgebraicGeometry.exists_unipotent_cckpKernel_wound_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnipotentCckpKernelWoundCriterion.lean",
+  "statement": "theorem exists_unipotent_cckpKernel_wound_criterion {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (U : Grp (Over (Spec (.of k)))) (hU : SolvableGroupStructure.IsAlgebraic U) [Smooth U.X.hom] [ConnectedSpace U.X.left] (hunip : SolvableGroupStructure.IsUnipotent U) : ∃ (F : Grp (Over (Spec (.of k)))) (i : F ⟶ U), IsCckpKernel p i ∧ IsCommMonObj F.X ∧ (∀ (F' : Grp (Over (Spec (.of k)))) (i' : F' ⟶ U), IsCckpKernel p i' → ∃ e : F ≅ F', e.hom ≫ i' = i) ∧ (∀ (K : Type u) [Field K] [Algebra k K] (hK : Algebra.IsSeparableExtension k K), IsCckpKernel p ((MultiplicativeType.baseChange (K := K)).map i)) ∧ (IsWound U ↔ IsWound F)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses Algebra.IsSeparableExtension for arbitrary, possibly transcendental, separable field extensions and the actual pullback inclusion. Uniqueness is by an isomorphism commuting with the closed inclusions. Woundness tests all affine-line scheme morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e85bee00",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 006646d5: F1 repaired by (hK : Algebra.IsSeparableExtension k K), which covers non-algebraic separable K and uses the actual baseChange.map i; F2 repaired by a citation-only statement_change (old_statement equals live verbatim; proof and proof_deps unchanged; citer lem-sfb-split-unipotent-central-vector-subgroup holds). Clause-by-clause: IsAlgebraic/IsUnipotent/Smooth/Connected hypotheses; IsWound tests all A^1 scheme morphisms against structure map then k-point; centrality via centralizerPoints (𝟙 U) after every algebra extension; x^p=1 on all algebras; largestness by factorization; IsCommMonObj; uniqueness by an iso commuting with the inclusions; IsWound U ↔ IsWound F; U=1 allowed; no perfectness; single ambient universe u. New node def-sfb-wound-cckp-kernel has real Prop definitions, no sorry, no duplicate. stmt_deps cover every declaration the statement uses, and all four owner nodes have landed. lean.statement is verbatim for item and new node. Parallel Q64 3b81 was RETURNed and has not landed. No file changed, so no compile.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q15 stage 2",
+  "old_statement": "Let $k$ be a field of characteristic $p>0$, with $p$ prime [def-weil-field]. Groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup], and smooth and connected mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a(R)=(R,+)$ [def-sc-gm-ga] and $\\mathbb A^1_k=\\operatorname{Spec}k[x]$ [def-weil-affine-spectrum, def-weil-polynomial-ring]. A smooth connected unipotent $k$-group is called $k$-wound if every $k$-scheme morphism $\\mathbb A^1_k\\to H$ is constant with value in $H(k)$. Here unipotent means having a faithful finite-dimensional matrix representation with unipotent geometric points. The condition $[p]_H=0$ for a commutative group means that on every commutative $k$-algebra the sum of $p$ copies of each section is zero. Let $U$ be smooth, connected and unipotent. There is a largest smooth connected central subgroup $F\\subseteq U$ with $[p]_F=0$: every smooth connected central subgroup killed by $p$ is contained in $F$. Centrality means that its sections commute with all sections of $U$ after every commutative algebra extension. This subgroup is commutative, is uniquely determined as a closed subgroup of $U$, and is called the cckp-kernel. Its formation commutes with every separable field extension $K/k$: $F_K$ is the cckp-kernel of $U_K$. Moreover $U$ is $k$-wound if and only if $F$ is $k$-wound. The trivial group $U=1$ is allowed, with $F=1$. No perfectness hypothesis is imposed.",
+  "what": "The returned Lean used Algebra.IsSeparable, which forces an algebraic extension and omitted transcendental separable extensions. It now uses the existing Algebra.IsSeparableExtension predicate. The natural-language statement only gains the explicit terminology citations requested by the reviewer; its mathematical content is unchanged.",
+  "source": {
+   "document": "literature/conrad-structure-solvable-groups-general-fields.pdf",
+   "place": "Conrad, Definition 2.1 p.10; Definition 3.1 and its separable-extension paragraph p.15; Proposition 3.2 (1) and (3), pp.15–16. Existing separability terminology: def-weil-pbc-separable-field-extension, Stacks Tag 030O."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-split-unipotent-central-vector-subgroup",
+    "holds": true,
+    "note": "The central vector subgroup proof uses the cckp wound criterion and its compatibility with the separable closure. Explicit terminology citations preserve these uses, and the repaired Lean clause covers all separable extensions."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-field",
+   "def-sc-group-scheme",
+   "def-weil-finite-type-morphism",
+   "def-sc-group-scheme-subgroup",
+   "def-sbc-smooth-morphisms",
+   "def-weil-connected-scheme",
+   "def-sc-gm-ga",
+   "def-weil-affine-spectrum",
+   "def-weil-polynomial-ring"
+  ]
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "id": "def-sfb-comap-iso-strong-monoidal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "via": [
+    "def-sfb-upper-star-tensor-counit"
+   ],
+   "place": "the Lean of def-sfb-upper-star-tensor-counit uses the lax monoidal structure of (f)^*⟦Λ⟧ = mapMod(f^*) ⋙ extendScalars (instance monoidal_upperStar), whose extension of scalars along an isomorphism is restriction along its inverse: Mod.monoidal_extendScalars via Mod.monoidal_comap = (comapCoreMonoidal ψ).toMonoidal"
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Restriction of scalars along an isomorphism of commutative monoids is strong monoidal",
+ "statement": "Let $\\mathcal C$ be a braided monoidal category [def-sfb-monoidal-category] whose tensor product preserves coequalizers in each variable, and $\\psi\\colon S\\to R$ an isomorphism of commutative monoid objects [sk-def-sfb-ring-object]. Restriction of scalars $\\psi^*\\colon\\Mod_R(\\mathcal C)\\to\\Mod_S(\\mathcal C)$ [sk-def-sfb-module-objects] is strong monoidal for the relative tensor products [def-sfb-modobj-relative-tensor]: the isomorphisms $\\psi^*M\\otimes_S\\psi^*N\\cong\\psi^*(M\\otimes_RN)$, equal to the identity of $M\\otimes N$ on the coequalizer projections since the two parallel pairs differ by the isomorphism $M\\otimes\\psi\\otimes N$, together with the unit isomorphism $\\psi\\colon S\\cong\\psi^*R$, are $S$-linear and natural and satisfy the associativity and unit axioms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
+  "place": "def-sfb-upper-star-tensor-counit: the Lean of def-sfb-upper-star-tensor-counit uses the lax monoidal structure of (f)^*⟦Λ⟧ = mapMod(f^*) ⋙ extendScalars (instance monoidal_upperStar), whose extension of scalars along an isomorphism is restriction along its inverse: Mod.monoidal_extendScalars via Mod.monoidal_comap = (comapCoreMonoidal ψ).toMonoidal; Lean: upstream file lean/WeilConjectures/CategoryTheory/ModuleObjects/MapModMonoidal.lean, declaration CategoryTheory.Mod.comapCoreMonoidal (module WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal, lines 490-609, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars along an isomorphism of commutative monoid objects is monoidal",
+   "results": "Mod_.scalarRestriction, scalarRestriction_smul, scalarRestriction_hom (Mathlib.CategoryTheory.Monoidal.Mod_), ModuleCat.restrictScalars: the functor, no monoidal structure",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor mapMod on module objects over a commutative monoid with relative tensor product",
+   "results": "Mod_.scalarRestriction, Mod_.comap, Mod_.scalarRestriction_hom: no monoidal structure for the relative tensor product",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'comap.*CoreMonoidal|CoreMonoidal.*comap' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-sfb-upper-star-tensor-counit",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal",
+  "file": "lean/WeilConjectures/CategoryTheory/ModuleObjects/MapModMonoidal.lean",
+  "declaration": "CategoryTheory.Mod.comapCoreMonoidal",
+  "declarations": [
+   "CategoryTheory.Mod.comapCoreMonoidal"
+  ],
+  "statement": "noncomputable def comapCoreMonoidal : (comap ψ : Mod C R ⥤ Mod C S).CoreMonoidal where\n  εIso := comapUnitIso ψ\n  μIso := comapTensorIso ψ\n  μIso_hom_natural_left := by\n    intro M N f X\n    apply Mod.hom_ext\n    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) ((comap ψ).obj X))]\n    change _ ≫ ((comap ψ).map f ▷ (comap ψ).obj X).hom ≫\n      (comapTensorIso ψ N X).hom.hom = _\n    rw [tensorObjπ_whiskerRight_assoc, tensorπ_comapTensorIso_hom_hom]\n    change _ = _ ≫ (comapTensorIso ψ M X).hom.hom ≫ ((comap ψ).map (f ▷ X)).hom\n    rw [tensorπ_comapTensorIso_hom_hom_assoc]\n    change f.hom ▷ X.X ≫ tensorObjπ N X =\n      tensorObjπ M X ≫ (f ▷ X).hom\n    rw [tensorObjπ_whiskerRight]\n  μIso_hom_natural_right := by\n    intro M N X f\n    apply Mod.hom_ext\n    rw [← cancel_epi (tensorObjπ ((comap ψ).obj X) ((comap ψ).obj M))]\n    change _ ≫ (((comap ψ).obj X ◁ (comap ψ).map f).hom) ≫\n      (comapTensorIso ψ X N).hom.hom = _\n    rw [tensorObjπ_whiskerLeft_assoc, tensorπ_comapTensorIso_hom_hom]\n    change _ = _ ≫ (comapTensorIso ψ X M).hom.hom ≫ ((comap ψ).map (X ◁ f)).hom\n    rw [tensorπ_comapTensorIso_hom_hom_assoc]\n    change X.X ◁ f.hom ≫ tensorObjπ X N =\n      tensorObjπ X M ≫ (X ◁ f).hom\n    rw [tensorObjπ_whiskerLeft]\n  associativity := by\n    intro M N P\n    apply Mod.hom_ext\n    rw [← cancel_epi (tensorObjπ\n      ((comap ψ).obj M ⊗ (comap ψ).obj N) ((comap ψ).obj P))]\n    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) ▷\n      ((comap ψ).obj P).X)]\n    simp only [Mod.comp_hom']\n    rw [tensorObjπ_whiskerRight_assoc, ← comp_whiskerRight_assoc,\n      tensorπ_comapTensorIso_hom_hom,\n      tensorπ_comapTensorIso_hom_hom_assoc]\n    change tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P ≫ (α_ M N P).hom.hom = _\n    rw [tensorObjπ_associator_hom]\n    rw [tensorObjπ_associator_hom_assoc, tensorObjπ_whiskerLeft_assoc,\n      ← MonoidalCategory.whiskerLeft_comp_assoc, tensorπ_comapTensorIso_hom_hom,\n      tensorπ_comapTensorIso_hom_hom]\n    rfl\n  left_unitality := by\n    intro M\n    have hπC (Q : Mod C (R)) :\n        Mod.tensorObjπ (Mod.regular (R)) Q ≫ (λ_ Q).hom.hom = γ[R,Q.X] := by\n      change Mod.tensorObjπ (Mod.regular (R)) Q ≫\n        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := R)).hom\n        ((Mod.toBimod (R)).obj Q)).hom ≫\n          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerRight_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    have hπD (Q : Mod C (S)) :\n        Mod.tensorObjπ (Mod.regular (S)) Q ≫ (λ_ Q).hom.hom = γ[S,Q.X] := by\n      change Mod.tensorObjπ (Mod.regular (S)) Q ≫\n        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := S)).hom\n        ((Mod.toBimod (S)).obj Q)).hom ≫\n          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (S)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerRight_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    apply Mod.hom_ext\n    rw [← cancel_epi (tensorObjπ (regular S) ((comap ψ).obj M))]\n    simp only [Mod.comp_hom']\n    rw [hπD, tensorObjπ_whiskerRight_assoc,\n      tensorπ_comapTensorIso_hom_hom_assoc]\n    change ψ ▷ M.X ≫ γ[R,M.X] =\n      ψ ▷ M.X ≫ tensorObjπ (regular R) M ≫ (λ_ M).hom.hom\n    rw [hπC]\n  right_unitality := by\n    intro M\n    have hπC (Q : Mod C (R)) :\n        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by\n      change Mod.tensorObjπ Q (Mod.regular (R)) ≫\n        (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)\n        (Mod.toBimodRegularIso (R := R)).hom).hom ≫\n          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerLeft_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    have hπD (Q : Mod C (S)) :\n        Mod.tensorObjπ Q (Mod.regular (S)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (S)).hom ≫ γ[S,Q.X] := by\n      change Mod.tensorObjπ Q (Mod.regular (S)) ≫\n        (Bimod.whiskerLeft ((Mod.toBimod (S)).obj Q)\n        (Mod.toBimodRegularIso (R := S)).hom).hom ≫\n          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (S)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerLeft_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    apply Mod.hom_ext\n    rw [← cancel_epi (tensorObjπ ((comap ψ).obj M) (regular S))]\n    simp only [Mod.comp_hom']\n    rw [hπD, tensorObjπ_whiskerLeft_assoc,\n      tensorπ_comapTensorIso_hom_hom_assoc]\n    change (β_ M.X S).hom ≫ ψ ▷ M.X ≫ γ[R,M.X] =\n      M.X ◁ ψ ≫ tensorObjπ M (regular R) ≫ (ρ_ M).hom.hom\n    rw [hπC]\n    rw [braiding_naturality_right_assoc]",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Mod.comapCoreMonoidal"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.comapCoreMonoidal",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal",
+     "lines": [
+      490,
+      609
+     ],
+     "kind": "def",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

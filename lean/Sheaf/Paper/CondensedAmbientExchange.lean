@@ -6,6 +6,7 @@ Authors: SHEAF group Q97
 module
 
 public import Sheaf.Paper.PbcActualRingedExchange
+public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-!

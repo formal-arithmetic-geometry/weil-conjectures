@@ -1,0 +1,280 @@
+{
+ "id": "lem-trf-local-tower-collapse-noetherian",
+ "kind": "statement",
+ "title": "Noetherian collapse of a supplied local ring tower diagram",
+ "statement": "Let $I$ be a small nonempty directed preorder. Supply diagrams of commutative local rings $A_i\\xrightarrow{f_i}B_i\\xrightarrow{g_i}C_i$, local transition maps $a_{ji},b_{ji},c_{ji}$ for $i\\le j$, and local cocones $\\alpha_i:A_i\\to A$, $\\beta_i:B_i\\to B$, $\\gamma_i:C_i\\to C$ to a tower of commutative local rings $A\\xrightarrow f B\\xrightarrow g C$. All squares commute, transitions respect identities and composition, and these cocones are ring colimits [def-weil-pbc-category-colimit]. A homomorphism of local rings is local when the inverse image of the target maximal ideal is the source maximal ideal. Suppose $A_i$ is essentially of finite type over $\\mathbf Z$, $B_i$ over $A_i$, and $C_i$ over $B_i$ [def-weil-pbc-essentially-finite-type-algebra]. Suppose the canonical maps\n$B_i\\otimes_{A_i}A_j\\to B_j$, $b\\otimes a\\mapsto b_{ji}(b)f_j(a)$, and $C_i\\otimes_{B_i}B_j\\to C_j$, $c\\otimes b\\mapsto c_{ji}(c)g_j(b)$, are localizations for every $i\\le j$; suppose also that $B_i\\otimes_{A_i}A\\to B$, $b\\otimes a\\mapsto\\beta_i(b)f(a)$, and $C_i\\otimes_{B_i}B\\to C$, $c\\otimes b\\mapsto\\gamma_i(c)g(b)$, are localizations for every $i$. Tensor products have their usual induced ring structures [def-weil-pbc-module-tensor-product]. Here a localization at a multiplicative subset $W$ sends $W$ to units, every target element is a fraction with numerator in the source and denominator in $W$, and a source element mapping to zero is killed by an element of $W$.\nThen all the supplied rings $A_i,B_i,C_i$ are Noetherian [def-weil-pbc-noetherian-ring], and each composite $A_i\\to C_i$ is essentially of finite type. Each $C_i$ is a localization of a finitely presented $A_i$-algebra [def-weil-pbc-finitely-presented-algebra]. On the same supplied diagrams the canonical maps $C_i\\otimes_{A_i}A_j\\to C_j$, $c\\otimes a\\mapsto c_{ji}(c)(g_jf_j)(a)$, and $C_i\\otimes_{A_i}A\\to C$, $c\\otimes a\\mapsto\\gamma_i(c)(gf)(a)$, are localizations for all $i\\le j$ and all $i$, respectively. The original cocones on $A_i$ and $C_i$ are algebraic colimits: every limit element comes from a stage, and two stage elements have the same limit image if and only if their images coincide at a common later stage. No replacement of the supplied diagrams or cocone maps is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R7 (lemma-criterion-flatness-fibre), approximation paragraphs and the sentence composing the two tensor localizations; Tag 07DS (lemma-composition-essentially-of-finite-type); Tag 00FN (lemma-Noetherian-permanence); Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation), clause (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing Mathlib instance that the integers form a Noetherian ring (the principal-ideal argument for integer ideals). This is the input to the permanence argument at each stage.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), input ring Z; elementary integer ideal calculation"
+   }
+  },
+  {
+   "text": "Fix i. Apply Algebra.EssFiniteType.isNoetherianRing first over Z to A_i, then with the algebra structure of f_i to B_i over A_i, and then with the algebra structure of g_i to C_i over B_i. This Mathlib theorem is precisely the composite of finite-type Noetherian permanence and localization Noetherian permanence. The supplied rings and maps are unchanged.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), both sentences; Tag 00R7 (lemma-criterion-flatness-fibre), approximation paragraphs"
+   }
+  },
+  {
+   "text": "For each i, RingHom.EssFiniteType.comp applied to f_i and g_i makes g_i f_i essentially of finite type. Use Algebra.essFiniteType_iff_exists_subalgebra to obtain a finite type A_i-subalgebra P of C_i and a submonoid W such that C_i is its localization. Since A_i is Noetherian by the preceding step, Algebra.FinitePresentation.of_finiteType makes P finitely presented. Take p to be the algebra map into P and q to be the subalgebra inclusion into C_i. Their composite is g_i f_i by construction. The localization structure gives W.IsLocalizationMap q.",
+   "uses": [
+    "lem-weil-pbc-essentially-finite-type-composition",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DS (lemma-composition-essentially-of-finite-type), first assertion; Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation), clause (3)"
+   }
+  },
+  {
+   "text": "Fix $i\\le j$. Apply the six-ring tensor-localization tower transition statement to the towers $(A_i,B_i,C_i)$ and $(A_j,B_j,C_j)$, with $r=a_{ji}$, $s=b_{ji}$ and $t=c_{ji}$. Its first localization hypothesis is precisely the supplied $B_i\\otimes_{A_i}A_j\\to B_j$, and its second is the supplied $C_i\\otimes_{B_i}B_j\\to C_j$. The composite algebra structures are $g_if_i$ and $g_jf_j$; the commuting squares in the item give their compatibility. The cited conclusion is a localization $h:C_i\\otimes_{A_i}A_j\\to C_j$ satisfying $h(c\\otimes a)=c_{ji}(c)(g_jf_j)(a)$. This is the required canonical ring map: pure tensors generate the tensor product additively, so two ring maps with this formula agree. Hence the required map on the supplied transition diagram is a localization. In Lean, the proved private wrapper RingHom.isTensorLocalizationSquare_comp installs the algebra structures of both composites and their scalar-tower instances, converts IsLocalizationMap to IsLocalization for each supplied comparison, applies Module.tensorLocalization_tower_transition, and converts its conclusion back to IsLocalizationMap.",
+   "uses": [
+    "lem-weil-pbc-tensor-localization-tower-transition",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R7 (lemma-criterion-flatness-fibre), proof: sentence composing the adjacent tensor localizations"
+   }
+  },
+  {
+   "text": "Fix $i$ again and apply the same six-ring statement to the towers $(A_i,B_i,C_i)$ and $(A,B,C)$, this time with $r=\\alpha_i$, $s=\\beta_i$ and $t=\\gamma_i$. Both localization hypotheses are now exactly the two limit-comparison localizations assumed in the item; the cocone squares give compatibility. Its conclusion is a localization $h:C_i\\otimes_{A_i}A\\to C$ with $h(c\\otimes a)=\\gamma_i(c)(gf)(a)$. Additive generation by pure tensors again identifies $h$ with the specified canonical map. This application uses no Noetherianity or finite type hypothesis on $A,B,C$, and leaves all cocone maps unchanged.",
+   "uses": [
+    "lem-weil-pbc-tensor-localization-tower-transition",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R7 (lemma-criterion-flatness-fibre), tensor-localization composition argument, applied to a stage and the limit tower"
+   }
+  },
+  {
+   "text": "Regard the supplied small preorder $I$ as a category. It is filtered: nonemptiness supplies an object, directedness supplies common targets for any two objects, and parallel arrows in a preorder are already equal. Apply the elementwise filtered-colimit statement for commutative rings first to the supplied cocone $(A,(\\alpha_i))$ and then to $(C,(\\gamma_i))$. These are ring colimits by hypothesis. Clause (1) says that every element of $A$, respectively $C$, comes from a stage. Clause (2) says that equality of any two stage images is equivalent to equality at a common later stage; arrows in this category are exactly inequalities. These conclusions concern the actual supplied cocones. Together with steps 2 through 5 this proves every clause without replacing any diagram.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit), elementwise description; ring form supplied by the cited commutative-ring colimit node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-essentially-finite-type-composition",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-tensor-localization-tower-transition",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00R7, 00FN, 07DS, 00FP; existing Mathlib permanence and colimit theorems plus the proved tensor localization tower transition, assembled on the supplied diagrams",
+  "group": "M9",
+  "date": "2026-10-23"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Nn]oetherian.*[Tt]ower|[Ll]ocalization.*[Tt]ower|[Tt]ower.*[Ll]ocalization)",
+   "results": "25 hits; Mathlib/RingTheory/LocalProperties/Basic.lean, Mathlib/RingTheory/LocalProperties/Basic.lean, Mathlib/RingTheory/QuasiFinite/Polynomial.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean.  The hits give individual permanence, composition or localization results, not the supplied-diagram theorem with both transition and limit comparisons and algebraic ring colimits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Essentially finite type local ring tower diagrams over integers have Noetherian rings and composite base change localization comparisons",
+   "results": "8 hits; IsLocalization.isNoetherianRing, RingHom.finiteType_localizationPreserves, Algebra.FiniteType.isNoetherianRing, RingHom.finiteType_holdsForLocalizationAway, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.isNoetherianRing_of_away, IsNoetherianRing.of_isLocalization_maximal, IsLocalization.instIsNoetherianRingLocalization.  The hits give individual permanence, composition or localization results, not the supplied-diagram theorem with both transition and limit comparisons and algebraic ring colimits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsNoetherianRing",
+   "results": "3 hits; IsLocalization.isNoetherianRing, Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule, Module.injective_of_isLocalizedModule.  The hits give individual permanence, composition or localization results, not the supplied-diagram theorem with both transition and limit comparisons and algebraic ring colimits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram of local ring towers with essentially finite type stages over the integers and adjacent tensor localization comparisons has Noetherian stages and composite tensor localization comparisons at transitions and at the colimit",
+   "results": "8 hits; RingHom.EssFiniteType.holdsForLocalization, Algebra.EssFiniteType.comp, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, IsNoetherianRing.of_isLocalization_maximal, Algebra.Smooth.exists_finiteType, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, fg_of_fg_of_fg, Algebra.FiniteType.of_span_eq_top_source.  The hits give individual permanence, composition or localization results, not the supplied-diagram theorem with both transition and limit comparisons and algebraic ring colimits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(localization.*(baseChange|tensor|comp)|((baseChange|tensor).*localization)|EssFiniteType.*(noetherian|comp))",
+   "results": "25 hits; Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean, Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean, Mathlib/RingTheory/SurjectiveOnStalks.lean, Mathlib/RingTheory/SurjectiveOnStalks.lean, Mathlib/RingTheory/SurjectiveOnStalks.lean, Mathlib/RingTheory/SurjectiveOnStalks.lean, Mathlib/RingTheory/SurjectiveOnStalks.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean.  The hits give individual permanence, composition or localization results, not the supplied-diagram theorem with both transition and limit comparisons and algebraic ring colimits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compress compatible towers A_i to B_i to C_i of essentially finite type commutative algebras with localization pushouts into A_i to C_i diagrams, including Noetherianity and tensor comparisons for the colimit cocone",
+   "results": "8 hits; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.pushoutCoconeIsColimit, RingHom.CodescendsAlong.includeRight, CommRingCat.isPushout_iff_isPushout, RingHom.CodescendsAlong.mk, RingHom.CodescendsAlong, CommRingCat.pushoutCocone.  The hits give individual permanence, composition or localization results, not the supplied-diagram theorem with both transition and limit comparisons and algebraic ring colimits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, IsNoetherianRing",
+   "results": "1 hits: Algebra.EssFiniteType.isNoetherianRing. Read the hits and the relevant localization, essential-finiteness and colimit source statements. These are component results, not the full supplied-diagram assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A supplied directed diagram of local ring towers essentially of finite type over the integers has Noetherian stages and composite tensor localization comparisons at stages and limits",
+   "results": "8 hits: AlgebraicGeometry.isNoetherianRing_of_away, IsNoetherianRing.of_isLocalization_maximal, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Algebra.FiniteType.of_span_eq_top_source, fg_of_fg_of_fg, Algebra.QuasiFiniteAt, IsLocalization.isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing. Read the hits and the relevant localization, essential-finiteness and colimit source statements. These are component results, not the full supplied-diagram assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(tower|colimit)|EssFiniteType.*(comp|Noetherian)",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/LocalProperties/Basic.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean, Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean. Read the hits and the relevant localization, essential-finiteness and colimit source statements. These are component results, not the full supplied-diagram assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A directed system of commutative local ring towers with essentially finite type stages and localization tensor comparisons has Noetherian stages and localization comparisons for the composite tower",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, Ring.DirectLimit.commRing, IsLocalization.tensor, IsLocalization.tensorRight, IsLocalizedModule.rTensor, IsLocalization.instIsNoetherianRingLocalization, TensorProduct.directLimitRight, IsLocalization.commutes. Read the hits and the relevant localization, essential-finiteness and colimit source statements. These are component results, not the full supplied-diagram assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of base change localization comparisons in diagrams of essentially finite type algebras over integers, with Noetherian stages and elementwise filtered ring colimits",
+   "results": "8 hits: RingHom.IsStableUnderBaseChange.of_isLocalization, RingHom.IsStableUnderBaseChange.isLocalization_map, RingHom.EssFiniteType.isStableUnderBaseChange, RingHom.IsStableUnderBaseChange.localizationPreserves, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, Algebra.IsStandardOpenImmersion.trans, MaximalSpectrum.mapPiLocalization_comp, Algebra.Generators.compLocalizationAwayAlgHom_toAlgHom_toComp. Read the hits and the relevant localization, essential-finiteness and colimit source statements. These are component results, not the full supplied-diagram assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-module-arrow-noetherian-descent",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "In lem-trf-local-term-locality, proof (1),(2), the specialization/normal-cone route to the contracting-correspondence theorem: the algebraic 046Y helper on its approximation branch; returned item steps 1 and 2, Noetherian permanence and collapse of the two adjacent ring comparisons.",
+   "via": [
+    "lem-trf-local-module-arrow-noetherian-descent",
+    "lem-trf-valuation-general-mod-injective",
+    "lem-trf-valuation-finite-module-injectivity",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-local-tower-collapse-noetherian",
+  "worker": "Q20",
+  "summary": "Six proof steps retain all supplied diagrams and cocones. Noetherianity follows from the elementary integer ideal calculation and existing permanence leaves; composition and finite presentation use existing leaves; the existing six-ring localization comparison is applied to stages and to limits; the existing elementwise ring-colimit leaf gives the final clauses. No new nodes and no statement changes.",
+  "blueprint": "lem-trf-local-term-locality proof (1),(2), specialization/normal-cone route: the supplied-tower algebra helper on the 00R7 approximation branch, specifically Noetherian permanence and composition of adjacent tensor localization comparisons. This is below the unit route; no replacement of a unit step.",
+  "new_nodes": [],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tensor-localization-tower-transition",
+    "why": "Generic six-ring localization comparison from sk-thm-p1, applied to the supplied stage towers and then a stage and the limit; it supplies exactly the algebraic comparison needed below the contracting-correspondence unit. No statement in this unit supplies that general ring lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tensor-localization-tower-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-f3fdb61df",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-f3fdb61df (reviewer sub-agent of L); spot-checked: Read the full item (6 steps, no new nodes, statement and stmt_deps unchanged) against Stacks algebra.tex: 00FN lemma-Noetherian-permanence (l.5991), 07DS lemma-composition-essentially-of-finite-type (l.12847), 00FP(3) (l.6088), and the 00R7 lemma-criterion-flatness-fibre proof sentence that composes the two adjacent tensor localizations; tag-to-label pairs checked in tags/tags. Step 1 (Z Noetherian by least positive element and Euclidean division) is genuinely elementary. Step 2 applies the ess-finite-type definition, then finite-type-algebra-noetherian, then localization-noetherian (conditions a-c, a localization composed with an iso is still one), with bases Z, then A_i, then B_i in that order. Step 3 applies the ess-finite-type composition to f_i and g_i, then Noetherian finite type implies finite presentation over A_i, which is Noetherian by step 2. Steps 4 and 5 apply lem-weil-pbc-tensor-localization-tower-transition with (a_ji,b_ji,c_ji) and with (alpha_i,beta_i,gamma_i). The hypothesis formulas s(b)a and t(c)b match the item's canonical maps and are well defined by the commuting squares; the conclusion formula t(c)a matches the item's map, and pure-tensor generation (def-weil-pbc-module-tensor-product) identifies the two. The lemma needs nothing about the primed rings, so it is correct for the limit rings, which need not be Noetherian. Step 6: a small nonempty directed preorder is filtered, and the Mathlib leaf lem-pc-filtered-colimit-commrings-elementwise gives clauses (1) and (2) for the supplied cocones on A and C. Edge cases tested: one object, i=j, noninjective transitions, preorder with distinct isomorphic objects, non-Noetherian limits. No duplicate found: the noetherian-local-model-tower family, including categorical-conversion, has module data and concludes that a tower exists. The parent NW re-split uses exactly these conclusions. No SGA citation, no repair note, not dropped. Accepted tool_use: lem-weil-pbc-tensor-localization-tower-transition (sk-thm-p1, not in sk-i-curve-zero's uses), a generic ring lemma that replaces no unit step. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalTowerCollapseNoetherian",
+  "declaration": "Module.local_tower_collapse_noetherian",
+  "declarations": [
+   "RingHom.IsTensorLocalizationSquare",
+   "Module.local_tower_collapse_noetherian"
+  ],
+  "file": "lean/Sheaf/RingTheory/LocalTowerCollapseNoetherian.lean",
+  "statement": "theorem local_tower_collapse_noetherian (I : Type u) [Preorder I] [Nonempty I] [IsDirectedOrder I] (DA DB DC : I ⥤ CommRingCat.{u}) [∀ i : I, IsLocalRing (DA.obj i)] [∀ i : I, IsLocalRing (DB.obj i)] [∀ i : I, IsLocalRing (DC.obj i)] (ρ : DA ⟶ DB) (σ : DB ⟶ DC) (LA : Cocone DA) (LB : Cocone DB) (LC : Cocone DC) [IsLocalRing LA.pt] [IsLocalRing LB.pt] [IsLocalRing LC.pt] (f : LA.pt ⟶ LB.pt) (g : LB.pt ⟶ LC.pt) (hρ : ∀ i : I, IsLocalHom (ρ.app i).hom) (hσ : ∀ i : I, IsLocalHom (σ.app i).hom) (hf : IsLocalHom f.hom) (hg : IsLocalHom g.hom) (ha : ∀ (i j : I) (h : i ≤ j), IsLocalHom (DA.map (homOfLE h)).hom) (hb : ∀ (i j : I) (h : i ≤ j), IsLocalHom (DB.map (homOfLE h)).hom) (hc : ∀ (i j : I) (h : i ≤ j), IsLocalHom (DC.map (homOfLE h)).hom) (hα : ∀ i : I, IsLocalHom (LA.ι.app i).hom) (hβ : ∀ i : I, IsLocalHom (LB.ι.app i).hom) (hγ : ∀ i : I, IsLocalHom (LC.ι.app i).hom) (hAB : ∀ i : I, ρ.app i ≫ LB.ι.app i = LA.ι.app i ≫ f) (hBC : ∀ i : I, σ.app i ≫ LC.ι.app i = LB.ι.app i ≫ g) (hLA : IsColimit LA) (hLB : IsColimit LB) (hLC : IsColimit LC) (hZA : ∀ i : I, Algebra.EssFiniteType ℤ (DA.obj i)) (hABft : ∀ i : I, (ρ.app i).hom.EssFiniteType) (hBCft : ∀ i : I, (σ.app i).hom.EssFiniteType) (hABtr : ∀ (i j : I) (h : i ≤ j), RingHom.IsTensorLocalizationSquare (ρ.app i).hom (DA.map (homOfLE h)).hom (DB.map (homOfLE h)).hom (ρ.app j).hom) (hBCtr : ∀ (i j : I) (h : i ≤ j), RingHom.IsTensorLocalizationSquare (σ.app i).hom (DB.map (homOfLE h)).hom (DC.map (homOfLE h)).hom (σ.app j).hom) (hABlim : ∀ i : I, RingHom.IsTensorLocalizationSquare (ρ.app i).hom (LA.ι.app i).hom (LB.ι.app i).hom f.hom) (hBClim : ∀ i : I, RingHom.IsTensorLocalizationSquare (σ.app i).hom (LB.ι.app i).hom (LC.ι.app i).hom g.hom) : (∀ i : I, IsNoetherianRing (DA.obj i) ∧ IsNoetherianRing (DB.obj i) ∧ IsNoetherianRing (DC.obj i)) ∧ (∀ i : I, ((σ.app i).hom.comp (ρ.app i).hom).EssFiniteType) ∧ (∀ i : I, ∃ (P : CommRingCat.{u}) (p : DA.obj i →+* P) (q : P →+* DC.obj i), p.FinitePresentation ∧ q.comp p = (σ.app i).hom.comp (ρ.app i).hom ∧ ∃ W : Submonoid P, W.IsLocalizationMap q) ∧ (∀ (i j : I) (h : i ≤ j), RingHom.IsTensorLocalizationSquare ((σ.app i).hom.comp (ρ.app i).hom) (DA.map (homOfLE h)).hom (DC.map (homOfLE h)).hom ((σ.app j).hom.comp (ρ.app j).hom)) ∧ (∀ i : I, RingHom.IsTensorLocalizationSquare ((σ.app i).hom.comp (ρ.app i).hom) (LA.ι.app i).hom (LC.ι.app i).hom (g.hom.comp f.hom)) ∧ (∀ x : LA.pt, ∃ (i : I) (a : DA.obj i), (LA.ι.app i).hom a = x) ∧ (∀ (i j : I) (a : DA.obj i) (b : DA.obj j), (LA.ι.app i).hom a = (LA.ι.app j).hom b ↔ ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), (DA.map (homOfLE hik)).hom a = (DA.map (homOfLE hjk)).hom b) ∧ (∀ x : LC.pt, ∃ (i : I) (c : DC.obj i), (LC.ι.app i).hom c = x) ∧ (∀ (i j : I) (c : DC.obj i) (d : DC.obj j), (LC.ι.app i).hom c = (LC.ι.app j).hom d ↔ ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), (DC.map (homOfLE hik)).hom c = (DC.map (homOfLE hjk)).hom d)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper only packages the canonical tensor comparison specified by its pure-tensor formula, using Mathlib tensor products and localization-map predicate. The theorem retains the supplied diagrams and cocones, with all nine conclusion conjuncts. All proofs are postponed; no statement or dependency change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1802d08d5",
+  "group": "Q74",
+  "result": "pass",
+  "note": "The item node differs from live only in lean; no dependency or new nodes; lean.statement verbatim. Every hypothesis matches the node: I : Type u preorder, nonempty, directed (index-universe and directed-set conventions); supplied functors/cocones with IsColimit; IsLocalHom on all maps; EssFiniteType over Z and of rho_i, sigma_i. Helper IsTensorLocalizationSquare is a real Prop (Mathlib TensorProduct + Submonoid.IsLocalizationMap), the formula on pure tensors fixes the comparison map uniquely, and its four uses give the node's formulas exactly. All 9 conclusion clauses match the node (Noetherian stages, composite essentially finite type, fin. pres. localization with q∘p = composite, transition and limit composite comparisons, elementwise colimit clauses for A and C with both directions). Edge cases checked: i=j, single index, non-antisymmetric preorder, non-injective transitions, non-Noetherian limits; empty I excluded as in the node. The only sorry is the theorem proof; docstrings carry source places, blueprint ids and the six steps; no line over 100 chars; plain imports = proof-dependency modules per brief. No changes, so no compile; worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261023T123907-L-1286961",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

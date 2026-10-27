@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-affine-pgl-quotient-orbit-topology",
+ "kind": "statement",
+ "title": "Topological fibres and invariant closed images of an affine PGL quotient",
+ "statement": "Let $k$ be a field [def-weil-field], $r\\geq2$, and $G=\\operatorname{PGL}_{r,k}$, the group scheme of [lem-sfb-projective-matrix-central-cover]. Let $E$ be a finitely generated commutative $k$-algebra and $U=\\operatorname{Spec}E$ [def-weil-affine-spectrum], with an action of $G$ by $k$-scheme morphisms satisfying the group laws. Write $\\rho:E\\to E\\otimes_k k[G]$ for its coordinate coaction and $E^G=\\ker(\\rho-(e\\mapsto e\\otimes1))$. Then the invariant algebra is finitely generated and the map $p:U\\to Y=\\operatorname{Spec}(E^G)$ is surjective. For every invariant closed subset $D\\subseteq U$, its image $p(D)$ is closed in $Y$. For every algebraically closed extension $\\Omega/k$ and every $y\\in Y(\\Omega)$, the geometric fibre $U_y$ contains a unique $G_\\Omega$-orbit closed in $U_y$; the closure in $U_y$ of every orbit contains this closed orbit. For every field extension $K/k$, the canonical map $K\\otimes_k E^G\\to(K\\otimes_k E)^{G_K}$ is an isomorphism, identifying the invariant quotient after extension with $p_K:U_K\\to Y_K$. For every invariant closed subset $D$ as above, the image of its inverse image $D_K\\subseteq U_K$ under $p_K$ is the inverse image of $p(D)$ in $Y_K$, as subsets. These assertions permit nonreduced $U$ and nonreduced stabilizers and impose no characteristic restriction.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper, Adequate moduli spaces and geometrically reductive group schemes, arXiv:1005.2398v3, Theorem 9.1.4 and Remark 9.1.5 (affine quotient), Theorem 9.7.6 (reductive implies geometrically reductive), Theorem 5.3.1(1)--(5) (surjectivity, invariant closed images, orbit-closure equivalence), Theorem 6.3.3 (finite generation), Proposition 5.2.9 (flat base change). Unique closed orbit is the orbit-closure formulation of 5.3.1 combined with the orbit lemma; the field-extension invariant equality is the flat equalizer calculation. Local PDF WANTED; primary PDF read online.",
+  "url": "https://arxiv.org/pdf/1005.2398"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "lem-sfb-projective-matrix-central-cover",
+  "def-sfb-affine-action-invariant-spectrum",
+  "def-sfb-affine-action-quotient-stack"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=E^G$. The PGL power-lifting theorem gives finite generation of $A$ and the power-lifting hypothesis for all finite-type equivariant algebra quotients. The affine action-stack presentation applies because PGL is smooth affine of finite type. The adequate-affine-quotient criterion therefore makes $\\phi:[U/G]\\to\\operatorname{Spec}A$ an adequate moduli space, and its composite with the smooth surjective atlas $q:U\\to[U/G]$ is exactly $p$. Adequate-moduli surjectivity and atlas surjectivity give surjectivity of $p$.",
+   "uses": [
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-adequate-affine-quotient",
+    "lem-sfb-adequate-moduli-topological-images",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 9.1.4, Remark 9.1.5, Theorem 5.3.1(1); assembly from existing finite-type power-lifting criterion."
+   }
+  },
+  {
+   "text": "For a field extension $K/k$, tensor the exact sequence $0\\to A\\to E\\xrightarrow{\\rho-(-\\otimes1)}E\\otimes_k k[G]$ with the flat $k$-module $K$. Flat tensor exactness identifies its first term with the kernel of the extended difference map. Under the canonical tensor associativity identifications that map is precisely the coaction difference for $G_K$ on $K\\otimes_kE$. Thus the canonical map $K\\otimes_kA\\to(K\\otimes_kE)^{G_K}$ is bijective; it respects multiplication since both sides are subalgebras of $K\\otimes_kE$. Its inclusion into $K\\otimes_kE$ is the tensor of $A\\hookrightarrow E$, so the associated affine quotient is $p_K$. The matrix central-cover description identifies $G_K$ with $\\operatorname{PGL}_{r,K}$. Consequently Step 1 applies over every such $K$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-projective-matrix-central-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Flat tensor preserves kernels: Tag 00HD (lemma-flat), (2) implies (1), with Tag 00HB (definition-flat); explicit coaction equalizer. No exactness of the invariant functor is asserted."
+   }
+  },
+  {
+   "text": "For an invariant closed subset $D\\subseteq U$, the two inverse images under $a,\\operatorname{pr}_2:G\\times U\\rightrightarrows U$ agree. By the presentation-topology theorem it is $q^{-1}(C)$ for a closed subset $C\\subseteq|[U/G]|$, and $C$ has a reduced closed substack structure. Adequate-moduli closedness gives $p(D)=\\phi(C)$ closed. Moreover, for invariant closed $D_1,D_2$, their corresponding closed substacks satisfy $p(D_1)\\cap p(D_2)=p(D_1\\cap D_2)$: apply the intersection-of-images assertion and pull back the intersection to the atlas. This argument works over every extension field by Step 2 and Step 1.",
+   "uses": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-adequate-moduli-topological-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(2),(4); stacks-properties.tex Tags 04XJ, 04XL, 0509 for passage through the presentation."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed extension $\\Omega/k$ and $y\\in Y(\\Omega)$. Steps 1--2 give a nonempty fibre $F=U_y=\\operatorname{Spec}(E\\otimes_A\\Omega)$. The images of finitely many $k$-algebra generators of $E$ generate $E\\otimes_A\\Omega$ over $\\Omega$, so $F$ is affine finite type. The $\\Omega$-algebra map $\\Omega\\otimes_kA\\to\\Omega$ defining $y$ is surjective because it contains the constants; its kernel is maximal. Thus $y$ is closed in $Y_\\Omega$ and $F$ is closed in $U_\\Omega$, as required in Step 5. A nonempty closed subset of an affine scheme has a closed point by the quasi-compact Kolmogorov closed-point lemma, and the finite-type closed-point residue-field theorem makes that point $\\Omega$-rational. This applies also to every nonempty closed subset of $F$, with its reduced induced closed subscheme structure. The group $G_\\Omega$ is smooth connected affine of finite type by the matrix-cover theorem. Apply the smooth-group orbit lemma to its action on $F$: orbits are locally closed, their closures and boundaries are invariant, and all boundary orbits have strictly smaller dimension. First choose a rational point of $F$ by the closed-point argument, so rational-point orbits exist. In the closure of any such orbit choose a rational-point orbit of minimum dimension, possible since the set contains the original orbit and its dimensions are nonnegative integers. Its boundary is closed in its closure because the orbit is locally closed; its closure lies in the original orbit closure by minimality of topological closure. If this boundary were nonempty, it would contain a rational point by the preceding closed-point argument, whose orbit has smaller dimension. Hence this minimum orbit is closed in $F$.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-projective-matrix-central-cover",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups-2022.pdf",
+    "place": "Propositions 7.4--7.6 (orbit boundaries), combined with the closed-point argument (Stacks Tags 005E, 01TB, 01J3). Local Milne PDF WANTED; assembly argument by worker."
+   }
+  },
+  {
+   "text": "Let $O_x,O_z$ be closed orbits in $F$ of $x,z\\in F(\\Omega)$. By the orbit lemma their closures, i.e. themselves, are invariant, so they are invariant closed subsets of $U_\\Omega$ since $F=p_\\Omega^{-1}(y)$ is closed. Suppose $O_x\\cap O_z\\neq\\emptyset$. This closed subset of the affine scheme $F$ contains a closed point $w$ by the Kolmogorov closed-point lemma, and $w$ is $\\Omega$-rational by the closed-point residue-field theorem. The fibre of the orbit map $G_\\Omega\\to O_x$, $g\\mapsto gx$, over $w$ is a nonempty closed subscheme of the affine finite-type scheme $G_\\Omega$ (the orbit lemma gives surjectivity), so by the same two lemmas it has a rational point $g$ with $gx=w$; likewise $hz=w$ with $h\\in G(\\Omega)$. Right translations being automorphisms of $G_\\Omega$, $O_x=O_w=O_z$. Hence distinct closed orbits are disjoint, whereas Step 3 over $\\Omega$ makes the intersection of their images equal to the image of their intersection; both images are $\\{y\\}$ and the image of $\\emptyset$ is empty, a contradiction. Thus $F$ has a unique closed orbit. Step 4 applied inside each orbit closure gives an orbit closed in $F$ inside it, which is therefore this unique one. Hence every orbit closure contains it.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(4); uniqueness argument using Steps 3--4, with disjointness of distinct orbits from the closed-point lemmas."
+   }
+  },
+  {
+   "text": "Finally give $D$ its reduced induced closed subscheme structure $D_{\\mathrm{red}}\\hookrightarrow U$. Its pullback to $U_K$ has underlying subset exactly $D_K$, irrespective of whether that pullback is reduced. Apply the set-theoretic image/base-change assertion for 2-fibre products to the scheme map $D_{\\mathrm{red}}\\to Y$ and $Y_K\\to Y$: the image of $D_{\\mathrm{red}}\\times_YY_K=D_{\\mathrm{red}}\\times_kK$ is precisely the inverse image of $p(D)$ in $Y_K$. By Step 2 its map to $Y_K$ is the restriction of $p_K$, proving the last assertion. Every preceding input permits nonreduced schemes and nonreduced stabilizers; none requires an inverse to the characteristic or to $r$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian), specialized to schemes; Tag 01J3 (schemes.tex, lemma-reduced-closed-subscheme)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-pgl-geometric-reductivity",
+  "lem-sfb-affine-action-stack-presentation",
+  "lem-sfb-power-lifting-adequate-affine-quotient",
+  "lem-sfb-adequate-moduli-topological-images",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sfb-projective-matrix-central-cover",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-smooth-group-orbit-geometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Assembly of Alper Theorem 5.3.1 with the existing power-lifting and orbit-geometry nodes; flat equalizer and minimal-dimension arguments written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a rational PGL group scheme action on an affine finite type algebra the invariant quotient is surjective maps invariant closed sets to closed sets and each geometric fiber has a unique closed orbit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [i\", \"doc\": \"Let $ A \\\\subseteq B $ be commutative rings with $ B $ equipped with a profinite group $ G $-action preserving the $ A $-algebra structure. For a prime ideal $ Q \\\\subseteq B $ lying over $ P = Q \\\\cap A\"}\n  {\"name\": \"IsFractionRing.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] (K : Type u_4) (L : Type u\", \"doc\": \"The stabilizer homomorphism from the stabilizer subgroup of the ideal $ Q $ in $ G $ to the Galois group $ \\\\text{Gal}(L/K) $ is surjective, meaning every element of the Galois group is the image of so\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] [Algebra.IsInvariant A B G\", \"doc\": \"The group homomorphism from the stabilizer subgroup $\\\\text{Stab}_G(P)$ of an ideal $P \\\\subseteq B$ to the group of $A/p$-algebra automorphisms of the quotient ring $B/P$ is surjective. This means ever\"}\n  {\"name\": \"FixedPoints.toAlgAut_surjective\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G],\\n  Function.Surjective ⇑(MulSemiringAction.toAlgAut G (↥(FixedPoints.subfield G F)) F)\", \"doc\": \"For any finite group $ G $ acting on a field $ F $, the canonical group homomorphism from $ G $ to the group of $ R $-algebra automorphisms of $ F $ induced by the multiplicative semiring action is su\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [C\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a compact topological group acting continuously on $F(X)$ for all $X \\\\i\"}\n  {\"name\": \"surjective_cosetToCuspOrbit\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ (𝒢 : Subgroup (GL (Fin 2) ℝ)) [inst : 𝒢.IsArithmetic], Function.Surjective (cosetToCuspOrbit 𝒢)\", \"doc\": \"For any arithmetic subgroup $\\\\mathcal{G} \\\\leq \\\\mathrm{GL}(2, \\\\mathbb{R})$, the map from cosets of $\\\\mathcal{G}$ in $\\\\mathrm{SL}(2, \\\\mathbb{Z})$ to cusp orbits is surjective. This means every cusp orbi\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a group acting on $F$. For any finite family of Galois objects $\\\\{X_i\\\\}_{i \\\\in I\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  (Q : Ideal B) {N N' : OpenNormalSubgroup G} (e : N ≤ N'),\\n  ∀ x ∈ MulAc\", \"doc\": \"If an element $ x $ in the quotient group $ G/N $ stabilizes the ideal $ Q $ under the action of $ G/N $ on the fixed points subalgebra $ B^N $, then its image under the quotient map to $ G/N' $ stabi\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants, set orbit quotients and topological separation quotients do not give the rational PGL invariant quotient in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically reductive affine invariant quotient has orbit closure equivalence fibers and invariant closed images commute with field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsInvariant.orbit_eq_primesOver\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ (A : Type u_1) (B : Type u_2) (G : Type u_3) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [Algebra.IsInvariant A B G] [Finite G] [SMulCommClass G A B]\\n  (P : Ideal A) (Q : Ideal B) [hP : Q.LiesOver P] [hQ : Q.IsPrime], MulAc\", \"doc\": \"For a finite group $G$ acting on a ring $B$ with commuting scalar multiplications over a base ring $A$, if $Q$ is a prime ideal in $B$ lying over a prime ideal $P$ in $A$, then the orbit of $Q$ under \"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"{A : Type u_1} →\\n  {B : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          {G : Type u_3} →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G B] →\\n                [SMulCommClass G A B] →\\n                  [inst_6 \", \"doc\": \"A functor from the category of open normal subgroups of a topological group $ G $ to types, where for each open normal subgroup $ N $, it constructs a type involving the fixed subalgebra of $ B $ unde\"}\n  {\"name\": \"SeparationQuotient.image_mk_closure\", \"module\": \"Mathlib/Topology/Inseparable\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},\\n  SeparationQuotient.mk '' closure s = closure (SeparationQuotient.mk '' s)\", \"doc\": \"For any set $ s $ in a topological space $ X $, the image of the closure of $ s $ under the canonical quotient map $ \\\\pi: X \\\\to X/\\\\sim $ to the separation quotient is equal to the closure of the image\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  (Q : Ideal B) {N N' : OpenNormalSubgroup G} (e : N ≤ N'),\\n  ∀ x ∈ MulAc\", \"doc\": \"If an element $ x $ in the quotient group $ G/N $ stabilizes the ideal $ Q $ under the action of $ G/N $ on the fixed points subalgebra $ B^N $, then its image under the quotient map to $ G/N' $ stabi\"}\n  {\"name\": \"Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [inst_10 : \", \"doc\": \"In an algebra $ A $ over $ B $ invariant under a group $ G $, if two prime ideals $ P $ and $ Q $ in $ B $ have equal contractions to $ A $ (i.e., $ P.\\\\text{under}(A) = Q.\\\\text{under}(A) $), then ther\"}\n  {\"name\": \"MulAction.isClosedMap_quotient\", \"module\": \"Mathlib/Topology/Algebra/Group/Pointwise\", \"type\": \"∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] [inst_2 : Group α]\\n  [inst_3 : MulAction α β] [ContinuousInv α] [ContinuousSMul α β] [CompactSpace α], IsClosedMap Quotient.mk'\", \"doc\": \"For a compact group $\\\\alpha$ acting on a topological space $\\\\beta$, the quotient map $\\\\beta \\\\to \\\\beta/\\\\sim$ (where $\\\\sim$ is the orbit equivalence relation) is a closed map. This means that the image \"}\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α] (c : M) (x : α), c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants, set orbit quotients and topological separation quotients do not give the rational PGL invariant quotient in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"invariant\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants, set orbit quotients and topological separation quotients do not give the rational PGL invariant quotient in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*reduct|adequateModuli|invariant.*quotient|closed.*orbit",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/Dynamics/Minimal.lean\", \"line\": \"106\", \"text\": \"  exacts [isClosed_closure, fun _ ↦ smul_closure_orbit_subset _ _,\"}\n  {\"file\": \"Mathlib/ModelTheory/Fraisse.lean\", \"line\": \"262\", \"text\": \"    refine ⟨age.nonempty M, age.is_equiv_invariant L M, age.countable_quotient M, fun N hN => hN.1,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Pointwise.lean\", \"line\": \"82\", \"text\": \"    IsClosedMap (Quotient.mk' : β → Quotient (orbitRel α β)) := by\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"246\", \"text\": \"abbrev quotientToInvariants : Rep k (G ⧸ S) := Rep.of (A.ρ.quotientToInvariants S)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"19\", \"text\": \"of the form `ρ g x - x` for `x : V`, `g : G`. Then the coinvariants of `(V, ρ)` are the quotient of\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"180\", \"text\": \"/-- The morphism from `ρ` to `toCoinvariants ρ S` induced by the quotient map. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"322\", \"text\": \"abbrev quotientToCoinvariants : Rep k (G ⧸ S) := Rep.ofQuotient (Rep.toCoinvariants A S) S\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"19\", \"text\": \"* `MeasureTheory.QuotientMeasureEqMeasurePreimage.smulInvariantMeasure_quotient`: If `μ` satisfies\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"26\", \"text\": \"* `MeasureTheory.QuotientMeasureEqMeasurePreimage.mulInvariantMeasure_quotient`: If `μ` satisfies\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"29\", \"text\": \"* `MeasureTheory.leftInvariantIsQuotientMeasureEqMeasurePreimage`: If `μ` is left-invariant, and\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"32\", \"text\": \"  `MeasureTheory.QuotientMeasureEqMeasurePreimage.mulInvariantMeasure_quotient`.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"40\", \"text\": \"  `MeasureTheory.QuotientMeasureEqMeasurePreimage.mulInvariantMeasure_quotient`.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntervalIntegral/Periodic.lean\", \"line\": \"84\", \"text\": \"  apply MeasureTheory.leftInvariantIsAddQuotientMeasureEqMeasurePreimage\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants, set orbit quotients and topological separation quotients do not give the rational PGL invariant quotient in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine geometric invariant theory quotient unique closed orbit in each fiber in arbitrary characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.quotientToInvariantsFunctor_obj_V\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] (X : Rep k G),\\n  ((Rep.quotientToInvariantsFunctor k S).obj X).V =\\n    ModuleCat.of k ↥(Representation.invariants (MonoidHom.comp X.ρ S.subtype))\", \"doc\": \"For a commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $X$ of $G$, the underlying module of the quotient-to-invariants functor applied to $X$ is t\"}\n  {\"name\": \"AddAction.orbitRel.Quotient.orbit_injective\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G α],\\n  Function.Injective AddAction.orbitRel.Quotient.orbit\", \"doc\": \"The orbit map from the quotient space $\\\\alpha/G$ to the set of orbits in $\\\\alpha$ is injective. That is, if two equivalence classes in $\\\\alpha/G$ have the same orbit under the action of the additive g\"}\n  {\"name\": \"AddAction.ofQuotientStabilizer_mem_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β) (g : α ⧸ AddAction.stabilizer α x),\\n  AddAction.ofQuotientStabilizer α x g ∈ AddAction.orbit α x\", \"doc\": \"For any additive group $\\\\alpha$ acting on a type $\\\\beta$, and for any element $x \\\\in \\\\beta$, applying the induced action of any coset in the quotient group $\\\\alpha / \\\\text{Stab}(x)$ (where $\\\\text{Stab\"}\n  {\"name\": \"AddAction.orbitRel.Quotient.mem_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G α] {a : α}\\n  {x : AddAction.orbitRel.Quotient G α}, a ∈ x.orbit ↔ Quotient.mk'' a = x\", \"doc\": \"For an additive group $G$ acting on a type $\\\\alpha$, an element $a \\\\in \\\\alpha$ belongs to the orbit corresponding to the equivalence class $x$ in the quotient space $\\\\alpha/G$ if and only if the equiv\"}\n  {\"name\": \"AddAction.orbitRel.Quotient.orbit_inj\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G α] {x y : AddAction.orbitRel.Quotient G α},\\n  x.orbit = y.orbit ↔ x = y\", \"doc\": \"For an additive group $G$ acting on a type $\\\\alpha$, the orbit map from the quotient space $\\\\alpha/G$ to the set of orbits is injective. Specifically, two elements $x, y \\\\in \\\\alpha/G$ satisfy $x.\\\\text\"}\n  {\"name\": \"AddAction.orbitRel.Quotient.orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"{G : Type u_1} →\\n  {α : Type u_2} → [inst : AddGroup G] → [inst_1 : AddAction G α] → AddAction.orbitRel.Quotient G α → Set α\", \"doc\": \"Given an additive group $G$ acting on a type $\\\\alpha$, this function maps each element of the quotient space $\\\\alpha/G$ (formed by identifying elements in the same orbit under $G$) to the correspondin\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"MulAction.orbitRel.Quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Type _\", \"doc\": \"The quotient of the set $ \\\\alpha $ by the orbit equivalence relation induced by the group action, resulting in the set of orbits under the action.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants, set orbit quotients and topological separation quotients do not give the rational PGL invariant quotient in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine quotient by the reductive group scheme PGL has finitely generated invariants and a unique closed orbit in every geometric fiber",
+   "results": "Read actual hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.AffineSpace.not_isIntegralHom, Rep.instProjective, FDRep.instProjectiveOfNeZeroCastCard, Rep.quotientToInvariants, CategoryTheory.PreGaloisCategory.has_decomp_quotients, Representation.quotientToInvariants, Representation.Coinvariants.mk_surjective; 8 hits; digest c65071a2df0439c9",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants and topological orbit quotients do not give rational PGL scheme quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational algebraic group invariant ring flat field extension equalizer and closed invariant subsets of the categorical quotient",
+   "results": "Read actual hits: instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient, Ideal.Quotient.exists_algHom_fixedPoint_quotient_under, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, Algebra.IsInvariant.isInvariant, IntermediateField.fixingSubgroup_isClosed, Algebra.IsInvariant.isIntegral_of_profinite, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite; 8 hits; digest a7c0ed6abbf94588",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants and topological orbit quotients do not give rational PGL scheme quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"invariant\"",
+   "results": "Read actual hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants and topological orbit quotients do not give rational PGL scheme quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*reduct|adequateModuli|invariant.*quotient|closed.*orbit",
+   "results": "Read actual hits: Mathlib/Dynamics/Minimal.lean, Mathlib/Topology/Algebra/Group/Pointwise.lean, Mathlib/ModelTheory/Fraisse.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/MeasureTheory/Measure/Haar/Quotient.lean; 13 hits; digest be2f93d455a59886",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants and topological orbit quotients do not give rational PGL scheme quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "PGL rational invariant algebra affine quotient unique closed orbit",
+   "results": "Read actual hits: Algebra.IsInvariant.mk, Rep.quotientToInvariantsFunctor_obj_V, Algebra.IsInvariant.isIntegral, Algebra.IsInvariant.rec, Algebra.IsInvariant.isInvariant, Algebra.isInvariant_iff, instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient, Algebra.IsInvariant.casesOn; 8 hits; digest 86d493109994448a",
+   "date": "2026-10-22",
+   "verdict": "No match: finite or profinite abstract-group invariants and topological orbit quotients do not give rational PGL scheme quotients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-plucker-pgl-linearization",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem.",
+   "via": [
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-pgl-quotient-orbit-topology",
+  "worker": "stage1",
+  "summary": "Repair retry after live-DAG promotion refusal: re-read all current dependency statements, verify all 17 saved quotes, and rebuild on current server sheaf-dag through deliver.py. Retain the six-step adequate-moduli and flat-equalizer proof and two statement-only helpers; clarify finite type of the geometric fibre, existence of a rational starting orbit, and closedness of the boundary in the minimum-dimension argument. No statement or dependency changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic algebraic/topological tool used with its stated hypotheses; the unit supplies no replacement for this auxiliary invariant-quotient argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-a74299f00",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-a74299f00 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement, and checked the four Stacks lemmas in stacks-properties.tex: 04XH (l.802), 04XJ (l.885), 04XL (l.938) and 0509 (l.2240). The new node lem-sfb-smooth-presentation-closed-subsets is exactly those four lemmas; the closed saturated subset correspondence follows from the quotient topology (04XL) together with the R-classes (04XJ). It is not a duplicate: lem-sfb-stack-point-topology gives only the topology clause, and stack-topology-open-substacks covers only DM stacks and open substacks. The new node lem-sfb-adequate-moduli-topological-images is Alper 1005.2398 Thm 5.3.1(1),(2),(4), which has no Noetherian hypothesis; there is no local PDF. It only partly overlaps adequate-geometric-fibres-submersion (surjectivity, but no closedness or intersection clause) and does not restate the item. Steps 1-4 and 6 are correct. Step 1: finite-type power lifting matches the adequate-affine criterion exactly. Step 2: flat equalizer with the 0-> form of flat-tensor-exact; G_K=PGL_{r,K} from matrix-cover. Step 3: R=GxU, closedness from universal closedness, intersections from 5.3.1(4) with 04XH. Step 4: the expanded minimum-dimension argument is valid; y is closed, F is affine of finite type, and the orbit lemma needs no reducedness. Step 6: D_red and 04XH. Edge cases checked: empty U, trivial action, characteristic dividing r, nonreduced stabilizers, inseparable K. One C2 fault: Step 5 is again marked elementary with no uses, yet 'distinct closed orbits are disjoint' needs a rational point of the intersection and a rational g in the faithfully flat orbit-map fibre. Reviews c57a and a492 both fixed this, and the fix is lost in this re-push. FIX: Step 5 replaced by the earlier fixed text, citing smooth-group-orbit-geometry, the Kolmogorov closed-point lemma and closed-point-residue-field-base, elementary false; proof_deps unchanged and equal to the union of uses. Statements unchanged. Batch-5 flag: pgl-geometric-reductivity -> noetherian-subring-finite-type-submersion -> lem-trf-flattening-by-admissible-blowup. That node is Raynaud-Gruson flattening (Stacks 081R), general commutative algebra that neither the trace-formula nor the Poincare-duality assumption gives and that is not a step of their proofs; it serves Alper 6.2.1 finite generation here, so the citation is accepted. Accepted tool_uses: the reduced-induced closed subscheme leaf, the pbc flat/flat-tensor/closed-point leaves and the sc Kolmogorov leaf. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePGLQuotientOrbitTopology",
+  "declaration": "AlgebraicGeometry.SchemeAction.affine_pgl_quotient_orbit_topology",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.affineInvariantAlgebra",
+   "AlgebraicGeometry.SchemeAction.extendedAffineInvariants",
+   "AlgebraicGeometry.SchemeAction.affineGeometricOrbit",
+   "AlgebraicGeometry.SchemeAction.affine_pgl_quotient_orbit_topology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePGLQuotientOrbitTopology.lean",
+  "statement": "theorem affine_pgl_quotient_orbit_topology (r : ℕ) (hr : 2 ≤ r) (H : Grp (Over (Spec (.of k)))) (π : GeneralLinearGroup (LinearGroupSchemes.Index.{u} r) k ⟶ H.X) (j : StandardGroupSchemes.roots k r ⟶ LinearGroupSchemes.specialLinear k r) (_hP : ProjectiveMatrixCentralCover.Presentation k r hr H π j) [ModObj H.X (affineActionScheme k E)] [Algebra.FiniteType k E] : Algebra.FiniteType k (affineInvariants k E H.X) ∧ Surjective (affineInvariantProjection k E H.X).left ∧ (∀ D : Set (affineActionScheme k E).left, IsClosed D → (ModObj.smul (M := H.X) (X := affineActionScheme k E)).left ⁻¹' D = (snd H.X (affineActionScheme k E)).left ⁻¹' D → IsClosed ((affineInvariantProjection k E H.X).left '' D)) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] (y : affineActionScheme k Ω ⟶ affineInvariantSpectrum k E H.X), ∃ x : affineActionScheme k Ω ⟶ affineActionScheme k E, x ≫ affineInvariantProjection k E H.X = y ∧ IsClosed (affineGeometricOrbit k E H.X Ω x) ∧ ∀ z : affineActionScheme k Ω ⟶ affineActionScheme k E, z ≫ affineInvariantProjection k E H.X = y → affineGeometricOrbit k E H.X Ω x ⊆ closure (affineGeometricOrbit k E H.X Ω z) ∧ (IsClosed (affineGeometricOrbit k E H.X Ω z) → affineGeometricOrbit k E H.X Ω z = affineGeometricOrbit k E H.X Ω x)) ∧ (∀ (K : Type u) [Field K] [Algebra k K], (∃ e : K ⊗[k] (affineInvariants k E H.X) ≃+* extendedAffineInvariants k E H.X K, ∀ (c : K) (a : affineInvariants k E H.X), (e (c ⊗ₜ[k] a) : Γ(((Over.pullback (ProjectiveMatrixCentralCover.extension k K)).obj (affineActionScheme k E)).left, ⊤)) = (pullback.snd (affineActionScheme k E).hom (ProjectiveMatrixCentralCover.extension k K)).appTop.hom ((Scheme.ΓSpecIso (.of K)).inv.hom c) * (pullback.fst (affineActionScheme k E).hom (ProjectiveMatrixCentralCover.extension k K)).appTop.hom ((Scheme.ΓSpecIso (.of E)).inv.hom a)) ∧ (∃ e : ((Over.pullback (ProjectiveMatrixCentralCover.extension k K)).obj (affineInvariantSpectrum k E H.X)).left ≅ Spec (.of (extendedAffineInvariants k E H.X K)), ((Over.pullback (ProjectiveMatrixCentralCover.extension k K)).map (affineInvariantProjection k E H.X)).left ≫ e.hom = ((Over.pullback (ProjectiveMatrixCentralCover.extension k K)).obj (affineActionScheme k E)).left.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (extendedAffineInvariants k E H.X K).subtype)) ∧ ∀ D : Set (affineActionScheme k E).left, IsClosed D → (ModObj.smul (M := H.X) (X := affineActionScheme k E)).left ⁻¹' D = (snd H.X (affineActionScheme k E)).left ⁻¹' D → ((Over.pullback (ProjectiveMatrixCentralCover.extension k K)).map (affineInvariantProjection k E H.X)).left '' ((pullback.fst (affineActionScheme k E).hom (ProjectiveMatrixCentralCover.extension k K)) ⁻¹' D) = (pullback.fst (affineInvariantSpectrum k E H.X).hom (ProjectiveMatrixCentralCover.extension k K)) ⁻¹' ((affineInvariantProjection k E H.X).left '' D))",
+  "branch": "sheaf-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded matrix central-cover Presentation and the existing scheme-action coaction equalizer and quotient map. Helpers supply the constant algebra structure, the actual base-changed equalizer, and the full orbit-scheme image. No scheme or map is chosen from bare existence. Statement dependencies cite the owning definition nodes def-sfb-affine-action-invariant-spectrum for the invariant ring, constants, spectrum and projection, and def-sfb-affine-action-quotient-stack for affineActionScheme. The presentation theorem remains a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f757b441",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Re-delivery of 79239bbc (RETURN H2). Lean module byte-identical (sha256 7a95d1fd…adfcc). Item node now cites the owning def nodes def-sfb-affine-action-invariant-spectrum (affineInvariants/Constants/Spectrum/Projection) and def-sfb-affine-action-quotient-stack (affineActionScheme) instead of theorem lem-sfb-affine-action-stack-presentation, which stays in proof_deps; only lean.note wording changed otherwise. Dep records identical to live (no revert); module not live yet (not a no-op rebind); lean.statement verbatim in file. Substance re-checked: Presentation-pinned PGL, ModObj action, eqLocus invariants, invariant closed D via smul/snd inverse images, full orbit-scheme images with unique closed orbit and closure clauses, pure-tensor-pinned K⊗E^G iso, Y_K normalization, set equality; edge cases E=0, trivial action, char | r, inseparable K, D=∅; one universe; sorry only; six-step docstring. Not compiled (no file changed)."
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-trf-finite-affine-refinement-existence",
+ "kind": "statement",
+ "title": "Existence of finite affine pair, overlap and subordinate triple refinements",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism]. There exist a finite affine refinement shape $K$ and affine opens $(C_d)_{d\\in\\operatorname{Fin}(K.\\mathrm{size})}$ forming a valid collection [def-trf-finite-affine-refinement-collection]: the main charts cover $X$, the specified pair charts cover pair intersections of main charts, the overlap charts cover intersections of pair charts belonging to the same pair cover, and the triple charts cover triple intersections of main charts and are each contained in a chart of each of the three pair covers. The additional incidence set may be empty. Empty schemes and empty covers are allowed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, lemma-descend-modules-finite-presentation, first proof, finite Zariski gluing preparation; Schemes Tags 01IT and 01KO"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-trf-finite-affine-refinement-collection"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover of X. For each pair of its members, quasi-separatedness makes the intersection quasi-compact. Choose a finite affine cover of each such intersection.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "pqf-lem-qs-intersection-qc",
+    "lem-pqf-finite-affine-cover-qc-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every two affine pair charts choose a finite affine cover of their intersection, using quasi-separatedness again. This supplies all the required pair-chart overlap covers, including pairs belonging to any common main pair cover.",
+   "uses": [
+    "pqf-lem-qs-intersection-qc",
+    "lem-pqf-finite-affine-cover-qc-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For three main charts a,b,c and choices r,s,t in their ab, ac and bc pair covers, cover the intersection of the three pair charts by finitely many affines. The union of these covers over r,s,t covers the main triple intersection: a point in the triple can be placed in a member of each pair cover. Each new chart is contained in the three pair charts indexing it. Threefold intersections are quasi-compact by iterating the quasi-separated intersection criterion.",
+   "uses": [
+    "pqf-lem-qs-intersection-qc",
+    "lem-pqf-finite-affine-cover-qc-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the disjoint sum of the main, pair, overlap and triple label types. These types are finite since finite dependent sums are finite. Identify the sum with Fin n and transport the chosen opens. Define the main, pair, overlap and triple finsets as images of their respective label types. The stored pair labels of each triple chart define its subordinate triple. Use an empty additional incidence set. Finite supremum identities give the covering fields; containment in the three pair charts follows from membership in the chosen affine cover of their intersection. This constructs every field of Valid. The same construction applies when any indexing type is empty.",
+   "uses": [
+    "def-trf-finite-affine-refinement-collection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof; explicit finite cover and label construction for Step 2 of lem-trf-fp-affine-limit-chart-models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated scheme has a finite affine open cover with finite pair overlap covers and subordinate triple intersection covers",
+   "results": "Scheme.affineCover; isCompact_iff_finite_and_eq_biUnion_affineOpens; Scheme.quasiSeparatedSpace_of_isOpenCover; QuasiCompactCover.of_finite. These give the individual finite covers, not the full labelled refinement shape.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a finite collection of affine charts, pair intersection covers, overlap covers and subordinate triple covers on a quasi compact quasi separated scheme",
+   "results": "Scheme.affineOpenCover; Scheme.exists_isOpenCover_and_isAffine; Scheme.OpenCover.affineRefinement; ordinary affine covers only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(refinement|triple)|refinement.*(exist|finite)",
+   "results": "msearch grep returned 9 hits: Topology/ShrinkingLemma, PartitionOfUnity, Compactness/Paracompact, LocallyFinsupp, and Sites/Hypercover/Homotopy. None packages finite affine pair/overlap/triple refinements. Additional local Mathlib affine-cover searches found the individual finite affine subcover lemmas; blueprint_refs search found no blueprint node with this statement; the DAG has the shape definition and larger limit-chart-model theorem but no existence-only lemma.",
+   "date": "2026-10-27",
+   "verdict": "new packaging lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitChartModels",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Finite affine refinement existence, Step 2 in the affine preparation for Limits Tag 01ZR.",
+   "via": [
+    "lem-trf-fp-affine-limit-chart-models",
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-trf-invertible-affine-limit-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineRefinementExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineRefinementExistence.lean",
+  "declaration": "AlgebraicGeometry.exists_finiteAffineRefinementCollection",
+  "statement": "theorem exists_finiteAffineRefinementCollection (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X] :\n    ∃ (K : FiniteAffineRefinementShape) (C : Fin K.size → X.Opens), K.Valid C",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "pqf-lem-qs-intersection-qc",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "def-trf-finite-affine-refinement-collection"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T094407-L-222159",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T094407-L-222159",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

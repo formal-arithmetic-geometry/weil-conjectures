@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-finite-field-geometric-maximal-torus",
+ "kind": "statement",
+ "title": "Geometrically maximal tori over finite fields",
+ "statement": "Let $k$ be a field [def-weil-field], and fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All groups below are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group which becomes $\\mathbf G_m^r$ over $\\bar k$, for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Unipotent means admitting, for some $n\\geq1$, a closed immersion [def-weil-closed-immersion] into the upper unitriangular group $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]: its $A$-points are upper triangular matrices with all diagonal entries $1$, for every commutative $k$-algebra $A$. Assume $k$ is finite and let $G$ be smooth and connected. Its scalar extension $G_{\\bar k}$ is smooth, connected, affine and of finite type over $\\bar k$. There is a torus $T\\subseteq G$ defined over $k$ such that $T_{\\bar k}$ is maximal among torus subgroups of $G_{\\bar k}$: every torus subgroup $S\\subseteq G_{\\bar k}$ containing $T_{\\bar k}$ is equal to $T_{\\bar k}$. The rank-zero torus is allowed. There is no reductivity assumption on $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.99, printed pp.383–384, in the finite-field setting of section 17.k: existence of a Borel pair with geometrically maximal torus. This is exactly its use in the final paragraph of Proposition 17.81, p.379. Geometric connectedness uses Proposition 1.34, pp.16–17; smoothness is stable under field extension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-weil-finite-field-q-elements",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\bar k$ and $H=G_F$. The field-extension clause of [lem-sfb-solvable-normal-subgroup-products] says that smooth connected group schemes remain smooth and connected under every field extension, so it applies to $G$ without any solvability hypothesis. Affineness of $H$ follows from [lem-weil-pbc-affine-morphism-permanence]. Writing $G=\\operatorname{Spec}C$ with $C$ a finitely generated $k$-algebra, its base change is $\\operatorname{Spec}(C\\otimes_k F)$; the same finite list of algebra generators generates over $F$. Thus $H$ also has finite type. This proves the scalar-extension clause of the item.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34, pp.16–17; base-change preparation for Proposition 17.99, pp.383–384."
+   }
+  },
+  {
+   "text": "The rank-zero torus $1\\subseteq H$ is a torus. By the torus-containment clause of [lem-sfb-general-borel-flag-variety], choose a Borel subgroup $B\\subseteq H$ containing it. By [lem-sfb-borel-maximal-torus-conjugacy], $B$ contains a torus $T_0$ maximal in $H$. Let $\\sigma$ act semilinearly through $a\\mapsto a^q$ on $F$, as in [def-weil-frobenius-substitution], where $q=|k|$. Applying this field automorphism and its inverse to closed subgroup inclusions and split-torus isomorphisms shows that $\\sigma(T_0)$ is again a maximal torus. The conjugacy clause of [lem-sfb-borel-maximal-torus-conjugacy] gives $h\\in G(F)$ such that $\\sigma(T_0)=hT_0h^{-1}$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "def-weil-frobenius-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.99, first proof paragraph, printed p.384; direct maximal-torus conjugacy version of its Frobenius argument, using Theorem 17.10."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-lang-finite-field-group-surjectivity] to the given smooth connected affine finite-type group $G/k$ and to $h^{-1}$. Choose $g\\in G(F)$ with $g^{-1}\\sigma(g)=h^{-1}$, equivalently $\\sigma(g)h=g$. Set $T_1=gT_0g^{-1}$. Conjugation is a group-scheme automorphism, so $T_1$ is a maximal torus of $H$. Moreover, as equalities of closed subgroup schemes, $$\\sigma(T_1)=\\sigma(g)\\sigma(T_0)\\sigma(g)^{-1}=\\sigma(g)hT_0h^{-1}\\sigma(g)^{-1}=gT_0g^{-1}=T_1.$$ This calculation is scheme-theoretic because the preceding conjugacy was an equality of subgroup schemes and conjugation commutes with scalar extension.",
+   "uses": [
+    "lem-sfb-lang-finite-field-group-surjectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.99, first proof paragraph, printed p.384; direct maximal-torus conjugacy version of its Frobenius argument, using Theorem 17.10."
+   }
+  },
+  {
+   "text": "We make the descent finite rather than assume an infinite-extension version of a finite descent theorem. Write $T_1=\\operatorname{Spec}((C\\otimes_k F)/I)$. The algebra $C\\otimes_k F$ is Noetherian by [lem-wf-affine-noetherian-components], so choose finitely many generators $f_1,\\ldots,f_s$ of $I$, using [def-weil-pbc-noetherian-ring]. Each $f_i$ is a finite sum of tensors. Adjoin their finitely many coefficients to $k$ inside $F$, obtaining a finite field extension $E/k$; it is finite since each coefficient is algebraic and $k$ is finite. Put $C_E=C\\otimes_k E$, $I_E=(f_1,\\ldots,f_s)\\subseteq C_E$, and $Z_E=\\operatorname{Spec}(C_E/I_E)$. Its extension to $F$ is exactly $T_1$. By [lem-weil-pbc-field-extension-base-change-faithfully-flat] and [lem-weil-pbc-faithfully-flat-ideal-contraction], $I_E$ is the contraction of $I$ to $C_E$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.65, printed p.581; explicit finite-coefficient reduction of the descent used in Proposition 17.99."
+   }
+  },
+  {
+   "text": "The closed subscheme $Z_E$ is a subgroup, not merely a model of its underlying scheme. Use the coordinate multiplication, counit and antipode of [lem-sfb-affine-group-coordinate-hopf]. For each generator $f_i$, its counit vanishes after extension to $F$, its antipode lies in $I$ after extension, and its comultiplication lies in $I\\otimes_F C_F+C_F\\otimes_F I$, because $T_1$ is a subgroup. Apply faithful flatness and ideal contraction from [lem-weil-pbc-field-extension-base-change-faithfully-flat, lem-weil-pbc-faithfully-flat-ideal-contraction] to $E\\to F$, $C_E\\to C_F$, and $(C_E\\otimes_E C_E)\\to(C_F\\otimes_F C_F)$. These three assertions hold already over $E$, with the comultiplication ideal $I_E\\otimes_E C_E+C_E\\otimes_E I_E$. The resulting maps on $C_E/I_E$ give the restricted group law, identity and inverse; their identities follow from those on $G_E$. Hence $Z_E\\subseteq G_E$ is a closed subgroup scheme.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64–A.65, printed pp.580–581; coordinate explanation of subgroup descent."
+   }
+  },
+  {
+   "text": "The finite field $E$ is preserved by $\\sigma$. From $\\sigma(I)=I$ and the contraction identity $I_E=I\\cap C_E$ we get $\\sigma(I_E)=I_E$, so $Z_E$ is preserved as a closed subgroup by this semilinear automorphism. By [lem-sfb-finite-field-galois-frobenius], $E/k$ is finite Galois and every automorphism is a power of $a\\mapsto a^q$. Thus $Z_E$ is preserved by the entire Galois group. Apply [lem-sfb-galois-closed-subscheme-descent] with $X=G$ to obtain a closed $k$-subgroup $T\\subseteq G$ whose $E$-extension is $Z_E$. Its $F$-extension is $T_1$, so it is a torus by the definition in the item. Finally if a torus $S\\subseteq G_F$ contains $T_F=T_1=gT_0g^{-1}$, then $g^{-1}Sg$ contains $T_0$, whence $g^{-1}Sg=T_0$ by maximality; therefore $S=T_F$. All arguments allow rank zero and use no reductivity.",
+   "uses": [
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-sfb-galois-closed-subscheme-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.99, first proof paragraph, p.384; Appendix A.65, p.581; finite-field Frobenius as in section 17.k, p.382."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "def-weil-frobenius-substitution",
+  "lem-sfb-lang-finite-field-group-surjectivity",
+  "lem-wf-affine-noetherian-components",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-sfb-galois-closed-subscheme-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.99, p.384: use maximal-torus conjugacy directly in place of first descending a Borel. The Frobenius conjugacy equation and descent are the same argument; finite-field reduction and Hopf-ideal descent are supplied explicitly from Appendix A.64–A.65."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over a finite field contains a torus whose algebraic closure base change is maximal",
+   "results": "{\"t\": \"2026-10-24T04:58:53Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group over a finite field contains a torus whose algebraic closure base change is maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.nonempty_algHom_extension\", \"Field.absoluteGaloisGroupAbelianization\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"Algebra.FormallySmooth.of_perfectField\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"krullTopology_discreteTopology_of_finiteDimensional\", \"FirstOrder.Field.finite_ACF_prime_not_realize_of_ACF_zero_realize\", \"Field.instGroupAbsoluteGaloisGroup\"], \"digest\": \"6fb5c953d14d9f69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field extensions, absolute Galois groups, Galois categories and Cartan subalgebras do not assert existence of a geometrically maximal torus in an algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a geometrically maximal torus defined over the finite base field in any connected smooth linear algebraic group",
+   "results": "{\"t\": \"2026-10-24T04:58:54Z\", \"tool\": \"leanfinder\", \"query\": \"There exists a geometrically maximal torus defined over the finite base field in any connected smooth linear algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isRegular_of_finrank_le_card\", \"IntermediateField.fixingSubgroup_isOpen\", \"krullTopology_discreteTopology_of_finiteDimensional\"], \"digest\": \"4f21c25ccf17b845\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field extensions, absolute Galois groups, Galois categories and Cartan subalgebras do not assert existence of a geometrically maximal torus in an algebraic group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-24T04:58:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field extensions, absolute Galois groups, Galois categories and Cartan subalgebras do not assert existence of a geometrically maximal torus in an algebraic group."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*torus|torus.*maximal|Borel.pair",
+   "results": "{\"t\": \"2026-10-24T04:58:50Z\", \"tool\": \"grep\", \"query\": \"maximal.*torus|torus.*maximal|Borel.pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field extensions, absolute Galois groups, Galois categories and Cartan subalgebras do not assert existence of a geometrically maximal torus in an algebraic group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected affine algebraic group over a finite field contains a torus whose algebraic closure base change is maximal",
+   "results": "{\"t\": \"2026-10-24T04:58:50Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected affine algebraic group over a finite field contains a torus whose algebraic closure base change is maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroup\", \"Field.instGroupAbsoluteGaloisGroup\", \"Algebra.FormallySmooth.of_perfectField\", \"AlgebraicClosure.maxIdeal.isMaximal\", \"AlgebraicClosure.isAlgClosed\", \"IsAlgClosed.instIsAlgClosure\", \"AlgebraicClosure\", \"FiniteField.Extension.frob\"], \"digest\": \"64e1b648283dab18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field extensions, absolute Galois groups, Galois categories and Cartan subalgebras do not assert existence of a geometrically maximal torus in an algebraic group."
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*torus|torus.*maximal|Borel.pair",
+   "results": "{\"t\": \"2026-10-24T07:01:54Z\", \"tool\": \"grep\", \"query\": \"maximal.*torus|torus.*maximal|Borel.pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras, Galois categories, maximal algebraic independence, and centers of special linear groups do not assert existence of a geometrically maximal torus over the base finite field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a maximal torus over a finite field in a connected algebraic group",
+   "results": "{\"t\": \"2026-10-24T07:01:55Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a maximal torus over a finite field in a connected algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"exists_maximal_algebraicIndependent\", \"IsGaloisGroup.finite\", \"Finset.exists_maximal\", \"FiniteField.instIsCyclicAlgEquivOfFinite\", \"Field.instTopologicalSpaceAbsoluteGaloisGroup\", \"instFiniteMaximalSpectrumOfIsFractionRing\"], \"digest\": \"65999108d42515c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras, Galois categories, maximal algebraic independence, and centers of special linear groups do not assert existence of a geometrically maximal torus over the base finite field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-24T07:01:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras, Galois categories, maximal algebraic independence, and centers of special linear groups do not assert existence of a geometrically maximal torus over the base finite field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth affine algebraic group over a finite field contains a torus maximal after algebraic closure",
+   "results": "{\"t\": \"2026-10-24T07:01:56Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth affine algebraic group over a finite field contains a torus maximal after algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Field.absoluteGaloisGroupAbelianization\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\"], \"digest\": \"a81b9edea4d2702d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras, Galois categories, maximal algebraic independence, and centers of special linear groups do not assert existence of a geometrically maximal torus over the base finite field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field linear algebraic group has a rational maximal torus even when it is not reductive",
+   "results": "{\"t\": \"2026-10-24T07:06:44Z\", \"tool\": \"leanfinder\", \"query\": \"A finite field linear algebraic group has a rational maximal torus even when it is not reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"littleWedderburn\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"Field.absoluteGaloisGroupAbelianization\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\"], \"digest\": \"30bf902b68f0d939\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan subalgebras, Galois categories, maximal algebraic independence, and centers of special linear groups do not assert existence of a geometrically maximal torus over the base finite field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.99, printed pp.383–384, in the finite-field setting of section 17.k: existence of a Borel pair with geometrically maximal torus. This is exactly its use in the final paragraph of Proposition 17.81, p.379. Geometric connectedness uses Proposition 1.34, pp.16–17; smoothness is stable under field extension.",
+   "via": [
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-field-geometric-maximal-torus",
+  "worker": "stage1",
+  "summary": "Read Milne 17.99, 17.97, 17.10, 17.12, 1.34 and Appendix A.64–A.65. Reuse existing geometric torus conjugacy and finite Galois closed-subgroup descent, isolate general Lang surjectivity, and give the scheme-theoretic Frobenius calculation plus explicit finite coefficient/Hopf-ideal descent. All cited statements opened and quoted; no statement change and no project attachment.",
+  "blueprint": "Inherited prerequisite of det-thm-sf-ctf-stability-direct-images (3); resolves the finite-field maximal-torus input of Milne 17.81 by the Frobenius argument of Proposition 17.99. The current latest direct-images proof was read; no unit/chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-9a1b210f3",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-9a1b210f3 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full against Milne, Algebraic Groups: §17.k p.382 (Frobenius acts on coordinates by a↦a^q), Thm 17.96 and Cor 17.97 p.383 (g·F(g^{-1}) is surjective; with g↦g^{-1} this is the new node's g^{-1}σ(g); the μ_n counterexample shows connectedness is needed and the node keeps it), and Prop 17.99 p.384. The item runs 17.99's Frobenius argument directly with maximal tori. Step 1 uses the separate field-extension clause of solvable-normal-subgroup-products plus the affine-morphism leaf; finite type is elementary. Step 2 takes a Borel through the trivial torus (general-borel-flag-variety), a maximal torus in it, and conjugacy of maximal tori by G(F) as subgroup schemes; σ(T_0) is maximal by transport. Step 3's sign checks: g^{-1}σ(g)=h^{-1} gives σ(g)h=g, so σ(T_1)=T_1. I checked that σ on points (x↦σ∘x) matches the ideal transform (1⊗σ)(I). Step 4: Noetherian generators lie in a finite E, and faithful flatness of C_E→C_F gives I_E=I∩C_E. Step 5: the Hopf-ideal conditions are reflected through C_E, C_E⊗C_E and E, which gives a closed subgroup in the sense of def-sc-group-scheme-subgroup. Step 6: σ(I_E)=I_E; finite-field-galois-frobenius gives Gal(E/k)=⟨Frob⟩; galois-closed-subscheme-descent then gives T⊆G with T_F=T_1; maximality is pulled back by conjugation. The new Lang node is statement-only (B1–B5 OK) and strictly smaller than the item. Small cases tested: G_m, G_a, trivial group, GL_n; it fails for disconnected μ_n, which is excluded. It duplicates none of lem-sc-lang-steinberg (vector-space F−1), the Artin–Schreier pbc nodes or steinberg-endomorphism-detection. No cycle: the item is not in its citations' 14k-node closure. Other-unit citations are Mathlib leaves or definitions, so no tool_uses are needed. Batch-5 finding: the three flagged citations are algebraic-group statements whose closures reach only generic lemmas (fppf covering base change, split-torus smoothness, fpqc descent of smoothness). These are not the trace formula, Poincaré duality or steps of their proofs, so I accepted them. Minor: the report mentions a citations.json that the commit does not contain. No fixes."
+ }
+}

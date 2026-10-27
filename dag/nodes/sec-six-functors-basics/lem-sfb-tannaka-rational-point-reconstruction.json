@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-tannaka-rational-point-reconstruction",
+ "kind": "statement",
+ "title": "Reconstructing a rational point from a tensor-compatible representation family",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], meaning every nonconstant polynomial in $K[T]$ has a root in $K$, and let $G$ be an affine $K$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. A finite-dimensional rational representation $(V,r_V)$ means an algebraic-group module [def-wf-algebraic-representations]: $V$ is a finite-dimensional $K$-vector space and $r_V:G\\to\\mathrm{GL}(V)$ is a homomorphism of $K$-group schemes, where $\\mathrm{GL}(V)(R)=\\operatorname{Aut}_R(R\\otimes_K V)$ for a commutative $K$-algebra $R$. The zero representation is permitted. A $G$-equivariant map $f:V\\to W$ is $K$-linear and satisfies $(1_R\\otimes f)r_V(x)=r_W(x)(1_R\\otimes f)$ for every such $R$ and $x\\in G(R)$. The tensor representation on $V\\otimes_K W$ has action $r_{V\\otimes W}(x)=r_V(x)\\otimes_R r_W(x)$ under the canonical scalar-extension identification; the tensor product is universal for bilinear maps. The unit representation $\\mathbf1$ is $K$ with trivial action. Suppose that for every finite-dimensional rational representation $(V,r_V)$ one is given an invertible $K$-linear map $\\lambda_V:V\\to V$. Assume $f\\lambda_V=\\lambda_Wf$ for every $G$-equivariant map $f:V\\to W$, $\\lambda_{V\\otimes W}=\\lambda_V\\otimes\\lambda_W$ for every pair of representations, and $\\lambda_{\\mathbf1}=\\mathrm{id}_K$. Then there exists a unique $h\\in G(K)$ such that $r_V(h)=\\lambda_V$ for every finite-dimensional rational representation $V$. Here $G(R)$ denotes the morphisms $\\operatorname{Spec}R\\to G$ over $K$ [def-weil-affine-spectrum]. All spaces and algebras lie in a fixed universe, and the family is indexed in a containing universe.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 9.2 and conditions (a), (b), (c), printed pp.164--165, specialized to R=K and invertible maps; algebraic groups are affine by the convention at the end of Chapter 8, printed p.162."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-wf-algebraic-representations",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=K[G]$. Use [lem-sfb-affine-group-coordinate-hopf] for its Hopf structure and [lem-sfb-rational-representation-comodule-dictionary] to express representations and equivariant maps as coactions and coaction-preserving linear maps. In particular, $A$ with coaction $\\Delta$ is the right regular representation: the coaction identities are precisely coassociativity and the counit identity. Trivial and tensor representations have the coactions in the dictionary. We allow infinite-dimensional rational modules temporarily; only finite-dimensional ones carry the originally supplied maps.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, regular representation; Remark 4.1, printed p.84."
+   }
+  },
+  {
+   "text": "For any rational module $M$ and $v\\in M$, choose a finite-dimensional rational submodule $W$ containing $v$, using [lem-sfb-comodule-finite-subrepresentation], and set $L_M(v)=\\lambda_W(v)$, viewed in $M$. This does not depend on $W$: for two choices $W,Z$, choose finite spanning sets of each and apply the same cited node to their union to obtain a finite-dimensional rational submodule $T$ containing both. The inclusions are equivariant by [lem-sfb-rational-representation-comodule-dictionary], so naturality of the given family makes both values equal to $\\lambda_T(v)$. Choosing one such $T$ for any two vectors also proves additivity and homogeneity. Thus $L_M$ is a linear map and equals the original $\\lambda_M$ when $M$ is finite-dimensional.",
+   "uses": [
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed pp.164--165, extension to unions of finite-dimensional subrepresentations."
+   }
+  },
+  {
+   "text": "The enlarged family is natural for every equivariant linear map $f:M\\to N$. Choose a finite-dimensional submodule $W$ containing $v$ and a finite-dimensional submodule $Z$ of $N$ containing the images of a finite spanning set of $W$, using [lem-sfb-comodule-finite-subrepresentation]. Then $f(W)\\subseteq Z$. The restricted map $W\\to Z$ commutes with coactions: its coaction equation becomes the original one after inclusion into $N\\otimes A$, and that inclusion is injective. To check injectivity directly, choose a basis $(a_i)$ of $A$ by [lem-weil-pbc-vector-space-free]. Expanding finite tensor sums in this basis and applying its coefficient maps [def-weil-pbc-free-module] shows that $\\sum z_i\\otimes a_i$ can vanish in $N\\otimes A$ only when every $z_i=0$; these coefficient maps exist by [def-weil-pbc-module-tensor-product]. The dictionary [lem-sfb-rational-representation-comodule-dictionary] makes the restriction equivariant. Original naturality gives $fL_M(v)=L_Nf(v)$ for every $v$.",
+   "uses": [
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, condition (c) for the enlarged family."
+   }
+  },
+  {
+   "text": "For arbitrary rational $M,N$, choose finite-dimensional rational submodules $W\\subset M$, $Z\\subset N$ containing $v,w$, respectively, by [lem-sfb-comodule-finite-subrepresentation]. The tensor module $W\\otimes Z$ is finite-dimensional: tensoring their finite spanning families gives a finite spanning family, by bilinearity and pure-tensor generation [def-weil-pbc-module-tensor-product]. Its canonical map to $M\\otimes N$ is equivariant by the tensor formula in [lem-sfb-rational-representation-comodule-dictionary]. Step 3 for this map and original tensor compatibility give $L_{M\\otimes N}(v\\otimes w)=L_M(v)\\otimes L_N(w)$. Since pure tensors span, $L_{M\\otimes N}=L_M\\otimes L_N$.",
+   "uses": [
+    "lem-sfb-comodule-finite-subrepresentation",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, condition (a) for the enlarged family."
+   }
+  },
+  {
+   "text": "If $T$ is any vector space with trivial action and $t\\in T$, the linear map $K\\to T$, $a\\mapsto at$, is equivariant by the trivial coaction formula [lem-sfb-rational-representation-comodule-dictionary]. Apply step 3 and $\\lambda_{\\mathbf1}=1_K$ to $1$ to obtain $L_T(t)=t$. Thus $L_T=1_T$, including when $T$ is infinite-dimensional or zero.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, agreement on the underlying trivial vector space."
+   }
+  },
+  {
+   "text": "Let $u=L_A$. Multiplication $m:A\\otimes A\\to A$ is equivariant for the diagonal tensor action: for $a,b\\in A$, the equality $\\Delta(ab)=\\Delta(a)\\Delta(b)$ says exactly $c_A m=(m\\otimes1)c_{A\\otimes A}$, by [lem-sfb-affine-group-coordinate-hopf] and the tensor formula [lem-sfb-rational-representation-comodule-dictionary]. The unit $K\\to A$ is equivariant since $\\Delta(1)=1\\otimes1$. Steps 3--5 therefore give $u(ab)=u(a)u(b)$ and $u(1)=1$. Linearity makes $u$ a $K$-algebra endomorphism.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, multiplication and unit on the regular representation."
+   }
+  },
+  {
+   "text": "Let $A_0$ denote the vector space $A$ with trivial action. The map $\\Delta:A\\to A_0\\otimes A$ is equivariant: the target coaction is $1_A\\otimes\\Delta$, so the required equation is $(\\Delta\\otimes1)\\Delta=(1\\otimes\\Delta)\\Delta$ from [lem-sfb-affine-group-coordinate-hopf], using [lem-sfb-rational-representation-comodule-dictionary]. Steps 3--5 give\n$$\\Delta u=(1_A\\otimes u)\\Delta.$$\nDefine $h^\\sharp=\\epsilon u:A\\to K$. Both factors are algebra maps (step 6 and the Hopf node), so [def-weil-affine-spectrum] gives a point $h:\\operatorname{Spec}K\\to G$ over $K$, namely $h\\in G(K)$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, equivariance of comultiplication; Lemma 9.1, printed p.164."
+   }
+  },
+  {
+   "text": "Apply $1_A\\otimes\\epsilon$ to the equation of step 7. The counit identities of [lem-sfb-affine-group-coordinate-hopf] give\n$$u=(1_A\\otimes h^\\sharp)\\Delta=r_A(h).$$\nThe last equality is exactly the evaluation formula of [lem-sfb-rational-representation-comodule-dictionary]. Thus the point just constructed acts on the regular representation by $u$. This is the coordinate computation of Milne's Lemma 9.1, with $h^\\sharp=\\epsilon u$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 9.1, printed p.164, evaluation at the identity."
+   }
+  },
+  {
+   "text": "For a finite-dimensional representation $V$ with coaction $c_V$, let $V_0$ be its underlying vector space with trivial action. The map $c_V:V\\to V_0\\otimes A$ is equivariant, since the required identity is precisely $(c_V\\otimes1)c_V=(1\\otimes\\Delta)c_V$. It is injective because $(1_V\\otimes\\epsilon)c_V=1_V$. Both identities are supplied by [lem-sfb-rational-representation-comodule-dictionary]. Apply enlarged naturality (step 3), tensor compatibility (step 4) and triviality (step 5) to obtain\n$$c_V\\lambda_V=(1_{V_0}\\otimes u)c_V.$$\nEquivariance of $c_V$ evaluated at $h$ also gives $c_V r_V(h)=(1_{V_0}\\otimes r_A(h))c_V$. Step 8 identifies the right sides. Injectivity of $c_V$ gives $r_V(h)=\\lambda_V$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, embedding into the trivial space tensored with the regular representation; Proposition 4.12, printed pp.87--88."
+   }
+  },
+  {
+   "text": "If $g\\in G(K)$ also realizes the family, then $r_A(g)=u$: every $a\\in A$ lies in a finite-dimensional rational submodule by [lem-sfb-comodule-finite-subrepresentation], its inclusion into $A$ is equivariant by [lem-sfb-rational-representation-comodule-dictionary], and on that submodule both maps are $\\lambda$. Applying $\\epsilon$ to $r_A(g)=(1_A\\otimes g^\\sharp)\\Delta$ gives $g^\\sharp=\\epsilon u=h^\\sharp$, by the counit identity [lem-sfb-affine-group-coordinate-hopf]. The uniqueness of the affine-spectrum correspondence [def-weil-affine-spectrum] gives $g=h$. This proves uniqueness without any reducedness or density assertion about $G(K)$.",
+   "uses": [
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.2, printed p.165, uniqueness; Lemma 9.1 and the counit identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-comodule-finite-subrepresentation",
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 9.2, printed pp.164--165; Lemma 9.1, printed p.164; Remark 4.1 and Proposition 4.12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine algebraic group is recovered from tensor compatible natural automorphisms of its finite dimensional rational representations",
+   "results": "8 hits: TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, Rep.homEquiv, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp.congr_simp, FDRep.dualTensorIsoLinHomAux, CategoryTheory.PreGaloisCategory.AutGalois, TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp, FDRep.dualTensorIsoLinHom",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/RepresentationTheory/Tannaka.lean:230 TannakaDuality.FiniteGroup.equiv assumes a finite abstract group; it is not reconstruction for arbitrary affine group schemes or rational representations; ModuleCat/Tannaka.lean:32 reconstructs a ring, while CategoryTheory/Monoidal/Bimon_.lean:21 only lists general reconstruction as TODO"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine group scheme G over a field every natural tensor compatible family of linear automorphisms of finite dimensional rational G modules is evaluation at a unique point of G",
+   "results": "8 hits: TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.toRightFDRepComp_injective, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp, TannakaDuality.FiniteGroup.mulRepHom, Rep.diagonalSuccIsoTensorTrivial_hom_hom_single, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right, Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_left",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/RepresentationTheory/Tannaka.lean:230 TannakaDuality.FiniteGroup.equiv assumes a finite abstract group; it is not reconstruction for arbitrary affine group schemes or rational representations; ModuleCat/Tannaka.lean:32 reconstructs a ring, while CategoryTheory/Monoidal/Bimon_.lean:21 only lists general reconstruction as TODO"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine group scheme over an algebraically closed field is isomorphic on field points to the group of tensor automorphisms of the forgetful functor on rational representations",
+   "results": "8 hits: AlgebraicGeometry.AffineScheme, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp.congr_simp, TannakaDuality.FiniteGroup.forget, AlgebraicGeometry.AffineScheme.forgetToScheme_obj, AlgebraicGeometry.Scheme.isoSpec, TannakaDuality.FiniteGroup.forget_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/RepresentationTheory/Tannaka.lean:230 TannakaDuality.FiniteGroup.equiv assumes a finite abstract group; it is not reconstruction for arbitrary affine group schemes or rational representations; ModuleCat/Tannaka.lean:32 reconstructs a ring, while CategoryTheory/Monoidal/Bimon_.lean:21 only lists general reconstruction as TODO"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tannaka\"",
+   "results": "12 hits: TannakaDuality.FiniteGroup.rightFDRep, TannakaDuality.FiniteGroup.leftRegular, TannakaDuality.FiniteGroup.rightRegular, TannakaDuality.FiniteGroup.leftRegularFDRepHom, TannakaDuality.FiniteGroup.equivApp, TannakaDuality.FiniteGroup.ofRightFDRep, TannakaDuality.FiniteGroup.forget, TannakaDuality.FiniteGroup.mulRepHom",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/RepresentationTheory/Tannaka.lean:230 TannakaDuality.FiniteGroup.equiv assumes a finite abstract group; it is not reconstruction for arbitrary affine group schemes or rational representations; ModuleCat/Tannaka.lean:32 reconstructs a ring, while CategoryTheory/Monoidal/Bimon_.lean:21 only lists general reconstruction as TODO"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.*[Jj]ordan|[Jj]ordan.*multiplicative|Tannaka|tensor.*automorphism",
+   "results": "8 hits: Mathlib/CategoryTheory/Monoidal/Bimon_.lean, Mathlib/Algebra/Category/ModuleCat/Tannaka.lean, Mathlib/Algebra/Category/ModuleCat/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/RepresentationTheory/Tannaka.lean:230 TannakaDuality.FiniteGroup.equiv assumes a finite abstract group; it is not reconstruction for arbitrary affine group schemes or rational representations; ModuleCat/Tannaka.lean:32 reconstructs a ring, while CategoryTheory/Monoidal/Bimon_.lean:21 only lists general reconstruction as TODO"
+  },
+  {
+   "tool": "grep",
+   "query": "Tannaka|coend|reconstruct",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/RepresentationTheory/Tannaka.lean:230 TannakaDuality.FiniteGroup.equiv assumes a finite abstract group; it is not reconstruction for arbitrary affine group schemes or rational representations; ModuleCat/Tannaka.lean:32 reconstructs a ring, while CategoryTheory/Monoidal/Bimon_.lean:21 only lists general reconstruction as TODO"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor automorphism of the forgetful functor on rational representations of an affine algebraic group is evaluation at a unique rational point",
+   "results": "8 hits: TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, CategoryTheory.PreGaloisCategory.autIsoFibers, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp.congr_simp, TannakaDuality.FiniteGroup.toRightFDRepComp_injective, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, Action.functorCategoryEquivalenceCompEvaluation, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.equiv at Mathlib/RepresentationTheory/Tannaka.lean:230 assumes a finite abstract group; the present group scheme need not have finitely many points and may be nonreduced."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine group scheme over an algebraically closed field is reconstructed from tensor compatible natural automorphisms of all finite dimensional rational representations",
+   "results": "8 hits: TannakaDuality.FiniteGroup.toRightFDRepComp_injective, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, CategoryTheory.PreGaloisCategory.AutGalois, CategoryTheory.PreGaloisCategory.toAutMulEquiv, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: TannakaDuality.FiniteGroup.equiv at Mathlib/RepresentationTheory/Tannaka.lean:230 assumes a finite abstract group; the present group scheme need not have finitely many points and may be nonreduced."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-representation-unipotent-point",
+  "date": "2026-10-23",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Pointwise prerequisite for the fixed-vector input: Milne 9.19 identifies unipotence in a faithful representation with unipotence in every rational representation. Supporting input: Theorem 9.2 and conditions (a), (b), (c), printed pp.164--165, specialized to R=K and invertible maps; algebraic groups are affine by the convention at the end of Chapter 8, printed p.162.",
+   "via": [
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tannaka-rational-point-reconstruction",
+  "worker": "stage1",
+  "summary": "Preserved the statement; followed Milne Theorem 9.2 through extension to all rational modules, multiplicativity on the regular representation, the explicit point epsilon composed with its action, and detection on coaction embeddings. Reused the existing finite-subrepresentation and coordinate-Hopf nodes. Created only the representation/comodule dictionary as a strictly smaller supporting result; no new reconstruction clause, faithful-representation theorem, or extension-of-family node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Pointwise prerequisite for the fixed-vector input: Milne 9.19 identifies unipotence in a faithful representation with unipotence in every rational representation. Supporting input: Theorem 9.2 and conditions (a), (b), (c), printed pp.164--165, specialized to R=K and invertible maps; algebraic groups are affine by the convention at the end of Chapter 8, printed p.162. Theorem 9.2 is realized by steps 1--10; the imported null nearest blueprint id is retained. Latest blueprint sk-thm-sf-ctf-stability, direct-image alteration route, is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-9a4b94033",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-9a4b94033 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Ch.9(a) pp.163-165 (regular representation (47), Lemma 9.1, conditions a-c, Thm 9.2), Ch.4(a) pp.83-84 (GL_V, comodule axioms (24), Remark 4.1 with (25)) and Prop 4.12. The item statement and stmt_deps are unchanged against live and side-live, where the item is still unsplit, and there is no repair note. The item is Thm 9.2 with R=K; its extra hypotheses (algebraically closed, finite type, invertible) are harmless and unused, and the statement is not weakened. Steps 1-10 follow Milne's proof: (2) extension via the finite-subcomodule node; (3) naturality, with Z⊗A→N⊗A injectivity written out via a basis of A; (4) tensor compatibility; (5) L_T=1 on trivial T, filling Milne's 'by (b)'; (6) m and unit equivariant, so u is an algebra map; (7) Δu=(1⊗u)Δ from coassociativity, h♯=εu; (8) u=(1⊗h♯)Δ=r_A(h), which is Lemma 9.1 in coordinates; (9) c_V:V→V0⊗A is an equivariant injection, so r_V(h)=λ_V; (10) uniqueness via ε∘r_A(g)=g♯ and the affine-spectrum bijection, with no faithful-representation or density claim, so it holds for nonreduced G. I checked the convention r(x)r(y)=r(xy) from (c⊗1)c=(1⊗Δ)c, and that c=Δ gives Milne's right regular representation. proof_deps equals the union of the step uses, and there is no cycle. The new dictionary node is true and correctly hypothesised: it is Milne Remark 4.1 for V of any dimension, plus the morphism, trivial and tensor clauses and the finite-dimensional GL(V) clause. I tested V=0, trivial G, G_m, alpha_p and the regular comodule. It is unsplit and statement-only, with full stmt_deps and real searches, and it restates no clause of the item. A whole-DAG grep for comodule/coaction and natural-in-R/Aut_R found no duplicate (hopf-coaction-linearization, char-zero-differentiation-hom, comodule-finite-subrepresentation and coordinate-hopf all differ). There is no SGA source. review_split 'no such node' errors come from the symlinked chapter directories; I opened every one of those nodes. No fixes."
+ }
+}

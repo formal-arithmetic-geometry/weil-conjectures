@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-abelian-tate-action-saturation",
+ "kind": "statement",
+ "title": "Faithful Tate action detects prime-power divisibility",
+ "statement": "Let $k$ be a field [def-weil-field], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and let $\\ell$ be a prime different from $\\operatorname{char}k$. Use the geometric Tate modules $T_\\ell A,T_\\ell B$ of [sk-def-av-tate], with coefficient ring $\\mathbf Z_\\ell$ [def-weil-l-adic-numbers]. Put $M=\\operatorname{Hom}_k(A,B)$, the group-scheme homomorphisms [def-sc-group-scheme] with pointwise addition, and $H=\\operatorname{Hom}_{\\mathbf Z_\\ell}(T_\\ell A,T_\\ell B)$. The Tate modules are finite free of ranks $2\\dim A$ and $2\\dim B$, so $H\\cong\\mathbf Z_\\ell^{4\\dim A\\dim B}$ [def-weil-pbc-free-module]. The componentwise action $\\iota:M\\to H$, $f\\mapsto T_\\ell f$, is an injective homomorphism of abelian groups. For every $f\\in M$ and integer $n\\geq1$, if $\\iota(f)\\in\\ell^nH$, then there is $g\\in M$ with $f=\\ell^n g$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 7.3, printed p.34; Proposition 10.5 and Lemma 10.6, printed p.45; Lemma 10.16, printed p.49 (over the original field k)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "sk-def-av-tate",
+  "def-weil-l-adic-numbers",
+  "def-sc-group-scheme",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-av-commutative], pointwise addition and inverse make $M$ an abelian group: sums of homomorphisms preserve addition because the target group law commutes. Define $\\iota(f)(t)_r=f(t_r)$ using the compatible sequences in [sk-def-av-tate, def-tate-module-abelian-group]. Compatibility follows from $f(\\ell x)=\\ell f(x)$. For $c\\in\\mathbf Z_\\ell$ its residue $c_r$ acts on level $r$, and $f(c_rt_r)=c_rf(t_r)$; hence this map is $\\mathbf Z_\\ell$-linear. The identities $(f+g)(t_r)=f(t_r)+g(t_r)$ prove that $\\iota$ is an additive homomorphism.",
+   "uses": [
+    "lem-sc-av-commutative",
+    "sk-def-av-tate",
+    "def-tate-module-abelian-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Remark 7.3, p.34, and the componentwise functor immediately after Proposition 10.5, p.45."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\Omega$ of $k$ [def-weil-algebraic-closure]. By [lem-sfb-abelian-field-extension], $A_\\Omega$ and $B_\\Omega$ are abelian varieties of the same dimensions as $A,B$. The fibre-product universal property [def-pc-base-change] identifies their $\\Omega$-points with the original geometric points, respects addition and multiplication by $\\ell$, and therefore identifies their Tate modules and componentwise maps with those in the statement. Apply [prop-av-tate-rank] over $\\Omega$. In the resulting finite bases a linear map is uniquely its matrix, with $2\\dim B$ rows and $2\\dim A$ columns. Listing its entries gives $H\\cong\\mathbf Z_\\ell^{4\\dim A\\dim B}$. An empty row or column set gives the zero module, as required.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-abelian-field-extension",
+    "def-pc-base-change",
+    "prop-av-tate-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Remark 7.3, p.34, and Proposition 10.5, p.45; extension and dimension as in Stacks 0BFB and 02FY."
+   }
+  },
+  {
+   "text": "For any abelian variety $D/\\Omega$, the coordinate projection $T_\\ell D\\to D[\\ell^r](\\Omega)$ is surjective. Given $x$ in that finite level, use [lem-sc-isogeny-surjective] repeatedly to choose $x_{r+1},x_{r+2},\\ldots$ with $\\ell x_{j+1}=x_j$ and $x_r=x$. Each $x_j$ is killed by $\\ell^j$ by induction. For $j<r$ put $x_j=\\ell^{r-j}x$. This is precisely a compatible sequence in [sk-def-av-tate]. Thus if $T_\\ell f=0$, its coordinate formula in step 1 gives $f_\\Omega(x)=0$ for every prime-power torsion point of $A_\\Omega$.",
+   "uses": [
+    "lem-sc-isogeny-surjective",
+    "sk-def-av-tate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Remark 7.3, p.34; the first inference in Lemma 10.6, p.45, expanded using surjectivity of multiplication."
+   }
+  },
+  {
+   "text": "Assume $T_\\ell f=0$. Use [lem-sfb-simple-isogeny-decomposition] over $\\Omega$ to choose an isogeny $u:\\prod_i C_i\\to A_\\Omega$ with positive-dimensional simple factors. Each restriction $h_i:C_i\\to B_\\Omega$ of $f_\\Omega u$ kills $C_i[\\ell^r](\\Omega)$ for every $r$, since homomorphisms send torsion to torsion. Suppose $h_i\\ne0$. Its kernel $H=\\ker h_i=C_i\\times_{B_\\Omega,h_i,e}\\operatorname{Spec}\\Omega$ is a closed subgroup scheme of $C_i$ [def-sc-group-scheme]. By [lem-sfb-abelian-closed-subgroup-reduced-component], $D=(H_{\\mathrm{red}})^0$ is an abelian subvariety of $C_i$ with $\\dim D=\\dim H$, so simplicity gives $\\dim D\\in\\{0,\\dim C_i\\}$. If $\\dim D=\\dim C_i$, then $D=C_i$ as sets: $C_i$ is irreducible by [lem-sc-abelian-variety-characterization], and a longest chain of irreducible closed subsets of $D\\subsetneq C_i$ would extend by $C_i$. As $C_i$ is reduced (smooth), the closed subscheme $H$ with full support is $C_i$, so $h_i$ factors through $e$, i.e. $h_i=0$, a contradiction. Hence $\\dim D=0$, and the same node gives $H$ finite over $\\Omega$, i.e. $H=\\operatorname{Spec}R$ for a finite-dimensional $\\Omega$-algebra $R$ [def-sc-group-scheme]. Such a scheme has at most $\\dim_\\Omega R$ distinct $\\Omega$-points: for any finite list of distinct evaluations $v_j:R\\to\\Omega$, choose for each pair $j\\ne t$ an element distinguishing them; subtract its value at $v_t$ and divide by its nonzero value at $v_j$, then multiply over $t\\ne j$. The resulting elements $a_j$ satisfy $v_t(a_j)=\\delta_{tj}$ and are linearly independent. But [lem-sc-ntorsion-etale] gives $\\ell^{2r\\dim C_i}$ distinct torsion points in this kernel for every $r$, an unbounded number. This contradiction proves every $h_i=0$. A homomorphism on a finite product is the sum of its restrictions to the factors, since $(c_i)_i=\\sum_i\\iota_i(c_i)$ on every test scheme. Hence $f_\\Omega u=0$, also for the empty product.",
+   "uses": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-closed-subgroup-reduced-component",
+    "lem-sc-abelian-variety-characterization",
+    "def-sc-group-scheme",
+    "lem-sc-ntorsion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 10.1, p.42, and proof of Lemma 10.6, p.45; finite-kernel point bound written out by interpolation. Kernel finiteness from the reduced identity component of the kernel (Milne I, discussion after Remark 10.2, p.43)."
+   }
+  },
+  {
+   "text": "By [lem-sc-isogeny-degree], $u$ is finite and flat; it is surjective by the definition of isogeny [def-sc-isogeny]. It is an fpqc singleton cover: over an affine open its inverse image is affine by finiteness [def-weil-finite-integral-morphism] and maps onto that open, so it satisfies [def-weil-pbc-fpqc-covering]. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] cancels $u$ in $f_\\Omega u=0$ to give $f_\\Omega=0$. By [lem-pc-field-extension-fpqc-cover] and [lem-galois-fpqc-covering-base-change], $p_A:A_\\Omega\\to A$ is also an fpqc cover. Cancel it in $f p_A=p_B f_\\Omega=0$ by the same descent uniqueness, obtaining $f=0$. Applied to $f-g$ and using step 1, this proves injectivity of $\\iota$.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "def-sc-isogeny",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.6, p.45; descent of equality by Stacks descent.tex, Tag 023Q (lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "Now suppose $\\iota(f)=\\ell^n v$ for $v\\in H$ and $n\\ge1$. For $x\\in A_\\Omega[\\ell^n](\\Omega)$ choose $t\\in T_\\ell A$ with $t_n=x$ by step 3. The coordinate description of [def-tate-module-abelian-group] gives $f_\\Omega(x)=(T_\\ell f(t))_n=(\\ell^n v(t))_n=\\ell^n(v(t))_n=0$. The integer $\\ell^n$ is positive and invertible in $\\Omega$, so [lem-sfb-abelian-torsion-kernel-divisibility] gives a unique $\\Omega$-group homomorphism $b:A_\\Omega\\to B_\\Omega$ with $b q_\\Omega=f_\\Omega$, where $q=[\\ell^n]_A$ [def-sc-mult-n]. This step uses that node only over the algebraically closed field $\\Omega$.",
+   "uses": [
+    "def-tate-module-abelian-group",
+    "lem-sfb-abelian-torsion-kernel-divisibility",
+    "def-sc-mult-n"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.16, p.49; Remarks 8.11(f) and 8.12, p.39."
+   }
+  },
+  {
+   "text": "The map $q$ over the original field $k$ is finite and flat by [lem-sc-mult-n-finite-flat], and surjective by [lem-sc-mult-n-isogeny]. As in step 5, using the affine-preimage characterization in [def-weil-finite-integral-morphism], it is therefore an fpqc cover by [def-weil-pbc-fpqc-covering]. Put $S=\\operatorname{Spec}\\Omega\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$. The two pullbacks $b_1,b_2:A_S\\to B_S$ satisfy $b_1q_S=f_S=b_2q_S$ because $f,q$ are defined over $k$. The map $q_S$ is an fpqc cover by [lem-galois-fpqc-covering-base-change], even though $S$ need not be the spectrum of a field or reduced. Uniqueness in [lem-weil-pbc-fpqc-representable-descent], with target the scheme $B_S$, cancels $q_S$ and gives $b_1=b_2$. Thus $h=p_B b:A_\\Omega\\to B$ agrees after the two projections $A_S\\rightrightarrows A_\\Omega$ and is descent data for a morphism into $B$.",
+   "uses": [
+    "lem-sc-mult-n-finite-flat",
+    "lem-sc-mult-n-isogeny",
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.16, p.49, over the original field; descent.tex, Tag 023Q, applied to multiplication and to the field-extension cover."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-representable-descent] to the cover $p_A$ and the compatible $h$ of step 7 to get a scheme morphism $g:A\\to B$ with $g p_A=h$. It is over $k$: its structure-map equation holds after $p_A$, and descent uniqueness with target $\\operatorname{Spec}k$ cancels $p_A$. The fibre-product universal property then identifies the base change of $g$ with $b$. For the group law compare $g m_A$ and $m_B(g\\times g)$ on $A\\times_k A$ [def-sc-group-scheme]. After the fpqc base change $(A\\times_k A)_\\Omega\\to A\\times_k A$ they agree, because $b$ is a group homomorphism; this base change is a cover by [lem-galois-fpqc-covering-base-change] and the field cover of step 5. Descent uniqueness gives equality. The unit equation is checked after $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k$ in the same way. The inverse equation is checked after $p_A$ and cancelled likewise. Thus $g$ is a $k$-group-scheme homomorphism.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-sc-group-scheme",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.16, p.49; scheme descent in descent.tex, Tag 023Q, with group operations descended by equality detection."
+   }
+  },
+  {
+   "text": "The equality $gq=f$ holds after the cover $p_A$, since there it is $bq_\\Omega=f_\\Omega$, so [lem-weil-pbc-fpqc-representable-descent] gives $gq=f$ over $k$. On every $k$-scheme $T$, the homomorphism law gives $g_T(\\ell^n x)=\\ell^n g_T(x)$ for $x\\in A(T)$, by repeated addition [def-sc-mult-n]. Thus the equality is exactly $f=\\ell^n g$ in $M$, proving the divisibility assertion. The construction includes $A=0$ or $B=0$: the associated Tate Hom module is zero, the simple-factor product may be empty, and the only homomorphism is divided by taking $g=0$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-sc-mult-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.16, p.49, and pointwise Hom convention of §10, pp.42–43."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-av-commutative",
+  "sk-def-av-tate",
+  "def-tate-module-abelian-group",
+  "def-weil-algebraic-closure",
+  "lem-sfb-abelian-field-extension",
+  "def-pc-base-change",
+  "prop-av-tate-rank",
+  "lem-sc-isogeny-surjective",
+  "lem-sfb-simple-isogeny-decomposition",
+  "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "lem-sc-abelian-variety-characterization",
+  "def-sc-group-scheme",
+  "lem-sc-ntorsion-etale",
+  "lem-sc-isogeny-degree",
+  "def-sc-isogeny",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-abelian-torsion-kernel-divisibility",
+  "def-sc-mult-n",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sc-mult-n-isogeny"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 7.3, Proposition 10.5, Lemmas 10.6 and 10.16; interpolation bound, coordinate lifting and original-field fpqc descent expanded explicitly using Stacks Tag 023Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The action of homomorphisms of abelian varieties on the Tate module is injective and detects divisibility by powers of the prime",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: Ideal.torsionMapQuot_injective, IsDedekindDomain.selmerGroup.fromUnitLift_injective, AddCommGrpCat.injective_of_divisible, Ideal.rootsOfUnityMapQuot_injective, WeierstrassCurve.Affine.Point.map_injective, AddMonoidHom.toZModLinearMap_injective, AddCommGrpCat.enoughInjectives, Ideal.quotientToQuotientRangePowQuotSucc_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract divisible groups, Selmer groups, or faithful functors, not faithful and saturated algebraic Tate action"
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|TateModule|torsion.*divisib",
+   "results": "0 hits; searched AlgebraicGeometry; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract divisible groups, Selmer groups, or faithful functors, not faithful and saturated algebraic Tate action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tateModule\"",
+   "results": "0 hits; searched all Mathlib / remote service; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract divisible groups, Selmer groups, or faithful functors, not faithful and saturated algebraic Tate action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Tate module functor on abelian varieties is faithful and detects divisibility by prime powers",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat, CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction, AlgebraicGeometry.AffineScheme.Spec_faithful, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CategoryTheory.coherentTopology.instIsDenseSubsite, CategoryTheory.Functor.Faithful.toEssImage, DerivedCategory.instFaithfulSingleFunctor, CategoryTheory.Functor.IsLocallyFaithful.of_faithful",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract divisible groups, Selmer groups, or faithful functors, not faithful and saturated algebraic Tate action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of abelian varieties divisible by ell on Tate modules is divisible by ell as an algebraic group morphism",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: Function.Surjective.divisibleBy, modularCyclotomicCharacter.pow_dvd_aux_pow_sub_aux_pow, PadicInt.pow_dvd_nthHom_sub, PreTilt.pow_dvd_untiltAux_sub_untiltAux, Module.Baer.of_divisible, AddCommGrpCat.injective_of_divisible, AddCommGroup.divisibleByIntOfSMulTopEqTop, PreTilt.pow_dvd_mul_untiltAux_sub_untiltAux_mul",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern abstract divisible groups, Selmer groups, or faithful functors, not faithful and saturated algebraic Tate action"
+  },
+  {
+   "tool": "grep",
+   "query": "TateModule|tateModule|torsion.*dense|dense.*torsion",
+   "results": "0 hits; ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic Tate faithfulness or saturation theorem; abstract group divisibility and saturated kernels are different statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of abelian varieties act faithfully on Tate modules and the image is saturated for prime power divisibility",
+   "results": "8 hits; AddSubgroup.ker_saturated, LieModule.instIsFaithfulEnd, AddAut.apply_faithfulSMul, LinearEquiv.apply_faithfulSMul, RelHom.apply_faithfulSMul, Abelianization.lift, Abelianization.map, Ideal.Quotient.instFaithfulSMul",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic Tate faithfulness or saturation theorem; abstract group divisibility and saturated kernels are different statements"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tateModule\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic Tate faithfulness or saturation theorem; abstract group divisibility and saturated kernels are different statements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Tate module functor on abelian varieties is injective on homomorphisms and detects divisibility by prime powers",
+   "results": "8 hits; AddCommGrpCat.injective_of_divisible, instEnoughInjectivesModuleCatInt, AddCommGrpCat.enoughInjectives, ProfiniteGrp.toLimit_injective, CommGrpCat.enoughInjectives, IsPRadical.injective_comp_of_perfect, CategoryTheory.Abelian.IsGrothendieckAbelian.OppositeModuleEmbedding.faithful_embedding, IsDedekindDomain.selmerGroup.fromUnitLift_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic Tate faithfulness or saturation theorem; abstract group divisibility and saturated kernels are different statements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an algebraic homomorphism between abelian varieties kills all ell power torsion then it is zero; divisibility of induced Tate module maps",
+   "results": "8 hits; Ideal.torsionMapQuot_injective, Ideal.torsionMapQuot, Ideal.torsionMapQuot_apply, AddIsTorsion.extension_closed, IsTorsion.extension_closed, Module.exists_smul_eq_zero_and_mk_eq, IsDedekindDomain.selmerGroup.fromUnit_ker, AddIsTorsion.quotient_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic Tate faithfulness or saturation theorem; abstract group divisibility and saturated kernels are different statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-hom-finite-free",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 7.3, printed p.34; Proposition 10.5 and Lemma 10.6, printed p.45; Lemma 10.16, printed p.49 (over the original field k).",
+   "via": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-tate-action-saturation",
+  "worker": "stage1",
+  "group": "Q146",
+  "summary": "Retained the statement over an arbitrary original field. Split the rank, faithful action and saturation arguments into nine steps; added one strictly smaller statement-only input on scalar extension; finite kernels from a simple source come from the existing reduced-identity-component node (reviewer FIX: the delivered finite-kernel node was dropped as a few-line consequence of it). Reused the algebraically closed kernel-divisibility lemma only over the algebraic closure and descended its factorization using fpqc cancellation, including the possibly nonreduced overlap. No use of Hom finite generation, which depends on this item.",
+  "blueprint": "Realizes the inherited from.place supporting Milne I Tate action in the level-rigidity prerequisite beneath det-thm-sf-ctf-stability-direct-images proof (3). The ancestor tool reports None, so the inherited null ancestor is preserved. Whole-blueprint Tate module, finite kernel, simple abelian, field extension and base-change searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Makes pointwise Hom addition commutative; a generic abelian-variety tool absent from this unit."
+   },
+   {
+    "node": "prop-av-tate-rank",
+    "why": "Gives the finite bases over the algebraic closure, only at its stated algebraically closed base; no such rank theorem is in this unit."
+   },
+   {
+    "node": "lem-sc-isogeny-surjective",
+    "why": "Lifts each torsion point to a compatible Tate sequence over the algebraic closure; a generic multiplication tool."
+   },
+   {
+    "node": "lem-sc-ntorsion-etale",
+    "why": "Counts prime-to-characteristic torsion points on a simple factor; a generic finite-kernel tool."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "Makes a source-decomposition isogeny finite flat so equality can be descended; a generic isogeny tool."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Supplies the fpqc cover associated with an arbitrary field extension, used only for descent."
+   },
+   {
+    "node": "lem-sc-mult-n-finite-flat",
+    "why": "Supplies finite flat multiplication over the original field for cancellation after arbitrary base change."
+   },
+   {
+    "node": "lem-sc-mult-n-isogeny",
+    "why": "Supplies surjectivity of multiplication over the original field for the fpqc cancellation."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Irreducibility of a simple factor, so that a full-dimensional abelian subvariety is the whole factor in step 4; a generic abelian-variety fact absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-av-commutative",
+  "prop-av-tate-rank",
+  "lem-sc-isogeny-surjective",
+  "lem-sc-ntorsion-etale",
+  "lem-sc-isogeny-degree",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sc-mult-n-isogeny",
+  "lem-sc-abelian-variety-characterization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-6f5274a0b",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-6f5274a0b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Milne AV I 10.5, 10.6 (and its proof) and 10.16 (pp.45-49), and Stacks 0BFB, 02FY and 023Q; the labels match. The statement is unchanged and correct (Milne 10.6+10.16 over an arbitrary k). Steps 1-9 check out: Tate rank over Omega=kbar; lifting by divisibility of A(Omega); simple-factor kernel bound by interpolation; fpqc cancellation along u and p_A; kernel-divisibility over Omega with ell^n invertible; descent of b using cancellation of [ell^n]_S on a possibly non-reduced S=Spec(Omega x_k Omega); group law checked after covers; gq=f. No cycle and no SGA. lem-sfb-abelian-field-extension is true (0BFB plus 02FY(1)) and is not a duplicate, so it is kept. FIX (C5, C1 exception): lem-sfb-simple-abelian-map-finite-kernel is a two-line consequence of the existing same-unit node lem-sfb-abelian-closed-subgroup-reduced-component (also of lem-sfb-abelian-kernel-abelian-part), which the report's duplicate check missed. I dropped it and rewrote step 4: H=ker h_i is a closed subgroup; (H_red)^0 is an abelian subvariety of dimension dim H; simplicity gives 0 or dim C_i; dim C_i would force H=C_i by irreducibility (lem-sc-abelian-variety-characterization) and reducedness, so h_i=0; dimension 0 gives H finite. proof_deps recomputed; tool_use added for lem-sc-abelian-variety-characterization. Batch-5: the seven flagged citations (prop-av-tate-rank, lem-sc-isogeny-surjective, lem-sfb-simple-isogeny-decomposition, lem-sc-ntorsion-etale, lem-sfb-abelian-torsion-kernel-divisibility, lem-sc-mult-n-finite-flat, lem-sc-mult-n-isogeny) are basic abelian-variety facts that reach def-trf-schematically-dense-open only through the generic Hilbert-polynomial/Chow/Nagata chain. They are not part of the trace formula or Poincare duality, so I accept them. Tool uses accepted: the eight declared sc/pc/av nodes plus the added characterization node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.TateActionSaturation",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.tate_action_saturation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/TateActionSaturation.lean",
+  "statement": "theorem tate_action_saturation (K : Type u) [Field K] (A B : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] [GrpObj B] [IsAbelianVariety B] (ℓ : ℕ) [Fact ℓ.Prime] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) : Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * dim A) → ℤ_[ℓ])) ∧ Nonempty (tateModule ℓ B ≃ₗ[ℤ_[ℓ]] (Fin (2 * dim B) → ℤ_[ℓ])) ∧ Nonempty ((tateModule ℓ A →ₗ[ℤ_[ℓ]] tateModule ℓ B) ≃ₗ[ℤ_[ℓ]] (Fin (4 * dim A * dim B) → ℤ_[ℓ])) ∧ ∃ iota : Additive (Grp.mk A ⟶ Grp.mk B) →+ (tateModule ℓ A →ₗ[ℤ_[ℓ]] tateModule ℓ B), (∀ f : Additive (Grp.mk A ⟶ Grp.mk B), iota f = tateModuleMap (ℓ := ℓ) f.toMul.hom.hom) ∧ Function.Injective iota ∧ ∀ (f : Additive (Grp.mk A ⟶ Grp.mk B)) (n : ℕ), 1 ≤ n → (∃ v : tateModule ℓ A →ₗ[ℤ_[ℓ]] tateModule ℓ B, iota f = (ℓ : ℤ_[ℓ]) ^ n • v) → ∃ g : Additive (Grp.mk A ⟶ Grp.mk B), f = (ℓ ^ n) • g",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f17a24867",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Only the item's lean field and one new module are delivered. Each clause matches the node: field K at an arbitrary universe u; A, B : Over (Spec K) with GrpObj and IsAbelianVariety; ℓ prime, ℓ ≠ char via CharP K p and hℓ (char 0 included); geometric tateModule over ℤ_[ℓ]; M = Additive (Grp.mk A ⟶ Grp.mk B), whose Hom group is pointwise (Mathlib Cartesian/Grp hom_hom_zpow, using IsAbelianVariety.isCommMonObj); ranks 2dimA, 2dimB and 4dimAdimB as explicit Fin-coordinate linear equivalences; iota pinned at every f to tateModuleMap (owned by sk-def-av-tate), injective; saturation for n ≥ 1 with the ℓ^n•v / ℓ^n•g parse checked. Statement field matches the file verbatim; docstrings carry the source place, the blueprint tag and all 9 proof steps; sorry only; no definitions; no pro-étale substitute; the dimension-0 case is covered; report has both required sections. Advisory: the commutativity instance from lem-sc-av-commutative is used for typing but is not a stmt_dep (Prop instance on a proved theorem node; the node's own stmt_deps omit it too). No compile was run because no file was changed."
+ }
+}

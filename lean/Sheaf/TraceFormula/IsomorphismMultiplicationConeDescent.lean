@@ -5,6 +5,7 @@ Authors: SHEAF group NZ
 -/
 module
 
+public import Sheaf.TraceFormula.IsomorphismStrictQuotientModels
 public import Sheaf.Paper.InverseImagePullbackComparisonDerived
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
@@ -13,10 +14,10 @@ public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Sheaf.CategoryTheory.StrictRoosComparison
 public import Sheaf.Paper.ExactProductFunctorStrictLimit
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+
+import Sheaf.TraceFormula.IsomorphismStrictQuotientMultiplication
+import Sheaf.TraceFormula.IsomorphismQuotientRoosComparison
+import Sheaf.TraceFormula.StrictQuotientCompletionRealization
 
 /-! # Multiplication and product comparison on entire strict quotient cones
 
@@ -34,111 +35,250 @@ every simultaneous quotient presentation through the existing K-injective-normal
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.standard
   SheafOfModules.monoidalCategory CategoryTheory.Limits.limit
 
 universe t u
-open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
+
+private theorem component_conjugation
+    {C : Type*} [Category C] {D : Type*} [Category D]
+    {F G : C ⥤ D} (τ : F ⟶ G) {A B : C} (e : A ≅ B) :
+    τ.app B = F.map e.inv ≫ τ.app A ≫ G.map e.hom := by
+  rw [← τ.naturality e.hom, ← F.map_comp_assoc, e.inv_hom_id, F.map_id, Category.id_comp]
+
+private theorem component_substitution
+    {C : Type*} [Category C] {D : Type*} [Category D]
+    {F G : C ⥤ D} (tau : F ⟶ G) {A B : C} (e : A ≅ B)
+    {D1 D2 D3 : D} (p : F.obj A ⟶ D1) (q : D1 ⟶ D2)
+    (r : D2 ⟶ D3) (s : D3 ⟶ G.obj A)
+    (h : tau.app A = p ≫ q ≫ r ≫ s) :
+    tau.app B = F.map e.inv ≫ p ≫ q ≫ r ≫ s ≫ G.map e.hom := by
+  rw [component_conjugation tau e, h]
+  simp only [Category.assoc]
+
+private theorem mapped_pair_identity
+    {C : Type*} [Category C] {D : Type*} [Category D]
+    (F : C ⥤ D) {A B : C} (a : A ⟶ B) (a' : B ⟶ A) (h : a ≫ a' = 𝟙 A) :
+    F.map a ≫ F.map a' = 𝟙 (F.obj A) := by
+  rw [← F.map_comp, h, F.map_id]
+
+private theorem remove_two_pairs
+    {C : Type*} [Category C] {A B D E F : C}
+    (f : A ⟶ B) (a : B ⟶ D) (a' : D ⟶ B) (b : D ⟶ E) (b' : E ⟶ D)
+    (k : A ⟶ F) (k' : F ⟶ E) (ha : a ≫ a' = 𝟙 B) (hb : b ≫ b' = 𝟙 D)
+    (h : f ≫ a ≫ b = k ≫ k') : f = k ≫ k' ≫ b' ≫ a' := by
+  have hb' : b ≫ b' ≫ a' = a' := by
+    rw [← Category.assoc, hb, Category.id_comp]
+  have h' := congrArg (fun z ↦ z ≫ b' ≫ a') h
+  simpa only [Category.assoc, hb', ha, Category.comp_id] using h'
+
+-- Combine independent witnesses before specializing their predicates to large categories.
+private theorem combine_comparisons
+    {A : Sort*} {B : Sort*} {C : Sort*} {D : Sort*}
+    {P1 P2 : A → Prop} {Q1 Q2 : B → Prop} {R : C → Prop} {F : Prop}
+    {S1 S2 : A → B → C → D → Prop}
+    (ha : ∃ a, P1 a ∧ P2 a) (hb : ∃ b, Q1 b ∧ Q2 b) (hc : ∃ c, R c)
+    (hf : F) (hd : ∀ a b c, ∃ d, S1 a b c d ∧ S2 a b c d) :
+    ∃ a b c d, P1 a ∧ P2 a ∧ F ∧ Q1 b ∧ Q2 b ∧ R c ∧
+      S1 a b c d ∧ S2 a b c d := by
+  obtain ⟨a, ha1, ha2⟩ := ha
+  obtain ⟨b, hb1, hb2⟩ := hb
+  obtain ⟨c, hc⟩ := hc
+  obtain ⟨d, hd1, hd2⟩ := hd a b c
+  exact ⟨a, b, c, d, ha1, ha2, hf, hb1, hb2, hc, hd1, hd2⟩
+
+section ComparisonAPI
+
+variable {C0 C1 C2 C3 C4 C5 C6 : Type*}
+  [Category C0] [Category C1] [Category C2] [Category C3]
+  [Category C4] [Category C5] [Category C6]
+  (i : C0 ⥤ C1) (p : C1 ⥤ C3) (t : C1 ⥤ C2) (v : C2 ⥤ C3)
+  (hx : C3 ⥤ C4) (hy : C2 ⥤ C1) (f : C1 ⥤ C4)
+  (qy : C1 ⥤ C5) (qx : C4 ⥤ C6) (g : C5 ⥤ C6)
+  (q : C0 ⥤ C5) (r : C5 ⥤ C5)
+  (j : i ⋙ p ≅ i ⋙ t ⋙ v)
+  (eta : i ⋙ t ⋙ hy ⋙ f ≅ i ⋙ t ⋙ v ⋙ hx)
+  (rho : q ⋙ r ≅ i ⋙ t ⋙ hy ⋙ qy) (a : qy ⋙ g ≅ f ⋙ qx)
+
+-- These constructions keep functor reassociation abstract.
+private def chain_comparison : i ⋙ (p ⋙ hx) ⋙ qx ≅ i ⋙ t ⋙ hy ⋙ f ⋙ qx :=
+  isoWhiskerRight (isoWhiskerRight j hx ≪≫ eta.symm) qx
+
+private def descent_comparison : q ⋙ (r ⋙ g) ≅ i ⋙ (p ⋙ hx) ⋙ qx :=
+  (isoWhiskerRight rho g ≪≫ isoWhiskerLeft (i ⋙ t ⋙ hy) a) ≪≫
+    (chain_comparison (i := i) (p := p) (t := t) (v := v)
+      (hx := hx) (hy := hy) (f := f) (qx := qx) (j := j) (eta := eta)).symm
+
+private theorem descent_comparison_component {L : C5 ⥤ C6}
+    (Theta : L ≅ r ⋙ g) (k : q ⋙ L ≅ i ⋙ (p ⋙ hx) ⋙ qx)
+    (h : isoWhiskerLeft q Theta ≪≫
+      descent_comparison (i := i) (p := p) (t := t) (v := v)
+        (hx := hx) (hy := hy) (f := f) (qy := qy) (qx := qx) (g := g)
+        (q := q) (r := r) (j := j) (eta := eta) (rho := rho) (a := a) = k)
+    (x : C0) :
+    Theta.hom.app (q.obj x) ≫ g.map (rho.hom.app x) ≫
+        a.hom.app (hy.obj (t.obj (i.obj x))) =
+      k.hom.app x ≫ qx.map (hx.map (j.hom.app x) ≫ eta.inv.app x) := by
+  let c := chain_comparison (i := i) (p := p) (t := t) (v := v)
+    (hx := hx) (hy := hy) (f := f) (qx := qx) (j := j) (eta := eta)
+  have hh := congrArg (fun z ↦ z.hom.app x) h
+  have hh' := congrArg (fun z ↦ z ≫ c.hom.app x) hh
+  dsimp only [descent_comparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerRight_hom, whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app] at hh'
+  have hc : (isoWhiskerRight (isoWhiskerRight j hx ≪≫ eta.symm) qx).inv.app x ≫
+      qx.map (hx.map (j.hom.app x) ≫ eta.inv.app x) = 𝟙 _ :=
+    (isoWhiskerRight (isoWhiskerRight j hx ≪≫ eta.symm) qx).inv_hom_id_app x
+  dsimp only [c, chain_comparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerRight_hom, whiskerRight_app, Functor.comp_obj] at hh'
+  simpa only [Functor.comp_obj, Category.assoc, hc, Category.comp_id] using hh'
+
+private theorem normalized_cone_descent (L : C5 ⥤ C6)
+    (k : q ⋙ L ≅ i ⋙ (p ⋙ hx) ⋙ qx)
+    (univ : ∀ (G : C5 ⥤ C6) (e : q ⋙ G ≅ i ⋙ (p ⋙ hx) ⋙ qx),
+      ∃! theta : L ≅ G, isoWhiskerLeft q theta ≪≫ e = k) :
+    ∃ (Theta : L ≅ r ⋙ g),
+      (∀ x : C0,
+        Theta.hom.app (q.obj x) ≫ g.map (rho.hom.app x) ≫
+            a.hom.app (hy.obj (t.obj (i.obj x))) =
+          k.hom.app x ≫ qx.map (hx.map (j.hom.app x) ≫ eta.inv.app x)) ∧
+      (∀ (N : C5) (x : C0) (e : q.obj x ≅ N),
+        Theta.hom.app N = L.map e.inv ≫ k.hom.app x ≫
+          qx.map (hx.map (j.hom.app x) ≫ eta.inv.app x) ≫
+          a.inv.app (hy.obj (t.obj (i.obj x))) ≫ g.map (rho.inv.app x) ≫
+          (r ⋙ g).map e.hom) := by
+  let e' := descent_comparison (i := i) (p := p) (t := t) (v := v)
+    (hx := hx) (hy := hy) (f := f) (qy := qy) (qx := qx) (g := g)
+    (q := q) (r := r) (j := j) (eta := eta) (rho := rho) (a := a)
+  obtain ⟨Theta, hTheta, _⟩ := univ (r ⋙ g) e'
+  have hrep (x : C0) :
+      Theta.hom.app (q.obj x) ≫ g.map (rho.hom.app x) ≫
+          a.hom.app (hy.obj (t.obj (i.obj x))) =
+        k.hom.app x ≫ qx.map (hx.map (j.hom.app x) ≫ eta.inv.app x) := by
+    exact descent_comparison_component (i := i) (p := p) (t := t) (v := v)
+      (hx := hx) (hy := hy) (f := f) (qy := qy) (qx := qx) (g := g)
+      (q := q) (r := r) (j := j) (eta := eta) (rho := rho) (a := a)
+      (Theta := Theta) (k := k) (h := hTheta) (x := x)
+  refine ⟨Theta, hrep, ?_⟩
+  intro N x e
+  have h : Theta.hom.app (q.obj x) = k.hom.app x ≫
+      qx.map (hx.map (j.hom.app x) ≫ eta.inv.app x) ≫
+      a.inv.app (hy.obj (t.obj (i.obj x))) ≫ g.map (rho.inv.app x) := by
+    exact remove_two_pairs _ _ _ _ _ _ _
+      (mapped_pair_identity g _ _ (rho.hom_inv_id_app x))
+      (a.hom_inv_id_app (hy.obj (t.obj (i.obj x)))) (hrep x)
+  exact component_substitution Theta.hom e _ _ _ _ h
+
+end ComparisonAPI
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+section DescentProof
+
+attribute [local instance 3000] integralTowerHasDerivedCategory
+
+attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
+  CategoryTheory.sheafCompose
+
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  inverseImageCompletedCoefficientMap isoSectionwiseModuleInverseImage
+  Functor.mapHomologicalComplex
 
-/-- The actual strict quotient tower D, functorial in the original complex.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 06YY and 0941
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-def trfQuotientTowerFunctor (W : Scheme.{t}) :
-    CochainComplex (integralTowerModules l E W) ℤ ⥤
-      ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ :=
-  (Functor.ofOpSequence (X := fun n ↦ unrestrictedIntegralComplexFunctor l E W n)
-    (unrestrictedIntegralTransition l E W)).flip
+attribute [local irreducible] integralOperationsGoodComplex
+  coefficientSequenceLimit TrfCompletionRoosNormalized
+  integralDerivedPullback integralDerivedPullbackComparison integralPullbackDescent
+  Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory DerivedCategory.Q
+  integralOperationsRoosMap
 
-/-- Termwise completed inverse image, with scalar action through c inverse.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 03D6
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-abbrev trfInverseImageComplex {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :=
-  (inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)
+attribute [local irreducible] integralOperationsRoos trfQuotientTowerFunctor
+  integralOperationsPullbackTowerFunctor unrestrictedIntegralComplexFunctor
 
-/-- Postcomposition on strict towers, retaining their transition maps.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 0941
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-abbrev trfInverseImageTower {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :=
-  (Functor.whiskeringRight ℕᵒᵖ
-    (CochainComplex (integralTowerModules l E Y) ℤ)
-    (CochainComplex (integralTowerModules l E X) ℤ)).obj (trfInverseImageComplex l E g)
+private theorem pullback_descent_universal
+    {X Y : Scheme.{t}} (g : X ⟶ Y)
+    (G : DerivedCategory (integralTowerModules l E Y) ⥤
+      DerivedCategory (integralTowerModules l E X))
+    (e : integralOperationsGoodLocalization l E Y ⋙ G ≅
+      integralOperationsPullbackOnGood l E g) :
+    ∃! i : integralDerivedPullback l E g ≅ G,
+      isoWhiskerLeft (integralOperationsGoodLocalization l E Y) i ≪≫ e =
+        integralDerivedPullbackComparison l E g := by
+  unfold integralDerivedPullback integralDerivedPullbackComparison
+  exact (integralPullbackDescent l E g).universal G e
 
-/-- The existing difference 1-s on the product of the quotient tower D(Q).
-Source: blueprint rational-frobenius-integral-model (2); Stacks 08TC
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-abbrev trfQuotientDifference (W : Scheme.{t})
-    (Q : CochainComplex (integralTowerModules l E W) ℤ) :=
-  towerTransitionEndomorphism
-    (K := fun n : ℕ ↦ ((trfQuotientTowerFunctor l E W).obj Q).obj (op n))
-    (integralOperationsTowerStep ((trfQuotientTowerFunctor l E W).obj Q))
+private theorem assembled_cone_descent
+    {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
+    (S : CoefficientDerivedSystemCalculus l E Y)
+    (j : (integralOperationsGoodComplex l E Y).ι ⋙
+          integralOperationsPullbackTowerFunctor l E g ≅
+        (integralOperationsGoodComplex l E Y).ι ⋙
+          trfQuotientTowerFunctor l E Y ⋙ trfInverseImageTower l E g)
+    (eta : (integralOperationsGoodComplex l E Y).ι ⋙
+          trfQuotientTowerFunctor l E Y ⋙ integralOperationsRoosFunctor ⋙
+            trfInverseImageComplex l E g ≅
+        (integralOperationsGoodComplex l E Y).ι ⋙ trfQuotientTowerFunctor l E Y ⋙
+          trfInverseImageTower l E g ⋙ integralOperationsRoosFunctor)
+    (rho : integralOperationsGoodLocalization l E Y ⋙
+          (S.reduction ⋙ coefficientSequenceLimit l E Y) ≅
+        (integralOperationsGoodComplex l E Y).ι ⋙ trfQuotientTowerFunctor l E Y ⋙
+          integralOperationsRoosFunctor ⋙ DerivedCategory.Q) :
+    ∃ (Theta : integralDerivedPullback l E g ≅
+        (S.reduction ⋙ coefficientSequenceLimit l E Y) ⋙ inverseImageIntegralDerived l E g),
+      (∀ (P : (integralOperationsGoodComplex l E Y).FullSubcategory),
+        Theta.hom.app (DerivedCategory.Q.obj P.obj) ≫
+            (inverseImageIntegralDerived l E g).map (rho.hom.app P) ≫
+            (inverseImageIntegralModules l E g).mapDerivedCategoryFactors.hom.app
+              (integralOperationsRoos ((trfQuotientTowerFunctor l E Y).obj P.obj)) =
+          (integralDerivedPullbackComparison l E g).hom.app P ≫
+            DerivedCategory.Q.map
+              (integralOperationsRoosFunctor.map ((j.hom.app P)) ≫ eta.inv.app P)) ∧
+      -- This equation includes every resolution and every derived object N.
+      (∀ (N : DerivedCategory (integralTowerModules l E Y))
+        (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
+        (e : DerivedCategory.Q.obj P.obj ≅ N),
+        Theta.hom.app N =
+          (integralDerivedPullback l E g).map e.inv ≫
+            (integralDerivedPullbackComparison l E g).hom.app P ≫
+            DerivedCategory.Q.map
+              (integralOperationsRoosFunctor.map (j.hom.app P) ≫ eta.inv.app P) ≫
+            (inverseImageIntegralModules l E g).mapDerivedCategoryFactors.inv.app
+              (integralOperationsRoos ((trfQuotientTowerFunctor l E Y).obj P.obj)) ≫
+            (inverseImageIntegralDerived l E g).map (rho.inv.app P) ≫
+            ((S.reduction ⋙ coefficientSequenceLimit l E Y) ⋙
+              inverseImageIntegralDerived l E g).map e.hom) := by
+  exact normalized_cone_descent
+    (i := (integralOperationsGoodComplex l E Y).ι)
+    (p := integralOperationsPullbackTowerFunctor l E g)
+    (t := trfQuotientTowerFunctor l E Y) (v := trfInverseImageTower l E g)
+    (hx := integralOperationsRoosFunctor) (hy := integralOperationsRoosFunctor)
+    (f := trfInverseImageComplex l E g) (qy := DerivedCategory.Q)
+    (qx := DerivedCategory.Q) (g := inverseImageIntegralDerived l E g)
+    (q := integralOperationsGoodLocalization l E Y)
+    (r := S.reduction ⋙ coefficientSequenceLimit l E Y)
+    (j := j) (eta := eta) (rho := rho)
+    (a := (inverseImageIntegralModules l E g).mapDerivedCategoryFactors)
+    (L := integralDerivedPullback l E g) (k := integralDerivedPullbackComparison l E g)
+    (univ := pullback_descent_universal l E g)
 
-/-- The same difference on GD(Q), with the actual inverse-image transitions.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 08TC
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-abbrev trfInverseQuotientDifference {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
-    (Q : CochainComplex (integralTowerModules l E Y) ℤ) :=
-  towerTransitionEndomorphism
-    (K := fun n : ℕ ↦ ((trfInverseImageTower l E g).obj
-      ((trfQuotientTowerFunctor l E Y).obj Q)).obj (op n))
-    (integralOperationsTowerStep
-      ((trfInverseImageTower l E g).obj ((trfQuotientTowerFunctor l E Y).obj Q)))
 
-/-- The canonical product arrow phi, characterized by its product projections.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 0941
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-abbrev trfQuotientProductComparison {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
-    (Q : CochainComplex (integralTowerModules l E Y) ℤ) :=
-  piComparison (trfInverseImageComplex l E g)
-    (fun n : ℕ ↦ ((trfQuotientTowerFunctor l E Y).obj Q).obj (op n))
+end DescentProof
 
-attribute [local irreducible] integralOperationsRoos
+attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
+  CategoryTheory.sheafCompose
 
-/-- The normalized representative comparison for L R. It tests whole strict quotient
-presentations, not only their derived evaluations. The section formula fixes the
-strict tower identification a to the actual finite comparison kappa. The final
-formula is its total-limit/Roos realization, including the specified comparison e.
-Source: blueprint rational-frobenius-integral-model (2)--(3); Stacks 06YY and 0941
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent). -/
-def TrfCompletionRoosNormalized (W : Scheme.{t})
-    (S : CoefficientDerivedSystemCalculus l E W)
-    (r : IntegralComparisonRoosModel l E W)
-    (rho : integralOperationsGoodLocalization l E W ⋙
-        (S.reduction ⋙ coefficientSequenceLimit l E W) ≅
-      (integralOperationsGoodComplex l E W).ι ⋙ trfQuotientTowerFunctor l E W ⋙
-        integralOperationsRoosFunctor ⋙ DerivedCategory.Q) : Prop :=
-  ∀ (P : (integralOperationsGoodComplex l E W).FullSubcategory)
-    (K : CochainComplex (coefficientSequenceModules l E W) ℤ)
-    (e : S.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj K)
-    (kappa : ∀ n : ℕ,
-      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj K ≅
-        (unrestrictedIntegralFiniteComplex l E W n).obj P.obj),
-    CoefficientReductionPresentation l E W S.toCoefficientDerivedSystemReduction
-      P.obj P.property.1 K e kappa →
-    ∃ a : (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj
-        K).asFunctor ≅ (trfQuotientTowerFunctor l E W).obj P.obj,
-      (∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ) (x : (K.X i).val.obj (op (n, U.unop))),
-        ((a.hom.app (op n)).f i).val.app U
-            (integralComparisonRestrictedSection l E W (K.X i) n U x) =
-          ((kappa n).hom.f i).val.app U
-            (coefficientEvaluationSection l E W (K.X i) n U x)) ∧
-      rho.hom.app P =
-        (coefficientSequenceLimit l E W).map e.hom ≫
-          (integralComparisonRoosBridge l E W r K).hom ≫
-            DerivedCategory.Q.map (integralOperationsRoosFunctor.map a.hom)
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  integralOperationsGoodComplex coefficientSequenceLimit TrfCompletionRoosNormalized
+  integralDerivedPullback integralDerivedPullbackComparison integralPullbackDescent
+  Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory DerivedCategory.Q
+  integralOperationsRoosMap
 
-attribute [local semireducible] integralOperationsRoos
-
+set_option maxHeartbeats 800000 in
+-- The fixed statement elaborates both strict section and derived-category coordinates.
 /-- Multiplication and the canonical product comparison give the same natural
 isomorphism on all strict quotient cones and after localization.
 
@@ -272,6 +412,10 @@ theorem isomorphismMultiplicationConeDescent
             (inverseImageIntegralDerived l E g).map (rho.inv.app P) ≫
             ((S.reduction ⋙ coefficientSequenceLimit l E Y) ⋙
               inverseImageIntegralDerived l E g).map e.hom) := by
-  sorry
+  have hc := isomorphismQuotientRoosComparison l E g
+  refine ⟨inferInstance, inferInstance, inferInstance, hc.1, ?_⟩
+  exact combine_comparisons (isomorphismStrictQuotientMultiplication l E g) hc.2.2
+    (strictQuotientCompletionRealization l E Y S r) hc.2.1
+    (assembled_cone_descent l E g S)
 
 end WeilConjectures

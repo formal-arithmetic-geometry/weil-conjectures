@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-geo-cartier-scalar-unit-of-universal",
+ "kind": "statement",
+ "title": "Canonical scalar universality gives the Cartier scalar unit",
+ "statement": "Let R,S be commutative rings in Type (u+1), phi:R→S a ring homomorphism, and Z a scheme in universe u. For pro-etale module sheaves F over R and G over S and eta:F→Res(phi)(G), scalarUniversal [def-geo-exact-degree-zero-interface] implies GeoCartierScalarUnit [def-sfb-geo-cartier-interface] for the same map. Both properties test all unbounded complexes; there is no flatness or finiteness hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Finite coefficient extension paragraph; normalization of the canonical derived scalar universal property"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-interface",
+  "def-geo-exact-degree-zero-interface"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalarUniversal_derivedUnit to express canonical scalar universality in the abstract exact-functor interface. In a general pair of abelian categories with chosen derived categories, associativity identifies its three-arrow composition with the first two arrows parenthesized together. Specialize this proved categorical identity to restriction of scalars. Unfold GeoCartierScalarUnit and IsDerivedBaseChange; their defining formula is precisely the resulting one. All unbounded test complexes are retained.",
+   "uses": [
+    "lem-sp-scalar-universal-derived-unit",
+    "def-sp-exact-functor-derived-unit",
+    "def-sfb-geo-cartier-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph; normalization of the canonical derived scalar universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-universal-derived-unit",
+  "def-sp-exact-functor-derived-unit",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Finite coefficient extension paragraph; normalization of the canonical derived scalar universal property"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical scalarUniversal predicate implies the raw unbounded derived scalar unit universal property for sheaves",
+   "results": "Eight sheaf-of-modules scalar-action and quasicoherence hits; no project-specific predicate conversion.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing scalarUniversal_iff and associativity."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafExactDegreeZero.scalarUniversal",
+   "results": "No hit; this project identifier is not in the Mathlib index.",
+   "date": "2026-10-27",
+   "verdict": "The project scalarUniversal_iff supplies the raw formula."
+  },
+  {
+   "tool": "grep",
+   "query": "GeoCartierScalarUnit|scalarUniversal_iff",
+   "results": "Mathlib index has no hit. Local project search finds scalarUniversal_iff and only the opposite-direction Cartier-to-DerivedUnit bridge.",
+   "date": "2026-10-27",
+   "verdict": "No existing Cartier conclusion bridge; prove the conversion directly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierNormalizedScalarUnits",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-cartier-normalized-scalar-units",
+   "place": "Identification of the canonical scalar universal property with the Cartier predicate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeoCartierScalarUnitOfUniversal",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoCartierScalarUnitOfUniversal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartierScalarUnit_of_scalarUniversal",
+  "statement": "theorem geoCartierScalarUnit_of_scalarUniversal\n    {R S : Type (u + 1)} [CommRing R] [CommRing S]\n    (φ : R →+* S) (Z : Scheme.{u})\n    (F : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R))\n    (G : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} S))\n    (η : F ⟶ (Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ).obj G)\n    (h : SheafExactDegreeZero.scalarUniversal (Scheme.ProEt.topology Z) φ F G η) :\n    GeoCartierScalarUnit φ Z F G η",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T084438-L-3681097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T084438-L-3681097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

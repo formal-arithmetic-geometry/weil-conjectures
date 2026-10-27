@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-qc-flat-monomorphism-ringed-image",
+ "kind": "statement",
+ "title": "Ringed image and factorization property of a quasi-compact flat monomorphism",
+ "statement": "Let $f:X\\to S$ be a quasi-compact flat monomorphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-pbc-scheme-conventions]. Here monomorphism means that postcomposition is injective on $\\operatorname{Hom}(T,X)$ for every scheme $T$. Put $E=f(|X|)\\subseteq|S|$ and give $E$ the subspace topology and inverse-image structure sheaf, so $S|_E=(E,\\mathcal O_S|_E)$ is the ringed subspace [def-a1-ringed-subspace]. The morphism $f$ canonically identifies $X$ with $S|_E$ as a locally ringed space. The subset $E$ is stable under generalization (if $s\\in E$ and $s\\in\\overline{\\{t\\}}$, then $t\\in E$) and retrocompact (its intersection with every quasi-compact open of $S$ is quasi-compact). For any scheme $T$ and morphism $g:T\\to S$, there is a unique morphism $a:T\\to X$ with $f\\circ a=g$ if and only if $g(|T|)\\subseteq E$. Consequently two quasi-compact flat monomorphisms into $S$ with the same image are uniquely isomorphic over $S$. No finite-presentation, Noetherian or separation hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "§1 Propositions 1.1 and 1.2(i), Corollary 1.3, printed pp.1–2; generalization stability as used in Theorem 3.3 proof 1°. The factorization assertion is the immediate inverse-image-sheaf consequence of the canonical ringed-image identification, expanded in report.md; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-a1-ringed-subspace"
+ ],
+ "proof": [
+  {
+   "text": "First the monomorphism hypothesis gives an isomorphism $\\Delta_f:X\\to X\\times_SX$: the two projections are equal by cancellation with $f$, and the diagonal and either projection are inverse by the fibre-product universal property. Apply [lem-per-flat-monomorphism-local-structure] to $f$ (with this diagonal isomorphism, flatness and quasi-compactness). It gives injectivity of $|f|$ and, for each $x\\in X$, an isomorphism of the actual structural local ring maps $\\mathcal O_{S,f(x)}\\to\\mathcal O_{X,x}$. No finiteness or reducedness hypothesis is needed for these clauses.",
+   "uses": [
+    "lem-per-flat-monomorphism-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L6, lemma-monomorphism; Raynaud §1 Proposition 1.1 (online scan, printed p.1); the cited local-structure node supplies the local-ring assertion."
+   }
+  },
+  {
+   "text": "Let $C\\subseteq|X|$ be any closed subset. Choose a closed immersion $i:Z\\hookrightarrow X$ with image $C$ by [lem-weil-pbc-closed-subset-closed-subscheme]. The composite $h=f\\circ i$ is quasi-compact: over an affine open $V\\subseteq S$, its source is the closed subset $C\\cap f^{-1}V$ of the quasi-compact space $f^{-1}V$; this is quasi-compact, by restricting an open cover and adjoining its open complement. Use [def-weil-finite-type-morphism] and the closed-embedding clause of [def-weil-closed-immersion]. Let $F\\hookrightarrow S$ be the scheme-theoretic image of $h$, supplied by [lemma-nagata-scheme-image-ideal-qc]. By [lem-sfb-scheme-image-flat-base-change], the closed subscheme $F\\times_SX$ is the schematic image of $Z\\times_SX\\to X$. The map $Z\\to Z\\times_SX$ given by $(1_Z,i)$ is inverse to the first projection: for any compatible pair $(z,x)$, monicity of $f$ forces $x=i(z)$. Thus this base-changed map is $i$. Its schematic image is $Z$ by [lemma-nagata-scheme-image-of-closed-immersion]. Consequently $F\\times_SX=Z$ as closed subschemes of $X$.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sfb-scheme-image-flat-base-change",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I, lemma-flat-base-change-scheme-theoretic-image; Raynaud §1 Proposition 1.2(i), proof, printed p.2; existence of Z: schemes.tex Tag 01J3, lemma-reduced-closed-subscheme."
+   }
+  },
+  {
+   "text": "The equality in Step 2 implies $f^{-1}(|F|)=C$. Indeed, on affine charts a pulled-back closed subscheme is cut out by the extended ideal, and a prime contains that ideal exactly when its inverse image contains the original ideal; this is the affine quotient description in [def-weil-closed-immersion]. Injectivity of $f$ now gives $f(C)=E\\cap|F|$. This is closed in $E$. The continuous bijection $\\bar f:|X|\\to E$ therefore carries every closed subset to a closed subset, so its inverse is continuous. Thus $\\bar f$ is a homeomorphism for the subspace topology.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I, conclusion of the schematic-image argument; Raynaud §1 Proposition 1.2(i), printed p.2, passage from inverse images of schematic images to the subspace topology."
+   }
+  },
+  {
+   "text": "Let $\\alpha:f^{-1}\\mathcal O_S\\to\\mathcal O_X$ be the adjunct of the structure morphism, using [def-weil-pbc-topological-inverse-image]. By [lem-pc-inverse-image-structure-stalk-iso], its stalk at $x$, preceded by the canonical ring isomorphism $\\mathcal O_{S,f(x)}\\cong(f^{-1}\\mathcal O_S)_x$, is precisely $f_x^\\sharp$. Step 1 makes this an isomorphism. Apply [lem-weil-pbc-sets-sheaf-iso-on-stalks] to the underlying sheaves of sets: the ring stalk is the same germ set, with operations on representatives over a common neighbourhood. Thus $\\alpha$ is bijective on every open. Its inverse respects the ring operations since $\\alpha$ does, and respects restrictions by composing the naturality square with the inverse component maps. Hence $\\alpha$ is an isomorphism of sheaves of rings. Under the homeomorphism of Step 3, the inverse-image sheaf $f^{-1}\\mathcal O_S$ is the transport of $i_E^{-1}\\mathcal O_S$ to $X$: their neighbourhood diagrams are identified by $\\bar f$, since $i_E\\bar f=f$. By [def-a1-ringed-subspace], this identifies $X$ canonically with $S|_E$. Its stalks are the local rings $\\mathcal O_{S,s}$, and the identified structural maps are local by [def-weil-locally-ringed-space-morphism]. This is an isomorphism of locally ringed spaces over $S$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "lem-pc-inverse-image-structure-stalk-iso",
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+    "def-a1-ringed-subspace",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008H (lemma-stalk-pullback), 007T (lemma-points-exactness), 008P (section-presheaves-structures-functorial); Raynaud §1 Proposition 1.2(i), final sentence of proof, printed p.2."
+   }
+  },
+  {
+   "text": "For $s=f(x)\\in E$ and $s\\in\\overline{\\{t\\}}$, the point $t$ specializes to $s$. Apply [lem-weil-pbc-flat-generalizations-lift] to obtain $x'$ specializing to $x$ with $f(x')=t$. Therefore $t\\in E$. To prove retrocompactness, let $U\\subseteq S$ be any quasi-compact open and choose a finite affine open cover $U=\\bigcup_{j=1}^rV_j$. Each $f^{-1}V_j$ is quasi-compact by [def-weil-finite-type-morphism]; their finite union $f^{-1}U$ is quasi-compact by the finite-subcover definition. Its continuous image $f(f^{-1}U)=E\\cap U$ is quasi-compact: pull back any open cover, take a finite subcover of the source, then map back. This also covers $U=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HV, lemma-generalizations-lift-flat; quasi-compactness definition (Tag 01K2) and Raynaud §1 Definition 1.4, printed pp.2–3."
+   }
+  },
+  {
+   "text": "Let $g:T\\to S$ have image contained in $E$. The map $b:T\\to E$ obtained by restricting the codomain of $g$ is continuous, because the inverse image of $E\\cap V$, for $V$ open in $S$, is $g^{-1}V$. Therefore $a_0=\\bar f^{-1}\\circ b:|T|\\to|X|$ is continuous and satisfies $f\\circ a_0=|g|$. All stalk maps of $f$ are isomorphisms by Step 1, so [new-lem-zl-stalk-isomorphism-lifting], with its $W=T$ and $Y=S$, supplies a scheme morphism $a:T\\to X$ having this underlying map and $f\\circ a=g$. Any two such morphisms are equal by the original monomorphism hypothesis. Conversely $g=f\\circ a$ immediately gives $g(|T|)\\subseteq f(|X|)=E$.",
+   "uses": [
+    "new-lem-zl-stalk-isomorphism-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008C (section-presheaves-functorial), 008P (section-presheaves-structures-functorial), 0091 (definition-ringed-space): inverse-image sheaf mapping property, as packaged in the cited lifting node; this expands the ringed-image consequence of Raynaud §1 Proposition 1.2(i)."
+   }
+  },
+  {
+   "text": "Finally let $f_j:X_j\\to S$ ($j=1,2$) satisfy the hypotheses and have the same image $E$. Apply Step 6 to $g=f_2$ and $f=f_1$, and then with the indices exchanged, to obtain unique $S$-morphisms $u:X_2\\to X_1$ and $v:X_1\\to X_2$. Since $f_1uv=f_1$ and $f_2vu=f_2$, monicity gives $uv=1_{X_1}$ and $vu=1_{X_2}$. Thus $u$ is the unique isomorphism over $S$. Every preceding argument used only quasi-compactness, flatness and monicity, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L6, lemma-monomorphism, categorical cancellation; Raynaud §1 Corollary 1.3, printed p.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-flat-monomorphism-local-structure",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+  "def-a1-ringed-subspace",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "new-lem-zl-stalk-isomorphism-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of existing DAG results, following Raynaud §1 Propositions 1.1 and 1.2(i), Corollary 1.3 (primary Numdam scan read online; archival copy WANTED), with the universal property expanded using the existing stalk-isomorphism lifting theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact flat monomorphism identifies its source with its image as a ringed subspace and has the universal property of a pro open immersion",
+   "results": "{\"t\": \"2026-10-24T14:39:49Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact flat monomorphism identifies its source with its image as a ringed subspace and has the universal property of a pro open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\"], \"digest\": \"bf0fde27ce7bd96b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono only covers a surjective image; IsOpenImmersion.of_flat_of_mono needs local finite presentation. Neither states the ringed-image or factorization theorem for arbitrary quasi-compact flat monomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"QuasiCompact\", \"IsEmbedding\"",
+   "results": "{\"t\": \"2026-10-24T14:39:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"QuasiCompact\\\", \\\"IsEmbedding\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono only covers a surjective image; IsOpenImmersion.of_flat_of_mono needs local finite presentation. Neither states the ringed-image or factorization theorem for arbitrary quasi-compact flat monomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mono|mono.*flat|pro.?open",
+   "results": "{\"t\": \"2026-10-24T14:39:49Z\", \"tool\": \"grep\", \"query\": \"flat.*mono|mono.*flat|pro.?open\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"4efc9d2fac3134e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono only covers a surjective image; IsOpenImmersion.of_flat_of_mono needs local finite presentation. Neither states the ringed-image or factorization theorem for arbitrary quasi-compact flat monomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact flat monomorphism is a topological embedding with isomorphic local rings and every scheme map whose image is contained in its image factors uniquely through it",
+   "results": "{\"t\": \"2026-10-24T14:39:50Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact flat monomorphism is a topological embedding with isomorphic local rings and every scheme map whose image is contained in its image factors uniquely through it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"0922c9876b72d2d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono only covers a surjective image; IsOpenImmersion.of_flat_of_mono needs local finite presentation. Neither states the ringed-image or factorization theorem for arbitrary quasi-compact flat monomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a quasi compact flat monomorphism is generalization stable and represents the functor of scheme maps with image in that subset",
+   "results": "{\"t\": \"2026-10-24T14:39:52Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a quasi compact flat monomorphism is generalization stable and represents the functor of scheme maps with image in that subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\"], \"digest\": \"36b6f84a23faaf3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Flat.isIso_of_surjective_of_mono only covers a surjective image; IsOpenImmersion.of_flat_of_mono needs local finite presentation. Neither states the ringed-image or factorization theorem for arbitrary quasi-compact flat monomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mono|mono.*flat|pro.?open",
+   "results": "{\"t\": \"2026-10-24T15:06:26Z\", \"tool\": \"grep\", \"query\": \"flat.*mono|mono.*flat|pro.?open\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"6948fe789344dde9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected FlatMono.lean:25–27 and :38–39; the former requires surjectivity and the latter local finite presentation. The full ringed-image and factorization theorem is absent from the returned declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact flat monomorphism of schemes is a topological embedding with isomorphic stalk maps and represents morphisms with image contained in its range",
+   "results": "{\"t\": \"2026-10-24T15:06:26Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact flat monomorphism of schemes is a topological embedding with isomorphic stalk maps and represents morphisms with image contained in its range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.IsPreimmersion.mk\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\"], \"digest\": \"19d00d3f38059372\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected FlatMono.lean:25–27 and :38–39; the former requires surjectivity and the latter local finite presentation. The full ringed-image and factorization theorem is absent from the returned declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"QuasiCompact\", \"IsEmbedding\"",
+   "results": "{\"t\": \"2026-10-24T15:06:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"QuasiCompact\\\", \\\"IsEmbedding\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected FlatMono.lean:25–27 and :38–39; the former requires surjectivity and the latter local finite presentation. The full ringed-image and factorization theorem is absent from the returned declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact flat monomorphism of schemes identifies the source with the ringed subspace of its image and any morphism with image contained there factors uniquely",
+   "results": "{\"t\": \"2026-10-24T15:06:28Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact flat monomorphism of schemes identifies the source with the ringed subspace of its image and any morphism with image contained there factors uniquely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\"], \"digest\": \"3e0c6cf90c107f50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected FlatMono.lean:25–27 and :38–39; the former requires surjectivity and the latter local finite presentation. The full ringed-image and factorization theorem is absent from the returned declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a quasi compact flat monomorphism of schemes is stable under generalizations and retrocompact and the source has the inverse image structure sheaf",
+   "results": "{\"t\": \"2026-10-24T15:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"The image of a quasi compact flat monomorphism of schemes is stable under generalizations and retrocompact and the source has the inverse image structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Scheme.Hom.isSpectralMap\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\"], \"digest\": \"e9056e5670c2b68c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected FlatMono.lean:25–27 and :38–39; the former requires surjectivity and the latter local finite presentation. The full ringed-image and factorization theorem is absent from the returned declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-descent-flat-monomorphism-subset",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the finite-set affine-neighbourhood branch, via Raynaud integral descent of admissible subsets. Supporting input: §1 Propositions 1.1 and 1.2(i), Corollary 1.3, printed pp.1–2; generalization stability as used in Theorem 3.3 proof 1°. The factorization assertion is the immediate inverse-image-sheaf consequence of the canonical ringed-image identification, expanded in report.md",
+   "via": [
+    "lem-sfb-integral-descent-flat-monomorphism-subset",
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-qc-flat-monomorphism-ringed-image",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the subspace topology by schematic images and flat base change, identified the actual inverse-image structure sheaf by the stalk criterion, and established generalization stability, retrocompactness, factorization and uniqueness using existing DAG tools. No new nodes, no Lean edits or compilation.",
+  "blueprint": "Supporting algebraic geometry for det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited strict-local trait group and integral-descent chain recorded in blueprint.from. Read the current latest blueprint direct-images proof (3). This generic ringed-image lemma does not replace the direct-image route. blueprint_refs ancestor returns None for this inherited non-imported chain; retained that existing from.node and exact from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-per-flat-monomorphism-local-structure",
+    "why": "Generic scheme lemma giving injectivity and the actual structural stalk isomorphisms of a quasi-compact flat monomorphism. It does not use perverse sheaves, and no theorem of the current unit supplies these local-ring assertions."
+   },
+   {
+    "node": "lem-pc-inverse-image-structure-stalk-iso",
+    "why": "Generic canonical ring-stalk comparison for the adjunct of a scheme structure map, used to identify the actual inverse-image sheaf. No six-functor assertion is substituted."
+   },
+   {
+    "node": "new-lem-zl-stalk-isomorphism-lifting",
+    "why": "Generic scheme-morphism lifting theorem from a continuous lift and isomorphisms of structural stalk maps; used only after constructing that continuous lift. It gives the scheme factorization, with no purity or smooth-proper assumption."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-flat-monomorphism-local-structure",
+  "lem-pc-inverse-image-structure-stalk-iso",
+  "new-lem-zl-stalk-isomorphism-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-2acc780a1",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-2acc780a1 (reviewer sub-agent of L); spot-checked: I read the item in full: one commit, item plus report, no new nodes. The statement is unchanged and is Raynaud §1 Prop 1.1, 1.2(i) and Cor 1.3 (archival copy WANTED, proof marked agent-origin), with no added hypotheses. I tested it on X empty, Spec Q→Spec Z and Spec Z_(p)→Spec Z. Step 1: a mono's diagonal is an iso, then lem-per-flat-monomorphism-local-structure (qc, flat, diagonal iso) gives injectivity and stalk isos. Step 2: h=f∘i is quasi-compact. lem-sfb-scheme-image-flat-base-change matches Stacks 081I (morphisms.tex l.4965: g qc, base change flat, no qs). (1_Z,i) inverts pr1 by monicity, an iso precomposition leaves the schematic image unchanged, and the image of a closed immersion is Z, so F×_S X=Z. Step 3 is elementary: the extended-ideal support gives f^{-1}|F|=C, and a closed continuous bijection is a homeomorphism. Step 4: by lem-pc-inverse-image-structure-stalk-iso, α_x∘e=f_x^♯; with the sets stalk criterion this gives a ring-sheaf iso, and transport gives S|_E (def-a1-ringed-subspace). Step 5: generalization stability from 03HV in the right direction; retrocompactness from a finite affine cover and the qc image. Step 6: continuous lift \\bar f^{-1}∘b, then new-lem-zl-stalk-isomorphism-lifting; I re-derived that this tool is true. Uniqueness by monicity. Step 7: cancellation. No cycle (transitive closure). I accept the three declared tool uses (per local structure, pc stalk iso, zl lifting) as generic black boxes. The duplicate search (affine/quasi-affine neighbourhood, generalizing-subset envelope, space representability, lfp open immersion) found none. The only citer uses exactly the stated clauses. Mathlib's FlatMono.lean has only the surjective and lfp variants, so this is not a leaf. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCompactFlatMonomorphismRingedImage",
+  "declaration": "AlgebraicGeometry.quasiCompact_flat_monomorphism_ringed_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCompactFlatMonomorphismRingedImage.lean",
+  "statement": "theorem quasiCompact_flat_monomorphism_ringed_image {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [Flat f] [Mono f] : (∃ hlocal : ∀ x : Set.range f, IsLocalRing ((LocallyRingedSpace.ringedSubspace S.toLocallyRingedSpace (Set.range f)).presheaf.stalk x), ∃ e : X.toLocallyRingedSpace ≅ LocallyRingedSpace.locallyRingedSubspace S.toLocallyRingedSpace (Set.range f) hlocal, e.hom.toShHom ≫ LocallyRingedSpace.ringedSubspaceι S.toLocallyRingedSpace (Set.range f) = f.toLRSHom.toShHom) ∧ StableUnderGeneralization (Set.range f) ∧ IsRetrocompact (Set.range f) ∧ (∀ (T : Scheme.{u}) (g : T ⟶ S), (∃! a : T ⟶ X, a ≫ f = g) ↔ Set.range g ⊆ Set.range f) ∧ (∀ (Y : Scheme.{u}) (g : Y ⟶ S) [QuasiCompact g] [Flat g] [Mono g], Set.range g = Set.range f → ∃! e : X ≅ Y, e.hom ≫ g = f)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83bfeabe0",
+  "group": "Q69",
+  "result": "fix",
+  "note": "Lean exact against the node and Raynaud §1 1.1/1.2(i)/1.3: qc+flat+mono only; the iso X ≅ locallyRingedSubspace(range f) is canonical because e.hom.toShHom ≫ ringedSubspaceι = f.toLRSHom.toShHom; StableUnderGeneralization (y⤳x→x∈s→y∈s) and IsRetrocompact are the Mathlib definitions in the node's direction; (∃! lift) ↔ range g ⊆ range f; ∃! iso over S with hypotheses on both maps. lean.statement identical to the file; stmt_deps own every name; no new definitions; sorry only; source and blueprint docstrings present; Mathlib FlatMono has only the surjective and lfp cases. Edge cases (X empty, f = id, Spec ℚ→Spec ℤ, U empty) checked. Only fault: H11, the second reading is the author's self-check. FIX: fixes/lem-sfb-qc-flat-monomorphism-ringed-image.report.md keeps the Worker report verbatim and adds a clause-by-clause maintainer second reading. No Lean change, no compile."
+ }
+}

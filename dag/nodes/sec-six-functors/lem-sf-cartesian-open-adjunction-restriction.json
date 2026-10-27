@@ -1,0 +1,277 @@
+{
+ "id": "lem-sf-cartesian-open-adjunction-restriction",
+ "kind": "statement",
+ "title": "Open restriction preserves the specified derived adjunction unit and counit",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $p:V\\to Z$ be a morphism of schemes and $i:W\\hookrightarrow Z$ an open immersion. Form the cartesian square with $V_W=V\\times_ZW$, $b:V_W\\hookrightarrow V$ and $q:V_W\\to W$ [def-cbc-open-immersion-square, def-pc-fibre-product]. Work in the ordinary unbounded derived categories of constant-$\\Lambda$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-proetale-operations]. Write $P_u\\dashv S_u$ for exact inverse image and total derived direct image, with unit $\\eta_u$ and counit $\\varepsilon_u$, and $J_j\\dashv P_j$ for exact open extension. Let $\\beta:P_pJ_i\\xrightarrow{\\sim}J_bP_q$ be the open-unit-normalized comparison of [lem-sf-open-tensor-normalization], and let $\\theta:P_qP_i\\xrightarrow{\\sim}P_bP_p$ be canonical pullback composition. Let $E:P_iS_p\\xrightarrow{\\sim}S_qP_b$ be the open-restriction isomorphism, whose map on derived Hom sets is the chain\n$$\\operatorname{Hom}(H,P_iS_pG)\\cong\\operatorname{Hom}(J_iH,S_pG)\\cong\\operatorname{Hom}(P_pJ_iH,G)\\cong\\operatorname{Hom}(J_bP_qH,G)\\cong\\operatorname{Hom}(P_qH,P_bG)\\cong\\operatorname{Hom}(H,S_qP_bG),$$\nusing $\\beta^{-1}$ in the middle. Then $E$ agrees with ordinary open restriction of derived direct image, with the identity-on-sections normalization, and the following equations hold for every $F$ on $Z$ and $G$ on $V$:\n$$E_{P_pF}\\,P_i(\\eta_{p,F})=S_q(\\theta_F)\\,\\eta_{q,P_iF},$$\n$$\\varepsilon_{q,P_bG}\\,P_q(E_G)=P_b(\\varepsilon_{p,G})\\,\\theta_{S_pG}.$$\nComposition is right to left. Both are equalities in the stated derived categories, natural in the inputs. No properness, quasi-compactness, constructibility, Tor or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence and following open-restriction/counit argument; agent extraction from lem-sf-proper-open-tensor-compatibility, old proof step 2: identification of the restricted unit and counit for the cartesian open square before applying the clopen projector"
+ },
+ "stmt_deps": [
+  "def-cbc-open-immersion-square",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib iterated_mateEquiv_conjugateEquiv to express the specified conjugate Hom comparison as the pull/push mate of the open mate. The ordinary intrinsic open mate is the mate of the canonical square (sfOpenMate_mate). The exact localized adjunction has the localized ordinary unit (exactAdj_unit_Qh). Apply exact_unit_square and uniqueness of mates (mate_eq_of_unit) to show that localization preserves this open-mate equation. Finally sfDerivedMate_eq identifies the published derived open mate with that localization. Thus sfCartesianOpenHomComparison is the mate of the published derived square.",
+   "uses": [
+    "def-sp-finite-intrinsic-open-square",
+    "lem-exc-etale-origin-open-restriction-transport",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; explicit agent expansion of the normalized Hom chain in the item and the compactification-independence argument of prop-sf-pf-coherence.proof.md"
+   }
+  },
+  {
+   "text": "Identify the fixed-scalar restriction with the ordinary pro-etale base-change map by fixed_restriction_eq_baseChange, and then with the pullback-composition mate by pro_baseChange_eq_mate. Transport that mate through the four intrinsic coefficient equivalences using trMate, and through the specified right-adjoint coordinate isomorphisms using the unit equation for Adjunction.ofNatIsoRight. The explicit compositor and direct-image coordinate factors are exactly the definition of sfProperOpenPullbackRestriction. This proves ordinaryRestriction_eq_mate without a new sectionwise calculation.",
+   "uses": [
+    "lem-exc-etale-origin-open-restriction-transport",
+    "lem-fix-site-open-exchange-sheaf",
+    "def-sp-finite-intrinsic-open-square",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; explicit agent expansion of the normalized Hom chain in the item and the compactification-independence argument of prop-sf-pf-coherence.proof.md"
+   }
+  },
+  {
+   "text": "The proved intrinsic_restriction_eq_square identifies sfProperOpenDerivedRestriction with derivedSquare of the ordinary restriction. Substitute Step 2 and use derived_mate_exact_eq_square for the two specified intrinsic inverse-image/direct-image adjunctions. This gives derivedRestriction_eq_mate. In the chosen fibre-product square, proEtaleOpenRestrictionComparison is definitionally this published derived restriction. Combining with Step 1 proves the first conjunct, preserving the specified identity-on-sections normalization.",
+   "uses": [
+    "lem-exc-etale-origin-open-restriction-transport",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-exc-proetale-derived-open-restriction",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; explicit agent expansion of the normalized Hom chain in the item and the compactification-independence argument of prop-sf-pf-coherence.proof.md"
+   }
+  },
+  {
+   "text": "After rewriting the Hom comparison by Step 1, the second conjunct is exactly Mathlib unit_mateEquiv for the two specified derived pull/push adjunctions and the canonical derived square.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; explicit agent expansion of the normalized Hom chain in the item and the compactification-independence argument of prop-sf-pf-coherence.proof.md"
+   }
+  },
+  {
+   "text": "After the same rewrite, the third conjunct is exactly Mathlib mateEquiv_counit. This uses the actual published counits and not a replacement adjunction or an arbitrary base-change isomorphism.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; explicit agent expansion of the normalized Hom chain in the item and the compactification-independence argument of prop-sf-pf-coherence.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-open-square",
+  "lem-exc-etale-origin-open-restriction-transport",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "lem-fix-site-open-exchange-sheaf",
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-derived-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "D5: reuse the proved ordinary intrinsic and fixed-scalar mate calculations, exact-localization unit compatibility and derivedSquare mate comparison; Mathlib iterated_mateEquiv_conjugateEquiv, unit_mateEquiv and mateEquiv_counit. The normalized Hom chain and all published constructions are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "open.*(unit|counit)|restrict.*adjunction|baseChange.*unit",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and Zariski structure-module restriction do not identify the specified unbounded pro-etale open-restriction comparison with the normalized geometric Hom chain"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and Zariski structure-module restriction do not identify the specified unbounded pro-etale open-restriction comparison with the normalized geometric Hom chain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction unit and counit commute with restriction to an open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, TopologicalSpace.Opens.adjunction_counit_map_functor, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top, AlgebraicGeometry.toOpen_toSpecΓ_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_map_assoc, IsOpenMap.adjunction, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and Zariski structure-module restriction do not identify the specified unbounded pro-etale open-restriction comparison with the normalized geometric Hom chain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a cartesian open square identifies the derived direct image adjunction unit and counit with the restricted adjunction via normalized open base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and Zariski structure-module restriction do not identify the specified unbounded pro-etale open-restriction comparison with the normalized geometric Hom chain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open Beck Chevalley isomorphism for unbounded derived proetale sheaves identifies units and counits of inverse image direct image adjunctions",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.sheafComposeNatIso, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and Zariski structure-module restriction do not identify the specified unbounded pro-etale open-restriction comparison with the normalized geometric Hom chain"
+  },
+  {
+   "tool": "grep",
+   "query": "Beck.Chevalley|open.*base.change|restrictAdjunction_(unit|counit)",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations and Zariski structure-module restriction do not identify the specified unbounded pro-etale open-restriction comparison with the normalized geometric Hom chain"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|unit_mateEquiv|restrictAdjunction_(unit|counit)",
+   "results": "{\"t\": \"2026-10-22T07:58:09Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_counit|unit_mateEquiv|restrictAdjunction_(unit|counit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"b89bf2ff3efe379b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations cover the formal equations but not the geometric identification of this specified unbounded pro-etale Hom-chain comparison; structure-sheaf module restriction results use a different site and coefficient category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image adjunction unit and counit commute with open restriction using the extension by zero Hom adjunction",
+   "results": "{\"t\": \"2026-10-22T07:58:09Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image adjunction unit and counit commute with open restriction using the extension by zero Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"IsOpenMap.adjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"0ef2b7e3ea9d0ca0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations cover the formal equations but not the geometric identification of this specified unbounded pro-etale Hom-chain comparison; structure-sheaf module restriction results use a different site and coefficient category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-22T07:58:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations cover the formal equations but not the geometric identification of this specified unbounded pro-etale Hom-chain comparison; structure-sheaf module restriction results use a different site and coefficient category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a cartesian open square preserves the units and counits of the unbounded derived inverse image direct image adjunction of proetale sheaves",
+   "results": "{\"t\": \"2026-10-22T07:58:19Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to a cartesian open square preserves the units and counits of the unbounded derived inverse image direct image adjunction of proetale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"4f5bd98d66c20c53\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations cover the formal equations but not the geometric identification of this specified unbounded pro-etale Hom-chain comparison; structure-sheaf module restriction results use a different site and coefficient category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open Beck Chevalley comparison is the mate of the pullback composition isomorphism and agrees with sectionwise restriction on unbounded derived sheaves",
+   "results": "{\"t\": \"2026-10-22T07:59:14Z\", \"tool\": \"leanfinder\", \"query\": \"Open Beck Chevalley comparison is the mate of the pullback composition isomorphism and agrees with sectionwise restriction on unbounded derived sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackIso\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"SheafOfModules.pullback_comp_id\"], \"digest\": \"a8bfb308e7085395\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate equations cover the formal equations but not the geometric identification of this specified unbounded pro-etale Hom-chain comparison; structure-sheaf module restriction results use a different site and coefficient category"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proper-open-tensor-compatibility",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. The proper/open interchange component of each refinement comparison must respect the base tensor action. Extracted subargument: identification of the restricted unit and counit for the cartesian open square before applying the clopen projector",
+   "via": [
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cartesian-open-adjunction-restriction",
+  "worker": "stage1",
+  "summary": "Expanded the normalized Hom chain to the canonical mate, identified it with the identity-on-sections K-injective restriction comparison, and calculated both unit and counit equations explicitly. Reused existing DAG statements only; no new nodes, Lean writing or compilation. Statement unchanged.",
+  "blueprint": "Realizes the retained ancestor lem-fix-weil-operations proof, For an admissible exceptional adjoint paragraph, projection transformation equivariance sentence, via the proper/open comparison normalization; expands the compactification-independence and following open-factor/counit calculation in main-20261015 prop-sf-pf-coherence. The assigned remark unit has no proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Canonical open-unit normalization identifies the particular beta inverse adjunct used in the Hom chain; no such normalization is stated in the remark unit."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Specified ordinary unbounded constant-coefficient pushpull and its actual adjunction, used to identify the maps rather than arbitrary adjoints."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Sectionwise colimit inverse-image construction and ordinary counit used to check the geometric normalization."
+   },
+   {
+    "node": "lem-exc-proetale-derived-open-restriction",
+    "why": "Generic unbounded open-restriction comparison with precisely the K-injective identity-on-sections normalization; no properness required."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic characterization of the derived Hom adjunction on representatives identifies its transpose with the localized ordinary calculation; not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-derived-open-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-8d2f37ccb",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-8d2f37ccb (reviewer sub-agent of L); spot-checked: I read all five steps and every cited statement in full. The item and the report are the only delivered files; there are no new nodes and no repair note, so the re-split rules do not apply. Step 1: I traced f through the five-adjunction Hom chain myself. Its orientation is right: in lem-sf-open-tensor-normalization, beta^{-1} is the adjunct of Lg_U^*u followed by theta_node^{-1}, and theta_node^{-1} is the item's theta, so P_b(beta^{-1})u_b = theta P_q(u_i). Naturality of theta and u_i plus the open triangle identity then give E_G = S_q(c_G)eta_q, which is the mate formula of def-weil-pbc-adjunction-mate. Step 2: both transposes of the ordinary restriction send the germ (T->V x_Z Q, s) to I(a)(s), checked against the colimit and counit in def-weil-proetale-inverse-image. Step 3: lem-exc-proetale-derived-open-restriction gives rho with the termwise-identity normalization on a K-injective I, and says b^* preserves K-injectives. The characterization in lem-pc-pre-derived-adjoint-functors-general (t=id since q^* is exact, s a homotopy equivalence) makes the derived transpose equal to Q of the ordinary one. def-weil-pbc-proetale-operations defines its adjunction through that node, so rho = E. Step 4: the unit equation follows from theta naturality and the p and q triangle identities, and the types match. Step 5: the counit equation is the transpose of E. Edge cases W empty, i=id, p=id and Lambda=0 are all consistent. Stacks 07A7 (sites-cohomology.tex l.4033) and 0DVC/0FND are checked, as is main-20261015 prop-sf-pf-coherence.proof.md l.15-17. No SGA is cited. Duplicate search over dag/nodes found nothing that states the item (checked lem-sbc-open-restriction-pushforward-comparison, lem-sfb-localized-ring-mate-graph-evaluation, lem-asd-exceptional-base-change-open-restriction). Parent lem-sf-proper-open-tensor-compatibility step 2 uses the unit equation in this orientation. The unit sk-rem-sf-pf-done has no steps, so all statement citations are off-unit; I accept the declared generic tool_uses lem-sf-open-tensor-normalization, lem-exc-proetale-derived-open-restriction and lem-pc-pre-derived-adjoint-functors-general. Advisory only: the inherited statement does not cite an extension-by-zero definition node for J_j; it enters through lem-sf-open-tensor-normalization."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CartesianOpenAdjunctionRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.sfCartesianOpenAdjunctionRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfCartesianOpenPullPushAdjunction",
+   "AlgebraicGeometry.Scheme.sfCartesianOpenHomComparison",
+   "AlgebraicGeometry.Scheme.sfCartesianOpenAdjunctionRestriction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CartesianOpenAdjunctionRestriction.lean",
+  "statement": "theorem sfCartesianOpenAdjunctionRestriction (A : Type u) [CommRing A] [Finite A] {V Z W : Scheme.{u}} (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion i] : sfCartesianOpenHomComparison A p i = proEtaleOpenRestrictionComparison p i A ∧ (∀ F : proEtaleDerivedCategory Z A, (sfIntrinsicDerivedPullback A i).map ((sfCartesianOpenPullPushAdjunction A p).unit.app F) ≫ (sfCartesianOpenHomComparison A p i).app ((sfIntrinsicDerivedPullback A p).obj F) = (sfCartesianOpenPullPushAdjunction A (pullback.snd p i)).unit.app ((sfIntrinsicDerivedPullback A i).obj F) ≫ (proEtaleConstantDerivedDirectImage (pullback.snd p i) A).map ((sfIntrinsicDerivedSquarePullback A (pullback.snd p i) (pullback.fst p i) i p (pullback.condition (f := p) (g := i)).symm).hom.app F)) ∧ (∀ G : proEtaleDerivedCategory V A, (sfIntrinsicDerivedPullback A (pullback.snd p i)).map ((sfCartesianOpenHomComparison A p i).app G) ≫ (sfCartesianOpenPullPushAdjunction A (pullback.snd p i)).counit.app ((sfIntrinsicDerivedPullback A (pullback.fst p i)).obj G) = (sfIntrinsicDerivedSquarePullback A (pullback.snd p i) (pullback.fst p i) i p (pullback.condition (f := p) (g := i)).symm).hom.app ((proEtaleConstantDerivedDirectImage p A).obj G) ≫ (sfIntrinsicDerivedPullback A (pullback.fst p i)).map ((sfCartesianOpenPullPushAdjunction A p).counit.app G))",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The Hom-chain comparison is defined by conjugateEquiv of the two composite published adjunctions, applied to sfIntrinsicDerivedOpenMate, the exact descent of the normalized beta inverse. Equality to proEtaleOpenRestrictionComparison fixes the identity-on-sections K-injective normalization and implies invertibility. Both component equations use the specified derived adjunction and canonical pullback compositor. No new coefficient/site construction or arbitrary comparison is supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb73c8590",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Item lean record only; 5 stmt_dep nodes identical to live; statement verbatim. Checked every clause: finite CommRing A Type u, arbitrary p, open i, pullback square (fst=b, snd=q, condition.symm). P/S = sfIntrinsicDerivedPullback ⊣ proEtaleConstantDerivedDirectImage via mapDerivedCategoryRightDerivedAdjunction of sfIntrinsicConstantModuleAdjunction (actual eta/eps). J ⊣ P = exceptionalOpenAdjunction. beta^-1 = sfIntrinsicDerivedOpenMate = termwise descent of unit, theta, counit, i.e. the normalization's adjunct formula. theta = sfIntrinsicDerivedSquarePullback.hom, P_qP_i -> P_bP_p. E = conjugateEquiv of the composite adjunctions = the node's Hom chain (orientation traced). Conjunct 1: E = proEtaleOpenRestrictionComparison (identity-on-sections K-injective rho, no properness; gives invertibility). Unit and counit equations typed and ordered correctly. Edge cases W empty, id, A=0, unbounded OK. Docstrings have source place, blueprint tag and 5 proof steps; sorry only; no hollow defs; no duplicate found. Advisories: sfCartesianOpenPullPushAdjunction has the same body as finiteRecollementDerivedAdjunction; owners of exceptionalOpenAdjunction, the open mate, theta, rho and the module adjunction are not stmt_deps (S1-fixed); the Type (u+1) existential Lean of lem-sf-open-tensor-normalization is unused, and the concrete mate is the correct pin. No compile, since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261024T184848-L-3231955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

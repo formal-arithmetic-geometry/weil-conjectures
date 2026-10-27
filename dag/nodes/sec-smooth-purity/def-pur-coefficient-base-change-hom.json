@@ -79,23 +79,28 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sf-compatibility",
  "lean": {
-  "module": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "module": "Sheaf.Paper.CoefficientSystemScalarCalculus",
   "declaration": "WeilConjectures.coefficientBaseChangeHom",
   "statement": "def coefficientBaseChangeHom\n    {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]\n    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}\n    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)\n    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P Q : A) :\n    F.obj (HA.obj (op P, Q)) ⟶ HB.obj (op (F.obj P), F.obj Q)",
   "branch": "sheaf-dag",
   "by": "NY",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Existing explicit evaluation-transpose definition at line 195. This node records the definition alone; the coefficientDerivedSystemEvaluationCalculus theorem conclusion is not used. No duplicate module is introduced."
+  "note": "Existing explicit evaluation-transpose definition at line 195. This node records the definition alone; the coefficientDerivedSystemEvaluationCalculus theorem conclusion is not used. No duplicate module is introduced. C2, 2026-10-27: declaration moved verbatim to the scalar foundation module after profiling and local unfolding improvements. The original calculus module publicly re-exports it, with identical signature, data and attributes.",
+  "file": "lean/Sheaf/Paper/CoefficientSystemScalarCalculus.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -112,5 +117,15 @@
   "group": "NY",
   "result": "pass",
   "note": "Re-delivery after RETURN e85e0a80: Lean module byte-identical (sha256 e5783100…), item node differs from live only in lean/stmt_deps; theorem stmt_dep lem-coef-derived-system-evaluation-calculus replaced by new existing:true def node def-pur-coefficient-base-change-hom owning WeilConjectures.coefficientBaseChangeHom (CoefDerivedSystemEvaluationCalculus.lean:195, explicit transpose of μ⁻¹ ≫ F(ev), no .choose); node statement matches body, lean.statement verbatim, stmt_dep def-coef-ringed-tensor-hom-model owns CoefficientClosedStructure, closure 208 nodes acyclic and not reaching the item, no other node owns the def, existing:true precedent def-coef-derived-system-calculus-data on the same module. Earlier H3 check (normalized μ, canonical α/u, htower/hid = scalarHomTensorCoherence, naturality/tower/identity variance, no extra hypotheses, edge cases) carries over. Report sections present; whole-proof sorry only; docstrings OK. nt_compile --json rc 0 (53.1 s, no errors or warnings)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-39893",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T134955-L-3651497",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules vs clone original (verbatim prefix split + 1 hole proved, statement unchanged); all 107 direct importers compiled against the delivered set (104 OK, 3 slow pre-existing, equal time on published); axioms clean; nodes vs Lean"
  }
 }

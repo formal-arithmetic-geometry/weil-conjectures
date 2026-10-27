@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-fibred-fppf-space-module-comparisons",
+ "kind": "statement",
+ "title": "Small-etale module comparisons on algebraic-space tests of a fibred category",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and let $p:\\mathcal C\\to\\mathit{Sch}/S$ be a category fibred in groupoids: cartesian lifts of all base arrows exist and every arrow is cartesian. Give $\\mathcal C$ the big fppf ringed site of [def-sfb-stack-quasi-coherent-algebra, def-pc-fppf-site], with $\\mathcal O_{\\mathcal C}(y)=\\Gamma(T,\\mathcal O_T)$ for an object over $T$. Let $K$ be any module sheaf [def-weil-sheaf-of-modules-category]. An algebraic-space test $z:V\\to\\mathcal C$ means a functor over $\\mathit{Sch}/S$ from the discrete fibred category of an algebraic space $V$ [def-trf-algebraic-space]. Use the restriction functor $K\\mapsto K_z$ and, for $a:V\\to W$, a test $w:W\\to\\mathcal C$, and a two-isomorphism $\\theta:z\\Rightarrow w\\circ a$, the canonical tensor comparison $c_{a,\\theta}^K:a^*K_w\\to K_z$ of [def-sfb-space-test-module-restriction-comparison]. The comparison is natural in $K$ and in the tests and their two-isomorphisms, is the identity for an identity arrow, and respects composition: for $b:W\\to B$ and $\\eta:w\\Rightarrow v\\circ b$, $$c_{ba,(\\eta a)\\theta}^K=c_{a,\\theta}^K\\circ a^*c_{b,\\eta}^K$$ under $(ba)^*\\simeq a^*b^*$. On a scheme test it is the map adjoint to ordinary restriction along the corresponding arrow of $\\mathcal C$; it is an isomorphism for etale $a$. For a quasi-coherent $K$, in the local-presentation sense of [def-trf-space-quasi-coherent-module], every $K_z$ is quasi-coherent and every $c_{a,\\theta}^K$ is an isomorphism, for arbitrary $a$. No stack, algebraicity, flatness or finiteness hypothesis on $\\mathcal C$ or the tests is required.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075D (lemma-comparison), (1)--(4), and its module extension equation-comparison-modules; Tag 076R (equation-comparison-algebraic-spaces-modules), and the following sentence extending (1)--(4) to algebraic-space tests; Tags 06WH (lemma-pullback-quasi-coherent) and 0GQD (lemma-compare-quasi-coherent), including pullback compatibility, for the quasi-coherent clause."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-pc-fppf-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-pc-module-pullback",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-test-module-restriction-comparison",
+  "def-pur-cochain-coefficient-universe-transport"
+ ],
+ "proof": [
+  {
+   "text": "First regard $K$ as a big-etale module: every jointly surjective etale scheme family is fppf, since etale means flat and locally of finite presentation [def-weil-etale-morphism, def-pc-fppf-site]. For a test $z$, precomposition with its functor is a big-fppf module by [lem-sfb-fibred-fppf-ringed-inverse-image]. Its restriction to the etale charts of $V$ is $K_z$. A covering of an etale chart consists of etale scheme maps, and its iterated fibre products give the same diagram in the fibred category under $z$. Thus the sheaf equalizer for $K$ gives precisely the sheaf equalizer for $K_z$. The actions are those of $\\Gamma(T,\\mathcal O_T)$ and the restrictions are semilinear, so this is a module sheaf [def-weil-sheaf-of-modules-category]. The required scheme fibre products and etale composition assertions are [lem-trf-space-representable-etale-scheme-tests].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TS, 06WE; the restriction construction before Tag 075D and the algebraic-space restriction preceding Tag 076R"
+   }
+  },
+  {
+   "text": "Construct the adjoint map $d:K_w\\to a_*K_z$. For an etale scheme $e:E\\to W$ and an object $(t:T\\to V,r:T\\to E)$ of the chart category $\\mathcal A(a,E)$, one has $at=er$. The two-isomorphism $\\theta$ and the arrow induced by $r$ give an arrow $\\alpha_{T,r}:z(t)\\to w(e)$ over $r$. Send $m\\in K_w(E)=K(w(e))$ to $K(\\alpha_{T,r})(m)\\in K_z(T)$. This is $\\Gamma(E,\\mathcal O_E)$-linear. For a chart arrow $q:T'\\to T$, naturality of $\\theta$ gives $\\alpha_{T',rq}=\\alpha_{T,r}\\circ z(q)$, so the images are compatible. The limiting-cone property in [def-trf-space-etale-module-functors] gives $d_E$. The same formula after a map $E'\\to E$ proves compatibility with restrictions; hence $d$ is a module map. Take its adjoint $c_{a,\\theta}^K:a^*K_w\\to K_z$. By [lem-trf-space-chart-adjunction-tensor-realization], on local chart tensors its formula is $b\\otimes m\\mapsto b\\,K(\\alpha_{T,r})(m)$. This is balanced because $K(\\alpha_{T,r})(sm)=r^\\sharp(s)\\,K(\\alpha_{T,r})(m)$. This construction uses the limit vertex specified in the cited definition, not an assumption that the category of all charts is small.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 076R (equation-comparison-algebraic-spaces-modules); the adjoint construction immediately before it"
+   }
+  },
+  {
+   "text": "For a module map $h:K\\to L$, naturality on the arrow $\\alpha$ says $h_zK(\\alpha)=L(\\alpha)h_w$; linearity therefore makes the two comparison squares equal on $b\\otimes m$. Identity tests give $\\alpha=\\mathrm{id}$ and $b\\otimes m\\mapsto bm$. For composable tests, take local chart tensors $u\\otimes(s\\otimes m)$ for $a^*b^*K_v$, with $u$ a function on a chart $T$ of $V$ and $s$ a function on a chart $E'$ of $W$ receiving the chart map $r:T\\to E'$. Write $\\alpha$ for the arrow over the chart map to $W$, and $\\beta$ for that over the chart map to $B$. Naturality of the two-isomorphisms identifies the arrow of the composite two-isomorphism $(\\eta a)\\theta$ with $\\beta\\circ\\alpha$. Successive comparisons send this tensor to $u\\,K(\\alpha)(s\\,K(\\beta)(m))=u\\,r^\\sharp(s)\\,K(\\beta\\circ\\alpha)(m)$. The tensor-composition map of [lem-trf-space-chart-adjunction-tensor-realization] sends it first to $u\\,r^\\sharp(s)\\otimes m$, so the direct comparison has the same value. Maps out of a tensor pullback are determined by their adjoints, hence by these chart-unit values, which gives the stated composition equation. Replacing a test by a two-isomorphic one applies $K$ to the components of that isomorphism; its naturality gives the same commuting square with every $\\alpha$. These formulas prove naturality in tests, two-isomorphisms, and $K$, including the identity laws.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D (lemma-comparison), (1), (3), (4), and their extension following Tag 076R"
+   }
+  },
+  {
+   "text": "For scheme tests, an object $E\\to W$ pulls back to the etale scheme $E\\times_WV\\to V$. Projection of the cone in step 2 to this chart is exactly the restriction along the corresponding cartesian lift in $\\mathcal C$. By step 1, $K$ is a big-etale module, and the identification $\\tau$ of the specified adjoint with ringed tensor pullback [lem-trf-space-chart-adjunction-tensor-realization] is fixed by the units, so the adjoint of this cone is the scheme comparison of [lem-sfb-fibred-big-etale-restriction-calculus], since that statement specifies precisely this restriction-induced comparison. Thus our map is the required scheme-test map. If $a:V\\to W$ is etale, tensor pullback is restriction on the localized etale sites by [lem-trf-space-etale-module-pushforward-restriction]. Every etale scheme $t:T\\to V$ is then also an etale chart of $W$ [lem-trf-space-representable-etale-scheme-tests]. On it our map is $K$ applied to $\\theta_T:z(t)\\simeq w(at)$, with the tensor unit identification $b\\otimes m\\mapsto bm$ of [lem-trf-space-chart-adjunction-tensor-realization]. Its inverse is induced by $\\theta_T^{-1}$. These inverses commute with restrictions by naturality of $\\theta$, proving the etale assertion for arbitrary modules.",
+   "uses": [
+    "lem-sfb-fibred-big-etale-restriction-calculus",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075D (2), equation-comparison-modules, and the extension following Tag 076R"
+   }
+  },
+  {
+   "text": "Now suppose $K$ is quasi-coherent. For every etale scheme test $t:T\\to V$, [lem-sfb-stack-quasi-coherent-scheme-restriction] gives a quasi-coherent Zariski module $F_{z(t)}$, whose associated etale sheaf is the restriction of $K_z$ to $T_{\\mathrm{et}}$: for an etale $q:T'\\to T$ both have value $\\Gamma(T',q^*F_{z(t)})=K(z(tq))$, with the same restrictions. The associated etale sheaf is quasi-coherent by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Unpack [def-trf-space-quasi-coherent-module]: its local presentations on $T_{\\mathrm{et}}$ are presentations on the slice $V_{\\mathrm{et}}/T$, with the same structure ring and module. Indeed every map between etale scheme charts over $V$ is etale and their composites are etale [lem-trf-space-representable-etale-scheme-tests]. Thus for every object $T$ of $V_{\\mathrm{et}}$ there is a covering on which $K_z$ has a presentation by small sums of the structure sheaf. This is exactly quasi-coherence of $K_z$, and applies to each test.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WH, 06WI and 0GQD; the chartwise argument of lemma-compare-locally-quasi-coherent"
+   }
+  },
+  {
+   "text": "Finally take arbitrary $a:V\\to W$. Choose a surjective etale scheme atlas $E\\to W$ [def-trf-algebraic-space]. Its pullback $V_E\\to V$ is a surjective etale cover, and choose a surjective etale scheme atlas $T\\to V_E$. These facts and composition are [lem-trf-space-fibre-products-etale-covers, lem-trf-space-representable-etale-scheme-tests]. Let $r:T\\to E$ be the resulting scheme map, with no flatness condition. The tensor-pullback restriction isomorphism of [lem-trf-space-etale-module-pushforward-restriction] and composition identify the restriction of $a^*K_w$ to $T_{\\mathrm{et}}$ with $r^*(K_w|_{E_{\\mathrm{et}}})$. By step 3 and the etale identifications of step 4, the restriction of $c_{a,\\theta}$ is the scheme comparison for $r$ (the two-isomorphism is the restriction of $\\theta$). The latter is invertible: [lem-sfb-stack-quasi-coherent-scheme-restriction] gives the canonical isomorphism $r^*F_{w(E)}\\simeq F_{z(T)}$, and [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] turns it into an isomorphism $r_{\\mathrm{et}}^*(F_{w(E)})_{\\mathrm{et}}\\simeq(F_{z(T)})_{\\mathrm{et}}$; both this isomorphism and the scheme comparison send the chart-unit tensor $1\\otimes m$ to the restriction of $m$ along the arrow over $r$, so they are equal. Thus $c_{a,\\theta}$ is invertible on the etale cover $T\\to V$. To see this suffices, on every etale scheme $D\\to V$ pull back that cover; the local inverses agree on double overlaps, being inverses of the same restricted map. The sheaf equalizer glues them uniquely, compatibly with $D$ and its restrictions [def-weil-sheaf-of-modules-category]. They give a global inverse. No step imposed algebraicity on $\\mathcal C$ or flatness or finiteness on $a$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 0GQD (lemma-compare-quasi-coherent), pullback compatibility, using Tags 06WH and 075D"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "lem-sfb-fibred-fppf-ringed-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-fibred-big-etale-restriction-calculus",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 075D, 076R, 06WH, 0GQD; omitted functoriality checks expanded on chart cones and local tensors using sites-modules.tex Tags 03D7--03D8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comparison|pullback|[Cc]artesian",
+   "results": "17 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackComp (PullbackContinuous.lean) is coherence of composed site pullbacks; it does not identify the small-etale restriction of a big-fppf module or assert cartesianness for quasi-coherent modules on fibred categories. Read PullbackContinuous.lean:83-155 and Quasicoherent.lean:195-258."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackComp (PullbackContinuous.lean) is coherence of composed site pullbacks; it does not identify the small-etale restriction of a big-fppf module or assert cartesianness for quasi-coherent modules on fibred categories. Read PullbackContinuous.lean:83-155 and Quasicoherent.lean:195-258."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules on fibred sites to algebraic spaces has comparison maps compatible with composition and is cartesian for quasi coherent sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict_map, CategoryTheory.Sheaf.ΓRes, SheafOfModules.pullbackComp, SheafOfModules.restrictScalars",
+   "date": "2026-10-24",
+   "verdict": "no match: SheafOfModules.pullbackComp (PullbackContinuous.lean) is coherence of composed site pullbacks; it does not identify the small-etale restriction of a big-fppf module or assert cartesianness for quasi-coherent modules on fibred categories. Read PullbackContinuous.lean:83-155 and Quasicoherent.lean:195-258."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small etale restrictions of quasi coherent modules on a category fibred in groupoids have invertible tensor pullback comparisons for arbitrary algebraic space tests",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality",
+   "date": "2026-10-24",
+   "verdict": "no match: pullbackObjFreeIso, Scheme.Modules.pullbackComp and the scheme module pseudofunctor concern ordinary pullback coherence, not big-to-small comparison maps for arbitrary fibred categories or the quasi-coherent comparison theorem on algebraic-space tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves are cartesian on scheme tests of a fibred category and have composition compatible comparison maps on algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: pullbackObjFreeIso, Scheme.Modules.pullbackComp and the scheme module pseudofunctor concern ordinary pullback coherence, not big-to-small comparison maps for arbitrary fibred categories or the quasi-coherent comparison theorem on algebraic-space tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of quasi coherent modules from the big fppf site to algebraic space small etale sites commutes with pullback",
+   "results": "{\"t\": \"2026-10-23T21:28:26Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of quasi coherent modules from the big fppf site to algebraic space small etale sites commutes with pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.sheafificationCompPullback\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"digest\": \"0e055d2a37b8ba2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PullbackContinuous.lean:83--163 and Quasicoherent.lean:195--258; these give ordinary tensor-pullback coherence and local presentations, not the fibred big-fppf to small-etale comparison theorem on algebraic-space tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-23T21:28:26Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PullbackContinuous.lean:83--163 and Quasicoherent.lean:195--258; these give ordinary tensor-pullback coherence and local presentations, not the fibred big-fppf to small-etale comparison theorem on algebraic-space tests."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison|pullback|[Cc]artesian",
+   "results": "{\"t\": \"2026-10-23T21:28:26Z\", \"tool\": \"grep\", \"query\": \"comparison|pullback|[Cc]artesian\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"fd404a5792ebf2c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PullbackContinuous.lean:83--163 and Quasicoherent.lean:195--258; these give ordinary tensor-pullback coherence and local presentations, not the fibred big-fppf to small-etale comparison theorem on algebraic-space tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small etale restrictions of modules on fibred fppf sites have composition compatible pullback comparisons, invertible for quasi coherent modules",
+   "results": "{\"t\": \"2026-10-23T21:28:27Z\", \"tool\": \"leanfinder\", \"query\": \"Small etale restrictions of modules on fibred fppf sites have composition compatible pullback comparisons, invertible for quasi coherent modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"e088e93c50eaf486\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PullbackContinuous.lean:83--163 and Quasicoherent.lean:195--258; these give ordinary tensor-pullback coherence and local presentations, not the fibred big-fppf to small-etale comparison theorem on algebraic-space tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves on a category fibered in groupoids restrict to cartesian quasi coherent sheaves on algebraic space tests",
+   "results": "{\"t\": \"2026-10-23T21:29:32Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent sheaves on a category fibered in groupoids restrict to cartesian quasi coherent sheaves on algebraic space tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.X\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.coversTop\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"a6f7f69b48b37ec8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected PullbackContinuous.lean:83--163 and Quasicoherent.lean:195--258; these give ordinary tensor-pullback coherence and local presentations, not the fibred big-fppf to small-etale comparison theorem on algebraic-space tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-groupoid-maps-from-quasicoherent",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: module right adjoint before adding multiplication; Q53 split: the quasi-coherator on locally quasi-coherent flat-compatible modules, used after ordinary direct image and before composing the Hom bijections. Q22 split: Tag 0778 proof, first Hom equality, maps out of quasi-coherent modules. Q60 split: Tag 076S, comparison maps on algebraic-space tests over the prestack, before constructing the map on each (T,u).",
+   "via": [
+    "lem-sfb-groupoid-maps-from-quasicoherent",
+    "lem-sfb-stack-lqc-coherator",
+    "lem-sfb-stack-qcqs-module-adjunction",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-fppf-space-module-comparisons",
+  "worker": "stage1",
+  "summary": "Q50 writes the chart-cone construction and tensor calculation, then deduces etale and quasi-coherent invertibility using existing scheme and space lemmas; no new nodes or changed statement.",
+  "blueprint": "The inherited ancestry has from.node=null. Read the current latest sec-six-functors-basics/sk-thm-sf-ctf-stability unit and det-thm-sf-ctf-stability-direct-images proof (3). This auxiliary input serves the inherited quasi-coherator/groupoid-Hom branch below that direct-image clause, exactly at the Q60 place already recorded in blueprint.from.place. Steps 1--4 realize Stacks 075D/076R comparison calculus, steps 5--6 its quasi-coherent specialization. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "steps 1,4,5,6 take scheme fibre products of scheme-source maps, etale composition and etaleness of chart maps over an algebraic space; generic algebraic-space foundations no sk-thm-sf-ctf-stability node states"
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "steps 2-4 take the local chart-tensor formula, the tensor-composition formula and the etale unit identification of the specified small-etale tensor pullback of algebraic spaces"
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "steps 4,6 take that tensor pullback along an etale map of algebraic spaces is restriction, and its base-change compatibility"
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "steps 5,6 take quasi-coherence of the associated etale sheaf of a Zariski quasi-coherent module and its compatibility with arbitrary scheme pullback"
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "step 6 takes that algebraic-space fibre products exist and that surjective etale families are stable under base change"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-209d1d12f",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-209d1d12f (reviewer sub-agent of L); spot-checked: First split of an unsplit item with no proof; statement, stmt_deps, source and blueprint are byte-identical to the base; no new nodes; item still unsplit live and side-live. I read Stacks sheaves 075D (1)-(4) with equation-comparison-modules (lines 1040-1180), the 076R adjoint construction, 06WH/06WI (lines 1470-1600) and 0GQD with its pullback compatibility (lines 2020-2110). The statement matches them hypothesis by hypothesis, and the coefficient category is small-etale O_V-modules with a_small^*. Steps 1-6 check out. Step 1: etale coverings are fppf (def-weil-etale-morphism, def-pc-fppf-site), so K_z is a sheaf. Step 2: the chart-limit cone with alpha_{T,r} = w(r) o theta_t, whose compatibility follows from naturality of theta. Step 3: K(alpha)K(beta) = K(beta o alpha), and composition follows from the P_kP_f formula of chart-adjunction-tensor-realization. Step 4: scheme tests match fibred-big-etale-restriction-calculus, and for etale a the map is K(theta_t), an iso. Step 5: K_z restricted to T_et is (F_{z(t)})_et by stack-qc-scheme-restriction, quasi-coherent by the Zariski/etale equivalence. Step 6: atlas T->V_E->E and arbitrary r; c_a|_T = c_r, which is invertible by r^*F_x = F_y and the Zariski/etale pullback compatibility, then gluing. No cycle; no duplicate (stack-small-etale-comparison-calculus is a specialisation that cites the item). Batch-5: the 79 trf/pod nodes in the closure are all generic lem/def foundations (algebraic spaces, etale module functors, Zariski/etale quasi-coherence, projective bundles); there is no thm/prop, no nt-assume leaf, and no step of the trace formula or Poincare duality; the two sfb paths reach trf only through the definitions def-sfb-stable-pointed-moduli-groupoids and def-trf-space-quasi-coherent-module. OK. FIX of three faults: (1) B4: all six step texts had corrupt TeX, with literal TAB and backspace control characters in steps 2-6 (from \\to, \\theta, \\beta) and stripped backslashes in every step (\\alpha, \\otimes, \\Gamma, \\mathcal ...); the report wrongly claims single-escaped TeX; all six texts are rewritten with the same arguments, the clashing scalar v renamed s in step 3, and the step 6 identification and step 3 generation sentence written out. (2) split_report.tool_uses declared for the five sk-i-curve-zero generic tools (representable-etale-scheme-tests, chart-adjunction-tensor-realization, etale-module-pushforward-restriction, scheme-zariski-etale-qc-equivalence, fibre-products-etale-covers), which I accept. (3) C1: step 4 used tau and the etale unit identification of lem-trf-space-chart-adjunction-tensor-realization without citing it; now cited. proof_deps is unchanged and still equals the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibredFppfSpaceModuleComparisons",
+  "declaration": "CategoryTheory.fibred_fppf_space_module_comparisons",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleRing",
+   "AlgebraicGeometry.AlgebraicSpace.AmbientModules",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleChartScalar",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleChartMap_smul",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleChartMap",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleChartMap_id",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleChartMap_comp",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleChartDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.AmbientModuleDirectImageModel",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleDirectImageModel_nonempty",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleDirectImageModel_unique",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleDirectImageModel",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleDirectImage_isRightAdjoint",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleTensorPullback",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleTensorAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleTensorSection",
+   "AlgebraicGeometry.AlgebraicSpace.AmbientTensorCompositionFormula",
+   "AlgebraicGeometry.AlgebraicSpace.existsUnique_ambientTensorComp",
+   "AlgebraicGeometry.AlgebraicSpace.ambientTensorComp",
+   "AlgebraicGeometry.AlgebraicSpace.AmbientTensorIdentityFormula",
+   "AlgebraicGeometry.AlgebraicSpace.existsUnique_ambientTensorId",
+   "AlgebraicGeometry.AlgebraicSpace.ambientTensorId",
+   "AlgebraicGeometry.AlgebraicSpace.ambientSmallCommRing_isSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.ambientSmallCommRing",
+   "AlgebraicGeometry.AlgebraicSpace.ambientModuleLift",
+   "AlgebraicGeometry.AlgebraicSpace.existsUnique_ambientModuleTensorLift",
+   "CategoryTheory.moduliSpaceEtaleTest",
+   "CategoryTheory.moduliSpaceEtaleRing_eq",
+   "CategoryTheory.moduliSpaceRestrictionPresheaf",
+   "CategoryTheory.moduliSpaceRestriction_isSheaf",
+   "CategoryTheory.moduliSpaceRestriction",
+   "CategoryTheory.moduliSpaceRestrictionMap",
+   "CategoryTheory.moduliSpaceChartArrow",
+   "CategoryTheory.ModuliSpaceComparisonFormula",
+   "CategoryTheory.existsUnique_moduliSpaceComparison",
+   "CategoryTheory.moduliSpaceComparison",
+   "CategoryTheory.existsUnique_moduliSpaceTestChange",
+   "CategoryTheory.moduliSpaceTestChange",
+   "CategoryTheory.moduliSpaceIdentityTwoIso_over",
+   "CategoryTheory.moduliSpaceIdentityTwoIso",
+   "CategoryTheory.moduliSpaceCompositeTwoIso_over",
+   "CategoryTheory.moduliSpaceCompositeTwoIso",
+   "CategoryTheory.moduliSpaceOverHasWeakSheafify",
+   "CategoryTheory.moduliSpaceOverWEqualsLocallyBijective",
+   "CategoryTheory.fibred_fppf_space_module_comparisons"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FibredFppfSpaceModuleComparisons.lean",
+  "statement": "theorem fibred_fppf_space_module_comparisons : (∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)), ModuliSpaceComparisonFormula hC a z t θ K (moduliSpaceComparison hC a z t θ K)) ∧ (∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (K L : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)) (f : K ⟶ L), (ambientModuleTensorPullback.{u, v, w} a).map (moduliSpaceRestrictionMap hC t f) ≫ moduliSpaceComparison hC a z t θ L = moduliSpaceComparison hC a z t θ K ≫ moduliSpaceRestrictionMap hC z f) ∧ (∀ (V : AlgebraicSpace S) (z : BasedFunctor (discreteModuli V.obj.obj) C) (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)), moduliSpaceComparison hC (𝟙 V) z z (moduliSpaceIdentityTwoIso z) K = (ambientTensorId.{u, v, w} V).hom.app (moduliSpaceRestriction hC z K)) ∧ (∀ (V W B : AlgebraicSpace S) (a : V ⟶ W) (b : W ⟶ B) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (r : BasedFunctor (discreteModuli B.obj.obj) C) (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (η : ModuliTwoIso t ((discreteModuliMap b.hom.hom).comp r)) (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)), (ambientTensorComp.{u, v, w} a b).hom.app (moduliSpaceRestriction hC r K) ≫ moduliSpaceComparison hC (a ≫ b) z r (moduliSpaceCompositeTwoIso a b z t r θ η) K = (ambientModuleTensorPullback.{u, v, w} a).map (moduliSpaceComparison hC b t r η K) ≫ moduliSpaceComparison hC a z t θ K) ∧ (∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)), AlgebraicSpace.IsEtale a.hom.hom → IsIso (moduliSpaceComparison hC a z t θ K)) ∧ (∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)) (E : W.EtaleSite) (q : ModuleChart a E) (m : (moduliSpaceRestriction hC t K).val.obj (op E)), ((ambientModuleDirectImageModel.{u, v, w} a).projection (moduliSpaceRestriction hC z K) E).app (op q) ((((ambientModuleTensorAdjunction.{u, v, w} a).homEquiv (moduliSpaceRestriction hC t K) (moduliSpaceRestriction hC z K)) (moduliSpaceComparison hC a z t θ K)).val.app (op E) m) = K.val.map (moduliSpaceChartArrow a z t θ E q).op m) ∧ (∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z z' : BasedFunctor (discreteModuli V.obj.obj) C) (t t' : BasedFunctor (discreteModuli W.obj.obj) C) (σ : ModuliTwoIso z z') (τ : ModuliTwoIso t t') (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)) (θ' : ModuliTwoIso z' ((discreteModuliMap a.hom.hom).comp t')) (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)), θ.val.hom ≫ whiskerLeft (discreteModuliMap a.hom.hom).toFunctor τ.val.hom = σ.val.hom ≫ θ'.val.hom → (ambientModuleTensorPullback.{u, v, w} a).map (moduliSpaceTestChange hC t t' τ K) ≫ moduliSpaceComparison hC a z t θ K = moduliSpaceComparison hC a z' t' θ' K ≫ moduliSpaceTestChange hC z z' σ K) ∧ (∀ (K : SheafOfModules.{max (u + 1) v w} (moduliModuleRings C hC)), K.IsQuasicoherent → (∀ (V : AlgebraicSpace S) (z : BasedFunctor (discreteModuli V.obj.obj) C), SheafOfModules.IsQuasicoherent.{max (u + 1) v w, u, u + 1} (moduliSpaceRestriction hC z K)) ∧ ∀ (V W : AlgebraicSpace S) (a : V ⟶ W) (z : BasedFunctor (discreteModuli V.obj.obj) C) (t : BasedFunctor (discreteModuli W.obj.obj) C) (θ : ModuliTwoIso z ((discreteModuliMap a.hom.hom).comp t)), IsIso (moduliSpaceComparison hC a z t θ K))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Item-owned ambient coefficient extensions reuse Q24 chart categories without rebinding its dependency node. The canonical existing ULift transport and a uniquely chart-tensor-normalized isomorphism relate ambient tensor pullback to Q24 tensor pullback. Literal test restrictions and uniquely normalized comparisons retain all clauses and universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-126a4a22a",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 9d5d8be8. H13 fixed: all 10 dep node files are byte-identical to side-live (Q24 def-trf-space-etale-module-functors record intact) and AmbientSpaceModuleOperations is gone. The ambient* helpers are item-owned, carry the item's blueprint tag and are in the item's 46 lean.declarations (exact match with the file). The item node changes only by the lean record and one added stmt_dep on the existing landed def-pur-cochain-coefficient-universe-transport. The fibred-category half of the file is byte-identical to the version the earlier review checked. Re-checked clause by clause against Stacks 075D/076R/06WH/0GQD: the ∃!-pinned chart-tensor formula b⊗m↦b·K(θ_T≫t(r))(m), K-naturality, the unitor, the compositor with (ηa)θ (orientation verified on chart tensors), étale IsIso, the adjoint chart projection (scheme-test clause), 2-iso test naturality (checked by τ-naturality) and the QC clause for arbitrary a. No extra hypotheses; universes forced by moduliModuleRings. moduliSpaceEtaleRing_eq is true because BasedFunctor.w is strict. New bridge existsUnique_ambientModuleTensorLift (lift⋙ambient f^* ≅ Q24 f^*⋙lift, normalized by up b⊗up s↦up(b⊗s), via the landed CochainUniverseTransport.functor) is true and uniquely determined, which answers the earlier advisory. No existing larger-universe module pullback on algebraic spaces found in live lean/Sheaf, so no H4. Gates: no hollow def (19 sorries, all named theorems with docstrings), docstrings with source and blueprint, lines ≤100, statement verbatim. Second reading independent, so H11 accepted. No compile (no file changed); worker reports clean scompile and an OK dry run. Advisory: ambientSmallCommRing_isSheaf is provable like structurePresheaf_isSheaf."
+ }
+}

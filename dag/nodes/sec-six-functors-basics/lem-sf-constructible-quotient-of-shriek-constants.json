@@ -1,0 +1,101 @@
+{
+ "id": "lem-sf-constructible-quotient-of-shriek-constants",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sf-flat-model",
+   "place": "the Lean proof of sk-lem-sf-flat-model's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.Scheme.exists_epi_sigma_lowerShriek_constantSheaf (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the generators a_!L of D_ctf: every constructible sheaf is a quotient of a finite sum of j_!Λ",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constructible sheaves are quotients of finite sums of j_{V!}Λ_V",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme and $\\Lambda$ a finite ring. Every constructible sheaf $F$ of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-constructible-sheaf] admits an epimorphism $\\bigoplus_{i=1}^nj_{i!}\\Lambda_{V_i}\\twoheadrightarrow F$ from a finite direct sum of extensions by zero [def-weil-pbc-extension-by-zero] of constant sheaves $\\Lambda_{V_i}$, where each $j_i\\colon V_i\\to X$ is étale with $V_i$ affine and admits a compactification (Stacks 095M; SGA 4½ Rapport 4.6).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/_section.md",
+  "place": "sk-lem-sf-flat-model: the generators a_!L of D_ctf: every constructible sheaf is a quotient of a finite sum of j_!Λ; Lean: upstream file lean/WeilConjectures/ConstructibleSheaf/Presentation.lean, declaration AlgebraicGeometry.Scheme.exists_epi_sigma_lowerShriek_constantSheaf (module WeilConjectures.ConstructibleSheaf.Presentation, lines 43-51, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every constructible etale sheaf is a quotient of a finite direct sum of extensions by zero of constant sheaves j_! Lambda",
+   "results": "Sheaf.IsConstant.mem_essImage, constantSheaf, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf): constant sheaves only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible étale sheaf is a quotient of a finite sum of extension by zero of constant sheaves",
+   "results": "SheafOfModules.IsFinitePresentation, IsFiniteType, Presentation.IsFinite (Mathlib.Algebra.Category.ModuleCat.Sheaf.*): finite presentation, not constructibility",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'IsConstructible|constructibleSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "constructible sets only (Mathlib/Topology/Constructible.lean, RingTheory/Spectrum/Prime/ConstructibleSet.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "sk-lem-sf-flat-model",
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.exists_epi_sigma_lowerShriek_constantSheaf"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_epi_sigma_lowerShriek_constantSheaf",
+     "module": "WeilConjectures.ConstructibleSheaf.Presentation",
+     "lines": [
+      35,
+      51
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-flat-model",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.ConstructibleSheaf.Presentation",
+  "file": "lean/WeilConjectures/ConstructibleSheaf/Presentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_epi_sigma_lowerShriek_constantSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exists_epi_sigma_lowerShriek_constantSheaf"
+  ],
+  "statement": "theorem exists_epi_sigma_lowerShriek_constantSheaf [CompactSpace X] [QuasiSeparatedSpace X]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :\n    ∃ (n : ℕ) (V : Fin n → Scheme.{u}) (j : ∀ i, V i ⟶ X),\n      (∀ i, Etale (j i) ∧ IsAffine (V i)) ∧\n      ∃ (_ : ∀ i, HasCompactification (j i))\n        (φ : (∐ fun i ↦ (Etale.lowerShriek (ModuleCat.{u + 1} Λ) (j i)).obj\n          ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n            (ModuleCat.of Λ Λ))) ⟶ F), Epi φ :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22"
+ }
+}

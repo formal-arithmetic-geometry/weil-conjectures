@@ -1,0 +1,125 @@
+{
+ "id": "lem-zl-classical-realization-punctual-purity",
+ "kind": "statement",
+ "title": "Purity equivalence for a normalized classical realization",
+ "statement": "Fix a finite-field datum $D$ with finite field $k_0$ of characteristic $p$ and algebraic closure $k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega:\\operatorname{Type}(u+1)$ of $\\mathbf Q_\\ell$, and a separated finite-type $k_0$-scheme $Y_0$; write $Y=Y_0\\times_{k_0}k$. Let $R$ be any normalized classical realization [def-zl-normalized-classical-weil-realization]. Use the classical Weil category, exact classical and finite-stage filtrations, finite point fibres and normalized local operators of [def-zl-classical-weil-filtration-transport-data, def-zl-classical-local-fibre-comparison]. For one classical lisse Weil object $F$, a field isomorphism $\\iota:\\Omega\\simeq\\mathbb C$ and $w\\in\\mathbb R$, SfIsPunctuallyPureOfWeight of $R(F)$ for $\\iota,w$ holds if and only if ZlClassicalPure of $F$ holds for $\\iota,w$. The former quantifies over finite Weil presentations and all closed-point eigenvalues; the latter uses every compatible closed-point lift and normalized finite-cover return path. Include zero rank and the empty scheme.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 1: the actual Weil filtration and its local purity; Bhatt--Scholze Section 6.8, especially 6.8.4(1),(4), 6.8.14(2), 6.8.15."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-normalized-classical-weil-realization",
+  "def-zl-classical-weil-filtration-transport-data",
+  "def-zl-classical-local-fibre-comparison",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "For sf purity implying classical purity, apply the local-spectrum equivalence for the supplied closed-point lift and normalized beta to its classical eigenvalue, then apply the sf purity norm equation.",
+   "uses": [
+    "lem-zl-classical-realization-local-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conversely unpack the finite Weil presentation and residue embedding witnessing an sf eigenvalue. Obtain a normalized beta from the local-spectrum theorem. Transport the eigenvalue across its equivalence and apply classical purity to that beta. This recovers exactly the same residue cardinality and norm equation.",
+   "uses": [
+    "lem-zl-classical-realization-local-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-classical-realization-local-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, assembly of the existing normalized realization interfaces for blueprint real-mixed-by-curves paragraph 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized geometric fibres identify the eigenvalues of local Frobenius on a lisse Weil sheaf with all its finite coefficient presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isConj_arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Let $ Q $ and $ Q' $ be prime ideals in a semiring $ S $ with finite quotients $ S/Q $ and $ S/Q' $. If their contractions to a commutative semiring $ R $ (under a scalar multiplication commuting with\"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (G : Type u_3) →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G S] →\\n                [SMulCommClass G R S] →\\n                  (Q : Ide\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, this definition asserts\"}\n  {\"name\": \"IsArithFrobAt.exists_of_isInvariant\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [Finite G]\\n  [Algebra.IsInvariant R S G] [Q.IsPrime] [Finite (S ⧸ Q)], ∃ σ, IsArithFrobAt\", \"doc\": \"If $ Q $ is a prime ideal in $ S $ such that the quotient ring $ S/Q $ is finite, then there exists an element $ \\\\sigma \\\\in G $ such that $ \\\\sigma $ satisfies the arithmetic Frobenius condition at $ Q\"}\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_1) [inst_1 : CommRing k] [inst_2 : IsDomain k] [inst_3 : CharP k p]\\n  [inst_4 : PerfectRing k p] (m : ℤ) (x : WittVector.StandardOneDimIsocrystal p k m),\\n  (WittVector.Isocrystal.frobenius p k) x = ↑p ^ m • (WittVector.FractionRing.frobeniusRingHom p\", \"doc\": \"For any integer $ m $ and element $ x $ in the standard one-dimensional isocrystal over a field $ k $ of characteristic $ p $, the Frobenius isomorphism $ \\\\Phi $ satisfies $ \\\\Phi(x) = p^m \\\\cdot \\\\varph\"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  {a : FractionRing (WittVector p k)},\\n  a ≠ 0 → ∃ b, b ≠ 0 ∧ ∃ m, (IsFractionRing.ringEquivOfRingEquiv (WittVector.frobeniusEquiv p k)) b * a = ↑p ^ m * b\", \"doc\": \"For any non-zero element $ a $ in the fraction field of Witt vectors over a perfect field $ k $ of characteristic $ p $, there exist a non-zero element $ b $ and an integer $ m $ such that $ \\\\varphi(b\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: hits concern general sheaves, fibres or linear algebra, not the normalized classical/sf comparison required here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear isomorphism intertwining two endomorphisms preserves their eigenvalues",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.charpoly_conj\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.ToMatrix\", \"type\": \"(e : M₁ ≃ₗ[R] M₂) (φ : Module.End R M₁) : (e.conj φ).charpoly = φ.charpoly\", \"doc\": \"For any linear equivalence $ e : M₁ \\\\simeq_R M₂ $ between modules over a commutative ring $ R $, and any linear endomorphism $ \\\\varphi $ on $ M₁ $, the characteristic polynomial of the conjugated endo\"}\n  {\"name\": \"Module.End.HasEigenvalue\", \"module\": \"Mathlib.LinearAlgebra.Eigenspace.Basic\", \"type\": \"(f : End R M) (a : R) : Prop\", \"doc\": \"The endomorphism $ f $ has an eigenvalue $ a $ if the kernel of $ f - a \\\\cdot \\\\text{id}_M $ is non-trivial, i.e., there exists a non-zero vector $ v \\\\in M $ such that $ f(v) = a \\\\cdot v $.\"}\n  {\"name\": \"LinearMap.det_conj\", \"module\": \"Mathlib.LinearAlgebra.Determinant\", \"type\": \"{N : Type*} [AddCommGroup N] [Module A N] (f : M →ₗ[A] M) (e : M ≃ₗ[A] N) :\\n  LinearMap.det ((e : M →ₗ[A] N) ∘ₗ f ∘ₗ (e.symm : N →ₗ[A] M)) = LinearMap.det f\", \"doc\": \"For any commutative ring $A$ and $A$-modules $M,N$, if $e:M\\\\to N$ is a linear isomorphism and $f:M\\\\to M$ is a linear endomorphism, then the determinant of the conjugated endomorphism $e\\\\circ f\\\\circ e^\"}\n  {\"name\": \"LinearEquiv.conjRingEquiv\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \"(e : M₁ ≃ₛₗ[σ₁₂] M₂) : Module.End R₁ M₁ ≃+* Module.End R₂ M₂\", \"doc\": \"Given a linear equivalence $ e $ between $ R_1 $-module $ M_1 $ and $ R_2 $-module $ M_2 $ compatible with a ring homomorphism $ \\\\sigma_{12}: R_1 \\\\to R_2 $, this constructs a ring isomorphism between \"}\n  {\"name\": \"LinearEquiv.isSemisimple_iff\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \"{M₂ : Type*} [AddCommGroup M₂] [Module R M₂] (g : End R M₂) (e : M ≃ₗ[R] M₂) (he : e ∘ₗ f = g ∘ₗ e) :\\n  f.IsSemisimple ↔ g.IsSemisimple\", \"doc\": \"Given modules $ M $ and $ M_2 $ over a ring $ R $, and a linear equivalence $ e : M \\\\simeq_R M_2 $, if endomorphisms $ f : \\\\text{End}_R(M) $ and $ g : \\\\text{End}_R(M_2) $ satisfy $ e \\\\circ f = g \\\\circ\"}\n  {\"name\": \"LinearEquiv.conj\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \"(e : M₁' ≃ₛₗ[σ₁'₂'] M₂') : Module.End R₁' M₁' ≃ₛₗ[σ₁'₂'] Module.End R₂' M₂'\", \"doc\": \"Given modules $ M_1' $ and $ M_2' $ over semirings with a ring homomorphism $ \\\\sigma_{1'2'} $, a linear equivalence $ e: M_1' \\\\simeq_{\\\\sigma_{1'2'}} M_2' $ induces a linear equivalence between their e\"}\n  {\"name\": \"LinearMap.isPairSelfAdjoint_equiv\", \"module\": \"Mathlib.LinearAlgebra.SesquilinearForm.Basic\", \"type\": \"(e : M₁ ≃ₗ[R] M) (f : Module.End R M) :\\n  IsPairSelfAdjoint B F f ↔ IsPairSelfAdjoint (B.compl₁₂ e e) (F.compl₁₂ e e) (e.symm.conj f)\", \"doc\": \"For a linear isomorphism $ e : M_1 \\\\to M $ and a linear endomorphism $ f $ of $ M $, $ f $ is self-adjoint with respect to the bilinear form $ B $ over the field $ F $ if and only if the conjugated en\"}\n  {\"name\": \"LinearMap.det_map\", \"module\": \"Mathlib.LinearAlgebra.Determinant\", \"type\": \"{K V W : Type*} [Field K] [AddCommGroup V] [Module K V] [AddCommGroup W] [Module K W] {F : Type*}\\n  [EquivLike F (End K V) (End K W)] [AlgEquivClass F K _ _] (f : F) (x : End K V) : (f x).det = x.det\", \"doc\": \"For a field $ K $ and vector spaces $ V $ and $ W $ over $ K $, if $ f $ is an algebra isomorphism between the endomorphism rings $ \\\\mathrm{End}_K(V) $ and $ \\\\mathrm{End}_K(W) $, then for every linear\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: hits concern general sheaves, fibres or linear algebra, not the normalized classical/sf comparison required here."
+  },
+  {
+   "tool": "grep",
+   "query": "HasEigenvalue|eigenspace",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Zero\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Minpoly\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"488\", \"text\": \"  obtain ⟨v, hv⟩ := (Module.End.hasEigenvalue_of_isRoot this).exists_hasEigenvector\"}\n  {\"file\": \"Mathlib/Algebra/DirectSum/LinearMap.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Basic\"}\n  {\"file\": \"Mathlib/Algebra/DirectSum/LinearMap.lean\", \"line\": \"103\", \"text\": \"that the trace of `g` vanishes on each generalized eigenspace of `f`. -/\"}\n  {\"file\": \"Mathlib/Algebra/DirectSum/LinearMap.lean\", \"line\": \"108\", \"text\": \"    (hf : ⨆ μ, f.maxGenEigenspace μ = ⊤)\"}\n  {\"file\": \"Mathlib/Algebra/DirectSum/LinearMap.lean\", \"line\": \"109\", \"text\": \"    (hg : ∀ μ, trace R _ (g.restrict (f.mapsTo_maxGenEigenspace_of_comm h_comm μ)) = 0) :\"}\n  {\"file\": \"Mathlib/Algebra/DirectSum/LinearMap.lean\", \"line\": \"112\", \"text\": \"      MapsTo (g ∘ₗ f) ↑(f.maxGenEigenspace μ) ↑(f.maxGenEigenspace μ) :=\"}\n  {\"file\": \"Mathlib/Tactic/Linter/DirectoryDependency.lean\", \"line\": \"610\", \"text\": \"  (`Mathlib.LinearAlgebra.Eigenspace.ContinuousLinearMap, `Mathlib.Topology),\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"20\", \"text\": \"  eigenspace\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ZMatrix.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Matrix\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ZMatrix.lean\", \"line\": \"45\", \"text\": \"    (μ ρ : R) (hμ : ∀ i j, A i j ≤ if i = j then μ else 0) (hρ : HasEigenvalue A.toLin' ρ) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/ZMatrix.lean\", \"line\": \"51\", \"text\": \"    replace hρ : HasEigenvalue (toLin' N) (μ - ρ) := by simpa [N_def, hasEigenvalue_sub'_iff]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Basic\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"line\": \"345\", \"text\": \"@[simp] lemma maxGenEigenSpace_toEnd_eq_top [IsNilpotent L M] (x : L) :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"line\": \"346\", \"text\": \"    ((toEnd R L M x).maxGenEigenspace 0) = ⊤ := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"line\": \"348\", \"text\": \"  simp only [Module.End.mem_maxGenEigenspace, zero_smul, sub_zero, Submodule.mem_top,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Gershgorin.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Basic\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Gershgorin.lean\", \"line\": \"30\", \"text\": \"theorem eigenvalue_mem_ball {μ : K} (hμ : Module.End.HasEigenvalue (Matrix.toLin' A) μ) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Gershgorin.lean\", \"line\": \"53\", \"text\": \"                  exact (congrFun (Module.End.mem_eigenspace_iff.mp h_eg) i).symm]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Gershgorin.lean\", \"line\": \"69\", \"text\": \"  rw [Module.End.hasEigenvalue_iff, Module.End.eigenspace_zero, ne_comm]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Rank.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Zero\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Rank.lean\", \"line\": \"206\", \"text\": \"  (ad K L x).finrank_maxGenEigenspace_zero_eq\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"line\": \"37\", \"text\": \"Mathlib has already defined eigenvalues in `LinearAlgebra.Eigenspace` as the roots of the minimal\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.LinearAlgebra.Eigenspace.Matrix\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact statement: hits concern general sheaves, fibres or linear algebra, not the normalized classical/sf comparison required here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalWeilFiltrationHeartTransport",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, \"The actual Weil filtration ... now proves that G is mixed\": Purity equivalence for a normalized classical realization",
+   "via": [
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalRealizationPunctualPurity",
+  "file": "lean/Sheaf/Paper/ClassicalRealizationPunctualPurity.lean",
+  "declaration": "WeilConjectures.zl_classical_realization_punctual_purity",
+  "statement": "theorem zl_classical_realization_punctual_purity\n    (R : ZlClassicalRealization D l hl Ω Y₀) (F : ZlClassicalWeil D l Ω Y₀)\n    (iota : Ω ≃+* ℂ) (w : ℝ) :\n    SfIsPunctuallyPureOfWeight D l hl Ω Y₀ iota.toRingHom\n        ((R.weil D l hl Ω Y₀).obj F) w ↔\n      ZlClassicalPure D l Ω Y₀ iota.toRingHom F w",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-113fb",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T101350-L-3687274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-113fb",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T101350-L-3687274",
+  "kind": "interface",
+  "note": "independent cc review: item proof (exact_diagram + diagram_fibres + punctual_purity assembly) and 4 new nodes against node statements; TransportData decls byte-diffed against published module; both direct importers compiled"
+ }
+}

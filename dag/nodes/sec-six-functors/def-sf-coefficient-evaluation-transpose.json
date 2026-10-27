@@ -1,0 +1,105 @@
+{
+ "id": "def-sf-coefficient-evaluation-transpose",
+ "kind": "definition",
+ "title": "Canonical coefficient dual tensor internal-Hom evaluation comparison",
+ "status": "split",
+ "statement": "Let $B$ be a category with independent object and morphism universes, $H:B^{op}\\times B\\to B$ a bifunctor, and $S$ a closed tensor-Hom structure for $H$ as in [def-coef-ringed-tensor-hom-model]. Write $\\otimes$, $\\mathbf1$, $\\alpha$, $\\rho$, and $\\mathrm{ev}_{P,O}:H(P,O)\\otimes P\\to O$ for its tensor, unit, associator, right unitor, and adjunction evaluation. Let $s$ be a symmetry for this monoidal structure, let $O\\in B$, and let $u:\\mathbf1\\xrightarrow{\\sim}O$. For arbitrary $P,N\\in B$, define $d_{P,N}:N\\otimes H(P,O)\\to H(P,N)$ to be the transpose under $-\\otimes P\\dashv H(P,-)$ of $(N\\otimes H(P,O))\\otimes P\\xrightarrow{\\alpha}N\\otimes(H(P,O)\\otimes P)\\xrightarrow{1\\otimes\\mathrm{ev}_{P,O}}N\\otimes O\\xrightarrow{1\\otimes u^{-1}}N\\otimes\\mathbf1\\xrightarrow{\\rho}N$. Define $c_{P,N}:H(P,O)\\otimes N\\to H(P,N)$ by first applying $s_{H(P,O),N}$ and then $d_{P,N}$. In the coefficient-unit case take $O=\\mathbf1$ and $u=1$. These definitions impose no perfectness, invertibility of either comparison, orientation, or exceptional inverse-image hypothesis.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "Proof sentences 1–3, evaluation-defined second arrow; expanded transpose in lem-sf-coefficient-evaluation-naturality, statement. Existing construction: RingedSiteDualityMaps.lean, ringedSiteDualEvaluation and ringedSiteDualEvaluationLeft (Stacks 08JD, 08JE, 0A98)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|dualTensorHom|ihomTensorToIhom",
+   "results": "{\"t\": \"2026-10-22T14:27:09Z\", \"tool\": \"grep\", \"query\": \"ihomUnitTensorToIhom|dualTensorHom|ihomTensorToIhom\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse existing ringedSiteDualEvaluation and ringedSiteDualEvaluationLeft; search hits do not give another DAG definition owner for these coefficient-closed-structure maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The evaluation transpose map from coefficient dual tensor M to internal Hom P M in a symmetric monoidal closed category",
+   "results": "{\"t\": \"2026-10-22T14:27:10Z\", \"tool\": \"leansearch\", \"query\": \"The evaluation transpose map from coefficient dual tensor M to internal Hom P M in a symmetric monoidal closed category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.transpose_apply\", \"CategoryTheory.ihom.ev\", \"Module.Dual.transpose\", \"CategoryTheory.exp.ev\", \"transpose_dualTensorHom\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"contractLeft\", \"CategoryTheory.ihom.coev\"], \"digest\": \"56f38a1ba507b1d4\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse existing ringedSiteDualEvaluation and ringedSiteDualEvaluationLeft; search hits do not give another DAG definition owner for these coefficient-closed-structure maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev",
+   "results": "{\"t\": \"2026-10-22T14:27:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ihom.ev\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"CategoryTheory.MonoidalClosed.uncurry_id_eq_ev\", \"CategoryTheory.MonoidalClosed.uncurry_ihom_map\", \"CategoryTheory.MonoidalClosed.uncurry_eq\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc\", \"CategoryTheory.MonoidalClosed.uncurry_pre\"], \"digest\": \"a38f37fbed56c200\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse existing ringedSiteDualEvaluation and ringedSiteDualEvaluationLeft; search hits do not give another DAG definition owner for these coefficient-closed-structure maps."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSiteDualEvaluation|ihomUnitTensorToIhom|dualTensorHom; all definition-node lean records; blueprint_refs.py search coefficient evaluation",
+   "results": "rg in lean/WeilConjectures finds ordinary module dualTensorHom specializations and rigid-category ihomUnitTensorToIhom, not a replacement on the recorded coefficient closed structure. rg in lean/Sheaf finds the exact definitions in CategoryTheory/RingedSiteDualityMaps.lean:66 and :170. Parsing every def-*.json lean record finds no owner of either evaluation definition. blueprint_refs.py search coefficient evaluation finds prop-pod-dual-tate-data-compatibility and sk-thm-sf-dual-perfect; neither owns these definitions. def-per-ringed-site-bidual-transpose owns only ringedSiteBidual and its naturality.",
+   "date": "2026-10-22",
+   "verdict": "Record the existing two definitions without a new Lean module; remove the theorem-only statement dependency."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-coefficient-evaluation-naturality",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-dual-perfect",
+   "place": "Proof sentences 1–3: evaluation-defined coefficient dual tensor comparison used in theta.",
+   "via": [
+    "lem-sf-coefficient-evaluation-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "declaration": "CategoryTheory.ringedSiteDualEvaluationLeft",
+  "declarations": [
+   "CategoryTheory.ringedSiteDualEvaluation",
+   "CategoryTheory.ringedSiteDualEvaluationLeft"
+  ],
+  "statement": "def ringedSiteDualEvaluationLeft (P N : D) :\n    S.tensor.obj (H.obj (op P, O), N) ⟶ H.obj (op P, N)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Owns the existing real definitions only. Ambient variables are D, H, S : CoefficientClosedStructure H, s : SymmetricCategory for S.monoidal, O : D and u : S.monoidal.tensorUnit ≅ O. The right-order comparison transposes associator, evaluation, inverse unit identification and right unitor; the left-order comparison is the braiding followed by that map. No choose from ringedSiteDualityMaps_exists and no theorem premise. The item specializes O to the coefficient unit and u to Iso.refl."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc745ba27",
+  "group": "Q70",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc745ba27",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Re-delivery of d51f2efaf68a; H2 fix verified: theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by new existing:true def node def-sf-coefficient-evaluation-transpose owning ringedSiteDualEvaluation/ringedSiteDualEvaluationLeft (statement matches live RingedSiteDualityMaps.lean:66,:170 term for term; verbatim signature = lines 170-171; no other owner, id not live). sk-lem-sf-twist-interchange record now a superset of the live ND record (5+4 decls), live unchanged since base. Rational line now named sfRationalTwistingCoefficient m ⟦t⟧. CoefficientTwistInterchange.lean byte-identical to previously reviewed; all clauses/edge cases re-confirmed. No compile (no file changed). Advisory: θ⁻¹ = sfPerfectThetaInverse linked only in report; plain Monoidal.Closed.Basic import likely redundant."
+ }
+}

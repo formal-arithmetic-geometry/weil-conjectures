@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-resolving-class-cycle-acyclicity",
+ "kind": "statement",
+ "title": "Descending cycles in a kernel-closed exact-image class",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and let $V:\\mathcal A\\to\\mathcal B$ be additive, meaning that it preserves addition and zero of morphisms. Let $\\mathcal E$ be a class of objects of $\\mathcal A$ containing every zero object and closed under isomorphisms. Assume that for every short exact sequence $0\\to M'\\xrightarrow{i}M\\xrightarrow{p}M''\\to0$ with $M,M''\\in\\mathcal E$, one has $M'\\in\\mathcal E$ and $0\\to V(M')\\xrightarrow{V(i)}V(M)\\xrightarrow{V(p)}V(M'')\\to0$ is short exact. Let $E$ be an integer-indexed cochain complex [def-weil-abstract-derived-category], let $b\\in\\mathbf Z$, and suppose $E^n=0$ for $n>b$, $H^n(E)=0$ for every $n$, and $E^n\\in\\mathcal E$ for every $n$. Write $Z^n(E)=\\ker d_E^n$, let $i_n:Z^n(E)\\to E^n$ be its inclusion, and let $p_n:E^n\\to Z^{n+1}(E)$ be the differential with codomain restricted to cycles. Then $Z^n(E)\\in\\mathcal E$ for every $n$, and\n$$0\\to V(Z^n(E))\\xrightarrow{V(i_n)}V(E^n)\\xrightarrow{V(p_n)}V(Z^{n+1}(E))\\to0$$\nis short exact for every $n$. In the termwise image complex $V(E)$, the map $V(i_n)$ identifies $V(Z^n(E))$ with both $\\ker d_{V(E)}^n$ and $\\operatorname{im}d_{V(E)}^{n-1}$ as subobjects of $V(E^n)$. In particular $V(E)$ is acyclic. Neither right exactness of $V$ on the whole category nor enough projectives is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Dual of Tag 015D, lemma-F-acyclic-ses, applied to the cycle sequences in the proof of the dual acyclic-computation assertion of Tag 015E, lemma-leray-acyclicity; abstract descending-cycle argument extracted from returned Step 5. The class-level generalization and subobject identifications are expanded in report.md."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $a_n:E^{n-1}\\to Z^n(E)$ for the cycle lift of $d_E^{n-1}$. By the cohomology definition, $H^n(E)$ is its cokernel. This cokernel is zero. For every $z:T\\to Z^n(E)$, clause (c) of the refinement lemma therefore gives an epimorphism $\\rho:T'\\to T$ and $x:T'\\to E^{n-1}$ with $z\\rho=a_nx$. Clause (a) makes $a_n$ epic. Thus $p_n=a_{n+1}$ is epic. Also $d_E^n=i_{n+1}p_n$, so the monicity of $i_{n+1}$ gives $\\ker p_n=\\ker d_E^n$, with inclusion $i_n$. Hence $0\\to Z^n(E)\\xrightarrow{i_n}E^n\\xrightarrow{p_n}Z^{n+1}(E)\\to0$ is short exact for every $n$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 05PK, lemma-epimorphism-universal-abelian-category, and 08N5, lemma-check-exactness-fibre-product; apply the refinement criteria to the zero cohomology cokernel."
+   }
+  },
+  {
+   "text": "For $n>b$, $Z^n(E)$ is zero because it is the kernel of a map from the zero object $E^n$; hence it belongs to $\\mathcal E$. Starting with $Z^{b+1}(E)\\in\\mathcal E$, induct on $k\\in\\mathbf N$ to obtain $Z^{b+1-k}(E)\\in\\mathcal E$. At the successor step set $n=b-k$: Step 1 gives the short exact cycle sequence, $E^n\\in\\mathcal E$ by hypothesis and $Z^{n+1}(E)\\in\\mathcal E$ by induction. The assumed closure condition gives $Z^n(E)\\in\\mathcal E$ and the stated short exact image sequence. This also gives that image sequence for $n>b$, since its middle and quotient are in $\\mathcal E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Dual of Tag 015D, lemma-F-acyclic-ses, used in the acyclic-computation setting of Tag 015E, lemma-leray-acyclicity; explicit induction using the class condition assumed in this item."
+   }
+  },
+  {
+   "text": "Write $I_n=V(i_n)$ and $P_n=V(p_n)$. Step 2 says that $I_n$ is monic, $P_n$ is epic, and $\\operatorname{im}I_n=\\ker P_n$. The image of the monomorphism $I_n$ is the subobject it represents. Functoriality gives $d_{V(E)}^n=I_{n+1}P_n$. As $I_{n+1}$ is monic, an arrow $x$ satisfies $d_{V(E)}^nx=0$ exactly when $P_nx=0$. Thus $\\ker d_{V(E)}^n=\\ker P_n=\\operatorname{im}I_n$ as subobjects, with representative $I_n$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010E, definition-exact; kernel universal property and cancellation of the monomorphism supplied by Step 2."
+   }
+  },
+  {
+   "text": "The factorization $d_{V(E)}^{n-1}=I_nP_{n-1}$ gives $d_{V(E)}^nd_{V(E)}^{n-1}=0$. If $x:T\\to V(E^n)$ satisfies $d_{V(E)}^nx=0$, Step 3 gives $x=I_nz$. Since $P_{n-1}$ is epic, clause (a) supplies an epimorphism $\\rho:T'\\to T$ and $y:T'\\to V(E^{n-1})$ with $z\\rho=P_{n-1}y$. Thus $x\\rho=d_{V(E)}^{n-1}y$. Clause (b) proves exactness at $V(E^n)$, namely $\\operatorname{im}d_{V(E)}^{n-1}=\\ker d_{V(E)}^n$. Step 3 identifies this common subobject with $I_n$. Its quotient is zero in every degree, so $V(E)$ is acyclic.",
+   "uses": [
+    "lem-sp-abelian-refinements",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 05PK and 08N5, lemma-epimorphism-universal-abelian-category and lemma-check-exactness-fibre-product, applied in the target abelian category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sp-abelian-refinements",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit descending-cycle argument in the dual 015D/015E setting, using the refinement criteria 05PK and 08N5 from homology.tex. The general class-level statement is not quoted as a theorem of 015D or 015E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "acyclic|exact.*map|map.*exact [sub=CategoryTheory/Abelian]",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"grep\", \"query\": \"acyclic|exact.*map|map.*exact\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\"], \"digest\": \"259d1802c8498a32\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, Functor.Additive, Exact",
+   "results": "{\"t\": \"2026-10-22T06:43:53Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, Functor.Additive, Exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.Additive'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected (loogle: unknown identifier 'Functor.Additive'); not evidence of absence; valid searches are also recorded."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor on a kernel closed class with exact short exact image sequences preserves acyclicity of bounded above complexes in that class",
+   "results": "{\"t\": \"2026-10-22T06:44:04Z\", \"tool\": \"leansearch\", \"query\": \"An additive functor on a kernel closed class with exact short exact image sequences preserves acyclicity of bounded above complexes in that class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.additiveFunctor\", \"CategoryTheory.Functor.preservesHomology_of_map_exact\", \"HomologicalComplex.Acyclic\", \"CategoryTheory.leftExactFunctor_le_additiveFunctor\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf\", \"CategoryTheory.ShortComplex.Exact.map_of_mono_of_preservesKernel\"], \"digest\": \"199fceb6ac90f9a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserves acyclicity of a bounded above exact complex whose terms lie in a class closed under kernels of epimorphisms with exact image short sequences",
+   "results": "{\"t\": \"2026-10-22T06:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor preserves acyclicity of a bounded above exact complex whose terms lie in a class closed under kernels of epimorphisms with exact image short sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesHomology_of_map_exact\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf\", \"CategoryTheory.ShortComplex.Exact.map\", \"CategoryTheory.Functor.preservesHomologyOfExact\", \"CategoryTheory.ShortComplex.Exact.map_of_epi_of_preservesCokernel\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf\"], \"digest\": \"a9b2db333f1f1493\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descending induction on cycles of a bounded above acyclic complex in a resolving class makes an additive functor exact on its cycle short exact sequences",
+   "results": "{\"t\": \"2026-10-22T06:44:16Z\", \"tool\": \"leanfinder\", \"query\": \"Descending induction on cycles of a bounded above acyclic complex in a resolving class makes an additive functor exact on its cycle short exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"HomologicalComplex.exact_of_degreewise_exact\", \"CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ\", \"HomologicalComplex.exact_iff_degreewise_exact\", \"HomologicalComplex.cycles_left_exact\", \"HomologicalComplex.shortExact_of_degreewise_shortExact\", \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\"], \"digest\": \"606bd4607457867c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*map|map.*acyclic|[Rr]esolving|cycles.*[Ee]xact [sub=Algebra/Homology]",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"grep\", \"query\": \"acyclic.*map|map.*acyclic|[Rr]esolving|cycles.*[Ee]xact\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Cycles.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Cycles.lean\"], \"digest\": \"231625c667b42fda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", CategoryTheory.Functor.Additive",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"ShortExact\\\", CategoryTheory.Functor.Additive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesEpimorphisms_of_preserves_shortExact_right\", \"CategoryTheory.Functor.preservesMonomorphisms_of_preserves_shortExact_left\", \"CategoryTheory.ShortComplex.ShortExact.injective_f\", \"CategoryTheory.ShortComplex.ShortExact.surjective_g\", \"CategoryTheory.ShortComplex.ShortExact.d_eq_zero_of_f_eq_d_apply\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply\", \"CategoryTheory.ShortComplex.ShortExact.mapShiftedHom_singleδ'\"], \"digest\": \"88b4feb6328de969\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any unbounded cochain map P to X, epimorphisms from P n to X n times over Z n+1 X with Z n+1 P imply degreewise epimorphism and quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:44:51Z\", \"tool\": \"leanfinder\", \"query\": \"For any unbounded cochain map P to X, epimorphisms from P n to X n times over Z n+1 X with Z n+1 P imply degreewise epimorphism and quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.degreewiseEpiWithInjectiveKernel\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"CochainComplex.cm5b\", \"HomologicalComplex.epi_homologyMap_of_epi_of_not_rel\", \"DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff\", \"CochainComplex.instIsMultiplicativeIntDegreewiseEpiWithInjectiveKernel\", \"DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff\", \"CochainComplex.cm5b.instQuasiIsoIntP\"], \"digest\": \"80416cca9bcc5263\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Functor.exact_tfae and preservesHomology_of_map_exact require preservation of exact sequences on the whole category. The new hypotheses hold only when the middle and quotient objects belong to E; membership of all cycles must first be proved by downward induction. HomologicalComplex exactness and cycle-sequence infrastructure does not provide that induction. Read ShortComplex/ExactFunctor.lean:25-58 and CategoryTheory/Abelian/Exact.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*map|map.*acyclic|exact_iff_epi_toCycles|cycles_left_exact [sub=Algebra/Homology]",
+   "results": "{\"t\": \"2026-10-23T04:26:51Z\", \"tool\": \"grep\", \"query\": \"acyclic.*map|map.*acyclic|exact_iff_epi_toCycles|cycles_left_exact\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"bfb9457077f2dbab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact_tfae and preservesHomology_of_map_exact require exactness on the whole category; the item only assumes exact image sequences within a kernel-closed class. exact_iff_epi_toCycles and cycles_left_exact are local infrastructure, not the descending-class induction. Sources read: ShortComplex/Exact.lean:307-410, ShortComplex/ExactFunctor.lean:25-58, CategoryTheory/Abelian/Exact.lean:267-279. The existing Mathlib leaf lem-sp-abelian-refinements supplies the local lifting criteria used below."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exact_iff_epi_toCycles\"",
+   "results": "{\"t\": \"2026-10-23T04:26:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"exact_iff_epi_toCycles\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.exact_iff_epi_toCycles\"], \"digest\": \"28c1f55cdb99168c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact_tfae and preservesHomology_of_map_exact require exactness on the whole category; the item only assumes exact image sequences within a kernel-closed class. exact_iff_epi_toCycles and cycles_left_exact are local infrastructure, not the descending-class induction. Sources read: ShortComplex/Exact.lean:307-410, ShortComplex/ExactFunctor.lean:25-58, CategoryTheory/Abelian/Exact.lean:267-279. The existing Mathlib leaf lem-sp-abelian-refinements supplies the local lifting criteria used below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor on a resolving class preserves acyclicity of bounded above complexes whose terms belong to that class",
+   "results": "{\"t\": \"2026-10-23T04:26:52Z\", \"tool\": \"leansearch\", \"query\": \"An additive functor on a resolving class preserves acyclicity of bounded above complexes whose terms belong to that class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.additiveFunctor\", \"CategoryTheory.additiveFunctor_iff\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"DerivedCategory.instAdditiveCochainComplexIntQ\", \"CategoryTheory.AdditiveFunctor.of\", \"CategoryTheory.Functor.map_homogical_complex_additive\"], \"digest\": \"135c965a7867a2d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact_tfae and preservesHomology_of_map_exact require exactness on the whole category; the item only assumes exact image sequences within a kernel-closed class. exact_iff_epi_toCycles and cycles_left_exact are local infrastructure, not the descending-class induction. Sources read: ShortComplex/Exact.lean:307-410, ShortComplex/ExactFunctor.lean:25-58, CategoryTheory/Abelian/Exact.lean:267-279. The existing Mathlib leaf lem-sp-abelian-refinements supplies the local lifting criteria used below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor exact on short exact sequences within a kernel closed class sends bounded above acyclic complexes of that class to acyclic complexes",
+   "results": "{\"t\": \"2026-10-23T04:26:59Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor exact on short exact sequences within a kernel closed class sends bounded above acyclic complexes of that class to acyclic complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Functor.preservesHomology_of_map_exact\", \"CategoryTheory.ShortComplex.Exact.map_of_mono_of_preservesKernel\", \"CategoryTheory.ShortComplex.ShortExact.map\", \"CategoryTheory.ShortComplex.Exact.map\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf\", \"CategoryTheory.Functor.preservesHomologyOfExact\"], \"digest\": \"2a63fa0f00e1dfbc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact_tfae and preservesHomology_of_map_exact require exactness on the whole category; the item only assumes exact image sequences within a kernel-closed class. exact_iff_epi_toCycles and cycles_left_exact are local infrastructure, not the descending-class induction. Sources read: ShortComplex/Exact.lean:307-410, ShortComplex/ExactFunctor.lean:25-58, CategoryTheory/Abelian/Exact.lean:267-279. The existing Mathlib leaf lem-sp-abelian-refinements supplies the local lifting criteria used below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descending induction from a zero upper bound proves all cycles lie in a kernel closed class and applying an additive functor gives exact image cycle sequences",
+   "results": "{\"t\": \"2026-10-23T04:28:02Z\", \"tool\": \"leanfinder\", \"query\": \"Descending induction from a zero upper bound proves all cycles lie in a kernel closed class and applying an additive functor gives exact image cycle sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cycles_left_exact\", \"CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff\", \"CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf\", \"CategoryTheory.ShortComplex.Exact.map_of_mono_of_preservesKernel\", \"CategoryTheory.ShortComplex.Exact.map\", \"CategoryTheory.Functor.preservesHomology_of_map_exact\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.ShortComplex.ShortExact.map_of_exact\"], \"digest\": \"cc4dc77f4aedf39e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact_tfae and preservesHomology_of_map_exact require exactness on the whole category; the item only assumes exact image sequences within a kernel-closed class. exact_iff_epi_toCycles and cycles_left_exact are local infrastructure, not the descending-class induction. Sources read: ShortComplex/Exact.lean:307-410, ShortComplex/ExactFunctor.lean:25-58, CategoryTheory/Abelian/Exact.lean:267-279. The existing Mathlib leaf lem-sp-abelian-refinements supplies the local lifting criteria used below."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesHomology_of_map_exact|exact_tfae [sub=CategoryTheory/Abelian]",
+   "results": "{\"t\": \"2026-10-23T04:37:22Z\", \"tool\": \"grep\", \"query\": \"preservesHomology_of_map_exact|exact_tfae\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Exact.lean\", \"Mathlib/CategoryTheory/Abelian/Exact.lean\", \"Mathlib/CategoryTheory/Abelian/Exact.lean\"], \"digest\": \"167685479138e51f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact_tfae and preservesHomology_of_map_exact require exactness on the whole category; the item only assumes exact image sequences within a kernel-closed class. exact_iff_epi_toCycles and cycles_left_exact are local infrastructure, not the descending-class induction. Sources read: ShortComplex/Exact.lean:307-410, ShortComplex/ExactFunctor.lean:25-58, CategoryTheory/Abelian/Exact.lean:267-279. The existing Mathlib leaf lem-sp-abelian-refinements supplies the local lifting criteria used below."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-above-acyclic-derived-computation",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Extracted supporting argument: returned Step 5, descending induction on cycles and exact image sequences.",
+   "via": [
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-resolving-class-cycle-acyclicity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four explicit steps: the zero cohomology cokernel and epimorphic refinements give the cycle short exact sequences; downward induction from the zero upper tail applies exactly the assumed class condition; monic cancellation identifies image cycles with the target kernels; epimorphic refinements identify incoming boundaries with those kernels. No new node is needed: the existing Mathlib leaf lem-sp-abelian-refinements supplies all non-elementary lifting facts.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Extracted supporting argument: returned Step 5, descending induction on cycles and exact image sequences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-2c6b10a52",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-2c6b10a52 (reviewer sub-agent of L); spot-checked: I read the full statement and all four steps. The statement is identical to live/side-live, where the node is still unsplit, so no other group superseded it. There are no new nodes and no SGA sources. The item is the dual, class-level form of Stacks 015D(3) (derived.tex l.5643) applied to the cycle sequences of 015E (l.5717); the class condition is taken as a hypothesis, which makes the statement true. Parent use matches: lem-trf-bounded-above-acyclic-derived-computation Step 4 supplies a cone that is acyclic, termwise in a class containing zeros, iso-invariant and kernel-closed (from lem-trf-left-acyclic-short-exact(2)), and zero above b. Step 1: H^n=ker d^n/im d^{n-1} (def-weil-abstract-derived-category) is coker a_n; clauses (c) and (a) of the Mathlib leaf lem-sp-abelian-refinements make a_n epic, and monicity of i_{n+1} gives ker p_n=i_n, so the cycle sequence is short exact. Step 2 is a correctly set-up downward induction (base Z^{b+1}=0, successor n=b-k) using only the item's own hypothesis, and covers n>b via the zero sequence. Step 3: cancelling the monic I_{n+1} gives ker d_{V(E)}^n=ker P_n=im I_n. Step 4: refinement clauses (a) and (b) in B give im d^{n-1}=ker d^n, so V(E) is acyclic. Tags 015D/015E/05PK/08N5/010E check out in tags/tags. Small cases tested: the zero complex; Z->Z with -⊗Z/2 on free groups works; with all groups as the class, 0->Z->Z->Z/2 fails exactly where the class condition fails, so the hypothesis is needed. Duplicate search found nothing: lem-kun-pointwise-finite-cd-exact-complex, lem-sc-integer-section-acyclic-incoming-kernel-image, lem-coef-augmented-injective-cycle-test and lem-sc-acyclic-lift-split-cycles state different results. Provenance is unchanged and tool_uses is empty. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ResolvingClassCycleAcyclicity",
+  "declaration": "HomologicalComplex.resolving_class_cycle_acyclicity",
+  "file": "lean/Sheaf/Algebra/Homology/ResolvingClassCycleAcyclicity.lean",
+  "statement": "theorem resolving_class_cycle_acyclicity {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [Abelian B] (V : A ⥤ B) [V.Additive] (𝓔 : A → Prop) (hzero : ∀ X : A, IsZero X → 𝓔 X) (hiso : ∀ {X Y : A}, (X ≅ Y) → 𝓔 X → 𝓔 Y) (hclosed : ∀ S : ShortComplex A, S.ShortExact → 𝓔 S.X₂ → 𝓔 S.X₃ → 𝓔 S.X₁ ∧ (S.map V).ShortExact) (E : CochainComplex A ℤ) (b : ℤ) (hbounded : ∀ n : ℤ, b < n → IsZero (E.X n)) (hacyclic : ∀ n : ℤ, IsZero (E.homology n)) (hterms : ∀ n : ℤ, 𝓔 (E.X n)) : (∀ n : ℤ, 𝓔 (E.cycles n)) ∧ (∀ n : ℤ, ((E.cyclesShortComplex n (n + 1)).map V).ShortExact ∧ imageSubobject (V.map (E.iCycles n)) = kernelSubobject (((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj E).d n (n + 1)) ∧ imageSubobject (V.map (E.iCycles n)) = imageSubobject (((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj E).d (n - 1) n)) ∧ ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj E).Acyclic",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d4012f31",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Read the node, the stmt_deps (def-sp-abelian, def-weil-abstract-derived-category), the side-live cyclesShortComplex (iCycles/toCycles, the canonical cycle sequence), the module and the report. All hypotheses (additive V; 𝓔 contains zero objects, is iso-closed, kernel-closed with exact images; E zero above b, acyclic, termwise in 𝓔) and all conclusions (cycles in 𝓔, short exact image cycle sequences, imageSubobject V(i_n) = kernelSubobject d^n = imageSubobject d^{n-1}, V(E) Acyclic) match the node exactly, with no stronger assumptions and independent universes. lean.statement is verbatim; the node diff vs side-live is lean only; no new nodes; H4 searches show no existing match; one sorry; docstrings carry source and blueprint and the 4 steps. No recompile because no file was changed."
+ }
+}

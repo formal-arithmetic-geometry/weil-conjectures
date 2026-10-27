@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-log-morphism-operations",
+ "kind": "statement",
+ "title": "Identity and composition of arbitrary logarithmic morphisms",
+ "statement": "For arbitrary schemes with etale log structures and relative-section log morphisms [def-trf-log-ideal-chart-presentation], there are identity log maps $1_M$ and composites $g\\circ f$. The base of a composite is the composite of scheme maps. On every compatible relative etale triangle its section map is the composite of the two given section maps. These triangle equations determine the composite uniquely. Identities fix every relative section; composition satisfies both identity laws and associativity. These constructions specialize to fs locally Noetherian objects [def-trf-fs-log-blowup], whose identity satisfies the prescribed identity condition [def-per-strict-log-morphism]. Strict etale log maps, meaning bijective canonical restriction maps on every relative etale test object, compose.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69 (log-morphism conventions); VIII 3.3.4(ii), p.107. Explicit relative-section construction written by F3; Kato 1988 section 1."
+ },
+ "stmt_deps": [
+  "def-trf-log-ideal-chart-presentation",
+  "def-trf-fs-log-blowup",
+  "def-per-strict-log-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For a relative diagram V to W over a composite, pull W back along the second map. The lift of V to this etale intermediate test object exists by the scheme product property. Compose the two section maps. Naturality and compatibility with regular functions follow from naturality of the given maps and the two projection equations.",
+   "uses": [
+    "def-trf-log-ideal-chart-presentation",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other intermediate etale test triangle, its map to the canonical pullback and naturality identify the section-map composites. Conversely the triangle using the canonical pullback determines the composite, including its base.",
+   "uses": [
+    "def-trf-log-ideal-chart-presentation",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity uses the restriction homomorphisms on the etale site. Naturality gives its triangle equations. Uniqueness of the composite proves both identity laws. For associativity, use two successive canonical pullbacks and apply the triangle equations to the same three section maps. For strict etale composition, those equations express the canonical restriction map as the composite of two bijections; ordinary etale composition supplies the base condition.",
+   "uses": [
+    "def-trf-log-ideal-chart-presentation",
+    "def-per-strict-log-morphism",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-log-ideal-chart-presentation",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-per-strict-log-morphism",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69 (log-morphism conventions); VIII 3.3.4(ii), p.107. Explicit relative-section construction written by F3; Kato 1988 section 1. The proof text records the construction, not a claim that ILO writes every relative-section detail."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal logarithmic smoothness is stable under composition and strict base change and chart smoothness is etale local",
+   "results": "OK 8 hits: RingHom.isStandardSmooth_stableUnderComposition, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.isStandardSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.FormallySmooth.comp, RingHom.FormallySmooth.stableUnderComposition, RingHom.Smooth.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log morphisms form a category, unique and local infinitesimal lifts compose, strict log fibre products preserve lifts, strict etale chart transport, and saturated blowup chart covers",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategory, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtaleLogMap\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleLogMap|FSLogChart|IsSaturatedLogBlowup|EtaleLogHom",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FSLogSmoothCompositionStrictBaseChange",
+  "date": "2026-10-23",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Supporting input: Identity and composition of arbitrary logarithmic morphisms.",
+   "via": [
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LogMorphismOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogMorphismOperations.lean",
+  "declaration": "AlgebraicGeometry.EtaleLogMap.comp_compEq",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogMap.comp",
+   "AlgebraicGeometry.EtaleLogMap.comp_compEq",
+   "AlgebraicGeometry.EtaleLogMap.id",
+   "AlgebraicGeometry.EtaleLogMap.toFSHom",
+   "AlgebraicGeometry.EtaleLogHom.id",
+   "AlgebraicGeometry.EtaleLogHom.comp",
+   "AlgebraicGeometry.EtaleLogHom.comp_compEq",
+   "AlgebraicGeometry.EtaleLogHom.id_isIdentity",
+   "AlgebraicGeometry.EtaleLogMap.ext",
+   "AlgebraicGeometry.EtaleLogMap.eq_comp_of_compEq",
+   "AlgebraicGeometry.EtaleLogMap.comp_base",
+   "AlgebraicGeometry.EtaleLogMap.id_base",
+   "AlgebraicGeometry.EtaleLogMap.compEq_id",
+   "AlgebraicGeometry.EtaleLogMap.id_compEq",
+   "AlgebraicGeometry.EtaleLogMap.comp_id",
+   "AlgebraicGeometry.EtaleLogMap.id_comp",
+   "AlgebraicGeometry.EtaleLogMap.comp_assoc",
+   "AlgebraicGeometry.EtaleLogMap.strictEtale_comp"
+  ],
+  "statement": "theorem EtaleLogMap.comp_compEq {X Y Z : Scheme.{u}}\n    {L : EtaleLogStructure X} {M : EtaleLogStructure Y} {N : EtaleLogStructure Z}\n    (f : EtaleLogMap L M) (g : EtaleLogMap M N) : f.CompEq g (f.comp g)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

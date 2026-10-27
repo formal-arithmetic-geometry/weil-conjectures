@@ -88,7 +88,62 @@
   "def-sc-effective-cartier-divisor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme",
+     "lines": [
+      669,
+      725
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_tensorObj_dual_pullback_pushforward_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.UniversalAdjointSection",
+     "lines": [
+      50,
+      76
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isQuasicoherent_pushforward_dual_toModules",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.UniversalAdjointSection",
+     "lines": [
+      80,
+      95
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.zeroLocus_adjointSection_eq_of_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.UniversalAdjointSection",
+     "lines": [
+      104,
+      146
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-f-representable",
  "split_report": {
@@ -144,5 +199,42 @@
    "AlgebraicGeometry.nonempty_arrowIso_pullback_directImageCounit"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field and let $X$ be a $k$-scheme which is proper, smooth of\nrelative dimension $1$ and geometrically integral over $k$, of genus $g$, with\na $k$-rational point $\\sigma$. Let $T$ be a scheme over $k$, write\n$f_T:X_T\\to T$, and let $D\\subset X_T$ be an effective Cartier divisor.\n\n1. $f_{T,*}\\mathcal{O}_{X_T}(D)$ is a quasi-coherent $\\mathcal{O}_T$-module.\n1. (*The $\\sigma$-terms cancel.*) If $\\mathcal{L}\\cong\\mathcal{O}_{X_T}(D)\\otimes f_T^*\\mathcal{M}$\nfor an invertible $\\mathcal{O}_T$-module $\\mathcal{M}$ and $f_{T,*}\\mathcal{O}_{X_T}(D)$ is\ninvertible, then $f_{T,*}\\mathcal{L}$ is invertible and\n$$\n\\mathcal{L}\\otimes f_T^*(f_{T,*}\\mathcal{L})^{-1}\\;\\cong\\;\n\\mathcal{O}_{X_T}(D)\\otimes f_T^*\\bigl(f_{T,*}\\mathcal{O}_{X_T}(D)\\bigr)^{-1}.\n$$\n1. (*The adjoint section has zero scheme $D$.*) Let\n$\\mathcal{L}\\in F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ ([def-pc-f-subfunctor]),\nassume $D\\in\\operatorname{Hilb}^g_{X/k}(T)$ ([def-pc-hilb-functor]) and\n$\\mathcal{L}\\cong\\mathcal{O}_{X_T}(D)\\otimes f_T^*\\mathcal{N}'$ for some invertible\n$\\mathcal{O}_T$-module $\\mathcal{N}'$, and let $\\mathcal{N}$ be an invertible\n$\\mathcal{O}_T$-module with $\\mathcal{N}\\cong f_{T,*}\\mathcal{L}$. Then the section $s$ of\n$\\mathcal{L}\\otimes f_T^*\\mathcal{N}^{-1}$ adjoint to the adjunction map\n$f_T^*\\mathcal{N}\\to\\mathcal{L}$ ([lem-pc-zero-scheme-recd]) has zero scheme\n$Z(s)=D$.\n\nIn particular, for $H=\\underline{\\operatorname{Hilb}}^g_{X/k}$ with universal divisor\n$D_{\\mathrm{univ}}\\subset H\\times X$ ([lem-pc-universal-divisor]), the normalized\nuniversal module\n$\\mathcal{L}_H=\\mathcal{O}(D_{\\mathrm{univ}})\\otimes\\mathrm{pr}_H^*\\sigma_H^*\\mathcal{O}(D_{\\mathrm{univ}})^{-1}$\nand the open $W\\subseteq H$ over which $\\mathcal{L}_H$ lies in $F$, the adjoint\nsection of $\\mathcal{L}_H|_{W\\times X}$ has zero scheme $D_{\\mathrm{univ}}\\cap(W\\times X)$.",
+  "proof": [
+   {
+    "text": "(1) $\\mathcal{O}_{X_T}(D)$ is invertible, hence quasi-coherent, and $f_T$ is\nproper (a base change of the proper $X\\to\\operatorname{Spec}k$), hence\nquasi-compact and quasi-separated; the direct image of a quasi-coherent module\nalong a quasi-compact quasi-separated morphism is quasi-coherent.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(2) By the projection formula ([lem-pc-projection-formula], $q=0$),\n$f_{T,*}\\mathcal{L}\\cong f_{T,*}\\bigl(\\mathcal{O}_{X_T}(D)\\otimes f_T^*\\mathcal{M}\\bigr)\\cong\nf_{T,*}\\mathcal{O}_{X_T}(D)\\otimes\\mathcal{M}$, which is invertible. Hence\n\n$$\n\\mathcal{L}\\otimes f_T^*(f_{T,*}\\mathcal{L})^{-1}\n\\cong\\mathcal{O}_{X_T}(D)\\otimes f_T^*\\mathcal{M}\\otimes\nf_T^*\\bigl(f_{T,*}\\mathcal{O}_{X_T}(D)\\bigr)^{-1}\\otimes f_T^*\\mathcal{M}^{-1}\n\\cong\\mathcal{O}_{X_T}(D)\\otimes f_T^*\\bigl(f_{T,*}\\mathcal{O}_{X_T}(D)\\bigr)^{-1}.\n$$",
+    "uses": [
+     "lem-pc-projection-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(3) Let $\\varphi:f_T^*f_{T,*}\\mathcal{L}\\to\\mathcal{L}$ be the adjunction map. The\nadjunction map $f_T^*\\mathcal{N}\\to\\mathcal{L}$ is $\\varphi$ precomposed with the\nisomorphism $f_T^*\\mathcal{N}\\cong f_T^*f_{T,*}\\mathcal{L}$, so it has the same zero\nscheme as $\\varphi$, and by [lem-pc-zero-scheme-recd] this is also $Z(s)$; it is a\nrelative effective Cartier divisor, finite locally free of degree $g$ over $T$.\nOn the other hand, the canonical section $1$ of $\\mathcal{O}_{X_T}(D)$ (the\ninclusion $\\mathcal{I}_D\\subseteq\\mathcal{O}_{X_T}$, dualized), twisted by\n$f_T^*\\mathcal{N}'$, is a morphism $s':f_T^*\\mathcal{N}'\\to\\mathcal{L}$ with zero scheme\n$D$ ([def-pc-zero-scheme]). By adjunction $s'$ factors as $f_T^*t$ followed by\n$\\varphi$, where $t:\\mathcal{N}'\\to f_{T,*}\\mathcal{L}$ is its adjoint; hence\n$Z(\\varphi)\\subseteq Z(s')=D$. Both $Z(\\varphi)$ and $D$ are closed subschemes of\n$X_T$ finite locally free of degree $g$ over $T$, and a closed immersion between\nfinite locally free $T$-schemes of the same degree is an isomorphism (on\neach fibre it is a surjection of $\\kappa(t)$-algebras of the same dimension,\nso its ideal vanishes by Nakayama). Hence $Z(s)=Z(\\varphi)=D$.",
+    "uses": [
+     "lem-pc-zero-scheme-recd",
+     "def-pc-zero-scheme"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The final assertion is (3) for $T=W$, $D=D_{\\mathrm{univ}}\\cap(W\\times X)$ (a point\nof $\\operatorname{Hilb}^g_{X/k}(W)$, being the restriction of the universal one) and\n$\\mathcal{N}'=\\sigma_W^*\\mathcal{O}(D_{\\mathrm{univ}})^{-1}$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

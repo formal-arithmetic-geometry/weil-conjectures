@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-divisor-adjoint",
+ "kind": "statement",
+ "title": "Finite supported diagonal projection is the divisor Chern adjunct",
+ "statement": "theorem diagonalTrace_finiteDivisorAdjoint\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : IsDiagonalLimit l Y hY D δ)\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ) :\n    let E := ULift.{u} (Padic l)\n    let V := p.restrictionS.F.mapDerivedCategory\n    let ev := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    (diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n        (a.hom ≫ p.Rc.R.map δ) ≫ p.sourceMap l E ≫\n        (p.LS.projection n).app _ ≫ ev.map (p.varying.inv.app _) =\n      (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫\n        ev.map (V.map\n          ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n            ((p.model.coefficientPullback.derivedIso l E).hom ≫\n              SpTowerClasses.firstChern l E p.chernX\n                (SpTowerClasses.diagonalPic Y))))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-sources",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the finite direct-image operation Phi, together with its normalization equations on every supported completed arrow and every geometric arrow, from diagonalTrace_finiteAdjunction_factorization. This step uses no diagonal limit or Chern identity.",
+   "uses": [
+    "lem-sfb-diagonal-trace-finite-adjunction-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonalTrace_finiteCartierChern on the surface with p.chernX, p.normalizedX, p.finiteX, p.restrictionX, p.coefficientsX and p.LX. It identifies the finite projection of the supported completed diagonal after forgetting support with the finite first Chern arrow of diagonalPic Y, before direct image or adjunction.",
+   "uses": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply congrArg Phi to the surface equality. Rewrite its left side with the factorization equation for delta and its right side with the geometric equation for firstChern p.chernX (diagonalPic Y). The resulting equality is the stated divisor-adjunct equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-finite-adjunction-factorization",
+  "lem-sfb-diagonal-trace-finite-cartier-chern"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), separated into the unadjointed finite surface class and normalized direct-image factorization; combined by congrArg",
+  "by": "V4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projecting a completed supported Cartier diagonal class to finite coefficients gives the adjoint of its first Chern class after direct image",
+   "results": "8 hits: RootPairing.Base.cartanMatrixIn_apply_same, ClassGroup.mk_mk0, AdicCompletion.kerProj_of, RootPairing.Base.cartanMatrix_apply_same, Algebra.Extension.Cotangent.of_val, AdicCompletion.kerProj, Algebra.Extension.Cotangent.val, AdicCompletion.pi_apply_coe",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A supported diagonal Cartier cycle on a projective line has relative Chern component one before applying trace",
+   "results": "8 hits: AlgebraicGeometry.Proj.one_apply, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection, WeierstrassCurve.Affine.Point.toClass_apply",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*components",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/LinearAlgebra/Matrix/Hermitian.lean, Mathlib/Algebra/Order/Antidiag/Prod.lean, Mathlib/Algebra/Order/Antidiag/Prod.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-pretrace-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteDivisorAdjoint",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteDivisorAdjoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finiteDivisorAdjoint",
+  "statement": "theorem diagonalTrace_finiteDivisorAdjoint\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (hδ : IsDiagonalLimit l Y hY D δ)\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ) :\n    let E := ULift.{u} (Padic l)\n    let V := p.restrictionS.F.mapDerivedCategory\n    let ev := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    (diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n        (a.hom ≫ p.Rc.R.map δ) ≫ p.sourceMap l E ≫\n        (p.LS.projection n).app _ ≫ ev.map (p.varying.inv.app _) =\n      (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫\n        ev.map (V.map\n          ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n            ((p.model.coefficientPullback.derivedIso l E).hom ≫\n              SpTowerClasses.firstChern l E p.chernX\n                (SpTowerClasses.diagonalPic Y))))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "worker": "S4",
+  "summary": "Finite supported diagonal projection is the divisor Chern adjunct",
+  "blueprint": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "tool_uses": [
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic compatibility of exact evaluation and derived direct image with the normalized derived unit."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic direct-image/derived-limit comparison characterized by the common derived unit."
+   },
+   {
+    "node": "lem-asd-supported-kummer-chern-realization",
+    "why": "Generic Cartier forget-support Chern equation, used before any projective-line component calculation."
+   },
+   {
+    "node": "lem-sp-cartier-reduction-existence",
+    "why": "Generic etale/pro-etale Cartier comparison with the specified scalar adjunct, used to identify the finite class."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T050649-L-251264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

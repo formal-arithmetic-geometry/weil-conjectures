@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-semisimple-centralizer-tangent-span",
+ "kind": "statement",
+ "title": "Proper semisimple Lie centralizers span the ambient tangent space",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and geometric connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure], and let $G$ be smooth and geometrically connected. For a smooth group $J$ put $\\mathfrak j=\\operatorname{Lie}(J)=T_{J/k,e}$ [def-sc-scheme-tangent-space], with its commutator Lie bracket [def-wf-lie-algebra]. Fix a faithful closed linear representation $i:G\\hookrightarrow\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group, def-weil-closed-immersion]. Call $X\\in\\mathfrak g$ semisimple if $di(X)$ is diagonalizable over $\\bar k$, and noncentral if $[X,Y]\\ne0$ for some $Y\\in\\mathfrak g$. Assume $k$ is infinite and $\\operatorname{Lie}(G_{\\bar k})$ contains a noncentral semisimple element, using the base-changed representation. For each noncentral semisimple $X\\in\\mathfrak g$, let $K_X=C_G(X)^\\circ$, where $C_G(X)(R)=\\{g\\in G(R):\\operatorname{Ad}(g)(X\\otimes1)=X\\otimes1\\}$ and $\\operatorname{Ad}$ is the differential of conjugation. The superscript means the identity component with its open-subscheme structure. Each $K_X$ is a smooth geometrically connected closed subgroup with $\\dim K_X<\\dim G$ [def-kun-topological-krull-dimension], its tangent space inside $\\mathfrak g$ is $\\{Y:[Y,X]=0\\}$, and these subspaces span $\\mathfrak g$ over $k$. In particular the indexing set of rational noncentral semisimple $X$ is nonempty. No perfectness or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 17.76–17.79, printed pp.377–378, and the first infinite-field case in Theorem 17.91, p.381. The identity component has the same tangent space; properness and dimension drop use 17.77 and 10.15. Over an imperfect field use restricted powers to obtain rational semisimple elements, rather than rational Jordan parts."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-wf-lie-algebra-derivation",
+  "def-wf-algebraic-components"
+ ],
+ "proof": [
+  {
+   "text": "Fix any rational noncentral semisimple $X$. Apply [lem-sfb-semisimple-tangent-stabilizer] to the given closed representation of $G$. Geometric connectedness implies connectedness by taking the extension $k/k$; the representation has positive dimension since a closed subgroup of $\\operatorname{GL}_0=1$ cannot have a geometric noncentral tangent vector. The lemma therefore gives a smooth closed finite-type affine subgroup $C=C_G(X)$ and identifies its tangent image with $\\{Y:[Y,X]=0\\}$. Noncentrality makes this a proper subspace of $\\mathfrak g$: choose $Y$ with $[X,Y]\\ne0$ and use antisymmetry. Consequently $C\\ne G$, since equality would give equality of tangent images.",
+   "uses": [
+    "lem-sfb-semisimple-tangent-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 17.76 and 17.77, printed p.377; faithful-matrix formulation as in the cited stabilizer node."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-type-group-identity-subgroup] to $C$. Its identity component $K_X$ is a connected open and closed subgroup with the specified open-subscheme structure. As a closed subscheme of the affine finite-type scheme $C$, it is affine of finite type (its coordinate algebra is a quotient of $k[C]$). The successive quotient maps also show that its inclusion in $G$ is closed. The open inclusion into the smooth $C$ is smooth over $k$ by [lem-pc-open-immersion-smooth-composition] (Stacks Tags 01VC and 01VA). The identity is a $k$-point of $K_X$, so [lem-sbc-connected-rational-point-geometrically-connected] (Tag 04KV) makes $K_X$ geometrically connected. All three cited assertions allow arbitrary base fields.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34, printed pp.16–17; Proposition 17.76, p.377. Stacks Tags 0B7R, 01VC, 01VA and 04KV for identity subgroup, smooth restriction and geometric connectedness."
+   }
+  },
+  {
+   "text": "The tangent spaces of $C$ and its open identity component agree inside $\\mathfrak g$. Indeed a tangent vector is a map $\\operatorname{Spec}(k[\\epsilon]/\\epsilon^2)\\to C$ reducing to the identity, by [lem-sfb-affine-group-dual-number-calculus]. The source has just one underlying point, which maps to the identity in $K_X$. The open-factorization assertion [lem-weil-pbc-morphism-factors-through-open-subscheme] (Tag 01HI) gives a unique factorization through $K_X$. Conversely compose a tangent vector of $K_X$ with its inclusion. These operations are inverse and respect the tangent inclusions by naturality in the dual-number calculus. Thus $\\operatorname{Lie}(K_X)=\\operatorname{Lie}(C)=\\{Y:[Y,X]=0\\}$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34 and Sections 10.6, 10.14, printed pp.16–17, 188–190; open restriction of tangent vectors, Stacks Tag 01HI."
+   }
+  },
+  {
+   "text": "For $J=K_X,G$, [lem-ag-smooth-lie-local-dimension] gives $\\dim_k\\operatorname{Lie}(J)=\\dim\\mathcal O_{J,e}$ and [lem-ag-group-identity-local-dimension] gives $\\dim\\mathcal O_{J,e}=\\dim J$. Here these are the same tangent Lie spaces as above; both dimension statements apply over $k$, not merely over an algebraic closure. The tangent subspace of $K_X$ is proper by steps 1 and 3. Extend a basis of it by a vector outside it and then to a basis of $\\mathfrak g$. It follows that $\\dim K_X<\\dim G$. This proves every asserted geometric property for each index $X$, independently of the existence and spanning argument that follows.",
+   "uses": [
+    "lem-ag-smooth-lie-local-dimension",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The dimension calculation underlying Proposition 10.15, printed pp.190–191, and Proposition 17.77, p.377."
+   }
+  },
+  {
+   "text": "Let $d=\\dim_k\\mathfrak g$, finite by [lem-sfb-affine-group-dual-number-calculus], and choose a basis. By [lem-sfb-affine-group-lie-tangent-calculus], identify $\\mathfrak g$ with its faithful tangent matrix image, the bracket with matrix commutator, and $\\operatorname{Lie}(G_{\\bar k})$ with $\\bar k\\otimes_k\\mathfrak g$. The adjoint representation $\\operatorname{Ad}=\\operatorname{Ad}_G:G\\to\\operatorname{GL}(\\mathfrak g)\\cong\\operatorname{GL}_{d,k}$ of [lem-sfb-affine-group-dual-number-calculus] has differential $\\operatorname{ad}$: its conjugation formula for $\\operatorname{GL}_{n,k}$, with $E(B)=I+\\delta B$, gives $\\operatorname{Ad}(h)B=hBh^{-1}$, and naturality for $i$ gives $di(\\operatorname{Ad}(g)Z)=i(g)\\,di(Z)\\,i(g)^{-1}$. For $g=t_Y$, $i(t_Y)=I+\\epsilon\\,di(Y)$ and $(I+\\epsilon A)B(I-\\epsilon A)=B+\\epsilon(AB-BA)$; injectivity and bracket compatibility of $di$ give $d\\operatorname{Ad}(Y)=\\operatorname{ad}(Y)$. Write $\\det(T-\\operatorname{ad}(Y))=T^d+f_1(Y)T^{d-1}+\\cdots+f_d(Y)$. The entries of $\\operatorname{ad}(Y)$ are linear in $Y$, so the determinant formula makes each $f_i$ a polynomial over $k$. Choose the geometric noncentral semisimple element $S$ in the hypothesis and diagonalize its faithful tangent matrix over $\\bar k$. On all matrices, commutation with that diagonal matrix is diagonal in the matrix-unit basis. Its invariant subspace $\\mathfrak g_{\\bar k}$ is a sum of eigenspaces: polynomial spectral projections recover each component. Thus $\\operatorname{ad}(S)$ is diagonalizable and nonzero, so it has a nonzero eigenvalue. Its characteristic polynomial is not $T^d$. Fix $f=f_i$ with $f_i(S)\\ne0$; in particular $f$ is a nonzero polynomial over $k$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.78 and the first sentence of 17.79, printed p.378; matrix spectral-projection calculation expands the adjoint criterion."
+   }
+  },
+  {
+   "text": "For every $Y\\in\\mathfrak g(k)$ with $f(Y)\\ne0$, $\\operatorname{ad}(Y)$ has a nonzero eigenvalue over $\\bar k$. Suppose first that $\\operatorname{char}k=0$. This field is perfect: the derivative of a nonconstant irreducible polynomial is nonzero of smaller degree, hence coprime to that polynomial, so the polynomial has no repeated geometric roots. Apply [lem-sfb-algebraic-lie-additive-jordan] over $k$ and put $X=Y_s$. Its faithful matrix is diagonalizable; the commuting decomposition gives $[Y,X]=0$. Applied to the rational adjoint representation, whose differential is $\\operatorname{ad}$ by step 5, the same lemma identifies $\\operatorname{ad}(X)$ with the semisimple part of $\\operatorname{ad}(Y)$. In a basis diagonalizing the semisimple part, its commuting nilpotent part restricts to each eigenspace and has only zero eigenvalues there. Hence the eigenvalues of $\\operatorname{ad}(Y)$ are those of its semisimple part. The nonzero eigenvalue persists, so $\\operatorname{ad}(X)\\ne0$. Thus $X$ is rational noncentral semisimple and $Y$ lies in its bracket centralizer.",
+   "uses": [
+    "lem-sfb-algebraic-lie-additive-jordan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 17.74 and 17.79, printed pp.377–378; the characteristic-zero rational Jordan-part argument."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=p>0$, apply [lem-sfb-restricted-rational-differentiation] to $G$, its faithful representation and its adjoint representation. Its tangent vectors are the point derivations $x$ with $t_x(a)=\\varepsilon(a)+x(a)\\epsilon$ on $k[G]$; for a representation $r$ with matrix coefficients $c_{ab}$ the operator $\\rho(x)$ has entries $x(c_{ab})$, which by $r(t_x)=I+\\epsilon\\,dr(x)$ [lem-sfb-affine-group-lie-tangent-calculus] are those of $dr(x)$. So $\\rho=di$ for $i$ and $\\rho=d\\operatorname{Ad}=\\operatorname{ad}$ (step 5) for the adjoint comodule. For $q=p^N$, the rational vector $X=Y^{[p^N]}$ has faithful matrix $M^q$, where $M=di(Y)$, and $\\operatorname{ad}(X)=\\operatorname{ad}(Y)^q$. Over the perfect field $\\bar k$, [lem-sfb-algebraic-lie-additive-jordan] writes $M=M_s+M_n$ with commuting diagonalizable and nilpotent parts. Choose $N$ so that $q$ is at least a nilpotence exponent of $M_n$. The commuting binomial formula in characteristic $p$ gives $M^q=M_s^q$, which is diagonalizable. The nonzero eigenvalue $\\lambda$ of $\\operatorname{ad}(Y)$ gives the nonzero eigenvalue $\\lambda^q$ of $\\operatorname{ad}(X)$, so $X$ is noncentral. Finally $M$ commutes with $M^q$; injectivity and bracket compatibility of the tangent matrix map from step 5 give $[Y,X]=0$. Thus the same conclusion as step 6 holds over every imperfect field as well, without taking rational Jordan parts.",
+   "uses": [
+    "lem-sfb-restricted-rational-differentiation",
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.79, printed p.378, with the restricted-power construction preceding 11.36, p.223; agent expansion of the imperfect-field descent omitted in the printed proof."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq\\mathfrak g$ be the $k$-linear span of all bracket centralizers of rational noncentral semisimple elements. Steps 6–7 show that $W$ contains every rational $Y$ with $f(Y)\\ne0$. A nonzero polynomial over an infinite field has a rational nonzero value: induct on the number of variables, choose the first variables to keep a nonzero coefficient in the last variable nonzero, then avoid the finitely many roots in the last variable; for zero variables the assertion is immediate. Applying this to $f$ produces such a $Y$, so steps 6–7 also prove that the indexing set is nonempty. If $W$ were proper, extend a basis to construct a nonzero linear form $\\ell$ vanishing on $W$. The polynomial $f\\ell$ is nonzero: multiply leading monomials in a monomial order, whose coefficients have nonzero product in the field. Apply the same polynomial argument to obtain a rational $Y$ with $f(Y)\\ell(Y)\\ne0$. Then $Y\\in W$ but $\\ell(Y)\\ne0$, a contradiction. Hence $W=\\mathfrak g$. Step 3 identifies its constituent subspaces with the tangent spaces of the asserted $K_X$, completing the spanning assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.79, printed p.378, and its use in Theorem 17.91, p.381; elementary polynomial proof of rational density and linear spanning."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimple-tangent-stabilizer",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-algebraic-lie-additive-jordan",
+  "lem-sfb-restricted-rational-differentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 17.76–17.79, printed pp.377–378; Theorem 17.91, p.381; restricted-power repair of the imperfect-field inference in 17.79."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an infinite field the Lie algebra of an algebraic group is spanned by centralizers of rational noncentral semisimple Lie elements",
+   "results": "{\"t\": \"2026-10-24T09:11:57Z\", \"tool\": \"leanfinder\", \"query\": \"Over an infinite field the Lie algebra of an algebraic group is spanned by centralizers of rational noncentral semisimple Lie elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isRegular\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra_eq_lieSpan\"], \"digest\": \"4eb03fd8d7421b8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Centralizers of noncentral semisimple elements span the Lie algebra of a smooth algebraic group",
+   "results": "{\"t\": \"2026-10-24T09:11:48Z\", \"tool\": \"leansearch\", \"query\": \"Centralizers of noncentral semisimple elements span the Lie algebra of a smooth algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"AddSubgroup.centralizer\", \"Subalgebra.centralizer_eq_top_iff_subset\", \"Subsemigroup.centralizer\", \"AddSubgroup.centralizer_eq_iInf\", \"Subalgebra.centralizer\", \"Subalgebra.mem_centralizer_iff\", \"Subalgebra.centralizer_univ\"], \"digest\": \"75c80eedc0615a34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"span\"",
+   "results": "{\"t\": \"2026-10-24T09:11:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"span\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*centralizer|centralizer.*span|centralizer.*semisimple",
+   "results": "{\"t\": \"2026-10-24T09:11:48Z\", \"tool\": \"grep\", \"query\": \"semisimple.*centralizer|centralizer.*span|centralizer.*semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational semisimple adjoint stabilizer tangent spaces span the tangent space of an affine algebraic group",
+   "results": "{\"t\": \"2026-10-24T09:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"Rational semisimple adjoint stabilizer tangent spaces span the tangent space of an affine algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isRegular\", \"LieAlgebra.IsRegular\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.IsKilling.span_weight_eq_top\", \"LieAlgebra.IsKilling.span_weight_isNonZero_eq_top\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieAlgebra.exists_isCartanSubalgebra_engel\"], \"digest\": \"337f25cd9f4e92b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract subgroup, topological group, field-theory or Lie-algebra statements do not assert the stated algebraic-group-scheme theorem; the geometric-connectedness grep hits only define that predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Centralizers of rational noncentral semisimple tangent elements span the Lie algebra of a smooth affine algebraic group over an infinite field",
+   "results": "{\"t\": \"2026-10-24T09:38:33Z\", \"tool\": \"leanfinder\", \"query\": \"Centralizers of rational noncentral semisimple tangent elements span the Lie algebra of a smooth affine algebraic group over an infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieSubalgebra.engel\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"RootPairing.GeckConstruction.cartanSubalgebra\"], \"digest\": \"3fe8451eef2bdf99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Cartan/Engel and root-space results do not state a group-scheme centralizer tangent-spanning theorem over arbitrary infinite fields; natural-language semisimple Lie algebra results use a different notion."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*centralizer|centralizer.*span|centralizer.*semisimple",
+   "results": "{\"t\": \"2026-10-24T09:39:01Z\", \"tool\": \"grep\", \"query\": \"semisimple.*centralizer|centralizer.*span|centralizer.*semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Cartan/Engel and root-space results do not state a group-scheme centralizer tangent-spanning theorem over arbitrary infinite fields; natural-language semisimple Lie algebra results use a different notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebras of proper semisimple centralizer subgroups span the Lie algebra over an infinite field",
+   "results": "{\"t\": \"2026-10-24T09:39:02Z\", \"tool\": \"leansearch\", \"query\": \"Lie algebras of proper semisimple centralizer subgroups span the Lie algebra over an infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSemisimple\", \"LieSubmodule.lieSpan\", \"LieSubalgebra.lieSpan\", \"LieSubalgebra.submodule_span_le_lieSpan\", \"LieSubalgebra.ctorIdx\", \"LieSubalgebra.lieSpan_induction\", \"LieSubalgebra.span_univ\", \"LieAlgebra.IsSimple.instIsSemisimple\"], \"digest\": \"01977bf7951ec0ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Cartan/Engel and root-space results do not state a group-scheme centralizer tangent-spanning theorem over arbitrary infinite fields; natural-language semisimple Lie algebra results use a different notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"span\"",
+   "results": "{\"t\": \"2026-10-24T09:39:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"span\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Cartan/Engel and root-space results do not state a group-scheme centralizer tangent-spanning theorem over arbitrary infinite fields; natural-language semisimple Lie algebra results use a different notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of kernels of brackets with noncentral diagonalizable tangent matrices spans the Lie algebra",
+   "results": "{\"t\": \"2026-10-24T09:39:03Z\", \"tool\": \"leanfinder\", \"query\": \"The union of kernels of brackets with noncentral diagonalizable tangent matrices spans the Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.engel\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_top\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieModule.lowerCentralSeries_one_inf_center_le_ker_traceForm\", \"LieAlgebra.IsKilling.coe_invtSubmoduleToLieIdeal_eq_iSup\", \"LieDerivation.IsKilling.rangeAdOrthogonal\", \"RootPairing.GeckConstruction.cartanSubalgebra\"], \"digest\": \"8ea13677d9c5bc5a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Cartan/Engel and root-space results do not state a group-scheme centralizer tangent-spanning theorem over arbitrary infinite fields; natural-language semisimple Lie algebra results use a different notion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cartan-subgroups-generate",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: apply the dominant finite product of Cartan subgroups in the proof of 17.92, following 17.91. Supporting input: Theorem 17.91, printed p.381 (generation); Corollary 17.83 and its proof, printed p.379 (existence of a maximal torus). Generation is the smallest-closed-subgroup notion introduced in section 2h, printed pp.53-56. Supporting input for Milne 17.91: Propositions 17.76–17.79, printed pp.377–378, and the first infinite-field case in Theorem 17.91, p.381. The identity component has the same tangent space; properness and dimension drop use 17.77 and 10.15. Over an imperfect field use restricted powers to obtain rational semisimple elements, rather than rational Jordan parts.",
+   "via": [
+    "lem-sfb-cartan-subgroups-generate",
+    "lem-sfb-cartan-product-dominance",
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-centralizer-tangent-span",
+  "worker": "stage1",
+  "summary": "Reused the existing semisimple tangent-stabilizer, identity-component, tangent-calculus, dimension, Jordan and restricted-differentiation nodes. Expanded the noncentral characteristic-polynomial open-set argument, replaced unjustified rational Jordan parts over imperfect fields by high restricted powers, and proved rational spanning by a nonzero-polynomial test. No new nodes and no statement change.",
+  "blueprint": "The item serves the Cartan-generation prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), at Milne 17.91: tangent spanning by proper semisimple centralizers. Its inherited null ancestor and full via chain are retained; whole-blueprint searches found no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Smoothness of the open identity component; a generic smooth-composition fact, not another proof route."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Geometric connectedness from the identity rational point of the connected component."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Unique factorization of a dual-number tangent map through the open identity component."
+   },
+   {
+    "node": "lem-ag-smooth-lie-local-dimension",
+    "why": "Equality of tangent dimension and local dimension at the rational identity for a smooth group over any field."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Equality of local dimension at the identity with group dimension over any field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-group-identity-local-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-e46624c1b",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-e46624c1b (reviewer sub-agent of L); spot-checked: Read the item's full statement and steps 1-8, every cited node's statement, and Milne iAG2017 17.76-17.79 (pp.377-378) and 17.91 (p.381). No new nodes. Statement and stmt_deps are byte-identical to the live base (unsplit). Steps 1-5 and 8 are correct. In step 1 the stabilizer node's hypotheses hold, with n>=1 forced by noncentrality. In step 2 the identity subgroup is smooth by the open-immersion leaf and geometrically connected via the rational identity point. In step 3 tangent spaces agree because Spec k[d] has one point (open factorization). In step 4 the two dimension nodes, valid over any field, give a strict drop. In step 5 the char-poly coefficients f_i are polynomials over k, and ad of a diagonalizable S is diagonalizable on the invariant subspace. Step 8 (rational non-root of f*l, then span) is correct. Step 6 (char 0, Jordan) and step 7 (char p, Y^[p^N] restricted powers with M^q=M_s^q) are correct, and step 7 needs no perfectness of k. But both used without proof that d(Ad)=ad and that the restricted node's comodule operators rho are di and d(Ad). FIX: corrected item JSON in fixes/dag/nodes/sec-six-functors-basics/. Step 5 now derives dAd=ad from the dual-number conjugation formula, naturality for i and injectivity of di. Step 6 refers to it. Step 7 writes the dictionary rho(x)_{ab}=x(c_ab)=dr(x)_{ab} and adds lem-sfb-affine-group-lie-tangent-calculus to its uses (already in proof_deps). Not a duplicate: lem-sfb-infinite-field-semisimple-centralizer-reduction (Q91) gives existence of one X only, without spanning. The 5 declared tool_uses are generic and accepted. Batch-5: lem-trf-smooth-fpqc-base-descent (smoothness descends, Mathlib leaf) and lem-trf-finite-type-component-open-qc (components of finite-type schemes are open and quasi-compact) are general scheme facts, not parts of the trace formula or Poincare duality, so accepted. No SGA used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemisimpleCentralizerTangentSpan",
+  "declaration": "AlgebraicGeometry.SemisimpleCentralizerTangentSpan.tangent_span",
+  "declarations": [
+   "AlgebraicGeometry.SemisimpleCentralizerTangentSpan.scalarExtension",
+   "AlgebraicGeometry.SemisimpleCentralizerTangentSpan.geometricTangentMatrix",
+   "AlgebraicGeometry.SemisimpleCentralizerTangentSpan.IsIndex",
+   "AlgebraicGeometry.SemisimpleCentralizerTangentSpan.Centralizer",
+   "AlgebraicGeometry.SemisimpleCentralizerTangentSpan.tangent_span"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemisimpleCentralizerTangentSpan.lean",
+  "statement": "theorem tangent_span {k K : Type u} [Field k] [Infinite k] [Field K] [Algebra k K] [IsAlgClosure k K] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [GeometricallyConnected G.X.hom] {ι : Type u} [Fintype ι] [DecidableEq ι] (i : G.X ⟶ GeneralLinearGroup ι k) [IsMonHom i] [IsClosedImmersion i.left] (hgeom : ∃ S : GrpObj.Lie (scalarExtension G K).X, Module.End.IsSemisimple (Matrix.toLin' (geometricTangentMatrix G i K S)) ∧ ∃ T : GrpObj.Lie (scalarExtension G K).X, ⁅S, T⁆ ≠ 0) : ∃ C : ∀ X : {X : GrpObj.Lie G.X // IsIndex (K := K) i X}, Centralizer G i X.val, (∀ X, Smooth (GrpObj.identityComponent (C X).group.X).hom ∧ GeometricallyConnected (GrpObj.identityComponent (C X).group.X).hom ∧ IsAffine (GrpObj.identityComponent (C X).group.X).left ∧ LocallyOfFiniteType (GrpObj.identityComponent (C X).group.X).hom ∧ QuasiCompact (GrpObj.identityComponent (C X).group.X).hom ∧ IsClosedSubgroupScheme (GrpObj.identityComponentι (C X).group.X ≫ (C X).inclusion) ∧ topologicalKrullDim (GrpObj.identityComponent (C X).group.X).left < topologicalKrullDim G.X.left ∧ Set.range (GrpObj.differential (GrpObj.identityComponentι (C X).group.X ≫ (C X).inclusion)) = {Y : GrpObj.Lie G.X | ⁅Y, X.val⁆ = 0}) ∧ (⨆ X, (GrpObj.differential (GrpObj.identityComponentι (C X).group.X ≫ (C X).inclusion)).toLinearMap.range) = ⊤ ∧ Nonempty {X : GrpObj.Lie G.X // IsIndex (K := K) i X}",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper declarations belong to the notions explicitly introduced by this statement. Scalar extension abbreviates the existing pullback functor on group objects; geometricTangentMatrix computes the actual base-changed differential on dual-number points. Centralizer specifies the given adjoint stabilizer functor by its faithful matrix equations on every commutative test algebra; the theorem asserts existence without choosing any object from a sorry. Identity components and tangent differentials are the existing upstream constructions. IsIndex uses Mathlib semisimple endomorphisms over the algebraic closure, equivalent to diagonalizability in finite dimension."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a8c77765",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read item node, 14 stmt_dep records, module, report, upstream GL/Lie (RationalHom.points/differential, toMatrix_eq_map_snd), GroupScheme.Defs/Basic (IsClosedSubgroupScheme, identityComponent(ι)), Mathlib GeometricallyConnected. Every hypothesis/conclusion matches: geometricTangentMatrix = ε-part of i(t_S) = di_K(S); IsIndex = IsSemisimple over IsAlgClosure K (= diagonalizable) ∧ noncentral; Centralizer.represents (commute with di(X)⊗R on all k-algebras R) ≡ Ad(g)(X⊗1)=X⊗1 by naturality+injectivity of di; ∃C harmless since closed subgroup determined up to unique iso by points; identity component open-subscheme; smooth/geom-conn/affine/ft/closed subgroup/dim drop/tangent image/span ⊤/Nonempty all present. n=0, X=0, commutative G, universes OK. lean.statement verbatim; single sorry; added stmt_deps def-wf-lie-algebra-derivation + def-wf-algebraic-components are the needed landed owners; docstrings and Worker/Second-reading sections present; worker dry run OK 410456e8072. Maintainer note: parallel Q125 57a2538f5a08 (PASS, unlanded; GroupScheme/SemisimpleCentralizerTangentSpan.lean, decl semisimpleCentralizer_tangent_span) is also correct; only one should land and the second must not rebind."
+ }
+}

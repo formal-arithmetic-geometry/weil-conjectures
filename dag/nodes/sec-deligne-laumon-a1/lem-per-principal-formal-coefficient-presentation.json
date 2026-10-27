@@ -1,0 +1,252 @@
+{
+ "id": "lem-per-principal-formal-coefficient-presentation",
+ "kind": "statement",
+ "title": "Coefficient lifting and finite presentation of a principal formal variety",
+ "statement": "Let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] complete and separated for powers of $(\\pi)$, where $\\pi\\in B$ [def-weil-pbc-adic-completion]. Suppose $k$ is a characteristic-zero field and a specified homomorphism $k\\to B/\\sqrt{\\pi B}$ makes that quotient a finite type $k$-algebra [def-weil-pbc-finite-type-algebra]. Here $\\sqrt{\\pi B}=\\{b\\in B:b^n\\in\\pi B\\text{ for some }n\\geq1\\}$. There exist a homomorphism $k\\to B$ lifting the specified homomorphism, an integer $r\\geq0$, and a continuous surjective homomorphism of $k[t]$-algebras $q:P\\to B$, where $t$ acts on $B$ by $\\pi$ and $P=\\widehat{k[t,x_1,\\ldots,x_r]}_{(t)}$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-adic-completion]. Continuity is for the $(t)$-adic and $(\\pi)$-adic topologies. In particular $B/\\pi B$ is finite type over the lifted field.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Proposition 3.2.3 and the coefficient-lifting argument of Proposition 3.2.1, printed pp.18--19; also Non_Embedded_Desingularization Remark 3.1.4(i). Read online; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "If $B=0$, take its unique coefficient map, $r=0$ and the unique map $\\widehat{k[t]}_{(t)}\\to0$; all assertions hold. Henceforth assume $B\\ne0$. Put $J=\\sqrt{\\pi B}$. By Noetherianity choose generators $z_1,\\ldots,z_s$ of $J$ and integers $e_i\\ge1$ with $z_i^{e_i}\\in\\pi B$. For $N=1+\\sum_i(e_i-1)$, every degree-$N$ monomial in the $z_i$ contains some $z_i^{e_i}$, so $J^N\\subseteq\\pi B$. If $s=0$ take $N=1$. Thus $(\\pi)^n\\subseteq J^n$ and $J^{Nn}\\subseteq(\\pi)^n$ for every $n\\ge1$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "The two filtrations give the same compatible-sequence ring: given compatible residues modulo $J^m$, its residue modulo $(\\pi)^n$ is obtained from the coordinate modulo $J^{Nn}$; conversely take the coordinate modulo $(\\pi)^n$ and reduce modulo $J^n$. Compatibility makes the composites identities. Hence $B\\cong\\varprojlim_m B/J^m$ by the assumed $(\\pi)$-adic completeness. Moreover $J$ is proper: if $J=B$, then $(\\pi)=B$, so $(\\pi)$-adic separatedness would force $B=0$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Every nonzero integer $a$ is a unit modulo $J$, since its inverse comes from the specified characteristic-zero field map. Lift this inverse to $c\\in B$ and put $u=1-ac\\in J$. The sums $v_h=\\sum_{i=0}^{h-1}u^i$ stabilize modulo every $(\\pi)^n$, since $u^{Nn}\\in(\\pi)^n$; completeness gives $v\\in B$ with $(1-u)v=1$. Thus $cv$ is an inverse of $a$. Consequently $B$ and every $B/J^m$ have canonical $\\mathbf Q$-algebra structures, and the specified map $k\\to B/J$ is a $\\mathbf Q$-algebra map (a unital ring map preserves inverses).",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Construct compatible $\\mathbf Q$-algebra maps $s_m:k\\to B/J^m$ for $m\\ge1$, starting with the specified $s_1$. For the induction step set $D_m=B/J^{m+1}$ and $L_m=J^m/J^{m+1}$. Then $L_m^2=0$ because $2m\\ge m+1$, and $D_m/L_m=B/J^m$. Apply [lem-weil-pbc-char-zero-field-extension-formally-smooth] to the field extension $k/\\mathbf Q$, the $\\mathbf Q$-algebra $D_m$, its square-zero ideal $L_m$, and $s_m$. It supplies $s_{m+1}$ reducing to $s_m$. Their compatible sequence defines $s:k\\to\\varprojlim_mB/J^m=B$, a ring map whose reduction modulo $J$ is exactly the specified map.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0322, proposition-characterize-separable-field-extensions, characteristic-zero (3); Tag 00TI, definition-formally-smooth; the induction is the characteristic-zero paragraph in theorem-cohen-structure-theorem (Tag 032A), applied to J instead of a maximal ideal."
+   }
+  },
+  {
+   "text": "Choose $y_1,\\ldots,y_a\\in B$ whose residues generate $B/J$ over $k$. Let $R\\subseteq B$ be the image of evaluation on the finite list $(y_1,\\ldots,y_a,z_1,\\ldots,z_s)$ over the lifted field. Then $B=R+J$. Each $J^m$ is generated over $B$ by degree-$m$ monomials in the $z_i$, all lying in $R$; replacing each coefficient using $B=R+J$ gives $J^m\\subseteq R+J^{m+1}$. Starting with $B=R+J$, induction yields $B=R+J^m$ for every $m\\ge1$. At $m=N$ we get $B=R+\\pi B$. Hence the images of this finite list generate $B/\\pi B$ over the lifted $k$. Rename the list $b_1,\\ldots,b_r$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $A=k[t,x_1,\\ldots,x_r]$ and let $e:A\\to B$ evaluate $t$ at $\\pi$ and $x_i$ at $b_i$, using $s$ on coefficients. For each $n\\ge1$, evaluation induces $e_n:A/t^nA\\to B/\\pi^nB$, since $e(t^nA)\\subseteq\\pi^nB$. These maps commute with reduction: both composites evaluate the same polynomial modulo $\\pi^mB$ for $m\\le n$. Applying $e_n$ coordinatewise therefore gives a ring map $q:P=\\varprojlim_nA/t^nA\\to\\varprojlim_nB/\\pi^nB=B$. On $A$ it equals $e$, so it is a $k[t]$-algebra homomorphism with $q(t)=\\pi$. Also $q(t^nP)\\subseteq\\pi^nB$, proving continuity for the stated adic topologies.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $b\\in B$ put $c_0=b$. Given $c_j$, choose a polynomial $h_j\\in k[x_1,\\ldots,x_r]$ representing its residue modulo $\\pi B$ (Step 5), and choose $c_{j+1}\\in B$ with $c_j-h_j(b_1,\\ldots,b_r)=\\pi c_{j+1}$. Then $H_m=\\sum_{j=0}^{m-1}t^jh_j\\in A$ satisfies $b-e(H_m)=\\pi^mc_m$. The classes $H_m\\bmod t^m$ are compatible, hence define $H\\in P$; the coordinate formula for $q$ gives $q(H)\\equiv b\\pmod{\\pi^mB}$ for all $m$. Separatedness implies $q(H)=b$. Thus $q$ is surjective. No cancellation of $\\pi$ was used, so this also covers $\\pi=0$ and nilpotent or zero-divisor $\\pi$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Propositions 3.2.1 and 3.2.3, printed pp.18--19; agent expansion of the coefficient lifting and principal-adic successive approximation arguments. Archival copy WANTED. Expanded after reading the online paper and Stacks; the Temkin PDF is absent from literature/."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientField|coefficient.field|Cohen.*structure|topologically.*finite",
+   "results": "{\"t\": \"2026-10-24T04:19:42Z\", \"tool\": \"grep\", \"query\": \"coefficientField|coefficient.field|Cohen.*structure|topologically.*finite\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lifts and Weierstrass preparation do not lift the coefficient field and supply this restricted presentation",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Algebra.FiniteType",
+   "results": "{\"t\": \"2026-10-24T04:19:42Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, Algebra.FiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lifts and Weierstrass preparation do not lift the coefficient field and supply this restricted presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a characteristic zero field from the reduced quotient of an adically complete ring and present the ring as a quotient of completed polynomials",
+   "results": "{\"t\": \"2026-10-24T04:19:42Z\", \"tool\": \"leansearch\", \"query\": \"Lift a characteristic zero field from the reduced quotient of an adically complete ring and present the ring as a quotient of completed polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.instCommRing\", \"IsAdicComplete.mk_lift\", \"IsAdicComplete.mk_liftRingHom\", \"IsAdicComplete.liftRingHom\", \"AdicCompletion.evalₐ_liftRingHom\", \"IsAdicComplete.of_liftRingHom\", \"IsAdicComplete.mk_comp_liftRingHom\", \"IsAdicComplete.liftAlgHom\"], \"digest\": \"5c53733a9cf2f7bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lifts and Weierstrass preparation do not lift the coefficient field and supply this restricted presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A characteristic zero Noetherian ring complete for a principal ideal with finite type reduced closed fibre admits a coefficient field and a restricted power series presentation",
+   "results": "{\"t\": \"2026-10-24T04:19:43Z\", \"tool\": \"leanfinder\", \"query\": \"A characteristic zero Noetherian ring complete for a principal ideal with finite type reduced closed fibre admits a coefficient field and a restricted power series presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isNoetherianRing\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.weierstrassDistinguished\"], \"digest\": \"c1b6ef912539629a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lifts and Weierstrass preparation do not lift the coefficient field and supply this restricted presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*charZero|formallySmooth.*of_perfect|of_isNilpotent|finiteType.*nilpotent",
+   "results": "{\"t\": \"2026-10-24T04:43:09Z\", \"tool\": \"grep\", \"query\": \"formallySmooth.*charZero|formallySmooth.*of_perfect|of_isNilpotent|finiteType.*nilpotent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Trace/Basic.lean\", \"Mathlib/RingTheory/Trace/Basic.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Pi.lean\", \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\"], \"digest\": \"60957a60084f69e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: field lifting and completion evaluation hits are component results, not finite polynomial generation and surjectivity onto B",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A characteristic zero field is formally smooth over the rational numbers and maps lift across nilpotent ideals",
+   "results": "{\"t\": \"2026-10-24T04:43:09Z\", \"tool\": \"leansearch\", \"query\": \"A characteristic zero field is formally smooth over the rational numbers and maps lift across nilpotent ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallySmooth.of_comp_surjective\", \"EqualCharZero.algebraRat\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Subfield.bot_eq_of_charZero\"], \"digest\": \"96b8cc3be6f9d0ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: field lifting and completion evaluation hits are component results, not finite polynomial generation and surjectivity onto B"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, CharZero",
+   "results": "{\"t\": \"2026-10-24T04:43:09Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth, CharZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: field lifting and completion evaluation hits are component results, not finite polynomial generation and surjectivity onto B"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a characteristic zero field homomorphism from a reduced quotient of a complete noetherian ring and obtain a surjection from adically completed polynomials",
+   "results": "{\"t\": \"2026-10-24T04:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a characteristic zero field homomorphism from a reduced quotient of a complete noetherian ring and obtain a surjection from adically completed polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.surjective_evalₐ\", \"AdicCompletion.evalOneₐ_surjective\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"AdicCompletion.factor_eval_liftRingHom\", \"IsAdicComplete.of_liftRingHom\", \"AdicCompletion.kerProj\", \"IsAdicComplete.mk_liftRingHom\"], \"digest\": \"91e9ee59b821546f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: field lifting and completion evaluation hits are component results, not finite polynomial generation and surjectivity onto B"
+  },
+  {
+   "tool": "grep",
+   "query": "of_algebraicIndependent_of_isSeparable|exists_isTranscendenceBasis|isSeparable_of_charZero|of_perfectField",
+   "results": "{\"t\": \"2026-10-24T04:47:01Z\", \"tool\": \"grep\", \"query\": \"of_algebraicIndependent_of_isSeparable|exists_isTranscendenceBasis|isSeparable_of_charZero|of_perfectField\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\"], \"digest\": \"e0bf196f23a8ae6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: field lifting and completion evaluation hits are component results, not finite polynomial generation and surjectivity onto B",
+   "subdirectory": "RingTheory/Smooth"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-principal-formal-algebraization",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proposition 3.2.3 and the coefficient-lifting argument of Proposition 3.2.1, printed pp.18--19; also Non_Embedded_Desingularization Remark 3.1.4(i). Read online; archival copy WANTED. Supporting the algebraization sentence in the inherited formal-resolution branch of ancestor Step 3; the latest ancestor has no separate formal-algebraization sentence.",
+   "via": [
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-principal-formal-coefficient-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement. Seven explicit steps: radical-power bound, cofinal completion, rational coefficients, compatible square-zero coefficient lifts, finite polynomial generators modulo pi, coordinatewise completed evaluation, and constructive surjectivity. Reused the existing characteristic-zero field lifting Mathlib leaf; no new nodes. No project Lean attachment.",
+  "blueprint": "Inherited formal-resolution branch of lem-per-artin-gabber-affine-curve Step 3, via lem-per-rig-principal-formal-algebraization Step 1. The current latest ancestor contains only the duality/perverse argument and no formal-algebraization sentence; this delivery splits the existing auxiliary algebra input without modifying that route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-e7e22bf91",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-e7e22bf91 (reviewer sub-agent of L); spot-checked: I read the whole item and all 7 steps; my review is in review.md, and I wrote no fixes. Shape: one commit (item plus report with a Review by Q05 section) and no new nodes. There is no repair note, so the re-split rule does not apply. Compared with an earlier snapshot of the node, only proof, proof_deps, proof_origin, status and split_report changed, and mathlib_searches was extended. The statement and stmt_deps are unchanged, so no target is weakened. proof_deps equals the union of the steps' uses. Citations: def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion, def-weil-pbc-finite-type-algebra and def-weil-pbc-mv-polynomial-ring are all Mathlib-leaf definitions, and each is used for what its statement says. Step 4 cites lem-weil-pbc-char-zero-field-extension-formally-smooth (a Mathlib leaf, square-zero lifting for any field extension of a char-0 base), applied with base Q and K=k. Since every citation is a definition or a Mathlib leaf, there is no unit-route issue and no tool_uses entry is needed. Mathematics: Step 1's pigeonhole bound gives J^N inside piB, so J^{Nn} is inside pi^nB. Step 2: the J-adic and pi-adic filtrations are cofinal, and J is proper by separatedness. Step 3: the geometric-series inverse of nonzero integers converges, so B and every B/J^m are Q-algebras. Step 4 is the square-zero induction (L_m^2=0 because 2m>=m+1), which is exactly the char-0 paragraph of Stacks 032A (algebra.tex around line 44944) with J in place of m. Step 5 proves J^m inside R+J^{m+1}, so B=R+piB. Step 6 builds the completed evaluation q coordinatewise; q(t)=pi and q(t^nP) is inside pi^nB. Step 7 is the successive-approximation surjectivity, using the identity b-e(H_m)=pi^m c_m and separatedness. I checked each step line by line. Edge cases tested: B=0, B=k[[pi]], nilpotent pi, pi=0 with B=k[eps]/eps^2, pi a zero divisor, pi a unit. Duplicate search over the DAG found only local or mixed/positive-characteristic coefficient-lift nodes (fs-adic-lift-over-finite-coefficient-map, trf-completed-chart-coefficient-surjection, per-prescribed-pbasis, per-equivariant-cohen, per-perfect-residue-dvr); none is this statement. The Temkin source is absent from literature/, the report has WANTED lines and proof_origin.by is agent. Maintainer note: blueprint.from points at an ancestor whose text has no formal-algebraization sentence; this was already on the base node, not introduced by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalFormalCoefficientPresentation",
+  "declaration": "RingTheory.exists_principal_formal_coefficient_presentation",
+  "declarations": [
+   "RingTheory.principalFormalPolynomialRing",
+   "RingTheory.exists_principal_formal_coefficient_presentation"
+  ],
+  "file": "lean/Sheaf/RingTheory/PrincipalFormalCoefficientPresentation.lean",
+  "statement": "theorem exists_principal_formal_coefficient_presentation (B : Type v) [CommRing B] [IsNoetherianRing B] (π : B) [IsAdicComplete (Ideal.span {π}) B] (k : Type u) [Field k] [CharZero k] (s₀ : k →+* B ⧸ (Ideal.span {π}).radical) (hs₀ : s₀.FiniteType) : ∃ s : k →+* B, (Ideal.Quotient.mk (Ideal.span {π}).radical).comp s = s₀ ∧ ((Ideal.Quotient.mk (Ideal.span {π})).comp s).FiniteType ∧ ∃ (r : ℕ) (q : principalFormalPolynomialRing k r →+* B), Function.Surjective q ∧ q.comp (algebraMap (Polynomial k) (principalFormalPolynomialRing k r)) = Polynomial.eval₂RingHom s π ∧ @Continuous (principalFormalPolynomialRing k r) B (Ideal.span {algebraMap (Polynomial k) (principalFormalPolynomialRing k r) Polynomial.X}).adicTopology (Ideal.span {π}).adicTopology q",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary abbreviation expands directly to Mathlib AdicCompletion of MvPolynomial (Fin r) (Polynomial k) along the ideal generated by C X. The ring-homomorphism equation with the canonical Polynomial k structure map states precisely that q is a k[t]-algebra homomorphism for t acting by π; explicit adic topologies state continuity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45a0c4b19",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Fresh S2 delivery: node diff vs live = lean field only; lean.statement verbatim; report has Worker report + Second reading by Q125. Clause check: IsNoetherianRing, IsAdicComplete (span{π}) (complete+separated), Field+CharZero k, s₀ : k →+* B ⧸ (span{π}).radical with s₀.FiniteType; conclusion ∃ s lifting s₀, (mk (span π) ∘ s).FiniteType, ∃ r q : AdicCompletion (span{C X}) (MvPolynomial (Fin r) k[X]) →+* B surjective, q ∘ algebraMap k[t] = eval₂RingHom s π (canonical Algebra S (AdicCompletion I R) instance; equals k[t]-algebra map, t↦π), continuity for explicit (t)-adic/(π)-adic adicTopology. No extra hypotheses; universes u,v independent. Edge cases B=0, π unit, π=0 (discrete topology), nilpotent/zero-divisor π, r=0 all fine. Helper abbrev is real data with source/blueprint docstrings; no duplicate in side-live lean trees. sorry only, Mathlib imports, 7-step proof docstring. No fixes, no compile needed."
+ }
+}

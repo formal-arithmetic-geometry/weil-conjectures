@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-field-lisse-stratified-heart-support",
+ "kind": "statement",
+ "title": "Field-scalar stratified heart closure and locally closed support",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] such that its scalar ring $F=\\Lambda(*)$ is a field. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. On every scheme $T$ over $X$ use $R_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and internal modules [sk-def-sfb-module-objects] on the small pro-etale site [def-weil-pbc-proetale-site]. An $R_T$-module is lisse if on a pro-etale cover it is a finite direct sum $R_T^r$, with $r=0$ allowed [def-sfb-lisse-coefficient-module]. A finite constant local model means a pro-etale local isomorphism $R_T\\otimes_{\\underline{\\Lambda(*)}}\\underline V$, with $V$ a finitely presented scalar $\\Lambda(*)$-module and underlines denoting discrete constant sheaves. Constructible means having these models on a finite constructible locally closed scheme stratification [sk-def-sfb-constructible, def-constructible-stratification, def-weil-constructible-subset]. Assume that, on every locally closed subscheme $T\\hookrightarrow X$, kernels and cokernels of maps between lisse $R_T$-modules are lisse and a short exact sequence with lisse ends has lisse middle term. Then the full class $\\mathscr A_c$ of constructible $R_X$-modules contains zero, is closed under isomorphisms and under kernels and cokernels of maps between its objects, and is closed under extensions in the ambient module category. In addition, let $a:S\\hookrightarrow X$ be a constructible locally closed immersion with a factorization $a=i\\circ j$, where $j:S\\hookrightarrow Z$ is open [def-weil-open-immersion] and $i:Z\\hookrightarrow X$ is closed [def-weil-closed-immersion]. For every lisse $R_S$-module $L$, the sheaf $G=i_*j_!L$ [def-sfb-module-lower-star, def-sfb-module-open-lower-shriek] is constructible. More precisely its inverse-image restrictions to the three locally closed pieces $S$, $Z\\setminus S$, and $X\\setminus Z$ are respectively $L$, zero, and zero, with inverse-image coefficients identified with $R_T$; empty pieces may be omitted. Both extension functors here are exact, so their termwise application to $L[0]$ is $G[0]$ in the ordinary derived category [sk-def-sfb-derived-categories].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "(1), common refinement and exact restriction, plus the opening stratum-extension assertion of sk-thm-sf-pf-field-tensor.proof.md; abstract field-scalar transfer of returned continuous-qbar-constructible-generators steps 5 and 7."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Identify the scalar ring at the chosen terminal profinite set with that at PUnit using the section-ring sheaf on the unique terminal isomorphism. Reconstructing the ring from its internal multiplication and evaluating the monoidal sections functor give the same ring object. Transport a finitely presented internal scalar module to an ordinary module. Its finite free presentation makes its cokernel finite-dimensional, so Module.finBasis gives a finite basis. Reflect this basis isomorphism through the internal-module equivalence. The scalar-extension finite-free comparison in the existing local-model interface turns each model into a finite free module; conversely the point-pullback finite-free comparison gives a finite constant model for each lisse module, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "det-def-sfb-constructible-local-model",
+    "def-sfb-lisse-coefficient-module",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For constructible modules A and B, choose their finite constructible scheme stratifications S and T. Use Stratification.inter: its domains are the actual fibre products of the old strata, and its immersion is the first projection followed by the old immersion. Pull back the old finite constant models along the two projections. The pullback-composition comparison and the fibre-product equation identify them with the restrictions of A and B to this single common stratification. No factorization is inferred from containment of subsets.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "new-unbounded-pullback-finite-constant-local-model",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a limiting kernel fork between constructible modules, use the common stratification of step 2. Exact pullback maps it to a limiting kernel fork on each stratum. Step 1 makes its two endpoints lisse; the assumed kernel closure makes its point lisse, and step 1 makes that point a finite constant model. This is constructibility of the original kernel point. Use the colimit-dual argument for cokernel coforks. For short exact sequences use common stratification for the two endpoints, exact pullback, and the assumed lisse extension closure; again step 1 supplies the middle model. The zero model and isomorphism transport are the existing proved generic constant-model helpers.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-sfb-lisse-coefficient-module",
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed immersion i makes Z locally Noetherian and topologically Noetherian. Its complementary open immersion and j are therefore quasi-compact. The condensed open-closed recollement gives exactness of i_* and an actual natural isomorphism i^*i_* ≅ id; j_! is exact by its definition. Apply the proved generic stratified_openExtension and stratified_closedPush helpers of the coefficient-heart extension module to the one-stratum lisse model. These helpers form open-closed stratifications with unchanged domains, transport models along the unit/counit, and use zero models on the complements. Thus i_*j_!L is constructible for this specified factorization, with no coefficient-family hypothesis.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "def-sfb-module-open-lower-shriek",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For restriction to S compose the pullback-composition isomorphism, j^* applied to the closed counit isomorphism, and the inverse of the open unit. For any given closed complementary k in Z use the same closed comparison, followed by open_module_restriction_identities, to get zero. For every given complementary open v in X use the proved generic openRestrictionPushforwardZero helper: sections of direct image on an object over v are sections on its empty fibre product with Z, hence zero, and forgetting the module action reflects zero.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-open-module-restriction-identities",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero comparison needs only preservation of zero morphisms. Apply HomologicalComplex.singleMapHomologicalComplex first for j_!, then for i_*, and map both isomorphisms through DerivedCategory.Q. The resulting target is definitionally the degree-zero derived object of i_*j_!L. Exactness has already been established separately.",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-free",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sp-exact-functor-preserves-homology",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "def-sfb-module-open-lower-shriek",
+  "lem-sfb-open-module-restriction-identities",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-module-lower-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "(1), common-stratum exact closure; locally closed extension assertion in sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md (1); implemented using existing fibre-product intersection and generic extension helper proofs, Y2 2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If lisse modules over a pulled back condensed field are closed under kernels cokernels and extensions then stratified constructible modules form a weak Serre class and locally closed extension by zero preserves constructibility",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"CondensedMod.ofSheafStonean\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Stoneanᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] → CondensedMod R\", \"doc\": \"Given a ring $ R $ and a functor $ F : \\\\text{Stonean}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products, this function constructs the corresponding condensed $ R $-module by applyi\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"Condensed.instAB4CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4 (CondensedMod R)\", \"doc\": \"The category of condensed modules over any ring $ R $ satisfies the AB4 axiom, meaning it has all coproducts and coproducts preserve exact sequences (are exact functors).\"}\n  {\"name\": \"CondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [Ring R] → Type (u + 2)\", \"doc\": \"The category of condensed modules over a ring $ R $, defined as the category of sheaves on the site of compact Hausdorff spaces equipped with the coherent Grothendieck topology, taking values in the c\"}\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves form a weak Serre class by common stratification and extension by zero of finite locally free sheaves is constructible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.recOn\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {P : CategoryTheory.ObjectProperty C} →\\n        {motive : P.IsSerreClass → Sort u_1} →\\n          (t : P.IsSerreClass) →\\n            ([toContainsZero : P.ContainsZero] →\\n                [toIsC\", \"doc\": \"A recursor for the Serre class property $ P $ on objects of an abelian category $ \\\\mathcal{C} $, which allows defining functions or proofs by recursion on the four defining conditions: containing the \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.casesOn\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {P : CategoryTheory.ObjectProperty C} →\\n        {motive : P.IsSerreClass → Sort u_1} →\\n          (t : P.IsSerreClass) →\\n            ([toContainsZero : P.ContainsZero] →\\n                [toIsC\", \"doc\": \"A recursor for the Serre class property $ P $ on objects of an abelian category $ \\\\mathcal{C} $, which allows defining functions or proofs by recursion on the four defining conditions: containing the \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.mk\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  {P : CategoryTheory.ObjectProperty C} [toContainsZero : P.ContainsZero]\\n  [toIsClosedUnderSubobjects : P.IsClosedUnderSubobjects] [toIsClosedUnderQuotients : P.IsClosedUnderQuotients]\\n  [toIsClosedUnderExt\", \"doc\": \"If a predicate $ P $ on objects of an abelian category $ \\\\mathcal{C} $ contains the zero object, is closed under subobjects, quotients, and extensions, then $ P $ is a Serre class.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.rec\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {P : CategoryTheory.ObjectProperty C} →\\n        {motive : P.IsSerreClass → Sort u_1} →\\n          ([toContainsZero : P.ContainsZero] →\\n              [toIsClosedUnderSubobjects : P.IsClosedUnde\", \"doc\": \"A recursor for the Serre class property $ P $ on objects of an abelian category $ \\\\mathcal{C} $, which allows defining functions or proofs by recursion on the four defining conditions: containing the \"}\n  {\"name\": \"AddCommGrpCat.instIsSerreClassIsFinite\", \"module\": \"Mathlib.Algebra.Category.Grp.IsFinite\", \"type\": \": isFinite.{u}.IsSerreClass\", \"doc\": \"The collection of finite additive commutative groups forms a Serre class in the category of additive commutative groups. This means the class is closed under subobjects, quotients, extensions, and fin\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → CategoryTheory.ObjectProperty C → Prop\", \"doc\": \"A predicate $ P $ on objects of an abelian category $ \\\\mathcal{C} $ is a Serre class if it satisfies the axioms defining a Serre class, including closure under subobjects, quotients, extensions, and f\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \": (⊤ : ObjectProperty C).IsSerreClass\", \"doc\": \"The class of all objects in an abelian category is a Serre class. This means that it is closed under subobjects, quotients, extensions, and finite direct sums.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C}\\n  {P : CategoryTheory.ObjectProperty C} [self : P.IsSerreClass], P.IsClosedUnderExtensions\", \"doc\": \"If $\\\\mathcal{P}$ is a Serre class in an abelian category $\\\\mathcal{C}$, then $\\\\mathcal{P}$ is closed under extensions, meaning that for any short exact sequence $0 \\\\to A \\\\to B \\\\to C \\\\to 0$ in $\\\\mathca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"kernel\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]erre|[Ss]erre.*constructible|lisse.*extension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed support identities and common finite locally closed refinements transfer an abelian class of lisse module sheaves to constructible module sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Cc]onstructible|[Cc]onstructible.*extensionByZero",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along a locally closed immersion of a locally finite free sheaf of modules over a field is constructible",
+   "date": "2026-10-22",
+   "results": "OK 8 hits: SheafOfModules.free, SheafOfModules.ιFree, Function.ExtendByZero.linearMap, ContinuousLinearMap.extend_zero, Finsupp.extendDomain, DFinsupp.lmk, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.IsImmersion.mk",
+   "verdict": "no match: the returned topology and finite-presentation infrastructure does not state the internal-module stratified closure/support claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules with finite locally free local models are closed under kernels cokernels and extensions if the lisse modules on each stratum are closed under these operations",
+   "date": "2026-10-22",
+   "results": "OK 8 hits: SheafOfModules.IsFiniteType, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.QuasicoherentData",
+   "verdict": "no match: the returned topology and finite-presentation infrastructure does not state the internal-module stratified closure/support claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common finite locally closed stratifications and exact inverse image give weak Serre closure of constructible module sheaves and locally closed extension by zero preserves constructibility",
+   "date": "2026-10-22",
+   "results": "OK 8 hits: Topology.IsLocallyConstructible.isConstructible, Topology.IsConstructible.isLocallyConstructible, PrimeSpectrum.ConstructibleSetData, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.ConstructibleSetData.isConstructible_toSet, SheafOfModules.IsFiniteType, Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "verdict": "no match: the returned topology and finite-presentation infrastructure does not state the internal-module stratified closure/support claim"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-qbar-constructible-generators",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-lem-coefficient-heart.proof.md (1), common refinement and exact restriction; sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md (1), final locally closed extension assertion.",
+   "via": [
+    "lem-sfb-continuous-qbar-constructible-generators",
+    "lem-sfb-admissible-tensor-constructibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-field-lisse-stratified-heart-support",
+  "worker": "stage1",
+  "summary": "Proved closure by finite scalar bases, fibre-product common refinement and exact restriction, using the stated lisse-closure hypothesis rather than an unconditional field claim. Computed all three restrictions of the specified i_*j_! and its degree-zero derived image. Reused existing DAG nodes throughout; no new nodes. Reviewer FIX (Q101 maintainer read, 2026-10-22): common refinement through lem-weil-pbc-constructible-stratification-assembly with actual factorizations, lisse inverse image through the new statement-only node lem-sfb-lisse-module-inverse-image, and the three-piece stratification through lem-sfb-noetherian-complementary-stratifications with the reduced induced structure on the complement of S in Z.",
+  "blueprint": "sk-lem-coefficient-heart.proof.md (1): finite models, common stratification and exact restriction; sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md (1), last sentence: locally closed extension of a lisse sheaf is bounded constructible. The created.item chain has no imported ancestor, as blueprint_refs.py ancestor reports; retained null ancestry and recorded these exact source places.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Generic Exact constant finite free presentations after flat sheaf scalar extension used for the local-model, exact-restriction or open/closed support calculation; no replacement of the unit tensor/stability route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic Exactness of pullback on module objects used for the local-model, exact-restriction or open/closed support calculation; no replacement of the unit tensor/stability route."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-locally-closed-extension",
+    "why": "Generic Exact locally closed coefficient extension through the scheme-theoretic closure used for the local-model, exact-restriction or open/closed support calculation; no replacement of the unit tensor/stability route."
+   },
+   {
+    "node": "lem-sfb-proetale-identified-open-closed",
+    "why": "Generic Exact open and closed extensions with identified inverse-image coefficients used for the local-model, exact-restriction or open/closed support calculation; no replacement of the unit tensor/stability route."
+   },
+   {
+    "node": "lem-sfb-open-module-restriction-identities",
+    "why": "Generic Open and closed restrictions of coefficient-linear extension by zero used for the local-model, exact-restriction or open/closed support calculation; no replacement of the unit tensor/stability route."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Generic Open restriction of pro-etale direct image with counit normalization used for the local-model, exact-restriction or open/closed support calculation; no replacement of the unit tensor/stability route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-stratification-assembly",
+    "why": "Generic assembly of stratifications of strata into one constructible stratification of a qcqs scheme with a prescribed property of the stratum maps; used only to obtain the common refinement with actual factorizations (reviewer fix of Step 2); no unit step is replaced."
+   },
+   {
+    "node": "lem-sfb-noetherian-complementary-stratifications",
+    "why": "Generic open/closed complementary extension of stratifications over a Noetherian scheme with actual composite immersions; used only for the three-piece stratification of Step 7 (reviewer fix); no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced induced scheme structure on the closed complement of S in Z (reviewer fix of Step 5); no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-open-module-restriction-identities"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-bc32c4dca",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-bc32c4dca (reviewer sub-agent of L); spot-checked: I read the whole delivery (item statement unchanged, 8 steps, no new nodes) against main-20261015 sk-lem-coefficient-heart.proof.md (1), sk-lem-coefficient-heart-common-stratification.proof.md (1)-(3) and sk-thm-sf-pf-field-tensor.proof.md (1). No SGA source is cited. The item is still unsplit in live and side-live: no supersession, no re-split note, no earlier runs. The statement is true under its stated lisse-closure hypothesis. Small cases checked: X empty; S=X; S closed; S open; L=0; rank 0 and varying ranks; nonreduced Z. Steps 1, 3, 4, 6 and 8 are correct and their cited statements say what is used: vector-space basis plus the finite-generation argument; the flatness-independent clause of the constant-finite-free-presentation node; pullback exactness; preservation of homology (a)/(c); open-module restriction identities; the fibre-product sections formula with open restriction-counit over an empty fibre product; derived functors of exact functors applied termwise. Three repairable faults: (1) Step 2, C3/C1: it took fibre-product strata from the proof of lemma-constructible-common-refinement, whose statement only gives a set-theoretic refinement (def-constructible-refines), and used without any node that the composite of immersions is an immersion. Repaired with lemma-constructible-pullback-stratification along each kappa_l (strata constructible because W_l is Noetherian) plus lem-weil-pbc-constructible-stratification-assembly with the predicate 'factors through actual morphisms to both old strata'. (2) Step 2, C1/C4: no cited node says that restricting a lisse module to a stratum through its trivializing cover keeps it lisse (base-changed cover, slice restriction). The existing nodes cover only E/Qbar immersions or surjective closed immersions. Added the statement-only node lem-sfb-lisse-module-inverse-image (general Lambda, any h, same ranks; source common-stratification.proof.md (2)) and cited it. (3) Steps 5/7, C1/C2: K=Z\\S had no scheme structure, and the composite i∘k was taken to be an immersion in an 'elementary' step. Repaired: k is now the reduced induced closed subscheme (lem-weil-pbc-reduced-induced-closed-subscheme), and the stratification {ij, ik, v} comes from lem-sfb-noetherian-complementary-stratifications applied twice. proof_deps recomputed; tool_uses pruned and extended with the three generic off-unit geometry nodes; no cycles (checked the dependency closures). Duplicate check: det-lem-coefficient-heart-closure, sk-lem-coefficient-heart and the Serre nodes are E/Qbar or finite-ring only, or assume the closure. Fixes are in fixes/dag/nodes/sec-six-functors-basics/ (item and new node); details in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldLisseStratifiedHeartSupport",
+  "declaration": "AlgebraicGeometry.ProEtale.field_lisse_stratified_heart_support",
+  "file": "lean/Sheaf/Paper/FieldLisseStratifiedHeartSupport.lean",
+  "statement": "theorem field_lisse_stratified_heart_support (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (hfield : IsField ((CategoryTheory.InternalAbelianSheafModule.sectionRingSheaf (coherentTopology Profinite.{u}) Λ.X).obj.obj (Opposite.op (⊤_ Profinite.{u})))) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (hclosed : ∀ (T : Scheme.{u}) (a : T ⟶ X), IsImmersion a → ObjectProperty.IsClosedUnderKernels (IsLisseCoefficientModule Λ.X (X := T)) ∧ ObjectProperty.IsClosedUnderCokernels (IsLisseCoefficientModule Λ.X (X := T)) ∧ ObjectProperty.IsClosedUnderExtensions (IsLisseCoefficientModule Λ.X (X := T))) : IsConstantModelConstructible Λ.X X (0 : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)) ∧ ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ.X X) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible Λ.X X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible Λ.X X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ.X X) ∧ ∀ (S Z : Scheme.{u}) (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i], Topology.IsConstructible (Set.range (j ≫ i)) → PreservesFiniteLimits (CondensedRing.openImmersionLowerShriek Λ.X j) ∧ PreservesFiniteColimits (CondensedRing.openImmersionLowerShriek Λ.X j) ∧ PreservesFiniteLimits (CondensedRing.lowerStar Λ.X i) ∧ PreservesFiniteColimits (CondensedRing.lowerStar Λ.X i) ∧ ∀ L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S), IsLisseCoefficientModule Λ.X L → IsConstantModelConstructible Λ.X X ((CondensedRing.lowerStar Λ.X i).obj ((CondensedRing.openImmersionLowerShriek Λ.X j).obj L)) ∧ Nonempty ((CondensedRing.upperStar Λ.X (j ≫ i)).obj ((CondensedRing.lowerStar Λ.X i).obj ((CondensedRing.openImmersionLowerShriek Λ.X j).obj L)) ≅ L) ∧ (∀ (K : Scheme.{u}) (k : K ⟶ Z) [IsClosedImmersion k], Set.range k = (Set.range j)ᶜ → IsZero ((CondensedRing.upperStar Λ.X (k ≫ i)).obj ((CondensedRing.lowerStar Λ.X i).obj ((CondensedRing.openImmersionLowerShriek Λ.X j).obj L)))) ∧ (∀ (U : Scheme.{u}) (v : U ⟶ X) [IsOpenImmersion v], Set.range v = (Set.range i)ᶜ → IsZero ((CondensedRing.upperStar Λ.X v).obj ((CondensedRing.lowerStar Λ.X i).obj ((CondensedRing.openImmersionLowerShriek Λ.X j).obj L)))) ∧ Nonempty (DerivedCategory.Q.obj (((CondensedRing.lowerStar Λ.X i).mapHomologicalComplex (ComplexShape.up ℤ)).obj (((CondensedRing.openImmersionLowerShriek Λ.X j).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj L))) ≅ (DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.lowerStar Λ.X i).obj ((CondensedRing.openImmersionLowerShriek Λ.X j).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af79330da",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Statement verbatim matches file; node delta = lean record only. All 15 clauses match the recorded deps: Profinite.CondensedRing+IsCommMonObj; IsField of sectionRingSheaf at the point (same term as condensedScalarRing, advisory); IsLocallyNoetherian+CompactSpace; condensedRingObj Mod on Scheme.ProEt; IsLisseCoefficientModule; IsConstantModelConstructible; hclosed over IsImmersion = the node's three-part lisse closure (Mathlib IsClosedUnderKernels/Cokernels/Extensions read); zero/iso/ker/coker/ext conclusions; j open, i closed, IsConstructible range; exactness of openImmersionLowerShriek and lowerStar; G constructible; a^*G ≅ L (node names no canonical map); zero on every closed K with complementary range and on every open complement; derived-category iso Q(termwise L[0]) ≅ G[0]. Edge cases (empty X/S, S=X, L=0, rank 0, nonreduced) fine; universes consistent. No duplicate (existing closures are E/Qbar, O_E, finite or over a field k, or assume the closure). Docstrings carry source place, blueprint tag and 8 steps; sorry only; no new defs. Not recompiled (no change). Advisory: upperStar owner not in stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T024007-L-2496063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

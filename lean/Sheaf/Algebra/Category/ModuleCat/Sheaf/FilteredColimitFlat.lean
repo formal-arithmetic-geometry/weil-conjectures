@@ -12,11 +12,11 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import Mathlib.CategoryTheory.Limits.Preserves.Limits
 public import Mathlib.CategoryTheory.Category.Preorder
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # Filtered colimits of flat module sheaves
 
@@ -80,6 +80,42 @@ theorem isFlatOnSite_of_isColimit_directed
         (D : K ⥤ SheafOfModules.{w}
           ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)),
         IsIso (limit.post D (tensorLeft c.pt)) := by
-  sorry
+  classical
+  let A := SheafOfModules.{w}
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
+  have : HasExactColimitsOfShape I A :=
+    HasExactColimitsOfShape.domain_of_functor I (SheafOfModules.toSheaf _)
+  have hleft (i : I) : PreservesFiniteLimits (tensorLeft (F.obj i)) := by
+    have hs : PreservesFiniteLimits (siteSheafTensorRight (A := R) (F.obj i)) :=
+      (hflat i).1
+    have hr : PreservesFiniteLimits (tensorRight (F.obj i)) :=
+      preservesFiniteLimits_of_natIso (siteSheafTensorRightIso R (F.obj i))
+    exact preservesFiniteLimits_of_natIso
+      (BraidedCategory.tensorLeftIsoTensorRight (F.obj i)).symm
+  have ht (M : A) : PreservesColimitsOfSize.{w, w} (tensorRight M) := by
+    have := tensorLeft_preservesColimits_independentCoefficients R M
+    exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  have : PreservesColimit F (curriedTensor A) :=
+    preservesColimit_of_evaluation _ _ fun M ↦
+      inferInstanceAs (PreservesColimit F (tensorRight M))
+  let e : tensorLeft c.pt ≅ (F ⋙ curriedTensor A).flip ⋙ colim :=
+    (curriedTensor A).mapIso (hc.coconePointUniqueUpToIso (colimit.isColimit F)) ≪≫
+      preservesColimitIso (curriedTensor A) F ≪≫ colimitIsoFlipCompColim _
+  have : PreservesFiniteLimits ((F ⋙ curriedTensor A).flip) :=
+    preservesFiniteLimits_of_evaluation _ fun i ↦ hleft i
+  have : PreservesFiniteLimits (tensorLeft c.pt) :=
+    preservesFiniteLimits_of_natIso e.symm
+  have : PreservesFiniteLimits (tensorRight c.pt) :=
+    preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight c.pt)
+  have : PreservesFiniteLimits (siteSheafTensorRight (A := R) c.pt) :=
+    preservesFiniteLimits_of_natIso (siteSheafTensorRightIso R c.pt).symm
+  have : PreservesColimitsOfSize.{w, w} (tensorRight c.pt) := ht c.pt
+  have : PreservesFiniteColimits (tensorRight c.pt) :=
+    PreservesColimitsOfSize.preservesFiniteColimits _
+  have : PreservesFiniteColimits (siteSheafTensorRight (A := R) c.pt) :=
+    preservesFiniteColimits_of_natIso (siteSheafTensorRightIso R c.pt).symm
+  refine ⟨?_, fun K _ _ D ↦ inferInstance⟩
+  exact ⟨(inferInstance : PreservesFiniteLimits (siteSheafTensorRight (A := R) c.pt)),
+    (inferInstance : PreservesFiniteColimits (siteSheafTensorRight (A := R) c.pt))⟩
 
 end SheafOfModules

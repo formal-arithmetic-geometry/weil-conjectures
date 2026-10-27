@@ -1,0 +1,202 @@
+{
+ "id": "lem-sfb-projective-bundle-fiber-degree",
+ "kind": "statement",
+ "title": "Unique integer degree on a projective-bundle fibre",
+ "statement": "Let S be a scheme [def-pc-scheme], E a quasi-coherent finite locally free module of constant rank r >= 2 [def-amb-finite-locally-free-module], and D a normalized tautological quotient on p:P(E)->S [lem-trf-projective-bundle-quotient-geometry]. Let L be an invertible module on P(E) [def-sc-invertible-module], and s a point of S. On the scheme-theoretic fibre i_s:P(E)_s->P(E) [def-pc-scheme-fibre], there is a unique integer m for which i_s^*L is isomorphic to i_s^*(integerLinePower D.line D.invertible m), using [def-pc-module-pullback] and [def-sfb-locally-constant-line-twist]. This asserts nothing about any neighbourhood of s.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, applied over each residue field; EGA II Remark 4.2.7, field calculation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-sc-invertible-module",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-sfb-locally-constant-line-twist"
+ ],
+ "proof": [
+  {
+   "text": "Apply the standard fibre-and-line model to obtain e:P^(r-1)_kappa(s) isomorphic to p.fiber(s), with e^* i_s^* D.line isomorphic to O(1).",
+   "uses": [
+    "lem-sfb-projective-bundle-fiber-twist-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA and 01OE, section-projective-bundle and example-projective-space; lemma-relative-proj-base-change, Tag 01O3."
+   }
+  },
+  {
+   "text": "Pull L to standard projective space; invertibility is preserved by tensor pullback, using uniqueness of its adjunction with ordinary module pullback. When r=2 apply the existing projective-line classification. When r>=3 the ring of each chart is a polynomial ring over a field, hence a UFD with trivial Picard group. The affine invertible-sections theorem therefore gives an actual free generator g_i on each chart. The unit relating g_i and g_j satisfies the cocycle equation by injectivity of multiplication by a free generator on every subopen. Normalize this function cocycle, rescale the generators by its chart units, and glue the frame-preserving isomorphisms to O(d).",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sfb-projective-line-invertible-classification",
+    "lem-sc-affine-invertible-sections",
+    "lem-sfb-projective-standard-unit-cocycle-normalization",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  },
+  {
+   "text": "For the composite g=e.hom;i_s, tensor pullback preserves the unit and tensor products. Given g^*D.line isomorphic to O(1), use tensor cancellation by O(1) and the pulled-back dual evaluation to identify g^*(dual D.line) with O(-1). Induction on natural powers gives g^* integerLinePower(D.line,m) isomorphic to O(m), for both signs of m. Pullback composition identifies this with e^* i_s^* integerLinePower(D.line,m).",
+   "uses": [
+    "def-sfb-locally-constant-line-twist",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  },
+  {
+   "text": "If O(a) is isomorphic to O(b), tensor with O(-a) to identify O(0) with O(b-a). If b<a then H^0(O(b-a))=0, whereas H^0(O(0)) is the degree-zero polynomial submodule and contains the distinct elements 0 and 1. Thus a<=b. Apply the same argument to the inverse isomorphism to obtain b<=a, proving a=b.",
+   "uses": [
+    "lem-pc-twist-tensor",
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  },
+  {
+   "text": "Compose the isomorphism for the pulled-back L with the inverse power comparison, and pull back along e.inv. The identity and composition isomorphisms recover an isomorphism on the original fibre. Any second integer pulls back to a second standard twist of L; composing the two isomorphisms and applying the preceding separation argument forces equality.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-bundle-fiber-twist-model",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sfb-projective-line-invertible-classification",
+  "lem-sc-affine-invertible-sections",
+  "lem-sfb-projective-standard-unit-cocycle-normalization",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "def-sfb-locally-constant-line-twist",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-twist-tensor",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ: standard-cover existence, with uniqueness instead proved using Tag 01XS twist cohomology; fibre normalization is constructions.tex Tags 01OA, 01OE and 01O3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Invertible modules on projective space over a field are uniquely tensor powers of O(1); two invertible sheaves isomorphic on a fibre are isomorphic over a neighbourhood",
+   "results": "Field query: 8 hits, including CommRing.Pic.mk_eq_one_iff and Module.Invertible.instProjective; no projective-space Picard theorem. Spreading query: 8 hits, including Proj.ext, Sheaf.isLocallySurjective_of_iso, and topological vector-bundle trivializations; none is a spreading theorem for algebraic lines.",
+   "date": "2026-10-27",
+   "verdict": "No projective-bundle fibre degree classification or fibre-isomorphism spreading theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on projective space over a field is a unique integer twist and locally over any base is a twist; two line bundles on projective space over an arbitrary base which agree on a fiber become isomorphic above a neighborhood",
+   "results": "Field query: 8 basic Proj structure-sheaf and section declarations. Spreading query: 8 hits, including Proj.ext, hom_trivializationAt and Projectivization.mk_eq_mk_iff; no algebraic spreading theorem. Loogle ProjectiveSpace.twist gave unknown identifier (not a Mathlib declaration).",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*projective|projective.*Pic|fiber.*invertible; existsUnique.*(degree|twist)|local_normal_form|locally.*twist; DAG title and blueprint searches for projective normal form, fibre degree and isomorphism of lines",
+   "results": "Mathlib msearch: 3 unrelated hits. Repository search: proved ProjectiveLine.existsUnique_degree_of_isInvertible covers only dimension one. AffineSpaceInvertibleTrivial proves chart triviality; ProperFlatFibreSectionLifting lifts sections under explicit hypotheses. ProjectiveLineFibrewiseTrivialDescent imports the parent classification, so cannot be used here. DAG and blueprint searches found related statements but no duplicate of either new statement.",
+   "date": "2026-10-27",
+   "verdict": "The two new statements isolate different steps of the original plan, not existing declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleLocalNormalForm",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Local-normal-form proof steps 1-2, restricted to one residue-field fibre; no neighbourhood extension.",
+   "via": [
+    "lem-sfb-projective-bundle-local-normal-form",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberDegree",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleFiberDegree.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_fiber_degree",
+  "statement": "theorem projective_bundle_fiber_degree (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)\n    (D : TautologicalQuotient E)\n    (L : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules)\n    (hL : L.IsInvertible) (s : S) :\n    ∃! m : ℤ, Nonempty\n      ((tensorPullback\n        ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.fiberι s)).obj L ≅\n        (tensorPullback\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.fiberι s)).obj\n          (integerLinePower D.line D.invertible m))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T112322-L-1570750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T123516-L-2314137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

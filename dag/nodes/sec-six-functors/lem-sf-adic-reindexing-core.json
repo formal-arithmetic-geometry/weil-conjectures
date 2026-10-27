@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-adic-reindexing-core",
+ "kind": "statement",
+ "title": "Normalized integral and common-stage realization reindexing",
+ "statement": "Fix a prime l, a finite-field datum D, and for every separated finite-type geometric space T over its algebraically closed field a SpaceData d(T), consisting of the fixed native realization, its exact section-module presentation, tensor/unit data, finite normalizations, and Hom laws [def-sf-adic-realization-isomorphism-data]. There exists a FamilyCore C with exactly C.data = d: its coefficient-ring inverse images are fixed on functions, its integral balanced reindexing is fixed on sections and derived representatives, and its common-stage comparison is natural and satisfies integralRealizationAgreement for every finite integral representative. The module identity and composition maps act as identity on sections; the source identity obeys the unit equation for the specified common-stage pullback composition. Its ambient tensor reindexing is normalized on homogeneous pure tensors and coefficient units, and its source unit is the canonical pullback unit assertion. This conclusion asserts no identity/composition equation for the realization comparison and no tensor/unit/Hom compatibility of that comparison.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; arbitrary scheme-isomorphism reindexing, including semilinear Frobenius; old step 12; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Use sectionwise inverse image along each underlying scheme isomorphism. Its\ncoefficient map fixes the finite-extension-valued functions, and coefficient naturality\nidentifies the integral quotient projections and finite scalar transitions. Balanced scalar\nextension gives the section-normalized IntegralReindex. Localize its cochain comparison\nthrough the exact-derived factorizations and scalar-extension counits. Compose its inverse\nwith the specified completion-unit inverse and the integral realization isomorphisms; this\nis precisely integralRealizationAgreement, including both mapping-fiber coordinates.\nThe scalar-compatibility equation for the specified completion unit makes these components\ncompatible with finite scalar extension. Naturality first descends through the raw finite\nrationalizations and then through common-stage Hom groups: represent an arrow at a common\nfield, use naturality there, and cancel the two scalar comparisons. Equality at a larger\nstage proves independence of representatives. The inverse components descend by the same\nsquare. Construct tensor reindexing on total K-flat models by the homogeneous pure-tensor\nmap and descend it by the representative equation. Reindexing preserves K-flatness since\nit is an exact monoidal equivalence. The coefficient unit pulls back to itself, supplying\nthe canonical common-stage unit assertion. For the ordinary identity and compositor use\nsectionwise identity maps. For the source identity use the integral pullback identity and\ndescend it through rationalization and common-stage inclusion; its unit equation is the\nidentity of the specified pullback composition on the same representatives. These maps\nretain the given objectwise data exactly. No linearity over the base field is used.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-trf-integral-inverse-image-comparison-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-weil-isomorphism-comparison-natural",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-trf-integral-inverse-image-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit stage-3 subargument of lem-sf-adic-realization-isomorphism-normalization; 1, 2, 3, 4, 5. Not claimed verbatim in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural monoidal transformation commutes with internal Hom evaluation transpose",
+   "results": "Eight hits including CategoryTheory.ihom.ev_naturality and CategoryTheory.NatTrans.IsMonoidal. These concern generic closed monoidal categories, not the native adic/common-stage normalized maps.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "Eight hits, including Scheme.Modules.pullbackId, pullbackCongr, restrictFunctorIsoPullback and comapIso identities. None states native adic realization normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientBaseChangeHom|homEquiv_naturality_left_symm",
+   "results": "25 hits for generic adjunction naturality; no coefficientBaseChangeHom in Mathlib. Native adic comparisons are in the project library.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationIsomorphismNormalization",
+  "date": "2026-10-25",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation with no imported blueprint ancestor; lem-sf-adic-realization-isomorphism-normalization proof steps 1, 2, 3, 4, 5",
+   "via": [
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingCore",
+  "file": "lean/Sheaf/Paper/AdicReindexingCore.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_normalized_reindexing_core",
+  "statement": "theorem exists_normalized_reindexing_core\n    (d : ∀ T : GeometricSpace D, SpaceData l D T) :\n    ∃ C : FamilyCore l D, C.data = d ∧\n    (∀ (T : GeometricSpace D) (M : modules l T.base.left (C.data T).realization)\n      (U : T.base.left.ProEtᵒᵖ)\n      (x : ((modulePull l T.base.left (𝟙 _) (C.ring T T (Iso.refl _))).obj M).val.obj U),\n    HEq (((C.moduleId T).hom.app M).val.app U x) x)\n    ∧ (∀ (T U V : GeometricSpace D)\n      (g : T.base.left ≅ U.base.left) (h : U.base.left ≅ V.base.left)\n      (M : modules l V.base.left (C.data V).realization) (W : T.base.left.ProEtᵒᵖ)\n      (x : ((modulePull l T.base.left (g ≪≫ h).hom\n        (C.ring T V (g ≪≫ h))).obj M).val.obj W),\n    HEq (((C.moduleComp T U V g h).hom.app M).val.app W x) x)\n    ∧ (∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n      (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)),\n    letI := (C.data T).units\n    letI := (C.data U).units\n    integralRealizationAgreement l g.hom (C.data T).realization (C.data U).realization\n      (C.ring T U g) E (C.integral T U g E) (C.comparison T U g))\n    ∧ (∀ (T : GeometricSpace D)\n      (M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.base.left),\n    letI := (C.data T).units\n    HEq\n      ((pullbackTensorCommonComposition l (PadicAlgCl l)\n          (𝟙 T.base.left) (𝟙 T.base.left) M).hom ≫\n        (C.sourceId T).hom.app\n          ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))\n      (𝟙 ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+ }
+}

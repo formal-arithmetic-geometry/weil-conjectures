@@ -3,7 +3,7 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "For every $m\\ge n$, the finite dualizing comparison [lem-coef-finite-dualizing] supplies the pro-etale isomorphism $\\omega_m\\otimes^L_{A_m}A_n\\cong\\omega_n$, its quotient cocycle and unit, and the identity carrying the counit at level $m$ to the counit at level $n$. The tensor--restriction adjunction in the normalized-tower definition [def-coef-normalized-dvr-tower] therefore turns this comparison into $\\tau_{m,n}:\\omega_m\\to\\operatorname{Res}_{m,n}\\omega_n$ with the required identity and cocycle. The assumed strict complex $Q_\\bullet$ represents these objects and has transitions adjoint to these maps, so no additional choice of a derived lift is made.",
+   "text": "By [lem-coef-finite-dualizing], the finite comparisons $u_{m,n}$ have the quotient cocycle and identity and realize the specified pro-etale dualizing objects. The tensor--restriction adjunction of [def-coef-normalized-dvr-tower] gives their adjuncts $\\tau_{m,n}$. The assumed strict $Q_\\bullet$ represents exactly these objects and transitions; it is already a coherent input, so this step chooses no derived lift.",
    "uses": [
     "lem-coef-finite-dualizing",
     "def-coef-normalized-dvr-tower"
@@ -15,10 +15,9 @@
    }
   },
   {
-   "text": "The ringed sequence site of [def-coef-ringed-sequence-site] realizes strict quotient-semilinear systems, with exact evaluation and the actual quotient transition maps. Apply [lem-coef-semilinear-derived-sections] to the open extension $j_!$, proper direct image $Rp_*^{\\mathcal Q}$, and, separately, point sections to the one-point tower site. The ring systems for the scheme inverse images are the inverse images of the constant finite coefficient systems; for point sections the inverse image sends $A_n$ to $(A_n)_s$. Thus the hypotheses of its operations clause hold. Its evaluation identifications give the ordinary finite operations, naturally in the input and its quotient-semilinear arrows. Consequently $\\operatorname{ev}_nB_\\omega$ is the derived point section of $F_nQ_n$, restricted to $R$. This uses the varying-ring realization, not a constant-ring module diagram equivalence.",
+   "text": "Apply [lem-coef-dualizing-support-evaluation] to $M_n=\\omega_n$ and $\\alpha_{m,n}=u_{m,n}$, using the given identifications of $Q_n$ and its transitions. Its $B(Q)$ is the specified $B_\\omega$, since the ringed sites, compactification, separate derived operations and constant-$R$ restrictions agree. Its $\\Theta_{Q,n}$ gives $\\operatorname{ev}_nB_\\omega\\cong\\Gamma(s,F_n\\omega_n)$; its formula identifies every transition with compact support of $\\tau_{m,n}$, equivalently $\\operatorname{Res}(F_nu_{m,n}\\circ c_{m,n})\\eta$. It includes identity and quotient composition.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-coef-semilinear-derived-sections"
+    "lem-coef-dualizing-support-evaluation"
    ],
    "elementary": false,
    "source": {
@@ -27,33 +26,9 @@
    }
   },
   {
-   "text": "By the finite pro-etale realization clause of [lem-coef-finite-dualizing], each $Q_n$ represents the finite exceptional object $\\omega_n=G_n(A_n)_s$. Substituting this identification into the evaluation from the preceding step gives the asserted natural isomorphism $\\operatorname{ev}_nB_\\omega\\cong\\Gamma(s,F_n\\omega_n)$, with the coefficient restriction from $A_n$ to the constant base ring $R$ understood in the tower category.",
+   "text": "Transport the finite counit section maps $e_n$ of [lem-coef-finite-counit-restriction-square] along $\\Theta_{Q,n}$ from step 2, defining $\\epsilon_n=e_n\\Theta_{Q,n}$. That lemma gives $e_n\\bar d_{m,n}=q_{m,n}[0]e_m$ for the same projection-transpose transition and canonical quotient target. Substitution of the transition equation from step 2 yields $\\epsilon_nt^{B_\\omega}_{m,n}=q_{m,n}[0]\\epsilon_m$. Thus all evaluations, transitions and finite counits have the required identifications in $D(R)$. The construction uses only the fixed $Q_\\bullet$, compactification and finite counits, independently of $K$.",
    "uses": [
-    "lem-coef-finite-dualizing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2: the specified natural maps before taking limits; coherent realization of the single finite counit trace (old step 9)."
-   }
-  },
-  {
-   "text": "For $m\\ge n$, the semilinear transition supplied by [lem-coef-semilinear-derived-sections] applies the quotient-semilinear map $Q_m\\to\\operatorname{Res}_{m,n}Q_n$ levelwise through $j_!$, $Rp_*^{\\mathcal Q}$, and point sections. Under the identifications of the previous step, this is exactly compact support applied to $\\tau_{m,n}$ followed by coefficient restriction, because the latter is the adjoint of the finite comparison in [lem-coef-finite-dualizing]. The identity and cocycle for $\\tau_{m,n}$ from step 1 therefore give the stated strict tower transitions.",
-   "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-coef-finite-dualizing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2: the specified natural maps before taking limits; coherent realization of the single finite counit trace (old step 9)."
-   }
-  },
-  {
-   "text": "Let $\\epsilon_n$ be the finite exceptional counit transported through the evaluation isomorphism and then through derived point sections. Here is the compatibility calculation before applying point sections. Put $A=A_m$, $B=A_n$, $T=-\\otimes_A^LB$, $u:T\\omega_m\\to\\omega_n$, and let $\\eta$ be the tensor--restriction unit. Thus $\\tau=\\operatorname{Res}(u)\\eta_{\\omega_m}$. Write $c:T F_m\\omega_m\\to F_nT\\omega_m$ for the coefficient comparison in [lem-coef-finite-dualizing]. The projection-transpose clause of [lem-coef-semilinear-derived-sections] identifies the restriction transition of step 4 with $\\operatorname{Res}(F_nu)\\operatorname{Res}(c)\\eta_{F_m\\omega_m}$. The finite counit identity is $\\varepsilon_n F_nu=(T\\varepsilon_m)c^{-1}$. Hence composing the transition with $\\operatorname{Res}(\\varepsilon_n)$ gives $\\operatorname{Res}(T\\varepsilon_m)\\eta_{F_m\\omega_m}=\\eta_{A_s}\\varepsilon_m$ by naturality of the unit. Under $TA_s=B_s$, $\\eta_{A_s}$ is the quotient $A_s\\to B_s$. Applying derived point sections and restricting to $R$ therefore gives $\\epsilon_n t_{m,n}=q_{m,n}\\epsilon_m$ in $D(R)$. This is the asserted compatibility of the evaluated counits; it does not infer a strict chain map from equalities only in $D(R)$. All operations used $Q_\\bullet$ and its fixed compactification, independently of any test object $K$.",
-   "uses": [
-    "lem-coef-finite-dualizing",
-    "lem-coef-semilinear-derived-sections"
+    "lem-coef-finite-counit-restriction-square"
    ],
    "elementary": false,
    "source": {
@@ -64,9 +39,9 @@
  ],
  "proof_deps": [
   "def-coef-normalized-dvr-tower",
-  "def-coef-ringed-sequence-site",
-  "lem-coef-finite-dualizing",
-  "lem-coef-semilinear-derived-sections"
+  "lem-coef-dualizing-support-evaluation",
+  "lem-coef-finite-counit-restriction-square",
+  "lem-coef-finite-dualizing"
  ],
  "proof_origin": {
   "by": "agent",
@@ -220,20 +195,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-coef-tower-trace-rectification",
   "worker": "stage1",
-  "summary": "Audited the imported trace-rectification statement against the finite dualizing comparison and the current ringed-tower framework. No finished project declaration with this exact statement exists. The split uses the existing finite counit cocycle, the exact ringed sequence evaluation, and the semilinear derived-section construction to identify every level and transition, then transports the finite counits and checks their quotient compatibility. No new node was needed. Maintainer review removed the redundant constant-ring module equivalence in step 2, corrected the agent proof attribution, and expanded the unit/counit calculation in step 5.",
-  "blueprint": "Realizes prop-coef-integral-dualizing, proof paragraph 2: the specified natural maps before taking limits and coherent realization of the single finite counit trace (old step 9).",
+  "summary": "Repair of the human-requested re-split: two comparable statement-only nodes extract returned steps 2-4 (1890 characters) and step 5 (1342 characters); the finite comparison/adjunct setup of step 1 remains in the short assembly. The full original argument is preserved verbatim in report.md. Statement and Lean metadata unchanged. Genuine semantic, Loogle and grep searches are logged for each new node.",
+  "blueprint": "prop-coef-integral-dualizing proof paragraph 2: specified finite natural maps, dualizing comparisons defined by counits, before taking the total inverse limit. The evaluation/transition construction and scalar-counit quotient square are separate parallel work items.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q101-340994c2d",
-  "group": "Q101",
+  "reviewer": "NT-cc-Q135-7610003cf",
+  "group": "Q135",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q101-340994c2d (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route. Repaired step 2’s constant-ring module-equivalence misuse and corrected proof attribution to agent; expanded the counit compatibility calculation. Statement unchanged. Small cases, dependency cycles, long-step and batch-5 restrictions checked. Review and corrected whole-node JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-7610003cf (reviewer sub-agent of L); spot-checked: I read the whole re-split delivery against the 2026-10-22 re-split note and the source. The source is prop-coef-integral-dualizing, proof paragraph 2, identical in master and main-20261015. The item is not dropped and not superseded: live still has the 5-step Q101 version. The item statement is byte-identical to base.\n\nHow the old proof is distributed:\n- Old step 1 stays as assembly step 1.\n- Old steps 2-4 become lem-coef-dualizing-support-evaluation: level isomorphism Θ for arbitrary strict Q, plus the transition formula d=Res(F_n(α)∘c)∘η from the extension-form transition G_n(t)∘b_{m,n} of lem-coef-semilinear-derived-sections, applied to j_!, Rp_* and point sections.\n- Old step 5 becomes lem-coef-finite-counit-restriction-square.\nThe assembly is 1595 characters; the new statements are 2765 and 2557 characters. Neither restates the item, and nothing is shortened or dropped.\n\nChecks on the counit-square node:\n- Res(ε_n)∘d = v∘ε_m follows from finite-dualizing's counit identity ε_B F_B(u)=(Tε_A)c^{-1}, using the identification λ, and naturality of η.\n- ι_n holds because id_s is the final object (def-weil-finite-coefficient-point), so RΓ(s,v)=q[0].\n- Edge cases m=n, X=s with a=id, X empty, and m=2,n=1 (non-flat, derived tensor) all hold.\n\nAssembly step 3 is elementary conjugation by Θ, given that both nodes use the same d.\n\nDuplicate search: I compared the live DAG candidates finite-adjunction-transition, tower-coaugmentation, tower-evaluation-pairing, sequence-global-sections-evaluation, and today's six-functors nodes. None states either new node. lem-trf-compact-support-system-evaluation-coherence equals the Y=s, pre-point-sections part of the evaluation node. It sits on the trace-formula unit route (batch 5), so a separate six-functors node is acceptable; maintainer note.\n\nOther checks: three search kinds per node; blueprint from/via/same_as correct; no SGA; same unit throughout; no tool_uses.\n\nFIX, B2/B3/E6 wording in lem-coef-dualizing-support-evaluation:\n(1) 'W=X,s' omitted the site of X̄, where j_!Q and Rp_* live; now 'W=X,X̄,s' with j and p named.\n(2) Point sections are now named as Γ(s,-) at the final object, with def-weil-finite-coefficient-point added to stmt_deps.\n(3) The vague dualizing clause now says explicitly that, after M_n≅ω_n, the semilinear-built c_{m,n,ω_m} is the finite pro-étale realization of c_{X,A_m,A_n,ω_m} of lem-coef-finite-dualizing. Assembly step 3 needs this to equate the two d_{m,n}; old step 5 had used it silently.\n\nThe corrected whole JSON is in fixes/dag/nodes/sec-six-functors/. The new nodes lack the merged_into and lean_audit keys; the merge tool should default them.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.SixFunctors.CoefTowerTraceRectification",
@@ -303,5 +278,42 @@
   "result": "pass",
   "note": "Statement, dependencies, source route, declarations, docstrings, edge cases, report sections, and ordinary derived-route compliance checked; sandbox and library scompile passed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261025T122914-L-1817155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.coefTowerTraceRectification",
+   "WeilConjectures.coefTraceConstantScalars_exact",
+   "WeilConjectures.coefTraceOpen_exact",
+   "WeilConjectures.coefTraceQuotient_comp",
+   "WeilConjectures.coefTraceQuotient_linear",
+   "WeilConjectures.coefTraceSections_additive",
+   "WeilConjectures.coefTraceSheafTowers_kInjectives",
+   "WeilConjectures.coefTraceSystemRestriction_exact",
+   "WeilConjectures.coefTraceTargetTransition_quotient"
+  ],
+  "sorry_after": [
+   "WeilConjectures.coefTowerTraceRectification",
+   "WeilConjectures.coefTraceSheafTowers_kInjectives",
+   "WeilConjectures.coefTraceTargetTransition_quotient"
+  ]
+ }
 }

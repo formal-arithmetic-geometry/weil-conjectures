@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-ringed-pullback-presentation-on-sites",
+ "kind": "statement",
+ "title": "Tensor presentation of continuous module pullback on independently sized sites",
+ "statement": "Let C and D be sites essentially small relative to a coefficient universe w [def-weil-sheaf-of-modules-category]. Let F:D -> C be continuous, and let L:Sh(D,Type w) -> Sh(C,Type w) be a finite-limit-preserving left adjoint to continuous direct image. For commutative ring sheaves R on C and S on D, and a ring map phi:S -> F_*R, there exist an algebraic inverse image I of S with ring RI [def-weil-pbc-algebraic-inverse-image], a ring map c:RI -> R, and an additive module functor T whose objects and maps are exactly sheafified scalar extension [def-pur-sheaf-tensor-product] of I.modules, with an adjunction T left adjoint to continuous module direct image along phi, using restriction of scalars [def-pc-sheaf-restrict-scalars]. Site object and morphism universes are independent of w.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Morphisms of topoi and sheaves of modules: lemmas pullback-module, adjoint-push-pull-modules and adjoint-pullback-pushforward-modules; sheafified scalar-extension adjunction, Tag 03D7."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the continuous ringed direct image and transpose the given coefficient map using the set-sheaf adjunction. Ring and module graph identities follow by transposing products and constants.",
+   "uses": [
+    "def-pur-ringed-topos-morphism-of-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the algebraic presentation of the finite-limit-preserving set inverse image to construct the transported ring and module functor. Its underlying set isomorphism transports the structural ring map. Reflect the addition, multiplication and unit identities through the inverse ring isomorphism to obtain a ring homomorphism c.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the set-sheaf Hom equivalence to linear maps. The graph equations and compatibility of binary operations with mates establish linearity in both directions and naturality. Compose this equivalence with the sheafified tensor/restriction adjunction. The resulting left adjoint is additive. Its objects and maps are literally scalar extension of the algebraic inverse-image functor.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-ringed-topos-morphism-of-universes",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Module inverse image and scalar extension",
+  "note": "Generalizes the existing proved private supplied_adjunction and siteContinuousRingedTopos arguments to independent site universes, retaining the actual objects, maps and continuous direct image."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the left adjoint to continuous module direct image is inverse image followed by extension of scalars",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, pullbackPushforwardAdjunction, pullback",
+   "date": "2026-10-25",
+   "verdict": "Ordinary adjunction available, but no algebraic inverse-image followed by scalar-extension presentation at independent universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "PresheafOfModules pushforward APIs; no tensor presentation theorem.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Aa]djunction|pushforward.*[Aa]djunction",
+   "results": "25 hits, including SheafOfModules.pullbackPushforwardAdjunction and scheme-module adjunction.",
+   "date": "2026-10-25",
+   "verdict": "The presentation and restriction of the geometric Hom equivalence still require proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "date": "2026-10-25",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph defining integral operations by compatible finite reductions: ordinary ambient pullback is geometric inverse image followed by scalar extension.",
+   "via": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedPullbackPresentationOnSites",
+  "file": "lean/Sheaf/CategoryTheory/RingedPullbackPresentationOnSites.lean",
+  "declaration": "SheafOfModules.RingedPresentationOnSites.continuous_ringed_pullback_presentation",
+  "statement": "theorem continuous_ringed_pullback_presentation\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]\n    (F : D ⥤ C) [F.IsContinuous K J]\n    (L : Sheaf K (Type u) ⥤ Sheaf J (Type u))\n    (adj : L ⊣ F.sheafPushforwardContinuous (Type u) K J) [PreservesFiniteLimits L]\n    (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u})\n    (φ : S ⟶ (F.sheafPushforwardContinuous CommRingCat.{u} K J).obj R) :\n    ∃ (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage L S RI) (c : RI ⟶ R)\n      (T : SheafOfModules.{u} ((sheafCompose K\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤\n          SheafOfModules.{u} ((sheafCompose J\n            (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (_ : T.Additive),\n      ∃ hobj : ∀ M, T.obj M = changeOfRings c (I.modules.obj M),\n      (∀ {M N} (a : M ⟶ N), T.map a =\n        eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫\n          eqToHom (hobj N).symm) ∧\n      Nonempty (T ⊣ SheafOfModules.pushforward\n        ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).map φ))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T180832-L-4039039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T180832-L-4039039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

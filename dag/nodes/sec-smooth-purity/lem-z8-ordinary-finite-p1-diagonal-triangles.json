@@ -1,0 +1,131 @@
+{
+ "id": "lem-z8-ordinary-finite-p1-diagonal-triangles",
+ "kind": "statement",
+ "title": "Ordinary Finite P1 Diagonal Triangles",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteP1_diagonal_triangles (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)\n    (hc : OrdinaryFiniteP1ChernFamilySpec A N hA c)\n    (b : ∀ (S : Scheme.{u}) [IsNoetherian S] (_hS : IsUnit (N : Γ(S, ⊤))),\n      ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅\n        (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))\n    (hb : ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),\n      (b S hS).hom = ordinaryFiniteP1KummerMap A N hA t c S hS)\n    (hbc : OrdinaryFiniteP1KummerMapBaseChange A N hA t c) :\n    (∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),\n      ∃ η : 𝟭 (DerivedCategoryModule A (ProjectiveLine S)) ⟶\n          ordinaryFinitePushforward A (ProjectiveLine S ↘ S) ⋙\n            ordinaryFiniteP1Right A N hA S,\n        (∀ M : DerivedCategoryModule A (ProjectiveLine S),\n          (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map (η.app M) ≫\n            (ordinaryFiniteP1TraceCounit A N hA S (b S hS)).app\n              ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj M) = 𝟙 _) ∧\n        (∀ K : DerivedCategoryModule A S,\n          η.app ((ordinaryFiniteP1Right A N hA S).obj K) ≫\n            (ordinaryFiniteP1Right A N hA S).map\n              ((ordinaryFiniteP1TraceCounit A N hA S (b S hS)).app K) = 𝟙 _))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-asd-ordinary-finite-p1-kummer-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the supported diagonal component formula to obtain the two normalized scalar integrals. Normalize the shifted coefficient line along both projections and use the chart trace exchange equations in the existing even-line coordinate trace contractions. Tensor the first scalar section integral by the generic section projection calculation, and use the second scalar integral directly. The generic two-triangle assembly gives a unit for the common-base coefficient. Transport that coefficient along the specified normalized twist pullback; projection naturality identifies its counit with the prescribed Kummer trace counit. Explicitly unfold only the projective-line counit and right-adjoint wrappers when applying the generic coefficient-triangle assembly. Apply the elementary pushed-isomorphism cancellation with the supported map's canonical source object specified explicitly.",
+   "uses": [
+    "lem-z8-etale-diagonal-coefficient-triangles",
+    "lem-z8-etale-section-unit-normalization",
+    "lem-z8-ordinary-finite-diagonal-trace-coordinates",
+    "lem-z8-ordinary-finite-p1-diagonal-integral",
+    "lemma-constructible-iso-invariance",
+    "lemma-constructible-pullback-finite",
+    "lemma-constructible-pullback-stratification",
+    "prop-constructible-pullback",
+    "lem-z8-ordinary-finite-single-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the separately proved first and second normalized coordinate exchange identities.",
+   "uses": [
+    "lem-z8-ordinary-finite-diagonal-first-coordinate-exchange",
+    "lem-z8-ordinary-finite-diagonal-second-coordinate-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-etale-diagonal-coefficient-triangles",
+  "lem-z8-etale-section-unit-normalization",
+  "lem-z8-ordinary-finite-diagonal-first-coordinate-exchange",
+  "lem-z8-ordinary-finite-diagonal-second-coordinate-exchange",
+  "lem-z8-ordinary-finite-diagonal-trace-coordinates",
+  "lem-z8-ordinary-finite-p1-diagonal-integral",
+  "lem-z8-ordinary-finite-single-unit-normalization",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-finite",
+  "lemma-constructible-pullback-stratification",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1DiagonalTriangles.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_triangles",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_diagonal_triangles"
+  ],
+  "statement": "theorem ordinaryFiniteP1_diagonal_triangles (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)\n    (hc : OrdinaryFiniteP1ChernFamilySpec A N hA c)\n    (b : ∀ (S : Scheme.{u}) [IsNoetherian S] (_hS : IsUnit (N : Γ(S, ⊤))),\n      ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅\n        (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))\n    (hb : ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),\n      (b S hS).hom = ordinaryFiniteP1KummerMap A N hA t c S hS)\n    (hbc : OrdinaryFiniteP1KummerMapBaseChange A N hA t c) :\n    (∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),\n      ∃ η : 𝟭 (DerivedCategoryModule A (ProjectiveLine S)) ⟶\n          ordinaryFinitePushforward A (ProjectiveLine S ↘ S) ⋙\n            ordinaryFiniteP1Right A N hA S,\n        (∀ M : DerivedCategoryModule A (ProjectiveLine S),\n          (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map (η.app M) ≫\n            (ordinaryFiniteP1TraceCounit A N hA S (b S hS)).app\n              ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj M) = 𝟙 _) ∧\n        (∀ K : DerivedCategoryModule A S,\n          η.app ((ordinaryFiniteP1Right A N hA S).obj K) ≫\n            (ordinaryFiniteP1Right A N hA S).map\n              ((ordinaryFiniteP1TraceCounit A N hA S (b S hS)).app K) = 𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-normality-from-completed-monoid-chart",
+ "kind": "statement",
+ "title": "Normality descends from saturated completed strict-local monoid models",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point] over $x$, and put $A_0=\\mathcal O_{X,x}$ and $A=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$, the affine pointed-etale-neighbourhood colimit [def-weil-pbc-strict-henselization-limit]. Let $\\widehat A=\\varprojlim_m A/\\mathfrak m_A^m$ be the completion at its maximal ideal [def-weil-pbc-adic-completion]. Let $P$ be a finitely generated integral saturated commutative monoid [def-trf-fs-log-blowup], written additively and sharp (its only invertible element is $0$), and $n\\geq0$. For a local coefficient ring $L$, define $B_L(P,n)$ as the completion of $L[P][t_1,\\ldots,t_n]$ at $(\\mathfrak m_L,z^q\\ (q\\neq0),t_1,\\ldots,t_n)$; the monoid ring consists of finite sums with $z^qz^{q'}=z^{q+q'}$. Suppose $\\widehat A$ is isomorphic as a ring either to $B_k(P,n)$ for a field $k$, or to $B_C(P,n)/(\\theta)$, where $C$ is a Cohen ring of residue characteristic the prime $p$ [def-weil-pbc-cohen-ring] and $\\theta-p\\in(z^q\\ (q\\neq0),t_1,\\ldots,t_n)B_C(P,n)$. Then the canonical maps $A_0\\to A$ and $A\\to\\widehat A$ are faithfully flat [def-weil-pbc-faithfully-flat-ring-map], and $\\widehat A$, $A$ and $A_0$ are normal domains [def-weil-pbc-normal-ring]. No log structure or log regularity is assumed on $X$ beyond the displayed completed-ring hypothesis.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-extracted completed-local normality criterion underlying Expose VI 1.6, printed p. 70; parent split, original steps 1--2. Strict-local descent inputs: Stacks Tags 04HX (lemma-describe-etale-local-ring), 07QM (lemma-dumb-properties-henselization), 06LJ (lemma-henselization-noetherian), 05CK (lemma-faithfully-flat-universally-injective). Saturated complete-model normality remains the separately cited Kato (1994), 4.1 input, WANTED locally."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-adic-completion",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}R$ of $X$ containing $x$, with corresponding prime $\\mathfrak p$. By [pqf-lem-affine-open-locnoeth], $R$ is Noetherian. By [lem-weil-pbc-affine-open-stalk-localization], the germ map identifies $A_0=\\mathcal O_{X,x}$ with $R_{\\mathfrak p}$. Apply [lem-weil-pbc-localization-noetherian] at the multiplicative set $R\\setminus\\mathfrak p$. Thus $A_0$ is a Noetherian local ring.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); affine stalk identification: schemes.tex, Tag 01HV (lemma-spec-sheaves)."
+   }
+  },
+  {
+   "text": "Let $K\\subset\\Omega$ be the separable algebraic closure of $\\kappa(x)$ in $\\Omega$. It is a separable closure of $\\kappa(x)$ by [def-weil-pbc-relative-separable-closure], since $\\Omega$ is algebraically closed; and $\\kappa(x)=\\kappa(\\mathfrak p)$ is the residue field of the local ring $A_0=R_{\\mathfrak p}$. Apply [lem-weil-pbc-strict-henselization-triples] to the ring $A_0$, its maximal ideal $\\mathfrak pA_0$ and $K$: the category of pointed etale triples of $A_0$ is filtered, and its colimit $H$, with structural map $\\rho:A_0\\to H$, is a local ring. By [lem-sc-etale-triples-colimit-is-strict-henselization] (at the closed point, with $\\chi:\\kappa(\\mathfrak p)\\to K$ the inclusion), $H$ with this colimit cocone is an algebraic strict henselization of $R_{\\mathfrak p}$ relative to $K$. Apply [lem-exc-affine-strict-local-ring-comparison] to the affine open immersion $i:\\operatorname{Spec}R\\to X$ with image $U$, the geometric point $\\bar x$, $L=R_{\\mathfrak p}$ and $L^{\\mathrm{sh}}=H$. It gives a ring isomorphism $\\theta:A\\to H$ with $\\theta\\circ a=\\rho\\circ\\lambda$, where $a:R\\to A$ is the chart leg and $\\lambda:R\\to R_{\\mathfrak p}$ the localization map, and it states that $A$ is a strictly henselian local ring. The canonical map $A_0\\to A$, composed with the germ map $\\lambda$, is the chart leg $a$: both are the map on sections over $U$ of the structural morphism $\\operatorname{Spec}A\\to X$, which factors through $U$. Hence $\\theta\\circ(A_0\\to A)$ and $\\rho$ agree after precomposition with $\\lambda$, so they are equal by [lem-weil-pbc-ring-localization-universal-property].",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW (lemma-strict-henselization-different), identification of the triple colimit at a prime with the strict henselization of the localization; etale-cohomology.tex, Tag 04HX (lemma-describe-etale-local-ring), affine-neighbourhood proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-strict-henselization-faithfully-flat] to the local ring $A_0$, $K$ and the colimit cocone of Step 2: the structural map $\\rho:A_0\\to H$ is faithfully flat. By Step 2 the canonical map $A_0\\to A$ equals $\\theta^{-1}\\circ\\rho$, and $\\theta^{-1}$ is a ring isomorphism, so $A$ and $H$ are isomorphic $A_0$-modules and $A_0\\to A$ is faithfully flat. Since $A_0$ is Noetherian (Step 1), [lem-sc-strict-henselization-noetherian], applied to the strict henselization $H$ of $A_0$, gives that $H$ is Noetherian, hence so is $A\\cong H$. $A$ is local by Step 2. Apply [lem-weil-pbc-local-completion-faithfully-flat] to $(A,\\mathfrak m_A)$: its completion is exactly the inverse limit $\\widehat A$ in the statement, so $A\\to\\widehat A$ is faithfully flat as well.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QM (lemma-dumb-properties-henselization), part (1), and 06LJ (lemma-henselization-noetherian); algebra.tex, Tag 00MC (lemma-completion-faithfully-flat)."
+   }
+  },
+  {
+   "text": "The hypotheses on $P$, $n$, and the coefficient ring are precisely those of [lem-trf-log-regular-saturation-normality]. In the field case apply its case (i); in the Cohen case apply its case (ii), using the given congruence $\\theta-p\\in(z^q\\ (q\\ne0),t_1,\\ldots,t_n)$. It gives that the displayed model is a nonzero normal domain. Transport this property along the assumed ring isomorphism to obtain that $\\widehat A$ is a normal domain. This application requires no log structure on $X$.",
+   "uses": [
+    "lem-trf-log-regular-saturation-normality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p. 70, displayed complete models; agent assembly using the independently stated saturated-model normality theorem."
+   }
+  },
+  {
+   "text": "We descend normal-domain normality along each of the two maps of Step 3, first $A\\to\\widehat A$, then $A_0\\to A$. For either map $f:R\\to S$ with $S$ already a normal domain, [lem-weil-pbc-faithfully-flat-ideal-contraction] gives injectivity, so $R$ is a nonzero domain: $1_R=0$ or $ab=0$ would imply respectively $1_S=0$ or $f(a)f(b)=0$. By [lem-weil-pbc-fraction-field-lift], the composite $R\\hookrightarrow S\\hookrightarrow\\operatorname{Frac}(S)$ extends to an injection of fraction fields, sending $a/b$ to $f(a)/f(b)$. If $a/b$ is integral over $R$, its monic equation maps to a monic equation over $S$, so this fraction lies in $S$ by normality [def-weil-pbc-normal-ring]. Hence $f(a)\\in f(b)S$, and ideal contraction for $I=bR$ gives $a\\in bR$. Writing $a=br$ shows $a/b=r\\in R$. Thus $R$ is integrally closed in its fraction field. The two applications prove that $A$ and $A_0$ are normal domains, completing all conclusions.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-fraction-field-lift",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033G (lemma-descent-normal), its domain-case argument; Tag 05CK (lemma-faithfully-flat-universally-injective), principal-ideal contraction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-trf-log-regular-saturation-normality",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-fraction-field-lift",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Domain-case argument of Tag 033G, assembled with Tags 04HX, 04GW, 07QM, 06LJ, 00MC and the existing saturated-complete-model theorem; geometric motivation ILO Expose VI 1.6, printed p. 70."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fine saturated log regular scheme has normal completed geometric strict local rings and normal ordinary local rings by faithful flat descent.",
+   "results": "{\"t\": \"2026-10-22T05:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"A fine saturated log regular scheme has normal completed geometric strict local rings and normal ordinary local rings by faithful flat descent.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"a6c7339412adce4e\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log_regular|logRegular|StrictHensel.*[Nn]ormal",
+   "results": "{\"t\": \"2026-10-22T05:58:57Z\", \"tool\": \"grep\", \"query\": \"LogRegular|log_regular|logRegular|StrictHensel.*[Nn]ormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality descends from the completed strict henselian local charts of a Noetherian fine saturated logarithmically regular scheme.",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"leansearch\", \"query\": \"Normality descends from the completed strict henselian local charts of a Noetherian fine saturated logarithmically regular scheme.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally Noetherian scheme, if a completed geometric strict local ring is a saturated completed monoid ring over a field or a Cohen hypersurface, it and the strict and ordinary local rings are normal domains and both local completion maps are faithfully flat.",
+   "results": "{\"t\": \"2026-10-22T05:59:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally Noetherian scheme, if a completed geometric strict local ring is a saturated completed monoid ring over a field or a Cohen hypersurface, it and the strict and ordinary local rings are normal domains and both local completion maps are faithfully flat.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.IsSmoothAt\", \"isLocalRing_of_isAdicComplete_maximal\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"IsIntegrallyClosed.of_isLocalization_maximal\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"4627b4f52838517a\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CompletedLocalModel|Cohen.*[Mm]onoid|[Mm]onoid.*Cohen|LogRegular",
+   "results": "{\"t\": \"2026-10-22T05:59:56Z\", \"tool\": \"grep\", \"query\": \"CompletedLocalModel|Cohen.*[Mm]onoid|[Mm]onoid.*Cohen|LogRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-22T05:59:57Z\", \"tool\": \"loogle\", \"query\": \"IsIntegrallyClosed, FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'FaithfullyFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary scheme normalization, local flatness and adic-completion flatness do not prove normality from a saturated complete monoid model, nor the comparison and two-stage strict-local descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.*[Mm]onoid|[Mm]onoid.*Cohen|LogRegular|StrictHensel.*[Nn]ormal",
+   "results": "{\"t\": \"2026-10-23T09:29:42Z\", \"tool\": \"grep\", \"query\": \"Cohen.*[Mm]onoid|[Mm]onoid.*Cohen|LogRegular|StrictHensel.*[Nn]ormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: HenselianLocalRing, DVR TFAEs, completion flatness and flat-local faithful flatness do not state the saturated-model normality and strict-local comparison criterion. Local source confirms the two flatness hits only concern their individual algebra inputs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality of completed saturated monoid charts and faithfully flat descent to geometric strict local rings.",
+   "results": "{\"t\": \"2026-10-23T09:29:42Z\", \"tool\": \"leansearch\", \"query\": \"Normality of completed saturated monoid charts and faithfully flat descent to geometric strict local rings.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"AdicCompletion.flat_of_isNoetherian\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"Algebra.FormallyEtale.of_isLocalization\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"b08827b91af9973d\"}; Read returned hits: HenselianLocalRing, DVR TFAEs, completion flatness and flat-local faithful flatness do not state the saturated-model normality and strict-local comparison criterion. Local source confirms the two flatness hits only concern their individual algebra inputs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T09:29:42Z\", \"tool\": \"loogle\", \"query\": \"IsIntegrallyClosed, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: HenselianLocalRing, DVR TFAEs, completion flatness and flat-local faithful flatness do not state the saturated-model normality and strict-local comparison criterion. Local source confirms the two flatness hits only concern their individual algebra inputs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian geometric strict local ring whose completion is a saturated formal monoid ring over a field or a Cohen hypersurface is a normal domain, and the strict henselization and completion maps are faithfully flat.",
+   "results": "{\"t\": \"2026-10-23T09:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian geometric strict local ring whose completion is a saturated formal monoid ring over a field or a Cohen hypersurface is a normal domain, and the strict henselization and completion maps are faithfully flat.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Field.henselian\", \"HenselianLocalRing.TFAE\", \"IsAdicComplete.henselianRing\", \"AdicCompletion.flat_of_isNoetherian\", \"HenselianLocalRing.toIsLocalRing\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\"], \"digest\": \"f614d5078f0322d7\"}; Read returned hits: HenselianLocalRing, DVR TFAEs, completion flatness and flat-local faithful flatness do not state the saturated-model normality and strict-local comparison criterion. Local source confirms the two flatness hits only concern their individual algebra inputs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictHensel|strictHensel|MonoidAlgebra.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*MonoidAlgebra",
+   "results": "{\"t\": \"2026-10-23T09:32:21Z\", \"tool\": \"grep\", \"query\": \"StrictHensel|strictHensel|MonoidAlgebra.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*MonoidAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: HenselianLocalRing, DVR TFAEs, completion flatness and flat-local faithful flatness do not state the saturated-model normality and strict-local comparison criterion. Local source confirms the two flatness hits only concern their individual algebra inputs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the completion of the strict henselization of a Noetherian local ring is a normal domain then the original local ring is a normal domain; normality of saturated formal toric rings and Cohen monoid hypersurfaces.",
+   "results": "{\"t\": \"2026-10-23T09:32:24Z\", \"tool\": \"leanfinder\", \"query\": \"If the completion of the strict henselization of a Noetherian local ring is a normal domain then the original local ring is a normal domain; normality of saturated formal toric rings and Cohen monoid hypersurfaces.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"IsIntegrallyClosed.of_isLocalization_maximal\", \"HenselianLocalRing.toIsLocalRing\", \"IsIntegrallyClosed.of_localization_maximal\", \"Field.henselian\"], \"digest\": \"3a52d300f56d526c\"}; Read returned hits: HenselianLocalRing, DVR TFAEs, completion flatness and flat-local faithful flatness do not state the saturated-model normality and strict-local comparison criterion. Local source confirms the two flatness hits only concern their individual algebra inputs.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-divisorial-structure",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), retained nearby-duality alteration ancestry, via the log-blowup normalization argument: Agent-extracted completed-local normality criterion underlying Expose VI 1.6, printed p. 70; parent split, original steps 1--2. Strict-local descent inputs: Stacks Tags 04HX (lemma-describe-etale-local-ring), 07QM (lemma-dumb-properties-henselization), 06LJ (lemma-henselization-noetherian), 05CK (lemma-faithfully-flat-universally-injective). Saturated complete-model normality remains the separately cited Kato (1994), 4.1 input, WANTED locally.",
+   "via": [
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normality-from-completed-monoid-chart",
+  "worker": "stage1",
+  "summary": "Reuse the existing exact saturated-model normality theorem. Identify the geometric colimit with the algebraic strict henselization using the existing triple comparisons; establish Noetherianity and both faithful-flatness conclusions, then write out the domain-case principal-ideal descent twice. Statement unchanged; no new nodes. Maintainer reader FIX (2026-10-23): Step 2 now identifies the geometric colimit with the strict henselization of A_0=R_p through lem-exc-affine-strict-local-ring-comparison and the A_0-triple colimit, instead of the unsupported passage from R-triples at p to the strict henselization of R_p.",
+  "blueprint": "Retained nearby-duality alteration ancestry of lem-trf-local-term-locality, via lem-trf-log-regular-divisorial-structure original steps 1--2. This is a local-algebra tool below that ancestry, not a replacement of the current contracting-correspondence unit route. Latest blueprint searched for completed monoid, no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic strict-henselization/affine-chart or faithfully-flat algebra tool; supplies only its stated comparison, flatness, Noetherianity or ideal contraction. No node of this unit gives this input, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic strict-henselization/affine-chart or faithfully-flat algebra tool; supplies only its stated comparison, flatness, Noetherianity or ideal contraction. No node of this unit gives this input, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic strict-henselization/affine-chart or faithfully-flat algebra tool; supplies only its stated comparison, flatness, Noetherianity or ideal contraction. No node of this unit gives this input, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "why": "Generic strict-henselization algebra tool: identifies the triple colimit of the local ring A_0 as an algebraic strict henselization. No node of this unit gives this input, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic comparison of the chosen geometric strict local ring with the algebraic strict henselization of the affine local ring R_p, compatible with the chart map. No node of this unit gives this input, and no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-74adce8e1",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-74adce8e1 (reviewer sub-agent of L); spot-checked: I read ILO VI 1.6 (printed p.70) and Stacks 033G; the statement agrees with them and was tested on small cases (P=0 with n=0, P=N with θ=p−z², θ=p(1−z)). The delivery is one commit with no new nodes, and the statement and stmt_deps are unchanged. Steps 1, 4 and 5 are correct: Step 1 gets A₀≅R_p Noetherian from the stalk-localization node (c) plus localization-Noetherian. Step 4's hypotheses match lem-trf-log-regular-saturation-normality word for word, with no log structure assumed. Step 5 is the domain case of 033G written out via ideal contraction and the fraction-field lift. One fault (C3/C4): Step 2 said the colimit of étale residue triples of R at p 'is the algebraic strict henselization of A₀=R_p'. That is Stacks 04GW, which appears only as a parenthetical remark in lem-weil-pbc-strict-henselization-triples. Its proof steps and its Lean statement do not prove it. Step 3 needed it, because lem-sc-strict-henselization-faithfully-flat requires the triple colimit of the local ring A₀ at its maximal ideal (hp). FIX: Step 2 now applies the triples lemma to A₀ at its maximal ideal with K, then lem-sc-etale-triples-colimit-is-strict-henselization (strict henselization of R_p). Next, lem-exc-affine-strict-local-ring-comparison gives θ: A≅H compatible with the chart leg, with A strictly henselian local. lem-weil-pbc-ring-localization-universal-property then gives θ∘(A₀→A)=ρ. Step 3 transports faithful flatness and Noetherianity along θ. In proof_deps and tool_uses, lem-weil-pbc-etale-local-ring-triples is replaced by the two generic off-unit tools. A recursive dependency check shows no cycle. Fixed file: fixes/dag/nodes/sec-trace-formula/lem-trf-normality-from-completed-monoid-chart.json.; 1 file(s) fixed by the reviewer"
+ }
+}

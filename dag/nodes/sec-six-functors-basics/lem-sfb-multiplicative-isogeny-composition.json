@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-multiplicative-isogeny-composition",
+ "kind": "statement",
+ "title": "Composition of multiplicative isogenies has finite central multiplicative kernel",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H_0,H_1,H_2$ be smooth connected affine $F$-group schemes of finite type [def-sc-group-scheme]. If $f:H_0\\to H_1$ and $g:H_1\\to H_2$ are multiplicative isogenies, then $g\\circ f:H_0\\to H_2$ is a multiplicative isogeny with central kernel. A multiplicative isogeny means a homomorphism whose pullback on coordinate algebras is faithfully flat and whose scheme-theoretic kernel is finite and of multiplicative type. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means having finite-dimensional coordinate algebra. A finite group scheme is of multiplicative type if, after extension to an algebraic closure, it is diagonalizable: it is isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, with comultiplication $e_m\\mapsto e_m\\otimes e_m$ on the group-algebra basis. Central means commuting with every group element after every scalar extension. ",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.2 and its displayed exact sequence of kernels, printed p.387; Corollary 12.41, printed p.244; Corollary 12.22, printed p.239. The conjugation action is trivial by 12.41, not by finiteness of geometric points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-sfb-finite-diagonalizable-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=\\ker f$, $Q=\\ker g$, and $K=\\ker(g\\circ f)$. The kernel-subgroup statement makes these closed group schemes. The kernel fibre-product definition gives $K=H_0\\times_{H_1}Q$ and a homomorphism $q:K\\to Q$ induced by $f$, with kernel $N$. Indeed, on every $F$-algebra $A$, $x\\in K(A)$ precisely when $f(x)\\in Q(A)$, and $q(x)=1$ precisely when $f(x)=1$. These identifications are natural in $A$, and their inverse maps are the evident inclusion and projection. Conjugation by $H_0$ preserves $K$ and $N$, since homomorphisms send $hxh^{-1}$ to the conjugate of the image of $x$. Being closed subschemes of affine finite-type groups, these kernels are affine and of finite type.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2, displayed kernel sequence; Exercise 5-8, p.123: direct kernel computation in the faithfully flat case."
+   }
+  },
+  {
+   "text": "Write $A=F[H_1]$, $C=F[H_0]$, $B=F[Q]$ and $D=F[K]$. The affine fibre-product formula gives $D=B\\otimes_A C$. Faithfully flat base change applied to $A\\to C$ shows that $B\\to D$ is faithfully flat. Thus $q$ is exactly a faithfully flat quotient with scheme-theoretic kernel $N$; the sequence $1\\to N\\to K\\xrightarrow{q}Q\\to1$ has the quotient hypothesis required by both extension lemmas below.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2, displayed exact kernel sequence; affine faithfully-flat base change. Stacks algebra.tex Tag 00HQ and schemes.tex affine fibre-product construction."
+   }
+  },
+  {
+   "text": "First establish the extra centrality required by the corrected extension-action lemma. Restrict conjugation to $H_0\\times_F N\\to N$, possible by Step 1. This is an action by group automorphisms, $H_0$ is smooth and connected, and $N$ is of multiplicative type by the hypothesis on $f$. Apply connected-action rigidity for groups of multiplicative type to obtain $hnh^{-1}=n$ for every commutative $F$-algebra $A$, $h\\in H_0(A)$ and $n\\in N(A)$. Thus $N$ is central in $H_0$, and restricting $h$ to $K(A)$ proves that $N$ is central in $K$. This uses no smoothness of $N$; in particular it applies to $\\mu_p$ in characteristic $p$.",
+   "uses": [
+    "lem-sfb-connected-action-multiplicative-type-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 12.37 and 12.38, printed p.244; this supplies the central-subgroup hypothesis of Corollary 12.41 corrected in the Chapter 12 errata."
+   }
+  },
+  {
+   "text": "The conjugation action $H_0\\times_F K\\to K$ is by group automorphisms and preserves $N$ by Step 1. By Step 3, $N$ is central in $K$. Apply corrected multiplicative-extension action rigidity with acting group $G=H_0$, middle group $E=K$, quotient $Q$, and quotient map $q$. The end groups $N,Q$ are of multiplicative type by the hypotheses on $f,g$, and $H_0$ is smooth and connected by hypothesis. Hence $hxh^{-1}=x$ for every $F$-algebra and all its $H_0$- and $K$-points. This is the asserted scheme-theoretic centrality of $K$ in $H_0$.",
+   "uses": [
+    "lem-sfb-multiplicative-extension-action-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2, application of Corollary 12.41, p.244, with its Chapter 12 erratum: N central in the middle group, verified in Step 3."
+   }
+  },
+  {
+   "text": "Taking $h$ also in $K$ in the preceding identity proves that $K$ is commutative. Apply the commutative-extension lemma to $q:K\\to Q$ from Step 2 and $N=\\ker q$: its two end groups are of multiplicative type, and its middle group is now commutative. Therefore $K$ is of multiplicative type. This application does not assume that the finite kernel is smooth or connected.",
+   "uses": [
+    "lem-sfb-commutative-multiplicative-type-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2, application of Corollary 12.22, p.239."
+   }
+  },
+  {
+   "text": "To check finiteness scheme-theoretically, retain $B=F[Q]$ and $D=F[K]$ and put $P=F[N]$. There is an isomorphism $N\\times_F K\\simeq K\\times_Q K$ given on all algebra points by $(n,x)\\mapsto(nx,x)$; its inverse is $(y,x)\\mapsto(yx^{-1},x)$, since $q(y)=q(x)$. Multiplication and inverse are morphisms, so these are inverse scheme maps. The affine fibre-product formula identifies this with a $D$-linear isomorphism $D\\otimes_B D\\simeq D\\otimes_F P$, using the second projection on each side and swapping tensor factors where needed. If $p_1,\\ldots,p_r$ is an $F$-basis of the finite-dimensional algebra $P$, then $1\\otimes p_i$ generate $D\\otimes_F P$ over $D$. Apply faithfully-flat finite-module descent to $B\\to D$ of Step 2 and the $B$-module $D$. It follows that $D$ is finite over $B$. As $B$ is finite-dimensional over $F$, products of finite $B$-module generators of $D$ with an $F$-basis of $B$ span $D$ over $F$. Thus $K$ is finite, including when $N$ or $Q$ is nonreduced.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-descent-finite-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2, finiteness of the composite kernel, expanded using the torsor identity of Lemma 5.24, p.104, and Stacks algebra.tex Tag 03C4(1), lemma-descend-properties-modules."
+   }
+  },
+  {
+   "text": "Finally, extension of scalars along $F[H_2]\\to F[H_0]$ is the composite of extension along $g^*$ and $f^*$: the tensor associativity map sends $c\\otimes(a\\otimes m)$ to $cf^*(a)\\otimes m$, with inverse $c\\otimes m\\mapsto c\\otimes(1\\otimes m)$. The two extension functors are exact and detect zero modules, so their composite is exact and detects zero modules. Therefore $(g\\circ f)^*=f^*\\circ g^*$ is faithfully flat. Together with the finiteness and multiplicative type of $K$ and its centrality, this proves every clause of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2: composition is faithfully flat by the tensor definition of faithful flatness; conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kernel-subgroup",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-sfb-connected-action-multiplicative-type-rigidity",
+  "lem-sfb-multiplicative-extension-action-rigidity",
+  "lem-sfb-commutative-multiplicative-type-extension",
+  "lem-weil-pbc-faithfully-flat-descent-finite-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.2, printed p.387, using Corollaries 12.37--12.38 to supply the centrality hypothesis in corrected Corollary 12.41, then Corollary 12.22; kernel, tensor and finiteness calculations expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A composite of multiplicative isogenies of smooth connected affine algebraic groups is a multiplicative isogeny with finite central kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are local isomorphisms of schemes, then their composition $ g \\\\circ f : X \\\\\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is multiplicative, meaning that the composition of two affine morphisms is again an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [CategoryTheory.IsIso f],\\n  AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.CategoryStruct.comp f g) = AlgebraicGeometry.Scheme.Hom.ker g\", \"doc\": \"For morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ is an isomorphism, then the kernel of the composition $ g \\\\circ f $ is equal to the kernel of $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.cancel_right_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] {X Y Z : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) (g : Y ⟶ Z) [CategoryTheory.IsIso g] [inst : AlgebraicGeometry.IsAffine Z]\\n  [inst_1 : AlgebraicGeometry.IsAffine Y], P (CategoryTheory.CategoryStruct.comp f g) ↔ P f\", \"doc\": \"If a morphism property $P$ for affine targets respects isomorphisms, then for any morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ where $g$ is an isomorphism and both $Y$ and $Z$ are affine schemes, the prope\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.cancel_left_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] {X Y Z : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) (g : Y ⟶ Z) [CategoryTheory.IsIso f] [inst : AlgebraicGeometry.IsAffine Z],\\n  P (CategoryTheory.CategoryStruct.comp f g) ↔ P g\", \"doc\": \"Let $\\\\mathcal{P}$ be a morphism property defined on schemes with affine targets that respects isomorphisms. For schemes $X,Y,Z$, a morphism $f:X\\\\to Y$ that is an isomorphism, and a morphism $g:Y\\\\to Z$\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern composition of scheme morphism properties or finite abstract groups; none proves centrality or multiplicative type of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two surjective homomorphisms of connected algebraic groups have finite kernels of multiplicative type then their composite has finite kernel of multiplicative type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Group.fintypeOfKerLeRange\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Finite\", \"type\": \"{F : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : Group F] →\\n        [inst_1 : Group G] →\\n          [inst_2 : Group H] → [Fintype F] → [Fintype H] → (f : F →* G) → (g : G →* H) → g.ker ≤ f.range → Fintype G\", \"doc\": \"If the kernel of a group homomorphism $ g $ is contained within the image of another group homomorphism $ f $, then the group $ G $ is finite.\"}\n  {\"name\": \"Group.fintypeOfKerEqRange\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Finite\", \"type\": \"{F : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : Group F] →\\n        [inst_1 : Group G] →\\n          [inst_2 : Group H] → [Fintype F] → [Fintype H] → (f : F →* G) → (g : G →* H) → g.ker = f.range → Fintype G\", \"doc\": \"If the kernel of a group homomorphism $ g $ is equal to the image of another group homomorphism $ f $, then the group $ G $ is finite.\"}\n  {\"name\": \"Ideal.fg_ker_comp\", \"module\": \"Mathlib/RingTheory/Finiteness/Ideal\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} {A : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  (f : R →+* S) (g : S →+* A),\\n  (RingHom.ker f).FG → (RingHom.ker g).FG → Function.Surjective ⇑f → (RingHom.ker (g.comp f)).FG\", \"doc\": \"For commutative rings $ R $, $ S $, and $ A $, let $ f : R \\\\to S $ and $ g : S \\\\to A $ be ring homomorphisms. If the kernels of $ f $ and $ g $ are finitely generated and $ f $ is surjective, then the\"}\n  {\"name\": \"AddGroup.fintypeOfKerLeRange\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Finite\", \"type\": \"{F : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : AddGroup F] →\\n        [inst_1 : AddGroup G] →\\n          [inst_2 : AddGroup H] → [Fintype F] → [Fintype H] → (f : F →+ G) → (g : G →+ H) → g.ker ≤ f.range → Fintype G\", \"doc\": \"Given additive groups $F$, $G$, and $H$ with $F$ and $H$ finite, and additive group homomorphisms $f : F →+ G$ and $g : G →+ H$, if the kernel of $g$ is contained within the image of $f$, then $G$ is \"}\n  {\"name\": \"Submodule.fg_ker_comp\", \"module\": \"Mathlib/RingTheory/Finiteness/Finsupp\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : Ring R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  (f : M →ₗ[R] N) (g : N →ₗ[R] P), f.ker.FG → g.ker.FG → Function.Surjective\", \"doc\": \"Let $ R $ be a ring, and let $ f: M \\\\to N $ and $ g: N \\\\to P $ be $ R $-linear maps. If $ f $ is surjective, the kernel of $ f $ is finitely generated, and the kernel of $ g $ is finitely generated, t\"}\n  {\"name\": \"MonoidHom.finite_iff_finite_ker_range\", \"module\": \"Mathlib/GroupTheory/Index\", \"type\": \"∀ {G : Type u_1} {G' : Type u_2} [inst : Group G] [inst_1 : Group G'] (f : G →* G'),\\n  Finite G ↔ Finite ↥f.ker ∧ Finite ↥f.range\", \"doc\": \"For a group homomorphism $ f : G \\\\to G' $, the group $ G $ is finite if and only if both the kernel of $ f $ and the image of $ f $ are finite.\"}\n  {\"name\": \"AddGroup.fintypeOfKerEqRange\", \"module\": \"Mathlib/GroupTheory/QuotientGroup/Finite\", \"type\": \"{F : Type u_1} →\\n  {G : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : AddGroup F] →\\n        [inst_1 : AddGroup G] →\\n          [inst_2 : AddGroup H] → [Fintype F] → [Fintype H] → (f : F →+ G) → (g : G →+ H) → g.ker = f.range → Fintype G\", \"doc\": \"Given additive groups $F$, $G$, and $H$ with $F$ and $H$ finite, and additive group homomorphisms $f : F → G$ and $g : G → H$, if the kernel of $g$ equals the image of $f$, then $G$ is a finite group.\"}\n  {\"name\": \"MonoidHom.surjective_of_card_ker_le_div\", \"module\": \"Mathlib/GroupTheory/Index\", \"type\": \"∀ {G : Type u_1} {M : Type u_2} [inst : Group G] [inst_1 : Group M] [Finite G] [Finite M] (f : G →* M),\\n  Nat.card ↥f.ker ≤ Nat.card G / Nat.card M → Function.Surjective ⇑f\", \"doc\": \"For finite groups $G$ and $M$, if a group homomorphism $f : G \\\\to M$ satisfies $\\\\lvert \\\\ker f \\\\rvert \\\\leq \\\\lvert G \\\\rvert / \\\\lvert M \\\\rvert$, then $f$ is surjective.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern composition of scheme morphism properties or finite abstract groups; none proves centrality or multiplicative type of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\", \"comp\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration for multiplicative isogenies or the stated algebraic-group structure theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicativeIsogeny|multiplicative_isogeny|centralIsogeny|central_isogeny",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration for multiplicative isogenies or the stated algebraic-group structure theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of two algebraic group isogenies whose kernels are finite diagonalizable group schemes is a multiplicative isogeny",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.IsMultiplicative.instIsomorphisms\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Composition\", \"type\": \": (isomorphisms C).IsMultiplicative\", \"doc\": \"The property of being an isomorphism in a category is multiplicative, meaning that the composition of two isomorphisms is again an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \": IsMultiplicative @IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are local isomorphisms of schemes, then their composition $ g \\\\circ f : X \\\\\"}\n  {\"name\": \"IsMulFreimanIso.comp\", \"module\": \"Mathlib.Combinatorics.Additive.FreimanHom\", \"type\": \"(hg : IsMulFreimanIso n B C g) (hf : IsMulFreimanIso n A B f) : IsMulFreimanIso n A C (g ∘ f)\", \"doc\": \"If $ f : A \\\\to B $ and $ g : B \\\\to C $ are multiplicative Freiman homomorphisms of dimension $ n $ for sets $ A \\\\subseteq \\\\alpha $, $ B \\\\subseteq \\\\beta $, and $ C \\\\subseteq \\\\gamma $, then their compos\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsIso f] : (f ≫ g).ker = g.ker\", \"doc\": \"For morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ is an isomorphism, then the kernel of the composition $ g \\\\circ f $ is equal to the kernel of $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \": MorphismProperty.IsMultiplicative @IsPreimmersion\", \"doc\": \"The property of being a preimmersion between schemes is multiplicative; that is, the composition of two preimmersion morphisms is again a preimmersion.\"}\n  {\"name\": \"CategoryTheory.Iso.commGroupIsoToMulEquiv_apply\", \"module\": \"Mathlib.Algebra.Category.Grp.Basic\", \"type\": \"∀ {X Y : CommGrpCat} (i : X ≅ Y) (a : ↑X), i.commGroupIsoToMulEquiv a = (CommGrpCat.Hom.hom i.hom) a\", \"doc\": \"An isomorphism $ i : X \\\\cong Y $ in the category of commutative groups gives rise to a multiplicative equivalence $ X \\\\simeq^* Y $, where the forward and inverse maps are the homomorphisms of the isom\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsMultiplicative @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is multiplicative: the composition of two closed immersions $ f: X \\to Y $ and $ g: Y \\to Z $ is also a closed immersion. This follows because the com\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsMultiplicative @IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern composition of scheme morphism properties or finite abstract groups; none proves centrality or multiplicative type of a scheme-theoretic kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two faithfully flat isogenies of connected algebraic groups with finite multiplicative type kernels has finite central multiplicative type kernel",
+   "results": "Available; 8 hits: RingHom.FaithfullyFlat.stableUnderComposition, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Scheme.Hom.ker_comp, Module.FaithfullyFlat.trans, AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso, isZGroup_of_coprime, RingHom.Flat.stableUnderComposition. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: abstract groups and scheme morphism properties do not give multiplicative-type kernels; the faithful-flat composition hits supply only an elementary ingredient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: abstract groups and scheme morphism properties do not give multiplicative-type kernels; the faithful-flat composition hits supply only an elementary ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|diagonalizable|isogeny",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: abstract groups and scheme morphism properties do not give multiplicative-type kernels; the faithful-flat composition hits supply only an elementary ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of diagonalizable affine algebraic group schemes is diagonalizable if the middle group is commutative",
+   "results": "Available; 8 hits: AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: abstract groups and scheme morphism properties do not give multiplicative-type kernels; the faithful-flat composition hits supply only an elementary ingredient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of groups of multiplicative type is multiplicative if commutative",
+   "results": "Available; 8 hits: Multiplicative.commGroup, CommGroup.ofIsMulCommutative, CommGroup.ext, Multiplicative, Multiplicative.group, AddCommGrpCat.toCommGrp_obj_coe, IsAbelianGalois.toIsMulCommutative, Multiplicative.seminormedAddCommGroup. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: abstract groups and scheme morphism properties do not give multiplicative-type kernels; the faithful-flat composition hits supply only an elementary ingredient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-simply-connected-cover",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel.",
+   "via": [
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-multiplicative-isogeny-composition",
+  "worker": "stage1",
+  "summary": "Repair E2/E7: item statement unchanged; corrected the new extension-action statement by adding centrality of its kernel, as required by Milne Chapter 12 errata. Added a statement-only connected-action rigidity node covering all multiplicative-type groups, including nonreduced ones. New Step 3 applies it to conjugation on N=ker f to prove N central in H0 and hence in K before corrected Step 4. Retained the valid quotient, commutative-extension, finite-module descent and composition arguments. Three new statement-only nodes, no new Mathlib leaves.",
+  "blueprint": "Realizes the inherited Milne central-cover prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), through the reductive cover supporting chain. The ancestor command returns None; inherited from.node=null and via are retained. Whole-blueprint searches for multiplicative isogen, multiplicative type, diagonalizable, 12.22, 12.41 and connected actions found no equivalent imported nodes. Repair follows the same Milne route, supplying the centrality hypothesis missing from the printed 12.41 using 12.37--12.38; no unit-level route change.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic scheme-theoretic kernel closed-subgroup theorem; needed to form the kernel extension. No replacement occurs in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-c9739baa0",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-c9739baa0 (reviewer sub-agent of L); spot-checked: This re-delivery repairs both points of the earlier E2/E7 return (40b90d08).\n\nNew nodes:\n- lem-sfb-multiplicative-extension-action-rigidity now requires N central in E. This matches the Milne iAG erratum at the end of the PDF ('*p.244. In 12.41, N should be a central subgroup of H'). The report has a Source error section with the O(2) = G_m⋊C_2 counterexample, which I checked: conjugating (1,σ) by s gives (s²,σ). I proved the corrected statement myself: φ(g,x) = x⁻¹a(g,x) gives homomorphisms Q→N, which are constant by 12.36.\n- lem-sfb-connected-action-multiplicative-type-rigidity is Milne 12.37 (p.244), specialised to smooth connected G over an algebraically closed F with D = D(M). It covers μ_p in characteristic p, where Aut(μ_p) is constant. lem-sfb-connected-action-torus-rigidity covers only tori, so the new node is not a duplicate. An rg -L search for 'multiplicative type|diagonalizable' found no other duplicate.\n- lem-sfb-commutative-multiplicative-type-extension (Milne 12.22, p.239, sufficient direction) is true. I tested it on μ_p→μ_{p²}→μ_p.\n\nItem steps:\n- Step 1: kernels, from lem-sc-kernel-subgroup. Elementary.\n- Step 2: F[K] = F[Q]⊗F[H1]F[H0], so q is faithfully flat by base change.\n- Step 3 (new): N is central in H0 by rigidity, which is Milne 12.38, hence central in K.\n- Step 4: the corrected 12.41 node gives K central in H0. I checked every hypothesis.\n- Step 5: K is commutative, so 12.22 gives multiplicative type.\n- Step 6: the torsor N×K ≅ K×_Q K plus finite-module descent along B→D makes K finite. The tensor sides match the descent statement.\n- Step 7: a composite of faithfully flat maps is faithfully flat. Elementary.\n\nThe item statement is unchanged and agrees with Milne Def. 18.1 and Prop. 18.2 (p.387). proof_deps equals the union of the step uses. There is no cycle and no SGA citation. I accept the tool_use of lem-sc-kernel-subgroup. No re-split note applies to this item. I wrote no fixes; details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultiplicativeIsogenyComposition",
+  "declaration": "AlgebraicGeometry.multiplicativeIsogeny_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/MultiplicativeIsogenyComposition.lean",
+  "statement": "theorem multiplicativeIsogeny_comp {F : Type u} [Field F] [IsAlgClosed F] (H0 H1 H2 : Over (Spec (.of F))) [GrpObj H0] [GrpObj H1] [GrpObj H2] [IsAffine H0.left] [IsAffine H1.left] [IsAffine H2.left] [Smooth H0.hom] [Smooth H1.hom] [Smooth H2.hom] [ConnectedSpace H0.left] [ConnectedSpace H1.left] [ConnectedSpace H2.left] [LocallyOfFiniteType H0.hom] [LocallyOfFiniteType H1.hom] [LocallyOfFiniteType H2.hom] [QuasiCompact H0.hom] [QuasiCompact H1.hom] [QuasiCompact H2.hom] (f : H0 ⟶ H1) (g : H1 ⟶ H2) [IsMonHom f] [IsMonHom g] (hf : f.left.appTop.hom.FaithfullyFlat) (hg : g.left.appTop.hom.FaithfullyFlat) [IsFinite (GrpObj.ker f).hom] [IsFinite (GrpObj.ker g).hom] (hN : IsFiniteDiagonalizableGroupScheme (GrpObj.ker f)) (hQ : IsFiniteDiagonalizableGroupScheme (GrpObj.ker g)) : (f ≫ g).left.appTop.hom.FaithfullyFlat ∧ IsFinite (GrpObj.ker (f ≫ g)).hom ∧ IsFiniteDiagonalizableGroupScheme (GrpObj.ker (f ≫ g)) ∧ ∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker (f ≫ g)) (h : T ⟶ H0), (x ≫ GrpObj.kerι (f ≫ g)) * h = h * (x ≫ GrpObj.kerι (f ≫ g))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6b55239f",
+  "group": "NI",
+  "result": "pass",
+  "note": "Item statement matches node/Milne 18.2 clause by clause: alg. closed F; smooth connected affine finite-type GrpObj over Spec F; IsMonHom f,g; appTop FaithfullyFlat; IsFinite + IsFiniteDiagonalizableGroupScheme of GrpObj.ker (= fibre product over e, def-sc-group-scheme record); conclusions FF of composite, finite, diagonalizable, centrality over all F-schemes. New def node def-sfb-finite-diagonalizable-group-scheme = natural group iso to Hom(M,Γ(T)ˣ), M finite (Yoneda ⇔ G≅D(M)); correct direction, non-hollow, no duplicate in DAG/Sheaf/WeilConjectures/Mathlib, H12 fields OK. Item node changed only stmt_deps+lean; statements verbatim; imports = proof_dep modules; docstrings with 7 steps; sorry only; edge cases μ_p/trivial kernels/universe u OK. Advisory: IsFinite hyps redundant with hN/hQ, harmless."
+ }
+}

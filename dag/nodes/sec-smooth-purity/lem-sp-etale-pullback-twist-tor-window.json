@@ -1,0 +1,249 @@
+{
+ "id": "lem-sp-etale-pullback-twist-tor-window",
+ "kind": "statement",
+ "title": "Flat representatives for etale pullback, finite twists and shifts",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$, separated finite-type $k$-schemes $T,T'$, and a $k$-morphism $u:T'\\to T$ [sk-def-sfb-dc-setting]. Let $N=\\ell^n\\ge1$ and let $R$ be a finite commutative ring with $NR=0$. Use ordinary small-etale constant-ring module derived categories [def-weil-pbc-derived-categories], exact module inverse image $u^*$ [def-weil-pbc-inverse-image], constructibility [def-weil-pbc-etale-constructible-sheaf], and Tor amplitude [def-kun-tor-amplitude]. Define $R_{T'}(1)=\\mu_{N,T'}\\otimes_{(\\mathbf Z/N)_{T'}}R_{T'}$ and $R_{T'}(c)=R_{T'}(1)^{\\otimes c}$ for $c\\ge0$, with $R_{T'}(0)=R_{T'}$, as in [lem-asd-finite-etale-twist-line]. Let $a\\le b$, let $K$ be bounded constructible of Tor amplitude in $[a,b]$ on $T$, and let $P$ be any representing cochain complex of flat constructible $R_T$-modules zero outside $[a,b]$ [def-pc-cochain-complex-modules, def-pc-flat-sheaf-modules]. For every $c\\ge0$ and $s\\in\\mathbf Z$, the complex $(u^*P\\otimes_{R_{T'}}R_{T'}(c))[s]$ is a K-flat representative [def-pc-kflat-complex] of $(u^*K\\otimes^L_{R_{T'}}R_{T'}(c))[s]$, with flat constructible terms and zero terms outside $[a-s,b-s]$. Consequently this derived object is bounded constructible of Tor amplitude in $[a-s,b-s]$; in particular $u^*$ itself preserves $[a,b]$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03TT, lemma-when-ctf; lemma-pullback-ctf; Tag 095I, lemma-tensor-product-constructible; Tag 03PK, section-kummer; the termwise pullback, twist and signed-shift calculations in retained Steps 5--6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-kun-tor-amplitude",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-inverse-image",
+  "lem-asd-finite-etale-twist-line"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: every ideal is either $(0)$ or $(1)$. Thus $\\operatorname{Spec}k$ is Noetherian, using its single affine chart and its one-point underlying space. Apply [lem-weil-pbc-finite-type-over-noetherian] to the finite-type structure morphisms $T\\to\\operatorname{Spec}k$ and $T\\prime\\to\\operatorname{Spec}k$. Both $T$ and $T\\prime$ are Noetherian, so the scheme hypotheses of the termwise model theorem and the flat-model existence theorem used below hold.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OV, definition-noetherian"
+   }
+  },
+  {
+   "text": "Since $\\ell\\ne p$ and both are prime, the integer $N=\\ell^n$ has nonzero image in $k$, also when $n=0$. Its inverse in $k$ maps to an inverse in every local ring of $T\\prime$. Apply [lem-asd-finite-etale-twist-line] with scheme $T\\prime$, coefficient ring $A=R$ and exponent $r=c$. The assumptions $N\\ge1$ and $NR=0$ are exactly those in the item. For $E=R_{T\\prime}(c)$ this gives an etale covering trivializing $E$ as the constant $R$-module sheaf of rank one, including $c=0$. This verifies the line hypothesis of the existing termwise model theorem; no assumption that $R$ is flat over $\\mathbf Z/N$ is used.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer; groupoids.tex Tag 040M, example-roots-of-unity; finite twist line specialization"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-etale-pullback-line-flat-model] to the prescribed complex P, its representing isomorphism, f, the finite Tate line and the shift s. Convert the line cover from the localized small-etale site to the small-etale site of each covering scheme using overSheafEquivFunctorObjOverIso and constantSheafSheafCongrIso. The theorem gives flat constructible terms, support [a-s,b-s], K-flatness, invertibility of the canonical representative comparison, constructible cohomology and Tor amplitude of the localized model. Invert that comparison. The existing derived tensor commShiftIso (the localization of the coherent signed tensor shift structure [lem-weil-pbc-total-tensor-integer-shifts]) moves the shift of the second factor to the shift of the whole tensor [def-kun-derived-tensor]. The composition is the required representing isomorphism. The termwise composition of the two functors is definitionally the specified pullbackTwistComplex.",
+   "uses": [
+    "lem-sp-etale-pullback-line-flat-model",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0963, lemma-pullback-ctf, finite-complex argument specialized to the existing arbitrary-line model; more-algebra.tex Tag 0FNH, item-shift-tensor"
+   }
+  },
+  {
+   "text": "Transport the model Tor amplitude to the represented object using hasTorAmplitudeIn_iff_torAmplitudeIn and invariance under isomorphism. Testing against the monoidal unit gives cohomology concentrated in [a-s,b-s], hence boundedness. Transport constructibility of the model cohomology using the localization homologyFunctorFactors isomorphism and the representing isomorphism. The equivalence of finite-value and finite-stalk constructibility allows use of the existing isomorphism invariance theorem. This establishes precisely bounded constructibility and [def-kun-tor-amplitude].",
+   "uses": [
+    "lem-sp-etale-pullback-line-flat-model",
+    "def-kun-tor-amplitude",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, lemma-when-ctf, implication (2) to (1); sites-cohomology.tex definition-tor-amplitude"
+   }
+  },
+  {
+   "text": "For arbitrary bounded constructible K of Tor amplitude [a,b], apply [lem-sf-etale-flat-constructible] directly to obtain a flat constructible representative P supported in [a,b]; no change of coefficients is needed. Apply the same arbitrary-line model argument with c=0 and s=0. The zeroth finite Tate twist is the actual constant coefficient sheaf, which is the sheaf tensor unit. Compose the representing isomorphism with the zero-shift isomorphism, singleFunctorObjUnitIso, and the derived right unitor. Transport constructibility and Tor amplitude as in the preceding step. Since a-0=a and b-0=b, this proves the final clause with unchanged endpoints.",
+   "uses": [
+    "lem-sf-etale-flat-constructible",
+    "lem-sp-etale-pullback-line-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, lemma-when-ctf, existence clause; Tag 0963, lemma-pullback-ctf, finite-complex argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-etale-flat-constructible",
+  "lem-sp-etale-pullback-line-flat-model",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03TT and 0963 and Section 03PK. Q8 stage-3 proof specializes the stated arbitrary-line model, transports through canonical derived comparison and shift isomorphisms, and uses direct flat-constructible model existence for the final untwisted pullback clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a constructible finite Tor etale complex tensor a finite Tate line then shift preserves Tor amplitude with shifted endpoints",
+   "results": "{\"t\": \"2026-10-22T05:56:08Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of a constructible finite Tor etale complex tensor a finite Tate line then shift preserves Tor amplitude with shifted endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CochainComplex.isKProjective_shift_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"97ec78488a23d32c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract shifts and t-structures or ordinary etale ring maps, not finite-ring constructible pullback and Tate-line models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite ring etale constructible complex admits bounded flat representatives stable under scheme inverse image and roots of unity twists",
+   "results": "{\"t\": \"2026-10-22T05:56:08Z\", \"tool\": \"leanfinder\", \"query\": \"A finite ring etale constructible complex admits bounded flat representatives stable under scheme inverse image and roots of unity twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.finitePresentation\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"6fe7826efb94d08d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract shifts and t-structures or ordinary etale ring maps, not finite-ring constructible pullback and Tate-line models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\", \"shift\"",
+   "results": "{\"t\": \"2026-10-22T05:55:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"torAmplitude\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract shifts and t-structures or ordinary etale ring maps, not finite-ring constructible pullback and Tate-line models"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ate[Tt]wist|[Tt]orAmplitude|finiteTor",
+   "results": "{\"t\": \"2026-10-22T05:55:53Z\", \"tool\": \"grep\", \"query\": \"[Tt]ate[Tt]wist|[Tt]orAmplitude|finiteTor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results concern abstract shifts and t-structures or ordinary etale ring maps, not finite-ring constructible pullback and Tate-line models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme inverse image and Tate twist preserve bounded constructible etale complexes and Tor intervals",
+   "results": "{\"t\": \"2026-10-22T05:55:53Z\", \"tool\": \"leansearch\", \"query\": \"Scheme inverse image and Tate twist preserve bounded constructible etale complexes and Tor intervals\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ate[Tt]wist|[Tt]orAmplitude|finiteTor",
+   "results": "{\"t\": \"2026-10-22T06:50:28Z\", \"tool\": \"grep\", \"query\": \"[Tt]ate[Tt]wist|[Tt]orAmplitude|finiteTor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module flatness/exactness results do not state small-etale constructible pullback, the finite Tate-line model, K-flatness, or its shifted Tor window"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded flat constructible etale complex remains a bounded flat K flat complex after pullback tensoring by a Tate line and shifting",
+   "results": "{\"t\": \"2026-10-22T06:50:29Z\", \"tool\": \"leansearch\", \"query\": \"A bounded flat constructible etale complex remains a bounded flat K flat complex after pullback tensoring by a Tate line and shifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.instTensorProduct\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.FaithfullyFlat.instTensorProduct\"], \"digest\": \"8e58cb7acce95563\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module flatness/exactness results do not state small-etale constructible pullback, the finite Tate-line model, K-flatness, or its shifted Tor window"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlat\", \"shift\"",
+   "results": "{\"t\": \"2026-10-22T06:50:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKFlat\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module flatness/exactness results do not state small-etale constructible pullback, the finite Tate-line model, K-flatness, or its shifted Tor window"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of finite ring module sheaves and tensoring by a locally constant rank one sheaf preserve bounded flat constructible complexes",
+   "results": "{\"t\": \"2026-10-22T06:50:39Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image of finite ring module sheaves and tensoring by a locally constant rank one sheaf preserve bounded flat constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\"], \"digest\": \"50666d284e488152\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module flatness/exactness results do not state small-etale constructible pullback, the finite Tate-line model, K-flatness, or its shifted Tor window"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a bounded flat constructible etale complex tensor a finite Tate twist and shift is a K flat representative with Tor amplitude shifted by the negative shift",
+   "results": "{\"t\": \"2026-10-22T06:50:39Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of a bounded flat constructible etale complex tensor a finite Tate twist and shift is a K flat representative with Tor amplitude shifted by the negative shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\"], \"digest\": \"d8484f97ddb04cd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module flatness/exactness results do not state small-etale constructible pullback, the finite Tate-line model, K-flatness, or its shifted Tor window"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-etale-ctf-chart-domain",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: the canonical isomorphism $(e^*p_d^*K(d)[2d])_B ≃ e^*p_d^*(K_B)(d)[2d]$; Flat representatives for etale pullback, finite twists and shifts (retained chart-domain Steps 5,6)",
+   "via": [
+    "lem-sp-etale-ctf-chart-domain"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-pullback-twist-tor-window",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing same-unit arbitrary locally trivial line model rather than create duplicate pullback/twist lemmas. Verify Noetherian scheme hypotheses and invertibility of the annihilator; specialize to the actual finite Tate line and signed shift. Use the existing same-unit scalar flat-model existence clause for the final assertion for every bounded constructible finite-Tor object. No new nodes.",
+  "blueprint": "det-sp-reduction-exceptional, Charts: the canonical isomorphism (e^*p_d^*K(d)[2d])_B ≃ e^*p_d^*(K_B)(d)[2d]; retained chart-domain Steps 5--6, flat representatives and their unchanged or shifted Tor windows.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic ordinary small-etale finite Tate-line local triviality supplies the line input for the same-unit arbitrary-line model; the unit has no separate theorem giving the roots-of-unity trivialization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-finite-etale-twist-line"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-b50d0f22d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b50d0f22d (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps, statement unchanged, no new nodes. I also read every cited statement and Stacks 0963/03TT/0FNH/01T6/01OV/03PK by label. Nothing cites SGA. Context: the item is a statement-only node from the landed Q03 re-split of lem-sp-etale-ctf-chart-domain (old Steps 5-6). The re-split note covers the parent, not this item, so this is a normal one-level split, still unsplit in live and side-live. The old pullback, K-flat, constructible-pullback, Tate-line and shift argument is all in the same-unit node lem-sp-etale-pullback-line-flat-model (arbitrary étale-locally trivial line E, any shift r, plus constructible cohomology and the Tor window). That node has no path back to the item, so there is no cycle, and reusing it creates no duplicate. The item is a strict specialization with its own checks, so it is not a relabel (D1). Step 1: Spec k is Noetherian, so T and T' are Noetherian by the mathlib leaf. Step 2: N=ℓ^n is a unit on k-schemes, and the hypotheses and definition of A_T(r) in lem-asd-finite-etale-twist-line match exactly, including c=0; this tool use is declared and accepted. Step 3: I checked the substitutions X=T', Y=T, f=u, C=P, E=R(c), r=s hypothesis by hypothesis. f_R^* is the same functor as def-weil-pbc-inverse-image. Moving E[s] to (u^*K⊗^L E)[s] by the s² chain isomorphism of the shift leaf, with the K-flat representing formula, is a derived-category identification, not a degree-by-degree one. The window is right: Q^j=u^*P^{j+s}⊗E is nonzero only for j in [a-s,b-s]. Step 4 is elementary as marked: the vanishing quantifier matches def-kun-tor-amplitude, and D^b follows because Q is zero outside a finite interval. Step 5: the existence clause of lem-sp-etale-scalar-flat-model with A=B=R supplies P for every K, then apply the line model with E=R and r=0. Edge cases checked: N=1 (R=0), T' empty, c=0, signed s, a=b, and no flatness of R over Z/N. proof_deps equals the union of the step uses, and the blueprint fields are present. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtalePullbackTwistTorWindow",
+  "declaration": "AlgebraicGeometry.Etale.etale_pullback_twist_tor_window",
+  "declarations": [
+   "AlgebraicGeometry.Etale.pullbackTwistComplexMonoidal",
+   "AlgebraicGeometry.Etale.pullbackTwistComplex",
+   "AlgebraicGeometry.Etale.pullbackTwistDerived",
+   "AlgebraicGeometry.Etale.etale_pullback_twist_tor_window"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePullbackTwistTorWindow.lean",
+  "statement": "theorem etale_pullback_twist_tor_window (k : Type u) [Field k] (p ell : ℕ) [CharP k p] (_hp : 0 < p) (_hell : ell.Prime) (_hne : ell ≠ p) (T T' : Over (Spec (CommRingCat.of k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T'.hom] [LocallyOfFiniteType T'.hom] [QuasiCompact T'.hom] (f : T' ⟶ T) (n : ℕ) (R : Type (u + 1)) [CommRing R] [Finite R] (hR : ((ell ^ n : ℕ) : R) = 0) (a b : ℤ) (_hab : a ≤ b) : (∀ (K : DerivedCategoryModule R T.left), DerivedCategory.isBoundedConstructible R T.left K → DerivedCategory.hasTorAmplitudeIn R T.left a b K → ∀ (P : CochainComplex (Sheaf T.left.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ), Nonempty (_root_.DerivedCategory.Q.obj P ≅ K) → (∀ i : ℤ, exactFunctor _ _ (@tensorRight _ _ (Sheaf.monoidalCategory T.left.smallEtaleTopology (ModuleCat.{u + 1} R)) (P.X i))) → (∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X i)) → (∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) → ∀ (c : ℕ) (s : ℤ), (∀ j : ℤ, exactFunctor _ _ (@tensorRight _ _ (Sheaf.monoidalCategory T'.left.smallEtaleTopology (ModuleCat.{u + 1} R)) ((pullbackTwistComplex R f.left (ell ^ n) hR P c s).X j))) ∧ (∀ j : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((pullbackTwistComplex R f.left (ell ^ n) hR P c s).X j)) ∧ (∀ j : ℤ, (j < a - s ∨ b - s < j) → IsZero ((pullbackTwistComplex R f.left (ell ^ n) hR P c s).X j)) ∧ @MorphismProperty.kFlat _ _ (pullbackTwistComplexMonoidal R T'.left) (HomologicalComplex.quasiIso (Sheaf T'.left.smallEtaleTopology (ModuleCat.{u + 1} R)) (.up ℤ)) (pullbackTwistComplex R f.left (ell ^ n) hR P c s) ∧ Nonempty (_root_.DerivedCategory.Q.obj (pullbackTwistComplex R f.left (ell ^ n) hR P c s) ≅ pullbackTwistDerived R f.left (ell ^ n) hR K c s) ∧ DerivedCategory.isBoundedConstructible R T'.left (pullbackTwistDerived R f.left (ell ^ n) hR K c s) ∧ DerivedCategory.hasTorAmplitudeIn R T'.left (a - s) (b - s) (pullbackTwistDerived R f.left (ell ^ n) hR K c s)) ∧ (∀ K : DerivedCategoryModule R T.left, DerivedCategory.isBoundedConstructible R T.left K → DerivedCategory.hasTorAmplitudeIn R T.left a b K → DerivedCategory.isBoundedConstructible R T'.left ((upperStar (ModuleCat.{u + 1} R) f.left).mapDerivedCategory.obj K) ∧ DerivedCategory.hasTorAmplitudeIn R T'.left a b ((upperStar (ModuleCat.{u + 1} R) f.left).mapDerivedCategory.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb23b11bf",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: the field, ℓ≠p and separated finite-type T, T' setting; finite R with NR=0; bounded constructible K with Tor amplitude [a,b]; any P with flat constructible terms zero outside [a,b]. The conclusion is pullback ⊗ finiteEtaleTateTwist then ⟦s⟧, with flat constructible terms zero outside [a-s,b-s] (sign correct), kFlat (recorded Q58 interface, canonical signed total tensor), a Nonempty derived iso to (u^*K ⊗^L R(c))[s], bounded constructible with Tor [a-s,b-s], plus an independent ∀K clause that u^* preserves bounded constructibility and Tor [a,b]. Shift parse is immaterial (iso-invariant claims). Edge cases n=0/R=0, c=0, negative s, a=b, empty T' are covered. R : Type (u+1) is forced by the deps. Helper defs are real, docstrings and the 5 proof steps are present, the statement field is verbatim, dep records are unchanged vs side-live, and the item is not in the drop list. Advisories: finiteEtaleTateTwist, isBoundedConstructible and derivedTensor are owned by def nodes outside stmt_deps; pullbackTwistDerived resembles the parent's etaleChartOperation, which the item cannot cite (cycle); Noetherian/BifunctorShift imports are proof-only. No change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261023T151942-L-427271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

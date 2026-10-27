@@ -1,0 +1,129 @@
+{
+ "id": "lem-amb-cartier-kummer-realization-existence",
+ "kind": "statement",
+ "title": "Existence of simultaneous normalized Cartier Kummer realization",
+ "statement": "Fix a prime l, a finite extension E/Q_l and the families and normalization of [def-amb-cartier-kummer-data]. Suppose every finite coefficient level is killed by some l^(r+1). For every normalized ordinary etale Kummer family κ, there exists a CartierKummerFamily c satisfying CartierKummerRealization κ c at every annihilating exponent. This asserts existence and exponent independence only; it does not assert uniqueness of c.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Final paragraph: descent and independence of the chosen annihilating exponent; existence component of the parent descent node."
+ },
+ "stmt_deps": [
+  "def-amb-cartier-kummer-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose an annihilating exponent at each coefficient level. Compose the constructed canonical pro-etale Cartier class with the uniquely root-normalized finite Tate comparison. The canonical-class comparison equation and uniqueness of the ordinary supported Kummer boundary identify the supplied ordinary family with this construction. Verify the constant-quotient normalization by the mate-unit identity and the universal property of sheafification.",
+   "uses": [
+    "def-sfb-geo-cartier-canonical-class",
+    "lem-sfb-geo-cartier-source-comparison",
+    "lem-amb-finite-tate-site-descent",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-supported-kummer-scalar-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For exponents r≤s, take the coherent normalized transition from finite Tate site descent. Construct the roots projection with Scheme.rootsOfUnityPowMap; its defining kernel equation is Scheme.rootsOfUnityPowMap_ι. Its kernel-inclusion equation identifies its value on underlying units with the l^(s-r) power map. The normalized etale transition therefore sends every pure root tensor to the tensor of that projection. Apply the canonical Cartier modulus theorem to this transition. Uniqueness of normalized root comparisons identifies the coherent comparison family with the chosen comparisons. Associativity of Ext composition identifies the transported classes. Compare arbitrary exponents with their maximum.",
+   "uses": [
+    "lem-sfb-cartier-reduction-modulus",
+    "lem-amb-finite-tate-site-descent",
+    "def-pur-adic-root-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-geo-cartier-canonical-class",
+  "lem-sfb-geo-cartier-source-comparison",
+  "lem-amb-finite-tate-site-descent",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-supported-kummer-scalar-maps",
+  "lem-sfb-cartier-reduction-modulus",
+  "def-pur-adic-root-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Existence and exponent-independence component of lem-amb-cartier-kummer-descent. Uniqueness is now completely proved in its parent Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A uniquely normalized supported relative Kummer boundary descends to a unique pro etale Tate class independently of the killing exponent",
+   "results": "Eight hits concerning StandardEtalePair and ordinary etale constructions; none provides the supported Ext/Tate comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"map\"",
+   "results": "Twelve results about Std map containers; no normalized Cartier boundary transport.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(pullback|scalar|boundary)|Tate.*comparison",
+   "results": "One unrelated FourierMotzkin result from msearch; local rg finds the ordinary Kummer boundary and finite Tate descent interfaces, but not their simultaneous Cartier transport.",
+   "date": "2026-10-21",
+   "verdict": "no matching Mathlib theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized supported Cartier Kummer boundary descends to a finite proetale Tate sheaf and is natural under coefficient reduction and pullback",
+   "results": "Eight hits: Scheme.Hom.normalizationDesc, SheafOfModules.pullbackObjFreeIso_hom_naturality, pushforwardNatTrans_app_val_app_apply, freeFunctorCompPullbackIso, Scheme.Hom.toNormalization, sheafificationCompPullback, Condensed.lanSheafProfinite, pullbackObjFreeIso. These give ordinary pullback/sheafification APIs or scheme normalization, not the normalized supported Cartier Ext/Tate transport.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierKummerDescent",
+  "date": "2026-10-25",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-descent",
+   "place": "Existence component of descent; proof steps 8--11 and the existence part of 13.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierKummerRealizationExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierKummerRealizationExistence.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartier_kummer_realization_exists",
+  "statement": "theorem cartier_kummer_realization_exists\n    (hkill : ∀ n : ℕ, ∃ r : ℕ,\n      ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0)\n    (κ : CartierEtaleKummerFamily l E)\n    (hκ : CartierEtaleKummerNormalization l E κ) :\n    ∃ c : CartierKummerFamily l E, CartierKummerRealization l E κ c",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T164133-L-958786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T164133-L-958786",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

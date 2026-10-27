@@ -75,37 +75,96 @@
  },
  "proof": [
   {
-   "text": "For an integral coefficient ring, reduce a constructible heart object modulo powers of a uniformizer. Proper torsion finiteness makes the derived images constructible, and proper base change identifies the reductions. Integral direct image preserves derived completeness. The adic constructibility criterion identifies the resulting complex as constructible; on a Noetherian target its cohomology has a finite stratification by finitely presented local models. This is Bhatt--Scholze 6.7.1--6.7.2 combined with 6.6.11.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "For finite rational coefficients choose integral lattices on a finite stratification. Inverting ell commutes with proper direct image by bounded-below qcqs continuity. Finite gluing and localization preserve constructibility. For the condensed algebraic closure use finite coefficient descent of the finitely many local presentations and scalar extension along the filtered system of finite fields. This is the coefficient passage of Bhatt--Scholze 6.8.11--6.8.15. To compare an abstract finite normed extension E with the embedded presentation, choose a Q_ell-embedding into the algebraic closure; uniqueness of the extended absolute value makes it isometric. It identifies the unit ball with the induced valuation ring, and continuous-function sheaf functoriality transports the coefficient ring and all module-object functors. This covers the explicit unit-ball constructor too.",
+   "text": "For a proper morphism between Noetherian schemes, use the identity open immersion compactification. Compact-support constructibility therefore gives constructibility of ordinary etale direct-image cohomology for bounded constructible finite coefficients. A uniform finite fibre-dimension bound and proper torsion cohomological dimension give boundedness. The etale/pro-etale derived comparison transports this to ordinary pro-etale finite-field modules, where boundedness also gives finite Tor amplitude. The already proved source finiteTorAmplitude_of_boundedConstructible_of_field and torAmplitudeIn_mapDerivedCategory_iff supply field Tor amplitude and its comparison; no appeal is made to the separate abstract field-stage theorem. Reuse the proved private ProEtale.etale_cd from Sheaf.AlgebraicGeometry.FiniteProperClassicalCoproducts for the proper torsion bound; its proof combines the recorded torsion, forgetful and single-object comparison inputs.",
    "uses": [
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Constructible module objects form a weak Serre class for these coefficients on a Noetherian scheme. Apply induction on a finite cohomological interval for K, using good-truncation triangles. Derived pushforward is triangulated; the long exact cohomology sequence writes the middle cohomology as an extension of a cokernel by a kernel. These are constructible by the Serre property and the induction hypothesis. Zero complexes, empty strata and all integer degrees are included.",
+   "text": "Use the established finite discrete coefficient encoding and its constructibility, compactification and tensor compatibility to transport the finite-field bounded constructible and finite Tor result to internal module objects. Reuse the proved private ProEtale.ordinary_constructible_iff from Sheaf.Paper.LocalizingClosureCtfEqualsBc to identify the ordinary constructibility predicates; its elementary cover-index comparison includes empty covers and arbitrary small index universes.",
    "uses": [
-    "lem-weil-pbc-integral-constructible-serre",
-    "lem-weil-pbc-condensed-constructible-serre",
-    "def-kun-truncations"
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-sf-finite-discrete-encoding-compactification",
+    "lem-sf-finite-discrete-encoding-tensor-tor",
+    "def-sfb-derived-open-lower-shriek-id",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the actual continuous integer coefficient ring, the residue quotient is a finite field since the chosen uniformizer generates the maximal ideal of the extension DVR. Apply the internal residue criterion to the source, the finite-field result to its residue reduction, and the internal direct-image-limits theorem to identify the target reduction and preserve derived completeness. The target residue criterion proves bounded constant-model constructibility. The isomorphism-invariance predicates supplied by the finite-Tor well-definedness theorem justify transport of the residue comparison.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sfb-internal-integral-residue-criterion",
+    "lem-sfb-internal-integral-direct-image-limits",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the integer coefficient presentations by explicit continuous ring isomorphisms. The lattice coefficient integers and the extension integers differ only by WithAbs; for a normed finite extension the spectral norm agrees with the given norm, so the valuation ring identifies with its closed unit ball. Postcomposition gives inverse continuous-function sheaf maps and hence ring-object isomorphisms. Transport constructibility through scalar restriction and the derived direct-image comparison, using the established local-finite-presentation/constant-model comparison.",
+   "uses": [
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For continuous finite rational coefficients, choose an integral bounded constructible model. Its proper image has constructible cohomology by the integral result. The proved integral scalar/direct-image comparison and exact scalar extension identify its localized cohomology with that of the rational image. For the condensed algebraic closure, descend the input to a finite intermediate field, apply that rational result and use the bounded-below scalar/direct-image comparison. Finally case-split the four constructors of IsEllAdicFinitenessCoefficient, keeping the original theorem signature.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-integral-push-comparison",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-sfb-constructible-cocone-obj",
+    "lem-weil-pbc-condensed-qbar-bounded-push"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-truncations",
-  "lem-weil-pbc-condensed-constructible-serre",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-weil-pbc-integral-constructible-serre"
+  "def-sfb-derived-open-lower-shriek-id",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-pe-derived-nakayama-resolution",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sf-finite-discrete-encoding-compactification",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-sf-finite-discrete-encoding-tensor-tor",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-constructible-cocone-obj",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-internal-integral-direct-image-limits",
+  "lem-sfb-internal-integral-residue-criterion",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-continuous-constructible-integral-model",
+  "lem-weil-pbc-continuous-integral-push-comparison",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M2",
+  "date": "2026-10-24",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Integral and rational proper finiteness, constructibility clauses; Bhatt--Scholze 6.7.2 and Remark 6.8.15."
+  "place": "Bhatt--Scholze 6.7.1--6.7.2 and 6.8.15; finite etale finiteness, internal residue and direct-image-limits criteria, then integral models and scalar extension."
  },
  "blueprint": {
   "is": null,
@@ -137,14 +196,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C5",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261020T051052-L-1550627",
+  "landing": "20261024T015202-L-2337610",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

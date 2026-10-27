@@ -61,24 +61,51 @@
   "latex:proposition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-thm-transport",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $K\\in D^b_{ctf}(X,\\mathcal O_E)$ be perfect over $(\\mathcal O_E)_X$ (the hypothesis of [thm-pod-derived-poincare-duality] at $\\Lambda=\\mathcal O_E$) and put $K_n=K\\otimes ^L_{\\mathcal O_E}A_{E,n}$. Derived perfectness at the $\\mathcal O_E$-stage yields the universal-coefficient exact sequences for the cohomology modules\n\n$$\n0\\longrightarrow H^i_c(X,K)\\otimes _{\\mathcal O_E}A_{E,n} \\longrightarrow H^i_c(X,K_n) \\longrightarrow \\operatorname {Tor}_1^{\\mathcal O_E}\\bigl(H^{i+1}_c(X,K),A_{E,n}\\bigr) \\longrightarrow 0,\n$$\n\nand the corresponding sequences for the second variable of the pairing and for the adjoint maps. If the relevant cohomology modules are finite projective over $\\mathcal O_E$, the Tor terms vanish and the degreewise maps are perfect $\\mathcal O_E$-module pairings.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $K\\in D^b_{ctf}(X,\\mathcal O_E)=\\Dbc(X,\\mathcal O_E)$, a full subcategory of $D(X_{\\mathrm{pro\\acute et}},\\mathcal O_E)$, be perfect over $\\mathcal O_{E,X}$ (the hypothesis of [thm-pod-derived-poincare-duality] at $\\Lambda=\\mathcal O_E$) and put $K_n=K\\otimes ^L_{\\mathcal O_{E,X}}A_{E,n}$. Derived perfectness at the $\\mathcal O_E$-stage yields the universal-coefficient exact sequences for the cohomology modules\n\n$$\n0\\longrightarrow H^i_c(X,K)\\otimes _{\\mathcal O_E}A_{E,n} \\longrightarrow H^i_c(X,K_n) \\longrightarrow \\operatorname {Tor}_1^{\\mathcal O_E}\\bigl(H^{i+1}_c(X,K),A_{E,n}\\bigr) \\longrightarrow 0,\n$$\n\nand the corresponding sequences for the second variable of the pairing and for the adjoint maps. If the relevant cohomology modules are finite projective over $\\mathcal O_E$, the Tor terms vanish and the degreewise maps are perfect $\\mathcal O_E$-module pairings. In general the defect is measured by the $\\operatorname{Ext}^1$ terms of [sk-rem-pd-integral-corrections].",
   "proof": [
    {
-    "text": "By [thm-pod-derived-poincare-duality] at the $\\mathcal O_E$-stage, the inverse adjoint $R\\Gamma _c(X,K)^\\vee \\to R\\Gamma (X,K^\\vee (d))[2d]$ is an isomorphism of derived-complete perfect $\\mathcal O_E$-complexes; finite reduction is the derived tensor product $-\\otimes ^L_{\\mathcal O_E}A_{E,n}$, which is computed levelwise by [def-weil-derived-complete-integral-detailed], so the derived-complete perfectness of the two complexes (the definition of the category at the point of [def-weil-finite-coefficient-point] at the $\\mathcal O_E$-stage) gives the levelwise Tor-exact sequences of the statement: for a derived-complete complex $C$ of $\\mathcal O_E$-modules of finite Tor-amplitude, the triangle\n\n$$\nC\\otimes ^L_{\\mathcal O_E}K_1 \\longrightarrow C\\otimes ^L_{\\mathcal O_E}K_{n+1} \\longrightarrow C\\otimes ^L_{\\mathcal O_E}K_n \\xrightarrow {+1}\n$$\n\nof the exact coefficient sequence $0\\to A_{E,1}\\to A_{E,n+1}\\to A_{E,n}\\to 0$ yields the Tor-sequence, with the Tor term the $\\varpi$-torsion of the $\\mathcal O_E$-module and the reduction term the tensor product; the identification of the two terms with $H^i_c(X,K)\\otimes _{\\mathcal O_E}A_{E,n}$ and $\\operatorname {Tor}_1^{\\mathcal O_E}(H^{i+1}_c(X,K),A_{E,n})$ is the derived-tensor computation over a principal ideal ring, in which a bounded complex of finite projective $\\mathcal O_E$-modules, the perfect representative of the input (the finite-Tor condition of [def-weil-finite-tor-amplitude] and the derived completion of [def-weil-derived-complete-integral-detailed]), replaces the coefficients levelwise. The same argument applied to the second variable $K^\\vee (d)$ and to the adjoint map gives the other two sequences. When the cohomology modules are finite projective over $\\mathcal O_E$, the Tor terms vanish, so the sequences show that the cohomology of $K_n$ is the reduction of the cohomology of $K$; transporting the perfect derived pairing along these identifications gives $\\mathcal O_E$-module perfect pairings levelwise, defining the degreewise maps of the statement.",
+    "text": "By [sk-lem-finite], $P=R\\Gamma_c(X,K)$ is a perfect complex over\n$\\mathcal O_E$, and so is $Q=R\\Gamma(X,K^\\vee(d))$. By [sk-prop-scalar-six],\nreduction modulo $\\pi_E^n$ commutes with $R\\Gamma_c$, with $R\\Gamma$ and with\ninternal Hom, so\n\n$$\nP\\otimes^L_{\\mathcal O_E}A_{E,n}\\simeq R\\Gamma_c(X,K_n),\\qquad\nQ\\otimes^L_{\\mathcal O_E}A_{E,n}\\simeq R\\Gamma(X,K_n^\\vee(d)),\n$$\n\nnaturally in $K$. Represent $P$ by a bounded complex $P^\\bullet$ of finite\nfree $\\mathcal O_E$-modules. Its terms are torsion-free, so\n$P\\otimes^L_{\\mathcal O_E}A_{E,n}$ is represented by $P^\\bullet/\\pi_E^n$, and\nthe short exact sequence of complexes\n$0\\to P^\\bullet\\xrightarrow{\\pi_E^n}P^\\bullet\\to P^\\bullet/\\pi_E^n\\to0$ gives\nthe long exact sequence\n\n$$\n\\cdots\\to H^i(P)\\xrightarrow{\\pi_E^n}H^i(P)\\to H^i(P\\otimes^L A_{E,n})\n\\to H^{i+1}(P)\\xrightarrow{\\pi_E^n}H^{i+1}(P)\\to\\cdots.\n$$",
     "uses": [
-     "thm-pod-derived-poincare-duality",
-     "def-weil-derived-complete-integral-detailed",
-     "def-weil-finite-coefficient-point",
-     "def-weil-finite-tor-amplitude"
+     "sk-lem-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Its cokernel and kernel terms are $H^i(P)\\otimes_{\\mathcal O_E}A_{E,n}$ and\nthe $\\pi_E^n$-torsion of $H^{i+1}(P)$, which is\n$\\operatorname{Tor}_1^{\\mathcal O_E}(H^{i+1}(P),A_{E,n})$. This is the\ndisplayed sequence. The same argument for $Q$, and naturality of the long\nexact sequence for the adjoint map $P^\\vee\\to Q[2d]$ of\n[thm-pod-derived-poincare-duality], give the other sequences.",
+    "uses": [
+     "thm-pod-derived-poincare-duality"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If the cohomology modules of $P$ are finite projective, the Tor terms vanish,\nso the cohomology of $K_n$ is the reduction of the cohomology of $K$.\nMoreover $P\\simeq\\bigoplus_iH^i(P)[-i]$: over the discrete valuation ring\n$\\mathcal O_E$, the complex $P^\\bullet$ of free modules has free boundaries, and\nthe cycles are free with free quotients $H^i(P)$, so $P^\\bullet$ splits as the\nsum of its cohomology and of contractible complexes $[B\\xrightarrow{\\mathrm{id}}B]$.\nHence $P^\\vee\\simeq\\bigoplus_i\\operatorname{Hom}_{\\mathcal O_E}(H^i(P),\\mathcal O_E)[i]$\nand $H^{-i}(P^\\vee)=\\operatorname{Hom}_{\\mathcal O_E}(H^i(P),\\mathcal O_E)$. The\nderived pairing is perfect by [thm-pod-derived-poincare-duality], hence the\ndegreewise pairings are perfect $\\mathcal O_E$-module pairings, and their\nreductions are the corresponding pairings for $K_n$.",
+    "uses": [
+     "thm-pod-derived-poincare-duality"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-section-proj-etale-embedding",
+ "kind": "statement",
+ "title": "Global section-algebra Proj embedding from etale local canonical maps",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], let $f:X\\to T$ be a quasi-compact separated morphism over $S$ in the terminology of [lem-trf-space-qc-separated-etale-local], and let $L$ be a line module on $X$. Let $\\{g_i:T_i\\to T\\}_{i\\in I}$ be a jointly surjective etale family of schemes such that $X_i=X\\times_TT_i$ is a scheme for every $i$. Put $f_i:X_i\\to T_i$ and let $L_i$ be the ordinary invertible module [def-sc-invertible-module] corresponding to $L|_{X_i}$ [def-trf-space-module-scheme-restriction]. For each $i$, form the ordinary canonical graded section algebra $\\mathcal A_i=\\bigoplus_{d\\geq0}(f_i)_*L_i^{\\otimes d}$ and its evaluation homomorphism $\\psi_i:f_i^*\\mathcal A_i\\to\\bigoplus_{d\\geq0}L_i^{\\otimes d}$. Suppose $U(\\psi_i)=X_i$ and the canonical map $r_i:X_i\\to\\operatorname{Proj}_{T_i}(\\mathcal A_i)$ is an open immersion, with the generation locus and canonical map defined by [lem-trf-space-line-module-proj-map].\nHere $f_*$ and $f^*$ mean direct image and tensor pullback on small etale ringed topoi; passage to Zariski modules uses the scheme-site equivalence in [lem-trf-space-section-algebra-etale-base-change]. Then $\\mathcal A=\\bigoplus_{d\\geq0}f_*L^{\\otimes d}$ is a quasi-coherent graded Zariski $\\mathcal O_T$-algebra [def-weil-pbc-quasi-coherent-algebra] [def-weil-pbc-graded-sheaf-structures], with canonical graded isomorphisms $g_i^*\\mathcal A\\simeq\\mathcal A_i$ identifying the restriction of its evaluation map $\\psi$ with $\\psi_i$. The comparison in degree $d$ sends a section of $f_*L^{\\otimes d}$ to its restriction, and evaluation then gives the same local section of $L_i^{\\otimes d}$. The relative Proj $P=\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj] is a scheme. Its canonical map $r:U(\\psi)\\to P$ has $U(\\psi)=X$ and is an open immersion. Under $\\operatorname{Proj}_{T_i}(\\mathcal A_i)\\simeq P\\times_TT_i$, the maps $r_i$ are its base changes. In particular $X$ is a scheme. For this resulting scheme, $\\mathcal A$, $\\psi$, and $r$ agree with the ordinary Zariski section algebra, its evaluation homomorphism, and its ordinary canonical map for the invertible module corresponding to $L$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), the polarized-scheme descent sentence of lem-trf-local-term-locality, via lem-trf-algebraic-space-ample-local: old proof Steps 3 and 4 and the initial comparisons of Step 5 (section algebra, evaluation, global generation locus, canonical Proj embedding, and ordinary-scheme comparison)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-sc-invertible-module",
+  "def-trf-space-module-scheme-restriction",
+  "lem-trf-space-line-module-proj-map",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-nagata-relative-proj",
+  "lem-trf-space-section-algebra-etale-base-change",
+  "def-trf-section-proj-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply space_section_algebra_etale_base_change to get A, its ordinary-scheme agreement, and normalized base-change models. Present A by section_proj_model_presentation, retaining exactly the same section algebra.",
+   "uses": [
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-section-proj-model-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each supplied local model, apply section_proj_model_comparison to the normalized base-change model just obtained. This gives the local ordinary-scheme agreement, beta, D, its degree equation and IsBaseChange. Choose these comparisons for all i. PullbackData.isPullback gives the Cartesian relative-Proj square of each D.",
+   "uses": [
+    "lem-trf-section-proj-model-comparison",
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply space_line_proj_etale_descent to these coefficient data, the cover and the supplied local canonical open immersions. It returns full generation and the global canonical representable open immersion with the local component equations.",
+   "uses": [
+    "lem-trf-space-line-proj-etale-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Representability of etale morphisms is stable under the given source pullback squares. The cartesian realization restricted to each resulting etale test is its ordinary Zariski restriction, by etaleLinePresentation_schemeRestriction. The line presentation behind lineTestFamily is linePresentation, whose line is L by exists_linePresentation.",
+   "uses": [
+    "lem-trf-etale-line-presentation-scheme-restriction",
+    "def-trf-space-line-module-proj-input"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the global representable open immersion over the identity of its scheme target. In this pullback square the projection to X is an isomorphism. Its representing scheme U, the scheme open immersion q and this isomorphism e satisfy the Yoneda equation by commutativity. Isomorphisms are etale; apply the same restriction theorem to e.",
+   "uses": [
+    "lem-trf-etale-line-presentation-scheme-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-section-algebra-etale-base-change",
+  "lem-trf-section-proj-model-presentation",
+  "lem-trf-section-proj-model-comparison",
+  "lem-trf-space-line-proj-etale-descent",
+  "lem-trf-etale-line-presentation-scheme-restriction",
+  "def-trf-space-line-module-proj-input",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C: the same section-algebra, generation-locus and open-immersion route, with explicit adapter comparisons and the scheme test over the identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated algebraic space over a scheme whose local canonical maps into Proj of the section algebra are everywhere defined open immersions has a global canonical open immersion into relative Proj",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"The continuous map sending prime ideals in the degree-zero localization $ A_f^0 $ of a graded ring $ \\\\mathcal{A} $ to homogeneous prime ideals in $ \\\\text{Proj}(\\\\mathcal{A}) $ that do not contain the h\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing canonical maps to projective spectrum using the graded direct image of tensor powers of an invertible sheaf and etale locality of open immersions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"For any open set $U$ in the projective spectrum $\\\\text{Proj}(A)$, the composition of the structure sheaf restriction map $\\\\mathcal{O}_{\\\\text{Proj}(A)}(D_+(f)) \\\\to \\\\mathcal{O}_{\\\\text{Proj}(A)}(U)$ with\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                (AlgebraicGeometry.Proj.toLocallyRingedSpace 𝒜).restrict ⋯ ⟶\\n  \", \"doc\": \"The morphism of locally ringed spaces from the restriction of the projective spectrum $ \\\\text{Proj}(A) $ to the basic open set $ D_+(f) $ (defined by exclusion of the homogeneous element $ f $) to the\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"The theorem establishes the associativity of composed morphisms involving the structure sheaf on the projective spectrum $\\\\text{Proj}(A)$ of a graded ring $A$. Specifically, it asserts that for an ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                \", \"doc\": \"A morphism in the category of commutative rings that maps the localization of a graded ring $ A $ at the submonoid generated by powers of a homogeneous element $ f $ to the global sections of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recognize an algebraic space as an open subscheme of the relative Proj of its graded section algebra by etale base change of evaluation maps and local canonical open immersions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": IsOpenImmersion (Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \": Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(X : LocallyRingedSpace.{u})\\n  (h :\\n    ∀ x : X,\\n      ∃ (R : CommRingCat) (f : Spec.toLocallyRingedSpace.obj (op R) ⟶ X),\\n        (x ∈ Set.range f.base :) ∧ LocallyRingedSpace.IsOpenImmersion f) :\\n  Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (basicOpen 𝒜 f).toScheme ≅ Spec (.of <| Away 𝒜 f)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, the canonical morphism from the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X ⟶ Proj 𝒜\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) :\\n  (fromOfGlobalSections 𝒜 f hf).resLE _ _ (fromOfGlobalSections_preimage_basicOpen _ _ _ hn hr).ge =\\n    toBasicOpenOfGlobalSections 𝒜 f rfl hn hr\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) : fromOfGlobalSections 𝒜 f hf ⁻¹ᵁ basicOpen 𝒜 r = X.basicOpen (f r)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, the preimage of the basic open set $D_+(r)$ in $\\\\operatorname{Proj}(\\\\mathcal{A})$ under the morphism $X \\\\to \\\\o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) : AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|canonical.*[Pp]roj|[Pp]roj.*canonical|[Pp]roj.*[Ii]mmersion",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"23\", \"text\": \"  The canonical isomorphism `Proj A |_ D₊(f) ≅ Spec (A_f)₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"25\", \"text\": \"- `AlgebraicGeometry.Proj.awayι`: The open immersion `Spec (A_f)₀ ⟶ Proj A`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"132\", \"text\": \"/-- The canonical map `(A_f)₀ ⟶ Γ(Proj A, D₊(f))`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"137\", \"text\": \"/-- The canonical map `Proj A |_ D₊(f) ⟶ Spec (A_f)₀`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"157\", \"text\": \"/-- The canonical isomorphism `Proj A |_ D₊(f) ≅ Spec (A_f)₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"336\", \"text\": \"    rw [← Proj.awayι_toSpecZero _ _ (hxd i i.2), IsOpenImmersion.lift_fac_assoc]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsOpenImmersion\"",
+   "results": "OK 1 hits: AlgebraicGeometry.Proj.instIsOpenImmersionAwayι. Read Proj.awayι (Basic.lean:185) and fromOfGlobalSections (Basic.lean:443): affine graded-ring/scheme constructions, not the stated relative section-algebra descent for an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space whose canonical maps to the relative Proj of its section algebra are open immersions on an etale cover is an open subscheme of that relative Proj",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, AlgebraicGeometry.Proj. Read Proj.awayι (Basic.lean:185) and fromOfGlobalSections (Basic.lean:443): affine graded-ring/scheme constructions, not the stated relative section-algebra descent for an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|canonical.*[Pp]roj|[Pp]roj.*canonical|[Pp]roj.*[Ii]mmersion",
+   "results": "OK 6 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean. Read Proj.awayι (Basic.lean:185) and fromOfGlobalSections (Basic.lean:443): affine graded-ring/scheme constructions, not the stated relative section-algebra descent for an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing a canonical open immersion from an algebraic space into relative Proj by etale descent of its graded section algebra and evaluation",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Scheme.GlueData.mk, AlgebraicGeometry.Scheme.Cover.isOpenEmbedding_fromGlued, AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open, AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.GlueData.instIsOpenImmersionCommRingCatFPresheafedSpaceToPresheafedSpaceGlueDataToSheafedSpaceGlueDataToLocallyRingedSpaceGlueData, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor. Read Proj.awayι (Basic.lean:185) and fromOfGlobalSections (Basic.lean:443): affine graded-ring/scheme constructions, not the stated relative section-algebra descent for an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of an open immersion into the projective spectrum along an etale cover of the base scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.awayι. Read Proj.awayι (Basic.lean:185) and fromOfGlobalSections (Basic.lean:443): affine graded-ring/scheme constructions, not the stated relative section-algebra descent for an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-ample-local",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the polarized-scheme descent sentence of lem-trf-local-term-locality, via lem-trf-algebraic-space-ample-local: old proof Steps 3 and 4 and the initial comparisons of Step 5 (section algebra, evaluation, global generation locus, canonical Proj embedding, and ordinary-scheme comparison).",
+   "via": [
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-section-proj-etale-embedding",
+  "worker": "stage1",
+  "summary": "ND: assembled the existing graded section-algebra and evaluation comparisons, canonical line-module Proj map, cover base change, and open-immersion locality. Checked the actual statements and local section normalization, retained every hypothesis and conclusion, and created no nodes. No exact project attachment or Mathlib match was found.",
+  "blueprint": "The polarized-scheme descent sentence recorded in blueprint.from.place, via lem-trf-algebraic-space-ample-local: section algebra and evaluation, full generation locus, canonical Proj open immersion, and ordinary-scheme comparison. The latest local-term blueprint no longer contains that historical sentence; this item remains its explicitly sourced geometric descent sublemma and follows Stacks 0D3C.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic existence of relative Proj of a quasi-coherent graded algebra over a scheme; the trace-formula unit gives no separate construction of this scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-253becc51",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-253becc51 (reviewer sub-agent of L); spot-checked: The item follows the (2)⇒(1) proof of Stacks 0D3C (spaces-descent.tex lines 2124–2207), with ampleness replaced by its consequences, which the item assumes: U(ψ_i)=X_i and r_i an open immersion. The delivery adds no new nodes and leaves the statement and stmt_deps exactly as on the base; it changes only the proof fields, split_report and search records. Step 1: lem-trf-space-section-algebra-etale-base-change gives the quasi-coherent graded algebra A, the isomorphism g_i^*A≅A_i through its scheme clause (X_i is a scheme), and the evaluation compatibility. The general clause of lem-trf-graded-evaluation-zariski-etale-comparison, applied to B_d=L^⊗d, makes ψ an algebra homomorphism. Step 2: lem-trf-graded-pushforward-etale-restriction gives the restriction description of the comparison, that it is an algebra isomorphism, and the local formula a⊗s↦a·s|_W. Step 3: lemma-nagata-relative-proj-exists (declared tool use, accepted as generic relative-Proj existence) makes P a scheme. lem-trf-space-line-module-proj-map, applied to the square X_i→X over T_i→T with both sources schemes, gives U(ψ')=g'^{-1}U(ψ), the identification Proj_{T_i}(A_i)≅P×_T T_i, and r_i as a base change of r. Step 4: lem-trf-space-fibre-products-etale-covers, used twice, gives the cover of X and the scheme cover P×_T T_i of P. U(ψ)=X follows from the points (a standard two-line fact, as in the source). Associativity of fibre products identifies the base change of r with r_i, and lem-trf-space-open-immersion-etale-local then makes r an open immersion and X a scheme. Step 5: the scheme clauses of the section-algebra node (identity base change) and of the Proj-map node give the comparison with the ordinary Zariski objects. Hypotheses check: quasi-compact separated f is used only in Step 1, and no extra finiteness is assumed. Edge cases hold: empty X, empty T, empty I, identity cover. No duplicates: lem-trf-canonical-proj-open-cover-gluing is the Zariski analogue for schemes only. No cycle: the parent lem-trf-algebraic-space-ample-local is the only citer. Advisory, not a fault: Step 1 calls the cited clause the 'tensor-power clause', and quasi-coherence of L^⊗d is left implicit."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SectionProjEtaleEmbedding",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.section_proj_etale_embedding",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.section_proj_etale_embedding"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SectionProjEtaleEmbedding.lean",
+  "statement": "theorem section_proj_etale_embedding (S : Scheme.{u}) (T : Over S) (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (hqc : IsQuasiCompactPresheafMap f) (hsep : IsSeparatedPresheafMap f) (L : X.Modules) (hL : X.IsLineModule L) (I : Type v) (Tᵢ Xᵢ : I → Over S) (g : ∀ i, Tᵢ i ⟶ T) (hget : ∀ i, Etale (g i).left) (hcover : ∀ (V : Over S) (x : V ⟶ T), ∃ R : Sieve V.left, R ∈ Scheme.fppfTopology V.left ∧ ∀ (W : Over S) (a : W ⟶ V), R a.left → ∃ (i : I) (b : W ⟶ Tᵢ i), b ≫ g i = a ≫ x) (k : ∀ i, yoneda.obj (Xᵢ i) ⟶ X.obj.obj) (fᵢ : ∀ i, Xᵢ i ⟶ Tᵢ i) (hcart : ∀ i, IsPullback (k i) (yoneda.map (fᵢ i)) f (yoneda.map (g i))) (Mᵢ : ∀ i, SectionProjModel (yoneda.map (fᵢ i)) ((lineTestFamily X L hL).pullback (k i))) (rᵢ : ∀ i, Xᵢ i ⟶ projOver (Tᵢ i) (Mᵢ i).affine) (hgen : ∀ i, (Mᵢ i).evaluation.IsGenerationOpen ⊤) (hcanonical : ∀ i, (Mᵢ i).evaluation.IsCanonicalMap ⊤ ((⊤ : Subfunctor (yoneda.obj (Xᵢ i))).ι ≫ yoneda.map (rᵢ i))) (hopen : ∀ i, IsOpenImmersion (rᵢ i).left) : ∃ M : SectionProjModel f (lineTestFamily X L hL), M.sections.AgreesWithSchemes ∧ M.evaluation.IsGenerationOpen ⊤ ∧ ∃ r : X.obj.obj ⟶ yoneda.obj (projOver T M.affine), M.evaluation.IsCanonicalMap ⊤ ((⊤ : Subfunctor X.obj.obj).ι ≫ r) ∧ IsRepresentableWith (fun _ _ q ↦ IsOpenImmersion q.left) r ∧ (∀ i, (∃ hk : IsEtale (k i), Nonempty ((lineTestFamily X L hL).module (CostructuredArrow.mk (k i)) ≅ (schemeRestriction X ⟨CostructuredArrow.mk (k i), hk⟩).obj L)) ∧ (Mᵢ i).sections.AgreesWithSchemes ∧ ∃ (β : SpaceSectionAlgebraBaseChange (k i) (g i) M.sections (Mᵢ i).sections) (D : Scheme.GradedAlgebraData.PullbackData (g i).left M.affine (Mᵢ i).affine), (∀ (V : T.left.affineOpens) (V' : (Tᵢ i).left.affineOpens) (h : V'.1 ≤ (g i).left ⁻¹ᵁ V.1) (n : ℕ) (s : Γ(M.sections.degree n, V.1)), D.map h (M.degreeIso V n s) = ((Mᵢ i).degreeIso V' n ((β.degree n).hom.app V'.1 (sectionAlgebraPullSection (g i).left (M.sections.degree n) V.1 V'.1 h s)) : (Mᵢ i).affine.obj V')) ∧ M.evaluation.IsBaseChange (k i) (g i) D (Mᵢ i).evaluation ∧ IsPullback D.relProjComparison (Mᵢ i).affine.relProjHom M.affine.relProjHom (g i).left ∧ (∀ (W : Over S) (a : W ⟶ Xᵢ i), (a ≫ rᵢ i).left ≫ D.relProjComparison = (r.app (op W) ((k i).app (op W) a)).left)) ∧ ∃ (U : Over S) (e : yoneda.obj U ≅ X.obj.obj) (q : U ⟶ projOver T M.affine), IsOpenImmersion q.left ∧ yoneda.map q = e.hom ≫ r ∧ ∃ he : IsEtale e.hom, Nonempty ((lineTestFamily X L hL).module (CostructuredArrow.mk e.hom) ≅ (schemeRestriction X ⟨CostructuredArrow.mk e.hom, he⟩).obj L)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The unchanged SectionProjModel declaration moves to its own definition module, publicly reexported here. The theorem signature is unchanged. Stage 3 combines normalized affine presentation and comparison with the proved generation/canonical-map descent and constructs the representing scheme from the open-immersion scheme test over the identity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5adc6eb3c",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Node diff vs base: only lean changed; lean.statement verbatim equals file signature; only sorry is the theorem proof; docstrings carry source and blueprint; report has Worker report and Second reading by Q32 sections. Hypotheses match the node: IsQuasiCompactPresheafMap/IsSeparatedPresheafMap; hcover (fppf-local lifting) is equivalent to joint surjectivity of an étale family and is the encoding of the recorded open-immersion descent node; hcart is a true IsPullback; local maps r_i pinned by IsCanonicalMap (unique per space_line_module_proj_map); no ampleness, finiteness or universe restriction added; I : Type v free. SectionProjModel joins SpaceSectionAlgebra and the GradedAlgebraData/GradedLineMap presentation; degree equivalences respect mul/unit/restriction and evaluation_eq fixes the evaluation, so it is unique up to iso, not hollow, and listed in declarations. Conclusions present: quasi-coherent graded algebra; base-change iso beta with evaluation compatibility; D pinned by the degree equation and IsBaseChange; IsGenerationOpen top; canonical r with representable open immersion; IsPullback of relProjComparison plus the equation making each r_i the base change of r; X represented by U with q an open immersion; AgreesWithSchemes plus schemeRestriction iso. Edge cases (empty I/X/T, identity and infinite covers, degree 0) covered. Advisories: schemeRestriction isos are Nonempty, not pinned (harmless up to a unit); citers must construct the local SectionProjModels. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "independent cc review: item signature byte-identical to clone; relocated SectionProjModel byte-identical with change record, 0 importers; 4 new sorry statements read against SpaceSectionAlgebra/GradedAlgebraData/PullbackData/EtaleLinePresentation defs (true); #print axioms on item and descent theorem (sorryAx only via new holes/upstream)"
+ }
+}

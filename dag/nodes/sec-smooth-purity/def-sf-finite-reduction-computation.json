@@ -1,0 +1,124 @@
+{
+ "id": "def-sf-finite-reduction-computation",
+ "kind": "definition",
+ "title": "Canonical ordinary quotient and finite K-flat reduction computation",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and a scheme $W$. Use the actual completed and finite coefficient module categories and scalar restrictions [def-sf-scalar-reduction-categories-restriction], the positive quotient coefficients [def-coef-ringed-sequence-site], finite derived reduction [def-weil-integral-derived-reduction], and its quotient projections [def-weil-integral-reduction-tower]. Define coefficientOrdinaryQuotient for $n\\le m$ as the canonical ordinary natural map from extension to $B_m$ into restriction of extension to $B_n$, the mate of the ordinary scalar-extension unit under successive scalar restrictions; its pure-tensor formula is $b\\otimes x\\mapsto q_{m,n}(b)\\otimes x$. For a K-flat completed-module complex $P$ [def-pc-kflat-complex], define coefficientFiniteReductionModel at level $n$ to be the canonical isomorphism from derived finite extension of $QP$ to $Q(P\\otimes B_n)$: compose the localization/homotopy identification, the universal derived scalar-extension counit on $P$ (invertible on K-flat complexes by [lem-pur-derived-change-of-rings]), and the localization identification back. These specify existing canonical maps, not new existence or compatibility claims. Scheme and coefficient universes are independent.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-coef-ringed-sequence-site",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-reduction-tower",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941: K-flat change-of-rings computation and quotient transitions, with the universal derived counit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IntegralStrictReductionModel|coefficientOrdinaryQuotient|coefficientFiniteReductionModel|coefficientMap",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact specialized Mathlib map; reuse the existing published coefficientOrdinaryQuotient and coefficientFiniteReductionModel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite reduction isomorphism on a K-flat complex and natural quotient map between scalar extensions",
+   "results": "8 hits: HomologicalComplex.pOpcyclesIso, CategoryTheory.ShortComplex.QuasiIso.isIso, quasiIsoAt_of_isIso, ModuleCat.smulShortComplex_g_epi, HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, RingHom.Flat.respectsIso, DerivedCategory.instIsIsoMapCochainComplexIntQ",
+   "date": "2026-10-24",
+   "verdict": "No exact specialized Mathlib map; reuse the existing published coefficientOrdinaryQuotient and coefficientFiniteReductionModel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite derived scalar extension computation on K-flat complexes and the ordinary quotient transition maps",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.trans, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.flat_of_isLocalized_span, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, Module.Flat.of_forall_exists_factorization",
+   "date": "2026-10-24",
+   "verdict": "No exact specialized Mathlib map; reuse the existing published coefficientOrdinaryQuotient and coefficientFiniteReductionModel."
+  },
+  {
+   "tool": "grep",
+   "query": "rg coefficientOrdinaryQuotient|coefficientFiniteReductionModel lean/WeilConjectures lean/Sheaf; scan lean records of definition nodes; blueprint_refs.py search quotient reduction",
+   "results": "No matching upstream definition. Both definitions occur in Sheaf.Paper.CoefDerivedSystemEvaluationCalculus and are only recorded under theorem nodes; def-pur-coefficient-reduction-presentation owns a separate predicate.",
+   "date": "2026-10-24",
+   "verdict": "Add an existing:true definition ownership record, without changing Lean."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-closed-direct-image-strict-reduction",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral closed-counit simultaneous quotient comparison, retaining strict systems and their augmentation before localization.",
+   "via": [
+    "lem-sf-closed-direct-image-strict-reduction",
+    "lem-sf-finite-exceptional-site-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientSystemScalarCalculus",
+  "declaration": "WeilConjectures.coefficientFiniteReductionModel",
+  "declarations": [
+   "WeilConjectures.coefficientOrdinaryQuotient",
+   "WeilConjectures.coefficientFiniteReductionModel"
+  ],
+  "statement": "noncomputable def coefficientFiniteReductionModel\n    (Q : CochainComplex (scalarReductionSource l E W) ℤ)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients\n      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)\n    (n : ℕ) :\n    (coefficientFiniteDerivedExtension l E W n).obj (DerivedCategory.Q.obj Q) ≅\n      DerivedCategory.Q.obj\n        (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "F2 ownership record: reuse these two exact existing canonical definitions without relying on the host evaluation-calculus main theorem. C2, 2026-10-27: declaration moved verbatim to the scalar foundation module after profiling and local unfolding improvements. The original calculus module publicly re-exports it, with identical signature, data and attributes.",
+  "file": "lean/Sheaf/Paper/CoefficientSystemScalarCalculus.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3420 (H13/H4 tower rebind + cycle; H2 theorem stmt_deps). F1 fixed: def-weil-integral-reduction-tower restored byte-identical; IntegralStrictReductionModel owned by new §1(A) def-sf-integral-strict-reduction-model whose statement lists every field; DAG walk over the item's stmt_deps reaches neither the item nor its citer (no cycle). F2 fixed: theorem stmt_deps removed; plain defs owned by new existing:true def nodes def-sf-projection-coefficient-direct-image (IntegralAmbient.push/coefficientMap), def-sf-finite-reduction-computation (coefficientOrdinaryQuotient/coefficientFiniteReductionModel; theorem cite justified by asIso), def-sf-constant-tower-square (constantSquare); remaining added deps are landed def nodes (brief l.177); previously theorem-only owners, recorded signatures match the source, H12 fields ok. Item Lean byte-identical to 3420; clause-by-clause re-read ok (IsProjectionNormalized pins r, augmentation equation in D(towers), ExactImages concluded, no extra hypotheses, edge cases and independent universes ok); statement verbatim, one sorry, docstrings with 8 steps. Advisory: no node asserts existence of a model; two redundant transitive imports; scalarReductionExtension owned only by a theorem node outside stmt_deps. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-39893",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T134955-L-3651497",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules vs clone original (verbatim prefix split + 1 hole proved, statement unchanged); all 107 direct importers compiled against the delivered set (104 OK, 3 slow pre-existing, equal time on published); axioms clean; nodes vs Lean"
+ }
+}

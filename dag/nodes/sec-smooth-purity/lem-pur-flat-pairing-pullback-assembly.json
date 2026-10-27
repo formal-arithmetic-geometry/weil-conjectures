@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-flat-pairing-pullback-assembly",
+ "kind": "statement",
+ "title": "Abstract pullback assembly for pairings with a partial tensorator",
+ "statement": "Let C,E,D,F be monoidal categories, S:C to D, Sprime:E to F, U:C to E, and V:D to F functors, and gamma:S composed V to U composed Sprime a natural transformation. Let P,Pprime be predicates with U carrying P to Pprime, and mu,muprime tensor comparisons on their left P/Pprime factors, with muprime natural. Fix ordinary comparison delta:U(L tensor M) to U(L) tensor U(M), and comparison kappa:V(SL tensor SM) to V(SL) tensor V(SM). If the canonical mu/muprime square with gamma,delta,kappa commutes, then the corresponding square for arbitrary pairings f,g and arrows b,c,d commutes whenever U(f);d=delta;(b tensor c);g. No exactness or invertibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, functorial coherence of tensor pairings; elementary categorical assembly of the canonical comparison squares."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use gamma naturality on f. Apply Sprime to the ordinary pullback square, and replace its initial comparison by the assumed canonical tensorator square. Naturality of muprime moves b tensor c to the tensor factors. Tensor bifunctoriality combines these maps with the two gamma components.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Use gamma naturality on f. Apply Sprime to the ordinary pullback square, and replace its initial comparison by the assumed canonical tensorator square. Naturality of muprime moves b tensor c to the tensor factors. Tensor bifunctoriality combines these maps with the two gamma components."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and associativity of a tensor comparison on flat objects imply associativity of arbitrary pairings and naturality of pullback pairings",
+   "results": "8 hits, about closed functor comparisons and rigid tensor-hom naturality; none states assembly for a tensorator defined on a predicate of objects.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorHom\", \"map_comp\"",
+   "results": "One linear-algebra hit TensorProduct.homTensorHomMap_comp_map_lcomp, not a categorical partial tensorator assembly statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxMonoidal.*associativity|braiding_naturality|tensorHom_comp_tensorHom",
+   "results": "25 hits include graded-object tensor bifunctoriality and multifunctor coherence constructors. The generic tensorHom_comp_tensorHom_assoc identity is used in the pullback proof; none gives the whole predicate-restricted assembly.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison of functors satisfying a tensorator pullback square preserves arbitrary compatible pairings",
+   "results": "8 hits include Limits.prodComparison_natural, CartesianMonoidalCategory.prodComparisonBifunctorNatTrans, Functor.map_isPullback and categorical pullback constructors. These concern categorical limits or Cartesian comparisons; none gives the stated arbitrary pairing assembly from the canonical tensorator square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "The pullback diagram-chasing part of the canonical flat single tensorator compatibility argument.",
+   "via": [
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FlatPairingPullbackAssembly",
+  "file": "lean/Sheaf/CategoryTheory/FlatPairingPullbackAssembly.lean",
+  "declaration": "CategoryTheory.flatPairing_pullback_assembly",
+  "statement": "theorem flatPairing_pullback_assembly\n    {C : Type uC} {E : Type uE} {D : Type uD} {F : Type uF}\n    [Category.{vC} C] [Category.{vE} E] [Category.{vD} D] [Category.{vF} F]\n    [MonoidalCategory C] [MonoidalCategory E]\n    [MonoidalCategory D] [MonoidalCategory F]\n    (S : C ⥤ D) (S' : E ⥤ F) (U : C ⥤ E) (V : D ⥤ F)\n    (γ : S ⋙ V ⟶ U ⋙ S') (P : C → Prop) (P' : E → Prop)\n    (μ : ∀ L M : C, P L → (S.obj L ⊗ S.obj M ⟶ S.obj (L ⊗ M)))\n    (μ' : ∀ L M : E, P' L → (S'.obj L ⊗ S'.obj M ⟶ S'.obj (L ⊗ M)))\n    (δ : ∀ L M : C, U.obj (L ⊗ M) ⟶ U.obj L ⊗ U.obj M)\n    (κ : ∀ L M : C,\n      V.obj (S.obj L ⊗ S.obj M) ⟶ V.obj (S.obj L) ⊗ V.obj (S.obj M))\n    (hU : ∀ {L : C}, P L → P' (U.obj L))\n    (h_natural : ∀ {L L' M M' : E} (b : L ⟶ L') (c : M ⟶ M')\n      (hL : P' L) (hL' : P' L'),\n      (S'.map b ⊗ₘ S'.map c) ≫ μ' L' M' hL' = μ' L M hL ≫ S'.map (b ⊗ₘ c))\n    (h_pull : ∀ (L M : C) (hL : P L),\n      V.map (μ L M hL) ≫ γ.app (L ⊗ M) ≫ S'.map (δ L M) =\n        κ L M ≫ (γ.app L ⊗ₘ γ.app M) ≫ μ' (U.obj L) (U.obj M) (hU hL))\n    {L M N : C} {L' M' N' : E} (hL : P L) (hL' : P' L')\n    (f : L ⊗ M ⟶ N) (g : L' ⊗ M' ⟶ N')\n    (b : U.obj L ⟶ L') (c : U.obj M ⟶ M') (d : U.obj N ⟶ N')\n    (w : U.map f ≫ d = δ L M ≫ (b ⊗ₘ c) ≫ g) :\n    V.map (μ L M hL ≫ S.map f) ≫ γ.app N ≫ S'.map d =\n      κ L M ≫ (γ.app L ≫ S'.map b) ▷ V.obj (S.obj M) ≫\n        S'.obj L' ◁ (γ.app M ≫ S'.map c) ≫ (μ' L' M' hL' ≫ S'.map g)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 8 new nodes vs Lean; moved data decls byte-identical to clone item; axioms via scratch #print axioms; 3 SLOW importers vs published baselines; original FTSPP vs delivered build"
+ }
+}

@@ -1,0 +1,574 @@
+{
+ "id": "lem-sfb-ind-etale-galois-fibre-reconstruction",
+ "kind": "statement",
+ "title": "Algebra reconstruction from continuous profinite Galois fibres",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Let $k$ be a field with separable closure $\\Omega/k$ [def-pd-separable-closure], and let $G=\\operatorname{Aut}_k(\\Omega)$ have its Krull topology (finite-intermediate-field stabilizers are an identity neighbourhood basis). Use [def-weil-size-convention]. An ind-etale $k$-algebra is a filtered colimit of finitely presented etale $k$-algebras [def-weil-pbc-ind-etale-algebra]. For such an algebra $B$, equip $F_k(B)=\\operatorname{Hom}_{k\\text{-alg}}(B,\\Omega)$ with the inverse-limit topology of its restrictions to finite etale $k$-subalgebras, and with $g\\cdot f=g\\circ f$.\n\nFor any two ind-etale $k$-algebras $B,C$, precomposition induces a bijection\n$$\\operatorname{Hom}_{k\\text{-alg}}(C,B)\\ \\xrightarrow{\\sim}\\ \\operatorname{Cont}_G(F_k(B),F_k(C)),\\qquad \\alpha\\longmapsto(f\\longmapsto f\\circ\\alpha),$$\nwhere $\\operatorname{Cont}_G$ denotes continuous equivariant maps. This includes zero algebras: $F_k(0)=\\varnothing$.\n\nLet $P$ be any compact Hausdorff totally disconnected space with continuous left $G$-action. Index its finite $G$-invariant clopen partitions by refinement, and let $P_i$ be their finite quotient $G$-sets, with the empty partition allowed when $P=\\varnothing$. Choose finite etale $k$-algebras $A_i$ together with equivariant bijections $\\operatorname{Hom}_{k\\text{-alg}}(A_i,\\Omega)\\cong P_i$. There is a unique coherent system of algebra transition maps corresponding to the quotient maps. The filtered colimit $A=\\varinjlim_i A_i$ is ind-etale and carries a $G$-equivariant homeomorphism $F_k(A)\\cong P$ compatible with all the quotient projections. In particular, every such $P$ is realized by an ind-etale algebra, with its specified topology, and for the empty $P$ one may take $A=0$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10, p. 28: finite-stage factorization of morphisms and realization from invariant finite quotients."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-sfb-invariant-discrete-quotients"
+ ],
+ "proof": [
+  {
+   "text": "First work with finite etale algebras. By [lem-sc-finite-etale-algebra-criterion] each is a finite product $D=\\prod_{a\\in I}L_a$ of finite separable extensions, allowing $I=\\varnothing$ and $D=0$. The affine-spectrum dictionary [def-weil-affine-spectrum] identifies geometric points with algebra embeddings. A unital homomorphism $D\\to\\Omega$ sends the orthogonal factor idempotents to orthogonal idempotents of the field $\\Omega$ summing to $1$, so exactly one goes to $1$; it is uniquely an embedding of that factor. Thus $F_k(D)=\\coprod_a\\operatorname{Hom}_{k\\text{-alg}}(L_a,\\Omega)$ equivariantly. Each summand is finite, nonempty and transitive by [lem-exc-etale-field-galois-classification], and has open stabilizers. The same description shows that embeddings into $\\Omega$ separate elements of $D$: for unequal tuples choose an unequal coordinate and an embedding of its field, which is injective.",
+   "uses": [
+    "lem-sc-finite-etale-algebra-criterion",
+    "def-weil-affine-spectrum",
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, lemma-sheaves-point, finite orbit decomposition; algebra.tex Tag 00U3, lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "For finite etale $D=\\prod_a L_a$ and $E=\\prod_b M_b$, a map $E\\to D$ is one map $E\\to L_a$ for each $a$. The idempotent calculation of step 1 says that this is a choice of $b=b(a)$ and a field embedding $M_b\\to L_a$. An equivariant map $F_k(D)\\to F_k(E)$ likewise takes each transitive summand into a unique summand; the bijection on that pair of summands is exactly the full-faithfulness clause of [lem-exc-etale-field-galois-classification], interpreted by [def-weil-affine-spectrum]. This proves the finite-algebra Hom bijection, including empty products. Every finite continuous $G$-set $Q$ is a finite disjoint union of its nonempty orbits; applying the converse clause of that classification to each orbit and taking the product of the resulting fields realizes $Q$. This product is finite etale by [lem-sc-finite-etale-algebra-criterion]. Empty $Q$ gives the empty product $0$. Composition and identities correspond because both sides act by precomposition.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification",
+    "def-weil-affine-spectrum",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03QR, lemma-sheaves-point, equivalence on finite disjoint unions; algebra.tex Tag 00U3, lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "By [lem-sfb-field-geometric-fibre-construction], write each ind-etale algebra as the directed union of all its finite etale subalgebras. This applies since that node makes the spectrum of an ind-etale algebra weakly etale, affine and qcqs, and identifies its coordinate algebra with that directed union. Its fibre is the compatible-family inverse limit, with continuous $G$-action; for a nonzero algebra every projection onto a finite-stage fibre is surjective. In particular $F_k(B)$ is nonempty if $B\\ne0$. These fibres detect elements of $B$: put two elements in a common finite subalgebra, distinguish them by step 1, and lift the distinguishing embedding along the surjective fibre projection. Precomposition by any algebra homomorphism is already continuous and equivariant by the cited node.",
+   "uses": [
+    "lem-sfb-field-geometric-fibre-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.4 and 4.1.10, pp. 27–28, finite-subalgebra presentations and geometric fibres"
+   }
+  },
+  {
+   "text": "Assume $B\\ne0$. If $Q$ is a finite discrete continuous $G$-set and $v:F_k(B)\\to Q$ is continuous and equivariant, its fibres are open, so it is locally constant. Apply [lem-weil-pbc-profinite-limit-function-factorization] to the small cofiltered diagram of finite-stage fibres supplied by [lem-sfb-field-geometric-fibre-construction]. It gives a stage $B_j$ and $v_j:F_k(B_j)\\to Q$ with $v=v_j\\circ r_j$. This $v_j$ is automatically equivariant: for $y=r_j(x)$, surjectivity of $r_j$ gives $v_j(gy)=v(gx)=gv(x)=gv_j(y)$. No averaging or passage to a larger equivariant stage is required.",
+   "uses": [
+    "lem-weil-pbc-profinite-limit-function-factorization",
+    "lem-sfb-field-geometric-fibre-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, passage from pro-objects to continuous maps; finite-stage factorization supplied by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Let $u:F_k(B)\\to F_k(C)$ be continuous and equivariant, with $B\\ne0$ and $C\\ne0$. For each finite subalgebra $C_i$, compose with restriction to $F_k(C_i)$. Step 4 and the finite Hom bijection of step 2 give $\\alpha_i:C_i\\to B_j\\hookrightarrow B$ inducing that composite. This map is independent of the chosen stage and factorization: place two choices in a common finite subalgebra $B_l$; their induced maps on $F_k(B_l)$ agree after the surjection $F_k(B)\\to F_k(B_l)$, hence agree, and the finite Hom bijection makes the algebra maps equal. The same argument for $C_i\\subseteq C_{i'}$ gives $\\alpha_{i'}|_{C_i}=\\alpha_i$. Define $\\alpha(c)=\\alpha_i(c)$ at any stage containing $c$. Compatibility makes this well-defined; addition, multiplication, scalars and $1$ are preserved by placing finitely many elements in one stage. All restrictions of $f\\circ\\alpha$ equal those of $u(f)$, so $f\\circ\\alpha=u(f)$. If two algebra maps induce $u$, their values on every $c$ agree under every $f\\in F_k(B)$, hence are equal by the element detection of step 3. Together with the precomposition assertion of [lem-sfb-field-geometric-fibre-construction], this proves the required Hom bijection.",
+   "uses": [
+    "lem-sfb-field-geometric-fibre-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, explicit finite-stage assembly of morphisms"
+   }
+  },
+  {
+   "text": "For the essential-surjectivity construction, $G$ is profinite by [lem-sfb-field-geometric-fibre-construction]. Apply [lem-sfb-profinite-action-finite-quotients] to $P$. The invariant finite clopen partitions form a small nonempty directed refinement system, their block sets $P_i$ are finite continuous $G$-sets, their transition maps $q_{ji}:P_j\\to P_i$ are surjective, and $P\\cong\\varprojlim_iP_i$ equivariantly and homeomorphically. Choose $A_i$ and equivariant bijections $\\theta_i:F_k(A_i)\\to P_i$ using step 2. The finite Hom bijection gives a unique map $t_{ij}:A_i\\to A_j$ with $\\theta_i\\circ F_k(t_{ij})=q_{ji}\\circ\\theta_j$. The identity and composition equations for $q$ give those for $t$, by injectivity of the same Hom bijection. This proves uniqueness and coherence of the stipulated system.",
+   "uses": [
+    "lem-sfb-field-geometric-fibre-construction",
+    "lem-sfb-profinite-action-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, realization from the inverse system of finite invariant quotients"
+   }
+  },
+  {
+   "text": "Each $t_{ij}$ is injective. If $a,a'\\in A_i$ have the same image, then every embedding of $A_j$ into $\\Omega$ agrees on their images. Since $F_k(t_{ij})$ corresponds to the surjection $q_{ji}$, every embedding of $A_i$ agrees on $a,a'$; step 1 gives $a=a'$. Form the filtered algebra colimit $A$ as classes of pairs $(i,a)$, identifying two pairs when their images agree at some common later stage, with operations computed at a common stage. The injectivity just proved identifies the $A_i$ with subalgebras of $A$. Their union is $A$, and $A$ is ind-etale by [def-weil-pbc-ind-etale-algebra]. Every finite etale subalgebra $D\\subseteq A$ is contained in one $A_i$: choose a finite $k$-basis of $D$, put its finitely many elements in a common stage, and use that this stage is a $k$-subalgebra. Thus the chosen finite stages are cofinal among the finite subalgebras defining the fibre topology.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, algebra colimit of the finite quotient diagram"
+   }
+  },
+  {
+   "text": "Restrictions give a bijection $F_k(A)\\to\\varprojlim_iF_k(A_i)$: a compatible family $(f_i)$ defines the inverse homomorphism by $[(i,a)]\\mapsto f_i(a)$; compatibility proves well-definedness, and a common stage verifies every algebra operation. Give the right side its compatible-family subspace topology in the product of the finite discrete fibres. A subbasis consists of restrictions on single coordinates. On the left these are precisely finite-stage restrictions; conversely every finite-subalgebra restriction factors through some $A_i$ by step 7. Hence the bijection and its inverse are continuous. Its action is coordinatewise since $(g\\circ f)|_{A_i}=g\\circ(f|_{A_i})$. The coherent $\\theta_i$ identify this limit equivariantly and homeomorphically with $\\varprojlim_iP_i$. Compose with the inverse of the homeomorphism of [lem-sfb-profinite-action-finite-quotients] to obtain $F_k(A)\\cong P$. Its $i$-th projection is $\\theta_i\\circ(f\\mapsto f|_{A_i})$, which is the required compatibility with all quotient maps.",
+   "uses": [
+    "lem-sfb-profinite-action-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, geometric fibre of the algebra colimit with its inverse-limit topology"
+   }
+  },
+  {
+   "text": "Finally, if $B=0$, there is exactly one unital algebra map $C\\to B$, and exactly one map from $F_k(B)=\\varnothing$ to $F_k(C)$. If $B\\ne0$ and $C=0$, there is no unital map $C\\to B$, and no map from the nonempty $F_k(B)$ to $F_k(C)=\\varnothing$, by [lem-sfb-field-geometric-fibre-construction]. These settle all zero cases of the Hom assertion, including $B=C=0$. If $P=\\varnothing$, its only partition is empty; take its algebra to be $0$, so the colimit is $0$ and its fibre is empty. All quotient compatibilities are the unique empty maps. No nonempty-space assumption is needed in the result.",
+   "uses": [
+    "lem-sfb-field-geometric-fibre-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, empty affine scheme and empty profinite set"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-etale-algebra-criterion",
+  "def-weil-affine-spectrum",
+  "lem-exc-etale-field-galois-classification",
+  "lem-sfb-field-geometric-fibre-construction",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-sfb-profinite-action-finite-quotients",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent expansion of Example 4.1.10, p. 28; finite Galois correspondence from Stacks Tag 03QR and finite etale algebra structure from Tag 00U3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous equivariant maps between inverse limits of finite Galois sets correspond contravariantly to homomorphisms of ind etale field algebras and every profinite continuous action is realized this way",
+   "results": {
+    "t": "2026-10-22T06:05:55Z",
+    "tool": "leanfinder",
+    "query": "Continuous equivariant maps between inverse limits of finite Galois sets correspond contravariantly to homomorphisms of ind etale field algebras and every profinite continuous action is realized this way",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.algEquivToLimit",
+     "InfiniteGalois.limitToAlgEquiv",
+     "InfiniteGalois.limitToAlgEquiv_apply",
+     "InfiniteGalois.profiniteGalGrpIsoLimit",
+     "InfiniteGalois.continuousMulEquivToLimit",
+     "InfiniteGalois.mulEquivToLimit",
+     "InfiniteGalois.proj",
+     "InfiniteGalois.algEquivToLimit_continuous"
+    ],
+    "digest": "e71594f6c2ebbb14"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the ind-etale Hom bijection or realization of arbitrary profinite continuous actions; finite etale and Krull-limit results do not give this reconstruction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-22T06:05:35Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the ind-etale Hom bijection or realization of arbitrary profinite continuous actions; finite etale and Krull-limit results do not give this reconstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "(IndEtale|ind.etale).*(Galois|Profinite)|(Galois|Profinite).*(IndEtale|ind.etale)",
+   "results": {
+    "t": "2026-10-22T06:05:35Z",
+    "tool": "grep",
+    "query": "(IndEtale|ind.etale).*(Galois|Profinite)|(Galois|Profinite).*(IndEtale|ind.etale)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the ind-etale Hom bijection or realization of arbitrary profinite continuous actions; finite etale and Krull-limit results do not give this reconstruction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recover an ind finite etale algebra from its profinite set of embeddings into a separable closure using finite invariant clopen partitions",
+   "results": {
+    "t": "2026-10-22T06:05:35Z",
+    "tool": "leansearch",
+    "query": "Recover an ind finite etale algebra from its profinite set of embeddings into a separable closure using finite invariant clopen partitions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.of_isSeparable_aux",
+     "Algebra.FormallyEtale.of_isSeparable",
+     "Algebra.Etale.finitePresentation",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "Field.Emb.cardinal_separableClosure",
+     "Algebra.Etale",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "separableClosure"
+    ],
+    "digest": "eac6a548e2d66d5e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the ind-etale Hom bijection or realization of arbitrary profinite continuous actions; finite etale and Krull-limit results do not give this reconstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "factorThru|exists.*[Ff]actor|[Ff]actor.*[Ll]imit",
+   "results": {
+    "t": "2026-10-22T10:38:23Z",
+    "tool": "grep",
+    "query": "factorThru|exists.*[Ff]actor|[Ff]actor.*[Ll]imit",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean"
+    ],
+    "digest": "b89ef866f4a60992"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous map from a cofiltered limit of finite discrete spaces to a finite discrete space factors through a stage",
+   "results": {
+    "t": "2026-10-22T10:38:23Z",
+    "tool": "leansearch",
+    "query": "A continuous map from a cofiltered limit of finite discrete spaces to a finite discrete space factors through a stage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.exists_hom",
+     "Profinite.exists_locallyConstant_fin_two",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant",
+     "CategoryTheory.IsCofiltered.instHasLimitOfIsEventuallyConstant",
+     "Compactum.str_hom_commute",
+     "Profinite.isIso_asLimitCone_lift",
+     "Condensed.fintypeCatAsCofanIsColimit"
+    ],
+    "digest": "d9bf8b51248900ca"
+   },
+   "date": "2026-10-22",
+   "verdict": "generalization: finite-stage topological factorization is already the existing leaf lem-weil-pbc-profinite-limit-function-factorization, reused rather than duplicated"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"factor\"",
+   "results": {
+    "t": "2026-10-22T10:38:23Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"factor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "LightCondMod.factorsThru_lightProfinite_epi_of_epi",
+     "Profinite.NobelingProof.factors",
+     "Profinite.NobelingProof.factors_prod_eq_basis",
+     "Profinite.NobelingProof.factors_prod_eq_basis_of_eq",
+     "Profinite.NobelingProof.factors_prod_eq_basis_of_ne",
+     "Profinite.NobelingProof.GoodProducts.range_equiv_factorization",
+     "Profinite.NobelingProof.GoodProducts.smaller_factorization"
+    ],
+    "digest": "b0bb66ef839b8ac4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind etale field algebras are contravariantly equivalent to profinite continuous absolute Galois group actions",
+   "results": {
+    "t": "2026-10-22T10:38:24Z",
+    "tool": "leanfinder",
+    "query": "Ind etale field algebras are contravariantly equivalent to profinite continuous absolute Galois group actions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.asProfiniteGaloisGroupFunctor",
+     "InfiniteGalois.algEquivToLimit",
+     "InfiniteGalois.limitToAlgEquiv_apply",
+     "InfiniteGalois.limitToAlgEquiv",
+     "InfiniteGalois.algEquivToLimit_continuous",
+     "InfiniteGalois.profiniteGalGrpIsoLimit",
+     "InfiniteGalois.mulEquivToLimit",
+     "InfiniteGalois.profiniteGalGrp"
+    ],
+    "digest": "b60333cc07e11e00"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous equivariant maps from an inverse limit of finite continuous G sets with surjective transitions to a finite discrete G set factor equivariantly through a finite stage",
+   "results": {
+    "t": "2026-10-22T10:38:26Z",
+    "tool": "leanfinder",
+    "query": "Continuous equivariant maps from an inverse limit of finite continuous G sets with surjective transitions to a finite discrete G set factor equivariantly through a finite stage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.exists_lift_of_continuous",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_hom",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "ProfiniteGrp.toLimit_fun",
+     "CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Profinite.exists_locallyConstant_finite_aux"
+    ],
+    "digest": "16edb8f44cb01135"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma exists_hom|exists_locallyConstant",
+   "results": {
+    "t": "2026-10-22T10:39:01Z",
+    "tool": "grep",
+    "query": "lemma exists_hom|exists_locallyConstant",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/Extend.lean",
+     "Mathlib/Topology/Category/Profinite/Extend.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean"
+    ],
+    "digest": "2e8997008cc2ff89"
+   },
+   "date": "2026-10-22",
+   "verdict": "generalization: finite-stage topological factorization is already the existing leaf lem-weil-pbc-profinite-limit-function-factorization, reused rather than duplicated"
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite.exists_hom",
+   "results": {
+    "t": "2026-10-22T10:39:01Z",
+    "tool": "loogle",
+    "query": "Profinite.exists_hom",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Profinite.exists_hom"
+    ],
+    "digest": "4873512175e1b42e"
+   },
+   "date": "2026-10-22",
+   "verdict": "generalization: finite-stage topological factorization is already the existing leaf lem-weil-pbc-profinite-limit-function-factorization, reused rather than duplicated"
+  },
+  {
+   "tool": "grep",
+   "query": "(IndEtale|ind.etale).*(Galois|Profinite)|(Galois|Profinite).*(IndEtale|ind.etale)",
+   "results": {
+    "t": "2026-10-22T10:40:08Z",
+    "tool": "grep",
+    "query": "(IndEtale|ind.etale).*(Galois|Profinite)|(Galois|Profinite).*(IndEtale|ind.etale)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind etale algebras over a field are opposite to profinite sets with continuous absolute Galois group action",
+   "results": {
+    "t": "2026-10-22T10:40:08Z",
+    "tool": "leansearch",
+    "query": "Ind etale algebras over a field are opposite to profinite sets with continuous absolute Galois group action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Etale",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "Algebra.FormallyEtale",
+     "Field.absoluteGaloisGroup",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "Algebra.FormallyEtale.of_isSeparable_aux",
+     "Algebra.Etale.formallyEtale",
+     "Algebra.IsStandardEtale"
+    ],
+    "digest": "cfcfeac0c1acf097"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndEtale\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-22T10:40:09Z",
+    "tool": "loogle",
+    "query": "\"IndEtale\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms between filtered unions of finite etale algebras are determined by continuous equivariant maps on their sets of embeddings into a separable closure",
+   "results": {
+    "t": "2026-10-22T10:40:10Z",
+    "tool": "leanfinder",
+    "query": "Homomorphisms between filtered unions of finite etale algebras are determined by continuous equivariant maps on their sets of embeddings into a separable closure",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.Emb.Cardinal.embFunctor",
+     "StandardEtalePair.homEquiv",
+     "StandardEtalePair.hom_ext",
+     "StandardEtalePair.hom_ext_iff",
+     "galLiftEquiv_apply",
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "StandardEtalePair.homEquiv_apply_coe",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem"
+    ],
+    "digest": "a1840741458eaaa3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full ind-etale algebra reconstruction; finite-stage Galois group or standard-etale results supply only ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-profinite-galois-site",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input below the coefficient-topology comparison: geometric field-site presentation, before any derived or coefficient assertion. Re-split of lem-sfb-field-profinite-galois-site: returned proof steps 4–5 (finite-stage Hom reconstruction and realization).",
+   "via": [
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ind-etale-galois-fibre-reconstruction",
+  "worker": "stage1",
+  "summary": "Proved reconstruction by explicit finite-product Galois classification, equivariant finite-stage factorization, compatible algebra-map assembly and a direct topological colimit calculation. Reused existing nodes throughout; no new lemma restates either reconstruction clause. Checked empty algebras and empty partitions.",
+  "blueprint": "Realizes the inherited ancestor place: paragraph (3), separable-closure descent input, specifically the returned field-profinite-site proof steps 4–5 (finite-stage Hom reconstruction and realization). The inherited blueprint.from.node is null, as reported by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Finite separable field Galois classification is the generic finite-stage tool; this unit supplies no competing finite field classification."
+   },
+   {
+    "node": "lem-sc-finite-etale-algebra-criterion",
+    "why": "Finite etale algebras over a field are finite products of finite separable fields; used only as a generic algebraic structure tool."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-limit-function-factorization",
+    "why": "Generic factorization of locally constant maps from cofiltered profinite limits, already a Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-galois-classification",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-weil-pbc-profinite-limit-function-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-7fcf2d898",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-7fcf2d898 (reviewer sub-agent of L); spot-checked: Read the item and all 9 steps in full. The delivery has 0 new nodes and the statement is unchanged; the item is still unsplit on live and side-live, there is no repair note and no SGA anywhere. Source: Bhatt–Scholze Ex. 4.1.10 (p. 28), which gives no algebra-level argument, so proof_origin=agent is correct; Stacks 03QR and 00U3 are cited for the finite stage. I opened every cited statement. Steps 1–2: the idempotent decomposition gives F(D)=⊔F(L_a) as orbits; the finite Hom bijection is lem-exc full faithfulness with the contravariant direction checked; realization is the converse clause applied orbit by orbit, with the empty G-set giving 0. Step 3: the directed union, the fibre topology and the surjectivity for B≠0 are all clauses of the fibre-construction statement (C3 respected); element detection works by lifting an embedding. Step 4: the leaf Profinite.exists_locallyConstant applies to the compatible-family limit (a limit in Prof); equivariance of v_j follows from surjectivity of r_j. Step 5: independence and compatibility of α_i come from a common stage, surjectivity and injectivity of the step-2 bijection; uniqueness comes from element detection. Steps 6–8: the partition lemma applies since G is profinite. The unique coherent t_ij comes from the step-2 bijection. Each t_ij is injective because q_ji is surjective. Finite stages are cofinal by a basis argument. F(A)≅lim F(A_i)≅lim P_i≅P is a homeomorphism (the single-coordinate subbases match) and is compatible with the quotient maps. Step 9 handles the zero and empty cases. Tested: k separably closed (A=LC(P,k)), k=ℝ (ℂ and ℝ realize the free orbit and the point), zero algebras, P=∅. No duplicate: the geometric-field dense-subsite node covers algebraically closed K only, the tensor-fibres node covers LC(P,L) only, and the lem-wf Galois-category nodes concern covers of connected schemes. No cycle. Accepted tool_uses: lem-exc-etale-field-galois-classification and lem-sc-finite-etale-algebra-criterion, both generic algebra used as black boxes with no competing node in sk-thm-sf-ctf-stability; the profinite factorization node is a Mathlib leaf."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.IndEtaleGaloisFibreReconstruction",
+  "declaration": "FieldTheory.indEtaleGaloisFibrePrecomp_bijective",
+  "declarations": [
+   "FieldTheory.indEtaleGaloisFibreTopology",
+   "FieldTheory.IndEtaleGaloisFibreMap",
+   "FieldTheory.GaloisQuotientAlgebraSystem",
+   "FieldTheory.GaloisQuotientAlgebraSystem.diagram",
+   "FieldTheory.indEtaleGaloisFibre_precomp_continuous",
+   "FieldTheory.indEtaleGaloisFibrePrecomp",
+   "FieldTheory.indEtaleGaloisFibrePrecomp_bijective",
+   "FieldTheory.indEtaleGaloisFibre_reconstruction",
+   "FieldTheory.indEtaleGaloisFibre_zero"
+  ],
+  "file": "lean/Sheaf/FieldTheory/IndEtaleGaloisFibreReconstruction.lean",
+  "statement": "theorem indEtaleGaloisFibrePrecomp_bijective (k : Type u) (Ω : Type v) [Field k] [Field Ω] [Algebra k Ω] [IsSepClosure k Ω] (B : Type w) (C : Type z) [CommRing B] [Algebra k B] [CommRing C] [Algebra k C] (hB : (algebraMap k B).IndEtaleAcrossUniverses) (hC : (algebraMap k C).IndEtaleAcrossUniverses) : Function.Bijective (indEtaleGaloisFibrePrecomp k Ω B C hB hC)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Helpers define the fibre topology, continuous equivariant maps, canonical precomposition and coherent algebra systems belonging to this node. The additional theorem declarations state finite-stage existence, unique coherent reconstruction with every colimit and quotient compatibility, and zero-algebra realization. The existing invariant-partition definition is added to stmt_deps and imported directly; no new notion node is required. Maintainer review FIX (2026-10-24): the transition-system uniqueness of indEtaleGaloisFibre_reconstruction is stated in iff form, unique among all systems inducing the quotient maps, instead of an ∃! over the whole conjunction.",
+  "fixed_by": "NT-stage2-cc-16fdb3aee"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16fdb3aee",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Read item node and steps 1-9, stmt_deps (IsSepClosure, IndEtaleAcrossUniverses = IndEtale ∘ ulift, InvariantDiscreteQuotient, size convention), module, report (Worker report and Second reading present). The fibre topology (⨅ over finite étale subalgebras, discrete restrictions), Cont_G subtype, precomposition C→B and bijectivity over independent universes, hypotheses on P, refinement order and ofLE direction, θ equivariance via representatives, colimit and homeomorphism clauses, and zero/empty cases all match. The max u w realization universe is harmless. No duplicate decls. H3 FIX: reconstruction had ∃! t over (compat ∧ colimit ∧ reconstruction), so t was unique only among systems meeting all clauses; uniqueness from compat alone needs finite-étale point separation. Replaced by the iff form ∃ t, (∀ t', compat t' ↔ t' = t) ∧ …; step-2 proof docstring updated. fixes/IndEtaleGaloisFibreReconstruction.lean compiled via nt_compile --json: rc=0 in 6.2 s, no warnings. lean-record.json pins the main statement verbatim and adds a note; refit_record gave no refusals."
+ }
+}

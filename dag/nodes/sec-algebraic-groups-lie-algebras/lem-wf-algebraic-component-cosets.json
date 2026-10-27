@@ -55,7 +55,32 @@
   "lem-wf-affine-noetherian-components"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Matrix.GeneralLinearGroup.isClopen_connectedComponent_zeroLocus"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Matrix.GeneralLinearGroup.isClopen_connectedComponent_zeroLocus",
+     "module": "WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent",
+     "lines": [
+      220,
+      229
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-p-geometry",
  "lean": {
@@ -68,5 +93,49 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $G$ be a group scheme of finite type over an algebraically closed\nfield $L$ of characteristic zero, and let $G^\\circ$ be the connected\ncomponent of $G$ containing the identity. Then $G$ has finitely many\nconnected components. The identity component $G^\\circ$ is open, closed\nand irreducible, and it is a normal subgroup of $G$. The connected\ncomponents of $G$ are exactly the pairwise disjoint translates $gG^\\circ$\nwith $g\\in G(L)$, and multiplication of cosets makes\n\n$$\n\\pi_0(G)=G(L)/G^\\circ(L)\n$$\n\na finite group.\n\n*Complement.* For a closed algebraic subgroup\n$H\\subseteq\\operatorname{GL}(V)$ and its identity component $H^\\circ$ of\n[def-wf-algebraic-components], $H^\\circ$ is a closed, open, normal\nsubgroup, the connected components of $H$ are the cosets $hH^\\circ$, and\n$\\pi_0(H)=H/H^\\circ$ is a finite group.",
+  "proof": [
+   {
+    "text": "Cover $G$ by finitely many affine opens of finite type over $L$. Each has\nfinitely many irreducible components\n([lem-wf-affine-noetherian-components]), so $G$ has finitely many\nirreducible components. By Cartier's theorem [lem-ag-cartier-reduced],\n$G$ is smooth over $L$, so every local ring of $G$ is regular. Applying\n[lem-wf-smooth-components-disjoint] on each affine open, we see that two\ndistinct irreducible components of $G$ do not meet. Hence each\nirreducible component is closed and its complement, a finite union of\nthe other components, is closed as well. The irreducible components are\ntherefore open, closed and connected, so they are exactly the connected\ncomponents of $G$. In particular there are finitely many connected\ncomponents, and $G^\\circ$ is open, closed and irreducible.",
+    "uses": [
+     "lem-wf-affine-noetherian-components",
+     "lem-ag-cartier-reduced",
+     "lem-wf-smooth-components-disjoint"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $L$ is algebraically closed, a product of connected schemes of\nfinite type over $L$ is connected. The image of $G^\\circ\\times_LG^\\circ$\nunder multiplication is therefore connected and contains $1$, so it lies\nin $G^\\circ$; likewise the image of $G^\\circ$ under inversion lies in\n$G^\\circ$. Hence the open subscheme $G^\\circ$ is a subgroup scheme. For\n$g\\in G(L)$, the conjugation $c_g$ of [def-sc-group-scheme-translate] is\nan automorphism of $G$ fixing $1$ ([lem-sc-translation-automorphism]),\nso it preserves $G^\\circ$; thus $G^\\circ$ is normal.",
+    "uses": [
+     "def-sc-group-scheme-translate",
+     "lem-sc-translation-automorphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The left translation $L_g$ by $g\\in G(L)$ is an isomorphism\n([lem-sc-translation-automorphism]). It carries $G^\\circ$ onto a\nconnected open and closed subset containing $g$, which is therefore the\nconnected component of $g$. Every connected component is a nonempty\nclosed subset of a scheme of finite type over $L$, so it contains a\nclosed point, and closed points are $L$-points because $L$ is\nalgebraically closed ([lem-wf-affine-nullstellensatz-vanishing]). Hence\nthe connected components are exactly the translates $gG^\\circ$, and two\ntranslates are equal or disjoint. Two $L$-points lie in the same\ncomponent if and only if they lie in the same coset of $G^\\circ(L)$, so\nthe components correspond to $G(L)/G^\\circ(L)$. Normality makes coset\nmultiplication well defined, and finiteness of the set of components\nmakes this a finite group.",
+    "uses": [
+     "lem-sc-translation-automorphism",
+     "lem-wf-affine-nullstellensatz-vanishing"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the complement, a closed algebraic subgroup\n$H\\subseteq\\operatorname{GL}(V)$ is a reduced group scheme of finite type\nover $L$, and its identity component in the sense of\n[def-wf-algebraic-components] is the connected component of $1$; the\nstatement is the special case $G=H$.",
+    "uses": [
+     "def-wf-algebraic-components"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

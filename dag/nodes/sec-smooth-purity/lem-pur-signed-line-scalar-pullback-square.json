@@ -18,119 +18,52 @@
  ],
  "proof": [
   {
-   "text": "Write $A=f^{-1}R$, $B=f^{-1}S$, and $\\alpha=f^{-1}\\iota$. The supplied inverse image is geometric; its tensor structure is given by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the ringed-topos maps defined by $a$ and $b$. This supplies natural tensor isomorphisms $F_R(M\\otimes_R N)\\cong F_R(M)\\otimes_{R'}F_R(N)$, and similarly for $F_S$. The unit map is explicitly $F_R(R)=A\\otimes_A R'\\to R'$, $x\\otimes t\\mapsto a(x)t$, with inverse $t\\mapsto1\\otimes t$; likewise for $S$. These maps and tensor maps use the sheafified sectionwise tensor of [def-pur-sheaf-tensor-product]. Their normalization on pure tensors determines them, so their unit and reassociation identities are the equality of the corresponding products of scalar factors, by the balancing relations.",
+   "text": "Apply the one-line normalized existence theorem twice, to a,L,p and b,N,q. Pair the resulting families.",
    "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-normalized-signed-line-pullback-exists"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback; section-tensor-product, balanced tensor and unit formulas"
+    "place": "Tags 03EL (tensor pullback), 0GMX (internal-Hom pullback), 0FNY (finite free dual), 04J0 (localization); blueprint/latest prop-weil-twist-preserves.proof.md, tensor powers and internal Homs."
    }
   },
   {
-   "text": "For any $R$-module sheaf $M$, apply the tensor comparison also to the inverse image with target ring $A$. It identifies $f^{-1}(M\\otimes_R S)$ with $f^{-1}M\\otimes_A B$. The required reassociation is therefore\n$$\\Theta_M:(f^{-1}M\\otimes_A B)\\otimes_B S'\\longrightarrow(f^{-1}M\\otimes_A R')\\otimes_{R'}S',\\qquad (x\\otimes y)\\otimes t\\longmapsto(x\\otimes1)\\otimes b(y)t.$$\nIts inverse sends $(x\\otimes r')\\otimes t$ to $(x\\otimes1)\\otimes\\iota'(r')t$. The relation $b\\alpha=\\iota'a$ makes both formulas balanced over $A$; balancing over $B$ and $R'$ shows that both composites are the identity. The formulas induce sheaf morphisms by the sheafification in [def-pur-sheaf-tensor-product]. They are natural in $M$, since replacing $x$ by any module morphism's value commutes with both formulas.",
+   "text": "Apply scalar-square naturality to the given normalized families and signed scalar comparisons. This proves every required square.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-signed-line-scalar-pullback-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL (tensor pullback), 0GMX (internal-Hom pullback), 0FNY (finite free dual), 04J0 (localization); blueprint/latest prop-weil-twist-preserves.proof.md, tensor powers and internal Homs."
+   }
+  },
+  {
+   "text": "Uniqueness: apply adjunction injectivity and pure-tensor hom extensionality. Degree zero is the coefficient map, degree one is p; induction forces positive degrees. For each negative degree compose with homObjMap of the positive isomorphism. The evaluation normalization identifies both composites with the unique pullback pairing transfer of identity evaluation. Cancel this homObjMap, whose inverse is homObjMap of the inverse positive isomorphism. Apply function extensionality, Iso.ext and Prod.ext.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-pairing-transfer",
+    "def-pur-sheaf-hom",
+    "lem-pur-signed-line-scalar-tensor-tower"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL and section-tensor-product, scalar associativity formulas specialized to the commutative coefficient square"
-   }
-  },
-  {
-   "text": "Set $p_0$ equal to the unit map and $p_1=p$. For $n\\geq1$ define $p_{n+1}$ as the tensor comparison for $F_R(P^{[n]}\\otimes_R P)$ followed by $p_n\\otimes p$. Each map is an isomorphism, by induction. Define $q_n$ in precisely the same way with $F_S$ and $q$. This is the required positive recursion of [def-pur-sheaf-tensor-product]. On a covering where $P$ has basis $e$, $P^{[n]}$ has basis $e^{\\otimes n}$: the explicit maps $R\\otimes_R R\\rightleftarrows R$, $r\\otimes s\\mapsto rs$ and $r\\mapsto r\\otimes1$, give the assertion inductively. Thus each $P^{[n]}$ is finite locally free; the same argument applies to $Q,P',Q'$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL; section-tensor-product, recursive tensor powers and the rank-one multiplication chart"
-   }
-  },
-  {
-   "text": "For $n>0$ apply [lem-pur-ringed-site-finite-free-dual-pullback] to $L=P^{[n]}$ and the ring map $a$. The common size convention, finite limits, covering preservation and finite local freeness required there are exactly our hypotheses and step 3. Its evaluation-defined isomorphism is\n$$\\delta_R:F_R(P^{[-n]})\\xrightarrow{\\sim}\\mathcal Hom_{R'}(F_R(P^{[n]}),R').$$\nDefine $p_{-n}(z)=\\delta_R(z)\\circ p_n^{-1}$. Precomposition with an isomorphism is invertible, with inverse precomposition with $p_n$, directly from [def-pur-sheaf-hom]. Thus $p_{-n}$ is an isomorphism and\n$$\\operatorname{ev}(p_{-n}(z),p_n(w))=\\delta_R(z)(w)=F_R(\\operatorname{ev})(z\\otimes w),$$\nwith the tensor and unit maps of step 1 understood. The same construction for $Q^{[n]}$, $b$, and $q_n$ gives $q_{-n}$ and its evaluation identity. No general internal-Hom base-change theorem or flatness is used: the cited dual theorem expressly covers finite locally free sheaves and arbitrary coefficient maps.",
-   "uses": [
-    "lem-pur-ringed-site-finite-free-dual-pullback",
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMX, remark-pullback-internal-hom, evaluation comparison; Tag 0FNY, example-dual, finite free dual"
-   }
-  },
-  {
-   "text": "The degree-zero and degree-one maps are prescribed. Induction in the tensor recursion forces every positive map to equal the one in step 3. For $n>0$ the negative formula then forces the one in step 4. Equivalently, the evaluation identity determines the functional $p_{-n}(z)$ on every argument because $p_n$ is an isomorphism; equality on all local arguments is equality in the sheaf Hom of [def-pur-sheaf-hom]. This proves uniqueness of both families.",
-   "uses": [
-    "def-pur-sheaf-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMX, evaluation-defined map; internal Hom definition in section-internal-hom"
-   }
-  },
-  {
-   "text": "We will use bases on localized sites. For $V\\in\\mathcal C$, the induced $u_V:\\mathcal C/V\\to\\mathcal D/u(V)$ preserves finite limits and coverings: both are computed on underlying diagrams and covering families. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to this functor. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] globally and on these slices, with the restrictions of $a$ and $b$. This identifies the tensor-formula module functors used here as the left adjoints in [lem-pur-ringed-site-pullback-localization-universes]; that theorem's slice continuity hypothesis follows from covering preservation. Its comparison identifies $F_{R,V}(P|_V)$ with $(F_RP)|_{u(V)}$ and identifies the slice unit with the restricted global unit; similarly for $S$. Thus a trivialization on $V$ pulls to one on $u(V)$, and its basis pulls to the unit image of that basis, because the localized coefficient unit is the multiplication map of step 1.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pur-ringed-site-pullback-localization-universes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; Tag 03D7, lemma-adjoint-pullback-pushforward-modules"
-   }
-  },
-  {
-   "text": "Choose a covering $\\{V_i\\to1_{\\mathcal C}\\}$ trivializing $P$ and write $e$ for its basis on one member. Put $v=c(e\\otimes1)$, an $S$-basis of $Q$ there. The covering maps $u(V_i)\\to1_{\\mathcal D}$ cover by the assumptions on $u$. On each such member, let $\\widehat e$ and $\\widehat v$ denote the unit images in $F_R(P)$ and $F_S(Q)$, and put $e'=p(\\widehat e)$ and $v'=q(\\widehat v)$. These are bases by the unit-compatible localization comparison in step 6 and the coefficient units of step 1. The assumed degree-one square, with $\\Theta_P$, says $v'=c'(e'\\otimes1)$. Positive recursion sends $\\widehat {e^{\\otimes n}}$ to $(e')^{\\otimes n}$ and likewise for $v$. For negative powers the basis assertion of [lem-pur-ringed-site-finite-free-dual-pullback] sends the pulled dual basis to the dual of the pulled basis; precomposition with $p_n^{-1}$ sends it to the dual basis of $(e')^{\\otimes n}$, and likewise for $q_n$. Consequently $p_m,q_m$ send the corresponding signed bases to signed bases for every $m\\in\\mathbf Z$, including $m=0$.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-pur-ringed-site-finite-free-dual-pullback",
-    "def-pur-sheaf-tensor-product",
-    "lem-pur-ringed-site-pullback-localization-universes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMX and Tag 0FNY, pulled evaluation and dual bases; Tag 03EL, unit-normalized tensor comparison"
-   }
-  },
-  {
-   "text": "On these same charts, [lem-pur-signed-line-scalar-tensor-tower] gives $c_m(e^m\\otimes1)=v^m$ and $c'_m((e')^m\\otimes1)=(v')^m$ for every signed $m$. The common source of the proposed square, identified by $\\Theta_{P^{[m]}}$, is a free rank-one $S'$-module sheaf with generator $g=\\widehat {e^m\\otimes1}$. The left composite takes $g$ first to $\\widehat {v^m}$ and then to $(v')^m$. The right composite takes it to $(e')^m\\otimes1$ and then to $(v')^m$. Both maps are $S'$-linear, so on every section $t g$ their value is $t(v')^m$; hence they coincide on each localized chart. The sheaf uniqueness axiom makes them equal globally. This proves the square simultaneously in positive, zero and negative degree, with arbitrary $a,b,\\iota,\\iota'$; each calculation used only balancing or evaluation.",
-   "uses": [
-    "lem-pur-signed-line-scalar-tensor-tower",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Blueprint prop-weil-twist-preserves.proof.md, powers/internal-Homs and common finite stages; Tag 0GMX, evaluation normalization; signed scalar tensor tower local basis formula"
+    "place": "Tags 03EL (tensor pullback), 0GMX (internal-Hom pullback), 0FNY (finite free dual), 04J0 (localization); blueprint/latest prop-weil-twist-preserves.proof.md, tensor powers and internal Homs."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "lem-pur-normalized-signed-line-pullback-exists",
+  "lem-pur-signed-line-scalar-pullback-naturality",
+  "lem-pur-ringed-site-pullback-pairing-transfer",
   "def-pur-sheaf-hom",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pur-ringed-site-pullback-localization-universes",
   "lem-pur-signed-line-scalar-tensor-tower"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-  "place": "Tensor powers/internal Homs and common finite coefficient stages; explicit ringed-site naturality argument using Stacks 03EL, 0GMX, 0FNY."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "D6: separate existence and naturality; uniqueness is proved by adjunction, tensor recursion and the published unique pairing transfer."
  },
  "mathlib_searches": [
   {
@@ -306,5 +239,27 @@
   "group": "Q57",
   "result": "pass",
   "note": "lean.statement verbatim; 1 sorry, 2 non-hollow Prop helpers; docstrings with source, blueprint id and 8 proof steps; stmt_deps unchanged from stage 1. Clause check: a,b in adjoint form with _hab as the adjoint equation; F_R,F_S are Mathlib module pullbacks; local freeness via a CoversTop family with Type u index (no restriction); unit, degree-1, tensor-recursion and negative-evaluation normalizations and the square hold on images of local sections, which determine the morphisms; all m:ℤ; no flatness or invertibility. Edge cases m=0,±1, negatives, zero ring, empty cover, non-flat Z→Z/2, unit scalars λ^m. Advisories: signedLinePower and SignedLineComparisonNormalized are plain defs owned by the theorem node lem-pur-signed-line-scalar-tensor-tower (a stage-1 stmt_dep, not added here); proof-only imports; C and D share universes as in the recorded FiniteFreeDualPullback interface. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-929d5",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184859-L-3243522",
+  "kind": "interface",
+  "note": "independent cc review: relocated predicates vs clones/live item module (byte-identical); item proof + two split sorry statements vs nodes lem-pur-signed-line-scalar-pullback-square, lem-pur-normalized-signed-line-pullback-exists, lem-pur-signed-line-scalar-pullback-naturality; direct importers SignedLineDerivedBaseChange and IntegralTwistSchemeCompatibility compiled against the delivered modules"
  }
 }

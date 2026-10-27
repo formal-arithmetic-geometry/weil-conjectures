@@ -28,37 +28,36 @@
  ],
  "proof": [
   {
-   "text": "Apply the general proper-flat base-change theorem [lem-sc-proper-flat-right-adjoint-basechange] with Y'=X, g=f, and with the original morphism f:X\\to S. The resulting cartesian square is P=X\\times_S X with g_X=\\operatorname{pr}_1 and f'=\\operatorname{pr}_2. The hypotheses hold because S and X are Noetherian, while the given f is proper, flat, and of finite presentation.",
+   "text": "Let K be the degree-zero structure sheaf of S as an object of D_QCoh(S). Apply proper_flat_rightAdjoint_baseChange to g=f and f=f with the supplied right adjoints a,b and adjunctions adjA,adjB. Noetherian schemes supply the compact and quasi-separated instances. Obtain hβ and the isomorphism condition for β=dualityEquationBaseChangeMap f f a b adjA adjB hβ K. The preservation witnesses in the supplied adjunctions agree with those in the general theorem by proof irrelevance.",
    "uses": [
     "lem-sc-proper-flat-right-adjoint-basechange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E2P, proof of Lemma 48.12.8, cartesian square and invocation of Lemma 48.12.4 (Tag 0AAB)"
+    "place": "lemma-proper-flat-base-change (Tag 0AAB), specialized to the self-product"
    }
   },
   {
-   "text": "Under this specialization, a'=b is the chosen right adjoint to R(\\operatorname{pr}_2)_*, g^*=Lf^*, and g_X^*=L\\operatorname{pr}_1^*. Evaluating the canonical base-change isomorphism of Step 1 at K=\\mathcal O_S, and using the canonical structure-sheaf pullback isomorphism [lem-weil-pbc-module-pullback-structure-sheaf] for f, gives Lf^*\\mathcal O_S\\cong\\mathcal O_X and hence the canonical isomorphism b(\\mathcal O_X)\\cong L\\operatorname{pr}_1^*a(\\mathcal O_S).",
+   "text": "Use nonempty_derivedPullback_structureSheaf_iso f to identify Lf^*O_S[0] with O_X[0]. ObjectProperty.isoMk lifts this isomorphism to D_QCoh(X). Apply b.mapIso, invert, and compose with the inverse of asIso β. The result is b(O_X[0]) ≅ Lpr_1^*a(O_S[0]); proof irrelevance identifies the quasi-coherence witnesses with hLpr₁ and hOX in the conclusion.",
    "uses": [
-    "lem-sc-proper-flat-right-adjoint-basechange",
-    "lem-weil-pbc-module-pullback-structure-sheaf"
+    "lem-sc-derived-pullback-structure-sheaf-local"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E2P, proof of Lemma 48.12.8, third equality and Equation 48.12.8.1"
+    "place": "lemma-proper-flat-base-change (Tag 0AAB), evaluated at O_S; structure-sheaf identification as in cohomology.tex Tags 06YD and 06YJ"
    }
   }
  ],
  "proof_deps": [
   "lem-sc-proper-flat-right-adjoint-basechange",
-  "lem-weil-pbc-module-pullback-structure-sheaf"
+  "lem-sc-derived-pullback-structure-sheaf-local"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E2P, proof of Lemma 48.12.8, invoking Lemma 48.12.4"
+  "place": "lemma-proper-flat-base-change (Tag 0AAB), specialized to g=f and K=O_S; Lean specialization by C2, 2026-10-26"
  },
  "mathlib_searches": [
   {
@@ -115,7 +114,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dbu1815 (reviewer sub-agent of L); spot-checked: New node = Stacks 0AAB exactly (qcqs bases, f proper flat fp, a'(Lg^*K)=Lg_X^*a(K) on D_QCoh); no duplicate in DAG (grep 0AAB/48.12.4), not in Mathlib (no D_QCoh twisted inverse image); stmt_deps only defs, so no cycle with siblings. Step 1: Y'=X, g=f gives X'=X x_S X with g_X=pr_1, f'=pr_2, Noetherian implies qcqs; flatness of the original f is the 0AAB hypothesis (no separate Tor-independence needed), cited in Step 1. Step 2: a'=b, Lf^*O_S=f^*O_S=O_X via structure-sheaf node; target matches item. No repairs."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.DiagonalBaseChangeUpperShriek",
   "declaration": "AlgebraicGeometry.diagonal_baseChange_upperShriek",
@@ -133,5 +143,15 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261025T180512-L-3996404",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

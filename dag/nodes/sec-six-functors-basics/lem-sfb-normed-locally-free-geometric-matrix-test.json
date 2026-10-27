@@ -1,0 +1,461 @@
+{
+ "id": "lem-sfb-normed-locally-free-geometric-matrix-test",
+ "kind": "statement",
+ "title": "Continuous matrix detection for locally finite free normed coefficients",
+ "statement": "Work in compatible small-site and coefficient universes. Let $F$ be a normed field with totally disconnected metric topology, put $C_F(P)=C(P,F)$ for profinite $P$ [def-sfb-continuous-map-condensed-ring], and put $F_T=p_T^*C_F$ for every scheme $T$ [sk-def-sfb-pulled-back-coefficients]. Modules mean internal $F_T$-modules [sk-def-sfb-module-objects], with module inverse images as in [sk-def-sfb-module-pushforward-pullback]. Let $T$ be any scheme, and let $M,N$ be $F_T$-modules with finite constant local models [det-def-sfb-constructible-local-model]. For a morphism $h:M\\to N$, assume that for every algebraically closed field $k$ and geometric point $y:s=\\operatorname{Spec}k\\to T$ [def-weil-geometric-point], the $F$-linear map $\\Gamma(s,y^*h)$ is invertible, with scalars given by constant sections. Then $h$ is an isomorphism. More precisely, there is a common pro-etale covering $(U_j\\to T)_j$ and finite free models $M|_{U_j}\\cong F_{U_j}^{n_j}$, $N|_{U_j}\\cong F_{U_j}^{m_j}$. In these models $h|_{U_j}$ is a matrix $A_j$ with entries in $C(|U_j|,F)$, via the canonical coefficient realization. Its pullback to a geometric point over $u\\in|U_j|$ is the matrix $A_j(u)$. For each nonempty $U_j$ one has $m_j=n_j$ and $\\det A_j(u)\\ne0$ for every $u$; the continuous matrix $u\\mapsto(\\det A_j(u))^{-1}\\operatorname{adj}(A_j(u))$ defines an inverse to $h|_{U_j}$ compatible with restriction to every pro-etale object over $U_j$. Empty covering members impose no rank equality. No Noetherianity or stratification of $T$, and no completeness of $F$, is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and Section 3; agent continuous determinant/adjugate and covering descent argument (old step 6)."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-def-sfb-constructible-local-model",
+  "def-weil-geometric-point",
+  "def-weil-pbc-condensed-field-presentation-matrix",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite constant models of $M,N$. Their scalar ring is $C_F(*)=F$. The field clause of the scalar finite-basis lemma gives bases of every finitely presented model. The finite-power scalar-extension identifications therefore give finite free models. Refine the two covers by their fibre products; base change and composition of coverings give a common pro-etale cover. Restriction to a slice is sectionwise, so the specified bases restrict to bases on this refinement. The weakly etale localization identifies its slice site with the small site of each $U_j$. For the underlying abelian sheaves inverse image along an object of the site is restriction. Under continuous coefficient realization both restricted and intrinsic coefficient rings have sections $C(|V|,F)$ on $V\\to U_j$; their comparison is the identity there, by the normalized precomposition formula. Thus the ringed module inverse image in the statement agrees with these restrictions.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-scalar-finite-free-resolutions",
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "def-weil-pbc-proetale-site",
+    "def-pur-localized-ringed-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-normalized-continuous-set-comparison-coherence",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2, p.6; agent finite-free matrix proof and cover descent (Stacks sites.tex Tag 04TQ, lemma-glue-maps, for the final gluing)."
+   }
+  },
+  {
+   "text": "Use the internal/sectionwise module equivalence to read sections without changing them. Continuous coefficient realization is compatible with the ring operations: its naturality for continuous addition and multiplication, and its finite-product and unit compatibility, identify the pulled-back ring with the pointwise function ring. The finite-free Hom bijection now assigns to $h|_{U_j}$ a unique $m_j\\times n_j$ matrix $A_j$ in $C(|U_j|,F)$. On $v:V\\to U_j$ it acts by $b\\mapsto A_j\\circ|v|\\,b$, since its entries are the images of the global basis sections and restriction is precomposition.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2, p.6; agent finite-free matrix proof and cover descent (Stacks sites.tex Tag 04TQ, lemma-glue-maps, for the final gluing)."
+   }
+  },
+  {
+   "text": "Let $z:s=\\operatorname{Spec}k\\to U_j$ be a geometric point with image $u$, and put $y=(U_j\\to T)z$. Module pullback is additive and preserves finite biproducts. In the resulting coordinates $z^*F_{U_j}^{r}\\cong F_s^{r}$, each matrix entry pulls back to the constant $a_{ab}(u)$: the normalized coefficient adjunct is precomposition, and $|s|$ is a singleton. One can check this on $a_{ab}e_b$; functoriality and the finite biproduct identities then give all entries. Thus $\\Gamma(s,z^*(h|_{U_j}))$ has matrix $A_j(u)$ over $\\Gamma(s,F_s)=C(|s|,F)=F$. The inverse-image composition isomorphism identifies it with $\\Gamma(s,y^*h)$, so it is invertible by hypothesis.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-monoidal-finite-free-transport",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-normalized-continuous-set-comparison-coherence",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2, p.6; agent finite-free matrix proof and cover descent (Stacks sites.tex Tag 04TQ, lemma-glue-maps, for the final gluing)."
+   }
+  },
+  {
+   "text": "For every $u\\in|U_j|$, choose an algebraic closure $k$ of its residue field; the canonical $\\operatorname{Spec}k\\to U_j$ is a geometric point above $u$. Step 3 gives an invertible $F$-linear map $F^{n_j}\\to F^{m_j}$. The image of its standard basis is a basis, so invariance of finite basis cardinality gives $m_j=n_j$ whenever $U_j$ is nonempty. After this identification, the determinant criterion gives $\\det A_j(u)\\ne0$ for every $u$. No geometric-point lifting through a cover is needed: we choose the geometric point on $U_j$ itself.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point",
+    "def-weil-vector-space-dimension",
+    "lem-weil-endomorphism-invertible-iff-det-nonzero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2, p.6; agent finite-free matrix proof and cover descent (Stacks sites.tex Tag 04TQ, lemma-glue-maps, for the final gluing)."
+   }
+  },
+  {
+   "text": "For a nonempty $U_j$ apply the continuous adjugate inverse lemma to $X=|U_j|$ and $A_j$. It gives the continuous matrix $B_j(u)=(\\det A_j(u))^{-1}\\operatorname{adj}(A_j(u))$ with $A_jB_j=B_jA_j=I$. The Hom bijection turns $B_j$ into a morphism inverse to $h|_{U_j}$. On any $v:V\\to U_j$ the matrix is $B_j\\circ|v|$; substitution in both identities proves the two inverse identities on every section over $V$. This proves the requested restriction compatibility. If $n_j=0$, the determinant is $1$ and the matrices are empty. If $U_j$ is empty, every section group is zero by the sheaf condition for the empty covering, so the unique map between the two restricted modules is invertible even if their displayed ranks differ.",
+   "uses": [
+    "lem-sfb-continuous-adjugate-inverse",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2, p.6; agent finite-free matrix proof and cover descent (Stacks sites.tex Tag 04TQ, lemma-glue-maps, for the final gluing)."
+   }
+  },
+  {
+   "text": "The local inverses agree on overlaps: both are two-sided inverses to the restriction of $h$, and $g_1=g_1(hg_2)=(g_1h)g_2=g_2$. Apply the map-gluing clause of set-sheaf cover descent to their underlying sheaf maps. The glued map $g:N\\to M$ is additive and $F_T$-linear because the two equations for additivity and scalar multiplication hold after restriction to the cover and equality of sections is local. The identities $gh=1$ and $hg=1$ hold for the same reason. Transport $g$ back through the internal/sectionwise equivalence. This is the inverse of $h$. For empty $T$ the empty covering gives zero sheaves and the same conclusion.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and Remark 3.2, p.6; agent finite-free matrix proof and cover descent (Stacks sites.tex Tag 04TQ, lemma-glue-maps, for the final gluing)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "def-weil-pbc-proetale-site",
+  "def-pur-localized-ringed-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "lem-sfb-normalized-continuous-set-comparison-coherence",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-ringed-site-free-matrix-scalar-extension",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-monoidal-finite-free-transport",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-geometric-point",
+  "def-weil-vector-space-dimension",
+  "lem-weil-endomorphism-invertible-iff-det-nonzero",
+  "lem-sfb-continuous-adjugate-inverse",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and Remark 3.2, p.6 for the coefficient realization and finite models; explicit continuous-matrix inverse and gluing argument, with Stacks sites.tex Tag 04TQ, lemma-glue-maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of locally finite free sheaves of continuous functions into a totally disconnected normed field are isomorphisms if their matrices are invertible at all geometric points",
+   "results": {
+    "t": "2026-10-22T06:03:55Z",
+    "tool": "leanfinder",
+    "query": "Morphisms of locally finite free sheaves of continuous functions into a totally disconnected normed field are isomorphisms if their matrices are invertible at all geometric points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+     "PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply",
+     "PresheafOfModules.homEquivOfIsLocallyBijective",
+     "CategoryTheory.Sheaf.isLocallyBijective_iff_isIso",
+     "PresheafOfModules.homEquivOfIsLocallyBijective_apply",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf",
+     "CategoryTheory.Sheaf.isLocallyInjective_of_iso"
+    ],
+    "digest": "02e44d6d45b106b3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies continuous determinant/adjugate and matrix inverse formulas, but not their identification with geometric evaluation of these continuous coefficient module sheaves and descent of their inverse."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous matrix with everywhere nonzero determinant has a continuous inverse given by its adjugate divided by the determinant",
+   "results": {
+    "t": "2026-10-22T06:03:44Z",
+    "tool": "leansearch",
+    "query": "A continuous matrix with everywhere nonzero determinant has a continuous inverse given by its adjugate divided by the determinant",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Matrix.nonsing_inv_apply",
+     "Matrix.inv",
+     "Matrix.invOf_eq",
+     "Matrix.inv_def",
+     "Matrix.nonsing_inv_cancel_or_zero",
+     "Matrix.unitOfDetInvertible",
+     "Matrix.GeneralLinearGroup.mkOfDetNeZero.congr_simp",
+     "Matrix.invertibleOfDetInvertible"
+    ],
+    "digest": "3dfe4afd384f64a1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies continuous determinant/adjugate and matrix inverse formulas, but not their identification with geometric evaluation of these continuous coefficient module sheaves and descent of their inverse."
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, Matrix.inv",
+   "results": {
+    "t": "2026-10-22T06:03:44Z",
+    "tool": "loogle",
+    "query": "Continuous, Matrix.inv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies continuous determinant/adjugate and matrix inverse formulas, but not their identification with geometric evaluation of these continuous coefficient module sheaves and descent of their inverse."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*(matrix|adjugate)|[Ii]sIso.*(geometric|[Ff]iber|[Ff]ibre)",
+   "results": {
+    "t": "2026-10-22T06:03:44Z",
+    "tool": "grep",
+    "query": "continuous.*(matrix|adjugate)|[Ii]sIso.*(geometric|[Ff]iber|[Ff]ibre)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 21,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousOn.lean",
+     "Mathlib/Topology/ContinuousOn.lean",
+     "Mathlib/Topology/ContinuousOn.lean",
+     "Mathlib/Topology/ContinuousOn.lean",
+     "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+     "Mathlib/Topology/UniformSpace/Matrix.lean",
+     "Mathlib/Topology/UniformSpace/Matrix.lean",
+     "Mathlib/Topology/Constructions.lean"
+    ],
+    "digest": "c053463d8496e105"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies continuous determinant/adjugate and matrix inverse formulas, but not their identification with geometric evaluation of these continuous coefficient module sheaves and descent of their inverse."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric evaluation detects isomorphisms of locally free continuous field coefficient pro etale module sheaves",
+   "results": {
+    "t": "2026-10-22T06:03:56Z",
+    "tool": "leanfinder",
+    "query": "Geometric evaluation detects isomorphisms of locally free continuous field coefficient pro etale module sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.Etale.respectsIso",
+     "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app",
+     "RingHom.etale_iff_formallyUnramified_and_smooth",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "Algebra.FormallyEtale.iff_of_equiv",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "AlgebraicGeometry.IsEtale",
+     "Algebra.Etale.formallyEtale"
+    ],
+    "digest": "466b5f138e46d5a9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies continuous determinant/adjugate and matrix inverse formulas, but not their identification with geometric evaluation of these continuous coefficient module sheaves and descent of their inverse."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_det|continuousOn_inv|continuous.*adjugate|isUnit_iff_det",
+   "results": {
+    "t": "2026-10-22T12:02:24Z",
+    "tool": "grep",
+    "query": "continuous_det|continuousOn_inv|continuous.*adjugate|isUnit_iff_det",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean",
+     "Mathlib/Dynamics/TopologicalEntropy/Semiconj.lean",
+     "Mathlib/Dynamics/TopologicalEntropy/Semiconj.lean",
+     "Mathlib/Topology/Algebra/GroupWithZero.lean",
+     "Mathlib/Topology/Algebra/GroupWithZero.lean",
+     "Mathlib/Topology/Algebra/GroupWithZero.lean",
+     "Mathlib/Topology/Algebra/GroupWithZero.lean",
+     "Mathlib/Topology/Homotopy/Lifting.lean"
+    ],
+    "digest": "5a2b20107fb0cf22"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full internal continuous-coefficient geometric matrix assertion; hits cover ordinary sheaf/free-module tools or continuous matrix algebra only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, Matrix.det",
+   "results": {
+    "t": "2026-10-22T12:02:24Z",
+    "tool": "loogle",
+    "query": "Continuous, Matrix.det",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Continuous.matrix_det",
+     "Matrix.SpecialLinearGroup.continuous_apply"
+    ],
+    "digest": "fc9a2efa52bc178e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full internal continuous-coefficient geometric matrix assertion; hits cover ordinary sheaf/free-module tools or continuous matrix algebra only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A matrix of continuous functions into a normed field with everywhere nonzero determinant has continuous inverse",
+   "results": {
+    "t": "2026-10-22T12:02:25Z",
+    "tool": "leansearch",
+    "query": "A matrix of continuous functions into a normed field with everywhere nonzero determinant has continuous inverse",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.toContinuousLinearEquivOfDetNeZero",
+     "ContinuousLinearMap.coe_toContinuousLinearEquivOfDetNeZero",
+     "continuousAt_matrix_inv",
+     "NormedDivisionRing.to_continuousInv₀",
+     "ContinuousLinearMap.IsInvertible.contDiffAt_map_inverse",
+     "Matrix.GeneralLinearGroup.continuous_det",
+     "Continuous.inv₀",
+     "ContinuousLinearMap.toContinuousLinearEquivOfDetNeZero_apply"
+    ],
+    "digest": "f3774bcad292de4e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full internal continuous-coefficient geometric matrix assertion; hits cover ordinary sheaf/free-module tools or continuous matrix algebra only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finite free module sheaves of continuous functions into a normed field are isomorphic if a morphism induces invertible linear maps at every geometric point",
+   "results": {
+    "t": "2026-10-22T12:02:34Z",
+    "tool": "leanfinder",
+    "query": "Locally finite free module sheaves of continuous functions into a normed field are isomorphic if a morphism induces invertible linear maps at every geometric point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.ιFree_mapFree_inv_assoc",
+     "PresheafOfModules.homEquivOfIsLocallyBijective",
+     "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app",
+     "SheafOfModules.mapFree",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "SheafOfModules.freeHomEquiv_freeMap"
+    ],
+    "digest": "10f372778562fe01"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full internal continuous-coefficient geometric matrix assertion; hits cover ordinary sheaf/free-module tools or continuous matrix algebra only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-normed-geometric-fibres",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric norm-coefficient projection: Exact geometric fibres and constructible detection for continuous normed-field coefficients. Subargument: Example 3.1 and Section 3; agent continuous determinant/adjugate and covering descent argument (old step 6).",
+   "via": [
+    "lem-sfb-constructible-normed-geometric-fibres",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-locally-free-geometric-matrix-test",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused general continuous coefficient realization, normalized scheme pullback, internal finite-free Hom coordinates, scalar finite bases and map gluing. Wrote six steps: simultaneous trivializations, section matrices, geometric evaluation, rank/determinant, adjugate inverse, descent. One new Mathlib leaf packages continuous adjugate inversion with no completeness assumption. Empty covering members do not force equal ranks.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor prints None. Retained existing ancestry and place, following the parent finite-model conservativity matrix argument; the new leaf records this item at the front of via. Whole-blueprint searches found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Its finite-power and specified-basis comparisons turn scalar models into free coefficient sheaves."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the site over a cover member with the localized site."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Only its sets/abelian/ring inverse-image restriction assertion is used, not its constant-ring module clause."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Additivity and preservation of finite biproducts for the actual module inverse image."
+   },
+   {
+    "node": "lem-sfb-monoidal-finite-free-transport",
+    "why": "Tracks basis injections under the strong monoidal abelian inverse image."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic map gluing along arbitrary site coverings, followed by explicit local linearity checks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-monoidal-finite-free-transport",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-53a278010",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-53a278010 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the first split of a node Q33 created on 2026-10-22; it had no earlier proof and has no repair note, so it is not a re-split. The statement is unchanged. Tested cases: empty T or empty U_j (no rank equality), rank 0 (det 1), a rank-1 non-constant unit 1/a, and m≠n (impossible at a geometric point). Step 1: the local-model scalar ring is C(*,F)=F, so the field clause of the scalar finite-free node gives a basis, and the flatness-free clause of constant-finite-free-presentation-extension gives free models. Only clause 1 (sets, abelian groups, rings) of proetale-object-inverse-image-restriction is used. alpha_f in sk-def-sfb-coefficient-morphisms is the point-pullback composition comparison, so the coherence node reduces module pullback to restriction. Step 2: realization gives sections C(|V|,F) as a ring isomorphism, and the ringed-site matrix node gives the Hom/matrix bijection, composition to product and the sectionwise action. Step 3: additivity, transported biproduct maps, the adjunct being precomposition (a(u) on the one-point |s|) and the composition isomorphism. Step 4: algebraic closure of κ(u) gives a geometric point on U_j itself; basis cardinality gives m=n; the det criterion follows. Step 5: the new leaf applied on |U_j|. Step 6: map gluing plus a local linearity check. proof_deps equal the union of uses; no cycle (closure of 641 nodes); no SGA. New leaf lem-sfb-continuous-adjugate-inverse: Mathlib declarations checked in source (Continuous.matrix_det Matrix.lean:213, matrix_adjugate :239, Continuous.inv₀ GroupWithZero:126, Continuous.smul MulAction:136, mul_adjugate/adjugate_mul Adjugate:264/269, NormedDivisionRing.to_continuousInv₀ :170). Duplicate search found no match (Cramer identities, the algebraic adjugate node, the O_X minor-block node, p-adic free rank, lattice neighbourhoods). HRS Example 3.1 and Remark 3.2 (p.6) were read and match. The declared tool uses are generic black boxes; accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormedLocallyFreeGeometricMatrixTest",
+  "declaration": "AlgebraicGeometry.ProEtale.normed_locallyFree_geometric_matrix_test",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.matrixTestFreePullbackIso",
+   "AlgebraicGeometry.ProEtale.matrixTestFreePullbackMap",
+   "AlgebraicGeometry.ProEtale.matrixTestPullbackMatrix",
+   "AlgebraicGeometry.ProEtale.normed_locallyFree_geometric_matrix_test"
+  ],
+  "file": "lean/Sheaf/Paper/NormedLocallyFreeGeometricMatrixTest.lean",
+  "statement": "theorem normed_locallyFree_geometric_matrix_test (F : Type u) [NormedField F] [TotallyDisconnectedSpace F] (T : Scheme.{u}) (M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (condensedFieldCoefficientRingObj F) T)) (hM : HasFiniteConstantLocalModel (condensedFieldCoefficientRingObj F) T M) (hN : HasFiniteConstantLocalModel (condensedFieldCoefficientRingObj F) T N) (h : M ⟶ N) (hy : ∀ (k : Type u) [Field k] [IsAlgClosed k] (y : Spec (.of k) ⟶ T), Function.Bijective (((CondensedRing.upperStar (condensedFieldCoefficientRingObj F) y).map h).hom.hom.app (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))))) : IsIso h ∧ ∃ (𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage T) (n m : 𝒰.I₀ → ℕ) (eM : ∀ j : 𝒰.I₀, (CondensedRing.upperStar (condensedFieldCoefficientRingObj F) (𝒰.f j)).obj M ≅ Mod.finiteFree (condensedRingObj (condensedFieldCoefficientRingObj F) (𝒰.X j)) (n j)) (eN : ∀ j : 𝒰.I₀, (CondensedRing.upperStar (condensedFieldCoefficientRingObj F) (𝒰.f j)).obj N ≅ Mod.finiteFree (condensedRingObj (condensedFieldCoefficientRingObj F) (𝒰.X j)) (m j)), ∀ j : 𝒰.I₀, ∃ (d : Mod.finiteFree (condensedRingObj (condensedFieldCoefficientRingObj F) (𝒰.X j)) (n j) ⟶ Mod.finiteFree (condensedRingObj (condensedFieldCoefficientRingObj F) (𝒰.X j)) (m j)) (g : Mod.finiteFree (condensedRingObj (condensedFieldCoefficientRingObj F) (𝒰.X j)) (m j) ⟶ Mod.finiteFree (condensedRingObj (condensedFieldCoefficientRingObj F) (𝒰.X j)) (n j)) (A : Matrix (Fin (m j)) (Fin (n j)) C(𝒰.X j, F)) (B : Matrix (Fin (n j)) (Fin (m j)) C(𝒰.X j, F)), d = (eM j).inv ≫ (CondensedRing.upperStar (condensedFieldCoefficientRingObj F) (𝒰.f j)).map h ≫ (eN j).hom ∧ A = continuousFieldPresentationMatrix F (𝒰.X j) (condensedFieldContinuousMapIso F (𝒰.X j)).hom.hom d ∧ B = continuousFieldPresentationMatrix F (𝒰.X j) (condensedFieldContinuousMapIso F (𝒰.X j)).hom.hom g ∧ d ≫ g = 𝟙 _ ∧ g ≫ d = 𝟙 _ ∧ (∀ (k : Type u) [Field k] [IsAlgClosed k] (z : Spec (.of k) ⟶ 𝒰.X j) (x : Spec (.of k)) (a : Fin (m j)) (b : Fin (n j)), matrixTestPullbackMatrix F z d a b x = A a b (z x)) ∧ (∀ V : (𝒰.X j).ProEt, matrixTestPullbackMatrix F V.hom d = A.map (fun a ↦ a.comp V.hom.base.hom) ∧ matrixTestPullbackMatrix F V.hom g = B.map (fun b ↦ b.comp V.hom.base.hom) ∧ matrixTestFreePullbackMap F V.hom d ≫ matrixTestFreePullbackMap F V.hom g = 𝟙 _ ∧ matrixTestFreePullbackMap F V.hom g ≫ matrixTestFreePullbackMap F V.hom d = 𝟙 _) ∧ (Nonempty (𝒰.X j) → ∃ e : m j = n j, (∀ x : 𝒰.X j, ((A.map (fun a ↦ a x)).submatrix (Fin.cast e.symm) id).det ≠ 0) ∧ ∀ x : 𝒰.X j, (B.map (fun b ↦ b x)).submatrix id (Fin.cast e.symm) = (((A.map (fun a ↦ a x)).submatrix (Fin.cast e.symm) id).det)⁻¹ • ((A.map (fun a ↦ a x)).submatrix (Fin.cast e.symm) id).adjugate)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing canonical continuous-field realization and presentation matrix. CoefficientCheck.lean compiled the definitional equality of condensedFieldCoefficientRingObj F and the recorded continuousMapRingObjOfUniverse F. Global-section invertibility is expressed by bijectivity of its underlying map; module pullback already gives F-linearity for the constant-section action. Canonical finite-free pullback helpers have actual data. No new mathematical hypothesis or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a4b05ab1",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, item module, report, live owner sources. Statement matches node clause by clause: NormedField+TotallyDisconnectedSpace F, C_F via condensedFieldCoefficientRingObj (abbrev of continuousCoefficientRingObj, rfl-equal to continuousMapRingObjOfUniverse per worker probe), condensedRingObj, Mod internal modules, HasFiniteConstantLocalModel hM/hN, hy = bijective global sections of upperStar y at ProEt.mk (𝟙) for all alg closed k : Type u, IsIso h, common proetale cover with eM/eN finite-free models of actual inverse images, A/B via continuousFieldPresentationMatrix and canonical condensedFieldContinuousMapIso, geometric evaluation A(z x), restriction-compatible inverse for every V : (U_j).ProEt, Nonempty-guarded m=n, det≠0, B=det⁻¹•adj. Edge cases covered: empty T, empty members, rank 0, incomplete F. Helpers built from canonical maps (mapBiproduct/extendScalarsIsoComapInv/regularIsoOfIsIso) with no choices; proof sorry; docstrings ok; lean.statement verbatim; node diff vs live is only the two added stmt_deps. Mechanical theorem-stmt_dep finding: condensedFieldContinuousMapIso is the .exists.choose of the theorem's ∃! (CondensedFieldContinuousRealization.lean:499), so the statement genuinely depends on the theorem's conclusion (the landed def-weil-pbc-condensed-field-presentation-matrix cites it likewise) -> PASS on that point. No file changed, nothing compiled."
+ }
+}

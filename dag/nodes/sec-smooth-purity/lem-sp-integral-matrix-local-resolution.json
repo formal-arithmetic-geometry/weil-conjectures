@@ -1,0 +1,162 @@
+{
+ "id": "lem-sp-integral-matrix-local-resolution",
+ "kind": "statement",
+ "title": "A specified scalar resolution gives compatible local derived matrix models",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $S$, and a small site $(C,J)$ equivalent to $S_{\\mathrm{pro\\acute et}}$ with its induced topology [def-weil-pbc-proetale-site]. Use the concrete rings, functors, complexes and maps of [def-sp-integral-matrix-model-data]. Let $L$ be a $B$-module sheaf. Let $U\\in C$ and let $N$ be a finitely presented $A$-module such that $L|_U\\simeq(B\\otimes_{\\underline A}\\underline N)|_U$ [sk-def-sfb-constructible]. Given any finite matrix $d:A^a\\to A^b$ and $p:A^b\\to N$ with $d$ injective, $\\operatorname{im}(d)=\\ker(p)$ and $p$ surjective, there is an isomorphism $e_N:(B\\otimes_{\\underline A}\\underline N)|_U\\simeq L|_U$ such that the realized sequence $d,p$ composed with $e_N$ is short exact, and $\\operatorname{SimultaneousModels}(L,U,d)$ is inhabited. This statement makes no assertion about quotient cohomology, finite residues, global vanishing, or covering sieves.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J, 093M; sites-cohomology Tags 06YQ, 06YY, 0E8K and 07A6; original matrix-reduction steps 1--4, with the scalar resolution supplied as input"
+ },
+ "stmt_deps": [
+  "def-sp-integral-matrix-model-data",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "First compare reduction with restriction to a covering object $U$. Choose a flat-term K-flat resolution $P\\to L[0]$ by [lem-pc-kflat-resolution]. By [lem-sfb-ringed-site-restriction-kflat], $P|_U$ is K-flat and restriction is exact, so it resolves $L|_U[0]$. The pure-tensor comparison of [lem-sfb-localized-site-tensor-restriction], termwise with $B_n$ in degree zero, identifies $(P\\otimes_B B_n)|_U$ with $P|_U\\otimes_{B_U}(B_n)|_U$; the differentials agree by naturality. Applying [lem-pur-derived-change-of-rings] to these two resolutions proves $(L[0]\\otimes_B^LB_n)|_U\\cong L|_U[0]\\otimes_{B_U}^L(B_n)|_U$ in the localized coefficient derived category. This argument uses the actual restricted ring $B_U$, not a newly pulled-back completion; it is natural for every coefficient quotient map, since the tensor comparisons send $x\\otimes a$ to $x\\otimes a$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K (lemma-restriction-K-flat); Tag 06YY (lemma-derived-base-change), localized coefficient tensor comparison"
+   }
+  },
+  {
+   "text": "Start with the given injective matrix d, exact augmentation p and surjectivity of p. The exact constant functor of [lem-weil-pbc-finite-type-constant-exact] makes this an exact sequence on $S_{\\mathrm{proét}}$. By [lem-weil-pbc-completed-constant-sheaf-reduction] for $I=(\\ell)$, extension to $B$ is exact. Restrict this sequence to $U$ using [lem-sfb-ringed-site-restriction-kflat]. Tensor restriction [lem-sfb-localized-site-tensor-restriction] identifies its last term with the specified $B_U\\otimes_{\\underline A}\\underline N\\cong L|_U$. Its free terms are $B_U^u,B_U^v$: the mutually inverse identifications send $b\\otimes(a_i)$ to $(ba_i)$ and $(b_i)$ to $\\sum_i b_i\\otimes e_i$. Thus the differential is the single scalar matrix $d$, independent of $n$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-constant-exact",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); more-algebra.tex Tag 0AUW (lemma-dedekind-torsion-free-flat), scalar kernel resolution"
+   }
+  },
+  {
+   "text": "Put $K=[B_U^u\\xrightarrow d B_U^v]$ in degrees $-1,0$ with its specified augmentation to $L|_U[0]$. By [lem-sfb-ringed-finite-free-resolution-tensor] this augmentation is a quasi-isomorphism and $K$ is K-flat with flat terms. Derived change of rings [lem-pur-derived-change-of-rings] therefore computes reduction in $D((B_n)_U)$ by $K\\otimes_{B_U}(B_n)_U$. The free-basis tensor formulas in [lem-sfb-ringed-finite-free-resolution-tensor] identify its terms with $(B_n)_U^u,(B_n)_U^v$ and its differential with $(z_i)\\mapsto(\\sum_i\\overline d_{ki}z_i)_k$. Since $(B_n)_U=\\underline{A_n}_U$, this is the asserted constant matrix complex. Combined with step 1 it represents the originally stated restricted derived object, not merely its cohomology.",
+   "uses": [
+    "lem-sfb-ringed-finite-free-resolution-tensor",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), Tag 06YY (lemma-derived-base-change); fixed two-term matrix computation"
+   }
+  },
+  {
+   "text": "For $m\\le n$ let $q_{nm}:(B_n)_U\\to(B_m)_U$ be the specified coefficient quotient [sk-def-sp-coefficient-towers]. Keep this same augmented $K$ for every level. On this K-flat representative the quotient-induced arrow is $1_K\\otimes q_{nm}$: the normalized extension unit and its adjunct are respectively $x\\mapsto x\\otimes1$ and $x\\otimes a\\mapsto a\\,g(x)$ by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Taking $g(x)=x\\otimes1$ at level $m$ gives $x\\otimes a\\mapsto x\\otimes q_{nm}(a)$. Under the basis identifications this is entrywise reduction on both terms. It is a chain map since $q_{nm}(\\overline d_{ki}z)=\\overline d_{ki}\\,q_{nm}(z)$, and the quotient maps compose strictly. Thus the derived identifications respect all actual transitions simultaneously on the original cover, including identity transitions.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); quotient-induced transition computed with its normalized unit and adjunct"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "sk-def-sp-coefficient-towers",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J, 093M; sites-cohomology Tags 06YQ, 06YY, 0E8K and 07A6; original matrix-reduction steps 1--4, with the scalar resolution supplied as input; specialization of the original eight-step matrix-reduction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of module sheaves to slice commutes with homology and constant matrix cone homology is kernel and cokernel",
+   "results": "8 hits; restriction of complexes along index embeddings, scalar restriction, and abstract short-complex homology kernels.",
+   "date": "2026-10-25",
+   "verdict": "No theorem for the specified sectionwise ringed slice and derived matrix object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension computes a finite free resolution by reduced matrices compatible with all quotient transitions",
+   "results": "8 hits; ordinary algebra presentations and cotangent complexes.",
+   "date": "2026-10-25",
+   "verdict": "No derived ringed-site matrix comparison or all-quotient normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*quotient.*natCast|IsNoetherianRing.*Finite",
+   "results": "msearch grep returned 25 hits, mainly finite modules and Noetherian-ring instances; manual source searches also read mappingCone, homologyFunctorFactors, exact-functor, basisOfPid, exists_fin and finitePresentation_of_finite APIs.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete completed coefficient, derived quotient-square or slice-matrix homology interfaces; the available scalar algebra is proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLocalModelFiniteMatrixReduction",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sp-normalized-towers",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-tower-normalized",
+   "place": "Constructibility paragraph: Tags 093J, 093M; sites-cohomology Tags 06YQ, 06YY, 0E8K and 07A6; original matrix-reduction steps 1--4, with the scalar resolution supplied as input",
+   "via": [
+    "lem-sp-integral-local-model-finite-matrix-reduction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralMatrixLocalResolution",
+  "file": "lean/Sheaf/Paper/IntegralMatrixLocalResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralMatrix.local_resolution",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralMatrix.local_resolution"
+  ],
+  "statement": "theorem local_resolution (S : Scheme.{t}) (site : C ≌ S.ProEt) (topology : J = site.functor.inducedTopology (Scheme.ProEt.topology S)) (L : Modules J (completion l E J)) (U : C) (N : ModuleCat.{r} (Scalars l E)) (hN : HasFiniteScalarConstantModelOn J (Scalars l E) (completion l E J) (scalarMap l E J) L U N) {a b : ℕ} (d : Matrix (Fin b) (Fin a) (Scalars l E)) (p : (Fin b → Scalars l E) →ₗ[Scalars l E] N) (hd : Function.Injective (Matrix.toLin' d)) (hex : Function.Exact (Matrix.toLin' d) p) (hp : Function.Surjective p) : ∃ eN : ((model l E J).obj N).over U ≅ L.over U, ∃ hz : ((model l E J).map (ModuleCat.ofHom (Matrix.toLin' d))).over U ≫ ((model l E J).map (ModuleCat.ofHom p)).over U ≫ eN.hom = 0, (ShortComplex.mk (((model l E J).map (ModuleCat.ofHom (Matrix.toLin' d))).over U) (((model l E J).map (ModuleCat.ofHom p)).over U ≫ eN.hom) hz).ShortExact ∧ Nonempty (SimultaneousModels l E J L U d)",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c188",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T163916-L-898532",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c188",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T163916-L-898532",
+  "kind": "interface",
+  "note": "independent cc review: the delivered data module against the published item prefix (verbatim apart from blueprint tags and dropped plain imports); the item statement against the published one (identical); matrix_cohomology and local_resolution against their nodes and Stacks 093J/093M/06YQ (both true); a combined scratch compile with #print axioms (only the expected sorryAx)"
+ }
+}

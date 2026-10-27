@@ -1,0 +1,453 @@
+{
+ "id": "lem-sf-perfect-dual-pair-and-tate-stability",
+ "kind": "statement",
+ "title": "Perfect coefficient dual pairs and shifted Tate-line stability",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\ge1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, and a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Fix a six-functor datum [def-sf-datum], let $X$ be a finite-type $k$-scheme in its domain, and use the actual coefficient categories, tensor and internal Hom of [sk-def-sf-operations](i). Write $\\mathbf1=\\Lambda_X$, $H(P,M)=R\\mathcal Hom_X(P,M)$ and $P^\\vee=H(P,\\mathbf1)$. The integral unit and tensor are completed; the field categories are the specified rationalization and common finite-stage categories, respectively. All tensor constraints and symmetries below are those of these categories, including their cohomological signs.\n\nLet $P\\in\\Dctf(X,\\Lambda)$ be perfect, meaning dualizable as in [sk-def-perfect], equivalently site-perfect in the stage-specific sense of [def-weil-site-perfect-complex]. Let $m,s\\in\\mathbf Z$ and put $L=\\Lambda_X(m)[s]$ using [def-coefficient-twists-detailed]. Then $P^\\vee$ and $P^\\vee\\otimes L$ are perfect. The opposite-line evaluation maps give isomorphisms\n$$L\\otimes\\Lambda_X(-m)[-s]\\xrightarrow{\\sim}\\mathbf1,\\qquad \\Lambda_X(-m)[-s]\\otimes L\\xrightarrow{\\sim}\\mathbf1,$$\nand tensoring with these two shifted lines gives mutually inverse functors preserving the perfect objects.\n\nFor any dual pair $(P,Q,e,b)$ with $e:Q\\otimes P\\to\\mathbf1$ and $b:\\mathbf1\\to P\\otimes Q$ satisfying both triangle identities, the transpose of $e$ is an isomorphism $Q\\xrightarrow{\\sim}P^\\vee$ identifying $e$ with coefficient evaluation. Write $b_P:\\mathbf1\\to P\\otimes P^\\vee$ for the induced coevaluation. The canonical coefficient biduality\n$$j_P:P\\longrightarrow H(P^\\vee,\\mathbf1)=P^{\\vee\\vee},$$\ndefined as the transpose of $e_P\\circ\\sigma_{P,P^\\vee}$, is an isomorphism. Its inverse is the composite\n$$P^{\\vee\\vee}\\xrightarrow{b_P\\otimes1}P\\otimes P^\\vee\\otimes P^{\\vee\\vee}\\xrightarrow{1\\otimes(\\mathrm{ev}_{P^\\vee}\\circ\\sigma_{P^\\vee,P^{\\vee\\vee}})}P\\otimes\\mathbf1\\cong P.$$\nThese are assertions about the actual coefficient evaluation and dual-pair maps in each of the four stages, not only about an abstract isomorphism of objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+ },
+ "stmt_deps": [
+  "sk-def-sf-operations",
+  "def-sf-datum",
+  "sk-def-perfect",
+  "def-weil-site-perfect-complex",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Work in the actual coefficient tensor category specified in the statement. Its internal Hom is right adjoint to tensor, by clause (i) of sk-def-sf-operations; symmetry changes a left-tensor adjunction into the right-tensor convention used here. Choose a dual pair $(P,Q,e,b)$, possible by perfectness. The exact-pairing tensor adjunction gives $(-\\otimes P)\\dashv(-\\otimes Q)$. Compare this with $(-\\otimes P)\\dashv H(P,-)$. Counit-compatible uniqueness of right adjoints gives $N\\otimes Q\\xrightarrow{\\sim}H(P,N)$, whose untranspose is contraction with $e$. At $N=\\mathbf1$, its component (after the unitor) is exactly $a:Q\\to H(P,\\mathbf1)$, the transpose of $e$, and $e_P(a\\otimes1_P)=e$. Thus the assertion concerns the specified evaluation, not an unspecified object isomorphism.",
+   "uses": [
+    "sk-def-sf-operations",
+    "sk-def-perfect",
+    "lem-sfb-dual-tensor-adjunctions",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "Transport $b$ by $1_P\\otimes a$ to $b_P:\\mathbf1\\to P\\otimes P^\\vee$. In the first triangle substitute $e_P(a\\otimes1)=e$; it becomes the given first triangle. In the second conjugate the given identity of $Q$ by $a$, giving the identity of $P^\\vee$. Apply the symmetric-swap leaf to this exact pair: $P^\\vee$ has dual $P$, with evaluation $e_P\\sigma_{P,P^\\vee}$ and coevaluation $\\sigma_{P,P^\\vee}b_P$. In particular $P^\\vee$ is dualizable, hence perfect in the stated convention. This also follows on the actual coefficient site from prop-sf-dualizable, whose hypotheses are precisely the site-perfectness assumed for $P$; thus the dual lies in the required coefficient domain at each stage.",
+   "uses": [
+    "lem-sf-exact-pairing-symmetric-swap",
+    "sk-def-perfect",
+    "prop-sf-dualizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "Apply the right-adjoint comparison of step 1 to the swapped pair $(P^\\vee,P,e_P\\sigma,\\sigma b_P)$. Its unit-target component is the transpose of $e_P\\sigma$, namely the stated $j_P:P\\to H(P^\\vee,\\mathbf1)$, so $j_P$ is an isomorphism. This uses the actual closed adjunction of the coefficient category and proves invertibility of this map, without identifying an arbitrary bidual isomorphism with it.",
+   "uses": [
+    "lem-sfb-dual-tensor-adjunctions",
+    "det-sp-unique-right-adjoint",
+    "sk-def-sf-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "Put $D=P^{\\vee\\vee}$, $A=P^\\vee$, and $e'=\\mathrm{ev}_A\\sigma_{A,D}:A\\otimes D\\to\\mathbf1$. Define $r=(1_P\\otimes e')(b_P\\otimes1_D)$, with unitors and associators. Naturality of symmetry and the transpose equation $\\mathrm{ev}_A(j_P\\otimes1_A)=e_P\\sigma_{P,A}$ give $e'(1_A\\otimes j_P)=e_P$, since $\\sigma_{P,A}\\sigma_{A,P}=1$. Hence\n$$rj_P=(1_P\\otimes e_P)(b_P\\otimes1_P)=1_P.$$\nSince $j_P$ is already invertible, $r=j_P^{-1}$, and therefore also $j_Pr=1_D$. This is exactly the inverse displayed in the statement; no independent choice of evaluation or coevaluation is involved.",
+   "uses": [
+    "lem-sfb-braiding-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "The Tate line theorem gives local unit bases and opposite signed powers at all four stages; the twist-preservation theorem gives the finite-Tor domains and the opposite inverse twists. For the specified evaluations use more precise inputs: at finite coefficients the unbounded line-tensor theorem computes derived tensor by ordinary tensor with a flat line and identifies evaluation on a basis as $(au)\\otimes(bu^*)\\mapsto ab$. At integral coefficients apply the signed-line reduction/restriction theorem to $\\mathcal O_E(1)$: the local freeness and the finite locally constant reductions required there are provided by the Tate line theorem. It identifies the ordinary line evaluation with the evaluation for the actual quotient-tower completed tensor. Thus for every integer $m$, including negative $m$, the two degree-zero opposite-line evaluations are isomorphisms of the actual coefficient objects. Their inverses provide the corresponding coevaluations.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free",
+    "prop-weil-twist-preserves",
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-pur-integral-line-reduction-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "Insert the opposite shifts. The signed total-tensor comparison $t_{s,-s}$ identifies $\\Lambda(m)[s]\\otimes\\Lambda(-m)[-s]$ with $(\\Lambda(m)\\otimes\\Lambda(-m))[0]$; use $t_{-s,s}$ in the other order. Composing these isomorphisms with the evaluations of step 5 gives precisely the opposite shifted-line evaluations. On the shifted degree-zero line factors the multipliers of both $t$ maps are $(-1)^{s^2}=(-1)^s$, because the first-factor degrees are $-s$ and $s$, respectively. The inverse evaluation and the other evaluation therefore contribute cancelling scalars in either triangle. The degree-zero line triangle then proves the shifted one. At integral coefficients the completed tensor-shift theorem identifies these comparisons with the finite-level signed maps on the strict quotient tower (and its product-cone shift), so the same cancellation takes place in the specified completed category, rather than in an uncompleted substitute.",
+   "uses": [
+    "lem-pur-total-tensor-signed-coherence",
+    "lem-sf-completed-tensor-shift-right"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "For the field stages send the integral line, inverse line, evaluations and coevaluations through the prescribed raw rationalization, and then to a common finite coefficient field for $\\overline{\\mathbf Q}_\\ell$. The completed scalar-line coherence theorem identifies the scalar-extended signed-line evaluations with the prescribed ones; its evaluation equation ensures they agree at every further common field. Composition preserves the two inverse and triangle equations. More explicitly a rational arrow is a finite sum $\\sum f_i\\otimes a_i$; each naturality square is the corresponding sum of the integral squares, by bilinearity. At the common stage any square is represented at one common finite field, and the scalar coherence equation makes the resulting equality independent of its enlargement. Thus the preceding inverse maps and natural tensor equivalences are maps of the actual rational and common-stage categories. This passage is used only for the line maps; the arbitrary dual pair and its coefficient transpose were treated intrinsically in steps 1-4.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-completed-line-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  },
+  {
+   "text": "Write $L^-=\\Lambda_X(-m)[-s]$. For each $K$, reassociate $(K\\otimes L)\\otimes L^-$ and contract $L\\otimes L^-$; the opposite contraction gives $(K\\otimes L^-)\\otimes L\\cong K$. These maps are natural since tensor is a bifunctor; the line triangles proved above make the two tensor functors mutually inverse. Each line is site-perfect: locally it is a single shifted copy of the coefficient unit; its finite-Tor and constructible membership, and preservation of those domains, follow from twist preservation and the definition of finite Tor amplitude (a shift translates the bounding intervals). It is consequently dualizable. The tensor-pair leaf applied to any perfect object and $L$ or $L^-$ supplies an exact dual pair for its tensor, so both functors preserve perfect objects. Applying it to the perfect $P^\\vee$ proves the remaining assertion $P^\\vee\\otimes L$ perfect.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "sk-def-perfect",
+    "def-weil-finite-tor-amplitude",
+    "prop-weil-twist-preserves",
+    "lem-sf-exact-pairing-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-rationalization-karoubi",
+  "def-weil-site-perfect-complex",
+  "det-def-sp-tate-twist-locally-free",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-pur-integral-line-reduction-restriction",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-sf-exact-pairing-symmetric-swap",
+  "lem-sf-exact-pairing-tensor",
+  "lem-sfb-braiding-naturality",
+  "lem-sfb-dual-tensor-adjunctions",
+  "prop-sf-dualizable",
+  "prop-weil-twist-preserves",
+  "sk-def-perfect",
+  "sk-def-sf-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "last sentence, expanded using Stacks categories.tex Tags 0FFQ, 0FFS, 0FN8 and the existing coefficient signed-line results"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isInvertible.*shift|isDualizable.*tensor|Tate.*[Pp]erfect",
+   "results": "{\"t\": \"2026-10-22T06:47:43Z\", \"tool\": \"grep\", \"query\": \"isInvertible.*shift|isDualizable.*tensor|Tate.*[Pp]erfect\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsInvertible, CategoryTheory.IsDualizable",
+   "results": "{\"t\": \"2026-10-22T06:47:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsInvertible, CategoryTheory.IsDualizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.IsInvertible'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a perfect sheaf complex with shifted Tate line preserves perfectness and opposite Tate line and opposite shift give inverse tensor functors",
+   "results": "{\"t\": \"2026-10-22T06:47:54Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor a perfect sheaf complex with shifted Tate line preserves perfectness and opposite Tate line and opposite shift give inverse tensor functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Tor'_map_app\"], \"digest\": \"02f6895091725e77\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDual|tensorRightHomEquiv|HasRightDual",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"grep\", \"query\": \"rightDual|tensorRightHomEquiv|HasRightDual\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"2f09028dbbea70ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect coefficient sheaf complex in completed and scalar localized categories is canonically isomorphic to its coefficient double dual",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"leansearch\", \"query\": \"A perfect coefficient sheaf complex in completed and scalar localized categories is canonically isomorphic to its coefficient double dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.instIsReflecive\", \"LinearMap.IsPerfPair.dualEval\", \"LinearMap.IsPerfPair.id\", \"FGModuleCat.FGModuleCatDual_coe\", \"LinearMap.flip.instIsPerfPair\", \"LinearMap.toPerfPair\", \"CompleteLat.dualEquiv\", \"FGModuleCat.exactPairing\"], \"digest\": \"841b5839db50beda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shifted Tate line tensor and its inverse preserve perfect objects in adic sheaf derived categories",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"leansearch\", \"query\": \"Shifted Tate line tensor and its inverse preserve perfect objects in adic sheaf derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasShift.Induced.add_inv_app_obj\", \"CategoryTheory.Equivalence.IsTriangulated.symm\", \"CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedInverse\", \"DerivedCategory.instAdditiveShiftFunctorInt\", \"CategoryTheory.Equivalence.commShiftInverse\", \"CategoryTheory.shiftFunctorAdd_inv_app_obj_of_induced\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt\", \"CategoryTheory.NatTrans.CommShift.of_iso_inv\"], \"digest\": \"a5094dc28cc9c636\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.HasRightDual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasRightDual\", \"CategoryTheory.HasRightDual.rightDual\", \"CategoryTheory.RightRigidCategory.mk\", \"CategoryTheory.RightRigidCategory.rightDual\", \"CategoryTheory.hasRightDualUnit\", \"CategoryTheory.HasRightDual.mk\", \"CategoryTheory.hasLeftDualRightDual\", \"CategoryTheory.hasRightDualLeftDual\"], \"digest\": \"12127c8f9a4f6715\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In symmetric monoidal closed categories identify a chosen dual pair with internal Hom into the unit and identify its canonical evaluation transpose double dual map with the inverse built from coevaluation",
+   "results": "{\"t\": \"2026-10-22T06:48:41Z\", \"tool\": \"leanfinder\", \"query\": \"In symmetric monoidal closed categories identify a chosen dual pair with internal Hom into the unit and identify its canonical evaluation transpose double dual map with the inverse built from coevaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exp.ev_coev\", \"CategoryTheory.ihom.ev_coev\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.exp.coev_ev\", \"CategoryTheory.exp.ev_coev_assoc\", \"CategoryTheory.exp.coev_ev_assoc\", \"CategoryTheory.ihom.coev_ev\"], \"digest\": \"d0ff39e48f6edb15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse of a Tate twist shifted by an integer is the opposite Tate twist shifted by the negative integer on derived complete adic sheaf categories",
+   "results": "{\"t\": \"2026-10-22T06:48:41Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse of a Tate twist shifted by an integer is the opposite Tate twist shifted by the negative integer on derived complete adic sheaf categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftShortComplexFunctor'_inv_app_τ₁\", \"CochainComplex.shiftShortComplexFunctorIso_inv_app_τ₁\", \"CategoryTheory.TwistShiftData.shiftFunctorAdd'_inv_app\", \"CochainComplex.shiftEval_inv_app\", \"CochainComplex.shiftFunctorAdd_inv_app_f\", \"CochainComplex.shiftFunctorAdd'_inv_app_f'\", \"CochainComplex.shiftFunctorAdd'_inv_app_f\", \"CochainComplex.shiftShortComplexFunctor'_inv_app_τ₃\"], \"digest\": \"7800d557d1b4d5c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable complex is identified with its coefficient double dual by the transpose of evaluation, and tensoring its coefficient dual by an invertible shifted Tate line preserves perfectness at all adic coefficient stages",
+   "results": "{\"t\": \"2026-10-22T06:50:07Z\", \"tool\": \"leanfinder\", \"query\": \"A dualizable complex is identified with its coefficient double dual by the transpose of evaluation, and tensoring its coefficient dual by an invertible shifted Tate line preserves perfectness at all adic coefficient stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.exactPairing\", \"LinearMap.IsPerfPair.dualEval\", \"FGModuleCat.rightDual\", \"rTensor_injective_iff_lcomp_surjective\", \"FGModuleCat.FGModuleCatCoevaluation\", \"Module.Flat.iff_characterModule_baer\", \"FGModuleCat.rightRigidCategory\", \"Module.dual_projective\"], \"digest\": \"9d5fd461c9f43d2f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable object in a symmetric monoidal closed category has internal Hom dual and canonical evaluation biduality, and tensor with shifted Tate line preserves dualizability",
+   "results": "{\"t\": \"2026-10-22T07:55:21Z\", \"tool\": \"leanfinder\", \"query\": \"A dualizable object in a symmetric monoidal closed category has internal Hom dual and canonical evaluation biduality, and tensor with shifted Tate line preserves dualizability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.closedOfHasLeftDual\", \"FGModuleCat.rightRigidCategory\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.monoidalClosedOfLeftRigidCategory\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\"], \"digest\": \"53a40313e0a5e474\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactPairing|hasRightDualTensor|hasLeftDualRightDual",
+   "results": "{\"t\": \"2026-10-22T07:55:48Z\", \"tool\": \"grep\", \"query\": \"ExactPairing|hasRightDualTensor|hasLeftDualRightDual\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"07c94dc2d7459cbc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical internal Hom coefficient double dual morphism of a dualizable object in a symmetric monoidal category is invertible",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"leansearch\", \"query\": \"The canonical internal Hom coefficient double dual morphism of a dualizable object in a symmetric monoidal category is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DomAddAct.mk\", \"Module.Dual.instIsReflecive\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.leftDual_rightDual\", \"CategoryTheory.leftDualIso\", \"CategoryTheory.rightDual_leftDual\", \"CategoryTheory.rightDualIso\", \"Module.symm_dualMap_evalEquiv\"], \"digest\": \"01f952d3321b9906\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.exactPairing_swap",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.exactPairing_swap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.exactPairing_swap'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier, corrected by qualified-name searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted Tate coefficient lines have tensor inverse the opposite twist and opposite shift in completed and rational coefficient derived categories",
+   "results": "{\"t\": \"2026-10-22T07:56:25Z\", \"tool\": \"leanfinder\", \"query\": \"Shifted Tate coefficient lines have tensor inverse the opposite twist and opposite shift in completed and rational coefficient derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv\", \"CochainComplex.shiftShortComplexFunctor'_inv_app_τ₁\", \"CategoryTheory.CommShift₂Setup.int_ε\", \"CochainComplex.shiftShortComplexFunctorIso_inv_app_τ₁\", \"CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁\", \"CochainComplex.shiftShortComplexFunctor'_hom_app_τ₁\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv\", \"CochainComplex.shiftShortComplexFunctorIso_add'_hom_app\"], \"digest\": \"4b924c0128c6cd4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "grep",
+   "query": "instance ExactPairing.tensor|lemma ExactPairing.tensor_(co)?evaluation",
+   "results": "{\"t\": \"2026-10-22T07:57:18Z\", \"tool\": \"grep\", \"query\": \"instance ExactPairing.tensor|lemma ExactPairing.tensor_(co)?evaluation\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"4e32f5d7969e7110\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "grep",
+   "query": "def exactPairing_swap|coevaluation.*β_|evaluation.*β_",
+   "results": "{\"t\": \"2026-10-22T07:57:58Z\", \"tool\": \"grep\", \"query\": \"def exactPairing_swap|coevaluation.*β_|evaluation.*β_\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\"], \"digest\": \"2b22ccd0fc2b67d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor products of exact pairings in a monoidal category",
+   "results": "{\"t\": \"2026-10-22T07:57:19Z\", \"tool\": \"leansearch\", \"query\": \"Tensor products of exact pairings in a monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.term_⊗ᵢ_\", \"CategoryTheory.MonoidalCategory.tensor\", \"CategoryTheory.MonoidalCategoryStruct.tensorHom\", \"CategoryTheory.MonoidalCategoryStruct.tensorObj\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.tensorObj\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.tensorHom\", \"CategoryTheory.ExactPairing.mk\"], \"digest\": \"a0f9056ee799b72d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact pairing can be reversed in a braided monoidal category using the braiding",
+   "results": "{\"t\": \"2026-10-22T07:57:19Z\", \"tool\": \"leansearch\", \"query\": \"An exact pairing can be reversed in a braided monoidal category using the braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\", \"CategoryTheory.reverseBraiding\", \"CategoryTheory.ExactPairing.mk\", \"CategoryTheory.BraidedCategory.curriedBraidingNatIso_inv_app_app\", \"CategoryTheory.MonoidalCategory.externalProductSwap_inv_app_app\", \"CategoryTheory.BraidedCategory.hasLeftDualOfHasRightDual\", \"CategoryTheory.SymmetricCategory.reverseBraiding_eq\", \"CategoryTheory.Center.braiding_inv_f\"], \"digest\": \"069b88524a4f5721\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing",
+   "results": "{\"t\": \"2026-10-22T07:57:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ExactPairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing\", \"CategoryTheory.HasLeftDual.mk\", \"CategoryTheory.HasRightDual.mk\", \"CategoryTheory.HasLeftDual.exact\", \"CategoryTheory.HasRightDual.exact\", \"CategoryTheory.exactPairingUnit\", \"CategoryTheory.exactPairingCongrLeft\", \"CategoryTheory.exactPairingCongrRight\"], \"digest\": \"19c5e26a5da3d27b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of objects with exact evaluation coevaluation pairings has dual the reversed tensor product of the duals in a monoidal category",
+   "results": "{\"t\": \"2026-10-22T07:57:29Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor product of objects with exact evaluation coevaluation pairings has dual the reversed tensor product of the duals in a monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorRightAdjunction\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\"], \"digest\": \"a85a7d2cf595bd25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category swapping evaluation and coevaluation by the symmetry reverses an exact dual pairing",
+   "results": "{\"t\": \"2026-10-22T07:57:30Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal category swapping evaluation and coevaluation by the symmetry reverses an exact dual pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\", \"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation'\", \"CategoryTheory.ExactPairing.evaluation_coevaluation''\", \"CategoryTheory.ExactPairing.coevaluation_evaluation''\", \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"CategoryTheory.HasRightDual.exact\"], \"digest\": \"7623d9f7c744d0de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "grep",
+   "query": "def exactPairing_swap|coevaluation.*β_|evaluation.*β_",
+   "results": "{\"t\": \"2026-10-22T07:57:58Z\", \"tool\": \"grep\", \"query\": \"def exactPairing_swap|coevaluation.*β_|evaluation.*β_\", \"sub\": \"CategoryTheory/Monoidal/Rigid\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\"], \"digest\": \"2b22ccd0fc2b67d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.exactPairing_swap",
+   "results": "{\"t\": \"2026-10-22T07:57:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.BraidedCategory.exactPairing_swap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.BraidedCategory.exactPairing_swap\"], \"digest\": \"fff8e860baf66d74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing.tensor",
+   "results": "{\"t\": \"2026-10-22T08:00:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ExactPairing.tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.ExactPairing.tensor\", \"CategoryTheory.ExactPairing.tensor_evaluation\", \"CategoryTheory.ExactPairing.tensor_coevaluation\"], \"digest\": \"ea4c1f98729cc10e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizability is stable under tensor product, with evaluation obtained by contracting the inner pair then the outer pair",
+   "results": "{\"t\": \"2026-10-22T08:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"Dualizability is stable under tensor product, with evaluation obtained by contracting the inner pair then the outer pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.dualDistrib\", \"TensorProduct.dualDistrib_apply\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"transpose_dualTensorHom\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"comp_dualTensorHom\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\"], \"digest\": \"e667201b7cf330d7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item: generic exact-pairing matches are used as leaves; finite/complete/rational/common-stage coefficient evaluations remain an assembly argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-sf-dual-perfect",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-dual-perfect",
+   "place": "proof, last sentence: perfect coefficient dual and coefficient biduality; returned Steps 3–4, including inverse Tate line",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-perfect-dual-pair-and-tate-stability",
+  "worker": "stage1",
+  "summary": "Eight proof steps identify the coefficient dual by counit-compatible adjoint uniqueness, reverse its exact pairing, prove canonical biduality and its specified inverse, and construct evaluation-normalized shifted Tate inverse functors in all four stages. Added two generic exact-pairing Mathlib leaves; reused existing site-perfect and signed-line coefficient results. Statement unchanged.",
+  "blueprint": "Realizes sk-thm-sf-dual-perfect proof last sentence: perfect K^vee, stability under the opposite shifted Tate line, and coefficient biduality with its actual map; no orientation or purity construction is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-dual-tensor-adjunctions",
+    "why": "Generic exact-pairing adjunction used to identify the actual coefficient dual; no orientation or geometric route is substituted."
+   },
+   {
+    "node": "prop-sf-dualizable",
+    "why": "Site-perfect coefficient-dual closure, under exactly the four coefficient conventions of this item; this is a tool to ensure the actual dual lies in the specified domain."
+   },
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Construction and local rank-one model of the specified Tate line in all coefficient stages."
+   },
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Actual Tate twist preserves constructibility, completeness and finite-Tor intervals, used only for domain checks."
+   },
+   {
+    "node": "lem-pur-line-unbounded-derived-tensor",
+    "why": "Specified evaluation on a flat coefficient line, for the finite stage."
+   },
+   {
+    "node": "lem-pur-integral-line-reduction-restriction",
+    "why": "Evaluation-normalized passage from ordinary line tensor to the prescribed completed tensor."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Explicit opposite-shift tensor signs, used to prove the shifted inverse and triangle identities."
+   },
+   {
+    "node": "lem-sf-completed-tensor-shift-right",
+    "why": "Actual completed-tensor shift comparison, with strict finite-reduction and product-cone normalization."
+   },
+   {
+    "node": "lem-pur-completed-line-tensor-coherence",
+    "why": "Scalar extension preserves the specified signed-line evaluations; gives the field-stage normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-dual-tensor-adjunctions",
+  "prop-sf-dualizable",
+  "det-def-sp-tate-twist-locally-free",
+  "prop-weil-twist-preserves",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-integral-line-reduction-restriction",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-d4bc026cd",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-d4bc026cd (reviewer sub-agent of L); spot-checked: This is the first split of the Q120-created statement-only item; the statement is byte-identical and stmt_deps are unchanged. The 8 steps cover every clause. I recomputed: the counit-compatible right-adjoint uniqueness (lem-sfb-dual-tensor-adjunctions U_P⊣U_Q against the internal-Hom adjunction plus σ, then det-sp-unique-right-adjoint) gives Q≅P^∨ with e_P(a⊗1)=e; the swap leaf gives the exact pair (P^∨,P,e_Pσ,σb_P); j_P is invertible as the transpose for the swapped pair; e'(1⊗j_P)=e_P by braiding naturality and σ²=1, so r=j_P^{-1} is exactly the displayed inverse. For the shifts, the t_{s,−s} and t_{−s,s} scalars are both (−1)^{s²}=(−1)^s, and the triple-coefficient formulas of lem-pur-total-tensor-signed-coherence at (a,b,c)=(s,−s,s) agree. The integral stage uses lem-pur-integral-line-reduction-restriction, whose hypotheses prop-weil-twist-preserves supplies, together with lem-sf-completed-tensor-shift-right; the field stages use rationalization and lem-pur-completed-line-tensor-coherence. Both new Mathlib leaves match ExactPairing.tensor (Rigid/Basic.lean:140, reversed dual factors) and exactPairing_swap (Braided.lean:81: coev η≫β⁻¹, ev β≫ε, with β⁻¹=σ since the category is symmetric). Duplicate scans found nothing: the mathlib_match ExactPairing nodes, lem-pod-coefficient-dual-perfect (smooth X only), lem-sfb-ringed-site-perfect-duality (ordinary tensor only) and prop-sf-dualizable(-hom) are all narrower. No SGA is used. Batch-5: prop-sf-dualizable reaches lem-trf-site-functorial-flat-resolution, which only gives functorial flat resolutions on ringed sites (origin unit sk-thm-sf-compatibility). That is general homological algebra, not a step of the trace formula or of Poincaré duality, and prop-sf-dualizable is a general coefficient fact outside both assumptions, used here only as a domain check, so it is accepted. Advisory: membership of P^∨ in Dctf stays implicit, as the Q120 reader already noted. Small cases checked: P=0, P=1, empty X, m=0, s odd, characteristic 2."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PerfectDualPairAndTateStability",
+  "declaration": "WeilConjectures.sfPerfectDualPairAndTateStability",
+  "declarations": [
+   "WeilConjectures.sfCoefficientBidualInverse",
+   "WeilConjectures.SfPerfectDualPair",
+   "WeilConjectures.SfPerfectLinePair",
+   "WeilConjectures.SfLineUnitComparison",
+   "WeilConjectures.SfPerfectLineTransport",
+   "WeilConjectures.sfLineModules",
+   "WeilConjectures.sfShiftedLineComplex",
+   "WeilConjectures.sfSignedLinePairing",
+   "WeilConjectures.SfShiftedLineChainEvaluation",
+   "WeilConjectures.SfRingedShiftedLineEvaluation",
+   "WeilConjectures.SfNormalizedRingedLinePair",
+   "WeilConjectures.SfFinitePerfectLines",
+   "WeilConjectures.SfIntegralRationalPerfectLines",
+   "WeilConjectures.sfPerfectLineModels",
+   "WeilConjectures.SfCommonPerfectLines",
+   "WeilConjectures.sfPerfectDualPairAndTateStability"
+  ],
+  "file": "lean/Sheaf/Paper/PerfectDualPairAndTateStability.lean",
+  "statement": "theorem sfPerfectDualPairAndTateStability {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {n : ℕ} (S : SixFunctorDatum D C E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) (X : SixFunctorSpace D) : SfPerfectDualPair (S.finiteClosed X).closed (S.finiteClosed X).symmetric ∧ SfPerfectDualPair (S.integralClosed X).closed (S.integralClosed X).symmetric ∧ SfPerfectDualPair (S.rationalClosed X).closed (S.rationalClosed X).symmetric ∧ SfPerfectDualPair (S.commonClosed X).closed (S.commonClosed X).symmetric ∧ ∀ m s : ℤ, SfFinitePerfectLines S X m s ∧ SfIntegralRationalPerfectLines C.l E X.obj.left (sfPerfectLineModels S X) m s ∧ SfCommonPerfectLines S X (Padic.finiteCoefficientBase C.l C.Qbar) m s",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546e3c818",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Only the item lean field changed; stmt_deps byte-identical; statement verbatim. All four stages use the datum's closed domains with recorded IsDualizable. Dual-pair clause, transpose iso and evaluation compatibility, ringedSiteBidual IsIso and two-sided displayed inverse all present. Finite/integral lines pinned by equality to recorded twist lines shifted by s; rational/common lines are images under datum rationalization and common-stage inclusion. Evaluations pinned via K-flat model iso and right-unitor-normalized unit comparison, generator formula with (s*s).negOnePow, matching totalTensorShiftFormula for (s,-s,-s) and (-s,s,s). Mutually inverse pinned tensor functors, preservation of perfect objects, P^vee tensor L perfect. Edge cases n=1, m=0/±, odd s, char 2, P=0 OK. No hollow defs, only the theorem is sorry, docstrings and proof-dep imports OK, no pro-etale substitute. Advisories: sfSignedLinePairing repeats CompletedLineTensor.pairing for a general ring; some decls owned by nodes outside stmt_deps (ringedSiteBidual, purTwist*), stmt_deps unchanged from base; second reading is a short self-review."
+ }
+}

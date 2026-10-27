@@ -1,0 +1,286 @@
+{
+ "id": "lem-per-texact-system-triangle-coherence",
+ "kind": "statement",
+ "title": "Coherence of normalized cohomology and complete truncation triangles in t-exact systems",
+ "statement": "Let $I$ be a small nonempty directed poset [def-weil-size-convention]. For each $i\\in I$ let $\\mathcal C_i$ be a triangulated category [def-weil-triangulated-category] with a bounded t-structure [def-weil-t-structure]. For $i\\le j$ let $T_{j/i}:\\mathcal C_i\\to\\mathcal C_j$ be an exact functor with its specified shift comparison, preserving both halves in every degree. Assume $T_{i/i}=1$ and exact natural associators $a_{k,j,i}:T_{k/j}T_{j/i}\\cong T_{k/i}$ satisfying the unit and pentagon equations and commuting with shifts. Write $c^-_{j/i,r}:T_{j/i}\\tau_i^{\\le r}\\cong\\tau_j^{\\le r}T_{j/i}$ and $c^+_{j/i,r}:T_{j/i}\\tau_i^{\\ge r}\\cong\\tau_j^{\\ge r}T_{j/i}$ for the normalized comparisons of [lem-pod-texact-truncation-comparison], characterized by $\\iota c^-=T(\\iota)$ and $c^+T(\\pi)=\\pi$. Put $H_i^r(K)=(\\tau_i^{\\ge r}\\tau_i^{\\le r}K)[r]$, viewed as an object in the heart [lem-weil-heart-short-exact-triangles].\n\nFor either truncation $\\tau$, the comparisons obey\n$$c_{k/i,r,K}\\,a_{k,j,i,\\tau K}=\\tau_k(a_{k,j,i,K})\\,c_{k/j,r,T_{j/i}K}\\,T_{k/j}(c_{j/i,r,K}),$$\nand $c_{i/i,r}=1$. For each $T=T_{j/i}$ the triple $(c^-_{j/i,r,K},1_{TK},c^+_{j/i,r+1,K})$ is a natural isomorphism from the image under $T$ of the entire distinguished truncation triangle of $K$ to the truncation triangle of $TK$. Its third square is explicitly\n$$\\delta_{TK}c^+_{j/i,r+1,K}=(c^-_{j/i,r,K})[1]\\,\\sigma_{T,\\tau_i^{\\le r}K}\\,T(\\delta_K),$$\nwhere $\\delta$ is the truncation boundary and $\\sigma_T:T(-[1])\\cong(T-)[1]$ is the specified shift comparison. These isomorphisms commute with canonical changes of cutoff and obey the same identity and composition equations as $c$.\n\nComposing the two normalized truncation comparisons with the iterated shift comparison gives natural isomorphisms $h^r_{j/i}:T_{j/i}H_i^r\\cong H_j^rT_{j/i}$, with $h^r_{i/i}=1$ and\n$$h^r_{k/i,K}\\,a_{k,j,i,H_i^rK}=H_k^r(a_{k,j,i,K})\\,h^r_{k/j,T_{j/i}K}\\,T_{k/j}(h^r_{j/i,K}).$$\nAll assertions also hold for a single exact t-exact functor and are compatible with exact natural transformations between such functors. Here all triangle comparisons are comparisons in the triangulated categories, and $H^r$ is the degree-zero object, not an unshifted degree-$r$ complex.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.3.3(i),(ii), Proposition 1.1.9 and Corollary 1.1.10(ii), and 1.3.6: agent extraction of the normalized system-coherence argument of old proof steps 4–5, not a separately numbered theorem in BBD"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles",
+  "def-per-truncation-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct the single-functor comparison directly by Triangle.isoMk from the normalized eTruncLTIso, the identity, and eTruncGEIso. Their counit and unit equations give its first two squares. The proved upstream Functor.eTruncGEδLT_comm supplies the boundary square with the specified shift. Naturality follows componentwise from the naturality of the two truncation comparisons. This uses the existing upstream proof of BBD truncation uniqueness, so no appeal to the separate full-triangle comparison lemma is needed.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  },
+  {
+   "text": "For changes of cutoff, apply the proved upstream Functor.eTruncLT_map_app_eTruncLTIso_hom_app and Functor.eTruncGE_map_app_eTruncGEIso_hom_app at the morphism n ≤ m in EInt. The middle component of the canonical cutoff map is the identity. These three equalities prove equality of natural transformations of triangles componentwise.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  },
+  {
+   "text": "Apply cohomology_comparison_pasting to obtain the three heart memberships and the specified shifted double-truncation formula. Apply the transformation clause of texact_truncation_comparison to eta for its first and third components. Construct its triangle lift using eta on each vertex: naturality gives the first two squares and NatTrans.shift_app_comm gives the last. Componentwise equality proves the full comparison square. Apply truncationCohomologyComparison_naturality for the final cohomology square.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "lem-a1-cohomology-comparison-pasting",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  },
+  {
+   "text": "For a system associator a, apply the composition clause of texact_truncation_comparison to the actual normalized comparisons for T_ij followed by T_jk. Apply its transformation clause to a and substitute those composition formulas, obtaining both system truncation equations. Applying the transformation clause to eqToIso(unit) and then its identity clause gives the diagonal truncation equations.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  },
+  {
+   "text": "The diagonal equality of underlying functors does not by itself identify their shift structures. Substitute T_ii = id in the left unit law at (i,i). The associator is then the identity on vertices. Its shift equation says s_n followed by s_n equals s_n, where s_n is the specified diagonal shift comparison. Cancel the invertible s_n to conclude s_n = id. Thus eqToIso(unit) commutes with the specified shift and the canonical identity shift. Lift it by Functor.mapTriangleIso and follow by Functor.mapTriangleIdIso. Its three components are precisely eqToIso(unit) on the vertices. The diagonal truncation equations identify its value on each truncation triangle with the stated composite.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  },
+  {
+   "text": "Choose the single-functor comparisons for each transition using the proved single-functor theorem. The cutoff equations are those already proved there. For the system triangle composition equation, the first and third components are the system truncation equations and the middle is the associator. Functor.mapTriangleCompIso has identity components, so componentwise extensionality proves the equality of triangle morphisms.",
+   "uses": [
+    "lem-pod-texact-truncation-comparison",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  },
+  {
+   "text": "Apply truncationCohomologyComparison_naturality to the shift-compatible associator a and replace the composite comparison using truncationCohomologyComparison_comp. This is the cohomology system law. For the diagonal law use the shift compatibility of eqToIso(unit) established above, then cohomology naturality and truncationCohomologyComparison_id with its canonical identity shift structure.",
+   "uses": [
+    "lem-a1-cohomology-comparison-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-a1-cohomology-comparison-pasting",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "BBD 1.3.3(i),(ii), 1.3.4--1.3.6 and 1.1.9--1.1.10; agent assembly of normalized comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(trunc.*(comparison|[Cc]omposition|[Aa]ssociator)|t[Ee]xact.*(triangle|[Hh]omology)|[Hh]omology.*[Aa]ssociator)",
+   "results": "18 hits: Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "T-exact functor truncation triangle comparison including connecting arrow coherent with composition associator and cohomology",
+   "results": "8 hits: CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₃, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₁, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Triangulated.TStructure.triangleLTGE_map_hom₃, CategoryTheory.Triangulated.TStructure.triangleLTGE_map_hom₁; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.bounded, CategoryTheory.Triangulated.TStructure.minus, CategoryTheory.Triangulated.TStructure.plus, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a coherent system of exact t-exact functors, normalized truncation and cohomology comparison isomorphisms respect associators and identify all three arrows of truncation triangles",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Functor.comp_homologySequenceδ_assoc, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₃, CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.Functor.homologySequence_comp_assoc, CochainComplex.πTruncGE_naturality_assoc; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact t-exact functor commutes with the full standard truncation triangle including its connecting morphism, and the cohomology isomorphisms are compatible with composition and natural transformations",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.IsHomological.mk', DerivedCategory.triangleOfSESIso, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso; ",
+   "date": "2026-10-22",
+   "verdict": "no match: individual truncation/heart constructions do not state this system coherence or simultaneous finite-stage realization"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*(comparison|associator)|[Ii]sTExact|[Tt]Exact",
+   "results": "1 hits: Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these are t-structure/truncation or homological-functor primitives, not the normalized system, boundary, cutoff and shifted-heart coherence assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact t-exact functors commute with truncation triangles and cohomology compatibly with composition",
+   "results": "8 hits: CategoryTheory.ExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CochainComplex.truncate, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.ExactFunctor.of, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Triangulated.TStructure.truncLT",
+   "date": "2026-10-22",
+   "verdict": "no match: these are t-structure/truncation or homological-functor primitives, not the normalized system, boundary, cutoff and shifted-heart coherence assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.bounded, CategoryTheory.Triangulated.TStructure.minus, CategoryTheory.Triangulated.TStructure.plus, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le",
+   "date": "2026-10-22",
+   "verdict": "no match: these are t-structure/truncation or homological-functor primitives, not the normalized system, boundary, cutoff and shifted-heart coherence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical truncation functor comparisons respect changes of cutoff and identify the connecting morphism of distinguished triangles",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.truncGEδLT, ComplexShape.Embedding.ιTruncLENatTrans, ComplexShape.Embedding.πTruncGENatTrans, ComplexShape.Embedding.truncLE'Functor_map, ComplexShape.Embedding.ιTruncLENatTrans_app, CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₃, CategoryTheory.Triangulated.TStructure.triangleLTGE_map_hom₁, ComplexShape.Embedding.truncGE'Functor_map",
+   "date": "2026-10-22",
+   "verdict": "no match: these are t-structure/truncation or homological-functor primitives, not the normalized system, boundary, cutoff and shifted-heart coherence assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized truncation triangle and heart cohomology comparisons for exact t-exact functors are coherent with composition associators and natural transformations",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.homologySequence_comp_assoc, CategoryTheory.Functor.comp_homologySequenceδ_assoc, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.homologySequenceδ_comp_assoc, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Triangulated.TStructure.truncGEδLT",
+   "date": "2026-10-22",
+   "verdict": "no match: these are t-structure/truncation or homological-functor primitives, not the normalized system, boundary, cutoff and shifted-heart coherence assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLT|truncGE|triangleLTGE",
+   "results": "21 hits: Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these are t-structure/truncation or homological-functor primitives, not the normalized system, boundary, cutoff and shifted-heart coherence assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-common-stage-truncations",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: “$Lf^*$ is exact (the cohomology sheaves of $Lf^*K$ are the pullbacks of those of $K$)” and “the pullback of a constructible sheaf has support the preimage”; supplies the degree-zero and fibre inputs, without any smoothness or dimension estimate. Re-split allocation: returned proof steps 3–5 of lem-per-adic-heart-pullback-fibres. Re-split of common-stage-truncations old steps 4–5; full boundary square and cohomology tower equations.",
+   "via": [
+    "lem-per-adic-common-stage-truncations",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-texact-system-triangle-coherence",
+  "worker": "stage1",
+  "summary": "Q86 assembled six proof steps from four existing abstract comparison/heart lemmas and the triangulated-category axioms. No new nodes. Expanded cutoff factorizations and their TR3 boundary square, preserved the shifted heart convention, and checked system associators and exact natural transformations. All cited statements have verbatim quotations in citations.json.",
+  "blueprint": "Ancestor lem-per-smooth-pullback-t-exact, first proof paragraph (ordinary cohomology of pullback); allocation through common-stage-truncations old steps 4–5 as recorded in blueprint.from.place: normalized comparisons, full boundary squares and cohomology system equations. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic normalized t-exact truncation comparisons, naturality and composition; the curve-Fourier unit has no corresponding abstract tool."
+   },
+   {
+    "node": "lem-pod-texact-truncation-triangle-comparison",
+    "why": "Generic full-triangle comparison including the specified shift and connecting arrow; independent of the geometric unit route."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic truncation adjunctions used to construct and identify cutoff maps; no geometric theorem is substituted."
+   },
+   {
+    "node": "lem-a1-cohomology-comparison-pasting",
+    "why": "Generic shifted-heart comparison formula and its naturality/composition, specialized to the supplied system associators; no Fourier or purity route is changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-a1-cohomology-comparison-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-a5134d929",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-a5134d929 (reviewer sub-agent of L); spot-checked: No new nodes. The statement is unchanged from NI's unsplit statement, and the item had no base proof or re-split note. stmt_deps match the statement's citations, proof_deps equal the union of the step uses, and there is no cycle. Steps: 1) the composition, naturality (η=a) and identity clauses of lem-pod-texact-truncation-comparison give the system equation; types checked. 2) lem-pod-texact-truncation-triangle-comparison (m=r) gives the triple (c⁻,1,c⁺), its last square with the specified σ and naturality; composites are componentwise via step 1, and exactness of a is used. 3) Cutoff maps u, v come from the heart-lemma adjunctions (C≤r⊂C≤s; τ≥s+1K∈C≥r+1). The comparison squares were verified via ι_s and via T(π_r) = (c⁺)⁻¹π_{TK}. 4) TR3 on (u,1) gives w; the left adjunction forces w=v, so the cutoff triple is a triangle morphism. 5) The a1-cohomology-comparison-pasting q-formula is exactly h^r; naturality and composition (with composite shift comparisons, a exact) give the equation. For h_{i/i}=1, the unit associator's exactness forces σ=1, which is accepted. 6) Exact η: the third square follows from η's shift equation. Source: BBD 1.3.3(i),(ii) on printed pp. 29–30, plus 1.1.9/1.1.10 and 1.3.6, read; no SGA. Edge cases: trivial poset, zero category, r=s, out-of-range cutoffs, and K=A[−r] in D^b(Ab), which gives H^r=A in the heart with the [r] shift. Batch-5 flag: lem-pod-texact-truncation-triangle-comparison is an abstract t-structure lemma with generic stmt_deps and no proof_deps; it is not given by either assumption and is not a step of the trace formula or Poincaré duality, so the citation is accepted (same as Q93/Q76 for lem-pod-texact-truncation-comparison). The four generic tool_uses are accepted. Advisory: a1-pasting's last sentence and lem-a1-texact-coefficient-stage-descent overlap the item's system clauses (pre-existing, not a delivery fault)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.TExactSystemTriangleCoherence",
+  "declaration": "CategoryTheory.Triangulated.TStructure.texact_system_triangle_coherence",
+  "declarations": [
+   "CategoryTheory.Triangulated.TStructure.texact_triangle_cutoff_coherence",
+   "CategoryTheory.Triangulated.TStructure.texact_system_triangle_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/TExactSystemTriangleCoherence.lean",
+  "statement": "theorem texact_system_triangle_coherence {I : Type uI} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (C : I → Type uC) [∀ i : I, Category.{vC} (C i)] [∀ i : I, Preadditive (C i)] [∀ i : I, HasZeroObject (C i)] [∀ i : I, HasShift (C i) ℤ] [∀ (i : I) (n : ℤ), (shiftFunctor (C i) n).Additive] [∀ i : I, Pretriangulated (C i)] [∀ i : I, IsTriangulated (C i)] (t : ∀ i : I, TStructure (C i)) (_bounded : ∀ i : I, (t i).bounded = ⊤) (T : ∀ (i j : I), i ≤ j → C i ⥤ C j) [∀ (i j : I) (hij : i ≤ j), (T i j hij).CommShift ℤ] [∀ (i j : I) (hij : i ≤ j), (T i j hij).IsTriangulated] [∀ (i j : I) (hij : i ≤ j), (T i j hij).IsTExact (t i) (t j)] (unit : ∀ i : I, T i i le_rfl = 𝟭 (C i)) (a : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), T i j hij ⋙ T j k hjk ≅ T i k (hij.trans hjk)) [∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), NatTrans.CommShift (a i j k hij hjk).hom ℤ] (_unitLeft : ∀ (i j : I) (hij : i ≤ j), a i i j le_rfl hij = Functor.isoWhiskerRight (eqToIso (unit i)) (T i j hij) ≪≫ Functor.leftUnitor (T i j hij)) (_unitRight : ∀ (i j : I) (hij : i ≤ j), a i j j hij le_rfl = Functor.isoWhiskerLeft (T i j hij) (eqToIso (unit j)) ≪≫ Functor.rightUnitor (T i j hij)) (_pentagon : ∀ (i j k l : I) (hij : i ≤ j) (hjk : j ≤ k) (hkl : k ≤ l) (K : C i), (T k l hkl).map ((a i j k hij hjk).hom.app K) ≫ (a i k l (hij.trans hjk) hkl).hom.app K = (a j k l hjk hkl).hom.app ((T i j hij).obj K) ≫ (a i j l hij (hjk.trans hkl)).hom.app K) : (∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (r : ℤ) (K : C i), (a i j k hij hjk).hom.app (((t i).truncLE r).obj K) ≫ ((T i k (hij.trans hjk)).eTruncLTIso (t i) (t k) (r + 1 : ℤ)).hom.app K = (T j k hjk).map (((T i j hij).eTruncLTIso (t i) (t j) (r + 1 : ℤ)).hom.app K) ≫ ((T j k hjk).eTruncLTIso (t j) (t k) (r + 1 : ℤ)).hom.app ((T i j hij).obj K) ≫ ((t k).truncLE r).map ((a i j k hij hjk).hom.app K) ∧ (a i j k hij hjk).hom.app (((t i).truncGE r).obj K) ≫ ((T i k (hij.trans hjk)).eTruncGEIso (t i) (t k) (r : ℤ)).hom.app K = (T j k hjk).map (((T i j hij).eTruncGEIso (t i) (t j) (r : ℤ)).hom.app K) ≫ ((T j k hjk).eTruncGEIso (t j) (t k) (r : ℤ)).hom.app ((T i j hij).obj K) ≫ ((t k).truncGE r).map ((a i j k hij hjk).hom.app K)) ∧ (∀ (i : I) (r : ℤ) (K : C i), ((T i i le_rfl).eTruncLTIso (t i) (t i) (r + 1 : ℤ)).hom.app K ≫ ((t i).truncLE r).map ((eqToIso (unit i)).hom.app K) = (eqToIso (unit i)).hom.app (((t i).truncLE r).obj K) ∧ ((T i i le_rfl).eTruncGEIso (t i) (t i) (r : ℤ)).hom.app K ≫ ((t i).truncGE r).map ((eqToIso (unit i)).hom.app K) = (eqToIso (unit i)).hom.app (((t i).truncGE r).obj K)) ∧ (∃ e : ∀ (i j : I) (hij : i ≤ j) (n : ℤ), (t i).triangleLTGE n ⋙ (T i j hij).mapTriangle ≅ T i j hij ⋙ (t j).triangleLTGE n, (∀ (i j : I) (hij : i ≤ j) (n : ℤ) (K : C i), ((e i j hij n).hom.app K).hom₁ = ((T i j hij).eTruncLTIso (t i) (t j) (n : ℤ)).hom.app K ∧ ((e i j hij n).hom.app K).hom₂ = 𝟙 ((T i j hij).obj K) ∧ ((e i j hij n).hom.app K).hom₃ = ((T i j hij).eTruncGEIso (t i) (t j) (n : ℤ)).hom.app K) ∧ (∀ (i j : I) (hij : i ≤ j) (n m : ℤ) (hnm : n ≤ m), Functor.whiskerRight ((t i).natTransTriangleLTGEOfLE n m hnm) (T i j hij).mapTriangle ≫ (e i j hij m).hom = (e i j hij n).hom ≫ Functor.whiskerLeft (T i j hij) ((t j).natTransTriangleLTGEOfLE n m hnm)) ∧ (∀ i : I, ∃ uT : (T i i le_rfl).mapTriangle ≅ 𝟭 (Triangle (C i)), (∀ A : Triangle (C i), (uT.hom.app A).hom₁ = (eqToIso (unit i)).hom.app A.obj₁ ∧ (uT.hom.app A).hom₂ = (eqToIso (unit i)).hom.app A.obj₂ ∧ (uT.hom.app A).hom₃ = (eqToIso (unit i)).hom.app A.obj₃) ∧ ∀ (n : ℤ) (K : C i), uT.hom.app (((t i).triangleLTGE n).obj K) = (e i i le_rfl n).hom.app K ≫ ((t i).triangleLTGE n).map ((eqToIso (unit i)).hom.app K)) ∧ ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (n : ℤ) (K : C i), (Functor.mapTriangleIso (a i j k hij hjk)).hom.app (((t i).triangleLTGE n).obj K) ≫ (e i k (hij.trans hjk) n).hom.app K = (Functor.mapTriangleCompIso (T i j hij) (T j k hjk)).hom.app (((t i).triangleLTGE n).obj K) ≫ (T j k hjk).mapTriangle.map ((e i j hij n).hom.app K) ≫ (e j k hjk n).hom.app ((T i j hij).obj K) ≫ ((t k).triangleLTGE n).map ((a i j k hij hjk).hom.app K)) ∧ (∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (r : ℤ) (K : C i), (a i j k hij hjk).hom.app (((t i).truncGELE r r ⋙ shiftFunctor (C i) r).obj K) ≫ (truncationCohomologyComparison (t i) (t k) (T i k (hij.trans hjk)) r).hom.app K = (T j k hjk).map ((truncationCohomologyComparison (t i) (t j) (T i j hij) r).hom.app K) ≫ (truncationCohomologyComparison (t j) (t k) (T j k hjk) r).hom.app ((T i j hij).obj K) ≫ ((t k).truncGELE r r ⋙ shiftFunctor (C k) r).map ((a i j k hij hjk).hom.app K)) ∧ (∀ (i : I) (r : ℤ) (K : C i), (truncationCohomologyComparison (t i) (t i) (T i i le_rfl) r).hom.app K ≫ ((t i).truncGELE r r ⋙ shiftFunctor (C i) r).map ((eqToIso (unit i)).hom.app K) = (eqToIso (unit i)).hom.app (((t i).truncGELE r r ⋙ shiftFunctor (C i) r).obj K))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40b3accd0",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN on 545686af. Lean module byte-identical; item node changes only stmt_deps (lem-a1-cohomology-comparison-pasting -> new def-per-truncation-cohomology-comparison; theorem kept in proof_deps). New def node: existing:true on live def truncationCohomologyComparison (CohomologyComparisonPasting.lean:85, explicit composite commShiftIso/eTruncGEIso/eTruncLTIso, not hollow). Statement formula and hypotheses match the def's section variables, signature verbatim in live source, source BBD 1.3.3/1.3.6, no other live owner or duplicate id. Item statement verbatim. Live item otherwise unchanged. Prior clause-by-clause reading re-confirmed: hypotheses, c-/c+ system and identity equations, pinned triangle iso with boundary square, cutoff changes, uT/composition, h^r heart/formula/system laws, exact eta. Edge cases ok. No compile (no file changed). Advisory: new node cites theorem lem-pod-texact-truncation-comparison for eTrunc comparisons (accepted pattern)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261024T185910-L-3755926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,99 @@
+{
+ "id": "lem-pod-reindexing-completion-normalization",
+ "kind": "statement",
+ "title": "The original completion augmentation and the selected reduction calculus",
+ "statement": "Let l be prime, E a finite extension of Q_l, and W a scheme on which l is invertible in all residue fields. The actual integral completion functor is naturally isomorphic to the selected coherent reduction followed by total derived limit, and its original augmentation followed by this isomorphism equals the actual unit of the selected reduction/limit adjunction, on every ambient derived object. No completeness or boundedness is assumed. [def-pod-completion-reindex-models]",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models"
+ ],
+ "proof": [
+  {
+   "text": "take the normalized primitive completion model on the singleton family W.\nBoth its reduction functor and the selected reduction functor are left adjoint to\nthe same total-limit functor. The unique left-adjoint comparison identifies their\nactual units. Whisker that comparison by total limit and compose it with the\nprimitive model's completion comparison. The primitive unit normalization and the\nunit formula for the unique left-adjoint comparison give the required equality.\nThe construction does not use nonemptiness of W or boundedness of a complex.",
+   "uses": [
+    "lem-pur-normalized-completed-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-completed-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence preserves the mapping cocone Roos complex and signed shifts of countable towers",
+   "results": "Eight mappingCone.mapHomologicalComplexIso and mapCochainComplexShiftIso matches; no full normalized Roos comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use native Roos calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "Seven matches including mapBiprod and hom/inv formulas.",
+   "date": "2026-10-25",
+   "verdict": "Use degreewise biproduct preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*(equiv|shift)|unit_leftAdjointUniq_hom_app",
+   "results": "Adjunction.Unique.unit_leftAdjointUniq_hom_app and two applications. Project searches found isomorphismReductionTower, normalizedCompletedOperationModels and integralTowerInverseImageUnit_existsUnique.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the library declarations; remaining normalization is project-specific."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completion-unit-tensor",
+   "place": "Ambient comparison, proof steps 1--5 and signed shifts in step 8."
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingCompletionNormalization",
+  "file": "lean/Sheaf/Paper/PodReindexingCompletionNormalization.lean",
+  "declaration": "WeilConjectures.podReindexingCompletionNormalization",
+  "statement": "theorem podReindexingCompletionNormalization (W : Scheme.{t})\n    [∀ w : W, Invertible (l : W.residueField w)] :\n    ∃ e : IntegralOnSlice.completion l E W none ≅\n        (podReindexCalculus l E W).reduction ⋙ coefficientSequenceLimit l E W,\n      ∀ K : DerivedCategory (scalarReductionSource l E W),\n        (IntegralOnSlice.completionUnit l E W none).app K ≫ e.hom.app K =\n          (podReindexCalculus l E W).adjunction.unit.app K",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

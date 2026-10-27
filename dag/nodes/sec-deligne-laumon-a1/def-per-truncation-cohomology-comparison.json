@@ -1,0 +1,114 @@
+{
+ "id": "def-per-truncation-cohomology-comparison",
+ "kind": "definition",
+ "title": "Canonical shifted truncation cohomology comparison",
+ "status": "split",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories [def-weil-triangulated-category] with t-structures $t_{\\mathcal C},t_{\\mathcal D}$ [def-weil-t-structure]. Let $F:\\mathcal C\\to\\mathcal D$ be an exact functor with specified coherent shift comparisons $\\sigma^r_{F,N}:F(N[r])\\xrightarrow{\\sim}(FN)[r]$, preserving both halves in every integer degree. Write $c^-_{F,r}:F\\tau_{\\mathcal C}^{\\le r}\\xrightarrow{\\sim}\\tau_{\\mathcal D}^{\\le r}F$ and $c^+_{F,r}:F\\tau_{\\mathcal C}^{\\ge r}\\xrightarrow{\\sim}\\tau_{\\mathcal D}^{\\ge r}F$ for the canonical comparisons normalized by the counit and unit equations of [lem-pod-texact-truncation-comparison]; their construction uses the truncation adjunctions and does not require boundedness. For $r\\in\\mathbf Z$ put $H_{\\mathcal C}^r=(\\tau_{\\mathcal C}^{\\ge r}\\tau_{\\mathcal C}^{\\le r})[r]$ and define $H_{\\mathcal D}^r$ similarly. The canonical natural isomorphism $h_F^r:FH_{\\mathcal C}^r\\xrightarrow{\\sim}H_{\\mathcal D}^rF$ is the composite whose component at $K\\in\\mathcal C$, with $N=\\tau_{\\mathcal C}^{\\ge r}\\tau_{\\mathcal C}^{\\le r}K$, is\n$$h^r_{F,K}=\\bigl(\\tau_{\\mathcal D}^{\\ge r}(c^-_{F,r,K})\\circ c^+_{F,r,\\tau_{\\mathcal C}^{\\le r}K}\\bigr)[r]\\circ\\sigma^r_{F,N}.$$\nAssociators identify the functor parenthesizations. This definition specifies the composite itself, with no arbitrary choice of comparison.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "lem-pod-texact-truncation-comparison"
+ ],
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.3.3(i),(ii) and Theorem 1.3.6, printed pp. 29–31; canonical functor comparison assembled from the truncation adjunctions and shift comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncationCohomologyComparison|[Cc]ohomology.*[Cc]omparison [CategoryTheory/Triangulated]",
+   "results": "0 hits; no matching declaration in Mathlib",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; existing project definition is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison for an exact t-exact functor with shifted double truncation cohomology, defined by shift and truncation isomorphisms",
+   "results": "8 hits; ChainComplex.truncate; CochainComplex.truncate; CategoryTheory.Functor.isTriangulated_of_iso; CategoryTheory.Functor.isTriangulated_iff_of_iso; CategoryTheory.Triangulated.TStructure.ge_shift; CategoryTheory.Triangulated.TStructure.truncLT; CategoryTheory.Triangulated.TStructure.triangleLTGE; CategoryTheory.Functor.IsHomological.exact",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; existing project definition is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "truncationCohomologyComparison, CategoryTheory.Functor.eTruncGEIso",
+   "results": "0 hits; loogle: unknown identifier 'truncationCohomologyComparison'",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; existing project definition is reused."
+  },
+  {
+   "tool": "rg",
+   "query": "truncationCohomologyComparison|cohomologyComparison in lean/WeilConjectures/CategoryTheory/Triangulated; truncationCohomologyComparison in lean/Sheaf/CategoryTheory/Triangulated",
+   "results": "No upstream match. Sheaf.CategoryTheory.Triangulated.CohomologyComparisonPasting:85 defines the explicit canonical composite; the remaining hits use that definition.",
+   "date": "2026-10-24",
+   "verdict": "existing project declaration, no new module"
+  },
+  {
+   "tool": "blueprint_refs.py search / rg / JSON node inspection",
+   "query": "cohomology comparison; truncationCohomologyComparison in dag/nodes; definition nodes containing cohomology and comparison",
+   "results": "Blueprint search: 5 unrelated matches. The exact declaration is recorded by lem-a1-cohomology-comparison-pasting, a theorem node; no definition node owns this shifted truncation comparison. The proposed id is absent.",
+   "date": "2026-10-24",
+   "verdict": "new definition node required for the existing declaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-texact-system-triangle-coherence",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Normalized shifted cohomology comparison h^r in the common-stage truncation argument, old proof steps 4–5, supplying the degree-zero heart comparisons.",
+   "via": [
+    "lem-per-texact-system-triangle-coherence",
+    "lem-per-adic-common-stage-truncations",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.CohomologyComparisonPasting",
+  "declaration": "CategoryTheory.Triangulated.TStructure.truncationCohomologyComparison",
+  "statement": "def truncationCohomologyComparison (j : ℤ) :\n    (tC.truncGELE j j ⋙ shiftFunctor C j) ⋙ F ≅\n      F ⋙ (tD.truncGELE j j ⋙ shiftFunctor D j)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing explicit composite at CohomologyComparisonPasting.lean:85; this new definition node owns the canonical h^r formula. The pasting theorem remains a proof dependency of the consumer, not a statement dependency."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40b3accd0",
+  "group": "N7",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40b3accd0",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN on 545686af. Lean module byte-identical; item node changes only stmt_deps (lem-a1-cohomology-comparison-pasting -> new def-per-truncation-cohomology-comparison; theorem kept in proof_deps). New def node: existing:true on live def truncationCohomologyComparison (CohomologyComparisonPasting.lean:85, explicit composite commShiftIso/eTruncGEIso/eTruncLTIso, not hollow). Statement formula and hypotheses match the def's section variables, signature verbatim in live source, source BBD 1.3.3/1.3.6, no other live owner or duplicate id. Item statement verbatim. Live item otherwise unchanged. Prior clause-by-clause reading re-confirmed: hypotheses, c-/c+ system and identity equations, pinned triangle iso with boundary square, cutoff changes, uT/composition, h^r heart/formula/system laws, exact eta. Edge cases ok. No compile (no file changed). Advisory: new node cites theorem lem-pod-texact-truncation-comparison for eTrunc comparisons (accepted pattern)."
+ }
+}

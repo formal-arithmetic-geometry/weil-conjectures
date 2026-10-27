@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-fibral-central-isogeny-recognition",
+ "kind": "statement",
+ "title": "Recognition of a central isogeny from geometric fibres",
+ "statement": "Let $A$ be a nonzero commutative ring. Let $G$ and $H$ be reductive $A$-group schemes: smooth affine finitely presented group schemes over $\\operatorname{Spec}A$ whose geometric fibres are connected and have no nontrivial smooth connected normal unipotent subgroup, with group-scheme and reductivity conventions as in [def-sfb-pinned-split-root-realization], but without any splitness or torus hypothesis. Let $f:G\\to H$ be a homomorphism. Assume that for every homomorphism $A\\to\\Omega$ to an algebraically closed field, $f_\\Omega:G_\\Omega\\to H_\\Omega$ is surjective and its scheme-theoretic kernel is finite over $\\Omega$ and central in $G_\\Omega$. Then $f$ is finite, flat [def-weil-flat-morphism], surjective and finitely presented, and its scheme-theoretic kernel $K$ is central in $G$. Here finite means affine with finite coordinate module over the target, and central means commuting with every group element after every algebra extension. Moreover $f$ represents the fppf quotient by $K$: the canonical map $G\\times_AK\\to G\\times_HG$, $(x,k)\\mapsto(x,xk)$, is an isomorphism and $G\\to H$ is a cover for the topology of flat finitely presented surjective morphisms. No Noetherian hypothesis on $A$ or smoothness of $K$ is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 3.3.10 and its proof, printed pp.103--104; the discussion immediately preceding it supplies flatness, finite presentation and the fppf quotient description. This statement uses geometric fibres and does not assume global surjectivity separately. Read online; local PDF WANTED. No Stacks tag states this reductive-group theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}A$ and $K=G\\times_{H,e_H}S$. By [lem-a1-map-over-base-finite-presentation], $f$ is locally of finite presentation. A morphism between affine $S$-schemes is affine: over $\\operatorname{Spec}A$ it is the morphism of spectra of its coordinate-algebra map. Consequently $f$ is quasi-compact and quasi-separated, hence finitely presented. Its base change $K\\to S$ is also affine and finitely presented: if $A[H]\\to A[G]$ is presented by finitely many generators and relations, tensor that presentation with $A$ via $e_H^*$.",
+   "uses": [
+    "lem-a1-map-over-base-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FV, lemma-finite-presentation-permanence; affine algebra presentation and base change."
+   }
+  },
+  {
+   "text": "For an algebraically closed $A$-field $\\Omega$, apply [lem-sfb-group-hom-dimension-kernel-image] to $f_\\Omega$. Its closed image $I$ has the same underlying space as $H_\\Omega$, since $f_\\Omega$ is surjective. Thus $\\dim I=\\dim H_\\Omega$, and the lemma gives $\\dim G_\\Omega=\\dim H_\\Omega+\\dim K_\\Omega$. Its criterion applies because $H_\\Omega$ is smooth and connected, so $f_\\Omega$ is flat. At an ordinary base point $s$, the projection $H_{\\overline{\\kappa(s)}}\\to H_s$ is flat and surjective: on coordinates it is tensoring with a field extension. Each point lifts, and [lem-sfb-pointwise-flatness-base-change](2) descends flatness to $f_s$. Smoothness of $G\\to S$ gives flatness by [lem-pc-smooth-flat]. Now [lem-sfb-relative-flat-fibre-test] applies to $G\\to H\\to S$ (source flat and locally finitely presented; target locally of finite type), proving that $f$ is flat. It is surjective because every point of $H$ lifts to a geometric fibre, where $f_\\Omega$ is surjective. By step 1, $f$ is therefore an fppf cover.",
+   "uses": [
+    "lem-sfb-group-hom-dimension-kernel-image",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-pc-smooth-flat",
+    "lem-sfb-relative-flat-fibre-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Discussion preceding Proposition 3.3.10, p.103; field flatness via the kernel-image dimension theorem; Stacks Tag 039E/039C fibrewise flatness criterion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-centre-multiplicative-base-change] to obtain $Z=Z_G$, of multiplicative type and compatible with every geometric base change. Apply [lem-sfb-multiplicative-source-kernel] to $f|_Z:Z\\to H$. Its kernel $N$ is affine, flat and finitely presented over $S$, and the inclusion $N\\to G$ factors through $K$; call the induced map $j:N\\to K$. On every geometric fibre, the given scheme-theoretic centrality says $K_\\Omega\\subseteq Z_{G_\\Omega}=Z_\\Omega$. Therefore $N_\\Omega=K_\\Omega\\cap Z_\\Omega=K_\\Omega$ as subgroup schemes, and $j_\\Omega$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-relative-centre-multiplicative-base-change",
+    "lem-sfb-multiplicative-source-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.3.4, pp.98--100, and Exercise 2.4.3, p.76; alternative assembly of the centrality argument in Proposition 3.3.10."
+   }
+  },
+  {
+   "text": "The source $N$ of $j$ is flat and finitely presented over $S$ by step 3. Its target $K$ is finitely presented over $S$ by step 1. By [lem-a1-map-over-base-finite-presentation], $j$ is locally of finite presentation. All the hypotheses of [lem-sfb-flat-geometric-fibre-open-criterion] are now satisfied, and $j_\\Omega$ is an isomorphism for every geometric point by step 3. Thus $j$ is an isomorphism. The inclusion $K\\hookrightarrow G$ consequently factors through $Z_G$; this proves centrality after every algebra extension, not only on field-valued points. It also identifies $K$ as a group of multiplicative type of finite presentation.",
+   "uses": [
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 039E, lemma-morphism-between-flat, geometric-fibre isomorphism consequence recorded in the cited node; Conrad Lemma B.3.1, p.288."
+   }
+  },
+  {
+   "text": "Fppf-locally on $S$, step 4 identifies $K$ with $D(M)$ for a finitely generated abelian group $M$. Every nonempty chart has a geometric point, and its fibre $\\operatorname{Spec}\\Omega[M]$ is finite by hypothesis. Since $\\Omega[M]$ has basis $(e_m)_{m\\in M}$, this forces $M$ to be finite. On this chart $\\mathcal O[M]$ is therefore finite free with that same basis, so $K$ is finite there. These fppf charts form an fpqc covering by [lem-trf-fppf-covering-is-fpqc]; [lem-weil-pbc-fpqc-descend-finite] proves that $K\\to S$ is finite. This uses no smoothness of $K$ and allows torsion in $M$ divisible by residue characteristics.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02LA, lemma-descending-property-finite; explicit group-algebra basis calculation."
+   }
+  },
+  {
+   "text": "For any $S$-scheme $T$, if $f(x)=f(y)$ for $x,y\\in G(T)$ then $x^{-1}y\\in K(T)$. Thus $(x,k)\\mapsto(x,xk)$ and $(x,y)\\mapsto(x,x^{-1}y)$ are inverse natural transformations between $(G\\times_SK)(T)$ and $(G\\times_HG)(T)$. They are morphisms formed from multiplication and inverse and satisfy the displayed identities as scheme morphisms. Hence they give the asserted isomorphism. Since $f$ is an fppf cover, any $T\\to H$ lifts over the fppf cover $G\\times_HT\\to T$; two lifts differ uniquely by $K$ through this isomorphism. Sheafifying the pointwise quotient therefore gives $H$, with quotient map $f$. To justify the sheaf assertion, [lem-trf-fppf-covering-is-fpqc] makes every fppf covering an fpqc covering, and [lem-weil-pbc-fpqc-representable-descent] makes maps to $H$ a sheaf: compatible local morphisms descend uniquely. The quotient map is sectionwise injective by the displayed kernel calculation and locally surjective by the cover, so its associated sheaf is this representable sheaf.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; explicit group torsor calculation as in Conrad Exercise 3.4.6(i), p.105."
+   }
+  },
+  {
+   "text": "Under the isomorphism of step 6, the pullback of $f$ along itself is $G\\times_SK\\to G$. It is finite: tensoring a finite set of $A$-module generators of $A[K]$ with $A[G]$ gives finite $A[G]$-module generators of $A[G]\\otimes_A A[K]$. The singleton cover $f:G\\to H$ is fpqc, since it is flat and surjective by step 2 and affine, hence quasi-compact, by step 1. Apply [lem-weil-pbc-fpqc-descend-finite] to this cover to conclude that $f$ is finite. Together with steps 1, 2, 4 and 6 this gives all the claimed assertions.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02LA, lemma-descending-property-finite; Conrad discussion preceding Proposition 3.3.10 and Exercise 3.4.6(iii), pp.103,105."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-sfb-group-hom-dimension-kernel-image",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-pc-smooth-flat",
+  "lem-sfb-relative-flat-fibre-test",
+  "lem-sfb-relative-centre-multiplicative-base-change",
+  "lem-sfb-multiplicative-source-kernel",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 3.3.10, p.103; alternative centrality proof using Theorem 3.3.4 and Exercise 2.4.3, followed by the geometric-fibre isomorphism criterion and explicit torsor calculation. No source outside Conrad and Stacks is used as a new structural input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphism of reductive group schemes with finite central kernel on every geometric fibre is finite faithfully flat central isogeny",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], AlgebraicGeometry.IsFinite f\", \"doc\": \"Any isomorphism between schemes is a finite morphism. That is, if $ f : X \\\\to Y $ is an isomorphism of schemes, then $ f $ satisfies the definition of a finite morphism, meaning it is affine and the i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map f) ∧ AlgebraicGeometry.Surjective (AlgebraicGeometry.Spec.map f) ↔\\n    (CommRingCat.Hom.hom f).FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"Algebra.IsCentral.left_of_tensor\", \"module\": \"Mathlib/Algebra/Central/TensorProduct\", \"type\": \"∀ (K : Type u_1) (B : Type u_2) (C : Type u_3) [inst : CommSemiring K] [inst_1 : Semiring B] [inst_2 : Semiring C]\\n  [inst_3 : Algebra K B] [inst_4 : Algebra K C],\\n  Function.Injective ⇑(algebraMap K C) →\\n    ∀ [Module.Flat K B] [hbc : Algebra.IsCentral K (TensorProduct K B C)], Algebra.IsCentral K \", \"doc\": \"Let $ K $ be a commutative semiring, and let $ B $ and $ C $ be $ K $-algebras. If the canonical algebra map $ K \\\\to C $ is injective, $ B $ is a flat $ K $-module, and the tensor product $ B \\\\otimes_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "central.isogen|fibre.*central.*kernel|fiber.*central.*kernel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise central isogeny criterion for reductive group schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Grothendieck.isoMk_hom_fiber\", \"module\": \"Mathlib.CategoryTheory.Grothendieck\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C CategoryTheory.Cat}\\n  {X Y : CategoryTheory.Grothendieck F} (e₁ : X.base ≅ Y.base) (e₂ : (F.map e₁.hom).toFunctor.obj X.fiber ≅ Y.fiber),\\n  (CategoryTheory.Grothendieck.isoMk e₁ e₂).hom.fiber = e₂.hom\", \"doc\": \"Given objects $X$ and $Y$ in the Grothendieck category of a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, if there is an isomorphism $e_1 : X_{\\\\text{base}} \\\\cong Y_{\\\\text{base}}$ in $\\\\mathcal{C}$ and an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (x : X) : f.fiberι _ (f.asFiber x) = x\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any point $ x \\\\in X $, the composition of the inclusion map of the fiber $ f^{-1}(f(x)) $ into $ X $ with the fiber construction at $ x $ yields $ x $ i\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : IsPreimmersion (f.fiberι y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"Subgroup.centerCongr_apply_coe\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (e : G ≃* H) (r : ↥(Subsemigroup.center G)),\\n  ↑((Subgroup.centerCongr e) r) = e ↑r\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq H $ between groups $ G $ and $ H $, the induced isomorphism $ \\\\text{center}(G) \\\\simeq \\\\text{center}(H) $ satisfies $ e(z) = e(z) $ for all $ z \\\\in \\\\text{center\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : DiscreteTopology (f.fiber y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between reductive group schemes that is a central isogeny on geometric fibres is finite flat surjective",
+   "results": "8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recognize finite faithfully flat central isogenies of reductive group schemes from geometric fibres",
+   "results": "8 hits: RingHom.FaithfullyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.FaithfullyFlat.of_linearEquiv, RingHom.FaithfullyFlat.respectsIso, AlgebraicGeometry.isFinite_iff, Module.FaithfullyFlat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Module.FaithfullyFlat.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"Flat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "central.isogen|fibral.*isogen|geometric.*central.*kernel",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group centres, ideal-sheaf kernels or general scheme morphisms do not state the relative group-scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-central-isogeny-lifting",
+  "date": "2026-10-24",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Recognition of a central isogeny from geometric fibres.",
+   "via": [
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibral-central-isogeny-recognition",
+  "worker": "stage1",
+  "group": "Q128",
+  "summary": "Retained the statement. Proved flatness by the fibre criterion, identified the full kernel with the multiplicative-type kernel of the restriction to the centre using the geometric-fibre isomorphism criterion, and proved finiteness and the quotient claim by explicit group-algebra and torsor calculations. Two statement-only structural inputs have no Noetherian or smooth-kernel hypothesis.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting the pinned split classification through the inherited alteration/moduli/reductive-group chain. The immediate parent uses fibrewise central-isogeny recognition; the new nodes serve the centre/kernel comparison in that prerequisite. The chapter and unit routes are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic permanence of finite presentation used for maps of affine group schemes; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic fpqc descent of finite morphisms for K and the torsor map; no group-theoretic content."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic comparison of covering notions, applied to multiplicative-type splitting charts."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic descent of morphisms supplies the representable fppf-sheaf assertion in the explicit quotient calculation; it does not replace a group-theoretic unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-83d6fd87e",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-83d6fd87e (reviewer sub-agent of L); spot-checked: The statement is unchanged from base dagsnap 8192019e; on the base the item was unsplit with no proof, so this is a first split and the re-split rule does not apply. All 7 steps were checked against the cited statements. (1) a1-map-over-base-fp gives f lfp; f is affine, hence fp; K is fp by base-changing the presentation. (2) The group-hom dimension lemma: a surjective f_Omega makes the image I have the same underlying space as H_Omega; H_Omega is smooth and connected, so f_Omega is faithfully flat. Clause (2) of pointwise-flatness-base-change descends flatness along H_Omega->H_s, with G_s x_{H_s} H_Omega = G_Omega. lem-pc-smooth-flat and relative-flat-fibre-test then make f flat, and surjectivity comes from the geometric fibres. (3) Centre node gives Z_G; kernel node applies to f|_Z (Z multiplicative type fp, H affine fp); the scheme-theoretic centrality hypothesis plus base change of Z gives N_Omega = K_Omega. (4) flat-geometric-fibre-open-criterion with N flat lfp, K fp and j lfp gives N = K, so K is central and of multiplicative type. (5) On each nonempty chart Omega[M] finite forces M finite; fppf->fpqc comparison and Stacks 02LA give K finite. (6) The torsor iso is explicit; sheaf property via fpqc representable descent. (7) The pullback of f along f is G x K -> G, which is finite; descend along the singleton fpqc cover {f}. New nodes are true (tested GL_n, SL_n with mu_n non-smooth, PGL_n; power maps, weight maps, trivial map with infinite kernel). Neither is in the DAG: the existing centre nodes are Noetherian-base, field or split only, and the existing kernel nodes cover split targets, monomorphisms or Noetherian local bases. Neither restates an item clause. Stacks tags 02FV, 039E, 039C, 02LA and 023Q were verified by label. Conrad's notes are online-only and recorded as WANTED, matching the item's inherited source. The four declared off-unit tool uses (map-over-base fp, fpqc descend finite, fppf-is-fpqc, fpqc representable descent) are generic and accepted. Batch-5: every listed closure reach (fppf-covering-base-change, localization fp ring map, geometric-fibre unramified criterion, fppf-is-fpqc, smooth fpqc base descent via pinned-split def) is a generic scheme fact, not trace-formula or Poincare-duality content or a step of their proofs, so no assumption-leaf citation is required. Minor advisory: Spec_U O_U[M] over a non-affine chart is a one-line extension of def-sfb-ring-diagonalizable-group. No fixes."
+ }
+}

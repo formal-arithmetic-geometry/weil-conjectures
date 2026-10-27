@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-pseudocoherent-algebra-scalar-restriction",
+ "kind": "statement",
+ "title": "Restriction of scalars through a pseudo-coherent algebra",
+ "statement": "Let $f:S\\to T$ be a homomorphism of commutative rings. Suppose that $T[0]$, regarded as a complex of $S$-modules through $f$, is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. For every $K\\in D(T)$ [def-weil-abstract-derived-category], one has $$K\\text{ is pseudo-coherent over }T\\quad\\Longleftrightarrow\\quad f_*K\\text{ is pseudo-coherent over }S.$$ Here $f_*$ is restriction of scalars: it applies the ordinary forgetful functor termwise to complexes, keeping the same additive groups and differentials, and uses the action $s\\cdot k=f(s)k$. No flatness, surjectivity, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064Z, lemma-finite-push-pseudo-coherent, final assertion (pseudo-coherence, rather than the m-pseudo-coherent refinement)."
+ },
+ "stmt_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Restriction leaves kernels, images and quotient additive groups unchanged: $H^i(f_*C)=f_*H^i(C)$. It preserves quasi-isomorphisms and the explicit cone $\\operatorname{Cone}(u)^i=C^{i+1}\\oplus D^i$ with its signed differential. Thus it acts on the derived categories and preserves cone triangles. Choose a bounded-above finite free $S$-resolution $P$ representing $T[0]$. For each finite $r$, the complex $P^{\\oplus r}$ is still bounded above and finite free and represents $(f_*T^{\\oplus r})[0]$. Hence every finite free $T$-module is pseudo-coherent over $S$, including the rank-zero module.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, restriction of scalars and the finite free terms; Tag 064Q, definition-pseudo-coherent"
+   }
+  },
+  {
+   "text": "If $K$ is pseudo-coherent over $T$, choose a bounded-above finite free $T$-complex $E$ representing it. Every term of $f_*E$ is pseudo-coherent over $S$ by step 1. Apply [lem-sfb-pseudocoherent-terms-bounded-above] over $S$. Since restriction preserves quasi-isomorphisms, its conclusion is precisely pseudo-coherence of $f_*K$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-pseudocoherent-terms-bounded-above"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, forward direction, using Tag 064Y"
+   }
+  },
+  {
+   "text": "Conversely suppose $f_*K$ is pseudo-coherent. Represent $K$ by a $T$-complex $C$. A bounded-above finite free model for $f_*C$ supplies an integer $b$ with $H^i(C)=0$ for $i>b$, since the cohomology groups are unchanged. Fix any bounded finite free $T$-complex $F$, chain map $u:F\\to C$, and integer $n$ with $H^i(\\operatorname{Cone}(u))=0$ for $i>n$. By step 1 its restricted terms are pseudo-coherent; [lem-sfb-pseudocoherent-terms-bounded-above] makes $f_*F$ pseudo-coherent.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-pseudocoherent-terms-bounded-above"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, reverse direction; Tag 064U, finite-cone construction"
+   }
+  },
+  {
+   "text": "For every integer $m$, apply [lem-pc-ring-pseudo-coherent-iff-all-m] to obtain $(m+1)$-pseudo-coherence of $f_*F$ and $m$-pseudo-coherence of $f_*C$. The first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] applied to their cone triangle gives $m$-pseudo-coherence of $f_*\\operatorname{Cone}(u)$. Apply the equivalence again, for all $m$, to obtain pseudo-coherence of that restricted cone.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064R, lemma-cone-pseudo-coherent, assertion (1); Tag 064U, lemma-pseudo-coherent"
+   }
+  },
+  {
+   "text": "In particular the restricted cone is $n$-pseudo-coherent by [lem-pc-ring-pseudo-coherent-iff-all-m]. Its cohomology vanishes above $n$, so [lem-sc-finite-cohomology] over $S$ shows that $H^n(\\operatorname{Cone}(u))$ is finitely generated as an $S$-module. The same finite generators generate over $T$: an expression $x=\\sum s_jx_j$ becomes $x=\\sum f(s_j)x_j$. Thus its top cohomology is a finite $T$-module.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064S, lemma-finite-cohomology; Tag 064U, descending finite-free construction"
+   }
+  },
+  {
+   "text": "The arbitrary choices in step 3 and the conclusion of step 5 verify every cone-finiteness hypothesis of [lem-pc-ring-finite-cone-free-model] for $R=T$, the complex $C$, and the bound $b$. Choose one universe containing $S,T,C$ and all the complexes quantified there. The criterion supplies a chain-level quasi-isomorphism $Q\\to C$ with $Q^i=0$ for $i>b$ and every $Q^i$ finite free over $T$. This is exactly pseudo-coherence of $K$ over $T$. Together with step 2 it proves the asserted equivalence.",
+   "uses": [
+    "lem-pc-ring-finite-cone-free-model",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064U, lemma-pseudo-coherent, proof of (2) implies (1); Tag 064Z, reverse implication"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-pseudocoherent-terms-bounded-above",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-sc-finite-cohomology",
+  "lem-pc-ring-finite-cone-free-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064Z, lemma-finite-push-pseudo-coherent; forward argument using Tag 064Y; reverse argument via the existing Tag 064U finite-cone construction, with Tags 064R and 064S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map whose target is pseudo coherent as a module restriction of scalars preserves and reflects pseudo coherent complexes",
+   "results": "OK: 8 hits; CommRingCat.moduleCatRestrictScalarsPseudofunctor, RingCat.moduleCatRestrictScalarsPseudofunctor, CommRingCat.moduleCatExtendScalarsPseudofunctor, CondensedMod, LightCondMod.instPreservesEpimorphismsLightCondSetForget, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, CondensedMod.IsSolid, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: the scalar-restriction functors and their pseudofunctoriality do not assert preservation or reflection of pseudo-coherence. Hits about formally unramified algebras assume additional hypotheses and concern ordinary flat/projective modules. Mathlib grep finds no pseudo-coherence declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings pseudo coherence equivalence for a finite algebra having an infinite finite free resolution over the source",
+   "results": "OK: 8 hits; Algebra.FormallyUnramified.finite_of_free, RingHom.EssFiniteType.isStableUnderBaseChange, Algebra.FinitePresentation.of_restrict_scalars_finitePresentation, Module.Finite.of_equiv_equiv, RingHom.finitePresentation_isStableUnderBaseChange, Algebra.FormallyUnramified.projective_of_restrictScalars, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the scalar-restriction functors and their pseudofunctoriality do not assert preservation or reflection of pseudo-coherence. Hits about formally unramified algebras assume additional hypotheses and concern ordinary flat/projective modules. Mathlib grep finds no pseudo-coherence declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent algebra as module implies complexes are pseudo coherent if and only if restriction of scalars is pseudo coherent",
+   "results": "OK: 8 hits; RingCat.moduleCatRestrictScalarsPseudofunctor, RestrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, Algebra.FormallyUnramified.flat_of_restrictScalars, PresheafOfModules.pushforward, SheafOfModules.restrictScalars, CommRingCat.moduleCatExtendScalarsPseudofunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: the scalar-restriction functors and their pseudofunctoriality do not assert preservation or reflection of pseudo-coherence. Hits about formally unramified algebras assume additional hypotheses and concern ordinary flat/projective modules. Mathlib grep finds no pseudo-coherence declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"restrictScalars\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the scalar-restriction functors and their pseudofunctoriality do not assert preservation or reflection of pseudo-coherence. Hits about formally unramified algebras assume additional hypotheses and concern ordinary flat/projective modules. Mathlib grep finds no pseudo-coherence declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|pseudoCoherent",
+   "results": "OK: 0 hits; . Searched Mathlib/Algebra/",
+   "date": "2026-10-23",
+   "verdict": "no match: the scalar-restriction functors and their pseudofunctoriality do not assert preservation or reflection of pseudo-coherence. Hits about formally unramified algebras assume additional hypotheses and concern ordinary flat/projective modules. Mathlib grep finds no pseudo-coherence declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars preserves and reflects pseudo coherent complexes when the algebra is pseudo coherent as a module",
+   "results": "OK: 8 hits; CommRingCat.moduleCatRestrictScalarsPseudofunctor, RingCat.moduleCatRestrictScalarsPseudofunctor, CommRingCat.moduleCatExtendScalarsPseudofunctor, CommRingCat.moduleCatRestrictScalarsPseudofunctor_obj, CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, CommRingCat.moduleCatRestrictScalarsPseudofunctor_map, ModuleCat.instReflectsIsomorphismsRestrictScalars, RingCat.moduleCatRestrictScalarsPseudofunctor_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general projective resolutions, support bounds or K-projectivity, without finiteness of free terms or pseudo-coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|pseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence theorem; scalar-restriction pseudofunctors do not assert the equivalence, and formally unramified projectivity results impose extra hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherence of complexes under restriction of scalars through an algebra which is pseudo coherent as a module",
+   "results": "OK: 8 hits; RingCat.moduleCatRestrictScalarsPseudofunctor, ModuleCat.RestrictScalars.obj', RestrictScalars, CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapId, RingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, RestrictScalars.moduleOrig, AlgHom.restrictScalars, Algebra.FormallyUnramified.of_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence theorem; scalar-restriction pseudofunctors do not assert the equivalence, and formally unramified projectivity results impose extra hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"restrictScalars\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence theorem; scalar-restriction pseudofunctors do not assert the equivalence, and formally unramified projectivity results impose extra hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex whose terms admit resolutions by finite free modules admits a bounded above finite free resolution",
+   "results": "OK: 8 hits; CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, ModuleCat.projectiveResolution",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence theorem; scalar-restriction pseudofunctors do not assert the equivalence, and formally unramified projectivity results impose extra hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence theorem; scalar-restriction pseudofunctors do not assert the equivalence, and formally unramified projectivity results impose extra hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings equivalence of finite free resolutions unbounded to the left for pseudo coherent algebras",
+   "results": "OK: 8 hits; Algebra.FormallyUnramified.projective_of_restrictScalars, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.exists_finiteType, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Module.free_of_lTensor_residueField_injective, CategoryTheory.HasProjectiveDimensionLE, Module.free_of_flat_of_finrank_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence theorem; scalar-restriction pseudofunctors do not assert the equivalence, and formally unramified projectivity results impose extra hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-fp-quotient-pseudocoherent",
+  "date": "2026-10-23",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Pseudo-coherence of the diagonal module needed to realize the algebraic class test as sheaf internal Hom. Supporting algebra input: Comparison of pseudo-coherence after forgetting from either quotient of the common polynomial ring; this is the general algebra theorem underlying the relative comparison used by 0E1T.",
+   "via": [
+    "lem-sfb-flat-fp-quotient-pseudocoherent",
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pseudocoherent-algebra-scalar-restriction",
+  "worker": "stage1",
+  "summary": "Proved preservation via pseudo-coherent terms (one new Tag 064Y statement-only node), and reflection by checking the existing finite-cone criterion using triangle closure and finite top cohomology. No hypotheses or statement changed; no project attachment or Mathlib match found.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite: comparison of pseudo-coherence under the two quotient maps in the relative dualizing polynomial calculation. Latest blueprint read; the inherited nearest-ancestor chain is broken and ancestor command returns None, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic ring-level characterization of pseudo-coherence at all finite cutoffs; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "why": "Generic ring-level cone closure; used without changing the geometric unit route."
+   },
+   {
+    "node": "lem-sc-finite-cohomology",
+    "why": "Finite top cohomology of an m-pseudo-coherent ring complex; a generic algebra tool."
+   },
+   {
+    "node": "lem-pc-ring-finite-cone-free-model",
+    "why": "Generic constructive finite-cone criterion gives a finite-free model over T after the cone-finiteness hypotheses are verified here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-sc-finite-cohomology",
+  "lem-pc-ring-finite-cone-free-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-9add70445",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-9add70445 (reviewer sub-agent of L); spot-checked: I read Stacks 064Z and 064Y in more-algebra.tex in full, and checked the tags 064Q/R/S/U/Y/Z against tags/tags. The item states the pseudo-coherent part of 064Z and adds no hypothesis; the citer lem-sfb-flat-fp-quotient-pseudocoherent step 3 uses it exactly as stated. Step 1 is elementary: restriction keeps cohomology and cones, and P^{⊕r} models restricted T^r. Step 2: the 064Y node applies to f_*E, whose terms are pseudo-coherent by step 1. Steps 3-6: the converse goes through the existing 064U finite-cone criterion lem-pc-ring-finite-cone-free-model with R=T and bound b. Its hypotheses hold: the upper bound from the S-model; f_*F pseudo-coherent by 064Y; cone m-pc for all m by iff-all-m and clause 1 of the distinguished-triangle node; top cohomology finite over S by lem-sc-finite-cohomology, hence over T. This replaces Stacks' E⊗_A B / Tor spectral-sequence induction with a valid agent route. I accept the four generic picard-unit tool_uses. The new node lem-sfb-pseudocoherent-terms-bounded-above is 064Y's final assertion. It is statement-only, self-contained and searched with grep, leansearch, loogle and leanfinder. Without bounded-above the claim is false, so that hypothesis is needed. It does not restate the item and duplicates no existing node: the nearest is lem-weil-pbc-pseudocoherent-cohomology-implies-pseudocoherent, which assumes cohomology, not terms. No SGA is cited and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentAlgebraScalarRestriction",
+  "declaration": "DerivedCategory.isPseudoCoherent_restrictScalars_iff_of_algebra",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentAlgebraScalarRestriction.lean",
+  "statement": "theorem isPseudoCoherent_restrictScalars_iff_of_algebra {S : Type uS} {T : Type uT} [CommRing S] [CommRing T] (f : S →+* T) [HasDerivedCategory.{wS} (ModuleCat.{max uS uT v} S)] [HasDerivedCategory.{wT} (ModuleCat.{max uS uT v} T)] (hT : IsPseudoCoherent ((singleFunctor (ModuleCat.{max uS uT v} S) 0).obj ((ModuleCat.restrictScalars f).obj (ModuleCat.of T (ULift.{max uS v} T))))) (K : DerivedCategory (ModuleCat.{max uS uT v} T)) : IsPseudoCoherent K ↔ IsPseudoCoherent ((ModuleCat.restrictScalars f).mapDerivedCategory.obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46f538c11",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Read node vs Stacks 064Z (more-algebra.tex lemma-finite-push-pseudo-coherent, final assertion) and the recorded IsPseudoCoherent def (RingPseudoCoherent.lean:40, 064P(2)). Lean: CommRing S T, arbitrary f : S →+* T, hT = IsPseudoCoherent of single 0 of the S-restricted regular T-module (ULift is a canonical size transport only), unbounded K in D(T), IsPseudoCoherent K ↔ IsPseudoCoherent ((restrictScalars f).mapDerivedCategory.obj K). Matches every clause in node order; no extra flat/surj/Noetherian/bounded/nontrivial hypotheses; universes uS uT v wS wT bound and independent, same convention as sibling Q09 m-pc item (PASS). Node diff vs side-live: only new lean record (live null); statement verbatim in file; no new nodes, no stmt_dep or statement change. No duplicate in Sheaf/WeilConjectures (polynomial-presentation, finite-free-algebra and closed-pushforward theorems are different statements) or Mathlib. Docstrings carry source, blueprint and all 6 steps; proof sorry only; private imports of the 4 stated proof-dep modules exist; report has Worker report and Second reading by Q147. No compile run (no file changed)."
+ }
+}

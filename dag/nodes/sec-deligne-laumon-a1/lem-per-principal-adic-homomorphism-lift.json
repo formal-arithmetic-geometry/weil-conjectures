@@ -10,11 +10,89 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-per-completed-polynomial-conormal"
+ ],
+ "proof": [
+  {
+   "text": "Write $P=\\widehat{A[t_1,\\ldots,t_q]}_{(a)}$. We first improve any map $\\psi_m:R\\to T/a^mT$ with $m>\\max(2h,h+t)$. Put $s=m-h$, so $s\\geq1$, $s>t$, and $2s>m$. Set $M=a^mT/a^{2m}T$, $Q=a^sT/a^{2m-h}T$, and $N=a^sT/a^{2s}T$. All three are annihilated by $a^m$, so they are $R$-modules through $\\psi_m$. Multiplication by $a^h$ defines an $R$-linear bijection $\\mu:Q\\to M$. Indeed it is surjective since $a^mT=a^h a^sT$. If $x\\in a^sT$ and $a^hx=a^{2m}z$, then $x-a^{2m-h}z$ lies in $a^sT$ and is killed by $a^h$. It is zero since $s\\geq t$ and $T[a^\\infty]\\cap a^tT=0$. This proves injectivity. This calculation replaces the nonzerodivisor assumption in Tag 0AK6 by the bounded-torsion hypothesis of Tag 0AK7.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tags 0AK6 (lemma-get-morphism-nonzerodivisor), first paragraph, and 0AK7 (lemma-get-morphism-principal); explicit high-ideal division calculation."
+   }
+  },
+  {
+   "text": "Choose $y_i\\in T$ lifting $\\psi_m(\\bar t_i)$. By [lem-per-completed-polynomial-taylor-evaluation], the tuple defines an evaluation $E_y:P\\to T$. Its reduction modulo $a^m$ equals the composite $P\\to R\\xrightarrow{\\psi_m}T/a^mT$: both are continuous $A$-algebra maps with the same coordinates, so the uniqueness clause applies. Here every $A$-algebra map preserves powers of $(a)$ and hence is continuous; $T/a^mT$ is complete because its quotient tower is eventually constant. Consequently $E_y(L)\\subseteq a^mT$.",
+   "uses": [
+    "lem-per-completed-polynomial-taylor-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tags 0AJM (formal-spaces.tex, remark-universal-property) and 0GAP (remark-improve-homomorphism), choice of a lift of the polynomial coordinates."
+   }
+  },
+  {
+   "text": "Define $o:L/L^2\\to M$ by $o([g])=E_y(g)\\bmod a^{2m}T$. This is well-defined since $E_y(L^2)\\subseteq a^{2m}T$. For $p\\in P$ and $g\\in L$, the equality $E_y(pg)=E_y(p)E_y(g)$ shows $R$-linearity: the scalar $p\\bmod L$ acts through $E_y(p)\\bmod a^mT=\\psi_m(p\\bmod L)$. Put $\\beta=oH:R^{\\oplus q}\\to M$. The assumed equality $H\\delta_R=a^h\\mathrm{id}$ gives $\\beta\\delta_R=a^ho$. No Ext identification or obstruction-existence theorem is being invoked here; $o$ is the displayed map on representatives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAP (remark-improve-homomorphism), the displayed map o(psi); direct use of the given conormal nullhomotopy."
+   }
+  },
+  {
+   "text": "Let $\\pi:Q\\to N$ be reduction and $j:M\\to N$ the map induced by inclusion $a^mT\\subseteq a^sT$. Both are well-defined since $2m-h\\geq2s$ and $2m\\geq2s$. Put $c=\\pi\\mu^{-1}\\beta:R^{\\oplus q}\\to N$. For every $x\\in a^mT$, viewing $x$ also in $Q$ gives $\\mu([x]_Q)=[a^hx]_M$; hence $\\pi\\mu^{-1}(a^h[x]_M)=j([x]_M)$. It follows that $c\\delta_R=jo$. Choose $d_i\\in a^sT$ representing $c(e_i)$. For every $g\\in L$, this equality reads\n$$E_y(g)\\equiv\\sum_i E_y(\\partial_i g)d_i\\pmod{a^{2s}T}.$$\nIndeed the coordinates of $\\delta_R[g]$ are $\\partial_i g\\bmod L$ and their actions on $N$ are through $\\psi_m$, equivalently through $E_y$. Changing a representative of such a scalar by $a^mT$ changes its product with $d_i$ by $a^{m+s}T\\subseteq a^{2s}T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tags 0AK6 and 0GAP, factoring the included error map through the conormal differential; explicit division and representative calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-per-completed-polynomial-taylor-evaluation] with coordinate increment $(-d_i)_i\\in(a^sT)^q$. For every $g\\in L$ it gives\n$$E_{y-d}(g)\\equiv E_y(g)-\\sum_i E_y(\\partial_i g)d_i\\equiv0\\pmod{a^{2s}T}.$$\nThus $E_{y-d}$ factors through an $A$-algebra map $\\psi_{2s}:R\\to T/a^{2s}T$. The same lemma gives $E_{y-d}(f)\\equiv E_y(f)\\pmod{a^sT}$ for every $f\\in P$, so $\\psi_{2s}$ and $\\psi_m$ agree modulo $a^sT$. This proves the required one-step improvement from precision $m$ to precision $2(m-h)$, with agreement at precision $m-h$.",
+   "uses": [
+    "lem-per-completed-polynomial-taylor-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tags 0AK3 (remark-linear-approximation), 0GAP (remark-improve-homomorphism), correction of coordinates, and 0AK6, improvement of precision."
+   }
+  },
+  {
+   "text": "Starting with $m_0=n$ and $\\psi^0=\\psi_n$, repeat steps 1--5 recursively, putting $m_{j+1}=2(m_j-h)$ and choosing $\\psi^{j+1}$ given there. The formula $m_j=2h+2^j(n-2h)$ proves that $m_j$ increases without bound, so every $m_j>\\max(2h,h+t)$ and the construction remains applicable. Write $s_j=m_j-h$. For every $j$, $\\psi^{j+1}$ and $\\psi^j$ agree modulo $a^{s_j}T$, while $s_{j+1}>s_j$ and $s_j$ tends to infinity. For any $k\\geq0$ define $f_k:R\\to T/a^kT$ by reducing $\\psi^j$ for any $j$ with $s_j\\geq k$. Consecutive choices agree by the preceding congruence, and therefore all such choices agree. Reducing $f_{k+1}$ gives $f_k$ by choosing the same sufficiently large $j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AK6 (lemma-get-morphism-nonzerodivisor), second paragraph; explicit recurrence and compatible reductions."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-adic-completion], the compatible family $(f_k)_k$ defines $r\\mapsto(f_k(r))_k$ from $R$ to $\\varprojlim_k T/a^kT$, with addition, multiplication, unit and $A$-scalar compatibility checked coordinatewise. Completeness identifies this ring with $T$ by the inverse of the canonical $A$-algebra map. Composing gives $\\varphi:R\\to T$. At $k=s_0=n-h$ one may choose $j=0$, so the reduction of $\\varphi$ is $f_{n-h}=\\psi_n\\bmod a^{n-h}T$, as asserted.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AK6, final paragraph; algebra.tex Section 00M9 and Definition 0317, inverse-limit definition of completion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-completed-polynomial-taylor-evaluation",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tags 0GAP, 0AK3 and 0AK6 iterative correction proof, with the high-ideal division calculation from the bounded-torsion hypothesis of 0AK7 replacing the quotient-by-torsion detour."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +128,46 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgHom.IsArithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (S →ₐ[R] S) → Ideal S → Prop\", \"doc\": \"For an algebra homomorphism $\\\\varphi: S \\\\to S$ over $R$ and an ideal $Q \\\\subseteq S$, the proposition states that for all $x \\\\in S$, the difference $\\\\varphi(x) - x^{\\\\#(R/Q_{\\\\text{under}} R)}$ lies in \"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"PreTilt.untilt\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} →\\n  [inst : CommRing O] →\\n    {p : ℕ} →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) O] → PreTilt O p →* O\", \"doc\": \"The function defines a multiplicative homomorphism from the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to the ring $ O $, mapping each sequence $ (f_n) $ in the pretilt to an element $ y \\\\in O $ such that $ y\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.mk_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra.FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I)\\n  (g : A →ₐ[R] B ⧸ I) (x : A), (Ideal.Quotient.mk I) ((Algebra.FormallyS\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a commutative ring $ B $ and an algebra homomorphism $ g : A \\\\to B/I $, the image of the lift of any\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: IsAdicComplete.liftAlgHom requires an already compatible family of maps; formally smooth lifting assumes formal smoothness. Neither supplies bounded-precision lifting from a power-nullhomotopic conormal differential."
+  },
+  {
+   "tool": "grep",
+   "query": "liftAlgHom|exists_mk.*comp_eq|conormal|Elkik",
+   "results": "{\"t\": \"2026-10-24T08:07:53Z\", \"tool\": \"grep\", \"query\": \"liftAlgHom|exists_mk.*comp_eq|conormal|Elkik\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"Mathlib/RingTheory/TensorProduct/Nontrivial.lean\", \"Mathlib/RingTheory/TensorProduct/Nontrivial.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\"], \"digest\": \"746f0fa9d28918af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: compatible-family lifting assumes the family already exists; formally smooth lifting has a stronger hypothesis. StandardEtalePair and distinguished-polynomial results do not state this conormal-nullhomotopy lifting theorem.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elkik approximation of algebra homomorphisms from conormal nullhomotopy to complete rings with bounded principal torsion",
+   "results": "{\"t\": \"2026-10-24T08:07:53Z\", \"tool\": \"leansearch\", \"query\": \"Elkik approximation of algebra homomorphisms from conormal nullhomotopy to complete rings with bounded principal torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.mk_comp_liftRingHom\", \"AdicCompletion.liftAlgHom\", \"AdicCompletion.mkₐ\", \"IsAdicComplete.algHom_ext\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.mk_liftAlgHom\"], \"digest\": \"fee0d3a81856ce6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: compatible-family lifting assumes the family already exists; formally smooth lifting has a stronger hypothesis. StandardEtalePair and distinguished-polynomial results do not state this conormal-nullhomotopy lifting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T08:07:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.lift\", \"AdicCompletion.eval_lift\", \"AdicCompletion.lift_smul\", \"AdicCompletion.eval_lift_apply\", \"AdicCompletion.lift_add\", \"AdicCompletion.liftRingHom\", \"AdicCompletion.liftAlgHom\", \"AdicCompletion.evalₐ_liftRingHom\"], \"digest\": \"b2b0313f098b9a16\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: compatible-family lifting assumes the family already exists; formally smooth lifting has a stronger hypothesis. StandardEtalePair and distinguished-polynomial results do not state this conormal-nullhomotopy lifting theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Newton lifting algebra maps from a quotient of a completed polynomial algebra with a power inverse of the Jacobian conormal differential",
+   "results": "{\"t\": \"2026-10-24T08:07:55Z\", \"tool\": \"leanfinder\", \"query\": \"Newton lifting algebra maps from a quotient of a completed polynomial algebra with a power inverse of the Jacobian conormal differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.lift\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"Algebra.FormallySmooth.lift\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\"], \"digest\": \"58232e2efd875bd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: compatible-family lifting assumes the family already exists; formally smooth lifting has a stronger hypothesis. StandardEtalePair and distinguished-polynomial results do not state this conormal-nullhomotopy lifting theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate algebra homomorphisms lift with bounded loss of adic precision when a power annihilates the conormal complex and the target has bounded torsion",
+   "results": "{\"t\": \"2026-10-24T08:07:57Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate algebra homomorphisms lift with bounded loss of adic precision when a power annihilates the conormal complex and the target has bounded torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.mk_liftAlgHom\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"AdicCompletion.evalₐ_liftAlgHom\", \"Algebra.FormallySmooth.lift\"], \"digest\": \"a41177cd2a78c812\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: compatible-family lifting assumes the family already exists; formally smooth lifting has a stronger hypothesis. StandardEtalePair and distinguished-polynomial results do not state this conormal-nullhomotopy lifting theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-principal-jacobian-algebraization",
@@ -80,5 +194,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-principal-adic-homomorphism-lift",
+  "worker": "stage1",
+  "summary": "Reused the existing completed-polynomial Taylor/evaluation node. Wrote explicit conormal-error, bounded-torsion division, coordinate correction and compatible-limit steps without Ext machinery or additional nodes; retained the statement unchanged and checked the exact Mathlib candidates.",
+  "blueprint": "Realizes the principal lifting input of the existing principal Jacobian algebraization split, on the Step 1 duality dependency of lem-per-artin-gabber-affine-curve; blueprint.from retains the full intermediate chain. The lifting argument follows Stacks 0AK6/0GAP with the bounded-torsion condition of 0AK7."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-4e0ec37f9",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-4e0ec37f9 (reviewer sub-agent of L); spot-checked: I read the full item and all seven steps against Stacks restricted.tex 0AK3, 0GAP, 0AK6 and 0AK7 (l.855-1130) and the full statements of both cited nodes; no changes were made. Statement: it is 0AK7 with c=h and d=t, where the Ext-annihilation hypothesis is replaced by an explicit nullhomotopy H (δH=a^h·id, Hδ=a^h·id), which implies the source hypothesis. It is unchanged from the base and is what the citer lem-per-principal-jacobian-algebraization step 5 supplies. Step 1: the exponents hold (s≥1, s>t, 2s>m), a^m kills M, Q and N, and multiplication by a^h from a^sT/a^{2m-h}T to a^mT/a^{2m}T is a bijection; torsion is cancelled only inside a^sT⊆a^tT. Step 2: the Taylor node's uniqueness applies to T/a^mT, which is complete because its tower is eventually constant, so E_y(L)⊆a^mT. Steps 3-4: o is well defined and R-linear, βδ=a^h·o and cδ=jo; the lift ambiguity a^{m+s}T lies in a^{2s}T. Step 5: the Taylor congruences with z=-d∈(a^sT)^q give ψ_{2s} agreeing with ψ_m mod a^s. Step 6: the recursion m_j=2h+2^j(n-2h) is stated explicitly and the reductions are compatible. Step 7: the limit comes from the inverse-limit definition of completion. Small cases q=0, h=0, a a unit, and T=Z_p×F_p are consistent. Duplicates: the 0GAQ node lem-per-power-split-uniform-adic-map-lifting needs a Noetherian target and gives uniform constants, so it is not a generalization of the item; no other node carries 0AK6/0AK7. Route: the Taylor node is in the same unit, the other citation is a definition, there are no tool_uses, no SGA and no cycle. Searches: 10 recorded across the three kinds, correctly rejecting liftAlgHom and the formally smooth lift. There are no new nodes and no re-split order applies."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalAdicHomomorphismLift",
+  "declaration": "AlgebraicGeometry.exists_principal_adic_homomorphism_lift",
+  "file": "lean/Sheaf/RingTheory/PrincipalAdicHomomorphismLift.lean",
+  "statement": "theorem exists_principal_adic_homomorphism_lift (A : Type u) [CommRing A] [IsNoetherianRing A] (a : A) (q : ℕ) (L : Ideal (rigPolynomialCompletion A (Ideal.span {a}) q)) [IsAdicComplete (Ideal.span {a}) (rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L)] (h : ℕ) (H : (Fin q → rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L) →ₗ[rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L] L.Cotangent) (hδH : ∀ x : Fin q → rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L, rigJacobianDifferential (Ideal.span {a}) q L (H x) = (algebraMap A (rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L) a) ^ h • x) (hHδ : ∀ x : L.Cotangent, H (rigJacobianDifferential (Ideal.span {a}) q L x) = (algebraMap A (rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L) a) ^ h • x) (T : Type v) [CommRing T] [Algebra A T] [IsAdicComplete (Ideal.span {a}) T] (t : ℕ) (ht : ∀ x : T, (∃ k : ℕ, (algebraMap A T a) ^ k * x = 0) → x ∈ (Ideal.span {algebraMap A T a}) ^ t → x = 0) (n : ℕ) (hn : max (2 * h) (h + t) < n) (ψ : (rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L) →ₐ[A] T ⧸ (Ideal.span {algebraMap A T a}) ^ n) : ∃ φ : (rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L) →ₐ[A] T, ∀ r : rigPolynomialCompletion A (Ideal.span {a}) q ⧸ L, Ideal.Quotient.mk ((Ideal.span {algebraMap A T a}) ^ (n - h)) (φ r) = Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.sub_le n h)) (ψ r)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a16be8f7",
+  "group": "N5",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_principal_adic_homomorphism_lift with the node: Noetherian A, R = rigPolynomialCompletion A (span{a}) q ⧸ L complete, R-linear H : R^q → L.Cotangent, pointwise δH = a^h and Hδ = a^h via the landed Q147 rigJacobianDifferential, T an (a)-complete A-algebra in its own universe v, ht = T[a^∞] ∩ a^tT = 0, hn = max(2h, h+t) < n, ψ an A-algebra map to T/a^n, conclusion ∃ φ with canonical reduction at n-h (ℕ subtraction exact since n > 2h). Compared with live, the node changes only stmt_deps (adds the existing conormal node, whose Lean record is on the base) and lean (statement verbatim in the file). No new definitions; only sorry; docstrings carry the source place and blueprint id; both report sections present (the second reading is by the author, as the report says). Edge cases q=0, h=0, t=0, a zero or a unit, L=⊤, T=0 fine. No extra assumptions. Not compiled (no file changed). restricted.tex is absent locally, so the source match rests on the stage-1 review of 0AK7."
+ }
 }

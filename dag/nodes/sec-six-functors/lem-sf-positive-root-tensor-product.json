@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-positive-root-tensor-product",
+ "kind": "statement",
+ "title": "Normalized multiplication of unshifted positive root powers",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme X, and natural numbers d,e. Use the completed coefficient ring and positive root-power module sheaves of [def-coefficient-twists-detailed], and the pure scalar/root generators of [def-weil-frobenius-coefficient-twists]. There is a unique module-sheaf isomorphism from the ordinary sheaf tensor of the positive powers d and e to the power d+e that sends every tensor of generators (a;x_1,...,x_d) and (b;y_1,...,y_e) to (ab;x_1,...,x_d,y_1,...,y_e). The ordinary tensor generator means the sheafification-unit image of the sectionwise tensor. No complex, shift, derived tensor or completion operation occurs in this statement. Zero exponents use the coefficient unit; no invertibility assumption on l on X is needed for tensor reassociation.",
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Positive tensor-power definition; the unshifted tensor-reassociation step of the ordinary product proof in def-sf-orientation-integral-line-comparisons."
+ },
+ "proof": [
+  {
+   "text": "Construct the multiplication recursively in the second exponent from the actual scalarTensorRightUnitor, scalarTensorLeftUnitor and scalarTensorAssociatorIso. The second exponent zero uses the right unitor, degree one uses the left unitor at first exponent zero and the identity otherwise. At a higher second exponent invert the associator and tensor the preceding multiplication with the identity on the first root line. Transport the source from the monoidal sheaf tensor to siteSheafTensorRight using its sheafification comparison.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-sfb-sheaf-tensor-pure-section",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove by induction that multiplying a scalar/root generator by a scalar multiplies its coefficient. Induct on the second exponent in the multiplication construction. The explicit unit and associator formulas, bilinearity and Fin.append_snoc give concatenation of the ordered root lists and multiplication of the coefficients. This includes both zero exponents.",
+   "uses": [
+    "def-weil-frobenius-coefficient-twists",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each power take the sectionwise submodule spanned by scalar/root generators. Its membership sieve is restriction-stable. Sections whose membership sieve covers form a submodule. Local surjectivity of sheafification units and transitivity of the topology reduce local membership to presheaf tensor sections. At degree one, express a discrete scalar/root tensor using the image of that scalar in the completed coefficient ring and a unit-scalar root tensor; the completed action normalization justifies this equality. Tensor induction, intersection of covering sieves and the successor recursion then prove local spanning for every power. For two normalized homomorphisms, intersect the two local spanning covers, apply bilinearity to both spans, and use separatedness of the target sheaf. Finally an isomorphism is determined by its homomorphism.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-sfb-sheaf-tensor-pure-section",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "def-pur-twist-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "The existing three-step tensor reassociation and local root generation argument, implemented by H5 using the proved scalar tensor coherence API."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor multiplication of positive powers of a completed Tate root sheaf uniquely normalized on pure root tensors",
+   "results": "TensorPower.mulEquiv, TensorPower.gMul_def and LinearMap.mul'; these concern modules, not the recorded sheafified recursive powers and completed-root generators.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of two tensor powers is isomorphic to the tensor power of their sum, with concatenation of pure tensors",
+   "results": "TensorPower.mulEquiv and TensorPower.tprod_mul_tprod, Mathlib.LinearAlgebra.TensorPower.Basic; PiTensorProduct.tmulEquiv and its formula. These do not identify the actual module sheaves of this project.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTwistPower.*[Aa]dd|positiveLine.*[Pp]roduct",
+   "results": "No matching project declarations. Additional local rg searches of Mathlib/CategoryTheory/Monoidal for tensorPower/tensorPow addition isomorphisms found no match. The imported blueprint search for root tensor found no matching node. The existing item is the shifted complex version; this is only its unshifted module-multiplication step.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrientationIntegralCoefficientTwists",
+  "date": "2026-10-26",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sf-orientation",
+   "place": "Coefficient-line comparison conventions: unshifted positive-root multiplication used in the ordinary shifted-complex product.",
+   "via": [
+    "def-sf-orientation-integral-line-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-def-sf-orientation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PositiveRootTensorProduct",
+  "file": "lean/Sheaf/Paper/PositiveRootTensorProduct.lean",
+  "declaration": "WeilConjectures.positiveRootTensorProduct_existsUnique",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-26",
+  "statement": "theorem positiveRootTensorProduct_existsUnique\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (d e : ℕ) :\n    ∃! m : (SheafOfModules.monoidalCategory\n        (completedIntegralCommRingSheafUnrestricted l E X)).tensorObj\n          (FrobeniusCoefficientTwists.positiveLine l E X d)\n          (FrobeniusCoefficientTwists.positiveLine l E X e) ≅\n        FrobeniusCoefficientTwists.positiveLine l E X (d + e),\n      ∀ (U : X.ProEtᵒᵖ)\n        (a b : (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj U)\n        (x : Fin d → (purTwistZlOne X l).obj.obj U)\n        (y : Fin e → (purTwistZlOne X l).obj.obj U),\n        m.hom.val.app U\n          (SheafOfModules.ScalarHomOrdinary.pure\n            (completedIntegralCommRingSheafUnrestricted l E X) _ _ U\n            (FrobeniusCoefficientTwists.generator l E X U a d x)\n            (FrobeniusCoefficientTwists.generator l E X U b e y)) =\n          FrobeniusCoefficientTwists.generator l E X U (a * b) (d + e)\n            (Fin.addCases x y)"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261026T023932-L-615802",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T182621-L-3572071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

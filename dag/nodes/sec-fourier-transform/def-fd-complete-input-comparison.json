@@ -1,0 +1,142 @@
+{
+ "id": "def-fd-complete-input-comparison",
+ "kind": "definition",
+ "title": "Specified completion comparison isomorphism on complete inputs",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$ and a $\\mathbf Q_\\ell$-algebra embedding $\\iota:E\\to F$ [def-weil-l-adic-coefficient-extension], and a scheme $X$. Let $R_E,R_F$ be their completed integral coefficient sheaves [def-weil-completed-integral-coefficients], and use the derived categories of sheaves of modules over them [def-weil-abstract-derived-category]. Write $C_\\iota K=K\\otimes^L_{R_E}R_F$ for ordinary derived scalar extension and $U_\\iota K$ for the strict quotient-tower scalar extension [def-weil-integral-scalar-extension]. For a derived-complete $K\\in D(R_E)$ [def-weil-derived-complete], define the comparison isomorphism $b_{\\iota,K}:C_\\iota K\\xrightarrow{\\sim}U_\\iota K$ to be the specified natural completion comparison $\\chi_{\\iota,K}$ of [lem-weil-finite-free-completed-scalar-comparison], equipped with the invertibility proved there. Thus its forward arrow is exactly that comparison and its inverse is the inverse of that same arrow, not a new completion map. Coefficient and scheme universes are independent for this construction. For an intrinsic integral constructible object $K\\in D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], use the canonical proof that its underlying object satisfies this derived-completeness predicate, obtained by identifying the augmented reduction triangles; in this intrinsic presentation the coefficient field and scheme have the same universe. This supplies $b_{\\iota,K}$ on integral constructible inputs without an additional completeness hypothesis.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-complete",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Definition 3.5.2, pp. 23–24: completion isomorphism and augmented reduction-tower completeness; existing helpers CompletedLineTensor.chi and CompletedLineTensor.intrinsic_complete. The finite-coefficient comparison is the specialization recorded in lem-weil-finite-free-completed-scalar-comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The completed scalar comparison on a derived complete adic complex is an isomorphism and integral constructible complexes are derived complete",
+   "results": "OK 8 hits: AdicCompletion.ofAlgEquiv_apply; AdicCompletion.module; IsAdicComplete.StrictMono.of_comp_lift; IsAdicComplete.toIsPrecomplete; IsAdicComplete; AdicCompletion.ofAlgEquiv; Padic.adicCompletionEquiv; AdicCompletion.ofLinearEquiv.",
+   "date": "2026-10-24",
+   "verdict": "No exact derived sheaf comparison; reuse the existing project helpers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical completed scalar comparison is an isomorphism at a derived complete complex",
+   "results": "OK 8 hits: DerivedCategory.singleFunctorIsoCompQ; DerivedCategory.instIsIsoMapCochainComplexIntQ; CochainComplex.cm5b.instQuasiIsoIntP; CategoryTheory.instIsIsoToRightDerivedZero'; DerivedCategory.isIso_Q_map_iff_quasiIso; CategoryTheory.instIsIsoAppToRightDerivedZero; DerivedCategory.singleFunctorCompHomologyFunctorIso; CategoryTheory.instIsIsoFunctorToRightDerivedZero.",
+   "date": "2026-10-24",
+   "verdict": "Generic derived isomorphisms only; no exact completion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep completedScalarComparison|IsDerivedCompleteUnrestricted|intrinsic_complete CategoryTheory; rg completedScalarComparison|intrinsic_complete lean/WeilConjectures; rg def chi |theorem intrinsic_complete lean/Sheaf/Paper/CompletedLineTensorCoherence.lean; rg CompletedLineTensor.chi|CompletedLineTensor.intrinsic_complete dag/nodes; blueprint_refs.py search completed comparison; blueprint_refs.py search CompletedLineTensor.chi",
+   "results": "Mathlib CategoryTheory: OK 0 hits. WeilConjectures: no hits. Sheaf/Paper/CompletedLineTensorCoherence.lean:378 def chi and :928 theorem intrinsic_complete are exact existing helpers. DAG exact declaration-name search: lem-pur-completed-line-tensor-coherence lists both helpers, but its statement is the line-tensor coherence theorem, not this definition interface. blueprint search completed comparison: one match, def-weil-pbc-completed-pullback; exact-name search: 0 blueprint nodes match CompletedLineTensor.chi.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing two declarations, with a new definition node owning this interface as required by the returned review; no new Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-integral-inverse-scalar-cocycle",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Coefficient-category comparison: inverse completion comparison on integral inputs, extracted in lem-fd-integral-inverse-scalar-cocycle.",
+   "via": [
+    "lem-fd-integral-inverse-scalar-cocycle",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "declaration": "WeilConjectures.CompletedLineTensor.chi",
+  "declarations": [
+   "WeilConjectures.CompletedLineTensor.chi",
+   "WeilConjectures.CompletedLineTensor.intrinsic_complete"
+  ],
+  "statement": "def chi (K : DerivedCategory (integralTowerModules l E X))\n    (hK : IsDerivedCompleteUnrestricted l E X K) :\n    (completedDerivedScalarExtension l E F ι X).obj K ≅\n      (integralScalarExtensionOfUniverses l E F ι X).obj K",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing definition: asIso of completedScalarComparison.app using the recorded finite-free comparison. The existing intrinsic_complete helper supplies the canonical augmented-tower completeness proof on sfIntegralConstructibleCategory. No line-tensor coherence conclusion or proof is required for this interface. Added at the maintainer’s returned stage-2 review request for immutable head 35dbc2f85d32."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22579f63",
+  "group": "Q49",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22579f63",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 35dbc2f8. Lean module byte-identical to 35dbc2 and lean.statement unchanged. Item node differs only in stmt_deps and lean.note: theorem lem-pur-completed-line-tensor-coherence removed; added new existing:true def node def-fd-complete-input-comparison (module CompletedLineTensorCoherence, decls CompletedLineTensor.chi [signature verbatim matches live l.376-381, asIso of completedScalarComparison] + intrinsic_complete [l.928]) and def-weil-pbc-finite-completed-coefficient-map (owner of pbcCompletedScalarMap, advisory followed). New node: statement matches the Lean, all 7 stmt_deps exist in live DAG, source Bhatt-Scholze 3.5.1/3.5.2, three kinds of search, no duplicate owner. Spot-check: forward conjunct = A.normalization; unit_normalization gives b=mu>>unit.inv and b^-1>>mu=unit.hom; left_unit/right_unit match. No proof_deps change, no statement change, gates OK. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T181137-L-4080685",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.CompletedLineTensor.associatorData_existsUnique",
+   "WeilConjectures.CompletedLineTensor.beta_natural_evaluation",
+   "WeilConjectures.CompletedLineTensor.canonical_restriction",
+   "WeilConjectures.CompletedLineTensor.complete",
+   "WeilConjectures.CompletedLineTensor.evaluation_existsUnique",
+   "WeilConjectures.CompletedLineTensor.integralTwist_linear",
+   "WeilConjectures.CompletedLineTensor.ordinaryUnit_existsUnique",
+   "WeilConjectures.CompletedLineTensor.pairData_existsUnique",
+   "WeilConjectures.CompletedLineTensor.rational_diagonal",
+   "WeilConjectures.CompletedLineTensor.scalar_coherence",
+   "WeilConjectures.CompletedLineTensor.tower"
+  ],
+  "sorry_after": [
+   "WeilConjectures.CompletedLineTensor.associatorData_existsUnique",
+   "WeilConjectures.CompletedLineTensor.beta_natural_evaluation",
+   "WeilConjectures.CompletedLineTensor.canonical_restriction",
+   "WeilConjectures.CompletedLineTensor.complete",
+   "WeilConjectures.CompletedLineTensor.evaluation_existsUnique",
+   "WeilConjectures.CompletedLineTensor.integralTwist_linear",
+   "WeilConjectures.CompletedLineTensor.pairData_existsUnique",
+   "WeilConjectures.CompletedLineTensor.rational_diagonal",
+   "WeilConjectures.CompletedLineTensor.scalar_coherence",
+   "WeilConjectures.CompletedLineTensor.tower"
+  ]
+ }
+}

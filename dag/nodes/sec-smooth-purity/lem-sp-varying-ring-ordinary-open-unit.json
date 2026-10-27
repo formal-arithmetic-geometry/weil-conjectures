@@ -1,0 +1,147 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-open-unit",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "title": "The ordinary open comparison has the prescribed pullback mate",
+ "statement": "For arbitrary commutative rings R_n with transitions, n a natural number, and a single open immersion j:U→X, the inverse of ordinaryOpenComparison of [lem-sp-varying-ring-ordinary-evaluation-comparisons] has mate ordinaryPullComparison.hom under the ordinary open adjunction moduleJAdj and the derived strict-tower open adjunction StrictTower.jAdj. This is an equality of natural transformations with the exact original comparisons, including the ordinaryRealization_eq transports; no commutative square or beta map is involved.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 4.22, especially (4.22.1), for open-extension/evaluation comparison; Stacks 03DI and 09AE. The asserted unit normalization after degree-zero constant embedding is an agent-formulated categorical consequence, extracted from the first one-open subargument in lem-sp-varying-ring-ordinary-comparison-normalization."
+ },
+ "stmt_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Form the invertible ordinary inverse mate of moduleEvalG under moduleJAdj and StrictTower.moduleJAdj; its invertibility is the already proved ordinaryOpenMateIso in VaryingRingOperations. Its unit equation is unit_mateEquiv_symm. Exact localization preserves this unit equation by StrictTower.exact_mate, with the specified exact/right-derived adjunction normalization. Injectivity of the derived open Hom equivalence identifies its localization with evalJInv. Thus evalJ is the inverse localization of this ordinary mate.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural-isomorphism coherence of mapDerivedCategorySingleFunctor and full faithfulness of the degree-zero embedding show that ordinaryRecoverSingleIso recovers an ordinary isomorphism from its localization. Cancel the two derived composition comparisons in ordinaryOpenEvaluation. It follows that ordinaryOpenEvaluation.inv is precisely the ordinary inverse mate constructed in the preceding step.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-diagram comparison preserves the adjunction unit componentwise. The degree-zero comparison preserves the localized unit: use exactAdj_unit on a single complex, cancel the exact-functor factorization isomorphisms and compute the remaining complex equality in its only nonzero degree. Apply mateEquiv_vcomp to these two squares to obtain the mate equation for ordinaryConstantSingleComparison.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the ordinary evaluation square and the constant/single square. By mateEquiv_vcomp its mate is the pasted pullback comparison. Whisker its top and bottom with the ordinaryRealization_eq equality isomorphisms. The mate whiskering theorem transports these to the right and left sides of its mate. Expanding the component formulas and deleting identity associators identifies the resulting two squares with ordinaryOpenComparison.inv and ordinaryPullComparison.hom, respectively.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "def-sp-varying-ring-operations",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "def-sp-varying-ring-operations",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Constructions 4.1 and 4.22 (4.22.1); J1 realizes the one-open normalization by the existing ordinary inverse mate, exact localization of its unit square, fully faithful recovery, and constant/single mate pasting. All helper statements are proved privately in the assigned module."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Ordinary realization normalization in the local pairs argument: the single-open unit equation before the cartesian open beta calculation.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-cartesian-evaluation",
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the degree zero embedding into the derived category with the unit of an exact adjunction",
+   "results": "msearch.py returned generic derived_unit, derivedη_fac_app_assoc, and shift-adjunction compatibilityUnit_isoZero. None states the normalization of the specified recovered ordinary open comparison after constant embedding.",
+   "date": "2026-10-27",
+   "verdict": "generic unit-localization API only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction mate of a natural transformation is preserved by compatible functor comparisons and composition",
+   "results": "mateEquiv_vcomp, unit_mateEquiv and mateEquiv_counit found by msearch.py; none identifies these concrete recovered-single/constant-tower comparisons.",
+   "date": "2026-10-27",
+   "verdict": "generic mate tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_vcomp",
+   "results": "msearch.py reported no identifier; inspected the local Mathlib Mates file and adopted source Mates API.",
+   "date": "2026-10-27",
+   "verdict": "local generic API, no concrete normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Mm]ate|SingleFunctor.*unit",
+   "results": "msearch.py returned zero matches; local inspection found exact-single natural-isomorphism and composition coherence in the adopted source, and generic exact localization mate results, but no ordinaryOpenComparison unit theorem.",
+   "date": "2026-10-27",
+   "verdict": "no existing statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryCartesianEvaluation",
+  "group": "A4",
+  "date": "2026-10-27"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryOpenUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinaryOpenUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinaryOpen_mate",
+  "statement": "theorem ordinaryOpen_mate (n : ℕ) {U X : Scheme.{u}} (j : U ⟶ X)\n    [IsOpenImmersion j] :\n    mateEquiv (moduleJAdj R φ j) (StrictTower.jAdj (R n) j)\n      (ordinaryOpenComparison R φ n U X j).inv =\n      (ordinaryPullComparison R φ n U X j).hom",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T094330-L-214849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T123455-L-2303801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

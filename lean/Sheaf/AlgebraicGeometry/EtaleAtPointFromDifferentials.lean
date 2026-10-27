@@ -16,11 +16,8 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.GroupTheory.MonoidLocalization.Away
-import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
-import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+import Sheaf.AlgebraicGeometry.CoordinateDifferentialsAffineChart
+import Sheaf.RingTheory.EtaleCoordinatesOfFibreBasis
 
 /-!
 # Étaleness from prescribed coordinate differentials
@@ -51,28 +48,20 @@ Source: Stacks Project, Tags 02GU(8), 01V7 and 00T7(2)
 (blueprint: lem-pur-etale-at-point-from-differentials).
 
 Proof:
-1. Use `lem-weil-pbc-smooth-locally-standard-smooth` to choose an affine neighbourhood
-   `Spec A` of the point with a standard smooth presentation
-   `A = k[y_1,...,y_n]/(F_1,...,F_r)` and invertible first `r` Jacobian minor.
-2. By `lem-weil-pbc-standard-smooth-kahler-basis`, the differentials of the remaining
-   `n-r` variables form a basis. The affine differential-sheaf description and
-   `lem-weil-pbc-spec-tilde-stalk-localization` identify its residue-field base change
-   with the differential fibre in the hypothesis. Comparing bases gives `d = n-r`.
-3. Lift the given functions to polynomials `H_j`. Over `R = k[T_1,...,T_d]`, the same
-   algebra has the graph presentation `R[y]/(F_1,...,F_r,H_1-T_1,...,H_d-T_d)`.
-   Evaluation of the `T_j` gives the presentation and its inverse; there are `n` equations.
-4. Write the square Jacobian in blocks `B,C,D,E`, with `B` the invertible `r`-minor.
-   The derivation rules give `B dy_first + C dy_last = 0`, so the prescribed differential
-   basis has matrix `E-D B⁻¹ C` in the standard basis after reduction to the residue field.
-   It is invertible. Block row elimination shows the whole determinant `Delta` is nonzero
-   at the point. Empty blocks have determinant one, covering `r=0` and `d=0`.
-5. Localize at the image of `Delta`. Adjoin a variable `t` and the relation `Delta*t-1`.
-   This presents the localization with a square Jacobian of determinant `Delta^2`, a unit.
-6. `lem-exc-etale-jacobian-presentation` makes this algebra étale over `R`.
-   `lem-weil-pbc-etale-ring-map-iff-etale-affine` makes its spectrum étale over affine space,
-   and `lem-weil-pbc-principal-localization-open-immersion` identifies it with the required
-   principal open containing the point. Each `T_j` still maps to the original function,
-   so this is the restriction of the prescribed map, not a different coordinate map. -/
+1. Choose a standard smooth affine chart using
+   `Scheme.exists_coordinate_differentials_affine_chart`. Its canonical fibre comparison
+   identifies the given coordinate differentials with their affine algebra differentials.
+2. The complementary variables of the submersive presentation give a global differential
+   basis. Pull the prescribed fibre basis back through the chart comparison and reindex
+   both bases by the lifted coordinate index.
+3. Apply `MvPolynomial.exists_etale_aeval_localization_of_fibre_basis`. The determinant of
+   the prescribed differentials in the global basis is nonzero in the fibre. Inverting it
+   makes these differentials a basis and the prescribed polynomial evaluation map étale.
+4. The chart's coordinate-map identity and compatibility of polynomial evaluation with
+   localization identify the resulting spectrum morphism with the prescribed map.
+5. The localization followed by the chart immersion is an open immersion. Its image is
+   the principal open of the chosen determinant, containing the point by nonzero evaluation.
+   Transport étaleness through its canonical isomorphism onto this open subscheme. -/
 theorem Scheme.exists_etale_open_of_coordinate_differentials_basis
     (k : Type u) [Field k] (U : Scheme.{u}) [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
@@ -90,6 +79,83 @@ theorem Scheme.exists_etale_open_of_coordinate_differentials_basis
     ∃ V : U.Opens, x ∈ V ∧
       Etale (V.ι ≫ AffineSpace.homOfVector (U ↘ Spec (.of k))
         (fun j : ULift.{u} (Fin d) ↦ h j.down)) := by
-  sorry
+  classical
+  obtain ⟨W, hW, hx, hchart⟩ :=
+    Scheme.exists_coordinate_differentials_affine_chart k U x d h hbasis
+  let res : Γ(U, ⊤) →+* Γ(U, W) :=
+    (U.presheaf.map (homOfLE le_top).op).hom
+  let : Algebra k Γ(U, W) :=
+    ((ΓSpecIso (.of k)).inv ≫ (U ↘ Spec (.of k)).appTop ≫
+      U.presheaf.map (homOfLE le_top).op).hom.toAlgebra
+  let : Algebra Γ(U, W) (IsLocalRing.ResidueField (U.presheaf.stalk x)) :=
+    (U.presheaf.germ W x hx ≫ U.residue x).hom.toAlgebra
+  let : Module Γ(U, W)
+      ((RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj
+        (U ↘ Spec (.of k)).relativeDifferentials) :=
+    Module.compHom _ (U.presheaf.germ W x hx).hom
+  let : Algebra (MvPolynomial (ULift.{u} (Fin d)) k) Γ(U, W) :=
+    (MvPolynomial.aeval (R := k) (fun j : ULift.{u} (Fin d) ↦ res (h j.down))).toRingHom.toAlgebra
+  obtain ⟨r, P, hP, _, ⟨g, Φ, _, _, hΦ⟩, _, _, hmap⟩ := hchart
+  have hcompl : IsCompl (Set.range (Fin.natAdd r : Fin d → Fin (r + d)))
+      (Set.range P.map) := by
+    rw [hP]
+    constructor
+    · rw [Set.disjoint_left]
+      rintro _ ⟨i, rfl⟩ ⟨j, hj⟩
+      have he := congrArg Fin.val hj
+      simp only [Fin.val_castAdd, Fin.val_natAdd] at he
+      omega
+    · rw [codisjoint_iff_le_sup]
+      intro i _
+      by_cases hi : i.val < r
+      · exact Or.inr ⟨⟨i.val, hi⟩, Fin.ext rfl⟩
+      · exact Or.inl ⟨⟨i.val - r, by omega⟩, Fin.ext (by simp; omega)⟩
+  let b := P.basisKaehlerOfIsCompl (Fin.natAdd_injective d r) hcompl
+  obtain ⟨c, hc⟩ := hbasis
+  let c' := c.map Φ.symm
+  have hc' (j : Fin d) :
+      c' j = 1 ⊗ₜ[Γ(U, W)] KaehlerDifferential.D k Γ(U, W) (res (h j)) := by
+    apply Φ.injective
+    simpa only [c', Module.Basis.map_apply, LinearEquiv.apply_symm_apply, hc] using
+      (hΦ j).symm
+  have : Algebra.IsStandardSmooth k Γ(U, W) := P.isStandardSmooth
+  obtain ⟨f, hf, het⟩ := MvPolynomial.exists_etale_aeval_localization_of_fibre_basis
+    (fun j : ULift.{u} (Fin d) => res (h j.down))
+    (b.reindex Equiv.ulift.symm) (c'.reindex Equiv.ulift.symm)
+    (fun j => by simpa using hc' j.down)
+  let S := Localization.Away f
+  let l : Spec (.of S) ⟶ Spec Γ(U, W) :=
+    Spec.map (CommRingCat.ofHom (algebraMap Γ(U, W) S))
+  let a := AffineSpace.homOfVector (U ↘ Spec (.of k))
+    (fun j : ULift.{u} (Fin d) => h j.down)
+  have hl : Etale (l ≫ hW.fromSpec ≫ a) := by
+    have heval :
+        (algebraMap Γ(U, W) S).comp
+          (MvPolynomial.aeval (R := k) (fun j : ULift.{u} (Fin d) => res (h j.down))).toRingHom =
+        (MvPolynomial.aeval (R := k) (fun j : ULift.{u} (Fin d) =>
+          algebraMap Γ(U, W) S (res (h j.down)))).toRingHom := by
+      exact congrArg AlgHom.toRingHom
+        (MvPolynomial.comp_aeval (fun j : ULift.{u} (Fin d) => res (h j.down))
+          (IsScalarTower.toAlgHom k Γ(U, W) S))
+    rw [← hmap, ← Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, heval]
+    have : Etale (Spec.map (CommRingCat.ofHom
+        (MvPolynomial.aeval (R := k) (fun j : ULift.{u} (Fin d) =>
+          algebraMap Γ(U, W) S (res (h j.down)))).toRingHom)) :=
+      (HasRingHomProperty.Spec_iff (P := @Etale)).mpr het
+    infer_instance
+  let i := l ≫ hW.fromSpec
+  have hrange : i.opensRange = U.basicOpen f := by
+    rw [Scheme.Hom.opensRange_comp, Scheme.Hom.opensRange_localizationAway,
+      hW.fromSpec_image_basicOpen]
+  have hx' : x ∈ i.opensRange := by
+    rw [hrange]
+    exact (U.evaluation_ne_zero_iff_mem_basicOpen x hx f).mp hf
+  let e := IsOpenImmersion.isoOfRangeEq i i.opensRange.ι (by simp)
+  refine ⟨i.opensRange, hx', ?_⟩
+  have : Etale (i ≫ a) := by simpa only [i, Category.assoc] using hl
+  have hi : Etale (e.inv ≫ i ≫ a) := inferInstance
+  have hfac : e.inv ≫ i = i.opensRange.ι :=
+    IsOpenImmersion.isoOfRangeEq_inv_fac i i.opensRange.ι _
+  simpa only [← Category.assoc, hfac] using hi
 
 end AlgebraicGeometry

@@ -1,0 +1,153 @@
+{
+ "id": "lem-coef-finite-free-tensor-ctf",
+ "kind": "statement",
+ "title": "Exact finite-free scalar extension preserves the constructible finite-Tor domain",
+ "statement": "Let W be any scheme with its small pro-etale site. Let A and B be finite commutative rings, let B be an A-algebra, and let b be a basis of B over A indexed by Fin r for a natural number r [def-sf-finite-free-scalar-calculus-data]. If K is a bounded constructible complex of A-module sheaves of finite Tor amplitude [def-weil-finite-tor-amplitude, def-weil-finite-torsion-constructibility], then the canonical derived scalar extension K tensor_A^L B is a bounded constructible complex of B-module sheaves of finite Tor amplitude. Scalar extension is the left adjoint of actual derived restriction [def-weil-pbc-witness-compatibility]. No Noetherian or finite-type hypothesis on W is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "Parts (2)--(3): scalar extension preserves the constructible finite-Tor domain. Here finite freeness permits the direct exact-scalar argument without the standing-scheme hypotheses."
+ },
+ "stmt_deps": [
+  "def-sf-finite-free-scalar-calculus-data",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-finite-free-scalar-tensor-calculus] on the etale and pro-etale sites. It supplies exact extension and restriction, their exact derived functors, and the adjunction to actual derived restriction. Exact extension commutes with homology and preserves both cohomological bounds. Ordinary scalar extension preserves finite locally constant sheaves and their fixed finite stratifications: tensor the local constant modules with B; they remain finite because the coefficient rings and the original module are finite. This is the proved source-library instance ProEtale.isConstructibleSheaf_etaleSheafExtendScalars_obj. Hence exact etale scalar extension preserves bounded constructibility.",
+   "uses": [
+    "lem-sf-finite-free-scalar-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Parts (2)--(3): scalar extension preserves the constructible finite-Tor domain. Here finite freeness permits the direct exact-scalar argument without the standing-scheme hypotheses."
+   }
+  },
+  {
+   "text": "The canonical ordinary scalar/site comparison localizes through exact extension. If K is the pro-etale realization of L, then its exact extension is the realization of the exact extension of L. Compose that comparison with extension of the original origin isomorphism; this gives the required bounded constructible etale origin.",
+   "uses": [
+    "lem-sf-finite-free-scalar-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Parts (2)--(3): scalar extension preserves the constructible finite-Tor domain. Here finite freeness permits the direct exact-scalar argument without the standing-scheme hypotheses."
+   }
+  },
+  {
+   "text": "Choose a Tor interval [a,b] of K. For every degree-zero B-module sheaf F, [lem-sf-finite-free-scalar-derived-tensor-models] identifies derived restriction of the extended K tensor_B F with K tensor_A Res F. Restriction commutes with degree-zero complexes and homology, and reflects cohomological vanishing. Thus the same interval holds for the extension. Finally uniqueness of left adjoints identifies exact descent with the fixed derived tensor of [def-weil-pbc-witness-compatibility], and invariance under isomorphisms transfers the constructed domain proof.",
+   "uses": [
+    "lem-sf-finite-free-scalar-derived-tensor-models",
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Parts (2)--(3): scalar extension preserves the constructible finite-Tor domain. Here finite freeness permits the direct exact-scalar argument without the standing-scheme hypotheses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-free-scalar-tensor-calculus",
+  "lem-sf-finite-free-scalar-derived-tensor-models",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "Finite-free special case of scalar preservation: exact homology and etale-origin descent plus the degree-zero Tor test. The arbitrary-scheme version follows directly from exact finite-free scalar descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free extension of scalars preserves bounded constructible cohomology and Tor amplitude",
+   "verdict": "Search performed via msearch.py; generic exact-functor and algebraic scalar results do not state this sheaf-derived ctf assertion.",
+   "date": "2026-10-26",
+   "results": "Search performed via msearch.py; generic exact-functor and algebraic scalar results do not state this sheaf-derived ctf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "verdict": "Found CategoryTheory.Adjunction.leftAdjointUniq, used to identify exact descent with canonical derived scalar extension; it does not by itself prove ctf preservation.",
+   "date": "2026-10-26",
+   "results": "Found CategoryTheory.Adjunction.leftAdjointUniq, used to identify exact descent with canonical derived scalar extension; it does not by itself prove ctf preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor.*[Ss]calar|[Nn]ormalized.*[Ss]calar",
+   "verdict": "msearch.py returned only unrelated normalized trace/ring results. Local rg found ProEtale.constructibleFiniteTor_leftDerivedSheafExtendScalars, which needs finite type over a field and invertible exponent; those hypotheses are absent here. The finite-free scalar tensor and derived tensor packages suffice.",
+   "date": "2026-10-26",
+   "results": "msearch.py returned only unrelated normalized trace/ring results. Local rg found ProEtale.constructibleFiniteTor_leftDerivedSheafExtendScalars, which needs finite type over a field and invertible exponent; those hypotheses are absent here. The finite-free scalar tensor and derived tensor packages suffice."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedScalarSystemTranspose",
+  "date": "2026-10-26",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Finite scalar-extension paragraph, preservation of constructible finite-Tor finite levels.",
+   "via": [
+    "lem-coef-ramified-scalar-system-transpose",
+    "lem-coef-finite-scalar-mate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeTensorCtf",
+  "file": "lean/Sheaf/Paper/FiniteFreeTensorCtf.lean",
+  "declaration": "AlgebraicGeometry.finiteFreeTensorCtf",
+  "statement": "theorem finiteFreeTensorCtf (W : Scheme.{u})\n    (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] [Algebra A B]\n    (r : ℕ) (basis : Module.Basis (Fin r) A B)\n    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} A)))\n    (hK : ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) W K) :\n    ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} B) W\n      ((ProEtale.pbcFixedScalarExtension (Scheme.ProEt.topology W)\n        (algebraMap A B)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-coef-finite-free-tensor-ctf",
+  "worker": "stage3",
+  "summary": "Proved exact finite-free tensor preservation on arbitrary schemes using etale-origin descent and the derived tensor cancellation formula. No new holes.",
+  "blueprint": "Finite scalar-extension paragraph of lem-coef-rational-operations: preservation of the finite-level constructible Tor domains."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T022824-L-465056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T022824-L-465056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

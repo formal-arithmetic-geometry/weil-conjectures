@@ -7,9 +7,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+
+import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 
 /-!
 # Cartier sections of smooth relative curves
@@ -46,6 +46,14 @@ theorem smoothCurveSection_cartier
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]
     [SmoothOfRelativeDimension 1 f] (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :
     IsClosedImmersion σ ∧ σ.ker.IsInvertible := by
-  sorry
+  have : IsClosedImmersion (σ ≫ f) := by rw [hσ]; infer_instance
+  have : IsClosedImmersion σ := IsClosedImmersion.of_comp σ f
+  refine ⟨inferInstance, ?_⟩
+  have : IsIso (σ.toImage ≫ (σ.imageι ≫ f)) := by
+    rw [← Category.assoc, Scheme.Hom.toImage_imageι, hσ]
+    infer_instance
+  have : IsIso (σ.imageι ≫ f) := IsIso.of_isIso_comp_left σ.toImage _
+  exact Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat f
+    inferInstance inferInstance inferInstance
 
 end AlgebraicGeometry

@@ -1,0 +1,150 @@
+{
+ "id": "lem-per-invariant-frame-line-descent",
+ "kind": "statement",
+ "title": "Invariant local frames give effective descent and all tensor-power maps",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], $H$ any type, $a:H\\to\\operatorname{Aut}(X)$ and $q:X\\to Y$ satisfy $a_h;q=q$. Suppose every $q^\\sharp_T:\\mathcal O_Y(T)\\to \\mathcal O_X(q^{-1}T)$ is injective and its image is exactly the elements fixed by every $a_h^*$, using transport along $a_h^{-1}q^{-1}T=q^{-1}T$. Let $F$ be a module sheaf, and suppose isomorphisms $\\lambda_h:a_h^*F\\simeq F$ and $\\lambda_{d,h}:a_h^*F^{\\otimes d}\\simeq F^{\\otimes d}$ are given for every $d\\geq0$. Assume every $y\\in Y$ has an open neighbourhood $T$ and a free generator $n\\in\\Gamma(q^{-1}T,F)$ [def-sc-local-free-generator] such that every pure power $n^{\\otimes d}$ is a free generator too; $\\lambda_h(a_h^*n)=n$ and $\\lambda_{d,h}(a_h^*n^{\\otimes d})=n^{\\otimes d}$ for every $h,d$. The sections, pullbacks, unit and quotient comparisons are those of [def-per-orbit-tensor-section-comparisons]. Then there are an invertible $\\mathcal O_Y$-module $M$ [def-sc-invertible-module], an inclusion $j:M\\to q_*F$ injective on sections with image precisely the sections fixed by all $\\lambda_h a_h^*$, and an isomorphism $e:q^*M\\simeq F$ whose hom is the adjoint of $j$ and satisfies $\\lambda_h\\circ a_h^*e=e\\circ\\kappa_h$, where $\\kappa_h:a_h^*q^*M\\simeq q^*M$ is the normalized quotient comparison. For each $d\\geq0$ there is $c_d:M^{\\otimes d}\\to q_*F^{\\otimes d}$, injective on sections with image precisely the sections fixed by all $\\lambda_{d,h}a_h^*$. For every $T$ and family of $d$ sections $m_i$ of $M$ on $T$, it sends their pure tensor to the pure tensor of $j(m_i)$. For $d=0$ it sends every scalar $b\\in\\mathcal O_Y(T)$ to $q^\\sharp_T(b)$ under the unit-section identifications. No group law, finiteness, surjectivity or orbit tensor construction is required.",
+ "stmt_deps": [
+  "def-per-orbit-tensor-section-comparisons",
+  "def-pc-scheme",
+  "def-sc-local-free-generator",
+  "def-sc-invertible-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV (sites-modules-definition-sheaf-modules), 0096 (module pullback adjunction), 01CA (modules-section-tensor-product), and 0BCY (divisors-lemma-norm-invertible). The invariant-coefficient calculation is the agent-written Steps 3--6 of the parent, with F and invariant local frames given instead of the orbit tensor and its construction."
+ },
+ "proof": [
+  {
+   "text": "For each T, take the additive submodule of F(q inverse T) consisting of sections fixed by every lambda_h after section pullback. The invariant-ring condition makes this stable under base scalars. Naturality gives restriction maps. Compatible invariant sections glue in F, and their gluing is invariant by uniqueness. This defines the module sheaf M and its sectionwise injective inclusion j.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "def-per-orbit-tensor-section-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a framed neighbourhood and each subopen W, write a section uniquely f n. Semilinearity and invariance of n show this is fixed precisely when f is fixed. The ring hypotheses give a unique b with f=q sharp(b). These coefficient bijections commute with restrictions and trivialize M there. Thus M is invertible and j has exactly the required image.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-sc-invertible-module",
+    "def-per-orbit-tensor-section-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjoint of j by [def-pc-module-pullback]. It carries the pulled-back base frame to n, hence is locally and globally an isomorphism. Both sides of the equivariance square carry the same local frame to n, and their semilinearity gives equality on all multiples; equality is local.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-local-free-generator",
+    "def-per-orbit-tensor-section-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the inclusion j on sections and apply the sheaf tensor universal property to construct c_d for d>0. Its local formula sends m tensor d to n tensor d. The assumed invariant frames and their unique coefficients give its sectionwise kernel and image exactly. The local inverses glue uniquely. At degree zero use q sharp under unitSectionsEquiv; the ring hypotheses supply precisely its injectivity and image.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sc-local-free-generator",
+    "def-per-orbit-tensor-section-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-per-orbit-tensor-section-comparisons",
+  "def-sc-local-free-generator",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tags 03CV (sites-modules-definition-sheaf-modules), 0096 (module pullback adjunction), 01CA (modules-section-tensor-product), and 0BCY (divisors-lemma-norm-invertible). The invariant-coefficient calculation is the agent-written Steps 3--6 of the parent, with F and invariant local frames given instead of the orbit tensor and its construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A line bundle with invariant local frames descends through an invariant ring quotient by its sheaf of fixed sections and descent commutes with tensor powers",
+   "results": "{\"t\": \"2026-10-26T08:10:48Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle with invariant local frames descends through an invariant ring quotient by its sheaf of fixed sections and descent commutes with tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.quotientToInvariants\", \"Rep.quotientToInvariants\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"Rep.quotientToInvariantsFunctor_map_hom\", \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Rep.mkQ_hom\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\"], \"digest\": \"d0697d04fac53286\"}",
+   "date": "2026-10-26",
+   "verdict": "Representation invariants and fixed subalgebras do not construct descended module sheaves from invariant frames."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor of the translates of a line bundle under a finite group action descends through a quotient by invariant local frames",
+   "results": "{\"t\": \"2026-10-26T08:05:32Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor of the translates of a line bundle under a finite group action descends through a quotient by invariant local frames\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"Representation.Coinvariants.mk_inv_tmul\", \"Representation.Coinvariants.mk_tmul_inv\", \"Rep.coinvariantsTensorFreeLEquiv_apply\", \"Rep.finsuppToCoinvariantsTensorFree_single\", \"Rep.coinvariantsTensorIndInv_mk_tmul_indMk\", \"Rep.finsuppToCoinvariantsTensorFree\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\"], \"digest\": \"5f4b53255759bcc3\"}",
+   "date": "2026-10-26",
+   "verdict": "Coinvariant representation identities do not state invariant-frame descent on schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "orbitTensor|orbit_tensor|invariant_frame_line|tensorPullbackSection",
+   "results": "{\"t\": \"2026-10-26T08:13:27Z\", \"tool\": \"grep\", \"query\": \"orbitTensor|orbit_tensor|invariant_frame_line|tensorPullbackSection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib declarations; the named section constructions are project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrbitTensorLineDescent",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Expose XVI, section 3.7, printed pp.254--255: the scheme quotient X double-prime/H is projective over X. This lemma supplies descent of the orbit tensor of a line bundle through an already constructed finite quotient; it asserts neither existence of that quotient nor ampleness. Substep: Invariant local frames give effective descent and all tensor-power maps.",
+   "via": [
+    "lem-per-orbit-tensor-line-descent",
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InvariantFrameLineDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantFrameLineDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invariant_frame_line_descent",
+  "statement": "theorem invariant_frame_line_descent {H : Type v} {X Y : Scheme.{u}}\n    (a : H → (X ≅ X)) (q : X ⟶ Y) (aq : ∀ h : H, (a h).hom ≫ q = q)\n    (ring_injective : ∀ T : Y.Opens, Function.Injective (q.app T))\n    (ring_image : ∀ (T : Y.Opens) (f : Γ(X, q ⁻¹ᵁ T)),\n      (∃ b : Γ(Y, T), q.app T b = f) ↔\n        ∀ g : H,\n          X.presheaf.map (eqToHom\n            (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)).symm).op\n              ((a g).hom.app (q ⁻¹ᵁ T) f) = f)\n    (F : X.Modules)\n    (lin : ∀ g : H, (tensorPullback (a g).hom).obj F ≅ F)\n    (linPow : ∀ (d : ℕ) (g : H),\n      (tensorPullback (a g).hom).obj (F.tensorPow d) ≅ F.tensorPow d)\n    (local_frames : ∀ y : Y, ∃ (T : Y.Opens) (n : Γ(F, q ⁻¹ᵁ T)), y ∈ T ∧\n      IsFreeGenerator n ∧\n      (∀ d : ℕ, IsFreeGenerator (orbitPowerSection F (q ⁻¹ᵁ T) d (fun _ ↦ n))) ∧\n      (∀ g : H, (lin g).hom.app (q ⁻¹ᵁ T)\n        (orbitInvariantPullback (a g).hom F (q ⁻¹ᵁ T)\n          (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) n) = n) ∧\n      (∀ (d : ℕ) (g : H), (linPow d g).hom.app (q ⁻¹ᵁ T)\n        (orbitInvariantPullback (a g).hom (F.tensorPow d) (q ⁻¹ᵁ T)\n          (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g))\n          (orbitPowerSection F (q ⁻¹ᵁ T) d (fun _ ↦ n))) =\n        orbitPowerSection F (q ⁻¹ᵁ T) d (fun _ ↦ n))) :\n    ∃ (M : Y.Modules) (j : M ⟶ (pushforward q).obj F)\n        (e : (tensorPullback q).obj M ≅ F)\n        (c : ∀ d : ℕ, M.tensorPow d ⟶\n          (pushforward q).obj (F.tensorPow d)),\n        M.IsInvertible ∧\n        (∀ T : Y.Opens, Function.Injective (j.app T)) ∧\n        (∀ (T : Y.Opens) (s : Γ(F, q ⁻¹ᵁ T)),\n          (∃ m : Γ(M, T), j.app T m = s) ↔\n            ∀ g : H, (lin g).hom.app (q ⁻¹ᵁ T)\n              (orbitInvariantPullback (a g).hom F (q ⁻¹ᵁ T)\n                (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) s) = s) ∧\n        e.hom = ((tensorPullbackSectionAdjunction q).homEquiv M F).symm j ∧\n        (∀ g : H, (tensorPullback (a g).hom).map e.hom ≫ (lin g).hom =\n          (orbitQuotientPullbackIso q (a g).hom (aq g) M).hom ≫ e.hom) ∧\n        (∀ (d : ℕ) (T : Y.Opens) (s : Fin d → Γ(M, T)),\n          (c d).app T (orbitPowerSection M T d s) =\n            orbitPowerSection F (q ⁻¹ᵁ T) d (fun i ↦ j.app T (s i))) ∧\n        (∀ (T : Y.Opens) (b : Γ(Y, T)),\n          (c 0).app T (unitSectionsEquiv T b) = unitSectionsEquiv (q ⁻¹ᵁ T) (q.app T b)) ∧\n        (∀ (d : ℕ) (T : Y.Opens), Function.Injective ((c d).app T)) ∧\n        (∀ (d : ℕ) (T : Y.Opens) (s : Γ(F.tensorPow d, q ⁻¹ᵁ T)),\n          (∃ m : Γ(M.tensorPow d, T), (c d).app T m = s) ↔\n            ∀ g : H, (linPow d g).hom.app (q ⁻¹ᵁ T)\n              (orbitInvariantPullback (a g).hom (F.tensorPow d)\n                (q ⁻¹ᵁ T) (congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq g)) s) = s)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "independent cc review: orbit_tensor_line_descent signature vs clone (identical); 7 moved defs vs clone bodies (verbatim); new sorry statements vs their nodes and the item's needs; #print axioms of the item and local-frames theorem in a /tmp sandbox"
+ }
+}

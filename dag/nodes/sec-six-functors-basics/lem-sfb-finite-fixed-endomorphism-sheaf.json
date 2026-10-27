@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-finite-fixed-endomorphism-sheaf",
+ "kind": "statement",
+ "title": "Common fixed endomorphisms commute with principal localization and affine sheaves",
+ "statement": "Let $R$ be a commutative ring, $I$ a finite set, and $\\sigma_i:R\\to R$ ring endomorphisms for $i\\in I$. No action laws or invertibility of the endomorphisms are assumed. Put $A=\\{r\\in R:\\sigma_i(r)=r\\text{ for all }i\\in I\\}$, a subring, and let $p:\\operatorname{Spec}R\\to\\operatorname{Spec}A$ be induced by inclusion [def-weil-affine-spectrum]. For every $f\\in A$, the canonical map $A_f\\to R_f$ is injective and identifies $A_f$ with the common fixed subring of the induced endomorphisms $(\\sigma_i)_f$ of $R_f$ [def-weil-ring-localization-away]. For any open $T\\subseteq\\operatorname{Spec}A$, each $\\operatorname{Spec}\\sigma_i$ preserves $p^{-1}T$, so it induces an endomorphism of $\\mathcal O_{\\operatorname{Spec}R}(p^{-1}T)$. The assignment $\\mathcal F(T)=\\{s\\in\\mathcal O_{\\operatorname{Spec}R}(p^{-1}T):\\sigma_i^*s=s\\text{ for all }i\\in I\\}$, with inherited restrictions, is a sheaf of rings [def-weil-locally-ringed-space-morphism]. The canonical structure map induces an isomorphism of sheaves $\\mathcal O_{\\operatorname{Spec}A}\\cong\\mathcal F$, whose component on $D_A(f)$ is precisely the localization map onto the common fixed subring of $R_f$. These identifications commute with restrictions between all opens. No reducedness or nonzero-divisor assumption on $R$ or $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I3, lemma-standard-open-affine, for the basic affine charts; the finite common-denominator fixed-fraction argument is the agent-written original Step 4 of lem-sfb-admissible-finite-type-field-quotient, generalized from finite group automorphisms to a finite family of endomorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:A\\hookrightarrow R$. Since $\\sigma_i j=j$, functoriality of $\\operatorname{Spec}$ gives $p\\circ s_i=p$ for $s_i=\\operatorname{Spec}\\sigma_i$. Hence $s_i^{-1}(p^{-1}T)=p^{-1}T$ for every open $T$. The sheaf component of $s_i$ therefore gives a ring endomorphism of sections on $p^{-1}T$, natural in $T$. Also $\\sigma_i(f)=f$, so the formula $(\\sigma_i)_f(r/f^n)=\\sigma_i(r)/f^n$ respects the fraction equivalence relation and defines a ring endomorphism of $R_f$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "algebra-lemma-spec-functorial; schemes Section Affine schemes; agent-written application of functoriality and the fraction definition (00CO)"
+   }
+  },
+  {
+   "text": "The inclusion induces $j_f:A_f\\to R_f$, $a/f^n\\mapsto a/f^n$. If its value is zero, the fraction criterion gives $f^ka=0$ in $R$ for some $k\\geq0$. Both $f$ and $a$ lie in $A$, and inclusion is injective, so the same equality holds in $A$ and $a/f^n=0$ in $A_f$. Thus $j_f$ is injective. Every fraction in its image is fixed, because its numerator and denominator are fixed.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, algebra-definition-localization; agent-written kernel and fixed-fraction calculation"
+   }
+  },
+  {
+   "text": "Conversely, let $r/f^n\\in R_f$ be fixed by every $(\\sigma_i)_f$. Multiplication by the unit $f^n$ shows $(\\sigma_i(r)-r)/1=0$. Thus for each $i$ there is $k_i\\geq0$ with $f^{k_i}(\\sigma_i(r)-r)=0$. Choose $N=\\max(\\{0\\}\\cup\\{k_i:i\\in I\\})$, using finiteness of $I$. Then $\\sigma_i(f^Nr)=f^N\\sigma_i(r)=f^Nr$ for every $i$, so $a=f^Nr\\in A$. The fraction $a/f^{n+N}\\in A_f$ maps to $r/f^n$. This proves the claimed image equality without cancelling any element in $R$. For $I=\\varnothing$, take $N=0$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, algebra-definition-localization; agent-written finite common-exponent argument generalizing the original field-quotient Step 4"
+   }
+  },
+  {
+   "text": "Restrictions preserve the fixed sections by naturality in Step 1. For an open cover $T=\\bigcup_\\alpha T_\\alpha$, compatible sections of $\\mathcal F(T_\\alpha)$ glue uniquely in $\\mathcal O_{\\operatorname{Spec}R}(p^{-1}T)$, since the $p^{-1}T_\\alpha$ cover $p^{-1}T$. For each $i$, the glued section and its pullback by $s_i$ have identical restrictions to that cover, hence are equal by sheaf uniqueness. Thus the glued section belongs to $\\mathcal F(T)$; the inherited operations make $\\mathcal F$ a sheaf of rings. Functoriality of ringed-space composition and $p\\circ s_i=p$ give $s_i^*p^\\sharp=p^\\sharp$. Corestricting $p^\\sharp$ therefore gives a morphism $\\theta:\\mathcal O_{\\operatorname{Spec}A}\\to\\mathcal F$ compatible with every restriction.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/schemes.tex",
+    "place": "definition-ringed-space (0091), morphisms and composition; agent-written verification of the sheaf gluing axiom for common fixed sections"
+   }
+  },
+  {
+   "text": "For $f\\in A$, contraction of primes along $j$ gives $p^{-1}D_A(f)=D_R(f)$. The affine section-localization lemma identifies the section rings on these two opens with $A_f$ and $R_f$, using the canonical restriction maps from $A$ and $R$. Under these identifications, $p^\\sharp$ sends $a/1$ to $j(a)/1$ and sends the inverse of $f/1$ to its inverse; every fraction is a product of these elements, so its map is exactly $j_f$. The same argument for $\\sigma_i$ identifies $s_i^*$ on $D_R(f)$ with $(\\sigma_i)_f$. Consequently $\\mathcal F(D_A(f))$ is the common fixed subring of $R_f$, and Steps 2--3 say exactly that $\\theta_{D_A(f)}$ is an isomorphism.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (1),(3),(5), and Tag 01I3, lemma-standard-open-affine; canonical affine-section maps followed by the explicit generator calculation"
+   }
+  },
+  {
+   "text": "The opens $D_A(f)$ form a basis by the spectrum basic-open lemma. Apply part (b) of the sheaf-morphism-on-basis lemma to the sheaves $\\mathcal O_{\\operatorname{Spec}A}$ and $\\mathcal F$ and the morphism $\\theta$: Step 5 verifies its isomorphism hypothesis on every basis member. Hence $\\theta$ is an isomorphism of sheaves of rings. Its components and their inverses commute with restrictions on all opens by naturality (compose the naturality square with the component inverses). This is the canonical isomorphism asserted, with the specified principal-open components.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology; Tag 009O, lemma-restrict-basis-equivalence, and its algebraic-structure version in Section 009H"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex; literature/stacks-project/sheaves.tex",
+  "place": "Agent-written fixed-fraction and fixed-section argument; affine charts follow 01HV/01I3 and the final basis criterion is 009O. No external source is claimed for the finite-endomorphism calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixed.*localiz|localiz.*fixed|invariant.*localiz|localiz.*invariant",
+   "results": "OK 1 hits: Mathlib/RingTheory/OreLocalization/Basic.lean Subdirectory: RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: localization functors preserve finite module limits, but identifying the fixed ring and its canonical affine section sheaf requires the localization and sheaf argument; returned fixed-ring definitions and spectrum sheaf declarations do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at an element fixed by a finite family of ring endomorphisms commutes with the common equalizer subring",
+   "results": "OK 8 hits: IsLocalizedModule.mk, CommRingCat.instIsLocalHomCarrierObjWalkingParallelPairFunctorConstPtEqualizerForkZeroParallelPairRingHomHomι, IsLocalization.Away.mvPolynomialQuotientEquiv, IsLocalization.ringEquivOfRingEquiv_eq, IsLocalization.algEquiv, IsLocalization.Away.map.congr_simp, IsLocalization.isLocalization_iff_of_ringEquiv, ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor",
+   "date": "2026-10-22",
+   "verdict": "no match: localization functors preserve finite module limits, but identifying the fixed ring and its canonical affine section sheaf requires the localization and sheaf argument; returned fixed-ring definitions and spectrum sheaf declarations do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"fixed\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: localization functors preserve finite module limits, but identifying the fixed ring and its canonical affine section sheaf requires the localization and sheaf argument; returned fixed-ring definitions and spectrum sheaf declarations do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf on the spectrum of a common fixed subring is the equalizer sheaf of finitely many endomorphisms on the direct image of the affine structure sheaf",
+   "results": "OK 8 hits: AlgebraicGeometry.IsAffineOpen.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpens, AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.ΓRestrictAlgebra, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.StructureSheaf.const_ext, AlgebraicGeometry.Spec_sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: localization functors preserve finite module limits, but identifying the fixed ring and its canonical affine section sheaf requires the localization and sheaf argument; returned fixed-ring definitions and spectrum sheaf declarations do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely many endomorphisms of a commutative ring the common fixed subring commutes with localization at a fixed element and equals invariant sections on the spectrum",
+   "results": "OK 8 hits: Algebra.IsInvariant.isInvariant, FixedPoints.isIntegral, FixedPoints.subring, Algebra.isInvariant_iff, FixedPoints.subalgebra, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, Algebra.IsInvariant.isIntegral, Algebra.IsInvariant.exists_smul_of_under_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: localization functors preserve finite module limits, but identifying the fixed ring and its canonical affine section sheaf requires the localization and sheaf argument; returned fixed-ring definitions and spectrum sheaf declarations do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of the common fixed subring of finitely many ring endomorphisms equals the sheaf of common fixed sections on its affine spectrum",
+   "results": "OK 8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.sectionsSubring, AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.commRingStructureSheafInTypeObj, AlgebraicGeometry.StructureSheaf.toOpen_eq_const, AlgebraicGeometry.StructureSheaf.const_ext",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction, localization-map, equalizer-inclusion and structure-sheaf constructions do not state the finite fixed-ring plus canonical sheaf identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"fixed\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction, localization-map, equalizer-inclusion and structure-sheaf constructions do not state the finite fixed-ring plus canonical sheaf identification."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*localiz|localiz.*fixed|invariant.*localiz|localiz.*invariant",
+   "results": "OK 1 hits: Mathlib/RingTheory/OreLocalization/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction, localization-map, equalizer-inclusion and structure-sheaf constructions do not state the finite fixed-ring plus canonical sheaf identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of ring endomorphisms fixing f has common fixed ring in the localization R_f equal to the localization of the common fixed subring",
+   "results": "OK 8 hits: RingHom.finiteType_ofLocalizationSpan, IsLocalization.Away.instMapRingHomPowersOfCoe, RingHom.StableUnderCompositionWithLocalizationAwayTarget, instFinitePresentationAway, RingHom.finiteType_ofLocalizationSpanTarget, RingHom.localization_away_map_finite, Module.Finite.instLocalizationLocalizedModule, IsLocalization.Away.map",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction, localization-map, equalizer-inclusion and structure-sheaf constructions do not state the finite fixed-ring plus canonical sheaf identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a commutative ring at a common fixed element commutes with the equalizer of a finite family of ring endomorphisms even with zero divisors",
+   "results": "OK 8 hits: CommRingCat.instIsLocalHomCarrierObjWalkingParallelPairFunctorConstPtEqualizerForkZeroParallelPairRingHomHomι, IsLocalization.Away.commutes, IsLocalization.Away.awayToAwayRight_eq, IsLocalization.Away.awayToAwayLeft_eq, IsLocalization.commutes, IsLocalization.localization_localization_exists_of_eq, IsLocalization.iff_map_piEvalRingHom, IsLocalization.Away.mul",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction, localization-map, equalizer-inclusion and structure-sheaf constructions do not state the finite fixed-ring plus canonical sheaf identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-admissible-finite-type-field-quotient",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), ILO IX 1.4 quotient ingredient: original field-quotient Step 4, localization with zero divisors and compatible invariant-sheaf affine charts.",
+   "via": [
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-fixed-endomorphism-sheaf",
+  "worker": "stage1",
+  "summary": "Proved the finite common-fixed localization assertion by an explicit common annihilating exponent, including zero divisors and empty index sets; verified the fixed-section sheaf and its canonical map, identified all affine components, then applied the existing basis criterion. Reused existing Mathlib leaves; no new nodes or statement changes.",
+  "blueprint": "Realizes the recorded ancestor place det-thm-sf-ctf-stability-direct-images, proof (3), ILO IX 1.4 quotient ingredient: original field-quotient Step 4, localization with zero divisors and compatible invariant-sheaf affine charts. blueprint_refs ancestor returns None, as recorded in the existing item; retained its via list and precise from.place. Whole-blueprint searches common fixed, invariant sections, fixed localization found no duplicate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-efe88fc16",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-efe88fc16 (reviewer sub-agent of L); spot-checked: First split: live and side-live still have the item unsplit and there is no repair note. Statement, stmt_deps, blueprint, source and created are byte-identical to the Q22-created node. The delivery has no new nodes and contains only the item and the report, which has a '## Review by Q57' section. proof_deps equals the union of the step uses. No SGA. All six cited nodes are mathlib leaves (spectrum, localization-away, ringed-space morphism, affine-open section localization (b), basic-open basis (i), sheaf-morphism-on-basis (b)), so tool_uses is not needed. I read every step in full. Steps 1 and 4: p∘Spec σ_i = p, so σ_i preserves p^{-1}T; the fixed sections form an equalizer subsheaf and p♯ corestricts to it via the composition formula. Steps 2 and 3: the injectivity uses the kernel criterion in A, and the common exponent N = max k_i over finite I gives f^N r ∈ A without cancelling in R (N = 0 when I is empty). Step 5: p^{-1}D_A(f) = D_R(f); 01HV/01I3 via the section-localization leaf identify p♯ with j_f and σ_i♯ with (σ_i)_f through the generators r/1 and 1/f. Step 6: an isomorphism on the basis gives an isomorphism of sheaves. Stacks tags 00CO, 0091, 01HV, 01I3, 00E0, 009O and 009H were checked against tags/tags and the .tex files. Tested on I empty, f nilpotent, Z[i] with conjugation and f = 2, and F_2[t,x]/(tx,x^2) with σ(x) = 0, f = t (zero divisors): the statement holds in every case. The nearest DAG node, lem-sbc-affine-invariant-basic-open-descent, needs a domain and h ≠ 0 and states a different universal property, so there is no duplicate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFixedEndomorphismSheaf",
+  "declaration": "AlgebraicGeometry.finite_fixed_endomorphism_sheaf",
+  "declarations": [
+   "AlgebraicGeometry.commonFixedSubring",
+   "AlgebraicGeometry.commonFixedSpecMap",
+   "AlgebraicGeometry.commonFixedLocalizedInclusion",
+   "AlgebraicGeometry.commonFixedLocalizedEndomorphism",
+   "AlgebraicGeometry.commonFixedEndomorphism_preimage",
+   "AlgebraicGeometry.commonFixedSectionEndomorphism",
+   "AlgebraicGeometry.finite_fixed_endomorphism_sheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFixedEndomorphismSheaf.lean",
+  "statement": "theorem finite_fixed_endomorphism_sheaf [Finite I] : (∀ f : commonFixedSubring σ, Function.Injective (commonFixedLocalizedInclusion σ f) ∧ (commonFixedLocalizedInclusion σ f).range = commonFixedSubring (commonFixedLocalizedEndomorphism σ f)) ∧ ∃ (F : TopCat.Sheaf CommRingCat.{u} (Spec (.of (commonFixedSubring σ))).carrier) (ι : F.obj ⟶ (commonFixedSpecMap σ).base _* (Spec (.of R)).presheaf) (θ : (Spec (.of (commonFixedSubring σ))).sheaf ≅ F), θ.hom.hom ≫ ι = (commonFixedSpecMap σ).c ∧ (∀ T : (Spec (.of (commonFixedSubring σ))).Opens, Function.Injective (ι.app (op T)) ∧ (ι.app (op T)).hom.range = commonFixedSubring (fun i : I ↦ commonFixedSectionEndomorphism σ i T)) ∧ (∀ (f : commonFixedSubring σ) (z : Localization.Away f), (ι.app (op (PrimeSpectrum.basicOpen f))) ((θ.hom.hom.app (op (PrimeSpectrum.basicOpen f))) (IsLocalization.algEquiv (Submonoid.powers f) (Localization.Away f) ((Spec.structureSheaf (commonFixedSubring σ)).obj.obj (op (PrimeSpectrum.basicOpen f))) z)) = IsLocalization.algEquiv (Submonoid.powers (f : R)) (Localization.Away (f : R)) ((Spec.structureSheaf R).obj.obj (op (PrimeSpectrum.basicOpen (f : R)))) (commonFixedLocalizedInclusion σ f z)) ∧ (∀ (f : commonFixedSubring σ) (i : I) (z : Localization.Away (f : R)), commonFixedSectionEndomorphism σ i (PrimeSpectrum.basicOpen f) (IsLocalization.algEquiv (Submonoid.powers (f : R)) (Localization.Away (f : R)) ((Spec.structureSheaf R).obj.obj (op (PrimeSpectrum.basicOpen (f : R)))) z) = IsLocalization.algEquiv (Submonoid.powers (f : R)) (Localization.Away (f : R)) ((Spec.structureSheaf R).obj.obj (op (PrimeSpectrum.basicOpen (f : R)))) (commonFixedLocalizedEndomorphism σ f i z))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem states all clauses together. The helper theorem commonFixedEndomorphism_preimage is the invariant-open clause of this same DAG statement; it is named separately because the actual section endomorphism needs this equality for transport. All helper definitions use Mathlib equalizer subrings, inclusion, localization maps, spectrum maps, and sheaf components. The fixed-section sheaf is specified as an injective subobject of the direct image with exactly the fixed image, canonically isomorphic to the literal fixed-section subsheaf with inherited restrictions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c63ca2b62",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; lean.statement verbatim. A=⨅ eqLocus, p=Spec.map subtype, j_f and (σ_i)_f via IsLocalization.map; first conjunct gives injectivity and the fixed-range equality. Preimage clause is a two-sided sorry theorem of this same node, used for eqToHom in the real .app section map. F is pinned by an injective natural ι with fixed-section image; θ is pinned by θ≫ι=p.c (not arbitrary); D(f) components match j_f and (σ_i)_f under IsLocalization.algEquiv; restrictions via naturality. Finite I only on the main theorem; independent universes; no extra hypotheses. Edge cases I=∅, f nilpotent, R=0, f=1 covered. stmt_deps are Mathlib existing:true records used as recorded. No commonFixed* collisions; docstrings and blueprint tags present; only sorry. No compile (no change)."
+ }
+}

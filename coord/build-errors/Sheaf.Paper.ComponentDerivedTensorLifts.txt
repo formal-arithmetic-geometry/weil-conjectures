@@ -1,0 +1,117 @@
+# global build 2026-10-25T18:42:09Z of 630f67c1f3: Sheaf.Paper.ComponentDerivedTensorLifts failed
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:298:17: failed to set `[local irreducible]`, `Square.theta` is currently `[irreducible]`, `[semireducible]`, `[implicit_reducible]` nor `[instance_reducible]` expected
+
+Note: Use `set_option allowUnsafeReducibility true` to override reducibility status validation
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:350:4: Type mismatch
+  Functor.LaxMonoidal.comp (Corner.modules Λ X (s.corner X)).mapDerivedCategory
+    (CondensedRing.upperStar Λ.X f).mapDerivedCategory
+has type
+  ((Corner.modules Λ X (s.corner X)).mapDerivedCategory ⋙
+      (CondensedRing.upperStar Λ.X f).mapDerivedCategory).LaxMonoidal
+but is expected to have type
+  (leftPath Λ (s.corner X) f).LaxMonoidal
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:353:4: Type mismatch
+  Functor.LaxMonoidal.comp (Slice.modules Λ (s.slice f)).mapDerivedCategory
+    (Corner.modules Λ Y (s.corner Y)).mapDerivedCategory
+has type
+  ((Slice.modules Λ (s.slice f)).mapDerivedCategory ⋙ (Corner.modules Λ Y (s.corner Y)).mapDerivedCategory).LaxMonoidal
+but is expected to have type
+  (rightPath Λ (s.corner Y) f (s.slice f)).LaxMonoidal
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:357:4: Type mismatch
+  hm
+has type
+  @NatTrans.IsMonoidal
+    (DerivedCategory
+      (CategoryTheory.Mod (Sheaf ((coherentTopology Profinite).over (affineComponentSpace X)) Ab)
+        (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X))))
+    (instCategoryDerivedCategory
+      (CategoryTheory.Mod (Sheaf ((coherentTopology Profinite).over (affineComponentSpace X)) Ab)
+        (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X))))
+    (DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+      (CategoryTheory.Mod (Sheaf ((coherentTopology Profinite).over (affineComponentSpace X)) Ab)
+        (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X))))
+    (DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    (instCategoryDerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    (DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+      (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    ((Corner.modules Λ X (s.corner X)).mapDerivedCategory ⋙ (CondensedRing.upperStar Λ.X f).mapDerivedCategory)
+    ((Slice.modules Λ (s.slice f)).mapDerivedCategory ⋙ (Corner.modules Λ Y (s.corner Y)).mapDerivedCategory)
+    (((Corner.modules Λ X (s.corner X)).mapDerivedCategoryCompIso (CondensedRing.upperStar Λ.X f)).symm ≪≫
+        Functor.mapDerivedCategoryNatIso (s.square f).ordinary ≪≫
+          (Slice.modules Λ (s.slice f)).mapDerivedCategoryCompIso (Corner.modules Λ Y (s.corner Y))).hom
+    (Functor.LaxMonoidal.comp (Corner.modules Λ X (s.corner X)).mapDerivedCategory
+      (CondensedRing.upperStar Λ.X f).mapDerivedCategory)
+    (Functor.LaxMonoidal.comp (Slice.modules Λ (s.slice f)).mapDerivedCategory
+      (Corner.modules Λ Y (s.corner Y)).mapDerivedCategory)
+but is expected to have type
+  @NatTrans.IsMonoidal
+    (CondensedRing.Evaluation.D ((coherentTopology Profinite).over (affineComponentSpace X))
+      (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X)))
+    (instCategoryDerivedCategory
+      (CategoryTheory.Mod (Sheaf ((coherentTopology Profinite).over (affineComponentSpace X)) Ab)
+        (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X))))
+    Mod.derivedMonoidalCategory
+    (DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    (instCategoryDerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    Mod.derivedMonoidalCategory (leftPath Λ (s.corner X) f) (rightPath Λ (s.corner Y) f (s.slice f))
+    (id
+        (id
+          (id
+            (id
+              (((Corner.modules Λ X (s.corner X)).mapDerivedCategoryCompIso (CondensedRing.upperStar Λ.X f)).symm ≪≫
+                Functor.mapDerivedCategoryNatIso (s.square f).ordinary ≪≫
+                  (Slice.modules Λ (s.slice f)).mapDerivedCategoryCompIso (Corner.modules Λ Y (s.corner Y))))))).hom
+    this✝ this
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:358:9: Application type mismatch: The argument
+  fun K L ↦ ?m.539
+has type
+  (K : ?m.536) → (L : ?m.540 K) → ?m.541 K L
+but is expected to have type
+  autoParam
+    (Functor.LaxMonoidal.ε (Corner.derived Λ X (s.corner X) ⋙ (CondensedRing.upperStar Λ.X f).mapDerivedCategory) ≫
+        (Square.theta Λ (s.square f)).hom.app
+          (𝟙_
+            (CondensedRing.Evaluation.D ((coherentTopology Profinite).over (affineComponentSpace X))
+              (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X)))) =
+      Functor.LaxMonoidal.ε (Slice.derived Λ (s.slice f) ⋙ Corner.derived Λ Y (s.corner Y)))
+    NatTrans.IsMonoidal.unit._autoParam
+in the application
+  @NatTrans.IsMonoidal.mk
+    (CondensedRing.Evaluation.D ((coherentTopology Profinite).over (affineComponentSpace X))
+      (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X)))
+    (instCategoryDerivedCategory
+      (CategoryTheory.Mod (Sheaf ((coherentTopology Profinite).over (affineComponentSpace X)) Ab)
+        (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X))))
+    Mod.derivedMonoidalCategory
+    (DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    (instCategoryDerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    (DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+      (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ.X Y)))
+    (Corner.derived Λ X (s.corner X) ⋙ (CondensedRing.upperStar Λ.X f).mapDerivedCategory)
+    (Slice.derived Λ (s.slice f) ⋙ Corner.derived Λ Y (s.corner Y)) (Square.theta Λ (s.square f)).hom
+    (Functor.LaxMonoidal.comp (Corner.derived Λ X (s.corner X)) (CondensedRing.upperStar Λ.X f).mapDerivedCategory)
+    (Functor.LaxMonoidal.comp (Slice.derived Λ (s.slice f)) (Corner.derived Λ Y (s.corner Y))) fun K L ↦ ?m.539
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:358:8: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  this✝¹
+inferred
+  Functor.LaxMonoidal.comp (Corner.derived Λ X (s.corner X)) (CondensedRing.upperStar Λ.X f).mapDerivedCategory
+error: Sheaf/Paper/ComponentDerivedTensorLifts.lean:361:7: Type mismatch: After simplification, term
+  NatTrans.IsMonoidal.unit
+ has type
+  Functor.LaxMonoidal.ε (leftPath Λ (s.corner X) f) ≫
+      (Square.theta Λ (s.square f)).hom.app
+        (𝟙_
+          (CondensedRing.Evaluation.D ((coherentTopology Profinite).over (affineComponentSpace X))
+            (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X)))) =
+    Functor.LaxMonoidal.ε (rightPath Λ (s.corner Y) f (s.slice f))
+but is expected to have type
+  ∀
+    (X_1 Y_1 :
+      CondensedRing.Evaluation.D ((coherentTopology Profinite).over (affineComponentSpace X))
+        (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X))),
+    Functor.LaxMonoidal.μ (Corner.derived Λ X (s.corner X) ⋙ (CondensedRing.upperStar Λ.X f).mapDerivedCategory) X_1
+          Y_1 ≫
+        (Square.theta Λ (s.square f)).hom.app (X_1 ⊗ Y_1) =
+      ((Square.theta Λ (s.square f)).hom.app X_1 ⊗ₘ (Square.theta Λ (s.square f)).hom.app Y_1) ≫
+        Functor.LaxMonoidal.μ (Slice.derived Λ (s.slice f) ⋙ Corner.derived Λ Y (s.corner Y)) X_1 Y_1
+error: Lean exited with code 1

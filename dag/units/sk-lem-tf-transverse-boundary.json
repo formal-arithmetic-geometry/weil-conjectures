@@ -1,0 +1,36 @@
+{
+ "id": "sk-lem-tf-transverse-boundary",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Transverse boundary calculation",
+ "lean": [],
+ "uses": [
+  "sk-prop-curve-affine-kummer"
+ ],
+ "statement": "Let $Z$ be a regular smooth surface over an algebraically closed field\nof characteristic $p$, or an étale limit with affine transition\nmaps of such surfaces. Let $X,Y$ be regular divisors meeting\ntransversely at exactly one point $z$, and let\n\n$$\n j:Z-Y\\hookrightarrow Z,\\qquad\n i:Z-(X\\cup Y)\\hookrightarrow Z-Y.\n$$\n\nLet $\\ell\\ne p$, let $A$ be a finite commutative $\\ell$-primary ring,\nand let $E$ be a bounded complex of $A$-modules on $Z-(X\\cup Y)$\nwith finite locally constant cohomology whose monodromy factors\nthrough a finite $\\ell$-group. Put $M=Rj_*i_!E$. Then $M_z=0$, and\n$M|_{Y-z}$ has finite locally constant cohomology. If $Y$ is\nconnected, then for every closed geometric point $s\\in Y-z$ the\nrestriction map\n\n$$\n R\\Gamma(Y,M|_Y)\\longrightarrow M_s\n$$\n\nis zero in $D(A)$.",
+ "steps": [
+  {
+   "text": "For the assertion at $z$, pass to the strict localization $S$ of\n$Z$ at $z$ and write $X_S,Y_S$ for the two transverse divisors.\nThe stalk formula for an open direct image\n([Stacks, Tag 03Q7](https://stacks.math.columbia.edu/tag/03Q7)) and\nlocalization give\n\n$$\n M_z=R\\Gamma(S-Y_S,i_!E).\n$$\n\nTo prove that this object is zero we may forget the $A$-action,\nsince the exact forgetful functor is conservative and cohomology of\nmodule sheaves agrees with the underlying abelian-sheaf cohomology\n([Stacks, Tag 03FD](https://stacks.math.columbia.edu/tag/03FD)). A finite abelian $\\ell$-group with an action of a\nfinite $\\ell$-group has a finite filtration with trivial\n$\\mathbf F_\\ell$ quotients: first filter by powers of $\\ell$, then use\nnilpotence of the augmentation ideal of the group algebra over\n$\\mathbf F_\\ell$. Since $i_!$ is exact, truncation and these\ncomposition series reduce the assertion to $E=\\mathbf F_\\ell$ on\n$S-(X_S\\cup Y_S)$."
+  },
+  {
+   "text": "For these constant coefficients, the open–closed sequence on\n$S-Y_S$ identifies the desired zero object with the cone of\n\n$$\n R\\Gamma(S-Y_S,\\mathbf F_\\ell)\n \\longrightarrow R\\Gamma(X_S-z,\\mathbf F_\\ell).\n$$\n\nBoth complexes have cohomology $\\mathbf F_\\ell$ in degree zero,\n$\\mathbf F_\\ell(-1)$ in degree one, and zero in all other degrees.\nFor the surface this follows from localization, acyclicity of the\nstrictly local schemes $S,Y_S$, and\n$i_{Y_S}^!\\mathbf F_\\ell=\\mathbf F_\\ell(-1)[-2]$; this purity\nidentity follows by transitivity from the smooth dualizing complexes\nof $S$ and $Y_S$. For the punctured trait, vanishing in degrees\n$\\geq2$ follows from Proposition [sk-prop-curve-affine-kummer] by\npassing to the filtered limit of punctured curve neighbourhoods.\nIts Kummer sequence gives\n$H^1(-,\\mu_\\ell)=K^*/K^{*\\ell}\\simeq\\mathbf Z/\\ell$, where $K$ is the\nfraction field: the units of the strictly henselian trait are\n$\\ell$-divisible, and a uniformizer has residue one, the valuation\nresidue of the curve appendix. The restriction is the identity in\ndegree zero. A local equation of $Y_S$ restricts to a uniformizer on\n$X_S$, so its Kummer residue is one on both sides and restriction is\nan isomorphism in degree one as well. Hence the cone is zero, and\n$M_z=0$ in $D(A)$ by conservativity."
+  },
+  {
+   "text": "Away from $z$ only the divisor $Y$ remains. Abhyankar's lemma along\nthe regular divisor $Y$\n([Stacks, Tag 0EYG](https://stacks.math.columbia.edu/tag/0EYG)) says that, étale locally on $Y$, a finite\ntame local system is trivialized by a Kummer cover of a local\nparameter of $Y$ and an unramified cover. Our finite $\\ell$-group\nmonodromy is tame, because wild inertia is pro-$p$. Consequently the\nstalks of $Rj_*E$ are the continuous cohomology of the same tame\ninertia representation, and their specialization maps along $Y-z$\nare isomorphisms. Explicitly, the pro-$\\ell$ part of tame inertia is\n$\\mathbf Z_\\ell(1)$; its cohomology on a finite $\\ell$-primary\nmodule is computed by the two-term complex of a topological\ngenerator minus one, and the other prime-to-$p$ factors have exact\ninvariants on these coefficients. Since the parameter and the\nunramified cover can be chosen on an étale neighbourhood, this\ndescription, including the specialization maps, is locally constant.\nApplying the argument to the cohomology sheaves of $E$ and using the\nbounded spectral sequence proves the assertion for $E$."
+  },
+  {
+   "text": "For the last assertion, choose a geometric generic point $\\bar\\eta$\nof the connected regular curve $Y$. Choose also specialization maps\nfrom $\\bar\\eta$ to $z$ and to $s$. Naturality of restriction gives the\ncommutative square in $D(A)$\n\n$$\n\\begin{CD}\n R\\Gamma(Y,M|_Y) @>>> M_s\\\\\n @VVV @VV{\\sim}V\\\\\n M_z=0 @>>> M_{\\bar\\eta}.\n\\end{CD}\n$$\n\nThe right arrow is an isomorphism by the local constancy just\nproved, so the upper arrow is zero as a morphism in $D(A)$."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-lem-tf-transverse-boundary/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

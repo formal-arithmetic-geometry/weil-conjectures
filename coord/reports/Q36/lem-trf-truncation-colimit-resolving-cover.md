@@ -1,0 +1,45 @@
+## Worker report
+
+Files written: `dag/nodes/sec-trace-formula/lem-trf-truncation-colimit-resolving-cover.json` (item, statement, split; no whole-item Mathlib match), `citations.json`, and this report. `searches.jsonl` contains the search command's unmodified records. The sandbox had no previous item, proof or report. The live item is unsplit, with no released repair note.
+
+Attachments: none. Searches of `lean/WeilConjectures/` for the exact blueprint tag and for compatible/resolving-class truncations found no declaration stating the entire item. `FlatTruncationTower.lean` concerns flat module sheaves rather than an arbitrary quotient-generating class, and cannot attach this item. The existing project declaration for homology preserving exact colimits is reused through its existing node.
+
+WANTED: none. All needed source texts are present.
+
+Imported defects and changes: the item had an empty proof. Its statement is correct and unchanged, including the isomorphism closure and the assertion at the boundary degree j=n. I supplied six proof steps, using two existing non-elementary inputs and elementary categorical constructions. No new nodes and no Mathlib leaves were created. Nothing remains unfinished within this one-level split.
+
+## Sources and route
+
+Read `literature/stacks-project/derived.tex`, Tag 06XX, `lemma-special-direct-system` (including strictification and final epicification), and Tag 0794, `proposition-left-derived-exists`, especially its second paragraph. The item isolates that paragraph's colimit resolution, not the proposition's left-derived-functor conclusion. The source's cohomology equality for n>i extends to n=i by the kernel term of good truncation; the proof explicitly checks this boundary. I also read `lean/WeilConjectures/CategoryTheory/DerivedCategory/DegreewiseLimits.lean`, the pointwise short-complex homology comparison and the exact-colimit instances at lines 76–89 and 142–144.
+
+Read the chapter and unit records and the current `literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/` unit and `lem-trf-local-term-locality.proof.md`. This auxiliary homological input serves the existing inherited normal-cone/specialization branch; it changes no chapter or unit assertion. The full inherited `blueprint.from` provenance is retained. `blueprint_refs.py ancestor` identifies `lem-trf-local-term-locality`; searches for `special-direct-system`, `truncation resolution`, `06XX`, `colimit homology` and `homology colimits` found no blueprint node stating the item. The two reused non-elementary nodes are declared as generic tool uses in `split_report.tool_uses`, for the maintainer to judge; no maintainer-owned `tool_uses` field was written.
+
+## Existing-node and Mathlib searches
+
+Searched all `dag/nodes/` by source tags 06XX/0794, special-direct-system, exact-colimit/cohomology concepts and titles/statements. Opened the resulting compatible-resolution node `lem-sfb-subcategory-truncation-resolution-system` and the exact-colimit node `src-weil-homology-preserves-exact-colimits`, including their full statements. The former supplies the entire strictly compatible tower under exactly the closure hypotheses proved in Step 1; the latter applies to any exact colimit shape, so it does not require a Grothendieck category or all filtered colimits. The flat-truncation nodes specialize to sheaves of modules and are unnecessary.
+
+All fresh Mathlib service queries were run using the prescribed `msearch.py Q36 lem-trf-truncation-colimit-resolving-cover` command and recorded from its log; the inherited 2026-10-22 searches remain intact. Both natural-language phrasings were read, as were the Loogle and grep results. LeanSearch gives complex colimit existence, a truncation quasi-isomorphism under a boundedness hypothesis, and an injective factorization; LeanFinder gives bounded derived representatives/fractions, individual-object left resolutions, and exact colimits in complexes. I read the returned source statements in `DerivedCategory/TStructure.lean:170–183`, `HomologicalComplexLimits.lean:119–174`, `GrothendieckAbelian.lean`, `LeftResolution/Basic.lean` and `Embedding/CochainComplex.lean:42–71`. These do not give compatible resolutions by an arbitrary quotient-generating class. The item is not a one-line specialization of them. No search service was unavailable.
+
+## Not duplicates
+
+No new nodes. In particular, no duplicate of the existing 06XX tower theorem or of the exact-colimit homology theorem was introduced.
+
+## Review by Q36
+
+I checked the item against Tags 06XX and 0794 with their statements and proofs open. All objects, indexing categories and hypotheses match. The item assumes exact sequential colimits only in A, which suffices: the stronger assumptions on F and B in 0794 are used later in that proposition, not in this colimit-resolution paragraph. The arbitrary class is first replaced by its isomorphism closure, exactly as needed by the existing 06XX node. No project-specific coefficient category is substituted.
+
+Step 1 uses the actual abelian-category definition `def-sp-abelian`, which includes zero objects and finite biproducts. Composition of isomorphisms and the induced biproduct isomorphism prove closure; the original epimorphic covers are retained. This is elementary bookkeeping, not a new theorem.
+
+Step 2 cites `lem-sfb-subcategory-truncation-resolution-system`. I read that node's statement: it says bounded above, every term in the chosen class, all positive integer stages, quasi-isomorphic augmentations, and equality of the square as chain maps. These are precisely what this step takes; the additional termwise epimorphism and split-transition clauses are not needed. This avoids trying to take a colimit of a diagram commuting only up to homotopy.
+
+Step 3 cites `def-weil-abstract-derived-category` for the explicit cohomology quotient, its functoriality, and the definition of quasi-isomorphism. The good truncation is defined in the item's statement. I checked the incoming image at degree n is taken inside ker(d_K^n), so the argument covers j=n, j<n, and j>n separately. The equality of the cohomology comparison maps follows from the strict chain-map equation rather than an unspecified transport.
+
+Step 4 cites `def-weil-pbc-category-colimit`, whose statement supplies the cocone factorization and uniqueness used here. The index is the small nonempty positive-integer poset. Differential squares, chain-map equations, the colimit universal property in complexes, and the augmentation are each checked after precomposition with all termwise legs. Thus no separate existence theorem about colimits of complexes is silently used.
+
+Step 5 cites `src-weil-homology-preserves-exact-colimits`. Its statement explicitly asserts preservation of colimits for every complex shape when those colimits in the abelian category exist and are exact, without filteredness restrictions. These are exactly the hypotheses here for the positive-integer category and the integer cochain shape. I also read the existing source proof, which identifies the induced maps on homology, so the comparison really is H^j(a), not just an abstract isomorphism of objects.
+
+Step 6 cites the colimit definition and cohomology definition, already opened in Steps 3–4. I checked the explicit factorization b_N c_N^{-1} for indices on either side of N=max(1,j), using only finite composites of transitions. This proves the cocone on H^j(K) is colimiting directly, with no uncited eventual-constant-diagram theorem. Uniqueness of colimits gives H^j(a) invertible; its composite with H^j(e_n) is c_n, so the leg is invertible for every j≤n. No circular use of the desired leg assertion occurs.
+
+For small cases I checked K=0, complexes supported in degree 0, a complex supported in degree n (the boundary cohomology equals K^n), a complex supported in degree n+1 (the n-th stage cohomology vanishes), and arbitrary negative j (N=1 works). The class may consist of a chosen representative of each isomorphism class rather than literally all zero objects; Step 1 handles exactly this issue. No projectivity, lifting property, exactness of all filtered colimits, or bound uniform in n is assumed. All six steps are below 2000 characters. Every cited node has a verbatim statement quote in `citations.json`; proof dependencies are exactly the union of their uses.
+
+I checked delivery-errors B1–B10: no new node is needed, the statement stays self-contained, the original source and TeX are preserved, searches are actual logged searches, and the blueprint place/result are populated. C1–C8: the two non-elementary inputs are existing statements that say exactly what is used, elementary comparisons are written out, no existing dependency was edited, and off-unit tools are declared. D1–D5: the item's proof assembles the tower and performs the colimit argument instead of moving a clause into a new node. E1–E7: the exactness shape, strict squares, boundary degree, maps and elementary universal-property computations were verified as above. No source error or statement dispute was found; no correction of the statement is needed.

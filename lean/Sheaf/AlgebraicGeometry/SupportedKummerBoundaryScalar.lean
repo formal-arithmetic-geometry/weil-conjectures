@@ -7,11 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerSystem
 import Sheaf.AlgebraicGeometry.SupportedKummerScalarSource
-import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.RelativeTorsorCohomology
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.AlgebraicGeometry.SupportedCartierBoundaryExistence
+import Sheaf.AlgebraicGeometry.SupportedKummerScalarOfSource
 
 /-!
 # Derived scalar extension of the supported Kummer boundary
@@ -30,6 +26,7 @@ namespace AlgebraicGeometry.Etale
 -- Match the stored instances of the boundary and scalar interfaces.
 set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
 
 
 /-- The normalized supported boundary over A is the derived scalar extension of
@@ -69,6 +66,12 @@ theorem supported_kummer_boundary_scalar (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
       ((Scheme.finiteEtaleTwistScalar N A hA).comp ULift.ringEquiv.toRingHom) N
       (congrArg (ULift.up : ZMod N → ULift.{u + 1} (ZMod N))
         (ZMod.natCast_self N)) hA i κ₀ κ := by
-  sorry
+  let R := ULift.{u + 1} (ZMod N)
+  have hR : (N : R) = 0 :=
+    congrArg (ULift.up : ZMod N → R) (ZMod.natCast_self N)
+  let φ := supportedScalarMap N A hA
+  obtain ⟨η, ηT, hη, hηT, huD, huI, huT, hnat⟩ :=
+    supported_kummer_scalar_source T N hN A hA i
+  exact supported_kummer_scalar_of_source φ T N hN hR hA hT i hI κ κ₀ hκ hκ₀ η hη huI
 
 end AlgebraicGeometry.Etale

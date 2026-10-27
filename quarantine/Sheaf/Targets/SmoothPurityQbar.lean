@@ -12,7 +12,7 @@ public import Sheaf.Paper.PbcQbarCategory
 public import Sheaf.Paper.PbcCoefficientTwists
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.SmoothPurity.NormalizedWitness
+import WeilConjectures.SmoothPurity.Defs
 
 /-!
 # Smooth purity at the condensed algebraic-closure coefficient unit
@@ -82,7 +82,7 @@ theorem nonempty_smoothPurityIso
     Nonempty
       (((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).obj ≅
-        (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d)) :=
-  sorry
+        (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d)) := by
+  exact ⟨smoothPurityIso ℓ f d⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

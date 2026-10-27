@@ -1,0 +1,318 @@
+{
+ "id": "lem-sf-native-adic-pullback-exact-lisse",
+ "kind": "statement",
+ "title": "Exact native coefficient inverse image preserves lisse local models",
+ "statement": "Fix a prime $\\ell$, put $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its $\\ell$-adic absolute-value topology, and use the small pro-etale site [def-weil-pbc-proetale-site] and sheaves of modules [def-weil-sheaf-of-modules-category]. For any scheme $X$, let $B_X$ be the sheaf of locally finite continuous $\\Omega$-valued functions: its sections on $U$ are continuous functions $|U|\\to\\Omega$ such that every point has an open neighbourhood on which the values span a finite-dimensional $\\mathbf Q_\\ell$-space. Restrictions are by precomposition. This is the coefficient construction used in [def-sf-native-weil-derived-framework], applied to $X$ itself. Write $\\mathcal A_X=\\operatorname{Mod}(B_X)$. Call an object lisse if it is pro-etale locally isomorphic to $B_U^{\\oplus r_U}$ with $r_U$ a finite nonnegative integer, allowed to vary with the covering member $U$. For every morphism of schemes $g:Y\\to X$, the canonical coefficient map $g^{-1}B_X\\to B_Y$ induced by precomposition is an isomorphism. The module inverse image $g^*M=B_Y\\otimes_{g^{-1}B_X}g^{-1}M$ is exact and sends lisse objects to lisse objects. It sends $B_X^{\\oplus r}$ to $B_Y^{\\oplus r}$. For $h:Z\\to Y$ the canonical inverse-image comparisons identify $h^*g^*$ with $(g\\circ h)^*$, and $\\operatorname{id}^*$ with the identity.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean",
+  "place": "Module.lean:120-178 (module inverse image and exactness), Constructible.lean:190-200 (lisse pullback), UpperStar.lean:263-312 (canonical coefficient isomorphism), Module.lean:307-318 (identity and composition comparisons). Bhatt-Scholze, Lemma 4.2.12 and Definition 6.8.1 motivate the coefficient construction; the precise locally finite-functions assertion is the native Lean statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For $V\\to X$ define $\\eta_g(t)$ on $V\\times_XY$ by $t\\circ\\operatorname{pr}_V$. Continuity is preserved by precomposition; the inverse image of a neighbourhood on which $t$ has finite-dimensional span has image contained in that same span. Hence this gives a section of $B_Y$. Pointwise addition, multiplication and $1$ commute with precomposition, and the pullback projection identities give compatibility with restrictions. Thus $\\eta_g:B_X\\to g_*B_Y$ is a ring-sheaf morphism. Take its adjoint $c_g:g^{-1}B_X\\to B_Y$ for the inverse-image adjunction.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/UpperStar.lean",
+    "place": "Lines 235-267, adicConstantSheafToLowerStar and upperStarAdicConstantSheafHom"
+   }
+  },
+  {
+   "text": "Apply the local generators and relations criterion with $P=u_g:X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$, $F=B_X$, $G=B_Y$, considered as abelian sheaves, and $\\eta=\\eta_g$. The chosen small sites and larger coefficient universe are those of the inverse-image construction; $u_g$ sends coverings to coverings and preserves the terminal object and fibre products, hence binary products. For a section $s$ and each point of its domain, the local-presentation lemma supplies an affine open on which $s$ is the pullback of a section of $B_X$. These opens cover the domain and give condition (i). For condition (ii), the zero-relation lemma applies to the continuous function underlying $t\\in B_X(V)$: its opens cover $U$, its maps $a$ give $B_X(a)t=0$ by pointwise equality, and its factorization identity is exactly the criterion's identity. Thus $c_g$ is an isomorphism on abelian sheaves. Its inverse respects multiplication and the unit, since those identities can be checked after the bijective map $c_g$, so it is the asserted ring-sheaf isomorphism.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-sf-adic-section-profinite-presentation",
+    "lem-sf-adic-zero-relation-neighbourhood",
+    "lem-sf-site-local-generators-relations-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/UpperStar.lean",
+    "place": "Lines 269-312, local generation, local relations and coefficient isomorphism"
+   }
+  },
+  {
+   "text": "The geometric inverse image with transported $g^{-1}B_X$-action is exact on underlying abelian sheaves by the cited exactness theorem. By the previous step the scalar extension in $g^*M=B_Y\\otimes_{g^{-1}B_X}g^{-1}M$ merely transports that action through $c_g$. Explicitly its underlying abelian sheaf is identified with $g^{-1}M$ by $b\\otimes m\\mapsto c_g^{-1}(b)m$, inverse $m\\mapsto1\\otimes m$. These formulas respect the balancing relation and are mutually inverse; they define sheaf maps by the sheaf tensor-product construction. Consequently the exact sequences supplied by geometric inverse image remain exact with the transported $B_Y$-actions, proving exactness of $g^*$.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact, first assertion and proof; native Module.lean:155-178"
+   }
+  },
+  {
+   "text": "The canonical composition and identity comparisons for the site inverse images are monoidal by the cited theorem. The coefficient maps respect them: the adjunct of the coefficient comparison for $g\\circ h$ sends $t$ to its precomposition with the projection to its original domain; precomposing first for $g$, then for $h$, gives this same function under the fibre-product associator. The identity projection gives $t$ itself. The inverse-image adjunction therefore identifies $c_{g\\circ h}$ with $c_h\\circ h^{-1}(c_g)$ and $c_{\\mathrm{id}}$ with the identity. The monoidal inverse-image comparisons consequently respect the transported module actions. Together with the explicit scalar-transport identifications of step 3 they give the canonical natural isomorphisms $h^*g^*\\cong(g\\circ h)^*$ and $\\mathrm{id}^*\\cong\\mathrm{id}$, with the stated coefficient maps.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean",
+    "place": "Lines 184-212 and 307-318, coefficient precomposition and module inverse-image comparisons; Stacks sites.tex Tag 00X6, proposition-get-morphism"
+   }
+  },
+  {
+   "text": "Under scalar transport, $g^*B_X$ identifies with $B_Y$: the map on the scalar-extension presentation is $b\\otimes a\\mapsto b\\,c_g(a)$, inverse $b\\mapsto b\\otimes1$. Exact additive pullback preserves finite biproducts: apply it to the inclusions and projections and to the identities $p_i i_j=\\delta_{ij}$ and $\\sum_i i_i p_i=1$. Thus $g^*(B_X^{\\oplus r})\\cong B_Y^{\\oplus r}$. For $r=0$ both sides are zero, since exactness preserves the zero object.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean",
+    "place": "Lines 175-185, nonempty_upperStar_iso_biproduct"
+   }
+  },
+  {
+   "text": "Let $(U_i\\to X)$ be a pro-etale covering trivializing a lisse $M$, with ranks $r_i$. Weakly etale base change and fpqc-covering base change show that $(U_i\\times_XY\\to Y)$ is again a pro-etale covering. Apply the ringed-site pullback/localization comparison to $u_g$ and the object $U_i$. Its hypotheses hold because $u_g$ preserves finite limits and coverings, and so does its slice functor $X_{\\mathrm{proet}}/U_i\\to Y_{\\mathrm{proet}}/(U_i\\times_XY)$; the required left adjoints of the global and slice module pushforwards are the tensor-formula pullbacks $B\\otimes_{c^{-1}B}c^{-1}(-)$ along the precomposition coefficient maps, by the ringed-topos module adjunction applied to the geometric morphisms of these site functors. By uniqueness of left adjoints the global one is $g^*$. The weakly-etale localization equivalence identifies these slice sites with the small pro-etale sites of $U_i$ and $U_i\\times_XY$; the restricted coefficient rings are literally their locally finite functions. The comparison identifies $(g^*M)|_{U_i\\times_XY}$ with pullback, along $U_i\\times_XY\\to U_i$, of $M|_{U_i}\\cong B_{U_i}^{\\oplus r_i}$. Step 5 makes this $B_{U_i\\times_XY}^{\\oplus r_i}$. This proves the lisse assertion, including varying finite ranks and rank zero.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean",
+    "place": "Lines 187-200, IsAdicLisseSheaf.upperStar; Stacks Modules on Sites Tag 03DO for locality of finite free models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-sf-adic-section-profinite-presentation",
+  "lem-sf-adic-zero-relation-neighbourhood",
+  "lem-sf-site-local-generators-relations-iso",
+  "lem-trf-geometric-inverse-image-exact",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/UpperStar.lean",
+  "place": "Reconstruction of native UpperStar.lean:86-312, Module.lean:120-178 and 184-318, Constructible.lean:175-200. General exactness and localization are cited through existing DAG nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of locally finite continuous l adic coefficient module sheaves is exact and preserves pro etale locally free finite rank sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.isOpen_etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"7d75ad4f642f1773\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adicUpperStar\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "adicUpperStar|upperStarAdicConstantSheaf|locallyFiniteFunctions",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of continuous l adic coefficient module sheaves is exact and preserves finite locally free sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\"], \"digest\": \"ac3ae5c5b58a6a6d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of modules over the sheaf of locally finite continuous algebraic closure p adic valued functions preserves kernels cokernels and local systems",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback\", \"instAbelianCondensedMod\", \"SheafOfModules.instIsLeftAdjointPullback\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"7e4bbffa7ee22750\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of locally finite continuous l adic coefficient sheaves is exact and preserves locally free finite rank modules",
+   "results": "{\"t\": \"2026-10-22T05:35:32Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of locally finite continuous l adic coefficient sheaves is exact and preserves locally free finite rank modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"AdicCompletion.map_exact\"], \"digest\": \"5ff1ca64113dfbda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module pullback and free-module comparisons cover parts, but do not prove the native locally finite continuous coefficient comparison; this item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adicUpperStar\"",
+   "results": "{\"t\": \"2026-10-22T05:35:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"adicUpperStar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module pullback and free-module comparisons cover parts, but do not prove the native locally finite continuous coefficient comparison; this item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "adicUpperStar|upperStarAdicConstantSheaf|locallyFiniteFunctions",
+   "results": "{\"t\": \"2026-10-22T05:35:26Z\", \"tool\": \"grep\", \"query\": \"adicUpperStar|upperStarAdicConstantSheaf|locallyFiniteFunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module pullback and free-module comparisons cover parts, but do not prove the native locally finite continuous coefficient comparison; this item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of locally finite continuous p adic coefficient sheaves preserves exact sequences",
+   "results": "{\"t\": \"2026-10-22T05:35:27Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of locally finite continuous p adic coefficient sheaves preserves exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf\", \"CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits\"], \"digest\": \"3e7b657b4ee01196\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module pullback and free-module comparisons cover parts, but do not prove the native locally finite continuous coefficient comparison; this item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback modules over a sheaf of rings along an isomorphism of coefficient sheaves is exact",
+   "results": "{\"t\": \"2026-10-22T05:35:33Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback modules over a sheaf of rings along an isomorphism of coefficient sheaves is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"0c8631a41184a3b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module pullback and free-module comparisons cover parts, but do not prove the native locally finite continuous coefficient comparison; this item is not a one-line Mathlib specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-constructible-abelian",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.ProEtale.isIso_upperStarAdicConstantSheafHom",
+   "file": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/UpperStar.lean",
+   "line": 273,
+   "note": "Canonical coefficient comparison; source and live sorry map checked."
+  },
+  {
+   "declaration": "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar",
+   "file": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean",
+   "line": 190,
+   "note": "Lisse clause; additional exactness and comparison instances are in Module.lean."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native coefficient local calculation for the inherited route prop-functor-package clause 3 (localization triangle); the seed ancestor is None. Module.lean:120-178 (module inverse image and exactness), Constructible.lean:190-200 (lisse pullback), UpperStar.lean:263-312 (canonical coefficient isomorphism), Module.lean:307-318 (identity and composition comparisons). Bhatt-Scholze, Lemma 4.2.12 and Definition 6.8.1 motivate the coefficient construction; the precise locally finite-functions assertion is the native Lean statement.",
+   "via": [
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-pullback-exact-lisse",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split native coefficient comparison into local section presentation, local zero-relation descent, and a generic generators/relations criterion; prove exactness by explicit transport of scalars, comparisons by the precomposition identity, and lisse preservation on pulled-back covers. Three statement-only new nodes; no Lean or compiler actions. Earlier refused ATTACH is not repeated.",
+  "blueprint": "The inherited native-support chain has blueprint ancestor None (confirmed by blueprint_refs.py ancestor), so its existing null ancestor and via chain are retained. Steps 1-2 realize the native coefficient comparison in UpperStar.lean, steps 3-4 Module.lean exactness and canonical comparisons, steps 5-6 Constructible.lean local model argument; these serve the inherited prop-functor-package localization-triangle support calculation without replacing the package unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness for arbitrary transported ring actions, used only after the native coefficient isomorphism; no native coefficient theorem is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic monoidal composition and identity coherence of site inverse images, used to lift the original coefficient precomposition law."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic preservation of fpqc covers under scheme base change, needed to pull back the chosen lisse cover."
+   },
+   {
+    "node": "lem-pur-ringed-site-pullback-localization-universes",
+    "why": "Generic ringed-site restriction comparison, used to pull back the actual local trivializations on slice sites."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the small pro-etale sites over the covering objects with the slice sites in the generic restriction comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O2-25231c1b9",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-25231c1b9 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes and every cited statement in full. Sources checked: native UpperStar.lean:80-312 (exists_opens_factor_of_eq_zero, exists_openImmersion_eq_comp_fst, isIso_upperStarAdicConstantSheafHom) and PullbackIsoOfLocallyGenerated.lean:50-95, 244-284; the split follows the native proof. The item had no proof on the base, so this is a first split, not a re-split. Item statement unchanged. I re-proved all 3 new nodes by hand. (1) Section presentation: shrink to an affine chart; the image K is compact in a finite-dimensional subspace, hence profinite; use Spec LC(K,R) and the clopen idempotents. (2) Zero relation: in an ultrametric field the balls are clopen and cut out by idempotents; localize at them; only continuity of t is needed. (3) Generators/relations criterion: using binary products, each colimit element is one class [t,phi]; (ii) gives local injectivity and (i) local surjectivity. None restates a clause of the item, and all are statement-only and self-contained. Edge cases checked: empty U, t=0, rank 0, varying ranks. Steps 1-5 are correct: in step 3, with c_g an isomorphism, the presheaf tensor is already g^{-1}M with transported action. Step 4 gets coefficient coherence from precomposition plus the adjunction. Fault (C1/C4), step 6: lem-pur-ringed-site-pullback-localization-universes takes abstract left adjoints of the module pushforwards, and the step asserted without citation that g^* and the slice pullbacks are those adjoints. FIX: cite lem-weil-pbc-ringed-topoi-module-adjunction (on route via sk-thm-properbasechange; no cycle; no trf or pod node in its closure), add that the slice functor preserves finite limits and coverings and that left adjoints are unique, and update proof_deps. Batch-5: lem-trf-geometric-inverse-image-exact (step 3) is generic topos exactness. Its closure has no trace-formula or Poincare theorem, only two trf definitions, and many other chapters cite it. It is genuinely outside both assumptions, so I accept it as a tool use, along with pur-ringed-site-localization and the fpqc base change leaf. Advisory: existing lem-sfb-totally-disconnected-coefficient-realization (f^{-1}C(|-|,D) = C(|-|,D) for totally disconnected D) gives a shorter alternative to step 2. Not a duplicate of any new node. No SGA. 1 fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Constructible",
+  "declaration": "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar",
+   "AlgebraicGeometry.ProEtale.isIso_upperStarAdicConstantSheafHom",
+   "AlgebraicGeometry.ProEtale.instPreservesFiniteLimitsAdicSheafAdicUpperStar",
+   "AlgebraicGeometry.ProEtale.instPreservesFiniteColimitsAdicSheafAdicUpperStar",
+   "AlgebraicGeometry.ProEtale.nonempty_upperStar_iso_biproduct",
+   "AlgebraicGeometry.ProEtale.adicUpperStarUnitIso",
+   "AlgebraicGeometry.ProEtale.adicUpperStarComp",
+   "AlgebraicGeometry.ProEtale.adicUpperStarId",
+   "AlgebraicGeometry.ProEtale.adicConstantSheafToLowerStar_comp",
+   "AlgebraicGeometry.ProEtale.adicConstantSheafToLowerStar_id",
+   "AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafHom",
+   "AlgebraicGeometry.ProEtale.adicConstantSheafToLowerStar",
+   "AlgebraicGeometry.ProEtale.adicUpperStar",
+   "AlgebraicGeometry.ProEtale.AdicSheaf",
+   "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf",
+   "AlgebraicGeometry.ProEtale.adicConstantSheaf",
+   "PadicAlgCl.locallyFiniteFunctions"
+  ],
+  "statement": "theorem IsAdicLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)\n    {F : AdicSheaf l X} (hF : IsAdicLisseSheaf F) :\n    IsAdicLisseSheaf ((f)^*ᵃ[l].obj F)",
+  "branch": "slopmaster2",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing native declarations cover all clauses, not only the primary lisse theorem. Constructible declares the primary theorem and nonempty_upperStar_iso_biproduct; it publicly imports Module (finite limits/colimits, unit, composition and identity) and UpperStar (the canonical coefficient isomorphism). For the finite-free clause specialize nonempty_upperStar_iso_biproduct to F equal to the displayed biproduct, e equal to Iso.refl, and hg supplied by adicUpperStarUnitIso. The primary signature is from Constructible.lean:190; its section binds universe u, {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}. Scalar transport through the coefficient isomorphism in adicUpperStar is the canonical tensor-formula pullback. No scheme finiteness hypotheses. This is a statement attachment, not a claim that all reachable proofs are closed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fbf72997f",
+  "group": "Q51",
+  "result": "pass",
+  "note": "existing:true attachment to native slopmaster2 declarations. Checked against the native source: locallyFiniteFunctions is exactly the node's B_X; IsAdicLisseSheaf has per-member finite ranks, rank 0 included; isIso_upperStarAdicConstantSheafHom has no hypotheses and is proved natively; adicUpperStar transports the action through the inverse coefficient iso, which is the canonical scalar extension; the exactness instances instPreservesFiniteLimits/ColimitsAdicSheafAdicUpperStar exist (seen in the built ilean); the finite-free clause is nonempty_upperStar_iso_biproduct with Iso.refl and adicUpperStarUnitIso (a real construction); adicUpperStarComp/Id are canonical conjugates. Statement field is verbatim Constructible.lean:190-192. No sorry in UpperStar, Module, Constructible, Ring or ConstantSheaf; no extra hypotheses; no universe restriction; framework-owned declarations are reused, not duplicated; node not yet attached live. No findings."
+ }
+}

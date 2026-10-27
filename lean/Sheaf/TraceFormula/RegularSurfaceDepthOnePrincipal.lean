@@ -8,12 +8,10 @@ module
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.Quotient
-import Sheaf.AlgebraicGeometry.IsRegularScheme
-import WeilConjectures.RingTheory.DepthLeSupportDimension
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Sheaf.TraceFormula.CoprimeGeneratorsMprimaryOrUnit
-import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesExactSequence
+import Mathlib.Algebra.GCDMonoid.Finset
 
 /-!
 # A depth-one quotient of a regular local surface has principal kernel
@@ -27,6 +25,52 @@ part (2) (blueprint: lem-trf-regular-surface-depth-one-principal).
 universe u
 
 namespace RingTheory
+
+private theorem parameters (A : Type u) [CommRing A] [IsRegularLocalRing A] :
+    ∃ t : List A, IsLocalRing.IsRegularSystemOfParameters t := by
+  classical
+  obtain ⟨s, hs, hspan⟩ :=
+    Submodule.FG.exists_span_finset_card_eq_spanFinrank
+      (IsLocalRing.maximalIdeal A).fg_of_isNoetherianRing
+  refine ⟨s.toList, ?_, ?_⟩
+  · simpa using hspan
+  · simpa [hs] using (IsRegularLocalRing.spanFinrank_maximalIdeal (R := A))
+
+private theorem length_le_depth (A : Type u) [CommRing A] [IsRegularLocalRing A]
+    (t : List A) (ht : IsLocalRing.IsRegularSystemOfParameters t) :
+    (t.length : ℕ∞) ≤ IsLocalRing.depth (R := A) A := by
+  have hr := (IsRegularLocalRing.isRegular_and_quotients_of_generators
+    A t.length ht.2.symm t ht).1
+  classical
+  unfold IsLocalRing.depth Ideal.depth
+  split_ifs with h
+  · exact le_top
+  · apply le_sSup
+    refine ⟨t, hr, ?_, rfl⟩
+    intro x hx
+    rw [← ht.1]
+    exact Ideal.subset_span hx
+
+private theorem regular_element (R : Type u) [CommRing R] [IsLocalRing R]
+    (h : IsLocalRing.depth (R := R) R = (1 : ℕ∞)) :
+    ∃ x : R, x ∈ IsLocalRing.maximalIdeal R ∧ IsSMulRegular R x := by
+  classical
+  have ht : (IsLocalRing.maximalIdeal R) • (⊤ : Submodule R R) ≠ ⊤ :=
+    (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
+      (IsLocalRing.maximalIdeal_le_jacobson (Module.annihilator R R))).symm
+  rw [IsLocalRing.depth, Ideal.depth, if_neg ht] at h
+  by_contra hn
+  have hz : sSup {n : ℕ∞ | ∃ rs : List R, Sequence.IsRegular R rs ∧
+      (∀ x ∈ rs, x ∈ IsLocalRing.maximalIdeal R) ∧ n = (rs.length : ℕ∞)} ≤ 0 := by
+    apply sSup_le
+    rintro n ⟨rs, hr, hm, rfl⟩
+    cases rs with
+    | nil => simp
+    | cons x xs =>
+      exact False.elim (hn ⟨x, hm x (by simp),
+        (Sequence.isRegular_cons_iff R x xs).mp hr |>.1⟩)
+  rw [h] at hz
+  exact (by simp : ¬ (1 : ℕ∞) ≤ 0) hz
 
 /-- Let `(A, 𝔫)` be a regular local ring of Krull dimension two and let `I ≤ 𝔫`.
 If the quotient `A ⧸ I`, with its quotient maximal ideal, has depth one, then
@@ -52,6 +96,89 @@ theorem regularSurfaceDepthOnePrincipal
         IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
       IsLocalRing.depth (R := A ⧸ I) (A ⧸ I) = (1 : ℕ∞)) :
     ∃ f : A, f ≠ 0 ∧ f ∈ IsLocalRing.maximalIdeal A ∧ I = Ideal.span {f} := by
-  sorry
+  classical
+  let : Nontrivial (A ⧸ I) :=
+    Ideal.Quotient.nontrivial_iff.mpr
+      (ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal A).ne_top hI)
+  let : IsLocalRing (A ⧸ I) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  have hne : I ≠ ⊥ := by
+    intro he
+    subst I
+    let := IsRegularLocalRing.of_ringEquiv (RingEquiv.quotientBot A).symm
+    obtain ⟨t, ht⟩ := parameters (A ⧸ (⊥ : Ideal A))
+    have hl : t.length = 2 := by
+      have := ht.2.trans ((ringKrullDim_eq_of_ringEquiv
+        (RingEquiv.quotientBot A)).trans hdim)
+      exact_mod_cast this
+    have hd := length_le_depth (A ⧸ (⊥ : Ideal A)) t ht
+    rw [hl, hdepth] at hd
+    norm_num at hd
+  obtain ⟨t, ht⟩ := parameters A
+  have hufd := regularLocalUFDBoundaryFactorization A t ht 0
+    (fun i ↦ Fin.elim0 i) (fun i ↦ Fin.elim0 i)
+  let : IsDomain A := hufd.1
+  let : UniqueFactorizationMonoid A := hufd.2.1
+  let : NormalizedGCDMonoid A := Classical.choice (inferInstance :
+    Nonempty (NormalizedGCDMonoid A))
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+    I.fg_of_isNoetherianRing
+  have hr : (Finset.univ : Finset (Fin r)).Nonempty := by
+    by_contra h
+    have hempty : (Set.range a : Set A) = ∅ := by
+      ext x
+      simp only [Set.mem_range, Set.mem_empty_iff_false, iff_false, not_exists]
+      intro i
+      exact False.elim (h ⟨i, Finset.mem_univ i⟩)
+    exact hne (by rw [← ha, hempty, Submodule.span_empty])
+  obtain ⟨g, hg, hcop⟩ := Finset.extract_gcd a hr
+  let f := Finset.univ.gcd a
+  have hfg (i : Fin r) : a i = f * g i := hg i (Finset.mem_univ i)
+  have hf : f ≠ 0 := by
+    intro hf
+    apply hne
+    rw [← ha]
+    apply le_antisymm _ bot_le
+    apply Submodule.span_le.mpr
+    rintro _ ⟨i, rfl⟩
+    simp [hfg, hf]
+  have hle : I ≤ Ideal.span {f} := by
+    rw [← ha]
+    apply Submodule.span_le.mpr
+    rintro _ ⟨i, rfl⟩
+    exact Ideal.mem_span_singleton.mpr ⟨g i, hfg i⟩
+  have hmul : ∀ z ∈ Ideal.span (Set.range g), f * z ∈ I := by
+    intro z hz
+    induction hz using Submodule.span_induction with
+    | mem z hz =>
+      obtain ⟨i, rfl⟩ := hz
+      rw [← hfg]
+      rw [← ha]
+      exact Submodule.subset_span ⟨i, rfl⟩
+    | zero => simp
+    | add x y hx hy ihx ihy => simpa [mul_add] using I.add_mem ihx ihy
+    | smul c z hz ih => simpa [smul_eq_mul, mul_left_comm f c] using I.mul_mem_left c ih
+  have hdiv : ∀ d : A, (∀ i : Fin r, d ∣ g i) → IsUnit d := by
+    intro d hd
+    have hdg : d ∣ Finset.univ.gcd g := Finset.dvd_gcd (fun i _ ↦ hd i)
+    rw [hcop] at hdg
+    exact isUnit_of_dvd_one hdg
+  have hfin : f ∈ I := by
+    rcases coprimeGeneratorsMprimaryOrUnit A hdim r g hdiv with htop | hrad
+    · simpa using hmul 1 (htop ▸ (show (1 : A) ∈ (⊤ : Ideal A) by trivial))
+    · obtain ⟨x, hx, hxreg⟩ := regular_element (A ⧸ I) hdepth
+      obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+      have hy : y ∈ IsLocalRing.maximalIdeal A := by
+        have := IsLocalHom.of_surjective (Ideal.Quotient.mk I)
+          Ideal.Quotient.mk_surjective
+        exact (IsLocalRing.maximalIdeal_comap (Ideal.Quotient.mk I)).le hx
+      obtain ⟨n, hn⟩ := Ideal.mem_radical_iff.mp (hrad ▸ hy)
+      apply Ideal.Quotient.eq_zero_iff_mem.mp
+      apply (hxreg.pow n).right_eq_zero_of_smul
+      change (Ideal.Quotient.mk I y) ^ n * Ideal.Quotient.mk I f = 0
+      rw [← map_pow, ← map_mul]
+      exact Ideal.Quotient.eq_zero_iff_mem.mpr (by simpa [mul_comm] using hmul _ hn)
+  refine ⟨f, hf, hI hfin, le_antisymm hle ?_⟩
+  exact Ideal.span_le.mpr (by simpa using hfin)
 
 end RingTheory

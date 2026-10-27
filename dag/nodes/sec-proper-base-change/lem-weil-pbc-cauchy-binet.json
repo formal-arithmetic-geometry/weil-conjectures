@@ -140,7 +140,32 @@
   "item": "lem-weil-pbc-matrix-left-inverse-minors",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Matrix.cauchy_binet"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Matrix.cauchy_binet",
+     "module": "WeilConjectures.LinearAlgebra.Matrix.CauchyBinet",
+     "lines": [
+      28,
+      103
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -182,5 +207,42 @@
   "landing": "20261012T225305-L-1803429",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring, $m,n\\ge0$ integers, $A=(a_{ij})$ an $m\\times n$ matrix and $B=(b_{jk})$ an $n\\times m$ matrix with entries in $R$, and $AB$ their product, the $m\\times m$ matrix with entries $(AB)_{ik}=\\sum_{j=1}^n a_{ij}b_{jk}$. For a subset $S\\subseteq\\{1,\\dots,n\\}$ with $|S|=m$, let $A^{S}$ be the $m\\times m$ submatrix of $A$ formed by the columns with indices in $S$ and $B_S$ the $m\\times m$ submatrix of $B$ formed by the rows with indices in $S$, both taken in increasing order of the indices. Then, with $\\det$ the determinant of a square matrix, $$\\det(AB)=\\sum_{S\\subseteq\\{1,\\dots,n\\},\\ |S|=m}\\det(A^{S})\\det(B_S)$$ in $R$. (For $n<m$ the sum is empty and $\\det(AB)=0$; for $m=0$ both sides are $1$.)",
+  "proof": [
+   {
+    "text": "(Expansion.) Write $[m]=\\{1,\\dots,m\\}$. By the definition of the determinant and of the product, $\\det(AB)=\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^m\\sum_{j=1}^n a_{\\sigma(k)j}b_{jk}$. Expanding the product of the $m$ sums by distributivity, $\\prod_{k=1}^m\\sum_{j=1}^n x_{k,j}=\\sum_{f:[m]\\to[n]}\\prod_{k=1}^m x_{k,f(k)}$ (one term for each choice of an index $f(k)$ in the $k$-th factor), so, exchanging the two finite sums and using commutativity of $R$, $$\\det(AB)=\\sum_{f:[m]\\to[n]}\\Big(\\prod_{k=1}^m b_{f(k)k}\\Big)\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^m a_{\\sigma(k)f(k)}=\\sum_{f:[m]\\to[n]}\\Big(\\prod_{k=1}^m b_{f(k)k}\\Big)\\det(A_f),$$ where $A_f$ is the $m\\times m$ matrix with $(A_f)_{ik}=a_{i,f(k)}$ (column $k$ of $A_f$ is column $f(k)$ of $A$), the last equality being the definition of $\\det(A_f)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Non-injective $f$ contribute $0$.) If $f:[m]\\to[n]$ is not injective, there are $k\\ne l$ with $f(k)=f(l)$; then $(A_f)_{ik}=a_{i,f(k)}=a_{i,f(l)}=(A_f)_{il}$ for all $i$, so columns $k$ and $l$ of $A_f$ are equal and $\\det(A_f)=0$ (a matrix with two equal columns has determinant zero). Hence in step 1 the sum may be restricted to the injective maps $f:[m]\\to[n]$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Injective maps by image and permutation.) For $S\\subseteq[n]$ with $|S|=m$ write $S=\\{s_1<\\dots<s_m\\}$. The map $(S,\\tau)\\mapsto f$, $f(k)=s_{\\tau(k)}$, from pairs of such a subset $S$ and a permutation $\\tau\\in S_m$ to injective maps $[m]\\to[n]$ is a bijection: $f$ is injective as a composite of injective maps, with image $S$; conversely an injective $f$ has an image $S=f([m])$ with $|S|=m$, and $\\tau(k)$ is then forced to be the unique $t$ with $s_t=f(k)$, which defines a permutation $\\tau$ of $[m]$ because $f:[m]\\to S$ and $t\\mapsto s_t$, $[m]\\to S$, are bijections. (If $n<m$ there is no such $S$ and no injective $f$.)",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(The term of $f=s\\circ\\tau$.) Let $S=\\{s_1<\\dots<s_m\\}$ and $f(k)=s_{\\tau(k)}$ as in step 3. By the definition of the submatrices taken in increasing order, $(A^S)_{it}=a_{i,s_t}$ and $(B_S)_{tk}=b_{s_t,k}$ for $1\\le i,t,k\\le m$. Hence $(A_f)_{ik}=a_{i,s_{\\tau(k)}}=(A^S)_{i,\\tau(k)}$: $A_f$ is $A^S$ with its columns permuted by $\\tau$, so $\\det(A_f)=\\operatorname{sgn}(\\tau)\\det(A^S)$ (permuting columns multiplies the determinant by the sign). And $\\prod_k b_{f(k)k}=\\prod_k b_{s_{\\tau(k)},k}=\\prod_k(B_S)_{\\tau(k),k}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Conclusion.) By steps 1–4, $$\\det(AB)=\\sum_{|S|=m}\\sum_{\\tau\\in S_m}\\Big(\\prod_{k=1}^m(B_S)_{\\tau(k),k}\\Big)\\operatorname{sgn}(\\tau)\\det(A^S)=\\sum_{|S|=m}\\det(A^S)\\sum_{\\tau\\in S_m}\\operatorname{sgn}(\\tau)\\prod_{k=1}^m(B_S)_{\\tau(k),k}=\\sum_{|S|=m}\\det(A^S)\\det(B_S),$$ the last equality being the definition of $\\det(B_S)$. For $n<m$ both the sum over injective $f$ and the sum over $S$ are empty and $\\det(AB)=0$; for $m=0$ the only $f$ is the empty map, the only $S$ is $\\emptyset$, and both sides are $1$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

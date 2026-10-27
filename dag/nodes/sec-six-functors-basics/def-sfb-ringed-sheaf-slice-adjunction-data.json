@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-ringed-sheaf-slice-adjunction-data",
+ "kind": "definition",
+ "title": "Data of a ringed sheaf slice presentation and its exact module adjunctions",
+ "status": "split",
+ "statement": "Let $C$ be a small category with Grothendieck topology $J$, let $R$ be a sheaf of rings and let $A$ be a sheaf of sets in the common universe [def-weil-size-convention]. Use the element-site constructions of [def-sfb-element-site-localization] and the fibre, set-restriction and direct-sum constructions of [def-sfb-element-site-slice-constructions]. Define ringed sheaf slice adjunction data to consist of the following data and properties, without asserting their existence. Include equality of the element topology with the restricted topology of $p_A$; an equivalence $e:\\operatorname{Sh}(J_A)\\simeq\\operatorname{Sh}(J)/A$ with a natural isomorphism from its inverse followed by the forgetful functor to the fibre presheaf functor; and the formula $R_A=p_A^*R$ on underlying presheaves. Include a ringed-topos morphism $j:(\\operatorname{Sh}(J_A),R_A)\\to(\\operatorname{Sh}(J),R)$ [def-weil-pbc-ringed-topos-morphism] whose inverse image equals the sectionwise set restriction, and whose structural map sends each section to that same section under this identification. On module sheaves [def-weil-sheaf-of-modules-category], include a functor $P:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R_A)$ (with default the canonical sectionwise module restriction), an adjunction $P\\dashv j_*$ and equalities of carriers $(PM)(U,s)=M(U)$. Include a functor $E:\\operatorname{Mod}(R_A)\\to\\operatorname{Mod}(R)$ with, for each $L$, an isomorphism from $EL$ to the module sheafification [def-weil-presheaf-modules-sheafification] of the direct-sum presheaf $U\\mapsto\\bigoplus_{s\\in A(U)}L(U,s)$, an adjunction $E\\dashv P$, preservation of finite limits and finite colimits by both $P$ and $E$, and additivity of $E$. Finally, for every sheaf map $b:B\\to A$, include continuity of its element-site functor and a module restriction functor equal to the canonical restriction along that functor, an equivalence $\\operatorname{Sh}(J_B)\\simeq\\operatorname{Sh}(J)/B$, and a natural isomorphism between $P$ followed by this restriction and the canonical sectionwise restriction from $R$ to $R_B$.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-element-site-localization",
+  "def-sfb-element-site-slice-constructions",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0791 (lemma-localize-topos-site), geometric slice presentation; Tag 04IE (lemma-localize-ringed-topos), localization and module adjunctions; Tag 04J4 (lemma-relocalize-ringed-topos), iterated localization. This node defines the package of data, not the theorem of its existence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RingedSheafSliceAdjunctionData|elementFibrePresheaf|elementSheafPullback|elementObj",
+   "results": "0 hits: . No exact Mathlib match; existing project definitions reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define the fibre presheaf of a sheaf over A on its element site and the data of a ringed sheaf slice presentation with exact module adjunctions",
+   "results": "8 hits: ModuleCat.tildeInModuleCat, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.freeAdjunction, SheafOfModules.Presentation, AlgebraicGeometry.Scheme.PresheafOfModules, AlgebraicGeometry.Scheme.Modules.presheaf, SheafOfModules.mk, PresheafOfModules.sheafificationAdjunction. No exact Mathlib match; existing project definitions reused.",
+   "date": "2026-10-23",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the fibre presheaf of a sheaf over A on its element site and the data of a ringed sheaf slice presentation with exact module adjunctions",
+   "results": "8 hits: SheafOfModules.Presentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.QuasicoherentData, SheafOfModules.LocalGeneratorsData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.Presentation.map. No exact Mathlib match; existing project definitions reused.",
+   "date": "2026-10-23",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedSheafSliceAdjunctionData|elementFibrePresheaf|elementSheafPullback|elementObj in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search ringed slice presentation",
+   "results": "No upstream WeilConjectures match. Project declarations found in RingedSheafSliceConstruction (fibre definitions lines 71-104, sheaf pullback 280-286) and RingedSheafSliceAdjunction (structure 33-99). DAG matches own these only through theorem nodes, not a definition node; def-sfb-element-site-localization owns projection/topology/ring/module restrictions but none of the four missing definitions. Blueprint search: 0 matches; ancestor: None.",
+   "date": "2026-10-23",
+   "verdict": "exact existing project match; no definition owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-topos-slice-functoriality",
+  "date": "2026-10-23",
+  "group": "Q41"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Concrete definitions used by the ringed relocalization statement: Data of a ringed sheaf slice presentation and its exact module adjunctions",
+   "via": [
+    "lem-sfb-ringed-topos-slice-functoriality",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSheafSliceAdjunction",
+  "declaration": "CategoryTheory.RingedSheafSliceAdjunctionData",
+  "declarations": [
+   "CategoryTheory.RingedSheafSliceAdjunctionData"
+  ],
+  "statement": "structure RingedSheafSliceAdjunctionData\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing definition reused without changing or duplicating Lean. Definition ownership is separated from the theorem asserting existence of the data."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e175eed3",
+  "group": "Q41",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e175eed3",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed cc92af91 (H2). Lean files byte-identical (sha256 f9bcb528/bf49343e); item statement/source/proof identical to live, only lean+stmt_deps changed. stmt_deps now all definitions: size-convention, ringed-topos-morphism, def-sfb-locally-ringed-topos, def-sfb-element-site-localization (live NK record unmodified), and new existing:true def-sfb-element-site-slice-constructions (elementObj/ObjMap/FibrePresheaf/FibrePresheafFunctor/SheafPullback/DirectSumMap/DirectSumPresheaf, all present in live RingedSheafSliceConstruction, statement verbatim) and def-sfb-ringed-sheaf-slice-adjunction-data (RingedSheafSliceAdjunctionData, statement follows every field, no existence claim). Every declaration used by the statement is owned by a cited def node; theorems only in proof_deps. Mathematics re-read: Over.post⋙Over.pullback inverse image, ringMap_eq, locality clauses, restriction/twoIso comparisons pinned by first + Over structure, id/comp coherence, single universe u. No new same-id/owner nodes landed in live. Advisories: possibly unused private Preserves.Shapes.Over import; redundant ring fields. No compile (no file changed)."
+ }
+}

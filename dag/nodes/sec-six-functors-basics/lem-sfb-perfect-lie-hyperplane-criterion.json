@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-perfect-lie-hyperplane-criterion",
+ "kind": "statement",
+ "title": "Simple-hyperplane criterion for representations of a perfect Lie algebra",
+ "statement": "Let $k$ be a field and let $L$ be a $k$-Lie algebra [def-wf-lie-algebra] that is perfect: $L$ is the $k$-linear span of its brackets $[x,y]$. A finite-dimensional representation is a finite-dimensional $k$-vector space $M$ [def-weil-finite-dimensional-subspace] with a linear map $\\rho:L\\to\\operatorname{End}_k(M)$ satisfying $\\rho([x,y])=\\rho(x)\\rho(y)-\\rho(y)\\rho(x)$. A subspace is invariant if it is preserved by every $\\rho(x)$, and a representation is simple if it is nonzero and its only invariant subspaces are $0$ and itself. Suppose that for every finite-dimensional representation $M$ of $L$ and every simple invariant subspace $W\\subseteq M$ with $\\dim_k(M/W)=1$, there exists an invariant subspace $D\\subseteq M$ with $M=W\\oplus D$. Then every invariant subspace $U$ of every finite-dimensional representation $V$ of $L$ has an invariant complement $C$, with $V=U\\oplus C$. Here a direct sum means that each vector has a unique expression as a sum of vectors from the two indicated subspaces. No finite-dimensionality of $L$, characteristic-zero hypothesis, or algebraic closure of $k$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 22c, Lemma 22.40, printed pp.476-477: agent adaptation of its simple-hyperplane criterion and Hom-space proof to Lie modules for a perfect Lie algebra over any field; this Lie-module formulation is not the algebraic-group statement of the printed lemma."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix $L,k$ and the simple-hyperplane splitting hypothesis. Subspaces, quotients and inverse images of invariant subspaces carry the restricted or quotient action: $x\\cdot(v+A)=x\\cdot v+A$, well-defined because $A$ is invariant, and the representation identity descends. We use finite dimensions throughout. A quotient is spanned by the images of a finite basis; a subspace has a basis of at most the ambient dimension (successively choose independent vectors until they span). Thus these constructions stay finite-dimensional. On a one-dimensional invariant space $T$, choose $t\\ne0$ and write $x\\cdot t=\\chi(x)t$. Linearity makes $\\chi:L\\to k$ linear, and the representation identity gives $\\chi([x,y])=\\chi(x)\\chi(y)-\\chi(y)\\chi(x)=0$. Perfectness gives $\\chi=0$, so every invariant line is trivial.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+   }
+  },
+  {
+   "text": "Prove by strong induction on $n=\\dim M$ that every invariant hyperplane $W\\subset M$ has an invariant complement. For $n=0$ there is no hyperplane. If $W=0$, take $M$; if $W$ is simple, use the hypothesis. Otherwise choose a proper invariant subspace $A\\subsetneq W$ of largest dimension. Since $W$ is nonzero and not simple, a proper nonzero invariant subspace exists, so $A\\ne0$. Such a largest dimension exists among $0,\\ldots,\\dim W-1$. Every invariant subspace of $W/A$ has invariant inverse image in $W$; maximality of $\\dim A$ implies $W/A$ is simple. Choose $m\\notin W$. The map $(W/A)\\oplus k\\to M/A$, $(w+A,a)\\mapsto w+am+A$, is a vector-space isomorphism. Hence $W/A$ is an invariant hyperplane of $M/A$. Since $A\\ne0$, the dimension formula gives $\\dim(M/A)<n$. The induction hypothesis therefore gives an invariant line $\\overline D\\subset M/A$ with $M/A=(W/A)\\oplus\\overline D$.",
+   "uses": [
+    "lem-trf-finite-dimensional-short-exact-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+   }
+  },
+  {
+   "text": "Let $P$ be the inverse image of $\\overline D$ in $M$. It is invariant, $P\\cap W=A$, and $M=W+P$: both claims follow by taking images in the displayed quotient direct sum. The quotient map gives $P/A\\cong\\overline D$, so $A$ is a hyperplane in $P$. The dimension formula yields $\\dim P=\\dim A+1<\\dim W+1=\\dim M$, since $A\\subsetneq W$. Apply the induction hypothesis again, now to $(P,A)$, obtaining $P=A\\oplus D$ with $D$ invariant. Then $M=W+D$ and $W\\cap D\\subseteq A\\cap D=0$. This completes the induction. The second induction application is essential; an arbitrary vector-space splitting of $P/A$ would not give an invariant $D$.",
+   "uses": [
+    "lem-trf-finite-dimensional-short-exact-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+   }
+  },
+  {
+   "text": "For the desired pair $(V,U)$, take $C=V$ if $U=0$ and $C=0$ if $U=V$. Otherwise put $H=\\operatorname{Hom}_k(V,U)$. The cited Lie-Hom action gives $(x\\cdot f)(v)=x\\cdot f(v)-f(x\\cdot v)$. The space $H$ is finite-dimensional: relative to finite bases of $V$ and $U$, the finitely many maps sending one basis vector to one basis vector and the others to zero span $H$. Thus every subspace of $H$ below is a finite-dimensional representation when invariant.",
+   "uses": [
+    "lem-sfb-lie-linear-hom-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+   }
+  },
+  {
+   "text": "Put $E=\\{f\\in H:f|_U=a\\operatorname{id}_U\\text{ for some }a\\in k\\}$ and $K=\\{f\\in H:f|_U=0\\}$. They are linear subspaces. For $f|_U=a\\operatorname{id}_U$ and $u\\in U$, invariance of $U$ gives $(x\\cdot f)(u)=a(x\\cdot u)-a(x\\cdot u)=0$. Hence $x\\cdot E\\subseteq K$ and $x\\cdot K\\subseteq K$, so both are invariant. Because $U\\ne0$, the scalar $a$ is unique, defining a linear map $s:E\\to k$ with kernel $K$. To see it is onto, use a vector-space complement $V=U\\oplus B$ from the cited complement lemma; the projection $p(u+b)=u$ lies in $E$ and satisfies $s(p)=1$. More explicitly $f=s(f)p+(f-s(f)p)$ decomposes $E=kp\\oplus K$, so $K$ is a hyperplane in $E$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+   }
+  },
+  {
+   "text": "Apply the hyperplane splitting proved in steps 2-3 to $K\\subset E$: obtain an invariant line $D$ with $E=K\\oplus D$. Choose $0\\ne f\\in D$. Step 1 makes the action on $D$ trivial, so for all $x,v$, $0=(x\\cdot f)(v)=x\\cdot f(v)-f(x\\cdot v)$; thus $f:V\\to U$ is equivariant. Since $D\\cap K=0$, its scalar $a=s(f)$ is nonzero. Set $q=a^{-1}f$. Then $q|_U=\\operatorname{id}_U$ and $q$ is equivariant. The subspace $C=\\ker q$ is invariant, since $q(x\\cdot c)=x\\cdot q(c)=0$. For each $v\\in V$, $v=q(v)+(v-q(v))$ has its first term in $U$ and its second in $C$. If $u\\in U\\cap C$, then $u=q(u)=0$. The expression is therefore unique and $V=U\\oplus C$, as required.",
+   "uses": [
+    "lem-sfb-lie-linear-hom-action"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "def-weil-finite-dimensional-subspace",
+  "lem-trf-finite-dimensional-short-exact-dimension",
+  "lem-sfb-lie-linear-hom-action",
+  "lem-trf-vector-subspace-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 22.40, printed pp.476-477; agent adaptation from group actions with no characters to Lie actions of a perfect Lie algebra."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hyperplane|codim|[Ss]emisimple|[Ii]sCompl",
+   "results": "{\"t\": \"2026-10-24T00:38:02Z\", \"tool\": \"grep\", \"query\": \"hyperplane|codim|[Ss]emisimple|[Ii]sCompl\", \"sub\": \"Algebra/Lie/Submodule.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"459\", \"460\", \"461\"], \"digest\": \"f833c087466dfc65\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduce complete reducibility of finite dimensional Lie modules to splitting simple hyperplanes",
+   "results": "{\"t\": \"2026-10-24T00:38:03Z\", \"tool\": \"leansearch\", \"query\": \"Reduce complete reducibility of finite dimensional Lie modules to splitting simple hyperplanes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.IsTriangularizable\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieModule.IsIrreducible.mk\", \"LieModule.IsTriangularizable.congr_simp\", \"LieAlgebra.IsSimple.instIsIrreducible\", \"LieModule.IsTriangularizable.mk\", \"LieModule.IsIrreducible\", \"LieModule.IsTriangularizable.rec\"], \"digest\": \"656f43dda23b4d13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieSubmodule, \"codim\"",
+   "results": "{\"t\": \"2026-10-24T00:38:03Z\", \"tool\": \"loogle\", \"query\": \"LieSubmodule, \\\"codim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete reducibility of representations of a perfect Lie algebra follows if every simple submodule of codimension one in any finite dimensional module has an invariant complement",
+   "results": "{\"t\": \"2026-10-24T00:38:07Z\", \"tool\": \"leanfinder\", \"query\": \"Complete reducibility of representations of a perfect Lie algebra follows if every simple submodule of codimension one in any finite dimensional module has an invariant complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.IsIrreducible\", \"LieAlgebra.IsSimple.instIsIrreducible\", \"LieModule.IsIrreducible.mk\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.IsTriangularizable\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\"], \"digest\": \"0397b2955089509a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all extensions of one dimensional trivial Lie algebra modules by irreducible modules split then every finite dimensional representation is completely reducible",
+   "results": "{\"t\": \"2026-10-24T00:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"If all extensions of one dimensional trivial Lie algebra modules by irreducible modules split then every finite dimensional representation is completely reducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.IsIrreducible\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsSimple.instIsIrreducible\", \"LieModule.IsIrreducible.mk\"], \"digest\": \"18608a4778bf681a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|codim|IsSemisimple|IsCompl",
+   "results": "{\"t\": \"2026-10-24T01:09:02Z\", \"tool\": \"grep\", \"query\": \"hyperplane|codim|IsSemisimple|IsCompl\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\"], \"digest\": \"58786ef190aa6161\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern semisimplicity of the Lie algebra or a single operator, definitions of irreducibility, and Maschke for finite groups; none states this criterion for arbitrary Lie modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect Lie algebra is completely reducible if simple invariant hyperplanes always split",
+   "results": "{\"t\": \"2026-10-24T01:09:03Z\", \"tool\": \"leansearch\", \"query\": \"A perfect Lie algebra is completely reducible if simple invariant hyperplanes always split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSimple.instIsIrreducible\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"LieModule.IsIrreducible\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsSemisimple.mk\", \"LieAlgebra.IsSemisimple\"], \"digest\": \"6c42d52efe5c56dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern semisimplicity of the Lie algebra or a single operator, definitions of irreducibility, and Maschke for finite groups; none states this criterion for arbitrary Lie modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieModule, \"IsSemisimple\"",
+   "results": "{\"t\": \"2026-10-24T01:09:03Z\", \"tool\": \"loogle\", \"query\": \"LieModule, \\\"IsSemisimple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern semisimplicity of the Lie algebra or a single operator, definitions of irreducibility, and Maschke for finite groups; none states this criterion for arbitrary Lie modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If extensions of the trivial one dimensional Lie module by any simple module split, then every finite dimensional Lie module is completely reducible",
+   "results": "{\"t\": \"2026-10-24T01:09:04Z\", \"tool\": \"leanfinder\", \"query\": \"If extensions of the trivial one dimensional Lie module by any simple module split, then every finite dimensional Lie module is completely reducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieModule.IsIrreducible\", \"LieAlgebra.IsSimple.instIsIrreducible\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.IsIrreducible.mk\", \"LieAlgebra.IsSemisimple.sSup_atoms_eq_top\"], \"digest\": \"cf789f01a752c4c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern semisimplicity of the Lie algebra or a single operator, definitions of irreducibility, and Maschke for finite groups; none states this criterion for arbitrary Lie modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representation is semisimple when all extensions by a trivial quotient split, using the action on the vector space of linear maps",
+   "results": "{\"t\": \"2026-10-24T01:11:47Z\", \"tool\": \"leanfinder\", \"query\": \"A representation is semisimple when all extensions by a trivial quotient split, using the action on the vector space of linear maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_id\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Module.End.isFinitelySemisimple_iff_isSemisimple\", \"instIsSemisimpleModuleSubtypeMemSubmoduleValSetIsotypicComponents\", \"IsSemisimpleRing.isSemisimpleModule\", \"isSemisimpleModule_iff_exists_linearEquiv_dfinsupp\", \"IsSemisimpleRing.moduleEnd\", \"IsIsotypicOfType.linearEquiv_fun\"], \"digest\": \"fd8322fa7776e8b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern semisimplicity of the Lie algebra or a single operator, definitions of irreducibility, and Maschke for finite groups; none states this criterion for arbitrary Lie modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-invariant-complement",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, equation (153), pp.509--510, and characteristic-zero integration Theorem 23.70, pp.507--508. Agent-formulated integral sl2 input filling the omitted rank-one verification in Theorem 23.72; the lattice integration assertion is not explicitly proved in Milne. Rational-fibre input: decompose the given sl2 operators into homogeneous polynomial modules before constructing the two integral charts. Weyl complement input used after constructing one highest-weight string (item proof step 5); Milne Theorem 23.70 proof (a), printed p.507: representations of a semisimple Lie algebra are semisimple. Supporting reduction: Milne Lemma 22.40 (c) to (b) to (a), pp.476-477, applied to the perfect rational Lie algebra sl2 before the Casimir calculation.",
+   "via": [
+    "lem-sfb-sl2-invariant-complement",
+    "lem-sfb-sl2-rational-polynomial-model",
+    "lem-sfb-sl2-lattice-integration",
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-lie-hyperplane-criterion",
+  "worker": "stage1",
+  "summary": "Read Milne Lemma 22.40, pp.476-477, and adapted its two reductions to Lie modules. Wrote both strong-induction applications, the Hom-space scalar restriction, the triviality of invariant lines using perfectness, and the explicit retraction/kernel decomposition. Reused existing vector complement and dimension leaves; created only the exact Mathlib Hom-action leaf. No statement change.",
+  "blueprint": "Retains the existing origin chain through the sl2 invariant-complement input: Milne Lemma 22.40 (c) to (b) is proof steps 2-3; (b) to (a) is proof steps 4-6; perfectness replaces the no-characters assumption in step 1."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-6f2958277",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-6f2958277 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 Lemma 22.40 (printed pp.476-477, PDF pp.488-489) and Mathlib Algebra/Lie/Basic.lean lines 238-282. The new node's cited declarations are at the lines it gives: instLieRingModule 249, LieHom.lie_apply 271, instLieModule 275. The item's statement text is unchanged; it gains the stmt_dep def-weil-vector-space-dimension, which the statement uses for dim(M/W). Steps 2-3 carry Milne's (c)⇒(b): a strong induction with a maximal proper invariant A⊊W, W/A simple and a hyperplane of M/A, dim M/A<n, the preimage P with P∩W=A, dim P=dim A+1<dim M, and a second induction on (P,A). I checked each claim. Steps 4-6 carry (b)⇒(a): Hom(V,U), and E,K are invariant because (x·f)(u)=a·xu−a·xu=0. The scalar map s is onto via a projection along a vector complement, the invariant line D is trivial, and q=s(f)^{-1}f is an equivariant retraction whose kernel is the complement. The cited statements say exactly what each step takes from them. I tested L=0, U=0, U=V, dim 1, positive characteristic and infinite-dimensional L; all go through. Perfectness of L is in fact unnecessary, since x·E⊆K already forces x·D⊆D∩K=0. That makes the hypothesis stronger than needed but not false, and I made no change. The new leaf lem-sfb-lie-linear-hom-action satisfies B1-B8: statement only, self-contained, an exact one-line specialization of Mathlib, searches recorded. It does not restate the item. It is not a duplicate of lem-sfb-rational-linear-hom (Hopf-coaction groups), of lem-sfb-simple-hyperplane-splitting-criterion or lem-sfb-characteristic-zero-complete-reducibility (rational G-modules over an algebraically closed field of characteristic zero), or of the single-operator complement nodes. Batch-5 flags: lem-trf-finite-dimensional-short-exact-dimension (ModuleCat.free_shortExact_finrank_add) and lem-trf-vector-subspace-complement (Submodule.exists_isCompl) are Mathlib leaves with no proof_deps. They are generic linear algebra, not steps of the proof of the trace formula or of Poincaré duality, so I accept them. No SGA citation, no cycle, the unit route is unchanged, and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.PerfectLieHyperplaneCriterion",
+  "declaration": "LieModule.exists_isCompl_of_perfect_of_simple_hyperplane",
+  "file": "lean/Sheaf/Algebra/Lie/PerfectLieHyperplaneCriterion.lean",
+  "statement": "theorem exists_isCompl_of_perfect_of_simple_hyperplane (k : Type u) [Field k] (L : Type v) [LieRing L] [LieAlgebra k L] (_hperfect : LieAlgebra.derivedSeries k L 1 = ⊤) (hsplit : ∀ (M : Type (max u w)) [AddCommGroup M] [Module k M] [LieRingModule L M] [LieModule k L M] [FiniteDimensional k M] (W : LieSubmodule k L M), LieModule.IsIrreducible k L W → Module.finrank k (M ⧸ W.toSubmodule) = 1 → ∃ D : LieSubmodule k L M, IsCompl W D) (V : Type w) [AddCommGroup V] [Module k V] [LieRingModule L V] [LieModule k L V] [FiniteDimensional k V] (U : LieSubmodule k L V) : ∃ C : LieSubmodule k L V, IsCompl U C",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2fafdac",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: perfect = derivedSeries 1 = ⊤ (coe_derivedSeries_one_eq = span of brackets); simple = IsIrreducible (IsSimpleOrder, excludes 0); finrank of quotient = 1; IsCompl of LieSubmodules = invariant direct sum; arbitrary field/Lie algebra, no extra assumptions. hsplit restricted to Type (max u w) only weakens the hypothesis and is provable via ULift of the Hom space; V universe independent. Node diff vs live = lean field only; statement verbatim; sorry-only; source/blueprint docstrings, six proof steps; stmt_deps all mathlib records; no duplicate found in Mathlib or project; edge cases V=0, U=0/V, dim M=0/1, L=0, char p checked. No fixes."
+ }
+}

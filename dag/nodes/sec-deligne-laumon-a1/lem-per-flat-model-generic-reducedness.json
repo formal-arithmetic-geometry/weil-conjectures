@@ -1,0 +1,243 @@
+{
+ "id": "lem-per-flat-model-generic-reducedness",
+ "kind": "statement",
+ "title": "Generic reducedness of flat coefficient models under dominating domain base change",
+ "statement": "Let $R$ and $D$ be finitely generated commutative $\\mathbf Q$-algebras which are integral domains (nonzero rings with no zero divisors), and let $R\\hookrightarrow D$ be an injective homomorphism of $\\mathbf Q$-algebras. Let $B$ be a finite type $R$-algebra [def-weil-pbc-finite-type-algebra] flat as an $R$-module [def-weil-pbc-flat-ring-map]. Let $k$ be a field of characteristic zero equipped with an injective $\\mathbf Q$-algebra map $R\\hookrightarrow k$. Equip tensor products [def-weil-pbc-module-tensor-product] with their usual algebra multiplication $(u\\otimes b)(v\\otimes c)=uv\\otimes bc$. If $k\\otimes_R B$ is generically reduced, then $D\\otimes_R B$ is generically reduced. Here a ring $T$ is generically reduced if for every minimal prime $\\mathfrak p$ of $T$ the localization $T_{\\mathfrak p}$ has no nonzero nilpotent element [def-pc-reduced-scheme]; the zero ring is allowed, with this condition vacuous.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00HS (lemma-flat-going-down) and 030V (lemma-geometrically-reduced-finite-purely-inseparable-extension); combined generic-local consequence, including descent from a containing field, rather than a verbatim statement of either tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\operatorname{Frac}(R)$ and $L=\\operatorname{Frac}(D)$, the rings of fractions at nonzero elements. The given injections extend uniquely to $K\\hookrightarrow k$ and $K\\hookrightarrow L$ by $r/s\\mapsto i(r)/i(s)$. Put $A=K\\otimes_R B$, $T=D\\otimes_R B$, and $C=L\\otimes_R B$. The tensor-algebra universal property gives $k\\otimes_K A\\simeq k\\otimes_R B$ and $L\\otimes_K A\\simeq C$: in either case $x\\otimes(y\\otimes b)\\mapsto xy\\otimes b$, with inverse $z\\otimes b\\mapsto z\\otimes(1\\otimes b)$. These formulas preserve multiplication and compose to the identity on pure tensors, hence on their sums.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Basic algebra conventions and fraction/tensor constructions; explicit reassociation maps."
+   }
+  },
+  {
+   "text": "The fraction field $K$ has characteristic zero. Apply [lem-per-field-extension-generic-reducedness] to $K\\hookrightarrow k$ and the $K$-algebra $A$. The first identification and the hypothesis give generic reducedness of $A$. Apply the same lemma to $K\\hookrightarrow L$; the second identification gives generic reducedness of $C$. Both applications allow an arbitrary field extension and the zero algebra.",
+   "uses": [
+    "lem-per-field-extension-generic-reducedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00I4 and 00HS, generic-local field-extension consequence."
+   }
+  },
+  {
+   "text": "The $D$-module $T=D\\otimes_RB$, with $D$ acting through the first factor, is flat by [lem-weil-pbc-flat-module-base-change] applied to $R\\to D$ and the flat $R$-module $B$. Let $\\mathfrak q$ be any minimal prime of $T$. Going down [lem-sc-flat-going-down] for the flat map $D\\to T$, $d\\mapsto d\\otimes1$, applied to the primes $(0)\\subseteq\\mathfrak q\\cap D$ of $D$ ($(0)$ is prime since $D$ is a domain; $\\mathfrak q\\cap D$ denotes the inverse image of $\\mathfrak q$), gives a prime $\\mathfrak q_1\\subseteq\\mathfrak q$ of $T$ contracting to $(0)$. Minimality forces $\\mathfrak q_1=\\mathfrak q$. Thus $\\mathfrak q\\cap D=(0)$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HI (lemma-flat-base-change) for flatness of the base change; Tag 00HS (lemma-flat-going-down)."
+   }
+  },
+  {
+   "text": "Let $S=D\\setminus\\{0\\}$. Localization of the first tensor factor identifies $C$ with $S^{-1}T$; the module isomorphism preserves multiplication on fractions. Since $\\mathfrak q\\cap S=\\varnothing$, the localization spectrum embedding gives a prime $\\mathfrak q_S$ of $C$ contracting to $\\mathfrak q$. It is minimal: a smaller prime contracts to a prime contained in $\\mathfrak q$, hence to $\\mathfrak q$, and injectivity of the spectrum embedding forces equality. There is an isomorphism $C_{\\mathfrak q_S}\\simeq T_{\\mathfrak q}$ sending $(t/s)/(u/v)$ to $tv/(su)$; here $s,v\\in S$ and $u\\notin\\mathfrak q$. Its inverse sends $t/u$ to $(t/1)/(u/1)$, and equality is the usual fraction equality. Since $C$ is generically reduced, $T_{\\mathfrak q}$ is reduced. This holds for every minimal prime of $T$; if $T=0$, there are none.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization), followed by the explicit two-stage localization fractions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-per-field-extension-generic-reducedness",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of the fraction-field comparisons, the generic-local consequence of Tags 00I4/00HS, and the localization correspondence of 00E3. The proof of 00HI is written out rather than invoked without a node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finite type algebra over an integral domain has generically reduced spectrum if its generic fibre is generically reduced",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.isReduced_of_isGeometricallyReduced, Algebra.HasGoingDown.of_flat, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, Algebra.FormallyUnramified.isReduced_of_field, IsReduced.tensorProduct_of_flat_of_forall_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finite type algebra over a characteristic zero domain with generically reduced generic fiber remains generically reduced after base change to any dominating characteristic zero domain",
+   "results": "unavailable: service unavailable: ERROR Command '['curl', '-s', '-m', '40', '-A', 'Mozilla/5.0 (weil-sheaf researc",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "GenericallyReduced|generically.reduced",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasGoingDown\"",
+   "results": "11 hits: Algebra.HasGoingDown, Algebra.HasGoingDown.of_flat, Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap, Algebra.HasGoingDown.trans, Algebra.HasGoingDown.exists_ideal_le_liesOver_of_lt, Algebra.HasGoingDown.mk, Algebra.HasGoingDown.of_comap_localRingHom_surjective, Ideal.exists_ltSeries_of_hasGoingDown",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic reducedness of a finite type algebra over a characteristic zero field is invariant under field extension; a flat algebra over a domain is generically reduced when its generic fiber is",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.IsGeometricallyReduced.of_injective, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "grep",
+   "query": "HasGoingDown.of_flat|IsGeometricallyReduced",
+   "results": "6 hits: Mathlib/RingTheory/Ideal/GoingDown.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically reduced finite type algebra over a perfect field is generically reduced after every extension of that field",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.casesOn, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, perfectField_of_isSeparable_of_perfectField_top, Algebra.IsGeometricallyReduced.mk, IsAlgClosed.perfectField",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective map of characteristic zero domains R to D and a flat finite type R algebra B, generic reducedness after extension to a field containing Frac R implies generic reducedness of B tensor R D",
+   "results": "8 hits: Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.casesOn, Algebra.IsGeometricallyReduced, IsReduced.tensorProduct_of_flat_of_forall_fg, Algebra.IsGeometricallyReduced.mk, TensorProduct.map_injective_of_flat_flat_of_isDomain, Algebra.IsGeometricallyReduced.of_forall_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic reducedness of the generic fibre of a flat finite type algebra over a characteristic zero domain persists under injective base change of domains",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.isReduced_of_isGeometricallyReduced, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, IsReduced.tensorProduct_of_flat_of_forall_fg, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.of_forall_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: going down and geometric reducedness of entire algebras do not assert preservation of reduced local rings only at minimal primes under this flat dominating-domain base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finite type algebra over a characteristic zero integral domain that is generically reduced after extension to a containing field stays generically reduced after injective base change to another domain",
+   "results": "{\"t\": \"2026-10-24T07:06:08Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finite type algebra over a characteristic zero integral domain that is generically reduced after extension to a containing field stays generically reduced after injective base change to another domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"Algebra.isGeometricallyReduced_iff\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"8c24e165ce19fe81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness under base change and going down are available and reused, but the statement about generic reducedness under dominating-domain base change is not stated by the hits; geometric reducedness of an entire algebra is stronger."
+  },
+  {
+   "tool": "grep",
+   "query": "HasGoingDown.of_flat|GenericallyReduced|generically.reduced",
+   "results": "{\"t\": \"2026-10-24T07:07:09Z\", \"tool\": \"grep\", \"query\": \"HasGoingDown.of_flat|GenericallyReduced|generically.reduced\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/GoingDown.lean\"], \"digest\": \"cfb0378c796d8ab6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness under base change and going down are available and reused, but the statement about generic reducedness under dominating-domain base change is not stated by the hits; geometric reducedness of an entire algebra is stronger."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat algebra over an integral domain with generically reduced generic fiber is generically reduced after dominating base change in characteristic zero",
+   "results": "{\"t\": \"2026-10-24T07:07:09Z\", \"tool\": \"leansearch\", \"query\": \"A flat algebra over an integral domain with generically reduced generic fiber is generically reduced after dominating base change in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Algebra.IsGeometricallyReduced\", \"RingHom.Flat\", \"Algebra.IsGeometricallyReduced.casesOn\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"65934b948f49253e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness under base change and going down are available and reused, but the statement about generic reducedness under dominating-domain base change is not stated by the hits; geometric reducedness of an entire algebra is stronger."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.HasGoingDown",
+   "results": "{\"t\": \"2026-10-24T07:07:10Z\", \"tool\": \"loogle\", \"query\": \"Algebra.HasGoingDown\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap\", \"Algebra.HasGoingDown.trans\", \"Algebra.HasGoingDown.exists_ideal_le_liesOver_of_lt\", \"Algebra.HasGoingDown.mk\", \"Ideal.exists_ideal_le_liesOver_of_le\", \"Ideal.exists_ideal_lt_liesOver_of_lt\"], \"digest\": \"8fdae2b7db875477\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness under base change and going down are available and reused, but the statement about generic reducedness under dominating-domain base change is not stated by the hits; geometric reducedness of an entire algebra is stronger."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-variety-rational-smooth-limit-models",
+  "date": "2026-10-24",
+  "group": "Q158"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 3 (duality), via the regular-resolution branch: preservation of generic reducedness in the flat coefficient models used for the rational approximation of varieties (Bierstone–Milman–Temkin, Theorem 7.5).",
+   "via": [
+    "lem-per-variety-rational-smooth-limit-models",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-flat-model-generic-reducedness",
+  "worker": "stage1",
+  "summary": "Q114: unchanged statement. Reduced the proof to two field-extension comparisons and a minimal-prime localization argument. Added only the field-extension generic-reducedness lemma, with logged searches in two phrasings; reused existing flat going down, tensor universal property, tensor localization and spectrum localization nodes. Checked the zero algebra, generically reduced rings with embedded nilpotents, inseparable positive-characteristic failure, and nonflat vertical components. No project attachment found.",
+  "blueprint": "Realizes the inherited lem-per-artin-gabber-affine-curve Step 3 duality branch through the characteristic-zero regular-resolution/rational smooth-limit models: generic reducedness of each dominating flat coefficient model. The unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-e714e1030",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-e714e1030 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-field-extension-generic-reducedness and every cited node in full. Checked the sources in algebra.tex: 00HS lemma-flat-going-down (:9265), 00I4 lemma-perfect-reduced (:10581), 00E3 lemma-spec-localization (:3163) and 00HI lemma-flat-base-change (:8889). The item statement is unchanged and true. Edge cases: B=0; a nonflat vertical nilpotent factor, which flatness excludes; inseparable characteristic p, which char 0 excludes. Step 1: the algebra pushout universal property gives k⊗_K(K⊗_R B)≅k⊗_R B and L⊗_K A≅L⊗_R B; correct. Step 2: both directions of the new lemma, with K=Frac R of characteristic 0; correct. Step 4: localization-tensor-over-base with M=D and S=D∖0 gives C=S⁻¹T; the spectrum embedding gives a minimal q_S over q; C_{q_S}≅T_q with well-defined fractions; correct. The new lemma (char-0 field extension preserves and reflects generic reducedness) is true by faithful flatness plus going down plus 00I4, needs no Noetherian hypothesis, is self-contained and statement-only, and duplicates nothing: an rg -L search for 'generically reduced' gives 17 hits, and the perfect-scalars and perfect-reduced-tensor nodes are about whole-ring reducedness. It is not a restated clause of the item. All cited nodes outside the unit are definitions or Mathlib leaves, so no tool_uses are needed. One C4/C5 fault, repaired: step 3 proved flatness of D⊗_R B over D by a module cancellation and cited the algebra pushout node, which does not state that; the existing Mathlib leaf lem-weil-pbc-flat-module-base-change (Module.Flat.baseChange, 00HI) states it exactly. Fix: step 3 now cites that leaf and keeps the going-down and minimality argument; uses and proof_deps updated in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-flat-model-generic-reducedness.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatModelGenericReducedness",
+  "declaration": "Algebra.genericallyReduced_tensorProduct_of_flat",
+  "file": "lean/Sheaf/RingTheory/FlatModelGenericReducedness.lean",
+  "statement": "theorem genericallyReduced_tensorProduct_of_flat (R : Type uR) (D : Type uD) (B : Type uB) (k : Type uk) [CommRing R] [IsDomain R] [Algebra ℚ R] [Algebra.FiniteType ℚ R] [CommRing D] [IsDomain D] [Algebra ℚ D] [Algebra.FiniteType ℚ D] [Algebra R D] [IsScalarTower ℚ R D] [CommRing B] [Algebra R B] [Module.Flat R B] [Field k] [CharZero k] [Algebra ℚ k] [Algebra R k] [IsScalarTower ℚ R k] (hRD : Function.Injective (algebraMap R D)) (hRB : (algebraMap R B).FiniteType) (hRk : Function.Injective (algebraMap R k)) (hk : ∀ p : PrimeSpectrum (k ⊗[R] B), p.asIdeal ∈ minimalPrimes (k ⊗[R] B) → IsReduced (Localization.AtPrime p.asIdeal)) : ∀ p : PrimeSpectrum (D ⊗[R] B), p.asIdeal ∈ minimalPrimes (D ⊗[R] B) → IsReduced (Localization.AtPrime p.asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e06873550",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match: R,D f.g. ℚ-domains (Algebra.FiniteType ℚ, IsDomain), injective R→D, R→k (hRD,hRk), B flat (Module.Flat) and finite type (recorded RingHom.FiniteType), k char-0 field; generic reducedness stated inline as the node defines it (∀ p ∈ minimalPrimes, IsReduced (Localization.AtPrime p)) on k⊗[R]B ⇒ D⊗[R]B; zero ring vacuous (no Nontrivial). No stronger assumptions (CharZero k and the IsScalarTower ℚ instances are redundant), universes independent. No GenericallyReduced declaration in live/side-live/Sheaf Lean or Mathlib, so no H4 copy and no name clash. Item diff vs live is lean only and lean.statement matches the file verbatim; stmt_deps unchanged and used. Docstrings give source (00HS, 030V), blueprint id and the 4 proof steps; sorry only; report has Worker report + Second reading sections. Not recompiled per instruction."
+ }
+}

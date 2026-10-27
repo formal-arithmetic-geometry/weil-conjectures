@@ -1,0 +1,133 @@
+{
+ "id": "def-pur-native-constant-section-restriction",
+ "kind": "definition",
+ "title": "Explicit constant section tower and scalar-restriction record",
+ "status": "split",
+ "statement": "Fix $\\ell,E$. Define the constant integral-to-quotient maps by the actual ULift quotient ring homomorphisms. Restrict native coefficient sequence modules along each vertical inclusion and along those coefficient maps. Their original horizontal section restrictions define a strict constant-integral tower. Its level comparison with the ordinary scalar-restriction functor is the composite-pushforward/restriction identification and is the identity on sections. Transitions are exactly the original sequence presheaf maps. Given additivity and finite-limit and finite-colimit preservation of this explicit functor, assemble the resulting OrdinaryScalarRestriction record. These hypotheses supply only proofs: the tower, its maps and level comparisons are the explicit constructions just specified.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-sf-semilinear-scalar-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ and 03DA; sites-cohomology.tex Tag 0940. Explicit section construction from def-pur-native-constant-support-model proof Steps 6 and 7."
+ },
+ "proof": [
+  {
+   "text": "The quotient homomorphisms factor through adjacent quotients, so their composites agree. The completion cone equations give the equivalent compatibility after vertical restriction. Pushforward of module sheaves along each vertical inclusion supplies each level. The horizontal natural transformation gives the original sequence presheaf section map, with functor laws from the presheaf laws. These maps assemble functorially on native modules.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-compact-support-native-system-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose continuous pushforward with restriction of scalars. This is definitionally pushforward with the composite ring map, so the level isomorphisms have identity section maps. The horizontal transition formula is definitionally the original section restriction. Package the explicit functor and these formulas with the three given exactness proofs into OrdinaryScalarRestriction. No object is selected from a mere existence theorem.",
+   "uses": [
+    "lem-sf-semilinear-scalar-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-sf-semilinear-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ and 03DA, sites-cohomology 0940; explicit existing section tower and new normalized scalar record extracted from the item after profiling slow concrete normalization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of module sheaves direct image comparison identity on sections",
+   "results": "8 component-level restriction/direct-image hits, no native sequence construction.",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib continuous pushforward and scalar restriction as components."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv",
+   "results": "Generic mate APIs; no specialized coefficient-system construction.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate specialized native construction."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars pullback",
+   "results": "0 exact specialized Mathlib hits; project SemilinearScalarRestriction supplies the interface.",
+   "date": "2026-10-27",
+   "verdict": "Build explicit native record using the existing interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeConstantSupportModel",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-native-constant-support-model",
+   "place": "Steps 6 and 7; explicit tower and constant-quotient scalar interface extracted for independent compilation after profiling.",
+   "via": [
+    "def-pur-native-constant-support-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeConstantSectionRestriction",
+  "file": "lean/Sheaf/Paper/NativeConstantSectionRestriction.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.nativeConstantScalarRestriction",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.nativeSectionVertical",
+   "WeilConjectures.PurStrictScalar.nativeConstantLevelMap",
+   "WeilConjectures.PurStrictScalar.nativeConstantLevelMap_horizontal",
+   "WeilConjectures.PurStrictScalar.nativeSectionHom_ext",
+   "WeilConjectures.PurStrictScalar.nativeSectionTowerTransition",
+   "WeilConjectures.PurStrictScalar.nativeSectionTowerFunctor",
+   "WeilConjectures.PurStrictScalar.nativeConstantSectionTower",
+   "WeilConjectures.PurStrictScalar.nativePushforwardRestrictIso",
+   "WeilConjectures.PurStrictScalar.nativeConstantScalarMap",
+   "WeilConjectures.PurStrictScalar.nativeConstantScalarMap_compatibility",
+   "WeilConjectures.PurStrictScalar.nativeConstantScalarLevel",
+   "WeilConjectures.PurStrictScalar.nativeConstantScalarRestriction"
+  ],
+  "statement": "def nativeConstantScalarRestriction\n    (hadd : ∀ W : Scheme.{u}, (nativeConstantSectionTower l E W).Additive)\n    (hlim : ∀ W : Scheme.{u}, PreservesFiniteLimits (nativeConstantSectionTower l E W))\n    (hcolim : ∀ W : Scheme.{u}, PreservesFiniteColimits (nativeConstantSectionTower l E W)) :\n    ProEtale.VaryingRing.OrdinaryScalarRestriction (compactSupportSystemLevel l E)\n      (compactSupportSystemQuotient l E)\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) (nativeConstantScalarMap l E)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T195403-L-2941333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T195403-L-2941333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

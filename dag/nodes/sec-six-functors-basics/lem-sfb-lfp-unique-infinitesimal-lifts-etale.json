@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-lfp-unique-infinitesimal-lifts-etale",
+ "kind": "statement",
+ "title": "Locally finitely presented morphisms with unique infinitesimal lifts are etale",
+ "statement": "Let $c:W\\to Z$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose that for every first order thickening $j:T_0\\hookrightarrow T$ of affine schemes [def-sbc-first-order-thickening], every pair of scheme morphisms $a_0:T_0\\to W$ and $b:T\\to Z$ with $c a_0=bj$ admits exactly one morphism $a:T\\to W$ satisfying $aj=a_0$ and $ca=b$. Then $c$ is etale [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HM, lemma-etale-formally-etale, implication (2) to (1), with Tag 02HG, definition-formally-etale, the unique-lifting formulation for affine first order thickenings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary affine opens U in Z and V in W with c(V) contained in U, use LocallyOfFinitePresentation.finitePresentation_appLE to give the section algebra Gamma(W,V) finite presentation over Gamma(Z,U). Prove its etaleness; these are precisely the section maps required by Etale.etale_appLE.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM, converse affine reduction; morphisms.tex Tag 02GI."
+   }
+  },
+  {
+   "text": "Let D be any algebra over Gamma(Z,U), I a square-zero ideal, and v:Gamma(W,V)->D/I an algebra map. The quotient map q gives a closed immersion Spec(D/I)->Spec D. Compute its kernel ideal sheaf on the affine target from the kernel of q, transported through GammaSpecIso; Ideal.le_comap_pow and I^2=0 prove that its square is zero. Thus it is a first-order thickening. The algebra compatibility equation translates by functoriality of Spec and SpecMap_appLE_fromSpec to a square into W and Z; apply the hypothesis.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HL, affine ring translation, and Tag 02HM converse."
+   }
+  },
+  {
+   "text": "A square-zero closed immersion j is surjective on points: support(j.ker)=support(j.ker^2)=support(0) is the whole target, while support(j.ker) is the closed image of j. Consequently a(Spec D) lies in V, since its composite with j factors through Spec Gamma(W,V). IsOpenImmersion.lift factors a through the chart inclusion. The two triangles cancel through the open chart inclusions. Full faithfulness of Spec identifies this factorization with a ring map r; the base triangle makes r an algebra map, and the thickening triangle says q composed with r equals v. Conversely any algebra lift gives a scheme lift, so uniqueness in the hypothesis and cancellation of the chart inclusion imply uniqueness of the algebra lift.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 02HK and 02HL, restriction to opens and affine ring translation."
+   }
+  },
+  {
+   "text": "Apply Mathlib Algebra.FormallyEtale.iff_comp_bijective to the bijectivity just proved. Its reverse implication applies FormallyUnramified.iff_comp_injective_of_small to uniqueness, giving vanishing Kahler differentials, and FormallySmooth.of_comp_surjective to existence, giving vanishing H1Cotangent. Thus these are the two stated ring lifting criteria, combined without a new intermediate declaration.",
+   "uses": [
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UR, formally etale and etale, using Tags 00TN and 00UO."
+   }
+  },
+  {
+   "text": "Combine Algebra.FormallyEtale with the finite-presentation instance using Algebra.Etale.mk. RingHom.Etale is defined by this algebra condition. This is the ring etaleness in the affine comparison criterion, and each arbitrary affine section map now satisfies it. Supply these section maps directly to Etale.mk to conclude Etale c, including the empty source case.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM converse; morphisms.tex Tags 02GI and 02GJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-sbc-first-order-thickening",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 02HK, 02HL, and 02HM converse, formalized by W2 using Mathlib Algebra.FormallyEtale.iff_comp_bijective and Algebra.Etale.mk (2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes locally of finite presentation with unique lifts against affine square zero thickenings is etale",
+   "results": "{\"t\": \"2026-10-22T05:09:30Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of schemes locally of finite presentation with unique lifts against affine square zero thickenings is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Etale\", \"RingHom.FormallyEtale\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale\"], \"digest\": \"b08a3a6bc73e4695\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme facts give etale cancellation or the forward implication; ring formal-etaleness is not the stated scheme infinitesimal criterion without affine localization and the scheme-ring lifting comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]ormallyEtale|formally[Ee]tale|formally_etale",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"grep\", \"query\": \"[Ff]ormallyEtale|formally[Ee]tale|formally_etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme facts give etale cancellation or the forward implication; ring formal-etaleness is not the stated scheme infinitesimal criterion without affine localization and the scheme-ring lifting comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"FormallyEtale\"",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsEtale\\\", \\\"FormallyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme facts give etale cancellation or the forward implication; ring formal-etaleness is not the stated scheme infinitesimal criterion without affine localization and the scheme-ring lifting comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented formally etale morphism of schemes is etale",
+   "results": "{\"t\": \"2026-10-22T05:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented formally etale morphism of schemes is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"4ec38c22c59f73be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme facts give etale cancellation or the forward implication; ring formal-etaleness is not the stated scheme infinitesimal criterion without affine localization and the scheme-ring lifting comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique infinitesimal lifting criterion for an etale scheme morphism",
+   "results": "{\"t\": \"2026-10-22T05:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"Unique infinitesimal lifting criterion for an etale scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.formallyEtale\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.etaleLocus_eq_univ_iff\"], \"digest\": \"4c8530255920e596\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme facts give etale cancellation or the forward implication; ring formal-etaleness is not the stated scheme infinitesimal criterion without affine localization and the scheme-ring lifting comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyEtale|formally_etale|unique.*lift",
+   "results": "{\"t\": \"2026-10-22T05:30:14Z\", \"tool\": \"grep\", \"query\": \"FormallyEtale|formally_etale|unique.*lift\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"ec9eeffb76b6188f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness definitions, cancellation statements, or ring-level formal etaleness do not state the affine infinitesimal lifting criterion for an arbitrary scheme morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented scheme morphism with unique lifts against affine square zero thickenings is etale",
+   "results": "{\"t\": \"2026-10-22T05:30:14Z\", \"tool\": \"leansearch\", \"query\": \"A locally finitely presented scheme morphism with unique lifts against affine square zero thickenings is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"RingHom.FormallyEtale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallyEtale\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"35f1fe78caef5260\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness definitions, cancellation statements, or ring-level formal etaleness do not state the affine infinitesimal lifting criterion for an arbitrary scheme morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"FormallyEtale\"",
+   "results": "{\"t\": \"2026-10-22T05:30:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsEtale\\\", \\\"FormallyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness definitions, cancellation statements, or ring-level formal etaleness do not state the affine infinitesimal lifting criterion for an arbitrary scheme morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism locally of finite presentation is etale if formally etale",
+   "results": "{\"t\": \"2026-10-22T05:30:16Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism locally of finite presentation is etale if formally etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus_eq_univ_iff\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"0fcef78a624cb8f3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness definitions, cancellation statements, or ring-level formal etaleness do not state the affine infinitesimal lifting criterion for an arbitrary scheme morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fs-log-infinitesimal-criterion",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Locally finitely presented morphisms with unique infinitesimal lifts are etale.",
+   "via": [
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lfp-unique-infinitesimal-lifts-etale",
+  "worker": "stage1",
+  "summary": "Repair of the landing refusal at returned head a8855570575 (2026-10-22 16:30 UTC). Initial fresh-base dry run 0610fab56c6 passed. Compared the retained delivery with the current unsplit DAG item and re-read all nine proof dependencies and their sources; no statement or inherited metadata changed. Expanded step 4 to check uniqueness of algebra lifts via the actual scheme triangles, and moved the affine/ring equivalence to step 5 so it is applied once after the three ring hypotheses have been verified. Removed the redundant step-4 citation; the eleven remaining quotes are verbatim. Same five-step affine-ring route, statement, sources, blueprint provenance and logged searches; no new nodes or Mathlib leaves. Promotion of the side completion remains with L.",
+  "blueprint": "Realizes the inherited from.place: ordinary infinitesimal étaleness supporting the log-chart criterion in det-thm-sf-ctf-stability-direct-images proof (3), as the live replacement of the dropped artin-gabber tool. The five steps port the affine-ring argument, using no dropped per node. Nearest blueprint ancestor remains null as reported by blueprint_refs.py; inherited place and via are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-74fa43bfb",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-74fa43bfb (reviewer sub-agent of L); spot-checked: This is the fifth head of the 02HM (2)=>(1) port. Head a8855570 and the two before it were PASSed, and each was returned only by the side-completion promotion refusal. Against the a8855570 snapshot only steps 4-5 and split_report changed; the statement, stmt_deps, proof_deps and sources are byte-identical. In clones/live and side-live the item is still unsplit. I read the full item, all nine cited statements, and Stacks more-morphisms 02HG (l.1509), 02HK, 02HL and 02HM (l.1722-1748) and algebra 00UR (l.41199-41214). The statement keeps local finite presentation and uses the 02HG unique-lift notion through def-sbc-first-order-thickening (4); it is not weakened. Step 1: def-sbc-locally-finite-presentation gives the fp charts pointwise. Step 2: a thickening is surjective on spaces, so the lift factors through the open subscheme (def-weil-open-immersion); open inclusions cancel in both triangles, which also gives uniqueness. Step 3: Spec(D/I)->Spec D is an affine first-order thickening for an arbitrary R-algebra D. By def-weil-affine-spectrum, u.phi=q.rho is (c|U)a0=bj, and a=Spec v corresponds to qv=u and v.phi=rho; I recomputed both directions. Step 4: two R-algebra lifts are two scheme lifts, so steps 2-3 give v1=v2. That is condition (1) of formally-unramified-ring-iff-kahler-zero (00UO, any R-algebra, no finiteness), so Omega=0. Existence plus fp gives H1=0 by fp-square-zero-lifting-smooth-ring-map (00TN). Step 5: the three 00U1 conditions and the reverse direction of etale-ring-map-iff-etale-affine (02GJ) make each chart etale. The charts cover W, so c is etale in the 02GI affine-local form recorded in def-weil-etale-morphism; empty W is vacuous. Moving the 02GJ cite from step 4 to step 5 is correct. Small cases: the identity; empty W; A^1_k with t->0 and t->eps (uniqueness has content); F_p over Z through Z/p^2 (existence has content). The 22-node closure is acyclic. Neither the closure nor the item is on clones/live route-pivot-dropped.txt, and the dropped per twin (l.1669) is not cited. No SGA, no new nodes, no fixes. All non-definition inputs are Mathlib leaves, so tool_uses=[] is correct. Maintainer note: promote or land this item rather than re-dispatching it a sixth time."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LfpUniqueInfinitesimalLiftsEtale",
+  "declaration": "AlgebraicGeometry.lfp_unique_infinitesimal_lifts_etale",
+  "statement": "theorem lfp_unique_infinitesimal_lifts_etale {W Z : Scheme.{u}} (c : W ⟶ Z) [LocallyOfFinitePresentation c] (h : ∀ (T₀ T : Scheme.{u}) (j : T₀ ⟶ T) [IsAffine T₀] [IsAffine T] (hj : IsFirstOrderThickening j) (a₀ : T₀ ⟶ W) (b : T ⟶ Z), a₀ ≫ c = j ≫ b → ∃! a : T ⟶ W, j ≫ a = a₀ ∧ a ≫ c = b) : Etale c",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The identical theorem is already declared in the landed Sheaf module; this item records that declaration rather than defining the notion again."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24bfc9a57",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Existing:true binding of lem-sfb-lfp-unique-infinitesimal-lifts-etale to the landed AlgebraicGeometry.lfp_unique_infinitesimal_lifts_etale; the node is otherwise unchanged against side-live. Every clause matches the node and Stacks 02HG/02HM (2)=>(1): LocallyOfFinitePresentation, affine IsFirstOrderThickening (closed immersion with square-zero kernel) tests, both triangles under one exists-unique, Etale c. Test schemes in the same universe u, no extra assumptions; statement verbatim (script check). Edge cases empty W, identity thickening, A^1 and F_p/Z^2 checked. One theorem for both twin nodes, no duplicate. No compile: no Lean changed. Maintainer notes: the module belongs to the route-pivot dropped twin (dropped list l.1665, modules list l.1275), so stage-3 importers (fs-log criterion, space-lfp criterion) will be refused until the modules list is updated; the docstring still cites blueprint lem-per and the dropped ring leaf, and stage 3 should follow the sfb steps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083357-L-2337063",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

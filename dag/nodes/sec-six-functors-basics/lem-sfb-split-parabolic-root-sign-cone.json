@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-split-parabolic-root-sign-cone",
+ "kind": "statement",
+ "title": "The root-sign cone of a split parabolic",
+ "statement": "Let $k$ be any field [def-weil-field] and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth, affine of finite type and geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after algebraic closure. Unipotent means that all geometric points are unipotent matrices in a faithful finite-dimensional representation. A parabolic $k$-subgroup $P\\subseteq G$ is a smooth geometrically connected closed subgroup [def-weil-closed-immersion] such that the fppf right-coset sheaf $G/P$ is represented by a proper finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. This sheaf is the sheafification of $A\\mapsto G(A)/P(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras, with $G(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,G)$. Write $\\mathbf G_m=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. Let $T\\subseteq G$ be a split maximal torus, meaning a closed subgroup isomorphic to $\\mathbf G_m^r$, $r\\geq0$, not strictly contained in another torus, and let $P\\subseteq G$ be a parabolic subgroup containing $T$. Put $X^*(T)=\\operatorname{Hom}_{k\\text{-grp}}(T,\\mathbf G_m)$ and $X_*(T)=\\operatorname{Hom}_{k\\text{-grp}}(\\mathbf G_m,T)$, with pointwise multiplication written additively. Define $\\langle\\alpha,\\mu\\rangle\\in\\mathbf Z$ by $\\alpha\\circ\\mu(t)=t^{\\langle\\alpha,\\mu\\rangle}$. Let $\\operatorname{Lie}(H)$ denote the tangent space of $H$ at its identity, with $T$ acting by conjugation, and put $\\Phi=\\{\\alpha\\in X^*(T)\\setminus\\{0\\}:\\operatorname{Lie}(G)_\\alpha\\ne0\\}$ and $\\Phi_P=\\{\\alpha\\in\\Phi:\\operatorname{Lie}(P)_\\alpha\\ne0\\}$, where the subscript denotes the character-weight space. The set\n$$C(P,T)=\\{\\mu\\in X_*(T):\\Phi_P=\\{\\alpha\\in\\Phi:\\langle\\alpha,\\mu\\rangle\\geq0\\}\\}$$\nis nonempty. For every $\\mu\\in X_*(T)$, one has $\\mu\\in C(P,T)$ if and only if $P=P_\\mu$ as subgroup functors on all commutative $k$-algebras, where $P_\\mu(A)$ consists of those $g\\in G(A)$ for which $t\\mapsto\\mu(t)g\\mu(t)^{-1}$ extends from $\\mathbf G_{m,A}$ to an $A$-morphism $\\mathbf A^1_A=\\operatorname{Spec}A[t]\\to G_A$. No algebraic closedness, characteristic or semisimplicity assumption is imposed; $\\Phi=\\varnothing$ and $P=G$ are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.91 and Corollary 21.92, printed pp.453--455; Theorem 25.1, printed p.544, equation (166) and the preceding paragraph. Nonemptiness uses a dominant rational cocharacter on the face indexed by I, multiplied by a positive integer to lie in X_*(T)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $K/k$. By [lem-sfb-maximal-torus-field-extension], $T_K$ is maximal in $G_K$. It is split. The given geometric hypotheses make $G_K$ reductive and $P_K$ smooth connected; smoothness and properness are preserved by base change by [lem-pc-proper-base-change]. The sheaf represented by $(G/P)_K$ is $G_K/P_K$: on a $K$-algebra $A$, the cosets and their fppf local lifts are exactly those in the defining quotient over $k$, since every algebra in a covering of $A$ inherits its $K$-structure. Thus $P_K$ is parabolic. By [lem-sfb-multiplicative-character-antiduality], the character and cocharacter lattices of the split torus identify across $K/k$, with the same pairing. Tangents and weight spaces also extend scalars: for the augmentation ideal $\\mathfrak m$ in a group's coordinate ring, its cotangent space is $\\mathfrak m/\\mathfrak m^2$, whose tensor with $K$ is the new cotangent space. A character-weight space is the kernel of $v\\mapsto c(v)-v\\otimes e_\\alpha$ for the conjugation coaction in the Laurent monomial basis of $k[T]$. Tensoring vector spaces with $K$ preserves that kernel and detects nonzero spaces. Consequently $\\Phi$ and $\\Phi_P$ identify with the corresponding root sets over $K$.",
+   "uses": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-pc-proper-base-change",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, printed p.544, passage to a splitting field; scalar-extension identifications written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-parabolic-simple-root-exhaustion] to $G_K,T_K,P_K$. Choose its $B$ and write $\\Phi^+,\\Delta,I$ for the resulting positive roots, simple roots and subset. It gives $\\Phi_P=\\Phi^+\\cup\\Phi_I$, with $\\Phi_I=\\Phi\\cap\\mathbf Z I$, and $\\Delta$ is rationally independent. By [lem-sfb-reductive-borel-pair-structure], the integer character-cocharacter pairing is perfect. In particular, if $X=X^*(T_K)$ and $Y=X_*(T_K)$, the rational pairing identifies $Y\\otimes\\mathbf Q$ with the dual of $X\\otimes\\mathbf Q$.",
+   "uses": [
+    "lem-sfb-parabolic-simple-root-exhaustion",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.91 and Proposition 21.90, printed pp.453--454; root datum conventions in Chapter 21."
+   }
+  },
+  {
+   "text": "Extend the independent set $\\Delta$ to a rational basis of $X\\otimes\\mathbf Q$. Define a rational functional $f$ to have value $0$ on $I$, value $1$ on $\\Delta\\setminus I$, and value $0$ on the added basis vectors. By the perfect pairing in step 2 it is pairing with some $q\\in Y\\otimes\\mathbf Q$. Choose $D>0$ clearing the finitely many denominators of $q$ in a lattice basis of $Y$, and put $\\mu=Dq\\in Y$. For a positive root $\\beta=\\sum_{\\delta\\in\\Delta}n_\\delta\\delta$, all $n_\\delta\\geq0$, and $\\langle\\beta,\\mu\\rangle=D\\sum_{\\delta\\notin I}n_\\delta$. This vanishes exactly when $\\beta\\in\\Phi_I$ and is otherwise positive. Negating the formula shows that the negative roots with nonnegative pairing are exactly the negative roots in $\\Phi_I$. Thus $\\{\\alpha:\\langle\\alpha,\\mu\\rangle\\geq0\\}=\\Phi^+\\cup\\Phi_I=\\Phi_P$. The lattice identification in step 1 makes this an actual cocharacter over $k$. Hence $C(P,T)$ is nonempty. This construction uses a basis of the full character space extending $\\Delta$; it does not assume that the roots span that space. If $\\Delta$ is empty, choose $f=q=\\mu=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 21.i, printed p.452, fundamental rational cocharacters and positive denominator clearing; Theorem 25.1, equation (166), printed p.544."
+   }
+  },
+  {
+   "text": "For an arbitrary $k$-cocharacter $\\nu$ of $T$, [lem-sfb-reductive-cocharacter-parabolic-geometry] makes $P_\\nu$ a smooth geometrically connected closed subgroup and identifies $(P_\\nu)_K=P_{\\nu_K}$. The torus $T$ lies in $P_\\nu$: its elements commute with $\\nu(t)$ over every test algebra, so the conjugation orbit is constant. Over $K$, [lem-sfb-cocharacter-limit-smooth-structure] gives $\\operatorname{Lie}(P_{\\nu_K})=\\bigoplus_{n\\geq0}\\mathfrak g_n$ for the integer weights of $\\nu$. On the $T_K$-character space $\\mathfrak g_\\alpha$, this weight is exactly $\\langle\\alpha,\\nu\\rangle$, by the definition $\\alpha\\circ\\nu(t)=t^{\\langle\\alpha,\\nu\\rangle}$. Intersecting the displayed direct sum with each character space therefore gives\n$$\\Phi_{P_{\\nu_K}}=\\{\\alpha\\in\\Phi:\\langle\\alpha,\\nu\\rangle\\geq0\\}.$$",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33 and Corollary 21.92, printed p.455; Theorem 25.1, printed p.544."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-maximal-torus-overgroup-root-generation] separately to $P_K$ and $P_{\\nu_K}$; both are smooth connected overgroups of the maximal torus $T_K$, by steps 1 and 4. If $\\nu\\in C(P,T)$, their root sets coincide by step 4. Both subgroup schemes are then the smallest closed subgroup containing the same torus and exactly the same root subgroups, so they are equal. Conversely, equality of these subgroup schemes makes their tangent spaces and character-weight sets equal, and step 4 gives $\\nu\\in C(P,T)$. This uses scheme-theoretic root generation, rather than an inference that arbitrary smooth subgroups with equal Lie algebras must coincide.",
+   "uses": [
+    "lem-sfb-maximal-torus-overgroup-root-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne 21.66, printed p.444, applied after the root-sign calculation of equation (166), printed p.544."
+   }
+  },
+  {
+   "text": "By the field-extension clause of [lem-sfb-reductive-cocharacter-parabolic-geometry], $P_{\\nu_K}=(P_\\nu)_K$. Equality of the closed subgroup schemes $P_K$ and $(P_\\nu)_K$ descends to $k$: if $J,J'$ are their defining ideals in $k[G]$, equality after tensoring with $K$ forces both $(J+J')/J$ and $(J+J')/J'$ to vanish, since tensoring a vector space with the nonzero field $K$ detects zero (extend a nonzero vector to a basis). Hence $J=J'$. The reverse implication follows simply by tensoring equal ideals. Equality of representing closed subgroup schemes is equality of their subgroup functors on every commutative $k$-algebra, including nonreduced algebras. Combining this with step 5 proves the required equivalence. If $P=G$, step 3 allows $I=\\Delta$ and $\\mu=0$; if $\\Phi$ is empty the same argument applies, so no exceptional case is excluded.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, printed p.544, faithful field descent after equation (166); coordinate-ideal descent written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-pc-proper-base-change",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-parabolic-simple-root-exhaustion",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-maximal-torus-overgroup-root-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "21.66 (p.444), 21.91--21.92 (pp.453--455), and 25.1 (p.544), equation (166); explicit rational face construction and coordinate-ideal descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cocharacter|parabolic|IsMaximalTorus",
+   "results": "{\"t\": \"2026-10-24T07:37:26Z\", \"tool\": \"grep\", \"query\": \"cocharacter|parabolic|IsMaximalTorus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern abstract Lie algebras, root pairings, topological tori or parabolic matrices; none gives the asserted algebraic-group-scheme statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocharacters defining a parabolic subgroup of a split reductive algebraic group are characterized by inequalities on the roots occurring in the Lie algebra of the parabolic",
+   "results": "{\"t\": \"2026-10-24T07:37:26Z\", \"tool\": \"leansearch\", \"query\": \"Cocharacters defining a parabolic subgroup of a split reductive algebraic group are characterized by inequalities on the roots occurring in the Lie algebra of the parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"LieSubalgebra.root.congr_simp\", \"LieAlgebra.mem_corootSpace\", \"LieAlgebra.mem_corootSpace'\", \"RootPairing.Base.coroot_mem_span_int\", \"LieSubalgebra.root\", \"LieSubalgebra.IsCartanSubalgebra.rec\", \"Matrix.GeneralLinearGroup.IsParabolic\"], \"digest\": \"e1153f016912a72c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern abstract Lie algebras, root pairings, topological tori or parabolic matrices; none gives the asserted algebraic-group-scheme statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\", \"cocharacter\"",
+   "results": "{\"t\": \"2026-10-24T07:37:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\", \\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern abstract Lie algebras, root pairings, topological tori or parabolic matrices; none gives the asserted algebraic-group-scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A parabolic subgroup containing a split maximal torus is characterized by nonnegative root pairings with a cocharacter and its defining cocharacters form a nonempty cone",
+   "results": "{\"t\": \"2026-10-24T07:37:27Z\", \"tool\": \"leanfinder\", \"query\": \"A parabolic subgroup containing a split maximal torus is characterized by nonnegative root pairings with a cocharacter and its defining cocharacters form a nonempty cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.zero_le_pairingIn_of_root_sub_mem\", \"RootPairing.posRootForm_posForm_anisotropic\", \"RootPairing.exists_coroot_ne\", \"RootPairing.exists_ge_zero_eq_rootForm\", \"RootPairing.Base.IsPos.exists_mem_support_pos_pairingIn\", \"RootPairing.baseOf_pairwise_pairing_le_zero\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.IsReduced\"], \"digest\": \"f7444e21ed41353b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern abstract Lie algebras, root pairings, topological tori or parabolic matrices; none gives the asserted algebraic-group-scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic|cocharacter|root.*pairing",
+   "results": "{\"t\": \"2026-10-24T07:38:04Z\", \"tool\": \"grep\", \"query\": \"parabolic|cocharacter|root.*pairing\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean\", \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean\", \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean\", \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean\", \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean\", \"Mathlib/LinearAlgebra/RootSystem/Reduced.lean\", \"Mathlib/LinearAlgebra/RootSystem/Reduced.lean\", \"Mathlib/LinearAlgebra/RootSystem/Reduced.lean\"], \"digest\": \"b838d970059c8d47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern abstract Lie algebras, root pairings, topological tori or parabolic matrices; none gives the asserted algebraic-group-scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive group with maximal torus T the cocharacters giving a fixed parabolic through T form the integral points of a nonempty root sign cone",
+   "results": "{\"t\": \"2026-10-24T07:41:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a split reductive group with maximal torus T the cocharacters giving a fixed parabolic through T form the integral points of a nonempty root sign cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\", \"RootPairing.Base.coroot_mem_or_neg_mem\", \"RootPairing.coroot_mem_or_neg_mem_closure_of_root\", \"RootPairing.Iic_chainTopCoeff_eq\", \"RootPairing.pairingIn_pairingIn_mem_set_of_isCrystal_of_isRed'\", \"RootPairing.Iic_chainBotCoeff_eq\"], \"digest\": \"72c3cc1a59cf4e87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned results concern abstract Lie algebras, root pairings, topological tori or parabolic matrices; none gives the asserted algebraic-group-scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A parabolic subgroup containing a split maximal torus is characterized by the nonnegative root pairings of a cocharacter",
+   "results": "{\"t\": \"2026-10-24T08:10:20Z\", \"tool\": \"leanfinder\", \"query\": \"A parabolic subgroup containing a split maximal torus is characterized by the nonnegative root pairings of a cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.zero_le_pairingIn_of_root_sub_mem\", \"RootPairing.exists_ge_zero_eq_rootForm\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.IsReduced\", \"RootPairing.baseOf_pairwise_pairing_le_zero\", \"RootPairing.isRootSystem_mk''\", \"RootPairing.Base.IsPos.exists_mem_support_pos_pairingIn\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\"], \"digest\": \"8f915feafcd8795e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocharacters defining a parabolic subgroup of a reductive algebraic group form a nonempty root sign cone",
+   "results": "{\"t\": \"2026-10-24T08:10:18Z\", \"tool\": \"leansearch\", \"query\": \"Cocharacters defining a parabolic subgroup of a reductive algebraic group form a nonempty root sign cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.or_neg\", \"ConvexCone.Flat\", \"AddGroupCone.nonneg\", \"RootPairing.Base.root_mem_or_neg_mem\", \"RootPairing.Base.coroot_mem_or_neg_mem\", \"RootPairing.coroot_mem_or_neg_mem_closure_of_root\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.IsParabolic\"], \"digest\": \"b6229e579d760958\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\", \"cocharacter\"",
+   "results": "{\"t\": \"2026-10-24T08:10:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\", \\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|parabolic|IsMaximalTorus",
+   "results": "{\"t\": \"2026-10-24T08:10:18Z\", \"tool\": \"grep\", \"query\": \"cocharacter|parabolic|IsMaximalTorus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-parabolic-prescribed-split-cocharacter",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Theorem 25.1, printed p.544, converse and Galois averaging in a maximal torus of P; choose that torus through the prescribed S. The prescribed-torus choice is the preparatory assertion in the proof of Theorem 25.6(b), printed p.546, before the centralizer and semidirect-product conclusions. Only P=P(lambda) is asserted here, with no centralizer, Levi or conjugacy conclusion. Supporting input: Theorem 21.91 and Corollary 21.92, printed pp.453--455; Theorem 25.1, printed p.544, equation (166) and the preceding paragraph. Nonemptiness uses a dominant rational cocharacter on the face indexed by I, multiplied by a positive integer to lie in X_*(T).",
+   "via": [
+    "lem-sfb-parabolic-prescribed-split-cocharacter",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-parabolic-root-sign-cone",
+  "worker": "stage1",
+  "summary": "Retained the statement. Split off simple-root exhaustion of parabolics and the more general root-generation theorem for smooth connected overgroups of a maximal torus. Constructed a rational face functional and an integral cocharacter explicitly, used existing dynamic-subgroup tangent and base-change results, and descended subgroup-scheme equality by faithful scalar extension. Checked empty roots, P=G and a central torus factor.",
+  "blueprint": "Current latest blueprint: det-thm-sf-ctf-stability-direct-images proof (3), the inherited alteration prerequisite chain recorded in blueprint.from.place. This local split follows Milne 21.91, 21.66 and 25.1; it makes no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-457c8924c",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-457c8924c (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Milne source places; no fixes are needed. The item statement is unchanged and true (Milne 25.1, eq. (166), p.544, with 21.91-21.92, pp.453-455). Small cases agree: for GL_2 with B, mu=(a,b) is in C iff a>b iff P_mu=B; for G=T, P=G every mu works; for SL_2 with I empty the step-3 denominator D=2 is needed and is present. Step checks: (1) maximal-torus-field-extension (17.82) has no perfectness assumption; proper-base-change gives smoothness and properness after base change; the antiduality node identifies X^* and, by full faithfulness, X_* with the same pairing; weight spaces commute with tensoring by K. (2) borel-pair-structure states the perfect integer pairing. (3) The face construction is correct: for a root beta, <beta,mu> = D times the sum of its non-I coefficients, which is zero iff beta lies in Phi cap ZI. (4) reductive-cocharacter-parabolic-geometry gives P_nu smooth, geometrically connected, closed and compatible with field extension, and T lies in P_nu; cocharacter-limit-smooth-structure gives Lie(P_nu) as the sum of the weight spaces g_n for n>=0, and splitting by characters gives the displayed root set. (5) Root generation applied to P_K and P_{nu_K} gives equality from equal root sets, and the converse holds by comparing tangent weights. (6) Equality descends from K to k by comparing defining ideals. New node lem-sfb-parabolic-simple-root-exhaustion: 17.16 with 17.10 gives B through T inside P; 21.91 with 21.90(a) gives Phi_P = Phi+ union Phi_I; I is unique; the reductive-to-semisimple reduction is on p.452. It contains no cocharacter clause, so it does not restate the item. New node lem-sfb-maximal-torus-overgroup-root-generation: this is Milne 21.66 (p.444) with H containing T. Since g_alpha is one-dimensional, Lie(H)_alpha nonzero means U_alpha lies in H (21.11c), and generation follows from 10.17; the clause allowing a non-smooth J is valid. Not duplicates of standard-parabolic-levi-charts (semisimple only, constructive), semisimple-root-subgroups-generate, smooth-subgroup-tangent-generation, root-subgroup-parametrizations, split-torus-solvable-cocharacter-containment or parabolic-containing-geometric-maximal-torus. Batch-5 flags: the sec-trace-formula nodes reached (fppf-covering-base-change, split-lattice-torus-projection, scheme-cover-descent-datum, projective-exterior-scalar-comparisons, smooth-at-point-fibre-criterion) are general foundations, not steps of the trace formula or Poincare duality, so all eight flagged citations are accepted. No SGA source is used. The report lists a citations.json file that is not in the commit; this is harmless."
+ }
+}

@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-space-flat-proper-fp-locality",
+ "kind": "statement",
+ "title": "Base change and fppf locality of flatness, properness and finite presentation",
+ "statement": "Algebraic spaces and their morphisms are as in [def-trf-algebraic-space], over schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. For morphisms of algebraic spaces, flatness and local finite presentation are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Finite presentation means local finite presentation, quasi-compactness and quasi-separatedness (the diagonal is quasi-compact). Finite type means quasi-compact and locally of finite type on etale charts [def-weil-finite-type-morphism]. Proper means separated, of finite type and universally closed; separated means the diagonal is a closed immersion, and universally closed means closed on underlying topological spaces after every algebraic-space base change [def-weil-proper-morphism]. Each of the three properties flat, proper, and of finite presentation is preserved by arbitrary base change of algebraic spaces. For a morphism $f:X\\to T$ to a scheme and any fppf covering $\\{T_i\\to T\\}_{i\\in I}$ [def-pc-fppf-site], $f$ has any one of these properties if and only if each $X\\times_TT_i\\to T_i$ has that property. The assertion is separate for each property; no conjunction of the other two is assumed. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Underlying point sets are field-valued point classes [def-trf-algebraic-space-jointly-surjective-family], with the quotient topology from surjective etale scheme atlases. A quasi-compact space admits a quasi-compact surjective etale scheme atlas [def-weil-pbc-quasi-compact-scheme]; a quasi-compact morphism is one whose pullback to any quasi-compact algebraic space has quasi-compact source. A closed immersion of algebraic spaces is representable and is a closed immersion on every scheme test [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 041V (lemma-descending-property-finite-presentation), 041W (lemma-descending-property-flat), 0422 (lemma-descending-property-proper); base change in spaces-morphisms.tex Tags 03XR (lemma-base-change-finite-presentation), 03MO (lemma-base-change-flat), 04WP (lemma-base-change-proper)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-fppf-site",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First record the point-set fact used below. For maps $A\\to B\\leftarrow C$ of algebraic spaces, representatives $a:\\operatorname{Spec}K\\to A$ and $c:\\operatorname{Spec}L\\to C$ with the same image in $|B|$ agree over $B$ after a common field extension $M$. Their restrictions therefore define $\\operatorname{Spec}M\\to A\\times_BC$, projecting to the original point classes. Thus $|A\\times_BC|\\to|A|\\times_{|B|}|C|$ is surjective. In particular jointly surjective families remain jointly surjective after every base change. This is a direct use of the definition of point classes and the sheaf fibre-product universal property, not an identification of these two point sets.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), field-representative proof"
+   }
+  },
+  {
+   "text": "Let $P$ be flat, locally of finite presentation, or locally of finite type. Given $f:X\\to Y$ with $P$ and $Y'\\to Y$, choose a surjective etale scheme chart $V\\to Y$ and a surjective etale scheme chart $U\\to X\\times_YV$. The chart test gives $P(U\\to V)$. Choose a surjective etale scheme chart $V'\\to Y'\\times_YV$. The map $V'\\to Y'$ is the composite of $V'\\to Y'\\times_YV$ and of the base change $Y'\\times_YV\\to Y'$ of $V\\to Y$, both surjective etale; by the chartwise-etale permanence lemma (composites, and agreement with representable etale for a scheme source) and composition of surjections on point classes it is a surjective etale scheme chart of $Y'$, and $U'=U\\times_VV'$ is a scheme with a surjective etale map to $X\\times_YY'\\times_{Y'}V'$. The scheme map $U'\\to V'$ is the base change of $U\\to V$, so it has $P$ by the corresponding scheme base-change lemma. Apply the chart test again to obtain $P(X\\times_YY'\\to Y')$. Atlas existence is part of the definition of an algebraic space; preservation of the atlas maps is the etale-cover base-change assertion. Thus this proves arbitrary base-change stability of these three local properties without any hypothesis involving the other two.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03MO (lemma-base-change-flat), 03XR (lemma-base-change-finite-presentation), 0AMM (remark-base-change-P)"
+   }
+  },
+  {
+   "text": "Quasi-compactness is stable under arbitrary base change by the quasi-compact-space lemma. If $D=X\\times_YX$ and $Y'\\to Y$, then $D'= (X\\times_YY')\\times_{Y'}(X\\times_YY')\\cong D\\times_YY'$; the map $D'\\to D$ forgets the common $Y'$ coordinate. Under this isomorphism, $X\\times_DD'\\cong X\\times_YY'$: on any test scheme $W$, a section of the left side consists of $x$ and $((x_1,x_2),y')$ with $(x_1,x_2)=(x,x)$, hence is uniquely a pair $(x,y')$ over $Y$. This correspondence commutes with restriction in $W$ and takes the projection to $D'$ to the new diagonal. Thus the new diagonal is precisely the base change of $\\Delta_f:X\\to D$ along $D'\\to D$. These identities follow by writing the two projections and the single equality over $Y$ in the fibre-product universal property. Hence quasi-compactness of $\\Delta_f$ implies quasi-compactness of the new diagonal. Quasi-separatedness is therefore preserved. Combining these two facts with local finite presentation from Step 2 proves preservation of finite presentation. For properness, use the four constituents of the convention of the statement. Finite type is preserved: local finite type by Step 2 and quasi-compactness by the quasi-compact-space lemma. Separatedness is preserved: for a scheme test $Z\\to D'$ of the new diagonal, compose with $D'\\to D$; pasting fibre squares gives $(X\\times_YY')\\times_{D'}Z\\cong X\\times_DZ$ over $Z$, a scheme test of $\\Delta_f$, hence a closed immersion. Universal closedness is preserved: for an algebraic-space map $Y''\\to Y'$, $(X\\times_YY')\\times_{Y'}Y''\\cong X\\times_YY''$ over $Y''$, so the required closedness on $|Y''|$ is an instance of universal closedness of $f$. This proves all three arbitrary base-change assertions.",
+   "uses": [
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HF (lemma-base-change-quasi-compact), 03XR (lemma-base-change-finite-presentation), 04WP (lemma-base-change-proper: combination of the base changes of separated, finite type and universally closed)"
+   }
+  },
+  {
+   "text": "Every scheme fppf covering in the statement is an fpqc covering in the existing scheme descent lemmas. Indeed, for each affine open $V\\subset T$, restrict the covering to $V$ by scheme fppf base change. The affine-refinement lemma supplies finitely many affine opens in the covering schemes whose images cover $V$. The original maps are flat, and these finite affine refinements are exactly the second condition in the definition of an fpqc covering. This applies also to every scheme base change of the original covering.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), finite affine refinement argument"
+   }
+  },
+  {
+   "text": "Now let $T$ be a scheme and suppose all $f_i:X_i=X\\times_TT_i\\to T_i$ have one fixed local property $P$ among flat, locally of finite presentation, and locally of finite type. Choose a surjective etale scheme atlas $U\\to X$. For each $i$, $U_i=U\\times_TT_i$ is a scheme and is a surjective etale atlas of $X_i$. By the chart test with target $T_i$, $U_i\\to T_i$ has $P$. The scheme morphism $U\\to T$ therefore has $P$ by the appropriate existing fpqc descent lemma and Step 4. The chart test with target $T$ now gives $P(f)$. Each of the three properties is descended separately: the only common flatness/local-presentation hypotheses are those on the covering maps.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-fpqc-descend-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 041W (lemma-descending-property-flat), 041T (lemma-descending-property-locally-finite-presentation), 041S (lemma-descending-property-locally-finite-type): descent on a fixed etale source atlas"
+   }
+  },
+  {
+   "text": "If all $f_i$ are quasi-compact, the quasi-compact-space lemma immediately gives quasi-compactness of $f$. If all $f_i$ are quasi-separated, put $D=X\\times_TX$ and $D_i=D\\times_TT_i$. The maps $D_i\\to D$ are flat and locally of finite presentation by Step 2 and jointly surjective by Step 1. Moreover $D_i\\cong X_i\\times_{T_i}X_i$ and $\\Delta_{f_i}$ is the pullback of $\\Delta_f$ along $D_i\\to D$, by the same universal-property calculation as in Step 3. Apply the quasi-compact-space lemma to $\\Delta_f$ and this family. The quasi-compactness of every $\\Delta_{f_i}$ implies that of $\\Delta_f$. Thus quasi-separatedness descends. In particular if all $f_i$ are of finite presentation, Steps 5 and 6 supply respectively local finite presentation and the two quasi-compactness conditions, proving finite presentation of $f$.",
+   "uses": [
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 041L (lemma-descending-property-quasi-compact), 041N (lemma-descending-property-quasi-separated), 041V (lemma-descending-property-finite-presentation)"
+   }
+  },
+  {
+   "text": "To descend separatedness, suppose every $f_i$ is separated. Write $D=X\\times_TX$. The relative diagonal $\\Delta_f:X\\to D$ is the pullback of the representable absolute diagonal $X\\to X\\times_SX$ along $D\\to X\\times_SX$, with $S$ the common original base scheme. For any scheme test $Z\\to D$, the sheaf $E=X\\times_DZ$ is therefore $X\\times_{X\\times_SX}Z$: on sections both consist of $(x,z)$ with the two $X$ coordinates of $z$ equal to $x$. This bijection respects restriction and the projection to $Z$. Thus $E$ is a scheme by representability of the absolute diagonal. The maps $Z_i=Z\\times_TT_i\\to Z$ form a scheme fppf covering, hence an fpqc covering by Step 4. Each $E\\times_ZZ_i\\to Z_i$ is a scheme test of $\\Delta_{f_i}$, so is a closed immersion. The scheme fpqc descent lemma for closed immersions gives that $E\\to Z$ is a closed immersion. Since this holds for every scheme test, $\\Delta_f$ is a closed immersion and $f$ is separated. This uses the representable meaning of closed immersion; it does not assert that the algebraic space $X$ itself is a scheme.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-closed-immersion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0421 (lemma-descending-property-separated), proof by scheme tests of the relative diagonal"
+   }
+  },
+  {
+   "text": "Suppose every $f_i$ is universally closed. Fix an arbitrary algebraic-space map $T'\\to T$ and put $X'=X\\times_TT'$, $T_i'=T'\\times_TT_i$. The maps $p_i:T_i'\\to T'$ are flat and locally of finite presentation by Step 2, jointly surjective by Step 1, and open by the algebraic-space flat-lfp openness lemma. For a closed subset $C\\subset|X'|$, let $C_i$ be its inverse image in $|X'\\times_{T'}T_i'|$ and let $A$ be its image in $|T'|$. Universal closedness of $f_i$ makes the image $A_i$ of $C_i$ closed in $|T_i'|$. Step 1 gives $A_i=p_i^{-1}(A)$: a pair consisting of a point of $C$ and a point over its image lifts to their fibre product. Consequently each $p_i^{-1}(|T'|\\setminus A)$ is open. Its image under the open map $p_i$ is open, and the union of these images is $|T'|\\setminus A$ by joint surjectivity. Hence $A$ is closed. This works for every closed $C$ and every $T'$, proving that $f$ is universally closed.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041O (lemma-descending-property-universally-closed), closed-image argument; here open fppf maps replace the affine fpqc quotient maps in the source proof"
+   }
+  },
+  {
+   "text": "Finally assume every $f_i$ is proper. The definition supplies separatedness, quasi-compactness, local finite type and universal closedness of each $f_i$. Steps 5, 6, 7 and 8 give exactly these four properties for $f$. The first two finite-type conditions combine to say that $f$ is of finite type, and hence $f$ is proper. Together with the flatness and finite-presentation descent already obtained in Steps 5 and 6, this proves the reverse implications for all three properties. The forward implications are their arbitrary base-change assertions in Steps 2 and 3. No step assumes that $f$ is flat in the proper case, or that $f$ is proper in the flat or finite-presentation cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0422 (lemma-descending-property-proper), combination of the constituent properties"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-fppf-affine-refinement",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 041V, 041W, 0422 and their cited constituent-property proofs; spaces-morphisms.tex Tags 03MO, 03XR, 04WP. Universal closedness uses the same closed-image argument with open fppf coverings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper and finitely presented morphisms of algebraic spaces are stable under base change and fppf local on the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc descent of flatness properness and finite presentation for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"DescendsAlong\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \" (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange] (H : ∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R) (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheory.Limit\", \"doc\": \"If `P` is local at the target, to show `P` descends along `P'` we may assume\\nthe base to be affine.\"}\n  {\"name\": \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \" (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} [P.RespectsIso] (hQQ' : RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] => Q) fun {R S} [CommRing R] [CommRing S] => Q') (H₁ : ∀ {R\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \" (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange] [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange] (H₁ : @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P') [AlgebraicGeometry.IsZariskiLocalAtTarget P] (H : ∀ {R S : CommRingCat} \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \" (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange] [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange] (H₁ : @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.\", \"doc\": \"Let `P` be the morphism property associated to the ring hom property `Q`. Suppose\\n\\n- `P'` implies `Q'` on global sections for affine schemes,\\n- `P'` is satisfied for all surjective, local isomorphisms\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \" (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange] [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange] (H₁ : @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.\", \"doc\": \"Let `P` be a morphism property associated with `affineAnd Q`. Suppose\\n\\n- `P'` implies `Q'` on global sections on affine schemes,\\n- `P'` is satisfied for surjective, local isomorphisms,\\n- affine morphi\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Being an open immersion satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Universally closed satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Universally injective satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Universally open satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Surjective satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Being an isomorphism satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [P.IsStableUnderBaseChange] {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} [AlgebraicGeometry.HasRingHomProperty P fun {R S} [CommRing R] [CommRing S] => Q] (h : RingHom.CodescendsAlong (fun {R S} \", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descendsAlong.*(flat|proper|finitePresentation)",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"line\": \"20\", \"text\": \"- `HasRingHomProperty.descendsAlong`: if `P` is a local property induced by `Q`, `P'` implies\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"line\": \"164\", \"text\": \"nonrec lemma HasRingHomProperty.descendsAlong [HasRingHomProperty P Q]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"20\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"22\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"24\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"26\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"28\", \"text\": \"  (`AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"35\", \"text\": \"instance : DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"36\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.FiniteType.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"38\", \"text\": \"instance : DescendsAlong @LocallyOfFinitePresentation (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"39\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.FinitePresentation.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"41\", \"text\": \"instance : DescendsAlong @Smooth (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat finite presentation algebraic space morphisms descend fppf locally",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper finitely presented morphisms of algebraic spaces are preserved by base change and fppf local on the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of flat proper finite presentation algebraic space morphisms along faithfully flat covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat proper finitely presented morphisms of algebraic spaces satisfy fppf descent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern schemes or rings; none states the algebraic-space assertion, and the algebraic-space source grep found no such implementation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-descent-isom-spaces",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Property descent in quot-lemma-spaces-stack and base change in quot-lemma-spaces-fibred-in-groupoids, as used by quot-lemma-curves-stack.",
+   "via": [
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-flat-proper-fp-locality",
+  "worker": "stage1",
+  "group": "Q44",
+  "summary": "Separated the three assertions into chartwise local-property descent, quasi-compactness and the relative diagonal, and a closed-image argument using open covering maps. Reused scheme descent; proper base change is assembled from its separated, finite-type and universally closed constituents (Stacks 04WP proof) rather than cited from lem-sfb-space-proper-base-change, whose quasi-compactness convention differs (maintainer review fix, re-applied after the landing returns); two genuinely smaller space inputs are left statement-only. Checked scheme versus space hypotheses, arbitrary covers, and empty cases. Repaired only doubled TeX escapes and supplied explicit underlying-space and representable-closed-immersion conventions. Repair of the 2026-10-22 landing return: compared the retained delivery with the current unsplit live item, re-read all cited live statements, checked every saved full-statement quote for agreement, and made the diagonal base-change square explicit. The official delivery tool rebuilds the commit on the current server DAG; the two new inputs remain absent from that DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Property descent in quot-lemma-spaces-stack and base change in quot-lemma-spaces-fibred-in-groupoids, as used by quot-lemma-curves-stack. This realizes property descent in quot-lemma-spaces-stack and arbitrary pullback in quot-lemma-spaces-fibred-in-groupoids, as used by quot-lemma-curves-stack; the item inherits a null nearest blueprint ancestor, which is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Finite affine refinement converts the given scheme fppf cover into the fpqc cover expected by scheme descent; the unit has no such refinement input."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Scheme base change of the covering is needed for the affine refinements and diagonal scheme tests; this is a general covering-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Used only for the scheme atlas U to T; algebraic-space descent is proved here by atlas comparison."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Used only for the scheme atlas U to T; no space descent theorem is being assumed."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Used only for the scheme atlas U to T when reconstructing finite type for properness."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Used only for scheme tests of the representable relative diagonal; no unit node supplies scheme closed-immersion descent."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre products and preservation of etale atlas covers, needed to carry out the unit supporting descent construction."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Step 2 needs that the composite of a surjective etale scheme chart of Y' x_Y V with the base change of V -> Y is again a surjective etale scheme chart of Y'; this is the generic etale-composition calculus for algebraic spaces, which no node of the unit states."
+   }
+  ],
+  "repair": {
+   "returned_head": "7d4ddc1f6d6",
+   "reason": "Side completion was never promoted to the live DAG read by the queue; maintainer requested rebase on current DAG and renewed citation review.",
+   "comparison": "Live item remains unsplit; no released repair note exists. All non-split-owned fields agree. Both new input ids remain absent. Every existing proof citation agrees verbatim with the saved full statement in citations.json.",
+   "adjustment": "Retained the approved nine-step route and two statement-only inputs, explicitly identified the diagonal pullback over D, and added the repair audit to report.md. Reused the logged searches because the statements and search questions are unchanged. On the renewed current-DAG audit, strengthened the diagonal identification by a natural bijection on sections over every test scheme W, explicitly tracking its projection to D\\prime; this verifies an isomorphism of sheaves rather than merely a correspondence of topological points.",
+   "current_audit": "2026-10-23: re-read all proof-dependency statements and verified all 29 citation quotes. Repaired the newly detected 03MJ shared-tag comparison with lem-a1-space-lqf-atlas-refinement in report.md, and made the scheme test of the relative diagonal an explicit pullback of the absolute diagonal over the original base S."
+  }
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-d7269030a",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-d7269030a (reviewer sub-agent of L); spot-checked: Fourth push of this split. Heads 7d4ddc1f, 3f327858 and 1e558b10 were each FIXed with the same three repairs, and each landing was refused because L had not promoted the side completion. In clones/live and clones/side-live the item is still unsplit, has no proof and has no repair note, and neither new node exists, so the delivery is not superseded. Both new nodes are unchanged since 1e558b10. The item changes only Step 7, which now identifies the scheme test E=X×_D Z with X×_{X×_S X} Z on sections. That is correct, so repair (3) for the 'S=T' wording is no longer needed and I kept the delivered Step 7. Repairs (1) and (2) were lost again. I re-applied them in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-flat-proper-fp-locality.json. (1) C1, Step 2: V'→Y' was claimed surjective étale with no reason. It is the composite of V'→Y'×_YV and a base change of V→Y. The step now cites lem-trf-space-chartwise-etale-permanence, which is added to tool_uses. (2) C4, Step 3: it cited lem-sfb-space-proper-base-change. That node defines quasi-compactness by inverse images of quasi-compact opens, but the item uses the Stacks base-change definition (spaces-morphisms l.1036), and no node compares the two. Properness is now proved from its constituents as in the 04WP proof: finite type, separatedness by pasting scheme tests, and universal closedness by transitivity of fibre products. proof_deps is recomputed as the union of the step uses. The longest step is 1724 characters, and all statements are unchanged. I read all 9 steps in full and found them correct: 03H4 point lifting; chart-test base change; fppf to fpqc through lem-pc-fppf-affine-refinement; scheme fpqc descent on the atlas U→T; descent of qc and of the diagonal Δ_f along the space family D_i→D; descent of closed immersions on scheme tests of Δ_{X/T}, the base change of Δ_{X/S} along D↪X×_S X; and the closed-image argument with open fppf maps, where A_i=p_i^{-1}(A) comes from Step 1. Stacks sources checked: 03MJ (spaces-morphisms l.4097), 041L (spaces-descent l.1163), definition-quasi-compact, and tags 03HF/03MM/040Y/0410/04WP/041V/041W/0422/0DFQ, all resolved in tags/tags. No SGA source is used. New node lem-sfb-space-local-properties-chart-test (03MJ) is true and is not a duplicate of lem-a1-space-lqf-atlas-refinement or lem-sfb-stack-finite-type-calculus. New node lem-sfb-space-quasicompact-fppf-local (03HF, 041L, 0DFQ) is true and is not lem-trf-space-qc-separated-etale-local or the scheme-only qc descent lemma. Neither node restates a clause of the item. Batch-5 flags: def-trf-algebraic-space, def-trf-algebraic-space-jointly-surjective-family, lem-trf-space-fibre-products-etale-covers, lem-trf-fppf-covering-base-change, lem-sfb-flat-lfp-space-universally-open (reached only through def-trf-algebraic-space) and the added lem-trf-space-chartwise-etale-permanence are generic definitions or space/site calculus, not steps of the trace formula or of Poincaré duality, so they are accepted. Maintainer note: this FIX has now been lost four times because the worker re-pushes files from before the fixes, so repairs (1) and (2) must be carried into whatever L promotes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFlatProperFpLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flat_proper_fp_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFlatProperFpLocality.lean",
+  "statement": "theorem flat_proper_fp_locality {S : Scheme.{u}} (P : MorphismProperty (AlgebraicSpace S)) (hP : P = @MapIsFlat S ∨ P = @MapIsProper S ∨ P = fun _ _ f ↦ MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) : (∀ {X Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y), P f → P (enlargedFibreProductFst g f)) ∧ (∀ {I : Type w} (T : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T), Presieve.ofArrows (fun i : I ↦ (Tᵢ i).left) (fun i : I ↦ (g i).left) ∈ Scheme.fppfPrecoverage T.left → (P f ↔ ∀ i : I, P (enlargedFibreProductFst (ObjectProperty.homMk ⟨yoneda.map (g i)⟩ : schemeSpace (Tᵢ i) ⟶ schemeSpace T) f)))",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The property parameter selects flatness, properness or the explicit conjunction defining finite presentation, separately. First conjunct: arbitrary algebraic-space base change. Second conjunct: equivalence for every scheme fppf covering. Reuses the landed chartwise morphism predicates and affine-test quasi-compactness, equivalent to the stated quasi-compact-space tests; no additional definition or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a518dea86",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Re-delivery of 1576fb (H2 RETURN). Only changes: stmt_deps theorem node lem-trf-space-enlarged-etale-ringed-site-model → def-trf-scheme-algebraic-space + def-sfb-space-sheaf-fibre-product (existing:true owners of schemeSpace / enlargedFibreProduct / enlargedFibreProductFst, byte-identical to side-live), and import AtlasEtaleRestriction → EnlargedEtaleRingedSite; signature, docstring and lean record unchanged (statement verbatim). Live item still split with no lean, so not superseded. Math re-read: hP selects exactly one of flat / proper (sep ∧ ft ∧ univ closed) / (lfp ∧ qc ∧ qc diagonal); base change along arbitrary space maps via actual sheaf pullback; iff over Scheme.fppfPrecoverage families with I : Type w; empty, infinite and non-affine cases covered; affine-test qc equals the node convention (03E4/03KG). sorry only, no defs, docstrings carry source and blueprint, plain imports = proof_dep modules present live. No file changed, no compile run; worker compile clean."
+ }
+}

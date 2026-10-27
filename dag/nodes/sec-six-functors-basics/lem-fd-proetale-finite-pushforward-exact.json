@@ -1,0 +1,145 @@
+{
+ "id": "lem-fd-proetale-finite-pushforward-exact",
+ "kind": "statement",
+ "title": "Exactness of finite pushforward on the pro-étale site",
+ "statement": "Let $f\\colon X\\to Y$ be a finite morphism of finite presentation.\n\n1. For every ring $R$, the pushforward\n   $f_*\\colon\\Sh(X_{\\mathrm{proét}},\\Mod_R)\\to\\Sh(Y_{\\mathrm{proét}},\\Mod_R)$\n   ([sk-def-sfb-finite-pushforward-pullback]) is exact.\n2. For every commutative condensed ring $\\Lambda$, the pushforward of module objects\n   $f_*\\colon\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$\n   ([sk-def-sfb-module-pushforward-pullback]) is exact. Consequently\n   $Rf_*K\\simeq f_*K$, computed term by term, for every\n   $K\\in D(\\Mod_{\\Lambda_X})$ ([sk-def-sfb-module-derived-pushpull]), and\n   $R^qf_*M=0$ for every $M\\in\\Mod_{\\Lambda_X}$ and $q>0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/lem-fd-proetale-finite-pushforward-exact.md",
+  "place": "node lem-fd-proetale-finite-pushforward-exact, order 1702",
+  "external": [
+   {
+    "document": "Bhatt",
+    "place": "This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.1.17; we recall the argument."
+   },
+   {
+    "document": "Scholze",
+    "place": "This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.1.17; we recall the argument."
+   },
+   {
+    "document": "Bhatt",
+    "place": "Hence $D'$ is w-contractible (Bhatt–Scholze, Lemma 2.4.10), and $W\\times_YX$ is a weakly contractible object of $X_{\\mathrm{proét}}$ ([sk-thm-pe-weakly-contractible-basis])."
+   },
+   {
+    "document": "Scholze",
+    "place": "Hence $D'$ is w-contractible (Bhatt–Scholze, Lemma 2.4.10), and $W\\times_YX$ is a weakly contractible object of $X_{\\mathrm{proét}}$ ([sk-thm-pe-weakly-contractible-basis])."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.1.17; we\nrecall the argument.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(1).* As a right adjoint ([sk-def-sfb-finite-pushforward-pullback]), $f_*$\npreserves kernels, so it suffices to show that it preserves epimorphisms. Every\nobject of $Y_{\\mathrm{proét}}$ is covered by affines $W=\\operatorname{Spec}D$ with\n$D$ w-contractible ([sk-thm-pe-weakly-contractible-basis]), so a morphism of\nsheaves on $Y_{\\mathrm{proét}}$ is an epimorphism as soon as it is surjective on\nsections over every such $W$. For such $W$, the base change\n$W\\times_YX\\to X$ is weakly étale ([sk-lem-pe-weakly-etale-stability]), and\n$W\\times_YX=\\operatorname{Spec}D'$ with $D\\to D'$ finite of finite presentation.\nHence $D'$ is w-contractible (Bhatt–Scholze, Lemma 2.4.10), and $W\\times_YX$ is a\nweakly contractible object of $X_{\\mathrm{proét}}$\n([sk-thm-pe-weakly-contractible-basis]). Let $G\\to H$ be an epimorphism of sheaves\nof $R$-modules on $X_{\\mathrm{proét}}$. By weak contractibility\n([sk-def-pe-weak-contractible]) the map\n$(f_*G)(W)=G(W\\times_YX)\\to H(W\\times_YX)=(f_*H)(W)$ is surjective. So $f_*G\\to f_*H$\nis an epimorphism.",
+   "uses": [
+    "sk-thm-pe-weakly-contractible-basis",
+    "sk-lem-pe-weakly-etale-stability",
+    "sk-def-pe-weak-contractible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(2).* The underlying abelian sheaf of $f_*M$ is $f^{\\Ab}_*M$\n([def-sfb-module-lower-star]), and the forgetful functor\n$\\Mod_{\\Lambda_X}\\to\\Sh(X_{\\mathrm{proét}},\\Ab)$ is exact and faithful, with kernels\nand cokernels computed on underlying sheaves ([sk-prop-sfb-module-category], (1)\nand (4)). A sequence of module objects is therefore exact if and only if its\nunderlying sequence of abelian sheaves is, and exactness of $f_*$ on\n$\\Mod_{\\Lambda_X}$ follows from (1) with $R=\\mathbf Z$. An exact functor preserves\ncohomology of complexes, hence quasi-isomorphisms. If $K\\to I$ is a K-injective\nresolution, then $f_*K\\to f_*I=Rf_*K$ ([sk-def-sfb-module-derived-pushpull]) is a\nquasi-isomorphism, so $Rf_*K\\simeq f_*K$. For a module $M$ placed in degree $0$\nthis gives $R^qf_*M=0$ for $q>0$.",
+   "uses": [
+    "def-sfb-module-lower-star",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-pe-weakly-contractible-basis",
+  "sk-lem-pe-weakly-etale-stability",
+  "sk-def-pe-weak-contractible",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/lem-fd-proetale-finite-pushforward-exact.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1702,
+ "blueprint_uses": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-finite-pushforward-pullback",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-thm-pe-weakly-contractible-basis",
+  "sk-def-pe-weak-contractible",
+  "sk-lem-pe-weakly-etale-stability",
+  "sk-prop-sfb-module-category",
+  "def-sfb-module-lower-star"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isFinite"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isFinite"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "lem-fd-proetale-finite-pushforward-exact",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-derived-pushpull",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f\\colon X\\to Y$ be a finite morphism of finite presentation.\n\n1. For every ring $R$, the pushforward\n   $f_*\\colon\\Sh(X_{\\mathrm{proét}},\\Mod_R)\\to\\Sh(Y_{\\mathrm{proét}},\\Mod_R)$\n   ([sk-def-sfb-finite-pushforward-pullback]) is exact.\n2. For every commutative condensed ring $\\Lambda$, the pushforward of module objects\n   $f_*\\colon\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$\n   ([det-def-sfb-module-pushforward-pullback]) is exact. Consequently\n   $Rf_*K\\simeq f_*K$, computed term by term, for every\n   $K\\in D(\\Mod_{\\Lambda_X})$ ([sk-def-sfb-module-derived-pushpull]), and\n   $R^qf_*M=0$ for every $M\\in\\Mod_{\\Lambda_X}$ and $q>0$.",
+  "proof": [
+   {
+    "text": "This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.1.17; we\nrecall the argument.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(1).* As a right adjoint ([sk-def-sfb-finite-pushforward-pullback]), $f_*$\npreserves kernels, so it suffices to show that it preserves epimorphisms. Every\nobject of $Y_{\\mathrm{proét}}$ is covered by affines $W=\\operatorname{Spec}D$ with\n$D$ w-contractible ([sk-thm-pe-weakly-contractible-basis]), so a morphism of\nsheaves on $Y_{\\mathrm{proét}}$ is an epimorphism as soon as it is surjective on\nsections over every such $W$. For such $W$, the base change\n$W\\times_YX\\to X$ is weakly étale ([sk-lem-pe-weakly-etale-stability]), and\n$W\\times_YX=\\operatorname{Spec}D'$ with $D\\to D'$ finite of finite presentation.\nHence $D'$ is w-contractible (Bhatt–Scholze, Lemma 2.4.10), and $W\\times_YX$ is a\nweakly contractible object of $X_{\\mathrm{proét}}$\n([sk-thm-pe-weakly-contractible-basis]). Let $G\\to H$ be an epimorphism of sheaves\nof $R$-modules on $X_{\\mathrm{proét}}$. By weak contractibility\n([sk-def-pe-weak-contractible]) the map\n$(f_*G)(W)=G(W\\times_YX)\\to H(W\\times_YX)=(f_*H)(W)$ is surjective. So $f_*G\\to f_*H$\nis an epimorphism.",
+    "uses": [
+     "sk-thm-pe-weakly-contractible-basis",
+     "sk-lem-pe-weakly-etale-stability",
+     "sk-def-pe-weak-contractible"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2).* The underlying abelian sheaf of $f_*M$ is $f^{\\Ab}_*M$\n([def-sfb-module-lower-star]), and the forgetful functor\n$\\Mod_{\\Lambda_X}\\to\\Sh(X_{\\mathrm{proét}},\\Ab)$ is exact and faithful, with kernels\nand cokernels computed on underlying sheaves ([det-prop-sfb-module-category], (1)\nand (4)). A sequence of module objects is therefore exact if and only if its\nunderlying sequence of abelian sheaves is, and exactness of $f_*$ on\n$\\Mod_{\\Lambda_X}$ follows from (1) with $R=\\mathbf Z$. An exact functor preserves\ncohomology of complexes, hence quasi-isomorphisms. If $K\\to I$ is a K-injective\nresolution, then $f_*K\\to f_*I=Rf_*K$ ([sk-def-sfb-module-derived-pushpull]) is a\nquasi-isomorphism, so $Rf_*K\\simeq f_*K$. For a module $M$ placed in degree $0$\nthis gives $R^qf_*M=0$ for $q>0$.",
+    "uses": [
+     "def-sfb-module-lower-star",
+     "sk-def-sfb-module-derived-pushpull"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
+}

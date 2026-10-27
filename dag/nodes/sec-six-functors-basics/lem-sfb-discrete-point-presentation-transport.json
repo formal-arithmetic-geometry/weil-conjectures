@@ -1,0 +1,168 @@
+{
+ "id": "lem-sfb-discrete-point-presentation-transport",
+ "kind": "statement",
+ "title": "Transporting a discrete point presentation to a coefficient slice",
+ "statement": "Let X,Y be schemes in universe u, f:Y→X, A a commutative ring in universe u and k a commutative ring in universe u+1. Fix e:ULift A≃+*k and a ring-sheaf isomorphism c from the constant k sheaf on the coefficient-sized pro-etale model of X to the reconstructed small ring of the discrete A coefficient. Let N be an internal module on the pro-etale site of X and U an object of the coefficient-sized pro-etale model of Y. If the restriction of N along the composite U→Y→X is isomorphic to the point pullback of the cokernel of a map between the m-fold and n-fold finite free point modules over the discrete A ring, then the fixed-scalar pullback model on the slice over U is isomorphic to the cokernel of a morphism between the constant k-module sheaves of k^(Fin m) and k^(Fin n). The discrete coefficient and section reconstruction are [def-sfb-integral-models-stacks-data], the free modules are [def-sfb-point-model-free-module], scheme restriction is [def-sfb-point-model-restriction-module], and point pullback is [def-sfb-point-model-pullback-functor]; the fixed-scalar site model is [def-sfb-affine-locally-constructible-proetale-modules].",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-sfb-point-model-free-module",
+  "def-sfb-point-model-restriction-module",
+  "def-sfb-point-model-pullback-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; forward finite-matrix transport in the proof of the discrete coefficient local-model lemma"
+ },
+ "proof": [
+  {
+   "text": "Form G from the internal module category on X to fixed-k sheaves on the coefficient slice over U by composing smallModules, restriction along c, coefficientModelFixedScalars, scheme inverse image along f and slice restriction. Section reconstruction composed with AsSmall is an equivalence; restriction along c and fixed-scalar reconstruction are equivalences. The final two inverse-image functors are left adjoints. Thus G preserves finite colimits. Point pullback P on X is also a left adjoint on modules, so F=P followed by G preserves finite colimits and is additive.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-ctf-finite-comparison-model-realization",
+    "def-sfb-point-model-pullback-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; forward finite-matrix transport in the proof of the discrete coefficient local-model lemma"
+   }
+  },
+  {
+   "text": "Point pullback sends the regular coefficient module to the regular module. The sectionwise identity identifies its reconstructed module with the regular small-ring module. The inverse of c identifies restriction of the latter with the regular constant-ring module, and the ordinary monoidal constant-scalar equivalence identifies it with the constant k-module sheaf. Scheme inverse image preserves this constant sheaf: apply the general constant-sheaf pullback comparison to the terminal identity scheme object, transported through AsSmall. Slice restriction also preserves constant sheaves. Additivity of F and of the constant-sheaf functor identifies the images of the finite free point modules with the constant sheaves of k^(Fin m) and k^(Fin n), using the biproduct/product comparison in ModuleCat. This construction includes zero ranks. The ring isomorphism c already suffices for this calculation; the supplied e is retained in the unchanged signature.",
+   "uses": [
+    "def-sfb-point-model-free-module",
+    "lem-sfb-constant-restriction-ordinary-monoidal",
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; forward finite-matrix transport in the proof of the discrete coefficient local-model lemma"
+   }
+  },
+  {
+   "text": "The monoidal comparison for composing point pullback with scheme inverse image, followed by extension/restriction cancellation along its coefficient isomorphism, identifies restriction to U of P(coker d) with point pullback to the underlying scheme of U of coker d. Compose its inverse with the supplied isomorphism hN. Apply [lem-sfb-coefficient-slice-restriction-iso] to N and P(coker d), obtaining G(N) isomorphic to F(coker d). This step uses the new lemma only for invariance under an isomorphism of internal restrictions, with no presentation data in that lemma.",
+   "uses": [
+    "def-sfb-point-model-restriction-module",
+    "def-sfb-point-model-pullback-functor",
+    "lem-sfb-coefficient-slice-restriction-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; forward finite-matrix transport in the proof of the discrete coefficient local-model lemma"
+   }
+  },
+  {
+   "text": "Conjugate F(d) by the two proved finite-free isomorphisms to obtain the required matrix a. Finite-colimit preservation gives PreservesCokernel.iso F d; cokernel.mapIso then identifies coker(F(d)) with coker(a). Its square commutes by cancellation of the inverse finite-free isomorphisms. Compose these isomorphisms with the isomorphism from the previous step. All these combinations are complete Lean proofs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; forward finite-matrix transport in the proof of the discrete coefficient local-model lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-point-model-free-module",
+  "def-sfb-point-model-pullback-functor",
+  "def-sfb-point-model-restriction-module",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-sfb-coefficient-slice-restriction-iso",
+  "lem-sfb-constant-restriction-ordinary-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 00YV; categorical finite-free/cokernel transport with a separate internal restriction invariance step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport of finite free module sheaf presentations under inverse image and equivalences",
+   "date": "2026-10-26",
+   "results": "8 hits, including SheafOfModules.pullbackObjFreeIso, freeFunctorCompPullbackIso and isFinitePresentation.",
+   "verdict": "These apply to ordinary sectionwise modules. They do not supply the comparison of the internal point inverse image with the fixed-scalar slice functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a finite free presentation through section reconstruction and an equivalence of module sheaf categories",
+   "date": "2026-10-26",
+   "results": "8 hits, including SheafOfModules.Presentation.map, Presentation.mapGenerators and Presentation.mapRelations.",
+   "verdict": "Useful after constructing the inverse-image and scalar-reconstruction square, but do not state that square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesCokernel.iso",
+   "date": "2026-10-26",
+   "results": "9 hits, including CategoryTheory.Limits.PreservesCokernel.iso in Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels.",
+   "verdict": "Provides the formal cokernel comparison once a comparison of the functors and free modules is available."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*regular|sectionModule.*pullback|pullback.*sectionModule",
+   "date": "2026-10-26",
+   "results": "msearch returned 0 Mathlib hits. Local rg additionally found section reconstruction in InternalAbelianSheafModuleEquivalence, smallModules in IntegralModelsStacksData and constantSchemeIso in FiniteDiscreteSchemeRing.",
+   "verdict": "No existing theorem packages the whole required transport; keep these existing definitions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscretePointPresentationRefinement",
+  "date": "2026-10-26",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; forward presentation transport before local constancy of the matrix",
+   "via": [
+    "lem-sfb-discrete-point-presentation-refinement",
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiscretePointPresentationTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscretePointPresentationTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_point_presentation_transport",
+  "statement": "theorem discrete_point_presentation_transport\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]\n    (e : ULift.{u + 1} A ≃+* k)\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj (discreteObj A) X))\n    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (discreteObj A) X))\n    (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)\n    (m n : ℕ)\n    (d : pointModelFree (discreteObj A) m ⟶ pointModelFree (discreteObj A) n)\n    (hN : Nonempty\n        (pointModelRestriction (discreteObj A) f N (AsSmall.down.obj U).hom ≅\n          (pointModelPullbackFunctor (discreteObj A) (AsSmall.down.obj U).left).obj (cokernel d))) :\n    ∃ a : (constantSheaf\n        ((Scheme.coefficientProEtaleModelTopology.{u, u} Y).over U)\n        (ModuleCat.{u + 1} k)).obj (ModuleCat.of k (Fin m → k)) ⟶\n      (constantSheaf\n        ((Scheme.coefficientProEtaleModelTopology.{u, u} Y).over U)\n        (ModuleCat.{u + 1} k)).obj (ModuleCat.of k (Fin n → k)),\n      Nonempty (((Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k).obj\n          ((coefficientModelFixedScalars _ k).obj\n            ((smallModules X (condensedRingObj (discreteObj A) X) ⋙\n              ConstantCompletion.res c.hom).obj N))).over U ≅ cokernel a)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T091738-L-3372111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T111821-L-1740465",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

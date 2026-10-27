@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-noetherian-image-boundary-dvr",
+ "kind": "statement",
+ "title": "A boundary point of a finite-type image is reached by a DVR",
+ "statement": "Let $g:U\\to Y$ be a finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], where $Y$ is locally Noetherian [pqf-def-locnoeth]. For every point $y\\in\\overline{g(|U|)}\\setminus g(|U|)$ there exist a discrete valuation ring $A$ [def-sc-discrete-valuation-ring], its fraction field $K$, and morphisms $u:\\operatorname{Spec}K\\to U$ and $v:\\operatorname{Spec}A\\to Y$ [def-weil-affine-spectrum] such that $g\\circ u=v\\circ j$ and $v(s_A)=y$, where $j:\\operatorname{Spec}K\\to\\operatorname{Spec}A$ is induced by $A\\hookrightarrow K$ and $s_A$ is the point corresponding to the maximal ideal of $A$. The bar denotes closure in the Zariski topology of $Y$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CM2 (limits-lemma-reach-point-closure-Noetherian), restricted to points outside the image. The boundary restriction excludes the trivial-specialization error in the unrestricted statement (see report)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-boundary-affine-local-domain-model] to $g$ and $y$. Its hypotheses are exactly the finite-type, locally Noetherian and missing-image-point hypotheses here. Obtain $W=\\operatorname{Spec}C\\subseteq U$, $V=\\operatorname{Spec}B\\subseteq Y$, their finite-type map $\\varphi:B\\to C$, primes $\\mathfrak r,\\mathfrak q,\\mathfrak p$, and $R\\subseteq L=\\kappa(\\mathfrak r)$ as stated there. In particular $y$ is represented by $\\mathfrak p$ in $V$.",
+   "uses": [
+    "lem-sfb-boundary-affine-local-domain-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, proof, restricted to a point outside the image; affine-coordinate expansion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-domain-affine-dvr-square] with these $B,C,\\varphi,\\mathfrak r,R$ and the factorization $\\alpha:B\\to R$ of $B\\to L$. Step 1 supplies that $R$ is a nonfield Noetherian local domain, that its fraction subfield is the induced copy of $\\kappa(\\mathfrak q)$, and that $\\alpha^{-1}(\\mathfrak m_R)=\\mathfrak p$. Thus every hypothesis is met. Obtain a DVR $A\\subseteq L$ with fraction field $L$ and a commuting affine square whose closed point maps to $\\mathfrak p$.",
+   "uses": [
+    "lem-sfb-local-domain-affine-dvr-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, proof, restricted to a point outside the image; affine-coordinate expansion."
+   }
+  },
+  {
+   "text": "Compose the two horizontal maps of that affine square with the open immersions $W\\hookrightarrow U$ and $V\\hookrightarrow Y$. Since $g|_W$ is induced by $\\varphi$, associativity gives the required square over $g$. The closed point still maps to $y$, represented by $\\mathfrak p$ in $V$. Take the field denoted $K$ in the conclusion to be $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, proof, restricted to a point outside the image; affine-coordinate expansion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-boundary-affine-local-domain-model",
+  "lem-sfb-local-domain-affine-dvr-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, proof (using 02JQ and 00PH); expanded in affine coordinates without the unnecessary generic-component replacement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reach.*[Cc]losure|[Cc]losure.*[Dd]vr|[Dd]vr.*[Cc]losure|IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T04:03:35Z\", \"tool\": \"grep\", \"query\": \"reach.*[Cc]losure|[Cc]losure.*[Dd]vr|[Dd]vr.*[Cc]losure|IsDiscreteValuationRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"8aff5e62da21307d\"}; No hit constructs a DVR through a missing image point. ValuativeCriterion.Existence and its specializingMap consequence assume lifting for all valuation rings; Scheme.range_fromSpecStalk only parametrizes generalizations and supplies no DVR. The Proj existence result is restricted to projective spectra. Read ValuativeCriterion.lean:78-95 and its Noetherian-DVR TODO at line 29.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A boundary point of the image of a finite type morphism over a Noetherian scheme is realized by a discrete valuation ring diagram",
+   "results": "{\"t\": \"2026-10-22T04:03:36Z\", \"tool\": \"leansearch\", \"query\": \"A boundary point of the image of a finite type morphism over a Noetherian scheme is realized by a discrete valuation ring diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCommSq.mk\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"of_isDiscreteValuationRing\", \"AlgebraicGeometry.ValuativeCommSq.i₁\"], \"digest\": \"85f35c641f61c75e\"}; No hit constructs a DVR through a missing image point. ValuativeCriterion.Existence and its specializingMap consequence assume lifting for all valuation rings; Scheme.range_fromSpecStalk only parametrizes generalizations and supplies no DVR. The Proj existence result is restricted to projective spectra. Read ValuativeCriterion.lean:78-95 and its Noetherian-DVR TODO at line 29.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyNoetherian\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-22T04:03:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyNoetherian\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hit constructs a DVR through a missing image point. ValuativeCriterion.Existence and its specializingMap consequence assume lifting for all valuation rings; Scheme.range_fromSpecStalk only parametrizes generalizations and supplies no DVR. The Proj existence result is restricted to projective spectra. Read ValuativeCriterion.lean:78-95 and its Noetherian-DVR TODO at line 29.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism to a locally Noetherian scheme every point in the closure of its image but outside its image is reached by the closed point of a discrete valuation ring whose generic point lifts to the source",
+   "results": "{\"t\": \"2026-10-22T04:03:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism to a locally Noetherian scheme every point in the closure of its image but outside its image is reached by the closed point of a discrete valuation ring whose generic point lifts to the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"952ea9a8dad3b1fa\"}; No hit constructs a DVR through a missing image point. ValuativeCriterion.Existence and its specializingMap consequence assume lifting for all valuation rings; Scheme.range_fromSpecStalk only parametrizes generalizations and supplies no DVR. The Proj existence result is restricted to projective spectra. Read ValuativeCriterion.lean:78-95 and its Noetherian-DVR TODO at line 29.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Curve selection by a discrete valuation ring at a missing point in the closure of a finite type scheme image",
+   "results": "{\"t\": \"2026-10-22T04:03:44Z\", \"tool\": \"leanfinder\", \"query\": \"Curve selection by a discrete valuation ring at a missing point in the closure of a finite type scheme image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\"], \"digest\": \"0110721c4ae16221\"}; No hit constructs a DVR through a missing image point. ValuativeCriterion.Existence and its specializingMap consequence assume lifting for all valuation rings; Scheme.range_fromSpecStalk only parametrizes generalizations and supplies no DVR. The Proj existence result is restricted to projective spectra. Read ValuativeCriterion.lean:78-95 and its Noetherian-DVR TODO at line 29.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reach.*[Cc]losure|[Cc]losure.*[Dd]vr|[Dd]vr.*[Cc]losure|IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T04:16:21Z\", \"tool\": \"grep\", \"query\": \"reach.*[Cc]losure|[Cc]losure.*[Dd]vr|[Dd]vr.*[Cc]losure|IsDiscreteValuationRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"8aff5e62da21307d\"}; No match: ValuativeCriterion.Existence.specializingMap assumes the full valuation-ring lifting criterion. Scheme.range_fromSpecStalk supplies generalizations but not a DVR and source lift. Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31,78-95,112-120; no one-line specialization gives this boundary DVR diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "DVR curve selection for boundary points of finite type scheme morphism images",
+   "results": "{\"t\": \"2026-10-22T04:16:21Z\", \"tool\": \"leansearch\", \"query\": \"DVR curve selection for boundary points of finite type scheme morphism images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.mk\", \"IsDiscreteValuationRing.toIsLocalRing\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDiscreteValuationRing.casesOn\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDiscreteValuationRing.recOn\", \"IsDedekindDomainDvr.toIsNoetherian\"], \"digest\": \"b225a47c0394019d\"}; No match: ValuativeCriterion.Existence.specializingMap assumes the full valuation-ring lifting criterion. Scheme.range_fromSpecStalk supplies generalizations but not a DVR and source lift. Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31,78-95,112-120; no one-line specialization gives this boundary DVR diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyNoetherian\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-22T04:16:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyNoetherian\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: ValuativeCriterion.Existence.specializingMap assumes the full valuation-ring lifting criterion. Scheme.range_fromSpecStalk supplies generalizations but not a DVR and source lift. Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31,78-95,112-120; no one-line specialization gives this boundary DVR diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point outside the image but in its closure for a finite type morphism to a locally Noetherian scheme can be reached by the special point of a DVR whose generic point lifts",
+   "results": "{\"t\": \"2026-10-22T04:16:22Z\", \"tool\": \"leanfinder\", \"query\": \"A point outside the image but in its closure for a finite type morphism to a locally Noetherian scheme can be reached by the special point of a DVR whose generic point lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\"], \"digest\": \"4f6fed13aec2328d\"}; No match: ValuativeCriterion.Existence.specializingMap assumes the full valuation-ring lifting criterion. Scheme.range_fromSpecStalk supplies generalizations but not a DVR and source lift. Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31,78-95,112-120; no one-line specialization gives this boundary DVR diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Curve selection by a discrete valuation ring through a missing point of the closure of the image of a morphism of finite type",
+   "results": "{\"t\": \"2026-10-22T04:16:48Z\", \"tool\": \"leanfinder\", \"query\": \"Curve selection by a discrete valuation ring through a missing point of the closure of the image of a morphism of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\"], \"digest\": \"d17d29a5ad88330f\"}; No match: ValuativeCriterion.Existence.specializingMap assumes the full valuation-ring lifting criterion. Scheme.range_fromSpecStalk supplies generalizations but not a DVR and source lift. Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31,78-95,112-120; no one-line specialization gives this boundary DVR diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reach.*[Cc]losure|[Cc]losure.*[Dd]vr|[Dd]vr.*[Cc]losure|IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"grep\", \"query\": \"reach.*[Cc]losure|[Cc]losure.*[Dd]vr|[Dd]vr.*[Cc]losure|IsDiscreteValuationRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\"], \"digest\": \"e942aac4e1fc4f24\"}; No match. ValuativeCriterion.Existence assumes lifting for an existing valuation square, while the item constructs a DVR and generic lift; project NoetherianImageBoundaryDvr.lean still has sorry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyNoetherian\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-22T06:02:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyNoetherian\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match. ValuativeCriterion.Existence assumes lifting for an existing valuation square, while the item constructs a DVR and generic lift; project NoetherianImageBoundaryDvr.lean still has sorry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Curve selection by a discrete valuation ring through a missing point of the closure of the image of a morphism of finite type",
+   "results": "{\"t\": \"2026-10-22T06:02:36Z\", \"tool\": \"leanfinder\", \"query\": \"Curve selection by a discrete valuation ring through a missing point of the closure of the image of a morphism of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.ValuativeCommSq.field\"], \"digest\": \"0735700547701f42\"}; No match. ValuativeCriterion.Existence assumes lifting for an existing valuation square, while the item constructs a DVR and generic lift; project NoetherianImageBoundaryDvr.lean still has sorry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A boundary point of the image of a finite type morphism over a Noetherian scheme is realized by a discrete valuation ring diagram",
+   "results": "{\"t\": \"2026-10-22T06:03:20Z\", \"tool\": \"leansearch\", \"query\": \"A boundary point of the image of a finite type morphism over a Noetherian scheme is realized by a discrete valuation ring diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCommSq.mk\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"of_isDiscreteValuationRing\", \"AlgebraicGeometry.ValuativeCommSq.i₁\"], \"digest\": \"85f35c641f61c75e\"}; No match. ValuativeCriterion.Existence assumes lifting for an existing valuation square, while the item constructs a DVR and generic lift; project NoetherianImageBoundaryDvr.lean still has sorry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-dvr-properness",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points).",
+   "via": [
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-noetherian-image-boundary-dvr",
+  "worker": "stage1",
+  "summary": "Repaired the re-split return without changing the statement. Two statement-only nodes of comparable proof size distribute all five returned arguments: affine specialization/local algebra (steps 1-3, 2162 characters) and finite residue extension/DVR/spectrum square (steps 4-5, 1307 characters). The parent now only applies them and composes the affine open immersions. The old proof is preserved verbatim in report.md.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; proof of the Noetherian DVR test: reach a missing point of the diagonal image and of the Chow immersion image by a DVR (Stacks 0CM2, restricted to boundary points). Returned steps 1-3 are assigned to lem-sfb-boundary-affine-local-domain-model; returned steps 4-5 to lem-sfb-local-domain-affine-dvr-square. The parent assembles their conclusions.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-sc-picard-closure-specialization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-d70fcfc68",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-d70fcfc68 (reviewer sub-agent of L); spot-checked: Released 2026-10-22 batch5 re-split note (5 steps, 3469 chars, at least 2 nodes). The item statement and stmt_deps are unchanged, and the proof is now a 3-step assembly of 1271 chars. All 5 old arguments reappear as statement content of two new unsplit, statement-only nodes of comparable size. lem-sfb-boundary-affine-local-domain-model takes old steps 1-3 (2162 chars): the 02JQ point x, the Noetherian chart V∋y, the finite-type chart W, q⊊p, ker h=q, R=(B/q)_{p/q}↪κ(r), R a Noetherian local domain that is not a field, m_R contracting to p, and Frac R=κ(q). lem-sfb-local-domain-affine-dvr-square takes old steps 4-5 (1307 chars): finite generation of κ(r)/κ(q), the 00PH DVR A⊆L dominating R, the square Spec φ∘u=v∘j, and v(s_A)=p. Neither restates the item: node 1 has no DVR, and node 2 assumes the local model. I checked both statements against Stacks 0CM2 (limits.tex:3740-3781) and 00PH and found them true, verifying z∈V by generalization, q⊊p from V(q) and z≠y, the injectivity of the localization of B/q into L, and the contraction of m_A through R to p. Small cases checked: k[t,1/t]→k[t] at (t); k[t]→k[t,1/t,z] with L=k(t,z); a nilpotent B; an empty source. Both nodes are self-contained, with three search kinds recorded (LeanSearch unavailable for node 2, LeanFinder and Loogle present) and the inherited blueprint from/via. The assembly hypotheses match exactly: α=B→B/q→R, and node 1's fraction subfield is the image of κ(q)→κ(r). Step 3 composes with the open immersions. No cycle, and no duplicates found by rg over dag/nodes (sbc-noetherian-specialization-trait, sc-picard-valuation-probe-closure, local-domain-fg-field-dvr, same-field-dvr, properness criteria). No SGA source. Maintainer notes: the item's tool_uses still lists lem-sc-picard-closure-specialization, which is now used only in node 1's future proof, so node 1's worker should declare it. lem-sfb-local-domain-fg-field-dvr is temporarily cited by no node and should be reused by node 2's worker. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianImageBoundaryDvr",
+  "declaration": "AlgebraicGeometry.exists_dvr_of_mem_closure_range_not_mem_range",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianImageBoundaryDvr.lean",
+  "statement": "theorem exists_dvr_of_mem_closure_range_not_mem_range {U Y : Scheme.{u}} (g : U ⟶ Y) [LocallyOfFiniteType g] [QuasiCompact g] [IsLocallyNoetherian Y] (y : Y) (hy : y ∈ closure (Set.range g)) (hy_not : y ∉ Set.range g) : ∃ (A : Type u) (_ : CommRing A) (_ : IsDomain A) (_ : IsDiscreteValuationRing A) (K : Type u) (_ : Field K) (_ : Algebra A K) (_ : IsFractionRing A K) (a : Spec (CommRingCat.of K) ⟶ U) (v : Spec (CommRingCat.of A) ⟶ Y), a ≫ g = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ v ∧ v (IsLocalRing.closedPoint A) = y",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2e82aae",
+  "group": "NF",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except the new lean record (no prior live lean). Each clause matches: LocallyOfFiniteType+QuasiCompact (recorded finite-type conjunction), IsLocallyNoetherian Y, y ∈ closure(range g) and y ∉ range g, DVR A : Type u (CommRing, IsDomain, IsDiscreteValuationRing), IsFractionRing A K, square a ≫ g = Spec.map(algebraMap A K) ≫ v, v(closedPoint A) = y. A and K in Type u is a true, stronger existential (A ⊆ κ(r)) and matches the citer isProper_iff_unique_dvr_lift. lean.statement is verbatim in the file; public imports cover the stmt_deps; plain imports are the recorded proof-dep modules (QuasiCompact project module has a published olean); fg-field-dvr has no lean, so it is cited only in the docstring. Docstring has source, blueprint tag and the 5 steps. No duplicate in Mathlib or live Sheaf/WeilConjectures; item not dropped; only sorry; report has both required sections. No compile (no change). No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,224 @@
+{
+ "id": "det-lem-picard-cech-computes",
+ "kind": "statement",
+ "title": "Leray's theorem for quasi-coherent sheaves",
+ "statement": "Let $X$ be separated over an affine base $S=\\Spec A$ and let\n$\\mathfrak U$ be an open affine covering. Then for every quasi-coherent\n$\\cO_X$-module $\\cF$ and every $q\\ge0$ there is an isomorphism of\n$\\Gamma(X,\\cO_X)$-modules, hence of $A=\\Gamma(S,\\cO_S)$-modules (the edge\nmap of [det-thm-picard-cech] is one)\n\n$$\n\\Cech^q(\\mathfrak U,\\cF)\\overset{\\sim}{\\longrightarrow}H^q(X,\\cF)\n\\qquad(q\\ge0);\n$$\n\nin particular it is $k$-linear when $S=\\Spec k$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-lem-picard-cech-computes.md",
+  "place": "node det-lem-picard-cech-computes, order 787",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01XD"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "det-thm-picard-cech",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write the covering as $(U_i)_{i\\in I}$. Apply [lem-weil-pbc-separated-affine-open-intersection] to the given separated morphism $X\\to\\operatorname{Spec}A$. Thus two affine opens intersect in an affine open. Induct on the length of a nonempty tuple: length one is the covering hypothesis; intersect the affine intersection of the first $p+1$ opens with the last affine open for the induction step. Hence every $U_{i_0\\dots i_p}$ is affine, including repeated indices and empty intersections. No affineness of the intersection of the empty family (which would be $X$) is asserted.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KP, label lemma-characterize-separated (1)(a); blueprint proof Step 1"
+   }
+  },
+  {
+   "text": "Restrict $\\mathcal F$ to each tuple intersection. It remains quasi-coherent by [pqf-def-coherent]: a point of the open has a standard open $D(f)$ inside it and inside an affine chart $\\operatorname{Spec}B$ with $\\mathcal F|_{\\operatorname{Spec}B}=\\widetilde M$, and $\\mathcal F|_{D(f)}=\\widetilde{M_f}$. By Step 1 and [det-lem-picard-affine], its cohomology there vanishes in every positive degree. Apply [det-thm-picard-cech] to the underlying abelian sheaf $\\mathcal F_{ab}$ on the Zariski site (the opens form a set, finite fibre products are intersections, and the given family covers $X$). Its row terms $H^b(W,\\mathcal F_{ab})$, cohomology over the object $W=U_{i_0\\dots i_p}$, are the cohomology of $\\mathcal F_{ab}|_W$ on the localized site, which is $W_{\\rm Zar}$, by [lem-weil-pbc-cohomology-over-object-localization]; by [lem-sc-zariski-module-abelian-cohomology-agree] for the scheme $W$ these are the module cohomology groups $H^b(W,\\mathcal F|_W)$ to which the vanishing just proved applies, and by the same node for $X$ the abutment $H^n(X,\\mathcal F_{ab})$ is $H^n(X,\\mathcal F)$, the identifications being the identity in degree zero. All terms of the Cech complex of $\\mathcal H^b(\\mathcal F)$ are zero for $b>0$, so $E_2^{a,b}=0$ there. In row zero $\\mathcal H^0(\\mathcal F)(V)=\\Gamma(V,\\mathcal F)$, giving $E_2^{a,0}=\\check H^a(\\mathfrak U,\\mathcal F)$. For $r\\ge2$, differentials out of this row have negative second index and differentials into it start in a zero positive row. Thus $E_\\infty^{q,0}=E_2^{q,0}$. In total degree $q$ the finite abutment filtration has only this one nonzero graded piece; its edge map is therefore bijective, also for $q=0$.",
+   "uses": [
+    "pqf-def-coherent",
+    "det-lem-picard-affine",
+    "det-thm-picard-cech",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-sc-zariski-module-abelian-cohomology-agree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01ET, label lemma-cech-spectral-sequence-application; Tag 01ES, label lemma-cech-spectral-sequence; blueprint proof Step 2; sites-cohomology.tex Tag 03F3 (lemma-cohomology-of-open), Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+   }
+  },
+  {
+   "text": "Use the canonical comparison, rather than choosing an arbitrary bijection. By [lem-sc-cech-comparison-map-iso-affine] the affine-intersection cover of Step 1 makes the canonical comparison an isomorphism. Its precise normalization is [def-sc-module-cech-comparison]: for an injective resolution, let $T$ be the total Cech-resolution double complex, $\\alpha:\\Gamma(X,I^\\bullet)\\to T$ the restriction augmentation and $\\beta:\\check C^\\bullet(\\mathfrak U,\\mathcal F)\\to T$ the resolution augmentation; the map is $H^q(\\alpha)^{-1}H^q(\\beta)$. This is the edge map in Step 2, read as in the module form of the construction (Stacks 01ES, the source of this item), whose double complex is formed with an injective resolution in $\\Mod(\\mathcal O_X)$ and whose $E_2$ terms and abutment are those of Step 2 through the identifications made there: the zero-resolution row enters the total complex by $\\beta$, and the abutment is identified with sheaf cohomology by $\\alpha$. If the two total-complex conventions order the indices oppositely, multiplication in bidegree $(a,b)$ by $(-1)^{ab}$ intertwines $d_C+(-1)^a d_I$ and $d_I+(-1)^b d_C$ and is the identity on both axes, so both augmentations, and hence the comparison, agree.",
+   "uses": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EQ, label lemma-cech-cohomology, alpha and beta in the proof; Tag 01ET; blueprint proof Step 2 (specified edge map)"
+   }
+  },
+  {
+   "text": "Put $R=\\Gamma(X,\\mathcal O_X)$. For $r\\in R$, multiplication $m_r:\\mathcal F\\to\\mathcal F$ is a morphism of $\\mathcal O_X$-modules. The naturality equation of [lem-sc-cech-comparison-map-naturality], applied to $m_r$, says $c_{\\mathcal F}\\check H^q(m_r)=H^q(m_r)c_{\\mathcal F}$. The first induced map is multiplication by $r$ on sections term by term and hence on Cech cohomology; the second is the induced $R$-action on sheaf cohomology. Thus $c_{\\mathcal F}(rx)=r c_{\\mathcal F}(x)$. Together with Step 3 this gives the claimed $R$-module isomorphism. For $a\\in A$, its action is that of the image of $a$ under $A\\to R$, so the same equation proves $A$-linearity; taking $A=k$ proves the field assertion.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EQ, label lemma-cech-cohomology, transformation of functors on module sheaves; coherent.tex Tag 01XD; blueprint proof Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "pqf-def-coherent",
+  "det-lem-picard-affine",
+  "det-thm-picard-cech",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "def-sc-module-cech-comparison",
+  "lem-sc-cech-comparison-map-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XD, label lemma-cech-cohomology-quasi-coherent, via Tags 01ET and 01EQ; affine intersections from schemes.tex Tag 01KP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "cechComplex, Sheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'cechComplex'\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "invalid pattern (unknown identifier); corrected by subsequent searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-coherent sheaf on a scheme separated over an affine scheme, the canonical Cech cohomology edge map for an affine open cover is an isomorphism linear over global sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(cohom|[Cc]ompar)|[Ll]eray",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []} ; Mathlib subdirectory: AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology of a quasi coherent sheaf on a separated scheme is sheaf cohomology",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"CategoryTheory.Sheaf.isSeparated\", \"SheafOfModules.Presentation\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.mk\", \"SheafOfModules.QuasicoherentData\", \"CategoryTheory.Presieve.IsSheaf.isSeparated\", \"SheafOfModules.IsQuasicoherent.casesOn\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray theorem: an acyclic open covering computes derived sheaf cohomology by its Cech complex",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.MessageData.maxTraceChildren\", \"Lean.Widget.LazyTraceChildren\", \"Lean.Widget.instTypeNameLazyTraceChildren\", \"Lean.Widget.LazyTraceChildren.indent\", \"Lean.Widget.LazyTraceChildren.children\", \"Lean.Widget.LazyTraceChildren.mk\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffineOpen\\.(inf|biInf)|isAffineOpen.*[Ii]nf|affine.*inter",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\"]} ; Mathlib subdirectory: AlgebraicGeometry/Morphisms",
+   "date": "2026-10-24",
+   "verdict": "auxiliary geometry only; existing leaf lem-weil-pbc-separated-affine-open-intersection is reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.biInf",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.biInf\"]}",
+   "date": "2026-10-24",
+   "verdict": "auxiliary geometry only; existing leaf lem-weil-pbc-separated-affine-open-intersection is reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 787,
+ "blueprint_uses": [
+  "det-lem-picard-affine",
+  "det-thm-picard-cech"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Modules.nonempty_cechComplex_linearEquiv_H_of_isSeparated"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.Modules.nonempty_cechComplex_linearEquiv_H_of_isSeparated"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-lem-picard-cech-computes",
+  "from": null,
+  "same_as": [
+   "sk-lem-picard-cech-computes"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-lem-picard-cech-computes",
+  "worker": "stage1",
+  "group": "Q89",
+  "summary": "Kept every clause of the imported statement. Reused the existing affine-intersection Mathlib leaf, made finite-intersection induction and one-row spectral-sequence degeneration explicit, specified the canonical alpha/beta edge, and used the existing naturality theorem for scalar linearity. No new nodes. The project Leray declarations give a linear equivalence but do not state its identity with the spectral-sequence edge map. Reviewer FIX (Q89 maintainer reader): Step 2 now cites the object-localization (03F3) and module/abelian cohomology (03FD) comparisons that bridge the abelian-sheaf spectral sequence of det-thm-picard-cech to the module cohomology of the item and of det-lem-picard-affine; Step 3 reads the edge map in the module form of Stacks 01ES.",
+  "blueprint": "Steps 1, 2, 3 of the latest blueprint proof are realized respectively by delivered step 1, steps 2-3, and step 4. The general affine-intersection comparison and its naturality are generic tools below this node; the unit/chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-cech-comparison-map-iso-affine",
+    "why": "Generic canonical comparison theorem for arbitrary affine-intersection covers; used to specify the bijective edge map, not to replace the unit route."
+   },
+   {
+    "node": "def-sc-module-cech-comparison",
+    "why": "Existing module-valued alpha/beta normalization fixes the canonical comparison and its total-complex signs."
+   },
+   {
+    "node": "lem-sc-cech-comparison-map-naturality",
+    "why": "Generic naturality of the canonical comparison on module sheaves, needed for multiplication by a global function; the spectral-sequence existence statement in this unit does not assert naturality."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic Stacks 03F3: cohomology over an object of the Zariski site equals cohomology of the restriction on the localized site; [det-thm-picard-cech] is stated over objects of a site, [det-lem-picard-affine] for an affine scheme."
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "Generic Stacks 03FD: module and abelian Zariski cohomology agree; [det-thm-picard-cech] is a statement about abelian sheaves while the item and [det-lem-picard-affine] use module cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-cech-comparison-map-iso-affine",
+  "def-sc-module-cech-comparison",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-sc-zariski-module-abelian-cohomology-agree"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-6c67cc921",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-6c67cc921 (reviewer sub-agent of L); spot-checked: FIX: one citation gap, repaired in fixes/dag/nodes/sec-picard-framework/det-lem-picard-cech-computes.json; statement unchanged, no new nodes. Sources read: blueprint main-20261023-1620 statement and proof (same in latest), and Stacks 01XD, 01EQ, 01ES, 01ET, 03F3, 03FD. I read every cited node's statement. The project Lean Leray.lean:149 has no sorry but states only Nonempty(Γ-linear equiv) and not the edge-map clause, so the item is not finished by it (B10 does not apply). Step 1: the separated-over-Spec-A Mathlib leaf plus an explicit tuple-length induction; empty and repeated cases handled; correct. Step 2 fault (C4/E1): det-thm-picard-cech is about an abelian sheaf on a site (its E_2 terms are cohomology over objects, its abutment is abelian cohomology), while det-lem-picard-affine and the item use module cohomology. The step used the vanishing with no bridge. FIX: Step 2 now cites lem-weil-pbc-cohomology-over-object-localization (03F3) and lem-sc-zariski-module-abelian-cohomology-agree (03FD), declared in tool_uses, and writes out quasi-coherence of the restriction via D(f). The degeneration indices are checked: E_inf^{q,0}=E_2^{q,0} is the only nonzero graded piece. Step 3: lem-sc-cech-comparison-map-iso-affine applies (all tuple intersections affine, F quasi-coherent); c = H(alpha)^-1 H(beta) as in def-sc-module-cech-comparison. Identifying the edge map has to read the spectral-sequence construction, because the statement points at the edge map of an existence-only node; I clarified it as the module form of Stacks 01ES, the item's own source. The (-1)^{ab} sign swap was checked in both components. Step 4: the naturality equation of lem-sc-cech-comparison-map-naturality applied to m_r gives Γ-linearity, then A-linearity via f^#, then k-linearity. Accepted tool uses: the three sk-thm-picard-duality comparison nodes plus the two added bridge nodes. No cycle (DFS from all dependencies). No duplicate new nodes. No SGA. Small cases checked: q=0, a single affine, F=0, disjoint opens, empty X, infinite covers.; 1 file(s) fixed by the reviewer"
+ }
+}

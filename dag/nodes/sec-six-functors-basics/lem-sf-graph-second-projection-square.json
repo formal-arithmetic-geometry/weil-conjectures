@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-graph-second-projection-square",
+ "kind": "statement",
+ "title": "Projection compatibility of the second graph constituent",
+ "statement": "Let A be a finite commutative ring, f:X→Y a morphism of arbitrary schemes, c a supplied open/proper compactification and t=(a,e,p) a proper/open/proper presentation of f. Form the concrete graph presentations t1,t2 and comparison factors B1,B2,D of [def-sf-graph-projection-stages]. For every M in D(X_et,A) and K in D(Y_et,A), tensor B2_M with K and then apply the successive word projection of the second graph presentation t2. The result equals the original word projection for t followed by B2 evaluated at M tensor Lf*K. These are the exact sfGraphWordProjection coefficient compositors [def-sf-etale-graph-word-projection]. No other graph constituent is used in this assertion, and no qc, Noetherianity or boundedness is required.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriekOfCompactification, eB; sites-cohomology.tex, equation-projection-formula-map and lemma-j-shriek-and-tensor; more-etale.tex, lemma-shriek-proper-and-open"
+ },
+ "stmt_deps": [
+  "def-sf-graph-projection-stages",
+  "def-sf-etale-graph-word-projection"
+ ],
+ "proof": [
+  {
+   "text": "Write s for the second proper graph, q for its projection to U, b for the supporting open, and r for the projection to P. Then s followed by q equals a. The specified second-side comparison is Rp(Je(alpha inverse)), followed by Rp(gamma), followed by beta, where alpha is the proper compositor for s,q, gamma is the Cartesian proper/open exchange, and beta is the proper compositor for r,p. Expand only these functor associators and whiskerings.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the already proved properStrength_comp constituent of the compactification-tower calculation at s,q and at r,p, and its mixed_twisted_projection constituent for q,b,e,r. An elementary categorical pasting lemma cancels only alpha, moves the inner strength through the exchange by naturality, applies the mixed square, and then moves the resulting coefficient change through beta. This gives the projection square at the raw coefficient Ls Lq Le Lp K. No projection arrow is inverted.",
+   "uses": [
+    "lem-amb-compactification-projection-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the final coefficient path by three component associativity identities for derived pullback composition, applied to (sb,r,p), (s,b,r), and (s,q,e). Naturality of the s,b compositor moves the r,p coefficient map. Expand the square pullback comparison and cancel its inverse compositor. The resulting path is exactly the canonical sfGraphWordProjection coefficient for the second presentation.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the raw square with tensor of the inverse s,q pullback compositor followed by the original word coefficient. Naturality of the second-side isomorphism moves this map across the comparison. Coefficient naturality of open and proper projection gives the second word projection; cancellation of the s,q compositor gives the original word projection. Thus the displayed equation has precisely the specified endpoint coefficients. Normalize the endpoint by explicitly unfolding sfGraphWordProjection and its imported sfGraphProjectionWord definition, distributing the final coefficient composite through the tensor, proper image and open extension functors.",
+   "uses": [
+    "lem-amb-compactification-projection-composition",
+    "lem-kun-derived-pullback-composition-monoidal",
+    "def-sf-etale-explicit-graph-projection-word"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-compactification-projection-composition",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "def-sf-etale-explicit-graph-projection-word"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "eB; D3 instantiation of the proved mixed and proper-composition constituents in Sheaf.AlgebraicGeometry.CompactificationProjectionComposition, with source-library UpperStarCompCoherence and elementary categorical pasting. Endpoint normalization explicitly unfolds the imported sfGraphProjectionWord definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula compatibility with direct image composition and proper open graph comparison",
+   "results": "8 unrelated Profinite, DiscreteQuotient and LightProfinite projection composition identities. No derived graph-word theorem.",
+   "date": "2026-10-26",
+   "verdict": "No matching result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graph comparison of proper direct image and extension by zero commutes with the derived projection formula",
+   "results": "8 results on product/biproduct comparisons, CostructuredArrow projections, cokernel comparisons and homology. None is an etale projection-formula compatibility.",
+   "date": "2026-10-26",
+   "verdict": "No matching result."
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedLowerStarProjectionMap",
+   "results": "No results; identifier absent from Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "The concrete projection API belongs to the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*projection|projection.*graph; rightDerivedLowerStarProjectionMap.*comp",
+   "results": "Mathlib search returned only stereographic projections. Project search found the proper projection composition theorem, OpenImmersionProjectionComposition and EtaleProperOpenTensorSquare, but no tensor square for the separate eA/eB/eC graph words. Existing graph-neighborhood words define related functors without these tensor identities. blueprint_refs searches graph projection and proper open tensor returned zero blueprint matches.",
+   "date": "2026-10-26",
+   "verdict": "The existing canonical maps are reused. Their individual graph tensor squares are strict parts of the assigned calculation, not duplicate endpoint comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfGraphWordProjectionSquare",
+  "date": "2026-10-26",
+  "group": "E5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "thm-asd-smooth-tensor.proof.md, paragraph 3: projection formula and composite counits; nonempty_iso_rightDerivedLowerShriekOfCompactification, eB; sites-cohomology.tex, equation-projection-formula-map and lemma-j-shriek-and-tensor; more-etale.tex, lemma-shriek-proper-and-open",
+   "via": [
+    "lem-sf-etale-graph-word-projection-square",
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfGraphSecondProjectionSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphSecondProjectionSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphSecondSideIso_projection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphSecondSideIso_projection"
+  ],
+  "statement": "theorem sfGraphSecondSideIso_projection (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (t : EtaleGraphPresentation f) (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) : ((derivedTensor (ModuleCat.{u + 1} A) Y).map ((sfGraphSecondSideIso c t A).hom.app M)).app K ≫ sfGraphWordProjection A (sfGraphSecondPresentation c t) M K = sfGraphWordProjection A (t) M K ≫ (sfGraphSecondSideIso c t A).hom.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T001325-L-4184578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T091351-L-3336585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

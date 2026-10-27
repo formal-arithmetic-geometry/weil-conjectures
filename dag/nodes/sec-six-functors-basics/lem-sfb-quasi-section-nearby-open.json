@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-quasi-section-nearby-open",
+ "kind": "statement",
+ "title": "Integral quasi-section through a closed fibre point meeting a nearby open",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], locally of finite type [def-weil-finite-type-morphism], with $S$ locally Noetherian [pqf-def-locnoeth]. Let $x\\in X$, set $s=f(x)$, and suppose $x$ is closed in the fibre $X_s$ [def-pc-scheme-fibre], meaning that its singleton is closed in that fibre. Let $V\\subseteq X$ be an open subscheme [def-weil-open-immersion]. Suppose that there is $x^{\\prime}\\in V$ such that $x\\in\\overline{\\{x^{\\prime}\\}}$ and $f(x^{\\prime})\\ne s$. Then there are an integral closed subscheme $i:Z\\hookrightarrow X$ [def-pc-integral-scheme, def-weil-closed-immersion] and its generic point $z$ [def-sc-generic-point] such that $x\\in i(Z)$, $i(z)\\in V$, $f(i(z))\\ne s$, and $f\\circ i$ is quasi-finite at the point of $Z$ above $x$ [pqf-def-quasifinite]. Here $\\overline{\\{i(z)\\}}=i(Z)$ as subsets of $X$, so $i(z)$ specializes to $x$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU, more-morphisms-lemma-quasi-finite-quasi-section-meeting-nearby-open-X, statement and proof, especially the explicit choice Z = closure of {z} with its induced reduced scheme structure. The integrality and generic-point formulation record this choice, rather than an arbitrary Z in the displayed statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-scheme-fibre",
+  "def-weil-open-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-generic-point",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "By [pqf-lem-locnoeth-lft], $X$ is locally Noetherian. Put $B=\\mathcal O_{X,x}$, with maximal ideal $\\mathfrak m_B$. Choose a Noetherian affine chart $\\operatorname{Spec}R$ containing $x$ from the covering in [pqf-def-locnoeth], and write $\\mathfrak p\\subset R$ for $x$. The canonical-local-spectrum statement [lem-weil-pbc-spec-local-ring-canonical-morphism] identifies $B=R_{\\mathfrak p}$. Thus [lem-weil-pbc-localization-noetherian] makes $B$ Noetherian. It is nonzero, since $\\mathfrak p$ is proper. Write $c:\\operatorname{Spec}B\\to X$ for the canonical morphism; it maps $\\mathfrak m_B$ to $x$ and its image consists of the generalizations of $x$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X, local-spectrum reduction; Tag 05GT, preceding lemma-quasi-finite-quasi-section-meeting-nearby-open, Noetherianness; Tags 01T6 and 00FN."
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{S,s}$, with maximal ideal $\\mathfrak m_A$, and let $\\varphi:A\\to B$ be the local homomorphism induced by $f$. The morphism $f\\circ c$ equals $\\operatorname{Spec}B\\xrightarrow{\\operatorname{Spec}\\varphi}\\operatorname{Spec}A\\to S$: by [lem-weil-pbc-morphism-from-spec-local-ring], both correspond to $(s,\\varphi)$. By the canonical-local-spectrum description and the prime-localization bijection [lem-weil-pbc-primes-of-localization], the only prime of $A$ mapping to $s$ is $\\mathfrak m_A$. Consequently the primes of $B$ mapping to $s$ are exactly $V(\\mathfrak m_AB)$: contraction contains $\\mathfrak m_A$ if and only if it equals this maximal ideal. Hence $W=c^{-1}(V)\\setminus V(\\mathfrak m_AB)$ is open and lies in the punctured spectrum $P=\\operatorname{Spec}B\\setminus\\{\\mathfrak m_B\\}$. It is nonempty: $x^{\\prime}$ is a generalization of $x$, hence lifts under $c$, and any such lift lies in $W$ because $x^{\\prime}\\in V$ and $f(x^{\\prime})\\ne s$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J6 and 01J7 (lemma-morphism-from-spec-local-ring and lemma-specialize-points); the canonical local-spectrum commutative square preceding lemma-specialize-points. Tag 05GT, open avoiding the closed base point."
+   }
+  },
+  {
+   "text": "Apply [lem-per-punctured-local-closed-points] to the nonzero Noetherian local ring $B$ and the nonempty open (hence locally closed) $W\\subseteq P$. Obtain $\\mathfrak q\\in W$ closed in $P$. Since $B$ is local, $\\mathfrak q\\subsetneq\\mathfrak m_B$ and $\\mathfrak m_B\\in V(\\mathfrak q)$. Closedness of $\\{\\mathfrak q\\}$ in $P$ says $V(\\mathfrak q)\\cap P=\\{\\mathfrak q\\}$. Thus the only primes of $B$ containing $\\mathfrak q$ are $\\mathfrak q$ and $\\mathfrak m_B$. Set $u=c(\\mathfrak q)$. Then $u\\in V$, $f(u)\\ne s$ and $u$ specializes to $x$.",
+   "uses": [
+    "lem-per-punctured-local-closed-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GT, lemma-quasi-finite-quasi-section-meeting-nearby-open, choice of a closed point in the punctured spectrum by Properties Tag 02IM."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-reduced-induced-closed-subscheme] on $T=\\overline{\\{u\\}}\\subseteq X$ to obtain its reduced induced closed subscheme $i:Z\\hookrightarrow X$. Its image is $T$, so it contains $x$. The subset $T$ is nonempty and irreducible: every open of $T$ containing any specialization of $u$ contains $u$, so any two nonempty opens of $T$ intersect at $u$. Thus $Z$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. The point $z$ above $u$ is generic in $Z$, since the closed-immersion homeomorphism identifies its closure with $T$. In particular $i(z)=u\\in V$ and $f(i(z))\\ne s$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X, construction of the reduced closure; Schemes Tag 01J3, lemma-reduced-closed-subscheme; Properties Tag 01ON, lemma-characterize-integral."
+   }
+  },
+  {
+   "text": "Let $a\\in Z$ lie above $x$, and let $b\\in Z$ be a generalization of $a$. Using the Noetherian affine chart $\\operatorname{Spec}R$ from step 1, write $\\mathfrak r\\subseteq\\mathfrak p$ for $u$; then $\\mathfrak rB=\\mathfrak q$ by [lem-weil-pbc-primes-of-localization]. Every generalization $i(b)$ of $x$ lies in this chart and corresponds to a prime $\\mathfrak r\\subseteq\\mathfrak l\\subseteq\\mathfrak p$: the first inclusion expresses membership in $T=\\overline{\\{u\\}}$ and the second expresses specialization to $x$. Its extension $\\mathfrak lB$ contains $\\mathfrak q$, so step 3 gives $\\mathfrak lB=\\mathfrak q$ or $\\mathfrak m_B$. Contraction gives $i(b)=u$ or $x$, hence $b=z$ or $a$. The point $a$ is closed in $Z_s$: by [def-pc-scheme-fibre] and the closed-immersion embedding [def-weil-closed-immersion], this fibre is a subspace of $X_s$, where $x$ is closed by hypothesis. If $b$ belongs to $Z_s$ and specializes to $a$ in $Z_s$, it also specializes in $Z$; the alternative $b=z$ is excluded by $f(u)\\ne s$. Thus $a$ has no other generalization in $Z_s$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-pc-scheme-fibre",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, reduced-closure construction; Tag 05GT, the two points of Spec(B/q); Algebra Tag 00E3, lemma-spec-localization. This spells out the topological closed-fibre criterion instead of invoking local-ring quasi-finiteness implicitly."
+   }
+  },
+  {
+   "text": "The composite $g=f\\circ i$ is locally of finite type: for every affine $\\operatorname{Spec}R_0\\subseteq S$ and affine $\\operatorname{Spec}C\\subseteq f^{-1}(\\operatorname{Spec}R_0)$, [lem-weil-pbc-lft-affine-pairs] gives finitely many $R_0$-algebra generators of $C$. The inverse image under $i$ is $\\operatorname{Spec}(C/I)$ by [def-weil-closed-immersion], and the images of these generators generate $C/I$. These inverse images cover $Z$, giving the required affine finite-type charts. Apply [lem-sfb-closed-fibre-point-quasifinite-criterion] to $g$, $a$ and the two fibre properties proved in step 5. It is quasi-finite at $a$. Together with step 4 this gives every conclusion, including $\\overline{\\{i(z)\\}}=i(Z)$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-closed-immersion",
+    "lem-sfb-closed-fibre-point-quasifinite-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TH, lemma-quasi-finite-at-point-characterize, (3) implies (1); Tag 01T2, lemma-locally-finite-type-characterize; Tag 05GU, final quasi-finiteness conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-per-punctured-local-closed-points",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sfb-closed-fibre-point-quasifinite-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 05GU and 05GT, lemmas quasi-finite-quasi-section-meeting-nearby-open-X and quasi-finite-quasi-section-meeting-nearby-open; punctured-spectrum choice and reduced closure, with 01TH (3) to (1) spelling out the final local criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?section|nearby.?open|exists.*[Tt]rait|exists.*[Dd]iscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T07:06:53Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|nearby.?open|exists.*[Tt]rait|exists.*[Dd]iscreteValuationRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite closed subscheme through a closed fibre point meets a prescribed open generalization",
+   "results": "{\"t\": \"2026-10-22T07:06:53Z\", \"tool\": \"leansearch\", \"query\": \"A quasi finite closed subscheme through a closed fibre point meets a prescribed open generalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite.casesOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\"], \"digest\": \"e30c9593fc4255b5\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-22T07:06:53Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfLocallyOfFiniteTypeOfUniversallyInjective\", \"AlgebraicGeometry.LocallyQuasiFinite.of_injective\", \"AlgebraicGeometry.LocallyQuasiFinite.of_finite_preimage_singleton\", \"AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton\", \"AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompSchemeιQuasiFiniteLocus\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_eq_top\"], \"digest\": \"e46354dd0ff73c21\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism to a locally Noetherian scheme, a closed fibre point specialized from a prescribed open lies on an integral closed subscheme quasi finite at that point",
+   "results": "{\"t\": \"2026-10-22T07:07:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type morphism to a locally Noetherian scheme, a closed fibre point specialized from a prescribed open lies on an integral closed subscheme quasi finite at that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isClosedMap_iff_specializingMap\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\"], \"digest\": \"a0b95af01cfe72ee\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Select an integral closed quasi section through a closed point of a fibre with generic point in a given open of the total space",
+   "results": "{\"t\": \"2026-10-22T07:08:27Z\", \"tool\": \"leanfinder\", \"query\": \"Select an integral closed quasi section through a closed point of a fibre with generic point in a given open of the total space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"AlgebraicGeometry.IsIntegral.component_integral\"], \"digest\": \"129e37c0436bfdff\"}; Source inspection: quasi-finiteness classes, locus openness, generic-function-field constructions and valuative existence criteria do not construct an integral quasi-section meeting a prescribed nearby open or a finite-extension trait.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism to a locally Noetherian scheme construct an integral closed quasi section through a closed fibre point whose generic point lies in a prescribed open",
+   "results": "{\"t\": \"2026-10-23T09:30:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type morphism to a locally Noetherian scheme construct an integral closed quasi section through a closed fibre point whose generic point lies in a prescribed open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\"], \"digest\": \"39c57af2d0a96827\"}; No quasi-section existence declaration; normalization, integrality and quasi-finiteness criteria do not select a closed subscheme meeting the prescribed open.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-23T09:30:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteOfLocallyOfFiniteTypeOfUniversallyInjective\", \"AlgebraicGeometry.LocallyQuasiFinite.of_injective\", \"AlgebraicGeometry.LocallyQuasiFinite.of_finite_preimage_singleton\", \"AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton\", \"AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompSchemeιQuasiFiniteLocus\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_eq_top\"], \"digest\": \"e46354dd0ff73c21\"}; No quasi-section existence declaration; normalization, integrality and quasi-finiteness criteria do not select a closed subscheme meeting the prescribed open.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?section|nearby.?open",
+   "results": "{\"t\": \"2026-10-23T09:30:09Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|nearby.?open\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No quasi-section existence declaration; normalization, integrality and quasi-finiteness criteria do not select a closed subscheme meeting the prescribed open.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral closed subscheme through a closed fibre point quasi finite at that point and meeting a given open",
+   "results": "{\"t\": \"2026-10-23T09:30:09Z\", \"tool\": \"leansearch\", \"query\": \"An integral closed subscheme through a closed fibre point quasi finite at that point and meeting a given open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\"], \"digest\": \"9a1ca1385ea71888\"}; No quasi-section existence declaration; normalization, integrality and quasi-finiteness criteria do not select a closed subscheme meeting the prescribed open.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose an irreducible closed subscheme through a fibre closed point with generic point in a given open and quasi finite morphism at the point",
+   "results": "{\"t\": \"2026-10-23T09:48:16Z\", \"tool\": \"leanfinder\", \"query\": \"Choose an irreducible closed subscheme through a fibre closed point with generic point in a given open and quasi finite morphism at the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\"], \"digest\": \"732dbc975c9f7bb3\"}; No quasi-section existence declaration; normalization, integrality and quasi-finiteness criteria do not select a closed subscheme meeting the prescribed open.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dense-generic-trait-selection",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Trait selection meeting a prescribed generic open with finite fraction field. General geometric input: Tag 05GU, construction of Z as the reduced closure of the selected point z.",
+   "via": [
+    "lem-sfb-dense-generic-trait-selection",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasi-section-nearby-open",
+  "worker": "stage1",
+  "summary": "Read Stacks 05GU and 05GT in full. Reused the existing punctured-Noetherian-local-spectrum closed-point theorem (02IM), canonical local-spectrum and reduced-induced-closed-subscheme nodes. The six-step proof explicitly chooses a prime closed in the punctured spectrum, constructs its integral reduced closure, and checks the closed-fibre/no-other-generalization criterion. One new statement-only generic 01TH criterion; no duplicate local-algebra quasi-section node. Normalized doubled TeX escapes without a mathematical statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Trait selection meeting a prescribed generic open with finite fraction field. General geometric input: Tag 05GU, construction of Z as the reduced closure of the selected point z. The prime selection and closure supply the quasi-section prerequisite on the existing trait-selection branch. The ancestor command returns None, retained as in the current node; no unit route changes.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-local-ring",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-primes-of-localization",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-per-punctured-local-closed-points",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic scheme/local-algebra tool for the explicit Stacks 05GU prime-selection and reduced-closure argument; no node of this unit supplies this statement, and it replaces no step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-per-punctured-local-closed-points",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-95628891a",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-95628891a (reviewer sub-agent of L); spot-checked: Read the item, the new node and all 13 cited statements in full. Statement: matches Stacks 05GU (more-morphisms.tex 14957-15025); the integral Z with generic point in V records the source's own choice Z = reduced closure of z, so the target is not weakened. The only citer (lem-sfb-dense-generic-trait-selection step 2) uses it as stated. Steps: (1) 01T6 gives X locally Noetherian; B = R_p is Noetherian and nonzero. (2) f∘c factors through Spec A because both correspond to (s,φ); only m_A maps to s; W = c^-1(V)\\V(m_A B) is open, misses m_B, and is nonempty because x' lifts. (3) The 02IM node gives q closed in the punctured spectrum, so the primes containing q are exactly q and m_B. (4) The reduced closure of u is nonempty, reduced and irreducible, hence integral. (5) A generalization of a is a or z; a is closed in Z_s because Z_s is a subspace of X_s; z is not in Z_s. (6) f∘i is lft by the affine-pairs criterion and the quotient charts of the closed immersion; the new node then gives quasi-finiteness at a. All steps check; proof_deps equals the union of the uses. New node: exactly 01TH (3)=>(1), a real lemma (the source proof needs the fibre to be Jacobson). Tested on A^1_k->k at the origin, a DVR over itself, and k(t)/k (shows lft is needed). Not a duplicate: the existing 01TH nodes cover (1)=>(2), (2)=>(4), residue finiteness and restriction to opens; Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber assumes isolation. No SGA source. Mechanical finding (cites lem-per-punctured-local-closed-points from the dropped 2026-10-19 route): accepted. The node still exists (split, Q29 review pass) and is pure commutative algebra (02IM(1)/02J6(4)), proved via 005E and 02IG with none of the banned inputs (Qbar or adic categories, Verdier duality or biduality, middle t-structure, Gabber, de Jong, stable reduction). The ban applies only to lem-per-artin-gabber-affine-curve and its children; this item is in sk-thm-sf-ctf-stability, outside that subtree. The use is justified at step 3, exactly as 05GT uses 02IM, and is declared in split_report.tool_uses. Accepted tool_uses: all eight declared generic scheme and local-algebra nodes. Maintainer note: the Lean modules Sheaf.RingTheory.PuncturedLocalClosedPoints and NoetherianLocalDomainInfiniteOpens were deleted as dead on 2026-10-20; this citation makes both nodes reachable again, so stage 2 must restore them. blueprint.from.node is null on both nodes, inherited from the Q69 chain and not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiSectionNearbyOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_integral_closed_quasiSection_nearby_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiSectionNearbyOpen.lean",
+  "statement": "theorem exists_integral_closed_quasiSection_nearby_open {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsLocallyNoetherian S] (x : X) (hclosed : IsClosed ({f.asFiber x} : Set (f.fiber (f x)))) (V : X.Opens) (hnearby : ∃ x' : X, x' ∈ V ∧ x ∈ closure ({x'} : Set X) ∧ f x' ≠ f x) : ∃ (Z : AlgebraicGeometry.Scheme.{u}) (i : Z ⟶ X), IsIntegral Z ∧ IsClosedImmersion i ∧ ∃ z a : Z, IsGenericPoint z (Set.univ : Set Z) ∧ i a = x ∧ i z ∈ V ∧ f (i z) ≠ f x ∧ (i ≫ f).IsQuasiFiniteAtPoint a ∧ closure ({i z} : Set X) = Set.range i",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44de14f4c",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement matches Stacks 05GU (more-morphisms.tex) and the node clause by clause: LocallyOfFiniteType f, IsLocallyNoetherian S, closedness of x in the scheme-theoretic fibre f.fiber (f x) rather than in X, x' in V with x in closure{x'} and f x' ≠ f x; conclusion: integral Z with a closed immersion i, generic point z, i a = x, i z in V, f(i z) ≠ f x, (i ≫ f).IsQuasiFiniteAtPoint a (project 01TD predicate including local finite type), closure{i z} = range i. Integral Z with generic point is the source proof's own reduced-closure choice. No extra assumptions; universe u throughout. Record differs from live only in lean; statement verbatim; 9 stmt_dep records correct. Proof-dep imports (PuncturedLocalClosedPoints, ClosedFibrePointQuasiFiniteCriterion, ReducedInducedClosedSubscheme, SpecLocalRingCanonicalMorphism) exist live, and the criterion's hypotheses fit step 6. No duplicate in Mathlib or the project. Only proof is sorry; docstrings carry the source place, the blueprint tag and the six proof steps; report sections present. No files changed, so no compile."
+ }
+}

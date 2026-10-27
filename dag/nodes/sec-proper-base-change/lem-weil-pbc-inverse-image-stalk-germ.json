@@ -126,7 +126,32 @@
   "item": "lem-weil-pbc-zero-dimensional-field-extension",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.inverseImage_stalk_germ"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.inverseImage_stalk_germ",
+     "module": "WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm",
+     "lines": [
+      26,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -169,5 +194,39 @@
   "landing": "20261012T025316-L-1237125",
   "kind": "proof",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme], $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point] and $\\bar x=f\\circ\\bar y$ the image geometric point of $X$. Let $G$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], $f^{-1}G$ its inverse image with unit $\\eta_{f,G}:G\\to f_*f^{-1}G$ [def-weil-pbc-inverse-image], so that for $U\\to X$ etale $\\eta_{f,G}(U):G(U)\\to(f_*f^{-1}G)(U)=(f^{-1}G)(U\\times_XY)$ [def-weil-pbc-direct-image]. Stalks are those of [def-weil-pbc-geometric-stalks]. There is an isomorphism of abelian groups\n$$c_{f,\\bar y,G}:(f^{-1}G)_{\\bar y}\\xrightarrow{\\ \\sim\\ }G_{\\bar x},$$\nnatural in $G$, such that for every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar x$ and every $a\\in G(U)$, with $(U\\times_XY,(\\bar u,\\bar y))$ the induced pointed etale neighbourhood of $\\bar y$,\n$$c_{f,\\bar y,G}\\bigl(\\text{germ of }\\eta_{f,G}(U)(a)\\text{ at }(U\\times_XY,(\\bar u,\\bar y))\\bigr)=\\text{germ of }a\\text{ at }(U,\\bar u).$$\nIn particular, for $U=X$ and $a\\in G(X)$: $c_{f,\\bar y,G}\\bigl((\\eta_{f,G}(X)(a))_{\\bar y}\\bigr)=a_{\\bar x}$.",
+  "proof": [
+   {
+    "text": "Choose c = AlgebraicGeometry.Etale.upperStarCompSheafFiberIso AddCommGrpCat f y [lemma-openclosed-stalk-upperstar]. It is already a natural isomorphism in G. Its definition is the composite of the constructed/abstract pullback comparison, the inverse of Point.sheafFiberComapIso, and Point.sheafFiberIso for pointSmallEtaleComapIso f y. This uses the general-site route explicitly cited by Stacks 03Q1 (3), via Sites 05V1.",
+    "uses": [
+     "lemma-openclosed-stalk-upperstar"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For G, U and a lift ū, compose the desired equality with c.inv. Expand the three factors of c.inv. Point.toPresheafFiber_sheafFiberIso_inv_app transports the germ to the lift (pointSmallEtaleFiberEtaleIso f y).inv.app U ū. Point.toPresheafFiber_sheafFiberComapIso_hom_app then rewrites it as the unit of the abstract sheaf pullback followed by the germ at that lift and the stalk of the abstract/constructed pullback comparison. These two rewrite lemmas are proved in WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Category and .Comap, respectively; they describe the factors of the isomorphism in the preceding step. ([lemma-openclosed-stalk-upperstar], [def-weil-pbc-geometric-stalks]).",
+    "uses": [
+     "lemma-openclosed-stalk-upperstar",
+     "def-weil-pbc-geometric-stalks"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use Point.toPresheafFiber_naturality to move the pullback comparison before the germ. Adjunction.unit_leftAdjointUniq_hom_app, evaluated on U, identifies the abstract unit followed by that comparison with the unit of Etale.upperStarLowerStarAdjunction [def-weil-pbc-inverse-image]. This proves the required germ equality by associativity. The transported lift agrees definitionally with the lift in the statement. No extra hypothesis on f or on G is used. ([def-weil-pbc-geometric-stalks]).",
+    "uses": [
+     "def-weil-pbc-inverse-image",
+     "def-weil-pbc-geometric-stalks"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

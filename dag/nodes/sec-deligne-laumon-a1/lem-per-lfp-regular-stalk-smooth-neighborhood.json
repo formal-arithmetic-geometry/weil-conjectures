@@ -1,0 +1,293 @@
+{
+ "id": "lem-per-lfp-regular-stalk-smooth-neighborhood",
+ "kind": "statement",
+ "title": "A regular stalk map gives a smooth neighborhood under local finite presentation",
+ "statement": "Let $f:X\\to Y$ be a morphism of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth] which is locally of finite presentation [def-sbc-locally-finite-presentation], and let $x\\in X$. Write $y=f(x)$ and let $f_x^\\sharp:\\mathcal O_{Y,y}\\to\\mathcal O_{X,x}$ be its induced local homomorphism [def-weil-locally-ringed-space-morphism]. If $f_x^\\sharp$ is a regular ring map [def-weil-pbc-g-ring], there exists an open subscheme $U\\subseteq X$ containing $x$ such that $f|_U:U\\to Y$ is smooth [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9 (lemma-smooth-at-point), (2) implies (1), combined with Varieties Tags 038U (lemma-geometrically-regular-at-point) and 038X (lemma-geometrically-regular-smooth) in varieties.tex: geometric regularity of the closed fibre local ring implies smoothness of the finite-type fibre at x."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-g-ring",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, $\\mathfrak m=\\mathfrak m_y$, and $k=\\kappa(y)$. The definition in [def-weil-pbc-g-ring], applied to the prime $\\mathfrak m$ of the local ring $A$, gives two facts: $A\\to B$ is flat, and $C=B\\otimes_A k$ is a Noetherian geometrically regular $k$-algebra. These are consequences of the regular-map hypothesis itself; no flatness on a neighbourhood is asserted.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07BZ, definition-regular, flatness and the fibre at the maximal ideal"
+   }
+  },
+  {
+   "text": "Let $F=X_y$ and let $\\xi\\in F$ be the point over $x$. By [lem-sbc-scheme-fibre-stalk-quotient], $\\mathcal O_{F,\\xi}\\cong B/\\mathfrak mB$, by the map induced from the fibre projection. Apply [lem-weil-pbc-fibre-ring-localization-quotient] to $A\\to B$ at $\\mathfrak m$. Every element of $A\\setminus\\mathfrak m$ is already a unit of $A$, hence maps to a unit of $B$, so the localization of $B$ occurring there is $B$ itself. Its displayed formula identifies $C$ with $B/\\mathfrak mB$. These are isomorphisms of $k$-algebras: for $a\\in A$, both send the class of $a$ in $k=A/\\mathfrak m$ to the class of its image in $B$. Thus $\\mathcal O_{F,\\xi}$ is geometrically regular over $k$: tensor these isomorphisms with each finite purely inseparable extension of $k$ and use the defining regularity of the corresponding tensor of $C$.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1, lemma-local-ring-fibre; algebra.tex Tag 00E6, remark-fundamental-diagram"
+   }
+  },
+  {
+   "text": "The morphism $F\\to\\operatorname{Spec}k$ is locally of finite type. Indeed, around each point $x_0\\in X$ with $f(x_0)=y$, choose affine opens $W=\\operatorname{Spec}S$ and $T=\\operatorname{Spec}R$ with $x_0\\in W$, $f(W)\\subseteq T$, and $R\\to S$ finitely presented, as allowed by [def-sbc-locally-finite-presentation]. The map $\\operatorname{Spec}k\\to Y$ factors through $T$ since its image is $y$. By [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], the inverse image of $W$ in $F$ is the affine open $\\operatorname{Spec}(S\\otimes_R k)$, with its $k$-structure given by the second tensor factor. By [lem-weil-pbc-finite-presentation-base-change-composition], this is a finitely presented $k$-algebra (interchange tensor factors); in particular its finite list of polynomial generators generates it as a $k$-algebra. These opens cover $F$, proving the assertion by [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01I4/01JQ (affine fibre products); algebra.tex Tag 05G5 (lemma-base-change-finiteness), (4)"
+   }
+  },
+  {
+   "text": "Apply [lem-per-geometrically-regular-stalk-smooth-over-field] to $F$ over $k$ at $\\xi$. Step 3 verifies local finite type and step 2 verifies geometric regularity of its stalk with the correct $k$-algebra structure. It gives an open neighbourhood of $\\xi$ in $F$ smooth over $k$.",
+   "uses": [
+    "lem-per-geometrically-regular-stalk-smooth-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 038U (lemma-geometrically-regular-at-point) and 038X (lemma-geometrically-regular-smooth)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-smooth-at-point-fibre-criterion] to $f$ at $x$. Local finite presentation is a hypothesis of the item, flatness of the stalk map is step 1, and smoothness of the fibre at the point over $x$ is step 4. Its reverse implication gives an open neighbourhood $U$ of $x$ on which $f$ is smooth, exactly the conclusion.",
+   "uses": [
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9 (lemma-smooth-at-point), (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-weil-finite-type-morphism",
+  "lem-per-geometrically-regular-stalk-smooth-over-field",
+  "lem-trf-smooth-at-point-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9 (2) implies (1), together with schemes.tex 0HA1, algebra.tex 00E6/05G5, and varieties.tex 038U/038X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(IsSmoothAt|smoothLocus|geometricallyRegular|IsRegular)",
+   "results": "15 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness at a point is equivalent to flatness and geometric regularity of the local fibre ring for a morphism locally of finite presentation",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.mk, RingHom.smooth_iff_locally_isStandardSmooth, RingHom.smooth_def, RingHom.Smooth.ofLocalizationSpanTarget, Algebra.Smooth.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt",
+   "results": "5 hits: Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.of_formallySmooth_fiber, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally of finite presentation is smooth at a point if and only if its induced local ring map is regular",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, RingHom.Smooth.propertyIsLocal, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, RingHom.smooth_iff_locally_isStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth locus of a finite presentation scheme morphism consists of points whose stalk homomorphisms have geometrically regular fibres",
+   "results": "8 hits: Algebra.isOpen_smoothLocus, Algebra.smoothLocus, Algebra.smoothLocus_eq_univ_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.basicOpen_subset_smoothLocus_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "isSmooth_iff|isOpen_smoothLocus|exists_notMem_smooth|of_formallySmooth_fiber",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre",
+   "subdirectory": "AlgebraicGeometry/Morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "isSmooth_iff|isOpen_smoothLocus|exists_notMem_smooth|of_formallySmooth_fiber",
+   "results": "11 hits: Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: existing smooth-locus lemmas start from formal smoothness, not regularity of a ring map; the fibre lemma assumes formal smoothness of the entire fibre",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|IsGeometricallyRegular|exists_notMem_smooth|of_formallySmooth_fiber",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme over a field is smooth at a point precisely when its local ring is geometrically regular",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmooth_iff, RingHom.smooth_def, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, Algebra.IsSmoothAt",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt",
+   "results": "5 hits: Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.of_formallySmooth_fiber, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over a field is smooth near a point if its local ring is geometrically regular over that field",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, Algebra.smoothLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.basicOpen_subset_smoothLocus_iff_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*regular|regular.*smooth",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring",
+   "subdirectory": "RingTheory/RegularLocalRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of locally Noetherian schemes with regular local ring homomorphism at a point is smooth on a neighborhood of that point",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.Smooth.propertyIsLocal",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of a localization of a finite type algebra over a field is equivalent to the prime lying in the smooth locus",
+   "results": "8 hits: Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.smoothLocus_comap_of_isLocalization, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.Smooth.holdsForLocalizationAway, Algebra.smoothLocus, Algebra.IsStandardSmooth.localization_away",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism is smooth near x if the induced homomorphism of local rings is flat with geometrically regular fibres",
+   "results": "8 hits: RingHom.Smooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.Smooth.ofLocalizationSpanTarget, RingHom.smooth_def, Algebra.smooth_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-precomposition-smooth-image",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Supporting regular-morphism descent in Temkin Proposition 3.3.5, printed p.25: the sentence invoking Lemma 2.1.4 to obtain a smooth neighborhood of the image; A regular stalk map gives a smooth neighborhood under local finite presentation.",
+   "via": [
+    "lem-per-regular-precomposition-smooth-image",
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-lfp-regular-stalk-smooth-neighborhood",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Extracted flatness and geometric regularity of the closed fibre of the stalk map; explicitly identified it with the local ring of the scheme-theoretic fibre with its residue-field algebra structure; verified local finite type of that fibre on finite-presentation affine charts; applied the pointwise field criterion and the existing 01V9 node. Added one statement-only field lemma after DAG, blueprint, project-source and logged Mathlib searches. No Lean or build tools used.",
+  "blueprint": "Retains the inherited lem-per-artin-gabber-affine-curve ancestry and the regular-precomposition / Elkik / Temkin supporting branch. Steps 1-5 realize the smooth-neighborhood input described in blueprint.from.place; this elementary algebraic-geometric support lemma does not change the Artin-Gabber unit or its route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic 0HA1 identification of a scheme fibre stalk with the quotient by the base maximal ideal; no node of this unit states this local-ring computation."
+   },
+   {
+    "node": "lem-trf-smooth-at-point-fibre-criterion",
+    "why": "Generic 01V9 criterion at a single point, exactly the inherited source route for this item; the unit has no other node stating pointwise flat plus fibre smooth implies smooth near the point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-trf-smooth-at-point-fibre-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-512ef5cdf",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-512ef5cdf (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-geometrically-regular-stalk-smooth-over-field and every cited statement in full, including the blueprint_update of def-weil-pbc-g-ring (reworded, same content). Read Stacks 038U (varieties.tex l.2382), 038X (l.2544), 01V9 (morphisms l.7264) and the tags 0HA1/00E6/05G5/07BZ; all match tags/tags. The item statement is unchanged and true: 01V9 (2)=>(1) plus 038U/038X. It is not a re-split: the item was first created 2026-10-24 as a statement only. Step 1 is genuinely elementary: the definition at the maximal ideal, with κ(m)=A/m because A is local. Step 2 identifies the fibre ring through 0HA1 and 00E6; B_m=B since A∖m maps to units, and the k-algebra compatibility holds by commutativity of the fibre square. Step 3: local finite type from fp charts, the open fibre product, Spec(S⊗_R k) and fp base change, with the right object S⊗_R k. Step 4 applies the new node with the correct k-structure. Step 5: the 01V9 node's flatness is exactly step 1's flat stalk map, and 'fibre smooth at the point' is supplied by step 4. The new node is true: 038U (3)⇒(1) then 038X; Z is locally of finite type, hence locally Noetherian. Tested on k(t^{1/p}) over F_p(t) (not geometrically regular, not smooth), A¹ at its generic point, and Spec k[x,y]/(xy,y²) at x=1 (pointwise). B1-B7 OK. It is the field case, strictly smaller than the item and not a restatement. No duplicate: the global 038X criterion lem-weil-pbc-geometric-regularity-smooth-field-criterion, the separable-residue nodes lem-trf-regular-separable-residue-smooth and lem-sfb-regular-separable-affine-smooth-neighbourhood, and the adic formal-smoothness node lem-sfb-geometrically-regular-local-field-adic-smooth all differ; no blueprint node states it. Accepted tool_uses: 0HA1 lem-sbc-scheme-fibre-stalk-quotient and 01V9 lem-trf-smooth-at-point-fibre-criterion. Batch-5 flag on lem-trf-smooth-at-point-fibre-criterion: generic Stacks 01V9. Its 434-node closure is generic algebra; its only trf nodes are two generic ring lemmas, and it never reaches the trace formula, Poincaré duality, sk-thm-trace-transport or batch-4 targets. It is outside the assumed statements, so accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularStalkSmoothNeighborhood",
+  "declaration": "AlgebraicGeometry.exists_smooth_open_neighborhood_of_regular_stalkMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularStalkSmoothNeighborhood.lean",
+  "statement": "theorem exists_smooth_open_neighborhood_of_regular_stalkMap {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) [LocallyOfFinitePresentation f] (x : X) (hregular : (f.stalkMap x).hom.IsRegular) : ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4b80a723",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Lean matches every node clause: Scheme.{u} X Y, IsLocallyNoetherian X/Y, LocallyOfFinitePresentation f, x : X, (f.stalkMap x).hom.IsRegular (= Flat ∧ geometrically regular Noetherian fibres at all primes, Stacks 07BZ, GRing.lean:50), conclusion ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f) with target Y; no extra assumptions; same shape as landed 01V9 criterion. Item record: only lean added (non-lean fields identical to side-live); 6 stmt_dep records unchanged; lean.statement verbatim in file. No duplicate in Mathlib/Sheaf/WeilConjectures (stalkMap.*IsRegular hits are different statements). Docstrings with source + blueprint + 5-step proof; sorry only; no defs; imports exist. Not recompiled (no change). No findings."
+ }
+}

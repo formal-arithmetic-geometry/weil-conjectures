@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-geometric-irreducibility-generic-dichotomy",
+ "kind": "statement",
+ "title": "Generic dichotomy for geometrically irreducible fibres on a closed irreducible subset",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. For $t\\in Y$, let $X_t$ be its scheme-theoretic fibre over the residue field $\\kappa(t)$ [def-pc-scheme-fibre, def-weil-residue-field]. Let $Z\\subseteq |Y|$ be a nonempty irreducible closed subset [def-weil-irreducible-components]. There exists a nonempty relatively open subset $V\\subseteq Z$ such that precisely one of the following alternatives holds:\n$$\\text{for every }t\\in V,\\ X_t\\text{ is geometrically irreducible over }\\kappa(t);$$\n$$\\text{for every }t\\in V,\\ X_t\\text{ is not geometrically irreducible over }\\kappa(t).$$\nGeometric irreducibility means irreducibility and nonemptiness after every field extension [def-pc-geometrically-irreducible]. Empty fibres belong to the second alternative. Neither flatness nor Noetherian hypotheses on $X$, $Y$ or $f$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055B (lemma-nr-geom-irreducible-components-constructible), second paragraph at the level n=1, using Tag 055A (lemma-nr-geom-irreducible-components-good). This extracts old steps 3--4 up to the application of the Noetherian constructibility criterion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-irreducible-components",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-scheme-sober], choose the generic point $\\eta\\in Z$, so $Z=\\overline{\\{\\eta\\}}$. Apply [lem-trf-geometric-component-count-generic-constancy] to the given finite type $f$ and this point. It gives a nonempty relatively open $V\\subseteq Z$ and $n\\geq0$ such that, for every $t\\in V$, the scheme $W_t=X_t\\times_{\\kappa(t)}\\kappa(t)^s$ has exactly $n$ irreducible components. Use the separable closures fixed in [def-pd-separable-closure]; in particular each $\\kappa(t)^s$ is separably closed. No change of the base scheme or extra hypothesis on it is needed.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-trf-geometric-component-count-generic-constancy",
+    "def-pd-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055B (lemma-nr-geom-irreducible-components-constructible), second paragraph, applying Tag 055A (lemma-nr-geom-irreducible-components-good); Tag 01IS (lemma-scheme-sober)."
+   }
+  },
+  {
+   "text": "For any topological space $W$, exactly one irreducible component is equivalent to irreducibility and nonemptiness. Indeed [lem-sc-irreducible-components-cover] says the components cover $W$. If there is exactly one, say $C$, then $W=C$, and $C$ is irreducible and nonempty by [def-weil-irreducible-components]. Conversely, if $W$ is irreducible and nonempty, it is itself a maximal irreducible subset; any component contained in $W$ equals $W$ by maximality. Thus it is the unique component. This argument also checks that the empty space has zero components.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004W (lemma-irreducible), part (4), and the definition of an irreducible component."
+   }
+  },
+  {
+   "text": "Fix $t\\in V$. If $X_t$ is geometrically irreducible, [def-pc-geometrically-irreducible] applied to $\\kappa(t)^s/\\kappa(t)$ makes $W_t$ irreducible and nonempty. Conversely, if $W_t$ is irreducible and nonempty, apply [lem-sbc-subset-geometric-irreducibility] with $k=\\kappa(t)$, $\\Omega=\\kappa(t)^s$, the structure morphism of $X_t$, and $A=|X_t|$. The inverse image of this full subset is the full base-changed space. Hence that lemma makes $X_t\\times_k E$ irreducible and nonempty for every field extension $E/k$, exactly geometric irreducibility by [def-pc-geometrically-irreducible]. Together with Step 2, this proves $X_t$ geometrically irreducible if and only if $n=1$.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-sbc-subset-geometric-irreducibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 054P (lemma-geometrically-irreducible-check-after-extension), 020J (lemma-separably-closed-irreducible), and 038I (lemma-characterize-geometrically-irreducible), the separable-closure test."
+   }
+  },
+  {
+   "text": "If $n=1$, Step 3 gives geometric irreducibility for every $t\\in V$. If $n\\ne1$, Step 3 gives its failure for every $t\\in V$. These alternatives cannot both hold, since $V$ is nonempty: choose a point of $V$ and the two conclusions contradict each other there. In particular an empty fibre has zero components by Step 2 and is never put in the first alternative. This proves precisely the stated dichotomy.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055B (lemma-nr-geom-irreducible-components-constructible), second paragraph, specialization to the level n=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-sober",
+  "lem-trf-geometric-component-count-generic-constancy",
+  "def-pd-separable-closure",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-pc-geometrically-irreducible",
+  "lem-sbc-subset-geometric-irreducibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055B (lemma-nr-geom-irreducible-components-constructible), second paragraph, using Tag 055A and the geometric-irreducibility test of Varieties Tag 038I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(geometricallyIrreducible|geometrically_irreducible|GeometricallyIrreducible).*(construct|[Ll]ocus|[Cc]omponent|[Gg]eneric)|(construct|[Ll]ocus|[Cc]omponent|[Gg]eneric).*(geometricallyIrreducible|GeometricallyIrreducible)",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean. No theorem asserting the open geometric-irreducibility dichotomy for arbitrary finite type morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIrreducible, IsIrreducible",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Hom.isIrreducible_preimage. No theorem asserting the open geometric-irreducibility dichotomy for arbitrary finite type morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic constancy of geometric irreducibility of the fibres on an irreducible closed subset for a finite type scheme morphism",
+   "results": "8 hits: genericPoints, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, IsGenericPoint.isIrreducible, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, TopologicalSpace.IrreducibleCloseds.map, AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget. No theorem asserting the open geometric-irreducibility dichotomy for arbitrary finite type morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes and any nonempty irreducible closed subset of the base there is a nonempty relative open subset where the fibres are all geometrically irreducible or all fail to be geometrically irreducible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType. No theorem asserting the open geometric-irreducibility dichotomy for arbitrary finite type morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometrically irreducible fibre predicate is constant on some nonempty open of every irreducible closed subset of the target of a finite type morphism, by counting components over separable closures",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.IsDominant, image_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.isOpenMap_of_generalizingMap. No theorem asserting the open geometric-irreducibility dichotomy for arbitrary finite type morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(geometrically.?irreducible|geometric.*component).*(generic|construct|open)|(generic|construct).*(geometrically.?irreducible|geometric.*component)",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean. Read the returned signatures: finite-fibre properties, component finiteness, dominance/locality, and component equivalences under an already geometrically irreducible open map do not assert the generic dichotomy for an arbitrary finite type morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic constancy of the number of geometric irreducible components of fibres of finite type scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.Scheme.Hom.discrete_fiber, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion. Read the returned signatures: finite-fibre properties, component finiteness, dominance/locality, and component equivalences under an already geometrically irreducible open map do not assert the generic dichotomy for an arbitrary finite type morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIrreducible, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "0 hits: . Read the returned signatures: finite-fibre properties, component finiteness, dominance/locality, and component equivalences under an already geometrically irreducible open map do not assert the generic dichotomy for an arbitrary finite type morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes the number of geometric irreducible components of the fibres is constant on a dense open of an irreducible base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.IsDominant, AlgebraicGeometry.instIsPreimmersionFiberι. Read the returned signatures: finite-fibre properties, component finiteness, dominance/locality, and component equivalences under an already geometrically irreducible open map do not assert the generic dichotomy for an arbitrary finite type morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism the predicate that the geometric fibre is irreducible is constant on a nonempty relative open subset of any irreducible closed subset of the base",
+   "results": "8 hits: AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.IsDominant. Read the returned signatures: finite-fibre properties, component finiteness, dominance/locality, and component equivalences under an already geometrically irreducible open map do not assert the generic dichotomy for an arbitrary finite type morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-irreducible-fibre-locus",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FH, good irreducible-fibre locus. Tag 055B (lemma-nr-geom-irreducible-components-constructible), second paragraph at the level n=1, using Tag 055A (lemma-nr-geom-irreducible-components-good). This extracts old steps 3--4 up to the application of the Noetherian constructibility criterion.",
+   "via": [
+    "lem-trf-geometrically-irreducible-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometric-irreducibility-generic-dichotomy",
+  "worker": "stage1",
+  "summary": "Reused the existing general geometric-component-count generic-constancy theorem rather than creating a duplicate. Scheme sobriety identifies Z with a point closure. Wrote out the elementary unique-component criterion, applied the existing arbitrary-subset separably-closed-extension test to the full fibre, and concluded by n=1 versus n≠1, including empty fibres and exclusivity. Read all cited statements, Stacks 055A/055B, 01IS, 004W, 054P/020J/038I, and the latest blueprint; no statement changed and no new node is needed. No exact project declaration or Mathlib match found.",
+  "blueprint": "Realizes the existing ancestry from local-term-locality through its legacy flattening/Noetherian-approximation 05FH branch: the generic-constancy input of 055A used in 055B, second paragraph at level n=1. Read the latest local-term-locality statement/proof and sk-i-curve-zero: this auxiliary split does not change their contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "Generic field-extension test, applied to the whole fibre. Its statement supplies irreducibility and nonemptiness after every field extension from one separably closed extension; the current unit has no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-subset-geometric-irreducibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-03e219ae6",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-03e219ae6 (reviewer sub-agent of L); spot-checked: First split of a node that was statement-only before (no repair note, not a 10-21 re-split); no new nodes. Statement unchanged: it is the n=1 level of the Stacks 055B second-paragraph argument, under 055A's finite type hypothesis; 055B's finite presentation is only needed for its limit reduction, which is not used here. Step 1: lem-sc-scheme-sober (01IS) gives the generic point eta of Z. lem-trf-geometric-component-count-generic-constancy (same unit; any choice of separable closures; no flatness or Noetherian hypothesis) gives a nonempty relatively open V in Z and a constant integer count n. def-pd-separable-closure fixes kappa(t)^s as a separably closed field. Step 2 (elementary): exactly one component iff irreducible and nonempty, using lem-sc-irreducible-components-cover (004W) and maximality; the empty space has 0 components. Step 3: the forward direction is the definition applied to kappa(t)^s; the reverse direction applies lem-sbc-subset-geometric-irreducibility with A = |X_t|, whose hypotheses match exactly (it is the 038I test extended to subsets). Step 4: n=1 versus n not 1; V nonempty gives exclusivity; empty fibres fall in the second alternative. proof_deps equal the union of uses. Tool use of lem-sbc-subset-geometric-irreducibility accepted: it is a generic field-extension test, and no same-unit node or Mathlib leaf for 038I exists. No cycle: the closure of 97 nodes excludes the item, whose only citer is its parent fibre-locus node. Not a duplicate: the sbc generic-geometric-irreducibility-shrink nodes are positive-only. Tested on a point base, X empty, two copies of Y, separable and purely inseparable extensions, and non-reduced fibres. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricIrreducibilityGenericDichotomy",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_genericDichotomy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricIrreducibilityGenericDichotomy.lean",
+  "statement": "theorem geometricallyIrreducible_genericDichotomy {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (Z : Set Y) (hZclosed : IsClosed Z) (hZirreducible : IsIrreducible Z) : ∃ V : Set Z, IsOpen V ∧ V.Nonempty ∧ Xor (∀ t : Z, t ∈ V → GeometricallyIrreducible (f.fiberToSpecResidueField t.val)) (∀ t : Z, t ∈ V → ¬ GeometricallyIrreducible (f.fiberToSpecResidueField t.val))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ccec6bd1",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: LFT+QC finite type; fibre over κ(t) via f.fiberToSpecResidueField t.val; Z closed and IsIrreducible (includes nonempty); ∃ V : Set Z open in subspace topology and nonempty; Xor of the ∀-GI and ∀-¬GI alternatives; Mathlib GeometricallyIrreducible = geometrically IrreducibleSpace (requires nonempty, so empty fibres fall in the second alternative). No extra hypotheses; universe u bound. Item node differs from live only in lean; the six stmt_deps are unchanged; lean.statement verbatim. def-weil-irreducible-components is Mathlib-matched without a lean record and is cited this way by 212 landed items. Proof-only imports exist live; no duplicate declaration in the live project trees or in Mathlib Geometrically/. Docstrings give source place 055A/055B, blueprint id and the 4 proof steps; sorry only; report has Worker report and Second reading sections. Edge cases checked: empty Y/Z/X, one-point base, non-reduced fibres. No findings."
+ }
+}

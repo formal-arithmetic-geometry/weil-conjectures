@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-space-perfect-test-relative-perfection",
+ "kind": "statement",
+ "title": "Perfect tensor tests detect relative perfection on algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived tensor is computed by K-flat resolutions and derived direct image by K-injective resolutions. A perfect complex is etale locally represented by a bounded complex of direct summands of finite free modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $A$ be a commutative ring and $f:X\\to\\operatorname{Spec}A$ a separated flat finitely presented algebraic space. Here separated means the diagonal is a closed immersion; flatness and local finite presentation are tested on etale scheme charts; finite presentation includes quasi-compactness and quasi-separatedness. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Suppose $R\\Gamma(X,E\\otimes_{\\mathcal O_X}^{\\mathbf L}K)$ is perfect in $D(A)$ for every perfect $E\\in D(\\mathcal O_X)$, where perfect over $A$ means isomorphic to a bounded complex of finitely generated projective $A$-modules [def-pc-perfect-ring-complex]. Then $K$ is $\\operatorname{Spec}A$-perfect: it is pseudo-coherent (etale locally represented by a bounded-above complex of finite free modules) and locally has finite Tor amplitude over $f^{-1}\\mathcal O_{\\operatorname{Spec}A}$. The latter means that locally there is a finite interval $[a,b]$ outside which the cohomology of the derived tensor with every module over this inverse-image ring sheaf in degree zero vanishes. In particular $K$ is locally cohomologically bounded below. Global sections are [def-pur-ringed-site-zeroth-hypercohomology].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0GFL, lemma-characterize-relatively-perfect; local lower boundedness from lemma-bounded-on-fibres, preceding it."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-perfect-ring-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-relative-perfect",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Each perfect test has a bounded finite-projective $A$-model. Apply [lem-pc-finite-projective-complex-free-model] to obtain a bounded-above finite-free model, so the test is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex]. Apply [lem-sfb-space-perfect-tests-pseudocoherence]: $f$ is separated flat finitely presented by hypothesis, so $K$ is pseudo-coherent on $X$.",
+   "uses": [
+    "lem-pc-finite-projective-complex-free-model",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-space-perfect-tests-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFL, first two sentences; Tags 0GFJ and 0DII."
+   }
+  },
+  {
+   "text": "$X$ is quasi-compact quasi-separated by finite presentation over the affine base. Choose a perfect generator $G$ by [lem-sfb-space-perfect-weak-generator]. Its dual $G^\\vee$ is perfect by [lem-sfb-ringed-site-perfect-duality]. The hypothesis at $E=G^\\vee$ makes $R\\Gamma(X,G^\\vee\\otimes^{\\mathbf L}K)$ perfect, hence bounded below by its bounded projective model. Condition (iii) of [lem-sfb-space-generator-detects-lower-bound] therefore gives $K\\in D^+_{\\mathrm{QCoh}}(\\mathcal O_X)$, in particular locally bounded below.",
+   "uses": [
+    "lem-sfb-space-perfect-weak-generator",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-space-generator-detects-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFL, application of Tag 0GFI; the printed D-minus is corrected to D-plus."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset A$, put $k=\\kappa(\\mathfrak p)$, $Y=X\\times_A\\operatorname{Spec}k$, and let $i:Y\\to X$ be the projection. It is affine as the base change of a morphism between affine schemes; $Y$ is quasi-compact quasi-separated. By [lem-sfb-space-derived-qcoh-pullback-tensor], $Li^*K$ and $Li^*G$ have quasi-coherent cohomology. Also $Li^*G$ is perfect: for an etale $V\\to X$ put $Y_V=Y\\times_XV$; by [lem-sfb-space-derived-etale-chart-calculus], $(Li^*G)|_{Y_V}\\cong Li_V^*(G|_V)$. Where $G|_V$ has a bounded model of direct summands of finite free modules, [lem-weil-pbc-strict-perfect-ringed-pullback-model] identifies $Li_V^*$ of it with the termwise pullback, again such a bounded model. The $Y_V$ cover $Y$.",
+   "uses": [
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFL, fibre and perfect pullback; sites-cohomology.tex Tag 08H3 (lemma-strictly-perfect-pullback), applied etale locally as in Tag 08H6."
+   }
+  },
+  {
+   "text": "For any $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$, derived adjunction from [lem-sfb-space-derived-etale-chart-calculus] identifies $\\operatorname{Hom}(Li^*G[n],F)$ with $\\operatorname{Hom}(G[n],Ri_*F)$. If these vanish for every $n$, the defining zero-detection property of $G$ gives $Ri_*F=0$. By [lem-sfb-space-affine-derived-pushforward-conservative], $Ri_*$ lands in $D_{\\mathrm{QCoh}}$ and reflects the isomorphism of $0\\to F$; hence $F=0$. Thus $Li^*G$ is a perfect generator on $Y$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-affine-derived-pushforward-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFL, use of spaces-perfect.tex Tag 0E4R, remark-pullback-generator (affine case)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-affine-perfect-hom-base-change], applied to the flat $f$ and $A\\to k$, there is an isomorphism in $D(k)$\n$$R\\operatorname{Hom}_Y(Li^*G,Li^*K)\\simeq R\\operatorname{Hom}_X(G,K)\\otimes_A^{\\mathbf L}k.$$\nBy [lem-sfb-ringed-site-perfect-duality] the latter Hom over $X$ is $R\\Gamma(X,G^\\vee\\otimes^{\\mathbf L}K)$, perfect by hypothesis. Its tensor with $k$ is perfect by [lem-sc-perfect-pullback-perfect-residue], and hence has no sufficiently negative cohomology. The Hom base-change node identifies degree-$j$ cohomology with $\\operatorname{Hom}(Li^*G,Li^*K[j])$. Condition (ii) of [lem-sfb-space-generator-detects-lower-bound] now shows that $Li^*K$ is bounded below. No common bound over the primes is asserted.",
+   "uses": [
+    "lem-sfb-space-affine-perfect-hom-base-change",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sc-perfect-pullback-perfect-residue",
+    "lem-sfb-space-generator-detects-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFL, displayed derived Hom calculation and its boundedness consequence; spaces-perfect.tex Tag 0E4S provides the existing derived Hom base-change form."
+   }
+  },
+  {
+   "text": "Every point of $\\operatorname{Spec}A$ is a prime $\\mathfrak p$, so steps 2 and 5 provide both lower-boundedness hypotheses of [lem-sfb-space-relative-perfect-fibre-criterion]. Step 1 supplies its pseudo-coherence hypothesis, and $f$ is flat locally finitely presented. The criterion gives finite Tor amplitude locally over $f^{-1}\\mathcal O_{\\operatorname{Spec}A}$. Together with pseudo-coherence this is precisely the asserted $\\operatorname{Spec}A$-perfection; local lower boundedness was already proved in step 2.",
+   "uses": [
+    "lem-sfb-space-relative-perfect-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFL, conclusion by Tag 0GFK, lemma-bounded-on-fibres."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-projective-complex-free-model",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-space-perfect-tests-pseudocoherence",
+  "lem-sfb-space-perfect-weak-generator",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-space-generator-detects-lower-bound",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-affine-derived-pushforward-conservative",
+  "lem-sfb-space-affine-perfect-hom-base-change",
+  "lem-sc-perfect-pullback-perfect-residue",
+  "lem-sfb-space-relative-perfect-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0GFL, lemma-characterize-relatively-perfect, proof; affine conservativity spells out Tag 0E4R, and Tag 0E4S supplies the displayed derived Hom base-change isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat separated finitely presented algebraic space over a ring, a quasi coherent complex is relatively perfect if all its perfect tensor tests have perfect derived global sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect relative perfection using derived global sections of tensor products with perfect complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PerfectionMap\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    {R : Type u₁} →\\n      [inst_1 : CommSemiring R] →\\n        [CharP R p] →\\n          {P : Type u₂} → [inst_3 : CommSemiring P] → [inst_4 : CharP P p] → [PerfectRing P p] → (P →+* R) → Prop\", \"doc\": \"Given a prime number $ p $, a commutative semiring $ R $ with characteristic $ p $, and a perfect ring $ P $ with characteristic $ p $, the perfection map is a predicate on ring homomorphisms from $ P\"}\n  {\"name\": \"IsPerfectClosure\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommSemiring K] →\\n      [inst_1 : CommSemiring L] → (K →+* L) → (p : ℕ) → [inst : ExpChar L p] → [PerfectRing L p] → Prop\", \"doc\": \"Given a ring homomorphism $ i : K \\\\to L $ between commutative semirings with exponential characteristic $ p $, the proposition that $ L $ is a perfect closure of $ K $, meaning $ i $ satisfies the $ p\"}\n  {\"name\": \"PerfectionMap.map\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    {R : Type u₁} →\\n      [inst_1 : CommSemiring R] →\\n        [inst_2 : CharP R p] →\\n          {P : Type u₃} →\\n            [inst_3 : CommSemiring P] →\\n              [inst_4 : CharP P p] →\\n                [inst_5 : PerfectRing P p] →\\n                  {S : Ty\", \"doc\": \"Given a prime $ p $, perfect rings $ P $ and $ Q $, and commutative semirings $ R $ and $ S $ with characteristic $ p $, if $ \\\\pi: P \\\\to R $ and $ \\\\sigma: Q \\\\to S $ are perfection maps and $ \\\\varphi: \"}\n  {\"name\": \"PerfectionMap.lift\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (R : Type u₁) →\\n      [inst_1 : CommSemiring R] →\\n        [inst_2 : CharP R p] →\\n          [PerfectRing R p] →\\n            (S : Type u₂) →\\n              [inst_4 : CommSemiring S] →\\n                [inst_5 : CharP S p] →\\n                  (P : Type u₃) →\\n\", \"doc\": \"Given a prime number $ p $, a perfect ring $ P $, and a commutative semiring $ R $ with characteristic $ p $, there exists a ring equivalence between $ P $ and the perfection of $ R $ (the set of $ p \"}\n  {\"name\": \"Perfection.lift\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(p : ℕ) →\\n  [hp : Fact (Nat.Prime p)] →\\n    (R : Type u₁) →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CharP R p] →\\n          [PerfectRing R p] →\\n            (S : Type u₂) → [inst_3 : CommSemiring S] → [inst_4 : CharP S p] → (R →+* S) ≃ (R →+* Ring.Perfection S p)\", \"doc\": \"For commutative semirings $ R $ and $ S $ of prime characteristic $ p $, where $ R $ is perfect, this establishes a bijection between ring homomorphisms $ R \\to S $ and ring homomorphisms $ R \\to \\text{P\"}\n  {\"name\": \"PerfectionMap.of\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (R : Type u₁) [inst_1 : CommSemiring R] [inst_2 : CharP R p],\\n  PerfectionMap p (Perfection.coeff R p 0)\", \"doc\": \"For a commutative semiring $ R $ with prime characteristic $ p $, the 0-th coefficient homomorphism from the perfection of $ R $ to $ R $, which maps each $ p $-perfect sequence $ (f_k) $ to its 0-th \"}\n  {\"name\": \"PerfectionMap.mk'\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₃}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {f : P →+* R}\\n  (g : P ≃+* Ring.Perfection R p), (Perfection.lift p P R) f = ↑g → PerfectionMap p f\", \"doc\": \"For commutative semirings $ R $ and $ S $ of prime characteristic $ p $, where $ R $ is perfect, there is a bijection between the set of ring homomorphisms $ R \\to S $ and the set of ring homomorphisms\"}\n  {\"name\": \"Perfection.perfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (R : Type u₁) [inst : CommSemiring R] (p : ℕ) [hp : Fact (Nat.Prime p)] [inst_1 : CharP R p],\\n  PerfectRing (Ring.Perfection R p) p\", \"doc\": \"For a commutative semiring $ R $ of prime characteristic $ p $, the perfection of $ R $ (the set of all $ p $-perfect sequences $ (f_n) $ satisfying $ f_n = f_{n+1}^p $) inherits the characteristic $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Quasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relatively_perfect|characterize.*perfect",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative perfectness detected by perfect derived global sections after tensoring every perfect complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PerfectionMap.mk\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₂}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R},\\n  (∀ ⦃x y : P⦄, (∀ (n : ℕ), π ((⇑(frobeniusEquiv P p).symm)^[n] x) = π ((⇑(frobeniusEquiv P p).s\", \"doc\": \"A ring homomorphism $\\\\pi : P \\\\to R$ from a perfect ring $P$ (of characteristic $p$) to a ring $R$ (of characteristic $p$) satisfies the perfection map conditions if: (1) $\\\\pi$ is injective on elements\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Module.IsReflexive.of_isPerfPair\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \": IsReflexive R M\", \"doc\": \"For a commutative ring $ R $ and $ R $-modules $ M $ and $ N $, if there exists a perfect pairing between $ M $ and $ N $, then $ M $ is a reflexive module, i.e., the canonical evaluation map $ M \\to (\"}\n  {\"name\": \"perfect_iff_eq_derivedSet\", \"module\": \"Mathlib.Topology.DerivedSet\", \"type\": \"{U : Set X} : Perfect U ↔ U = derivedSet U\", \"doc\": \"A set $ U $ in a topological space is perfect if and only if $ U $ is equal to its derived set, i.e., $ U = \\\\{ x \\\\in X \\\\mid x $ is an accumulation point of $ U \\\\} $.\"}\n  {\"name\": \"PerfectionMap.map\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"{π : P →+* R} (_ : PerfectionMap p π) {σ : Q →+* S} (n : PerfectionMap p σ) (φ : R →+* S) : P →+* Q\", \"doc\": \"Given a prime $ p $, perfect rings $ P $ and $ Q $, and commutative semirings $ R $ and $ S $ with characteristic $ p $, if $ \\\\pi: P \\\\to R $ and $ \\\\sigma: Q \\\\to S $ are perfection maps and $ \\\\varphi: \"}\n  {\"name\": \"perfectField_of_isSeparable_of_perfectField_top\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.PerfectClosure\", \"type\": \"[Algebra.IsSeparable F E] [PerfectField E] : PerfectField F\", \"doc\": \"If $ F $ is a separable algebra over a perfect field $ E $, then $ F $ is also a perfect field. This follows from the fact that separability preserves the property of having all elements with $ p $-th\"}\n  {\"name\": \"Perfection.map\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"(φ : R →+* S) : Ring.Perfection R p →+* Ring.Perfection S p\", \"doc\": \"Given a ring homomorphism $\\\\varphi: R \\\\to S$ between commutative semirings of prime characteristic $p$, this constructs the induced ring homomorphism between their perfections. For a $p$-perfect seque\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative perfection of a quasi coherent derived complex on a flat separated finitely presented algebraic space detected by perfect tensor tests",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect derived global sections after tensoring every perfect complex imply finite Tor amplitude over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective Y] (n : ℕ),\\n  \", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative perfect complexes detected by perfect tensor tests on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] : FormallySmooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally smooth $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally smooth $ B $-algebra.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_exists_tensorProduct\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[EssFiniteType R S] :\\n  FormallyUnramified R S ↔\\n    ∃ t : S ⊗[R] S, (∀ s, ((1 : S) ⊗ₜ[R] s - s ⊗ₜ[R] (1 : S)) * t = 0) ∧ TensorProduct.lmul' R t = 1\", \"doc\": \"Let $R$ be a commutative ring and let $S$ be a finitely generated $R$-algebra. Let $\\\\mu: S \\\\otimes_R S \\\\to S$ be the multiplication map defined by $\\\\mu(s_1 \\\\otimes s_2) = s_1 s_2$. The algebra $S$ is \"}\n  {\"name\": \"perfectSpace_of_module\", \"module\": \"Mathlib.Topology.Algebra.Module.PerfectSpace\", \"type\": \": PerfectSpace E\", \"doc\": \"The topological space $E$ is perfect, meaning every point in $E$ is a limit point of $E$.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"HomologicalComplex.HasTensor\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \"(K₁ K₂ : HomologicalComplex C c)\", \"doc\": \"Given two homological complexes $K_1$ and $K_2$ in a category $\\\\mathcal{C}$ equipped with a monoidal structure via the curried tensor product bifunctor, this definition asserts the existence of a tens\"}\n  {\"name\": \"LinearMap.IsPerfectCompl\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_2} →\\n    {N : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [inst_3 : AddCommGroup N] →\\n              [inst_4 : Module R N] → (p : M →ₗ[R] N →ₗ[R] R) → [p.IsPerfPair] → Submodule R M → Submodul\", \"doc\": \"A predicate asserting that a given linear map from an $ R $-module $ M $ to the dual of an $ R $-module $ N $ is a perfect pairing, where $ R $ is a commutative ring and $ M $, $ N $ are additive comm\"}\n  {\"name\": \"HomologicalComplex.instHasTensorOfHasTensorX\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \"(K₁ K₂ : HomologicalComplex C c) [GradedObject.HasTensor K₁.X K₂.X] : HasTensor K₁ K₂\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ with a fixed complex shape $ c $, if their underlying graded objects $ K_1.X $ and $ K_2.X $ are equipped with a compa\"}\n  {\"name\": \"PerfectSpace.recOn\", \"module\": \"Mathlib.Topology.Perfect\", \"type\": \"{α : Type u_1} →\\n  [inst : TopologicalSpace α] →\\n    {motive : PerfectSpace α → Sort u} →\\n      (t : PerfectSpace α) → ((univ_preperfect : Preperfect Set.univ) → motive ⋯) → motive t\", \"doc\": \"The recursor for the PerfectSpace type allows defining functions or proofs by elimination on perfect spaces, by specifying their behavior when the space is constructed from the condition that the univ\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Quasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relatively_perfect|characterize.*perfect",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-adjoint-unit-properties",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V.",
+   "via": [
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-perfect-test-relative-perfection",
+  "worker": "stage1",
+  "summary": "Checked Tag 0GFL; preserved the statement. Reused generator, perfect duality, derived pullback, affine conservativity and Hom base change. Added three strictly smaller general criteria. Corrected the source proof D-minus typo and retained algebraic-space fibres.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. The steps expand the relative-perfection criterion used by the affine adjoint unit; the current blueprint unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-projective-complex-free-model",
+    "why": "General ring-complex stabilization converts each perfect test to the finite-free pseudo-coherent model; no same-unit node states it."
+   },
+   {
+    "node": "lem-sc-perfect-pullback-perfect-residue",
+    "why": "General ring-complex extension of scalars preserves perfectness, needed for the residue-field tensor; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "why": "General ringed-topos fact that derived pullback of a bounded complex of direct summands of finite free modules is its termwise pullback, again of that form; applied etale locally in step 3 to show Li^*G perfect. No same-unit node states it (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-projective-complex-free-model",
+  "lem-sc-perfect-pullback-perfect-residue",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-bf29e8d58",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-bf29e8d58 (reviewer sub-agent of L); spot-checked: Read Stacks 0GFL (statement and proof), 0GFK, 0GFJ, 0DII, 0GFI and remark-pullback-generator. The item statement is unchanged and matches 0GFL hypothesis by hypothesis. Both source corrections in the report are right: 0GFI gives D^+, not the D^- of the proof, and the fibre is only an algebraic space. Steps: 1 (free model, then pseudo-coherence node), 2 (weak generator, perfect dual, (iii)⇒(i) global lower bound), 4 (adjunction and affine conservativity make Li^*G a generator), 5 (perfect-Hom base change to κ(p), perfect duality, residue perfectness, (ii)⇒(i) on Y) and 6 (0GFK (i)⇒(ii)) all check against the cited statements. All three new nodes are true, self-contained, statement-only, of comparable size and strictly smaller than the item. Small cases checked: Spec A with K = M̃, a field with a left-unbounded complex, empty X. Duplicate search found nothing usable: lem-sfb-perfect-tests-detect-pseudocoherence is the scheme-only version; lem-sfb-space-relative-perfect-base-change and the generator-existence nodes are different statements. Batch-5: the def-trf citations are general definitions; derived-qcoh-pullback-tensor and affine-perfect-hom-base-change reach sec-trace-formula only through def-trf-algebraic-space; none of them is a trace-formula or Poincaré step. FIX (C1): step 3 asserted that Li^*G is perfect without citing a node. Added [lem-sfb-space-derived-etale-chart-calculus] (étale-local compatibility of Li^*) and [lem-weil-pbc-strict-perfect-ringed-pullback-model] (08H3, termwise strict-perfect pullback). Step 3 now also notes that Li^*G is in D_QCoh, which the generator needs. Updated proof_deps and recorded the new general ringed-topos tool use; checked that it creates no cycle and does not reach the trace formula. Accepted the declared tool uses of lem-pc-finite-projective-complex-free-model and lem-sc-perfect-pullback-perfect-residue.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectTestRelativePerfection",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPerfectRelativeToScheme_of_perfect_tensor_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectTestRelativePerfection.lean",
+  "statement": "theorem isPerfectRelativeToScheme_of_perfect_tensor_tests {S : Scheme.{u}} (A : Type u) [CommRing A] (Y : Over S) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) (hsep : MapIsSeparated f) (hflat : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f) (hqc : MapIsQuasiCompact f.hom.hom) [HasDerivedCategory.{w} X.SmallModules] (K : X.DerivedQCoh) (htest : ∀ E : X.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E → DerivedCategory.IsPerfectRingComplex ((affineDerivedSections A Y e X f).obj (X.derivedDualityModel.closed.tensor.obj (E, K.obj)))) : IsPerfectRelativeToScheme Y f K.obj ∧ ∀ V : X.SmallEtaleModel, ∃ T : Sieve V, T ∈ X.smallEtaleModelTopology V ∧ ∀ (U : X.SmallEtaleModel) (g : U ⟶ V), T g → ∃ c : ℤ, ∀ n : ℤ, n < c → IsZero ((SheafOfModules.overFunctor.{u} X.smallStructureRings U).obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj K.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed small affine etale ringed model, scalar K-injective derived sections, the normalized K-flat tensor, and the existing scheme-target relative-perfection predicate. Added statement dependencies name these landed interfaces and the existing chart-tested morphism properties. No mathematical statement or proof split changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a02e314c3",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Clause-by-clause match with Stacks 0GFL/0GFK. A arbitrary, Spec A via e : Y.left ≅ Spec A. MapIsSeparated + MapIsFlat + MapIsLocallyOfFinitePresentation + MapIsQuasiCompact = separated flat finitely presented (qs from separated). K : X.DerivedQCoh. htest ranges over all IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} E and requires IsPerfectRingComplex of affineDerivedSections (K-injective RHom(O_X,-) with A-action) of the normalized K-flat tensor. Conclusion is the landed IsPerfectRelativeToScheme (QCoh, affine-chart pseudo-coherence, all-module finite Tor dimension over the inverse image) plus a local lower bound varying per cover member. stmt_deps gained only four landed def nodes; lean.statement verbatim; universes bound; docstrings carry source and the six-step proof; sorry only; no duplicate or competing delivery. Edge cases A=0, X empty, K=E=0, non-Noetherian A are fine. Advisory: MapIsQuasiCompact owner def-sfb-proper-curve-moduli is not a direct stmt_dep (reached via def-sfb-space-morphism-properties, as in landed citers). No files changed, so no compile."
+ }
+}

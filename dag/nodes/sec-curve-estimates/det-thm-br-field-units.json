@@ -76,5 +76,55 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $k$ be algebraically closed, let $C$ be an integral curve over $k$\nwith function field $K=k(C)$, and let $L$ be an algebraic\nextension of $K$. Then\n\n$$\nH^q(\\operatorname{Spec}L_{\\mathrm{ét}},\\mathbf G_m)=0\\qquad(q\\geq1).\n$$\n\nIn particular this holds for $L=K$ and for the fraction field of every\nstrict henselization of a local ring of $C$.",
+  "proof": [
+   {
+    "text": "*Degree one.* $H^1(\\operatorname{Spec}L_{\\mathrm{ét}},\\mathbf G_m)=0$ is\nHilbert 90 ([cor-sc-hilbert-90-field]).",
+    "uses": [
+     "cor-sc-hilbert-90-field"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Degree two.* The field $L$ is $C_1$. Indeed, let $f$ be a homogeneous form\nof degree $d$ in $N>d$ variables with coefficients in $L$. Its finitely many\ncoefficients generate a subextension $L_0\\subseteq L$ of finite type over\n$K$; being algebraic over $K$, it is a finite extension of $K$. The field\n$K$ is $C_1$ by Tsen's theorem ([lem-sc-tsen]), hence so is $L_0$\n([lem-sc-c1-finite-extension]), so $f$ has a nontrivial zero in\n$L_0^N\\subseteq L^N$. Therefore\n$\\operatorname{Br}(L)=H^2(\\operatorname{Spec}L_{\\mathrm{ét}},\\mathbf G_m)=0$\nby [lem-sc-c1-brauer-trivial].",
+    "uses": [
+     "lem-sc-tsen",
+     "lem-sc-c1-finite-extension",
+     "lem-sc-c1-brauer-trivial"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Degrees at least three.* Let $G=\\operatorname{Gal}(L^{\\mathrm{sep}}/L)$ and\n$M=(L^{\\mathrm{sep}})^\\times$, a discrete $G$-module. Étale cohomology of\n$\\operatorname{Spec}L$ is the Galois cohomology $H^q(G,-)$ of the\ncorresponding discrete module (Stacks, Étale Cohomology, section on Galois\ncohomology), so $H^q(\\operatorname{Spec}L_{\\mathrm{ét}},\\mathbf G_m)=H^q(G,M)$.\nFor $q\\geq1$ this group is torsion: it is the filtered colimit of the\ncohomology groups of the finite quotients $G/U$ with coefficients in $M^U$,\nand each of these is killed by $\\#(G/U)$.\n\nFix a prime $\\ell$ (possibly equal to $\\operatorname{char}k$) and $q\\geq3$.\nPut $A=M[\\ell]$, $B=\\ell M$ and $Q=M/\\ell M$; the modules $A$ and $Q$ are\nkilled by $\\ell$, so they are torsion, and by [lem-sc-function-field-cd-one]\n\n$$\nH^i(G,A)=H^i(G,Q)=0\\qquad(i\\geq2).\n$$\n\nConsider the exact sequences\n\n$$\n0\\to A\\to M\\xrightarrow{\\ \\ell\\ }B\\to0,\\qquad\n0\\to B\\hookrightarrow M\\to Q\\to0 .\n$$\n\nFrom the first, $H^q(G,A)=0$ gives that $H^q(G,M)\\to H^q(G,B)$ is\ninjective. From the second, $H^{q-1}(G,Q)=0$ (as $q-1\\geq2$) gives that\n$H^q(G,B)\\to H^q(G,M)$ is injective. The composite $M\\to B\\hookrightarrow M$\nis multiplication by $\\ell$, so multiplication by $\\ell$ is injective on\n$H^q(G,M)$. Thus the torsion group $H^q(G,M)$ has no $\\ell$-torsion for any\nprime $\\ell$, hence vanishes.",
+    "uses": [
+     "lem-sc-function-field-cd-one"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The last sentence.* A strict henselization $\\mathcal O^{\\mathrm{sh}}$ of a\nlocal ring of $C$ is a filtered colimit of local rings of étale\n$C$-schemes, and its fraction field is the corresponding colimit of their\nfunction fields, each a finite separable extension of $K$; so it is\nalgebraic over $K$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

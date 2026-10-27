@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-noetherian-countable-antichain",
+ "kind": "statement",
+ "title": "Countable specialization antichain with the same closure",
+ "statement": "Let $U$ be a Noetherian scheme [def-pc-scheme], meaning a quasi-compact locally Noetherian scheme [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. For every subset $E\\subseteq|U|$ there is an at most countable subset $D\\subseteq E$ with $\\overline D=\\overline E$ and with no specialization between distinct elements: if $v,w\\in D$ and $w\\in\\overline{\\{v\\}}$, then $v=w$. Closures are taken in the underlying topological space of $U$. The empty and finite cases are included.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 0G2F (lemma-countable-dense-subset), applied on the reduced closed subscheme with space the closure of E, and 0G2R (lemma-maximal-points), applied to the resulting countable subset; finite cases included."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $Z_x=\\overline{\\{x\\}}$ for $x\\in |U|$, and define $Q$ to be the set of $x$ for which there exists an at most countable $C_x\\subseteq E\\cap Z_x$ with $\\overline{C_x}=Z_x$. Choose one such witness for each $x\\in Q$. For $x\\in E$ the witness $\\{x\\}$ works, so $E\\subseteq Q$. For every $x\\in Q$, the equality $Z_x=\\overline{C_x}$ gives $x\\in\\overline E$. Thus $E\\subseteq Q\\subseteq\\overline E$, including when $E$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2F, lemma-countable-dense-subset, first paragraph: the set T' and its witnesses E_s"
+   }
+  },
+  {
+   "text": "For any at most countable $A\\subseteq Q$, put $C=\\bigcup_{x\\in A} C_x$. A countable union of at most countable sets is at most countable, and $C\\subseteq E$. Each $x\\in A$ belongs to $\\overline{C_x}\\subseteq\\overline C$, while $C_x\\subseteq Z_x\\subseteq\\overline A$ for $x\\in A$. Taking closures proves $\\overline C=\\overline A$. This also holds for $A=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2F, lemma-countable-dense-subset, first paragraph: closure of E' equals closure of the union of E_s"
+   }
+  },
+  {
+   "text": "For $A$ and $C$ as in step 2, decompose the closed set $F=\\overline A=\\overline C$ into its finitely many distinct irreducible components $Z_1,\\ldots,Z_r$ by [lem-sc-noetherian-closed-subset-finite-components]. Each $Z_i$, being closed in the closed set $F$, is closed in $U$, so [lem-weil-pbc-scheme-sober] supplies its generic point $\\eta_i$. We claim $\\overline{C\\cap Z_i}=Z_i$. Indeed put $H_i=\\bigcup_{j\\ne i}Z_j$. Maximality and irreducibility imply $Z_i\\not\\subseteq H_i$: otherwise its finite closed cover by $Z_i\\cap Z_j$ would force containment in a distinct component. Hence $O_i=F\\setminus H_i$ is a nonempty open subset of $F$ contained in $Z_i$. Every nonempty open subset of the irreducible space $Z_i$ meets $O_i$, since two disjoint nonempty opens would give a cover by two proper closed subsets. Its intersection with $O_i$ is open in $F$ and therefore meets $C$, which is dense in $F$. Thus $C\\cap Z_i$ is dense in $Z_i$. It is at most countable and lies in $E\\cap Z_i$, so it witnesses $\\eta_i\\in Q$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2F, lemma-countable-dense-subset, first paragraph: generic points of the components of the closure of E' belong to T'; the restriction-to-component density argument is written out"
+   }
+  },
+  {
+   "text": "Let $M=\\{m\\in Q:\\text{ if }s\\in Q\\text{ and }m\\in Z_s,\\text{ then }s=m\\}$. By [lem-sfb-subset-maximal-generalization] applied to $T=Q$, every point of $Q$ is in $Z_m$ for some $m\\in M$. Suppose $M$ were infinite and choose a countably infinite subset $A\\subseteq M$. Steps 2 and 3 apply to this $A$: the closed set $\\overline A$ has finitely many components, with generic points $\\eta_1,\\ldots,\\eta_r$ belonging to $Q$. For $a\\in A$, some component $Z_i=\\overline{\\{\\eta_i\\}}$ contains $a$. Because $a\\in M$ and $\\eta_i\\in Q$, the defining implication for $M$ gives $a=\\eta_i$. Therefore $A\\subseteq\\{\\eta_1,\\ldots,\\eta_r\\}$, a contradiction. Consequently $M$ is finite.",
+   "uses": [
+    "lem-sfb-subset-maximal-generalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2F, lemma-countable-dense-subset, second paragraph; Tag 0G2R, lemma-maximal-points, assertion (b) applied to T'"
+   }
+  },
+  {
+   "text": "Put $C=\\bigcup_{m\\in M} C_m$. It is at most countable and contained in $E$. The covering conclusion for $Q$ in step 4 gives $E\\subseteq Q\\subseteq\\bigcup_{m\\in M}Z_m$. For each $m\\in M$, $Z_m=\\overline{C_m}\\subseteq\\overline C$. Thus $E\\subseteq\\overline C$. Together with $C\\subseteq E$ this gives $\\overline C=\\overline E$. If $M$ is empty, the same inclusions force $E=C=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2F, lemma-countable-dense-subset, final sentence; this direct-in-U proof avoids introducing a reduced closed subscheme"
+   }
+  },
+  {
+   "text": "Finally define $D=\\{d\\in C:\\text{ if }s\\in C\\text{ and }d\\in Z_s,\\text{ then }s=d\\}$. It is a subset of the at most countable set $C$, hence is at most countable and lies in $E$. Apply [lem-sfb-subset-maximal-generalization] to $T=C$: for every $c\\in C$ there is $d\\in D$ with $c\\in Z_d$. It follows that $C\\subseteq\\overline D$, whence $\\overline C\\subseteq\\overline D$; the reverse inclusion follows from $D\\subseteq C$. Consequently $\\overline D=\\overline E$. If $v,w\\in D$ and $w\\in Z_v$, then $v\\in C$ and the defining implication for $w\\in D$ gives $v=w$. All the constructions allow empty sets and finite sets, so no exceptional case is excluded.",
+   "uses": [
+    "lem-sfb-subset-maximal-generalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 0G2R, lemma-maximal-points, definition of T_0 and assertion (b); this is the thinning used after 0G2F in artin.tex Tag 0CXU, first proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "def-weil-irreducible-components",
+  "lem-sfb-subset-maximal-generalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 0G2F (lemma-countable-dense-subset) and 0G2R (lemma-maximal-points); the proof of 0G2F is applied to the closure of E directly in U, so no reduced subscheme or global dimension bound is needed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian scheme every subset has a countable subset with the same closure and no specializations between distinct points",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α] {s : Set α},\\n  IsClosed s → ∃ S, S.Finite ∧ (∀ t ∈ S, IsClosed t) ∧ (∀ t ∈ S, IsIrreducible t) ∧ s = ⋃₀ S\", \"doc\": \"In a Noetherian topological space $\\\\alpha$, every closed set $s$ can be expressed as a finite union of irreducible closed subsets. Specifically, there exists a finite collection $S$ of closed irreduci\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α] (s : TopologicalSpace.Closeds α),\\n  ∃ S, (∀ (k : ↥S), IsIrreducible ↑↑k) ∧ s = S.sup id\", \"doc\": \"In a Noetherian topological space, every closed subset can be expressed as the union of finitely many irreducible closed subsets. Specifically, for any closed set $ s $, there exists a finite collecti\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α], (irreducibleComponents α).Finite\", \"doc\": \"In a Noetherian topological space, the set of irreducible components is finite. That is, if $ X $ is a topological space satisfying the descending chain condition for open sets (Noetherian property), \"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"NoetherianSpace.to_quasiSeparatedSpace\", \"module\": \"Mathlib/Topology/QuasiSeparated\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α], QuasiSeparatedSpace α\", \"doc\": \"Every Noetherian topological space is quasi-separated. That is, in a Noetherian space, the intersection of any two quasi-compact open subsets remains quasi-compact.\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α] (s : TopologicalSpace.Closeds α),\\n  ∃ S, S.Finite ∧ (∀ t ∈ S, IsIrreducible ↑t) ∧ s = sSup S\", \"doc\": \"In a Noetherian topological space, every closed subset can be expressed as the union of finitely many irreducible closed subsets.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite irreducible decompositions and countable dense sets under separability hypotheses do not give this assertion for every Noetherian scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace, Dense",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'NoetherianSpace'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite irreducible decompositions and countable dense sets under separability hypotheses do not give this assertion for every Noetherian scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*dense|dense.*countable|Countable.*closure|closure.*Countable",
+   "sub": "",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"line\": \"321\", \"text\": \"theorem boundedContinuousFunction_dense [SecondCountableTopologyEither α E] [Fact (1 ≤ p)]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"line\": \"333\", \"text\": \"theorem boundedContinuousFunction_topologicalClosure [SecondCountableTopologyEither α E]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/ConditionalExpectation/CondJensen.lean\", \"line\": \"56\", \"text\": \"  have : SecondCountableTopology Y := ht.span.closure.secondCountableTopology\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/ConditionalExpectation/CondJensen.lean\", \"line\": \"124\", \"text\": \"  have : SecondCountableTopology Y := ht.span.closure.secondCountableTopology\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean\", \"line\": \"34\", \"text\": \"measurable. It is even enough to have this for `p` and `q` in a countable dense set. -/\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean\", \"line\": \"38\", \"text\": \"    [BorelSpace β] (s : Set β) (s_count : s.Countable) (s_dense : Dense s) (f : α → β)\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean\", \"line\": \"113\", \"text\": \"    ∃ s : Set ℝ≥0∞, s.Countable ∧ Dense s ∧ 0 ∉ s ∧ ∞ ∉ s :=\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean\", \"line\": \"114\", \"text\": \"    ENNReal.exists_countable_dense_no_zero_top\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean\", \"line\": \"150\", \"text\": \"    have := h1.closure.secondCountableTopology\"}\n  {\"file\": \"Mathlib/MeasureTheory/Covering/Differentiation.lean\", \"line\": \"232\", \"text\": \"    ∃ w : Set ℝ≥0∞, w.Countable ∧ Dense w ∧ 0 ∉ w ∧ ∞ ∉ w :=\"}\n  {\"file\": \"Mathlib/MeasureTheory/Covering/Differentiation.lean\", \"line\": \"233\", \"text\": \"    ENNReal.exists_countable_dense_no_zero_top\"}\n  {\"file\": \"Mathlib/MeasureTheory/Covering/Differentiation.lean\", \"line\": \"771\", \"text\": \"    We apply this to a countable set of `c` which is dense in the range of `f`, to deduce the\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"38\", \"text\": \"a fixed countable set, if this set is dense. This map is given in `kuratowskiEmbedding`,\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"92\", \"text\": \"    have : ∃ s : Set α, s.Countable ∧ Dense s := exists_countable_dense α\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"93\", \"text\": \"    rcases this with ⟨S, ⟨S_countable, S_dense⟩⟩\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"line\": \"247\", \"text\": \"theorem secondCountable_of_almost_dense_set\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"line\": \"250\", \"text\": \"  refine EMetric.secondCountable_of_almost_dense_set fun ε ε0 => ?_\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ProperSpace/Real.lean\", \"line\": \"34\", \"text\": \"  have : SeparableSpace EReal := ⟨⟨_, countable_range _, denseRange_ratCast⟩⟩\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"647\", \"text\": \"  choose hsX hcX hdX using (fun n ↦ TopologicalSpace.exists_countable_dense (X n))\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Basic.lean\", \"line\": \"176\", \"text\": \"  refine secondCountable_of_almost_dense_set fun ε ε0 => ?_\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/PiNat.lean\", \"line\": \"1106\", \"text\": \"/-- Given a separable metric space `X`, `denseSeq X : ℕ → X` gives a countable\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/SeparableMeasure.lean\", \"line\": \"31\", \"text\": \"A measure `μ` is **separable** if it admits a countable and measure-dense family of sets.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/SeparableMeasure.lean\", \"line\": \"65\", \"text\": \"separable measure, measure-dense, Lp space, second-countable\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/SeparableMeasure.lean\", \"line\": \"335\", \"text\": \"/-- A measure `μ` is separable if there exists a countable and measure-dense family of sets.\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/SeparableMeasure.lean\", \"line\": \"340\", \"text\": \"  exists_countable_measureDense : ∃ 𝒜, 𝒜.Countable ∧ μ.MeasureDense 𝒜\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite irreducible decompositions and countable dense sets under separability hypotheses do not give this assertion for every Noetherian scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subset of a Noetherian scheme has a countable dense set of maximal points",
+   "sub": "",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme of finite type over the integers has a countable specialization antichain dense in any prescribed subset",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, PrespectralSpace ↥X\", \"doc\": \"Every scheme, when considered as a topological space, is a prespectral space, meaning it satisfies the inductive conditions related to compactness and a basis of compact open sets specified by the pre\"}\n  {\"name\": \"PrimeSpectrum.instPrespectralSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], PrespectralSpace (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, satisfies the inductive conditions of a prespectral space. This means it forms a topologi\"}\n  {\"name\": \"PrimeSpectrum.instSpectralSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], SpectralSpace (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a spectral space. This means it satisfies the topological properties defining spectral\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {j \", \"doc\": \"Given a cofiltered or empty category $\\\\mathcal{I}$ and a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes where all transition morphisms are affine, let $j$ be an object in $\\\\mathcal{I}$. Suppose fo\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.IsDominant X.toSpecΓ\", \"doc\": \"For any compact scheme $X$, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is dominant, meaning its image is dense in $\\\\operatorname{Spec}(\\\\Gamma(X))$.\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).IsCoverDense (Opens.grothendieckTopology ↥X)\", \"doc\": \"For any scheme $X$, the canonical inclusion functor from the affine Zariski site of $X$ to the category of open subsets of $X$ is cover-dense with respect to the Grothendieck topology on the open subs\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite irreducible decompositions and countable dense sets under separability hypotheses do not give this assertion for every Noetherian scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.NoetherianSpace, Dense",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite irreducible decompositions and countable dense sets under separability hypotheses do not give this assertion for every Noetherian scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable|[Aa]ntichain",
+   "sub": "Topology/NoetherianSpace.lean",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite irreducible decompositions and countable dense sets under separability hypotheses do not give this assertion for every Noetherian scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every subset of a Noetherian scheme has a countable subset with the same closure and pairwise incomparable points",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"instPrespectralSpaceOfNoetherianSpace\", \"module\": \"Mathlib/Topology/Spectral/Prespectral\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [TopologicalSpace.NoetherianSpace X], PrespectralSpace X\", \"doc\": \"Every Noetherian topological space is a prespectral space. This instance asserts that if a topological space $X$ satisfies the Noetherian condition (every non-empty collection of open subsets has a mi\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α] (s : TopologicalSpace.Closeds α),\\n  ∃ S, (∀ (k : ↥S), IsIrreducible ↑↑k) ∧ s = S.sup id\", \"doc\": \"In a Noetherian topological space, every closed subset can be expressed as the union of finitely many irreducible closed subsets. Specifically, for any closed set $ s $, there exists a finite collecti\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: countable-dense-subset lemmas require SeparableSpace or metrizability; component finiteness and NoetherianSpace instances are ingredients, not this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Countable, closure",
+   "sub": "",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.exists_countable_dense_subset\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \" {α : Type u} [t : TopologicalSpace α] (s : Set α) [TopologicalSpace.SeparableSpace ↑s] : ∃ t_1, t_1.Countable ∧ t_1 ⊆ s ∧ s ⊆ closure t_1\", \"doc\": \"\"}\n  {\"name\": \"UniformSpace.subset_countable_closure_of_almost_dense_set\", \"module\": \"Mathlib.Topology.UniformSpace.Cauchy\", \"type\": \" {α : Type u} [uniformSpace : UniformSpace α] [(uniformity α).IsCountablyGenerated] (s : Set α) (hs : ∀ U ∈ uniformity α, ∃ t, t.Countable ∧ s ⊆ ⋃ x ∈ t, UniformSpace.ball x U) : ∃ t ⊆ s, t.Countable ∧ s ⊆ closure t\", \"doc\": \"\"}\n  {\"name\": \"IsCompact.exists_countable_dense_subset\", \"module\": \"Mathlib.Topology.Metrizable.Basic\", \"type\": \" {X : Type u_2} [TopologicalSpace X] [TopologicalSpace.PseudoMetrizableSpace X] {s : Set X} (hs : IsCompact s) : ∃ t ⊆ s, t.Countable ∧ s ⊆ closure t\", \"doc\": \"A compact set in a pseudo metrizable space is separable, i.e., it is a subset of the closure of\\na countable set.\"}\n  {\"name\": \"TopologicalSpace.IsSeparable.exists_countable_dense_subset\", \"module\": \"Mathlib.Topology.Metrizable.Basic\", \"type\": \" {X : Type u_2} [TopologicalSpace X] [TopologicalSpace.PseudoMetrizableSpace X] {s : Set X} (hs : TopologicalSpace.IsSeparable s) : ∃ t ⊆ s, t.Countable ∧ s ⊆ closure t\", \"doc\": \"If a set `s` is separable in a pseudo metrizable space, then it admits a countable dense\\nsubset. This is not obvious, as the countable set whose closure covers `s` given by the definition\\nof separabil\"}\n  {\"name\": \"EMetric.subset_countable_closure_of_compact\", \"module\": \"Mathlib.Topology.EMetricSpace.Basic\", \"type\": \" {X : Type u_2} [TopologicalSpace X] [TopologicalSpace.PseudoMetrizableSpace X] {s : Set X} (hs : IsCompact s) : ∃ t ⊆ s, t.Countable ∧ s ⊆ closure t\", \"doc\": \"**Alias** of `IsCompact.exists_countable_dense_subset`.\"}\n  {\"name\": \"EMetric.countable_closure_of_compact\", \"module\": \"Mathlib.Topology.EMetricSpace.Basic\", \"type\": \" {γ : Type w} [EMetricSpace γ] {s : Set γ} (hs : IsCompact s) : ∃ t ⊆ s, t.Countable ∧ s = closure t\", \"doc\": \"A compact set in an emetric space is separable, i.e., it is the closure of a countable set.\"}\n  {\"name\": \"EMetric.subset_countable_closure_of_almost_dense_set\", \"module\": \"Mathlib.Topology.EMetricSpace.Basic\", \"type\": \" {α : Type u} [TopologicalSpace α] [WeakPseudoEMetricSpace α] (s : Set α) (hs : ∀ ε > 0, ∃ t, t.Countable ∧ s ⊆ ⋃ x ∈ t, Metric.closedEBall x ε) : ∃ t ⊆ s, t.Countable ∧ s ⊆ closure t\", \"doc\": \"For a set `s` in a weak pseudo emetric space, if for every `ε > 0` there exists a countable\\nset that is `ε`-dense in `s`, then there exists a countable subset `t ⊆ s` that is dense in `s`.\"}\n  {\"name\": \"ContinuousMap.Homotopy.curveIntegral_add_curveIntegral_eq_of_hasFDerivWithinAt_off_countable\", \"module\": \"Mathlib.MeasureTheory.Integral.CurveIntegral.Poincare\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [RCLike 𝕜] [NormedAddCommGroup E] [NormedSpace 𝕜 E] [NormedAddCommGroup F] [NormedSpace 𝕜 F] [NormedSpace ℝ E] [NormedSpace ℝ F] {a b c d : E} {γ₁ : Path a b} {γ₂ : Path c d} {s : Set (↑unitInterval × ↑unitInterval)} {t : Set E} {ω : E → E →L[𝕜] F} {dω :\", \"doc\": \"The curve integral of a closed 1-form along the boundary of the image of a unit square\\nunder a smooth map is zero. We may ignore the behavior on a countable set.\\n\\nThis theorem is stated in terms of a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: countable-dense-subset lemmas require SeparableSpace or metrizability; component finiteness and NoetherianSpace instances are ingredients, not this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every subset of a Noetherian scheme has a countable dense subset",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.separableSpace_iff\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"∀ (α : Type u) [t : TopologicalSpace α], TopologicalSpace.SeparableSpace α ↔ ∃ s, s.Countable ∧ Dense s\", \"doc\": \"A topological space $\\\\alpha$ is separable if and only if there exists a countable subset $S \\\\subseteq \\\\alpha$ such that $S$ is dense in $\\\\alpha$.\"}\n  {\"name\": \"TopologicalSpace.Countable.to_separableSpace\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"[Countable α] : SeparableSpace α\", \"doc\": \"Any countable topological space is separable, as the entire space itself forms a countable dense subset whose closure equals the space.\"}\n  {\"name\": \"TopologicalSpace.SeparableSpace.exists_countable_dense\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"∀ {α : Type u} {t : TopologicalSpace α} [self : TopologicalSpace.SeparableSpace α], ∃ s, s.Countable ∧ Dense s\", \"doc\": \"In a separable topological space, there exists a countable subset $ S $ such that $ S $ is dense in the space.\"}\n  {\"name\": \"TopologicalSpace.IsSeparable\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"(s : Set α)\", \"doc\": \"A set $ s $ is separable if there exists a countable set $ c $ such that $ s \\\\subseteq \\\\overline{c} $, where $ \\\\overline{c} $ denotes the closure of $ c $.\"}\n  {\"name\": \"TopologicalSpace.exists_countable_dense\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"[SeparableSpace α] : ∃ s : Set α, s.Countable ∧ Dense s\", \"doc\": \"In a separable topological space $\\\\alpha$, there exists a countable subset $s$ such that $s$ is dense in $\\\\alpha$.\"}\n  {\"name\": \"Dense.exists_countable_dense_subset\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"{α : Type*} [TopologicalSpace α] {s : Set α} [SeparableSpace s] (hs : Dense s) : ∃ t ⊆ s, t.Countable ∧ Dense t\", \"doc\": \"In a topological space $\\\\alpha$, if a set $s$ is both dense and separable, then there exists a countable subset $t \\\\subseteq s$ such that $t$ is dense in $\\\\alpha$.\"}\n  {\"name\": \"TopologicalSpace.IsSeparable.exists_countable_dense_subset\", \"module\": \"Mathlib.Topology.Metrizable.Basic\", \"type\": \"[PseudoMetrizableSpace X] {s : Set X} (hs : IsSeparable s) : ∃ t, t ⊆ s ∧ t.Countable ∧ s ⊆ closure t\", \"doc\": \"In a pseudometrizable topological space $ X $, every separable set $ s $ contains a countable subset $ t $ such that $ s \\\\subseteq \\\\overline{t} $, where $ \\\\overline{t} $ denotes the closure of $ t $.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: countable-dense-subset lemmas require SeparableSpace or metrizability; component finiteness and NoetherianSpace instances are ingredients, not this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable.*(closure|dense)|([Cc]losure|[Dd]ense).*[Cc]ountable",
+   "sub": "Topology",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"27\", \"text\": \"There is currently no way to state the hypothesis \\\"`E` admits a countable order-dense subset\\\"\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"30\", \"text\": \"use `Dense.exists_between` to show that a chosen countable dense subset is order-dense.\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"63\", \"text\": \"  rcases exists_countable_dense E with ⟨D, D_count, D_dense⟩\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"38\", \"text\": \"a fixed countable set, if this set is dense. This map is given in `kuratowskiEmbedding`,\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"92\", \"text\": \"    have : ∃ s : Set α, s.Countable ∧ Dense s := exists_countable_dense α\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Kuratowski.lean\", \"line\": \"93\", \"text\": \"    rcases this with ⟨S, ⟨S_countable, S_dense⟩⟩\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"line\": \"247\", \"text\": \"theorem secondCountable_of_almost_dense_set\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"line\": \"250\", \"text\": \"  refine EMetric.secondCountable_of_almost_dense_set fun ε ε0 => ?_\"}\n  {\"file\": \"Mathlib/Topology/Order/WithTop.lean\", \"line\": \"49\", \"text\": \"  obtain ⟨c', c'_count, hc'⟩ : ∃ c' : Set ι, c'.Countable ∧ Dense c' :=\"}\n  {\"file\": \"Mathlib/Topology/Order/WithTop.lean\", \"line\": \"50\", \"text\": \"    SeparableSpace.exists_countable_dense\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ProperSpace/Real.lean\", \"line\": \"34\", \"text\": \"  have : SeparableSpace EReal := ⟨⟨_, countable_range _, denseRange_ratCast⟩⟩\"}\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"272\", \"text\": \"theorem Dense.exists_countable_dense_subset_no_bot_top [Nontrivial α] {s : Set α} [SeparableSpace s]\"}\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"274\", \"text\": \"    ∃ t, t ⊆ s ∧ t.Countable ∧ Dense t ∧ (∀ x, IsBot x → x ∉ t) ∧ ∀ x, IsTop x → x ∉ t := by\"}\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"275\", \"text\": \"  rcases hs.exists_countable_dense_subset with ⟨t, hts, htc, htd⟩\"}\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"285\", \"text\": \"countable dense set `s : Set α` that contains neither top nor bottom elements of `α`.\"}\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"287\", \"text\": \"`exists_countable_dense_bot_top`. -/\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Gluing.lean\", \"line\": \"647\", \"text\": \"  choose hsX hcX hdX using (fun n ↦ TopologicalSpace.exists_countable_dense (X n))\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Basic.lean\", \"line\": \"176\", \"text\": \"  refine secondCountable_of_almost_dense_set fun ε ε0 => ?_\"}\n  {\"file\": \"Mathlib/Topology/Separation/NotNormal.lean\", \"line\": \"62\", \"text\": \"  have ⟨d, hd_countable, hd_dense⟩ := exists_countable_dense X\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/PiNat.lean\", \"line\": \"1106\", \"text\": \"/-- Given a separable metric space `X`, `denseSeq X : ℕ → X` gives a countable\"}\n  {\"file\": \"Mathlib/Topology/Order/Basic.lean\", \"line\": \"561\", \"text\": \"it has second countable topology. Note that the \\\"densely ordered\\\" assumption cannot be dropped, see\"}\n  {\"file\": \"Mathlib/Topology/Order/Basic.lean\", \"line\": \"563\", \"text\": \"theorem SecondCountableTopology.of_separableSpace_orderTopology [DenselyOrdered α]\"}\n  {\"file\": \"Mathlib/Topology/Order/Basic.lean\", \"line\": \"565\", \"text\": \"  rcases exists_countable_dense α with ⟨s, hc, hd⟩\"}\n  {\"file\": \"Mathlib/Topology/Order/Basic.lean\", \"line\": \"715\", \"text\": \"  · obtain ⟨s, s_count, hs⟩ := exists_countable_dense α\"}\n  {\"file\": \"Mathlib/Topology/Order/IsLUB.lean\", \"line\": \"310\", \"text\": \"    [DenselyOrdered α] [OrderTopology α] [FirstCountableTopology α] {x y : α} (hy : y < x) :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: countable-dense-subset lemmas require SeparableSpace or metrizability; component finiteness and NoetherianSpace instances are ingredients, not this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable|[Aa]ntichain",
+   "sub": "Topology/NoetherianSpace.lean",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: countable-dense-subset lemmas require SeparableSpace or metrizability; component finiteness and NoetherianSpace instances are ingredients, not this theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, first paragraph: extract E prime with the same closure and remove specializations using Properties Lemmas 0G2F and 0G2R.",
+   "via": [
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-countable-antichain",
+  "worker": "stage1",
+  "summary": "Six steps follow the witness-set argument of Stacks 0G2F and thin the resulting countable set using 0G2R. The countable-density argument remains in this item; one new statement-only node isolates cofinal maximal generalizations for arbitrary subsets. Reused existing component, sobriety and irreducibility nodes. Expanded the component-restriction density argument and included empty and finite cases. No statement change, Lean writing or compilation.",
+  "blueprint": "Supporting prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), through the inherited stable-curve/Artin-versality ancestry: Tag 0CXU first proof paragraph, choice of E' with unchanged closure and no specializations. The latest blueprint direct-images proof (3) was read; this is an auxiliary below its direct-image finiteness route. blueprint_refs.py ancestor reports None; inherited null ancestor and via chain are retained. Steps 1–5 implement the 0G2F choice and step 6 the 0G2R thinning.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-2aa5e835d",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2aa5e835d (reviewer sub-agent of L); spot-checked: I read the whole delivery against properties.tex 0G2F (lemma-countable-dense-subset, both proof paragraphs), 0G2R (lemma-maximal-points) and artin.tex 0CXU (first proof paragraph, where the item is used). The item statement is unchanged and is stronger than 0G2F as printed: it allows any E, where 0G2F needs an infinite dense subset. It gives the parent (lem-sfb-artin-square-zero-effectivity-openness, step 2) exactly what that step needs. Steps 1, 2 and 5 are elementary and correct. Step 3 correctly expands 0G2F's 'generic points are in T''. It cites lem-sc-noetherian-closed-subset-finite-components, lem-weil-pbc-scheme-sober and def-weil-irreducible-components, which are mathlib leaves or definitions. Its density argument checks out: O_i=F∖H_i is open in F, nonempty and contained in Z_i, and irreducibility makes C∩Z_i dense in Z_i. Step 4 gets the finiteness contradiction with the direction of specialization right. Step 6 thins C to its maximal points with the helper and checks the antichain direction. The new node lem-sfb-subset-maximal-generalization is 0G2R(b). It reads the source typos T'→T and O_{T,t'}→O_{S,t'} correctly. It is true, since local rings of a Noetherian scheme have finite dimension, and holds on small cases: T empty, a singleton, a DVR spectrum, closed points of A^1. It is statement-only and self-contained, with three kinds of search recorded and no duplicate: rg -L for 0G2R/0G2F and the wording finds only the item and the parent. It is not a restatement of the item. No route or tool_uses issues, no SGA, no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianCountableAntichain",
+  "declaration": "AlgebraicGeometry.Scheme.exists_countable_subset_closure_eq_no_specializations",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianCountableAntichain.lean",
+  "statement": "theorem exists_countable_subset_closure_eq_no_specializations (U : AlgebraicGeometry.Scheme.{u}) [AlgebraicGeometry.IsLocallyNoetherian U] [CompactSpace U] (E : Set U) : ∃ D : Set U, D ⊆ E ∧ D.Countable ∧ closure D = closure E ∧ ∀ (v : U), v ∈ D → ∀ (w : U), w ∈ D → w ∈ closure ({v} : Set U) → v = w",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a137707b0",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: Scheme.{u} with IsLocallyNoetherian+CompactSpace (= Mathlib IsNoetherian, no stronger hypothesis), arbitrary E with no nonempty/infinite/dense hypothesis, D ⊆ E, D.Countable, closure D = closure E, antichain w ∈ closure {v} → v = w. True by Stacks 0G2F (on closure E) + 0G2R (properties.tex 678-735); edge cases empty/finite/DVR/infinite closed points OK. Node unchanged except lean record (diffed vs side-live); lean.statement verbatim in file; stmt_dep records all existing Mathlib; docstrings carry source place, blueprint tag and six proof steps; single sorry, no definitions, no pro-etale; no existing Mathlib/project declaration found; report has Worker report and Second reading sections. No compile needed (no change)."
+ }
+}

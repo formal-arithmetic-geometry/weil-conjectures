@@ -20,30 +20,45 @@
  ],
  "proof": [
   {
-   "text": "use the two-component partition into U and its open complement. The finite-clopen\nmodule equivalence and derived tensor calculus make ordinary restriction exact and\nidentify its unbounded derived functor with the corresponding coordinate projection.\nThe finite and completed coefficient identifications in d commute with the quotient\nprojections; on each test object this identifies the scalar-extension tensors by\ns tensor x mapped to the local s tensor x. Sheafification gives the ordinary natural\nisomorphism; degreewise application gives finite_quotient and quotient with the recorded\npure-tensor normalizations. Descend the ordinary comparison through K-flat localization\nto obtain reduction. Uniqueness of left derived functors with their universal comparison\nmakes its counit square commute on every complex; this is a square of derived-functor\ncomparison transformations, so the assertion is not limited to K-flat inputs.\nThe tensor formula commutes with the coefficient quotient transitions and with the unit\nx mapped to 1 tensor x. Localizing therefore gives the tower natural isomorphism with\nits prescribed components and the augmented unit square. Restriction preserves K-flat\ncomplexes and flat terms by the tensor calculus. Under the finite-product derived\nequivalence, insertion in the U coordinate is left adjoint to restriction, so restriction\npreserves all existing products, in particular the product used in the Roos triangle.\nIts exact derived functor preserves that triangle, the map 1 minus the transition shift,\nand the augmentation. A global K-flat completeness witness thus restricts to a local\none with the same Roos limit condition. Finally a local site object V has the same\nunderlying object over T; relocalization identifies their slice categories and restricted\ncoefficient rings. The residue reduction comparison identifies tensoring with every\nlocal degree-zero module. Transport the assumed vanishings through these exact slice\nand tensor identifications; the integers a and b do not change. Empty components give\nzero categories and satisfy the same argument.",
+   "text": "Obtain the derived scalar and actual chain quotient isomorphisms with their pure-tensor and universal-counit normalizations. These comparisons apply to arbitrary complexes; no tower or chain coherence equations are assumed.",
    "uses": [
-    "lem-pur-clopen-ringed-module-gluing",
-    "lem-pur-finite-product-derived-tensor-calculus",
-    "lem-weil-integral-reduction-tower-well-defined",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-derived-limit"
+    "lem-sf-clopen-scalar-quotient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the chain transition square after precomposing with the inverse quotient isomorphism. Apply the existing local pure-tensor extensionality lemma, compute the inverse comparison on each local pure tensor from its normalization, and apply the published quotient-transition formulas. The coefficient equation is d.transition evaluated on that section. This gives the transition square on every degree. Similarly, evaluate the chain unit on each section, use its formula x mapping to 1 tensor x and preservation of 1 by the coefficient isomorphism, and apply quotient_tensor to prove the chain unit square.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For P and exponent n+1 compose sfClopenLocalizationIso with the localized chain quotient isomorphism. Naturality of mapDerivedCategoryFactors moves a localized transition past the first isomorphism; functoriality and the chain transition equation then give consecutive-arrow naturality. NatTrans.ofOpSequence extends it to every arrow of the inverse system, and NatIso.ofComponents constructs the tower isomorphism. Its components are definitionally the prescribed quotient comparisons. The same localization naturality applied to the chain unit and then its unit equation proves the required augmented unit square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Supply the preservation of derived completeness and the identical objectwise residue Tor interval, and assemble all fields of SfClopenCompleteRestriction.",
+   "uses": [
+    "lem-sf-clopen-preserves-completeness",
+    "lem-sf-clopen-preserves-residue-tor"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-clopen-ringed-module-gluing",
-  "lem-pur-finite-product-derived-tensor-calculus",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-derived-limit"
+  "lem-sf-clopen-scalar-quotient-comparison",
+  "lem-sf-clopen-preserves-completeness",
+  "lem-sf-clopen-preserves-residue-tor",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined"
  ],
  "proof_origin": {
-  "by": "G4",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Expanded from the assigned node proof and the cited site/derived arguments."
+  "by": "W9",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and the original scalar, Roos, and relocalization paragraphs. The Lean proof explicitly assembles the augmented derived tower from the chain equations using Mathlib localization naturality and NatTrans.ofOpSequence."
  },
  "mathlib_searches": [
   {
@@ -112,13 +127,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-88567",
-  "group": "G4",
-  "result": "fix",
-  "landing": "20261021T174238-L-3771479",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T013003-L-2356382",
   "kind": "interface",
-  "note": "independent cc review: moved interface block vs live item (byte-identical), item theorem vs live (unchanged), new nodes' lean records/proof_deps vs Lean uses, 49 import-removal variants, #print axioms of all proved decls"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

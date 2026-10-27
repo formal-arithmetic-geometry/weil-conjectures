@@ -19,50 +19,50 @@
  ],
  "proof": [
   {
-   "text": "The projection is proper and finitely presented by [lemma-nagata-projective-space-base-change-proper]. Both base and source are noetherian and of finite type over K. As in Proposition 6.8.14, descend F[0] to a finite extension E/Q_l and choose a constructible integral lattice complex C over O_E; the existence argument is [lem-weil-pbc-lisse-e-constructible-integral-lattice] and Lemma 6.8.13. The lattice need not be lisse globally.",
+   "text": "The affine base W, locally of finite type over a field, is Noetherian. The projective-space projection p is proper and locally of finite type, and its source is Noetherian. Place F in degree zero: its sole nonzero cohomology is F, so F[0] is bounded with constructible cohomology. This uses the proved elementary singleFunctor lemma in Adic.ConstructibleHeart, not any constructible t-structure existence assertion.",
    "uses": [
-    "lemma-nagata-projective-space-base-change-proper",
-    "lem-weil-pbc-lisse-e-constructible-integral-lattice"
+    "lemma-nagata-projective-space-base-change-proper"
    ],
    "elementary": false
   },
   {
-   "text": "For each n >= 1 the derived reduction of C modulo pi^n is a bounded constructible finite-torsion complex. Classical proper finiteness [lem-fin-proper-bounded-constructible] makes its direct image constructible. Proper base change and the torsion cohomological-dimension bound for the projective-space fibres give a single bound for all n. The perfect two-term resolutions of O_E/pi^n give uniform bounds for the source reductions as well.",
+   "text": "Use encoding_exact_derived from the native encoding interface to obtain exactness. Its derived homology comparison and [lem-sf-native-adic-encoding-constructibility] show that the encoded F[0] is bounded constructible for the pulled-back bounded-image condensed algebraic closure coefficient.",
    "uses": [
-    "lem-fin-proper-bounded-constructible",
-    "thm-fin-proper-case"
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-sf-native-adic-encoding-constructibility"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the complete direct-image and perfect-reduction comparisons of Lemmas 6.5.9 and 6.5.11. The finite-level constructibility and uniform bounds give integral constructibility by Lemma 6.7.2, the proper case of [lem-sf-integral-direct-image-constructible].",
+   "text": "Apply the existing proper direct-image finiteness theorem [lem-sfb-proper-dc-preserves-qbar] to p over K, with Fact (ringChar K != l) supplied by hK. It gives bounded constructibility of the condensed derived direct image.",
    "uses": [
-    "lem-sf-integral-direct-image-constructible"
+    "lem-sfb-proper-dc-preserves-qbar"
    ],
    "elementary": false
   },
   {
-   "text": "Finally apply Proposition 6.8.11 to get bounded constructible cohomology, and Proposition 6.8.14 and Remark 6.8.15 to identify rationalization and passage to the locally finite Qbar_l coefficient sheaf with the ordinary ambient derived direct image on AdicSheaf_l. This is valid also for n empty (P^0_W) and for an empty base. Formalizing these coefficient comparisons remains necessary.",
+   "text": "The derivedPushComparison of [lem-sf-native-adic-encoding-ordinary-operations] identifies this image with the encoding of the native Rp_*F[0]. Transport boundedness and each constructible cohomology along this isomorphism. Exactness and faithfulness of encoding reflect boundedness; the derived homology comparison and [lem-sf-native-adic-encoding-constructibility] reflect constructible cohomology. The isomorphism invariance used here is the proved helper constructible_of_iso in [lem-weil-pbc-module-constructible-pullback]. The conclusion is precisely the original conjunction. No positive-rank, nonempty-base, or positive-dimensional projective-space assumption was used.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients"
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-sf-native-adic-encoding-constructibility",
+    "lem-weil-pbc-module-constructible-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lemma-nagata-projective-space-base-change-proper",
-  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
-  "lem-fin-proper-bounded-constructible",
-  "thm-fin-proper-case",
-  "lem-sf-integral-direct-image-constructible",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-sf-native-adic-encoding-constructibility",
+  "lem-sfb-proper-dc-preserves-qbar",
+  "lem-weil-pbc-module-constructible-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
-  "date": "2026-10-16",
+  "group": "J1",
+  "date": "2026-10-25",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.7.2, Proposition 6.8.11, Proposition 6.8.14 and Remark 6.8.15; affine compactification proof of sk-prop-sf-finiteness (SGA 4½, Theoreme de finitude, Theorem 1.1)."
+  "place": "Definitions 6.8.3 and 6.8.8; Remark 6.8.15. Reuse the existing condensed proper direct-image finiteness theorem and transport through the normalized native encoding."
  },
  "mathlib_searches": [
   {
@@ -139,14 +139,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "X-39cd0",
-  "group": "C3",
+  "reviewer": "C-83faf",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261015T195758-L-1299658",
+  "landing": "20261025T043250-L-1693096",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+  "note": "independent cc review: Item proof, new encoding_constructible_iff, and the 13 declarations moved into NativeAdicEncodingCore checked against clone originals (signatures byte-identical) and their nodes; need for each adaptation shown by the import cycle its original recreates; delivered set plus all 10 direct importers compiled in a /tmp sandbox; #print axioms shows sorryAx only from statements that were already sorry"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

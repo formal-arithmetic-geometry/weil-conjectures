@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-polarization-calculus-over-field",
+ "kind": "statement",
+ "title": "Polarization calculus and symmetric kernel over an arbitrary field",
+ "statement": "Let $k$ be any field [def-weil-field] and let $A/k$ be an abelian variety [def-sc-abelian-variety]. For abelian varieties $B,C/k$, write $\\operatorname{Hom}^0_k(B,C)=\\operatorname{Hom}_k(B,C)\\otimes_{\\mathbf Z}\\mathbf Q$, where homomorphisms are group-scheme homomorphisms [def-sc-group-scheme] and tensor products are [def-weil-pbc-module-tensor-product]; multiplication of rational endomorphisms is composition. There exists a normalized dual Poincare datum $(A^\\vee,\\mathcal P_A)$ [def-sfb-abelian-dual-poincare-datum]. For every invertible module $N$ on $A$ [def-sc-invertible-module], its normalized translated-difference family defines a homomorphism $\\phi_N:A\\to A^\\vee$, whose value on a geometric point $x$ is $[t_x^*N\\otimes N^{-1}]$. Here $t_x$ is translation by $x$ and pullbacks are tensor inverse images [def-pc-module-pullback]. These homomorphisms satisfy\n$$\\phi_{N\\otimes P}=\\phi_N+\\phi_P,\\qquad \\phi_{\\mathcal O_A}=0,\\qquad \\phi_{b^*N}=b^\\vee\\phi_Nb$$\nfor invertible modules $N,P$ and every $b\\in\\operatorname{End}_k(A)$. Here the dual $b^\\vee:A^\\vee\\to A^\\vee$ is the homomorphism classifying the family $(b\\times1)^*\\mathcal P_A$ on $A\\times_kA^\\vee$, with the pulled-back identity-axis trivialization; on a geometric point it sends the class of a line $Q$ to the class of $b^*Q$. Duality $b\\mapsto b^\\vee$ is additive and extends $\\mathbf Q$-linearly to rational homomorphisms. If $L$ is ample [def-weil-pbc-ample-invertible-module], $\\lambda=\\phi_L$ has a two-sided inverse in $\\operatorname{Hom}^0_k(A^\\vee,A)$, and\n$$v^\\dagger=\\lambda^{-1}v^\\vee\\lambda$$\nis a $\\mathbf Q$-linear involution on $\\operatorname{End}^0_k(A)$ reversing multiplication and fixing rational scalar multiples of the identity. If $N$ is symmetric, meaning $[-1]^*N\\simeq N$, and the image of $\\phi_N$ in $\\operatorname{Hom}^0_k(A,A^\\vee)$ is zero, then $N^{\\otimes2}\\simeq\\mathcal O_A$. No algebraic closedness, perfection or characteristic restriction on $k$ is imposed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent auxiliary for the abelian endomorphism-span input: I §8 Proposition 8.4 and Remark 8.5 (kernel and inversion), pp.35–40 (dual and normalized differences), §9 (duality), Lemma 10.6 (torsion-free homomorphisms), and §14 opening Rosati formula; the arbitrary-field assembly is explained in the report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sfb-abelian-rational-hom"
+ ],
+ "proof": [
+  {
+   "text": "Regard $A$ as a group algebraic space via [def-trf-scheme-algebraic-space]; it is commutative by [lem-sc-av-commutative], and proper, smooth and of finite presentation over the Noetherian base $\\operatorname{Spec}k$. Its geometric fibres are abelian varieties by [lem-sfb-abelian-field-extension]. Apply [lem-sfb-abelian-space-poincare-calculus] over the locally Noetherian scheme $\\operatorname{Spec}k$. Its dual is a proper smooth group algebraic space with geometrically connected abelian fibres. It is separated and locally of finite type, so [lem-sfb-locally-separated-group-space-scheme] represents it by a group scheme. The same characterization makes that scheme an abelian variety. The ordinary-line/etale-line equivalence [lem-trf-scheme-etale-invertible-comparison] identifies its universal module and rigidification with a normalized dual datum in [def-sfb-abelian-dual-poincare-datum]. The tensor-sum clause of that datum is the pullback of the second biadditivity $(1,m_{A^\\vee})^*\\mathcal P_A\\simeq p_{12}^*\\mathcal P_A\\otimes p_{13}^*\\mathcal P_A$ along $1\\times(f,g)$. The cited Poincare calculus gives, for every $N$, the group homomorphism classifying $N_N$, its geometric-point formula, and dual homomorphisms classifying pulled-back Poincare families. All these statements apply over $k$ itself.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sc-av-commutative",
+    "def-trf-scheme-algebraic-space",
+    "lem-sc-abelian-variety-characterization",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-sfb-abelian-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8, pp.36–40 and §9 opening; arbitrary-field assembly through the existing relative Poincare theorem."
+   }
+  },
+  {
+   "text": "Write $c:A\\times A\\to\\operatorname{Spec}k$ and $e: \\operatorname{Spec}k\\to A$. The definition is $N_N=m^*N\\otimes p_1^*N^{-1}\\otimes p_2^*N^{-1}\\otimes c^*e^*N$. Distributing pullback over tensor by [lem-weil-pbc-module-pullback-tensor] gives $N_{N\\otimes P}\\simeq N_N\\otimes N_P$ and $N_{\\mathcal O_A}\\simeq\\mathcal O_{A\\times A}$, preserving the identity rigidifications. The universal property and tensor group law of [def-sfb-abelian-dual-poincare-datum] therefore give $\\phi_{N\\otimes P}=\\phi_N+\\phi_P$ and $\\phi_{\\mathcal O_A}=0$.",
+   "uses": [
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8, normalized difference on pp.39–40; tensor identities written out by N8."
+   }
+  },
+  {
+   "text": "For $b\\in\\operatorname{End}_k(A)$, the group-homomorphism identities $m(b\\times b)=bm$ and $be=e$ give $N_{b^*N}\\simeq(b\\times b)^*N_N$, using pullback composition [lem-pc-module-pullback-identity-composition] and tensor compatibility [lem-weil-pbc-module-pullback-tensor]. The defining identity for $b^\\vee$ from [lem-sfb-abelian-space-poincare-calculus] identifies the latter family with $(1\\times b^\\vee\\phi_Nb)^*\\mathcal P_A$. Both identifications preserve the axis rigidification. Uniqueness in [def-sfb-abelian-dual-poincare-datum] proves $\\phi_{b^*N}=b^\\vee\\phi_Nb$. Restricting the defining identity for $b^\\vee$ to a geometric point gives the stated class $[b^*Q]$.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §9 opening, p.41; substitution in the normalized difference of §8 p.40."
+   }
+  },
+  {
+   "text": "For $f,g:B\\to C$, apply the first-variable biadditivity of $\\mathcal P_C$ from [lem-sfb-abelian-space-poincare-calculus] along $(f,g,1)$: the family for $(f+g)^\\vee$ is the tensor of the families for $f^\\vee$ and $g^\\vee$. The representing tensor law gives $(f+g)^\\vee=f^\\vee+g^\\vee$. Likewise functorial pullback gives $(hf)^\\vee=f^\\vee h^\\vee$, and identity pullback gives $1^\\vee=1$, by uniqueness of classifiers. The comparisons are those of [lem-pc-module-pullback-identity-composition]. An additive map extends uniquely to a $\\mathbf Q$-linear map on $\\operatorname{Hom}\\otimes_{\\mathbf Z}\\mathbf Q$ by $f\\otimes q\\mapsto f^\\vee\\otimes q$; the tensor relations are respected because the map is additive. The composition identity extends by bilinearity. Thus duality fixes rational multiples of the identity.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.5, p.36 and §9 opening, p.41; rational extension by the tensor relations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ample-line-polarization-isogeny] to the ample line $L$, obtaining that $\\lambda=\\phi_L$ is an isogeny over $k$. By [lem-sfb-simple-isogeny-decomposition], choose $g:A^\\vee\\to A$ and $n>0$ with $g\\lambda=[n]_A$ and $\\lambda g=[n]_{A^\\vee}$. Then $\\mu=n^{-1}g$ satisfies $\\mu\\lambda=1_A$ and $\\lambda\\mu=1_{A^\\vee}$ in the rational Hom groups. This constructs the required two-sided inverse.",
+   "uses": [
+    "lem-sfb-ample-line-polarization-isogeny",
+    "lem-sfb-simple-isogeny-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.6 p.36 and §14 opening p.61."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-poincare-biduality] to identify $A$ with $A^{\\vee\\vee}$ through $\\delta_A$. The normalized difference $N_L$ is invariant under swapping its two factors: $m$ is commutative [lem-sc-av-commutative] and its two projection factors exchange. The bidual Poincare identity and the definition of $\\lambda^\\vee$ give $(1\\times\\lambda^\\vee\\delta_A)^*\\mathcal P_A\\simeq s^*(1\\times\\lambda)^*\\mathcal P_A=s^*N_L\\simeq N_L$ on $A\\times A$, where $s$ swaps factors. Each comparison respects the first identity-axis rigidification: on that axis the evaluation of a line against its inverse cancels. The universal property [def-sfb-abelian-dual-poincare-datum] gives $\\lambda^\\vee\\delta_A=\\lambda$. Thus the required symmetry of the polarization is proved from the symmetric family, without an assumption that $L$ itself is symmetric.",
+   "uses": [
+    "lem-sfb-abelian-poincare-biduality",
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-av-commutative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8 biduality pp.37–38 and normalized difference p.40; symmetry calculation for §14."
+   }
+  },
+  {
+   "text": "Set $v^\\dagger=\\mu v^\\vee\\lambda$. Step 4 and distributivity of composition give $\\mathbf Q$-linearity. Also $(vw)^\\dagger=\\mu w^\\vee v^\\vee\\lambda=(\\mu w^\\vee\\lambda)(\\mu v^\\vee\\lambda)=w^\\dagger v^\\dagger$, inserting $\\lambda\\mu=1$. For a rational scalar $a$, $(a1)^\\dagger=\\mu(a1)\\lambda=a1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §14 opening p.61; algebraic identities expanded by N8."
+   }
+  },
+  {
+   "text": "Dualizing both inverse identities gives $\\mu^\\vee\\lambda^\\vee=1$ and $\\lambda^\\vee\\mu^\\vee=1$, so $\\mu^\\vee=\\delta_A\\mu$ by step 6 and uniqueness of a two-sided inverse. Naturality from [lem-sfb-abelian-poincare-biduality] gives $v^{\\vee\\vee}\\delta_A=\\delta_Av$, also for rational $v$ by linearity. Consequently $(v^\\dagger)^\\dagger=\\mu\\lambda^\\vee v^{\\vee\\vee}\\mu^\\vee\\lambda=\\mu\\lambda^\\vee v^{\\vee\\vee}\\delta_A=\\mu\\lambda^\\vee\\delta_Av=v$. This proves involutivity over $k$.",
+   "uses": [
+    "lem-sfb-abelian-poincare-biduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §14 opening p.61; bidual calculation replacing the equivalent Tate-pairing calculation in the source."
+   }
+  },
+  {
+   "text": "By [lem-sfb-abelian-hom-finite-free], $\\operatorname{Hom}_k(A,A^\\vee)$ has a finite integer basis and hence is torsion-free: in basis coordinates $nh=0$ forces every integer coefficient to be zero when $n>0$. Apply [lem-trf-torsionfree-rationalization-injective]. If the rational image of $\\phi_N$ is zero, then $\\phi_N=0$ as a genuine group-scheme homomorphism.",
+   "uses": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-trf-torsionfree-rationalization-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 10.6 p.45 (torsion-free Hom), with the stronger existing Theorem 10.15 node; rational injection."
+   }
+  },
+  {
+   "text": "The Poincare classifier now gives $N_N\\simeq\\mathcal O_{A\\times A}$, since $(1\\times0)^*\\mathcal P_A$ is trivial on the other identity axis [def-sfb-abelian-dual-poincare-datum]. Pull back along $j:A\\to A\\times A$, $j(x)=(x,-x)$. In the formula for $N_N$, $mj=e\\circ p$, $p_1j=1$ and $p_2j=[-1]$, with $p:A\\to\\operatorname{Spec}k$. Thus $j^*N_N\\simeq(p^*e^*N)^{\\otimes2}\\otimes N^{-1}\\otimes([-1]^*N)^{-1}$ by pullback composition and tensor compatibility [lem-pc-module-pullback-identity-composition, lem-weil-pbc-module-pullback-tensor]. The constant line $p^*e^*N$ is trivial because a one-dimensional vector space over $k$ has a basis. If $[-1]^*N\\simeq N$, cancellation gives $N^{\\otimes2}\\simeq\\mathcal O_A$. Every isomorphism in this step is over $k$, so no descent of a geometric trivialization is assumed; the argument works unchanged in characteristic two and dimension zero.",
+   "uses": [
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4(c) and Remark 8.5 p.36; direct normalized-family proof over k written by N8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-space-poincare-calculus",
+  "def-trf-scheme-algebraic-space",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sfb-locally-separated-group-space-scheme",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "def-sfb-abelian-dual-poincare-datum",
+  "lem-sfb-abelian-field-extension",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sfb-ample-line-polarization-isogeny",
+  "lem-sfb-simple-isogeny-decomposition",
+  "lem-sfb-abelian-poincare-biduality",
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-trf-torsionfree-rationalization-injective",
+  "lem-sc-av-commutative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I §§8–10,14; normalized-family and bidual algebra assembly over arbitrary k by N8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian variety over any field the line bundle homomorphism to its dual is additive, compatible with pullback and has algebraically trivial kernel; a symmetric line in its kernel has square trivial",
+   "results": "8 hits. WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Projective.Point.instAddCommGroup, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, CommRing.Pic.mk_dual, WeierstrassCurve.Affine.Point.instAddCommGroup; Elliptic-curve class maps and CommRing.Pic.mk_dual concern other objects and do not construct the dual abelian variety or detect its symmetric kernel.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an abelian variety a symmetric line bundle with zero associated homomorphism to the dual has tensor square trivial",
+   "results": "8 hits. TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially, TensorAlgebra.toTrivSqZeroExt, Bundle.Trivial.symmₗ_trivialization, LinearMap.IsSymmetric.zero, LinearMap.isSymm_zero, groupHomology.H1ToTensorOfIsTrivial.congr_simp, Sym2, LinearMap.IsSymm.tmul; Tensor vanishing, trivial bundles, symmetric linear maps and group homology do not state the geometric kernel theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"dual\"",
+   "results": "0 hits. ; No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosati|phi.*[Ll]ine|[Pp]olarization|[Pp]olarisation",
+   "results": "0 hits. ; No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundle differences on abelian varieties give a Rosati anti involution; symmetric line bundles in the rational kernel have square trivial",
+   "results": "8 hits. CommRing.relPic, RootPairing.CoPolarizationIn, RootPairing.PolarizationIn_eq, CommRing.Pic.mk_dual, RootPairing.PolarizationEquiv, CommRing.Pic.inv_eq_dual, RootPairing.polarizationEquiv_symm_apply_coroot, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul.  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polarization calculus for an abelian variety with rational endomorphisms and symmetric line bundles",
+   "results": "8 hits. LinearMap.IsSymmetric.inner_map_polarization, RootPairing.Polarization_apply, LinearMap.BilinForm.IsSymm.polarization, RootPairing.toLinearMap_apply_apply_Polarization, QuadraticMap.associated_apply, RootPairing.PolarizationIn.congr_simp, RootPairing.CoPolarization_apply, QuadraticMap.polarSym2_map_smul.  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\"",
+   "results": "0 hits. .  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|Poincare|Rosati|polarization",
+   "results": "0 hits. .  Read the returned signatures: these concern module/character duality, root systems, affine space or elliptic-curve point models, not the stated abelian-variety theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+  "date": "2026-10-24",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne AV I §§8–10 and §14: arbitrary-field polarization calculus auxiliary for the symmetric ample endomorphism-span input, below the inherited direct-image/alteration chain.",
+   "via": [
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polarization-calculus-over-field",
+  "worker": "stage1",
+  "summary": "Reused relative Poincare calculus, group-space representability, finite-free Hom and isogeny inverses. Added only biduality and the ample-line isogeny prerequisite. Wrote normalized-family identities, the bidual Rosati calculation and the symmetric-kernel inverse-diagonal pullback over k. No statement change, no Lean writing or builds.",
+  "blueprint": "The current latest blueprint direct-image proof (3) is the inherited outer route; this is a Milne auxiliary below it. The imported auxiliary has no blueprint id and blueprint_refs ancestor returns null; retained that provenance. No unit/chapter modification.",
+  "tool_uses": [
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Generic scheme/module/group tool used only to assemble the abelian-variety auxiliary; no replacement of an outer six-functor unit step."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic scheme/module/group tool used only to assemble the abelian-variety auxiliary; no replacement of an outer six-functor unit step."
+   },
+   {
+    "node": "lem-trf-scheme-etale-invertible-comparison",
+    "why": "Generic scheme/module/group tool used only to assemble the abelian-variety auxiliary; no replacement of an outer six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic scheme/module/group tool used only to assemble the abelian-variety auxiliary; no replacement of an outer six-functor unit step."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic scheme/module/group tool used only to assemble the abelian-variety auxiliary; no replacement of an outer six-functor unit step."
+   },
+   {
+    "node": "lem-trf-torsionfree-rationalization-injective",
+    "why": "Generic scheme/module/group tool used only to assemble the abelian-variety auxiliary; no replacement of an outer six-functor unit step."
+   },
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Commutativity of an abelian variety (imported tool of sk-cor-av-commutative), needed for the commutative-group hypothesis of lem-sfb-abelian-space-poincare-calculus and for the swap symmetry of the normalized difference; added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-scheme-algebraic-space",
+  "lem-sc-abelian-variety-characterization",
+  "lem-trf-scheme-etale-invertible-comparison",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-trf-torsionfree-rationalization-injective",
+  "lem-sc-av-commutative"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-e5208099e",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-e5208099e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full, against Milne AV I §8 pp.34-40 (Prop 8.1, Lemma 8.8, Theorem 8.9 and the paragraph before it, Prop 8.14 and the p.40 normalized difference) and §14 p.61. This is a first split, not a 2026-10-21 re-split: the base had no proof and there is no repair note. Steps 2-10 check out. Step 3: (b×b)^*N_N ≅ N_{b*N} and the b^∨ identity. Step 4: (f+g)^∨ via (m_C,1)∘(f,g,1). Step 5: the inverse comes from simple-isogeny-decomposition. Step 6: λ^∨δ=λ, directions checked, through the swap on A×A. Step 8: μ^∨=δμ, then the double-dagger calculation. Step 10: the sign of j=(1,-1) gives (p^*e^*N)^2⊗N^{-1}⊗[-1]^*N^{-1}. One missing citation, fixed: the commutativity of A (lem-sc-av-commutative) is a hypothesis of lem-sfb-abelian-space-poincare-calculus (step 1) and gives m∘s=m (step 6). The fix adds it to both steps, proof_deps and tool_uses, and adds one step-1 sentence deriving the datum's tensor-sum clause from the second biadditivity. The new node lem-sfb-abelian-poincare-biduality (Milne pp.37-38; true over any k by descent) is true; no double-dual node exists elsewhere in the DAG. The new node lem-sfb-ample-line-polarization-isogeny (Milne 8.1/8.14, p.40) is true; the existing versions are algebraically closed only, so neither node is a duplicate. Both are statement-only, self-contained, smaller than the item and restate none of its clauses; no SGA anywhere. Batch 5: all seven listed citations are generic algebraic-space, abelian-variety or group-algebra tools, none part of the trace-formula or Poincaré-duality proofs; accepted. The worker's six tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PolarizationCalculusOverField",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.polarization_calculus_over_field",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.polarization_calculus_over_field"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/PolarizationCalculusOverField.lean",
+  "statement": "theorem IsAbelianVariety.polarization_calculus_over_field {k : Type u} [Field k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] : ∃ c : ∀ (B C E : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [GrpObj E] [IsAbelianVariety B] [IsAbelianVariety C] [IsAbelianVariety E], abelianRationalHom B C →ₗ[ℚ] abelianRationalHom C E →ₗ[ℚ] abelianRationalHom B E, (∀ (B C E : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [GrpObj E] [IsAbelianVariety B] [IsAbelianVariety C] [IsAbelianVariety E] (r s : ℚ) (f : abelianHom B C) (g : abelianHom C E), c B C E (r ⊗ₜ[ℤ] f) (s ⊗ₜ[ℤ] g) = (r * s) ⊗ₜ[ℤ] abelianHomComp f g) ∧ ∃ (D : AbelianDualPoincareDatum A) (φ : (N : A.left.Modules) → N.IsInvertible → abelianHom A D.dual) (d : ∀ (B C : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [IsAbelianVariety B] [IsAbelianVariety C] (DB : AbelianDualPoincareDatum B) (DC : AbelianDualPoincareDatum C), abelianHom B C →+ abelianHom DC.dual DB.dual) (dQ : ∀ (B C : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [IsAbelianVariety B] [IsAbelianVariety C] (DB : AbelianDualPoincareDatum B) (DC : AbelianDualPoincareDatum C), abelianRationalHom B C →ₗ[ℚ] abelianRationalHom DC.dual DB.dual), (∀ (N : A.left.Modules) (hN : N.IsInvertible) (f : A ⟶ D.dual), ClassifiesAbelianDifference D N f ↔ f = abelianHomMap (φ N hN)) ∧ (∀ (N : A.left.Modules) (hN : N.IsInvertible) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of k)) (x : Over.mk s ⟶ A), Nonempty ((tensorPullback (A ◁ (x ≫ abelianHomMap (φ N hN))).left).obj D.poincare ≅ (tensorPullback ((fst A (Over.mk s) * (snd A (Over.mk s) ≫ x)).left)).obj N ⊗ (tensorPullback (fst A (Over.mk s)).left).obj (Scheme.Modules.dual N))) ∧ (∀ (N P : A.left.Modules) [hN : N.IsInvertible] [hP : P.IsInvertible], φ (N ⊗ P) inferInstance = φ N hN + φ P hP) ∧ φ (𝟙_ A.left.Modules) inferInstance = 0 ∧ (∀ (B C : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [IsAbelianVariety B] [IsAbelianVariety C] (DB : AbelianDualPoincareDatum B) (DC : AbelianDualPoincareDatum C) (f : abelianHom B C) (g : DC.dual ⟶ DB.dual), Nonempty ((Scheme.Modules.pullback (abelianHomMap f ▷ DC.dual).left).obj DC.poincare ≅ (Scheme.Modules.pullback (B ◁ g).left).obj DB.poincare) ↔ g = abelianHomMap (d B C DB DC f)) ∧ (∀ (B C : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [IsAbelianVariety B] [IsAbelianVariety C] (DB : AbelianDualPoincareDatum B) (DC : AbelianDualPoincareDatum C) (f : abelianHom B C) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of k)) (q : Over.mk s ⟶ DC.dual), Nonempty ((tensorPullback (B ◁ (q ≫ abelianHomMap (d B C DB DC f))).left).obj DB.poincare ≅ (tensorPullback (abelianHomMap f ▷ Over.mk s).left).obj ((tensorPullback (C ◁ q).left).obj DC.poincare))) ∧ (∀ (B C : Over (Spec (.of k))) [GrpObj B] [GrpObj C] [IsAbelianVariety B] [IsAbelianVariety C] (DB : AbelianDualPoincareDatum B) (DC : AbelianDualPoincareDatum C) (r : ℚ) (f : abelianHom B C), dQ B C DB DC (r ⊗ₜ[ℤ] f) = r ⊗ₜ[ℤ] d B C DB DC f) ∧ (∀ (N : A.left.Modules) [hN : N.IsInvertible] (b : abelianHom A A), φ ((Scheme.Modules.pullback (abelianHomMap b).left).obj N) inferInstance = abelianHomComp (abelianHomComp b (φ N hN)) (d A A D D b)) ∧ (∀ (L : A.left.Modules) [hL : L.IsInvertible], IsAmple A.left L → ∃ (invLambda : abelianRationalHom D.dual A) (dagger : abelianRationalHom A A →ₗ[ℚ] abelianRationalHom A A), c A D.dual A (abelianHomToRational (φ L hL)) invLambda = abelianHomToRational (abelianHomId A) ∧ c D.dual A D.dual invLambda (abelianHomToRational (φ L hL)) = abelianHomToRational (abelianHomId D.dual) ∧ (∀ v : abelianRationalHom A A, dagger v = c A D.dual A (c A D.dual D.dual (abelianHomToRational (φ L hL)) (dQ A A D D v)) invLambda) ∧ Function.Involutive dagger ∧ (∀ v w : abelianRationalHom A A, dagger (c A A A v w) = c A A A (dagger w) (dagger v)) ∧ ∀ r : ℚ, dagger (r • abelianHomToRational (abelianHomId A)) = r • abelianHomToRational (abelianHomId A)) ∧ ∀ (N : A.left.Modules) (hN : N.IsInvertible), Nonempty ((tensorPullback (ι[A]).left).obj N ≅ N) → abelianHomToRational (φ N hN) = 0 → Nonempty (N.tensorPow 2 ≅ 𝟙_ A.left.Modules)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d46fef0c6",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read the item, the new node def-sfb-abelian-rational-hom, both delivered modules, and the dep declarations (AbelianDualPoincareDatum/ClassifiesAbelianDifference, IsAmple, IsInvertible/tensorPow/dual, tensorPullback, GrpObj, rationalizationMap). Every node clause is rendered: the existential c/φ/d/dQ are pinned by pure-tensor equations or classifier iffs (the unrigidified iff is equivalent via unit rescaling + universal); geometric-point formulas over all alg-closed Ω in universe u; additivity, φ_O = 0, φ_{b*N} = b^∨φ_N b in categorical order; ample λ two-sided rational inverse and Rosati dagger (Q-linear, involutive, anti-multiplicative, fixes Q·id); symmetric-kernel clause uses the rational image. No extra hypotheses; edge cases dim 0, char 2, imperfect k checked. lean.statement verbatim for item and new node; node diff vs live = lean + one added stmt_dep. New node is a real non-duplicate def, no sorry; docstrings and 10-step proof present. Advisories: self second reading; mixed tensorPullback/Scheme.Modules.pullback inherited from the datum; sheaf-tensor and IsAlgClosed owners not in stmt_deps; the report's rescaling remark names the wrong unit. No compile (no file changed)."
+ }
+}

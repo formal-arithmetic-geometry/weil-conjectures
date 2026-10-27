@@ -18,23 +18,22 @@
  ],
  "proof": [
   {
-   "text": "Put $P=R\\times_{s,U,t}R$ with projections $p_0,p_1$, using [def-pc-fibre-product]. The groupoid identities give $s\\circ c=s\\circ p_1$ and $t\\circ c=t\\circ p_0$. The square with top map $p_0$, bottom map $t$, and vertical maps $p_1,s$ is the defining pullback. The square with top map $c$, bottom map $s$, and the same vertical maps $p_1,s$ is also a pullback: the morphism $P\\to R\\times_{s,U,s}R$ sending $(a,b)$ to $(c(a,b),b)$ has inverse $(h,b)\\mapsto(c(h,i(b)),b)$. Both composites are identities by associativity and the inverse and identity laws; these are morphisms by the fibre-product universal property. Thus $p_1:P\\to R$ is the pullback of $s$ along $t$ via $p_0$, and along $s$ via $c$. For $a=t^\\sharp(f)$, the identity $t\\circ c=t\\circ p_0$ gives $c^\\sharp(a)=p_0^\\sharp(a)$.",
+   "text": "Put $P=R\\times_{s,U,t}R$ with projections $p_0,p_1$, using [def-pc-fibre-product]. The groupoid identities give $s\\circ c=s\\circ p_1$ and $t\\circ c=t\\circ p_0$. The square with top map $p_0$, bottom map $t$, and vertical maps $p_1,s$ is the defining pullback. The square with top map $c$, bottom map $s$, and the same vertical maps $p_1,s$ is also a pullback: the morphism $P\\to R\\times_{s,U,s}R$ sending $(a,b)$ to $(c(a,b),b)$ has inverse $(h,b)\\mapsto(c(h,i(b)),b)$. Both composites are identities by associativity and the inverse and identity laws; these are morphisms by the fibre-product universal property. Thus $p_1:P\\to R$ is the pullback of $s$ along $t$ via $p_0$, and along $s$ via $c$. For $a=t^\\sharp(f)$, the identity $t\\circ c=t\\circ p_0$ gives $c^\\sharp(a)=p_0^\\sharp(a)$. Lean implements the inverse by pullback.lift, proves cancellation with the associativity, inverse and unit fields of Scheme.IsGroupoid, and applies PullbackCone.isLimitAux to verify the universal property directly.",
    "uses": [
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "def-a1-scheme-groupoid-laws"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
     "place": "groupoids-lemma-diagram, explicit inverse for the lower right square; Tag 03BH (groupoids-lemma-determinant-trick), first equality"
    }
   },
   {
-   "text": "Write $n=N_\\sigma(a)$ and use [lem-pd-finite-locally-free-norm-charts] to cover $U$ by affine opens $V$ where the section algebra of $s^{-1}(V)$ is finite free and $n|_V$ is its multiplication determinant. Refine the intersections $s^{-1}(V_s)\\cap t^{-1}(V_t)$ by affine opens $W$ of $R$. On $W$, the two squares in step 1 identify the algebra of $p_1^{-1}(W)$ respectively with the scalar extensions of the section algebras over $V_s$ and $V_t$; [lem-weil-pbc-fibre-product-affine-spectra] gives these tensor-product identifications and their maps. A basis $(e_j)$ of either chart algebra becomes the basis $(e_j\\otimes1)$ after extension to $\\Gamma(W,\\mathcal O_R)$. If $a e_j=\\sum_i m_{ij}e_i$, then $(a\\otimes1)(e_j\\otimes1)=\\sum_i g^\\sharp(m_{ij})(e_i\\otimes1)$, with $g=s$ or $t$ on the relevant chart. By [def-weil-endomorphism-determinant, def-weil-pbc-matrix-determinant], the determinant is $g^\\sharp(\\det(m_{ij}))$: the ring map preserves each sum, sign and product in the Leibniz formula. Consequently $(s^\\sharp n)|_W$ is the determinant of multiplication by $c^\\sharp(a)$ on $\\Gamma(p_1^{-1}(W),\\mathcal O_P)$ in the first pulled-back basis, and $(t^\\sharp n)|_W$ is the determinant of multiplication by $p_0^\\sharp(a)$ on that same algebra in the second basis.",
+   "text": "Choose the two finite-free affine charts supplied by the hypothesis characterizing n, at s(z) and t(z), and refine their inverse-image intersection by an affine open W containing z. For either pullback square, Mathlib isIso_pushoutSection_of_isAffineOpen gives the pushout square of section rings, equivalently the tensor-product algebra of [lem-weil-pbc-fibre-product-affine-spectra]. Equip these four section rings with the induced algebras and scalar towers, and use Algebra.IsPushout.equiv to identify the pulled-back section algebra with the tensor product. Algebra.norm_eq_of_algEquiv, Algebra.baseChange_lmul and LinearMap.det_baseChange then show that the restriction of the pullback of n is the norm of the pullback of a on that same algebra. These are the determinant and basis-independence identities of [def-weil-endomorphism-determinant]. Restriction of global sections to the charts commutes with these maps by Scheme.Hom.map_appLE. Apply this once with g=c and f=s, once with g=p_0 and f=t. No existence or gluing of a new norm section is needed: the given hn supplies both chart formulas.",
    "uses": [
-    "lem-pd-finite-locally-free-norm-charts",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-endomorphism-determinant",
-    "def-weil-pbc-matrix-determinant"
+    "def-weil-endomorphism-determinant"
    ],
    "elementary": false,
    "source": {
@@ -43,12 +42,12 @@
    }
   },
   {
-   "text": "On each $W$ from step 2, the two multiplication endomorphisms are equal because $c^\\sharp(a)=p_0^\\sharp(a)$ by step 1. Their determinants agree even in the two different bases, by the basis independence stated in [def-weil-endomorphism-determinant]. Therefore $(s^\\sharp n)|_W=(t^\\sharp n)|_W$. These $W$ cover $R$, so the sheaf equality axiom for its structure sheaf [def-pc-scheme] gives $s^\\sharp n=t^\\sharp n$ in $B$. The defining equality for $C$ now says $n=N_\\sigma(\\tau(f))\\in C$. All calculations are on finite-free charts and allow different ranks on different components; the empty matrix has determinant $1$, so no positive-rank assumption has entered.",
+   "text": "On each $W$ from step 2, the two multiplication endomorphisms are equal because $c^\\sharp(a)=p_0^\\sharp(a)$ by step 1. Their determinants agree even in the two different bases, by the basis independence stated in [def-weil-endomorphism-determinant]. Therefore $(s^\\sharp n)|_W=(t^\\sharp n)|_W$. These $W$ cover $R$, so the sheaf equality axiom for its structure sheaf [def-pc-scheme] gives $s^\\sharp n=t^\\sharp n$ in $B$. The defining equality for $C$ now says $n=N_\\sigma(\\tau(f))\\in C$. All calculations are on finite-free charts and allow different ranks on different components; the empty matrix has determinant $1$, so no positive-rank assumption has entered. Lean transports the target-composition identity through Scheme.Hom.appTop and restriction, combines the two chart equalities by congrArg Algebra.norm, applies TopCat.Sheaf.eq_of_locally_eq' on the point-indexed affine cover, and uses Scheme.ΓSpecIso_inv_naturality and injectivity of ΓSpecIso.inv to return to coordinate-ring elements.",
    "uses": [
     "def-weil-endomorphism-determinant",
     "def-pc-scheme"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
     "place": "Tag 03BH (groupoids-lemma-determinant-trick), final equality and conclusion"
@@ -57,16 +56,15 @@
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-pd-finite-locally-free-norm-charts",
+  "def-a1-scheme-groupoid-laws",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "def-weil-endomorphism-determinant",
-  "def-weil-pbc-matrix-determinant",
   "def-pc-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
-  "place": "Tag 03BH (groupoids-lemma-determinant-trick), expanding its groupoid diagram and the local matrix calculation of Tag 02DV(3)"
+  "place": "Tag 03BH, lemma-determinant-trick, using lemma-diagram; Tag 02DV(3), determinant under scalar extension. Lean proof by U2, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -163,9 +161,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pd-finite-locally-free-norm-charts"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -193,5 +189,26 @@
   "existing": false,
   "note": "The norm section n is specified by the local finite-free determinant charts of exists_finiteLocallyFree_norm_charts, transported through Scheme.ΓSpecIso. No global freeness or constant-rank hypothesis is imposed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261023T131938-L-2174959",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

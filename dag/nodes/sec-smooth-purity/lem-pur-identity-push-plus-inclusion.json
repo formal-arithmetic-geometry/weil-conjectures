@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-identity-push-plus-inclusion",
+ "kind": "statement",
+ "title": "Identity direct image across the bounded-below inclusion",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and $X$ a scheme. On constant-$\\Lambda$ module sheaves on $X_{\\rm proet}$ [def-weil-pbc-proetale-operations], use the specified adjunction $L=L(1_X)^*\\dashv R=R(1_X)_*$. Let $e:L\\cong1$ be the canonical identity pullback and $c:R\\cong1$ the conjugate of $e^{-1}$ [def-weil-pbc-adjunction-mate]. Let $d:R^+(1_X)_*\\cong1$ be rightDerivedFunctorPlusNatIso(lowerStarId) followed by rightDerivedFunctorPlusIdIso on the bounded-below derived category [def-weil-pbc-derived-categories], and $q:\\iota\\circ R^+(1_X)_*\\cong R\\circ\\iota$ the canonical right-derived inclusion comparison. For every bounded-below $K$, $\\iota(d_K^{-1})q_K=c_{\\iota K}^{-1}$ in Lean composition order. No proper/open square is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence; canonical bounded-below inclusion calculation in Step 2 of lem-pur-pf-witnessed-mate-normalization; Stacks more-etale.tex, lemma-shriek-proper-and-open, and sites-cohomology.tex, remark-base-change."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "conjugate the inverse canonical identity pullback under its derived\nadjunction and the identity adjunction. The inverse conjugate is the transpose\nof the identity pullback comparison. The derived adjunction factorization and\nthe identity localization factorization show that this is the right-derived\nlocalization of lowerStarId followed by the canonical right-derived identity\nisomorphism. For bounded-below complexes the analogous localization is exactly\nd as displayed. The comparison rightDerivedFunctorPlusCompatibility is the\nunique comparison respecting the derived units; naturality of right-derived\nlocalization therefore identifies the included d inverse followed by that\ncomparison with the unbounded inverse conjugate. This is an identity of natural\ntransformations, so evaluating at any K gives the asserted formula. It involves\nno proper/open square and holds for the zero object and the zero ring.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence; canonical bounded-below inclusion calculation in Step 2 of lem-pur-pf-witnessed-mate-normalization; Stacks more-etale.tex, lemma-shriek-proper-and-open, and sites-cohomology.tex, remark-base-change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of adjunction mates with bounded below derived category inclusion",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derivedη_fac_app"
+    ],
+    "note": "General derived-adjunction factorization; no exact specialization."
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit"
+    ],
+    "note": "General mate identities used by the parent."
+   },
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Cc]ompat|[Cc]ompat.*mate",
+   "results": {
+    "hits": 6,
+    "note": "Unrelated topology and sheaf matches."
+   },
+   "date": "2026-10-27",
+   "verdict": "No relevant match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenRefinementMatePlusCompatibility",
+  "date": "2026-10-27",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof of compactification independence; identity normalization across bounded-below inclusion",
+   "via": [
+    "lem-pur-pf-witnessed-mate-normalization",
+    "lem-pur-pf-refinement-compatibility",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization",
+    "lem-pur-refinement-mate-plus-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdentityPushPlusInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdentityPushPlusInclusion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.identityPush_plus_inclusion",
+  "statement": "theorem identityPush_plus_inclusion\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})\n    (K : DerivedCategory.Plus\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :\n    let d := Functor.rightDerivedFunctorPlusNatIso\n      (lowerStarId (ModuleCat.{u + 1} Λ) X) ≪≫\n        Functor.rightDerivedFunctorPlusIdIso _\n    DerivedCategory.Plus.ι.map (d.inv.app K) ≫\n      (lowerStar (ModuleCat.{u + 1} Λ) (𝟙 X)).rightDerivedFunctorPlusCompatibility.hom.app K =\n    ((conjugateIsoEquiv\n      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X))\n      Adjunction.id) (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).symm).inv.app K.obj",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261027T034723-L-3679000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261027T034723-L-3679000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

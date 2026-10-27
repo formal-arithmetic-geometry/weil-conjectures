@@ -1,0 +1,245 @@
+{
+ "id": "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+ "kind": "statement",
+ "title": "Syntomicity from a finite principal cover by relative complete intersections",
+ "statement": "Let $\\varphi:A\\to D$ be a homomorphism of commutative rings, let $m\\geq0$ be an integer, and let $g_1,\\ldots,g_m,h_1,\\ldots,h_m\\in D$ satisfy $\\sum_{a=1}^m h_ag_a=1$. For $g\\in D$ write $D_g=D[1/g]$ [def-weil-ring-localization-away]. Suppose each composite $A\\to D\\to D_{g_a}$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]: there is an $A$-algebra presentation $D_{g_a}\\cong A[x_1,\\ldots,x_{n_a}]/(f_{a,1},\\ldots,f_{a,c_a})$ whose nonzero residue-field fibres all have dimension $n_a-c_a$. Then $\\varphi$ is flat [def-weil-pbc-flat-ring-map], of finite presentation [def-weil-pbc-finitely-presented-algebra], and for every prime $\\mathfrak p\\subset A$ the fibre ring $D\\otimes_A\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] is a local complete intersection over $\\kappa(\\mathfrak p)$ [def-weil-pbc-complete-intersection-over-field]. The empty cover is allowed: its displayed relation forces $D=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SO (lemma-local-syntomic), with relative global complete intersection charts syntomic by Tag 00SW (lemma-relative-global-complete-intersection)."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof": [
+  {
+   "text": "If $D=0$, it is finitely presented over $A$ by $A/(1)$, its underlying module is zero and hence flat (tensoring any injection with it gives $0\\to0$), and every fibre is zero, a global and therefore local complete intersection by the zero-ring convention (use the one-element cover indexed by $1=0$). This proves the conclusion in this case. In particular it handles $m=0$, since the given relation then reads $0=1$. Henceforth assume $D\\ne0$, so $m>0$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SO (lemma-local-syntomic) and 00S9 (definition-lci-field), zero-ring convention."
+   }
+  },
+  {
+   "text": "For each $a$, choose the presentation $T_a=A[x_1,\\ldots,x_{n_a}]/(f_{a,1},\\ldots,f_{a,c_a})\\cong D_{g_a}$ in the hypothesis. It is a finite presentation by [def-weil-pbc-finitely-presented-algebra]. Apply [lem-weil-pbc-relative-global-complete-intersection-flat] with these exact equations and their assumed fibre-dimension condition; it gives flatness of $A\\to T_a$. The displayed $A$-algebra isomorphism identifies its underlying $A$-module with $D_{g_a}$, so the tensor-injectivity definition of flatness gives flatness of $A\\to D_{g_a}$ as well.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SW (lemma-relative-global-complete-intersection), proof: finite presentation from the presentation and flatness from 00SV."
+   }
+  },
+  {
+   "text": "Put $s=\\{g_a:1\\le a\\le m\\}\\subseteq D$. The relation $\\sum h_ag_a=1$ shows it generates the unit ideal: multiplying this equality by $d\\in D$ writes $d=\\sum(dh_a)g_a$. Step 2 supplies flatness and finite presentation of every composite $A\\to D_g$ for $g\\in s$, even if indices repeat. Apply [lem-trf-flat-ring-map-principal-cover] and [lem-trf-finite-presentation-ring-map-principal-cover] with the ring map $\\varphi$ and this set $s$. Thus $A\\to D$ is flat and of finite presentation.",
+   "uses": [
+    "lem-trf-flat-ring-map-principal-cover",
+    "lem-trf-finite-presentation-ring-map-principal-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SO (lemma-local-syntomic), applying Tags 00HT (lemma-flat-localization), part (5), and 00EP (lemma-cover-upstairs), part (2)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset A$, put $k=\\kappa(\\mathfrak p)$ and $F=D\\otimes_A k$, and write $\\bar g_a=g_a\\otimes1$. Base change the chosen presentation of $T_a$ along $A\\to k$ using [lem-weil-pbc-relative-global-complete-intersection-base-change]. It gives $T_a\\otimes_A k\\cong k[x_1,\\ldots,x_{n_a}]/(\\bar f_{a,1},\\ldots,\\bar f_{a,c_a})$, a relative global complete intersection over $k$. Its only residue-field fibre is itself, so when nonzero its dimension is $n_a-c_a$; when zero use the convention in [def-weil-pbc-complete-intersection-over-field]. In both cases it is a global complete intersection. To identify this ring with $F_{\\bar g_a}$, apply [lem-weil-pbc-localization-base-change] to $D\\to D_{g_a}$ and $D\\to F$. The elementary tensor reassociation $F\\otimes_D D_{g_a}\\cong D_{g_a}\\otimes_A k$ sends $(d\\otimes\\lambda)\\otimes z$ to $dz\\otimes\\lambda$, with inverse $z\\otimes\\lambda\\mapsto(1\\otimes\\lambda)\\otimes z$. Combining these identifications gives $F_{\\bar g_a}\\cong D_{g_a}\\otimes_A k$, whose inverse sends $(d/g_a^r)\\otimes\\lambda$ to $(d\\otimes\\lambda)/\\bar g_a^r$. The balanced relations check these formulas on pure tensors. Consequently every $F_{\\bar g_a}$ is a global complete intersection over $k$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SO (lemma-local-syntomic), fibre locality, expanded using Tags 00SS (lemma-base-change-relative-global-complete-intersection), 00DK (lemma-tensor-localization) and 00S9 (definition-lci-field)."
+   }
+  },
+  {
+   "text": "The finite presentation of $D$ in step 3 provides finitely many $A$-algebra generators $d_1,\\ldots,d_N$. Their images $d_i\\otimes1$ generate $F$ as a $k$-algebra: each pure tensor $d\\otimes\\lambda$ is $\\lambda$ times the polynomial expression for $d$ after applying $A\\to k$, and tensors are sums of pure tensors. The given relation maps to $\\sum(h_a\\otimes1)\\bar g_a=1$ in $F$. For any prime ideal $\\mathfrak q$ of $F$, not all the $\\bar g_a$ can belong to $\\mathfrak q$, since otherwise $1\\in\\mathfrak q$. Hence the principal opens $D(\\bar g_a)$ cover $\\operatorname{Spec}F$. Together with step 4 this is exactly the defining cover by global complete intersections in [def-weil-pbc-complete-intersection-over-field]. Thus $F$ is a local complete intersection, including $F=0$, and $\\mathfrak p$ was arbitrary.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SO (lemma-local-syntomic), last sentence, with Tag 00S9 (definition-lci-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-relative-global-complete-intersection-flat",
+  "lem-trf-flat-ring-map-principal-cover",
+  "lem-trf-finite-presentation-ring-map-principal-cover",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00SO (lemma-local-syntomic) and 00SW (lemma-relative-global-complete-intersection); the fibre-locality sentence is expanded with base change and explicit tensor/fraction formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness and local complete intersection fibres glue from a finite principal open cover by relative global complete intersection presentations",
+   "results": "{\"t\": \"2026-10-22T06:19:41Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness and local complete intersection fibres glue from a finite principal open cover by relative global complete intersection presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.flat_of_localized_span\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"60ac8d6a2d53cc52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation and ring-colimit tools, flatness locality and smoothness results do not assert the complete-intersection statement; the complete-intersection/syntomic name searches have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"syntomic\"",
+   "results": "{\"t\": \"2026-10-22T06:19:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation and ring-colimit tools, flatness locality and smoothness results do not assert the complete-intersection statement; the complete-intersection/syntomic name searches have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|complete.intersection|relativeGlobalCompleteIntersection",
+   "results": "{\"t\": \"2026-10-22T06:19:29Z\", \"tool\": \"grep\", \"query\": \"syntomic|complete.intersection|relativeGlobalCompleteIntersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation and ring-colimit tools, flatness locality and smoothness results do not assert the complete-intersection statement; the complete-intersection/syntomic name searches have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring map is syntomic if its localizations on a finite principal open cover are relative global complete intersections",
+   "results": "{\"t\": \"2026-10-22T06:19:30Z\", \"tool\": \"leansearch\", \"query\": \"A ring map is syntomic if its localizations on a finite principal open cover are relative global complete intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth\", \"RingHom.locally_iff_finite\", \"RingHom.FormallySmooth\", \"RingHom.IsStandardSmooth\", \"RingHom.FormallyEtale\", \"RingHom.Smooth.propertyIsLocal\", \"RingHom.OfLocalizationFiniteSpan\", \"RingHom.finitePresentation_isLocal\"], \"digest\": \"106548b71df07268\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation and ring-colimit tools, flatness locality and smoothness results do not assert the complete-intersection statement; the complete-intersection/syntomic name searches have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring map is syntomic when it is covered by principal localizations that are relative global complete intersections",
+   "results": "{\"t\": \"2026-10-23T09:44:07Z\", \"tool\": \"leanfinder\", \"query\": \"A ring map is syntomic when it is covered by principal localizations that are relative global complete intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth\", \"RingHom.Smooth\", \"RingHom.Etale\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"RingHom.Smooth.propertyIsLocal\", \"Algebra.Smooth\", \"RingHom.Smooth.ofLocalizationSpanTarget\"], \"digest\": \"1a8ffb90526fb6cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits give smoothness, flatness or finite-presentation locality, not complete-intersection fibres; the latter two locality facts are separately recorded Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|CompleteIntersection|complete.intersection",
+   "results": "{\"t\": \"2026-10-23T09:47:36Z\", \"tool\": \"grep\", \"query\": \"syntomic|CompleteIntersection|complete.intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits give smoothness, flatness or finite-presentation locality, not complete-intersection fibres; the latter two locality facts are separately recorded Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finitely presented algebra with local complete intersection fibres from a principal open cover",
+   "results": "{\"t\": \"2026-10-23T09:47:36Z\", \"tool\": \"leansearch\", \"query\": \"Flat finitely presented algebra with local complete intersection fibres from a principal open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.mk\", \"RingHom.finitePresentation_isLocal\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Algebra.FinitePresentation.of_span_eq_top_target\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\"], \"digest\": \"c99a0584573c714a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits give smoothness, flatness or finite-presentation locality, not complete-intersection fibres; the latter two locality facts are separately recorded Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"syntomic\"",
+   "results": "{\"t\": \"2026-10-23T09:47:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits give smoothness, flatness or finite-presentation locality, not complete-intersection fibres; the latter two locality facts are separately recorded Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomicity is local on the target for a finite standard open cover",
+   "results": "{\"t\": \"2026-10-23T09:47:38Z\", \"tool\": \"leanfinder\", \"query\": \"Syntomicity is local on the target for a finite standard open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover\", \"AlgebraicGeometry.IsLocalAtTarget.of_openCover\", \"AlgebraicGeometry.IsLocalAtTarget.of_range_subset_iSup\", \"AlgebraicGeometry.IsLocalAtTarget.of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.HasRingHomProperty.locally_of_iff\", \"AlgebraicGeometry.IsLocalAtSource.of_openCover\", \"AlgebraicGeometry.topologically_isLocalAtSource'\"], \"digest\": \"6f4fac94cb39e7da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits give smoothness, flatness or finite-presentation locality, not complete-intersection fibres; the latter two locality facts are separately recorded Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-syntomic-ring-filtered-colimit-descent",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal/alteration auxiliary descent input: Stacks 0C33 last proof sentence, gluing principal complete-intersection charts by 00SO and 00SY; previously item steps 9-10.",
+   "via": [
+    "lem-trf-syntomic-ring-filtered-colimit-descent",
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+  "worker": "stage1",
+  "summary": "Read Stacks 00SO/00SW and their locality inputs; kept the statement, reused the existing relative-CI flatness and base-change nodes, added two exact Mathlib locality leaves, and expanded fibre locality and the empty-cover case. No Lean attachment states the whole assertion.",
+  "blueprint": "Historical nodal/alteration auxiliary descent input already recorded in blueprint.from.place: principal complete-intersection gluing (00SO) for the 0C33 descent sentence. The current ancestor instead uses contracting correspondences; this split does not alter that chapter/unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "why": "Generic ring theorem proving flatness of the given relative complete-intersection presentations; no trace-formula unit theorem replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "why": "Generic presentation/base-change theorem needed to identify the fibre charts as global complete intersections; it replaces no trace-formula step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-base-change",
+    "why": "Generic localization base-change tool for identifying the fibre principal opens; it replaces no trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-relative-global-complete-intersection-flat",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-bb1d26488",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-bb1d26488 (reviewer sub-agent of L); spot-checked: First stage-1 delivery: the item is still unsplit in live and side-live, and there is no repair note. Statement and stmt_deps are unchanged. Source checked: Stacks 00SO lemma-local-syntomic, whose proof covers flatness via 00HT(5), finite presentation via 00EP(2), and fibre lci by definition (00S9). Each chart is a relative global complete intersection, as 00SW handles. Step 1: D=0 and m=0 via the zero-ring conventions; elementary and correct. Step 2: lem-weil-pbc-relative-global-complete-intersection-flat applies to exactly the hypothesised presentation, and flatness and finite presentation carry over to D_{g_a} through the A-algebra isomorphism. Step 3: the two new leaves applied with s={g_a} spanning (1). Step 4: base change of each presentation along A→k (lem-weil-pbc-relative-global-complete-intersection-base-change (a),(b)); over a field this gives a global complete intersection. F localized at ḡ_a is identified with D_{g_a}⊗_A k via lem-weil-pbc-localization-base-change (R=D, M=powers of g_a, ψ:D→F) plus an explicit elementary reassociation. Step 5: F is finitely generated and the D(ḡ_a) cover Spec F, which is exactly def-weil-pbc-complete-intersection-over-field (2). New leaves: RingHom.Flat.ofLocalizationSpanTarget (Flat.lean:74-82) and RingHom.finitePresentation_ofLocalizationSpanTarget (FinitePresentation.lean:57-65), checked against the OfLocalizationSpanTarget definition (LocalProperties/Basic.lean:171-174); both are exact matches. Both statements are self-contained, the searches are recorded, and the blueprint.from fields are correct. They are generic locality facts, not restatements of the item. Duplicate scan by tags 00EP/00HT/00SO and by *LocalizationSpan* matches finds no duplicate (nearest nodes: pbc-flat-map-local-criterion is prime-local, pbc-smooth-ring-map-local-on-cover is about smoothness, sc standard-cover nodes are about modules). Edge cases tested: nilpotent g_a, c>n, A=0, zero fibres. Accepted tool_uses: the three generic sk-thm-p1 ring-theory nodes (relative-CI flatness, relative-CI base change, localization base change). No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeCIPrincipalCoverSyntomicGluing",
+  "declaration": "Algebra.relative_ci_principal_cover_syntomic_gluing",
+  "file": "lean/Sheaf/RingTheory/RelativeCIPrincipalCoverSyntomicGluing.lean",
+  "statement": "theorem relative_ci_principal_cover_syntomic_gluing {A : Type u} {D : Type v} [CommRing A] [CommRing D] [Algebra A D] (m : ℕ) (g h : Fin m → D) (hcover : ∑ a : Fin m, h a * g a = 1) (hci : ∀ a : Fin m, IsRelativeGlobalCompleteIntersection ((algebraMap D (Localization.Away (g a))).comp (algebraMap A D))) : RingHom.Flat (algebraMap A D) ∧ Algebra.FinitePresentation A D ∧ ∀ (p : Ideal A) [p.IsPrime], ∃ (hft : Algebra.FiniteType p.ResidueField (p.Fiber D)), @IsLocalCompleteIntersection p.ResidueField (p.Fiber D) _ _ _ hft",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff755929",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 00SO/00SW clause by clause: arbitrary A→D (independent universes u,v), Fin m tuples with exact ∑ h_a g_a = 1, hci = recorded Algebra.IsRelativeGlobalCompleteIntersection on the composite A→D→Localization.Away (g a) (c≤n guard = def's own encoding of the c>n remark), conclusion RingHom.Flat ∧ Algebra.FinitePresentation ∧ ∀ prime p, ∃ FiniteType witness, IsLocalCompleteIntersection κ(p) (p.Fiber D); the FiniteType witness is the lci def's finite-type domain condition, implied by FP, so not stronger. Edge cases m=0/D=0/A=0/zero or nilpotent g_a/repeats/c>n all admitted; no extra instances. lean.statement verbatim; node differs from live only by the new lean record (no rebind); no new defs, no existing match; proof-only imports exist; sorry-only proof; docstrings carry 00SO/00SW, blueprint id and all 5 proof steps. Note: the 'Second reading by Q03' section was written by the same worker (substantive, agrees with this review). No file changed, no compile run."
+ }
+}

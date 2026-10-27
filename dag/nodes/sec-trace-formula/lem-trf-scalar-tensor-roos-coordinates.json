@@ -1,0 +1,142 @@
+{
+ "id": "lem-trf-scalar-tensor-roos-coordinates",
+ "kind": "statement",
+ "title": "Tensor coordinates of the two scalar quotient augmentations",
+ "statement": "Fix a prime l, finite extensions E,L,F of Q_l, embeddings iota:E to L and j:L to F, and a scheme X. Let P be any E-coefficient cochain complex and C a strict E quotient-system complex with level isomorphisms kappa_n to the finite quotient complexes of P. Suppose qEL and qEF identify the restricted ordinary system scalar extensions of C with the specified E-to-L and E-to-F quotient tensor towers, and carry every sheafified pure tensor to the prescribed quotient tensor section [def-trf-integral-comparison-realization-models, def-trf-integral-comparison-sequence-systems]. Form f by the E-to-L chain augmentation followed by Roos(qEL inverse). Form g by the ordinary sheaf tensor associator on P followed by the direct E-to-F chain augmentation and Roos(qEF inverse followed by the inverse strict system tensor associator) [lem-weil-finite-free-completed-scalar-comparison, lem-pur-completed-line-tensor-coherence]. Both f and g have zero shifted-product coordinates. On every nested tensor s tensor (t tensor x), the nth unshifted coordinate of g is the quotient of s tensored with the nth coordinate of f(t tensor x), under the unchanged restriction-section identifications. This is a strict cochain statement, with no reduction calculus, scalar realization model, derived-category map or whole-system counit.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7; normalization refinement of parent steps 8--10, using Stacks 0941 whole-system cone counit. This square is an agent expansion, not stated verbatim in the source."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "A strict tower map induces the diagonal product map on both Roos coordinates. Prove this by precomposing with the two mapping-cocone inclusions. Consequently transport of an augmentation with zero shifted coordinate again has zero shifted coordinate.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-signed-mapping-cocone-shift",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The qEL normalization identifies the unshifted coordinate of f on t tensor x with quotient(t) tensor kappa-inverse(1 tensor x), by cancellation of qEL with its inverse.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the component of the strict system associator followed by qEF. The ordinary associator and the direct augmentation send s tensor (t tensor x) to quotient(s*j(t)) tensor x. The system associator followed by qEF sends it to quotient(s)*j_n(quotient(t)) tensor x. The residue equation for completedCoefficientMap and multiplicativity of the quotient projection identify these scalars.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-completed-line-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-signed-mapping-cocone-shift",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Expansion of lem-trf-scalar-model-iterated-strict-calculation: Tensor coordinates of the two scalar quotient augmentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "associativity of derived extension of scalars natural transformation and adjunction counit compatible with limit realization",
+   "results": "Adjunction.derivedε_fac_app and the derived adjunction normalization lemmas give the categorical primitives; no theorem addresses the fixed whole-system scalar/Roos models.",
+   "date": "2026-10-27",
+   "verdict": "No direct model-specific match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.counit_naturality",
+   "results": "No match under this spelling; local Mathlib source provides Adjunction.counit.naturality and natural-transformation naturality.",
+   "date": "2026-10-27",
+   "verdict": "Use the ordinary categorical API for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|counit.*naturality",
+   "results": "25 hits for ordinary adjunction naturality, with no whole-system scalar/Roos model statement. Separate local project searches give SignedCoconeShift.coconeMap_inl/inr, completedScalarChainComparison_existsUnique, and the ordinary and system scalar associator normalizations.",
+   "date": "2026-10-27",
+   "verdict": "Retain the normalized-model and strict-coordinate steps separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelIteratedStrictCalculation",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Tensor coordinates of the two scalar quotient augmentations; Final common-stage transport sentence; normalized integral scalar associativity, parent counit-realization-substitution steps 8--10; strict part of scalar-model associativity proof steps 1--3",
+   "via": [
+    "lem-trf-scalar-model-iterated-strict-calculation",
+    "lem-trf-scalar-model-associativity",
+    "lem-trf-counit-realization-substitution",
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarTensorRoosCoordinates",
+  "file": "lean/Sheaf/TraceFormula/ScalarTensorRoosCoordinates.lean",
+  "declaration": "WeilConjectures.scalarTensorRoosCoordinates",
+  "statement": "theorem scalarTensorRoosCoordinates\n    (P : CochainComplex (integralTowerModules l E X) ℤ)\n    (C : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E X n).obj P)\n    (qEL : (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex\n          (.up ℤ)).obj C)).asFunctor ≅ (integralScalarTowerFunctor l E L ι X).obj P)\n    (hqEL : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n        (s : (coefficientSequenceCommRingSheaf l L X).obj.obj (op (n, U.unop)))\n        (x : (P.X i).val.obj U),\n        ((qEL.hom.app (op n)).f i).val.app U\n          (integralComparisonRestrictedSection l L X\n            ((integralComparisonSequenceScalarModel l E L ι X).E.obj (C.X i)) n U\n            (integralComparisonSequenceTensorSection l E L ι X (C.X i)\n              (op (n, U.unop)) s\n              (integralComparisonSequenceSection l E X (C.X i) n U\n                (((κ n).inv.f i).val.app U\n                  (unrestrictedIntegralTensorSection l E X n (P.X i) U 1 x))))) =\n          integralScalarTensorSection l E L ι X n (P.X i) U s x)\n    (qEF : (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.mapHomologicalComplex\n          (.up ℤ)).obj C)).asFunctor ≅ (integralScalarTowerFunctor l E F (j.comp ι) X).obj P)\n    (hqEF : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n        (s : (coefficientSequenceCommRingSheaf l F X).obj.obj (op (n, U.unop)))\n        (x : (P.X i).val.obj U),\n        ((qEF.hom.app (op n)).f i).val.app U\n          (integralComparisonRestrictedSection l F X\n            ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.obj (C.X i)) n U\n            (integralComparisonSequenceTensorSection l E F (j.comp ι) X (C.X i)\n              (op (n, U.unop)) s\n              (integralComparisonSequenceSection l E X (C.X i) n U\n                (((κ n).inv.f i).val.app U\n                  (unrestrictedIntegralTensorSection l E X n (P.X i) U 1 x))))) =\n          integralScalarTensorSection l E F (j.comp ι) X n (P.X i) U s x) :\n    let P' := (completedOrdinaryScalarComplex l E L ι X).obj P\n    let D := ((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex\n      (.up ℤ)).obj C\n    let a := (NatIso.mapHomologicalComplex\n      (integralComparisonSequenceScalarComposition l E L ι F j X) (.up ℤ)).app C\n    let w := ((coefficientSequenceRestriction l F X).mapHomologicalComplex\n      (.up ℤ)).mapIso a\n    let wa := HomologicalComplex.complexOfFunctorsToFunctorToComplex.mapIso w\n    let f := (completedScalarChainComparison l E L ι X).app P ≫\n      integralOperationsRoosFunctor.map qEL.inv\n    let g := (CompletedLineTensor.scalarAssociatorComplex l E X L ι F j\n        (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P ≫\n      (completedScalarChainComparison l E F (j.comp ι) X).app P ≫\n      integralOperationsRoosFunctor.map (qEF.inv ≫ wa.inv)\n    (∀ i : ℤ, f.f i ≫\n      (CochainComplex.mappingCocone.snd (scalarRoosBoundary\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex\n          (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0) ∧\n    (∀ i : ℤ, g.f i ≫\n      (CochainComplex.mappingCocone.snd (scalarRoosBoundary\n        (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n          (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex\n            (.up ℤ)).obj D)).asFunctor)).v i (i - 1) (by omega) = 0) ∧\n    (∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n      (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)\n      (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)\n      (x : (P.X i).val.obj U) (y : (D.X i).val.obj (op (n, U.unop))),\n      ((f.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary\n        (((coefficientSequenceRestriction l L X).mapHomologicalComplex\n          (.up ℤ)).obj D).asFunctor)).f i ≫\n        (Pi.π (fun m : ℕ ↦\n          (((coefficientSequenceRestriction l L X).mapHomologicalComplex\n            (.up ℤ)).obj D).asFunctor.obj (op m)) n).f i).val.app U)\n        (completedScalarTensorSection l E L ι X (P.X i) U t x) =\n          integralComparisonRestrictedSection l L X (D.X i) n U y →\n      ((g.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary\n        (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n          (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex\n            (.up ℤ)).obj D)).asFunctor)).f i ≫\n        (Pi.π (fun m : ℕ ↦\n          (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n            (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex\n              (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i).val.app U)\n        (completedScalarTensorSection l L F j X (P'.X i) U s\n          (completedScalarTensorSection l E L ι X (P.X i) U t x)) =\n      integralComparisonRestrictedSection l F X\n        ((integralComparisonSequenceScalarModel l L F j X).E.obj (D.X i)) n U\n        (integralComparisonSequenceTensorSection l L F j X (D.X i) (op (n, U.unop))\n          ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U s) y))",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T131449-L-2939324",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T131449-L-2939324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

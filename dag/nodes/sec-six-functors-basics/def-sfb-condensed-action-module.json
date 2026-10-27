@@ -65,40 +65,43 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
  "lean": {
-  "module": "Sheaf.CategoryTheory.CondensedActionModule",
-  "declaration": "Profinite.CondensedAction.ActionModule",
+  "module": "Sheaf.CategoryTheory.UniverseCondensedActionModule",
+  "declaration": "Profinite.CondensedAction.Universe.ActionModule",
   "declarations": [
-   "Profinite.CondensedAction.Modules",
-   "Profinite.CondensedAction.sectionModule",
-   "Profinite.CondensedAction.ActionModule",
-   "Profinite.CondensedAction.Equivariant",
-   "Profinite.CondensedAction.equivariant_closure",
-   "Profinite.CondensedAction.homSubgroup",
-   "Profinite.CondensedAction.actionCategory",
-   "Profinite.CondensedAction.actionPreadditive",
-   "Profinite.CondensedAction.forgetAction",
-   "Profinite.CondensedAction.inflate",
-   "Profinite.CondensedAction.trivial",
-   "Profinite.CondensedAction.Fixed",
-   "Profinite.CondensedAction.FixedAll",
-   "Profinite.CondensedAction.Invariants",
-   "Profinite.CondensedAction.ProductInvariants"
+   "Profinite.CondensedAction.Universe.ActionModule",
+   "Profinite.CondensedAction.Universe.Equivariant",
+   "Profinite.CondensedAction.Universe.equivariant_closure",
+   "Profinite.CondensedAction.Universe.homSubgroup",
+   "Profinite.CondensedAction.Universe.actionCategory",
+   "Profinite.CondensedAction.Universe.actionPreadditive",
+   "Profinite.CondensedAction.Universe.forgetAction",
+   "Profinite.CondensedAction.Universe.inflate",
+   "Profinite.CondensedAction.Universe.trivial",
+   "Profinite.CondensedAction.Universe.Fixed",
+   "Profinite.CondensedAction.Universe.FixedAll",
+   "Profinite.CondensedAction.Universe.Invariants",
+   "Profinite.CondensedAction.Universe.ProductInvariants"
   ],
-  "file": "lean/Sheaf/CategoryTheory/CondensedActionModule.lean",
+  "file": "lean/Sheaf/CategoryTheory/UniverseCondensedActionModule.lean",
   "statement": "structure ActionModule",
   "branch": "sheaf-dag",
-  "by": "ND",
-  "date": "2026-10-21",
-  "existing": false
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B) universe repair: the former ActionModule takes P : Type u for the site Profinite.{u}, although coefficient sections live in Type (u+1). The consumer allows any group in that coefficient universe. This module states the same action-category, inflation, trivial-action and normalized-invariants definitions with independent group universes v and w. It reuses Profinite.CondensedAction.Modules and sectionModule, importing the former module rather than redefining those notions. Existing specialized consumers remain valid; this generalized interface also admits coefficient-universe groups."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -109,11 +112,25 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7cdb6e0a8",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-569a02bf4",
+  "group": "Q50",
   "result": "pass",
-  "note": "Read item, 5 stmt_deps, new def node def-sfb-condensed-action-module and both modules (CondensedActionModule, CondensedProductActionInflation), sectionRings/sectionModuleFunctor in side-live, source place (direct-images proof para 3, agent input). Clause match: arbitrary comm condensed ring (no Nontrivial), profinite G,H in Type u, ActionModule = C(S,P)→*End natural in T⟶S with sectionwise equivariant maps; IsGrothendieckAbelian.{u+1} for Modules R and existential Abelian structures equal to actionPreadditive; trivial/inflate fst Additive + finite limits/colimits; Invariants/ProductInvariants pin inclusion injectivity, image = fixed-after-every-base-change sections, transpose/untranspose formulas, residual (g,1) action; final clause conjugateIsoEquiv of direct vs composite adjunction composed with inclusions = direct inclusion (identity M^{G×H}=(M^H)^G). Edge cases (trivial factor, zero ring, empty tests) covered. No duplicate in project/Mathlib, no name clash; statement verbatim; declarations complete; only equivariant_closure and the item are sorry. No compile re-run (human 2026-10-21), no files changed. Advisory: proof-only imports unused by the statement; docstring merges node steps 2-3."
+  "note": "Read item, 5 stmt_deps, both delivered modules, the report (it has Worker report and Second reading by Q50) and the live ND CondensedActionModule. Clause match: arbitrary commutative condensed ring; discrete G : Type (u+1) with no finiteness; SingleObj G ⥤ Modules R ≌ Universe.ActionModule R G with both directions additive; strict functor equalities hforward/hinverse fix underlying modules and maps; fibre formula over every f with g∘f ≡ a pins the action (finite clopen fibres); inverse = constant-map action; trivial functors preserved both ways; trivial group, empty S, zero ring and zero module not excluded. lean.statement verbatim. §1(B) dependency module UniverseCondensedActionModule is a verbatim universe generalization of ND's module (P : Type v, Q/H : Type w, namespace .Universe), reusing Modules and sectionModule by public import, with no name clash in live. Maintainer note: the def-sfb-condensed-action-module record now lists only the Universe.* declarations; the old Type-u declarations are still used by 29 live importers and should be consolidated later (Q140 precedent). Advisory: the 'finite covering family' clause is implicit; one unused proof-only import. No fixes; no compile run because nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T034026-L-215040",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Profinite.CondensedAction.Universe.equivariant_closure"
+  ],
+  "sorry_after": []
  }
 }

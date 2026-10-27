@@ -1,0 +1,150 @@
+{
+ "id": "lem-pur-diagonal-ordinary-chart-lift",
+ "kind": "statement",
+ "title": "Ordinary lift of one specified diagonal orientation",
+ "statement": "In the finite setting [def-pur-conventions], let f:X→Y be separated, finite type and smooth of pure relative dimension d, with compactification and finite-type structure map aY to Spec k. For one affine target open V and one Chart D of [lem-pur-diagonal-orientation-refinement], the local four-factor isomorphism theta_D has an ordinary-etale lift between the exact restrictions of the ordinary dualizing object and A_X(d)[2d] of [def-pur-diagonal-dualizing-data]. The realization uses the specified unit conversion and the natural exact restriction/site-comparison isomorphism, and its realization is exactly theta_D. No family, compatibility, global orientation or normalization theorem is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement"
+ ],
+ "proof": [
+  {
+   "text": "Tensor induction on d identifies the ordered coefficient object with the finite Tate sheaf A(d) shifted by 2d. Flatness of each finite Tate line makes the derived tensor of its single complex the single of its tensor. Undo the shift to prove concentration in degree zero.",
+   "uses": [
+    "lem-amb-affine-trace-right-normal-form",
+    "lem-asd-finite-etale-twist-line",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate theta by the unit conversion and the exact restriction/site comparison. This is an isomorphism nu*M≈nu*N. Exact restriction preserves concentration of the shifted Tate target; exact comparison preserves and reflects concentration. Hence the shifted source is concentrated too, so M and N are bounded below.",
+   "uses": [
+    "lem-pur-diagonal-orientation-refinement",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing bounded-below comparison Hom bijection to the isomorphism and its inverse. Injectivity gives their inverse equations. Cancel the conjugating comparisons to obtain the specified realization.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-trace-right-normal-form",
+  "lem-asd-finite-etale-twist-line",
+  "def-coefficient-twists-detailed",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between derived sheaves concentrated in degree zero agree if they agree on an open cover",
+   "results": "8 results, including Scheme.Modules.hom_ext_iff and TopCat.Sheaf.hom_ext; these concern sheaf maps, not exact derived restriction with the diagonal comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use existing degreeZeroDerivedMapGluing for the derived equality test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms of derived sheaves concentrated in one degree glue over open covers",
+   "results": "8 results including TopCat.Sheaf.existsUnique_gluing and presheafed-space gluing; none gives prescribed derived diagonal orientations. Loogle also found Functor.preimageIso_mapIso for undoing the shift.",
+   "date": "2026-10-25",
+   "verdict": "No replacement for the comparison/overlap calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "onSmallerOpen|sourceComposition|tate.*comp; derivedComparison full faithfulness; shifted Tate concentration",
+   "results": "Mathlib has no diagonal orientation notions. Project rg found DegreeZeroDerivedMapGluing, DiagonalOrientationRefinement.Agrees, the proved comparison Hom bijection, and the private base_normal_form proof in BundleSectionOrientationMapExt.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the declared gluing and comparison interfaces; reproduce the private finite-Tate induction with the same public ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrdinaryOrientationGluing",
+  "date": "2026-10-25",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph",
+   "via": [
+    "lem-pur-diagonal-ordinary-orientation-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalOrdinaryChartLift",
+  "file": "lean/Sheaf/Paper/DiagonalOrdinaryChartLift.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.chart_lift",
+  "statement": "theorem chart_lift (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (d : ℕ) [SmoothOfRelativeDimension d f] (V : Y.affineOpens)\n    (D : OrientationRefinement.Chart P f aY d V) :\n    ∃ b : (restrict P (f ⁻¹ᵁ V.1).ι).obj (P.diagonalOrdinaryDualizing f) ≅\n      (restrict P (f ⁻¹ᵁ V.1).ι).obj (P.diagonalTwistEtale X d),\n      realize P f aY d V b =\n        OrientationRefinement.theta P f aY d V D.geometry D.betaEtale",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.restrict",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.unit",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.comparison",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.realize",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.twist_concentrated",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.chart_lift",
+   "WeilConjectures.PurityFiniteSetting.OrdinaryDiagonal.concentrated_iso"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T180925-L-4053581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T180925-L-4053581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

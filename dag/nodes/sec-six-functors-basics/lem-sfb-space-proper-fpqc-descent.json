@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-space-proper-fpqc-descent",
+ "kind": "statement",
+ "title": "Fpqc descent of properness for algebraic spaces over schemes",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $f:X\\to T$ be a morphism from an algebraic space [def-trf-algebraic-space], and let $\\{T_i\\to T\\}_{i\\in I}$ be an fpqc covering family of schemes [def-weil-pbc-fpqc-covering]. Put $X_i=X\\times_TT_i$ and let $f_i:X_i\\to T_i$ be the projection [lem-trf-space-fibre-products-etale-covers]. Then $f$ is proper if and only if every $f_i$ is proper, with properness as in [def-sfb-space-morphism-properties]: separated, of finite type and universally closed. No finite-presentation, Noetherian, flatness, connectedness or nonemptiness assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0422, lemma-descending-property-proper, with Tag 03YH, definition-property-morphisms-local; restricted to a scheme target and scheme covering family."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is proper, apply [lem-sfb-space-proper-base-change] with $B=Y=T$, $Y'=T_i$ and $g=g_i$ for each $i$. The morphisms $T_i\\to T$ need no extra hypotheses for this direction. Its conclusion is properness of every projection $f_i$ in the convention of that node. Separatedness (closed-immersion diagonal on every scheme test), local finite type on compatible etale scheme charts and universal closedness (closedness on point spaces after every algebraic-space base change) are stated identically there and in [def-sfb-space-morphism-properties]. Quasi-compactness there means that every affine scheme base change $W$ admits a surjective etale map from a quasi-compact scheme, while [def-sfb-space-morphism-properties] asks that $|W|$ be compact; by [lem-a1-space-finite-affine-subatlas] these agree: the final clause gives compactness of $|W|$ from such an atlas, and conversely, refining any atlas of $W$ by the affine opens of its source to a disjoint union of affine schemes, the first clause extracts a quasi-compact finite subatlas. Hence each $f_i$ is proper in the sense of the item, proving the forward implication.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0422, forward implication, using spaces-morphisms.tex Tag 04WP (lemma-base-change-proper)."
+   }
+  },
+  {
+   "text": "Conversely assume every $f_i$ proper. By [def-sfb-space-morphism-properties], each $f_i$ is separated and quasi-compact, is locally of finite type on compatible etale scheme charts, and is universally closed. We will descend these four properties separately; none asserts flatness of $f$.",
+   "uses": [
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0422, expand properness using spaces-morphisms.tex definition-proper (03ZM)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-fpqc-qc-separated-descent] twice, once to quasi-compactness and once to separatedness, with the given scheme covering, taking the common base $S=T$. This gives both properties of $f$. The separatedness conventions in that statement and [def-sfb-space-morphism-properties] are the identical closed-immersion diagonal test. For the quasi-compactness convention, [lem-a1-space-finite-affine-subatlas] gives the equivalence between compact point space and existence of a quasi-compact surjective etale scheme atlas: refine an atlas by its affine opens, extract its finite subatlas in the compact case; conversely the final clause of that node gives compactness from a quasi-compact atlas. Apply this on each affine scheme test to identify the two conventions.",
+   "uses": [
+    "lem-sfb-space-fpqc-qc-separated-descent",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 041L (lemma-descending-property-quasi-compact) and 0421 (lemma-descending-property-separated); compatibility of the quasi-compactness conventions uses spaces-properties.tex lemma-quasi-compact-space."
+   }
+  },
+  {
+   "text": "Use the fpqc-local-on-target clause of [lem-sfb-space-lft-smooth-fpqc-locality] for $f$ and the given covering. It gives local finite type of $f$. Its chartwise definition is exactly the local finite type clause of [def-sfb-space-morphism-properties]. The scheme covering is also a covering in the scheme-pullback convention used by the locality node, since [lem-galois-fpqc-covering-base-change] says every scheme base change of it is fpqc. Combine local finite type with quasi-compactness from Step 3 to obtain finite type of $f$.",
+   "uses": [
+    "lem-sfb-space-lft-smooth-fpqc-locality",
+    "def-sfb-space-morphism-properties",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 041S (lemma-descending-property-locally-finite-type) and 041U (lemma-descending-property-finite-type)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-fpqc-descend-universally-closed] to $f$ and this same scheme covering. All its hypotheses hold: each $f_i$ is universally closed by Step 2; there are no separation, flatness or finite-type hypotheses to supply. Thus $f$ is universally closed. Together with separatedness from Step 3 and finite type from Step 4 this is precisely properness by [def-sfb-space-morphism-properties], proving the reverse implication.",
+   "uses": [
+    "lem-sfb-space-fpqc-descend-universally-closed",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0422, combining Tag 041O (lemma-descending-property-universally-closed) with separatedness and finite type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-base-change",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-fpqc-qc-separated-descent",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-space-lft-smooth-fpqc-locality",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sfb-space-fpqc-descend-universally-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0422, lemma-descending-property-proper, constituent-property proof with Tags 041O, 0421 and 041U; finite type expanded via 041L and 041S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Properness of algebraic space morphisms descends under an fpqc covering of the scheme target",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\nAlgebraicGeometry.IsProper.instIsMultiplicativeScheme\nAlgebraicGeometry.IsProper.comp_iff\nAlgebraicGeometry.IsProper.of_comp\nAlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\nAlgebraicGeometry.Scheme.Hom.isProperMap\nAlgebraicGeometry.IsProper.instCompScheme\nAlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a morphism of algebraic spaces is fpqc local on the target and stable under base change",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.IsProper.isStableUnderBaseChange\nAlgebraicGeometry.universallyClosed_isStableUnderBaseChange\nAlgebraicGeometry.IsLocalAtTarget.descendsAlong\nAlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\nAlgebraicGeometry.IsLocalAtTarget\nAlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\nAlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\nAlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat, AlgebraicGeometry.Surjective",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*[Dd]escend|[Dd]escend.*IsProper|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed morphism of algebraic spaces descends along fpqc coverings of a scheme target",
+   "results": "8 hits: AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsProper.toUniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Flat",
+   "results": "1 hits: AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Uu]niversally[Cc]losed.*[Dd]escend|[Dd]escend.*[Uu]niversally[Cc]losed",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of an algebraic space over a scheme descends along an fpqc covering family of schemes",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.IsProper.of_comp, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.toUniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of morphisms from algebraic spaces to schemes is local for faithfully flat quasi compact coverings",
+   "results": "8 hits: AlgebraicGeometry.IsProper, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsProper.*[Dd]escend|[Dd]escend.*IsProper",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the base changes of a map from an algebraic space to a scheme along an fpqc cover are universally closed then the original map is universally closed",
+   "results": "8 hits: AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.UniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Scheme morphisms, not maps from algebraic spaces; read Proper.lean:37-41, UniversallyClosed.lean:35-41 and FlatDescent.lean:48-62. No algebraic-space framework in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-proper-fibres-proper",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Properness of flat separated families with connected proper fibres. Present split: Fpqc descent of properness for algebraic spaces over schemes. Checked against latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3): foundational property descent supporting the inherited proper direct-image/compactification route; no unit step is replaced.",
+   "via": [
+    "lem-sfb-connected-proper-fibres-proper",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-proper-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Q81 follows Stacks 0422 by descending the constituents of properness. Reuses proper base change, fpqc qc/separated descent, fpqc lft locality, and the compact-space/finite-subatlas equivalence. Creates only universal-closedness descent (041O), strictly weaker than properness descent. Statement unchanged; all Mathlib hits checked to be scheme-only.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/moduli/relative-Picard support chain. ancestor returns None for this pre-existing chain; retained its null node and via list, with exact supporting source places. No chapter or unit changes.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic compact-point-space versus quasi-compact etale-atlas comparison used only to match definitions, not a trace or purity argument."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic scheme fpqc-cover base change used to match the scheme-pullback covering convention in the lft locality input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-59f861a4b",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-59f861a4b (reviewer sub-agent of L); spot-checked: FIX for one convention gap in Step 1. Shape: one commit; the item statement and stmt_deps are unchanged against live and side-live (item still unsplit there); the new node id is not on live; no re-split note. Sources read in Stacks spaces-descent.tex: 0422 (l.1666, proof = 041O + 0421 + 041U) and 041O (l.1246-1287: reduction via 041J, fpqc quotient topology, surjection of points onto the topological fibre product). The delivery follows Stacks' route and uses no SGA. Step 1 cites lem-sfb-space-proper-base-change, whose quasi-compactness is atlas-based (lem-trf-space-qc-separated-etale-local), while the item's properness uses compact point spaces via def-sfb-space-morphism-properties / def-sfb-proper-curve-moduli. Step 1 identified the two silently; Step 3 compared them only for the converse direction. The fix rewrites Step 1 to match separated/lft/universally closed word for word and to identify the qc conventions via lem-a1-space-finite-affine-subatlas (final clause one way; affine refinement plus finite subatlas the other), adding def-sfb-space-morphism-properties and lem-a1-space-finite-affine-subatlas to Step 1's uses; both are already in proof_deps. Steps 2-5 checked: conjunction elimination; qc-separated-descent with S=T; lft fpqc-target clause, with lem-galois-fpqc-covering-base-change meeting the scheme-pullback covering convention; the new node with the same cover. New node lem-sfb-space-fpqc-descend-universally-closed: true by 041O, since a scheme fpqc covering is an fpqc covering of spaces; tested on empty X, Spec k-bar over Spec k and redundant empty cover members; strictly smaller than the item; statement-only. Not a duplicate: lem-weil-pbc-fpqc-descend-universally-closed (02KS) is schemes only; lem-sfb-space-flat-proper-fp-locality covers fppf only; lem-sfb-space-fpqc-property-affine-criterion (041J) is a general criterion; the Mathlib results are Scheme-only. Batch 5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are the foundational definition and fibre products, already stmt_deps of the unchanged item. def-sfb-space-morphism-properties, proper-base-change, a1 finite-subatlas and lft-locality reach sec-trace-formula only through that definition. They are generic foundations, not steps of the trace formula or of Poincare duality, so none of them is a reason to return. The worker-written tool_uses (a1 subatlas, galois fpqc base change) are generic convention matches and I accept them; recording them is the maintainer's job (C8), which is advisory only.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceProperFpqcDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_iff_fpqc_scheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceProperFpqcDescent.lean",
+  "statement": "theorem proper_iff_fpqc_scheme_cover {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X ⟶ schemeSpace T) {I : Type v} (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T) (hg : Presieve.ofArrows (fun i : I ↦ (Tᵢ i).left) (fun i : I ↦ (g i).left) ∈ Scheme.fpqcPrecoverage T.left) : MapIsProper f ↔ ∀ i : I, MapIsProper (enlargedFibreProductFst (ObjectProperty.homMk ⟨yoneda.map (g i)⟩ : schemeSpace (Tᵢ i) ⟶ schemeSpace T) f)",
+  "branch": "sheaf-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing schemeSpace and enlargedFibreProductFst definitions, with their landed definition nodes added to stmt_deps. The covering member is the first factor, so its first projection is f_i. S is the unrestricted ambient scheme of the algebraic-space category; T.left is the scheme target."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65c23f17e",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read the node, Stacks 0422/03YH in spaces-descent.tex, and the delivered module against the recorded declarations. Clause by clause: S unrestricted (S=T gives the node); f : X ⟶ schemeSpace T (actual Yoneda sheaf, owner def-trf-scheme-algebraic-space); fpqc via Scheme.fpqcPrecoverage on T.left (recorded Mathlib owner); f_i = enlargedFibreProductFst of the actual sheaf pullback T_i ×_T X → T_i, 03YH factor order, canonical yoneda.map; MapIsProper = separated ∧ finite type ∧ universally closed (landed); iff over all i. No extra hypotheses or instances; universes u and v independent and bound; edge cases (empty I, empty X, empty members, non-fp fpqc members) covered. Item record: only lean and the two added stmt_deps differ from side-live; both added dep nodes are on base with existing:true records; lean.statement verbatim. Signature shape matches the landed quasiCompact_separated_of_fpqc_scheme_cover. Docstrings carry the source place, the blueprint id and all 5 proof steps; no definitions, proof is sorry. Report has Worker report and Second reading by Q160. Not recompiled (no file changed); the worker reports clean compiles. No findings."
+ }
+}

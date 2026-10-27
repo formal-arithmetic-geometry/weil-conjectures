@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-relative-reductive-group",
+ "kind": "definition",
+ "title": "Reductive groups over arbitrary scheme bases",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $H\\to S$ an $S$-group scheme, that is, a group object in the category of schemes over $S$, with multiplication, identity and inverse satisfying the group diagrams. Use smooth morphisms [def-sbc-smooth-morphisms] and the scheme-morphism conventions [def-weil-pbc-scheme-conventions], in particular finite presentation means locally of finite presentation, quasi-compact and quasi-separated. Call $H$ reductive over $S$ if $H\\to S$ is smooth affine of finite presentation and, for every algebraically closed field $k$ and every $s:\\operatorname{Spec}k\\to S$, the pullback group $H_s$ with its induced group law [def-pc-base-change] is reductive in the field sense [def-sfb-reductive-torus-centralizer-terminology]. Thus its geometric fibres are connected and have no nontrivial smooth connected normal unipotent closed subgroup. No nonemptiness or Noetherian hypothesis on $S$ is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-base-change",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Definition 3.1.1, printed p.81; smooth affine finite-presentation convention of lem-sfb-relative-torus-automorphism-fixed-group."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A reductive group scheme over an arbitrary scheme is smooth affine of finite presentation with connected reductive geometric fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact arbitrary-base group-scheme reductivity predicate; returned algebraic-group, root-system or generic-scheme declarations do not provide it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive group schemes over a scheme have no smooth connected normal unipotent subgroup in geometric fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.nilradical_eq_bot\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X], X.nilradical = ⊥\", \"doc\": \"For any reduced scheme $X$, the nilradical of $X$ (the sheaf of nilpotent elements in its structure sheaf) is equal to the zero ideal sheaf (the bottom element of the ideal sheaf data).\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_1) {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [Algebra.IsGeometricallyReduced k A], IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact arbitrary-base group-scheme reductivity predicate; returned algebraic-group, root-system or generic-scheme declarations do not provide it."
+  },
+  {
+   "tool": "grep",
+   "query": "IsReductive|IsRelativeReductive",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact arbitrary-base group-scheme reductivity predicate; returned algebraic-group, root-system or generic-scheme declarations do not provide it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"IsReductive|IsRelativeReductive\" lean/WeilConjectures lean/Sheaf; definition-node scan; blueprint_refs.py search \"reductive group scheme\"",
+   "results": "Blueprint search: 0 blueprint nodes match. Project source: 29 lines; defining declaration: /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ReductiveTorusCentralizerTerminology.lean:41:def IsReductive {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) : Prop :=",
+   "date": "2026-10-24",
+   "verdict": "The only defining hit is ReductiveTorusCentralizer.IsReductive over Spec of a field; retain it to define reductivity of geometric fibres. No arbitrary-base predicate or existing DAG node for it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-automorphism-fixed-group",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Reductivity of the ambient group and its fixed subgroup over an arbitrary base in the torus-automorphism fixed-group theorem; Conrad Definition 3.1.1 and Corollary 3.3.5 proof.",
+   "via": [
+    "lem-sfb-relative-torus-automorphism-fixed-group",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeReductive",
+  "declaration": "AlgebraicGeometry.GroupScheme.IsReductive",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeReductive.lean",
+  "statement": "def IsReductive {S : Scheme.{u}} (H : Grp (Over S)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-028fed8e0",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-028fed8e0",
+  "group": "NF",
+  "result": "pass",
+  "note": "All clauses match the node. H: Grp(Over S) smooth/affine/lfp/qc/qs/GeometricallyConnected (all-field version equivalent to geometric fibres); R: IsRelativeTorus R.X with its GrpObj law; action: ModObj + ha (multiplicative on all test points). fixedPoints is the node's H^R (∀ V→U, r∈R(V)). Conclusion: closed-immersion group map F→H whose image on every U is H^R, F smooth/affine/fp/geometrically connected, base change via Over.pullback mapGrp and canonical actionBaseChange (μ ≫ pullback.map a, no flatness), IsReductive H → IsReductive F. New def-sfb-relative-reductive-group IsReductive = smooth affine fp + field ReductiveTorusCentralizer.IsReductive of the pullback to every algebraically closed geometric point (Conrad 3.1.1); real data, k : Type u is no restriction. No existing relative reductive predicate or fixed-subfunctor def in live/Mathlib; no name clashes. Statements verbatim in both files; proof sorry only, 11-step docstring; imports exist live; stmt_deps += relative-torus and relative-reductive only. Edge cases (rank 0, trivial action, empty S, nonreduced test/base) covered. No compile (no change)."
+ }
+}

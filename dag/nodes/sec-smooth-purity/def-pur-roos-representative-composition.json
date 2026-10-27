@@ -1,0 +1,106 @@
+{
+ "id": "def-pur-roos-representative-composition",
+ "kind": "definition",
+ "title": "Strict coordinate composition of representative Roos comparisons",
+ "statement": "For additive functors E,F,G between abelian categories with countable products, an ordinary associator E⋙F≅G, strict towers X,Y,Z,W and an output tower map m:Z→W, RepresentativeComposition records the second comparison on the first arithmetic subsequence. Its fields prescribe the selected finite-stage maps, the horizontal equality of actual signed Roos maps, the arithmetic block/selection map and its square and composition equation. This is the existing structure extracted verbatim from the completion coherence module.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, product-cone calculation; Stacks sites-modules.tex Tag 03EK for scalar tensor products."
+ },
+ "stmt_deps": [
+  "lem-pur-finite-free-completion-exchange",
+  "def-pur-arithmetic-roos-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The product and cone comparison for an additive functor commutes with arithmetic subsequences and composition of scalar extension",
+   "results": "MappingCone.mapHomologicalComplexXIso and preservation of finite products by additive functors; no arithmetic Roos coherence theorem.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic subsequence restriction of a Roos mapping fiber commutes with tensor product and composition of finite free ring extensions",
+   "results": "Ordinary tensor scalar restriction and cotangent comparison results; no Roos coherence statement.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Roos\"",
+   "results": "Slice-category RooSlice names; no relevant result.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "strictRoosMapOfSquare|arithmeticRoosMap",
+   "results": "No Mathlib declaration; the project implements these maps.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the project strict Roos API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence",
+  "date": "2026-10-24",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Existing strict coordinate data before localization.",
+   "via": [
+    "lem-pur-finite-free-completion-exchange-coherence",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RoosRepresentativeComposition",
+  "file": "lean/Sheaf/Algebra/Homology/RoosRepresentativeComposition.lean",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.RepresentativeComposition",
+  "statement": "structure RepresentativeComposition\n    {A : Type xA} [Category.{yA} A] [Abelian A] [HasCountableProducts A]\n    {B : Type xB} [Category.{yB} B] [Abelian B] [HasCountableProducts B]\n    {D : Type xD} [Category.{yD} D] [Abelian D] [HasCountableProducts D]\n    {E : A ⥤ B} [E.Additive] {F : B ⥤ D} [F.Additive] {G : A ⥤ D} [G.Additive]\n    (α : E ⋙ F ≅ G)\n    (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (Y : CochainComplex (ℕᵒᵖ ⥤ B) ℤ)\n    (Z W : CochainComplex (ℕᵒᵖ ⥤ D) ℤ) (m : Z ⟶ W)\n    (e f : ℕ) (he : 1 ≤ e)\n    (ra : RepresentativeRoosComparison E X Y e)\n    (rb : RepresentativeRoosComparison F Y Z f)\n    (rba : RepresentativeRoosComparison G X W (e * f))",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "B4",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "independent cc review: item signatures byte-identical to live; split lemma checked clause by clause against RepresentativeRoosComparison/index/block/selection; 26 importers compiled against the delivered set and against published PQCM/FFCE"
+ }
+}

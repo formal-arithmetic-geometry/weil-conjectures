@@ -290,7 +290,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-1e2588e93 (reviewer sub-agent of L); spot-checked: Reviewed item, route, all cited statements and sources, exact master lemma, hypotheses, coefficient category, comparison direction, edge cases, duplicate audit, and searches. No new nodes or mathematical faults; review.md records the checks."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp_map_coefficientMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp_map_coefficientMap",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      122,
+      132
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -308,5 +333,25 @@
   "date": "2026-10-18",
   "existing": true,
   "note": "Exact existing theorem in the published pro-etale module-object framework. Its explicit omit removes MonObj Λ, MonObj Λ' and IsMonHom a: the compiler confirms parameters {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} (a : Λ ⟶ Λ') {X Y : Scheme.{u}} (f : X ⟶ Y), without ring hypotheses. coefficientMap a T is (upperStarFromPoint T).map a, condensedPullbackHom Λ f is (upperStarFromPointComp f).hom.app Λ, and condensedPushforwardHom Λ f is the adjunction unit followed by lowerStar.map of that component. A scompile.py probe checked the theorem against precisely this expanded equation, with no monoid structures assumed. Thus the abelian-group square and its ring specialization are the node's exact constructions. #print axioms reports only propext, Classical.choice and Quot.sound. No new module or statement correction."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of condensed abelian groups (in particular of\ncondensed rings), $f\\colon X\\to Y$ a morphism of schemes, and\n$\\eta_f\\colon\\Lambda_Y\\to f_*\\Lambda_X$, $\\eta'_f\\colon\\Lambda'_Y\\to f_*\\Lambda'_X$ the\ncoefficient morphisms of [det-def-sfb-coefficient-morphisms], with $f_*$ the pushforward of\nabelian sheaves ([sk-def-sfb-finite-pushforward-pullback]). Then\n\n$$\nf_*a_X\\circ\\eta_f=\\eta'_f\\circ a_Y\\colon\\Lambda_Y\\longrightarrow f_*\\Lambda'_X ,\n$$\n\nwith $a_X$, $a_Y$ the coefficient changes of [def-sfb-coefficient-map].",
+  "proof": [
+   {
+    "text": "By [det-def-sfb-coefficient-morphisms], $\\eta_f$ is the unit $u_{\\Lambda_Y}\\colon\\Lambda_Y\\to\nf_*f^*\\Lambda_Y$ of the adjunction $f^*\\dashv f_*$ of\n[sk-def-sfb-finite-pushforward-pullback] followed by $f_*\\alpha_f$, and likewise for $\\eta'_f$.\nHence, using [lem-sfb-coefficient-pullback-square] in the second step and the naturality of the\nunit in the third,\n\n$$\nf_*a_X\\circ\\eta_f=f_*(a_X\\circ\\alpha_f)\\circ u_{\\Lambda_Y}\n=f_*\\alpha'_f\\circ f_*f^*a_Y\\circ u_{\\Lambda_Y}\n=f_*\\alpha'_f\\circ u_{\\Lambda'_Y}\\circ a_Y=\\eta'_f\\circ a_Y .\n$$",
+    "uses": [
+     "det-def-sfb-coefficient-morphisms",
+     "lem-sfb-coefficient-pullback-square"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

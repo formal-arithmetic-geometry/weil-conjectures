@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-split-marked-nodal-action",
+ "kind": "definition",
+ "title": "Split marked nodal action and trivial stabilizer dual graphs",
+ "statement": "Let $f:T\\to S$ be a morphism of schemes [def-pc-scheme], $J$ a group with compatible actions $a_T,a_S$, and $m_1,\\ldots,m_n:S\\to T$ disjoint sections in the relative smooth locus [def-sbc-smooth-morphisms]. Define the split marked-action condition as follows. First $f$ satisfies the rational-node-and-branches condition [def-sfb-quasi-split-nodal-fibres]. Every irreducible component of every residue-field fibre [def-pc-scheme-fibre], with its reduced induced closed structure [def-weil-pbc-reduced-normalization], is geometrically irreducible over the residue field [def-pc-geometrically-irreducible]. For $g\\in J$ fixing $y\\in S$, $a_T(g)$ preserves each component of $T_y$ individually, fixes every nonsmooth point, and fixes every marked point $m_i(y)$. It also fixes both branches of every node: for the induced automorphism $b$ of $T_y$, the induced automorphism $c$ of its componentwise normalization fixes every point above each node. Equivalently this last condition is imposed for every pair of automorphisms $b,c$ satisfying $\\iota_y\\circ b=a_T(g)\\circ\\iota_y$ and $\\nu_y\\circ c=b\\circ\\nu_y$, where $\\iota_y:T_y\\to T$ and $\\nu_y:T_y^\\nu\\to T_y$ are the canonical maps. The commuting squares determine these lifts uniquely, and the lifts exist by functoriality under isomorphisms. Components need not be smooth; self-nodes and an empty marking are allowed. Thus point stabilizers act trivially on vertices, edges, both ends, and marked legs of the geometric dual graph.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Lemma 2.2 proof, printed p.149: the marked nodal one-curve input to Vidal 4.4.4. This predicate spells out the split marked dual-graph convention of lem-sfb-equivariant-nodal-smooth-pair-resolution, using normalization points for ends, including self-nodes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-quasi-split-nodal-fibres",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-reduced-normalization",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg Split.*Nodal|split.*marked|dualGraph in lean/Sheaf and lean/WeilConjectures; rg -l split nodal|split.*dual graph dag/nodes --glob def-*.json; python3 tools/blueprint_refs.py search split nodal",
+   "results": "Project: HasStrictSplitNodalFibres and MarkedSplitNodalTower require smooth components, exclude self-nodes and bundle an entire tower. HasQuasiSplitNodalFibres gives rational nodes and branches but neither components nor the stabilizer graph condition. DAG: only these two definitions. blueprint_refs: 0 blueprint nodes match split nodal. No exact predicate exists.",
+   "date": "2026-10-22",
+   "verdict": "Add the missing split marked-action predicate; reuse quasi-split and componentwise normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "split marked nodal curve group action fixes dual graph branches and marked sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsCusp.smul_of_mem\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{c : OnePoint ℝ} {𝒢 : Subgroup (GL (Fin 2) ℝ)} (hc : IsCusp c 𝒢) {g : GL (Fin 2) ℝ} (hg : g ∈ 𝒢) : IsCusp (g • c) 𝒢\", \"doc\": \"If $ c $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $, and $ g \\\\in \\\\mathcal{G} $, then the image $ g \\\\cdot c $ under the natural action of $ \\\\mathcal{G} $ on the one-poin\"}\n  {\"name\": \"WeierstrassCurve.instMulActionVariableChange\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.VariableChange\", \"type\": \": MulAction (VariableChange R) (WeierstrassCurve R)\", \"doc\": \"For any commutative ring $ R $, the group of variable changes for Weierstrass curves over $ R $ acts on the set of Weierstrass curves over $ R $. This defines a monoid action where the group operation\"}\n  {\"name\": \"MulAction.IsQuasiPreprimitive\", \"module\": \"Mathlib.GroupTheory.GroupAction.Primitive\", \"type\": \"(G : Type u_1) → (X : Type u_2) → [inst : Group G] → [MulAction G X] → Prop\", \"doc\": \"The group action of $G$ on $X$ is quasi-preprimitive.\"}\n  {\"name\": \"SubMulAction.fixingSubgroup_smul_eq_fixingSubgroup_map_conj\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfFixingSubgroup\", \"type\": \": fixingSubgroup M (g • s) = (fixingSubgroup M s).map (MulAut.conj g).toMonoidHom\", \"doc\": \"For a group $M$ acting on a type $\\\\alpha$ and a subset $s \\\\subseteq \\\\alpha$, the fixing subgroup of the set $g \\\\cdot s$ (obtained by applying the group action of $g$ to each element of $s$) is equal t\"}\n  {\"name\": \"AddAction.ofFixingSubgroup.isMultiplyPreprimitive\", \"module\": \"Mathlib.GroupTheory.GroupAction.MultiplePrimitivity\", \"type\": \"∀ (M : Type u_1) (α : Type u_2) [inst : AddGroup M] [inst_1 : AddAction M α] {m n : ℕ}\\n  [AddAction.IsMultiplyPreprimitive M α n] {s : Set α} [Finite ↑s],\\n  s.ncard + m = n →\\n    AddAction.IsMultiplyPreprimitive (↥(fixingAddSubgroup M s)) (↥(SubAddAction.ofFixingAddSubgroup M s)) m\", \"doc\": \"Let $ M $ be an additive group acting on a type $ \\\\alpha $, and let $ s \\\\subseteq \\\\alpha $ be a finite subset. If the action of $ M $ is multiply preprimitive for $ n $ and satisfies $ |s| + m = n $, \"}\n  {\"name\": \"GroupExtension.Splitting.conjAct\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \": G →* MulAut N\", \"doc\": \"The group homomorphism $ G \\\\to \\\\mathrm{Aut}(N) $ obtained by composing the splitting $ s : G \\\\to E $ with the conjugation action homomorphism $ E \\\\to \\\\mathrm{Aut}(N) $, where $ \\\\mathrm{Aut}(N) $ denot\"}\n  {\"name\": \"MulAction.ofFixingSubgroup.isMultiplyPreprimitive\", \"module\": \"Mathlib.GroupTheory.GroupAction.MultiplePrimitivity\", \"type\": \"{m n : ℕ} [IsMultiplyPreprimitive M α n] {s : Set α} [Finite s] (hs : s.ncard + m = n) :\\n  IsMultiplyPreprimitive (fixingSubgroup M s) (SubMulAction.ofFixingSubgroup M s) m\", \"doc\": \"Let $ M $ be a group acting on a type $ \\\\alpha $, and let $ s \\\\subseteq \\\\alpha $ be a finite subset with cardinality satisfying $ |s| + m = n $. If the original action is $ n $-multiply preprimitive, \"}\n  {\"name\": \"fixingSubgroup_fixedPoints_gc\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \": GaloisConnection (OrderDual.toDual ∘ fixingSubgroup M) ((fun P : Subgroup M => fixedPoints P α) ∘ OrderDual.ofDual)\", \"doc\": \"There is a Galois connection between the dual of the subgroup lattice of a group $ M $ and the power set of a type $ \\\\alpha $ under a group action. Specifically, for any subset $ S \\\\subseteq \\\\alpha $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; reuse the existing quasi-split and normalization primitives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "split marked nodal curve group action fixes dual graph branches and marked sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.instMulActionVariableChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → MulAction (WeierstrassCurve.VariableChange R) (WeierstrassCurve R)\", \"doc\": \"For any commutative ring $ R $, the group of variable changes for Weierstrass curves over $ R $ acts on the set of Weierstrass curves over $ R $. This defines a monoid action where the group operation\"}\n  {\"name\": \"RootPairing.Equiv.instMulActionAut\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → MulAction P.Aut ι\", \"doc\": \"The automorphism group of a root pairing $ P $ acts on its index set $ \\\\iota $, where each automorphism induces a permutation of $ \\\\iota $ through the index permutation homomorphism. This action is de\"}\n  {\"name\": \"Polynomial.Gal.galActionAux\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"{F : Type u_1} → [inst : Field F] → (p : Polynomial F) → MulAction p.Gal ↑(p.rootSet p.SplittingField)\", \"doc\": \"For any field $ F $ and polynomial $ p $ over $ F $, the Galois group $ \\\\text{Gal}(p/F) $ acts on the set of distinct roots of $ p $ in its splitting field. This action is defined by restricting each \"}\n  {\"name\": \"Polynomial.Gal.galAction\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    (p : Polynomial F) →\\n      (E : Type u_2) →\\n        [inst_1 : Field E] →\\n          [inst_2 : Algebra F E] → [Fact (Polynomial.map (algebraMap F E) p).Splits] → MulAction p.Gal ↑(p.rootSet E)\", \"doc\": \"For a polynomial $ p $ over a field $ F $ and an extension field $ E $ where $ p $ splits, the Galois group $ \\\\text{Gal}(p/F) $ acts on the set of distinct roots of $ p $ in $ E $. This action is defi\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.action_ext_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) {G : Type u_1}\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"In a pre-Galois category, if a group element $g$ acts on an element $x$ of $F(X)$ such that $g \\\\cdot x = t_X(x)$ for a natural transformation $t$ and a Galois object $X$, then this equality extends to\"}\n  {\"name\": \"Polynomial.Gal.galAction_isPretransitive\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"∀ {F : Type u_1} [inst : Field F] (p : Polynomial F) (E : Type u_2) [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [inst_3 : Fact (Polynomial.map (algebraMap F E) p).Splits],\\n  Irreducible p → MulAction.IsPretransitive p.Gal ↑(p.rootSet E)\", \"doc\": \"For an irreducible polynomial $ p $ over a field $ F $, if $ p $ splits in an extension field $ E $, then the Galois group $ \\\\text{Gal}(p/F) $ acts pretransitively on the set of distinct roots of $ p \"}\n  {\"name\": \"Polynomial.Gal.smul\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    (p : Polynomial F) →\\n      (E : Type u_2) →\\n        [inst_1 : Field E] →\\n          [inst_2 : Algebra F E] → [Fact (Polynomial.map (algebraMap F E) p).Splits] → SMul p.Gal ↑(p.rootSet E)\", \"doc\": \"For a polynomial $ p $ over a field $ F $, if the polynomial obtained by applying the canonical algebra homomorphism $ F \\\\to E $ to the coefficients of $ p $ splits in an extension field $ E $, then t\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X], MulAction.IsPretransitive (CategoryTheory.Aut \", \"doc\": \"If an object $ X $ in a pre-Galois category $ \\\\mathcal{C} $ satisfies the Galois condition, then the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; reuse the existing quasi-split and normalization primitives"
+  },
+  {
+   "tool": "grep",
+   "query": "HasNodal|NodalAction|MarkedNodal|SplitNodal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; reuse the existing quasi-split and normalization primitives"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The split marked dual graph and stabilizer clause of the one-curve resolution input, ILO X Lemma 2.2 proof p.149.",
+   "via": [
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitMarkedNodalAction",
+  "declaration": "AlgebraicGeometry.IsSplitMarkedNodalAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitMarkedNodalAction.lean",
+  "statement": "def IsSplitMarkedNodalAction {T S : Scheme.{u}} (f : T ⟶ S) {J : Type v} [Group J] (aT : J →* Aut T) (aS : J →* Aut S) (n : ℕ) (m : Fin n → (S ⟶ T)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed1e9b41d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed1e9b41d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node; f QC+QS follow from projectivity; the hscalar Spec.map(ρ g⁻¹) convention is consistent with Aut composition; empty D gives the unit ideal and reduces to smoothness of S₀; E' is the radical of the comap of vanishingIdeal B along r≫fst; components are determined by integral, incomparable C i; equations use the ordinary-stalk germ map, with an injective index into a regular system of parameters; IsRegularScheme and the IsHProjective implication are present. New def-sfb-split-marked-nodal-action: no duplicate (def-per-marked-split-nodal-tower needs smooth components); quasi-split plus geometrically irreducible components plus stabilizer fixing components, nodes, both normalization branches and marked points; the b/c lifts exist and b is unique, so not vacuous. Statements verbatim, 15 steps in the docstring, sorry only, lines ≤100, source and blueprint docstrings present. Advisories: H11 second reading is an author self-audit (dispatcher policy); two extra proof-only imports serve proof deps without lean records; maintainer: split + trivial-legs is stronger than the quasi-split data the galois-model citer supplies."
+ }
+}

@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-solvable-radical-separable-base-change",
+ "kind": "statement",
+ "title": "Separable algebraic base change preserves the maximal solvable normal subgroup",
+ "statement": "Let $k$ be a field [def-weil-field]. Group schemes, closed normal subgroups, smoothness, connectedness and finite type have the meanings of [def-sc-group-scheme, def-sc-group-scheme-subgroup, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Geometrically connected means connected after extension to an algebraic closure [def-weil-algebraic-closure]. Let $G$ be a smooth geometrically connected affine $k$-group scheme of finite type, and let $R\\subseteq G$ be a smooth connected solvable normal closed subgroup containing every smooth connected solvable normal closed subgroup of $G$. Here solvable means that the iterated derived subgroup eventually becomes trivial, and a derived subgroup is the smallest closed subgroup through which $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors. Let $K/k$ be a separable algebraic field extension [def-pc-field-extension]: every element of $K$ has a minimal polynomial over $k$ with no repeated roots in an algebraic closure. Write $G_K=G\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ and $R_K=R\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-fibre-product]. Then $R_K$ is smooth, connected, solvable and normal in $G_K$, and contains every smooth connected solvable normal closed subgroup scheme of $G_K$. The extension need not be finite, and no reductivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 19.1 and its proof, printed p.397, with 6.44 (p.135), Corollaries 6.19(a), 6.31 (pp.129,132). The separable algebraic extension is not restricted to finite extensions. No Stacks tag states this algebraic-group result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "We first reconcile the two solvability conventions used by the cited statements. For a smooth connected affine group $H$, the product node makes $H$ geometrically connected. The derived-subgroup node applies successively to $H,D(H),D^2(H),\\ldots$: all these groups are smooth and geometrically connected, their successive quotients are commutative, and $D^i(H)_M=D^i(H_M)$ for every field extension $M$. If $D^n(H)=1$, this is a solvable series in the convention of the product node. Conversely, for a solvable series $H=H_0\\supseteq\\cdots\\supseteq H_n=1$, inductively $D^i(H)\\subseteq H_i$: compose $D^i(H)\\to H_i$ with the commutative quotient $H_i/H_{i+1}$, which is an affine group scheme of finite type by the normal-quotient node (applied to the normal closed subgroup $H_{i+1}$ of the affine finite-type group $H_i$); the derived-subgroup node kills its next derived subgroup. Thus $D^n(H)=1$. Finally, equality detection for closed subgroups shows $D^n(H_M)=1$ if and only if $D^n(H)=1$. Consequently solvability in the derived-series sense is preserved and reflected by every field extension for smooth connected affine groups.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-derived-commutator-word-arbitrary-field",
+    "lem-sfb-galois-descent-affine-subgroups",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "6.19(a),(b),(d), 6.26--6.31, printed pp.129--132."
+   }
+  },
+  {
+   "text": "Over any field $F$ and for any smooth geometrically connected affine finite-type group $J/F$, choose a smooth connected solvable normal closed subgroup $U$ of greatest dimension. Such subgroups exist (the identity subgroup is one), and the product node bounds their integer dimensions by $\\dim J$. For any other such subgroup $V$, the same node gives a smooth connected solvable normal closed product $UV$ containing $U,V$. If $U\\ne UV$, strict dimension growth contradicts its choice. Hence $UV=U$ and $V\\subseteq U$. This constructs a largest subgroup, denoted $\\mathcal R_F(J)$, and proves its uniqueness. Step 1 makes this valid with precisely the solvability convention stated above. In particular $\\mathcal R_k(G)=R$ by mutual containment.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "6.41--6.44, printed pp.134--135; the existence input recalled before 19.1, p.397."
+   }
+  },
+  {
+   "text": "First let $L/k$ be Galois, allowing an infinite extension. Set $U=\\mathcal R_L(G_L)$ using step 2. Each $\\sigma\\in\\operatorname{Gal}(L/k)$ carries $U$ to another smooth connected solvable normal closed subgroup of $G_L$: since $G$ is defined over $k$, $(G_L)\\times_{\\operatorname{Spec}L,\\sigma}\\operatorname{Spec}L=G_L$, and $\\sigma(U)$ is the base change of $U$ along the field isomorphism $\\sigma:L\\to L$, which preserves the group law, all these properties and the derived series. Applying $\\sigma^{-1}$ to the containment of any such subgroup proves that $\\sigma(U)$ is again largest. Uniqueness gives $\\sigma(U)=U$ as closed subgroup schemes, not merely on rational points; equivalently its defining ideal is stable under the canonical semilinear action. The Galois descent node therefore gives a unique closed subgroup $N\\subseteq G$ with $N_L=U$. Its normality descends by that same node.",
+   "uses": [
+    "lem-sfb-galois-descent-affine-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "19.1, printed p.397, and 1.54(a),(b), pp.21--22; 1.54(b) explicitly allows infinite Galois extensions."
+   }
+  },
+  {
+   "text": "The descended $N$ is affine of finite type, being closed in the affine finite-type group $G$. The field-extension node gives a faithfully flat coordinate extension, both for $k\\to L$ and for $k[N]\\to L\\otimes_k k[N]$. Surjectivity on spectra follows from the faithfully-flat spectrum node. The map $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is quasi-compact since both are one-point spaces. Thus the smooth fpqc base-descent node applies to $N\\to\\operatorname{Spec}k$ and proves $N$ smooth from $N_L=U$ smooth. Also $|U|\\to|N|$ is a continuous surjection, so $N$ is connected: a decomposition into two nonempty clopen pieces would pull back to such a decomposition of $U$. Step 1 now reflects solvability from $N_L=U$. We have proved every hypothesis needed to apply the defining maximality of $R$, and obtain $N\\subseteq R$.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-trf-smooth-fpqc-base-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "19.1, printed p.397, descent of the subgroup properties; smooth descent: Stacks Tag 02VL (descent.tex, lemma-descending-property-smooth); faithfully flat spectra: Tag 00HP (algebra.tex, lemma-ff)."
+   }
+  },
+  {
+   "text": "The product node gives smoothness, connectedness and solvability of $R_L$, and the subgroup-descent node preserves normality under field extension. Thus the maximality of $U$ gives $R_L\\subseteq U=N_L$. Inclusion detection yields $R\\subseteq N$. Together with step 4 this gives $N=R$ and $U=R_L$. This proves the full assertion for every Galois extension, including infinite ones; no finite-generation descent of $U$ to a finite subextension is being assumed.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-galois-descent-affine-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "19.1, printed p.397, two containments; 1.54(b), printed p.22, for the infinite extension."
+   }
+  },
+  {
+   "text": "For the given separable algebraic $K/k$, choose a separable closure $\\Omega/k$ by the separable-closure node, and use the embedding node to embed $K$ into $\\Omega$ over $k$. Identify $K$ with its image. The separable-closure node says $\\Omega/k$ is Galois. Step 5 therefore gives $R_\\Omega=\\mathcal R_\\Omega(G_\\Omega)$. Let $V\\subseteq G_K$ be any smooth connected solvable normal closed subgroup. The product node and normality base-change detection give the same properties for $V_\\Omega\\subseteq G_\\Omega$. Hence $V_\\Omega\\subseteq R_\\Omega=(R_K)_\\Omega$. Apply closed-subgroup inclusion detection to the extension $\\Omega/K$ to conclude $V\\subseteq R_K$. There is no requirement that $K/k$ be finite or normal.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-galois-descent-affine-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "19.1, printed p.397, passage to a Galois overfield; separable closures and their embeddings: Stacks Tags 09GT, 09HC, 09GU, 09I2, fields.tex, as specified by the cited field nodes."
+   }
+  },
+  {
+   "text": "Finally $R_K$ itself is smooth, connected and solvable by the product node (using the equivalence established in step 1), and normal by the normality base-change clause of the subgroup-descent node. It is a closed subgroup by base change of its defining ideal. Step 6 proves that it contains every subgroup required here, which completes all its clauses.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-galois-descent-affine-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "19.1, printed p.397, conclusion; 6.31, printed p.132."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-derived-commutator-word-arbitrary-field",
+  "lem-sfb-galois-descent-affine-subgroups",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "lem-sfb-affine-normal-quotient-geometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 19.1, printed p.397, with 1.54(b) for direct infinite-Galois descent and the explicit separable-closure overfield argument for arbitrary separable algebraic extensions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "solvableRadical|radical.*separable|separable.*radical",
+   "results": "[grep] OK 7 hit(s); Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/FieldTheory/IsPerfectClosure.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: results are about Lie-algebra radicals, Galois groups, field radicals or abstract groups, not solvable normal subgroup schemes and separable base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The solvable radical of a connected algebraic group commutes with separable algebraic extension of the base field",
+   "results": "[leansearch] OK 8 hit(s); LieAlgebra.radicalIsSolvable, separableClosure, IsSolvableByRad.base, LieAlgebra.abelian_radical_iff_solvable_is_abelian, separableClosure.isSeparable, solvableByRad.induction, LieAlgebra.radical_eq_top_of_isSolvable, Algebra.IsAlgebraic.isSeparable_of_perfectField",
+   "date": "2026-10-24",
+   "verdict": "no match: results are about Lie-algebra radicals, Galois groups, field radicals or abstract groups, not solvable normal subgroup schemes and separable base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"solvable\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-24",
+   "verdict": "no match: results are about Lie-algebra radicals, Galois groups, field radicals or abstract groups, not solvable normal subgroup schemes and separable base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separable scalar extension preserves the maximal connected solvable normal subgroup scheme of a linear algebraic group",
+   "results": "[leanfinder] OK 8 hit(s); Field.absoluteGaloisGroup.commutator_closure_isNormal, isSolvable_of_isScalarTower, solvableByRad.induction1, IsSolvableByRad.base, solvableByRad.isSolvable, gal_isSolvable_tower, solvableByRad.induction, solvable_of_ker_le_range",
+   "date": "2026-10-24",
+   "verdict": "no match: results are about Lie-algebra radicals, Galois groups, field radicals or abstract groups, not solvable normal subgroup schemes and separable base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The solvable radical of a smooth connected affine algebraic group commutes with separable algebraic extensions",
+   "results": "8 hits: solvableByRad.induction1, solvableByRad.P, IsSolvableByRad.base, solvableByRad, solvableByRad.isSolvable, solvableByRad.induction2, IsSolvableByRad, solvableByRad.induction",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or field radicals, not closed solvable subgroup schemes and separable base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The solvable radical of a connected algebraic group commutes with separable algebraic field extension",
+   "results": "8 hits: LieAlgebra.radicalIsSolvable, LieAlgebra.radical_eq_top_of_isSolvable, solvableByRad.induction, IsSolvableByRad.recOn, LieAlgebra.abelian_radical_iff_solvable_is_abelian, separableClosure, solvableByRad.isIntegral, gal_isSolvable_tower",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras or field radicals, not closed solvable subgroup schemes and separable base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-field-semisimple-commutative-test",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Lemma 23.68, printed p.506, implication from semisimple Lie algebra to semisimple connected algebraic group. This is the converse direction to the existing lem-sfb-char-zero-semisimple-group-lie. Supporting input for the Q77 split: Proposition 19.3 and its proof, printed p.398, with geometric semisimplicity in 6.44 (p.135), radical base change in Proposition 19.1 (p.397), and Proposition 19.2(a) (p.398). The test explicitly ranges over affine finite-type subgroup schemes, as all closed subgroups of G are such. No Stacks tag states this algebraic-group criterion. Supporting Q38 input: Proposition 19.1 and its proof, printed p.397, with 6.44 (p.135), Corollaries 6.19(a), 6.31 (pp.129,132). The separable algebraic extension is not restricted to finite extensions.",
+   "via": [
+    "lem-sfb-perfect-field-semisimple-commutative-test",
+    "lem-sfb-charzero-lie-semisimple-converse",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-solvable-radical-separable-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing product/dimension, derived-subgroup base-change, infinite-Galois subgroup descent, faithful-flatness, smooth descent and separable-closure nodes. Wrote the maximal-dimension construction and both Galois descent containments, with an explicit passage through a separable closure for infinite nonnormal separable algebraic extensions. No new nodes.",
+  "blueprint": "Supports the radical-base-change prerequisite of the semisimplicity criterion in the existing ancestry of det-thm-sf-ctf-stability-direct-images, proof (3). Read the current latest blueprint proof; this is a supporting algebraic-group tool and changes no chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-a93900869",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a93900869 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017: Prop 19.1 with its proof (p.397), 6.42/6.44 (pp.134-135) and 1.54(b) (pp.21-22; allows infinite Galois). The statement matches 19.1: the 'geometrically connected' hypothesis is automatic (1.36), and derived-series solvability equals series solvability (step 1). There are no new nodes. All 7 steps were checked against the statements they cite. Step 1: the two solvability notions agree via the derived node, which is applied only to the smooth groups D^i(H). Step 2: the largest subgroup is built by greatest dimension, as in Milne 6.42, using the products node's product and dimension clauses. Step 3: Galois descent for infinite L uses the descent node's stable-ideal criterion. Step 4: smoothness descends by 02VL along Spec L->Spec k, which is flat, surjective and quasi-compact. Connectedness descends by FF/Spec-surjectivity. Solvability descends by step 1. Then maximality gives N⊆R. Step 5: R_L⊆U=N_L gives R⊆N. Step 6: the separable closure Ω is Galois over k (node part 2), K embeds into Ω, and inclusion detection over Ω/K finishes. Step 7: assembly. FIX 1: step 1 applied the derived node's annihilation clause to H_i/H_{i+1} without citing that this quotient is affine of finite type. Added lem-sfb-affine-normal-quotient-geometry to step 1 and to proof_deps; it is on the base and already in the closure. FIX 2: step 3 now says why σ(U) keeps the properties: σ(U) is the base change of U along σ:L→L. Batch-5 flags: the closures of products-node (10904 nodes) and derived-node (976) contain no nt-* node, no trace-transport and no Poincaré-duality node. The trf nodes reached (fppf covering base change, smooth composition) are generic foundations. lem-trf-smooth-fpqc-base-descent is the Mathlib leaf 02VL. All three are generic, not trace-formula or Poincaré-duality steps, so they are accepted. The cited trf/pbc nodes are Mathlib leaves, so no tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SolvableRadicalSeparableBaseChange",
+  "declaration": "AlgebraicGeometry.solvable_radical_separable_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SolvableRadicalSeparableBaseChange.lean",
+  "statement": "theorem solvable_radical_separable_baseChange (k K : Type u) [Field k] [Field K] [Algebra k K] [Algebra.IsSeparable k K] (G R : Over (Spec (.of k))) [GrpObj G] [GrpObj R] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [GeometricallyConnected G.hom] (i : R ⟶ G) [IsClosedSubgroupScheme i] [IsNormalSubgroupScheme i] [Smooth R.hom] [ConnectedSpace R.left] (hR : IsSolvableGroupScheme R) (hmax : ∀ (N : Over (Spec (.of k))) [GrpObj N] (j : N ⟶ G), IsClosedSubgroupScheme j → IsNormalSubgroupScheme j → Smooth N.hom → ConnectedSpace N.left → IsSolvableGroupScheme N → ∃ f : N ⟶ R, f ≫ i = j) : IsClosedSubgroupScheme ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map i) ∧ Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj R).hom ∧ ConnectedSpace ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj R).left ∧ IsSolvableGroupScheme ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj R) ∧ IsNormalSubgroupScheme ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map i) ∧ (∀ (N : Over (Spec (.of K))) [GrpObj N] (j : N ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj G), IsClosedSubgroupScheme j → IsNormalSubgroupScheme j → Smooth N.hom → ConnectedSpace N.left → IsSolvableGroupScheme N → ∃ f : N ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj R, f ≫ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map i = j)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d60620068",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement matches node and Milne 19.1. k,K:Type u, Algebra.IsSeparable (algebraic, no finite/Galois binder). G: GrpObj over Spec k, IsAffine, LOFT+QC, Smooth, Mathlib GeometricallyConnected (equivalent over a field). R: IsClosedSubgroupScheme+IsNormalSubgroupScheme (scheme-theoretic, Defs.lean), Smooth, ConnectedSpace, IsSolvableGroupScheme (derived-series def of landed def-sfb-semisimple-group-scheme, now cited; matches node's inline convention; Q116 series form not used per node). hmax quantifies all closed normal smooth connected solvable N with scheme-theoretic factorization. Base change via Over.pullback with canonical grpObjObj (Braided instance). Conclusion has all clauses plus a closedness conjunct (true, implied by node and step 7; advisory). Edge cases K=k, infinite/non-normal K, trivial R, R=G, imperfect k, empty scheme, shared universe u (forced) OK. Node diff vs live: only lean + added stmt_dep; lean.statement verbatim. Docstrings have source, blueprint tag, 7 steps; only sorry; report sections present. No files changed, no compile run."
+ }
+}

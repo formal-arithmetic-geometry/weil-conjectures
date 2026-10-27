@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-signed-line-power-flat",
+ "kind": "statement",
+ "title": "Signed line PowerFlat",
+ "statement": "If P is locally free of rank one on a covering of the final object of its ringed site, then every signed power P^[d], d∈Z [def-pur-signed-line-pullback-normalization-data], is flat in the sense of IsFlatOnSite [def-pc-flat-sheaf-modules], including the degree-zero unit and the internal duals of positive powers.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data",
+  "def-pur-signed-line-pullback-normalization-data",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "On each rank-one chart, tensor restriction and the unit tensor comparison identify every positive power with the coefficient ring. The evaluation-inverse-pair theorem identifies each negative power with the corresponding dual free line. Tensoring with the coefficient unit is exact; flatness is local on the covering family, giving every signed power.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedLinePowerFlat",
+  "file": "lean/Sheaf/Algebra/Homology/SignedLinePowerFlat.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.signed_line_power_flat",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.signed_line_power_flat"
+  ],
+  "statement": "theorem signed_line_power_flat\n    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    (P : KFlatFixedTensor.Modules A)\n    (hP : ∃ (I : Type u) (V : I → C), J.CoversTop V ∧ ∀ i,\n      Nonempty (P.over (V i) ≅\n        unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj A).over (V i))))\n    (d : ℤ) : IsFlatOnSite (R := A) (signedLinePower.{u, v, w} P d)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

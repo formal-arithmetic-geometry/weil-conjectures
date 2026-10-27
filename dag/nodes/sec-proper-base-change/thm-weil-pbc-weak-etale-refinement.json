@@ -103,7 +103,18 @@
   "def-weil-pbc-ind-etale-algebra"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-pe-indetale-refinement",
  "split_report": {
@@ -162,5 +173,45 @@
   "landing": "20261015T154212-L-164807",
   "kind": "interface",
   "note": "independent Codex review: Matched the delivered proof with its unchanged Lean signature, DAG statement and dependencies; verified public import exposure and compiled the sole direct importer against the delivery."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A\\to B$ be weakly etale [def-weil-pbc-ind-etale-algebra]. For the\nconstruction of [def-weil-pbc-weak-etale-refinement], the map $B\\to B'$ is\nfaithfully flat and ind-etale, and $A\\to B'$ is ind-etale.",
+  "proof": [
+   {
+    "text": "Use $C,J,D_0$ from [def-weil-pbc-weak-etale-refinement]. By\n[lem-weil-pbc-strict-w-cover], $C/A$ is faithfully flat and ind-etale, its\nspectrum is w-local with closed points $V(J)$, and its maximal local rings\nare strictly henselian. The map $C\\to D_0$ is weakly etale, by base change\n([lem-weil-pbc-ind-etale-stability]), so its residue field extensions are\nalgebraic by [lem-weil-pbc-weak-etale-field] applied to its fibres. Part 3 of\n[lem-weil-pbc-retained-localization] shows that the closed points of\n$\\operatorname{Spec}B'$ are the points of $V(JB')$, and part 1 that\n$\\operatorname{Spec}B'$ is w-local and $D_0\\to B'$ is ind-Zariski.",
+    "uses": [
+     "def-weil-pbc-weak-etale-refinement",
+     "lem-weil-pbc-strict-w-cover",
+     "lem-weil-pbc-ind-etale-stability",
+     "lem-weil-pbc-weak-etale-field",
+     "lem-weil-pbc-retained-localization"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "At every maximal ideal $n\\subset B'$ we have $n\\supset JB'$, so its contraction\n$m\\subset C$ contains $J$ and is maximal. The map $C\\to B'$ is weakly etale by\n[lem-weil-pbc-ind-etale-stability], so $C_m\\to B'_n$ is an isomorphism by\n[thm-weil-pbc-weak-etale-strict-local]. Every prime of $B'$ lies under a\nmaximal ideal. Localizing this isomorphism again shows that $C\\to B'$\nidentifies all local rings. As $C$ and $B'$ are w-local and maximal ideals of\n$B'$ contract to maximal ideals of $C$, the map $C\\to B'$ is ind-Zariski by\n[lem-weil-pbc-local-rings-ind-zariski]. Composition with $A\\to C$ proves that\n$A\\to B'$ is ind-etale.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-stability",
+     "thm-weil-pbc-weak-etale-strict-local",
+     "lem-weil-pbc-local-rings-ind-zariski"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The map $B\\to D_0$ is faithfully flat and ind-etale by base change from\n$A\\to C$; composition makes $B\\to B'$ ind-etale and flat as well. For\nsurjectivity on spectra, let $\\mathfrak p$ be a prime of $B$ over\n$\\mathfrak p_0\\subset A$. The closed point set $V(J)$ surjects onto\n$\\operatorname{Spec}A$ by [lem-weil-pbc-strict-w-cover], so some $c\\in V(J)$\nlies over $\\mathfrak p_0$, and some prime of $D_0$ lies over both $c$ and\n$\\mathfrak p$; it lies in $V(JD_0)$. By part 2 of\n[lem-weil-pbc-retained-localization] every point of $V(JD_0)$ is the image of a\npoint of $\\operatorname{Spec}B'$. This proves faithful flatness. The\nconstruction gives the refinement theorem commonly formulated in\n[Stacks Project, Tag 097Z](https://stacks.math.columbia.edu/tag/097Z); its\ncovering and local-ring steps have been proved above.",
+    "uses": [
+     "lem-weil-pbc-strict-w-cover",
+     "lem-weil-pbc-retained-localization"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

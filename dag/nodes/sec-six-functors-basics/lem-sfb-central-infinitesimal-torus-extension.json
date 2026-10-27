@@ -1,0 +1,352 @@
+{
+ "id": "lem-sfb-central-infinitesimal-torus-extension",
+ "kind": "statement",
+ "title": "Central infinitesimal multiplicative extensions of tori and their character sequence",
+ "statement": "Let $k$ be a field [def-weil-field], fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure], and let $E,T$ be affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Let $T$ be a torus and let $q:E\\to T$ be a finite faithfully flat homomorphism, meaning that $k[E]$ is a finite faithfully flat $k[T]$-module via $q^*$. Assume that $N=\\ker q$ is infinitesimal, central in $E$, and of multiplicative type. Infinitesimal means that $k[N]$ is local with nilpotent augmentation ideal, and central means that $N(A)$ commutes with $E(A)$ for every commutative $k$-algebra $A$. Tori and multiplicative type are as in [def-sfb-tori-multiplicative-type]. Then $E$ is commutative and of multiplicative type. For a separable closure $k^s/k$ [def-pd-separable-closure], write $X^*(D)=\\operatorname{Hom}_{k^s\\text{-grp}}(D_{k^s},\\mathbf G_{m,k^s})$ for a group $D$ of multiplicative type, with its natural continuous Galois action [lem-sfb-multiplicative-character-antiduality]. Pullback and restriction give an exact sequence of finitely generated abelian groups with Galois action $$0\\longrightarrow X^*(T)\\xrightarrow{q^*}X^*(E)\\longrightarrow X^*(N)\\longrightarrow0,$$ where $X^*(T)$ is free of finite rank and $X^*(N)$ is finite. No smoothness or reducedness assumption on $E$ or $N$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.22, printed p.239, and Theorem 12.23, p.240. Agent synthesis: for a central infinitesimal kernel the commutator descends to the reduced scheme T x T and is trivial, then apply commutative multiplicative extension and exact character antiduality. This is a supporting lemma for Proposition 17.80(b), p.378, rather than the torus-lifting conclusion itself."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-tori-multiplicative-type",
+  "def-pd-separable-closure",
+  "lem-sfb-multiplicative-character-antiduality",
+  "def-sfb-multiplicative-character-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\bar k$. Coordinate rings of base changes and kernels are tensor pushouts by [def-weil-affine-spectrum], [def-sc-group-scheme] and [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Thus $q_F$ remains faithfully flat by [lem-weil-pbc-faithfully-flat-base-change], and its kernel is $N_F$. The augmentation ideal of $F[N_F]=F\\otimes_k k[N]$ is $F\\otimes_k I$, where $I=\\ker(\\epsilon:k[N]\\to k)$; if $I^a=0$, its extended ideal also has $a$th power zero and the quotient is $F$. Centrality remains true because every $F$-algebra is a $k$-algebra. By [def-sfb-tori-multiplicative-type], $T_F$ is split and $N_F$ embeds in a split torus; [lem-sfb-split-torus-subgroups-diagonalizable] makes $N_F$ diagonalizable. For the next two steps work over $F$, suppressing subscripts. The map $p=q\\times q:E\\times E\\to T\\times T$ is faithfully flat: it factors into two base changes of $q$. Faithful flatness of the factors follows from the base-change node, and that of their composite follows because the composite scalar-extension functor is exact and detects zero modules, as in [def-weil-pbc-faithfully-flat-ring-map].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "def-sfb-tori-multiplicative-type",
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation."
+   }
+  },
+  {
+   "text": "The morphism $c:E\\times E\\to E$, $(x,y)\\mapsto xyx^{-1}y^{-1}$, has $q(c(x,y))=1$, since $T$ is commutative, so factors through $N=\\ker q$ by [def-sc-group-scheme]. On the overlap $(E\\times E)\\times_{T\\times T}(E\\times E)$, its two pullbacks agree: for every algebra $A$, two lifts satisfy $x'=xn$, $y'=ym$ with $n,m\\in N(A)$, and centrality gives $(xn)(ym)(xn)^{-1}(ym)^{-1}=xyx^{-1}y^{-1}$. These are equalities of morphisms, since they hold on points over every algebra (in particular the coordinate algebra of the overlap). Write $R=F[T\\times T]$ and $B=F[E\\times E]$. By [lem-pc-cech-exact] with module $R$, $R\\to B$ is the equalizer of $b\\mapsto b\\otimes1$ and $b\\mapsto1\\otimes b$. Consequently every $c^*(a)$, $a\\in F[N]$, lies in $R\\subset B$. The unique preimage assignment $a\\mapsto\\bar c^*(a)$ is an $F$-algebra map, because the inclusion $R\\to B$ is injective. By [def-weil-affine-spectrum] it defines $\\bar c:T\\times T\\to N$ with $c=\\bar c\\circ p$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-pc-cech-exact",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023M, lemma-ff-exact, applied in degree zero; explicit central commutator calculation supplied by Q41. This realizes the commutator-descent sentence of the item source."
+   }
+  },
+  {
+   "text": "The coordinate algebra $R$ of the split torus $T\\times T$ is reduced: write it as $F[\\mathbf Z^{2r}]$ and apply the field-extension/domain clause of [lem-trf-split-lattice-torus-projection] with base field $F$ and extension $F/F$. The identification with the coordinate torus, including its group law, is the first clause of [lem-trf-lattice-torus-coordinates-action]. Every element of the augmentation ideal $J$ of $F[N]$ is nilpotent by step 1, so its image under $\\bar c^*:F[N]\\to R$ is zero. Since $F[N]/J=F$, this map is exactly the identity-point map followed by constants. Hence $c=1$, and $E_F$ is commutative. This also proves commutativity over $k$: the two coordinate maps for multiplication and opposite multiplication become equal after tensoring with $F$, and the map $k[E\\times E]\\to k[E\\times E]\\otimes_k F$ is injective by [lem-weil-pbc-field-extension-base-change-faithfully-flat] and [lem-weil-pbc-faithfully-flat-universally-injective].",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-trf-lattice-torus-coordinates-action",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-commutative-multiplicative-type-extension] over the algebraically closed field $F$ to $N_F\\to E_F\\to T_F$. The coordinate map is faithfully flat by step 1; both ends are diagonalizable (for $T_F$, its split-torus presentation is $D_F(\\mathbf Z^r)$); and the middle group is commutative by step 3. It follows that $E_F$ is diagonalizable, hence embeds into a split torus: choose finitely many generators of its character group $M$, and use the surjective Hopf map $F[\\mathbf Z^s]\\to F[M]$. The affine closed-immersion criterion [def-weil-closed-immersion] turns this into a closed embedding. Thus $E$ is of multiplicative type by [def-sfb-tori-multiplicative-type].",
+   "uses": [
+    "lem-sfb-commutative-multiplicative-type-extension",
+    "def-weil-closed-immersion",
+    "def-sfb-tori-multiplicative-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation."
+   }
+  },
+  {
+   "text": "Now work over $K=k^s$. By [lem-sfb-multiplicative-character-antiduality], the groups $E_K,T_K,N_K$ have split presentations $D_K(M),D_K(L),D_K(P)$ with $M=X^*(E)$, $L=X^*(T)$, $P=X^*(N)$ finitely generated and carrying their stated continuous Galois actions. Naturality identifies $q^*$ with a homomorphism $u:L\\to M$ and the coordinate map with $e_l\\mapsto e_{u(l)}$: a character labelled $l$ pulls back to the one labelled $u(l)$. The coordinate map is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change], hence injective by [lem-weil-pbc-faithfully-flat-universally-injective] with module $K[L]$. If $u(l)=0$, the element $e_l-e_0$ maps to zero, so basis independence gives $l=0$. Thus $u$ is injective.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation."
+   }
+  },
+  {
+   "text": "The kernel fibre product in [def-sc-group-scheme], with the algebra tensor pushout of [lem-weil-pbc-algebra-tensor-pushout-universal-property], has coordinate algebra $K[M]\\otimes_{K[L]}K=K[M]/(e_{u(l)}-1\\mid l\\in L)$. Put $C=M/u(L)$. This quotient is $K[C]$: the forward map sends $e_m$ to $e_{[m]}$, and the inverse sends $e_{[m]}$ to the class of $e_m$. It is well-defined since $m'=m+u(l)$ gives $e_{m'}=e_me_{u(l)}=e_m$ in the quotient. Both maps preserve the Hopf operations on these basis elements and are inverse. Thus $N_K\\simeq D_K(C)$, with the inclusion into $E_K$ induced by $M\\to C$. By the natural character identification in [lem-sfb-multiplicative-character-antiduality], restriction $M\\to P$ is this quotient map followed by an isomorphism $C\\simeq P$. It is surjective with kernel $u(L)$. Together with step 5 this proves the displayed short exact sequence. Both maps commute with Galois action: conjugating a character and then composing with the $k$-defined $q$ or inclusion is the same as composing first and then conjugating.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation."
+   }
+  },
+  {
+   "text": "Over $F$, the split presentation of $T_F=\\mathbf G_m^r$ gives its character group $\\mathbf Z^r$: its coordinate Hopf algebra is $F[\\mathbf Z^r]$, and [lem-sfb-group-algebra-group-like-basis] says that the images of $t$ under Hopf maps $F[t,t^{-1}]\\to F[\\mathbf Z^r]$ are exactly the $e_l$. The scalar-extension compatibility in [lem-sfb-multiplicative-character-antiduality] identifies this group with $L=X^*(T)$. Hence $L$ is free of finite rank. Finally $N$ has finite-dimensional coordinate algebra: a finite set of $k[T]$-module generators for $k[E]$ maps to a spanning set of $k[E]\\otimes_{k[T]}k=k[N]$. Extending to $K$ keeps this spanning set finite, whereas $K[N_K]=K[P]$ has basis $e_p$ indexed by $P$. Basis independence forces $P$ to be finite. None of these arguments assumes that $E$ or $N$ is reduced or smooth.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-pc-cech-exact",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-trf-lattice-torus-coordinates-action",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-sfb-commutative-multiplicative-type-extension",
+  "def-weil-closed-immersion",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-group-algebra-group-like-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.22 and Theorem 12.23, printed pp.239–240; agent-supplied commutator descent and explicit character-kernel calculation. Descent input: Stacks Tag 023M (lemma-ff-exact)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite faithfully flat homomorphism to a torus with central infinitesimal multiplicative type kernel, the source is multiplicative type and the character modules form a short exact sequence",
+   "results": "{\"t\": \"2026-10-24T07:16:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite faithfully flat homomorphism to a torus with central infinitesimal multiplicative type kernel, the source is multiplicative type and the character modules form a short exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_characterModule_injective\", \"Algebra.H1Cotangent.exact_map_δ\", \"Module.Flat.iff_characterModule_baer\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.Cotangent.exact\", \"Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap\"], \"digest\": \"d9a212fcd3c77d91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension, cyclic central quotient and additive CharacterModule declarations do not classify multiplicative-type group schemes or give their geometric character exact sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus extended centrally by a finite connected diagonalizable kernel is diagonalizable geometrically and characters of kernel are the cokernel of pullback of torus characters",
+   "results": "{\"t\": \"2026-10-24T07:16:11Z\", \"tool\": \"leanfinder\", \"query\": \"A torus extended centrally by a finite connected diagonalizable kernel is diagonalizable geometrically and characters of kernel are the cokernel of pullback of torus characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"CharacterModule.homEquiv_apply_apply\", \"IsTorsion.extension_closed\", \"CharacterModule.instAddCommGroup\", \"AddIsTorsion.extension_closed\", \"CharacterModule\", \"rTensor_injective_iff_lcomp_surjective\", \"CommGroup.monoidHom_mulEquiv_of_hasEnoughRootsOfUnity\"], \"digest\": \"be7ee2c86b41d080\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension, cyclic central quotient and additive CharacterModule declarations do not classify multiplicative-type group schemes or give their geometric character exact sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Diagonalizable\"",
+   "results": "{\"t\": \"2026-10-24T07:16:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Diagonalizable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension, cyclic central quotient and additive CharacterModule declarations do not classify multiplicative-type group schemes or give their geometric character exact sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|torus|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T07:16:00Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|torus|diagonalizable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension, cyclic central quotient and additive CharacterModule declarations do not classify multiplicative-type group schemes or give their geometric character exact sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Central infinitesimal multiplicative extensions of tori have exact character sequences",
+   "results": "{\"t\": \"2026-10-24T07:16:01Z\", \"tool\": \"leansearch\", \"query\": \"Central infinitesimal multiplicative extensions of tori have exact character sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.infinitesimal\", \"MulChar.ext\", \"MulChar.ext'\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"LieAlgebra.IsExtension.exact\", \"Algebra.Extension.toInfinitesimal\", \"CategoryTheory.Abelian.Ext.contravariantSequence_exact\"], \"digest\": \"5d2128eb80fe13ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension, cyclic central quotient and additive CharacterModule declarations do not classify multiplicative-type group schemes or give their geometric character exact sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central extension of a torus by an infinitesimal group of multiplicative type is commutative and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T07:41:02Z\", \"tool\": \"leanfinder\", \"query\": \"A central extension of a torus by an infinitesimal group of multiplicative type is commutative and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UnitAddTorus\", \"TopologicalAbelianization.commGroup\", \"TopologicalAbelianization\", \"commGroupOfCyclicCenterQuotient\", \"LieAlgebra.instAddCommGroupOfTwoCocycle\", \"LieAlgebra.Extension.ofTwoCocycle\", \"LieAlgebra.Extension.twoCocycleOf\", \"LieAlgebra.ofProd\"], \"digest\": \"b91225dd1e823423\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|torus|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T07:41:41Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|torus|diagonalizable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Central extensions of tori by infinitesimal diagonalizable group schemes and exact character sequences",
+   "results": "{\"t\": \"2026-10-24T07:41:41Z\", \"tool\": \"leansearch\", \"query\": \"Central extensions of tori by infinitesimal diagonalizable group schemes and exact character sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension\", \"LieAlgebra.Extension\", \"LieAlgebra.IsExtension.exact\", \"GroupExtension.rec\", \"GroupExtension.mk\", \"groupCohomology.H1InfRes\", \"AddGroupExtension\", \"LieAlgebra.Extension.IsExtension\"], \"digest\": \"b171e377335f7c6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Diagonalizable\"",
+   "results": "{\"t\": \"2026-10-24T07:41:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Diagonalizable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central infinitesimal group scheme kernel over a torus gives an exact sequence of geometric character groups",
+   "results": "{\"t\": \"2026-10-24T07:41:44Z\", \"tool\": \"leanfinder\", \"query\": \"A central infinitesimal group scheme kernel over a torus gives an exact sequence of geometric character groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.Cotangent.exact\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\"], \"digest\": \"a8ae1ca427a2a893\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "commutator|central",
+   "results": "{\"t\": \"2026-10-24T07:43:59Z\", \"tool\": \"grep\", \"query\": \"commutator|central\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"ef266cacf5ce3ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The commutator pairing of a central extension of commutative affine group schemes descends along the faithfully flat quotient",
+   "results": "{\"t\": \"2026-10-24T07:44:00Z\", \"tool\": \"leansearch\", \"query\": \"The commutator pairing of a central extension of commutative affine group schemes descends along the faithfully flat quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Extension.instIsLieAbelianSubtypeLMemLieSubmoduleKerProj\", \"closureCommutatorRepresentatives\", \"Con.commGroup\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"commutator\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"Submodule.dualPairing\", \"instNormalCommutator\"], \"digest\": \"5c4660d583eeb534\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"ker\"",
+   "results": "{\"t\": \"2026-10-24T07:44:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"commutator\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Abelianization.addCommutator_le_ker\", \"Abelianization.commutator_le_ker\", \"Abelianization.commutator_subset_ker\", \"CategoryTheory.AddGrpObj.whiskerLeft_η_addCommutator\", \"CategoryTheory.AddGrpObj.η_whiskerRight_addCommutator\", \"CategoryTheory.GrpObj.whiskerLeft_η_commutator\", \"CategoryTheory.GrpObj.η_whiskerRight_commutator\", \"CategoryTheory.AddGrpObj.whiskerLeft_η_addCommutator_assoc\"], \"digest\": \"006d3bf0f5afa9a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine faithfully flat central group extension with commutative quotient, the commutator descends to a morphism from the quotient square to the kernel",
+   "results": "{\"t\": \"2026-10-24T07:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine faithfully flat central group extension with commutative quotient, the commutator descends to a morphism from the quotient square to the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.Extension.toKer_bracket\", \"Abelianization.ker_of\", \"Abelianization.commutator_subset_ker\", \"GroupExtension.quotientKerRightHomEquivRight\", \"commutative_of_cyclic_center_quotient\", \"Subgroup.quotientCentralizerEmbedding_apply\", \"GroupExtension.range_inl_eq_ker_rightHom\", \"Subgroup.quotientCenterEmbedding\"], \"digest\": \"aea5565c09e713b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutators of lifts in an affine group scheme central extension depend only on the images and define an algebraic morphism on the quotient product by faithfully flat descent",
+   "results": "{\"t\": \"2026-10-24T07:47:37Z\", \"tool\": \"leanfinder\", \"query\": \"Commutators of lifts in an affine group scheme central extension depend only on the images and define an algebraic morphism on the quotient product by faithfully flat descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.map\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.Extension.H1Cotangent.map_comp\", \"Subgroup.quotientCenterEmbedding_apply\", \"Algebra.Extension.H1Cotangent.map_apply_coe\", \"Abelianization.coe_lift_symm\", \"Abelianization.lift\", \"Abelianization.map\"], \"digest\": \"22e32e5579bfbcb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, cotangent exactness or proper integral group schemes, not this finite affine extension and character sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinitesimal-isogeny-lie-reduction",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Corollary 12.22, printed p.239, and Theorem 12.23, p.240. Agent synthesis: for a central infinitesimal kernel the commutator descends to the reduced scheme T x T and is trivial, then apply commutative multiplicative extension and exact character antiduality. This is a supporting lemma for Proposition 17.80(b), p.378, rather than the torus-lifting conclusion itself.",
+   "via": [
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-central-infinitesimal-torus-extension",
+  "worker": "stage1",
+  "summary": "Q41 retained the statement, reused existing commutative-extension and character-antiduality nodes, and supplied faithful-flat equalizer descent of the commutator, infinitesimal-to-reduced vanishing, and explicit group-algebra kernel exactness. No new nodes or Mathlib leaves.",
+  "blueprint": "Inherited supporting branch of det-thm-sf-ctf-stability-direct-images proof (3), under the alteration/linearization/maximal-torus route. Realizes the precise commutator-descent sentence and Corollary 12.22/Theorem 12.23 cited by this item. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). Ancestor tool returns null for the inherited created.item chain; preserve its null from.node and via, with the already precise from.place. Whole-blueprint searches: multiplicative type, central infinitesimal, central extension, commutator, commutator descends; no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-cech-exact",
+    "why": "Uses only the degree-zero faithfully flat equalizer to descend the commutator map; the algebraic-group route needs this general descent tool, not another unit proof route."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Uses only the arbitrary-field domain clause for the coordinate algebra of a split torus; the item unit has no split-torus reducedness node."
+   },
+   {
+    "node": "lem-trf-lattice-torus-coordinates-action",
+    "why": "Uses only the first lattice-basis coordinate/group-law comparison for the split torus, not the monoscheme action clause; no item-unit node states this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-cech-exact",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-trf-lattice-torus-coordinates-action"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-9b82fef40",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-9b82fef40 (reviewer sub-agent of L); spot-checked: First split of a statement-only item: 7 steps, no new nodes, statement unchanged. Sources read: Milne iAG2017 Cor 12.22 (printed p.239) and Thm 12.23 (p.240); Stacks lemma-ff-exact (023M), whose degree-0 equalizer is lem-pc-cech-exact. Every step was checked against the full statements it cites. Step 1: base change to F=k̄; N_F is diagonalizable via split-torus-subgroups; q×q is faithfully flat. Step 2: the commutator factors through N; centrality makes it agree on the affine overlap; Amitsur degree-0 exactness with module R descends it to T×T. Step 3: F[Z^{2r}] is a domain, so the nilpotent augmentation ideal maps to 0 and c=e; injectivity of k[E×E]→k[E×E]⊗F carries commutativity down to k. Step 4: all hypotheses of the commutative-multiplicative-extension node hold, and a surjective Hopf map gives the closed immersion. Steps 5–6: antiduality naturality identifies q^* with u, which is injective by faithful flatness and basis independence; K[M]⊗_{K[L]}K ≅ K[M/u(L)] gives surjectivity with kernel u(L), Galois-equivariantly. Step 7: group-like basis gives X*(T)=Z^r; finiteness of q makes k[N] finite-dimensional, so X*(N) is finite. Every hypothesis is used. Tested on rank 0, μ_p ⊂ G_m via x^p, and non-reduced μ_p×G_m; no duplicate found by a DAG-wide search. Batch-5 flags: lem-trf-split-lattice-torus-projection and lem-trf-lattice-torus-coordinates-action are general lattice group-algebra facts (a domain clause and a coordinate isomorphism). Their full closures contain only toric/monoid/log algebra nodes, with no trace-formula or Poincaré proof nodes, no trace-transport and no nt- targets, so accepted as generic. split_report.tool_uses are accurate. The null blueprint from.node is inherited from the base chain; maintainer note only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CentralInfinitesimalTorusExtension",
+  "declaration": "AlgebraicGeometry.MultiplicativeType.central_infinitesimal_torus_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CentralInfinitesimalTorusExtension.lean",
+  "statement": "theorem central_infinitesimal_torus_extension {k : Type u} [Field k] (E T : Grp (Over (Spec (.of k)))) [IsAffine E.X.left] [IsAffine T.X.left] [LocallyOfFiniteType E.X.hom] [QuasiCompact E.X.hom] [LocallyOfFiniteType T.X.hom] [QuasiCompact T.X.hom] (q : E ⟶ T) (hT : IsTorus T) (hqfinite : q.hom.hom.left.appTop.hom.Finite) (hqflat : q.hom.hom.left.appTop.hom.FaithfullyFlat) (hlocal : IsLocalRing Γ((GrpObj.ker q.hom.hom).left, ⊤)) (hnil : IsNilpotent (RingHom.ker ((Scheme.ΓSpecIso (.of k)).hom.hom.comp (MonObj.one (X := GrpObj.ker q.hom.hom)).left.appTop.hom))) (hcentral : ∀ (A : Type u) [CommRing A] [Algebra k A] (n : (Spec (.of A)).asOver (Spec (.of k)) ⟶ GrpObj.ker q.hom.hom) (e : (Spec (.of A)).asOver (Spec (.of k)) ⟶ E.X), Commute (n ≫ GrpObj.kerι q.hom.hom) e) (hN : IsMultiplicativeType (Grp.mk (GrpObj.ker q.hom.hom))) : IsCommMonObj E.X ∧ IsMultiplicativeType E ∧ ∀ (ks : Type u) [Field ks] [Algebra k ks] [IsSepClosure k ks], ∃ MT ME MN : CharacterModules k ks, ∃ eT : MT.obj.V ≃ GeometricCharacters ks T, ∃ eE : ME.obj.V ≃ GeometricCharacters ks E, ∃ eN : MN.obj.V ≃ GeometricCharacters ks (Grp.mk (GrpObj.ker q.hom.hom)), (∀ x y : MT.obj.V, (eT (x + y)).hom.hom = (eT x).hom.hom * (eT y).hom.hom) ∧ (∀ x y : ME.obj.V, (eE (x + y)).hom.hom = (eE x).hom.hom * (eE y).hom.hom) ∧ (∀ x y : MN.obj.V, (eN (x + y)).hom.hom = (eN x).hom.hom * (eN y).hom.hom) ∧ (∀ (σ : ks ≃ₐ[k] ks) (x : MT.obj.V), IsConjugate σ (eT x) (eT ((MT.obj.ρ σ).hom x))) ∧ (∀ (σ : ks ≃ₐ[k] ks) (x : ME.obj.V), IsConjugate σ (eE x) (eE ((ME.obj.ρ σ).hom x))) ∧ (∀ (σ : ks ≃ₐ[k] ks) (x : MN.obj.V), IsConjugate σ (eN x) (eN ((MN.obj.ρ σ).hom x))) ∧ ∃ (p : MT.obj.V →+ ME.obj.V) (r : ME.obj.V →+ MN.obj.V), (∀ x : MT.obj.V, eE (p x) = (baseChange (K := ks)).map q ≫ eT x) ∧ (∀ x : ME.obj.V, eN (r x) = (baseChange (K := ks)).map (Grp.ofHom (GrpObj.kerι q.hom.hom)) ≫ eE x) ∧ (∀ (σ : ks ≃ₐ[k] ks) (x : MT.obj.V), p ((MT.obj.ρ σ).hom x) = (ME.obj.ρ σ).hom (p x)) ∧ (∀ (σ : ks ≃ₐ[k] ks) (x : ME.obj.V), r ((ME.obj.ρ σ).hom x) = (MN.obj.ρ σ).hom (r x)) ∧ Function.Injective p ∧ Function.Exact p r ∧ Function.Surjective r ∧ Module.Free ℤ MT.obj.V ∧ Module.Finite ℤ MT.obj.V ∧ Finite MN.obj.V",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a541f063c",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read node, Milne Cor 12.22/Thm 12.23 place, delivered module, report, and dep modules ToriMultiplicativeType, MultiplicativeCharacterData, MultiplicativeCharacterAntiduality, GrpObj.ker/kerι (pullback along unit). All hypotheses render the node: finite+faithfully flat on q.left.appTop (k[T]→k[E]), scheme kernel, local k[N], nilpotent augmentation kernel via identity section and ΓSpecIso, centrality on Spec A points for all k-algebras A, IsMultiplicativeType of kernel; no extra hypotheses. Conclusions: IsCommMonObj E.X, IsMultiplicativeType E, and for every separable closure character modules bijective with actual GeometricCharacters respecting +/pointwise product and IsConjugate, pullback/restriction pinned by baseChange.map q and kerι equations, equivariance, injective/exact/surjective, X*(T) free finite, X*(N) finite. Added stmt_dep def-sfb-multiplicative-character-data is needed (CharacterModules/GeometricCharacters/IsConjugate), landed, acyclic. lean.statement verbatim. Edge cases rank 0, q=id, Frobenius μ_p, char 0 fine. No defs, single sorry, docstrings with source and blueprint id, 7-step proof plan. No duplicate found. Not recompiled per instruction; worker dry-run OK. Note: Q118 second-reading section is an admitted self-review."
+ }
+}

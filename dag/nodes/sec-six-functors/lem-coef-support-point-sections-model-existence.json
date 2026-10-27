@@ -1,0 +1,132 @@
+{
+ "id": "lem-coef-support-point-sections-model-existence",
+ "kind": "lemma",
+ "title": "Unit-normalized point sections on native coefficient systems",
+ "statement": "Fix a prime l and a finite extension E of Q_l as in def-weil-l-adic-coefficient-extension. For every scheme W in universe u, the native point-sections data SectionsModel l E W of def-coef-support-point-sections-data is inhabited. Thus the derived quotient-to-completed sections comparison satisfies its whole-derived unit equation, and finite evaluation satisfies the prescribed unit and every-pair transition equations. Values are towers of modules over the constant coefficient ring; no inverse limit is taken.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2; support-open-tensor argument, step 4; Stacks sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E) and 0941."
+ },
+ "stmt_deps": [
+  "def-coef-support-point-sections-data",
+  "def-coef-constant-scalar-tower-sections",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use sectionsComparison_exists, the isolated whole-derived scalar square, to supply comparison and comparison_unit. No finite-evaluation conclusion is taken from this lemma.",
+   "uses": [
+    "lem-coef-support-point-sections-comparison-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the actual total right derived pairs with their rightDerivedFunctorUnitQ natural transformations. Their universal property follows from the K-injective derivability structure; units are invertible on K-injectives by rightDerivedFunctorUnitQ_eq. Apply the proved generic private coefficientTowerComparison of CoefficientSequenceGlobalSections to ordinaryLevelSections and ordinarySections. Ordinary sections on towers is definitionally termwise ordinaryLevelSections. The theorem gives finite evaluation, its unit equation on every complex and all transition squares. Multiply the unit equation by the inverse evaluation-factor isomorphism to put it in the exact sectionsEvaluationUnit form.",
+   "uses": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the generic coefficientTowerComparison transition equation at (op m), (op n), (homOfLE h).op, which is precisely sectionsEvaluationTransitions. Package these fields with the whole-derived scalar comparison from step 1 to obtain SectionsModel.",
+   "uses": [
+    "lem-coef-sequence-global-sections-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-support-point-sections-comparison-existence",
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native-interface specialization of derived direct-image composition and sequence evaluation (support-open-tensor step 4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of sheaf module towers commute with exact evaluation and scalar restriction",
+   "results": "Eight generic global-section, restriction and evaluation facts; no unit-normalized native derived model.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the existing project interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support reduction tower transitions and normalized open tensor finite evaluation",
+   "results": "Eight unrelated condensed module and test-function facts. Loogle NatTrans.naturality found the generic naturality square used in assembly, not a model construction.",
+   "date": "2026-10-25",
+   "verdict": "No matching native interface."
+  },
+  {
+   "tool": "grep",
+   "query": "SectionsModel|GammaEvaluation|SystemOpenModel|FiniteOpenModel; extensionByZero.*tensor; rightDerived.*Evaluation",
+   "results": "Project search found only data definitions and model consumers; Mathlib search found no such construction. Blueprint search point sections found det-pbc-torsion-stalk-proetale-point, which concerns a geometric point, not R-linear sequence sections. Existing open normalization uses independently chosen localized-site tensors and is insufficient by direct application.",
+   "date": "2026-10-25",
+   "verdict": "New interface specialization, retaining the stated construction dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefSupportOpenTensorModel",
+  "date": "2026-10-25",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 4-5: Compact-support reduction realization with normalized open tensor comparison. Native interface specialization: step 4.",
+   "via": [
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefSupportPointSectionsModelExistence",
+  "file": "lean/Sheaf/Paper/CoefSupportPointSectionsModelExistence.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.sectionsModel_exists",
+  "statement": "theorem sectionsModel_exists (W : Scheme.{u}) : Nonempty (SectionsModel l E W)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T123013-L-1823418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T123013-L-1823418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

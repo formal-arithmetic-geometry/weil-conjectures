@@ -1,0 +1,109 @@
+{
+ "id": "lem-cbc-derived-complex-unit-compatibility",
+ "kind": "lemma",
+ "title": "Compatibility laws of the right-derived unit on complexes",
+ "statement": "The explicit complex unit is inverse to the K-injective derived-value comparison, natural in complex maps, compatible with exact derived factorization, and compatible with the bounded-below inclusion. These four laws are packaged as a conjunction using the existing private comparison proofs.",
+ "stmt_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 070I and 015F; quotient comparison and right-derived unit compatibility."
+ },
+ "proof": [
+  {
+   "text": "Construct the complex unit as the inverse quotient comparison followed by the homotopy right-derived unit and the derived image of the quotient comparison. Use the existing right_unit_Q_obj_iso, right_unit_Q_naturality, exact_factor_Q and right_derived_plus_unit proofs from UnboundedEtaleCompactSupportComparisons to fill the four conjuncts. Their unit has exactly this explicit composite, so the proof is a direct conjunction introduction with no added assumption. Its component equation is proved by unfolding the explicit unit definition once.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 070I and 015F; reuse of the existing private comparison proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor unit on complexes compatible with K-injective value isomorphism and bounded below restriction",
+   "results": "8 hits, including mapDerivedCategoryFactors, mapDerivedCategoryFactorsh and its component equation.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing private unit compatibility proofs, with the Mathlib exact-factorization API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorObjQIso",
+   "results": "0 hits: unknown identifier in the search index; local source contains the project extension.",
+   "date": "2026-10-24",
+   "verdict": "Read the project declarations directly."
+  },
+  {
+   "tool": "grep",
+   "query": "right_unit_Q_obj_iso|right_unit_Q_naturality|exact_factor_Q|right_derived_plus_unit",
+   "results": "Remote search returned zero hits; local rg locates all four proved private helpers in UnboundedEtaleCompactSupportComparisons.",
+   "date": "2026-10-24",
+   "verdict": "Import all privately in the interface module and apply those four existing proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleClopenMateNormalization",
+  "date": "2026-10-24",
+  "group": "B5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-etale-clopen-mate-normalization",
+   "place": "Existing derived-unit compatibility helpers packaged for proof reuse.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedComplexUnitCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/DerivedComplexUnitCompatibility.lean",
+  "declaration": "CategoryTheory.derivedComplexUnitCompatibility",
+  "declarations": [
+   "CategoryTheory.derivedComplexUnit",
+   "CategoryTheory.derivedComplexUnit_eq",
+   "CategoryTheory.derivedComplexUnitCompatibility"
+  ],
+  "statement": "theorem derivedComplexUnitCompatibility :\n    (∀ (F : C ⥤ D) [F.Additive] (J : CochainComplex C ℤ) [J.IsKInjective],\n      derivedComplexUnit F J ≫ (F.rightDerivedFunctorObjQIso J).hom = 𝟙 _) ∧\n    (∀ (F : C ⥤ D) [F.Additive] {J I : CochainComplex C ℤ} (ρ : J ⟶ I),\n      DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map ρ) ≫\n        derivedComplexUnit F I =\n        derivedComplexUnit F J ≫ F.rightDerivedFunctor.map (DerivedCategory.Q.map ρ)) ∧\n    (∀ (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n      (J : CochainComplex C ℤ),\n      F.mapDerivedCategoryFactorsh.inv.app ((HomotopyCategory.quotient C (.up ℤ)).obj J) ≫\n          F.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C).hom.app J) ≫\n          F.mapDerivedCategoryFactors.hom.app J =\n        (DerivedCategory.quotientCompQhIso D).hom.app\n          ((F.mapHomologicalComplex (.up ℤ)).obj J)) ∧\n    (∀ [EnoughInjectives C] (F : C ⥤ D) [F.Additive] (K : HomotopyCategory.Plus C),\n      DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫\n          F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =\n        F.rightDerivedFunctorUnit.app ((HomotopyCategory.Plus.ι C).obj K))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-77b58",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261024T184610-L-3075477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-77b58",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261024T184610-L-3075477",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules/nodes vs clone sheaf-dag item and node, Mathlib TwoSquare/mapDerivedCategoryPlusCompatibility defs, rg of all ClopenMateNormalization users; 3 direct importers + StrictTowerProperOpenCalculus compiled against delivered and fixed item"
+ }
+}

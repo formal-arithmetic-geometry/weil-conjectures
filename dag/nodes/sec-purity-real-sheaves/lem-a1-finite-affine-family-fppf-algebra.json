@@ -1,0 +1,275 @@
+{
+ "id": "lem-a1-finite-affine-family-fppf-algebra",
+ "kind": "statement",
+ "title": "Finite affine family packaged as a faithfully flat finitely presented algebra",
+ "statement": "Let $R,A$ be commutative rings, $R\\to A$ a ring homomorphism, $I$ a finite set, and $(A\\to B_i)_{i\\in I}$ homomorphisms of commutative rings. Suppose each $A\\to B_i$ is flat [def-weil-pbc-flat-ring-map] and of finite presentation [def-weil-pbc-finitely-presented-algebra], each composite $R\\to B_i$ is of finite type [def-weil-pbc-finite-type-algebra], and the maps $\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum] are jointly surjective on points. Put $B=\\prod_{i\\in I}B_i$ with the coordinatewise maps $R\\to A\\to B$, and put $Z=\\coprod_{i\\in I}\\operatorname{Spec}B_i$ in schemes [def-pc-scheme; lem-weil-pbc-scheme-coproduct-family]. The canonical isomorphism $Z\\cong\\operatorname{Spec}B$ identifies each coprojection with the spectrum of the corresponding projection $B\\to B_i$. The component maps induce morphisms $q_Z:Z\\to\\operatorname{Spec}A$ and $p_Z:Z\\to\\operatorname{Spec}R$ satisfying $p_Z=(\\operatorname{Spec}A\\to\\operatorname{Spec}R)\\circ q_Z$, and these correspond under that isomorphism to the stated coordinate maps. The morphism $q_Z$ is flat [def-weil-flat-morphism], surjective and locally of finite presentation [def-sbc-locally-finite-presentation], and $p_Z$ is locally of finite type [def-weil-finite-type-morphism]. The homomorphism $A\\to B$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map] and of finite presentation, and the composite $R\\to B$ is of finite type. The empty family is allowed; its joint surjectivity forces $A=0$, and the empty product is the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL (lemma-flat-finitely-presented-permanence), locally-of-finite-type alternative; Proof, sentence replacing X by the finite coproduct of affine opens, and final affine reduction; old item steps 4-6, including compatibility of the two maps, affine criteria, and the maximal-ideal faithful-flatness argument (Algebra Tag 00HP, lemma-ff)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha:R\\to A$, $\\beta_i:A\\to B_i$, and $\\gamma_i=\\beta_i\\circ\\alpha$. The coproduct universal property gives $q_Z$ and $p_Z$ from the families $\\operatorname{Spec}\\beta_i$ and $\\operatorname{Spec}\\gamma_i$. Their composites with every coprojection agree with those of $(\\operatorname{Spec}\\alpha)\\circ q_Z$, so uniqueness gives $p_Z=(\\operatorname{Spec}\\alpha)\\circ q_Z$. Let $e:Z\\xrightarrow{\\sim}\\operatorname{Spec}B$ be the finite affine coproduct isomorphism, with $e\\circ\\iota_i=\\operatorname{Spec}\\pi_i$. For the coordinate maps $\\beta=(\\beta_i)_i$ and $\\gamma=(\\gamma_i)_i$, functoriality of $\\operatorname{Spec}$ gives $(\\operatorname{Spec}\\beta)\\circ e\\circ\\iota_i=\\operatorname{Spec}(\\pi_i\\circ\\beta)=\\operatorname{Spec}\\beta_i$ and the analogous equality for $\\gamma$. Coproduct uniqueness therefore gives $q_Z=(\\operatorname{Spec}\\beta)\\circ e$ and $p_Z=(\\operatorname{Spec}\\gamma)\\circ e$. Coordinatewise equality gives $\\gamma=\\beta\\circ\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, proof: finite disjoint affine source replacement and affine reduction"
+   }
+  },
+  {
+   "text": "Apply Flat.SpecMap_iff to each flat ring map beta_i. The coprojections form the open cover sigmaOpenCover, so the source-locality instance Flat.instDescScheme gives Flat q_Z. Under the isomorphism e = sigmaSpec B and the identity q_Z = e followed by Spec beta from Step 1, cancel_left_of_respectsIso gives Flat (Spec beta). This argument also applies to an empty coproduct.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5, lemma-flat-characterize, applied to the affine replacement; finite-product module flatness as in the cited existing leaf"
+   }
+  },
+  {
+   "text": "For each target point y, joint surjectivity gives a component i and x in Spec B_i over y. The point iota_i(x) maps to y by Sigma.ι_desc, so q_Z is surjective. Cancel precomposition with the isomorphism e to obtain surjectivity of Spec beta. Together with Step 2, flat_and_surjective_SpecMap_iff gives that beta is faithfully flat, exactly the flat-surjective-spectrum criterion.",
+   "uses": [
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HQ, lemma-ff-rings, (2) implies (1)"
+   }
+  },
+  {
+   "text": "Each Spec beta_i is locally of finite presentation by LocallyOfFinitePresentation.SpecMap_iff and the hypothesis on beta_i. The coprojections form an open cover, so IsZariskiLocalAtSource.sigmaDesc gives local finite presentation of q_Z. This is the component-neighbourhood argument of the pointwise definition, including its vacuous empty-source case.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TP, definition-finite-presentation, (1) and (2)"
+   }
+  },
+  {
+   "text": "Transport local finite presentation of q_Z across the isomorphism e = sigmaSpec B using cancel_left_of_respectsIso and the coordinate comparison in Step 1. The affine finite-presentation criterion LocallyOfFinitePresentation.SpecMap_iff then gives finite presentation of beta.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2)"
+   }
+  },
+  {
+   "text": "Apply HasRingHomProperty.Spec_iff for LocallyOfFiniteType to each gamma_i using the finite-type hypothesis. IsZariskiLocalAtSource.sigmaDesc gives local finite type of p_Z from its component neighbourhoods. Cancel precomposition with e in the comparison of Step 1 and apply the affine finite-type criterion HasRingHomProperty.Spec_iff again. This gives finite type of gamma.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T1 and 01T2, definition-finite-type and lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "If I is empty, any two elements of the product B agree by function extensionality and elimination of an index. Thus B is a subsingleton ring. Step 3 gives beta faithfully flat; RingHom.FaithfullyFlat.injective implies its underlying function is injective. An injective function into a subsingleton has subsingleton domain, so A is subsingleton too. No nonzero-factor or nonempty-index hypothesis is used anywhere.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CK, lemma-faithfully-flat-universally-injective, with N=A and S=0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, finite affine source replacement; implemented using Mathlib source-locality on coproducts and cancellation across sigmaSpec; empty-family conclusion uses injectivity of faithfully flat ring maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of flat finitely presented algebras whose spectra cover Spec A has faithfully flat finitely presented product, finite type over R if each factor is",
+   "results": "{\"t\": \"2026-10-22T07:57:54Z\", \"tool\": \"leansearch\", \"query\": \"A finite family of flat finitely presented algebras whose spectra cover Spec A has faithfully flat finitely presented product, finite type over R if each factor is\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.pi\", \"RingHom.FaithfullyFlat\", \"Algebra.FiniteType.prod\", \"Module.FaithfullyFlat.instTensorProduct\", \"Algebra.FormallySmooth.pi_iff\", \"Algebra.FiniteType.of_finitePresentation\", \"Module.Flat.iff_flat_tensorProduct\", \"Algebra.FormallyEtale.instForallOfFinite\"], \"digest\": \"93f1be715acbbe1c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sigmaSpec and its isomorphism instance identify the coproduct only; Flat.instDescScheme gives only flatness; flat_and_surjective_iff_faithfullyFlat_of_isAffine requires flatness and surjectivity of the assembled map. Algebra.FinitePresentation.pi gives only finite presentation, not the compatible two-map scheme construction or faithful flatness from joint surjectivity. The whole statement requires their assembly, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let R to A to B_i be finitely many ring maps with A to B_i flat finitely presented and Spec B_i jointly surjective over Spec A. The finite coproduct is affine and the product algebra is faithfully flat finitely presented over A and finite type over R if every B_i is finite type over R",
+   "results": "{\"t\": \"2026-10-22T07:58:56Z\", \"tool\": \"leanfinder\", \"query\": \"Let R to A to B_i be finitely many ring maps with A to B_i flat finitely presented and Spec B_i jointly surjective over Spec A. The finite coproduct is affine and the product algebra is faithfully flat finitely presented over A and finite type over R if every B_i is finite type over R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.pi\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\"], \"digest\": \"78dc5dd538d8534c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sigmaSpec and its isomorphism instance identify the coproduct only; Flat.instDescScheme gives only flatness; flat_and_surjective_iff_faithfullyFlat_of_isAffine requires flatness and surjectivity of the assembled map. Algebra.FinitePresentation.pi gives only finite presentation, not the compatible two-map scheme construction or faithful flatness from joint surjectivity. The whole statement requires their assembly, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat.*(pi|prod)|[Ff]aithfullyFlat.*[Pp]i|FinitePresentation.pi|FiniteType.pi|flat_and_surjective_iff",
+   "results": "{\"t\": \"2026-10-22T07:59:20Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat.*(pi|prod)|[Ff]aithfullyFlat.*[Pp]i|FinitePresentation.pi|FiniteType.pi|flat_and_surjective_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\"], \"digest\": \"6773dea0af9c0adc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sigmaSpec and its isomorphism instance identify the coproduct only; Flat.instDescScheme gives only flatness; flat_and_surjective_iff_faithfullyFlat_of_isAffine requires flatness and surjectivity of the assembled map. Algebra.FinitePresentation.pi gives only finite presentation, not the compatible two-map scheme construction or faithful flatness from joint surjectivity. The whole statement requires their assembly, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-22T07:59:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"FaithfullyFlat\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"RingHom.FinitePresentation.codescendsAlong_faithfullyFlat\", \"Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat\"], \"digest\": \"b095f60f59945123\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sigmaSpec and its isomorphism instance identify the coproduct only; Flat.instDescScheme gives only flatness; flat_and_surjective_iff_faithfullyFlat_of_isAffine requires flatness and surjectivity of the assembled map. Algebra.FinitePresentation.pi gives only finite presentation, not the compatible two-map scheme construction or faithful flatness from joint surjectivity. The whole statement requires their assembly, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaSpec|flat_and_surjective_iff_faithfullyFlat_of_isAffine|instance.*desc|Sigma.desc",
+   "results": "{\"t\": \"2026-10-22T08:00:32Z\", \"tool\": \"grep\", \"query\": \"sigmaSpec|flat_and_surjective_iff_faithfullyFlat_of_isAffine|instance.*desc|Sigma.desc\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"111\", \"143\", \"170\"], \"digest\": \"fde3d839b28f7b5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sigmaSpec and its isomorphism instance identify the coproduct only; Flat.instDescScheme gives only flatness; flat_and_surjective_iff_faithfullyFlat_of_isAffine requires flatness and surjectivity of the assembled map. Algebra.FinitePresentation.pi gives only finite presentation, not the compatible two-map scheme construction or faithful flatness from joint surjectivity. The whole statement requires their assembly, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replacing a finite jointly surjective family Spec B_i to Spec A by its disjoint union gives Spec product B_i, compatible with both maps to Spec A and Spec R, with flat locally finite presentation and finite type properties and a faithfully flat coordinate map",
+   "results": "{\"t\": \"2026-10-22T08:00:41Z\", \"tool\": \"leanfinder\", \"query\": \"Replacing a finite jointly surjective family Spec B_i to Spec A by its disjoint union gives Spec product B_i, compatible with both maps to Spec A and Spec R, with flat locally finite presentation and finite type properties and a faithfully flat coordinate map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sigmaSpec\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.coprodSpec_apply\", \"AlgebraicGeometry.instIsOpenImmersionSigmaSpec\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.instIsIsoSchemeCoprodSpec\", \"AlgebraicGeometry.coprodSpec_coprodMk\"], \"digest\": \"bd360b08e2dc03e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: sigmaSpec and its isomorphism instance identify the coproduct only; Flat.instDescScheme gives only flatness; flat_and_surjective_iff_faithfullyFlat_of_isAffine requires flatness and surjectivity of the assembled map. Algebra.FinitePresentation.pi gives only finite presentation, not the compatible two-map scheme construction or faithful flatness from joint surjectivity. The whole statement requires their assembly, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Spec\"",
+   "results": "{\"t\": \"2026-10-24T00:38:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Spec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"RingHom.Flat.respectsIso\", \"RingHom.FaithfullyFlat.respectsIso\", \"AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion\", \"AlgebraicGeometry.Flat.SpecMap_iff\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\"], \"digest\": \"ee5c14b5e898d5b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits state only constituent facts (finite-product finite presentation, coproduct-spectrum isomorphism, or the flat-surjective criterion), reused through existing DAG leaves; they do not assemble both compatible maps and all clauses in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite jointly surjective family of flat finitely presented affine algebras gives a faithfully flat finitely presented product compatible with the two structure morphisms and finite type over a second base",
+   "results": "{\"t\": \"2026-10-24T00:38:40Z\", \"tool\": \"leanfinder\", \"query\": \"A finite jointly surjective family of flat finitely presented affine algebras gives a faithfully flat finitely presented product compatible with the two structure morphisms and finite type over a second base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FinitePresentation.pi\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Module.FaithfullyFlat.of_specComap_surjective\"], \"digest\": \"cedd903baa0ef016\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits state only constituent facts (finite-product finite presentation, coproduct-spectrum isomorphism, or the flat-surjective criterion), reused through existing DAG leaves; they do not assemble both compatible maps and all clauses in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coproduct of affine schemes from flat finitely presented algebras gives a faithfully flat finitely presented product algebra, compatible with maps over two rings",
+   "results": "{\"t\": \"2026-10-24T00:39:03Z\", \"tool\": \"leansearch\", \"query\": \"Finite coproduct of affine schemes from flat finitely presented algebras gives a faithfully flat finitely presented product algebra, compatible with maps over two rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.instIsAffineHomDescScheme\", \"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"RingHom.FaithfullyFlat\", \"Algebra.FinitePresentation.pi\", \"AlgebraicGeometry.sigmaSpec\", \"AlgebraicGeometry.instIsIsoSchemeCoprodSpec\"], \"digest\": \"1ab94d307e640282\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits state only constituent facts (finite-product finite presentation, coproduct-spectrum isomorphism, or the flat-surjective criterion), reused through existing DAG leaves; they do not assemble both compatible maps and all clauses in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaSpec|flat_and_surjective_SpecMap_iff|SpecMap_iff",
+   "results": "{\"t\": \"2026-10-24T00:39:04Z\", \"tool\": \"grep\", \"query\": \"sigmaSpec|flat_and_surjective_SpecMap_iff|SpecMap_iff\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"67\", \"184\"], \"digest\": \"8e2e98925edef6a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits state only constituent facts (finite-product finite presentation, coproduct-spectrum isomorphism, or the flat-surjective criterion), reused through existing DAG leaves; they do not assemble both compatible maps and all clauses in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Package finitely many fppf affine morphisms that jointly cover an affine target as the spectrum of the finite product, respecting a further map to an affine base",
+   "results": "{\"t\": \"2026-10-24T00:41:05Z\", \"tool\": \"leanfinder\", \"query\": \"Package finitely many fppf affine morphisms that jointly cover an affine target as the spectrum of the finite product, respecting a further map to an affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.AffineCover.J\", \"AlgebraicGeometry.Scheme.AffineCover.I₀\", \"AlgebraicGeometry.Scheme.AffineCover.f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\"], \"digest\": \"7de12d21fd244873\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: hits state only constituent facts (finite-product finite presentation, coproduct-spectrum isomorphism, or the flat-surjective criterion), reused through existing DAG leaves; they do not assemble both compatible maps and all clauses in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-lft-flat-lfp-source-descent",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Proof, sentence replacing X by the finite coproduct of affine opens, and final affine reduction; old item steps 4-6, including compatibility of the two maps, affine criteria, and the maximal-ideal faithful-flatness argument (Algebra Tag 00HP, lemma-ff).",
+   "via": [
+    "lem-a1-lft-flat-lfp-source-descent",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-finite-affine-family-fppf-algebra",
+  "worker": "stage1",
+  "summary": "Expanded the finite affine replacement with explicit compatible maps, finite-product flatness, pointwise lfp/lft witnesses, affine finiteness criteria and faithful flatness. Reused existing Mathlib leaves throughout; no new nodes or statement change. Checked empty families and zero factors.",
+  "blueprint": "Historical auxiliary affine-source replacement of Stacks 02KL on the inherited ancestry from lem-a1-affine-hc0, specifically the source descent item steps 4-6 named in blueprint.from.place. The current latest ancestor proof is a cohomological vanishing proof and contains no literal affine-replacement sentence; this generic auxiliary node preserves its inherited role without claiming that the current blueprint text contains that sentence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-7f52b701b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-7f52b701b (reviewer sub-agent of L); spot-checked: PASS: this is a correct first split of an item that was unsplit on the base. The delivery is one commit, adds no new nodes and leaves the statement and stmt_deps unchanged. There is no repair note, so the re-split rules do not apply. Source checked: Stacks descent.tex:4385, Tag 02KL, lemma-flat-finitely-presented-permanence; its proof replaces X by the finite coproduct of affine opens and says 'clearly'. The item spells that step out, and its hypotheses match the source one by one. All step tags were checked against tags/tags; 00HQ (lemma-ff-rings), which says a flat map is faithfully flat iff it is surjective on Spec, was read for Step 3. All 15 cited nodes are Mathlib leaves, so the unit route is not left and no tool_uses are needed. Each statement was read and supports exactly what its step takes. Step 1: q_Z and p_Z come from coproduct uniqueness, and q_Z = Spec β∘e, p_Z = Spec γ∘e follow from e∘ι_i = Spec π_i. Step 2: B is a finite product of flat A-modules (empty product included), so β is flat; Flat.SpecMap_iff gives Spec β flat, and flatness transfers along the isomorphism e stalk by stalk. Step 3: preimages come from joint surjectivity and 00HQ gives A→B faithfully flat. Step 4 is marked elementary and is an instance of the pointwise lfp definition, with each component as an affine open and β_i as its ring map. Step 5 applies the lfp affine-pairs lemma to Z ≅ Spec B over Spec A. Step 6 uses the pointwise finite-type criterion with γ_i, then the all-affine-pairs criterion for γ. Step 7: for the empty family, A→0 is faithfully flat, and universal injectivity with N = A forces A = 0. Every clause of the statement is covered. Small cases checked: the empty family, one factor, zero factors and repeated factors. Duplicates checked: lem-trf-finite-affine-composite-presentation needs finitely presented composites and has no flatness or surjectivity, so it is not a duplicate. lem-a1-fppf-source-finite-affine-charts and lem-a1-finite-type-fppf-source-algebra are sibling lemmas on the same 02KL route, not duplicates. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineFamilyFppfAlgebra",
+  "declaration": "AlgebraicGeometry.finiteAffineFamily_fppfAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteAffineFamilyFppfAlgebra.lean",
+  "statement": "theorem finiteAffineFamily_fppfAlgebra (R A : CommRingCat.{u}) (α : R →+* A) (I : Type u) [Finite I] (B : I → CommRingCat.{u}) (β : ∀ i : I, A →+* B i) (hflat : ∀ i : I, (β i).Flat) (hfp : ∀ i : I, (β i).FinitePresentation) (hft : ∀ i : I, ((β i).comp α).FiniteType) (hcover : ∀ y : Spec A, ∃ (i : I) (x : Spec (B i)), Spec.map (CommRingCat.ofHom (β i)) x = y) : IsIso (sigmaSpec B) ∧ (∀ i : I, Sigma.ι (fun j : I ↦ Spec (B j)) i ≫ sigmaSpec B = Spec.map (CommRingCat.ofHom (Pi.evalRingHom (fun j : I ↦ B j) i))) ∧ Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom ((β i).comp α))) = Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom (β i))) ≫ Spec.map (CommRingCat.ofHom α) ∧ Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom (β i))) = sigmaSpec B ≫ Spec.map (CommRingCat.ofHom (RingHom.pi β)) ∧ Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom ((β i).comp α))) = sigmaSpec B ≫ Spec.map (CommRingCat.ofHom (RingHom.pi (fun i : I ↦ (β i).comp α))) ∧ RingHom.pi (fun i : I ↦ (β i).comp α) = (RingHom.pi β).comp α ∧ Flat (Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom (β i)))) ∧ Surjective (Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom (β i)))) ∧ LocallyOfFinitePresentation (Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom (β i)))) ∧ LocallyOfFiniteType (Sigma.desc (fun i : I ↦ Spec.map (CommRingCat.ofHom ((β i).comp α)))) ∧ (RingHom.pi β).FaithfullyFlat ∧ (RingHom.pi β).FinitePresentation ∧ (RingHom.pi (fun i : I ↦ (β i).comp α)).FiniteType ∧ (IsEmpty I → Subsingleton A ∧ Subsingleton (∀ i : I, B i))",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6678ca40",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 02KL (descent.tex:4385): the hypotheses are flat, finite-presentation and finite-type ring maps plus joint surjectivity; the conclusions are the canonical isomorphism (IsIso sigmaSpec plus the coprojection clause), the two maps built from the component maps with the triangle p_Z = q_Z ≫ Spec α, the coordinate comparisons through RingHom.pi, Flat/Surjective/LocallyOfFinitePresentation of q_Z, LocallyOfFiniteType of p_Z, faithful flatness and finite presentation of A→ΠB, finite type of R→ΠB, and the empty-family clause. No extra assumptions; the single universe u is the scheme-coproduct convention and loses no case. Edge cases (empty family, zero factors, A=0, one factor) are covered. The 10 statement dependencies are Mathlib matches; the scheme-coproduct node has no lean record and is cited the same way by landed siblings. lean.statement is verbatim in the file; only the node's lean field changed; no new nodes, no dependency records. Docstrings carry the source place, the blueprint tag and proof steps 1-7; proof is sorry; all imports used; report has both sections. Not live and no duplicate found. Not recompiled per instructions; the worker reports a clean compile. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T082322-L-2161250",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

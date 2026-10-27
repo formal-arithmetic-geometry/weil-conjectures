@@ -80,7 +80,32 @@
  "merged_into": null,
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "algHom_eq_of_henselianLocalRing_etale"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "algHom_eq_of_henselianLocalRing_etale",
+     "module": "WeilConjectures.RingTheory.HenselianEtaleRetractionUniqueness",
+     "lines": [
+      27,
+      96
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "id": "lem-weil-pbc-henselian-etale-retraction-uniqueness",
  "title": "Uniqueness of a henselian étale retraction",
  "statement": "Under the hypotheses of lem-weil-pbc-henselian-etale-retraction, any two S-algebra homomorphisms B → S whose inverse image of the maximal ideal is q' are equal.",
@@ -121,5 +146,29 @@
   "landing": "20261012T113948-L-821662",
   "kind": "interface",
   "note": "independent Codex review: Delivered module, node metadata, change record, report, proof axioms, and direct importer compile match the stage-3 review requirements."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S,\\mathfrak m,\\kappa)$ be a henselian local ring [def-weil-pbc-henselian-terminology], let $\\varphi:S\\to B$ be a ring map such that $\\operatorname{Spec}B\\to\\operatorname{Spec}S$ is etale, and let $\\mathfrak q'\\subset B$ be a prime ideal with $\\varphi^{-1}(\\mathfrak q')=\\mathfrak m$ such that the induced map of residue fields $\\kappa\\to\\kappa(\\mathfrak q')$ is bijective. If $\\sigma,\\tau:B\\to S$ are $S$-algebra homomorphisms with $\\sigma^{-1}(\\mathfrak m)=\\mathfrak q'$ and $\\tau^{-1}(\\mathfrak m)=\\mathfrak q'$, then $\\sigma=\\tau$.",
+  "proof": [
+   {
+    "text": "Since $S$ is henselian, simple roots modulo $\\mathfrak m$ of monic polynomials over $S$ lift to roots in $S$. Let $x=\\mathfrak q'\\in\\operatorname{Spec}B$ and $y=\\mathfrak m\\in\\operatorname{Spec}S$ its image. The scheme residue fields at $x$ and $y$ are $\\kappa(\\mathfrak q')$ and $\\kappa$, compatibly with $B\\to\\kappa(\\mathfrak q')$ and $S\\to\\kappa$, so the residue-field map of $\\operatorname{Spec}B\\to\\operatorname{Spec}S$ at $x$ is the given map $\\kappa\\to\\kappa(\\mathfrak q')$. The composite $S\\to\\kappa\\to\\kappa(\\mathfrak q')$ is surjective, so this residue-field map is surjective, and it is injective because it is a homomorphism of fields.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Apply the root-lifting retraction lemma to the $S$-algebra $B$ with this root-lifting property and this residue-field bijection. Both given algebra maps have maximal-ideal preimage $\\mathfrak q'$, so its uniqueness clause identifies each with the unique retraction, and hence $\\sigma=\\tau$. ([lem-weil-pbc-root-lifting-etale-retraction]).",
+    "uses": [
+     "lem-weil-pbc-root-lifting-etale-retraction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

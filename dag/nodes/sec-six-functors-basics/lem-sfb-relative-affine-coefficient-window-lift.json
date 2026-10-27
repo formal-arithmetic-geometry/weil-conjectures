@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-relative-affine-coefficient-window-lift",
+ "kind": "statement",
+ "title": "Finite-window coefficient lift of a relatively pseudo-coherent affine complex",
+ "statement": "Let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $B\\to A$ a homomorphism of commutative rings, and $R$ a commutative finite type $B$-algebra (a quotient of a polynomial ring in finitely many variables). Put $R_A=R\\otimes_B A$, and fix a surjection $P=A[t_1,\\ldots,t_r]\\twoheadrightarrow R_A$ with $r\\geq0$. Let $K\\in D(R_A)$ [def-weil-abstract-derived-category] be such that its restriction to $D(P)$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. For every $a\\in\\mathbf Z$, there exist a commutative finite type $B$-algebra $D$, a factorization $B\\to D\\to A$, and $L\\in D(R_D)$, where $R_D=R\\otimes_B D$, whose cohomology modules are finitely generated over $R_D$ and zero outside a finite interval, together with a morphism $\\gamma:L\\to\\operatorname{Res}_{R_D}^{R_A}K$. The following morphism in $D(R_D)$ has cone with zero cohomology in every degree $i\\geq a$:\n$$A\\otimes_D^{\\mathbf L}L\\xrightarrow{1\\otimes\\gamma}A\\otimes_D^{\\mathbf L}K\\xrightarrow{\\mu_K}K.$$\nHere restriction of scalars is termwise, $R_D\\to R_A$ is the given map, derived tensor is computed using a K-flat resolution [def-pc-module-kflat-complex], and $\\mu_K$ is induced by the ordinary $A$-action on an $R_A$-module complex representing $K$. Cones have the meaning of [def-weil-triangulated-category]. No flatness of any ring map is assumed, and no exact descent of $K$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated prerequisite for the unnumbered Kiehl assertion following Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. Affine algebra prerequisite, retaining the prescribed finite type algebra action and the derived scalar-action map. This assertion is not stated or proved by that tag. Primary Kiehl (1972) descente source WANTED; no numbered source theorem is claimed."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-module-kflat-complex",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite polynomial surjection $Q_B=B[x_1,\\ldots,x_s]\\twoheadrightarrow R$ from the hypothesis that $R$ is finite type. For a coefficient stage $D$ put $Q_D=D[x_1,\\ldots,x_s]$; tensoring the displayed quotient gives a surjection $Q_D\\twoheadrightarrow R_D$. In particular $Q_A\\twoheadrightarrow R_A$. The polynomial-presentation invariance lemma, applied to this surjection and the given $P\\twoheadrightarrow R_A$, makes $K$ pseudo-coherent over $Q_A$. Its bounded-above finite-free representative supplies an integer $b$ with $H^i(K)=0$ for $i>b$.",
+   "uses": [
+    "lem-sfb-polynomial-presentation-pseudocoherence-invariance",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+   }
+  },
+  {
+   "text": "For $n=b+1$ take $D=B$, $L=0$ in $D(R)$ and $\\gamma=0$. Its normalized scalar-action map is $0\\to K$ and its cone is $K$, hence has zero cohomology in degrees $i\\geq n$. We induct downwards on $n$, maintaining: $D$ is finite type over $B$, $B\\to D\\to A$ is a factorization, $L\\in D(R_D)$ has bounded finitely generated cohomology, and the cone of $\\theta_D=\\mu_K(1\\otimes\\gamma):A\\otimes_D^{\\mathbf L}L\\to K$ has $H^i=0$ for $i\\geq n$. No transition map between successive models is part of the invariant.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+   }
+  },
+  {
+   "text": "Consider a stage of the invariant. The rings $D$ and $Q_D$ are Noetherian by finite-type permanence. Restrict $L$ along the surjection $Q_D\\twoheadrightarrow R_D$. Each cohomology module is still finitely generated over $Q_D$ (the same generators work) and is zero outside the same interval. The Noetherian pseudo-coherence criterion therefore gives a bounded-above finite-free $Q_D$-complex $E$ representing this restriction. Each term is free over $D$, since the monomials are a $D$-basis of $Q_D$. The bounded-above flat-complex lemma makes $E$ K-flat over $D$ as well as over $Q_D$. Thus $A\\otimes_D E=Q_A\\otimes_{Q_D}E$ represents the source of the $Q_A$-linear extension--restriction counit composite $\\theta_Q$ associated to $\\gamma$. It is bounded-above finite free over $Q_A$, so is pseudo-coherent. After forgetting to $Q_D$, this map has the same underlying derived scalar-action map as $\\theta_D$: restriction of $\\gamma$ is used, and both counits send an ordinary scalar tensor $a\\otimes k$ to $ak$. Equivalently, resolve $A$ over $D$ for both counits; the comparison to the ordinary tensor is the augmentation followed by this multiplication. Hence their cones have the same underlying cohomology groups. No $R_A$-module structure on the derived tensor source is asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+   }
+  },
+  {
+   "text": "Let $C_Q=\\operatorname{Cone}(\\theta_Q)$ in $D(Q_A)$. Both its source and target are pseudo-coherent. Apply the equivalence with $m$-pseudo-coherence for every $m$ and the ring cone lemma (source parameter $m+1$, target parameter $m$); it follows that $C_Q$ is $m$-pseudo-coherent for every $m$. The invariant and step 3 give $H^i(C_Q)=0$ for $i\\geq n$. In particular it vanishes for $i>n-1$; the finite-top-cohomology lemma with $m=n-1$ makes $H^{n-1}(C_Q)$ a finitely generated $Q_A$-module. This is a finiteness assertion over the polynomial ring, not over the generally non-Noetherian coefficient ring $A$.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-sc-cone-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+   }
+  },
+  {
+   "text": "Apply single-degree coefficient cone cancellation with base ring $D$, algebra $S=R_D$, the surjection $Q_D\\twoheadrightarrow R_D$, the existing $L,\\gamma$, and parameter $n-1$. Step 3 verifies its Noetherian base hypothesis, and step 4 verifies its two cone hypotheses. Since $R_D$ is finite type over $D$ and $(R_D)\\otimes_D A=R_A$, all its rings and the target are the required ones. Obtain a finite type $D$-algebra $D'$ factoring to $A$, a bounded finite-cohomology $L'$ over $(R_D)\\otimes_D D'=R\\otimes_B D'$, and $\\gamma'$ whose normalized scalar-action cone vanishes for $i\\geq n-1$. A finite generating list for $D/B$ followed by a finite generating list for $D'/D$ generates $D'$ over $B$. The result is exactly the induction invariant at $n-1$; its Noetherianity at the next iteration follows again from finite-type permanence.",
+   "uses": [
+    "lem-sfb-single-degree-coefficient-cone-cancellation",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+   }
+  },
+  {
+   "text": "If $a\\leq b+1$, perform the preceding improvement $b+1-a$ times, a nonnegative integer; if $a>b+1$, keep the zero initial stage. The final stage has cone cohomology zero for every $i\\geq a$. Its $D,L,\\gamma$ have precisely the stated algebra factorization and bounded finitely generated cohomology. The map is always the normalized $\\mu_K(1\\otimes\\gamma)$ required by the item, because cancellation returns that same formula. The polynomial ring was only a tool for verifying top-obstruction finiteness; the conclusion concerns the cone in $D(R_D)$ as stipulated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polynomial-presentation-pseudocoherence-invariance",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology",
+  "lem-sfb-single-degree-coefficient-cone-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-written finite descending induction for the affine prerequisite of the unnumbered Kiehl assertion after Tag 0CSD; supporting ring statements: Tags 065H, 066E, 064U, 064R, 064S and 064K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[Dd]escente|finite.window",
+   "results": "Hits read: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherent complex finite degree approximation by derived scalar extension of bounded finite modules over a Noetherian algebra stage",
+   "results": "Hits read: CommRingCat.moduleCatExtendScalarsPseudofunctor, instFinitePresentationTensorProduct, ModuleCat.extendRestrictScalarsAdj, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars, comonadicExtendScalars, Algebra.Extension.cotangentComplex, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "Hits read: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relatively pseudo coherent complex of modules over R tensor B A with R finite type over a Noetherian B, approximate derived scalar extension by a bounded coherent complex at a finite B algebra stage",
+   "results": "Hits read: AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, Algebra.Smooth.exists_finiteType, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, localCohomology.diagram, Submodule.exists_fg_of_baseChange_eq_zero, instFinitePresentationTensorProduct, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent module complex over a polynomial ring with a finite type algebra action has a bounded finite module model through any fixed range after descending coefficients to a finite Noetherian algebra",
+   "results": "Hits read: Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite, Algebra.FinitePresentation.of_finiteType, FGModuleRepr, AlgHom.FinitePresentation.of_finiteType, Module.FinitePresentation.of_finite_of_finitePresentation, Module.finitePresentation_of_finite, RingHom.FinitePresentation.of_finiteType, FGModuleRepr.instFiniteRepr. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a relatively pseudo coherent complex over a finite type algebra by derived scalar extension from a finite Noetherian coefficient algebra in any upper cohomological window",
+   "results": "{\"t\": \"2026-10-23T20:43:43Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate a relatively pseudo coherent complex over a finite type algebra by derived scalar extension from a finite Noetherian coefficient algebra in any upper cohomological window\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"de9d7607baa8fba0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|coefficient.?window|[Dd]escente",
+   "results": "{\"t\": \"2026-10-23T20:45:42Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|coefficient.?window|[Dd]escente\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent finite upper cohomology window relatively pseudo coherent complex finite type coefficient algebra with nonflat derived tensor",
+   "results": "{\"t\": \"2026-10-23T20:45:43Z\", \"tool\": \"leansearch\", \"query\": \"Descent finite upper cohomology window relatively pseudo coherent complex finite type coefficient algebra with nonflat derived tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"ContinuousCohomology.MultiInd.complex\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"692899c6e0ef9006\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary cone, cochain, injective-factorization or scalar-flatness statements, not finite coefficient cancellation; source hits read at the returned modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T20:45:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Affine algebra prerequisite, retaining the prescribed finite type algebra action and the derived scalar-action map.",
+   "via": [
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-affine-coefficient-window-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement and its nonflat normalized map unchanged. Gave a finite downward induction, proving polynomial pseudo-coherence and top-cone finiteness at every stage with existing nodes. Isolated only the genuinely non-elementary one-degree coefficient cancellation as a statement-only prerequisite; unlike the item it assumes a previous model and a finite top obstruction and asserts one improvement. Primary Kiehl descente source remains WANTED.",
+  "blueprint": "Retains the inherited direct-images (3) / Kiehl prerequisite route in blueprint.from.place. The ancestor tool returns None, consistently with the inherited field. Latest blueprint and imported-blueprint searches found no equivalent affine coefficient assertion. No chapter or unit record changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian ring cohomology criterion 066E, needed for the polynomial representative of the coefficient model, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat module-complex K-flatness, required to compute nonflat coefficient tensor without a flat ring-map assumption."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic ring pseudo-coherence criterion 064U, used only to apply the cone and top-finiteness tools at each integer."
+   },
+   {
+    "node": "lem-sc-cone-pseudo-coherent",
+    "why": "Generic ring cone lemma 064R, establishing the obstruction complex is m-pseudo-coherent."
+   },
+   {
+    "node": "lem-sc-finite-cohomology",
+    "why": "Generic top-cohomology finite-generation theorem 064S over the polynomial ring; the unit gives no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-a5a2dda2f",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a5a2dda2f (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-single-degree-coefficient-cone-cancellation, every cited statement, the parent lem-sfb-prescribed-envelope-relative-sheaf-descente (steps 4-5), and perfect.tex 0CSD with the following Kiehl remark. That remark states no descente lemma; both nodes are agent-formulated, claim no numbered theorem, and list Kiehl as WANTED. The item's statement is unchanged. Step 1: 065H applied to two A-algebra surjections A[t]->R_A and Q_A->R_A gives K pseudo-coherent over Q_A and a bound b. Step 2: zero model at n=b+1, with the invariant stated explicitly. Step 3: D and Q_D are Noetherian (00FN). 066E gives a finite-free Q_D-resolution E, which is D-free and so K-flat by 064K; hence A(x)^L_D L = Q_A(x)_{Q_D}E is pseudo-coherent, and theta_Q agrees with theta_D after forgetting to Q_D. Step 4: 064U and 064R make the cone m-pseudo-coherent for every m, and 064S at m=n-1 gives finite H^{n-1} over Q_A, with no Noetherian assumption on Q_A. Step 5: every hypothesis of the new node is supplied, and S'=R(x)_B D' with D' finite type over B. Step 6: finite induction, with the case a>b+1 handled. The tool uses (066E, 064K, 064U, 064R, 064S) are generic ring lemmas; accepted. The new node is statement-only and self-contained, its stmt_deps exist, and its blueprint and searches are present. It is the induction step, not a restatement of the item; the closest nodes (two-open locality, finite-cone-free-model, finite-localization-free-step) are not duplicates. I tested it on four cases: A finite type over D (tau^{>=n}K works), L=0, D=k[x], S=k with A=k[x,z_i]/(xz_i) (the hypothesis forces Ann(x) to be finitely generated and Tor_1 can then be killed), and the Z->F_p and k[x]/x^2 cases. No counterexample. Residual risk recorded in review.md: the lemma omits pseudo-coherence of K, so its future proof must control the S'(x)^L_S L versus D'(x)^L_D L difference above degree n. The hypotheses do imply that K is n-pseudo-coherent. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativeAffineCoefficientWindowLift",
+  "declaration": "ModuleCat.relativeAffineCoefficientWindowLift",
+  "file": "lean/Sheaf/Algebra/Homology/RelativeAffineCoefficientWindowLift.lean",
+  "statement": "theorem relativeAffineCoefficientWindowLift (B A R : Type u) [CommRing B] [CommRing A] [CommRing R] [IsNoetherianRing B] [Algebra B A] [Algebra B R] [Algebra.FiniteType B R] (r : ℕ) (p : @AlgHom A (MvPolynomial (Fin r) A) (R ⊗[B] A) _ _ _ _ Algebra.TensorProduct.rightAlgebra) (hp : Function.Surjective p) (K : DerivedCategory (ModuleCat.{u} (R ⊗[B] A))) (hK : DerivedCategory.IsPseudoCoherent ((derivedRestrictScalars (@AlgHom.toRingHom A (MvPolynomial (Fin r) A) (R ⊗[B] A) _ _ _ _ Algebra.TensorProduct.rightAlgebra p)).obj K)) (a : ℤ) : ∃ (D : Type u) (_ : CommRing D) (_ : Algebra B D) (_ : Algebra D A) (_ : IsScalarTower B D A), Algebra.FiniteType B D ∧ ∃ (L : DerivedCategory (ModuleCat.{u} (R ⊗[B] D))) (γ : L ⟶ (derivedRestrictScalars (Algebra.TensorProduct.map (AlgHom.id B R) (IsScalarTower.toAlgHom B D A)).toRingHom).obj K), (∃ c b : ℤ, ∀ i : ℤ, i < c ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (R ⊗[B] D)) i).obj L)) ∧ (∀ i : ℤ, Module.Finite (R ⊗[B] D) ((DerivedCategory.homologyFunctor (ModuleCat.{u} (R ⊗[B] D)) i).obj L)) ∧ ∃ (T : DerivedCategory (ModuleCat.{u} A)) (η : (derivedRestrictScalars (Algebra.TensorProduct.includeRight : D →ₐ[B] R ⊗[B] D).toRingHom).obj L ⟶ (derivedRestrictScalars (algebraMap D A)).obj T), IsDerivedBaseChange η ∧ ∃ (θ : T ⟶ (derivedRestrictScalars (Algebra.TensorProduct.includeRight : A →ₐ[B] R ⊗[B] A).toRingHom).obj K) (C : DerivedCategory (ModuleCat.{u} A)) (ι : (derivedRestrictScalars (Algebra.TensorProduct.includeRight : A →ₐ[B] R ⊗[B] A).toRingHom).obj K ⟶ C) (δ : C ⟶ T⟦(1 : ℤ)⟧), (η ≫ (derivedRestrictScalars (algebraMap D A)).map θ = (derivedRestrictScalars (Algebra.TensorProduct.includeRight : D →ₐ[B] R ⊗[B] D).toRingHom).map γ ≫ (derivedRestrictScalarsCompIso (f := (Algebra.TensorProduct.includeRight : D →ₐ[B] R ⊗[B] D).toRingHom) (g := (Algebra.TensorProduct.map (AlgHom.id B R) (IsScalarTower.toAlgHom B D A)).toRingHom) rfl ≪≫ Functor.mapDerivedCategoryNatIso (restrictScalarsCongr (congrArg AlgHom.toRingHom (Algebra.TensorProduct.map_comp_includeRight (AlgHom.id B R) (IsScalarTower.toAlgHom B D A)))) ≪≫ (derivedRestrictScalarsCompIso (f := algebraMap D A) (g := (Algebra.TensorProduct.includeRight : A →ₐ[B] R ⊗[B] A).toRingHom) rfl).symm).hom.app K) ∧ Triangle.mk θ ι δ ∈ distTriang _ ∧ ∀ i : ℤ, a ≤ i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj C)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical restriction-square transport is the inline composite of derivedRestrictScalarsCompIso, mapDerivedCategoryNatIso (restrictScalarsCongr w), and the inverse composition isomorphism. The universal unit and transpose equation specify the actual derived tensor/scalar-action composite. The cancellation theorem remains a proof dependency only. Its cone bound is tested after forgetting to A-modules, the same underlying cohomology convention as the cancellation interface. The polynomial presentation explicitly uses TensorProduct.rightAlgebra."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7217ff42e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 110e2ac4. Diffed module vs returned head: only change is imports (cancellation now plain import; public imports for DerivedBaseChange/KFlat/HomologySequence/MvPolynomial/FiniteType/Finiteness.Defs) and inlining coefficientConeRestrictionSquareIso as derivedRestrictScalarsCompIso rfl ≪≫ mapDerivedCategoryNatIso (restrictScalarsCongr w) ≪≫ (derivedRestrictScalarsCompIso rfl).symm with the same f,g,h,k,w — identical to landed helper body (SingleDegreeCoefficientConeCancellation.lean:58-67). Node non-lean fields identical to side-live (5 def stmt_deps; cancellation stays proof_dep); live node has no lean record; lean.statement verbatim. All imports exist on base. Clause audit unchanged and faithful: rightAlgebra A-structure, p surjective r>=0, IsPseudoCoherent over P, all a, D finite type with IsScalarTower B D A, bounded finite H^i L over R_D, gamma to Res K, theta pinned by IsDerivedBaseChange + transpose equation, distinguished cone with a<=i (A-linear test, same underlying D-complex). No hollow defs, sorry only, docstrings with source/blueprint/proof steps, Worker report and Second reading sections present. No compile run (no file changed), no fixes."
+ }
+}

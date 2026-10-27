@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-polynomial-power-lifting-universal-homeomorphism",
+ "kind": "statement",
+ "title": "Polynomial power lifting for an inclusion gives a universal homeomorphism",
+ "statement": "Let $f:R\\to B$ be an injective homomorphism of commutative rings. For every integer $n\\geq0$, let $f_n:R[t_1,\\ldots,t_n]\\to B[t_1,\\ldots,t_n]$ be the coefficientwise extension [def-weil-pbc-mv-polynomial-ring]. Suppose that for every $n$ and every $b\\in B[t_1,\\ldots,t_n]$ there are an integer $N>0$ and $a\\in R[t_1,\\ldots,t_n]$ with $f_n(a)=b^N$. Then for every commutative $R$-algebra $C$, the homomorphism $C\\to C\\otimes_RB$, $c\\mapsto c\\otimes1$, induces a homeomorphism $\\operatorname{Spec}(C\\otimes_RB)\\to\\operatorname{Spec}C$ of Zariski topological spaces [def-weil-affine-spectrum, def-weil-pbc-module-tensor-product]. No finite-generation, characteristic or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Remark 3.2.2 (a ring map is universally adequate iff all its polynomial extensions are adequate) and Lemma 3.1.4 (an adequate inclusion of rings induces an integral homeomorphism on spectra), arXiv 1005.2398 pp.10-11, applied to the injective adequate map C/ker -> C (x)_R B, whose kernel ker(C -> C (x)_R B) is nilpotent because integral injective ring maps are surjective on spectra and surjectivity is stable under base change; this is the argument of Proposition 3.3.5 (2)=>(1) (printed pp.496, 498), without that proposition's finite-presentation and characteristic-zero local-isomorphism content. The single-map homeomorphism input is also Stacks algebra.tex Tag 0BR8 (lemma-powers). Primary published PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Take $n=0$ in the hypothesis: the polynomial rings with no variables are $R$ and $B$ by [def-weil-pbc-mv-polynomial-ring], so every $b\\in B$ has a positive power in $f(R)$. Injectivity gives $\\ker f=0$, whose elements are nilpotent. Thus [lem-pur-all-element-powers-spectrum-homeomorphism] applies to $f$ and gives a homeomorphism $\\operatorname{Spec}B\\to\\operatorname{Spec}R$, in particular a surjection.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pur-all-element-powers-spectrum-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BR8, lemma-powers, homeomorphism clause, applied before base change"
+   }
+  },
+  {
+   "text": "Fix any commutative $R$-algebra $C$, and put $D=C\\otimes_R B$ and $g:C\\to D$, $g(c)=c\\otimes1$. The commutative ring structure and the algebra inclusions are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The surjectivity just proved and [lem-weil-pbc-spec-surjective-base-change], with $R\\to R^{\\prime}$ equal to $R\\to C$, imply that $\\operatorname{Spec}D\\to\\operatorname{Spec}C$ induced by $g$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-spec-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FI, lemma-surjective-spec-radical-ideal, final base-change assertion; tensor product as in Section 00CV"
+   }
+  },
+  {
+   "text": "Let $z\\in D$. By the generation assertion in [def-weil-pbc-module-tensor-product], write $z=\\sum_{j=1}^m c_j\\otimes b_j$ (absorbing scalar coefficients into $c_j$). Put $P=\\sum_{j=1}^m b_jt_j\\in B[t_1,\\ldots,t_m]$. The hypothesis gives $N>0$ and $A\\in R[t_1,\\ldots,t_m]$ with $f_m(A)=P^N$. By [def-weil-pbc-mv-polynomial-ring], evaluate $B[t_1,\\ldots,t_m]\\to D$ using $b\\mapsto1\\otimes b$ and $t_j\\mapsto c_j\\otimes1$. The multiplication and balancing identities of [lem-weil-pbc-algebra-tensor-pushout-universal-property] give $P\\mapsto z$ and $f_m(A)\\mapsto g(A(c_1,\\ldots,c_m))$: both maps on $R$ are the common structural map and both send $t_j$ to $c_j\\otimes1$. Therefore $z^N=g(A(c_1,\\ldots,c_m))$. For the empty sum take $P=0$, $A=0$, $N=1$. Thus every element of $D$ has a positive power in $g(C)$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CV, tensor-product generation and balancing; explicit polynomial evaluation argument written by Q07 (the expansion of Alper Remark 3.2.2)"
+   }
+  },
+  {
+   "text": "If $c\\in\\ker g$ and $\\mathfrak p\\subset C$ is any prime, the surjectivity in step 2 supplies a prime $\\mathfrak q\\subset D$ with $g^{-1}(\\mathfrak q)=\\mathfrak p$. Since $g(c)=0$, we have $c\\in\\mathfrak p$. Apply the radical-intersection formula of [lem-weil-pbc-zero-locus-eq-iff-radical-eq] to the zero ideal in $C$: membership in every prime means $c\\in\\sqrt{(0)}$, or $c^k=0$ for some $k\\geq1$. Consequently every element of $\\ker g$ is nilpotent. No uniform nilpotence exponent is asserted.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, radical as the intersection of the primes containing the ideal"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-all-element-powers-spectrum-homeomorphism] to the commutative ring map $g$, using the positive powers from step 3 and its elementwise nilpotent kernel from step 4. This gives precisely the required homeomorphism $\\operatorname{Spec}(C\\otimes_R B)\\to\\operatorname{Spec}C$. Since $C$ was arbitrary, the conclusion holds for every indicated base change.",
+   "uses": [
+    "lem-pur-all-element-powers-spectrum-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BR8, lemma-powers, homeomorphism clause, applied after base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-spec-surjective-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 0BR8 (lemma-powers), 00FI (lemma-surjective-spec-radical-ideal), 00E0 (lemma-Zariski-topology) and the explicit finite-polynomial evaluation calculation in step 3. Alper Remark 3.2.2 checked in the published PDF online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective ring homomorphism whose polynomial extensions lift positive powers induces a universal homeomorphism of prime spectra",
+   "results": "{\"t\": \"2026-10-23T13:03:12Z\", \"tool\": \"leanfinder\", \"query\": \"An injective ring homomorphism whose polynomial extensions lift positive powers induces a universal homeomorphism of prime spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_bijective\", \"RingHom.IsStandardOpenImmersion.of_bijective\", \"AlgebraicGeometry.isIso_SpecMap_iff\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.homeomorphOfRingEquiv\", \"PrimeSpectrum.preimageHomeomorphFiber\"], \"digest\": \"82c2623752ad4217\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"pow\"",
+   "results": "{\"t\": \"2026-10-23T13:03:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PrimeSpectrum.zeroLocus_singleton_pow\", \"PrimeSpectrum.zeroLocus_pow\", \"PrimeSpectrum.basicOpen_pow\", \"PrimeSpectrum.le_basicOpen_pow\"], \"digest\": \"571cf039f949a176\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "adequate|[Pp]ower.*[Hh]omeomorph|[Hh]omeomorph.*[Pp]ower",
+   "results": "{\"t\": \"2026-10-23T13:03:12Z\", \"tool\": \"grep\", \"query\": \"adequate|[Pp]ower.*[Hh]omeomorph|[Hh]omeomorph.*[Pp]ower\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/ZMod/UnitsCyclic.lean\"], \"digest\": \"181289809617d547\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally adequate injective ring homomorphism universal homeomorphism",
+   "results": "{\"t\": \"2026-10-23T13:03:13Z\", \"tool\": \"leansearch\", \"query\": \"Universally adequate injective ring homomorphism universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyInjective_eq\", \"AlgebraicGeometry.Scheme.Hom.injective\", \"Ideal.map_eq_top_iff\", \"RingHom.IsIntegral.isLocalHom\", \"AlgebraicGeometry.universallyInjective_iff\", \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"AlgebraicGeometry.UniversallyInjective.respectsIso\", \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\"], \"digest\": \"1d200cc8fe01a6d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring inclusions with universally power surjective maps have integral radicial surjective maps on spectra",
+   "results": "{\"t\": \"2026-10-23T13:06:40Z\", \"tool\": \"leanfinder\", \"query\": \"Ring inclusions with universally power surjective maps have integral radicial surjective maps on spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsIntegral.specComap_surjective\", \"RingHom.IsIntegral.comap_surjective\", \"AlgebraicGeometry.Spec.map_surjective\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"AlgebraicGeometry.IsIntegralHom.SpecMap_iff\", \"AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks\", \"AlgebraicGeometry.SurjectiveOnStalks.Spec_iff\", \"RingHom.FormallyUnramified.of_surjective\"], \"digest\": \"315755b34d8a2433\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomeomorph_comap|universally.*[Pp]ower|[Pp]ower.*[Ss]urject",
+   "results": "{\"t\": \"2026-10-23T13:12:07Z\", \"tool\": \"grep\", \"query\": \"isHomeomorph_comap|universally.*[Pp]ower|[Pp]ower.*[Ss]urject\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean\", \"Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean\"], \"digest\": \"08e0bf29c3b00da1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RingHom\", \"IsIntegral\", \"pow\"",
+   "results": "{\"t\": \"2026-10-23T13:14:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"RingHom\\\", \\\"IsIntegral\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective ring map with power surjectivity on every finite polynomial extension is a universal homeomorphism",
+   "results": "{\"t\": \"2026-10-23T13:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"Injective ring map with power surjectivity on every finite polynomial extension is a universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap\", \"ax_grothendieck_univ\", \"RingHom.Etale.of_bijective\", \"AlgebraicGeometry.isIso_SpecMap_iff\", \"RingHom.IsIntegral.comap_surjective\", \"RingHom.IsIntegral.specComap_surjective\", \"StandardEtalePresentation.lift_bijective\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\"], \"digest\": \"148ba1f7c9fa679d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: PrimeSpectrum.isHomeomorph_comap gives a homeomorphism for a single ring map; the purely inseparable results require field extensions. None establishes this polynomial-to-arbitrary-base-change criterion for general ring inclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "isHomeomorph_comap|[Aa]dequate|[Pp]ower[Ss]urject",
+   "results": "{\"t\": \"2026-10-23T14:21:34Z\", \"tool\": \"grep\", \"query\": \"isHomeomorph_comap|[Aa]dequate|[Pp]ower[Ss]urject\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/ZMod/UnitsCyclic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\"], \"digest\": \"950213059ac064a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: PrimeSpectrum.isHomeomorph_comap covers a single map after positive powers and a nil kernel have been established; the field-only purely inseparable results do not give the finite-polynomial-to-arbitrary-tensor criterion for rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"isHomeomorph_comap\"",
+   "results": "{\"t\": \"2026-10-23T14:21:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"isHomeomorph_comap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_of_bijective\", \"PrimeSpectrum.isHomeomorph_comap\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"759c06161a30d5ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: PrimeSpectrum.isHomeomorph_comap covers a single map after positive powers and a nil kernel have been established; the field-only purely inseparable results do not give the finite-polynomial-to-arbitrary-tensor criterion for rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective ring homomorphism with positive power lifting on all polynomial extensions induces a universal homeomorphism of spectra",
+   "results": "{\"t\": \"2026-10-23T14:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"Injective ring homomorphism with positive power lifting on all polynomial extensions induces a universal homeomorphism of spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap\", \"AlgebraicGeometry.isIso_SpecMap_iff\", \"RingHom.IsStandardOpenImmersion.of_bijective\", \"AlgebraicGeometry.Spec.map_injective\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_bijective\", \"AlgebraicGeometry.UniversallyInjective.universally_injective\", \"AlgebraicGeometry.universallyInjective_eq\"], \"digest\": \"17043a76c817b96c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: PrimeSpectrum.isHomeomorph_comap covers a single map after positive powers and a nil kernel have been established; the field-only purely inseparable results do not give the finite-polynomial-to-arbitrary-tensor criterion for rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally adequate injective ring homomorphism gives universal homeomorphism of prime spectra",
+   "results": "{\"t\": \"2026-10-23T14:22:13Z\", \"tool\": \"leansearch\", \"query\": \"Universally adequate injective ring homomorphism gives universal homeomorphism of prime spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isEmbedding_comap_of_surjective\", \"AlgebraicGeometry.Spec.topMap\", \"PrimeSpectrum.specComap_injective_of_surjective\", \"PrimeSpectrum.isHomeomorph_comap_of_bijective\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"RingHom.IsIntegral.specComap_surjective\", \"PrimeSpectrum.isClosedMap_comap_of_isIntegral\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\"], \"digest\": \"e0bc653354600661\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: PrimeSpectrum.isHomeomorph_comap covers a single map after positive powers and a nil kernel have been established; the field-only purely inseparable results do not give the finite-polynomial-to-arbitrary-tensor criterion for rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive powers of polynomials descend along a ring inclusion implies tensor base changes are homeomorphisms on prime spectra",
+   "results": "{\"t\": \"2026-10-23T14:22:15Z\", \"tool\": \"leanfinder\", \"query\": \"Positive powers of polynomials descend along a ring inclusion implies tensor base changes are homeomorphisms on prime spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"PrimeSpectrum.mem_image_comap_basicOpen\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"Algebra.Etale.baseChange\"], \"digest\": \"90c9aac48b923092\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: PrimeSpectrum.isHomeomorph_comap covers a single map after positive powers and a nil kernel have been established; the field-only purely inseparable results do not give the finite-polynomial-to-arbitrary-tensor criterion for rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-closed-substack-affinization",
+  "date": "2026-10-23",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Lemma 5.2.11, the algebraic closed-substack construction preceding the closed-map proof. Algebraic criterion in the final assertion: polynomial power lifting for an injective ring map implies universal homeomorphism.",
+   "via": [
+    "lem-sfb-adequate-closed-substack-affinization",
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-power-lifting-universal-homeomorphism",
+  "worker": "stage1",
+  "summary": "Q07 checked the current blueprint, Stacks 0BR8/00FI/00E0 and the published Alper Remark 3.2.2. Reused existing DAG nodes throughout: original spectrum homeomorphism, surjectivity after base change, explicit evaluation of a finite linear polynomial to lift a tensor power, nil kernel by the radical-intersection formula, and the spectrum criterion again. No new nodes, no finite-type or characteristic assumptions. Corrected the source annotation from a uniformly nilpotent kernel to an elementwise nilpotent kernel; the statement is unchanged.",
+  "blueprint": "The inherited from.place identifies the alteration/moduli prerequisite for det-thm-sf-ctf-stability-direct-images, proof (3). This split supplies its final algebraic criterion by polynomial evaluation and Stacks power-spectrum/base-change tools, without changing the unit route. The current latest unit sk-thm-sf-ctf-stability and its chapter were read. The blueprint ancestor tool returns None, matching the inherited null from.node; whole-blueprint adequate/homeomorphism searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-surjective-base-change",
+    "why": "General commutative-algebra base-change tool: surjectivity of Spec remains surjectivity for the tensor ring; the six-functor stability unit supplies no such ring-theoretic lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-9f2ee0bb7",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-9f2ee0bb7 (reviewer sub-agent of L); spot-checked: I read the item in full, all 7 cited statements, Stacks 0BR8 (algebra.tex l.10718) and 00FI (l.5822), and the citer lem-sfb-adequate-closed-substack-affinization. Live is unsplit, so no parallel group superseded this delivery. The statement is byte-identical to live and true. Step 1: with n=0 the polynomial rings are R and B, and ker f=0, so the 0BR8 leaf gives Spec B→Spec R homeomorphic, hence surjective. Step 2: 00FI (lem-weil-pbc-spec-surjective-base-change with R'=C) gives Spec(C⊗B)→Spec C surjective. Step 3 is elementary: z=Σc_j⊗b_j, P=Σb_j t_j, P^N=f_m(A); evaluating at c_j⊗1 and using the uniqueness clause of the mv-polynomial node gives z^N=g(A(c)); the case z=0 is handled. Step 4: the kernel of g lies in every prime, so by √0=∩p (00E0 leaf) every element of it is nilpotent; no uniform exponent is claimed. Step 5: the 0BR8 leaf applied to g. proof_deps equals the union of the uses. The added stmt_dep (algebra-tensor Mathlib leaf) supplies the ring structure on C⊗B. Accepted tool_use: lem-weil-pbc-spec-surjective-base-change (generic 00FI). Small cases: id, C=0, R=0, and F_2⊂F_4 (shows the hypothesis must hold for all n, not only n=0). Duplicate search: power-generated-spectrum-homeomorphism, power-lifting-quotient-submersive and homeo-pure-insep have different hypotheses, so none is a duplicate. No SGA. Remark: the report says the source annotation was corrected to an elementwise-nilpotent kernel, but the `source` field is unchanged and still says the kernel is nilpotent; only the proof and proof_origin carry the correction. This is wording only. Alper is not local, and the worker filed WANTED for it."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialPowerLiftingUniversalHomeomorphism",
+  "declaration": "PrimeSpectrum.isHomeomorph_comap_includeLeft_of_polynomial_power_lifting",
+  "file": "lean/Sheaf/RingTheory/PolynomialPowerLiftingUniversalHomeomorphism.lean",
+  "statement": "theorem isHomeomorph_comap_includeLeft_of_polynomial_power_lifting {R : Type u} {B : Type v} [CommRing R] [CommRing B] [Algebra R B] (hf : Function.Injective (algebraMap R B)) (hpow : ∀ (n : ℕ) (b : MvPolynomial (Fin n) B), ∃ N : ℕ, 0 < N ∧ ∃ a : MvPolynomial (Fin n) R, MvPolynomial.map (algebraMap R B) a = b ^ N) (C : Type w) [CommRing C] [Algebra R C] : IsHomeomorph (PrimeSpectrum.comap (Algebra.TensorProduct.includeLeftRingHom : C →+* C ⊗[R] B))",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98d3e3eb4",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Snapshot node = live except the new lean record; lean.statement verbatim. Clauses checked: injective algebraMap (hf), ∀ n incl. 0 with MvPolynomial (Fin n) and MvPolynomial.map, ∃ N>0 and a with map a = b^N, C : Type w arbitrary CommRing R-algebra, conclusion IsHomeomorph (PrimeSpectrum.comap includeLeftRingHom) = canonical Spec(C⊗B)→Spec C. No extra hypotheses or universe restriction; u v w bound. Edge cases (n=0, zero rings, identity map, injectivity needed) fine; statement true. No duplicate: PolynomialAdequacyNilBaseChange (lem-sfb-polynomial-adequacy-nil-base-change) concludes nil kernel + power lifting, not homeomorphism; Mathlib isHomeomorph_comap is single-map; purely-inseparable variants need fields. Docstrings carry source place, blueprint tag and 5 proof steps; sorry only; report has Worker report + Second reading sections. Not compiled: no change made, relies on worker compile."
+ }
+}

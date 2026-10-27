@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-marked-curve-diagram-model",
+ "kind": "statement",
+ "title": "Descend a marked curve diagram before final shrinking",
+ "statement": "Let f:X→S be separated and finitely presented, η a component generic point, K/κ(η) a finite purely inseparable extension, L_i/K finitely many finite separable field extensions, and A_i→B_i→Spec L_i a specified finite diagram with A_i nonempty open in B_i, B_i smooth proper geometrically irreducible of dimension at most one. Suppose ν₀:∐A_i→X_η×K is a finite surjection compatible with the structure maps, and W₀ is open, dense in each A_i under inverse image, with ν₀ a thickening over W₀. There is an open neighbourhood U of η and finite surjective universally injective g:V→U carrying models T_i,Y_i,B'_i and a finite surjection ν:∐Y_i→X_V, commuting with their structure maps, such that T_i→V is finite etale, Y_i→B'_i is open, and B'_i→T_i is smooth proper. The original A_i,B_i,Spec L_i are recovered by cartesian squares along a specified σ:Spec K→V compatible with the canonical map into S, and the comparison arrows commute with j₀,q₀. There is an open W⊆X_V on which ν is a thickening. For every point s of T_i over η the fibre B'_{i,s} is geometrically connected of dimension at most one and s belongs to the image of the inverse-image marked open in Y_i. No assertion about the other fibres or global marked surjectivity is made. Empty finite families are allowed. [def-pc-scheme] [def-pc-scheme-fibre] [def-sbc-smooth-morphisms] [def-pc-geometrically-irreducible] [def-sbc-first-order-thickening] [def-weil-pbc-finite-purely-inseparable-extension]",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, proof of lemma-make-good-curves: diagram and marked-open descent before final shrinking"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply unmarked finite-diagram descent to the supplied curves and finite surjection, without using W₀ or its properties. Retain the comparison σK, the three component pullback squares, the two compatibility equalities, and the pullback square for ν itself. This supplies all of the required model and generic-fibre properties except the marking.",
+   "uses": [
+    "lem-weil-pbc-unmarked-curve-diagram-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite closed-immersion locus theorem to the cartesian comparison between ν₀ and ν and the open W₀. It gives W on which ν is a closed immersion and whose inverse image contains W₀. Since ν is surjective, its base change over W is surjective; hence this restriction is a thickening.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-immersion-locus",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix i and s in T_i over η. A point z of Spec K maps to η. Since g is universally injective and U→S is an open immersion, t_i(s)=σK(z). The pullback square for T_i supplies zL in Spec L_i mapping to s. The dense inverse image of W₀ in the nonempty A_i contains a point a. The coproduct pullback square and W₀⊆aX⁻¹W imply hA_i(a) lies in the marked inverse image. The two arrow-compatibility equations identify its image in T_i with hT_i(q₀_i(j₀_i(a))). Spec L_i is a singleton, so this equals hT_i(zL)=s. Thus the marked image contains s. This proof is vacuous for n=0 and uses no additional shrinking.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unmarked-curve-diagram-model",
+  "lem-weil-pbc-finite-closed-immersion-locus",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7: unmarked descent followed by the finite-cokernel closed-immersion locus argument; pointwise assembly proved in Lean by H9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Spread a finite diagram of smooth proper curves with a marked open from a generic residue field to an open neighbourhood",
+   "results": "8 hits including spread_out_of_isGermInjective and affine-transition limit APIs; no marked diagram result",
+   "date": "2026-10-25",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a finite diagram of schemes and their coproduct with cartesian comparison squares",
+   "results": "8 hits including finite base-change stability and finite coproducts of schemes; no complete interface",
+   "date": "2026-10-25",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FinitaryPreExtensive.isPullback_sigmaDesc",
+   "results": "1 hit: the general cartesian coproduct comparison",
+   "date": "2026-10-25",
+   "verdict": "base-change ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*locus|closedImmersionLocus|exists.*marked.*diagram; rg marked curve diagram in the library and blueprint",
+   "results": "No exact declaration; existing SpreadMarkedCurveDiagram is the parent. blueprint_refs search marked curve diagram: 0 matches",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SpreadMarkedCurveDiagram",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0GK7, proof of lemma-make-good-curves: Descend a marked curve diagram before final shrinking",
+   "via": [
+    "lem-weil-pbc-spread-marked-curve-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MarkedCurveDiagramModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedCurveDiagramModel.lean",
+  "declaration": "AlgebraicGeometry.exists_marked_curve_diagram_model",
+  "statement": "theorem exists_marked_curve_diagram_model\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (η : S) (hη : ∃ Z ∈ irreducibleComponents S, IsGenericPoint η Z)\n    (K : Type u) [Field K] [Algebra (S.residueField η) K]\n    [Module.Finite (S.residueField η) K] [IsPurelyInseparable (S.residueField η) K]\n    (n : ℕ) (L : Fin n → Type u) [∀ i, Field (L i)] [∀ i, Algebra K (L i)]\n    (A B : Fin n → Scheme.{u}) (j₀ : ∀ i, A i ⟶ B i)\n    (q₀ : ∀ i, B i ⟶ Spec (.of (L i)))\n    (ν₀ : (∐ A) ⟶ pullback (f.fiberToSpecResidueField η)\n      (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) K))))\n    (hν₀ : IsFinite ν₀ ∧ Surjective ν₀)\n    (hcomm : ∀ i, Sigma.ι A i ≫ ν₀ ≫ pullback.snd _ _ =\n      j₀ i ≫ q₀ i ≫ Spec.map (CommRingCat.ofHom (algebraMap K (L i))))\n    (hL : ∀ i, Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i))\n    (hj₀ : ∀ i, IsOpenImmersion (j₀ i) ∧ Nonempty (A i))\n    (hq₀ : ∀ i, Smooth (q₀ i) ∧ IsProper (q₀ i) ∧\n      GeometricallyIrreducible (q₀ i) ∧ topologicalKrullDim (B i) ≤ 1)\n    (W₀ : (pullback (f.fiberToSpecResidueField η)\n      (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) K)))).Opens)\n    (hW₀ : (∀ i, Dense ((Sigma.ι A i ≫ ν₀) ⁻¹' (W₀ : Set _))) ∧\n      IsThickening (pullback.snd ν₀ W₀.ι)) :\n    ∃ (U : S.Opens) (_ : η ∈ U) (V : Scheme.{u}) (g : V ⟶ U.toScheme),\n      IsFinite g ∧ Surjective g ∧ UniversallyInjective g ∧\n      ∃ (T Y Ybar : Fin n → Scheme.{u})\n        (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i)\n        (p : ∀ i, Ybar i ⟶ T i)\n        (ν : (∐ Y) ⟶ pullback f (g ≫ U.ι)),\n        IsFinite ν ∧ Surjective ν ∧\n        (∀ i, Sigma.ι Y i ≫ ν ≫ pullback.snd f (g ≫ U.ι) = j i ≫ p i ≫ t i) ∧\n        (∀ i, IsFinite (t i) ∧ Etale (t i)) ∧\n        (∀ i, IsOpenImmersion (j i)) ∧\n        (∀ i, Smooth (p i) ∧ IsProper (p i)) ∧\n        (∃ (σK : Spec (.of K) ⟶ V)\n          (hA : ∀ i, A i ⟶ Y i) (hB : ∀ i, B i ⟶ Ybar i)\n          (hT : ∀ i, Spec (.of (L i)) ⟶ T i),\n          σK ≫ g ≫ U.ι = Spec.map (CommRingCat.ofHom\n            (algebraMap (S.residueField η) K)) ≫ S.fromSpecResidueField η ∧\n          ∀ i,\n            IsPullback (hA i) (j₀ i ≫ q₀ i ≫\n              Spec.map (CommRingCat.ofHom (algebraMap K (L i))))\n              (j i ≫ p i ≫ t i) σK ∧\n            IsPullback (hB i) (q₀ i ≫\n              Spec.map (CommRingCat.ofHom (algebraMap K (L i)))) (p i ≫ t i) σK ∧\n            IsPullback (hT i) (Spec.map (CommRingCat.ofHom (algebraMap K (L i))))\n              (t i) σK ∧\n            hA i ≫ j i = j₀ i ≫ hB i ∧ hB i ≫ p i = q₀ i ≫ hT i) ∧\n        ∃ W : (pullback f (g ≫ U.ι)).Opens,\n          IsThickening (pullback.snd ν W.ι) ∧\n          ∀ i (s : T i), (t i ≫ g ≫ U.ι) s = η →\n            GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧\n            topologicalKrullDim ((p i).fiber s) ≤ 1 ∧\n            s ∈ Set.range (((Sigma.ι Y i ≫ ν) ⁻¹ᵁ W).ι ≫ j i ≫ p i)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102011-L-3765735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123106-L-1831624",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

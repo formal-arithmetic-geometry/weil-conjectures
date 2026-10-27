@@ -76,7 +76,32 @@
   "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      549,
+      596
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -104,35 +129,37 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X$ be a separated curve of finite type over an algebraically closed field\n$k$ (so $\\dim X\\leq1$), and let $k'/k$ be an algebraically closed extension.\nSuppose that for every prime $\\ell$ and every constructible sheaf $G$ of\n$\\mathbf F_\\ell$-modules on $X_{\\mathrm{red}}$ the pullback maps\n\n$$\n H^q(X_{\\mathrm{red}},G)\\longrightarrow\n H^q((X_{\\mathrm{red}})_{k'},G_{k'})\n$$\n\nare isomorphisms for all $q$. Then for every torsion sheaf $F$ on $X_{\\Et}$\nthe pullback maps $H^q(X,F)\\to H^q(X_{k'},F_{k'})$ are isomorphisms for all\n$q$. The same holds with the hypothesis only for primes\n$\\ell\\neq\\operatorname{char}k$ and the conclusion only for $F$ prime to\n$\\operatorname{char}k$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be an algebraically closed field and let $\\Lambda$ be a finite\ncommutative ring. Suppose that for every reduced curve $X$ over $k$ (separated\nof finite type, $\\dim X\\leq1$), every prime $\\ell$ and every constructible\nsheaf $G$ of $\\mathbf F_\\ell$-modules on $X_{\\Et}$, the eight assertions\n$\\mathcal C(X,G)$ of [def-weil-pbc-eight-curve-assertions] hold. Then\n$\\mathcal C(C,F)$ holds for every curve $C$ over $k$ and every torsion sheaf\n$F$ of $\\Lambda$-modules on $C_{\\Et}$, with cohomology that of the underlying\nabelian sheaf.",
   "proof": [
    {
-    "text": "The reduction map $r:X_{\\mathrm{red}}\\to X$ is a universal homeomorphism.\nThe site equivalence sends $F$ to $r^{-1}F$, preserves covering families, and\ntherefore identifies the cochain complexes computing all cohomology groups.\nIt also commutes with the corresponding reduction after extending $k$.",
-    "uses": [],
-    "elementary": null
+    "text": "The reduction map $r:C_{\\mathrm{red}}\\to C$ is a universal homeomorphism\n([lemma-weil-pbc-universal-homeomorphism-site-equivalence]). Base change\nalong $r$ is an equivalence of small etale sites which preserves and reflects\ncovering families ([lemma-weil-pbc-universal-homeomorphism-coverings]); it\nsends $F$ to $r^{-1}F$ and identifies all cohomology groups, the restriction\nmaps to opens, and, since $(C_{\\mathrm{red}})_{k'}\\to C_{k'}$ is again a\nuniversal homeomorphism, the pullback maps to algebraically closed\nextensions. Affineness, properness, constructibility and the torsion\nconditions are unchanged. So $\\mathcal C(C,F)$ follows from\n$\\mathcal C(C_{\\mathrm{red}},r^{-1}F)$, and we may assume $C$ reduced.",
+    "uses": [
+     "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+     "lemma-weil-pbc-universal-homeomorphism-coverings"
+    ],
+    "elementary": false
    },
    {
-    "text": "The etale topos of the noetherian scheme $X$ is coherent. Given finitely\nmany local sections of $F$ on quasi-compact etale objects and finitely many\nrelations, their image generates a constructible subsheaf: refine by a\nfinite stratification on which the finitely generated stalk groups are\nconstant. Ordered by inclusion, these constructible subsheaves $F_\\lambda$\nform a filtered system with $F=\\varinjlim_\\lambda F_\\lambda$. The preceding\ncontinuity lemma gives the natural square\n\n$$\n\\begin{CD}\n\\varinjlim_\\lambda H^q(X,F_\\lambda) @>{\\sim}>> H^q(X,F)\\\\\n@VVV @VVV\\\\\n\\varinjlim_\\lambda H^q(X_{k'},F_\\lambda|) @>{\\sim}>>\nH^q(X_{k'},F|).\n\\end{CD}\n$$\n\nThus comparison for every constructible $F_\\lambda$ implies comparison for\n$F$.",
-    "uses": [],
-    "elementary": null
+    "text": "*Constructible sheaves.* Let $F$ be a constructible torsion sheaf of\n$\\Lambda$-modules. A finite stratification with finite stalks gives one\nexponent $N$ annihilating every stalk, hence $NF=0$. Write\n$N=\\prod_{\\ell\\mid N}\\ell^{r_\\ell}$. Bezout supplies integers $e_\\ell$\nwhich are $1$ modulo $\\ell^{r_\\ell}$ and $0$ modulo the other prime powers.\nThe mutually orthogonal endomorphisms $e_\\ell:F\\to F$ sum to the identity and\ngive the decomposition\n\n$$\nF\\xrightarrow{\\sim}\\bigoplus_{\\ell\\mid N}F[\\ell^{r_\\ell}],\n\\qquad s\\longmapsto(e_\\ell s)_\\ell,\n$$\n\nwhose inverse is addition; the summands are constructible, and split short\nexact sequences together with [lemma-weil-pbc-eight-curve-devissage] reduce\n$\\mathcal C(C,F)$ to the summands. If $\\ell^rF=0$, use the exact\nkernel–quotient sequence\n\n$$\n0\\longrightarrow F[\\ell]\\xrightarrow{\\iota}F\n\\xrightarrow{\\pi}F/F[\\ell]\\longrightarrow0.\n$$\n\nIts outer terms are constructible, and the quotient is killed by\n$\\ell^{r-1}$ because $\\ell^{r-1}s\\in F[\\ell]$. The sheaf $F[\\ell]$ is a\nconstructible sheaf of $\\mathbf F_\\ell$-modules (its stalks are finite,\n$\\Lambda$ being finite), so it satisfies the eight assertions by hypothesis.\nInduction on $r$ and [lemma-weil-pbc-eight-curve-devissage], which passes the\neight assertions from the outer terms of a short exact sequence to the middle\nterm, give $\\mathcal C(C,F)$.",
+    "uses": [
+     "lemma-weil-pbc-eight-curve-devissage"
+    ],
+    "elementary": false
    },
    {
-    "text": "Fix a constructible $F$. A finite stratification with finite stalks gives\none exponent $N$ annihilating every stalk, hence $NF=0$. Write\n$N=\\prod_{\\ell\\mid N}\\ell^{r_\\ell}$. Bezout supplies integers\n$e_\\ell$ which are $1$ modulo $\\ell^{r_\\ell}$ and $0$ modulo the other prime\npowers. The mutually orthogonal endomorphisms $e_\\ell:F\\to F$ sum to the\nidentity and give the explicit decomposition\n\n$$\nF\\xrightarrow{\\sim}\\bigoplus_{\\ell\\mid N}F[\\ell^{r_\\ell}],\n\\qquad s\\longmapsto(e_\\ell s)_\\ell,\n$$\n\nwhose inverse is addition. It remains to treat one summand.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "If $\\ell^rF=0$, use the exact kernel–quotient sequence\n\n$$\n0\\longrightarrow F[\\ell]\\xrightarrow{\\iota}F\n\\xrightarrow{\\pi}F/F[\\ell]\\longrightarrow0.\n$$",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "The quotient is killed by $\\ell^{r-1}$ because\n$\\ell^{r-1}s\\in F[\\ell]$. Pullback to $X_{k'}$ preserves this kernel,\nquotient, and both maps. Induction on $r$, with the base case $\\ell F=0$ given by the hypothesis,\nand the five lemma applied to the two long exact cohomology sequences,\nlinked by the pullback maps (as in the short-exact devissage lemma), prove\nthe comparison for $F$. If $F$ is prime to $\\operatorname{char}k$, so are its\nconstructible subsheaves, and only primes $\\ell\\neq\\operatorname{char}k$\noccur in the decomposition.",
-    "uses": [],
-    "elementary": null
+    "text": "*Torsion sheaves.* The etale topos of the noetherian scheme $C$ is coherent.\nGiven finitely many local sections of $F$ on quasi-compact etale objects and\nfinitely many relations, their image generates a constructible subsheaf:\nrefine by a finite stratification on which the finitely generated stalk\ngroups are constant. Ordered by inclusion, these constructible subsheaves\n$F_\\lambda$ form a filtered system with $F=\\varinjlim_\\lambda F_\\lambda$;\nif $F$ is $p$-primary or of torsion prime to $\\operatorname{char}k$, so is\nevery $F_\\lambda$. By [lemma-weil-pbc-curve-filtered-cohomology], and\nnaturality of the restriction and pullback maps, every class of\n$H^q(C,F)$, $H^q(U,F|_U)$ or $H^q(C_{k'},F|)$ comes from some stage and a\nclass dying in the colimit dies at a later stage. Hence the vanishing\nassertions, the bijectivity of the pullback maps and the surjectivity of\n$H^2(C,F)\\to H^2(U,F|_U)$ pass from the $F_\\lambda$ to $F$. The finiteness\nassertions only concern constructible $F$, which is covered by the previous\nstep.",
+    "uses": [
+     "lemma-weil-pbc-curve-filtered-cohomology"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

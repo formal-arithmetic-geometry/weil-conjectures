@@ -1,0 +1,277 @@
+{
+ "id": "lem-sf-qbar-localization-common-stage",
+ "kind": "statement",
+ "title": "Common-stage descent of localization data and cross-stage orthogonality",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber], [def-weil-algebraic-closure]. Let $X$ be a separated finite-type $k$-scheme, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. For $T=X,U,Z$ use the raw rational categories $D^b_c(T,E)$ for finite coefficient extensions $E/\\mathbf Q_\\ell$ contained in $\\overline{\\mathbf Q}_\\ell$ and their common-stage category $D^b_c(T,\\overline{\\mathbf Q}_\\ell)$, with objects $(E,K)$ and morphisms represented over a common finite extension [def-weil-rationalization-karoubi], [def-weil-algebraically-closed-coefficients]. Write $T^T_{L/E}$ for scalar extension and $q_{E,T}$ for the finite-stage inclusion.\n\nThe canonical scalar comparisons for $i^*,j^*,i_*,j_!$ and their adjunctions descend to exact functors and adjunctions $j_!\\dashv j^*$, $i^*\\dashv i_*$ on these common-stage categories, with operations as specified in [def-weil-derived-pullback-tensor-hom], [def-weil-derived-direct-image], [def-weil-integral-rational-qbar-compact-support]. Their units and counits are represented by the finite-stage units and counits. They obey the unit, associator and shift comparisons of scalar extension; in particular these constructions are independent of further enlargement of the representing field.\n\nIf a finite-stage distinguished triangle completes the open counit and closed unit for $K\\in D^b_c(X,E)$, its image under $q_{E,X}$ is distinguished and completes the prescribed maps for $(E,K)$. Every object of the common-stage category is of this form, after enlarging $E$ when necessary. For objects represented at possibly different stages, $N=(E,N_E)$ on $U$, $M=(F,M_F)$ on $Z$, and every $m\\in\\mathbf Z$, the comparison of Hom groups is\n$$\\operatorname{Hom}(j_!N[m],i_*M)\\cong\\varinjlim_{L\\supset E,F}\\operatorname{Hom}_{D^b_c(X,L)}\\bigl(j_!T^U_{L/E}N_E[m],i_*T^Z_{L/F}M_F\\bigr)=0.$$\nHere the transition maps are scalar extension with the canonical functor comparisons; every group in the displayed colimit is zero. These assertions apply to all common-stage morphisms, including those not represented at either original field. No Karoubi completion or claim of a single integral lattice for arbitrary common-stage data is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Algebraically closed-stage paragraph: coherent descent, exact finite-stage triangle and filtered-colimit cross-stage vanishing; original detailed step 11."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compact-support-coefficient-action",
+  "def-sf-rational-localization-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain finite coefficient families and normalized finite adjunction maps from finite localization coherence. Apply exact descent to each of the four functors.",
+   "uses": [
+    "lem-sf-qbar-localization-finite-coherence",
+    "lem-sf-qbar-localization-exact-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The rational and algebraically closed coefficient stages; finite-stage descent detail in steps 1--5 of lem-sf-qbar-localization-common-stage"
+   }
+  },
+  {
+   "text": "Descend the compatible units and counits using the proved stage-system natural transformation constructor. Their triangle identities are included finite identities. Shift compatibility follows by precomposing with each stage inclusion, then cancelling its invertible shift comparison. The finite adjunction shift square gives that restricted square.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The rational and algebraically closed coefficient stages; finite-stage descent detail in steps 1--5 of lem-sf-qbar-localization-common-stage"
+   }
+  },
+  {
+   "text": "The canonical pullback functors agree by their unique object and representative characterization. Inclusion exactness takes each conditional finite completion to the asserted distinguished triangle. Every object is its literal stage pair.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The rational and algebraically closed coefficient stages; finite-stage descent detail in steps 1--5 of lem-sf-qbar-localization-common-stage"
+   }
+  },
+  {
+   "text": "At every common field rational orthogonality makes the operation-shifted Hom group a subsingleton. The canonical source and target isomorphisms induce Iso.homCongr, so every raw representative group is a subsingleton. Every raw direct-limit element is represented and therefore zero; the existing Hom coordinate equivalence makes all raw arrows agree. The shifted-pair isomorphism gives the desired shifted Hom vanishing. Every element of the displayed operation direct limit is likewise zero. The unique additive equivalence of the zero groups satisfies the representative formula, and the directed-system equations hold in the subsingleton targets.",
+   "uses": [
+    "lem-sf-rational-localization-triangle-orthogonality",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The rational and algebraically closed coefficient stages; finite-stage descent detail in steps 1--5 of lem-sf-qbar-localization-common-stage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-qbar-localization-finite-coherence",
+  "lem-sf-qbar-localization-exact-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-rational-localization-triangle-orthogonality",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The rational and algebraically closed coefficient stages; finite-stage descent detail in steps 1--5 of lem-sf-qbar-localization-common-stage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of open closed localization functors adjunction maps and triangles through finite coefficient fields, with cross-stage Hom vanishing in the filtered colimit category of algebraic l-adic sheaves",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Adjunction.derivedε_fac_app; LightCondMod.LocallyConstant.adjunction; localCohomology.diagram; CategoryTheory.Adjunction.localization; Condensed.profiniteSolidCounit; CondensedMod.LocallyConstant.adjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Orthogonal subcategories remain orthogonal in a filtered colimit of triangulated categories when objects are represented at different stages",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated; CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂LeftOrthogonal; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂RightOrthogonal; CategoryTheory.ObjectProperty.instIsTriangulatedRightOrthogonalOfIsStableUnderShiftInt; CategoryTheory.ObjectProperty.isColocal_trW; CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt; CategoryTheory.ObjectProperty.isLocal_trW",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common finite coefficient field descent for algebraic closure adic localization triangles and cross Hom vanishing",
+   "results": "[leansearch] OK 8 hit(s); PadicAlgCl.isAlgebraic; AlgebraicGeometry.Scheme.residue_descResidueField; AlgebraicClosure.isAlgClosed; AdicCompletion.liftAlgHom; IsDedekindDomain.FiniteAdeleRing.algebraMap; IsAdicComplete.liftAlgHom; Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing; AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered, CategoryTheory.Functor",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.IsFiltered.cocone; CategoryTheory.IsFiltered.of_isRightAdjoint; CategoryTheory.IsFiltered.cocone_nonempty; CategoryTheory.IsFiltered.of_cocone_nonempty; CategoryTheory.IsFiltered.iff_cocone_nonempty; CategoryTheory.IsFiltered.of_right_adjoint; CategoryTheory.Limits.PreservesFilteredColimitsOfSize.mk; CategoryTheory.Limits.PreservesFilteredColimitsOfSize.preserves_filtered_colimits; CategoryTheory.Limits.ReflectsFilteredColimitsOfSize.mk; CategoryTheory.Limits.ReflectsFilteredColimitsOfSize.reflects_filtered_colimits; AddCommMonCat.FilteredColimits.M; AddCommMonCat.FilteredColimits.colimit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(common.stage|cross.stage|[Qq]bar|[Qq]lbar).*(triang|orthogon|vanish)|(orthogon|vanish).*filteredColimit",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(common.stage|cross.stage|[Qq]bar).*(localization|adjunction|orthogon)|(orthogon|adjunction).*filteredColimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern generic adjunctions, module scalar functors or triangulated orthogonals, not the specified raw constructible coefficient-stage localization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction and orthogonality descend to filtered colimit categories over finite coefficient fields",
+   "results": "8 hits: CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Localization.HasProductsOfShapeAux.adj, CategoryTheory.IsFiltered.of_right_adjoint, CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.Limits.colimitLimitIso.congr_simp, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern generic adjunctions, module scalar functors or triangulated orthogonals, not the specified raw constructible coefficient-stage localization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern generic adjunctions, module scalar functors or triangulated orthogonals, not the specified raw constructible coefficient-stage localization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension functors and adjunction units descend to the category of pairs over finite coefficient fields, with Hom groups a filtered colimit",
+   "results": "8 hits: Condensed.profiniteSolidCounit, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.unit_app, comonadicExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern generic adjunctions, module scalar functors or triangulated orthogonals, not the specified raw constructible coefficient-stage localization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed recollement orthogonality in a filtered colimit of triangulated categories, with functors computed on common stage representatives",
+   "results": "8 hits: CategoryTheory.ObjectProperty.isColocal_trW, CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated, CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂RightOrthogonal, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂LeftOrthogonal, CategoryTheory.ObjectProperty.isLocal_trW, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Subcategory.W_iff'",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern generic adjunctions, module scalar functors or triangulated orthogonals, not the specified raw constructible coefficient-stage localization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "def mkOfUnitCounit|def mkOfHomEquiv|theorem map_bijective_of_isTriangulated|lemma map_bijective_of_isTriangulated",
+   "results": "2 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.mkOfHomEquiv and mkOfUnitCounit construct an adjunction from supplied natural data; neither provides constructible coefficient descent, exactness or orthogonality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-open-closed-triangle-all-stages",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Algebraically closed-stage paragraph: coherent descent, exact finite-stage triangle and filtered-colimit cross-stage vanishing; original detailed step 11.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-qbar-localization-common-stage",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing rational localization, coefficient coherence and abstract additive pair descent. Verified the actual adjunction maps, shift comparisons, exactness on common-stage triangles and conjugation of cross-stage Hom transition maps. No new nodes; no comparison with the distinct PBC integral category is assumed. Clarified finite fields to finite coefficient extensions of Q_l, as required by the cited definition.",
+  "blueprint": "The algebraically closed-stage paragraph of prop-sf-open-closed-triangle-all-stages.proof.md: steps 1-5 supply the coherent operations and compatible transformations; step 6 supplies the finite-stage triangle; steps 7-8 give the cross-stage Hom colimit and vanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coefficient comparisons preserving tensor associators, units and counits, used to normalize these immersion operations; the localization unit has no separate coefficient-coherence theorem."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Exact scalar transition functors on the raw rational categories, a generic coefficient tool."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Canonical composition comparisons for the raw rational scalar transitions, a generic coefficient tool."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Abstract additive pair-category descent, including compatible transformations and equations; instantiated directly on the raw rational stages, without replacing the unit localization route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-fb5ecc807",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-fb5ecc807 (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, along with every cited node statement and the main-20261015 'Algebraically closed stage' paragraph of prop-sf-open-closed-triangle-all-stages.proof.md. The delivery adds no new nodes. The only statement change replaces 'finite fields E ⊂ Q̄_ℓ' with 'finite coefficient extensions E/Q_ℓ ⊂ Q̄_ℓ'. That is correct: a field of finite cardinality has characteristic ℓ and cannot sit inside Q̄_ℓ, and the new wording matches def-weil-algebraically-closed-coefficients. Nothing is weakened. Not citing prop-weil-pbc-descent-functors, prop-weil-pbc-scalar-extension and thm-weil-pbc-verdier-axioms is justified. Those nodes are stated for P_T over def-weil-pbc-rational-category, the PBC integral category, while the item works with raw rationalizations of def-weil-derived-complete-integral-detailed. lem-fd-common-stage-comparison-descent shows that comparing the two needs explicit equivalences, so a direct citation would be a C4 error. The abstract lem-sbc-coherent-pair-functor-descent is a correct black-box tool for the same descent. I accept the declared tool_uses: lem-fix-operation-reduction, scalar-extension exactness and the pair-descent lemma. Step by step: (1) the rational sibling's hypotheses match exactly (X separated finite type over F̄_q, ℓ≠p, raw rationalization) and it gives Hom(j_!N[m],i_*M)=0 for arbitrary rational objects. (2) lem-fix-operation-reduction covers rationalization and the common-stage transitions of the cited definition, with identity and tower equations and preservation of units and counits; (j,id_X) gives j_! by the compact-support definition; the degreewise shift argument is concrete. (3) The descent formula b⁻¹Φ(u)b matches the item, and the T_{E/E} unitor normalization is an elementary re-presentation. (4) q_L(A_LΔ_L)=A(q_LΔ_L) on the nose, so exactness follows from the definition of distinguished triangles. (5) The compatible-transformation clause is satisfied, so the triangle identities descend. (6) The finite-stage triangle image is conditional, and its existence is supplied by the parent. (7) a_L/b_L conjugation is compatible with transitions by the tower equations. (8) Every colimit element has a representative at some stage, where the group is zero. Edge cases checked: E=F=L, N or M zero, U or Z empty, negative m, the EF upper bound, and morphisms first represented at a larger field. No duplicates: prop-sf-localization-all-stages, lem-fd-common-stage-comparison-descent, def-weil-operation-exchange-coefficient-descent and the sbc coherence nodes all state different things. Advisories: the associator pentagon is proved only in the proof of lem-weil-scalar-extension-composition, but the cited definition presupposes it; the report mentions a citations.json that is not on the branch."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfQbarLocalizationCommonStage",
+  "declaration": "WeilConjectures.sfQbarLocalizationCommonStage",
+  "declarations": [
+   "WeilConjectures.SfQbarLocalizationExactAction",
+   "WeilConjectures.sfQbarLocalizationShiftedPair",
+   "WeilConjectures.sfQbarLocalizationShiftedIso",
+   "WeilConjectures.SfQbarLocalizationCommon",
+   "WeilConjectures.SfQbarLocalizationStageHom",
+   "WeilConjectures.sfQbarLocalizationSourceIso",
+   "WeilConjectures.sfQbarLocalizationTargetIso",
+   "WeilConjectures.sfQbarLocalizationToOperation",
+   "WeilConjectures.sfQbarLocalizationToRaw",
+   "WeilConjectures.sfQbarLocalizationHomTransition",
+   "WeilConjectures.SfQbarLocalizationHomColimit",
+   "WeilConjectures.SfQbarLocalizationHomComparison",
+   "WeilConjectures.SfQbarLocalizationDescent",
+   "WeilConjectures.sfQbarLocalizationResidueInvertible",
+   "WeilConjectures.sfQbarLocalizationCommonStage"
+  ],
+  "file": "lean/Sheaf/Paper/SfQbarLocalizationCommonStage.lean",
+  "statement": "theorem sfQbarLocalizationCommonStage\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)\n    [IsClosedImmersion i] [IsOpenImmersion j]\n    (hij : Set.range i.base = (Set.range j.base)ᶜ) :\n    letI : Z.Over (Spec (.of D.k)) := ⟨i ≫ X ↘ Spec (.of D.k)⟩\n    letI : U.Over (Spec (.of D.k)) := ⟨j ≫ X ↘ Spec (.of D.k)⟩\n    letI : i.IsOver (Spec (.of D.k)) := ⟨rfl⟩\n    letI : j.IsOver (Spec (.of D.k)) := ⟨rfl⟩\n    letI : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian\n      (X ↘ Spec (.of D.k))\n    letI : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace\n      (X ↘ Spec (.of D.k))\n    letI : IsNoetherian X := {}\n    letI : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace\n    letI : TopologicalSpace.NoetherianSpace Z := i.isEmbedding.isInducing.noetherianSpace\n    letI : QuasiCompact j := inferInstance\n    letI : LocallyOfFiniteType (Z ↘ Spec (.of D.k)) := inferInstanceAs\n      (LocallyOfFiniteType (i ≫ X ↘ Spec (.of D.k)))\n    letI : QuasiCompact (Z ↘ Spec (.of D.k)) := inferInstance\n    letI : LocallyOfFiniteType (U ↘ Spec (.of D.k)) := inferInstanceAs\n      (LocallyOfFiniteType (j ≫ X ↘ Spec (.of D.k)))\n    letI : QuasiCompact (U ↘ Spec (.of D.k)) := inferInstance\n    letI : ∀ x : X, Invertible (l : X.residueField x) :=\n      sfQbarLocalizationResidueInvertible l D hl X (X ↘ Spec (.of D.k))\n    letI : ∀ z : Z, Invertible (l : Z.residueField z) :=\n      sfQbarLocalizationResidueInvertible l D hl Z (Z ↘ Spec (.of D.k))\n    letI : ∀ t : U, Invertible (l : U.residueField t) :=\n      sfQbarLocalizationResidueInvertible l D hl U (U ↘ Spec (.of D.k))\n    Nonempty (SfQbarLocalizationDescent l Ω D hl i j)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "R1: the closed stage morphism is pinned at every field to the normalized ordinary closedRationalImage, and its beta is the adjunction mate of the inverse canonical closed-pullback beta. It is no longer the compact-support action at ofIsProper i. Finite adjunction and shift HEqs, pullback pins, triangle and object clauses, and the representative-characterized Hom DirectLimit are retained. R2: the six unchanged rational-localization definitions are cited through def-sf-rational-localization-data; the rational-localization existence theorem remains in proof_deps only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-feaf10a6d",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery repairs both faults returned at a16022f00064. R1: closedAction is now a StageSystem.Morphism with Φ E = (finiteLocalization E).closedRationalImage (holds by rfl). β.hom = mateEquiv of the finite closed adjunctions applied to (closedPull.β h).inv; the direction was checked against Mathlib mateEquiv and the library's DirectImageAdjunction.mateFamily hb convention. The adjunction and shift are pinned by HEq to the sibling's normalized closedRationalAdjunction and closedPush.rationalShift, so there is no unprovable equality of chosen limit vertices and no free map. R2: new def-sf-rational-localization-data, existing:true on the unchanged landed SfRationalLocalizationOrthogonality module. It lists exactly the six plain defs, its statement field is verbatim the live signature, all 10 stmt_deps are cited in its text, and they equal the sibling theorem's. The item now cites it in stmt_deps; the theorem is kept in proof_deps only and the item's Lean uses neither the theorem nor any choice from it. The previous advisory on the sibling's free instance fields is resolved: the IsOver fields determine the Over instances. Clause list, edge cases, universes, verbatim statement, docstrings and the sorry-only proof were all checked and are unchanged otherwise. Advisories: inherited stmt_dep owners in the unchanged sibling module (integralComparisonPullbackCounit, integralComparisonSystemUnit, coefficientSequenceLimit); two public imports may be only transitively needed. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261025T101416-L-3690709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

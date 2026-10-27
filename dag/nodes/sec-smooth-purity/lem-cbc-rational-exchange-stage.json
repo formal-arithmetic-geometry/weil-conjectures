@@ -1,0 +1,175 @@
+{
+ "id": "lem-cbc-rational-exchange-stage",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Naturality and preservation of adjunction-defined maps by coefficient localization; original coefficient-coherence proof step 16.",
+   "via": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unique normalized exchange at a single rational coefficient stage",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a compact-support square of noetherian finite-dimensional schemes $X',X,Y',Y$ on which $\\ell$ is invertible. Let $f:X\\to Y$ be separated of finite type, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$, and compactifications $c=(j,p),c'=(j',p')$ with a specified proper Cartesian square and open Cartesian square [def-cbc-compact-support-square]. Supply normalized families $H,H',P,P'$ [def-cbc-normalized-coefficient-families] for these four operations. For each finite coefficient stage $E$ there is exactly one natural transformation $\\tau_E:H_E \\mathbin{\\cdot} P_{g,E}\\Rightarrow P_{g',E} \\mathbin{\\cdot} H'_E$ (composition in Lean functor order) whose component on every localized integral object $K$ is the localization of the actual completedCompactSupportExchange [def-cbc-completed-exchange-map]. This component equation holds for every finite generating tuple of the coefficient ideal and every intrinsic-completeness witness; its two endpoints belong to the integral constructible complete category. There is no coefficient-stage compatibility assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Naturality and preservation of adjunction-defined maps by coefficient localization; original coefficient-coherence proof step 16."
+ },
+ "stmt_deps": [
+  "def-cbc-normalized-coefficient-families",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-cbc-compact-support-square",
+  "def-cbc-completed-exchange-map",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof": [
+  {
+   "text": "The preserves fields of H,H',P,P' give full-subcategory restrictions of the two integral composites. Whisker the four localization equalities to identify the two rational composites after integral localization. Choose a finite generating tuple and form the integral natural exchange from completeCompactSupportProetale_isIso, using wfConstructible_complete for every object.",
+   "uses": [
+    "def-cbc-normalized-coefficient-families",
+    "def-cbc-completed-exchange-map",
+    "thm-cbc-complete-proetale",
+    "def-wf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Naturality and preservation of adjunction-defined maps by coefficient localization; original coefficient-coherence proof step 16."
+   }
+  },
+  {
+   "text": "The unit-normalized completed open exchange is independent of the generating tuple: restrict the comparison from one complete full domain to another and invoke uniqueness of the same ordinary/unit equation. Consequently its composite with the proper exchange is independent too. The existing private finiteExtension_exchange_generators gives this exact equality.",
+   "uses": [
+    "thm-cbc-finite-extension",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Naturality and preservation of adjunction-defined maps by coefficient localization; original coefficient-coherence proof step 16."
+   }
+  },
+  {
+   "text": "The canonical tensor localization is equivalent to the existing Rationalization category by the tensor-Hom equivalence. It is therefore a localization functor; precomposition with it is full. Extend the integral natural map (after target localization) through this full whiskering functor, conjugating by the four functor equalities. Its component equation is the conjugation HEq lemma; generator independence gives the formula for every tuple. Every rational object is an integral object, so the formula determines all components and NatTrans.ext gives uniqueness.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Naturality and preservation of adjunction-defined maps by coefficient localization; original coefficient-coherence proof step 16."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-completed-exchange-map",
+  "def-cbc-normalized-coefficient-families",
+  "def-weil-pbc-rational-category",
+  "def-wf-tensor-product",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "prop-weil-pbc-rational-transport",
+  "thm-cbc-complete-proetale",
+  "thm-cbc-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Naturality and preservation of adjunction-defined maps by coefficient localization; original coefficient-coherence proof step 16. Precise normalization and localization argument supplied by P5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact compact support and completed pullback form normalized coherent coefficient families; scalar extension intertwines their completed base change exchange",
+   "results": "TestFunction.coe_mk and ordinary PresheafOfModules.pullback; none states normalized completed coefficient families or exchange compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized exact coefficient families for compact support and completed pullback and the compatibility square of localized exchange transformations",
+   "results": "Profinite.NobelingProof.succ_exact, IsLocalizedModule.map_exact, Scheme.Hom.preservesLocalization_normalizationDiagramMap; none has the required categories or specified transformations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*scalar|scalar.*compact.?support|completedPull|coefficientFamily in Mathlib/CategoryTheory; normalized coefficient families in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py searches for coefficient compact support and completed pullback family",
+   "results": "No Mathlib theorem matches. Existing PbcPullbackCoherentFamily supplies a reflector pullback family but not the strict datum completionUnit/localization/shift interface. Existing finiteExtension_compactSupportBaseChange uses the unlifted coefficient datum, not the normalized small-stage families. Generic localization and natural-transformation tools are used in the single-stage proof. No duplicate of these four precise parts was found.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalCompactSupportCoefficientCoherence",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CbcRationalExchangeStage",
+  "file": "lean/Sheaf/Paper/CbcRationalExchangeStage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcRationalExchangeStage_existsUnique",
+  "statement": "theorem cbcRationalExchangeStage_existsUnique\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (H : CbcCompactSupportCoefficientFamily l Ω c)\n    (H' : CbcCompactSupportCoefficientFamily l Ω c')\n    (P : CbcCompletedPullCoefficientFamily l Ω g)\n    (P' : CbcCompletedPullCoefficientFamily l Ω g')\n    (E : Padic.FiniteCoefficientFields l Ω) :\n    ∃! τ : (H.family.base.Φ E ⋙ P.family.base.Φ E) ⟶\n        (P'.family.base.Φ E ⋙ H'.family.base.Φ E),\n      ∀ (K : pbcIntegralStage l Ω X E)\n    (r : ℕ) (a : Fin r → PbcIntegralRing l (pbcFiniteField.{u} l Ω E))\n    (ha : Ideal.span (Set.range a) = (pbcStageDatum.{u} l Ω E).ideal)\n    (hc : cbcCompleteProperty (pbcStageDatum.{u} l Ω E) X r a ha K.obj),\n    ∃ (hs : PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E)\n        ((cbcDerivedOpenShriek (pbcStageDatum.{u} l Ω E) c.i c.isOpenImmersion ⋙\n          (pbcStageDatum.{u} l Ω E).push c.g ⋙\n            (pbcStageDatum.{u} l Ω E).completedPull g).obj K.obj))\n      (ht : PbcIsBoundedConstructibleComplete Y' (pbcStageDatum.{u} l Ω E)\n        (((pbcStageDatum.{u} l Ω E).completedPull g' ⋙\n          cbcDerivedOpenShriek (pbcStageDatum.{u} l Ω E) c'.i c'.isOpenImmersion ⋙\n            (pbcStageDatum.{u} l Ω E).push c'.g).obj K.obj)),\n      HEq (τ.app ((pbcStageLocalization l Ω X E).obj K))\n        ((pbcStageLocalization l Ω Y' E).map\n          (ObjectProperty.homMk (X := ⟨_, hs⟩) (Y := ⟨_, ht⟩)\n            (completedCompactSupportExchange (pbcStageDatum.{u} l Ω E)\n              c c' gbar properSquare openSquare r a ha ⟨K.obj, hc⟩)))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-cbc-rational-exchange-stage",
+  "worker": "P5",
+  "summary": "One strict part of the original coefficient-coherence argument. Its source and full proof are also in the theorem docstring.",
+  "blueprint": "Preserves the original open/proper mate and strict completion normalization route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic Functorial transport to a finite field is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "The generic tensor localization comparison with Rationalization gives fullness of precomposition with integral localization. It constructs only the natural transformation on the fixed raw category, without altering the compact-support or coefficient-coherence route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b299e",
+  "group": "P5",
+  "result": "fix",
+  "landing": "20261025T164027-L-938248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b299e",
+  "group": "P5",
+  "result": "fix",
+  "landing": "20261025T164027-L-938248",
+  "kind": "interface",
+  "note": "independent cc review: item rationalCompactSupportCoefficientCoherence (statement byte-identical) and its 4 new split statements against def-cbc-normalized-coefficient-families (β/functors pinned), the parent 16-step plan and the unit sk-thm-sf-compatibility (realized empty); axioms of the stage theorem and of localization_full in scratch compiles"
+ }
+}

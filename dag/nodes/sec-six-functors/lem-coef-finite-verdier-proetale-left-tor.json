@@ -1,0 +1,148 @@
+{
+ "id": "lem-coef-finite-verdier-proetale-left-tor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-finite-verdier",
+   "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tor bound on the reduced pro-etale Verdier dual",
+ "statement": "Fix the finite-field datum D, a prime l distinct from its characteristic, a finite extension E of Q_l, a separated finite-type scheme X over its algebraic closure and dim X <= d for d in N [def-weil-finite-field-fiber, def-weil-finite-type-morphism, def-weil-proper-morphism]. At positive levels n+1 >= m+1 use the actual coefficient quotient and scalar extension S, and the pro-etale dualizing object W_n obtained by comparison pullback from the counit-defined etale omega_n [lem-coef-finite-dualizing, lem-weil-finite-duality-site-comparison]. Let K be finite-Tor constructible in the fixed ModuleCat pro-etale presentation [def-weil-finite-tor-amplitude] and have ordered Tor interval [a,b] [def-weil-proetale-tor-amplitude]. Then S(RHom(K,W_n)), after the published fixed-module intrinsic realization, has Tor interval [-b-2d,-a] over level m+1. This statement only concerns the left endpoint, and asserts no Hom comparison or equations for it.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-coef-finite-dualizing",
+  "lem-weil-finite-duality-site-comparison",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "def-coef-finite-verdier-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale finite-Tor constructible representative Kprime of K with the same [a,b] interval, using site descent and the fixed-module intrinsic realization equivalence. Evaluation-defined site Hom comparison identifies the pro-etale dual with pullback of the etale dual of Kprime, for the specified transported target.",
+   "uses": [
+    "lem-coef-finite-hom-site-descent",
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound"
+   }
+  },
+  {
+   "text": "Verdier preservation bounds the etale dual by [-b-2d,-a] and makes it constructible. This interval is ordered since a<=b and d>=0. The bounded flat constructible K-flat model stays in the interval after the coefficient quotient, by the flat-model scalar-extension theorem.",
+   "uses": [
+    "lem-weil-verdier-preservation-strata",
+    "lem-coef-finite-hom-domain-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound"
+   }
+  },
+  {
+   "text": "The scalar/site isomorphism identifies scalar extension of the pro-etale dual with comparison pullback of that reduced etale dual. Site descent preserves its Tor interval. Transport through these isomorphisms and the intrinsic realization gives the required HasProEtaleTorAmplitude predicate, testing all degree-zero module sheaves. This also handles zero objects, the empty scheme and identity quotients.",
+   "uses": [
+    "lem-coef-finite-hom-site-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-hom-site-descent",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-verdier-preservation-strata",
+  "lem-coef-finite-hom-domain-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Hom comparison, evaluation, double-dual, quotient cocycle, and final Tor bound"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient change Verdier duality evaluation double dual morphisms and Tor amplitude",
+   "results": "8 hits: Module.Dual.eval, eval_naturality, evalEquiv, and finite-module perfect pairing lemmas. No sheaf-derived Verdier scalar compatibility or Tor bound.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars commutes with Verdier duality evaluation and double dual morphism",
+   "results": "8 hits including ModuleCat.homEquiv_extendScalarsComp and rigid tensorLeftHomEquiv evaluation lemmas; no derived sheaf statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Verdier\"",
+   "results": "12 generic Verdier localizing-subcategory declarations, no geometric duality.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dual.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*dual",
+   "results": "Mathlib hits are Verdier triangulated structures or Module.Dual.baseChange; none state either finite-sheaf compatibility diagrams or a Tor-amplitude bound.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteCoefficientVerdier",
+  "date": "2026-10-25",
+  "group": "Q2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteVerdierProEtaleLeftTor",
+  "file": "lean/Sheaf/SixFunctors/FiniteVerdierProEtaleLeftTor.lean",
+  "declaration": "WeilConjectures.finiteVerdier_proEtale_left_tor",
+  "statement": "theorem finiteVerdier_proEtale_left_tor\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (d : ℕ) (X : Scheme.{u})\n    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    {n m : ℕ} (h : m ≤ n)\n    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X)\n      (ModuleCat.{u + 1} (finiteDualizingCoeff l E n))))\n    (hK : finiteTorConstructibleProEtaleModule l E (n + 1) (Nat.succ_pos n) X K)\n    (a b : ℤ) (hab : a ≤ b)\n    (ht : Scheme.HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))\n      ((ProEtale.finiteCoefficientIntrinsicRealization X\n        (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.obj K) a b) :\n    Scheme.HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (m + 1))\n      ((ProEtale.finiteCoefficientIntrinsicRealization X\n        (Padic.coefficientExtensionRing l E (m + 1))).mapDerivedCategory.obj\n        ((pbcFixedScalarExtension (Scheme.ProEt.topology X)\n          (finiteDualizingQuotient l E h)).obj\n          (((finiteVerdierProEtaleHomAt (finiteDualizingCoeff l E n) X).obj (op K)).obj\n            ((comparisonUpperStar (ModuleCat.{u + 1} (finiteDualizingCoeff l E n))\n              X).mapDerivedCategory.obj (finiteDualizingEtaleTerm l E D X n)))))\n      (-b - 2 * (d : ℤ)) (-a)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bdaf5",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T101301-L-3678653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bdaf5",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T101301-L-3678653",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new sorry modules/nodes + def relocation (byte-identical vs clone) against node cor-coef-finite-verdier, change record, unit realized (empty); sandbox compile of 4 delivered modules + 4 direct importers all exit 0; axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

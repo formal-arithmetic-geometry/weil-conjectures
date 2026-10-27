@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-symbol-dilated-cutoff-estimates",
+ "kind": "statement",
+ "title": "Uniform seminorm estimate for a single symbol with a dilated frequency cutoff",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol estimates of [def-sfb-symbol-pseudodifferential-operators]. Fix integers $m\\geq1$, $p,q\\geq0$. For an integer $s$, a smooth map $a:\\mathbf R^m\\times\\mathbf R^m\\to\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q)$ is in the uniform symbol class $S^s$ if every quantity\n$$P_{s,n}(a)=\\max_{|\\alpha|,|\\beta|\\leq n}\\sup_{x,\\xi}(1+|\\xi|)^{-s+|\\beta|}\\|\\partial_x^\\alpha\\partial_\\xi^\\beta a(x,\\xi)\\|$$\nis finite, for $n\\in\\mathbf N$. Let $\\theta:\\mathbf R^m\\to\\mathbf R$ be smooth, equal to $0$ on $|\\xi|\\leq1$ and to $1$ on $|\\xi|\\geq2$. Put $\\theta_R(\\xi)=\\theta(\\xi/R)$ for $R\\geq1$. For every $n\\in\\mathbf N$ there is a finite $C_n\\geq1$, depending only on $m,n,\\theta$, such that for every $s,t\\in\\mathbf Z$ with $t\\geq s$, every $a\\in S^s$ and every $R\\geq1$, the product $(x,\\xi)\\mapsto\\theta_R(\\xi)a(x,\\xi)$ belongs to $S^t$ and satisfies\n$$P_{t,n}(\\theta_R a)\\leq C_n P_{s,n}(a)(1+R)^{s-t}.$$",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n$. There are only finitely many pairs of multi-indices $\\alpha,\\beta$ with $|\\alpha|,|\\beta|\\le n$, so it suffices to bound each weighted derivative. Write $d=t-s\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.7 p.7, reduction to finitely many derivatives in a fixed seminorm."
+   }
+  },
+  {
+   "text": "For each $|\\gamma|\\le n$, apply [lem-sfb-symbol-cutoff-scaled-derivatives]. Thus $\\partial^\\gamma\\theta_R$ has size at most $A_n(1+R)^{-|\\gamma|}$; when $|\\gamma|>0$ it is supported in the annulus $R\\le|\\xi|\\le2R$, while $\\theta_R$ itself vanishes for $|\\xi|\\le R$. The same cited statement gives smoothness of $\\theta_R$, needed in step 3.",
+   "uses": [
+    "lem-sfb-symbol-cutoff-scaled-derivatives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.7 p.7, scaled cutoff derivative estimate and support."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-symbol-product-derivative-bound] with $u=v=m$ and $h=\\theta_R$. It gives smoothness of the product and the explicit mixed Leibniz formula\n$$\\partial_x^\\alpha\\partial_\\xi^\\beta(\\theta_Ra)=\\sum_{\\gamma\\leq\\beta}\\binom\\beta\\gamma(\\partial^\\gamma\\theta_R)(\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a),$$\ntogether with the norm bound by the corresponding sum of products. In particular only derivatives of $a$ with $|\\alpha|,|\\beta-\\gamma|\\leq n$ occur.",
+   "uses": [
+    "lem-sfb-symbol-product-derivative-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.7 p.7, Leibniz formula after the scaled cutoff estimate."
+   }
+  },
+  {
+   "text": "Put $M=P_{s,n}(a)$, $d=t-s\\geq0$ and $k=|\\gamma|$. By the definition of $M$, the norm of $\\partial_x^\\alpha\\partial_\\xi^{\\beta-\\gamma}a$ is at most $M(1+|\\xi|)^{s-|\\beta|+k}$. The weighted norm of a Leibniz summand is therefore at most\n$$A_nM(1+R)^{-k}(1+|\\xi|)^{k-d}.$$\nFor $k=0$ its support has $|\\xi|\\geq R$, giving $(1+|\\xi|)^{-d}\\leq(1+R)^{-d}$. For $k>0$ its support has $R\\leq|\\xi|\\leq2R$, giving $(1+|\\xi|)^k\\leq2^k(1+R)^k$ and $(1+|\\xi|)^{-d}\\leq(1+R)^{-d}$. Thus every weighted summand is bounded by $2^nA_nM(1+R)^{-d}$, including points where it vanishes. Summing the coefficients gives $\\sum_{\\gamma\\leq\\beta}\\binom\\beta\\gamma=2^{|\\beta|}\\leq2^n$, by the coordinatewise binomial formula. Take $C_n=4^nA_n\\geq1$. This is independent of $s,t,a,R,p,q$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-symbol-cutoff-scaled-derivatives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.7 p.7, substitution of cutoff and symbol estimates into the Leibniz formula."
+   }
+  },
+  {
+   "text": "Step 3 gives smoothness. Step 4 bounds every weighted mixed derivative with $|\\alpha|,|\\beta|\\leq n$ by the same number, uniformly in $x,\\xi$. Taking their suprema and finite maximum proves $P_{t,n}(\\theta_Ra)\\leq C_nP_{s,n}(a)(1+R)^{s-t}$. Since this holds for each $n$ and $a\\in S^s$, all the defining seminorms of $\\theta_Ra$ in $S^t$ are finite. Hence $\\theta_Ra\\in S^t$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "§3.7 p.7, conclusion that the cutoff product has the required symbol-order estimates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-symbol-cutoff-scaled-derivatives",
+  "lem-sfb-symbol-product-derivative-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multiplication of a symbol by a smooth high frequency cutoff has seminorms tending to zero in every strictly higher symbol order",
+   "results": "{\"t\": \"2026-10-24T04:58:11Z\", \"tool\": \"leansearch\", \"query\": \"Multiplication of a symbol by a smooth high frequency cutoff has seminorms tending to zero in every strictly higher symbol order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.seminormAux_smul_le\", \"SmoothBumpFunction.contMDiff_smul\", \"smoothingSeminorm\", \"SmoothPartitionOfUnity.contMDiff_smul\", \"tendsto_smoothingFun_of_eq_zero\", \"smoothingSeminormSeq\", \"Asymptotics.SuperpolynomialDecay.param_mul\", \"analyticOrderAt_smul_eq_top_of_left\"], \"digest\": \"a1434158b936b8f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap seminorm bounds and decay, smooth multiplication and Landau notation do not give the two-variable symbol seminorm estimate with a radius factor; grep finds no symbol cutoff calculus. Both natural-language phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth symbol multiplied by a cutoff vanishing on a growing ball tends to zero in larger order symbol seminorms",
+   "results": "{\"t\": \"2026-10-24T04:59:32Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth symbol multiplied by a cutoff vanishing on a growing ball tends to zero in larger order symbol seminorms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StrongFEPair.hf_zero'\", \"StrongFEPair.hf_top'\", \"WeakFEPair.hg_top\", \"SchwartzMap.isBigO_cocompact_zpow_neg_nat\", \"SchwartzMap.isBigO_cocompact_zpow\", \"SchwartzMap.isBigO_cocompact_rpow\", \"WeakFEPair.hf_top\", \"SchwartzMap.norm_pow_mul_le_seminorm\"], \"digest\": \"4829ecfc2c2913dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap seminorm bounds and decay, smooth multiplication and Landau notation do not give the two-variable symbol seminorm estimate with a radius factor; grep finds no symbol cutoff calculus. Both natural-language phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Symbol\"",
+   "results": "{\"t\": \"2026-10-24T04:59:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Symbol\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.ParserDescr.symbol\", \"Lean.ParserDescr.nonReservedSymbol\", \"Lean.ParserDescr.unicodeSymbol\", \"Std.Time.DateFormatSymbols\", \"Std.Time.DayPeriodSymbols\", \"Std.Time.DateFormatSymbols.enUS\", \"Std.Time.instInhabitedDayPeriodSymbols\", \"Std.Time.instReprDayPeriodSymbols\"], \"digest\": \"483941f8e9c4ea87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap seminorm bounds and decay, smooth multiplication and Landau notation do not give the two-variable symbol seminorm estimate with a radius factor; grep finds no symbol cutoff calculus. Both natural-language phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "cutoff.*symbol|symbol.*cutoff|symbol.*seminorm|pseudodifferential|asymptoticSummation",
+   "results": "{\"t\": \"2026-10-24T04:59:49Z\", \"tool\": \"grep\", \"query\": \"cutoff.*symbol|symbol.*cutoff|symbol.*seminorm|pseudodifferential|asymptoticSummation\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SchwartzMap seminorm bounds and decay, smooth multiplication and Landau notation do not give the two-variable symbol seminorm estimate with a radius factor; grep finds no symbol cutoff calculus. Both natural-language phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "symbol.*seminorm|symbol.*cutoff|pseudodifferential|iteratedFDeriv.*smul|iteratedFDeriv.*comp.*[Ll]inear",
+   "results": "{\"t\": \"2026-10-24T06:58:07Z\", \"tool\": \"grep\", \"query\": \"symbol.*seminorm|symbol.*cutoff|pseudodifferential|iteratedFDeriv.*smul|iteratedFDeriv.*comp.*[Ll]inear\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\"], \"digest\": \"81cd61bc2864f438\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this symbol estimate: the hits give Schwartz seminorms, smooth bump constructions or full iterated derivative operations, with no two-variable symbol class and radius factor. Source candidates were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth symbol cut off below radius R has larger order seminorm bounded by a power of R",
+   "results": "{\"t\": \"2026-10-24T06:58:07Z\", \"tool\": \"leansearch\", \"query\": \"A smooth symbol cut off below radius R has larger order seminorm bounded by a power of R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothingFun_le\", \"ContDiffBumpBase.ofInnerProductSpace\", \"SchwartzMap.seminorm_le_bound\", \"seminormFromBounded\", \"ContDiffMapSupportedIn.seminorm_eq_bot_of_gt\", \"ContDiffMapSupportedIn.seminorm\", \"SchwartzMap.seminormAux_le_bound\", \"seminormFromBounded_le\"], \"digest\": \"3ba10843bda4efe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this symbol estimate: the hits give Schwartz seminorms, smooth bump constructions or full iterated derivative operations, with no two-variable symbol class and radius factor. Source candidates were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iteratedFDeriv\", \"smul\"",
+   "results": "{\"t\": \"2026-10-24T06:58:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"iteratedFDeriv\\\", \\\"smul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ContinuousMultilinearMap.iteratedFDeriv\", \"ContinuousMultilinearMap.norm_iteratedFDeriv_le'\", \"ContinuousMultilinearMap.iteratedFDerivComponent\", \"ContinuousMultilinearMap.norm_iteratedFDerivComponent_le\", \"ContinuousMultilinearMap.iteratedFDerivComponent_apply\", \"ContinuousMultilinearMap.hasFTaylorSeriesUpTo_iteratedFDeriv\", \"ContinuousMultilinearMap.iteratedFDeriv_eq\", \"ContinuousMultilinearMap.norm_iteratedFDeriv_le\"], \"digest\": \"85231f2fb5ac40d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this symbol estimate: the hits give Schwartz seminorms, smooth bump constructions or full iterated derivative operations, with no two-variable symbol class and radius factor. Source candidates were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform symbol seminorm estimate for multiplication by a dilated smooth high frequency cutoff independent of the symbol orders",
+   "results": "{\"t\": \"2026-10-24T06:58:08Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform symbol seminorm estimate for multiplication by a dilated smooth high frequency cutoff independent of the symbol orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.seminormAux\", \"SchwartzMap.seminormAux_smul_le\", \"SchwartzMap.norm_pow_mul_le_seminorm\", \"SchwartzMap.le_seminormAux\", \"SchwartzMap.one_add_le_sup_seminorm_apply\", \"SchwartzMap.seminormAux_le_bound\", \"SchwartzMap.seminorm_le_bound'\", \"SchwartzMap.le_seminorm'\"], \"digest\": \"c2b9ecedc89e9842\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for this symbol estimate: the hits give Schwartz seminorms, smooth bump constructions or full iterated derivative operations, with no two-variable symbol class and radius factor. Source candidates were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symbol-borel-cutoff",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting cutoff argument in the proof of det-thm-sf-ctf-stability-direct-images (3), Demailly §3.7 p.7: scaled cutoff derivative estimate and Leibniz weighted seminorm calculation.",
+   "via": [
+    "lem-sfb-symbol-borel-cutoff",
+    "lem-sfb-pseudodifferential-asymptotic-sum",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbol-dilated-cutoff-estimates",
+  "worker": "stage1",
+  "summary": "The five-step proof cites a scalar-cutoff derivative/support lemma and a general mixed coordinate Leibniz lemma, both statement-only. The remaining proof is the explicit symbol-weight calculation with C_n=4^n A_n. Full iterated-derivative norm bounds in Mathlib were rejected as an exact match because they do not give the separate mixed frequency orders used here. Checked n=0, R=1, t=s, arbitrary negative orders, zero matrix spaces, and boundary radii.",
+  "blueprint": "The steps realize the supporting cutoff argument in the proof of det-thm-sf-ctf-stability-direct-images (3), specifically Demailly §3.7 p.7: scaled cutoff derivative estimate, Leibniz estimate, and weighted seminorm conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-eb0b6e76e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-eb0b6e76e (reviewer sub-agent of L); spot-checked: PASS; no fixes and no nodes dropped; review.md is written. This is a first split (no 2026-10-21 re-split note): the item had no proof on the base (Q36 snapshot) and its statement is byte-identical. Demailly §3.7 pp.7-8 is not available locally (marked WANTED, proof_origin agent), so I checked every estimate myself. Steps: (1) finitely many (α,β), elementary. (2) lem-sfb-symbol-cutoff-scaled-derivatives gives exactly what is used: θ_R smooth, |∂^γθ_R|≤A_n(1+R)^{-|γ|}, θ_R=0 for |ξ|≤R, and ∂^γθ_R supported in R≤|ξ|≤2R for k>0. (3) lem-sfb-symbol-product-derivative-bound with u=v=m, h=θ_R: its hypotheses hold, and it gives the mixed Leibniz formula and norm bound with |β-γ|≤n. (4) Weighted term A_nM(1+R)^{-k}(1+|ξ|)^{k-d}. For k=0, |ξ|>R gives (1+R)^{-d}. For k>0, 1+|ξ|≤2(1+R) on the annulus, and the two factors are handled separately, so the sign of k-d does not matter. The binomial sum is 2^{|β|}≤2^n, so C_n=4^nA_n depends only on m,n,θ. Elementary. (5) Supremum and maximum, smoothness from step 3. Cutoff node is true: ∂^γθ_R=R^{-k}(∂^γθ)(ξ/R), R^{-k}≤2^k(1+R)^{-k}, derivatives vanish off the closed annulus by continuity, and θ is bounded. Product node is the standard multivariate Leibniz rule. Both nodes are generic, strictly smaller than the item, statement-only and self-contained (B1-B4). Tested on m=1, R=1, t=s, large d, negative orders, p=0 or q=0, β=0 and the boundary radii. Duplicates: rg -L for Leibniz, xi/R and dilat over dag/nodes; read the six symbol and Schwartz-cutoff statements and euclidean-smooth-bump; none matches. Mathlib norm_iteratedFDeriv_smul_le and iteratedDeriv_mul are not a one-line specialization (B8). Blueprint from.node null inherited, via extended, same_as []. No SGA, no tool_uses."
+ }
+}

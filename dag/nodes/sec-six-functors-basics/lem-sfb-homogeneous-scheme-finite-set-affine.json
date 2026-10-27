@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-homogeneous-scheme-finite-set-affine",
+ "kind": "statement",
+ "title": "Finite subsets of a schematic homogeneous space have affine neighbourhoods",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a separated finite-type $k$-group scheme [def-sc-group-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $Y$ be a separated finite-type $k$-scheme [def-pc-scheme]. Suppose a $k$-morphism $a:G\\times_kY\\to Y$ defines a left action: $a(1,y)=y$ and $a(g,a(h,y))=a(gh,y)$ on every test scheme. Suppose $o\\in Y(k)$ [def-pc-rational-point] and that its orbit morphism $q:G\\to Y$, $g\\mapsto a(g,o)$, is flat, surjective and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Then every finite subset of the underlying point set of $Y$ is contained in an affine open subscheme of $Y$. This asserts a property of the given scheme $Y$; it does not assert existence of a quotient scheme.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix B, Theorem B.37, Step 2, printed p.605; closed-point formulation extended to finite point sets by closed specialization in a finite-type scheme over a field. The orbit map is an fppf quotient by the stabilizer of o. Step 2 uses only the existing homogeneous scheme, not the quasi-projectivity assumption needed earlier in Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-rational-point"
+ ],
+ "proof": [
+  {
+   "text": "Let $E\\subseteq |Y|$ be finite. If $E=\\varnothing$, the empty open $\\operatorname{Spec}(0)$ suffices. Otherwise, for each $x\\in E$, the Jacobson statement applied to the nonempty closed subset $\\overline{\\{x\\}}$ supplies a point $c_x$ closed in $Y$. Put $S=\\{c_x:x\\in E\\}$. An open containing $c_x$ contains $x$, since opens are stable under generalization. It is therefore enough to find an affine open containing $S$. The finite-type scheme $Y$ is Noetherian (a field is a Noetherian ring). It has finitely many irreducible components; it is quasi-separated because it is separated and finite type over the affine scheme $\\operatorname{Spec}k$. Apply the generic-point affine-neighbourhood lemma to all its component generic points, with the given point $o$. We obtain an affine open $U$ containing those generic points. Thus $U$ is dense in $Y$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lemma-nagata-affine-neighbourhood-generic-points-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  },
+  {
+   "text": "Apply the simultaneous rational-lift lemma to the surjective $k$-morphism $q:G\\to Y$ and $S$. Choose a finite extension $K/k$ and $g_1,\\ldots,g_r\\in G_K(K)$ such that the points $x_j=q_K(g_j)$ are exactly the points of $S_K=p_Y^{-1}(S)$, all $K$-rational. Here $p_Y:Y_K\\to Y$ is the projection. Repetitions do not affect the construction. Finite type of $G$ and $Y$, surjectivity of $q$, and closedness and finiteness of $S$ are exactly the hypotheses of that lemma.",
+   "uses": [
+    "lem-sfb-finite-closed-set-rational-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  },
+  {
+   "text": "For each finite extension $F/k$, the scalar projection $Y_F\\to Y$ is locally the finite-free ring map $A\\to A\\otimes_k F$, hence is finite and flat. The field map $k\\to F$ is finitely presented: choose a finite basis starting with $1$, use a variable for each remaining basis vector, and impose its finitely many multiplication-table relations; these relations reduce every monomial to the basis and give precisely $F$. Thus $\\operatorname{Spec}F\\to\\operatorname{Spec}k$ is flat and locally finitely presented. It is surjective since both spectra have one point; its scheme base changes are surjective by the base-change lemma and open by the flat-lfp openness lemma. In particular $U_K=p_Y^{-1}(U)$ is dense: the image of a nonempty open of $Y_K$ is a nonempty open of $Y$, so meets $U$. The base-changed $q_K$ is likewise surjective and open (the latter follows from the original flat-lfp hypotheses). Therefore $V=q_K^{-1}(U_K)$ is a dense open of $G_K$: every nonempty open has nonempty open image meeting $U_K$.",
+   "uses": [
+    "lem-sfb-finite-scalar-extension-generic-points",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  },
+  {
+   "text": "For $h\\in G_K(K)$, left multiplication $t_h$ and inversion $i$ on $G_K$ are isomorphisms, with inverses $t_{h^{-1}}$ and $i$. Hence each $g_j i(V)$ is dense open. The finite intersection $\\Omega=\\bigcap_{j=1}^r g_j i(V)$ is dense open and nonempty because $G_K$ contains its identity. Finite intersections of dense opens are dense: successively intersect a given nonempty open with each one. The scheme $G_K$ is of finite type over $K$ by finite-type base-change stability; its closed points are dense by the Jacobson statement. Choose a closed point $b\\in\\Omega$. The closed-point residue-field lemma gives a finite extension $L=\\kappa(b)$ of $K$, and the canonical $L$-point of $G_K$ at $b$ gives $g\\in G(L)$ lying in $\\Omega_L$. The extension $L/k$ is finite as a composite of finite-dimensional extensions. This choice works over finite or imperfect fields.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  },
+  {
+   "text": "All the points above $S$ in $Y_L$ are the base changes of the $K$-rational $x_j$: the scheme fibre over a $K$-rational point is $\\operatorname{Spec}K$, whose extension to $L$ is $\\operatorname{Spec}L$. For each $j$, membership $g\\in g_{j,L}i(V_L)$ says $g=g_{j,L}v_j^{-1}$ for an $L$-point $v_j\\in V_L$, equivalently $g_{j,L}=gv_j$. This is valid on $L$-points because inversion and translation are scheme isomorphisms. The action identity gives $q_L(g_{j,L})=a_L(g,q_L(v_j))\\in gU_L$. On $Y_L$, the map $y\\mapsto a_L(g,y)$ is an isomorphism with inverse $y\\mapsto a_L(g^{-1},y)$ by the action axioms. The open $A=gU_L$ is consequently affine and contains the entire finite set $S_L=p^{-1}(S)$, where $p:Y_L\\to Y$. Affineness of $U_L$ follows from the affine scalar-extension formula applied to $U=\\operatorname{Spec}B$: $U_L=\\operatorname{Spec}(B\\otimes_k L)$.",
+   "uses": [
+    "lem-sfb-finite-scalar-extension-generic-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  },
+  {
+   "text": "Use the canonical descent datum of $Y_L=Y\\times_k\\operatorname{Spec}L$ along $p_0:\\operatorname{Spec}L\\to\\operatorname{Spec}k$. On test schemes, transport changes the $L$-structure and retains the map to $Y$; the identity and cocycle laws are identities of these projections. In the norm-shrinking lemma take its base $X=\\operatorname{Spec}L$, $Y=\\operatorname{Spec}k$, and its $V=Y_L$. Its cartesian relation object $R=Y_L\\times_k\\operatorname{Spec}L$ identifies with $Y_L\\times_Y Y_L$; source and target become the two projections $s,t:R\\to Y_L$. Since $p_0$ is finite, flat and locally of finite presentation by Step 3, its hypotheses hold. The set $S_L$ is finite, is contained in $A$, and is saturated: $s^{-1}(p^{-1}S)=t^{-1}(p^{-1}S)$ since $ps=pt$. The cited lemma supplies an affine open $W\\subseteq A$ containing $S_L$ with $s^{-1}W=t^{-1}W$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-pd-descent-norm-affine-shrinking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  },
+  {
+   "text": "The map $p:Y_L\\to Y$ is finite, flat, surjective and quasi-compact by Step 3 (on an affine chart its inverse image is one affine). Apply invariant-open image descent to $W\\hookrightarrow Y_L$ and $p$. It gives an open $B=p(W)\\subseteq Y$, with $p^{-1}B=W$ and $W\\simeq B\\times_k\\operatorname{Spec}L$ as schemes. Since $p$ is surjective and $W$ contains $p^{-1}S$, one has $S\\subseteq B$. The singleton $\\{\\operatorname{Spec}L\\to\\operatorname{Spec}k\\}$ is an fpqc covering: it is flat, and its sole affine source covers the sole point of its affine target. Apply fpqc descent of affine morphisms to $B\\to\\operatorname{Spec}k$; its pullback is the affine scheme $W$. Hence $B$ is affine, contains $S$, and therefore contains $E$ by Step 1. No quotient-existence theorem, smoothness, or quasi-projectivity has been used.",
+   "uses": [
+    "lem-trf-invariant-open-image-pullback",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem B.37, Step 2, printed p.605"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lemma-nagata-affine-neighbourhood-generic-points-exists",
+  "lem-sfb-finite-closed-set-rational-lifts",
+  "lem-sfb-finite-scalar-extension-generic-points",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-closed-point-field",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-pd-descent-norm-affine-shrinking",
+  "lem-trf-invariant-open-image-pullback",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem B.37, Step 2, printed p.605"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homogeneous|transitive|finite.*affine.*neigh",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"grep\", \"query\": \"homogeneous|transitive|finite.*affine.*neigh\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"2a42b4b301985aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine covers and quasi-affine/projective standard opens do not supply one affine open containing an arbitrary finite subset of a homogeneous scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme with a transitive algebraic group action has an affine open containing any finite collection of points",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"leansearch\", \"query\": \"A finite type scheme with a transitive algebraic group action has an affine open containing any finite collection of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\"], \"digest\": \"1fd46ddcd75638d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine covers and quasi-affine/projective standard opens do not supply one affine open containing an arbitrary finite subset of a homogeneous scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine covers and quasi-affine/projective standard opens do not supply one affine open containing an arbitrary finite subset of a homogeneous scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite subset of a separated finite type homogeneous scheme under an algebraic group over a field has an affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T14:56:55Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite subset of a separated finite type homogeneous scheme under an algebraic group over a field has an affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.AffineOpenCover\"], \"digest\": \"373f3106467b0a41\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine covers and quasi-affine/projective standard opens do not supply one affine open containing an arbitrary finite subset of a homogeneous scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with a faithfully flat orbit map from an algebraic group has the AF property that finite point sets lie in affine opens",
+   "results": "{\"t\": \"2026-10-23T14:56:56Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with a faithfully flat orbit map from an algebraic group has the AF property that finite point sets lie in affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.AffineSpace.instIsAffine\"], \"digest\": \"a37258d94c88c094\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine covers and quasi-affine/projective standard opens do not supply one affine open containing an arbitrary finite subset of a homogeneous scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite subset of a homogeneous scheme under an algebraic group is contained in an affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T18:05:33Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite subset of a homogeneous scheme under an algebraic group is contained in an affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\"], \"digest\": \"0d2a729cefd86a2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general scheme covers and affine-open neighbourhoods of individual points; no simultaneous homogeneous-space neighbourhood theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite collection of points of a scheme with a faithfully flat orbit morphism from a group scheme lies in an affine open",
+   "results": "{\"t\": \"2026-10-23T18:07:03Z\", \"tool\": \"leansearch\", \"query\": \"Every finite collection of points of a scheme with a faithfully flat orbit morphism from a group scheme lies in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.AffineCover.covers\", \"AlgebraicGeometry.instIsAffineToSchemeValOpensMemSetAffineOpens\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\"], \"digest\": \"aa8ad645ed83f2c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general scheme covers and affine-open neighbourhoods of individual points; no simultaneous homogeneous-space neighbourhood theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-23T18:06:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general scheme covers and affine-open neighbourhoods of individual points; no simultaneous homogeneous-space neighbourhood theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|transitive|finite.*affine.*neigh",
+   "results": "{\"t\": \"2026-10-23T18:06:36Z\", \"tool\": \"grep\", \"query\": \"homogeneous|transitive|finite.*affine.*neigh\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"2a42b4b301985aea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general scheme covers and affine-open neighbourhoods of individual points; no simultaneous homogeneous-space neighbourhood theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-homogeneous-quotient",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof: existence of G/N, expanded to the independent homogeneous-space theorem 5.28 for arbitrary closed subgroups.; Milne B.37 Step 2, the affine-neighbourhood condition required for finite field descent",
+   "via": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-scheme-finite-set-affine",
+  "worker": "stage1",
+  "summary": "NV follows Milne B.37 Step 2 for an already existing homogeneous scheme, supplies the finite-closed-set rational-lift input as one smaller statement-only node, and cites existing generic-point affine neighbourhood, flat-lfp openness, norm-shrinking, invariant-open descent and affine descent nodes. Arbitrary finite point sets reduce to closed specializations; finite and imperfect fields and nonreduced groups are retained. Only duplicated TeX backslashes in the statement are normalized; its mathematical content is unchanged.",
+  "blueprint": "Supports the existing Milne B.37 Step 2 prerequisite in the descendant chain of det-thm-sf-ctf-stability-direct-images, proof (3). Retains its homogeneous-space/finite-descent route; realizes the translate construction and descent on printed p.605.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic scheme-theoretic tool used only in the stated generality: Residue fields of closed points. The unit has no alternative for this elementary geometric/descent input to Milne B.37 Step 2."
+   },
+   {
+    "node": "lem-pd-descent-norm-affine-shrinking",
+    "why": "Generic scheme-theoretic tool used only in the stated generality: Invariant affine shrinking around a finite saturated set. The unit has no alternative for this elementary geometric/descent input to Milne B.37 Step 2."
+   },
+   {
+    "node": "lem-trf-invariant-open-image-pullback",
+    "why": "Generic scheme-theoretic tool used only in the stated generality: Invariant open image and its cartesian descended model. The unit has no alternative for this elementary geometric/descent input to Milne B.37 Step 2."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic scheme-theoretic tool used only in the stated generality: Being affine descends along fpqc coverings (Stacks 02L5). The unit has no alternative for this elementary geometric/descent input to Milne B.37 Step 2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-pd-descent-norm-affine-shrinking",
+  "lem-trf-invariant-open-image-pullback",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-021de15f0",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-021de15f0 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Context: first split of a base item that was unsplit and had no proof, so the re-split rule does not apply. The item is not split live by any other group, so it is not superseded. The statement equals the base statement with doubled backslashes normalized and def-pc-rational-point added; no hypothesis changed and no SGA appears. Source: I read Milne iAG2017 B.37 Step 2 (printed p.605) together with Steps 1 and 3 and Remark B.38. The given flat, surjective, lfp orbit map q is used exactly as Milne uses u; quasi-projectivity is needed only in Step 1, for the existence of the quotient. Step checks: (1) Jacobson closed specializations reduce to closed points; Y is Noetherian, has finitely many components and is quasi-separated; the generic-point affine-neighbourhood lemma gives a dense affine U. (2) The new node applies to q and S, and its all-points-over-S clause is what Step 5 needs. (3) The finite-free scalar-extension clause plus flat-lfp openness and surjectivity after base change show that U_K and V=q_K^{-1}U_K are dense. (4) Ω is a finite intersection of translated dense opens, nonempty because G_K contains the identity; the Jacobson property gives a closed point b, and closed-point-field clause (a) only gives L=κ(b) finite over K and g∈Ω_L(L). (5) g_{j,L}=g v_j, so q_L(g_{j,L})=a(g,q_L(v_j))∈gU_L; the fibre over a K-rational point is Spec L, so S_L⊆A=gU_L, which is affine. (6) Norm-shrinking with p=Spec L→Spec k, V=Y_L, R≅Y_L×_Y Y_L; S_L=p^{-1}S is saturated, giving an invariant affine W. (7) Invariant-open image gives B=p(W) with W≅B_L; fpqc descent of affineness along {Spec L→Spec k} shows B is affine and contains S and E. New node lem-sfb-finite-closed-set-rational-lifts is true: lift to closed z_s and take a finite normal K containing each κ(z_s); every residue field of κ⊗K is then K, and surjectivity on fibres gives the lifts. I tested k=ℝ with ℂ-points, a purely inseparable F_p(t) case and empty S. It is statement-only, self-contained and its definitions are cited; it is not a clause of the item; DAG scans for rational lifts and finite-set affine neighbourhoods found no duplicate (lem-pd-invariant-affine-neighbourhoods assumes V is already AF). Batch-5 flag: lem-trf-invariant-open-image-pullback is generic descent (Stacks 0247), and its 70-node closure contains no other trace-formula, Poincaré-duality or target node, so it lies outside both assumptions; accepted. tool_uses (closed-point-field (a), norm-shrinking, invariant-open-image, fpqc-descend-affine) accepted as generic tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HomogeneousSchemeFiniteSetAffine",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_of_homogeneous_scheme_finite_set",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomogeneousSchemeFiniteSetAffine.lean",
+  "statement": "theorem exists_isAffineOpen_of_homogeneous_scheme_finite_set {k : Type u} [Field k] (G Y : Over (Spec (.of k))) [GrpObj G] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (a : G ⊗ Y ⟶ Y) (hone : ∀ (T : Over (Spec (.of k))) (y : T ⟶ Y), lift (1 : T ⟶ G) y ≫ a = y) (hmul : ∀ (T : Over (Spec (.of k))) (g h : T ⟶ G) (y : T ⟶ Y), lift g (lift h y ≫ a) ≫ a = lift (g * h) y ≫ a) (o : 𝟙_ (Over (Spec (.of k))) ⟶ Y) (q : G ⟶ Y) (hq : q = lift (𝟙 G) (toUnit G ≫ o) ≫ a) [Flat q.left] [Surjective q.left] [LocallyOfFinitePresentation q.left] (E : Set Y.left) (hE : E.Finite) : ∃ U : Y.left.Opens, IsAffineOpen U ∧ E ⊆ (U : Set Y.left)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6749222c1",
+  "group": "N9",
+  "result": "pass",
+  "note": "First S2 delivery; node diff vs live = lean field only; statement verbatim in file, proof sorry only, no new defs. Clause check: k field; G GrpObj in Over(Spec k) with IsSeparated+LocallyOfFiniteType+QuasiCompact (no properness); Y same; a : G⊗Y⟶Y (fibre product over k); hone/hmul = a(1,y)=y, a(g,a(h,y))=a(gh,y) on all test T; o : 𝟙_⟶Y = section (def-pc-rational-point); q pinned by hq = lift 𝟙 (toUnit≫o)≫a; Flat/Surjective/LFP on q.left; E finite arbitrary set; ∃ affine open ⊇ E. No extra assumptions; empty E, non-closed points, imperfect/finite k, non-reduced G covered; non-vacuous; single universe u standard. Docstrings carry Milne B.37 Step 2 p.605, blueprint id, steps 1-7. Imports exist on side-live. No duplicate (GrpObj.exists_isAffineOpen_compl_support_zeroLocus needs alg. closed/quasi-projective). Not recompiled (no change)."
+ }
+}

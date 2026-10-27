@@ -1,0 +1,183 @@
+{
+ "id": "def-sf-adic-closed-reindexing-maps",
+ "kind": "definition",
+ "title": "Canonical adic evaluation and completed reindexing maps",
+ "status": "split",
+ "statement": "Use completed integral coefficient sheaves [def-weil-completed-integral-coefficients], the recorded completed/rational/common-field tensor, pullback and permitted internal Hom [def-weil-derived-pullback-tensor-hom], and sectionwise module inverse image [def-sf-proetale-sectionwise-module-inverse-image]. Use the partial closed data (additive tensor-Hom transposition on exactly the permitted pairs), its evaluation and the permitted-pair pullback functor of [def-pod-partial-closed-interfaces]. The common-field closed datum is the unique one whose inverse transpose on every common finite coefficient-field representative is rational inverse transposition conjugated by the prescribed stage tensor/Hom maps. Define the Hom comparison of that pullback on permitted pairs as the transpose of inverse tensor comparison followed by pulled-back evaluation. For a scheme isomorphism and a finite coefficient field, define completed ring transport as the limit lift of all finite coefficient projections followed by their constant-normalized coefficient maps. Define completed module inverse image using that ring transport, and its derived functor by exact termwise derivation. Define comparison to tower pullback as inverse image of the completion unit followed by the inverse resolution-normalized total-limit comparison and inverse Roos-model identification; on complete constructible inputs take the isomorphism of this very map. These are the existing canonical definitions, with their specified normalizations, not new assertions that compatibility laws hold.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-proetale-sectionwise-module-inverse-image",
+  "def-pod-partial-closed-interfaces"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GMX and 08J9; completed limit model and common-field normalization in the proof of lem-pod-derived-automorphism-hom-evaluation, steps 1, 8 and 15--16."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Data for normalized native adic realization coefficient presentations tensor completion and sectionwise module inverse image",
+   "results": "8 hits: AdicCompletion.module, tensor_map_id_left_eq_map, coe_ofTensorProductEquivOfFiniteNoetherian, ofTensorProductEquivOfFiniteNoetherian_apply, ofTensorProductEquivOfFiniteNoetherian.congr_simp, ofTensorProductEquivOfFiniteNoetherian, AdicCompletion, congr_symm_apply. None supplies these sheaf-level data.",
+   "date": "2026-10-23",
+   "verdict": "reuse existing project definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized continuous adic coefficient realization and module inverse image from scheme isomorphisms",
+   "results": "8 hits: Scheme.Hom.toNormalization_app_preimage, normalizationDiagram, normalizationDiagramMap, ι_toNormalization, ι_fromNormalization, ι_fromNormalization_assoc, fromNormalization_toNormalization, toNormalization. None supplies these data.",
+   "date": "2026-10-23",
+   "verdict": "reuse existing project definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|ConstructibleTensorCompletionPresentation|podCompletedModuleInverseImage|isoSectionwiseModuleInverseImage",
+   "results": "Mathlib: 0 hits. rg in lean/WeilConjectures: no hits. rg in lean/Sheaf: the existing definitions are in LocallyFiniteAdicConstructibleRealization, RationalRealizationTensorComparison, DerivedAutomorphismHomEvaluation, and ProEtale/IsoSectionwiseInverseImage. DAG declaration-name search finds only their theorem owners; def-trf-point-restriction-coordinates merely consumes sectionwise inverse image. blueprint_refs searches native realization, tensor completion presentation, sectionwise inverse image: 0 matches each.",
+   "date": "2026-10-23",
+   "verdict": "existing definitions without definition-node owners; record without redefinition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit canonical comparison data in the native realization obligation. The parent is a maintainer-created native obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedAutomorphismHomEvaluation",
+  "declaration": "WeilConjectures.podCompletedModuleInverseImage",
+  "declarations": [
+   "WeilConjectures.podPartialHomComparison",
+   "WeilConjectures.PodPartialHomCompatibility",
+   "WeilConjectures.PodCommonTransposeNormalization",
+   "WeilConjectures.podCommonClosed",
+   "WeilConjectures.podCommonHomComparison",
+   "WeilConjectures.podCompletedRingProjection",
+   "WeilConjectures.podCompletedRingMap",
+   "WeilConjectures.podCompletedModuleInverseImage",
+   "WeilConjectures.podCompletedDerivedInverseImage",
+   "WeilConjectures.podCompletedToTower",
+   "WeilConjectures.podCompletedToTowerIso",
+   "WeilConjectures.podRationalClosed",
+   "WeilConjectures.podRationalClosed_existsUnique",
+   "WeilConjectures.podIntegralClosed",
+   "WeilConjectures.podIntegralClosed_existsUnique"
+  ],
+  "statement": "def podCompletedModuleInverseImage : integralTowerModules l E Y ⥤ integralTowerModules l E X",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by maintainer H2 at immutable head 07059192980c. Reuses the unchanged published declarations; no existence theorem is asserted or used as an additional hypothesis, no module is duplicated. Reviewer FIX (2026-10-23): PodPartialClosed, PodPartialClosed.evaluation and podPairPullback are already owned by the landed definition node def-pod-partial-closed-interfaces (Q69), which is now cited instead of re-owned. Section 1(B), Q115: L explicitly requested this lean-only extension in return point 3 for immutable head 706ac052572a. The previous owner supplied the common-field normalization, which calls podRationalClosed, but omitted that rational closed datum and its unique pure-tensor pinning theorem. Add the exact published podRationalClosed and podRationalClosed_existsUnique from the same module; no construction is copied, no source or node statement is changed, and all prior owned declarations remain. Section 1(B), Q13 repair of immutable head 617cf0161e28: extend this existing:true definition owner with the published podIntegralClosed and its ordinary-completion-unit unique characterization. The record already owns podRationalClosed and its pure-tensor characterization. Integral closed data are needed to specify the integral evaluation whose rationalization is the field evaluation. These are unchanged canonical definitions from the same module, not a new choice or a theorem assumption; no source module or other node field changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e18e7e670",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 617c. The only Lean changes write out the returned helpers: operationUniqueSpecification and commonStage*RepresentativeLaws become the same predicate on def-weil-derived-pullback-tensor-hom _existsUnique theorems, and coefficientTransposeUnits is replaced by its identical body. stmt_deps drop the three theorem nodes and add the landed def nodes def-weil-derived-pullback-tensor-hom and def-sf-adic-closed-reindexing-maps; the latter's lean-only existing:true extension adds podIntegralClosed(+_existsUnique), a pinned choice like Q115's podRationalClosed. Item and dependency records differ from base only in lean/stmt_deps; statement verbatim in file. Re-read maths: hypotheses, five identifications, HEq evaluation, localized arrows, scalar comparisons, unary descent, common stage and edge cases are all OK. 6 theorems with 6 sorries, real defs, docstrings OK, no line over 100 chars, report sections present. Advisory only: uncited owners of sfRationalScalarUnit/Comp (choice from a theorem), sfCompactSupportTerm/Transition, sfCompletedDerivedDirectImage, integralDerivedPullback/Tensor. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T180423-L-3989163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.podArgumentFirst_common",
+   "WeilConjectures.podArgumentFirst_integral_rational",
+   "WeilConjectures.podCommonClosed_existsUnique",
+   "WeilConjectures.podCommonHomComparison_comp",
+   "WeilConjectures.podCommonHomComparison_laws",
+   "WeilConjectures.podCompletedModuleComp_existsUnique",
+   "WeilConjectures.podCompletedToTower_laws",
+   "WeilConjectures.podDerivedHomShift_existsUnique",
+   "WeilConjectures.podFiniteHomComparison_comp",
+   "WeilConjectures.podFiniteHomComparison_laws",
+   "WeilConjectures.podFiniteHomComparison_shift",
+   "WeilConjectures.podFiniteRestrictionOrdinary_existsUnique",
+   "WeilConjectures.podHomComplexShift_existsUnique",
+   "WeilConjectures.podHomReductionSquare",
+   "WeilConjectures.podIntegralHomComparison_comp",
+   "WeilConjectures.podIntegralHomComparison_laws",
+   "WeilConjectures.podIntegralPullbackComp_normalization",
+   "WeilConjectures.podIntegralRationalHomComparison_shift",
+   "WeilConjectures.podIntegralReindexedHom_shift",
+   "WeilConjectures.podLimitReindexing_existsUnique",
+   "WeilConjectures.podOrdinaryLimitReindexing_existsUnique",
+   "WeilConjectures.podRationalClosed_existsUnique",
+   "WeilConjectures.podRationalHomComparison_comp",
+   "WeilConjectures.podRationalHomComparison_laws",
+   "WeilConjectures.podReductionReindexingMap_laws",
+   "WeilConjectures.podSystemHomComparison_fiber",
+   "WeilConjectures.podSystemHomComparison_laws",
+   "WeilConjectures.podSystemNormalized"
+  ],
+  "sorry_after": [
+   "WeilConjectures.podArgumentFirst_common",
+   "WeilConjectures.podArgumentFirst_integral_rational",
+   "WeilConjectures.podCommonClosed_existsUnique",
+   "WeilConjectures.podCommonHomComparison_comp",
+   "WeilConjectures.podCommonHomComparison_laws",
+   "WeilConjectures.podCompletedModuleComp_existsUnique",
+   "WeilConjectures.podDerivedHomShift_existsUnique",
+   "WeilConjectures.podFiniteHomComparison_comp",
+   "WeilConjectures.podFiniteHomComparison_laws",
+   "WeilConjectures.podFiniteHomComparison_shift",
+   "WeilConjectures.podFiniteRestrictionOrdinary_existsUnique",
+   "WeilConjectures.podHomReductionSquare",
+   "WeilConjectures.podIntegralHomComparison_comp",
+   "WeilConjectures.podIntegralHomComparison_laws",
+   "WeilConjectures.podIntegralPullbackComp_normalization",
+   "WeilConjectures.podIntegralRationalHomComparison_shift",
+   "WeilConjectures.podIntegralReindexedHom_shift",
+   "WeilConjectures.podLimitReindexing_existsUnique",
+   "WeilConjectures.podOrdinaryLimitReindexing_existsUnique",
+   "WeilConjectures.podRationalClosed_existsUnique",
+   "WeilConjectures.podRationalHomComparison_comp",
+   "WeilConjectures.podRationalHomComparison_laws",
+   "WeilConjectures.podReductionReindexingMap_laws",
+   "WeilConjectures.podSystemHomComparison_fiber",
+   "WeilConjectures.podSystemHomComparison_laws",
+   "WeilConjectures.podSystemNormalized"
+  ]
+ }
+}

@@ -15,24 +15,43 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-a1-space-etale-open-image] with the algebraic space $E=h_U$, the target $F=X$, and the representable etale map $q=f$. Its conclusion supplies an open subspace $X_f\\subseteq X$ whose underlying set is exactly the point image of $|h_U|\\to|X|$, an inclusion $j:X_f\\hookrightarrow X$ that is representable by open immersions, and a factorization $h_U\\to X_f\\to X$ whose first map $f_f$ is representable, surjective and etale. Here $|h_U|$ is the set of field-valued point classes of $h_U$, which is the meaning of $|U|$ under the convention fixed in the item statement (equivalently the underlying set of the scheme $U$, a point $u$ corresponding to $\\operatorname{Spec}\\kappa(u)\\to U$). This is precisely the asserted $X_f$, inclusion $j$, and factorization $f=j\\circ f_f$.",
+   "text": "Regard U as the actual representable fppf sheaf schemeSpace U, using [def-trf-scheme-algebraic-space]. Apply [lem-a1-space-etale-open-image] to its map f to X. Retain the open subfunctor A, its open-immersion scheme tests, and the factor ff with ff followed by the inclusion equal to f, ff etale and surjective.",
    "uses": [
+    "def-trf-scheme-algebraic-space",
     "lem-a1-space-etale-open-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 06NF, lemma-etale-image-open, first assertion and factorization (lines 536-555)."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Bundle A as an algebraic space without choosing new presheaf data. A representable presheaf over a sheaf is a sheaf: glue the images of a matching family in X, represent the pullback over the glued section, and glue the induced maps to that representing scheme using fppf subcanonicity. The diagonal of A is representable by composing A into X with the diagonal of X and cancelling the monomorphism A times A into X times X. Pull back an etale surjective scheme atlas of X along A to obtain one of A. Pasting representing pullback squares proves the base-change assertions. The inclusion has injective components because A is a subfunctor. Cancel its monomorphism from the representing scheme tests of f to obtain representability of ff.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-valued section in A, test the surjective ff over Spec K. Choose a point of the representing scheme above the unique point of Spec K, and take its residue field L. The composite Spec L to Spec K corresponds by full faithfulness of Spec to a ring embedding K to L; evaluating the representing pullback square supplies the required lifted U-section. Conversely, a U-lift over L gives an A-section over L by ff. The open scheme test of A into X at the original K-section is therefore nonempty. Its map to Spec K is surjective since Spec K has one point; being an open immersion it is an isomorphism. Its inverse gives the original K-section in A. Naturality and ff followed by the inclusion equal to f give exactly the displayed field-extension equivalence.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-a1-space-etale-open-image"
+  "def-trf-scheme-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "def-weil-open-immersion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "S9",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tag 06NF, lemma-etale-image-open, first assertion and factorization (lines 536-555), using the general open-image node for the specialization."
+  "place": "Tag 06NF lemma-etale-image-open: specialization of the general open-image theorem. The explicit bundling and field-representative glue follow the definitions and Mathlib fppf subcanonicity, residue fields, Yoneda, and open-immersion isomorphism criteria."
  },
  "mathlib_searches": [
   {
@@ -127,5 +146,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261023T124422-L-1397268",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-equivariant-projective-stein-factor",
+ "kind": "statement",
+ "title": "Semilinear action and projective geometric integrality of the Stein base",
+ "statement": "Let $k$ be a field, let $T$ be a normal projective geometrically integral finite-type $k$-scheme, let $B$ be an integral projective finite-type $k$-scheme, and let $f:T\\to B$ be a dominant $k$-morphism. Let a finite group $H$ act semilinearly on $T$, $B$ and $k$, and suppose $f$ is equivariant. Put $E=k(T)$ and $F=k(B)$, with the inclusion induced by $f$. For the Stein scheme $Y=\\underline{\\operatorname{Spec}}_B(f_*\\mathcal O_T)$ and its evaluation factorization $T\\xrightarrow{g}Y\\xrightarrow{q}B$, the scheme $Y$ is normal, projective and geometrically integral of finite type over $k$, $q$ is finite, dominant and H-projective, and $g$ is proper, dominant and H-projective with geometrically connected fibres. There is a unique semilinear $H$-action on $Y$ making both $g$ and $q$ equivariant. For each affine open $W\\subseteq B$, its action from $q^{-1}W$ to $q^{-1}(hW)$ is the spectrum of pullback on $\\Gamma(f^{-1}(hW),\\mathcal O_T)\\to\\Gamma(f^{-1}W,\\mathcal O_T)$. Inside $E$ one has $k(Y)=L=\\{x\\in E:x\\text{ is algebraic over }F\\}$; $L/F$ is finite and $L$ is algebraically closed in $E$.\n\nThe notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-kun-projective], [def-sc-function-field], [def-weil-finite-integral-morphism], [def-weil-affine-spectrum], [def-pc-geometrically-irreducible], [def-weil-relative-algebraic-closure], [def-sfb-dominant-function-field-map]. Normal means that every local ring is an integrally closed domain. A projective morphism here means an H-projective morphism: it admits a closed immersion into a finite-dimensional projective space over its target. A semilinear $H$-action means actions by scheme automorphisms and by field automorphisms of $k$, with the structure morphisms equivariant; faithfulness is not assumed. A birational morphism here identifies the function fields and is an isomorphism over a dense open of the target.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0, theorem-stein-factorization-Noetherian; de Jong Lemma 5.2 proof, printed p.613, induced action on the Stein scheme and geometric integrality over the original field. Equivariant section maps and projectivity are the arguments of returned curve-pencil steps 12--14."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-kun-projective",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-geometrically-irreducible",
+  "def-weil-relative-algebraic-closure",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof": [
+  {
+   "text": "First regard all morphisms as ordinary scheme morphisms. Since $B/k$ is H-projective, projective-implies-proper makes it proper, hence separated over $k$. Apply the finite-constant projective graph lemma with constant extension $k/k$, projective source $T$ and separated target $B$. It makes the given $f:T\\to B$ H-projective and proper. Its dominance is a hypothesis. No equivariant projective embedding is required: H-projective here is the finite-projective-space convention, not an extra linearization condition.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-finite-constant-projective-graph",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC (lemma-locally-projective-proper); Tag 0C4Q (lemma-projective-permanence), closed graph proof, specialized to projective spaces and the identity constant extension"
+   }
+  },
+  {
+   "text": "The scheme $\\operatorname{Spec}k$ is Noetherian: its sole affine chart has only the ideals $(0)$ and $(1)$. Finite type over a Noetherian scheme therefore makes $T$ and $B$ Noetherian. Apply the normal Noetherian Stein-model lemma to $f$. It gives precisely the canonical $Y=\\underline{\\operatorname{Spec}}_B(f_*\\mathcal O_T)$ and evaluation factorization, with $Y$ integral and normal, $q$ finite and dominant, and $g$ proper and dominant with geometrically connected fibres. For affine $W=\\operatorname{Spec}A\\subset B$, write $R_W=\\Gamma(f^{-1}W,\\mathcal O_T)$: its charts are $q^{-1}W=\\operatorname{Spec}R_W$, with $R_W$ finite over $A$ and evaluation pullback the identity of $R_W$. These are the maps specified in the item.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-normal-stein-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0 (theorem-stein-factorization-Noetherian), with morphisms.tex Tag 035L (lemma-normal-normalization); Noetherian setup from morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)"
+   }
+  },
+  {
+   "text": "Apply the normal Stein constant-field lemma to the same proper dominant $f$ of integral finite-type $k$-schemes. Its scheme is this same relative spectrum and its map is this same evaluation map, so no choice of factorization is being identified merely birationally. It supplies finite type of $Y/k$ and, through the pullback inclusion into $E$, the equality $k(Y)=L=\\{x\\in E:x\\text{ is algebraic over }F\\}$, finiteness of $L/F$, and algebraic closedness of $L$ in $E$.",
+   "uses": [
+    "lem-sfb-normal-stein-constant-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0 (theorem-stein-factorization-Noetherian); normal Stein constant-field lemma, whose explicit evaluation and function-field clauses are used"
+   }
+  },
+  {
+   "text": "Apply finite-over-projective to $Y\\xrightarrow{q}B\\to\\operatorname{Spec}k$. The outer base is affine Noetherian, so the lemma gives a global closed immersion $Y\\hookrightarrow\\mathbf P^N_k$, not merely local projectivity on $B$. Thus $Y$ is projective over $k$ and hence proper and separated over $k$. Apply the finite-constant projective graph lemma with constant extension $k/k$ first to the projective source $Y$ and separated target $B$, then to the projective source $T$ and separated target $Y$. It gives H-projectivity of $q$ and $g$. The properness and all dominance and fibre assertions already obtained are retained.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective), 01WE (lemma-H-projective-composition); Tag 0C4Q (lemma-projective-permanence), closed graph proof"
+   }
+  },
+  {
+   "text": "Since $T$ is integral and geometrically irreducible, the generic-point criterion makes $\\operatorname{Spec}E$ geometrically irreducible over $k$. The subextension lemma applied to $k\\subseteq L\\subseteq E$ makes $\\operatorname{Spec}L$ geometrically irreducible. The same generic-point criterion, now for the integral $Y$ and its function field $L$, proves that $Y$ is geometrically irreducible over the original field $k$. The criteria impose no perfectness assumption on $k$.",
+   "uses": [
+    "lem-zl-generic-point-geometric-irreducibility",
+    "lem-zl-geometric-irreducibility-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054Q (lemma-geometrically-irreducible-function-field), equivalence (1) and (2); algebra.tex Tag 037N (lemma-subalgebra-geometrically-irreducible), part (1)"
+   }
+  },
+  {
+   "text": "The proper $g$ is quasi-compact. It is scheme-theoretically dominant, as follows directly from the section embeddings for integral schemes. For a nonempty open $V\\subseteq Y$, dominance makes $g^{-1}V$ nonempty. Pullback $\\Gamma(V,\\mathcal O_Y)\\to\\Gamma(g^{-1}V,\\mathcal O_T)$ commutes with germs at the generic points and with the field injection $L\\hookrightarrow E$; the injection of $\\Gamma(V,\\mathcal O_Y)$ into $L$ therefore makes this pullback injective. On the empty open there is nothing to check. These injections say exactly that $\\mathcal O_Y\\to g_*\\mathcal O_T$ has zero kernel. Apply geometric-reducedness descent along a quasi-compact schematically dominant map to $g$: $T$ is geometrically reduced by hypothesis, so $Y$ is geometrically reduced. For every field extension $k'/k$, $Y_{k'}$ is reduced by this descent and irreducible by Step 5. It is nonempty: an affine neighbourhood of the generic point has a nonzero $k$-algebra $A$, and $A\\otimes_k k'$ contains the injected copy of $A$ (extend a $k$-basis containing $1$). Thus the reduced-and-irreducible criterion gives integrality of every $Y_{k'}$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-sfb-dominant-function-field-map",
+    "lem-sbc-geometrically-reduced-dominant-descent",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 081I (lemma-flat-base-change-scheme-theoretic-image), 056B (lemma-scheme-theoretic-image-reduced); section embeddings as in properties.tex Tag 01ON and morphisms.tex Tag 01RV; integral criterion properties.tex Tag 01ON"
+   }
+  },
+  {
+   "text": "Write $\\mathcal A=f_*\\mathcal O_T$. On the affine basis of $B$, evaluation identifies $\\mathcal A$ with $q_*\\mathcal O_Y$: both section rings are $R_W$, compatibly with restriction. Fix $h\\in H$ and write $Y_h=(Y,h_B\\circ q)$ and $Y_0=(Y,q)$ as schemes over $B$. The former is affine: the inverse image of an affine $V$ is $q^{-1}(h_B^{-1}V)$, an affine Stein chart. Its direct-image algebra is $\\mathcal A_h(V)=\\mathcal A(h_B^{-1}V)$, with structure map $\\mathcal O_B(V)\\xrightarrow{h_B^\\sharp}\\mathcal O_B(h_B^{-1}V)\\to\\mathcal A(h_B^{-1}V)$. Pullback by $h_T$ gives a restriction-compatible map $\\varphi_h:\\mathcal A\\to\\mathcal A_h$. Explicitly, for $r\\in\\mathcal O_B(V)$, equivariance gives $h_T^\\sharp(f^\\sharp r)=f^\\sharp(h_B^\\sharp r)$, so this is an $\\mathcal O_B$-algebra map. The affine-algebra anti-equivalence sends it contravariantly to a $B$-morphism $a_h:Y_h\\to Y_0$, hence an underlying scheme map $Y\\to Y$ with $q a_h=h_B q$. Over $V=h_BW$, its source and target are respectively $q^{-1}W$ and $q^{-1}(h_BW)$, and its formula is $\\operatorname{Spec}(h_T^\\sharp:R_{h_BW}\\to R_W)$. The restriction clause supplies compatibility on overlaps, without requiring affine intersections.",
+   "uses": [
+    "lem-sfb-noetherian-normal-stein-model",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SA (lemma-affine-equivalence-algebras), including base change compatibility; constructions.tex Tag 01LX (lemma-spec-properties), affine section formula and open restriction"
+   }
+  },
+  {
+   "text": "On $f^{-1}W$, the two maps $a_h g$ and $g h_T$ have target $q^{-1}(h_BW)=\\operatorname{Spec}R_{h_BW}$. Their section maps are both $h_T^\\sharp:R_{h_BW}\\to R_W$, since evaluation pullback is the identity. The affine-spectrum adjunction and gluing of morphisms therefore give $a_h g=g h_T$. Conversely, any $b_h$ satisfying these two equivariance equations maps $q^{-1}W$ into $q^{-1}(h_BW)$; pulling its section map back along $g|_{f^{-1}W}$, whose pullback on sections is the identity, forces $b_h^\\sharp=h_T^\\sharp$. The same adjunction and gluing imply $b_h=a_h$. Both $a_1$ and the identity satisfy these equations; and both $a_h a_j$ and $a_{hj}$ satisfy them, since $h_Tj_T=(hj)_T$ and $h_Bj_B=(hj)_B$. Uniqueness gives $a_1=1$ and $a_h a_j=a_{hj}$; in particular $a_{h^{-1}}$ is inverse to $a_h$. Finally, if $p_B:B\\to\\operatorname{Spec}k$ and $p_Y=p_Bq$, then $p_Ya_h=p_Bh_Bq=h_kp_Bq=h_kp_Y$. This proves semilinearity, the group laws, both equivariances, and uniqueness of the action. Faithfulness and a bound on the group order were never used.",
+   "uses": [
+    "lem-sfb-noetherian-normal-stein-model",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), naturality and injectivity of the section-map correspondence; Tag 01JA (section-glueing-schemes), uniqueness and gluing of morphisms; agent group-law argument from these identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-finite-constant-projective-graph",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-normal-stein-model",
+  "lem-sfb-normal-stein-constant-field",
+  "lem-fin-finite-over-projective",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-zl-geometric-irreducibility-subextension",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-sfb-dominant-function-field-map",
+  "lem-sbc-geometrically-reduced-dominant-descent",
+  "def-pc-integral-scheme",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0; agent assembly of existing normal Stein and constant-field nodes with geometric descent and the relative-spectrum anti-equivalence (Tags 054Q, 037N, 081I, 056B, 01SA, 01I1). No de Jong PDF assumed available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of an equivariant dominant morphism from a normal geometrically integral projective variety has a semilinear group action and geometrically integral projective base",
+   "results": "{\"t\": \"2026-10-22T06:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"Stein factorization of an equivariant dominant morphism from a normal geometrically integral projective variety has a semilinear group action and geometrically integral projective base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"826abad74e099468\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stein\"",
+   "results": "{\"t\": \"2026-10-22T06:08:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"stein\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bStein\\b|steinFactor|stein_factor|equivariant.*[Ff]actorization",
+   "results": "{\"t\": \"2026-10-22T06:08:28Z\", \"tool\": \"grep\", \"query\": \"\\\\bStein\\\\b|steinFactor|stein_factor|equivariant.*[Ff]actorization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite base in Stein factorization of a semilinear equivariant projective morphism is projective geometrically integral and has an induced group action",
+   "results": "{\"t\": \"2026-10-22T06:08:29Z\", \"tool\": \"leansearch\", \"query\": \"The finite base in Stein factorization of a semilinear equivariant projective morphism is projective geometrically integral and has an induced group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.instMulAction.congr_simp\", \"Projectivization.smul_mk\", \"Projectivization.smul_def\", \"Projectivization.instMulAction\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"Projectivization.generalLinearGroup_smul_def\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"ef1e4a7887671ebb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|equivariant.*[Ff]actorization",
+   "results": "{\"t\": \"2026-10-22T06:08:01Z\", \"tool\": \"grep\", \"query\": \"[Ss]tein|equivariant.*[Ff]actorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"Mathlib/NumberTheory/ModularForms/Derivative.lean\"], \"digest\": \"b4be0a9acc730472\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: restricted AlgebraicGeometry grep has no Stein factorization or equivariant factorization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of an equivariant dominant map from a normal projective geometrically integral variety has a unique semilinear action on its finite base",
+   "results": "{\"t\": \"2026-10-22T11:09:10Z\", \"tool\": \"leanfinder\", \"query\": \"Stein factorization of an equivariant dominant map from a normal projective geometrically integral variety has a unique semilinear action on its finite base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"e0408060cee30903\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universality, integrality of section rings, scheme-theoretic images, and unrelated Eisenstein/semilinear-linear-algebra hits do not give the Stein theorem, its semilinear action and geometric projectivity in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stein\"",
+   "results": "{\"t\": \"2026-10-22T11:09:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"stein\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Function.Embedding.schroeder_bernstein\", \"Function.Embedding.schroeder_bernstein_of_rel\", \"Polynomial.irreducible_of_eisenstein_criterion\", \"Polynomial.generalizedEisenstein\", \"Polynomial.IsEisensteinAt\", \"Polynomial.IsWeaklyEisensteinAt\", \"Polynomial.IsEisensteinAt.isWeaklyEisensteinAt\", \"Polynomial.IsEisensteinAt.leading\"], \"digest\": \"12f6eaf3a631fa29\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universality, integrality of section rings, scheme-theoretic images, and unrelated Eisenstein/semilinear-linear-algebra hits do not give the Stein theorem, its semilinear action and geometric projectivity in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "steinFactor|stein_factor|Stein factorization",
+   "results": "{\"t\": \"2026-10-22T11:09:11Z\", \"tool\": \"grep\", \"query\": \"steinFactor|stein_factor|Stein factorization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universality, integrality of section rings, scheme-theoretic images, and unrelated Eisenstein/semilinear-linear-algebra hits do not give the Stein theorem, its semilinear action and geometric projectivity in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Stein factorization is functorial for semilinear automorphisms and its base is geometrically integral and projective",
+   "results": "{\"t\": \"2026-10-22T11:09:11Z\", \"tool\": \"leansearch\", \"query\": \"Canonical Stein factorization is functorial for semilinear automorphisms and its base is geometrically integral and projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.functorialSurjectiveInjectiveFactorizationData\", \"LinearMap.coe_coe\", \"AlgebraicGeometry.specTargetImageFactorization\", \"LinearMap.coe_semilinearMap\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"SemilinearMapClass.semilinearMap\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"Projectivization.map\"], \"digest\": \"8f90a82d5b81640f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universality, integrality of section rings, scheme-theoretic images, and unrelated Eisenstein/semilinear-linear-algebra hits do not give the Stein theorem, its semilinear action and geometric projectivity in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of the relative spectrum of the pushforward structure sheaf and geometric integrality of the Stein factor",
+   "results": "{\"t\": \"2026-10-22T11:09:13Z\", \"tool\": \"leanfinder\", \"query\": \"Functoriality of the relative spectrum of the pushforward structure sheaf and geometric integrality of the Stein factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.SpecMap_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegralHom.integral_app\"], \"digest\": \"19412f03d5a353bf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universality, integrality of section rings, scheme-theoretic images, and unrelated Eisenstein/semilinear-linear-algebra hits do not give the Stein theorem, its semilinear action and geometric projectivity in one specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; extracted argument: Semilinear action and projective geometric integrality of the Stein base",
+   "via": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-projective-stein-factor",
+  "worker": "stage1",
+  "summary": "Q145: retained the full statement; eight-step proof reuses the existing normal Stein and constant-field lemmas, finite-over-projective and graph embeddings, geometric irreducibility and reducedness descent, and the relative-spectrum anti-equivalence. Explicit twisted algebra maps give the semilinear action and affine formula; evaluation proves equivariance, uniqueness and the group laws. No new nodes are needed. All citations were read statement by statement and quoted in citations.json. Repair of the returned head a9c6247c867: compared the retained payload with the current unsplit live item, re-read all current cited statements, and kept the exact statement and route. Step 7 now specifies both twisted-base objects, the algebra-linearity equation and the contravariant source/target; Step 6 now verifies nonemptiness on each field base change explicitly. Delivery is rebuilt on the current live DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; extracted argument: Semilinear action and projective geometric integrality of the Stein base; realizes the equivariant Stein-factor paragraph of de Jong Lemma 5.2 by the Stacks route, within the direct-image alteration input.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Ordinary properness and separatedness of projective schemes; projectivity is used as a generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic finiteness tool for the normal Stein construction; no unit route is replaced."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Only its affine-base case is used, over Spec k, to obtain projectivity of the finite Stein cover; no result of the unit supplies this projective embedding."
+   },
+   {
+    "node": "lem-zl-generic-point-geometric-irreducibility",
+    "why": "Generic-point characterization of geometric irreducibility used twice as a generic tool over the original field."
+   },
+   {
+    "node": "lem-zl-geometric-irreducibility-subextension",
+    "why": "Geometric irreducibility passes to the intermediate function field; a generic algebra tool, not a replacement of the alteration argument."
+   },
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "Injection of sections into the function field verifies schematic dominance explicitly."
+   },
+   {
+    "node": "lem-sbc-geometrically-reduced-dominant-descent",
+    "why": "Generic descent of geometric reducedness from T to its schematically dominated Stein base, with no perfect-field hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Restriction-compatible affine-algebra anti-equivalence constructs the action from the displayed twisted algebra map."
+   },
+   {
+    "node": "lem-a1-locally-ringed-space-affine-adjunction",
+    "why": "Maps into each affine Stein chart are determined by their section map; used to prove equivariance and uniqueness."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Equality of morphisms is checked on the affine-base open covers; this is a generic gluing tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-over-projective",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-zl-geometric-irreducibility-subextension",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sbc-geometrically-reduced-dominant-descent",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-63e18102b",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-63e18102b (reviewer sub-agent of L); spot-checked: This head re-delivers a9c6247c867, which a reader approved but which was not landed because the side completion had not been promoted. The item is still unsplit with no proof in both live and side-live, so no other group has superseded it, and there is no repair note. Compared with the a9c6 snapshot, only the texts of Steps 6 and 7 and the split_report summary changed; the statement and stmt_deps are byte-identical, there are no new nodes and no SGA source. I read all 8 steps against the statements of their 17 proof_deps. Step 1: projective implies proper, so B is separated; the graph lemma with F=k, R=T, S=B makes f H-projective and proper. Step 2: Spec k is Noetherian, so T and B are Noetherian; the normal Stein-model statement gives Y integral and normal, q finite, g proper with geometrically connected fibres, both maps dominant, and the charts with g^sharp=id. Step 3: the constant-field lemma, which builds the same relative spectrum, gives k(Y)=L, L/F finite and L algebraically closed in E. Step 4: finite-over-projective over the affine base Spec k (B is quasi-compact by finite type, implicit, advisory) gives Y in P^N_k, and the graph lemma applied twice makes q and g H-projective. Step 5: generic-point criterion, subextension lemma, generic-point criterion over the original k. Step 6 (changed): sections inject into L and then E, so g is schematically dominant and quasi-compact; dominant descent gives geometric reducedness; the newly written nonemptiness of Y_{k'} (A tensor k' contains A) and the reduced-irreducible criterion give geometric integrality. Step 7 (changed): I checked that Y_h=(Y,h_B q) has algebra A(h_B^{-1}V), that h_T^sharp is O_B-linear because h_T^sharp f^sharp = f^sharp h_B^sharp, that the anti-equivalence gives a_h with q a_h = h_B q, and that the chart map Spec(R_{h_BW} to R_W) has the direction stated in the item. Step 8: equivariance, uniqueness, group law and semilinearity follow from the affine adjunction and gluing; I verified each identity. Sources: Stacks 03H0 (more-morphisms l.15205) and 01SA (morphisms l.1818); de Jong 5.2 is absent from literature and proof_origin=agent says so. Edge cases checked: f=id, B=Spec k, dimension 0, non-faithful H, imperfect k, char p dividing |H|. rg -L finds no duplicate (only the two cited Stein nodes and the citer). Batch-5 flag: lem-sfb-finite-constant-projective-graph reaches def-trf-projective-bundle-morphism only as a general definition (closed subschemes of P_S(E), definition stmt_deps); it is neither a trace-formula nor a Poincare-duality step, so I accept it. I accept the declared tool_uses (kun, pbc, fin, zl, sc, sbc and a1 generic scheme tools). No changes. Maintainer note: the inherited blueprint.from.node is null because the imported item's ancestor chain is broken, a fault of the base node."
+ }
+}

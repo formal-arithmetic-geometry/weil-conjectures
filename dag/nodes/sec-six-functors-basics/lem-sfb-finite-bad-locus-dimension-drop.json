@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-finite-bad-locus-dimension-drop",
+ "kind": "statement",
+ "title": "Dimension drop for a bad locus under a finite morphism",
+ "statement": "Let $V$ be a Noetherian scheme of finite topological Krull dimension, and let $A\\subseteq |V|$ be a set of points. Assume the following generic spreading condition: for every integral reduced closed subscheme $T\\subseteq V$ with generic point $\\xi\\notin A$, there is a nonempty open subset of $T$ disjoint from $A$. Put $Z=\\overline A$, with its reduced closed subscheme structure. Every generic point of an irreducible component of $Z$ belongs to $A$, and there are only finitely many such points.\nMoreover, let $a:W\\to V$ be a finite morphism with $W$ Noetherian, and let $A_W\\subseteq |W|$ satisfy the same generic spreading condition on integral reduced closed subschemes of $W$. Suppose $A_W\\subseteq a^{-1}(A)$ and suppose that, for every generic point $s$ of an irreducible component of $Z$, one has $A_W\\cap a^{-1}(s)=\\varnothing$. Put $Z_W=\\overline{A_W}$ with its reduced closed structure. Then\n$$ Z_W\\subseteq a^{-1}(Z),\\qquad Z_W\\cap a^{-1}(s)=\\varnothing\\quad\\text{for every such }s. $$\nIf $Z$ is nonempty of dimension $d$, every strict specialization chain in $Z_W$ has length less than $d$; consequently $Z_W$ is empty for $d=0$, and for nonempty $Z_W$ one has $\\dim Z_W<\\dim Z$. If $Z$ is empty, then $Z_W$ is empty. The finite morphism need not be flat, surjective, or generically etale.\n\nSchemes, finite morphisms, integral schemes, generic points, closed and open subschemes, and irreducible components use [def-pc-scheme], [def-weil-finite-integral-morphism], [def-pc-integral-scheme], [def-sc-generic-point], [def-weil-closed-immersion], [def-weil-open-immersion] and [def-weil-irreducible-components]. Noetherian means locally Noetherian [pqf-def-locnoeth] and quasi-compact. The bar denotes topological closure; $x$ specializes to $y$ when $y\\in\\overline{\\{x\\}}$. Dimension is the supremum of the lengths of strict specialization chains [def-kun-topological-krull-dimension]. The reduced induced closed structures are those of [lem-weil-pbc-reduced-induced-closed-subscheme].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong (1997), Lemma 5.7 proof, second paragraph, p.615: generic points of the bad closure and strict dimension drop after a finite cover. Agent abstraction isolating the spreading hypothesis and the integral incomparability argument; local PDF WANTED, publisher primary scan read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-irreducible-components",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "For either $(X,B)=(V,A)$ or $(W,A_W)$, put $E=\\overline B$. The reduced induced closed structure on $E$, and on each closed irreducible subset of $E$, exists by [lem-weil-pbc-reduced-induced-closed-subscheme]. Since $X$ is Noetherian, [lem-sc-noetherian-closed-subset-finite-components] writes $E=C_1\\cup\\cdots\\cup C_r$ as its finitely many distinct irreducible components. Each $C_i$ has a unique generic point $\\eta_i$ by [lem-weil-pbc-scheme-sober], applied to the closed irreducible subset $C_i$ of $X$. Its reduced closed structure is integral: it is nonempty, reduced and irreducible, exactly the equivalence in [def-pc-integral-scheme]. These are therefore legitimate test subschemes for the assumed spreading condition. The case $E=\\varnothing$ has $r=0$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 01IS (lemma-scheme-sober); properties.tex Tags 0BA8 (lemma-Noetherian-irreducible-components), 01ON (lemma-characterize-integral). Preparations for de Jong Lemma 5.7, p.615."
+   }
+  },
+  {
+   "text": "Fix $i$. If $\\eta_i\\notin B$, spreading supplies a nonempty relatively open $O\\subseteq C_i$ disjoint from $B$. Every nonempty open in $C_i$ contains $\\eta_i$: if it missed $\\eta_i$, its closed complement would contain $\\overline{\\{\\eta_i\\}}=C_i$. Also $\\eta_i\\notin C_j$ for $j\\ne i$, since otherwise $C_i=\\overline{\\{\\eta_i\\}}\\subseteq C_j$, contradicting distinct maximal components. Thus $D=E\\setminus\\bigcup_{j\\ne i}C_j$ is an open neighbourhood of $\\eta_i$ in $E$, contained in $C_i$. Write $O=C_i\\cap H$ for $H$ open in $E$. Then $D\\cap H$ is a nonempty open in $E$ disjoint from $B$, contrary to $E=\\overline B$. Indeed any such open is $E\\cap H'$ with $H'$ ambient open meeting $E$; by the definition of closure $H'$ meets $B\\subseteq E$. Hence every $\\eta_i\\in B$. Applying this to $V$ gives the first assertion, including finiteness, and applying it to $W$ gives the same assertion for $Z_W$.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 004X (definition-generic-point), 004V (definition-irreducible-components); elementary open-neighbourhood argument filling de Jong Lemma 5.7, second paragraph, first sentence, p.615."
+   }
+  },
+  {
+   "text": "The underlying map of the scheme morphism $a$ is continuous. Since $Z$ is closed, $a^{-1}(Z)$ is closed and contains $A_W\\subseteq a^{-1}(A)\\subseteq a^{-1}(Z)$. Taking closures yields $Z_W\\subseteq a^{-1}(Z)$. In particular $Z=\\varnothing$ forces $A_W=Z_W=\\varnothing$.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Definition 01IJ (definition-scheme); elementary continuity/closure argument for de Jong Lemma 5.7, p.615, containment of the new bad closure over the old one."
+   }
+  },
+  {
+   "text": "Suppose $w\\in Z_W$ and $a(w)=s$, where $s$ is the generic point of a component $C$ of $Z$. Choose a component of $Z_W$ containing $w$ (step 1), and let $t$ be its generic point. Step 2 gives $t\\in A_W$. Continuity implies that $x=a(t)$ specializes to $s$, while step 3 gives $x\\in Z$. The irreducible closed set $\\overline{\\{x\\}}\\subseteq Z$ contains $s$ and hence contains $\\overline{\\{s\\}}=C$. Maximality of $C$ forces $\\overline{\\{x\\}}=C$; uniqueness of its generic point gives $x=s$. (The closure of a singleton is irreducible because any two opens meeting it both contain that point.) Consequently $t\\in A_W\\cap a^{-1}(s)$, contradicting the assumed emptiness. This proves $Z_W\\cap a^{-1}(s)=\\varnothing$ for every old component generic point. Notice that this step needs no flatness or surjectivity.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober), with topology.tex Tags 004V and 004X; elementary generic-point argument filling de Jong Lemma 5.7, p.615, assertion that the new bad closure avoids the old maximal points."
+   }
+  },
+  {
+   "text": "A strict specialization $u\\rightsquigarrow v$ in $W$ remains strict after applying $a$. Choose an affine open $U=\\operatorname{Spec}R$ containing $a(v)$ by [lem-weil-pbc-affine-opens-basis]. It also contains $a(u)$: an open containing a specialization contains its generalization. Finiteness in [def-weil-finite-integral-morphism] identifies $a^{-1}(U)=\\operatorname{Spec}S$ with $S$ a finite $R$-module. The points $u,v$ correspond to primes $\\mathfrak q\\subsetneq\\mathfrak q'$ of $S$: in the Zariski topology $\\overline{\\{\\mathfrak q\\}}=V(\\mathfrak q)$, because a closed set $V(I)$ contains $\\mathfrak q$ exactly when $I\\subseteq\\mathfrak q$. The map on points is contraction for the ring map $R\\to S$ of [def-weil-affine-spectrum]. By [lem-weil-pbc-finite-algebra-is-integral] this map is integral, and [lem-weil-pbc-integral-incomparability] gives $\\mathfrak q\\cap R\\subsetneq\\mathfrak q'\\cap R$. Thus $a(u)\\ne a(v)$. Continuity already gives specialization, proving the claim for each adjacent pair in any chain.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00GT (lemma-integral-no-inclusion); schemes.tex Tag 01IT (lemma-basis-affine-opens), morphisms.tex Tag 01WH. Affine strict-contraction justification of de Jong Lemma 5.7, p.615, finite-map dimension comparison."
+   }
+  },
+  {
+   "text": "Let $w_0\\rightsquigarrow\\cdots\\rightsquigarrow w_n$ be a strict chain in $Z_W$. Its image $x_0\\rightsquigarrow\\cdots\\rightsquigarrow x_n$ is strict by step 5 and lies in $Z$ by step 3. Choose a component $C$ of $Z$ containing $x_0$ and its generic point $s$. Then $s$ specializes to $x_0$, and $s\\ne x_0$ by step 4. Prepending $s$ gives a strict chain of length $n+1$ in $Z$. To compare with [def-kun-topological-krull-dimension], in a closed subset of a scheme chains of irreducible closed sets correspond, in reverse order, to strict specialization chains: choose the unique generic point of each closed set using [lem-weil-pbc-scheme-sober]; conversely send a point to its singleton closure. Inclusion of closures is specialization and equality forces equality of their generic points. Thus $n+1\\le d=\\dim Z$, so $n<d$. The dimension of $Z$ is finite since its closed-set chains are also chains in $V$. If $d=0$, even a chain consisting of one point would give $1\\le0$, so $Z_W=\\varnothing$. Otherwise all chain lengths in a nonempty $Z_W$ lie in $\\{0,\\ldots,d-1\\}$ and their supremum is at most $d-1<d$. Together with step 3 this proves every dimension and empty-case assertion.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull), with schemes.tex Tag 01IS (lemma-scheme-sober); elementary chain-length conclusion filling de Jong Lemma 5.7, second paragraph, p.615."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-incomparability",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong (1997), Lemma 5.7, second paragraph, p.615, publisher scan https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf read online; detailed topological abstraction and affine chain proof supplied by Q46 using Stacks Tags 01J3, 01IS, 0BA8, 01ON, 00GK, 00GT. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a nodal curve family the closure of fibres that are not quasi split has strictly smaller dimension after a finite base cover splitting all fibres over the generic points of the old bad closure",
+   "results": "{\"t\": \"2026-10-22T06:12:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a nodal curve family the closure of fibres that are not quasi split has strictly smaller dimension after a finite base cover splitting all fibres over the generic points of the old bad closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\"], \"digest\": \"8dc227495c339649\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite fibres, quasi-finiteness, affine limits and transcendence-degree inequalities do not give generic membership in an arbitrary bad set or the closure dimension drop under its two spreading hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dimension\", \"finite\"",
+   "results": "{\"t\": \"2026-10-22T06:11:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dimension\\\", \\\"finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite fibres, quasi-finiteness, affine limits and transcendence-degree inequalities do not give generic membership in an arbitrary bad set or the closure dimension drop under its two spreading hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?split|bad.?locus|bad.?closure",
+   "results": "{\"t\": \"2026-10-22T06:11:47Z\", \"tool\": \"grep\", \"query\": \"quasi.?split|bad.?locus|bad.?closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite fibres, quasi-finiteness, affine limits and transcendence-degree inequalities do not give generic membership in an arbitrary bad set or the closure dimension drop under its two spreading hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism splitting the generic points of the bad fibre locus makes the dimension of its closure decrease",
+   "results": "{\"t\": \"2026-10-22T06:11:48Z\", \"tool\": \"leansearch\", \"query\": \"A finite morphism splitting the generic points of the bad fibre locus makes the dimension of its closure decrease\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.IsFinite.casesOn\"], \"digest\": \"a0d452bc5e9318c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite fibres, quasi-finiteness, affine limits and transcendence-degree inequalities do not give generic membership in an arbitrary bad set or the closure dimension drop under its two spreading hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension decreases under a finite surjective map when a fibrewise property is stable under field extension and spreads from generic points of integral closed subschemes",
+   "results": "{\"t\": \"2026-10-22T06:12:16Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension decreases under a finite surjective map when a fibrewise property is stable under field extension and spreads from generic points of integral closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"IntermediateField.relfinrank_comap_comap_eq_relfinrank_of_surjective\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver\", \"lift_trdeg_le_of_surjective\", \"trdeg_le_of_surjective\", \"Subfield.relfinrank_comap_comap_eq_relfinrank_of_surjective\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"RingHom.IsIntegral.specComap_surjective\"], \"digest\": \"6658698cbd240dd5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite fibres, quasi-finiteness, affine limits and transcendence-degree inequalities do not give generic membership in an arbitrary bad set or the closure dimension drop under its two spreading hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme a subset whose complement spreads from generic points contains every generic point of its closure; a finite map avoiding these points strictly lowers dimension",
+   "results": "{\"t\": \"2026-10-23T04:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian scheme a subset whose complement spreads from generic points contains every generic point of its closure; a finite map avoiding these points strictly lowers dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"genericPoints.finite\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.height_of_isClosed\"], \"digest\": \"47e4aacddcf87f30\"}; Read the returned generic-point, sobriety, finite-fibre and component-finiteness declarations. They give ingredients but no theorem about an arbitrary bad set under the stated spreading conditions. Sober.lean:39-94, NoetherianSpace.lean:193-211 and AlgebraicGeometry/Noetherian.lean:364 read.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; component finiteness, sobriety and integral incomparability are already existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGenericPoint, closure",
+   "results": "{\"t\": \"2026-10-23T04:27:54Z\", \"tool\": \"loogle\", \"query\": \"IsGenericPoint, closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"isGenericPoint_closure\", \"IsGenericPoint.def\", \"IsIrreducible.isGenericPoint_genericPoint_closure\", \"isGenericPoint_def\", \"IsGenericPoint.image\"], \"digest\": \"83594d915285f581\"}; Read the returned generic-point, sobriety, finite-fibre and component-finiteness declarations. They give ingredients but no theorem about an arbitrary bad set under the stated spreading conditions. Sober.lean:39-94, NoetherianSpace.lean:193-211 and AlgebraicGeometry/Noetherian.lean:364 read.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; component finiteness, sobriety and integral incomparability are already existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "incomparab|comap_lt_comap|finite.*irreducibleComponents|generic.*closure",
+   "results": "{\"t\": \"2026-10-23T04:27:54Z\", \"tool\": \"grep\", \"query\": \"incomparab|comap_lt_comap|finite.*irreducibleComponents|generic.*closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Tactic/FBinop.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Data/Ordering/Basic.lean\", \"Mathlib/Data/Ordering/Basic.lean\", \"Mathlib/Data/Sign/Basic.lean\", \"Mathlib/Order/Max.lean\", \"Mathlib/Order/Max.lean\", \"Mathlib/Algebra/Colimit/Module.lean\"], \"digest\": \"2021504be1314504\"}; Read the returned generic-point, sobriety, finite-fibre and component-finiteness declarations. They give ingredients but no theorem about an arbitrary bad set under the stated spreading conditions. Sober.lean:39-94, NoetherianSpace.lean:193-211 and AlgebraicGeometry/Noetherian.lean:364 read.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; component finiteness, sobriety and integral incomparability are already existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite map of Noetherian schemes decreases the dimension of the closure of a bad set once all generic bad points are removed",
+   "results": "{\"t\": \"2026-10-23T04:31:34Z\", \"tool\": \"leansearch\", \"query\": \"A finite map of Noetherian schemes decreases the dimension of the closure of a bad set once all generic bad points are removed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"genericPoints\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\"], \"digest\": \"f765f63fd6d20d60\"}; Read the returned generic-point, sobriety, finite-fibre and component-finiteness declarations. They give ingredients but no theorem about an arbitrary bad set under the stated spreading conditions. Sober.lean:39-94, NoetherianSpace.lean:193-211 and AlgebraicGeometry/Noetherian.lean:364 read.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; component finiteness, sobriety and integral incomparability are already existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every good generic point has a good open neighborhood in its closure, the generic points of the closure of the bad set are bad",
+   "results": "{\"t\": \"2026-10-23T04:31:36Z\", \"tool\": \"leanfinder\", \"query\": \"If every good generic point has a good open neighborhood in its closure, the generic points of the closure of the bad set are bad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints.closure\", \"genericPoints\", \"IsIrreducible.isGenericPoint_genericPoint_closure\", \"isGenericPoint_closure\", \"genericPoint_closure\", \"genericPoints.isGenericPoint\", \"IsIrreducible.closure_genericPoint\", \"IsIrreducible.genericPoint_closure_eq\"], \"digest\": \"d0c4b133b5db53cd\"}; Read the returned generic-point, sobriety, finite-fibre and component-finiteness declarations. They give ingredients but no theorem about an arbitrary bad set under the stated spreading conditions. Sober.lean:39-94, NoetherianSpace.lean:193-211 and AlgebraicGeometry/Noetherian.lean:364 read.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; component finiteness, sobriety and integral incomparability are already existing DAG leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGenericPoint|isGenericPoint|closure.*irreducible",
+   "results": "{\"t\": \"2026-10-23T04:31:36Z\", \"tool\": \"grep\", \"query\": \"IsGenericPoint|isGenericPoint|closure.*irreducible\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/Sober.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\"], \"digest\": \"c1633f3f5ad9d666\"}; Read the returned generic-point, sobriety, finite-fibre and component-finiteness declarations. They give ingredients but no theorem about an arbitrary bad set under the stated spreading conditions. Sober.lean:39-94, NoetherianSpace.lean:193-211 and AlgebraicGeometry/Noetherian.lean:364 read.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item; component finiteness, sobriety and integral incomparability are already existing DAG leaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-finite-quasi-splitting",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), one-curve quasi-splitting input: de Jong Lemma 5.7 second paragraph, generic points of bad closure and finite-cover dimension drop; returned item steps 5, 7 and 8.",
+   "via": [
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-bad-locus-dimension-drop",
+  "worker": "stage1",
+  "summary": "Six steps prove generic membership, finite generic-point set, containment and avoidance of the new bad closure, strict contraction of specialization chains, and every dimension/empty case. No new nodes: all non-elementary facts reuse existing nodes. Statement is unchanged mathematically; added explicit reference for the reduced induced closed structures. No exact project attachment or Mathlib match found.",
+  "blueprint": "Auxiliary below det-thm-sf-ctf-stability-direct-images proof (3), via the inherited nodal quasi-splitting ancestry: realizes de Jong Lemma 5.7 second-paragraph maximal bad points and finite-cover dimension descent, i.e. returned parent steps 5, 7 and 8. Nearest imported blueprint ancestor is null as reported by tools/blueprint_refs.py; retain that recorded ancestry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-81779f914",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-81779f914 (reviewer sub-agent of L); spot-checked: First split of an unsplit item. Live and side-live both hold it unsplit with an empty proof, and no repair note exists for it. The delivery creates 0 new nodes. The only statement change adds a reference to the Lean-closed lem-weil-pbc-reduced-induced-closed-subscheme, also added to stmt_deps; it names a structure the statement already used. Step 1: Noetherian finite components (Mathlib leaf), sobriety, reduced-induced (2) and def-pc-integral-scheme's reduced+irreducible equivalence make each component a legitimate spreading test subscheme. Step 2: the open D cut out of E lies in C_i, and intersecting it with H gives a nonempty ambient-relative open missing B, contradicting density; relative vs ambient opens are handled. Step 3: continuity gives Z_W ⊆ a^{-1}(Z). Step 4: from the generic point t ∈ A_W, a(t) ⇝ s, and maximality plus uniqueness of generic points give a(t) = s, contradicting A_W ∩ a^{-1}(s) = ∅. Step 5: an affine U contains both images, finiteness gives S finite over R, the primes satisfy q ⊊ q', and the integral and incomparability leaves give a strict contraction with no injectivity needed (checked against Stacks 00GT, algebra.tex:7813, and 00GK). Step 6: prepending s gives length n+1 ≤ d; chains match the closed-set Krull definition by sobriety; the d = 0 and empty cases are handled. Tested on A¹ with A = {0}, A = all closed points (spreading fails, as needed), A² with a line plus a point, and finite closed immersions; no counterexample found. The parent nodal-finite-quasi-splitting uses the item in steps 3 and 5 exactly as stated. The duplicate search over DAG statements found nothing equivalent. pqf-lem-incomparability is the same ring fact as the cited leaf. No SGA, no off-route statements, tool_uses empty. The de Jong PDF is not available locally (WANTED); proof_origin is agent, and I verified the proof on its own merits. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctorsBasics.FiniteBadLocusDimensionDrop",
+  "declaration": "AlgebraicGeometry.finite_bad_locus_dimension_drop",
+  "file": "lean/Sheaf/SixFunctorsBasics/FiniteBadLocusDimensionDrop.lean",
+  "statement": "theorem finite_bad_locus_dimension_drop (V : Scheme.{u}) [IsLocallyNoetherian V] [CompactSpace V] (hdimV : topologicalKrullDim V < ⊤) (A : Set V) (hspread : ∀ (T : Scheme.{u}) (i : T ⟶ V) [IsClosedImmersion i] [IsIntegral T] (ξ : T), IsGenericPoint ξ Set.univ → i ξ ∉ A → ∃ U : T.Opens, U ≠ ⊥ ∧ ∀ t : T, t ∈ U → i t ∉ A) : (∀ C ∈ irreducibleComponents ↥(closure A), ∀ ξ : ↥(closure A), IsGenericPoint ξ C → (ξ : V) ∈ A) ∧ Set.Finite {ξ : ↥(closure A) | ∃ C ∈ irreducibleComponents ↥(closure A), IsGenericPoint ξ C} ∧ (∀ (W : Scheme.{u}) [IsLocallyNoetherian W] [CompactSpace W] (a : W ⟶ V) [IsFinite a] (A_W : Set W), (∀ (T : Scheme.{u}) (i : T ⟶ W) [IsClosedImmersion i] [IsIntegral T] (ξ : T), IsGenericPoint ξ Set.univ → i ξ ∉ A_W → ∃ U : T.Opens, U ≠ ⊥ ∧ ∀ t : T, t ∈ U → i t ∉ A_W) → A_W ⊆ a ⁻¹' A → (∀ C ∈ irreducibleComponents ↥(closure A), ∀ s : ↥(closure A), IsGenericPoint s C → A_W ∩ a ⁻¹' ({(s : V)} : Set V) = ∅) → closure A_W ⊆ a ⁻¹' closure A ∧ (∀ C ∈ irreducibleComponents ↥(closure A), ∀ s : ↥(closure A), IsGenericPoint s C → closure A_W ∩ a ⁻¹' ({(s : V)} : Set V) = ∅) ∧ (∀ d : ℕ, (closure A).Nonempty → topologicalKrullDim (Scheme.IdealSheafData.vanishingIdeal (⟨closure A, isClosed_closure⟩ : TopologicalSpace.Closeds V)).subscheme = (d : WithBot ℕ∞) → (∀ (n : ℕ) (c : Fin (n + 1) → ↥(closure A_W)), (∀ j : Fin n, c (Fin.castSucc j) ⤳ c (Fin.succ j) ∧ c (Fin.castSucc j) ≠ c (Fin.succ j)) → n < d) ∧ (d = 0 → closure A_W = ∅) ∧ ((closure A_W).Nonempty → topologicalKrullDim (Scheme.IdealSheafData.vanishingIdeal (⟨closure A_W, isClosed_closure⟩ : TopologicalSpace.Closeds W)).subscheme < topologicalKrullDim (Scheme.IdealSheafData.vanishingIdeal (⟨closure A, isClosed_closure⟩ : TopologicalSpace.Closeds V)).subscheme)) ∧ (closure A = ∅ → closure A_W = ∅))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21bbe82c8",
+  "group": "NS",
+  "result": "pass",
+  "note": "Only the item node differs from side-live; its non-lean fields equal live, so there is no statement change and no new or dep records. lean.statement is verbatim the file signature (script check). Clause match: V IsLocallyNoetherian+CompactSpace with dim<⊤ (allows empty); spreading over all closed immersions from IsIntegral T in universe u, with nonempty U : T.Opens missing A; component generic points of ↥(closure A) lie in A, and Set.Finite; the W clause assumes Noetherian W, IsFinite a, the same spreading, A_W ⊆ a⁻¹A and fibre avoidance; conclusions are closure inclusion, closure fibre avoidance, and for each d : ℕ with nonempty Z and dim of the reduced induced subscheme (vanishingIdeal.subscheme) = d: strict Fin(n+1) chains give n<d, d=0 → Z_W=∅, dim Z_W < dim Z; plus Z=∅ → Z_W=∅. The ∀ d guard is equivalent because Z_W nonempty implies Z nonempty and dim Z ≤ dim V < ⊤. Edge cases checked: empty V/A/W, n=0, d=0, non-reduced ambients. No extra assumptions; stmt_deps complete and none spurious; docstrings carry the source place, blueprint tag and six steps; sorry only; no definitions; no pro-etale. Not compiled (no file changed); worker reports clean compiles."
+ }
+}

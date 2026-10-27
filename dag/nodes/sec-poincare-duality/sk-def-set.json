@@ -135,5 +135,40 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-398281534 (reviewer sub-agent of L); spot-checked: Read in full: the item sk-def-set, the unit record, the main-20261015 _section.md (order 2748) and the master unit text. Also read the full statements of all 7 statement dependencies (sk-def-sf-setting, sk-def-sf-operations (v)/(vi)/warning, sk-prop-sf-existence, thm-sf-ambient-adjoint-class, sk-prop-sf-rf-shriek-preservation, thm-sf-ctf-stability (i)-(vii), sk-def-sf-admissible), and the blueprint sk-thm-sf-ctf-stability and sk-rem-sf-fullcd-scope. The statement matches the current source clause by clause: the finite-field datum and four coefficient stages, X_0 smooth of relative dimension d, separated, finite type and geometrically connected, the base change X = X_0 x_{k_0} k, no admissibility hypothesis, and properness excluded. Ra_X^! is sk-def-sf-operations (vi), which is defined for every separated finite-type morphism; a_X qualifies. Its adjunction is thm-sf-ambient-adjoint-class (2) on the etale-origin class at the finite stage, and preservation of D^b_ctf is thm-sf-ctf-stability (v) at the finite stage and (vii) at the other stages. The replacement sk-thm-sf-ctf-stability -> thm-sf-ctf-stability is correct, since that node carries the unit. The forward references to downstream duality nodes were rightly turned into prose. A reachability check over stmt_deps and proof_deps shows no dependency reaches sk-def-set, so the imported in_cycle flag is resolved. The report prose about removing operation references is inconsistent with the final file, which keeps sk-def-sf-operations, but the files are acyclic. The item is a definition with no proof steps and the delivery creates no new nodes. The slopmaster2 declaration AlgebraicGeometry.PoincareDualitySetting (lines 75-82) is geometry-only and its docstring says it omits the coefficient datum, so not attaching it is correct. Duplicate candidate def-pod-conventions (sec-six-functors) is not the same statement: it assumes admissibility and adds orientation, duals and Frobenius. same_as [] is defensible; the conflict between the two nodes is noted for the maintainer. Edge cases checked: d=0 gives X=Spec k and a_X=id; empty X_0 is excluded by connectedness; nonproper A^1 is allowed; all four stages are covered. The parenthetical 'fails for smooth proper curves' is the source's own wording and is supported by the elliptic-curve warning. No SGA source is cited, no fixes were made, no tool_uses. Full details are in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.PoincareDualitySetting"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.PoincareDualitySetting",
+     "module": "WeilConjectures.AlgebraicGeometry.PoincareDualitySetting",
+     "lines": [
+      68,
+      83
+     ],
+     "kind": "structure",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Work with the finite-field datum $(p,a,q,k_0,k)$, $\\ell$, $E$, $\\Oe$,\n$\\pi_E$, $\\AEn=\\Oe/\\pi_E^n$ and the admissible coefficient rings\n$\\Lambda\\in\\{\\AEn,\\Oe,E,\\Qlb\\}$ fixed in [def-sf-setting], each\nregarded as a condensed ring. For a scheme $T$ in this setting the ambient\ncategory is $D(T_{\\mathrm{pro\\acute et}},\\Lambda)$, the derived category of\n$\\Lambda_T=p_T^*\\Lambda$-modules ([det-def-sfb-pulled-back-coefficients]),\nand the coefficients are its full subcategories\n$\\Dctf(T,\\Lambda)\\subseteq\\Dbc(T,\\Lambda)$ of\n[det-def-sfb-bounded-constructible]; for $\\Lambda=\\Oe,E,\\Qlb$ the two agree.\nFor finite $\\Lambda=\\AEn$ these are equivalently the étale categories, by the\ncomparison of [def-sf-setting]. Let $X_0/k_0$ be smooth of relative\ndimension $d$, separated of finite type and geometrically connected, put\n$X=X_0\\times_{k_0}k$ and $s=\\Spec k$, and let $a_X:X\\to s$ be the\nstructure morphism. No admissibility hypothesis is imposed on $a_X$: its\nexceptional inverse image $Ra_X^!$ is the constructible exceptional adjoint\nof [det-def-sf-operations](vi), the right adjoint of $Ra_{X!}$ on\n$\\Dctf$ given by [sk-thm-existence], which exists and preserves\n$\\Dctf$ for every admissible $\\Lambda$ and every separated finite-type morphism\n([thm-sf-ambient-adjoint-class], [sk-prop-sf-rf-shriek-preservation],\n[sk-thm-sf-ctf-stability]); the\nambient datum of [sk-def-sf-admissible], which fails for smooth proper\ncurves ([sk-rem-sf-fullcd-scope]), is not used. Properness of $X_0$ is *not* part of this setting: the\nduality results [sk-thm-sf-global-duality], [sk-thm-sf-identification]\nand [sk-thm-derived-duality]\nare formulated with compact supports and never use it. It is imposed\nexplicitly, and only, in [sk-def-trace-cup], [sk-cor-trace],\n[sk-thm-poincare-duality] and the final clause of\n[sk-thm-derived-duality], each of which needs\n$Ra_{X!}\\cong Ra_{X*}$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

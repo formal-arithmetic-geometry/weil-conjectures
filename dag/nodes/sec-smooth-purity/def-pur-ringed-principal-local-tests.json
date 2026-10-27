@@ -1,0 +1,125 @@
+{
+ "id": "def-pur-ringed-principal-local-tests",
+ "kind": "definition",
+ "title": "Ringed Principal Local Tests",
+ "status": "split",
+ "statement": "For a ringed site with coefficient universe containing its object and arrow universes, define a compatible slice section from one terminal value, local divisibility by a global section using a covering sieve, and the localization test as derived internal Hom from the sheafified localization into exact derived slice restriction. Principal local completeness means zero for all such tests at locally divisible sections. Every slice section is determined by its terminal value; local completeness is invariant under derived isomorphism. Dependencies: [def-pur-derived-internal-hom], [def-weil-pbc-ringed-section-localization], [lem-sf-site-perfect-restriction-exact], [lem-sf-site-perfect-restriction-additive], [lem-sf-site-perfect-derived-restriction-iso].",
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sf-site-perfect-restriction-additive",
+  "lem-sf-site-perfect-derived-restriction-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "Vanishing for sections locally divisible by the specified compatible section. Source: Stacks 0999.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-ringed-section-localization",
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-sf-site-perfect-restriction-additive",
+    "lem-sf-site-perfect-derived-restriction-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sf-site-perfect-restriction-additive",
+  "lem-sf-site-perfect-derived-restriction-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a ringed site with coefficient universe containing its object and arrow universes, define a compatible slice section from one terminal value, local divisibility by a global section using a covering sieve, and the localization test as derived internal Hom from the sheafified localization into exact derived slice restriction. Principal local completeness means zero for all such tests at locally divisible sections. Every slice section is determined by its terminal value; local completeness is invariant under derived isomorphism.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": (structureSheaf <| Γ.obj <| op X).val.obj (op <| basicOpen r) ⟶ X.presheaf.obj (op <| X.toΓSpecMapBasicOpen r)\", \"doc\": \"For a locally ringed space $X$ and element $r$ in its ring of global sections $\\\\Gamma(X)$, this is the canonical ring homomorphism from the localization $\\\\Gamma(X)_r$ to the ring of sections over the \"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \": LocalPredicate (Localizations M)\", \"doc\": \"The local predicate on localized module sections over $\\\\operatorname{Spec}(R)$ obtained by sheafifying the prelocal predicate that a section is locally expressible as a fraction $m/s$ with $m \\\\in M$ a\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsLocalHomCarrierStalkCommRingCatPresheafStructureSheafOfAtPrimeAsIdealRingHomHomStalkToFiberRingHom\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum R) : IsLocalHom (stalkToFiberRingHom R x).hom\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the ring homomorphism from the stalk $ \\\\mathcal{O}_x $ of the structure sheaf at $ x $ to the localizat\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : (structureSheaf R).presheaf.stalk x ⟶ CommRingCat.of (Localization.AtPrime x.asIdeal)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, this ring homomorphism maps the stalk $ \\\\mathcal{O}_x $ of the structure sheaf at $ x $ to the localiza\"}\n  {\"name\": \"TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \"(U) : IsLocalization (G.obj U) (G.localizationPresheaf.obj U)\", \"doc\": \"For any open set $ U $ in a topological space $ X $, the localization of the submonoid $ \\\\mathcal{G}(U) $ in the ring $ \\\\mathcal{F}(U) $ satisfies the universal property of localization, where $ \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme.{u}) [IsAffine X] (r : Γ(X, ⊤)) : IsLocalization.Away r Γ(X.basicOpen r, ⊤)\", \"doc\": \"For any affine scheme $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$, the ring of sections over the basic open set $X_{r}$ is canonically isomorphic to the localizati\"}\n  {\"name\": \"ModuleCat.Tilde.openToLocalization\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U : Opens (PrimeSpectrum R)) (x : PrimeSpectrum R) (hx : x ∈ U) :\\n  (tildeInModuleCat M).obj (op U) ⟶ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"Given an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ containing a prime ideal $ \\\\mathfrak{p} $, this morphism maps sections of the sheaf $ \\\\widetilde{M} $ over $ U $ to the loca\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZero\", \"mapIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsZero.*(mapIso|iso|iff) Mathlib/ (local read-only Mathlib source)",
+   "results": "118 matching source lines. First matches:\nMathlib/NumberTheory/ModularForms/BoundedAtCusp.lean:31:  rw [IsZeroAtImInfty, ZeroAtFilter, tendsto_zero_iff_norm_tendsto_zero] at hf ⊢\nMathlib/NumberTheory/ModularForms/BoundedAtCusp.lean:62:lemma IsZeroAt.smul_iff : IsZeroAt (g • c) f k ↔ IsZeroAt c (f ∣[k] g) k := by\nMathlib/NumberTheory/ModularForms/BoundedAtCusp.lean:88:  ⟨fun hc ↦ hc g hg , by simp [← hg, IsZeroAt.smul_iff, isZeroAt_infty_iff]⟩\nMathlib/NumberTheory/ModularForms/BoundedAtCusp.lean:106:    simpa [IsZeroAt.smul_iff, isZeroAt_infty_iff] using! fun hfc ↦ ⟨γ, rfl, hfc⟩\nMathlib/NumberTheory/ModularForms/BoundedAtCusp.lean:108:    simpa [IsZeroAt.smul_iff, isZeroAt_infty_iff] using! b\nMathlib/NumberTheory/ModularForms/BoundedAtCusp.lean:120:  simpa [IsZeroAt.smul_iff, isZeroAt_infty_iff] using! h γ rfl\nMathlib/NumberTheory/ModularForms/Basic.lean:681:      ← OnePoint.IsZeroAt.smul_iff]\nMathlib/NumberTheory/ModularForms/Basic.lean:721:  rw [← OnePoint.isZeroAt_infty_iff, SL_slash, ← OnePoint.IsZeroAt.smul_iff]\nMathlib/NumberTheory/ModularForms/Bounds.lean:195:  rw [IsZeroAtImInfty, ZeroAtFilter, ← tendsto_zero_iff_norm_tendsto_zero]\nMathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean:128:    exact P.prop_of_isZero (IsZero.of_iso hZ\nMathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean:234:    exact P.prop_of_isZero (IsZero.of_iso hZ\nMathlib/CategoryTheory/Subobject/Lattice.lean:727:  ⟨⟨mk (0 : 0 ⟶ X), mk (𝟙 X), fun w => h (IsZero.of_iso (isZero_zero C) (isoOfMkEqMk _ _ w).symm)⟩⟩",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedPrincipalLocalTests",
+  "file": "lean/Sheaf/CategoryTheory/RingedPrincipalLocalTests.lean",
+  "declaration": "CategoryTheory.principalLocallyComplete",
+  "statement": "def principalLocallyComplete (a : (R.obj ⋙ forget CommRingCat).sections)\n    (N : DerivedCategory (SheafOfModules.{max c v r} Rg)) : Prop",
+  "declarations": [
+   "CategoryTheory.principalSliceSection",
+   "CategoryTheory.principalSliceSection_eta",
+   "CategoryTheory.principalLocallyDivisible",
+   "CategoryTheory.principalLocalTest",
+   "CategoryTheory.principalLocallyComplete",
+   "CategoryTheory.principalLocallyComplete_iso"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

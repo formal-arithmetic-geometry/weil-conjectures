@@ -358,19 +358,30 @@
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/VeryTameLogQuotient.lean",
   "statement": "theorem exists_veryTame_logQuotient (X : FineSaturatedLogScheme.{u}) [IsNoetherian X.scheme] (G : Type v) [Group G] [Finite G] (a : FSLogGroupAction G X) (hadmissible : ∀ x : X.scheme, ∃ U : X.scheme.Opens, x ∈ U ∧ IsAffineOpen U ∧ ∀ (g : G) (z : X.scheme), (a.baseAction g).hom z ∈ U ↔ z ∈ U) (hfree : a.IsGenericallyFree) (hregular : X.IsLogRegular) (hverytame : a.IsVeryTame) : ∃ (Y : FineSaturatedLogScheme.{u}) (q : EtaleLogHom X Y), IsNoetherian Y.scheme ∧ IsFinite q.base ∧ Surjective q.base ∧ a.IsQuotient q ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x z : Spec (.of Ω) ⟶ X.scheme), x ≫ q.base = z ≫ q.base ↔ ∃ g : G, x ≫ (a.baseAction g).hom = z) ∧ Y.IsLogRegular ∧ q.IsLogEtale ∧ q.IsKummer ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), q.HasStrictLocalKummerChart t) ∧ ∀ (S : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X S), (∀ g : G, (a.logMap g).CompEq f f) → ∃! r : EtaleLogHom Y S, q.CompEq r f",
-  "branch": "newtargets-dag",
-  "by": "Q46",
-  "date": "2026-10-18",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.VeryTameLogQuotient deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Section 1(B): the old record points to a module explicitly deleted on 2026-10-20. It is absent locally, and scompile.py --source Sheaf.AlgebraicGeometry.VeryTameLogQuotient reports Module source unavailable. Restored exactly the recorded quotient theorem signature, with its existing fs/Kummer/action/very-tame notions, full geometric-orbit and strict-chart conclusions, and unique log factorization; the dependency statement and all non-lean fields are unchanged."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-74dae3218",
-  "group": "Q46",
+  "reviewer": "NT-stage2-cc-641b404f7",
+  "group": "Q110",
   "result": "pass",
-  "note": "Checked ILO VI 2.1-2.3, 3.1-3.5 and proof 3.7 clause by clause. Hypotheses: Noetherian fs log regular X; finite G acting by log automorphisms; admissible invariant affine cover; generically free (geometric stabilizers on a dense invariant open); IsVeryTame = IsTame + inertia Associated on log germs (characteristic monoid) + ring germ difference in nonunitIdeal (strict local stratum). Conclusions: exists Y and q; Noetherian, finite, surjective; IsQuotient (invariant rings, M_Y=(q_*M)^G on etale tests, injective log pullback); geometric orbit fibres on Spec Omega points; Y log regular; IsLogEtale; IsKummer (ILO 2.1); HasStrictLocalKummerChart at every geometric point (fs stalk charts, ring map pinned on germs, injective Kummer h, finite cokernel killed by a d invertible on O^sh_Y, IsPullback correctly oriented, as in ILO 2.2/3.5(c)); unique EtaleLogHom factorization of invariant maps (uniqueness follows from log_injective). New def nodes def-per-very-tame-fs-log-action and def-per-kummer-log-morphism are true and not hollow, with source/blueprint docstrings. No duplicate: IsVeryTameDivisorialAction/veryTame_quotient_logRegular are a divisorial-pair interface; no competing landed node. The statement interface matches the live citer exists_gabber_logSmooth_equivariant_modification. Imports: all proof dependencies with recorded modules are imported. lean.statement is verbatim in all 3 records. Compile: nt_compile --json clean (3.0 s, 3.0 s, 2.5 s) at load 83. Edge cases: empty X, trivial G, trivial log structure, t->-t, universes. No findings."
+  "note": "Rebased re-delivery after 1bef FIX was refused at landing (composition node absent from 1bef base). All 3 Lean files byte-identical to a9b5/1bef (sha256); Q110's copy of def-per-log-morphism-composition removed, item and def-per-kummer-g-cover cite Q67's landed node on base b5f6feff, which (Q95 superset) owns EtaleLogHom.comp too. def-per-inverse-log-morphisms unchanged from 1bef. Cover node only rewords the composition sentence (accurate: EtaleLogHom.comp = toFSHom of EtaleLogMap.comp). Re-read vs CompEq/IsFSPullback/AreInverses: composite directions, fs diagonal, induced action, ∃! harmless, cover/quotient O_E and M_E, geometric orbits, coherence, very-tame application all correct; statements verbatim; sorry-only. No parallel clash; all dep records and modules byte-equal base vs side-live tip. Advisories: author self-check second reading; superseded report paragraph. No file changed, no compile."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

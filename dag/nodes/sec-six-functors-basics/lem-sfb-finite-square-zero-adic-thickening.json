@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-finite-square-zero-adic-thickening",
+ "kind": "statement",
+ "title": "Adic completeness lifts across a square-zero ideal",
+ "statement": "Let $C$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $Q\\subseteq C$ an ideal with $Q^2=0$, and $H\\subseteq C$ any ideal. Suppose the quotient ring $C/Q$ is $(H+Q)/Q$-adically complete [def-weil-pbc-adically-complete-ring]. Then $C$ is $H$-adically complete. No section of $C\\to C/Q$, coefficient-ring flatness, or locality assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0DYC (lemma-complete-modulo-nilpotent), specialization to its I=Q with Q squared zero and its J=H. The general lemma assumes Q-adic completeness, automatic for Q squared zero."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "For every $n\\geq2$, the equality $Q^n=0$ follows from $Q^2=0$. Thus the quotient system defining the $Q$-adic completion [def-weil-pbc-adically-complete-ring] has the constant tail $C/Q^n=C$ with identity transition maps. A compatible family $(x_n)$ is uniquely determined by $x_2\\in C$: its terms for $n\\geq2$ equal $x_2$, and its earlier terms are the images of $x_2$ under the quotient maps. Hence the canonical map $C\\to\\varprojlim_n C/Q^n$ is bijective, so $C$ is $Q$-adically complete.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0317 (definition-complete), applied to the eventually constant quotient system; verification of the first completeness hypothesis in Tag 0DYC (lemma-complete-modulo-nilpotent)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-two-ideal-adic-completeness] with $R=C$, $I=Q$, and $J=H$. Its Noetherian hypothesis is exactly the hypothesis on $C$. Its first completeness hypothesis is step 1, and its quotient completeness hypothesis is precisely the assumed completeness of $C/Q$ for $(Q+H)/Q=(H+Q)/Q$. The lemma therefore gives $H$-adic completeness of $C$. The cited statement imposes no section, coefficient-ring flatness, or locality hypothesis.",
+   "uses": [
+    "lem-sfb-two-ideal-adic-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0DYC (lemma-complete-modulo-nilpotent), statement, with its I=Q and J=H."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "lem-sfb-two-ideal-adic-completeness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0DYC (lemma-complete-modulo-nilpotent), specialized to I=Q, J=H; Tag 0317 (definition-complete) for the elementary constant-tail verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A square zero extension of a Noetherian ring by a finite module is Noetherian, its adic completion remains exact, and it is complete if the quotient is complete",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: map_exact and map_injective assume Noetherianity of the ambient ring; neither proves Noetherianity from a finite square-zero kernel nor lifts completeness from its quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Ideal.Quotient\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: map_exact and map_injective assume Noetherianity of the ambient ring; neither proves Noetherianity from a finite square-zero kernel nor lifts completeness from its quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent|square.zero|quotient.*complete|complete.*quotient",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"41\", \"text\": \"    obtain ⟨n, hn⟩ := (isArtinianRing_iff_isNilpotent_maximalIdeal A).mp ‹_›\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: map_exact and map_injective assume Noetherianity of the ambient ring; neither proves Noetherianity from a finite square-zero kernel nor lifts completeness from its quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring with finite square zero ideal and Noetherian complete quotient is Noetherian and adically complete",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"Ideal.Quotient.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Noetherian\", \"type\": \"{R : Type*} [CommRing R] [IsNoetherianRing R] (I : Ideal R) : IsNoetherianRing (R ⧸ I)\", \"doc\": \"For any Noetherian commutative ring $ R $ and any ideal $ I $ of $ R $, the quotient ring $ R/I $ is also Noetherian. This means that if every ideal of $ R $ is finitely generated, then every ideal of\"}\n  {\"name\": \"IsAdicComplete.bot\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M], IsAdicComplete ⊥ M\", \"doc\": \"For any commutative ring $ R $ and any $ R $-module $ M $, the module $ M $ is adic complete with respect to the zero ideal $ \\\\{0\\\\} $.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsAdicComplete.mk\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [toIsHausdorff : IsHausdorff I M] [toIsPrecomplete : IsPrecomplete I M], IsAdicComplete I M\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $ equipped with an additive commutative group structure, if $ M $ is Hausdorff with respect to the $ I $-adic topology \"}\n  {\"name\": \"IsAdic.isPrecomplete_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Topology\", \"type\": \": IsPrecomplete I R ↔ CompleteSpace R\", \"doc\": \"A commutative ring $ R $ equipped with the adic topology induced by an ideal $ I $ is precomplete if and only if $ R $ is a complete space.\"}\n  {\"name\": \"AdicCompletion.liftRingHom.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  (f f_1 : (n : ℕ) → R →+* S ⧸ I ^ n) (e_f : f = f_1)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m),\\n  AdicCompletion.liftRingHom I f hf = AdicCompletion.liftRingHo\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise addition and multiplication induced by the inverse limit of the quotient ri\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: map_exact and map_injective assume Noetherianity of the ambient ring; neither proves Noetherianity from a finite square-zero kernel nor lifts completeness from its quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completeness lifts across a finite nilpotent ideal in a Noetherian ring and completion preserves the extension sequence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"IsAdicComplete.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"Let $R$ be a commutative ring, $I$ be an ideal of $R$, and $M, N$ be $R$-modules. Assume that $N$ is $I$-adically complete. Let $(f_n : M \\\\to N/I^n N)_{n \\\\in \\\\mathbb{N}}$ be a compatible family of $R$\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_comp_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.StrictMono.lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {a : ℕ → ℕ} →\\n   \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, a strictly monotonic sequence $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and a compatible family of $ R $-linear maps $ f_n : M \\\\\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: map_exact and map_injective assume Noetherianity of the ambient ring; neither proves Noetherianity from a finite square-zero kernel nor lifts completeness from its quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a Noetherian ring has a square zero ideal and its quotient is complete for the image of a second ideal then the ring is complete for that second ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsAdicComplete I M], IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if $ M $ is adic complete with respect to $ I $, then $ M $ is precomplete with respect to $ I $.\"}\n  {\"name\": \"IsAdic.isPrecomplete_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Topology\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : UniformSpace R] [IsUniformAddGroup R] {I : Ideal R},\\n  IsAdic I → (IsPrecomplete I R ↔ CompleteSpace R)\", \"doc\": \"A commutative ring $ R $ equipped with the adic topology induced by an ideal $ I $ is precomplete if and only if $ R $ is a complete space.\"}\n  {\"name\": \"isAdicComplete_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsAdicComplete I M ↔ IsHausdorff I M ∧ IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the module $ M $ is adic complete with respect to $ I $ if and only if it is both Hausdorff (the intersection of all $\"}\n  {\"name\": \"IsAdic.isAdicComplete_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Topology\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : UniformSpace R] [IsUniformAddGroup R] {I : Ideal R},\\n  IsAdic I → (IsAdicComplete I R ↔ CompleteSpace R ∧ T2Space R)\", \"doc\": \"For a commutative ring $ R $ equipped with the adic topology induced by an ideal $ I $, $ R $ is adic complete with respect to $ I $ if and only if $ R $ is a complete Hausdorff space.\"}\n  {\"name\": \"AdicCompletion.instIsHausdorff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsHausdorff I (AdicCompletion I M)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and a semiring $ S $ with compatible scalar actions on $ R $ and $ M $ satisfying the s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, Henselianity, definitions of completeness and lifting idempotents do not lift completeness across a square-zero quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete.*(quotient|Quotient)|complete.*nilpotent|nilpotent.*complete",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Idempotents.lean\", \"line\": \"31\", \"text\": \"- `CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker`:\"}\n  {\"file\": \"Mathlib/RingTheory/Idempotents.lean\", \"line\": \"304\", \"text\": \"lemma CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\"}\n  {\"file\": \"Mathlib/RingTheory/Idempotents.lean\", \"line\": \"325\", \"text\": \"lemma CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\"}\n  {\"file\": \"Mathlib/RingTheory/Idempotents.lean\", \"line\": \"348\", \"text\": \"theorem CompleteOrthogonalIdempotents.of_ker_isNilpotent_of_isMulCentral\"}\n  {\"file\": \"Mathlib/RingTheory/Idempotents.lean\", \"line\": \"405\", \"text\": \"theorem CompleteOrthogonalIdempotents.of_ker_isNilpotent (h : ∀ x ∈ RingHom.ker f, IsNilpotent x)\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean\", \"line\": \"20\", \"text\": \"related to `IsAdicComplete` to find a lift element from compatible sequences in the quotients.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: flatness, Henselianity, definitions of completeness and lifting idempotents do not lift completeness across a square-zero quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete.*(quotient|Quotient)|complete.*nilpotent|nilpotent.*complete",
+   "results": "Hits: Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean Searched RingTheory.",
+   "date": "2026-10-23",
+   "verdict": "no match: definitions of completeness, flatness of completion, and Henselianity do not lift completeness from a square-zero quotient; the lift and of_lift declarations assume completeness of the target. Read AdicCompletion/Basic.lean:42-56, 710-737; RingHom.lean:34-56; Exactness.lean:85-111."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian ring is adically complete if its quotient by a square zero ideal is complete for the image ideal",
+   "results": "Hits: IsAdicComplete, IsAdicComplete.bot, AdicCompletion.instCommRing, IsAdicComplete.mk, AdicCompletion, AdicCompletion.module, IsAdic.isPrecomplete_iff, AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-23",
+   "verdict": "no match: definitions of completeness, flatness of completion, and Henselianity do not lift completeness from a square-zero quotient; the lift and of_lift declarations assume completeness of the target. Read AdicCompletion/Basic.lean:42-56, 710-737; RingHom.lean:34-56; Exactness.lean:85-111."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Ideal.Quotient\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: definitions of completeness, flatness of completion, and Henselianity do not lift completeness from a square-zero quotient; the lift and of_lift declarations assume completeness of the target. Read AdicCompletion/Basic.lean:42-56, 710-737; RingHom.lean:34-56; Exactness.lean:85-111."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a Noetherian ring has a square zero ideal and its quotient is complete for the image of an ideal H then the ring is H adically complete",
+   "results": "Hits: IsAdicComplete, IsAdic.isAdicComplete_iff, isAdicComplete_iff, IsAdicComplete.henselianRing, IsAdic.isPrecomplete_iff, AdicCompletion.flat_of_isNoetherian, IsAdicComplete.toIsPrecomplete, IsAdicComplete.bot",
+   "date": "2026-10-23",
+   "verdict": "no match: definitions of completeness, flatness of completion, and Henselianity do not lift completeness from a square-zero quotient; the lift and of_lift declarations assume completeness of the target. Read AdicCompletion/Basic.lean:42-56, 710-737; RingHom.lean:34-56; Exactness.lean:85-111."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|nilpotent|square.zero",
+   "results": "Hits: Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean Searched RingTheory/AdicCompletion.",
+   "date": "2026-10-23",
+   "verdict": "no match: definitions of completeness, flatness of completion, and Henselianity do not lift completeness from a square-zero quotient; the lift and of_lift declarations assume completeness of the target. Read AdicCompletion/Basic.lean:42-56, 710-737; RingHom.lean:34-56; Exactness.lean:85-111."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic completeness of a Noetherian ring lifts across a nilpotent kernel from its quotient",
+   "results": "Hits: IsAdicComplete.of_liftRingHom, IsAdicComplete.henselianRing, AdicCompletion.flat_of_isNoetherian, IsAdicComplete.of_lift, AdicCompletion.map_injective, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, IsAdicComplete, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-23",
+   "verdict": "no match: definitions of completeness, flatness of completion, and Henselianity do not lift completeness from a square-zero quotient; the lift and of_lift declarations assume completeness of the target. Read AdicCompletion/Basic.lean:42-56, 710-737; RingHom.lean:34-56; Exactness.lean:85-111."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exal-completion-smooth-complement",
+  "date": "2026-10-23",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Tangent comparison for N=P, before passing from the J-adic completion to its complete local factors. Supporting lemma: Finite square-zero thickenings preserve Noetherianity and lift adic completeness.",
+   "via": [
+    "lem-sfb-exal-completion-smooth-complement",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-square-zero-adic-thickening",
+  "worker": "stage1",
+  "summary": "Checked Stacks Tag 0DYC against the unchanged statement and reused the already existing, more general lem-sfb-two-ideal-adic-completeness. Proved Q-adic completeness directly from the constant tail C/Q^n=C for n at least two, then checked every hypothesis of the two-ideal lemma. No new nodes, no attachment, and no stronger finiteness or locality assumption. Repeated searches for the present statement with two phrasings and inspected the actual Mathlib hits.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the existing alteration/deformation dependency chain in blueprint.from.place: the square-zero completeness prerequisite for lem-sfb-exal-completion-smooth-complement. Read the latest blueprint proof (3); its generic tool route is unchanged. The ancestor command reports None for the inherited created-node chain; retained that existing null ancestry and its full via list."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-32bb1405d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-32bb1405d (reviewer sub-agent of L); spot-checked: Read the item in full, both cited nodes' statements, Stacks algebra.tex 23215-23237 (Tag 0DYC lemma-complete-modulo-nilpotent) and the citer's use. The statement is identical to live/side-live and is not weakened. It is the case I=Q, J=H of 0DYC, where Q-completeness follows from Q^2=0. Step 1 (elementary, uses def-weil-pbc-adically-complete-ring): Q^n=0 for n>=2, so C/Q^n=C with identity transitions, and the canonical map is bijective in both directions, so C is Q-complete. Step 2 is an exact application of the existing same-unit unsplit node lem-sfb-two-ideal-adic-completeness with R=C, I=Q, J=H: Noetherian by hypothesis, I-complete by step 1, quotient complete for (Q+H)/Q by hypothesis. It uses only that node's statement, there is no cycle and there are no tool_uses. There are no new nodes. This is not relabelling: the cited node is a generalization, not a clause of the item, and the item already existed. There is no re-split note. Duplicate search: the 0DYC and square-zero greps found only the generalization, applications and the citer. The citer lem-sfb-exal-completion-smooth-complement step 4 fits the statement. Small cases Q=0, H=0, H=C (forces C=0), k[[t]][e]/(e^2) and k[t,e]/(e^2) all agree. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SquareZeroAdicThickening",
+  "declaration": "IsAdicComplete.of_square_zero_quotient",
+  "file": "lean/Sheaf/RingTheory/SquareZeroAdicThickening.lean",
+  "statement": "theorem of_square_zero_quotient (C : Type u) [CommRing C] [IsNoetherianRing C] (Q H : Ideal C) (hQ : Q ^ 2 = ⊥) (hcomplete : IsAdicComplete ((H ⊔ Q).map (Ideal.Quotient.mk Q)) (C ⧸ Q)) : IsAdicComplete H C",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2f3378d4",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim. IsAdicComplete.of_square_zero_quotient (C : Type u) [CommRing C] [IsNoetherianRing C] (Q H) (hQ : Q^2=⊥) (IsAdicComplete ((H⊔Q).map mk Q) (C⧸Q)) ⊢ IsAdicComplete H C matches node and Stacks 0DYC (I=Q, J=H; Q-completeness automatic from Q²=0), with no extra assumption (no locality/Nontrivial/finiteness/universe constraint). Edge cases Q=0, H=0, H=⊤ (C=0) covered. Proof sorry; docstrings carry 0DYC/0317, blueprint tag and both proof steps; Mathlib-only imports; report has Worker report and Second reading by Q142. No duplicate in Mathlib/Sheaf/WeilConjectures (only nilpotent-ideal completeness helpers). No findings; no compile needed (no file changed)."
+ }
+}

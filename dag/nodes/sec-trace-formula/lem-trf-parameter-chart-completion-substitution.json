@@ -1,0 +1,343 @@
+{
+ "id": "lem-trf-parameter-chart-completion-substitution",
+ "kind": "statement",
+ "title": "Completed parameter charts preserve a chosen coefficient section",
+ "statement": "Let $(R,\\mathfrak m)$ be a nonzero commutative Noetherian regular local ring of finite Krull dimension $n\\ge0$ [def-weil-pbc-noetherian-ring, def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring], let $u_1,\\ldots,u_n$ be a regular system of parameters [def-weil-pbc-regular-system-of-parameters], and put $F=R/\\mathfrak m$ [def-weil-residue-field]. Fix a ring section $c:F\\to\\widehat R$ of the residue map, where $\\widehat R=\\varprojlim_qR/\\mathfrak m^q$ [def-weil-pbc-adic-completion]. For $r\\ge0$, set $S=R[t_1,\\ldots,t_r]$ [def-weil-pbc-mv-polynomial-ring], $D=n+r$, and $v=(u_1,\\ldots,u_n,t_1,\\ldots,t_r)$. Choose $J\\subseteq\\{1,\\ldots,D\\}$. If $J$ is empty, put $C=S$, $\\mathfrak q=(v_1,\\ldots,v_D)C$ and $w=(v_1,\\ldots,v_D)$. Otherwise choose $a\\in J$ and put\n$$C=S[y_i\\mid i\\in J\\setminus\\{a\\}]/(v_i-v_a y_i\\mid i\\in J\\setminus\\{a\\}),\\qquad \\mathfrak q=(v_a,y_i\\ (i\\in J\\setminus\\{a\\}),v_l\\ (l\\notin J))C,$$\nand let $w$ be the displayed list of $D$ generators of $\\mathfrak q$. The quotient $C/\\mathfrak q$ is canonically $F$, so $\\mathfrak q$ is maximal. Write $B=C_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] and let $\\widehat f:\\widehat R\\to\\widehat B$ be the map induced by the local map $R\\to B$. Then $B$ is Noetherian regular local of dimension $D$ and residue field $F$, and $\\widehat f\\circ c$ is a residue-field section. There is a unique continuous isomorphism of complete local $F$-algebras\n$$\\Theta:F[[W_1,\\ldots,W_D]]\\xrightarrow{\\sim}\\widehat B,\\qquad W_i\\longmapsto w_i,\\quad b\\longmapsto\\widehat f(c(b)),$$\nwhere formal power series mean [def-weil-pbc-multivariate-power-series]. Under the continuous coordinate isomorphism $F[[U_1,\\ldots,U_n]]\\cong\\widehat R$ sending coefficients by $c$ and $U_i$ to $u_i$, the map $\\widehat f$ is exactly the following substitution: coefficients are fixed; for $J=\\varnothing$ all $u_i$ retain their coordinate variables; otherwise $v_a\\mapsto e$, $v_i\\mapsto eY_i$ for $i\\in J\\setminus\\{a\\}$, and $v_l\\mapsto Z_l$ for $l\\notin J$, with $e,Y_i,Z_l$ the variables corresponding to $w$. The same formulas specify the images of the adjoined $t_j$. The assertion includes $n=0$, $r=0$, and singleton $J$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2) and its proof with prescribed coefficient field and parameter images. Agent algebraic parameter-chart comparison: polynomial origin completion followed by elimination of the relations v_i-v_a y_i; not asserted verbatim by that tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-residue-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak p=(u_1,\\ldots,u_n,t_1,\\ldots,t_r)S$ and $A=S_{\\mathfrak p}$. Reduction of coefficients modulo $\\mathfrak m$ followed by evaluation of all variables at zero gives $S/\\mathfrak p=F$. In the nonempty-$J$ case, reduction also sends all $y_i$ to zero: the equations $v_i-v_a y_i$ then vanish. Conversely, killing the displayed generators $w$ kills every $v_i$, since $v_i=v_a y_i$ for $i\\in J\\setminus\\{a\\}$. Thus $C/\\mathfrak q=F$, canonically with the given coefficient reduction. In either case $\\mathfrak q$ is maximal and $B/\\mathfrak qB=F$: a denominator outside $\\mathfrak q$ reduces to a nonzero element of $F$, and its inverse reduces to the reciprocal. In particular $R\\to B$ is local and its residue-field map is the identity on $F$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization); polynomial evaluation and quotient universal properties, explicit calculation."
+   }
+  },
+  {
+   "text": "The regular local ring $R$ is regular as a ring by [lem-weil-pbc-regular-local-localization]. Hence [lem-trf-polynomial-ring-regular-base] makes $S$ Noetherian regular, so $A$ is regular local. We check $\\dim A=D$ without assuming that a maximal ideal always has full global dimension. By [lem-sf-noetherian-polynomial-dimension], $\\dim S=n+r=D$. Choose a length-$n$ chain $P_0\\subsetneq\\cdots\\subsetneq P_n=\\mathfrak m$ in $R$; it exists by the definition of finite Krull dimension (the last prime must be $\\mathfrak m$, or appending it contradicts maximal length). In $S$ extend it to $P_0S\\subsetneq\\cdots\\subsetneq\\mathfrak mS\\subsetneq(\\mathfrak m,t_1)\\subsetneq\\cdots\\subsetneq(\\mathfrak m,t_1,\\ldots,t_r)=\\mathfrak p$. These are prime because their quotients are polynomial rings over domains, and the inclusions are strict by coefficients or by the next variable. They stay strict in $A$: for primes $P\\subseteq\\mathfrak p$, if $x/1$ lies in $PA$, some $s\\notin\\mathfrak p$ has $sx\\in P$, hence $x\\in P$. Conversely contraction sends any strict prime chain of $A$ to a strict chain in $S$, since membership of a fraction in a prime of $A$ is exactly membership of its numerator. Thus $D\\leq\\dim A\\leq\\dim S=D$. The images of the $D$ entries of $v$ generate the maximal ideal of $A$ and form a regular system of parameters.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFS (lemma-localization-of-regular-local-is-regular); Mathlib polynomial regularity and dimension leaves; explicit prime-chain computation at the origin."
+   }
+  },
+  {
+   "text": "If $J=\\varnothing$, then $B=A$, so Step 2 proves its dimension and regularity. Otherwise $D\\geq1$. Form $H=A[y_i:i\\in J\\setminus\\{a\\}]/(v_i-v_a y_i)$ and its maximal ideal $\\mathfrak h=(v_a,y_i,v_l:l\\notin J)H$. Step 1 gives $H/\\mathfrak h=F$. The map $C\\to B$ inverts $S\\setminus\\mathfrak p$, because these elements have nonzero residue in $F$, so it extends to $H\\to B$ and then to $H_{\\mathfrak h}\\to B$. Conversely $C\\to H_{\\mathfrak h}$ inverts every $c\\notin\\mathfrak q$, because its residue in $F$ is nonzero. The resulting maps $B\\rightleftarrows H_{\\mathfrak h}$ fix coefficients, the $y_i$, and inverses of all denominators; they are inverse. Apply [lem-trf-parameter-blowup-algebra-regular] over $A$ with the parameter list $v$: $H$ is Noetherian regular. Apply [lem-trf-parameter-blowup-coordinate-quotients] with $\\epsilon=1$, $U=J\\setminus\\{a\\}$, $K=\\{1,\\ldots,D\\}\\setminus J$, and $P=\\mathfrak h$. It gives $\\dim H_{\\mathfrak h}=\\dim F+1+(|J|-1)+(D-|J|)=D$. Therefore $B$ is Noetherian regular local of dimension $D$, and $w$ generates its maximal ideal with exactly $D$ entries.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-trf-parameter-blowup-algebra-regular",
+    "lem-trf-parameter-blowup-coordinate-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9, printed p.121 (PDF p.128), standard ratio charts; localization at the origin written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adic-completion-noetherian], [lem-weil-pbc-local-completion-local-ring], [lem-weil-pbc-adic-completion-mod-ideal], [lem-weil-pbc-completion-regular-local], and [lem-weil-pbc-completion-dimension] to $R$ and $B$. Their completions are Noetherian complete regular local rings of dimensions $n$ and $D$, their maximal ideals are respectively $\\mathfrak m\\widehat R$ and $(w)\\widehat B$, and their residue fields identify canonically with $F$. Thus the images of $u$ and $w$ generate the respective maximal ideals with the required number of entries. These applications use finite generation of the maximal ideals, provided by their displayed finite lists (also in dimension zero).",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NV (lemma-completion-dimension), 07NY (lemma-completion-regular), and algebra.tex Tags 0316, 05GG, 05GI."
+   }
+  },
+  {
+   "text": "Let $f:R\\to B$ be the local map. Since $f(\\mathfrak m)\\subseteq\\mathfrak qB$, for each $q\\geq1$ it induces $f_q:R/\\mathfrak m^q\\to B/(\\mathfrak qB)^q$. These quotient maps commute with reduction. Define $\\widehat f((x_q)_q)=(f_q(x_q))_q$ using [def-weil-pbc-adic-completion]; componentwise operations show it is a ring map and that it agrees with $f$ on $R$. The kernel of the $q$th projection maps into the kernel of the $q$th target projection; [lem-weil-pbc-adic-completion-mod-power] identifies these kernels with the extended ideal powers, proving continuity. At level one, Step 1 says $f_1=1_F$. Therefore $\\operatorname{res}_{\\widehat B}\\widehat f=\\operatorname{res}_{\\widehat R}$, and $c_B=\\widehat f c$ satisfies $\\operatorname{res}_{\\widehat B}c_B=1_F$. In particular the original chosen section, rather than a newly chosen coefficient field, equips $\\widehat B$ with its $F$-algebra structure.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), kernels of all projections; componentwise construction of the induced completed local map."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-regular-complete-coefficient-coordinates] first to $(\\widehat B,(w)\\widehat B)$ with coefficient map $c_B$ and list $w$, and then to $(\\widehat R,\\mathfrak m\\widehat R)$ with coefficient map $c$ and list $u$. Step 4 verifies Noetherianity, completeness, regularity, dimensions and generation; Step 5 verifies the residue-field isomorphism for $c_B$, and it is assumed for $c$. We obtain continuous local $F$-algebra isomorphisms $\\Theta:F[[W_1,\\ldots,W_D]]\\to\\widehat B$ and $\\Psi:F[[U_1,\\ldots,U_n]]\\to\\widehat R$ with exactly the stated coefficient maps and variable values. Uniqueness of the homomorphism with those coefficients and variable images is [lem-weil-pbc-power-series-universal-property-complete], so in particular $\\Theta$ is unique.",
+   "uses": [
+    "lem-trf-regular-complete-coefficient-coordinates",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2) and proof, with the prescribed coefficients and parameters."
+   }
+  },
+  {
+   "text": "Compute $g=\\Theta^{-1}\\widehat f\\Psi$. For $b\\in F$, the definition of $c_B$ gives $g(b)=b$. For each original parameter $u_i=v_i$ with $i\\leq n$, the quotient relations in $C$ give: if $J=\\varnothing$, its image is its corresponding $W$; otherwise its image is $e$ when $i=a$, is $eY_i$ when $i\\in J\\setminus\\{a\\}$, and is $Z_i$ when $i\\notin J$. Each lies in the ideal $(W_1,\\ldots,W_D)$ of $F[[W_1,\\ldots,W_D]]$, for which this ring is adically complete [lem-weil-pbc-power-series-variables-complete]; so the power-series universal property [lem-weil-pbc-power-series-universal-property-complete] defines this substitution as a ring map, and its uniqueness clause identifies $g$ with this substitution on every series, since it agrees on coefficients and all $U_i$. Separately, for each $t_j=v_{n+j}$, the map $C\\to B\\to\\widehat B$ followed by $\\Theta^{-1}$ satisfies the identical three-case calculation using the same relation $v_i=v_a y_i$; this explains the adjoined-variable clause without treating $t_j$ as an element of $\\widehat R$. If $J$ is singleton there are no ratio relations or $Y$ variables; if $n=0$ there are no $U$ variables; if $D=0$ then $J$ is empty and both completions are $F$. All formulas and uniqueness remain valid.",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-power-series-variables-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C0S proof with fixed parameter images; explicit coefficient and generator computation in the chart presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-sf-noetherian-polynomial-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-trf-parameter-blowup-algebra-regular",
+  "lem-trf-parameter-blowup-coordinate-quotients",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-power-series-variables-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C0S (2) and its prescribed-coordinate proof, combined with the existing ILO VIII 4.2.9 parameter-chart lemmas; explicit polynomial-origin and completed-map calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blowup|u_i.*u_j|coefficientField",
+   "results": "{\"t\": \"2026-10-23T12:21:40Z\", \"tool\": \"grep\", \"query\": \"blowup|u_i.*u_j|coefficientField\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ReesAlgebra.lean\"], \"digest\": \"5da6a143e7886309\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No exact parameter-chart completion comparison. The polynomial-to-power-series completion equivalence does not identify a blowup chart or transport a prescribed residue section."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*quotient|quotient.*completion|completion.*[Pp]olynomial|[Pp]olynomial.*completion",
+   "results": "{\"t\": \"2026-10-23T12:21:40Z\", \"tool\": \"grep\", \"query\": \"completion.*quotient|quotient.*completion|completion.*[Pp]olynomial|[Pp]olynomial.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"53ec21fbcffd82b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No exact parameter-chart completion comparison. The polynomial-to-power-series completion equivalence does not identify a blowup chart or transport a prescribed residue section."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed local parameter blowup chart has formal power series coordinates with coefficient field fixed",
+   "results": "{\"t\": \"2026-10-23T12:21:41Z\", \"tool\": \"leansearch\", \"query\": \"Completed local parameter blowup chart has formal power series coordinates with coefficient field fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesAt\", \"HasFPowerSeriesWithinAt\", \"hasFPowerSeriesAt_iff\", \"PowerSeries.instIsLocalRing\", \"HasFPowerSeriesWithinOnBall\", \"HasFPowerSeriesOnBall\", \"HasFPowerSeriesOnBall.restrictScalars\", \"LaurentSeries.powerSeriesRingEquiv\"], \"digest\": \"b334c44731d39c4f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No exact parameter-chart completion comparison. The polynomial-to-power-series completion equivalence does not identify a blowup chart or transport a prescribed residue section."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T12:21:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No exact parameter-chart completion comparison. The polynomial-to-power-series completion equivalence does not identify a blowup chart or transport a prescribed residue section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After adjoining polynomial variables to a regular local ring, complete a chart defined by X_i=X_a*Y_i at its zero section and eliminate the X_i variables",
+   "results": "{\"t\": \"2026-10-23T12:21:42Z\", \"tool\": \"leanfinder\", \"query\": \"After adjoining polynomial variables to a regular local ring, complete a chart defined by X_i=X_a*Y_i at its zero section and eliminate the X_i variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePresentation.toPresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardSmooth.out\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.toPresentation_relation\", \"StandardEtalePresentation.toPresentation_σ'\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"516d494b8a5c1b3b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Standard-smooth and etale-presentation existence only; no completed parameter-chart map with prescribed coefficient section."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-parameter-chart-completion-substitution: completion at the coordinate origin of a regular parameter blowup chart R[w]/(u_i-u_a*w_i) is a residue field power series ring and the completed map fixes coefficients and substitutes u_i=u_a*w_i",
+   "results": "{\"t\": \"2026-10-23T12:21:43Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-parameter-chart-completion-substitution: completion at the coordinate origin of a regular parameter blowup chart R[w]/(u_i-u_a*w_i) is a residue field power series ring and the completed map fixes coefficients and substitutes u_i=u_a*w_i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\"], \"digest\": \"247bf2d7b32044b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Standard-smooth and etale-presentation existence only; no completed parameter-chart map with prescribed coefficient section."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientField|blowup|parameter.*completion",
+   "results": "{\"t\": \"2026-10-23T14:27:26Z\", \"tool\": \"grep\", \"query\": \"coefficientField|blowup|parameter.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ReesAlgebra.lean\"], \"digest\": \"5da6a143e7886309\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: power-series/polynomial completion equivalences and Weierstrass results do not state the regular local chart comparison with the prescribed section and its substitution formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a regular local ring with a prescribed coefficient field and system of parameters, functorial under blowup chart coordinate substitution",
+   "results": "{\"t\": \"2026-10-23T14:27:27Z\", \"tool\": \"leansearch\", \"query\": \"Completion of a regular local ring with a prescribed coefficient field and system of parameters, functorial under blowup chart coordinate substitution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.instCommRing\", \"AdicCompletion.instAlgebra\", \"AdicCompletion.liftRingHom.congr_simp\", \"AdicCompletion.module\", \"AdicCompletion.liftAlgHom.congr_simp\", \"AdicCompletion.subring\", \"UniformSpace.Completion.algebraMap_def\", \"AdicCompletion.mkₐ\"], \"digest\": \"2e125c8cd4c036ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: power-series/polynomial completion equivalences and Weierstrass results do not state the regular local chart comparison with the prescribed section and its substitution formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"MvPowerSeries\"",
+   "results": "{\"t\": \"2026-10-23T14:27:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"MvPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: power-series/polynomial completion equivalences and Weierstrass results do not state the regular local chart comparison with the prescribed section and its substitution formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a regular local parameter blowup chart with polynomial variables is a power series ring preserving a chosen coefficient field and replacing coordinates by exceptional parameter times ratio",
+   "results": "{\"t\": \"2026-10-23T14:27:36Z\", \"tool\": \"leanfinder\", \"query\": \"The completion of a regular local parameter blowup chart with polynomial variables is a power series ring preserving a chosen coefficient field and replacing coordinates by exceptional parameter times ratio\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.weierstrassMod\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassDivision\"], \"digest\": \"58ea6e69e2f5fa67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: power-series/polynomial completion equivalences and Weierstrass results do not state the regular local chart comparison with the prescribed section and its substitution formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous power series coordinates at the origin of a polynomial algebra over a regular local ring and its monomial blowup chart",
+   "results": "{\"t\": \"2026-10-23T14:27:37Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous power series coordinates at the origin of a polynomial algebra over a regular local ring and its monomial blowup chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\"], \"digest\": \"b89c06f3c561b13c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: power-series/polynomial completion equivalences and Weierstrass results do not state the regular local chart comparison with the prescribed section and its substitution formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "toAdicCompletionAlgEquiv|exists_ringHom_of_isAdicComplete|IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-23T14:34:00Z\", \"tool\": \"grep\", \"query\": \"toAdicCompletionAlgEquiv|exists_ringHom_of_isAdicComplete|IsRegularLocalRing\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"e2bdf95a0d1988d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: power-series/polynomial completion equivalences and Weierstrass results do not state the regular local chart comparison with the prescribed section and its substitution formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-center-formal-normal-slice",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical resolution input of lem-trf-local-term-locality, via numerical order recovery: coordinate blowup substitutions on the generic normal slice in lem-trf-test-sequence-order-recovery, proof steps 3 and 9; algebraic completion comparison used by lem-trf-generic-center-formal-normal-slice.",
+   "via": [
+    "lem-trf-generic-center-formal-normal-slice",
+    "lem-trf-test-sequence-order-recovery",
+    "lem-trf-residual-companion-boundary-reduction",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-chart-completion-substitution",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its hypotheses. Reused existing parameter-chart regularity, simultaneous coordinate dimension, completion permanence, and prescribed coefficient-coordinate lemmas; wrote the polynomial-origin dimension, chart localization, coefficient-section transport and substitution calculations explicitly. No new nodes.",
+  "blueprint": "Historical resolution input recorded in blueprint.from.place: algebraic coordinate blowup substitutions in the generic normal slice. Latest blueprint locality proof now cites the contracting-correspondence theorem directly; this auxiliary statement is nevertheless split as dispatched, without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative-algebra input for the polynomial-origin or completion calculation; does not replace the unit contracting-correspondence route, and this unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input for the polynomial-origin or completion calculation; does not replace the unit contracting-correspondence route, and this unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic commutative-algebra input for the polynomial-origin or completion calculation; does not replace the unit contracting-correspondence route, and this unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra input for the polynomial-origin or completion calculation; does not replace the unit contracting-correspondence route, and this unit has no separate statement of this input."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Generic commutative-algebra input for the polynomial-origin or completion calculation; does not replace the unit contracting-correspondence route, and this unit has no separate statement of this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-13cfb2943",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-13cfb2943 (reviewer sub-agent of L); spot-checked: First stage-1 split (no repair note, no new nodes). The statement is byte-identical to the version NJ created; only the proof was added. Read Stacks 0C0S(2) and its proof, which matches the prescribed-coefficient form of lem-trf-regular-complete-coefficient-coordinates. Checked all 7 steps against the cited statements: (1) C/q=F and B/qB=F, elementary. (2) R is a regular ring (0AFS), S is regular (Mathlib leaf), dim S=D (Mathlib leaf); an explicit prime chain of length D stays strict in S_p, so dim A=D and v is a regular system of parameters. (3) H_h ≅ B via both written inverses; the two ILO VIII 4.2.9 chart lemmas are applied with base A, epsilon=1, U=J minus a, K=complement of J, giving c=D and dim B=D. (4) The completion nodes 0316/05GG/05GI/07NY/07NV and mod-ideal(1) apply to R and B. (5) f-hat is built levelwise, continuous via the mod-power node, with f_1=1_F, so f-hat∘c is a section. (6) The coefficient-coordinates node is applied twice with every hypothesis checked; uniqueness of Theta from the universal property with T=B-hat. (7) Substitution formulas checked from v_i=v_a·y_i. Edge cases J empty, J singleton, n=0, r=0, D=0 checked. Not a duplicate of N9 lem-trf-coordinate-ratio-chart-completion (that chart is taken after completion, at a shifted point, with no coefficient section). No cycle (BFS over 181 nodes), no SGA. The five sk-thm-p1 tool_uses are generic and accepted. FIX: Step 7 applied the power-series universal property with target F[[W]] without citing its (W)-adic completeness; added a sentence and the citation of Mathlib leaf lem-weil-pbc-power-series-variables-complete to the step's uses and to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterChartCompletionSubstitution",
+  "declaration": "IsLocalRing.existsUnique_parameterChartCompletion_coordinates",
+  "declarations": [
+   "IsLocalRing.parameterChartBaseParameter",
+   "IsLocalRing.parameterChartCenter",
+   "IsLocalRing.parameterChartPivot",
+   "IsLocalRing.ParameterChartRing",
+   "IsLocalRing.parameterChartPolynomialMap",
+   "IsLocalRing.parameterChartCoordinate",
+   "IsLocalRing.parameterChartOrigin",
+   "IsLocalRing.ParameterChartLocalRing",
+   "IsLocalRing.parameterChartStructuralMap",
+   "IsLocalRing.ParameterChartCompletion",
+   "IsLocalRing.parameterChartCompletedIdeal",
+   "IsLocalRing.parameterChartIntoCompletion",
+   "IsLocalRing.parameterChartSubstitutionVariable",
+   "IsLocalRing.existsUnique_parameterChartCompletion_coordinates"
+  ],
+  "file": "lean/Sheaf/RingTheory/ParameterChartCompletionSubstitution.lean",
+  "statement": "theorem existsUnique_parameterChartCompletion_coordinates [IsRegularLocalRing R] (u : Fin n → R) (hu : IsRegularSystemOfParameters (List.ofFn u)) (c : ResidueField R →+* AdicCompletion (maximalIdeal R) R) (hc : ∀ b : ResidueField R, AdicCompletion.evalOneₐ (maximalIdeal R) (c b) = b) (J : Finset (Fin (n + r))) (a : Option (Fin (n + r))) (ha : (J = ∅ ∧ a = none) ∨ ∃ j ∈ J, a = some j) : (parameterChartOrigin u J a).IsMaximal ∧ ∀ [(parameterChartOrigin u J a).IsPrime], IsNoetherianRing (ParameterChartLocalRing u J a) ∧ IsRegularLocalRing (ParameterChartLocalRing u J a) ∧ ringKrullDim (ParameterChartLocalRing u J a) = ((n + r : ℕ) : WithBot ℕ∞) ∧ IsLocalHom (parameterChartStructuralMap u J a) ∧ ∃ (εC : (ParameterChartRing u J a ⧸ parameterChartOrigin u J a) ≃+* ResidueField R) (εB : ResidueField (ParameterChartLocalRing u J a) ≃+* ResidueField R), (∀ b : R, εC (Ideal.Quotient.mk _ (parameterChartPolynomialMap u J a (MvPolynomial.C b))) = residue R b) ∧ (∀ x : ParameterChartRing u J a, εB (residue (ParameterChartLocalRing u J a) (algebraMap _ (ParameterChartLocalRing u J a) x)) = εC (Ideal.Quotient.mk _ x)) ∧ ∃ (g : AdicCompletion (maximalIdeal R) R →+* ParameterChartCompletion u J a), (∀ (k : ℕ) (x : AdicCompletion (maximalIdeal R) R) (b : R), AdicCompletion.evalₐ (maximalIdeal R) k x = Ideal.Quotient.mk (maximalIdeal R ^ k) b → AdicCompletion.evalₐ (maximalIdeal (ParameterChartLocalRing u J a)) k (g x) = Ideal.Quotient.mk (maximalIdeal (ParameterChartLocalRing u J a) ^ k) (parameterChartStructuralMap u J a b)) ∧ (∀ b : ResidueField R, εB (AdicCompletion.evalOneₐ (maximalIdeal (ParameterChartLocalRing u J a)) (g (c b))) = b) ∧ ∃ (ψ : MvPowerSeries (Fin n) (ResidueField R) ≃+* AdicCompletion (maximalIdeal R) R), (∀ b : ResidueField R, ψ (MvPowerSeries.C b) = c b) ∧ (∀ i : Fin n, ψ (MvPowerSeries.X i) = algebraMap R (AdicCompletion (maximalIdeal R) R) (u i)) ∧ (∀ k : ℕ, Ideal.comap ψ.toRingHom (((maximalIdeal R).map (algebraMap R (AdicCompletion (maximalIdeal R) R))) ^ k) = Ideal.span (Set.range (MvPowerSeries.X : Fin n → MvPowerSeries (Fin n) (ResidueField R))) ^ k) ∧ ∃ Θ : MvPowerSeries (Fin (n + r)) (ResidueField R) ≃+* ParameterChartCompletion u J a, (∀ Θ' : MvPowerSeries (Fin (n + r)) (ResidueField R) ≃+* ParameterChartCompletion u J a, ((∀ b : ResidueField R, Θ' (MvPowerSeries.C b) = g (c b)) ∧ (∀ i : Fin (n + r), Θ' (MvPowerSeries.X i) = parameterChartIntoCompletion u J a (parameterChartCoordinate u J a i)) ∧ (∀ k : ℕ, Ideal.comap Θ'.toRingHom (parameterChartCompletedIdeal u J a ^ k) = Ideal.span (Set.range (MvPowerSeries.X : Fin (n + r) → MvPowerSeries (Fin (n + r)) (ResidueField R))) ^ k)) ↔ Θ' = Θ) ∧ (∀ i : Fin (n + r), Θ.symm (parameterChartIntoCompletion u J a (parameterChartPolynomialMap u J a (parameterChartBaseParameter u i))) = parameterChartSubstitutionVariable (ResidueField R) J a i) ∧ (∀ (z : MvPowerSeries (Fin n) (ResidueField R)) (k : ℕ), Θ.symm (g (ψ z)) - MvPolynomial.eval₂ MvPowerSeries.C (fun i : Fin n ↦ parameterChartSubstitutionVariable (ResidueField R) J a (i.castAdd r)) (MvPowerSeries.truncTotal k z) ∈ Ideal.span (Set.range (MvPowerSeries.X : Fin (n + r) → MvPowerSeries (Fin (n + r)) (ResidueField R))) ^ k)",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Full prescribed-coefficient chart completion and substitution statement. The displayed quotient chart is inlined using Mathlib, with one unused final label handling the empty center; no dependency on the chart nonzerodivisor theorem is needed. Uniqueness characterizes all continuous coordinate equivalences with the specified constants and variables independently of both substitution computations. The completed structural map is specified by all quotient evaluations; ideal-comap equations encode the adic homeomorphisms and truncation congruences specify substitution on all series."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e5fcbba6",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Re-delivery fixes all 4 findings of the 4f61 RETURN: stmt_deps = live 9 def nodes (chart quotient inlined, theorem stmt_dep and dependency module removed); real second reading; Θ uniqueness now ∀Θ', (consts∧vars∧comap) ↔ Θ'=Θ, separate from the substitution clauses; typo fixed. Every hypothesis/conclusion checked: IsRegularLocalRing + IsRegularSystemOfParameters, c/hc section, J/a/ha pivot, inline chart C with unused last label, w and 𝔮, IsMaximal, B Noetherian/regular/dim n+r, IsLocalHom, pinned εC/εB, level-pinned completed map g with section clause, pinned Ψ, substitution on all D labels incl. t_j, truncTotal congruence. Edge cases n=0, r=0, D=0, singleton/empty J ok. lean.statement verbatim, 14 declarations match, no name clash, docstrings carry source/blueprint and the 7-step proof, sorry only, no SGA/pro-étale. Not recompiled per instruction."
+ }
+}

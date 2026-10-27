@@ -1,0 +1,357 @@
+{
+ "id": "lem-zl-finite-completed-image-comparison",
+ "kind": "statement",
+ "title": "Completed finite direct image agrees with its normalized reduction tower",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a finite morphism of separated finite-type $k$-schemes [def-weil-finite-integral-morphism, def-weil-scheme-morphism-properties]. For a scheme $W$, write $R_W=\\varprojlim_n(A_n)_W$ on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Use $D^b_c(W,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed], the strict derived reductions $K_n=K\\otimes^L_{R_W}(A_n)_W$, and exact restriction of scalars $\\operatorname{Res}_n$ [def-pur-integral-derived-operations]. Let $Rf_*$ be the tower direct image of [def-weil-derived-direct-image].\n\nLet $F_f:\\operatorname{Mod}(R_X)\\to\\operatorname{Mod}(R_Y)$ be module direct image with the action through the canonical map $f^{-1}R_Y\\to R_X$ [def-weil-sheaf-of-modules-category]. Then $F_f$ is exact on the whole module category and preserves countable products by the canonical product comparison. It induces the termwise triangulated functor $F_{f,D}$ on ordinary derived categories [def-weil-abstract-derived-category]. The schemes $X,Y$ are noetherian and finite-dimensional, and $f$ is finitely presented. The same assertions hold for the finite base change $h:X\\times_Ys\\to s$ along any $k$-point $s=\\operatorname{Spec}k\\to Y$ [def-pc-base-change].\n\nFor every $K\\in D^b_c(X,\\mathcal O_E)$ there is a canonical natural isomorphism in $D(\\operatorname{Mod}(R_Y))$\n$$\\Theta_{f,K}:F_{f,D}K\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}_nf_{*,n}K_n=Rf_*K.$$\nHere $f_{*,n}$ is exact on all $(A_n)_X$-modules, hence is its own derived functor. With $q_n:K\\to\\operatorname{Res}_nK_n$ the actual reduction map and $\\pi_n$ the total-limit projection, the normalization is\n$$\\pi_n\\Theta_{f,K}=F_{f,D}(q_n),$$\nusing the termwise identification $F_f\\operatorname{Res}_n=\\operatorname{Res}_nf_{*,n}$, which identifies quotient transition maps as well. The object $Rf_*K$ is integral constructible and derived complete, and its canonical reductions $(Rf_*K)_n\\to f_{*,n}K_n$ are isomorphisms. Each $K_n$ has etale origin, meaning that it is the comparison inverse image of a bounded constructible etale complex [def-weil-pbc-site-comparison-morphism, def-weil-pbc-constructible-complexes]. Consequently $F_{f,D}$ restricts to this integral constructible category and preserves both halves of the standard pair [def-weil-constructible-standard-tstructure].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Tag 09A8, proetale.tex lemma-finite; Bhatt–Scholze Proposition 3.5.1, Lemmas 3.5.6 and 6.7.2. Normalized strict-limit specialization realizes returned steps 1–3."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-base-change",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-constructible-standard-tstructure",
+  "def-pur-proetale-module-scalar-restriction",
+  "lem-pe-constant-derived-encoding"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme of finite type over the field k, Mathlib gives a locally Noetherian source and compactness, hence IsNoetherian. Apply the finite-dimensionality bound and finite-presentation theorem to f. Finite base change makes h=pullback.snd finite; its structure map to Spec k is itself finite, hence locally of finite type and quasi-compact. The same construction therefore applies to h, including an empty source.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6, 01WL, 01TP."
+   }
+  },
+  {
+   "text": "Apply finite_fp_proEtale_pushforward_exact to the inverse-adjoint of the actual completed coefficient map, and separately to every constant finite-coefficient direct-image map. The adjunction triangle identity identifies these with the required module direct images. Exactness makes the total right-derived unit invertible at every complex. Choose derived=sfCompletedDerivedDirectImage and factors to be the inverse cochain-unit isomorphism. Naturality of the unit proves the factorization naturality, and its inverse-hom identity is resolutionNormalization. The comparison is the identity natural isomorphism; the existing right-derived shift and triangulated instances apply.",
+   "uses": [
+    "lem-zl-finite-fp-proetale-pushforward-exact",
+    "lem-pur-exact-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), part (4); proetale.tex Tag 09A8."
+   }
+  },
+  {
+   "text": "Use the canonical pro-etale ring-module adjunction and the proved completed_direct_image_eq from SfCompleteDirectImageReduction to show that the specified underived direct image preserves products. Its scalarComparison is exactly the identity-on-sections clause of sfDirectImageRestrictionComparison_existsUnique. Exact countable products of completed module sheaves give preservation of epimorphisms by the countable product functor; descend these exact products to the derived category using derivedCategory_countableProducts_core.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-sf-complete-direct-image-reduction",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03DB; derived.tex Tag 07KC."
+   }
+  },
+  {
+   "text": "The input completeness predicate already supplies the distinguished Roos triangle with its actual reduction-unit projections. The proved completed_derived_products and map_roos helpers in SfCompleteDirectImageReduction map that triangle through the specified completed derived image, using its shift and triangulated structures and its canonical product comparison. Transport the target tower along sfDerivedRestrictionComparison by roos_transport. The transition compatibility is immediate from the definition of sfDirectImageTransition, cancelling the comparison followed by its inverse. Its transported augmentation is precisely zlFiniteCompletedImageProjection, so choose its boundary from this proved triangle existence. Since comparison is the identity, normalization is Pi.lift_π. No arbitrary tower-limit object or cone comparison is chosen.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-direct-image",
+    "def-weil-derived-complete",
+    "lem-sf-complete-direct-image-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 and 0941; SfCompleteDirectImageReduction, map_roos and completed_derived_products."
+   }
+  },
+  {
+   "text": "Compute that l is a unit in k from the finite-field cardinality p^a and l!=p. Apply sfIntegralDirectImage_constructible to the just-constructed SfIntegralDirectImage, obtaining constructibility, completeness and invertibility of each actual scalar-adjoint reduction comparison. The input constructibility property gives intrinsic constructibility of each finite reduction and its common cohomological interval. The exact constant-scalar restriction carries these cohomology conditions to the fixed-module presentation. Apply the proved fixedDerivedOrigin helper of ProEtaleConstructibleOrigin and invert its resulting isomorphism to obtain the stated etaleOrigin field.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-finite-torsion-constructibility",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pe-constant-derived-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2; Stacks Tag 09AL for finite-level etale origin."
+   }
+  },
+  {
+   "text": "For each degree in either standard-class vanishing range, exactness of the completed module direct image and isZero_homologyFunctor_mapDerivedCategory_obj give vanishing for the termwise derived functor. Transport this across the canonical rightDerivedFunctorIsoMapDerivedCategory to obtain vanishing for the chosen derived functor. This proves standard for both Bool values. Apply the whole field-independent finite_comparison construction to f and to each finite geometric base change h.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-constructible-standard-tstructure",
+    "lem-pur-exact-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N; derived.tex Tag 015F."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-zl-finite-fp-proetale-pushforward-exact",
+  "lem-pur-exact-derived-unit",
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-complete",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-finite-torsion-constructibility",
+  "lem-sf-proetale-constructible-origin",
+  "lem-pe-constant-derived-encoding",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-constructible-standard-tstructure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A8 and derived.tex Tag 015F; reuse proved normalized Roos transport in SfCompleteDirectImageReduction and finite-level origin in ProEtaleConstructibleOrigin. W3 proof, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite finitely presented morphism exact proetale pushforward commutes with derived completion and strict reduction tower",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.Etale.finitePresentation; AdicCompletion.map_exact; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp. Algebraic adic completion and abstract product preservation do not identify the completed pro-etale direct image and its normalized constructible reduction tower.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"exact\"",
+   "results": "[loogle] OK 0 hit(s); No hits. Algebraic adic completion and abstract product preservation do not identify the completed pro-etale direct image and its normalized constructible reduction tower.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*pushforward|pushforward.*proetale|derived.*complet",
+   "results": "[grep] OK 1 hit(s); Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:65. Algebraic adic completion and abstract product preservation do not identify the completed pro-etale direct image and its normalized constructible reduction tower.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite finitely presented morphism exact proetale pushforward commutes with derived completion and strict reduction tower",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsFinite.recOn; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; IsAdicComplete.StrictMono.of_comp_lift; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; CommRingCat.isFinitelyPresentable_hom; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.Scheme.Modules.instFullPushforward. Algebraic adic completion and abstract product preservation do not identify the completed pro-etale direct image and its normalized constructible reduction tower.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact product preserving direct image identifies derived adic inverse limit with termwise image",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.PreservesProduct.iso; CategoryTheory.exactFunctor; InverseSystem.isNatEquiv_piEquivLim; InverseSystem.invLimEquiv; InverseSystem.piEquivLim; CategoryTheory.leftExactFunctor; CategoryTheory.exactFunctor_iff; CategoryTheory.Limits.isLimitOfHasProductOfPreservesLimit. Algebraic adic completion and abstract product preservation do not identify the completed pro-etale direct image and its normalized constructible reduction tower.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*pushforward|pushforward.*proetale|derived.*complet",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean No hit states finite pro-etale module exactness together with the normalized completed-coefficient reduction-tower comparison. Read the ElladicCohomology coefficient definition and the general exact-functor declarations; neither gives this geometric comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor preserving products commutes with derived inverse limit of reduction towers",
+   "results": "Hits: CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.exactFunctor_iff, CategoryTheory.LeftExactFunctor.of, CategoryTheory.Limits.isLimitOfHasProductOfPreservesLimit No hit states finite pro-etale module exactness together with the normalized completed-coefficient reduction-tower comparison. Read the ElladicCohomology coefficient definition and the general exact-functor declarations; neither gives this geometric comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"exact\"",
+   "results": "No hits. No hit states finite pro-etale module exactness together with the normalized completed-coefficient reduction-tower comparison. Read the ElladicCohomology coefficient definition and the general exact-functor declarations; neither gives this geometric comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite proetale module pushforward is exact and commutes with the derived inverse limit of adic reductions",
+   "results": "Hits: AdicCompletion.map_exact, Condensed.profiniteSolid, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.transitionMap_comp_reduceModIdeal, localCohomology, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian No hit states finite pro-etale module exactness together with the normalized completed-coefficient reduction-tower comparison. Read the ElladicCohomology coefficient definition and the general exact-functor declarations; neither gives this geometric comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-adic-direct-image",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Stacks Tag 09A8, proetale.tex lemma-finite; Bhatt–Scholze Proposition 3.5.1, Lemmas 3.5.6 and 6.7.2. Normalized strict-limit specialization realizes returned steps 1–3. Supplies the finite exactness/cohomology or geometric-stalk step of the parent proof.",
+   "via": [
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-finite-completed-image-comparison",
+  "worker": "stage1",
+  "summary": "Proved all clauses in seven steps using existing DAG nodes only. Verified finite presentation before applying pro-etale exactness, wrote the sectionwise product/scalar/transition identifications, used the canonical-completeness-unit equivalence rather than an unmarked limit isomorphism, and obtained the required projection normalization by the strict augmentation comparison. Checked constructibility, canonical reductions, etale origin and both standard halves without changing the statement.",
+  "blueprint": "Realizes the first paragraph of lem-zl-finite-pushforward.proof.md (finite direct-image exactness and H^j(Rg_*K)=g_*H^j(K)), through the normalized completed-image subclaim of lem-zl-finite-adic-direct-image.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian permanence for schemes of finite type; verifies the finite-presentation hypothesis. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite-dimensionality of a finite-type scheme over a field. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Finite morphisms to a locally Noetherian base are finitely presented. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Stability of finite morphisms under the given point base change. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "General termwise triangulated extension of an exact abelian functor. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Canonical comparison of an exact functor with its total derived functor. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Sectionwise module limits used to check the canonical product comparison. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Module action on ringed direct image through the adjunct structural map. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-sf-bc-adic-ring-domain",
+    "why": "Checks the coefficient hypotheses of the canonical completeness theorem. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Promotes the project completeness convention to invertibility of the actual quotient augmentation. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Normalized projections and canonical augmentation of a strict tower. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products for arbitrary pro-etale module sheaves. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Canonical derived-limit comparison for an exact product-preserving functor, including augmentations. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Constructibility, completeness and canonical reduction isomorphisms for the same tower-defined direct image. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Equivalence between intrinsic finite constructibility and etale origin. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "General cohomology comparison for exact abelian functors. This is a generic tool; no step of the affine-line weight route is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Finite-level restriction-of-scalars/direct-image isomorphism that defines the transitions of the tower direct image; used to match them with the termwise identification. Generic tool (added by the maintainer reader); no step of the affine-line weight route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-46edf3bc3",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-46edf3bc3 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 0 new nodes, and its statement and stmt_deps are byte-identical to the base, where the item was unsplit with an empty proof. No re-split note exists. Source checks: Stacks proetale.tex lemma-finite (09A8) needs f finite and locally of finite presentation; step 1 derives finite presentation from pqf-lem-finite-fp-locnoeth and noetherianity, and finiteness of h from finite-morphism-permanence (a),(b). The parent blueprint is lem-zl-finite-pushforward.proof.md, first paragraph; the route is unchanged and nothing cites SGA. Steps: (2) the module clause of lem-zl-finite-fp-proetale-pushforward-exact covers the completed ring sheaves; the exact-functor derived and triangulated identifications are correct. (3) The sectionwise product, scalar-square and transition identities are genuinely elementary. (4) The roos-intrinsic-completeness-equivalence implication (i)->(v) has its hypotheses supplied by lem-sf-bc-adic-ring-domain; the projection comes from lem-weil-strict-roos-comparison. (5) The hypotheses of the exact-product strict-limit lemma hold; its augmentation clause gives pi_n Theta = F_{f,D}(q_n), the specified map. (6) lem-sf-integral-direct-image-constructible applies over K_0=k with ell invertible; clause (ii) of constructible-origin gives etale origin. (7) The exact-functor cohomology argument preserves both halves of the standard pair. Edge cases checked: f=id, X empty, two points, k[e]/e^2, an empty fibre for h, torsion K. I found no duplicate in the DAG (etale finite exactness, the closed-immersion interval node and the coefficient-change node are different statements). FIX (E5-type gap, repaired): step 5 claimed 'including transitions' without matching the transitions of def-weil-derived-direct-image, which use the R(f_{n+1})_*Res ≅ Res R(f_n)_* isomorphism. I added the K-injective diagram check and cited lem-weil-proetale-direct-image-restriction-of-scalars, which is non-circular and does not reach batch 5. Batch-5: lem-pur-roos-intrinsic-completeness-equivalence reaches lem-pod-completed-integral-scalar-regular, which only says that varpi^m is injective on sections of lim(A_n)_T. That is a general ring-sheaf fact, neither assumption nor a step of their proofs, so the citation is accepted. All generic out-of-unit tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlFiniteCompletedImageComparison",
+  "declaration": "WeilConjectures.zlFiniteCompletedImageComparison",
+  "declarations": [
+   "WeilConjectures.zlFiniteCompletedImageProjection",
+   "WeilConjectures.ZlFiniteCompletedImageComparison",
+   "WeilConjectures.ZlFiniteCompletedImageComparison.theta",
+   "WeilConjectures.zlFiniteCompletedImageComparison"
+  ],
+  "file": "lean/Sheaf/Paper/ZlFiniteCompletedImageComparison.lean",
+  "statement": "theorem zlFiniteCompletedImageComparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X Y : Over (Spec (.of D.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) [IsFinite f.left] : Nonempty (ZlFiniteCompletedImageComparison l E f.left) ∧ ∀ s : Over.mk (𝟙 (Spec (.of D.k))) ⟶ Y, IsFinite (pullback.snd f.left s.left) ∧ Nonempty (ZlFiniteCompletedImageComparison l E (pullback.snd f.left s.left))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical projection is constructed from direct image of the actual reduction unit and the recorded resolution-normalized restriction square. The Roos conclusion makes the existing completed derived direct image a model of the specified tower limit; theta is the restricted canonical resolution comparison, not a chosen isomorphism between unmarked limit objects. The record packages all clauses and is asserted for f and every geometric point base change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49cb192b0",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery of RETURN bf5c (H2). Lean file byte-identical (sha 6318ef01…), so the full bf5c clause-by-clause check stands: hypotheses, F_f exact with canonical piComparison, triangulated F_{f,D} pinned by resolution unit, Noetherian/dimension/fp, f_{*,n} exact and its own derived functor, explicit projection + roos IsDerivedLimitTriangle, theta/normalization, constructible/complete/reduction, etale origin via comparisonUpperStar, both standard halves, full record for h. Item node differs from live only in lean and stmt_deps (+def-pur-proetale-module-scalar-restriction, +lem-pe-constant-derived-encoding, none removed); the other 17 snapshot nodes match live exactly. Mechanical theorem-stmt_dep finding: genuine dependence, because Functor.mapDerivedCategory needs Additive/PreservesFinite(Co)Limits, supplied only by the Prop instances proEtaleModuleRestriction_additive/_equivalence (proved conclusions, via proEtaleModuleRestriction_isEquivalence) in ProEtaleConstantDerivedEncoding; the item does not use the module's data abbrev. Report sections present. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T124231-L-1955760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

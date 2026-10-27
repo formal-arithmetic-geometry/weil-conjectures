@@ -22,96 +22,44 @@
  ],
  "proof": [
   {
-   "text": "Write $H(A,B)=\\RHom_X(A,B)$, $\\mathbf1=\\Lambda_X$, $L=\\Lambda_X(d)[2d]$, $\\omega=Rf^!\\Lambda_Y$ and $D=H(-,\\omega)$. The orientation [sk-def-sf-orientation] gives $\\gamma:L\\xrightarrow{\\sim}\\omega$. The bifunctor of [sk-def-sf-operations](i) sends $\\gamma^{-1}$ to an isomorphism $H(K,\\omega)\\to H(K,L)$. The displayed special case $m=d,n=2d$ of [sk-lem-sf-twist-interchange] gives $H(K,L)\\cong K^\\vee\\otimes L$. Thus the composite is exactly the specified $\\theta_K$.",
+   "text": "Use lem-sf-orientation-perfect-lines to place the actual orientation lines and exceptional images in the four finite-Tor domains and make each source line invertible. Use the coefficient evaluation laws and canonical twist interchange to construct theta, identify its inverse with sfPerfectThetaInverse, and prove naturality on the dualizable full subcategory.",
    "uses": [
-    "sk-def-sf-orientation",
-    "sk-def-sf-operations",
-    "sk-lem-sf-twist-interchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-    "place": "entire proof, with formal evaluation calculations expanded"
-   }
-  },
-  {
-   "text": "The canonical comparison $c_{K,M}:H(K,\\mathbf1)\\otimes M\\to H(K,M)$ is the transpose of evaluation tensored with $M$, using [sk-def-sf-operations](i). For $M=L$, its inverse is the unit case of [sk-lem-sf-twist-interchange]. For $u:K\\to K'$, the two composites from $K'^\\vee\\otimes M$ to $H(K,M)$ have the same transpose: evaluation after $u$. Injectivity of the adjunction bijection makes them equal. Bifunctoriality likewise makes $H(K,\\gamma^{-1})$ natural in $K$, so $\\theta$ is natural. The defining transpose equation for $c$ says that, under $\\theta_K$, evaluation $DK\\otimes K\\to\\omega$ is $K^\\vee\\otimes L\\otimes K\\to K^\\vee\\otimes K\\otimes L\\xrightarrow{e_K\\otimes1}L\\xrightarrow{\\gamma}\\omega$. All symmetries are those of the derived tensor.",
-   "uses": [
-    "sk-def-sf-operations",
-    "sk-lem-sf-twist-interchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-    "place": "entire proof, with formal evaluation calculations expanded"
-   }
-  },
-  {
-   "text": "By [prop-sf-dualizable], $K^\\vee$ is perfect: the local finite-projective hypothesis follows from the equivalent description in [sk-def-perfect]. The Tate line is locally constant of rank one and invertible by [lem-sf-twist-interchange]. Locally tensor a bounded finite-projective model for $K^\\vee$ with this rank-one module and translate its degrees by $2d$; it remains a bounded finite-projective model, with the completed, localized and common-stage meanings of [def-weil-site-perfect-complex]. Hence $K^\\vee(d)[2d]$ and $DK$ are perfect. In [def-coefficient-twists-detailed] the negative twist is defined as the coefficient dual of the positive tensor power. Evaluation of a rank-one module and its dual is multiplication after trivializing that line, with inverse sending $1$ to the corresponding basis and dual basis. Thus the opposite Tate lines cancel. The inverse of $L$ is $L^{-1}=\\Lambda_X(-d)[-2d]$: opposite Tate lines and opposite shifts cancel. Tensoring by these two objects gives inverse functors.",
-   "uses": [
-    "prop-sf-dualizable",
-    "sk-def-perfect",
-    "lem-sf-twist-interchange",
-    "def-weil-site-perfect-complex",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-    "place": "entire proof, with formal evaluation calculations expanded"
-   }
-  },
-  {
-   "text": "Use the dual pair supplied by [sk-def-perfect], with evaluation $e:Q\\otimes K\\to\\mathbf1$ and coevaluation $b:\\mathbf1\\to K\\otimes Q$. Under the adjunction [sk-def-sf-operations](i), the transpose $Q\\to H(K,\\mathbf1)$ of $e$ has inverse obtained by inserting $b$ and evaluating $H(K,\\mathbf1)\\otimes K$. Both inverse equations are the two dual-pair triangle identities. Thus $Q$ identifies with $K^\\vee$ with its canonical evaluation. Symmetry reverses the pair, giving a dual pair $(K^\\vee,K)$. The transpose $j_K:K\\to H(K^\\vee,\\mathbf1)$ of coefficient evaluation has inverse $K^{\\vee\\vee}\\xrightarrow{b\\otimes1}K\\otimes K^\\vee\\otimes K^{\\vee\\vee}\\xrightarrow{1\\otimes\\mathrm{ev}_{K^\\vee}}K$, with the symmetry understood. Its two inverse equations are again those two triangle identities. Therefore the canonical coefficient biduality is an isomorphism.",
-   "uses": [
-    "sk-def-perfect",
-    "sk-def-sf-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-    "place": "entire proof, with formal evaluation calculations expanded"
-   }
-  },
-  {
-   "text": "Transport the first variable by $\\theta_K$ and the second by $\\gamma^{-1}$ to identify $DDK$ with $H(K^\\vee\\otimes L,L)$. Cancellation defines an isomorphism $q:H(K^\\vee\\otimes L,L)\\xrightarrow{\\sim}H(K^\\vee,\\mathbf1)$. Explicitly, for every test object $A$, the adjunction of [sk-def-sf-operations](i) identifies its map on Hom sets with\n$$\\operatorname{Hom}(A\\otimes K^\\vee\\otimes L,L)\\cong\\operatorname{Hom}(A\\otimes K^\\vee,\\mathbf1).$$\nSend a map on the left to its tensor with $L^{-1}$ and cancel $L\\otimes L^{-1}$; the inverse sends $v$ to $v\\otimes1_L$. The two composites cancel to identities. Transposing these formulas gives inverse internal-Hom arrows, so the construction concerns internal Hom and not only global sections. These are the canonical opposite-twist maps of [sk-lem-sf-twist-interchange], applicable to the perfect $K^\\vee$ by Step 3. Now $\\delta_K:K\\to DDK$ is the transpose of evaluation $DK\\otimes K\\to\\omega$. Step 2 identifies that evaluation with $e_K\\otimes1_L$, followed by $\\gamma$. The cancellation sends its transpose to the transpose of $e_K$, namely $j_K$. Thus $q\\delta_K=j_K$ and Step 4 proves the asserted biduality identification and invertibility. The symmetry retains the graded signs; the shift $2d$ is even.",
-   "uses": [
-    "sk-def-sf-operations",
-    "sk-lem-sf-twist-interchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-    "place": "entire proof, with formal evaluation calculations expanded"
-   }
-  },
-  {
-   "text": "Transposing naturality of evaluation gives $DD(u)\\delta_K=\\delta_{K'}u$. Thus Steps 3 and 5 supply the contravariant endofunctor $D$ on perfect objects and a natural isomorphism $\\mathrm{id}\\xrightarrow{\\sim}DD$. This gives the equivalence between the perfect category and its opposite, with $D$ as inverse. More explicitly, the inverse on arrows $v:DK'\\to DK$ is $\\delta_{K'}^{-1}D(v)\\delta_K$; the two inverse equations use the preceding naturality and $D(\\delta_K)\\delta_{DK}=1_{DK}$. The latter follows by transposing evaluation twice: both transposes are evaluation by the unit–counit triangle identities of [sk-def-sf-operations](i). Finally [sk-def-sf-orientation] and [sk-def-sf-operations] identify $Rf^!\\Lambda_Y=\\omega_X$ and $D=\\mathbb D_X$ when $Y=\\operatorname{Spec}k$, $f=a_X$, giving exactly the named absolute maps.",
-   "uses": [
-    "sk-def-sf-operations",
+    "lem-sf-orientation-perfect-lines",
+    "lem-sf-coefficient-evaluation-naturality",
+    "sk-lem-sf-twist-interchange",
     "sk-def-sf-orientation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-    "place": "entire proof, with formal evaluation calculations expanded"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic evaluation-law core of lem-sf-oriented-double-hom-cancellation to the two inverse-line contractions. Its canonical inverse q agrees by adjunction target naturality with sfPerfectLineCancellation. Factor the double-Hom map through theta and gamma to obtain exactly the specified relative-bidual-to-coefficient-bidual equation. Coefficient biduality is invertible by lem-sf-perfect-dual-pair-and-tate-stability, hence relative biduality is invertible. The same lemma supplies coefficient dual closure; tensoring with the invertible line and theta gives relative dual closure.",
+   "uses": [
+    "lem-sf-oriented-double-hom-cancellation",
+    "lem-sf-perfect-dual-pair-and-tate-stability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift actual relative internal Hom to the full subcategory of dualizable objects. Naturality of its invertible evaluation-transpose biduality gives an isomorphism id to the square of this contravariant functor. Its opposite inverse gives the other isomorphism. Equivalence.mk supplies the anti-equivalence with precisely this lifted functor. Apply the identical assembly to all four coefficient stages. Structure-morphism specialization is literal substitution.",
+   "uses": [
+    "sk-def-sf-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-sf-orientation",
-  "sk-def-sf-operations",
+  "lem-sf-orientation-perfect-lines",
+  "lem-sf-coefficient-evaluation-naturality",
   "sk-lem-sf-twist-interchange",
-  "prop-sf-dualizable",
-  "sk-def-perfect",
-  "lem-sf-twist-interchange",
-  "def-weil-site-perfect-complex",
-  "def-coefficient-twists-detailed"
+  "sk-def-sf-orientation",
+  "lem-sf-oriented-double-hom-cancellation",
+  "lem-sf-perfect-dual-pair-and-tate-stability",
+  "sk-def-sf-operations"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
-  "place": "entire proof; expanded tensor--Hom transposes and dual-pair triangles"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "entire proof; formal closed-domain assembly with evaluation-normalized line cancellation"
  },
  "mathlib_searches": [
   {
@@ -243,20 +191,72 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-dual-perfect",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual",
+    "AlgebraicGeometry.Etale.Orientation.isDualizable_verdierDual"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_coefficientDual",
+    "AlgebraicGeometry.Etale.Orientation.isDualizable_verdierDual"
+   ]
+  }
+ },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "sk-thm-sf-dual-perfect",
   "worker": "stage1",
-  "summary": "Expanded the canonical orientation/twist comparison, its evaluation and naturality, preservation of perfectness, dual-pair proof of coefficient biduality, cancellation identifying relative biduality, and the anti-equivalence. No new nodes. Repaired dangling bibliographic pointers without changing mathematical content.",
-  "blueprint": "Steps 1–2 realize the first two sentences; Steps 3–5 expand the last sentence and its coefficient-dual input; Step 6 spells out the anti-equivalence consequence and absolute specialization."
+  "summary": "Re-split the returned 5177-character proof into three independently queued statement-only tasks: evaluation and naturality (old Step 2), perfect dual pairs with Tate stability (old Steps 3–4), and internal-Hom cancellation with its canonical biduality equation (old Step 5). The item retains its exact statement, constructs theta, assembles these lemmas, and spells out the anti-equivalence and absolute specialization. All six original arguments are retained verbatim in the report with their new owners.",
+  "blueprint": "Step 1 realizes the first three sentences; Step 2 realizes applying theta twice and the coefficient-biduality identification of the last sentence; Step 3 supplies the anti-equivalence consequence and absolute specialization. The new nodes come from the corresponding sentences of this unit, with no route change."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q75-f3274af00",
-  "group": "Q75",
+  "reviewer": "NT-cc-Q120-deecc0ac4",
+  "group": "Q120",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-f3274af00 (reviewer sub-agent of L); spot-checked: I read the full item (statement, 6 steps), the unit record, the main-20261015 blueprint statement and proof of sk-thm-sf-dual-perfect, sk-prop-sf-dualizable-biduality (statement and proof), thm-sf-dual-perfect and the statement of every cited node. The two statement edits are equivalent and reported, not a weakening: the dangling [sk-thm-smooth-purity] pointer is reworded, and [sk-prop-sf-dualizable-biduality] is replaced by its own description of the biduality as the adjoint of evaluation. Hypotheses match the blueprint: smooth, separated, finite type, pure relative dimension d, arbitrary oriented base Y, K perfect in Dctf. The coefficient category is that of sk-def-sf-orientation/def-sf-datum. Step 1: sk-def-sf-orientation gives gamma for any Y; sk-def-sf-operations(i) and the m=d,n=2d special case of sk-lem-sf-twist-interchange give theta. Step 2: c is the transpose of ev tensor 1, and lem-sf-twist-interchange says the interchange arrow is the inverse of c. I recomputed that under theta, evaluation becomes gamma∘(e⊗1)∘sym. Step 3: perfectness via prop-sf-dualizable, taking the local model from the 'equivalently' clause of sk-def-perfect. That clause is true, and the step also follows formally from Step 4; the invertible Tate line comes from lem-sf-twist-interchange and def-coefficient-twists-detailed. Step 4: I checked both inverse equations against the two triangle identities, including for the symmetric pair (K^∨,K). Step 5: tensoring with L^{-1} is well defined independent of the chosen cancellation and is an inverse because tensoring with L is fully faithful. I verified q∘delta_K=j_K, and the shift 2d is even. Step 6: D(delta_K)delta_DK=1 and naturality give the anti-equivalence; the absolute case follows with omega=Ra^!. Route: prop-sf-dualizable and lem-sf-twist-interchange are in units this unit cites, so no tool_uses are needed. Unit: only realized and realized_by changed. There are no new nodes and no SGA citations. thm-sf-dual-perfect is recorded in same_as and is not cited. Edge cases checked: K=0, d=0 or f=id, K=Lambda, odd shift, empty X. Not faults: lean_audit line ranges are stale (Orientation.lean declarations at 183/197, which I confirmed), and the sk-prop-sf-dualizable-biduality unit's realized field is still empty. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-deecc0ac4 (reviewer sub-agent of L); spot-checked: Answer to the released re-split note of 2026-10-22 for sk-thm-sf-dual-perfect. The statement is byte-identical to live and the stage-2 Lean binding is kept. Mapping of the old proof: Step 2 → lem-sf-coefficient-evaluation-naturality; Steps 3–4 → lem-sf-perfect-dual-pair-and-tate-stability; Step 5 → lem-sf-oriented-double-hom-cancellation. Steps 1 (construction of theta) and 6 (formal anti-equivalence) stay verbatim in a 1887-character, 3-step assembly. No argument was blurred, and no new node restates the item. Not superseded: live still has the 6-step proof, the three ids exist in neither live nor side-live, and the item is not dropped. I recomputed each new statement. Evaluation node: naturality types check; ev(theta^-1⊗1)=gamma(e⊗1)(1⊗sigma) is the defining transpose; c^-1 equals the twist interchange, as lem-sf-twist-interchange states. Dual-pair node: the inverse of j built from b_P and ev∘sigma follows from the two triangle identities. Cancellation node: uncurrying t∘delta and applying the hexagon gives (e∘sigma)⊗1_L, so q t delta=j holds with signs; the symmetric involution cancels. Small cases checked: P=0, unit, 1[1], m=0, d=0. Duplicate search over the whole DAG: lem-sfb-ringed-site-perfect-duality, lem-sf-etale-twisted-bidual-transport, lem-sf-evaluation-bidual-comparison-transport, lem-coef-closed-adjunction-naturality, lem-fix-closed-evaluation-dual-criterion, prop-weil-twist-preserves, lem-coef-site-perfect-rational-bidual and others; none duplicates a node. One C5 fault, fixed: the q_U clause of lem-sf-oriented-double-hom-cancellation restated the existing lem-sf-invertible-factor-hom-cancellation (c=s^-1 with X=U, Y=1, J=L). The corrected file defines q_U through that node (cancellation iso after the unitor), adds it to stmt_deps (no cycle), and keeps the equation q t delta=j unchanged. Assembly: Step 1 gives gamma, H(K,gamma^-1) and the twist iso, and naturality comes from the new node. In Step 2, the hypothesis that c is invertible is supplied by Step 1, and delta is an isomorphism because q, t and j are. Step 3 is formal (naturality of delta and the triangle identity). No SGA, no off-unit citations, no tool_uses. Advisory: membership of DK in Dctf is left implicit, as in the base proof already reviewed (Q75).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedPerfectDuality",
+  "declaration": "WeilConjectures.sfOrientedPerfectDuality",
+  "declarations": [
+   "WeilConjectures.sfPerfectThetaInverse",
+   "WeilConjectures.sfPerfectLineCancellation",
+   "WeilConjectures.SfOrientedPerfectDuality",
+   "WeilConjectures.SfOrientedPerfectDualityOnDomain",
+   "WeilConjectures.sfOrientedPerfectDuality"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedPerfectDuality.lean",
+  "statement": "theorem sfOrientedPerfectDuality {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {m : ℕ} {S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))} (O : SfOrientationDatum S) {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left] (d : ℕ) [SmoothOfRelativeDimension d f.hom.left] (c : Compactification f.hom.left) : SfOrientedPerfectDualityOnDomain (S.finiteClosed X) (SixFunctorOrientation O f d c) ∧ SfOrientedPerfectDualityOnDomain (S.integralClosed X) (SixFunctorOrientation.integralComponent O f d c) ∧ SfOrientedPerfectDualityOnDomain (S.rationalClosed X) (SixFunctorOrientation.rationalComponent O f d c) ∧ SfOrientedPerfectDualityOnDomain (S.commonClosed X) (SixFunctorOrientation.commonComponent O f d c)",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-060354c41",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read item, 4 stmt_deps, live decls (SixFunctorOrientation + components, sfOrientationReducedLine, SixFunctorClosedDomain/sixFunctorDomainHom, CoefficientClosedStructure, ringedSiteBidual/DualEvaluation, IsDualizable, SixFunctorOperationDatum). Hypotheses match (separated, SmoothOfRelativeDimension d, arbitrary Y, compactification coordinate as in the dep, all four stages, perfect = IsDualizable on the finite-Tor domain). theta.inv pinned to the canonical evaluation transpose composed with gamma, equal to the node's twist-iso∘RHom(K,γ⁻¹); naturality direction correct; anti-equivalence tied to the actual H(-,W); biduality equation checked true by hand via symmetric coherence (2d even). Records: item lean only, statement verbatim; §1(B) existing:true bindings for sk-def-perfect (IsDualizable) and sk-def-sf-operations (SixFunctorOperationDatum, same decl as def-fix-six-functor-datum), both previously null, with notes. Imports = stmt_dep modules + proof_dep modules per brief. Edge cases K=0, d=0, empty X, n=1, odd shifts, arbitrary Y ok. No compile (no change). Advisories: author self-check second reading; unused etale twist-interchange import / non-stmt_dep ringedSiteDualEvaluation; invertibleHomComparison analogue on MonoidalClosed; inline H(K,1)=sixFunctorCoefficientDual."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c85e",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123118-L-1833257",
+  "kind": "interface",
+  "note": "independent cc review: sfOrientedPerfectDuality proof + new sfOrientationPerfectLines + wrapper sfOrientedCancellation_of_evaluationLaws against SfOrientedPerfectDuality def, unit sk-thm-sf-dual-perfect realized steps, and clone diff; axioms checked in /tmp sandbox (sorryAx only from upstream evaluation/dual-pair holes)"
  }
 }

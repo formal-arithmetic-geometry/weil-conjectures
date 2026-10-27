@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-space-atlas-sheaf-descent",
+ "kind": "statement",
+ "title": "Etale sheaves on an algebraic space descend along a scheme atlas",
+ "statement": "Let $B$ be a scheme and $H$ an algebraic space over $B$ [def-trf-algebraic-space], with the universes and small skeletons of [def-weil-size-convention]. Write $\\operatorname{Sh}(H_{\\mathrm{et}})$ for sheaves of sets [def-weil-pbc-sites-and-cohomology] on the small etale scheme site, and use the inverse images and composition comparisons of [lem-trf-space-enlarged-etale-ringed-site-model]. Let $p:W\\to H$ be a representable surjective etale map with $W$ a scheme. Put $R=W\\times_HW$ and $T=W\\times_HW\\times_HW$, which are schemes [lem-trf-space-fibre-products-etale-covers]. Let $p_1,p_2:R\\to W$ and $p_{ij}:T\\to R$ be the projections. A descent pair is a sheaf $G$ on $W_{\\mathrm{et}}$ together with an isomorphism $\\alpha:p_1^{-1}G\\xrightarrow{\\sim}p_2^{-1}G$ satisfying $p_{23}^{-1}\\alpha\\circ p_{12}^{-1}\\alpha=p_{13}^{-1}\\alpha$ under the canonical composition comparisons; a morphism of pairs is a sheaf map commuting with $\\alpha$. Restriction sends a sheaf $F$ on $H_{\\mathrm{et}}$ to $(p^{-1}F,\\alpha_F)$, where $\\alpha_F$ is the canonical identification of the two inverse images of $F$. This functor is an equivalence of categories. In particular every descent pair is effective, compatible maps glue uniquely, and an isomorphism of descent pairs glues to an isomorphism. No quasi-compactness, separation, Noetherianity or finiteness of the atlas is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05YY (lemma-descent-sheaf), statement; descent pair written using the double and triple fibre products of the scheme atlas."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-space-enlarged-site-scheme-density] at $H$ to form the enlarged etale site $\\mathcal C=\\mathcal C_H$. It has terminal object $H/H$, all fibre products, and the singleton covering $\\{W\\to H\\}$. Work on its small representative in the stipulated sheaf universe. By [lem-trf-space-fibre-products-etale-covers], the double and triple overlaps are the schemes $R$ and $T$ in the statement, and all their projection maps needed below are etale. Thus the covering and its fibre products satisfy the hypotheses of general site descent.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05YY (lemma-descent-sheaf), first proof, first paragraph; Tags 03G0 (definition-spaces-etale-site), 03G1 (lemma-compare-etale-sites)."
+   }
+  },
+  {
+   "text": "By [lem-trf-space-enlarged-etale-ringed-site-model], for $Z=H,W,R,T$ the scheme-object restriction $E_Z:\\operatorname{Sh}(\\mathcal C_Z)\\to\\operatorname{Sh}(Z_{\\mathrm{et}})$ is an equivalence, and postcomposition identifies $\\mathcal C_Z$ with $\\mathcal C/Z$ for these etale maps to $H$. Under these identifications inverse image is restriction, compatibly with composition. Since $H/H$ is terminal, $\\mathcal C/H\\cong\\mathcal C$: its inverse assigns to an object its unique map to $H/H$, with the same coverings. For a sheaf $F$ on $H_{\\mathrm{et}}$, extend it by $E_H$ and restrict to $W$. The two restrictions to $R$ have identical composites to $H$, so their identity comparison gives $\\alpha_F$; on $T$ the three comparisons compose as identities. The cited composition comparisons identify these with exactly the inverse images and cocycle of the statement, naturally on maps.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05YY (lemma-descent-sheaf), first proof, localization and canonical identification; Tag 03LP (lemma-etale-morphism-topoi)."
+   }
+  },
+  {
+   "text": "Given $(G,\\alpha)$, choose an extension $\\widetilde G$ on $\\mathcal C_W$ through $E_W$. The comparison in step 2 identifies the restrictions of $\\widetilde G$ along the two projections with the extensions of $p_1^{-1}G,p_2^{-1}G$. Full faithfulness of $E_R$ therefore lifts $\\alpha$ uniquely to an overlap isomorphism $\\widetilde\\alpha$; its inverse lifts the inverse of $\\alpha$. Faithfulness of $E_T$ shows that its triple-overlap cocycle holds, since the two composites restrict to the asserted cocycle for $\\alpha$. These are precisely gluing data for the singleton covering of step 1. Here the repeated cover index still has overlap $W\\times_HW$, not just $W$; no extra diagonal axiom is needed. Indeed pulling the cocycle to $(w,w,w)$ gives $d^*\\alpha\\circ d^*\\alpha=d^*\\alpha$, hence $d^*\\alpha=1$ by cancellation.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05YY (lemma-descent-sheaf), first proof: the diagram is the cocycle condition for gluing data; sites.tex gluing data before Tag 04TR (lemma-glue-sheaves)."
+   }
+  },
+  {
+   "text": "Apply [lem-pe-set-sheaf-cover-descent] to $\\mathcal C$, $U=H$, the singleton index set, and $(\\widetilde G,\\widetilde\\alpha)$. The site is small with all fibre products by step 1, and the chosen universe contains the index set and products. It gives a sheaf $\\widetilde F$ on $\\mathcal C/H$ and an isomorphism $\\widetilde F|_W\\simeq\\widetilde G$ intertwining the overlap data. Identify $\\mathcal C/H$ with $\\mathcal C$ as in step 2 and put $F=E_H\\widetilde F$. Under the equivalences of step 2 this gives an isomorphism from the restriction pair of $F$ to $(G,\\alpha)$. Every descent pair is therefore effective.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05YY (lemma-descent-sheaf), first proof, final sentence, invoking Sites gluing; sites.tex Tag 04TR (lemma-glue-sheaves)."
+   }
+  },
+  {
+   "text": "Let $F_1,F_2$ be sheaves on $H_{\\mathrm{et}}$. Extend them to $\\mathcal C$. A map between their descent pairs lifts uniquely on $\\mathcal C/W$ by full faithfulness of $E_W$; its compatibility with $\\alpha$ says precisely that its two restrictions agree on $\\mathcal C/R$, by faithfulness of $E_R$ and step 2. The morphism clause of [lem-pe-set-sheaf-cover-descent] glues it uniquely on $\\mathcal C/H$. Thus restriction is fully faithful. Choose the realizations of step 4 for objects and use this unique gluing for arrows: uniqueness gives preservation of identity and composition and gives the inverse natural comparisons. This constructs an equivalence. If the local map is an isomorphism, its inverse also commutes with the overlap data; glue both maps, and uniqueness identifies their composites with identities. Hence an isomorphism of pairs glues to an isomorphism.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05YY (lemma-descent-sheaf), first proof; sites.tex Tag 04TQ (lemma-glue-maps) and Tag 04TS (lemma-mapping-property-glue)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05YY (lemma-descent-sheaf), first proof, using Tags 03G0, 03G1, 03LP and sites.tex Tags 04TR (lemma-glue-sheaves), 04TQ (lemma-glue-maps), 04TS (lemma-mapping-property-glue)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on an algebraic space are equivalent to sheaves on an etale scheme atlas with a cocycle on the kernel pair",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.SheafedSpace.instCategory, AlgebraicGeometry.SheafedSpace.IsSheaf, AlgebraicGeometry.SheafedSpace.GlueData.toGlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.isoSheafedSpace, AlgebraicGeometry.SheafedSpace, AlgebraicGeometry.SheafedSpace.ext, AlgebraicGeometry.SheafedSpace.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Descent\"",
+   "results": "Actual logged search: 1 hits; CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*sheaf|sheaf.*descent|AlgebraicSpace",
+   "results": "Actual logged search: 3 hits; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Subsheaf.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent for small etale sheaves along a surjective etale presentation of an algebraic space",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.etalePretopology, Algebra.Etale.formallyEtale, Algebra.Etale.finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on an algebraic space is a sheaf on a surjective etale scheme cover with an isomorphism on the double overlap satisfying the triple overlap cocycle",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.sheaf, TopCat.Sheaf, TopCat.Presheaf.IsSheafOpensLeCover, TopCat.Presheaf.IsSheaf, AlgebraicGeometry.Scheme.Cover.gluedCover, TopCat.Presheaf.isSheaf_iff_isSheafPairwiseIntersections, TopCat.Presheaf.IsSheafPairwiseIntersections, TopCat.Sheaf.forget",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme etale categories, ring etaleness, topological sheafed spaces, or generic descent interfaces; none states this algebraic-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|sheaf.*[Dd]escent|[Dd]escent.*sheaf",
+   "results": "{\"t\": \"2026-10-23T18:28:52Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|sheaf.*[Dd]escent|[Dd]escent.*sheaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Subsheaf.lean\"], \"digest\": \"55dea9707c7d2345\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, topological sheaves and abstract descent-data interfaces do not state descent for algebraic-space etale sheaves or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent for sheaves of sets on localized sites along a covering family",
+   "results": "{\"t\": \"2026-10-23T18:28:53Z\", \"tool\": \"leansearch\", \"query\": \"Effective descent for sheaves of sets on localized sites along a covering family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EffectiveEpiFamily.desc\", \"CategoryTheory.Presheaf.IsSheaf\", \"CategoryTheory.EffectiveEpiFamilyStruct.desc\", \"TopCat.Sheaf\", \"TopCat.Sheaf.forget\", \"TopCat.Presheaf.IsSheafOpensLeCover\", \"TopCat.Presheaf.IsSheaf\", \"SheafOfModules.LocalGeneratorsData.coversTop\"], \"digest\": \"b5eb69c5976d997a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, topological sheaves and abstract descent-data interfaces do not state descent for algebraic-space etale sheaves or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.DescentData",
+   "results": "{\"t\": \"2026-10-23T18:28:53Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, CategoryTheory.DescentData\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DescentData'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "unavailable: Loogle pattern used an unknown identifier; the corrected quoted-name pattern was run separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on the small etale site of an algebraic space are equivalent to sheaves on a surjective etale scheme atlas with cocycle descent data",
+   "results": "{\"t\": \"2026-10-23T18:28:54Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves on the small etale site of an algebraic space are equivalent to sheaves on a surjective etale scheme atlas with cocycle descent data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.SheafedSpace\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"ff1ed8041d2f54f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, topological sheaves and abstract descent-data interfaces do not state descent for algebraic-space etale sheaves or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to slice sites gives an equivalence between sheaves on a site and cocycle gluing data on a cover",
+   "results": "{\"t\": \"2026-10-23T18:29:56Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to slice sites gives an equivalence between sheaves on a site and cocycle gluing data on a cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evalEquiv_symm_apply\", \"TopCat.Presheaf.generateEquivalenceOpensLe\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_left\"], \"digest\": \"5cf737cbfb0496d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, topological sheaves and abstract descent-data interfaces do not state descent for algebraic-space etale sheaves or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-23T18:30:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv\"], \"digest\": \"99979f992c8454fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, topological sheaves and abstract descent-data interfaces do not state descent for algebraic-space etale sheaves or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|spacesEtale|spaces_etale",
+   "results": "{\"t\": \"2026-10-23T18:30:02Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|spacesEtale|spaces_etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale sites, topological sheaves and abstract descent-data interfaces do not state descent for algebraic-space etale sheaves or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-integral-radicial-etale-invariance",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for lifting a scheme object across U -> Y and X -> Z: Stacks 05ZS, lemma-thickening-equivalence. Supporting theorem for 05ZS: spaces-more-morphisms.tex Tag 05ZH (theorem-topological-invariance), equivalence on etale algebraic-space objects before restricting to schemes. Atlas descent input: Tag 05YY, used to lift maps and cocycles after the scheme invariance theorem on an atlas, its double overlap and its triple overlap.",
+   "via": [
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-atlas-sheaf-descent",
+  "worker": "stage1",
+  "summary": "Follow Tag 05YY first proof on the enlarged etale site. Reuse the existing general covering descent theorem, enlarged-site finite-limit and comparison statements, and algebraic-space fibre products; no new nodes. Check singleton repeated-index overlap, diagonal normalization, faithful lifting of the cocycle, and morphism/inverse gluing. Preserve the statement and its dependencies verbatim.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images proof (3), under the existing alteration/plurinodal/de Jong/infinitesimal-pushout chain recorded in blueprint.from.place. This split supplies only Tag 05YY atlas descent in the 05ZH/05ZS topological-invariance prerequisite; it changes no chapter or unit route. The ancestor search returns None for this inherited helper chain, which is retained. Latest blueprint read at literature/blueprint/latest/.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "General set-sheaf descent and unique gluing of maps on a small site with fibre products; the unit has no generic replacement. This is the Sites gluing theorem explicitly invoked by 05YY."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic comparison of small and enlarged etale topoi, compatible composition, and localization for etale maps; used as the chart-independent site model, not as a trace-formula result."
+   },
+   {
+    "node": "lem-trf-space-enlarged-site-scheme-density",
+    "why": "Generic enlarged-site axioms, terminal object and finite limits needed for the hypotheses of site descent; not a step of the trace-formula argument."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and schematicity of the atlas overlaps and etale base-change permanence; no trace-formula assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-f9fff3e4a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-f9fff3e4a (reviewer sub-agent of L); spot-checked: Pass: no faults found and no fixes made. The delivery is a one-level split of the item with no new nodes; the statement and stmt_deps are the same as on base. Live still has the item unsplit, and there is no repair note for it. Source checked: Stacks 05YY (spaces-properties.tex lemma-descent-sheaf, about lines 2945-2990). The item's statement matches it; its cocycle p23∘p12=p13 is 05YY's cocycle diagram written with the projections. The five steps follow the first proof of 05YY on the enlarged site C_H. Step 1: the density node gives the site, terminal H/H and fibre products; the fibre-products node gives R and T as schemes, the étale projections, and {W→H} as a covering. Step 2: the model node gives the equivalences E_Z and the identification C_Z' = C_Z/Z' for étale maps, so α_F is the identity of F̃|_R, as 03LP and 05YY say. Step 3: α and its inverse lift by full faithfulness of E_R, and the cocycle holds by faithfulness of E_T. Step 4: the object clause of lem-pe-set-sheaf-cover-descent (Sites 04TR) applies with one index, a=b allowed, and gives effectivity. Step 5: its map clause (04TQ) gives full faithfulness, hence the equivalence and the isomorphism clause. Edge cases tested: H empty, the identity atlas, a finite Galois Spec k'→Spec k, and a non-quasi-compact atlas. Duplicate search: grep for 05YY and a scan of all algebraic-space descent/glue statements; module-tuple-sheaf, space-cover-sheaf-descent-categories (0ADT), etale-sheaf-space-atlas-bootstrap (0BH4) and fppf-qcoh-descent are different results. No cycle. Batch-5 flag: the newly cited lem-trf-space-enlarged-site-scheme-density is the generic enlarged étale site of an algebraic space (Stacks 03G0/03G1/03G2). Neither assumption gives it and it is not a step of the trace formula or Poincaré duality; its closure reaches no trace-formula, Poincaré or assume node, so citing it is acceptable. The four declared tool uses are accepted as generic black boxes. Mathlib has no algebraic spaces, so the recorded no-match verdict is correct. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAtlasSheafDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.atlasSheafRestriction_isEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.atlasSmallRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSmallSheafFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSmallSheafPseudofunctor",
+   "AlgebraicGeometry.AlgebraicSpace.atlasBaseObject",
+   "AlgebraicGeometry.AlgebraicSpace.atlasToBase",
+   "AlgebraicGeometry.AlgebraicSpace.AtlasSheafDescent",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSheafRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.atlasSheafRestriction_isEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAtlasSheafDescent.lean",
+  "statement": "theorem atlasSheafRestriction_isEquivalence (H : AlgebraicSpace S) (W : H.EtaleSite) (hs : IsSurjective W.obj.hom) : (atlasSheafRestriction.{u, w} H W).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9f4efd08",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Tag 05YY stated as atlasSheafRestriction_isEquivalence: restriction from Sheaf H.etaleTopology to Mathlib DescentData of the strict small-site sheaf pseudofunctor on the enlarged site (identity composition comparisons, so ofObj gives canonical alpha_F); singleton atlas W→H/H with hom_self derivable and hom_comp = p_ij cocycle, so the same category as the node's (G,alpha) pairs; only hypotheses W : H.EtaleSite (representable étale) plus hs IsSurjective; coefficients Type (max (u+1) w) as in the recorded model; statement verbatim; edge cases (empty, identity atlas, Galois kernel pair, non-qc atlas) covered. §1(B) dep record lem-trf-space-enlarged-etale-ringed-site-model rebound to AtlasEtaleRestriction, which publicly re-exports the unchanged sorried SmallEnlargedEtaleModules, keeps all declarations and adds the true enlargedArrow_chartwise (étale cancellation) and chartwiseEtaleMap_continuous (03LP); live record = base, so no competing overwrite; not a dup of etaleMap (needs representable IsEtale). No duplicate in project or Mathlib; no hollow definitions; sorry only; docstrings with source and blueprint; imports used, SetSheafCoverDescent is the proof_dep. No file changed, no compile run."
+ }
+}

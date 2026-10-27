@@ -1,0 +1,98 @@
+{
+ "id": "def-sf-native-constructible-tensor",
+ "kind": "definition",
+ "title": "Native derived tensor restricted to bounded constructible Weil complexes",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For a separated finite-type $k_0$-scheme $X_0$, use the native ambient category $D(\\mathcal W_X)$ and its full bounded constructible subcategory $\\mathrm{WC}^{\\mathrm{der}}(X_0)$ of [def-sf-native-weil-derived-framework], and the native derived tensor bifunctor $\\otimes^L_{B_X}$ of [def-sf-derived-weil-category-and-operations]. Its bounded constructible closure is [lem-sf-derived-weil-tensor-hom-adjunction]. Define the restricted bifunctor $\\otimes^L_{X_0}:\\mathrm{WC}^{\\mathrm{der}}(X_0)\\times\\mathrm{WC}^{\\mathrm{der}}(X_0)\\to\\mathrm{WC}^{\\mathrm{der}}(X_0)$ to send $(K,L)$ to the same ambient object $K\\otimes^L_{B_X}L$, with the bounded constructible membership proof supplied by that closure statement. On a pair of morphisms $(f:K\\to K',g:L\\to L')$ its map is the same ambient tensor morphism $f\\otimes^L_{B_X}g$, regarded as a morphism in the full subcategory.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-derived-weil-tensor-hom-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, first and fourth tensor--internal-Hom transpositions: native tensor on the bounded constructible full subcategory"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict native derived tensor to the full subcategory of bounded constructible Weil complexes",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE; HomologicalComplex.restriction; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.TStructure.t; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.IsLE; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic. None defines the native restricted tensor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bifunctor obtained by restricting derived tensor product to bounded constructible Weil complexes",
+   "results": "8 hits: HomologicalComplex.ιTensorObj; HomologicalComplex.tensorObj; HomologicalComplex.HasTensor; HomologicalComplex.HasGoodTrifunctor₂₃Obj; HomologicalComplex.HasGoodTensor₁₂; HomologicalComplex.instHasMapProdObjGradedObjectFunctorMapBifunctorMapBifunctorMapObjπX; HomologicalComplex.HasGoodTrifunctor₁₂Obj; CochainComplex.instHasMapBifunctorObjIntShiftFunctor_1. None is the native bounded constructible tensor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nativeConstructibleTensor|WeilComplex|nativeDerivedTensor",
+   "results": "msearch Mathlib grep: 0 hits. Direct rg of dag/nodes, lean/WeilConjectures and lean/Sheaf/Paper/NativeCompactProjectionFormula.lean: exact definition at NativeCompactProjectionFormula.lean:137-147, already listed among helpers of lem-sf-derived-weil-compact-projection-formula, but no definition node owns it; no upstream WeilConjectures match. blueprint_refs.py search constructible tensor returned 165 broad blueprint matches, none is the restriction definition; exact id and declaration search found no definition node.",
+   "date": "2026-10-24",
+   "verdict": "exact existing project declaration; no definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-dualizing-hom-transposition",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1: the native bounded constructible tensor objects and maps in the first and fourth Hom transpositions",
+   "via": [
+    "lem-sf-weil-dualizing-hom-transposition",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeCompactProjectionFormula",
+  "declaration": "AlgebraicGeometry.WeilComplex.nativeConstructibleTensor",
+  "statement": "def nativeConstructibleTensor (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :\n    WeilComplex k₀ l X × WeilComplex k₀ l X ⥤ WeilComplex k₀ l X",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Attaches the existing bounded-constructible lift at NativeCompactProjectionFormula.lean:137-147. Its object is the existing ambient nativeDerivedTensor on the pair, its membership proof is nativeDerivedTensor_mem_weilComplex, and ObjectProperty.lift uses the same ambient map. This node owns only that definition; it neither states nor assumes the compact projection formula theorem. No new Lean declaration or module."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2a92edf7",
+  "group": "Q67",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2a92edf7",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read item, 4 stmt_deps, new node def-sf-native-constructible-tensor (existing:true NativeCompactProjectionFormula:137-147, no other owner in live DAG), module, report (Worker report + Second reading by Q67 present). Hypotheses exact (finite field, prime≠char, separated finite type; arbitrary J with α, no HasUpperShriek). ω=J(toComplex(adicConstant Spec k0)) matches operations node's 1_0; D=derivedHom into ω, preservation asserted (∃ hD), not assumed. c pinned: braiding ≫ transpose.symm(v ≫ nativeModel.inv) = native left uncurrying from right-closed structure; t pinned = (α.homEquiv).symm. Six forward/inverse/composite squares type-correct with f:K'⟶K, g:L'⟶L, D.map f.op; K-square true since nativeModel is natural and CoefficientClosedStructure.evaluation_naturality fixes first-variable functoriality. lean.statement verbatim in file. Edge cases K=0, L=0, X empty, X=Spec k0, universes OK. Advisory: redundant re-add of specOverSpec instance at file end (harmless); nativeModel unpinned in landed operations package (pre-existing). No file changed, no compile."
+ }
+}

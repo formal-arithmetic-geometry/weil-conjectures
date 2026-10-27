@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-directed-tensor-integral-embedding",
+ "kind": "statement",
+ "title": "Stagewise tensor embeddings with integral image pass to a directed algebra colimit",
+ "statement": "Let $R,C,B$ be commutative rings, $C,B$ commutative $R$-algebras, and $v:C\\to B$ an $R$-algebra homomorphism. Let $I$ be a nonempty directed preorder and $(S_i,a_{ij})$ a diagram of commutative $R$-algebras with colimit $(S,a_i)$ in commutative $R$-algebras [def-weil-pbc-category-colimit]. Work in a common universe containing the index and all ring carriers. Give all tensor products their algebra multiplication $(s\\otimes c)(s'\\otimes c')=ss'\\otimes cc'$ [def-weil-pbc-module-tensor-product]. Put $E_i=S_i\\otimes_R C$, $D_i=S_i\\otimes_R B$, $E=S\\otimes_R C$, $D=S\\otimes_R B$, and $f_i=1\\otimes v:E_i\\to D_i$, $f=1\\otimes v:E\\to D$. Assume every $f_i$ is injective and every element of its image is integral over $S_i$ [def-weil-pbc-integral-closure]. Then $f$ is injective and every element of its image is integral over $S$. In particular it restricts to an injective $S$-algebra map $q:E\\to\\overline S^{\\,D}$, where $\\overline S^{\\,D}$ denotes the integral closure of $S$ in $D$, with $q(s\\otimes c)=s\\otimes v(c)$. For each $i\\le j$ the maps satisfy $(a_{ij}\\otimes1_B)f_i=f_j(a_{ij}\\otimes1_C)$, and for each $i$ they satisfy $(a_i\\otimes1_B)f_i=f(a_i\\otimes1_C)$. No flatness, integrality or injectivity assumption on $v$, $S_i\\to S_j$, or $S_i\\to S$ is imposed beyond the displayed stagewise assumptions.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof: tensor-colimit compatibility, preservation of monic equations, and injectivity from eventual vanishing (former steps 2 and 3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Write $e_i=a_i\\otimes1_C$, $d_i=a_i\\otimes1_B$, and $e_{ij}=a_{ij}\\otimes1_C$, $d_{ij}=a_{ij}\\otimes1_B$. The tensor universal property [def-weil-pbc-module-tensor-product] defines these linear maps and $f_i,f$ by their pure-tensor formulas. They preserve multiplication: for example $f_i((s\\otimes c)(t\\otimes c\\prime))=st\\otimes v(cc\\prime)=(s\\otimes v(c))(t\\otimes v(c\\prime))$; bilinearity extends this equality to arbitrary finite sums. They preserve $1\\otimes1$ and the scalar maps. On $s\\otimes c$, both $d_{ij}f_i$ and $f_je_{ij}$ have value $a_{ij}(s)\\otimes v(c)$; both $d_if_i$ and $fe_i$ have value $a_i(s)\\otimes v(c)$. Generation by pure tensors proves both required identities.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; expanded using Tags 00D6, 00D7, 00DD, 00GI and 00GP."
+   }
+  },
+  {
+   "text": "The nonempty directed preorder, viewed as a category, is filtered [def-weil-pbc-category-colimit]: a common upper bound receives two objects and there is at most one arrow between any pair. Apply [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] to the $R$-algebra diagram $(S_i)$ with $N=C$ and with $N=B$. Its universe hypothesis holds by the common-universe convention in the statement. Thus every $x\\in E$ equals $e_i(x_i)$ for some $i,x_i\\in E_i$; and $d_i(y_i)=0$ for $y_i\\in D_i$ implies $d_{ij}(y_i)=0$ for some $j\\ge i$. The maps $d_i$ are ring homomorphisms. These statements apply to the specified colimit cocone, by its unique cocone-compatible isomorphism with a chosen colimit.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; expanded using Tags 00D6, 00D7, 00DD, 00GI and 00GP."
+   }
+  },
+  {
+   "text": "If $f(x)=0$, choose $x=e_i(x_i)$ by [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise]. Step 1 gives $d_i(f_i(x_i))=0$. The eventual-zero clause of that same node gives $j\\ge i$ with $0=d_{ij}(f_i(x_i))=f_j(e_{ij}(x_i))$. Injectivity of $f_j$ gives $e_{ij}(x_i)=0$. Cocone compatibility gives $x=e_j(e_{ij}(x_i))=0$. Apply this kernel argument to $x-x\\prime$ to obtain injectivity of $f$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; expanded using Tags 00D6, 00D7, 00DD, 00GI and 00GP."
+   }
+  },
+  {
+   "text": "For $x=e_i(x_i)$, stagewise integrality and [def-weil-pbc-integral-closure] give $n\\ge1$ and $r_0,\\ldots,r_{n-1}\\in S_i$ such that $y_i^n+\\sum_{k<n}(r_k\\otimes1_B)y_i^k=0$, where $y_i=f_i(x_i)$. Apply the ring map $d_i$ and use $d_i(y_i)=f(x)$ and $d_i(r_k\\otimes1_B)=a_i(r_k)\\otimes1_B$. The resulting equation $f(x)^n+\\sum_{k<n}(a_i(r_k)\\otimes1_B)f(x)^k=0$ is monic over $S$, so $f(x)$ is integral over $S$. This writes out preservation of a monic equation and needs no flatness or injectivity of a transition map.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; expanded using Tags 00D6, 00D7, 00DD, 00GI and 00GP."
+   }
+  },
+  {
+   "text": "The integral elements form the $S$-subalgebra $\\overline S^{\\,D}\\subseteq D$ [def-weil-pbc-integral-closure]. Step 4 therefore defines $q(x)=f(x)$ with this restricted codomain. The ring and $S$-scalar laws follow from those for $f$ in Step 1. Equality of $q$-values implies equality of their images under the inclusion into $D$, hence equality of the inputs by Step 3. Finally $q(s\\otimes c)=s\\otimes v(c)$ follows from its defining formula.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; expanded using Tags 00D6, 00D7, 00DD, 00GI and 00GP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; expanded using Tags 00D6, 00D7, 00DD, 00GI and 00GP. The source calls filtered-colimit compatibility straightforward; the five steps supply the omitted argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor map over a directed colimit of algebras is injective and has integral image when each stage tensor map is injective and has integral image",
+   "results": "{\"t\": \"2026-10-22T06:11:11Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor map over a directed colimit of algebras is injective and has integral image when each stage tensor map is injective and has integral image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.IsIntegral.tensorProduct\", \"IsIntegral.tmul\", \"Submodule.FG.rTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit_apply\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.lTensor.directLimit_apply'\"], \"digest\": \"fd00650c440e8b7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat injectivity and integral base change are related but do not state this stagewise-to-colimit assertion for an arbitrary algebra map; tensor direct limits alone do not give the integral-image conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsIntegral, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T06:13:18Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsIntegral, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat injectivity and integral base change are related but do not state this stagewise-to-colimit assertion for an arbitrary algebra map; tensor direct limits alone do not give the integral-image conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ii]njective.*[Cc]olimit|[Cc]olimit.*[Ii]njective|[Ii]ntegral.*[Cc]olimit|[Cc]olimit.*[Ii]ntegral)",
+   "results": "{\"t\": \"2026-10-22T06:13:17Z\", \"tool\": \"grep\", \"query\": \"([Ii]njective.*[Cc]olimit|[Cc]olimit.*[Ii]njective|[Ii]ntegral.*[Cc]olimit|[Cc]olimit.*[Ii]ntegral)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat injectivity and integral base change are related but do not state this stagewise-to-colimit assertion for an arbitrary algebra map; tensor direct limits alone do not give the integral-image conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stagewise injective tensor maps with integral image induce an injective tensor map with integral image over a filtered algebra colimit",
+   "results": "{\"t\": \"2026-10-22T06:13:17Z\", \"tool\": \"leansearch\", \"query\": \"Stagewise injective tensor maps with integral image induce an injective tensor map with integral image over a filtered algebra colimit\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of a tensor product map is detected on a directed presentation of the coefficient algebra, and integral elements in each stage remain integral in the colimit",
+   "results": "{\"t\": \"2026-10-22T06:13:57Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of a tensor product map is detected on a directed presentation of the coefficient algebra, and integral elements in each stage remain integral in the colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\", \"Algebra.IsIntegral.tensorProduct\", \"Algebra.TensorProduct.includeRight_injective\"], \"digest\": \"029ad29a2a34187d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat injectivity and integral base change are related but do not state this stagewise-to-colimit assertion for an arbitrary algebra map; tensor direct limits alone do not give the integral-image conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity and integrality of tensor algebra maps pass from all stages to the directed colimit",
+   "results": "{\"t\": \"2026-10-22T06:14:11Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity and integrality of tensor algebra maps pass from all stages to the directed colimit\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor map over a directed colimit of algebras is injective and has integral image when every stage map is injective with integral image",
+   "results": "{\"t\": \"2026-10-23T04:12:09Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor map over a directed colimit of algebras is injective and has integral image when every stage map is injective with integral image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.fromDirectLimit\", \"RingHom.CodescendsAlong.algebraMap_tensorProduct\", \"Algebra.IsIntegral.tensorProduct\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"TensorProduct.toDirectLimit\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\"], \"digest\": \"912fe48852f60e2a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "grep",
+   "query": "(injective.*[Cc]olimit|[Cc]olimit.*injective|integral.*[Cc]olimit|[Cc]olimit.*integral)",
+   "results": "{\"t\": \"2026-10-23T04:13:22Z\", \"tool\": \"grep\", \"query\": \"(injective.*[Cc]olimit|[Cc]olimit.*injective|integral.*[Cc]olimit|[Cc]olimit.*integral)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity and integral image of tensor maps pass from all stages to the directed colimit",
+   "results": "{\"t\": \"2026-10-23T04:13:23Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity and integral image of tensor maps pass from all stages to the directed colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.directLimitLeft_tmul_of\", \"DirectLimit.mk_injective\", \"TensorProduct.toDirectLimit\", \"TensorProduct.toDirectLimit_tmul_of\", \"Module.DirectLimit.lift_injective\", \"TensorProduct.directLimitRight_tmul_of\", \"Submodule.FG.rTensor.directLimit_apply'\"], \"digest\": \"19d42651f8860768\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsIntegral, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T04:13:23Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsIntegral, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stagewise injective algebra tensor maps give an injective map after filtered base change, and monic equations transport to the limiting base ring",
+   "results": "{\"t\": \"2026-10-23T04:13:57Z\", \"tool\": \"leanfinder\", \"query\": \"Stagewise injective algebra tensor maps give an injective map after filtered base change, and monic equations transport to the limiting base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.CotangentSpace.map_toComp_injective\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\", \"Module.FaithfullyFlat.injective_of_tensorProduct\", \"Algebra.TensorProduct.includeLeft_injective\", \"Algebra.TensorProduct.includeRight_injective\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\"], \"digest\": \"5aff38921ee2d818\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_injective_of_flat|theorem.*tensorProduct|directLimitLeft_rTensor_of|theorem lift_injective",
+   "results": "{\"t\": \"2026-10-23T04:15:18Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_injective_of_flat|theorem.*tensorProduct|directLimitLeft_rTensor_of|theorem lift_injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"8530ad789387c778\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_injective_of_flat",
+   "results": "{\"t\": \"2026-10-23T04:15:50Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_injective_of_flat\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"2cba1f98addf7a8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem tensorProduct",
+   "results": "{\"t\": \"2026-10-23T04:15:50Z\", \"tool\": \"grep\", \"query\": \"theorem tensorProduct\", \"sub\": \"RingTheory/IntegralClosure/Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are tensor/direct-limit ingredients or integral-closure maps with additional flatness hypotheses, not this arbitrary stagewise tensor map and its integral image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-closure-ind-etale-base-change",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof, paragraph (3), open direct image: finite tame root extension input; comparison of the concrete finite normalization with its strict-local pullback. Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof: tensor-colimit compatibility, preservation of monic equations, and injectivity from eventual vanishing (former steps 2 and 3).",
+   "via": [
+    "lem-sfb-integral-closure-ind-etale-base-change",
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-directed-tensor-integral-embedding",
+  "worker": "stage1",
+  "summary": "Q42 checked Tag 0CBF and expanded its omitted filtered-colimit argument into tensor naturality, existing tensor representatives/eventual zero, the kernel argument, explicit transport of monic equations, and restriction to integral closure. Statement unchanged; no new nodes or Mathlib leaves. Mathlib searches confirm related flatness and tensor-limit declarations are components only.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, through the inherited finite-normalization chain: Tag 0CBF filtered-colimit tensor embedding component (former steps 2 and 3 of lem-sfb-integral-closure-ind-etale-base-change).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic commutative-algebra tensor-colimit representative and eventual-zero criterion, including the ring-map clause. The current unit has no other statement giving it; it supplies the filtered-colimit algebra input of Tag 0CBF without replacing any six-functor route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-f5e94082a",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-f5e94082a (reviewer sub-agent of L); spot-checked: Proof-only split of an open leaf. Against the live file, the statement, source, stmt_deps, blueprint and unit fields are unchanged; live is still unsplit, and there are no new nodes and no repair or re-split note. Source: Stacks Tag 0CBF (algebra.tex, lemma-integral-closure-commutes-colim-smooth) calls the filtered-colimit compatibility 'straightforward', so proof_origin=agent with Tags 00D6/00D7/00DD/00GI/00GP is correct; the tags were checked in tags/tags. There are no SGA citations. Steps: (1) defines 1⊗v and a_i⊗1 through the universal property of def-weil-pbc-module-tensor-product; multiplicativity holds because both sides are biadditive, and the naturality squares are checked on pure tensors. (2) A nonempty directed preorder is filtered, and lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise is applied with N=C and N=B; its hypotheses (R-algebra diagram, universe) match, and transport to the specified colimit uses the unique cocone isomorphism. (3) The kernel argument uses only eventual zero and the injectivity of f_j; it is correct. (4) The monic equation is pushed forward by the ring map d_i with d_i(r⊗1)=a_i(r)⊗1, keeping n≥1. (5) Codomain restriction to the integral-closure subring (def-weil-pbc-integral-closure) gives the injective S-algebra map q. Edge cases: zero rings, constant diagram, transitions that kill elements, and non-injective v (Z→F_2 with S_i=F_2) are all consistent; the statement is true and not weakened. Duplicate scan (integral + colimit/directed/filtered): the closest node, lem-weil-pbc-integral-tensor-generators-colimit-descent, is the converse descent result, so there is no duplicate. The parent lem-sfb-integral-closure-ind-etale-base-change step 2 uses the item exactly as stated. The tool_use of the generic tensor-colimit elementwise node is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectedTensorIntegralEmbedding",
+  "declaration": "Algebra.TensorProduct.directed_integral_embedding",
+  "file": "lean/Sheaf/RingTheory/DirectedTensorIntegralEmbedding.lean",
+  "statement": "theorem directed_integral_embedding (R C B : Type u) [CommRing R] [CommRing C] [CommRing B] [Algebra R C] [Algebra R B] (v : C →ₐ[R] B) (I : Type u) [Preorder I] [Nonempty I] [IsDirectedOrder I] (F : I ⥤ CommAlgCat.{u, u} R) (c : Cocone F) (hc : IsColimit c) (h_injective : ∀ i : I, Function.Injective (lTensor (S := R) (F.obj i) v)) (h_integral : ∀ (i : I) (x : (F.obj i : Type u) ⊗[R] C), IsIntegral (F.obj i) (lTensor (S := R) (F.obj i) v x)) : Function.Injective (lTensor (S := R) c.pt v) ∧ (∀ x : (c.pt : Type u) ⊗[R] C, IsIntegral c.pt (lTensor (S := R) c.pt v x)) ∧ (∃ q : (c.pt : Type u) ⊗[R] C →ₐ[c.pt] integralClosure c.pt ((c.pt : Type u) ⊗[R] B), Function.Injective q ∧ (∀ x : (c.pt : Type u) ⊗[R] C, (q x : (c.pt : Type u) ⊗[R] B) = lTensor (S := R) c.pt v x) ∧ (∀ (s : c.pt) (z : C), (q (s ⊗ₜ[R] z) : (c.pt : Type u) ⊗[R] B) = s ⊗ₜ[R] v z)) ∧ (∀ (i j : I) (hij : i ≤ j), (rTensor B (F.map (homOfLE hij)).hom).comp (lTensor (S := R) (F.obj i) v) = (lTensor (S := R) (F.obj j) v).comp (rTensor C (F.map (homOfLE hij)).hom)) ∧ (∀ i : I, (rTensor B (c.ι.app i).hom).comp (lTensor (S := R) (F.obj i) v) = (lTensor (S := R) c.pt v).comp (rTensor C (c.ι.app i).hom))",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10faa0957",
+  "group": "NB",
+  "result": "pass",
+  "note": "Item lem-sfb-directed-tensor-integral-embedding: Lean theorem Algebra.TensorProduct.directed_integral_embedding matches the node clause by clause: R,C,B,v as R-algebra hom; nonempty IsDirectedOrder preorder; F : I ⥤ CommAlgCat.{u,u} R with specified Cocone+IsColimit; f_i=f=Mathlib lTensor (S:=R); stagewise injectivity and image integrality (leftAlgebra s↦s⊗1); conclusions are injectivity, integrality, q into integralClosure pinned by ↑(q x)=f x and the pure-tensor formula, and both rTensor naturality squares. No extra assumptions; common universe u as the node prescribes. lean.statement is verbatim; only the lean field changed vs live; stmt_deps unchanged and all used; no duplicate decl/module; no new defs, sorry-only proof, source and blueprint docstrings with the 5 proof steps. The private proof-dep import FilteredColimitAlgebrasTensorElementwise exists live and its universes fit. The report has both required sections. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T081053-L-1798058",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Algebra.TensorProduct.directed_integral_embedding"
+  ],
+  "sorry_after": []
+ }
+}

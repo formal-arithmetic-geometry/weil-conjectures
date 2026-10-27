@@ -1,0 +1,212 @@
+{
+ "id": "lem-trf-restricted-saturated-submodule-finite",
+ "kind": "statement",
+ "title": "Saturated submodules over valuation-ring restricted series are finite",
+ "statement": "Let $K$ be a complete field with a nontrivial real-valued nonarchimedean absolute value, let $V=\\{a\\in K:|a|\\le1\\}$ be its valuation ring [def-trf-valuation-ring], and fix $\\pi\\in V$ with $0<|\\pi|<1$. For an integer $r\\ge0$ let $S=V\\langle T_1,\\ldots,T_r\\rangle$, the ring of formal series with coefficients tending to zero [def-trf-restricted-series-presentation]. Let $M$ be a finitely generated $S$-module [def-weil-finitely-generated-module]. If $P\\subseteq M$ is an $S$-submodule saturated for powers of $\\pi$, meaning that for every $x\\in M$ and $k\\ge0$, $\\pi^k x\\in P$ implies $x\\in P$, then $P$ is finitely generated as an $S$-module. No finite-presentation or torsion-freeness hypothesis is imposed on $M$.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 2.3, Lemma 7(i), printed pp. 131–132 (PDF pages 132–133), case (V); Theorem 4 on printed p. 130 supplies its finiteness input. Primary PDF read online; local archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-trf-valuation-ring",
+  "def-trf-restricted-series-presentation",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=M/P$ and let $q:M\\twoheadrightarrow Q$ be the quotient map. The images of any finite generating family of $M$ generate $Q$ by taking representatives and applying $q$ [def-weil-finitely-generated-module]. For $0\\ne a\\in V$ choose $k\\ge0$ with $|\\pi|^k\\le|a|$; then $b=\\pi^k/a\\in V$ and $ba=\\pi^k$. If $a\\bar x=0$ in $Q$, a representative $x\\in M$ satisfies $ax\\in P$, hence $\\pi^kx=bax\\in P$. Saturation gives $x\\in P$, so $\\bar x=0$. Thus $Q$ is torsion-free over $V$. This uses no cancellation on $M$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Lemma 7(i), printed pp. 131–132 (PDF pages 132–133), case (V); online primary PDF."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-torsionfree-flat] to the valuation ring $V$ and the torsion-free $V$-module $Q$ of Step 1. It gives flatness of $Q$ over $V$, with no finite-generation requirement over $V$.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Lemma 7(i), printed pp. 131–132 (PDF pages 132–133), case (V); online primary PDF."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-restricted-flat-module-finite-presentation] to the given complete valued field $K$, its ring $V$, the same number $r$ of variables and $Q$. Step 1 supplies finite generation over $S$, and Step 2 supplies flatness over $V$ through constants. It follows that $Q$ is finitely presented over $S$.",
+   "uses": [
+    "lem-trf-restricted-flat-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Lemma 7(i), printed pp. 131–132 (PDF pages 132–133), case (V); online primary PDF."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-presentation-surjective-module-kernel] with ring $S$, finitely generated source $M$, finitely presented target $Q$ from Step 3, and surjection $q$. Its kernel is finitely generated. Since $q(x)=0$ holds exactly when $x\\in P$, this kernel is $P$, proving the claim.",
+   "uses": [
+    "lem-trf-finite-presentation-surjective-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Lemma 7(i), printed pp. 131–132 (PDF pages 132–133), case (V); online primary PDF."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-trf-restricted-flat-module-finite-presentation",
+  "lem-trf-finite-presentation-surjective-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Bosch 2.3/7(i), case (V), read in the online primary PDF; explicit scalar-divisibility argument and direct application of the existing general kernel lemma. Local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A saturated submodule of a finitely generated module over restricted power series over a complete rank one valuation ring is finitely generated",
+   "results": "8 hits: PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, PowerSeries.fg_iff_of_isPrime, reesAlgebra.fg, Submodule.fg_of_isLocalized_maximal, Submodule.fg_of_localized_maximal, Ideal.adic_module_basis, Ideal.adic_basis; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat|TateAlgebra|RestrictedPowerSeries",
+   "results": "12 hits: Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/IdealFilter/Basic.lean; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturated submodules of finite modules over restricted power series over a complete valuation ring are finitely generated",
+   "results": "8 hits: Submodule.FG.of_le_of_isNoetherian, Submodule.FG.of_le, Module.IsNoetherian.finite, IsNoetherian.noetherian, Module.Finite.of_finite, isNoetherian_of_finite, Submodule.FG.of_finite, Module.finite_def; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.IsSaturated, Submodule.FG",
+   "results": "0 hits: ; loogle: unknown identifier 'Submodule.IsSaturated'; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.FG",
+   "results": "12 hits: Submodule.FG, Submodule.fg_iff_addSubmonoid_fg, Module.Finite.fg_top, Module.Finite.of_fg_top, Module.finite_def, Submodule.fg_iff_addSubgroup_fg, Submodule.fg_def, Submodule.fg_iff_exists_fin_generating_family; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of pi saturated submodules over the ring of integers of a Tate algebra Bosch Raynaud Gruson",
+   "results": "8 hits: instModuleFinite_of_discrete_submodule, Ideal.adic_basis, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.submodule, Submodule.fg_of_isLocalized_maximal, AdicCompletion.AdicCauchySequence.submodule, Submodule.fg_of_localized_maximal, AdicCompletion.ofTensorProduct_surjective_of_finite; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*[Ff]inite|[Ff]inite.*saturat|[Rr]estricted.*[Ss]eries",
+   "results": "12 hits: Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean; inspected returned types and relevant source: Noetherian finiteness/Artin–Rees require unavailable Noetherian hypotheses; adic definitions and restricted-series predicates do not assert saturated-submodule finiteness or induced-topology comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*[Ff]inite|[Ff]inite.*saturat",
+   "results": "0 hits: ; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finiteness of saturated submodules over a complete rank one valuation ring restricted power series",
+   "results": "8 hits: PowerSeries.isNoetherianRing, PowerSeries.instIsDiscreteValuationRing, Valuation.leSubmodule, Polynomial.degreeLT.instFiniteSubtypeMemSubmodule, Valuation.ltSubmodule, Submodule.IsLattice.finite, Submodule.spanFinrank, Submodule.IsLattice.inf; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.FG",
+   "results": "12 hits: Submodule.FG, Submodule.fg_iff_addSubmonoid_fg, Module.Finite.fg_top, Module.Finite.of_fg_top, Module.finite_def, Submodule.fg_iff_addSubgroup_fg, Submodule.fg_def, Submodule.fg_iff_exists_fin_generating_family; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pi saturated submodule of a finitely generated module over restricted power series over a complete valuation ring is finitely generated",
+   "results": "8 hits: PowerSeries.fg_iff_of_isPrime, PowerSeries.instIsNoetherianRing, PowerSeries.isNoetherianRing, IsAdicComplete, Ideal.adic_module_basis, Ideal.adic_basis, AdicCompletion.submodule, IsPrecomplete; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a quotient of a finite module over integral Tate algebra by a pi torsion free module is finitely generated",
+   "results": "8 hits: Algebra.Presentation.fg_ker, Algebra.Extension.Cotangent.finite, Algebra.Generators.fg_ker_of_finitePresentation, Module.Finite.kerRepr, Module.Finite.kerReprₛ, Module.FinitePresentation.fg_ker, Submodule.finite_quotient_smul, KaehlerDifferential.ideal_fg; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-restricted-submodule-adic-topology",
+  "date": "2026-10-24",
+  "group": "Q67"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Completeness of restricted-series quotients over a rank-one valuation ring. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Specifically, the induced-submodule topology input of Bosch 2.3/7(ii), used in the proof of 2.3/8 supporting 2.3/9. The saturated-submodule finiteness input in Bosch 2.3/7(i), used to prove 2.3/7(ii).",
+   "via": [
+    "lem-trf-restricted-submodule-adic-topology",
+    "lem-trf-restricted-quotient-complete",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-restricted-saturated-submodule-finite",
+  "worker": "stage1",
+  "summary": "Verified Bosch 2.3/7(i) and Theorem 4 online. Proved quotient torsion-freeness explicitly using powers of pi cofinal with all nonzero scalar divisors. Reused valuation torsion-free flatness and generic finite-presentation kernel finiteness leaves; created one statement-only analytic finite-presentation input, with searches and no finite type/Noetherian substitution. Ambient M is only finitely generated.",
+  "blueprint": "Historical restricted-series completion input below lem-trf-local-term-locality; realizes Bosch 2.3/7(i) used in 2.3/7(ii), without replacing the current contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-3158ca5fb",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-3158ca5fb (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the report. Step 1 is elementary and correct. M/P is finite over S. For a≠0 in V pick k with |pi|^k<=|a|, so pi^k/a lies in V, and saturation then gives V-torsion-freeness without any cancellation in M. Step 2 applies lem-trf-valuation-torsionfree-flat; its inline valuation-ring definition is met by V, and it needs no finiteness. Step 3 applies the new node lem-trf-restricted-flat-module-finite-presentation, with Q finite over S and flat over V through constants. Step 4 applies lem-trf-finite-presentation-surjective-module-kernel to the quotient map M->M/P; its kernel is P. The new node is the rank-one case (V) of Bosch 2.3/4 (Raynaud-Gruson): K complete with a nontrivial real absolute value, so V is pi-adically complete and V<T> is the pi-adic restricted-series ring. Its hypotheses match one for one, nothing is weakened, it has statement only, and every notion cites its definition node. I tested it on r=0 (finite torsion-free over a valuation ring is free), Q=0, and S/(pi), which is not flat and so is excluded. I tested the item on M=S/(pi), where P is forced to be M, and on m of a non-discrete V, which is not saturated. My rg -L duplicate search (Raynaud/Gruson, restricted plus finitely presented, saturated, topologically finite type) found no duplicate. The new node is not a restatement of the item and creates no cycle. No copy of Bosch is under literature/, so I could not read the document; the report has a WANTED line and proof_origin.by=agent, as the brief requires. The report names citations.json and searches.jsonl, which are not in the commit; these are tool files, not a DAG fault. No fixes and no tool_uses."
+ }
+}

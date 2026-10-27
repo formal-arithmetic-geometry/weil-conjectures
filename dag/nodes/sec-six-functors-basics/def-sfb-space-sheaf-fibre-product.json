@@ -1,0 +1,153 @@
+{
+ "id": "def-sfb-space-sheaf-fibre-product",
+ "kind": "definition",
+ "title": "The sheaf fibre product of algebraic spaces and its first projection",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y,Z$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:X\\to Z$ and $g:Y\\to Z$ be morphisms. Define $X\\times_ZY$ as the pullback of their underlying sheaves on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site], endowed with its algebraic-space property. Thus its sections over a scheme $T\\to S$ are the pairs $(x,y)\\in X(T)\\times Y(T)$ with $f_T(x)=g_T(y)$, and restriction is componentwise. Define its first projection $\\operatorname{pr}_1:X\\times_ZY\\to X$ by $(x,y)\\mapsto x$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal), followed by lemma-fibre-product-spaces; Tag 03G2 (lemma-functoriality-etale-site), the sheaf fibre-product construction and its first projection."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "enlargedFibreProduct|AlgebraicSpace.*pullback|pullback.*AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T11:53:35Z\", \"tool\": \"grep\", \"query\": \"enlargedFibreProduct|AlgebraicSpace.*pullback|pullback.*AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib algebraic-space construction found; scheme pullbacks do not supply this notion. Reuse the existing Sheaf enlargedFibreProduct and enlargedFibreProductFst definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibre product of algebraic spaces is the sheaf pullback with the canonical first projection",
+   "results": "{\"t\": \"2026-10-23T11:53:36Z\", \"tool\": \"leansearch\", \"query\": \"Fibre product of algebraic spaces is the sheaf pullback with the canonical first projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.instFstScheme\", \"TopCat.pullbackFst\", \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_fst\", \"AlgebraicGeometry.Scheme.Pullback.range_fst\", \"AlgebraicGeometry.IsImmersion.instFstScheme\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"AlgebraicGeometry.Scheme.Pullback.p1\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"d7e275864901d485\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib algebraic-space construction found; scheme pullbacks do not supply this notion. Reuse the existing Sheaf enlargedFibreProduct and enlargedFibreProductFst definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre product of algebraic spaces is the sheaf pullback with the canonical first projection",
+   "results": "{\"t\": \"2026-10-23T11:53:38Z\", \"tool\": \"leanfinder\", \"query\": \"Fibre product of algebraic spaces is the sheaf pullback with the canonical first projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback_over\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_s\", \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_x\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\"], \"digest\": \"fcb8dfee90201623\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib algebraic-space construction found; scheme pullbacks do not supply this notion. Reuse the existing Sheaf enlargedFibreProduct and enlargedFibreProductFst definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "Project and DAG ownership search for enlargedFibreProduct; blueprint_refs.py search \"sheaf fibre product\"",
+   "results": "$ rg -n enlargedFibreProduct|AlgebraicSpace.*pullback|pullback.*AlgebraicSpace /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures\nexit 1\n\n$ rg -n ^def enlargedFibreProduct /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf\nexit 0\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/EnlargedEtaleRingedSite.lean:230:def enlargedFibreProduct {X Y Z : AlgebraicSpace S} (f : X ⟶ Z) (g : Y ⟶ Z) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/EnlargedEtaleRingedSite.lean:236:def enlargedFibreProductFst {X Y Z : AlgebraicSpace S} (f : X ⟶ Z) (g : Y ⟶ Z) :\n\n$ rg -l enlargedFibreProduct /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes\nexit 0\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-space-chartwise-etale-permanence.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-space-enlarged-etale-ringed-site-model.json\n\n$ python3 /home/ubuntu/weil-conjectures-sheaf-shared/tools/blueprint_refs.py search sheaf fibre product\nexit 0\n0 blueprint nodes match 'sheaf fibre product'\n",
+   "date": "2026-10-23",
+   "verdict": "The two definitions exist only in Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite. Declaration-name DAG hits are theorem nodes, not definition owners. The existing algebraic-space definition only mentions scheme-test sheaf pullbacks and its pullback declaration is the module-sheaf pullback functor. Add definition-node ownership, with existing:true and no new Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-proper-fibres-proper",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The geometric fibre and its projection in the connected-proper-fibres properness input to the relative Picard properness step; retained enclosing direct-image stability ancestry.",
+   "via": [
+    "lem-sfb-connected-proper-fibres-proper",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.enlargedFibreProduct",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedFibreProduct",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedFibreProductFst"
+  ],
+  "statement": "def enlargedFibreProduct {X Y Z : AlgebraicSpace S} (f : X ⟶ Z) (g : Y ⟶ Z) :\n    AlgebraicSpace S",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing published definitions, unchanged. enlargedFibreProduct contains the actual Limits.pullback of the underlying fppf sheaves; only its Prop-valued algebraic-space property is obtained from fibreProduct_isAlgebraicSpace. enlargedFibreProductFst is the actual sheaf pullback first projection. These definitions are not choices from the enlarged-ringed-site theorem. This node supplies their missing definition ownership, repairing H2 in returned head 4c5d7549a45c."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1f3c6a5b",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1f3c6a5b",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 4c5d7549a45c (H2 RETURN). Item Lean byte-identical (sha256 16b057fe…); item diff only stmt_deps lem-trf-space-enlarged-etale-ringed-site-model -> new def-sfb-space-sheaf-fibre-product plus lean.note. New node: sheaf pullback of algebraic spaces + first projection, existing:true on unchanged Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite, declarations enlargedFibreProduct/enlargedFibreProductFst, statement verbatim (side-live l.230-231), plain defs (Limits.pullback / pullback.fst), source tags 04T9/02X2/03G2 verified, stmt_deps def-pc-scheme/def-trf-algebraic-space/def-pc-fppf-site exist; no duplicate def owner in side-live (def-pc-fibre-product is the scheme notion); co-ownership with theorem record mirrors landed def-trf-scheme-algebraic-space/schemeSpace. Clause check unchanged and correct (loc. Noetherian base; sep/flat/qc/qs/lfp; geometric points Ω : Type u alg. closed; ConnectedSpace incl. nonempty; MapIsProper fibre projection; conclusion MapIsProper h); edge cases empty S/empty fibre ok; sorry only; docstrings OK; item not stated by another group. No compile (no file changed). Advisory: hqs redundant with hsep; second reading is a self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T100342-L-4192194",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_composition",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_identity",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedDirectImage_geometric",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtale_localization",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtale_site",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedLocalization_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedSchemeInclusion_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_composition",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtale_localization",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedLocalization_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique"
+  ]
+ }
+}

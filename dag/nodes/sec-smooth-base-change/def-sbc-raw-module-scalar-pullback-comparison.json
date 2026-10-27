@@ -12,20 +12,33 @@
  ],
  "proof": [
   {
-   "text": "Scalar forgetting is additive sectionwise and preserves finite limits by reflection through sheafToPresheaf. Apply constantModuleSheaves_forget_preservesColimits to obtain preservation of finite colimits. Construct the inverse-image comparison from lanCompIsoOfPreserves and sheafComposeNatIso, using the restriction/coextension adjunction to establish preservation. Construct freeMap by transposing the represented module generator under the abelian sheafification and free-group adjunctions.",
+   "text": "Use the canonical coefficientwise moduleAbelianForget, whose additivity and finite-limit preservation are proved in ModuleAbelianCoefficientComparison. Its finite-colimit preservation is constantModuleSheaves_forget_preservesColimits. The old forget name is a definitional abbreviation of this same functor, and its instances forward to the existing proofs.",
    "uses": [
     "lem-weil-pbc-constant-module-sheaves-forget-colimits"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the upstream pullbackIso, the inverse of moduleAbelianUpperStarIso, whose inverse component pullback is the abelian adjunction mate of the forgotten module unit. In Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso, pullback_unit proves that unit equation directly: by definition the comparison is the inverse image of the forgotten module unit under the abelian adjunction Hom equivalence, so Equiv.apply_symm_apply recovers that unit. No import of RawModuleScalarSheafComposition is needed. The theorem eq_pullback_of_unit proves uniqueness. The fully proved kanSheafification_eq_pullback identifies this particular map with the sheafified inverse Kan-extension comparison followed by sheafComposeNatTrans. Its proof expands both inverse-image units, applies sheafification-unit naturality and sheafComposeNatTrans_fac, and then leftKanExtensionCompIsoOfPreserves_inv_fac. Injectivity of the abelian adjunction Hom equivalence identifies the two maps. Thus the original canonical formula is retained as a library theorem, rather than only as a scratch regression. All formulas hold without nonempty, nonzero or finiteness hypotheses.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the upstream freeAbelian and freeMap. They are the original constructions, definitionally unchanged after identifying forget with moduleAbelianForget: transpose the represented module identity section through abelian sheafification, the free-group adjunction, and Yoneda. All parent nodes continue to use these same canonical maps.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-module-sheaves-forget-colimits"
+  "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison"
  ],
  "proof_origin": {
-  "by": "M4",
-  "document": "Stacks Project",
-  "place": "Tags 03D3 and 03D7; canonical construction also used in exists_upperStar_forget₂_natIso"
+  "by": "C2",
+  "document": "Stacks Project and adopted upstream Lean proof",
+  "place": "Tags 03D3 and 03D7; ModuleAbelianCoefficientComparison defines the comparison as the adjunction mate, so its unit equation is Equiv.apply_symm_apply. The retained Kan-extension/sheafification equality follows by the same unit computation as ModuleAbelianInverseImageComparison."
  },
  "mathlib_searches": [
   {
@@ -78,24 +91,21 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarPullbackComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarPullbackComparison.lean",
   "declaration": "AlgebraicGeometry.Etale.RawModuleScalarComparison.pullbackIso",
-  "statement": "def pullbackIso (Λ : Type (u + 1)) [CommRing Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    upperStar (ModuleCat.{u + 1} Λ) f ⋙ forget Λ X ≅\n      forget Λ Y ⋙ upperStar AddCommGrpCat.{u + 1} f",
+  "statement": "abbrev pullbackIso (Λ : Type (u + 1)) [CommRing Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    upperStar (ModuleCat.{u + 1} Λ) f ⋙ moduleAbelianForget Λ X ≅\n      moduleAbelianForget Λ Y ⋙ upperStar AddCommGrpCat.{u + 1} f",
   "branch": "sheaf-dag",
-  "by": "M4",
-  "date": "2026-10-13",
+  "by": "P2",
+  "date": "2026-10-21",
   "declarations": [
-   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget",
-   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget_additive",
-   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget_preservesFiniteLimits",
-   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget_preservesFiniteColimits",
    "AlgebraicGeometry.Etale.RawModuleScalarComparison.pullbackIso",
    "AlgebraicGeometry.Etale.RawModuleScalarComparison.pullback",
    "AlgebraicGeometry.Etale.RawModuleScalarComparison.freeAbelian",
    "AlgebraicGeometry.Etale.RawModuleScalarComparison.freeMap"
-  ]
+  ],
+  "note": "The canonical construction attachment remains upstream. Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison is withdrawn after migrating both current direct consumers, OrdinaryFiniteP1Kummer and CartierRelativeBoundaryRealization, to Sheaf.AlgebraicGeometry.RawModuleScalarDerivedPullbackIso. The latter already reexports the upstream canonical constructions and retains forget, forget_additive, forget_preservesFiniteLimits and forget_preservesFiniteColimits as the same aliases and instances. It now also contains the three fully proved characterization theorems AlgebraicGeometry.Etale.RawModuleScalarComparison.pullback_unit, AlgebraicGeometry.Etale.RawModuleScalarComparison.eq_pullback_of_unit and AlgebraicGeometry.Etale.RawModuleScalarComparison.kanSheafification_eq_pullback, transferred verbatim from the withdrawn module. In particular the identification with the original Kan-extension/sheafification composite remains a library theorem. No construction, mathematical dependency, declaration signature or unit step is withdrawn. A current scan of lean/ and quarantine/ finds no other imports of the withdrawn Sheaf path."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -108,14 +118,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T133226-L-4193562",
+  "landing": "20261025T030524-L-2856984",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

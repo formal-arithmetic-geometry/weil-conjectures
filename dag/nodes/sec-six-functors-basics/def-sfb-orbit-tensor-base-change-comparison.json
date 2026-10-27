@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-orbit-tensor-base-change-comparison",
+ "kind": "definition",
+ "title": "Canonical base change of an ordered translated tensor",
+ "status": "split",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], $f:Y\\to X$ a morphism, $G$ an index type, $\\alpha:G\\to\\operatorname{Aut}(X)$ and $\\beta:G\\to\\operatorname{Aut}(Y)$ families with $f\\circ\\beta(g)=\\alpha(g)\\circ f$ for every $g$, and $L$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. Let $T_\\alpha(L,\\ell)$ denote the right-associated translated tensor with structure-module unit tail, defined by the list recursion of [def-sfb-pencil-orbit-bundle-norm]; this recursion applies to every finite list $\\ell$ without requiring $G$ itself finite. Define the canonical comparison $f^*T_\\alpha(L,\\ell)\\simeq T_\\beta(f^*L,\\ell)$ as follows. At the empty list it is the pullback-unit comparison. At $g::\\ell$, first use the tensor-pullback comparison [def-sc-tensor-pullback-power-comparison], then the commuting-square comparison $f^*\\alpha(g)^*L\\simeq\\beta(g)^*f^*L$, and tensor it with the recursively defined tail comparison. The commuting-square comparison is the inverse of the composite-pullback comparison $(\\alpha(g)\\circ f)^*L\\simeq f^*\\alpha(g)^*L$, followed by the equality $(\\alpha(g)\\circ f)^*L=(f\\circ\\beta(g))^*L$ supplied by the square, followed by the composite-pullback comparison $(f\\circ\\beta(g))^*L\\simeq\\beta(g)^*f^*L$; all pullbacks and composition comparisons use the section-normalized adjunction of [def-pc-module-pullback]. For a finite $G$, evaluate at the same enumeration $e_G$ to obtain $f^*B_\\alpha(L)\\simeq B_\\beta(f^*L)$. No group law, faithfulness, invertibility, flatness or integrality is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-pencil-orbit-bundle-norm",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tags 01CA (section-tensor-product) and 01CD (lemma-tensor-product-pullback); ordered recursive comparison used in steps 7--8 of lem-sfb-effective-action-norm-pencil."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ordered tensor product of translated sheaves commutes with pullback along an equivariant morphism of schemes via the canonical factorwise comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \":\\n  pullback (Spec.map (CommRingCat.ofHom (algebraMap R S))) (Spec.map (CommRingCat.ofHom (algebraMap R T))) ≅\\n    Spec (.of <| S ⊗[R] T)\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"TensorProduct.comm\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \": M ⊗[R] N ≃ₗ[R] N ⊗[R] M\", \"doc\": \"The canonical linear equivalence between the tensor products $ M \\\\otimes_R N $ and $ N \\\\otimes_R M $, established by flipping the factors and verifying that the composition of the flipped maps equals \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"(t : ↑(pullback f g)) :\\n  Spec.map (ofPointTensor t) ≫ (Triplet.ofPoint t).SpecTensorTo = (pullback f g).fromSpecResidueField t\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes and any point $t$ in the fiber product $X \\\\times_S Y$, the composition of the morphism $\\\\operatorname{Spec}$ induced by the tensor product \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.rightComm\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (M ⊗[S] P) ⊗[R] Q ≃ₗ[B] (M ⊗[R] Q) ⊗[S] P\", \"doc\": \"For commutative semirings $ R $ and $ S $, and modules $ M $, $ P $, and $ Q $ with compatible $ R $- and $ S $-module structures, there exists a linear equivalence between the tensor products $ (M \\\\o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{T T' : Triplet f g} (h : T = T') : Spec.map (Triplet.tensorCongr h).hom ≫ T.SpecTensorTo = T'.SpecTensorTo\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"LinearEquiv.lTensor_trans\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \": (f ≪≫ₗ g).lTensor M = f.lTensor M ≪≫ₗ g.lTensor M\", \"doc\": \"For linear equivalences $ f $ and $ g $, the tensor product of their composition with a module $ M $ is equal to the composition of their individual tensor products with $ M $, i.e., $(f \\\\circ g) \\\\oti\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The project has the exact existing real-data definition normPencilTranslateBaseChangeIso; it has no definition-node owner."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical factorwise base change comparison of finite ordered orbit tensor products of modules on schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} → {T₁ T₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g} → T₁ = T₂ → (T₁.tensor ≅ T₂.tensor)\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then their associated tensor pushouts in the category of commutative rings are isomo\"}\n  {\"name\": \"IsBaseChange.finitePow\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangePi\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (ι : Type u_3)\\n  [Finite ι] {M : Type u_4} {M' : Type u_5} [inst_4 : AddCommMonoid M] [inst_5 : AddCommMonoid M'] [inst_6 : Module R M]\\n  [inst_7 : Module R M'] [inst_8 : Module S M'] [inst_9 : I\", \"doc\": \"For any finite index type $\\\\iota$ and a linear map $f : M \\\\to_R M'$ that is a base change from $R$ to $S$, the component-wise extension of $f$ to functions $\\\\iota \\\\to M$ (defined by applying $f$ point\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e ≪≫ AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e' =\\n    AlgebraicGeometry.Scheme.Pullba\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any equalities $e:x=y$ and $e':y=z$ between pullback triplets, the composition of isomorphisms $\\\\text{tensorCongr}(e) \\\\circ \\\\text{te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z) {Z : CommRingCat} (h : z.tensor ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (CategoryTheo\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and three equal pullback triplets $x=y=z$, the composition of the tensor congruence homomorphisms $T_1.tensor \\\\to T_2.tensor$ and $T_2.t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).symm =\\n    AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then the inverse of the isomorphism between their tensor pushouts is equal to the te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The project has the exact existing real-data definition normPencilTranslateBaseChangeIso; it has no definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*tensor|orbit.*bundle|[Tt]ranslate.*[Bb]ase[Cc]hange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. The project has the exact existing real-data definition normPencilTranslateBaseChangeIso; it has no definition-node owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'normPencilTranslateBaseChangeIso|orbit.*bundle' lean/WeilConjectures lean/Sheaf/AlgebraicGeometry/SeparatingPairOpen.lean; grep -rl 'normPencilTranslateBaseChangeIso' dag/nodes; python3 tools/blueprint_refs.py search 'orbit tensor'",
+   "results": "lean/Sheaf/AlgebraicGeometry/SeparatingPairOpen.lean:69:noncomputable def normPencilTranslateBaseChangeIso {X Y : Scheme.{u}} {G : Type v}\nlean/Sheaf/AlgebraicGeometry/SeparatingPairOpen.lean:81:          normPencilTranslateBaseChangeIso f α β w L l)\nlean/Sheaf/AlgebraicGeometry/SeparatingPairOpen.lean:117:      ((boundaryTensorPowIso (normPencilTranslateBaseChangeIso\ndag/nodes/sec-six-functors-basics/lem-sfb-separating-pair-open.json\n0 blueprint nodes match 'orbit tensor'\n",
+   "date": "2026-10-24",
+   "verdict": "The helper is declared only in Sheaf.AlgebraicGeometry.SeparatingPairOpen and mentioned by the theorem node lem-sfb-separating-pair-open; no definition node owns its canonical comparison. No new Lean definition is needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-effective-action-norm-pencil",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.3--3.4, pp.605--606: local quotient pencils and avoidance of 0,1,infinity. The zero-dimensional clause spells out the suitable-cover/pencil choice left implicit in §3.3; after a finite separable constant extension one chooses the finite separating pencil on the quotient curve. Local PDF WANTED; online publisher PDF read.; extraction of returned local-pencil proof, steps 2--3; canonical factorwise comparison under arbitrary base change, steps 7--8 of the effective-action norm lemma.",
+   "via": [
+    "lem-sfb-effective-action-norm-pencil",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatingPairOpen",
+  "declaration": "AlgebraicGeometry.normPencilTranslateBaseChangeIso",
+  "statement": "def normPencilTranslateBaseChangeIso {X Y : Scheme.{u}} {G : Type v}\n    (f : Y ⟶ X) (α : G → Aut X) (β : G → Aut Y)\n    (w : ∀ g : G, (β g).hom ≫ f = f ≫ (α g).hom) (L : X.Modules) :\n    ∀ l : List G, (tensorPullback f).obj (pencilTranslateTensor α L l) ≅\n      pencilTranslateTensor β ((tensorPullback f).obj L) l",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Registers the existing real-data recursive comparison at SeparatingPairOpen.lean:69--81. No declaration is copied or moved. Its former listing among the separating-pair theorem helpers did not provide a definition-node owner for this construction."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2becc9b04",
+  "group": "Q51",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2becc9b04",
+  "group": "Q51",
+  "result": "fix",
+  "note": "First S2 delivery; item fields unchanged except lean and stmt_deps (+new node, +landed def-pc-module-pullback, def-sc-tensor-pullback-power-comparison), statement verbatim. Clause-by-clause: IsIntegral S,Y, IsDominant/IsSeparated p, finite J universe v, G = ρ.range; injectivity via Over.pullback fromSpecFunctionField mapAut; linearization = pullback-composition + mulRight permutation pinned by ∃! on all opens/local pure tensors (named sorry theorem, no hollow def); identity clause and cocycle λ_{hk}=mulIso≫k^*λ_h≫λ_k checked; norm fixed for all n incl. n=0; J-invariant coordinate morphism under sheaf-Epi generation; arbitrary T→S: same ρ.range index, linearization square, norm and pencil base-change (φ_T≫ProjectiveSpace.map t = v≫φ, generation preserved); N(a^m)=N(a)^m via tensorPowMulIso for m≥1. No extra hypotheses; no H4 duplicate (rg lineariz/pencil*/normPencilTranslateBaseChangeIso); new existing:true def node owns the landed normPencilTranslateBaseChangeIso and passes check_new_node. FIX F1: new node TeX had ill-typed square β(g)∘f=f∘α(g) and ambiguous comparison direction → fixes/def-sfb-orbit-tensor-base-change-comparison.json (statement only: f∘β(g)=α(g)∘f; inverse composite comparison, equality, composite comparison, matching the Lean body). No Lean changed, no compile run."
+ }
+}

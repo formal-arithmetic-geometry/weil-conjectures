@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-algebra-module-simultaneous-generic-flatness",
+ "kind": "statement",
+ "title": "Simultaneous generic flatness of an algebra and a finite module",
+ "statement": "Let $A$ be a commutative integral domain, $B$ a commutative finite type $A$-algebra [def-weil-pbc-finite-type-algebra], and $M$ a finitely generated $B$-module [def-weil-finitely-generated-module]. There exists $0\\ne a\\in A$ such that both $B_a=B[1/\\varphi(a)]$ and $M_a=M[1/\\varphi(a)]$ are flat as $A$-modules [def-weil-pbc-flat-ring-map], where $\\varphi:A\\to B$ is the structure map. The localizations are at the powers of $\\varphi(a)$ [def-weil-ring-localization-away, def-weil-pbc-module-localization-away], and their $A$-module structures are induced by $A\\to B\\to B_a$. Neither $A$ being Noetherian nor $B$ or $M$ being finitely presented is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051T, lemma-generic-flatness, conclusion (a), applied in Tag 0573, lemma-scheme-theoretically-dense-generic-fibre, proof third paragraph; square-zero specialization of the algebra case."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Choose algebra generators $b_1,\\ldots,b_n$ of $B$ over $A$ and module generators $m_1,\\ldots,m_r$ of $M$ over $B$. Form the commutative square-zero algebra $C=B\\oplus M$ of [def-sc-trivial-square-zero-extension], with structure map $u\\mapsto(\\varphi(u),0)$. It is generated over $A$ by the finitely many $(b_i,0)$ and $(0,m_j)$: for $(b,m)\\in C$, write $b=P(b_1,\\ldots,b_n)$ and $m=\\sum_j c_jm_j$ with $c_j=P_j(b_1,\\ldots,b_n)$; then $(b,m)=P((b_i,0))+\\sum_j P_j((b_i,0))(0,m_j)$. Thus the defining finite-generation criterion makes $C$ finite type over $A$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finitely-generated-module",
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051T, lemma-generic-flatness, conclusion (a); agent-written square-zero reduction to the existing algebra-only theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-finite-type-algebra-generic-flatness] to $A\\to C$. Its hypotheses hold because $A$ is a domain, $C$ is commutative, and step 1 proves finite type. Obtain $a\\ne0$ in $A$ such that $F=C[1/t]$, where $s=\\varphi(a)$ and $t=(s,0)$, is flat over $A$: take this particular localization as the theorem's arbitrary localization model. Flatness of the composite ring map is precisely flatness of the underlying $A$-module $F$ by [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "lem-sbc-finite-type-algebra-generic-flatness",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051T, lemma-generic-flatness, conclusion (a); agent-written square-zero reduction to the existing algebra-only theorem."
+   }
+  },
+  {
+   "text": "Construct $A$-linear maps $i_B:B_s\\to F$, $p_B:F\\to B_s$, $i_M:M_s\\to F$, and $p_M:F\\to M_s$ by $i_B(b/s^e)=(b,0)/t^e$, $i_M(m/s^e)=(0,m)/t^e$, $p_B((b,m)/t^e)=b/s^e$, and $p_M((b,m)/t^e)=m/s^e$. These are well-defined directly by the fraction relations: equality of $(b,m)/t^e$ and $(b\\prime,m\\prime)/t^{e\\prime}$ means that for some $k\\ge0$ both $s^k(s^{e\\prime}b-s^eb\\prime)=0$ and $s^k(s^{e\\prime}m-s^em\\prime)=0$, since $t^j=(s^j,0)$. This implies equality of both projected fractions. Conversely an equality of $B_s$-fractions or $M_s$-fractions gives the required equality after its inclusion, the other coordinate being zero. The fraction addition formulas show additivity of all four maps, and multiplication by $(\\varphi(u),0)$ shows $A$-linearity for $u\\in A$. On every fraction $p_Bi_B$ and $p_Mi_M$ are the identity. Hence both specified localizations $B_s$ and $M_s$ are $A$-module retracts of $F$.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051T, lemma-generic-flatness, conclusion (a); agent-written square-zero reduction to the existing algebra-only theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-module-retract] twice, to $(i_B,p_B)$ and $(i_M,p_M)$ of step 3, with ambient flat $A$-module $F$ from step 2. It yields flatness over $A$ of $B_s=B_a$ and $M_s=M_a$ for the same nonzero $a$. Their scalar actions are the stipulated ones because all four maps use $u\\mapsto(\\varphi(u),0)$ and componentwise scalar multiplication. This proves every clause without any Noetherianity or finite-presentation hypothesis.",
+   "uses": [
+    "lem-weil-pbc-flat-module-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051T, lemma-generic-flatness, conclusion (a); agent-written square-zero reduction to the existing algebra-only theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-trivial-square-zero-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "lem-sbc-finite-type-algebra-generic-flatness",
+  "lem-weil-pbc-flat-module-retract"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051T, lemma-generic-flatness, conclusion (a); alternative square-zero proof using the already proved algebra case, as requested by the item source. Tag 0573 application read in literature/stacks-project/more-morphisms.tex, lemma-scheme-theoretically-dense-generic-fibre, third paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*(flat|free)|exists.*(flat|free)",
+   "results": "{\"t\": \"2026-10-22T06:46:56Z\", \"tool\": \"grep\", \"query\": \"generic.*(flat|free)|exists.*(flat|free)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/AdjoinRoot.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\"], \"digest\": \"472deeaebd9113bc\"} No exact match or one-line specialization. Returned flatness criteria, localization instances and smoothness results do not choose a simultaneous nonzero base element. Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78) assumes finite presentation over the base; no such assumption holds here. The project theorem RingHom.exists_nonzero_flat_localizationAway in WeilConjectures/RingTheory/GenericFlatness.lean handles the algebra alone, not an arbitrary finite B-module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous generic flatness of a finite type algebra and a finite module over an arbitrary domain.",
+   "results": "{\"t\": \"2026-10-22T06:46:56Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous generic flatness of a finite type algebra and a finite module over an arbitrary domain.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.tfae_equational_criterion\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Algebra.Smooth.flat\"], \"digest\": \"8e81b47668ece603\"} No exact match or one-line specialization. Returned flatness criteria, localization instances and smoothness results do not choose a simultaneous nonzero base element. Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78) assumes finite presentation over the base; no such assumption holds here. The project theorem RingHom.exists_nonzero_flat_localizationAway in WeilConjectures/RingTheory/GenericFlatness.lean handles the algebra alone, not an arbitrary finite B-module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GenericFree\"",
+   "results": "{\"t\": \"2026-10-22T06:46:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"GenericFree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No exact match or one-line specialization. Returned flatness criteria, localization instances and smoothness results do not choose a simultaneous nonzero base element. Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78) assumes finite presentation over the base; no such assumption holds here. The project theorem RingHom.exists_nonzero_flat_localizationAway in WeilConjectures/RingTheory/GenericFlatness.lean handles the algebra alone, not an arbitrary finite B-module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra B over any integral domain A and a finitely generated B-module M, there exists nonzero a in A such that B localized at a and M localized at a are both flat as A-modules.",
+   "results": "{\"t\": \"2026-10-22T06:47:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type algebra B over any integral domain A and a finitely generated B-module M, there exists nonzero a in A such that B localized at a and M localized at a are both flat as A-modules.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.flat_of_localized_span\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"IsLocalization.flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.flat_of_isLocalized_maximal\", \"Localization.flat\", \"Module.flat_of_localized_maximal\"], \"digest\": \"970f456111df8635\"} No exact match or one-line specialization. Returned flatness criteria, localization instances and smoothness results do not choose a simultaneous nonzero base element. Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78) assumes finite presentation over the base; no such assumption holds here. The project theorem RingHom.exists_nonzero_flat_localizationAway in WeilConjectures/RingTheory/GenericFlatness.lean handles the algebra alone, not an arbitrary finite B-module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.{0,30}(flat|free)|(flat|free).{0,30}generic",
+   "results": "{\"t\": \"2026-10-22T06:47:38Z\", \"tool\": \"grep\", \"query\": \"generic.{0,30}(flat|free)|(flat|free).{0,30}generic\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No exact match or one-line specialization. Returned flatness criteria, localization instances and smoothness results do not choose a simultaneous nonzero base element. Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78) assumes finite presentation over the base; no such assumption holds here. The project theorem RingHom.exists_nonzero_flat_localizationAway in WeilConjectures/RingTheory/GenericFlatness.lean handles the algebra alone, not an arbitrary finite B-module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic flatness for a finite module via the trivial square zero extension algebra B direct sum M, over a non-Noetherian domain.",
+   "results": "{\"t\": \"2026-10-22T06:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"Generic flatness for a finite module via the trivial square zero extension algebra B direct sum M, over a non-Noetherian domain.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.FaithfullyFlat\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective\", \"Module.flat_iff\"], \"digest\": \"3f7159c48dacbbb1\"} No exact match or one-line specialization. Returned flatness criteria, localization instances and smoothness results do not choose a simultaneous nonzero base element. Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78) assumes finite presentation over the base; no such assumption holds here. The project theorem RingHom.exists_nonzero_flat_localizationAway in WeilConjectures/RingTheory/GenericFlatness.lean handles the algebra alone, not an arbitrary finite B-module.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.{0,40}(flat|free)|(flat|free).{0,40}generic",
+   "results": "{\"t\": \"2026-10-23T23:39:25Z\", \"tool\": \"grep\", \"query\": \"generic.{0,40}(flat|free)|(flat|free).{0,40}generic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean\"], \"digest\": \"57c68192616608e2\"} Read returned declarations: localization flatness and local flatness criteria do not produce a nonzero base element for an initially nonflat module; smoothness requires extra hypotheses. The grep hits genericPolyMap, unrelated to generic flatness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebra over an integral domain and its finitely generated module become simultaneously flat after localizing at one nonzero base element.",
+   "results": "{\"t\": \"2026-10-23T23:39:25Z\", \"tool\": \"leansearch\", \"query\": \"A finite type algebra over an integral domain and its finitely generated module become simultaneously flat after localizing at one nonzero base element.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"IsLocalization.flat\", \"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.localizedModule\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_iff_of_isLocalization\", \"Localization.flat\"], \"digest\": \"32bd8a661f33f3c6\"} Read returned declarations: localization flatness and local flatness criteria do not produce a nonzero base element for an initially nonflat module; smoothness requires extra hypotheses. The grep hits genericPolyMap, unrelated to generic flatness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Algebra.FiniteType",
+   "results": "{\"t\": \"2026-10-23T23:39:25Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Algebra.FiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned declarations: localization flatness and local flatness criteria do not produce a nonzero base element for an initially nonflat module; smoothness requires extra hypotheses. The grep hits genericPolyMap, unrelated to generic flatness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra B over a domain A and a finite B-module M, there is nonzero a in A such that both B and M localized at a are flat over A.",
+   "results": "{\"t\": \"2026-10-23T23:39:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type algebra B over a domain A and a finite B-module M, there is nonzero a in A such that both B and M localized at a are flat over A.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.holdsForLocalizationAway\", \"Module.flat_of_isLocalized_maximal\", \"instFlatAtPrime\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"f76954e69fc89211\"} Read returned declarations: localization flatness and local flatness criteria do not produce a nonzero base element for an initially nonflat module; smoothness requires extra hypotheses. The grep hits genericPolyMap, unrelated to generic flatness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*flat.*localized|generic.*flat|generic.*free",
+   "results": "{\"t\": \"2026-10-23T23:40:06Z\", \"tool\": \"grep\", \"query\": \"exists.*flat.*localized|generic.*flat|generic.*free\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean\"], \"digest\": \"989c3ecf74ff8ccb\"} Read returned declarations: localization flatness and local flatness criteria do not produce a nonzero base element for an initially nonflat module; smoothness requires extra hypotheses. The grep hits genericPolyMap, unrelated to generic flatness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic flatness of a finite module over a finitely generated algebra, using the trivial square zero extension and flatness of direct summands over a non-Noetherian domain.",
+   "results": "{\"t\": \"2026-10-23T23:40:07Z\", \"tool\": \"leanfinder\", \"query\": \"Generic flatness of a finite module over a finitely generated algebra, using the trivial square zero extension and flatness of direct summands over a non-Noetherian domain.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.HasGoingDown.of_flat\", \"Module.flat_of_isLocalized_span\", \"Module.FaithfullyFlat\", \"Module.flat_iff\"], \"digest\": \"1c08c416c54f1b49\"} Read returned declarations: localization flatness and local flatness criteria do not produce a nonzero base element for an initially nonflat module; smoothness requires extra hypotheses. The grep hits genericPolyMap, unrelated to generic flatness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-schematic-density-generic-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The final sentence of the Tag 0578 generic-fibre alternative in the constructibility input: apply Tag 0573 to the smooth open of the generic fibre. Tag 0573 subargument: simultaneously flatten the chart algebra and the finite cokernel, using the square-zero algebra (returned step 4).",
+   "via": [
+    "lem-trf-schematic-density-generic-fibre-open",
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-algebra-module-simultaneous-generic-flatness",
+  "worker": "stage1",
+  "summary": "Q39: proved the simultaneous statement through the existing algebra-only generic flatness node applied to B direct-sum M with square-zero multiplication; wrote finite generators and all four localized retract maps explicitly, then applied the existing Mathlib flat-retract leaf. Preserved the statement and reused all notions; created no nodes. Corrected the location of the Tag 0573 application to more-morphisms.tex.",
+  "blueprint": "Realizes the Tag 0573 simultaneous chart-algebra/cokernel flattening subargument recorded in blueprint.from.place, within the constructibility input below lem-trf-local-term-locality; the current latest blueprint proof supplies the contracting-correspondence route, and this is a lower algebraic tool in its inherited DAG route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-type-algebra-generic-flatness",
+    "why": "Generic algebraic tool: gives a nonzero base localization making the finite type square-zero algebra flat over an arbitrary domain; the trace unit states no such commutative-algebra theorem."
+   },
+   {
+    "node": "def-sc-trivial-square-zero-extension",
+    "why": "Existing definition of the auxiliary commutative algebra B direct-sum M; the trace unit supplies no square-zero construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-type-algebra-generic-flatness",
+  "def-sc-trivial-square-zero-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-4d712f3e5",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-4d712f3e5 (reviewer sub-agent of L); spot-checked: PASS, no changes. Statement, stmt_deps and source are byte-identical to the base copy in the Q93 snapshots, so no target is weakened. There are no new nodes, no SGA citation and no re-split note for this item. The item faithfully weakens Stacks 051T (algebra.tex:28565, conclusion (a)): free over A_f implies flat over A, with the same hypotheses (A a domain, B finite type, M a finite B-module). Tag 0573 (more-morphisms.tex:6563, third paragraph) uses exactly this simultaneous flatness. Step 1: C=B⊕M from def-sc-trivial-square-zero-extension with R=B; I checked the generator identity P((b_i,0))+Σ(c_j,0)(0,m_j)=(b,m), so C is finite type over A. Step 2: lem-sbc-finite-type-algebra-generic-flatness applies to A→C (domain, finite type, no injectivity or finite-presentation hypothesis needed); the element inverted is φ_C(a)=(s,0)=t and F=C[1/t] is a valid localization model. Step 3: I recomputed t^k(t^{e'}(b,m)−t^e(b',m'))=(s^k(...),s^k(...)), so all four maps are well defined, additive and A-linear, and p∘i=id holds on every fraction. Step 4: Module.Flat.of_retract (Flat/Basic.lean:172), applied twice over A with the same a. Edge cases checked: M=0, B=0, A a field, ℤ→ℤ/2 with a=2 (everything localizes to 0), non-Noetherian A. Searched the DAG for duplicates: lem-pur-noetherian-algebra-module-generic-freeness needs a Noetherian base, and lem-sfb-reduced-polynomial-module-generic-freeness is only a possible alternative route, not a duplicate. Accepted tool use: lem-sbc-finite-type-algebra-generic-flatness as a generic commutative-algebra black box; def-sc-trivial-square-zero-extension is only a notion. Cosmetic: the report's 0573 relocation appears only in proof_origin. Advisory for stage 2/3: the Lean declaration RingHom.exists_nonzero_flat_localizationAway requires R and B in one universe, while TrivSqZeroExt B M lives in max(u_B,u_M), so ULift may be needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AlgebraModuleSimultaneousGenericFlatness",
+  "declaration": "Module.exists_nonzero_flat_localizationAway_algebra_module",
+  "file": "lean/Sheaf/RingTheory/AlgebraModuleSimultaneousGenericFlatness.lean",
+  "statement": "theorem exists_nonzero_flat_localizationAway_algebra_module (A : Type u) (B : Type v) (M : Type w) [CommRing A] [IsDomain A] [CommRing B] [Algebra A B] [AddCommGroup M] [Module B M] [Module.Finite B M] (hB : (algebraMap A B).FiniteType) : ∃ a : A, a ≠ 0 ∧ ((algebraMap B (Localization.Away (algebraMap A B a))).comp (algebraMap A B)).Flat ∧ @Module.Flat A (LocalizedModule.Away (algebraMap A B a) M) _ _ (Module.compHom _ (algebraMap A B))",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-520afd5e4",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Only the lean record of the item changed; lean.statement matches the file signature verbatim. Clause check against the node and Stacks 051T(a)/0573: domain A, hB : (algebraMap A B).FiniteType, Module.Finite B M, ∃ a ≠ 0, RingHom.Flat of the composite A→B→Localization.Away (φ a), and Module.Flat A (LocalizedModule.Away (φ a) M) via Module.compHom (canonical action restricted along A→B). No Noetherian, finite-presentation, injectivity or Nontrivial assumptions; universes u v w independent. Edge cases M=0, B=0, non-injective φ, field or non-Noetherian A are covered. The five stmt_deps are existing Mathlib records. No duplicate in Sheaf/WeilConjectures (RingHom.exists_nonzero_flat_localizationAway is algebra-only and is the proof dependency). Single sorry, docstrings carry the source place, blueprint id and four proof steps; report has Worker report and Second reading sections. Stage-3 advisory: the generic-flatness lemma needs one universe for both rings, so the proof needs ULift for TrivSqZeroExt B M."
+ }
+}

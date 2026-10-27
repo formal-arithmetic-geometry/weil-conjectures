@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-snc-root-local-presentation",
+ "kind": "statement",
+ "title": "Local intersection and localization data for an affine SNC root presentation",
+ "statement": "Let $A$ be a commutative ring such that $X=\\operatorname{Spec}A$ is regular [def-weil-regular-scheme]. Let $I$ be a finite index set, and let $t_i\\in A$ for $i\\in I$ cut out precisely the pairwise distinct reduced irreducible branches, as closed subschemes $V(t_i)$, of a strict normal crossings boundary on $X$ [def-trf-strict-normal-crossings-boundary]. For an integer $n\\geq1$ put $C=A[x_i:i\\in I]/(x_i^n-t_i:i\\in I)$ [def-weil-pbc-mv-polynomial-ring]. Then $A$ and $C$ are Noetherian. For every prime $p\\subset A$, put $R=A_p$ [def-weil-pbc-localization-at-prime], let $\\mathfrak m=pA_p$, write $\\bar t_i=t_i/1$, and set $S=\\{i\\in I:t_i\\in p\\}$. For every $J\\subseteq S$, the ring $R_J=R/(\\bar t_j:j\\in J)$ is regular local, and $\\dim R_J+|J|=\\dim R$, where dimension is Krull dimension [def-weil-pbc-krull-dimension-ring]. Every $\\bar t_i$ with $i\\notin S$ is a unit in $R$ and in every $R_J$. There is a canonical isomorphism $(A\\setminus p)^{-1}C\\cong R[x_i:i\\in I]/(x_i^n-\\bar t_i:i\\in I)$ sending coefficients to their fractions and each root coordinate to the coordinate with the same index. For every prime $q\\subset C$ contracting to $p$, if $Q$ is its extension to the ring on the right, this isomorphism induces an isomorphism of that ring localized at $Q$ with $C_q$, fixing the image of $C$. No regularity of $C$ is asserted. Zero rings and empty index sets are allowed; the prime-indexed assertions are vacuous when $A=0$.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 0BIA (lemma-strict-normal-crossings), regular-intersection criterion and proof; applied to the full parameter-root presentation of ILO Expose IX Proposition 2.1, printed p.133. The coefficient and quotient localization identifications and affine Noetherianity are those of the original item steps 1, 2 and 7."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Regularity of $X$ implies that $X$ is locally Noetherian. Apply the affine-open Noetherianity lemma to the affine open $X$ itself to obtain that $A$ is Noetherian. Choose an enumeration of the finite set $I$. The displayed presentation of $C$ is then a quotient of a polynomial ring in $|I|$ variables over $A$, so the finite-type algebra Noetherianity lemma gives that $C$ is Noetherian. This also applies to $I=\\varnothing$ and to the zero ring.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); Properties Tag 01OW (lemma-locally-Noetherian), affine-open criterion."
+   }
+  },
+  {
+   "text": "Fix p and J. The integral subschemes in the SNC definition have irreducible closed supports covering H. Each actual irreducible component of H lies in one of this finite family of supports, hence equals it by maximality. Choose these indices: distinct actual components give distinct indices, so the resulting map Fin r into the SNC index set is injective. The selected subschemes and the principal prime quotient spectra have the same supports and are reduced; their ideal sheaves are therefore equal. Their intersection D has global ideal K_J=(t_j:j in J), by the supremum formula for ideal sheaves and the affine quotient kernel formula. Since K_J is contained in p, the point x of Spec A corresponding to p lifts to z in D. The map from the stalk of Spec A at x to the stalk of D at z is surjective. Its kernel is the extension of K_J, by Scheme.Hom.ker_stalkMap. Transport across Spec.stalkIso and take the first isomorphism theorem to obtain A_p/K_J A_p isomorphic to the stalk of D at z. The SNC intersection condition now gives regularity and the dimension equality, and injectivity of the chosen indices preserves |J|. This also handles empty J.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-trf-strict-normal-crossings-boundary",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA (lemma-strict-normal-crossings), regular-intersection criterion; Schemes Tag 01HV (lemma-spec-sheaves)(6); Algebra Tag 00CT (proposition-localize-quotient)."
+   }
+  },
+  {
+   "text": "If $i\\notin S$, then $t_i\\notin p$, so $1/t_i$ is a fraction in $R=A_p$ and $(t_i/1)(1/t_i)=1$. Applying the quotient map $R\\to R_J$ to this equality gives an inverse for the image of $\\bar t_i$ in every $R_J$. No property of $n$ is used here.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), fraction multiplication."
+   }
+  },
+  {
+   "text": "Put R=A_p, P=A[x_i], S=R[x_i], and let I and J be the respective root relation ideals. The coefficient extension P to S maps I exactly to J, by Ideal.map_span and the formulas for mapping X and C. MvPolynomial.isLocalization identifies S as the localization of P at the images of A minus p. IsLocalization.of_surjective then identifies S/(I S) as the localization of P/I at the images of these denominators. Transport this localization structure across the quotient equivalence given by I S=J. Thus B=S/J is a localization of C=P/I at exactly the same multiplicative subset as the displayed Localization.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), proof by the explicit fraction formula; polynomial evaluation and quotient relations."
+   }
+  },
+  {
+   "text": "Apply IsLocalization.algEquiv to the two localizations of C to obtain the required ring equivalence e. Its coefficient and coordinate formulas follow from AlgEquiv.commutes and the formulas for the polynomial quotient map. For uniqueness, two such equivalences agree after precomposition with C by quotient surjectivity and MvPolynomial.ringHom_ext: their values on coefficients and variables agree. IsLocalization.ringHom_ext then gives equality on the localization.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), explicit inverse and uniqueness calculation; Tag 00CT (proposition-localize-quotient), quotient-map construction."
+   }
+  },
+  {
+   "text": "For a prime q of C contracting to p, its intersection with the image of A minus p is empty. Give B its C-algebra structure through e. Transport the localization instance along e and apply IsLocalization.isPrime_of_isPrime_disjoint to see that Q=qB is prime. The contraction equality Q intersect C=q is IsLocalization.under_map_of_isPrime_disjoint.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization), numerator proof of prime extension, written out using Tag 00CO fractions."
+   }
+  },
+  {
+   "text": "The localization of B at Q is a localization of C at q, by IsLocalization.isLocalization_isLocalization_atPrime_isLocalization and the contraction equality. Apply IsLocalization.algEquiv with C_q. AlgEquiv.commutes proves that the resulting equivalence fixes every element of C. All constructions are valid for empty branch sets and n=1. If A is the zero ring, there are no primes p, so its prime-indexed conclusions are vacuous.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), existence and uniqueness proof, twice applied by explicit fractions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "Y7",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 0BIA regular-intersection criterion; affine stalk kernel and quotient first isomorphism theorem; Mathlib polynomial and quotient localization universal properties for Algebra Tags 00CP, 00CT, 00E3; Noetherianity from Tag 00FN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine regular scheme with distinct reduced strict normal crossings branch equations, localization at a prime makes every intersection quotient regular local of dimension dim A_p minus the number of branches, and localization commutes with the simultaneous root presentation",
+   "results": "8 hits: Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.IsSmoothAt, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves",
+   "date": "2026-10-22",
+   "verdict": "no match: regular-sequence dimension or localization results do not identify all SNC intersection stalks and the simultaneous root presentation in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictNormalCrossings|normal.crossing|IsRegularLocalRing.*quotient|isRegularLocalRing.*[Qq]uotient",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: regular-sequence dimension or localization results do not identify all SNC intersection stalks and the simultaneous root presentation in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a regular affine scheme with strict normal crossings branch equations at a prime gives regular local intersection quotients of the expected dimension and commutes with adjoining simultaneous roots",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.Quotient, Localization.AtPrime",
+   "results": "UNAVAILABLE: loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*(krullDim|ringKrullDim)|(krullDim|ringKrullDim).*quotient|Quotient.*IsLocalization",
+   "results": "25 hits: Mathlib/RingTheory/Length.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean [Mathlib subdirectory RingTheory]",
+   "date": "2026-10-22",
+   "verdict": "no match: regular-sequence dimension or localization results do not identify all SNC intersection stalks and the simultaneous root presentation in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For equations of distinct simple normal crossing branches, localizing at a point identifies every scheme theoretic intersection stalk with the quotient of the local ring and subtracts the number of branches from Krull dimension",
+   "results": "8 hits: ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, AlgebraicGeometry.isReduced_stalk_of_isReduced, Module.rankAtStalk, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors",
+   "date": "2026-10-22",
+   "verdict": "no match: regular-sequence dimension or localization results do not identify all SNC intersection stalks and the simultaneous root presentation in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, \"quotient\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: regular-sequence dimension or localization results do not identify all SNC intersection stalks and the simultaneous root presentation in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictNormalCrossings|normal.crossing|snc.*root",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the SNC geometry is absent; the regular-sequence dimension theorem and polynomial localization infrastructure cover components of the proof only, not this statement in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local intersection quotients for strict normal crossings divisors and coefficient localization of polynomial root algebras",
+   "results": "8 hits: IsLocalization.integerNormalization, Polynomial.isIntegral_isLocalization_polynomial_quotient, instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient, IsLocalization.integerNormalization_aeval_eq_zero, Submodule.localized'_inf, IsLocalization.coeffIntegerNormalization_of_coeff_zero, IsLocalization.coeffIntegerNormalization, IsLocalization.Away.mvPolynomialQuotientEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the SNC geometry is absent; the regular-sequence dimension theorem and polynomial localization infrastructure cover components of the proof only, not this statement in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, \"quotient\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the SNC geometry is absent; the regular-sequence dimension theorem and polynomial localization infrastructure cover components of the proof only, not this statement in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular affine scheme with strict normal crossings branch equations, intersection quotients of the local rings are regular of expected dimension, and adjoining finitely many roots commutes with localization at a prime",
+   "results": "8 hits: RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.IsStandardSmooth.localization_away, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, Algebra.IsSmoothAt, Algebra.smoothLocus, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: the SNC geometry is absent; the regular-sequence dimension theorem and polynomial localization infrastructure cover components of the proof only, not this statement in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|isRegularLocalRing|ringKrullDim_add_length_eq_ringKrullDim_of_isRegular",
+   "results": "11 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean [Mathlib subdirectory RingTheory]",
+   "date": "2026-10-22",
+   "verdict": "no match: the SNC geometry is absent; the regular-sequence dimension theorem and polynomial localization infrastructure cover components of the proof only, not this statement in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local equations of distinct strict normal crossing components give regular local quotients of codimension equal to the number of equations; simultaneous monic root algebras are Noetherian and localize by localizing their coefficient ring",
+   "results": "8 hits: Algebra.IsStandardSmooth.localization_away, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsStandardSmooth, StandardEtalePair, RingHom.isStandardSmooth_holdsForLocalizationAway, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway",
+   "date": "2026-10-22",
+   "verdict": "no match: the SNC geometry is absent; the regular-sequence dimension theorem and polynomial localization infrastructure cover components of the proof only, not this statement in one specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-finite-root-regular-ring",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: normality and boundary nonzerodivisors on affine weakly etale charts of the full parameter-root limit, used to extend morphisms between supplied lisse extensions. Finite simultaneous parameter-root stage, before taking the full root limit. Original steps 1, 2 and 7: affine Noetherianity, regular intersection stalks and localization of the full finite root presentation.",
+   "via": [
+    "lem-sfb-snc-finite-root-regular-ring",
+    "lem-sfb-snc-root-limit-normal-charts",
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-root-local-presentation",
+  "worker": "stage1",
+  "summary": "Q90: unchanged statement. Proved affine Noetherianity using existing Mathlib leaves, interpreted the boundary intersection condition via existing affine stalk and quotient-localization nodes, and gave explicit mutually inverse fraction maps for both localization isomorphisms. No new nodes were needed. Checked zero rings, empty index sets and n=1, and did not assume n invertible.",
+  "blueprint": "Nearest imported ancestor is null as printed by blueprint_refs.py ancestor: the created.item chain ends at a Lean-module-created node. Retains from.place and via. Realizes Paragraph (3), open direct image, finite parameter-root stage: the original finite-root proof steps 1, 2 and 7 (Noetherianity, regular intersection stalks, and localization). Whole-blueprint searches for normal crossings, strict normal, root, Noetherian and localization found no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "def-trf-strict-normal-crossings-boundary",
+    "why": "Uses exactly its defining regular-intersection and local-dimension conditions for the supplied branches, a generic geometric definition already in stmt_deps, without replacing the open-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-strict-normal-crossings-boundary"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-84a6ddb0a",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-84a6ddb0a (reviewer sub-agent of L); spot-checked: The statement is verbatim the one Q64 created on 2026-10-22, with the same stmt_deps. The delivery adds no new nodes and fills the empty proof with 7 steps. The item is not superseded: it is still unsplit with an empty proof in live and side-live, has no repair note and is in no dropped list. There is no SGA reference. I read all 10 cited statements, using find -L because the chapter directories are symlinks; that is why review_split prints 'no such node' for every citation. Step 1 (A Noetherian via 01OW, C via 00FN) is correct. Step 2 is correct: the stalk is A_p, the intersection of the V(t_j) is Spec A/K_J, and (A/K_J)_{p/K_J} = A_p/K_J A_p. The SNC definition then gives regularity and dim+|J|. I checked that the definition's branch family is unique: the J={i} condition gives codimension 1, so each C_i is a reduced component, matching the definition's final sentence. Steps 3-7 are explicit fraction calculations (00CO/00CP/00E3) and I checked each one: F is well defined, G is evaluation at x_i/1, FG and GF are the identity, qD is a prime equal to F^{-1}(Q), and H/L are mutually inverse and fix C. Edge cases hold: A=0, I or J empty, n=1, and no claim depends on n being invertible. Tested on k[u,v] with uv=0. No duplicates: lem-per-snc-root-algebra-structure, lem-per-snc-parameter-root-quotient and lem-sfb-transverse-local-root-family-regular state different things. The declared tool_use of def-trf-strict-normal-crossings-boundary is accepted. Advisory only: step 1's source.document is algebra.tex but its place also names Properties 01OW."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCRootLocalPresentation",
+  "declaration": "AlgebraicGeometry.snc_root_local_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCRootLocalPresentation.lean",
+  "statement": "theorem snc_root_local_presentation (A : Type u) [CommRing A] (_hA : IsRegularScheme (Spec (.of A))) (r : ℕ) (t : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (_hH : IsStrictNormalCrossingsBoundary H) (components : Fin r ≃ {Z : Set (H.support : Set (Spec (.of A))) // Z ∈ irreducibleComponents (H.support : Set (Spec (.of A)))}) (_hbranches : ∀ i : Fin r, (Ideal.span {t i}).IsPrime ∧ Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {t i})))) = Subtype.val '' (components i).val) (n : ℕ) (_hn : 1 ≤ n) : IsNoetherianRing A ∧ IsNoetherianRing ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i))))) ∧ ∀ (p : Ideal A) [p.IsPrime], (∀ (J : Finset (Fin r)), (∀ j ∈ J, t j ∈ p) → IsRegularLocalRing (Localization.AtPrime p ⧸ Ideal.span ((fun j ↦ algebraMap A (Localization.AtPrime p) (t j)) '' (J : Set (Fin r)))) ∧ ringKrullDim (Localization.AtPrime p ⧸ Ideal.span ((fun j ↦ algebraMap A (Localization.AtPrime p) (t j)) '' (J : Set (Fin r)))) + (J.card : ℕ) = ringKrullDim (Localization.AtPrime p) ∧ ∀ i : Fin r, t i ∉ p → IsUnit (algebraMap A (Localization.AtPrime p) (t i)) ∧ IsUnit (Ideal.Quotient.mk (Ideal.span ((fun j ↦ algebraMap A (Localization.AtPrime p) (t j)) '' (J : Set (Fin r)))) (algebraMap A (Localization.AtPrime p) (t i)))) ∧ ∃! e : Localization (p.primeCompl.map (algebraMap A ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i))))))) ≃+* (MvPolynomial (Fin r) (Localization.AtPrime p) ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (algebraMap A (Localization.AtPrime p) (t i))))), (∀ a : A, e (algebraMap ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i))))) _ (algebraMap A ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i))))) a)) = algebraMap (Localization.AtPrime p) _ (algebraMap A (Localization.AtPrime p) a)) ∧ (∀ i : Fin r, e (algebraMap ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i))))) _ (Ideal.Quotient.mk _ (MvPolynomial.X i))) = Ideal.Quotient.mk _ (MvPolynomial.X i)) ∧ ∀ (q : Ideal ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i)))))) [q.IsPrime], q.comap (algebraMap A ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i)))))) = p → ∃ (Q : Ideal ((MvPolynomial (Fin r) (Localization.AtPrime p) ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (algebraMap A (Localization.AtPrime p) (t i))))))) (_hQ : Q.IsPrime), Q = q.map (e.toRingHom.comp (algebraMap ((MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i))))) _)) ∧ ∃ eq : Localization.AtPrime Q ≃+* Localization.AtPrime q, ∀ c : (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n - MvPolynomial.C (t i)))), eq (Localization.mk (e (Localization.mk c 1)) 1) = Localization.mk c 1",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The finite branch set is enumerated by Fin r. The simultaneous root quotient is written directly using the recorded MvPolynomial dependency, without importing or citing the unrelated strict-local Kummer-splitting theorem node. Original stmt_deps are preserved. All canonical equivalences are pinned on coefficients, root coordinates, and the image of C."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-634c6bc67",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery repairs the H2 RETURN of a5f304c984c9 as prescribed: theorem stmt_dep lem-sfb-strict-local-prime-to-p-kummer-splitting dropped, the 5 base stmt_deps are restored, and the MvPolynomial (Fin r) A ⧸ span{X i^n - C t_i} quotient is written inline (exact abbrev bodies; the import of the theorem module is removed). Compared with the side-live node, only the lean field differs; lean.statement is verbatim to the file signature; proof is sorry only. The final equation uses Localization.mk _ 1, which equals algebraMap by Localization.mk_one_eq_algebraMap (Defs.lean:847), so the meaning is unchanged. Rechecked all clauses (regular Spec A, SNC boundary with components equiv + prime (t_i), Noetherian A and C, regular local R_J with ringKrullDim + |J|, units in R and R_J, ∃! e pinned on a and X i, Q = extension, B_Q ≅ C_q pinned on C) and edge cases (A=0, r=0, J=∅, n=1, single universe). No parallel landing or repair note. No compile run (no file changed). Advisory: sncRootLevel duplicate construction; unused proof-dependency imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261023T132445-L-2277380",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

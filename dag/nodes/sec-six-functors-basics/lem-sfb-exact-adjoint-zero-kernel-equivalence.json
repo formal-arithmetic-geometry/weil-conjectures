@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-exact-adjoint-zero-kernel-equivalence",
+ "kind": "statement",
+ "title": "An exact fully faithful left adjoint with zero-kernel right adjoint is an equivalence",
+ "statement": "Let $\\mathcal D$ and $\\mathcal D\\prime$ be triangulated categories [def-weil-triangulated-category], and let $F:\\mathcal D\\to\\mathcal D\\prime$ and $G:\\mathcal D\\prime\\to\\mathcal D$ be exact functors. Suppose $F$ is fully faithful (bijections on all morphism sets), there is a specified adjunction $F\\dashv G$ (natural Hom-set bijections with unit $\\eta$ and counit $\\varepsilon$ satisfying the triangle identities), and $G(Y)\\simeq0$ implies $Y\\simeq0$ for every $Y\\in\\mathcal D\\prime$. Then $F$ and $G$ are inverse equivalences: both $\\eta:\\operatorname{id}\\to GF$ and $\\varepsilon:FG\\to\\operatorname{id}$ are natural isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09J1, derived-lemma-fully-faithful-adjoint-kernel-zero."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sp-adjunction-unit-fully-faithful-left] to the specified adjunction $F\\dashv G$. Its hypothesis is exactly full faithfulness of $F$, so $\\eta:\\mathrm{id}_{\\mathcal D}\\to GF$ is a natural isomorphism.",
+   "uses": [
+    "lem-sp-adjunction-unit-fully-faithful-left"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 07RB, lemma-adjoint-fully-faithful (1), as invoked in the first sentence of Tag 09J1."
+   }
+  },
+  {
+   "text": "Fix $Y\\in\\mathcal D\\prime$. The right triangle identity is $G(\\varepsilon_Y)\\circ\\eta_{GY}=\\mathrm{id}_{GY}$. Step 1 makes $\\eta_{GY}$ invertible, hence $G(\\varepsilon_Y)=\\eta_{GY}^{-1}$ is invertible. By TR1 of [def-weil-triangulated-category], choose a distinguished triangle $FGY\\xrightarrow{\\varepsilon_Y}Y\\to C_Y\\to(FGY)[1]$. Exactness of $G$, as defined there, gives a distinguished triangle $GFGY\\xrightarrow{G(\\varepsilon_Y)}GY\\to GC_Y\\to(GFGY)[1]$, where the last arrow uses the shift comparison of $G$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09J1, lemma-fully-faithful-adjoint-kernel-zero, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-distinguished-cone-zero] in $\\mathcal D$ to the image triangle of step 2. Its first map is invertible, so $GC_Y\\simeq0$. The zero-kernel hypothesis of the item, applied to $C_Y$, implies $C_Y\\simeq0$. Apply the same cited criterion in $\\mathcal D\\prime$ to the original triangle: its third vertex is zero, so $\\varepsilon_Y:FGY\\to Y$ is invertible.",
+   "uses": [
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09J1, lemma-fully-faithful-adjoint-kernel-zero, proof."
+   }
+  },
+  {
+   "text": "The counit is already natural. For $a:Y\\to Y\\prime$, its naturality equation $a\\circ\\varepsilon_Y=\\varepsilon_{Y\\prime}\\circ FG(a)$ implies $FG(a)\\circ\\varepsilon_Y^{-1}=\\varepsilon_{Y\\prime}^{-1}\\circ a$ by composing with the two inverses. Thus the component inverses form a natural inverse to $\\varepsilon$. Together with the natural isomorphism $\\eta$ from step 1, these give the asserted inverse equivalences $F$ and $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09J1, lemma-fully-faithful-adjoint-kernel-zero, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-adjunction-unit-fully-faithful-left",
+  "def-weil-triangulated-category",
+  "lem-kun-distinguished-cone-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09J1, lemma-fully-faithful-adjoint-kernel-zero, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful functor between triangulated categories with a right adjoint whose kernel is zero is an equivalence",
+   "results": "8 hits: CategoryTheory.Equivalence.IsTriangulated.mk', CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Equivalence.IsTriangulated.mk'', CategoryTheory.Equivalence.IsTriangulated, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+   "date": "2026-10-23",
+   "verdict": "no match: triangulated adjunction preservation and equivalence with invertible unit/counit do not prove the zero-kernel criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful left adjoint between triangulated categories is an equivalence if its right adjoint detects zero objects",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Equivalence.IsTriangulated, CategoryTheory.Adjunction.IsTriangulated.mk, CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: triangulated adjunction preservation and equivalence with invertible unit/counit do not prove the zero-kernel criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"IsEquivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: triangulated adjunction preservation and equivalence with invertible unit/counit do not prove the zero-kernel criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalence|IsEquivalence|isZero|IsZero",
+   "results": "0 hits: . Searched CategoryTheory/Triangulated/Adjunction.lean.",
+   "date": "2026-10-23",
+   "verdict": "no match: triangulated adjunction preservation and equivalence with invertible unit/counit do not prove the zero-kernel criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative right adjoint and fully faithful left adjoint give an equivalence of categories",
+   "results": "8 hits: CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right, CategoryTheory.Functor.isEquivalence_of_isRightAdjoint, CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv, CategoryTheory.Functor.adjunction, CategoryTheory.Functor.isLeftAdjoint_of_isEquivalence, CategoryTheory.Functor.isRightAdjoint_of_isEquivalence",
+   "date": "2026-10-23",
+   "verdict": "no match: triangulated adjunction preservation and equivalence with invertible unit/counit do not prove the zero-kernel criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*iff.*[Ii]sIso|[Ii]sIso.*iff.*[Ii]sZero|reflectsIsomorphisms|isEquivalence",
+   "results": {
+    "t": "2026-10-23T12:10:29Z",
+    "tool": "grep",
+    "query": "isZero.*iff.*[Ii]sIso|[Ii]sIso.*iff.*[Ii]sZero|reflectsIsomorphisms|isEquivalence",
+    "sub": "CategoryTheory/Triangulated",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Rotate.lean",
+     "Mathlib/CategoryTheory/Triangulated/Rotate.lean",
+     "Mathlib/CategoryTheory/Triangulated/Rotate.lean",
+     "Mathlib/CategoryTheory/Triangulated/Rotate.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean"
+    ],
+    "digest": "24954e7fdf60ea63"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no exact or one-line zero-kernel equivalence theorem; the cone criterion and adjunction facts are existing DAG leaves and require the displayed assembly argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful left adjoint between triangulated categories whose right adjoint detects zero objects is an equivalence",
+   "results": {
+    "t": "2026-10-23T12:10:33Z",
+    "tool": "leanfinder",
+    "query": "An exact fully faithful left adjoint between triangulated categories whose right adjoint detects zero objects is an equivalence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Equivalence.IsTriangulated.mk'",
+     "CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor",
+     "CategoryTheory.Equivalence.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Equivalence.IsTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''"
+    ],
+    "digest": "20dc06ea23f76cb3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no exact or one-line zero-kernel equivalence theorem; the cone criterion and adjunction facts are existing DAG leaves and require the displayed assembly argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"IsEquivalence\"",
+   "results": {
+    "t": "2026-10-23T12:18:18Z",
+    "tool": "loogle",
+    "query": "\"IsTriangulated\", \"IsEquivalence\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no exact or one-line zero-kernel equivalence theorem; the cone criterion and adjunction facts are existing DAG leaves and require the displayed assembly argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful triangulated left adjoint is an equivalence when the right adjoint has zero kernel",
+   "results": {
+    "t": "2026-10-23T12:18:18Z",
+    "tool": "leansearch",
+    "query": "A fully faithful triangulated left adjoint is an equivalence when the right adjoint has zero kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv",
+     "CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor"
+    ],
+    "digest": "2e7379641efe308c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no exact or one-line zero-kernel equivalence theorem; the cone criterion and adjunction facts are existing DAG leaves and require the displayed assembly argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative right adjoint and a fully faithful left adjoint form an equivalence of categories",
+   "results": {
+    "t": "2026-10-23T12:18:19Z",
+    "tool": "leanfinder",
+    "query": "A conservative right adjoint and a fully faithful left adjoint form an equivalence of categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.isEquivalence_right_of_isEquivalence_left",
+     "CategoryTheory.Adjunction.isEquivalence_left_of_isEquivalence_right",
+     "CategoryTheory.Functor.isEquivalence_of_isRightAdjoint",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Functor.adjunction",
+     "CategoryTheory.Functor.isLeftAdjoint_of_isEquivalence",
+     "CategoryTheory.Equivalence.isLeftAdjoint_functor",
+     "CategoryTheory.Functor.isRightAdjoint_of_isEquivalence"
+    ],
+    "digest": "49db47f7748ee454"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no exact or one-line zero-kernel equivalence theorem; the cone criterion and adjunction facts are existing DAG leaves and require the displayed assembly argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-space-tilting-equivalence",
+  "date": "2026-10-23",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Final exact-adjunction criterion used in the proof of Tag 0BQU.",
+   "via": [
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-exact-adjoint-zero-kernel-equivalence",
+  "worker": "stage1",
+  "summary": "Read Stacks 09J1 and its 07RB and 05QR inputs. Preserve the statement and inherited provenance; give the four-step cone proof, explicitly deriving invertibility of the mapped counit from the right triangle identity. Reuse two existing Mathlib leaves and the triangulated-category definition. No new nodes and no statement correction. Logged five fresh Mathlib searches in Q105, including a second phrasing, without replacing the inherited searches.",
+  "blueprint": "The inherited from.place traces this tool through projective-space tilting (Stacks 0BQU, last paragraph) to det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint direct-image proof (3) is read; this split supplies only the already chosen tilting-equivalence prerequisite, via the exact-adjunction criterion of 09J1, and does not change that unit route. ancestor prints None for this inherited non-blueprint lineage; preserve that provenance. Whole-blueprint searches for fully faithful adjoint, fully faithful, and 09J1 found no duplicate of the item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-8f1cda55c",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-8f1cda55c (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement is byte-identical to live and matches Stacks 09J1 (derived.tex:2373; tags line 12059) hypothesis by hypothesis. The explicit claim that η and ε are natural isomorphisms is exactly what the source's proof gives. Live is still unsplit, so no other group has superseded it, and there is no repair note. Step 1: lem-sp-adjunction-unit-fully-faithful-left (Mathlib FullyFaithful.lean:75) has exactly these hypotheses. Step 2: the right triangle identity G(ε_Y)∘η_{GY}=id makes G(ε_Y)=η_{GY}⁻¹. TR1 and exactness as stated in def-weil-triangulated-category give the cone triangle and its distinguished G-image through the shift comparison. This correctly replaces the source's 'GFG(X)=G(X)'. Step 3: lem-kun-distinguished-cone-zero (Pretriangulated.lean:388-391), applied in D, gives GC_Y=0. The zero-kernel hypothesis gives C_Y=0. Applied in D′, it makes ε_Y invertible. Step 4: the componentwise inverse is natural, so ε is a natural isomorphism. Edge cases: zero category, identity adjunction, and D→D×E, whose kernel (0,Z) shows the hypothesis is needed. The DAG search for 09J1, the label and the statement concepts found no duplicate. Mathlib's Triangulated directory has no zero-kernel equivalence criterion, so the item is correctly split. Inputs are Mathlib leaves and a Mathlib definition, so there is no route issue and no tool_uses. The inherited blueprint lineage is unchanged. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.ExactAdjointZeroKernel",
+  "declaration": "CategoryTheory.Adjunction.isIso_unit_and_counit_of_fully_faithful_of_zero_kernel",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/ExactAdjointZeroKernel.lean",
+  "statement": "theorem isIso_unit_and_counit_of_fully_faithful_of_zero_kernel {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Preadditive C] [Preadditive D] [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated C] [Pretriangulated D] [IsTriangulated C] [IsTriangulated D] (F : C ⥤ D) (G : D ⥤ C) [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated] [F.Full] [F.Faithful] (adj : F ⊣ G) (hG : ∀ Y : D, IsZero (G.obj Y) → IsZero Y) : IsIso adj.unit ∧ IsIso adj.counit",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23a756447",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Item statement checked clause by clause against node and Stacks 09J1 (derived.tex:2372-2404): triangulated C,D via the full Pretriangulated+IsTriangulated interface recorded by def-weil-triangulated-category; exact F,G = CommShift ℤ + Functor.IsTriangulated; F.Full/F.Faithful; actual adj : F ⊣ G; hG : ∀ Y, IsZero (G.obj Y) → IsZero Y; conclusion IsIso adj.unit ∧ IsIso adj.counit. No extra assumptions; universes v₁ v₂ u₁ u₂ independent and bound; lean.statement verbatim in file; node otherwise identical to live, live lean unset (no rebind). Docstrings carry source place, blueprint id and the 4 proof steps; proof is sorry only; no defs/new nodes/dep modules/pro-étale. No duplicate in Mathlib or the project. Report has both sections. Edge cases (zero categories, C→C×E) fine. Not recompiled (no file changed). No findings."
+ }
+}

@@ -201,20 +201,38 @@
   "module": "Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion",
   "declaration": "AlgebraicGeometry.EtaleLogHom.smooth_near_of_strict_logCotangent_injective",
   "file": "lean/Sheaf/AlgebraicGeometry/StrictLogJacobianCriterion.lean",
-  "statement": "theorem EtaleLogHom.smooth_near_of_strict_logCotangent_injective {X Y S : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X S) (g : EtaleLogHom Y S) (h : EtaleLogHom X Y) (hf : f.IsLogSmooth) (hg : g.IsLogSmooth) (hover : h.CompEq g f) (hstrict : h.IsStrict) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (hinj : EtaleLogHom.IsLogCotangentInjective f g h t) : ∃ U : X.scheme.Opens, t default ∈ U ∧ Smooth (U.ι ≫ h.base)",
+  "statement": "theorem smooth_near_of_strict_logCotangent_injective {S X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X S) (g : EtaleLogHom Y S) (h : EtaleLogHom X Y) (hover : h.CompEq g f) (hf : f.IsLogSmooth) (hg : g.IsLogSmooth) (hstrict : h.IsStrict) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (hinj : IsLogCotangentInjective f g h t) : ∃ U : X.scheme.Opens, (Scheme.SpecToEquivOfField Ω X.scheme t).1 ∈ U ∧ Smooth (U.ι ≫ h.base)",
   "branch": "newtargets-dag",
-  "by": "Q03",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/StrictLogJacobianCriterion.lean",
+  "module": "Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.smooth_near_of_strict_logCotangent_injective",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion deleted (dead: no target reaches it); this node is not reached either."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-64103f005",
-  "group": "Q03",
+  "reviewer": "NT-stage2-cc-6f7584268",
+  "group": "Q25",
   "result": "pass",
-  "note": "Re-delivery after H13/H4 RETURN of 419b630e0b33 makes exactly the prescribed repair. The def-per-strict-log-morphism record is byte-identical to NG's live existing:true LogFanChartBlowup record. StrictLogMorphismCharts.lean is deleted. The item is a non-module file importing LogFanChartBlowup with hstrict : h.IsStrict; the direction (source = pullback of target) is correct. lean.statement is verbatim; stmt_deps, the NL statement/proof and the def-per-log-cotangent-comparison node/module are unchanged from the version accepted before. No parallel duplicate: NZ lem-per-log-cotangent-characteristic-quotient is a different statement; the citer equivariant-log-smooth-chart uses the same IsStrict. nt_compile --json: both files clean (2.5 s / 3.0 s, rc 0)."
+  "note": "Item is route-pivot-dropped (l.1911; module l.1352 deleted 10-20) but a graph search from nt-target-weil-conjectures reaches it via lem-sfb-field-log-smooth-gabber-modification → gabber-fixed-locus-log-chart → equivariant-log-smooth-chart, so judged on merits. Snapshot differs from live only in the item's lean field; all 7 stmt_dep records identical. The statement matches node and ILO X 1.2 p.138 / Kato 3.12: FineSaturatedLogScheme (loc. Noetherian, fs), chart log smoothness for f and g, CompEq h g f (h.base≫g.base=f.base plus section compatibility), canonical strict IsStrict in the correct direction, algebraically closed geometric point t, IsLogCotangentInjective (reviewed graph comparison), conclusion ∃ open U ∋ point with Smooth (U.ι ≫ h.base). No extra hypotheses or universe restrictions; lean.statement verbatim. Edge cases checked: empty X, zero cotangent, trivial log, h=id, Kummer excluded. No duplicate in live lean; sfb twin lem-sfb-strict-log-jacobian-criterion has lean null and should bind existing:true here. Docstrings carry source place, blueprint tag and the 5 steps; proof sorry only; no dropped module imported; Worker report and Second reading by Q25 present. No file changed, so no compile. Maintainer notes: stale drop-list and module-list entries; sfb twin binding."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

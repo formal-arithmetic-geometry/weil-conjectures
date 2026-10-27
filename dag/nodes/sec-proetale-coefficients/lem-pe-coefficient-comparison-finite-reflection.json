@@ -1,0 +1,152 @@
+{
+ "id": "lem-pe-coefficient-comparison-finite-reflection",
+ "kind": "lemma",
+ "title": "Reflection of finite local systems on the coefficient-sized models",
+ "statement": "Let X be any scheme, A a commutative Noetherian ring in max(v,u+1), and F a fixed-scalar A-module sheaf on the coefficient-sized etale site [def-pe-etale-constructible-module]. If its fixed-scalar comparison inverse image along the transported etale inclusion [def-weil-pbc-site-comparison-morphism] is locally constant with finitely generated constant module models on covering sieves, then F satisfies the same finite local-model condition on the etale site. This is a single-stratum statement, with no scheme partition or global constructibility conclusion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, lemma-compare-locally-constant, proof; Tag 099T, lemma-fully-faithful; the first paragraph of Tag 09AK, lemma-compare-constructible"
+ },
+ "stmt_deps": [
+  "def-pe-etale-constructible-module",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite local-model hypothesis on each object and replace finite generation by finite presentation using Noetherianity. Apply coefficientFpLocalSystem_etaleCover to the actual comparison inverse image. This produces coefficient-sized etale objects V_i whose images cover the pro-etale site and constant slice charts with finitely presented models M_i.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-pe-coefficient-fp-local-system-etale-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect the cover through the transported inclusion directly: push the model covering sieve down through AsSmall, extract a generating pro-etale covering presieve at the terminal object, and use its joint surjectivity. Factoring each of its members through an etale V_i shows the underlying etale family is jointly surjective. The etale covering criterion gives a covering sieve of these objects, and AsSmall transports it to the coefficient-sized etale site. This is the fully proved private helper comparison_coversTop_reflect, including the empty-family and empty-base cases.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect each supplied constant chart on the single etale object V_i, preserving its module M_i. For an arbitrary etale site object W use Sieve.ofObjects V W, which is covering by the preceding step. Each arrow of this sieve has domain U admitting q:U→V_i. Restrict the reflected chart along q; pushforwardOverMapIso identifies the restricted F with F.over U, and pushforwardContinuousSheafificationCompatibility identifies the restricted constant sheaf with constant M_i. Finite presentation implies finite generation, giving precisely the required witnesses on this sieve. No nonempty-chart or nonzero-model choice is made.",
+   "uses": [
+    "lem-pe-coefficient-comparison-constant-chart-reflection",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-pe-etale-constructible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-pe-coefficient-fp-local-system-etale-cover",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "lem-pe-coefficient-comparison-constant-chart-reflection",
+  "lem-weil-pbc-site-constant-restriction",
+  "def-pe-etale-constructible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y and 099T; coefficient-sized assembly using the existing etale-chart theorem and one-chart reflection. Cover reflection uses joint surjectivity and the small etale covering criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale module is locally constant with finite module models if and only if its pro etale inverse image is locally constant with finitely presented module models over a Noetherian ring",
+   "results": "8 hits: RingHom.Etale.propertyIsLocal, Algebra.Etale.finitePresentation, Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, RingHom.Etale.ofLocalizationSpan. Receipt ef0654fccba7f7fc.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*[Cc]omparison|[Cc]omparison.*constructib",
+   "results": "0 hits: . Receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"IsLocallyConstant\"",
+   "results": "0 hits: . Receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale module sheaf is locally constant with finite type models if its pro etale inverse image is locally constant with finitely presented models",
+   "results": "8 hits: SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.isFinitePresentation, Algebra.Etale.finitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation. Receipt 8456bc71c037b291.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant coefficient ring module sheaf inverse image is naturally isomorphic to inverse image of fixed coefficient module valued sheaves",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.instIsLeftAdjointPullback, CondensedMod.LocallyConstant.functorIsoDiscrete. Receipt fdfa36d70ac6040f.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to constant scalars commutes with inverse image of sheaves of modules along the etale to proetale comparison and scheme base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Receipt 294ceb13f96d7543.",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the coefficient-sized single-stratum or scalar-restriction comparison. Generic inverse-image and local finite-presentation APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonConstructibilityTest",
+  "date": "2026-10-26",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First sentence: the preceding proposition handles a single stratum; Stacks Tag 09AK first proof paragraph, comparison commutes with pullback to strata.",
+   "via": [
+    "lem-pe-coefficient-comparison-constructibility-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonFiniteReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonFiniteReflection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_finite_reflect",
+  "statement": "theorem coefficientComparison_finite_reflect (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]\n    (F : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    (h : IsCoefficientModelLocallyConstantFinite\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X) A\n      ((Functor.sheafPullbackConstruction.sheafPullback\n        (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n        (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n        (Scheme.coefficientProEtaleModelTopology.{u, v} X)).obj F)) :\n    IsCoefficientModelLocallyConstantFinite\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A F",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T201652-L-2597621",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T065243-L-2772292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

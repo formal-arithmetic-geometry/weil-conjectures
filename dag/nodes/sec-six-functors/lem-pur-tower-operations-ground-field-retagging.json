@@ -1,0 +1,276 @@
+{
+ "id": "lem-pur-tower-operations-ground-field-retagging",
+ "kind": "statement",
+ "title": "Ground-field retagging identifies ordinary strict-tower operations",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$; put $A_n=\\mathcal O_E/\\ell^n$ for $n\\geq1$ [def-pur-conventions, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes, and $f:X\\to Y$ a smooth separated $k$-morphism of pure relative dimension $d\\geq0$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms]. For a field automorphism $\\sigma:k\\simeq k$ fixing $k_0$, let $T^\\sigma$ be the same scheme $T$ with structural map $\\operatorname{Spec}(\\sigma)\\circ a_T$, for $T=X,Y$, and let $f^\\sigma$ be the same underlying morphism. Use the strict varying-coefficient tower categories $\\operatorname{Tow}(T,\\mathcal O_E)$ [sk-def-sp-coefficient-towers], their ordinary derived categories [def-weil-abstract-derived-category], and their full subcategories $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ of towers with constructible levels and level-independent finite cohomological and Tor bounds [sk-def-sp-normalized-towers].\n\nThe identity on the underlying small pro-etale ringed sites [def-weil-pbc-proetale-site] identifies the abelian categories $\\operatorname{Tow}(T^\\sigma,\\mathcal O_E)=\\operatorname{Tow}(T,\\mathcal O_E)$, including the coefficient quotient maps and semilinear transitions, and identifies their categories of complexes, quasi-isomorphisms, ordinary derived categories and subcategories $\\mathcal C_T$. Under these identifications, the exact tower pullbacks for $f^\\sigma$ and $f$ agree; the ordinary derived tower tensor products over $(A_{n,T})_n$ agree, with their unit, symmetry, associativity and pullback-tensor comparisons; and the levelwise Tate twists agree, with their power and quotient transitions and their twist reassociations [det-sp-tower-shriek-levels, def-coefficient-twists-detailed]. For a chosen compactification $X\\xrightarrow j\\overline X\\xrightarrow pY$ of $f$ [def-weil-compactifications-refinements], give $\\overline X$ the retagged structural map as well. The ordinary tower compact-support functors $F=Rp_{*,\\bullet}j_{!,\\bullet}$ for the two presentations are identified on bounded-below towers, together with the underlying pullback/direct-image adjunctions and extension-by-zero tensor comparisons [det-sp-tower-shriek-levels]. All these are identifications of tower constructions before finite evaluation; they retain the actual quotient-coefficient transitions. No derived reduction-isomorphism condition on the input towers is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clauses (2)–(3), underlying tower operations; explicit auxiliary for the retagged purity square of thm-pur-weil-equivariance-of-purity-and-trace, proof Step 1"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-compactifications-refinements",
+  "def-pur-signed-line-scalar-normalization-data",
+  "def-sf-signed-line-product-normalization-data",
+  "def-sp-commutative-coefficient-ring-tower",
+  "def-sf-coefficient-towers-abelian-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The functor Over.map postcomposes the structure map only. Its object left and morphism left projections reduce to the original scheme and arrow. The retagged compactification is defined to be the original compactification. Thus the sites, coefficient diagrams, tower and complex categories, quasi-isomorphisms, calculus, derived categories, constructible/Tor predicates and inclusions, roots, integral lines, finite quotients, signed lines, geometry, pullback, compact support and open operations are identified by reflexivity. No new adjunction, resolution or tensor comparison is selected.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "sk-def-sp-coefficient-towers",
+    "det-sp-coefficient-towers-abelian",
+    "def-weil-abstract-derived-category",
+    "sk-def-sp-normalized-towers",
+    "det-sp-tower-shriek-levels",
+    "def-pur-roots-of-unity-sheaf",
+    "def-coefficient-twists-detailed",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For two normalized quotient-comparison families, degree-one homomorphisms agree on double scalar-extension pure sections by their common multiplication formula. scalarExtensionTower_hom_ext gives equality of degree-one isomorphisms. At zero use the normalized unit formula. Induct on nonnegative powers, using scalarExtension_tensor_hom_ext and the positive recursion to compare both factor images. For each negative power use its prescribed dual-map composite and the equality of the positive isomorphism, including its inverse. Function extensionality gives equality of families; substitution then identifies every semilinear transition.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-tower-core",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The DVR computation in spEllIdeal_eq_uniformizer_pow gives a positive e with (ell)=(varpi)^e. Hence the ideal at level n is the uniformizer ideal at positive exponent e(n+1). Regard ordinary scalar extension of the integral Tate line as a family indexed by its quotient ideal and transport along this equality. The finite local-freeness clause of pur_twist_sheaf_locally_free makes this line locally free of rank one. Its hypothesis holds because the prime ell is a unit in the stalks of every k-scheme by the purity setting and remains a unit in the residue fields. Rank-one local freeness supplies a CoversTop family of isomorphisms with free modules of rank one, then freeUniqueIso identifies these with the scalar units. existsUnique_signedLineProduct applied to this cover identifies any two normalized product families. Empty schemes cause no exception: covers and uniqueness are valid there as well. Assemble all conjunctions without changing any hypothesis.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "def-pur-conventions",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "def-pur-roots-of-unity-sheaf",
+  "def-coefficient-twists-detailed",
+  "def-weil-compactifications-refinements",
+  "lem-sp-scalar-extension-dual-tower-core",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "def-pur-conventions",
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clauses (2)-(3): Lean identity of the fixed constructions, normalized scalar-comparison uniqueness, and normalized signed-product uniqueness; C3 stage 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "retag|coefficientTower|towerShriek|tateTwist",
+   "results": "{\"t\": \"2026-10-22T06:12:07Z\", \"tool\": \"grep\", \"query\": \"retag|coefficientTower|towerShriek|tateTwist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforward/congruence and light condensed monoidal categories do not state the strict-tower retagging identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ground field retagging preserves the derived category and compact support functor of varying coefficient towers",
+   "results": "{\"t\": \"2026-10-22T06:12:07Z\", \"tool\": \"leansearch\", \"query\": \"Ground field retagging preserves the derived category and compact support functor of varying coefficient towers\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-22T06:12:07Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerived, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforward/congruence and light condensed monoidal categories do not state the strict-tower retagging identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing structural maps to a field by a field automorphism preserves strict coefficient tower categories, derived pullback, Tate twist and compactification pushforward",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"Changing structural maps to a field by a field automorphism preserves strict coefficient tower categories, derived pullback, Tate twist and compactification pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforwardCongr\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\"], \"digest\": \"5222859952d52685\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforward/congruence and light condensed monoidal categories do not state the strict-tower retagging identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity of the underlying proetale ringed sites identifies the ordinary derived categories of semilinear module systems with their tensor and compact support operations",
+   "results": "{\"t\": \"2026-10-22T06:12:38Z\", \"tool\": \"leanfinder\", \"query\": \"Identity of the underlying proetale ringed sites identifies the ordinary derived categories of semilinear module systems with their tensor and compact support operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondMod\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Condensed.profiniteSolid\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\"], \"digest\": \"5631856d3f697ba1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforward/congruence and light condensed monoidal categories do not state the strict-tower retagging identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardCongr [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "results": "{\"t\": \"2026-10-22T06:13:22Z\", \"tool\": \"grep\", \"query\": \"pushforwardCongr\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\"], \"digest\": \"c7fe38c14e1075ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pushforward/congruence and light condensed monoidal categories do not state the strict-tower retagging identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "retagg|StrictRingSystem|semilinear.*system|coefficientTower",
+   "results": "{\"t\": \"2026-10-22T06:59:33Z\", \"tool\": \"grep\", \"query\": \"retagg|StrictRingSystem|semilinear.*system|coefficientTower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Ring/CompTypeclasses.lean\"], \"digest\": \"2d98c19dcf1fc6ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaves of modules, scheme pullbacks or condensed monoidal categories; none states the full strict quotient-tower retagging assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identity of ringed sites gives identical derived functors on towers of module sheaves",
+   "results": "{\"t\": \"2026-10-22T06:59:33Z\", \"tool\": \"leansearch\", \"query\": \"Identity of ringed sites gives identical derived functors on towers of module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_comp_id\", \"PresheafOfModules.pushforwardId\", \"SheafOfModules.pullbackId\", \"PresheafOfModules.pullbackId\", \"CategoryTheory.Functor.sheafPushforwardContinuousId\", \"SheafOfModules.id_val\", \"SheafOfModules.pushforwardCongr.congr_simp\"], \"digest\": \"4bb3c6869c49c4dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaves of modules, scheme pullbacks or condensed monoidal categories; none states the full strict quotient-tower retagging assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardCongr",
+   "results": "{\"t\": \"2026-10-22T06:59:34Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforwardCongr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardCongr_symm\", \"SheafOfModules.pushforwardNatTrans_id\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.pushforwardNatTrans_comp\", \"SheafOfModules.pushforwardCongr_hom_app_val_app\", \"SheafOfModules.pushforwardCongr_inv_app_val_app\", \"SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply\"], \"digest\": \"ff6c70b5e47ba4cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaves of modules, scheme pullbacks or condensed monoidal categories; none states the full strict quotient-tower retagging assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing only the ground field structural map of a scheme preserves strict semilinear coefficient towers and their derived tensor and compact support operations",
+   "results": "{\"t\": \"2026-10-22T06:59:35Z\", \"tool\": \"leanfinder\", \"query\": \"Changing only the ground field structural map of a scheme preserves strict semilinear coefficient towers and their derived tensor and compact support operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.HasRingHomProperty.copy\", \"AlgebraicGeometry.Scheme.Hom.copyBase\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\"], \"digest\": \"9532c28977d13685\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaves of modules, scheme pullbacks or condensed monoidal categories; none states the full strict quotient-tower retagging assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The same ringed site and the same morphism define the same category of inverse systems of modules, derived tensor functor, and derived direct image with adjunction units and counits",
+   "results": "{\"t\": \"2026-10-22T07:04:40Z\", \"tool\": \"leanfinder\", \"query\": \"The same ringed site and the same morphism define the same category of inverse systems of modules, derived tensor functor, and derived direct image with adjunction units and counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafProfinite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"26a855be5855a505\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaves of modules, scheme pullbacks or condensed monoidal categories; none states the full strict quotient-tower retagging assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-purity-ground-field-retagging",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Proof Step 1, tower purity square: identity of the underlying tower sites, twists and same compactification after retagging",
+   "via": [
+    "lem-pur-tower-purity-ground-field-retagging"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-tower-operations-ground-field-retagging",
+  "worker": "stage1",
+  "summary": "Q30 wrote an explicit identity-of-constructions proof on the common ringed sequence site. It checks strict semilinear transitions, ordinary derived tensor and adjunction normalizations, signed Tate-twist quotient maps, same-compactification bounded-below direct image and the uniform finite-Tor subcategories. Existing general system and signed-line results suffice; no new node, normalization hypothesis or levelwise faithfulness claim is used. Statement unchanged.",
+  "blueprint": "Realizes thm-pur-weil-equivariance-of-purity-and-trace proof Step 1, underlying tower operations; expands det-sp-tower-gamma proof clauses (2)–(3) without comparing orientations or exceptional adjoints.",
+  "tool_uses": [
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Common tower category is abelian and evaluation is exact; generic input rather than an alternative purity route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Ordinary derived tensor and geometric adjunctions on arbitrary strict ring systems; no normalization or flat-transition assumption."
+   },
+   {
+    "node": "lem-pur-varying-ring-tensor-comparison",
+    "why": "Supplies the adjunction-normalized tensor comparison for arbitrary inverse ring sequences, including powers of ell."
+   },
+   {
+    "node": "det-sp-tower-injective-components",
+    "why": "Computes bounded-below tower direct image by an injective tower resolution."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Finite Tate twists are rank-one lines so signed dual and quotient comparisons apply."
+   },
+   {
+    "node": "lem-pur-signed-line-scalar-tensor-tower",
+    "why": "Signed powers, dual quotient maps and twist reassociations are canonically normalized on local bases."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Characterizes open tensor comparison by its adjoint inverse, explicitly for arbitrary strict systems."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-coefficient-towers-abelian",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-signed-line-scalar-tensor-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-c35e12de9",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c35e12de9 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the whole item (statement unchanged, 9 steps), the report, both blueprint proof files at the cited places (gamma.proof (2)-(3) and thm-pur-weil-equivariance Step 1, neither of which contains a retagging argument, so proof_origin=agent is right), the parent lem-pur-tower-purity-ground-field-retagging Step 1, and every cited statement. The delivery adds no new nodes. Step checks: 1. The pro-étale site and constant sheaves do not involve a_T. 2. Tow(T,O_E) is built from (C_n,t_n,q_n) only, and is abelian with exact evaluation (det-sp-coefficient-towers-abelian). 3-4. lem-coef-semilinear-derived-sections gives derived tensor by K-flat resolutions and total complexes with no flatness of transitions. The differentials and signs of the total complex match def-pc-tensor-complex-sheaves. 5. def-sp-varying-ring-operations gives sections M_n(H×_Y X) and f^* by its adjoint property. lem-pur-varying-ring-tensor-comparison is stated for arbitrary R_n and one fixed adjunction, so the comparisons agree for h=f,j,p. 6. Twists: ℓ is invertible on k-schemes. A_n=O_E/ℓ^n=A_{E,en}, which is locally free of rank one by lem-pur-twist-sheaf-locally-free (3). The hypotheses of lem-pur-signed-line-scalar-tensor-tower hold (finite limits, final object, local rank one, scalar-extension b_ij), and it supplies the signed powers, the quotient transitions and μ^{a,b}. 7. The same j,p remain a compactification after retagging (compose the equations with Spec σ). det-sp-tower-injective-components computes Rp_{*,•} on D^+, and j_! is exact. This is consistent with F_f on D^+ in det-sp-tower-shriek-levels. 8. lem-sf-open-tensor-normalization characterizes γ by its adjunct inverse, and its last paragraph covers arbitrary strict systems. 9. Constructibility, Tor amplitude and the uniform bounds of sk-def-sp-normalized-towers depend only on underlying data. No normalization is used. Edge cases checked: σ=id, X=∅, d=0, towers with zero transitions, ramified ℓ=uϖ^e. A 'retag' grep finds no duplicate: the coefficient-tower-transfer and coordinate-orientation nodes are finite-level statements about orientations and coefficient comparisons, and the tensor-transpose node cites this item. No cycle: the item is not in its own 13146-node closure. Searches are recorded in all three kinds (one LeanSearch run recorded as unavailable, another ran). I accept the seven declared tool_uses as generic black boxes that replace no purity route step: det-sp-coefficient-towers-abelian, lem-coef-semilinear-derived-sections, lem-pur-varying-ring-tensor-comparison, det-sp-tower-injective-components, lem-pur-twist-sheaf-locally-free, lem-pur-signed-line-scalar-tensor-tower and lem-sf-open-tensor-normalization."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerOperationsGroundFieldRetagging",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_operations_ground_field_retagging",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spGroundFieldRetag",
+   "AlgebraicGeometry.ProEtale.spGroundFieldRetagCompactification",
+   "AlgebraicGeometry.ProEtale.spEllTwistQuotient",
+   "AlgebraicGeometry.ProEtale.spEllTwistOne",
+   "AlgebraicGeometry.ProEtale.spEllTwistLine",
+   "AlgebraicGeometry.ProEtale.SpEllTwistComparisons",
+   "AlgebraicGeometry.ProEtale.SpEllTwistComparisonsNormalized",
+   "AlgebraicGeometry.ProEtale.spEllTwistTransition",
+   "AlgebraicGeometry.ProEtale.SpEllTwistProducts",
+   "AlgebraicGeometry.ProEtale.sp_tower_operations_ground_field_retagging"
+  ],
+  "file": "lean/Sheaf/Paper/TowerOperationsGroundFieldRetagging.lean",
+  "statement": "theorem sp_tower_operations_ground_field_retagging (P : PurityFiniteSetting.{u}) (σ : P.field.k ≃ₐ[P.field.k₀] P.field.k) (X Y : Over (Spec (CommRingCat.of P.field.k))) (f : X ⟶ Y) (d : ℕ) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated f.left] [SmoothOfRelativeDimension d f.left] (b : SpTowerShriek.Base P.coefficients.l P.extension) (o : SpTowerShriek.Operations P.coefficients.l P.extension b) (c : Compactification f.left) : (∀ (T : Over (Spec (CommRingCat.of P.field.k))), T = X ∨ T = Y → ((spGroundFieldRetag P σ).obj T).left.ProEt = T.left.ProEt ∧ HEq (ProEt.topology ((spGroundFieldRetag P σ).obj T).left) (ProEt.topology T.left) ∧ HEq (spCoefficientRings P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left) (spCoefficientRings P.coefficients.l P.extension T.left) ∧ HEq (spCoefficientPresheaf P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left) (spCoefficientPresheaf P.coefficients.l P.extension T.left) ∧ spCoefficientTowers P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left = spCoefficientTowers P.coefficients.l P.extension T.left ∧ CochainComplex (spCoefficientTowers P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left) ℤ = CochainComplex (spCoefficientTowers P.coefficients.l P.extension T.left) ℤ ∧ HEq (HomologicalComplex.quasiIso (spCoefficientTowers P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left) (ComplexShape.up ℤ)) (HomologicalComplex.quasiIso (spCoefficientTowers P.coefficients.l P.extension T.left) (ComplexShape.up ℤ)) ∧ HEq (b.calculus ((spGroundFieldRetag P σ).obj T).left) (b.calculus T.left) ∧ (∀ A : SpCoefficientTowersAbelian P.coefficients.l P.extension T.left, spDerivedCoefficientTowers P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left A = spDerivedCoefficientTowers P.coefficients.l P.extension T.left A ∧ HEq (spConstructibleTorTowers P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left A) (spConstructibleTorTowers P.coefficients.l P.extension T.left A) ∧ HEq (spConstructibleTorTowers P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left A).ι (spConstructibleTorTowers P.coefficients.l P.extension T.left A).ι) ∧ HEq (proEtaleRootsOfUnityTower ((spGroundFieldRetag P σ).obj T).left P.coefficients.l Fact.out) (proEtaleRootsOfUnityTower T.left P.coefficients.l Fact.out) ∧ HEq (purTwistIntegralOne ((spGroundFieldRetag P σ).obj T).left P.coefficients.l P.extension) (purTwistIntegralOne T.left P.coefficients.l P.extension) ∧ (∀ n : ℕ, HEq (spEllTwistQuotient P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n) (spEllTwistQuotient P.coefficients.l P.extension T.left n)) ∧ (∀ (n : ℕ) (m : ℤ), HEq (spEllTwistLine P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n m) (spEllTwistLine P.coefficients.l P.extension T.left n m)) ∧ (∀ (n : ℕ) (Bσ : SpEllTwistComparisons P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n) (B : SpEllTwistComparisons P.coefficients.l P.extension T.left n), SpEllTwistComparisonsNormalized P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n Bσ → SpEllTwistComparisonsNormalized P.coefficients.l P.extension T.left n B → HEq Bσ B ∧ ∀ m : ℤ, HEq (spEllTwistTransition P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n Bσ m) (spEllTwistTransition P.coefficients.l P.extension T.left n B m)) ∧ (∀ (n : ℕ) (μσ : SpEllTwistProducts P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n) (μ : SpEllTwistProducts P.coefficients.l P.extension T.left n), SheafOfModules.SignedLineProductNormalized.{u + 1, u, u + 1} (spEllTwistOne P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj T).left n) μσ → SheafOfModules.SignedLineProductNormalized.{u + 1, u, u + 1} (spEllTwistOne P.coefficients.l P.extension T.left n) μ → HEq μσ μ)) ∧ HEq (o.geometry ((spGroundFieldRetag P σ).map f).left) (o.geometry f.left) ∧ HEq (SpTowerShriek.pull P.coefficients.l P.extension b (o.geometry ((spGroundFieldRetag P σ).map f).left)) (SpTowerShriek.pull P.coefficients.l P.extension b (o.geometry f.left)) ∧ HEq (DerivedCategory.Plus.ι (C := SpTowerShriek.S P.coefficients.l P.extension ((spGroundFieldRetag P σ).obj X).left) ⋙ SpTowerShriek.F P.coefficients.l P.extension b o (spGroundFieldRetagCompactification P σ c)) (DerivedCategory.Plus.ι (C := SpTowerShriek.S P.coefficients.l P.extension X.left) ⋙ SpTowerShriek.F P.coefficients.l P.extension b o c) ∧ HEq (o.openOp (spGroundFieldRetagCompactification P σ c).i) (o.openOp c.i) ∧ HEq (o.geometry (spGroundFieldRetagCompactification P σ c).g) (o.geometry c.g) ∧ HEq (o.openTensor (spGroundFieldRetagCompactification P σ c).i) (o.openTensor c.i)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of H2 return on 9ad95781f860: theorem-only statement dependencies are replaced by definition owners for the signed scalar/product predicates and the abelian tower presentation, evaluation and commutative coefficient rings. Both theorem nodes remain unchanged in proof_deps. Lean source and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527254f06",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after the 9ad95781 H2 RETURN. The Lean module is byte-identical (sha c8a72a35) and lean.statement is unchanged and verbatim. The theorem nodes det-sp-coefficient-towers-abelian and lem-pur-signed-line-scalar-tensor-tower are out of stmt_deps and remain in proof_deps. Replaced by four definition owners: def-pur-signed-line-scalar-normalization-data and def-sp-commutative-coefficient-ring-tower (both landed), plus two new existing:true nodes. def-sf-signed-line-product-normalization-data: the statement gives the four SignedLineBasisPowers conditions and the product condition, and the def signature is verbatim with the live l.111. def-sf-coefficient-towers-abelian-presentation: the statement matches every SpCoefficientTowersAbelian field (equivalence and the four HEq pins, Grothendieck, evaluation exactness, HasDerivedCategory, scalar/tensor, ordinaryReduction_eq, reduction_rep, unitor, associator); `structure X` is the live convention; all stmt_deps are definitions; no other live owner. Substance re-read: Over.map Spec σ is a_T ≫ Spec σ; all clauses match; B/μ uniqueness is pinned; edge cases σ=id, empty, d=0, n+1 index, signed m, ramified, zero transitions all hold; universes fine; docstrings and gates pass. Advisory: purTwistIntegralOne, proEtaleRootsOfUnityTower and scalarExtensionEmbedding have owners outside stmt_deps; base-era det-sp-tower-shriek-levels stmt_dep; H9 imports. No compile (no file changed); the worker's scompile is clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T162048-L-238766",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

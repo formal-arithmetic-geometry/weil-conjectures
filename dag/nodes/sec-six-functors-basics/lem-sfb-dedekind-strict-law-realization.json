@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-dedekind-strict-law-realization",
+ "kind": "statement",
+ "title": "Realization of strict birational laws over a Dedekind base",
+ "statement": "Let $R$ be a Noetherian integral domain such that, for every nonzero prime ideal $\\mathfrak p$, $R_{\\mathfrak p}$ is a discrete valuation ring [def-sc-discrete-valuation-ring]. Fields are allowed. Put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $X\\to S$ be a smooth separated morphism of finite presentation with nonempty fibres [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Finite presentation here includes quasi-compactness and quasi-separatedness; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Products are fibre products over $S$ [def-pc-fibre-product]. Call an open $S$-dense if it is dense in each fibre over $S$. An $S$-rational map is a morphism on an $S$-dense open, modulo equality on an $S$-dense common open. An $S$-birational map is represented by an isomorphism between $S$-dense opens.\n\nLet $m:X\\times_SX\\dashrightarrow X$ be an associative $S$-rational law for which $(x,y)\\mapsto(x,m(x,y))$ and $(x,y)\\mapsto(m(x,y),y)$ are $S$-birational. Assume it is strict: there is an open $D$ in its domain such that these two maps restrict to open immersions $D\\to X\\times_SX$, and $D$ and both images are dense in every fibre of each projection $X\\times_SX\\to X$. Then there exist a smooth separated $S$-group scheme $H$ of finite presentation and an open immersion $i:X\\hookrightarrow H$ [def-weil-open-immersion] with $S$-dense image such that the multiplication on $H$ restricts to $m$ as an $S$-rational map. An $S$-group scheme has multiplication, inverse and identity morphisms satisfying the associativity, unit and inverse diagrams. For any two pairs $(H_1,i_1)$ and $(H_2,i_2)$ with these properties there is a unique $S$-group isomorphism $a:H_1\\simeq H_2$ with $a\\circ i_1=i_2$. No affineness, connectedness or reductivity assumption on the groups is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.3, discussion after Example 6.3.12 and before Proposition 6.3.13, printed pp.224--225: field/DVR realization, spreading out and gluing over a Dedekind base. Use the scheme construction and descent route described there. Read online; local PDF WANTED. No Stacks tag states this input."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $K=\\operatorname{Frac}R$ and $\\eta=\\operatorname{Spec}K$. Every non-generic point of $S$ is closed: a strict specialization between two nonzero primes would give a chain of length at least two below the larger prime, whereas its local ring is a DVR of dimension one. The local-ring dimension/generalization-chain formula rules this out. The affine scheme $S$ is Noetherian by its single affine chart and the hypothesis on $R$. Consequently a closed subset missing $\\eta$ is finite, by the finite-closed-points lemma. This also covers the field case, when that subset is empty.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "pqf-def-locnoeth",
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Section 6.3, printed p.225, final paragraph; dimension and finite complement preliminaries"
+   }
+  },
+  {
+   "text": "Base change the strict law to $\\eta$ using the strict-law base-change lemma. Apply the field case of strict-birational-law realization to obtain a smooth separated finite-type $K$-group $H_\\eta$ and a fibrewise dense open immersion $i_\\eta:X_\\eta\\hookrightarrow H_\\eta$ realizing the law. The field is Noetherian, so these finite-type smooth separated objects are of finite presentation: smooth gives local finite presentation, finite type gives quasi-compactness, and separated gives quasi-separatedness.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Section 6.3, printed p.225: solution over the generic point"
+   }
+  },
+  {
+   "text": "Use the inverse system $\\operatorname{Spec}R_f$, $0\\ne f\\in R$, ordered by further localization. It is a small directed system of affine qcqs schemes, with affine transitions and limit $\\operatorname{Spec}K$ (the colimit of these rings is $K$). By finite-presentation spreading, descend $H_\\eta$, then its multiplication, inverse, identity, and $i_\\eta$ with the fixed source $X$. Descend the finitely many associativity, unit and inverse equalities by part (3) of the same theorem, after descending the arrows by part (2); products are their base changes and finite-presentation objects. Obtain a group $H_V$ and $i_V:X_V\\to H_V$ over one principal dense open $V$. Increase the index so that $H_V$ is smooth and separated and $i_V$ is an open immersion, by the three property-descent lemmas. Their qcqs hypotheses hold for finite-presentation objects over the affine stages. Their local finite-presentation hypotheses on arrows hold by the map-over-base lemma and qcqs permanence.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-descend-separated",
+    "lem-weil-pbc-descend-open-immersion-qcqs",
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW/01YX, 01ZM, 0C0C, 01ZQ, 0EUU; spread the finite group diagram and the open chart"
+   }
+  },
+  {
+   "text": "Arrange that $i_V(X_V)$ is dense in every fibre by applying generic-open fibre density to this open in the finite-type scheme $H_V$ and shrinking $V$. Also spread compatibility with the law. The original strictness domain $D\\subset X\\times_SX$ is of finite presentation: the product is smooth and finite type over the Noetherian base, hence Noetherian, and every open immersion into it is quasi-compact; the other finiteness conditions follow from smoothness, from quasi-separatedness of the locally Noetherian scheme $D$, and qcqs permanence. Over $K$, the morphisms $i_\\eta m_\\eta$ and $\\mu_\\eta(i_\\eta\\times i_\\eta)$ on $D_\\eta$ agree on a dense open by realization. The smooth $K$-scheme $D_\\eta$ is reduced; its dense open is schematically dense by the reduced-dense-image lemma, so separated-target uniqueness gives equality on all $D_\\eta$. Part (3) of 01ZM now makes these two morphisms equal on all $D_V$ after shrinking $V$ again. Thus the fixed strictness domain itself witnesses rational compatibility over $V$.",
+   "uses": [
+    "lem-sbc-generic-open-fibre-density",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-pd-spreading-out",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 054X, 01T6, 01ZM, 0EUU; spread the rational compatibility and its fibrewise dense witness"
+   }
+  },
+  {
+   "text": "Let $F=S\\setminus V$; step 1 makes $F$ a finite set of closed points. For each $s\\in F$, put $T_s=\\operatorname{Spec}R_s$. It is the spectrum of a DVR by hypothesis. The base change of the given law to $T_s$ is strict by strict-law base change. The DVR case of realization gives $(H_s,i_s)$ over $T_s$, smooth separated of finite presentation by the same finiteness observation as in step 2. Both $(H_s)_K$ and $H_\\eta$ solve the same strict law on $X_\\eta$; uniqueness in the field case gives their unique group isomorphism identifying the two immersions of $X_\\eta$.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Section 6.3, printed p.225: local DVR solutions and comparison over the generic point"
+   }
+  },
+  {
+   "text": "For $s\\in F$ choose a principal affine neighbourhood $W_s$ avoiding $F\\setminus\\{s\\}$: for every other maximal ideal choose an element in it but outside the ideal of $s$ and take their product. Then $W_s\\setminus\\{s\\}=W_s\\cap V$ and the punctured local spectrum at $s$ is $\\eta$ (a DVR has just its generic and closed points). Apply closed-point finite-presentation patching over the Noetherian affine $W_s$ to $H_V|_{W_s\\cap V}$ and $H_s$, with the generic comparison of step 5. It produces a smooth separated finite-presentation $W_s$-scheme $\\widetilde H_s$. The same equivalence is fully faithful on arrows: glue multiplication from the products, inverse from the group, and identity from the base, whose restrictions match on $\\eta$. The group diagrams hold because the equivalence is faithful. Likewise glue $i_V$ and $i_s$ to an open immersion $\\widetilde i_s:X_{W_s}\\hookrightarrow\\widetilde H_s$, using its open-immersion detection clause. Products have the required restrictions by base change. The patches of $X$ and of the base are their given restrictions, so full faithfulness identifies their glued objects with those objects.",
+   "uses": [
+    "lem-sfb-closed-point-fp-patching",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0BPA and 0EY3; patch group operations and the chart by full faithfulness"
+   }
+  },
+  {
+   "text": "The image of $\\widetilde i_s$ is fibrewise dense: all fibres away from $s$ are those over $V$, and its fibre at $s$ is the one supplied by $i_s$. To check rational compatibility without assuming any descent theorem for rational maps, compare the two everywhere-defined morphisms on $D_{W_s}$ given by $\\widetilde i_s m$ and $\\mu(\\widetilde i_s\\times\\widetilde i_s)$. They agree on $D_{W_s\\cap V}$ by step 4. The base $W_s$ is reduced locally Noetherian, and $D_{W_s}\\to W_s$ is smooth (an open in the smooth product); smooth-reduced-dense-pullback therefore says that $D_{W_s}$ is reduced and that $D_{W_s\\cap V}$ is dense. The dense open is quasi-compact and quasi-separated since $D_{W_s}$ is Noetherian. Reduced-dense-image schematicity makes its inclusion schematically dominant. Separated-target uniqueness gives equality on all $D_{W_s}$. This proves compatibility with $m$ on the original strictness domain, including the special fibre. The domain $D$ is $S$-dense in $X\\times_SX$: for $t\\in S$ and a nonempty open $O\\subset X_t\\times_{\\kappa(t)}X_t$, pick $z\\in O$ and let $x$ be its first projection; then $O$ meets the fibre of the first projection over $x$ in a nonempty open, which meets $D$ by strictness. Hence equality on $D$ is equality of $S$-rational maps.",
+   "uses": [
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Smooth reduction and density, reduced dense opens and separated-target uniqueness; the fixed original strictness domain suffices."
+   }
+  },
+  {
+   "text": "Glue $H_V$ and the $\\widetilde H_s$ along their specified identifications on $W_s\\cap V$. For distinct $s,t$, the intersection $W_s\\cap W_t$ is contained in $V$, so all comparison maps there factor through the same $H_V$ and satisfy the cocycle identity. Zariski gluing gives an $S$-scheme $H$ with these restrictions. Glue the multiplication, inverse, identity and the maps from $X$ by morphism gluing; their equations hold on the covering and hence globally. Smoothness holds by locality on the source after viewing each restriction as a smooth map to its open base and composing with that base open immersion. Separatedness and local finite presentation hold by target-open locality, and quasi-compactness by target-open locality of quasi-compactness; separatedness implies quasi-separatedness. Thus $H$ is smooth separated of finite presentation. The glued map $i:X\\to H$ is an open immersion: it is injective, since two points with the same image lie over the same point of $S$, hence in one patch $X_W$ ($W=V$ or $W_s$), on which $i$ restricts to the injective open immersion into $H_W$; and every point lies in an open $X_W$ whose composite to $H$ is the open immersion $X_W\\hookrightarrow H_W$ followed by the inclusion $H_W\\subset H$. The local-on-source open-immersion criterion applies. Fibrewise density and rational compatibility are verified on those same base patches, using the fixed domain of step 7.",
+   "uses": [
+    "lem-galois-glue",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-sfb-separated-lfp-target-open-locality",
+    "lem-pc-quasi-compact-local-on-target",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-open-immersion-injective-local-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad p.225 gluing; Stacks relative Zariski gluing and locality"
+   }
+  },
+  {
+   "text": "For two resulting pairs, the isomorphism $i_2i_1^{-1}$ between their fibrewise dense open charts is an $S$-birational map compatible with multiplication: use the common fibrewise dense domain where both realize $m$. Rational group-homomorphism extension therefore gives a unique $S$-group isomorphism $a:H_1\\simeq H_2$ restricting to $i_2i_1^{-1}$ on the whole chart. This says $a i_1=i_2$, and the uniqueness clause of the same extension theorem is exactly the required uniqueness. It applies over arbitrary $S$, with no connectedness, reductivity, affineness or field assumption.",
+   "uses": [
+    "lem-sfb-rational-group-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "BLR 5.1 Proposition 3 and Lemma 4, as summarized in Conrad, Section 6.3, printed p.224"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dvr-dimension-one",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "pqf-def-locnoeth",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-sfb-strict-law-base-change",
+  "lem-sfb-strict-birational-law-realization",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-limit-affine-transition",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sbc-generic-open-fibre-density",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-sfb-closed-point-fp-patching",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-galois-glue",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-pc-quasi-compact-local-on-target",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-rational-group-hom-extension",
+  "lem-weil-pbc-open-immersion-injective-local-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.3, printed pp.224-225; Dedekind spreading, local DVR realization and gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated scheme with a strict birational group law over a Dedekind domain embeds in a smooth separated group scheme",
+   "results": "Returned 8 hits; read: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.FormallyUnramified. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing and Lie-algebra results, rational-map definitions, smoothness properties, and unrelated arithmetic results do not give this scheme-theoretic construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue field and discrete valuation ring solutions of a birational group law over a Dedekind scheme",
+   "results": "Returned 8 hits; read: AlgebraicGeometry.ValuativeCommSq.field, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.minimal, WeierstrassCurve.reduction, WeierstrassCurve.Affine.FunctionField. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing and Lie-algebra results, rational-map definitions, smoothness properties, and unrelated arithmetic results do not give this scheme-theoretic construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Birational\"",
+   "results": "Returned 12 hits; read: AlgebraicGeometry.Scheme.Birational, AlgebraicGeometry.Scheme.Birational.refl, AlgebraicGeometry.Scheme.Birational.partialIso, AlgebraicGeometry.Scheme.Birational.symm, AlgebraicGeometry.Scheme.Birational.trans, AlgebraicGeometry.Scheme.BirationalOver.refl, AlgebraicGeometry.Scheme.BirationalOver, AlgebraicGeometry.Scheme.Hom.birational. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing and Lie-algebra results, rational-map definitions, smoothness properties, and unrelated arithmetic results do not give this scheme-theoretic construction"
+  },
+  {
+   "tool": "grep",
+   "query": "(Dedekind|birational).{0,60}(groupScheme|GroupScheme|group law)|birationalGroup",
+   "results": "Returned 0 hits; read: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing and Lie-algebra results, rational-map definitions, smoothness properties, and unrelated arithmetic results do not give this scheme-theoretic construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realization of strict birational group laws over Dedekind schemes",
+   "results": "Returned 8 hits; read: IsDedekindDomain.primesOverEquivPrimesOver, AlgebraicGeometry.Scheme.PartialMap.noConfusionType, IsDedekindDomainInv.commGroupWithZero, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver, AlgebraicGeometry.Scheme.RationalMap.IsOver, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.instHasStrictInitialObjectsScheme. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing and Lie-algebra results, rational-map definitions, smoothness properties, and unrelated arithmetic results do not give this scheme-theoretic construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-birational-integral-envelope",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Section 6.3, Proposition 6.3.4, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13 and the following paragraph, equation (6.3.5), printed pp.214--227; root-cell construction and smooth birational envelope before fibral semisimplicity; Section 6.3, discussion after Example 6.3.12 and before Proposition 6.3.13, printed pp.224--225: field/DVR realization, spreading out and gluing over a Dedekind base. Use the scheme construction and descent route described there.",
+   "via": [
+    "lem-sfb-chevalley-birational-integral-envelope",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-strict-law-realization",
+  "worker": "stage1",
+  "summary": "Reused the existing field/DVR realization, group-homomorphism extension, finite-presentation spreading and closed-point patching nodes. Made the finite group diagram, open chart, dense rational compatibility witnesses and gluing explicit; no new nodes or changed statement.",
+  "blueprint": "Supporting input of the inherited det-thm-sf-ctf-stability-direct-images (3) ancestry: Conrad Section 6.3 p.225 Dedekind spreading and gluing. The latest blueprint changes the upper direct-image proof; this subordinate input retains its assigned scheme-construction route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-separated",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-open-immersion-qcqs",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-sbc-generic-open-fibre-density",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lemma-nagata-reduced-dense-image-schematic",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   },
+   {
+    "node": "lem-galois-glue",
+    "why": "Generic scheme-theoretic tool for the explicit Dedekind spreading/gluing proof; it does not replace a step of the assigned unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-weil-pbc-limit-affine-transition",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-sbc-generic-open-fibre-density",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-pc-proper-base-change",
+  "lem-galois-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-5aeb88610",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-5aeb88610 (reviewer sub-agent of L); spot-checked: Read the item and all 34 cited statements, plus Conrad's Luminy notes §6.3 pp.224–225 (definition of a solution, Example 6.3.12, the strict definition, and the Dedekind paragraph before Prop 6.3.13: field/DVR solution, spread to dense V, limit reduction to the DVR case at finitely many closed points). Steps 1–9 follow this route and write out the 'limit considerations': 01ZM spreading over Spec R_f, generic-open fibre density, closed-point fp patching on D(g) with W_s∩F={s} and punctured local spectrum Spec K, then Zariski glue. Rational compatibility is proved on the fixed strictness domain D via smooth-reduced-dense-pullback, the Nagata schematic-density lemma and the separated-target lemma; uniqueness comes from rational-group-hom-extension. Hypotheses check: qcqs stages and lfp arrows for the descent lemmas, Noetherian/qc for D, the DVR at s, and the patching triple's α as a group iso compatible with the immersions. Edge cases: R a field (F empty), R a DVR. Statement unchanged; no new nodes; no duplicate found by rg over the snapshot DAG. Batch-5: lem-trf-smooth-reduced-dense-pullback, lem-trf-smooth-composition, and the closures through lem-trf-invariant-open-image-pullback (fpqc invariant-open descent) are generic scheme facts, not steps of the trace formula or Poincaré duality, so they are accepted. All 13 declared tool_uses are accepted as generic black boxes. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dedekind-strict-law-realization.json: (1) step 4 cites lem-weil-pbc-locally-noetherian-quasi-separated for D being quasi-separated; (2) step 7 adds the elementary proof that D is S-dense in X×_SX (strictness only gives density in the projection fibres), which steps 8 and 9 need for rational equality; (3) step 8 replaces the unsupported 'open immersion over each patch' with injectivity plus local composites and cites the Mathlib leaf lem-weil-pbc-open-immersion-injective-local-source.; 1 file(s) fixed by the reviewer"
+ }
+}

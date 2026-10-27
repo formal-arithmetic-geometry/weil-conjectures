@@ -1,0 +1,20 @@
+--- a/lean/Sheaf/Paper/ScalarEvaluationTransposeExistence.lean
++++ b/lean/Sheaf/Paper/ScalarEvaluationTransposeExistence.lean
+@@ -75,7 +75,7 @@
+       SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hR.symm) ≅
+       SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hS.symm) ⋙
+         SheafOfModules.restrictScalars ψ)
+-    (hδ : ∀ (N : SheafOfModules.{max c v r} S) (U : C)
++    (_hδ : ∀ (N : SheafOfModules.{max c v r} S) (U : C)
+       (x : ((SheafOfModules.restrictScalars φ).obj N).val.obj (Opposite.op (n, U))),
+       ((δ.hom.app N).val.app (Opposite.op U)) x = x) :
+     IsIso ((mateEquiv adj adjn).symm (TwoSquare.mk _ _ _ _ δ.hom)).natTrans := by
+@@ -85,7 +85,7 @@
+     change (𝟭 (ℕ × C)).IsContinuous _ _
+     infer_instance
+   exact WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
+-    J J (𝟭 C) R S n φ Rn Sn hR hS ψ E En adj adjn δ hδ
++    J J (𝟭 C) R S n φ Rn Sn hR hS ψ E En adj adjn δ
+ 
+ section
+ universe a av b bv cv d dv a' av' b' bv' c' cv' d' dv'

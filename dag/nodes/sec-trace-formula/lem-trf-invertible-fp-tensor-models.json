@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-invertible-fp-tensor-models",
+ "kind": "statement",
+ "title": "Finite-presentation tensor models for an invertible module and its dual",
+ "statement": "Let $I$ be a small nonempty directed set, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i:Z\\to Z_i$ be its limit in the category of schemes [def-pc-scheme]. Here being a limit means $q_{ji}\\circ q_j=q_i$ for $j\\geq i$, and for every scheme $T$ and family $t_i:T\\to Z_i$ satisfying $q_{ji}\\circ t_j=t_i$ there is a unique morphism $t:T\\to Z$ with $q_i\\circ t=t_i$ for every $i$. For a sheaf of modules [def-weil-sheaf-of-modules-category], finite presentation means that every point has an open neighbourhood $U$ on which there is an exact sequence $\\mathcal O_U^m\\to\\mathcal O_U^n\\to F|_U\\to0$ for finite $m,n$. All pullbacks are tensor pullbacks [def-pc-module-pullback], with iterated pullbacks identified by their canonical composition isomorphisms. Let $L$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module] and put $N=L^\\vee=\\mathcal Hom_{\\mathcal O_Z}(L,\\mathcal O_Z)$. Then $N$ is invertible, $L$ and $N$ are finitely presented, and evaluation $e:L\\otimes N\\to\\mathcal O_Z$ is an isomorphism. There exist $i\\in I$, finitely presented $\\mathcal O_{Z_i}$-modules $A_i,B_i$, and isomorphisms $a:q_i^*A_i\\xrightarrow{\\sim}L$, $b:q_i^*B_i\\xrightarrow{\\sim}N$. The sheaves $P_i=A_i\\otimes_{\\mathcal O_{Z_i}}B_i$ and $\\mathcal O_{Z_i}$ are finitely presented. Here $\\otimes$ is the sheaf tensor product [def-pur-sheaf-tensor-product]. The composite $$\\epsilon:q_i^*P_i\\xrightarrow{\\sim}q_i^*A_i\\otimes q_i^*B_i\\xrightarrow{a\\otimes b}L\\otimes N\\xrightarrow{e}\\mathcal O_Z$$ is an isomorphism, where the first arrow is the canonical pullback-tensor comparison. Neither invertibility nor local freeness of $A_i$ or $B_i$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), simultaneous models and the evaluation before map descent; modules.tex Tags 01CT, lemma-constructions-invertible (2), and 01CE, lemma-tensor-product-permanence (4)."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-tensor-dual-invertible] with $\\mathcal M=\\mathcal N=L$: its dual clause makes $N=L^\\vee$ invertible and its evaluation clause gives the specified isomorphism $e:L\\otimes N\\to\\mathcal O_Z$. By [def-sc-invertible-module], each of $L,N$ is locally isomorphic to $\\mathcal O_Z$. On a trivializing open, the sequence $\\mathcal O^0\\to\\mathcal O\\xrightarrow{\\sim}L\\to0$ (and likewise for $N$) is a finite presentation. This proves all the assertions about $L,N,e$ before descent.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CT, modules-lemma-constructions-invertible (2); rank-one local trivializations."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-trf-fp-modules-affine-limit-descent] separately to $L$ and $N$. It gives indices $r,s$, finitely presented models $A_r,B_s$, and pullback isomorphisms to $L,N$. Choose a common upper bound $i\\geq r,s$ by directedness, and put $A_i=q_{ir}^*A_r$, $B_i=q_{is}^*B_s$. Both are finitely presented by [lem-pc-tensor-pullback-finite-presentation], which requires no flatness. The composition isomorphisms of [def-pc-module-pullback] identify $q_i^*A_i$ with $q_r^*A_r$, and $q_i^*B_i$ with $q_s^*B_s$, since $q_{ir}\\circ q_i=q_r$ and $q_{is}\\circ q_i=q_s$. Compose with the chosen isomorphisms to obtain $a,b$. All qcqs and affine-transition hypotheses of the descent lemma are precisely the hypotheses of this item.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, limits-lemma-descend-modules-finite-presentation (1); Tag 0B8W, limits-lemma-descend-invertible-modules, proof of (2)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fp-sheaf-tensor-product] on $Z_i$ to the finitely presented $A_i,B_i$. It gives finite presentation of $P_i=A_i\\otimes B_i$, without an invertibility or flatness hypothesis on either factor. The structure module has the global finite presentation $\\mathcal O_{Z_i}^0\\to\\mathcal O_{Z_i}\\xrightarrow{1}\\mathcal O_{Z_i}\\to0$.",
+   "uses": [
+    "lem-trf-fp-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CE, modules-lemma-tensor-product-permanence (4)."
+   }
+  },
+  {
+   "text": "The canonical isomorphism of [lem-weil-pbc-module-pullback-tensor], applied to $q_i,A_i,B_i$, gives $q_i^*P_i\\cong q_i^*A_i\\otimes q_i^*B_i$. Tensoring the isomorphisms $a,b$ gives an isomorphism: the tensor of their inverses is its inverse by functoriality of tensor. Composing with $e$ gives exactly the displayed $\\epsilon$, so $\\epsilon$ is an isomorphism. This only uses the evaluation isomorphism on the limit and makes no assertion that either finite-stage model is locally free.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, limits-lemma-descend-invertible-modules, proof of (2), evaluation before map descent; Modules Tag 01CD, modules-lemma-tensor-product-pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-invertible-module",
+  "lem-trf-fp-modules-affine-limit-descent",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "def-pc-module-pullback",
+  "lem-trf-fp-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 0B8W (limits-lemma-descend-invertible-modules), proof of (2), and 01ZR(1); modules.tex Tags 01CT(2) and 01CE(4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "invertible.*(limit|descend)|finite.*presentation.*tensor|tensor.*finite.*presentation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "grep",
+   "query": "IsInvertible|invertible|[Ll]imit.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Ll]imit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a qcqs scheme inverse limit with affine transitions has finitely presented models for itself and its dual at a common stage with finitely presented tensor product and evaluation isomorphism after pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles admit simultaneous finitely presented approximations with their tensor inverses over inverse limits of schemes with affine transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend a line bundle and its dual to finitely presented module sheaves on one stage of an affine transition inverse limit",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsInvertible",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'SheafOfModules.IsInvertible'",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern structure-sheaf sections, finite-presentation definitions, free sheaf comparisons or condensed locally constant sheaves; none supplies the stated simultaneous models or finite-stage module isomorphism descent."
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*(descend|limit)|finite.*presentation.*tensor|tensor.*finite.*presentation",
+   "results": "7 hits: Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module duals, sheaf predicates, pullback functors or structure-sheaf section descent, not simultaneous sheaf models at a common scheme stage."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, \"pullback\"",
+   "results": "10 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module duals, sheaf predicates, pullback functors or structure-sheaf section descent, not simultaneous sheaf models at a common scheme stage."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf and its dual on an inverse limit of qcqs schemes with affine transition morphisms descend to finitely presented module sheaves at one stage",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module duals, sheaf predicates, pullback functors or structure-sheaf section descent, not simultaneous sheaf models at a common scheme stage."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles admit simultaneous finite presentation models and tensor evaluation over inverse limits with affine transition maps",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module duals, sheaf predicates, pullback functors or structure-sheaf section descent, not simultaneous sheaf models at a common scheme stage."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible module and its dual have finitely presented models on a common stage of an inverse limit of quasi compact quasi separated schemes with affine transition maps",
+   "results": "8 hits: Module.dual_finite, SheafOfModules.IsFinitePresentation.mk, Module.Invertible.instDual, Module.finite_dual_iff, Module.Invertible.instFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.Invertible.linearEquivDual, CommRing.Pic.inv_eq_dual",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module duals, sheaf predicates, pullback functors or structure-sheaf section descent, not simultaneous sheaf models at a common scheme stage."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-invertible-affine-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Extracted subargument: The line-bundle approximation inside the fibrewise ampleness input: dual inverse, common finite-presentation stage, tensor presentation, and limit evaluation comparison (old item steps 1--3 and the opening of step 4).",
+   "via": [
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-invertible-fp-tensor-models",
+  "worker": "stage1",
+  "summary": "Retained the statement. Four steps give the dual and its evaluation, separate finite-presentation descent followed by a directed common upper bound, tensor finite presentation, and the canonical limit evaluation composite. Reused the existing general 01ZR descent and pullback results. Created one general scheme-sheaf tensor-permanence node (01CE(4)), after searches; no new Mathlib leaf or exact project attachment found.",
+  "blueprint": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Extracted subargument: The line-bundle approximation inside the fibrewise ampleness input: dual inverse, common finite-presentation stage, tensor presentation, and limit evaluation comparison (old item steps 1--3 and the opening of step 4).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Generic dual and evaluation theorem for invertible modules; the trace-formula unit has no statement supplying these module facts."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic preservation of finite presentations by arbitrary tensor pullback, used to put the two models at a common stage; the unit supplies no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-dual-invertible",
+  "lem-pc-tensor-pullback-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-e28c3b49d",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-e28c3b49d (reviewer sub-agent of L); spot-checked: First delivery: the item is still unsplit with an empty proof on live and side-live. The statement, stmt_deps, source and blueprint are identical to live. Four steps, checked against Stacks. (1) lem-pc-tensor-dual-invertible with M=L gives N=L^vee invertible and e:L⊗N→O an isomorphism, matching 01CT(2) at modules.tex:4207. Local rank-one triviality gives the finite presentation O^0→O→L→0. (2) lem-trf-fp-modules-affine-limit-descent clause (1) matches 01ZR(1) at limits.tex:2558, and its hypotheses are exactly the item's. A common upper bound comes from directedness. lem-pc-tensor-pullback-finite-presentation (01BQ, no flatness needed) and the def-pc-module-pullback composition isomorphisms give a and b, with the indices oriented correctly. (3) The new node gives P_i finitely presented. (4) lem-weil-pbc-module-pullback-tensor (01CD at modules.tex:2393) applies to arbitrary modules; a⊗b is an isomorphism by bifunctoriality, so ε is one; no finite-stage model is claimed locally free. New node lem-trf-fp-sheaf-tensor-product is Stacks 01CE(4) at modules.tex:2450, restricted to schemes. It is true and self-contained, defines finite presentation inline, and has no proof fields. Small cases checked: a zero factor, O/(t)⊗O/(t) on k[t] (non-flat factors) and the empty scheme. It is a generic input, not a restated clause of the item. Duplicate search over all DAG nodes (01CE, tensor-product-permanence, finite-presentation with tensor) found only ring-level, pro-étale ring-object or pullback results. No SGA anywhere. Both tool_uses accepted. Proof_deps equal the union of uses. Base-era note, not this delivery's fault: lem-pc-tensor-pullback-finite-presentation cites the ring-module definition def-sc-finitely-presented-module for a sheaf notion. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleFpTensorModels",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invertible_fp_tensor_models",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleFpTensorModels.lean",
+  "statement": "theorem invertible_fp_tensor_models {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (L : c.pt.Modules) [L.IsInvertible] : (dual L).IsInvertible ∧ L.IsFinitePresentation ∧ (dual L).IsFinitePresentation ∧ IsIso (dualEvaluation L) ∧ ∃ (i : I) (A B : (D.obj (op i)).Modules), A.IsFinitePresentation ∧ B.IsFinitePresentation ∧ ∃ (a : (tensorPullback (c.π.app (op i))).obj A ≅ L) (b : (tensorPullback (c.π.app (op i))).obj B ≅ dual L), (A ⊗ B).IsFinitePresentation ∧ (𝟙_ (D.obj (op i)).Modules).IsFinitePresentation ∧ IsIso ((Classical.choose (module_pullback_tensor (c.π.app (op i))) A B).hom ≫ (a.hom ⊗ₘ b.hom) ≫ dualEvaluation L)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20190788a",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Item node differs from live only in lean; the 8 stmt_dep nodes are unchanged; statement verbatim, max line 92, one sorry, no defs. Clause check: I is Type u, Preorder, Nonempty, IsDirected; D : Iᵒᵖ ⥤ Scheme.{u} with CompactSpace, QuasiSeparatedSpace and IsAffineHom on transitions; Cone + IsLimit; L IsInvertible; N = dual L (internal Hom into the unit); conjuncts give N invertible, L and N IsFinitePresentation (Mathlib), IsIso dualEvaluation (actual evaluation); ∃ i A B fp with a : q_i^*A ≅ L and b : q_i^*B ≅ dual L via tensorPullback; (A⊗B) and 𝟙 fp; IsIso(choose(module_pullback_tensor) ≫ a⊗b ≫ dualEvaluation) in the node's order. No extra hypotheses; hypothesis block identical to the landed parent invertible_affine_limit_descent. Edge cases (singleton I, empty schemes, zero modules, any characteristic, non-invertible models) covered. No duplicate; imports exist and none is quarantined; docstrings give source place, blueprint id and 4 proof steps; report has Worker report and Second reading. Advisory: module_pullback_tensor .choose is canonical (pinned by naturality and the section formula with the unit normalized at 1⊗m) and its node is a proof_dep, not a stmt_dep (def-less theorem, Q38/Q139 precedent); second reading done by the author. Not compiled, per instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261027T094506-L-234559",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.invertible_fp_tensor_models"
+  ],
+  "sorry_after": []
+ }
+}

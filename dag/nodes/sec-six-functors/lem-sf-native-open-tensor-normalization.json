@@ -1,0 +1,161 @@
+{
+ "id": "lem-sf-native-open-tensor-normalization",
+ "kind": "statement",
+ "title": "Unit and forgetting normalization of the native open tensor",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and an open immersion $j:U\\to Z$ between separated finite-type $k_0$-schemes, in the native framework of [def-sf-native-weil-derived-framework]. Use the tensor operations of [def-sf-derived-weil-category-and-operations], native data of [def-sf-native-open-tensor-presentation-data], generic presentations and normalization predicates of [def-sf-generic-open-tensor-presentation], concrete operations of [def-sf-native-open-tensor-operations] and forgetting comparison of [lem-sf-weil-native-closed-forgetful]. Let $s$ be a native sheaf tensor datum and let $\\rho,\\gamma,c$ be any localized presentation satisfying exactly the native-operation and comparison equalities of [lem-sf-native-open-tensor-localization]. Then the inverse of $\\gamma$ is the open-unit transpose under $s$'s exact-derived adjunction and $\\rho$. Moreover there exists OpenTensorForgetData for these fixed comparisons and the actual ordinary adic open extension/restriction: an ordinary restriction comparison agreeing on forgotten inputs under the fixed native tensor comparisons, a unit-normalized ordinary open tensor isomorphism, and the prescribed forward forgetting square. This is solely a normalization assertion about supplied comparisons; it does not construct sheaf, chain or derived tensor isomorphisms.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-open-tensor-presentation-data",
+  "def-sf-generic-open-tensor-presentation",
+  "def-sf-native-open-tensor-operations",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-native-open-tensor-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tags 0E8I and 015F; native parent proof steps 7--8"
+ },
+ "proof": [
+  {
+   "text": "The sheaf inverse-unit equation is part of s. The supplied presentation pins both chain comparisons on all sheaf summands and both derived comparisons on all K-flat representatives. The exact-derived adjunction localizes this same unit and counit with the standard exact-functor factors. Totalize the sheaf inverse-unit equality on every summand, then use the two representative squares to localize it. The localization universal property extends the derived equation from K-flat representatives to arbitrary objects. This is precisely the inverse-unit conclusion for the supplied rho and gamma.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  },
+  {
+   "text": "Forgetting the prescribed equivariant sheaf maps gives the balanced ordinary restriction and open tensor maps, including their inverse-unit formula. Equivariant flat-term K-flat resolutions forget to ordinary K-flat resolutions by the resolution theorem. Under the fixed native closed tensor comparison and the actual exact-open forgetting factorization isomorphisms, the supplied representative squares therefore identify the forgotten maps with those ordinary localized maps. The ordinary open tensor theorem characterizes its inverse by the same unit transpose. Taking inverses gives the forward forgetting square; the restriction compatibility square holds on the same pure-tensor summands and hence after localization. These data form OpenTensorForgetData. No arbitrary derived arrow is lifted by conservativity.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-exact-derived-adjunction",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native equivariant refinement of Stacks 0GL1/0E8I; parent argument steps 7, 8; full proof in Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived tensor products for an open immersion of Frobenius equivariant module sheaves",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenDerivedTensor",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native open factor of fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection; native parent steps 7, 8",
+   "via": [
+    "lem-sf-native-open-derived-tensor",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorNormalization",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_tensor_normalization",
+  "statement": "theorem native_open_tensor_normalization (s : NativeOpenTensorData k₀ l j)\n    (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅\n      (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)\n    (gamma : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j)\n    (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z))\n    (_hc :\n      HEq c.E (extensionByZero k₀ l j) ∧ HEq c.R (upperStar k₀ l j) ∧\n      HEq c.SA (nativeOpenSheafTensor k₀ l U) ∧ HEq c.SB (nativeOpenSheafTensor k₀ l Z) ∧\n      HEq c.TA (nativeTensorTotal k₀ l U) ∧ HEq c.TB (nativeTensorTotal k₀ l Z) ∧\n      HEq c.DA (nativeDerivedTensor k₀ l U) ∧ HEq c.DB (nativeDerivedTensor k₀ l Z) ∧\n      HEq c.flatA (NativeIsKFlat k₀ l U) ∧ HEq c.flatB (NativeIsKFlat k₀ l Z) ∧\n      HEq c.modelA (nativeOpenTensorModel k₀ l U) ∧\n      HEq c.modelB (nativeOpenTensorModel k₀ l Z) ∧\n      HEq c.iA (nativeOpenTensorInsertion k₀ l U) ∧\n      HEq c.iB (nativeOpenTensorInsertion k₀ l Z) ∧\n      HEq c.sheafGamma s.sheafGamma ∧ HEq c.gamma gamma ∧\n      HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction rho) :\n    OpenTensorUnitNormalization\n    (nativeOpenExtension k₀ l j) (nativeOpenPull k₀ l j)\n    (nativeDerivedTensor k₀ l U) (nativeDerivedTensor k₀ l Z)\n    s.adj.mapExactDerivedCategory rho gamma\n      ∧ Nonempty (OpenTensorForgetData\n    (nativeOpenExtension k₀ l j) (nativeOpenPull k₀ l j)\n    (ProEtale.adicOpenImmersionLowerShriek l\n      (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory\n    (ProEtale.adicUpperStar l\n      (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapDerivedCategory\n    (nativeForget k₀ l U) (nativeForget k₀ l Z)\n    (nativeDerivedTensor k₀ l U) (nativeDerivedTensor k₀ l Z)\n    (nativeDerivedClosedComparison k₀ l U).ordinaryClosed.tensor\n    (nativeDerivedClosedComparison k₀ l Z).ordinaryClosed.tensor\n    (nativeOpenForgetExtension k₀ l j) (nativeOpenForgetPull k₀ l j)\n    (nativeDerivedClosedComparison k₀ l U).tensorComparison\n    (nativeDerivedClosedComparison k₀ l Z).tensorComparison\n    (ProEtale.adicOpenImmersionLowerShriekAdjunction l\n      (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapExactDerivedCategory\n      rho gamma)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-open-tensor-normalization",
+  "worker": "G7 stage3",
+  "summary": "A strict part of the existing native open argument; full source proof in docstring, statement tested at the empty open, identity open, zero inputs and unbounded complexes.",
+  "blueprint": "Retains the native open factor in Step 1, second Hom bijection of fix-lem-tensor-adjunction.proof.md. No unit route is bypassed.",
+  "tool_uses": [
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

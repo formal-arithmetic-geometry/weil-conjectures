@@ -1,0 +1,106 @@
+{
+ "id": "def-per-scheme-action-fixed-ideal",
+ "kind": "definition",
+ "title": "The fixed ideal of a subgroup of scheme automorphisms",
+ "statement": "Let $X$ be a separated scheme [def-pc-scheme], [def-weil-proper-morphism], let $G$ be a group acting on $X$ by scheme automorphisms $a_g$, and let $K\\leq G$. For each $g\\in K$, let $e_g:E_g\\to X$ be the equalizer of $a_g$ and $\\operatorname{id}_X$. Define the fixed ideal $\\mathcal I_K=\\sum_{g\\in K}\\ker(\\mathcal O_X\\to(e_g)_*\\mathcal O_{E_g})$, using the closed-immersion ideal sheaf of [def-sbc-closed-immersion-ideal-sheaf]. The associated closed subscheme $V(\\mathcal I_K)$ is denoted $X^K$: this is the scheme-theoretic intersection of these equalizers, retaining their nonreduced structures.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 4.1--4.2, printed pp.76--77 (fixed scheme equalizers and their difference ideals), and VI 4.7--4.8, printed p.79 (the subgroup fixed center)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fixed subscheme of a group of scheme automorphisms is defined by the sum of the ideals of their equalizers with the identity",
+   "results": "OK 8 hits: FixedPoints.subalgebra, FixedPoints.subring, FixedPoints.subgroup, FixedPoints.subfield, IntermediateField.fixedField, fixingSubgroup, Representation.invariants_eq_inter, mem_fixingAddSubgroup_iff. These are invariant subobjects or pointwise fixed sets, not the closed fixed-scheme ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed closed subscheme ideal of an abstract finite group action on a separated scheme",
+   "results": "OK 8 hits: finite_compl_fixedBy_closure_iff, FixedPoints.isSeparable, Rep.invariantsFunctor_obj_carrier, IntermediateField.fixingSubgroup_isClosed, FixedPoints.normal, Algebra.IsInvariant.isIntegral, FixedPoints.isIntegral, Rep.quotientToInvariantsFunctor_obj_V. None defines the fixed closed subscheme ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedSubscheme|fixedIdeal|FixedIdeal|equalizer.*ker",
+   "results": "msearch AlgebraicGeometry: OK 0 hits. Direct rg of WeilConjectures and Sheaf found GabberModification.FixedIdeal only: a functor-of-points predicate for an FSLogGroupAction, not an ideal construction for an ordinary scheme action. TraceFixedScheme is a correspondence over a finite field, not this group-action notion. DAG definition search found those same log/correspondence nodes; blueprint_refs.py search fixed subscheme returned 0 blueprint matches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-commutator-blowup-inertia-drop",
+  "date": "2026-10-24",
+  "group": "Q127"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3, geometric equivariant modification through XVI 3.7; the VIII 4.2.13 use of the commutator fixed center in VI Proposition 4.8. Defines that center for ordinary schemes without a log structure.",
+   "via": [
+    "lem-per-commutator-blowup-inertia-drop",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeActionFixedIdeal",
+  "declaration": "AlgebraicGeometry.schemeActionFixedIdeal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeActionFixedIdeal.lean",
+  "statement": "def schemeActionFixedIdeal {G : Type v} [Group G] {X : Scheme.{u}} [X.IsSeparated] (a : G →* Aut X) (K : Subgroup G) : X.IdealSheafData",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42f1cecdb",
+  "group": "Q127",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42f1cecdb",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_dep records, both modules, report, ILO VI 3.1/4.2/4.7/Prop 4.8 and blowup universal-property signatures. Lean matches every hypothesis (Noetherian regular separated, tame = IsUnit of geometric stabilizer card, generically free on a dense invariant open, H = geometric stabilizer, nonabelian, K = ⁅H,H⁆, center pinned by hI to schemeActionFixedIdeal) and every clause (lifted H →* Aut blowup over blowupMap, which is unique by hom_ext; proper inertia at all geometric points over x̄ via an arbitrary field extension s; for normal maximally dominating equivariant W with invertible comap: ∃! factor, equivariance, proper inertia). New def = ⨆ ker of equalizer.ι (affine-wise ideal sum, honest kernel since separated), not hollow, fields per H12. Duplicate search: GabberModification.FixedIdeal (log predicate) and def-trf-fixed-scheme (single endomorphism over a finite field) are different notions. Item changes only lean and stmt_deps (new node plus 3 nodes with Lean records, allowed by brief-stage2 l.177). Docstrings, imports, line lengths OK; one sorry. No compile run since nothing changed. Advisory: the second-reading section is a thin same-worker reading."
+ }
+}

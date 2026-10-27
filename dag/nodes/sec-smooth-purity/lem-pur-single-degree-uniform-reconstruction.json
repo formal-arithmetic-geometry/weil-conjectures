@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-single-degree-uniform-reconstruction",
+ "kind": "statement",
+ "title": "Constructible complete reconstruction in one degree",
+ "statement": "Let T be a Noetherian finite-type scheme over a field, d an adic coefficient datum, M an adic tower and W common uniform local models on a stratification S with lower=upper=q0. Assume every level has intrinsically constructible coefficient cohomology and vanishes away from q0. Then the actual uniformReconstructionLimit is bounded constructible complete, its canonical projection-induced counits are isomorphisms compatible with every quotient normalization, and its cohomology vanishes away from q0. Uses [def-weil-pbc-adic-coefficient-datum], [def-weil-pbc-bounded-constructible-tower], [def-weil-pbc-bounded-constructible-complete].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2, common local models, normalized finite tower and adic reconstruction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof": [
+  {
+   "text": "Apply reconstructionUniformTower to the supplied common W. It returns intrinsic completeness, invertible actual counits, all comparable-pair normalization squares and the model bounds.",
+   "uses": [
+    "lem-weil-pbc-reconstruction-uniform-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite generation of the ideal to choose its finite generating family. The proved wfPresentation_of_complete transfers intrinsic completeness to the complete-category presentation. Transport constructible cohomology and the equal level bounds to the actual reductions along the canonical counit isomorphisms. The proved boundedConstructible_of_reductionControl supplies compatible etale origins and constructible completeness.",
+   "uses": [
+    "def-wf-tensor-product",
+    "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+    "lem-weil-pbc-actual-coefficient-constructible-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The common lower and upper model bounds both equal q0, so reconstruction bounds imply all other cohomology objects are zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reconstruction-uniform-tower",
+  "def-wf-tensor-product",
+  "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+  "lem-weil-pbc-actual-coefficient-constructible-preservation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2, common local models, normalized finite tower and adic reconstruction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit root of unity line tensor powers have normalized strict quotient towers and common local models",
+   "results": "BDeRhamPlus; generic adic completion tensor equivalences and quotient transition formulas",
+   "date": "2026-10-25",
+   "verdict": "No theorem on normalized pro-etale derived towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp and presheaf composition formulas",
+   "date": "2026-10-25",
+   "verdict": "Composition tools only; no tower reconstruction or source unit coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorIso.*unit|unit.*tensorIso|adic.*reconstruction|root.*tower",
+   "results": "Generic scalar-tower and root polynomial lemmas; no matching sheaf theorem. Also searched both project roots.",
+   "date": "2026-10-25",
+   "verdict": "Use project declarations for the relevant geometric and categorical ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized inverse system of roots of unity sheaves has a complete constructible derived limit with canonical finite coefficient reductions",
+   "results": "InverseSystem.limit, InverseSystem.mk, SheafOfModules.hasLimitsOfShape, ProfiniteGrp.isIso_toLimit, instHasLimitsCondensedMod",
+   "date": "2026-10-25",
+   "verdict": "Only generic limits, inverse systems and profinite results. None proves the specified root projection, unit coherence or constructible-complete reconstruction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedTateIntegralTower",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2, common local models, normalized finite tower and adic reconstruction",
+   "via": [
+    "lem-pur-condensed-tate-integral-tower",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SingleDegreeUniformReconstruction",
+  "file": "lean/Sheaf/Paper/SingleDegreeUniformReconstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singleDegreeUniformReconstruction",
+  "statement": "theorem singleDegreeUniformReconstruction\n    {k : Type u} [Field k] (T : Scheme.{u}) [IsNoetherian T]\n    (fT : T ⟶ Spec (.of k)) (hT : LocallyOfFiniteType fT ∧ QuasiCompact fT)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (M : AdicTower T d) (S : Stratification T) (W : UniformAdicTowerData d M S)\n    (q₀ : ℤ) (hlower : W.lower = q₀) (hupper : W.upper = q₀)\n    (hc : ∀ (n : ℕ) (q : ℤ),\n      @IsConstructibleProEtaleCoefficientModuleSheaf T (A ⧸ d.ideal ^ (n + 1)) _\n        (d.quotientFinite n)\n        ((pbcRestrict (pbcLevelConstantComparison T d n).hom).obj\n          ((DerivedCategory.homologyFunctor _ q).obj (M.level n))))\n    (hz : ∀ (n : ℕ) (q : ℤ), q ≠ q₀ →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n))) :\n    PbcIsBoundedConstructibleComplete T d (uniformReconstructionLimit d M) ∧\n    (∀ n : ℕ, IsIso (uniformReconstructionCounit d M n)) ∧\n    (∀ (b a : ℕ) (hab : a ≤ b),\n      (pbcDerivedExtend (pbcAdicQuotient T d b a hab)).map\n          (uniformReconstructionCounit d M b) ≫ (M.normalization b a hab).hom =\n        (pbcReductionNormalization (pbcAdicProjection T d b)\n          (pbcAdicQuotient T d b a hab) (pbcAdicProjection T d a)\n          (pbcAdicProjection_comp T d b a hab)\n          (uniformReconstructionLimit d M)).hom ≫ uniformReconstructionCounit d M a) ∧\n    ∀ q : ℤ, q ≠ q₀ → IsZero ((DerivedCategory.homologyFunctor _ q).obj\n      (uniformReconstructionLimit d M))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-feced",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261025T002531-L-3126547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-feced",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261025T002531-L-3126547",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-pur-condensed-tate-integral-tower plan and new nodes; extracted data module diffed against the old item (bodies identical); the two remaining sorry statements read against FiniteSmoothCoefficientArrows/FiniteSmoothPurityMaps definitions; node proof_deps vs Lean"
+ }
+}

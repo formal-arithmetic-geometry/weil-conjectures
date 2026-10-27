@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-ample-nonvanishing-basis-criterion",
+ "kind": "statement",
+ "title": "Ampleness characterized by a basis of nonvanishing loci",
+ "statement": "Let $X$ be a quasi-compact scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme] and let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For $n\\geq1$ and $s\\in\\Gamma(X,L^{\\otimes n})$, let $X_s$ be the open set where the residue-field value of $s$ is nonzero, as in [def-weil-pbc-ample-invertible-module]; tensor powers use [def-pur-sheaf-tensor-product]. Then $L$ is ample [def-weil-pbc-ample-invertible-module] if and only if these opens form a basis for the topology of $X$: for every open $V\\subseteq X$ and every $x\\in V$ there exist $n\\geq1$ and $s\\in\\Gamma(X,L^{\\otimes n})$ with $x\\in X_s\\subseteq V$. No affineness of the opens $X_s$ in this basis condition is assumed, and no Noetherian or separatedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01Q3, proposition-characterize-ample, equivalence of (1) and (3) (item-ample and item-s-basis)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Assume $L$ is ample. Fix an open $V\\subseteq X$ and $x\\in V$. By [def-weil-pbc-ample-invertible-module], the positive-power section opens cover $X$, and there are $d\\geq1$ and $a\\in\\Gamma(X,L^{\\otimes d})$ with $x\\in X_a$ and $X_a$ affine. Put $S=\\bigoplus_{n\\geq0}\\Gamma(X,L^{\\otimes n})$. Apply [lem-sc-ample-proj-local-chart] to this cover: its canonical map $f:X\\to\\operatorname{Proj}(S)$ has $f^{-1}(D_+(t))=X_t$ for every positive-degree homogeneous $t$, and $f|_{X_a}:X_a\\to D_+(a)$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-proj-local-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01Q3 (proposition-characterize-ample), (1) implies (3); 01Q1 (lemma-ample-immersion-into-proj), affine-chart argument; 01PZ (lemma-map-into-proj), (1)."
+   }
+  },
+  {
+   "text": "The isomorphism of Step 1 sends $V\\cap X_a$ to an open subset $W$ of $D_+(a)$, hence an open subset of $\\operatorname{Proj}(S)$ containing $f(x)$. By [lem-sc-proj-standard-open-basis], choose a positive-degree homogeneous $t\\in S_n$, $n\\geq1$, with $f(x)\\in D_+(t)\\subseteq W$. By the inverse-image formula in Step 1, $x\\in X_t=f^{-1}(D_+(t))$. Since $D_+(t)\\subseteq D_+(a)$, every point of $X_t$ lies in $X_a$; on $X_a$ the isomorphism identifies the preimage of $W$ with $V\\cap X_a$. Thus $x\\in X_t\\subseteq V$. The element $t\\in S_n$ is a global section of $L^{\\otimes n}$, as required.",
+   "uses": [
+    "lem-sc-proj-standard-open-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01Q3 (proposition-characterize-ample), first paragraph: (2) implies (4) implies (3); positive-degree standard-open refinement is Algebra Tag 00JP (lemma-topology-proj), (5)."
+   }
+  },
+  {
+   "text": "Conversely, assume the stated basis condition. For $x\\in X$, use [lem-weil-pbc-affine-opens-basis] with the open $X$ to choose an affine open $U$ containing $x$. The assumed basis condition provides $n\\geq1$ and $s\\in\\Gamma(X,L^{\\otimes n})$ with $x\\in X_s\\subseteq U$. By [lem-sc-affine-cap-section-open], applied to this positive tensor power and the affine open $U$, the intersection $U\\cap X_s$ is affine. But $U\\cap X_s=X_s$, so $X_s$ is an affine section neighbourhood of $x$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PX (lemma-affine-s-opens), proof, used for (3) implies (1) in Tag 01Q3; Tag 01PV (lemma-affine-cap-s-open)."
+   }
+  },
+  {
+   "text": "The scheme $X$ is quasi-compact by hypothesis. Step 3 gives an affine nonvanishing locus of a positive-power global section through every point. These are precisely the two conditions defining ampleness in [def-weil-pbc-ample-invertible-module]. Thus $L$ is ample, completing both implications.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample), conditions (1) and (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-proj-local-chart",
+  "lem-sc-proj-standard-open-basis",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01Q3 (proposition-characterize-ample), equivalence (1) and (3), using the affine charts of 01Q1, the standard-open basis of 00JP, and 01PX/01PV for the reverse implication."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf is characterized by nonvanishing loci of global sections of positive tensor powers forming a topological basis",
+   "results": "{\"t\": \"2026-10-24T16:43:02Z\", \"tool\": \"leansearch\", \"query\": \"An ample invertible sheaf is characterized by nonvanishing loci of global sections of positive tensor powers forming a topological basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen\", \"AlgebraicGeometry.isBasis_basicOpen\", \"AlgebraicGeometry.isBasis_affine_open\", \"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"TopCat.Presheaf.IsSheaf\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"ampleSet_empty\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\"], \"digest\": \"ad8c2e03a933b2a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|characterize.ample|ample.*basis|basis.*ample",
+   "results": "{\"t\": \"2026-10-24T16:43:02Z\", \"tool\": \"grep\", \"query\": \"IsAmple|characterize.ample|ample.*basis|basis.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "{\"t\": \"2026-10-24T16:43:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact scheme a line bundle is ample if and only if its nonvanishing loci of positive powers form a basis of the topology",
+   "results": "{\"t\": \"2026-10-24T16:43:04Z\", \"tool\": \"leanfinder\", \"query\": \"On a quasi compact scheme a line bundle is ample if and only if its nonvanishing loci of positive powers form a basis of the topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen\"], \"digest\": \"9be729d053b56ed7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle is ample exactly when for every open neighborhood of a point there is a global section of a positive tensor power nonzero at that point whose nonvanishing locus lies inside the neighborhood",
+   "results": "{\"t\": \"2026-10-24T16:43:06Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle is ample exactly when for every open neighborhood of a point there is a global section of a positive tensor power nonzero at that point whose nonvanishing locus lies inside the neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen\"], \"digest\": \"a4a5e49acfef13dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a quasi compact scheme is ample if and only if nonvanishing loci of positive tensor power global sections form a basis",
+   "results": "{\"t\": \"2026-10-24T17:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible sheaf on a quasi compact scheme is ample if and only if nonvanishing loci of positive tensor power global sections form a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen\", \"AlgebraicGeometry.isBasis_basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\"], \"digest\": \"d48632a7024936f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|ample.*basis|basis.*ample",
+   "results": "{\"t\": \"2026-10-24T17:13:06Z\", \"tool\": \"grep\", \"query\": \"IsAmple|ample.*basis|basis.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle is ample exactly when positive tensor power sections have nonvanishing opens refining every neighborhood",
+   "results": "{\"t\": \"2026-10-24T17:13:06Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle is ample exactly when positive tensor power sections have nonvanishing opens refining every neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AmpleSet\", \"AlgebraicGeometry.IsAffineOpen.self_le_iSup_basicOpen_iff\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AmpleSet.vadd\", \"ampleSet_empty\"], \"digest\": \"9ff72983b068177a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "{\"t\": \"2026-10-24T17:13:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonvanishing global sections of tensor powers of an ample line bundle form a topological basis on an arbitrary quasi compact scheme",
+   "results": "{\"t\": \"2026-10-24T17:13:51Z\", \"tool\": \"leanfinder\", \"query\": \"Nonvanishing global sections of tensor powers of an ample line bundle form a topological basis on an arbitrary quasi compact scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"AlgebraicGeometry.Scheme.affineBasisCover_is_basis\", \"AlgebraicGeometry.isBasis_basicOpen\", \"AlgebraicGeometry.isBasis_affine_open\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen\", \"ProjectiveSpectrum.isTopologicalBasis_basic_opens\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"b8d87fc968bad887\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|ample.*basis|basis.*ample",
+   "results": "{\"t\": \"2026-10-24T17:20:14Z\", \"tool\": \"grep\", \"query\": \"IsAmple|ample.*basis|basis.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.isBasis_basicOpen",
+   "results": "{\"t\": \"2026-10-24T17:20:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj.isBasis_basicOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isBasis_basicOpen\"], \"digest\": \"a0862dc115bd395a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine intersection with a nonvanishing locus of a section of an invertible module",
+   "results": "{\"t\": \"2026-10-24T17:20:16Z\", \"tool\": \"leansearch\", \"query\": \"affine intersection with a nonvanishing locus of a section of an invertible module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.instIsAffineHomιBasicOpen\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen\", \"AlgebraicGeometry.IsAffineOpen.fromSpec_image_zeroLocus\", \"AlgebraicGeometry.exists_basicOpen_le_affine_inter\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter\"], \"digest\": \"58d2184c1d8000ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give structure-sheaf basic opens, Proj topology, or section localization; none gives this equivalence for arbitrary invertible modules on quasi-compact schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-pullback-qc-immersion",
+  "date": "2026-10-25",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Ample invertible module on a quasi-compact open in a locally finite type group; field-fibre effectivity used in Anantharaman 4.1 before the trait component-envelope argument (inherited blueprint ancestry). Auxiliary for this item: restriction of an ample line to a quasi-compact open of a component, Stacks 0B3E(2). In the proof of the present auxiliary: the applications of Properties 01Q3 before and after pulling back nonvanishing loci (0B3E, proof, second paragraph).",
+   "via": [
+    "lem-sfb-ample-pullback-qc-immersion",
+    "lem-sfb-lft-group-quasicompact-open-ample",
+    "lem-sfb-field-fpqc-group-form-effectivity",
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-ample-nonvanishing-basis-criterion",
+  "worker": "stage1",
+  "summary": "Proved the basis criterion using existing canonical affine Proj charts and the positive-degree standard-open basis in the forward direction; in the reverse direction chose an affine neighbourhood and applied the existing affine-cap-section-open theorem, then the definition of ampleness. No new nodes, statement changes, or Lean writing. Recorded actual Mathlib searches and checked every cited statement.",
+  "blueprint": "Realizes the inherited lower-level ampleness input in blueprint.from.place, specifically both uses of Properties 01Q3 in the parent restriction/pullback argument. The inherited ancestor is null and the current latest unit contains no direct ampleness sentence; this generic algebraic-geometric tool does not change its six-functor route. Searches of the whole imported blueprint for ample, nonvanishing and basis for the topology found no matching blueprint assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-proj-local-chart",
+    "why": "Generic canonical section-ring chart theorem: provides one map, its inverse-image identities, and the affine-chart isomorphism. This unit supplies no such scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-proj-standard-open-basis",
+    "why": "Generic topology theorem on Proj: refines an open neighbourhood by a positive-degree homogeneous standard open. No node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic affineness theorem for an affine open intersected with an invertible-section nonvanishing locus, with no separation hypothesis. This unit supplies no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-proj-local-chart",
+  "lem-sc-proj-standard-open-basis",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-d0de9aced",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-d0de9aced (reviewer sub-agent of L); spot-checked: PASS: I read the whole split and every cited node. The item's statement is unchanged and matches Stacks properties.tex 01Q3 (proposition-characterize-ample), (1) item-ample <=> (3) item-s-basis. X is quasi-compact, the sections come from L^{⊗n} with n>=1 (the homogeneous elements of S_+), the X_s in the basis are not assumed affine, and no other hypotheses are added. Step 1: condition (2) of def-weil-pbc-ample-invertible-module gives the cover that lem-sc-ample-proj-local-chart needs. That node supplies the map f: X -> Proj(S) with S = Γ_*, the identity f^{-1}D_+(t) = X_t, and the isomorphism X_a ≅ D_+(a). This matches 01Q1/01PZ. Step 2: W is open in Proj because D_+(a) is open. lem-sc-proj-standard-open-basis gives D_+(t) ⊆ W ⊆ D_+(a), so X_t ⊆ X_a, and injectivity of f on X_a gives X_t ⊆ V. I checked this. Both Proj definitions describe the same scheme, since def-nagata-affine-proj is built on def-pc-proj. Step 3 is exactly the proof of 01PX: an affine U containing x from 01IT, then X_s = U ∩ X_s is affine by lem-sc-affine-cap-section-open (01PV), whose statement covers positive tensor powers and needs no separatedness. Step 4 is a correctly marked elementary check against the definition. Edge cases checked: empty X; affine X with L = O_X; the zero section; degree 0 is excluded; quasi-compactness is needed only for the ample side. No cycle: none of the five proof_deps reaches the item. No other DAG node states this equivalence (searched for 01Q3 and for basis-of-topology with ample). I accept the three cross-unit tool_uses (lem-sc-ample-proj-local-chart, lem-sc-proj-standard-open-basis, lem-sc-affine-cap-section-open, all from sk-thm-curveestimate) as generic tools used only for their statements. Advisory, not a fault: lem-sc-ample-finite-principal-affine (09NV) with E={x} would give the forward direction in one line and does not depend on the item. The delivered route is also correct. No changes made."
+ }
+}

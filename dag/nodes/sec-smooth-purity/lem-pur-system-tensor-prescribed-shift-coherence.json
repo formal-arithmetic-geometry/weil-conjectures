@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-system-tensor-prescribed-shift-coherence",
+ "kind": "statement",
+ "title": "Coherence of the prescribed system tensor shifts",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell and a scheme W. Use the actual derived category of strict quotient-semilinear coefficient systems and its recorded closed tensor [def-sf-integral-system-operations], with prescribed slot comparisons [def-pur-integral-operation-shift-data]. These comparisons extend in each individual slot to coherent integer CommShift structures, with exactly the prescribed components. Define t(a,b) by extracting the second shift, then the first shift, then identifying [a][b] with [a+b]. The actual unsigned monoidal associator intertwines t(a,b) and t(a+b,c) with t(b,c) and t(a,b+c), using the canonical (a+b)+c=a+(b+c) shift identification. There exists a natural tensor-swap isomorphism s, normalized on every K-flat pair by a chain swap whose (i,j) generator is (-1)^(ij) times the reversed generator, through the actual K-flat tensor comparisons. Its shifted square is t(a,b) followed by s[a+b] equals (-1)^(ab) times s on the shifted inputs followed by t(b,a) and the canonical b+a=a+b shift identification. The model formula holds on all K-flat representatives; no evaluation of derived morphisms is used to detect equality.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section Sign rules, item-shift-tensor (0FNH), unsigned tensor associator, item-flip-tensor-product; sites-cohomology.tex Tag 0FPQ; parent proof Steps 4 and 6."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-pur-integral-operation-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "specialize the diagram tensor model theorem to the quotient rings\nR/t^(n+1) and their quotient transitions. On flat-term K-flat representatives\nits first and second shift extractions have precisely the two generator\nformulas characterizing tensorShifts. Full faithfulness of restriction to\nresolving representatives identifies these natural comparisons with the\nprescribed ones. Transport the diagram theorem's slotwise CommShift\nstructures along these equalities; this gives the two displayed families\nand their zero/addition laws. Its extraction identity identifies the\nsimultaneous comparison with the expression t below. For reassociation,\nuse the unsigned chain associator; the two exponents agree by\nbi+c(i+j)=cj+(b+c)i. Its normalization identifies the descended associator\nwith the actual systemClosed monoidal associator. For symmetry descend the\nKoszul chain swap, with coefficient (-1)^(ij). The two shifted paths differ\nby (-1)^(ab), since their remaining exponents differ by an even integer.\nThe chain formula commutes with every quotient transition. The fixed\nK-flat comparisons and localization full faithfulness give the stated\nmodel formula and the symmetry square for all derived objects. A further\nflat-term K-flat resolution extends the model formula to arbitrary\nK-flat representatives by cancellation of the resolving isomorphisms.",
+   "uses": [
+    "lem-pur-diagram-pullback-monoidal-shift-models",
+    "def-pur-integral-operation-shift-data",
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section Sign rules, item-shift-tensor (0FNH), unsigned tensor associator, item-flip-tensor-product; sites-cohomology.tex Tag 0FPQ; parent proof Steps 4 and 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagram-pullback-monoidal-shift-models",
+  "def-pur-integral-operation-shift-data",
+  "lem-pur-derived-tensor-additive-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section Sign rules, item-shift-tensor (0FNH), unsigned tensor associator, item-flip-tensor-product; sites-cohomology.tex Tag 0FPQ; parent proof Steps 4 and 6. Explicit specialization and identification of the fixed representative comparisons."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor products of cochain complexes commute with shifts coherently with associativity and Koszul symmetry",
+   "results": "HomologicalComplex.associator; Functor.commShiftIso_map₂CochainComplex_hom_app; CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc; CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso. Read Mathlib BifunctorShift and project normalization signatures.",
+   "date": "2026-10-25",
+   "verdict": "Generic chain infrastructure only; no prescribed whole-system or completed-tensor comparison normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift₂Int",
+   "results": "Functor.CommShift₂Int; NatTrans.CommShift₂Int; Functor.instCommShift₂IntCochainComplexIntMap₂CochainComplex.",
+   "date": "2026-10-25",
+   "verdict": "Generic coherent bifunctor shifts; no identification with the four prescribed tensorShifts families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products of cochain complexes simultaneous integer shifts signed formula and coherent associativity symmetry on derived categories; completed derived tensor Roos mapping cone shift comparison identity zero addition shifts in each tensor slot",
+   "results": "CochainComplex.mapBifunctorShift₂Iso and mapBifunctorShift₁Iso; mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso; ι_mapBifunctorShift₂Iso_hom_f_assoc; mappingCone.mapHomologicalComplexXIso_eq; mappingCone.id_X; mappingCone.map_inr.",
+   "date": "2026-10-25",
+   "verdict": "No exact system or Roos-normalized derived statement. Reuse existing generic signed-chain dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift₂Iso|commShiftIso_add|mappingCone.shiftIso in Mathlib; blueprint_refs search tensor shift, completed tensor, Koszul and slot; exact new declaration names in lean and dag/nodes",
+   "results": "Mathlib.Algebra.Homology.BifunctorShift and CategoryTheory.Shift.CommShift; no exact project declaration or blueprint duplicate. Blueprint matches are the parent coefficient-coherence statements and broad six-functor statements, not these proper subarguments.",
+   "date": "2026-10-25",
+   "verdict": "No one-line specialization gives the fixed representative and completed-model normalizations."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.BasicSystemShiftResolutionCalculus",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used sentence in fix-prop-coherence: tensor reassociation, evaluation, and adjunction units and counits; the basic-operation shifts used in its coefficient-coherence argument. Section Sign rules, item-shift-tensor (0FNH), unsigned tensor associator, item-flip-tensor-product; sites-cohomology.tex Tag 0FPQ; parent proof Steps 4 and 6.",
+   "via": [
+    "lem-pur-basic-system-shift-resolution-calculus",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SystemTensorShiftCoherence",
+  "file": "lean/Sheaf/SixFunctors/SystemTensorShiftCoherence.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.systemTensorShiftCoherence",
+  "statement": "theorem systemTensorShiftCoherence (W : Scheme.{u}) :\n    let t := fun a b : ℤ ↦\n      isoWhiskerLeft (tensorShiftFirst (System l E W) a) ((tensorShifts l E).systemRight W b) ≪≫\n        isoWhiskerRight ((tensorShifts l E).systemLeft W a) (shiftFunctor (System l E W) b) ≪≫\n        isoWhiskerLeft (calculus l E W).systemClosed.tensor\n          (shiftFunctorAdd (System l E W) a b).symm\n    (∃ (s₁ : ∀ N : System l E W,\n            ((Functor.curry.obj (calculus l E W).systemClosed.tensor).flip.obj N).CommShift ℤ)\n          (s₂ : ∀ M : System l E W,\n            ((Functor.curry.obj (calculus l E W).systemClosed.tensor).obj M).CommShift ℤ),\n          (∀ (M N : System l E W) (r : ℤ),\n            (Functor.commShiftIso _ (self := s₁ N) r).app M =\n              ((tensorShifts l E).systemLeft W r).app (M, N)) ∧\n          (∀ (M N : System l E W) (r : ℤ),\n            (Functor.commShiftIso _ (self := s₂ M) r).app N =\n              ((tensorShifts l E).systemRight W r).app (M, N))) ∧\n        (∀ (M N H : System l E W) (a b c : ℤ),\n        (calculus l E W).systemClosed.tensor.map\n            (Prod.mkHom ((t a b).hom.app (M, N)) (𝟙 (H⟦c⟧))) ≫\n          (t (a + b) c).hom.app\n            ((calculus l E W).systemClosed.tensor.obj (M, N), H) ≫\n          ((calculus l E W).systemClosed.monoidal.associator M N H).hom⟦(a + b) + c⟧' =\n        ((calculus l E W).systemClosed.monoidal.associator (M⟦a⟧) (N⟦b⟧) (H⟦c⟧)).hom ≫\n          (calculus l E W).systemClosed.tensor.map\n            (Prod.mkHom (𝟙 (M⟦a⟧)) ((t b c).hom.app (N, H))) ≫\n          (t a (b + c)).hom.app\n            (M, (calculus l E W).systemClosed.tensor.obj (N, H)) ≫\n          eqToHom (congrArg\n            (fun n : ℤ ↦ ((calculus l E W).systemClosed.tensor.obj\n              (M, (calculus l E W).systemClosed.tensor.obj (N, H)))⟦n⟧) (add_assoc a b c).symm)) ∧\n        (∃ s : (calculus l E W).systemClosed.tensor ≅\n      CategoryTheory.Prod.swap (System l E W) (System l E W) ⋙\n        (calculus l E W).systemClosed.tensor,\n    (∀ (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (hP : systemKFlat l E W P) (hQ : systemKFlat l E W Q),\n    ∃ α : (systemTotalTensor l E W).obj (P, Q) ≅\n      (systemTotalTensor l E W).obj (Q, P),\n      (∀ (i j : ℤ) (U : (ℕ × W.ProEt)ᵒᵖ)\n        (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U),\n        ((α.hom.f (i + j)).val.app U)\n          (coefficientTensorGenerator.{u, u + 1, u}\n            (coefficientSequenceTopology (ProEt.topology W))\n            (coefficientSequenceCommRingSheaf l E W) P Q i j (i + j) rfl U x y) =\n        (i * j).negOnePow • coefficientTensorGenerator.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology W))\n          (coefficientSequenceCommRingSheaf l E W) Q P j i (i + j) (add_comm j i) U y x) ∧\n      ((calculus l E W).systemTensorModel.iso\n        (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W) (calculus l E W).systemClosed\n        P Q hP hQ).hom ≫ s.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n      DerivedCategory.Q.map α.hom ≫\n        ((calculus l E W).systemTensorModel.iso\n          (coefficientSequenceTopology (ProEt.topology W))\n          (coefficientSequenceCommRingSheaf l E W) (calculus l E W).systemClosed\n          Q P hQ hP).hom) ∧\n    ∀ (M N : System l E W) (a b : ℤ),\n      (t a b).hom.app (M, N) ≫\n          (s.hom.app (M, N))⟦a + b⟧' =\n        (a * b).negOnePow • (s.hom.app (M⟦a⟧, N⟦b⟧) ≫\n          (t b a).hom.app (N, M) ≫\n          eqToHom (congrArg\n            (fun n : ℤ ↦ ((calculus l E W).systemClosed.tensor.obj (N, M))⟦n⟧)\n            (add_comm b a))))",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "Generic chain, K-flat or localization infrastructure already used by the parent; identifies the prescribed comparison without replacing the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T180418-L-3988453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T180418-L-3988453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

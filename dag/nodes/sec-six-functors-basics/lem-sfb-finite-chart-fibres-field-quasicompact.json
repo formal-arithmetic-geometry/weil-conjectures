@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-finite-chart-fibres-field-quasicompact",
+ "kind": "statement",
+ "title": "Finite chart and relation fibres make every field representative quasi-compact",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $x\\in|X|$ a field-valued point class [def-a1-space-point-topology]. Suppose $(a_i:U_i\\to X)_{i\\in I}$ is a set-indexed jointly surjective family of representable etale morphisms from schemes [def-weil-etale-morphism], meaning that the union of the images of $|U_i|\\to|X|$ is $|X|$. Put $R_i=U_i\\times_XU_i$ with first projection $p_i:R_i\\to U_i$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Assume that for every $i\\in I$ the sets $|a_i|^{-1}(\\{x\\})$ and $|a_i p_i|^{-1}(\\{x\\})$ are finite. Then every $S$-morphism $u:\\operatorname{Spec}L\\to X$ from a field $L$ [def-weil-field, def-weil-affine-spectrum] representing $x$ is quasi-compact: for every affine scheme $T\\to X$ the scheme $T\\times_X\\operatorname{Spec}L$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. No quasi-separatedness, finite-type or Noetherian assumption is imposed on $X$ or the $U_i$, and the individual fibres may be empty.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV (lemma-UR-finite-above-x), implication (2) to (6); the lemma allows schemes U_i without affineness or quasi-compactness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply change of base to $S\\to\\operatorname{Spec}\\mathbf Z$, writing $X^{\\mathrm{abs}}=j_!X$. Its etale scheme charts and their fibre products are the same schemes. Its field-valued representatives are pairs consisting of an $S$-structure and a representative in $X$; equality after a common field extension is exactly equality of those pairs. Thus its point classes, chart fibres and relation fibres identify with those in the hypothesis. We may prove quasi-compactness for the corresponding absolute field morphism: every original affine $S$-scheme test is also an absolute affine test, and its fibre product is unchanged. Work with this absolute space in the following steps.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 03I4 (lemma-change-base-scheme) and 04SG (lemma-category-of-spaces-over-smaller-base-scheme), applied to the base of Tag 03JV."
+   }
+  },
+  {
+   "text": "Apply finite-fibre transfer to the given covering $(U_i\\to X)_i$. For every affine representable etale chart $V\\to X$ the set $F_V=\\{v\\in|V|:v\\mapsto x\\}$ is finite. This application uses only the chart-fibre hypothesis, and imposes no quasi-compactness on $U_i$.",
+   "uses": [
+    "lem-sfb-etale-chart-finite-fibre-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (2) to (1), first sentence, using Tag 03JS."
+   }
+  },
+  {
+   "text": "Joint surjectivity supplies $i$ and $u\\in U_i$ over $x$. The set of $r\\in R_i$ with both projections equal to $u$ is a subset of the assumed finite fibre of $|R_i|\\to|X|$ at $x$, so is finite. Apply the residual-relation lemma with $U=U_i$: for $K=\\kappa(u)$ and $b:\\operatorname{Spec}K\\to X$, both projections of $\\operatorname{Spec}K\\times_X\\operatorname{Spec}K$ are etale and quasi-compact. The existing self-relation lemma therefore gives a field $k$ and a monomorphism $j:\\operatorname{Spec}k\\to X$ in the class $x$. Only this one chart must have a nonempty fibre.",
+   "uses": [
+    "lem-sfb-chart-pair-finite-residual-relation",
+    "lem-sfb-finite-point-self-relation-field-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (2) to (1), applying Tag 03JU to one chart meeting x."
+   }
+  },
+  {
+   "text": "Fix any affine representable etale chart $V\\to X$ and set $D=V\\times_X\\operatorname{Spec}k$. Base change of the etale chart makes $D\\to\\operatorname{Spec}k$ etale. The projection $D\\to V$ is a monomorphism: two maps with equal $V$-coordinates have equal field coordinates by monomorphy of $j$, hence coincide by the fibre-product property. In particular it is injective on maps from field spectra. The field-point equivalence in the radicial node implies it is universally injective, hence injective on underlying points. Its image lies in $F_V$, since its composite to $X$ has class $x$ at every point. Thus $|D|$ is finite by step 2.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), obtaining condition (3); Tag 01S4 (lemma-universally-injective), field-point criterion."
+   }
+  },
+  {
+   "text": "Apply the etale-fibre decomposition to $D\\to\\operatorname{Spec}k$ at its unique point; this fibre is $D$ itself. It is a disjoint union of spectra of finite separable extensions $k_d/k$, indexed by $d\\in|D|$. Step 4 makes that index set finite. The component open immersions of the finite-product-spectrum lemma identify the disjoint union with $\\operatorname{Spec}(\\prod_d k_d)$, so $D=\\operatorname{Spec}(\\prod_d k_d)$ and the coordinate algebra is a finite-dimensional $k$-module: concatenate a finite basis of each factor. By the definition of a finite morphism, $D\\to\\operatorname{Spec}k$ is finite; the empty case has zero coordinate algebra and also satisfies this assertion. We have verified this for every affine etale chart, so apply the existing finite-chart criterion to $j$. It gives quasi-compactness of every field representative of $x$, on every affine test $T\\to X$, with no etale restriction on $T$. Step 1 identifies these fibre products with the original $S$-fibre products and proves the assertion.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-spec-finite-product-fields",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-field-monomorphism-finite-chart-decency-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (1) to (3) and (3) to (6); etale field decomposition is Tag 02GL (lemma-etale-over-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-etale-chart-finite-fibre-transfer",
+  "lem-sfb-chart-pair-finite-residual-relation",
+  "lem-sfb-finite-point-self-relation-field-monomorphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-field-monomorphism-finite-chart-decency-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JV (lemma-UR-finite-above-x), (2) to (6), via Tags 03JS and 03JU, reusing existing nodes for (3) to (6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*relation|point.like|residual.*field|monomorphism.*field",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite chart fibres and finite relation fibres imply that an algebraic space point admits a quasi compact monomorphism from a field",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, Algebra.QuasiFinite.mk, Algebra.QuasiFinite.casesOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.IsFinite.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Mono\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"QuasiCompact\"",
+   "results": "12 hits: AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_of_isIso, AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space point with finite fibres in an etale covering by schemes and their self relations is represented by a quasi compact field monomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite fibres in etale scheme charts and their self relations characterize quasi compactness of field valued points of an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.QuasiCompact, Algebra.QuasiFinite.mk, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.QuasiCompactCover.of_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a point has finite fibres in an etale scheme cover and its self relations, every field valued map representing that point is quasi compact",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.quasiCompact_of_compactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space with an etale scheme covering whose chart fibres and relation fibres over a point are finite has only quasi compact field representatives of that point",
+   "results": "8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.compactSpace_iff_quasiCompact, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.quasiCompactCover_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or quasi-compact scheme covers, not finite chart-and-relation fibres or field-valued maps of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finite.*relation.*fibre",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness, finite-morphism fibres and finite quasi-compact covers do not state the pointwise algebraic-space criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness, finite-morphism fibres and finite quasi-compact covers do not state the pointwise algebraic-space criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite chart fibres and relation fibres over a point of an algebraic space force every field representative to be quasi compact",
+   "results": "8 hits: AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.quasiCompact_iff, Algebra.QuasiFinite.finite_fiber",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness, finite-morphism fibres and finite quasi-compact covers do not state the pointwise algebraic-space criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite fibres in an etale scheme cover and its self relations imply every field valued point representing that class in an algebraic space is quasi compact",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.QuasiCompactCover.singleton, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.quasiCompact_of_compactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compactness, finite-morphism fibres and finite quasi-compact covers do not state the pointwise algebraic-space criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qs-space-field-monomorphism",
+  "date": "2026-10-23",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Field monomorphisms representing points of a quasi-separated space. Pointwise finiteness criterion: Stacks 03JV, condition (2) implies (6), used after refining the atlas over affine opens of S.",
+   "via": [
+    "lem-sfb-qs-space-field-monomorphism",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-chart-fibres-field-quasicompact",
+  "worker": "stage1",
+  "summary": "Expanded the pointwise finite-chart criterion along Stacks 03JV. Reused the absolute-base conversion, field-monomorphism construction, radicial field-point criterion and finite-affine-chart criterion. Created only 03JS finite-fibre transfer and the residual self-relation input of 03JU. Normalized doubled TeX escapes in the imported statement without changing its meaning. Checked arbitrary non-quasi-compact charts and empty individual fibres.",
+  "blueprint": "The existing from.place chain ends at the pointwise criterion used for the quasi-separated-space field-monomorphism input to the alteration/moduli prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3). This split realizes that exact 03JV (2) to (6) input; no change to the unit route. Blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic etale-scheme-over-a-field decomposition (02GL); the unit does not replace this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "The generic finite-product spectrum decomposition identifies a finite disjoint union of field spectra with one affine spectrum, including the empty product; this is an elementary scheme-theoretic tool for the finite-chart verification."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic representability of sheaf fibre products of algebraic spaces and of etale base changes (Stacks 02X2); used in step 4 only to know that D=V x_X Spec k is a scheme with the fibre-product property, a black-box foundational tool that no node of this unit states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-e8089fbc3",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-e8089fbc3 (reviewer sub-agent of L); spot-checked: Read Stacks decent-spaces 03JS, 03JU, the weak lemma and 03JV in full. The item is exactly 03JV (2)=>(6), unchanged apart from TeX escapes. Step 1: change of base to Z, with charts, fibre products and point classes identified through the explicit j_! formula. Step 2: new 03JS transfer node, finite F_V for every affine etale chart. Step 3: the self-pair set at u is inside the finite |R_i| fibre over x; the new residual node gives etale, quasi-compact projections of Spec k(u) x_X Spec k(u); the existing 03JU (3)=>(4) node then gives a monomorphism j. Step 4: D = V x_X Spec k is a scheme; D->V is a monomorphism, so by 01S4 (1)=>(2) it is injective on points, and |D| sits inside F_V, which is finite. Step 5: 02GL plus the finite-product-spectrum node give D = Spec of a product of finite separable fields, finite over k (the empty case also works); the 03JV (3)=>(6) criterion then gives quasi-compactness on all affine tests. All correct; proof_deps = union of uses. Both new nodes are true and statement-only. Tested the residual node on X=U and on A^1_Q/Z (closed point: finite; generic point: excluded by the hypothesis), and the transfer node with empty fibres and non-quasi-compact U_i. rg over 03JS/03JT/03JU/03JV and their labels: no duplicate, and neither node restates the item. No SGA. Batch-5: def-trf-algebraic-space, def-a1-space-point-topology, lem-trf-space-fibre-products-etale-covers (Stacks 02X2) and the two existing sfb nodes, whose closure reaches the trace-formula chapter only through def-trf-algebraic-space, are general foundations outside both assumptions; accepted. The two recorded pbc tool_uses are accepted. FIX: added the missing tool_uses entry for the cross-unit, non-closed proof dependency lem-trf-space-fibre-products-etale-covers (step 4), as 233 of the 254 nodes in this unit that use it already do. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteChartFibresFieldQuasicompact",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_chart_fibres_field_quasicompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteChartFibresFieldQuasicompact.lean",
+  "statement": "theorem finite_chart_fibres_field_quasicompact {S : Scheme.{u}} (X : AlgebraicSpace S) (x : Point X.obj.obj) {I : Type w} (U : I → Over S) (a : ∀ i : I, yoneda.obj (U i) ⟶ X.obj.obj) (ha : ∀ i : I, IsEtale (a i)) (hcover : ∀ y : Point X.obj.obj, ∃ (i : I) (v : (U i).left), schemePointMap (a i) v = y) (R : I → Over S) (p₁ p₂ : ∀ i : I, R i ⟶ U i) (hR : ∀ i : I, IsPullback (yoneda.map (p₁ i)) (yoneda.map (p₂ i)) (a i) (a i)) (hU : ∀ i : I, Set.Finite {v : (U i).left | schemePointMap (a i) v = x}) (hfinite : ∀ i : I, Set.Finite {r : (R i).left | schemePointMap (yoneda.map (p₁ i) ≫ a i) r = x}) : ∀ c : PointRepresentative X.obj.obj, Quot.mk _ c = x → ∀ (T : Over S), IsAffine T.left → ∀ t : yoneda.obj T ⟶ X.obj.obj, ∃ (V : Over S) (p : V ⟶ T) (q : V ⟶ Over.mk c.base), IsPullback (yoneda.map p) (yoneda.map q) t (yonedaEquiv.symm c.value) ∧ CompactSpace V.left",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbe83bafc",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read node, Stacks 03JV (2)=>(6) (decent-spaces.tex l.515-547), the 8 stmt_dep records and the Lean declarations used (AlgebraicSpace/IsRepresentableWith/IsEtale, PointRepresentative/Rel/Point/schemePointMap in side-live). Every clause matches: S, X, x : Point; I : Type w with U, a, IsEtale; hcover is joint surjectivity on |X|; R_i given as representing pullback squares with the correct orientation (always exist, unique up to iso); finite fibres of a_i and of p1≫a_i; all representatives c with Quot.mk c = x; every affine T with no étale condition; exists a representing scheme fibre product with CompactSpace (equivalent to for-all by Yoneda full faithfulness; CompactSpace is def-weil-pbc-quasi-compact-scheme). No extra assumptions. Edge cases: empty I vacuous, empty fibres allowed, nonaffine/non-qc charts allowed, universes u/w bound. Node differs from side-live only in lean; statement field verbatim; docstrings carry source, blueprint and 5 proof steps; sorry only; no defs; imports exist; both report sections present. No file changed, so no compile; worker reports a clean compile. Advisory only: existing MapIsQuasiCompact is an equivalent encoding; the Lean follows the node's scheme-level wording."
+ }
+}

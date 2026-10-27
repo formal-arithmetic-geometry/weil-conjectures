@@ -185,7 +185,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-4ca909fb8 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and source passages. All seven steps preserve the exact interval and discrete Noetherian coefficient category; Stacks 05VD, 07A4, 06YQ, 08G0–08G1 support the argument. No new nodes, cycles, or repairs. Accepted five generic tool uses; detailed checks are in review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -215,5 +226,43 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be quasi-compact and quasi-separated, $\\Lambda$ a discrete Noetherian\nring and $K\\in D^b_c(X_{\\Et},\\Lambda)$. For integers $a\\leq b$, $K$ has Tor\namplitude in $[a,b]$ (that is, $K\\otimes^{\\mathrm L}_\\Lambda N$ has cohomology\nonly in degrees $[a,b]$ for every $\\Lambda$-module sheaf $N$ on $X_{\\Et}$) if and\nonly if $\\nu_X^*K$ has Tor amplitude in $[a,b]$ on $X_{\\Proet}$. Consequently,\nwhenever $\\nu_X^*$ is an equivalence\n$D^b_c(X_{\\Et},\\Lambda)\\simeq\\Dbc(X,\\Lambda)$ (for instance for finite\n$\\Lambda$, by [lem-sf-proetale-constructible-origin]), it restricts to an\nequivalence $D^b_{\\mathrm{ctf}}(X_{\\Et},\\Lambda)\\simeq\\Dctf(X,\\Lambda)$.",
+  "proof": [
+   {
+    "text": "*Flatness is preserved.* For Noetherian $\\Lambda$ the inverse image of a flat\nétale $\\Lambda$-module sheaf is flat, by [lem-exc-constant-inverse-image-flat].",
+    "uses": [
+     "lem-exc-constant-inverse-image-flat"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Tor amplitude is preserved.* Suppose $K$ has Tor amplitude in $[a,b]$. As in\n[lem-exc-comparison-tor-interval], choose a bounded-above flat resolution $P$ of\n$K$ with $P^q=0$ for $q>b$; the cokernel $Q=\\operatorname{coker}(P^{a-1}\\to P^a)$\nis flat since $\\operatorname{Tor}_1(Q,N)=H^{a-1}(P\\otimes N)=0$ for all $N$, and\n$[Q\\to P^{a+1}\\to\\dots\\to P^b]$ is a flat representative of $K$ in degrees\n$[a,b]$. Its termwise pullback is a bounded complex of flat sheaves representing\n$\\nu_X^*K$ (exactness of $\\nu_X^*$), hence K-flat, and tensoring it with any\npro-étale module sheaf gives a complex in degrees $[a,b]$.",
+    "uses": [
+     "lem-exc-comparison-tor-interval"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Tor amplitude is detected.* Suppose $\\nu_X^*K$ has Tor amplitude in $[a,b]$ and\nlet $N$ be an étale module sheaf. Taking bounded-above flat resolutions of $K$\nand $N$, whose pullbacks stay flat, and using that $\\nu_X^*$ is exact and commutes\nwith tensor products and direct sums, we get\n$\\nu_X^*(K\\otimes^{\\mathrm L}_\\Lambda N)\\cong\n\\nu_X^*K\\otimes^{\\mathrm L}_{\\Lambda_X}\\nu_X^*N$, which has cohomology only in\n$[a,b]$. Since $\\nu_X^*$ is exact and faithful on module sheaves,\n$H^q(K\\otimes^{\\mathrm L}N)=0$ whenever $\\nu_X^*H^q(K\\otimes^{\\mathrm L}N)=0$.\nSo $K$ has Tor amplitude in $[a,b]$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The equivalence.* If $\\nu_X^*$ is an equivalence\n$D^b_c(X_{\\Et},\\Lambda)\\to\\Dbc(X,\\Lambda)$, as it is for finite $\\Lambda$ by\n[lem-sf-proetale-constructible-origin], then by the two previous paragraphs an object has finite Tor amplitude if and only if its image does, so\nthe equivalence restricts to the full subcategories of objects of finite Tor\namplitude.",
+    "uses": [
+     "lem-sf-proetale-constructible-origin"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

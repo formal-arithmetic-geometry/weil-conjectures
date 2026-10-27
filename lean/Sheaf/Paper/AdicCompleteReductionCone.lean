@@ -6,6 +6,8 @@ module
 public import Sheaf.Paper.AdicResidueLiftComparisons
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.Paper.AdicResidueCechQuotientCone
+import Sheaf.Paper.AdicResidueCompletionModel
 
 /-! # The normalized quotient cone of a complete object
 
@@ -66,6 +68,27 @@ theorem adicResidue_complete_reduction_cone
         (adj (n + 1)).homEquiv T _ f ≫ (e (n + 1)).inv ≫
             F.map (homOfLE (Nat.le_succ n)).op ≫ (e n).hom =
           (adj n).homEquiv T _ (adicResidueHomStep.{u, v} X J U T M n f)) := by
-  sorry
+  obtain ⟨K, ε, hK, hi⟩ := adicResidueCompletionModel_exists.{u, v} X J U
+  obtain ⟨π, hlim, hπ⟩ := adicResidue_cech_quotient_cone.{u, v} X J U M K ε hK
+  let R := (CategoryTheory.ConstantCompletion.completed
+    (coefficientProEtaleModelTopology.{u, v} X) A J).over U
+  let := HasDerivedCategory.standard (CategoryTheory.ConstantCompletion.Mod R)
+  let η := ringedCechCompletionUnit R K ε M
+  have : IsIso η := hi M _hM
+  let c : Cone (adicResidueAdjointTower.{u, v} X J U M) := ⟨_, π⟩
+  let eM : c.pt ≅ M := (asIso η).symm
+  refine ⟨adicResidueAdjointTower.{u, v} X J U M, c, eM,
+    fun _ ↦ Iso.refl _, adicResidueScalarAdjunction.{u, v} X J U, hlim, ?_, ?_⟩
+  · intro n
+    apply (cancel_epi η).1
+    simpa only [c, eM, η, R, Category.assoc, Iso.symm_hom, asIso_inv,
+      IsIso.hom_inv_id_assoc, Iso.refl_hom, Category.comp_id] using hπ n
+  · intro T n f
+    simp only [Iso.refl_inv, Iso.refl_hom, adicResidueAdjointTower,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    change (adicResidueScalarAdjunction.{u, v} X J U (n + 1)).homEquiv T _ f ≫
+      (𝟙 _ ≫ (adicResidueAdjointStep.{u, v} X J U M n ≫ 𝟙 _)) = _
+    rw [CategoryTheory.Category.comp_id, CategoryTheory.Category.id_comp]
+    exact adicResidueAdjointStep_transpose.{u, v} X J U T M n f
 
 end AlgebraicGeometry.Scheme

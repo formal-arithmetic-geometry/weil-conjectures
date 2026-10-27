@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-flat-curve-cofactor-scalar-extension",
+ "kind": "statement",
+ "title": "Arbitrary scalar extension of the flat curve cofactor map",
+ "statement": "Let $R$ be a commutative ring, $c\\geq0$, $P=R[x_0,\\ldots,x_c]$, and $I=(f_1,\\ldots,f_c)$ for an ordered regular sequence [def-weil-pbc-regular-sequence]. Put $B=P/I$, $C=I/I^2$, $V=\\bigoplus_{j=0}^c B\\,dx_j$ and $u:C\\to V$, $u(\\bar f_i)=\\sum_j\\overline{\\partial f_i/\\partial x_j}dx_j$. Differentials mean [def-weil-pbc-kahler-differentials], and exterior powers mean [def-weil-pbc-exterior-algebra]. Write $E=[C\\xrightarrow{u}V]$ in degrees $-1,0$ and $D(E)=(\\bigwedge^c C)^\\vee\\otimes_B\\bigwedge^{c+1}V$, with $M^\\vee=\\operatorname{Hom}_B(M,B)$. Assume that $B$ is flat over $R$ [def-weil-pbc-flat-ring-map]. For any ring homomorphism $R\\to R'$, put $P'=R'[x_0,\\ldots,x_c]$, let $f'_i$ be the coefficient images of $f_i$, and put $I'=(f'_1,\\ldots,f'_c)$, $B'=P'/I'=B\\otimes_RR'$, $C'=I'/I'^2$ and $V'=\\bigoplus_j B'\\,dx_j$. Let $E'=[C'\\xrightarrow{df'}V']$ and $D(E')=(\\bigwedge^c C')^\\vee\\otimes_{B'}\\bigwedge^{c+1}V'$. There are canonical isomorphisms $C\\otimes_BB'\\simeq C'$, $V\\otimes_BB'\\simeq V'$ sending equation classes and coordinate differentials to their primed counterparts. Write $L_{B/R}$ and $L_{B'/R'}$ for the cotangent complexes of [lem-trf-lci-cotangent-presentation], and $E\\simeq L_{B/R}$ for the conormal comparison of [lem-sfb-affine-conormal-jacobian-realization]. The comparison\n$$E\\otimes_BB'\\simeq L_{B/R}\\otimes_B^{\\mathbf L}B'\\simeq L_{B'/R'}$$\nis an isomorphism in the derived category and identifies its displayed two-term model with $E'$, with degree-zero map the isomorphism $\\eta:\\Omega^1_{B/R}\\otimes_BB'\\simeq\\Omega^1_{B'/R'}$, $d\\bar x_j\\otimes1\\mapsto d\\bar x'_j$. Use the determinant functor of [lem-trf-two-term-perfect-determinant] and the local wedge map $w$ of [lem-sfb-affine-conormal-jacobian-realization]. The primed wedge formula defines $w':\\Omega^1_{B'/R'}\\to D(E')$, and the induced determinant comparison $\\delta:D(E)\\otimes_BB'\\simeq D(E')$ satisfies\n$$\\delta\\circ(w\\otimes_BB')=w'\\circ\\eta.$$\nThe map $\\delta$ sends $\\bigl((\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes(dx_0\\wedge\\cdots\\wedge dx_c)\\bigr)\\otimes1$ to $(\\bar f'_1\\wedge\\cdots\\wedge\\bar f'_c)^\\vee\\otimes(dx_0\\wedge\\cdots\\wedge dx_c)$. Thus the augmented Jacobian formulas also commute with coefficient extension. These comparisons commute with affine localization, transport by isomorphisms, identity ring maps and composition $R\\to R'\\to R''$, including composition of the intrinsic cotangent and determinant comparisons. No Noetherian or flatness hypothesis on $R'$ or $R\\to R'$ is imposed; the primed wedge formula uses the displayed conormal basis and does not require globally regular equations over $P'$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), Tor-independent form; perfect.tex Tag 0FJY; duality.tex Tag 0E9Y wedge formula. Extracts old proof step 8, including the derived model and coefficientwise compatibility, rather than asserting compatibility only for flat base changes."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-regular-sequence",
+  "lem-sfb-affine-conormal-jacobian-realization",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-lci-cotangent-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-polynomial-scalar-extension] and [lem-weil-pbc-tensor-quotient-base-change] to identify $P\\otimes_RR'=P'$ and $B\\otimes_RR'=B'$, by coefficient extension. Tensor $0\\to I\\to P\\to B\\to0$ over $R$ with $R'$. Since its last term $B$ is $R$-flat, [lem-weil-pbc-flat-quotient-tensor-injective] identifies $I\\otimes_RR'$ with the kernel $I'$ of $P'\\to B'$, sending $a\\otimes r'$ to $r'a'$. This uses flatness of the quotient, not of the scalar extension.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HL (lemma-flat-tor-zero), 00DF (lemma-tensor-product-exact); polynomial coefficient-extension identification"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-tensor-right-exact] to $I^2\\to I\\to C\\to0$. Under step 1 the image of $I^2\\otimes_RR'$ in $I'$ is exactly $I'^2$: a product $(\\sum a_k\\otimes r_k)(\\sum b_l\\otimes s_l)$ is $\\sum a_kb_l\\otimes r_ks_l$, and conversely $ab\\otimes r'=(a\\otimes1)(b\\otimes r')$. Thus $C\\otimes_RR'\\simeq I'/I'^2$. By the tensor universal property [def-weil-pbc-module-tensor-product], $C\\otimes_B(B\\otimes_RR')\\simeq C\\otimes_RR'$ via $z\\otimes(b\\otimes r')\\mapsto bz\\otimes r'$, with inverse $z\\otimes r'\\mapsto z\\otimes(1\\otimes r')$. This proves the asserted canonical conormal isomorphism and its equation-class formula.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact), applied to the square-ideal quotient; elementary multiplication and tensor balancing"
+   }
+  },
+  {
+   "text": "The conormal basis and the cokernel description of $\\Omega^1_{B/R}$ come from [lem-sfb-affine-conormal-jacobian-realization]. Scalar extension sends the two displayed free bases to bases over $B'$: identify a free module with a finite direct sum and send each coordinate tensor to its product in $B'$, with inverse $\\sum b'_je_j\\mapsto\\sum e_j\\otimes b'_j$ [def-weil-pbc-module-tensor-product]. Step 2 therefore supplies the basis of $C'$ without assuming regularity of the primed equations. The coordinate map similarly identifies $V\\otimes_BB'$ with $V'$. For a monomial $a x^\\nu$, coefficient extension commutes with $\\partial/\\partial x_j$, since both orders give $\\nu_j a' x^{\\nu-e_j}$; add over its finitely many monomials. Consequently the matrix of $u\\otimes1$ is $df'$. Tensor right exactness identifies its cokernel with $\\Omega^1_{B/R}\\otimes_BB'$. By [lem-weil-pbc-kahler-differentials-base-change], this is canonically $\\Omega^1_{B'/R'}$ through $d\\bar x_j\\otimes1\\mapsto d\\bar x'_j$; this is $\\eta$.",
+   "uses": [
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change), Tag 00DF; coefficientwise differentiation and free-module tensor calculation"
+   }
+  },
+  {
+   "text": "The complex $B[0]$ is K-flat over $R$, by [lem-pc-module-bounded-flat-kflat], and [lem-pc-source-kflat-module-tensor-model] computes $B[0]\\otimes_R^{\\mathbf L}R'[0]$ as $(B\\otimes_RR')[0]=B'[0]$. Thus this square is Tor-independent. The complex $E$ has finite free $B$-terms by [lem-sfb-affine-conormal-jacobian-realization], hence is K-flat by the same theorem; its ordinary tensor with $B'$ computes its derived tensor. Apply the Tor-independent base-change clause of [lem-trf-lci-cotangent-presentation] to $\\operatorname{Spec}B\\to\\operatorname{Spec}R$. It gives the asserted derived isomorphism. That node also states compatibility with the local conormal models, so steps 2 and 3 identify its model with $E'$ and its $H^0$ map with $\\eta$. We have not applied the regular-presentation theorem to possibly nonregular global equations in $P'$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "lem-trf-lci-cotangent-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), Tor-independent form; more-algebra.tex Tag 064K (lemma-derived-tor-quasi-isomorphism)"
+   }
+  },
+  {
+   "text": "Apply the pullback and model comparisons of [lem-trf-two-term-perfect-determinant] to step 4. Their affine expression is the tensor of the top exterior and dual comparisons in [lem-trf-projective-exterior-scalar-comparisons], followed by the conormal and coordinate isomorphisms. Both terms are finite free, so these comparisons apply to $C,V$ and to $\\bigwedge^c C$. Write $e=\\bar f_1\\wedge\\cdots\\wedge\\bar f_c$ and $v_0=dx_0\\wedge\\cdots\\wedge dx_c$, and put primes on their images. The exterior maps send $e\\otimes1$ to $e'$ and $v_0\\otimes1$ to $v'_0$; the dual comparison sends $e^\\vee\\otimes1$ to the functional taking $e'$ to $1$, namely $e'^\\vee$. Thus the induced map $\\delta$ sends $(e^\\vee\\otimes v_0)\\otimes1$ to $e'^\\vee\\otimes v'_0$, with the relation-first orientation unchanged.",
+   "uses": [
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-projective-exterior-scalar-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY (remark-functorial-det); more-algebra.tex Tags 0FJ9 and 0FJB, exterior and dual scalar comparisons"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cofactor-local-descent] to $u':C'\\to V'$ (the free modules of step 3). It gives a well-defined map on $\\operatorname{coker}u'=\\Omega^1_{B'/R'}$ by the primed wedge formula, even when $u'$ is not injective. This is $w'$. For a lift $v\\in V$ of $\\omega\\in\\Omega^1_{B/R}$, let $v'$ denote its image in $V'$. The formula of [lem-sfb-affine-conormal-jacobian-realization] and the exterior/dual maps of step 5 give\n$$\\delta(w(\\omega)\\otimes1)=e'^\\vee\\otimes(u'(\\bar f'_1)\\wedge\\cdots\\wedge u'(\\bar f'_c)\\wedge v')=w'(\\eta(\\omega\\otimes1)).$$\nThe elements $\\omega\\otimes1$ generate over $B'$, so the required square commutes. In the indicated trivializations the coefficient of $v'_0$ is the determinant of the primed augmented Jacobian: expand the wedge multilinearly over permutations of the $dx_j$. Step 3 identifies every entry with its coefficient image, and the finite permutation sum for the determinant commutes with a ring homomorphism. This proves the augmented Jacobian assertion as well.",
+   "uses": [
+    "lem-sfb-cofactor-local-descent",
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "lem-trf-projective-exterior-scalar-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula; primed well-definedness supplied by the cited arbitrary-differential cofactor construction"
+   }
+  },
+  {
+   "text": "For $R\\to R'\\to R''$, all ordinary comparisons agree on $\\bar f_i$, $dx_j$, $d\\bar x_j$ and $e^\\vee\\otimes v_0$: either route sends each to its double-primed counterpart, and these generate their modules. The same calculation gives the identity law. The intrinsic derived cotangent maps have identity, composition and local-model compatibility by [lem-trf-lci-cotangent-presentation]; the determinant pullback maps have these laws and are natural for derived isomorphisms by [lem-trf-two-term-perfect-determinant] and [lem-trf-projective-exterior-scalar-comparisons]. For localization, [lem-weil-pbc-localization-module-exact] identifies localized conormal quotients and cokernels, and [lem-weil-pbc-localization-tensor-product] identifies localized scalar tensors; exterior/dual maps and wedge maps localize by [lem-trf-projective-exterior-scalar-comparisons] and [lem-sfb-cofactor-local-descent]. Their formulas on fractions are the same formulas with localized coefficients. Finally the conormal realization is compatible with transport by isomorphisms by [lem-sfb-affine-conormal-jacobian-realization]; [lem-sfb-two-term-cofactor-naturality] identifies the wedge maps under the resulting derived comparisons, including changes of two-term model. These naturality statements make the coefficient-extension square compatible with such transport. Empty wedges and $\\bigwedge^0 C=B$ give the asserted $c=0$ case, and the formulas remain valid if $B'=0$.",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-sfb-cofactor-local-descent",
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "lem-sfb-two-term-cofactor-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY (remark-functorial-det); cotangent.tex Tag 08QQ; algebra.tex Tags 00CS, 00DL; duality.tex Tag 0E9Y and more-algebra.tex Tag 0FJM, naturality of the cofactor construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-affine-conormal-jacobian-realization",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-sfb-cofactor-local-descent",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-sfb-two-term-cofactor-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QQ, assembled with algebra.tex Tags 00HL, 00DF, 00RV and perfect.tex Tag 0FJY; explicit coefficientwise wedge verification of duality.tex Tag 0E9Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat complete intersection polynomial quotient the conormal cotangent determinant cofactor map commutes with arbitrary base change including nonflat coefficient extensions",
+   "results": "{\"t\": \"2026-10-22T07:26:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat complete intersection polynomial quotient the conormal cotangent determinant cofactor map commutes with arbitrary base change including nonflat coefficient extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"Algebra.Extension.Cotangent.map_comp\", \"Algebra.Generators.CotangentSpace.compEquiv\", \"Algebra.Extension.CotangentSpace.map_comp_apply\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.H1Cotangent.map\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"Algebra.Generators.repr_CotangentSpaceMap\"], \"digest\": \"5de309c23a91305f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:130-178 and RingTheory/Kaehler/TensorProduct.lean:120-180. Ordinary differential base change and flat-change conormal comparisons are partial tools, not the arbitrary coefficient extension theorem for the intrinsic derived model and its determinant-valued cofactor map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-22T07:26:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"KaehlerDifferential.mapBaseChange\", \"KaehlerDifferential.range_mapBaseChange\", \"KaehlerDifferential.mapBaseChange_surjective\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"KaehlerDifferential.mapBaseChange_tmul\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\"], \"digest\": \"d50fd0e402ea8659\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:130-178 and RingTheory/Kaehler/TensorProduct.lean:120-180. Ordinary differential base change and flat-change conormal comparisons are partial tools, not the arbitrary coefficient extension theorem for the intrinsic derived model and its determinant-valued cofactor map."
+  },
+  {
+   "tool": "grep",
+   "query": "(cofactor|determinant).*(baseChange|base_change)|(baseChange|base_change).*(cofactor|conormal)",
+   "results": "{\"t\": \"2026-10-22T07:26:44Z\", \"tool\": \"grep\", \"query\": \"(cofactor|determinant).*(baseChange|base_change)|(baseChange|base_change).*(cofactor|conormal)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:130-178 and RingTheory/Kaehler/TensorProduct.lean:120-180. Ordinary differential base change and flat-change conormal comparisons are partial tools, not the arbitrary coefficient extension theorem for the intrinsic derived model and its determinant-valued cofactor map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Arbitrary base change compatibility of the fundamental class of a flat local complete intersection curve",
+   "results": "{\"t\": \"2026-10-22T07:26:44Z\", \"tool\": \"leansearch\", \"query\": \"Arbitrary base change compatibility of the fundamental class of a flat local complete intersection curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"WeierstrassCurve.VariableChange.map_baseChange\", \"WeierstrassCurve.baseChange_Ψ\", \"WeierstrassCurve.map_baseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"WeierstrassCurve.baseChange_Φ\", \"WeierstrassCurve.baseChange_ΨSq\"], \"digest\": \"7f65015e023f14ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:130-178 and RingTheory/Kaehler/TensorProduct.lean:120-180. Ordinary differential base change and flat-change conormal comparisons are partial tools, not the arbitrary coefficient extension theorem for the intrinsic derived model and its determinant-valued cofactor map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor the conormal complex of a flat regular polynomial quotient along any base ring map: its cokernel and determinant valued wedge map are the base changed differential and cofactor maps",
+   "results": "{\"t\": \"2026-10-22T07:26:54Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor the conormal complex of a flat regular polynomial quotient along any base ring map: its cokernel and determinant valued wedge map are the base changed differential and cofactor maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.cotangentComplexBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"tensorKaehlerQuotKerSqEquiv_tmul_D\", \"Algebra.Extension.tensorCotangent\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"Algebra.Extension.tensorH1Cotangent\", \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\"], \"digest\": \"329f26b58547dd7a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:130-178 and RingTheory/Kaehler/TensorProduct.lean:120-180. Ordinary differential base change and flat-change conormal comparisons are partial tools, not the arbitrary coefficient extension theorem for the intrinsic derived model and its determinant-valued cofactor map."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change",
+   "results": "{\"t\": \"2026-10-22T07:26:54Z\", \"tool\": \"grep\", \"query\": \"baseChange|base_change\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"643f218b3d8fcedc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean:130-178 and RingTheory/Kaehler/TensorProduct.lean:120-180. Ordinary differential base change and flat-change conormal comparisons are partial tools, not the arbitrary coefficient extension theorem for the intrinsic derived model and its determinant-valued cofactor map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary coefficient extension of the conormal cotangent complex and determinant cofactor map for a flat complete intersection polynomial quotient",
+   "results": "{\"t\": \"2026-10-23T11:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"Arbitrary coefficient extension of the conormal cotangent complex and determinant cofactor map for a flat complete intersection polynomial quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.SubmersivePresentation.sectionCotangent\", \"Algebra.Presentation.differentials.hom₁\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Generators.cotangentRestrict\", \"Algebra.Generators.CotangentSpace.compEquiv\"], \"digest\": \"70740e97526331b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Kaehler/TensorProduct.lean:189-255, Ideal/CotangentBaseChange.lean:43-105, and Extension/Cotangent/BaseChange.lean:130-178. Differential base change and flat-scalar conormal tools do not state the combined arbitrary-scalar intrinsic determinant/cofactor compatibility. Other hits are presentation maps or special curve identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T11:12:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"KaehlerDifferential.mapBaseChange\", \"KaehlerDifferential.range_mapBaseChange\", \"KaehlerDifferential.mapBaseChange_surjective\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"KaehlerDifferential.mapBaseChange_tmul\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\"], \"digest\": \"d50fd0e402ea8659\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Kaehler/TensorProduct.lean:189-255, Ideal/CotangentBaseChange.lean:43-105, and Extension/Cotangent/BaseChange.lean:130-178. Differential base change and flat-scalar conormal tools do not state the combined arbitrary-scalar intrinsic determinant/cofactor compatibility. Other hits are presentation maps or special curve identities."
+  },
+  {
+   "tool": "grep",
+   "query": "(cofactor|determinant).*(baseChange|base_change)|(baseChange|base_change).*(cofactor|conormal)",
+   "results": "{\"t\": \"2026-10-23T11:12:18Z\", \"tool\": \"grep\", \"query\": \"(cofactor|determinant).*(baseChange|base_change)|(baseChange|base_change).*(cofactor|conormal)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Kaehler/TensorProduct.lean:189-255, Ideal/CotangentBaseChange.lean:43-105, and Extension/Cotangent/BaseChange.lean:130-178. Differential base change and flat-scalar conormal tools do not state the combined arbitrary-scalar intrinsic determinant/cofactor compatibility. Other hits are presentation maps or special curve identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The wedge map from differentials to the determinant of a flat complete intersection curve commutes with any base ring extension",
+   "results": "{\"t\": \"2026-10-23T11:12:19Z\", \"tool\": \"leansearch\", \"query\": \"The wedge map from differentials to the determinant of a flat complete intersection curve commutes with any base ring extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivBase\", \"KaehlerDifferential.mapBaseChange\", \"CommRingCat.KaehlerDifferential.map\", \"WeierstrassCurve.Projective.baseChange_polynomialX\", \"WeierstrassCurve.map_Δ\", \"exteriorPower.alternatingMapToDual_apply_ιMulti\", \"exteriorPower.map_apply_ιMulti_family\", \"WeierstrassCurve.Jacobian.baseChange_polynomialY\"], \"digest\": \"acf59ad81a171f65\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Kaehler/TensorProduct.lean:189-255, Ideal/CotangentBaseChange.lean:43-105, and Extension/Cotangent/BaseChange.lean:130-178. Differential base change and flat-scalar conormal tools do not state the combined arbitrary-scalar intrinsic determinant/cofactor compatibility. Other hits are presentation maps or special curve identities."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorCotangent|tensorKaehlerEquiv",
+   "results": "{\"t\": \"2026-10-23T11:12:48Z\", \"tool\": \"grep\", \"query\": \"tensorCotangent|tensorKaehlerEquiv\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"90aee6e92b07352b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Kaehler/TensorProduct.lean:189-255, Ideal/CotangentBaseChange.lean:43-105, and Extension/Cotangent/BaseChange.lean:130-178. Differential base change and flat-scalar conormal tools do not state the combined arbitrary-scalar intrinsic determinant/cofactor compatibility. Other hits are presentation maps or special curve identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a flat complete intersection conormal differential along a nonflat base ring map preserves the intrinsic cotangent determinant and its augmented Jacobian wedge formula",
+   "results": "{\"t\": \"2026-10-23T11:12:54Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a flat complete intersection conormal differential along a nonflat base ring map preserves the intrinsic cotangent determinant and its augmented Jacobian wedge formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"Algebra.Extension.tensorCotangent\", \"Algebra.Extension.tensorCotangentSpace\", \"Algebra.Extension.CotangentSpace.map_tmul\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"KaehlerDifferential.cotangentComplexBaseChange\", \"tensorKaehlerQuotKerSqEquiv_tmul_D\", \"Algebra.Extension.CotangentSpace.map\"], \"digest\": \"e7da8ee0f8c58d97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Kaehler/TensorProduct.lean:189-255, Ideal/CotangentBaseChange.lean:43-105, and Extension/Cotangent/BaseChange.lean:130-178. Differential base change and flat-scalar conormal tools do not state the combined arbitrary-scalar intrinsic determinant/cofactor compatibility. Other hits are presentation maps or special curve identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-curve-fundamental-class",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; Tag 08QQ (lemma-flat-base-change-cotangent-complex), Tor-independent form; perfect.tex Tag 0FJY; duality.tex Tag 0E9Y wedge formula. Extracts old proof step 8, including the derived model and coefficientwise compatibility, rather than asserting compatibility only for flat base changes.",
+   "via": [
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-curve-cofactor-scalar-extension",
+  "worker": "stage1",
+  "summary": "Preserved every statement clause. Split arbitrary nonflat coefficient extension into flat-quotient tensor exactness, conormal quotient and basis calculations, Tor-independent intrinsic cotangent base change, determinant scalar comparison, the explicit wedge identity, and localization/transport/composition. All inputs already have DAG nodes; no new nodes.",
+  "blueprint": "Historical ancestor place retained: det-thm-sf-ctf-stability-direct-images (3), local adjunction normalization in the alteration input, old fundamental-class proof step 8. The current latest blueprint direct-images proof (3) is shorter and invokes preservation tools; this subordinate algebra lemma realizes the already-recorded local normalization prerequisite, without changing the unit route. No current blueprint node states this coefficientwise lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Generic intrinsic cotangent Tor-independent base change, already a statement dependency; no geometric trace-formula result is used."
+   },
+   {
+    "node": "lem-trf-two-term-perfect-determinant",
+    "why": "Generic determinant functor and arbitrary pullback coherence, already a statement dependency; no trace-formula theorem is used."
+   },
+   {
+    "node": "lem-trf-projective-exterior-scalar-comparisons",
+    "why": "Generic finite-projective exterior/dual scalar maps, needed to spell out the determinant formula without a flat coefficient map."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flatness criterion, used for B[0] and the displayed free complex."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module computation of derived tensor on a K-flat first factor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-cbe9ddcf3",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-cbe9ddcf3 (reviewer sub-agent of L); spot-checked: First split, 7 steps, no new nodes. Statement and stmt_deps are identical to live; the item is still unsplit there, with no repair note. Read every cited statement. Step 1: B being R-flat makes I⊗R'→P' injective via flat-quotient-tensor-injective (N=R'), so I⊗R'=I'. Step 2: I²⊗R' maps onto I'², so C⊗B'≅C'. Step 3: free bases go to free bases, coefficient extension commutes with ∂/∂x_j so u⊗1=df', and Kähler base change gives η. Step 4: B[0] is K-flat, so the square is Tor-independent; E is finite free, so it is K-flat; Stacks 08QQ (cotangent.tex l.985) assumes Tor-independence, as the step uses. The H^0=η identification is sound because f' is Koszul-regular: K(f)⊗R' has homology Tor^R_i(B,R')=0 (advisory only). Step 5: the exterior/dual scalar maps send e^∨⊗v0 to e'^∨⊗v0'. The determinant node does not spell out that its pullback iso is the scalar-extension map on models; this is the reading used across the DAG and there is no sign issue (advisory). Step 6: cofactor-local-descent applied to u' needs no injectivity, and the wedge identity checks on generators. Step 7: identity, composition, localization and transport laws are all in the cited statements. Tested c=0, B'=0, f=x0²−2 over ℤ→𝔽₂ (u'=0, w'=0, consistent) and f=2x0 (not flat, step 1 fails as expected). No duplicates: trf-flat-lci-presentation-base-change needs a Noetherian base. Batch-5 flags: projective-exterior-scalar-comparisons is generic linear algebra, not part of the trace formula or Poincaré duality. cofactor-local-descent and two-term-cofactor-naturality reach sec-trace-formula only through that node and the generic determinant functor, which is already a stmt_dep on base. All accepted. No SGA."
+ }
+}

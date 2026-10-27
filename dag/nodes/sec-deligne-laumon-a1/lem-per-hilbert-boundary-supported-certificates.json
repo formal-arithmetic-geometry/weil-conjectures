@@ -1,0 +1,303 @@
+{
+ "id": "lem-per-hilbert-boundary-supported-certificates",
+ "kind": "statement",
+ "title": "Supported boundary certificates for Hilbert coefficient transforms",
+ "statement": "Let $L$ be a characteristic-zero field, $A=L[[W_1,\\ldots,W_m,Z_1,\\ldots,Z_r]]$, $\\mathfrak m=(W,Z)$, and $K=(f_1,\\ldots,f_s)\\subset A$ [def-weil-field, def-weil-pbc-multivariate-power-series]. Fix positive degrees $d_i$, ordered orthant vertices $(0,\\alpha_i)$ of degrees $d_i$, and first-vertex quotient supports $\\Delta_i$ as in [def-trf-supported-homogeneous-division]. Group vertices by degree and write $Z^\\ell$ for the essential variables of each accumulated block. Suppose pure transverse forms $A_i(Z)$ of degrees $d_i$ have unique supported homogeneous division for every degree prefix, and $f_i(0,Z)=A_i(Z)$ modulo terms of degree greater than $d_i$. Suppose the following certificates hold: every $Z^\\beta f_i$ is a sum $\\sum_hq_hf_h$ with $q_h$ supported in $\\Delta_h$; the block derivatives $g_j=\\partial_Z^{\\beta_j}f_{i(j)}$, with $\\alpha_{i(j)}=\\beta_j+e_j$, belong to $(Z^\\ell)$ with invertible transverse Jacobian; and $\\partial_{Z^\\ell}^\\delta f_i\\in(Z^\\ell)$ for later blocks whenever $\\delta$ lies in the prefix diagram and $|\\delta|\\le Q$, where $Q\\ge\\max_i d_i-1$ [def-trf-formal-power-series-partial-derivative]. These are identities of whole series, including all multiplication certificates, not only equalities of initial forms.\nPut $D=\\bigcup_i((0,\\alpha_i)+\\mathbf N^{m+r})$ and $H_D(t)=\\#\\{\\eta\\notin D:|\\eta|\\le t\\}$. Write $f_i=\\sum_\\gamma c_{i\\gamma}(W)Z^\\gamma$ and $S$ for the conditions $\\operatorname{ord}c_{i\\gamma}\\ge d_i-|\\gamma|$ for $|\\gamma|<d_i$. Order means containment in the corresponding power of $(W)$, with infinite order for zero [def-trf-marked-ideal-order]. Then $H_K(t)=\\dim_L A/(K+\\mathfrak m^{t+1})$ is lexicographically at most $H_D$, and equals $H_D$ exactly when $S$ holds. When $S$ holds, the $f_i$ have orders $d_i$, have supported homogeneous division for every prefix, and generate $K$ by supported sums. Moreover $K:e^\\infty=K$ for every coefficient coordinate $e=W_j$, where $K:e^\\infty=\\{f:\\exists v\\ge0,\\ e^vf\\in K\\}$. Without $S$, saturation by such an $e$ can only further decrease $H_K$, so cannot produce the level $H_D$ from a strictly smaller function. The assertions include coefficient-field extensions and empty families ($K=0,D=\\varnothing$).\nThe conclusion applies to the regular Taylor models of such certificates after boundary-chart substitutions $W_u=e$, $W_v=e(\\xi+V)$ with all $Z$ unchanged, provided the displayed pure transverse forms and whole-series certificates are retained at the point in question. It does not assert that an arbitrary equality-locus-only standard basis retains these certificates.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-trf-marked-ideal-order",
+  "def-weil-vector-space-dimension",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-trf-hilbert-samuel-invariant"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $S$ holds. For $|\\gamma|<d_i$, the order of $c_{i\\gamma}(W)Z^\\gamma$ is at least $d_i$; the other terms automatically have that order. The degree-$d_i$ part $H_i(W,Z)$ restricts at $W=0$ to $A_i(Z)$. The pure supported division hypothesis makes $A_i$ nonzero (the column with quotient $1$ belongs to its basis), so $\\operatorname{ord}f_i=d_i$. Apply [lem-trf-homogeneous-division-extra-variables] with $U=W,V=Z$ to each degree prefix. It gives supported homogeneous division for the corresponding $H_i$ in all variables. Then [lem-trf-homogeneous-continuous-formal-division] gives unique formal division, continuous quotient and remainder maps, and a closed space $M$ of supported sums, equal to the kernel of its remainder map $r$.",
+   "uses": [
+    "lem-trf-homogeneous-division-extra-variables",
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, route reference; BM 1997, (7.2)(1)--(2), Lemma 7.3, p.263. Extra-variable specialization of the formal division calculation."
+   }
+  },
+  {
+   "text": "Still under $S$, each multiplication certificate puts $Z^\\beta f_i$ in $M$. Since all vertices have zero $W$ components, multiplying its quotients by a $W$-monomial preserves their supports $\\Delta_h$. Thus every polynomial multiple of every $f_i$ lies in $M$. For any series $a_i$, its finite total-degree truncations times $f_i$ converge to $a_if_i$. Closedness of $M$ therefore puts $K=(f_i)$ in $M$; the reverse inclusion holds because a supported sum is a finite sum of series multiples of the $f_i$. Hence $K=M=\\ker r$. Apply the Hilbert-dimension conclusion of [lem-trf-homogeneous-continuous-formal-division] with $I=K$: $H_K=H_D$, and all of $K$ has supported generation. Prefix homogeneous division was already obtained in Step 1; supported generation of $K$ here uses the full family.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Lemmas 7.3 and 7.5, p.263; the passage from monomial multiplication certificates to the closed supported-sum space is written explicitly here."
+   }
+  },
+  {
+   "text": "If $S$ fails, then some $\\operatorname{ord}f_i<d_i$: expansion by the distinct $Z$-monomials makes this exactly a failed coefficient inequality. Let $k=\\min\\{\\operatorname{ord}f_i:\\operatorname{ord}f_i<d_i\\}$, and retain the degree prefix $P=\\{h:d_h\\le k\\}$ with diagram $D_P$. Every retained $f_h$ has order $d_h$; otherwise its order would be less than $d_h\\le k$, contradicting minimality of $k$. The proof of Step 1, for this prefix, gives the homogeneous basis and continuous division, even though the later generators may violate $S$. Apply [lem-trf-homogeneous-continuous-formal-division] with these divisors and $I=K$, which contains them. Thus $H_K(t)\\le H_{D_P}(t)$ for every $t$. Because all omitted vertex degrees exceed $k$, $D_P$ and $D$ agree through degree $k$, so $H_K(t)\\le H_D(t)$ for $t\\le k$. This includes an empty prefix.",
+   "uses": [
+    "lem-trf-homogeneous-division-extra-variables",
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, (7.2)(2) and Corollary 7.4, p.263; agent-written minimal failing order argument for the stronger certificate interface."
+   }
+  },
+  {
+   "text": "Choose $i$ with $\\operatorname{ord}f_i=k<d_i$ and let $h=\\operatorname{in}_k(f_i)\\ne0$. If $P$ is nonempty, use its last accumulated essential block $Z^\\ell$. A degree-$k$ monomial has $Z^\\ell$ exponent $\\delta$ of size at most $k<d_i\\le Q+1$. For $\\delta$ in the restricted prefix diagram the assumed membership $\\partial_{Z^\\ell}^\\delta f_i\\in(Z^\\ell)$, evaluated at $Z^\\ell=0$, reads $\\delta!\\,[ (Z^\\ell)^\\delta ]f_i=0$. The coefficient here is a whole series in all complementary variables. Characteristic zero makes $\\delta!$ invertible, so every such coefficient vanishes. Thus $h$ is supported outside $D_P$; this is automatic if $P$ is empty. The homogeneous basis from Step 3 implies that this nonzero complement-supported polynomial is independent of the supported degree-$k$ prefix columns. Modulo $\\mathfrak m^{k+1}$ those prefix columns have independent lowest homogeneous parts in every degree at most $k$, with total number $\\#\\{\\eta\\in D_P:|\\eta|\\le k\\}$. The column $f_i$ supplies one further independent relation: in any dependence, take the smallest total degree; prefix independence eliminates all degrees below $k$, and in degree $k$ the complement-supported $h$ is independent of the remaining prefix columns. Consequently $H_K(k)<H_{D_P}(k)=H_D(k)$. Together with the inequalities through $k$ in Step 3 this proves $H_K<_{\\mathrm{lex}}H_D$.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "lem-trf-homogeneous-division-extra-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, (7.2)(5), p.262, and the supported-basis dimension count of Corollary 7.4; explicit agent-written strict-drop argument, not an application of the geometric equality-locus theorem."
+   }
+  },
+  {
+   "text": "Under $S$, let $e=W_j$. In the unique division $a=\\sum q_i(a)f_i+r(a)$ multiply by $e$. All quotient supports remain allowed, and $e\\,r(a)$ is still supported outside $D$, because membership in $D$ depends only on the $Z$ exponent. Uniqueness of division therefore gives $r(ea)=e\\,r(a)$ and, by induction, $r(e^va)=e^v r(a)$. If $e^va\\in K=\\ker r$, the latter expression is zero. Multiplication by $e^v$ shifts the $W_j$ coefficients of a formal series injectively, so $r(a)=0$ and $a\\in K$. This proves $K:e^\\infty=K$, including $v=0$. In general $K\\subseteq K:e^\\infty$ induces surjections of every truncated quotient, so $H_{K:e^\\infty}(t)\\le H_K(t)$ pointwise. Hence a strict lexicographic drop from Step 4 cannot be restored by saturation.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Lemma 7.3 and Lemma 7.5, p.263; coefficient-coordinate saturation proved directly by uniqueness, with no flatness or freeness theorem invoked."
+   }
+  },
+  {
+   "text": "In a boundary chart the ordinary pullback is $f_i'=\\sum_\\gamma\\sigma(c_{i\\gamma})Z^\\gamma$, with $\\sigma(W_u)=e$, $\\sigma(W_v)=e(\\xi+V)$ and $\\sigma(Z)=Z$. There is no division by an exceptional power in this assertion. Applying the continuous substitution to a certificate gives $Z^\\beta f_i'=\\sum_h\\sigma(q_h)f_h'$. Since first-vertex supports restrict only $Z$, these new quotients remain supported. Also $\\partial_Z^\\delta\\sigma(f)=\\sigma(\\partial_Z^\\delta f)$ coefficientwise, and the ideals $(Z^\\ell)$ are preserved; a local Taylor homomorphism carries the Jacobian units to units. At every model point where the stipulated pure forms and certificates are retained, Steps 1--5 apply to this new series family itself. They give exactly the new coefficient-order test, Hilbert comparison and saturation conclusion asserted. This is a conditional assertion about those model points, not an invariance assertion at arbitrary points of an equality-locus-only basis.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, Theorem 7.21(2), p.269, boundary substitution formula; ILO VIII 2.3.11--2.3.13 and BMT 2009 section 5.2 for the route. The conditional Taylor-model application is direct substitution."
+   }
+  },
+  {
+   "text": "After a coefficient-field embedding $L\\hookrightarrow L'$, each finite-degree homogeneous basis remains a basis by [lem-trf-homogeneous-division-extra-variables]. Whole-series identities and derivative memberships map coefficientwise; nonzero coefficients stay nonzero and Jacobian units stay units. A coefficient's order is unchanged because its first nonzero coefficient remains nonzero. Thus the arguments of Steps 1--6, including finite-degree dimension counts, apply over $L'$. If $s=0$, then $K=0$ and $D=\\varnothing$; the monomials of degree at most $t$ form the finite basis of $A/\\mathfrak m^{t+1}$, giving $H_K=H_D$. All coefficient conditions are empty and coefficient-coordinate multiplication is injective directly. There is then no failure case to minimize. Empty sets of coefficient variables make the saturation assertion vacuous.",
+   "uses": [
+    "lem-trf-homogeneous-division-extra-variables"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "BM 1997, formal supported division in section 7, including the empty family; BMT 2009 sections 6.1--6.2 for coefficient-field and presentation context."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-homogeneous-division-extra-variables",
+  "lem-trf-homogeneous-continuous-formal-division",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13, pp.93--94, route reference; detailed formal inputs BM 1997 (7.2), Lemmas 7.3--7.5 and boundary formula Theorem 7.21(2), pp.262--263,269. Explicit minimal-order and saturation arguments written by Q132; BM journal PDF read online, archival local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundary.*(saturat|standard)|standard.*(blowup|Hilbert)|coefficient.*test.*sequence",
+   "results": "{\"t\": \"2026-10-24T07:14:52Z\", \"tool\": \"grep\", \"query\": \"boundary.*(saturat|standard)|standard.*(blowup|Hilbert)|coefficient.*test.*sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean\", \"Mathlib/Analysis/CStarAlgebra/Module/Defs.lean\", \"Mathlib/Analysis/InnerProductSpace/StandardSubspace.lean\", \"Mathlib/Analysis/InnerProductSpace/StandardSubspace.lean\", \"Mathlib/Analysis/InnerProductSpace/StandardSubspace.lean\"], \"digest\": \"83e290b2b82c087c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal division coefficients boundary substitution Hilbert Samuel strict transform saturation",
+   "results": "{\"t\": \"2026-10-24T07:14:52Z\", \"tool\": \"leansearch\", \"query\": \"Formal division coefficients boundary substitution Hilbert Samuel strict transform saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.le_saturation\", \"Subalgebra.saturation\", \"Subalgebra.mem_saturation_iff\", \"Subalgebra.saturation_saturation\", \"Polynomial.coeff_divModByMonicAux_mem_span_pow_mul_span\", \"Polynomial.coeff_divByMonic_mem_pow_natDegree_mul\", \"PowerSeries.coeff_subst'\", \"MvPolynomial.coeff_divMonomial\"], \"digest\": \"9a4fa247e71ef388\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal",
+   "results": "{\"t\": \"2026-10-24T07:14:52Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.hasSubstIdeal\", \"PowerSeries.HasSubst.ideal\", \"MvPowerSeries.truncTotalAlgHom\", \"MvPowerSeries.truncTotal_sub_truncTotal_mem_pow_idealOfVars\", \"MvPowerSeries.truncTotal_mul_sub_mul_truncTotal_mem_pow_idealOfVars\", \"MvPowerSeries.truncTotalAlgHom_apply\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"0548ef17b7bd08e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported standard bases under boundary coordinate blowups detect order drops and saturation at the retained Hilbert Samuel level",
+   "results": "{\"t\": \"2026-10-24T07:14:53Z\", \"tool\": \"leanfinder\", \"query\": \"Supported standard bases under boundary coordinate blowups detect order drops and saturation at the retained Hilbert Samuel level\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adic_basis\", \"MvPowerSeries.LinearTopology.basis_le_iff\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"mem_reesAlgebra_iff_support\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\", \"MvPowerSeries.LinearTopology.basis_le\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\"], \"digest\": \"99b29a559e6cd4b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturation by an exceptional parameter preserves a formal ideal with a supported basis in transverse variables",
+   "results": "{\"t\": \"2026-10-24T07:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"Saturation by an exceptional parameter preserves a formal ideal with a supported basis in transverse variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.LinearTopology.basis\", \"MvPowerSeries.LinearTopology.basis_le_iff\", \"Ideal.adic_basis\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"MvPowerSeries.LinearTopology.basis_le\", \"MvPowerSeries.LinearTopology.mem_basis_iff\", \"Ideal.hasBasis_nhds_adic\", \"Ideal.adic_module_basis\"], \"digest\": \"865a9f3fe91a138c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "standard[Bb]asis|[Ss]upported.*[Dd]ivision|[Hh]ilbert.?[Ss]amuel",
+   "results": "{\"t\": \"2026-10-24T07:17:54Z\", \"tool\": \"grep\", \"query\": \"standard[Bb]asis|[Ss]upported.*[Dd]ivision|[Hh]ilbert.?[Ss]amuel\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal ideal with block triangular homogeneous standard basis and supported multiplication identities has fixed Hilbert function exactly when all low coefficient orders are retained",
+   "results": "{\"t\": \"2026-10-24T07:18:52Z\", \"tool\": \"leanfinder\", \"query\": \"A formal ideal with block triangular homogeneous standard basis and supported multiplication identities has fixed Hilbert function exactly when all low coefficient orders are retained\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.irrelevant_le\", \"HomogeneousIdeal.toIdeal_irrelevant_le\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousIdeal.toAddSubmonoid_irrelevant_le\", \"MvPowerSeries.LinearTopology.basis_le_iff\", \"HomogeneousIdeal.ext'\", \"HomogeneousIdeal.irrelevant_eq_span\", \"Ideal.leadingCoeffNth_mono\"], \"digest\": \"d291e03b2c9f35b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Standard basis low coefficient orders Hilbert function equality saturation by coefficient parameter",
+   "results": "{\"t\": \"2026-10-24T07:18:53Z\", \"tool\": \"leansearch\", \"query\": \"Standard basis low coefficient orders Hilbert function equality saturation by coefficient parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.Sequence.basis.congr_simp\", \"Polynomial.Sequence.basis\", \"Polynomial.degreeLT.basis\", \"Polynomial.Sequence.basis_eq_self\", \"MvPowerSeries.coeff_mul_right_one_sub_of_lt_order\", \"Polynomial.basisMonomials\", \"Polynomial.Sequence.basis_natDegree_strictMono\"], \"digest\": \"e730de196d723b4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern power-series substitution, adic topology, polynomial bases and unrelated saturation; none gives the conditional block-division Hilbert equality and coefficient-parameter saturation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]upported.*[Dd]ivision|[Hh]ilbert.?[Ss]amuel|standard[Bb]asis",
+   "results": "{\"t\": \"2026-10-24T07:58:39Z\", \"tool\": \"grep\", \"query\": \"[Ss]upported.*[Dd]ivision|[Hh]ilbert.?[Ss]amuel|standard[Bb]asis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; univariate Weierstrass division, substitution/truncation, linear topology and Rees membership do not give this multivariate supported certificate comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturation of a formal power series ideal by coefficient variable and supported standard basis",
+   "results": "{\"t\": \"2026-10-24T07:58:40Z\", \"tool\": \"leansearch\", \"query\": \"Saturation of a formal power series ideal by coefficient variable and supported standard basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mem_reesAlgebra_iff_support\", \"MvPowerSeries.LinearTopology.basis\", \"PowerSeries.maximalIdeal_eq_span_X\", \"Polynomial.Sequence.basis\", \"PowerSeries.idealX\", \"PowerSeries.isNoetherianRing\", \"PowerSeries.span_X_isPrime\", \"PowerSeries.ker_coeff_eq_max_ideal\"], \"digest\": \"0a8ec014c2fa9f90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; univariate Weierstrass division, substitution/truncation, linear topology and Rees membership do not give this multivariate supported certificate comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal",
+   "results": "{\"t\": \"2026-10-24T07:58:40Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.hasSubstIdeal\", \"PowerSeries.HasSubst.ideal\", \"MvPowerSeries.truncTotalAlgHom\", \"MvPowerSeries.truncTotal_sub_truncTotal_mem_pow_idealOfVars\", \"MvPowerSeries.truncTotal_mul_sub_mul_truncTotal_mem_pow_idealOfVars\", \"MvPowerSeries.truncTotalAlgHom_apply\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"0548ef17b7bd08e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; univariate Weierstrass division, substitution/truncation, linear topology and Rees membership do not give this multivariate supported certificate comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series ideal with supported division and vanishing forbidden coefficients has Hilbert Samuel function equal to its monomial diagram exactly when coefficient orders hold",
+   "results": "{\"t\": \"2026-10-24T07:58:41Z\", \"tool\": \"leanfinder\", \"query\": \"Formal power series ideal with supported division and vanishing forbidden coefficients has Hilbert Samuel function equal to its monomial diagram exactly when coefficient orders hold\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"MvPowerSeries.LinearTopology.basis_le_iff\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisionAt.coeff_f_sub_r_mem\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\"], \"digest\": \"2c55097eabca6dae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; univariate Weierstrass division, substitution/truncation, linear topology and Rees membership do not give this multivariate supported certificate comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel function of a power series quotient drops when a later standard basis generator acquires a lower order term outside the earlier initial diagram",
+   "results": "{\"t\": \"2026-10-24T08:23:23Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel function of a power series quotient drops when a later standard basis generator acquires a lower order term outside the earlier initial diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\"], \"digest\": \"dd73b0356ff1ce46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types; univariate Weierstrass division, substitution/truncation, linear topology and Rees membership do not give this multivariate supported certificate comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-scheme-hilbert-samuel-test-presentations",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (duality), regular-resolution branch: BMT section 6.2 minimal-envelope presentation, with the actual nonreduced structure sheaf. Auxiliary input to the exceptional-intersection test in lem-per-scheme-hilbert-samuel-test-presentations, Step 6: whole-series supported boundary certificates, strict drop and coefficient-coordinate saturation.",
+   "via": [
+    "lem-per-scheme-hilbert-samuel-test-presentations",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-hilbert-boundary-supported-certificates",
+  "worker": "stage1",
+  "summary": "Seven explicit steps prove the supplied certificate interface using existing extra-variable and continuous formal-division nodes. The strict-drop argument chooses the smallest failing order and uses forbidden derivative identities to obtain an independent relation outside the earlier prefix diagram. Saturation follows from coefficient-coordinate equivariance of the unique remainder; boundary substitutions are ordinary pullbacks with unchanged Z. No new nodes or statement changes.",
+  "blueprint": "Auxiliary formal Hilbert input in the ancestor Step 3 regular-resolution branch, via the historical created.item chain; realizes the exceptional-intersection coefficient test used by lem-per-scheme-hilbert-samuel-test-presentations Step 6. The current affine-curve statement and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-homogeneous-division-extra-variables",
+    "why": "Generic homogeneous-basis extension in free variables; supplies the formal polynomial calculation, not a replacement for any perverse-unit step."
+   },
+   {
+    "node": "lem-trf-homogeneous-continuous-formal-division",
+    "why": "Generic complete formal-series division, closed supported sums and finite-jet dimension comparison; the present unit has no competing formal algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-homogeneous-division-extra-variables",
+  "lem-trf-homogeneous-continuous-formal-division"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-79db24a76",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-79db24a76 (reviewer sub-agent of L); spot-checked: First delivery of Q132 lem-per-hilbert-boundary-supported-certificates: no new nodes, imported statement unchanged, the empty proof replaced by 7 steps; I read all of it. Step 1: under S every term has order >= d_i; vertices are minimal, so 0 is in Delta_i, A_i is nonzero and ord f_i = d_i. The extra-variables lemma (i)=>(ii) with U=W, V=Z, then continuous-formal-division, gives unique continuous division and the closed space M = ker r. Step 2: certificates hold for all Z^beta f_i and W-monomials keep the supports, so closedness gives K = M = ker r and H_K = H_D. Step 3: failure of S means some ord f_i < d_i; take k the least failing order; every generator of the prefix P = {d_h <= k} satisfies S; division of the prefix gives H_K <= H_{D_P}, and H_{D_P} = H_D through degree k. Step 4: the derivative hypothesis (|delta| <= k <= Q) and char 0 put in_k f_i outside D_P, and the minimal-degree independence argument gives H_K(k) < H_D(k), a strict lex drop. This also holds for P empty and k = 0. Step 5: uniqueness of division gives r(ea) = e r(a), so K:e^inf = K; without S saturation only lowers H pointwise. Step 6: the boundary substitution is a continuous local map that keeps every certificate; the clause is conditional and has no e^{-d} division. Step 7: field extension and the empty family are checked. Small cases Z^2+W, Z, Z^2+W^2, the empty family and k=0 all agree. Not a duplicate of lem-trf-coefficient-order-hilbert-equality, coefficient-locus-uniform-division or coordinate-blowup-division-generators (all geometric or controlled-transform statements). ILO VIII 2.3.11-2.3.13 pp.93-94 is only the route reference; BM is not local, so I checked the agent-written proof against the cited node statements. Batch-5: the two newly cited sec-trace-formula nodes (homogeneous-division-extra-variables and homogeneous-continuous-formal-division, unit sk-i-curve-zero) are generic BM formal-division algebra. Their full closure is 12 formal-algebra nodes and reaches no trace-formula, Poincare-duality, sk-thm or batch-4 node, and neither assumption gives these facts, so I accept them as generic tools. I also accept the tool_uses the worker recorded for these two nodes. The unused Jacobian hypothesis is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HilbertBoundarySupportedCertificates",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.hilbert_boundary_supported_certificates",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.transverseCoefficient",
+   "AlgebraicGeometry.HilbertCoefficient.BoundaryOrderCondition",
+   "AlgebraicGeometry.HilbertCoefficient.boundaryHilbert",
+   "AlgebraicGeometry.HilbertCoefficient.boundarySaturation",
+   "AlgebraicGeometry.HilbertCoefficient.boundaryBlockJacobian",
+   "AlgebraicGeometry.HilbertCoefficient.SupportedBoundaryCertificates",
+   "AlgebraicGeometry.HilbertCoefficient.SupportedBoundaryConclusions",
+   "AlgebraicGeometry.HilbertCoefficient.boundaryChartVariables",
+   "AlgebraicGeometry.HilbertCoefficient.hilbert_boundary_supported_certificates",
+   "AlgebraicGeometry.HilbertCoefficient.hilbert_boundary_supported_certificates_map",
+   "AlgebraicGeometry.HilbertCoefficient.hilbert_boundary_supported_certificates_chart"
+  ],
+  "file": "lean/Sheaf/RingTheory/HilbertBoundarySupportedCertificates.lean",
+  "statement": "theorem hilbert_boundary_supported_certificates {L : Type u} [Field L] [CharZero L] {m r s : ℕ} (α : Fin s → Fin r →₀ ℕ) (A : Fin s → MvPolynomial (Fin r) L) (f : Fin s → MvPowerSeries (Fin m ⊕ Fin r) L) (Q : ℕ) (cert : SupportedBoundaryCertificates α A f Q) : SupportedBoundaryConclusions α f",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 4f885346c5ec: canonical boundaryHilbert, boundarySaturation and boundaryChartVariables and their consumers now share this one owning module; no duplicate helper module or definition node. Declaration names, definition bodies and theorem signatures unchanged. Helpers belong to the certificate notion stated by this item, as authorized by brief-stage2 section 1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40ad8e90b",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Re-delivery after landing RETURN of 4f88 (helper names clashed with parallel Q155's module, which has since been retired; no clash on live or in blueprint-index). Diff vs 4f88: the two modules merged into the item module, helper blueprint tags renamed, 11 declarations recorded, def-per-supported-boundary-certificates node and stmt_dep dropped; definition bodies and theorem signatures unchanged. Clause check: field/ring/ideal; ordered minimal vertices via fullVertex; Delta_i = quotientSupport; pure prefix unique division; transverseJet; whole-series multiplication certificates not conditional on S; pick/beta first essential block, block membership, Jacobian unit, later derivatives with Q >= d_i - 1; S as (W)^(d-|gamma|) containment; H_K = finrank of A/(K + m^(t+1)) and H_D = ncard; conclusions lex <=, equality iff S, orders/prefix division/supported generation/saturation under S, saturation membership criterion, Hilbert decrease and persistence of a strict drop; _map for any embedding in an independent universe; _chart conditional on actual subst with W_u -> W_u, W_v -> W_u(xi+W_v), Z fixed. Edge cases s=0, r=0, m=0, empty prefix, k=0, t=0, v=0 checked. lean.statement verbatim; 3 sorry only; docstrings carry source/blueprint and the 7 proof steps; dep records on live. No compile needed (no file changed). Advisories: cert in _chart unused, Jacobian hypothesis unused by the proof."
+ }
+}

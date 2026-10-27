@@ -25,13 +25,11 @@
  ],
  "proof": [
   {
-   "text": "Apply [lemma-constructible-pullback-stratification] to $f$ and $(i_i)$: the base-changed immersions $j_i$ have pairwise disjoint images $f^{-1}(|S_i|)$ covering $X$. Their images are constructible by [lem-pur-scheme-constructible-preimage], applied to the constructible images of $i_i$. Delete the empty images; this preserves the covering, disjointness and finiteness. Base change each covering family along $f_i$. Its arrows remain weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change] and the family remains fpqc by [lem-galois-fpqc-covering-base-change]. These are precisely the covering conditions in [def-weil-pbc-proetale-site], so the $V_{ia}$ give the asserted covers. No finite-type hypothesis on $f$ is used.",
+   "text": "Construct the nonempty pullback-stratum index set I = { i : Fin n | Nonempty (X times_Y S_i) } and enumerate it by Fintype.equivFin. Define each stratum directly as f-preimage of the original stratum, with its pullback scheme and pullback.fst immersion. Local closedness, disjointness, constructibility and the range equation follow from continuous preimage, [lem-pur-scheme-constructible-preimage], and the pullback range formula. For coverage, any point x over a stratum gives a point of that pullback by the range formula, hence its index lies in I. This includes empty schemes and the empty index set. Apply the cover-preserving pro-etale base-change functor of [def-weil-proetale-inverse-image] to each original covering sieve. Pull back along its invertible terminal comparison and use uniqueness of maps into the terminal object to identify the arrows with the displayed terminal arrows. This gives the covering clause for every i, without using the nonempty hypothesis.",
    "uses": [
-    "lemma-constructible-pullback-stratification",
+    "def-constructible-stratification",
     "lem-pur-scheme-constructible-preimage",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-galois-fpqc-covering-base-change",
-    "def-weil-pbc-proetale-site"
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -40,118 +38,100 @@
    }
   },
   {
-   "text": "For composable scheme maps $T\\xrightarrow h W\\xrightarrow k Z$, let $\\alpha:(kh)^{-1}\\simeq h^{-1}k^{-1}$ be the canonical inverse-image compositor. The finite rings $R/t^n$ of [def-weil-l-adic-coefficient-extension] satisfy [lem-trf-constant-coefficient-composition]. Thus, suppressing $\\alpha$ in the notation, the defining projection equations give\n$$\\pi_{T,n}c_hh^{-1}c_k=c^h_nh^{-1}(\\pi_{W,n})h^{-1}c_k=c^h_nh^{-1}(c^k_n)h^{-1}k^{-1}(\\pi_{Z,n})=c^{kh}_n(kh)^{-1}(\\pi_{Z,n})=\\pi_{T,n}c_{kh}.$$\nMaps into $B_T$ are determined by all these projections, by [def-pur-sheaf-inverse-limit]. This proves equality of the coefficient structural maps for a composite, and proves their equality at each finite projection at the same time. In particular apply this calculation to $fj_i=i_if_i$. It asserts equality of maps and does not require any of the completed coefficient maps to be invertible.",
+   "text": "For coefficientMap_comp, use the direct-image constant-map composition calculation in [lem-tw-completed-coefficient-ringed-coherence] at every quotient R/t^(n+1), then forget commutativity. The projection specification in [def-sf-ordinary-integral-pullback-construction] shows that the composite completed direct-image map has the same projections as the map of the composite morphism; uniqueness makes them equal. Taking adjunction mates through the specified geometric direct-image compositor gives exactly inverseComp and the completed inverse-image composition equation. Adjunction naturality also gives every displayed finite projection equation. The slice coherence remains the declared input to the ordinary chart-comparison step.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-trf-constant-coefficient-composition",
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CB, lemma-composition-morphisms-sites, and Tag 0H7J, example-constant-sheaf; elementary projection calculation for the inverse limit"
-   }
-  },
-  {
-   "text": "For any chart $u:U_{ia}\\to S_i$, [lem-weil-proetale-weakly-etale-localization] identifies $(S_i)_{\\mathrm{proet}}/U_{ia}$ with $(U_{ia})_{\\mathrm{proet}}$, and identifies the restrictions of every constant ring $R/t^n$ by the identity on constant sections. Limits are sectionwise by [def-pur-sheaf-inverse-limit]; hence the restricted ring $B_{S_i}|_{U_{ia}}$ is $B_{U_{ia}}$, with precisely the restricted finite projections. Do the same on $X_i$ and $V_{ia}$. Apply [lem-weil-pbc-localize-ringed-site-morphism] to the base-change functor defining $f_i$. Its localized coefficient map, under these ring identifications, is $c_{v_{ia}}$: at every finite projection both maps are induced by the same constant-section map, so the preceding projection argument identifies them. Thus this localized ringed morphism is the one used to define $P_{v_{ia}}$.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-sheaf-inverse-limit",
-    "lem-weil-pbc-localize-ringed-site-morphism"
+    "lem-tw-completed-coefficient-ringed-coherence",
+    "def-sf-ordinary-integral-pullback-construction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; proetale.tex Tag 09AE localization convention; sectionwise limit identification"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; projection-defined completed coefficients and composition: Bhatt--Scholze Proposition 6.6.11 and Remark 6.8.15. Extraction of returned proof steps 2-3 (agent argument)."
    }
   },
   {
-   "text": "Use the ordinary unbounded ringed-topos comparison [lem-sfb-ringed-derived-monoidal-comparisons] for $(j_i,f)$ and $(f_i,i_i)$. Step 2 identifies their composite structural maps over the canonical geometric isomorphism associated to $fj_i=i_if_i$, so the specified two-isomorphism transport in that same node identifies $P_{fj_i}$ with $P_{i_if_i}$. The two composition comparisons therefore give $P_{j_i}P_fK\\simeq P_{f_i}P_{i_i}K$. Both immersions are locally closed, so [lem-sf-immersion-completed-pullback-comparison] gives ordinary exact $P_{j_i}=j_i^*$ and $P_{i_i}=i_i^*$. This proves the first asserted isomorphism, with no completeness assumption on $K$ or $P_fK$: only the unconditional ordinary-exactness clause of the immersion node is used.",
+   "text": "Construct moduleSquare_existsUnique directly from the already proved coefficient direct-image composition equation. The sectionwise module pushforward composition comparisons, for the two equal composites of the pullback square, give a right-adjoint isomorphism. On sections it is precisely restriction along squareSite. Take its adjunction mate for the two composite ordinary pullback adjunctions. The composite-unit equation gives the prescribed iterated-generator normalization. Applying the composite adjunction hom equivalence and checking sections proves uniqueness. For derivedSquare_existsUnique, package the existing ordinary computation counits as natural transformations. Their components are invertible by the exact ordinary pullback result [lem-tw-ordinary-completed-pullback-exact], transferred to the specified original ordinary pullback by the projection uniqueness in [def-sf-ordinary-integral-pullback-construction]. The two iterated counit comparisons, followed on one side by complexSquare, give an isomorphism after precomposition with the cochain localization. Mathlib Localization.liftNatIso descends it. Its component formula is exactly the required counit equation. Cancellation against the invertible iterated counit and Localization.natTrans_ext prove uniqueness. Applying the two resulting squares constructs localExchange, and applying ordinary pullback to the given chart isomorphism gives its middle factor.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sf-immersion-completed-pullback-comparison"
+    "def-sf-ordinary-integral-pullback-construction",
+    "lem-tw-ordinary-completed-pullback-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition; K-flat representative normalization; Bhatt--Scholze Remark 6.8.15 for exact immersion restriction"
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, and Tag 06YY; ordinary adjunction mates are Stacks sites-modules.tex Tags 03D1 and 03D2. Exact localization specialization using the existing exactness input."
    }
   },
   {
-   "text": "Apply [lem-sbc-ringed-topos-sheaf-slice-derived-comparison] to the ringed morphism $f_i$ and the sheaf $A=h_{U_{ia}}$, a sheaf by [lem-weil-pbc-proetale-subcanonical]. The base-change functor $u_{f_i}$ preserves finite limits and coverings [def-weil-proetale-inverse-image], and both sites are subcanonical, so [lem-pur-site-representable-algebraic-pullback] gives $f_i^{-1}h_{U_{ia}}\\cong h_{u_{f_i}(U_{ia})}=h_{V_{ia}}$. An element of $h_{U_{ia}}(W)$ is an arrow $W\\to U_{ia}$, so the element sites of the cited node are the localized sites $(S_i)_{\\mathrm{proet}}/U_{ia}$ and $(X_i)_{\\mathrm{proet}}/V_{ia}$, with the restricted rings of step 3; the inverse image of $(f_i)_A$, $(H\\to A)\\mapsto(f_i^{-1}H\\to f_i^{-1}A)$, agrees with that of the localized morphism of step 3 by its canonical isomorphism $(f_V)^{-1}j_V^{-1}\\cong j_U^{-1}f^{-1}$, and both structural ring maps are $c_{v_{ia}}$ there. The two-isomorphism transport of [lem-sfb-ringed-derived-monoidal-comparisons] therefore identifies $L(f_i)_A^*$ with $P_{v_{ia}}$. The node gives $(P_{f_i}(i_i^*K))|_{V_{ia}}\\simeq P_{v_{ia}}((i_i^*K)|_{U_{ia}})$, using the inverse of its displayed $\\theta$. Combine this with step 4 and apply the functor $P_{v_{ia}}$ to the given chart isomorphism $(i_i^*K)|_{U_{ia}}\\simeq B_{U_{ia}}\\otimes_R L_{ia}^\\bullet$. This proves the first local comparison in the statement. The cited slice theorem applies to unbounded complexes and arbitrary structural ring maps.",
+   "text": "For modelPullback_existsUnique, identify the selected modelModule with the concrete scalarPerfectFunctor, naturally in every scalar module. The object and map specifications of derived change of rings supply the first comparison, and identity component maps compare the old and independent-universe tensor presheaves. Naturality of abelian sheafification proves that this isomorphism carries modelSection(b,x) to the same pure tensor. Transport the already proved allComparison from [lem-tw-finite-projective-model-pullback] through these natural isomorphisms. Naturality of the specified ordinary pullback adjunction unit transports its generator normalization. For uniqueness, precompose with the inverse model isomorphism and use the constant-model/terminal-section adjunction: values on terminal constant generators determine each transpose, and the ordinary pullback Hom equivalence is injective. This applies to every scalar module, including zero modules and empty schemes; no finite-projectivity hypothesis is introduced.",
    "uses": [
-    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
-    "lem-weil-pbc-proetale-subcanonical",
-    "def-weil-proetale-inverse-image",
-    "lem-pur-site-representable-algebraic-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-tw-finite-projective-model-pullback",
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi, with its ordinary unbounded derived slice comparison"
+    "place": "Tags 03CY and 03EK; existing normalized scalar-model adjunction proof in lem-tw-finite-projective-model-pullback, transported through the selected tensor functor specifications."
    }
   },
   {
-   "text": "Fix one chart and abbreviate $U=U_{ia}$, $V=V_{ia}$, $L=L_{ia}^\\bullet$. Put $M^q=B_U\\otimes_R L^q$. Choose split maps $L^q\\to R^{r_q}\\to L^q$ whose composite is the identity, as allowed by finite projectivity. Tensoring these maps exhibits $M^q$ as a retract of $B_U^{r_q}$. For any exact sequence of $B_U$-module sheaves, tensoring with $B_U^{r_q}$ gives its finite direct sum, which is exact componentwise; tensoring with $M^q$ is the direct summand cut out by the displayed splitting, and kernels and images split along the two complementary projections. Thus it too is exact. This verifies flatness directly from [def-pc-flat-sheaf-modules]; no flatness over $R$ of $B_U$ is needed.",
+   "text": "For perfectModelPullback, construct the finite-projective scalar realization using the existing scalarPerfectFunctor. The constant-unit and scalar-extension-unit comparisons from [lem-sfb-scalar-perfect-chart-finite-free], additivity and preservation of finite products identify its realization of R^(Fin n) with B^(Fin n). A finite projective scalar module is a retract of such a module. Apply the finite-free retract flatness calculation of [lem-weil-pbc-strict-perfect-ringed-pullback-model]. The object specification of [lem-pur-derived-change-of-rings] identifies the original selected modelModule objects with the same tensor construction; identity component maps and tensor induction check restriction maps. Transfer flatness across this isomorphism. The original upper bound is preserved by the additive realization. Apply [lem-weil-pbc-independent-bounded-flat-kflat] and the original computation-counit theorem in [def-sf-ordinary-integral-pullback-construction]. Compose its invertible counit with localization of modelPullbackComplex. The main theorem then composes localExchange, the functor image of the given chart isomorphism, and this invertible counit/model composite. The generator-normalized model and square comparison theorems remain named intermediate statements of this module.",
    "uses": [
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ER, definition-flat, item (3); elementary split-summand argument"
-   }
-  },
-  {
-   "text": "The complex $M^\\bullet=B_U\\otimes_R L^\\bullet$ is bounded, with flat terms by step 6, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. The computation counit of [lem-weil-pbc-ringed-topoi-derived-pullback] therefore gives the canonical isomorphism $P_v[M^\\bullet]\\xrightarrow{\\sim}[v_B^*M^\\bullet]$. This is the specified ordinary derived computation counit, not an isomorphism obtained after completion. Its hypotheses concern the source complex, not flatness of $c_v$.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-sfb-scalar-perfect-chart-finite-free",
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-sf-ordinary-integral-pullback-construction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 06YY, lemma-derived-base-change"
+    "place": "Tags 06YQ, lemma-bounded-flat-K-flat, and 06YY, lemma-derived-base-change; Bhatt--Scholze Proposition 6.6.11 and Remark 6.8.15 for perfect scalar models. Extraction of returned proof steps 6-8, including the balanced-tensor, splitting and differential normalization (agent argument)."
    }
   },
   {
-   "text": "On a finite free module with basis $e_1,\\ldots,e_r$, define the termwise comparison by\n$$B_V\\otimes_{v^{-1}B_U}v^{-1}(B_U^r)\\longrightarrow B_V^r,\\qquad b\\otimes ae_j\\longmapsto b\\,c_v(a)e_j.$$\nThe inverse sends $be_j$ to $b\\otimes e_j$; the balanced-tensor relations make the two composites identities. Here inverse image preserves the finite direct sum, as a left adjoint in [def-weil-proetale-inverse-image], and the displayed coefficient maps preserve the constant scalars from $R$ by their constant-section construction and all finite projections. For a finite projective summand represented by an idempotent matrix $e\\in M_r(R)$, the same comparison intertwines $v^*(e)$ with $e$ on $B_V^r$, since it sends each constant entry to the same entry. Restrict the comparison and its inverse to this split summand. The formula commutes with every $R$-linear map between summands (apply the formula to its matrix between the chosen free modules), hence with each differential of $L$. Consequently it gives a complex isomorphism $v_B^*(B_U\\otimes_R L^\\bullet)\\simeq B_V\\otimes_R L^\\bullet$. With step 7 this is the last asserted isomorphism, with exactly the basis and idempotent normalization required. The chart isomorphisms of step 5 now give all displayed conclusions.",
+   "text": "Additivity of modelModule is the composite of constant-module additivity from [lem-weil-pbc-completed-constant-sheaf-reduction] and the selected scalar-extension additivity. Its modelModule_obj equation is exactly the object specification of [lem-pur-derived-change-of-rings], with the standard derived-category choices fixed as in completedConstantExtension. These proofs preserve the existing functors and their generator definitions.",
    "uses": [
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, perfect constant local models; Remark 6.8.15, ordinary ringed pullback formula; explicit balanced-tensor calculation"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK: additive constant-module sheafification and ordinary extension of scalars; the derived extension witness is Stacks 06YY."
+   }
+  },
+  {
+   "text": "For immersionExact and weaklyEtaleExact, first identify the ringed chart direct map with ordinaryIntegralDirectRingMap. Apply the completed coefficient projection equation in [lem-tw-completed-coefficient-ringed-coherence], take its adjunction mate, forget commutativity and use the projection uniqueness of [def-sf-ordinary-integral-pullback-construction]. The induced pushforward isomorphism has a left-adjoint mate identifying the module pullbacks. Transfer the finite-limit theorem [lem-tw-ordinary-completed-pullback-exact] across this isomorphism. Finite colimits follow from the specified ordinary adjunction. An exact additive functor inverts homotopy quasi-isomorphisms after localization; its total left-derived counit is invertible by the universal property. Each factor in ordinaryIntegralPullComplexCounit is therefore invertible on every complex. Specialize to immersions and weakly etale morphisms. No completion or condition on the input complex is added.",
+   "uses": [
+    "lem-tw-completed-coefficient-ringed-coherence",
+    "def-sf-ordinary-integral-pullback-construction",
+    "lem-tw-ordinary-completed-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 0D6D; exact ordinary pullback from the existing projection-defined ringed-site model, Stacks Tags 03D2 and 04JC."
    }
   }
  ],
  "proof_deps": [
-  "lemma-constructible-pullback-stratification",
+  "def-constructible-stratification",
   "lem-pur-scheme-constructible-preimage",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-galois-fpqc-covering-base-change",
-  "def-weil-pbc-proetale-site",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-trf-constant-coefficient-composition",
-  "def-pur-sheaf-inverse-limit",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sf-immersion-completed-pullback-comparison",
-  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
   "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-proetale-subcanonical",
-  "lem-pur-site-representable-algebraic-pullback"
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "def-sf-ordinary-integral-pullback-construction",
+  "lem-tw-ordinary-completed-pullback-exact",
+  "lem-sfb-scalar-perfect-chart-finite-free",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-tw-finite-projective-model-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11 and Remark 6.8.15; ordinary ringed local-model argument expanded with Stacks Tags 0D6D, 04IF, 06YQ and 06YY"
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "P1 stage-3 proof, 2026-10-27: retain the established geometry, module/derived squares and flat perfect-model argument. Close the remaining normalized scalar-model comparison by a natural tensor-model isomorphism and the already proved finite-projective-model module allComparison; terminal constant generators and the two adjunction Hom equivalences prove uniqueness."
  },
  "mathlib_searches": [
   {
@@ -277,11 +257,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-tw-ordinary-pullback-stratified-models",
   "worker": "stage1",
-  "summary": "Eight-step ordinary ringed proof; reuses existing strata, coefficient composition, slice, general derived composition and K-flat nodes; writes out finite-projective summand and balanced tensor arguments. No statement change, new nodes, completion step, or Lean attachment.",
-  "blueprint": "lem-tw-dual-negation, first sentence: dual stalk is the dual representation; via lem-tw-dual-stalk-frobenius, lem-tw-lisse-rational-realization and lem-tw-ordinary-completed-integral-pullback, the ordinary pullback transport of perfect charts in extracted original steps 2-3.",
+  "summary": "Repair of the 2026-10-22 re-split return: retain the statement and geometric proof; distribute old steps 2-3, 4-5, and 6-8 over three independent statement-only unsplit nodes. Parent proof is a short assembly, with the full old argument preserved verbatim in report.md. No Lean changes or attachments.",
+  "blueprint": "lem-tw-dual-negation, first sentence: dual stalk is the dual representation; via lem-tw-dual-stalk-frobenius, lem-tw-lisse-rational-realization and lem-tw-ordinary-completed-integral-pullback, the ordinary pullback transport of perfect charts in extracted original steps 2-3. Re-split: steps 2-3 -> completed coefficient coherence; 4-5 -> arbitrary immersion/chart comparison; 6-8 -> normalized finite-projective models.",
   "tool_uses": [
    {
     "node": "lemma-constructible-pullback-stratification",
@@ -298,50 +278,11 @@
    {
     "node": "lem-galois-fpqc-covering-base-change",
     "why": "Fpqc stability supplies the covering condition after arbitrary base change."
-   },
-   {
-    "node": "lem-trf-constant-coefficient-composition",
-    "why": "The coefficient maps at each finite quotient need this general constant-section composition law."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies the pro-etale site of each covering object with the slice."
-   },
-   {
-    "node": "lem-weil-pbc-localize-ringed-site-morphism",
-    "why": "Identifies the restricted coefficient structural map on the slice, a general ringed-site fact."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Ordinary derived composition and two-isomorphism transport are generic ringed-topos tools, with no coefficient-isomorphism assumption."
-   },
-   {
-    "node": "lem-sf-immersion-completed-pullback-comparison",
-    "why": "Only its unconditional ordinary-exact immersion restriction clause is used; no completed-pullback conclusion is used."
-   },
-   {
-    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
-    "why": "Generic ordinary unbounded derived slice comparison, without flatness assumptions."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic K-flatness criterion for the explicit bounded flat chart complexes."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic computation counit on K-flat flat-term representatives."
-   },
-   {
-    "node": "lem-pur-site-representable-algebraic-pullback",
-    "why": "Generic site fact f^{-1}h_U = h_{u(U)} identifying the pulled-back slice object with V_ia (added by the maintainer reader)."
    }
   ]
  },
  "tool_uses": [
-  "lemma-constructible-pullback-stratification",
   "lem-pur-scheme-constructible-preimage",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-galois-fpqc-covering-base-change",
   "lem-trf-constant-coefficient-composition",
   "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-pbc-localize-ringed-site-morphism",
@@ -353,12 +294,12 @@
   "lem-pur-site-representable-algebraic-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q55-b9753c2f0",
-  "group": "Q55",
+  "reviewer": "NT-cc-Q39-d10656158",
+  "group": "Q39",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-b9753c2f0 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement; there are no new nodes and the statement is unchanged. Sources: Bhatt–Scholze Prop 6.6.11 and Rem 6.8.15 (proof_origin agent is correct); no SGA. Step 1: strata base change, 054I constructible preimage, and weakly étale + fpqc base change (094U, 022D) give the pro-étale site covers; OK. Step 2: I recomputed π_T c_h h^{-1}c_k = π_T c_{kh}; it is correct for finite R/t^n, and uniqueness comes from the sectionwise limit. Step 3: the weakly-étale localization and 04J0 localized ring map agree with c_v at every projection. Step 4: the composition and 2-isomorphism transport of lem-sfb-ringed-derived-monoidal-comparisons; immersion exactness uses only the unconditional clause, and its coefficient iso is the same projection-defined map. Steps 6-8: retract flatness, bounded flat ⇒ K-flat counit, and the basis/idempotent map; all verified, including the small cases L=0, L=R, L=eR^2 and X empty. One fault (C1/E5), repaired in step 5: it used f_i^{-1}h_{U_ia}≅h_{V_ia} and identified the topos-slice morphism with v without citing anything. I added lem-weil-pbc-proetale-subcanonical, lem-pur-site-representable-algebraic-pullback, def-weil-proetale-inverse-image and the 2-isomorphism transport of lem-sfb-ringed-derived-monoidal-comparisons, plus a tool_uses entry; there is no cycle and no new trace-formula or Poincaré node in the closure. Batch 5: lem-trf-constant-coefficient-composition is a generic constant-coefficient coherence result (Stacks 03CB/0H7J). Its 219-node closure contains no other trace-formula, Poincaré or nt-* node, and it is not part of the proof of either assumption, so it is accepted. Advisory: lem-pc-bounded-above-flat-kflat-site's source.place says 06YS but the label is 06YQ.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-d10656158 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and the sources BS Prop 6.6.11 / Rem 6.8.15 and Stacks 04J0 (tags 04IF, 0D6D, 06YQ, 06YY, 094U, 022D checked against tags/tags). The re-split note is released (human decision 2026-10-21, applied 2026-10-22). The delivery is not superseded: live and side-live still hold the old 8-step proof, and no new id exists live. The item is not in the dropped list. Statement and stmt_deps are byte-identical to base. All 8 old step texts appear verbatim in the report. Old step 1 stays in the item verbatim (existing nodes only, short glue). Old steps 2-3 become lem-tw-completed-coefficient-ringed-coherence, 4-5 become lem-tw-ordinary-immersion-chart-comparison, and 6-8 become lem-tw-finite-projective-model-pullback. All three are of comparable size, self-contained, statement-only and unsplit, with 4 Mathlib searches each and correct created/blueprint fields. None restates the item. The item proof is 2287 characters. Checks on the nodes: (A) the composition equation recomputed at each n via lem-trf-constant-coefficient-composition, unique by the limit; the 04J0 localized functor is base change along v, and restriction preserves limits and constant sheaves, so c_g restricted to V is c_v. (B) any f; i is closed then open, matching lem-sf-immersion; derived composition and 2-iso transport via lem-sfb-ringed-derived-monoidal-comparisons; unconditional exactness of i^*; slice comparison of lem-sbc with A = h_U and f_S^{-1}h_U ≅ h_V via lem-pur-site-representable-algebraic-pullback. (C) small cases L=0, L=R, L=eR^r, naturality in differentials and splitting-independence all hold; a summand of B^r is flat, bounded flat implies K-flat, so ε is an iso; no R-flatness of B is used. No SGA. The tool_uses are the 4 Q55-accepted step-1 tools. Advisory only: A's composition clause is the composition clause of lem-weil-pbc-profinite-coefficient-inverse-image; C's flat/K-flat/counit clauses come from lem-weil-pbc-strict-perfect-ringed-pullback-model; lem-weil-pbc-ringed-derived-slice-localization is an alternative tool for B's slice part. Each new node adds content beyond these, so none is a duplicate. The landed sorry Lean already has declarations matching A/B/C for stage 2. Checks are written in review.md; fixes/ is empty."
  },
  "lean": {
   "module": "Sheaf.Paper.OrdinaryPullbackStratifiedModels",
@@ -405,5 +346,27 @@
   "group": "Q85",
   "result": "pass",
   "note": "Clause-by-clause check of OrdinaryPullbackStratifiedModels against the node and BS 6.6.11/6.8.15: IsNoetherian X,Y; arbitrary K; FiniteLocallyClosedStratification + IsConstructible; per-chart covers with independent index universe v; bounded finite projective L; chart iso e through immersionExact (dep clause transported from pbcActualModulePull) and weaklyEtaleExact (slice restriction). Conclusion: sX with bijection to nonempty X_i, preimage strata and pullback.fst-compatible domain iso; base-changed covers; coefficientMap_comp (canonical inverseComp mate, finite projections); derivedSquare pinned by the counit equation (unique on K-flat reps); modelPullback pinned on 1⊗x through the adjunction unit (naturality gives idempotent/differential compatibility); perfectModelPullback counit iso; main clause IsIso of the specified localComparison. stmt_deps gained only landed def nodes (allowed); lean.statement verbatim; 25 declarations match; docstrings, imports, line widths and sorry-only all OK; edge cases OK. No compile (no file changed; worker compile clean). Advisories: A1 ordinaryIntegralDerivedPull/PullCounit/PullComplexCounit/_hasLeftDerived are owned by parent theorem lem-tw-ordinary-completed-integral-pullback, so extend def-sf-ordinary-integral-pullback-construction declarations; A2 item imports the parent module, giving a stage-3 import cycle; A3 fibre-product order differs between the cover clause and localComparison (canonically isomorphic)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T094455-L-231387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

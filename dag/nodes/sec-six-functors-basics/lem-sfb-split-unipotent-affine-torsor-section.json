@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-split-unipotent-affine-torsor-section",
+ "kind": "statement",
+ "title": "A section of a split unipotent torsor over an affine scheme",
+ "statement": "Let $k$ be a field [def-weil-field], and let $U$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Suppose $U$ has a finite split series $U=U_0\\supseteq\\cdots\\supseteq U_m=1$ of smooth connected closed subgroup schemes, each normal in its predecessor, with each represented fppf quotient $U_j/U_{j+1}$ isomorphic to $\\mathbf G_{a,k}$ [def-sfb-split-solvable-right-torsors, def-sc-gm-ga]. Here $m=0$ is allowed. Let $S$ be an affine $k$-scheme of finite type, and let $p:P\\to S$ be a represented right $U$-torsor [def-sfb-split-solvable-right-torsors]: $p$ is flat, surjective and finitely presented, with a right action for which $(x,u)\\mapsto(x,xu)$ is an isomorphism $P\\times_kU\\simeq P\\times_SP$ [def-pc-fibre-product]. Then there exists a section $s:S\\to P$ with $p\\circ s=\\operatorname{id}_S$. Neither $k$ nor $S$ is required to be perfect or reduced, respectively; no commutativity or centrality hypothesis is imposed on $U$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.55(b), printed p.344; split series convention in Definition 6.33 and Section 14.61, with additive affine torsors in Example 2.72, printed p.61."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-split-solvable-right-torsors",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-sfb-split-unipotent-series"
+ ],
+ "proof": [
+  {
+   "text": "Proceed by induction on the length m of the displayed split series. If m=0, then U=1. The torsor comparison in the hypothesis is the diagonal P\\simeq P\\times_S P, so p is a monomorphism. It is flat and locally of finite presentation by the torsor hypotheses, hence an open immersion by [lem-pe-flat-lfp-monomorphism-open]. Since it is also surjective, this open immersion is an isomorphism, and its inverse is the required section.",
+   "uses": [
+    "lem-pe-flat-lfp-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.55(b), printed p.344, with the length-zero case written out using the flat-monomorphism criterion"
+   }
+  },
+  {
+   "text": "Assume m>0 and put N=U_1. Apply [lem-sfb-affine-normal-quotient-geometry] to the closed normal subgroup N of U. It supplies the affine finite-type quotient Q=U/N, a faithfully flat finitely presented quotient map q with scheme-theoretic kernel N, and the represented fppf quotient; the given split-series clause identifies Q with \\mathbf G_{a,k}. Apply [lem-sfb-normal-extension-torsor-reduction] to q and the represented U-torsor P\\to S. We obtain a represented right Q-torsor R=P/N\\to S, and for any section a:S\\to R the pullback P_a=P\\times_{R,a}S is a represented right N-torsor whose section composes to a section of P.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-normal-extension-torsor-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.55(b), printed p.344; quotient and torsor reduction as in Example 2.68 and Proposition 2.69, printed p.60"
+   }
+  },
+  {
+   "text": "Write the affine base as S=Spec A. Transport the Q-torsor R along its given isomorphism Q\\simeq\\mathbf G_{a,k}; its flat, surjective, finitely presented map and torsor comparison are exactly the hypotheses of [lem-sfb-additive-affine-torsor-section], so R has a section a. The tail N=U_1\\supseteq\\cdots\\supseteq U_m=1 is a split series of length m-1 with the same smoothness, connectedness and finite-type hypotheses. The induction hypothesis applied to the N-torsor P_a therefore gives a section b:S\\to P_a. The final clause of [lem-sfb-normal-extension-torsor-reduction] composes b with P_a\\to P to obtain e:S\\to P and p\\circ e=id_S, completing the induction.",
+   "uses": [
+    "lem-sfb-additive-affine-torsor-section",
+    "lem-sfb-normal-extension-torsor-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 2.72, printed p.61, and Proposition 16.55(b), printed p.344"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-flat-lfp-monomorphism-open",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-normal-extension-torsor-reduction",
+  "lem-sfb-additive-affine-torsor-section"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.55(b), printed p.344; induction through the additive quotients using Example 2.72, printed p.61"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every torsor under a split unipotent algebraic group over an affine scheme has a section",
+   "results": "{\"t\": \"2026-10-24T03:42:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every torsor under a split unipotent algebraic group over an affine scheme has a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\"], \"digest\": \"9fa6d7b43278943a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, topological trivial bundles, cotangent H1 and Hilbert 90 do not assert triviality of fppf torsors under split unipotent group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A principal bundle for a split unipotent group over an affine scheme is trivial",
+   "results": "{\"t\": \"2026-10-24T03:42:23Z\", \"tool\": \"leansearch\", \"query\": \"A principal bundle for a split unipotent group over an affine scheme is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bundle.Trivial\", \"Bundle.Trivial.trivialization_apply\", \"IsHomeomorphicTrivialFiberBundle\", \"Bundle.Trivial.trivialization_symm_apply\", \"Bundle.Trivial.fiberBundle_trivializationAt'\", \"Bundle.Trivial.trivialization_baseSet\", \"Bundle.Trivial.trivialization_source\", \"Bundle.Trivial.fiberBundle\"], \"digest\": \"92ad606c8ab7501b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, topological trivial bundles, cotangent H1 and Hilbert 90 do not assert triviality of fppf torsors under split unipotent group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-24T03:42:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, topological trivial bundles, cotangent H1 and Hilbert 90 do not assert triviality of fppf torsors under split unipotent group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|Torsor|unipotent",
+   "results": "{\"t\": \"2026-10-24T03:42:24Z\", \"tool\": \"grep\", \"query\": \"torsor|Torsor|unipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, topological trivial bundles, cotangent H1 and Hilbert 90 do not assert triviality of fppf torsors under split unipotent group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First flat cohomology of an affine scheme with coefficients in a split unipotent algebraic group vanishes",
+   "results": "{\"t\": \"2026-10-24T03:42:25Z\", \"tool\": \"leanfinder\", \"query\": \"First flat cohomology of an affine scheme with coefficients in a split unipotent algebraic group vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"Algebra.Extension.cotangentComplex_injective_iff\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.Extension.subsingleton_h1Cotangent\", \"groupCohomology.d₀₁_eq_zero\"], \"digest\": \"24bfd1e68922b61f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions, topological trivial bundles, cotangent H1 and Hilbert 90 do not assert triviality of fppf torsors under split unipotent group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-affine-space-quotient",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion Lemma 2.3 proof, printed p.118, first three sentences (unipotent radical, affine-space variety and trivial torsor); Remark 2.2(v), p.117, for splitting over an algebraically closed field. Geometric integrality of a connected smooth algebraic group is included explicitly as a structural prerequisite. Supporting lemma: Proposition 16.55(b), printed p.344; split series convention in Definition 6.33 and Section 14.61, with additive affine torsors in Example 2.72, printed p.61.",
+   "via": [
+    "lem-sfb-split-reductive-affine-space-quotient",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-unipotent-affine-torsor-section",
+  "worker": "stage1",
+  "summary": "Filled the imported split-unipotent torsor item with the finite induction on the supplied additive series. The length-zero torsor is an isomorphism by the existing flat locally-finitely-presented monomorphism criterion; the positive step forms the affine quotient torsor through the first normal subgroup, applies the additive affine torsor section theorem, and applies the induction hypothesis to the kernel torsor. No new nodes were needed because the quotient-reduction and additive-section statements already exist.",
+  "blueprint": "The inherited blueprint support place identifies Milne Proposition 16.55(b) and Example 2.72 as the supporting lemma; the three steps realize that induction and leave the unit route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-c3578657e",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-c3578657e (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements and the source in full (Milne iAG2017 Prop 16.55(b), printed p.344; Ex 2.72, p.61; Ex 2.68 and Prop 2.69, p.60). No new nodes, no repair note, statement and stmt_deps unchanged. The citer lem-sfb-split-reductive-affine-space-quotient uses the item in exactly this form. Step 1 (m=0): U=1, so the torsor comparison is the diagonal and p is a monomorphism; it is flat and lfp, so lem-pe-flat-lfp-monomorphism-open (Stacks 025G) makes it an open immersion; being surjective it is an isomorphism, which also covers S empty. Step 2: lem-sfb-affine-normal-quotient-geometry (G=U, N=U_1) gives a faithfully flat, surjective, finitely presented q with kernel N and Q=G/N, and every hypothesis of lem-sfb-normal-extension-torsor-reduction holds. Q is identified with G_a because the fppf quotient's representing object is unique. Step 3: after transport along Q≅G_a, lem-sfb-additive-affine-torsor-section applies to R over S=Spec A. The tail series of length m-1 stays closed in U_1 with smooth connected terms, so the induction hypothesis applies to P_a, and the last clause of the reduction node gives a section of P. The induction is properly set up. Tested on m=0, U=G_a, the noncommutative Heisenberg group, empty base, and imperfect k or nonreduced S. Duplicate search over all nodes found only the cited m=1 node and the perfect-field series-existence node. No cycle, the route stays within the item's unit sk-thm-sf-ctf-stability plus one Mathlib leaf, and no SGA is cited. Batch-5: the flagged def-trf-scheme-cover-descent-datum (a general descent definition) and lem-trf-fppf-covering-is-fpqc (Stacks 022C, a leaf) are generic foundations. Every -trf- node in the closure, plus thm-pd-spreading-out (limits), lies outside the trace formula, Poincaré duality and their proofs, so this is accepted. Cosmetic: the report mentions a citations.json that is not on the branch. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitUnipotentAffineTorsorSection",
+  "declaration": "AlgebraicGeometry.split_unipotent_affine_torsor_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitUnipotentAffineTorsorSection.lean",
+  "statement": "theorem split_unipotent_affine_torsor_section {k : Type u} [Field k] (U : Grp (Over (Spec (.of k)))) [IsAffine U.X.left] [LocallyOfFiniteType U.X.hom] [QuasiCompact U.X.hom] (m : ℕ) (hseries : SplitUnipotentLength U m) (S : Over (Spec (.of k))) [IsAffine S.left] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] (P : RepresentedRightTorsor U S) : ∃ s : S ⟶ P.space, s ≫ P.projection = 𝟙 S",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d49370ac",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read item, report (Worker report + Second reading by Q17), module, SplitUnipotentLength, RepresentedRightTorsor, IsFppfQuotient, FlatMono. Clauses match Milne 16.55(b): field k; U affine with LOFT+QC, smooth/connected via additive-only SplitUnipotentLength (closed normal i, q to G_a fppf quotient; m=0 trivial); S affine finite type over Spec k; P RepresentedRightTorsor (flat, surj, fp, action laws, cartesian square); conclusion section s ≫ p = 𝟙 over k. No extra hypotheses. Edge cases m=0, G_a, empty S, nonreduced S, imperfect k, noncommutative U covered; single universe u. lean.statement verbatim; only diffs vs live node are the lean record and the added stmt_dep def-sfb-split-unipotent-series (landed Q26, on base, actually used). No new defs, proof sorry, docstrings with source/blueprint/proof steps, proof-dep imports exist, no duplicate or parallel landing. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-artin-effective-versal-algebraization",
+ "kind": "statement",
+ "title": "An effective versal formal object algebraizes to a versal finite type family",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Work in the universes of [def-weil-size-convention]. Let $\\mathcal X$ be a category fibred in groupoids on $S$-schemes [def-pc-scheme], meaning that cartesian pullbacks exist along every base morphism and each fibre is a groupoid. A local ring has a unique maximal ideal; an Artinian ring satisfies the descending chain condition on ideals. Let $k$ be a field of finite type over $R$ [def-weil-field, def-weil-finite-type-morphism], and let $s\\in S$ be its image. Suppose $R_s$, the localization at the prime corresponding to $s$, is a G-ring [def-weil-pbc-localization-at-prime, def-weil-pbc-g-ring]. Suppose $\\mathcal X$ preserves directed affine limits on objects: every object over $\\varprojlim_i T_i$ for a small directed inverse system of affine $S$-schemes is isomorphic to pullback of an object at some stage. A formal object over a complete Noetherian local $R$-algebra $(C,\\mathfrak m)$ with residue field identified with $k$ is a system $\\xi_n\\in\\mathcal X(C/\\mathfrak m^n)$, $n\\geq1$, with compatible transition isomorphisms; completeness means $C\\cong\\varprojlim_n C/\\mathfrak m^n$ [def-weil-pbc-adic-completion]. Such a system is versal if, for every surjection $B'\\to B$ of Artinian local $R$-algebras with residue field identified with $k$, every local $R$-map $C\\to B$ inducing the identity on $k$, every $z\\in\\mathcal X(B')$, and every isomorphism $z|_B\\cong\\xi_B$ compatible with the specified identifications over $k$, there exist a local $R$-lift $C\\to B'$ and an isomorphism $z\\cong\\xi_{B'}$ extending the prescribed isomorphism. Here $\\xi_B$ denotes pullback from $\\xi_n$ for any $n$ with $\\mathfrak m^n$ mapping to zero in $B$, and similarly for $B'$. Let $(\\xi_n)$ be such a versal formal object. Assume it is effective: there exist $x_C\\in\\mathcal X(C)$ and isomorphisms $x_C|_{C/\\mathfrak m^n}\\cong\\xi_n$ compatible with all transitions. A point $v$ of an $S$-scheme $V$ is a finite type point if $\\operatorname{Spec}\\kappa(v)\\to V$ is of finite type [def-weil-residue-field, def-weil-finite-type-morphism]. For $V$ locally of finite type over $S$ and $y\\in\\mathcal X(V)$, say that $y$ is versal at a finite type point $v$ if, for every surjection $B'\\to B$ of Artinian local $R$-algebras with residue field identified with $\\kappa(v)$, every $a:\\operatorname{Spec}B\\to V$ restricting to the canonical point $v$, every $z\\in\\mathcal X(B')$, and every isomorphism $z|_B\\cong a^*y$, there exist a lift $a':\\operatorname{Spec}B'\\to V$ of $a$ and an isomorphism $z\\cong(a')^*y$ extending the prescribed isomorphism. Then there exist a finite type $S$-scheme $V$, a finite type point $v\\in V$, an $R$-isomorphism $\\kappa(v)\\cong k$, and $y\\in\\mathcal X(V)$ such that $y$ is versal at $v$ and $y|_v\\cong\\xi_1$ under that residue-field isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07XH (lemma-approximate-versal), with Tag 07XF (definition-versal) and definition-versal-formal-object. Only the residue-field and versality conclusions of the approximation lemma are asserted."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose the effective object $x_C$ supplied in the hypotheses. Apply [lem-sfb-artin-object-graded-approximation] with $N=2$ to obtain $A,\\mathfrak n,y,e_2$ and the graded isomorphism. The hypotheses are precisely the given Noetherian base, complete local ring, finite type residue field, G-ring at its image and preservation of directed affine limits on objects. The given effectivity isomorphism identifies $x_C$ modulo $\\mathfrak m^2$ with $\\xi_2$, so the approximation identifies $y$ modulo $\\mathfrak n^2$ with $\\xi_2$.",
+   "uses": [
+    "lem-sfb-artin-object-graded-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07XH (lemma-approximate-versal), first two sentences; Tag 07XB with N=2."
+   }
+  },
+  {
+   "text": "The algebra $A$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Put $L=A_{\\mathfrak n}$, which is Noetherian by [lem-weil-pbc-localization-noetherian], and let $\\mathfrak q=\\mathfrak nL$. For $t\\notin\\mathfrak n$ choose $u$ with $tu=1$ modulo $\\mathfrak n$; modulo $\\mathfrak n^r$, the inverse of $tu=1+h$ is $\\sum_{i=0}^{r-1}(-h)^i$. Thus localization induces $A/\\mathfrak n^r\\cong L/\\mathfrak q^r$ for every $r\\geq1$. Set $D=\\widehat L$ and $\\mathfrak d=\\mathfrak qD$. By [lem-weil-pbc-adic-completion-noetherian], [lem-weil-pbc-local-completion-local-ring], [lem-weil-pbc-adic-completion-mod-ideal] and [lem-weil-pbc-adic-completion-mod-power], $D$ is complete Noetherian local, its maximal ideal is $\\mathfrak d$, its residue field is $k$, and $D/\\mathfrak d^r\\cong A/\\mathfrak n^r$ canonically for every $r\\geq1$. Taking kernels of the adjacent quotient maps gives $\\mathfrak d^r/\\mathfrak d^{r+1}\\cong\\mathfrak n^r/\\mathfrak n^{r+1}$ compatibly with multiplication. Let $\\eta_r=y|_{D/\\mathfrak d^r}$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0316, 05GI, 05GG; artin.tex Tag 07XH, definition of eta over the completion."
+   }
+  },
+  {
+   "text": "Construct compatible local $R$-maps $f_r:C\\to D/\\mathfrak d^r$ and isomorphisms $\\theta_r:(\\xi)_{f_r}\\cong\\eta_r$. Start at $r=2$ using $e_2$ and the object isomorphism of step 1, and obtain $r=1$ by reduction. Suppose $(f_r,\\theta_r)$ has been chosen for $r\\geq2$. Both $D/\\mathfrak d^{r+1}$ and $D/\\mathfrak d^r$ are Artinian local with residue $k$ by [lem-weil-pbc-noetherian-local-quotient-artinian-local]. Apply the stipulated versal lifting property of $\\xi$ to their quotient surjection, to $f_r$, to $z=\\eta_{r+1}$, and to $\\theta_r^{-1}:z|_{D/\\mathfrak d^r}\\cong(\\xi)_{f_r}$. It gives $f_{r+1}$ lifting $f_r$ and, after inversion, $\\theta_{r+1}$ reducing to $\\theta_r$. Recursion produces the compatible system. This uses only the definition of versality once at each stage; no assertion of algebraization follows from approximation alone.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07XH, successive lifts to eta_3, eta_4, ...; formal-defos.tex remark-versal-object."
+   }
+  },
+  {
+   "text": "Define $f:C\\to D=\\varprojlim_rD/\\mathfrak d^r$ by $f(c)=(f_r(c))_r$, using completeness [def-weil-pbc-adic-completion]. Each $f_r$ is an $R$-map, so componentwise operations make $f$ an $R$-map; its reduction to $k$ is the identity, hence $f$ is local. Its reduction modulo the square of the maximal ideal is $e_2$, so its cotangent map is surjective. Step 1 and step 2 give equal dimensions of all maximal-ideal graded pieces of $C$ and $D$. Apply [lem-sfb-complete-local-cotangent-graded-rigidity]: $f$ is an isomorphism. Its inverse is also an $R$-map. The compatible $\\theta_r$ identify the formal pullback of $\\xi$ along $f$ with $\\eta$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-sfb-complete-local-cotangent-graded-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07XH, surjectivity and equal graded dimensions imply that the dotted ring map is an isomorphism."
+   }
+  },
+  {
+   "text": "Put $V=\\operatorname{Spec}A$ and let $v$ correspond to $\\mathfrak n$ [def-weil-affine-spectrum]. Since $A$ is generated by finitely many elements over $R$, $V\\to S$ is finite type [def-weil-finite-type-morphism]. Since $A\\to A/\\mathfrak n$ is surjective, the canonical point map $\\operatorname{Spec}\\kappa(v)\\to V$ is finite type (one affine chart with no algebra generators). Thus $v$ is a finite type point, and $\\kappa(v)=A/\\mathfrak n\\cong k$. To verify versality, take any test $B'\\twoheadrightarrow B$, $a:\\operatorname{Spec}B\\to V$, $z$, and prescribed object isomorphism from the statement. The map $A\\to B$ sends $A\\setminus\\mathfrak n$ to units and extends uniquely to a local map $L\\to B$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], some power of the maximal ideal of $B$ vanishes. Consequently $L\\to B$ kills $\\mathfrak q^r$ for some $r$, and the quotient isomorphisms of step 2 extend it uniquely to $g:D\\to B$. Uniqueness follows because every local map $D\\to B$ factors through such a quotient.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXK (lemma-versality-matches), Artinian-valued points are maps from the completed local ring; Tag 07XH, final sentence."
+   }
+  },
+  {
+   "text": "Compose $g$ with $f$ to get $C\\to B$. Because $B$ is Artinian, the compatible $\\theta_r$ of step 3 identify $(\\xi)_{g f}$ with $a^*y$: choose $r$ killing the maximal ideal of $B$ and pull back $\\theta_r$. They turn the prescribed isomorphism $z|_B\\cong a^*y$ into the datum for versality of $\\xi$. Obtain a lift $h:C\\to B'$ and an isomorphism $z\\cong(\\xi)_h$ extending it. Define the lifted point by the ring map $A\\to D\\xrightarrow{f^{-1}}C\\xrightarrow{h}B'$. Its reduction is $A\\to D\\xrightarrow{g}B$, as required. The maximal ideal of $B'$ is nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent], so pulling back some $\\theta_r$ identifies $(\\xi)_h$ with the pullback of $y$ along this lifted point. Compatibility of the $\\theta_r$ ensures that the resulting isomorphism restricts to the prescribed one over $B$. This proves versality at $v$. At $r=1$, $\\theta_1$ gives $y|_v\\cong\\xi_1$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tags 07XH and 0CXK, final transport of versality, explicitly on the Artinian lifting test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-artin-object-graded-approximation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-weil-pbc-adic-completion",
+  "lem-sfb-complete-local-cotangent-graded-rigidity",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07XH (lemma-approximate-versal), proof; Tag 07XB (lemma-approximate); completion facts in algebra.tex Tags 05GG, 05GI, 0316."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An effective versal formal object of a limit preserving fibred groupoid over a G ring can be algebraized to a finite type family versal at a point with the same residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation algebraizes a formally versal deformation over a complete Noetherian local algebra preserving the residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] (f : S →ₐ[R] A)\\n  (hf : Function.Surjective ⇑f), ∃ g, (AdicCompletion.kerProj hf).comp g = AlgHom.id R A\", \"doc\": \"Let `R` be a commutative ring, and let `A` be a formally smooth `R`-algebra. For any `R`-algebra `S` and any surjective `R`-algebra homomorphism `f : S \\\\to A`, let `\\\\hat{S}` be the adic completion of \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin approximation effective versal formal object finite type algebraization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) :\\n  ∃ (g : A →ₐ[R] AdicCompletion (ker f) S), (AdicCompletion.kerProj hf).comp g = AlgHom.id R A\", \"doc\": \"Let `R` be a commutative ring, and let `A` be a formally smooth `R`-algebra. For any `R`-algebra `S` and any surjective `R`-algebra homomorphism `f : S \\\\to A`, let `\\\\hat{S}` be the adic completion of \"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[EssFiniteType R A] [FormallySmooth R A] : Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"algebraization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "algebrais|algebraiz|approximate[Vv]ersal|[Vv]ersal[Ff]ormal",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Tactic.Algebraize\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1160\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1185\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1228\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Ideal.lean\", \"line\": \"52\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"line\": \"37\", \"text\": \"  algebraize [(Subalgebra.inclusion le).toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"line\": \"260\", \"text\": \"@[algebraize Algebra.EssFiniteType]\"}\n  {\"file\": \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"line\": \"278\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"line\": \"284\", \"text\": \"  algebraize [f, g₁.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"224\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"502\", \"text\": \"  algebraize [f, IsLocalization.map (S := Rᵣ) Sᵣ f M.le_comap_map,\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"474\", \"text\": \"  algebraize [f, g, g.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"478\", \"text\": \"  algebraize [f, g, g.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"591\", \"text\": \"  algebraize [f, g, g.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"line\": \"301\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"line\": \"315\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Grassmannian.lean\", \"line\": \"156\", \"text\": \"  algebraize [f.toRingHom, g.toRingHom, (g.comp f).toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/Grassmannian.lean\", \"line\": \"157\", \"text\": \"  -- FIXME: `algebraize` doesn't generate this instance, even though it seems like it should\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"line\": \"59\", \"text\": \"    algebraize [f.toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Defs.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Tactic.Algebraize\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Defs.lean\", \"line\": \"169\", \"text\": \"@[algebraize Module.Finite, stacks 0563]\"}\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"line\": \"695\", \"text\": \"    by intro; algebraize [f]; exact finite_of_finite_type_of_isJacobsonRing R S⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"line\": \"718\", \"text\": \"  algebraize [f, (g.comp f)]\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"428\", \"text\": \"  algebraize [(algebraMap (A ⧸ P) k).comp (algebraMap A (A ⧸ P)),\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"162\", \"text\": \"  algebraize [f, g, (g.comp f)]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-smooth-point-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-approximate-versal after effectivity and before openness",
+   "via": [
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-effective-versal-algebraization",
+  "worker": "stage1",
+  "summary": "Q07 follows Stacks 07XH: approximate an effective object at order two with graded control; recursively lift using formal versality; use complete local graded rigidity; explicitly transfer every prescribed Artinian lifting diagram. Two genuine statement-only prerequisites are created, existing completion and Artinian facts are reused, and the original statement is retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-approximate-versal after effectivity and before openness; realizes the approximation input to Tag 07XY in the existing stable-curve moduli prerequisite chain; current latest direct-images proof (3), no change to its route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative algebra tool: completion of the Noetherian local ring L is Noetherian. The unit has no replacement; this is exactly the completion construction in Stacks 07XH."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-8a8679522",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-8a8679522 (reviewer sub-agent of L); spot-checked: I read the delivery against Stacks artin.tex 07XB (lemma-approximate), 07XH (lemma-approximate-versal and its proof) and definition-versal-formal-object, and formal-defos.tex 06GZ. The item statement is byte-identical to live and matches 07XH on an affine Noetherian base. Step 1 applies the new 07XB node with N=2; all its hypotheses are present in the item. Step 2 gets D/d^r = L/q^r and D complete Noetherian local from the cited nodes: completion-noetherian, local-completion-local-ring, mod-ideal (1) for completeness and mod-power (kernel q^r D); each says what is used. Step 3 is the dotted-arrow recursion from the item's own versality hypothesis on the Artinian quotients from noetherian-local-quotient-artinian-local; I checked the orientation of theta_r and that each choice extends the previous one. Step 4: f_2 is an iso mod squares; equal graded dimensions come from the 07XB graded iso plus step 2, with matching k-structures through e_2; the rigidity node then makes f an isomorphism. Steps 5-6 are the lifting diagram chase. Nilpotence of m_B and m_B' factors maps through D/d^r. The lift A->D->C->B' reduces to a, and compatibility of the theta_r extends the prescribed iso; theta_1 gives y|_v = xi_1. New node object-graded-approximation is 07XB (1)-(6) on an affine base, matching hypothesis by hypothesis, with no versality content. New node complete-local-cotangent-graded-rigidity is true by my own proof: Nakayama plus complete Nakayama give surjectivity, and equal lengths of C/m^j and D/n^j give injectivity. I tested it on k[[t]]->k[[t]]/(t^2), Z_p->F_p, Z_p[[t]]->Z_p and the identity. It is not a duplicate of lem-sfb-complete-local-cotangent-surjectivity, which needs k-algebras and states surjectivity only; the item works over an arbitrary Noetherian R. A rg -L search for duplicates over the snapshot found none (07XB/07XH/06GZ/0CXK tags, approximation and complete-local names, gradings). I accept the tool_use lem-weil-pbc-adic-completion-noetherian. There are no SGA citations, and live and side-live still show the item unsplit. No fixes written."
+ }
+}

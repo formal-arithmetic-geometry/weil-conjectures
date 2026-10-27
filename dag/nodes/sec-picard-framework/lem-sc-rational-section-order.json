@@ -26,53 +26,57 @@
  ],
  "proof": [
   {
-   "text": "*Independence of the generator.* Fix a closed point $P$. Since $e$ and $e'$ both generate the free rank-one $\\mathcal O_{C,P}$-module $\\mathcal L_P$ [lem-sc-invertible-module-generic-stalk], there is a unit $u\\in\\mathcal O_{C,P}^*$ with $e'=ue$. Thus $g'=gu^{-1}$ in $k(C)^*$. The normalized DVR valuation $v_P$ in the statement sends $u$ and $u^{-1}$ to $0$ (the exponent of a unit in its uniformizer factorization is $0$), so $v_P(g')=v_P(g)$.",
+   "text": "Use the basis and image descriptions in lem-sc-invertible-module-generic-stalk. If g times the generic image of a stalk generator lies in the stalk image, comparison of coefficients in that basis expresses g as a nonzero local scalar. The valuation nonnegativity characterization in lem-sc-smooth-connected-curve-local-rings therefore gives nonnegative order. Given the two coefficient expressions for s, division shows that (g/g') lam(e) = lam(e') and conversely. The two nonnegative valuation differences force equality of orders. This is the private proved helper coefficient_order_nonneg followed by the local proof hind.",
    "uses": [
-    "lem-sc-invertible-module-generic-stalk"
+    "lem-sc-invertible-module-generic-stalk",
+    "lem-sc-smooth-connected-curve-local-rings"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Section 02SE, paragraph immediately before Definition 02SF: two generators differ by a unit, so the ratio of a meromorphic section to a generator is defined up to a unit"
+    "place": "Section 'The Weil divisor class associated to an invertible module' (section-c1): the paragraph before Tag 02SF (divisors-definition-order-vanishing-meromorphic), 'there exists a unit $u\\in\\mathcal O_{X,\\xi}^*$ such that $s_\\xi=us'_\\xi$ ... $s/s_\\xi$ is independent of the choice of $s_\\xi$ up to multiplication by a unit' (clause 1), and Tag 02SG (divisors-lemma-divisor-meromorphic-locally-finite) with its proof (clause 2: on a nonempty open where $s$ generates $\\mathcal L$ the order is $0$, and only the finitely many components of the complement remain), specialized to the smooth connected curve $C$, whose prime divisors are its closed points."
    }
   },
   {
-   "text": "*A nonzero rational section generates on a nonempty open.* Choose an open neighbourhood of the generic point $\\eta$ on which $\\mathcal L$ is free with generator $e$ [def-sc-invertible-module], then a nonempty affine open $V=\\operatorname{Spec}A$ inside it. Since $\\eta$ is generic, it lies in $V$. The image of $e$ is a basis of $\\mathcal L_\\eta$ [lem-sc-invertible-module-generic-stalk], so $s=g e_\\eta$ for some $g\\in k(C)^*$. By [lem-sc-integral-function-field-affine-fraction], write $g=a/b$ with $a,b\\in A\\setminus\\{0\\}$. The principal open $U=D(ab)\\subseteq V$ is nonempty (it contains $\\eta$), and both $a$ and $b$ are units on $U$. Hence $g$ and $g^{-1}$ are regular on $U$, and $s=(a/b)e$ is a generator of $\\mathcal L|_U$.",
+   "text": "Represent s by a section z on an open V containing the generic point, using the stalk germ representation. Local triviality gives a free generator e on a smaller affine neighbourhood W. Write the restriction of z as a e by its uniquely determined coefficient. Taking generic germs shows that the germ of a is nonzero, since s is nonzero. The basic open D(a) therefore contains the generic point. At each P in D(a), the germ of a is a unit. The germ of e spans the stalk: represent any stalk element on a smaller neighbourhood, express that representative in the free generator, and take germs (private proved helper span_germ_of_freeGenerator). Hence the germ of z is also a generator, and specialization of this germ equals s.",
    "uses": [
     "def-sc-invertible-module",
-    "lem-sc-invertible-module-generic-stalk",
-    "lem-sc-integral-function-field-affine-fraction"
+    "def-sc-local-free-generator",
+    "def-weil-pbc-module-stalk"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Proof of Lemma 02SG, first sentence: a nonzero meromorphic section generates the invertible module on a nonempty open; the affine fraction and principal-open construction makes this sentence explicit"
+    "place": "Section 'The Weil divisor class associated to an invertible module' (section-c1): the paragraph before Tag 02SF (divisors-definition-order-vanishing-meromorphic), 'there exists a unit $u\\in\\mathcal O_{X,\\xi}^*$ such that $s_\\xi=us'_\\xi$ ... $s/s_\\xi$ is independent of the choice of $s_\\xi$ up to multiplication by a unit' (clause 1), and Tag 02SG (divisors-lemma-divisor-meromorphic-locally-finite) with its proof (clause 2: on a nonempty open where $s$ generates $\\mathcal L$ the order is $0$, and only the finitely many components of the complement remain), specialized to the smooth connected curve $C$, whose prime divisors are its closed points."
    }
   },
   {
-   "text": "*Finite support.* For every closed point $P\\in U$, the germ $s_P$ generates $\\mathcal L_P$, so writing $s=g_P\\lambda_P(e_P)$ for any generator $e_P$ gives $g_P\\in\\mathcal O_{C,P}^*$ and $v_P(g_P)=0$ by the normalized DVR valuation in the statement. Therefore the closed points with nonzero order lie in $Z=C\\setminus U$. This is a proper closed subset of the integral curve $C$, since $\\eta\\in U$. If $Z$ contained a strict chain of two nonempty irreducible closed subsets, appending $C$ would give a chain of length two in $C$, contrary to $\\dim C=1$ [def-sc-curves]; thus $\\dim Z\\le0$. Since $C$ is of finite type over $k$ [def-sc-curves], [lem-sc-dim0-finite] gives that $Z$ is a finite set of closed points. The set of $P$ with nonzero order is a subset of this finite set.",
+   "text": "At each closed P in D(a), compare an arbitrary generator and coefficient g with the generator given by the germ of z and coefficient 1. The already proved independence makes the order of g zero. Thus all points in the nonzero-order support lie outside D(a). Apply the already proved source-library theorem IsOpen.finite_compl_of_topologicalKrullDim_le_one, recorded as lem-sc-nonempty-open-complement-finite-dim-le-one. Its Noetherianity and irreducibility hypotheses follow from lem-sc-smooth-connected-curve-local-rings, and its dimension bound follows from def-sc-curves. A subset of that finite complement is finite.",
    "uses": [
-    "def-sc-curves",
-    "lem-sc-dim0-finite"
+    "lem-sc-nonempty-open-complement-finite-dim-le-one",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "def-sc-curves"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Lemma 02SG, proof: all nonzero-order prime divisors lie outside the open where the section generates; specialization to a finite-type integral curve, with finite zero-dimensional closed subsets as in [lem-sc-dim0-finite]"
+    "place": "Section 'The Weil divisor class associated to an invertible module' (section-c1): the paragraph before Tag 02SF (divisors-definition-order-vanishing-meromorphic), 'there exists a unit $u\\in\\mathcal O_{X,\\xi}^*$ such that $s_\\xi=us'_\\xi$ ... $s/s_\\xi$ is independent of the choice of $s_\\xi$ up to multiplication by a unit' (clause 1), and Tag 02SG (divisors-lemma-divisor-meromorphic-locally-finite) with its proof (clause 2: on a nonempty open where $s$ generates $\\mathcal L$ the order is $0$, and only the finitely many components of the complement remain), specialized to the smooth connected curve $C$, whose prime divisors are its closed points."
    }
   }
  ],
  "proof_deps": [
   "lem-sc-invertible-module-generic-stalk",
+  "lem-sc-smooth-connected-curve-local-rings",
   "def-sc-invertible-module",
-  "lem-sc-integral-function-field-affine-fraction",
-  "def-sc-curves",
-  "lem-sc-dim0-finite"
+  "def-sc-local-free-generator",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "def-sc-curves"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Section 02SE before Definition 02SF; Lemma 02SG and its proof"
+  "place": "Section 02SE before Definition 02SF; Lemma 02SG and its proof. The nonempty generating open is constructed directly from a germ representative and a local free generator; the finite-complement conclusion uses the existing proved topological lemma."
  },
  "mathlib_searches": [
   {
@@ -105,7 +109,18 @@
   "item": "lem-sc-line-bundle-rational-section",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "split_report": {
@@ -139,5 +154,15 @@
   "group": "F1",
   "result": "pass",
   "note": "k alg closed [Field][IsAlgClosed]; C smooth connected curve = IsConnectedCurve f + Smooth f (def-sc-curves record, as landed local-rings dep); integrality/eta/k(C)=C.functionField and v_P chosen from landed smooth_connected_curve_local_rings (projections h.2^8 .2.2 counted; v characterized by unit*t^n exponent = normalized valuation, no second order notion); L IsInvertible; L_x, lam_x = stalkSpecializes as in invertible_module_generic_stalk; s≠0; clause 1 all generators e,e' and units g,g' -> equal orders; clause 2 Set.Finite of closed P with some generator/coefficient of nonzero order (= support by clause 1); #check: names resolve to AlgebraicGeometry.*; compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261023T124450-L-1405001",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

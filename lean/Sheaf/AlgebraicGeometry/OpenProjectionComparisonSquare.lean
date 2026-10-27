@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
-import Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.SixFunctors.ComparisonOpenTensorCoherence
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
 # Site transport of the open projection formula
@@ -90,6 +90,56 @@ theorem openProjectionTransport_projection_square
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm)).app B))).hom ≫
       ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j).app
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory.obj F)).app
-        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj B) := by sorry
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj B) := by
+  have hsupport : supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j =
+      (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).symm := by
+    have hd : supportSiteComparisonCoefficientDirectImageIso (ModuleCat.{u + 1} Λ) j =
+        lowerStarCompComparisonLowerStarIso j (ModuleCat.{u + 1} Λ) := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext G
+      apply Sheaf.hom_ext
+      apply NatTrans.ext
+      funext W
+      simp only [supportSiteComparisonCoefficientDirectImageIso,
+        lowerStarCompComparisonLowerStarIso, Iso.trans_hom, Iso.symm_hom,
+        NatTrans.comp_app, Functor.sheafPushforwardContinuousComp,
+        Functor.sheafPushforwardContinuousIso,
+        supportSiteComparisonSiteBaseChangeIso, toProEtCompOverPullbackIso,
+        Iso.refl_hom, NatTrans.id_app]
+      rfl
+    change ((conjugateIsoEquiv _ _).symm
+      (supportSiteComparisonCoefficientDirectImageIso (ModuleCat.{u + 1} Λ) j).symm).symm = _
+    rw [hd]
+    rfl
+  let C := (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory
+  let CU := (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory
+  let e := ((Etale.derivedOpenImmersionLowerShriekProjectionIso
+    (ModuleCat.{u + 1} Λ) j).app F).app B
+  let p := ((derivedOpenImmersionLowerShriekProjectionIso
+    (ModuleCat.{u + 1} Λ) j).app (CU.obj F)).app (C.obj B)
+  let s := (mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso
+    (ModuleCat.{u + 1} Λ) j).hom.app _ ≫
+    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.map
+      (comparisonOpenTensorIso Λ j F B).hom
+  let t := (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+    (ModuleCat.{u + 1} Λ)
+    ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj F)).hom.app B ≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).map
+      ((mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso
+        (ModuleCat.{u + 1} Λ) j).hom.app F)).app (C.obj B)
+  have h : C.map e.inv ≫ s = t ≫ p.inv := by
+    simpa only [s, t, e, p, C, CU, Iso.app_inv, Category.assoc] using
+      comparison_open_tensor_coherence Λ j F B
+  have h' : C.map e.hom ≫ t = s ≫ p.hom := by
+    apply (cancel_epi (C.map e.inv)).1
+    simp only [← Category.assoc, ← C.map_comp, Iso.inv_hom_id, C.map_id,
+      Category.id_comp]
+    rw [h]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  simpa [C, CU, e, p, s, t, comparisonOpenTensorIso, comparisonOpenDerivedPullbackIso,
+    mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso,
+    hsupport, Functor.mapDerivedCategoryNatIso_symm,
+    Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc] using h'
 
 end AlgebraicGeometry.ProEtale

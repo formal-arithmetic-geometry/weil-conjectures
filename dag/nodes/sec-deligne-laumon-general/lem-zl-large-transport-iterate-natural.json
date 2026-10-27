@@ -1,0 +1,132 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, p. 62; agent expansion of the constant-extension calculation in blueprint thm-zl-real-mixed-by-curves, proof paragraph 1, via lem-zl-classical-local-frobenius-iterate-comparison, proof step 8."
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "id": "lem-zl-large-transport-iterate-natural",
+ "title": "Naturality of prescribed common-stage positive point transports",
+ "statement": "Fix D, l ≠ D.p, Ω as in [def-weil-local-frobenius-trace]. Write P_f for the actual common-stage pullback and V for the large point-fibre functor, over s=Spec k. For every morphism f:N→M in the common-stage constructible category on s and n≥0, V(f) followed by T_n(M) equals T_n(N) followed by V(P_(g_s^(n+1))(f)), where T_n is the prescribed restriction-and-coprojection transport iterate, with n denoting n+1 steps. This holds for arbitrary common-stage morphisms, without a chosen integral lattice.",
+ "stmt_deps": [
+  "def-weil-local-frobenius-trace",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "restriction of sections commutes with every module morphism, and the colimit\ncoprojections and sheafification map are natural. On a good flat complex this gives\nan equality of chain maps, compatible with every quotient transition and with the\ncompleted comparison. The same equation therefore holds after localization to the\nintegral derived category. Rationalization extends it linearly. For a common-stage\narrow choose its actual representative at a field containing both coefficient stages.\nThe tensor-normalized scalar comparisons commute with restriction and coprojection;\nconjugating the finite-stage equation by these comparisons gives the one-step equation\nfor this representative, independent of further enlargement. For successive steps,\napply this square at each pulled-back morphism and use naturality of the specified\npullback compositor. Adjacent comparisons cancel. Induction on n then proves the\nstated equation for the recursive transportIterate, including n = 0.",
+   "uses": [
+    "lem-trf-point-transport-composition",
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-transport-composition",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof_origin": "Agent B4: extracted the naturality or associativity constituent of step 1 of lem-zl-large-transport-iterate-addition; follows the prescribed finite/integral/rational/common-stage maps.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Iterated natural transformation along pullback functors composition associativity",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Limits.pullbackObjIso_hom_comp_fst_assoc, CategoryTheory.Limits.pullbackObjIso_hom_comp_snd_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, PresheafOfModules.pullback_assoc, CategoryTheory.Limits.pullbackObjIso_inv_comp_fst_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_map_associator, CategoryTheory.Limits.pullbackObjIso_inv_comp_snd_assoc; ",
+   "verdict": "No exact match: Mathlib gives abstract categorical naturality and ordinary pullback associativity, not the specified integral/rational/common-stage constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp",
+   "date": "2026-10-25",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.map_comp'",
+   "verdict": "No exact match: Mathlib gives abstract categorical naturality and ordinary pullback associativity, not the specified integral/rational/common-stage constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "transportIterate|localPositivePower|conj_eqToHom_iff_heq",
+   "date": "2026-10-25",
+   "results": "8 hits: Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean, Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/Grothendieck.lean; ",
+   "verdict": "No exact match: Mathlib gives abstract categorical naturality and ordinary pullback associativity, not the specified integral/rational/common-stage constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a natural transformation under iteration of a functor",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.app_naturality, CategoryTheory.MorphismProperty.naturalityProperty, CategoryTheory.NatTrans.naturality', CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.Subfunctor.nat_trans_naturality, CategoryTheory.TwoSquare.natTrans, CategoryTheory.NatTrans.mk; ",
+   "verdict": "No exact match: Mathlib gives abstract categorical naturality and ordinary pullback associativity, not the specified integral/rational/common-stage constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of inverse pullback composition isomorphisms",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.Limits.pullbackProdFstIsoProd_inv_snd_fst_assoc, CategoryTheory.Limits.pullbackProdSndIsoProd_inv_fst_fst_assoc, CategoryTheory.IsPullback.isoIsPullback_inv_fst_assoc, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.Limits.pullbackAssoc, CategoryTheory.Limits.pullbackAssocSymmIsPullback, CategoryTheory.MorphismProperty.Over.pullbackComp, CategoryTheory.Limits.pullbackAssoc_inv_snd; ",
+   "verdict": "No exact match: Mathlib gives abstract categorical naturality and ordinary pullback associativity, not the specified integral/rational/common-stage constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of inverse pullback composition isomorphisms",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.Limits.pullbackAssoc_inv_fst_fst, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_snd_fst_assoc, CategoryTheory.Limits.pullbackAssoc_inv_fst_snd, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_snd_snd_assoc, CategoryTheory.Limits.pullbackRightPullbackFstIso_inv_fst_assoc, CategoryTheory.Limits.pullbackAssoc_inv_fst_fst_assoc, CategoryTheory.Limits.pullbackAssoc_inv_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst_assoc; ",
+   "verdict": "No exact match: Mathlib gives abstract categorical naturality and ordinary pullback associativity, not the specified integral/rational/common-stage constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalFrobeniusLargeTransportAddition",
+  "date": "2026-10-25",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, constant-extension local-Frobenius calculation; naturality and associativity constituent of step 1 of lem-zl-large-transport-iterate-addition.",
+   "via": [
+    "lem-zl-large-transport-iterate-addition",
+    "def-zl-classical-local-frobenius-data",
+    "lem-zl-classical-local-frobenius-iterate-comparison",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalFrobeniusLargeTransportNaturality",
+  "file": "lean/Sheaf/Paper/LocalFrobeniusLargeTransportNaturality.lean",
+  "declaration": "WeilConjectures.LocalFrobeniusLarge.transportIterate_naturality",
+  "statement": "theorem transportIterate_naturality\n    {N M : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))}\n    (f : N ⟶ M) (n : ℕ) :\n    letI := frobeniusPointPrimeInvertible D l hl\n    (pointFibre D l hl Ω).map f ≫ transportIterate D l hl Ω M n =\n      transportIterate D l hl Ω N n ≫ (pointFibre D l hl Ω).map\n        ((commonStageDerivedPullback l Ω\n          (localPositivePower (frobeniusPointIso D).hom n)).map f)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T180438-L-3991853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T180438-L-3991853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

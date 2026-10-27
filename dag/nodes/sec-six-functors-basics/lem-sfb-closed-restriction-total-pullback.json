@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-closed-restriction-total-pullback",
+ "kind": "statement",
+ "title": "Unit-normalized closed comparisons on finite total complexes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ a sheaf of commutative rings on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and use module sheaves [def-weil-sheaf-of-modules-category] with inverse-image coefficient rings and the actual module inverse and direct images [def-weil-proetale-inverse-image]. Use the canonical unit-normalized adjunctions [def-sfb-proetale-unit-normalized-adjunction]. Let $i:Z\\hookrightarrow X$ and $i_a:Z_a\\hookrightarrow X$, $1\\leq a\\leq m$, be closed immersions [def-weil-closed-immersion], with each $i_a$ factoring through $i$. Let $M$ range over $A$-module sheaves. Assume their complementary open immersions [def-weil-open-immersion] are quasi-compact morphisms [def-weil-finite-type-morphism]. Assume $m\\geq1$; no covering hypothesis is needed. For a nonempty subset $J\\subseteq\\{1,\\ldots,m\\}$ let $Z_J$ be the scheme-theoretic intersection (the iterated fibre product over $X$ [def-pc-fibre-product]), and put $E_J=i_{J,*}i_J^*$ and $E_Z=i_*i^*$. For $J\\subseteq L$, let $r_{J,L}:E_J\\to E_L$ be the actual unit of $Z_L\\hookrightarrow Z_J$ pushed to $X$, with inverse-image composition identifications; define $r_{Z,J}$ similarly. Write $D^{-1}(M)=E_Z(M)$, $D^p(M)=\\bigoplus_{|J|=p+1}E_J(M)$ for $0\\leq p<m$, and $D^p=0$ otherwise. The proposed differential is\n$$ (dc)_{(a_0<\\cdots<a_{p+1})}=\\sum_{t=0}^{p+1}(-1)^t r_{L\\setminus\\{a_t\\},L}(c_{L\\setminus\\{a_t\\}}),\\qquad d^{-1}=(r_{Z,\\{a\\}})_a. $$\nLet $g:X'\\to X$ be a scheme morphism, $A'=g^{-1}A$, and let $E'_T$ be the corresponding closed restriction on $X'$ for $T\\in\\{Z\\}\\cup\\{Z_J:J\\ne\\varnothing\\}$. Use the canonical coefficient-composition identifications. Suppose given natural isomorphisms\n$$c_T:g^*E_T\\xrightarrow{\\sim}E'_Tg^*,\\qquad c_T\\,g^*(\\eta_T)=\\eta'_T g^*$$\nfor every such $T$, including $T=Z$. These unit equations alone imply that every square of restriction faces commutes. The degreewise direct sums of the $c_{Z_J}$ give a natural isomorphism of augmented row complexes, with $c_Z$ in degree $-1$.\nFor every bounded-below complex $K$, let $C(K)$ and $C'(g^*K)$ be the finite totals of the nonnegative rows, with differential $d_D+(-1)^p d_K$ and augmentations $\\alpha$ and $\\alpha'$. There is a unique natural chain isomorphism\n$$\\tau_K:g^*C(K)\\xrightarrow{\\sim}C'(g^*K)$$\nwhose component on every diagonal inclusion is the componentwise direct sum of $c_{Z_J}$, namely\n$$\\tau_K^n\\,g^*(\\iota_{p,q})=\\iota'_{p,q}\\,(\\bigoplus_{|J|=p+1}c_{Z_J,K^q}),\\qquad p+q=n.$$\nIt satisfies $\\tau_K\\,g^*\\alpha_K=\\alpha'_{g^*K}c_{Z,K}$. If both augmentations are quasi-isomorphisms, localization $Q$ in the ordinary derived category [def-weil-abstract-derived-category] satisfies\n$$Q(\\tau_K)=Q(\\alpha'_{g^*K})\\,Q(c_{Z,K})\\,Q(g^*\\alpha_K)^{-1}.$$\nThese equations are identities of natural transformations, preserved by compatible morphisms, iterated pullback comparisons, automorphisms, and small parameter diagrams. A parameter diagram means a functor from a small category into the displayed data, with all comparisons natural on that category. No existence of closed base change for an arbitrary $g$ is asserted without the supplied unit-compatible comparisons.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, supplies epimorphic closed units; the comparison and totalization identities are agent deductions, not assertions of this tag. Extracted from old step 8 of lem-sfb-finite-closed-cover-resolution and its existing Lean docstring, with finite totalization as in homology.tex Tag 0133, lemma-double-complex-gives-resolution."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "def-weil-abstract-derived-category",
+  "def-sfb-finite-closed-row-constructions",
+  "def-sfb-finite-closed-augmented-rows"
+ ],
+ "proof": [
+  {
+   "text": "For every nonempty $J$, the closed-immersion product lemma (applied to $Z_a\\to X$ and $Z_b\\to X$ over the base $X$, with $X\\times_XX=X$, and inductively on $|J|$) shows that $i_J:Z_J\\to X$ is a closed immersion; the same holds for the pulled-back family $Z'_J=Z_J\\times_XX'$ in $X'$. As a set $Z_J$ is $\\bigcap_{a\\in J}Z_a$ (the fibre product of closed immersions is the preimage of one closed subscheme in the other), so the complement of $Z_J$ is the finite union of the complements of $Z_a$, $a\\in J$. Over each affine open of $X$ these are quasi-compact spaces, so their finite union is quasi-compact; hence its open immersion is quasi-compact. The same holds for $Z$. The ringed open-closed lemma therefore makes every actual unit $\\eta_{T,M}:M\\to E_T(M)$ an epimorphism. With inverse-image coefficients $g^*$ is exact by the geometric-inverse-image lemma; exact functors preserve epimorphisms, so $g^*\\eta_{T,M}$ is epimorphic. All complements after base change are quasi-compact by quasi-compact base change. Apply the signed-restriction lemma to the original and pulled-back families to obtain their additive augmented row complexes. Its hypotheses require no covering.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-pc-quasi-compact-base-change",
+    "lem-sfb-closed-restriction-signed-refinements",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for the actual epimorphic closed units; agent comparison calculation using the existing signed-restriction and ringed-localization statements."
+   }
+  },
+  {
+   "text": "The unit identity in the signed-restriction lemma, applied also with ambient closed support $Z_J$ and singleton subfamily $Z_L$, gives $r_{J,L}\\eta_J=\\eta_L$; it also gives $r_{Z,J}\\eta_Z=\\eta_J$. For $J\\subseteq L$ compare $c_Lg^*r_{J,L}$ and $r'_{J,L}c_J$. Precomposing with $g^*\\eta_J$ gives, respectively,\n$$c_Lg^*(r_{J,L}\\eta_J)=c_Lg^*\\eta_L=\\eta'_Lg^*,\\qquad r'_{J,L}c_Jg^*\\eta_J=r'_{J,L}\\eta'_Jg^*=\\eta'_Lg^*.$$\nCancel the epimorphism from step 1 to obtain the face square. Replacing $J$ by $Z$ gives the augmentation-face square. These are equations of natural transformations since the calculation holds at every module with the supplied natural $c_T$.",
+   "uses": [
+    "lem-sfb-closed-restriction-signed-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for the actual epimorphic closed units; agent comparison calculation using the existing signed-restriction and ringed-localization statements."
+   }
+  },
+  {
+   "text": "An additive functor preserves finite biproducts directly from their equations: applying it to $\\pi_a\\iota_b=\\delta_{ab}$ and $\\sum_a\\iota_a\\pi_a=1$ gives the same biproduct equations. Thus identify $g^*D^p(M)$ with $\\bigoplus_{|J|=p+1}g^*E_J(M)$. The sum $b^p_M=\\bigoplus_Jc_{J,M}$ is invertible, with inverse the sum of $c_{J,M}^{-1}$. Each matrix entry of $b^{p+1}g^*d^p-d'^pb^p$ is the signed difference of the two face composites proved equal in step 2, hence zero. In degree $-1$ use $b^{-1}=c_Z$; its chain equation is exactly the augmentation-face squares. This proves the asserted natural augmented-row isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for the actual epimorphic closed units; agent comparison calculation using the existing signed-restriction and ringed-localization statements."
+   }
+  },
+  {
+   "text": "Put $B^{p,q}=D^p(K^q)$ for $0\\leq p<m$ and zero otherwise, with commuting differentials $d_D$ and $D^p(d_K)$; the signed-restriction lemma gives their commutation. Naturality of each $c_J$ at $d_K^q$ and step 2 make $b^{p,q}$ a componentwise invertible bicomplex map $g^*B\\to B'$, where $B'^{p,q}=D'^p(g^*K^q)$. For each total degree $n$ only $m$ horizontal indices can contribute. These diagonal coproducts exist as finite biproducts and are preserved by $g^*$ by step 3 (the remaining summands are zero). Apply the additive-total-comparison lemma to identify $g^*C(K)\\cong\\operatorname{Tot}(g^*B)$ with its stated diagonal inclusions. Define the map from this total to $\\operatorname{Tot}(B')$ on each $(p,q)$ summand by $b^{p,q}$. Its chain equation on that summand is the sum of the horizontal equation and $(-1)^p$ times the vertical equation. Summing the inverses gives its chain inverse. Their composite is $\\tau_K$, and the inclusion identity of the total-comparison lemma gives exactly the displayed characterization of $\\tau_K^n$. Equality on all diagonal inclusions proves uniqueness and naturality in chain maps $K\\to L$.",
+   "uses": [
+    "lem-sfb-closed-restriction-signed-refinements",
+    "lem-sfb-left-resolution-map-total-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean",
+    "place": "mapTotalIso and map_ι_mapTotalXIso_inv, lines 73–78 and 118–126; existing DAG total-comparison node; signed finite-total construction and elementary summand calculation."
+   }
+  },
+  {
+   "text": "In degree $n$ the augmentation lands only in $(0,n)$. The characterization of $\\tau_K$ reduces its augmentation square to $b^0g^*d^{-1}=d'^{-1}c_Z$, proved in step 3. Thus $\\tau_Kg^*\\alpha_K=\\alpha'_{g^*K}c_{Z,K}$ as chain maps. Suppose both augmentations are quasi-isomorphisms. Exactness of $g^*$ and its natural homology comparison imply that $g^*\\alpha_K$ is a quasi-isomorphism. Localization sends it to an invertible map. Apply $Q$ to the chain equality and compose on the right by $Q(g^*\\alpha_K)^{-1}$ to obtain exactly the asserted derived identity. Here $c_{Z,K}$ is a chain isomorphism by naturality at each differential, not a newly chosen derived comparison.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for the actual epimorphic closed units; agent comparison calculation using the existing signed-restriction and ringed-localization statements."
+   }
+  },
+  {
+   "text": "For a compatible morphism of the displayed data, the naturality square for $\\tau$ can be tested on every diagonal inclusion: it is the corresponding stipulated square for $c_J$, followed by the target inclusion. The augmentation case is the square for $c_Z$. For successive pullbacks $X''\\xrightarrow{h}X'\\xrightarrow{g}X$, the component comparison is $c^h_{T'}\\,h^*c^g_T$, using coefficient composition identifications; its unit equation follows by applying the two supplied unit equations. Any separately supplied unit-normalized comparison for $gh$ equals this composite: precompose their difference with the epimorphic $(gh)^*\\eta_T$ and cancel as in step 2. The two proposed total maps now agree on every diagonal inclusion, so uniqueness in step 4 proves the iterated-pullback equation. Identities and associativity follow by the same inclusion test. Apply the morphism calculation to automorphisms, or objectwise to each arrow of any small parameter category. Inversion of natural isomorphisms and functoriality of $Q$ preserve these commuting squares and the equality in step 5. Thus all equations have the claimed natural-transformation compatibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, for the actual epimorphic closed units; agent comparison calculation using the existing signed-restriction and ringed-localization statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-compact-base-change",
+  "lem-sfb-closed-restriction-signed-refinements",
+  "lem-sfb-left-resolution-map-total-iso",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Agent deduction from Tag 09AH and the existing DAG signed-restriction and additive-total-comparison lemmas; supports paragraph (3) of the current blueprint det-thm-sf-ctf-stability-direct-images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Epimorphic units determine compatibility of closed restriction comparison maps with faces and with finite totalization under exact inverse image",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Γ₀.Obj.map_epi_on_summand_id, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, AlgebraicTopology.DoldKan.Γ₀.Obj.map_epi_on_summand_id_assoc, SimplicialObject.Splitting.IndexSet.fac_pull; ",
+   "date": "2026-10-22",
+   "verdict": "no match: total.mapIso and diagonal naturality require a bicomplex map already supplied; they do not establish face compatibility from epimorphic closed units or its augmentation normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit compatible natural isomorphisms between closed restriction functors induce an augmentation preserving comparison of finite total complexes characterized on diagonal inclusions",
+   "results": "8 hits: Rep.standardComplex.compForgetAugmentedIso, CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, CategoryTheory.Abelian.DoldKan.comparisonN, AlgebraicTopology.DoldKan.N₂Γ₂ToKaroubiIso, CategoryTheory.Equivalence.mapHomologicalComplex_counitIso, ChainComplex.augmentTruncate, AlgebraicTopology.DoldKan.Γ₀'CompNondegComplexFunctor, CategoryTheory.Idempotents.DoldKan.hη; ",
+   "date": "2026-10-22",
+   "verdict": "no match: total.mapIso and diagonal naturality require a bicomplex map already supplied; they do not establish face compatibility from epimorphic closed units or its augmentation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact pullback of a finite double complex commutes with totalization and preserves augmentation using unit compatible comparisons",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"map\", \"iso\"",
+   "results": "5 hits: HomologicalComplex₂.total.mapIso, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex₂.total.mapIso_inv, ProfiniteAddGrp.instReflectsIsomorphismsProfiniteForget₂ContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap, ProfiniteGrp.instReflectsIsomorphismsProfiniteForget₂ContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfiniteContinuousMap; ",
+   "date": "2026-10-22",
+   "verdict": "no match: total.mapIso and diagonal naturality require a bicomplex map already supplied; they do not establish face compatibility from epimorphic closed units or its augmentation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(total.*[Pp]reserves|total.*[Cc]omparison|[Mm]ap.*[Tt]otal|[Tt]otal.*[Mm]ap)",
+   "results": "25 hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: total.mapIso and diagonal naturality require a bicomplex map already supplied; they do not establish face compatibility from epimorphic closed units or its augmentation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(closed.*(unit|restriction).*(total|comparison)|total.*(mapIso|ιMap)|mapBiproduct)",
+   "results": "22 hits: Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplex.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic total.mapIso assumes a bicomplex isomorphism and does not prove closed-unit face compatibility; finite biproduct comparisons do not give the augmentation and derived normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"mapIso\"",
+   "results": "3 hits: HomologicalComplex₂.total.mapIso, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex₂.total.mapIso_inv",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic total.mapIso assumes a bicomplex isomorphism and does not prove closed-unit face compatibility; finite biproduct comparisons do not give the augmentation and derived normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison of finite total complexes under exact inverse image respecting the closed restriction units",
+   "results": "8 hits: CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality, HomologicalComplex₂.total.mapIso_inv, CategoryTheory.ShortComplex.mapOpcyclesIso_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality, CategoryTheory.ShortComplex.mapNatIso_inv, CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality_assoc, HomologicalComplex.restrictionToTruncGE'_naturality_assoc, HomologicalComplex.mapBifunctorFlipIso_hom_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic total.mapIso assumes a bicomplex isomorphism and does not prove closed-unit face compatibility; finite biproduct comparisons do not give the augmentation and derived normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit compatible closed restriction isomorphisms commute with restriction faces by cancelling epimorphic adjunction units and induce a natural finite total complex pullback isomorphism",
+   "results": "8 hits: HomologicalComplex.restriction.sc'Iso, HomologicalComplex.restriction.sc'Iso_hom_τ₁, HomologicalComplex.restriction.sc'Iso_hom_τ₂, HomologicalComplex.restrictionCyclesIso, HomologicalComplex.restrictionOpcyclesIso, HomologicalComplex.restriction.sc'Iso_inv_τ₁, HomologicalComplex.pOpcycles_restrictionOpcyclesIso_hom, HomologicalComplex.restrictionCyclesIso_hom_iCycles",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic total.mapIso assumes a bicomplex isomorphism and does not prove closed-unit face compatibility; finite biproduct comparisons do not give the augmentation and derived normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between finite bicomplexes induces an isomorphism of their total cochain complexes commuting with summand inclusions and augmentations",
+   "results": "8 hits: HomologicalComplex₂.total.mapIso, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal_assoc, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal_assoc, HomologicalComplex₂.ι_totalShift₂Iso_inv_f, HomologicalComplex₂.ι_totalShift₁Iso_inv_f",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: generic total.mapIso assumes a bicomplex isomorphism and does not prove closed-unit face compatibility; finite biproduct comparisons do not give the augmentation and derived normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-closed-cover-resolution",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; technical support-resolution subargument: Tag 09AH, lemma-ses-associated-to-open, supplies epimorphic closed units; the comparison and totalization identities are agent deductions, not assertions of this tag. Extracted from old step 8 of lem-sfb-finite-closed-cover-resolution and its existing Lean docstring, with finite totalization as in homology.tex Tag 0133, lemma-double-complex-gives-resolution.",
+   "via": [
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-restriction-total-pullback",
+  "worker": "stage1",
+  "summary": "Proved face compatibility by cancelling epimorphic actual closed units, assembled finite biproduct row and total comparisons, checked augmentation and derived normalization, and proved diagram and iterated-pullback coherence by diagonal inclusions. Reused all needed general results; no new nodes, no statement change, and no covering assumption.",
+  "blueprint": "Technical finite closed-support comparison supporting paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images in literature/blueprint/latest. The inherited ancestor is null (confirmed with blueprint_refs ancestor); the paragraph does not itself assert this technical lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "The actual closed-unit short exact sequence supplies epimorphisms; no node of this unit gives that localization sequence."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exact inverse image with inverse-image rings is a generic site tool, needed for epi cancellation and localization."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic exact-functor preservation of epimorphisms and homology applies to g^*; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-left-resolution-map-total-iso",
+    "why": "Generic additive-functor comparison with totalization, characterized on diagonal inclusions; no coefficient-specific or derived-tensor hypotheses are used."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Lean-closed generic lemma: fibre products and composites of closed immersions are closed immersions, so each Z_J and Z'_J is a closed subscheme to which the ringed open-closed lemma applies; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-sfb-left-resolution-map-total-iso",
+  "lem-weil-pbc-closed-immersion-products"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-4b0cbb99b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-4b0cbb99b (reviewer sub-agent of L); spot-checked: Read the item's six steps, every cited statement and Stacks 09AH (proetale.tex, lemma-ses-associated-to-open) in full. The statement and its stmt_deps are byte-identical to live, where the item is still unsplit; there are no new nodes and no cycle. Fix (C1): step 1 applied lem-weil-pbc-proetale-ringed-open-closed to i_J : Z_J -> X without showing that the iterated fibre product Z_J, or Z'_J after pullback, is a closed immersion with underlying set the intersection of the Z_a. Added the citation of the Lean-closed lem-weil-pbc-closed-immersion-products and wrote the argument out; uses, proof_deps and tool_uses are updated. Steps checked: complements of the Z_J are quasi-compact as finite unions of quasi-compact opens. The units are epimorphisms whichever adjunction normalization is used. g^* = g^{-1} with inverse-image coefficients comes from a geometric morphism, so it is exact. Step 2: the signed-refinements unit identity, applied with ambient Z_J and the one-member family Z_L, gives r_{J,L} eta_J = eta_L, and cancelling the epimorphism g^* eta_J then gives the face squares. Step 4: the total-iso lemma's hypotheses hold, since g^* is additive and the finite biproducts are preserved; tau = Tot(b) composed with c_B^{-1} gives the inclusion characterization. Step 5: the derived identity uses only that g^* alpha is a quasi-isomorphism. Step 6: iterated pullbacks agree by epimorphism cancellation. Edge cases tested: m=1, empty Z_J, Z_a=Z, g=id, families that do not cover Z. Batch-5: lem-trf-geometric-inverse-image-exact is accepted as a generic topos fact; its closure reaches no trace-formula or Poincare theorem, only two trf definitions. Tool uses accepted: ringed-open-closed, total-iso, exact-functor (mathlib), closed-immersion-products. A parallel Q75 delivery of the same item is pending.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedRestrictionTotalPullback",
+  "declaration": "AlgebraicGeometry.closed_restriction_total_pullback",
+  "declarations": [
+   "AlgebraicGeometry.finiteClosedAugmentedRows_exists",
+   "AlgebraicGeometry.closed_restriction_total_pullback",
+   "AlgebraicGeometry.closedRestrictionComparison_unique",
+   "AlgebraicGeometry.closedTotalComparison_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedRestrictionTotalPullback.lean",
+  "statement": "theorem closed_restriction_total_pullback {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (m : ℕ) (hm : 0 < m) (W : Fin m → Over X) (hclosed : ∀ a, IsClosedImmersion (W a).hom) (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i)) (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι) (hqcW : ∀ a, ∃ U : X.Opens, Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (D : FiniteClosedAugmentedRows i W A) {Y : Scheme.{u}} (g : Y ⟶ X) (D' : FiniteClosedAugmentedRows (pullback.fst g i) (finiteClosedPullbackFamily W g) (ProEtaleTensorComparison.inverseRing g A)) (c : finiteClosedRestriction i A ⋙ proEtaleModuleInverseImage g A ≅ proEtaleModuleInverseImage g A ⋙ finiteClosedRestriction (pullback.fst g i) (ProEtaleTensorComparison.inverseRing g A)) (hc : ∀ M : ProEtaleTensorComparison.Modules A, (proEtaleModuleInverseImage g A).map ((finiteClosedUnit i A).app M) ≫ c.hom.app M = (finiteClosedUnit (pullback.fst g i) (ProEtaleTensorComparison.inverseRing g A)).app ((proEtaleModuleInverseImage g A).obj M)) (cs : ∀ s : Finset (Fin m), s.Nonempty → (finiteClosedRestriction (finiteClosedIntersection W s).hom A ⋙ proEtaleModuleInverseImage g A ≅ proEtaleModuleInverseImage g A ⋙ finiteClosedRestriction (finiteClosedIntersection (finiteClosedPullbackFamily W g) s).hom (ProEtaleTensorComparison.inverseRing g A))) (hcs : ∀ (s : Finset (Fin m)) (hs : s.Nonempty) (M : ProEtaleTensorComparison.Modules A), (proEtaleModuleInverseImage g A).map ((finiteClosedUnit (finiteClosedIntersection W s).hom A).app M) ≫ (cs s hs).hom.app M = (finiteClosedUnit (finiteClosedIntersection (finiteClosedPullbackFamily W g) s).hom (ProEtaleTensorComparison.inverseRing g A)).app ((proEtaleModuleInverseImage g A).obj M)) : (∀ (s t : Finset (Fin m)) (hs : s.Nonempty) (ht : t.Nonempty), s ⊆ t → Functor.whiskerRight (D.restriction s t) (proEtaleModuleInverseImage g A) ≫ (cs t ht).hom = (cs s hs).hom ≫ Functor.whiskerLeft (proEtaleModuleInverseImage g A) (D'.restriction s t)) ∧ (∀ (s : Finset (Fin m)) (hs : s.Nonempty), Functor.whiskerRight (D.ambientRestriction s hs) (proEtaleModuleInverseImage g A) ≫ (cs s hs).hom = c.hom ≫ Functor.whiskerLeft (proEtaleModuleInverseImage g A) (D'.ambientRestriction s hs)) ∧ ∃ σ : D.rows ⋙ finiteClosedPullbackComplex g A ≅ proEtaleModuleInverseImage g A ⋙ D'.rows, (∀ σ' : D.rows ⋙ finiteClosedPullbackComplex g A ≅ proEtaleModuleInverseImage g A ⋙ D'.rows, D.RowFormula g D' cs σ'.hom ↔ σ' = σ) ∧ (∀ M : ProEtaleTensorComparison.Modules A, (proEtaleModuleInverseImage g A).map (D.augment.app M) ≫ (σ.hom.app M).f 0 = c.hom.app M ≫ D'.augment.app ((proEtaleModuleInverseImage g A).obj M)) ∧ ∃ τ : CochainComplex.Plus.ι (ProEtaleTensorComparison.Modules A) ⋙ @finiteClosedTotal X A D.rows D.additive ⋙ finiteClosedPullbackComplex g A ≅ CochainComplex.Plus.ι (ProEtaleTensorComparison.Modules A) ⋙ finiteClosedPullbackComplex g A ⋙ @finiteClosedTotal Y _ D'.rows D'.additive, (∀ τ' : CochainComplex.Plus.ι (ProEtaleTensorComparison.Modules A) ⋙ @finiteClosedTotal X A D.rows D.additive ⋙ finiteClosedPullbackComplex g A ≅ CochainComplex.Plus.ι (ProEtaleTensorComparison.Modules A) ⋙ finiteClosedPullbackComplex g A ⋙ @finiteClosedTotal Y _ D'.rows D'.additive, D.TotalFormula g D' σ.hom τ'.hom ↔ τ' = τ) ∧ (Functor.whiskerLeft (CochainComplex.Plus.ι (ProEtaleTensorComparison.Modules A)) (Functor.whiskerRight D.totalAugment (finiteClosedPullbackComplex g A)) ≫ τ.hom = Functor.whiskerLeft (CochainComplex.Plus.ι (ProEtaleTensorComparison.Modules A)) (NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℤ) ≫ Functor.whiskerLeft (finiteClosedPullbackComplex g A) D'.totalAugment)) ∧ ∀ (K : CochainComplex.Plus (ProEtaleTensorComparison.Modules A)), QuasiIso (D.totalAugment.app K.obj) → QuasiIso (D'.totalAugment.app ((finiteClosedPullbackComplex g A).obj K.obj)) → ∃ e : DerivedCategory.Q.obj ((finiteClosedPullbackComplex g A).obj (((finiteClosedRestriction i A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj)) ≅ DerivedCategory.Q.obj ((finiteClosedPullbackComplex g A).obj ((@finiteClosedTotal X A D.rows D.additive).obj K.obj)), e.hom = DerivedCategory.Q.map ((finiteClosedPullbackComplex g A).map (D.totalAugment.app K.obj)) ∧ DerivedCategory.Q.map (τ.hom.app K) = e.inv ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℤ)).app K.obj) ≫ DerivedCategory.Q.map (D'.totalAugment.app ((finiteClosedPullbackComplex g A).obj K.obj))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-de8dcb4e2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de8dcb4e2",
+  "group": "NR",
+  "result": "fix",
+  "note": "Re-delivery of 19766f. F1/F2 resolved: the helpers and FiniteClosedAugmentedRows/RowFormula/TotalFormula are owned by the prelanded def-sfb-finite-closed-row-constructions and def-sfb-finite-closed-augmented-rows, both now stmt_deps; the item imports FiniteClosedAugmentedRows, not the cover theorem, so no import inversion and no cycle. Statement re-checked clause by clause against the node (face squares; σ = sum of c_J with c_Z in degree -1; τ on Plus fixed on diagonal inclusions; τ g*α = α' c_Z; derived identity with e.hom = Q(g*α)). Edge cases checked: m=1, empty intersection scheme, s=∅, p<0 or p≥m, Z empty, non-covering families, g=id. All four theorems sorry; docstrings OK; lean.statement verbatim. FIX 1 (H3): the nested ∃! σ … ∃! τ made σ unique only among σ that also admit a unique τ, and τ unique only among τ that also satisfy the augmentation and derived clauses; rewritten in iff form ∃ σ, (∀ σ', RowFormula σ'.hom ↔ σ' = σ) ∧ … ∃ τ, (∀ τ', TotalFormula σ.hom τ'.hom ↔ τ' = τ) ∧ …. FIX 2 (H2): closedTotalComparison_naturality used mapTotalIso, a def owned by the proof_dep lemma lem-sfb-left-resolution-map-total-iso; restated with arbitrary diagonal-characterized total maps τB/τE and a Mathlib PreservesColimit hypothesis for B (node step 6). Fixes: fixes/ClosedRestrictionTotalPullback.lean and fixes/lem-sfb-closed-restriction-total-pullback.lean-record.json (verbatim statement; refit_record gave no notes or refusals). nt_compile --json: 50.2 s, exit 0, clean. Advisory: ProEtaleTensorComparison.Modules/inverseRing are abbrevs from a theorem node that unfold to the def-weil owners; inherited, no action."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T081404-L-1945057",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.closedRestrictionComparison_unique",
+   "AlgebraicGeometry.closedTotalComparison_naturality",
+   "AlgebraicGeometry.closed_restriction_total_pullback",
+   "AlgebraicGeometry.finiteClosedAugmentedRows_exists"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.closed_restriction_total_pullback"
+  ]
+ }
+}

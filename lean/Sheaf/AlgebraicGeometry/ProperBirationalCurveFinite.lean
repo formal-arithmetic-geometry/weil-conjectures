@@ -8,9 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
-import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
+import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphismComparison
 import Sheaf.AlgebraicGeometry.DominantIntegralCurveQuasiFinite
 
 /-!
@@ -58,6 +57,11 @@ theorem isFinite_of_isProper_birational_curve
     (p : E ⟶ C) [p.IsOver (Spec (.of k))] [IsProper p] [IsDominant p]
     (hbirational : Function.Bijective (p.stalkMap (genericPoint E) :
       C.presheaf.stalk (p (genericPoint E)) ⟶ E.functionField)) : IsFinite p := by
-  sorry
+  have hfinite : (p.stalkMap (genericPoint E)).hom.Finite :=
+    RingHom.Finite.of_surjective _ hbirational.surjective
+  have hqf : p.IsLocallyQuasiFinite :=
+    quasiFiniteAtPoint_of_dominant_integral_curves (k := k) hdimC hdimE p hfinite
+  have : LocallyQuasiFinite p := (p.isLocallyQuasiFinite_iff.mp hqf).1
+  exact IsFinite.of_isProper_of_locallyQuasiFinite p
 
 end AlgebraicGeometry

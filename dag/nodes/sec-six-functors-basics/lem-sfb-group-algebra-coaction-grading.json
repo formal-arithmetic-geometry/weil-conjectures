@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-group-algebra-coaction-grading",
+ "kind": "statement",
+ "title": "A group-algebra coaction gives a grading over an arbitrary base ring",
+ "statement": "Let $R$ be a commutative ring, $M$ an additive abelian group, and $R[M]$ the group algebra of [def-sfb-ring-diagonalizable-group], with basis $e_m$, coproduct $\\Delta(e_m)=e_m\\otimes e_m$ and counit $\\epsilon(e_m)=1$. Let $A$ be a commutative $R$-algebra [def-weil-pbc-algebra-hom-quotient] and let $\\rho:A\\to A\\otimes_R R[M]$ be an $R$-algebra homomorphism, using the usual balanced tensor product [def-weil-pbc-module-tensor-product] with its commutative $R$-algebra structure $(a\\otimes f)(b\\otimes g)=ab\\otimes fg$, unit $1\\otimes1$ [lem-weil-pbc-algebra-tensor-pushout-universal-property], satisfying $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$ and $(1\\otimes\\epsilon)\\rho=1_A$ under the canonical tensor associativity and unit identifications. For $m\\in M$ put $A_m=\\{a\\in A:\\rho(a)=a\\otimes e_m\\}$. Then each $A_m$ is an $R$-submodule of $A$, every element $a\\in A$ has a unique finite homogeneous expansion $a=\\sum_m a_m$ with $a_m\\in A_m$, $1\\in A_0$, the structure map $R\\to A$ has image in $A_0$, and $A_mA_n\\subseteq A_{m+n}$. Moreover $\\rho(a)=\\sum_m a_m\\otimes e_m$ for this expansion. No finite-generation, field, reducedness, or torsion-freeness hypothesis is imposed on $R$, $A$, or $M$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0EKK, label lemma-complete-reducibility-Gm, proof at lines 2340–2370: coefficient projections for a group-like basis. Its stated case is M=Z and base Z; the arbitrary-base, arbitrary-abelian-group version here is the same coefficient calculation, independently written in report.md, not claimed verbatim in the source."
+ },
+ "stmt_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "For $f=\\sum_m r_me_m\\in R[M]$ define $q_m(f)=r_m$. These maps are $R$-linear and $q_m(e_n)=\\delta_{mn}$. By the tensor universal property the bilinear rule $(a,f)\\mapsto q_m(f)a$ induces $C_m:A\\otimes_RR[M]\\to A$. Every tensor is a finite sum $x=\\sum_j b_j\\otimes f_j$; expanding the finite supports of the $f_j$ gives $x=\\sum_m C_m(x)\\otimes e_m$. Applying $C_n$ to any finite expansion recovers its $n$th coefficient, proving uniqueness. This is a finite expansion and a direct check of the defining bilinear relations, not a tensor-exactness claim.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient-projection proof, generalized from the Laurent basis to the basis indexed by M."
+   }
+  },
+  {
+   "text": "Put $p_m=C_m\\rho$. The $p_m$ are $R$-linear, have finite support on each element, and $\\rho(a)=\\sum_m p_m(a)\\otimes e_m$ by step 1. Apply $1\\otimes\\epsilon$ to this identity. Since $\\epsilon(e_m)=1$, the counit hypothesis gives $a=\\sum_m p_m(a)$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient-projection proof, generalized from the Laurent basis to the basis indexed by M."
+   }
+  },
+  {
+   "text": "Coassociativity and the group-like coproduct give $\\sum_m\\rho(p_m(a))\\otimes e_m=\\sum_m(p_m(a)\\otimes e_m)\\otimes e_m$. Extract the coefficient of $e_n$ in the final factor to obtain $\\rho(p_n(a))=p_n(a)\\otimes e_n$. The extraction is legitimate directly: for any $R$-module $B$ the bilinear rule $(b,f)\\mapsto q_n(f)b$ defines $B\\otimes_RR[M]\\to B$; here take $B=A\\otimes_RR[M]$. Thus $p_n(a)\\in A_n$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient-projection proof, generalized from the Laurent basis to the basis indexed by M."
+   }
+  },
+  {
+   "text": "Each $A_n$ is an $R$-submodule: $\\rho(0)=0$, $\\rho(a+b)=(a+b)\\otimes e_n$ and $\\rho(ra)=ra\\otimes e_n$ whenever $a,b\\in A_n$, since $\\rho$ and $a\\mapsto a\\otimes e_n$ are $R$-linear. Steps 2 and 3 supply the asserted finite homogeneous expansion.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient-projection proof, generalized from the Laurent basis to the basis indexed by M."
+   }
+  },
+  {
+   "text": "If $a=\\sum_m b_m$ is any finite family with $b_m\\in A_m$, then $\\rho(a)=\\sum_m b_m\\otimes e_m$ by additivity. Applying $C_n$ gives $p_n(a)=b_n$, interpreting omitted indices as zero. Hence the homogeneous family is unique, and the displayed coaction formula agrees with that family.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient-projection proof, generalized from the Laurent basis to the basis indexed by M."
+   }
+  },
+  {
+   "text": "The algebra-homomorphism hypothesis gives $\\rho(1)=1\\otimes e_0$ and $\\rho(\\iota(r))=\\iota(r)\\otimes e_0$ for the structure map $\\iota:R\\to A$. Thus $1$ and the image of $R$ lie in $A_0$. For $a\\in A_m$ and $b\\in A_n$, compute $\\rho(ab)=\\rho(a)\\rho(b)=(a\\otimes e_m)(b\\otimes e_n)=ab\\otimes e_{m+n}$, using the defining multiplication of $R[M]$ and the multiplication and unit of the tensor algebra from [lem-weil-pbc-algebra-tensor-pushout-universal-property](1). Consequently $A_mA_n\\subseteq A_{m+n}$.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient-projection proof, generalized from the Laurent basis to the basis indexed by M."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0EKK, lemma-complete-reducibility-Gm; explicit arbitrary-ring, arbitrary-M coefficient proof. The source states only the G_m case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graded|grading|decompos",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comodule over the group algebra with group-like basis is a group graded module",
+   "results": "8 hits; ; returned names/files: IsGroupLikeElem.mk, GroupLike.ctorIdx, GroupLike, IsGroupLikeElem, IsGroupLikeElem.casesOn, GroupLike.noConfusion, IsGroupLikeElem.recOn, isGroupLikeElem_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"DirectSum\"",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comodules over a group coalgebra are equivalent to graded modules and equivariant maps preserve homogeneous components",
+   "results": "8 hits; ; returned names/files: GradedModule.linearEquiv, GradedModule.isModule, Rep.coindVEquiv_apply_hom, Rep.counitIsoAddEquiv, Rep.coindFunctorIso_hom_app_hom_hom_apply_hom_hom_apply, Rep.coindIso_hom_hom_hom, Rep.counitIso, DirectSum.Gmodule.smulAddMonoidHom_apply_of_of",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|coaction|diagonalizable",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representation of a diagonalizable group scheme over a commutative ring decomposes into weight submodules indexed by characters",
+   "results": "8 hits; ; returned names/files: Rep.diagonalHomEquiv, Rep.diagonal, Rep.diagonalHomEquiv_apply, Rep.diagonalHomEquiv_symm_apply, Rep.diagonalSuccIsoFree, Rep.diagonalSuccIsoFree_hom_hom_single, LieModule.iSup_genWeightSpace_eq_top, LieModule.iSup_genWeightSpace_eq_top'",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|comodule|decompos",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedModule.linearEquiv (Mathlib/Algebra/Module/GradedModule.lean:209) assumes a grading; it does not construct one from a coaction. IsGroupLikeElem (Mathlib/RingTheory/Coalgebra/GroupLike.lean:37) defines individual group-like elements. Rep.diagonal and group-algebra module equivalences concern ordinary group representations, not comodules. The Lie weight theorem needs a field and a finite-dimensional triangularizable Lie module. Source greps found no coaction-to-grading theorem. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|comodule|groupLike",
+   "results": "{\"t\": \"2026-10-24T04:56:33Z\", \"tool\": \"grep\", \"query\": \"coaction|comodule|groupLike\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/GroupLike.lean\", \"Mathlib/RingTheory/Bialgebra/GroupLike.lean\", \"Mathlib/RingTheory/Bialgebra/GroupLike.lean\"], \"digest\": \"a4609a51da033363\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddMonoidAlgebra.grade.gradedAlgebra and grade.isInternal (Mathlib/Algebra/MonoidAlgebra/Grading.lean:173,186) grade the group algebra itself, not an arbitrary algebra carrying a coaction. The group-like-element declarations specify the coproduct only. Rep.diagonal concerns ordinary group representations; Lie weight decompositions impose field or finiteness hypotheses. No coaction-to-grading theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comodule over a group algebra with group-like basis decomposes as a direct sum of homogeneous components",
+   "results": "{\"t\": \"2026-10-24T04:56:34Z\", \"tool\": \"leansearch\", \"query\": \"A comodule over a group algebra with group-like basis decomposes as a direct sum of homogeneous components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.grade.decomposition\", \"AddMonoidAlgebra.grade.isInternal\", \"HomogeneousSubmodule.isHomogeneous\", \"HomogeneousSubmodule\", \"Submodule.IsHomogeneous\", \"HomogeneousSubmodule.noConfusion\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"HomogeneousSubmodule.is_homogeneous'\"], \"digest\": \"44c08ccbc8c592f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddMonoidAlgebra.grade.gradedAlgebra and grade.isInternal (Mathlib/Algebra/MonoidAlgebra/Grading.lean:173,186) grade the group algebra itself, not an arbitrary algebra carrying a coaction. The group-like-element declarations specify the coproduct only. Rep.diagonal concerns ordinary group representations; Lie weight decompositions impose field or finiteness hypotheses. No coaction-to-grading theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"DirectSum\"",
+   "results": "{\"t\": \"2026-10-24T04:56:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comodule\\\", \\\"DirectSum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddMonoidAlgebra.grade.gradedAlgebra and grade.isInternal (Mathlib/Algebra/MonoidAlgebra/Grading.lean:173,186) grade the group algebra itself, not an arbitrary algebra carrying a coaction. The group-like-element declarations specify the coproduct only. Rep.diagonal concerns ordinary group representations; Lie weight decompositions impose field or finiteness hypotheses. No coaction-to-grading theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weight decomposition of a diagonalizable group scheme representation over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T04:56:36Z\", \"tool\": \"leanfinder\", \"query\": \"Weight decomposition of a diagonalizable group scheme representation over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonalHomEquiv\", \"Rep.diagonalHomEquiv_apply\", \"Rep.diagonalSuccIsoFree\", \"LieModule.instLinearWeightsOfCharZero\", \"LieModule.Weight.instFintype\", \"LieModule.Weight.instFinite\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.iSup_genWeightSpace_eq_top'\"], \"digest\": \"162bff415b64d0ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddMonoidAlgebra.grade.gradedAlgebra and grade.isInternal (Mathlib/Algebra/MonoidAlgebra/Grading.lean:173,186) grade the group algebra itself, not an arbitrary algebra carrying a coaction. The group-like-element declarations specify the coproduct only. Rep.diagonal concerns ordinary group representations; Lie weight decompositions impose field or finiteness hypotheses. No coaction-to-grading theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coaction of the group algebra of an abelian group on an algebra over a commutative ring gives a grading",
+   "results": "{\"t\": \"2026-10-24T04:56:37Z\", \"tool\": \"leanfinder\", \"query\": \"A coaction of the group algebra of an abelian group on an algebra over a commutative ring gives a grading\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.grade.gradedAlgebra\", \"AddMonoidAlgebra.gradeBy.gradedAlgebra\", \"AddMonoidAlgebra.grade.gradedMonoid\", \"AddMonoidAlgebra.gradeBy.gradedMonoid\", \"AddMonoidAlgebra.gradeBy.isInternal\", \"DirectSum.GAlgebra.smul_def\", \"GradedMonoid.GMonoid.toGMulAction\", \"GradedMonoid.GMulAction.toGSMul\"], \"digest\": \"80e0b4a1a95105e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddMonoidAlgebra.grade.gradedAlgebra and grade.isInternal (Mathlib/Algebra/MonoidAlgebra/Grading.lean:173,186) grade the group algebra itself, not an arbitrary algebra carrying a coaction. The group-like-element declarations specify the coproduct only. Rep.diagonal concerns ordinary group representations; Lie weight decompositions impose field or finiteness hypotheses. No coaction-to-grading theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Affine-target multiplicative-type monomorphism argument: translate the split group D_R(M) on G and resolve its coordinate coaction into weight components before applying the existing graded-stabilizer lemma. This supports the generic torus quotient input in the inherited ancestry; blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-algebra-coaction-grading",
+  "worker": "stage1",
+  "summary": "Q85 read Stacks 0EKK and the current blueprint, checked the unrestricted ring and character-group hypotheses, and wrote six coefficient calculations from the tensor universal property. No new node is needed: every extraction, reconstruction and grading identity is proved directly. The statement and its three notion dependencies are unchanged. Project-source searches found no attachment; logged Mathlib searches found only special cases or different notions.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). Retain the existing ancestry through the affine multiplicative-type monomorphism node; the six steps supply exactly its coordinate-coaction grading input. Current latest sk-thm-sf-ctf-stability and chapter route read; neither states this algebra lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-c0f50d178",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-c0f50d178 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, its 6 steps, the 3 cited definition statements and the source, Stacks 0EKK at groupoids.tex l.2340-2370 (lemma-complete-reducibility-Gm, confirmed in tags/tags). The item generalizes the 0EKK coefficient calculation from Z[x^{±1}] to R[M]; the proof is correctly marked agent-written. All six steps are correct. Coefficient extraction C_m comes from the balanced universal property, the counit gives a=Σp_m(a), extracting the last factor of the coassociativity identity gives ρ(p_n a)=p_n a⊗e_n, and uniqueness, the submodule property and A_mA_n⊆A_{m+n} follow. Edge cases hold: R=0, A=0, M=0, trivial coaction, torsion M in characteristic p, infinite M, R=Z/4. Checked for duplicates over dag/nodes (coaction, comodule, e_m⊗e_m, every citer of def-sfb-ring-diagonalizable-group): lem-sfb-gm-affine-action-grading (M=Z), lem-sfb-diagonalizable-representation-weight-grading (field, finitely generated M) and lem-sfb-relative-torus-bundle-weights (Z^r, projective) are special cases; none generalizes the item. The item is not a restated clause of its parent lem-sfb-affine-multiplicative-type-monomorphism-closed and creates no cycle. Mathlib has no Comodule class. The delivery has no new nodes. FIX (B3/C4): the R-algebra structure on A⊗_R R[M] had no cited node. The statement's hypothesis that ρ is an algebra homomorphism needs it, and so do step 4 (R-linearity of ρ) and step 6 (ρ(1)=1⊗e_0, (a⊗e_m)(b⊗e_n)=ab⊗e_{m+n}). def-weil-pbc-module-tensor-product is a module-level node only. The corrected item cites the Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property(1) in the statement (inline bracket with the formula; meaning unchanged), in stmt_deps, in steps 4 and 6 and in proof_deps, as def-sfb-hopf-action-module-data already does. Nothing was weakened. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-group-algebra-coaction-grading.json. There are no route issues and tool_uses is empty.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GroupAlgebraCoactionGrading",
+  "declaration": "AddMonoidAlgebra.group_algebra_coaction_grading",
+  "file": "lean/Sheaf/RingTheory/GroupAlgebraCoactionGrading.lean",
+  "statement": "theorem group_algebra_coaction_grading (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] (A : Type w) [CommRing A] [Algebra R A] (ρ : A →ₐ[R] A ⊗[R] AddMonoidAlgebra R M) (hcoassoc : ∀ a : A, TensorProduct.assoc R A (AddMonoidAlgebra R M) (AddMonoidAlgebra R M) (ρ.toLinearMap.rTensor (AddMonoidAlgebra R M) (ρ a)) = (Coalgebra.comul (R := R) (A := AddMonoidAlgebra R M)).lTensor A (ρ a)) (hcounit : ∀ a : A, TensorProduct.rid R A ((Coalgebra.counit (R := R) (A := AddMonoidAlgebra R M)).lTensor A (ρ a)) = a) : ∃ W : M → Submodule R A, (∀ (m : M) (a : A), a ∈ W m ↔ ρ a = a ⊗ₜ[R] (single m (1 : R))) ∧ (∀ a : A, ∃! f : M →₀ A, (∀ m : M, f m ∈ W m) ∧ f.sum (fun _ b ↦ b) = a) ∧ (1 : A) ∈ W 0 ∧ (∀ r : R, algebraMap R A r ∈ W 0) ∧ (∀ (m n : M) (a b : A), a ∈ W m → b ∈ W n → a * b ∈ W (m + n)) ∧ (∀ (a : A) (f : M →₀ A), (∀ m : M, f m ∈ W m) → f.sum (fun _ b ↦ b) = a → ρ a = f.sum (fun m b ↦ b ⊗ₜ[R] (single m (1 : R))))",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5fd65aa5",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read item node, 4 stmt_deps, the module, report and Stacks 0EKK (groupoids.tex 2340-2370). Node differs from live only in lean; lean.statement verbatim. R[M]=AddMonoidAlgebra R M (same object as the def-sfb-ring-diagonalizable-group module); Mathlib instCoalgebra comul_single/counit_single give group-like Δ and ε(e_m)=1. Coassoc (assoc∘(ρ⊗1)∘ρ=(1⊗Δ)∘ρ) and counit (rid∘(1⊗ε)∘ρ=id) correct. W m carriers pinned by ρ a = a⊗single m 1; ∃! finsupp homogeneous expansion, 1 and algebraMap in W 0, W m·W n⊆W(m+n), coaction formula: all clauses, no extra hypotheses, independent universes. Edge cases R=0, A=0, M=0, infinite/torsion M, nonreduced R covered. No Mathlib/project duplicate; no defs; proof sorry; docstrings with source, blueprint and 6 steps; Worker report and Second reading by Q26 present. No findings."
+ }
+}

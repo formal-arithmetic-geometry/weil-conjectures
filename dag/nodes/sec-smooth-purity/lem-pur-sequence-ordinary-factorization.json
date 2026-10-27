@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-sequence-ordinary-factorization",
+ "kind": "statement",
+ "title": "Ordinary quotient sequence adjunction and constant-ring factorization",
+ "statement": "For every prime l, finite extension E of Q_l and scheme W, the actual quotient coefficient sequence projection has ordinary adjoints O as in [def-pur-sequence-adjoint-resolution-data], and a ringed factorization through the constant completed ring. The first morphism has identity geometric inverse image, structural map given by the completed-ring quotient projections, and exact scalar-restriction module direct image. Constant-ring sequence modules identify with towers of base modules, preserving sections and horizontal maps, and the second module direct image identifies with inverse limit. All composition, ordinary tensor, quotient-transition and transpose equations are the fields of PurSequenceOrdinaryAdjoints and PurSequenceRingedFactorization. No finite-type or field-of-definition hypothesis is needed. See [def-coef-ringed-sequence-site] for the actual categories.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Form the completed-ring cone on the actual quotient tower, using naturality of its limit projections. Use the explicit ordinary portion of the sequence-site constant/limit construction and its tensor/limit module adjunction. No derived construction or proof that this cone is limiting is needed for this ordinary step.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits."
+   }
+  },
+  {
+   "text": "Compare the level scalar extensions with the recorded finite adjunctions by uniqueness of left adjoints. Identify the actual quotient mate first as a natural transformation by uniqueness of its specified components. The unit comparisons and this quotient mate formula identify the horizontal tensor transitions on all local unit tensors; scalar-extension Hom extensionality gives the transition equation. Identify the evaluation comparison with equality transport, so composition of equality maps gives the prescribed limit-coordinate projection formula. The generic adjunction unit equation and naturality of those projections give the ordinary transpose formula.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-system-scalar-transition-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules."
+   }
+  },
+  {
+   "text": "Construct PurSequenceOrdinaryAdjoints explicitly from the ordinary constant/limit geometry, the additive strict scalar-extension functor, its adjunction, the finite left-adjoint uniqueness comparisons, the normalized horizontal transition equations and the limit-coordinate transpose. Apply the constant-ring factorization theorem to this constructed O and return the pair.",
+   "uses": [
+    "def-pur-sequence-adjoint-resolution-data",
+    "lem-pur-sequence-constant-ring-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-completion-projection",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-sequence-adjoint-resolution-data",
+  "lem-pur-sequence-constant-ring-factorization",
+  "lem-pur-system-scalar-transition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison paragraph; ordinary tensor/limit construction and Stacks 0940 constant-ring factorization, with finite adjunction normalization from Stacks 03D7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ringed projection from a sequence site factors through the constant ring, with exact restriction of scalars and inverse limit direct image",
+   "results": "Read eight hits, including SheafOfModules.Presentation.map_π_eq and CondensedMod.ofSheafProfinite; none states the sequence-site factorization or its normalized coefficient interface.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Read leftAdjointUniq, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_app_counit. These provide adjunction transport, not the sequence geometry or the supplied derived coefficient normalization.",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic transport API used in the assembly"
+  },
+  {
+   "tool": "grep",
+   "query": "Ringed.*[Ff]actor|homEquiv_ofNatIsoRight|derivedη_fac_app",
+   "results": "Read Mathlib/CategoryTheory/Adjunction/Basic.lean homEquiv_ofNatIsoRight_apply and Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app. These are generic normalization formulas, with no actual quotient tower or coefficient calculus.",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurSequenceProjectionHomNormalization",
+  "date": "2026-10-24",
+  "group": "S6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-sequence-projection-hom-normalization",
+   "place": "Original proof steps 1–2: the ordinary projection and factorization."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurSequenceOrdinaryFactorization",
+  "file": "lean/Sheaf/Paper/PurSequenceOrdinaryFactorization.lean",
+  "declaration": "WeilConjectures.purSequenceOrdinaryFactorization",
+  "statement": "theorem purSequenceOrdinaryFactorization :\n    ∃ O : PurSequenceOrdinaryAdjoints l E W,\n      Nonempty (PurSequenceRingedFactorization l E W O)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261024T191050-L-238762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T181035-L-3429166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

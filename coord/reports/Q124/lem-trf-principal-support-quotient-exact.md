@@ -1,0 +1,55 @@
+# Q124: lem-trf-principal-support-quotient-exact
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-principal-support-quotient-exact.json`: split into six steps; statement, source ancestry, and original searches retained; six actual current Mathlib searches appended. Neither the entire item nor a one-line specialization of a returned declaration was found in Mathlib.
+- `citations.json`: 19 citations, one for every step/node pair, copied verbatim from the existing node statements and checked by substring comparison.
+- `report.md`: this report. There are no new nodes and no new Mathlib leaves. All proof steps are below 2000 characters.
+
+## Attachments
+
+None. A search under `lean/WeilConjectures/` for the exact item tag and principal-support/quotient terminology found no project declaration giving both clauses. The project's `Submodule.powTorsion_eq_ker_localization` and `Submodule.localized'_powTorsion` in `WeilConjectures/Mathlib/Algebra/Module/Torsion.lean` are existing smaller inputs, already named by the DAG; they do not prove the exact quotient sequence or its sheaf interpretation.
+
+## WANTED
+
+None. The source needed for the split is available locally.
+
+## What was wrong or incomplete
+
+The item was a statement-only node. Its two clauses required the link between module localization, the sectionwise kernel, and the categorical sheaf quotient, as well as the explicit middle-exactness calculation. Those arguments are now carried by the item, rather than restated in new nodes. The statement is unchanged.
+
+## Source error
+
+Stacks `divisors.tex`, Tag 080W, `lemma-strict-transform-universally-injective`, ends its algebra argument with `a^n(x-y)=0` and claims that y represents the original quotient class. Its preceding equations instead give y=a^n z, so the correct expression is a^n(x-i(z))=0 and z represents the class. For example, use R=Z, a=2, N_1=N_2=Z, i=id, N_3=0, x=1, n=1, y=2, z=1. All the lemma's exactness hypotheses hold, but 2(x-y)=-2 is not zero. Step 5 uses the correct variable z. This is a proof typo, not a statement dispute; no hypothesis or conclusion has changed.
+
+## Not duplicates
+
+No new nodes were created. Whole-DAG title/statement searches, tag searches for 080W, and `tools/blueprint_refs.py search` for associated sheaf, power-torsion, supported, and localization found the already existing input nodes used below. In particular `lemma-nagata-power-torsion-localization` states the localization identification but not the powerwise-exact quotient claim, while `lem-trf-affine-pushforward-quasi-coherent-quotient` concerns pushforward of a given quasi-coherent quotient and does not supply this quotient-exactness calculation. The item’s parent `lem-trf-strict-transform-universal-exact` is the global argument which this item serves, not an independent proof input. It is not cited back, so there is no dependency cycle through that parent. No blueprint node states the whole item in another form; `blueprint.same_as` remains empty.
+
+## Mathlib searches read
+
+The sandbox `searches.jsonl` records all six searches run for this item. Two LeanFinder formulations concern, respectively, the supported associated-sheaf quotient and exactness after dividing by power torsion. Loogle queried `"torsion", Function.Exact`. LeanSearch queried the kernel of restriction and exactness of power-torsion quotients. The two logged grep patterns searched the Algebra and AlgebraicGeometry subtrees. The results and query strings were appended exactly to `mathlib_searches` without inventing queries or declaring a service failure to be an empty answer. Every service answered successfully.
+
+I read the returned candidates and relevant source in `Mathlib/RingTheory/QuotSMulTop.lean`, `Mathlib/Algebra/Module/Torsion/Basic.lean`, and `Mathlib/Algebra/Module/PID.lean`. `QuotSMulTop.map_exact` concerns quotient by a single scalar image, not quotient by all elements killed by some power. `AdicCompletion.map_exact` has noetherian/finite hypotheses and concerns completion. The regularity declarations give a different scalar-quotient exactness statement. Tilde/restriction hits supply individual notions already in the DAG, not both clauses here. I also read `Mathlib/AlgebraicGeometry/Modules/Tilde.lean` for the existing tilde mapping property and `Mathlib/Topology/Sheaves/SheafCondition/Sites.lean` for determination and invertibility on a basis. The original item's earlier search records were retained as historical source material.
+
+## Review by Q124
+
+I read the item against Stacks `divisors.tex`, `definition-strict-transform` (1) and Tag 080W `lemma-strict-transform-universally-injective`, including its final algebra calculation. I read `schemes.tex`, Tag 01HV `lemma-spec-sheaves`, including all principal-open section identifications, functoriality, and the exactness conclusion. I read `modules.tex`, `lemma-abelian`, for the sheaf kernel/cokernel conventions. There are no new nodes requiring a further source audit. I read the chapter and unit records and the current files under `literature/blueprint/latest/`, particularly the ancestor `lem-trf-local-term-locality` statement and proof. The present affine calculation continues the inherited flattening branch; it changes neither the chapter route nor the unit statement. Its blueprint ancestor and via chain are retained exactly.
+
+For Step 1, I opened `lem-weil-pbc-affine-tilde-gamma-adjunction`, `lem-weil-pbc-spec-module-tilde-sections`, `lem-sc-tilde-preserves-finite-limits`, and `def-weil-sheaf-of-modules-category`. The first states both the normalized functor on maps and preservation of small colimits, not just full faithfulness. The second gives the fraction sections and restriction maps. These give the actual component formula for a linear map. The finite-limit node really states preservation for all commutative rings and all modules, including zero, so it gives kernels without an extra finite-generation assumption. The category node explicitly states that the category is abelian, kernels are sectionwise, and cokernels are sheafified sectionwise cokernels. Together they prove exactness; no definition of flatness or unsupported tensor-exactness assertion is substituted for this argument. I declare the finite-limit statement as an off-unit generic tool in `split_report.tool_uses`, because the trace unit has no affine tilde exactness input of its own. All other inputs at this point are Mathlib leaves.
+
+For Step 2, I opened the statements of `lemma-nagata-power-torsion-kernel-localization` and `lemma-nagata-power-torsion-localization` and also read their sorry-free source declarations in the project's Torsion file. The former identifies exactly the kernel of localization at a; it is applied to the R_s-module N_s. The latter identifies the image of the localized torsion submodule; I do not use a quotient-isomorphism clause that has disappeared from its current `blueprint_update`. The identification (N_s)_(a/1)=N_(sa) is justified from which elements are inverted. I separately cite `lem-sc-p1-localization-short-exact` for injectivity of T_s to N_s. Its statement allows arbitrary modules and arbitrary multiplicative sets, so powers of s qualify even when s is nilpotent. `lem-weil-pbc-sheaf-morphism-on-basis` really states determination and isomorphism on a basis, not merely a sheaf definition. The principal-open basis follows directly by writing complements of V(I) as unions of D(s). All comparisons are inclusions into the same sheaf, so restriction compatibility is actual equality there. Naturality is checked by the explicit fraction formula and a^n f(x)=f(a^n x).
+
+For Step 3, I opened `def-weil-pbc-quotient-module` and `def-weil-sheaf-of-modules-category`. The former states that N to N/T is surjective with kernel T, giving the input short exact sequence. The latter states the categorical quotient convention. The step applies Step 1, then uses the two cokernel universal properties; it writes the commuting triangle with the maps from tilde N. The naturality square is proved by precomposing with the quotient epimorphism, whose equality makes the square unique. This is elementary assembly from cited statements, not a claim that taking sections commutes with arbitrary sheaf quotients.
+
+For Steps 4 and 5, I opened `def-nagata-power-torsion`, `def-weil-pbc-quotient-module`, and `def-weil-pbc-exact-sequence`. Their statements provide exactly the existence of a killing exponent, the coset criterion for zero, and kernel=image plus endpoint injectivity/surjectivity. The element arguments themselves are written out. The sole use of powerwise injectivity is identified: the image of y in N_2/a^nN_2 is zero, so its class in N_1/a^nN_1 vanishes and y=a^n z. There is no illegal cancellation of a^n, and i is explicitly retained in expressions involving an element of N_1 inside N_2. I corrected the Stacks variable typo as described above. These two short calculations are elementary steps; creating new nodes for them would merely rename clauses of the item.
+
+For Step 6, the cited finite-limit and tilde-adjunction statements supply exactness already established in Step 1. I wrote both naturality squares, not just a claim to transport the result. They identify the resulting arrows with those induced from the original tilde maps by their composites with the quotient epimorphisms. There is no additional descent theorem hidden here.
+
+I tested the zero ring and zero modules: all sections and quotients are zero, and the localization statements still apply. For a=0 or nilpotent a, each T_k is N_k and each Q_k is zero, as is required because D(a) is empty. For a a unit, T_k=0, K_k=0, and the sequence is the original exact sequence; restriction is identity on Z. For s=0, every localization and section group on D(s) is zero. The middle argument works also for n=0: then y=z and x=i(z). None of these cases uses a non-zero-divisor or a finiteness hypothesis. To check the substantive powerwise hypothesis, I considered 0 to Z --2--> Z to Z/2 to 0 with a=2: injectivity modulo 2 fails, and the power-torsion quotient sequence would have middle map 2 and zero last term, hence fail exactness. This shows the proof uses the necessary additional hypothesis at the right place.
+
+I checked errors B--E against the delivered node: no unsplit new nodes, no restatement nodes, no unverified Mathlib leaf, no circular dependency on the parent, no non-elementary fact cited only by tag, and no citation used for material found only in its proof. All 19 quotations are literal substrings of the statements read. Every non-elementary fact in the split is an explicit node input, and all larger arguments are decomposed into the six steps rather than hidden behind "standard" or "transport".
+
+## Unfinished work
+
+None in the requested one-level split. Existing input nodes retain their current stage states; this delivery does not change them or claim their future proofs are complete. Server dry run and delivery are the remaining operational checks.

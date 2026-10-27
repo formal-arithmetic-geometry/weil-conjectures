@@ -1,0 +1,190 @@
+{
+ "id": "lem-cbc-adic-pullback-presentation-models",
+ "kind": "statement",
+ "title": "Counit-normalized constant and evaluation models of adic pullback",
+ "statement": "The canonical ordinary and strict-tower derived pullback pairs admit unique counit-normalized constant-tower and evaluation comparisons. Their finite-reduction comparison retains the given quotient presentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Steps 1–2: completed open-factor comparison and its naturality. Agent-written supporting model/convention lemmas, with the unchanged original Lean proofs; Stacks 05S7, 03DI, 00VC, 06YY and 015F supply their standard constructions."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-intrinsic-completion",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "The completed coefficient projections are jointly monic, so both presentations equal the published map. For finite quotient naturality, pass through the inverse-image/direct-image adjunction and sheafification adjunction: naturality of toSheafify on the constant presheaf gives the square. This also includes identity quotient maps.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Supporting construction for the integral open factor in Steps 1–2; unchanged previously formalized argument. Completed-pullback and finite-reduction sentences; W7 Lean proof, step 1 (2026-10-21)."
+   }
+  },
+  {
+   "text": "After identifying coefficient maps, both pullback constructions are literally the same balanced-tensor functor. Its identity natural isomorphism gives the module and strict-tower identifications. Mathlib leftDerivedUnique and leftDerived_ext construct and uniquely characterize the two counit-preserving derived comparisons.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Supporting construction for the integral open factor in Steps 1–2; unchanged previously formalized argument. Completed-pullback and finite-reduction sentences; W7 Lean proof, step 2 (2026-10-21)."
+   }
+  },
+  {
+   "text": "Transport the published constant comparison along the unique comparisons s:L→L₀ and t:T→T₀. The complex counit formula commutes with s and t. Naturality of t at the exact constant-functor comparison and cancellation of the isomorphisms identify the generalized normalization with the published one; the published unique normalization therefore gives both existence and uniqueness.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Supporting construction for the integral open factor in Steps 1–2; unchanged previously formalized argument. Completed-pullback and finite-reduction sentences; W7 Lean proof, step 3 (2026-10-21)."
+   }
+  },
+  {
+   "text": "For evaluation, resolve the whole tower by applying the functorial flat resolution to its associated functor, then transpose back to a complex of towers. Evaluation of the augmentation is a quasi-isomorphism at every level, and the tensor-K-flat resolution implies acyclic-tensor K-flatness by applying it to 0→Z for acyclic Z. Precomposition with these resolving representatives is fully faithful. The tower counit followed by evaluation and the evaluation followed by the ordinary counit give natural transformations to the same ordinary complex pullback, using the degreewise identity of evaluation and levelwise pullback. Both are invertible on resolving objects by the canonical pairs and counit transport. Their quotient descends uniquely through fully faithful precomposition, yielding exactly the required normalized evaluation comparison.",
+   "uses": [
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Supporting construction for the integral open factor in Steps 1–2; unchanged previously formalized argument. Completed-pullback and finite-reduction sentences; W7 Lean proof, step 4 (2026-10-21)."
+   }
+  },
+  {
+   "text": "The prescribed finite-reduction comparison is the published normalized finite comparison whiskered with the unique tower comparison. No proof or definition is changed by the module split.",
+   "uses": [
+    "lemma-weil-pbc-completed-pullback-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Supporting construction for the integral open factor in Steps 1–2; unchanged previously formalized argument. Tag 05S7, uniqueness of derived comparisons; the original CBC presentation proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-completed-pullback",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lemma-weil-pbc-completed-pullback-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "W7, 2026-10-22: four remaining Lean holes closed using canonical constant normalization, fully faithful descent of evaluation on functorially resolved towers, canonical finite-transition coherence, and abelian-sheaf locality of the open comparison. Two representative-normalization definitions are refactored through the same generic predicate, preserving their equations definitionally; all existing signatures and public imports stay unchanged. J4, 2026-10-22: the finite transition square uses the directly proved finite_quotient_transition_compatibility, with no appeal to the unused extended normalization assertions.",
+  "note": "Existing proved declarations and their proof bodies relocated verbatim to keep each module within the compile limit. Original proof and sources retained. Relocated by J4, 2026-10-27, from lem-cbc-adic-pullback-presentation-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Existing normalized adic/extension model declarations in the source module",
+   "results": "Reuse the existing complete proofs without changing any statement or proof body.",
+   "date": "2026-10-27",
+   "verdict": "This is only a module split, with no new mathematical obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalBaseData",
+  "group": "J4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Construction and naturality of the completed open factor, Steps 1–2; the normalized model construction is agent-written supporting work, not a new blueprint assertion.",
+   "via": [
+    "lem-cbc-adic-pullback-presentation-transport",
+    "lem-cbc-completed-extension-zero-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPullbackPresentationModels",
+  "file": "lean/Sheaf/Paper/AdicPullbackPresentationModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPresentationConstantIso_normalized",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adic_pullback_coefficient_presentations",
+   "AlgebraicGeometry.Scheme.adicPresentationPullback",
+   "AlgebraicGeometry.Scheme.adicPresentationIdentity",
+   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryUniversal_proof",
+   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryUniversal",
+   "AlgebraicGeometry.Scheme.adicPresentationTowerUniversal_proof",
+   "AlgebraicGeometry.Scheme.adicPresentationTowerUniversal",
+   "AlgebraicGeometry.Scheme.adicPresentationOrdinaryIso",
+   "AlgebraicGeometry.Scheme.adicPresentationTowerIso",
+   "AlgebraicGeometry.Scheme.adicPresentationConstantIso",
+   "AlgebraicGeometry.Scheme.HasAdicPresentationConstantNormalization",
+   "AlgebraicGeometry.Scheme.adicPresentationConstantIso_normalized",
+   "AlgebraicGeometry.Scheme.adicPresentationEvaluationComplex_eq",
+   "AlgebraicGeometry.Scheme.HasAdicPresentationEvaluationNormalization",
+   "AlgebraicGeometry.Scheme.adicPresentationEvaluationIso_exists",
+   "AlgebraicGeometry.Scheme.adicPresentationEvaluationIso",
+   "AlgebraicGeometry.Scheme.adicPresentationFiniteIso",
+   "CategoryTheory.Functor.HasRepresentativeNormalization"
+  ],
+  "statement": "theorem adicPresentationConstantIso_normalized :\n    HasAdicPresentationConstantNormalization g d L ε T τ\n      (adicPresentationConstantIso g d L ε T τ) ∧\n    ∀ b : L ⋙ completedDerivedConstant d X ≅ completedDerivedConstant d Y ⋙ T,\n      HasAdicPresentationConstantNormalization g d L ε T τ b →\n        b = adicPresentationConstantIso g d L ε T τ",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "independent cc review: item localBaseData_exists + new hole localOrdinaryResolving_exists against LocalBaseData/Local fields and node; Models+Transport and Model+ZeroCompletion concatenations vs published originals (verbatim); public decl type hashes published vs sandbox (identical); 12 delivered modules + 30 direct importers compiled in sandbox (all OK)"
+ }
+}

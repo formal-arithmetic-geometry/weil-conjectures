@@ -22,69 +22,30 @@
  ],
  "proof": [
   {
-   "text": "Obtain quasi-compactness of each displayed open from QuasiCompact.of_comp and the Over commutativity relation; this uses finite type hypotheses only to form a complementary open in the locally closed argument, where Mathlib LocallyOfFiniteType.isLocallyNoetherian applies. Ranges after base change are complementary by Scheme.image_preimage_eq_of_isPullback applied to the whole source. The assumed open and closed immersion instances already give their permanence hypotheses.",
+   "text": "QuasiCompact.of_comp and the Over relations provide quasi-compactness of both displayed opens. Apply the bounded exact stratum theorem over the existing integralCoefficientRing; it supplies the specified canonical bounded isomorphisms and all restriction clauses without changing their statements.",
    "uses": [
-    "lem-weil-pbc-base-change-image"
+    "lem-sfb-condensed-bounded-stratum-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Apply condensed_open_closed_recollement with arbitrary condensed coefficients to extract exactness and full faithfulness of the underived closed direct image. Its counit is therefore invertible. The module open extension is fully faithful by linearization of the fully faithful sheaf open extension and the coefficient scalar equivalence. Exact-derived adjunctions preserve these unit and counit isomorphisms.",
+   "text": "For the locally closed factorization use the unbounded calculus closed_square_iso, with locally Noetherian ambient schemes supplied by finite type over the field, and open_mate_iso for the given open square. Whisker the open mate by primed closed direct image and compose with the inverse closed mate. The proved abstract stratum_composite_cancel identity gives the required cancellation without unfolding coefficient data. Exact homology gives the bounds. The data constructions moved verbatim to the calculus module and are publicly reexported.",
    "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-sfb-finite-extension-by-zero-fully-faithful"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a cartesian open square, use profinitePointModuleForgetPullbackIso and the sheaf openImmersionLowerShriekBaseChangeIso to see that the pullback of an open extension lies in the essential image of the primed module open extension. The primed counit on it is invertible. Apply this counit termwise, descend its natural isomorphism by mapDerivedCategoryNatIso, and transport along mapDerivedCategoryCompIso. Thus all three factors of the actual open exchange mate are invertible on every unbounded input. The abelian sheaf base-change API used here is proved in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange, without a finite coefficient hypothesis; the separate finite-ring wrapper node lem-cbc-proetale-extension-zero-base-change is not used.",
-   "uses": [
-    "lem-weil-pbc-profinite-point-pullback",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-sfb-finite-extension-by-zero-fully-faithful"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the existing module open/closed detection API and its exact-derived lift. The mixed restriction of an open extension vanishes on disjoint ranges. The other mixed restriction follows by applying successively the open and closed adjunction Hom equivalences to the identity, then descends through homology. For the closed mate, its open restriction is between zero objects using the pullback square comparison, and its closed restriction is invertible by the counit identity from the adjunction Hom bijection. Joint reflection makes the closed mate invertible. The same Hom bijection gives the displayed open unit identity. Specifically use CondensedRing.jointlyReflectIsomorphisms_upperStar_of_isCompl and Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory, proved source-library APIs on module objects; this does not invoke the separate ringed-module detection theorem.",
-   "uses": [
-    "sk-def-sfb-module-lower-shriek",
-    "sk-def-sfb-module-pushforward-pullback",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Whisker the actual unbounded open and closed mate isomorphisms by the bounded inclusion. Exact-functor homology comparisons preserve the bounded predicate for every functor used. Supply both mixed zero objects and uniqueness of their zero morphism, together with the actual unit/counit normalizations proved above.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a locally closed factorization, form an actual open complement to the closed image on the ambient scheme; locally Noetherianity makes this open quasi-compact. Pull it back to the primed ambient scheme. Apply the preceding closed-mate argument to this pair and the open-mate argument to the given open square. Whisker the open mate by the primed closed direct image, associate the functors, and compose with the inverse closed mate. Whisker by the bounded inclusion. Exactness gives both output bounds, and the inverse identity proves the displayed cancellation equation.",
-   "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-weil-pbc-base-change-image",
+    "lem-sfb-condensed-stratum-base-change-calculus",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-base-change-image",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "sk-def-sfb-module-lower-shriek",
-  "lem-sfb-finite-extension-by-zero-fully-faithful",
-  "lem-weil-pbc-profinite-point-pullback",
-  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-condensed-bounded-stratum-base-change",
+  "lem-sfb-condensed-stratum-base-change-calculus",
   "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AA, 09BM, 09BN and 09AH; module support API, exact-derived adjunction mates, and actual locally closed composite (Y3)"
+  "place": "Tags 09AA, 09BM, 09BN and 09AH; module support API, exact-derived adjunction mates, and actual locally closed composite (Y3); E1 performance repair: coefficient-polymorphic bounded proof and abstract composite cancellation (2026-10-26); split into the proved unbounded calculus and proved coefficient-polymorphic bounded theorem after optimized monolithic compilation still took 99 seconds"
  },
  "mathlib_searches": [
   {
@@ -230,14 +191,6 @@
   "module": "Sheaf.Paper.IntegralBoundedStratumBaseChange",
   "declaration": "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.integral_bounded_open_closed_base_change",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.pullback",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.openExtension",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.openAdjunction",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.closedDirectImage",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.closedAdjunction",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.pullbackSquare",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.openMate",
-   "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.closedMate",
    "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.integral_bounded_open_closed_base_change",
    "AlgebraicGeometry.ProEtale.IntegralBoundedStratumBaseChange.integral_bounded_locally_closed_base_change"
   ],
@@ -258,13 +211,25 @@
   "note": "Read the item, all 11 stmt_deps, report (Worker report + Second reading by NU present) and the module. Only lean + added landed def stmt_dep differ from live; first S2 delivery, not dropped, no repair note. Clause match: integral O_E condensed coefficients on pro-étale sites; termwise exact pullback/j_!/i_* as the node says (framework iso leftDerivedUpperStarIsoMapDerivedCategory to total Lg^*); openMate/closedMate = exchangeLeft/exchangeRight of actual derived adjunctions with pullbackSquare from upperStarComp only; components checked against node β (transpose of t_N) and γ (unit, square, counit); isos on all of D^b; restriction equations plus IsIso of actual units/counits; IsZero ends for the mixed restrictions; boundedness of both ends; locally closed e pinned to i'_*β then γ⁻¹ by the cancellation equation. The existential PreservesFiniteColimits for closed lowerStar is a true Prop conclusion, not a hypothesis (no framework instance exists). Edge cases (empty U/Z/S, h=id, N=0, nonreduced Z, universes) OK. No duplicate (framework open base change is D_cons/open-only). Real-data helpers with docstrings, 2 sorry, statement verbatim. No compile run (no changes). Advisories: helper name `pullback` shadows Limits.pullback; citer may need the leftDerived iso; redundant =0 clauses."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-5ddfd",
-  "group": "Y3",
-  "result": "pass",
-  "landing": "20261021T155101-L-3251851",
-  "kind": "proof",
-  "note": "independent cc review: delivered IntegralBoundedStratumBaseChange.lean + node vs clone live and unit sk-lem-int-tensor (realized empty, no cartesian-coefficients use); proof_deps vs imported modules"
+  "reviewer": "C-cbb0c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261026T154342-L-1646958",
+  "kind": "interface",
+  "note": "independent cc review: delivered item vs quarantine archive (theorem signatures byte-identical, 8 defs verbatim in the new calculus module and publicly re-exported); new node lean.statements vs Lean; item node proof_deps vs proof; 0 importers"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

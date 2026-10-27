@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-scalar-section-compositor",
+ "kind": "statement",
+ "title": "Scalar balancing commutes with inverse-image section cancellation",
+ "statement": "Let A,B be commutative rings and φ:A→B unital. Let p:T→S and i:S→T be morphisms of schemes with i≫p=1. For every ordinary etale derived A-module C on S, the inverse scalar/pullback comparison at i, followed by i*_B of the inverse comparison at p and the B section cancellation, equals scalar extension of the A section cancellation. In notation λ for scalarPullbackIso [def-pur-etale-scalar-pullback-iso] and c for the canonical inverse-image section compositor, λ_i^{-1}(p_A^*C)≫i_B^*(λ_p^{-1}(C))≫c_B(C_B)=S_φ(c_A(C)).",
+ "stmt_deps": [
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (2), finite coefficient extension of the vector-bundle and deformation constructions, with normalization at t=1."
+ },
+ "proof": [
+  {
+   "text": "Identify the inverse scalar comparison with the scalar-adjunction mate. The ordinary restriction square respects inverse-image composition and the identity, so it respects cancellation along i followed by p. Transpose both desired maps under the scalar adjunction. Its unit equations replace each inverse scalar comparison by the restriction square. Naturality moves the intermediate comparison across that square, and the restriction cancellation identity reduces the composite to naturality of the section compositor. Injectivity of the adjunction bijection gives the result. No flatness or finiteness is used.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition",
+    "lem-sfb-etale-proetale-scalar-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-scalar-pullback-composition",
+  "lem-sfb-etale-proetale-scalar-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Detailed specialization of the cited blueprint argument, with explicit canonical ordinary maps."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with cancellation of derived inverse images along a section",
+   "results": "Eight hits, none states this derived etale coefficient/deformation assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "scalarPullbackIso",
+   "results": "Loogle returned zero hits because these names are unknown to its Mathlib environment. This invalid query supplies no negative evidence. Semantic and source searches recorded separately.",
+   "date": "2026-10-26",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackIso|sectionRestrictionIso",
+   "results": "Zero Mathlib hits. Local project search finds the cited constituent interfaces but no theorem with this complete signature.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso",
+   "results": "Twelve hits, including Functor.map_isIso and Functor.map_inv. Used for formal preservation and cancellation; none states the scheme-derived coefficient coherence or family constancy.",
+   "date": "2026-10-26",
+   "verdict": "component tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension respects inverse image composition and identity along a section",
+   "results": "Eight hits: module scalar adjunctions, elementary tensor algebra or unrelated affine/normalization facts; no derived etale six-functor or normalized-family assertion. Constituent categorical facts are used in the proof.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.PurityDncCoefficientTransport",
+  "date": "2026-10-26",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (2), finite coefficient extension of the vector-bundle and deformation constructions, with normalization at t=1.",
+   "via": [
+    "lem-pur-dnc-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ScalarSectionCompositor",
+  "file": "lean/Sheaf/SecSmoothPurity/ScalarSectionCompositor.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalar_section_compositor",
+  "statement": "theorem scalar_section_compositor\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {T S : Scheme.{u}} (i : S ⟶ T) (p : T ⟶ S) (hi : i ≫ p = 𝟙 S)\n    (C : DerivedCategoryModule A S) :\n    (scalarPullbackIso φ i).inv.app\n        ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.obj C) ≫\n      (upperStar (ModuleCat.{u + 1} B) i).leftDerivedFunctor.map\n        ((scalarPullbackIso φ p).inv.app C) ≫\n      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} B) i p hi).hom.app\n        ((scalarExtension φ S).obj C) =\n    (scalarExtension φ S).map\n      ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) i p hi).hom.app C)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-26"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b6d7e",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261026T002119-L-58326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b6d7e",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261026T002119-L-58326",
+  "kind": "interface",
+  "note": "independent cc review: b6d7 delivered files vs prior reviewed head 54acf (diff -r: only warn.sorry option line + report/change-record text); item proof vs node proof_deps; 4 direct importers compiled against delivered modules (all OK)"
+ }
+}

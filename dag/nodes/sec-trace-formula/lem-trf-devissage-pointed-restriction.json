@@ -1,0 +1,492 @@
+{
+ "id": "lem-trf-devissage-pointed-restriction",
+ "kind": "statement",
+ "title": "Pointed base change and standard shrinking of devissage data",
+ "statement": "Use the pointed affine one-step data, chains, and standard shrinkings of [def-trf-pointed-scheme-devissage-data]. The following operations preserve those data. (1) Given an affine pointed map $(B',b')\\to(B,b)$ inducing an isomorphism $\\kappa(b)\\to\\kappa(b')$, base change of a one-step datum or chain, with the unique points above all old marked points in the fibre over $b'$, is again such a datum or chain. All smooth relative dimensions are unchanged; for a chain the maps $\\alpha_j$ are pulled back using the canonical finite-pushforward base-change isomorphisms. Their cokernels are the pullbacks of the old cokernels. (2) A one-step datum can be standardly shrunk after any prescribed principal open restriction of the base containing $b$. For any principal open $W\\subset Y$ containing $y$, it has a standard shrinking with new base a principal open $B'\\subset B$ containing $b$ and new target $Y'=W\\times_BB'$. For any open $U\\subset X$ containing $x$, it has a standard shrinking with initial scheme contained in $U$. If a map $\\alpha:\\mathcal O_Y^{\\oplus r}\\to\\pi_*\\mathcal G$ has an isomorphism on the generic residue-field vector space of $Y_b$, its restriction has that property and its cokernel restricts to the old cokernel. (3) A chain can be standardly shrunk after any prescribed principal open restriction of the base, inside any prescribed open neighbourhood of its initial marked point, or with its last target equal to $W\\times_BB'$ for a prescribed principal open neighbourhood $W$ of its last marked point, after shrinking the base to $B'$. All inclusions in standard shrinkings preserve marked residue fields. The statements include chains of length zero, with the last-target request made only for positive length.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tags 05HA (lemma-shrink), 05HK (lemma-base-change-complete-at-x), 05HM (lemma-shrink-complete), with 05H7 and 05HJ for the one-step and complete base-change comparisons; the proofs preserve the auxiliary data without support-dimension equalities."
+ },
+ "stmt_deps": [
+  "def-trf-pointed-scheme-devissage-data",
+  "def-sfb-module-base-change-map",
+  "def-sfb-tensor-pullback-structure-sheaf-map",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "First base-change a single datum. Write $B=\\operatorname{Spec}A$ and $B'=\\operatorname{Spec}A'$. The fibre-product formula makes all four new schemes affine. The pulled-back $X'\\to B'$ is locally of finite type; $i'$ is a closed immersion of finite presentation, $\\pi'$ is finite, and $Y'\\to B'$ is smooth of the same relative dimension $d$, by the cited permanence statements. For a point $c'\\in B'$ above $c\\in B$, the fibre of $Y'$ is $Y_c\\times_{\\kappa(c)}\\kappa(c')$: on rings this is $(T\\otimes_A A')\\otimes_{A'}\\kappa(c')=T\\otimes_A\\kappa(c')$. After a further field extension it is still a field extension of $Y_c$, so is irreducible by the definition of geometrically irreducible. Thus every new fibre has the required geometric irreducibility. The fibre dimensions follow. Since $Y\\to B$ is locally of finite presentation [lem-pc-smooth-flat], each old fibre $Y_c$ is locally of finite type over $\\kappa(c)$ and irreducible of dimension $d$, so every point of $Y_c$ has local dimension $d$ [lem-sbc-equidimensional-open-local-dimension]; thus $Y\\to B$ is smooth of relative dimension $d$ in the sense of [def-sbc-smooth-morphisms], and so is $Y'\\to B'$. Each new fibre is the spectrum of the finitely generated $\\kappa(c')$-algebra $T\\otimes_A\\kappa(c')$, hence Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]; it is irreducible, and all its local dimensions are $d$, so it has dimension $d$ [lem-sbc-constant-local-dimension-components].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-smooth-flat",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05H7, lemma-base-change-one-step, geometric part; support-dimension comparison omitted for the auxiliary definition"
+   }
+  },
+  {
+   "text": "The pullbacks of $\\mathcal F$ and $\\mathcal G$ are quasi-coherent. On affine opens pullback is $M\\mapsto M\\otimes_R R'$; if $m_1,\\ldots,m_t$ generate $M$, their tensors $m_i\\otimes1$ generate the pullback. The affine finite-type criterion therefore preserves finite type. Apply affine pushforward base change to $i$: pulling back $i_*\\mathcal G\\cong\\mathcal F$ gives $i'_*\\mathcal G'\\cong\\mathcal F'$. Apply it also to $\\pi$ to identify the new pushforward with the pullback of $\\pi_*\\mathcal G$. These maps are affine since their sources and targets are affine; on rings the comparison is $R'\\otimes_R M\\cong(R'\\otimes_R D)\\otimes_D M$, $a'\\otimes m\\mapsto(a'\\otimes1)\\otimes m$, with inverse $(a'\\otimes d)\\otimes m\\mapsto a'\\otimes dm$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05H7 and 05HJ, using 02KG (coherent.tex, lemma-affine-base-change)"
+   }
+  },
+  {
+   "text": "At the chosen point the preceding fibre formula becomes $T\\otimes_A\\kappa(b')\\cong T\\otimes_A\\kappa(b)$, because the specified map $\\kappa(b)\\to\\kappa(b')$ is an isomorphism. It identifies the entire marked fibres, their points, residue fields, and the maps $i_b,\\pi_b$. In particular there are unique new $x',z',y'$ over the old marked points and $b'$, $i'(z')=x'$, $\\pi'(z')=y'$, and the fibre over $y'$ is a singleton. The extension $\\kappa(y')/\\kappa(b')$ is the old purely transcendental extension under these identifications. Together with steps 1--2 this verifies every condition of the pointed one-step definition, without any assumption on support dimensions.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05H8, lemma-base-change-one-step-at-x, and 05HK, lemma-base-change-complete-at-x"
+   }
+  },
+  {
+   "text": "For a chain pull back each $\\alpha_j$, using the pushforward comparison of step 2. On an affine target with coefficient module $N_j$, the exact sequence $R_j^{r_j}\\xrightarrow{\\alpha_j}N_j\\to Q_j\\to0$ becomes $R_j'^{r_j}\\to N_j\\otimes_{R_j}R_j'\\to Q_j\\otimes_{R_j}R_j'\\to0$ by right exactness of tensor. The quasi-coherent cokernel is computed by this quotient on affine opens, so the new cokernel is precisely the old cokernel pulled back. At the generic point $\\xi'_j$ the pullback-stalk formula, followed by tensoring with $\\kappa(\\xi'_j)$, identifies the new residue-field map with the old one extended from $\\kappa(\\xi_j)$ to $\\kappa(\\xi'_j)$. Here $\\xi'_j$ corresponds to $\\xi_j$ under step 3. Tensoring an isomorphism preserves its inverse. Hence the generic-basis condition persists. The next datum is for this very cokernel by step 2, and $Q_n=0$ pulls back to zero. This proves (1) for every positive chain length.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HJ, lemma-base-change-complete, and 05HK, lemma-base-change-complete-at-x"
+   }
+  },
+  {
+   "text": "A prescribed principal base restriction $B_0=D(a)$ containing $b$ is a special case of (1). Every resulting open in the affine schemes is principal: the inverse image of $D(a)$ is $D(f^\\sharp(a))$. This follows from the inverse-image description of prime ideals under a spectrum map. Thus this base change is a standard shrinking. We may perform it first in all later constructions. Finitely many successive principal restrictions are still principal: in $R_a$, an open $D(h/a^m)$ corresponds to $D(ah)$ in $\\operatorname{Spec}R$. This also shows that principal restrictions constructed below over a smaller base are principal in the original schemes.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HA, lemma-shrink (1), and 05HM, lemma-shrink-complete (1)"
+   }
+  },
+  {
+   "text": "Fix a principal $W=D(g)\\subset Y$ containing $y$. Its map to $B$ is smooth by open restriction, hence flat and locally of finite presentation, and hence open by the cited openness theorem. Choose a principal $B_1=D(a)$ containing $b$ inside its image. Set $Y_1=W\\times_BB_1$ and $Z_1=\\pi^{-1}(Y_1)$. Every fibre of $Y_1\\to B_1$ is a nonempty open of the corresponding geometrically irreducible old fibre. It remains nonempty after every field extension, since field-extension maps on spectra are surjective and surjectivity survives base change. Such an open is irreducible: two nonempty opens in it are nonempty opens in the irreducible ambient fibre and hence intersect. Therefore the new fibres are geometrically irreducible. Open immersions are etale, so restriction retains smooth relative dimension $d$ by composition with relative dimension zero. By step 1, $Y\\to B$ is smooth of relative dimension $d$; so each fibre $(Y_1)_c$, the spectrum of a finitely generated $\\kappa(c)$-algebra because $Y_1$ is principal, is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], irreducible, with all local dimensions $d$, hence of dimension $d$ [lem-sbc-constant-local-dimension-components]. Write $i^\\sharp(h)=\\pi^\\sharp(g)$ for a lift $h\\in\\Gamma(X,\\mathcal O_X)$, using surjectivity for the affine closed immersion. Put $X_1=D(hf^\\sharp(a))$. Then $X_1$ lies over $B_1$ and $i^{-1}(X_1)=Z_1$. Consequently $i_1$ is the base change of $i$ and $\\pi_1$ that of $\\pi$; the sheaf identity restricts by step 2. All marked points remain, and the singleton fibre and purely transcendental extension are unchanged. This constructs the target shrinking in (2).",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HA, lemma-shrink (2), with 056G (morphisms.tex, lemma-smooth-open) and the explicit lift used there"
+   }
+  },
+  {
+   "text": "For $U\\subset X$ containing $x$, choose a principal $U_0\\subset U$ containing $x$. The singleton-fibre neighbourhood lemma applied to $i^{-1}(U_0)\\subset Z$ gives a neighbourhood $V$ of $y$ with $\\pi^{-1}(V)\\subset i^{-1}(U_0)$. Choose a principal $W$ with $y\\in W\\subset V$ and apply step 6. Its $Z_1$ lies in $i^{-1}(U_0)$; replace $X_1$ by $X_1\\cap U_0$. This is principal (multiply the two defining functions), and its inverse image in $Z$ is still $Z_1$, so it changes none of the restricted sheaf identities or finite maps. It is contained in $U$, proving the initial-open request of (2).",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-trf-finite-singleton-fibre-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HA, lemma-shrink (3) using 05B8 (more-morphisms.tex, lemma-finite-morphism-single-point-in-fibre)"
+   }
+  },
+  {
+   "text": "For each restriction above, the pushforward really is the restriction of the old pushforward because $Z_1=\\pi^{-1}(Y_1)$. On every open $T\\subset Y_1$ both sheaves have sections $\\mathcal G(\\pi^{-1}T)$. Restrict $\\alpha$ through this equality. Step 4's quotient computation gives its old cokernel restricted. The nonempty open $(Y_1)_b$ of $Y_b$ contains the same generic point: every nonempty open of an irreducible space contains its generic point, by the definition of generic point. Its local ring and residue field agree with the old ones because this is an open immersion; thus the residue-field map of $\\alpha$ is the identical isomorphism. This proves the extra assertion about $\\alpha$ in (2) and supplies the compatibility of all the restrictions used next.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HJ, lemma-base-change-complete, cokernel and generic-point argument applied to the restrictions of 05HA"
+   }
+  },
+  {
+   "text": "For the last-target request for a chain of length $n>0$, put $Y_0=X$. Start with the desired principal open $W\\subset Y_n$. Apply step 6 to datum $n$, obtaining a principal restriction of its initial $Y_{n-1}$. Use that principal open as the target request for datum $n-1$. Continue backwards to datum 1. At each stage restrict the already treated later data only by the further principal base restriction, as allowed by step 5. After $n$ operations take the final base $B_*$. Every adjacent $Y_j$ now agrees from both sides: when treating datum $j$ its target was chosen to be exactly the previously selected initial open of datum $j+1$, further restricted to the current base. All opens are principal in the originals by step 5. By step 8 the cokernel passed from stage $j$ to $j+1$ is the same restricted cokernel; the generic-basis conditions and final zero remain. The last target is exactly $W\\times_BB_*$, since subsequent operations changed it only by base restriction. This proves this request in (3).",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HM, lemma-shrink-complete (2), explicit backward induction"
+   }
+  },
+  {
+   "text": "For the initial-open request induct on the positive chain length. For length 1, steps 7--8 give the required chain restriction. For length $n>1$, first apply step 7 to datum 1, giving $B_1,X_1,Z_1,Y_1$ with $X_1\\subset U$. Over $B_1$, the unchanged tail of length $n-1$ is a chain for $Q_1$ on the original $Y_1$ restricted to $B_1$ (step 5). By induction shrink that tail with its initial scheme a principal open $V$ contained in the head's chosen $Y_1$. First base-restrict the shrunk head to the base selected for the tail; then apply step 6 to that head with target request $V$ (viewed as principal in the head target by step 5). This gives a still smaller base $B_*$ and initial scheme contained in $X_1$, with head target exactly $V\\times_{B_1}B_*$. Restrict the tail only along $B_*$. Step 8 identifies its initial module with the new head cokernel, so the pieces concatenate to a chain. Its initial scheme is contained in $U$. Together with steps 5 and 9 this proves all positive-length requests of (3), also after any prescribed principal base restriction.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05HM, lemma-shrink-complete (3), induction and matching of the common target"
+   }
+  },
+  {
+   "text": "In length zero the initial sheaf is zero by definition. Base change keeps it zero. After any principal base restriction, choose a principal neighbourhood of the marked initial point inside the requested open and intersect it with the inverse image of the base restriction; the zero sheaf restricts to zero. No last target is requested. Finally every map occurring as an inclusion in a standard shrinking is an open immersion, and hence induces an isomorphism on the marked residue fields by the cited residue-field statement. This covers the zero-length case and the final residue-field assertion.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-residue-field-point-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "05H9, definition-shrink; 05HL, definition-shrink-complete; auxiliary zero-length convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-trf-pointed-scheme-devissage-data",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-trf-finite-singleton-fibre-localization",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "05H7--05HA and 05HJ--05HM, proofs with the auxiliary support-dimension-free data and the explicit zero-length case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pointed complete devissages are preserved by residue field preserving affine base change and can be shrunk inside a prescribed ambient open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_le\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q W : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, Q f → W f) →\\n    AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) ≤\\n    \", \"doc\": \"If a ring homomorphism condition $ Q $ implies another condition $ W $ for all commutative rings, then the property of being locally on affine target opens an affine morphism satisfying $ Q $ is conta\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n\nThe returned affine-neighbourhood and smooth-locus facts have no chain of finite pushforwards or prescribed simultaneous principal restrictions. Grep hits involving Shrink are universe resizing, unrelated to principal opens. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Standard principal open shrinking of a finite chain of affine devissages preserves smooth geometrically irreducible fibres and cokernels",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n\nThe returned affine-neighbourhood and smooth-locus facts have no chain of finite pushforwards or prescribed simultaneous principal restrictions. Grep hits involving Shrink are universe resizing, unrelated to principal opens. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "[loogle] OK 0 hit(s)\n\nThe returned affine-neighbourhood and smooth-locus facts have no chain of finite pushforwards or prescribed simultaneous principal restrictions. Grep hits involving Shrink are universe resizing, unrelated to principal opens. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|[sS]hrink.*[fF]inite.*[fF]ibre|[fF]inite.*[sS]hrink",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"323\", \"text\": \"instance shrink [Module.Finite R M] [Small.{u} M] : Module.Finite R (Shrink.{u} M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"324\", \"text\": \"  Module.Finite.equiv (Shrink.linearEquiv R M).symm\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"327\", \"text\": \"@[deprecated (since := \\\"2026-04-18\\\")] alias Module.finite_shrink := shrink\"}\n  {\"file\": \"Mathlib/Topology/Category/LightProfinite/Basic.lean\", \"line\": \"175\", \"text\": \"  have : PreservesLimitsOfSize.{0, 0} (forget Profinite.{u}) := preservesLimitsOfSize_shrink _\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"199\", \"text\": \"-- Making this an instance causes an infinite sequence `M → Shrink M → Shrink (Shrink M) → ...`.\"}\n  {\"file\": \"Mathlib/RingTheory/Depth/Rees.lean\", \"line\": \"177\", \"text\": \"    inferInstance, Module.Finite.equiv (Shrink.linearEquiv R (R ⧸ I)).symm, suppQ, h2⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/TransfiniteComposition.lean\", \"line\": \"324\", \"text\": \"lemma shrink₀ : IsStableUnderTransfiniteComposition.{0} W := shrink.{0, w'} W\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"line\": \"303\", \"text\": \"  preservesFiniteLimits_of_natIso Φ.shrinkYonedaCompPresheafFiberIso\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Transfer.lean\", \"line\": \"143\", \"text\": \"    HasFiniteLimits.{w} (ShrinkHoms C) := ⟨fun _ => inferInstance⟩\"}\n  {\"file\": \"Mathlib/Data/Fintype/Shrink.lean\", \"line\": \"22\", \"text\": \"instance Shrink.instFinite {α : Type u} [Finite α] : Finite (Shrink.{v} α) :=\"}\n\nThe returned affine-neighbourhood and smooth-locus facts have no chain of finite pushforwards or prescribed simultaneous principal restrictions. Grep hits involving Shrink are universe resizing, unrelated to principal opens. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite devissage chain with singleton marked finite fibres shrink all preceding affine schemes so the final smooth target lies in a given principal open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f : X → Y$, and a property $P$ of ring homomorphisms that is stable under composition with localizations at elements and preserved by such localizations, for any\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n\nThe returned affine-neighbourhood and smooth-locus facts have no chain of finite pushforwards or prescribed simultaneous principal restrictions. Grep hits involving Shrink are universe resizing, unrelated to principal opens. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointed affine devissage chains are preserved by residue field preserving base change and principal open shrinking",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_iff, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.targetAffineLocally_affineAnd_le, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.HasAffineProperty.affineAnd_le_affineAnd. Read the returned types: individual permanence properties or affine limit constructions only, no pointed devissage chain and simultaneous principal shrinking theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "0 hits: . Read the returned types: individual permanence properties or affine limit constructions only, no pointed devissage chain and simultaneous principal shrinking theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|Devissage|[dD]évissage",
+   "results": "0 hits: . Read the returned types: individual permanence properties or affine limit constructions only, no pointed devissage chain and simultaneous principal shrinking theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite maps to smooth affine schemes form a devissage stable under base change and restriction to neighborhoods",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange. Read the returned types: individual permanence properties or affine limit constructions only, no pointed devissage chain and simultaneous principal shrinking theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously shrink a finite diagram of affine schemes and finite morphisms around singleton fibres to prescribed principal open neighborhoods",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index. Read the returned types: individual permanence properties or affine limit constructions only, no pointed devissage chain and simultaneous principal shrinking theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-algebra-devissage-etale-existence",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical supporting algebra in the semistable-alteration ancestry of lem-trf-local-term-locality, clauses (1)--(2), recorded in the parent: the flat-tensor weak-assassin argument uses an etale projective neighborhood. In the proof of that neighborhood, the first localization produces complete devissage, before projectivity is proved. Supporting the 05I1 existence step via the 05HR dimension induction: Pointed base change and standard shrinking of devissage data.",
+   "via": [
+    "lem-trf-complete-algebra-devissage-etale-existence",
+    "lem-trf-flat-algebra-etale-projective-neighborhood",
+    "lem-trf-flat-tensor-weakass-fibre",
+    "lem-trf-vertical-principal-ideal-fibre-detection",
+    "lem-trf-valuation-smooth-branches-strict-chart",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-devissage-pointed-restriction",
+  "worker": "stage1",
+  "summary": "Read the Stacks one-step and complete devissage proofs against the auxiliary definition; retained the statement, proved the geometry and coefficients under base change, and wrote the principal-open lift, singleton-fibre argument and forward/backward chain inductions explicitly. Reused existing generic tools throughout: no new nodes.",
+  "blueprint": "Historical supporting algebra below lem-trf-local-term-locality via lem-trf-complete-algebra-devissage-etale-existence: realizes pointed base change and standard shrinking needed for the 05HR/05I1 devissage-existence induction. Latest blueprint locality proof has changed to contracting correspondences; this historical supporting lemma retains the source route of its assigned parent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic The fibre product of affine schemes is the spectrum of the tensor product used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic Locally of finite type is stable under base change used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic Base change, affineness and properness for finite morphisms used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic Base change and composition of smooth morphisms of fixed relative dimension used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic The pullback of a quasi-coherent module is quasi-coherent used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic Sections of the pullback of a quasi-coherent module over an affine open used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC) used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic Affine base change: pushforward of a quasi-coherent module along an affine morphism commutes with arbitrary base change used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic Tensor product is right exact used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic Cokernel and image of a morphism of quasi-coherent modules: quasi-coherent, computed on affine opens used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic Stalk of the pullback of a module, and germs of pulled-back sections used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic Basic opens form a basis of Spec A, and Spec A_f is homeomorphic to the open D(f) used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic Smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic Smooth morphisms are flat used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic Flat finite-presentation morphisms are open used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "Generic A field extension induces a surjective morphism of spectra used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic Base change of a surjective morphism is surjective used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic An open immersion of schemes is etale used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Generic Closed immersions on affine opens: surjective ring maps, and the criterion by an affine open covering of the target used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-weil-pbc-residue-field-point-naturality",
+    "why": "Generic Naturality of Spec kappa(x) -> X; open immersions induce isomorphisms of residue fields used only for the affine geometry or module calculation in the cited steps of the Stacks devissage route; no pointed-devissage node of this unit supplies this independent fact."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic: an irreducible locally finite type scheme over a field of dimension d has local dimension d at every point; used in step 1 to read the datum fibre-dimension condition as smooth relative dimension d. No node of this unit gives this bridge."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Generic: a locally Noetherian space with all local dimensions d has components of dimension d; used in steps 1 and 6 to return from smooth relative dimension d to the datum condition on fibre dimension. No node of this unit gives this bridge."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-8849dd8b1",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-8849dd8b1 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps (no new nodes) against Stacks flat.tex 05H7–05HA and 05HJ–05HM, including the proofs at lines 877–1420, and against def-trf-pointed-scheme-devissage-data. The statement is unchanged from live. The item is still unsplit on live and side-live and has no repair note. Clause (1) matches 05H8/05HK, (2) matches 05HA, (3) matches 05HM. Step 6 correctly uses X1=D(h f^#a) where Stacks omits the base factor. Steps 7, 9 and 10 reproduce the 05HA(3) and 05HM(2)/(3) inductions, with the principal-open bookkeeping checked. Each cited statement says what its step takes from it (affine pushforward base change, cokernel-image (3), module-stalk-pullback, finite-singleton-fibre-localization neighbourhood clause, closed-immersion-affine-cover-criterion). Edge cases checked: d=0, r=0, length 0, identity and non-flat base changes, empty fibres excluded. One C1/C4 gap: the definition requires fibres of Krull dimension d, but steps 1 and 6 argue only with 'smooth of relative dimension d', a local-dimension notion, and nothing they cite links the two. FIX: appended the bridge to steps 1 and 6, citing lem-pc-smooth-flat, lem-sbc-equidimensional-open-local-dimension, def-sbc-smooth-morphisms, lem-weil-pbc-finite-type-algebra-noetherian and lem-sbc-constant-local-dimension-components. Updated uses and proof_deps, and added tool_uses entries for the two sk-prop-normal-form nodes. No duplicate node exists in the DAG (rg for 05HA, 05HM, lemma-shrink and 'standard shrinking'). No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedDevissageRestriction",
+  "declaration": "AlgebraicGeometry.PointedAffineDevissage.pointed_devissage_baseChange_and_shrinking",
+  "declarations": [
+   "AlgebraicGeometry.PointedAffineDevissage.OneStepBaseChange",
+   "AlgebraicGeometry.PointedAffineDevissage.ChainBaseChange",
+   "AlgebraicGeometry.PointedAffineDevissage.OneStepRestriction",
+   "AlgebraicGeometry.PointedAffineDevissage.ChainRestriction",
+   "AlgebraicGeometry.PointedAffineDevissage.lastScheme",
+   "AlgebraicGeometry.PointedAffineDevissage.lastPoint",
+   "AlgebraicGeometry.PointedAffineDevissage.lastStructureMap",
+   "AlgebraicGeometry.PointedAffineDevissage.targetImages",
+   "AlgebraicGeometry.PointedAffineDevissage.MarkedResidueIsos",
+   "AlgebraicGeometry.PointedAffineDevissage.BaseRestrictionImages",
+   "AlgebraicGeometry.PointedAffineDevissage.OneStepRestrictionProperties",
+   "AlgebraicGeometry.PointedAffineDevissage.ChainRestrictionProperties",
+   "AlgebraicGeometry.PointedAffineDevissage.pointed_devissage_baseChange_and_shrinking"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedDevissageRestriction.lean",
+  "statement": "theorem pointed_devissage_baseChange_and_shrinking : OneStepRestrictionProperties.{u} ∧ ChainRestrictionProperties.{u}",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a6d78408",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of ce392a383508 (RETURN H2). (a) stmt_deps now add def-sfb-module-base-change-map, def-sfb-tensor-pullback-structure-sheaf-map, def-pc-module-pullback, all landed; node otherwise identical to side-live except lean. (b) pullbackUnitInverse removed, no reference to tensorPullbackObjUnitToUnit_isIso; ChainBaseChange.alphaSquare is the forward form for all k, which pins alpha' (pullback preserves the coproduct free; for r=0 vacuous). Clauses (1)-(3) checked against the def module and Stacks 05H7-05HA/05HJ-05HM: affine pointed map with kappa iso only; Cartesian squares with orientation checked; unique lifts; same d, n, r; eQ pinned by quotientSquare; exact D(a) inverse images; W x_B B' target; initial open U; alpha clause true for all OneStepRestriction via finiteCartesian; last-target request guarded by 0<n via lastScheme/targetImages; recursor binder positions verified; residue isos for all shrinkings. Edge cases n=0, r=0, d=0, D(1), identity/non-flat base change. One sorry, statement verbatim, no hollow defs, docstrings ok, not landed. Advisory: proof-only private imports (H9); IsPullback used without direct citation of def-pc-fibre-product. No file changed, no compile."
+ }
+}

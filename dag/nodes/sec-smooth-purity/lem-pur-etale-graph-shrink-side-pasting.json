@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-etale-graph-shrink-side-pasting",
+ "kind": "statement",
+ "title": "Pasting the second graph side across an open shrinking",
+ "statement": "Let A be a finite commutative ring, h:X→Z a scheme map, c=(j,c0) an open-then-proper compactification of h, and H=(a,e,p) a proper/open/proper presentation of h [def-pur-etale-graph-interchange-data]. Let a':X→W be proper and v:W→H.U open with a' v=a, and write S=(a',v e,p). Define B2_H and B2_S to be the specified second graph-side isomorphisms from F_H and F_S to their second-neighborhood words [def-pur-etale-graph-neighborhood-words]. Let T be the inverse proper/open triangle induced by the open N_S→N_H, followed by the open compositor under the common ambient proper direct image. Let I be the elementary shrinking isomorphism F_H→F_S. Then B2_H followed by T equals I followed by B2_S, as natural transformations on the ordinary unbounded small-etale module derived categories. This assertion contains neither the graph middle map nor the final graph comparison.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), independence-of-choices part of the proof and the final comparison of diagrams A-F. Agent-stated product-graph extension: unlike the source compatible-tower comparisons, this assertion identifies the concrete graph comparisons for arbitrary proper/open/proper presentations. Elementary presentation move compared with upstream LowerShriekComposition.lean, rightDerivedLowerStarCompOpenImmersionLowerShriekIso and the eh factor in nonempty_iso_rightDerivedLowerShriek_comp. This is a new obligation, not a theorem claimed to be proved by that Lean existence declaration."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-neighborhood-words",
+  "def-pur-etale-graph-interchange-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing open-shrinking comparison for the presentation H and the open factor v followed by H.e. Normalize its explicit shrinking presentation to H.shrink, and expand each graph comparison from open as graphSide₁, graphMiddle, and the inverse of graphSide₂.",
+   "uses": [
+    "lem-pur-etale-graph-comparison-open-shrink"
+   ]
+  },
+  {
+   "text": "Use the existing middle pasting equality and the definitional first-side identity graphFirstShrinkIso. A generic categorical cancellation lemma, proved privately in this module, cancels the first-side and middle isomorphisms from the expanded comparison equality. The remaining equality is exactly graphSide₂ followed by graphNeighborhoodTriangle equals etaleGraphShrinkInterchange followed by the shrunken graphSide₂.",
+   "uses": [
+    "lem-pur-etale-graph-shrink-middle-pasting"
+   ]
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-graph-comparison-open-shrink",
+  "lem-pur-etale-graph-shrink-middle-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/EtaleGraphComparisonOpenShrink.lean and lean/Sheaf/AlgebraicGeometry/EtaleGraphShrinkMiddlePasting.lean",
+  "place": "The open-shrink comparison, middle pasting, and categorical cancellation of the common first and middle factors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper maps to graph neighborhoods and inverse triangle interchange are compatible with shrinking the supporting open immersion",
+   "results": "IsProper.instMorphismRestrict; Scheme.Hom.app_appIso_inv; sheafed-space open-immersion inverse formulas; proper-map restrictions. None states the derived graph pasting equality.",
+   "date": "2026-10-24",
+   "verdict": "No match for the graph construction or its specified derived maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "product graph grid row boundary proper open exchange",
+   "results": "Combinatorial graph and Young-diagram results, not scheme graph comparisons.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.map\"",
+   "results": "pullback.mapDesc, pullback.map, pullback.map_comp, pullback.map_id, IsPullback.map_fst_comp_fst_snd_comp_fst. Used the pullback-map API for geometry; no derived word equality.",
+   "date": "2026-10-24",
+   "verdict": "Geometry API applies to the projection steps; it does not state the complete assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "graphNeighborhoodShrink|graphSide₂|productInterchange|productBV",
+   "results": "No Mathlib declarations with these graph-neighborhood or derived product-boundary constructions.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonInterchange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument.",
+   "via": [
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphShrinkSidePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphShrinkSidePasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphShrinkSidePasting",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphShrinkSidePasting"
+  ],
+  "statement": "theorem etaleGraphShrinkSidePasting (A : Type (u + 1)) [CommRing A] [Finite A] {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h) (H : EtaleGraphPresentation h) (a' : X ⟶ W) (v : W ⟶ H.U) [IsProper a'] [IsOpenImmersion v] (fac : a' ≫ v = H.a) : (H.graphSide₂ c A).hom ≫ (H.graphNeighborhoodTriangle c A a' v fac).hom = (etaleGraphShrinkInterchange A H a' v fac).hom ≫ ((H.shrink a' v fac).graphSide₂ c A).hom",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-b198d",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261024T020820-L-2671853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T022831-L-471881",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

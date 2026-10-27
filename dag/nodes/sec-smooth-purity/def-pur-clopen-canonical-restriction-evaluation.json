@@ -1,0 +1,121 @@
+{
+ "id": "def-pur-clopen-canonical-restriction-evaluation",
+ "kind": "definition",
+ "title": "Canonical evaluation of clopen strict-system restriction",
+ "status": "split",
+ "statement": "For a purity datum [def-pur-conventions], a compactification [def-weil-compactifications-refinements] of a quasi-compact morphism [def-weil-finite-type-morphism], and an open and closed immersion [def-weil-open-immersion] [def-weil-closed-immersion], use the recorded clopen system data [def-pur-clopen-system-realization-data]. At each positive coefficient exponent define the evaluated sequence-restriction isomorphism from a specified realized level restriction by composing the recorded system evaluation, scalar-unit coordinate comparisons [def-pur-adic-proetale-realization], and the fixed-coefficient finite pullback presentation [def-pur-pullback-reduction-realization]. This is a composite of the specified maps, not an existence assertion or a choice of level comparison.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pur-clopen-system-realization-data",
+  "def-pur-adic-proetale-realization",
+  "def-pur-pullback-reduction-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Retained finite-clopen step 8: canonical positive-level realization of strict-system restriction maps."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized clopen strict coefficient system site transport and finite counit comparison data",
+   "results": "OK 8 hits: CompHausLike.LocallyConstant.counit_app_val, counit, counitApp, counitAppApp, counitApp_app, incl_of_counitAppApp; Condensed.profiniteSolidCounit and Condensed.ofSheafForgetProfinite. These concern condensed and locally constant sheaves, not this strict-system transport record.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized clopen coefficient system comparison data with canonical site square and finite evaluations",
+   "results": "OK 8 hits: TopologicalSpace.Clopens.mk.congr_simp, coe_toOpens, ext, coe_mk, coe_toCloseds; DiscreteQuotient.finsetClopens.congr_simp; Profinite.Nobeling.ι; IsLocalization.integerNormalization_coeff. None is the coefficient-system comparison package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ClopenSystemIntegralTransport|clopenCompletedOrdinary|clopen.*[Cc]ounit (Mathlib CategoryTheory)",
+   "results": "OK 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "ClopenSystemIntegralTransport|clopenCompletedOrdinary|normalized clopen.*transport in dag/nodes, dag/lean_names_upstream.json, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search clopen system integral",
+   "results": "No matching declaration or definition node. One text hit in lem-sf-completed-shriek-composition-laws describes composition laws, not these data. blueprint_refs: 0 blueprint nodes match. Existing ClopenSystemSquare etc are reused as fields, not copied.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "clopenCanonicalRestrictionEvaluation|ClopenCanonicalRestrictionEvaluation in dag/nodes, lean/Sheaf, lean/WeilConjectures",
+   "results": "No declaration of this clopen canonical composite exists; the constituent normalized coordinate, site, mate and evaluation maps already exist and are reused.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-system-integral-realization",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility sentence, finite-clopen system-transport expansion, retained old steps 8-9.",
+   "via": [
+    "lem-pur-clopen-system-integral-realization",
+    "lem-pur-finite-clopen-exceptional-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.ClopenCanonicalRestrictionEvaluation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.clopenCanonicalRestrictionEvaluation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ClopenRestrictionRealizationIso",
+   "WeilConjectures.PurityFiniteSetting.clopenCanonicalRestrictionEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/ClopenCanonicalRestrictionEvaluation.lean",
+  "statement": "def clopenCanonicalRestrictionEvaluation (P : PurityFiniteSetting.{u}) {X Y Xi : Scheme.{u}} {g : X ⟶ Y} (c : Compactification g) (j : Xi ⟶ X) [IsOpenImmersion j] [IsClosedImmersion j] [QuasiCompact g] (C : ClopenSystemTransportCore P c j) (n : ℕ) (r : ClopenRestrictionRealizationIso P c j C n) (N : coefficientSequenceDerived.{u, u} P.coefficients.l P.extension X) : (coefficientSequenceDerivedEvaluation.{u, u} P.coefficients.l P.extension Xi n).obj (C.site.sequenceRestriction.obj N) ≅ (finiteDerivedPullback P.coefficients.l P.extension n j).obj ((coefficientSequenceDerivedEvaluation.{u, u} P.coefficients.l P.extension X n).obj N)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cf4ac880",
+  "group": "NK",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cf4ac880",
+  "group": "NK",
+  "result": "fix",
+  "note": "Re-delivery after 86cf RETURN; all 4 points repaired. (1) DU commutation: ordinaryScalarRestriction is fixed on sections via the recorded evaluations, lift.moduleUnderlying and the graph-coprojection setRestriction.sheafIso (HEq section types are propositionally equal via coefficientSequenceRestriction_evaluation, so the clause is not vacuous); scalarRestriction_normalized fixes it on every CX.sequence.derived.functor.obj (Q.obj H); reductionRestriction_normalized = red(kappa) ≫ purAdicPullbackReduction. (2) finiteEvaluation/finiteEvaluationI/restriction.evaluation are each equal to the explicit composites clopenCanonicalFiniteEvaluation/clopenCanonicalRestrictionEvaluation; restrictionDerived is fixed by IsClopenRestrictionDerivedNormalized and its ordinary part by sections. (3) The theorem stmt_dep is replaced by existing:true def-pur-open-completed-restriction-data. (4) strict-system-support is dropped and its record untouched. Hypotheses, edge cases (I empty, empty components, n=0 gives exponent 1, Y not separated), universes, verbatim statement, docstrings and single sorry are OK. FIX: new node def-pur-clopen-system-realization-data cited theorem lem-sfb-proetale-object-inverse-image-restriction only for the structure ProEtaleObjectRestrictionComparison; swapped to its def owner def-pe-proetale-object-restriction-comparison-data (on base, no cycle) in stmt_deps and the inline citation; fixes/def-pur-clopen-system-realization-data.json. No Lean change, no compile. Advisory: purAdicPullbackReduction/FinitePullbackPresentation are double-listed with def-pur-adic-purity-objects (avoids a genuine cycle); some declarations used come from owner nodes outside stmt_deps; the second reading is a self-check."
+ }
+}

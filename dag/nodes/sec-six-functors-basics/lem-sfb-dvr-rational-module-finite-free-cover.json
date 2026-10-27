@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-dvr-rational-module-finite-free-cover",
+ "kind": "statement",
+ "title": "Finite rational modules over a DVR admit finite free equivariant covers",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] and let $H$ be a flat affine finitely presented group scheme over $\\operatorname{Spec}A$ [def-sc-group-scheme, def-weil-flat-morphism, pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-affine-spectrum], with group-object diagrams over this base. Put $C=A[H]=\\Gamma(H,\\mathcal O_H)$, with its coordinate Hopf algebra comultiplication $\\Delta$ and counit $\\epsilon$. A rational $H$-module is an $A$-module $M$ with an $A$-linear coaction $\\rho_M:M\\to M\\otimes_A C$ satisfying $(\\rho_M\\otimes1)\\rho_M=(1\\otimes\\Delta)\\rho_M$ and $(1\\otimes\\epsilon)\\rho_M=1_M$; tensor products are [def-weil-pbc-module-tensor-product]. Suppose $N$ is a rational $H$-module finitely generated as an $A$-module, meaning that some finite set of elements spans $N$. Then there exist a rational $H$-module $P$ with a finite $A$-basis and a surjective $A$-linear map $p:P\\twoheadrightarrow N$ satisfying $(p\\otimes1_C)\\rho_P=\\rho_Np$. No torsion-freeness of $N$, smoothness, connectedness, or reductivity of $H$ is assumed. The case $N=0$ is allowed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Definition 9.2.2, Remarks 9.2.3 and 9.2.4(i), printed p.521: resolution property over separated regular Noetherian bases of dimension at most one, specialized to a DVR. Local PDF WANTED; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf",
+  "url": "https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sc-group-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-flat-morphism-affine-criterion], applied to the full affine source $H$ and target $\\operatorname{Spec}A$, the coordinate module $C$ is flat over $A$. Its coalgebra identities are among the coordinate Hopf identities assumed in the statement. Since $A$ is a domain by [def-sc-discrete-valuation-ring], multiplication by any $a\\ne0$ is injective on $A$. Tensoring this injection with $C$ is injective by [def-weil-pbc-flat-ring-map], and under $A\\otimes_A C\\simeq C$ it is multiplication by $a$. Thus $C$ is torsion free.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize), (1) implies (2); Tag 00HD (lemma-flat), injection criterion."
+   }
+  },
+  {
+   "text": "Choose generators $n_1,\\ldots,n_r$ of $N$. Let $F=A^r$ with standard basis $e_i$ and define $q:F\\twoheadrightarrow N$ by $q(e_i)=n_i$. Give $B=F\\otimes_A C$ and $D=N\\otimes_A C$ the cofree coactions $\\delta_B=1_F\\otimes\\Delta$ and $\\delta_D=1_N\\otimes\\Delta$. These satisfy both coaction identities directly by the corresponding coalgebra identities. The map $b=q\\otimes1_C:B\\to D$ is equivariant by functoriality of tensor. The map $\\rho_N:N\\to D$ is equivariant by the coassociativity equation for $N$. Put $T=N\\oplus B$, with componentwise coaction $\\delta_T$, and $f:T\\to D$, $f(n,z)=\\rho_N(n)-b(z)$. Then $(f\\otimes1_C)\\delta_T=\\delta_D f$, by these two equations and linearity. All tensor maps and the identification $(N\\oplus B)\\otimes C\\simeq(N\\otimes C)\\oplus(B\\otimes C)$ are given on pure tensors; their inverse sends the two summands through the two inclusions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Examples 4.2(a), Aside 4.7 and section 5, printed pp.114,117; agent-written cofree pullback assembly proving the DVR case of Alper Remark 9.2.4(i), printed p.521. Local PDFs WANTED; read online."
+   }
+  },
+  {
+   "text": "Let $W=\\ker(f)\\subseteq T$ and let $j:W\\hookrightarrow T$ be inclusion. The exact sequence $0\\to W\\xrightarrow{j}T\\xrightarrow{f}D$, tensored with flat $C$, is exact by [lem-weil-pbc-flat-tensor-exact]. For $w\\in W$, the equation in step 2 gives $(f\\otimes1_C)\\delta_T(w)=\\delta_D(f(w))=0$, so $\\delta_T(w)\\in\\operatorname{im}(j\\otimes1_C)$. Hence every $w\\in W$ lies in the stable core $W^\\circ$ of [lem-sfb-flat-coalgebra-subcomodule-core]. That node also gives $W^\\circ\\subseteq W$ and its restricted coaction, so $W=W^\\circ$ has a coaction $\\rho_W$ with $(j\\otimes1_C)\\rho_W=\\delta_Tj$. Composing with the two projections of $T$ shows that $a:W\\to N$ and $c:W\\to B$ are equivariant. Thus $W$ is the actual module pullback $\\{(n,z):\\rho_N(n)=b(z)\\}$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-flat-coalgebra-subcomodule-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Examples 4.2(a), Aside 4.7 and section 5, printed pp.114,117; agent-written cofree pullback assembly proving the DVR case of Alper Remark 9.2.4(i), printed p.521. Local PDFs WANTED; read online."
+   }
+  },
+  {
+   "text": "The projection $a$ is surjective: for any $n\\in N$, expand $\\rho_N(n)=\\sum_k x_k\\otimes d_k$, choose $y_k\\in F$ with $q(y_k)=x_k$, and set $z=\\sum_k y_k\\otimes d_k$. Then $b(z)=\\rho_N(n)$ and $(n,z)\\in W$. The projection $c$ is injective: if $c(n,z)=z=0$, the defining equation gives $\\rho_N(n)=0$ and applying $1_N\\otimes\\epsilon$ gives $n=0$. These arguments use neither a splitting of $q$ nor torsion-freeness of $N$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Examples 4.2(a), Aside 4.7 and section 5, printed pp.114,117; agent-written cofree pullback assembly proving the DVR case of Alper Remark 9.2.4(i), printed p.521. Local PDFs WANTED; read online."
+   }
+  },
+  {
+   "text": "The chosen basis of $F$ identifies $B=F\\otimes_A C$ with $C^r$, by $e_i\\otimes d\\mapsto(0,\\ldots,d,\\ldots,0)$ and inverse $(d_i)\\mapsto\\sum_i e_i\\otimes d_i$. Thus $B$ is torsion free by step 1, coordinate by coordinate. Since $c:W\\hookrightarrow B$ is injective, $W$ is torsion free: $aw=0$ with $a\\ne0$ implies $a c(w)=0$, then $c(w)=0$, then $w=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Examples 4.2(a), Aside 4.7 and section 5, printed pp.114,117; agent-written cofree pullback assembly proving the DVR case of Alper Remark 9.2.4(i), printed p.521. Local PDFs WANTED; read online."
+   }
+  },
+  {
+   "text": "For each $i$ choose $w_i\\in W$ with $a(w_i)=n_i$ using step 4. Apply [lem-sfb-dvr-comodule-finite-free-lattice] to the flat $A$-coalgebra $C$, the torsion-free comodule $W$, and the finite subset $\\{w_1,\\ldots,w_r\\}$. Its hypotheses are established in steps 1, 3 and 5. It supplies a subcomodule $P\\subseteq W$ containing those lifts, with a finite $A$-basis and an equivariant inclusion $u:P\\hookrightarrow W$. Set $p=a\\circ u$. Its image contains each $n_i$, hence all of $N$, and composition of the two coaction equations gives $(p\\otimes1_C)\\rho_P=\\rho_Np$. These are the required data. For $N=0$ one may take $r=0$ and directly take $P=0$ with the empty basis and zero coaction.",
+   "uses": [
+    "lem-sfb-dvr-comodule-finite-free-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Examples 4.2(a), Aside 4.7 and section 5, printed pp.114,117; agent-written cofree pullback assembly proving the DVR case of Alper Remark 9.2.4(i), printed p.521. Local PDFs WANTED; read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-dvr-comodule-finite-free-lattice",
+  "lem-sfb-flat-coalgebra-subcomodule-core",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-basic-affine-group-schemes.pdf",
+  "place": "VIII, Examples 4.2(a), Aside 4.7 and section 5, printed pp.114,117; agent-written cofree pullback assembly proving the DVR case of Alper Remark 9.2.4(i), printed p.521. Local PDFs WANTED; read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Resolution property affine flat group scheme over a discrete valuation ring every finite module has an equivariant surjection from a finite free representation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned statements; none provides finite free equivariant covers for rational group-scheme modules over a DVR"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"Free\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned statements; none provides finite free equivariant covers for rational group-scheme modules over a DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionProperty|resolution_property|equivariant.*surject|surject.*equivariant",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean\", \"line\": \"133\", \"text\": \"/-- If there exists a surjective equivariant map `α →ₑ[σ] β`\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned statements; none provides finite free equivariant covers for rational group-scheme modules over a DVR"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine group schemes over a discrete valuation ring have the resolution property for finite type representations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": HasRingHomProperty (@LocallyOfFiniteType) RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"[Finite n] : LocallyOfFinitePresentation (𝔸(n; S) ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {σ : Type v} (g : σ → AlgebraicGeometry.Scheme) [inst : Finite σ] [∀ (i : σ), AlgebraicGeometry.IsAffine (g i)],\\n  AlgebraicGeometry.IsAffine (∐ g)\", \"doc\": \"The coproduct (disjoint union) of a finite family of affine schemes is itself an affine scheme. Specifically, if $\\\\sigma$ is a finite type and each scheme $g(i)$ in the family indexed by $\\\\sigma$ is a\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : AffineScheme.{u}) : IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned statements; none provides finite free equivariant covers for rational group-scheme modules over a DVR"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type comodule for an affine flat group scheme over a DVR is an equivariant quotient of a finite free comodule",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) → Module.Free R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely generated flat $ R $-module. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the rank of the tensor product $ (R/\\\\mathfrak{p}) \\\\otimes_R M $ \"}\n  {\"name\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) →\\n    Nonempty (Modu\", \"doc\": \"If $ M $ is a finitely generated flat module over a commutative ring $ R $, and for every maximal ideal $ \\\\mathfrak{p} $ of $ R $ the rank of the tensor product $ M \\\\otimes_R (R/\\\\mathfrak{p}) $ over t\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned statements; none provides finite free equivariant covers for rational group-scheme modules over a DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|contragredient",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"dual\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite type rational representation of a flat affine group scheme over a discrete valuation ring is an equivariant quotient of a finite free representation",
+   "results": "Actual logged hits: Module.free_of_flat_of_finrank_eq, FDRep.instFiniteCarrierVFGModuleCat, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, FDRep.instConcreteCategoryHomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGV, FDRep.of_ρ, TannakaDuality.FiniteGroup.ofRightFDRep, FDRep.instProjectiveOfNeZeroCastCard",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free equivariant surjections onto rational modules over a DVR",
+   "results": "Actual logged hits: Module.finitePresentation_of_free_of_surjective, LinearMap.splittingOfFinsuppSurjective, Module.Finite.kerRepr, Module.Finite.reprEquiv, Module.Finite.exists_fin_quot_equiv, LinearEquiv.surjective, Function.Exact.linearEquivOfSurjective, Module.surjective_piEquiv_apply_iff",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Duals of finite projective comodules generate all representations of an affine group scheme over a Dedekind ring",
+   "results": "Actual logged hits: Rep.instEnoughProjectives, Rep.instProjective, Rep.free_projective, FDRep.instProjectiveOfNeZeroCastCard, Rep.diagonal_succ_projective, Rep.leftRegular_projective, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.ofRightFDRep",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|Coalgebra.*(pullback|kernel)",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a morphism of comodules over a flat coalgebra carries the restricted coaction",
+   "results": "Actual logged hits: CategoryTheory.Limits.kernel, CategoryTheory.Limits.kerIsKernel, CategoryTheory.Limits.kernelIsKernel, LinearMap.ker, CategoryTheory.Limits.kernelSubobject, ModuleCat.kernelIsLimit, Representation.Coinvariants.ker, LieModuleHom.ker",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"pullback\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullbacks of comodules over a flat coalgebra are computed on underlying modules and the kernel has a restricted coaction",
+   "results": "Actual logged hits: comonadicExtendScalars, CoalgCat.instComonObjModuleCatOfCarrier, CoalgCat.toComonObj, CategoryTheory.Comonad.beckCoalgebraEqualizer, CategoryTheory.Comonad.beckEqualizer, CoalgCat.comonEquivalence, CoalgCat.toComon, CoalgCat.ofComonObj",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat coalgebra over a commutative ring has a category of comodules whose forgetful functor creates finite limits",
+   "results": "Actual logged hits: CategoryTheory.Comonad.forgetCreatesLimit, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, CommRingCat.Under.preservesFiniteLimits_of_flat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, comonadicExtendScalars, Module.Flat.iff_preservesFiniteLimits_tensorLeft, CategoryTheory.Comonad.ForgetCreatesLimits'.conePoint",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"ker\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "forgetCreatesLimit|iff_preservesFiniteLimits_tensorLeft|instPreservesFiniteLimitsModuleCat",
+   "results": "Actual logged hits: Mathlib/Topology/Category/Compactum.lean, Mathlib/Topology/Category/Compactum.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/RingTheory/Flat/CategoryTheory.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/CategoryTheory/Limits/MorphismProperty.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: ordinary free module covers, abstract-group representations, and general comonad limits do not supply the finite free rational equivariant cover; the comonad and flat-limit hits are useful general tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-primitive-polynomial-lifting-criterion",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemma 9.2.5(5),(5-double-prime), Remark 9.2.4(i), and Lemma 4.1.8, printed pp.502--504,521--523. Corrected primitive-vector form of Remark 9.2.7: dualize a surjection from a finite free module, rather than an arbitrary injection A into V. The resolution property over a DVR and Noetherian approximation remove all restrictions on M. Supporting lemma: Remark 9.2.4(i), the resolution property for finite rational modules over a DVR, before dualizing the surjection.",
+   "via": [
+    "lem-sfb-dvr-primitive-polynomial-lifting-criterion",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-rational-module-finite-free-cover",
+  "worker": "stage1",
+  "summary": "Q103 proves the unchanged finite-free equivariant cover statement using an explicit cofree pullback of a chosen ordinary free cover. Flat tensor exactness and the existing stable-core theorem give the pullback coaction; the counit embeds it in a torsion-free cofree module. The existing DVR lattice theorem supplies a finite free subcomodule covering the generators. No new nodes; no smoothness or reductivity assumptions.",
+  "blueprint": "The inherited blueprint.from.place identifies Alper Remark 9.2.4(i), used before dualizing a surjection in the primitive polynomial lifting criterion, ultimately supporting det-thm-sf-ctf-stability-direct-images proof (3). Steps 1--6 realize precisely that DVR resolution-property input. Whole-blueprint searches for resolution property, coalgebra and comodule found no duplicate. The ancestor tool returns None on the inherited created.item chain; its null from.node and full via list are preserved. Current latest blueprint was read; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic affine-chart criterion converts the given scheme flatness to module flatness; no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic exactness of tensor with a flat module identifies the kernel after tensoring."
+   },
+   {
+    "node": "lem-sfb-flat-coalgebra-subcomodule-core",
+    "why": "Generic stable-core construction gives a coaction on the explicitly stable kernel."
+   },
+   {
+    "node": "lem-sfb-dvr-comodule-finite-free-lattice",
+    "why": "Existing same-unit DVR coalgebra finiteness theorem applies only after the constructed pullback is proved torsion free."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sfb-flat-coalgebra-subcomodule-core",
+  "lem-sfb-dvr-comodule-finite-free-lattice"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-6a6f2e707",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-6a6f2e707 (reviewer sub-agent of L); spot-checked: I read the item in full, all six steps, and the statement of every cited node. There are no new nodes, and the statement and stmt_deps are unchanged. Source check: Alper (Algebraic Geometry 2014), printed p.521, read from the PDF at the cited URL. Def 9.2.2, Rem 9.2.3 (the affine finite-free form) and Rem 9.2.4(i) (regular Noetherian separated base of dimension ≤1, G affine) cover a flat affine finitely presented H over a DVR exactly, so nothing is weakened. Step 1: the affine flatness criterion applied to H → Spec A gives C flat, hence torsion free over the domain A. Step 2: the cofree comodules, ρ_N equivariant by coassociativity, and f = ρ_N − b equivariant all check. Step 3: flat-tensor-exact covers 0→W→T→D with no surjectivity needed, so δ_T(W) ⊆ im(j⊗1). The stable-core node's statement then gives W = W° with a restricted coaction; only its statement is used. Step 4: a is surjective by lifting the pure-tensor coefficients through q, and c is injective by the counit. Step 5: B ≅ C^r is torsion free and c is injective, so W is torsion free. Step 6: the DVR lattice node applies with all its hypotheses met and gives a finite free subcomodule containing lifts of the generators; p = a∘u is surjective and equivariant. Edge cases checked: N = 0, torsion N = A/(t) with trivial H, and C = A. No duplicate (scan of coaction/comodule plus surjection statements; same_as []), no cycle, and both tool nodes are in the item's unit. The worker wrote its own tool_uses (C8 says the maintainer records these); the entries are accurate and I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.DvrRationalModuleFiniteFreeCover",
+  "declaration": "AlgebraicGeometry.exists_finite_basis_equivariant_surjection_of_dvr",
+  "file": "lean/Sheaf/RepresentationTheory/DvrRationalModuleFiniteFreeCover.lean",
+  "statement": "theorem exists_finite_basis_equivariant_surjection_of_dvr (A : CommRingCat.{u}) [IsDomain A] [IsDiscreteValuationRing A] (H : Scheme.{u}) [H.Over (Spec A)] [IsAffine H] [GrpObj (H.asOver (Spec A))] [Flat (H ↘ Spec A)] [LocallyOfFinitePresentation (H ↘ Spec A)] (N : Type v) [AddCommGroup N] [Module A N] [Module.Finite A N] (ρN : N →ₗ[A] N ⊗[A] Γ(H, ⊤)) (hcoassoc : (TensorProduct.assoc A N Γ(H, ⊤) Γ(H, ⊤)).toLinearMap ∘ₗ ρN.rTensor Γ(H, ⊤) ∘ₗ ρN = (Coalgebra.comul (R := A) (A := Γ(H, ⊤))).lTensor N ∘ₗ ρN) (hcounit : (TensorProduct.rid A N).toLinearMap ∘ₗ (Coalgebra.counit (R := A) (A := Γ(H, ⊤))).lTensor N ∘ₗ ρN = LinearMap.id) : ∃ (P : ModuleCat.{u} A) (n : ℕ) (_ : Module.Basis (Fin n) A P) (ρP : P →ₗ[A] P ⊗[A] Γ(H, ⊤)) (p : P →ₗ[A] N), (TensorProduct.assoc A P Γ(H, ⊤) Γ(H, ⊤)).toLinearMap ∘ₗ ρP.rTensor Γ(H, ⊤) ∘ₗ ρP = (Coalgebra.comul (R := A) (A := Γ(H, ⊤))).lTensor P ∘ₗ ρP ∧ (TensorProduct.rid A P).toLinearMap ∘ₗ (Coalgebra.counit (R := A) (A := Γ(H, ⊤))).lTensor P ∘ₗ ρP = LinearMap.id ∧ Function.Surjective p ∧ p.rTensor Γ(H, ⊤) ∘ₗ ρP = ρN ∘ₗ p",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ccff8520",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Lean exact against node: A CommRingCat [IsDomain][IsDiscreteValuationRing]; H.Over Spec A + GrpObj(H.asOver); IsAffine H ≡ affine map over affine Spec A; Flat + LocallyOfFinitePresentation (affine ⇒ f.p.); C = Γ(H,⊤) with Mathlib Group/Affine canonical Algebra/Bialgebra/Hopf instances; coaction equations inline (assoc∘ρ.rTensor∘ρ = comul.lTensor∘ρ, rid∘counit.lTensor∘ρ = id), definitionally equal to the landed IsCoordinateCoaction; the node defines rational module inline, so no H4; N : Type v Module.Finite; ∃ P : ModuleCat.{u} A with Basis (Fin n), ρP with both equations, Surjective p, p.rTensor C ∘ ρP = ρN ∘ p. Edge cases N=0 (n=0), A/(t) with trivial H, any characteristic. Node changes only in lean; 7 stmt_dep records identical to live; statement verbatim; source/blueprint docstrings with 6 proof steps; sorry only; no defs; name and path new; report sections present (stock second reading). Nothing compiled (no change). Maintainer note: parallel Q115 1a0585cb9 (FIX, unlanded; GroupScheme/DvrRationalModuleFiniteFreeCover, dvr_rational_module_finite_free_cover, cites IsCoordinateCoaction) is equivalent; only one should land, Q115 slightly preferable; the later must not rebind."
+ }
+}

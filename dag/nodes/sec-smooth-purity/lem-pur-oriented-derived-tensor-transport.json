@@ -1,0 +1,279 @@
+{
+ "id": "lem-pur-oriented-derived-tensor-transport",
+ "kind": "statement",
+ "title": "Transport through an oriented derived tensor product",
+ "statement": "Let $X$ be a scheme and $A$ a commutative ring. Work in the unbounded derived category $D=D(X_{\\mathrm{proet}},A)$ of sheaves of modules on its small pro-etale site [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with the specified K-flat derived tensor [def-weil-derived-tensor] and total tensor convention [def-pc-tensor-complex-sheaves]. Let $T$ be a sheaf of $A_X$-modules, regarded as a complex concentrated in degree zero, and let $d\\geq0$ be an integer. Let $\\omega\\in D$ and fix an isomorphism $\\Pi:\\omega\\xrightarrow{\\sim}T[2d]$. Let $\\mathcal I$ be a category [def-nagata-category], let $P,H:\\mathcal I\\to D$ be functors, and suppose given a natural isomorphism $\\theta_i:P(i)\\otimes_A^L\\omega\\xrightarrow{\\sim}H(i)$.\n\nThe canonical second-variable tensor-shift comparison gives a natural isomorphism\n$$a_M:(M\\otimes_A^LT)[2d]\\xrightarrow{\\sim}M\\otimes_A^L(T[2d])\\qquad(M\\in D).$$\nOn a K-flat representative $Q\\to M$, its map in degree $r$ is the identity of $Q^{r+2d}\\otimes_A T$. Both differentials are $d_Q\\otimes1$; the comparison is the sign-free reindexing, not an unspecified isomorphism of these objects. This formula descends independently of the K-flat representative and is natural in both $M$ and $T$.\n\nThe specified morphisms\n$$G_i=\\theta_i\\circ(1_{P(i)}\\otimes\\Pi^{-1})\\circ a_{P(i)}:(P(i)\\otimes_A^LT)[2d]\\longrightarrow H(i)$$\nform a natural isomorphism. Their inverses are exactly\n$$a_{P(i)}^{-1}\\circ(1_{P(i)}\\otimes\\Pi)\\circ\\theta_i^{-1}.$$\nIn particular the construction uses the given $\\Pi$ and $\\theta$ with no further scalar or sign choice. No existence or geometric normalization of $\\Pi$ or $\\theta$ is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
+  "place": "Three-arrow composite: twist reassociation, inverse orientation and canonical tensor map; extraction of returned proof Steps 1 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=2d$. For any complexes $E,F$, use the canonical second-variable chain comparison $s^2_n:\\operatorname{Tot}(E\\otimes F[n])\\cong\\operatorname{Tot}(E\\otimes F)[n]$ of [lem-weil-pbc-total-tensor-integer-shifts]. Its coefficient on first-factor degree $p$ is $(-1)^{np}=1$. Hence its inverse is precisely identity reindexing, natural in both chain variables. In particular, for degree-zero $T$ and any complex $Q$, both $(Q\\otimes T)[n]^r$ and $(Q\\otimes T[n])^r$ are $Q^{r+n}\\otimes T$, and both differentials are $d_Q\\otimes1$: the shift multiplies the first differential by $(-1)^n=1$ and $d_T=0$. This verifies the stated chain formula, including its direction.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor; even second-variable shift"
+   }
+  },
+  {
+   "text": "Work on the small skeleton in [def-weil-pbc-proetale-site]. Apply [lem-weil-pbc-site-derived-tensor-descent] to its constant ring sheaf $A_X$. It supplies the resolving localization equivalence, tensor-model comparisons, and unique extension of natural transformations. The flat-term K-flat resolving class is shift-stable by [lem-weil-pbc-total-tensor-homotopy-cone-signs]; shifting merely reindexes its flat terms. Thus [lem-weil-pbc-derived-tensor-shift-descent] applies to this specified total-tensor bifunctor. Set $a_M=(t^2_n(M,T))^{-1}$. Its statement gives naturality for all derived morphisms in both inputs, not only chain maps. It also identifies $t^2_n$ at a fixed flat-term K-flat first argument with the one-variable comparison on arbitrary second complexes. The latter hypothesis holds because total tensor with a K-flat complex induces a functor on the homotopy category preserving quasi-isomorphisms by [lem-weil-pbc-total-tensor-homotopy-cone-signs]. The required comparison $e_L$ is constructed, not read off a definition: fix a flat-term K-flat $Q$. Since $Q_hH_Q$ inverts quasi-isomorphisms, it factors uniquely through the localization of [def-weil-abstract-derived-category] as $\\bar H_Q:D\\to D$. The bifunctors $U(M,N)=\\bar H_Q(N)$ and $V(M,N)=T(Q_hQ,N)$ are related on $\\mathcal P\\times\\mathcal P$ by the natural isomorphism $c_{Q,B}$, so the extension clause of [lem-weil-pbc-site-derived-tensor-descent] extends $c$ and $c^{-1}$ uniquely; by uniqueness the extensions are mutually inverse. Since $U,V$ ignore $M$ and $D$ has a zero object, the component does not depend on $M$. Its composite with $Q_h$ is the natural isomorphism $e_{L,B}:Q_hH_Q(B)\\cong T(Q_hQ,Q_hB)$, $B\\in K(R)$, whose components on $\\mathcal P$ are exactly $c_{Q,B}$. With the first resolution $Q$ itself, its source is the object $Q\\otimes_AB$ that defines $Q_hQ\\otimes_A^LQ_hB$ in [def-weil-derived-tensor]. So $e_L$ is the identification of these specified objects with the values of the descended bifunctor. Consequently, on a flat-term K-flat $Q$ and the unreplaced sheaf $T$, $a$ is exactly the chain map of Step 1. This also identifies the descended bifunctor with the specified K-flat tensor, without a new normalization choice.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "def-weil-derived-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor and preceding construction), 06YM and 06YP; apply the published shift-descent normalization"
+   }
+  },
+  {
+   "text": "For an arbitrary K-flat representative $q:Q\\to M$, not assumed termwise flat, choose a flat-term K-flat resolution $r:R\\to Q$ by [lem-pc-kflat-resolution]. Then $qr:R\\to M$ is another representative. The conditional comparison clause of [lem-weil-derived-tensor-resolution-independent], applied to the actual chain map $r$ and to $T$, respectively $T[n]$, says that $r\\otimes1_T$ and $r\\otimes1_{T[n]}$ are quasi-isomorphisms and give the canonical model comparisons. Naturality of the chain isomorphism from Step 1 gives\n$$ (r\\otimes1_{T[n]})\\circ a_R^{\\rm Ch}=a_Q^{\\rm Ch}\\circ(r\\otimes1_T)[n]. $$\nAfter localization, the two vertical comparisons are invertible. The normalization on $R$ in Step 2 therefore forces the same formula on $Q$. For any two choices $Q,Q'$, their canonical comparisons to the specified derived tensor are exactly those of [lem-weil-derived-tensor-resolution-independent], which obey the cocycle identity. Both chain formulas represent the already constructed $a_M$, so they agree under these comparisons. No direct chain comparison between arbitrary resolutions is assumed, and no flatness of $T$ is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-derived-tensor-resolution-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YU; comparison with an arbitrary K-flat representative"
+   }
+  },
+  {
+   "text": "Write $F(i)=(P(i)\\otimes_A^LT)[n]$, $J(i)=P(i)\\otimes_A^LT[n]$ and $B(i)=P(i)\\otimes_A^L\\omega$. For an arrow $u:i\\to j$ let $f=P(u)$. Their arrow maps are $F(u)=(f\\otimes1_T)[n]$, $J(u)=f\\otimes1_{T[n]}$ and $B(u)=f\\otimes1_\\omega$, by bifunctoriality of the derived tensor [lem-weil-pbc-site-derived-tensor-descent]. Set $b_i=1_{P(i)}\\otimes\\Pi^{-1}$. Functoriality gives\n$$B(u)\\circ b_i=b_j\\circ J(u),$$\nsince both sides are $f\\otimes\\Pi^{-1}$. Further, $b_i$ is invertible with inverse $1_{P(i)}\\otimes\\Pi$: their composites are tensor images of the inverse equations for $\\Pi$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
+    "place": "Three-arrow composite: inverse orientation"
+   }
+  },
+  {
+   "text": "Define $G_i=\\theta_i\\circ b_i\\circ a_{P(i)}$, exactly as specified. Naturality in Step 2 and the equation in Step 4, followed by the assumed naturality of $\\theta$, give for every $u:i\\to j$\n$$H(u)\\circ G_i=\\theta_j\\circ B(u)\\circ b_i\\circ a_{P(i)}=\\theta_j\\circ b_j\\circ J(u)\\circ a_{P(i)}=G_j\\circ F(u).$$\nThus these actual components form a natural transformation; this calculation uses all arrows of $\\mathcal I$ and imposes no finiteness or geometric assumption on that category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
+    "place": "Three-arrow composite: naturality of the prescribed components"
+   }
+  },
+  {
+   "text": "Set $V_i=a_{P(i)}^{-1}\\circ(1_{P(i)}\\otimes\\Pi)\\circ\\theta_i^{-1}$. Associativity and the inverse equations, in order, give\n$$V_iG_i=a_{P(i)}^{-1}(1\\otimes\\Pi)(1\\otimes\\Pi^{-1})a_{P(i)}=1_{F(i)},\\qquad G_iV_i=\\theta_i(1\\otimes\\Pi^{-1})(1\\otimes\\Pi)\\theta_i^{-1}=1_{H(i)}.$$\nMultiplying $H(u)G_i=G_jF(u)$ on the left by $V_j$ and on the right by $V_i$ gives $V_jH(u)=F(u)V_i$, so the displayed inverses are natural too. Hence $G$ is a natural isomorphism with exactly the stated inverse. Every factor was fixed by the hypotheses or by the chain normalization, leaving no scalar or sign choice.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
+    "place": "Three-arrow composite: each factor is an isomorphism; explicit inverse equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "def-weil-derived-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-derived-tensor-resolution-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.proof.md",
+  "place": "Three-arrow composite; explicit K-flat sign, localization and categorical assembly argument using Stacks 0FNH, 06YS, 06YU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*shift|shift.*tensor|commShiftIso",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean. Read the signatures. BifunctorShift and CommShiftTwo provide chain-level shift machinery, and Tor and sheaf monoidal structures are related infrastructure. None identifies the specified unbounded sheaf-derived comparison on K-flat representatives together with the displayed oriented natural transformation and inverse. The Mathlib chain comparison must still be descended and matched to the project tensor; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Even shift derived tensor product sheaves K-flat orientation natural isomorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: . Service unavailable; no absence conclusion from this query.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift₂, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'; 0 hits: . Read the signatures. BifunctorShift and CommShiftTwo provide chain-level shift machinery, and Tor and sheaf monoidal structures are related infrastructure. None identifies the specified unbounded sheaf-derived comparison on K-flat representatives together with the displayed oriented natural transformation and inverse. The Mathlib chain comparison must still be descended and matched to the project tensor; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of sheaves of modules: an orientation omega isomorphic to T shifted by 2d and a natural tensor isomorphism M tensor omega to H(M) induce a natural isomorphism (M tensor T)[2d] to H(M), with sign-free even-shift comparison on K-flat complexes",
+   "results": "8 hits: Rep.torIso, CategoryTheory.Tor'_obj_obj, HomologicalComplex.rightUnitor'_inv_comm, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, HomologicalComplex.leftUnitor'_inv_comm, HomologicalComplex.leftUnitor'_inv_comm_assoc, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Tor'. Read the signatures. BifunctorShift and CommShiftTwo provide chain-level shift machinery, and Tor and sheaf monoidal structures are related infrastructure. None identifies the specified unbounded sheaf-derived comparison on K-flat representatives together with the displayed oriented natural transformation and inverse. The Mathlib chain comparison must still be descended and matched to the project tensor; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map₂CochainComplex|shiftFunctor₂|CommShift₂",
+   "results": "5 hits: 28, 141, 174, 235, 257. Read the signatures. BifunctorShift and CommShiftTwo provide chain-level shift machinery, and Tor and sheaf monoidal structures are related infrastructure. None identifies the specified unbounded sheaf-derived comparison on K-flat representatives together with the displayed oriented natural transformation and inverse. The Mathlib chain comparison must still be descended and matched to the project tensor; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift₂",
+   "results": "12 hits: CategoryTheory.Functor.CommShift₂, CategoryTheory.Functor.CommShift₂.commShiftObj, CategoryTheory.Functor.CommShift₂.commShiftFlipObj, CategoryTheory.Functor.CommShift₂.precomp₁, CategoryTheory.NatTrans.CommShift₂.instIdFunctor, CategoryTheory.NatTrans.CommShift₂, CategoryTheory.Functor.CommShift₂.commShift_map, CategoryTheory.Functor.CommShift₂.commShift_flip_map. Read the signatures. BifunctorShift and CommShiftTwo provide chain-level shift machinery, and Tor and sheaf monoidal structures are related infrastructure. None identifies the specified unbounded sheaf-derived comparison on K-flat representatives together with the displayed oriented natural transformation and inverse. The Mathlib chain comparison must still be descended and matched to the project tensor; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The second-variable tensor shift isomorphism for unbounded derived categories of sheaves is represented on K-flat complexes by identity reindexing when the shift is even; composing with a fixed orientation and a natural tensor identification preserves the prescribed morphism",
+   "results": "8 hits: CochainComplex.mapBifunctorHomologicalComplexShift₁Iso, HomologicalComplex₂.shiftFunctor₁₂CommIso, HomologicalComplex₂.shiftFunctor₁XXIso_refl, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_hom_f_f, HomologicalComplex₂.shiftFunctor₂XXIso_refl, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.mapBifunctorHomologicalComplexShift₂Iso_hom_f_f, CategoryTheory.Functor.instCommShiftCochainComplexIntObjFlipMap₂CochainComplex. Read the signatures. BifunctorShift and CommShiftTwo provide chain-level shift machinery, and Tor and sheaf monoidal structures are related infrastructure. None identifies the specified unbounded sheaf-derived comparison on K-flat representatives together with the displayed oriented natural transformation and inverse. The Mathlib chain comparison must still be descended and matched to the project tensor; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*tensor.*shift|tensor.*shift.*derived|mapBifunctorShift₂Iso",
+   "results": "5 hits: Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean. Read BifunctorShift.lean:137-188 and the reported signatures. These give chain comparisons and exact-functor shifts, not the specified unbounded derived sheaf tensor normalization and oriented composite; no one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived tensor product sheaves second factor even shift natural comparison on K-flat complexes",
+   "results": "8 hits: CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁_assoc, CochainComplex.isKProjective_shift_iff, CochainComplex.mapBifunctorHomologicalComplexShift₂Iso_hom_f_f, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app. Read BifunctorShift.lean:137-188 and the reported signatures. These give chain comparisons and exact-functor shifts, not the specified unbounded derived sheaf tensor normalization and oriented composite; no one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorShift₂Iso",
+   "results": "8 hits: CochainComplex.mapBifunctorShift₂Iso, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc, CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso. Read BifunctorShift.lean:137-188 and the reported signatures. These give chain comparisons and exact-functor shifts, not the specified unbounded derived sheaf tensor normalization and oriented composite; no one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An even second-variable shift of the derived tensor product of sheaves is the identity reindexing on K-flat representatives, naturally; composing it with a fixed orientation and a natural tensor isomorphism gives the prescribed natural isomorphism and inverse",
+   "results": "8 hits: CochainComplex.mapBifunctorHomologicalComplexShift₂Iso_inv_f_f, CochainComplex.mapBifunctorHomologicalComplexShift₂Iso, CochainComplex.mapBifunctorHomologicalComplexShift₂Iso_hom_f_f, CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app. Read BifunctorShift.lean:137-188 and the reported signatures. These give chain comparisons and exact-functor shifts, not the specified unbounded derived sheaf tensor normalization and oriented composite; no one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and normalization of the second tensor shift isomorphism on the unbounded derived category of module sheaves via K-flat localization, composed with an orientation omega isomorphic to a shifted sheaf",
+   "results": "8 hits: CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app. Read BifunctorShift.lean:137-188 and the reported signatures. These give chain comparisons and exact-functor shifts, not the specified unbounded derived sheaf tensor normalization and oriented composite; no one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-dualizing-object-purity",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Current corollary proof: the twist reassociation and the inverse of the identification; returned Steps 1 and 3, including K-flat sign calculation, inverse equations and naturality.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-oriented-derived-tensor-transport",
+  "worker": "stage1",
+  "summary": "Preserved the statement; supplied the even-shift chain calculation, descent with fixed-K-flat normalization and arbitrary-representative comparison, followed by explicit naturality and inverse equations. Reused existing nodes; no new nodes.",
+  "blueprint": "cor-pur-dualizing-object-purity.proof.md, entire three-arrow composite: twist reassociation in Steps 1-3, inverse orientation in Step 4, tensor map and assembly in Steps 5-6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic localization and natural-transformation extension for the specified sheaf tensor; purity provides no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "Generic homotopy descent, quasi-isomorphism preservation and shift stability for K-flat tensor; verifies the hypotheses of the shift-descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Generic signed derived tensor shift and fixed-K-flat comparison normalization for arbitrary second inputs; not a geometric purity theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolution of an arbitrary K-flat representative, needed only for representative normalization."
+   },
+   {
+    "node": "lem-weil-derived-tensor-resolution-independent",
+    "why": "Generic pro-etale K-flat model comparisons and cocycle independence, without asserting nonexistent direct maps between arbitrary resolutions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-derived-tensor-resolution-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-4f0130fc5",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-4f0130fc5 (reviewer sub-agent of L); spot-checked: FIX for one C4 fault in Step 2. Step 2 used the fixed-A clause of lem-weil-pbc-derived-tensor-shift-descent but took its required comparison e_L (components equal to c on flat-term K-flat complexes) from def-weil-derived-tensor, which only defines the object P⊗K2 and states no comparison with the T of site-derived-tensor-descent (the pur9-cs-def-invertible review found the same gap). I rewrote that sentence: H_Q descends through the localization (def-weil-abstract-derived-category, added to the step's uses), and the extension clause of site-derived-tensor-descent extends c and c^{-1} to inverse isomorphisms e_L. Since D has a zero object, e_L does not depend on the first variable, and its source is the def-weil-derived-tensor object. Checks: statement, stmt_deps and blueprint are unchanged from live, which is still unsplit; there is no repair note and no SGA citation. Degree by degree, both complexes are Q^{r+2d}⊗T with differential d_Q⊗1. The sign (-1)^{np}, and Stacks 0FNH's (-1)^{pb} with b=2d, are both 1, so a = (s^2)^{-1} is sign-free. Step 3 applies resolution-independent with α=r and q'α=q exactly, uses no flatness of T, and the chain square commutes by fixed-argument naturality. Steps 4-6 (functoriality, naturality of G, inverses in both orders) are correct and match the parent's arrow order θ∘(1⊗Π^{-1})∘a. Small cases: d=0, non-flat T, unbounded Q. Five generic tool uses (site descent, homotopy-cone-signs, shift descent, kflat-resolution, resolution-independent) accepted; no cycle. No new nodes and no duplicate of the item. Maintainer note: lem-weil-derived-tensor-functorial still leaves the model's action on morphisms unspecified, and no node identifies it with T's action.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedDerivedTensorTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.orientedDerivedTensorTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.orientedDerivedTensorTransportSpec",
+   "AlgebraicGeometry.ProEtale.orientedDerivedTensorTransport"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedDerivedTensorTransport.lean",
+  "statement": "theorem orientedDerivedTensorTransport (d : ℕ) : orientedDerivedTensorTransportSpec (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) d",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Full naturality, sign-free total-complex formula, normalization on every K-flat representative via the actual localization tensor comparison, and the prescribed oriented composite and inverse. The real-data specification predicate is stated abstractly to keep elaboration of totalization small; the theorem specializes it to the recorded fixed-ring pro-etale derived tensor, definitionally curriedTensor. No abstract-category theorem or additional hypothesis is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b59a9168",
+  "group": "NW",
+  "result": "pass",
+  "note": "Node unchanged except the new lean record; lean.statement matches the file verbatim. The tensor is curriedTensor on DerivedCategory(Sheaf(ProEt.topology X)(ModuleCat.{u+1} A)), the same structure the recorded ProEtale.derivedTensor is defined as; A : Type(u+1) follows the project's size convention. The existential a is uniquely determined by its equation on every K-flat representative (Q,e): all later factors are isomorphisms (isIso_tensorLeftCounit) and K-flat representatives exist. The chain clause is Mathlib's ι_mapBifunctorShift₂Iso_hom_f with sign (-1)^(2dp)=1, in the s² direction, so a=(s²)⁻¹. Naturality in M and T is over all morphisms. G's hom and inv components are exactly θ∘(1⊗Π⁻¹)∘a and its inverse; I is universe-polymorphic; no extra hypotheses. Edge cases d=0, negative p, non-flat T, unbounded Q, empty I covered. Docstrings give source place and blueprint id with proof steps; only sorry; Worker report and Second reading sections present. Not recompiled per instruction (worker reports clean 5.1/5.9 s). Advisory: unused public import RingedSiteModules."
+ }
+}

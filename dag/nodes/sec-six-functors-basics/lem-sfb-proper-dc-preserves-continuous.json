@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-proper-dc-preserves-continuous",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "lem-sfb-dc-lower-star-preserves, proper-morphism case of its proof (the compactification argument reduces preservation to proper finiteness); finite normed-field coefficient case, by integral models and rationalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper direct image preserves bounded constructible complexes (finite extension E)",
+ "statement": "Fix a prime $\\ell$ and a field $k$ in which $\\ell$ is invertible. Let $E/\\mathbf Q_\\ell$ be a finite normed field extension with its norm extending the normalized $\\ell$-adic norm [def-weil-l-adic-coefficient-extension], and let $\\Lambda=\\underline E$ be the condensed ring $S\\mapsto C(S,E)$ [sk-def-sfb-condensed-ring]. For a scheme $T$, write $\\Lambda_T$ for the coefficient ring pulled back from the point [sk-def-sfb-pulled-back-coefficients] and $D(\\operatorname{Mod}_{\\Lambda_T})$ for the ordinary uncompleted derived category of internal module objects on $T_{\\mathrm{pro\\acute et}}$ [sk-def-sfb-module-derived-pushpull]. Let $Y$ be a Noetherian $k$-scheme (locally Noetherian and quasi-compact), and let $p:Z\\to Y$ be proper [def-weil-proper-morphism]. If $K\\in D(\\operatorname{Mod}_{\\Lambda_Z})$ is bounded constructible, meaning bounded cohomology whose modules are locally finitely presented on the pieces of finite locally closed stratifications [sk-def-sfb-bounded-constructible], then $Rp_*K\\in D(\\operatorname{Mod}_{\\Lambda_Y})$ is bounded constructible. No finite-type or separatedness hypothesis on $Y\\to\\operatorname{Spec}k$ is imposed, and $k$ may have characteristic zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/lem-sfb-dc-lower-star-preserves.md",
+  "place": "lem-sfb-dc-lower-star-preserves: the case of a proper morphism (proper base change theorem, finiteness clause), which the proof reduces to after compactifying; Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/ProperLowerStarEllAdic.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic, lines 67-74, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "The specified coefficient has IsEllAdicFinitenessCoefficient via its continuous, integral or algebraicClosure constructor, with exactly the given multiplication. Unpack bounded constructibility as boundedness of K and constructibility of each H^q(K). The latter puts every H^q(K) in constructibleCoproductClosure by le_weakSerreCoproductClosure; this replete property contains zero.",
+   "uses": [
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply properLowerStar_uniformBound_ellAdic to the given prime, coefficient, field, structure map, Noetherian target and proper morphism. Obtain one integer d bounding the images of all degree-zero objects in constructibleCoproductClosure. If K is at most b, the triangulated and shift-compatible total right derived functor and isLE_obj_of_isLE_of_homologyProperty give Rp_* K at most b+d. Its hypotheses are boundedness of K and the cohomology containment from the preceding step.",
+   "uses": [
+    "lem-sfb-noetherian-proper-heart-uniform-bound",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-bounded-heart-amplitude-devissage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If K is at least a, Functor.isGE_rightDerivedFunctor_obj, already proved in the public ConstructibleDirectImage dependency, gives Rp_* K at least a. This is the bounded-below comparison with R^+; the module heart is Grothendieck abelian, hence has enough injectives and K-injective resolutions, and the underived pushforward is additive. Thus Rp_* K is bounded with lower bound a and upper bound b+d. The bounded predicate does not require the displayed endpoints to be ordered, so it also covers the zero image and disjoint bounds.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply properLowerStar_constructible_cohomology_ellAdic with the same coefficient and geometric hypotheses to K and its original bounded-constructibility proof. Every cohomology object of Rp_* K is constructible. Pair this with the preceding boundedness to obtain boundedConstructible. No characteristic-positivity or finite-type assumption on aY is introduced.",
+   "uses": [
+    "lem-sfb-noetherian-proper-constructible-cohomology",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-noetherian-proper-heart-uniform-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-bounded-heart-amplitude-devissage",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sfb-noetherian-proper-constructible-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15, through the existing Noetherian proper-finiteness inputs; formal finite Postnikov devissage and bounded-below derived comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image along a proper morphism preserves bounded constructible l-adic complexes",
+   "results": "Scheme.Hom.isLocallyConstructible_image (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation), IsProper.* fields: constructible sets only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward along proper morphism preserves bounded constructible complexes of l-adic sheaves",
+   "results": "SheafOfModules.pushforward_obj_val, pushforward_assoc (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous): underived pushforward only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'IsConstructible|constructibleSheaf|PadicAlgCl' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "constructible sets (Mathlib/Topology/Constructible.lean, RingTheory/Spectrum/Prime/ConstructibleSet.lean), PadicAlgCl in NumberTheory/Padics/Complex.lean; no derived pushforward or constructible sheaves",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward preserves bounded constructible complexes of continuous l-adic sheaves on Noetherian schemes",
+   "results": "Returned: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, DerivedCategory",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|constructible.*(sheaf|module)|proper.*derived",
+   "results": "Returned: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward of constructible l-adic sheaves along a proper scheme morphism is bounded and constructible",
+   "results": "Returned: TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, AlgebraicGeometry.Scheme.Modules.pushforward, CategoryTheory.Functor.sheafPushforwardContinuous, SheafOfModules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforward_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility and finite cohomological dimension theorem for proper direct images in etale cohomology with l-adic coefficients",
+   "results": "Returned: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An embedding of a finite normed extension of the p-adic numbers into the algebraic closure is an isometry",
+   "results": "Returned: PadicComplex.norm_extends, PadicAlgCl.norm_extends, NumberField.InfinitePlace.Completion.isometry_extensionEmbedding, PadicComplex.nnnorm_extends, PadicComplex.coe_eq, NumberField.InfinitePlace.isometry_embedding, PadicAlgCl.coe_eq, AbsoluteValue.Completion.isometry_extensionEmbedding_of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "NormedAlgebra, AlgHom, Isometry",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "isometry.*[Aa]lg|[Aa]lg.*isometry|norm.*[Aa]lg[Hh]om|[Aa]lg[Hh]om.*norm",
+   "results": "Returned: Mathlib/Analysis/Normed/Algebra/Spectrum.lean, Mathlib/Analysis/Normed/Algebra/Spectrum.lean, Mathlib/Analysis/Normed/Algebra/Spectrum.lean, Mathlib/Analysis/Normed/Operator/Mul.lean, Mathlib/Analysis/Normed/Operator/Mul.lean, Mathlib/Analysis/Normed/Operator/Mul.lean, Mathlib/Analysis/Normed/Algebra/GelfandFormula.lean, Mathlib/Analysis/Normed/Algebra/Unitization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def lift|def equivRange|toContinuousLinearEquiv|finiteDimensional_range",
+   "results": "Returned: Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/Analysis/CStarAlgebra/Basic.lean, Mathlib/Analysis/CStarAlgebra/Basic.lean, Mathlib/Analysis/CStarAlgebra/Matrix.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic field extension embeds into an algebraically closed extension and finite dimensional linear equivalences are continuous",
+   "results": "Returned: LinearMap.toContinuousLinearMap, Field.embEquivOfIsAlgClosed, Field.instInhabitedEmb, Field.Emb, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed, NumberField.Embeddings.instNonemptyRingHom, LinearEquiv.extend, Module.End.toContinuousLinearMap",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed.lift",
+   "results": "Returned: IsAlgClosed.lift, Field.absoluteGaloisGroup.map_toFun_apply, Field.absoluteGaloisGroup.map_toFun_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of the p-adic numbers is continuously algebra isomorphic to a finite intermediate field in an algebraic closure",
+   "results": "Returned: PadicAlgCl, PadicAlgCl.isAlgebraic, PadicAlgCl.instCoePadic, PadicAlgCl.coe_eq, PadicComplex.coe_eq, PadicComplex.instAlgebraPadic, PadicComplex, PadicComplex.instIsScalarTowerPadicPadicAlgCl",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem.*lift|noncomputable.*lift",
+   "results": "Returned: Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "equivRange|finiteDimensional_range|finiteDimensional.*fieldRange",
+   "results": "Returned: Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/Differential/Liouville.lean, Mathlib/FieldTheory/Normal/Closure.lean, Mathlib/FieldTheory/Normal/Closure.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "def toContinuousLinearEquiv|theorem.*continuous",
+   "results": "Returned: 86, 153, 197, 203, 216",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "grep",
+   "query": "isAlgebraic_of_finite|isAlgebraic.*[Ff]inite|[Ff]initeDimensional.*[Ii]sAlgebraic",
+   "results": "Returned: Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite field extension has an algebra embedding into any algebraically closed extension field",
+   "results": "Returned: Field.instInhabitedEmb, Field.Emb, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed, Field.embEquivOfIsAlgClosed, Field.infinite_emb_of_transcendental, NumberField.Embeddings.instNonemptyRingHom, Field.embProdEmbOfIsAlgebraic, Field.isAlgebraic_of_finite_intermediateField",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, AlgHom",
+   "results": "Returned: IsAlgClosed.lift, IsAlgClosed.exists_aeval_eq_zero, Algebra.IsAlgebraic.range_eval_eq_rootSet_minpoly, IsAlgClosed.exists_aeval_eq_zero_of_injective, IsAlgClosed.surjective_domRestrict_of_isAlgebraic, IsAlgClosed.surjective_restrictDomain_of_isAlgebraic, Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed, spectrum.map_polynomial_aeval_of_nonempty",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional field extension embeds as an algebra homomorphism into an algebraically closed extension of the base field",
+   "results": "Returned: AlgHom.card, IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset, minpoly.AlgHom.fintype, FiniteField.nonempty_algHom_of_finrank_dvd, IsAlgClosed.lift, NumberField.Embeddings.instNonemptyRingHom, Field.instInhabitedEmb, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed",
+   "date": "2026-10-22",
+   "verdict": "no match for the proper bounded-constructible direct-image item; exploratory coefficient-field hits are already covered by lem-sfb-normed-coefficient-realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic",
+     "lines": [
+      64,
+      74
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/ProperLowerStarEllAdic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj"
+  ],
+  "statement": "theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Z)))\n    (hK : boundedConstructible _ K) :\n    boundedConstructible _ (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj K) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; the same clause is stated in blueprint form by det-thm-sfb-proper-base-change-rational; Sheaf.Paper.ProperBaseChangeRational.properPushforward_boundedConstructible_rational is our (sorried) version of the rational clause"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-dc-preserves-continuous",
+  "worker": "stage1",
+  "summary": "Q26 split the Noetherian proper finite-normed-field case using existing normed-coefficient realization, an actual integral model, the sibling integral proper theorem, the qcqs scalar comparison and scalar preservation. No new nodes. Removed the misleading standing-setting citation (which would impose positive characteristic and absolute finite type) and made the original upstream scope and internal-module predicate explicit. All cited statements were read and verbatim quotations recorded. Repair after the landing refusal: re-read the current reviewed integral sibling, match each of its explicit hypotheses in step 4, and replace its stale quotation; all other proof quotations still match current statements.",
+  "blueprint": "Realizes the proper-finiteness reduction of lem-sfb-dc-lower-star-preserves and the integral-to-rational argument of sk-prop-open-coefficients, unit step 3, with the proper finiteness input referenced by step 1; for Noetherian schemes this uses the same integral-model and rationalization route. det-thm-sfb-proper-base-change-rational clause (2) overlaps only in the narrower standing-scheme setting, so it is not recorded as an exact same_as.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic properness consequences needed to apply qcqs coefficient comparison and finite-type Noetherian permanence; does not replace the integral-model/rationalization route."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-constructible-integral-model",
+    "why": "Generic integral-model theorem for the actual locally finitely presented internal modules on every topologically Noetherian scheme; the unit's standing-scheme generators do not state this Noetherian scope."
+   },
+   {
+    "node": "def-weil-pbc-continuous-integral-coefficients",
+    "why": "Names the actual closed-unit-ball coefficient inclusion and its derived scalar extension, so the model and push comparison use the same functor."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-integral-push-comparison",
+    "why": "Generic qcqs scalar-extension/pushforward comparison with no standing-field or finite-type hypothesis; this implements the unit's rationalization step for the Noetherian proper input."
+   },
+   {
+    "node": "lem-sfb-extend-scalars-bounded-constructible",
+    "why": "Generic exact integral-to-field scalar extension preserves the required bounded stratified local-finite-presentation predicate for any scheme; the unit does not give this coefficient operation itself."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-f2077c577",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-f2077c577 (reviewer sub-agent of L); spot-checked: This re-push (f2077c57) follows the landing refusal of ad9a9818, which I had PASSed after a full read. The landing refused it because the cited lem-sfb-proper-dc-preserves-integral statement had changed: the Q37 FIX merged at 06:10. A JSON diff of the two snapshots' item nodes shows that only the step 4 text and an appended split_report.summary sentence changed. The statement, stmt_deps, proof_deps, the other five steps, tool_uses and searches are byte-identical. I compared all 9 cited statements across the two snapshots. Eight are unchanged. The integral sibling changed, and its statement here is identical to the one in live, side-live and the sheaf DAG. The item is still unsplit in all three DAGs, so it is not superseded. No repair note names it, and it is not dropped. There are no new nodes. STEP 4: the current integral statement asks for a prime ℓ invertible in the field k; E ⊆ Q̄_ℓ finite; Λ = <u>O_E</u>; Y quasi-compact and locally Noetherian over k; p proper; K bounded constructible. Each hypothesis is supplied. ℓ and k come from the item. F ⊆ Q̄_ℓ finite comes from the normed realization of step 2. C(S, O_F) for the induced norm is literally <u>O_F</u>, which is the A of step 3. Y matches the item's own definition of Noetherian. p is proper by hypothesis, and M is bounded constructible by step 3. The conclusion is that N = Rp_*M is bounded constructible. Correct. The integral sibling no longer cites the char-p setting, so the earlier maintainer note about aligning the sibling scopes is resolved. Steps 1–3, 5 and 6, the edge cases (Z empty, p = id, k = ℚ with Y = Spec ℚ(t), ramified E), the generic tool_uses and the no-SGA route are as checked in ad9a9818. The new sibling stmt_deps (quasi-compact scheme, locally Noetherian) are definitions, so no cycle."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261023T131931-L-2173142",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properLowerStarHeartHypotheses_continuousMapRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properLowerStarHeartHypotheses_padicAlgClRingObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properLowerStarHeartHypotheses_padicIntegersRingObj"
+  ],
+  "sorry_after": []
+ }
+}

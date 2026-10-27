@@ -1,0 +1,171 @@
+{
+ "id": "lem-sfb-quasiseparated-space-atlas-dimension",
+ "kind": "statement",
+ "title": "Topological dimension computed on a surjective etale atlas of a quasi-separated space",
+ "statement": "Let $k$ be a field [def-weil-field], let $Y$ be an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum], and assume its diagonal $Y\\to Y\\times_kY$ is quasi-compact: after every scheme test, inverse images of quasi-compact opens are quasi-compact. Give $|Y|$ its atlas topology [def-a1-space-point-topology]. For every representable surjective etale map $a:U\\to Y$ from a scheme $U$ [def-pc-scheme], the topological Krull dimensions [def-kun-topological-krull-dimension] satisfy $\\dim|Y|=\\dim|U|$. The equality includes infinite dimension and the empty space, whose dimension is $-\\infty$. No finite type, quasi-compactness, equidimensionality or reducedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0A4J (lemma-dimension-decent-space), parts (1) and (2), with quasi-separated implies decent in Tag 03JX (lemma-bounded-fibres), implications (eta) => (epsilon) => (delta) => (gamma); dimensions on charts are defined by spaces-properties.tex Tags 04N5 (definition-dimension-at-point) and 04N6 (definition-dimension)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=T=\\operatorname{Spec}k$, with $T\\to B$ the identity and $f:Y\\to B$ the given structure map. Write $P=Y\\times_B B$. On every scheme test $V$, the projection $p:P\\to Y$ sends $(y,b)$ with $f(y)=b$ to $y$; its inverse sends $y$ to $(y,f(y))$. These are inverse natural transformations [def-trf-algebraic-space]. Thus $P$ is canonically $Y$, and the atlas $a$ becomes $\\widetilde a:U\\to P$, $u\\mapsto(a(u),f(a(u)))$. On each scheme test this is the same atlas projection, so it is representable surjective etale. The diagonal of $f$ is exactly the quasi-compact diagonal in the hypothesis.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0A4J (lemma-dimension-decent-space), specialized via lem-sfb-space-etale-atlas-topological-dimension to the identity base change of Spec k."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-etale-atlas-topological-dimension] with $X=Y$, $B=T=\\operatorname{Spec}k$, $T\\to B=\\operatorname{id}$, and atlas $\\widetilde a:U\\to P$. Its sole geometric hypothesis on $f$ is quasi-separatedness, verified in step 1. Its conclusion is $\\dim|P|=\\dim|U|$, including empty spaces and infinite dimension; it imposes no finite-type or quasi-compactness assumption on either $Y$ or $U$.",
+   "uses": [
+    "lem-sfb-space-etale-atlas-topological-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0A4J (lemma-dimension-decent-space), specialized via lem-sfb-space-etale-atlas-topological-dimension to the identity base change of Spec k."
+   }
+  },
+  {
+   "text": "The inverse natural transformations $p$ and $p^{-1}$ identify field-valued point classes bijectively. They also identify their atlas topologies: a scheme test $V\\to P$ is representable etale exactly when its composite $V\\to Y$ is, since the scheme-test pullbacks are the same. Hence the inverse-image tests defining open subsets [def-a1-space-point-topology] are identical, so $|p|$ is a homeomorphism. By [lem-weil-pbc-homeomorphism-krull-dimension], $\\dim|P|=\\dim|Y|$. Combining with step 2 gives $\\dim|Y|=\\dim|U|$.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/topology.tex",
+    "place": "Tag 03BX (lemma-topology-points), atlas topology; Tag 0055 (definition-Krull), invariance under the displayed homeomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-etale-atlas-topological-dimension",
+  "def-a1-space-point-topology",
+  "lem-weil-pbc-homeomorphism-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Identity-base-change specialization of the existing DAG comparison lem-sfb-space-etale-atlas-topological-dimension (Tags 0A4J, 0A4H and 03JX); the testwise identification is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective etale scheme atlas of a quasi separated algebraic space has the same topological Krull dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R], topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R\", \"doc\": \"For any commutative semiring $ R $, the Krull dimension of the prime spectrum $ \\\\operatorname{Spec}(R) $ as a topological space (with the Zariski topology) is equal to the Krull dimension of $ R $ as \"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"ringKrullDim_le_of_surjective\", \"module\": \"Mathlib/RingTheory/KrullDimension/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] (f : R →+* S),\\n  Function.Surjective ⇑f → ringKrullDim S ≤ ringKrullDim R\", \"doc\": \"For any surjective ring homomorphism $ f : R \\\\to S $ between commutative semirings, the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq \\\\dim(R) $, where $ \\\\dim $ denotes the Krull dimension measured\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"ringKrullDim_succ_le_of_surjective\", \"module\": \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  Function.Surjective ⇑f → ∀ {r : R}, r ∈ nonZeroDivisors R → f r = 0 → ringKrullDim S + 1 ≤ ringKrullDim R\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a surjective ring homomorphism. If there is a non-zero-divisor $r \\\\in R$ in the kernel of $f$ (i.e., $f(r) = 0$), then the Krull dimension\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale and ring/topological dimension results do not compare an algebraic space with an etale scheme atlas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological dimension of a decent algebraic space equals dimension computed on etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R], topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R\", \"doc\": \"For any commutative semiring $ R $, the Krull dimension of the prime spectrum $ \\\\operatorname{Spec}(R) $ as a topological space (with the Zariski topology) is equal to the Krull dimension of $ R $ as \"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale and ring/topological dimension results do not compare an algebraic space with an etale scheme atlas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale and ring/topological dimension results do not compare an algebraic space with an etale scheme atlas"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|DecentSpace|topologicalKrullDim.*[eE]tale|[eE]tale.*topologicalKrullDim",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale and ring/topological dimension results do not compare an algebraic space with an etale scheme atlas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective etale scheme atlas preserves the topological Krull dimension of a quasi separated algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"topologicalKrullDim\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"(T : Type*) [TopologicalSpace T] : WithBot ℕ∞\", \"doc\": \"The Krull dimension of a topological space $ T $ is defined as the Krull dimension of the preorder of irreducible closed subsets of $ T $. This is the supremum of the lengths of all strictly increasin\"}\n  {\"name\": \"IsHomeomorph.topologicalKrullDim_eq\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"(f : X → Y) (h : IsHomeomorph f) : topologicalKrullDim X = topologicalKrullDim Y\", \"doc\": \"If two topological spaces are homeomorphic, then their topological Krull dimensions are equal. Specifically, for a homeomorphism $ f : X \\\\to Y $, the Krull dimension of $ X $ coincides with that of $ \"}\n  {\"name\": \"ringKrullDim_le_of_surjective\", \"module\": \"Mathlib.RingTheory.KrullDimension.Basic\", \"type\": \"(f : R →+* S) (hf : Function.Surjective f) : ringKrullDim S ≤ ringKrullDim R\", \"doc\": \"For any surjective ring homomorphism $ f : R \\\\to S $ between commutative semirings, the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq \\\\dim(R) $, where $ \\\\dim $ denotes the Krull dimension measured\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [Surjective f] : Function.Surjective f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"IsClosedEmbedding.topologicalKrullDim_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : Y → X},\\n  Topology.IsInducing f → topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ Y $ is a topological space equipped with the topology induced by a map $ f : Y \\\\to X $, then the topological Krull dimension of $ Y $ is less than or equal to the topological Krull dimension of $\"}\n  {\"name\": \"IsInducing.topologicalKrullDim_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"{f : Y → X} (hf : IsInducing f) : topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ f : Y \\\\to X $ is an inducing map (i.e., the topology on $ Y $ is the coarsest making $ f $ continuous), then the topological Krull dimension of $ Y $ is less than or equal to the topological Krul\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.Surjective f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map on topological spaces is surjective, then $ f $ is a surjective morphism of schemes.\"}\n  {\"name\": \"Order.krullDim_le_of_strictComono_and_surj\", \"module\": \"Mathlib.Order.KrullDimension\", \"type\": \"(f : α → β) (hf : ∀ ⦃a b⦄, f a < f b → a < b) (hf' : Function.Surjective f) : krullDim β ≤ krullDim α\", \"doc\": \"If $ f : \\\\alpha \\\\to \\\\beta $ is a strictly monotonic function (i.e., $ f a < f b $ implies $ a < b $) and surjective, then the Krull dimension of $ \\\\beta $ satisfies $ \\\\mathrm{krullDim}(\\\\beta) \\\\leq \\\\ma\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale and ring/topological dimension results do not compare an algebraic space with an etale scheme atlas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-dimension-base-change",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Relative-dimension base-change and covering detection in quot-lemma-curves-fibred-in-groupoids and quot-lemma-curves-stack. Dimension comparison needed to pass from geometric-space fibres to their surjective etale scheme atlases.",
+   "via": [
+    "lem-sfb-space-relative-dimension-base-change",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiseparated-space-atlas-dimension",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger atlas-dimension comparison after arbitrary scheme base change. Wrote out the identity fibre-product, atlas and topology identifications, checked the diagonal hypothesis and all empty/infinite cases. No new nodes and no statement correction. All five existing Mathlib search queries were rerun and their hits read; none states this algebraic-space theorem.",
+  "blueprint": "Supports the recorded det-thm-sf-ctf-stability-direct-images proof (3) dimension comparison in the curve-stack prerequisite. The latest blueprint proof (3) assembles direct images along a compactification; this technical prerequisite remains on the inherited dependency route. Step 2 reuses the stronger same-unit comparison instead of duplicating it. The ancestor command returns None, retained in blueprint.from.node; whole-blueprint searches for decent, atlas dimension, surjective etale atlas and 0A4J found no matching imported statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-f0469c16c",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-f0469c16c (reviewer sub-agent of L); spot-checked: I read the item, its 3 steps, every cited statement and the source 0A4J (decent-spaces.tex l.2727). With 03JX (quasi-separated implies decent) and 04N5/04N6 (chart dimension), the statement is correct and unchanged: no hypothesis added, and the -inf and infinite-dimension cases are included. There are no new nodes. Step 1 (elementary) identifies the sheaf fibre product Y x_{Spec k} Spec k with Y testwise, so the atlas stays representable, surjective and etale with the same scheme pullbacks, and the item's quasi-compact diagonal is f's quasi-separatedness. Step 2 cites the existing same-unit node lem-sfb-space-etale-atlas-topological-dimension (Q33, unsplit, proof_deps []). I read its full statement: B=T=Spec k with T->B=id meets every hypothesis, so there is no cycle and no tool_use. Step 3: the isomorphism of sheaves gives the same representable etale tests, so the atlas topologies (def-a1-space-point-topology) agree, and the Mathlib leaf IsHomeomorph.topologicalKrullDim_eq finishes the proof. Reducing the item to the stronger existing node avoids a second copy of 0A4J (C5). Citers lem-sfb-space-relative-dimension-base-change and lem-sfb-space-eventually-fibre-dimension are unaffected because the statement is unchanged. No repair note applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiseparatedSpaceAtlasDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.topologicalKrullDim_eq_atlas_of_quasiSeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiseparatedSpaceAtlasDimension.lean",
+  "statement": "theorem topologicalKrullDim_eq_atlas_of_quasiSeparated (k : Type u) [Field k] (Y : AlgebraicSpace (Spec (CommRingCat.of k))) (hqs : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj))) (U : Over (Spec (CommRingCat.of k))) (a : yoneda.obj U ⟶ Y.obj.obj) (ha : IsEtale a) (hs : IsSurjective a) : topologicalKrullDim (Point Y.obj.obj) = topologicalKrullDim U.left",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e00c0819",
+  "group": "NX",
+  "result": "pass",
+  "note": "Only lean field changed vs live (first delivery); statement verbatim; Worker report + Second reading by NX present; source/blueprint/proof-step docstrings; sorry only. Every clause matches: Y : AlgebraicSpace (Spec k); hqs = IsRepresentableWith QuasiCompact on prod.lift 𝟙 𝟙 = diagonal over Spec k on every scheme test (equivalent, not stronger, since diagonal already representable and QC iso-invariant); arbitrary U : Over (Spec k), a with IsEtale/IsSurjective (representability built in); pointTopologicalSpace = ⨆ coinduced = final topology of etale scheme maps (03BX); topologicalKrullDim equality in WithBot ℕ∞ keeps -∞/∞. No finiteness/QC/reducedness hypotheses; one universe forced by the Scheme.{u} API. Source 03JX (η)⇒decent and 0A4J(2) with 04N5/04N6 confirm; over Spec k relative = absolute quasi-separated. H4: IsAbsolutelyQuasiSeparated and etaleDimension are different notions, no duplicate. No compile (no change)."
+ }
+}

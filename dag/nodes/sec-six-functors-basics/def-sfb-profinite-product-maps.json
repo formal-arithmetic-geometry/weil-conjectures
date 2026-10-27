@@ -30,10 +30,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -73,20 +77,26 @@
   }
  ],
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.PointedLimitCech",
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.ProfiniteProductMaps",
   "declaration": "AlgebraicGeometry.Scheme.UniversalCover.profiniteProduct",
   "declarations": [
    "AlgebraicGeometry.Scheme.UniversalCover.profiniteProduct",
    "AlgebraicGeometry.Scheme.UniversalCover.profiniteProductBase",
    "AlgebraicGeometry.Scheme.UniversalCover.profiniteProductSection",
+   "AlgebraicGeometry.Scheme.UniversalCover.labelPower",
+   "AlgebraicGeometry.Scheme.UniversalCover.finiteLabelDiagram",
+   "AlgebraicGeometry.Scheme.UniversalCover.cumulativeLabel",
+   "AlgebraicGeometry.Scheme.UniversalCover.restrictedLabels",
+   "AlgebraicGeometry.Scheme.UniversalCover.labelMap",
    "AlgebraicGeometry.Scheme.UniversalCover.profiniteProductMap"
   ],
   "statement": "abbrev profiniteProduct (T : Scheme.{u}) (P : Profinite.{u}) : Scheme.{u}",
-  "branch": "newtargets-dag",
-  "by": "O1",
-  "date": "2026-10-21",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25",
   "existing": true,
-  "note": "H2/H12 repair: attach the unchanged, already published definitions from the theorem module. No new Lean declaration and no existence theorem is asserted by this definition node."
+  "note": "The four product definitions and five explicit finite-label helpers are moved verbatim from PointedLimitCech into a basic module, publicly re-exported there. Their names, signatures and terms are unchanged. This removes the proof import cycle with ProfiniteSchemeProductComponents; no mathematical definition changes.",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/ProfiniteProductMaps.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -103,5 +113,15 @@
   "group": "O1",
   "result": "pass",
   "note": "Re-delivery after the 508ed569 RETURN; both findings repaired. H2/H12: existing:true def-sfb-snc-residual-chart-data (SNCUniversalResidualCharts: SNCResidualChart, SNCParameterTower, SNCResidualRefinement, sncFullRootCoordinate etc.; statement matches the source, NL statement matches the fields) and def-sfb-profinite-product-maps (PointedLimitCech profiniteProduct/Base/Section/Map) now own the plain declarations; the item and both def nodes cite them and def-weil-proetale-inverse-image; setPullback/lowerStar replaced by proEtaleSheafInverseImage/DirectImage/Adjunction. H3: _scalarReduction binds Fact p.Prime, k with CharP, Over/LOFT/QC/IsSeparated and _hD like the main theorem. New moduleStalkLabel/SNCFiniteModuleStalkAction are real data pinned on all labels (End.mul order consistent); the commuting-with-action clause makes reduction explicit; R : Type v only generalizes. Statements verbatim, 3 sorry only in theorems, only lean/stmt_deps changed vs live, not dropped, no SGA. Compiles not reproduced; no fixes. Advisories: no def owner for UniversalCover.cover; def-sfb-full-parameter-root-tower should cite the new chart-data node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-216f2",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T061131-L-2400866",
+  "kind": "interface",
+  "note": "independent cc review: PointedLimitCech proofs + verbatim move of 9 helpers to ProfiniteProductMaps and the one-line import change in ProfiniteSchemeProductComponents, against the live clone, node lem-sfb-pointed-finite-etale-limit-cover, def-sfb-profinite-product-maps and the change record; sandbox compile of all three modules + #print axioms"
  }
 }

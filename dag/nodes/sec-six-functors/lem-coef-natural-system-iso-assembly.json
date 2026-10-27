@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-natural-system-iso-assembly",
+ "kind": "statement",
+ "title": "Natural assembly of compatible ordinary system isomorphisms",
+ "statement": "Fix independent site and coefficient universes t and u. For a site J on C:Type(t+1) with morphisms in Type t and an EssentiallySmall witness in max(u,t+1), with a strict tower B of commutative ring sheaves and quotient transitions τ [def-coef-semilinear-system-models], let F and G be functors from any category D to the ordinary system category. Suppose for every level n a natural isomorphism δ_n:F⋙evaluation(n)≅G⋙evaluation(n) is given, and its components commute with every transition n≤m. There exists a natural isomorphism ξ:F≅G such that evaluation(n)(ξ_P)=(δ_n)_P for every P and n. Only ordinary module systems occur; no derived equality is detected by evaluation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex, Tag 0941, strict coefficient systems and compatible maps."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "At each input object, apply the proved objectwise systemIsoOfEvaluation_exists to the finite isomorphisms and their transition squares.",
+   "uses": [
+    "lem-coef-system-iso-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each input arrow, evaluate the two naturality composites. The normalization of the assembled isomorphisms reduces their equality to naturality of δ_n. Evaluations are jointly faithful because they read every section of the sequence site. NatIso.ofComponents gives the natural isomorphism, with the same evaluation normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-system-iso-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 0941: ordinary compatible coefficient maps and their natural assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "assemble a natural isomorphism of functors from compatible isomorphisms on every coefficient evaluation",
+   "results": "Eight hits include NatIso.ofComponents and its component equations. This supplies the final natural-isomorphism constructor; objectwise semilinear assembly and joint faithfulness of coefficient evaluations still need the project lemma and proof.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Twelve hits: NatIso.ofComponents, app, hom_app, inv_app and uses in equivalences. Used NatIso.ofComponents, but no result assembles compatible semilinear evaluations naturally.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "JointlyFaithful|NatIso.ofComponents",
+   "results": "Twenty-five hits showing NatIso.ofComponents constructions in ordinary functor categories. Local source supplies systemIsoOfEvaluation_exists; the new proof adds naturality by sectionwise faithfulness.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryOpenRestrictionQuotient",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Ordinary natural system assembly in the open-factor coefficient compatibility.",
+   "via": [
+    "lem-sf-open-restriction-ordinary-quotient",
+    "lem-sf-open-restriction-augmented-descent",
+    "lem-sf-canonical-open-restriction-model",
+    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearNaturalIsoAssembly",
+  "file": "lean/Sheaf/Paper/SemilinearNaturalIsoAssembly.lean",
+  "declaration": "WeilConjectures.SemilinearSections.naturalIsoOfEvaluation_exists",
+  "statement": "theorem naturalIsoOfEvaluation_exists\n    {D : Type*} [Category D]\n    {C : Type (t + 1)} [Category.{t} C] (J : GrothendieckTopology C)\n    [EssentiallySmall.{max u (t + 1)} C]\n    (B : ℕ → Sheaf J CommRingCat.{max u (t + 1)}) (τ : ∀ n, B (n + 1) ⟶ B n)\n    (F G : D ⥤ SemilinearSections.Systems.{t + 1, t, max u (t + 1)} J B τ)\n    (δ : ∀ n, F ⋙ SemilinearSections.evaluation J B τ n ≅\n      G ⋙ SemilinearSections.evaluation J B τ n)\n    (ht : ∀ P {m n} (h : n ≤ m),\n      (SemilinearSections.transition J B τ h).app (F.obj P) ≫\n        (SemilinearSections.res (SemilinearSections.coefficientMap J B τ h)).map\n          ((δ n).hom.app P) =\n      (δ m).hom.app P ≫ (SemilinearSections.transition J B τ h).app (G.obj P)) :\n    ∃ ξ : F ≅ G, ∀ P n,\n      (SemilinearSections.evaluation J B τ n).map (ξ.hom.app P) =\n        (δ n).hom.app P",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-sf-open-restriction-ordinary-quotient; OpenSystems.restrictionSections vs change record + def-coef-semilinear-derived-calculus statement_change; finiteRestrictionMate_isIso vs its node (true, generator-pinned); 8 NOT RUN importers compiled OK against delivered SDC"
+ }
+}

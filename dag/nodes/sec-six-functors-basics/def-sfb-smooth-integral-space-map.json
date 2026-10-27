@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-smooth-integral-space-map",
+ "kind": "definition",
+ "title": "Smooth separated finitely presented maps with integral geometric fibres",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme, $T$ an $S$-scheme, and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Regard $T$ as its represented space and use the canonical Yoneda maps and sheaf fibre products [def-sfb-smooth-integral-group-space]. For a morphism $p:X\\to h_T$, define the smooth integral fibre condition by the existing chart tests [def-sfb-space-morphism-properties]: $p$ is smooth [def-sbc-smooth-morphisms], separated, locally of finite presentation [def-sbc-locally-finite-presentation], and both $p$ and its relative diagonal are quasi-compact. For every algebraically closed field $K$ in the scheme universe and $s:\\operatorname{Spec}K\\to T$, require the point space of $X\\times_T\\operatorname{Spec}K$ to be irreducible (hence nonempty) and every representable etale scheme chart of this fibre to be reduced [def-pc-reduced-scheme]. This is nonempty geometric integrality, in the same convention as the structural case. No group law or section is part of the definition. For every morphism $a:T\\prime\\to T$ of $S$-schemes, the base changed map is the actual second projection $X\\times_T T\\prime\\to h_{T\\prime}$ of that sheaf fibre product.",
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-reduced-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03ZE, 03KL and 042S; spaces-over-fields.tex Tag 0AD4; same geometric-fibre convention as def-sfb-smooth-integral-group-space, generalized to an arbitrary represented target."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth separated finitely presented morphism of algebraic spaces with nonempty integral geometric fibres",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.IsSmooth.casesOn, instLocallyOfFinitePresentationOfIsSmooth, IsSmooth, IsSmooth.mk, IsSmooth.recOn, quasiSeparated_iff_quasiSeparatedSpace, isProper_eq, isProper_iff. All concern scheme morphisms, not the general space map.",
+   "date": "2026-10-24",
+   "verdict": "No exact existing declaration; reuse the returned component notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.Smooth",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact existing declaration; reuse the returned component notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'LocallyFinite.*[Dd]ivisor|[Dd]ivisor.*LocallyFinite|SmoothIntegralSpaceMap|IsSupportedLocallyFiniteDivisor' lean/WeilConjectures lean/Sheaf; msearch.py grep with the same expression",
+   "results": "[grep] OK 0 hit(s); no matches in WeilConjectures or Sheaf.",
+   "date": "2026-10-24",
+   "verdict": "No exact existing declaration; reuse the returned component notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l locally-finite divisor definitions in dag/nodes; tools/blueprint_refs.py search locally finite divisor",
+   "results": "0 blueprint nodes match 'locally finite divisor'. Existing def-sfb-space-divisors restricts Weil divisors to finite support; def-sfb-smooth-integral-group-space treats only the structural projection. Neither gives the needed general interface.",
+   "date": "2026-10-24",
+   "verdict": "No exact existing declaration; reuse the returned component notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-integral-fibre-vertical-divisors",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Vertical divisors of a smooth morphism with geometrically integral fibres. Supporting definitions for this vertical-divisor statement.",
+   "via": [
+    "lem-sfb-smooth-integral-fibre-vertical-divisors",
+    "lem-sfb-regular-group-rigidified-line-extension",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothIntegralSpaceMap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SmoothIntegralSpaceMap",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SmoothIntegralSpaceMap",
+   "AlgebraicGeometry.AlgebraicSpace.integralSpaceBaseChangeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothIntegralSpaceMap.lean",
+  "statement": "def SmoothIntegralSpaceMap {S : Scheme.{u}} {X : AlgebraicSpace S} {T : Over S} (p : X ⟶ schemeSpace T) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccfbe7b74",
+  "group": "Q37",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccfbe7b74",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read the item, the 8 proof steps, the delivered and live declarations, and the 3 modules. Hypotheses match exactly: IsRegularScheme = locally Noetherian + regular; SmoothIntegralSpaceMap = smooth, separated, finite presentation (qc + qc diagonal), geometric fibres irreducible and reduced, same convention as the landed GroupSpaceIntegralFibres; V dense open. Every conclusion is rendered: X regular, X_V dense, X_B Noetherian and separated over Z for affine B, locally finite supported divisor groups with e fixed by the Cartier pullback relation, prime bijection r with |r z| = |p|^-1|z|, reduced irreducible inverse images, multiplicity-one singleton formula, unique Cartier for each Weil divisor, all opens, and every etale base change with exists-unique D' and a commuting square that allows prime splitting. Records: only lean and stmt_deps change (two new nodes plus six landed nodes); statement verbatim; new-node fields complete; no name clashes in live; no hollow defs (closure theorems sorried and stated in the node); docstrings complete. Notes: VerticalDivisorAffineFiniteness restates IsRegularNoetherianSeparated with equivalent content; helper-map owners reached only indirectly, accepted by preflight. Not recompiled per instructions."
+ }
+}

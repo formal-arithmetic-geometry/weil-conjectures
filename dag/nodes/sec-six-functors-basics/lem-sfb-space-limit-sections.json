@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-space-limit-sections",
+ "kind": "statement",
+ "title": "Global functions on affine inverse limits of qcqs spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces over $S$ with their fppf sheaves and small etale structure sheaves [def-trf-algebraic-space]. All indexing sets are small in the universes of [def-weil-size-convention]. A space is quasi-compact if it admits a surjective etale chart from a quasi-compact scheme; a morphism is quasi-compact if its pullback over every affine scheme test has quasi-compact source. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$, respectively the relative diagonal for a morphism, is quasi-compact. A morphism is affine if it is representable and its pullback over every affine scheme test has affine scheme source [pqf-def-affine-morphism]. Let $I$ be a small nonempty directed set, $(X_i)_{i\\in I}$ an inverse system of quasi-compact and quasi-separated algebraic spaces over $S$ with affine transition morphisms, and suppose the fppf sheaf $X=\\varprojlim_i X_i$ is an algebraic space with its specified projections. Write $A_i=\\Gamma(X_i,\\mathcal O_{X_i})$, with transition maps induced by the inverse-system morphisms. Pullback of functions induces an isomorphism of commutative rings $\\varinjlim_i A_i\\xrightarrow{\\sim}\\Gamma(X,\\mathcal O_X)$. Explicitly, every global function on $X$ comes from some $A_i$, and two elements of any $A_i$ with equal pullbacks to $X$ have equal images in $A_j$ for some $j\\ge i$. The colimit is the ring colimit [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SI (lemma-descend-section) in Situation 084R (situation-descent), specialized to the structure sheaf; no schematicity hypothesis on the stages."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-global-functions",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-quasifinite-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose $0\\in I$ and work on the directed tail $J=\\{i:i\\ge0\\}$. A compatible family on $J$ extends uniquely to $I$: for any $k$, choose $j\\ge k,0$ and push the $j$-component to $k$; a common upper bound of two choices proves independence. This works for inverse-system points and for cocones on the direct system of rings, so neither the limit nor its colimit universal property changes. Choose a representable surjective etale map $U_0\\to X_0$ with $U_0$ affine, using the finite-affine-atlas lemma (including its empty-space case). Set $R_0=U_0\\times_{X_0}U_0$. The fibre-product lemma makes $R_0$ a scheme and both projections representable etale. The affine-scheme lemma makes $U_0$ qcqs; the qcqs-source-products lemma, applied over $\\operatorname{Spec}\\mathbf Z$ to $U_0,U_0,X_0$, makes $R_0$ qcqs. It does not require $X_0$ separated.",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  },
+  {
+   "text": "For $i\\in J$ put $U_i=X_i\\times_{X_0}U_0$ and $R_i=X_i\\times_{X_0}R_0$. Associativity of sheaf fibre products identifies $R_i=U_i\\times_{X_i}U_i$. Affine locality and base change make $U_i\\to U_0$, $R_i\\to R_0$, and every transition map affine; thus all $U_i,R_i$ are schemes, all $U_i$ are affine, and all $R_i$ are qcqs. Affine-scheme qcqs also applies to every $U_i$. The scheme-limit theorem supplies scheme limits $U=\\varprojlim_J U_i$ and $R=\\varprojlim_J R_i$. Every $U_i\\to X_i$ is a representable surjective etale chart by base change of $U_0\\to X_0$.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  },
+  {
+   "text": "The specified fppf-sheaf limit identifies $U$ with $X\\times_{X_0}U_0$: on any scheme $T$, a map to this fibre product is a compatible family $T\\to X_i$ and one $T\\to U_0$ over $X_0$, exactly a compatible family $T\\to U_i$; the scheme-limit universal property identifies that family with $T\\to U$. The same test identifies $R=X\\times_{X_0}R_0=U\\times_XU$, with its two projections. These bijections are natural in $T$ and hence are isomorphisms of sheaves. Base change of the atlas now makes $U\\to X$ representable surjective etale. This argument uses only the assumed existence of $X$ and the scheme limits, not the parent lemma's assertion about algebraic-space limits.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  },
+  {
+   "text": "For a representable surjective etale scheme chart $V\\to Y$ of an algebraic space and $W=V\\times_YV$, the definition of the small etale structure sheaf gives\n$\\Gamma(Y,\\mathcal O_Y)=\\operatorname{Eq}(\\Gamma(V,\\mathcal O_V)\\rightrightarrows\\Gamma(W,\\mathcal O_W))$ as rings. Explicitly, a matching section on $V$ pulls back over each etale scheme $T\\to Y$ to a matching section on the etale cover $T\\times_YV\\to T$. The sheaf axiom glues it uniquely to a section on $T$. Uniqueness gives compatibility for every arrow of the small site, hence a global section; it also gives injectivity of restriction to $V$. Addition and multiplication commute with these restrictions. Apply this to $(Y,V,W)=(X_i,U_i,R_i)$ and $(X,U,R)$. The resulting equalizers commute with all transition pullbacks, since both maps are pullback along the two projections and fibre-product associativity commutes with these projections.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  },
+  {
+   "text": "Write $B_i=\\Gamma(U_i,\\mathcal O_{U_i})$, $C_i=\\Gamma(R_i,\\mathcal O_{R_i})$, and similarly $B,C$ at the scheme limits. Scheme section continuity applies to both systems: they are nonempty directed diagrams of qcqs schemes with affine transitions by step 2, with scheme limits by step 3. Thus $B=\\varinjlim B_i$ and $C=\\varinjlim C_i$, with representatives and eventual vanishing. For $a\\in\\Gamma(X,\\mathcal O_X)$, let $b\\in B$ be its restriction. Choose $b_i\\in B_i$ representing $b$. The difference $d_i=s_i^*b_i-t_i^*b_i\\in C_i$ pulls back to $s^*b-t^*b=0$. The eventual-vanishing clause for the $R_i$ system gives $j\\ge i$ with $d_i|_{R_j}=0$. The image $b_j$ therefore belongs to the equalizer of step 4, giving $a_j\\in A_j$. Its pullback to $X$ agrees with $a$ after restriction to $U$, so injectivity in step 4 proves equality. This proves representation of every global function.",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  },
+  {
+   "text": "If $a_i,a'_i\\in A_i$ have equal pullbacks to $X$, their restrictions $b_i,b'_i\\in B_i$ have difference with zero pullback to $U$. Scheme section continuity on the tail $j\\ge i$ gives a stage $j\\ge i$ at which that difference vanishes in $B_j$. Restriction $A_j\\to B_j$ is injective by step 4, so the images of $a_i,a'_i$ in $A_j$ agree. For two representatives starting at distinct indices, first push them to a common upper bound. Thus equality of functions is exactly eventual equality of representatives. No transition map is assumed injective or surjective.",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  },
+  {
+   "text": "The representatives and equality criterion prove the ring-colimit universal property directly. Given a ring $D$ and compatible homomorphisms $h_i:A_i\\to D$, define $h(a)=h_i(a_i)$ using a representative from step 5. Step 6 and a common upper bound show this is independent of the representative. Representing two functions at one common stage shows $h(a+a')=h(a)+h(a')$ and $h(aa')=h(a)h(a')$, and the representatives of $0,1$ show that $h$ is unital. Every function has a representative, so $h$ is the unique map extending the $h_i$. Hence the actual pullback cocone with apex $\\Gamma(X,\\mathcal O_X)$ is a colimit in commutative rings. Uniqueness of colimits identifies the canonical map in the statement with an isomorphism, and steps 5--6 are exactly its two explicit clauses. Cofinality from step 1 restores the original index set $I$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-affine-locality",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SI (lemma-descend-section), specialized to the structure sheaf; Situation 084R (situation-descent)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on an inverse limit of quasi compact quasi separated algebraic spaces with affine transitions are the filtered colimit of global functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structure sheaf global sections commute with affine inverse limits of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso (X.presheaf.obj (Opposite.op U))).hom\\n      (AlgebraicGeometry.Scheme.Hom.app hU.fromSpec U) =\\n    (AlgebraicGeometry.Spec (X.presheaf.obj (\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the composition of the canonical isomorphism $ \\\\Gamma(\\\\operatorname{Spec}(\\\\Gamma(U)), \\\\mathcal{O}) \\\\to \\\\Gamma(U, \\\\mathcal{O}_X) $ with the morphism i\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.algebraMap_Spec_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {R : CommRingCat} {U : (AlgebraicGeometry.Spec R).Opens},\\n  algebraMap ↑R ↑((AlgebraicGeometry.Spec R).presheaf.obj (Opposite.op U)) =\\n    CommRingCat.Hom.hom\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso R).inv\\n        ((AlgebraicGeometry.Spec R).presheaf.map (Categ\", \"doc\": \"The canonical algebra homomorphism from a commutative ring $ R $ to the ring of sections $ \\\\Gamma(\\\\operatorname{Spec}(R), U) $ over an affine open subset $ U $ is equal to the composition of the inver\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_app_self_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U)\\n  (x : CategoryTheory.ToType (X.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app hU.fromSpec U)) x =\\n    (CategoryTheory.ConcreteCategory.hom\\n        ((Algeb\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, the application of the canonical embedding morphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\to X $ at any element $ x $ in the global sections $ \\\\Gamma(U)\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.ΓSpecIso\\n          { carrier := MvPolynomial n ↑(S\", \"doc\": \"When the base scheme $ S $ is affine, the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the entire space to the\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat X.toΓSpecSheafedSpace.hom.base).obj X.presheaf).obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      Z),\\n\", \"doc\": \"For any locally ringed space $X$ and element $r$ in its global sections $\\\\Gamma(X)$, the composition of the canonical localization morphism $\\\\Gamma(X)_r \\\\to \\\\mathcal{O}_X(D(r))$ with the pushforward s\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U),\\n  CategoryTheory.CategoryStruct.comp hU.fromSpec X.toSpecΓ =\\n    AlgebraicGeometry.Spec.map (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)\", \"doc\": \"For a scheme $X$ and an affine open subset $U \\\\subseteq X$, the composition of the inclusion morphism $\\\\operatorname{Spec}(\\\\Gamma(U)) \\\\to X$ with the unit morphism $X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X)\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_app_self\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U),\\n  AlgebraicGeometry.Scheme.Hom.app hU.fromSpec U =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso (X.presheaf.obj (Opposite.op U))).inv\\n      ((AlgebraicGeometry.Spec (X.presheaf.obj (O\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the application of the canonical embedding morphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\to X $ to $ U $ corresponds to the composition of the inverse o\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj\\n                (O\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Γ\", \"PreservesColimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "grep",
+   "query": "(algebraic.?space|global.*section.*colimit|Γ.*[Cc]olimit)",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"974\", \"text\": \"  have : PreservesColimit D.op Scheme.Γ := ⟨fun hc ↦ nonempty_isColimit_Γ_mapCocone D _ hc.unop⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"87\", \"text\": \"instance preservesColimitsOfSize_algΓ : PreservesColimitsOfSize.{w, v} (algΓ R) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"177\", \"text\": \"/-- `Scheme.Γ : Schemeᵒᵖ ⥤ CommRingCat` preserves colimits of diagrams consisting of\"}\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of the structure sheaf commute with inverse limits of qcqs algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ(Spec R, ⊤) ≅ R\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": (ΓSpecIso R).inv = StructureSheaf.toOpen R ⊤\", \"doc\": \"The global sections of the structure sheaf on the affine scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Schemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition of the opposi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"{R S : CommRingCat} [IsLocalRing S] (φ : R ⟶ S) :\\n  (Spec R).presheaf.germ ⊤ _ trivial ≫ stalkClosedPointTo (Spec.map φ) = (ΓSpecIso R).hom ≫ φ\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γ_obj\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(X : LocallyRingedSpace.{u}ᵒᵖ) : Γ.obj X = X.unop.presheaf.obj (op ⊤)\", \"doc\": \"For any locally ringed space $X$, the global sections functor $\\\\Gamma$ applied to $X$ yields the global sections of the structure sheaf of $X$, i.e., $\\\\Gamma(X) = \\\\mathcal{O}_X(X)$, where $\\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": LocallyRingedSpace.{u}ᵒᵖ ⥤ CommRingCat.{u}\", \"doc\": \"The functor $\\\\Gamma$ that maps each locally ringed space to its global sections (the value of its structure sheaf at the terminal object) in the category of commutative rings, constructed as the compo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ = Scheme.forgetToLocallyRingedSpace.op ⋙ LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?space|AlgebraicSpace|nonempty_isColimit_Γ_mapCocone",
+   "results": {
+    "t": "2026-10-23T11:49:27Z",
+    "tool": "grep",
+    "query": "algebraic.?space|AlgebraicSpace|nonempty_isColimit_Γ_mapCocone",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+     "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean"
+    ],
+    "digest": "8b50bd0860bbdda6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits are for Scheme, not algebraic spaces; the scheme continuity theorem is used through the existing Mathlib leaf lem-weil-pbc-limit-global-sections-colimit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure sheaf global sections commute with affine inverse limits of algebraic spaces",
+   "results": {
+    "t": "2026-10-23T11:49:28Z",
+    "tool": "leansearch",
+    "query": "Structure sheaf global sections commute with affine inverse limits of algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.ΓSpecIso_inv",
+     "AlgebraicGeometry.LocallyRingedSpace.Γ_obj",
+     "AlgebraicGeometry.preservesLimit_rightOp_Γ",
+     "AlgebraicGeometry.StructureSheaf.to_global_factors_apply",
+     "AlgebraicGeometry.StructureSheaf.globalSectionsIso",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.Scheme.ΓSpecIso",
+     "AlgebraicGeometry.LocallyRingedSpace.𝒪"
+    ],
+    "digest": "299448aa1a94c0a1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits are for Scheme, not algebraic spaces; the scheme continuity theorem is used through the existing Mathlib leaf lem-weil-pbc-limit-global-sections-colimit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Γ\"",
+   "results": {
+    "t": "2026-10-23T11:49:28Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"Γ\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits are for Scheme, not algebraic spaces; the scheme continuity theorem is used through the existing Mathlib leaf lem-weil-pbc-limit-global-sections-colimit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on an inverse limit of quasi compact quasi separated algebraic spaces with affine transitions are the filtered colimit of global functions",
+   "results": {
+    "t": "2026-10-23T11:49:30Z",
+    "tool": "leanfinder",
+    "query": "Global functions on an inverse limit of quasi compact quasi separated algebraic spaces with affine transitions are the filtered colimit of global functions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone",
+     "AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj",
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType"
+    ],
+    "digest": "8a2a338434e0ccff"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits are for Scheme, not algebraic spaces; the scheme continuity theorem is used through the existing Mathlib leaf lem-weil-pbc-limit-global-sections-colimit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of regular functions identifies global sections on a limit of algebraic spaces with the equalizer of sections on limiting scheme charts",
+   "results": {
+    "t": "2026-10-23T11:51:36Z",
+    "tool": "leanfinder",
+    "query": "Etale descent of regular functions identifies global sections on a limit of algebraic spaces with the equalizer of sections on limiting scheme charts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType"
+    ],
+    "digest": "a9d53afa29d9e361"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits are for Scheme, not algebraic spaces; the scheme continuity theorem is used through the existing Mathlib leaf lem-weil-pbc-limit-global-sections-colimit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-limits-schematic-stages",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 07SF/07SQ/07SR: affine projections, eventual affine bases, and eventual schematic fibres; applies before any scheme-only limit lemma. Supporting lemma for the 07SF/07SQ/07SR proof: Global functions on affine inverse limits of qcqs spaces.",
+   "via": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-limit-sections",
+  "worker": "stage1",
+  "summary": "Q145 checked Tag 07SI against Situation 084R, audited project Lean and both Mathlib search phrasings, and supplied the atlas/overlap proof using only existing nodes. The scheme test of the assumed sheaf limit avoids a cycle through the parent lemma. Scheme continuity descends the overlap defect and detects equality; sheaf uniqueness glues sections. All original hypotheses and the statement are retained. No new nodes.",
+  "blueprint": "Supporting lemma below det-thm-sf-ctf-stability-direct-images, proof (3), via the inherited alteration/stable-moduli/07SF-07SQ-07SR chain; this split supplies precisely the 07SI global-functions input of the parent split, without changing a chapter or unit route. Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), read.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic 03H6 atlas choice for a quasi-compact algebraic space; the unit has no alternate atlas theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of space fibre products and base change of etale atlases; needed to perform the unit-supporting limit reduction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-ec65e5131",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-ec65e5131 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the Stacks source. The item is a correct specialization of Stacks spaces-limits Tag 07SI (Situation 084R) to F_0 = O; its statement is unchanged and it has no new nodes. The 7 steps follow the source's proof. Step 1: one affine atlas U_0 (03H6), R_0 is a scheme and qcqs (fibre-products node; qcqs-source-products over Spec Z). Step 2: U_i, R_i via affine base change and permanence, affine transitions, scheme limits by 01YX. Step 3: X×_{X0}U_0 = lim U_i by a T-point test, with no use of the parent, which avoids the cycle. Step 4: equalizer for a chart written out from the sheaf axiom of def-trf-algebraic-space. Steps 5-6: the 01Z0 Mathlib leaf (nonempty_isColimit_Γ_mapCocone, lines 842 and 744) applied to the U_• and R_• systems (eventual vanishing of the defect, injectivity). Step 7: ring colimit universal property. Every hypothesis checked: affine transitions, qcqs, nonempty directed tail, absolute quasi-separatedness. Edge cases checked: empty X_0, noninjective transitions, non-separated stages. proof_deps equals the union of the uses; no cycle. No duplicate: rg -L over dag/nodes for 07SI and 'global sections limit' found only the item, its parent, and scheme or module nodes. Mathlib searches cover all three kinds. Batch-5 flags: lem-trf-space-qc-finite-affine-atlas-refinement and lem-trf-space-fibre-products-etale-covers are generic algebraic-space foundations (03H6, 02X2). Their closures stay in sk-i-curve-zero atlas and fibre-product lemmas and never reach the trace formula, Poincaré duality or their proofs, so both are accepted as declared tool_uses. Advisory: no node names pullback of global functions along a non-étale space morphism; the notion was inherited from the original statement and functoriality is elementary. review_split.py in the snapshot reports 'no such node' only because it does not follow the symlinked chapter directories. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceLimitSections",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.globalFunctions_affine_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceLimitSections.lean",
+  "statement": "theorem globalFunctions_affine_limit {S : Scheme.{u}} {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (c : Cone D) (hc : IsLimit ((ObjectProperty.ι (IsAlgebraicSpace (S := S))).mapCone c)) (hqc : ∀ i : Iᵒᵖ, ∃ (U : Over S) (a : yoneda.obj U ⟶ (D.obj i).obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ i : Iᵒᵖ, IsAbsolutelyQuasiSeparated (D.obj i)) (haff : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), MapIsAffine (D.map f)) : IsIso (colimit.desc (D.op ⋙ globalFunctions) (globalFunctions.mapCocone c.op)) ∧ (∀ a : c.pt.globalFunctionRing, ∃ (i : Iᵒᵖ) (aᵢ : (D.obj i).globalFunctionRing), globalFunctionMap (c.π.app i) aᵢ = a) ∧ ∀ (i : Iᵒᵖ) (a b : (D.obj i).globalFunctionRing), globalFunctionMap (c.π.app i) a = globalFunctionMap (c.π.app i) b → ∃ (j : Iᵒᵖ) (hij : i.unop ≤ j.unop), globalFunctionMap (D.map (homOfLE hij).op) a = globalFunctionMap (D.map (homOfLE hij).op) b",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0089c9a27",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Item globalFunctions_affine_limit matches the node and Stacks 07SI/084R clause by clause. Hypotheses: small nonempty directed preorder I; D : Iᵒᵖ ⥤ AlgebraicSpace S with an fppf-sheaf limit cone; hqc inline atlas wording of the node; hqs via cited IsAbsolutelyQuasiSeparated; haff via cited MapIsAffine. Conclusions: IsIso of the actual colimit.desc of D.op ⋙ globalFunctions; every function comes from a stage; eventual equality with the correct A_i→A_j direction. No extra hypotheses; empty, singleton and non-qs-base cases covered; one universe u, rings in CommRingCat.{u+1} with the colimit from a Prop-valued hasColimitsOfSizeShrink instance. New def node def-sfb-space-global-functions: real data (all-test compatible Γ-families, precomposition pullback, functor laws proved by congrArg), sorried bijection to small-étale sections is true and no data is chosen from it; no existing algebraic-space Γ ring/functor in live or DAG (moduleStructureMap/sectionsMap are additive, not a duplicate); not in live, no race. Item diff vs live = lean record + 3 def-owner stmt_deps; both lean.statement fields verbatim; source/blueprint/7-step proof docstrings present; sorry only; no files changed, no compile. Advisories: the second reading is a worker self-review; no lemma yet relates globalFunctionMap to sectionsMap(moduleStructureMap f)."
+ }
+}

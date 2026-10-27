@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-galois-stable-subspace-descent",
+ "kind": "statement",
+ "title": "Galois-stable subspaces of a scalar extension descend",
+ "statement": "Let $k$ be a field [def-weil-field], let $L/k$ be an algebraic normal separable field extension [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension] (not necessarily finite), and put $\\Gamma=\\operatorname{Aut}_k(L)$. Let $M$ be any $k$-vector space and form $M_L=M\\otimes_k L$, with its $L$-vector space structure on the second tensor factor [def-weil-module-base-change, def-weil-pbc-module-tensor-product]. For $\\sigma\\in\\Gamma$, define $\\sigma_M(m\\otimes\\lambda)=m\\otimes\\sigma(\\lambda)$ and extend additively. Let $W\\subseteq M_L$ be an $L$-linear subspace such that $\\sigma_M(W)=W$ for every $\\sigma$. Define $W_0=\\{m\\in M:m\\otimes1\\in W\\}$, a $k$-linear subspace of $M$. Then the $L$-linear map $W_0\\otimes_kL\\to M_L$, $w\\otimes\\lambda\\mapsto w\\otimes\\lambda$, is injective and has image exactly $W$. Equivalently, it induces an isomorphism $W_0\\otimes_kL\\xrightarrow{\\sim}W$. There is no finite-dimensionality assumption on $M$ or $W$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.64, printed pp.580–581: continuous semilinear vector-space descent, restricted to a stable subspace of the canonical scalar-extension action; A.65 applies it to a defining ideal."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\iota(m)=m\\otimes1$. Bilinearity makes $\\iota$ $k$-linear, so $W_0=\\iota^{-1}(W)$ is a $k$-subspace. The tensor universal property [def-weil-pbc-module-tensor-product] gives $F:W_0\\otimes_kL\\to M\\otimes_kL$, $w\\otimes\\lambda\\mapsto w\\otimes\\lambda$; its formula makes it $L$-linear. Its image is the $L$-span $N$ of $\\iota(W_0)$: pure tensors generate the domain and $F(w\\otimes\\lambda)=\\lambda\\iota(w)$. Thus $N\\subseteq W$ because $W$ is $L$-linear.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581 (descent assertion); the finite-support proof below is written by the agent, not the Morita-equivalence proof in A.64."
+   }
+  },
+  {
+   "text": "Choose a $k$-basis $(e_i)_{i\\in I}$ of $M$ using [lem-weil-pbc-vector-space-basis-through-vector] with the empty prescribed set. By the basis clause of [def-weil-vector-space-scalar-extension], $(e_i\\otimes1)_{i\\in I}$ is an $L$-basis of $M_L$. Write $x=\\sum_i e_i\\otimes c_i$ in these unique, finitely supported coordinates, and let $s(x)=\\{i:c_i\\ne0\\}$. The formula for the action gives $\\sigma_M(x)=\\sum_i e_i\\otimes\\sigma(c_i)$. In particular $s(\\sigma_M(x))=s(x)$, since field automorphisms take nonzero elements to nonzero elements.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581 (descent assertion); the finite-support proof below is written by the agent, not the Morita-equivalence proof in A.64."
+   }
+  },
+  {
+   "text": "Fix a nonzero $x\\in W$ and put $S=s(x)$. Among nonzero $u\\in W$ with $s(u)\\subseteq S$, choose one whose support has least cardinality (the set is nonempty because it contains $x$). Pick $p\\in s(u)$ and divide $u$ by its nonzero $p$-coordinate, so that $c_p(u)=1$. For any $\\sigma\\in\\Gamma$, the vector $\\sigma_M(u)-u$ lies in $W$, has support contained in $s(u)$, and has zero $p$-coordinate. Minimality forces it to be zero. Uniqueness of coordinates therefore gives $\\sigma(c_i(u))=c_i(u)$ for all $i$ and $\\sigma$. Apply [lem-exc-etale-galois-fixed-field-subgroup] with its top extension $K=L$ and its intermediate field equal to the base field $k$: the subgroup fixing that intermediate field is all of $\\Gamma$, so its fixed field is $k$. (The hypotheses are precisely the algebraic, normal and separable hypotheses on $L/k$.) Thus $c_i(u)=a_i\\in k$; only finitely many $a_i$ are nonzero. Bilinearity gives $u=(\\sum_i a_ie_i)\\otimes1$. Since $u\\in W$, the vector $\\sum_i a_ie_i$ is in $W_0$ and $u\\in N$. This argument applies to every nonzero $x\\in W$ and supplies a vector $u\\in N\\cap W$ supported inside $s(x)$, with one specified coordinate $p$ equal to $1$.",
+   "uses": [
+    "lem-exc-etale-galois-fixed-field-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581 (descent assertion); the finite-support proof below is written by the agent, not the Morita-equivalence proof in A.64."
+   }
+  },
+  {
+   "text": "Prove $W\\subseteq N$ by strong induction on $|s(x)|$ for $x\\in W$. Empty support means $x=0\\in N$. Otherwise take the vector $u$ and index $p$ just constructed. If $b$ is the $p$-coordinate of $x$, then $y=x-bu\\in W$ has support contained in $s(x)\\setminus\\{p\\}$: both vectors are supported in $s(x)$ and the $p$-coordinate cancels. Hence the induction hypothesis gives $y\\in N$, and $x=y+bu\\in N$ since $u\\in N$ and $N$ is $L$-linear. Consequently $\\operatorname{im}(F)=N=W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581 (descent assertion); the finite-support proof below is written by the agent, not the Morita-equivalence proof in A.64."
+   }
+  },
+  {
+   "text": "To prove injectivity, choose a $k$-basis $B_0$ of $W_0$ and extend its image in $M$ to a $k$-basis $B$ of $M$, using [lem-weil-pbc-vector-space-basis-through-vector] twice. The image is $k$-linearly independent because $W_0\\hookrightarrow M$ is an injective subspace inclusion. By [def-weil-vector-space-scalar-extension], the tensors $b\\otimes1$ for $b\\in B_0$ form an $L$-basis of $W_0\\otimes_kL$, while their images under $F$ are part of the $L$-basis $b\\otimes1$ for $b\\in B$ of $M_L$. If $F(z)=0$, express $z$ as a finite combination of the former basis; independence of the latter forces every coefficient to be zero, so $z=0$. Thus $F$ is injective; together with its image $W$, it is the claimed isomorphism onto $W$. All coordinate sums used here are finite even when either vector space or the Galois extension is infinite.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64, printed pp.580–581 (descent assertion); the finite-support proof below is written by the agent, not the Morita-equivalence proof in A.64."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-scalar-extension",
+  "lem-exc-etale-galois-fixed-field-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.64, printed pp.580–581 (descent assertion); the finite-support proof below is written by the agent, not the Morita-equivalence proof in A.64."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Galois stable linear subspace of a scalar extended vector space descends to a subspace over the base field for an infinite algebraic Galois extension",
+   "results": "8 hits: Algebra.isInvariant_of_isGalois, mem_galBasis_iff, InfiniteGalois.mem_range_algebraMap_iff_fixed, InfiniteGalois.isOpen_iff_finite, Algebra.isInvariant_of_isGalois', InfiniteGalois.normal_iff_isGalois, galBasis, IsGalois.fixingSubgroup_normal_of_isGalois",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field and integral-closure invariants do not assert invariant-subspace descent; Submodule.baseChange_eq_span (Mathlib/LinearAlgebra/TensorProduct/Tower.lean:839) describes an already descended subspace, with no Galois-stability implication."
+  },
+  {
+   "tool": "grep",
+   "query": "(galois|semilinear).*(subspace|submodule|descent)|(subspace|submodule).*galois",
+   "results": "23 hits: Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/AffineSpace/AffineSubspace/Defs.lean, Mathlib/LinearAlgebra/Span/Defs.lean, Mathlib/LinearAlgebra/Span/Defs.lean, Mathlib/LinearAlgebra/Projectivization/Subspace.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Injective.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field and integral-closure invariants do not assert invariant-subspace descent; Submodule.baseChange_eq_span (Mathlib/LinearAlgebra/TensorProduct/Tower.lean:839) describes an already descended subspace, with no Galois-stability implication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois descent for invariant linear subspaces of tensor products of a vector space with a Galois extension field",
+   "results": "8 hits: Algebra.isInvariant_of_isGalois', IsGaloisGroup.isInvariant, Algebra.isInvariant_of_isGalois, IsGaloisGroup.fixedPoints_eq_bot, IsGaloisGroup.mk, IsGalois.finiteDimensional_of_finite, IsGaloisGroup.of_isGalois, IsGaloisGroup.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field and integral-closure invariants do not assert invariant-subspace descent; Submodule.baseChange_eq_span (Mathlib/LinearAlgebra/TensorProduct/Tower.lean:839) describes an already descended subspace, with no Galois-stability implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, TensorProduct, IsGalois",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field and integral-closure invariants do not assert invariant-subspace descent; Submodule.baseChange_eq_span (Mathlib/LinearAlgebra/TensorProduct/Tower.lean:839) describes an already descended subspace, with no Galois-stability implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear invariant submodule of L tensor over k M is generated over L by elements m tensor 1 in it, Galois descent of vector subspaces",
+   "results": "8 hits: Submodule.baseChange_eq_span, Module.Invertible.toSubmodule, Submodule.baseChange, Module.Flat.submoduleAlgebra, LieSubmodule.mem_baseChange_iff, Submodule.lTensorOne', Submodule.tensorEquivSpan, Submodule.rTensorOne'",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field and integral-closure invariants do not assert invariant-subspace descent; Submodule.baseChange_eq_span (Mathlib/LinearAlgebra/TensorProduct/Tower.lean:839) describes an already descended subspace, with no Galois-stability implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Galois invariant subspace of the scalar extension of an arbitrary vector space is spanned by vectors over the base field",
+   "results": "8 hits: Algebra.isInvariant_of_isGalois, mem_galBasis_iff, IsGaloisGroup.isInvariant, Algebra.isInvariant_of_isGalois', galBasis, IsGalois.mem_bot_iff_fixed, IsGalois.mem_range_algebraMap_iff_fixed, Algebra.IsInvariant.isInvariant",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fixed-field, invariant-ring, root-system, and Galois-connection results do not assert descent of a stable linear subspace. InfiniteGalois.mem_range_algebraMap_iff_fixed supplies a component already represented by lem-exc-etale-galois-fixed-field-subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "(Galois|galois|semilinear).*(subspace|submodule|descent)|(subspace|submodule).*galois",
+   "results": "23 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/RingTheory/Spectrum/Prime/Basic.lean, Mathlib/LinearAlgebra/Projectivization/Subspace.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/Geometry/Convex/Cone/Pointed.lean, Mathlib/LinearAlgebra/AffineSpace/AffineSubspace/Defs.lean, Mathlib/LinearAlgebra/Span/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fixed-field, invariant-ring, root-system, and Galois-connection results do not assert descent of a stable linear subspace. InfiniteGalois.mem_range_algebraMap_iff_fixed supplies a component already represented by lem-exc-etale-galois-fixed-field-subgroup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Galois stable subspace of a scalar extended vector space is defined over the fixed field",
+   "results": "8 hits: IntermediateField.fixedField.algebra, IsGaloisGroup.intermediateField, IsGalois.of_fixed_field, IsGaloisGroup.subgroup, IntermediateField.fixedField, IsGaloisGroup.fixedPoints_eq_bot, isGalois_bot, IsGalois.of_fixedField_eq_bot",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fixed-field, invariant-ring, root-system, and Galois-connection results do not assert descent of a stable linear subspace. InfiniteGalois.mem_range_algebraMap_iff_fixed supplies a component already represented by lem-exc-etale-galois-fixed-field-subgroup."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, TensorProduct, IsGalois",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fixed-field, invariant-ring, root-system, and Galois-connection results do not assert descent of a stable linear subspace. InfiniteGalois.mem_range_algebraMap_iff_fixed supplies a component already represented by lem-exc-etale-galois-fixed-field-subgroup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent linear subspaces invariant under automorphisms are generated by fixed vectors using minimal support",
+   "results": "8 hits: mem_galBasis_iff, IsGalois.mem_bot_iff_fixed, IsGalois.mem_range_algebraMap_iff_fixed, InfiniteGalois.mem_bot_iff_fixed, Algebra.IsInvariant.isInvariant, InfiniteGalois.mem_range_algebraMap_iff_fixed, RootPairing.Base.forall_mem_support_invtSubmodule_iff, FixedPoints.rank_le_card",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned fixed-field, invariant-ring, root-system, and Galois-connection results do not assert descent of a stable linear subspace. InfiniteGalois.mem_range_algebraMap_iff_fixed supplies a component already represented by lem-exc-etale-galois-fixed-field-subgroup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-galois-descent-affine-subgroups",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.6 proof of (a)⇒(b), used inside Theorem 16.33: descent of the unique diagonal kernel in present proof step 3. Linear descent input: Milne A.64 applied to the invariant defining-ideal subspace in A.65.",
+   "via": [
+    "lem-sfb-galois-descent-affine-subgroups",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-galois-stable-subspace-descent",
+  "worker": "stage1",
+  "summary": "Q139 checked Milne A.64–A.65 and the existing fixed-field and basis nodes. Statement unchanged. A five-step finite-support induction proves the image equality; basis extension proves injectivity. Every ingredient already has a DAG node, so no new nodes are created. Whole-item Mathlib searches found fixed-field facts but no invariant-subspace descent theorem.",
+  "blueprint": "The inherited provenance points through lem-sfb-galois-descent-affine-subgroups to det-thm-sf-ctf-stability-direct-images proof (3). These steps supply exactly the A.64 linear descent input named in blueprint.from.place. The current blueprint direct-image proof (3) and unit were read; no unit route is changed. blueprint_refs.py ancestor returns node=None for this existing created-node chain, retained rather than inventing an ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-b0f573372",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-b0f573372 (reviewer sub-agent of L); spot-checked: I read everything in full. The delivery is one commit touching only the item and its report. The item is unsplit in clones/live and clones/side-live, there is no repair note, and the statement and stmt_deps are byte-identical to live. The statement is true for arbitrary M and for possibly infinite algebraic normal separable L/k. Source checked: Milne A.64/A.65, printed pp.580-581 (PDF pp.590-591). A.64 is the semilinear descent equivalence and A.65 applies it to a stable ideal, matching how the parent lem-sfb-galois-descent-affine-subgroups uses the item (M=O(J), W=I). The proof is the standard minimal-support argument, honestly marked proof_origin agent. Step 1 (F exists, image N ⊆ W) is correctly elementary. Step 2: the basis comes from Basis.extend and the basis clause of def-weil-vector-space-scalar-extension. Step 3: the vector u has minimal support inside the fixed set s(x) and is normalised so c_p=1. Then σu−u lies in W with support ⊆ s(u)∖{p}, so it is 0. lem-exc-etale-galois-fixed-field-subgroup, with intermediate field k (no finiteness, hypotheses matching the item), puts the coefficients in k, so u lies in N. Step 4: strong induction with base case, y = x − c_p(x)·u. Step 5: injectivity via B_0 ⊆ B and the bases b⊗1. proof_deps equals the union of uses. All cited nodes are Mathlib leaves, so there is no route or tool_use issue and no SGA. Edge cases checked: M=0, W=0, W=M_L, L=k, ℂ/ℝ lines (stable and unstable), F̄_p/F_p, infinite-dimensional M. No duplicate: lem-sc-galois-invariant-vectors-span and lem-sc-matrix-descent-* are twisted finite-dimensional settings, lem-zl-ladic-invariant-subspace-descent is different, and lem-sfb-galois-closed-subscheme-descent is a citer. There are no new nodes. Search records are complete. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GaloisStableSubspaceDescent",
+  "declaration": "Submodule.galois_stable_subspace_descent",
+  "file": "lean/Sheaf/FieldTheory/GaloisStableSubspaceDescent.lean",
+  "statement": "theorem galois_stable_subspace_descent (k : Type u) (L : Type v) (M : Type w) [Field k] [Field L] [Algebra k L] [IsGalois k L] [AddCommGroup M] [Module k M] (W : Submodule L (L ⊗[k] M)) (hW : ∀ σ : L ≃ₐ[k] L, (W.restrictScalars k).map (σ.toLinearMap.rTensor M) = W.restrictScalars k) : Function.Injective (LinearMap.baseChange L ((W.restrictScalars k).comap (TensorProduct.mk k L M 1)).subtype) ∧ LinearMap.range (LinearMap.baseChange L ((W.restrictScalars k).comap (TensorProduct.mk k L M 1)).subtype) = W",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-395a47ad9",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Fresh S2 statement; only the item lean record differs from side-live (existing:false, own module). Clause-by-clause match: IsGalois k L = algebraic normal separable, no finiteness; Γ = L ≃ₐ[k] L; M arbitrary (independent universes); L ⊗[k] M is the recorded TensorProduct.comm convention of def-weil-module-base-change; σ_M = σ.toLinearMap.rTensor M; hW is equality of k-restricted carriers; W₀ = comap of TensorProduct.mk k L M 1; conclusion is Injective plus range = W of the canonical LinearMap.baseChange L W₀.subtype. Statement true for infinite M and L. Edge cases M=0, W=0, W=⊤, L=k checked by hand. No new definitions; name unique; no DAG node records IsGalois; only the theorem body is sorry; docstrings carry source and blueprint tag; lean.statement verbatim; report sections present; no stmt_dep or record changes. No compile run (no file changed)."
+ }
+}

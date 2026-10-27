@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-arithmetic-nodal-model-origin",
+ "kind": "definition",
+ "title": "Arithmetic nodal model, coefficient projection and origin predicate",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring. For $a\\in R$, write $A(R,a)=R[x_0,x_1]/(x_0x_1-a)$ for the existing nodal chart algebra [def-trf-strict-semistable-curve, def-weil-polynomial-ring]. Define $\\operatorname{constant}(R,a,c)$ to be the class of $c\\in R$, and $\\operatorname{coordinate}(R,a,i)$ to be the class of $x_i$ for $i\\in\\{0,1\\}$. For $\\pi\\in R$, define $\\operatorname{originIdeal}(R,a,\\pi)=(\\overline{x_0},\\overline{x_1},\\overline{\\pi})\\subset A(R,a)$. For every integer $n\\geq0$ put $M_n(R,\\pi)=\\operatorname{Spec}A(R,\\pi^n)$ [def-weil-affine-spectrum], and define its projection to $\\operatorname{Spec}R$ to be the spectrum morphism induced by the inclusion of coefficients $R\\to A(R,\\pi^n)$. For a point $o\\in M_n(R,\\pi)$ define $\\operatorname{IsOrigin}(R,\\pi,n,o)$ to mean that the prime ideal corresponding to $o$ is exactly $\\operatorname{originIdeal}(R,\\pi^n,\\pi)$. This is a predicate, not an assertion that this ideal is prime for arbitrary $R,\\pi,n$; no point is chosen. In the arithmetic nodal situation it specifies the point $(\\pi,x_0,x_1)$ without adding residue-field data.",
+ "stmt_deps": [
+  "def-trf-strict-semistable-curve",
+  "def-weil-polynomial-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDC (example-blowup), displayed coefficient map R -> R[x,y]/(xy-pi^n) and maximal ideal (pi,x,y); Tag 0CDE (lemma-blowup-at-worst-nodal), pointed etale comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Define the arithmetic nodal model Spec R[x,y]/(xy-pi^n), its projection and origin ideal",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, WeierstrassCurve.integralModel, AlgebraicGeometry.Spec.locallyRingedSpaceObj, AlgebraicGeometry.specTargetImageRingHom, StandardEtalePair.X, AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.toFun_asIdeal",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; reuse the landed DvrNodal definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine nodal model xy equals pi to the n and its origin",
+   "results": "8 hits: WeierstrassCurve.Affine.CoordinateRing.XClass, WeierstrassCurve.Affine.Point.zero_def, WeierstrassCurve.Jacobian.Point.toAffine_zero, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁, WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv, WeierstrassCurve.Affine.CoordinateRing.YClass, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂, WeierstrassCurve.Affine.Point",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep DvrNodal|originIdeal|strictNodalRing AlgebraicGeometry",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n DvrNodal|originIdeal|strictNodalRing lean/WeilConjectures lean/Sheaf",
+   "results": "No upstream WeilConjectures definition of DvrNodal; Sheaf/AlgebraicGeometry/DvrNodalChartBlowupCalculus.lean defines constant, coordinate, originIdeal, model, projection, IsOrigin at lines 57,63,69,76,82,98. StrictSemistableCurve.lean gives the underlying strictNodalRing. ValuationSymmetricNodalBlowup.lean has related symmetricNodal definitions.",
+   "date": "2026-10-24",
+   "verdict": "Exact landed declarations found and reused with existing:true; no duplicate definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n DvrNodal\\.(model|projection|IsOrigin|originIdeal|coordinate|constant) dag/nodes -g def-*.json; blueprint_refs.py search arithmetic nodal",
+   "results": "No definition-node matches for the six declarations; blueprint search: 0 blueprint nodes match arithmetic nodal. The theorem node lem-sfb-dvr-nodal-chart-blowup-calculus lists them as helpers but does not own their notion as a definition.",
+   "date": "2026-10-24",
+   "verdict": "New definition node supplies missing ownership; its Lean binding reuses the existing declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-point-blowup-projective-fibres",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; re-split of regularization: original steps 7--8 (projectivity and geometric exceptional fibres); definition prerequisite: arithmetic nodal affine model, coefficient projection and origin predicate for the pointed etale chart.",
+   "via": [
+    "lem-sfb-nodal-point-blowup-projective-fibres",
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrNodalChartBlowupCalculus",
+  "declaration": "AlgebraicGeometry.DvrNodal.model",
+  "declarations": [
+   "AlgebraicGeometry.DvrNodal.constant",
+   "AlgebraicGeometry.DvrNodal.coordinate",
+   "AlgebraicGeometry.DvrNodal.originIdeal",
+   "AlgebraicGeometry.DvrNodal.model",
+   "AlgebraicGeometry.DvrNodal.projection",
+   "AlgebraicGeometry.DvrNodal.IsOrigin"
+  ],
+  "statement": "def model (R : CommRingCat.{u}) (π : R) (n : ℕ) : Scheme.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by H2 on delivery 3a8563c2b22f. All six declarations are real definitions already landed in DvrNodalChartBlowupCalculus, independent of its theorem conclusions; read their full signatures, bodies and source docstrings. This node records only these definitions, not blowup_geometry or any other theorem. No source module is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28db20ddf",
+  "group": "Q44",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28db20ddf",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 3a8563c2. The Lean module is byte-identical to the earlier delivery; the item node differs from live only in lean and stmt_deps, which now cite the new definition node def-sfb-arithmetic-nodal-model-origin instead of the theorem node lem-sfb-dvr-nodal-chart-blowup-calculus. The new node is existing:true on the six landed plain definitions (constant, coordinate, originIdeal, model, projection, IsOrigin) in DvrNodalChartBlowupCalculus. Their bodies are real quotient and spectrum constructions that use no theorem conclusion. Its source (models.tex 0CDC, R[x,y]/(xy-pi^n) and (pi,x,y)) is verified, its stmt_deps are live definition nodes with no cycle, and no other definition node owns these declarations. Hypotheses, conclusions and edge cases were rechecked against the node with no mismatch. Sorry only; docstrings carry the source place, blueprint tag and proof steps. No file changed, so no compile."
+ }
+}

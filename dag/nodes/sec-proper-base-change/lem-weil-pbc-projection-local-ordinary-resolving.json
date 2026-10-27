@@ -1,0 +1,180 @@
+{
+ "id": "lem-weil-pbc-projection-local-ordinary-resolving",
+ "kind": "statement",
+ "title": "Ordinary localized projection pullback and resolving complexes",
+ "statement": "For schemes X,Y of universe u, f:X to Y, coefficient ring sheaves RY,RX of universe u+1, a coefficient inverse-image isomorphism c, a normalized Global datum g, and V in Y.ProEt, there exists an exact localized Operation o with coefficient at T to V equal to the original coefficient at T.left. There exists an OrdinaryTensor mu for o satisfying its pure-unit normalization; termwise pullback by o preserves flat-term K-flat complexes. All notions are those of [def-weil-pbc-ringed-projection-restriction-data]. No derived tensor models, tensor shifts, derived adjunction normalizations, or restriction comparisons are asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved unit-normalized underlying-set identification of pro-etale ring inverse image, compose it with c, and use g.coefficient_eq. Its inverse gives a set inverse-image presentation whose unit is exactly the underlying map of g.operation.coefficient.",
+   "uses": [
+    "lem-pur-proetale-unit-underlying-identifications"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+   }
+  },
+  {
+   "text": "Localize this presentation without changing site universes. Restriction of set sheaves is left adjoint to precomposition with Over.star. The product comparison identifies Over.star V followed by Over.post U with U followed by Over.star (U V). Uniqueness of composite left adjoints gives the localization isomorphism. Its unit equation follows from the two composite units, prodComparison_snd, and naturality of the global unit. Restrict the coefficient map sectionwise and conjugate the global presentation by this isomorphism.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+   }
+  },
+  {
+   "text": "Construct the actual module pullback from its existing right-adjoint existence theorem. The localized ring presentation identifies its underlying abelian sheaf with abelian inverse image, compatibly with units. Forgetting further to sets gives the module presentation. Underlying abelian inverse image is left exact and module forgetful reflects finite limits. Pushforward is additive sectionwise; adjunction gives additive pullback and finite-colimit preservation. The proved containing-universe Grothendieck theorem and the source-library K-injective theorem supply K-injective resolutions. These data form Operation with the unchanged restricted coefficient.",
+   "uses": [
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "lem-pur-signed-line-module-inverse-image-adjunction",
+    "lem-pur-signed-line-sheaf-pullback-forget",
+    "lem-pur-identified-ring-pullback-finite-limits",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+   }
+  },
+  {
+   "text": "Use algebraic_pullback_of_presentations to lift the specified set inverse image to the actual module pullback. Apply the already proved inverse_tensor_source_unit helper of the signed-line tensor theorem. Its binary monoidal comparison and source-unit pure-tensor equation are definitionally the iso and pure_unit fields of Operation.OrdinaryTensor.",
+   "uses": [
+    "lem-pur-signed-line-algebraic-pullback",
+    "lem-pur-signed-line-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+   }
+  },
+  {
+   "text": "Apply isKFlat_ringedToposPullback to this algebraic inverse image with identity scalar extension. Remove the identity scalar-extension model using systemScalarModelUnit. Transport K-flatness along the resulting complex isomorphism, and transport flatness degreewise along its evaluation isomorphisms. This gives exactly resolving preservation for arbitrary unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-proetale-unit-underlying-identifications",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-pur-signed-line-module-inverse-image-adjunction",
+  "lem-pur-signed-line-sheaf-pullback-forget",
+  "lem-pur-identified-ring-pullback-finite-limits",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-signed-line-algebraic-pullback",
+  "lem-pur-signed-line-pullback-tensor",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-system-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0, 03D2, 03D3 and 03EL; Cohomology on Sites Tag 0G7E. Composite-adjoint localization with a checked unit formula, followed by existing containing-universe module, tensor and K-flat APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact tensor functors preserving coproducts induce a tensor isomorphism on derived categories compatible with integer shifts",
+   "results": "mapDerivedCategory, its CommShift instance, exact-derived factors, commShiftMapCochainComplex. No normalized derived tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use exact-derived factorization, plus project tensor descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice site commutes with tensor products of sheaves of modules and derived tensor products",
+   "results": "Presheaf tensorObjMap, tensorObj_map_tmul, and general sheaf monoidal constructions; no matching tensor descent or localized exact operation.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "overFunctor, overFunctorMap, Scheme.Modules.overFunctorEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual slice restriction, with additional project theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*tensor|tensor.*overFunctor; mapDerivedCategoryFactors and mapBifunctorComparison in Mathlib, WeilConjectures and Sheaf",
+   "results": "Mathlib exact-derived factors and slice restriction. Project APIs include cochain tensor rigidity, tensorOverIso, K-flat restriction and signed total comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the combined normalized claim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalBaseData",
+  "group": "J4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "The locality step before the finite-complex argument; normalized localized tensor comparison for projection.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-base-data",
+    "lem-weil-pbc-ringed-projection-local-data",
+    "lem-weil-pbc-ringed-projection-local-model",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionLocalOrdinaryResolving",
+  "file": "lean/Sheaf/Paper/ProjectionLocalOrdinaryResolving.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localOrdinaryResolving_exists",
+  "statement": "theorem localOrdinaryResolving_exists {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)\n    (g : Global f R_Y R_X c) (V : Y.ProEt) :\n    ∃ o : Operation (Over.post (X := V) (proEtaleBaseChange f)) (R_Y.over V)\n        (R_X.over ((proEtaleBaseChange f).obj V)),\n      (∀ T : Over V, o.coefficient.hom.app (op T) =\n        g.operation.coefficient.hom.app (op T.left)) ∧\n      ∃ mu : o.OrdinaryTensor,\n        ∀ P, resolving (R_Y.over V) P →\n          resolving (R_X.over ((proEtaleBaseChange f).obj V))\n            ((o.pullback.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T135433-L-3707208",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

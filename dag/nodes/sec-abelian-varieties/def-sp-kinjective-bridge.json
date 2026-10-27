@@ -77,7 +77,140 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CochainComplex.KInjectiveResolution",
+     "module": "WeilConjectures.Algebra.Homology.KInjectiveResolution",
+     "lines": [
+      59,
+      69
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.rightDerived",
+     "module": "WeilConjectures.Algebra.Homology.KInjectiveResolution",
+     "lines": [
+      206,
+      211
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.rightDerivedHomology",
+     "module": "WeilConjectures.Algebra.Homology.KInjectiveResolution",
+     "lines": [
+      213,
+      217
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.exists_of_isStrictlyGE",
+     "module": "WeilConjectures.Algebra.Homology.KInjectiveResolution",
+     "lines": [
+      274,
+      284
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.nonempty_of_isGE",
+     "module": "WeilConjectures.Algebra.Homology.KInjectiveResolution",
+     "lines": [
+      286,
+      294
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.homologyRightDerivedFunctorPlusObjIso",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution",
+     "lines": [
+      47,
+      69
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.rightDerivedFunctorObjIso",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution",
+     "lines": [
+      74,
+      83
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolution.homologyRightDerivedFunctorObjIso",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution",
+     "lines": [
+      85,
+      96
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.KInjectiveResolutionChoice",
+     "module": "WeilConjectures.CategoryTheory.KInjectiveBridge",
+     "lines": [
+      45,
+      54
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "CochainComplex.grothendieckKInjectiveResolutionChoice",
+     "module": "WeilConjectures.CategoryTheory.KInjectiveBridge",
+     "lines": [
+      56,
+      66
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.rightDerivedComplexWithResolution",
+     "module": "WeilConjectures.CategoryTheory.KInjectiveBridge",
+     "lines": [
+      72,
+      82
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.rightDerivedCohomologyWithResolution",
+     "module": "WeilConjectures.CategoryTheory.KInjectiveBridge",
+     "lines": [
+      84,
+      95
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "pointers": [
   {
    "to": "lem-sp-kinjective-computes",
@@ -148,9 +281,13 @@
   "note": "arbitrary abelian C,D; resolution = QuasiIso map + Mathlib CochainComplex.IsKInjective (no second predicate; etale IsKInjectiveResolution abbrev inapplicable to general C, no generic bundled form upstream); Grothendieck existence from recorded kInjectiveResolutionFunctor data (#check'd); F Additive+PreservesFiniteLimits; K : CochainComplex.Plus; RvK = mapHomologicalComplex of r.complex; R^p = homology p, all p : Z; choice-independence deferred to lem-sp-kinjective-computes"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "A *K-injective resolution* of a complex $K$ is a quasi-isomorphism $K\\to I$\nwith $I$ K-injective: for every acyclic complex $A$ the complex\n$\\operatorname{Hom}(A,I)$ is acyclic. In a Grothendieck abelian category\n[def-sp-grothendieck-abelian] every bounded-below complex admits a\nK-injective resolution.\n\nThis carries a left exact additive functor [def-sp-left-exact-additive] from\nobjects to complexes. For $v:\\mathcal A\\to\\mathcal B$ left exact additive and\n$K\\in\\operatorname{Ch}^+(\\mathcal A)$, choose a K-injective resolution $K\\to\nI$ and set\n\n$$\n RvK:=v(I),\\qquad R^pv(K):=\\mathcal H^p(RvK),\n$$\n\na priori depending on the chosen resolution.\n\nUp to canonical isomorphism, $RvK$ does not depend on the choice of the\nK-injective resolution, and for an object $X$ placed in degree zero\n$R^pv(X)$ agrees with the right derived functor defined by injective\nresolutions in [def-sp-left-exact-additive]; this is proved in the lemma\nthat K-injective resolutions compute $Rv$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "A cochain complex $I$ in an abelian category (for instance of sheaves on an\nétale or pro-étale site) is *K-injective* if every morphism $A\\to I$ from an\nacyclic complex $A$ is homotopic to zero; equivalently, applying this to all\nshifts of $A$, for every acyclic complex $A$ the complex\n$\\operatorname{Hom}(A,I)$ is acyclic. A *K-injective resolution* of a complex\n$K$ is a quasi-isomorphism $K\\to I$ with $I$ K-injective. In a Grothendieck abelian category\n[def-sp-grothendieck-abelian] every bounded-below complex admits a\nK-injective resolution.\n\nThis carries a left exact additive functor [def-sp-left-exact-additive] from\nobjects to complexes. For $v:\\mathcal A\\to\\mathcal B$ left exact additive and\n$K\\in\\operatorname{Ch}^+(\\mathcal A)$, choose a K-injective resolution $K\\to\nI$ and set\n\n$$\n RvK:=v(I),\\qquad R^pv(K):=\\mathcal H^p(RvK),\n$$\n\na priori depending on the chosen resolution.\n\nUp to canonical isomorphism, $RvK$ does not depend on the choice of the\nK-injective resolution, and for an object $X$ placed in degree zero\n$R^pv(X)$ agrees with the right derived functor defined by injective\nresolutions in [def-sp-left-exact-additive]; this is proved in the lemma\nthat K-injective resolutions compute $Rv$.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

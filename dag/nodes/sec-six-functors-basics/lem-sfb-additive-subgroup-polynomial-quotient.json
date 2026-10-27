@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-additive-subgroup-polynomial-quotient",
+ "kind": "statement",
+ "title": "Monic additive polynomial quotient of a proper additive subgroup, with scalar equivariance",
+ "statement": "Let $k$ be a field [def-weil-field], and write $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ on commutative $k$-algebras [def-sc-gm-ga]. Let $N\\subsetneq\\mathbf G_a$ be a proper closed $k$-subgroup scheme [def-sc-group-scheme-subgroup, def-weil-closed-immersion]. There is a unique monic polynomial $P\\in k[T]$ of positive degree $n$ whose principal ideal is the defining ideal of $N$ in $k[T]$. It satisfies $P(0)=0$ and $P(X+Y)=P(X)+P(Y)$ in $k[X,Y]$. The morphism $P:\\mathbf G_a\\to\\mathbf G_a$ defined on $R$-points by $x\\mapsto P(x)$ is a faithfully flat finitely presented group-scheme homomorphism with scheme-theoretic kernel $N$, and induces an isomorphism from the fppf sheaf quotient $\\mathbf G_a/N$ to $\\mathbf G_a$. Here faithfully flat means that the coordinate-ring map makes its target a faithfully flat module over its source, and the quotient is the sheafification of $R\\mapsto R/N(R)$ for faithfully flat finitely presented coverings. If $G$ is an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], $\\eta:G\\to\\mathbf G_m$ is a homomorphism, and scalar multiplication through $\\eta$ preserves $N$ on all $k$-algebras, then\n$$P(\\eta_R(g)x)=\\eta_R(g)^nP(x)$$\nfor every commutative $k$-algebra $R$, $g\\in G(R)$, and $x\\in R$. Thus the induced action on the displayed quotient is the scalar action through $\\eta^n$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Exercise 14-3(a), printed p.301; endomorphisms of the additive group in 14.40; the equivariant exact sequence used in Theorem 15.34(d), printed p.319. The monic normalization gives the quotient character eta^n by comparison of leading coefficients."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "By the affine description of a closed immersion, write $N=\\operatorname{Spec}(k[T]/I)$ inside $\\mathbf G_a=\\operatorname{Spec}k[T]$. Properness gives $I\\ne0$. The identity belongs to $N(k)$, so every member of $I$ vanishes at $0$; hence $I\\ne k[T]$. Apply the polynomial principal-ideal-domain lemma to obtain $I=(f)$ with $f\\ne0$, and divide $f$ by its nonzero leading coefficient to get a monic generator $P$. A constant monic generator would be $1$, contradicting $I\\ne k[T]$, so $n=\\deg P\\ge1$; also $P(0)=0$. If $Q$ is another monic generator, write $Q=AP$ and $P=BQ$. Cancellation gives $AB=1$. Degrees of nonzero polynomial products add over the field, so $A,B$ are constants, and monicity gives $A=B=1$. Thus $P$ is unique.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga",
+    "def-sc-group-scheme-subgroup",
+    "lem-pur-polynomial-field-pid",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  },
+  {
+   "text": "Set $D(X,Y)=P(X+Y)-P(X)-P(Y)$. Expansion of the powers shows that every surviving monomial has both $X$-exponent and $Y$-exponent strictly below $n$: the pure powers cancel, and $P(0)=0$. Put $A=k[X]/(P(X))$ and $B=A[Y]/(P(Y))$. If $x,y\\in B$ are the two distinguished roots, then $P(x)=P(y)=0$, so $x,y\\in N(B)$. The subgroup condition on all $k$-algebras gives $x+y\\in N(B)$, hence $D(x,y)=0$. By the monic-quotient basis lemma over $A$, all coefficients of $D(x,Y)$ in the powers $1,y,\\ldots,y^{n-1}$ are zero in $A$. Each such coefficient comes from a polynomial in $X$ of degree below $n$, so the same basis lemma over $k$ makes every one of its coefficients zero. Thus $D=0$ in $k[X,Y]$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  },
+  {
+   "text": "The coordinate homomorphism $k[U]\\to k[T]$, $U\\mapsto P(T)$, defines the required morphism $q:\\mathbf G_a\\to\\mathbf G_a$. The polynomial identity just proved gives $q_R(x+y)=q_R(x)+q_R(y)$ for every $k$-algebra $R$, so it is a group-scheme homomorphism. Pulling back the zero section imposes the equation $P(T)=0$, giving $\\ker q=\\operatorname{Spec}k[T]/(P)=N$ as a closed subgroup scheme, including its scheme structure.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-sc-group-scheme",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  },
+  {
+   "text": "Put $C=k[U]$ and $E=C[T]/(P(T)-U)$. Evaluation $U\\mapsto P(T)$ induces $E\\to k[T]$; the reverse map sends $T$ to its class. They are inverse: they fix $T$, and in $E$ the class of $U$ equals $P(T)$. This is an isomorphism of $C$-algebras when $k[T]$ has structure map $U\\mapsto P(T)$. The relation is monic in $T$ of degree $n\\ge1$. Apply the monic-quotient faithful-tensor-coordinate lemma with base ring $C$ and degree $n$. It gives both the basis $1,T,\\ldots,T^{n-1}$ and faithful flatness of $C\\to k[T]$. The same presentation, with one generator and one relation, is a finite presentation of this algebra.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  },
+  {
+   "text": "By the affine flatness criterion $q$ is flat, and faithful flatness gives surjectivity of its spectrum map. The explicit presentation in the preceding step gives local finite presentation on the displayed affine chart. It also shows that $q$ is finite: over a principal open $D(h)\\subseteq\\operatorname{Spec}C$ the inverse-image ring is $C_h[T]/(P(T)-U)$ with the same finite basis, so its section module is finite locally on the target, as required by the affine definition of finiteness. Thus $q$ is finite, flat and locally of finite presentation, hence finite locally free. For completeness it is globally of finite presentation: a map between these affine schemes is affine and quasi-compact, and is separated (therefore quasi-separated); combine this with local finite presentation.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-integral-morphism",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  },
+  {
+   "text": "For the translation relation take $R_0=N\\times_k\\mathbf G_a$ with $s(z,x)=x$ and $t(z,x)=x+z$. Its map to $\\mathbf G_a\\times_{q,\\mathbf G_a,q}\\mathbf G_a$ is $(z,x)\\mapsto(x,x+z)$, with inverse $(x,y)\\mapsto(y-x,x)$: indeed additivity gives $P(y-x)=P(y)-P(x)=0$. These formulas are polynomial maps on the displayed closed subschemes and their composites are identities. Apply the finite-locally-free kernel-pair quotient lemma with base $\\operatorname{Spec}k$, $U=M=\\mathbf G_a$, and this $R_0$. All its hypotheses now hold, so $q$ identifies $\\mathbf G_a$ with the fppf sheafification of $H\\mapsto\\mathbf G_a(H)/N(H)$. On affine tests $H=\\operatorname{Spec}R$ this is exactly $R\\mapsto R/N(R)$ as in the statement. The isomorphism preserves addition since $q$ does.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-a1-fppf-kernel-pair-quotient-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  },
+  {
+   "text": "Fix a $k$-algebra $R$ and $g\\in G(R)$, and put $a=\\eta_R(g)\\in R^\\times$. In $B=R[T]/(P(T))$ let $t$ be the distinguished root and let $g_B$ be the image of $g$ by the structure map. Since $t\\in N(B)$, the assumed scalar stability on all $k$-algebras gives $at\\in N(B)$ and hence $P(at)=0$. The polynomial $Q(T)=P(aT)-a^nP(T)$ has zero $T^n$ coefficient and therefore degree below $n$. Its image in $B$ is zero. The monic-quotient basis lemma over $R$ makes all its coefficients zero, even when $R$ has nilpotents or is the zero ring. Evaluating $Q=0$ at any $x\\in R$ gives $P(ax)=a^nP(x)$. Consequently the quotient isomorphism of the preceding step intertwines the action through $\\eta$ with multiplication through $\\eta^n$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-sc-gm-ga",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "lem-pur-polynomial-field-pid",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-sc-group-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-a1-fppf-kernel-pair-quotient-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Exercise 14-3(a), printed p.301; Example 14.40, printed pp.292–293; Theorem 15.34(d), printed p.319. The following coefficient arguments supply the exercise and the scalar normalization.",
+  "note": "Milne states Exercise 14-3(a) without a solution; the coefficient-basis and scalar-equivariance arguments here are written by Q42, using the cited existing algebra and quotient nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every proper closed subgroup scheme of the additive group over a field is the kernel of a nonzero monic additive polynomial and the polynomial map is finite faithfully flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X], AlgebraicGeometry.Scheme.Hom.ker X.toSpecΓ = ⊥\", \"doc\": \"Let $X$ be a scheme whose underlying topological space is quasi-compact. Let $\\\\Gamma(X, \\\\mathcal{O}_X)$ be the ring of global sections of its structure sheaf. There is a canonical morphism of schemes \"}\n  {\"name\": \"ax_grothendieck_zeroLocus\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {K : Type u_1} {ι : Type u_2} [inst : Field K] [IsAlgClosed K] [Finite ι] (I : Ideal (MvPolynomial ι K))\\n  (p : ι → MvPolynomial ι K),\\n  have S := MvPolynomial.zeroLocus K I;\\n  Set.MapsTo (fun v i => (MvPolynomial.eval v) (p i)) S S →\\n    Set.InjOn (fun v i => (MvPolynomial.eval v) (p i)) S → Set.\", \"doc\": \"Let $ K $ be an algebraically closed field, $ \\\\iota $ an index type, and $ I $ an ideal in the polynomial ring $ K[\\\\iota] $. Let $ S $ denote the zero locus of $ I $, i.e., the set of all functions $ \"}\n  {\"name\": \"MvPolynomial.ker_evalₗ\", \"module\": \"Mathlib/FieldTheory/Finite/Polynomial\", \"type\": \"∀ (σ K : Type u) [inst : Fintype K] [inst_1 : Field K] [Finite σ], (MvPolynomial.evalᵢ σ K).ker = ⊥\", \"doc\": \"For a finite commutative ring $ K $ and type $ \\\\sigma $, the kernel of the $ K $-linear evaluation map on the submodule of multivariate polynomials $ K[\\\\sigma] $ with exponents in each variable at mos\"}\n  {\"name\": \"ax_grothendieck_of_locally_finite\", \"module\": \"Mathlib/FieldTheory/AxGrothendieck\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {R : Type u_3} [inst : Field K] [Finite K] [inst_2 : CommRing R] [Finite ι]\\n  [inst_4 : Algebra K R] [alg : Algebra.IsAlgebraic K R] (ps : ι → MvPolynomial ι R) (S : Set (ι → R)),\\n  Set.MapsTo (fun v i => (MvPolynomial.eval v) (ps i)) S S →\\n    Set.InjOn (fun v i => (\", \"doc\": \"Let $ K $ be a finite field, $ R $ a commutative ring algebraic over $ K $, and $ \\\\iota $ a finite type. For any family of multivariate polynomials $ p_i \\\\in R[\\\\iota] $ and a subset $ S \\\\subseteq \\\\iot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.Hom.ker (AlgebraicGeometry.Scheme.Hom.toNormalization f) = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"Polynomial.isCompact_image_comap_of_monic\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (f g : Polynomial R),\\n  g.Monic → IsCompact (PrimeSpectrum.comap Polynomial.C '' (PrimeSpectrum.zeroLocus {g} \\\\ PrimeSpectrum.zeroLocus {f}))\", \"doc\": \"For any polynomials $ f $ and $ g $ over a commutative semiring $ R $, where $ g $ is monic, the image of the set of prime ideals in $ R[X] $ containing $ g $ but not $ f $ under the preimage map indu\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological or abstract additive subgroups, general Hopf algebra structures and Hopf quotients, or unrelated polynomial results; none classifies proper subgroup schemes of the additive group or gives this equivariant polynomial quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hopf ideals of k[T] for the additive Hopf algebra are generated by monic additive polynomials and Ga modulo a finite subgroup is Ga",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AddMonoidAlgebra.instHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → {G : Type u_3} → [inst_3 : AddGroup G] → HopfAlgebra R (AddMonoidAlgebra A G)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ with a Hopf algebra structure over $ R $, and an additive group $ G $, this constructs a Hopf algebra structure on the additive monoid algebra $ A[\"}\n  {\"name\": \"AddMonoidAlgebra.instHopfAlgebraStruct\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  (A : Type u_2) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → (G : Type u_3) → [inst_3 : AddGroup G] → HopfAlgebraStruct R (AddMonoidAlgebra A G)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ equipped with a Hopf algebra structure over $ R $, and an additive group $ G $, this constructs a Hopf algebra structure on the additive monoid alg\"}\n  {\"name\": \"LaurentPolynomial.instHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  (A : Type u_2) →\\n    [inst : CommSemiring R] → [inst_1 : Semiring A] → [HopfAlgebra R A] → HopfAlgebra R (LaurentPolynomial A)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ equipped with a Hopf algebra structure over $ R $, and an additive group $ G $, the additive monoid algebra $ A[G] $ inherits a Hopf algebra struct\"}\n  {\"name\": \"CommSemiring.toHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → HopfAlgebra R R\", \"doc\": \"Every commutative semiring $ R $ admits a canonical Hopf algebra structure over itself, where the antipode map is the identity function. This structure is constructed by equipping $ R $ with its natur\"}\n  {\"name\": \"MonoidAlgebra.instHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → {G : Type u_3} → [inst_3 : Group G] → HopfAlgebra R (MonoidAlgebra A G)\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ equipped with a Hopf algebra structure over $ R $, and a group $ G $, the monoid algebra $ A[G] $ admits a canonical Hopf algebra structure over $ \"}\n  {\"name\": \"MonoidAlgebra.instHopfAlgebraStruct\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  (A : Type u_2) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] →\\n        [HopfAlgebra R A] → (G : Type u_3) → [inst_3 : Group G] → HopfAlgebraStruct R (MonoidAlgebra A G)\", \"doc\": \"The monoid algebra $ A[G] $ over a commutative semiring $ R $ is equipped with a Hopf algebra structure, where the antipode is defined by inverting elements of the monoid $ G $ and applying the antipo\"}\n  {\"name\": \"IsGroupLikeElem.antipode\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/GroupLike\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] {a : A},\\n  IsGroupLikeElem R a → IsGroupLikeElem R ((HopfAlgebraStruct.antipode R) a)\", \"doc\": \"If $ a $ is a group-like element in a Hopf algebra over a commutative semiring $ R $, then its antipode $ S(a) $ is also a group-like element.\"}\n  {\"name\": \"AddMonoidAlgebra.antipode_single\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : HopfAlgebra R A] {G : Type u_3}\\n  [inst_3 : AddGroup G] (g : G) (a : A),\\n  (HopfAlgebraStruct.antipode R) (AddMonoidAlgebra.single g a) =\\n    AddMonoidAlgebra.single (-g) ((HopfAlgebraStruct.antipode R) a)\", \"doc\": \"For any additive group $G$, commutative semiring $R$, and Hopf algebra $A$ over $R$, the antipode of the basis element $\\\\chi_g(a)$ in the additive monoid algebra $A[G]$ (where $g \\\\in G$ and $a \\\\in A$)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological or abstract additive subgroups, general Hopf algebra structures and Hopf quotients, or unrelated polynomial results; none classifies proper subgroup schemes of the additive group or gives this equivariant polynomial quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper closed subgroup scheme of Ga is the kernel of an additive polynomial with quotient Ga",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ClosedAddSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"(G : Type u) → [AddGroup G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed additive subgroup of a topological additive group $G$ is a subgroup that is closed in the topology of $G$.\"}\n  {\"name\": \"ClosedSubgroup.ctorIdx\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} → {inst : Group G} → {inst_1 : TopologicalSpace G} → ClosedSubgroup G → ℕ\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"AddMonoidHom.ker\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Ker\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → {M : Type u_7} → [inst_1 : AddZeroClass M] → (G →+ M) → AddSubgroup G\", \"doc\": \"Given an additive monoid homomorphism $ f : G → M $ from an additive group $ G $ to an additive monoid with zero $ M $, this constructs the kernel of $ f $ as the additive subgroup of $ G $ consisting\"}\n  {\"name\": \"ClosedAddSubgroup.instAddSubgroupClass\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"∀ (G : Type u) [inst : AddGroup G] [inst_1 : TopologicalSpace G], AddSubgroupClass (ClosedAddSubgroup G) G\", \"doc\": \"In a topological additive group $ G $, the closed additive subgroups satisfy the additive subgroup class structure, meaning they are subsets of $ G $ containing the identity element, closed under addi\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"AddSubgroup\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"(G : Type u_3) → [AddGroup G] → Type u_3\", \"doc\": \"The structure of an additive subgroup of an additive group $G$, consisting of a subset of $G$ closed under addition, negation, and containing the zero element.\"}\n  {\"name\": \"ClosedAddSubgroup.ext_iff\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"∀ {G : Type u} {inst : AddGroup G} {inst_1 : TopologicalSpace G} {x y : ClosedAddSubgroup G},\\n  x = y ↔ (↑x).carrier = (↑y).carrier\", \"doc\": \"Two closed additive subgroups of a topological additive group $G$ are equal if and only if their underlying subsets of $G$ are equal.\"}\n  {\"name\": \"instProperVAddSubtypeMemAddSubgroupOfIsClosedCoe\", \"module\": \"Mathlib.Topology.Algebra.ProperAction.Basic\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : AddGroup G] [inst_1 : AddAction G X] [inst_2 : TopologicalSpace G]\\n  [inst_3 : TopologicalSpace X] {H : AddSubgroup G} [ProperVAdd G X] [H_closed : IsClosed ↑H], ProperVAdd (↥H) X\", \"doc\": \"If $ G $ is an additive group acting properly on a topological space $ X $, and $ H $ is a closed additive subgroup of $ G $, then the action of $ H $ on $ X $ is also proper.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological or abstract additive subgroups, general Hopf algebra structures and Hopf quotients, or unrelated polynomial results; none classifies proper subgroup schemes of the additive group or gives this equivariant polynomial quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial\", \"IsAdditive\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological or abstract additive subgroups, general Hopf algebra structures and Hopf quotients, or unrelated polynomial results; none classifies proper subgroup schemes of the additive group or gives this equivariant polynomial quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "additive.polynomial|IsAdditive|additivePolynomial|AdditivePolynomial|hopf.*ideal",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"line\": \"12\", \"text\": \"# Hopf algebra structure on quotients by Hopf ideals\"}\n  {\"file\": \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"line\": \"14\", \"text\": \"A *Hopf ideal* of an `R`-Hopf algebra `A` is a biideal stable under the antipode. The quotient\"}\n  {\"file\": \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"line\": \"15\", \"text\": \"by a Hopf ideal inherits a Hopf algebra structure.\"}\n  {\"file\": \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"line\": \"19\", \"text\": \"* `Ideal.IsHopfIdeal R I` : `I` is a coideal (as an `R`-submodule) stable under the antipode.\"}\n  {\"file\": \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"line\": \"25\", \"text\": \"* `HopfAlgebra R (A ⧸ I)` instance when `[I.IsTwoSided]` and `[I.IsHopfIdeal R]`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological or abstract additive subgroups, general Hopf algebra structures and Hopf quotients, or unrelated polynomial results; none classifies proper subgroup schemes of the additive group or gives this equivariant polynomial quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial\", \"IsAdditive\"",
+   "results": "{\"t\": \"2026-10-23T20:13:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Polynomial\\\", \\\"IsAdditive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract additive subgroups, general Hopf structures or monic finite quotients, not the subgroup-scheme additive equation, sheaf quotient and scalar-equivariance statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper closed subgroup scheme of the additive group is defined by a monic additive polynomial and its fppf quotient is the additive group",
+   "results": "{\"t\": \"2026-10-23T20:13:50Z\", \"tool\": \"leanfinder\", \"query\": \"A proper closed subgroup scheme of the additive group is defined by a monic additive polynomial and its fppf quotient is the additive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Monic.finite_quotient\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"5283e629429f260f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract additive subgroups, general Hopf structures or monic finite quotients, not the subgroup-scheme additive equation, sheaf quotient and scalar-equivariance statement."
+  },
+  {
+   "tool": "grep",
+   "query": "additive.polynomial|additivePolynomial|IsAdditive|Hopf.*[Ii]deal",
+   "results": "{\"t\": \"2026-10-23T20:14:28Z\", \"tool\": \"grep\", \"query\": \"additive.polynomial|additivePolynomial|IsAdditive|Hopf.*[Ii]deal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\"], \"digest\": \"5105833188f5ddfc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract additive subgroups, general Hopf structures or monic finite quotients, not the subgroup-scheme additive equation, sheaf quotient and scalar-equivariance statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every proper subgroup scheme of the additive algebraic group has additive polynomial equation and faithfully flat quotient Ga",
+   "results": "{\"t\": \"2026-10-23T20:14:28Z\", \"tool\": \"leansearch\", \"query\": \"Every proper subgroup scheme of the additive algebraic group has additive polynomial equation and faithfully flat quotient Ga\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.addGroupEquivQuotientProdAddSubgroup\", \"AddSubgroup\", \"AddSubgroup.noConfusionType\", \"AddSubgroup.normal_of_comm\", \"AddSubgroupClass.toAddGroup\", \"AddSubgroup.instSetLike\", \"AddSubgroup.addSubgroupOf\", \"QuotientAddGroup.con_addSubgroup\"], \"digest\": \"f9e9ca8b147e0863\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract additive subgroups, general Hopf structures or monic finite quotients, not the subgroup-scheme additive equation, sheaf quotient and scalar-equivariance statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Hopf ideal of the polynomial additive Hopf algebra over a field is generated by an additive polynomial; scalar automorphisms act on this polynomial by their degree power",
+   "results": "{\"t\": \"2026-10-23T20:14:30Z\", \"tool\": \"leanfinder\", \"query\": \"A Hopf ideal of the polynomial additive Hopf algebra over a field is generated by an additive polynomial; scalar automorphisms act on this polynomial by their degree power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"AddMonoidAlgebra.instHopfAlgebra\", \"LaurentPolynomial.antipode_T\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.antipode_C\", \"AddMonoidAlgebra.instHopfAlgebraStruct\", \"CommSemiring.toHopfAlgebra\", \"MonoidAlgebra.instHopfAlgebra\"], \"digest\": \"944732b100065183\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract additive subgroups, general Hopf structures or monic finite quotients, not the subgroup-scheme additive equation, sheaf quotient and scalar-equivariance statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, use of 16.6 and 16.10; the concrete matrix kernel in present proof step 1, before descent. Supporting input: Milne Theorem 16.26(a), last paragraph: the pulled-back extension (118) splits by Theorem 15.34(d). Present split, proper-kernel case: the equivariant exact sequence of additive groups in Milne 15.34(d), Exercise 14-3(a).",
+   "via": [
+    "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-subgroup-polynomial-quotient",
+  "worker": "stage1",
+  "summary": "Seven explicit steps: principal generator, bidegree coefficient proof of additivity, scheme-theoretic kernel, a one-relation finite free faithfully flat presentation, affine morphism properties, kernel-pair sheaf quotient, and scalar equivariance over arbitrary coefficient algebras. Reused existing nodes throughout; no new nodes, no mathematical statement change. Added the definition dependencies for polynomial rings, faithful flatness, fppf sites, sheafification and finite presentation. No exact project Lean attachment was found.",
+  "blueprint": "Realizes the recorded ancestor place in det-thm-sf-ctf-stability-direct-images proof (3), through the inherited chain ending at the proper-kernel case of lem-sfb-additive-subgroup-diagonalizable-extension-splitting: Milne Exercise 14-3(a) and Theorem 15.34(d). The current latest blueprint still uses constructible direct-image preservation; this supporting algebraic-group argument is below its unit route. The inherited from.node is null, as returned by blueprint_refs.py ancestor; retained that ancestry and the full place and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-fppf-kernel-pair-quotient-descent",
+    "why": "Generic representation of a finite locally free kernel-pair sheaf quotient. It supplies effective fppf quotient descent, not a different route for the unit; no node of this unit states this general quotient criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-fppf-kernel-pair-quotient-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-7e443da29",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-7e443da29 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement is byte-identical to the Q31 snapshot, and only the definition stmt_deps it uses were added. Source: Milne iAG Exercise 14-3(a), which assumes H≠Ga and asks for an endomorphism φ with e→H→Ga→Ga→e exact; the item makes this precise with a monic generator and adds the η-equivariance that parent Q31 uses in step 4. Steps 1-7 check: (1) I≠0 by properness and I⊆(T) via the identity, then PID and monic normalization with uniqueness; (2) both exponents of every surviving monomial of D are below n, so two applications of monic-quotient-free over A and over k give D=0; (3) ker q = k[T]/(P); (4) P(T)−U is monic of degree n≥1 over k[U], and the faithful-tensor-coordinates lemma gives faithful flatness; (5) flat, surjective, affine, finite, locally of finite presentation, hence finite locally free; (6) I verified the kernel-pair isomorphism and its inverse in both orders, and all hypotheses of the kernel-pair lemma hold. The step's affine-test identification is compressed but holds via the lemma's own injectivity and single-cover local surjectivity clauses. (7) Q(T)=P(aT)−a^nP(T) has degree below n and vanishes in R[T]/(P), so Q=0; this works over any R, including nilpotents and R=0. Small cases checked: N=0, α_p, F_p (where a^p=a keeps the formula consistent), and char 0. No duplicates found in the DAG, no SGA cited. I accept the declared tool_use of lem-a1-fppf-kernel-pair-quotient-descent as a generic quotient criterion. Batch-5: its closure reaches only lem-trf-fppf-covering-is-fpqc, a Mathlib-leaf site fact outside the trace-formula and Poincaré-duality assumptions and their proofs, so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveSubgroupPolynomialQuotient",
+  "declaration": "AlgebraicGeometry.StandardGroupSchemes.exists_additiveSubgroup_polynomial_quotient",
+  "declarations": [
+   "AlgebraicGeometry.StandardGroupSchemes.additivePolynomialMap",
+   "AlgebraicGeometry.StandardGroupSchemes.additiveCoordinatePoint",
+   "AlgebraicGeometry.StandardGroupSchemes.multiplicativeCoordinateValue",
+   "AlgebraicGeometry.StandardGroupSchemes.additiveSubgroupDefiningIdeal",
+   "AlgebraicGeometry.StandardGroupSchemes.additiveSubgroupTranslation",
+   "AlgebraicGeometry.StandardGroupSchemes.additiveSubgroupCosetPresheaf",
+   "AlgebraicGeometry.StandardGroupSchemes.additiveSubgroupFppfQuotient",
+   "AlgebraicGeometry.StandardGroupSchemes.additiveSubgroupCosetProjection",
+   "AlgebraicGeometry.StandardGroupSchemes.exists_additiveSubgroup_polynomial_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveSubgroupPolynomialQuotient.lean",
+  "statement": "theorem exists_additiveSubgroup_polynomial_quotient (N : Over (Spec (.of k))) [GrpObj N] (i : N ⟶ additive k) [IsClosedSubgroupScheme i] (hproper : ¬ IsIso i) : ∃ P : Polynomial k, P.Monic ∧ 0 < P.natDegree ∧ Ideal.span ({P} : Set (Polynomial k)) = additiveSubgroupDefiningIdeal k i ∧ (∀ Q : Polynomial k, Q.Monic → Ideal.span ({Q} : Set (Polynomial k)) = additiveSubgroupDefiningIdeal k i → Q = P) ∧ P.eval 0 = 0 ∧ P.eval₂ (MvPolynomial.C : k →+* MvPolynomial (Fin 2) k) (MvPolynomial.X 0 + MvPolynomial.X 1) = P.eval₂ MvPolynomial.C (MvPolynomial.X 0) + P.eval₂ MvPolynomial.C (MvPolynomial.X 1) ∧ IsMonHom (additivePolynomialMap k P) ∧ (Polynomial.aeval (R := k) P).toRingHom.FaithfullyFlat ∧ LocallyOfFinitePresentation (additivePolynomialMap k P).left ∧ QuasiCompact (additivePolynomialMap k P).left ∧ QuasiSeparated (additivePolynomialMap k P).left ∧ (∃ e : N ≅ GrpObj.ker (additivePolynomialMap k P), e.hom ≫ GrpObj.kerι (additivePolynomialMap k P) = i) ∧ (∃ e : additiveSubgroupFppfQuotient k i ≅ (presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj (uliftYoneda.{u + 1}.obj (additive k)), (presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).map (additiveSubgroupCosetProjection k i) ≫ e.hom = (presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).map (uliftYoneda.{u + 1}.map (additivePolynomialMap k P))) ∧ (∀ (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (eta : G ⟶ multiplicative k) [IsMonHom eta], (∀ (R : Type u) [CommRing R] [Algebra k R] (g : affine k R ⟶ G) (x : R), (∃ z : affine k R ⟶ N, z ≫ i = additiveCoordinatePoint k R x) → ∃ z : affine k R ⟶ N, z ≫ i = additiveCoordinatePoint k R (multiplicativeCoordinateValue k (g ≫ eta) * x)) → ∀ (R : Type u) [CommRing R] [Algebra k R] (g : affine k R ⟶ G) (x : R), Polynomial.aeval (multiplicativeCoordinateValue k (g ≫ eta) * x) P = multiplicativeCoordinateValue k (g ≫ eta) ^ P.natDegree * Polynomial.aeval x P)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helpers construct the actual polynomial substitution, affine points and coordinate restriction, defining ideal, translation coequalizer and fppf sheafification. The theorem retains the unique monic generator, polynomial additivity, coordinate faithful flatness, finite presentation, scheme-theoretic kernel with its inclusion, canonical quotient comparison, and scalar equivariance on every test algebra. No statement or accepted stage-1 split changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6ec34173",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_dep records, StandardGroupSchemes and GroupScheme/Defs sources, module and report. Every clause matches: ¬IsIso i = proper; defining ideal = kernel of k[T]→Γ(N) (nilpotents kept); unique monic generator of positive degree; P(0)=0 and additivity in MvPolynomial (Fin 2); IsMonHom; RingHom.FaithfullyFlat of aeval P; LOFP∧QC∧QS; kernel iso compatible with kerι; fppf quotient = sheafified coequalizer of translation/projection, iso pinned by sheafify(π)≫e = sheafify(yoneda q); scalar stability and P(ηx)=η^n P(x) over all Type-u k-algebras. Edge cases N=0, α_p, F_p, char 0, nonreduced/zero R covered. Helpers non-hollow with source/blueprint docstrings; single sorry; statement verbatim; ≤100-char lines; private imports = proof_dep Mathlib matches; node unchanged except lean; no duplicate decls found. No files changed, no compile."
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedKoszulTensorCoproduct",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "The finite free tensor calculation of the completed extension-by-zero comparison, split into its degreewise basis and total-tensor assembly steps.",
+   "via": [
+    "lem-cbc-signed-koszul-tensor-coproduct"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-cbc-signed-koszul-basis-coproduct",
+ "title": "Degreewise finite basis coproduct for the ordered negative Koszul tensor",
+ "statement": "For a positive-length ordered negative Koszul tensor, in each integer degree n the supported pure basis maps indexed by subsets I with n=-|I| form a coproduct of the tensor unit.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul calculation."
+ },
+ "proof": [
+  {
+   "text": "Induct on r. The one-factor base case is supplied by lem-cbc-signed-koszul-basis-coproduct-base; in the successor apply the tensor reindexing step lem-cbc-signed-koszul-basis-coproduct-step to the induction hypothesis.",
+   "uses": [
+    "lem-cbc-signed-koszul-basis-coproduct-base",
+    "lem-cbc-signed-koszul-basis-coproduct-step"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-signed-koszul-basis-coproduct-base",
+  "lem-cbc-signed-koszul-basis-coproduct-step"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degreewise coproduct of pure tensor basis for a finite tensor of two-term complexes",
+   "results": "No exact theorem; only generic total-tensor coproduct infrastructure.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulBasisCoproduct",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulBasisCoproduct.lean",
+  "declaration": "CategoryTheory.isColimit_ringedNegativeKoszulBasis_succ",
+  "statement": "theorem isColimit_ringedNegativeKoszulBasis_succ\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) (r : ℕ)\n    (b : Fin (r + 1) → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n : ℤ) :\n    Nonempty (IsColimit (Cofan.mk\n      ((ringedNegativeKoszul O (r + 1) b m).X n)\n      (fun I : {I : Finset (Fin (r + 1)) // n = -(I.card : ℤ)} ↦\n        ringedNegativeKoszulBasis O (r + 1) b m I.1 n)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T142231-L-303199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200113-L-3289484",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.isColimit_ringedNegativeKoszulBasis_base",
+   "CategoryTheory.isColimit_ringedNegativeKoszulBasis_step"
+  ],
+  "sorry_after": []
+ }
+}

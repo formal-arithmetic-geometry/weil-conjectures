@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-constant-coefficient-chart-pullback",
+ "kind": "statement",
+ "title": "Constant coefficient charts propagate compatibly with the coefficient map",
+ "statement": "Let Λ be a commutative condensed ring object, f:Y→X a scheme map, k a commutative ring, and c a constant-k chart of the coefficient-sized reconstructed ring on X, using [def-sfb-integral-models-stacks-data]. There exists a constant-k chart d of the reconstructed ring on Y such that on every object V of the coefficient-sized site of X and every scalar a∈k, the sectionwise map coefficientMap of [lem-sfb-internal-module-operations-transport] takes c applied to the constant section a to d applied to the constant section a on the base change of V. Constant sections use the actual sheafification unit of [def-weil-pbc-constant-coefficient-scalar-extension]. This assertion only involves coefficient rings, and no module or slice.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-internal-module-operations-transport",
+  "def-weil-pbc-constant-coefficient-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, functoriality of algebraic structures under morphisms of topoi; constant-sheaf and inverse-image adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Use the existing general reconstructedCoefficientPullback helper: algebraic inverse image of the reconstructed condensed coefficient ring on X is its reconstructed ring on Y, and the adjunct of this ring isomorphism is the concrete internal coefficientMap. This helper is proved by forgetting commutative rings to abelian sheaves and identifying the adjunct with condensedPullbackHom; no integral specialization is used.",
+   "uses": [
+    "lem-sfb-integral-section-coefficient-naturality",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, functoriality of algebraic structures under morphisms of topoi; constant-sheaf and inverse-image adjunction units."
+   }
+  },
+  {
+   "text": "Transport the source ring by the AsSmall sheaf equivalence. Compose the constant-sheaf adjunction (evaluation at the terminal site object) with the geometric inverse-image adjunction. Base change preserves this terminal object, so uniqueness of left adjoints gives the constant-ring comparison. Its unit equation at the terminal object, followed by naturality along each object to the terminal object, says that its adjunct preserves every constant scalar.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, functoriality of algebraic structures under morphisms of topoi; constant-sheaf and inverse-image adjunction units."
+   }
+  },
+  {
+   "text": "Pull back c and compose with the ring isomorphism from the first step and the inverse constant-ring comparison. Transport back to the coefficient-sized target site using AsSmall and its constant comparison. Adjunction naturality and the scalar unit equations show exactly that the coefficientMap takes c(a) to d(a) on every section. All objects are constructed by these isomorphisms, including on empty schemes and for the zero ring.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data",
+    "def-weil-pbc-constant-coefficient-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, functoriality of algebraic structures under morphisms of topoi; constant-sheaf and inverse-image adjunction units."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-section-coefficient-naturality",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-integral-models-stacks-data",
+  "def-weil-pbc-constant-coefficient-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, functoriality of algebraic structures under morphisms of topoi; constant-sheaf and inverse-image adjunction units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a constant ring sheaf is a constant ring sheaf with compatibility with the adjunction unit",
+   "date": "2026-10-26",
+   "results": {
+    "t": "2026-10-26T12:05:56Z",
+    "tool": "leanfinder",
+    "query": "inverse image of a constant ring sheaf is a constant ring sheaf with compatibility with the adjunction unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.StructureSheaf.comap_const",
+     "CategoryTheory.constantSheafΓAdj",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "CategoryTheory.constantSheafAdj",
+     "CategoryTheory.Sheaf.isConstant_of_forget",
+     "CategoryTheory.constantSheafAdj_counit_w",
+     "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'",
+     "CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant"
+    ],
+    "digest": "ed2822bbf11aa275"
+   },
+   "verdict": "Generic constant-sheaf adjunction and left-adjoint uniqueness are available and used. None states compatibility of a constant chart of this reconstructed condensed ring with its concrete coefficientMap."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Rr]ing.*[Pp]ullback|[Pp]ullback.*constant.*[Rr]ing",
+   "date": "2026-10-26",
+   "results": {
+    "t": "2026-10-26T12:05:57Z",
+    "tool": "grep",
+    "query": "constant.*[Rr]ing.*[Pp]ullback|[Pp]ullback.*constant.*[Rr]ing",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "Generic constant-sheaf adjunction and left-adjoint uniqueness are available and used. None states compatibility of a constant chart of this reconstructed condensed ring with its concrete coefficientMap."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-26",
+   "results": {
+    "t": "2026-10-26T12:19:25Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app"
+    ],
+    "digest": "81d76e6b534e2fb8"
+   },
+   "verdict": "Generic constant-sheaf adjunction and left-adjoint uniqueness are available and used. None states compatibility of a constant chart of this reconstructed condensed ring with its concrete coefficientMap."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a constant sheaf of commutative rings preserves constants and the constant section unit.",
+   "date": "2026-10-26",
+   "results": {
+    "t": "2026-10-26T12:20:35Z",
+    "tool": "leansearch",
+    "query": "Inverse image of a constant sheaf of commutative rings preserves constants and the constant section unit.",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: ",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "Generic constant-sheaf adjunction and left-adjoint uniqueness are available and used. None states compatibility of a constant chart of this reconstructed condensed ring with its concrete coefficientMap."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientSliceRestrictionIso",
+  "date": "2026-10-26",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2): the coefficient-ring and constant-scalar part of the reconstruction/inverse-image comparison.",
+   "via": [
+    "lem-sfb-coefficient-slice-restriction-iso",
+    "lem-sfb-discrete-point-presentation-transport",
+    "lem-sfb-discrete-point-presentation-refinement",
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientSliceRestrictionIso",
+  "worker": "stage3",
+  "summary": "Proved ring-only chart transport using an existing general ring adjunct comparison, AsSmall equivalences, and the constant-sheaf adjunction; no new sorry.",
+  "blueprint": "Integral-model comparison (1)--(2): the coefficient-ring and constant-scalar part of the reconstruction/inverse-image comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integral-section-coefficient-naturality",
+    "why": "Uses its proved general reconstructedCoefficientPullback helper, valid for every Λ, as a ring-only tool; no integral-module argument or unit step is replaced."
+   }
+  ]
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantCoefficientChartPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantCoefficientChartPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.exists_constant_coefficient_chart_pullback",
+  "statement": "theorem exists_constant_coefficient_chart_pullback\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (k : Type (u + 1)) [CommRing k]\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj Λ X)) :\n    ∃ d : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} Y) k ≅\n        smallRing Y (condensedRingObj Λ Y),\n      ∀ (V : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ) (a : k),\n        ((InternalModuleOperations.coefficientMap Λ f).hom.app (AsSmall.down.op.obj V)).hom\n            ((c.hom.hom.app V).hom\n              ((SheafOfModules.constantCoefficientUnit\n                (Scheme.coefficientProEtaleModelTopology.{u, u} X) k).app V a)) =\n          (d.hom.hom.app ((Scheme.coefficientProEtaleModelBaseChange.{u, u} f).op.obj V)).hom\n            ((SheafOfModules.constantCoefficientUnit\n              (Scheme.coefficientProEtaleModelTopology.{u, u} Y) k).app\n                ((Scheme.coefficientProEtaleModelBaseChange.{u, u} f).op.obj V) a)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T135428-L-4032900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T135428-L-4032900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,14 +11,24 @@
   "def-sbc-raw-module-scalar-pullback-comparison",
   "lem-weil-pbc-inverse-image-composition"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Take the inverse of the existing canonical derived inverse-image comparison. Derived lifting preserves natural-isomorphism inverses, so reversing the three factors identifies this inverse with the original reverse composite; this is proved by reverseDerivedComparison and derivedPullbackIsoImpl_eq_formula.",
+   "uses": [
+    "def-sbc-raw-module-scalar-pullback-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "N4",
-  "date": "2026-10-14",
-  "document": "stage-3 reduction",
-  "place": "generic derived source-square calculation"
+  "group": "P2",
+  "date": "2026-10-21",
+  "document": "Functor.mapDerivedCategoryPlusNatIso and the adopted moduleAbelianDerivedUpperStarIso",
+  "place": "Symmetry of the three-factor exact-derived comparison"
  },
  "status": "split",
  "created": {
@@ -35,10 +45,17 @@
   "by": "N4",
   "date": "2026-10-14",
   "declarations": [
-   "AlgebraicGeometry.Etale.RawModuleScalarComparison.derivedPullbackIsoImpl"
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget",
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget_additive",
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget_preservesFiniteLimits",
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.forget_preservesFiniteColimits",
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.derivedPullbackIsoImpl",
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.derivedPullbackIsoImpl_eq_formula",
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.derivedPullbackIso"
   ],
   "statement": "def derivedPullbackIsoImpl (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) : (upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus ⋙ (forget Λ X).mapDerivedCategoryPlus ≅ (forget Λ Y).mapDerivedCategoryPlus ⋙ (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryPlus",
-  "branch": "sheaf-dag"
+  "branch": "sheaf-dag",
+  "note": "P2 retains the four scalar-forgetting compatibility aliases. derivedPullbackIsoImpl has its original signature and is the canonical forward comparison inverse; the proved formula API theorem derivedPullbackIsoImpl_eq_formula identifies it with its original three-factor formula. No mathematical obligation is added. S7 retires the duplicate coefficient-unshifted compatibility module. Its derivedPullbackIso abbreviation is moved verbatim to this definition module, alongside derivedPullbackIsoImpl. The historical name and its explicit reducible inverse components are preserved; it is definitionally the same canonical inverse. The coefficient-unshifted and shift theorems remain attached to their existing WeilConjectures declarations. No statement, proof dependency or unit step changes."
  },
  "mathlib_searches": [
   {
@@ -78,7 +95,18 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "mathlib_match": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-13",
   "by": "L",
@@ -90,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "S7",
   "result": "pass",
-  "landing": "20261013T234517-L-2165262",
+  "landing": "20261025T071152-L-122746",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

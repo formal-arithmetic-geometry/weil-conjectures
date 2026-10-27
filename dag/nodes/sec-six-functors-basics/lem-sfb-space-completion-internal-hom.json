@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-space-completion-internal-hom",
+ "kind": "statement",
+ "title": "Internal Hom computes morphisms of coherent completions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Modules, tensor pullback and direct image are on these ringed sites [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Locally Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth]; Noetherian means additionally quasi-compact and quasi-separated (quasi-compact diagonal). Coherent means quasi-coherent with coherent pullbacks on etale scheme charts [pqf-def-coherent]. Let $X$ be Noetherian, let $J\\subseteq\\mathcal O_X$ be quasi-coherent, and let $F,G$ be coherent modules. Let $\\mathcal H=\\mathcal Hom_{\\mathcal O_X}(F,G)$, the module sheaf of local module homomorphisms [def-pur-sheaf-hom]. Then $\\mathcal H$ is coherent, and its geometric-stalk support is contained in $\\operatorname{Supp}(F)\\cap\\operatorname{Supp}(G)$ (the nonzero geometric-stalk loci). There is a canonical bijection, natural in $F,G$, $$\\varprojlim_{n\\geq1}\\Gamma(X,\\mathcal H/J^n\\mathcal H)\\ \\simeq\\ \\operatorname{Hom}_{\\mathrm{Coh}(X,J)}(\\widehat F_J,\\widehat G_J).$$ Here completions and the inverse-system category are [def-sfb-space-coherent-adic-system]. The composite of the quotient-section map from $\\Gamma(X,\\mathcal H)=\\operatorname{Hom}_X(F,G)$ with this bijection sends $u$ to its quotient maps $(u\\bmod J^n)_n$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08B6 (lemma-completion-internal-hom); coherence and support of sheaf Hom as in the proof of Tag 08B9 (lemma-fully-faithful), first two paragraphs."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sfb-space-coherent-adic-system",
+  "def-pur-sheaf-hom",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-module-support",
+  "def-sfb-space-quasi-coherent-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Fix an etale scheme chart $e:U\\to X$. Etale pullback is slice restriction [def-trf-algebraic-space], and the scheme comparison [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] writes $F|_U=A_U(F_U)$ and $G|_U=A_U(G_U)$ with coherent Zariski modules $F_U,G_U$, by the assumed coherence of $F,G$. By [lem-weil-pbc-coherent-local-finite-presentation], $F_U$ is finitely presented. Put $H_U=\\mathcal Hom(F_U,G_U)$. This is coherent by [lem-weil-pbc-coherent-sheaf-hom-coherent]. The Hom comparison [lem-sfb-scheme-etale-tensor-hom-comparison] identifies $A_U(H_U)$ with $\\mathcal H|_U$: the latter restriction is exactly local module maps on the slice, by [def-pur-sheaf-hom]. These identifications are canonical under further chart restriction. Thus $\\mathcal H$ is quasi-coherent (its presentations are local on the site) and has coherent chart pullbacks, proving coherence.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-coherent-local-finite-presentation",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "lem-sfb-scheme-etale-tensor-hom-comparison",
+    "def-pur-sheaf-hom",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B9 (lemma-fully-faithful), coherence paragraph; descent.tex Tag 06VE(8); modules.tex Tags 01BW and 01CQ."
+   }
+  },
+  {
+   "text": "For a point $u\\in U$, finite presentation gives $(H_U)_u=\\operatorname{Hom}_{\\mathcal O_{U,u}}((F_U)_u,(G_U)_u)$ by [lem-weil-pbc-stalk-internal-hom-finite-presentation]. If either input stalk is zero this Hom is zero. Hence $\\operatorname{Supp}_U(H_U)\\subseteq\\operatorname{Supp}_U(F_U)\\cap\\operatorname{Supp}_U(G_U)$. Apply [lem-sfb-space-etale-chart-support] to the three quasi-coherent modules to identify these sets with inverse images of the three geometric-stalk supports on $X$. Choose a surjective atlas and refine its source by affine opens, as allowed by [def-trf-algebraic-space]. Every point of $X$ has a point on such a chart above it, so the chartwise containment implies the asserted containment on $X$.",
+   "uses": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-sfb-space-etale-chart-support",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B9 (lemma-fully-faithful), support paragraph; modules.tex Tag 01CP; spaces-morphisms.tex Tag 07TY."
+   }
+  },
+  {
+   "text": "Define the canonical map before proving bijectivity. Write $F_n=F/J^nF$, $G_n=G/J^nG$, and $H_n=\\mathcal H/J^n\\mathcal H$ [def-sfb-space-coherent-adic-system]. Postcomposition with $G\\to G_n$ sends a local map $v:F\\to G$ to $q^G_n v$. It kills $J^n\\mathcal H$, since $q^G_n(av)=a(q^G_n v)=0$ for $a\\in J^n$. Every local map $F\\to G_n$ kills $J^nF$ by the same identity. The two sheaf cokernel universal properties therefore give $\\epsilon_n:H_n\\to\\mathcal Hom(F_n,G_n)$, uniquely characterized by $\\epsilon_n(\\bar v)(\\bar x)=\\overline{v(x)}$ on local lifts [def-weil-sheaf-of-modules-category, def-pur-sheaf-hom]. Restrictions preserve these equations; reduction from level $m$ to $n\\le m$ sends both sides to the same class modulo $J^n$. A compatible family of global sections consequently gives maps $F_n\\to G_n$ commuting with every transition, hence a system morphism. Call this map $\\Phi$.",
+   "uses": [
+    "def-sfb-space-coherent-adic-system",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B6 (lemma-completion-internal-hom), canonical map made explicit by the quotient universal properties; coherent.tex Tag 0882."
+   }
+  },
+  {
+   "text": "On a Noetherian affine etale chart $U$, let $J_U$ be the quasi-coherent Zariski ideal corresponding to $J|_U$. The exact comparison [lem-sfb-scheme-etale-module-exact-finiteness-comparison] and tensor comparison [lem-sfb-scheme-etale-tensor-hom-comparison] identify $A_U(J_U^nP)$ with $(J|_U)^nA_U(P)$ and identify the quotient maps for $P=F_U,G_U,H_U$. The tensor terms, products and quotients are quasi-coherent by [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections, lem-weil-pbc-quasi-coherent-module-cokernel-image], so the exact comparison applies. Indeed each product is the image of $J_U^{\\otimes n}\\otimes P\\to P$; the exact functor preserves that image, and the tensor comparison preserves its multiplication map. Cokernels then give the quotient identification, including transitions. Full faithfulness of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies maps between the quotients and thus compatible families of such maps. Its identity comparison on open sections identifies $H_n(U)$ with $\\Gamma(U,H_U/J_U^nH_U)$. The map $\\Phi_U$ is exactly the canonical scheme map: both take a locally lifted $v$ to $\\bar x\\mapsto\\overline{v(x)}$. The scheme theorem [lem-weil-pbc-completion-internal-hom], with its two arguments exchanged, proves $\\Phi_U$ bijective. Here $U$ is Noetherian because it is affine and locally Noetherian by the assumed local Noetherianity of $X$ on etale charts. All its other hypotheses are exactly the coherent chart modules and quasi-coherent ideal just specified.",
+   "uses": [
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-sfb-scheme-etale-tensor-hom-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-completion-internal-hom",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B6 (lemma-completion-internal-hom), reduction to schemes; coherent.tex Tag 0882; descent.tex Tag 06VE(5),(7),(8)."
+   }
+  },
+  {
+   "text": "Injectivity of $\\Phi$ follows by restricting two families with the same image to each Noetherian affine etale chart and using the injectivity of $\\Phi_U$ from step 4. At every level the sections are equal on a covering family, hence equal by the sheaf condition. Affine charts cover every scheme object of $X_{\\mathrm{et}}$; equality there is equality of global sections. Here global sections can be read as compatible families on all scheme objects, so no terminal scheme object for $X$ is required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B6 (lemma-completion-internal-hom), etale-local reduction, injectivity expanded."
+   }
+  },
+  {
+   "text": "For surjectivity let $t=(t_n)$ be a morphism of the two completion systems. On each affine etale chart $U$ use step 4 to obtain its unique inverse family $s_{U,n}\\in H_n(U)$. For two charts $U,V$, their fibre product over $X$ is a scheme by [lem-trf-space-representable-etale-scheme-tests]; cover it by affine opens $W$. Each $W\\to X$ is again etale, and is Noetherian because it is affine and locally Noetherian. The restrictions of the two families to $W$ both map to $t|_W$ under $\\Phi_W$, since step 3 defined $\\Phi$ using restriction-compatible quotient maps. Local injectivity implies they coincide. The sheaf condition for $H_n$ therefore glues these sections, for each $n$, to a global $s_n$. On every chart its reduction to level $n$ agrees with $s_{U,n}$, so the glued family is transition-compatible. Likewise $\\epsilon_n(s_n)=t_n$ can be checked on the charts. Thus $\\Phi(s)=t$. Gluing on any other scheme object is obtained by base changing the covering charts and taking affine refinements, so these are genuine global sections on the small etale site.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B6 (lemma-completion-internal-hom), etale descent expanded as gluing of sections and component morphisms; no effectivity theorem for new objects is needed."
+   }
+  },
+  {
+   "text": "Finally the quotient-section family of a global morphism $u:F\\to G$ has at level $n$ the class of $u$ in $H_n$. By the defining equation in step 3 its image is $\\bar x\\mapsto\\overline{u(x)}$, exactly the quotient map of the completion functor [def-sfb-space-coherent-adic-system]. For $a:F'\\to F$ and $b:G\\to G'$, both routes around the naturality square send a local representative $v$ to the map $\\bar x\\mapsto\\overline{b(v(a(x)))}$. Local representatives suffice because quotient projections are epimorphisms of sheaves. Thus the square commutes at each level and on compatible families. Bijectivity then gives the asserted natural bijection and its normalization.",
+   "uses": [
+    "def-sfb-space-coherent-adic-system",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08B6 (lemma-completion-internal-hom), naturality and completion-map normalization of the canonical quotient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-sfb-scheme-etale-tensor-hom-comparison",
+  "def-pur-sheaf-hom",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-sfb-space-etale-chart-support",
+  "def-sfb-space-coherent-adic-system",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-completion-internal-hom",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08B6 (lemma-completion-internal-hom), etale-local reduction to coherent.tex Tag 0882; coherence and support as in Tag 08B9. Quotient map and descent details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom between completions of coherent sheaves on a Noetherian algebraic space equals the inverse limit of sections of the completion of internal Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.ihomPoints_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite) (x : ↑((A ⟹ B).val.obj (Opposite.op S))),\\n  (LightCondensed.ihomPoints R A B S) x =\\n    CategoryTheory.MonoidalClosed.uncurry\\n      (((LightCondensed.freeForgetAdjunction R).homEquiv ((CategoryTheory.coherentTopology Ligh\", \"doc\": \"For any commutative ring $ R $, light condensed $ R $-modules $ A $ and $ B $, and a light profinite space $ S $, the points of the internal hom-object $ [A, B] $ at $ S $ are given by uncurrying the \"}\n  {\"name\": \"LightCondensed.ihom_map_val_app\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B P : LightCondMod R) (S : LightProfinite) (e : A ⟶ B)\\n  (x : ↑((P ⟹ A).val.obj (Opposite.op S))),\\n  (CategoryTheory.ConcreteCategory.hom (((CategoryTheory.ihom P).map e).val.app (Opposite.op S))) x =\\n    (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryT\", \"doc\": \"For any light condensed $ R $-modules $ A $, $ B $, $ P $, a light profinite space $ S $, a morphism $ e: A \\to B $, and an element $ x $ in the hom-set $ [P, A](S) $, the application of the internal h\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite)\\n  (x : CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R A B S).symm x =\\n    (CategoryTheory.coherentTopology LightProfinite).yonedaEquiv\\n  \", \"doc\": \"For any objects $A, B$ in the category of light condensed $R$-modules and a light profinite space $S$, the inverse of the internal hom points map $\\\\text{ihomPoints}_R(A, B, S)$ evaluated at a morphism\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between coherent adic systems obtained by completion are global sections of completed sheaf Hom",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(x : R) : of I S (liftRingHom I f hf x) = (AdicCompletion.liftRingHom I f hf x)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \": R →+* S\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) : (Ideal.Quotient.mkₐ R (I ^ n)).comp (liftAlgHom I f hf) = f n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\\\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, there exists an $ R $-algebra homomorphism $ A → S $ ob\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R (Ideal.pow_le_pow_right hle)).comp (f n) = f m) : A →ₐ[R] S\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"UniformSpace.Completion.mapRingHom\", \"module\": \"Mathlib.Topology.Algebra.UniformRing\", \"type\": \"(hf : Continuous f) : Completion α →+* Completion β\", \"doc\": \"Given a continuous ring homomorphism $ f : \\\\alpha \\\\to \\\\beta $ between uniform rings, this constructs the induced ring homomorphism from the completion $ \\\\widehat{\\\\alpha} $ of $ \\\\alpha $ to the complet\"}\n  {\"name\": \"AdicCompletion.liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n            (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R →+* AdicCompletion I S\", \"doc\": \"Given a non-associative semiring $ R $, a commutative ring $ S $, an ideal $ I $ of $ S $, and a compatible family of ring homomorphisms $ f_n : R → S/I^n $ satisfying $ \\\\text{factorPow}_{I}(m,n) \\\\cir\"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M₁ M₂ : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"A morphism of presheaves of modules consists of a family of linear maps which\\nsatisfy the naturality condition.\"}\n  {\"name\": \"PresheafOfModules.instAddCommGroupHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : AddCommGroup (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAddHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Add (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instNegHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Neg (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instSubHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Sub (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instZeroHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Zero (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : (PresheafOfModules.unit R ⟶ M) ≃ M.sections\", \"doc\": \"The bijection `(unit R ⟶ M) ≃ M.sections` for `M : PresheafOfModules R`.\"}\n  {\"name\": \"PresheafOfModules.Hom.app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (self : M₁.Hom M₂) (X : Cᵒᵖ) : M₁.obj X ⟶ M₂.obj X\", \"doc\": \"a family of linear maps `M₁.obj X ⟶ M₂.obj X` for all `X`.\"}\n  {\"name\": \"PresheafOfModules.Hom.ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {x y : M₁.Hom M₂} (app : x.app = y.app) : x = y\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.Hom.ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {x y : M₁.Hom M₂} : x = y ↔ x.app = y.app\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} (h : ∀ (X : Cᵒᵖ), f.app X = g.app X) : f = g\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} : f = g ↔ ∀ (X : Cᵒᵖ), f.app X = g.app X\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*internal.*hom|internal.*hom.*completion|coherent.*completion.*[Hh]om",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*internal.*[Hh]om|[Hh]om.*coherent.*completion",
+   "results": "{\"t\": \"2026-10-23T21:03:31Z\", \"tool\": \"grep\", \"query\": \"completion.*internal.*[Hh]om|[Hh]om.*coherent.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom commutes with coherent formal completion on Noetherian algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T21:03:31Z\", \"tool\": \"leansearch\", \"query\": \"Internal Hom commutes with coherent formal completion on Noetherian algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.of_liftRingHom\", \"IsAdicComplete.algHom_ext\", \"LightCondensed.ihom_map_val_app\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"AdicCompletion.liftAlgHom\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\"], \"digest\": \"6a10c47edb90087a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T21:03:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AdicCompletion.liftRingHom\", \"AdicCompletion.liftAlgHom\", \"AdicCompletion.evalₐ_liftRingHom\", \"AdicCompletion.evalₐ_liftAlgHom\", \"AdicCompletion.evalₐ_comp_liftRingHom\", \"AdicCompletion.evalOneₐ_liftAlgHom\", \"AdicCompletion.factor_eval_liftRingHom\", \"AdicCompletion.instIsLocalHomMaximalIdealRingHomAlgebraMapOfIsNoetherianRing\"], \"digest\": \"42109617bf27aa47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of completions of coherent modules on a Noetherian algebraic space are the inverse limit of global sections of completed sheaf Hom",
+   "results": "{\"t\": \"2026-10-23T21:03:34Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms of completions of coherent modules on a Noetherian algebraic space are the inverse limit of global sections of completed sheaf Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasLimitsCondensedMod\", \"AdicCompletion.map_ext''_iff\", \"AdicCompletion.map\", \"AdicCompletion\", \"IsAdicComplete.of_comp_lift\", \"AdicCompletion.map_ext''\", \"AdicCompletion.eval_apply\", \"AdicCompletion.map_val_apply\"], \"digest\": \"a4820f6af23e797c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent adic systems have Hom computed by the completion of the sheaf of module homomorphisms",
+   "results": "{\"t\": \"2026-10-23T21:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent adic systems have Hom computed by the completion of the sheaf of module homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.lift\", \"AdicCompletion.map\", \"AdicCompletion.module\", \"IsAdicComplete.lift\", \"AdicCompletion.of\", \"AdicCompletion.map_of\", \"AdicCompletion\", \"IsAdicComplete.of_comp_lift\"], \"digest\": \"7361521d09775290\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; full faithfulness in the first paragraph, via the Hom computation 08B6 used in 08B9.",
+   "via": [
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-completion-internal-hom",
+  "worker": "stage1",
+  "summary": "Q20: checked Stacks 08B6/08B9, retained all hypotheses and conclusions, normalized doubled TeX escapes, and cited the sheaf-Hom definition. Reused the scheme completion theorem and existing coherence, stalk, support and comparison nodes. Added one generic small-etale tensor/Hom comparison node from 06VE(7),(8); explicitly constructed the canonical map and glued unique local inverse families without assuming a Noetherian overlap or a terminal scheme object.",
+  "blueprint": "The current latest sk-thm-sf-ctf-stability direct-images proof (3), compactification prerequisite chain, via the inherited from.place: supported formal existence 08BE, its full-faithfulness input 08B9 and its Hom computation 08B6. No change to the unit route. Ancestor command returns None; inherited from.node and via retained. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme or chart comparison/coherence/Hom tool used with its stated hypotheses in the etale-local reduction of Stacks 08B6/08B9; the current unit provides no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-local-finite-presentation",
+    "why": "Generic scheme or chart comparison/coherence/Hom tool used with its stated hypotheses in the etale-local reduction of Stacks 08B6/08B9; the current unit provides no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "why": "Generic scheme or chart comparison/coherence/Hom tool used with its stated hypotheses in the etale-local reduction of Stacks 08B6/08B9; the current unit provides no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "why": "Generic scheme or chart comparison/coherence/Hom tool used with its stated hypotheses in the etale-local reduction of Stacks 08B6/08B9; the current unit provides no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-internal-hom",
+    "why": "Generic scheme or chart comparison/coherence/Hom tool used with its stated hypotheses in the etale-local reduction of Stacks 08B6/08B9; the current unit provides no replacement of this tool."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme or chart comparison/coherence/Hom tool used with its stated hypotheses in the etale-local reduction of Stacks 08B6/08B9; the current unit provides no replacement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Generic quasi-coherent tensor/image/quotient closure on schemes, ensuring the exact Zariski-small-etale comparison applies to powers of the ideal and quotient diagrams."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic quasi-coherent tensor/image/quotient closure on schemes, ensuring the exact Zariski-small-etale comparison applies to powers of the ideal and quotient diagrams."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "lem-weil-pbc-completion-internal-hom",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-a0ee6e6d2",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a0ee6e6d2 (reviewer sub-agent of L); spot-checked: Read 08B6 (spaces-more-morphisms l.9656, which reduces étale-locally to 0882) and 06VE (descent l.3039) parts (5),(7),(8),(9) with their proofs. The item statement matches live; the only change is the added [def-pur-sheaf-hom] citation. No repair note and no supersession: live and side-live still show it unsplit. New node lem-sfb-scheme-etale-tensor-hom-comparison is exactly 06VE(7),(8) on the small étale site and correctly avoids the false big-site case 06VE(9). Its Hom quasi-coherence is cited to 01LA(10). Tested M=0, M=O and finite presentations. No duplicate in the DAG: the 06VE kernel, exactness, big-fppf and chart-calculus nodes cover other parts or settings, and the Hom-pullback nodes are constant-Λ, derived, or for isomorphisms only. Advisory: its tensor clause could also come from the trf equivalence's ε^* description plus the 03EL node. Steps checked: (1) U_et is the slice and the new node gives ℋ|_U ≅ A_U(Hom(F_U,G_U)), so ℋ is coherent; (2) 01CP stalk Hom plus 07TY chart support; (3) ε_n from the cokernel universal properties; (4) Jⁿ as an image, using the tensor/exactness nodes and full faithfulness, then 0882 with arguments swapped; U is affine and locally Noetherian, hence Noetherian, and no overlap is assumed Noetherian; (5)-(6) separatedness and gluing of morphisms on affine opens W of U×_X V, with W étale by the 03EC node and no terminal object needed; (7) naturality on local lifts. Edge cases checked: X empty, F or G zero, J=0, J=O_X, J nilpotent. Batch-5 check: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, lem-trf-space-representable-etale-scheme-tests, the chart-support node (reaches only a definition) and the exactness node are generic AG foundations, not trace-formula or PD steps, so accepted. tool_uses (trf and pbc 01BW/01CQ/01CP/0882/01I8/01IC) accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCompletionInternalHom",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_completion_internal_hom",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.completionInternalHom",
+   "AlgebraicGeometry.AlgebraicSpace.completionInternalHomMap",
+   "AlgebraicGeometry.AlgebraicSpace.completionInternalHomSection",
+   "AlgebraicGeometry.AlgebraicSpace.completedModuleSections",
+   "AlgebraicGeometry.AlgebraicSpace.completedModuleSectionsMap",
+   "AlgebraicGeometry.AlgebraicSpace.space_completion_internal_hom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCompletionInternalHom.lean",
+  "statement": "theorem space_completion_internal_hom (J : QuasiCoherentIdeal X) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) : (∀ (F G : X.Modules), (F.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) → (G.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj G)) → (completionInternalHom F G).IsQuasicoherent ∧ (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj (completionInternalHom F G))) ∧ moduleSupport (completionInternalHom F G) ⊆ moduleSupport F ∩ moduleSupport G) ∧ ∃ e : ∀ (F G : X.Modules) (n : ℕ), ((adicQuotientModel J).diagram.obj (completionInternalHom F G)).obj (op n) ⟶ completionInternalHom (((adicQuotientModel J).diagram.obj F).obj (op n)) (((adicQuotientModel J).diagram.obj G).obj (op n)), (∀ (F G : X.Modules) (n : ℕ), (adicQuotientModel J).projection (completionInternalHom F G) n ≫ e F G n ≫ completionInternalHomMap ((adicQuotientModel J).projection F n) (𝟙 (((adicQuotientModel J).diagram.obj G).obj (op n))) = completionInternalHomMap (𝟙 F) ((adicQuotientModel J).projection G n)) ∧ ∃ Φ : ∀ F G : ObjectProperty.FullSubcategory (C := X.Modules) (fun M ↦ M.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M)), completedModuleSections J (completionInternalHom F.obj G.obj) ≃ ((coherentAdicCompletion J hln hqc hqs).obj F ⟶ (coherentAdicCompletion J hln hqc hqs).obj G), (∀ F G s n, (Φ F G s).hom.app n = completionInternalHomSection _ _ (SheafOfModules.sectionsMap (e F.obj G.obj n.unop) (s.val n))) ∧ (∀ (F F' G G' : ObjectProperty.FullSubcategory (C := X.Modules) (fun M ↦ M.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M))) (a : F' ⟶ F) (b : G ⟶ G') s, Φ F' G' (completedModuleSectionsMap J (completionInternalHomMap a.hom b.hom) s) = (coherentAdicCompletion J hln hqc hqs).map a ≫ Φ F G s ≫ (coherentAdicCompletion J hln hqc hqs).map b) ∧ (∀ (F G : ObjectProperty.FullSubcategory (C := X.Modules) (fun M ↦ M.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M))) (s : (completionInternalHom F.obj G.obj).sections) (t : completedModuleSections J (completionInternalHom F.obj G.obj)), (∀ n : ℕᵒᵖ, t.val n = SheafOfModules.sectionsMap ((adicQuotientModel J).projection (completionInternalHom F.obj G.obj) n.unop) s) → Φ F G t = (coherentAdicCompletion J hln hqc hqs).map (ObjectProperty.homMk (completionInternalHomSection F.obj G.obj s)))",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Internal Hom is exactly the existing SheafOfModules.homObj transported along the published small affine-site module equivalence, retaining section universe u on the original small etale site of object universe u+1. Helpers give its existing functorial maps and global-section interpretation, and the compatible-family presentation of the inverse limit. The theorem includes coherence, geometric support, the quotient-normalized equivalence, naturality in both inputs and normalization on global morphisms. No definition data or helper theorem is postponed; the only sorry is this node theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a3e021b9",
+  "group": "NF",
+  "result": "pass",
+  "note": "Checked every clause against the node and Stacks 08B6/08B9. Hypotheses: hln/hqc/hqs are exactly the CoherentAdicSystem triple; coherence is the pqf-def-coherent predicate. Conclusion: H quasi-coherent and chartwise coherent; moduleSupport H ⊆ Supp F ∩ Supp G; completedModuleSections is the inverse limit of site-wide compatible global sections over all transitions, levels n+1 (op n). e is unique by its factorization equation (q_H epi, Hom(q_F,1) mono), so it is the node's epsilon_n. Phi is an equivalence to Hom in Coh(X,J), fixed by its component equation; naturality has the correct b∘v∘a orientation; normalization on global morphisms is stated. completionInternalHom is the def-pur-sheaf-hom homObj moved to the small affine model so sections stay in universe u (no existing X.Modules internal Hom; same pattern as AbelianSpacePoincareData). Records: statement verbatim in the file, all 6 declarations exist, the 3 added stmt_deps (small-ringed-model, module-support, quasi-coherent-ideal) are used and have landed records, all imports resolve, no name clashes. Edge cases: X empty, F=0, G=0, J=0, J=O_X, J nilpotent. Gates: no hollow definitions, docstrings with source and blueprint, only the node theorem is sorry with a 7-step proof docstring. Not compiled: no file changed; worker reports a clean compile. No fixes."
+ }
+}

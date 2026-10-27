@@ -1,0 +1,289 @@
+{
+ "id": "lem-per-regular-map-finite-surjective-detection",
+ "kind": "statement",
+ "title": "Finite surjective base change detects regularity of a flat ring map",
+ "statement": "Let $R,\\Lambda,R\\prime$ be commutative Noetherian rings [def-weil-pbc-noetherian-ring], and let $u:R\\to\\Lambda$ be a flat ring map [def-weil-pbc-flat-ring-map]. Let $v:R\\to R\\prime$ make $R\\prime$ a finitely generated $R$-module [def-weil-finitely-generated-module], and assume that every prime ideal $\\mathfrak p\\subset R$ is $v^{-1}(\\mathfrak p\\prime)$ for some prime ideal $\\mathfrak p\\prime\\subset R\\prime$. Give $\\Lambda\\otimes_RR\\prime$ its tensor-product algebra structure [def-weil-pbc-module-tensor-product], and put $u\\prime:R\\prime\\to\\Lambda\\otimes_RR\\prime$, $r\\prime\\mapsto1\\otimes r\\prime$. If $u\\prime$ is a regular ring map [def-weil-pbc-g-ring], then $u$ is a regular ring map.",
+ "source": {
+  "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+  "place": "Proposition 1.2, printed p.140, specialized to P = geometrically regular as in Definition 1.1; used in Proposition 1.3 and Theorem 3.1. Read from the publisher PDF through its indexed mirror; local bibliographic integration requested in report.md.",
+  "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/8F98780AD8CD9051866A2716C67833C3/S0027763000017190a.pdf/two-theorems-on-excellent-rings1.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset R$ and choose $\\mathfrak p'\\subset R'$ contracting to it, by the surjectivity hypothesis. Write $k=\\kappa(\\mathfrak p)$, $L=\\kappa(\\mathfrak p')$, $C=\\Lambda\\otimes_R k$, and $D=(\\Lambda\\otimes_R R')\\otimes_{R'}L$. These are the fibre rings of [def-weil-pbc-localization-at-prime]. The map $k\\to L$ sends the class of $a/s$ to the class of $v(a)/v(s)$: if $s\\notin\\mathfrak p$, then $v(s)\\notin\\mathfrak p'$, and elements of $\\mathfrak p$ map to zero in $L$. This is a unital field map, hence injective. Regularity of $u'$ says that $D$ is Noetherian and geometrically regular over $L$ by [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Proposition 1.2, converse, printed p.140; Definition 1.1 with P = geometrically regular. Publisher scan read at https://scispace.com/pdf/two-theorems-on-excellent-rings-2lc74dyy3w.pdf."
+   }
+  },
+  {
+   "text": "Tensor cancellation [lem-weil-pbc-tensor-cancel-base-change], with interchange of the two factors, gives an $L$-algebra isomorphism $D\\simeq L\\otimes_k C$. Explicitly $((a\\otimes b)\\otimes\\ell)\\mapsto \\ell\\bar b\\otimes(a\\otimes1)$, where $\\bar b$ is the image of $b\\in R'$ in $L$. Its inverse sends $\\ell\\otimes(a\\otimes x)$ to $(a\\otimes1)\\otimes\\ell\\bar x$, where $\\bar x$ is the image of $x\\in k$ in $L$. The balancing relations over $R$, $R'$ and $k$ make these formulas well defined, and their composites fix pure tensors. Thus they also preserve multiplication and units.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Proposition 1.2, converse, printed p.140; Definition 1.1 with P = geometrically regular. Publisher scan read at https://scispace.com/pdf/two-theorems-on-excellent-rings-2lc74dyy3w.pdf."
+   }
+  },
+  {
+   "text": "Let $K/k$ be any finite purely inseparable extension, including $K=k$. By [lem-weil-common-extension-fields], embed $L$ and $K$ into a common field $\\Omega$ compatibly over $k$. Replace their images by the compositum $M=LK\\subseteq\\Omega$. By [lem-weil-pbc-compositum-degree-bound], $M/L$ is finite, with degree at most $[K:k]$. In particular it is finitely generated as a field extension: a finite vector-space basis generates it as a field. The maps $K\\to M$ and $L\\to M$ still agree on $k$.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-weil-pbc-compositum-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038W, lemma-geometrically-regular-upstairs, converse common-field proof; affine ring version using Algebra Tags 0381 and 07NG."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] to the Noetherian geometrically regular $L$-algebra $D$ and the finite extension $M/L$. It gives regularity, including Noetherianity, of $M\\otimes_LD$. By [lem-weil-pbc-tensor-cancel-base-change] and the isomorphism of step 2 this ring is isomorphic to $E\\otimes_K M$, where $E=K\\otimes_k C$. On pure tensors the isomorphism is $m\\otimes((a\\otimes b)\\otimes\\ell)\\mapsto(1\\otimes(a\\otimes1))\\otimes m\\bar b\\ell$; the inverse is $(x\\otimes(a\\otimes y))\\otimes m\\mapsto m\\bar x\\bar y\\otimes((a\\otimes1)\\otimes1)$. The displayed mutually inverse ring maps identify the regular rings without changing any field action.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038W, lemma-geometrically-regular-upstairs, converse common-field proof; affine ring version using Algebra Tags 0381 and 07NG."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-field-extension-base-change-faithfully-flat], the map $E\\to E\\otimes_K M$ is faithfully flat. The regularity just proved for its target descends by [lem-weil-pbc-regular-ring-faithfully-flat-descent], so $K\\otimes_k C$ is regular, including Noetherianity. This holds for every finite purely inseparable $K/k$. Taking $K=k$ first gives that $C$ is Noetherian; the full family of conclusions then says that $C$ is geometrically regular over $k$ by [def-weil-pbc-g-ring].",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038W, lemma-geometrically-regular-upstairs, converse common-field proof; affine ring version using Algebra Tags 0381 and 07NG."
+   }
+  },
+  {
+   "text": "The prime $\\mathfrak p$ was arbitrary, so every fibre of $u$ is Noetherian and geometrically regular. Together with the assumed flatness of $u$, this is exactly regularity of $u$ by [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Proposition 1.2, converse, printed p.140; Definition 1.1 with P = geometrically regular. Publisher scan read at https://scispace.com/pdf/two-theorems-on-excellent-rings-2lc74dyy3w.pdf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+  "place": "Proposition 1.2 converse, printed p.140. Its fibrewise geometric-regularity descent is expanded using the common-field argument of Stacks Tag 038W, varieties.tex, lemma-geometrically-regular-upstairs, and Tags 0381, 07NG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring map is regular if its base change by a finite algebra surjective on prime spectra is regular",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S]\\n  {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs → RingTheory.Sequence.IsWeaklyRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ R $ is a flat $ S $-module and $ rs $ is a weakly regular sequence in $ R $, then the image of $ rs $ under the canonical algebra homomorphism $ R \\\\to S $ forms a weakly regular sequence in $ S $\"}\n  {\"name\": \"IsSMulRegular.of_flat\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\\n  [Module.Flat R S] {x : R}, IsSMulRegular R x → IsSMulRegular S ((algebraMap R S) x)\", \"doc\": \"If an element $ x $ in a commutative semiring $ R $ is injective in scalar multiplication on an $ R $-module, then its image under the canonical algebra homomorphism $ R \\to S $ is injective in scalar \"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FaithfullyFlat R S] {rs : List R},\\n  RingTheory.Sequence.IsRegular R rs → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and $ rs $ is a regular sequence in $ R $, then the image of $ rs $ under the algebra map $ R \\\\to S $ is a regular sequence in $ S $.\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] [Module.FaithfullyFl\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a ring homomorphism $ \\\\varphi: R \\\\to S $. If $ M $ is a faithfully flat $ R $-module and $ N = M \\\\otimes_R S $ is the base change of $ M $ along $ \\\\varphi\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] [Module.Flat R S] {f\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $\\\\phi: R \\\\to S$ be a ring homomorphism making $S$ a flat $R$-algebra. Let $M$ be an $R$-module. If a sequence of elements $(r_1, \\\\dots, r_k)$ in $R$ is a \"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommSemiring R] [inst_1 : CommSemiring S]\\n  [inst_2 : Algebra R S] [Module.Flat R S] [inst_4 : AddCommMonoid M] [inst_5 : Module R M] [inst_6 : AddCommMonoid N]\\n  [inst_7 : Module R N] [inst_8 : Module S N] [inst_9 : IsScalarTower\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: regular sequences and flat-base-change theorems do not state regularity of ring maps; residue-field finiteness is only an ingredient. No geometric-regularity notion occurs in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyRegular\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: regular sequences and flat-base-change theorems do not state regularity of ring maps; residue-field finiteness is only an ingredient. No geometric-regularity notion occurs in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|QuasiExcellent|IsGRing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: regular sequences and flat-base-change theorems do not state regularity of ring maps; residue-field finiteness is only an ingredient. No geometric-regularity notion occurs in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular ring maps are detected after finite surjective base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Regular.Flat\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {rs : List R} (reg : IsRegular M rs) : IsRegular N (rs.map (algebraMap R S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a ring homomorphism $ \\\\varphi: R \\\\to S $. If $ M $ is a faithfully flat $ R $-module and $ N = M \\\\otimes_R S $ is the base change of $ M $ along $ \\\\varphi\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange @FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}\n  {\"name\": \"isJacobsonRing_of_surjective\", \"module\": \"Mathlib.RingTheory.Jacobson.Ring\", \"type\": \"[H : IsJacobsonRing R] : (∃ f : R →+* S, Function.Surjective ↑f) → IsJacobsonRing S\", \"doc\": \"If $ R $ is a Jacobson ring and there exists a surjective ring homomorphism from $ R $ to $ S $, then $ S $ is also a Jacobson ring.\"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange_surjective\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(h : Function.Surjective (algebraMap A B)) : Function.Surjective (KaehlerDifferential.mapBaseChange R A B)\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ an $ R $-algebra, $ B $ an $ A $-algebra, and $ B $ an $ R $-algebra via the scalar tower $ R \\\\to A \\\\to B $, if the algebra map $ A \\\\to B $ i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: regular sequences and flat-base-change theorems do not state regularity of ring maps; residue-field finiteness is only an ingredient. No geometric-regularity notion occurs in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of fibres descends after extending their residue fields by finite field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.fiberIsoOfBijectiveResidueField\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"{R : Type u_1} →\\n  {R' : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing R'] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R R'] →\\n              [inst_4 : Algebra R S] →\\n                {p : Ideal R} →\\n                  {q : Ideal R'} →\\n   \", \"doc\": \"Given a bijective algebra homomorphism between the residue fields of prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{q} \\\\subseteq R'$, this constructs an order isomorphism between the sets of p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"Algebra.QuasiFinite.instFiniteResidueField\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime] (Q : Ideal S) [inst_5 : Q.IsPrime]\\n  [inst_6 : Q.LiesOver P], Module.Finite P.ResidueField Q.ResidueField\", \"doc\": \"For a quasi-finite algebra $ S $ over a commutative ring $ R $, if $ Q $ is a prime ideal in $ S $ lying over a prime ideal $ P $ in $ R $, then the residue field of $ Q $ is a finite extension of the\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).Over (AlgebraicGeometry.Spec (Y.residueField y))\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this constructs the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ equipped with its canonical projection morphism to $ \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: regular sequences and flat-base-change theorems do not state regularity of ring maps; residue-field finiteness is only an ingredient. No geometric-regularity notion occurs in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring homomorphism is regular if its base change along a finite algebra surjective on prime spectra is regular",
+   "results": "OK 8 hit(s): IsSMulRegular.of_flat, RingTheory.Sequence.IsWeaklyRegular.of_flat, RingTheory.Sequence.IsRegular.of_faithfullyFlat, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingHom.Flat.isStableUnderBaseChange, Module.FaithfullyFlat.of_specComap_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence, geometrically-reduced, general descent-property and flatness results do not state regularity of ring maps"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|IsGRing|regular.*[Ff]inite.*[Ss]urjective",
+   "results": "OK 0 hit(s): ; subdirectory RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence, geometrically-reduced, general descent-property and flatness results do not state regularity of ring maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular ring homomorphisms descend after finite surjective base change",
+   "results": "OK 8 hit(s): RingHom.IsStableUnderBaseChange, AlgebraicGeometry.HasRingHomProperty.descendsAlong, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, RingHom.IsStableUnderBaseChange.mk, RingHom.Etale.isStableUnderBaseChange, RingHom.finite_isStableUnderBaseChange, RingHom.QuasiFinite.isStableUnderBaseChange, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence, geometrically-reduced, general descent-property and flatness results do not state regularity of ring maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyRegular\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence, geometrically-reduced, general descent-property and flatness results do not state regularity of ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of algebras over a field descends after a field extension",
+   "results": "OK 8 hit(s): Algebra.IsGeometricallyReduced.of_injective, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsStandardSmooth.baseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence, geometrically-reduced, general descent-property and flatness results do not state regularity of ring maps"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegular|GeometricallyRegular",
+   "results": "OK 0 hit(s): ; subdirectory RingTheory/RingHom",
+   "date": "2026-10-24",
+   "verdict": "no match: regular-sequence, geometrically-reduced, general descent-property and flatness results do not state regularity of ring maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-finite-surjective-descent",
+  "date": "2026-10-24",
+  "group": "Q155"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, invocation of Greco, Two theorems on excellent rings, Theorem 3.1; the finite-surjective descent statement, not descent of excellence. The finite descent invocation is reduced to Greco Proposition 1.2: detection of regularity of a flat map after finite surjective change of its source ring.",
+   "via": [
+    "lem-per-qe-finite-surjective-descent",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-map-finite-surjective-detection",
+  "worker": "stage1",
+  "summary": "Q60: expanded Greco Proposition 1.2 into fibre identification, finite common-field extension, regularity upstairs, faithfully flat descent for each finite purely inseparable test extension, and assembly with assumed flatness. All inputs already exist; no new nodes or statements. The stronger field argument does not require finiteness of L/k.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, invocation of Greco, Two theorems on excellent rings, Theorem 3.1; the finite-surjective descent statement, not descent of excellence. The finite descent invocation is reduced to Greco Proposition 1.2: detection of regularity of a flat map after finite surjective change of its source ring.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tensor-cancel-base-change",
+    "why": "Generic commutative-algebra/field tool for expanding Greco Proposition 1.2 in the quasi-excellence descent subargument; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic commutative-algebra/field tool for expanding Greco Proposition 1.2 in the quasi-excellence descent subargument; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-compositum-degree-bound",
+    "why": "Generic commutative-algebra/field tool for expanding Greco Proposition 1.2 in the quasi-excellence descent subargument; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "why": "Generic commutative-algebra/field tool for expanding Greco Proposition 1.2 in the quasi-excellence descent subargument; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic commutative-algebra/field tool for expanding Greco Proposition 1.2 in the quasi-excellence descent subargument; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+    "why": "Generic commutative-algebra/field tool for expanding Greco Proposition 1.2 in the quasi-excellence descent subargument; does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-d3cd0f53c",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-d3cd0f53c (reviewer sub-agent of L); spot-checked: PASS: the item's six steps are a complete and correct proof of the statement, and there are no new nodes and no fixes. Statement: retained from the imported node, not weakened; the parent lem-per-qe-finite-surjective-descent step 3 uses it as stated. Greco Prop. 1.2 is not in the local literature and I could not read it; I checked the statement by proving it from the steps. The proof is the common-field argument of Stacks 038W (varieties.tex line 2471, read). Step 1: the map k→L is well defined because p' contracts to p, and the regularity of u' gives that D is Noetherian and geometrically regular over L (def-weil-pbc-g-ring). Step 2: D≅L⊗_kC by applying tensor-cancel twice; the pure-tensor maps check out. Step 3: common-extension-fields and compositum-degree-bound (with F the image of k) give [LK:L]≤[K:k]. Step 4: geometrically-regular-fg-extensions gives M⊗_LD regular, which is isomorphic to (K⊗_kC)⊗_KM. Step 5: field-extension-ff and regular-ring-ff-descent give K⊗_kC regular for every finite purely inseparable K; K=k gives C Noetherian. Step 6: assembly with the assumed flatness of u. Every hypothesis is met. Edge cases: R=0, C=0 (zero ring regular, 0→0 faithfully flat) and K=k all go through; the finiteness of v is not needed. Duplicate search over the DAG for geometrically regular, 07NH, 07QG and regular-permanence: no equivalent node. Not a re-split. I accept the generic algebra tool_uses (sk-thm-p1, Nagata); the worker wrote them into split_report themselves (C8), but they are correct. review.md has the step-by-step checks."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularMapFiniteSurjectiveDetection",
+  "declaration": "RingHom.isRegular_of_finite_surjective_baseChange",
+  "file": "lean/Sheaf/RingTheory/RegularMapFiniteSurjectiveDetection.lean",
+  "statement": "theorem isRegular_of_finite_surjective_baseChange {R : Type u} {Λ : Type v} {R' : Type w} [CommRing R] [CommRing Λ] [CommRing R'] [IsNoetherianRing R] [IsNoetherianRing Λ] [IsNoetherianRing R'] [Algebra R Λ] [Algebra R R'] [Module.Finite R R'] (hflat : (algebraMap R Λ).Flat) (hsurj : ∀ (p : Ideal R) [p.IsPrime], ∃ p' : Ideal R', p'.IsPrime ∧ Ideal.comap (algebraMap R R') p' = p) (hregular : RingHom.IsRegular (Algebra.TensorProduct.includeRight : R' →ₐ[R] TensorProduct R Λ R').toRingHom) : RingHom.IsRegular (algebraMap R Λ)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96944cf11",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: three Noetherian CommRings in independent universes; hflat is RingHom.Flat of algebraMap R Λ; Module.Finite R R' with no extra assumption on v; hsurj is exactly Spec surjectivity via Ideal.comap; u' is Algebra.TensorProduct.includeRight (1⊗r'); hypothesis and conclusion use the recorded RingHom.IsRegular (flat plus geometrically regular Noetherian fibres, algebra taken from f.toAlgebra), so no instance clash. lean.statement is verbatim in the file. Only the item's lean field changed (live was null); the 5 stmt_dep records are identical to side-live; no new nodes or statement_change. Docstrings give the Greco Prop 1.2 place, the blueprint id and all six proof steps; no definitions, so nothing hollow; proof is sorry; autoImplicit off; proof imports exist. Edge cases R=0, R'=0, Λ=0, R'=R, non-flat v are not excluded. No duplicate in Mathlib, WeilConjectures or Sheaf. No compile run (no file changed); worker reports a clean compile."
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-cbc-signed-koszul-summand-term-transport",
+ "kind": "statement",
+ "title": "Transport of one signed Koszul summand",
+ "statement": "For one selected index i in I in the model of [def-cbc-signed-koszul-completion-model], tensor the endomorphism (-1)^{card {j in I : j<i}} times (ringedKoszulScalar(a_i))^{m+1}, then the erased basis inclusion and its degree transport. After the total-tensor sign (-1)^{q+card I} and inclusion, the result equals the global-section coefficient action of (-1)^{q+card I}(-1)^{card {j in I : j<i}}a_i^{m+1}, followed by the coefficient-degree equality transport and erased summand inclusion.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof": [
+  {
+   "text": "Identify the rank-one global-section multiplication map with the Hom scalar action on its identity. Use the naturality of tensorObjIsoSheafification and the module sheafification unit to prove that tensorLeft preserves the global-section scalar action: on a pure tensor this is x tensor (b f(y)) = b (x tensor f(y)). Compose with the inverse right unitor and use bilinearity of composition. This is proved directly, without an unproved scalar-transport lemma.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Global-section multiplication on the rank-one module is a ring map into its endomorphisms (checked sectionwise), so the integer sign (-1)^|{j in I:j<i}| times the (m+1)-st power of multiplication by a_i is multiplication by rho((-1)^|{j in I:j<i}| a_i^(m+1)). Substitute the two degree equalities in a generic tensor-inclusion transport identity; after substitution both sides coincide, by proof irrelevance. Apply the identity to the erased basis and combine the total-tensor unit sign with the signed scalar power. Split by parity of q+|I| and use rho preserving multiplication and negation.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E finite free tensor calculation; P1 Lean proof by sectionwise scalar linearity, sheafification-unit naturality, equality induction and parity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor-left scalar equality transport signed Koszul summand",
+   "results": "No existing declaration for this specified sheaf scalar transport.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "rightUnitor_inv_naturality tensorLeft map scalar",
+   "results": "Generic naturality lemmas only; no specified summand transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedKoszulCoefficientSMul tensorLeft equality transport",
+   "results": "No existing declaration for this specified sheaf scalar transport.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedKoszulSummandDifferential",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-signed-koszul-summand-differential",
+   "place": "The scalar-action and equality-transport calculation for one erased-index summand."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulSummandTermTransport",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulSummandTermTransport.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulSummand_D₂_term",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27",
+  "statement": "theorem ringedNegativeKoszulSummand_D₂_term\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]\n    (ρ : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat))\n    (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (K : ringedSiteComplex O) (q : ℤ)\n    (I : Finset (Fin (r + 1))) (i : Fin (r + 1)) (hi : i ∈ I)\n    (hdeg : q + (I.card : ℤ) = (q + 1) + ((I.erase i).card : ℤ))\n    (hsrc : -(I.card : ℤ) + 1 = -((I.erase i).card : ℤ)) :\n    letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=\n      SheafOfModules.isGrothendieckAbelian _\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := Classical.choice (SheafOfModules.tensorClosed O).1\n    letI := Classical.choice (SheafOfModules.tensorClosed O).2.1\n    let Q := ringedNegativeKoszul O (r + 1)\n      (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m\n    ((-1 : ℤˣ) ^ (q + (I.card : ℤ))) •\n        (MonoidalCategory.rightUnitor (K.X (q + I.card))).inv ≫\n      (MonoidalCategory.tensorLeft (K.X (q + I.card))).map\n        (((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •\n            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)) ≫\n          ringedNegativeKoszulBasis O\n            (r + 1) (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m\n            (I.erase i) (-((I.erase i).card : ℤ)) ≫\n          eqToHom (congrArg Q.X hsrc.symm)) ≫\n      CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor _)\n        (q + I.card) (-(I.card : ℤ) + 1) (q + 1) (by omega) =\n      ringedKoszulCoefficientSMul O ρ\n          ((if Even (q + (I.card : ℤ)) then (1 : A) else -1) *\n            (-1 : A) ^ (I.filter (fun j ↦ j < i)).card * a i ^ (m + 1))\n        (K.XIsoOfEq hdeg).hom ≫\n        (MonoidalCategory.rightUnitor (K.X (q + 1 + (I.erase i).card))).inv ≫\n        (MonoidalCategory.tensorHom (𝟙 _) \n          (ringedNegativeKoszulBasis O\n            (r + 1) (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m\n            (I.erase i) (-((I.erase i).card : ℤ)))) ≫\n        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor _)\n          (q + 1 + (I.erase i).card) (-((I.erase i).card : ℤ)) (q + 1) (by omega)"
+ },
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensor scalar and equality transport for one erased index."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T181147-L-3439054",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c2185",
+  "group": "P1",
+  "result": "fix",
+  "landing": "20261027T012912-L-2345305",
+  "kind": "interface",
+  "note": "independent cc review: corrected statements of ringedNegativeKoszulSummand_D₂_term and ringedNegativeKoszulBasis_d_succ checked against ringedNegativeKoszulFactor (double of scalar^(m+1)) and the ε₂ tensor sign; original SignedKoszulSummandDifferential compiled against delivered item fails at line 180 (adaptation forced); item axioms clean; 3b importer SignedKoszulTensorCoordinates OK"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "M1 stage 3",
+  "old_statement": "For one selected index i in I, after the ordered basis differential is tensorized, the corresponding tensor-left scalar, basis inclusion and equality transport equal the recorded coefficient scalar times the erased summand inclusion.",
+  "what": "The left side used the unsigned first power of a_i although the right side used its signed (m+1)-st power. For one factor, m=1, a_0=2, K=O[0], q=-1 and I={0}, the old statement equates multiplication by 2 and 4. Insert the signed power on the left; the right side and all hypotheses stay unchanged.",
+  "source": {
+   "document": "literature/stacks-project/algebraization.tex",
+   "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensor scalar and equality transport for one erased index."
+  },
+  "citers": [
+   {
+    "id": "lem-cbc-signed-koszul-summand-differential",
+    "holds": true,
+    "note": "The sole consumer applies this term equality to each summand of the basis differential. The repaired left side is exactly the term of the repaired basis theorem; the consumer conclusion is unchanged."
+   }
+  ]
+ }
+}

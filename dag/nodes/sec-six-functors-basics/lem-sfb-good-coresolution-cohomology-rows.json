@@ -1,0 +1,418 @@
+{
+ "id": "lem-sfb-good-coresolution-cohomology-rows",
+ "kind": "statement",
+ "title": "Good coresolutions are exact on cohomology rows",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $M^\\bullet,E_0^\\bullet,E_1^\\bullet,\\ldots$ be integer-indexed cochain complexes of abelian groups, with additive differentials $d^n:V^n\\to V^{n+1}$ satisfying $d^{n+1}d^n=0$ for each complex $V^\\bullet$. Let $u:M^\\bullet\\to E_0^\\bullet$ and $f_i:E_i^\\bullet\\to E_{i+1}^\\bullet$ be chain maps (degree-preserving additive maps commuting with the differentials). Assume $0\\to M^\\bullet\\xrightarrow{u}E_0^\\bullet\\xrightarrow{f_0}E_1^\\bullet\\to\\cdots$ is exact in every degree. For each $n\\in\\mathbf Z$ put $C^n(V)=V^n/d_V^{n-1}(V^{n-1})$, and assume the induced sequence $0\\to C^n(M)\\to C^n(E_0)\\to C^n(E_1)\\to\\cdots$ is exact. Then, writing $H^n(V)=\\ker(d_V^n)/d_V^{n-1}(V^{n-1})$, the induced sequence $0\\to H^n(M)\\xrightarrow{H^n(u)}H^n(E_0)\\xrightarrow{H^n(f_0)}H^n(E_1)\\to\\cdots$ is exact for every $n\\in\\mathbf Z$. Exactness means that each incoming image equals the following kernel, including injectivity of the first displayed map. No boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof: the displayed exact sequence of cohomology groups and its reference to the diagram chase in lemma-good-resolution-gives-qis."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the horizontal sequence by $A_0=M$, $A_{j+1}=E_j$ for $j\\ge0$, with maps $h_0=u$, $h_{j+1}=f_j$. Put $A_j=0$ for $j<0$ and let all maps from these zero complexes be zero. The term rows and quotient rows remain exact at every index: at $A_0$ this is precisely the assumed injectivity, and at negative indices it is $0=0$. Chain maps preserve cycles and boundaries since $dh_j=h_jd$, so they induce the displayed maps on $C^n$ and $H^n$. Degreewise exactness gives $h_jh_{j-1}=0$. Consequently the incoming cohomology image is contained in the outgoing kernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+   }
+  },
+  {
+   "text": "Fix $n$. If a cycle $z\\in A_0^n$ maps to zero in $H^n(A_1)$, then $h_0z$ is a boundary, so the image of $[z]\\in C^n(A_0)$ is zero. Injectivity of $C^n(h_0)$ gives $[z]=0$ in $C^n(A_0)$, that is $z=dy$ for some $y\\in A_0^{n-1}$. Its cohomology class is therefore zero. Thus $H^n(h_0)$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+   }
+  },
+  {
+   "text": "Let $j\\ge1$ and let a cycle $z\\in A_j^n$ represent a class in the kernel of $H^n(h_j)$. Then $h_jz$ is a boundary. Exactness of the $C^n$ row at $A_j$ gives $x\\in A_{j-1}^n$ with $[z]=[h_{j-1}x]$. Equality in this quotient means $z=h_{j-1}x+dy$ for some $y\\in A_j^{n-1}$. Differentiating and using $dz=d^2y=0$ gives $h_{j-1}dx=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+   }
+  },
+  {
+   "text": "Exactness of the degree-$(n+1)$ term row at $A_{j-1}$ now gives $t\\in A_{j-2}^{n+1}$ such that $dx=h_{j-2}t$. For $j=1$ this says $dx=0$ by injectivity of $h_0$ and takes $t=0$ in $A_{-1}=0$. Since $dx$ is a boundary, $[t]\\in C^{n+1}(A_{j-2})$ maps to zero under $C^{n+1}(h_{j-2})$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+   }
+  },
+  {
+   "text": "Exactness of the $C^{n+1}$ row at $A_{j-2}$ gives $s\\in A_{j-3}^{n+1}$ and $v\\in A_{j-2}^n$ with $t=h_{j-3}s+dv$. When $j=1$ take $s=v=0$; when $j=2$, this is exactly injectivity of $C^{n+1}(h_0)$, giving $t=dv$ and $s=0$. Hence $dx=h_{j-2}t=h_{j-2}dv=d(h_{j-2}v)$, using $h_{j-2}h_{j-3}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+   }
+  },
+  {
+   "text": "Set $x'=x-h_{j-2}v\\in A_{j-1}^n$. The preceding equality gives $dx'=0$, and $h_{j-1}x'=h_{j-1}x$ since $h_{j-1}h_{j-2}=0$. Thus $z=h_{j-1}x'+dy$, so $[z]=H^n(h_{j-1})[x']$. This proves the reverse kernel-image inclusion at every $A_j$, $j\\ge1$. Together with step 2 and the inclusion in step 1 it proves the claimed exact cohomology row. The argument used only degrees $n-1,n,n+1$ and finitely many horizontal positions, so it requires no boundedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, displayed exact cohomology row; explicit element chase expanding its reference to Tag 09IZ, lemma-good-resolution-gives-qis, first paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact augmented sequence of cochain complexes of abelian groups that stays exact on differential cokernels stays exact on cohomology",
+   "results": {
+    "t": "2026-10-24T01:56:36Z",
+    "tool": "leanfinder",
+    "query": "An exact augmented sequence of cochain complexes of abelian groups that stays exact on differential cokernels stays exact on cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.map_cochainsFunctor_shortExact",
+     "groupCohomology.mapShortComplex₂_exact",
+     "groupCohomology.mapShortComplex₃_exact",
+     "CategoryTheory.Abelian.Ext.covariant_sequence_exact₂'",
+     "groupCohomology.mapShortComplex₁_exact",
+     "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'",
+     "CategoryTheory.Abelian.Ext.covariant_sequence_exact₁'",
+     "HomologicalComplex.HomologySequence.composableArrows₂_exact"
+    ],
+    "digest": "08f81a9e39c2761e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern short exact sequences, group cohomology, or individual short complexes. Read homology_exact₂ in Mathlib/Algebra/Homology/HomologySequence.lean:303-322; it assumes a short exact sequence of complexes, whereas the three consecutive terms here need not have mono first map or epi last map. SpectralObject/Page.lean:260-277 concerns a different cokernel sequence. No one-line specialization gives these infinite cohomology rows."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(homology|exact)|homology.*cokernel",
+   "results": {
+    "t": "2026-10-24T01:57:16Z",
+    "tool": "grep",
+    "query": "cokernel.*(homology|exact)|homology.*cokernel",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean"
+    ],
+    "digest": "a88bf86c7b263839"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern short exact sequences, group cohomology, or individual short complexes. Read homology_exact₂ in Mathlib/Algebra/Homology/HomologySequence.lean:303-322; it assumes a short exact sequence of complexes, whereas the three consecutive terms here need not have mono first map or epi last map. SpectralObject/Page.lean:260-277 concerns a different cokernel sequence. No one-line specialization gives these infinite cohomology rows."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact sequence of complexes exact on cokernels of differentials induces an exact sequence of cohomology groups",
+   "results": {
+    "t": "2026-10-24T01:57:17Z",
+    "tool": "leansearch",
+    "query": "An exact sequence of complexes exact on cokernels of differentials induces an exact sequence of cohomology groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.exact_of_g_is_cokernel",
+     "HomologicalComplex.opcycles_right_exact",
+     "groupHomology.mapShortComplex₃_exact",
+     "groupCohomology.mapShortComplex₃_exact",
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₂",
+     "CategoryTheory.ShortComplex.RightHomologyData.ofHasCokernelOfHasKernel",
+     "groupCohomology.mapShortComplex₂_exact",
+     "CategoryTheory.ShortComplex.ShortExact.gIsCokernel"
+    ],
+    "digest": "775dff041f76ff06"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern short exact sequences, group cohomology, or individual short complexes. Read homology_exact₂ in Mathlib/Algebra/Homology/HomologySequence.lean:303-322; it assumes a short exact sequence of complexes, whereas the three consecutive terms here need not have mono first map or epi last map. SpectralObject/Page.lean:260-277 concerns a different cokernel sequence. No one-line specialization gives these infinite cohomology rows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"Exact\"",
+   "results": {
+    "t": "2026-10-24T01:57:17Z",
+    "tool": "loogle",
+    "query": "\"homology\", \"Exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "CategoryTheory.ShortComplex.Exact.hasHomology",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_homology",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_leftHomology",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_rightHomology",
+     "CategoryTheory.ShortComplex.HomologyData.exact_iff",
+     "CategoryTheory.ShortComplex.HomologyData.exact_iff'",
+     "CategoryTheory.ShortComplex.LeftHomologyData.exact_iff"
+    ],
+    "digest": "966cd46e26ab4011"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern short exact sequences, group cohomology, or individual short complexes. Read homology_exact₂ in Mathlib/Algebra/Homology/HomologySequence.lean:303-322; it assumes a short exact sequence of complexes, whereas the three consecutive terms here need not have mono first map or epi last map. SpectralObject/Page.lean:260-277 concerns a different cokernel sequence. No one-line specialization gives these infinite cohomology rows."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Good right resolution exact differential quotient rows imply exact homology rows",
+   "results": {
+    "t": "2026-10-24T01:57:18Z",
+    "tool": "leanfinder",
+    "query": "Good right resolution exact differential quotient rows imply exact homology rows",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₂",
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₁",
+     "HomologicalComplex.HomologySequence.composableArrows₃_exact",
+     "HomologicalComplex.opcycles_right_exact",
+     "HomologicalComplex.HomologySequence.composableArrows₂_exact",
+     "HomologicalComplex.HomologySequence.composableArrows₅_exact",
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₃"
+    ],
+    "digest": "e82b3920e99facca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern short exact sequences, group cohomology, or individual short complexes. Read homology_exact₂ in Mathlib/Algebra/Homology/HomologySequence.lean:303-322; it assumes a short exact sequence of complexes, whereas the three consecutive terms here need not have mono first map or epi last map. SpectralObject/Page.lean:260-277 concerns a different cokernel sequence. No one-line specialization gives these infinite cohomology rows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"Exact\"",
+   "results": {
+    "t": "2026-10-24T02:24:47Z",
+    "tool": "loogle",
+    "query": "\"homology\", \"Exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "CategoryTheory.ShortComplex.Exact.hasHomology",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_homology",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_leftHomology",
+     "CategoryTheory.ShortComplex.exact_iff_isZero_rightHomology",
+     "CategoryTheory.ShortComplex.HomologyData.exact_iff",
+     "CategoryTheory.ShortComplex.HomologyData.exact_iff'",
+     "CategoryTheory.ShortComplex.LeftHomologyData.exact_iff"
+    ],
+    "digest": "966cd46e26ab4011"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: short-exact homology sequences and single-short-complex exactness are not this infinite-row assertion. Read Mathlib/Algebra/Homology/HomologySequence.lean:303-322 (ShortExact.homology_exact₂ requires a short exact sequence, absent for consecutive horizontal terms) and SpectralObject/Page.lean:260-277 (a different spectral-object cokernel sequence). The explicit correction of a lift to a cocycle is additional mathematics, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(homology|exact)|homology.*cokernel",
+   "results": {
+    "t": "2026-10-24T02:24:47Z",
+    "tool": "grep",
+    "query": "cokernel.*(homology|exact)|homology.*cokernel",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+     "Mathlib/Algebra/Homology/HomologySequence.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+    ],
+    "digest": "419e7eebdade11b7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: short-exact homology sequences and single-short-complex exactness are not this infinite-row assertion. Read Mathlib/Algebra/Homology/HomologySequence.lean:303-322 (ShortExact.homology_exact₂ requires a short exact sequence, absent for consecutive horizontal terms) and SpectralObject/Page.lean:260-277 (a different spectral-object cokernel sequence). The explicit correction of a lift to a cocycle is additional mathematics, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact augmented sequence of cochain complexes exact on differential cokernels is exact on cohomology",
+   "results": {
+    "t": "2026-10-24T02:24:50Z",
+    "tool": "leanfinder",
+    "query": "An exact augmented sequence of cochain complexes exact on differential cokernels is exact on cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.exactAt_of_isLE",
+     "CochainComplex.exactAt_of_isGE",
+     "groupCohomology.map_cochainsFunctor_shortExact",
+     "groupCohomology.mapShortComplex₃_exact",
+     "groupCohomology.mapShortComplex₂_exact",
+     "groupCohomology.mapShortComplex₁_exact",
+     "HomologicalComplex.HomologySequence.composableArrows₅_exact",
+     "CategoryTheory.Abelian.Ext.covariantSequence_exact"
+    ],
+    "digest": "7d32bed695310bb6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: short-exact homology sequences and single-short-complex exactness are not this infinite-row assertion. Read Mathlib/Algebra/Homology/HomologySequence.lean:303-322 (ShortExact.homology_exact₂ requires a short exact sequence, absent for consecutive horizontal terms) and SpectralObject/Page.lean:260-277 (a different spectral-object cokernel sequence). The explicit correction of a lift to a cocycle is additional mathematics, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good right resolution exact cokernel rows imply exact cohomology rows",
+   "results": {
+    "t": "2026-10-24T02:24:50Z",
+    "tool": "leansearch",
+    "query": "Good right resolution exact cokernel rows imply exact cohomology rows",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.exact_of_g_is_cokernel",
+     "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+     "CategoryTheory.ShortComplex.HasRightHomology.of_hasCokernel_of_hasKernel",
+     "CategoryTheory.ShortComplex.hasRightHomology_of_hasHomology",
+     "CategoryTheory.ShortComplex.exact_iff_mono_cokernel_desc",
+     "CategoryTheory.ComposableArrows.Exact.cokerIsoKer'",
+     "CategoryTheory.ShortComplex.RightHomologyData.ofHasCokernelOfHasKernel_Q",
+     "CategoryTheory.ComposableArrows.Exact.cokerIsoKer"
+    ],
+    "digest": "8527b91ac6a3a64c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: short-exact homology sequences and single-short-complex exactness are not this infinite-row assertion. Read Mathlib/Algebra/Homology/HomologySequence.lean:303-322 (ShortExact.homology_exact₂ requires a short exact sequence, absent for consecutive horizontal terms) and SpectralObject/Page.lean:260-277 (a different spectral-object cokernel sequence). The explicit correction of a lift to a cocycle is additional mathematics, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact rows of complexes and exact quotient by boundaries rows imply exact homology rows",
+   "results": {
+    "t": "2026-10-24T02:25:11Z",
+    "tool": "leanfinder",
+    "query": "Exact rows of complexes and exact quotient by boundaries rows imply exact homology rows",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₂",
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₁",
+     "CategoryTheory.ShortComplex.ShortExact.homology_exact₃",
+     "HomologicalComplex.HomologySequence.composableArrows₂_exact",
+     "HomologicalComplex.HomologySequence.composableArrows₃_exact",
+     "HomologicalComplex.HomologySequence.composableArrows₅_exact",
+     "CategoryTheory.ShortComplex.SnakeInput.L₂_exact",
+     "HomologicalComplex.exact_of_degreewise_exact"
+    ],
+    "digest": "ef5ac5d7329c57f2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: short-exact homology sequences and single-short-complex exactness are not this infinite-row assertion. Read Mathlib/Algebra/Homology/HomologySequence.lean:303-322 (ShortExact.homology_exact₂ requires a short exact sequence, absent for consecutive horizontal terms) and SpectralObject/Page.lean:260-277 (a different spectral-object cokernel sequence). The explicit correction of a lift to a cocycle is additional mathematics, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-good-coresolution-product-total",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited supporting input under current latest det-thm-sf-ctf-stability-direct-images, proof (3): Tag 09LT uses Tag 09KU; its product-total resolution uses Tag 09J0. Here: 09J0 proof, the exact cohomology rows used in the recursive boundary construction.",
+   "via": [
+    "lem-sfb-good-coresolution-product-total",
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-good-coresolution-cohomology-rows",
+  "worker": "stage1",
+  "summary": "Expanded the cohomology-row assertion used in Stacks 09J0 into six elementary element-chase steps. Kept the statement and its sole statement dependency unchanged. A quotient lift is corrected to a cycle using term exactness in degree n+1 and quotient exactness in degree n+1; the initial two positions are checked explicitly. No new nodes or attachments. Repeated the required Mathlib searches through msearch and read the candidates.",
+  "blueprint": "Inherited supporting input below lem-sfb-good-coresolution-product-total under the current latest det-thm-sf-ctf-stability-direct-images proof (3). Steps 1-6 supply exactly the displayed cohomology-row assertion in Tag 09J0 invoked by the parent; no unit route is replaced. The latest blueprint does not itself separately state this elementary supporting assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-a75fb04f1",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-a75fb04f1 (reviewer sub-agent of L); spot-checked: I read the whole item (6 steps, no new nodes) against the 09J0 proof in Stacks homology.tex (lemma-good-right-resolution-gives-qis), specifically its displayed exact H^p row, and against the first paragraph of 09IZ (lemma-good-resolution-gives-qis). The statement is unchanged from live and matches 09J0's hypotheses exactly: a degreewise exact row, exact rows of Coker(d^p) for every p, and no boundedness. C^n = Coker(d^{n-1}) is only an index shift. Compared with live, only proof, proof_origin, split_report, status and mathlib_searches changed. Live still has the item unsplit and there is no repair note, so nothing supersedes this delivery. I re-derived the chase myself. Step 2 gets injectivity from the injectivity of C^n(u). Steps 3-6 lift a kernel class through the C^n row, take dx = h_{j-2}t from the degree-(n+1) term row, write t = h_{j-3}s + dv from the C^{n+1} row, and correct x by h_{j-2}v. The j=1 and j=2 boundary cases are handled correctly, and the degrees and signs check. Each step is a few-line element computation, so elementary=true is justified. No step quotes a tag, uses equals proof_deps equals [], there is no cycle, and no route or tool_uses question arises. The proof replaces Stacks' long-exact-sequence argument with a direct element chase, and proof_origin is correctly marked agent. Small-case tests: with zero differentials the claim is just the term row. M = Z[-1] inside [Z→Z] → Z[0] is degreewise exact but has a non-injective H^1, and there the C^1 row also fails, so the hypothesis is necessary. rg -L over the DAG found no duplicate. The sec-picard-framework total-resolution nodes are the dual kernel-row (09IZ) chain. The citer lem-sfb-good-coresolution-product-total uses exactly this row in its steps 2 and 4. All three kinds of Mathlib search are recorded. homology_exact₂ covers only short exact sequences of complexes and does not give this in one line. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.GoodCoresolutionCohomologyRows",
+  "declaration": "CochainComplex.GoodCoresolution.homology_rows_exact",
+  "file": "lean/Sheaf/Algebra/Homology/GoodCoresolutionCohomologyRows.lean",
+  "statement": "theorem homology_rows_exact (M : CochainComplex AddCommGrpCat.{u} ℤ) (E : ℕ → CochainComplex AddCommGrpCat.{u} ℤ) (u : M ⟶ E 0) (f : ∀ i : ℕ, E i ⟶ E (i + 1)) (h_inj : ∀ n : ℤ, Function.Injective (u.f n)) (h₀ : ∀ n : ℤ, Function.Exact (u.f n) ((f 0).f n)) (h : ∀ (i : ℕ) (n : ℤ), Function.Exact ((f i).f n) ((f (i + 1)).f n)) (hc_inj : ∀ n : ℤ, Function.Injective (opcyclesMap u n)) (hc₀ : ∀ n : ℤ, Function.Exact (opcyclesMap u n) (opcyclesMap (f 0) n)) (hc : ∀ (i : ℕ) (n : ℤ), Function.Exact (opcyclesMap (f i) n) (opcyclesMap (f (i + 1)) n)) : ∀ n : ℤ, Function.Injective (homologyMap u n) ∧ Function.Exact (homologyMap u n) (homologyMap (f 0) n) ∧ ∀ i : ℕ, Function.Exact (homologyMap (f i) n) (homologyMap (f (i + 1)) n)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-227bb2f30",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, Stacks 09J0 (homology.tex l.6928ff), stmt_dep def-weil-size-convention (convention, bind universes directly), module and parent GoodCoresolutionProductTotal. Term-row hyps h_inj/h₀/h and quotient-row hyps hc_inj/hc₀/hc (opcycles n = coker of d^{n-1} = source Coker(d^p) shifted) match node positions for all n:ℤ; conclusion ∀ n injective+exact at E_0+exact at all E_i, neither weaker nor stronger; no boundedness, extra instances or universe restriction. Edge cases (zero complexes, M=0, zero differentials, E_0/E_1 positions) covered. No Mathlib/project duplicate. Docstrings carry source place, blueprint id and all 6 proof steps; proof sorry only; no definitions. Node differs from live only in lean; lean.statement verbatim. Report has Worker report and Second reading by Q29. No files changed, no compile. No findings."
+ }
+}

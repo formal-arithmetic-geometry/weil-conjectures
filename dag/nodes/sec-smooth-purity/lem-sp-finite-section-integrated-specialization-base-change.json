@@ -1,0 +1,152 @@
+{
+ "id": "lem-sp-finite-section-integrated-specialization-base-change",
+ "kind": "statement",
+ "title": "Base change of integrated section specialization for arbitrary finite coefficients",
+ "statement": "Let A be a finite commutative ring, N a positive integer with N A = 0, and S and Sprime noetherian schemes on which N is invertible [lem-trf-finite-ring-section-deformation]. Let g:V to S and gprime:Vprime to Sprime be compactifiable smooth separated quasi-compact morphisms of pure relative dimension d, with closed sections s and sprime and supplied Geometry witnesses [lem-trf-finite-ring-section-deformation]. Let b:Sprime to S and q:Vprime to V form a Cartesian square preserving the sections [def-pc-base-change]. Supply the canonical cone-to-bundle Cartesian squares, and Rees family isomorphisms kappa and kappaprime normalized at one [def-pur-finite-smooth-canonical-maps]. Define integratedSpecialization(g,s,kappa) as zero specialization followed by inverse normalSectionMap and the inverse integration adjunct on the conormal bundle [def-pur-vector-purity-normalization]. Then pullback of integratedSpecialization followed by the specified Kummer-normalized Tate-line comparison equals the canonical sectionMap followed by integratedSpecialization(gprime,sprime,kappaprime). This statement concerns section invariants only; no diagonal factor or orientation of a smooth morphism is assumed or concluded. It includes d=0, empty schemes and the zero coefficient ring.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pc-base-change",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-vector-purity-normalization"
+ ],
+ "proof": [
+  {
+   "text": "For the Cartesian change of smooth section pairs, identify the new pair with the canonical pullback pair. Extended-Rees base change identifies the family and both fibres, preserves the sections, and identifies the associated-graded map with the symmetric conormal base-change map. This identifies the actual normal cone with the pulled-back normal bundle, preserving its projection and zero section.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  },
+  {
+   "text": "Transport the normalized Rees comparison through the family exchange. The exceptional-fibre coherence equation at one shows that this transport is normalized. Uniqueness of the finite-ring normalized comparison identifies it with the supplied primed comparison. Restriction at zero gives sectionMap followed by specialization-prime equal to pullback(specialization) followed by normal-section exchange.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-section-exceptional-fibre-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  },
+  {
+   "text": "The Kummer-normalized vector integration trace commutes with arbitrary Noetherian base change. Transpose this equality through the actual compact-support adjunctions and restrict to zero. Invertibility of the integration adjunct gives its inverse orientation square. Homogeneous normalization of the cone-to-bundle isomorphism identifies its section comparison with the normal exchange in the preceding step.",
+   "uses": [
+    "lem-pur-vector-trace-geometric-descent",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  },
+  {
+   "text": "Compose the specialization square and the inverse-integration square, then cancel the intervening normal exchange. This is the displayed integratedSpecialization square by its explicit three-factor definition. The tensor-root comparison is the specified purityTwistTransport. Rank zero uses empty tensor products, arbitrary coefficient rings need no scalar flatness, and empty schemes or zero rings give equations in zero categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "lem-trf-section-rees-base-change-etale",
+  "lem-trf-section-exceptional-fibre-coherence",
+  "lem-pur-vector-trace-geometric-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed smooth section deformation specialization and inverse normal bundle integration commute with arbitrary base change",
+   "date": "2026-10-27",
+   "results": "Eight unrelated smooth-manifold/vector-field matches; no finite-ring section-specialization theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\", \"Functor.map\", \"Iso.hom\"",
+   "date": "2026-10-27",
+   "results": "No hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integratedSpecialization|section_dnc_integration|bundleSectionAdjoint",
+   "date": "2026-10-27",
+   "results": "No Mathlib hits. Local SectionDncIntegrationSquare uses PurityFiniteSetting coefficient coordinates; finite-ring deformation and vector trace base change supply the separate component results.",
+   "verdict": "no exact match at arbitrary finite A in ordinary etale coordinates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "G4",
+  "item": "Sheaf.Paper.FiniteSmoothOrientationBaseChange",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-normalized-orientation-base-change",
+   "place": "Proof step 1, the closed-section integrated DNC square at arbitrary finite A",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSectionIntegratedSpecialization",
+  "file": "lean/Sheaf/Paper/FiniteSectionIntegratedSpecialization.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.integratedSpecialization_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.normalSectionMap_isIso",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.integratedSpecialization",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.integratedSpecialization_normalization",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.integratedSpecialization_baseChange"
+  ],
+  "statement": "theorem integratedSpecialization_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {V S V' S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']\n    (d : ℕ) (g : V ⟶ S) (g' : V' ⟶ S')\n    [SmoothOfRelativeDimension d g] [SmoothOfRelativeDimension d g']\n    [IsSeparated g] [QuasiCompact g] [HasCompactification g]\n    [IsSeparated g'] [QuasiCompact g'] [HasCompactification g']\n    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']\n    [FiniteRingSectionDeformation.Geometry d g s]\n    [FiniteRingSectionDeformation.Geometry d g' s']\n    (hs : s ≫ g = 𝟙 S) (hs' : s' ≫ g' = 𝟙 S')\n    (b : S' ⟶ S) (q : V' ⟶ V) (cart : IsPullback q g' g b)\n    (hsec : s' ≫ q = b ≫ s)\n    (sq : IsPullback\n      ((reesConeComparison s ≪≫ FiniteRingSectionDeformation.coneBundleIso d g s).hom)\n      (Scheme.Hom.normalConeProj g s)\n      (VectorBundleZeroSection.π S d (ConormalGradedAlgebra.piece s 1)) (𝟙 S))\n    (sq' : IsPullback\n      ((reesConeComparison s' ≪≫ FiniteRingSectionDeformation.coneBundleIso d g' s').hom)\n      (Scheme.Hom.normalConeProj g' s')\n      (VectorBundleZeroSection.π S' d (ConormalGradedAlgebra.piece s' 1)) (𝟙 S'))\n    (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S', ⊤)))\n    (κ : NoetherianSectionSpecialization.family A g s ≅\n      (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj\n        (sectionInvariant A g s))\n    (κ' : NoetherianSectionSpecialization.family A g' s' ≅\n      (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S')).obj\n        (sectionInvariant A g' s'))\n    (hκ : NoetherianSectionSpecialization.Normalized A g s hs κ)\n    (hκ' : NoetherianSectionSpecialization.Normalized A g' s' hs' κ') :\n    (ordinaryFinitePullback A b).map\n        (integratedSpecialization A d g s hs sq N hN hA hS κ) ≫\n        (vectorIntegrationBaseCoefficientPullback A N hA\n          (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom =\n      NoetherianSectionSpecialization.sectionMap A g g' b q cart s s' hsec ≫\n        integratedSpecialization A d g' s' hs' sq' N hN hA hS' κ'",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T222659-L-681333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T222659-L-681333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

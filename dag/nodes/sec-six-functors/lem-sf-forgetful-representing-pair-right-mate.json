@@ -1,0 +1,391 @@
+{
+ "id": "lem-sf-forgetful-representing-pair-right-mate",
+ "kind": "statement",
+ "title": "Representing lifts identify the right mate under arbitrary forgetting",
+ "statement": "Let $\\mathcal W_X,\\mathcal W_Y,\\mathcal C_X,\\mathcal C_Y$ be locally small categories and let $U_X:\\mathcal W_X\\to\\mathcal C_X$, $U_Y:\\mathcal W_Y\\to\\mathcal C_Y$ be functors. Suppose $F^{\\mathrm W}:\\mathcal W_X\\to\\mathcal W_Y$ has a specified right adjoint $G^{\\mathrm W}$ with unit $\\eta^{\\mathrm W}$ and counit $\\epsilon^{\\mathrm W}$, and $F:\\mathcal C_X\\to\\mathcal C_Y$ has a specified right adjoint $G$ with unit $\\eta$ and counit $\\epsilon$. Adjunction means natural mutually inverse Hom bijections, with transpose $u:K\\to GL$ sent to $\\epsilon_LF(u)$ and inverse $t\\mapsto G(t)\\eta_K$. Let $c:U_YF^{\\mathrm W}\\xrightarrow{\\sim}FU_X$ be a natural isomorphism.\n\nSuppose for each $L\\in\\mathcal W_Y$ there are an object $H_L\\in\\mathcal W_X$, an isomorphism $e_L:U_XH_L\\xrightarrow{\\sim}GU_YL$, and a morphism $d_L:F^{\\mathrm W}H_L\\to L$ such that $U_Y(d_L)=\\epsilon_{U_YL}F(e_L)c_{H_L}$, and $u\\mapsto d_LF^{\\mathrm W}(u)$ is a bijection $\\operatorname{Hom}(K,H_L)\\to\\operatorname{Hom}(F^{\\mathrm W}K,L)$ for every $K$, naturally in $K$.\n\nThere is a unique isomorphism $h_L:G^{\\mathrm W}L\\xrightarrow{\\sim}H_L$ with $d_LF^{\\mathrm W}(h_L)=\\epsilon^{\\mathrm W}_L$. The natural transformation $\\beta:U_XG^{\\mathrm W}\\to GU_Y$, whose component is the ordinary adjunct of $U_Y(\\epsilon^{\\mathrm W}_L)c_{G^{\\mathrm W}L}^{-1}$, satisfies $\\beta_L=e_LU_X(h_L)$ and is therefore a natural isomorphism. It is independent of all choices of representing triples and identifies both counits and units:\n$$\\epsilon_{U_YL}F(\\beta_L)c_{G^{\\mathrm W}L}=U_Y(\\epsilon^{\\mathrm W}_L),\\qquad G(c_K)\\beta_{F^{\\mathrm W}K}U_X(\\eta^{\\mathrm W}_K)=\\eta_{U_XK}.$$\nHere the right-mate transformation is the one defined in [def-weil-pbc-adjunction-mate] from $c^{-1}$ and the two specified adjunctions. No faithfulness or fullness of $U_X,U_Y$, and no functorial choice of representing triples, is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Fix $L$ and abbreviate $A=G^{\\mathrm W}L$, $H=H_L$, $d=d_L$. Write $P_K(v)=\\epsilon^{\\mathrm W}_LF^{\\mathrm W}(v)$ and $Q_K(u)=dF^{\\mathrm W}(u)$ for the two given bijections onto $\\operatorname{Hom}(F^{\\mathrm W}K,L)$. Define $h=Q_A^{-1}(\\epsilon^{\\mathrm W}_L)$ and $k=P_H^{-1}(d)$. Functoriality gives $Q_H(hk)=\\epsilon^{\\mathrm W}_LF^{\\mathrm W}(k)=d=Q_H(1_H)$ and $P_A(kh)=dF^{\\mathrm W}(h)=\\epsilon^{\\mathrm W}_L=P_A(1_A)$. Injectivity gives $hk=1_H$ and $kh=1_A$. Thus $h=h_L$ is an isomorphism; $Q_A$-injectivity also gives uniqueness among all morphisms satisfying the required counit equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+   }
+  },
+  {
+   "text": "Apply [def-weil-pbc-adjunction-mate] with $L_1=F^{\\mathrm W}$, $R_1=G^{\\mathrm W}$, $L_2=F$, $R_2=G$, and its horizontal functors equal to $U_X,U_Y$; take $\\alpha=c^{-1}:FU_X\\to U_YF^{\\mathrm W}$. It supplies a natural transformation $\\beta:U_XG^{\\mathrm W}\\to GU_Y$. At $L$, its transpose is exactly $t_L=U_Y(\\epsilon^{\\mathrm W}_L)c_{G^{\\mathrm W}L}^{-1}$, and therefore $\\beta_L=G(t_L)\\eta_{U_XG^{\\mathrm W}L}$. This construction involves only the specified adjunctions and $c$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+   }
+  },
+  {
+   "text": "Keep $L,A,H,h$ as in Step 1. Naturality of $c$ at $h:A\\to H$ says $c_HU_Y(F^{\\mathrm W}(h))=F(U_X(h))c_A$. Using the assumed equation for $U_Y(d)$ and the defining equation for $h$, compute\n$$\\epsilon_{U_YL}F(e_LU_X(h))=\\epsilon_{U_YL}F(e_L)c_HU_Y(F^{\\mathrm W}(h))c_A^{-1}=U_Y(dF^{\\mathrm W}(h))c_A^{-1}=t_L.$$\nThe ordinary Hom bijection is injective, so this transpose computation gives $\\beta_L=e_LU_X(h_L)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+   }
+  },
+  {
+   "text": "Every component $\\beta_L$ has inverse $q_L=U_X(h_L^{-1})e_L^{-1}$, as the two composites cancel using functoriality. These inverses are natural: for $a:L\\to L'$, naturality of $\\beta$ is $G(U_Ya)\\beta_L=\\beta_{L'}U_X(G^{\\mathrm W}a)$; multiplying on the left by $q_{L'}$ and on the right by $q_L$ gives $q_{L'}G(U_Ya)=U_X(G^{\\mathrm W}a)q_L$. Hence $\\beta$ is a natural isomorphism without requiring a functor $L\\mapsto H_L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+   }
+  },
+  {
+   "text": "The transpose equation from Step 2, followed by composition with $c_{G^{\\mathrm W}L}$, is the asserted counit identity. For the unit, the inverse mate formula in [def-weil-pbc-adjunction-mate], applied to $\\beta$ and evaluated at $K$, reads\n$$\\epsilon_{U_YF^{\\mathrm W}K}F(\\beta_{F^{\\mathrm W}K}U_X(\\eta^{\\mathrm W}_K))=c_K^{-1}.$$\nApply the ordinary adjunction's inverse transpose map $t\\mapsto G(t)\\eta_{U_XK}$ to this equality. Mutual inverseness of the Hom maps gives $\\beta_{F^{\\mathrm W}K}U_X(\\eta^{\\mathrm W}_K)=G(c_K^{-1})\\eta_{U_XK}$. Composing with $G(c_K)$ proves the asserted unit identity.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+   }
+  },
+  {
+   "text": "For any second representing triple $(H'_L,e'_L,d'_L)$ the same computation gives $e'_LU_X(h'_L)=\\beta_L=e_LU_X(h_L)$, since Step 2 never used a triple. More explicitly $a_L=h'_Lh_L^{-1}:H_L\\to H'_L$ satisfies $d'_LF^{\\mathrm W}(a_L)=d_L$; injectivity of the second triple's representing bijection makes it the unique such map. The displayed equality gives $e'_LU_X(a_L)=e_L$. Thus even the expressions obtained from different representing objects agree canonically. Every cancellation above occurs in a stated Hom bijection or uses an explicit inverse, so neither fullness nor faithfulness of the forgetful functors is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; explicit elementary representing-bijection and mate calculation expanding the parent split Steps 7–8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of left adjoints and underlying functors has invertible right mate when each ordinary counit lifts to a native representing pair; compatibility of units and counits",
+   "results": {
+    "t": "2026-10-22T07:05:58Z",
+    "tool": "leanfinder",
+    "query": "A comparison of left adjoints and underlying functors has invertible right mate when each ordinary counit lifts to a native representing pair; compatibility of units and counits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.unit_comp_map_eq_iff",
+     "CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_id_comp",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.Adjunction.unitAsIsoOfIso",
+     "CategoryTheory.Adjunction.leftAdjointIdIso_hom_app",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom_app",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_comp_id"
+    ],
+    "digest": "79137efcd307d261"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": {
+    "t": "2026-10-22T07:12:16Z",
+    "tool": "loogle",
+    "query": "\"rightAdjointUniq\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointUniq",
+     "CategoryTheory.Adjunction.rightAdjointUniq_refl",
+     "CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_app",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app"
+    ],
+    "digest": "f4fb8ba5e3e409a4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|rightAdjointUniq|rightAdjoint.*mate",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "grep",
+    "query": "mateEquiv_counit|rightAdjointUniq|rightAdjoint.*mate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "digest": "6b13a2b06aaee063"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invertibility of right adjoint comparison using a representing pair over a forgetful functor and left adjoint comparison",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "leansearch",
+    "query": "Invertibility of right adjoint comparison using a representing pair over a forgetful functor and left adjoint comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison",
+     "CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top",
+     "ModuleCat.instIsRightAdjointForget",
+     "CategoryTheory.Comonad.comparisonForget_inv_app",
+     "CategoryTheory.Adjunction.ofIsRightAdjoint",
+     "CategoryTheory.Monad.comparisonForget",
+     "CategoryTheory.Comonad.comparisonForget",
+     "CategoryTheory.Functor.isRightAdjoint_iff_leftAdjointObjIsDefined_eq_top"
+    ],
+    "digest": "fd9601fa756bdd05"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|rightAdjointUniq|rightAdjoint.*mate",
+   "results": {
+    "t": "2026-10-22T09:35:06Z",
+    "tool": "grep",
+    "query": "mateEquiv_counit|rightAdjointUniq|rightAdjoint.*mate",
+    "sub": "CategoryTheory/Adjunction",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean"
+    ],
+    "digest": "49fb09d11f6c3c61"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mates.lean:84–155 gives the mate bijection and unit/counit equations; Unique.lean:102–142 gives ordinary right-adjoint uniqueness. Neither states the complete objectwise lifting criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invertibility of right adjoint comparison using a representing pair over a forgetful functor and left adjoint comparison",
+   "results": {
+    "t": "2026-10-22T09:35:06Z",
+    "tool": "leansearch",
+    "query": "Invertibility of right adjoint comparison using a representing pair over a forgetful functor and left adjoint comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison",
+     "CategoryTheory.Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top",
+     "ModuleCat.instIsRightAdjointForget",
+     "CategoryTheory.Comonad.comparisonForget_inv_app",
+     "CategoryTheory.Adjunction.ofIsRightAdjoint",
+     "CategoryTheory.Monad.comparisonForget",
+     "CategoryTheory.Comonad.comparisonForget",
+     "CategoryTheory.Functor.isRightAdjoint_iff_leftAdjointObjIsDefined_eq_top"
+    ],
+    "digest": "fd9601fa756bdd05"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern comonadic comparison, existence from representability, and specific forgetful adjoints; none gives the complete stated comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": {
+    "t": "2026-10-22T09:35:07Z",
+    "tool": "loogle",
+    "query": "\"rightAdjointUniq\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjointUniq",
+     "CategoryTheory.Adjunction.rightAdjointUniq_refl",
+     "CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans_app",
+     "CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app"
+    ],
+    "digest": "f4fb8ba5e3e409a4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: rightAdjointUniq compares two specified right-adjoint functors to the same left adjoint; it does not give this arbitrary-forgetting objectwise criterion. Read Unique.lean:102–142."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of left adjoints and underlying functors has invertible right mate when each ordinary counit lifts to a native representing pair; compatibility of units and counits",
+   "results": {
+    "t": "2026-10-22T09:35:08Z",
+    "tool": "leanfinder",
+    "query": "A comparison of left adjoints and underlying functors has invertible right mate when each ordinary counit lifts to a native representing pair; compatibility of units and counits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom_app",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_comp_id",
+     "CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_id_comp"
+    ],
+    "digest": "dbd62270f156e7a4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities and composition/uniqueness results do not establish invertibility under these objectwise representing triples. The adjoint lifting otherMap hits concern comonadic or regular-mono hypotheses absent here (read Lifting/Right.lean:10–43, 112–192)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible mate from objectwise universal arrows lifting the counit through arbitrary functors, no full or faithful assumption",
+   "results": {
+    "t": "2026-10-22T09:35:37Z",
+    "tool": "leanfinder",
+    "query": "Invertible mate from objectwise universal arrows lifting the counit through arbitrary functors, no full or faithful assumption",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.LiftLeftAdjoint.otherMap",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.LiftRightAdjoint.otherMap",
+     "CategoryTheory.Adjunction.Localization.ε"
+    ],
+    "digest": "68dfc4e901c2c285"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the mate identities and composition/uniqueness results do not establish invertibility under these objectwise representing triples. The adjoint lifting otherMap hits concern comonadic or regular-mono hypotheses absent here (read Lifting/Right.lean:10–43, 112–192)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Old proof Steps 7–8: compare representing pairs with the chosen right adjoint, compute beta and both adjunction identities. Supplied provenance: exceptional-adjunction final sentence of cor-coef-verdier-weil-equivariance.proof.md; blueprint_refs ancestor is None.",
+   "via": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-forgetful-representing-pair-right-mate",
+  "worker": "stage1",
+  "group": "Q117",
+  "summary": "Preserved the statement and gave six steps: construct the unique representing isomorphism and its inverse directly from the two Hom bijections, define the fixed right mate, compute its factorization, construct its natural inverse, derive both adjunction identities from the mate bijection, and verify choice independence. Reused the existing Mathlib mate node. No new nodes are needed: all remaining arguments are explicit few-line substitutions in the hypotheses. No project attachment or one-line Mathlib match for the complete criterion was found. Repair of the side-completion landing refusal: rebased onto the current live unsplit item, reread the current mate leaf and both citation formulas, and classified the inverse-mate step as non-elementary with its existing explicit citation. The statement, representing-bijection argument and proof route remain unchanged.",
+  "blueprint": "Expands the final sentence about the same units and counits in cor-coef-verdier-weil-equivariance.proof.md, the supplied Old proof Steps 7–8. The existing provenance has no imported blueprint ancestor (blueprint_refs ancestor reports None); it is retained. Searches for representing pairs, right adjoints and mates found no blueprint node stating this arbitrary-forgetting criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-274c78b90",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-274c78b90 (reviewer sub-agent of L); spot-checked: I read the item and its whole proof. The statement and the other non-split fields match the live node, which is still unsplit with no repair note, so nothing has superseded it. The only change from the earlier delivery f75f8631 is that Step 5 is now marked non-elementary and the split_report has a repair paragraph, so this is not an identical re-push. Source check: the final sentence of main-20261015 cor-coef-verdier-weil-equivariance.proof.md ('The same units and counits ... give the exceptional-adjunction assertion'); no SGA anywhere. Step 2 applies def-weil-pbc-adjunction-mate (mateEquiv) with L1=F^W, R1=G^W, L2=F, R2=G, horizontal functors U_X and U_Y, and alpha=c^{-1} : F U_X -> U_Y F^W, which has the type the node requires; the transpose is U_Y(eps^W) c^{-1}, as the item states. Step 1: the two given Hom bijections produce h and its inverse k, and injectivity gives uniqueness; checked. Step 3: naturality of c at h gives eps F(e U_X h) = t_L, so beta_L = e_L U_X(h_L); every type checked. Step 4: the componentwise inverses are natural. Step 5: the node's inverse formula gives eps F(beta U_X eta^W) = c_K^{-1}; transposing and composing with G(c_K) gives the unit identity, and the counit identity follows from the Step 2 transpose. Step 6: beta does not depend on the triple; checked. proof_deps equals what the steps use. My own small test on BC3 with c = z gives beta = h = z^{-1} and the unit equation z z^{-1} = 1, which would catch c and c^{-1} being swapped. Faithfulness and fullness are never used. An rg -L search for representing-pair and right-mate nodes found only smooth-purity nodes in specific geometric settings, none a duplicate. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ForgetfulRepresentingPairRightMate",
+  "declaration": "CategoryTheory.Adjunction.forgetful_representingPair_rightMate",
+  "declarations": [
+   "CategoryTheory.Adjunction.forgetfulRightMate",
+   "CategoryTheory.Adjunction.forgetful_representingPair_rightMate"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ForgetfulRepresentingPairRightMate.lean",
+  "statement": "theorem forgetful_representingPair_rightMate (adjW : FW ⊣ GW) (adj : F ⊣ G) (c : FW ⋙ UY ≅ UX ⋙ F) (H : WY → WX) (e : ∀ L : WY, UX.obj (H L) ≅ G.obj (UY.obj L)) (d : ∀ L : WY, FW.obj (H L) ⟶ L) (hd : ∀ L : WY, UY.map (d L) = c.hom.app (H L) ≫ F.map (e L).hom ≫ adj.counit.app (UY.obj L)) (hbij : ∀ (L : WY) (K : WX), Function.Bijective (fun u : K ⟶ H L => FW.map u ≫ d L)) : IsIso (forgetfulRightMate adjW adj c) ∧ (∀ L : WY, ∃ h : GW.obj L ≅ H L, FW.map h.hom ≫ d L = adjW.counit.app L ∧ (∀ h' : GW.obj L ≅ H L, FW.map h'.hom ≫ d L = adjW.counit.app L → h' = h) ∧ (forgetfulRightMate adjW adj c).app L = UX.map h.hom ≫ (e L).hom) ∧ (∀ L : WY, (forgetfulRightMate adjW adj c).app L = adj.homEquiv (UX.obj (GW.obj L)) (UY.obj L) (c.inv.app (GW.obj L) ≫ UY.map (adjW.counit.app L))) ∧ (∀ L : WY, c.hom.app (GW.obj L) ≫ F.map ((forgetfulRightMate adjW adj c).app L) ≫ adj.counit.app (UY.obj L) = UY.map (adjW.counit.app L)) ∧ (∀ K : WX, UX.map (adjW.unit.app K) ≫ (forgetfulRightMate adjW adj c).app (FW.obj K) ≫ G.map (c.hom.app K) = adj.unit.app (UX.obj K)) ∧ (∀ (L : WY) (H' : WX) (e' : UX.obj H' ≅ G.obj (UY.obj L)) (d' : FW.obj H' ⟶ L), UY.map d' = c.hom.app H' ≫ F.map e'.hom ≫ adj.counit.app (UY.obj L) → (∀ K : WX, Function.Bijective (fun u : K ⟶ H' => FW.map u ≫ d')) → ∀ (h : GW.obj L ≅ H L) (h' : GW.obj L ≅ H'), FW.map h.hom ≫ d L = adjW.counit.app L → FW.map h'.hom ≫ d' = adjW.counit.app L → UX.map h.hom ≫ (e L).hom = UX.map h'.hom ≫ e'.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1039c1936",
+  "group": "Q142",
+  "result": "pass",
+  "note": "I matched every clause against the node. forgetfulRightMate = (mateEquiv adjW adj (TwoSquare.mk UX FW F UY c.inv)).natTrans, which is the recorded stmt_dep with G=UX, H=UY, L1=FW, L2=F, alpha=c^{-1}; the types check against TwoSquare.lean:50 and Mates.lean:84. The homEquiv component, counit identity (c.hom ≫ F.map β ≫ ε = UY ε^W) and unit identity (UX η^W ≫ β ≫ G c.hom = η) were checked by expanding mateEquiv toFun/invFun. hd and hbij match the node in diagrammatic order, and naturality in K follows automatically. Uniqueness of h is among isomorphisms, as in the node. The independence clause compares any second triple. The eight universes are independent and there is no full/faithful or functorial-choice assumption. lean.statement is verbatim, there is one sorry, docstrings carry the source and blueprint tag plus the six-step plan, and the only import is Mathlib. The live node is split with no lean record and the copy differs only in lean. Similarly named live modules are not duplicates. The report has both required sections. Nothing compiled because no file changed. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190447-L-4063763",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.forgetful_representingPair_rightMate"
+  ],
+  "sorry_after": []
+ }
+}

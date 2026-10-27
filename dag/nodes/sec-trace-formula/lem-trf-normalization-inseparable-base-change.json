@@ -24,88 +24,76 @@
  ],
  "proof": [
   {
-   "text": "Write $X_i=(C_{k_i})_{\\mathrm{red}}$. Because each $k_i/k$ is purely inseparable, [lem-pc-homeo-pure-insep] makes $C_{k_i}\\to C$ a homeomorphism on underlying spaces. Since $C$ is integral, each $C_{k_i}$ is irreducible and its reduction $X_i$ is integral (reduction preserves the underlying space and removes nilpotents, by [def-weil-pbc-scheme-reduction]). Apply [lem-weil-pbc-reduced-algebraic-normalization-field-change] to the reduced finite-type $k_i$-scheme $X_i$: its componentwise normalization is finite and surjective and is an isomorphism over a dense open normal locus $U_i\\subseteq X_i$. As $X_i$ is integral, this componentwise normalization is the given $N_i$, so $\\nu_i$ is finite and $N_i|_{U_i}\\cong U_i$. The normalization has normal-domain local rings by the integral-closure normality statement [lem-sbc-integral-closure-finite-normal-product].",
+   "text": "Write $X_i=(C_{k_i})_{\\mathrm{red}}$. By [lem-pc-homeo-pure-insep], $C_{k_i}$ has the irreducible nonempty space of $C$; reduction makes $X_i$ integral. Apply [lem-weil-pbc-reduced-algebraic-normalization-field-change] to the reduced finite-type $k_i$-scheme $X_i$: its componentwise normalization is finite and surjective and is an isomorphism over the dense open normal locus of $X_i$. As $X_i$ is integral, it has one irreducible component, $X_i$ itself, so this componentwise normalization is the given $N_i$; hence $\\nu_i$ is finite surjective and $\\nu_i^{-1}(U)\\to U$ is an isomorphism for every open $U$ of that normal locus. Each $N_i$ is integral, since on an affine chart its integral-closure ring is a subring of $k(X_i)$ [def-sc-normalization]; its local rings are normal domains by [lem-sbc-integral-closure-finite-normal-product].",
    "uses": [
     "lem-pc-homeo-pure-insep",
+    "def-weil-pbc-scheme-reduction",
     "lem-weil-pbc-reduced-algebraic-normalization-field-change",
     "def-sc-normalization",
-    "def-weil-pbc-scheme-reduction",
     "lem-sbc-integral-closure-finite-normal-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0BRA/0BR9 (purely inseparable base change), 0BXR and 0C3N (finite normalization and dense normal locus)"
+    "place": "Tags 0BXR (normalization), 0C3N (field change), 038M and 038O (geometric normality); finite model and fibre-product assembly"
    }
   },
   {
-   "text": "Put $Y=N_1\\times_{\\operatorname{Spec}k_1}\\operatorname{Spec}k_2$. The geometric-normality hypothesis (with $L=k_2$) says that every local ring of $Y$ is an integrally closed domain, so $Y$ is reduced and normal; the homeomorphism $Y\\to N_1$ from [lem-pc-homeo-pure-insep] (applied to the $k_1$-scheme $N_1$) makes $Y$ irreducible and nonempty, hence integral [def-pc-integral-scheme]. By [lem-weil-pbc-finite-morphism-permanence](a) the base change $\\nu_1\\times\\mathrm{id}:Y\\to X_1\\times_{k_1}k_2$ is finite. Since $X_1\\to C_{k_1}$ is a closed immersion that is the identity on underlying sets, its base change $X_1\\times_{k_1}k_2\\to C_{k_2}$ is a closed immersion which is bijective, so $Y\\to C_{k_2}$ is finite (over an affine $V=\\operatorname{Spec}A\\subseteq C_{k_2}$ the ring of $Y$ is a finite module over a quotient of $A$, hence over $A$). As $Y$ is reduced, $Y\\to C_{k_2}$ factors uniquely through $X_2=(C_{k_2})_{\\mathrm{red}}$; over $V$, $X_2\\cap V=\\operatorname{Spec}(A/\\mathfrak n)$ with $\\mathfrak n$ the nilradical, the $A$-algebra structure of the ring $B$ of $Y|_V$ kills $\\mathfrak n$ because $B$ is reduced, and $B$ is finite over $A/\\mathfrak n$; thus $p:Y\\to X_2$ is finite. It is surjective because $\\nu_1$ is surjective (step 1) and $Y\\to N_1$, $X_2\\to X_1$ are the homeomorphisms of [lem-pc-homeo-pure-insep]. Let $U_2\\subseteq X_2$ be the open set corresponding to $U_1$ under the homeomorphism $X_2\\to X_1$; it is dense open. Base change of the isomorphism $N_1|_{U_1}\\cong U_1$ over $U_1$ gives $Y|_{U_2}\\cong U_1\\times_{k_1}k_2$ over $C_{k_2}$, where $U_1\\times_{k_1}k_2$ is the open subscheme of $X_1\\times_{k_1}k_2$ on the set $U_2$. That open subscheme need not a priori be reduced, but it is isomorphic to the open subscheme $Y|_{U_2}$ of the reduced scheme $Y$, so it is reduced; a reduced open subscheme of $X_1\\times_{k_1}k_2$, whose underlying space is that of $C_{k_2}$, equals the open subscheme of $(X_1\\times_{k_1}k_2)_{\\mathrm{red}}=(C_{k_2})_{\\mathrm{red}}=X_2$ on the same set [def-weil-pbc-scheme-reduction] (the two reductions agree because $X_1\\times_{k_1}k_2\\to C_{k_2}$ is a bijective closed immersion). Hence $p$ restricts to an isomorphism $Y|_{U_2}=p^{-1}(U_2)\\cong U_2$.",
+   "text": "Take a dense normal open $U_1\\subseteq X_1$ from step 1. Apply [lem-trf-reduced-inseparable-finite-model] with $W=C_{k_1}$, $X=X_1$, $N=N_1$, $K=k_2$: geometric normality supplies normal local domains on $Y=N_1\\times_{k_1}k_2$. It gives a finite surjection $p:Y\\to X_2$ with $Y$ integral normal and a dense open $U_2\\subseteq X_2$ such that $p^{-1}U_2\\cong U_2$.",
    "uses": [
-    "lem-pc-homeo-pure-insep",
+    "lem-trf-reduced-inseparable-finite-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR (normalization), 0C3N (field change), 038M and 038O (geometric normality); finite model and fibre-product assembly"
+   }
+  },
+  {
+   "text": "The open $U_2$ is normal because it is isomorphic to an open of $Y$, so [lem-weil-pbc-reduced-algebraic-normalization-field-change] gives $\\nu_2^{-1}U_2\\cong U_2$. Both inverse images are nonempty opens in integral schemes, hence dense. The schemes $X_2,N_2,Y$ are finite type over $k_2$ (the latter two are finite over $X_2$), hence locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-trf-normal-dense-open-finite-target-extension] to these inverse images over $X_2$ in both directions. The resulting maps extend the inverse isomorphisms over $U_2$; their composites are identities by its uniqueness assertion. This gives $N_2\\cong Y$. Any other isomorphism over $C_{k_2}$ is over $X_2$, since the reduction immersion is a monomorphism, and has the same restriction over $U_2$; the same uniqueness assertion makes it equal. For every $L/k_2$, $N_2\\times_{k_2}L\\cong N_1\\times_{k_1}L$ has normal local domains by the hypothesis, proving geometric normality.",
+   "uses": [
     "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "def-pc-integral-scheme",
-    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-normal-dense-open-finite-target-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR (normalization), 0C3N (field change), 038M and 038O (geometric normality); normal-source extension from morphisms.tex, Tags 035I and 01RH"
+   }
+  },
+  {
+   "text": "Under this isomorphism, the inverse image of $D_1$ is $D_1\\times_{N_1}Y=D_1\\times_{k_1}k_2$ by the fibre-product definition [def-pc-base-change]; taking its reduction gives the required reduced inverse image [def-weil-pbc-scheme-reduction]. If $D_1$ is finite over $k_1$, its base change is finite over $k_2$ by [lem-weil-pbc-finite-morphism-permanence](a). Its affine ring $R$ is a finite $k_2$-module, so the nilradical quotient $R/\\sqrt{0}$ is again finite [def-weil-finite-integral-morphism].",
+   "uses": [
+    "def-pc-base-change",
     "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-finite-morphism-permanence",
     "def-weil-finite-integral-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0C3N and 038M (normalization comparison and geometric normality under field extension)"
-   }
-  },
-  {
-   "text": "The normalization map $\\nu_2:N_2\\to X_2$ is finite and surjective by [lem-sc-normalization-exists], and both $N_2$ and $Y$ have normal-domain local rings (for $N_2$, use [lem-sbc-integral-closure-finite-normal-product] on each affine $\\operatorname{Spec}A\\subseteq X_2$ with $B=k(X_2)$; over it $N_2$ is $\\operatorname{Spec}A'$, $A'\\subseteq k(X_2)$ the integral closure, a domain). The scheme $X_2$ is locally Noetherian because it is finite type over the field $k_2$, by [lem-weil-pbc-finite-type-over-noetherian]. The open $U_2$ is nonempty, so $p^{-1}(U_2)$ and $\\nu_2^{-1}(U_2)$ are nonempty (both maps are surjective) open subsets of the irreducible schemes $Y$ and $N_2$, hence dense. Apply [lem-sbc-finite-normal-dense-open-iso] with $L=X_2$, $N=Y$, $E=N_2$, and $U=U_2$, using the isomorphism $Y|_{U_2}\\cong U_2\\cong N_2|_{U_2}$ of step 2 and of step 1 for $i=2$: since $U_2\\cong Y|_{U_2}$ has integrally closed local domains, $U_2$ lies in the normal locus of $X_2$ on which $\\nu_2$ is an isomorphism (step 1), so $\\nu_2^{-1}(U_2)\\to U_2$ is an isomorphism. It gives an isomorphism $N_2\\cong Y$ over $X_2$, hence over $C_{k_2}$. Uniqueness: since $X_2\\to C_{k_2}$ is a monomorphism, an isomorphism over $C_{k_2}$ is one over $X_2$. Two such, $\\varphi,\\psi:N_2\\to Y$, agree over $U_2$, because $p^{-1}(U_2)\\to U_2$ is an isomorphism and both are morphisms over $U_2$. Over an affine $V=\\operatorname{Spec}A\\subseteq X_2$, $p^{-1}(V)=\\operatorname{Spec}B$ ($p$ is finite) and $\\nu_2^{-1}(V)=\\operatorname{Spec}A'$ with $A'$ a domain, and $\\varphi,\\psi$ are given by $A$-algebra maps $B\\to A'$; the generic point of $\\operatorname{Spec}A'$ lies over the generic point of $X_2$, which is in $U_2$, so the two maps agree after composing with the injection $A'\\hookrightarrow\\operatorname{Frac}A'$, hence agree. So $\\varphi=\\psi$. Under the same identification, for every field extension $L/k_2$ one has $N_2\\times_{k_2}L\\cong Y\\times_{k_2}L=N_1\\times_{k_1}L$, whose local rings are integrally closed domains by the geometric-normality hypothesis on $N_1$ (with $L$ viewed over $k_1\\subseteq k_2$); hence $N_2$ is geometrically normal over $k_2$.",
-   "uses": [
-    "lem-sbc-finite-normal-dense-open-iso",
-    "def-weil-pbc-normal-ring",
-    "lem-sbc-integral-closure-finite-normal-product",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-normalization-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0BXR, 0C3N and 038O (normalization on the normal locus, change of fields, and geometric normality)"
-   }
-  },
-  {
-   "text": "Under $N_2\\cong Y$, the scheme-theoretic inverse image of a closed subscheme $D_1\\subseteq N_1$ under $Y\\to N_1$ is $D_1\\times_{N_1}Y=D_1\\times_{k_1}k_2$, a closed subscheme of $Y$; by definition, the reduced inverse image is therefore its reduction $(D_1\\times_{k_1}k_2)_{\\mathrm{red}}$. If $D_1$ is finite over $k_1$, then $D_1\\times_{k_1}k_2$ is finite over $k_2$ by [lem-weil-pbc-finite-morphism-permanence](a), so it is $\\operatorname{Spec}R$ with $R$ a finite $k_2$-algebra; its reduction is $\\operatorname{Spec}(R/\\mathfrak n_R)$, again finite over $k_2$.",
-   "uses": [
-    "def-pc-base-change",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-scheme-reduction",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 01JQ (fibre products), 01I1 (finite morphisms and base change), and 038M (reduction)"
+    "place": "Tags 0BXR (normalization), 0C3N (field change), 038M and 038O (geometric normality); finite model and fibre-product assembly"
    }
   }
  ],
  "proof_deps": [
   "def-pc-base-change",
-  "def-pc-integral-scheme",
   "def-sc-normalization",
-  "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism",
-  "def-weil-pbc-normal-ring",
   "def-weil-pbc-scheme-reduction",
   "lem-pc-homeo-pure-insep",
-  "lem-sbc-finite-normal-dense-open-iso",
   "lem-sbc-integral-closure-finite-normal-product",
-  "lem-sc-normalization-exists",
+  "lem-trf-normal-dense-open-finite-target-extension",
+  "lem-trf-reduced-inseparable-finite-model",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-reduced-algebraic-normalization-field-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0C3N (normalization and change of fields), 038M (geometrically normal), 038O (geometrically normal schemes); finite-normal comparison on the dense normal locus"
+  "place": "Assembly of the extracted finite-model and dense-open extension lemmas, following Tags 0BXR, 0C3N, 038M and 038O and morphisms.tex Tags 035I and 01RH."
  },
  "mathlib_searches": [
   {
@@ -159,35 +147,27 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-normalization-inseparable-base-change",
   "worker": "stage1",
-  "summary": "Audited the normalization comparison against Stacks 0C3N, 038M and 038O. The proof first identifies the reduced purely inseparable base changes and their finite normalizations, then compares the base-changed first normalization with the second normalization on the dense normal locus using the existing finite-normal dense-open comparison. Geometric normality and the reduced inverse-image/finite clauses are then checked directly. No new nodes were needed; all non-elementary inputs are existing DAG statements.",
-  "blueprint": "Realizes the parent proof's Step 5 clause identifying the normalized generic fibre after the further purely inseparable extension with the base change of the first normalized model.",
+  "summary": "Repair of the 2026-10-22 re-split return: extracted two independently usable statement-only lemmas, for the finite normal reduced field-change model and extension of dense-open morphisms to a finite target. The original statement is unchanged. All four original arguments are retained in the report and mapped to the new nodes and short assembly; all cited statements were reread.",
+  "blueprint": "Expose X, proof of Theorem 3.5, Step 5: after choosing K, identify the normalized generic fibre after the further purely inseparable extension with the base change of the first normalized model.",
   "tool_uses": [
    {
     "node": "lem-pc-homeo-pure-insep",
-    "why": "The proof needs the universal-topological behavior of finite purely inseparable field base change."
+    "why": "Generic topological invariance under purely inseparable field change."
    },
    {
     "node": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
-    "why": "The proof needs finiteness, surjectivity, and the dense normal-locus isomorphism for normalization of the reduced finite-type base changes."
-   },
-   {
-    "node": "lem-sbc-finite-normal-dense-open-iso",
-    "why": "The proof needs the generic finite-normal comparison that extends an isomorphism on a common dense open."
+    "why": "Generic finiteness and dense normal-locus description of normalization."
    },
    {
     "node": "lem-sbc-integral-closure-finite-normal-product",
-    "why": "The proof needs normality of the local rings of the integral-closure normalizations."
-   },
-   {
-    "node": "lem-sc-normalization-exists",
-    "why": "The proof needs finiteness of the normalization map N_2 to apply the finite-normal comparison."
+    "why": "Normality of the local rings in the affine integral-closure construction."
    },
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "The proof needs local Noetherianity of the finite-type reduced base change X_2."
+    "why": "Generic Noetherianity needed by the normal-source extension theorem."
    }
   ]
  },
@@ -200,12 +180,12 @@
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q59-22e9ba2b4",
-  "group": "Q59",
+  "reviewer": "NT-cc-Q13-3c7230b0f",
+  "group": "Q13",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-22e9ba2b4 (reviewer sub-agent of L); spot-checked: I read the item, the parent's two steps that cite it, unit sk-i-curve-zero, every cited node's statement and Stacks 0C3N (varieties.tex l.5027). The statement is true and introduces all its objects. It strengthens 0C3N's universal homeomorphism to an isomorphism using the geometric normality of N_1. Taking the reduction of C_{k_i} is needed, since C=Spec k[x]/(x^p-t) can be non-reduced. Edge cases checked: char 0, k_2=k_1, D_1 empty, C not separated. There are no new nodes. None of lem-weil-pbc-normalization-geonormal-insep, the separable field-change lemma or the other inseparable-normalization nodes duplicates it. No SGA source is cited; the parent's source is Gabber's Travaux. I fixed three faults in the item's proof; only proof and proof_deps changed. (1) C1: steps 2 and 4 used finiteness under base change with no node; they now cite the Mathlib leaf lem-weil-pbc-finite-morphism-permanence(a), and step 4 is no longer marked elementary. (2) E5: step 2 claimed that base change gives Y|U_2 ≅ U_2, but base change only gives U_1×k_2, an open of the possibly non-reduced X_1×k_2. I added the argument: that open is reduced because Y is normal, and (X_1×k_2)_red=X_2. (3) E1/E5: step 3 did not check the density hypotheses of lem-sbc-finite-normal-dense-open-iso, did not say why N_2|U_2 ≅ U_2 (U_2 lies in the normal locus of X_2), and argued uniqueness only among isomorphisms extending the given one on U_2. I added all three, with uniqueness via the affine domain argument, which needs no separatedness of C. Accepted tool_uses: lem-pc-homeo-pure-insep, lem-weil-pbc-reduced-algebraic-normalization-field-change, lem-sbc-finite-normal-dense-open-iso, lem-sbc-integral-closure-finite-normal-product and lem-sc-normalization-exists, all generic AG tools that sk-i-curve-zero does not supply. The remaining two citations are Mathlib leaves. The report says created was corrected to Q59, but the file keeps Q90; that is correct for a node created by Q90's split.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-3c7230b0f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the sources: Stacks 0C3N (varieties.tex l.5027), 035I (morphisms.tex l.13936) and 01RH (l.1212). The re-split meets the 2026-10-22 note. The item statement is unchanged and the item is not superseded live. The assembly is 2362 characters (2684 after the fix). Old step 2 (finite model, nilradical factorization, the U_1×k_2 reducedness point, (X_1×k_2)_red=X_2, iso over U_2) is now entirely the statement of lem-trf-reduced-inseparable-finite-model. Old step 3 (existence, formerly from lem-sbc-finite-normal-dense-open-iso, and the fraction-field uniqueness) is now lem-trf-normal-dense-open-finite-target-extension plus a short assembly. Both new nodes are true. Node A was tested with K=k, char 0, non-reduced W_K and the normal-Y hypothesis. Node B: locally a normal Noetherian ring is a finite product of normal domains, so elements of O(U) integral over A lie in A; it was tested with X empty, a non-reduced E, a non-separated S, and the cusp (which shows normality is needed). Neither node duplicates or restates the item; lem-sfb-integral-normal-generic-recognition overlaps old step 3 (advisory only). All item steps check, including the hypotheses of both new nodes as applied, the monomorphism reduction and geometric normality via N_2×L≅N_1×L. Batch 5: both flagged citations are generic scheme theory (finite-model field change; extension of morphisms into a finite target), statement-only with definition stmt_deps. They are not steps of the trace formula or of Poincaré duality, so I accepted them. FIX on the item: (1) restored the dropped step-1 sentence identifying the componentwise normalization of lem-weil-pbc-reduced-algebraic-normalization-field-change with the given N_i (X_i is integral); (2) removed the stale tool_uses lem-sbc-finite-normal-dense-open-iso and lem-sc-normalization-exists, which no step cites any more. No SGA source is used.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NormalizationInseparableBaseChange",
@@ -225,5 +205,16 @@
   "result": "pass",
   "note": "Every hypothesis and conclusion clause matches the node and Stacks 0C3N/038M/038O (varieties.tex l.5027/2103/2160): the integral reductions are conclusions; normalization is the recorded upstream Scheme.normalization/fromNormalization; the isomorphism lies over C_{k2} via nu1 x id; uniqueness ranges only over isomorphisms over C_{k2}; geometric normality of N1 (hypothesis) and N2 (conclusion) uses the IsDomain and IsIntegrallyClosed stalk condition; the reduced inverse image of D1 is identified with (D1 x k2)_red by an isomorphism compatible with D1 and Spec k2, which makes it canonical; the finiteness implication is correct. L : Type u is harmless by 038O(3)/(4). No extra assumptions and no separatedness. Edge cases: char 0, trivial towers, non-reduced base changes, empty D1. No definitions, only sorry, docstrings give the source and blueprint id and follow all four proof steps; the node copy differs from main only in lean; lean.statement is verbatim equal to the signature (script check); the report has Worker report and Second reading by Q09 (an author self-check). nt_compile.py --json: 15.4 s, rc 0, no messages (warn.sorry=false). No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

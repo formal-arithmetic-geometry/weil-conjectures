@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-projective-hypersurface-structure-sequence",
+ "kind": "statement",
+ "title": "The structure-sheaf sequence of a projective hypersurface",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq1$ and $d\\geq1$ integers, $S=k[x_0,\\ldots,x_n]$ with each variable of degree one [def-weil-pbc-mv-polynomial-ring], and $F\\in S$ a nonzero homogeneous polynomial of degree $d$. Put $P=\\operatorname{Proj}(S)=\\mathbf P^n_k$ and $Z=\\operatorname{Proj}(S/(F))$ [def-pc-proj], with its quotient closed subscheme structure and canonical closed immersion $i:Z\\hookrightarrow P$ [def-weil-closed-immersion]. The sequence of $\\mathcal O_P$-modules [def-weil-sheaf-of-modules-category]\n$$0\\longrightarrow\\mathcal O_P(-d)\\xrightarrow{\\,F\\,}\\mathcal O_P\\xrightarrow{\\,r\\,}i_*\\mathcal O_Z\\longrightarrow0$$\nis short exact, where $\\mathcal O_P(-d)$ is the standard twist [def-pc-projective-space-twist, def-weil-pbc-proj-twisting-sheaf], and $r$ is the actual structure-sheaf restriction map. Under $\\mathcal O_P(-d)=\\widetilde{S(-d)}$, $\\mathcal O_P=\\widetilde S$, and $i_*\\mathcal O_Z=\\widetilde{S/(F)}$, the displayed arrows are the sheafifications of multiplication by $F$ and the quotient map. On $D_+(x_j)$ the first arrow sends the twist generator $x_j^{-d}$ to $F/x_j^d$. On every positive homogeneous basic open $D_+(g)$, the final identification is with $((S/(F))_g)_0$ and the restriction arrow sends $a/g^m$ to $\\bar a/\\bar g^m$. These identifications respect restrictions. The ideal is $(F)$, without replacing it by its radical; no reducedness, irreducibility, smoothness, or characteristic assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, label lemma-genus-plane-curve, proof: the graded exact sequence, its exact sheafification, the standard twist identifications, and the quotient structure-sheaf identification (returned steps 1--3), in arbitrary projective dimension"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-proj",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=S/(F)$ with its quotient grading and let $q:S\\to C$ be the quotient map. The graded map $u:S(-d)\\to S$ sends $a$ to $Fa$: an element of degree $r$ in $S(-d)$ lies in $S_{r-d}$, hence its image lies in $S_r$. The quotient map preserves degrees. Multiplication by $F$ is injective: order monomials lexicographically on the finite ordered variables; for any nonzero $a$, the largest monomial of $Fa$ is the product of the largest monomials of $F$ and $a$, with coefficient the product of their nonzero coefficients in $k$, hence is nonzero. By the definition of the principal ideal, $\\ker q=(F)=\\operatorname{im}u$, and every class in $C$ has a representative in $S$. Thus $0\\to S(-d)\\xrightarrow{u}S\\xrightarrow{q}C\\to0$ is an exact sequence of graded $S$-modules. The ideal $(F)$ is homogeneous since multiplying each homogeneous component of a polynomial by $F$ shifts its degree by $d$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, lemma-genus-plane-curve, first displayed graded exact sequence; elementary verification in n+1 variables"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proj-graded-sheafification-exact] to the graded exact sequence of Step 1 over the nonnegatively graded ring $S$. It gives the short exact sequence $0\\to\\widetilde{S(-d)}\\xrightarrow{\\widetilde u}\\widetilde S\\xrightarrow{\\widetilde q}\\widetilde C\\to0$ of $\\mathcal O_P$-modules. By [lem-sc-p1-proj-tilde-functorial], on every positive homogeneous chart $D_+(g)$ these maps are $a/g^m\\mapsto Fa/g^m$ and $b/g^m\\mapsto\\bar b/\\bar g^m$, respectively, where for the second formula the target is first viewed as the degree-zero localization of the graded $S$-module $C$. The shift in Step 1 makes the first formula degree-preserving. Both cited statements apply to arbitrary $S$ and arbitrary integer-graded modules, not just to the projective line.",
+   "uses": [
+    "lem-sfb-proj-graded-sheafification-exact",
+    "lem-sc-p1-proj-tilde-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M7, lemma-proj-sheaves, functoriality and final exactness assertion"
+   }
+  },
+  {
+   "text": "The definitions give $\\widetilde{S(-d)}=\\mathcal O_P(-d)$ and $\\widetilde S=\\mathcal O_P$. Fix $j$ and put $U_j=D_+(x_j)$. For every positive-degree homogeneous $g$ with $D_+(g)\\subseteq U_j$, $x_j$ is a unit of $S_g$ by [lem-weil-pbc-proj-standard-open-inclusion](1); hence $a\\mapsto a\\,x_j^{-d}$ and $b\\mapsto b\\,x_j^{d}$ are mutually inverse $S_{(g)}$-linear maps between $S_{(g)}=\\mathcal O_P(D_+(g))$ and $(S_g)_{-d}=\\widetilde{S(-d)}(D_+(g))$ [def-weil-pbc-proj-twisting-sheaf](2). Both maps commute with the restrictions, which are localization maps, and $x_j^{-d}$ restricts to $x_j^{-d}$. Standard opens inside $U_j$ form a basis of $U_j$ [lem-weil-pbc-proj-standard-open-inclusion](0), so [lem-weil-pbc-sheaf-morphism-on-basis](a),(b) make $a\\mapsto a\\,x_j^{-d}$ an isomorphism $\\mathcal O_{U_j}\\cong\\widetilde{S(-d)}|_{U_j}$ of $\\mathcal O_{U_j}$-modules: $x_j^{-d}$ is a frame. On $U_j\\cap U_l$, $x_j^{-d}=(x_j/x_l)^{-d}x_l^{-d}$, which is exactly the transition rule $e_j^{(-d)}=(x_j/x_l)^{-d}e_l^{(-d)}$ of the standard twist of [def-pc-projective-space-twist]. The coordinate opens cover $P$ by [lem-weil-pbc-proj-polynomial-twist-chart], so the isomorphisms $e_j^{(-d)}\\mapsto x_j^{-d}$ agree on overlaps and glue to an isomorphism from the specified twist onto the shifted-module sheaf. The formula of Step 2 sends the frame $x_j^{-d}=1/x_j^d$ (numerator $1\\in S(-d)_d$) to $F/x_j^d$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MN, definition-twist; Tag 01MS, lemma-when-invertible, frame on a degree-one chart"
+   }
+  },
+  {
+   "text": "Apply the chart clause of [lem-sfb-graded-proj-quotient-twist-comparison] to the surjective graded map $S\\to C$. Its hypotheses hold because $S$ is generated by its variables in degree one. Thus $i^{-1}D_+(g)=D_+(\\bar g)$ for every positive-degree homogeneous $g$, and the actual scheme morphism on these charts is given by $S_{(g)}\\to C_{(\\bar g)}$, $a/g^m\\mapsto\\bar a/\\bar g^m$. By [def-pc-proj], $\\Gamma(D_+(\\bar g),\\mathcal O_Z)=C_{(\\bar g)}$. The localization of $C$ as an $S$-module at $g$ is the localization of the ring $C$ at $\\bar g$: both have representatives $c/g^m$ and the relation $g^t(g^rc-g^mc')=0$ in $C$. Their degree-zero parts coincide. Hence these formulas give $\\mathcal O_P(D_+(g))$-linear identifications $(i_*\\mathcal O_Z)(D_+(g))=(C_g)_0=\\widetilde C(D_+(g))$, the last equality by [lem-weil-pbc-proj-graded-module-sheaf-exists](b).",
+   "uses": [
+    "lem-sfb-graded-proj-quotient-twist-comparison",
+    "def-pc-proj",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY, lemma-morphism-proj (2); Tag 01N1, lemma-surjective-graded-rings-generated-degree-1-map-proj; Tag 01M7 (1)--(3)"
+   }
+  },
+  {
+   "text": "The identifications of Step 4 commute with restrictions. Explicitly, for $D_+(h)\\subseteq D_+(g)$ choose $h^e=bg$ as in [lem-weil-pbc-proj-graded-module-sheaf-exists](a). On $\\widetilde C$, restriction sends $c/g^m$ to $b^mc/h^{em}$. On $Z$, $\\bar h^e=\\bar b\\bar g$, so the structure-sheaf restriction sends the same class to $\\bar b^mc/\\bar h^{em}$; these are the identical fraction in $C_{\\bar h}$. The scalar maps are identical quotient-localization maps as well. Standard opens form a basis by [lem-weil-pbc-proj-standard-open-inclusion](0); therefore [lem-weil-pbc-sheaf-morphism-on-basis](a),(b) glues these mutually inverse identifications into an $\\mathcal O_P$-linear isomorphism $\\widetilde C\\cong i_*\\mathcal O_Z$. On every basis open the composite of $\\widetilde q$ with this isomorphism is $a/g^m\\mapsto\\bar a/\\bar g^m$, which Step 4 identifies with the actual structure-sheaf restriction. Equality on the basis gives equality of these sheaf maps.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M7 (1)--(3), fraction restriction maps; Tag 01MY, lemma-morphism-proj (2)"
+   }
+  },
+  {
+   "text": "Substitute the identifications of Steps 3 and 5 into the short exact sequence of Step 2. Its two arrows become multiplication by $F$ and the actual map $r$, with exactly the chart and restriction formulas already computed. The construction throughout uses the quotient ring $S/(F)$ itself. For example if $F=x_0^d$ with $d>1$, its nilpotents remain in the quotient charts; when $\\bar g$ is nilpotent the localized ring is zero and the corresponding open of $Z$ is empty, so the same formulas still hold. No step replaces $(F)$ by its radical or requires smoothness, irreducibility, reducedness, or any condition on the characteristic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, lemma-genus-plane-curve, second displayed short exact sequence; assembly for the stated quotient hypersurface"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sfb-proj-graded-sheafification-exact",
+  "lem-sc-p1-proj-tilde-functorial",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-sfb-graded-proj-quotient-twist-comparison",
+  "def-pc-proj",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, lemma-genus-plane-curve, first two displays; details of sheafification and quotient charts from Constructions Tags 01M7, 01MY, 01N1, 01MN, 01MS, in arbitrary projective dimension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypersurface.*exact|exact.*hypersurface|structureSheaf.*shortExact|shortExact.*structureSheaf",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart constructions and projective objects in abstract abelian categories do not identify the sheafified homogeneous principal quotient or its hypersurface exact sequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero homogeneous polynomial defines the exact structure sheaf sequence of its projective hypersurface",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"Exact\"",
+   "results": "12 hits; CategoryTheory.ShortComplex.Exact.liftFromProjective, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp_assoc, CategoryTheory.ShortComplex.ShortExact.splittingOfProjective, ModuleCat.shortExact_projectiveShortComplex, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart constructions and projective objects in abstract abelian categories do not identify the sheafified homogeneous principal quotient or its hypersurface exact sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure sheaf of a projective hypersurface cut out by a nonzero homogeneous polynomial of degree d fits in the short exact sequence O(-d) to O to the pushforward of its structure sheaf",
+   "results": "8 hits; AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart constructions and projective objects in abstract abelian categories do not identify the sheafified homogeneous principal quotient or its hypersurface exact sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homogeneous principal ideal in a polynomial ring the sheafified quotient is the pushforward of the closed subscheme structure sheaf and the ideal sheaf is the negative degree twist",
+   "results": "8 hits; AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.carrier, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal, AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_hom_apply_asIdeal, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart constructions and projective objects in abstract abelian categories do not identify the sheafified homogeneous principal quotient or its hypersurface exact sequence"
+  },
+  {
+   "tool": "grep",
+   "query": "lem-sfb-projective-hypersurface-structure-sequence|Proj.*(quotient|ideal).*exact|twist.*shortExact",
+   "results": "0 hits;  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart constructions and projective objects in abstract abelian categories do not identify the sheafified homogeneous principal quotient or its hypersurface exact sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero homogeneous polynomial defines a short exact structure sheaf sequence O(-d) to O to the projective hypersurface structure sheaf",
+   "results": "8 hits; AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give structure sheaves and basic Proj chart morphisms or abstract projective-object exactness, not the hypersurface sequence with its maps"
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface.*exact|exact.*hypersurface|Proj.*quotient",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give structure sheaves and basic Proj chart morphisms or abstract projective-object exactness, not the hypersurface sequence with its maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The structure sheaf of a projective hypersurface has the exact sequence O(-d) to O to its quotient structure sheaf",
+   "results": "8 hits; AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.structureSheafInType, AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf', AlgebraicGeometry.Proj.toSheafedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give structure sheaves and basic Proj chart morphisms or abstract projective-object exactness, not the hypersurface sequence with its maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"Exact\"",
+   "results": "12 hits; CategoryTheory.ShortComplex.Exact.liftFromProjective, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp_assoc, CategoryTheory.ShortComplex.ShortExact.splittingOfProjective, ModuleCat.shortExact_projectiveShortComplex, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give structure sheaves and basic Proj chart morphisms or abstract projective-object exactness, not the hypersurface sequence with its maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafifying the homogeneous principal ideal quotient sequence on projective space gives the hypersurface structure sheaf resolution",
+   "results": "8 hits; AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.openToLocalization, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give structure sheaves and basic Proj chart morphisms or abstract projective-object exactness, not the hypersurface sequence with its maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-plane-hypersurface-cohomology",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Fermat geometric-fibre genus: the structure-sheaf cohomology calculation for a general plane hypersurface, Stacks 0BYD.; the graded exact sequence, its exact sheafification, the standard twist identifications, and the quotient structure-sheaf identification (returned steps 1--3), in arbitrary projective dimension",
+   "via": [
+    "lem-sfb-plane-hypersurface-cohomology",
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-hypersurface-structure-sequence",
+  "worker": "stage1",
+  "summary": "Verified the graded principal-ideal sequence, applied the existing general Proj exactness node, and explicitly identified the twist, quotient pushforward, actual structure map and restrictions. Reused all generic results; no new nodes and no change to the statement. Project Lean searches found no exact attachment; current Mathlib queries found only Proj chart/structure-sheaf definitions or abstract projective-object exactness facts.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Fermat geometric-fibre genus: the structure-sheaf cohomology calculation for a general plane hypersurface, Stacks 0BYD.; the graded exact sequence, its exact sheafification, the standard twist identifications, and the quotient structure-sheaf identification (returned steps 1--3), in arbitrary projective dimension",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-proj-tilde-functorial",
+    "why": "The statement is for any graded ring and supplies the induced-map fraction formulas; the item unit has no separate functoriality statement."
+   },
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "Generic coordinate-chart cover for polynomial Proj, used only to compare the two specified twist definitions."
+   },
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Generic graded-module chart and restriction identifications needed to identify the quotient pushforward; no construction of associated sheaves is supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Generic standard-open basis theorem, needed for the sheaf comparison; it does not replace a unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-22b0cc4fb",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-22b0cc4fb (reviewer sub-agent of L); spot-checked: FIX for one E5 gap in Step 3. I read the item and all 6 steps in full, plus the statement of every cited node: proj-graded-sheafification-exact, p1-proj-tilde-functorial (any N-graded S), polynomial-twist-chart, graded-proj-quotient-twist-comparison (01N1 chart clause, which needs S generated by S_1 and S→S/(F) surjective, both true here), graded-module-sheaf-exists (a)(b), standard-open-inclusion (0)(1), sheaf-morphism-on-basis (Mathlib leaf), def-pc-proj, def-pc-projective-space-twist and def-weil-pbc-proj-twisting-sheaf. Source: Stacks curves.tex 0BYD lemma-genus-plane-curve, whose proof (graded sequence, exact ~ from 01M7, (S/(F))~ = i_*O_Z) is exactly what the item states for n≥1. The statement is unchanged and not weakened; there are no new nodes and no re-split note applies. Checks: lex leading terms give injectivity of multiplication by F over a field; the twist convention matches, e_j^{(-d)}=(x_j/x_l)^{-d}e_l^{(-d)}, and the frame 1/x_j^d maps to F/x_j^d; C_g as an S-module equals C_ḡ as a ring; restrictions agree via h^e=bg; r equals the composite by basis uniqueness. Edge cases: F=x_0^d gives an empty chart and nilpotents; nilpotent ḡ; the characteristic is never used. The DAG grep (0BYD, 01M7, S/(F), O_P(-d), hypersurface) found only the P^1 or ℤ,d=1 analogues and the consumers, so there is no duplicate. I accept the four declared tool_uses as generic Proj black boxes, and no SGA source is cited. The repair: Step 3 stated freeness only for global sections on U_j and then said 'these frames identify'. The rewritten Step 3 proves O_{U_j}≅S(-d)~|U_j on every D_+(g)⊆U_j, using x_j a unit in S_g by standard-open-inclusion(1) and sheaf-morphism-on-basis(a),(b), then glues by the transition rule. It adds two uses already in proof_deps, so proof_deps is unchanged. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-projective-hypersurface-structure-sequence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveHypersurfaceStructureSequence",
+  "declaration": "AlgebraicGeometry.Proj.projective_hypersurface_structure_sequence",
+  "declarations": [
+   "AlgebraicGeometry.Proj.hypersurfacePolynomialGrading",
+   "AlgebraicGeometry.Proj.hypersurfaceMultiplication",
+   "AlgebraicGeometry.Proj.projective_hypersurface_structure_sequence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveHypersurfaceStructureSequence.lean",
+  "statement": "theorem projective_hypersurface_structure_sequence {k : Type u} [Field k] (n d : ℕ) (hn : 1 ≤ n) (hd : 1 ≤ d) (F : MvPolynomial (Fin (n + 1)) k) (hF : F.IsHomogeneous d) (hF0 : F ≠ 0) : ∃ (ℬ : ℕ → AddSubgroup (MvPolynomial (Fin (n + 1)) k ⧸ Ideal.span {F})) (_inst : GradedRing ℬ) (q : (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) →+*ᵍ ℬ) (hq : Function.Surjective q), (∀ a : MvPolynomial (Fin (n + 1)) k, q a = Ideal.Quotient.mk (Ideal.span {F}) a) ∧ (∀ e : ℕ, (ℬ e : Set (MvPolynomial (Fin (n + 1)) k ⧸ Ideal.span {F})) = Ideal.Quotient.mk (Ideal.span {F}) '' ((MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) e : Set (MvPolynomial (Fin (n + 1)) k))) ∧ IsClosedImmersion (map q (GradedRingHom.irrelevant_le_map_of_surjective hq)) ∧ (∃ hz : (hypersurfaceMultiplication hF) ≫ SheafOfModules.unitToPushforwardObjUnit (map q (GradedRingHom.irrelevant_le_map_of_surjective hq)).toRingCatSheafHom = 0, (ShortComplex.mk (hypersurfaceMultiplication hF) (SheafOfModules.unitToPushforwardObjUnit (map q (GradedRingHom.irrelevant_le_map_of_surjective hq)).toRingCatSheafHom) hz).ShortExact) ∧ (∀ j : Fin (n + 1), (hypersurfaceMultiplication hF).app (basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.X j)) (twistPowSection (-(d : ℤ)) (MvPolynomial.isHomogeneous_X k j)) = awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.X j) (Away.mk (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (MvPolynomial.isHomogeneous_X k j) d F (by simpa using hF))) ∧ (∃ alpha : ∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ), 0 < e → g.IsHomogeneous e → Γ(twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (-(d : ℤ)), basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) →+ Localization.Away g, (∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ) (he : 0 < e) (hg : g.IsHomogeneous e), Function.Injective (alpha g e he hg) ∧ Set.range (alpha g e he hg) = {z | ∃ (m r : ℕ) (a : MvPolynomial (Fin (n + 1)) k), a.IsHomogeneous r ∧ (r : ℤ) = (m : ℤ) * e - d ∧ Localization.mk a (⟨g ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers g) = z}) ∧ (∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ) (he : 0 < e) (hg : g.IsHomogeneous e) (c : Away (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) (s : Γ(twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (-(d : ℤ)), basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g)), alpha g e he hg (awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g c • s) = c.val * alpha g e he hg s) ∧ (∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ) (he : 0 < e) (hg : g.IsHomogeneous e) (s : Γ(twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (-(d : ℤ)), basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g)), ((basicOpenIsoAway (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g hg he).inv.hom ((hypersurfaceMultiplication hF).app (basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) s)).val = alpha g e he hg s * algebraMap (MvPolynomial (Fin (n + 1)) k) (Localization.Away g) F) ∧ (∀ (g h : MvPolynomial (Fin (n + 1)) k) (e l : ℕ) (he : 0 < e) (hl : 0 < l) (hg : g.IsHomogeneous e) (hh : h.IsHomogeneous l) (inc : basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) h ≤ basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) (t m : ℕ) (b a : MvPolynomial (Fin (n + 1)) k), 0 < t → h ^ t = b * g → ∀ s : Γ(twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (-(d : ℤ)), basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g), alpha g e he hg s = Localization.mk a (⟨g ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers g) → alpha h l hl hh ((twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) (-(d : ℤ))).presheaf.map (homOfLE inc).op s) = Localization.mk (b ^ m * a) (⟨h ^ (t * m), ⟨t * m, rfl⟩⟩ : Submonoid.powers h))) ∧ ∃ beta : ∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ), 0 < e → g.IsHomogeneous e → Γ(Proj ℬ, map q (GradedRingHom.irrelevant_le_map_of_surjective hq) ⁻¹ᵁ basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) ≃+* Away ℬ (q g), (∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ) (he : 0 < e) (hg : g.IsHomogeneous e) (c : Away (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) (s : Γ(Proj ℬ, map q (GradedRingHom.irrelevant_le_map_of_surjective hq) ⁻¹ᵁ basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g)), beta g e he hg (((map q (GradedRingHom.irrelevant_le_map_of_surjective hq)).app (basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) (awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g c)) * s) = Away.map q g c * beta g e he hg s) ∧ (∀ (g : MvPolynomial (Fin (n + 1)) k) (e : ℕ) (he : 0 < e) (hg : g.IsHomogeneous e) (m : ℕ) (a : MvPolynomial (Fin (n + 1)) k) (ha : a.IsHomogeneous (m • e)), beta g e he hg ((map q (GradedRingHom.irrelevant_le_map_of_surjective hq)).app (basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) (awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g (Away.mk (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) hg m a ha))) = Away.mk ℬ (q.map_mem hg) m (q a) (q.map_mem ha)) ∧ (∀ (g h : MvPolynomial (Fin (n + 1)) k) (e l : ℕ) (he : 0 < e) (hl : 0 < l) (hg : g.IsHomogeneous e) (hh : h.IsHomogeneous l) (inc : basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) h ≤ basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g) (t m : ℕ) (b : MvPolynomial (Fin (n + 1)) k) (c : MvPolynomial (Fin (n + 1)) k ⧸ Ideal.span {F}), 0 < t → h ^ t = b * g → ∀ s : Γ(Proj ℬ, map q (GradedRingHom.irrelevant_le_map_of_surjective hq) ⁻¹ᵁ basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) k) g), (beta g e he hg s).val = Localization.mk c (⟨q g ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers (q g)) → (beta h l hl hh ((Proj ℬ).presheaf.map ((Opens.map (map q (GradedRingHom.irrelevant_le_map_of_surjective hq)).base).map (homOfLE inc)).op s)).val = Localization.mk (q b ^ m * c) (⟨q h ^ (t * m), ⟨t * m, rfl⟩⟩ : Submonoid.powers (q h)))",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Literal quotient S/(F), with its quotient grading and graded quotient map fixed by equalities; canonical twist multiplication and actual unit-to-pushforward structure map. The alpha and beta chart identifications include scalar and all restriction formulas, including empty opens and nonreduced quotients. The grading instance only exposes Mathlib's existing total-degree grading."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5ff35887",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_dep records, curves 0BYD and the Constructions places, report, and the exact declarations (Proj.twist/twistMul/unitIsoTwistZero/twistPowSection, Proj.map, basicOpenIsoAway, unitToPushforwardObjUnit = i.app by rfl). Only the lean field changed vs side-live; lean.statement is verbatim. Hypotheses match the node exactly (field, n≥1, d≥1, F≠0 homogeneous of degree d), nothing extra. Z = Proj on literal S/(F) with grading and q fixed; i = Proj.map q with IsClosedImmersion; arrows are the real twistMul≫O(0)≅O and the actual unit-to-pushforward map; ShortExact; frame X_j^{-d} -> F/X_j^d. The alpha chart maps (range (S_g)_{-d}, linear, restriction) are fixed by the multiplication-by-F clause; the beta ring equivalences onto Away ℬ (q g) are fixed by the scalar clause; restriction formulas are true. Edge cases g=0, nilpotent ḡ, nonreduced F, any characteristic are fine. Note: hypersurfacePolynomialGrading is a global instance (convention prefers attribute [local instance] MvPolynomial.gradedAlgebra); harmless since GradedAlgebra on homogeneousSubmodule is determined by its components. No compile (no change)."
+ }
+}

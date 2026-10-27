@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Put $V=r^{-1}(Y)$. The map $j'$ factors through $V$ since $rj'=ip$. By [lem-weil-pbc-proper-base-change], $V\\to Y$ is proper, hence separated by [def-weil-pbc-scheme-conventions]. Thus [lem-weil-pbc-proper-to-separated] makes $\\overline X\\to V$ proper, and [lem-weil-pbc-proper-closed-image] makes its image closed. This image is also open and dense in $V$ by density in $W$. Hence it is all of $V$: the open immersion identifies $\\overline X$ with $V$ as schemes, and $r$ restricts to $p$.",
+   "text": "The source-library theorem Compactification.isPullback_of_isProper_of_isSchemeTheoreticallyDominant proves the compactification square cartesian: the restriction of the open immersion over Y is proper, hence closed, and scheme-theoretically dominant, hence an isomorphism. IsPullback.opensRange_fst on the flipped square gives the required equality of opens.",
    "uses": [
     "lem-weil-pbc-proper-base-change",
     "def-weil-pbc-scheme-conventions",
@@ -35,74 +35,74 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (1): the proper closed dense image argument."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (1)–(3)"
    }
   },
   {
-   "text": "Apply [lem-sfb-derived-open-square-restriction] to this Cartesian square. Write $\\eta_i,\\eta_{j'}$ for its invertible open units and $\\lambda_A=(Rp_*\\eta_{j',A})^{-1}\\rho_{j'_!A}:i^*Rr_*j'_!A\\xrightarrow{\\sim}Rp_*A$. These comparisons and adjunctions are natural and compatible with shifts on the unbounded categories.",
+   "text": "The proved cartesianDerivedCounit helper from the open base-change module makes the counit of j! ⊣ j* invertible on r* i! T. The open unit is invertible. Thus the left exchange mate of the canonical pullback comparison is invertible. An explicit unit/counit calculation identifies its conjugate under the composite adjunctions with the right exchange mate, namely compositionInterchangeRestriction. Hence the restriction comparison is invertible on every unbounded object.",
    "uses": [
-    "lem-sfb-derived-open-square-restriction"
+    "stage3-sfb-open-base-change-component-mono",
+    "lem-weil-pbc-condensed-open-closed-recollement"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (2): unbounded open restriction and its normalization."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (1)–(3)"
    }
   },
   {
-   "text": "The open adjunction followed by $\\lambda_A$ bijects maps $i_!Rp_*A\\to Rr_*j'_!A$ with endomorphisms of $Rp_*A$ by $m\\mapsto\\lambda_A i^*(m)\\eta_{i,Rp_*A}$. Define $\\iota_A$ as the inverse image of the identity; bijectivity proves its uniqueness. For $f:A\\to A'$, the two composites $G(f)\\iota_A$ and $\\iota_{A'}F(f)$, where $F=i_!Rp_*$ and $G=Rr_*j'_!$, have transpose $Rp_*f$ by naturality of $\\lambda$ and $\\eta_i$, so agree. The same bijection and the shift compatibility in step 2 identify $\\iota_{A[n]}$ with $\\iota_A[n]$.",
+   "text": "Transpose Rp_* of the j-unit followed by the inverse restriction comparison through the i-open adjunction. The inverse identities give the normalization equation. Cancellation of the restriction comparison and injectivity of the adjunction hom equivalence give uniqueness.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (2): elementary identity transpose, naturality and shifts."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (1)–(3)"
    }
   },
   {
-   "text": "Let $c:Z\\hookrightarrow\\overline Y$ be the closed complement. For $A\\in\\Dctf$, [lem-sfb-proper-open-boundary-zero] gives $c^*G(A)=0$. Clause (4) of [det-sf-open-closed-sequence-ring-sheaf] gives $c^*i_!=0$, because its pulled-back open is empty; every sheaf on the empty scheme is zero. Thus $c^*\\iota_A$ is an isomorphism; $i^*\\iota_A$ is one by its normalization.",
+   "text": "Shrink finite coefficient carriers by a ring equivalence, with explicit continuous postcomposition isomorphisms of condensed rings. This converts the coefficient hypothesis to the finite-subextension admissibility convention. For a constructible finite-Tor generator A, j! A is constructible finite-Tor. Restrict it to the chosen pullback W ×_Ybar Y; open pullback preserves the generators. The cartesian-square isomorphism and the derived open counit identify extension by zero of that restriction with j! A itself. Apply proper_open_boundary_zero and transport along this isomorphism to obtain vanishing on the closed complement.",
    "uses": [
     "lem-sfb-proper-open-boundary-zero",
-    "det-sf-open-closed-sequence-ring-sheaf"
+    "det-proper-image-localizing-open",
+    "lem-sfb-open-pullback-generators"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3): vanishing on the closed complement."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (1)–(3)"
    }
   },
   {
-   "text": "Exactness of $i^*,c^*$ from [sk-prop-sfb-cartesian-coefficients] makes the cohomology of the cone of $\\iota_A$ restrict to zero on both pieces. Each cohomology sheaf is zero by [lem-exc-open-closed-detection]; hence $\\iota_A$ is invertible for $A\\in\\Dctf$. Apply [det-sf-comp-coherence-single] to $(\\mathrm{id},p)$, $(i,\\mathrm{id})$ and $(j',r)$: $F,G$ are exact and preserve sums on the localizing closures. Step 3 and [det-sf-determination-localizing] extend invertibility to every $A\\in\\Loc(\\Dctf)$.",
+   "text": "The boundary functor F = D(j!) ⋙ Rr_* ⋙ D(z*) is triangulated. Its zero kernel is replete and triangulated; intersecting it with Loc(Dctf) gives a localizing subcategory, because compactification_localizing supplies preservation of ambient sums and D(z*) is a left adjoint. Minimality of localizingClosure extends boundary vanishing from the generators to every A in Loc(Dctf). The source i! Rp_* A has zero closed restriction by disjoint support. Normalization and invertible open units show that the open restriction of the comparison is invertible. The proved source-library derived open–closed joint-reflection theorem now makes the comparison invertible.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-exc-open-closed-detection",
-    "det-sf-comp-coherence-single",
-    "det-sf-determination-localizing"
+    "det-def-localizing-closure-existence",
+    "det-sf-comp-coherence-single"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-    "place": "Proof (3): detection and localizing propagation using existing lemmas."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (1)–(3)"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-scheme-conventions",
+  "det-def-localizing-closure-existence",
+  "det-proper-image-localizing-open",
   "det-sf-comp-coherence-single",
-  "det-sf-determination-localizing",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-exc-open-closed-detection",
-  "lem-sfb-derived-open-square-restriction",
+  "lem-sfb-open-pullback-generators",
   "lem-sfb-proper-open-boundary-zero",
+  "lem-weil-pbc-condensed-open-closed-recollement",
   "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-proper-closed-image",
   "lem-weil-pbc-proper-to-separated",
-  "sk-prop-sfb-cartesian-coefficients"
+  "stage3-sfb-open-base-change-component-mono"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-  "place": "Proof (1)–(3), retaining the reviewed route and extracting the derived restriction and boundary-support arguments."
+  "by": "C2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+  "place": "Proof (1)–(3), realized by cartesian adjunction mates and a triangulated boundary-vanishing kernel. The unit composition route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -203,13 +203,7 @@
   ]
  },
  "tool_uses": [
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-exc-open-closed-detection",
-  "det-sf-comp-coherence-single",
-  "det-sf-determination-localizing",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "sk-prop-sfb-cartesian-coefficients"
+  "det-sf-comp-coherence-single"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -219,7 +213,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-264de47d8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the blueprint main-20261015 proof (1)-(3), the unit record, the human's 2026-10-21 re-split note, and Stacks 09AH (proetale.tex:5135) and 08BJ. The re-split note is answered: the proof went from 6753 to 2203 characters in 5 steps. The old steps 2-4 became lem-sfb-derived-open-square-restriction: open restriction commutes with Rr_* on unbounded categories for all admissible Λ, via a Hom chain made of D(i_!)⊣D(i*), r*⊣Rr_*, the open base change from open-closed (4), D(j_!)⊣D(j*) and p*⊣Rp_*. It is true, with no properness needed, and checked on small cases (r=id, i=id, W empty). The old step 6 became lem-sfb-proper-open-boundary-zero: c*Rr_*j_!A=0 for A in Dctf. It is true: j_!A is in Dctf by det-proper-image-localizing-open; proper base change uses the finite version (2) on Dctf, and the integral (3) and rational (3) versions on Dbc, since Dctf is contained in Dbc; and r^{-1}(Z) misses U. The item's statement and lean records are byte-identical to live, and proof_deps equals the union of the step uses. Step 2's λ_A=(Rp_*η_{j'})^{-1}ρ type-checks. Step 3 is elementary adjunction calculus, with shift compatibility taken from node 1. Step 4 gets c*i_!=0 from open-closed (4). Step 5 uses exactness of the module pullbacks, open-closed detection (i is quasi-compact), coherence-single on (id,p), (i,id) and (j',r), and determination-localizing. Neither new node restates a parent clause, I found no cycle and no SGA citation, and the item is not in the dropped list. Duplicate search: node 1 overlaps lem-sfb-derived-direct-image-open-coherence (2), which covers only E and Q̄ℓ, and lem-exc-proetale-derived-open-restriction, which covers only constant finite A; it generalizes both. I found no duplicate for node 2. I accept the five declared tool_uses. Maintainer notes: the item's merged tool_uses still lists exact-functor-derived-factorization and termwise-adjunction-homotopy, which the item no longer cites; record the sfb proper-base-change nodes and det-proper-image-localizing-open as tool uses when node 2 is split. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.ProEtaleProperOpenInterchange",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.properOpenInterchange",
@@ -244,5 +249,15 @@
   "group": "Q12",
   "result": "pass",
   "note": "Read the node, the 4 stmt_deps and their records, the blueprint statement and proof (main-20261015), the report and the module. Clause by clause: dc-setting binders as in landed records; admissible Λ as a six-way Mon-iso disjunction with the finite-subextension padicAlgClRingObj; IsProper p; quasi-compact open i; BoundaryCompactification(p≫i) with IsSchemeTheoreticallyDominant j' (the sketch-data sense of dense, which every citer supplies). Clause 1 is Scheme.Opens equality, with restriction carried by comm. Clause 2 is ∃! over normalized maps on the unbounded category, with normalization homEquiv(m)≫β = Rp_*(η_j'), equivalent to the citers' ρ∘i^*m∘η_i = id. Clause 3 is localizingClosureProEtale → IsIso m. The helper definitions are canonical (upperStarComp, mapDerivedCategory isos, adjunction mate). Their sorryAx traces only to the landed BoundaryCompactification's IsMultiplicative. Verbatim statement; node changed only in lean; 3-file shape; docstrings and proof plan present; lines ≤100; names fresh, and Etale.properOpenInterchangeCoherence is a different statement. nt_compile rc 0 in 5.4 s with no warnings; probes confirm the signature. Edge cases checked: empty Y, Ȳ and X̄, identity maps, A = 0, zero ring, E = Q_ℓ, universes. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-4c3f9",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261024T214851-L-723795",
+  "kind": "interface",
+  "note": "independent cc review: Delivered ProEtaleProperOpenInterchange.lean vs clone (definitions and theorem signature unchanged, sorry→proof, public imports unchanged); node det-sf-comp-composition-interchange proof/proof_deps vs imported modules; unit sk-thm-sf-comp-composition realized (empty) vs dropped CartesianCoefficients/CondensedModuleDerivedPushpull; 7/10 direct importers compiled against the delivered module"
  }
 }

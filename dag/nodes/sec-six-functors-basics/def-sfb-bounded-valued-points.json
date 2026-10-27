@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-bounded-valued-points",
+ "kind": "definition",
+ "title": "Bounded affine coordinates and strict-henselian points",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $K,F$ be fields, $A$ a commutative ring equipped with a homomorphism $A\\to F$, $j:\\operatorname{Spec}F\\to\\operatorname{Spec}K$, and $X$ a scheme over $K$ [def-pc-scheme, def-weil-affine-spectrum]. Define $\\operatorname{HasBoundedValuedPoints}(K,F,A,j,X)$ as follows: there exist a finite affine open cover $U_i$ of $X$, commutative $K$-algebras $B_i$ and $K$-isomorphisms $\\operatorname{Spec}B_i\\simeq U_i$, finite lists $b_{ij}$ generating $B_i$ as a $K$-algebra, and subsets $C_i\\subseteq\\operatorname{Hom}_K(\\operatorname{Spec}F,\\operatorname{Spec}B_i)$ whose images cover $X(F)$, together with $0\\ne d\\in A$, such that $d\\,b_{ij}(x)$ belongs to the image of $A\\to F$ for every $x\\in C_i$ and every $j$. When $A$ is a discrete valuation ring [def-sc-discrete-valuation-ring] and $F=\\operatorname{Frac}A$, this is the usual boundedness condition: the finitely many lower valuation bounds can be replaced by a common nonzero denominator.\n\nFor a commutative ring $R$, a field $E$ with an $R$-algebra structure, a geometric point $t:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ [def-weil-geometric-point], and an $E$-scheme $G$, define $\\operatorname{HasBoundedStrictHenselianPoints}(R,E,t,G)$ by setting $A=\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}R,t}$ [def-weil-pbc-strict-henselization-limit] and requiring a field $F$ with an $A$-algebra structure making it a fraction field of $A$, a field homomorphism $E\\to F$ agreeing on $R$ with the canonical $R\\to A\\to F$ [def-weil-pbc-strict-henselization-structural-map], and $\\operatorname{HasBoundedValuedPoints}(E,F,A,j,G)$ for its spectrum map $j$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.1 Definition 2, printed pp.8--9, and 4.3 Proposition 4; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded rational points of a scheme over a discretely valued field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valued.integer\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": Subring K\", \"doc\": \"Let $K$ be a valued field with valuation $v$. The ring of integers of $K$ is the subring consisting of all elements $x \\\\in K$ such that $v(x) \\\\le 1$.\"}\n  {\"name\": \"Valued.integer.totallyBounded_iff_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] [IsDiscreteValuationRing 𝒪[K]] :\\n  TotallyBounded (Set.univ (α := 𝒪[K])) ↔ Finite 𝓀[K]\", \"doc\": \"For a valued field with a rank one valuation and a discrete valuation ring of integers, the universal set of the ring of integers is totally bounded if and only if the residue field is finite.\"}\n  {\"name\": \"Valuation.Integers.isIntegral_iff_v_le_one\", \"module\": \"Mathlib.RingTheory.Valuation.Integral\", \"type\": \"{x : R} : IsIntegral O x ↔ v x ≤ 1\", \"doc\": \"An element $ x $ in $ R $ is integral over the subring $ O $ if and only if the valuation $ v(x) $ is less than or equal to 1.\"}\n  {\"name\": \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{x : K} (H : ((maximalIdeal A).valuation K) x ≤ (1 : ℤᵐ⁰)) : ∃ a : A, algebraMap A K a = x\", \"doc\": \"For any element $ x $ in the fraction field $ K $ of a discrete valuation ring $ A $, if the valuation of $ x $ with respect to the maximal ideal of $ A $ is at most $ 1 $, then $ x $ belongs to $ A $\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace 𝒪[K]\", \"doc\": \"The ring of integers $\\\\mathcal{O}_K$ in a non-Archimedean local field $K$ is a complete topological space with respect to the topology induced by the valuation on $K$.\"}\n  {\"name\": \"Valued.isClosed_sphere\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuationTopology\", \"type\": \"(r : Γ₀) : IsClosed (X := R) {x | v x = r}\", \"doc\": \"For any element $ r $ in the linearly ordered commutative group with zero $ \\\\Gamma_0 $, the set $ \\\\{x \\\\in R \\\\mid v(x) = r\\\\} $ is closed in the topology induced by the valuation on the ring $ R $.\"}\n  {\"name\": \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[IsDiscreteValuationRing 𝒪[K]] (h : Finite 𝓀[K]) (n : ℕ) : Finite (𝒪[K] ⧸ 𝓂[K] ^ n)\", \"doc\": \"Let $\\\\mathcal{O}_K$ be the ring of integers of a discrete valuation field $K$ with maximal ideal $\\\\mathfrak{m}_K$ and residue field $k_K = \\\\mathcal{O}_K/\\\\mathfrak{m}_K$. If the residue field $k_K$ is \"}\n  {\"name\": \"LaurentSeries.exists_ratFunc_val_lt\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \"(f : K⸨X⸩) (γ : ℤᵐ⁰ˣ) : ∃ Q : RatFunc K, Valued.v (f - Q) < γ\", \"doc\": \"For any Laurent series $ f $ over a field $ K $ and any $ \\\\gamma $ in the multiplicative integers with zero $ \\\\mathbb{Z}^{\\\\times}_0 $, there exists a rational function $ Q $ such that the valuation $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching definition: the hits provide valued-ring primitives or ordinary dense-domain rational maps, not finite affine coordinate boundedness and fibrewise birational extension with maximal domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise dense open subschemes and relative birational maps over a base scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (S : AlgebraicGeometry.Scheme) → [X.Over S] → [Y.Over S] → X.RationalMap Y → Prop\", \"doc\": \"A rational map between schemes $X$ and $Y$ is over a scheme $S$ if it is compatible with the morphisms from $X$ and $Y$ to $S$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  ∃ g, AlgebraicGeometry.Scheme.PartialMap.IsOver S g ∧ g.toRationalMap = f\", \"doc\": \"For any rational map $ f $ from a scheme $ X $ to a scheme $ Y $ over a base scheme $ S $, there exists a partial map $ g $ from $ X $ to $ Y $ over $ S $ such that the equivalence class of $ g $ is $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsOverRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f] (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU hU')\", \"doc\": \"If a partial map between schemes over a base scheme $ S $ is restricted to a dense open subset of its domain, then the restricted map also satisfies the condition of being over $ S $. This means the s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {inst : X.Over S} {inst_1 : Y.Over S} {f : X.RationalMap Y}\\n  [self : AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  ∃ g, AlgebraicGeometry.Scheme.PartialMap.IsOver S g ∧ g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ over a base scheme $ S $, there exists a partial map $ g \\\\colon X \\\\to Y $ over $ S $ such that the rational map induced by $ g $ is equal to $ f $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching definition: the hits provide valued-ring primitives or ordinary dense-domain rational maps, not finite affine coordinate boundedness and fibrewise birational extension with maximal domain."
+  },
+  {
+   "tool": "grep",
+   "query": "HasBoundedValuedPoints|HasBoundedStrictHenselianPoints|HasFiberwiseBirationalExtension|IsFiberwiseDenseOpen",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching definition: the hits provide valued-ring primitives or ordinary dense-domain rational maps, not finite affine coordinate boundedness and fibrewise birational extension with maximal domain."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n HasBoundedValuedPoints|HasBoundedStrictHenselianPoints|HasFiberwiseBirationalExtension|IsFiberwiseDenseOpen lean/WeilConjectures lean/Sheaf lean/.lake/packages/mathlib/Mathlib",
+   "results": "No matches (rg exit 1).",
+   "date": "2026-10-24",
+   "verdict": "No existing declarations with these names; conceptual searches also checked BLR, Neron, birational and fibrewise dense."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-translation-model",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2, printed pp.8--9, and 4.3 Proposition 4",
+   "via": [
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedValuedPoints",
+  "declaration": "AlgebraicGeometry.HasBoundedValuedPoints",
+  "declarations": [
+   "AlgebraicGeometry.HasBoundedValuedPoints",
+   "AlgebraicGeometry.HasBoundedStrictHenselianPoints"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedValuedPoints.lean",
+  "statement": "def HasBoundedValuedPoints (K F A : Type u) [Field K] [Field F] [CommRing A] [Algebra A F] (j : Spec (.of F) ⟶ Spec (.of K)) (X : Over (Spec (.of K))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4137d7126",
+  "group": "Q89",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4137d7126",
+  "group": "Q89",
+  "result": "fix",
+  "note": "Lean statement and records correct against BLR 4.3/4(iii) and 1.1/2: hypotheses exact; boundedness via one nonzero denominator in R^sh is equivalent to integer valuation bounds (R^sh a DVR, F its fraction field, E->F unique); output Y, the iso over E, smooth/separated/finite type and nonempty special fibre exact; Z smooth finite type with xi the generic point of a special-fibre component, A a DVR as a conclusion; j/hj exists and is unique (A flat over R, Spec E -> Spec R mono), so not vacuous and no choice; translations fixed exactly on points; HasFiberwiseBirationalExtension gives an open immersion with domain and image dense in every fibre, and its maximal-domain clause equals the domain of definition (Y_A flat and separated over A). The two new definition nodes are justified (Mathlib Birational only needs total-space density) and their fields follow the format; item changed only in lean plus stmt_deps additions; lean.statement matches the files; no hollow defs; docstrings OK. Advisory: unneeded private Proper import. Only fault H11: the second reading is the author's self-check. FIX: fixes/lem-sfb-bounded-group-translation-model.report.md = Worker report verbatim plus the reviewer's clause-by-clause second reading. No Lean changed, so no compile."
+ }
+}

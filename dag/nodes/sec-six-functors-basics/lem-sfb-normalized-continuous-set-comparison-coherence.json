@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-normalized-continuous-set-comparison-coherence",
+ "kind": "statement",
+ "title": "Coefficient, product and scheme coherence of normalized continuous-set comparisons",
+ "statement": "Use compatible universes [def-weil-size-convention]. Let $X$ range over schemes [def-pc-scheme] with small pro-etale sites [def-weil-pbc-proetale-site]. Let $\\mathcal T$ be the category of Hausdorff totally disconnected spaces and continuous maps. Put $\\underline D(S)=C(S,D)$ on profinite spaces and $F_{D,X}(U)=C(|U|,D)$ [def-sfb-continuous-set-presheaf]. Suppose these are sheaves, and for every $X$ and $D\\in\\mathcal T$ a morphism $\\sigma_{D,X}:p_X^*\\underline D\\to F_{D,X}$ is specified by the normalization that its adjunct sends $b:S\\to D$ to $b r_{X,S}$ under the composite adjunction of [lem-weil-pbc-profinite-point-pullback], with $r_{X,S}$ as in [lem-sfb-relative-profinite-test-labels]. No invertibility of $\\sigma$ is assumed. Then $F_{h,X}\\sigma_{D,X}=\\sigma_{D',X}p_X^*\\underline h$ for every continuous $h:D\\to D'$. The maps $\\sigma$ respect the canonical finite-product identifications for continuous-function sheaves and the finite-product comparisons for $p_X^*$, including the empty product (the one-point coefficient space). For a scheme morphism $f:Y\\to X$, let $c_{f,D}:f^{-1}F_{D,X}\\to F_{D,Y}$ be the adjunct, for the actual inverse image [def-weil-proetale-inverse-image], of the map $\\rho_{f,D}:F_{D,X}\\to f_*F_{D,Y}$ given on $V\\to X$ by $s\\mapsto s\\circ|V\\times_XY\\to V|$. If $\\kappa_f:f^{-1}p_X^*\\to p_Y^*$ is the specified point-pullback composition comparison, then\n$$c_{f,D}\\circ f^{-1}(\\sigma_{D,X})=\\sigma_{D,Y}\\circ\\kappa_{f,\\underline D}.$$\nThe $c_{f,D}$ satisfy identity and composition: under the inverse-image identity comparison $c_{\\mathrm{id},D}$ is the identity, and for $Z\\xrightarrow{g}Y\\xrightarrow{f}X$, after identifying $(fg)^{-1}$ with $g^{-1}f^{-1}$ one has $c_{fg,D}=c_{g,D}\\circ g^{-1}(c_{f,D})$.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS Example 3.1 and following scheme-pullback paragraph, p.6; former item steps 7 and 8, explicit adjunction normalization refinement."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-set-presheaf",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-sfb-relative-profinite-test-labels",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-continuous-set-sheaf",
+  "def-sfb-continuous-set-profinite-sheaf",
+  "def-sfb-continuous-set-realization-normalization",
+  "def-sfb-continuous-set-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the coefficient square through the composite point adjunction. Naturality of its Hom equivalence changes postcomposition and precomposition into the two composites of adjuncts. Evaluate at every profinite S and b:S→D and apply the supplied normalization; associativity of continuous-map composition proves equality. Injectivity gives the square.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "def-sfb-continuous-set-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following unit formulas; Tag 0DV0, lemma-compose-counits. HRS Example 3.1, p.6 supplies the continuous-function setting."
+   }
+  },
+  {
+   "text": "Construct the product limit of the continuous-function presheaves directly: lift a cone by assigning to each section the continuous map whose i-th coordinate is its i-th component. Continuity is continuous_pi; naturality and uniqueness hold coordinatewise. Reflect the limit through the inclusion of sheaves into presheaves, for both profinite and scheme sites. The construction includes the empty family.",
+   "uses": [
+    "def-sfb-continuous-set-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p.6, continuous-function realization; explicit coefficient naturality calculation by the worker."
+   }
+  },
+  {
+   "text": "Use profinite_point_pullback_set_coherence to install preservation of finite limits by the specified set point inverse image. Map the profinite product cone to get the third limiting cone. A map to the chosen product is invertible precisely when its cone is limiting. Check the product equation at every projection using the coefficient square from step 1.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p.6; finite-product refinement using Stacks Tag 00X6, proposition-get-morphism."
+   }
+  },
+  {
+   "text": "Prove a generic transpose formula for a component of the inverse conjugation of a right-adjoint transformation, using unit_conjugateEquiv_symm and naturality. Apply it to the identity comparison. Its transpose is the inverse direct-image identity, whose section formula is exactly precomposition with the first projection in continuousSetDirectImageMap.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Following Example 3.1, p.6, scheme-pullback paragraph; explicit section formulas using the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Apply the generic conjugate transpose formula to the composition comparison. The composite Hom equivalence is the successive pair of Hom equivalences. Their naturality and the definition of continuousSetPullbackMap give the two successive rho maps followed by lowerStarComp. Evaluate on a test object U and section s. The equality pullbackComp_left_fst_fst proves that restriction along these three maps is restriction along the composite projection.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Following Example 3.1, p.6; explicit normalized-mate calculation. Stacks Tag 0B65, lemma-transformation-between-functors-and-adjoints, and Tag 0DV0, lemma-compose-counits."
+   }
+  },
+  {
+   "text": "For the normalized scheme square generalize the structure maps to kX:X→Spec Z and kY:Y→Spec Z with f≫kX=kY. Substitute the equality. Transpose through the composite of the point adjunction with the two scheme adjunctions. The left side becomes the normalized adjunct for X followed by rho. The generic conjugate transpose formula changes the inverse point compositor into lowerStarComp.inv on the right. Evaluate at S,b and apply the two normalization assumptions. The explicit definition of continuousSetRelativeTestProjection reduces equality to pullbackLeftPullbackSndIso_hom_fst. Specialize the structure maps and use the component formula for profinitePointSetSchemeComp. No existence, uniqueness, or invertibility theorem for realization is used.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits, composite Hom bijection; Tag 0B65, lemma-transformation-between-functors-and-adjoints, unit-compatible comparison; identity adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "def-sfb-continuous-set-presheaf",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-proetale-inverse-image",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS Example 3.1 and following scheme-pullback paragraph, p.6; explicit Lean proof by R6, using composite Hom equivalences, unit_conjugateEquiv_symm, sectionwise product cones and pullback-pasting projection equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized adjuncts sending continuous test functions b to b composed with a label projection are natural in the target space, preserve finite products, and agree with inverse image composition comparisons",
+   "results": "OK: 8 hits; TestFunction.mkCLM_apply, TestFunction.postcompCLM, TestFunction.mkCLM, TestFunction.postcompCLM_apply, TestFunction.continuous_iff_continuous_comp, ContDiffMapSupportedIn.structureMapCLM, TestFunction.toBoundedContinuousFunctionCLM_eq_of_scalars, TestFunction.ofSupportedInCLM; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composite adjunction formulas do not state the normalized continuous-set comparison equations on scheme sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of inverse image comparisons by transposing through composite adjunctions and checking the values on all profinite test functions",
+   "results": "OK: 8 hits; lightProfiniteToLightCondSetIsoTopCatToLightCondSet, Profinite.toProfiniteAdjToCompHaus, Condensed.isoFinYonedaComponents_inv_comp, LightCondensed.isoFinYonedaComponents_inv_comp, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom, CompHausLike.LocallyConstant.adjunction, LightCondSet.LocallyConstant.adjunction; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composite adjunction formulas do not state the normalized continuous-set comparison equations on scheme sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "OK: 12 hits; CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composite adjunction formulas do not state the normalized continuous-set comparison equations on scheme sites"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*comp|comp.*homEquiv|[Cc]ontinuous.*[Pp]ullback|[Cc]ontinuous.*[Nn]atural",
+   "results": "OK: 25 hits; Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composite adjunction formulas do not state the normalized continuous-set comparison equations on scheme sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction normalized continuous coefficient comparisons commute with base change and coefficient maps and finite products",
+   "results": "OK: 8 hits; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafAdjunctionContinuous, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, CategoryTheory.abelianOfAdjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CommRingCat.coyonedaAdj; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic composite adjunction formulas do not state the normalized continuous-set comparison equations on scheme sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_homEquiv",
+   "results": "{\"t\": \"2026-10-22T06:55:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_homEquiv\"], \"digest\": \"4ce5ece4c45200d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general adjunction, topological pullback or component-extensionality facts do not state this normalized comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized maps from pulled back continuous function sheaves commute with continuous coefficient maps finite products and scheme inverse image",
+   "results": "{\"t\": \"2026-10-22T06:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized maps from pulled back continuous function sheaves commute with continuous coefficient maps finite products and scheme inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.naturality\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE'\"], \"digest\": \"683575e4dc4959c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general adjunction, topological pullback or component-extensionality facts do not state this normalized comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_homEquiv|homEquiv_naturality|leftAdjointCompIso",
+   "results": "{\"t\": \"2026-10-22T06:55:45Z\", \"tool\": \"grep\", \"query\": \"comp_homEquiv|homEquiv_naturality|leftAdjointCompIso\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean\"], \"digest\": \"57ada99fe61f22a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general adjunction, topological pullback or component-extensionality facts do not state this normalized comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proetale continuous function sheaf normalized inverse image comparison natural coefficient product scheme pullback",
+   "results": "{\"t\": \"2026-10-22T06:55:45Z\", \"tool\": \"leansearch\", \"query\": \"Proetale continuous function sheaf normalized inverse image comparison natural coefficient product scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"SheafOfModules.pullback\", \"TopCat.Presheaf.pullbackObjObjOfImageOpen\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"TopCat.Presheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.stalkPullbackHom\", \"TopCat.continuousFunctions.pullback\"], \"digest\": \"4ec3d9c627d2d29e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general adjunction, topological pullback or component-extensionality facts do not state this normalized comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of morphisms out of inverse image sheaves can be checked by adjunction on profinite test sections; comparison maps preserve products and compose under base change",
+   "results": "{\"t\": \"2026-10-22T06:56:54Z\", \"tool\": \"leanfinder\", \"query\": \"Equality of morphisms out of inverse image sheaves can be checked by adjunction on profinite test sections; comparison maps preserve products and compose under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.hom_ext\", \"LightCondensed.hom_ext_iff\", \"TopCat.Presheaf.pullback_obj_obj_ext_iff\", \"TopCat.Presheaf.pullback_obj_obj_ext\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.piInters.hom_ext_iff\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext\", \"CategoryTheory.sheafComposeNatTrans_app_uniq\", \"CompHausLike.LocallyConstant.presheaf_ext\"], \"digest\": \"1e0863253e8a3d5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general adjunction, topological pullback or component-extensionality facts do not state this normalized comparison on scheme pro-etale sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-totally-disconnected-coefficient-realization",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), continuous coefficient realization before monodromy and finite-model arguments; Hemo--Richarz--Scholbach Example 3.1, first two paragraphs, and Bhatt--Scholze Lemma 4.2.12. HRS Example 3.1 and following scheme-pullback paragraph, p.6; former item steps 7 and 8, explicit adjunction normalization refinement.",
+   "via": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normalized-continuous-set-comparison-coherence",
+  "worker": "stage1",
+  "summary": "Checked the HRS continuous-function setting and all existing ingredient statements. Kept the statement unchanged. Wrote the coefficient, finite-product, normalized scheme comparison, identity and composition calculations explicitly, using adjunction injectivity and label base-change; no invertibility of sigma and no new nodes. Searched the live WeilConjectures source, the DAG, blueprint and Mathlib.",
+  "blueprint": "The existing provenance follows det-thm-sf-ctf-stability-direct-images proof paragraph (3) via the recorded chain; realizes former realization-item steps 7 and 8, coefficient/product naturality and actual scheme inverse-image coherence. blueprint_refs.py ancestor returns None, as in the inherited from.node; no blueprint node states this normalized set-valued lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Uses the specified point inverse image and its scheme composition comparison as a generic site tool; this unit does not reconstruct that functor."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "Uses the bifunctorial Hom bijection of sheaf inverse image, to transpose equations; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Uses finite-limit preservation for the point and scheme site functors, solely to identify the canonical finite-product comparison."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uses unit normalization of adjunction-compatible inverse-image compositors, so the two transposes have the specified normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NN-c96ec0ab2",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-c96ec0ab2 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement and stmt_deps are unchanged from live. The item is still unsplit in both live and side-live, so nothing supersedes it, and it has no repair note. Its six steps expand the old steps 7 and 8 of the parent realization node (the NV re-split, PASS) and drop none of their arguments. Steps 2-3: coefficient naturality is h(b r) = (h b) r. Finite products are checked coordinatewise through P_X(pr_i), with left-exactness from the point node, the base-change definition and the left-exact site theorem. The empty product is the terminal case. Steps 4-6: rho_f is natural by the fibre-product projection equations, and rho_fg = f_*(rho_g) rho_f. The main equation holds: transposing c_f f^{-1}(sigma_X) gives R_X(rho_f) alpha_X, whose value at (S,b) is b r_X |pr| = b r_Y by the label base-change clause. Transposing sigma_Y kappa_f through the composite adjunction and then delta gives alpha_Y by the conjugate unit equation. Composition and identity follow by successive transposes. Sigma is never inverted. Edge cases checked: empty X, S or D, one-point D, f = id, and two composable maps. Sources: HRS Ex. 3.1 p.6, and Stacks 0037, 0DV0, 0B65, 00WX and 00X6. No SGA is cited. I accept the declared tool uses of profinite-point-pullback and left-exact-site-inverse-image-tensor (both sk-thm-properbasechange) as generic site tools. The other cited nodes outside the unit are Mathlib leaves. No duplicate: the sibling kan-evaluation node gives sigma's existence and values on contractible affines, not this coherence. FIX (C4): step 1 uses pi_{X*} but did not cite def-weil-proetale-inverse-image, which defines it; I added that node. Steps 5-6 need kappa_f and the compositor of (fg)^{-1} with g^{-1}f^{-1} to be the adjunction-compatible ones. The point node says only 'the inverse-image composition comparison'. lem-weil-pbc-left-exact-site-inverse-image-tensor says the composition isomorphisms are the ones compatible with the adjunctions, so I added it to the uses of both steps and reworded them. proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedContinuousSetComparisonCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.normalized_continuousSetComparison_coherence",
+  "file": "lean/Sheaf/Paper/NormalizedContinuousSetComparisonCoherence.lean",
+  "statement": "theorem normalized_continuousSetComparison_coherence (σ : ∀ (X : Scheme.{u}) (D : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D], (profinitePointSetSchemeInverseImage X).obj (continuousSetProfiniteSheaf D) ⟶ continuousSetSheaf X D) (hσ : ∀ (X : Scheme.{u}) (D : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D], IsContinuousSetRealization X D (σ X D)) : (∀ (X : Scheme.{u}) (D E : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D] [TopologicalSpace E] [T2Space E] [TotallyDisconnectedSpace E] (h : C(D, E)), σ X D ≫ continuousSetSheafMap X h = (profinitePointSetSchemeInverseImage X).map (continuousSetProfiniteFunctor.map (TopCat.ofHom h)) ≫ σ X E) ∧ (∀ (X : Scheme.{u}) (I : Type u) [Finite I] (D : I → Type (u + 1)) [∀ i : I, TopologicalSpace (D i)] [∀ i : I, T2Space (D i)] [∀ i : I, TotallyDisconnectedSpace (D i)], IsIso (Pi.lift (fun i : I ↦ continuousSetProfiniteFunctor.map (TopCat.ofHom (⟨fun d : ∀ j : I, D j ↦ d i, continuous_apply i⟩)))) ∧ IsIso (Pi.lift (fun i : I ↦ continuousSetSheafMap X (⟨fun d : ∀ j : I, D j ↦ d i, continuous_apply i⟩))) ∧ IsIso (Pi.lift (fun i : I ↦ (profinitePointSetSchemeInverseImage X).map (continuousSetProfiniteFunctor.map (TopCat.ofHom (⟨fun d : ∀ j : I, D j ↦ d i, continuous_apply i⟩))))) ∧ σ X (∀ i : I, D i) ≫ Pi.lift (fun i : I ↦ continuousSetSheafMap X (⟨fun d : ∀ j : I, D j ↦ d i, continuous_apply i⟩)) = Pi.lift (fun i : I ↦ (profinitePointSetSchemeInverseImage X).map (continuousSetProfiniteFunctor.map (TopCat.ofHom (⟨fun d : ∀ j : I, D j ↦ d i, continuous_apply i⟩))) ≫ σ X (D i))) ∧ (∀ (X Y : Scheme.{u}) (f : Y ⟶ X) (D : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D], (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).map (σ X D) ≫ continuousSetPullbackMap f D = (profinitePointSetSchemeComp f).hom.app (continuousSetProfiniteSheaf D) ≫ σ Y D) ∧ (∀ (D : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D] (X : Scheme.{u}), continuousSetPullbackMap (𝟙 X) D = (profinitePointSetIdentity X).hom.app (continuousSetSheaf X D)) ∧ (∀ (D : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D] (X Y Z : Scheme.{u}) (f : Y ⟶ X) (g : Z ⟶ Y), continuousSetPullbackMap (g ≫ f) D = (profinitePointSetComp g f).hom.app (continuousSetSheaf X D) ≫ (Scheme.proEtaleSheafInverseImage g (Type (u + 1))).map (continuousSetPullbackMap f D) ≫ continuousSetPullbackMap g D)",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of H2/§1(A) at returned immutable head 7382d1b7b1a8: four existing:true definition nodes now own and expose the existing sheaf/coefficient maps, profinite coefficient functor/sheaf, normalization with its adjunction/relative projection, and canonical rho/c maps. Their ids are explicit stmt_deps. The Lean module, signature, mathematical statement and all proof fields are unchanged; the downstream realization theorem is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d461a52cb",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of the 7382 H2 return. The Lean module is byte-identical (sha256 69968a9d), so the earlier clause-by-clause check stands: arbitrary normalized σ with no IsIso, coefficient naturality, product IsIso clauses with the Pi.lift equation and I=∅, scheme square with the adjunction-compatible κ_f, identity and composition laws, universes u/u+1. The item JSON differs from the returned head and from side-live only in stmt_deps (the 4 new def ids added) and lean.note. Four new existing:true def nodes own the concrete published declarations of TotallyDisconnectedCoefficientRealization: def-sfb-continuous-set-sheaf, -profinite-sheaf, -realization-normalization and -pullback-comparison. Each TeX matches its Lean, each lean.statement is verbatim, no definition is hollow and none is chosen from the ∃! theorem. All stmt_deps exist in side-live and the stmt+proof closure is acyclic, reaching neither the item nor the parent. No other node owns these declarations; dual listing with the parent theorem record follows the def-sfb-continuous-set-presheaf precedent. No duplicate notion (the ring-valued condensed-ring node is different), no SGA. Advisories: A1, the sheaf def node does not cite lem-sfb-continuous-set-descent-components for the isSheaf it bundles (the item assumes sheafness); A2, the item TeX defines the four objects inline instead of citing the new ids. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261023T124258-L-1359344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

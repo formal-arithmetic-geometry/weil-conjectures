@@ -1,0 +1,251 @@
+{
+ "id": "lem-wf-henselization-ind-etale-comparison",
+ "kind": "statement",
+ "title": "Recognition over a local ring and its henselization",
+ "statement": "Let $(A,\\mathfrak m_A,k)$ be a commutative local ring with residue field $k$ [def-weil-residue-field], let $H$ be its henselization [def-weil-pbc-henselization-at-prime] with residue field identified with $k$, and let $K/k$ be a separable closure [def-pd-separable-closure]. Let $C$ be a henselian local commutative $H$-algebra [def-weil-pbc-henselian-terminology] such that $H\\to C$ is local and ind-etale [def-weil-pbc-ind-etale-algebra]. Suppose $q:C\\to K$ is surjective, $\\ker q=\\mathfrak m_C$, and $q$ composed with $H\\to C$ equals $H\\to k\\hookrightarrow K$. Regard $C$ as an $A$-algebra by composition. Then $A\\to C$ is local and ind-etale. For $R=A,H$, let $D_R$ be the ring colimit of etale residue triples over $(R,\\mathfrak m_R,K)$ [def-weil-pbc-etale-residue-triples], with its induced residue map $q_R:D_R\\to K$. There is exactly one $R$-algebra isomorphism $a_R:C\\xrightarrow{\\sim}D_R$ with $q_Ra_R=q$. In particular $C$, with the specified residue map $q$, is a strict henselization of both $A$ and $H$ in the pointed-algebra colimit sense [def-sc-ring-strict-henselization]. The map $a_A$ respects the canonical $H$-structure on $D_A$ induced by the universal property of the henselization: $a_A\\circ(H\\to C)$ is that canonical local map $H\\to D_A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BSL (remark-construct-sh-from-h), final ind-etaleness and uniqueness sentences; Tags 04GN (lemma-henselization), 0BSI (lemma-composition-colimit-etale), 08HR (lemma-map-into-henselian-colimit), 08HT (lemma-uniqueness-henselian) and 04GW (lemma-strict-henselization-different), applied over both A and its henselization."
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-henselization-at-prime",
+  "def-pd-separable-closure",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-etale-residue-triples",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta:A\\to H$ and $h:H\\to C$ for the structure maps. Apply [lem-trf-henselization-prime-ind-etale] at $\\mathfrak m_A$. Here $A_{\\mathfrak m_A}=A$ canonically: every denominator outside $\\mathfrak m_A$ is already a unit, so $a/s\\mapsto as^{-1}$ is the inverse localization map. Thus $\\eta$ is ind-etale. Composition stability in [lem-weil-pbc-ind-etale-stability] and the assumed ind-etaleness of $h$ show that $h\\eta$ is ind-etale. It is local since $(h\\eta)^{-1}(\\mathfrak m_C)=\\eta^{-1}(\\mathfrak m_H)=\\mathfrak m_A$.",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), property (2); Tag 0BSI (lemma-composition-colimit-etale); Tag 0BSL (remark-construct-sh-from-h), final sentences"
+   }
+  },
+  {
+   "text": "For each $R\\in\\{A,H\\}$, the specified embedding of its residue field $k$ into $K$ is a separable closure. Apply [lem-weil-pbc-strict-henselization-triples] to $(R,\\mathfrak m_R,K)$. It gives a filtered etale presentation of $D_R$, a surjection $q_R:D_R\\to K$ with kernel its maximal ideal, a local structure map $R\\to D_R$, and henselianness of $D_R$. The composite $R\\to D_R\\to K$ is the prescribed $R\\to k\\hookrightarrow K$: it is induced by the evaluations of the triples, all of which have that composite.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-etale-residue-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP (lemma-strict-henselization), properties (2)-(5), and 04GW (lemma-strict-henselization-different)"
+   }
+  },
+  {
+   "text": "Fix $R=A$ or $H$. Both $C$ and $D_R$ are henselian local ind-etale $R$-algebras. Use the identifications $C/\\mathfrak m_C\\xrightarrow{q}K$ and $D_R/\\mathfrak m_{D_R}\\xrightarrow{q_R}K$. Apply [lem-weil-pbc-map-into-henselian-colimit] with source $C$, target $D_R$, source prime $\\mathfrak m_C$, and residue map the identity of $K$. The primes contract to $\\mathfrak m_R$, and residue compatibility follows from the prescribed maps $R\\to k\\hookrightarrow K$. It gives a unique local $R$-map $a_R:C\\to D_R$ with $q_Ra_R=q$. Apply the same node with source $D_R$ and target $C$ to get $b_R$ with $qb_R=q_R$. The maps $b_Ra_R$ and $\\mathrm{id}_C$ both have prime $\\mathfrak m_C$ and residue map $\\mathrm{id}_K$; uniqueness in that node makes them equal. Likewise $a_Rb_R=\\mathrm{id}_{D_R}$. Hence $a_R$ is an isomorphism. Any $R$-algebra isomorphism $a$ with $q_Ra=q$ has $a^{-1}(\\mathfrak m_{D_R})=\\ker q=\\mathfrak m_C$ and the same residue map, so that uniqueness also proves the asserted uniqueness among isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit), applied in both directions and to the two composites; the proof of Tag 08HT (lemma-uniqueness-henselian)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-etale-triples-colimit-is-strict-henselization] to the colimit $D_R$ for each $R$. Its base is local, its prime is $\\mathfrak m_R$, and the residue embedding and every cocone leg have the prescribed $R$-action. Thus $D_R$ has the pointed-algebra colimit presentation of [def-sc-ring-strict-henselization]. Compose its defining algebra isomorphism to the pointed colimit with $a_R$ to obtain that presentation for $C$. This is precisely the defining condition, and its residue map is $q$ since $q_Ra_R=q$.",
+   "uses": [
+    "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW (lemma-strict-henselization-different), pointed-algebra interpretation of the triple colimit; Tag 0BSL (remark-construct-sh-from-h), conclusion"
+   }
+  },
+  {
+   "text": "By step 2, $D_A$ is henselian local and $A\\to D_A$ is local. The universal property in [def-weil-pbc-henselization-at-prime] therefore gives a unique local $A$-map $j:H\\to D_A$. The composite $a_Ah$ is another such map: it extends $A\\to D_A$ by $A$-linearity of $a_A$, and it is local because both $h$ and $a_A$ are local. Consequently $a_Ah=j$, which proves compatibility with the canonical $H$-structure.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit) specialized to the ordinary henselization with unchanged residue field; Tag 04GN (lemma-henselization) and Tag 04GQ (definition-henselization). The cited project definition records the resulting initial local-map universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-etale-residue-triples",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-sc-etale-triples-colimit-is-strict-henselization",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-henselization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BSL (remark-construct-sh-from-h), final two sentences, with Tags 04GN, 0BSI, 04GP, 04GW, 08HR and 08HT; apply the inverse-composite argument over each of A and H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local henselian ind-etale algebra C over the henselization H of a local ring A with specified separable closure residue field is canonically the pointed etale strict henselization of both A and H.",
+   "results": "[leansearch] OK 8 hit(s); Algebra.Etale; Algebra.FormallyEtale.iff_exists_algEquiv_prod; HenselianLocalRing; Algebra.Etale.formallyEtale; Algebra.Etale.recOn; HenselianLocalRing.toIsLocalRing; Algebra.FormallyEtale.of_unramified_and_smooth; HenselianLocalRing.casesOn",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian simple-root and standard-etale uniqueness statements do not recognize the strict henselization over two bases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare a henselian local filtered etale algebra with the strict henselization by unique maps preserving residue fields in both directions; compatibility with the ordinary henselization.",
+   "results": "[leanfinder] OK 8 hit(s); HenselianLocalRing.TFAE; HenselianLocalRing; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Field.henselian; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; HenselianLocalRing.toIsLocalRing; instHenselianRingMaximalIdeal; StandardEtalePair.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian simple-root and standard-etale uniqueness statements do not recognize the strict henselization over two bases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two henselian local ind-etale algebras with identical residue field are uniquely isomorphic preserving the base and residue maps.",
+   "results": "[leanfinder] OK 8 hit(s); StandardEtalePresentation.mk.inj; HenselianLocalRing.TFAE; StandardEtalePair.hom_ext; HenselianLocalRing; StandardEtalePair.hom_ext_iff; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; StandardEtalePair.homEquiv; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian simple-root and standard-etale uniqueness statements do not recognize the strict henselization over two bases."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.FormallyEtale",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian simple-root and standard-etale uniqueness statements do not recognize the strict henselization over two bases."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|henseliz|henselis|indEtale",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: henselian simple-root and standard-etale uniqueness statements do not recognize the strict henselization over two bases."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|henseliz|henselis|indEtale",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give henselian root lifting, residue-field map extensionality, or finite-presentation etaleness, not recognition of the specified ind-etale strict henselization over both bases."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two henselian local filtered colimits of etale algebras with the same specified residue field have a unique residue-preserving algebra isomorphism",
+   "results": "OK 8 hits: Ideal.ResidueField.algHom_ext, HenselianLocalRing.TFAE, Ideal.ResidueField.liftₐ.congr_simp, HenselianLocalRing.toIsLocalRing, Algebra.instEtaleOfIsStandardEtale, RingHom.FormallyEtale, Algebra.FormallyEtale.iff_of_equiv, Algebra.Etale.of_equiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give henselian root lifting, residue-field map extensionality, or finite-presentation etaleness, not recognition of the specified ind-etale strict henselization over both bases."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.FormallyEtale",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give henselian root lifting, residue-field map extensionality, or finite-presentation etaleness, not recognition of the specified ind-etale strict henselization over both bases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian local ind-etale algebra with a specified separable closure residue field is uniquely isomorphic to the strict henselization",
+   "results": "OK 8 hits: HenselianLocalRing.TFAE, HenselianLocalRing, Field.henselian, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, HenselianLocalRing.toIsLocalRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, instHenselianRingMaximalIdeal, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give henselian root lifting, residue-field map extensionality, or finite-presentation etaleness, not recognition of the specified ind-etale strict henselization over both bases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recognize a strict henselization over a local ring and over its henselization using uniqueness of lifts from filtered etale algebras to henselian local rings",
+   "results": "OK 8 hits: HenselianLocalRing, HenselianLocalRing.TFAE, HenselianRing, instHenselianRingMaximalIdeal, HenselianLocalRing.toIsLocalRing, Field.henselian, IsAdicComplete.henselianRing, HenselianLocalRing.is_henselian",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give henselian root lifting, residue-field map extensionality, or finite-presentation etaleness, not recognition of the specified ind-etale strict henselization over both bases."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-strict-henselization-finite-lifts",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-boundary-stalk-invariants",
+   "place": "Finite levels paragraph, 'the punctured strict henselian trait', and final Frobenius-equivariance paragraph, 'automorphisms ... over [the] henselization': identification of the finite-residue-lift construction with strict henselization over both bases.",
+   "via": [
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-wf-strict-henselian-fraction-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-wf-henselization-ind-etale-comparison",
+  "worker": "stage1",
+  "summary": "Proved recognition by composing ind-etale maps, obtaining the local henselian structure of each triple colimit, and applying prescribed-residue lifting in both directions with inverse-composite uniqueness. Reused all required algebra tools; no new nodes and no statement correction. Checked the pointed-colimit interpretation and compatibility with the henselization universal property.",
+  "blueprint": "Finite levels paragraph, 'the punctured strict henselian trait', and final Frobenius-equivariance paragraph, 'automorphisms ... over [the] henselization': identification of the finite-residue-lift construction with strict henselization over both bases.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-henselization-prime-ind-etale",
+    "why": "Generic ordinary-henselization ind-etaleness from 04GN; the boundary unit does not prove ring-theoretic construction properties."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic composition stability from 0BSI, needed to retain the prescribed A-action through H."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic local/henselian/residue structure of the etale-triple colimit (04GP/04GW), required over both bases."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic lifting and uniqueness theorem 08HR; proves the two comparison maps and their inverse identities."
+   },
+   {
+    "node": "lem-sc-etale-triples-colimit-is-strict-henselization",
+    "why": "Generic change from residue triples to pointed-algebra colimits, matching the exact strict-henselization definition used in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-sc-etale-triples-colimit-is-strict-henselization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-c65b2724d",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-c65b2724d (reviewer sub-agent of L); spot-checked: I read Stacks 0BSL (remark-construct-sh-from-h; its last sentences use 0BSI and 08HT) and every cited statement. The item is unchanged and there are no new nodes; its proof_deps equal the union of the steps' uses. Step 1: A_{m_A}=A and the trf 04GN node make A→H ind-étale; composing with h stays ind-étale by the stability node, and the composite is local because h and η are local. Step 2: the triples lemma (clauses 1–3) at p=m_R makes D_R henselian local with q_R surjective, ker q_R=m_{D_R}, the structure map local and q_R prescribed on R; its triple category is the same as def-weil-pbc-etale-residue-triples. Step 3: I checked the 08HR hypotheses in both directions (filtered étale source, henselian local target, primes contracting to m_R, τ a κ(m_R)-map). It gives a_R and b_R; inverse-composite uniqueness makes a_R an isomorphism, and any iso a with q_R a=q has preimage m_C, so it equals a_R. Step 4: lem-sc-etale-triples-colimit-is-strict-henselization applies (R local, p=m_R, R-structure from the legs). Step 5: def-weil-pbc-henselization-at-prime's universal property gives a_A h=j. Small cases: A a field gives C=K; A henselian with separably closed residue field gives identity comparisons; nonreduced A uses only ker q=m_C. Duplicate search: the sibling geometric-triples comparison and the pbc functoriality/residue-lift and trf invariance nodes are not duplicates. Batch-5 flag lem-trf-henselization-prime-ind-etale: it is 04GN pure algebra; its 122-node closure has only henselization helpers and no trace-formula or Poincaré node, so it is generic and accepted. Tool uses are generic ring theory and accepted. Advisory: def-sc-ring-strict-henselization has no residue datum, so 'with the specified residue map q' only records q_R a_R=q."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselizationIndEtaleComparison",
+  "declaration": "Algebra.henselization_indEtale_comparison",
+  "file": "lean/Sheaf/RingTheory/HenselizationIndEtaleComparison.lean",
+  "statement": "theorem henselization_indEtale_comparison (A H C K : Type u) [CommRing A] [IsLocalRing A] [CommRing H] [HenselianLocalRing H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] [Algebra A H] [IsScalarTower A (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] (hH : IsHenselizationAtPrime' A (IsLocalRing.maximalIdeal A) H) (e : IsLocalRing.ResidueField H ≃+* IsLocalRing.ResidueField A) (he : (e.toRingHom.comp (IsLocalRing.residue H)).comp (algebraMap A H) = IsLocalRing.residue A) [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [Algebra (IsLocalRing.ResidueField H) K] (hK : algebraMap (IsLocalRing.ResidueField H) K = (algebraMap (IsLocalRing.ResidueField A) K).comp e.toRingHom) [Algebra H K] [IsScalarTower H (IsLocalRing.ResidueField H) K] [CommRing C] [HenselianLocalRing C] [Algebra H C] [Algebra A C] [IsScalarTower A H C] (hlocal : IsLocalHom (algebraMap H C)) (hind : RingHom.IndEtaleAcrossUniverses (algebraMap H C)) (q : C →+* K) (hqsurj : Function.Surjective q) (hqker : RingHom.ker q = IsLocalRing.maximalIdeal C) (hq : q.comp (algebraMap H C) = algebraMap H K) (χA : (Spec (CommRingCat.of A)).residueField (IsLocalRing.closedPoint A) ⟶ CommRingCat.of K) (hχA : (Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ (Spec (CommRingCat.of A)).Γevaluation (IsLocalRing.closedPoint A) ≫ χA = CommRingCat.ofHom (algebraMap A K)) (χH : (Spec (CommRingCat.of H)).residueField (IsLocalRing.closedPoint H) ⟶ CommRingCat.of K) (hχH : (Scheme.ΓSpecIso (CommRingCat.of H)).inv ≫ (Spec (CommRingCat.of H)).Γevaluation (IsLocalRing.closedPoint H) ≫ χH = CommRingCat.ofHom (algebraMap H K)) (cA : Cocone (Scheme.etaleResidueTriplesRingDiagram (CommRingCat.of A) (IsLocalRing.closedPoint A) K χA)) (hcA : IsColimit cA) (cH : Cocone (Scheme.etaleResidueTriplesRingDiagram (CommRingCat.of H) (IsLocalRing.closedPoint H) K χH)) (hcH : IsColimit cH) [Algebra A cA.pt] [Algebra H cH.pt] (hρA : ∀ t, t.α ≫ cA.ι.app t = CommRingCat.ofHom (algebraMap A cA.pt)) (hρH : ∀ t, t.α ≫ cH.ι.app t = CommRingCat.ofHom (algebraMap H cH.pt)) (qA : cA.pt →+* K) (qH : cH.pt →+* K) (hqA : ∀ t, qA.comp (cA.ι.app t).hom = ((Scheme.ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom) (hqH : ∀ t, qH.comp (cH.ι.app t).hom = ((Scheme.ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom) : IsLocalHom (algebraMap A C) ∧ RingHom.IndEtaleAcrossUniverses (algebraMap A C) ∧ (∃! aA : C ≃ₐ[A] cA.pt, qA.comp aA.toRingHom = q) ∧ (∃! aH : C ≃ₐ[H] cH.pt, qH.comp aH.toRingHom = q) ∧ (∃ P : StrictHenselizationPresentationIn.{u, u} A K C, P.residueMap = q) ∧ (∃ sH : IsSepClosure (IsLocalRing.ResidueField H) K, ∃ P : @StrictHenselizationPresentationIn.{u, u} H K C _ _ _ _ sH _ _ _ _, @StrictHenselizationPresentationIn.residueMap.{u, u} H K C _ _ _ _ sH _ _ _ _ P = q) ∧ (∀ aA : C ≃ₐ[A] cA.pt, qA.comp aA.toRingHom = q → IsLocalHom (aA.toRingHom.comp (algebraMap H C)) ∧ ∀ j : H →+* cA.pt, IsLocalHom j → j.comp (algebraMap A H) = algebraMap A cA.pt → aA.toRingHom.comp (algebraMap H C) = j)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-901bdc888",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item lem-wf-henselization-ind-etale-comparison read clause by clause against the node, Stacks 0BSL and the recorded dependency declarations (IsHenselizationAtPrime', IndEtaleAcrossUniverses, etaleResidueTriplesRingDiagram, StrictHenselizationPresentationIn/residueMap, strictHenselization_triples interface). Hypotheses match; the extra data e/he, χA/χH, the leg-pinned algebra structures hρ and the residue maps hq are uniquely determined, so they add no assumption. Conclusions: A→C local and ind-étale; ∃! residue-compatible C≃ₐ[R]D_R for R=A,H; StrictHenselizationPresentationIn over A and over H, with IsSepClosure over k_H derived as sH and residueMap=q; a_A∘h local and equal to every local j extending A→D_A, which with hH pins the canonical map. Single universe u follows the def-sc-ring-strict-henselization and triple-category convention. Edge cases checked: field, already strictly henselian, nonreduced, zero ring excluded, triple categories nonempty. lean.statement appears verbatim in the file; one sorry; no definitions; source/blueprint docstrings and the 5-step proof docstring present; stmt_deps are all definition nodes (no H2); the 5 proof-dep modules exist; report has both sections; item not already landed; no statement_change. No compile: no file changed. Advisory only: residueMap=q records the residue compatibility, since the strict-henselization definition has no residue datum."
+ }
+}

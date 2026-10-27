@@ -1,0 +1,154 @@
+{
+ "id": "lem-pbc-abelian-etale-hmap-square",
+ "kind": "statement",
+ "title": "Normalized change of site intertwines abelian h-maps",
+ "statement": "Let X,Y be quasi-compact separated schemes, aX,aY normalized abelian-Zariski-to-lifted-etale cohomology equivalences, g:Y→X, quasi-coherent F,G and psi:g*F→G. Given an etale sheaf map theta with the structural qcoherentPullbackSection component formula, aY after zariskiModuleHMap of the tensor adjoint of psi equals the etale inverse-image cohomology map followed by the cohomology map of the adjoint of theta, after aX. Both Zariski groups and the map are abelian Ext; no module-derived map is involved. This does not construct theta. Notions: [def-pc-scheme], [pqf-def-coherent], [def-pbc-canonical-coherent-etale-comparison], [lem-weil-pbc-qcoherent-pullback-sections-map], [def-weil-pbc-cohomology-pullback], [def-pbc-qcoherent-zariski-cohomology-map].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "def-weil-pbc-cohomology-pullback",
+  "def-pbc-qcoherent-zariski-cohomology-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD refinement square; etale-cohomology.tex Tag 03P2; sites-cohomology.tex Tags 03AX and 03FD"
+ },
+ "proof": [
+  {
+   "text": "Obtain the two exact comparison presentations and the sheaf-level inverse-image isomorphism with its integer and coefficient triangles. This step has no positive-degree cohomology.",
+   "uses": [
+    "lem-pbc-coherent-etale-inverse-image-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact presentations induce normalized delta-functor maps. Quasi-coherent effacement and normalized uniqueness identify them with aX and aY. The proof uses the explicit Eq on values, not arbitrary choices of cohomology isomorphisms.",
+   "uses": [
+    "lem-pbc-exact-comparison-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved exactComparison_hmap_square API to the chosen presentations and their integer and coefficient triangles. This combines exact-functor naturality and Ext associativity without unfolding the large bundled maps in this theorem.",
+   "uses": [
+    "lem-pbc-exact-comparison-pullback-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-coherent-etale-inverse-image-square",
+  "lem-pbc-exact-comparison-normalized",
+  "lem-pbc-exact-comparison-pullback-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03P2 section-normalized comparison, using the exact-functor construction already proved in QcoherentNormalizedComparison; 03DR tensor unit compatibility; Ext square argument by F3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasicoherent sheaf etale Zariski cohomology comparison natural under pullback morphism of schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "10 hits; AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorSections.*[Pp]ullback|[Pp]ullback.*etaleTensorSections",
+   "results": "0 hits; ",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison module sheaf derived global sections and cohomology of underlying abelian sheaf natural under morphism of ringed spaces",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, SheafOfModules.sectionsMap, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap.*abelian|abelian.*moduleCohomologyFMap|qcoherentPullbackSection_naturality",
+   "results": "0 hits; ",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search: cohomology functoriality; tensor sections; cohomology comparison",
+   "results": "0, 0, and 5 nodes respectively. The latter concern proetale comparison or purity, not this quasi-coherent Zariski/etale argument.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
+  "date": "2026-10-25",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.; extracted from lem-weil-pbc-qcoherent-cohomology-comparison-pullback: The normalized comparison commutes with the canonical pullback cohomology maps; extracted structural restriction / abelian-map comparison step",
+   "via": [
+    "lem-weil-pbc-qcoherent-normalized-pullback-square",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcoherentAbelianEtalePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcoherentAbelianEtalePullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.normalizedAbelianEtale_hmap_square",
+  "statement": "theorem normalizedAbelianEtale_hmap_square\n    (X Y : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X]\n    [CompactSpace Y] [Scheme.IsSeparated Y]\n    (aX : ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),\n      CoherentEtale.Source X F q ≃+ CoherentEtale.Target X F q)\n    (aY : ∀ (G : Y.Modules) [G.IsQuasicoherent] (q : ℕ),\n      CoherentEtale.Source Y G q ≃+ CoherentEtale.Target Y G q)\n    (haX : IsNormalizedCoherentEtaleComparison X aX)\n    (haY : IsNormalizedCoherentEtaleComparison Y aY)\n    (g : Y ⟶ X) (F : X.Modules) (G : Y.Modules)\n    [F.IsQuasicoherent] [G.IsQuasicoherent] (ψ : (tensorPullback g).obj F ⟶ G)\n    (θ : liftedCoherentEtaleSheaf F ⟶\n      (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj (liftedCoherentEtaleSheaf G))\n    (hθ : ∀ (U : X.Etale) (s : (etaleTensorSectionsSheaf F).obj.obj (op U)),\n      θ.hom.app (op U) (ULift.up s) = ULift.up\n        (qcoherentPullbackSection g F G ψ U\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj U)\n          (pullback.fst U.hom g) pullback.condition s))\n    (q : ℕ) (x : CoherentEtale.Source X F q) :\n    aY G q (zariskiModuleHMap g\n      ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv F G ψ) q x) =\n      Sheaf.H.map\n        ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv\n          (liftedCoherentEtaleSheaf F) (liftedCoherentEtaleSheaf G) |>.symm θ)\n        q (Etale.cohomologyMap g (liftedCoherentEtaleSheaf F) q (aX F q x))",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T143205-L-963501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T181934-L-3509219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

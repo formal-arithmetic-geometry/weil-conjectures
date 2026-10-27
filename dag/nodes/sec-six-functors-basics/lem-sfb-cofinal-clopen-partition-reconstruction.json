@@ -1,0 +1,382 @@
+{
+ "id": "lem-sfb-cofinal-clopen-partition-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruction from a cofinal family of finite clopen partitions",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $P$ be a compact Hausdorff totally disconnected space. A finite clopen partition is a finite set of pairwise disjoint nonempty open and closed subsets with union $P$; the empty partition of the empty space is allowed. Let $J$ be a small nonempty collection of finite clopen partitions of $P$, ordered by $i\\le j$ when $j$ refines $i$. Assume that $J$ is directed and that every finite clopen partition of $P$ has a refinement in $J$. Let $P_i$ be the discrete finite set of blocks of $i$, let $q_i:P\\to P_i$ be the block projection, and let $r_{ji}:P_j\\to P_i$ be the containing-block map for $i\\le j$. Define\n$$L=\\{(B_i)\\in\\prod_{i\\in J}P_i:r_{ji}(B_j)=B_i\\text{ for all }i\\le j\\}$$\nwith the subspace topology from the product of the discrete $P_i$. Then $L$ is Hausdorff and the canonical map $\\phi:P\\to L$, $\\phi(x)=(q_i(x))_i$, is a homeomorphism. More explicitly, the partitions in $J$ separate distinct points of $P$, and every compatible family $(B_i)\\in L$ has intersection $\\bigcap_{i\\in J}B_i$ consisting of exactly one point, namely $\\phi^{-1}((B_i)_i)$. This includes $P=\\varnothing$, when $L=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Stacks Tag 08ZY, label lemma-profinite, proof of (2) implies (1), for a cofinal directed family of partitions; Tag 005D, label lemma-intersection-closed-in-quasi-compact, and Tag 08YE, label lemma-bijective-map. Returned parent proof steps 5–7."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "The compatibility subspace is Hausdorff by the product and subtype T2Space instances, since every DiscreteQuotient has the discrete topology. The canonical map is already defined using ofLE_proj, and continuous_pi followed by Continuous.subtype_mk proves continuity from the continuous quotient projections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Suppose the projections of x and y agree at every index in J. For an arbitrary discrete quotient Q, cofinality gives i in J with i <= Q. Apply ofLE to equality of the i-projections and simplify with ofLE_proj to obtain equality of the Q-projections. Mathlib DiscreteQuotient.eq_of_forall_proj_eq now gives x=y. Contraposition gives the stated point separation, and equality of canonical-map values gives injectivity by evaluation at each index. This directly uses Mathlib quotient separation in place of constructing a separating two-block partition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a compatible tuple b, put C_i = proj_i inverse({b_i}). Each C_i is closed by DiscreteQuotient.isClosed_preimage, compact as a closed subset of compact P, and nonempty by proj_surjective. If j <= i, ofLE_proj and compatibility show C_j is contained in C_i. The assumed directedness of J therefore makes this family downward directed. The hypothesis J.Nonempty supplies the nonempty indexing type. Apply the compact closed intersection result in its directed Mathlib form IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed to obtain x in every C_i. Its coordinate equalities give canonicalMap(x)=b by function and subtype extensionality, proving surjectivity. This argument also handles empty P: any proposed tuple would force a point in its nonempty closed blocks.",
+   "uses": [
+    "lem-sfb-compact-closed-finite-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical map is continuous and bijective, its source is compact and its target Hausdorff. Apply isHomeomorph_iff_continuous_bijective, the Mathlib declaration of the compact-Hausdorff-bijection leaf, and bundle it using IsHomeomorph.homeomorph. The resulting homeomorphism e has the canonical map as its underlying function by definition.",
+   "uses": [
+    "lem-weil-pbc-compact-hausdorff-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A point x belongs to every selected block of b exactly when canonicalMap(x)=b, by coordinate extensionality. Applying injectivity of e and e.apply_symm_apply turns this into x=e.symm(b). Conversely e.apply_symm_apply gives membership in every block for e.symm(b). Set extensionality yields the required singleton equality. Finally, if P is empty, a tuple b would give the impossible point e.symm(b), proving the limit empty without a separate construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-closed-finite-intersection",
+  "lem-weil-pbc-compact-hausdorff-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "X6 Lean implementation of Tag 08ZY, lemma-profinite, (2) implies (1), for a cofinal directed subfamily; Tag 005D via the directed compact intersection theorem; Tag 08YE via isHomeomorph_iff_continuous_bijective. Mathlib DiscreteQuotient.eq_of_forall_proj_eq replaces the explicit clopen-basis argument. All original conclusions and the unit route are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact Hausdorff totally disconnected space is homeomorphic to the inverse limit of any cofinal directed family of finite clopen partitions",
+   "results": {
+    "t": "2026-10-22T06:09:40Z",
+    "tool": "leanfinder",
+    "query": "A compact Hausdorff totally disconnected space is homeomorphic to the inverse limit of any cofinal directed family of finite clopen partitions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.isoindexConeLift",
+     "Profinite.asLimitindexConeIso",
+     "Profinite.isIso_indexCone_lift",
+     "Profinite.of",
+     "Profinite.indexCone",
+     "Profinite.indexCone_isLimit",
+     "LightProfinite.of",
+     "CompHaus.toProfiniteObj"
+    ],
+    "digest": "4e04e89f55bf6351"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and DiscreteQuotient.exists_of_compat use all discrete quotients. Restriction to an arbitrary cofinal directed family and reconstruction of compatible blocks require the separate argument stated here; Product.indexCone uses a different index."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed separating family of finite clopen partitions of a compact Hausdorff space gives a homeomorphism to the space of compatible blocks",
+   "results": {
+    "t": "2026-10-22T06:10:53Z",
+    "tool": "leanfinder",
+    "query": "A directed separating family of finite clopen partitions of a compact Hausdorff space gives a homeomorphism to the space of compatible blocks",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DiscreteQuotient.comp_finsetClopens",
+     "exists_clopen_partition_of_clopen_cover",
+     "Metric.PiNatEmbed.toPiNatHomeo",
+     "Metric.PiNatEmbed.toPiNatHomeo_apply_ofPiNat",
+     "cantorSetHomeomorphNatToBool",
+     "Metric.PiNatEmbed.isHomeomorph_toPiNat",
+     "DiscreteQuotient.finsetClopens",
+     "cantorSpaceHomeomorphNatToCantorSpace"
+    ],
+    "digest": "31bdaad83970f587"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and DiscreteQuotient.exists_of_compat use all discrete quotients. Restriction to an arbitrary cofinal directed family and reconstruction of compatible blocks require the separate argument stated here; Product.indexCone uses a different index."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"asLimit\"",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"asLimit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Profinite.hasLimits",
+     "Profinite.asLimitCone",
+     "Profinite.asLimit",
+     "Profinite.isoAsLimitConeLift",
+     "Profinite.asLimitConeIso",
+     "Profinite.isIso_asLimitCone_lift",
+     "LightProfinite.asLimitCone",
+     "LightProfinite.asLimitConeAux"
+    ],
+    "digest": "824613ca68459b16"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and DiscreteQuotient.exists_of_compat use all discrete quotients. Restriction to an arbitrary cofinal directed family and reconstruction of compatible blocks require the separate argument stated here; Product.indexCone uses a different index."
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsTotallyDisconnected|isoAsLimitConeLift|asLimitConeIso|exists_of_compat",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "grep",
+    "query": "ofIsTotallyDisconnected|isoAsLimitConeLift|asLimitConeIso|exists_of_compat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/DiscreteQuotient.lean",
+     "Mathlib/Topology/DiscreteQuotient.lean"
+    ],
+    "digest": "b664543e4e7985f0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and DiscreteQuotient.exists_of_compat use all discrete quotients. Restriction to an arbitrary cofinal directed family and reconstruction of compatible blocks require the separate argument stated here; Product.indexCone uses a different index."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a profinite space from any cofinal family of its finite clopen quotients",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "leansearch",
+    "query": "Reconstruct a profinite space from any cofinal family of its finite clopen quotients",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact Hausdorff totally disconnected space is homeomorphic to the inverse limit of any cofinal directed family of finite clopen partitions",
+   "results": {
+    "t": "2026-10-22T10:22:50Z",
+    "tool": "leanfinder",
+    "query": "A compact Hausdorff totally disconnected space is homeomorphic to the inverse limit of any cofinal directed family of finite clopen partitions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.isoindexConeLift",
+     "Profinite.asLimitindexConeIso",
+     "Profinite.isIso_indexCone_lift",
+     "Profinite.of",
+     "Profinite.indexCone",
+     "Profinite.indexCone_isLimit",
+     "LightProfinite.of",
+     "CompHaus.toProfiniteObj"
+    ],
+    "digest": "4e04e89f55bf6351"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit/isoAsLimitConeLift and DiscreteQuotient.exists_of_compat quantify over all discrete quotients, not the arbitrary cofinal directed partition family of this statement. Profinite.indexCone has a different diagram. The cofinality, finite-intersection argument, and singleton-intersection clauses require the proof given here."
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsTotallyDisconnected|isoAsLimitConeLift|asLimitConeIso|exists_of_compat",
+   "results": {
+    "t": "2026-10-22T10:23:07Z",
+    "tool": "grep",
+    "query": "ofIsTotallyDisconnected|isoAsLimitConeLift|asLimitConeIso|exists_of_compat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/Category/Profinite/AsLimit.lean",
+     "Mathlib/Topology/DiscreteQuotient.lean",
+     "Mathlib/Topology/DiscreteQuotient.lean"
+    ],
+    "digest": "b664543e4e7985f0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit/isoAsLimitConeLift and DiscreteQuotient.exists_of_compat quantify over all discrete quotients, not the arbitrary cofinal directed partition family of this statement. Profinite.indexCone has a different diagram. The cofinality, finite-intersection argument, and singleton-intersection clauses require the proof given here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a compact Hausdorff totally disconnected space from a cofinal directed family of finite clopen partitions",
+   "results": {
+    "t": "2026-10-22T10:23:07Z",
+    "tool": "leansearch",
+    "query": "Reconstruct a compact Hausdorff totally disconnected space from a cofinal directed family of finite clopen partitions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.of",
+     "Profinite",
+     "LightProfinite",
+     "CompHausLike.finiteCoproduct.cofan",
+     "Profinite.hasColimits",
+     "exists_clopen_partition_of_clopen_cover",
+     "loc_compact_Haus_tot_disc_of_zero_dim",
+     "Profinite.instEffectivelyEnoughCompHausProfiniteToCompHaus"
+    ],
+    "digest": "b122a350240e44ca"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit/isoAsLimitConeLift and DiscreteQuotient.exists_of_compat quantify over all discrete quotients, not the arbitrary cofinal directed partition family of this statement. Profinite.indexCone has a different diagram. The cofinality, finite-intersection argument, and singleton-intersection clauses require the proof given here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"asLimit\"",
+   "results": {
+    "t": "2026-10-22T10:23:07Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"asLimit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Profinite.hasLimits",
+     "Profinite.asLimitCone",
+     "Profinite.asLimit",
+     "Profinite.isoAsLimitConeLift",
+     "Profinite.asLimitConeIso",
+     "Profinite.isIso_asLimitCone_lift",
+     "LightProfinite.asLimitCone",
+     "LightProfinite.asLimitConeAux"
+    ],
+    "digest": "824613ca68459b16"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit/isoAsLimitConeLift and DiscreteQuotient.exists_of_compat quantify over all discrete quotients, not the arbitrary cofinal directed partition family of this statement. Profinite.indexCone has a different diagram. The cofinality, finite-intersection argument, and singleton-intersection clauses require the proof given here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed separating family of finite clopen partitions of a compact space reconstructs points as intersections of compatible blocks",
+   "results": {
+    "t": "2026-10-22T10:23:10Z",
+    "tool": "leanfinder",
+    "query": "A directed separating family of finite clopen partitions of a compact space reconstructs points as intersections of compatible blocks",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "Profinite.Nobeling.ι",
+     "DiscreteQuotient.comp_finsetClopens",
+     "TopologicalSpace.Clopens.surjective_finset_sup_prod",
+     "connectedComponent_eq_iInter_isClopen",
+     "DiscreteQuotient.finsetClopens",
+     "CantorScheme.inducedMap",
+     "Profinite.NobelingProof.C'"
+    ],
+    "digest": "f9a8afa62728d1ab"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit/isoAsLimitConeLift and DiscreteQuotient.exists_of_compat quantify over all discrete quotients, not the arbitrary cofinal directed partition family of this statement. Profinite.indexCone has a different diagram. The cofinality, finite-intersection argument, and singleton-intersection clauses require the proof given here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-finite-quotients",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Field-site presentation in Paragraph (3), Bhatt-Scholze Example 4.1.10: passage from finite discrete Galois sets to continuous profinite Galois sets; generic equivariant finite-quotient input. Stacks Tag 08ZY, label lemma-profinite, proof of (2) implies (1), for a cofinal directed family of partitions; Tag 005D, label lemma-intersection-closed-in-quasi-compact, and Tag 08YE, label lemma-bijective-map. Returned parent proof steps 5–7.",
+   "via": [
+    "lem-sfb-profinite-action-finite-quotients",
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cofinal-clopen-partition-reconstruction",
+  "worker": "stage1",
+  "summary": "Q38 retains the statement and all inherited metadata; supplies the full cofinal-partition reconstruction proof using three existing Mathlib leaves. Checks empty space, finite upper bounds, clopen separation, cylinder continuity, and uniqueness of the reconstructed point. No new nodes, no Lean changes, no attachment.",
+  "blueprint": "No imported blueprint ancestor exists (blueprint_refs ancestor returns None); preserve the inherited from-chain. The six proof steps supply returned parent lem-sfb-profinite-action-finite-quotients steps 5–7, the underlying-space reconstruction in Bhatt–Scholze Example 4.1.10, by the partition proof of Stacks 08ZY. Whole-blueprint searches for clopen, partition, totally disconnected, 005D and 08YE found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-bafc534a4",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-bafc534a4 (reviewer sub-agent of L); spot-checked: Zero-node split. The delivery adds a six-step proof to the item. Statement, stmt_deps and metadata match live byte for byte, and live and side-live still have the item unsplit, so it is not superseded. No re-split note exists and no SGA source is cited. I read the source, Stacks topology.tex 08ZY (lemma-profinite, proof of (2)=>(1)), together with 005D, 08YE and 08ZZ. The cofinal-subfamily variant needs two arguments beyond 08ZY, and the delivery writes out both: step 2 separates points via a clopen C from lem-weil-pbc-profinite-clopen-basis, the two-block partition {C, P\\C} and cofinality in the right direction; step 4 gets finite upper bounds from i0 plus directedness, so B_j is contained in each B_i and every finite intersection is nonempty, and lem-sfb-compact-closed-finite-intersection (J small) gives the point. Step 1 (P empty, so L empty via i0), step 3 (cylinder preimages are unions of blocks, L Hausdorff as a subspace of a discrete product), step 5 (bijectivity) and step 6 (lem-weil-pbc-compact-hausdorff-bijection with U=P, V=L) are correct. All three cited nodes are mathlib leaves whose statements match their use. I tested P empty, a point, two discrete points and the Cantor set with dyadic partitions. lem-sfb-compact-discrete-quotient-realization and lem-pe-profinite-partition-incidence-limit are not duplicates. The only flaw is that step 2's source names 08ZZ where 08ZY uses 08ZN, which is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CofinalClopenPartitionReconstruction",
+  "declaration": "Topology.cofinal_clopen_partition_reconstruction",
+  "declarations": [
+   "Topology.cofinalClopenPartitionLimit",
+   "Topology.cofinalClopenPartitionMap",
+   "Topology.cofinal_clopen_partition_reconstruction"
+  ],
+  "file": "lean/Sheaf/Topology/CofinalClopenPartitionReconstruction.lean",
+  "statement": "theorem cofinal_clopen_partition_reconstruction (P : Type u) [TopologicalSpace P] [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] (J : Set (DiscreteQuotient P)) (hne : J.Nonempty) (hdir : ∀ i j : J, ∃ k : J, k.val ≤ i.val ∧ k.val ≤ j.val) (hcofinal : ∀ Q : DiscreteQuotient P, ∃ i : J, i.val ≤ Q) : T2Space (cofinalClopenPartitionLimit J) ∧ (∀ x y : P, x ≠ y → ∃ i : J, i.val.proj x ≠ i.val.proj y) ∧ (∃ e : P ≃ₜ cofinalClopenPartitionLimit J, (∀ x : P, e x = cofinalClopenPartitionMap J x) ∧ ∀ b : cofinalClopenPartitionLimit J, (⋂ i : J, i.val.proj ⁻¹' {b.val i}) = {e.symm b}) ∧ (IsEmpty P → IsEmpty (cofinalClopenPartitionLimit J))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a81f35acb",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Node differs from side-live only by the added lean field; lean.statement is verbatim in the file. Clause by clause: compact, T2 and totally disconnected P with nothing extra; DiscreteQuotient = finite clopen partition (empty partition for P empty); Mathlib's reversed refinement order used consistently in hdir, hcofinal and compatibility; hne matches the node's nonemptiness; L is a concrete subtype of the product of discrete stages with ofLE as containing-block map; phi = (proj x)_i via ofLE_proj; conclusions are T2 L, point separation, a homeomorphism pinned to phi, the block intersection equal to {e.symm b}, and IsEmpty P -> IsEmpty L. Edge cases checked: empty P, empty J excluded, one-point P. Helpers are real data, listed in lean.declarations, with source and blueprint docstrings; proof is sorry with the six-step docstring; no pro-etale substitute. Not a duplicate of Profinite.asLimit, exists_of_compat or the parent's TopCat.limitCone. Report has both required sections. No compile run: nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261025T051015-L-3913489",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

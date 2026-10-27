@@ -1,0 +1,304 @@
+{
+ "id": "lem-trf-formal-chart-geometric-regularity",
+ "kind": "statement",
+ "title": "Formal toric models give log regular geometric stalks",
+ "statement": "Let $W$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup] with a global fs chart $R\\to M_W$, structural map $\\alpha$, and let $h:R\\to Q$ be a homomorphism of fs monoids inducing an isomorphism $R^{\\rm gp}\\xrightarrow{\\sim}Q^{\\rm gp}$. Give\n$$Z=W\\times_{\\operatorname{Spec}\\mathbf Z[R]}\\operatorname{Spec}\\mathbf Z[Q]$$\nthe associated $Q$-chart log structure [def-pc-fibre-product]. Fix a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to Z$, set $\\bar w=\\operatorname{pr}_W\\bar z$, $A=\\mathcal O^{\\rm sh}_{W,\\bar w}$, and use the closed geometric point over $\\bar w$ to lift $\\bar z$ to $Z_A=\\operatorname{Spec}A\\times_W Z$ [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. Let $\\mathfrak q$ be its prime in $A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q]$ and put $B=(A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q])_{\\mathfrak q}$ [def-weil-pbc-module-tensor-product, def-weil-pbc-localization-at-prime]. Put $G=\\alpha^{-1}(A^\\times)$, $F=\\{q:[q]\\in B^\\times\\}$, $S=R_G/G^{\\rm gp}$ and $T=Q_F/F^{\\rm gp}$, where $R_G=\\{r-g:r\\in R,g\\in G\\}$ and $Q_F=\\{q-f:q\\in Q,f\\in F\\}$. Assume $h^{-1}(F)=G$. Put $J=([q]:q\\notin F)B$.\nAssume there are a sharp chart $a:S\\to A$ inducing the characteristic identification and a character $\\epsilon:R^{\\rm gp}\\to A^\\times$ with $\\alpha(r)=\\epsilon(r)a(\\bar r)$ on $R_G$. Assume the completion $\\widehat A$ [def-weil-pbc-adic-completion], compatibly with these monomials, is (a) $k[[S]][[t_1,\\ldots,t_n]]$ or (b) $V[[S]][[t_1,\\ldots,t_n]]/(\\theta)$ for finite $n\\ge0$, where $k=A/\\mathfrak m_A$, $V$ is a Cohen ring for $k$ with uniformizer $p$ [def-weil-pbc-cohen-ring], and $\\theta-p\\in([s]:s\\ne0,t_1,\\ldots,t_n)$. Formal monoid rings mean completions of $E[S][t]$ at $(\\mathfrak m_E,[s]:s\\ne0,t)$; monoid rings have basis $[s]$ and multiplication $[s][s']=[s+s']$.\nThen there is a nonzero complete regular Noetherian local ring $D$ and, putting $H=D[[T]]$, $L=([v]:v\\ne0)H$, a pair isomorphism $(\\widehat B,J\\widehat B)\\cong(H,L)$ in case (a), or $(H/(\\eta),L(H/(\\eta)))$ in case (b), with $\\bar\\eta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$. Set $e=0$ or $1$ respectively. The stratum completion is regular and\n$$\\dim\\widehat B=\\dim D+\\operatorname{rank}T^{\\rm gp}-e,\\quad \\dim(\\widehat B/J\\widehat B)=\\dim D-e.$$\nThe quotient $B/J$ is regular and $\\dim B=\\dim(B/J)+\\operatorname{rank}T^{\\rm gp}$. The natural map of strict localizations $Z_{A,(\\bar z_A)}\\to Z_{(\\bar z)}$ is an isomorphism over $Z$, respecting every chart monomial, and identifies $\\mathcal O^{\\rm sh}_{Z,\\bar z}$ with $B^{\\rm sh}$. Under this identification, the characteristic monoid is $T$, its nonunit log ideal is $JB^{\\rm sh}$, the quotient $B^{\\rm sh}/JB^{\\rm sh}\\cong(B/J)^{\\rm sh}$ is regular, and\n$$\\dim B^{\\rm sh}=\\dim(B^{\\rm sh}/JB^{\\rm sh})+\\operatorname{rank}T^{\\rm gp}.$$\nThus the $Q$-chart log scheme $Z$ is log regular at $\\bar z$. Regularity and dimension are as in [def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension)."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-chart-unit-face-data",
+  "def-per-formal-monoid-extension-data",
+  "def-trf-complete-toric-model",
+  "def-trf-strict-henselization-canonical-map",
+  "def-trf-log-regular-pair"
+ ],
+ "proof": [
+  {
+   "text": "Apply formal-chart-local-preparation to obtain Noetherian A and B and the contraction equality. The boundary J is contained in m_B, since each of its spanning generators is a nonunit.",
+   "uses": [
+    "lem-trf-formal-chart-local-preparation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply chart-face-residual-unit-decomposition to the given chart character and contraction equality, extracting sharp fs T. Apply formal-monoid-extension-model to the given completion in the selected Boolean case, and then extended-formal-model-dimensions to obtain ModelDimensions.",
+   "uses": [
+    "lem-trf-chart-face-residual-unit-decomposition",
+    "lem-trf-formal-monoid-extension-model",
+    "lem-trf-extended-formal-model-dimensions",
+    "def-trf-formal-chart-geometric-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private regularity_of_model_dimensions proof makes B/J nonzero local, uses completion-of-quotient to identify its completion with Bhat/JBhat, transfers regularity and applies completion regular-iff. A regular local ring is a regular ring. Rewrite the two completed dimensions by completion-dimension, substitute dim D from the stratum formula, rearrange additions and cancel the common Boolean 0 or 1. This proves regularity of B/J and its dimension-plus-rank formula.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply formal-chart-strict-comparison without using the model hypotheses. Its regularity implication applies to B/J, and its dimension equalities transport the formula to Bsh and Bsh/JBsh.",
+   "uses": [
+    "lem-trf-formal-chart-strict-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the induced quotient ring equivalence from the strict-stalk ring equivalence and its ideal-map equation. Transfer regularity and Krull dimensions through these ring equivalences. The characteristic monoid equivalence induces a group-completion equivalence by monoid localization, hence a Z-linear equivalence and a rational base-change equivalence; rank invariance identifies characteristicRank with rank T. Substitute these equalities to obtain the last two clauses. Retain the pointed, monomial, characteristic and quotient comparison equations for the other clauses.",
+   "uses": [
+    "def-trf-formal-chart-geometric-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-formal-chart-geometric-data",
+  "lem-trf-chart-face-residual-unit-decomposition",
+  "lem-trf-extended-formal-model-dimensions",
+  "lem-trf-formal-chart-local-preparation",
+  "lem-trf-formal-chart-strict-comparison",
+  "lem-trf-formal-monoid-extension-model",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.6 and 1.8; Stacks 00MA, 07NY, 07NV, 05WS, 06LN, 06LK. Formal extension and face decomposition are applied in Lean; three missing comparisons are separate statements. Completion descent, Boolean-drop cancellation and final characteristic/quotient transport are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoid base change inducing an isomorphism on group completions preserves the regular stratum and the logarithmic dimension equality at geometric stalks, by completed formal monoid models and strict henselization.",
+   "results": "{\"t\": \"2026-10-22T06:13:23Z\", \"tool\": \"leanfinder\", \"query\": \"A monoid base change inducing an isomorphism on group completions preserves the regular stratum and the logarithmic dimension equality at geometric stalks, by completed formal monoid models and strict henselization.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"AlgebraicGeometry.stalkwise_Spec_map_iff\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"AlgebraicGeometry.stalkwise_SpecMap_iff\", \"RingHom.isStandardSmoothOfRelativeDimension_stableUnderCompositionWithLocalizationAway\", \"Module.rankAtStalk_baseChange\", \"Module.rankAtStalk_self\"], \"digest\": \"f1bc65742763e38c\"} No result states the formal logarithmic model and geometric-stratum comparison; ordinary localizations, smoothness and ranks do not imply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\", \"completion\"",
+   "results": "{\"t\": \"2026-10-22T06:13:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\", \\\"completion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No result states the formal logarithmic model and geometric-stratum comparison; ordinary localizations, smoothness and ranks do not imply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalMonoid|logRegular|LogRegular|monoid.*hensel",
+   "results": "{\"t\": \"2026-10-22T06:13:23Z\", \"tool\": \"grep\", \"query\": \"formalMonoid|logRegular|LogRegular|monoid.*hensel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No result states the formal logarithmic model and geometric-stratum comparison; ordinary localizations, smoothness and ranks do not imply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recover log regular geometric stalks from complete toric monoid local models after a group completion isomorphism.",
+   "results": "{\"t\": \"2026-10-22T06:13:24Z\", \"tool\": \"leansearch\", \"query\": \"Recover log regular geometric stalks from complete toric monoid local models after a group completion isomorphism.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.GrothendieckGroup.of\", \"Algebra.GrothendieckGroup\", \"Algebra.GrothendieckGroup.instCommGroup\", \"ModuleCat.Tilde.stalkIso\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toStalk_specStalkEquiv\", \"AlgebraicGeometry.Proj.stalkIso'\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\"], \"digest\": \"56713d6c66cf914a\"} No result states the formal logarithmic model and geometric-stratum comparison; ordinary localizations, smoothness and ranks do not imply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal monoid chart extensions have regular quotient by nonunit monomials and dimension equal to quotient dimension plus sharp monoid rank; descend through completion and strict localization.",
+   "results": "{\"t\": \"2026-10-22T06:13:47Z\", \"tool\": \"leanfinder\", \"query\": \"Formal monoid chart extensions have regular quotient by nonunit monomials and dimension equal to quotient dimension plus sharp monoid rank; descend through completion and strict localization.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"ebd266bfba42cac2\"} No result states the formal logarithmic model and geometric-stratum comparison; ordinary localizations, smoothness and ranks do not imply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.regular|monoid.*dimension|dimension.*monoid",
+   "results": "{\"t\": \"2026-10-22T06:13:47Z\", \"tool\": \"grep\", \"query\": \"log.regular|monoid.*dimension|dimension.*monoid\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No result states the formal logarithmic model and geometric-stratum comparison; ordinary localizations, smoothness and ranks do not imply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monoid.*completion|completion.*monoid",
+   "results": "Actual search record: {\"t\": \"2026-10-23T09:33:09Z\", \"tool\": \"grep\", \"query\": \"monoid.*completion|completion.*monoid\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\"], \"digest\": \"40c85aa76fc23b32\"}. The matches concern valued-field adic value groups, not log geometry or toric formal models.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logRegular|log_regular|formalMonoid",
+   "results": "Actual search record: {\"t\": \"2026-10-23T09:33:09Z\", \"tool\": \"grep\", \"query\": \"logRegular|log_regular|formalMonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. No source match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization preserves dimension and regularity of a local quotient",
+   "results": "Actual search record: {\"t\": \"2026-10-23T09:33:09Z\", \"tool\": \"leansearch\", \"query\": \"Strict henselization preserves dimension and regularity of a local quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"HenselianLocalRing.toIsLocalRing\", \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.casesOn\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\"], \"digest\": \"6d9fa09e4b3dd88c\"}. Hits concern regular-element dimension drops and general henselian rings; none gives the item, its chart model, or the specified geometric comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "Actual search record: {\"t\": \"2026-10-23T09:33:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. No matching declaration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic regularity from completed toric charts and strict henselization",
+   "results": "Actual search record: {\"t\": \"2026-10-23T09:33:17Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic regularity from completed toric charts and strict henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_eq\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"IsAdicComplete.henselianRing\", \"NumberField.mixedEmbedding.logMap_apply_of_norm_eq_one\"], \"digest\": \"e638cc3e2b789724\"}. Hits concern de Rham completions, number-field logarithms, smooth charts and henselian completeness; no logarithmic regularity or geometric-stalk model theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal monoid ring models after a monoid chart base change with isomorphic group completions",
+   "results": "Actual search record: {\"t\": \"2026-10-23T09:33:18Z\", \"tool\": \"leanfinder\", \"query\": \"Formal monoid ring models after a monoid chart base change with isomorphic group completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.mapRangeRingEquiv\", \"MonoidAlgebra.domCongr\", \"MonoidAlgebra.mapDomainRingEquiv\", \"MonoidAlgebra.domCongr_apply\", \"MonoidAlgebra.mapRangeAddEquiv\", \"MonoidAlgebra.toRingHom_mapDomainRingEquiv\", \"MonoidAlgebra.mapDomainRingEquiv_apply\", \"MonoidAlgebra.mapDomainAddEquiv\"], \"digest\": \"277bc6aee23a1f6f\"}. Hits are ordinary monoid-algebra coefficient/domain equivalences; none supplies completed toric charts, local strata, or strict-local regularity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-smooth-log-regular",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: ILO VI Proposition 1.9, the final application of log smoothness, using VI 1.8 and VI 1.4. Extraction: VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension).",
+   "via": [
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-chart-geometric-regularity",
+  "worker": "stage1",
+  "summary": "O1 checked the formal model assumptions and all completion/strict-henselization hypotheses. Reused existing formal-monoid extension, dimension, chart-face and ind-etale invariance nodes; created no duplicates. The proof descends regularity/dimension through completion, then passes to the actual geometric strict localization compatibly with chart monomials. No statement correction was needed.",
+  "blueprint": "Historical monoidal-resolution ancestry under lem-trf-local-term-locality proof (1)--(2), as recorded in blueprint.from.place; realizes the extracted formal-model-to-geometric-stalk argument (old returned steps 6--7). The latest blueprint replaces the ancestor argument by contracting correspondences; this ancillary node and its assigned unit/chapter are retained, without modifying that route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-weil-pbc-small-strict-henselization-ind-etale",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic commutative-algebra or pointed-neighbourhood comparison tool used exactly as stated in the indicated proof step; the unit has no replacement for this completion/strict-henselization input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-b5bcb5c55",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-b5bcb5c55 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and the report, no new nodes, no repair note (first split of a statement-only node). The statement is byte-identical to live; the only stmt_deps change adds def-weil-pbc-noetherian-ring, which the statement uses. proof_deps equals the union of the step uses (22 ids), there is no cycle (the 662-node closure does not reach the item), nothing cites SGA, and the only citer, lem-trf-log-smooth-log-regular step 3, uses the item as stated. Source: ILO VI 1.6 (printed p.70) gives exactly the completed models (a)/(b) with f congruent to p, and VI 1.8 defers to Kato, so proof_origin=agent is right. Stacks tags 00MA, 05WS, 07NY, 07NV, 06LN, 06LK, 04HX, 04GW, 04GP, 05WR, 0GIP, 06LJ, 00FN and 07QM all carry the labels the steps quote. Step 1: A=(O_{W,w})^sh is Noetherian local; C is a quotient of A[x_1..x_d]; q contracts to m_A because z_A lies over the closed geometric point; J is in m_B. Step 2: the residual-unit decomposition's hypotheses hold and it supplies sharp fs T. Step 3: extension-model hypotheses are verbatim the item's; regular includes Noetherian. Step 4: ring-dimension applies to complete regular D and sharp T; H/(L,eta)=D/(eta-bar) is elementary, giving e=0 or 1. Step 5: quotient-local, completion-quotient, completion regular-iff and completion dims give dim B - dim B/J = rank T^gp. Step 6: small-sh-ind-etale (Omega algebraically closed by definition) and ind-etale invariance under base change give the strict localization over Z; the triples lemmas give B^sh. Step 7: B to B^sh is local, so the face is F; logification gives characteristic Q_F/F^gp=T; the nonunit ideal is JB^sh because Q intersected with F^gp is F (F is a face). Step 8: 05WS-type quotient core, sh-regular and sh-dimension give exactly the log-regularity definition in def-trf-fs-log-blowup. Edge cases checked: T={0}, n=0, case (b) needs dim D>=1, toy R=Q=N. Advisory only: Step 1 overlaps the sibling lem-trf-toric-chart-strict-local-preparation, but that node assumes W log regular, so the inline argument is justified; the quotient-core node uses the IsStrictHenselization pairs predicate against the triples colimit, an elementary correspondence. All cited units are on the sk-i-curve-zero route, so the 10 declared tool_uses are harmless and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalChartGeometricRegularity",
+  "declaration": "AlgebraicGeometry.formal_chart_geometric_regularity",
+  "declarations": [
+   "AlgebraicGeometry.formal_chart_geometric_regularity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalChartGeometricRegularity.lean",
+  "statement": "theorem formal_chart_geometric_regularity (W : FineSaturatedLogScheme.{u}) (R Q : Type u) [CommMonoid R] [CommMonoid Q] (_hR : IsFineSaturatedMonoid R) (_hQ : IsFineSaturatedMonoid Q) (β : R →* W.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 W.scheme)))) (_hβ : W.logStructure.IsChart (Scheme.Etale.mk (𝟙 W.scheme)) β) (y : W.scheme ⟶ Spec (.of (MonoidAlgebra ℤ R))) (_hy : ∀ r : R, y.appTop ((Scheme.ΓSpecIso (.of (MonoidAlgebra ℤ R))).inv (MonoidAlgebra.single r 1)) = W.logStructure.alpha.app (op (Scheme.Etale.mk (𝟙 W.scheme))) (β r)) (h : R →* Q) (_hgp : Function.Bijective (Algebra.ChartResidual.groupMap h)) (N : EtaleLogStructure (chartScheme y h)) (γ : Q →* N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 (chartScheme y h))))) (_hγ : N.IsChart (Scheme.Etale.mk (𝟙 (chartScheme y h))) γ) (_hγmap : ∀ q : Q, (pullback.snd y (toricMap h)).appTop ((Scheme.ΓSpecIso (.of (MonoidAlgebra ℤ Q))).inv (MonoidAlgebra.single q 1)) = N.alpha.app (op (Scheme.Etale.mk (𝟙 (chartScheme y h)))) (γ q)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ chartScheme y h) (zA : Spec (.of Ω) ⟶ pullback (baseMap y h z) (pullback.fst y (toricMap h))) (_hzA : zA ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) = z) (_hzAclosed : zA ≫ pullback.fst (baseMap y h z) (pullback.fst y (toricMap h)) = Spec.map (Scheme.strictHenselizationEval (z ≫ pullback.fst y (toricMap h)))) (eC : Spec (Algebra.monoidChartTensor (alpha y h z) h) ≅ pullback (baseMap y h z) (pullback.fst y (toricMap h))) (_heCA : eC.hom ≫ pullback.fst (baseMap y h z) (pullback.fst y (toricMap h)) = Spec.map (CommRingCat.ofHom (Algebra.monoidChartTensorBase (alpha y h z) h))) (_heCQ : eC.hom ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) ≫ pullback.snd y (toricMap h) = Spec.map (CommRingCat.ofHom (tensorRight (alpha y h z) h))) (q : Ideal (Algebra.monoidChartTensor (alpha y h z) h)) [q.IsPrime] (_hq : q = (Scheme.SpecToEquivOfField Ω _ (zA ≫ eC.inv)).1.asIdeal) (_hface : (Algebra.ChartResidual.targetFace (alpha y h z) h q).comap h = Algebra.ChartResidual.sourceFace (alpha y h z)) (a : Multiplicative (Algebra.chartSharpMonoid (alpha y h z)) →* baseRing y h z) (_hasharp : ∀ s, IsUnit (a s) ↔ s = 1) (ε : Algebra.GrothendieckGroup R →* (baseRing y h z)ˣ) (_hα : ∀ r : Localization ((IsUnit.submonoid (baseRing y h z)).comap (alpha y h z)), Algebra.localizedUnitChart (alpha y h z) r = (ε (Algebra.unitChartGroupMap (alpha y h z) r) : baseRing y h z) * a (Multiplicative.ofAdd (Additive.ofMul (Associates.mk r)))) (tB : Spec (.of Ω) ⟶ Spec (.of (Localization.AtPrime q))) (_htB : tB ≫ Spec.map (CommRingCat.ofHom (algebraMap (Algebra.monoidChartTensor (alpha y h z) h) (Localization.AtPrime q))) = zA ≫ eC.inv) (mixed : Bool) (_hmodel : HasCompletion (baseRing y h z) (alpha y h z) a mixed) : ModelDimensions (Localization.AtPrime q) (Algebra.ChartResidual.targetSharp (alpha y h z) h q) (Algebra.localizedTensorBoundary (alpha y h z) h q) mixed ∧ IsRegularRing (Localization.AtPrime q ⧸ Algebra.localizedTensorBoundary (alpha y h z) h q) ∧ ringKrullDim (Localization.AtPrime q) = ringKrullDim (Localization.AtPrime q ⧸ Algebra.localizedTensorBoundary (alpha y h z) h q) + rank (Algebra.ChartResidual.targetSharp (alpha y h z) h q) ∧ IsIso (Scheme.strictHenselizationMap (pullback.snd (baseMap y h z) (pullback.fst y (toricMap h))) zA) ∧ (∃ e : strictLocalRing (chartScheme y h) z ≃+* Scheme.strictHenselization tB, (∀ (U : (chartScheme y h).Etale) (v : (Scheme.pointSmallEtale z).fiber.obj U), ∃ k : Scheme.strictLocalization tB ⟶ U.left, k ≫ U.hom = Scheme.strictLocalizationToBase tB ≫ Spec.map (CommRingCat.ofHom (algebraMap (Algebra.monoidChartTensor (alpha y h z) h) (Localization.AtPrime q))) ≫ eC.hom ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) ∧ Spec.map (Scheme.strictHenselizationEval tB) ≫ k = v.left ∧ ∀ c : Γ(U.left, ⊤), e (strictLocalGerm (chartScheme y h) z U v c) = (Scheme.ΓSpecIso (Scheme.strictHenselization tB)).hom (k.appTop c)) ∧ (∀ v : Q, e (N.toEtalePrelogStructure.stalkAlpha z (N.toEtalePrelogStructure.germ z (Scheme.Etale.mk (𝟙 (chartScheme y h))) (Over.homMk z) (γ v))) = strictBase tB (Algebra.localizedTensorMonomial (alpha y h z) h q v)) ∧ (N.nonunitIdeal z).map e.toRingHom = strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) ∧ (∃ eT : N.characteristic z ≃* Algebra.ChartResidual.targetSharp (alpha y h z) h q, ∀ v : Q, eT (Associates.mk (N.toEtalePrelogStructure.germ z (Scheme.Etale.mk (𝟙 (chartScheme y h))) (Over.homMk z) (γ v))) = Algebra.ChartResidual.sharpMap (Algebra.ChartResidual.targetFace (alpha y h z) h q) v) ∧ (∃ tJ : Spec (.of Ω) ⟶ Spec (.of (Localization.AtPrime q ⧸ Algebra.localizedTensorBoundary (alpha y h z) h q)), tJ ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Algebra.localizedTensorBoundary (alpha y h z) h q))) = tB ∧ ∃ eJ : (Scheme.strictHenselization tB ⧸ strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) ≃+* Scheme.strictHenselization tJ, ∀ b : Localization.AtPrime q, eJ (Ideal.Quotient.mk _ (strictBase tB b)) = strictBase tJ (Ideal.Quotient.mk _ b)) ∧ IsRegularRing (Scheme.strictHenselization tB ⧸ strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) ∧ ringKrullDim (Scheme.strictHenselization tB) = ringKrullDim (Scheme.strictHenselization tB ⧸ strictIdeal tB (Algebra.localizedTensorBoundary (alpha y h z) h q)) + rank (Algebra.ChartResidual.targetSharp (alpha y h z) h q) ∧ IsRegularRing (strictLocalRing (chartScheme y h) z ⧸ N.nonunitIdeal z) ∧ ringKrullDim (strictLocalRing (chartScheme y h) z) = ringKrullDim (strictLocalRing (chartScheme y h) z ⧸ N.nonunitIdeal z) + (N.characteristicRank z : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of return on e5ca95d5a2e4: statement dependencies cite definition owners only. The new face-data and strict-henselization-map nodes own the existing canonical constructions; tensor data uses def-per-formal-monoid-extension-data, complete models use the exact ToricMonoid aliases of def-trf-complete-toric-model, and strict stalks/fs monoids cite def-trf-log-regular-pair directly. tensorRight is constructed by TensorProduct.includeRight and does not use monoidChartTensorMonomial. The theorem signature and all mathematical clauses are unchanged. V1 stage-3 decomposition: helper definitions moved verbatim to FormalChartGeometricData and re-exported; all public declaration names and the theorem signature stay identical."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-170ac22a2",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Re-delivery after e5ca RETURN H2; all five points fixed. (1) New def node def-trf-chart-unit-face-data (existing:true over ChartFaceResidualUnitDecomposition) owns groupMap/sourceFace/targetFace/targetSharp/sharpMap; node statement matches the bodies; lean.statement verbatim. (2) def-per-formal-monoid-extension-data cited; tensorRight = includeRight with the same letI algebras as monoidChartTensor; monoidChartTensorMonomial no longer used. (3) HasCompletion/ModelDimensions use ToricMonoid.Complete/completedChartIdeal, abbrevs of CompletedLocalModel/boundary ideal owned by cited def-trf-complete-toric-model. (4) New def node def-trf-strict-henselization-canonical-map owns strictHenselizationMap (Classical.choose of proved ∃! with both equations; module unrecorded elsewhere; deps exist). (5) def-trf-log-regular-pair cited; theorem nodes removed. Statement/proof byte-identical to live; signature content unchanged from H3-accepted e5ca; ownership audit of every signature name done (cited nodes, Mathlib, upstream sh API). New ids absent on side-live. One sorry; docstrings OK; report sections present. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 split statements (local preparation, extended model dimensions, strict comparison) against node lem-trf-formal-chart-geometric-regularity, HasExtendedFormalMonoidModel/CompletedLocalModel defs, FineSaturatedLogScheme; moved defs diffed byte-identical vs clone; 0 importers"
+ }
+}

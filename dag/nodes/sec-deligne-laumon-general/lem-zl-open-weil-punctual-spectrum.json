@@ -1,0 +1,120 @@
+{
+ "id": "lem-zl-open-weil-punctual-spectrum",
+ "kind": "statement",
+ "title": "Weight-independent spectrum transport for open Weil extension",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, an algebraic closure Qbar of Q_l in an independent universe, and an open immersion j0:U0 -> X0 of separated finite-type schemes. For every functor J left adjoint to the canonical Weil restriction along j0, each local eigenvalue of J(F) at a closed point of X0 is a local eigenvalue of F at a closed point of U0 with the same residue-field cardinality. No complex embedding or weight bound is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-open-weil-coefficient-fibres",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "represent the output Weil sheaf and a given local eigenvector at a finite\ncoefficient field. If the target point is outside the open, the normalized empty\nfibre formula makes this vector space zero after scalar extension, contradicting\nthe nonzero eigenvector. Otherwise the open embedding lifts the point uniquely.\nIts residue map is an isomorphism. The lifted point is closed, since its residue\nfield is the same finite field as the target point. Consequently the residue\ncardinalities agree. Descend the input Weil structure, inverse, and its comparison\nto the given output model to a common finite coefficient enlargement; the finite\nWeil-diagram descent theorem supplies this finite model. The normalized open unit\nand the residue-compatible local Frobenius comparison give a conjugacy of the\nlocal operators. Apply its inverse to the nonzero eigenvector; scalar extension\nand the conjugacy preserve the eigenvalue and nonvanishing. This supplies the\nfinite-stage witness for SfPunctualEigenvalue of the input. The argument uses no\ncomplex embedding and includes arbitrary eigenvalues, zero sheaves, the empty\nopen, and the identity immersion.",
+   "uses": [
+    "lem-zl-open-weil-finite-stage-frobenius",
+    "lem-zl-open-weil-unit-and-empty-fibre",
+    "lem-zl-residue-compatible-pullback-frobenius"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-open-weil-finite-stage-frobenius",
+  "lem-zl-open-weil-unit-and-empty-fibre",
+  "lem-zl-residue-compatible-pullback-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), open extension by zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient inclusion of constructible Weil sheaves and natural Frobenius square",
+   "results": "8 hits: CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits, SheafOfModules.IsFiniteType.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.Presentation.IsFinite, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra.mapOfNatIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*extension|extension.*Weil|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match in the intrinsic common-stage Weil categories; generic sheaf, adjunction or finite-field results do not state this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "eigenvalue of extension by zero comes from closed point of open same residue field",
+   "results": "8 hits: IsLocalRing.PrimeSpectrum.comap_residue, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.Scheme.range_fromSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.fromSpecResidueField_apply, AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem for the recorded constructible Weil coefficient categories; hits are generic topology, scalar algebra or unrelated Frobenius constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtensionByZeroPunctual",
+  "date": "2026-10-25",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-quasi-finite",
+   "place": "proof (1) and (2), open extension by zero",
+   "via": [
+    "lem-zl-extension-by-zero-punctual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenWeilPunctualSpectrum",
+  "file": "lean/Sheaf/Paper/OpenWeilPunctualSpectrum.lean",
+  "declaration": "WeilConjectures.openWeilPunctualSpectrum",
+  "statement": "theorem openWeilPunctualSpectrum (F : sfCommonStageWeilSheaf D l hl U₀ Qbar) (x : {x : X₀.left // x ∈ closedPoints X₀.left}) (α : Qbar) (hα : SfPunctualEigenvalue D l hl Qbar X₀ (J.obj F) x α) : ∃ z : {z : U₀.left // z ∈ closedPoints U₀.left}, Nat.card (U₀.left.residueField z.val) = Nat.card (X₀.left.residueField x.val) ∧ SfPunctualEigenvalue D l hl Qbar U₀ F z α",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "independent cc review: item extensionByZero_punctual and its 4 new sorried lemmas against the base item conjuncts, SfPunctualEigenvalue and the owning nodes of the declarations used; moved declarations diffed against the clone; importer ReducedFrontierMixedGluing compiled with the 6 delivered modules"
+ }
+}

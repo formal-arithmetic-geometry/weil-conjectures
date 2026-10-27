@@ -9,11 +9,11 @@ public import Sheaf.AlgebraicGeometry.ModuleStrictTransformKernel
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 public import WeilConjectures.Blowup.FlatBaseChange
-import WeilConjectures.Blowup.Principalization
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
-import Mathlib.RingTheory.Flat.Basic
-import Sheaf.AlgebraicGeometry.ModuleStrictTransform
+import Sheaf.AlgebraicGeometry.BlowupSquarePullbackQuotientData
+import Sheaf.AlgebraicGeometry.SupportedKernelFlatPullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 
 /-!
 # Flat pullback of module strict transforms
@@ -71,6 +71,107 @@ noncomputable def moduleStrictTransformFlatPullbackSourceIso {X S Y T : Scheme.{
     (pullback.lift_fst _ _ _))) ≪≫
   (tensorPullbackSectionComp (pullback.fst g (I.comap e).blowupMap) j).app F
 
+/-- Sectionwise equality of ranges identifies an injective arrow with a kernel. -/
+private theorem exists_kernelIso_of_range {Z : Scheme.{u}} {A B C : Z.Modules}
+    (a : A ⟶ B) (r : B ⟶ C)
+    (ha : ∀ W : Z.Opens, Function.Injective (a.app W))
+    (hr : ∀ W : Z.Opens, Set.range (a.app W) = Set.range ((kernel.ι r).app W)) :
+    ∃ κ : A ≅ kernel r, a = κ.hom ≫ kernel.ι r := by
+  have hz : a ≫ r = 0 := by
+    ext W s
+    have hs : a.app W s ∈ Set.range ((kernel.ι r).app W) := by
+      rw [← hr W]
+      exact ⟨s, rfl⟩
+    obtain ⟨t, ht⟩ := hs
+    change r.app W (a.app W s) = 0
+    rw [← ht]
+    exact ConcreteCategory.congr_hom (congrArg (fun v ↦ v.app W) (kernel.condition r)) t
+  let k : A ⟶ kernel r := kernel.lift r a hz
+  have hk : k ≫ kernel.ι r = a := kernel.lift_ι _ _ _
+  have : IsIso k := (Hom.isIso_iff_isIso_app).2 fun W ↦ by
+    apply (ConcreteCategory.isIso_iff_bijective (k.app W)).2
+    constructor
+    · intro x y hxy
+      apply ha W
+      have he := congrArg (fun t ↦ (kernel.ι r).app W t) hxy
+      simpa only [← ConcreteCategory.comp_apply, ← Hom.comp_app, hk] using he
+    · intro t
+      have ht : (kernel.ι r).app W t ∈ Set.range (a.app W) := by
+        rw [hr W]
+        exact ⟨t, rfl⟩
+      obtain ⟨s, hs⟩ := ht
+      refine ⟨s, injective_map_kernelι W r ?_⟩
+      change (kernel.ι r).app W (k.app W s) = (kernel.ι r).app W t
+      simpa only [← ConcreteCategory.comp_apply, ← Hom.comp_app, hk] using hs
+  exact ⟨asIso k, hk.symm⟩
+
+/-- An isomorphism carries the subsheaf of sections vanishing on an open to itself. -/
+private theorem exists_kernelIso_of_supported {Z : Scheme.{u}} {A B B' C : Z.Modules}
+    (U : Z.Opens) (a : A ⟶ B) (γ : B ≅ B') (r : B' ⟶ C)
+    (ha : ∀ W : Z.Opens, Function.Injective (a.app W))
+    (hv : ∀ (W : Z.Opens) (s : Γ(B, W)), s ∈ Set.range (a.app W) ↔
+      B.presheaf.map (homOfLE (inf_le_left : W ⊓ U ≤ W)).op s = 0)
+    (hrange : ∀ W : Z.Opens, Set.range ((kernel.ι r).app W) =
+      {s | B'.presheaf.map (homOfLE (inf_le_left : W ⊓ U ≤ W)).op s = 0}) :
+    ∃ κ : A ≅ kernel r, a ≫ γ.hom = κ.hom ≫ kernel.ι r := by
+  have hγ (W) (s : Γ(B, W)) :
+      s ∈ Set.range (a.app W) ↔ γ.hom.app W s ∈ Set.range ((kernel.ι r).app W) := by
+    rw [hv, hrange W]
+    change _ = 0 ↔ _ = 0
+    have hn := ConcreteCategory.congr_hom
+      (γ.hom.mapPresheaf.naturality
+        (homOfLE (inf_le_left : W ⊓ U ≤ W)).op) s
+    change γ.hom.app (W ⊓ U)
+      (B.presheaf.map _ s) =
+        B'.presheaf.map _ (γ.hom.app W s) at hn
+    rw [← hn]
+    constructor
+    · intro hz
+      rw [hz, map_zero]
+    · intro hz
+      exact (ConcreteCategory.bijective_of_isIso (γ.hom.app (W ⊓ U))).1
+        (hz.trans (map_zero _).symm)
+  have hαγ (W) : Set.range ((a ≫ γ.hom).app W) =
+      Set.range ((kernel.ι r).app W) := by
+    ext s
+    constructor
+    · rintro ⟨t, rfl⟩
+      exact (hγ W (a.app W t)).mp ⟨t, rfl⟩
+    · intro ht
+      let s' := γ.inv.app W s
+      have hγs : γ.hom.app W s' = s := by
+        change (γ.inv ≫ γ.hom).app W s = s
+        simp
+      obtain ⟨t, ht'⟩ := (hγ W s').mpr (by rwa [hγs])
+      refine ⟨t, ?_⟩
+      change γ.hom.app W (a.app W t) = s
+      rw [ht', hγs]
+  exact exists_kernelIso_of_range (a ≫ γ.hom) r
+    (fun W ↦ (ConcreteCategory.bijective_of_isIso (γ.hom.app W)).1.comp (ha W)) hαγ
+
+/-- The supported-kernel statement in terms of the open on which sections vanish. -/
+private theorem restrictionKernel_flatPullback {Q P : Scheme.{u}}
+    (u : Q ⟶ P) [Flat u] (U : P.Opens)
+    (hU : ∀ x : P, ∃ (V : P.affineOpens) (b : Γ(P, V.1)),
+      x ∈ V.1 ∧ V.1 ⊓ U = P.basicOpen b)
+    (H : P.Modules) (hH : H.IsQuasicoherent) :
+    ∀ W : Q.Opens,
+      Function.Injective (((tensorPullback u).map
+        (kernel.ι ((restrictAdjunction U.ι).unit.app H))).app W) ∧
+      ∀ s : Γ((tensorPullback u).obj H, W),
+        s ∈ Set.range (((tensorPullback u).map
+          (kernel.ι ((restrictAdjunction U.ι).unit.app H))).app W) ↔
+        ((tensorPullback u).obj H).presheaf.map
+          (homOfLE (inf_le_left : W ⊓ (u ⁻¹ᵁ U) ≤ W)).op s = 0 := by
+  obtain ⟨D, rfl⟩ := TopologicalSpace.Closeds.compl_bijective.surjective U
+  have hs := (supportedSectionsKernel_flatPullback u D hU H hH).2.2.2.1
+  intro W
+  refine ⟨(hs W).1, ?_⟩
+  intro s
+  change s ∈ Set.range (((tensorPullback u).map (supportedSectionsKernelι D H)).app W) ↔ _
+  rw [(hs W).2.1]
+  exact (hs W).2.2 s
+
 /-- Strict transform commutes with flat source and base pullback, uniquely compatibly
 with the quotient maps from the ordinary pullbacks. The target cokernel is exactly
 `moduleStrictTransform g (I.comap e) ((tensorPullback j).obj F)` unfolded: using the
@@ -112,6 +213,56 @@ theorem existsUnique_moduleStrictTransform_flatPullback {X S Y T : Scheme.{u}}
         (moduleStrictTransformFlatPullbackSourceIso f e g j h I F).hom ≫
           cokernel.π (kernel.ι
             (moduleStrictTransformRestriction g (I.comap e) ((tensorPullback j).obj F))) := by
-  sorry
+  obtain ⟨_, _, u, hu, huq, _, hflat, hopen, hcharts, _, hdata⟩ :=
+    blowupSquare_pullback_quotientData f e g j h I
+  have heq : u = moduleStrictTransformFlatPullbackMap f e g j h I := by
+    apply pullback.hom_ext
+    · simpa only [moduleStrictTransformFlatPullbackMap, pullback.lift_fst] using hu
+    · simpa only [moduleStrictTransformFlatPullbackMap, pullback.lift_snd,
+        Scheme.IdealSheafData.blowupFlatBaseChangeIso, asIso_hom] using huq
+  subst u
+  let u := moduleStrictTransformFlatPullbackMap f e g j h I
+  let H := (tensorPullback (pullback.fst f I.blowupMap)).obj F
+  let γ := moduleStrictTransformFlatPullbackSourceIso f e g j h I F
+  let U := moduleStrictTransformOpen f I
+  let U' := moduleStrictTransformOpen g (I.comap e)
+  let a := (tensorPullback u).map (kernel.ι (moduleStrictTransformRestriction f I F))
+  let r := moduleStrictTransformRestriction g (I.comap e) ((tensorPullback j).obj F)
+  have : Flat u := hflat
+  obtain ⟨hH, _, _, _, _, _, hrange, _⟩ := hdata F
+  have hD : ∀ x, ∃ (V : (Limits.pullback f I.blowupMap).affineOpens)
+      (b : Γ(Limits.pullback f I.blowupMap, V.1)),
+      x ∈ V.1 ∧ V.1 ⊓ U = (Limits.pullback f I.blowupMap).basicOpen b := by
+    intro x
+    obtain ⟨V, hx, hV, b, hb, _⟩ := hcharts x
+    exact ⟨⟨V, hV⟩, b, hx, hb⟩
+  have hs := restrictionKernel_flatPullback u U hD H hH
+  have ha (W) : Function.Injective (a.app W) := (hs W).1
+  have hv (W) (s : Γ((tensorPullback u).obj H, W)) :
+      s ∈ Set.range (a.app W) ↔
+      ((tensorPullback u).obj H).presheaf.map
+        (homOfLE (inf_le_left : W ⊓ U' ≤ W)).op s = 0 := by
+    rw [show U' = u ⁻¹ᵁ U from hopen]
+    exact (hs W).2 s
+  obtain ⟨κ, hκ⟩ := exists_kernelIso_of_supported U' a γ r ha hv hrange
+  have : (tensorPullback u).IsLeftAdjoint := (tensorPullbackSectionAdjunction u).isLeftAdjoint
+  let θ := PreservesCokernel.iso (tensorPullback u)
+    (kernel.ι (moduleStrictTransformRestriction f I F)) ≪≫
+    cokernel.mapIso a (kernel.ι r) κ γ hκ
+  have hθ : (tensorPullback u).map (moduleStrictTransformπ f I F) ≫ θ.hom =
+      γ.hom ≫ cokernel.π (kernel.ι r) := by
+    dsimp only [θ, Iso.trans_hom, moduleStrictTransformπ]
+    rw [← Category.assoc, PreservesCokernel.π_iso_hom]
+    simp only [cokernel.mapIso_hom, cokernel.map]
+    change cokernel.π a ≫ cokernel.desc a _ _ = _
+    exact cokernel.π_desc _ _ _
+  refine ⟨θ, hθ, ?_⟩
+  intro θ' hθ'
+  apply Iso.ext
+  have : Epi ((tensorPullback u).map (moduleStrictTransformπ f I F)) := by
+    dsimp only [moduleStrictTransformπ]
+    infer_instance
+  apply (cancel_epi ((tensorPullback u).map (moduleStrictTransformπ f I F))).mp
+  exact hθ'.trans hθ.symm
 
 end AlgebraicGeometry.Scheme.Modules

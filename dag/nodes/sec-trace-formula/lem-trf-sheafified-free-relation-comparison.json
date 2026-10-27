@@ -1,0 +1,217 @@
+{
+ "id": "lem-trf-sheafified-free-relation-comparison",
+ "kind": "statement",
+ "title": "Free-generator and relation comparison under ring and module sheafification",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], small in the universe of the sheaves and presheaves below, and let $\\varphi:\\mathcal A\\to\\mathcal B$ be a morphism of presheaves of commutative rings. Write $\\eta_M:M\\to M^\\#$ for sheafification [def-weil-pbc-sheafification], using the underlying abelian sheafification and the extended $\\mathcal B^\\#$ action for module presheaves [lem-pc-sites-module-sheafification-interface]. For a presheaf of sets $T$, put $\\mathcal B[T](U)=\\bigoplus_{t\\in T(U)}\\mathcal B(U)[t]$ [def-weil-pbc-free-module], with $b[t]|_V=b|_V[t|_V]$. For a sheaf of rings $R$ and a sheaf of sets $S$, write $R[S]$ for the module sheafification [def-weil-presheaf-modules-sheafification] of $U\\mapsto R(U)[S(U)]$, with generator map $i:S\\to|R[S]|$; here $|-|$ denotes the underlying sheaf of sets. The maps $|\\mathcal A|\\to|\\mathcal A^\\#|$, $|\\mathcal B|\\to|\\mathcal B^\\#|$, and $\\mathcal B\\times\\mathcal B\\to|\\mathcal B^\\#|\\times|\\mathcal B^\\#|$ are sheafifications of set presheaves. For every set presheaf $T$ there is a canonical isomorphism of module sheaves\n$$c_T:\\mathcal B[T]^\\#\\xrightarrow{\\sim}\\mathcal B^\\#[T^\\#],\\qquad c_T(\\eta_{\\mathcal B[T]}([t]))=i(\\eta_T(t)).$$\nEquivalently, for every $\\mathcal B^\\#$-module sheaf $N$ [def-weil-sheaf-of-modules-category], restriction to generators and the sheafification unit gives a natural bijection\n$$\\operatorname{Hom}_{\\mathcal B^\\#}(\\mathcal B[T]^\\#,N)\\cong\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal C)}(T^\\#,|N|).$$\nPut $F=\\mathcal B[\\mathcal B]$ and $E=\\mathcal B[\\mathcal B\\times\\mathcal B]\\oplus\\mathcal B[\\mathcal B\\times\\mathcal B]\\oplus\\mathcal B[\\mathcal A]$. Let $r:E\\to F$ be the linear relation map with the three generator formulas $[(a,b)]\\mapsto[a+b]-[a]-[b]$, $[(f,g)]\\mapsto[fg]-g[f]-f[g]$, and $[h]\\mapsto[\\varphi(h)]$. There are generator-normalized isomorphisms\n$$c_F:F^\\#\\cong\\bar F=\\mathcal B^\\#[\\mathcal B^\\#],\\qquad c_E:E^\\#\\cong\\bar E=\\mathcal B^\\#[\\mathcal B^\\#\\times\\mathcal B^\\#]\\oplus\\mathcal B^\\#[\\mathcal B^\\#\\times\\mathcal B^\\#]\\oplus\\mathcal B^\\#[\\mathcal A^\\#].$$\nThey satisfy $c_F\\circ r^\\#=\\bar r\\circ c_E$, where $\\bar r$ is the sheaf-module map given by the same three formulas on all local sections of the sheafified rings, with $\\varphi$ replaced by $\\varphi^\\#$. In particular, equality on the original presheaf generators determines these sheafified module maps uniquely.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TP, lemma-differentials-sheafify, proof sentence identifying the sheafified free terms; Tag 04BL, lemma-universal-module, proof and equation-define-module-differentials."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pe-ring-sheafification-underlying-sets], $|\\eta_{\\mathcal A}|$ and $|\\eta_{\\mathcal B}|$ exhibit set sheafifications, with their unit identifications. Apply [lem-weil-pbc-sheafification-sets-exact] to $|\\mathcal B|\\times|\\mathcal B|$: the projection-normalized comparison identifies its set sheafification with $|\\mathcal B^\\#|\\times|\\mathcal B^\\#|$, and its unit is $\\eta_{\\mathcal B}\\times\\eta_{\\mathcal B}$. Thus all three set-sheafification assertions in the statement hold. The site and values lie in the common universe required by both cited statements. Ring sheafification is a ring morphism, so $\\eta_{\\mathcal B}(a+b)=\\eta_{\\mathcal B}(a)+\\eta_{\\mathcal B}(b)$, $\\eta_{\\mathcal B}(fg)=\\eta_{\\mathcal B}(f)\\eta_{\\mathcal B}(g)$, and $\\varphi^\\#\\eta_{\\mathcal A}=\\eta_{\\mathcal B}\\varphi$.",
+   "uses": [
+    "lem-pe-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR, section-sheaves-algebraic-structures, clauses (gamma) and (epsilon); Tag 00WJ, lemma-sheafification-exact."
+   }
+  },
+  {
+   "text": "For a $\\mathcal B^\\#$-module sheaf $N$, restrict its scalars along $\\eta_{\\mathcal B}$. A map of set presheaves $a:T\\to|N|$ extends uniquely to a $\\mathcal B$-linear presheaf map $\\mathcal B[T]\\to N$ by $\\sum b_t[t]\\mapsto\\sum\\eta_{\\mathcal B}(b_t)a(t)$. Uniqueness is coefficientwise linearity and the basis expansion of [def-weil-pbc-free-module]. This extension commutes with restrictions: along $V\\to U$, both orders give $\\sum\\eta_{\\mathcal B}(b_t|_V)a_V(t|_V)$, since $a$ is natural and restrictions of $N$ are semilinear. Consequently restriction to generators gives a natural bijection $\\operatorname{Hom}_{\\mathcal B}(\\mathcal B[T],N)\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(T,|N|)$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, free-term comparison; Tag 04BL, lemma-universal-module and equation-define-module-differentials; Tag 03CY, lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-interface] to $\\mathcal B[T]$ and [def-weil-pbc-sheafification] to $T$. Together with step 2 this gives\n$$\\operatorname{Hom}_{\\mathcal B^\\#}(\\mathcal B[T]^\\#,N)\\cong\\operatorname{Hom}_{\\mathcal B}(\\mathcal B[T],N)\\cong\\operatorname{Hom}_{\\mathrm{PSh}}(T,|N|)\\cong\\operatorname{Hom}_{\\mathrm{Sh}}(T^\\#,|N|).$$\nThe map $t\\mapsto\\eta_{\\mathcal B[T]}([t])$ extends uniquely to $k_T:T^\\#\\to|\\mathcal B[T]^\\#|$. The displayed bijection sends $h$ to $|h|k_T$: this follows by precomposing with $\\eta_T$ and the two uniqueness properties. Apply the last assertion of [lem-trf-free-module-sheaf-universal-property], with ring $\\mathcal B^\\#$, generator sheaf $T^\\#$ and representing pair $(\\mathcal B[T]^\\#,k_T)$. It supplies the unique isomorphism $c_T$ with $|c_T|k_T=i$, hence the required generator formula. Naturality follows by restriction to $t$: composition with any generator map or target module morphism has the same image through the displayed bijections. In particular maps out of $\\mathcal B[T]^\\#$ are equal whenever they agree on every $\\eta_{\\mathcal B[T]}([t])$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification",
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, free-term comparison; Tag 04BL, lemma-universal-module and equation-define-module-differentials; Tag 03CY, lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "Apply step 3 with $T=|\\mathcal B|$ and the set-unit identification of step 1 to obtain $c_F$. For the three terms of $E$, use $T_1=T_2=|\\mathcal B|\\times|\\mathcal B|$, $T_3=|\\mathcal A|$ and write $P_j=\\mathcal B[T_j]$. There is a canonical $d:(\\bigoplus_{j=1}^3P_j)^\\#\\cong\\bigoplus_{j=1}^3P_j^\\#$: extend the presheaf map $(x_j)\\mapsto(\\eta_{P_j}x_j)$ by the module-sheafification universal property. Its inverse is $b((y_j))=\\sum_j\\iota_j^\\#(y_j)$, where $\\iota_j:P_j\\to\\bigoplus_jP_j$ are the inclusions. The identity $bd=1$ follows after precomposition with the unit, and $db=1$ follows on each summand after its unit; these tests are justified by [lem-pc-sites-module-sheafification-interface]. Finite sums of module sheaves here are sectionwise finite products, with coordinatewise gluing and operations. Compose $d$ with the three isomorphisms of step 3, and then the set-unit identifications of step 1 on their generator sheaves, to obtain $c_E$. This proves its asserted normalization on each of the three original generator families.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, free-term comparison; Tag 04BL, lemma-universal-module and equation-define-module-differentials; Tag 03CY, lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "Use [lem-trf-free-module-sheaf-universal-property] to define the three components of $\\bar r$ by their stated generator formulas, now on all sections of $\\mathcal B^\\#\\times\\mathcal B^\\#$ and $\\mathcal A^\\#$. Each formula is a morphism of set sheaves, since the ring operations, module operations, generator maps, and $\\varphi^\\#$ commute with restriction. The universal property extends each uniquely to a linear sheaf map; summing on the three summands gives $\\bar r$. On an original generator of each family, both $c_F r^\\#$ and $\\bar r c_E$ have respectively the following values, writing $i$ for the generator of $\\bar F$:\n$$i(\\eta_{\\mathcal B}(a)+\\eta_{\\mathcal B}(b))-i(\\eta_{\\mathcal B}(a))-i(\\eta_{\\mathcal B}(b)),$$\n$$i(\\eta_{\\mathcal B}(f)\\eta_{\\mathcal B}(g))-\\eta_{\\mathcal B}(g)i(\\eta_{\\mathcal B}(f))-\\eta_{\\mathcal B}(f)i(\\eta_{\\mathcal B}(g)),$$\n$$i(\\varphi^\\#(\\eta_{\\mathcal A}(h))).$$\nFor the first route these equalities use step 1 and the module-unit identity $\\eta_P(bx)=\\eta_{\\mathcal B}(b)\\eta_P(x)$ supplied by [lem-pc-sites-module-sheafification-interface]; for the second they are the definitions of $\\bar r$ and $c_E$. Step 3's uniqueness applies on each $P_j^\\#$ and step 4's direct-sum comparison then gives $c_F r^\\#=\\bar r c_E$. The same tests prove the final uniqueness assertion for maps from $F^\\#$ and $E^\\#$: precompose with the sheafification units and use sectionwise linearity on the original bases.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, free-term comparison; Tag 04BL, lemma-universal-module and equation-define-module-differentials; Tag 03CY, lemma-sheafification-presheaf-modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-pbc-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-pbc-sheafification",
+  "lem-trf-free-module-sheaf-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TP, lemma-differentials-sheafify, free-term comparison; Tag 04BL, lemma-universal-module and equation-define-module-differentials; Tag 03CY, lemma-sheafification-presheaf-modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafifying free modules over a presheaf of rings identifies the differential relation map with the free sheaf relation map over the sheafified ring",
+   "results": "8 hits; SheafOfModules.Presentation.mapRelations; SheafOfModules.Presentation.mapRelations_mapGenerators; SheafOfModules.Presentation.map_relations_I; SheafOfModules.Presentation.mapGenerators; SheafOfModules.presentationOfIsCokernelFree_relations; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.relationsOfIsCokernelFree; digest=c85fa7807698069a. Separate module sheafification adjunction and free presheaf adjunction, or constant-index free sheaves; no normalized comparison of variable free generator sheaves and the differential relation map. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free module sheaf on sheafified variable generators is the sheafification of the free presheaf module with compatible additivity Leibniz and base relations",
+   "results": "8 hits; SheafOfModules.freeFunctor_obj; SheafOfModules.GeneratingSections.π; SheafOfModules.ιFree; SheafOfModules.freeSection; SheafOfModules.freeMap; SheafOfModules.free; SheafOfModules.freeFunctor; SheafOfModules.Presentation.mapGenerators; digest=8fdde0c2305c41b1. Separate module sheafification adjunction and free presheaf adjunction, or constant-index free sheaves; no normalized comparison of variable free generator sheaves and the differential relation map. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationHomEquiv",
+   "results": "5 hits; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; digest=5af6ed0bfcc42f64. Separate module sheafification adjunction and free presheaf adjunction, or constant-index free sheaves; no normalized comparison of variable free generator sheaves and the differential relation map. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeAdjunction|sheafificationHomEquiv|prodComparison|preservesFiniteProducts [sub=Algebra/Category/ModuleCat]",
+   "results": "10 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:18; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:77; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:79; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:88; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:94; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:86; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:92; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:95; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:100; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:103; digest=b6f2f454987b0dcd. Separate module sheafification adjunction and free presheaf adjunction, or constant-index free sheaves; no normalized comparison of variable free generator sheaves and the differential relation map. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of free presheaf module on presheaf generators agrees with free module on their sheafification and preserves differential relations",
+   "results": "8 hits; PresheafOfModules.sheafify; PresheafOfModules.sheafification; PresheafOfModules.sheafifyMap; SheafOfModules.ιFree; SheafOfModules.freeFunctor; PresheafOfModules.toSheafify; SheafOfModules.free; SheafOfModules.ιFree_mapFree_inv; digest=589f8f2ef632dda1. Separate module sheafification adjunction and free presheaf adjunction, or constant-index free sheaves; no normalized comparison of variable free generator sheaves and the differential relation map. Read Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142 and Sheaf/Free.lean:39-75.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeAdjunction, PresheafOfModules.sheafificationHomEquiv",
+   "results": "0 hits; ; digest=4f53cda18c2baa0c. No declaration contains both queried names; no combined comparison match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of free modules on presheaf generators over a presheaf of rings is free on the sheafified generators over the sheafified ring, with generator and relation compatibility",
+   "results": "8 hits; SheafOfModules.freeFunctor_obj; SheafOfModules.generatorsOfIsCokernelFree; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.generatorsOfIsCokernelFree_s; SheafOfModules.presentationOfIsCokernelFree_generators; SheafOfModules.ιFree; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.freeMap; digest=99c8822bfb228e11. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, and Sheaf/Free.lean:39-75. These give separate adjunctions or constant-index free sheaves, not the variable-generator comparison and relation square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeAdjunction|sheafificationHomEquiv|prodComparison [sub=Algebra/Category/ModuleCat]",
+   "results": "10 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; digest=b6f2f454987b0dcd. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, and Sheaf/Free.lean:39-75. These give separate adjunctions or constant-index free sheaves, not the variable-generator comparison and relation square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of free presheaf modules agrees with free modules on sheafified generator presheaves and identifies additivity and Leibniz relation maps",
+   "results": "8 hits; PresheafOfModules.sheafify; PresheafOfModules.sheafifyMap; SheafOfModules.free; PresheafOfModules.toSheafify; PresheafOfModules.sheafification; SheafOfModules.ιFree; SheafOfModules.freeFunctor_obj; SheafOfModules.GeneratingSections.π; digest=0826bac4bed92ad4. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, and Sheaf/Free.lean:39-75. These give separate adjunctions or constant-index free sheaves, not the variable-generator comparison and relation square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free module on a presheaf of sets sheafifies to the free module sheaf on its associated sheaf, with varying sheafified coefficient rings",
+   "results": "8 hits; SheafOfModules.freeFunctor_obj; SheafOfModules.freeFunctor; PresheafOfModules.free_obj; SheafOfModules.free; SheafOfModules.mapFree; SheafOfModules.freeMap; SheafOfModules.ιFree; PresheafOfModules.freeObj_obj; digest=4f81eb183c4d70ee. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean:67-108, Presheaf/Sheafification.lean:86-142, and Sheaf/Free.lean:39-75. These give separate adjunctions or constant-index free sheaves, not the variable-generator comparison and relation square.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-sheafified-module-differentials-cokernel",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting ring/sheaf input: sheaf cotangent stalks, section maps and ring localization; the underived inverse-image differential comparison uses the sheafified free-module relation-map presentation. Re-split: old steps (3, 4, 5) of lem-trf-sheafified-module-differentials-cokernel: Free-generator and relation comparison under ring and module sheafification.",
+   "via": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-sheafified-free-relation-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the free-term identification in Stacks 08TP using existing ring/set sheafification, module adjunction and free-module universal-property nodes. Proved the generator bijection and normalized isomorphisms, explicitly handled the finite direct sum, and checked each of the three relation formulas and uniqueness. No new nodes or statement changes.",
+  "blueprint": "Supporting ring/sheaf input below lem-trf-local-term-locality, through the inherited differentials/cotangent chain: the free-term and relation-map identification in lem-trf-sheafified-module-differentials-cokernel, realizing the sentence in Stacks 08TP that the sheaves in equation-define-module-differentials are the sheafifications of the presheaves. The latest blueprint ancestor was read; no same-statement blueprint node was found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-5fdbe5acc",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-5fdbe5acc (reviewer sub-agent of L); spot-checked: I read the whole item. This is its first delivery, and the statement and stmt_deps are byte-identical to the item as it landed from Q44's re-split. There are no new nodes and no repair note for this item, so it is an ordinary one-level split. proof_deps is exactly the union of the step uses. Sources: Stacks sites-modules.tex 04BL (lines 5950-6009) and 08TP (lines 6036-6061). The three relation formulas, including the coefficients g on [f] and f on [g], match equation-define-module-differentials. Steps 1-5 check out against the statements they cite. Step 1: lem-pe-ring-sheafification-underlying-sets gives |eta_P| as the set sheafification for any small site and ring presheaf, and lem-weil-pbc-sheafification-sets-exact gives the product comparison through the projections, with unit eta_B x eta_B. Step 2 (elementary): the extension Sum b_t[t] -> Sum eta_B(b_t)a(t) respects restrictions by semilinearity. Step 3: lem-pc-sites-module-sheafification-interface works for a presheaf ring, which a varying B needs; the constant-ring free-sheafify nodes would not do. The bijection is h -> |h|k_T, and the last clause of lem-trf-free-module-sheaf-universal-property (same unit) gives c_T with c_T(eta[t]) = i(eta_T t). Step 4: I checked bd=1 and db=1 for the finite direct sum by hand after the units. Step 5: I recomputed both routes on all three generator families, using the module-unit identity eta(bx) = eta_B(b)eta(x) and phi^# eta_A = eta_B phi; they agree. Uniqueness then follows from step 3 and the direct-sum isomorphism. The only non-leaf statement cited is in the item's own unit, so no tool_uses are needed and none is recorded. No SGA source is cited. Edge cases: empty T is consistent, because T^# can be a singleton only on an object with the empty covering, where B^#(U) is the zero ring. The zero ring, rings that are already sheaves, and repeated generators are all consistent. There are no duplicates: rg finds only constant-ring R[F]^# nodes, the geometric hom-equivalence node and its siblings. Mathlib's SheafOfModules.free uses a constant index type, so the item is correctly split rather than a leaf. No fixes."
+ }
+}

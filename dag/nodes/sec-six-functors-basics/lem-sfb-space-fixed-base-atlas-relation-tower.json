@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-fixed-base-atlas-relation-tower",
+ "kind": "statement",
+ "title": "Affine atlas relation towers and mixed products over a quasi-separated space",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], and universes [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. An affine scheme is a spectrum of a commutative ring [def-weil-affine-spectrum]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme]. A morphism is quasi-compact if its pullback over every affine scheme has quasi-compact source; quasi-separated means that its diagonal is quasi-compact. A space is quasi-separated when its absolute diagonal is quasi-compact. An affine morphism is representable and has affine source over every affine scheme test. Let $Y$ be a quasi-separated algebraic space, $I$ a small nonempty directed partially ordered set, $(Z_a\\to Y)_{a\\in I}$ an inverse system of quasi-compact quasi-separated algebraic spaces with affine transitions, and $Z=\\varprojlim_aZ_a$ a limit in algebraic spaces over $Y$. Fix $o\\in I$ and a representable surjective etale atlas $U_o\\to Z_o$ with $U_o$ affine. For $a\\ge o$ put $U_a=U_o\\times_{Z_o}Z_a$, $U=U_o\\times_{Z_o}Z$, $R_a=U_a\\times_{Z_a}U_a$, and $R=U\\times_ZU$, with projections $s_a,t_a$ and $s,t$ to the first and second factors. Then $U_a$ and $U$ are affine schemes, their maps to $Z_a,Z$ are representable surjective etale, and $U=\\varprojlim_{a\\ge o}U_a$ as schemes, with affine transitions. The objects $R_a,R$ are quasi-compact separated schemes; their two projections are etale and of finite type, and the maps $j_a=(s_a,t_a):R_a\\to U_a\\times_YU_a$ are locally of finite type [def-weil-finite-type-morphism]. For every $a,b\\ge o$, the sheaf product $U_a\\times_YU_b$ is a quasi-compact separated scheme. More generally, for every affine scheme $W$ with a map $W\\to Y$ and every $a\\ge o$, the schemes $V_b=W\\times_YU_b$ ($b\\ge a$) are quasi-compact and separated, have affine transition maps, and have limit $V=W\\times_YU$ as schemes. For $b\\ge a$, the map $h_{a,b}:R_b\\to U_a\\times_YU_b$, $r\\mapsto(u_{ba}s_b(r),t_b(r))$, where $u_{ba}:U_b\\to U_a$ is the transition, is the base change of $j_a$ along $1\\times u_{ba}$. More precisely there are canonical isomorphisms, preserving the displayed maps,\n$$R_b\\cong R_a\\times_{t_a,U_a}U_b\\cong R_a\\times_{U_a\\times_YU_a}(U_a\\times_YU_b),\\qquad R\\cong R_a\\times_{t_a,U_a}U.$$\nNo separatedness of $Z_a\\to Y$ or $Z\\to Y$, finite presentation of a stage over $Y$, or quasi-compactness of $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 084T (lemma-descend-separated), proof, atlas and mixed-product argument; Tag 086X (lemma-eventually-separated), relative version over a quasi-separated base; Tag 07SF (lemma-directed-inverse-system-has-limit), proof and part (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the upper tail $I_{\\ge o}$. It is directed: a common upper bound of two elements remains above $o$. A cone on the tail extends uniquely to $I$: its component at $i$ is obtained through any common upper bound of $i,o$, independently of that choice by passing to a further upper bound. Thus the given limit is unchanged. By [lem-sfb-space-affine-limits-schematic-stages], each $Z\\to Z_a$ is affine, and $U\\cong\\varprojlim_{a\\ge o}U_a$ as spaces. By [lem-sfb-space-affine-locality], base change of the affine maps $Z_b\\to Z_a$ makes $U_b\\to U_a$ affine, and $U_a\\to U_o$ and $U\\to U_o$ affine. Their target is affine, so all $U_a,U$ are affine schemes. The space limit universal property restricts to scheme tests, giving the stated scheme limit.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "Each $U_a\\to Z_a$ is the pullback of $U_o\\to Z_o$, as is $U\\to Z$. Apply [lem-trf-space-fibre-products-etale-covers] to the singleton surjective etale covering. These maps remain representable, surjective and etale. Their self-fibre-products $R_a$ and $R$ are schemes: they are base changes of these representable maps to the schemes $U_a,U$. Both projections of each relation are etale, by the same pullback assertion.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "For any two affine schemes $A,B\\to Y$, their product over $Y$ is a scheme: the representable diagonal of $Y$ represents $A\\times_YB$ over $A\\times_{\\mathbf Z}B$. By [lem-weil-pbc-fibre-product-affine-spectra] the latter is affine. Apply [lem-sfb-space-fibre-product-comparison] to $A,B\\to Y\\to\\operatorname{Spec}\\mathbf Z$: the comparison $A\\times_YB\\to A\\times_{\\mathbf Z}B$ is separated. Then [lem-sc-separated-over-affine-scheme-separated] shows that $A\\times_YB$ is separated. Finally [def-sfb-space-absolute-quasi-separated] gives its quasi-compactness directly from the affine-test criterion for $Y$. Taking $(A,B)=(U_a,U_b)$ or $(W,U_b)$ proves every asserted finite-stage mixed-product finiteness statement.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-space-fibre-product-comparison",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "def-sfb-space-absolute-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), condition (3); spaces-morphisms.tex Tag 03KN (lemma-fibre-product-after-map), (1)."
+   }
+  },
+  {
+   "text": "Apply the same comparison lemma to $U_a,U_a\\to Z_a\\to\\operatorname{Spec}\\mathbf Z$. It makes $R_a$ separated over the affine scheme $U_a\\times_{\\mathbf Z}U_a$, hence absolutely separated by [lem-sc-separated-over-affine-scheme-separated]. Since $Z_a$ is quasi-separated, [def-sfb-space-absolute-quasi-separated] makes $R_a$ quasi-compact. For $j_a$, instead apply [lem-sfb-space-fibre-product-comparison] to $U_a,U_a\\to Z_a\\to Y$; its locally finite type assertion is exactly the assertion about $j_a$. This uses no separatedness of $Z_a\\to Y$.",
+   "uses": [
+    "lem-sfb-space-fibre-product-comparison",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "def-sfb-space-absolute-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "Write $p_a:U_a\\to Z_a$. For a scheme test $T$, a section of $R_a\\times_{t_a,U_a}U_b$ is $(x,y,v)$ with $p_a(x)=p_a(y)$ and $y=u_{ba}(v)$. Write $v=(v_o,z_b)$ under $U_b=U_o\\times_{Z_o}Z_b$. If $x=(x_o,z_a)$, the equality forces $z_a$ to be the image of $z_b$. Therefore $x_b=(x_o,z_b)$ is a well-defined section of $U_b$ and $(x_b,v)\\in R_b(T)$. This is inverse to $(x_b,v)\\mapsto(u_{ba}(x_b),u_{ba}(v),v)$. The formulas are natural in $T$, so they give the first canonical isomorphism. The identical formulas with $Z,U$ in place of $Z_b,U_b$ give $R\\cong R_a\\times_{t_a,U_a}U$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "A test section of $R_a\\times_{U_a\\times_YU_a}(U_a\\times_YU_b)$ is $(r,x,v)$ subject to $s_a(r)=x$ and $t_a(r)=u_{ba}(v)$. Forgetting $x$ gives $R_a\\times_{t_a,U_a}U_b$, with inverse $(r,v)\\mapsto(r,s_a(r),v)$. Under step 5 its projection to $U_a\\times_YU_b$ is $(u_{ba}s_b,t_b)=h_{a,b}$. Hence the required square is cartesian along $1\\times u_{ba}$, with the displayed order of the projections preserved.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "Fix any $a\\ge o$. Step 1 makes $U\\to U_a$ affine; by step 5, $R\\to R_a$ is its base change along $t_a$. By [lem-sfb-space-affine-locality] it is affine and quasi-compact, so its pullback over the quasi-compact scheme $R_a$ is quasi-compact by [lem-sfb-space-quasicompact-affine-tests]. This pullback is $R$ itself. For separatedness apply [lem-sfb-space-fibre-product-comparison] to $U,U\\to Z\\to\\operatorname{Spec}\\mathbf Z$: it gives a separated morphism $R\\to U\\times_{\\mathbf Z}U$. The target is affine by [lem-weil-pbc-fibre-product-affine-spectra], hence [lem-sc-separated-over-affine-scheme-separated] makes $R$ absolutely separated. This avoids any assumption that $Z$ is separated or any separate assertion of quasi-separatedness of the limit.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-fibre-product-comparison",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "For $s_a,t_a:R_a\\to U_a$ and $s,t:R\\to U$, the source is quasi-compact by steps 4 and 7, and the target is affine, hence quasi-separated: for affine schemes $A,B$ over an affine target $\\operatorname{Spec}C$, the product $A\\times_{\\operatorname{Spec}C}B$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], hence quasi-compact, which is the affine-test criterion of [def-sfb-space-absolute-quasi-separated]. By [lem-sfb-space-qcqs-permanence] each projection is quasi-compact. They are etale by step 2 and therefore locally of finite presentation [def-weil-etale-morphism]. A finitely presented algebra $A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ is generated by the $n$ displayed classes [def-sbc-locally-finite-presentation], so each projection is locally of finite type. The definition [def-weil-finite-type-morphism] now gives finite type.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sfb-space-absolute-quasi-separated",
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "For $b\\ge c\\ge a$, $W\\times_YU_b\\cong(W\\times_YU_c)\\times_{U_c}U_b$, so the transitions $V_b\\to V_c$ are affine by [lem-sfb-space-affine-locality]. A compatible family of maps from a scheme $T$ to $V_b$ consists of one map $w:T\\to W$ and a compatible family $v_b:T\\to U_b$ with equal images in $Y$. Step 1 gives a unique $v:T\\to U$. The two maps $T\\to Y$ agree because their common value is already the image of $v_a$; hence $(w,v)$ defines a unique map to $W\\times_YU$. This proves the scheme limit property, since step 3 also applies to $A=W,B=U$ and shows that $V$ is a scheme. All indexing tails remain small and nonempty.",
+   "uses": [
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-space-fibre-product-comparison",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "def-sfb-space-absolute-quasi-separated",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-qcqs-permanence",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 084T (lemma-descend-separated), atlas and mixed-product construction; Tag 07SF (lemma-directed-inverse-system-has-limit), parts (1)-(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a quasi separated algebraic space Y mixed products of affine atlas schemes Ua times Y Ub are quasi compact separated schemes and atlas kernel pairs commute with affine inverse limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X],\\n  AlgebraicGeometry.QuasiCompact\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  QuasiSeparatedSpace ↥X ↔\\n    AlgebraicGeometry.QuasiCompact\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or abstract kernel pairs, not affine atlases of algebraic spaces or their mixed relation towers. Scheme-only hypotheses read in EffectiveEpi.lean:60-88, ClosedImmersion.lean:45 and Separated.lean:40-46; abstract IsKernelPair in CategoryTheory/Limits/Shapes/KernelPair.lean:43-55 gives no geometric finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine etale atlas relation towers over a quasi separated algebraic space and mixed fiber products commute with inverse limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) [IsAffine X] : QuasiSeparatedSpace X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{A B C : CommRingCat} (f : Spec A ⟶ Spec C) (g : Spec B ⟶ Spec C) : HasPullback f g\", \"doc\": \"For any commutative rings $A$, $B$, and $C$, and morphisms $f : \\\\operatorname{Spec}(A) \\\\to \\\\operatorname{Spec}(C)$ and $g : \\\\operatorname{Spec}(B) \\\\to \\\\operatorname{Spec}(C)$, the pullback (fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom f] [IsAffine Y] : IsAffine (pullback f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is an affine morphism and $Y$ is an affine scheme, then the fiber product $X \\times_S Y$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] {i : I} {U : (D.obj i).Opens} (hU : IsCompact (X := D.obj i) U)\\n  (s t : Γ(D.obj i, U)) (hs : (c.π.app i).app U s = (c.π.app i).app U t) :\\n  ∃ (j : I) (f : j ⟶ i), (D.map f).app U s = (D.map f).app U t\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsAffineHom @IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or abstract kernel pairs, not affine atlases of algebraic spaces or their mixed relation towers. Scheme-only hypotheses read in EffectiveEpi.lean:60-88, ClosedImmersion.lean:45 and Separated.lean:40-46; abstract IsKernelPair in CategoryTheory/Limits/Shapes/KernelPair.lean:43-55 gives no geometric finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*relation|kernelPair",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"68\", \"text\": \"  obtain ⟨u, hu⟩ := IsRegularEpi.exists_of_isKernelPair\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"88\", \"text\": \"    apply IsRegularEpi.exists_of_isKernelPair _ (IsPullback.of_hasPullback _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"722\", \"text\": \"  convert! IsPullback.of_id_snd.paste_horiz (IsKernelPair.id_of_mono g)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or abstract kernel pairs, not affine atlases of algebraic spaces or their mixed relation towers. Scheme-only hypotheses read in EffectiveEpi.lean:60-88, ClosedImmersion.lean:45 and Separated.lean:40-46; abstract IsKernelPair in CategoryTheory/Limits/Shapes/KernelPair.lean:43-55 gives no geometric finiteness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are for schemes or abstract kernel pairs, not affine atlases of algebraic spaces or their mixed relation towers. Scheme-only hypotheses read in EffectiveEpi.lean:60-88, ClosedImmersion.lean:45 and Separated.lean:40-46; abstract IsKernelPair in CategoryTheory/Limits/Shapes/KernelPair.lean:43-55 gives no geometric finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale atlas of a quasi compact quasi separated algebraic space and its pullbacks along an affine inverse system have quasi compact separated scheme kernel pairs with finite type etale projections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limit covers and abstract pullbacks do not give the algebraic-space atlas, finiteness and mixed base-change assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel pair of a pulled back etale presentation commutes with inverse limits and is a base change along just one of the two atlas coordinates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j k : 𝒰.I₀) →\\n            CategoryTheory.Limits.pullback (AlgebraicGeometr\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, this constructs a morphism from the pullback of $\\\\text{fV}(\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"StandardEtalePresentation.mapEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] → StandardEtalePresentation R S → (S ≃ₐ[R] T) → StandardEtalePresentation R\", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $ and an $ R $-algebra equivalence $ e : S ≃ₐ[R] T $, this function constructs the corresponding standard étale presentation of $ T $ \"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation\", \"doc\": \"For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) → AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶ AlgebraicGeome\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs a canonical isomorphism between the pullback objects\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (s : CategoryTheory.Limits.PullbackCone f g) →\\n            (i j : 𝒰.I₀) →\\n   \", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i,j \\\\in \\\\mathcal{U}.I_0$, this morphism maps the pullback of the $i$-th and $j$-th morphisms in\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme limit covers and abstract pullbacks do not give the algebraic-space atlas, finiteness and mixed base-change assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*relation|kernel.?pair",
+   "results": "; 3 hits: Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only or abstract pullback results do not state the full algebraic-space atlas relation tower; relevant source hypotheses inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine atlas relation schemes and mixed fiber products over quasi separated algebraic spaces",
+   "results": "; 8 hits: AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only or abstract pullback results do not state the full algebraic-space atlas relation tower; relevant source hypotheses inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine etale atlas kernel pair base change tower over a quasi separated algebraic space",
+   "results": "; 8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only or abstract pullback results do not state the full algebraic-space atlas relation tower; relevant source hypotheses inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom, CategoryTheory.Limits.pullback",
+   "results": "; 5 hits: AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only or abstract pullback results do not state the full algebraic-space atlas relation tower; relevant source hypotheses inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fiber product of two affine schemes over a quasi separated algebraic space is a quasi compact separated scheme",
+   "results": "; 8 hits: AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSeparatedFstScheme, AlgebraicGeometry.instQuasiSeparatedSndScheme, AlgebraicGeometry.instQuasiCompactFstScheme, AlgebraicGeometry.instQuasiCompactSndScheme, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only or abstract pullback results do not state the full algebraic-space atlas relation tower; relevant source hypotheses inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fixed-base-eventually-separated",
+  "date": "2026-10-23",
+  "group": "Q119"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, final sentence: separatedness of one closed finite-presentation stage; Tag 086X supporting argument: pulled-back affine atlas, its relation schemes and the mixed fibre products in the proof of Tag 084T, before either closed-immersion descent step.",
+   "via": [
+    "lem-sfb-space-fixed-base-eventually-separated",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fixed-base-atlas-relation-tower",
+  "worker": "stage1",
+  "summary": "Checked Tags 084T, 086X, 07SF, 03KN, 0AHR and 073B. Reused existing affine-space limit, affine-locality, fibre-product comparison, absolute quasi-separatedness and scheme separatedness lemmas. Wrote the second-projection relation base-change identities on scheme tests. No new nodes and no statement change.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), prerequisite chain recorded in blueprint.from.place: atlas construction used by Tag 084T in the fixed-base Tag 086X argument. The existing ancestor command returns None; retain the inherited null ancestor and the full recorded chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product or separated-scheme tool used in the atlas argument; no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-dfe2c1175",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-dfe2c1175 (reviewer sub-agent of L); spot-checked: Read all 9 steps against Stacks 084T (spaces-limits.tex l.1119, the atlas/relation/mixed-product proof), 086X and 07SF, and against the full statement of every cited node. The item was unsplit on the base and its statement is unchanged; there are no new nodes and no re-split note. Steps 1-2: affine-limits gives an affine Z->Z_a, and its base-change clause with W=U_o gives U = lim U_a. Affine-locality makes the transitions and U_a, U affine, and the fibre-product lemma makes R_a, R schemes with etale projections. Steps 3-4 and 7: separatedness comes from the comparison lemma to A x_Z B (affine) plus separated-over-affine; quasi-compactness comes from the affine-test definition, using only Y and Z_a quasi-separated. j_a is locally of finite type by the comparison over Z_a->Y. Steps 5-6: checked on points, e.g. z_a=pi(z_b) makes x_b=(x_o,z_b) well defined, and the inverses compose to the identity. Step 9 is checked, including the constant W-component in the limit. Edge cases checked: empty atlas, singleton I, non-separated Y. No cycle. One fault, C1: step 8 used 'affine target, hence quasi-separated' with no citation. FIX: added the argument via lem-weil-pbc-fibre-product-affine-spectra and def-sfb-space-absolute-quasi-separated (both already in proof_deps) to step 8's text and uses. I accept etale => lfp => lft through the mathlib definition nodes (Mathlib instance, FinitePresentation.lean:109). Batch-5: the five flagged nodes (affine-limits, affine-locality, absolute-quasi-separated, quasicompact-affine-tests, qcqs-permanence) are generic algebraic-space foundations reaching sec-trace-formula only through the definition def-trf-algebraic-space. None is a step of the trace-formula or Poincare duality proof, so they are accepted. I accept tool_use lem-trf-space-fibre-products-etale-covers as generic.; 1 file(s) fixed by the reviewer"
+ }
+}

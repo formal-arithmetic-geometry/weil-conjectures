@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-finite-module-fibre-product-patching",
+ "kind": "statement",
+ "title": "Finite modules patch over a surjective ring fibre product",
+ "statement": "Let $A'\\twoheadrightarrow A$ be a surjective homomorphism of commutative rings, let $B\\to A$ be a ring homomorphism, and put $I=\\ker(A'\\to A)$ and $R=B\\times_A A'=\\{(b,a'):b|_A=a'|_A\\}$ with coordinatewise ring operations. Tensor products are those of [def-weil-pbc-module-tensor-product]. Let $N$ be a $B$-module, $M'$ an $A'$-module and $\\varphi:N\\otimes_B A\\xrightarrow{\\sim}M'/IM'$ an $A$-linear isomorphism. Put $M=M'/IM'$ and $P=N\\times_M M'$, using $n\\mapsto\\varphi(n\\otimes1)$, with the coordinatewise $R$-action. If $N$ is finitely generated over $B$ and $M'$ is finitely generated over $A'$, then $P$ is finitely generated over $R$ [def-weil-finitely-generated-module]. No flatness, nilpotence, Noetherian or finite-generation hypothesis on $I$ is imposed; zero rings and modules are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2H, lemma-finite-module-over-fibre-product, in Situation 08KH (situation-module-over-fibre-product)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finitely-generated-module",
+  "def-sfb-fibre-product-patched-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:A'\\twoheadrightarrow A$, $p:P\\to N$ and $\\rho:P\\to M'$ for the maps in the statement. The map $R\\to B$ is onto: given $b\\in B$, lift its image in $A$ to $a'\\in A'$, obtaining $(b,a')\\in R$. Likewise $p$ is onto because every $\\varphi(n\\otimes1)\\in M'/IM'$ has a representative in $M'$. Choose finite generating lists $y_1,\\ldots,y_r$ of $N$ over $B$ and $x_1,\\ldots,x_s$ of $M'$ over $A'$ using [def-weil-finitely-generated-module], and choose $u_i\\in P$ with $p(u_i)=y_i$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2H, proof, choice of generators and the lifts u_i; Situation 08KH"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-patched-module-base-change] to this same surjection $A'\\to A$, ring map $B\\to A$ and gluing isomorphism $\\varphi$. Its second canonical isomorphism is $P\\otimes_R A'\\xrightarrow{\\sim}M'$, $v\\otimes a'\\mapsto a'\\rho(v)$. By the pure-tensor generation in [def-weil-pbc-module-tensor-product], each inverse image of $x_i$ is a finite sum of tensors $v\\otimes a'$. Collect the finitely many first factors occurring for all $i$ into a list $v_1,\\ldots,v_t\\in P$. Their images $\\rho(v_j)$ generate $M'$ over $A'$: each $x_i$ is a linear combination of them, and the $x_i$ generate. Thus no assertion that $P\\to M'$ is surjective is needed.",
+   "uses": [
+    "lem-sfb-patched-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2H, proof, finite tensor expressions for x_i; Tag 07RU, canonical A-prime base-change isomorphism"
+   }
+  },
+  {
+   "text": "Let $\\xi\\in P$. Write $p(\\xi)=\\sum_i b_i y_i$ and lift each $b_i\\in B$ to $b'_i\\in R$ using step 1. Then $\\delta=\\xi-\\sum_i b'_iu_i$ has first coordinate zero. By the defining equality of $P=N\\times_{M'/IM'}M'$, it has the form $(0,\\theta)$ with $\\theta\\in IM'$. By definition of the product of an ideal and a module, write $\\theta=\\sum_{k=1}^{h}i_k m'_k$ with $i_k\\in I$, and expand $m'_k=\\sum_{j=1}^{t}a'_{kj}\\rho(v_j)$ using step 2. Regrouping gives $\\theta=\\sum_j t_j\\rho(v_j)$ where $t_j=\\sum_k i_ka'_{kj}\\in I$, since $I$ is an ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2H, proof, subtraction of the lifted N-generators and expression of theta in IM-prime"
+   }
+  },
+  {
+   "text": "For each $j$ set $s_j=(0,t_j)\\in R$; this is in $R$ because $q(t_j)=0$, and its first coordinate is zero. Coordinatewise scalar multiplication gives $\\sum_j s_jv_j=(0,\\sum_jt_j\\rho(v_j))=(0,\\theta)=\\delta$. Consequently $\\xi=\\sum_i b'_iu_i+\\sum_j s_jv_j$. The finite list $u_1,\\ldots,u_r,v_1,\\ldots,v_t$ therefore generates $P$ over $R$, which is finite generation by [def-weil-finitely-generated-module]. Empty lists and zero rings are admitted by the same equalities; no finiteness condition on $I$ was used.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2H, proof, kernel coefficients s_j and final generator formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-sfb-patched-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2H (lemma-finite-module-over-fibre-product), proof, using Tag 07RU (lemma-module-over-fibre-product) as explicitly invoked there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite modules glue to finite modules over a ring fiber product along a surjection",
+   "results": "{\"t\": \"2026-10-23T11:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"Finite modules glue to finite modules over a ring fiber product along a surjection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_exact\", \"Module.Finite.of_surjective\", \"RingHom.finite_isStableUnderBaseChange\", \"RingHom.finiteType_isStableUnderBaseChange\", \"Module.Finite.trans\", \"FGModuleCat.instFiniteCarrierSigmaObjModuleCatOfFinite\", \"FGModuleCat.instHasFiniteColimits\", \"FGModuleCat.instFiniteCarrierPiObjModuleCatOfFinite\"], \"digest\": \"43706110643b2a71\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely generated modules over a fiber product of rings from two finite modules with isomorphic reductions",
+   "results": "{\"t\": \"2026-10-23T11:57:45Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely generated modules over a fiber product of rings from two finite modules with isomorphic reductions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_isStableUnderBaseChange\", \"RingHom.finite_isStableUnderBaseChange\", \"Algebra.QuasiFinite.baseChange\", \"Algebra.FinitePresentation.baseChange\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"Submodule.exists_fg_of_baseChange_eq_zero\", \"instFinitePresentationTensorProduct\", \"RingHom.QuasiFinite.isStableUnderBaseChange\"], \"digest\": \"d00d556339e1d10c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T12:05:24Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fibre.product|fiber.product|Milnor|patching",
+   "results": "{\"t\": \"2026-10-23T11:56:10Z\", \"tool\": \"grep\", \"query\": \"pullback|fibre.product|fiber.product|Milnor|patching\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Torsion/Free.lean\", \"Mathlib/Algebra/Module/Torsion/Free.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/Submodule/Map.lean\", \"Mathlib/Algebra/Module/Submodule/Map.lean\", \"Mathlib/Algebra/Module/Submodule/Map.lean\", \"Mathlib/Algebra/Module/Defs.lean\"], \"digest\": \"c0ebd9b925870bc1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite generation of the fiber product of compatible modules over a pullback ring",
+   "results": "{\"t\": \"2026-10-23T11:56:10Z\", \"tool\": \"leansearch\", \"query\": \"Finite generation of the fiber product of compatible modules over a pullback ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Finite\", \"Module.finitePresentation_iff_finite\", \"ModuleCat.isFG\", \"RingHom.finite_isStableUnderBaseChange\", \"Submodule.FG.mul\", \"ModuleCat.isFG_iff\", \"Module.Finite.tensorProduct\", \"Submodule.fg_pi\"], \"digest\": \"d47a070798faab74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scalar extension, flat base change, finite modules, or presentations individually; none gives patching over a surjective ring pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|patching|fibre.product|fiber.product",
+   "results": "{\"t\": \"2026-10-23T13:41:43Z\", \"tool\": \"grep\", \"query\": \"Milnor|patching|fibre.product|fiber.product\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibre product of compatible finitely generated modules over a surjective pullback square of commutative rings is finitely generated",
+   "results": "{\"t\": \"2026-10-23T13:41:43Z\", \"tool\": \"leansearch\", \"query\": \"A fibre product of compatible finitely generated modules over a surjective pullback square of commutative rings is finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.isFG\", \"RingHom.Finite\", \"FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂\", \"FGModuleCat.instHasFiniteLimits\", \"Module.Finite.prod\", \"Module.Finite.of_exact\", \"RingHom.Finite.of_surjective\", \"FGModuleCat.instHasLimitsOfShapeOfFinCategory\"], \"digest\": \"3cd2f9067cb2314a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-limit hits require a fixed Noetherian base ring; finite products and exact-sequence lemmas do not give compatible-module patching over the varying rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T13:41:43Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely generated compatible modules over two commutative rings patch to a finitely generated module over their fibre product when one ring map is surjective",
+   "results": "{\"t\": \"2026-10-23T13:41:44Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely generated compatible modules over two commutative rings patch to a finitely generated module over their fibre product when one ring map is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_surjective\", \"Module.FinitePresentation.trans\", \"Module.Finite.trans\", \"FinitePresentation.of_isBaseChange\", \"AlgHom.FiniteType.comp_surjective\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"Algebra.FiniteType.baseChangeAux_surj\", \"RingHom.FiniteType.comp_surjective\"], \"digest\": \"2787b2be12015d34\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite scalar extension, localization and finite-type transitivity results do not give patching over a ring pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Finite.of_exact|instance.*Finite.*[Ll]imit|variable.*Noetherian|instFiniteCarrierLimit",
+   "results": "{\"t\": \"2026-10-23T13:42:43Z\", \"tool\": \"grep\", \"query\": \"Module.Finite.of_exact|instance.*Finite.*[Ll]imit|variable.*Noetherian|instFiniteCarrierLimit\", \"sub\": \"Algebra/Category/FGModuleCat\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/FGModuleCat/Abelian.lean\", \"Mathlib/Algebra/Category/FGModuleCat/Colimits.lean\", \"Mathlib/Algebra/Category/FGModuleCat/Colimits.lean\", \"Mathlib/Algebra/Category/FGModuleCat/Limits.lean\", \"Mathlib/Algebra/Category/FGModuleCat/Limits.lean\", \"Mathlib/Algebra/Category/FGModuleCat/Limits.lean\"], \"digest\": \"a1914166031cf3d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: FGModuleCat/Limits.lean:45 assumes IsNoetherianRing k; no unrestricted ring-pullback statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milnor patching finite modules: if N is finite over B and M prime is finite over A prime, their compatible pullback over A is finite over B times A prime over A",
+   "results": "{\"t\": \"2026-10-23T13:42:45Z\", \"tool\": \"leanfinder\", \"query\": \"Milnor patching finite modules: if N is finite over B and M prime is finite over A prime, their compatible pullback over A is finite over B times A prime over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt.baseChange\", \"RingHom.finiteType_isStableUnderBaseChange\", \"RingHom.finite_isStableUnderBaseChange\", \"Module.Finite.of_localizationSpan_finite'\", \"Algebra.QuasiFinite.finite_fiber\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl\", \"RingHom.Finite.tensorProductMap\"], \"digest\": \"63b2486d84effcb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite scalar extension, localization and finite-type transitivity results do not give patching over a ring pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibre-product-algebra-flat-presentation",
+  "date": "2026-10-23",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, reduction of (3) and of the flat counit to the scheme lemma 07RX. Supporting input: Tag 07RX reduces to the ring-algebra lemma Tag 08KQ, parts (2), (3) and final assertion. Module input: 0D2H (lemma-finite-module-over-fibre-product).",
+   "via": [
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-module-fibre-product-patching",
+  "worker": "stage1",
+  "summary": "Retained the unrestricted statement of Stacks 0D2H and wrote its finite-generator argument in four steps. Reused the existing canonical patched-module base-change theorem 07RU and the tensor and finite-generation definitions; no new nodes are needed. Explicitly expanded ideal-module coefficients and lifted each to the kernel of the ring projection. Checked zero rings, zero modules, empty generators and non-finitely-generated ideals.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration / infinitesimal-pushout / 08KQ chain at its 0D2H finite-module input. The current latest blueprint unit and direct-image proof keep that role; no chapter or unit route changes. blueprint_refs.py ancestor reports the inherited null ancestor; retained that field and its precise place and via. Whole-blueprint searches for 0D2H, finite module, fibre product and patch found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-640e02a5d",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-640e02a5d (reviewer sub-agent of L); spot-checked: I read Stacks more-algebra.tex: 0D2H (lemma-finite-module-over-fibre-product, l.775-806) in full, plus 07RU (l.644-717) and Situation 08KH (l.523-541). The item statement is unchanged from the base (clones/side-live) and matches 0D2H hypothesis by hypothesis; the A-linear form of φ is equivalent to the source's B-linear N→M'/IM'. There are no new nodes. Step 1 (elementary): R→B and p:P→N are onto by lifting, and the generators and lifts u_i are chosen correctly. Step 2 uses the statement of lem-sfb-patched-module-base-change (same unit, no cycle), which gives N'⊗_R A' ≅ M' via (n,m')⊗a'↦a'm' (07RU's final assertion), and pure-tensor generation from def-weil-pbc-module-tensor-product, so the ρ(v_j) generate M'. Like the source, it never claims ρ is onto. Step 3 (elementary): θ∈IM' and the expansion θ=Σt_jρ(v_j) with t_j∈I are correct. Step 4 (elementary): s_j=(0,t_j)∈R because q(t_j)=0, which makes the source's J≅I explicit; this gives the final generator formula. proof_deps equals the union of uses. Edge cases checked: I=0, A=0, zero modules, a non-finitely-generated I in k[x_1,x_2,...], and the non-surjective ρ example k[t]⊂k(t). Duplicate search with rg -L: the finite-projective and relative-fp patching nodes are different statements. No SGA source, no tool_uses, item not superseded live, no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteModuleFibreProductPatching",
+  "declaration": "ModuleCat.FibreProductPatching.finite_patchedModule",
+  "file": "lean/Sheaf/RingTheory/FiniteModuleFibreProductPatching.lean",
+  "statement": "theorem finite_patchedModule {A A' B : CommRingCat.{u}} (b : B ⟶ A) (q : A' ⟶ A) (hq : Function.Surjective q) (N : ModuleCat.{max u v} B) (M' : ModuleCat.{max u v} A') (φ : (extendScalars b.hom).obj N ≅ (extendScalars q.hom).obj M') [Module.Finite B N] [Module.Finite A' M'] : Module.Finite (pullback (C := CommRingCat) b q) (patchedModule b q N M' φ)",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a7f6f64c",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after H2 return on 1f655d57: the item now cites the new def node def-sfb-fibre-product-patched-module (existing:true on leftMap/rightMap/patchedModule in Sheaf.RingTheory.FlatModuleFibreProductPatching) instead of the flat-patching theorem node. Item JSON differs from side-live only by that stmt_dep plus lean. Checked against Stacks 08KH/0D2H: surjective q, arbitrary b, φ: A⊗_B N ≅ A⊗_{A'}M' (canonically M'/IM'), patchedModule = ModuleCat pullback of the unit maps (real defs, no flatness), Module.Finite hypotheses and conclusion over the CommRingCat pullback; no extra hypotheses; universes u / max u v as in the reused API. lean.statement verbatim for both records (script check). New node meets the H12 field rule; no duplicate owner in the DAG. Docstring has source place, blueprint tag and the 4 proof steps; proof is sorry only. No files changed, no compile run. Advisory only: the reused defs' docstrings name the flat theorem node as blueprint."
+ }
+}

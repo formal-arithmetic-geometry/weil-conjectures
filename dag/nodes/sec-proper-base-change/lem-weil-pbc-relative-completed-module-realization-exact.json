@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-relative-completed-module-realization-exact",
+ "kind": "statement",
+ "title": "RelativeCompletedModuleRealizationExact",
+ "statement": "Let X,Y be schemes, h:Y→X a morphism, and d an adic coefficient datum on a commutative ring A [def-weil-pbc-adic-coefficient-datum]. Put C=AdicCompletion(d.ideal,A). There exist scalar maps φ:constant_Y(C)→H_Y and β:h⁻¹H_X→H_Y, where H is the inverse limit of the constant finite quotients [def-weil-pbc-completed-constant-realization-data]. Their composites with each positive finite projection are respectively the constant evaluation C→A/I^(n+1) and inverse image of the projection on X followed by the canonical constant inverse-image map. The functor c from C-modules to modules over h⁻¹(pbcAdicCompletion X d), obtained by completed constant realization along φ, restriction along β, and restriction along the inverse completed coefficient comparison [def-weil-pbc-bounded-constructible-tower], is additive and preserves finite limits and colimits. For every finite C-module N, restriction of c(N) along the forward completed coefficient comparison is relatively adic lisse [def-weil-pbc-adic-lisse-module]. This is a module assertion, with no input tower or bounded complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M, lemma-constant-exact and lemma-completion-flat; proetale.tex 09BT and 09BV"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-constant-realization-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-adic-lisse-module"
+ ],
+ "proof": [
+  {
+   "text": "Construct φ as the limit lift of the constant evaluation cone, using the compatibility of successive completion evaluations. Apply the profinite inverse-image theorem to the quotient ring tower and transport through identity-component diagram isomorphisms to obtain β and all its finite projection equations.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let C=AdicCompletion(I,A) and J=IC. C is Noetherian. Surjectivity and the kernel formula for completion evaluation construct C/J^n≅A/I^n; their projection equations give an isomorphism of constant quotient diagrams and hence their completed rings. Apply completed-constant flatness to C,J and φ, checking its scalar equation by cancelling the quotient isomorphism. The chosen scalar extension is the same actual functor completedAdicChange, so it preserves finite limits and colimits on all modules. Constant-module sheafification is exact by evaluation and sheafification exactness. Compose with the two exact additive scalar restrictions.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the completed constant module-model theorem with φ; use its additivity and absolute adic lissity for every finite C-module. Apply adicLisse_relative_restrict to β and these absolute local models. Compose the ordinary scalar-restriction comparisons: the inverse and forward completed-coefficient comparison maps cancel after inverse image. Relative adic lissity is invariant under the resulting module isomorphism, by composing each local trivialization and using linearity of the module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-module-model",
+    "lem-weil-pbc-adic-lisse-relative-restriction",
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-completed-constant-module-model",
+  "lem-weil-pbc-adic-lisse-relative-restriction",
+  "def-weil-pbc-adic-lisse-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M, with explicit evaluation-kernel quotient comparisons over C=AdicCompletion(I,A); relative transport uses proetale.tex 09BT and sites.tex 00YV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact realization of finite modules over an adic completion as sheaves over the completed constant coefficient sheaf",
+   "results": "8 hits on algebraic AdicCompletion, including ofTensorProductEquivOfFiniteNoetherian; no sheaf result.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\"",
+   "results": "12 hits on AdicCompletion and its additive/module structures; no exact relative realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*flat|constant.*exact",
+   "results": "3 hits: AdicCompletion.AsTensorProduct flatness and Smooth.Flat; no completed sheaf statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseNormalizedTowerLocalModels",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): Tags 093J--093M, lemma-constant-exact and lemma-completion-flat; proetale.tex 09BT and 09BV",
+   "via": [
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeCompletedModuleRealizationExact",
+  "file": "lean/Sheaf/Paper/RelativeCompletedModuleRealizationExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relative_completed_module_realization_exact",
+  "statement": "theorem relative_completed_module_realization_exact\n    (X Y : Scheme.{u}) (h : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :\n    ∃ φ : adicLisseConstantRing Y (AdicCompletion d.ideal A) ⟶\n      adicLisseCompletedRing Y d.ideal,\n      (∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem Y d.ideal) (op n) =\n      (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (AdicCompletion.evalₐ d.ideal (n + 1)).toRingHom)) ∧\n      ∃ β : (adicTowerInverseImage h).obj (adicLisseCompletedRing X d.ideal) ⟶\n      adicLisseCompletedRing Y d.ideal,\n        (∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem Y d.ideal) (op n) =\n      (adicTowerInverseImage h).map (limit.π (adicLisseRingSystem X d.ideal) (op n)) ≫\n        proEtaleConstantInverseImageMap h CommRingCat.{u + 1}\n          (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) ∧\n        let c := completedConstantRealization Y d.ideal φ ⋙ pbcRestrict β ⋙\n      pbcRestrict ((adicTowerInverseImage h).map (pbcCompletedComparison X d).inv)\n        ∃ hc : c.Additive,\n          PreservesFiniteLimits c ∧ PreservesFiniteColimits c ∧\n          ∀ N : ModuleCat.{u + 1} (AdicCompletion d.ideal A),\n            Module.Finite (AdicCompletion d.ideal A) N →\n              @IsRelativelyAdicLisseModule _ _ h A _ d.noetherian d.ideal\n                ((pbcRestrict ((adicTowerInverseImage h).map\n                  (pbcCompletedComparison X d).hom)).obj (c.obj N))",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9c288",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261026T201428-L-3380950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T235834-L-1459822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

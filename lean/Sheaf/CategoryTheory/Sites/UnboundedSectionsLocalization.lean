@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
@@ -45,7 +45,10 @@ private lemma compUnit_app
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at hi
   simp [Functor.rightDerivedFunctorCompUnit, hi]
 
-private lemma compIso_objQ
+/-- Normalization of the derived composition comparison on a K-injective complex.
+Source: Stacks Project, Tag 0D6E, the compatibility with resolution units
+(blueprint: lem-sfb-unbounded-sections-localization). -/
+lemma compIso_objQ
     {A B E : Type*} [Category A] [Category B] [Category E]
     [Abelian A] [Abelian B] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory E]

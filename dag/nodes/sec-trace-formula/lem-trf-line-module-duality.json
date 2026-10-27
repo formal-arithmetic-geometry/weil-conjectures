@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-line-module-duality",
+ "kind": "statement",
+ "title": "Dual evaluation and scalar endomorphisms of a rank-one projective module",
+ "statement": "Let $R$ be a commutative ring and $L$ a direct summand of a finite free $R$-module [def-weil-pbc-projective-module]. Assume that for every prime ideal $\\mathfrak p$ the localized module $L_{\\mathfrak p}$ [def-weil-pbc-module-localization] is free of rank one, meaning isomorphic to $R_{\\mathfrak p}$ as an $R_{\\mathfrak p}$-module. Put $L^\\vee=\\operatorname{Hom}_R(L,R)$, and use ordinary tensor products [def-weil-pbc-module-tensor-product]. Then the evaluation map $e_L:L^\\vee\\otimes_R L\\to R$, $\\lambda\\otimes l\\mapsto\\lambda(l)$, is an isomorphism. The scalar map $c_L:R\\to\\operatorname{Hom}_R(L,L)$, $r\\mapsto(l\\mapsto rl)$, is an $R$-linear isomorphism. In particular $L^\\vee$ is a tensor inverse of $L$ under ordinary tensor symmetry.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B8I (lemma-invertible), equivalence (1)--(3) and its evaluation proof; Tag 0FJ9 (section-determinants), paragraph preceding remark-determinant-as-socle, the identification R = Hom_R(L,L) for an invertible module."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose splitting maps $i:L\\to R^n$, $s:R^n\\to L$ with $si=1$ from the direct-summand hypothesis [def-weil-pbc-projective-module]. For the standard vectors $e_j$ put $x_j=s(e_j)$ and $\\lambda_j=\\operatorname{pr}_j i\\in L^\\vee$. Expanding $i(x)$ in coordinates gives $x=\\sum_j\\lambda_j(x)x_j$ for every $x\\in L$. Applying any $\\lambda\\in L^\\vee$ gives $\\lambda=\\sum_j\\lambda(x_j)\\lambda_j$. Both are finite sums, including when $n=0$.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B8I, lemma-invertible, evaluation argument; details supplied by a dual basis and Algebra Tag 00HN (lemma-characterize-zero-local (1))."
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak p$, extend a functional $\\lambda:L\\to R$ to $\\lambda_{\\mathfrak p}:L_{\\mathfrak p}\\to R_{\\mathfrak p}$ by $\\lambda_{\\mathfrak p}(x/a)=\\lambda(x)/a$. This is well-defined: $u(bx-ay)=0$ implies $u(b\\lambda(x)-a\\lambda(y))=0$, exactly the fraction relation [def-weil-pbc-module-localization]; the same formula verifies $R_{\\mathfrak p}$-linearity. Choose a generator $v$ of $L_{\\mathfrak p}\\cong R_{\\mathfrak p}$. Writing $x/1=av$, $y/1=bv$ shows $(\\lambda(x)y-\\lambda(y)x)/1=0$. Apply each coordinate functional $\\lambda_j$ to this equality: the scalar $\\lambda_j(\\lambda(x)y-\\lambda(y)x)$ vanishes in every $R_{\\mathfrak p}$, hence is zero by [lem-weil-pbc-prime-localizations-jointly-injective]. The expansion in step 1 then proves the global identity $\\lambda(x)y=\\lambda(y)x$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-prime-localizations-jointly-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B8I, lemma-invertible, evaluation argument; details supplied by a dual basis and Algebra Tag 00HN (lemma-characterize-zero-local (1))."
+   }
+  },
+  {
+   "text": "Put $t=\\sum_j\\lambda_j(x_j)$. At a prime choose the generator $v$ as in step 2, and write $x_j/1=a_jv$, $b_j=(\\lambda_j)_{\\mathfrak p}(v)$. The localized expansion of step 1, applied to $v$, says $v=(\\sum_j b_ja_j)v$. (It holds on fractions by dividing the expansion for their numerators.) Since $v$ is a free generator, $\\sum_j b_ja_j=1$. Thus $t/1=\\sum_j a_jb_j=1$. By [lem-weil-pbc-prime-localizations-jointly-injective], $t=1$ in $R$. This argument also covers the zero ring: the same injectivity assertion with an empty product forces the scalar equality.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-prime-localizations-jointly-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B8I, lemma-invertible, evaluation argument; details supplied by a dual basis and Algebra Tag 00HN (lemma-characterize-zero-local (1))."
+   }
+  },
+  {
+   "text": "By the tensor universal property [def-weil-pbc-module-tensor-product], the bilinear pairing $(\\lambda,x)\\mapsto\\lambda(x)$ induces the stated $e_L$. Put $\\xi=\\sum_j\\lambda_j\\otimes x_j$ and define $a:R\\to L^\\vee\\otimes_R L$ by $a(r)=r\\xi$. Step 3 gives $e_La(r)=r$. For a pure tensor, step 2 and tensor balancing give\n$$a e_L(\\lambda\\otimes x)=\\sum_j\\lambda_j\\otimes\\lambda(x)x_j=\\sum_j\\lambda_j\\otimes\\lambda(x_j)x=\\Bigl(\\sum_j\\lambda(x_j)\\lambda_j\\Bigr)\\otimes x=\\lambda\\otimes x.$$\nPure tensors generate, so $a e_L=1$ and $e_L$ is an isomorphism. The swap $x\\otimes\\lambda\\mapsto\\lambda\\otimes x$ is well-defined by bilinearity and is its own inverse; composing with $e_L$ gives the other evaluation isomorphism and the asserted tensor inverse.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B8I, lemma-invertible, evaluation argument; details supplied by a dual basis and Algebra Tag 00HN (lemma-characterize-zero-local (1))."
+   }
+  },
+  {
+   "text": "For $f\\in\\operatorname{Hom}_R(L,L)$ define $h(f)=\\sum_j\\lambda_j(f(x_j))\\in R$. This is $R$-linear, and $c_L$ is $R$-linear directly from its scalar formula. Steps 1 and 2 give\n$$f(x)=\\sum_j\\lambda_j(x)f(x_j)=\\sum_j\\lambda_j(f(x_j))x=h(f)x,$$\nso $c_Lh(f)=f$. Step 3 gives $h(c_L(r))=r\\sum_j\\lambda_j(x_j)=r$. Thus $h$ and $c_L$ are inverse $R$-linear maps. No choice of a global generator of $L$ has been made.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJ9, section-determinants, paragraph before remark-determinant-as-socle: R = Hom_R(L,L); explicit inverse supplied by the preceding dual-basis argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0B8I and 0FJ9: explicit dual-basis completion of the evaluation details omitted in 0B8I, with local detection from Algebra Tag 00HN (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible module has scalar endomorphisms and evaluation with its dual is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T10:00:14Z\", \"tool\": \"leansearch\", \"query\": \"An invertible module has scalar endomorphisms and evaluation with its dual is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.instIsReflecive\", \"LinearMap.IsPerfPair.dualEval\", \"CommRing.Pic.mk_dual\", \"Module.Dual.eval\", \"Submodule.instInvertibleSubtypeMemVal\", \"Module.Dual.congr_apply_apply\", \"Module.Invertible.linearEquivDual\", \"FGModuleCat.FGModuleCatEvaluation\"], \"digest\": \"f092f9ad8173e995\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Invertible",
+   "results": "{\"t\": \"2026-10-23T10:00:15Z\", \"tool\": \"loogle\", \"query\": \"Module.Invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Invertible\", \"Module.Invertible.inst\", \"CommRing.Pic.mk\", \"Module.Invertible.instFinite\", \"Module.Invertible.instProjective\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iffₛ\", \"Module.Invertible.algEquivOfRing\"], \"digest\": \"2f195fd57db1f7fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invertible module L over a commutative ring the scalar map R to End R L is an isomorphism and evaluation L tensor dual L is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T10:00:17Z\", \"tool\": \"leanfinder\", \"query\": \"For an invertible module L over a commutative ring the scalar map R to End R L is an isomorphism and evaluation L tensor dual L is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.linearEquiv\", \"Module.Invertible.toModuleEnd_bijective\", \"Module.Invertible.bijective\", \"Module.Invertible.instDual\", \"CommRing.Pic.mk_dual\", \"CommRing.Pic.mk\", \"CommRing.Pic.mk.linearEquiv\", \"Module.Invertible.left\"], \"digest\": \"e4c8efed55cc3843\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"iff\"",
+   "results": "{\"t\": \"2026-10-23T10:04:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Invertible\\\", \\\"iff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"nonempty_invertible_iff_isUnit\", \"Matrix.inv_mul_eq_iff_eq_mul_of_invertible\", \"Matrix.mul_inv_eq_iff_eq_mul_of_invertible\", \"Matrix.isUnit_fromBlocks_iff_of_invertible₁₁\", \"Matrix.isUnit_fromBlocks_iff_of_invertible₂₂\", \"FractionalIdeal.invertible_iff_generator_nonzero\", \"Module.Invertible.free_iff_linearEquiv\", \"Module.Invertible.leftInverse_iff_rightInverse\"], \"digest\": \"de84baac4c8c11cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "grep",
+   "query": "toModuleEnd_bijective|class Invertible|linearEquiv|iff.*rank|iff.*[Ll]ocal|locally|instDual|instTensor",
+   "results": "{\"t\": \"2026-10-23T10:04:17Z\", \"tool\": \"grep\", \"query\": \"toModuleEnd_bijective|class Invertible|linearEquiv|iff.*rank|iff.*[Ll]ocal|locally|instDual|instTensor\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"35\", \"59\", \"77\", \"83\", \"88\"], \"digest\": \"69fae5558ec77afb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite projective module locally free of rank one has bijective canonical dual evaluation and scalar endomorphism map",
+   "results": "{\"t\": \"2026-10-23T10:04:31Z\", \"tool\": \"leanfinder\", \"query\": \"A finite projective module locally free of rank one has bijective canonical dual evaluation and scalar endomorphism map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.bijective_dual_eval'\", \"Module.bijective_dual_eval\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.IsReflexive.of_finite_of_free\", \"Module.Invertible.bijective\", \"Module.dual_projective\", \"Module.Projective.exists_dual_eq_one\"], \"digest\": \"494b40e1c1538b32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "grep",
+   "query": "toModuleEnd_bijective|dualTensorHomEquiv|instDual|instTensor",
+   "results": "{\"t\": \"2026-10-23T10:06:25Z\", \"tool\": \"grep\", \"query\": \"toModuleEnd_bijective|dualTensorHomEquiv|instDual|instTensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/Flat/Stability.lean\"], \"digest\": \"7bc514e16fa04a86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rank one finite locally free module has bijective evaluation with its dual and all endomorphisms are unique scalar multiplications",
+   "results": "{\"t\": \"2026-10-23T10:06:26Z\", \"tool\": \"leansearch\", \"query\": \"A rank one finite locally free module has bijective evaluation with its dual and all endomorphisms are unique scalar multiplications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.existsUnique_eq_smul_id_of_finrank_eq_one\", \"LinearEquiv.smul_id_of_finrank_eq_one\", \"Module.IsReflexive.of_finite_of_free\", \"FiniteDimensional.of_rank_eq_one\", \"Module.Dual.instIsReflecive\", \"LinearMap.IsPerfPair.dualEval\", \"Module.Dual.eval\", \"rank_eq_one_iff\"], \"digest\": \"b7a017cc84a06651\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite locally free rank one modules L the map M tensor dual L to Hom L M is an isomorphism and R to End L is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T10:06:31Z\", \"tool\": \"leanfinder\", \"query\": \"For finite locally free rank one modules L the map M tensor dual L to Hom L M is an isomorphism and R to End L is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.linearEquiv\", \"dualTensorHomEquiv\", \"LinearEquiv.smul_id_of_finrank_eq_one\", \"Module.IsReflexive.of_finite_of_free\", \"IsAzumaya.id\", \"Module.Invertible.linearEquivDual\", \"IsAzumaya.tensorEquivEnd\", \"FGModuleCat.rightRigidCategory\"], \"digest\": \"e0815a43cba2ebe1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the local-rank-one hypothesis: PicardGroup.lean:77 defines Module.Invertible by bijective evaluation, :83 supplies linearEquiv and :257 toModuleEnd_bijective only assuming that class. The TODO at lines 55--59 explicitly leaves the local-rank-one characterization open. Contraction.lean:281 dualTensorHomEquiv handles finite projective tensor-Hom but does not give evaluation as an isomorphism from local rank one. Dimension.Free scalar lemmas require globally free modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Invertible",
+   "results": "{\"t\": \"2026-10-23T11:28:24Z\", \"tool\": \"loogle\", \"query\": \"Module.Invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Invertible\", \"Module.Invertible.inst\", \"CommRing.Pic.mk\", \"Module.Invertible.instFinite\", \"Module.Invertible.instProjective\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iffₛ\", \"Module.Invertible.algEquivOfRing\"], \"digest\": \"2f195fd57db1f7fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: Module.Invertible assumes bijective tensor evaluation (PicardGroup.lean:77--84); local rank-one characterization remains TODO at :55--59. Reflexivity is double-dual evaluation, not this tensor evaluation. The scalar theorem :257 assumes Invertible."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite projective module locally free of rank one has bijective dual tensor evaluation and every endomorphism is scalar",
+   "results": "{\"t\": \"2026-10-23T11:28:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite projective module locally free of rank one has bijective dual tensor evaluation and every endomorphism is scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instIsReflexiveOfFiniteOfProjective\", \"IsAzumaya.id\", \"Module.IsReflexive.of_finite_of_free\", \"IsAzumaya.toProjective\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"IsAzumaya\", \"IsAzumaya.toFinite\", \"Module.Invertible.instProjective\"], \"digest\": \"e5e1ab69786b960e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: Module.Invertible assumes bijective tensor evaluation (PicardGroup.lean:77--84); local rank-one characterization remains TODO at :55--59. Reflexivity is double-dual evaluation, not this tensor evaluation. The scalar theorem :257 assumes Invertible."
+  },
+  {
+   "tool": "grep",
+   "query": "class Invertible|toModuleEnd_bijective|become free of rank one|linearEquiv",
+   "results": "{\"t\": \"2026-10-23T11:30:01Z\", \"tool\": \"grep\", \"query\": \"class Invertible|toModuleEnd_bijective|become free of rank one|linearEquiv\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"35\", \"56\", \"77\", \"83\", \"88\"], \"digest\": \"890876a5731d0e56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: Module.Invertible assumes bijective tensor evaluation (PicardGroup.lean:77--84); local rank-one characterization remains TODO at :55--59. Reflexivity is double-dual evaluation, not this tensor evaluation. The scalar theorem :257 assumes Invertible."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite projective module locally isomorphic to the base ring has bijective evaluation with its dual",
+   "results": "{\"t\": \"2026-10-23T11:30:02Z\", \"tool\": \"leansearch\", \"query\": \"A finite projective module locally isomorphic to the base ring has bijective evaluation with its dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.bijective_dual_eval'\", \"Module.bijective_dual_eval\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.of_finite_of_free\", \"Module.eval_apply_injective\", \"Module.Dual.instIsReflecive\", \"Module.Dual.eval\", \"LinearMap.IsPerfPair.dualEval\"], \"digest\": \"e45c691fab30eb52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: Module.Invertible assumes bijective tensor evaluation (PicardGroup.lean:77--84); local rank-one characterization remains TODO at :55--59. Reflexivity is double-dual evaluation, not this tensor evaluation. The scalar theorem :257 assumes Invertible."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of a module over a commutative ring is zero if it vanishes in the localization at every maximal ideal",
+   "results": "{\"t\": \"2026-10-23T11:30:06Z\", \"tool\": \"leanfinder\", \"query\": \"An element of a module over a commutative ring is zero if it vanishes in the localization at every maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.subsingleton_of_localization_maximal\", \"Submodule.mem_of_localization_maximal\", \"injective_of_isLocalized_maximal\", \"Module.notMem_support_iff\", \"ModuleCat.Tilde.smul_stalk_no_nonzero_divisor\", \"LocalizedModule.subsingleton_iff\", \"Module.mem_support_iff\", \"injective_of_localized_maximal\"], \"digest\": \"6d685a2a9272b1f9\"}",
+   "date": "2026-10-23",
+   "verdict": "match for an auxiliary fact only: Module.eq_zero_of_localization_maximal at RingTheory/LocalProperties/Submodule.lean:94, but an existing ring-valued detection leaf suffices after applying the finite coordinate functionals; no new node."
+  },
+  {
+   "tool": "grep",
+   "query": "eq_zero_of_localization_maximal|eq_of_localization_maximal",
+   "results": "{\"t\": \"2026-10-23T11:33:05Z\", \"tool\": \"grep\", \"query\": \"eq_zero_of_localization_maximal|eq_of_localization_maximal\", \"sub\": \"RingTheory/LocalProperties\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Submodule.lean\", \"Mathlib/RingTheory/LocalProperties/Submodule.lean\", \"Mathlib/RingTheory/LocalProperties/Submodule.lean\", \"Mathlib/RingTheory/LocalProperties/Submodule.lean\", \"Mathlib/RingTheory/LocalProperties/Submodule.lean\"], \"digest\": \"c1544e6beb7210b4\"}",
+   "date": "2026-10-23",
+   "verdict": "match for an auxiliary fact only: Module.eq_zero_of_localization_maximal at RingTheory/LocalProperties/Submodule.lean:94, but an existing ring-valued detection leaf suffices after applying the finite coordinate functionals; no new node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element of a module is zero if its image is zero at every maximal ideal localization",
+   "results": "{\"t\": \"2026-10-23T11:33:05Z\", \"tool\": \"leansearch\", \"query\": \"An element of a module is zero if its image is zero at every maximal ideal localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.mk'_eq_zero\", \"ideal_eq_bot_of_localization'\", \"ideal_eq_bot_of_localization\", \"IsLocalizedModule.mk'_eq_zero'\", \"IsLocalization.mk'_zero\", \"IsLocalRing.residue_eq_zero_iff\", \"IsLocalization.map_eq_zero_iff\", \"LocalizedModule.subsingleton\"], \"digest\": \"2393a7dd4135dc22\"}",
+   "date": "2026-10-23",
+   "verdict": "match for an auxiliary fact only: Module.eq_zero_of_localization_maximal at RingTheory/LocalProperties/Submodule.lean:94, but an existing ring-valued detection leaf suffices after applying the finite coordinate functionals; no new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.eq_zero_of_localization_maximal",
+   "results": "{\"t\": \"2026-10-23T11:33:05Z\", \"tool\": \"loogle\", \"query\": \"Module.eq_zero_of_localization_maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.eq_zero_of_localization_maximal\"], \"digest\": \"ed890ff8f1df3903\"}",
+   "date": "2026-10-23",
+   "verdict": "match for an auxiliary fact only: Module.eq_zero_of_localization_maximal at RingTheory/LocalProperties/Submodule.lean:94, but an existing ring-valued detection leaf suffices after applying the finite coordinate functionals; no new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free modules of rank one are invertible modules: evaluation dual L tensor L to R is bijective",
+   "results": "{\"t\": \"2026-10-23T11:35:23Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally free modules of rank one are invertible modules: evaluation dual L tensor L to R is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.instFinite\", \"CommRing.Pic.instFreeAsModuleOfNat\", \"Module.Invertible.left\", \"CommRing.Pic.mk_eq_one\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.mk_eq_one_iff_free\", \"CommRing.Pic.subsingleton_iffₛ\", \"Module.Invertible.exists_linearEquiv_ideal\"], \"digest\": \"58c2aa21763d4c7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: Module.Invertible assumes bijective tensor evaluation (PicardGroup.lean:77--84); local rank-one characterization remains TODO at :55--59. Reflexivity is double-dual evaluation, not this tensor evaluation. The scalar theorem :257 assumes Invertible."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-two-term-kernel-normalization",
+  "date": "2026-10-23",
+  "group": "Q137"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Construction of the kernel-normalized determinant isomorphism. General algebra input for the kernel determinant line: dual evaluation and scalar endomorphisms of a finite locally free rank-one module.",
+   "via": [
+    "lem-trf-two-term-kernel-normalization",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-line-module-duality",
+  "worker": "stage1",
+  "summary": "Constructed a finite dual basis from the supplied splitting; prime-local rank one gives the interchange identity and dual-basis trace 1, detected by the existing Mathlib ring-localization leaf. Explicit two-sided inverse formulas prove evaluation and scalar endomorphisms. No new nodes or statement changes.",
+  "blueprint": "The inherited semistable-modification branch of lem-trf-local-term-locality proof (1)--(2), specifically the kernel determinant-line normalization input named in blueprint.from.place; this is ordinary algebra below that route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-ce1d73a1f",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-ce1d73a1f (reviewer sub-agent of L); spot-checked: Read all five steps in full. I checked the item against Stacks 0B8I lemma-invertible (more-algebra.tex:36118; its evaluation proof says 'details omitted', which the split supplies per D5), 0FJ9 section-determinants (R=Hom_R(L,L), line ~36256) and 00HN. The hypotheses (direct summand of a finite free module, every L_p free of rank 1) match 0B8I(1), so nothing is weakened. Step 1: the dual-basis expansions x=Σλ_j(x)x_j and λ=Σλ(x_j)λ_j follow from s∘i=id and are elementary. Step 2: λ_p is well defined because u(bλx−aλy)=λ(u(bx−ay))=0. The interchange λ(x)y=λ(y)x is checked locally and then pulled back to R through each λ_j, so the ring-only leaf lem-weil-pbc-prime-localizations-jointly-injective is applied correctly. Step 3: writing v=y/s gives Σa_jb_j=1 at every prime, so t=1. Step 4: the inverse composites of a(r)=rξ are verified; the chain uses balancing, step 2 and step 1. Step 5: f(x)=h(f)x and h(c r)=r. Edge cases checked: L=R, the zero ring, and L=R² over a field (excluded by the hypothesis). All four cited nodes are Mathlib leaves and their statements give exactly what the steps take. There are no new nodes. No DAG duplicate: the sheaf and space line nodes and the determinant chart nodes differ. Mathlib's PicardGroup.lean leaves this characterization as a TODO (lines 55–57) and defines Module.Invertible by bijective evaluation, so the item is not a leaf. The searches cover all three tool kinds. The unit route uses only definitions and leaves; tool_uses are empty and no SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LineModuleDuality",
+  "declaration": "Module.line_module_duality",
+  "file": "lean/Sheaf/RingTheory/LineModuleDuality.lean",
+  "statement": "theorem line_module_duality (R : Type u) [CommRing R] (L : Type v) [AddCommGroup L] [Module R L] [Module.Finite R L] [Module.Projective R L] (hlocal : ∀ (p : Ideal R) [p.IsPrime], Nonempty (LocalizedModule p.primeCompl L ≃ₗ[Localization.AtPrime p] Localization.AtPrime p)) : Function.Bijective (contractLeft R L) ∧ Function.Bijective (LinearMap.lsmul R L) ∧ Function.Bijective (contractRight R L)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8faecd890",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Clause by clause: Finite+Projective = direct summand of finite free; hlocal = R_p-linear L_p≅R_p at every prime; Bijective contractLeft (λ⊗l↦λ(l)), Bijective LinearMap.lsmul (r↦r•), Bijective contractRight (symmetric tensor inverse) = the node's three clauses, all canonical maps. Independent universes u,v, no extra instances. Edge cases: zero ring holds vacuously; L=0 and R² over a field excluded by hlocal. Statement verbatim in file, single sorry, source/blueprint docstrings, docstring follows the 5 proof steps, plain import = proof-dep module. Dependency records identical to side-live; only new file is LineModuleDuality.lean; no live landing or prior stage-2 run. No Mathlib duplicate (Module.Invertible is the conclusion; PicardGroup TODO). Advisory: private proved helper RingTheory.invertible_of_prime_localizations (RegularLocalPicardZero.lean:30) has the same hypothesis form and could be reused in stage 3. No compile run (no file changed)."
+ }
+}

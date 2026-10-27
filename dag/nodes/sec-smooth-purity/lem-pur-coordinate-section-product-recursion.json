@@ -1,0 +1,298 @@
+{
+ "id": "lem-pur-coordinate-section-product-recursion",
+ "kind": "statement",
+ "title": "Coordinate supported products and recursive closed adjoints",
+ "statement": "Fix the finite datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. All bases below are separated finite-type $k$-schemes [def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the specified pro-etale Tate twists [def-coefficient-twists-detailed], constructible exceptional inverse image [def-weil-exceptional-inverse-image], and adjunction-preserving composition comparisons [def-weil-pbc-composite-adjunction, def-weil-pbc-adjunction-conjugate].\n\nLet $B$ be such a base, $X_r=\\mathbf A^r_B$, $p_r:X_r\\to B$, $z_r:B\\hookrightarrow X_r$, $q_r:X_{r+1}\\to X_r$ the last-coordinate projection and $s_r:X_r\\hookrightarrow X_{r+1}$ its zero section [def-sbc-affine-space], and put $W_r=A_{X_r}(r)[2r]$. For $c\\geq0$, let $C_c:z_{c*}A_B\\to W_c$ be the ordered product of coordinate Cartier-Kummer morphisms [lem-amb-cartier-kummer-map, def-pur-affine-space-coordinate-boundaries], using [def-pur-supported-cup] and the canonical transport of their scheme-theoretic total intersection to $B$ [def-pur-supported-class-operations]. Let $\\theta_c:A_B\\to Rz_c^!W_c$ be its adjunct, as in [def-pur-affine-space-thom-map]. Let $u_r:W_r\\to Rs_r^!W_{r+1}$ be the adjunct of\n$$s_{r*}W_r\\xrightarrow{\\sim}s_{r*}A_{X_r}\\otimes q_r^*W_r\\xrightarrow{c_{s_r,A}\\otimes1}W_{r+1},$$\nwith the canonical proper projection and twist identifications [lem-weil-finite-compact-projection-formula]. With $d_r:Rz_{r+1}^!\\xrightarrow{\\sim}Rz_r^!Rs_r^!$ conjugate to compact-support composition, the actual maps satisfy\n$$C_0=1,\\quad\\theta_0=1,\\qquad\\theta_{r+1}=d_r^{-1}\\circ Rz_r^!(u_r)\\circ\\theta_r.$$\nMore explicitly, $C_{r+1}$ is exactly\n$$z_{r+1,*}A_B=s_{r*}z_{r*}A_B\\xrightarrow{s_{r*}C_r}s_{r*}W_r\\xrightarrow{\\sim}s_{r*}A_{X_r}\\otimes q_r^*W_r\\xrightarrow{c_{s_r,A}\\otimes1}W_{r+1}.$$\nThese are identities in the derived categories, with the same projection and composition identifications on both sides; no relative supported Kunneth isomorphism is asserted.\n\nFor any $g:B'\\to B$ between the stated bases, put $g_c:X'_c\\to X_c$, where $X'_c=\\mathbf A^c_{B'}$. The canonical closed direct-image and Tate pullback identifications carry $g_c^*C_c$ to $C'_c$. If $\\mathrm{Ex}^!_z:g^*Rz_c^!\\to Rz_c'^!g_c^*$ is the mate of this closed direct-image exchange, then\n$$\\mathrm{Ex}^!_z(W_c)\\circ g^*\\theta_c=\\theta'_c,$$\nwhere $g^*A_B=A_{B'}$. This is the specified exceptional base-change mate, without a flatness hypothesis on $g$. The same formulas hold for the ordinary etale witnesses and are preserved by the exact monoidal site comparison. The products and these identities are independent of the annihilating Kummer exponent; exchanging coordinate factors has sign $(-1)^{2\\cdot2}=1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-sbc-affine-space",
+  "lem-amb-cartier-kummer-map",
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-supported-cup",
+  "def-pur-supported-class-operations",
+  "def-pur-affine-space-thom-map",
+  "lem-weil-finite-compact-projection-formula",
+  "def-pur-coordinate-section-projection",
+  "def-pur-coordinate-section-arrows",
+  "def-pur-coordinate-zero-base-change",
+  "def-pur-coordinate-product-presentations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-coordinate-supported-product-recursion] to obtain the compact-support empty-product normalization and successor equation. Its proof retains the coordinate Cartier, cup multiplication and proper-projection argument of the former Steps 1--5.",
+   "uses": [
+    "lem-pur-coordinate-supported-product-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordered exterior product and projection-formula sentence; supported part of the former expanded Steps 1--5."
+   }
+  },
+  {
+   "text": "Use the supported-product equations from Step 1. Cancelling the inverse exceptional Hom bijection in compactProduct proves the rank-zero adjunct normalization. Apply [lem-pur-coordinate-adjunction-composition] to the zero section, last section, unit, target, compactProduct and sectionArrow. Substitute the supported successor equation and unfold coordinateComposition, sectionAdjunct and coordinateExceptionalComposition. Associativity identifies the displayed exceptional successor equation.",
+   "uses": [
+    "lem-pur-coordinate-adjunction-composition",
+    "def-pur-coordinate-section-arrows",
+    "def-pur-affine-space-thom-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "Now let $g:B'\\to B$ be arbitrary as in the statement. Under $g_c:X'_c\\to X_c$ every coordinate divisor pulls back to its namesake and remains Cartier by the coordinate polynomial calculation (multiplication by a coordinate shifts coefficients injectively, even after killing any other coordinates), even when $g$ is not flat. Cartier naturality carries each pulled-back factor to the corresponding primed factor; the supported cup pullback law carries their ordered product to the primed ordered product. The normalized closed-constant exchanges preserve coefficient restrictions and composition, so their total-intersection source comparison is the same $g_c^*z_{c*}A_B=z'_{c*}A_{B'}$ used in the statement. Hence $g_c^*C_c=C'_c$ with precisely those source, shift and Tate comparisons.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-supported-cup-functoriality",
+    "lem-pur-etale-closed-constant-tensor",
+    "def-pur-supported-class-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "For the exceptional base-change identity, let $e:z'_{c*}g^*\\xrightarrow{\\sim}g_c^*z_{c*}$ denote the inverse of the specified closed direct-image exchange. The defining transpose of its mate $\\mathrm{Ex}^!_z$ is $g_c^*\\varepsilon_z\\circ e$. The transpose under $z'_{c*}\\dashv Rz_c'^!$ of $\\mathrm{Ex}^!_z(W_c)\\circ g^*\\theta_c$ is consequently\n$$g_c^*\\varepsilon_z(W_c)\\circ e_{Rz_c^!W_c}\\circ z'_{c*}g^*\\theta_c\n=g_c^*C_c\\circ e_{A_B}=C'_c.$$\nThe first equality is naturality of $e$ and the formula $C_c=\\varepsilon_z z_{c*}\\theta_c$; the second is Step 7. Bijectivity of the adjunction Hom map gives $\\mathrm{Ex}^!_z(W_c)\\circ g^*\\theta_c=\\theta'_c$. This proves an equality of mates and does not assume that exceptional base change is invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-exceptional-inverse-image",
+    "def-pur-affine-space-thom-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "For the implemented ordinary-witness interface, first unfold ordinaryWitness and apply Equiv.apply_symm_apply to the bounded-below comparison Hom bijection. This proves ordinaryWitness_compare with exactly its specified endpoint identifications. For coordinate_section_product_ordinary, unpack the four pro-etale recursion equalities and rewrite each one inside ordinaryWitness, after introducing its arbitrary endpoint presentation. For coordinate_section_product_ordinary_baseChange, do the same with the two pro-etale base-change equalities. For coordinate_section_product_ordinary_invariance, rewrite the pro-etale permutation and exponent equalities inside every witness. These are congruence arguments on the literal witness function, so no further comparison theorem for projection, cup or exceptional functors is needed at this step. The underlying pro-etale recursion, base-change, permutation and exponent statements retain the outstanding calculations in Steps 1--8 and 10.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "Cartier naturality includes independence of the annihilating Kummer exponent for each factor, so replacing an exponent in the ordered tensor product replaces no morphism; applying the same Hom bijections replaces no adjunct either. Interchanging adjacent coordinate factors uses the supported cup symmetry with $a=b=2$, whose sign is $(-1)^{2\\cdot2}=1$. Its support interchange is the unique identification of the same total coordinate zero scheme, and its target interchange is the normalized Tate multiplication. Adjacent transpositions give all coordinate permutations. These statements also persist under the site comparison of Step 9.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-supported-cup-functoriality",
+    "def-pur-supported-class-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coordinate-supported-product-recursion",
+  "lem-pur-coordinate-adjunction-composition",
+  "def-pur-coordinate-section-arrows",
+  "def-pur-affine-space-thom-map",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-supported-cup-functoriality",
+  "lem-pur-etale-closed-constant-tensor",
+  "def-pur-supported-class-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Expanded ordered Cartier-product and iterated-adjunction proof. J4 Step 9 uses the inverse law for ordinaryWitness. Y8 isolates supported-arrow Steps 1--5 and the general pasted-counit calculation as two strict intermediate nodes; the parent Lean proof cancels the Hom bijection at rank zero and specializes the general calculation at the zero and last sections. Base-change, permutation and exponent arguments remain plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint of a composite of closed immersion section orientations equals the supported cup product and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp; AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate divisor Kummer classes multiply under recursive zero section composition, compatible with pullback on etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s); WeierstrassCurve.Affine.Point.toClass; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul; AlgebraicGeometry.Proj.awayMap_awayToSection; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; Algebra.Generators.cotangentCompAwaySec; AlgebraicGeometry.Scheme.Pullback.cocycle; AlgebraicGeometry.StructureSheaf.const_mul_cancel",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalCategory.tensorHom",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.MonoidalCategory.tensorHom'; No declarations returned.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedCup|cupProduct|Kummer",
+   "results": "[grep] OK 0 hit(s); No declarations returned. Directory Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recursive supported coordinate class product agrees with iterated exceptional adjoints and arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s); IsBaseChange.pi; IsBaseChange.prodMap; Bundle.Prod.contMDiffVectorBundle; LinearEquiv.prodProdProdComm; Algebra.FormallyUnramified.base_change; Mathlib.Tactic.Ring.ExProd.below; ContMDiffAt.coordChange; VectorBundleCore.coe_coordChange",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction identities or unrelated algebra/geometry do not state the specified finite-coefficient supported or integration morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported cup product of coordinate divisor Kummer morphisms equals iterated closed pushforward and projection formula",
+   "results": "8 hits; AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc; AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE; AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state coordinate Cartier products or exceptional section maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of supported sheaf morphisms, composition of adjunctions, compatibility of transposes with base change",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state coordinate Cartier products or exceptional section maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.homEquiv",
+   "results": "1 hits; CategoryTheory.Adjunction.comp_homEquiv",
+   "date": "2026-10-22",
+   "verdict": "partial formal ingredient only: comp_homEquiv at Mathlib/CategoryTheory/Adjunction/Basic.lean:584 gives the composite Hom bijection, not the supported-coordinate statement"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedCup|cartierKummer|coordinateSection|thomClass",
+   "results": "0 hits; none; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state coordinate Cartier products or exceptional section maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported Kummer divisor cup products and recursive exceptional inverse image adjunctions commute with arbitrary base change",
+   "results": "8 hits; KaehlerDifferential.tensorKaehlerEquiv; KaehlerDifferential.tensorKaehlerEquivBase; KaehlerDifferential.mapBaseChange; KaehlerDifferential.cotangentComplexBaseChange_tmul; KaehlerDifferential.mapBaseChange.congr_simp; IsBaseChange.toDualBaseChange; KaehlerDifferential.mapBaseChange_tmul; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state coordinate Cartier products or exceptional section maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-affine-space-zero-section-purity",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-coordinate-section-product-recursion",
+  "worker": "stage1",
+  "summary": "Expanded the ordered coordinate product into the actual closed projection maps, checked their coefficient normalization, and computed composite adjuncts and arbitrary-base-change mates explicitly. Reused existing supported cup, Cartier, projection and comparison nodes; no new node or statement change.",
+  "blueprint": "The sentence \"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\" is realized by Steps 1–6; the final base-change paragraph is realized by Steps 7–9; even shifts by Steps 4 and 10.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-closed-constant-tensor",
+    "why": "General etale closed-constant coefficient tensor, flatness and normalized pullback calculations used to identify the concrete product source; no affine-space-specific replacement is needed."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "The canonical proper projection map is used by its explicit counit normalization, not as a different purity route."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Canonical finite projection isomorphism on the pulled-back finite Tate twist; the unit iteration needs this generic tensor tool."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "The natural etale-origin adjunction Hom bijections transport the ordinary closed-adjunction equations to the stipulated pro-etale functors."
+   },
+   {
+    "node": "lem-pur-supported-cup-functoriality",
+    "why": "General supported-product pullback, associativity, symmetry and site-comparison laws; these implement the unit coordinate product rather than replace its purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-closed-constant-tensor",
+  "def-kun-projection-formula-map",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-29e1bd43f",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-29e1bd43f (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps and the statements of all 15 cited nodes. The source is the main-20261015 cor-pur-affine-space-zero-section-purity.proof.md lines 13-24 ('Iterating the affine-line adjunctions... ordered product of these Cartier maps' and the Cartier/counit base-change sentence), and the route is unit sk-prop-an Step 1 (z=s'z_{c-1}, no Kunneth). The delivery has 0 new nodes and the statement is unchanged against side-live, where the item is still unsplit. The item is not in the drop list, and the parent's re-split note concerns the parent, not this item. Checks: Step 1 holds because t_i is a nonzerodivisor over any base, so the Cartier pullback hypothesis holds even for nonreduced B, and the finite projection formula's hypotheses hold for s with K=A_Y and L=q^*W_r (locally free rank one, finite Tor). Step 3: I recomputed PF_s(A_Y,P) sectionwise; a⊗b goes to (ab) restricted to z_{r+1}(B), which is mu∘sigma, and the flat, exact models make the derived map agree. Step 4: naturality of PF gives C_{r+1}=m'(c⊗1)pi_W^{-1}s_*C_r. The signs are (-1)^{4r}=1, and the swap on L⊗L is the identity for invertible L. Step 6: the composite-adjunction counit plus counit naturality gives d_r θ_{r+1}=Rz^!(u_r)θ_r. Step 8: the mate direction is correct (alpha=e: z'_*g^*→g_c^*z_*, transpose g_c^*ε∘eR_1), and invertibility is not assumed. Step 9 uses thm-sf-ambient-adjoint-class only on bounded-below étale-origin objects. Edge cases r=0, empty B, nonflat g, ell=2 and the A_{E,n+1} vs A_{E,n} indexing are all fine. The duplicate search (rg -L, sibling Q107 nodes) found no overlap. I accept the declared tool_uses: the finite projection formula, ambient adjoint class, closed-constant tensor, projection-formula map and cup functoriality, all used as generic black boxes. review_split's 'no such node' lines are a tool index artefact; those nodes exist. Batch-5 flag: cup-functoriality reaches lem-poincare-compatible-primitive-roots, which is only the pro-étale local triviality of mu_{ell^n} (a Tate-twist foundation, not part of the trace formula or Poincaré duality). It is already in the item's stmt_dep closure, and the new cites add 0 sec-trace-formula/sec-poincare-duality nodes. Accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoordinateSectionProductRecursion",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_recursion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.ordinaryWitness",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.OrdinaryWitnessEquation",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.ordinaryWitness_compare",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_recursion",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_baseChange",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_permutation",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_exponent",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_ordinary",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_ordinary_baseChange",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_section_product_ordinary_invariance"
+  ],
+  "file": "lean/Sheaf/Paper/CoordinateSectionProductRecursion.lean",
+  "statement": "theorem coordinate_section_product_recursion (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] : compactProduct P n B aB 0 = coordinateIdentity P n B ∧ thom P n B aB 0 = coordinateIdentityAdjunct P n B aB ∧ (∀ r : ℕ, compactProduct P n B aB (r + 1) = (coordinateComposition P n B r).hom ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient) (lastSection B r)).map (compactProduct P n B aB r) ≫ sectionArrow P n B aB r) ∧ ∀ r : ℕ, thom P n B aB (r + 1) = thom P n B aB r ≫ (rightDerivedUpperShriek (ModuleCat.{u + 1} (setting P n).Coefficient) (zero B r)).map (sectionAdjunct P n B aB r) ≫ coordinateExceptionalComposition P n B aB r",
+  "branch": "sheaf-dag",
+  "by": "Q138",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-196a93fe9"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-196a93fe9",
+  "group": "Q138",
+  "result": "fix",
+  "note": "Delta vs d0d1: zero_succ removed and replaced by NH's live CoordinateTowerNormalization.zero_successor (same binders and conclusion; landed owner node cited, no cycle); correct. F1 (H4/H12), missed by the f82c and d0d1 PASSes: def-pur-coordinate-zero-base-change's coordinateMap/coordinateSquare/coordinateChosenSquare duplicate the live AffineZeroPurity.spaceMap/zero_square/zeroSquare in the already-imported parent module AffineSpaceZeroSectionPurity (live 2026-10-22 09:24, before the first push). FIX: fixes/CoordinateZeroBaseChange.lean drops the three and uses the live ones; fixes/CoordinateSectionProductRecursion.lean renames coordinateMap to spaceMap in the two base-change theorems (item record unchanged); fixes/def-pur-coordinate-zero-base-change.json updates declarations, verbatim statement and note. One nt_compile --json run of all 5 modules: clean, 8.7/7.8/47.1/17.6/20.7 s. Advisories: lastSection and closedCompositionInverse also exist in NH's theorem module; earlier f82c/d0d1 advisories carry over."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203840-L-2862507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

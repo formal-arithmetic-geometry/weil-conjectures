@@ -1,0 +1,129 @@
+{
+ "id": "lem-coef-semilinear-evaluation-acyclic-lift",
+ "kind": "statement",
+ "title": "Acyclic lifts of semilinear coefficient evaluation",
+ "statement": "For a small site $J$ and an inverse sequence of commutative ring sheaves $B$ with strict semilinear systems [def-coef-semilinear-system-models, lem-pur-system-ringed-sequence-site], every acyclic cochain complex $Z$ of $B_n$-modules admits an acyclic cochain complex $L$ of systems and an isomorphism $\\operatorname{ev}_n(L)\\cong Z$. No flatness of the ring transitions or of the terms is required.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, strict semilinear systems; elementary right extension at a vertex, as detailed in the proof."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "For a B_n-module M define its system at k≥n by restriction along B_k→B_n and at k<n by zero. Above n the transition is the identity on the underlying sheaf, with the restriction-of-scalars composition isomorphism; all remaining transitions are zero. These maps satisfy identity and composition componentwise and define an additive functor. Restriction along B_n→B_n identifies its n-th evaluation with M, naturally.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply this functor termwise to Z. Each nonzero level complex is obtained by exact scalar restriction, hence is acyclic; all other levels are zero. Exactness of strict systems is componentwise, so the whole system complex is acyclic.",
+   "uses": [
+    "lem-pur-system-grothendieck"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the complex through the strict-system/sequence-module equivalence. The equivalence is exact, so it preserves acyclicity. Its unit, the identity scalar-restriction isomorphism at n and the sectionwise identity between sequence evaluation and semilinear evaluation give ev_n(L)≅Z.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-evaluation-topos",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-grothendieck",
+  "lem-pur-system-evaluation-topos",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; explicit right extension at one vertex, exactness checked componentwise, zero lower prefix. B3 all-acyclic-test K-flat preservation argument."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "date": "2026-10-22",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-system-evaluation-calculus",
+   "place": "Evaluation preserves K-flatness against every acyclic complex, without a flat-term hypothesis.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearEvaluationAcyclicLift",
+  "file": "lean/Sheaf/Paper/SemilinearEvaluationAcyclicLift.lean",
+  "declaration": "SheafOfModules.semilinearEvaluation_acyclicLift",
+  "statement": "theorem semilinearEvaluation_acyclicLift (Z : CochainComplex (WeilConjectures.SemilinearSections.Mod J (A n)) ℤ) (hZ : Z.Acyclic) : ∃ (L : CochainComplex (WeilConjectures.SemilinearSections.Systems J A τ) ℤ), L.Acyclic ∧ Nonempty ((((WeilConjectures.SemilinearSections.evaluation J A τ n).mapHomologicalComplex (.up ℤ)).obj L) ≅ Z)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic complex of modules at a vertex of an inverse diagram of rings lifts to an acyclic complex of semilinear systems by restriction above the vertex and zero below",
+   "results": "8 hits: acyclicity and support infrastructure, no strict semilinear system lift.",
+   "date": "2026-10-22",
+   "verdict": "No matching lift theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Acyclic",
+   "results": "12 hits: acyclicity, opposite complexes, support, and the homotopy-quotient acyclicity criterion. No right extension of strict semilinear systems.",
+   "date": "2026-10-22",
+   "verdict": "No matching lift theorem; use exact-functor mapping and homology isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*[Ll]ift|[Ll]ift.*acyclic|evaluation.*[Rr]ight.*[Ee]xtension",
+   "results": "0 Mathlib hits. Local library right-extension modules concern a specific l-power tower and do not supply this arbitrary-ring tower statement.",
+   "date": "2026-10-22",
+   "verdict": "No duplicate generic lift found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every acyclic complex at one level of an inverse system of modules lifts to an acyclic complex of systems by restriction of scalars above that level and zero below.",
+   "results": "8 hits about acyclic complexes, restrictions and truncations; none constructs a lift for varying-coefficient systems.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing project interfaces and the explicit construction in this module."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-73b77",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T145606-L-2021248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-73b77",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T145606-L-2021248",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules and 4 node files vs clones/live (diff), change records vs the 3 interface changes, all 44 direct importers compiled against the sandbox-built delivered item (44/44 rc 0), #print axioms of the 9 closed holes and new theorems (sorryAx only through upstream scalarHomTensorComparison_exists and the item's remaining coefficientEvaluationTensorIso_exists)"
+ }
+}

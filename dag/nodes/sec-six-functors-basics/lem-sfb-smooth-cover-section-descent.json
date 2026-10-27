@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-smooth-cover-section-descent",
+ "kind": "statement",
+ "title": "Sections of quasi-coherent algebras descend along smooth scheme covers",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\mathcal Z$ be an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack]. Let $\\mathcal C$ be a quasi-coherent commutative $\\mathcal O_{\\mathcal Z}$-algebra, with big fppf site, precomposition restriction and global sections as in [def-sfb-stack-quasi-coherent-algebra]. Let $(p_i:U_i\\to\\mathcal Z)_{i\\in I}$ be a small jointly surjective family of representable smooth morphisms from schemes [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-size-convention]. Representable means representable by algebraic spaces [def-trf-algebraic-space]; smoothness is tested on their etale scheme charts. Joint surjectivity means that after every scheme base change these maps cover all points of the target. Write $R_{ij}=U_i\\times_{\\mathcal Z}U_j$, an algebraic space, with projections $r_1,r_2$, using [def-sfb-stable-pointed-moduli-groupoids]. Pullback gives a natural ring isomorphism $$\\Gamma(\\mathcal Z,\\mathcal C)\\ \\cong\\ \\{(c_i)\\in\\prod_{i\\in I}\\Gamma(U_i,p_i^*\\mathcal C):r_1^*c_i=r_2^*c_j\\text{ in }\\Gamma(R_{ij},\\mathcal C|_{R_{ij}})\\text{ for all }i,j\\}.$$ Thus every compatible family descends uniquely, and equality of global sections can be checked on the $U_i$. Neither the $U_i$ nor the relation spaces are required affine or quasi-compact, and neither $\\mathcal Z$ nor $\\mathcal C$ is subject to a finiteness or Deligne--Mumford hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 076S (lemma-map-from-quasi-coherent), applied to the structure module and a quasi-coherent algebra, in the smooth presentation of Tag 06WV (lemma-quasi-coherent-algebraic-stack)(1). It identifies maps from the structure sheaf, hence sections, with the compatible chart maps. Apply to the disjoint-union smooth atlas; relation objects are algebraic spaces, not assumed schemes or affine. Ring operations are pointwise."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Put $x_i=p_i\\in\\mathcal Z(U_i)$. With the precomposition restriction and global-section convention of [def-sfb-stack-quasi-coherent-algebra], a section on $U_i$ is an element of $\\mathcal C(x_i)$: evaluate its compatible family at $\\mathrm{id}_{U_i}$, and recover the family by restriction. A section on $R_{ij}$ is likewise a compatible family on all its scheme tests. In the $2$-fibre-product description [def-sfb-stable-pointed-moduli-groupoids], two arrows from an object $z\\in\\mathcal Z(W)$ to $x_i,x_j$ determine a map $W\\to R_{ij}$, with the isomorphism between the two induced objects given by those arrows. The assumed equality on $R_{ij}$ therefore says that the two restrictions of $c_i,c_j$ to $\\mathcal C(z)$ agree. This includes $i=j$ and different arrows to the same chart, so automorphisms are included in the compatibility condition.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TP (definition-inherited-topologies), 06TR (definition-sheaves); objectwise sheaf argument underlying Tag 076S (lemma-map-from-quasi-coherent). The assembly argument is written by Q58 from the definitions."
+   }
+  },
+  {
+   "text": "For each object $x\\in\\mathcal Z(T)$ form the algebraic spaces $P_i=T\\times_{\\mathcal Z}U_i$; these exist by representability in the hypotheses. Their projections to $T$ are smooth by [lem-sfb-stack-smooth-permanence], and jointly surjective by the hypothesis on $(p_i)$. Choose a surjective etale scheme chart $W_i\\to P_i$ using [def-trf-algebraic-space]. The composite $W_i\\to T$ is smooth because smoothness of the space map $P_i\\to T$ means smoothness of its composites with representable etale scheme charts [def-sfb-algebraic-moduli-stack]. Since each $W_i\\to P_i$ is surjective, the $W_i\\to T$ are jointly surjective. It is flat and locally of finite presentation by [lem-pc-smooth-flat]. Consequently $(W_i\\to T)_i$ is an fppf covering by [def-pc-fppf-site]. Each chart supplies arrows $w_i\\to x$ and $w_i\\to x_i$, where $w_i\\in\\mathcal Z(W_i)$ is its induced object, with the specified $2$-isomorphism in the fibre product. Thus it is also a cover of $x$ in the big fppf site of [def-sfb-stack-quasi-coherent-algebra]. All index sets and charts are in the stipulated size convention; no finite subcover is taken.",
+   "uses": [
+    "lem-sfb-stack-smooth-permanence",
+    "def-trf-algebraic-space",
+    "lem-pc-smooth-flat",
+    "def-pc-fppf-site",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TP (definition-inherited-topologies), 06TR (definition-sheaves); objectwise sheaf argument underlying Tag 076S (lemma-map-from-quasi-coherent). The assembly argument is written by Q58 from the definitions."
+   }
+  },
+  {
+   "text": "Restrict each $c_i$ along $w_i\\to x_i$, obtaining $a_i\\in\\mathcal C(w_i)$. On $W_i\\times_TW_j$, the two induced arrows to $x_i,x_j$ have their specified common object over $x$; step 1 makes the restrictions of $a_i,a_j$ equal. The sheaf equalizer in [def-weil-pbc-sites-and-cohomology], applied to the underlying sheaf of [def-sfb-stack-quasi-coherent-algebra], gives a unique $s_x\\in\\mathcal C(x)$ restricting to these $a_i$. More generally the same construction applies to any fppf cover of $x$ equipped with arrows to the $x_i$. Two such covers give the same $s_x$: their pairwise fibre products over $T$ form a common covering refinement by the base-change and composition axioms of the site; on each refined member the restrictions are equal by step 1, and the injectivity part of the sheaf equalizer gives equality on $x$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TP (definition-inherited-topologies), 06TR (definition-sheaves); objectwise sheaf argument underlying Tag 076S (lemma-map-from-quasi-coherent). The assembly argument is written by Q58 from the definitions."
+   }
+  },
+  {
+   "text": "For an arbitrary arrow $b:y\\to x$ over $T'\\to T$, pull the covering used for $x$ back to $T'$. It is a covering of $y$ by the base-change axiom [def-weil-pbc-sites-and-cohomology], and its members retain their arrows to the same $x_i$. By functoriality of the restriction maps of [def-sfb-stack-quasi-coherent-algebra], $b^*s_x$ restricts there to the corresponding pullbacks of $c_i$. Step 3 and its independence of the chosen cover imply $b^*s_x=s_y$. Thus $(s_x)_x$ is a global section in precisely the compatible-family convention of that definition. When $x=x_i$, compare with the identity covering of $x_i$, equipped with its identity arrow to $x_i$; step 3 gives $s_{x_i}=c_i$. This proves existence of a global section inducing the prescribed family, including its invariance under all arrows over identity scheme maps.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TP (definition-inherited-topologies), 06TR (definition-sheaves); objectwise sheaf argument underlying Tag 076S (lemma-map-from-quasi-coherent). The assembly argument is written by Q58 from the definitions."
+   }
+  },
+  {
+   "text": "If two global sections restrict equally to all $U_i$, evaluate them at any object $x$ and then on the cover from step 2. Their values on each covering member equal the pullbacks of their values at $x_i$, hence agree. The injectivity in the sheaf equalizer [def-weil-pbc-sites-and-cohomology] gives equality at $x$, so the global families are equal. Pullback preserves addition, multiplication and $1$ by [def-sfb-stack-quasi-coherent-algebra]; hence the now bijective restriction map is a ring isomorphism onto the displayed compatible-family subring. Its naturality follows because it is restriction on every component, and a map commuting with this restriction commutes with its unique inverse. If $I$ is empty, joint surjectivity forces every scheme admitting an object of $\\mathcal Z$ to be empty; the empty fppf cover then forces a unique section at every such object. The same argument therefore gives the one-element ring on both sides.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TP (definition-inherited-topologies), 06TR (definition-sheaves); objectwise sheaf argument underlying Tag 076S (lemma-map-from-quasi-coherent). The assembly argument is written by Q58 from the definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-smooth-permanence",
+  "def-trf-algebraic-space",
+  "lem-pc-smooth-flat",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Explicit objectwise proof from Tags 06TP and 06TR, Sites Tags 00VH/00VM/00VR, and smooth flatness Tags 01VE/01VF; comparison with Tag 076S and presentation statement Tag 06WV(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a quasi coherent sheaf on an algebraic stack equal the equalizer of sections on a smooth scheme atlas and its relation algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)} →\\n    (s : (j : D.J) → F.val.obj (Opposite.op (D.U j))) →\\n      (∀ (i j : D.J),\\n          F.val.map (D.f i j).op (s i) =\\n            F.val.map (CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given gluing data $ D $ for schemes and a sheaf $ F $ on the Zariski topology with values in a category of types, this constructs the value of $ F $ at the glued scheme $ D.\\text{glued} $ by applying t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)}\\n  (s : (j : D.J) → F.val.obj (Opposite.op (D.U j)))\\n  (h :\\n    ∀ (i j : D.J),\\n      F.val.map (D.f i j).op (s i) = F.val.map (CategoryTheory.CategoryStruct.comp (D.f j i).op (D.t i \", \"doc\": \"For a sheaf $ F $ on the Zariski topology and gluing data $ D $ for schemes, given compatible sections $ s_j $ over the indexing category $ J $ satisfying the sheaf condition, the constructed global s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (M : X.Modules), M.presheaf.IsSheaf\", \"doc\": \"For any sheaf of modules $ M $ over the structure sheaf of a scheme $ X $, the underlying presheaf of abelian groups on $ X $ satisfies the sheaf condition with respect to open covers of the topologic\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"{X : TopCat} →\\n  (F : TopCat.Sheaf CommRingCat X) →\\n    (U V : TopologicalSpace.Opens ↑X) →\\n      F.val.obj (Opposite.op (U ⊔ V)) ≅\\n        {\\n          carrier :=\\n            ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                    (RingHom.fst ↑(F.val.obj (Opposit\", \"doc\": \"For a sheaf $ F $ on a topological space $ X $ and open subsets $ U, V \\\\subseteq X $, there is an isomorphism between the sections $ F(U \\\\cup V) $ and the equalizer of the product $ F(U) \\\\times F(V) $\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (f g : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) f =\\n        (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.\", \"doc\": \"Let $X$ be a scheme, $U$ an open subset of $X$, and $\\\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\\\mathcal{U}.f(i)$ agree o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general site equalizer/sheaf-condition theorems and scheme gluing are present, but the algebraic-stack smooth presentation and the global-section identification with relation algebraic spaces require additional mathematics; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth atlas descent glues invariant sections of quasi coherent algebras on arbitrary algebraic stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData → AlgebraicGeometry.SheafedSpace.GlueData CommRingCat\", \"doc\": \"The gluing data for sheafed spaces over the category of commutative rings, constructed by applying the forgetful functor from locally ringed spaces to sheafed spaces. This transforms the original glui\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_inv_apply\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a smooth sheaf of commutative rings on a manifold with corners, the inverse of the forgetful functor's stalk isomorphism applied to the colimit inclusion morphism equals the concrete category homo\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"The composition of the colimit inclusion morphism with the inverse of the forgetful functor's stalk isomorphism equals the composition through the concrete category's hom functor, ensuring commutativi\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_inv\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a point $x$ in a manifold with corners $M$, the composition of the colimit inclusion morphism associated to open neighborhoods of $x$ with the inverse of the forgetful functor isomorphism (which f\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_hom_assoc\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a smooth sheaf of commutative rings on a manifold with corners, the composition of the forgetful functor's induced homomorphism with the colimit inclusion morphism satisfies associativity: the com\"}\n  {\"name\": \"smoothSheafCommRing.ι_evalHom\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a point $x$ in a manifold $M$ and an open neighborhood $U$ of $x$, the composition of the inclusion morphism from the colimit (stalk) of the opposite open neighborhoods inclusion with the evaluati\"}\n  {\"name\": \"smoothSheafCommRing.ι_forgetStalk_hom\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a smooth sheaf of commutative rings on a manifold with corners, the composition of the forgetful functor (removing ring structure) with the canonical inclusion from a neighborhood section to the s\"}\n  {\"name\": \"smoothSheafCommRing.ι_evalHom_assoc\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For a smooth sheaf of commutative rings $\\\\mathcal{F}$ on a manifold $M$, the composition of the colimit inclusion morphism $\\\\iota_U: \\\\mathcal{F}(U) \\\\to \\\\mathcal{F}_x$ (from an open neighborhood $U$ of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general site equalizer/sheaf-condition theorems and scheme gluing are present, but the algebraic-stack smooth presentation and the global-section identification with relation algebraic spaces require additional mathematics; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"equalizer\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Equalizer.Presieve.sheaf_condition\", \"module\": \"Mathlib.CategoryTheory.Sites.EqualizerSheafCondition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (P : CategoryTheory.Functor Cᵒᵖ (Type (max v u))) {X : C} (R : CategoryTheory.Presieve X) [R.HasPairwisePullbacks] : CategoryTheory.Presieve.IsSheafFor P R ↔ Nonempty (CategoryTheory.Limits.IsLimit (CategoryTheory.Limits.Fork.ofι (CategoryTheory.Equal\", \"doc\": \"`P` is a sheaf for `R`, iff the fork given by `w` is an equalizer.\"}\n  {\"name\": \"CategoryTheory.Equalizer.Sieve.equalizer_sheaf_condition\", \"module\": \"Mathlib.CategoryTheory.Sites.EqualizerSheafCondition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (P : CategoryTheory.Functor Cᵒᵖ (Type (max v u))) {X : C} (S : CategoryTheory.Sieve X) : CategoryTheory.Presieve.IsSheafFor P S.arrows ↔ Nonempty (CategoryTheory.Limits.IsLimit (CategoryTheory.Limits.Fork.ofι (CategoryTheory.Equalizer.forkMap P S.arro\", \"doc\": \"`P` is a sheaf for `S`, iff the fork given by `w` is an equalizer.\"}\n  {\"name\": \"CategoryTheory.Equalizer.Presieve.Arrows.sheaf_condition\", \"module\": \"Mathlib.CategoryTheory.Sites.EqualizerSheafCondition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (P : CategoryTheory.Functor Cᵒᵖ (Type w)) {B : C} {I : Type t} [Small.{w, t} I] (X : I → C) (π : (i : I) → X i ⟶ B) [(CategoryTheory.Presieve.ofArrows X π).HasPairwisePullbacks] : CategoryTheory.Presieve.IsSheafFor P (CategoryTheory.Presieve.ofArrows \", \"doc\": \"`P` is a sheaf for `Presieve.ofArrows X π`, iff the fork given by `w` is an equalizer.\"}\n  {\"name\": \"CategoryTheory.Equalizer.Presieve.isSheafFor_singleton_iff_of_hasPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.EqualizerSheafCondition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor Cᵒᵖ (Type u_1)} {X Y : C} {f : X ⟶ Y} [CategoryTheory.Limits.HasPullback f f] : CategoryTheory.Presieve.IsSheafFor F (CategoryTheory.Presieve.singleton f) ↔ Nonempty (CategoryTheory.Limits.IsLimit (CategoryTheory.Limits.For\", \"doc\": \"Special case of `isSheafFor_singleton_iff` with `c = pullback.cone f f`.\"}\n  {\"name\": \"CategoryTheory.Equalizer.Presieve.isSheafFor_singleton_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.EqualizerSheafCondition\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor Cᵒᵖ (Type u_1)} {X Y : C} {f : X ⟶ Y} (c : CategoryTheory.Limits.PullbackCone f f) (hc : CategoryTheory.Limits.IsLimit c) : CategoryTheory.Presieve.IsSheafFor F (CategoryTheory.Presieve.singleton f) ↔ Nonempty (CategoryTheo\", \"doc\": \"The sheaf condition for a single morphism is the same as the canonical fork diagram being\\nlimiting.\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_multiequalizer\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] (J : CategoryTheory.GrothendieckTopology C) (P : CategoryTheory.Functor Cᵒᵖ A) [∀ (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] : CategoryTheory.Presheaf.IsSheaf J P\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.equalizerSieve\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] {FD : D → D → Type u_1} {CD : D → Type w} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [CategoryTheory.ConcreteCategory D FD] {F : CategoryTheory.Functor Cᵒᵖ D} {X : Cᵒᵖ} (x y : CategoryTheory.ToType \", \"doc\": \"If `F : Cᵒᵖ ⥤ D` is a presheaf with values in a concrete category, if `x` and `y` are\\nelements in `F.obj X`, this is the sieve of `X.unop` consisting of morphisms `f`\\nsuch that `F.map f.op x = F.map f\"}\n  {\"name\": \"CategoryTheory.Presheaf.equalizerSieve_self_eq_top\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] {FD : D → D → Type u_1} {CD : D → Type w} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [CategoryTheory.ConcreteCategory D FD] {F : CategoryTheory.Functor Cᵒᵖ D} {X : Cᵒᵖ} (x : CategoryTheory.ToType (F\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.equalizerSieve_eq_top_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] {FD : D → D → Type u_1} {CD : D → Type w} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [CategoryTheory.ConcreteCategory D FD] {F : CategoryTheory.Functor Cᵒᵖ D} {X : Cᵒᵖ} (x y : CategoryTheory.ToType \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.equalizerSieve_mem\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] {FD : D → D → Type u_1} {CD : D → Type w} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTopology C) {F₁ F₂ : CategoryTheory.Functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.IsLocallyInjective.equalizerSieve_mem\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {D : Type u'} {inst✝¹ : CategoryTheory.Category.{v', u'} D} {FD : D → D → Type u_1} {CD : D → Type w} {inst✝² : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)} {inst✝³ : CategoryTheory.ConcreteCategory D FD} {J : CategoryTheory.GrothendieckTopolog\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Presheaf.equalizerSieve_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyInjective\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] {FD : D → D → Type u_1} {CD : D → Type w} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [CategoryTheory.ConcreteCategory D FD] {F : CategoryTheory.Functor Cᵒᵖ D} {X : Cᵒᵖ} (x y : CategoryTheory.ToType \", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general site equalizer/sheaf-condition theorems and scheme gluing are present, but the algebraic-stack smooth presentation and the global-section identification with relation algebraic spaces require additional mathematics; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*atlas|atlas.*smooth|algebraic.?stack|equalizer.*sections",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"line\": \"132\", \"text\": \"`chartAt x` of the atlas containing `x` in its source: in the smooth case, this is convenient to\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"33\", \"text\": \"`Atlas.lean` for smoothness of atlas members and local structomorphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general site equalizer/sheaf-condition theorems and scheme gluing are present, but the algebraic-stack smooth presentation and the global-section identification with relation algebraic spaces require additional mathematics; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections equalizer for a smooth presentation of an algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.HasGlobalSectionsFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₂) → [inst_1 : CategoryTheory.Category.{v₂, u₂} A] → [CategoryTheory.HasWeakSheafify J A] → Prop\", \"doc\": \"The property that the constant sheaf functor has a left adjoint, called the global sections functor, which assigns to each sheaf its global sections.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γ_obj\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(X : LocallyRingedSpace.{u}ᵒᵖ) : Γ.obj X = X.unop.presheaf.obj (op ⊤)\", \"doc\": \"For any locally ringed space $X$, the global sections functor $\\\\Gamma$ applied to $X$ yields the global sections of the structure sheaf of $X$, i.e., $\\\\Gamma(X) = \\\\mathcal{O}_X(X)$, where $\\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ = Scheme.forgetToLocallyRingedSpace.op ⋙ LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": LocallyRingedSpace\", \"doc\": \"Given two morphisms $ f, g : X \\to Y $ in the category of locally ringed spaces, their coequalizer exists and is constructed as the coequalizer in the category of sheafed spaces over commutative rings,\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace\", \"type\": \": (PresheafedSpace C)ᵒᵖ ⥤ C\", \"doc\": \"The functor $\\\\Gamma$ assigns to each presheafed space over a category $\\\\mathcal{C}$ its global sections (the value of its presheaf at the terminal open set), and to each morphism of presheafed spaces \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Schemeᵒᵖ) : Γ.obj X = Γ(unop X, ⊤)\", \"doc\": \"For any object $X$ in the opposite category of schemes, the global sections functor $\\\\Gamma$ evaluated at $X$ is equal to the global sections of the scheme corresponding to $X$ over its entire topolog\"}\n  {\"name\": \"ContMDiffSection.ext\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"(h : ∀ x, s x = t x) : s = t\", \"doc\": \"If two smooth sections $ s $ and $ t $ of a vector bundle over a manifold with corners agree at every point $ x $, then $ s = t $.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {f g s : Γ(X, ⊤)}\\n  (hfg : f |_ X.basicOpen s = g |_ X.basicOpen s) : ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: general site equalizer/sheaf-condition theorems and scheme gluing are present, but the algebraic-stack smooth presentation and the global-section identification with relation algebraic spaces require additional mathematics; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|smooth.*atlas|atlas.*smooth|equalizer.*sections",
+   "results": "Returned 2 hits: Mathlib/Geometry/Manifold/ChartedSpace.lean, Mathlib/Geometry/Manifold/ContMDiff/Defs.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general sheaf results do not establish that the specified representable smooth family covers the big stack site, or translate its algebraic-space relation sections; those geometric and definitional steps are explicit in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a sheaf on the big fppf site of an algebraic stack are compatible sections on a smooth atlas",
+   "results": "Returned 8 hits: AlgebraicGeometry.termΓ(_,_), CategoryTheory.Sheaf.ΓRes, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.existsUnique_section, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_, CategoryTheory.Sheaf.ΓObjEquivSections, CategoryTheory.Sheaf.Γ, CategoryTheory.HasGlobalSectionsFunctor, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general sheaf results do not establish that the specified representable smooth family covers the big stack site, or translate its algebraic-space relation sections; those geometric and definitional steps are explicit in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"equalizer\"",
+   "results": "Returned 12 hits: CategoryTheory.Equalizer.Presieve.sheaf_condition, CategoryTheory.Equalizer.Sieve.equalizer_sheaf_condition, CategoryTheory.Equalizer.Presieve.Arrows.sheaf_condition, CategoryTheory.Equalizer.Presieve.isSheafFor_singleton_iff_of_hasPullback, CategoryTheory.Equalizer.Presieve.isSheafFor_singleton_iff, CategoryTheory.Presheaf.isSheaf_iff_multiequalizer, CategoryTheory.Presheaf.equalizerSieve, CategoryTheory.Presheaf.equalizerSieve_self_eq_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general sheaf results do not establish that the specified representable smooth family covers the big stack site, or translate its algebraic-space relation sections; those geometric and definitional steps are explicit in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf on an algebraic stack descend uniquely along a smooth surjective family from schemes with algebraic space overlaps",
+   "results": "Returned 8 hits: AlgebraicGeometry.SheafedSpace.hom_stalk_ext, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, AlgebraicGeometry.Scheme.OpenCover.ext_elem. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general sheaf results do not establish that the specified representable smooth family covers the big stack site, or translate its algebraic-space relation sections; those geometric and definitional steps are explicit in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_section|section_ext|CoversTop",
+   "results": "Returned 10 hits: Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean, Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean, Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean, Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean, Mathlib/CategoryTheory/Sites/CoversTop/Basic.lean, Mathlib/CategoryTheory/Sites/CoversTop/Over.lean, Mathlib/CategoryTheory/Sites/CoversTop/Over.lean, Mathlib/CategoryTheory/Sites/CoversTop/Over.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general sheaf results do not establish that the specified representable smooth family covers the big stack site, or translate its algebraic-space relation sections; those geometric and definitional steps are explicit in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible elements on a family of objects covering the terminal sheaf extend uniquely to a global section of a sheaf on a site",
+   "results": "Returned 8 hits: CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.existsUnique_section, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_apply, CategoryTheory.GrothendieckTopology.CoversTop.sections_ext, CategoryTheory.Functor.IsCoverDense.sheaf_eq_amalgamation, CategoryTheory.GrothendieckTopology.CoversTop.ext, CategoryTheory.Presheaf.IsSheaf.existsUnique_amalgamation_ofArrows, CategoryTheory.Presieve.isSheafFor_arrows_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general sheaf results do not establish that the specified representable smooth family covers the big stack site, or translate its algebraic-space relation sections; those geometric and definitional steps are explicit in this split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-algebra-pushforward",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Sections of quasi-coherent algebras descend along smooth scheme covers",
+   "via": [
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-cover-section-descent",
+  "worker": "stage1",
+  "summary": "Q58 wrote an objectwise big-fppf sheaf gluing proof, checking scheme refinements of all representable smooth base changes, the full 2-isomorphism compatibility on algebraic-space relations, naturality for arbitrary arrows, uniqueness and ring operations. Reused the existing smooth-permanence and Mathlib smooth-flat nodes; no new nodes and no strengthened hypotheses.",
+  "blueprint": "Supports the existing from.place chain: det-thm-sf-ctf-stability-direct-images proof (3), via adequate-algebra-pushforward Lemma 4.1.7 power-lift descent. Latest direct-image proof (3) and current unit read; this is a below-unit auxiliary argument. blueprint_refs ancestor currently returns None, matching the inherited from.node; the live metadata is retained. Whole-blueprint searches for 076S, smooth cover and sections found no exact duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-2ee788e83",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-2ee788e83 (reviewer sub-agent of L); spot-checked: Read the item's five steps and every cited statement: def-sfb-stack-quasi-coherent-algebra, stable-pointed-moduli-groupoids, algebraic-moduli-stack, lem-sfb-stack-smooth-permanence, def-trf-algebraic-space, lem-pc-smooth-flat, def-pc-fppf-site and def-weil-pbc-sites-and-cohomology. Checked the statement against Stacks 076S (stacks-sheaves.tex l.2247, with F=O and H=C) and 06WV(1). The statement is unchanged and no hypothesis is weakened; quasi-coherence is not needed. There are no new nodes, and the item has no re-split note. Step 1 (Yoneda plus the 2-fibre-product triple, i=j included), step 3 (gluing by the sheaf equalizer, independence of the cover via fibre-product refinement), step 4 (compatibility along any b:y→x, s_{x_i}=c_i from the identity cover) and step 5 (injectivity, ring map, naturality) are correct. Edge cases checked: empty I (zero ring on both sides), identity cover, repeated charts and stabilisers, infinite non-quasi-compact covers. No duplicates: the cartesian-section-covering-restriction, etale-smooth-atlas-fppf-descent, qcoh-flat-atlas-exactness and affine-groupoid descent nodes state other things. No SGA, no off-unit non-Mathlib tool, no cycle. FIX in step 2: 'smoothness of P_i→T is tested on these etale charts' is the definition of a smooth space→scheme map in def-sfb-algebraic-moduli-stack, which step 2 did not cite. I added that citation to the text, to the step's uses and to proof_deps. I also added the omitted sentence that joint surjectivity passes from P_i→T to W_i→T because each W_i→P_i is surjective. Corrected item in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-cover-section-descent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCoverSectionDescent",
+  "declaration": "CategoryTheory.smoothCover_section_descent",
+  "declarations": [
+   "CategoryTheory.moduliChartSections",
+   "CategoryTheory.moduliCompatibleChartSections",
+   "CategoryTheory.smoothCover_section_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCoverSectionDescent.lean",
+  "statement": "theorem smoothCover_section_descent (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (A : ModuliAlgebraSheaf F hF.1.1) (hA : IsQuasicoherentModuliAlgebra A) (I : Type t) (U : I → Over (Spec (.of k))) (p : ∀ i : I, BasedFunctor (discreteModuli (yoneda.obj (U i))) F) (hsmooth : ∀ (i : I) (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace (Spec (.of k))) (q : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (p i) T t Z q ∧ SpaceMapIsSmooth Z T q) (hcover : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F) (x : T.left), ∃ (i : I) (Z : AlgebraicSpace (Spec (.of k))) (q : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (p i) T t Z q ∧ ∃ (V : Over (Spec (.of k))) (b : yoneda.obj V ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b ∧ ∃ y : V.left, (yoneda.preimage (b ≫ q)).left y = x) : ∃! e : moduliGlobalSectionsRing A.right ≃+* moduliCompatibleChartSections p A.right, ∀ (s : moduliGlobalSectionsRing A.right) (i : I) (x : (discreteModuli (yoneda.obj (U i))).obj), ((e s).val i).val (op x) = s.val (op ((p i).obj x))",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Literal precomposition chart sections and their relation-compatible subring use all objects and all comparison isomorphisms of the recorded 2-fibre product. The unique ring isomorphism is normalized on every chart test, specifying canonical pullback and its naturality. Independent index universe t; no affine, quasi-compact, finiteness, or Deligne–Mumford restrictions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87f86169b",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read item node, Stacks 076S/06WV(1) source place, all stmt_dep declarations (moduliTwoFiberProduct, HasSpaceBaseChange, SpaceMapIsSmooth/IsSmoothModuliAtlas, SpaceMapIsSurjective, ModuliAlgebraSheaf, IsQuasicoherentModuliAlgebra, moduliGlobalSectionsRing) and the delivered module. Hypotheses match exactly: field, algebraic stack, qcoh algebra, small family in independent universe t, hsmooth = representable+smooth tested on étale charts, hcover = pointwise joint surjectivity equivalent to SpaceMapIsSurjective union. Compatible subring is tested on all 2-fibre-product objects with comparison iso (i=j and automorphisms included); conclusion is a single ∃! ring iso normalized as pullback on every chart test. Empty I, zero algebra, empty charts OK; no extra finiteness/affine/DM assumptions. Node differs from live only in lean; lean.statement verbatim in file; no parallel landing; moduliSchemeTestSections is a different notion; docstrings with source+blueprint+5 proof steps; helpers non-hollow; sorry-only proof; report has Worker report and Second reading sections. No file changed, no compile run."
+ }
+}

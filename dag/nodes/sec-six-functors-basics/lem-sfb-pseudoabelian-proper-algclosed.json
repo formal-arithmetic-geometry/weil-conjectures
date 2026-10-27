@@ -1,0 +1,382 @@
+{
+ "id": "lem-sfb-pseudoabelian-proper-algclosed",
+ "kind": "statement",
+ "title": "Pseudo-abelian group varieties over an algebraically closed field are proper",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed and normal subgroup schemes as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Let $Q$ be a smooth connected separated finite-type $k$-group scheme. Assume that every smooth connected affine closed normal subgroup scheme $S\\hookrightarrow Q$ is trivial, meaning that its identity morphism $\\operatorname{Spec}k\\to S$ is an isomorphism. Then $Q$ is proper over $k$ [def-weil-proper-morphism]. No commutativity assumption is imposed on $Q$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 8.3, printed p.149, and Theorem 8.26 with its proof, printed p.154, specialized to an algebraically closed field. Complete means proper in this finite-type separated setting. No Stacks tag states the pseudo-abelian properness theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Prove the assertion simultaneously for all such $k$-groups by strong induction on $d=\\dim G$. The dimension clause of [lem-sfb-affine-normal-subgroup-products] makes $d$ a finite nonnegative integer. Apply [lem-sfb-general-group-centre-zero-dimension-affine] to form $Z=Z(G)$ and $A=(Z^0)_{\\mathrm{red}}$, with $\\dim A=\\dim Z$. By [lem-sfb-locally-algebraic-group-identity-component], applied to $Z$, $A$ is a smooth connected separated finite-type group. Its inclusion in $G$ is closed: compose the closed inclusions $A\\hookrightarrow Z^0\\hookrightarrow Z\\hookrightarrow G$ (locally the composite of two quotient ring maps is a quotient). It is central by the defining property of $Z$.",
+   "uses": [
+    "lem-sfb-affine-normal-subgroup-products",
+    "lem-sfb-general-group-centre-zero-dimension-affine",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26, p.154, induction on dimension; Proposition 1.92, pp.33--34; Corollary 1.39, p.18."
+   }
+  },
+  {
+   "text": "If $\\dim A=0$, then $\\dim Z=0$, so [lem-sfb-general-group-centre-zero-dimension-affine] makes $G$ affine. The identity inclusion $G\\hookrightarrow G$ is a smooth connected affine closed normal subgroup, hence the hypothesis says that $e_G:\\operatorname{Spec}k\\to G$ is an isomorphism. Its inverse is the structure morphism, which is finite (on affine coordinates an isomorphism is finite). It is proper by [lem-weil-pbc-finite-proper]. This case includes $d=0$, since the dimension clause in step 1 bounds $\\dim A$ by $d$.",
+   "uses": [
+    "lem-sfb-general-group-centre-zero-dimension-affine",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26, p.154, zero-dimensional-centre case. The pseudo-abelian hypothesis directly makes an affine G trivial; no anti-affineness assumption is needed."
+   }
+  },
+  {
+   "text": "Now $\\dim A>0$. If $A$ were not proper, [lem-sfb-rosenlicht-nonproper-affine-subgroup] applied to $A$ would give a smooth connected affine closed subgroup $U\\hookrightarrow A$ with $\\dim U>0$. Its composite inclusion in $G$ is closed (compose quotient maps locally) and normal: after every algebra extension, all its elements commute with all elements of $G$, since $A$ is central. Thus the hypothesis makes $U$ trivial. But $\\operatorname{Spec}k$ has dimension zero: it has a single point, hence no strict chain of nonempty irreducible closed subsets. This contradicts $\\dim U>0$. Consequently $A$ is proper, and is an abelian variety by [def-sc-abelian-variety].",
+   "uses": [
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26, p.154, noncomplete-central-component case; Proposition 8.25, pp.153--154."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rosenlicht-connected-almost-complement] to the central abelian subvariety $A\\hookrightarrow G$. Obtain a smooth connected closed normal subgroup $N$ and a faithfully flat finite-presentation homomorphism $m:A\\times_kN\\to G$, with finite kernel and $\\dim N=\\dim G-\\dim A<d$. In particular $N$ has the smoothness, connectedness, separatedness and finite-type hypotheses needed for induction. For separatedness one can restrict the closed diagonal of $G$ to $N\\times N$; finite type also follows from the stated finite-type group convention in the cited lemma.",
+   "uses": [
+    "lem-sfb-rosenlicht-connected-almost-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26, p.154, complete-central-component case; Theorem 8.24, p.153."
+   }
+  },
+  {
+   "text": "Check the remaining induction hypothesis for $N$. Let $S\\hookrightarrow N$ be any smooth connected affine closed normal subgroup. The composite $S\\hookrightarrow G$ is closed by composition of local quotient ring maps. To see normality, take a commutative $k$-algebra $B$, $g\\in G(B)$ and $s\\in S(B)$. Pulling back $m$ gives an fpqc covering on which $g=an$ with $a\\in A$ and $n\\in N$; this is a covering by [def-weil-pbc-fpqc-covering, lem-weil-pbc-fpqc-covering-axioms]. Locally $gsg^{-1}=nsn^{-1}\\in S$, because $a$ is central and $S$ is normal in $N$. These local lifts to $S$ agree on overlaps: their images in $G$ agree, and $S\\hookrightarrow G$ is a monomorphism. By [lem-weil-pbc-fpqc-representable-descent] they glue to an $S$-point, whose image equals $gsg^{-1}$ by uniqueness in the same lemma. Thus $S$ is normal in $G$, so it is trivial by the hypothesis on $G$. Induction applies to $N$ and proves that $N$ is proper.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26, p.154, assertion that every affine connected normal subgroup of the almost-complement is normal in G; fpqc local multiplication makes the assertion valid on all algebra points."
+   }
+  },
+  {
+   "text": "Both $A$ and $N$ are proper, so $A\\times_kN$ is proper: its projection to $N$ is proper by [lem-weil-pbc-proper-base-change], and compose with $N\\to\\operatorname{Spec}k$ by [lem-weil-pbc-proper-composition]. Apply [lem-weil-pbc-scheme-theoretic-image-proper] to $m:A\\times_kN\\to G$, whose target is separated of finite type. Its scheme-theoretic image is proper over $k$. It is all of $G$: surjectivity of $m$ makes the image have all of $|G|$, and $G$ is reduced by [sbc-lem-smooth-geometrically-reduced], applied over $k$. On any affine open $\\operatorname{Spec}B$ of $G$, the ideal $I$ of the image lies in every prime ideal since $V(I)=\\operatorname{Spec}B$, hence in the nilradical, which is zero because $B$ is reduced. Thus the image ideal is zero. Hence $G$ is proper. The induction proves the required assertion for $G=Q$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-scheme-theoretic-image-proper",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26, p.154, last sentence of complete-central-component case; Appendix A.75(c),(d), p.583. Scheme-theoretic image: Stacks Tag 0AH6, morphisms.tex, lemma-scheme-theoretic-image-is-proper."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-subgroup-products",
+  "lem-sfb-general-group-centre-zero-dimension-affine",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-finite-proper",
+  "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+  "def-sc-abelian-variety",
+  "lem-sfb-rosenlicht-connected-almost-complement",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-scheme-theoretic-image-proper",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 8.26, printed p.154. Use the reduced identity component of the centre and the connected refinement of Theorem 8.24; expand the fpqc normality and proper-image arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group over an algebraically closed field with no nontrivial smooth connected affine normal subgroup is proper",
+   "results": "{\"t\": \"2026-10-24T07:34:17Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected algebraic group over an algebraically closed field with no nontrivial smooth connected affine normal subgroup is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"instLieGroupOfTopWithTopENat\", \"LieGroup\"], \"digest\": \"baa42377e754c12b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo-abelian variety over a perfect field is complete",
+   "results": "{\"t\": \"2026-10-24T07:34:14Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo-abelian variety over a perfect field is complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"CategoryTheory.Abelian.Pseudoelement\", \"IsAlgClosed.perfectField\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"complete_of_proper\", \"CategoryTheory.Abelian.Pseudoelement.pseudoZero_aux\", \"PerfectField\", \"IsSepClosure.isAlgClosure_of_perfectField_top\"], \"digest\": \"5bf811b7cbdfbeba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-24T07:34:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?abelian|complete.*group|group.*proper",
+   "results": "{\"t\": \"2026-10-24T07:34:13Z\", \"tool\": \"grep\", \"query\": \"pseudo.?abelian|complete.*group|group.*proper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth nonproper group over an algebraically closed field has a nontrivial connected smooth affine normal subgroup",
+   "results": "{\"t\": \"2026-10-24T07:37:20Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth nonproper group over an algebraically closed field has a nontrivial connected smooth affine normal subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.Normal.pathComponentOne\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"OpenNormalSubgroup.pathComponentOne\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"instNormalCommutatorClosure\"], \"digest\": \"0535cec5cf5673ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type group scheme over an algebraically closed field is proper if it is smooth connected and has no positive dimensional connected normal linear subgroup",
+   "results": "{\"t\": \"2026-10-24T07:40:09Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type group scheme over an algebraically closed field is proper if it is smooth connected and has no positive dimensional connected normal linear subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\"], \"digest\": \"8705a4fff39d8216\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?abelian|Barsotti|Chevalley",
+   "results": "{\"t\": \"2026-10-24T07:40:06Z\", \"tool\": \"grep\", \"query\": \"pseudo.?abelian|Barsotti|Chevalley\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\"], \"digest\": \"f6081e2d8c8e4c26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?abelian|Rosenlicht|Barsotti",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"grep\", \"query\": \"pseudo.?abelian|Rosenlicht|Barsotti\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo-abelian group variety over a perfect field is complete",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo-abelian group variety over a perfect field is complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"IsAlgClosed.perfectField\", \"IsRightUniformAddGroup.completeSpace_of_weaklyLocallyCompactSpace\", \"CategoryTheory.Abelian.Pseudoelement\", \"QuotientAddGroup.completeSpace\", \"QuotientAddGroup.completeSpace'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"QuotientGroup.completeSpace\"], \"digest\": \"1937ccaab788830b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-24T08:07:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group over an algebraically closed field without nontrivial connected smooth affine normal subgroups is proper",
+   "results": "{\"t\": \"2026-10-24T08:07:18Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected algebraic group over an algebraically closed field without nontrivial connected smooth affine normal subgroups is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\"], \"digest\": \"77ed0529ff3a9234\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?abelian|Rosenlicht|Barsotti",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"grep\", \"query\": \"pseudo.?abelian|Rosenlicht|Barsotti\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo-abelian group variety over a perfect field is complete",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo-abelian group variety over a perfect field is complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"IsAlgClosed.perfectField\", \"IsRightUniformAddGroup.completeSpace_of_weaklyLocallyCompactSpace\", \"CategoryTheory.Abelian.Pseudoelement\", \"QuotientAddGroup.completeSpace\", \"QuotientAddGroup.completeSpace'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"QuotientGroup.completeSpace\"], \"digest\": \"1937ccaab788830b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-24T08:07:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group over an algebraically closed field without nontrivial connected smooth affine normal subgroups is proper",
+   "results": "{\"t\": \"2026-10-24T08:07:18Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected algebraic group over an algebraically closed field without nontrivial connected smooth affine normal subgroups is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\"], \"digest\": \"77ed0529ff3a9234\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?abelian|Rosenlicht|Barsotti",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"grep\", \"query\": \"pseudo.?abelian|Rosenlicht|Barsotti\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo-abelian group variety over a perfect field is complete",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo-abelian group variety over a perfect field is complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"IsAlgClosed.perfectField\", \"IsRightUniformAddGroup.completeSpace_of_weaklyLocallyCompactSpace\", \"CategoryTheory.Abelian.Pseudoelement\", \"QuotientAddGroup.completeSpace\", \"QuotientAddGroup.completeSpace'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"QuotientGroup.completeSpace\"], \"digest\": \"1937ccaab788830b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-24T08:07:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group over an algebraically closed field without nontrivial connected smooth affine normal subgroups is proper",
+   "results": "{\"t\": \"2026-10-24T08:07:18Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected algebraic group over an algebraically closed field without nontrivial connected smooth affine normal subgroups is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\"], \"digest\": \"77ed0529ff3a9234\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned complete uniform groups, category idempotents, general compactness or affine Hopf structure, not pseudo-abelian algebraic groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-barsotti-chevalley-decomposition",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.27 proof: after Proposition 8.2 has made the quotient pseudo-abelian, Theorem 8.26 makes it complete; step 5.",
+   "via": [
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pseudoabelian-proper-algclosed",
+  "worker": "stage1",
+  "summary": "Followed Milne Theorem 8.26 by dimension induction, retaining arbitrary noncommutative groups. Added three strictly intermediate statement-only Rosenlicht/centre inputs. Reused the general group identity-component and dimension nodes; expanded fpqc normality and the scheme-theoretic proper-image step. The statement is unchanged.",
+  "blueprint": "Ancestor search returns None, as on the reviewed parent. Retained its from.node null and full via chain, specifying each new node by the exact case of Milne Theorem 8.26 it serves. Whole latest blueprint/DAG searches find no duplicate for pseudo-abelian properness, Rosenlicht dichotomy, almost-complements or the general non-affine centre input. This continues the parent Chevalley decomposition tool below the inherited unit, without replacing a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "def-sc-abelian-variety",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-image-proper",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme foundation used only for dimension, finite properness, fpqc gluing, or proper-image assembly inside Milne Theorem 8.26; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-proper",
+  "def-sc-abelian-variety",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-scheme-theoretic-image-proper",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-8a1f05860",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-8a1f05860 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 3 new nodes and the statements of all 14 nodes the item cites. Checked against Milne iAG 2017: Def 8.3 (p.149), Prop 8.1, Cor 8.10/8.11 (pp.150-151), Thm 8.24, Prop 8.25 and the Thm 8.26 proof (pp.153-154). Steps 1-6 follow the 8.26 route exactly: (1) induction set up on dim with the reduced central identity component A; (2) dim A=0 makes G affine, hence trivial; (3) A not proper would give a positive-dimensional affine U that is central and normal, a contradiction, so A is an abelian variety; (4) almost-complement N with dim N<d; (5) normality of S in G via an fpqc pullback of m, with descent along the monomorphism S→G; (6) the scheme-theoretic image of proper A×N under the surjective m is all of the reduced G, so G is proper. All three new nodes are true. Centre node: Milne 1.92 plus 8.11/8.1(a); no smoothness of Z assumed, which matters for SL_p in char p. Almost-complement node: 8.24 with the connected component of N_red; the dimension count gives surjectivity. Dichotomy node: 8.25 with the reduced identity component. None restates the item, none is circular, and the DAG has no duplicate (searched Rosenlicht, almost-complement, pseudo-abelian, centre affine; the affine-only centre and jet nodes do not apply). Not a 10-21 re-split: the item was a fresh NZ node without a proof. Generic tool_uses accepted. One mechanical fault, repaired in fixes/: all 3 new nodes cite def-weil-field and def-weil-algebraic-closure in their statements but omitted both from stmt_deps.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PseudoabelianProper",
+  "declaration": "AlgebraicGeometry.isProper_of_pseudoabelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PseudoabelianProper.lean",
+  "statement": "theorem isProper_of_pseudoabelian (k : Type u) [Field k] [IsAlgClosed k] (Q : Over (Spec (.of k))) [GrpObj Q] [Smooth Q.hom] [ConnectedSpace Q.left] [IsSeparated Q.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] (hQ : ∀ (S : Over (Spec (.of k))) [GrpObj S] (i : S ⟶ Q), IsClosedSubgroupScheme i → IsNormalSubgroupScheme i → Smooth S.hom → ConnectedSpace S.left → IsAffine S.left → IsIso (MonObj.one (X := S)).left) : IsProper Q.hom",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67c90676b",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Only the lean field changes (live lean=null); lean.statement is verbatim in the file. Clauses match the node and Milne Def 8.3/Thm 8.26: IsAlgClosed k; GrpObj Q over Spec k with Smooth, ConnectedSpace, IsSeparated, LocallyOfFiniteType+QuasiCompact; the hypothesis quantifies all S with recorded IsClosedSubgroupScheme/IsNormalSubgroupScheme (all-R-points normality), Smooth, Connected, IsAffine, trivial as IsIso (MonObj.one).left (unit left = Spec k); conclusion IsProper Q.hom; no commutativity or extra assumption; single universe u. Edge cases ok (Spec k, affine Q forced trivial, empty excluded, alpha_p not quantified). No defs, sorry-only proof, source/blueprint docstrings with 6 proof steps, imports exist, no name clash in side-live. Not recompiled (no file changed)."
+ }
+}

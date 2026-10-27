@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-signed-line-derived-action",
+ "kind": "statement",
+ "title": "Signed line DerivedAction",
+ "statement": "Under the finite-limit, covering, invertible-ring-adjunct and local rank-one hypotheses of lem-pur-signed-line-derived-base-change, for every normalized signed family T there are pure-section-normalized ordinary tensor comparisons gamma_d and derived data b_d satisfying DerivedAction for each degree and DerivedFamilyCoherence simultaneously [def-pur-signed-line-derived-action-data]. The exact pullback instances are the supplied ones; the input complexes are unrestricted unbounded complexes.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "For each signed degree, construct the normalized ordinary tensor comparison from T. Both signed powers are flat by local rank-one charts; apply flat_tensor_derived_action to obtain the normalized derived data in that degree. The localized-coherence theorem gives the three simultaneous equations for exactly this family of derived data.",
+   "uses": [
+    "lem-pur-signed-line-pullback-tensor",
+    "lem-pur-signed-line-power-flat",
+    "lem-pur-flat-tensor-derived-action",
+    "lem-pur-signed-line-localized-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-line-pullback-tensor",
+  "lem-pur-signed-line-power-flat",
+  "lem-pur-flat-tensor-derived-action",
+  "lem-pur-signed-line-localized-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedLineDerivedAction",
+  "file": "lean/Sheaf/Algebra/Homology/SignedLineDerivedAction.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.signed_line_derived_action",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.signed_line_derived_action"
+  ],
+  "statement": "theorem signed_line_derived_action\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (_hcover : CoverPreserving J K U)\n    (rInv : Sheaf J RingCat.{max u v w} ⥤ Sheaf K RingCat.{max u v w})\n    (rAdj : rInv ⊣ U.sheafPushforwardContinuous RingCat J K)\n    (ha : IsIso ((rAdj.homEquiv _ _).symm a))\n    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    [∀ V : D, (K.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]\n    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]\n    (T : ∀ d : ℤ, (pull a).obj (signedLinePower.{u, v, w} P d) ≅\n        signedLinePower.{u, v, w} Q d)\n    (_hT : SignedLinePullbackNormalized a P Q t T)\n    (_hP : ∃ (I : Type u) (V : I → C), J.CoversTop V ∧\n      ∀ i : I, Nonempty (P.over (V i) ≅\n        unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over (V i))))\n    (_hQ : ∃ (I : Type u) (V : I → D), K.CoversTop V ∧\n      ∀ i : I, Nonempty (Q.over (V i) ≅\n        unit (((sheafCompose K (forget₂ CommRingCat RingCat)).obj S).over (V i))))\n    [_add : (pull a).Additive] [_lim : PreservesFiniteLimits (pull a)]\n    [_col : PreservesFiniteColimits (pull a)] :\n        ∃ γ : ∀ d : ℤ, siteSheafTensorRight (signedLinePower.{u, v, w} P d) ⋙ pull a ≅\n            pull a ⋙ siteSheafTensorRight (signedLinePower.{u, v, w} Q d),\n          (∀ (d : ℤ) (M : KFlatFixedTensor.Modules R) (V : C) (x : M.val.obj (op V))\n            (y : (signedLinePower.{u, v, w} P d).val.obj (op V)),\n            ((γ d).hom.app M).val.app (op (U.obj V))\n                (ringedSitePullbackSection a\n                  (module_pushforward_isRightAdjoint_of_universes a)\n                  ((siteSheafTensorRight (signedLinePower.{u, v, w} P d)).obj M) V\n                  (siteSheafTensorTmul M (signedLinePower.{u, v, w} P d) (op V) x y)) =\n              siteSheafTensorTmul ((pull a).obj M) (signedLinePower.{u, v, w} Q d)\n                (op (U.obj V))\n                (ringedSitePullbackSection a\n                  (module_pushforward_isRightAdjoint_of_universes a) M V x)\n                ((T d).hom.val.app (op (U.obj V))\n                  (ringedSitePullbackSection a\n                    (module_pushforward_isRightAdjoint_of_universes a)\n                    (signedLinePower.{u, v, w} P d) V y))) ∧\n          ∃ b : ∀ d : ℤ, DerivedActionData (pull a) (signedLinePower.{u, v, w} P d)\n            (signedLinePower.{u, v, w} Q d),\n            (∀ d : ℤ, DerivedAction (pull a) (signedLinePower.{u, v, w} P d)\n              (signedLinePower.{u, v, w} Q d) (γ d) (b d)) ∧\n            DerivedFamilyCoherence (pull a) P Q b",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

@@ -26,173 +26,86 @@
  ],
  "proof": [
   {
-   "text": "Write $a_W:R_W\\to S_W$, $j_{W,m}:B_{E,W,m}\\to B_{L,W,m}$ and $c_{F,m}:g^{-1}B_{F,Y,m}\\to B_{F,X,m}$ for the coefficient maps. The inverse-limit map $a_W$ satisfies $\\pi^L_ma_W=j_{W,m}\\pi^E_m$: its components are precisely the compatible maps $\\iota_m\\pi^E_m$. Moreover $c_{L,m}g^{-1}(j_{Y,m})=j_{X,m}c_{E,m}$. Indeed the adjoints of both sides send a constant section $\\bar a$ to the constant section $\\iota_m(\\bar a)$ on each base change; the sheafification universal property and the inverse-image adjunction in the cited definition give equality. The same argument gives compatibility with quotient transitions. Use throughout the explicit associator $Q\\otimes_{S_Y}B_{L,Y,m}\\cong P\\otimes_{R_Y}B_{L,Y,m}$, $((p\\otimes s)\\otimes z)\\mapsto p\\otimes\\pi^L_m(s)z$, whose inverse is $p\\otimes z\\mapsto(p\\otimes1)\\otimes z$. Thus the symbol $p$ in the target generator formula means $p\\otimes1$ in $Q$.",
+   "text": "The finite-free scalar cochain property gives countable-product preservation on X, preservation of good complexes on Y, and an invertible scalar counit on every complex over X and Y. These yield the first three assertions, including the counit on A_E(P) without assuming that A_E(P) is K-flat.",
    "uses": [
-    "def-weil-integral-scalar-extension",
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product"
+    "lem-sf-finite-free-scalar-cochain-properties"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: sheafified tensors and associativity; coefficient square checked from the cited inverse-image definition"
+    "place": "Tag 03EK, section-tensor-product; finite-free exactness and products in lem-sf-finite-free-scalar-cochain-properties, with K-flat base change and the universal derived counit."
    }
   },
   {
-   "text": "Define the additive generator map $f_m:P\\otimes_{R_Y}B_{E,Y,m}\\to P\\otimes_{R_Y}B_{L,Y,m}$ by $p\\otimes\\bar a\\mapsto p\\otimes j_{Y,m}(\\bar a)$. It is balanced since $j_{Y,m}(\\pi^E_m(r)\\bar a)=\\rho_m(r)j_{Y,m}(\\bar a)$. Apply $g^{-1}$ to $f_m$, and send $((g^{-1}z)\\otimes b)\\otimes s$ to $(g^{-1}f_m(z))\\otimes j_{X,m}(b)\\pi^L_m(s)$. For $h\\in g^{-1}B_{E,Y,m}$, moving $h$ from $z$ to $b$ gives the same value by $c_{L,m}g^{-1}j_{Y,m}=j_{X,m}c_{E,m}$. For $r\\in R_X$, moving $r$ from the first outer tensor factor to $s$ gives the same value because $j_{X,m}(\\pi^E_m(r))=\\pi^L_m(a_X(r))$. Additivity in every variable and $S_X$-linearity are immediate from multiplication. These identities persist under restrictions, so the sheaf tensor universal property produces a unique map $d_m$ with the required formula. The argument is about local tensor generators and their sheafification, and does not assert that every section globally is a pure tensor.",
+   "text": "Apply the unique balanced strict-tower construction to obtain d and its generator equation.",
    "uses": [
-    "def-weil-integral-scalar-extension",
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product"
+    "lem-sf-scalar-pullback-strict-tower-construction"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: bilinear maps and tensor relations"
+    "place": "Tag 03EK, section-tensor-product; Steps 1–3 of the original node, from Bhatt–Scholze Definition 3.4.10 and Lemma 6.5.9(4)."
    }
   },
   {
-   "text": "Only the $p$ coordinate has a cochain differential. Applying $d_m$ before or after the differential therefore gives the same generator with $p$ replaced by $d_Pp$. If $u:P\\to P'$ is a chain map, the two paths in its naturality square both give $(g^{-1}(u(p)\\otimes\\iota_m(\\bar a)))\\otimes\\iota_m(b)\\pi^L_m(s)$. Finally, reducing the level-$m+1$ formula to level $m$ replaces $\\bar a,b,s$ by their quotient images. The identities $\\operatorname{red}_L\\iota_{m+1}=\\iota_m\\operatorname{red}_E$ and $\\operatorname{red}_L\\pi^L_{m+1}=\\pi^L_m$, together with the coefficient square of Step 1, show that its value equals the level-$m$ formula. Hence $d_\\bullet$ is a strict tower map, natural in chain maps, not merely a collection of derived level maps.",
+   "text": "The existing additive Roos map is natural and has both prescribed coordinates. Product preservation makes its product comparison invertible. In degree i the cone is a binary biproduct of the product in degrees i and i-1. Additivity and the two invertible product components therefore make the Roos comparison invertible. Assemble these components into kappa. Both coordinate formulas give its required normalization. If another kappa has the normalization, compose its components with mappingCocone.id_X; agreement on fst and snd proves equality of the complex maps and of the natural isomorphisms.",
    "uses": [
-    "def-weil-integral-scalar-extension",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; strict transition calculation using the quotient maps in def-weil-integral-scalar-extension"
-   }
-  },
-  {
-   "text": "For any family of $R_X$-module sheaves $V_m$, let $\\kappa:(\\prod_mV_m)\\otimes_{R_X}S_X\\to\\prod_m(V_m\\otimes_{R_X}S_X)$ have $m$th projection $\\operatorname{pr}_m\\otimes1$. The cited completed-scalar comparison gives a finite free basis $e_1,\\ldots,e_d$ of $S_X$. In its coordinates the inverse of $\\kappa$ sends $(\\sum_jv_{mj}\\otimes e_j)_m$ to $\\sum_j(v_{mj})_m\\otimes e_j$. These are inverse sheaf maps: both composite identities hold on every coordinate, using the finite sum over $j$. This is a degreewise argument for arbitrary unbounded complexes. The forward map was defined entirely by projections, so its inverse and the isomorphism are independent of the basis. Naturality follows by composing with each projection. The same finite-sum formulas identify tensor of a binary biproduct with the biproduct of the tensors, and tensor of a shifted complex with the shift of the tensor.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; explicit finite-basis calculation, using the finite-free assertion of lem-weil-finite-free-completed-scalar-comparison"
-   }
-  },
-  {
-   "text": "Put $V=\\prod_mD^E_m(P)$ and $V'=\\prod_mD^L_m(Q)$. Under $\\kappa$, the image of the transition endomorphism is the transition endomorphism of the tensor tower: both have $m$th projection $(t_m\\otimes1)\\operatorname{pr}_{m+1}$. Thus the tensor/product and binary-sum identifications of Step 4 identify $A_E(P)\\otimes S_X$ with the shifted cone of $1-s$ on that tensor tower. Put $\\mu=\\prod_md_m$. Step 3 says $\\mu(1-s)=(1-s')\\mu$. In the coordinates of the cited strict Roos model the differential is $(y,x)\\mapsto(-dy-(1-s)x,dx)$. The map $(y,x)\\mapsto(\\mu y,\\mu x)$ commutes with it, since its first coordinate is $-d\\mu y-(1-s')\\mu x$ and its second is $d\\mu x$. This is the specified $\\delta_P$. Chain naturality follows from the generator naturality of Step 3 and the projection naturality of $\\kappa$. In particular no choice of a third map of a distinguished triangle enters.",
-   "uses": [
-    "def-weil-strict-roos-model",
-    "def-weil-abstract-derived-category"
+    "def-sf-scalar-pullback-strict-cone-data",
+    "def-sf-additive-roos-map"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone, and Tag 08TC, definition-derived-limit; explicit signed diagonal cone calculation"
+    "place": "Tag 014E, definition-cone; derived-limit cone convention, Tag 08TC; elementary binary-biproduct calculation using def-sf-additive-roos-map."
    }
   },
   {
-   "text": "Represent $K\\in D(R_Y)$ by a complex $K_0$ of $R_Y$-modules. Apply the cited resolution theorem to $K_0$ to choose a degreewise-surjective quasi-isomorphism $P\\to K_0$ with $P$ flat-term K-flat; its localization identifies $[P]$ with $K$. Apply K-flat change of rings to $R_Y\\to S_Y$: $Q=P\\otimes_{R_Y}S_Y$ is flat-term K-flat over $S_Y$, and derived change of rings identifies $[Q]$ with $C_YK$. The integral-operation comparison identifies $[A_E(P)]$ with $Lg_E^*K$ and $[A_L(Q)]$ with $Lg_L^*(C_YK)$, with natural comparison isomorphisms on these representatives. Here $g:X\\to Y$ is any scheme morphism with $\\ell$ invertible on $X,Y$; the cited operation theorem and K-flat theorem apply to these ringed sites for unbounded complexes. These are the completed pullback functors of the stated integral-operation definition.",
+   "text": "Put delta = kappa followed by the Roos image of d. Good complexes localize to the entire derived category by the existing good-complex localization theorem. On good representatives use the E-pullback comparison, then the X scalar counit, then the localization of delta, producing a. The Y scalar counit and the L-pullback comparison form an isomorphism b from the restricted target derived functor. Fully faithful precomposition with the good localization lifts a followed by b inverse to a unique tau. Its component equation is precisely the published descent equation. Conversely any tau satisfying descent has its restriction determined by cancellation of b, proving uniqueness. This handles all derived morphisms directly, without requiring an additional explicit homotopy descent argument.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-integral-operations-well-defined",
-    "def-pur-integral-derived-operations"
+    "lem-sf-scalar-pullback-unique-derived-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 0G7E, lemma-pullback-K-flat; Tag 06YT and construction preceding 06YU; completed-pullback context Bhatt--Scholze Lemma 6.5.9(4)"
-   }
-  },
-  {
-   "text": "The source of $\\delta_P$ also has the required derived interpretation even though $A_E(P)$ need not be K-flat. Indeed tensoring with $S_X\\cong R_X^{\\oplus d}$ is exact: on underlying $R_X$-module sheaves it is the finite direct sum of $d$ copies, and kernels and cokernels of $S_X$-module maps have their underlying module kernels and cokernels. The exact-functor factorization therefore computes its derived functor on every complex by termwise tensor. This factorization is canonically the derived change-of-rings functor $C_X$: on a K-flat resolution both are the same tensor complex by the change-of-rings comparison, and exactness makes the tensor of the resolution a quasi-isomorphism. Consequently $[A_E(P)\\otimes_{R_X}S_X]$ is canonically $C_XLg_E^*K$. This uses finite freeness of the completed coefficient sheaf, not flatness of the ramified finite quotient maps $\\iota_m$.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT and construction preceding 06YU, specialized to an exact finite-free tensor functor; exact localization factorization recorded in lem-weil-pbc-exact-functor-derived-factorization"
-   }
-  },
-  {
-   "text": "The constructions on representatives respect cochain homotopy. If $u-v=dh+hd$, applying reduction and finite pullback to $h$ gives level homotopies $h_m$ commuting with every quotient transition; tensor with $S_X$ also preserves this homotopy identity by additivity. The strict Roos homotopy theorem then supplies the cone homotopy $(y,x)\\mapsto(-\\prod_mh_m(y),\\prod_mh_m(x))$. Thus both sides of the naturality square of Step 5 give functors on the homotopy category of flat-term K-flat representatives, and $[\\delta_P]$ is a natural transformation there. For a quasi-isomorphism $u:P\\to P'$, derived change of rings makes $u\\otimes S_Y$ a quasi-isomorphism between flat-term K-flat complexes; the integral-operation invariance theorem makes both corresponding $A_E$ and $A_L$ maps quasi-isomorphisms. Exactness of tensor with $S_X$ from Step 7 makes the remaining outer tensor map a quasi-isomorphism. Both functors therefore invert the representative quasi-isomorphisms.",
-   "uses": [
-    "lem-pur-strict-roos-homotopy-functor",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-integral-operations-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E, definition-cone, and explicit strict Roos homotopy theorem; quasi-isomorphism invariance from sites-cohomology Tags 06YT and 0G7E"
-   }
-  },
-  {
-   "text": "Apply the resolving-class localization equivalence of the cited site-derived-tensor descent theorem to the ringed site $(Y_{\\mathrm{proet}},R_Y)$, taking a skeleton small relative to the module universe as in the pro-etale inverse-image convention. Its statement gives $W^{-1}\\mathcal P_{R_Y}\\simeq D(R_Y)$ for precisely the flat-term K-flat homotopy representatives used in Step 8. Apply the localization universal property for natural transformations to the two functors of Step 8 and $[\\delta_P]$, then transport across this equivalence. Conjugating by the canonical comparisons of Steps 6 and 7 gives $C_XLg_E^*\\Rightarrow Lg_L^*C_Y$ with the asserted representative. This proves naturality on all derived morphisms. Explicitly, naturality for a representative quasi-isomorphism $w$ gives $G(w)[\\delta_P]=[\\delta_{P'}]F(w)$; invertibility yields naturality for $[w]^{-1}$ as well, and localization extends this through composites. The universal property's uniqueness shows that replacing $P$ by any other flat-term K-flat resolution gives the same component under the canonical resolution comparisons, including comparisons of a third resolution. No assertion that all derived morphisms lift to individual chain maps is used.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-proetale-inverse-image",
-    "lem-pur-integral-operations-well-defined",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG, lemma-properties-left-localization; fully faithful precomposition for natural transformations as recorded in lem-weil-pbc-localization-universal-property; resolving-class equivalence from sites-cohomology Tags 06YS and 0G7D"
+    "place": "Tag 04VG, localization universal property; good-complex localization in lem-pur-integral-operations-well-defined and its normalized pullback comparison."
    }
   },
   {
-   "text": "For a triple $E\\subset L\\subset F$, write $j_{LF}:S_{L,X}\\to S_{F,X}$ for the completed coefficient map. The same-index quotient maps satisfy $\\iota_{LF,m}\\iota_{EL,m}=\\iota_{EF,m}$, since they all send the class of an integral element to its class in the final quotient. On a generator $(((g^{-1}(p\\otimes\\bar a))\\otimes b)\\otimes s)\\otimes t$, the successive level maps give first coordinate $g^{-1}(p\\otimes\\iota_{EF,m}(\\bar a))$ and final multiplier $\\iota_{EF,m}(b)\\pi^F_m(j_{LF}(s))\\pi^F_m(t)$. The direct level map after associating the scalar tensors gives the same multiplier $\\iota_{EF,m}(b)\\pi^F_m(j_{LF}(s)t)$. The target associator on $P\\otimes S_L\\otimes S_F$ is multiplication on the scalar factors, as in Step 1. Equality on generators and sheafification therefore prove composition of $d_m$. The product comparisons respect these associators: their $m$th projections are all the tensor of $\\operatorname{pr}_m$ followed by the same scalar multiplication. Hence the two composite cone maps agree on each of their two coordinates. For $L=E$, $\\iota_m$ is the quotient identity and the formula becomes multiplication by $\\pi^E_m(s)$, exactly the tensor unitor. The product and cone comparisons then also become their unit identifications.",
+   "text": "Assemble d, kappa, tau and their equations into strict cone data. For any two data first use uniqueness of the tower component, then uniqueness of the two-coordinate cone isomorphism, and finally uniqueness of derived descent. Proof irrelevance identifies the equation fields; hence the data type is a subsingleton.",
    "uses": [
-    "def-weil-integral-scalar-extension",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-strict-roos-model"
+    "def-sf-scalar-pullback-strict-cone-data"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product: associativity and units; explicit same-index quotient and cone-coordinate calculation"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG; combine the three uniqueness results of the preceding steps and proof irrelevance."
    }
   },
   {
-   "text": "For the triple extension use $P$, $P\\otimes S_L$ and $P\\otimes S_F$, related by the tensor associators, as resolving representatives. They are flat-term K-flat by change of rings. The canonical derived associators on these models are the localized ordinary tensor associators, by the K-flat computation of successive change of rings; equivalently the ordinary map $((p\\otimes s)\\otimes t)\\mapsto p\\otimes j_{LF}(s)t$ identifies the two computations and respects every resolution map. Thus the equality of cone maps in Step 10 is the required equality after the canonical derived associators on representatives. Faithfulness of restriction along the resolving-class localization and uniqueness in the localization universal property extend it to all derived objects. The same reasoning with the tensor unitor gives the derived identity comparison for $L=E$.",
+   "text": "Apply the chain-level composition and unit calculation to all normalized data. This gives the last two assertions without any further choice of tower or cone maps.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-sf-scalar-pullback-strict-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT, 06YU and 0G7D: K-flat computations and resolving localization; composition of the explicit scalar associators checked in Step 10"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, associativity and unit for tensor product; original Step 10, with both cone coordinates in derived.tex, Tag 014E."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-integral-derived-operations",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category",
-  "def-weil-integral-scalar-extension",
-  "def-weil-proetale-inverse-image",
-  "def-weil-strict-roos-model",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-strict-roos-homotopy-functor",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "def-sf-additive-roos-map",
+  "def-sf-scalar-pullback-strict-cone-data",
+  "lem-sf-finite-free-scalar-cochain-properties",
+  "lem-sf-scalar-pullback-strict-coherence",
+  "lem-sf-scalar-pullback-strict-tower-construction",
+  "lem-sf-scalar-pullback-unique-derived-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 6.5.9(4) provide the completion context, not a literal scalar-naturality theorem. Explicit generator, finite-basis, signed-cone, and localization arguments below; Stacks Tags 03EK, 014E, 06YS, 0G7D, 06YT, 0G7E, 04VG."
+  "group": "J3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lean assembly of the existing 11-step argument: finite-free exactness, both Roos coordinates and localization uniqueness are proved; generator construction and chain coherence are two strictly smaller remaining obligations."
  },
  "mathlib_searches": [
   {
@@ -368,28 +281,15 @@
   "module": "Sheaf.Paper.ScalarPullbackStrictConeNaturality",
   "declaration": "WeilConjectures.scalarPullbackStrictConeNaturality",
   "declarations": [
-   "WeilConjectures.scalarPullbackSourceTower",
-   "WeilConjectures.scalarPullbackTargetTower",
-   "WeilConjectures.scalarPullbackGenerator",
-   "WeilConjectures.scalarPullbackProductMap",
-   "WeilConjectures.scalarPullbackRoosEnd",
-   "WeilConjectures.ScalarPullbackGeneratorFormula",
-   "WeilConjectures.ScalarPullbackConeFormula",
-   "WeilConjectures.scalarPullbackConeMap",
-   "WeilConjectures.ScalarPullbackDescentFormula",
-   "WeilConjectures.ScalarPullbackStrictConeData",
-   "WeilConjectures.ScalarPullbackAssociationFormula",
-   "WeilConjectures.ScalarPullbackCompositionFormula",
-   "WeilConjectures.ScalarPullbackUnitFormula",
    "WeilConjectures.scalarPullbackStrictConeNaturality"
   ],
   "file": "lean/Sheaf/Paper/ScalarPullbackStrictConeNaturality.lean",
-  "statement": "theorem scalarPullbackStrictConeNaturality {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.residueField x)) (_hY : ∀ y : Y, IsUnit (l : Y.residueField y)) : (∀ K : ℕ → CochainComplex (integralTowerModules l E X) ℤ, IsIso (scalarPullbackProductMap l E L ι X K)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, integralOperationsGoodComplex l L Y ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj)) ∧ (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory, IsIso (completedScalarCounit l E L ι X ((integralOperationsPullbackComplexFunctor l E g).obj P.obj))) ∧ Nonempty (ScalarPullbackStrictConeData l E L ι g) ∧ Subsingleton (ScalarPullbackStrictConeData l E L ι g) ∧ (∀ D : ScalarPullbackStrictConeData l E L ι g, ScalarPullbackCompositionFormula l E L ι g D) ∧ (∀ D : ScalarPullbackStrictConeData l E E (AlgHom.id ℚ_[l] E) g, ScalarPullbackUnitFormula l E g D)",
-  "branch": "newtargets-dag",
-  "by": "Q49",
-  "date": "2026-10-21",
+  "statement": "theorem scalarPullbackStrictConeNaturality\n    {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)\n    (_hX : ∀ x : X, IsUnit (l : X.residueField x))\n    (_hY : ∀ y : Y, IsUnit (l : Y.residueField y)) :\n    (∀ K : ℕ → CochainComplex (integralTowerModules l E X) ℤ,\n      IsIso (scalarPullbackProductMap l E L ι X K)) ∧\n    (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,\n      integralOperationsGoodComplex l L Y\n        ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj)) ∧\n    (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,\n      IsIso (completedScalarCounit l E L ι X\n        ((integralOperationsPullbackComplexFunctor l E g).obj P.obj))) ∧\n    Nonempty (ScalarPullbackStrictConeData l E L ι g) ∧\n    Subsingleton (ScalarPullbackStrictConeData l E L ι g) ∧\n    (∀ D : ScalarPullbackStrictConeData l E L ι g,\n      ScalarPullbackCompositionFormula l E L ι g D) ∧\n    (∀ D : ScalarPullbackStrictConeData l E E (AlgHom.id ℚ_[l] E) g,\n      ScalarPullbackUnitFormula l E g D)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27",
   "existing": false,
-  "note": "One theorem states the full normalized strict tower/cone construction, unique derived descent, basis-independent product comparison, extension composition and identity; auxiliary definitions only express these witnesses and their generator/coordinate equations, using the recorded constructions unchanged."
+  "note": "The main proof assembles the unique balanced tower map, a proved generic two-coordinate cone isomorphism, and the proved unique derived descent in ScalarPullbackUniqueDerivedDescent. Finite-free scalar properties are proved separately. Only the strict tower construction and chain composition/unit calculations remain as two smaller obligations. The original auxiliary definitions are publicly re-exported unchanged from ScalarPullbackStrictConeData."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -398,5 +298,27 @@
   "group": "Q49",
   "result": "pass",
   "note": "Only the item's lean field changed. The 13 stmt_dep records are identical to live and side-live, there are no new nodes, the statement field is verbatim and the declaration list matches the file. Not dropped or superseded. Clause by clause the Lean matches the node: the ℓ-invertibility hypotheses, the generator formula ((g⁻¹(p⊗a))⊗b)⊗s ↦ gen_L(1⊗p, ι a, ι(b)π_L(s)), the basis-free Pi.lift product map shown to be an isomorphism, the cone comparison pinned on both mappingCocone coordinates, the cone map as κ ≫ the diagonal Roos map, and the descent equation through the scalar counits and integral pullback comparisons. Nonempty ∧ Subsingleton is sound: level, cone, derived and the associators are all uniquely pinned. Composition (level and cone) is pinned by associators fixed on generators, and the unit case by completedScalarIdentityMultiplication. Edge cases covered (P=0, empty schemes, g=id, L=E, n=0, ramified ι_m, unbounded complexes). Docstrings carry source, blueprint tag and all 11 steps; the only sorry is in the main theorem. Not recompiled, per instruction; the worker reports clean scompile runs (36.1 s and 28.9 s). Advisory: integralScalarQuotientSheafMap is owned by a theorem node that is not a stmt_dep, and the strict tower and Roos functors are plain defs in the module of a theorem stmt_dep (the established pattern); a definition node should own them. The second-reading section was written by the delivering worker."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-eebdd",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T123457-L-2304317",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (byte-identical signature); moved 13-def block vs published item (byte-identical); new nodes' lean.statement vs Lean signatures; both direct importers compiled against delivered modules; #print axioms"
  }
 }

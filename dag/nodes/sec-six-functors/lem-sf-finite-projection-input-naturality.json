@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-finite-projection-input-naturality",
+ "kind": "statement",
+ "title": "Naturality of the finite projection on its full input domains",
+ "statement": "For any finite operation stage S [def-sf-operation-stages], any morphism f and compactification c, the component [def-sf-constructible-projection-mates] is natural in every morphism a:K→K' of bounded constructible first inputs and b:L→L' of finite-Tor constructible second inputs. The source action is tensor of support(a) followed by tensor(b); the target action is support applied to tensor(a) followed by tensor(pull(b)). No invertibility or Tor restriction on K is used.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition and coherence sentence, realized using the specified finite operation normalizations."
+ },
+ "proof": [
+  {
+   "text": "Use the published projectionMapOfCompactification natural transformation. Assemble the source and target natural isomorphisms from finiteSupport, finitePullback, the coefficient equivalence units, and tensor currying. Their components agree with sourceComparison and targetComparison.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the published projection by inverse coefficient realization on both inputs and realization on the output; conjugate by the source and target isomorphisms. Evaluate NatTrans.naturality at (a,b), identify its components with component, and reflect through the faithful full constructible inclusion.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition and coherence sentence, realized using the specified finite operation normalizations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of conjugated projection formula and binary compact support compositor under equivalence",
+   "results": "Eight condensed-set or profinite naturality/projection facts; none about derived compact support.",
+   "date": "2026-10-26",
+   "verdict": "No exact result; use the existing project constructions and generic naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality; CategoryTheory.Functor.pentagon",
+   "results": "NatTrans.naturality gives formal input naturality; Functor.pentagon concerns the functor associator, not the prescribed compact-support compositor.",
+   "date": "2026-10-26",
+   "verdict": "Use formal naturality and functoriality for the transport; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "composition.*projection|projection.*composition; finiteCompositionNormalization; component_naturality",
+   "results": "No Mathlib compact-support result. The source project has proper/open triangle laws and origin associativity. CompactSupportProjectionFiniteStages has a private input-naturality proof, but importing that parent would create a cycle.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the private naturality argument in a lower module; use existing triangle and canonical-origin statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionCompositionTransport",
+  "date": "2026-10-26",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition and coherence sentence, realized using the specified finite operation normalizations.",
+   "via": [
+    "lem-sf-finite-projection-composition-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionInputNaturality",
+  "file": "lean/Sheaf/Paper/FiniteProjectionInputNaturality.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.component_input_naturality",
+  "statement": "theorem component_input_naturality (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) (c : Compactification f.hom.left)\n    {K K' : sixFunctorFiniteCategory D C E n hn X}\n    {L L' : finiteTorConstructibleCategory C.l E n hn Y.obj.left}\n    (a : K ⟶ K') (b : L ⟶ L') :\n    ((partialTensor S Y).map ((S.finite.support f c).map a)).app L ≫\n        ((partialTensor S Y).obj ((S.finite.support f c).obj K')).map b ≫\n        component S f c K' L' =\n      component S f c K L ≫ (S.finite.support f c).map\n        (((partialTensor S X).map a).app ((torPull S f).obj L) ≫\n          ((partialTensor S X).obj K').map ((torPull S f).map b))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T183654-L-3761937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T183654-L-3761937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

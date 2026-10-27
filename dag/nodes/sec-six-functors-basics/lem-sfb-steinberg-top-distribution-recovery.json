@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-steinberg-top-distribution-recovery",
+ "kind": "statement",
+ "title": "Top positive distributions recover the Steinberg highest vector",
+ "statement": "Let $F$ be an algebraically closed field of prime characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected affine $F$-group scheme [def-sc-group-scheme]: it is smooth, connected and of finite type, has no nontrivial smooth connected solvable normal subgroup, and every surjective homomorphism from a semisimple group scheme with finite central kernel to $S$ is an isomorphism. Solvable means that successive commutator subgroup schemes eventually become trivial; finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq B\\subseteq S$ and a Borel subgroup $B$. A split torus is a product of copies of $\\mathbf G_m$, with $\\mathbf G_m(D)=D^\\times$; maximal means maximal under inclusion; Borel means maximal smooth connected solvable closed subgroup. Its unipotent radical is its largest smooth connected normal unipotent subgroup, with unipotent meaning unipotent geometric matrices in a faithful representation. Use the character lattice $X^*(T)=\\operatorname{Hom}(T,\\mathbf G_m)$ and the positive roots $\\Phi^+$ in the tangent space $\\operatorname{Lie}(B)$, with roots interpreted as torus characters, as in [lem-sfb-reductive-borel-pair-structure]. Put $N=|\\Phi^+|$. Fix $r\\ge1$ and $q=p^r$. For each affine $F$-group $K$, put $K^{(q)}=\\operatorname{Spec}(F[K]\\otimes_{F,a\\mapsto a^q}F)$ and $K_r=\\ker(F^r_{K/F}:K\\to K^{(q)})$, where the relative Frobenius has coordinate map $c\\otimes a\\mapsto ac^q$ [def-weil-affine-spectrum, def-weil-pbc-module-tensor-product]. For a finite such kernel put $\\operatorname{Dist}(K_r)=\\operatorname{Hom}_F(F[K_r],F)$, with convolution product $(ab)(f)=(a\\otimes b)(\\Delta f)$, unit evaluation at the identity, augmentation $a\\mapsto a(1)$ and antipode $\\sigma$ dual to inversion; these agree with the finite-order distributions of [def-sfb-affine-group-distribution-calculus]. Assume $\\rho\\in X^*(T)$ satisfies $2\\rho=\\sum_{\\alpha\\in\\Phi^+}\\alpha$, and choose a $B$-character $\\widetilde\\rho$ extending it trivially on the unipotent radical. Put $\\lambda=(q-1)\\rho$ and $\\widetilde\\lambda=\\widetilde\\rho^{q-1}$. Choose an opposite Borel subgroup $B^-$, that is, a Borel subgroup $B^-\\supseteq T$ with $B\\cap B^-=T$, with unipotent radical $U^-$. Let $A=\\operatorname{Dist}(S_r)$ and $D_B=\\operatorname{Dist}(B_r)$. Let $F_\\lambda$ be the one-dimensional $D_B$-module with action $b\\cdot1=b(\\widetilde\\lambda|_{B_r})$, and define $M=A\\otimes_{D_B}F_\\lambda$ and $v=1\\otimes1$, as in [lem-sfb-frobenius-kernel-induced-dual-pbw]. Choose any ordering $\\alpha_1,\\ldots,\\alpha_N$ of $\\Phi^+$ and any root parametrizations $x_{\\pm\\alpha_i}:\\mathbf G_a\\xrightarrow{\\sim}U_{\\pm\\alpha_i}$ [lem-sfb-reductive-root-subgroup-parametrizations]. Let $d_{\\pm\\alpha_i}^{(n)}$ be coefficient extraction $f\\mapsto[t^n]x_{\\pm\\alpha_i}^*f$ on the $r$th kernels for $0\\le n<q$, regarded as elements of $A$. Put\n$$e_{\\rm top}=\\prod_{i=1}^N d_{\\alpha_i}^{(q-1)},\\qquad f_{\\rm top}=\\prod_{i=1}^N d_{-\\alpha_i}^{(q-1)}.$$\nThere exists $c\\in F^\\times$ such that $e_{\\rm top}f_{\\rm top}v=cv$ in $M$. For the empty root system the products and $c$ are $1$. The assertion holds for every prime $p$, including $2$, and every $r\\ge1$.",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Agent formulation of the top-root distribution calculation for the infinitesimal proof associated with Jantzen II.3.18. Local book WANTED. Kaneda, Section 2.5, equation (9), printed p.323, corroborates the resulting simplicity, not this calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-affine-group-distribution-calculus",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-frobenius-kernel-induced-dual-pbw"
+ ],
+ "proof": [
+  {
+   "text": "If $N=0$, both specified products are $1$, so take $c=1$. For $N>0$, apply the current finite-kernel PBW statement with $\\eta=\\lambda$, $\\widetilde\\eta=\\widetilde\\lambda$ and the given opposite Borel $B^-$. The character $\\widetilde\\lambda=\\widetilde\\rho^{q-1}$ restricts to $\\lambda$ on $T$ and is trivial on $R_u(B)$, as that statement requires. Its balanced tensor product $M_r(\\lambda)=\\operatorname{Dist}(S_r)\\otimes_{\\operatorname{Dist}(B_r)}F_\\lambda$ is precisely $M$, with $v_\\lambda=v$. Thus $S_r$ is finite and $v\\ne0$. For every $b\\in D_B$, the balancing relation gives $bv=1\\otimes(b\\cdot1)=b(\\widetilde\\lambda|_{B_r})v$. Hence the initial vector has exactly the $B_r$-eigencharacter required for step 3.",
+   "uses": [
+    "lem-sfb-frobenius-kernel-induced-dual-pbw"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent argument from the balanced tensor product; finite-kernel PBW is the cited node, not a claim from Milne."
+   }
+  },
+  {
+   "text": "Construct Borels $C_0=B,C_1,\\ldots,C_N$ containing $T$, with positive systems $\\Psi_j$ and $\\rho_j=\\frac12\\sum_{\\gamma\\in\\Psi_j}\\gamma$, as follows. Whenever $\\Psi_j\\ne-\\Phi^+$, some simple root $\\beta_{j+1}$ of $\\Psi_j$ belongs to $\\Phi^+$: otherwise all simple roots are negative in the original base, so every root of $\\Psi_j$, a nonnegative sum of them, is original-negative. Choose this $\\beta_{j+1}$ and use the adjacent-Borel lemma's conjugate $C_{j+1}$. Its positive system deletes $\\beta_{j+1}$ and adds $-\\beta_{j+1}$. Thus $|\\Psi_{j+1}\\cap\\Phi^+|=|\\Psi_j\\cap\\Phi^+|-1$. After precisely $N$ steps the chosen $\\beta_1,\\ldots,\\beta_N$ enumerate $\\Phi^+$ without repetitions. Moreover $\\rho_{j+1}=\\rho_j-\\beta_{j+1}$. For $\\gamma\\in\\Psi_j\\setminus\\{\\beta_{j+1}\\}$, some other current simple-root coefficient is positive (the root system is reduced), and reflection in $\\beta_{j+1}$ leaves that coefficient unchanged. Sign coherence therefore makes the reflected root positive; involutivity shows this reflection permutes $\\Psi_j\\setminus\\{\\beta_{j+1}\\}$. It carries $\\Psi_j$ onto $\\Psi_{j+1}$, so it sends $\\rho_j$ to $\\rho_j-\\beta_{j+1}$; the reflection formula gives $\\langle\\rho_j,\\beta_{j+1}^\\vee\\rangle=1$. All these equalities are in the rational character space. Starting from the given integral $\\rho$, the subtraction formula shows each $\\rho_j$ is an actual character. Put $\\mu_j=(q-1)\\rho_j$; hence $\\langle\\mu_j,\\beta_{j+1}^\\vee\\rangle=q-1$ as an integer.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-frobenius-adjacent-borel-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent finite induction using root bases (C.21--C.22, p.612) and rank-one reflection (21.11, pp.428--430); adjacent-Borel existence and its positive roots are in the cited local lemma."
+   }
+  },
+  {
+   "text": "Set $u_0=v$. Inductively suppose $u_j$ is a $\\operatorname{Dist}(C_{j,r})$-eigenvector for the extension of $\\mu_j$ trivial on $R_u(C_j)$. Apply the adjacent-Borel lemma to $V=M$, $C=C_j$, $\\alpha=\\beta_{j+1}$ and the root parametrizations specified in the item. Its integer-weight hypothesis was checked in step 2. It gives $u_{j+1}=d_{-\\beta_{j+1}}^{(q-1)}u_j$, an eigenvector for $C_{j+1,r}$ of character $\\mu_j-(q-1)\\beta_{j+1}=\\mu_{j+1}$, and $\\kappa_{j+1}\\in F^\\times$ with $d_{\\beta_{j+1}}^{(q-1)}u_{j+1}=\\kappa_{j+1}u_j$. The base case is step 1. This proves the induction for $0\\le j<N$.",
+   "uses": [
+    "lem-sfb-frobenius-adjacent-borel-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent induction from the cited single-wall finite-kernel lemma; geometric rank-one setting is Milne 20.37--20.41 and 21.11."
+   }
+  },
+  {
+   "text": "Write $E=d_{\\beta_1}^{(q-1)}\\cdots d_{\\beta_N}^{(q-1)}$ and $F_-=d_{-\\beta_N}^{(q-1)}\\cdots d_{-\\beta_1}^{(q-1)}$. By the defining recursion $u_N=F_-v$. Apply the recovery equations successively, starting with $d_{\\beta_N}^{(q-1)}$ (the rightmost factor of $E$), then $d_{\\beta_{N-1}}^{(q-1)}$, down to $d_{\\beta_1}^{(q-1)}$. They yield $EF_-v=(\\prod_{j=1}^N\\kappa_j)v$. The product is a unit of $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent multiplication of the recovery equations proved in step 3."
+   }
+  },
+  {
+   "text": "Apply the unipotent Frobenius-distribution socle statement first to $R_u(B)$, using the enumerations $\\beta_1,\\ldots,\\beta_N$ and $\\alpha_1,\\ldots,\\alpha_N$, and then to the given opposite Borel's radical $U^-$, using $-\\beta_N,\\ldots,-\\beta_1$ and $-\\alpha_1,\\ldots,-\\alpha_N$. It says that each of the corresponding top products is nonzero and spans the same annihilator of the augmentation ideal. Consequently $E=a e_{\\rm top}$ and $F_-=b f_{\\rm top}$ for some $a,b\\in F^\\times$. These equalities also hold in $A$ under the distribution inclusions. Step 4 becomes $ab e_{\\rm top}f_{\\rm top}v=(\\prod_j\\kappa_j)v$, so $c=(ab)^{-1}\\prod_j\\kappa_j$ is the required nonzero scalar. The local lemma and the socle statement include every prime and every $r\\ge1$, so no restriction on $p$, including $p=2$, entered.",
+   "uses": [
+    "lem-sfb-unipotent-frobenius-distribution-socle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent comparison of the one-dimensional socles supplied by the cited node; no unproved exchange of noncommuting root factors is made."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-frobenius-kernel-induced-dual-pbw",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-frobenius-adjacent-borel-reflection",
+  "lem-sfb-unipotent-frobenius-distribution-socle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Rank-one and root-base geometric inputs at 20.37--20.41, 21.11 and C.21--C.22; agent finite-kernel adjacent-Borel iteration. Jantzen II.3.18 is WANTED and was not inspected."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In the baby Verma module at Steinberg weight the product of top positive root divided powers maps the top negative root divided power vector to a nonzero highest vector",
+   "results": "{\"t\": \"2026-10-24T10:13:08Z\", \"tool\": \"leanfinder\", \"query\": \"In the baby Verma module at Steinberg weight the product of top positive root divided powers maps the top negative root divided power vector to a nonzero highest vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.chainTop\", \"LieModule.chainTopCoeff\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add\", \"LieModule.chainBotCoeff\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"LieModule.chainBot\", \"LieModule.chainTopCoeff_add_one\", \"LieModule.genWeightSpace_neg_zsmul_add_ne_bot\"], \"digest\": \"626edf409ca32d34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule chain endpoints and irreducibility definitions do not state the top divided-power identity in a Frobenius-kernel baby Verma module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieModule\", \"IsIrreducible\"",
+   "results": "{\"t\": \"2026-10-24T10:12:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"LieModule\\\", \\\"IsIrreducible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieModule.IsIrreducible\", \"LieModule.IsIrreducible.mk\", \"LieModule.nontrivial_of_isIrreducible\"], \"digest\": \"659cc6e5b00a59c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule chain endpoints and irreducibility definitions do not state the top divided-power identity in a Frobenius-kernel baby Verma module"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|baby.?Verma|Harish.Chandra|hyperalgebra",
+   "results": "{\"t\": \"2026-10-24T10:12:59Z\", \"tool\": \"grep\", \"query\": \"Steinberg|baby.?Verma|Harish.Chandra|hyperalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule chain endpoints and irreducibility definitions do not state the top divided-power identity in a Frobenius-kernel baby Verma module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Steinberg weight baby Verma module top positive and negative root distributions nonzero scalar identity",
+   "results": "{\"t\": \"2026-10-24T10:12:59Z\", \"tool\": \"leansearch\", \"query\": \"Steinberg weight baby Verma module top positive and negative root distributions nonzero scalar identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.coe_chainTop\", \"LieModule.Weight.isNonZero_neg\", \"LieModule.chainBotCoeff_neg\", \"LieModule.chainTop_isNonZero\", \"LieModule.coe_chainTop'\", \"LieModule.Weight.isZero_neg\", \"RootPairing.Base.toWeightBasis_apply\", \"LieModule.chainTop_isNonZero'\"], \"digest\": \"2fb2896243a9618d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule chain endpoints and irreducibility definitions do not state the top divided-power identity in a Frobenius-kernel baby Verma module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The highest root monomial coefficient for the Steinberg baby Verma highest vector is nonzero in every prime characteristic",
+   "results": "{\"t\": \"2026-10-24T10:13:09Z\", \"tool\": \"leanfinder\", \"query\": \"The highest root monomial coefficient for the Steinberg baby Verma highest vector is nonzero in every prime characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.chainTopCoeff_zero_right\", \"LieModule.chainTopCoeff\", \"LieModule.chainTop_isNonZero'\", \"LieModule.chainTop_isNonZero\", \"RootPairing.Base.height_ne_zero\", \"LieAlgebra.IsKilling.chainBotCoeff_zero_right\", \"LieModule.chainTopCoeff_add_one\", \"LieModule.chainBotCoeff\"], \"digest\": \"8912af1b7f2a487e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule chain endpoints and irreducibility definitions do not state the top divided-power identity in a Frobenius-kernel baby Verma module"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|baby.?Verma|hyperalgebra|Harish.Chandra",
+   "results": "{\"t\": \"2026-10-24T10:58:22Z\", \"tool\": \"grep\", \"query\": \"Steinberg|baby.?Verma|hyperalgebra|Harish.Chandra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Steinberg Frobenius kernel module top root distributions yield a nonzero scalar highest vector",
+   "results": "{\"t\": \"2026-10-24T10:58:22Z\", \"tool\": \"leansearch\", \"query\": \"Steinberg Frobenius kernel module top root distributions yield a nonzero scalar highest vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.span_orbit_eq_top\", \"RootPairing.invtRootSubmodule.top_mem\", \"RootPairing.coe_top\", \"Representation.invtSubmodule.top_mem\", \"LieAlgebra.rootSpace\", \"RootPairing.IsRootSystem.span_root_eq_top\", \"RootPairing.IsRootSystem.span_coroot_eq_top\", \"RootPairing.Base.toWeightBasis\"], \"digest\": \"e2f7e3804cc36a96\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieModule\", \"IsIrreducible\"",
+   "results": "{\"t\": \"2026-10-24T10:58:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"LieModule\\\", \\\"IsIrreducible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieModule.IsIrreducible\", \"LieModule.IsIrreducible.mk\", \"LieModule.nontrivial_of_isIrreducible\"], \"digest\": \"659cc6e5b00a59c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a baby Verma module at Steinberg highest weight the top positive root divided powers recover the highest vector from the top negative root monomial",
+   "results": "{\"t\": \"2026-10-24T10:58:23Z\", \"tool\": \"leanfinder\", \"query\": \"In a baby Verma module at Steinberg highest weight the top positive root divided powers recover the highest vector from the top negative root monomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.chainTopCoeff\", \"LieModule.chainTop\", \"LieModule.coe_chainTop'\", \"LieModule.coe_chainTop\", \"LieModule.chainBotCoeff\", \"LieModule.chainTopCoeff_add_one\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\"], \"digest\": \"4e1f91f0ee7263df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of divided powers for every positive root applied after every negative root with exponent p^r-1 is nonzero on the highest vector of weight (p^r-1)rho",
+   "results": "{\"t\": \"2026-10-24T10:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"A product of divided powers for every positive root applied after every negative root with exponent p^r-1 is nonzero on the highest vector of weight (p^r-1)rho\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.chainTop_isNonZero'\", \"LieModule.chainTop_isNonZero\", \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"LieModule.Weight.exists_ne_zero\", \"LieModule.chainTopCoeff_add_one\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.reflectRoot_isNonZero\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat\"], \"digest\": \"532de35b15de6772\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieModule weight chains, characteristic-zero sl2 strings, root reflections and irreducibility definitions do not give finite Frobenius-kernel divided powers or a change of Borel highest vector"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-steinberg-infinitesimal-induced-simple",
+  "date": "2026-10-24",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18, simplicity of the infinitesimal induced module at (p^r-1)rho, before II.3.19 and Kempf II.4.5; compatible G_rT notation in II.9.1. Use the infinitesimal argument, not global induced-module dimensions or Weyl filtrations. Supporting infinitesimal input: Top positive distributions recover the Steinberg highest vector.",
+   "via": [
+    "lem-sfb-steinberg-infinitesimal-induced-simple",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-steinberg-top-distribution-recovery",
+  "worker": "stage1",
+  "summary": "Q123: retained the statement and replaced the empty proof by a finite simple-wall induction, explicit reversal of the product, and an application of the existing arbitrary-order socle statement. One new statement-only lemma handles a single adjacent-Borel change for arbitrary distribution modules. Checked both initial and inductive characters, integer coroot weights, all prime characteristics and order of operator application; no global induced-module dimension or simplicity theorem is used. Repair of returned head 03ab8021401: rebased onto the current DAG and reread the updated PBW statement, whose Z_r covariance condition now quantifies D, x and b explicitly. Expanded step 1 to identify the current PBW specialization eta=lambda, its B-character and its balanced module with the item; revalidated and expanded the statement quotations. All other cited statements were reread and remain applicable.",
+  "blueprint": "The inherited from.place describes the II.3.18 infinitesimal top-root calculation supporting the constructible direct-image route; the present steps realize that calculation by single-wall moves. The ancestor command returns None for this existing agent-created chain; inherited from.node and via are retained. Latest blueprint unit sk-thm-sf-ctf-stability, direct-image clause (3), was read. Whole-blueprint searches found no equivalent top-distribution or adjacent-Borel module statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-1beb2e50b",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-1beb2e50b (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-frobenius-adjacent-borel-reflection and the full current statements of every cited node (PBW, Borel-pair, socle, rank-one reflections, root subgroups, distribution calculus). The item statement is unchanged and true: the Steinberg-weight top divided powers recover the highest vector; checked on SL2 with binom(q-1,q-1)=1, and N=0 and p=2 are covered. Step 1: the PBW statement applies with eta=lambda, and the balancing relation gives the B_r eigencharacter. Step 2: a simple root of Psi_j lying in Phi+ always exists while Psi_j is not -Phi+; s_beta permutes Psi_j minus beta (reduced root system, sign coherence), so rho_{j+1}=rho_j-beta and <rho_j,beta^vee>=1, an integer coroot value. Step 3: the induction is explicit and every hypothesis of the new node holds. Step 4: the recovery equations reverse the product without commuting any factors. Step 5: the socle statement holds for any enumeration and for the opposite radical, so the scalars a and b are nonzero. The new node is statement-only, self-contained and true: Y^{(j)}Y^{(q-1)}=0 in Dist(G_{a,r}), the radical of the other positive roots is normalized by U_{-alpha}, and X^{(q-1)}Y^{(q-1)}w=binom(q-1,q-1)w. It is not a duplicate of sl2-straightening, simple-root calculus, socle or PBW, and it is strictly smaller than the item. Batch-5 flags accepted: the trf nodes reached (fppf covering base change, fpqc smoothness descent, split torus smoothness) are generic and are reached only through general reductive-group structure nodes. The item's base stmt_deps already reached them, and none is part of the trace formula or Poincare duality. This head differs from the PASSed 03ab8021401 only by the expanded step 1. The route stays in unit sk-thm-sf-ctf-stability."
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-closed-lift-stalk-specialization",
+ "kind": "statement",
+ "title": "Specialization at the distinguished closed lift is transport",
+ "statement": "Let s:Spec Ω→S be a geometric point and c:Spec Ω→S_(s) the distinguished lift given by the point evaluation ring map, so cg=s. For every abelian etale sheaf F, specialization s→c followed by transport along cg=s is the identity on F_s. For every bounded-below complex K, the derived specialization to c is precisely transport from K_s to K_(cg) along the inverse equality.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0GJ2 (specialization and Remark alternative-sp), 03Q9, 03QO and 0GJV (proof of lemma-specialization-cospecialization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-specialization-cospecialization-arrows",
+  "lem-weil-pbc-strict-henselization-point-evaluation-pointed"
+ ],
+ "proof": [
+  {
+   "text": "On every affine pointed-neighbourhood germ, the defining section-cone restriction and the inverse-image stalk germ equation identify specialization with the germ at the lift through the limit leg. Point evaluation recovers the original marked lift at each limit leg. Stalk-colimit extensionality proves that specialization, followed by point transport, is the identity.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-point-evaluation-pointed",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived specialization is the right-derived natural transformation conjugated by the exact-stalk comparison isomorphisms. After eliminating the equality of geometric points, the underived transformation is the identity, and right-derived functoriality and cancellation of the comparison isomorphisms prove the derived assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-point-evaluation-pointed",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "worker P3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Expansion of the canonical germ, exchange and restriction comparisons in Tags 0GJ2 and 0GJV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived specialization of etale stalks via restriction to strict henselization and base change fibre maps",
+   "results": "Eight results about topological or structure-sheaf stalk specialization; no exact derived etale identity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk at geometric point strict henselization derived global sections specialization restriction",
+   "results": "Eight structure-sheaf stalk results; no derived etale factorization. Loogle did not know the project rightDerivedFunctorPlusNatTrans.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*Fibre.*Restrict|specialization.*Restriction|Closed.*Specialization in Mathlib, WeilConjectures, Sheaf and DAG",
+   "results": "Existing generic derived exchange/global-germ identity and horizontal pasting, section-cone restriction, and underived representative-germ proofs. No exact statements of these new identities.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictBaseFibreMapFactorization",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-specialization-cospecialization-compatibility",
+   "place": "Proof steps 1 and 3: compare specialization and both geometric fibre maps with restriction on the strict-local base.",
+   "via": [
+    "lem-weil-pbc-strict-base-fibre-map-factorization",
+    "lem-weil-pbc-specialization-cospecialization-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedLiftStalkSpecialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedLiftStalkSpecialization.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedEtaleStalkSpecialization_closed",
+  "statement": "theorem Etale.derivedEtaleStalkSpecialization_closed\n    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (s : Spec (.of Ω) ⟶ S)\n    (K : _root_.DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) :\n    (derivedEtaleStalkSpecialization s\n        (Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)))).app K =\n      eqToHom (congrArg (fun p : Spec (.of Ω) ⟶ S ↦\n        (pointSmallEtale p).sheafFiber.mapDerivedCategoryPlus.obj K)\n          (strictHenselizationClosedLift_over s).symm)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleStalkSpecialization_closed",
+   "AlgebraicGeometry.Etale.derivedEtaleStalkSpecialization_closed"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261025T095704-L-3467992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261025T095704-L-3467992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

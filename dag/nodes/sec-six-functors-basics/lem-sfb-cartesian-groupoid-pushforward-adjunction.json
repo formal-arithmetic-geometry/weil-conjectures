@@ -1,0 +1,316 @@
+{
+ "id": "lem-sfb-cartesian-groupoid-pushforward-adjunction",
+ "kind": "statement",
+ "title": "Cartesian groupoid pushforward and the restricted ordinary adjunction",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $\\mathcal R=(U,R,s,t,c,e,i)$ and $\\mathcal R'=(U',R',s',t',c',e',i')$ be groupoids in schemes over $S$ [def-a1-scheme-groupoid-laws]. For either groupoid, a quasi-coherent equivariant module is a quasi-coherent module $M$ on its object scheme [pqf-def-coherent] with an isomorphism $\\beta:t^*M\\xrightarrow{\\sim}s^*M$ [def-pc-module-pullback] satisfying $e^*\\beta=1$ and $c^*\\beta=\\operatorname{pr}_1^*\\beta\\circ\\operatorname{pr}_0^*\\beta$; morphisms $a:(M,\\beta)\\to(N,\\gamma)$ obey $s^*a\\circ\\beta=\\gamma\\circ t^*a$. Denote this category by $\\operatorname{QCoh}(\\mathcal R)$, and similarly for $\\mathcal R'$. Suppose morphisms $f_0:U\\to U'$ and $f_1:R\\to R'$ commute with source, target, identity, inversion and composition, so define a morphism of groupoids $f:\\mathcal R\\to\\mathcal R'$. Assume $f_0$ is quasi-compact and quasi-separated (inverse images of affine opens are quasi-compact, and its diagonal is quasi-compact), $s',t'$ are flat [def-weil-flat-morphism], and the square with horizontal maps $f_1,f_0$ and vertical maps $t,t'$ is Cartesian [def-pc-fibre-product]. Then pullback $f^*(M,\\beta)=(f_0^*M,f_1^*\\beta)$ and direct image $f_*$ define functors\n$$f^*:\\operatorname{QCoh}(\\mathcal R')\\longrightarrow\\operatorname{QCoh}(\\mathcal R),\\qquad f_*:\\operatorname{QCoh}(\\mathcal R)\\longrightarrow\\operatorname{QCoh}(\\mathcal R').$$\nThe underlying module and map of $f_*$ are $f_{0,*}N$ and $f_{0,*}a$. Its equivariant isomorphism is the natural composite\n$$(t')^*f_{0,*}N\\xrightarrow{b_t}f_{1,*}t^*N\\xrightarrow{f_{1,*}\\gamma}f_{1,*}s^*N\\xrightarrow{b_s^{-1}}(s')^*f_{0,*}N,$$\nwhere $b_t,b_s$ are the canonical flat base-change maps for the target and source squares, respectively. Both maps are isomorphisms, and this composite satisfies the identity and cocycle conditions. The ordinary module-sheaf adjunction restricts to natural bijections\n$$\\operatorname{Hom}_{\\operatorname{QCoh}(\\mathcal R)}(f^*M,N)\\cong\\operatorname{Hom}_{\\operatorname{QCoh}(\\mathcal R')}(M,f_*N).$$\nPrecisely, the underlying ordinary adjunction transpose of an equivariant map is equivariant, and the inverse ordinary transpose of an equivariant map is equivariant. Thus these bijections specify an adjunction $f^*\\dashv f_*$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 09VH (lemma-pushforward), statement and proof, including the ordinary module-adjunction restriction; pullback is Tag 03LJ (lemma-pullback)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sfb-scheme-groupoid-module",
+  "def-sfb-module-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "The target square is Cartesian by assumption. Applying inversion on both arrow schemes exchanges target with source and commutes with $f_1$, so the source square is Cartesian too. Equivalently, on every test scheme an arrow of $\\mathcal R'$ and a lift of its target have a unique lift in $\\mathcal R$; inversion gives the analogous uniqueness for a specified source. Pullback preserves quasi-coherence by [lem-weil-pbc-module-pullback-quasi-coherent]. Pull back the identity equation for $\\beta$ along $f_0$ and its cocycle equation along $f_2:R\\times_{s,U,t}R\\to R'\\times_{s',U',t'}R'$. The groupoid-functor equations identify these with the required equations for $f_1^*\\beta$. Pulling back the equation for a morphism gives its equivariance. Functoriality of module pullback gives identities and composition. This constructs $f^*$, without a flatness condition on $f_0$.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "def-pc-fibre-product",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LJ, lemma-pullback; Tag 09VH, source square obtained by inversion."
+   }
+  },
+  {
+   "text": "Fix the following notation for comparisons, including non-Cartesian squares. If $p:A\\to B$, $q:A'\\to B'$, $u:A\\to A'$, $v:B\\to B'$ satisfy $qu=vp$, write $B_{p,q}:q^*v_*\\to u_*p^*$ for the mate of $u^*q^*\\cong p^*v^*$. This is [def-weil-pbc-adjunction-mate] with the adjunctions for $v$ and $u$ from [lem-pc-module-pullback-adjunction]. For a second square $r:B\\to C$, $r':B'\\to C'$, $w:C\\to C'$, the pasting formula is\n$$B_{rp,r'q}=B_{p,q}(r^*(-))\\circ q^*B_{r,r'}.$$\nHere both sides have source $(r'q)^*w_*$ and target $u_*(rp)^*$. Apply [new-integral-residue-mate-pasting] to the three vertical adjunctions: the inverse mate of the composite on the right is the pasted pullback square; this is the outer pullback square. The latter equality is associativity of the canonical tensor pullback identifications of [def-pc-module-pullback] (on local tensors both send $a\\otimes b\\otimes m$ to $ab\\otimes m$). Injectivity of the inverse mate gives the formula. A square with identity horizontal maps ($u,v$ identities, $p=q$) has comparison the identity, and so does a square with identity vertical maps ($p,q$ identities, $u=v$): after the identifications $\\mathrm{id}^*\\cong\\mathrm{id}$ of [def-pc-module-pullback] the comparison is $u_*\\varepsilon_u\\circ\\eta_{u_*}=1$, by the triangle identity of [lem-pc-module-pullback-adjunction]. The comparisons are natural in the module, since units, counits and pullback composition are natural. No invertibility assertion is made here.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "new-integral-residue-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH, omitted comparison coherences; ordinary adjunction and composition: sheaves.tex Tags 0096 (lemma-adjoint-pullback-pushforward-modules), 0097 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "We will also use the comparison's normalized transpose. In the notation of step 2, let $h:v^*M\\to N$ and let $\\widehat h:M\\to v_*N$ be its ordinary transpose. Under $u^*\\dashv u_*$, the transpose of\n$$q^*M\\xrightarrow{q^*\\widehat h}q^*v_*N\\xrightarrow{B_{p,q}(N)}u_*p^*N$$\nis $p^*h$, with the canonical identification $u^*q^*M\\cong p^*v^*M$. Indeed [lem-amb-mate-unit-counit] identifies the transpose of $B_{p,q}(N)$ with $p^*\\varepsilon_{v,N}$. Naturality then identifies the displayed transpose with $p^*(\\varepsilon_{v,N}\\circ v^*\\widehat h)=p^*h$. This uses the given ordinary adjunction, not an independently chosen Hom bijection.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH, last two sentences of proof: restriction of the ordinary module adjunction; expanded counit calculation."
+   }
+  },
+  {
+   "text": "For $(N,\\gamma)$, the module $F=f_{0,*}N$ is quasi-coherent by [pqf-lem-pushforward-qcoh], since $f_0$ is quasi-compact and quasi-separated. Apply [lem-pc-flat-base-change-cohom] in degree zero to each of the Cartesian source and target squares: the horizontal direct-image map is $f_0$, the flat base maps are $s',t'$, and $N$ is quasi-coherent. This gives natural isomorphisms $b_s=B_{s,s'}(N)$ and $b_t=B_{t,t'}(N)$. Define $\\delta=b_s^{-1}\\circ f_{1,*}\\gamma\\circ b_t$. It is an isomorphism. If $a:N\\to N_1$ is equivariant, naturality of $b_s,b_t$ converts $f_{1,*}(s^*a\\circ\\gamma)=f_{1,*}(\\gamma_1\\circ t^*a)$ into $(s')^*f_{0,*}a\\circ\\delta=\\delta_1\\circ(t')^*f_{0,*}a$. Thus the ordinary direct-image maps are equivariant; they preserve identities and composition. It remains to verify the two equations for $\\delta$.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-pc-flat-base-change-cohom",
+    "def-weil-pbc-adjunction-mate",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH, first and second paragraphs; schemes.tex Tag 01LC (lemma-push-forward-quasi-coherent); coherent.tex Tag 02KH (lemma-flat-base-change-cohomology), i=0."
+   }
+  },
+  {
+   "text": "Put $P=R\\times_{s,U,t}R$, $P'=R'\\times_{s',U',t'}R'$ and let $f_2:P\\to P'$ be induced by $f_1$ on both factors. Both projection squares $(\\operatorname{pr}_j,\\operatorname{pr}'_j)$ with vertical maps $f_2,f_1$ are Cartesian. To see this for $j=0$, fix a lift $a$ of the first arrow $a'$ and a second arrow $b'$ with $t'(b')=s'(a')$. The target-square uniqueness of step 1 lifts $b'$ uniquely with target $s(a)$. For $j=1$, fix $b$ and lift $a'$ with source $t(b)$ using source-square uniqueness. These constructions are functorial on test schemes and are inverse to the fiber-product comparisons by [def-pc-fibre-product]. The map $f_1$ is qcqs, being a base change of $f_0$, by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. The maps $\\operatorname{pr}'_0,\\operatorname{pr}'_1$ are flat: they are respectively base changes of $t',s'$ by [lem-weil-pbc-flat-morphism-base-change]. Hence [lem-pc-flat-base-change-cohom], applied to $f_1$ in degree zero, gives isomorphisms $B_{\\operatorname{pr}_j,\\operatorname{pr}'_j}(L)$ for every quasi-coherent module $L$ on $R$. In particular take $L=s^*N,t^*N$, which are quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent].",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-base-change-cohom",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH: details of the sentence about the cocycle condition, using fiber-product universal properties and Tag 02KH."
+   }
+  },
+  {
+   "text": "For the identity, let $D(L)=B_{e,e'}(L):e'^*f_{1,*}L\\to f_{0,*}e^*L$. This comparison exists by step 2, even though $e'$ need not be flat. Pasting the $e$ square with the $s$ square, and with the $t$ square, gives\n$$D(s^*N)\\circ e'^*b_s=1_F=D(t^*N)\\circ e'^*b_t.$$\nIn particular $D(s^*N)$ is invertible, since $e'^*b_s$ is. Pull back $b_s\\delta=f_{1,*}\\gamma\\,b_t$ along $e'$ and postcompose with $D(s^*N)$. Naturality of $D$ gives\n$$e'^*\\delta=f_{0,*}(e^*\\gamma)=1_F.$$\nThus the identity law holds. This cancellation only uses the isomorphisms already obtained in step 4.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "def-pc-module-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "new-integral-residue-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH, omitted identity check for the constructed direct-image equivariance."
+   }
+  },
+  {
+   "text": "On $P$ write $u=t\\operatorname{pr}_0=tc$, $v=s\\operatorname{pr}_1=sc$, and $w=s\\operatorname{pr}_0=t\\operatorname{pr}_1$; use primes for the corresponding maps on $P'$. Set $C_u=B_{u,u'}(N)$, and similarly $C_v,C_w$. By pasting (step 2), $C_u=B_{\\operatorname{pr}_0,\\operatorname{pr}'_0}(t^*N)\\circ\\operatorname{pr}'_0{}^*b_t$, and $C_v=B_{\\operatorname{pr}_1,\\operatorname{pr}'_1}(s^*N)\\circ\\operatorname{pr}'_1{}^*b_s$; both are isomorphisms by steps 4--5. Naturality and pasting give the three equations\n$$C_v c'^*\\delta=f_{2,*}(c^*\\gamma)C_u,$$\n$$C_w\\operatorname{pr}'_0{}^*\\delta=f_{2,*}(\\operatorname{pr}_0^*\\gamma)C_u,$$\n$$C_v\\operatorname{pr}'_1{}^*\\delta=f_{2,*}(\\operatorname{pr}_1^*\\gamma)C_w.$$\nFor the first, apply $B_{c,c'}$ to $c'^*(b_s\\delta=f_{1,*}\\gamma\\,b_t)$, move $\\gamma$ across by naturality, and identify the two outer composites by pasting; the other two equations use the respective projection squares in the identical substitution. Multiplying the last two equations and using $c^*\\gamma=\\operatorname{pr}_1^*\\gamma\\circ\\operatorname{pr}_0^*\\gamma$ gives $C_v c'^*\\delta=C_v(\\operatorname{pr}'_1{}^*\\delta\\circ\\operatorname{pr}'_0{}^*\\delta)$. Cancel $C_v$. This is precisely the cocycle law, so step 4 defines $f_*$.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "def-pc-module-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "new-integral-residue-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH, sentence \"A similar argument shows that ... satisfies the cocycle condition\", expanded with the same ordinary comparisons."
+   }
+  },
+  {
+   "text": "Let $(M,\\beta)$ belong to $\\operatorname{QCoh}(\\mathcal R')$, and let $h:f_0^*M\\to N$ have ordinary transpose $\\widehat h:M\\to F$. Equivariance of $\\widehat h$ is equivalent, after multiplying by the invertible $b_s$, to\n$$b_s\\,(s')^*\\widehat h\\,\\beta=f_{1,*}\\gamma\\,b_t\\,(t')^*\\widehat h.$$\nTranspose this equality under $f_1^*\\dashv f_{1,*}$. Step 3 identifies the transpose of $b_s(s')^*\\widehat h$ with $s^*h$, and that of $b_t(t')^*\\widehat h$ with $t^*h$. Naturality of the Hom bijection, equivalently [lem-sfb-adjunction-transpose-square], identifies the displayed equality with\n$$s^*h\\circ f_1^*\\beta=\\gamma\\circ t^*h.$$\nThis is exactly equivariance of $h$. Since transposition is a bijection, this equivalence proves both directions required in the statement, not just one implication. Restrict the ordinary Hom bijection to these equal subsets. Naturality in $M,N$ is inherited from the ordinary adjunction: precomposition and postcomposition preserve equivariance by the functor constructions. Thus these restricted bijections specify $f^*\\dashv f_*$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback",
+    "def-weil-pbc-adjunction-mate",
+    "lem-amb-mate-unit-counit",
+    "lem-sfb-adjunction-transpose-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH, last two sentences: both ordinary transpose directions and naturality, written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "new-integral-residue-mate-pasting",
+  "lem-amb-mate-unit-counit",
+  "pqf-lem-pushforward-qcoh",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-sfb-adjunction-transpose-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03LJ (lemma-pullback) and 09VH (lemma-pushforward). Source route retained; Q41 expands the omitted identity, cocycle and ordinary-adjunction restriction by canonical mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Adjunction\"",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(pushforward|adjunction)|equivariant.*quasi|GroupoidObject",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of quasi coherent modules on a scheme groupoid is right adjoint to pullback along a cartesian morphism",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of quasi coherent modules along a cartesian morphism of scheme groupoids is right adjoint to pullback when the object map is quasi compact quasi separated and the target source and target maps are flat",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian functor between flat groupoid schemes induces an adjunction between equivariant quasi coherent sheaf categories via ordinary sheaf pullback and direct image",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc.*quasi|groupoid.*[Aa]dj|equivariant.*[Aa]dj",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module-sheaf adjunctions, free/forgetful adjunctions or unrelated categories; no equivariant quasi-coherent scheme-groupoid statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian morphism of flat groupoids in schemes gives an adjunction on equivariant quasi coherent modules using flat base change and qcqs pushforward",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary module adjunctions and their pseudofunctor, not equivariant quasi-coherent modules on scheme groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian groupoid scheme equivariant quasi coherent sheaf pushforward right adjoint pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, TopCat.Sheaf.pullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, CategoryTheory.Functor.sheafAdjunctionContinuous, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary module adjunctions and their pseudofunctor, not equivariant quasi-coherent modules on scheme groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(pushforward|adjunction)|equivariant.*quasi|GroupoidObject",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary module adjunctions and their pseudofunctor, not equivariant quasi-coherent modules on scheme groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Adjunction\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary module adjunctions and their pseudofunctor, not equivariant quasi-coherent modules on scheme groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-groupoid-coinduction-adjunction",
+  "date": "2026-10-23",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the invocation of Groupoids lemma-colimit-coherent in the last sentence; the equivariant approximation theorem, not the algebraic-space conclusion. Supporting input to Tag 07TU: Tag 07TR (lemma-construct-quasi-coherent), and Tag 0GNF (remark-adjunction-map), including its explicit unit formula. Supporting lemma for 07TR: groupoids.tex Tag 09VH (lemma-pushforward), applied to the pair groupoid of t and its difference morphism.",
+   "via": [
+    "lem-sfb-groupoid-coinduction-adjunction",
+    "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cartesian-groupoid-pushforward-adjunction",
+  "worker": "stage1",
+  "summary": "Q41 retains the statement and splits the proof into eight explicit steps, reusing existing DAG inputs (zero new nodes). Checks the Cartesian source and composable-pair squares, proves identity and cocycle by natural canonical comparisons, and proves equivariance iff equivariance under the actual ordinary transpose. The identity section is never assumed flat. Repairs the inherited null blueprint ancestor using the existing chain.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting quasi-coherent groupoid coinduction input along the inherited chain: the Tag 09VH prerequisite for Tag 07TR. The detailed alteration/support chain is retained in blueprint.from.place; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "new-integral-residue-mate-pasting",
+    "why": "Generic mate-pasting bijection for the three ordinary vertical module adjunctions. Applied in reverse by injectivity to deduce forward base-change pasting; no such generic coherence lemma is stated in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-integral-residue-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-4d69b3c9a",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-4d69b3c9a (reviewer sub-agent of L); spot-checked: Read the whole delivery: the unchanged statement (identical to live, which is still unsplit, so not superseded), all 8 steps and the 16 cited node statements, against Stacks groupoids.tex 03LJ/09VH and the group-module definition and lemma-isomorphism. The hypotheses match the source (f_0 qcqs, target square Cartesian, s',t' flat). Step 1 gets the source square by inversion. b_s,b_t are the canonical mates: def-weil-pbc-adjunction-mate follows Stacks 07A7, so they are the same as the degree-0 02KH base change of lem-pc-flat-base-change-cohom. I checked the pasting via the Lean statement of new-integral-residue-mate-pasting (inverseMate_pasting) used through injectivity; that tool_use is accepted, generic and on route. I checked the pair-square Cartesianity, the qcqs and flat base changes, the identity law (e' not flat), the cocycle with C_v cancellation (u=tc, v=sc, w=s pr_0) and the step-8 iff by transpose-square. FIX: step 2 stated B=1 only for identity horizontal maps, but step 6 needs the identity vertical case (se=id, s'e'=id). I added that sentence (triangle identity u_*ε∘η=1, using already-cited nodes). All off-unit citations are on the sk-thm-sf-ctf-stability route. There are no new nodes, no duplicate (09VH appears only in the item and its parent), no SGA citation, and blueprint.from.node matches the via chain. Edge cases tested: trivial groupoid, f=id, the action groupoid U×G over a point, and empty schemes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartesianGroupoidPushforwardAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.exists_cartesian_groupoid_pushforward_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.groupoidMorphismPullbackComparison",
+   "AlgebraicGeometry.Scheme.groupoidMorphismPullbackDescent",
+   "AlgebraicGeometry.Scheme.groupoidMorphismBaseChange",
+   "AlgebraicGeometry.Scheme.groupoidModuleOrdinaryAdjunction",
+   "AlgebraicGeometry.Scheme.exists_cartesian_groupoid_pushforward_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianGroupoidPushforwardAdjunction.lean",
+  "statement": "theorem exists_cartesian_groupoid_pushforward_adjunction (S : Scheme.{u}) {U R U' R' : Scheme.{u}} (p : U ⟶ S) (q : R ⟶ S) (p' : U' ⟶ S) (q' : R' ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (s' t' : R' ⟶ U') (e' : U' ⟶ R') (i' : R' ⟶ R') (c' : pullback s' t' ⟶ R') (_hsS : s ≫ p = q) (_htS : t ≫ p = q) (_hsS' : s' ≫ p' = q') (_htS' : t' ≫ p' = q') (hG : IsGroupoid s t e i c) (hG' : IsGroupoid s' t' e' i' c') (f₀ : U ⟶ U') (f₁ : R ⟶ R') (_hfS : f₀ ≫ p' = p) (_hfS' : f₁ ≫ q' = q) (hs : f₁ ≫ s' = s ≫ f₀) (ht : f₁ ≫ t' = t ≫ f₀) (_he : e ≫ f₁ = f₀ ≫ e') (_hi : i ≫ f₁ = f₁ ≫ i') (_hc : c ≫ f₁ = pullback.map s t s' t' f₁ f₁ f₀ hs.symm ht.symm ≫ c') [QuasiCompact f₀] [QuasiSeparated f₀] [Flat s'] [Flat t'] (_hcart : IsPullback f₁ t t' f₀) : ∃ (F : GroupoidModule s' t' e' i' c' hG' ⥤ GroupoidModule s t e i c hG) (G : GroupoidModule s t e i c hG ⥤ GroupoidModule s' t' e' i' c' hG') (hF : F ⋙ GroupoidModule.forgetToModules = GroupoidModule.forgetToModules ⋙ groupoidModulePullback f₀) (hP : G ⋙ GroupoidModule.forgetToModules = GroupoidModule.forgetToModules ⋙ Modules.pushforward f₀), (∀ M : GroupoidModule s' t' e' i' c' hG', (groupoidModulePullback t).map (eqToHom (congrArg (fun H ↦ H.obj M) hF).symm) ≫ (F.obj M).beta.hom ≫ (groupoidModulePullback s).map (eqToHom (congrArg (fun H ↦ H.obj M) hF)) = groupoidMorphismPullbackDescent f₀ f₁ s t s' t' hs ht M.moduleObj M.beta) ∧ (∀ N : GroupoidModule s t e i c hG, IsIso (groupoidMorphismBaseChange f₀ f₁ t t' ht N.moduleObj) ∧ IsIso (groupoidMorphismBaseChange f₀ f₁ s s' hs N.moduleObj) ∧ groupoidMorphismBaseChange f₀ f₁ t t' ht N.moduleObj ≫ (Modules.pushforward f₁).map N.beta.hom = (groupoidModulePullback t').map (eqToHom (congrArg (fun H ↦ H.obj N) hP).symm) ≫ (G.obj N).beta.hom ≫ (groupoidModulePullback s').map (eqToHom (congrArg (fun H ↦ H.obj N) hP)) ≫ groupoidMorphismBaseChange f₀ f₁ s s' hs N.moduleObj) ∧ ∃ adj : F ⊣ G, ∀ (M : GroupoidModule s' t' e' i' c' hG') (N : GroupoidModule s t e i c hG), (∀ a : F.obj M ⟶ N, (adj.homEquiv M N a).val ≫ eqToHom (congrArg (fun H ↦ H.obj N) hP) = (groupoidModuleOrdinaryAdjunction f₀).homEquiv M.moduleObj N.moduleObj (eqToHom (congrArg (fun H ↦ H.obj M) hF).symm ≫ a.val)) ∧ (∀ b : M ⟶ G.obj N, eqToHom (congrArg (fun H ↦ H.obj M) hF).symm ≫ ((adj.homEquiv M N).symm b).val = ((groupoidModuleOrdinaryAdjunction f₀).homEquiv M.moduleObj N.moduleObj).symm (b.val ≫ eqToHom (congrArg (fun H ↦ H.obj N) hP)))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be1ceda53",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of ba0d (H2 RETURN). It applies exactly the prescribed stmt_dep swap: lem-weil-pbc-module-base-change-map-open-restriction → def-sfb-module-base-change-map. The Lean file is byte-identical and all other node records match live. Checked against Stacks 09VH/03LJ: the hypotheses are exactly f0 qcqs, IsPullback f1 t t' f0, and Flat s', t'. F is pinned by hF plus the descent map f1^*β with tensorPullbackSectionComp comparisons. G is pinned by hP, IsIso b_t/b_s and b_t≫f1,*γ = δ≫b_s. The adjunction homEquiv is pinned to the section-normalized ordinary adjunction in both directions. moduleBaseChangeMap's choose is the unique normalized adjunction (existsUnique_tensorPullbackSectionAdjunction), so it is canonical. stmt_deps are all used definition nodes. lean.statement is verbatim. There is one sorry. The helpers are real data with docstrings and no name clashes. Report sections are present. No compile (no file changed)."
+ }
+}

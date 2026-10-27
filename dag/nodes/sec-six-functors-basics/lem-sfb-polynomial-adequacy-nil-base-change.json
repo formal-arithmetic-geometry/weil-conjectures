@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-polynomial-adequacy-nil-base-change",
+ "kind": "statement",
+ "title": "Polynomial tests for universal power lifting with nil kernel",
+ "statement": "Let $u:R\\to S$ be a homomorphism of commutative rings. For $n\\geq0$, let $u_n:R[t_1,\\ldots,t_n]\\to S[t_1,\\ldots,t_n]$ apply $u$ to coefficients, using [def-weil-pbc-mv-polynomial-ring]. Suppose every element of $\\ker u$ is nilpotent, and for every $n\\geq0$ and every $b\\in S[t_1,\\ldots,t_n]$ there exist $N>0$ and $a\\in R[t_1,\\ldots,t_n]$ such that $u_n(a)=b^N$. Then for every commutative $R$-algebra $E$, the map $u_E:E\\to E\\otimes_R S$, $e\\mapsto e\\otimes1$, has elementwise nilpotent kernel, and every $z\\in E\\otimes_R S$ has a positive power $z^M$ in its image. The tensor product is scalar extension [def-weil-module-base-change], with multiplication $(e\\otimes s)(e'\\otimes s')=ee'\\otimes ss'$. No characteristic, finiteness, flatness or reducedness hypothesis is imposed; in particular $\\ker u\\otimes_{\\mathbf Z}\\mathbf Q=0$ is not required.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Remark 3.2.2, printed p.496 (polynomial tests), Lemma 3.1.4, printed p.495, and the spectral part of the proof of Proposition 3.3.5, printed p.498 (nil kernel under base change). The conclusion only retains nil kernels and power lifting, not the characteristic-zero clause of an adequate homeomorphism. Published primary PDF https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Take $n=0$. By [def-weil-pbc-mv-polynomial-ring] the zero-variable polynomial rings are $R$ and $S$, so every $s\\in S$ has a positive power in $u(R)$. Together with the assumed elementwise nilpotent kernel, these are exactly the hypotheses of [lem-pur-all-element-powers-spectrum-homeomorphism]. Hence $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is a homeomorphism, in particular surjective.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pur-all-element-powers-spectrum-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BR8, lemma-powers, homeomorphism clause"
+   }
+  },
+  {
+   "text": "Fix a commutative $R$-algebra $E$. Put $D=E\\otimes_R S$ and $g:E\\to D$, $g(e)=e\\otimes1$. Its commutative ring structure and the maps $g$ and $j:S\\to D$, $j(s)=1\\otimes s$, are supplied by [lem-weil-pbc-algebra-tensor-pushout-universal-property](1). Apply [lem-weil-pbc-spec-surjective-base-change] to the surjection from step 1 and the ring map $R\\to E$: the induced map $\\operatorname{Spec}D\\to\\operatorname{Spec}E$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-spec-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FI, lemma-surjective-spec-radical-ideal, final base-change assertion; tensor ring structure from Section 00CV"
+   }
+  },
+  {
+   "text": "If $e\\in\\ker g$ and $\\mathfrak p$ is any prime ideal of $E$, step 2 gives a prime $\\mathfrak q$ of $D$ with $g^{-1}(\\mathfrak q)=\\mathfrak p$. Since $g(e)=0\\in\\mathfrak q$, we have $e\\in\\mathfrak p$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], applied to the zero ideal, $e\\in\\bigcap_{\\mathfrak p\\in\\operatorname{Spec}E}\\mathfrak p=\\sqrt{(0)}$. Thus $e^k=0$ for some $k\\geq1$. This is elementwise nilpotence; it does not require a single exponent for the whole kernel.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, item (7) and the definition of the radical"
+   }
+  },
+  {
+   "text": "For $z\\in D$, tensor-product generation in [def-weil-pbc-module-tensor-product] writes $z=\\sum_{i=1}^m e_i\\otimes s_i$, absorbing $R$-scalar coefficients into $e_i$. Put $b=\\sum_i s_it_i\\in S[t_1,\\ldots,t_m]$. The hypothesis gives $N>0$ and $a\\in R[t_1,\\ldots,t_m]$ with $u_m(a)=b^N$. By [def-weil-pbc-mv-polynomial-ring], evaluate $S[t_1,\\ldots,t_m]\\to D$ by $s\\mapsto j(s)$ and $t_i\\mapsto g(e_i)$. The tensor multiplication from [lem-weil-pbc-algebra-tensor-pushout-universal-property](1) sends $b$ to $\\sum_i(1\\otimes s_i)(e_i\\otimes1)=z$. Evaluation sends $u_m(a)$ to $g(a(e_1,\\ldots,e_m))$: on a coefficient $r$, $j(u(r))=1\\otimes u(r)=r_E\\otimes1=g(r_E)$ by balancing, and both maps send $t_i$ to $g(e_i)$. Polynomial uniqueness therefore identifies these maps. Preservation of powers gives $z^N=g(a(e_1,\\ldots,e_m))$. If the sum is empty, $z=0$ and $N=1$, $a=0$ work. This proves power lifting for every $E$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Remark 3.2.2, printed p.496: explicit polynomial-evaluation expansion; tensor generation and balancing are Section 00CV of Stacks algebra.tex; published PDF read online, local copy WANTED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-spec-surjective-base-change",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 0BR8 (lemma-powers), 00FI (lemma-surjective-spec-radical-ideal), 00E0 (lemma-Zariski-topology), and the explicit evaluation calculation expanding Alper Remark 3.2.2, printed p.496. The published primary PDF was read online; the local Alper PDF is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a ring homomorphism has nil kernel and every finite polynomial extension lifts positive powers then every tensor base extension has nil kernel and lifts positive powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.base_change\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {A : Type u_2} [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A],\\n  Algebra.FormallyUnramified B (TensorProduct R B A)\", \"doc\": \"The tensor product $ A \\\\otimes_R B $ of two commutative $ R $-algebras $ A $ and $ B $ over a commutative semiring $ R $ is equipped with a commutative ring structure, where the multiplication operati\"}\n  {\"name\": \"Algebra.IsStandardSmooth.baseChange\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u_1)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Algebra.IsStandardSmooth R S],\\n  Algebra.IsStandardSmooth T (TensorProduct R T S)\", \"doc\": \"If $ S $ is a standard smooth $ R $-algebra, then the tensor product $ T \\\\otimes_R S $ is a standard smooth $ T $-algebra.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u_1)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  Algebra.IsStandardSmoothOfRelativeDimension n T (TensorProduct R T S)\", \"doc\": \"Let $S$ and $T$ be commutative $R$-algebras over a commutative ring $R$. If $S$ is a standard smooth $R$-algebra of relative dimension $n$, then the base change $T \\\\otimes_R S$ is a standard smooth $T\"}\n  {\"name\": \"Algebra.FormallySmooth.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {A : Type u_5} [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_6)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A],\\n  Algebra.FormallySmooth B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally smooth $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally smooth $ B $-algebra.\"}\n  {\"name\": \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {R : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K] (x : TensorProduct k R K),\\n  ∃ n > 0, x ^ n ∈ (algebraMap R (TensorProduct k R K)).range\", \"doc\": \"For any purely inseparable field extension $ k \\\\subseteq K $ and any element $ x $ in the tensor product $ R \\\\otimes_k K $, there exists a positive integer $ n $ such that $ x^n $ lies in the image of\"}\n  {\"name\": \"Algebra.FormallyUnramified.elem\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → [Algebra.FormallyUnramified R S] → [Algebra.EssFiniteType R S] → TensorProduct R S S\", \"doc\": \"An element in the tensor product $ S \\\\otimes_R S $ that arises in the characterization of formally unramified algebras. This element is constructed via an existential choice from the proof that $ S $ \"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] {C : Type u_1} [inst_6 : Ring C]\\n  (f : B →+* C), IsNilpotent (RingHom.ker f) → ∀ (g₁ g₂ : A →ₐ[R] B), f.comp ↑g₁ \", \"doc\": \"Given a formally unramified $ R $-algebra $ A $, if $ f : B \\\\to C $ is a ring homomorphism with nilpotent kernel, then any two $ A $-algebra homomorphisms $ g_1, g_2 : A \\\\to B $ satisfying $ f \\\\circ g\"}\n  {\"name\": \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_3) (A : Type u_4) (K : Type u_5) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [inst_3 : Field K] [inst_4 : Algebra k K] [Algebra.IsAlgebraic k K] [Algebra.IsGeometricallyReduced k A],\\n  IsReduced (TensorProduct k K A)\", \"doc\": \"Let $A$ be a geometrically reduced algebra over a field $k$, and let $K/k$ be an algebraic field extension. Then the tensor product $K \\\\otimes_k A$ is a reduced ring, meaning it has no non-zero nilpot\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsPRadical fixes prime-power exponents and the purely inseparable tensor lemma assumes fields; the general polynomial-test criterion for arbitrary rings is not either statement. PrimeSpectrum.isHomeomorph_comap gives only the unextended spectral conclusion, not this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"ker\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Algebra.ker_algebraMap_isMaximal_of_isIntegral\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \" (R : Type u_1) [CommRing R] (k : Type u_6) [Field k] [Algebra R k] [Algebra.IsIntegral R k] : (RingHom.ker (algebraMap R k)).IsMaximal\", \"doc\": \"\"}\n  {\"name\": \"RingHom.IsIntegral.kerLift\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \" {S : Type u_4} {T : Type u_5} [CommRing S] [CommRing T] {f : S →+* T} (hf : f.IsIntegral) : f.kerLift.IsIntegral\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsPRadical fixes prime-power exponents and the purely inseparable tensor lemma assumes fields; the general polynomial-test criterion for arbitrary rings is not either statement. PrimeSpectrum.isHomeomorph_comap gives only the unextended spectral conclusion, not this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "universallyAdequate|universally_adequate|adequate|nilpotent.*[Kk]er|[Kk]er.*nilpotent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"737\", \"text\": \"/-- The preimage of a nilpotent group is nilpotent if the kernel of the homomorphism is contained\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"739\", \"text\": \"@[to_additive /-- The preimage of a nilpotent additive group is nilpotent if the kernel of the\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"741\", \"text\": \"theorem isNilpotent_of_ker_le_center {H : Type*} [Group H] (f : G →* H) (hf1 : f.ker ≤ center G)\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"756\", \"text\": \"    (hf1 : f.ker ≤ center G) [IsNilpotent H] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"758\", \"text\": \"  have : IsNilpotent G := isNilpotent_of_ker_le_center f hf1\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/StrictPositivity.lean\", \"line\": \"22\", \"text\": \"Note that, while the current definition is adequate in the unital case, it will eventually be\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/AddChar.lean\", \"line\": \"21\", \"text\": \"topologically nilpotent is strictly weaker than assuming `‖κ 1 - 1‖ < 1`, although they are\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean\", \"line\": \"440\", \"text\": \"of the `fixingSubgroup` of a subset of adequate cardinality -/\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean\", \"line\": \"497\", \"text\": \"of adequate cardinality. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"line\": \"870\", \"text\": \"        ((ad R L).quotKerEquivRange.nilpotent_iff_equiv_nilpotent.mpr h)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Immersion.lean\", \"line\": \"70\", \"text\": \"  immersion, so `IsImmersion(At)` is perfectly adequate. Such control will be helpful, however,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"193\", \"text\": \"protected lemma hom_ext {Z' Z : Scheme} (i : Z' ⟶ Z) (hi : IsNilpotent i.ker) [IsClosedImmersion i]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Zero.lean\", \"line\": \"19\", \"text\": \"such as being nilpotent, having determinant equal to 0, having a non-trivial kernel, etc...\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"line\": \"92\", \"text\": \"    rw [AlgHom.commutes, isNilpotent_iff_eq_zero, ← RingHom.mem_ker,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"line\": \"20\", \"text\": \"- `PrimeSpectrum.isHomeomorph_comap`: if `f : R →+* S` is a ring map with locally nilpotent kernel\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"line\": \"34\", \"text\": \"/-- If the kernel of `f : R →+* S` consists of nilpotent elements and for every `x : S`,\"}\n  {\"file\": \"Mathlib/Combinatorics/Additive/VerySmallDoubling.lean\", \"line\": \"733\", \"text\": \"  -- representing finset of `S` acting on `H` are adequate choices for the theorem\"}\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/Lemmas.lean\", \"line\": \"32\", \"text\": \"  simp_rw [isReduced_iff, hf.forall, IsNilpotent, ← map_pow, ← RingHom.mem_ker]\"}\n  {\"file\": \"Mathlib/RingTheory/ZMod/UnitsCyclic.lean\", \"line\": \"211\", \"text\": \"  -- We lift a primitive root of unity mod `p`, an adequate power of which has order `p - 1`.\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Basic.lean\", \"line\": \"144\", \"text\": \"    (f : B →+* C) (hf : IsNilpotent <| RingHom.ker f) (g₁ g₂ : A →ₐ[R] B)\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Basic.lean\", \"line\": \"154\", \"text\": \"    (hf : IsNilpotent <| RingHom.ker f) (g₁ g₂ : A →ₐ[R] B) (h : ∀ x, f (g₁ x) = f (g₂ x)) :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Basic.lean\", \"line\": \"159\", \"text\": \"    [Algebra R C] (f : B →ₐ[R] C) (hf : IsNilpotent <| RingHom.ker (f : B →+* C))\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Finiteness.NilpotentKer\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Pi.lean\", \"line\": \"57\", \"text\": \"    have hJ' (x) (hx : x ∈ RingHom.ker (Ideal.Quotient.mk J)) : IsNilpotent x := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Pi.lean\", \"line\": \"62\", \"text\": \"      g.toRingHom).lift_of_isNilpotent_ker (Ideal.Quotient.mk J) hJ'\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsPRadical fixes prime-power exponents and the purely inseparable tensor lemma assumes fields; the general polynomial-test criterion for arbitrary rings is not either statement. PrimeSpectrum.isHomeomorph_comap gives only the unextended spectral conclusion, not this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally adequate ring maps with nil kernel have nil kernel after every base change and polynomial rings detect universal adequacy",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Unramified R A] : Unramified B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}\n  {\"name\": \"RingHom.pNilradical_le_ker_of_perfectRing\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"[ExpChar L p] [PerfectRing L p] : pNilradical K p ≤ RingHom.ker i\", \"doc\": \"Let $L$ be a perfect ring with exponential characteristic $p$. Then the $p$-nilradical of $K$ is contained in the kernel of the ring homomorphism $i$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n  {\"name\": \"Algebra.FormallySmooth.polynomial\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type*) [CommRing R] : FormallySmooth R R[X]\", \"doc\": \"For any commutative ring $ R $, the polynomial ring $ R[X] $ is a formally smooth $ R $-algebra. This instance asserts that the canonical algebra structure on $ R[X] $ over $ R $ satisfies the formal \"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique'\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] {C : Type*} [Ring C] [Algebra R C] (f : B →ₐ[R] C)\\n  (hf : IsNilpotent <| RingHom.ker (f : B →+* C)) (g₁ g₂ : A →ₐ[R] B) (h : f.comp g₁ = f.comp g₂) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a formally unramified $ R $-algebra. Suppose $ B $ and $ C $ are rings equipped with $ R $-algebra structures, and $ f : B \\\\to C $ is an $ R $-algebra homomor\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] {C : Type*} [Ring C] (f : B →+* C) (hf : IsNilpotent <| RingHom.ker f) (g₁ g₂ : A →ₐ[R] B)\\n  (h : f.comp ↑g₁ = f.comp (g₂ : A →+* B)) : g₁ = g₂\", \"doc\": \"Given a formally unramified $ R $-algebra $ A $, if $ f : B \\\\to C $ is a ring homomorphism with nilpotent kernel, then any two $ A $-algebra homomorphisms $ g_1, g_2 : A \\\\to B $ satisfying $ f \\\\circ g\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsPRadical fixes prime-power exponents and the purely inseparable tensor lemma assumes fields; the general polynomial-test criterion for arbitrary rings is not either statement. PrimeSpectrum.isHomeomorph_comap gives only the unextended spectral conclusion, not this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial power lifting criterion for a ring map to remain power surjective with nil kernel under arbitrary change of scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isPRadical_iff\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : CommSemiring K] [inst_1 : CommSemiring L] (i : K →+* L) (p : ℕ),\\n  IsPRadical i p ↔ (∀ (x : L), ∃ n y, i y = x ^ p ^ n) ∧ RingHom.ker i ≤ pNilradical K p\", \"doc\": \"For commutative semirings $ K $ and $ L $, a ring homomorphism $ i : K \\\\to L $, and a natural number $ p $, the homomorphism $ i $ is $ p $-radical if and only if for every $ x \\\\in L $, there exist $ \"}\n  {\"name\": \"PerfectRing.lift_aux\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : CommSemiring K] [inst_1 : CommSemiring L] (i : K →+* L) (p : ℕ) [IsPRadical i p]\\n  (x : L), ∃ y, i y.2 = x ^ p ^ y.1\", \"doc\": \"For every element $ x $ in $ L $, there exists a natural number $ n $ and an element $ k $ in $ K $ such that $ i(k) = x^{p^n} $, where $ i : K \\\\to L $ is a ring homomorphism satisfying the $ p $-radi\"}\n  {\"name\": \"IsPRadical.pow_mem\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : CommSemiring K] [inst_1 : CommSemiring L] (i : K →+* L) (p : ℕ) [IsPRadical i p]\\n  (x : L), ∃ n y, i y = x ^ p ^ n\", \"doc\": \"For any element $x$ in $L$, there exists a natural number $n$ and an element $y$ in $K$ such that the image of $y$ under the homomorphism $i$ equals $x^{p^n}$, i.e., $i(y) = x^{p^n}$.\"}\n  {\"name\": \"IsPRadical\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"{K : Type u_1} → {L : Type u_2} → [inst : CommSemiring K] → [inst_1 : CommSemiring L] → (K →+* L) → ℕ → Prop\", \"doc\": \"Given commutative semirings $ K $ and $ L $, a ring homomorphism $ f : K \\to L $, and a natural number $ n $, the proposition that $ f $ satisfies the $ n $-radical condition.\"}\n  {\"name\": \"IsPRadical.pow_mem'\", \"module\": \"Mathlib/FieldTheory/IsPerfectClosure\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} {inst : CommSemiring K} {inst_1 : CommSemiring L} {i : K →+* L} {p : ℕ}\\n  [self : IsPRadical i p] (x : L), ∃ n y, i y = x ^ p ^ n\", \"doc\": \"For any commutative semirings $ K $ and $ L $, a ring homomorphism $ i : K \\\\to L $, and a natural number $ p $, if $ i $ satisfies the $ p $-radical condition, then for every element $ x \\\\in L $, ther\"}\n  {\"name\": \"AlgHom.liftOfSurjective_surjective\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Operations\", \"type\": \"∀ {R : Type u_5} {A : Type u_6} {B : Type u_7} {C : Type u_8} [inst : CommRing R] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : CommRing C] [inst_4 : Algebra R A] [inst_5 : Algebra R B] [inst_6 : Algebra R C]\\n  (f : A →ₐ[R] B) (hf : Function.Surjective ⇑f) (g : A →ₐ[R] C) (H : RingHom.ker \", \"doc\": \"Let $ f : A \\\\to B $ and $ g : A \\\\to C $ be surjective algebra homomorphisms over a commutative semiring $ R $. If the kernel of $ f $ is contained in the kernel of $ g $, then the induced algebra homo\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {C : Type u_4} [inst_5 : CommRing C] [inst_6 : Algebra R C]\\n  [inst_7 : Algebra.FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Functio\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"RingHom.FinitePresentation.polynomial_induction\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ (P : (R : Type u) → [inst : CommRing R] → (S : Type u) → [inst_1 : CommRing S] → (R →+* S) → Prop)\\n  (Q : (R : Type u) → [inst : CommRing R] → (S : Type v) → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (∀ (R : Type u) [inst : CommRing R], P R (Polynomial R) Polynomial.C) →\\n    (∀ (R : Type u) [in\", \"doc\": \"If a property $ Q $ holds for polynomial ring extensions $ R \\\\to R[X] $ and for surjective ring homomorphisms with finitely generated kernels, and if $ Q $ is closed under composition of homomorphisms\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsPRadical fixes prime-power exponents and the purely inseparable tensor lemma assumes fields; the general polynomial-test criterion for arbitrary rings is not either statement. PrimeSpectrum.isHomeomorph_comap gives only the unextended spectral conclusion, not this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of commutative rings with nil kernel that lifts powers of every polynomial remains power lifting with nil kernel after every tensor base change",
+   "results": "{\"t\": \"2026-10-23T19:13:04Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of commutative rings with nil kernel that lifts powers of every polynomial remains power lifting with nil kernel after every tensor base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"RingHom.FormallyUnramified\", \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"Algebra.FormallyUnramified.lift_unique'\", \"Algebra.FormallySmooth.instTensorProduct\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"Algebra.FormallyUnramified.ext'\"], \"digest\": \"acc44f79cb12fa63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: formal smoothness and unramified base change are different properties; the power-lifting hit assumes a purely inseparable field extension."
+  },
+  {
+   "tool": "grep",
+   "query": "universallyAdequate|universally_adequate|IsPRadical|exists_pow_mem_range_tensorProduct|isHomeomorph_comap",
+   "results": "{\"t\": \"2026-10-23T19:14:28Z\", \"tool\": \"grep\", \"query\": \"universallyAdequate|universally_adequate|IsPRadical|exists_pow_mem_range_tensorProduct|isHomeomorph_comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\"], \"digest\": \"31585981e371cc70\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the homeomorphism lemma treats a single map; purely inseparable tensor results require fields, and IsPRadical fixes prime-power exponents in specified characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial power lifting for a ring homomorphism implies power lifting after every scalar extension",
+   "results": "{\"t\": \"2026-10-23T19:14:28Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial power lifting for a ring homomorphism implies power lifting after every scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.map_pow\", \"Polynomial.map_pow\", \"Submodule.map_pow\", \"Polynomial.X_pow_mem_lifts\", \"Polynomial.lifts_iff_ringHom_rangeS\", \"Polynomial.eval₂_pow\", \"PerfectRing.lift_aux\", \"Polynomial.mem_lifts_iff_mem_alg\"], \"digest\": \"923effa727d18725\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: map_pow, polynomial evaluation and lifts identities do not establish the arbitrary scalar-extension criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"IsNilpotent\"",
+   "results": "{\"t\": \"2026-10-23T19:14:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"IsNilpotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit for this tensor-product nilpotence query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal adequacy: every element of a tensor product of commutative algebras has a positive power in the image if every multivariate polynomial has a power with lifted coefficients",
+   "results": "{\"t\": \"2026-10-23T19:16:07Z\", \"tool\": \"leanfinder\", \"query\": \"Universal adequacy: every element of a tensor product of commutative algebras has a positive power in the image if every multivariate polynomial has a power with lifted coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PolynomialLaw.exists_lift_of_mem_range_rTensor\", \"MvPolynomial.universalFactorizationMapPresentation\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"PolynomialLaw.exists_lift'\", \"PolynomialLaw.exists_lift\", \"exists_fg_and_mem_baseChange\"], \"digest\": \"15c33bab7cc1c068\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: field-only power lifting and polynomial-law finite-presentation lifts do not state this arbitrary-ring criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-ideal-quotient-comparison",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Proposition 5.2.9(3), replacing the invalid citation of the downstream topological-images node. Algebra input to the affine-chart calculation: Alper Lemma 5.2.6 and Proposition 3.3.5, the adjunction unit on an arbitrary algebra and its tensor extensions. Supporting input: Alper Lemma 5.2.1, printed p.507, with Proposition 3.3.5 and Remark 3.3.2, printed pp.497--498: algebraic consequence of the ideal-quotient adequate homeomorphism after every scalar extension. Ring-theoretic passage from polynomial power lifting and nil kernel to the arbitrary scalar extensions in the ideal-quotient comparison.",
+   "via": [
+    "lem-sfb-adequate-ideal-quotient-comparison",
+    "lem-sfb-adequate-algebra-unit-power-kernel",
+    "lem-sfb-adequate-base-change-affinization",
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polynomial-adequacy-nil-base-change",
+  "worker": "stage1",
+  "summary": "Q42: kept the statement unchanged; proved nilness after arbitrary scalar extension using the existing single-map power homeomorphism, universal spectral surjectivity, and nilradical intersection results; expanded polynomial power lifting by finite-sum evaluation. No new nodes, no Lean writing or compilation. Repeated Mathlib searches in two phrasings found no direct leaf.",
+  "blueprint": "Supporting commutative-algebra prerequisite in the inherited det-thm-sf-ctf-stability-direct-images (3) chain: the ideal-quotient adequate comparison after arbitrary scalar extension. Steps 1-3 implement its spectral nil-kernel passage; step 4 expands the polynomial tests of Alper Remark 3.2.2. Read the latest blueprint direct-images proof and unit; no unit or chapter route changed. The existing from.node=null ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-surjective-base-change",
+    "why": "Generic commutative-algebra base-change fact: surjectivity of Spec S -> Spec R persists for E -> E tensor_R S. It implements the spectral part of the adequate-comparison input; the unit has no separate statement of this ring-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-5c47850a7",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-5c47850a7 (reviewer sub-agent of L); spot-checked: PASS, no changes. Q42 lem-sfb-polynomial-adequacy-nil-base-change, S1 split, one commit, no new nodes; the statement and its stmt_deps are unchanged and the citer lem-sfb-adequate-ideal-quotient-comparison step 4 is still served. I checked each step against the cited statements. Step 1: with n=0, R[∅]=R, so the item's hypotheses are exactly those of lem-pur-all-element-powers-spectrum-homeomorphism (Mathlib leaf PrimeSpectrum.isHomeomorph_comap, Homeomorph.lean:39); it needs no injectivity and gives Spec surjectivity. Step 2: D=E⊗S with its ring structure from tensor-pushout (1); lem-weil-pbc-spec-surjective-base-change applies word for word with R'=E. This off-unit generic ring lemma is a declared tool use, and I accept it. Step 3: a kernel element lies in every prime of E, and zero-locus-eq-iff-radical-eq with I=0 gives elementwise nilpotence. Step 4 is rightly marked elementary: one polynomial b=Σ s_i t_i covers the whole tensor sum, and the uniqueness clause of the polynomial def identifies the two R-algebra maps R[t]→D. Edge cases checked: E=0, empty tensor sum, a nil-ideal quotient, Q[ε]/ε²→Q (shows the char-0 clause is rightly omitted), S=0. Duplicate search over all node statements: the only neighbour, lem-sfb-polynomial-power-lifting-universal-homeomorphism, assumes injectivity and gives a homeomorphism, so it is not a duplicate. proof_deps equal the union of the steps' uses, there is no cycle and no SGA citation. The local Alper PDF is still WANTED, but the item is proved here from DAG statements alone."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialAdequacyNilBaseChange",
+  "declaration": "Algebra.nil_kernel_and_power_lifting_baseChange_of_polynomial",
+  "file": "lean/Sheaf/RingTheory/PolynomialAdequacyNilBaseChange.lean",
+  "statement": "theorem nil_kernel_and_power_lifting_baseChange_of_polynomial {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (hker : ∀ r : R, algebraMap R S r = 0 → IsNilpotent r) (hpoly : ∀ (n : ℕ) (b : MvPolynomial (Fin n) S), ∃ N : ℕ, 0 < N ∧ ∃ a : MvPolynomial (Fin n) R, MvPolynomial.map (algebraMap R S) a = b ^ N) (E : Type w) [CommRing E] [Algebra R E] : (∀ e : E, (Algebra.TensorProduct.includeLeftRingHom : E →+* E ⊗[R] S) e = 0 → IsNilpotent e) ∧ (∀ z : E ⊗[R] S, ∃ M : ℕ, 0 < M ∧ ∃ e : E, (Algebra.TensorProduct.includeLeftRingHom : E →+* E ⊗[R] S) e = z ^ M)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4fae6f56",
+  "group": "NF",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: Algebra R S as u, elementwise hker, hpoly over every n:ℕ with Fin n MvPolynomial.map and 0<N, arbitrary E in independent universe w, Mathlib E ⊗[R] S with includeLeftRingHom as e↦e⊗1, both conclusions (elementwise nil kernel; ∃M>0 with z^M in the image). No extra hypotheses or universe restrictions. lean.statement verbatim in the file; node otherwise identical to live; stmt_deps use their recorded Mathlib owners; docstrings give source place, blueprint id and proof steps 1-4; sorry only; report has Worker report and Second reading by NF sections. Edge cases n=0, E=0, z=0, S=0, identity, nil quotients, Q[ε]/ε²→Q checked. Advisory: plain proof-plan imports unused at stage 2. Compile not re-run per instruction; the worker reports clean scompile and an OK dry run."
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "id": "lem-trf-affine-square-ample-neighbourhood-transfer",
+ "kind": "statement",
+ "title": "Transfer of an ample neighbourhood through an affine commutative square",
+ "statement": "Let $f:Y\\to X$, $g:Z\\to S$, $a:Y\\to Z$, and $b:X\\to S$ be morphisms of schemes [def-pc-scheme] with $g\\circ a=b\\circ f$. Assume $a$ and $b$ are affine [pqf-def-affine-morphism]. Let $N$ be an invertible $\\mathcal O_Z$-module and $M$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], with an isomorphism $a^*N\\cong M$ [def-pc-module-pullback]. Let $V\\subseteq S$ be an affine open such that $N|_{g^{-1}(V)}$ is ample in the absolute sense [def-weil-pbc-ample-invertible-module]. Then $U=b^{-1}(V)$ is an affine open of $X$, $f^{-1}(U)$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], and $M|_{f^{-1}(U)}$ is ample in the absolute sense. Moreover, $M|_{f^{-1}(W)}$ is ample for every affine open $W\\subseteq U$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, final paragraph and hints, implemented using the restricted affine horizontal maps after choosing affine V_i."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=g^{-1}(V)$, $U=b^{-1}(V)$, and $Y_0=f^{-1}(U)$. Since $b$ is affine and $V$ is affine open, the definition of an affine morphism gives that $U$ is affine open. Commutativity gives $Y_0=a^{-1}(T)$: for $y\\in Y$, $f(y)\\in b^{-1}(V)$ if and only if $g(a(y))\\in V$. Thus $a$ restricts to $a_0:Y_0\\to T$. This restriction is affine directly from the same definition: any affine open $H\\subseteq T$ is also an affine open of $Z$, and $a_0^{-1}(H)=a^{-1}(H)$ is affine.",
+   "uses": [
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood, final paragraph and hints; affine restriction is Definition 01S6 (morphisms-definition-affine)."
+   }
+  },
+  {
+   "text": "Write $N_T=N|_T$ and $M_0=M|_{Y_0}$. For the open inclusions $j:T\\hookrightarrow Z$ and $i:Y_0\\hookrightarrow Y$, restriction agrees with module pullback. The cited pullback lemma gives invertibility of these restrictions and the composition isomorphism. Since $j\\circ a_0=a\\circ i$, it gives $a_0^*N_T\\cong a_0^*j^*N\\cong i^*a^*N\\cong i^*M\\cong M_0$, where the middle isomorphism also uses the given $a^*N\\cong M$. By hypothesis $N_T$ is ample, and $a_0$ is affine by step 1. Affine pullback of ampleness therefore makes $a_0^*N_T$ ample. Invariance under module isomorphisms makes $M_0$ ample. The quasi-compactness clause in the definition of absolute ampleness then gives that $Y_0$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-sc-ample-iso",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample (2), affine case used in 0D2S; Sheaves Tags 0097 (lemma-push-pull-composition-modules), 00A0 (lemma-j-pullback); Properties Tag 01PS (definition-ample)."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq U$ be any affine open, and let $f_0:Y_0\\to U$ be the restriction of $f$. Both $W$ and $U$ are affine, so their inclusion $k:W\\hookrightarrow U$ is affine by the affine-schemes morphism lemma. Put $Y_W=f^{-1}(W)$. The square with horizontal maps $r:Y_W\\hookrightarrow Y_0$ and $k$, and vertical maps the restrictions of $f$, is Cartesian: a map $H\\to Y_0$ factors through the open $Y_W$ precisely when its composite $H\\to U$ factors through the open $W$; in either case the factor is unique, with the restricted structure-sheaf map. This verifies the fibre-product universal property. Thus $r$ is the base change of $k$ along $f_0$, and the affine-morphism base-change lemma shows that $r$ is affine.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01SH (lemma-morphism-affines-affine) and 01SD (lemma-base-change-affine), applied to W into U; open subschemes and the fibre-product universal property give the displayed square."
+   }
+  },
+  {
+   "text": "Apply affine pullback of ampleness to $r$ and the ample invertible module $M_0$ from step 2. It gives that $r^*M_0$ is ample. If $i_W:Y_W\\hookrightarrow Y$ is the inclusion, then $i\\circ r=i_W$. Open restriction and the pullback-composition isomorphism give $r^*M_0\\cong r^*i^*M\\cong i_W^*M\\cong M|_{Y_W}$; these are invertible by the pullback lemma. Invariance under isomorphisms proves that $M|_{f^{-1}(W)}$ is ample, as required for every such $W$.",
+   "uses": [
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892, lemma-pullback-ample-tensor-relatively-ample (2), second affine pullback; Sheaves Tags 0097 and 00A0; Properties Definition 01PS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-iso",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S (lemma-ample-in-neighbourhood), final paragraph and hints, expanded using Morphisms Tags 0892(2), 01SH, 01SD, and Sheaves Tags 0097, 00A0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square of schemes with affine horizontal maps a line bundle ample above an affine base open pulls back to an ample line bundle above every affine subopen of the inverse image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : AlgebraicGeometry.AffineTargetMorphismProperty} [P.IsLocal] {X Y UX UY : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsAffine UY] {f : X ⟶ Y} {iY : UY ⟶ Y} [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X}\\n  {f' : UX ⟶ UY}, CategoryTheory.IsPullback iX f' f iY → AlgebraicGeometry\", \"doc\": \"Given a local property $ P $ of morphisms with affine target, if a morphism $ f: X \\\\to Y $ satisfies $ P $ locally on affine opens of $ Y $, and there exists a pullback square involving an open immers\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f],\\n      AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"Let $ f : X \\\\to Y $ be an affine morphism of schemes, and let $ U \\\\subseteq Y $ be an affine open subset. Then the preimage $ f^{-1}(U) \\\\subseteq X $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.affinePreimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f],\\n      AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"For any affine morphism $ f : X \\\\to Y $ between schemes and any affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ forms an affine open subset of $ X $. This asserts that affine morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine],\\n  CategoryTheory.IsPullback f X.toSpecΓ Y.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes, and assume that $Y$ is a quasi-affine scheme. Let $\\\\text{toSpecΓ}_X: X \\\\to \\\\mathrm{Spec}(\\\\Gamma(X, \\\\mathcal{O}_X))$ and $\\\\text{toSpecΓ}_Y: Y \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  {UX UY : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine UY] {iY : UY ⟶ Y}\\n  [\", \"doc\": \"Given a pullback square where the target scheme $ Y $ is affine and the morphism $ i_Y: UY \\to Y $ is an open immersion, if the morphism $ f $ satisfies an affine target property $ P $, then the induce\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.isAffine_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsAffineHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"Let $f : X \\\\to Y$ be an affine morphism of schemes, and let $U \\\\subseteq Y$ be an affine open subset. Then the preimage $f^{-1}(U) \\\\subseteq X$ is also an affine open subset of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsAffineHom f ↔\\n    ∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is affine if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.RespectsIso] [P'.IsStableUnderComposition]\\n  [P.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {S X : AlgebraicGeometry.Scheme} (f : AlgebraicGeometry.Spec R ⟶ S) (g : X ⟶ S),\\n      P' f → P (CategoryTheory.Limits.pullback.fst\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine preimages, pullbacks and quasi-compact morphisms; the AmpleSet hit concerns convex analysis. None treats ample invertible modules in this square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsAffineHom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine preimages, pullbacks and quasi-compact morphisms; the AmpleSet hit concerns convex analysis. None treats ample invertible modules in this square."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*(pullback|affine)|affine.*ample",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"22\", \"text\": \"Typical examples of this are affine morphisms (where `Q` is trivial), finite morphisms\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine preimages, pullbacks and quasi-compact morphisms; the AmpleSet hit concerns convex analysis. None treats ample invertible modules in this square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along affine horizontal maps transfers ampleness over an affine neighbourhood to all affine subopens of its inverse image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom g] [IsAffine X] : IsAffine (pullback f g)\", \"doc\": \"If $ X $ is an affine scheme and $ g $ is an affine morphism, then the pullback of $ f $ and $ g $ is an affine scheme.\"}\n  {\"name\": \"AmpleSet.preimage\", \"module\": \"Mathlib.Analysis.Convex.AmpleSet\", \"type\": \"{s : Set F} (h : AmpleSet s) (L : E ≃ᴬ[ℝ] F) : AmpleSet (L ⁻¹' s)\", \"doc\": \"Let $ E $ and $ F $ be topological affine spaces over $ \\\\mathbb{R} $, and let $ s \\\\subseteq F $ be an ample set. If $ L : E \\\\to F $ is a continuous affine equivalence, then the preimage $ L^{-1}(s) \\\\s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{A B C : CommRingCat} (f : Spec A ⟶ Spec C) (g : Spec B ⟶ Spec C) : HasPullback f g\", \"doc\": \"For any commutative rings $A$, $B$, and $C$, and morphisms $f : \\\\operatorname{Spec}(A) \\\\to \\\\operatorname{Spec}(C)$ and $g : \\\\operatorname{Spec}(B) \\\\to \\\\operatorname{Spec}(C)$, the pullback (fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[P'.RespectsIso] [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange]\\n  (H : ∀ {R : CommRingCat.{u}} {S X : Scheme.{u}} (f : Spec R ⟶ S) (g : X ⟶ S), P' f → P (pullback.fst f g) → P g)\\n  {X Y Z T : Scheme.{u}} [IsAffine T] (p : T ⟶ X) (hp : P' p) (f : X ⟶ Z) (g : Y ⟶ Z) (h : P' f)\\n  (hf : P (pu\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{P : AffineTargetMorphismProperty} [P.IsLocal] {X Y UX UY : Scheme.{u}} [IsAffine UY] {f : X ⟶ Y} {iY : UY ⟶ Y}\\n  [IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY} (h : IsPullback iX f' f iY) (hf : targetAffineLocally P f) : P f'\", \"doc\": \"Given a local property $ P $ of morphisms with affine target, if a morphism $ f: X \\\\to Y $ satisfies $ P $ locally on affine opens of $ Y $, and there exists a pullback square involving an open immers\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom f] [IsAffine Y] : IsAffine (pullback f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is an affine morphism and $Y$ is an affine scheme, then the fiber product $X \\times_S Y$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [IsAffine X] [IsAffine Y] [IsAffine Z] : IsAffine (pullback f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine preimages, pullbacks and quasi-compact morphisms; the AmpleSet hit concerns convex analysis. None treats ample invertible modules in this square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine morphisms a and b in a commutative square f_i a = b f, absolute ampleness on f_i inverse V gives quasi compactness and relative ampleness on f inverse b inverse V",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine],\\n  CategoryTheory.IsPullback f X.toSpecΓ Y.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes, and assume that $Y$ is a quasi-affine scheme. Let $\\\\text{toSpecΓ}_X: X \\\\to \\\\mathrm{Spec}(\\\\Gamma(X, \\\\mathcal{O}_X))$ and $\\\\text{toSpecΓ}_Y: Y \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : AlgebraicGeometry.AffineTargetMorphismProperty} [P.IsLocal] {X Y UX UY : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsAffine UY] {f : X ⟶ Y} {iY : UY ⟶ Y} [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X}\\n  {f' : UX ⟶ UY}, CategoryTheory.IsPullback iX f' f iY → AlgebraicGeometry\", \"doc\": \"Given a local property $ P $ of morphisms with affine target, if a morphism $ f: X \\\\to Y $ satisfies $ P $ locally on affine opens of $ Y $, and there exists a pullback square involving an open immers\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is a compact subset of the topological space underlying \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ is a compact subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  {UX UY : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine UY] {iY : UY ⟶ Y}\\n  [\", \"doc\": \"Given a pullback square where the target scheme $ Y $ is affine and the morphism $ i_Y: UY \\to Y $ is an open immersion, if the morphism $ f $ satisfies an affine target property $ P $, then the induce\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n      AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $Q$ be a property of ring homomorphisms that is respected by isomorphisms. The property that $f$ is 'locally affine and $Q$ on the target' holds if a\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Z} {g : Y ⟶ Z} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : Y.Opens},\\n      IsCompact ↑V →\\n        ∀ {W : Z.Opens},\\n          AlgebraicGeometry.IsAffineOpen W →\\n            U ≤ (TopologicalSpace.Opens.map f.base).obj W →\\n              V\", \"doc\": \"Given schemes $X, Y, Z$ with morphisms $f : X \\\\to Z$ and $g : Y \\\\to Z$, if $U \\\\subseteq X$ is an affine open subset, $V \\\\subseteq Y$ is a compact subset, $W \\\\subseteq Z$ is an affine open subset, and \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern affine preimages, pullbacks and quasi-compact morphisms; the AmpleSet hit concerns convex analysis. None treats ample invertible modules in this square."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|ample|ampleness)\\b",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations concern affine morphisms and pullbacks, not ample invertible modules; AmpleSet.preimage concerns convex analysis. No Mathlib algebraic-geometry ampleness predicate was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsAffineHom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations concern affine morphisms and pullbacks, not ample invertible modules; AmpleSet.preimage concerns convex analysis. No Mathlib algebraic-geometry ampleness predicate was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine morphism of schemes pulls an ample line bundle back to an ample line bundle",
+   "results": "[leansearch] OK 8 hit(s)\nReturned declarations: AmpleSet.preimage, AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.IsAffineOpen.preimage, AlgebraicGeometry.IsAffineHom.mk, AlgebraicGeometry.IsAffineHom.isAffine_preimage, AlgebraicGeometry.HasAffineProperty.of_isPullback, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.IsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations concern affine morphisms and pullbacks, not ample invertible modules; AmpleSet.preimage concerns convex analysis. No Mathlib algebraic-geometry ampleness predicate was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square of schemes with affine horizontal maps, pullback of an ample invertible module over an affine base open is ample over its inverse image and over every affine subopen",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned declarations: AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.HasAffineProperty.of_isPullback, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations concern affine morphisms and pullbacks, not ample invertible modules; AmpleSet.preimage concerns convex analysis. No Mathlib algebraic-geometry ampleness predicate was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along an affine morphism preserves absolute ampleness of invertible sheaves, including quasi-compactness; restriction above an affine open in an affine base preserves ampleness",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned declarations: AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.HasAffineProperty.of_isPullback, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.affinePreimage, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebraic-geometry declarations concern affine morphisms and pullbacks, not ample invertible modules; AmpleSet.preimage concerns convex analysis. No Mathlib algebraic-geometry ampleness predicate was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ample-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Subsidiary ampleness argument: Tag 0D2S, lemma-ample-in-neighbourhood, final paragraph and hints, implemented using the restricted affine horizontal maps after choosing affine V_i.",
+   "via": [
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-square-ample-neighbourhood-transfer",
+  "worker": "stage1",
+  "summary": "Expanded the affine-square transfer argument without changing the statement or its statement dependencies. The inverse-image identity and affine restriction are checked directly; existing nodes supply the invertible pullback comparisons, affine pullback of ampleness, and affineness of the inverse image of W. No new nodes are required. Current live Lean has no declaration proving the entire item, although its generic inputs are already closed or Mathlib leaves.",
+  "blueprint": "The inherited subsidiary fibrewise-ampleness-to-projectivity argument below lem-trf-local-term-locality, through lem-trf-ample-neighbourhood: realizes the final paragraph and hints of Stacks 0D2S. Steps 1-2 transfer the chosen affine neighbourhood; steps 3-4 prove the every-affine-subopen clause. The current blueprint ancestor and the unit/chapter route are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-38974c5cc",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-38974c5cc (reviewer sub-agent of L); spot-checked: Single commit with no new nodes. The statement and stmt_deps are identical to the live item, which is unsplit with no proof and has no re-split note. Sources read: Stacks 0D2S lemma-ample-in-neighbourhood (hints: affine pullback of ample) and 0892(2). Step 1 is elementary from pqf-def-affine-morphism: U is affine, f^{-1}U=a^{-1}T follows from g∘a=b∘f alone, and a_0 is affine. Step 2: the open-immersion restriction≅pullback lemma and invertible-pullback (1) and (2) give a_0^*N_T≅M_0; ample pullback along the affine a_0 and lem-sc-ample-iso give M_0 ample; clause (1) of the ample definition gives Y_0 quasi-compact. Step 3: W→U is affine because both schemes are affine, and the written universal-property check shows f^{-1}W=Y_0×_U W, so r is affine by permanence (1). Step 4 is a second application of ample pullback along r. Cases checked: empty V and W, W=U, and a non-Cartesian square. The statement matches parent step 4 of lem-trf-ample-neighbourhood. The cited nodes from other units all carry Lean attachments. No SGA source, no duplicate, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSquareAmpleNeighbourhoodTransfer",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_square_ample_neighbourhood_transfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSquareAmpleNeighbourhoodTransfer.lean",
+  "statement": "theorem affine_square_ample_neighbourhood_transfer {X Y Z S : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ S) (a : Y ⟶ Z) (b : X ⟶ S) (hsquare : a ≫ g = f ≫ b) [IsAffineHom a] [IsAffineHom b] (N : Z.Modules) (M : Y.Modules) [N.IsInvertible] [M.IsInvertible] (e : (tensorPullback a).obj N ≅ M) (V : S.Opens) (hV : IsAffineOpen V) (hN : @IsAmple (g ⁻¹ᵁ V).toScheme ((tensorPullback (g ⁻¹ᵁ V).ι).obj N) ((invertible_pullback_tensor (g ⁻¹ᵁ V).ι).1 N).2) : IsAffineOpen (b ⁻¹ᵁ V) ∧ CompactSpace (f ⁻¹ᵁ (b ⁻¹ᵁ V)).toScheme ∧ @IsAmple (f ⁻¹ᵁ (b ⁻¹ᵁ V)).toScheme ((tensorPullback (f ⁻¹ᵁ (b ⁻¹ᵁ V)).ι).obj M) ((invertible_pullback_tensor (f ⁻¹ᵁ (b ⁻¹ᵁ V)).ι).1 M).2 ∧ ∀ (W : X.Opens), W ≤ b ⁻¹ᵁ V → IsAffineOpen W → @IsAmple (f ⁻¹ᵁ W).toScheme ((tensorPullback (f ⁻¹ᵁ W).ι).obj M) ((invertible_pullback_tensor (f ⁻¹ᵁ W).ι).1 M).2",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4c1acad7",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Single new module stating affine_square_ample_neighbourhood_transfer with sorry; the item node changes only its lean record (no new nodes or dep records). Every hypothesis and conclusion clause matches the node and the Stacks 0D2S hints: a≫g=f≫b, IsAffineHom a and b, invertible N and M, e : tensorPullback a N ≅ M, affine V, IsAmple of N restricted along (g⁻¹V).ι; conclusions IsAffineOpen(b⁻¹V), CompactSpace(f⁻¹b⁻¹V), IsAmple there, and for every affine W ≤ b⁻¹V. No extra assumptions; one explicit universe; lean.statement verbatim; docstrings carry the source place and blueprint id; edge cases (V or W empty, W=U, non-Cartesian square) covered. Note: the IsInvertible instance arguments use the theorem invertible_pullback_tensor without a stmt_dep; this is a proof-irrelevant Prop witness, consistent with landed citers and with the 2026-10-18 rule against theorem stmt_deps. No compile, no file changed."
+ }
+}

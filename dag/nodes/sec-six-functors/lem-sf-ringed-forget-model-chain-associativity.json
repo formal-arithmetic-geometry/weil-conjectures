@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-ringed-forget-model-chain-associativity",
+ "kind": "lemma",
+ "title": "Chain associativity for supplied tensor associator models",
+ "statement": "Under the preadditive monoidal category, zero-object, graded tensor existence, additive functor F, underived comparison nu, cochain comparison delta and summand hypotheses of lem-sf-ringed-forget-chain-associativity, let P,Q,N be cochain complexes in the source category. Let aB and aA be isomorphisms between the two iterated uncurried total tensors of P,Q,N and of their termwise F-images. Suppose aB.hom and aA.hom equal the respective native cochain associator homs. Then V(aB) ; delta(P,T_B(Q,N)) ; T_A(1,delta(Q,N)) = delta(T_B(P,Q),N) ; T_A(delta(P,Q),1) ; aA, where V is termwise F and T_B,T_A are the uncurried map₂CochainComplex tensor functors. There is no derived localization, flatness condition, or representative normalization square.",
+ "stmt_deps": [
+  "lem-sf-ringed-forget-chain-associativity",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+ },
+ "proof": [
+  {
+   "text": "Replace the supplied model associator homs by the native associator homs using the two hypotheses.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+   }
+  },
+  {
+   "text": "Apply tensorComparison_chain_associativity. Normalize the uncurried functor object projections and map₂CochainComplex abbreviations on both sides to match the endpoints. Keeping the calculation in abstract monoidal categories avoids repeatedly unfolding the concrete sheaf tensor data when it is specialized.",
+   "uses": [
+    "lem-sf-ringed-forget-chain-associativity",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-forget-chain-associativity",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPT and 06YU; the chain associativity calculation in the representative associator verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor tensor comparison specified on total-complex summands respects chain model associators identified with native associators",
+   "results": "8 hits, including HomologicalComplex.associator and HomologicalComplex.ι_mapBifunctorAssociatorX_hom; these provide the native construction, not the supplied-comparison model equation. The proved generic chain comparison theorem is used instead.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ι₁₂_associator_hom\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor comparison associativity for normalized cochain tensor associator models",
+   "results": "8 hits about tensor products of modules and coalgebras, including TensorProduct.assoc_tensor; none gives the ringed cochain comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexμIso_associativity|tensorComparison_chain_associativity",
+   "results": "0 indexed hits. Local source search found the adopted functor theorem, and the preceding proved helper implements its summand calculation without coproduct preservation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTensorAssociatorRepresentatives",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "A strict part of the representative associator proof.",
+   "via": [
+    "lem-sf-ringed-forget-associator-model-square",
+    "lem-sf-ringed-forget-tensor-associator-representatives",
+    "lem-sf-ringed-forget-tensor-coherence",
+    "lem-sf-ringed-forget-tensor-descent",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedForgetTensorModelAssociativity",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTensorModelAssociativity.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.tensorComparison_model_chain_associativity",
+  "statement": "theorem tensorComparison_model_chain_associativity\n    {B : Type b} [Category.{vb} B] [Preadditive B] [HasZeroObject B]\n    [MonoidalCategory B] [MonoidalPreadditive B]\n    [∀ (X Y : GradedObject ℤ B), X.HasTensor Y]\n    [∀ X, PreservesColimit (Functor.empty.{0} B) ((curriedTensor B).obj X)]\n    [∀ X, PreservesColimit (Functor.empty.{0} B) ((curriedTensor B).flip.obj X)]\n    [∀ (W X Y Z : GradedObject ℤ B), GradedObject.HasTensor₄ObjExt W X Y Z]\n    [∀ (X Y Z : GradedObject ℤ B), GradedObject.HasGoodTensor₁₂Tensor X Y Z]\n    [∀ (X Y Z : GradedObject ℤ B), GradedObject.HasGoodTensorTensor₂₃ X Y Z]\n    {A : Type a} [Category.{va} A] [Preadditive A] [HasZeroObject A]\n    [MonoidalCategory A] [MonoidalPreadditive A]\n    [∀ (X Y : GradedObject ℤ A), X.HasTensor Y]\n    [∀ X, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).obj X)]\n    [∀ X, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).flip.obj X)]\n    [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z]\n    [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X Y Z]\n    [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X Y Z]\n    (F : B ⥤ A) [F.Additive]\n    (ν : MonoidalCategory.tensor B ⋙ F ≅ (F.prod F) ⋙ MonoidalCategory.tensor A)\n    (δ : Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex) ⋙\n        F.mapHomologicalComplex (.up ℤ) ≅\n      ((F.mapHomologicalComplex (.up ℤ)).prod (F.mapHomologicalComplex (.up ℤ))) ⋙\n        Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex))\n    (hδ : ∀ (P Q : CochainComplex B ℤ) (p q n : ℤ) (h : p + q = n),\n      F.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ (δ.hom.app (P, Q)).f n =\n        ν.hom.app (P.X p, Q.X q) ≫\n          HomologicalComplex.ιTensorObj ((F.mapHomologicalComplex (.up ℤ)).obj P)\n            ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)\n    (hν : ∀ X Y Z : B,\n      (ν.inv.app (X, Y) ▷ F.obj Z) ≫ ν.inv.app (X ⊗ Y, Z) ≫ F.map (α_ X Y Z).hom =\n        (α_ (F.obj X) (F.obj Y) (F.obj Z)).hom ≫\n          (F.obj X ◁ ν.inv.app (Y, Z)) ≫ ν.inv.app (X, Y ⊗ Z))\n    (P Q N : CochainComplex B ℤ)\n    (aB : (Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex)).obj\n        ((Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex)).obj (P, Q), N) ≅\n      (Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex)).obj\n        (P, (Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex)).obj (Q, N)))\n    (aA : (Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex)).obj\n        ((Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex)).obj\n          ((F.mapHomologicalComplex (.up ℤ)).obj P, (F.mapHomologicalComplex (.up ℤ)).obj Q),\n          (F.mapHomologicalComplex (.up ℤ)).obj N) ≅\n      (Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex)).obj\n        ((F.mapHomologicalComplex (.up ℤ)).obj P,\n          (Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex)).obj\n            ((F.mapHomologicalComplex (.up ℤ)).obj Q, (F.mapHomologicalComplex (.up ℤ)).obj N)))\n    (haB : aB.hom = (α_ P Q N).hom)\n    (haA : aA.hom = (α_ ((F.mapHomologicalComplex (.up ℤ)).obj P)\n      ((F.mapHomologicalComplex (.up ℤ)).obj Q)\n      ((F.mapHomologicalComplex (.up ℤ)).obj N)).hom) :\n    let V := F.mapHomologicalComplex (.up ℤ)\n    let T_B := Functor.uncurry.obj ((curriedTensor B).map₂CochainComplex)\n    let T_A := Functor.uncurry.obj ((curriedTensor A).map₂CochainComplex)\n    V.map aB.hom ≫ δ.hom.app (P, T_B.obj (Q, N)) ≫\n        T_A.map (X := (V.obj P, V.obj (T_B.obj (Q, N))))\n          (Y := (V.obj P, T_A.obj (V.obj Q, V.obj N)))\n          (𝟙 (V.obj P), δ.hom.app (Q, N)) =\n      δ.hom.app (T_B.obj (P, Q), N) ≫\n        T_A.map (X := (V.obj (T_B.obj (P, Q)), V.obj N))\n          (Y := (T_A.obj (V.obj P, V.obj Q), V.obj N))\n          (δ.hom.app (P, Q), 𝟙 (V.obj N)) ≫ aA.hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27",
+  "note": "All categories, monoidal structures, tensor existence hypotheses, comparison data and model associator identifications are explicit parameters. There are no ringed-site, derived-category or K-flatness parameters."
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T131452-L-2939889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T131452-L-2939889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

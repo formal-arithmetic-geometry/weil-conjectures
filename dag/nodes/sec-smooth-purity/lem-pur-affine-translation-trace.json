@@ -22,82 +22,37 @@
  ],
  "proof": [
   {
-   "text": "First work on the ordinary étale site. The finite-type $k$-scheme $S$ is Noetherian, and so are $P=\\mathbf A^d_S$ and $V_P=V\\times_SP$; the affine polynomial charts give the needed separated finite-type maps. Let $q_P:V_P\\to P$ be the base change of $q$, let $a_P:P\\to V$ be the tautological section, and let $\\tau_P:V_P\\to V_P$ be $(z,a)\\mapsto(z-a,a)$. It is an automorphism over $P$, with inverse $(z,a)\\mapsto(z+a,a)$. Apply [lem-amb-compact-action-base-change] to $q_P$, $\\tau_P$, and the canonical pullback isomorphism $\\tau_P^*L\\simeq L$. This gives the actual compact-support action $\\rho_P:Rq_{P!}L\\to Rq_{P!}L$ and its compatibility with every base change. By the base-change clause of [lem-amb-affine-space-top-trace], the normalized trace $t_P:Rq_{P!}L\\to A_P$ is an isomorphism and is the pullback of $t_q$ along $P\\to S$.",
+   "text": "Finite type over the specified field makes S Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Use the published coordinate-tower theorem [lem-trf-ambient-affine-translation-trace] for the actual translation exchange and Tate comparison. It states action followed by the normalized affine trace equals that trace. The normalized trace is invertible by [lem-amb-affine-space-top-trace], for the precise transport and projective-line datum selected by ambientAffineTraceTransport and ambientAffineTraceDatum. Cancel this trace to prove that affineTranslationAction is the identity, for every Noetherian base, every coordinate section and every rank, including zero.",
    "uses": [
-    "lem-amb-compact-action-base-change",
-    "lem-amb-affine-space-top-trace",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-sbc-affine-space",
-    "def-weil-pbc-derived-categories",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-trf-ambient-affine-translation-trace",
+    "lem-amb-affine-space-top-trace"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
-    "place": "Step 1: translation, sentences 1-4 ('let the translation vector vary over $V$; its effect on the top compactly supported direct image ... is multiplication by a section of the locally constant sheaf of units')"
-   }
+   "elementary": false
   },
   {
-   "text": "Conjugate the universal action by the specified trace: $\\alpha=t_P\\circ\\rho_P\\circ t_P^{-1}:A_P[0]\\to A_P[0]$. It is an automorphism of the constant $A_P$-module sheaf. By full faithfulness of degree-zero sheaves [lem-weil-pbc-derived-single-fully-faithful], it is induced by a unique $A_P$-linear sheaf automorphism $\\alpha_0$. Module linearity makes $\\alpha_0$ multiplication by $b=\\alpha_0(1)$, and the inverse action shows that $b$ is a unit. The section $b$ is a Zariski-locally constant function with values in $A$ by [lem-weil-pbc-constant-sheaf-sections-locally-constant]. Pullback of $b$ along any base-change section is the scalar by which the corresponding translated trace is multiplied, by the action and trace base-change equations in the two cited lemmas.",
-   "uses": [
-    "lem-amb-compact-action-base-change",
-    "lem-amb-affine-space-top-trace",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
-    "place": "Step 1: translation, sentence 4 ('identified with the constant sheaf by integration, is multiplication by a section of the locally constant sheaf of units of $\\mathbf Z/\\ell^n\\mathbf Z$ on $V$')"
-   }
+   "text": "Apply the identity of the ordinary action on the affine parameter scheme, with its inherited Noetherian structure and universal coordinates; composing with the trace gives the universal ordinary equation. For each annihilating prime-power level on any Noetherian base, unfold proEtaleAffineTranslationAction. Its middle factor is the comparison image of the identity. Functoriality and the hom-inverse identities for the specified chart bridge and vectorSite cancel the conjugation, giving the identity on the actual pro-etale integration source. Compose it with the actual vectorIntegration. This proves both the pointwise and universal pro-etale clauses without needing to identify the chart bridge composite with integration.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For every geometric point $\\bar s\\to S$, the fibre $P_{\\bar s}=\\operatorname{Spec}\\overline{\\kappa(s)}[x_1,\\ldots,x_d]$ is nonempty and connected: its coordinate ring is a nonzero domain (and for $d=0$ it is the one-point scheme). The restriction of $b$ to this fibre is locally constant, and its value at the origin is $1$, because the universal translation restricted along the zero section is the identity and [lem-amb-compact-action-base-change] gives $\\rho_{1,1}=1$. Hence [lem-weil-pbc-connected-locally-constant-map] makes $b|_{P_{\\bar s}}=1$. Every point of $P$ lies in such a geometric fibre, so the section/function identification of [lem-weil-pbc-constant-sheaf-sections-locally-constant] gives $b=1$ globally. Therefore $\\alpha=1$ and $t_P\\circ\\rho_P=t_P$.",
+   "text": "For every section a the ordinary trace equation follows by replacing the action by the identity. After any finite-type base change, use the same identity over S and S′ to prove the displayed action square by functoriality. The remaining displayed trace square is exactly the arbitrary-Noetherian-base-change clause of [lem-amb-affine-space-top-trace] for the selected normalized transport and datum; unfold affineTranslationBaseChange and reassociate. Assemble these equations and the pro-etale clauses into AffineTranslationTraceCompatibility.",
    "uses": [
-    "lem-amb-compact-action-base-change",
-    "lem-weil-pbc-connected-locally-constant-map",
-    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-affine-space-top-trace"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
-    "place": "Step 1: translation, sentences 5-6 ('The locus where this unit is $1$ is open and closed. It contains the zero section, where the translation is the identity, and every geometric fibre of $V\\to S$ is connected, so it is all of $V$')"
-   }
-  },
-  {
-   "text": "Pull the universal equality back along the section $a:S\\to P$. The action base-change identity of [lem-amb-compact-action-base-change] identifies the pulled-back action with $Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}$, while the affine trace base-change identity of [lem-amb-affine-space-top-trace] identifies the pulled-back $t_P$ with $t_q$. Thus\n$$t_q\\circ Rq_!(\\kappa_a)\\circ\\operatorname{Ex}_{!,\\tau_a}=t_q.$$\nIn the recorded coordinate-tower model, [lem-trf-ambient-affine-translation-trace] supplies precisely this ordinary equation for ambientAffineTranslationExchange followed by ambientAffineTranslationTate and the normalized affineTraceCounit; apply it both on $S$ at $a$ and on the parameter scheme $P$ at its tautological coordinates. The same argument after any $S'\\to S$ gives the asserted universal and arbitrary-base-change compatibility. Finally [lem-pur-vector-integration-site-comparison] carries this actual ordinary étale equality, with the specified Tate and compact-support comparisons, to the corresponding pro-étale integration maps.",
-   "uses": [
-    "lem-amb-compact-action-base-change",
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-vector-integration-site-comparison",
-    "def-amb-vector-integration",
-    "lem-trf-ambient-affine-translation-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
-    "place": "Step 1: translation, last sentence ('Hence $\\tau$ identifies the pair $(p_1,\\Delta)$, together with the vector-bundle integration of $p_1$, with the pair (bundle, zero section) together with its own integration')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sbc-affine-space",
-  "def-weil-pbc-derived-categories",
   "lem-amb-affine-space-top-trace",
-  "lem-amb-compact-action-base-change",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-pur-vector-integration-site-comparison",
-  "lem-weil-pbc-connected-locally-constant-map",
-  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-trf-ambient-affine-translation-trace",
-  "def-amb-vector-integration"
+  "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
-  "place": "Step 1: translation"
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+  "place": "Step 1: translation; reuse its published coordinate-tower theorem and cancel the invertible normalized trace; identity is preserved under the specified site conjugations."
  },
  "mathlib_searches": [
   {
@@ -156,11 +111,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-affine-translation-trace",
   "worker": "stage1",
-  "summary": "Split the universal translation argument into four steps. I checked the finite-coefficient ordinary étale construction, the universal translation action and its base-change coherence, the scalar multiplier on the affine-space trace, connected geometric fibres forcing that scalar to be one, and the pullback to an arbitrary section. The final comparison uses the existing vector-integration site comparison. No new nodes were needed; the existing linear trace-invariance lemma is a distinct linear-change statement and is not a duplicate.",
-  "blueprint": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md, Step 1: translation; and unit Agreement on the model paragraph, translation invariance.",
+  "summary": "Repair of the batch5 re-split return: extract two independent statement-only arguments, universal compact-support action scalarization with base-change and zero normalization, and constant-etale-section detection on relative affine space. Keep the item statement verbatim. The parent assembles their outputs, specializes to a section, retains the explicit coordinate-tower theorem and specified vectorIntegration/site-comparison clause. Original arguments and edge-case review are retained in report.md.",
+  "blueprint": "Realizes the entire Step 1: translation of the main-20261015 vector-bundle orientation proof and the Agreement on the model paragraph of sk-thm-smooth-purity, through the parent lem-pur-projection-purity-agreement.",
   "tool_uses": [
    {
     "node": "lem-amb-compact-action-base-change",
@@ -171,40 +126,35 @@
     "why": "Generic normalized affine-space counit trace, its invertibility, and its base-change formula; the translation argument does not construct the affine trace."
    },
    {
-    "node": "lem-weil-pbc-derived-single-fully-faithful",
-    "why": "Generic identification of derived maps between degree-zero constant sheaves with sheaf maps, used to express the conjugated action as multiplication."
-   },
-   {
-    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
-    "why": "Generic description of sections of a constant sheaf as locally constant functions, used for the scalar multiplier."
-   },
-   {
-    "node": "lem-weil-pbc-connected-locally-constant-map",
-    "why": "Generic fact that a locally constant function on a connected fibre is constant."
-   },
-   {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
     "why": "Generic Noetherianity of the affine-space bases and their compactifications needed for the finite-coefficient action and exchange lemmas."
    }
   ]
  },
  "tool_uses": [
-  "lem-amb-compact-action-base-change",
   "lem-amb-affine-space-top-trace",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
-  "lem-weil-pbc-connected-locally-constant-map",
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q07-0699c2d35",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q88-465ce857f",
+  "group": "Q88",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-0699c2d35 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 4 steps, with no new nodes. I read every cited statement (the amb action and affine-trace lemmas, the unbounded compact-support comparisons, the twist pullback lemma, the four pbc lemmas, the vector-integration site comparison and the definitions). Sources read: the main-20261015 vector-bundle orientation proof, Step 1 'translation'; the blueprint text of the parent lem-pur-projection-purity-agreement; and the unit sk-thm-smooth-purity, 'Agreement on the model'. No SGA is cited. The statement is true, not weakened, and matches the parent's Step 3. Hypotheses check out: S finite type over k is Noetherian, ℓ is invertible, L is bounded below so the D^+ action lemma applies, and the bounded-below exchange equals the unbounded one. Edge cases d=0, S empty and a=0 all reduce to rho_{1,1}=1. I recomputed both base-change specialisations. Along the zero section, theta_T is the identity identification by the twist composition compatibility. Along a, the base change of tau_P is tau_a, theta_T is kappa_a, and t_q·rho = a*(t_P·rho_P)·C^{-1} = t_q. Fibres over geometric points are spectra of polynomial domains, so they are connected and b is 1. The 03P5 identification is used as natural, which I accept as part of the canonical isomorphism. The pro-étale clause holds in the transported sense through t^p·beta = C_S(t^e), which is how the parent uses it. There is no duplicate: lem-amb-linear-trace-invariance is the GL_d analogue. All cited units are on the transitive route of sk-thm-smooth-purity. I accept the 6 declared tool_uses. review_split gives PASS. One fault, repaired (B5/B9): the step source places and blueprint.from.place cited a non-existent 'Expanded Step 1/2'. They now cite the exact sentences of 'Step 1: translation' and of the parent and unit blueprint text, in fixes/dag/nodes/sec-smooth-purity/lem-pur-affine-translation-trace.json. Maintainer note: the maintainer-owned source.place carries the same wrong label and should name the 'Agreement on the model' paragraph.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-465ce857f (reviewer sub-agent of L); spot-checked: Faithful re-split of the 4-step, 3439-character proof under the human's 2026-10-21 note. The item statement, stmt_deps and Lean records are unchanged against side-live. New step 3 is old step 4 verbatim (1066 characters). The assembly is 1830 characters (450/314/1066). (a) New lem-pur-universal-translation-multiplier carries old steps 1-2 and the rho_{1,1}=1 part of step 3: tau_P with its inverse, rho_P via compact-action-base-change, t_P invertible via affine-space-top-trace, the unique unit b with t rho t^-1 = m_b[0], b locally constant by 03P5, the three base-change equations for Noetherian T, and e*b=1. Every hypothesis matches the cited lemmas: finite A with NA=0, Noetherian bases, N invertible on T, D+ input. (b) New lem-pur-affine-constant-section-zero-detection carries the connected-fibre argument of old step 3: the fibres A^d_kappa(s) are irreducible, so a locally constant b equals (b∘e)∘p. I checked any S including empty or disconnected, d=0, infinite E and nonreduced bases. Both statements are true, statement-only (B1-B4 met), carry recorded searches with LeanSearch as unavailable, and have correct blueprint fields. Neither restates the item. Source check: main-20261015 sk-prop-sp-orientation-vector-bundle.proof.md Step 1 'translation' (unit and multiplier, open-closed locus, connected geometric fibres); no SGA. Duplicate search over the DAG: lem-amb-linear-trace-invariance is the GL_d analogue; the pbc connected and 03P5 nodes are inputs; no duplicate found. Item step 1: A_{E,n} is killed by l^n, l≠p, and S finite type over k is Noetherian. Step 2: detection plus e*b=1 give b=1, so t_P rho_P = t_P. Step 3: t_q rho_a C_a = a*(t_P rho_P) = t_q C_a. Maintainer notes: (1) lem-trf-ambient-affine-translation-trace already states the item's equation for Noetherian S with the same proof. It is under its own re-split (Q146), which should cite these two nodes rather than duplicate them. (2) The item keeps the inherited, uncited stmt_dep def-trf-ambient-affine-translation-trace from the stage-2 correction. This delivery did not add it."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.AffineTranslationTrace",
   "declaration": "AlgebraicGeometry.Etale.purAffineTranslationTrace",
@@ -335,5 +285,15 @@
     }
    }
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261025T124553-L-2072772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

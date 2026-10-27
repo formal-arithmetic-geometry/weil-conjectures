@@ -1,0 +1,416 @@
+{
+ "id": "lem-per-local-alteration-diagram-spreading",
+ "kind": "statement",
+ "title": "Spreading a local alteration diagram with its proper covering witness",
+ "statement": "Let $B$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], let $\\mathfrak q\\subset B$ be prime, and put $S=\\operatorname{Spec}B_{\\mathfrak q}$ [def-weil-affine-spectrum] [def-weil-pbc-localization-at-prime]. Fix finitely many nonempty integral Noetherian schemes $T_i$ [def-pc-integral-scheme] with dominant generically finite finite-type maps $f_i:T_i\\to S$ [def-weil-finite-type-morphism]. Suppose given an integral Noetherian scheme $P$, a proper surjective generically finite map $g:P\\to S$ [def-weil-proper-morphism] [def-weil-surjective-morphism], a finite open cover $P=\\bigcup_iP_i$ [def-weil-open-immersion], and $S$-morphisms $h_i:P_i\\to T_i$. Here dominant means dense image and generically finite means a finite extension of function fields, with function field the local ring at the generic point. Then there is $a\\in B\\setminus\\mathfrak q$ and a diagram over $S_a=\\operatorname{Spec}B[1/a]$ [def-weil-ring-localization-away] consisting of integral Noetherian schemes $T_{a,i},P_a$, dominant generically finite finite-type maps $f_{a,i}:T_{a,i}\\to S_a$, a proper surjective generically finite map $g_a:P_a\\to S_a$, a finite open cover $P_a=\\bigcup_iP_{a,i}$ and $S_a$-morphisms $h_{a,i}:P_{a,i}\\to T_{a,i}$. Its base change along $S\\to S_a$ is isomorphic to the entire specified diagram, including the indexed open cover and all its morphisms [def-pc-fibre-product]. For every $b\\notin\\mathfrak q$ with $D(b)\\subseteq D(a)$, restriction to $D(b)$ retains all these properties and still recovers the specified diagram over $S$. No regularity or excellence assumption is made. Here Noetherian for a scheme means quasi-compact and locally Noetherian [pqf-def-locnoeth].",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Lemma 4.4, first proof paragraph, printed p.5: spreading the alteration cover and its proper witness from B_q to B[1/a]. Properness ingredient: Stacks limits.tex, Tag 081F, lemma-eventually-proper. The full diagram statement includes integrality/generic finiteness and open-cover data, not just properness. Archival copy WANTED; finite-presentation and surjectivity ingredients identified in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-ring-localization-away",
+  "def-weil-surjective-morphism",
+  "pqf-def-locnoeth",
+  "def-per-integral-alteration-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Index the principal neighbourhoods by $c\\in B\\setminus\\mathfrak q$, ordered by divisibility. They are directed, since $c,d$ both divide $cd$, and $B_{\\mathfrak q}=\\varinjlim_cB[1/c]$; the affine-limit lemma gives $S=\\varprojlim_cS_c$ with affine transitions and affine qcqs stages. All these rings are Noetherian by localization. Each $P_i$ is Noetherian by open-subscheme permanence. Its inclusion into $P$ is quasi-compact by the locally Noetherian open-immersion lemma and hence finite type; finite-type composition makes $P_i\\to S$ finite type. Thus all vertices are quasi-compact Noetherian schemes. The locally Noetherian quasi-separatedness lemma and morphism permanence make these structure maps quasi-separated. The locally finite type to finite presentation lemma therefore makes them finitely presented. Here properness includes finite type. Thus the object-descent hypotheses hold for every vertex, including each indexed open-cover vertex.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-localization-noetherian",
+    "pqf-def-locnoeth",
+    "def-weil-proper-morphism",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 0EUU (lemma-descend-open-immersion), 07RR (lemma-descend-surjective), 081F (lemma-eventually-proper); explicit assembly of the spreading paragraph of Kurano–Shimomoto Lemma 4.4, printed p.5."
+   }
+  },
+  {
+   "text": "Apply object descent to the finitely many vertices $T_i,P,P_i$, choosing a common stage $S_c$. Apply finite-diagram lifting to their given structure arrows, inclusions $P_i\\to P$, and maps $h_i$; include the finitely many relations $f_i h_i=g|_{P_i}$. We obtain a finite-presentation diagram over $S_c$ and a natural isomorphism from its pullback to the entire specified diagram. This retains the chosen $h_i$, rather than replacing them with arbitrary maps. Its sources are Noetherian by finite type over the Noetherian affine base. Every diagram arrow is locally finite type: its composite with the structure map is locally finite type; hence it is locally finitely presented over its locally Noetherian target.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-diagram-lift-of-models",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-fp-permanence",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 0EUU (lemma-descend-open-immersion), 07RR (lemma-descend-surjective), 081F (lemma-eventually-proper); explicit assembly of the spreading paragraph of Kurano–Shimomoto Lemma 4.4, printed p.5."
+   }
+  },
+  {
+   "text": "For each descended inclusion use open-immersion descent, and enlarge the common stage so all are open immersions. Apply finite-family joint-surjectivity descent to the maps $P_{c,i}\\to P_c$, obtaining a genuine indexed open cover. Apply properness descent to $P_c\\to S_c$, and surjectivity descent to the same map. All relevant sources, targets and bases are qcqs, all arrows in question are locally finitely presented, and the limit arrows have precisely the required properties. There are finitely many stage requirements, so choose a common multiple of their indices outside $\\mathfrak q$; the open, cover, proper and surjective properties persist under the intervening base changes.",
+   "uses": [
+    "lem-weil-pbc-descend-open-immersion-qcqs",
+    "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 0EUU (lemma-descend-open-immersion), 07RR (lemma-descend-surjective), 081F (lemma-eventually-proper); explicit assembly of the spreading paragraph of Kurano–Shimomoto Lemma 4.4, printed p.5."
+   }
+  },
+  {
+   "text": "Apply integrality near a prime to each $T_{c,i}$ and $P_c$ over $B[1/c]$ at $\\mathfrak qB[1/c]$, since its prime localization is the specified integral scheme. Clear the finitely many denominators of the resulting elements and multiply them with $c$ to obtain $a\\notin\\mathfrak q$. To check dominance and generic finiteness, let $X_a$ be any one of these integral models. On a nonempty affine chart $\\operatorname{Spec}C$ meeting $X_{\\mathfrak q}$ the localization $C\\to (B\\setminus\\mathfrak q)^{-1}C$ has nonzero domain target. Since $C$ is a domain it is injective and its zero prime contracts to zero; hence the generic point of $X_{\\mathfrak q}$ maps to the generic point of $X_a$. The base generic point likewise identifies through $B[1/a]\\to B_{\\mathfrak q}$. The affine fraction-field description identifies both function fields with the original ones, compatibly with their field embedding. Thus all $f_{a,i}$ and $g_a$ are dominant generically finite. Finite type and Noetherianity persist after this shrinking.",
+   "uses": [
+    "lem-per-integrality-prime-neighbourhood",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 0EUU (lemma-descend-open-immersion), 07RR (lemma-descend-surjective), 081F (lemma-eventually-proper); explicit assembly of the spreading paragraph of Kurano–Shimomoto Lemma 4.4, printed p.5."
+   }
+  },
+  {
+   "text": "Finally let $b\\notin\\mathfrak q$ with $D(b)\\subseteq D(a)$. Base change the chosen diagram to $D(b)$. The indexed open cover remains a cover by inverse images, properness persists, and the image formula preserves surjectivity. Finite type persists and the sources are Noetherian. Each restricted $T_{a,i}$ and $P_a$ is an open subscheme of an integral scheme containing its generic point: dominance puts that point over $(0)\\in D(b)$. It is therefore nonempty integral, with the same function field, by localization of its affine domain charts. The fraction-field description consequently preserves generic finiteness and dominance. Associativity of fibre products identifies its pullback to $S$ with the original specified diagram, with the same cover and all the same arrows.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-base-change-image",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 0EUU (lemma-descend-open-immersion), 07RR (lemma-descend-surjective), 081F (lemma-eventually-proper); explicit assembly of the spreading paragraph of Kurano–Shimomoto Lemma 4.4, printed p.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "lem-per-integrality-prime-neighbourhood",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "pqf-def-locnoeth",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Assembly of the existing descent theorems, making explicit the diagram and integrality omitted in the spreading paragraph of Kurano–Shimomoto Lemma 4.4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-alteration-diagram-spreading: A finite diagram of integral generically finite finite type schemes over a prime localization with proper surjective witness and finite open cover spreads to a principal neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwaySou\", \"doc\": \"A morphism property $ P $ on a scheme morphism $ f $ is equivalent to the condition that for every point $ x $ in the domain, there exist affine open neighborhoods $ U $ in the codomain and $ V $ in t\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut spreads a morphism into a fixed target; affine-transition limit hits concern arrows between existing models. Neither constructs this integral generically finite diagram and its proper-surjective/open-cover certificate."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsLocalization",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut spreads a morphism into a fixed target; affine-transition limit hits concern arrows between existing models. Neither constructs this integral generically finite diagram and its proper-surjective/open-cover certificate."
+  },
+  {
+   "tool": "grep",
+   "query": "spread|descend|[Ll]imit",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"14\", \"line\": \"# Spreading out morphisms\", \"text\": \"\"}\n  {\"file\": \"16\", \"line\": \"Under certain conditions, a morphism on stalks `Spec 𝒪_{X, x} ⟶ Spec 𝒪_{Y, y}` can be spread\", \"text\": \"\"}\n  {\"file\": \"29\", \"line\": \"We would like to spread `Spec(φ)` out to an `S`-morphism on an open subscheme `U ⊆ X`\", \"text\": \"\"}\n  {\"file\": \"37\", \"line\": \"- `AlgebraicGeometry.spread_out_unique_of_isGermInjective`\", \"text\": \"\"}\n  {\"file\": \"39\", \"line\": \"- `AlgebraicGeometry.spread_out_of_isGermInjective`\", \"text\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut spreads a morphism into a fixed target; affine-transition limit hits concern arrows between existing models. Neither constructs this integral generically finite diagram and its proper-surjective/open-cover certificate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-local-alteration-diagram-spreading: Spread a finite diagram of schemes and a proper surjective generically finite morphism from a prime localization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] {y : Y} (e : sX x = sY y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk x)\\n  (h : sY.stalkMap y ≫ φ = S.presheaf.stalkSpecializes (Inseparable.of_eq e).specializes ≫ sX.stalkMap x) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y),\\n    Spe\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"{x : X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y) (e : f x = g x)\\n  (H : f.stalkMap x = Y.presheaf.stalkSpecializes (Inseparable.of_eq e.symm).specializes ≫ g.stalkMap x) :\\n  ∃ (U : X.Opens), x ∈ U ∧ U.ι ≫ f = U.ι ≫ g\", \"doc\": \"Given a scheme $X$ with an injective germ at a point $x$, and two morphisms $f, g: X \\to Y$ that agree at $x$ and satisfy a compatibility condition on their induced stalk maps under specialization, the\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] (φ : Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : φ ≫ sY = X.fromSpecStalk x ≫ sX) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y), φ = U.fromSpecStalkOfMem x hxU ≫ f ∧ f ≫ sY = U.ι ≫ sX\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {R : CommRingCat} (f g x : ↑R) (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (h : ↑(PrimeSpectrum.basicOpen f) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.basicOpenIsoSpecAway x).inv\\n      (CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Spec R).homOfLE ⋯) h) =\\n    Categ\", \"doc\": \"Let $R$ be a commutative ring, and let $f, g \\\\in R$ with $x = f \\\\cdot g$. Let $D(f)$ and $D(x)$ be the corresponding basic open sets in $\\\\mathrm{Spec}(R)$. Since $D(x) \\\\subseteq D(f)$, there is a natu\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"{x : X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y) (e : X.fromSpecStalk x ≫ f = X.fromSpecStalk x ≫ g) :\\n  ∃ (U : X.Opens), x ∈ U ∧ U.ι ≫ f = U.ι ≫ g\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, if two morphisms $f,g : X \\\\to Y$ satisfy $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X \\\\xrightarrow{f} Y = \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{i : I} (a : D.obj i ⟶ X) (ha : t.app i = a ≫ f) {j : I} (b : D.obj j ⟶ X) (hb : t.app j = b ≫ f)\\n  (hab : c.π.app i ≫ a = c.π.app j ≫ b) : ∃ (k : I) (hik : k ⟶ i) (hjk : k ⟶ j), D.map hik ≫ a = D.map hjk ≫ b\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut spreads a morphism into a fixed target; affine-transition limit hits concern arrows between existing models. Neither constructs this integral generically finite diagram and its proper-surjective/open-cover certificate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-alteration-diagram-spreading: Descend finite presentation schemes morphisms open covers and proper surjections from a filtered limit of localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} → AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f → S\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this definition constructs\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut spreads a morphism into a fixed target; affine-transition limit hits concern arrows between existing models. Neither constructs this integral generically finite diagram and its proper-surjective/open-cover certificate."
+  },
+  {
+   "tool": "grep",
+   "query": "spread_out_of_isGermInjective|exists_hom_hom_comp_eq_comp",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"39\", \"text\": \"- `AlgebraicGeometry.spread_out_of_isGermInjective`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"335\", \"text\": \"lemma spread_out_of_isGermInjective [LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] {y : Y}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"374\", \"text\": \"lemma spread_out_of_isGermInjective' [LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"379\", \"text\": \"  have := spread_out_of_isGermInjective sX sY ?_ (Scheme.stalkClosedPointTo φ) ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"217\", \"text\": \"  hom := (spread_out_of_isGermInjective' sX sY φ h).choose_spec.choose_spec.choose\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"218\", \"text\": \"  domain := (spread_out_of_isGermInjective' sX sY φ h).choose\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"219\", \"text\": \"  dense_domain := (spread_out_of_isGermInjective' sX sY φ h).choose.2.dense\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"220\", \"text\": \"    ⟨_, (spread_out_of_isGermInjective' sX sY φ h).choose_spec.choose⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"226\", \"text\": \"  (spread_out_of_isGermInjective' sX sY φ h).choose_spec.choose_spec.choose_spec.2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"387\", \"text\": \"This results is formalized in `Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"412\", \"text\": \"/-- Subsumed by `Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"413\", \"text\": \"private nonrec lemma Scheme.exists_hom_hom_comp_eq_comp_of_isAffine_of_locallyOfFiniteType\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"466\", \"text\": \"An auxiliary structure used to prove `Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"594\", \"text\": \"  obtain ⟨k, hik, hjk, H⟩ := Scheme.exists_hom_hom_comp_eq_comp_of_isAffine_of_locallyOfFiniteType\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut.lean:335 and :374 extend morphisms to a fixed target; AffineTransitionLimit gives maps between existing models. Neither gives integral finite-type object models with this proper-surjective/open-cover diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "spread_out|descend.*proper|descend.*surject|integral.*localization",
+   "results": "OK: 25 hits; Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut extends an arrow into a fixed target; AffineTransitionLimit descends arrows between existing objects. Neither descends this finite diagram with its proper covering witness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-local-alteration-diagram-spreading: Finite presentation schemes morphisms and a proper covering diagram over a local ring spread to an open neighbourhood",
+   "results": "OK: 8 hits; AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, RingHom.finitePresentation_isLocal, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut extends an arrow into a fixed target; AffineTransitionLimit descends arrows between existing objects. Neither descends this finite diagram with its proper covering witness."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsLocalization",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut extends an arrow into a fixed target; AffineTransitionLimit descends arrows between existing objects. Neither descends this finite diagram with its proper covering witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-alteration-diagram-spreading: Descend a finite diagram of schemes from a prime localization to a principal neighbourhood preserving a proper surjective witness",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut extends an arrow into a fixed target; AffineTransitionLimit descends arrows between existing objects. Neither descends this finite diagram with its proper covering witness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-local-alteration-diagram-spreading: A finite diagram of finitely presented schemes descends along a filtered limit of affine schemes",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+   "date": "2026-10-24",
+   "verdict": "no match: SpreadingOut extends an arrow into a fixed target; AffineTransitionLimit descends arrows between existing objects. Neither descends this finite diagram with its proper covering witness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-alteration-regular-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. This auxiliary lemma supplies Spreading a local alteration diagram with its proper covering witness.",
+   "via": [
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-local-alteration-diagram-spreading",
+  "worker": "stage1",
+  "summary": "Descended the specified finite diagram, then its open-cover, proper and surjective certificates; isolated only the general integrality-near-a-prime lemma. Checked every cited statement and preserved all chosen morphisms. No excellence or regularity is used.",
+  "blueprint": "Current ancestor lem-per-artin-gabber-affine-curve, Step 3 through the recorded quasi-excellence/completion chain: the spreading paragraph of Kurano–Shimomoto Lemma 4.4 is realized by steps 1–4; step 5 supplies stability under further shrinking.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic scheme/localization/finite-presentation tool: Function field of an integral scheme is the fraction field of an affine open. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/localization/finite-presentation tool: Finite-type morphisms are stable under composition and base change. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/localization/finite-presentation tool: Affine schemes are quasi-compact and quasi-separated. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-base-change-image",
+    "why": "Generic scheme/localization/finite-presentation tool: The image of a base change is the inverse image of the image. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-open-immersion-qcqs",
+    "why": "Generic scheme/localization/finite-presentation tool: Open immersions descend along qcqs affine-transition limits. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-surjective",
+    "why": "Generic scheme/localization/finite-presentation tool: Surjectivity descends to a finite stage of a limit. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Generic scheme/localization/finite-presentation tool: Properness descends to a finite stage of a limit. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-diagram-lift-of-models",
+    "why": "Generic scheme/localization/finite-presentation tool: Finite diagram arrows and relations lift after object models are chosen. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+    "why": "Generic scheme/localization/finite-presentation tool: Joint surjectivity of a finite family descends to a stage. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/localization/finite-presentation tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme/localization/finite-presentation tool: Limits of schemes along affine transition morphisms. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic scheme/localization/finite-presentation tool: A localization is the filtered colimit of the principal localizations. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic scheme/localization/finite-presentation tool: Localizations of Noetherian rings are Noetherian. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme/localization/finite-presentation tool: A locally Noetherian scheme is quasi-separated (Stacks 01OY). The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme/localization/finite-presentation tool: Base change of an open immersion is an open immersion (Stacks 01JY). The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme/localization/finite-presentation tool: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/localization/finite-presentation tool: Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Generic scheme/localization/finite-presentation tool: Stalks and function field of the spectrum of a domain. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic scheme/localization/finite-presentation tool: Locally finite type over a locally Noetherian target is locally finitely presented. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme/localization/finite-presentation tool: Descent of finitely presented data at a filtered limit. The unit has no replacement for this descent or scheme-calculus fact; it serves the existing recorded completion/alteration route."
+   },
+   {
+    "node": "lem-sfb-noetherian-open-immersion-qc",
+    "why": "Generic finite-type and Noetherian open-subscheme tool needed to descend the indexed cover vertices. No node of the perverse unit replaces this scheme-calculus input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic finite-type and Noetherian open-subscheme tool needed to descend the indexed cover vertices. No node of the perverse unit replaces this scheme-calculus input."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic finite-type and Noetherian open-subscheme tool needed to descend the indexed cover vertices. No node of the perverse unit replaces this scheme-calculus input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-b0ae9afd5",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-b0ae9afd5 (reviewer sub-agent of L); spot-checked: Fresh S1 split with 5 steps and 1 new unsplit node; I read all of it. Step 1: the principal localizations B[1/c] for c not in q form a directed system with colimit B_q (00CR) and affine limit (01YX). T_i, P and P_i are of finite presentation over S: finite type, quasi-separated as Noetherian schemes (01OY), and locally of finite presentation over the Noetherian base. Each inclusion P_i into P is quasi-compact (01OX) and hence of finite type. Step 2: thm-pd-spreading-out clause 1 supplies the object models; the finite-diagram lift then supplies the inclusions and h_i with a natural isomorphism to the given diagram; diagram arrows are locally of finite presentation over locally Noetherian targets. Step 3: descent of open immersions (0EUU), joint surjectivity at a finite stage (07RR, finite-family form), properness (081F, limits.tex:3265) and surjectivity (07RR); their qcqs and finite-type hypotheses come from steps 1-2, and the properties persist by base change. Step 4: the new lemma is applied over B[1/c] at qB[1/c], whose localization is B_q; denominators clear to a = c times x_k; on domain charts the localization is injective, so generic points go to generic points and the function fields stay the same (01RV/01HV), which keeps dominance and generic finiteness. Step 5: D(b) contains (0) since b is nonzero, so the restrictions keep integrality, the cover, properness, surjectivity and recovery of the diagram over S. New node lem-per-integrality-prime-neighbourhood is true: the kernel of C_j to U^{-1}C_j is finitely generated and killed by some a_j outside p, so each chart becomes zero or a domain, and nonzero charts meet because their pullbacks meet in the irreducible X_p. Tested on R=k x k, an extra component away from p, a nilpotent component killed at p, and nonseparated X. It does not restate the parent and has no duplicate (checked the generic-fibre-localization-domain, finite-etale-integral-models, geometric-irreducibility-shrink and trf limit-descent nodes, among others). Batch-5 flag on lem-weil-pbc-eventually-proper: it reaches def-trf-schematically-dense-open only through general Nagata lemmas; eventual properness of limits is general scheme theory, not part of the trace-formula or Poincare-duality proofs, so accepted as generic. tool_uses are generic Stacks lemmas and accepted. No SGA; Kurano-Shimomoto is WANTED but the proof is a labelled agent assembly of Stacks results. Maintainer note: a BFS from the targets that skips the live route-pivot-dropped.txt reaches neither the item, its parent lem-per-qe-alteration-regular-neighbourhood, nor the new node (their only route is through the dropped lem-per-gabber-absolute-equivariant-modification). No recorded twin exists and the content is generic and correct, so this is PASS plus note, not RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalAlterationDiagramSpreading",
+  "declaration": "AlgebraicGeometry.exists_localAlterationDiagram_spreading",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalAlterationDiagramSpreading.lean",
+  "statement": "theorem exists_localAlterationDiagram_spreading (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B] (q : Ideal B) [q.IsPrime] (I : Type w) [Finite I] (D : IntegralAlterationDiagram I (Spec (.of (Localization.AtPrime q)))) : ∃ (a : B) (ha : a ∉ q) (E : IntegralAlterationDiagram I (Spec (.of (Localization.Away a)))), D.IsCartesianOver E (Spec.map (CommRingCat.ofHom (Localization.awayLift (algebraMap B (Localization.AtPrime q)) a (IsLocalization.map_units (M := q.primeCompl) (Localization.AtPrime q) ⟨a, ha⟩)))) ∧ ∀ (b : B) (hb : b ∉ q), PrimeSpectrum.basicOpen b ≤ PrimeSpectrum.basicOpen a → ∃ (r : Spec (.of (Localization.Away b)) ⟶ Spec (.of (Localization.Away a))) (F : IntegralAlterationDiagram I (Spec (.of (Localization.Away b)))), r ≫ Spec.map (CommRingCat.ofHom (algebraMap B (Localization.Away a))) = Spec.map (CommRingCat.ofHom (algebraMap B (Localization.Away b))) ∧ F.IsCartesianOver E r ∧ D.IsCartesianOver F (Spec.map (CommRingCat.ofHom (Localization.awayLift (algebraMap B (Localization.AtPrime q)) b (IsLocalization.map_units (M := q.primeCompl) (Localization.AtPrime q) ⟨b, hb⟩))))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-288ac28e8",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item node (only changes vs live: lean record and the added stmt_dep def-per-integral-alteration-diagram), the new def node and its module IntegralAlterationDiagram.lean, the item module, report.md (Worker report and Second reading by NF present), all 12 stmt_dep records, and the new node's deps (dominantFunctionFieldAlgebra body = generic-stalk functionFieldMap; Module.Finite). Clause-by-clause: Noetherian domain B, prime q, S = Spec B_q, finite I; integral nonempty Noetherian T_i/P; dominant finite-type generically finite f_i; proper surjective generically finite g; indexed open cover with iSup = top; h_i commuting over S. IsCartesianOver gives pullback squares on T_i, P and the U_i (forcing preimage opens) plus h-compatibility. The D(b) ⊆ D(a) clause is pinned to the canonical r, stated as base change of the chosen E, and recovers D. Edge cases: empty I is excluded by the nonempty P; empty U_i allowed; q = 0, fields and a = 1 covered; universes u/w unbound-free. Gates: integral_S field adds no hypothesis; no stronger assumptions; real data, no sorry in defs; docstrings with source and blueprint; lean.statement verbatim; no H4 duplicate found. Statement is true per the 01ZM/0EUU/07RR/081F argument plus integrality near a prime. Not checked against the source PDF. No change, so no compile. No findings."
+ }
+}

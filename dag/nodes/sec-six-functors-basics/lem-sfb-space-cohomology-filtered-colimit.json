@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-space-cohomology-filtered-colimit",
+ "kind": "statement",
+ "title": "Filtered colimits of etale cohomology on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated, meaning that every open cover has a finite subcover and the diagonal is quasi-compact on scheme tests. Let $D$ be a small filtered category (it is nonempty and every finite diagram admits a cocone) and let $(F_d)_{d\\in D}$ be a diagram of abelian sheaves on $X_{\\mathrm{et}}$ [def-weil-pbc-sites-and-cohomology]. For every $q\\ge0$, with cohomology the right derived functors of global sections of abelian sheaves, the canonical map $$\\varinjlim_{d\\in D}H^q(X,F_d)\\longrightarrow H^q\\!\\left(X,\\varinjlim_{d\\in D}F_d\\right)$$ is an isomorphism. The colimit on the right is in abelian sheaves.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073E, lemma-colimits."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Use the enlarged etale site $\\mathcal C_X$ of algebraic spaces etale over $X$, with terminal object $X/X$. The scheme-object inclusion gives a restriction equivalence on set sheaves by [lem-trf-space-enlarged-site-scheme-density]. It gives an additive equivalence on abelian sheaves too: extend the addition, zero and inverse maps through this fully faithful, finite-product-preserving equivalence; their equations hold because they hold after restriction. Global sections are maps from the terminal set sheaf, endowed with sectionwise addition, so restriction identifies global-section functors. Thus we may transfer the diagram to abelian sheaves on $\\mathcal C_X$. Choose the common universe so both sites and their covering sets are small, as in the cited comparison.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G0, 03G1 and 03H7, definition-spaces-etale-site, lemma-compare-etale-sites and remark-explain-equivalence."
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be the objects $U\\to X$ with $U$ qcqs, and take $\\mathrm{Cov}_0$ to consist of all finite coverings of such objects by qcqs objects. Given any covering $\\{V_j\\to U\\}$ with $U\\in\\mathcal B$, cover each $V_j$ by affine scheme components using [lem-a1-space-affine-etale-cover]. The composites of these components with $V_j\\to U$ are etale scheme maps by [lem-trf-space-chartwise-etale-permanence]; hence their point images in $|U|$ are open by [lem-a1-space-affine-etale-cover]. They cover $|U|$. Its quasi-compactness selects finitely many components, each still factoring through its original $V_j$. Affine schemes are qcqs by [lem-weil-pbc-affine-scheme-qcqs], and the same scheme-test property holds when they are regarded as representable spaces. These components therefore give a member of $\\mathrm{Cov}_0$ refining the original covering. If $U$ is empty take the empty family; its refinements and covering condition are valid.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073E, lemma-colimits, proof: cofinal finite coverings; spaces-properties.tex Tags 03FX, 03BX and 03H6."
+   }
+  },
+  {
+   "text": "For a member $\\{U_a\\to U\\}$ of $\\mathrm{Cov}_0$, the base $U$ and all factors $U_a$ are qcqs. Apply [lem-sfb-qcqs-space-fibre-product] to two factors over $U$, then inductively to the accumulated fibre product and the next factor over the same $U$. This gives every iterated intersection, allowing repetitions, as a qcqs algebraic space. The pullback and composition clauses of [lem-trf-space-chartwise-etale-permanence] show that its structural map to $X$ is etale, so it is an object of $\\mathcal B$. Thus both hypotheses of the finite-cover criterion hold, including all higher covering intersections, not just pairwise ones.",
+   "uses": [
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073E, lemma-colimits, proof: permanence by spaces-morphisms.tex Tag 073B."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-site-finite-cover-cohomology-colimit] to $\\mathcal C_X$, $\\mathcal B$, $\\mathrm{Cov}_0$, the given small filtered index $D$, and the transferred diagram. Since the hypothesis on $X$ says precisely that the terminal object $X/X$ lies in $\\mathcal B$, its conclusion gives the required isomorphism for evaluation at $X/X$ in every degree $q\\geq0$. This is global sections on the enlarged site, with the canonical map induced by the given coprojections.",
+   "uses": [
+    "lem-sfb-site-finite-cover-cohomology-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073E, lemma-colimits, final sentence, applying sites-cohomology.tex Tag 0739."
+   }
+  },
+  {
+   "text": "Transfer this assertion back through restriction. Both abelian sheaf categories have enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. The additive equivalence and section-functor identification of step 1 satisfy exactly the hypotheses of [lem-exc-equivalence-derived-sections], which gives cohomology identifications natural in each coefficient sheaf. An equivalence preserves the colimit together with its legs: cocones from the restricted diagram to $G$ correspond under its quasi-inverse to cocones from the original diagram to the inverse image of $G$, and the unique factorization property is unchanged. Naturality of the cohomology identifications therefore carries every coprojection map in step 4 to $H^q(F_d\\to\\varinjlim F)$. The induced map out of the group colimit is consequently the map in the statement by the uniqueness in [def-weil-pbc-category-colimit]. Its isomorphism property follows from step 4.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-exc-equivalence-derived-sections",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G1 and 03H7, equivalence of etale topoi, applied to injective resolutions and canonical coprojections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-site-finite-cover-cohomology-colimit",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-exc-equivalence-derived-sections",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073E, lemma-colimits, with the enlarged-site equivalence of Tags 03G1 and 03H7 made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of abelian sheaves on a quasi compact quasi separated algebraic space commutes with small filtered colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type v} [inst : CategoryTheory.SmallCategory C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁)\\n  [inst_1 : CategoryTheory.Category.{v, u₁} A] [inst_2 : CategoryTheory.Abelian A]\\n  [CategoryTheory.IsGrothendieckAbelian.{v, v, u₁} A] [inst_4 : CategoryTheory.HasSheafify J A],\\n  Categ\", \"doc\": \"Given a small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and an abelian category $\\\\mathcal{A}$ that is Grothendieck abelian with a sheafification functor, the category of sheaves on $\\\\ma\"}\n  {\"name\": \"instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ {A : Type u_1} {J : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Limits.HasColimitsOfShape J A]\\n  [CategoryTheory.HasWeakSheafify (CategoryTheory.coherentTopology CompHaus) A],\\n  CategoryTheory.Limits.HasColimitsOfShape J\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and the category of condensed objects in $\\\\mathcal{A}$ has weak sheafification with respect to the coherent Grothendieck topology on compact Ha\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CategoryTheory.Sheaf.instAddCommGroupH\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (F : CategoryTheory.Sheaf J AddCommGrpCat) →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommG\", \"doc\": \"For any natural number $ n $, the $ n $-th sheaf cohomology group $ H^n(F) $ of a sheaf $ F $ is equipped with a canonical additive commutative group structure. This follows from the abelian category \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafCohomology\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ohomology.*[Cc]olimit|[Cc]olimit.*[Cc]ohomology|[Ss]heafH.*[Cc]olimit",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"71\", \"text\": \"/-- The diagram we will take the colimit of to define local cohomology, corresponding to the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"line\": \"36\", \"text\": \"* take the colimit of `OneCohomology G U` over all covering families `U` (for\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of abelian sheaves on a quasi compact quasi separated algebraic space commutes with small filtered colimits",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaf cohomology of a qcqs algebraic space preserves filtered colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology on a qcqs algebraic space preserves small filtered colimits of abelian sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.preservesCoequalizer\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits\", \"type\": \"CategoryTheory.Limits.PreservesColimitsOfShape CategoryTheory.Limits.WalkingParallelPair\\n  AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace\", \"doc\": \"The forgetful functor from the category of locally ringed spaces to the category of sheafed spaces over commutative rings preserves colimits of diagrams indexed by the walking parallel pair category, \"}\n  {\"name\": \"AlgebraicGeometry.preservesColimit_Γ\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {I : Type w} [inst : CategoryTheory.Category.{v, w} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Schemeᵒᵖ)\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (Opposite.unop (D.obj i))],\\n  CategoryTheory.Limits.PreservesColimit D AlgebraicGeometry.Scheme.Γ\", \"doc\": \"The global sections functor $ \\\\Gamma $, which maps schemes to their global sections in the category of commutative rings, preserves colimits of diagrams where each object is an affine scheme. Specific\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"instHasColimitsCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasColimits (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all colimits.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, coefficient colimits and infrastructure; no algebraic-space cohomology colimit theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-finite-affine-descent",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Filtered colimits of etale cohomology on algebraic spaces.",
+   "via": [
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-cohomology-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Checked Stacks 073E and its 0739 and 073B prerequisites; no project attachment. Reused existing enlarged-site, affine atlas and derived-equivalence infrastructure. Two new statement-only prerequisites isolate the general finite-cover site criterion and qcqs space fibre-product permanence. Verified all canonical maps by naturality and the colimit universal property; statement unchanged.",
+  "blueprint": "The existing ancestor chain ends in blueprint.from.node = null (blueprint_refs.py ancestor reports None). The inherited precise place is retained. Steps realize Tag 073E used in Tag 07VP finite-affine descent, a supporting tool below the direct-image alteration route of det-thm-sf-ctf-stability-direct-images (3). The latest blueprint direct-image proof was read and its chapter/unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-site-scheme-density",
+    "why": "Use the existing enlarged-etale-site comparison so X is a terminal object; this is site infrastructure, not a replacement of the alteration route."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Use affine atlases and open images of etale scheme maps to obtain finite refinements on a qc target."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Use composition and pullback permanence on the enlarged site."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Use qcqs of the affine sources of the refining covers."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Use enough injectives on each of the two etale sites to apply the comparison of derived section functors."
+   },
+   {
+    "node": "lem-exc-equivalence-derived-sections",
+    "why": "Use the natural comparison of right-derived sections under the additive restriction equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-exc-equivalence-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-73dc3da69",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-73dc3da69 (reviewer sub-agent of L); spot-checked: I read Stacks 073E (spaces-cohomology l.450), 0739 (sites-cohomology l.2517), 073B(3) (spaces-morphisms l.1256) and Sites 00WJ(4). The item statement is unchanged and matches 073E. Steps: (1) the set-sheaf equivalence lem-trf-space-enlarged-site-scheme-density lifts to abelian sheaves and global sections. (2) Cofinality: an affine atlas from lem-a1 gives open images by chartwise permanence, then a finite subcover by quasi-compactness of |U|; the empty U is covered. (3) Iterated products stay qcqs by the new 073B node, with all three spaces qcqs at each stage, and stay etale over X. (4) Apply 0739 at X/X, which lies in B because X is qcqs. (5) Transfer back with lem-exc-equivalence-derived-sections; the equivalence preserves colimit cocones, and naturality plus uniqueness of the colimit map identify the canonical map. All steps are correct and proof_deps equals the union of uses. The new site node states 0739 exactly. Every 0739 hit in the DAG is a scheme-etale or colimit-of-sites specialization, so it is not a duplicate. The new fibre-product node states 073B(3) and correctly assumes C qcqs, without which it is false; it is not a duplicate. Neither new node restates the item. FIX (B3): lem-sfb-qcqs-space-fibre-product used the topology on |A| without a definition node; I added [def-a1-space-point-topology] to its statement and stmt_deps. Batch-5 check: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, lem-trf-space-enlarged-site-scheme-density, lem-trf-space-chartwise-etale-permanence and lem-a1-space-affine-etale-cover are generic algebraic-space and site infrastructure (02X2, 03G1, 03FT/03FU, 03FX/03BX). None is given by or part of the proof of the trace formula or Poincare duality, so all are accepted. I accept the split_report tool_uses as generic tools. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCohomologyFilteredColimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_cohomology_filteredColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCohomologyFilteredColimit.lean",
+  "statement": "theorem isIso_cohomology_filteredColimit {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) [HasSheafify X.etaleTopology AddCommGrpCat.{w}] [HasExt.{max (u + 1) w} (Sheaf X.etaleTopology AddCommGrpCat.{w})] (D : Type w) [SmallCategory D] [IsFiltered D] (F : D ⥤ Sheaf X.etaleTopology AddCommGrpCat.{w}) (q : ℕ) : IsIso (colimit.post F (Sheaf.functorH.{max (u + 1) w, w} X.etaleTopology q))",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded small étale site, point topology, absolute quasi-separatedness and Mathlib global abelian-sheaf cohomology. The comparison is colimit.post, hence is induced by the sheaf colimit coprojections. The two added statement dependencies already landed. Coefficient universe w is arbitrary (reviewer FIX: the delivery fixed AddCommGrpCat.{u+1}, excluding the project's abelian sheaves with sections in Type u, e.g. underlying sheaves of X.Modules); HasSheafify (project instance etaleAlgebraModulesHasSheafify at w = u, Mathlib at w ≥ u+1) and HasExt.{max (u+1) w} are propositional existence hypotheses, no geometric condition.",
+  "fixed_by": "NT-stage2-cc-ad2f9d472"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad2f9d472",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Statement matches Stacks 073E and the node clause by clause: AlgebraicSpace S with S arbitrary, CompactSpace of the point space, absolute quasi-separatedness (landed def node), small filtered D, Mathlib Sheaf.functorH as Ext from the constant ULift Z sheaf (= derived global sections), colimit.post as the canonical map, IsIso. Edge cases checked: X empty, q=0, empty index excluded as in the source, S non-qcqs. No hollow definitions, only sorry, docstrings with source place, blueprint id and 5-step proof, no pro-etale substitute, no existing duplicate found. F1 (fixed): the delivery fixed coefficients to AddCommGrpCat.{u+1} and D : Type (u+1) only to get past a universe constraint, which excludes the project's u-valued abelian sheaves on X_et (X.Modules, the etaleAlgebraModulesHasSheafify instance, the landed AlgebraicSpaceH1AffineBaseChange) that all six citers need. FIX generalizes to coefficient universe w with D : Type w and propositional [HasSheafify X.etaleTopology AddCommGrpCat.{w}] and [HasExt.{max (u+1) w}]; at w = u+1 this is exactly the delivered statement. fixes/SpaceCohomologyFilteredColimit.lean plus lem-sfb-space-cohomology-filtered-colimit.lean-record.json (statement verbatim; refit_record gives no notes or refusals). Fixed file compiled once via nt_compile --json: clean, 2.1 s, exit 0."
+ }
+}

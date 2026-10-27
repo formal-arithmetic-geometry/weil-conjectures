@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-compact-support-rational-scalar-iso",
+ "kind": "statement",
+ "title": "Raw rationalization of an integral compact-support scalar isomorphism",
+ "statement": "Let $K_0,\\ell,f:X\\to Y,c$ satisfy the finite-type and separated hypotheses of [def-weil-compact-support-finite-action], with $\\ell$ invertible in $K_0$. Let $E\\subseteq L$ be finite coefficient subfields of an algebraic closure of $\\mathbf Q_\\ell$. Every integral natural isomorphism $b:F_ET^Y\\simeq T^XF_L$, without any mixed-unit normalization hypothesis, induces a rational natural isomorphism between the corresponding compact-support/scalar-transition composites [def-weil-rationalization-karoubi]. Each component is heterogeneously equal to the image of $b_K$ under the specified raw integral-to-rational localization. The heterogeneous equality only transports the literal object equalities in the rational transition specification.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 6"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compact-support-finite-action",
+  "def-weil-integral-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Construct the component isomorphism by localizing b.app K.obj and conjugating by the literal rational transition object equalities. Prove naturality on each pure tensor using the prescribed rational transition and finite-action pure-tensor formulas, bilinear composition and integral naturality. Tensor induction (zero, pure tensor, sum) extends naturality to every map. The two localized inverse equations give the natural isomorphism; the construction gives its HEq component formula. The private generic localizeIso and map_heq helpers implement these endpoint transports. The private rationalScalarIsoOfFields helper performs the calculation for abstract finite coefficient fields before specializing to the specified universe-normalized coefficient fields, keeping their representation opaque to the calculation.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-compact-support-finite-action",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-compact-support-finite-action",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Existing normalized scalar isomorphisms plan, steps 6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism scalar extension compact support integral derived coefficient systems",
+   "results": "Eight hits, all unrelated supported smooth-function or compactly supported integration statements; no normalized derived compact-support comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized compact support coefficient extension isomorphism for integral constructible sheaves and rational localization",
+   "results": "Eight hits, including pointwise Kan extension under localization and unrelated test-function, coefficient-integer and condensed locally-constant statements; no exact comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(scalar|Scalar)|lowerShriek.*(scalar|Scalar)",
+   "results": "msearch grep returned 0 Mathlib hits. Project search found the assigned theorem and finite scalar transport, but no independent integral exchange invertibility, mixed-unit normalization, or rational component-localization statement usable without a cycle. Blueprint searches compact support scalar, rational scalar and mixed unit returned zero exact-phrase matches. Broader compact-support and scalar localization searches found the owning action and rationalization nodes and the parent comparisons, with no separate matching intermediate assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNormalizedScalarIsomorphisms",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "First sentence, finite-stage compact-support scalar-extension comparisons",
+   "via": [
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportRationalScalarIso",
+  "file": "lean/Sheaf/Paper/CompactSupportRationalScalarIso.lean",
+  "declaration": "WeilConjectures.sfCompactSupportRationalScalarIso",
+  "statement": "theorem sfCompactSupportRationalScalarIso\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L)\n    (b : sfCompactSupportFiniteIntegralFunctor l K₀ hl c (Coefficient.{u} l Ω E) ⋙\n        integralTransition l Ω Y E L h ≅\n      integralTransition l Ω X E L h ⋙\n        sfCompactSupportFiniteIntegralFunctor l K₀ hl c (Coefficient.{u} l Ω L)) :\n    ∃ β : sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω E) ⋙\n          transition l Ω Y E L h ≅\n        transition l Ω X E L h ⋙\n          sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω L),\n        ∀ K : Stage l Ω X E, HEq (β.hom.app K)\n          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) Y).map\n            (b.hom.app K.obj))",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T144029-L-1157101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T144029-L-1157101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

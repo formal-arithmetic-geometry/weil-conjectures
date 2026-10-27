@@ -24,6 +24,9 @@ import Sheaf.SixFunctors.IntegralModelsGenerators
 import Sheaf.Paper.RingedProjectionFirstShift
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.Paper.RingedCoefficientProjectionCocycle
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Finite geometric cohomology and normalized scalar projection
 
@@ -57,7 +60,7 @@ theorem finiteIntermediateFields_directed
     (E F : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] F] :
     ∃ H : IntermediateField ℚ_[ℓ] Ω, FiniteDimensional ℚ_[ℓ] H ∧ E ≤ H ∧ F ≤ H := by
-  sorry
+  exact ⟨E ⊔ F, inferInstance, le_sup_left, le_sup_right⟩
 
 /-- A continuous function has image in one finite intermediate field.
 Source: blueprint condensed algebraic-closure coefficients, displayed section formula
@@ -79,7 +82,24 @@ theorem finiteValued_closed (P : Profinite.{u}) :
     (∀ f g : C(P, Ω), IsFiniteValued ℓ Ω P f → IsFiniteValued ℓ Ω P g →
       IsFiniteValued ℓ Ω P (f * g)) ∧
     (∀ f : C(P, Ω), IsFiniteValued ℓ Ω P f → IsFiniteValued ℓ Ω P (-f)) := by
-  sorry
+  refine ⟨⟨⊥, inferInstance, fun _ ↦ (⊥ : IntermediateField ℚ_[ℓ] Ω).zero_mem⟩,
+    ⟨⊥, inferInstance, fun _ ↦ (⊥ : IntermediateField ℚ_[ℓ] Ω).one_mem⟩, ?_, ?_, ?_⟩
+  · rintro f g ⟨E, hE, hf⟩ ⟨F, hF, hg⟩
+    let := hE
+    let := hF
+    have hE' : E ≤ E ⊔ F := le_sup_left
+    have hF' : F ≤ E ⊔ F := le_sup_right
+    exact ⟨E ⊔ F, inferInstance, fun t ↦
+      (E ⊔ F).add_mem (hE' (hf t)) (hF' (hg t))⟩
+  · rintro f g ⟨E, hE, hf⟩ ⟨F, hF, hg⟩
+    let := hE
+    let := hF
+    have hE' : E ≤ E ⊔ F := le_sup_left
+    have hF' : F ≤ E ⊔ F := le_sup_right
+    exact ⟨E ⊔ F, inferInstance, fun t ↦
+      (E ⊔ F).mul_mem (hE' (hf t)) (hF' (hg t))⟩
+  · rintro f ⟨E, hE, hf⟩
+    exact ⟨E, hE, fun t ↦ E.neg_mem (hf t)⟩
 
 /-- The actual subring of finite-subextension-valued functions.
 Source: blueprint condensed algebraic-closure coefficients, displayed section formula
@@ -99,7 +119,8 @@ Proof: if f takes values in E, f composed with q takes values in that same E.
 -/
 theorem finiteValued_comp {P Q : Profinite.{u}} (q : Q ⟶ P) (f : sectionSubring ℓ Ω P) :
     IsFiniteValued ℓ Ω Q (f.val.comp q.hom.hom) := by
-  sorry
+  obtain ⟨E, hE, hf⟩ := f.property
+  exact ⟨E, hE, fun t ↦ hf (q t)⟩
 
 /-- Restriction is the lifted pointwise precomposition ring map.
 Source: blueprint condensed algebraic-closure coefficients
@@ -124,7 +145,37 @@ the empty parameter has its unique function. Forgetting ring structure reflects 
 -/
 theorem isSheaf_ringPresheaf :
     Presheaf.IsSheaf (coherentTopology Profinite.{u}) (ringPresheaf ℓ Ω) := by
-  sorry
+  let S : Subfunctor (ContinuousMap.yonedaPresheaf Profinite.toTopCat.{u} Ω) :=
+    { obj := fun P ↦ {f | IsFiniteValued ℓ Ω P.unop f}
+      map := fun q f hf ↦ by
+        obtain ⟨E, hE, h⟩ := hf
+        exact ⟨E, hE, fun t ↦ h (q.unop t)⟩ }
+  let e : ringPresheaf ℓ Ω ⋙ forget RingCat.{u + 1} ≅
+      S.toFunctor ⋙ uliftFunctor.{u + 1} :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+  rw [Presheaf.isSheaf_iff_isSheaf_forget _ _ (forget RingCat.{u + 1}),
+    Presheaf.isSheaf_of_iso_iff e, isSheaf_iff_isSheaf_of_type,
+    Presieve.isSheaf_comp_uliftFunctor_iff]
+  have hbase : Presheaf.IsSheaf (coherentTopology Profinite.{u})
+      (ContinuousMap.yonedaPresheaf Profinite.toTopCat.{u} Ω) := by
+    rw [Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition]
+    refine ⟨inferInstance, ?_⟩
+    apply +allowSynthFailures equalizerCondition_yonedaPresheaf
+      Profinite.toTopCat.{u} Ω
+    intro Z B π hπ
+    exact .of_surjective_continuous
+      (((Profinite.effectiveEpi_tfae π).out 0 2).mp hπ) π.hom.hom.continuous
+  rw [Subfunctor.isSheaf_iff S
+    (h := (isSheaf_iff_isSheaf_of_type _ _).mp hbase)]
+  intro P f hf
+  obtain ⟨ι, _, Q, π, hπ, hmem⟩ :=
+    (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily _).mp hf
+  choose E hE h using hmem
+  have hsurj : ∀ t : P.unop, ∃ (i : ι) (y : Q i), π i y = t :=
+    ((Profinite.effectiveEpiFamily_tfae Q π).out 0 2).mp hπ
+  refine ⟨⨆ i, E i, inferInstance, fun t ↦ ?_⟩
+  obtain ⟨i, y, rfl⟩ := hsurj t
+  exact (le_iSup E i) (h i y)
 
 /-- The specified finite-subextension-valued condensed ring C.
 Source: blueprint condensed algebraic-closure coefficients

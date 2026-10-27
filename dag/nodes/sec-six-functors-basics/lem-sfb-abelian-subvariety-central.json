@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-abelian-subvariety-central",
+ "kind": "statement",
+ "title": "An abelian subvariety of a connected group is central",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Dimensions mean topological Krull dimensions [def-kun-topological-krull-dimension]. Let $G$ be a smooth connected separated finite-type $k$-group scheme and let $i:A\\hookrightarrow G$ be a closed subgroup scheme with $A$ an abelian variety [def-sc-abelian-variety], that is, proper, smooth and connected over $k$. Then for every commutative $k$-algebra $B$, every $a\\in A(B)$ and every $g\\in G(B)$ one has $i(a)g=gi(a)$ in $G(B)$. In particular, $A$ is a central, hence normal, subgroup scheme of $G$. No affineness, properness or commutativity hypothesis is imposed on $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 8.13, p.151, applied to an abelian subvariety (Definition 8.15); anti-affineness of complete connected group varieties is stated before Proposition 8.12. Independent of Proposition 8.25. No Stacks tag states this centrality result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-abelian-variety"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-abelian-variety-characterization] to the proper smooth connected group scheme $A/k$. It gives that $A$ is geometrically integral; hence its base change to every extension field is reduced and irreducible, in particular connected. Thus $A$ is geometrically reduced and geometrically connected, as required by the rigidity lemma.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 04KV (varieties-lemma-geometrically-connected-if-connected-and-point), 0B7Q (groupoids-lemma-connected-group-scheme-over-field-irreducible), and 0BFC (groupoids-lemma-abelian-variety-smooth), as recorded in the cited characterization."
+   }
+  },
+  {
+   "text": "Using multiplication, inverse, the subgroup homomorphism $i$, and the projections, form the $k$-morphism $c:A\\times_kG\\to G$ given on points by $c(a,g)=i(a)g\\,i(a)^{-1}g^{-1}$. The group identities give $c|_{A\\times\\{e_G\\}}=e_G$ and $c|_{\\{e_A\\}\\times G}=e_G$ as morphisms: the two expressions reduce respectively to $i(a)i(a)^{-1}$ and $gg^{-1}$. These identities hold as diagrams of schemes, including after arbitrary base change.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 1.1 (Rigidity), printed pp.8–9: the two coordinate axes; application to the commutator morphism."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-rigidity] with $X=A$, $Y=G$, $Z=G$, $f=c$, and $y_0=e_G\\in G(k)$. Properness of $A$ is a hypothesis, and Step 1 gives its geometric connectedness and reducedness. The parameter scheme $G$ is connected, the target $G$ is separated and locally of finite type, and Step 2 contracts the fibre at the rational point $e_G$. Therefore there is a morphism $h:G\\to G$ such that $c=h\\circ\\operatorname{pr}_2$. Pull back this equality along the section $s:G\\to A\\times_kG$, $s(g)=(e_A,g)$. Since $\\operatorname{pr}_2\\circ s=\\mathrm{id}_G$ and $c\\circ s=e_G$, one obtains $h=e_G$ and hence $c=e_G$ as morphisms of schemes.",
+   "uses": [
+    "lem-sc-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 1.1, printed pp.8–9; the factorization form is the statement of the existing blueprint rigidity lemma."
+   }
+  },
+  {
+   "text": "For any commutative $k$-algebra $B$, evaluate the morphism identity $c=e_G$ on $(a,g)\\in A(B)\\times G(B)$. It gives $i(a)g\\,i(a)^{-1}g^{-1}=1$. Multiplying first on the right by $g$ and then by $i(a)$ gives $i(a)g=gi(a)$. Thus $i(A(B))$ is central in $G(B)$ for every $B$. Moreover $g\\,i(a)g^{-1}=i(a)$, so conjugation preserves the subgroup for every $B$, which is normality in [def-sc-group-scheme-subgroup].",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 1.1, printed pp.8–9, applied to the commutator; final group-identity calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-variety-characterization",
+  "def-sc-group-scheme",
+  "lem-sc-rigidity",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Application of Theorem 1.1, printed pp.8–9, in the factorization form of lem-sc-rigidity, to the mixed commutator A × G → G. This proves the conclusion of Milne Algebraic Groups Corollary 8.13 for an abelian subvariety."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety embedded as a closed subgroup of a smooth connected algebraic group is central",
+   "results": "{\"t\": \"2026-10-24T08:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"An abelian variety embedded as a closed subgroup of a smooth connected algebraic group is central\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.center_eq_top\", \"Subgroup.center.isMulCommutative\", \"commutator_eq_bot_iff_center_eq_top\", \"Group.commGroupOfCenterEqTop\", \"CommGroup.isSolvable\", \"CommGroup.isNilpotent\", \"LieAlgebra.abelian_of_le_center\", \"addCommGroupOfAddCyclicCenterQuotient\"], \"digest\": \"4cae96e6ae2ed9bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every abelian subvariety of a connected algebraic group is contained in its centre",
+   "results": "{\"t\": \"2026-10-24T08:56:10Z\", \"tool\": \"leansearch\", \"query\": \"Every abelian subvariety of a connected algebraic group is contained in its centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.le_centralizer\", \"AddSubgroup.centralizer_eq_top_iff_subset\", \"LieAlgebra.abelian_of_le_center\", \"AddSubgroup.le_centralizer_iff_isAddCommutative\", \"AddSubgroup.le_centralizer\", \"Subgroup.center\", \"commutator_centralizer_commutator_le_center\", \"Subalgebra.center_le_centralizer\"], \"digest\": \"7204bbe17ee039f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-24T08:56:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAbelianVariety\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "grep",
+   "query": "abelian.*centr|centr.*abelian|anti.affine",
+   "results": "{\"t\": \"2026-10-24T08:56:10Z\", \"tool\": \"grep\", \"query\": \"abelian.*centr|centr.*abelian|anti.affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper smooth connected closed subgroup of any connected algebraic group commutes with the whole group scheme",
+   "results": "{\"t\": \"2026-10-24T09:04:33Z\", \"tool\": \"leanfinder\", \"query\": \"A proper smooth connected closed subgroup of any connected algebraic group commutes with the whole group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal.pathComponentOne\", \"instNormalCommutatorClosure\", \"Subgroup.normal_of_comm\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"instNormalCommutator\", \"Subgroup.commGroupTopologicalClosure\", \"Subgroup.connectedComponentOfOne\", \"Subgroup.normalCore_isClosed\"], \"digest\": \"27b95fc4366be41e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "grep",
+   "query": "abelian.*centr|centr.*abelian|anti.affine",
+   "results": "{\"t\": \"2026-10-24T09:31:42Z\", \"tool\": \"grep\", \"query\": \"abelian.*centr|centr.*abelian|anti.affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group centre, centralizer and abelianization results do not assert centrality of a proper subgroup in a possibly non-affine group scheme; Loogle and the algebraic-geometry grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every complete connected subgroup of a connected algebraic group is central",
+   "results": "{\"t\": \"2026-10-24T09:31:43Z\", \"tool\": \"leansearch\", \"query\": \"Every complete connected subgroup of a connected algebraic group is central\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.center\", \"Subgroup.le_centralizer\", \"CommGroup.center_eq_top\", \"Subgroup.centralizer_eq_top_iff_subset\", \"AddSubgroup.centralizer_univ\", \"Subgroup.center.isMulCommutative\", \"Subgroup.centralizer_univ\", \"Subgroup.coe_center\"], \"digest\": \"8238bc42cdd3d995\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group centre, centralizer and abelianization results do not assert centrality of a proper subgroup in a possibly non-affine group scheme; Loogle and the algebraic-geometry grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-24T09:31:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAbelianVariety\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group centre, centralizer and abelianization results do not assert centrality of a proper subgroup in a possibly non-affine group scheme; Loogle and the algebraic-geometry grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety closed subgroup of a connected algebraic group scheme is central",
+   "results": "{\"t\": \"2026-10-24T09:31:44Z\", \"tool\": \"leanfinder\", \"query\": \"An abelian variety closed subgroup of a connected algebraic group scheme is central\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.center_eq_top\", \"Subgroup.center.isMulCommutative\", \"Subgroup.centerCharacteristic\", \"commutator_eq_bot_iff_center_eq_top\", \"Subgroup.instNormalCenter\", \"upperCentralSeries_one\", \"Group.commGroupOfCenterEqTop\", \"CommGroup.isNilpotent\"], \"digest\": \"15fccb6f3c2efe95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group centre, centralizer and abelianization results do not assert centrality of a proper subgroup in a possibly non-affine group scheme; Loogle and the algebraic-geometry grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a proper connected smooth group scheme to a connected algebraic group has central image by rigidity of the commutator",
+   "results": "{\"t\": \"2026-10-24T09:33:16Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a proper connected smooth group scheme to a connected algebraic group has central image by rigidity of the commutator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Abelianization.commutator_subset_ker\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Abelianization.ker_of\", \"MonoidHom.range_isMulCommutative\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"isNilpotent_of_ker_le_center\", \"Subgroup.quotientCenterEmbedding\"], \"digest\": \"ea6d1897d904d0c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group centre, centralizer and abelianization results do not assert centrality of a proper subgroup in a possibly non-affine group scheme; Loogle and the algebraic-geometry grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.25 rational-action proof: the proper reduced connected stabilizer is central, permitting Theorem 8.24 almost-complement.",
+   "via": [
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-subvariety-central",
+  "worker": "stage1",
+  "summary": "Reuse the existing geometric-integrality characterization and rigidity lemma. Construct the mixed commutator, verify its two axis identities, apply rigidity and evaluate the resulting equality of scheme morphisms on every algebra. No new nodes. Normalize doubled TeX escapes in the inherited statement without changing its mathematical content.",
+  "blueprint": "The inherited provenance serves the proper stabilizer centrality step in the Rosenlicht nonproper-affine-subgroup argument (Milne Proposition 8.25), before the almost-complement theorem. The present node-level proof uses rigidity, with the same conclusion and hypotheses. Blueprint searches for abelian subvariety, central, commutator and rigidity found no duplicate of the item. Ancestor command returned None; the inherited from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic geometric-integrality fact for proper smooth connected group schemes, needed to verify the rigidity hypotheses; the six-functor stability unit does not supply it."
+   },
+   {
+    "node": "lem-sc-rigidity",
+    "why": "Generic factorization theorem for morphisms from a product with a proper factor; it applies to the mixed commutator and is not a replacement of any unit-level step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-rigidity"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-a1151dc44",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-a1151dc44 (reviewer sub-agent of L); spot-checked: I read the item in full. Only the item record changed; there are no new nodes. The statement is mathematically the same as on the base and is true: Milne, Algebraic Groups (iAG2017) p.151, Cor 8.13, together with the paragraph before Prop 8.12 (a complete connected group variety is anti-affine). It is not weakened. Step 1: lem-sc-abelian-variety-characterization says A is geometrically integral, which gives the geometrically reduced and connected hypotheses rigidity needs. Step 2: the commutator c=i(a)g i(a)^-1 g^-1 is a scheme morphism, and both axis restrictions are the constant e_G; this is elementary. Step 3: lem-sc-rigidity, both the old text and the blueprint_update. Every hypothesis holds: A proper, G connected, G separated, and the fibre at the rational point e_G maps to a single point. Rigidity gives c=h∘pr2; precomposing with (e_A,id) gives h=e_G, so c=e_G. This matches the mechanism of Milne, Abelian Varieties, Thm 1.1, pp.8-9. Step 4: evaluating c=e_G on B-points gives centrality, and normality as defined in def-sc-group-scheme-subgroup. Edge cases checked: trivial A, G=A, G=A×SL2, and non-reduced B (covered by the morphism equality). A DAG scan found no duplicate. lem-sfb-conjugation-finite-jet-kernel needs affine G and is correctly not used. The two off-unit citations, lem-sc-rigidity and lem-sc-abelian-variety-characterization, are generic black-box tools; I accept both tool_uses. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianSubvarietyCentral",
+  "declaration": "AlgebraicGeometry.abelianSubvariety_central",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianSubvarietyCentral.lean",
+  "statement": "theorem abelianSubvariety_central {k : Type u} [Field k] [IsAlgClosed k] (G A : Over (Spec (.of k))) [GrpObj G] [GrpObj A] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsAbelianVariety A] (i : A ⟶ G) [IsClosedSubgroupScheme i] : (∀ (B : Type u) [CommRing B] [Algebra k B] (a : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k B))) ⟶ A) (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k B))) ⟶ G), (a ≫ i) * g = g * (a ≫ i)) ∧ IsNormalSubgroupScheme i",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50e362030",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Only the item lean field changed; the statement is verbatim in AbelianSubvarietyCentral.lean, with a sorry proof. Clause by clause against the node: k field + IsAlgClosed; G,A in Over(Spec k) with GrpObj; Smooth/ConnectedSpace/IsSeparated/LocallyOfFiniteType+QuasiCompact on G (the finite-type record convention); IsAbelianVariety A = proper+smooth+connected; IsClosedSubgroupScheme i = IsMonHom + R-point injectivity + closed immersion (def-sc-group-scheme-subgroup record). Conclusion: for all B:Type u k-algebras and points a,g, (a≫i)*g = g*(a≫i), with Hom.group consistent with IsMonHom.monoidHom; plus IsNormalSubgroupScheme i. No extra assumptions on G (affine/proper/commutative/dimension). Edge cases: trivial A, A=G, A×SL2, nonreduced or zero B, all characteristics; universes consistent. Provable via exists_eq_snd_comp (Rigidity.lean:335) + IsAbelianVariety.geometricallyIntegral. Docstrings carry Milne AG Cor 8.13/Def 8.15, AV Thm 1.1, the blueprint id and all four proof steps. No duplicate declaration, no new defs, no competing S2 delivery. Not recompiled (no change)."
+ }
+}

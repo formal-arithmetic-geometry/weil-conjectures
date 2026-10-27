@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-bounded-below-square-localization",
+ "kind": "statement",
+ "title": "Canonical localization of an arbitrary bounded-below exact square",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal A',\\mathcal B'$ be abelian categories [def-sp-abelian] in a common universe [def-weil-size-convention], with derived categories [def-weil-abstract-derived-category] and bounded-below derived categories [def-weil-pbc-bounded-derived-subcategories]. Write $K^+(\\mathcal C)$ for bounded-below cochain complexes modulo chain homotopy, $q:K^+(\\mathcal C)\\to D^+(\\mathcal C)$ for localization at quasi-isomorphisms, and $K(F)$ for termwise application of an additive functor. Let $L:\\mathcal B\\to\\mathcal A$, $L':\\mathcal B'\\to\\mathcal A'$, $G:\\mathcal B\\to\\mathcal B'$ and $H:\\mathcal A\\to\\mathcal A'$ be exact additive functors. Put $E=D(L)$, $E'=D(L')$, $T=D(G)$ and $S=D(H)$, with their canonical natural localization isomorphisms $\\phi_{F,V}:D(F)(qV)\\xrightarrow{\\sim}qK(F)V$ [lem-weil-pbc-exact-functor-derived-factorization]. Let $\\sigma:L'G\\to HL$ be an arbitrary natural transformation, and let $\\sigma^K:K(L')K(G)\\to K(H)K(L)$ be its termwise transformation on $K^+$. For $N\\in K^+(\\mathcal B)$ put\n$$A_N=\\phi_{L',K(G)N}\\circ E'(\\phi_{G,N}),\\qquad B_N=\\phi_{H,K(L)N}\\circ S(\\phi_{L,N}).$$ Then there is a unique natural transformation $\\theta:E'T\\to SE$ between the restrictions of these two composites to $D^+(\\mathcal B)$ (functors $D^+(\\mathcal B)\\to D(\\mathcal A')$) such that for every $N\\in K^+(\\mathcal B)$,\n$$B_N\\circ\\theta_{qN}=q(\\sigma^K_N)\\circ A_N.$$\nIts component is $\\theta_{qN}=B_N^{-1}\\circ q(\\sigma^K_N)\\circ A_N$, so it is the canonical termwise-derived transformation $D(\\sigma)$. No invertibility of $\\sigma$ or enough-injectives assumption is required.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "Old proof steps 1 and 3: descent of the arbitrary termwise square; PlusAdjunction.lean, derivedPlus_mateEquiv_app_fac hypothesis hθ, lines 419–429; construction also in lean/Sheaf/CategoryTheory/BoundedBelowDerivedMateModel.lean, boundedBelowDerivedSquare, lines 45–73."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Work directly in the homotopy category. Form the natural transformation τ from K(G)K(L') to K(L)K(H) by composing mapHomotopyCategoryCompIso.hom, NatTrans.mapHomotopyCategory σ, and the inverse composite comparison. Compose and whisker the exact-functor isomorphisms mapDerivedCategoryFactorsh to obtain a: Qh ⋙ (D(G) ⋙ D(L')) ≅ (K(G) ⋙ K(L')) ⋙ Qh and b: Qh ⋙ (D(L) ⋙ D(H)) ≅ (K(L) ⋙ K(H)) ⋙ Qh. Their components are exactly A_N and B_N of the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "place": "mapDerivedCategoryFactorsh; composition with the canonical Functor.associator isomorphisms."
+   }
+  },
+  {
+   "text": "Let δ = a.hom followed by whiskerRight τ Qh followed by b.inv, and restrict it along HomotopyCategory.Plus.ι B. The bounded-below homotopy localization Qh⁺ has fully faithful precomposition, so take the preimage θ of this restricted transformation under Localization.fullyFaithfulWhiskeringLeft. Its source and target are the prescribed unbounded derived composites restricted to D⁺(B), since Qh⁺ ⋙ DerivedCategory.Plus.ι is definitionally the homotopy inclusion followed by Qh. The bounded-below localization instance already exists in DerivedCategory/Plus.lean and requires no enough-injectives assumption; the cochain quotient and its composite localization are unnecessary here.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-cochain-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+    "place": "QhCompιIsoιCompQh, lines 108–109; Qh.IsLocalization at HomotopyCategory.Plus.quasiIso, lines 124–126 (the homotopy localization used by the cochain-localization dependency). Preimage: Mathlib/CategoryTheory/Localization/Predicate.lean, fullyFaithfulWhiskeringLeft."
+   }
+  },
+  {
+   "text": "Evaluate the fully faithful structure's map_preimage equation at N. It gives θ_(qN) = a_N ≫ Qh(τ_N) ≫ b_N⁻¹. Expanding only the composite isomorphisms and simplifying identity maps gives exactly the displayed second equality. Postcompose with b_N and use b_N⁻¹ ≫ b_N = 1 to get the first equality. This cancels only the canonical comparison isomorphism, with no inverse of σ.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Functor/FullyFaithful.lean",
+    "place": "Functor.FullyFaithful.map_preimage; evaluate with congr_app and cancel using Iso.inv_hom_id_app."
+   }
+  },
+  {
+   "text": "For any other θ' satisfying the two equalities, its second equality and the component formula for θ give equality at every Qh⁺(N). Apply Localization.natTrans_ext to the bounded-below homotopy localization to conclude θ' = θ. Thus the constructed transformation is unique.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-cochain-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Localization/Predicate.lean",
+    "place": "Localization.natTrans_ext, lines 286–291, with L = DerivedCategory.Plus.Qh."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-bounded-below-cochain-localization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/BoundedBelowSquareLocalization.lean",
+  "place": "J9: direct assembly of exact-functor comparisons on the homotopy category and preimage under fully faithful bounded-below localization, followed by componentwise cancellation and localization extensionality. This implements the same canonical descent as the original proof, omitting the cochain-quotient detour."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary natural transformation between composites of exact additive functors descends to a unique square on bounded below derived categories with the canonical localization comparison factorization",
+   "results": "{\"t\": \"2026-10-22T06:04:10Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary natural transformation between composites of exact additive functors descends to a unique square on bounded below derived categories with the canonical localization comparison factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\"], \"digest\": \"575d278a51258e2e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide fully faithful precomposition and comparisons for individual exact functors, not the bounded-below composite-square construction together with its specified factorization; these are ingredients already cited in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlus.*[Ss]quare|[Ss]quare.*mapDerivedCategoryPlus|fullyFaithfulWhiskeringLeft",
+   "results": "{\"t\": \"2026-10-22T06:04:27Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryPlus.*[Ss]quare|[Ss]quare.*mapDerivedCategoryPlus|fullyFaithfulWhiskeringLeft\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\", \"Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean\"], \"digest\": \"0fea6e1e612d8a81\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide fully faithful precomposition and comparisons for individual exact functors, not the bounded-below composite-square construction together with its specified factorization; these are ingredients already cited in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.fullyFaithfulWhiskeringLeft, NatTrans",
+   "results": "{\"t\": \"2026-10-22T06:04:28Z\", \"tool\": \"loogle\", \"query\": \"Localization.fullyFaithfulWhiskeringLeft, NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Localization.fullyFaithfulWhiskeringLeft'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'Localization.fullyFaithfulWhiskeringLeft'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical descent of a natural transformation between two composites of exact functors to bounded below derived categories",
+   "results": "{\"t\": \"2026-10-22T06:05:08Z\", \"tool\": \"leansearch\", \"query\": \"Canonical descent of a natural transformation between two composites of exact functors to bounded below derived categories\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a noninvertible natural square of exact functors on homotopy categories gives a derived square by conjugating with composition comparison isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:05:24Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a noninvertible natural square of exact functors on homotopy categories gives a derived square by conjugating with composition comparison isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"digest\": \"7527abb3b23caddb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide fully faithful precomposition and comparisons for individual exact functors, not the bounded-below composite-square construction together with its specified factorization; these are ingredients already cited in the DAG."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-22T06:05:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Localization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Localization'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "{\"t\": \"2026-10-22T06:05:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.fullyFaithfulWhiskeringLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.fullyFaithfulWhiskeringLeft\"], \"digest\": \"59ab625b708f174b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide fully faithful precomposition and comparisons for individual exact functors, not the bounded-below composite-square construction together with its specified factorization; these are ingredients already cited in the DAG."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|natTrans_ext|fullyFaithfulWhiskeringLeft",
+   "results": "{\"t\": \"2026-10-23T09:28:54Z\", \"tool\": \"grep\", \"query\": \"liftNatTrans|natTrans_ext|fullyFaithfulWhiskeringLeft\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"d5f26b9ea7d872c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ingredient only; the canonical composite comparisons and bounded-below square require the assembly in proof steps 1–4, rather than a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation of exact functors gives a unique natural transformation on bounded below derived categories",
+   "results": "{\"t\": \"2026-10-23T09:28:55Z\", \"tool\": \"leansearch\", \"query\": \"A natural transformation of exact functors gives a unique natural transformation on bounded below derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.natTrans_ext\", \"CategoryTheory.Functor.rightDerivedNatTrans_app\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.NatTrans\", \"CategoryTheory.Functor.leftDerivedNatTrans\", \"CategoryTheory.ExactFunctor.whiskeringRight_obj_map\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"CategoryTheory.Functor.fromLeftDerivedZero\"], \"digest\": \"cc87152a8f8eb213\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ingredient only; the canonical composite comparisons and bounded-below square require the assembly in proof steps 1–4, rather than a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "{\"t\": \"2026-10-23T09:28:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.liftNatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.liftNatTrans\", \"CategoryTheory.Localization.liftNatTrans_id\", \"CategoryTheory.Localization.liftNatIso_hom\", \"CategoryTheory.Localization.liftNatIso_inv\", \"CategoryTheory.Localization.comp_liftNatTrans\", \"CategoryTheory.Localization.comp_liftNatTrans_assoc\", \"CategoryTheory.Localization.liftNatTrans_app\", \"CategoryTheory.NatTrans.CommShift.liftNatTrans\"], \"digest\": \"cef4c5c3c9975579\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ingredient only; the canonical composite comparisons and bounded-below square require the assembly in proof steps 1–4, rather than a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between composites of exact additive functors descend uniquely to bounded below derived categories via canonical localization comparisons",
+   "results": "{\"t\": \"2026-10-23T09:29:05Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between composites of exact additive functors descend uniquely to bounded below derived categories via canonical localization comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.NatTrans.leftDerived_comp\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\"], \"digest\": \"ed947451225225c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ingredient only; the canonical composite comparisons and bounded-below square require the assembly in proof steps 1–4, rather than a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a noninvertible square of exact functors using composed comparison isomorphisms gives the unique derived natural square",
+   "results": "{\"t\": \"2026-10-23T09:31:06Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a noninvertible square of exact functors using composed comparison isomorphisms gives the unique derived natural square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\"], \"digest\": \"717c13573f67caea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ingredient only; the canonical composite comparisons and bounded-below square require the assembly in proof steps 1–4, rather than a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-below-derived-mate-model",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization first descent via the ph/etale comparison: the canonical arrow identification in Stacks 0DDJ(2), specifically computation of a derived mate by its underived square on complexes. Extraction: Old proof steps 1 and 3: descent of the arbitrary termwise square; PlusAdjunction.lean, derivedPlus_mateEquiv_app_fac hypothesis hθ, lines 419–429; construction also in lean/Sheaf/CategoryTheory/BoundedBelowDerivedMateModel.lean, boundedBelowDerivedSquare, lines 45–73.",
+   "via": [
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-trf-big-small-etale-localization-derived-pushforward",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-bounded-below-square-localization",
+  "worker": "stage1",
+  "summary": "Expanded the arbitrary termwise square construction and its unique descent, reusing three existing Mathlib leaves. No new nodes or statement changes. Checked noninvertible transformations and absence of enough-injectives assumptions.",
+  "blueprint": "lem-trf-local-term-locality, proof of (1) and (2), normal-cone specialization: the inherited ph/etale comparison branch needs the underived-to-derived arrow identification; here the square-localization part of parent lem-trf-bounded-below-derived-mate-model is expanded. No change to the contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-734453290",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-734453290 (reviewer sub-agent of L); spot-checked: I read the item in full; the split adds 0 new nodes. Sources checked: BoundedBelowDerivedMateModel.lean:45-73 (built on mapDerivedCategoryPlus, inverting only the comparison isomorphisms); Mathlib Localization/Predicate.lean:278-336 (liftNatTrans, liftNatTrans_app, natTrans_ext); Stacks 014X, 015F and 05RW(1), the last with no enough-injectives hypothesis; and the parent lem-trf-bounded-below-derived-mate-model step 1, which uses the item only on D^+. The three cited nodes are Mathlib leaves and each says what its step takes from it: exact-functor factorization in Steps 1-2, bounded-below cochain localization in Steps 3-4, and clauses (2)/(3) of the localization universal property in Steps 3-4. Steps 1, 3 and 4 are correct; tested on σ=0, σ=id, non-invertible σ and zero categories. Not duplicates: lem-sp-exact-derived-transformation-pasting and lem-trf-exact-evaluation-transformation-descent are unbounded, and def-weil-pbc-derived-square-iso is an invertible scheme square. Two faults repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-bounded-below-square-localization.json. (1) E1/E4: E=D(L) is an unbounded functor, so the statement's uniqueness of θ:E'T→SE, constrained only at qN, read on all of D(B), which the proof does not show. The statement now restricts θ to D^+(B) (functors D^+(B)→D(A')), matching the source, the Lean and the parent. (2) C1/E5: Step 2 applied the unbounded φ at Q^+N without citing the comparison i_D Q^+≅Q i_C, and claimed values in D^+ without proof. Step 2 now cites lem-weil-pbc-bounded-below-cochain-localization and uses target D(A') by fullness; Step 3 has target D(A'). proof_deps unchanged. No SGA, no tool_uses needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedBelowSquareLocalization",
+  "declaration": "CategoryTheory.existsUnique_boundedBelowSquareLocalization",
+  "file": "lean/Sheaf/CategoryTheory/BoundedBelowSquareLocalization.lean",
+  "statement": "theorem existsUnique_boundedBelowSquareLocalization {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'} [Category.{vA} A] [Category.{vB} B] [Category.{vA'} A'] [Category.{vB'} B'] [Abelian A] [Abelian B] [Abelian A'] [Abelian B'] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wA'} A'] [HasDerivedCategory.{wB'} B'] (L : B ⥤ A) (L' : B' ⥤ A') (G : B ⥤ B') (H : A ⥤ A') [L.Additive] [L'.Additive] [G.Additive] [H.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] [PreservesFiniteLimits L'] [PreservesFiniteColimits L'] [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (σ : G ⋙ L' ⟶ L ⋙ H) : ∃! θ : DerivedCategory.Plus.ι ⋙ (G.mapDerivedCategory ⋙ L'.mapDerivedCategory) ⟶ DerivedCategory.Plus.ι ⋙ (L.mapDerivedCategory ⋙ H.mapDerivedCategory), ∀ N : HomotopyCategory.Plus B, (θ.app (DerivedCategory.Plus.Qh.obj N) ≫ H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N.obj) ≫ H.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (ComplexShape.up ℤ)).obj N.obj) = L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N.obj) ≫ L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (ComplexShape.up ℤ)).obj N.obj) ≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl (G ⋙ L')) (ComplexShape.up ℤ)).hom.app N.obj ≫ (NatTrans.mapHomotopyCategory σ (ComplexShape.up ℤ)).app N.obj ≫ (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (ComplexShape.up ℤ)).inv.app N.obj)) ∧ (θ.app (DerivedCategory.Plus.Qh.obj N) = L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N.obj) ≫ L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (ComplexShape.up ℤ)).obj N.obj) ≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl (G ⋙ L')) (ComplexShape.up ℤ)).hom.app N.obj ≫ (NatTrans.mapHomotopyCategory σ (ComplexShape.up ℤ)).app N.obj ≫ (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (ComplexShape.up ℤ)).inv.app N.obj) ≫ H.mapDerivedCategoryFactorsh.inv.app ((L.mapHomotopyCategory (ComplexShape.up ℤ)).obj N.obj) ≫ H.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.inv.app N.obj))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The source and target are the restrictions of the prescribed unbounded exact derived composites along DerivedCategory.Plus.ι; the homotopy comparisons mapDerivedCategoryFactorsh implement φ on K⁺. The commuting square and the explicit component formula are both stated. No enough-injectives or invertibility hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9311c7127",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: four abelian categories with independent universes, exact functors (Additive + PreservesFiniteLimits/Colimits as in lem-weil-pbc-exact-functor-derived-factorization), arbitrary σ : G⋙L' ⟶ L⋙H with no IsIso or enough-injectives assumption. θ is stated only between Plus.ι-restricted composites D⁺(B)→D(A'). A_N/B_N are built from mapDerivedCategoryFactorsh and σ^K from mapHomotopyCategoryCompIso + NatTrans.mapHomotopyCategory. Both the square and the B_N⁻¹ formula are given (equivalent since B_N is iso, so ∃! is not weakened). True: Plus.Qh.IsLocalization gives liftNatTrans existence and natTrans_ext uniqueness. Item node differs from live only in lean; statement verbatim in file; stmt_deps are Mathlib leaves or the convention node; no definition copy or hollow definition; proof is sorry only; docstrings and report sections present; no parallel landing. Not compiled (no changes); worker compile and dry run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261026T091851-L-3383281",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

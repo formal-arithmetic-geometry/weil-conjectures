@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-rigidified-product-seesaw",
+ "kind": "statement",
+ "title": "See-saw extends a prescribed section isomorphism uniquely",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], let $V$ be a proper geometrically integral $k$-scheme [def-weil-proper-morphism, def-pc-geometrically-irreducible], let $x\\in V(k)$ [def-pc-rational-point], and let $T$ be a smooth separated finite-type $k$-scheme [def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $q:V\\times_kT\\to T$ and $s_x:T\\to V\\times_kT$ be the projection and the section $t\\mapsto(x,t)$ [def-pc-fibre-product, def-pc-rational-point]. Let $\\mathcal E,\\mathcal F$ be invertible sheaves on $V\\times_kT$ [def-sc-invertible-module]. Suppose that for every $t\\in T(k)$ the restrictions $\\mathcal E_t$ and $\\mathcal F_t$ to $V\\times_k\\{t\\}$ are isomorphic. Then every isomorphism\n$$\\alpha:s_x^*\\mathcal E\\xrightarrow{\\sim}s_x^*\\mathcal F$$\nextends uniquely to an isomorphism $\\widetilde\\alpha:\\mathcal E\\xrightarrow{\\sim}\\mathcal F$ satisfying $s_x^*\\widetilde\\alpha=\\alpha$. In particular, if an invertible sheaf $\\mathcal H$ on $V\\times_kT$ is trivial on every such fibre, then $\\mathcal H\\cong q^*s_x^*\\mathcal H$. All restrictions are tensor pullbacks [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Theorem 5.16 and Corollaries 5.17–5.18, printed p.26, with the evaluation construction of the isomorphism in the proof of 5.16. The section prescribes the base-factor isomorphism; uniqueness uses proper geometric integrality (global functions are constants). T is explicitly smooth, hence reduced: this is not a claim over arbitrary nonreduced bases."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-pc-rational-point",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=V\\times_kT$. The structure morphism of $V$ is flat by [lem-pc-flat-field], proper by hypothesis, and locally of finite presentation by [pqf-lem-lft-fp-locnoeth], since a field is Noetherian and proper includes finite type. It is quasi-compact and separated, hence of finite presentation. Apply [lem-sfb-space-flat-proper-fp-locality] to this scheme morphism and base change to $T$: $q$ is proper, flat and of finite presentation. Its fibre over $t$ is $V_{\\kappa(t)}$, geometrically integral by [def-pc-geometrically-irreducible], and $s_x$ is a section. Apply [sbc-lem-smooth-geometrically-reduced] to $T\\to\\operatorname{Spec}k$: its unique fibre is $T$, so $T$ is reduced. It is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], hence locally Noetherian. These are the base hypotheses needed for Grauert, including the locally Noetherian hypothesis in clause (4) of its current blueprint statement.",
+   "uses": [
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "def-pc-geometrically-irreducible",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.14–5.16, hypotheses; Stacks Tags 01TX, 01TS, 01U9, 056T, 01T6"
+   }
+  },
+  {
+   "text": "Set $\\mathcal H=\\mathcal F\\otimes\\mathcal E^\\vee$. By [def-sc-invertible-module], local bases of $\\mathcal E$ and $\\mathcal F$ identify $\\mathcal H$ with $\\mathcal O_X$; its dual is the inverse line bundle. The tensor-pullback formula [def-pc-module-pullback] gives $\\mathcal H_t=\\mathcal F_t\\otimes\\mathcal E_t^\\vee$. The given fibre isomorphism therefore makes $\\mathcal H_t$ trivial at every $k$-rational point of $T$. The prescribed $\\alpha$ corresponds, in these same rank-one bases, to an isomorphism $a:\\mathcal O_T\\xrightarrow{\\sim}s_x^*\\mathcal H$; this correspondence sends a scalar matrix to its section of $\\mathcal F\\otimes\\mathcal E^\\vee$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Corollary 5.17, tensor by the inverse bundle"
+   }
+  },
+  {
+   "text": "Every closed point of $T$ is $k$-rational by [lem-weil-pbc-closed-point-residue-field-base], so the preceding triviality holds at every closed point. Apply [lem-sc-picard-fiber-triviality-closed] to $q,\\mathcal H,s_x$: its hypotheses were checked in step 1. The set $Z$ of points with trivial residue-field fibre is closed. By [lem-sc-lft-over-field-jacobson-space], the closed points of $T$ are dense in $T$ (take its closed subset to be $T$). Since they all lie in $Z$, $Z=T$. Thus $\\mathcal H_t$ is trivial for every scheme point $t$, not just the originally prescribed rational points.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-picard-fiber-triviality-closed",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.19 and 5.16; Stacks Tags 0478, 01TB, 0BF0"
+   }
+  },
+  {
+   "text": "For each $t$, [lem-pc-h0-proper-variety](2) applied over $\\kappa(t)$ gives $H^0(V_{\\kappa(t)},\\mathcal O)=\\kappa(t)$: properness follows by base change as in step 1, and geometric integrality is preserved by further field extension by its definition. Since $\\mathcal H_t$ is trivial, $h^0(X_t,\\mathcal H_t)=1$ everywhere. The module $\\mathcal H$ is of finite presentation and flat over $T$: on a trivializing open its stalk is one copy of $\\mathcal O_{X,z}$, which is flat over $\\mathcal O_{T,q(z)}$ since $q$ is flat. Apply [thm-pc-semicontinuity-base-change] with $q=0$. Its reducedness and local Noetherian hypotheses hold by step 1, and the dimension function is constant, including on every generization. Consequently $N=q_*\\mathcal H$ is finite locally free and the canonical maps $N\\otimes\\kappa(t)\\to H^0(X_t,\\mathcal H_t)$ are isomorphisms. Their targets have dimension one, so every local free rank of $N$ is one: $N$ is invertible.",
+   "uses": [
+    "lem-pc-h0-proper-variety",
+    "thm-pc-semicontinuity-base-change",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.15 and proof of 5.16, first paragraph"
+   }
+  },
+  {
+   "text": "Take the adjunction evaluation $e:q^*N\\to\\mathcal H$ from [lem-pc-module-pullback-adjunction]. For an open $U\\subseteq T$, a section $m\\in N(U)=\\mathcal H(q^{-1}U)$ and a local function $b$ on $q^{-1}U$, the map is $b\\otimes m\\mapsto bm$. Hence its restriction to $X_t$, using the canonical base-change map of step 4, is exactly $\\mathcal O_{X_t}\\otimes_{\\kappa(t)}H^0(X_t,\\mathcal H_t)\\to\\mathcal H_t$, $b\\otimes m\\mapsto bm$. In any chosen trivialization of $\\mathcal H_t$, constants are all its global sections by step 4, so this is the multiplication isomorphism $\\mathcal O_{X_t}\\otimes_{\\kappa(t)}\\kappa(t)\\to\\mathcal O_{X_t}$. Thus $e$ is an isomorphism on every residue-field fibre at every point of $X$: first restrict to $X_{q(z)}$, then to $\\kappa(z)$. Both its source and target are locally free of rank one. Apply [lem-sc-finite-locally-free-residue-isomorphism] on $X$ to conclude that $e$ is an isomorphism.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-finite-locally-free-residue-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.10–5.11 and proof of 5.16, evaluation paragraph"
+   }
+  },
+  {
+   "text": "Pull $e$ back along $s_x$, identifying $s_x^*q^*N=N$ by $qs_x=\\mathrm{id}_T$ and [def-pc-module-pullback]; write $b:N\\xrightarrow{\\sim}s_x^*\\mathcal H$ for the resulting isomorphism. Then $c=b^{-1}a:\\mathcal O_T\\xrightarrow{\\sim}N$ defines $h=e\\circ q^*c:\\mathcal O_X\\xrightarrow{\\sim}\\mathcal H$. Its section restriction is $s_x^*h=b c=a$. In local rank-one bases the corresponding morphism $\\widetilde\\alpha:\\mathcal E\\to\\mathcal F$ is multiplication by the same unit as $h$. These local maps glue, since $\\mathcal H=\\mathcal F\\otimes\\mathcal E^\\vee$; their local inverses glue too. Thus $\\widetilde\\alpha$ is an isomorphism and $s_x^*\\widetilde\\alpha=\\alpha$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.18, section restriction, with explicit prescribed-isomorphism normalization"
+   }
+  },
+  {
+   "text": "For uniqueness, first compute functions on $X$. By [lem-pc-h0-proper-variety](2), $\\Gamma(V,\\mathcal O_V)=k$. For every affine open $U=\\operatorname{Spec}A\\subseteq T$, $A$ is flat over the field $k$ by [lem-pc-flat-field]. Therefore [lem-weil-pbc-stein-flat-base-change-global-sections] identifies the canonical pullback $A\\to\\Gamma(V\\times_kU,\\mathcal O)$ with $k\\otimes_k A\\to\\Gamma(V\\times_kU,\\mathcal O)$ and makes it bijective. For a global function $u$ on $X$, each restriction over $U$ consequently equals $q^*v_U$ for a unique $v_U\\in A$. Applying $s_x^*$ shows $v_U=(s_x^*u)|_U$, so these local equalities give $u=q^*s_x^*u$. An automorphism of the invertible module $\\mathcal E$ is multiplication by a unique global unit $u$: on trivializing opens it is a unit scalar, and these scalars agree on overlaps because conjugating a rank-one scalar by a change of basis leaves it unchanged [def-sc-invertible-module]. The ratio of two extensions of $\\alpha$ is such an automorphism, with $s_x^*u=1$. The function identity just proved gives $u=q^*1=1$. The extensions are therefore equal.",
+   "uses": [
+    "lem-pc-h0-proper-variety",
+    "lem-pc-flat-field",
+    "lem-weil-pbc-stein-flat-base-change-global-sections",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.16–5.18, uniqueness supplement; Stacks Tag 02KH, coherent-lemma-flat-base-change-cohomology"
+   }
+  },
+  {
+   "text": "Finally let $\\mathcal H$ be as in the last assertion. On each fibre, $q^*s_x^*\\mathcal H$ is the tensor product of $\\mathcal O_{V}$ with the one-dimensional fibre of $s_x^*\\mathcal H$, hence is trivial. Apply the extension assertion with $\\mathcal E=q^*s_x^*\\mathcal H$, $\\mathcal F=\\mathcal H$ and the canonical identity $s_x^*q^*s_x^*\\mathcal H\\cong s_x^*\\mathcal H$. It yields $q^*s_x^*\\mathcal H\\cong\\mathcal H$; invert it for the stated orientation. If $T$ is empty all module maps are uniquely determined, so the same conclusion holds without a nonemptiness assumption.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I 5.16 and 5.18, application after section restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-field",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "def-pc-geometrically-irreducible",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-picard-fiber-triviality-closed",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-pc-h0-proper-variety",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-finite-locally-free-residue-isomorphism",
+  "lem-weil-pbc-stein-flat-base-change-global-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I 5.14–5.19, printed pp.25–26: evaluation proof of 5.16, tensor reduction 5.17, section 5.18; explicit normalization and uniqueness supplement from Stacks 02KH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Seesaw principle for line bundles: a line bundle on the product of a proper geometrically integral variety and a variety trivial on every fibre is pulled back from the second factor",
+   "results": "8 hits; actual results: AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give scheme fibre products, open restriction/pullback comparisons, or topological bundle trivializations; none is the product see-saw theorem for algebraic invertible sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on a product of a complete variety and a parameter variety, trivial on every fibre, is isomorphic to the pullback of its restriction to a rational section",
+   "results": "8 hits; actual results: Trivialization.restrictPreimage'_target, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, Trivialization.pullback_target, Trivialization.pullback, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.Scheme.IdealSheafData.comap_bot, FiberBundle.pullback_trivializationAt'",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give scheme fibre products, open restriction/pullback comparisons, or topological bundle trivializations; none is the product see-saw theorem for algebraic invertible sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Invertible\"",
+   "results": "0 hits; actual results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give scheme fibre products, open restriction/pullback comparisons, or topological bundle trivializations; none is the product see-saw theorem for algebraic invertible sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "seesaw|see.saw|fiberwise.*trivial|fibrewise.*trivial|IsTrivial",
+   "results": "0 hits; actual results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give scheme fibre products, open restriction/pullback comparisons, or topological bundle trivializations; none is the product see-saw theorem for algebraic invertible sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a product of a proper geometrically integral scheme with a smooth variety trivial on every fibre is pulled back from the base uniquely after rigidification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.mk.inj, AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.AffineSpace.isPullback_map",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-product identities, flatness, or sheaf restriction identities; none states rigidified product see-saw."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"seesaw\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-product identities, flatness, or sheaf restriction identities; none states rigidified product see-saw."
+  },
+  {
+   "tool": "grep",
+   "query": "seesaw|see.saw|rigidif",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-product identities, flatness, or sheaf restriction identities; none states rigidified product see-saw."
+  },
+  {
+   "tool": "leansearch",
+   "query": "see saw theorem for invertible sheaves with a prescribed isomorphism along a rational section",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.Scheme.Opens.topIso_inv, AlgebraicGeometry.StructureSheaf.basicOpenIso, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.StructureSheaf.toBasicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-product identities, flatness, or sheaf restriction identities; none states rigidified product see-saw."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat family over a reduced base constant dimension of global sections gives a line bundle direct image and fibre base change isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-product identities, flatness, or sheaf restriction identities; none states rigidified product see-saw."
+  },
+  {
+   "tool": "grep",
+   "query": "Grauert|hFiber|higherDirectImage|fiber.*trivial|fibre.*trivial",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: fibre-product identities, flatness, or sheaf restriction identities; none states rigidified product see-saw."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-theta-poincare-pullback",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family. Milne III 6.8 proof, application of I 5.16 followed by restriction to P times J; the statement is the generic product theorem, independent of curves and theta divisors.",
+   "via": [
+    "lem-sfb-theta-poincare-pullback",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rigidified-product-seesaw",
+  "worker": "stage1",
+  "summary": "Retained the statement and its Milne route. Reused existing Grauert, closed triviality locus, Jacobson, residue-field, base-change and global-functions nodes. Constructed evaluation, normalized it to the prescribed section map, and proved uniqueness by affine-base flat base change. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family. Milne III 6.8 proof, application of I 5.16 followed by restriction to P times J; the statement is the generic product theorem, independent of curves and theta divisors. This split supplies the product see-saw prerequisite using Milne I 5.16–5.18; current blueprint direct-images proof (3) retained.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   },
+   {
+    "node": "lem-sc-picard-fiber-triviality-closed",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   },
+   {
+    "node": "thm-pc-semicontinuity-base-change",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   },
+   {
+    "node": "lem-sc-finite-locally-free-residue-isomorphism",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   },
+   {
+    "node": "lem-weil-pbc-stein-flat-base-change-global-sections",
+    "why": "Generic geometric/cohomological tool for the product evaluation proof; no node of the six-functor unit supplies this assertion. Used only with the hypotheses verified in the proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-picard-fiber-triviality-closed",
+  "lem-pc-h0-proper-variety",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-finite-locally-free-residue-isomorphism",
+  "lem-weil-pbc-stein-flat-base-change-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-3778044c7",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-3778044c7 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery, which is the item only, with no new nodes. Statement and stmt_deps are byte-identical to live and side-live; the live node is still unsplit, so no other delivery supersedes this one. No cycle, no SGA, and every cited id exists and is unmerged. Source: Milne AV I 5.16–5.19 (PDF pp.29–33): Grauert 4.2d, canonical q^*q_*L→L checked fibrewise by 5.11, the closed triviality locus of 5.19, tensor reduction 5.17 and section restriction 5.18. Steps 2, 3, 4, 5 and 6 follow this route. Steps 6–7 add the prescribed-α normalization and uniqueness via Γ(V,O)=k, which Milne's statement does not give. Every step checked against the cited statements: step 1 base hypotheses (flat over a field, lfp over a Noetherian base, base change of flat/proper/fp from the item's own unit, geometric integrality of the fibres, smooth⇒reduced, Noetherian); step 3 closed points are k-rational, the closed triviality locus with the section s_x, and Jacobson density with Z:=T; step 4 lem-pc-h0-proper-variety(2) over κ(t) and Grauert with q=0 on reduced, locally Noetherian T, β≡1, giving invertible N (checked against the blueprint_update clauses (3)/(4)); step 5 the adjunction counit is fibrewise multiplication, so the residue-isomorphism criterion applies; step 6 c=b^{-1}a; step 7 Stein flat base change over affine U⊆T gives Γ(X,O)=Γ(T,O), so an automorphism with s_x^*u=1 is the identity; step 8 elementary. Edge cases checked: V=Spec k, T empty, T disconnected. Duplicate search: thm-sc-theorem-of-cube, lem-sc-picard-pullback-evaluation and lem-sc-cube-fiber-triviality-open are different statements. Declared tool_uses (7 generic geometry and coherent-cohomology nodes) are accepted. Batch-5: lem-sfb-space-flat-proper-fp-locality reaches only def-trf-algebraic-space (a definition). lem-sc-picard-fiber-triviality-closed, lem-pc-h0-proper-variety and thm-pc-semicontinuity-base-change are general coherent-cohomology results that reach def-trf-schematically-dense-open only through the Chow/Nagata chain. None of them is part of the trace formula or Poincaré duality, so this is not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RigidifiedProductSeesaw",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.rigidified_product_seesaw",
+  "file": "lean/Sheaf/AlgebraicGeometry/RigidifiedProductSeesaw.lean",
+  "statement": "theorem rigidified_product_seesaw {k : Type u} [Field k] [IsAlgClosed k] {V T : Scheme.{u}} (f : V ⟶ Spec (.of k)) (g : T ⟶ Spec (.of k)) [IsProper f] [GeometricallyIntegral f] [Smooth g] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (x : f.fieldPoints k) : (∀ (E F : (Limits.pullback f g).Modules) [E.IsInvertible] [F.IsInvertible], (∀ t : g.fieldPoints k, Nonempty ((tensorPullback (Limits.pullback.fst (Limits.pullback.snd f g) t.1)).obj E ≅ (tensorPullback (Limits.pullback.fst (Limits.pullback.snd f g) t.1)).obj F)) → ∀ α : (tensorPullback (f.fieldPointBaseChange x (Over.mk g))).obj E ≅ (tensorPullback (f.fieldPointBaseChange x (Over.mk g))).obj F, ∃! e : E ≅ F, (tensorPullback (f.fieldPointBaseChange x (Over.mk g))).mapIso e = α) ∧ (∀ (H : (Limits.pullback f g).Modules) [H.IsInvertible], (∀ t : g.fieldPoints k, Nonempty ((tensorPullback (Limits.pullback.fst (Limits.pullback.snd f g) t.1)).obj H ≅ SheafOfModules.unit _)) → Nonempty (H ≅ (tensorPullback (Limits.pullback.snd f g)).obj ((tensorPullback (f.fieldPointBaseChange x (Over.mk g))).obj H)))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3f4d1a4d",
+  "group": "NO",
+  "result": "pass",
+  "note": "Item-only delivery: lean record added, statement verbatim, no new nodes or dependency changes. Clause check: k alg. closed; V with [IsProper f][GeometricallyIntegral f]; x : f.fieldPoints k (sections of f); T with Smooth/IsSeparated/LocallyOfFiniteType/QuasiCompact (recorded finite-type conjunction); X = Limits.pullback f g, q = pullback.snd; s_x = fieldPointBaseChange x (Over.mk g) (canonical (x∘g, id), in def-pc-rational-point audit decls); E,F IsInvertible; fibre hypothesis over t : g.fieldPoints k via pullback.fst (pullback.snd f g) t.1; ∀α ∃! e : E≅F with (tensorPullback s_x).mapIso e = α; separate H-conjunct H ≅ q^*s_x^*H; tensorPullback throughout per def-pc-module-pullback record. Mathematics: Milne I 5.16-5.18, uniqueness via Γ(X,O)=Γ(T,O); edge cases T empty or disconnected, V=Spec k, any characteristic, single universe u all fine. No duplicate: Seesaw.lean/TheoremOfCube give fibre criteria and closedness only. Docstrings have source, blueprint id and 8 proof steps; sorry only; autoImplicit off; standard report sections. No compile needed (no file changed)."
+ }
+}

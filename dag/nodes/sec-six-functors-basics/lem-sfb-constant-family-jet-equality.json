@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-constant-family-jet-equality",
+ "kind": "statement",
+ "title": "All jets of a constant rational section detect equality of morphisms",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $X$ be an integral separated finite-type $k$-scheme [def-pc-integral-scheme, def-weil-finite-type-morphism], and let $P\\in X(k)$. Put $R=\\mathcal O_{X,P}$, the stalk of the structure sheaf, and $\\mathfrak m=\\ker(R\\to k)$. For $n\\geq1$ write $X_n=\\operatorname{Spec}(R/\\mathfrak m^{n+1})$, with its canonical map to $X$; powers and quotients are as in [def-weil-pbc-algebra-hom-quotient] and spectra as in [def-weil-affine-spectrum]. Let $T$ be any finite-type $k$-scheme and $Z$ any separated $k$-scheme [def-pc-scheme]. Here separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Let $E\\subseteq T\\times_kX$ be an open subscheme [def-weil-open-immersion] containing $T\\times_k\\{P\\}$; products mean scheme fibre products [def-pc-fibre-product]. Every $T\\times_kX_n$ factors through $E$, since it has the same underlying support as $T\\times_k\\{P\\}$. If two $k$-morphisms $f,g:E\\to Z$ satisfy $f|_{T\\times_kX_n}=g|_{T\\times_kX_n}$ for every $n\\geq1$, then $f=g$. The scheme $T$ may be nonreduced or disconnected; no smoothness of $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), especially (1) and its proof by local Krull intersection. Agent-formulated constant-family morphism-detection consequence, with its argument recorded in report.md; this geometric statement is not itself the Stacks lemma. It isolates the formal-detection input in Milne, Algebraic Groups, Proposition 8.9, printed p.150, for the rational-action argument of Proposition 8.25."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Form the equalizer $q:Q\\hookrightarrow E$ as the pullback of the closed diagonal $\\Delta_{Z/k}:Z\\to Z\\times_k Z$ by $(f,g)$. The fibre-product universal property [def-pc-fibre-product] says that a map to $E$ factors through $Q$ exactly when its composites with $f,g$ agree. By [lem-weil-pbc-closed-immersion-base-change], $q$ is a closed immersion. Write $\\mathcal I=\\ker(\\mathcal O_E\\to q_*\\mathcal O_Q)$. By the affine description in [def-weil-closed-immersion], on an affine $\\operatorname{Spec}D\\subset E$ the inverse image of $Q$ is $\\operatorname{Spec}(D/L)$, where $L=\\mathcal I(\\operatorname{Spec}D)$. Our hypothesis says that every $T\\times_k X_n\\to E$ factors through $Q$. It suffices to prove $\\mathcal I=0$, since the same affine description will then make $q$ an isomorphism.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QR (lemma-base-change-closed-immersion) and Tag 01QO (lemma-closed-immersion); equalizer formed by pulling back the separated diagonal."
+   }
+  },
+  {
+   "text": "Fix an affine open $T_0=\\operatorname{Spec}B$ of $T$. Choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $P$ from a finite-type affine cover of $X$ [def-weil-finite-type-morphism]. Thus $A$ is a finite-type $k$-algebra and is a domain by [def-pc-integral-scheme]. Evaluation at $P$ gives $A\\to k$ with kernel $\\mathfrak p$ and $A/\\mathfrak p=k$. By [lem-weil-pbc-affine-open-stalk-localization], $R=A_{\\mathfrak p}$ and $\\mathfrak m=\\mathfrak pR$. The field $k$ is Noetherian since its only ideals are $0,k$; hence $A$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and $R$ is Noetherian by [lem-weil-pbc-localization-noetherian]. Apply [lem-weil-pbc-krull-intersection-jacobson] to the finite $R$-module $R$ and its maximal ideal, which is its Jacobson radical. This gives $\\bigcap_{r\\ge1}\\mathfrak m^r=0$. The localization $A\\to R$ is injective: a numerator killed by a denominator outside $\\mathfrak p$ is zero in the domain $A$. Therefore $\\bigcap_{r\\ge1}\\mathfrak p^r=0$ in $A$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00IQ (lemma-intersection-powers-ideal-module), part (2), and 00IP (lemma-intersect-powers-ideal-module-zero); Schemes 01HV (lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Put $C=B\\otimes_k A$ and $J=\\mathfrak p C$. The tensor-product and affine-spectrum universal properties [def-weil-pbc-module-tensor-product, def-weil-affine-spectrum], applied to [def-pc-fibre-product], identify $T_0\\times_kU$ with $\\operatorname{Spec}C$: a map to it is precisely a pair of compatible maps to the two affine factors. Choose a $k$-basis $(b_i)$ of the vector space $B$. Each element of $C$ has a unique finite expansion $\\sum_i b_i\\otimes a_i$; applying the coordinate linear functionals gives uniqueness. For each $r\\ge1$, the ideal $J^r$ consists exactly of expansions whose coefficients lie in $\\mathfrak p^r$ (expand products of generators, and conversely use $\\mathfrak p^rC=J^r$). Thus $C/J^r=B\\otimes_k(A/\\mathfrak p^r)$, $C/J=B$, and $\\bigcap_{r\\ge1}J^r=0$ by step 2. Equivalently $C\\to\\prod_{n\\ge1}C/J^{n+1}$ is injective; omitting the first power does not change the intersection.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product): elementary coefficient calculation from the tensor universal property; Tag 00IQ, elementary scalar-extension consequence."
+   }
+  },
+  {
+   "text": "For $r\\ge1$ the natural map $A/\\mathfrak p^r\\to R/\\mathfrak m^r$ is an isomorphism. Indeed, if $s\\notin\\mathfrak p$, write $s=c(1-u)$ with $c=s(P)\\in k^\\times$ and $u\\in\\mathfrak p$; its inverse modulo $\\mathfrak p^r$ is $c^{-1}\\sum_{j=0}^{r-1}u^j$. Hence localizing $A/\\mathfrak p^r$ outside $\\mathfrak p$ changes nothing, by the universal property of localization [lem-weil-pbc-affine-open-stalk-localization]. Together with step 3, this identifies $T_0\\times_k X_n$ with $\\operatorname{Spec}(C/J^{n+1})$, compatibly with its map to $T_0\\times_kU$. The radical of $J^{n+1}$ equals that of $J$, so this map has the same underlying support as the constant section $\\operatorname{Spec}(C/J)$. In particular it factors through the stated open $E$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary geometric-series inverse in a nilpotent quotient; Schemes Tag 01HV (lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Let $F$ be the closed complement of $E\\cap\\operatorname{Spec}C$ in $\\operatorname{Spec}C$, and write $F=V(K)$ for an ideal $K$ of $C$. This complement is disjoint from $V(J)$, because the entire constant section lies in $E$. Thus $V(K+J)=\\varnothing$, whence $K+J=C$ (a proper ideal lies in a maximal ideal). Choose $h\\in K$ with $1-h\\in J$. Then $D(h)\\subset E\\cap\\operatorname{Spec}C$ and $V(J)\\subset D(h)$. The affine ring of $D(h)$ is $C_h$ by [lem-weil-pbc-affine-open-section-vanishing-prime]. For every $r\\ge1$, $h=1+j$ with $j\\in J$ has inverse $\\sum_{i=0}^{r-1}(-j)^i$ modulo $J^r$. Consequently the maps $C\\to C/J^r$ extend uniquely to $C_h\\to C/J^r$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), part (3); elementary Zariski closed-set and finite geometric-series calculations."
+   }
+  },
+  {
+   "text": "The combined homomorphism $C_h\\to\\prod_{n\\ge1}C/J^{n+1}$ is injective. To see this, write an element as $c/h^e$. If every image is zero, then multiplication by the unit $h^e$ in each quotient shows $c\\in J^{n+1}$ for every $n\\ge1$, so $c=0$ by step 3. The closed subscheme $Q\\times_E D(h)$ is $\\operatorname{Spec}(C_h/L_h)$ for an ideal $L_h$ by [def-weil-closed-immersion]. Each $\\operatorname{Spec}(C/J^{n+1})$ factors through it by steps 1, 4, and 5; hence $L_h$ is killed by every displayed quotient map. Injectivity forces $L_h=0$. Thus $Q$ equals $E$ over $D(h)$, as schemes, and $\\mathcal I|_{D(h)}=0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary fraction calculation using the separated filtration from Tag 00IQ; Morphisms Tag 01QO (lemma-closed-immersion), affine closed-subscheme description."
+   }
+  },
+  {
+   "text": "Restriction of regular functions from $T_0\\times_k X$ to $D(h)$ is injective on every open subset. First $h$ is a non-zero-divisor on $C$: if $hc=0$, its unit images modulo all $J^{n+1}$ give $c=0$ by step 3. This remains true in $C_s$ for every $s\\in C$: an equation $hc/s^e=0$ implies $s^N hc=0$ in $C$ for some $N$, and cancellation of $h$ gives $c/s^e=0$. Thus $C_s\\to C_{sh}$ is injective, proving the assertion inside $T_0\\times_kU$ on its basis of principal opens [lem-weil-pbc-affine-open-section-vanishing-prime]. Next, for any nonempty affine $V=\\operatorname{Spec}A'$ of $X$, integrality [def-pc-integral-scheme] implies $U\\cap V\\ne\\varnothing$, and it contains a nonempty principal open $D(a)$ of $V$, with $0\\ne a\\in A'$. Multiplication by $a$ is injective on the domain $A'$ and therefore on $B\\otimes_k A'$ coefficient by coefficient in the same $k$-basis of $B$ used in step 3. The preceding localization argument gives injective restrictions on every principal open of $T_0\\times_kV$ to its intersection with $T_0\\times_kD(a)$. Since $D(a)\\subset U\\cap V$, any regular function vanishing on the intersection with $T_0\\times_kU$ is zero. Covering by these principal opens proves injectivity on every open, by the sheaf uniqueness axiom. Composing the two injective restrictions proves the claimed injection to $D(h)$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), part (3); elementary coefficient and localized-fraction arguments, expanding the schematic-density argument of Morphisms lemma-flat-morphism-scheme-theoretically-dense-open."
+   }
+  },
+  {
+   "text": "Apply step 7 to open subsets of $E_0=E\\cap(T_0\\times_kX)$. Every section of $\\mathcal I|_{E_0}$ is a regular function whose restriction to $D(h)$ is zero by step 6, so it is zero. Hence $\\mathcal I|_{E_0}=0$. The affine opens $T_0$ cover $T$, so these $E_0$ cover $E$, and sheaf uniqueness gives $\\mathcal I=0$. Step 1 now identifies $Q$ with $E$ and gives $f=g$. If $T$ is empty the conclusion is immediate; the argument treats disconnected or nonreduced affine $T_0$ because it used only that its coordinate ring $B$ is a $k$-vector space. No regularity or smoothness of $R$ was used.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Sheaf uniqueness and the affine closed-subscheme description (Morphisms Tag 01QO); conclusion of the agent-formulated formal-detection consequence of Algebra Tag 00IQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), part (2), and 00IP; coefficientwise tensor separation and explicit localization/density argument. Milne Algebraic Groups Proposition 8.9, printed p.150, motivates the formal-detection step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "infinitesimal.*dens|jet.*detect|stalk.*injective|germ.*injective",
+   "results": "{\"t\": \"2026-10-24T09:37:10Z\", \"tool\": \"grep\", \"query\": \"infinitesimal.*dens|jet.*detect|stalk.*injective|germ.*injective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\"], \"digest\": \"6076af5c1fb79cf9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: germ injectivity and extension from a stalk do not give detection from all finite jets after a possibly nonreduced parameter base; equality on a dense open assumes the schematically dense source that this lemma must establish."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two morphisms from a constant integral scheme family to a separated scheme agreeing on every infinitesimal neighbourhood of a rational point are equal",
+   "results": "{\"t\": \"2026-10-24T09:37:10Z\", \"tool\": \"leansearch\", \"query\": \"Two morphisms from a constant integral scheme family to a separated scheme agreeing on every infinitesimal neighbourhood of a rational point are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.noConfusion\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.Scheme.Hom.mk.noConfusion\", \"AlgebraicGeometry.Scheme.Hom.noConfusionType\", \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\"], \"digest\": \"d4284ea21645173b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: germ injectivity and extension from a stalk do not give detection from all finite jets after a possibly nonreduced parameter base; equality on a dense open assumes the schematically dense source that this lemma must establish."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-24T09:37:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\"], \"digest\": \"adf59e7b1280ed7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: germ injectivity and extension from a stalk do not give detection from all finite jets after a possibly nonreduced parameter base; equality on a dense open assumes the schematically dense source that this lemma must establish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite infinitesimal neighbourhoods of a rational point in an integral variety detect equality of morphisms after arbitrary finite type scalar extension",
+   "results": "{\"t\": \"2026-10-24T09:37:13Z\", \"tool\": \"leanfinder\", \"query\": \"Finite infinitesimal neighbourhoods of a rational point in an integral variety detect equality of morphisms after arbitrary finite type scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.ext_of_isDominant\"], \"digest\": \"8892ef471ac804cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: germ injectivity and extension from a stalk do not give detection from all finite jets after a possibly nonreduced parameter base; equality on a dense open assumes the schematically dense source that this lemma must establish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme in an open neighbourhood of a constant rational section is the whole open if it contains every thickening of that section in an integral variety",
+   "results": "{\"t\": \"2026-10-24T09:41:15Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subscheme in an open neighbourhood of a constant rational section is the whole open if it contains every thickening of that section in an integral variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.Scheme.basicOpen_le\", \"AlgebraicGeometry.Scheme.zeroLocus_singleton\", \"AlgebraicGeometry.Scheme.basicOpen\", \"AlgebraicGeometry.basicOpen_eq_bot_iff\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero\"], \"digest\": \"8f7dd7f17204059a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: germ injectivity and extension from a stalk do not give detection from all finite jets after a possibly nonreduced parameter base; equality on a dense open assumes the schematically dense source that this lemma must establish."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"equalizer\"",
+   "results": "{\"t\": \"2026-10-24T10:12:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparated\\\", \\\"equalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for this pair of name fragments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a constant family agreeing on all infinitesimal thickenings of a rational point in an integral scheme are equal even over a nonreduced parameter scheme",
+   "results": "{\"t\": \"2026-10-24T10:12:06Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms from a constant family agreeing on all infinitesimal thickenings of a rational point in an integral scheme are equal even over a nonreduced parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\"], \"digest\": \"0ecba74f8a5d130e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations give local morphism extensionality or equality after equality on a stalk, not equality from all constant-family jets; the dominant-source result assumes reducedness, which T need not have."
+  },
+  {
+   "tool": "grep",
+   "query": "infinitesimal.*dens|jet.*detect|isClosedImmersion_equalizer",
+   "results": "{\"t\": \"2026-10-24T10:12:49Z\", \"tool\": \"grep\", \"query\": \"infinitesimal.*dens|jet.*detect|isClosedImmersion_equalizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\"], \"digest\": \"bb6aacc36f6200b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isClosedImmersion_equalizer_ι_left (Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:281) gives only the closed equalizer, not all-jet detection. Its needed input is already covered by the existing closed-immersion base-change node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of morphisms on every infinitesimal neighbourhood of a rational section implies equality on an open of a product with an integral variety",
+   "results": "{\"t\": \"2026-10-24T10:12:49Z\", \"tool\": \"leansearch\", \"query\": \"Equality of morphisms on every infinitesimal neighbourhood of a rational section implies equality on an open of a product with an integral variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.Hom.congr_app\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.mk.injEq\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Scheme.Hom.appLE.congr_simp\", \"AlgebraicGeometry.Scheme.PartialMap.mk.injEq\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor.congr_simp\"], \"digest\": \"ee59d60345c3ef58\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations give local morphism extensionality or equality after equality on a stalk, not equality from all constant-family jets; the dominant-source result assumes reducedness, which T need not have."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-fixed-point-affineness",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.25 rational-action proof: the full-stabilizer case, using the finite-jet argument of Proposition 8.9. Input: the Krull-intersection step identifying the stable jet kernel with the action kernel.",
+   "via": [
+    "lem-sfb-rational-fixed-point-affineness",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-constant-family-jet-equality",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. No exact project declaration or Mathlib match found. Eight proof steps construct the closed equalizer, apply the existing Jacobson Krull-intersection leaf to the local ring, prove coefficientwise tensor separation, identify all jets, choose a section-containing principal open with denominator congruent to 1, prove joint injectivity of its jet maps, and prove schematic density by explicit localized coefficient calculations before killing the equalizer ideal. All remaining arguments are elementary and written out; no new nodes. Nonreduced parameter schemes are retained throughout.",
+  "blueprint": "The item has no blueprint ancestor (blueprint_refs.py ancestor returns None). Its existing from.place records the formal-detection input to Milne Proposition 8.25 via Proposition 8.9. Steps 2–6 supply this Krull-intersection input, and steps 1, 7–8 justify equality on the full rational-action domain; no route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-7a4430e60",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-7a4430e60 (reviewer sub-agent of L); spot-checked: I read the delivery in full and it passes with no fixes. The item was statement-only before; now it has an 8-step split and no new nodes. Statement, source, created, stmt_deps, blueprint and unit are byte-identical to the live copies (clones/live and clones/side-live). All 15 proof_deps are definitions or Mathlib leaves, so the route is unchanged and there are no tool_uses. Source checks: Stacks algebra.tex 00IQ (line 12257), clause (2) and its proof, which step 2 uses through lem-weil-pbc-krull-intersection-jacobson with M=R and I=m inside Jac(R). Milne iAG2017 Prop 8.9, printed p.150: the jet and Krull argument for a fixed point; the item is its constant-family form, and the citer lem-sfb-rational-fixed-point-affineness meets its hypotheses. Step checks: (1) the equalizer is the base change of the diagonal, a closed immersion, with the affine ideal description from def-weil-closed-immersion. (2) R=A_p is Noetherian, intersection of m^r is 0, and A embeds in A_p. (3) Because B is free over k, J^r consists of the expansions with coefficients in p^r, so the intersection of J^r is 0. (4) A/p^r is isomorphic to R/m^r by the geometric-series inverse, so T_0×X_n = Spec(C/J^{n+1}). (5) K+J=C gives h congruent to 1 mod J with D(h) inside E. (6) The jet maps from C_h are jointly injective, so L_h=0. (7) h is a non-zero-divisor; the nonzero a with D(a) in U∩V from irreducibility, and the injective localizations, give schematic density on every open; this is long but fully written out. (8) The ideal sheaf I is 0, so f=g. Edge cases: empty T, X=Spec k, B=k[eps]/eps^2, disconnected T, the cusp; a non-integral counterexample shows integrality is really needed. The duplicate search found only the Nagata extension lemma, which is another unit's lemma, not a Mathlib leaf and not closed; inlining it avoids a tool_use. No SGA citation. Nothing compiled."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantFamilyJetEquality",
+  "declaration": "AlgebraicGeometry.Scheme.eq_of_constantFamily_jets",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalPointJetInclusion",
+   "AlgebraicGeometry.Scheme.constantFamilyJetMap",
+   "AlgebraicGeometry.Scheme.eq_of_constantFamily_jets"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantFamilyJetEquality.lean",
+  "statement": "theorem eq_of_constantFamily_jets (k : Type u) [Field k] [IsAlgClosed k] {X T Z : Scheme.{u}} (s : X ⟶ Spec (.of k)) (t : T ⟶ Spec (.of k)) (z : Z ⟶ Spec (.of k)) [IsIntegral X] [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] [LocallyOfFiniteType t] [QuasiCompact t] [IsSeparated z] (P : Spec (.of k) ⟶ X) (hP : P ≫ s = 𝟙 (Spec (.of k))) (E : (pullback t s).Opens) (hE : ∀ y : ↥(pullback t s), pullback.snd t s y = P (IsLocalRing.closedPoint k) → y ∈ E) (f g : E.toScheme ⟶ Z) (hf : f ≫ z = E.ι ≫ pullback.fst t s ≫ t) (hg : g ≫ z = E.ι ≫ pullback.fst t s ≫ t) (hjet : ∀ n : ℕ, 1 ≤ n → pullback.snd (constantFamilyJetMap k t s P n) E.ι ≫ f = pullback.snd (constantFamilyJetMap k t s P n) E.ι ≫ g) : f = g",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18cb8f6fc",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Every clause matches the node: k algebraically closed; X integral, separated and finite type (IsIntegral, IsSeparated s, LocallyOfFiniteType s, QuasiCompact s); P a k-point; m = ker(stalkClosedPointTo P); X_n = Spec(R/m^(n+1)) via Spec.map(Quotient.mk) ≫ fromSpecStalk; T finite type with no reducedness; Z separated (IsSeparated z); hE says E contains T×{P} pointwise; hjet tests the restriction along pullback.snd(jetMap n) E.ι for all n≥1, equivalent to agreement on each T×X_n since each jet lies in E; hf/hg make f,g k-morphisms; conclusion f = g. lean.statement matches the file verbatim (script check). Only the node's lean field differs from side-live; no live module or parallel landing. Helpers are explicit canonical maps, not hollow; no owning def node (def-trf-diagonal-jets is a different notion); no name collisions. Edge cases fine: empty T, X = Spec k, nonreduced or disconnected T, singular X. Universes consistent. Theorem body is sorry; docstrings give source place, blueprint id and the 8 proof steps; no pro-étale substitute; report has Worker report and Second reading by Q147 (declared self-check). Not recompiled per instructions; worker reports a clean compile. Minor, not a fault: node source says 00IQ (1), docstrings cite (2), which the proof uses."
+ }
+}

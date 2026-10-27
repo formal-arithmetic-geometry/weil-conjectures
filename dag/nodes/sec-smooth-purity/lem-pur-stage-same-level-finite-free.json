@@ -1,0 +1,102 @@
+{
+ "id": "lem-pur-stage-same-level-finite-free",
+ "kind": "statement",
+ "title": "Same-level coefficient stage arrows are finite free",
+ "statement": "For stages s and t over the same fixed finite extension E of Q_l, let a:s→t record a field embedding compatible with E. If their positive exponents agree, the actual quotient ring t.ring is finite free over s.ring through a.ringMap; in particular no unramified hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "Finite coefficient stages and cofinal ramified indices; the arithmetic part of lem-pur-finite-coefficient-adjoint-comparisons."
+ },
+ "stmt_deps": [
+  "def-coef-finite-coefficient-stages"
+ ],
+ "proof": [
+  {
+   "text": "Use the embedding as the field algebra structure. The upper valuation ring is the integral closure of the lower DVR in the finite field extension. It is finite and torsion free, hence free. Base-changing that finite basis along the quotient by the source principal-power ideal gives a finite free quotient module. The arrow compatibility maps the source parameter to the target parameter, so at equal exponents the base-changed quotient is exactly t.ring with the recorded ring map.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P8",
+  "date": "2026-10-25",
+  "place": "Direct DVR expansion and integral-closure/quotient-base-change arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eq_unit_mul_pow_irreducible|tensorQuotientEquivQuotientSMul",
+   "results": "9 hits, including IsDiscreteValuationRing.eq_unit_mul_pow_irreducible in Mathlib.RingTheory.DiscreteValuationRing.Basic.",
+   "date": "2026-10-25",
+   "verdict": "Use DVR expansion for the ramification calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Ideal.span",
+   "results": "4 hits: maximalIdeal_eq, irreducible_iff_uniformizer, ideal_eq_span_pow_irreducible, idealOrderIsoENat_symm_apply_coe_of_irreducible.",
+   "date": "2026-10-25",
+   "verdict": "These give the DVR principal-ideal API, not the complete stage assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension of p-adic fields integer rings modulo a common uniformizer power is finite free and ramified powers are cofinal",
+   "results": "Search submitted through msearch.py; results recorded in the session.",
+   "date": "2026-10-25",
+   "verdict": "Direct integral-closure and quotient-base-change route retained."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientAdjointComparisons",
+  "group": "P8",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+   "place": "Arithmetic part, node proof step 1 and final ramification clauses.",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientAdjointData",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientAdjointData.lean",
+  "declaration": "AlgebraicGeometry.FiniteCoefficientAdjoints.stage_finiteFree",
+  "statement": "theorem stage_finiteFree {s t : Stage l E} (a : Arrow s t)\n    (h : s.exponent = t.exponent) : a.IsFiniteFree",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261025T143730-L-1079878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-529dd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T202009-L-2662190",
+  "kind": "interface",
+  "note": "independent cc review: 529d Data relocation (pp.all #print of 38 decls + item identical published vs sandbox) and 3 new ∃! sorry lemmas against the item's own clauses/normalizations; 11 direct importers compiled rc 0"
+ }
+}

@@ -1,0 +1,39 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-trace-formula/lem-trf-tate-fraction-weak-stability.json: split, statement unchanged.
+- lem-trf-char-zero-spectral-coordinate-topology: statement, unsplit, no Mathlib match.
+- lem-trf-fraction-root-module-weak-stability-criterion: statement, unsplit, no Mathlib match.
+- lem-trf-tate-root-finite-rank-bseparation: statement, unsplit, no Mathlib match.
+- citations.json: every step citation has a verbatim statement quote.
+
+Attachments: none. Project Lean searches for the item tag, weak stability, weak cartesianness, Tate fractions and restricted series found no exact declaration. The Tate-module fraction declarations concern rational Tate modules of groups, not Gauss fraction fields.
+
+WANTED: Bosch–Güntzer–Remmert, Non-Archimedean Analysis, local archival PDF, especially 3.5.1/4, 3.5.2/1, 3.5.3/2, 5.3.1/1–2. Read the primary scan at https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf by rendering scan pp.160–164 and 218–219. The node already requests this archive; no repository literature file was changed. The source-following assembly is marked agent-written because the archival document is missing locally.
+
+The imported item has no proof and no Lean attachment. Its statement matches BGR: weak stability requires coordinate topology, not an exact orthogonal basis. No statement dispute or change was needed. The chapter and unit were read, together with the current latest blueprint's lem-trf-local-term-locality and its proof. This item belongs to the historical analytic branch recorded on the node; it does not change the contracting-correspondence argument in the current blueprint.
+
+Nothing mathematical is left unfinished at this one-level split. The three new inputs intentionally carry no proofs and remain future stage-1 items. No Lean was written and no compiler, Lake or build was run.
+
+## Not duplicates
+
+The whole DAG was searched by weak stability, weakly cartesian, b-separable, spectral norm, root-module concepts and the exact BGR places 3.5.3/2 and 5.3.1/2. Text matches for b-separable inside ids such as sfb-separable were inspected as substring false positives. A scan of all node statements found no bounded-separation assertion. Blueprint searches using tools/blueprint_refs.py for weak stability, weakly cartesian, spectral norm, b-separable, pth root, bounded linear and characteristic zero found no exact imported node. The broad Tate search only gave other notions. The ancestor command confirms lem-trf-local-term-locality; the existing via chain was retained with this item prepended for each new node.
+
+lem-trf-char-zero-spectral-coordinate-topology vs lem-trf-tate-fraction-weak-stability: a general characteristic-zero valued field fact, with no restricted-series hypothesis, used for the characteristic-zero branch only; it is BGR 3.5.1/4, not a renamed full conclusion.
+lem-trf-fraction-root-module-weak-stability-criterion vs lem-trf-tate-fraction-weak-stability: a conditional result for arbitrary multiplicatively valued integral domains, requiring bounded separation of root modules; it establishes none of that analytic separation for a Tate algebra.
+lem-trf-tate-root-finite-rank-bseparation vs lem-trf-tate-fraction-weak-stability: a bounded-functional statement about modules in T^(1/p), with no quantification over finite spectral field extensions; it supplies the analytic hypothesis of the general criterion.
+All three vs lem-trf-tate-gauss-fraction-stability: that node assumes stability of k and concludes exact orthogonal bases; the new inputs concern weaker topology/separation without stable k.
+All three vs lem-trf-dense-weak-stability-transfer: the transfer node assumes weak stability and density of a stable subfield; none of the new nodes has that density hypothesis or proves the stable transfer conclusion.
+No new source has a Stacks tag; these analytic inputs are sourced by the precise BGR propositions rather than an unrelated Stacks citation.
+
+## Review by ND
+
+I read BGR Theorem 5.3.1/1 and the proof spanning printed pp.212–213, not only its headline. It first invokes 3.5.1/4 in characteristic zero, and in positive characteristic invokes the fraction-ring criterion 3.5.3/2 and then proves the finite-rank root-module separation of 5.3.1/2. I read printed pp.152–155 to check the first proposition, the definition of weak stability, and the full root-module criterion. The root ring is defined in an algebraic closure and uses the pth-root valuation, so no separability assumption is inserted. The three new statements expand exactly these results: the topology is written as two coordinate inequalities, and b-separability is written as separation of each nonzero point by a bounded module-linear functional.
+
+Step 1 uses the complete statement of the characteristic-zero node: it quantifies over every finite extension and basis without CompleteSpace K. The given embedding of constants establishes characteristic equality and nontriviality on F. Step 2 uses the complete bounded-functional conclusion of the Tate root-module node; finite generation implies finite rank because the same finite list spans after scalar extension. The completeness and nontriviality needed here are those of k, supplied by the item, not asserted for F. Step 3 uses the general criterion with exactly A=T, K=F and the root-ring norm from step 2. The cited criterion actually states the inequalities for all finite extensions, not only separable ones. Each quotation in citations.json was copied from that node's statement and checked as a substring.
+
+I tested the new statements at L=K (the spectral norm is the base absolute value, and a one-element basis only rescales constants), M=0 (separation is vacuous), and M cyclic (a coefficient functional is consistent with its induced root norm). Characteristic p includes imperfect k and infinite degree k^(1/p)/k; the finite-rank lemma explicitly permits this. No spherical completeness or stability is assumed. BGR's proof of its Tate lemma uses the complete subfield generated by the countably many coefficients of a maximal independent family, the norm-direct monomial decomposition after adjoining variable roots, and normality of the scalar-extended Tate ring to bring elements back inside it. Those are not claimed elementary here: they remain the proof content of the new unsplit module lemma, whose statement is strictly smaller than the item.
+
+I checked B–E of delivery-errors against the written JSON: new nodes are self-contained statement-only records; every special notion is defined inline or cites its definition; all three proof citations say precisely what is taken from them; proof_deps is their union. No new node restates the entire item, and the source's characteristic split is preserved. The entire assembly is below 3000 characters, every individual step below 2000. No inline comparison theorem or unproved analytic claim is hidden in a long step. No earlier return was supplied and no earlier sandbox proof existed.
+
+Mathlib searches were executed with msearch.py and preserved verbatim in searches.jsonl. Both semantic phrasings were read, plus Loogle and grep. spectralAlgNorm at Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean:663 supplies norm axioms only (already represented by lem-trf-incomplete-spectral-algebra-norm). spectralNorm.completeSpace at line 939 lies inside the CompleteSpace K section starting at line 821, so it cannot establish these incomplete-field coordinate bounds. Perfection, purely inseparable bases, finite module declarations and adic separatedness hits do not give bounded Gauss-module functionals. No new node can be a one-line specialization of those hits. A malformed exploratory Loogle pattern was not used as negative evidence; the corrected pattern spectralNorm, IsPurelyInseparable ran and gave no hits. The report and JSON retain only actually logged queries.

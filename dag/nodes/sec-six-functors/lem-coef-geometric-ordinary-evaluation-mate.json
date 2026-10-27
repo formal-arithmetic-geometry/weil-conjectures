@@ -1,0 +1,114 @@
+{
+ "id": "lem-coef-geometric-ordinary-evaluation-mate",
+ "kind": "statement",
+ "title": "The ordinary singleton mate is invertible from normalized push evaluation",
+ "statement": "For every index n and any two ordinary left adjoints to source and target evaluation, the inverse mate of the fixed inverse-image/evaluation square is invertible. This is an assertion entirely in ordinary module categories; it has no resolutions or derived categories in its conclusion.\n\nThe sites, coefficient tower and fixed ordinary realization are as in lem-coef-semilinear-geometric-derived-evaluation. The precise Lean statement, with the ambient parameter context, is:\n\nuniverse c v r\nopen CategoryTheory CategoryTheory.Limits Opposite\nnamespace WeilConjectures.SemilinearSections\nvariable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\ntheorem geometricOrdinaryEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ)\n    (L : Mod.{c, v, max c v r} J (B n) ⥤ Systems.{c, v, max c v r} J B τ)\n    (L' : Mod.{c, v, max c v r} J' (O.coefficients n) ⥤\n      Systems.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n    (adj : L ⊣ evaluation.{c, v, max c v r} J B τ n)\n    (adj' : L' ⊣ evaluation.{c, v, max c v r}\n      J' O.coefficients O.coefficientTransition n) :\n    IsIso ((mateEquiv adj adj').symm\n      (TwoSquare.mk _ _ _ _ (O.ordinaryPullEvaluation n).inv)).natTrans",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23."
+ },
+ "proof": [
+  {
+   "text": "Transpose the given ordinary push-evaluation isomorphism under the geometric adjunctions. Cancel the level pushforward of pull evaluation in ordinary_unit_evaluation. The resulting unit identity identifies its inverse mate with ordinaryPullEvaluation.inv.",
+   "uses": [
+    "lem-coef-semilinear-ordinary-geometric-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply iterated_mateEquiv_conjugateEquiv to the singleton and geometric adjunctions. The conjugate of the singleton mate is the just-identified ordinary push-evaluation isomorphism. Apply conjugateEquiv_of_iso to reflect its invertibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23. The unit and iterated-mates shortcut specializes Mathlib.CategoryTheory.Adjunction.Mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image functor on systems of modules commutes with evaluation after right derivation of its right adjoint",
+   "results": "8 hits, including SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.evaluationIsRightAdjoint and CategoryTheory.Functor.rightDerivedToHomotopyCategory. No normalized varying-coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary adjunction infrastructure only; use existing normalized singleton extension declarations for the unbounded derived step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iterated_mateEquiv_conjugateEquiv\"",
+   "results": "4 hits: CategoryTheory.iterated_mateEquiv_conjugateEquiv and its symm version, plus the two bicategorical versions, in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-26",
+   "verdict": "This is the shorter categorical argument actually used: the ordinary push-evaluation normalization gives singleton invertibility by reflection under conjugation."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*[Ii]so|conjugateEquiv_of_iso",
+   "results": "8 hits, including CategoryTheory.conjugateEquiv_of_iso (Mates.lean:408), and ordinary monoidal-closed mate constructions.",
+   "date": "2026-10-26",
+   "verdict": "Use Mathlib conjugation and iterated mates. There is no complete specialized theorem about the GeometryOrdinary normalization and its unbounded derived evaluation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricDerivedEvaluation",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Derived evaluation and scalar comparisons for fixed ordinary geometric operations.",
+   "via": [
+    "lem-coef-semilinear-geometric-derived-evaluation",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricOrdinaryEvaluationMate",
+  "file": "lean/Sheaf/Paper/GeometricOrdinaryEvaluationMate.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricOrdinaryEvaluationMate_isIso",
+  "statement": "theorem geometricOrdinaryEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ)\n    (L : Mod.{c, v, max c v r} J (B n) ⥤ Systems.{c, v, max c v r} J B τ)\n    (L' : Mod.{c, v, max c v r} J' (O.coefficients n) ⥤\n      Systems.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n    (adj : L ⊣ evaluation.{c, v, max c v r} J B τ n)\n    (adj' : L' ⊣ evaluation.{c, v, max c v r}\n      J' O.coefficients O.coefficientTransition n) :\n    IsIso ((mateEquiv adj adj').symm\n      (TwoSquare.mk _ _ _ _ (O.ordinaryPullEvaluation n).inv)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

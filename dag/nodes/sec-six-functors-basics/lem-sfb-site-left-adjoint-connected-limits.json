@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-site-left-adjoint-connected-limits",
+ "kind": "statement",
+ "title": "Connected-limit preservation by the sheafified site left adjoint",
+ "statement": "Work in the small-site convention of [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be sites [def-weil-pbc-sites-and-cohomology] and let $i:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor]. Assume that fibre products and equalizers exist in $\\mathcal C$ and that $i$ preserves them, meaning that their image cones have the corresponding universal properties in $\\mathcal D$. Write $R:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ for precomposition, $RG(U)=G(iU)$, on sheaves of sets. Let $L:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ be the sheafified presheaf left adjoint $LF=(i_pF)^\\#$ of [def-weil-pbc-sites-and-cohomology], where $\\#$ is sheafification [def-weil-pbc-sheafification]. Then $L\\dashv R$, and $L$ preserves fibre products and equalizers of sheaves of sets. No terminal object in either underlying site, and no preservation of the terminal sheaf by $L$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00XR (lemma-when-shriek), assertions (1),(2), and 00XS (lemma-preserve-equalizers), hypotheses (a)--(c) and conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Continuity gives that $RG=G\\circ i$ is a sheaf, by [lem-weil-pbc-site-continuous-pushforward-sheaf]. Apply [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] with values in sets: $L\\dashv R$, and $(i_pF)(V)=\\operatorname{colim}_{J_V}F(U)$, where $J_V=I_V^{op}$ and $I_V$ has objects $(U,\\phi:V\\to iU)$ and arrows $a:(U,\\phi)\\to(U\\prime,\\phi\\prime)$ with $i(a)\\phi=\\phi\\prime$. These categories are small, since the objects and arrows of both sites form sets in the chosen universe.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XR (lemma-when-shriek), 00WW (lemma-pushforward-sheaf), 00WX (lemma-adjoint-sheaves)."
+   }
+  },
+  {
+   "text": "Check the common-source span condition for $J_V$. A span with common source in $J_V$ is a cospan $(U\\prime,\\phi\\prime)\\xrightarrow{a}(U,\\phi)\\xleftarrow{b}(U\\prime\\prime,\\phi\\prime\\prime)$ in $I_V$. Take $P=U\\prime\\times_U U\\prime\\prime$. The image pullback gives a unique $\\psi:V\\to iP$ with projections $\\phi\\prime,\\phi\\prime\\prime$. Its projection arrows in $I_V$ commute because $a p_1=b p_2$. Reversing arrows gives the required cocone in $J_V$. This uses only the assumed universal property of the image pullback.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X4 (lemma-almost-directed), first verification, used by 00XS."
+   }
+  },
+  {
+   "text": "For condition (b), parallel arrows in $J_V$ reverse to $a,b:(U,\\phi)\\rightrightarrows(U\\prime,\\phi\\prime)$ in $I_V$. Let $e:E\\to U$ equalize $a,b$. Since $i(a)\\phi=i(b)\\phi=\\phi\\prime$ and $i(e)$ is an equalizer, there is a unique $\\psi:V\\to iE$ with $i(e)\\psi=\\phi$. Thus $e:(E,\\psi)\\to(U,\\phi)$ is an arrow of $I_V$ equalizing $a,b$. Its opposite coequalizes the given pair in $J_V$. Neither check required $I_V$ to have any objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X4 (lemma-almost-directed), second verification, used by 00XS."
+   }
+  },
+  {
+   "text": "For any presheaf diagram $F_1\\to F_0\\leftarrow F_2$, its fibre product has sections $F_1(U)\\times_{F_0(U)}F_2(U)$; an equalizer has sections $\\operatorname{Eq}(f_U,g_U)$, by [lem-weil-pbc-presheaf-finite-limits-objectwise]. For each $V$, steps 2 and 3 verify precisely the hypotheses of [lem-sfb-almost-filtered-set-colimits]. Apply its two canonical bijections to the functors $(U,\\phi)\\mapsto F_j(U)$ on $J_V$. By the comma-colimit formula in step 1 these are the comparisons for $i_p$ at $V$. They commute with restriction in $V$: precomposing $\\phi$ and then applying a diagram projection gives the same colimit representative as applying the projection first. Consequently $i_p$ preserves fibre products and equalizers as presheaves.",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-sfb-almost-filtered-set-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XS (lemma-preserve-equalizers), comma-colimit reduction; Categories Tag 002Y (lemma-almost-directed-commutes-equalizers)."
+   }
+  },
+  {
+   "text": "Now start with a fibre-product or equalizer diagram of sheaves on $\\mathcal C$. Its limit as a presheaf is the sheaf limit by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Step 4 identifies its image under $i_p$ with the corresponding presheaf limit on $\\mathcal D$. Sheafification preserves this finite limit by [lem-weil-pbc-sheafification-sets-exact], so sheafifying the comparison proves that $L=(i_p-)^\\#$ preserves the given sheaf limit. Together with step 1 this proves every assertion. The empty comma category causes no exception: both comparisons in the categorical lemma are between empty sets.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XS (lemma-preserve-equalizers), reduction by Tags 00W2 (lemma-limit-sheaf) and 00WJ (lemma-sheafification-exact)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "lem-sfb-almost-filtered-set-colimits",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00XR and 00XS, expanding the two universal-property checks of 00X4 and citing the set-colimit input 002Y."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteConnectedLimits|preserves.*[Ee]qualizer|preserves.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-23T22:02:37Z\", \"tool\": \"grep\", \"query\": \"PreservesFiniteConnectedLimits|preserves.*[Ee]qualizer|preserves.*[Pp]ullback\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\"], \"digest\": \"d90dd6eda600f12e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteConnectedLimits|preservesFiniteConnectedLimits",
+   "results": "{\"t\": \"2026-10-23T22:02:37Z\", \"tool\": \"grep\", \"query\": \"PreservesFiniteConnectedLimits|preservesFiniteConnectedLimits\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafified left Kan extension along a functor of sites preserving pullbacks and equalizers preserves finite connected limits",
+   "results": "{\"t\": \"2026-10-23T22:02:38Z\", \"tool\": \"leansearch\", \"query\": \"Sheafified left Kan extension along a functor of sites preserving pullbacks and equalizers preserves finite connected limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"CategoryTheory.preservesLimitsOfShape_presheafToSheaf\", \"CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf\", \"CategoryTheory.HasSheafify.isLeftExact\"], \"digest\": \"0a9e9dc27c8afb78\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesLimitsOfShape\"",
+   "results": "{\"t\": \"2026-10-23T22:02:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPullback\\\", \\\"PreservesLimitsOfShape\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesFiniteConnectedLimits\"",
+   "results": "{\"t\": \"2026-10-23T22:02:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPullback\\\", \\\"PreservesFiniteConnectedLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous and cocontinuous functor of sites preserving fibre products and equalizers the sheafified left Kan extension preserves fibre products and equalizers even without terminal objects",
+   "results": "{\"t\": \"2026-10-23T22:02:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous and cocontinuous functor of sites preserving fibre products and equalizers the sheafified left Kan extension preserves fibre products and equalizers even without terminal objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafification\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafification_1\", \"CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor\"], \"digest\": \"b15d6391ae1c5623\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous cocontinuous site functor has a left adjoint to restriction which preserves pullbacks and equalizers when the site functor does",
+   "results": "{\"t\": \"2026-10-23T22:02:41Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous cocontinuous site functor has a left adjoint to restriction which preserves pullbacks and equalizers when the site functor does\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\"], \"digest\": \"f734e70fe02bdd72\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Pullback.lean:87-99,120-121. The finite-limit instances assume RepresentablyFlat and finite-limit preservation of the presheaf Kan extension; neither follows by one-line specialization from the present non-terminal-site hypotheses. Sheafification left exactness and the continuous/cocontinuous adjunction hits supply only portions of the statement. The connected-limit site theorem was not found."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteConnectedLimits|preserves.*[Ee]qualizer|preserves.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"grep\", \"query\": \"PreservesFiniteConnectedLimits|preserves.*[Ee]qualizer|preserves.*[Pp]ullback\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\"], \"digest\": \"479fd81c993af928\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: Sites/Pullback.lean:87-99 and :120 assume RepresentablyFlat and finite-limit preservation of the presheaf left Kan extension; these are stronger than preservation of pullbacks and equalizers without a terminal-object hypothesis. Adjunction and sheafification hits cover only parts, already cited through existing DAG leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"PreservesLimitsOfShape\"",
+   "results": "{\"t\": \"2026-10-23T22:35:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafPullback\\\", \\\"PreservesLimitsOfShape\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: Sites/Pullback.lean:87-99 and :120 assume RepresentablyFlat and finite-limit preservation of the presheaf left Kan extension; these are stronger than preservation of pullbacks and equalizers without a terminal-object hypothesis. Adjunction and sheafification hits cover only parts, already cited through existing DAG leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous cocontinuous site functor preserving pullbacks and equalizers its sheafified left Kan extension preserves pullbacks and equalizers without terminal objects",
+   "results": "{\"t\": \"2026-10-23T22:35:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous cocontinuous site functor preserving pullbacks and equalizers its sheafified left Kan extension preserves pullbacks and equalizers without terminal objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafification\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\"], \"digest\": \"ea1a7d843cb7c7af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: Sites/Pullback.lean:87-99 and :120 assume RepresentablyFlat and finite-limit preservation of the presheaf left Kan extension; these are stronger than preservation of pullbacks and equalizers without a terminal-object hypothesis. Adjunction and sheafification hits cover only parts, already cited through existing DAG leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint to restriction on sheaves along a continuous cocontinuous functor preserving pullbacks and equalizers preserves those limits without preserving a terminal object",
+   "results": "{\"t\": \"2026-10-23T22:38:10Z\", \"tool\": \"leansearch\", \"query\": \"The left adjoint to restriction on sheaves along a continuous cocontinuous functor preserving pullbacks and equalizers preserves those limits without preserving a terminal object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.constantSheafAdj\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Adjunction.lim_preservesLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\"], \"digest\": \"0d7878360cef6731\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: Sites/Pullback.lean:87-99 and :120 assume RepresentablyFlat and finite-limit preservation of the presheaf left Kan extension; these are stronger than preservation of pullbacks and equalizers without a terminal-object hypothesis. Adjunction and sheafification hits cover only parts, already cited through existing DAG leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-big-small-ringed-comparison",
+  "date": "2026-10-24",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Ordinary big-small etale ringed comparison for algebraic spaces. Site-theoretic input to Tag 073M: the left adjoint preserves fibre products and equalizers before preservation of the terminal sheaf is checked using an atlas.",
+   "via": [
+    "lem-sfb-space-big-small-ringed-comparison",
+    "lem-sfb-stack-representable-derived-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-site-left-adjoint-connected-limits",
+  "worker": "stage1",
+  "summary": "Checked Stacks 00XR/00XS without a terminal-object hypothesis; reused the existing continuous sheaf adjunction and left exact sheafification leaves, verified both almost-directed comma-index conditions by the given universal properties, and isolated only the general set-colimit criterion 002Y. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Ordinary big-small etale ringed comparison for algebraic spaces. Site-theoretic input to Tag 073M: the left adjoint preserves fibre products and equalizers before preservation of the terminal sheaf is checked using an atlas.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic continuity criterion ensuring that precomposition preserves sheaves; the current unit has no replacement for this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-5c17a52ce",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-5c17a52ce (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with every cited statement. Sources checked: Stacks sites.tex 00X4 (l.417), 00XR (l.4578), 00XS (l.4627), and categories.tex 002X (l.2452), 002Y (l.2478) with its proof. The item statement is unchanged from Q116's creation and matches 00XS (a)-(c) plus 00XR(2); it is still unsplit in clones/live and clones/side-live, so it is not superseded. Step 1: pushforward-sheaf (00WW) supplies exactly the hypothesis of the adjunction leaf (00WX), which gives L ⊣ R and the colimit over I_V^op. Steps 2-3: the two omitted verifications of 00X4, checked with the opposites (e^op∘a^op = e^op∘b^op); correctly elementary. Step 4: objectwise presheaf limits plus the new node give invertibility of the i_p comparison maps. Step 5: sheaf limits are presheaf limits, and set sheafification is left exact. New node lem-sfb-almost-filtered-set-colimits: it is 002Y with the 002X hypotheses written verbatim, empty or disconnected index allowed, and true via componentwise filtered colimits plus coproducts commuting with fibre products and equalizers in Set. I tested it on the empty, discrete two-object and trivial cases; a C2 group or (ℕ,+) fails (b), and the orbit counterexample confirms (b) is needed. It is statement-only, self-contained and searched. Mathlib's filtered_colim_preservesFiniteLimits_of_types needs IsFiltered, and IsFilteredOrEmpty is stronger than span condition (a), so there is no match. rg -L over dag/nodes (002X, 002Y, 00X4, 00XS, almost-directed, connected limits) finds no duplicate; it is not a clause of the item. The off-unit tool use lem-weil-pbc-site-continuous-pushforward-sheaf (00WW, generic, Lean-recorded) is accepted; the other off-unit citations are Mathlib leaves. No SGA. Minor: the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteLeftAdjointConnectedLimits",
+  "declaration": "CategoryTheory.Functor.sheafPullback_preserves_pullbacks_and_equalizers",
+  "file": "lean/Sheaf/CategoryTheory/SiteLeftAdjointConnectedLimits.lean",
+  "statement": "theorem sheafPullback_preserves_pullbacks_and_equalizers {C : Type u} [SmallCategory C] {D : Type u} [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (i : C ⥤ D) [i.IsCocontinuous J.toGrothendieck K.toGrothendieck] (hcover : ∀ (X : C) (R : Presieve X), R ∈ J X → R.map i ∈ K (i.obj X)) [HasPullbacks C] [HasEqualizers C] [PreservesLimitsOfShape WalkingCospan i] [PreservesLimitsOfShape WalkingParallelPair i] : ∃ hcontinuous : i.IsContinuous J.toGrothendieck K.toGrothendieck, Nonempty (sheafPullbackConstruction.sheafPullback i (Type u) J.toGrothendieck K.toGrothendieck ⊣ @sheafPushforwardContinuous C _ D _ i (Type u) _ J.toGrothendieck K.toGrothendieck hcontinuous) ∧ PreservesLimitsOfShape WalkingCospan (sheafPullbackConstruction.sheafPullback i (Type u) J.toGrothendieck K.toGrothendieck) ∧ PreservesLimitsOfShape WalkingParallelPair (sheafPullbackConstruction.sheafPullback i (Type u) J.toGrothendieck K.toGrothendieck)",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b75b1558b",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Read item node, 4 stmt_deps (size convention, sites IsSiteForCoverings, special-cocontinuous record, presheafToSheaf), Stacks 00XR/00XS/00WV, module and report. Lean matches clause by clause: cocontinuity = conjunct 1 of the recorded IsSpecialCocontinuousForCoverings; hcover = its conjunct 2 verbatim; 00WV(b) is covered by the assumed global pullback preservation; HasPullbacks/HasEqualizers C; PreservesLimitsOfShape WalkingCospan/WalkingParallelPair i. L = Mathlib sheafPullbackConstruction.sheafPullback (lan then sheafify, canonical); R = sheafPushforwardContinuous under an existential IsContinuous witness (true by 00WW, which the recorded siteContinuous_pushforward_isSheaf derives from the same hypotheses); Nonempty adjunction plus preservation of both shapes. No terminal hypothesis. Single universe u per the small-site convention. Empty and disconnected comma-category cases fine. Node diff vs side-live = lean record only; statement verbatim in file; docstrings carry source place, blueprint tag and all 5 proof steps; sorry only; no definitions. No Mathlib or project match (Pullback.lean:87-99 needs RepresentablyFlat). Advisory: public import of SpecialCocontinuousCoverings not strictly needed. Stage-3 note: the pushforward-sheaf lemma uses Precoverage instance classes rather than IsSiteForCoverings. No recompile (no file changed; worker compile and dry run reported clean)."
+ }
+}

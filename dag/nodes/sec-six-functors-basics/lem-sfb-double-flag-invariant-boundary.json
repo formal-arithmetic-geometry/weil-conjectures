@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-double-flag-invariant-boundary",
+ "kind": "statement",
+ "title": "Invariant rho section cuts out the opposite double-flag orbit",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme], with these adjectives and the split maximal torus $T$, Borel subgroup $B$, character $\\rho$ and extension $\\widetilde\\rho$ as in [lem-sfb-rho-section-modules]. Let $Q=S/B$ and $\\pi:S\\to Q$ be the right $B$-torsor of [lem-sfb-reductive-borel-pair-structure]. Use the homogeneous invertible sheaf $L=\\mathcal L_{-\\widetilde\\rho}$ of [lem-sfb-homogeneous-line-bundle-sections], where $(-\\widetilde\\rho)(b)=\\widetilde\\rho(b)^{-1}$. On the product scheme $X=Q\\times_F Q$ [def-pc-scheme], put $D=\\operatorname{pr}_1^*L\\otimes_{\\mathcal O_X}\\operatorname{pr}_2^*L$, with its diagonal $S$-action. Invertible sheaves and their tensor powers have the meaning of [def-sc-invertible-module]. The scheme $X$ is integral (nonempty, irreducible and reduced), quasi-compact and separated over $F$; quasi-compact, separated, flat and surjective are as in [def-pc-morphism-conventions], and faithfully flat means flat and surjective. There are an element $n_0\\in N_S(T)(F)$, for which $B\\cap n_0Bn_0^{-1}=T$ as subgroup schemes, and an invariant global section $0\\ne d\\in\\Gamma(X,D)$ such that the open subscheme $U=X_d$ where $d$ generates the rank-one stalk is the image of\n$$q:S\\longrightarrow X,\\qquad g\\longmapsto(gB,gn_0B).$$\nThis image is dense, $q:S\\to U$ is a faithfully flat right $T$-torsor, and pullback is an equivariant $F$-algebra isomorphism\n$$q^*:\\Gamma(U,\\mathcal O_U)\\xrightarrow{\\sim}F[S]^{T,\\mathrm{right}},$$\nwhere the right-hand side consists of $f$ with $f(gt)=f(g)$ after every commutative $F$-algebra extension. Equivariance uses left translation $(s f)(g)=f(s^{-1}g)$ and the induced action on functions on $U$. Invariance of $d$ is an identity of rational $S$-coactions, and the linearization on $D$ is the one induced from its two homogeneous factors. The assertions include the trivial group, when $Q=X=U=\\operatorname{Spec}F$ and $d$ is a nonzero constant.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.80, Example 21.83 and Theorem 21.84 (pp.450--451), Theorem 22.48 and Remark 22.49 (pp.479--480). Agent-formulated double-flag boundary consequence of the Bruhat and divisor descriptions; not quoted as a verbatim theorem of Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-bruhat-longest-cell-charts] to $S$: it is reductive by [lem-sfb-reductive-borel-pair-structure]. Fix the representative $n_0$ of $w_0$, so $B\\cap n_0Bn_0^{-1}=T$. Write $V=R_u(B)$, $C=Vn_0B/B$, and $C_w=V^w n_wB$. The chart lemma makes $S,Q$ geometrically integral and gives a finite cover of $Q$ by affine-space charts with sections of $\\pi$. Apply [lem-sc-geometrically-irreducible-product] to the two copies of $Q$; hence $X$ is irreducible and nonempty. Products of the finitely many affine-space charts cover $X$ and are affine spaces over $F$, whose polynomial coordinate rings are reduced. Thus $X$ is reduced and quasi-compact. Finally $Q$ is proper by [lem-sfb-reductive-borel-pair-structure]. The projection $X\\to Q$ is its base change, hence proper by [lem-weil-pbc-proper-base-change]; composing with $Q\\to\\operatorname{Spec}F$ is proper by [lem-weil-pbc-proper-composition]. Thus $X$ is separated. This proves the geometric assertions about $X$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sc-geometrically-irreducible-product",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.70--21.84, flag charts; elementary chart and diagonal consequences"
+   }
+  },
+  {
+   "text": "The rational-weight assertion [lem-sfb-rho-regular-weyl-orbit] gives $w_0\\rho=-\\rho$. By [lem-sfb-rho-section-modules], $W_1=E_B(-\\widetilde\\rho)$ is nonzero. Apply [lem-sfb-induced-module-primitive-line] with $\\lambda=-\\widetilde\\rho$ and choose $0\\ne f\\in W_1^V$. The left-translation weight is $w_0(-\\rho)=\\rho$. Consequently, for every commutative $F$-algebra, $$f(bx)=\\widetilde\\rho(b)^{-1}f(x),\\qquad f(xb)=\\widetilde\\rho(b)f(x).$$ Indeed the first identity follows from $(b^{-1}f)(x)=f(bx)$ and the decomposition $B=T\\ltimes V$; the second is the defining identity of $W_1$. These are coaction identities, so include nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-induced-module-primitive-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.21--22.22, primitive functions and their torus weights"
+   }
+  },
+  {
+   "text": "For a representative $n_w$ and $t\\in T$, calculate $f(tn_w)$ in two ways: $$\\rho(t)^{-1}f(n_w)=f(tn_w)=(w\\rho)(t)f(n_w).$$ Thus $f(n_w)\\ne0$ implies $w\\rho=-\\rho$, hence $w=w_0$ by [lem-sfb-rho-regular-weyl-orbit]. Equality here is equality of characters, not of their differentials. On each Bruhat stratum the preceding semi-invariance gives $f(u n_w b)=\\widetilde\\rho(b)f(n_w)$. Moreover $f(n_0)\\ne0$: otherwise $f$ vanishes on the dense longest cell and hence is zero on the integral scheme $S$. After rescaling, take $f(n_0)=1$. The same identities hold after every algebraically closed extension, so the nonvanishing open of $f$ in $S$ is exactly $C_{w_0}=Vn_0B$ as an open subscheme.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.80 and the weight calculation of 22.22"
+   }
+  },
+  {
+   "text": "Define the regular function $\\delta(g,h)=f(g^{-1}h)$ on $S\\times_F S$. For $b_1,b_2\\in B$, the identities in step 2 give $$\\delta(gb_1,hb_2)=\\widetilde\\rho(b_1)\\widetilde\\rho(b_2)\\delta(g,h).$$ Trivialize the two homogeneous line bundles over the flag charts of [lem-sfb-bruhat-longest-cell-charts]. By [lem-sfb-homogeneous-line-bundle-sections], their pullback coefficients have exactly this right semi-invariance for $\\chi=-\\widetilde\\rho$. Hence the restrictions of $\\delta$ glue to a section $d$ of $D$: the displayed formula is precisely the transition rule on overlaps in both factors. The identity $\\delta(sg,sh)=\\delta(g,h)$ proves invariance for the prescribed diagonal linearization after all scalar extensions. Also $\\delta(1,n_0)=1$, so $d\\ne0$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-homogeneous-line-bundle-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18c and 22.48, homogeneous-line-bundle transition rule"
+   }
+  },
+  {
+   "text": "Over a flag chart $A\\subseteq Q$ choose its section $a:A\\to S$ of $\\pi$. The map $(x,y)\\mapsto(x,a(x)^{-1}y)$ is an isomorphism $A\\times Q\\simeq A\\times Q$. By step 3, in these coordinates $X_d$ is exactly $A\\times C$. Every $z\\in C$ is uniquely $u n_0B$ with $u\\in V$, scheme-theoretically by [lem-sfb-bruhat-longest-cell-charts]. The map $\\sigma(x,z)=a(x)u$ is therefore a morphism $A\\times C\\to S$ with $q\\sigma(x,z)=(x,a(x)z)$. These local sections show that every point of $U=X_d$ is in the image of $q$, while $q(g)$ is in $U$ since $f(n_0)=1$. Thus $q(S)=U$. The open $U$ is nonempty, and is dense because $X$ is irreducible.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.80--21.84 and Example 21.83; explicit local lifts of pairs"
+   }
+  },
+  {
+   "text": "For every test scheme, $q(g)=q(h)$ means $t=g^{-1}h\\in B$ and $n_0^{-1}tn_0\\in B$. The subgroup-scheme intersection from [lem-sfb-bruhat-longest-cell-charts] says exactly $t\\in T$. Thus $(g,t)\\mapsto(g,gt)$ identifies $S\\times_FT$ with $S\\times_US$, with inverse $(g,h)\\mapsto(g,g^{-1}h)$. On each open of step 5, $g\\mapsto(q(g),\\sigma(q(g))^{-1}g)$ and $(x,t)\\mapsto\\sigma(x)t$ identify $q$ with projection onto the first factor from a product with $T$. This is a right $T$-torsor. Since $T\\simeq\\mathbf G_m^r$, its local coordinate map is $R\\to R[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$, a free faithful $R$-module extension (the Laurent monomials are a basis). Thus $q$ is flat and surjective, hence faithfully flat.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.84, opposite Borel intersection; explicit torsor coordinates"
+   }
+  },
+  {
+   "text": "Pullback along $q$ gives right-$T$-invariant functions. Conversely let $r\\in F[S]$ satisfy $r(gt)=r(g)$ after every scalar extension. On an open $O$ of step 5 set $r_O=r\\circ\\sigma_O$. On an overlap, $\\sigma_{O'}=\\sigma_O t$ for the regular map $t=\\sigma_O^{-1}\\sigma_{O'}:O\\cap O'\\to T$ of step 6, so invariance gives $r_{O'}=r_O$. These functions glue to $\\bar r\\in\\Gamma(U,\\mathcal O_U)$, and the torsor coordinates give $q^*\\bar r=r$. If $q^*a=0$, pullback by each $\\sigma_O$ gives $a|_O=0$, so $a=0$. This constructs the inverse algebra map. Finally $q(sg)=s q(g)$ yields $q^*(s a)(g)=a(s^{-1}q(g))=(s q^*a)(g)$; hence the algebra isomorphism is equivariant for left translation. This proof uses ordinary sheaf gluing and explicit local sections, rather than an uncited descent theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 21.83; agent-written gluing calculation"
+   }
+  },
+  {
+   "text": "For the trivial group, $B=T=S=\\operatorname{Spec}F$, $w_0=1$ and $\\rho=0$. The construction takes $f=1$, $d=1$, $Q=X=U=\\operatorname{Spec}F$, and $q$ and the algebra map are identities. Thus none of the arguments exclude rank zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Empty-root-system specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-induced-module-primitive-line",
+  "lem-sfb-homogeneous-line-bundle-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-written construction from 21.80--21.84 and 22.21--22.22; no divisor formula needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a semisimple simply connected algebraic group the opposite flag orbit G mod T is the nonvanishing locus of an invariant section of the rho line bundle external square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.span_orbit_eq_top\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [NeZero 2]\\n  [P.IsIrreducible] (i : ι), Submodule.span R (MulAction.orbit (↥P.weylGroup) (P.ro\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any index $ i $, the span of the orbit of the root $ P.\\\\text{root}(i) $ under the Weyl group of $ P $ is equal to the entire module $ \"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For any vector $x$, $x$ belongs to the $\\\\omega$-conjugated Lie submodule $N$ if and only if the matrix $\\\\omega$ (from the Geck construction) multiplied by $x$ lies in $N$.\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"RootPairing.exist_set_root_not_disjoint_and_le_ker_coroot'_of_invtSubmodule\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [NeZero 2]\\n  [IsDomain R] [Module.IsTorsionFree R M] (q : Submodule R M),\\n  (∀ (i : ι), q ∈ Mo\", \"doc\": \"Let $R$ be an integral domain in which $2 \\\\neq 0$, and let $M$ be a torsion-free $R$-module. Let $P$ be a root pairing with index set $\\\\iota$, roots $\\\\alpha_i \\\\in M$ for $i \\\\in \\\\iota$, and correspondi\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n  {\"name\": \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_top_iff\", \"module\": \"Mathlib/Algebra/Lie/Weights/IsSimple\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_5 : H.IsCartanSubalgebra]\\n  [inst_6 : LieAlgebra.IsKilling K L] [inst_7 : LieModule.IsTriangularizable K (↥H) L]\\n  (q\", \"doc\": \"Given a submodule $ q $ of the dual space $ H^* $ over a field $ K $, invariant under reflections of the root system of $ H $, the Lie ideal constructed from $ q $ equals the entire Lie algebra $ L $ \"}\n  {\"name\": \"MeasureTheory.mem_fundamentalInterior\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalInterior G s ↔ x ∈ s ∧ ∀ (g : G), g ≠ 1 → x ∉ g • s\", \"doc\": \"An element $x$ belongs to the fundamental interior of a set $s$ under a group action if and only if $x \\\\in s$ and for every non-identity element $g \\\\in G$, $x$ is not contained in the image of $s$ und\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state this algebraic-group flag-variety assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product of flag varieties has boundary divisor of nonopposite flags and invariant canonical section of bidegree rho rho",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModelWithCorners.boundary_prod\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {E' : Type u_5} [inst_6\", \"doc\": \"The boundary of the product model $I \\\\times J$ on $M \\\\times N$ is the union of $M \\\\times \\\\partial N$ and $\\\\partial M \\\\times N$, where $\\\\partial M$ and $\\\\partial N$ denote the boundaries of $M$ and $N$\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.fst\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} {ac : e₁.AreComplementary e₂} {i₁ : ι₁} {i₂ : ι₂},\\n  ac.Boundary i₁ i₂ → e₁.BoundaryLE i₁\", \"doc\": \"For complementary embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$ of complex shapes, the embedding $e_1$ satisfies the BoundaryLE condition at index $i_1 \\\\in \\\\iota_1$, meaning: (1) $e_1(i_1)$ is rela\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.snd\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} {ac : e₁.AreComplementary e₂} {i₁ : ι₁} {i₂ : ι₂},\\n  ac.Boundary i₁ i₂ → e₂.BoundaryGE i₂\", \"doc\": \"For complementary embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$ of complex shapes, the index $i_2 \\\\in \\\\iota_2$ satisfies the boundary condition relative to $e_2$, meaning: (1) there exists a predec\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.exists₁\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₁ : ι₁},\\n  e₁.BoundaryLE i₁ → ∃ i₂, ac.Boundary i₁ i₂\", \"doc\": \"For any index $i_1$ in $\\\\iota_1$ satisfying the boundary condition for the embedding $e_1$, there exists an index $i_2$ in $\\\\iota_2$ such that $i_1$ and $i_2$ are related by the boundary relation of t\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.exists₂\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₂ : ι₂},\\n  e₂.BoundaryGE i₂ → ∃ i₁, ac.Boundary i₁ i₂\", \"doc\": \"For complementary embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$ of complex shapes, if an index $i_2 \\\\in \\\\iota_2$ satisfies the boundary condition $\\\\text{BoundaryGE}(i_2)$ for $e_2$, then there exis\"}\n  {\"name\": \"groupHomology.single_inv_ρ_self_add_single_mem_boundaries₁\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (g : G) (a : ↑A.V),\\n  Finsupp.single g⁻¹ ((A.ρ g⁻¹) a) + Finsupp.single g a ∈ groupHomology.boundaries₁ A\", \"doc\": \"For any group element $ g $ and module element $ a $, the sum of the finite support function $ \\text{single}_{g^{-1}}(\\rho(g^{-1})a) $ and $ \\text{single}_g(a) $ lies in the first homology boundaries sub\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₂ : ι₂} (h : e₂.BoundaryGE i₂),\\n  ac.Boundary (ComplexShape.Embedding.AreComplementary.Boundary.indexOfBou\", \"doc\": \"Given complementary embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$ of complex shapes, and an index $i_2 \\\\in \\\\iota_2$ satisfying the boundary condition $\\\\text{BoundaryGE}(i_2)$ for $e_2$, there exist\"}\n  {\"name\": \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryLE\", \"module\": \"Mathlib/Algebra/Homology/Embedding/AreComplementary\", \"type\": \"∀ {ι : Type u_1} {ι₁ : Type u_2} {ι₂ : Type u_3} {c : ComplexShape ι} {c₁ : ComplexShape ι₁} {c₂ : ComplexShape ι₂}\\n  {e₁ : c₁.Embedding c} {e₂ : c₂.Embedding c} (ac : e₁.AreComplementary e₂) {i₁ : ι₁} (h : e₁.BoundaryLE i₁),\\n  ac.Boundary i₁ (ComplexShape.Embedding.AreComplementary.Boundary.indexOf\", \"doc\": \"Given complementary complex shape embeddings $e_1: c_1 \\\\to c$ and $e_2: c_2 \\\\to c$, if the embedding $e_1$ satisfies the BoundaryLE condition at index $i_1 \\\\in \\\\iota_1$, then there exists an index in \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state this algebraic-group flag-variety assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flag\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state this algebraic-group flag-variety assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "opposite.*flag|Bruhat|big.cell|homogeneous.*line.bundle",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state this algebraic-group flag-variety assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open orbit in double flag variety G B times G B is G T and complement is zero locus of invariant rho section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : X.zeroLocus s = ⋂ f ∈ s, (X.basicOpen f).carrierᶜ\", \"doc\": \"For a scheme $X$, an open subset $U$ of $X$, and a set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ is defined as the intersection of the complements of the basic open sets a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (f : Γ(X, U)) : X.zeroLocus { f } = (↑(X.basicOpen f))ᶜ\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any section $ f $ of the structure sheaf over $ U $, the zero locus of the singleton set $ \\\\{f\\\\} $ is equal to the complement of the basic open set defi\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus_singleton\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (f : X.presheaf.obj (op U)) : X.zeroLocus { f } = (X.basicOpen f).carrierᶜ\", \"doc\": \"For any open subset $ U $ of a ringed space $ X $ and any section $ f $ of the structure sheaf over $ U $, the zero locus of the singleton set $\\\\{f\\\\}$ coincides with the complement of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} : X.zeroLocus (U := U) Set.univ = (↑U)ᶜ\", \"doc\": \"For any open subset $U$ of a scheme $X$, the zero locus of the universal set of sections over $U$ is equal to the complement of $U$ in the underlying topological space of $X$. Formally, $X.\\text{zeroLo\"}\n  {\"name\": \"ProjectiveSpectrum.basicOpen_eq_zeroLocus_compl\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(r : A) : (basicOpen 𝒜 r : Set (ProjectiveSpectrum 𝒜)) = (zeroLocus 𝒜 { r })ᶜ\", \"doc\": \"For a homogeneous element $ r $ in a graded ring $ A $, the basic open set $ D_+(r) $ in the projective spectrum $ \\\\text{Proj}(A) $ is equal to the complement of the zero locus $ V_+(\\\\{r\\\\}) $, i.e., $\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \": (invariants ρ).carrier = ⋂ g : G, Function.fixedPoints (ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n  {\"name\": \"AlgebraicGeometry.basicOpen_eq_bot_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : Scheme} [IsReduced X] {U : X.Opens} (s : Γ(X, U)) : X.basicOpen s = ⊥ ↔ s = 0\", \"doc\": \"For a reduced scheme $X$, an open subset $U$ of $X$, and a section $s$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, the basic open set $X.\\\\text{basicOpen}(s)$ is empty if and only if $s$ is the ze\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state this algebraic-group flag-variety assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal invariant section of the rho external tensor square on a product of flag varieties vanishes exactly outside the opposite flags orbit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For any vector $x$, $x$ belongs to the $\\\\omega$-conjugated Lie submodule $N$ if and only if the matrix $\\\\omega$ (from the Geck construction) multiplied by $x$ lies in $N$.\"}\n  {\"name\": \"Action.diagonalSuccIsoTensorTrivial_hom_hom_apply\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"∀ {G : Type u} [inst : Group G] {n : ℕ} (f : Fin (n + 1) → G),\\n  (Action.diagonalSuccIsoTensorTrivial G n).hom.hom f = (f 0, fun i => (f i.castSucc)⁻¹ * f i.succ)\", \"doc\": \"For a group $G$ and natural number $n$, the forward direction of the natural isomorphism between the diagonal action of $G$ on $G^{n+1}$ and the tensor product of the left regular action on $G$ with t\"}\n  {\"name\": \"AlternatingMap.domCoprod.summand_eq_zero_of_smul_invariant\", \"module\": \"Mathlib/LinearAlgebra/Alternating/DomCoprod\", \"type\": \"∀ {ιa : Type u_1} {ιb : Type u_2} [inst : Fintype ιa] [inst_1 : Fintype ιb] {R' : Type u_3} {Mᵢ : Type u_4}\\n  {N₁ : Type u_5} {N₂ : Type u_6} [inst_2 : CommSemiring R'] [inst_3 : AddCommGroup N₁] [inst_4 : Module R' N₁]\\n  [inst_5 : AddCommGroup N₂] [inst_6 : Module R' N₂] [inst_7 : AddCommMonoid Mᵢ]\", \"doc\": \"For alternating multilinear maps $ a $ and $ b $ over disjoint finite index sets $ \\\\iota_a $ and $ \\\\iota_b $, if a permutation $ \\\\sigma \\\\in \\\\mathrm{Perm.ModSumCongr}(\\\\iota_a, \\\\iota_b) $ is invariant u\"}\n  {\"name\": \"LieModule.trace_toEnd_genWeightSpaceChain_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) (p q : ℤ) [inst_7 : H.IsCartanSubalgebr\", \"doc\": \"Let $ M $ be a Lie module over a Lie algebra $ \\\\mathfrak{g} $ with Cartan subalgebra $ \\\\mathfrak{h} $. For weights $ \\\\chi \\\\in \\\\mathfrak{h}^* $ and roots $ \\\\alpha \\\\in \\\\mathfrak{h}^* $, suppose the gene\"}\n  {\"name\": \"RootPairing.InvariantForm.apply_eq_or_of_apply_ne\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Lemmas\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} [Finite ι]\\n  [CharZero R] [P.IsCrystallographic] {i j : ι} [IsDomain R] [P.IsReduced] (B : P.I\", \"doc\": \"Given a root pairing with an invariant form $ B $, if $ B(\\\\alpha_i, \\\\alpha_i) \\\\neq B(\\\\alpha_j, \\\\alpha_j) $ for distinct roots $ \\\\alpha_i, \\\\alpha_j $, then for every root $ \\\\alpha_k $, $ B(\\\\alpha_k, \\\\a\"}\n  {\"name\": \"RootPairing.InvariantForm.exists_apply_eq_or\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Lemmas\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} [Finite ι]\\n  [CharZero R] [P.IsCrystallographic] [IsDomain R] [P.IsReduced] (B : P.InvariantFo\", \"doc\": \"For a non-empty finite index set $\\\\iota$, there exist indices $i$ and $j$ such that for every index $k$, the bilinear form $B$ associated with the invariant form of the root pairing satisfies $B(\\\\alph\"}\n  {\"name\": \"exteriorPower.pairingDual_apply_apply_eq_one_zero\", \"module\": \"Mathlib/LinearAlgebra/ExteriorPower/Pairing\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {ι : Type u_3}\\n  [inst_3 : LinearOrder ι] (x : ι → M) (f : ι → Module.Dual R M),\\n  (∀ ⦃i j : ι⦄, i ≠ j → (f i) (x j) = 0) →\\n    ∀ (n : ℕ) (a b : Fin n ↪o ι),\\n      a ≠ b →\\n        ((exteriorPower.pair\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and natural number $ n $, if $ a, b: \\\\mathrm{Fin}(n) \\\\hookrightarrow \\\\iota $ are distinct injective functions, then the dual pairing between the we\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite Borel subgroups give an open orbit G over T in the double flag variety cut out by an invariant line bundle section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsOpen.exists_smul_mem\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] (x : α) {U : Set α}, IsOpen U → U.Nonempty → ∃ c, c • x ∈ U\", \"doc\": \"In a minimal monoid action of $ M $ on a topological space $ \\\\alpha $, for every point $ x \\\\in \\\\alpha $ and every non-empty open set $ U \\\\subseteq \\\\alpha $, there exists an element $ c \\\\in M $ such th\"}\n  {\"name\": \"IsOpen.iUnion_preimage_smul\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] {U : Set α}, IsOpen U → U.Nonempty → ⋃ c, (fun x => c • x) ⁻¹' U = Set.univ\", \"doc\": \"Let $ M $ be a monoid acting minimally on a topological space $ \\\\alpha $. For any nonempty open set $ U \\\\subseteq \\\\alpha $, the union of the preimages $ \\\\bigcup_{c \\\\in M} (c \\\\cdot -)^{-1}(U) $ equals \"}\n  {\"name\": \"IsOpen.iUnion_smul\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (G : Type u_2) {α : Type u_3} [inst : Group G] [inst_1 : TopologicalSpace α] [inst_2 : MulAction G α]\\n  [MulAction.IsMinimal G α] {U : Set α}, IsOpen U → U.Nonempty → ⋃ g, g • U = Set.univ\", \"doc\": \"If $ G $ is a group acting minimally on a topological space $ \\\\alpha $, then for any non-empty open set $ U \\\\subseteq \\\\alpha $, the indexed union $ \\\\bigcup_{g \\\\in G} g \\\\cdot U $ equals the universal s\"}\n  {\"name\": \"IsOpen.rightCoset\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [ContinuousMul G] {U : Set G},\\n  IsOpen U → ∀ (x : G), IsOpen (MulOpposite.op x • U)\", \"doc\": \"In a topological group $G$, if a subset $U \\\\subseteq G$ is open, then its right coset $U \\\\cdot x = \\\\{u \\\\cdot x \\\\mid u \\\\in U\\\\}$ by any element $x \\\\in G$ is also an open set in $G$.\"}\n  {\"name\": \"isOpenMap_smul_of_sigmaCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/OpenMapping\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : TopologicalSpace G] [inst_1 : TopologicalSpace X] [inst_2 : Group G]\\n  [IsTopologicalGroup G] [inst_4 : MulAction G X] [SigmaCompactSpace G] [BaireSpace X] [T2Space X] [ContinuousSMul G X]\\n  [MulAction.IsPretransitive G X] (x : X), IsOpenMap fun g => g • x\", \"doc\": \"Let $G$ be a $\\\\sigma$-compact, Hausdorff topological group, and let $X$ be a Baire topological space. If $G$ acts on $X$ continuously and transitively, then for any $x \\\\in X$, the orbit map $g \\\\mapsto\"}\n  {\"name\": \"MulAction.IsTopologicallyTransitive.exists_smul_inter\", \"module\": \"Mathlib/Dynamics/Transitive\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} {inst : Monoid M} {inst_1 : TopologicalSpace α} {inst_2 : MulAction M α}\\n  [self : MulAction.IsTopologicallyTransitive M α] {U V : Set α},\\n  IsOpen U → U.Nonempty → IsOpen V → V.Nonempty → ∃ m, (m • U ∩ V).Nonempty\", \"doc\": \"For any non-empty open subsets $ U $ and $ V $ of a topological space $ \\\\alpha $ under a monoid action $ M $, there exists an element $ m \\\\in M $ such that the image of $ U $ under the action of $ m $\"}\n  {\"name\": \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (L : FiniteGaloisIntermediateField k K), IsOpen (⇑(InfiniteGalois.mulEquivToLimit k K) '' ↑L.fixingSubgroup)\", \"doc\": \"In an infinite Galois extension $ K/k $, the image of the fixing subgroup of a finite Galois intermediate field $ L $ under the isomorphism to the inverse limit of profinite Galois groups is an open s\"}\n  {\"name\": \"isOpenMap_quotient_mk'_mul\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : Group Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : MulAction Γ T]\\n  [ContinuousConstSMul Γ T], IsOpenMap Quotient.mk'\", \"doc\": \"Given a group $\\\\Gamma$ acting continuously on a topological space $T$ via scalar multiplication, the canonical quotient map $T \\\\to T/\\\\sim$ (where $\\\\sim$ is the orbit equivalence relation) is an open m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flag\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "opposite.*flag|double.flag|Bruhat|homogeneous.*line.bundle",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open opposite flag orbit is the nonvanishing locus of an invariant section of the rho line bundle external square",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Set.op\", \"module\": \"Mathlib.Data.Set.Opposite\", \"type\": \"(s : Set α) : Set αᵒᵖ\", \"doc\": \"For a set $ s $ in a type $ \\\\alpha $, the opposite set $ \\\\text{op}\\\\, s $ is the set in the opposite type $ \\\\alpha^{\\\\text{op}} $ consisting of all elements whose image under the canonical projection to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_obj_op\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Γ.obj (op X) = Γ(X, ⊤)\", \"doc\": \"For any scheme $X$, the global sections of the opposite scheme $X^\\\\text{op}$ in the category of commutative rings are equal to the global sections of $X$ over its entire topological space (the termina\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus_singleton\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (f : X.presheaf.obj (op U)) : X.zeroLocus { f } = (X.basicOpen f).carrierᶜ\", \"doc\": \"For any open subset $ U $ of a ringed space $ X $ and any section $ f $ of the structure sheaf over $ U $, the zero locus of the singleton set $\\\\{f\\\\}$ coincides with the complement of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_res_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(i : op U ⟶ op V) [IsIso i] : X.basicOpen (X.presheaf.map i f) = X.basicOpen f\", \"doc\": \"For a scheme $X$, given an isomorphism $i : U^\\\\text{op} \\\\to V^\\\\text{op}$ between the opposites of open subsets $U$ and $V$, the basic open set defined by the image of a section $f$ under the presheaf \"}\n  {\"name\": \"Module.Basis.repr_unop_eq_mulOpposite_repr\", \"module\": \"Mathlib.LinearAlgebra.Basis.MulOpposite\", \"type\": \"(b : Basis ι R H) (x : Hᵐᵒᵖ) : b.repr (unop x) = b.mulOpposite.repr x\", \"doc\": \"Given a basis $ b $ of an $ R $-module $ H $, the opposite module $ H^\\\\mathrm{op} $ has a basis obtained by applying the canonical linear equivalence that reverses scalar multiplication. Specifically,\"}\n  {\"name\": \"Module.Basis.mulOpposite_repr_op\", \"module\": \"Mathlib.LinearAlgebra.Basis.MulOpposite\", \"type\": \"(b : Basis ι R H) (x : H) : b.mulOpposite.repr (op x) = b.repr x\", \"doc\": \"Given a basis $ b $ of an $ R $-module $ H $, the opposite module $ H^\\\\mathrm{op} $ has a basis obtained by applying the canonical linear equivalence that reverses scalar multiplication. Specifically,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.component_nontrivial\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(X : Scheme.{u}) (U : X.Opens) [Nonempty U] : Nontrivial Γ(X, U)\", \"doc\": \"For any scheme $X$ and any non-empty open subset $U$ of $X$, the ring of global sections $\\\\Gamma(X, U)$ is non-trivial (i.e., contains at least two distinct elements).\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state algebraic-group Bruhat cells, scheme charts or flag quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-tensor-square-eventual-detection",
+  "date": "2026-10-23",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section.",
+   "via": [
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-double-flag-invariant-boundary",
+  "worker": "stage1",
+  "summary": "Construct the invariant section as f(g^{-1}h) from the existing induced primitive-line lemma; use Bruhat strata and rho regularity to determine its open. Write explicit Zariski torsor coordinates and glue invariant functions. Two statement-only supporting nodes.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), the recorded alteration/moduli/geometric-reductivity branch: opposite-flag geometric input to rho tensor-square eventual detection. The inherited created.item chain ends at a Lean module rather than an imported blueprint node, so ancestor_for_item returns null, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Generic product theorem applied to Q twice; it supplies only irreducibility of X, and does not replace the group-theoretic route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic base change of proper morphisms gives properness of X to Q."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic composition gives properness of X over F."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-geometrically-irreducible-product",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-e5a9cf870",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-e5a9cf870 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement. Sources checked against Milne iAG2017: 21.79, 21.80(a-c), 21.83-21.86 and C.22. The charts node clauses (Bruhat strata, U^w x B iso, open cover of G/B by translates of the big cell, B∩n0Bn0^-1=T scheme-theoretically, V≅A^N) are each in Milne. The rho node (<rho,alpha^vee>=1 for simple alpha, trivial stabilizer, w rho=-rho iff w=w0) is true over Q in any characteristic, including the empty root system. Steps: (2) the sign of the U-fixed vector of E_B(-rho~)=W_1 checks out, giving f(bx)=rho~(b)^-1 f(x). (3) f(t n_w) computed two ways forces w=w0; f vanishes on the other strata and f(n0)≠0, so D(f)=C_{w0}. (4) delta(gb1,hb2)=rho~(b1)rho~(b2)delta matches E(-rho~); the gluing is the local transition rule of G x^B A^1, and delta is diagonally invariant with delta(1,n0)=1. (5) In the coordinates (x,a(x)^-1 y), X_d∩(A×Q)=A×C, with sigma=a(x)u. (6) The stabilizer is B∩n0Bn0^-1=T, so q is a Zariski-locally trivial T-torsor, faithfully flat. (7) Invariant functions glue. (1) X is irreducible by the product lemma, reduced and quasi-compact by the A^{2N} charts, and separated because it is proper by the base-change and composition leaves. Small cases: SL2 in any characteristic (f = lower-left entry, delta = det of first columns, U = pairs of distinct lines, stabilizer the torus), and the torus/trivial-group case. Not duplicates: lem-sfb-normal-big-cell-character-functions (same day, unsplit) shares only the big-cell open immersion and lacks the strata, the chart sections, B∩n0Bn0^-1=T and integrality; primitive-line, simply-connected-character-lattice and rho-section-modules do not state these facts. Neither new node restates a clause of the item. Tool uses accepted: lem-sc-geometrically-irreducible-product (generic irreducibility of Q×Q) and the two proper Mathlib leaves. No SGA, no statement change, proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DoubleFlagInvariantBoundary",
+  "declaration": "AlgebraicGeometry.exists_double_flag_invariant_boundary",
+  "declarations": [
+   "AlgebraicGeometry.DoubleFlag.externalSquare",
+   "AlgebraicGeometry.DoubleFlag.frame",
+   "AlgebraicGeometry.DoubleFlag.coefficient",
+   "AlgebraicGeometry.DoubleFlag.rightInvariants",
+   "AlgebraicGeometry.exists_double_flag_invariant_boundary"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DoubleFlagInvariantBoundary.lean",
+  "statement": "theorem exists_double_flag_invariant_boundary {F : Type u} [Field F] [IsAlgClosed F] (S T B : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (hpair : IsRhoBorelPair iT iB j) (a : ModObj T.X B.X) (ha : ∀ (Z : Over (Spec (.of F))) (t : Z ⟶ T.X) (b : Z ⟶ B.X), lift t b ≫ a.smul = (t ≫ j.hom.hom) * b * (t ≫ j.hom.hom)⁻¹) (Φ : List (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ρ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (ρB χ : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hΦ : Φ.Nodup) (hroots : ∀ α, α ∈ Φ ↔ α.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B a α ≠ ⊥) (hρ : ρ.hom.hom ^ 2 = (Φ.map (fun α ↦ α.hom.hom)).prod) (hρB : j ≫ ρB = ρ) (hρU : ∀ (V : Grp (Over (Spec (.of F)))) (l : V ⟶ B), IsClosedSubgroupScheme l.hom.hom → IsNormalSubgroupScheme l.hom.hom → ConnectedSpace V.X.left → SolvableGroupStructure.IsUnipotent V → l.hom.hom ≫ ρB.hom.hom = 1) (hχ : χ.hom.hom = ρB.hom.hom⁻¹) (Q : Over (Spec (.of F))) (π : S.X ⟶ Q) (hQ : IsProper Q.hom) (hQft : LocallyOfFiniteType Q.hom) (hQqc : QuasiCompact Q.hom) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst S.X B.X * (snd S.X B.X ≫ iB.hom.hom)) ≫ π = fst S.X B.X ≫ π) (hπtorsor : IsPullback (fst S.X B.X) (fst S.X B.X * (snd S.X B.X ≫ iB.hom.hom)) π π) (P : AssociatedCharacterLineBundle.Presentation S B iB Q π χ) (hL : P.L.IsInvertible) : IsIntegral (Q ⊗ Q).left ∧ QuasiCompact (Q ⊗ Q).hom ∧ IsSeparated (Q ⊗ Q).hom ∧ ∃ (n₀ : RankOneRoots.normalizer iT) (d : Γ(DoubleFlag.externalSquare Q P.L, ⊤)), d ≠ 0 ∧ (∀ (Z : Over (Spec (.of F))) (s g h : Z ⟶ S.X), DoubleFlag.coefficient π P.L P.trivialization (s * g) (s * h) d = DoubleFlag.coefficient π P.L P.trivialization g h d) ∧ (∀ Z : Over (Spec (.of F)), {g : Z ⟶ S.X | g ∈ RankOneRoots.pointImage iB Z ∧ ∃ b : Z ⟶ B.X, g = (toUnit Z ≫ n₀.val) * (b ≫ iB.hom.hom) * (toUnit Z ≫ n₀.val)⁻¹} = (RankOneRoots.pointImage iT Z : Set _)) ∧ ∃ (U : (Q ⊗ Q).left.Opens) (q : S.X ⟶ Over.mk (U.ι ≫ (Q ⊗ Q).hom)) (aU : ModObj S.X (Over.mk (U.ι ≫ (Q ⊗ Q).hom))), (U : Set (Q ⊗ Q).left) = Scheme.Modules.nonvanishingLocus (DoubleFlag.externalSquare Q P.L) d ∧ Dense (U : Set (Q ⊗ Q).left) ∧ q.left ≫ U.ι = (lift π ((𝟙 S.X * (toUnit S.X ≫ n₀.val)) ≫ π)).left ∧ Flat q.left ∧ Surjective q.left ∧ (fst S.X T.X * (snd S.X T.X ≫ iT.hom.hom)) ≫ q = fst S.X T.X ≫ q ∧ IsPullback (fst S.X T.X) (fst S.X T.X * (snd S.X T.X ≫ iT.hom.hom)) q q ∧ (∀ (Z : Over (Spec (.of F))) (s g : Z ⟶ S.X), lift s (g ≫ q) ≫ aU.smul = (s * g) ≫ q) ∧ ∃ e : RhoSection.Coordinate (Over.mk (U.ι ≫ (Q ⊗ Q).hom)) ≃ₐ[F] DoubleFlag.rightInvariants iT, (∀ r, (e r).val = ((algΓ (.of F)).map q).unop.hom r) ∧ ∀ (Z : Over (Spec (.of F))) (s g : Z ⟶ S.X) (r : RhoSection.Coordinate (Over.mk (U.ι ≫ (Q ⊗ Q).hom))), ((algΓ (.of F)).map (s⁻¹ * g)).unop.hom (e r).val = ((algΓ (.of F)).map (lift s⁻¹ (g ≫ q) ≫ aU.smul)).unop.hom r",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded rho Borel pair and half-sum character, the recorded homogeneous-line-bundle presentation for the inverse character, and the actual normalizer. The induced diagonal linearization is expressed by coefficient invariance in its canonical two-factor frames on every test scheme. Right invariants are the equalizer of the canonical right-action and projection algebra maps; the algebra equivalence is required to be pullback along the orbit map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-680e46cd7",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read item node, all 9 stmt_deps and their Lean (exists_rho_section_modules, IsRhoBorelPair, reductive_borel_pair_structure, exists_homogeneousLineBundle_sections, AssociatedCharacterLineBundle.Presentation, RhoSection.Coordinate, RankOneRoots.normalizer/pointImage, nonvanishingLocus). Hypotheses copy the dep interfaces verbatim (uniquely pinned data, so universal quantification is not stronger); χ=ρB⁻¹ gives L_{-ρ̃} with E(χ)=W_1. Conclusions match every node clause: X=Q⊗Q integral/qc/separated, n₀ in the actual normalizer with B∩n₀Bn₀⁻¹=T on all Z-points, d≠0, invariance as coefficient identity in canonical frames (checked against the trivialization and totalAction_coordinate = induced diagonal linearization), U=nonvanishingLocus, Dense, q pinned to (gB,gn₀B) with image U, flat+surjective right T-torsor via IsPullback, aU pinned, e = q^* onto the AlgHom.equalizer right invariants, left equivariance with (sf)(g)=f(s⁻¹g). Trivial group, char 2 and nonreduced test schemes covered; single universe u. Node changed only in lean, statement verbatim; helpers are real data with docstrings; no duplicate; sorry only. Not recompiled (no change). Note: normalizer from def-sfb-rank-one-root-interfaces is not in stmt_deps (non-blocking, maintainer may add)."
+ }
+}

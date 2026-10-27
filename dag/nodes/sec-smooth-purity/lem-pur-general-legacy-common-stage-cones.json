@@ -1,0 +1,218 @@
+{
+ "id": "lem-pur-general-legacy-common-stage-cones",
+ "kind": "statement",
+ "title": "Specified cone arrows and common-stage Verdier structure for the older presentation",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$; no structure map from $Y$ to $k$ is assumed. Let $I$ be the finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. For $E\\in I$, fix the small model $\\widetilde E=\\mathrm{Shrink}(E)$ and its algebra equivalence $s_E:\\widetilde E\\cong E$, and put $i_{EL}=s_L^{-1}\\circ(E\\hookrightarrow L)\\circ s_E$. Let $\\mathcal A_E^{\\mathrm{old}}$ be the full subcategory of the completed integral derived category whose objects are derived complete and whose reductions modulo every positive uniformizer power are finite-torsion constructible in a single finite cohomological interval independent of the power [def-weil-derived-complete-integral-detailed]. Here the specified presentation is exactly $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$, with its functors $\\mathrm{integralDerivedReduction}$. Set $C_E^{\\mathrm{old}}=\\mathcal A_E^{\\mathrm{old}}[1/\\varpi_E]$, the raw Hom scalar localization [def-weil-rationalization-karoubi], namely $\\mathrm{rationalConstructibleCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$. Its scalar transition $T^{\\mathrm{old}}_{EL}$ is $\\mathrm{rationalScalarExtension}$ along $i_{EL}$. These named presentations specify the categories and maps in the assertions below; no identification with a different presentation of the integral predicate is asserted.\n\nEquip $P^{\\mathrm{old}}$ with the system, Hom groups and shifts of [lem-pur-general-legacy-stage-coherence, lem-pur-general-legacy-hom-coordinates, lem-pur-general-legacy-pair-shifts]. The given scalar transitions are exact [lem-weil-scalar-extension-exact-triangulated]. There is a unique pretriangulation on these fixed data in which the distinguished triangles are precisely the triangles isomorphic to distinguished finite-stage images; it is triangulated and the inclusions $j_L$ are exact [def-sf-directed-common-stage-data, def-weil-triangulated-category]. More precisely, let $A=(E,K)$, $B=(F,H)$, $L\\ge E,F$, and let\n$$U=(T^{\\mathrm{old}}_{EL}K\\xrightarrow{u}T^{\\mathrm{old}}_{FL}H\\xrightarrow{g}C\\xrightarrow{h}(T^{\\mathrm{old}}_{EL}K)[1])$$\nbe distinguished in $C_L^{\\mathrm{old}}$. Write $\\delta_A:A\\cong j_LT^{\\mathrm{old}}_{EL}K$ and $\\delta_B:B\\cong j_LT^{\\mathrm{old}}_{FL}H$ for the specified stage identifications. There is a distinguished triangle with literal objects $A,B,(L,C)$ and arrows\n$$[L,u],\\quad j_L(g)\\circ\\delta_B,\\quad \\delta_A^{-1}[1]\\circ\\beta_{L,1,T^{\\mathrm{old}}_{EL}K}\\circ j_L(h).$$\nIts isomorphism to $j_L^\\triangle U$ has components $\\delta_A,\\delta_B,1_{(L,C)}$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old owning proof arguments 8 and 4, cone portion of 13; AlgebraicallyClosedCoefficients.lean:951-1018, GeneralAlgebraicallyClosedCoefficients.lean:637-679; common-stage Verdier and cone clauses.",
+  "note": "Construction material from old argument 8 (retained verbatim): For the retained finite-field legacy realization: Apply the existing common-stage Verdier theorem to obtain the pretriangulation, exact inclusions and distinguished criterion. For a given finite-stage cone, form its image triangle and conjugate its first two objects by isoToStage. The representative identity gives its prescribed first arrow; Triangle.isoMk proves it distinguished with the literal third pair unchanged. Exactness, the Hom node and the shift node supply every hypothesis of lem-route-common-stage-verdier-exists-unique, with the general directed-stage data, not the geometrically restricted PBC definition. For the displayed cone apply j_L to U. Set the second arrow to delta_B followed by j_L(g), and the connecting arrow to the stage image connecting arrow followed by the shift of delta_A inverse. The first triangle-isomorphism square is mkHom_eq_isoToStage; the second is the identity-unit equation; the third cancels the shifted inverse of delta_A. Triangle.isoMk supplies the isomorphism with identity on the third object. The common-stage distinguished criterion gives the result. The same literal cone argument is also the retained old argument 4: A commonStageCone is isomorphic to the image of its supplied distinguished finite-stage triangle. Its three isomorphism components are isoToStage for the first two objects and the identity for the third. The first arrow equation is mkHom_eq_isoToStage, the second is a unit equation, and the connecting arrow equation cancels the shifted inverse identification. Apply distinguished_iff."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-general-legacy-stage-coherence",
+  "lem-pur-general-legacy-hom-coordinates",
+  "lem-pur-general-legacy-pair-shifts",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-sf-directed-common-stage-data",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [
+  {
+   "text": "For every $E$, apply [lem-weil-integral-constructible-triangulated] to the specified derived-complete, uniformly bounded-reduction subcategory $\\mathcal A_E^{\\mathrm{old}}$. By [lem-weil-integral-constructible-linear] it is $\\mathcal O_E$-linear with linear shift. Apply [lem-weil-linear-scalar-localization-triangulated] with $R=\\mathcal O_E$ and $\\varpi=\\varpi_E$. It gives a triangulated structure, including TR4, on the raw localization $C_E^{\\mathrm{old}}$, with precisely the stage shift and stage distinguished triangles used here. All three cited statements allow any scheme $Y$.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained owning common-stage Verdier clause: triangulated rational stages, before old argument 8."
+   }
+  },
+  {
+   "text": "The coefficient index is nonempty and directed by [def-weil-finite-subextension-directed-set]. The specified tensor system is supplied by [lem-pur-general-legacy-stage-coherence]. Its fixed Hom-group laws and additive inclusions are supplied by [lem-pur-general-legacy-hom-coordinates]. The zero object, additive integer shifts, coherent inclusion comparisons and shift-compatible $\\theta$ are supplied by [lem-pur-general-legacy-pair-shifts]. Exactness of the specified transitions is [lem-weil-scalar-extension-exact-triangulated]. These are exactly the hypotheses of the exact-stage pair datum [def-sf-directed-common-stage-data]; no unitor $T_{EE}=1$ is required. Together with step 1, they meet every hypothesis of [lem-route-common-stage-verdier-exists-unique]. Apply it on these fixed data. This gives the unique pretriangulation, the common-stage distinguished criterion, TR4 and exactness of every $j_L$, with the already prescribed comparisons.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "lem-pur-general-legacy-stage-coherence",
+    "lem-pur-general-legacy-hom-coordinates",
+    "lem-pur-general-legacy-pair-shifts",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "def-sf-directed-common-stage-data",
+    "lem-route-common-stage-verdier-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old argument 8: apply the general common-stage Verdier theorem to the older presentation."
+   }
+  },
+  {
+   "text": "We compute the first arrow from the quotient formulas of [def-sf-directed-common-stage-data]. Put $X=T_{EL}K$, $Z=T_{FL}H$, $a_A=\\alpha_{ELL,K}$ and $a_B=\\alpha_{FLL,H}$. The representatives of $\\delta_A$, $j_L(u)$ and $\\delta_B^{-1}$ at $L$ are respectively $a_A^{-1}$, $T_{LL}(u)$ and $a_B$. Their composite therefore has class $[L,a_B T_{LL}(u)a_A^{-1}]=[L,t(u)]$, where $t$ is reflexive transport on this Hom set. This equals $[L,u]$: the cocycle with indices $(E,L,L,L)$ gives $T_{LL}(a_A)=\\alpha_{LLL,X}$ after cancellation of $a_A$, and similarly for $a_B$. Naturality of $\\alpha_{LLL}$ then gives $t(t(u))=a_B\\alpha_{LLL,Z}T_{LL}^2(u)\\alpha_{LLL,X}^{-1}a_A^{-1}=t(u)$. Thus the two representatives $t(u)$ and $u$ have equal transports at $L$ and define the same quotient class. In particular $j_L(u)\\circ\\delta_A=\\delta_B\\circ[L,u]$. This calculation uses no faithfulness and no identity-transition assumption.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old arguments 4 and 8: mkHom_eq_isoToStage, with reflexive-stage transport made explicit."
+   }
+  },
+  {
+   "text": "Let $V=j_L^\\triangle U$. By [def-sf-directed-common-stage-data], its connecting arrow is $w=\\beta_{L,1,X}\\circ j_L(h)$. Define a triangle $W$ with literal objects $A,B,(L,C)$ and arrows $f=[L,u]$, $g_W=j_L(g)\\circ\\delta_B$, $h_W=\\delta_A^{-1}[1]\\circ w$. The types are $A\\to B$, $B\\to(L,C)$ and $(L,C)\\to A[1]$. The triple $(\\delta_A,\\delta_B,1)$ is a triangle morphism $W\\to V$: its first square is step 3, its second is $1\\circ g_W=j_L(g)\\circ\\delta_B$, and its third is $\\delta_A[1]\\circ h_W=w\\circ1$ by functoriality of $[1]$ and $\\delta_A\\delta_A^{-1}=1$. By [def-weil-pbc-triangles-with-shift] this componentwise invertible triangle morphism is an isomorphism. Its inverse has components $(\\delta_A^{-1},\\delta_B^{-1},1)$, so the third object and third isomorphism component are literally as asserted.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old arguments 4 and 8, cone portion of 13: three triangle-isomorphism squares; Stacks Tag 0144, definition-triangle."
+   }
+  },
+  {
+   "text": "The distinguished $U$ and the isomorphism $W\\cong j_L^\\triangle U$ of step 4 witness $D_{S^{\\mathrm{old}}}(W)$ in [def-sf-directed-common-stage-data]. The criterion obtained in step 2 therefore makes $W$ distinguished. Its three arrows are the displayed formulas by construction, and its isomorphism to the stage image has components $\\delta_A,\\delta_B,1_{(L,C)}$.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained old arguments 4 and 8: apply the common-stage distinguished criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-finite-subextension-directed-set",
+  "lem-pur-general-legacy-stage-coherence",
+  "lem-pur-general-legacy-hom-coordinates",
+  "lem-pur-general-legacy-pair-shifts",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-sf-directed-common-stage-data",
+  "lem-route-common-stage-verdier-exists-unique",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained owning coefficient-pair construction, old arguments 4 and 8 and cone portion of 13, preserved in source.note. Explicit quotient and triangle-square calculations follow the read-only legacy implementation in lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:951-1018; latest sketch clause (4) supplies context only, not an asserted equivalence to its native condensed presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The common stage Verdier structure on a raw rational coefficient pair category identifies a cone with the stage cone triangle conjugated on the first two objects and identity on the third",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CochainComplex.mappingConeCompTriangle, HomotopyCategory.mappingConeCompTriangleh_distinguished, CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂, CategoryTheory.Pretriangulated.distinguished_cocone_triangle₁, CochainComplex.mappingConeCompTriangleh, CochainComplex.mappingConeCompTriangle_obj₃",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangle.isoMk",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Triangle.isoMk'; ",
+   "date": "2026-10-27",
+   "verdict": "Query rejected for an unknown identifier; corrected Loogle query and two semantic searches also recorded."
+  },
+  {
+   "tool": "grep",
+   "query": "commonStageCone|isoToStage|distinguished_iff",
+   "results": "[grep] OK 20 hit(s); Mathlib/CategoryTheory/Triangulated/Subcategory.lean:708, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean:261, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean:265, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean:125, Mathlib/CategoryTheory/Triangulated/Functor.lean:252, Mathlib/CategoryTheory/Triangulated/Functor.lean:280, Mathlib/CategoryTheory/Triangulated/Functor.lean:387, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:97, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:428, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:435, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:443, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:446, Mathlib/CategoryTheory/Triangulated/Triangulated.lean:366, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean:187, Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean:324, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean:231, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean:236, Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean:36, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:14, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:253",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered coefficient pair category has common stage distinguished triangles and the specified literal finite stage cone",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.IsFilteredOrEmpty.cocone_objs, CategoryTheory.IsFiltered.max, HomotopyCategory.Pretriangulated.distinguishedTriangles, CategoryTheory.IsFiltered, CategoryTheory.IsFiltered.of_cocone_nonempty, CategoryTheory.IsFiltered.cocone_nonempty, CategoryTheory.IsFiltered.cocone, CategoryTheory.IsFiltered.of_hasFiniteColimits",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.isoMk",
+   "results": "3 hits: CategoryTheory.Pretriangulated.Triangle.isoMk, CategoryTheory.Pretriangulated.Triangle.isoMk_hom, CategoryTheory.Pretriangulated.Triangle.isoMk_inv",
+   "date": "2026-10-27",
+   "verdict": "Generic equality/triangle isomorphism construction only; not the specified normalized coefficient stage theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|commonStageCone|mkHom_eq_isoToStage",
+   "results": "{\"t\": \"2026-10-27T07:25:21Z\", \"tool\": \"grep\", \"query\": \"StageSystem|PairCategory|commonStageCone|mkHom_eq_isoToStage\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: no theorem supplying all clauses for the specified legacy coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit of triangulated categories with exact transition functors, distinguished triangles represented at one stage",
+   "results": "{\"t\": \"2026-10-27T07:25:22Z\", \"tool\": \"leansearch\", \"query\": \"Filtered colimit of triangulated categories with exact transition functors, distinguished triangles represented at one stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"AddMonCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CommGrpCat.FilteredColimits.colimit\", \"CategoryTheory.Limits.hasColimitsOfShape_of_has_filtered_colimits\"], \"digest\": \"9137cd4ff84e6544\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: no theorem supplying all clauses for the specified legacy coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.isoMk",
+   "results": "{\"t\": \"2026-10-27T07:25:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated.Triangle.isoMk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.isoMk\", \"CategoryTheory.Pretriangulated.Triangle.isoMk_hom\", \"CategoryTheory.Pretriangulated.Triangle.isoMk_inv\"], \"digest\": \"905853d2e6f370d5\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: generic triangle isomorphism construction only; it does not supply the specified coefficient system and unique common-stage triangulation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed system of triangulated coefficient categories has a unique common stage triangulation on its pair category and literal cone arrows obtained by conjugating the finite stage triangle",
+   "results": "{\"t\": \"2026-10-27T07:25:25Z\", \"tool\": \"leanfinder\", \"query\": \"A directed system of triangulated coefficient categories has a unique common stage triangulation on its pair category and literal cone arrows obtained by conjugating the finite stage triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.triangleLTGE\", \"CategoryTheory.Triangulated.TStructure.triangle_map_exists\", \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"CategoryTheory.IsTriangulated.mk'\", \"CategoryTheory.Triangulated.TStructure.triangle_iso_exists\", \"CategoryTheory.Triangulated.TStructure.triangle_map_ext\", \"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂\"], \"digest\": \"291327ecbc20dab0\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: no theorem supplying all clauses for the specified legacy coefficient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Old owning proof arguments 8 and 4, cone portion of 13; AlgebraicallyClosedCoefficients.lean:951-1018, GeneralAlgebraicallyClosedCoefficients.lean:637-679; common-stage Verdier and cone clauses.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-legacy-common-stage-cones",
+  "worker": "stage1",
+  "summary": "Reused the integral triangulation/linearity, raw scalar localization and general common-stage Verdier nodes. Verified the exact-stage hypotheses on the literal legacy presentation. Computed the first arrow without a unitor and checked all three squares of the cone triangle isomorphism with identity third component. No new nodes; statement unchanged.",
+  "blueprint": "Retained ancestor old arguments 4 and 8 and cone portion of 13 as preserved in source.note: common-stage Verdier existence/uniqueness, exact inclusions, literal cone objects and all cone arrows. The latest sk-thm-sfb-qlbar-two-colimit clause (4) concerns a native ordinary-category equivalence and is not substituted for the retained legacy construction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Generic exactness of the raw rational scalar transitions T_EL (unit sk-prop-sf-pf-reduction, not cited by sk-def-sf-operations); step 2 needs it to fill the exact-transition field of the exact-stage pair datum, and no node of sk-def-sf-operations states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-scalar-extension-exact-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NM-2ecff568c",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-2ecff568c (reviewer sub-agent of L); spot-checked: Read the item's 5-step proof in full; the mathematics is correct. Shape: one commit (item and report), no new nodes, statement unchanged; the only stmt_deps addition is def-weil-pbc-triangles-with-shift (a mathlib definition of triangle isomorphism), which I accept. Step 1: lem-weil-integral-constructible-triangulated, -linear and lem-weil-linear-scalar-localization-triangulated (R=O_E, ϖ=ϖ_E) make every C_E^old triangulated, TR4 included, for any Y. Step 2: every field of the exact-stage pair datum in def-sf-directed-common-stage-data is supplied by the cited nodes. These are the directed index, the three legacy nodes and exact T with a coherent CommShift. That meets the hypotheses of lem-route-common-stage-verdier-exists-unique, and only its statement is used. Step 3: I checked the computation. The cocycle at (E,L,L,L) gives T_LL(a_A)=α_LLL, and naturality then gives t(t(u))=t(u), so [L,t(u)]=[L,u]; T_LL=1 is never needed. Steps 4–5: I checked all three triangle squares and the D_S witness. The arrows and components match AlgebraicallyClosedCoefficients.lean:951-1018 (commonStage_cone: Triangle.isoMk with eA, eB, Iso.refl). Edge cases E=F=L with T_LL≠1, u=0, a zero object and empty Y all go through. No duplicate: the PBC cone and Verdier nodes require noetherian T, and the generic Verdier node does not state the literal cone. Fault repaired: proof step 2 uses lem-weil-scalar-extension-exact-triangulated, a statement of unit sk-prop-sf-pf-reduction, from unit sk-def-sf-operations, whose uses list is empty. The report wrongly says there are no off-unit uses. I added split_report.tool_uses for it in fixes/dag/nodes/sec-smooth-purity/lem-pur-general-legacy-common-stage-cones.json and accept it as a generic tool, as already accepted for lem-sf-qbar-localization-common-stage.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "id": "def-cbc-proper-open-interchange-data",
+ "kind": "definition",
+ "title": "Bundled normalized proper/open comparison families",
+ "statement": "For a finite commutative coefficient ring Λ, ProperOpenInterchangeData packages an ordinary proper/open comparison family δ, a bounded-below derived family γ, and properOpenInterchangeConditions Λ δ γ. properOpenInterchangeData is the pair selected by the existing coherence theorem, with that theorem’s proof of the conditions. The section-preserving inclusion determines δ uniquely, and the derived-unit normalization determines γ uniquely.",
+ "stmt_deps": [
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, first proof paragraph; categorical construction implementing its prescribed comparison."
+ },
+ "proof": [
+  {
+   "text": "Use the exact same nested existential choices as the existing coherence theorem to fill the two data fields. Its choose_spec.choose_spec fills the conditions field. The structure fields retain the normalization proof. The constructor is irreducible, with a proved projection equation to the original second coherence witness. This lets consumers rewrite once without repeatedly unfolding the full dependent choice. Extracting the second conjunct gives the complete derived-unit normalization family. Extracting the first conjunct gives the section-preserving inclusion family. The accessors are proved theorems with explicit equation types. Their types retain only the needed equations, without the remaining coherence conjunction as implicit arguments.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B; B5 explicit definition and component interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of proper support composition with unit-counit mate for open immersions",
+   "results": "Existing group search found ordinary module adjunctions and no full comparison.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing construction ingredients; a small definition packages them without adding mathematical assumptions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Existing group search found mateEquiv and its unit/counit formulas.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing construction ingredients; a small definition packages them without adding mathematical assumptions."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenInterchangeConditions|NatTrans.comp_app|whiskerLeft_app",
+   "results": "The coherence theorem and Mathlib natural-transformation component lemmas supply all ingredients.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing construction ingredients; a small definition packages them without adding mathematical assumptions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleClopenMateNormalization",
+  "date": "2026-10-23",
+  "group": "B5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-etale-clopen-mate-normalization",
+   "place": "Explicit construction interface for the comparison used in the proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenInterchangeData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenInterchangeData.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOpenInterchangeData",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ProperOpenInterchangeData",
+   "AlgebraicGeometry.Etale.properOpenInterchangeData",
+   "AlgebraicGeometry.Etale.ProperOpenInterchangeData.unitNormalization",
+   "AlgebraicGeometry.Etale.ProperOpenInterchangeData.inclusionNormalization",
+   "AlgebraicGeometry.Etale.properOpenInterchangeData_derived"
+  ],
+  "statement": "def properOpenInterchangeData (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :\n    ProperOpenInterchangeData Λ",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-77b58",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261024T184610-L-3075477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-77b58",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261024T184610-L-3075477",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules/nodes vs clone sheaf-dag item and node, Mathlib TwoSquare/mapDerivedCategoryPlusCompatibility defs, rg of all ClopenMateNormalization users; 3 direct importers + StrictTowerProperOpenCalculus compiled against delivered and fixed item"
+ }
+}

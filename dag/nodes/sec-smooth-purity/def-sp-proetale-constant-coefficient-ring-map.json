@@ -1,0 +1,114 @@
+{
+ "id": "def-sp-proetale-constant-coefficient-ring-map",
+ "kind": "definition",
+ "title": "Ring-sheaf map induced by a constant coefficient homomorphism",
+ "status": "split",
+ "statement": "Let $T$ be a scheme and $\\varphi:A\\to B$ a unital homomorphism of commutative rings. Use the constant-ring presentation of small pro-etale modules in [def-weil-pbc-proetale-operations] and the constant sheaf functor of [def-weil-pbc-constant-sheaf]. Define $\\varphi_T:A_T\\to B_T$ as that constant sheaf functor applied to $\\operatorname{ULift}(\\varphi)$, using the fixed coefficient universe lift. Thus its action on constant sections is $a\\mapsto\\varphi(a)$; the coefficient objects, sheafifications and scalar actions are unchanged.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Constant-coefficient specialization of Tag 03EL, lemma-tensor-product-pullback; coefficient-map construction in the scalar-extension comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtaleOrdinaryTensor|proEtaleTensorPair|proEtaleTensorPullbackTotalIso|proEtaleConstantRingMap",
+   "results": "{\"t\": \"2026-10-22T11:13:01Z\", \"tool\": \"grep\", \"query\": \"proEtaleOrdinaryTensor|proEtaleTensorPair|proEtaleTensorPullbackTotalIso|proEtaleConstantRingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration; reuse the published Sheaf definition without copying."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor product pullback of sheaves of modules and its signed total comparison on unbounded complexes",
+   "results": "{\"t\": \"2026-10-22T11:13:01Z\", \"tool\": \"leansearch\", \"query\": \"Canonical tensor product pullback of sheaves of modules and its signed total comparison on unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\"], \"digest\": \"be6457c4801e1c74\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration; reuse the published Sheaf definition without copying."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaf ring homomorphism induced by a ring homomorphism and tensor pullback total complex natural comparison",
+   "results": "{\"t\": \"2026-10-22T11:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"Constant sheaf ring homomorphism induced by a ring homomorphism and tensor pullback total complex natural comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"5ee78b6644ff9b7a\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration; reuse the published Sheaf definition without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n proEtaleOrdinaryTensor|proEtaleTensorPullbackTotalIso|proEtaleConstantRingMap lean/WeilConjectures lean/Sheaf; rg -l the same names dag/nodes; blueprint_refs.py search tensor pullback / constant ring map",
+   "results": "No WeilConjectures match. Sheaf.Paper.ProEtaleCanonicalTensorPullback owns tensor, pairing and canonical total comparison; Sheaf.Paper.StratumScalarExtension owns the constant-ring map. No definition node owns these declarations. Blueprint searches both return 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "Existing Sheaf definitions; add ownership nodes only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant sheaf functor sends a commutative ring homomorphism to the morphism of constant ring sheaves",
+   "results": "{\"t\": \"2026-10-22T11:18:23Z\", \"tool\": \"leansearch\", \"query\": \"The constant sheaf functor sends a commutative ring homomorphism to the morphism of constant ring sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheaf\", \"LocallyConstant.mapRingHom\", \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"AlgebraicGeometry.Spec.sheafedSpaceMap\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map\", \"AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app\", \"SheafOfModules.freeFunctor\", \"CategoryTheory.Sheaf.IsConstant.mk\"], \"digest\": \"453794ec769f415d\"}",
+   "date": "2026-10-22",
+   "verdict": "Found Mathlib CategoryTheory.constantSheaf, which is exactly the generic functor used inside the published proEtaleConstantRingMap specialization; reuse that specialization, with no duplicate module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-proetale-scalar-balancing-chain",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Step 1 tensor-pullback identification, ordinary scalar balancing and its chain normalization",
+   "via": [
+    "lem-sp-proetale-scalar-balancing-chain",
+    "lem-sp-proetale-scalar-tensor-normalization",
+    "lem-sp-direct-image-change-ring-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.Paper.StratumScalarExtension",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantRingMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingMap"
+  ],
+  "statement": "def proEtaleConstantRingMap {T : Scheme.{u}} {A B : Type u}\n    [CommRing A] [CommRing B] (α : A →+* B) :\n    proEtaleConstantRing T A ⟶ proEtaleConstantRing T B",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "R1 definition ownership: reuse the existing published construction unchanged, with its canonical normalization. No theorem is assumed in place of this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22ae55e73",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22ae55e73",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 49085731679a; diffed old/new module: only import, Step-8 docstring and final conjunct changed; node statement unchanged vs live. R2 repaired: total clause now F(single2Iso_Y).hom >> T.hom.app P = (proEtaleTensorPullbackTotalIso f A_Y A_X c_A P B_Y[0]).inv >> mapBifunctorMap 1 (singleMapHomologicalComplex >> single(scalarMateCoefficientPullback)) >> single2Iso_X.hom. Checked tensorPullbackTotal = unsigned mu^-1 summands (RingedTopoiCanonicalTensorPullback:147), direction Tot(FP x FQ)->F Tot, and that scalarMateCoefficientPullback = beta at the unit then the unique normalized unit pullback = c_B. In degree i this says t = (1 x c_B) o mu, i.e. node Step 3; non-tautological. R1 repaired: scalar-mate / tensor-pullback-total / constant-ring-map now cited via definition owners (def-sp-proetale-scalar-mate-identifications plus 2 new existing:true nodes whose statements match the source verbatim and that no other node owns) plus def-weil-pbc-ring-restriction-pullback-comparison. Mechanical finding: lem-weil-pbc-ring-sheaf-change-adjunction kept for its genuine asIso typing use of proEtaleRingRestrictionPullbackInv_isIso -> PASS on that point. Hypotheses, universes, edge cases (f=id, X empty, B=0, Z/4->Z/2, unbounded P), H5/H6/H8 and statement verbatim OK. No compile (no file changed); worker compile clean. Advisory: pre-existing sorried proEtaleOrdinaryTensorPullback_existsUnique (ProEtaleCanonicalTensorPullback:128) has no DAG node carrying its proof obligation."
+ }
+}

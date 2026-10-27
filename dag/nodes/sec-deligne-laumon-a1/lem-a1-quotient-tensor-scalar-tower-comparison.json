@@ -1,0 +1,140 @@
+{
+ "id": "lem-a1-quotient-tensor-scalar-tower-comparison",
+ "kind": "statement",
+ "title": "The total tensor quotient tower and ordinary scalar reduction agree with their units",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and a scheme W. Let R_W be the completed integral coefficient sheaf and S_n its specified constant quotient of exponent n+1 [def-weil-completed-integral-coefficients]. For any unbounded cochain complex P of R_W-module sheaves, form the strict tower of total tensor complexes P tensor S_n[0] with the actual quotient transitions [def-a1-principal-completed-koszul-towers], and form the ordinary termwise scalar-reduction tower, with its R_W-action restored along the specified projections [def-pur-integral-derived-operations]. There is an isomorphism between these strict towers, natural for every cochain map on P. It sends the right-unitor inverse followed by tensoring the actual R_W to S_n projection [def-a1-principal-intrinsic-completion] to the ordinary augmentation x maps to 1 tensor x at every level. No flatness or completeness hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, tensor product and scalar extension on a ringed site; sites-cohomology.tex Tag 06YY and homology.tex Tag 012Z, tensor with a degree-zero complex"
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-a1-principal-completed-koszul-towers",
+  "def-pur-integral-derived-operations",
+  "def-a1-principal-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Apply the single-second-factor total-complex isomorphism to P and the degree-zero quotient module. Identify the ordinary scalar extension, restricted to the completed ring, with the sheaf tensor by the balanced exchange x tensor s to s tensor x. Sheafify this exchange and transport it across the actual reduction_obj equality. The inverse sends the ordinary generator s tensor x to x tensor s, followed by the single-factor totalization inclusion. Identify the two restricted quotient coefficient modules by the identity on sections and its identical inverse; their restrictions and scalar actions agree.",
+   "uses": [
+    "lem-pe-restricted-kflat-tensor-identification",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-integral-derived-operations",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check adjacent transitions on ordinary generators: both maps send s tensor x to rho(s) tensor x. Module tensor generation and the universal property of sheafification give equality of the degree maps. The ofOpSequence constructor extends this equality to all transition composites, yielding the tower isomorphism. The same generator calculation gives naturality in P.",
+   "uses": [
+    "lem-pur-module-tensor-generator-calculus",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse right unitor followed by the quotient tensor projection sends x to x tensor 1 in the degree-zero-factor summand. Under the exchange this is the generator 1 tensor x defining the normalized ordinary augmentation. Check this as an equality of chain maps degree by degree. There are no boundedness, flatness, nonzero quotient or nonempty-site assumptions.",
+   "uses": [
+    "lem-sf-ringed-tensor-complex-constraints",
+    "def-a1-principal-intrinsic-completion",
+    "def-a1-principal-completed-koszul-towers",
+    "def-pur-integral-derived-operations",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-restricted-kflat-tensor-identification",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pur-integral-derived-operations",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "def-a1-principal-intrinsic-completion",
+  "def-a1-principal-completed-koszul-towers",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK; explicit totalization, transition and unit normalization by H6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring an unbounded complex with a module concentrated in degree zero agrees naturally with termwise scalar extension and sends the tensor unit augmentation to the scalar extension unit",
+   "results": "ModuleCat.extendScalarsId_hom_app_one_tmul; ModuleCat.ExtendScalars.obj'; HomologicalComplex.rightUnitor'; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; HomologicalComplex.rightUnitor; HomologicalComplex.instHasTensorTensorUnit_1; HomologicalComplex.instHasTensorTensorUnit; TensorPower.mul_algebraMap₀",
+   "date": "2026-10-22",
+   "verdict": "No exact match for strict sheaf towers. The scalar unit and unitor formulas are useful ingredients; the transition and augmentation compatibility still require the generator calculations proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total tensor with a single module complex is naturally the termwise scalar extension, preserving tensor unit",
+   "results": "HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; HomologicalComplex.instHasTensorXTensorUnit; HomologicalComplex.instHasTensorXTensorUnit_1; HomologicalComplex.ιTensorObj; HomologicalComplex.tensorUnitIso; HomologicalComplex.tensorObj; HomologicalComplex.HasTensor",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mapBifunctorSingle₂Iso",
+   "results": "loogle: unknown identifier 'mapBifunctorSingle₂Iso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorSingle.*Iso|swapSheafIso",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RoosIntrinsicUnitComparison",
+  "date": "2026-10-21",
+  "group": "H6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-roos-intrinsic-unit-comparison",
+   "place": "Comparison of the actual quotient tensor unit with ordinary scalar reduction before localization"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientTensorScalarTowerComparison",
+  "file": "lean/Sheaf/Paper/QuotientTensorScalarTowerComparison.lean",
+  "declaration": "WeilConjectures.quotientTensorScalarTowerComparison",
+  "statement": "theorem quotientTensorScalarTowerComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (W : AlgebraicGeometry.Scheme.{t}) :\n    ∃ e : ∀ P : CochainComplex (Modules l E W) ℤ,\n        targetTower l E W P ≅ (IntegralOnSlice.tower l E W none).obj P,\n      (∀ (P : CochainComplex (Modules l E W) ℤ) (n : ℕ),\n        (tensorUnit l E W P).inv ≫ (tensorWith l E W P).map\n            ((CochainComplex.singleFunctor (Modules l E W) 0).map (projection l E W n)) ≫\n              (e P).hom.app (op n) =\n          ((IntegralOnSlice.augmentation l E W none).app P).app (op n)) ∧\n      ∀ (P P' : CochainComplex (Modules l E W) ℤ) (f : P ⟶ P'),\n        targetTowerMap l E W f ≫ (e P').hom =\n          (e P).hom ≫ (IntegralOnSlice.tower l E W none).map f",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-fadf0",
+  "group": "H6",
+  "result": "fix",
+  "landing": "20261022T114205-L-583187",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-fadf0",
+  "group": "H6",
+  "result": "fix",
+  "landing": "20261022T114205-L-583187",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; delivered Lean (signed fiber iso, Roos normalization, tensor/scalar tower iso, completeness equivalences) against item node proof steps and the Lean records of every imported module's nodes"
+ }
+}

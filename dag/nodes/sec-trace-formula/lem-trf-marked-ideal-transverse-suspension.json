@@ -14,11 +14,198 @@
   "def-weil-etale-morphism",
   "pqf-def-coherent",
   "def-nagata-global-blowup",
-  "def-nagata-strict-transform"
+  "def-nagata-strict-transform",
+  "def-trf-hilbert-samuel-presentation",
+  "def-trf-marked-ideal-order",
+  "def-per-adapted-normal-crossings-center"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Orders can be checked after the etale localizations in the hypothesis. Indeed for the local stalk map $A\\to B$ of an etale morphism, apply the etale local-ring flatness node with $M=B$: tensoring over $B$ with $B$ is the identity, so $B$ is flat over itself and hence over $A$. The flat-local criterion gives faithful flatness, and $\\mathfrak m_B=\\mathfrak m_AB$. Consequently $\\mathfrak m_B^q=\\mathfrak m_A^qB$, and contraction gives $KB\\subseteq\\mathfrak m_B^q$ if and only if $K\\subseteq\\mathfrak m_A^q$, for every ideal $K\\subseteq A$ and every $q$. This also checks the value infinity without any completion argument. Work henceforth on the specified etale neighbourhood, retaining its retraction and boundary coordinates.",
+   "uses": [
+    "lem-trf-etale-local-ring-flatness",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05BA (flat.tex lemma-etale-flat-up-down-local-ring), and Tags 00U4 (lemma-etale-at-prime), 00HR (lemma-local-flat-ff), 05CK (lemma-faithfully-flat-universally-injective); agent combines their statements for ideal powers."
+   }
+  },
+  {
+   "text": "Away from $N=V(z_1,\\ldots,z_r)$ some $z_j$ is a unit, so $J=\\mathcal O_Z$ and its order is zero. At $a\\in N$, write $A=\\mathcal O_{N,a}$ and $B=\\mathcal O_{Z,a}$. The local maps $A\\xrightarrow{p^\\sharp}B\\xrightarrow{i^\\sharp}A$ have composite identity. They send maximal ideals into maximal ideals. Thus $I_aB\\subseteq\\mathfrak m_B^b$ if and only if $I_a\\subseteq\\mathfrak m_A^b$: one direction extends generators, the other applies $i^\\sharp$. Every $z_j^b$ already belongs to $\\mathfrak m_B^b$. Hence $J_a\\subseteq\\mathfrak m_B^b$ is equivalent to $I_a\\subseteq\\mathfrak m_A^b$. This proves the claimed equality of cosupports, identifying $N$ with its image in $Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94, background only; explicit retraction calculation supplied by agent."
+   }
+  },
+  {
+   "text": "Assume $r>0$, let $a\\in N$, $A=\\mathcal O_{N,a}$, $B=\\mathcal O_{Z,a}$; $B$ is regular since $Z$ is smooth over the field. The chart of the hypothesis gives the stalk map $B'\\to B$ of an etale morphism, where $B'=\\mathcal O_{N\\times\\mathbf A^r,(a,0)}$ is the localization of $A[z_1,\\ldots,z_r]$ at $\\mathfrak m_AA[z]+(z)$; thus $\\mathfrak m_{B'}=\\mathfrak m_AB'+(z)$ and $B'/(z)=A$. Step 1, applied to this map, gives $B$ flat over $B'$, $\\mathfrak m_B^q=\\mathfrak m_{B'}^qB$ and $\\mathfrak m_B^q\\cap B'=\\mathfrak m_{B'}^q$. Modulo $\\mathfrak m_A$, $B'$ becomes $\\kappa(a)[z]$ localized at $(z)$, and $\\mathfrak m_{B'}^q$ becomes $(z)^q$. (i) If $z_1^b\\in\\mathfrak m_B^{b+1}$, then $z_1^b\\in\\mathfrak m_{B'}^{b+1}$, so $sz_1^b=g$ in the domain $\\kappa(a)[z]$ with $s(0)\\ne0$ and $g\\in(z)^{b+1}$; but the degree-$b$ part of the left side is $s(0)z_1^b\\ne0$, and $g$ has no term of degree $\\le b$. (ii) Let $y_1,\\ldots,y_s$ be a regular system of parameters of $A$, a minimal generating set of $\\mathfrak m_A$ by the cited node. Then $y,z$ form a basis of $\\mathfrak m_{B'}/\\mathfrak m_{B'}^2$: they generate $\\mathfrak m_{B'}$; if $\\sum\\alpha_iy_i+\\sum\\beta_jz_j\\in\\mathfrak m_{B'}^2$, reduction modulo $(z)$ gives $\\alpha_i\\in\\mathfrak m_{B'}$, and then reduction of $\\sum\\beta_jz_j\\in\\mathfrak m_{B'}^2$ modulo $\\mathfrak m_A$ and the same degree comparison give $\\beta_j\\in\\mathfrak m_{B'}$. Tensoring $0\\to\\mathfrak m_{B'}^2\\to\\mathfrak m_{B'}\\to\\mathfrak m_{B'}/\\mathfrak m_{B'}^2\\to0$ with the flat module $B$ gives $\\mathfrak m_B/\\mathfrak m_B^2\\cong(\\mathfrak m_{B'}/\\mathfrak m_{B'}^2)\\otimes_{\\kappa(a)}B/\\mathfrak m_B$. So $p^*y,z$ are a basis of $\\mathfrak m_B/\\mathfrak m_B^2$, generate $\\mathfrak m_B$ minimally (Nakayama), and are a regular system of parameters of $B$, for every choice of $y$. On the cosupport Step 2 gives $J_a\\subseteq\\mathfrak m_B^b$, whereas $z_1^b\\in J_a$ and (i) give $J_a\\not\\subseteq\\mathfrak m_B^{b+1}$. Its order is exactly $b$, including when $I=0$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KU (definition-regular-local), 00HL (lemma-flat-tor-zero) for the cotangent space after flat base change, and 00U4 as in Step 1; degree comparison in the polynomial ring supplied by agent."
+   }
+  },
+  {
+   "text": "Let $C$ be a proposed admissible smooth center; by Step 2 it lies in the common cosupport, so $C\\subseteq N$ as sets. Its local rings are regular, hence domains, by the cited regularity and domain theorems, so $C$ is reduced; each $z_j|_C$ lies in every prime of $\\mathcal O_C$, hence is zero, and $C$ is a closed subscheme of $N$. The smooth-pair coordinate theorem gives etale coordinates $(x,y)$ on $N$ with $C=V(x)$, used for smoothness in Step 6. Normal crossings with the ordered boundary is read at each $a\\in C$, as in the proof of ILO VIII 4.2.9: some regular system of parameters of the local ring at $a$ generates $\\mathcal I_C$ by members and has one member as equation of each boundary component through $a$; $C$ may lie in a component. The components through $a$, and those containing $C$ (set $K_0$), are the same in $N$ and $Z$, with equations $t_k$ and $p^*t_k$. ($N\\Rightarrow Z$) If $(x',y')$ is such a system of $A$ with $\\mathcal I_C=(x')$, then $(p^*x',p^*y',z)$ is a regular system of $B$ by Step 3, $\\mathcal I_{C}B=(p^*x',z)$ as $B/(z)=A$, and the $p^*t_k$ are members. ($Z\\Rightarrow N$) Let $w$ be such a system of $B$ with $\\mathcal I_C=(w_S)$, so the members for $K_0$ lie in $S$ and the others outside $S$. In $V=\\mathfrak m_B/\\mathfrak m_B^2$, the $\\bar z$ are independent (Step 3) and lie in $\\operatorname{span}\\bar w_S$; $V\\to\\mathfrak m_A/\\mathfrak m_A^2$ is onto with kernel $\\operatorname{span}\\bar z$, and sends the members for $K_0$ to the independent $\\bar t_k$. So $\\bar z$ and these members extend by members of $S$ to a basis of $\\operatorname{span}\\bar w_S$, omitting a set $S'$ of $r$ members. The images in $A$ of the members not in $S'$ form a basis of $\\mathfrak m_A/\\mathfrak m_A^2$, hence a regular system of $A$, containing every $t_k$ up to a unit. Those from $S\\setminus S'$ generate an ideal inside $\\mathcal I_C$ whose quotient is regular of dimension $\\dim A-|S|+r=\\dim\\mathcal O_{C,a}$ by the regular-sequence node; this quotient is a domain, so its quotient $\\mathcal O_{C,a}$ by a prime of the same dimension equals it.",
+   "uses": [
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.9, p.121 (normal crossings by a regular family of parameters at each point); Stacks more-morphisms.tex Tag 0FUE (lemma-etale-local-structure) for the etale coordinates; the transfer of the normal-crossings condition between N and Z by cotangent spaces is supplied by agent."
+   }
+  },
+  {
+   "text": "The controlled transform on $N$ is regular. To check this, work at a point of $C$ with $A=\\mathcal O_{N,a}$ and $Q=\\mathcal I_{C,a}$. The smooth-pair regular-immersion theorem makes $Q$ locally generated by a regular sequence. Since $A/Q$ is a regular local ring, it is a domain; the graded theorem makes every $Q^d/Q^{d+1}$ free over this domain. At the generic point of this local component of $C$, the cosupport condition says $I_AA_Q\\subseteq Q^bA_Q$. For $f\\in I_A$ there is therefore $s\\notin Q$ with $sf\\in Q^b$. Starting with $f\\in Q^0$, induct on $d<b$: if $f\\in Q^d$, its class in $Q^d/Q^{d+1}$ is killed by the nonzero element $\\bar s\\in A/Q$, hence is zero by the cited free-basis description. Thus $f\\in Q^b$. This proves $I\\subseteq\\mathcal I_C^b$ stalkwise. If $Q=0$, the same argument just says $I=0$ locally. This finite filtration argument uses no equality between an unspecified symbolic power and an ordinary power.",
+   "uses": [
+    "lem-pur-smooth-pair-regular-immersion",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN (lemma-regular-quasi-regular) and Tag 00NP (lemma-regular-domain), with divisors.tex Tag 067U (lemma-immersion-smooth-into-smooth-regular-immersion); finite filtration argument supplied by agent."
+   }
+  },
+  {
+   "text": "Blow up the ambient center $(x,z)$. The generator charts cover the blowup. On an $x_i$-chart put $e=x_i$, $x_h'=x_h/e$ for $h\\ne i$, and $z_j'=z_j/e$. Its equations are $x_h=ex_h'$ and $z_j=ez_j'$. These are the coordinate blowup chart equations. They apply with the auxiliary divisor consisting of all local coordinate hyperplanes (take the parameter count called $r$ in the chart lemma equal to the full dimension); afterwards retain just the actual boundary components. The calculation is also valid in the smooth coordinate charts: blowup commutes with the flat etale chart maps. Setting $z'=0$ gives the corresponding $x_i$-chart of $\\operatorname{Bl}_C N$, and the remaining functions define a retraction $p'$ to it. In fact the chart is etale over that base chart times $\\mathbf A^r_{z'}$: it is the base change of the original etale coordinate chart. The base chart itself is etale over a coordinate affine space, hence smooth by etale smoothness, smoothness of affine-space projections and composition. This also proves smoothness of $N'$ and the ambient chart. The exceptional equation $e$ is a nonzerodivisor on the base chart, so $(z')$ is $e$-saturated. Away from $e=0$ it is exactly the old $N$; the scheme-theoretic closure definition therefore identifies $N'$ with $V(z')$. On a $z_j$-chart, off the exceptional divisor the function $z_j$ is invertible, so the strict transform of $N$ is empty. If $c=0$, there are only these normal charts.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "lem-trf-permissible-coordinate-chart",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "lemma-nagata-chart-generator-regular",
+    "def-nagata-strict-transform",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.9, p.121, coordinate-chart argument; Stacks Tags 0804 (divisors.tex lemma-blowing-up-affine) and 0805 (lemma-flat-base-change-blowing-up); agent explicitly computes the strict-transform saturation."
+   }
+  },
+  {
+   "text": "On each $x_i$-chart Step 5 and $Q\\mathcal O_{N'}=(e)$ imply $\\sigma_N^*I\\subseteq(e^b)$, so $I'=e^{-b}\\sigma_N^*I$ is an ideal of regular functions on $N'$. The generator calculation in the ambient chart gives\n$$e^{-b}\\sigma_Z^*J=((z_1')^b,\\ldots,(z_r')^b)+(p')^*I'.$$\nIndeed $e^{-b}\\sigma_Z^*(z_j^b)=(z_j/e)^b$, and for $f\\in I$, $e^{-b}\\sigma_Z^*p^*f=(p')^*(e^{-b}\\sigma_N^*f)$, since $p\\sigma_Z=\\sigma_Np'$ and $e$ is the pullback of the base chart's exceptional coordinate. The equality holds for ideals, independently of a chosen generating list. Multiplication by $e$ is injective on the chart, so these quotients are unambiguous. In a $z_j$-chart the same controlled transform contains $e^{-b}z_j^b=1$ and has empty cosupport. Thus every chart missing $N'$ is harmless, including all charts if the whole support was the center.",
+   "uses": [
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lemma-nagata-chart-generator-regular"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.9, p.121, chart substitutions; controlled-transform calculation supplied by agent using the definition of the test operation."
+   }
+  },
+  {
+   "text": "The strict transforms of boundary components and the appended exceptional component remain coordinate hyperplanes on these charts. For an old equation $t=0$ which is among the center coordinates, its strict transform is $t/e=0$ except on its own distinguished chart, where it is empty; an old equation outside the center stays $t=0$. These are precisely the formulas in the coordinate-chart node. On an $x_i$-chart they involve base coordinates only, including $e=0$, so the boundary is still transverse to the new zero section $N'$ and retains its specified order. Hence Steps 2 and 3 can be repeated for the transformed pair, with marking still $b$, and Step 4 again identifies exactly its next permissible centers.",
+   "uses": [
+    "lem-trf-permissible-coordinate-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.9, p.121, boundary coordinate formulas; apply to the actual subset of boundary coordinates and preserve the ordered list."
+   }
+  },
+  {
+   "text": "For a product with a line, replace $p$ by $p\\times1$, $N$ by $N\\times\\mathbf A^1$ and $z_j$ by its pullback. The new ideal is literally $((z_j)^b)+(p\\times1)^*(I\\mathcal O_{N\\times\\mathbf A^1})$. The new zero-section boundary of the line has equation in the additional base variable, so it is compatible with the same product presentation. Steps 2--4 apply on this new base; in particular no assertion that every point of the product lies on the line's zero section is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, background; line-product test operation and coordinate substitution supplied by agent. Detailed marked-ideal source BMT 0905.3580 section 6.2 is WANTED."
+   }
+  },
+  {
+   "text": "For an exceptional test blowup, the center is an intersection of boundary components, not a center contained in $N$. In the current product chart its equations are base boundary coordinates, say $t_1=\\cdots=t_h=0$, with no $z_j$. The projection $p$ is smooth: it is the composite of an etale map with the affine-space projection, which are both smooth. It is flat by the smooth-flat node. Blow up this base-coordinate ideal in $Z$. The generator charts and the flat-base-change comparison identify this blowup with the pullback of the corresponding boundary-intersection blowup of $N$ along $p$. On the $t_i$-chart replace $t_h$ in the center by $t_i(t_h/t_i)$ and leave every $z_j$ unchanged. Ordinary pullback, as required for this operation, therefore gives\n$$J^{\\mathrm{new}}=(z_1^b,\\ldots,z_r^b)+(p^{\\mathrm{new}})^*I^{\\mathrm{new}},\\qquad I^{\\mathrm{new}}=\\sigma_N^*I.$$\nThere is no division by $t_i^b$ for this operation. The chart lemma gives the new boundary equations $t_i$, the ratios of its other center coordinates, and the unchanged remaining boundary coordinates. They are still base coordinates; the new support is the inverse image of $N$, and is smooth in these etale coordinate charts. This proves preservation of the same split zero-section presentation. The argument includes the usual test with two boundary components, and any boundary intersection if that convention is used.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "lem-trf-permissible-coordinate-chart",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 4.2.9, p.121; Stacks Tag 0805 (divisors.tex lemma-flat-base-change-blowing-up); ordinary pullback follows the exceptional test-operation convention, not the admissible controlled-transform convention."
+   }
+  },
+  {
+   "text": "Induct on the length of a finite test history, using the invariant: near the current smooth support the two ideals have the same marking and are related by $J_s=((z_{s,j})^b)+p_s^*I_s$ in compatible zero-section charts, with the same ordered boundary; outside this support the ambient cosupport is empty. The length-zero case is the hypothesis and Step 2. For an admissible blowup, Step 4 identifies the allowed centers in both directions, Steps 5--8 preserve the invariant and give the displayed transform formula, and the normal charts have unit ideal. For a line product use Step 9; for a boundary-intersection blowup use Step 10. An empty-cosupport region remains empty: pullbacks of a unit ideal are unit, and subsequent admissible centers are disjoint from it. On all remaining charts repeat Step 2, and when $r>0$ Step 3. Thus a sequence is a test sequence for one presentation exactly when it is for the other, at every finite length. The local tests glue: ideal containment is stalkwise, orders are etale-invariant by Step 1, and the chart formulas compute the actual globally defined blowups and scheme-theoretic strict transforms. No global choice of the local retractions is required. The strict transforms of the current support computed on the etale charts are the pullbacks of the global ones by the strict-transform base-change node; its generic-point hypothesis holds because at a generic point $\\eta'$ of a component of the pulled-back support the stalk map is flat and local (Step 1), hence faithfully flat, so the one-point spectrum of $\\mathcal O_{\\eta'}$ maps onto that of $\\mathcal O_{\\eta}$, and $\\eta$ is a generic point.",
+   "uses": [
+    "lem-trf-strict-transform-flat-etale-base-change",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13: local presentation input; explicit finite-history induction supplied by agent from Steps 1--10. Strict transforms along etale charts: Stacks morphisms.tex Tag 081I (lemma-flat-base-change-scheme-theoretic-image)."
+   }
+  },
+  {
+   "text": "If $r=0$, the zero-section model has $N=Z$ on the neighbourhood under consideration, $p=1$ and $J=I$. Every operation for the two presentations is the identical operation, so all the equivalence and transform statements hold tautologically. No exact-order assertion is made: for example $I=0$ has infinite order. Empty $N$, empty cosupport and empty centers also satisfy the preceding argument; if the center equals the whole current support, Step 6 has no base-center chart and Step 7 shows the ambient cosupport disappears. Lean implementation of the rank-zero subsidiary theorem (R3): Mathlib makes the affine-space projection with coordinate type ULift (Fin 0) an isomorphism. AffineSpace.homOfVector_over identifies its composite with the zero section as the identity, so the zero section is an isomorphism. The cartesian square zeroFiber then makes i an isomorphism, and the equation i followed by the retraction equals the identity makes the retraction its inverse. The range of the empty parameter family is empty, so on each affine open the ideal of normal-coordinate powers is zero. Supremum with the extended ideal is therefore just the extended ideal. This proves transverse_suspension_rank_zero without any order or blowup input; the other two subsidiary assertions of this node remain unproved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent edge-case check of the stated equivalence; no additional desingularization theorem used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-strict-transform",
+  "lem-pc-smooth-flat",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-sc-regular-local-domain",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-permissible-coordinate-chart",
+  "lem-trf-smooth-composition",
+  "lem-trf-strict-transform-flat-etale-base-change",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-chart-generator-regular",
+  "prop-nagata-affine-blowup-chart-cover",
+  "sbc-lem-affine-space-smooth",
+  "thm-nagata-blowup-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13, pp.93--94, for the resolution/presentation context, and VIII Lemma 4.2.9, p.121, for the chart calculation. Explicit transverse-suspension comparison is the agent argument below, not a theorem stated in ILO. BMT arXiv:0905.3580 section 6.2 is not locally available (WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -54,10 +241,45 @@
    "results": "{\"t\": \"2026-10-19T13:43:48Z\", \"tool\": \"leansearch\", \"query\": \"A marked ideal on a smooth closed subscheme is equivalent to its suspension by the powers of the normal coordinates in the ambient scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData\"], \"digest\": \"6a37fb946513e4d8\"}",
    "date": "2026-10-19",
    "verdict": "no match: closed-immersion ideal-sheaf equivalences and smooth loci do not compare order cosupports and all marked-ideal test transforms"
+  },
+  {
+   "tool": "grep",
+   "query": "markedIdeal|controlledTransform|transverse.*suspension",
+   "results": "{\"t\": \"2026-10-22T04:37:42Z\", \"tool\": \"grep\", \"query\": \"markedIdeal|controlledTransform|transverse.*suspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ideal order embeddings, principal-ideal graded quotients, Rees membership, ideal-sheaf monotonicity and Weierstrass/etale lifting statements do not state this marked-ideal test-equivalence and controlled-transform theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal, \"order\"",
+   "results": "{\"t\": \"2026-10-22T04:37:43Z\", \"tool\": \"loogle\", \"query\": \"Ideal, \\\"order\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.isSimpleOrder\", \"Ring.isField_iff_isSimpleOrder_ideal\", \"RingEquiv.idealComapOrderIso\", \"Ideal.orderEmbeddingOfSurjective\", \"Ideal.piOrderIso\", \"Ideal.orderEmbeddingOfSurjective_apply\", \"RingEquiv.idealComapOrderIso_symm_apply\", \"RingEquiv.idealComapOrderIso_apply\"], \"digest\": \"b9249378787b9832\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ideal order embeddings, principal-ideal graded quotients, Rees membership, ideal-sheaf monotonicity and Weierstrass/etale lifting statements do not state this marked-ideal test-equivalence and controlled-transform theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked ideal has the same admissible blowups and test sequences as its suspension by powers of transverse coordinates",
+   "results": "{\"t\": \"2026-10-22T04:37:51Z\", \"tool\": \"leanfinder\", \"query\": \"A marked ideal has the same admissible blowups and test sequences as its suspension by powers of transverse coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.untiltAux_smodEq_untiltFun\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"PreTilt.exists_smodEq_untiltAux\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"mem_reesAlgebra_iff\"], \"digest\": \"413b734eb5be62f3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ideal order embeddings, principal-ideal graded quotients, Rees membership, ideal-sheaf monotonicity and Weierstrass/etale lifting statements do not state this marked-ideal test-equivalence and controlled-transform theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of marked ideals under transverse suspension by normal coordinate powers",
+   "results": "{\"t\": \"2026-10-22T04:38:05Z\", \"tool\": \"leansearch\", \"query\": \"Equivalence of marked ideals under transverse suspension by normal coordinate powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotEquivPowQuotPowSuccEquiv\", \"Ideal.powQuotPowSuccEquivMapMkPowSuccPow\", \"Ideal.quotEquivPowQuotPowSucc\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\", \"FractionalIdeal.canonicalEquiv_coeIdeal\", \"DividedPowers.SubDPIdeal.mk.congr_simp\", \"FractionalIdeal.unitsMulEquivSubmodule.congr_simp\", \"Ideal.Quotient.factorPow\"], \"digest\": \"49b12b0b137a4322\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ideal order embeddings, principal-ideal graded quotients, Rees membership, ideal-sheaf monotonicity and Weierstrass/etale lifting statements do not state this marked-ideal test-equivalence and controlled-transform theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining bth powers of normal coordinates to an ideal on a smooth closed subscheme preserves the order cosupport and controlled transforms",
+   "results": "{\"t\": \"2026-10-22T04:38:07Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining bth powers of normal coordinates to an ideal on a smooth closed subscheme preserves the order cosupport and controlled transforms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.strictMono_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals_mono\", \"localCohomology.ideal_powers_initial\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_antitone\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_of_isAffine\"], \"digest\": \"3ca012b2a9bd241d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ideal order embeddings, principal-ideal graded quotients, Rees membership, ideal-sheaf monotonicity and Weierstrass/etale lifting statements do not state this marked-ideal test-equivalence and controlled-transform theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-local-presentations",
@@ -89,5 +311,104 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-marked-ideal-transverse-suspension",
+  "worker": "stage1",
+  "summary": "No new nodes. Prove cosupport equality by the local retraction, exact order by the existing graded-basis theorem, regularity of controlled transforms by a finite filtration over the smooth center, and test equivalence by explicit admissible, line-product and boundary-intersection charts and finite-history induction. Keep the original statement. Checked no project attachment and no Mathlib suspension theorem; recorded fresh logged searches.",
+  "blueprint": "Historical resolution-input branch recorded in blueprint.from: the marked-presentation comparison needed by lem-trf-hilbert-samuel-local-presentations, below the former log-regular/nearby-cycle route from lem-trf-local-term-locality. The current local-term blueprint uses a different contraction proof; this assigned lower lemma is treated as a standalone tool, without changing the unit or routing its trace proof through resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic local algebra or blowup-chart tool used with its stated hypotheses in this coordinate computation; this unit has no replacement for it and no step of the trace/local-term unit is replaced."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Generic local algebra or blowup-chart tool used with its stated hypotheses in this coordinate computation; this unit has no replacement for it and no step of the trace/local-term unit is replaced."
+   },
+   {
+    "node": "lem-pur-smooth-pair-regular-immersion",
+    "why": "Generic local algebra or blowup-chart tool used with its stated hypotheses in this coordinate computation; this unit has no replacement for it and no step of the trace/local-term unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic local algebra or blowup-chart tool used with its stated hypotheses in this coordinate computation; this unit has no replacement for it and no step of the trace/local-term unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic local algebra or blowup-chart tool used with its stated hypotheses in this coordinate computation; this unit has no replacement for it and no step of the trace/local-term unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic local algebra or blowup-chart tool used with its stated hypotheses in this coordinate computation; this unit has no replacement for it and no step of the trace/local-term unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-a1f381667",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-a1f381667 (reviewer sub-agent of L); spot-checked: Read in full: the item (12 steps, no new nodes), every cited statement and its main-20261015 blueprint_update, the parent (hilbert-samuel-local-presentations step 6), ILO VIII 2.3.11-2.3.13 pp.93-94 and Lemma 4.2.9 p.121 (the chart computation followed in Steps 6-8), and the Stacks tags checked against tags/tags. The statement is true and not weakened. Small cases checked: b=1, I=O, I=0 with r>=1 and r=0, C=N, a centre missing N, non-closed points. No duplicate node, no dropped ids in the closure, no repair note, the item is unsplit on live, and no SGA is cited. The six declared tool uses are accepted. Three repairs are in fixes/dag/nodes/sec-trace-formula/lem-trf-marked-ideal-transverse-suspension.json. (1) Step 3 called z part of a regular system 'stipulated' without proof, and Steps 4, 6 and 8 rely on that. It now works in B'=O_{N x A^r,(a,0)}: Step 1, a lowest-degree comparison in kappa(a)[z] and flat base change of m/m^2 show (p^*y,z) is a regular system and z_1^b is not in m_B^{b+1}. (2) E5 in Step 4: normal crossings in Z implying normal crossings in N was only gestured at. It now has an explicit cotangent-space exchange argument: kernel span(z-bar), boundary members kept, quotient of the same dimension is a domain. It cites regular-local-generators and uses the ILO 4.2.9 regular-parameter convention. (3) C1 in Step 11: comparing etale-chart strict transforms with the global ones had no citation. It now cites lem-trf-strict-transform-flat-etale-base-change (same unit), with the generic-point hypothesis checked via flat-local-hom-faithfully-flat. Steps 1, 2 and 5-10 were checked as written: etale invariance of the order; the retraction; the s-torsion-free graded filtration giving I in I_C^b; the x_i-chart (Bl_C N)_{x_i} x A^r_{z'} with e-saturation and empty z_j-charts; the controlled transform e^{-b}J = (z'^b)+p'^*I'; boundary-intersection blowups by flat base change along p.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedIdealTransverseSuspension",
+  "declaration": "AlgebraicGeometry.MarkedIdeal.transverse_suspension",
+  "declarations": [
+   "AlgebraicGeometry.MarkedIdeal.suspension",
+   "AlgebraicGeometry.MarkedIdeal.SuspensionChart",
+   "AlgebraicGeometry.MarkedIdeal.IsLocallySuspended",
+   "AlgebraicGeometry.MarkedIdeal.supportAmbient",
+   "AlgebraicGeometry.MarkedIdeal.HasAdmissibleChartFormula",
+   "AlgebraicGeometry.MarkedIdeal.transverse_suspension",
+   "AlgebraicGeometry.MarkedIdeal.transverse_suspension_admissible_charts",
+   "AlgebraicGeometry.MarkedIdeal.transverse_suspension_rank_zero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedIdealTransverseSuspension.lean",
+  "statement": "theorem transverse_suspension {k : Type u} [Field k] [CharZero k] {S : Embedded k} (M Q : Marked S) (hfinite : QuasiCompact S.p) (hNfinite : QuasiCompact (M.j ≫ S.p)) (hE : HasAdaptedNormalCrossingsCenter (⊥ : S.Z.IdealSheafData) (fun a ↦ S.boundary.get a)) (htrans : HasAdaptedNormalCrossingsCenter (⊥ : M.N.IdealSheafData) (fun a ↦ (S.boundary.get a).comap M.j)) (hEsmooth : ∀ D ∈ S.boundary, Smooth (D.subschemeι ≫ S.p)) (r : ℕ) (hJ : IsLocallySuspended M Q r) : M.cosupport = Q.cosupport ∧ Equivalent M Q ∧ (0 < r → FullMaximalOrder Q)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repairs H12/H4 from immutable head 15bcb8588b68: uses the landed HilbertSamuel Embedded/Marked, order, Equivalent, FullMaximalOrder, Step.Transforms and blowupBoundary, and HasAdaptedNormalCrossingsCenter. Drops the duplicate test-sequence definition node/module. The two-component exceptional test is the convention explicitly included in node Step 10. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5aead6f4c",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Re-delivery after the H12/H4 RETURN of 15bcb858: the duplicate test-sequence node and module are dropped. The item is restated on Q79 HilbertSamuel Embedded/Marked/cosupport/Step/Transforms/Equivalent/FullMaximalOrder and Q74 HasAdaptedNormalCrossingsCenter; these landed nodes, plus def-trf-marked-ideal-order, are added to stmt_deps. Conclusion: M.cosupport = Q.cosupport ∧ Equivalent M Q ∧ (0<r → FullMaximalOrder Q), which matches the citer presentation_full_maximalOrder. Clause check: hE/htrans with center ⊥ = SNC by distinct regular parameters and transversality to N (excludes components containing N); SuspensionChart has an étale coordinate map, cartesian zero fibre and boundary_eq; J = ofIdealTop(z^b) ⊔ I.comap p, unit off N. The chart formula pins z' by e·z'=z (e a nonzerodivisor), and p' via the exceptional boundary entry and old retraction; Q' has empty cosupport off N'. Rank zero: IsIso retraction and J = I.comap p. Edge cases I=0, I=O, empty N, C=N, empty C, empty boundary and universes are ok. No new decl names clash with side-live, slopmaster2 or other snapshots. Statement verbatim; node differs from live only in lean/stmt_deps; sorry only; docstrings ok. Advisories: H9 proof-only imports; typo at line 81; supportAmbient formal level; maintainer note: S1 re-split note released 05:47Z keeps the statement, so the proof docstring needs a refresh after the re-split. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T092429-L-3431663",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

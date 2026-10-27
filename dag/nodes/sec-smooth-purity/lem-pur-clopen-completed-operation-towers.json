@@ -1,0 +1,377 @@
+{
+ "id": "lem-pur-clopen-completed-operation-towers",
+ "kind": "statement",
+ "title": "Strict completed tensor and coefficient-extension towers under clopen restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $I$ be a finite set, and let $j_i:X_i\\hookrightarrow X$ be pairwise disjoint open and closed immersions whose images cover $X$ [def-weil-open-immersion, def-weil-closed-immersion]. Use the small pro-etale sites in the fixed universes [def-weil-pbc-proetale-site], sheaves of modules [def-weil-sheaf-of-modules-category], and their unbounded derived categories and cochain complexes [def-weil-abstract-derived-category].\n\nFix a prime $\\ell$ invertible on $X$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $R=\\widehat{\\mathcal O}_{E,X}=\\varprojlim_n(A_{E,n})_X$ [def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients]. Write $r_i$ for restriction, using the canonical coefficient identifications. Let $P\\to M$ and $Q\\to N$ be K-flat flat-term resolutions of arbitrary $M,N\\in D(R)$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], and put $P_n=P\\otimes_R(A_{E,n})_X$ and $Q_n=Q\\otimes_R(A_{E,n})_X$ [def-weil-integral-derived-reduction, def-pur-sheaf-tensor-product].\n\nThe pure-tensor comparisons induce isomorphisms of strict towers of complexes of $R_i$-modules\n$$r_i\\bigl(\\operatorname{Res}_n(P_n\\otimes_{(A_{E,n})_X}Q_n)\\bigr)_n\\cong\\bigl(\\operatorname{Res}_{i,n}((r_iP)_n\\otimes_{(A_{E,n})_{X_i}}(r_iQ)_n)\\bigr)_n.$$\nTheir level maps send $(p\\otimes a)\\otimes(q\\otimes b)$ to $(r_ip\\otimes r_ia)\\otimes(r_iq\\otimes r_ib)$; they commute with the transitions induced by $\\rho_n:A_{E,n+1}\\to A_{E,n}$ in both factors and with all strict tower maps. Here $\\operatorname{Res}_n$ and $\\operatorname{Res}_{i,n}$ read the finite-level complexes through the completed coefficient projections. There are resulting natural isomorphisms in $D(R_i)$\n$$r_i(M\\mathbin{\\widehat\\otimes}^L_{\\mathcal O_E}N)\\cong r_iM\\mathbin{\\widehat\\otimes}^L_{\\mathcal O_E}r_iN$$\nfor the strict-Roos operations [def-pur-integral-derived-operations]. The coefficient object $R$, its section $1$, all finite quotient coefficient units, and their transitions restrict to the corresponding component objects and maps.\n\nFor every finite extension $E\\subset L$ with chosen uniformizer $\\varpi_L$, put $A_{L,m}=\\mathcal O_L/\\varpi_L^m$, $R_L=\\widehat{\\mathcal O}_{L,X}$ and $\\rho^L_m=(\\iota_m)_X\\pi^E_m:R\\to(A_{L,m})_X$ as in [def-weil-integral-scalar-extension]. The complexes $P_{L,m}=P\\otimes_R(A_{L,m})_X$, read as $R_L$-modules through $\\pi^L_m$, have strict tower comparisons\n$$r_i(\\operatorname{Res}^L_mP_{L,m})_m\\cong(\\operatorname{Res}^L_{i,m}(r_iP\\otimes_{R_i}(A_{L,m})_{X_i}))_m.$$\nTheir maps $p\\otimes a\\mapsto r_ip\\otimes r_ia$ commute with every level unit $p\\mapsto p\\otimes1$ and every transition $p\\otimes a\\mapsto p\\otimes\\bar a$, using the same coefficient inclusion $\\iota_m$ and quotient projections. They yield natural isomorphisms in $D(R_L|_{X_i})$\n$$r_i(M\\otimes_{\\mathcal O_E}\\mathcal O_L)\\cong(r_iM)\\otimes_{\\mathcal O_E}\\mathcal O_L,$$\nincluding the specified level maps and transitions. These derived comparisons are those induced by the strict cone maps and are independent of the chosen resolutions; they assert no canonical cone construction in a bare triangulated category. No unramifiedness or completeness of $M,N$ is assumed. All assertions hold for empty components and the empty partition.\n\nTensor products of complexes here use the signed direct-sum total tensor [def-pc-tensor-complex-sheaves]. Strict towers and their morphisms are inverse systems of complexes [def-weil-inverse-system]; scalar restriction has the meaning of [def-pc-sheaf-restrict-scalars].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 3.4.12(4), p. 22; Proposition 3.5.1(3) and Definition 3.5.2, p. 24. Agent finite-clopen strict tensor and integral scalar extension application, returned proof steps 8-9; explicit tower definitions def-pur-integral-derived-operations and def-weil-integral-scalar-extension."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-integral-derived-reduction",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-inverse-system",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-clopen-ringed-module-gluing] to the completed and finite coefficient rings. It identifies $r_iR$ with $R_i$ and $r_i(A_{E,n})_X$ with $(A_{E,n})_{X_i}$, preserving $1$, the projections $\\pi_n$ and coefficient transitions. The final two equivalences of [lem-pur-clopen-total-tensor-kflat-detection], applied to each term and to the whole complex respectively, show that restriction preserves flat terms and K-flatness; by [lem-pur-clopen-unbounded-derived-localization] it preserves quasi-isomorphisms and computes derived restriction. Thus $r_iP\\to r_iM$ and $r_iQ\\to r_iN$ are admissible resolutions with exactly the hypotheses required in the component operation definitions. The Lean proofs of exactness and resolving-class preservation use the proved ring-isomorphism tensor-transport theorem for the normalized completed coefficient isomorphism. Exactness uses its underlying equivalence; flatness and K-flatness use its flat_iff and kflat_iff clauses.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "lem-pur-clopen-unbounded-derived-localization",
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "For $a=\\pi_n:R\\to B_n=(A_{E,n})_X$, [lem-pur-clopen-derived-scalar-compositor] supplies the $B_{i,n}$-linear chain isomorphisms $\\beta^P_n:r_i(P\\otimes_R B_n)\\cong r_iP\\otimes_{R_i}B_{i,n}$ and $\\beta^Q_n$, with the specified formula $p\\otimes a\\mapsto r_ip\\otimes r_ia$. The coefficient projections were identified in step 1. The definition [def-pc-sheaf-restrict-scalars] leaves underlying sheaves and maps unchanged: both restricted $R_i$-actions are $u\\cdot z=\\pi_{i,n}(u)z$. Therefore these are also isomorphisms after the indicated scalar restrictions. Substituting $a=1$ shows directly that $\\beta^P_n r_i(p\\mapsto p\\otimes1)$ is $r_ip\\mapsto r_ip\\otimes1$.",
+   "uses": [
+    "lem-pur-clopen-derived-scalar-compositor",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "Apply $b_{i,P_n,Q_n}$ of [lem-pur-clopen-total-tensor-kflat-detection] with coefficient ring $B_n$, then compose with $\\beta^P_n\\otimes\\beta^Q_n$ from step 2. The cited statement identifies its map on each $(p,q)$ direct-sum summand with $a_{i,P_n^p,Q_n^q}$ and gives the differential $r_i(dx)\\otimes r_iy+(-1)^p r_ix\\otimes r_i(dy)$. Thus the composite is a chain isomorphism $c_n$ from the restricted level $\\operatorname{Res}_n\\operatorname{Tot}(P_n\\otimes_{B_n}Q_n)$ to the stated component level for arbitrary unbounded $P_n,Q_n$; no K-flatness assumption on these finite-level complexes is needed for this application. On local sheafified pure tensors it sends $(p\\otimes a)\\otimes(q\\otimes b)$ to $(r_ip\\otimes r_ia)\\otimes(r_iq\\otimes r_ib)$. The node supplies naturality on all chain maps and the explicit signed symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$. Scalar restriction preserves this chain isomorphism by the action calculation of step 2 [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "The transition in [def-pur-integral-derived-operations] takes $(p\\otimes a)\\otimes(q\\otimes b)$ to $(p\\otimes\\rho_n(a))\\otimes(q\\otimes\\rho_n(b))$. Either order around its square with $c_{n+1}$ and $c_n$ gives $(r_ip\\otimes\\rho_{i,n}(r_ia))\\otimes(r_iq\\otimes\\rho_{i,n}(r_ib))$, since $r_i\\rho_n=\\rho_{i,n}$ by step 1. These equalities on pure tensors determine equal sheaf maps by the bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal], applied successively, and then determine maps out of each total direct sum. Thus $(c_n)_n$ is an isomorphism of strict towers. Naturality of the chain tensorator and the scalar comparisons gives the same squares for maps of $P,Q$. More generally it is natural for all strict tower maps: write the component level map as $c'_n r_i(f_n)c_n^{-1}$; its transition equation is the restriction of $f_nt_n=t'_nf_{n+1}$.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "For $E\\subset L$, use exactly the ring maps $\\rho^L_m=(\\iota_m)_X\\pi^E_m$ in [def-weil-integral-scalar-extension]. On an object of the component site the restricted constant presheaf map is still $\\iota_m$; functorial sheafification, from the unique factorization in [def-weil-pbc-sheafification], in the constant-sheaf construction [def-weil-pbc-constant-sheaf] gives its component constant-sheaf map. The projection compatibility in step 1 therefore identifies $r_i\\rho^L_m$ with $(\\iota_m)_{X_i}\\pi^E_{i,m}$. Apply [lem-pur-clopen-derived-scalar-compositor] to this map and $P$: its chain isomorphism $d_m$ sends $p\\otimes a$ to $r_ip\\otimes r_ia$. Applying the coefficient clause of [lem-pur-clopen-ringed-module-gluing] to $L$ identifies $r_iR_L$ with $\\widehat{\\mathcal O}_{L,X_i}$ and $r_i(A_{L,m})_X$ with $(A_{L,m})_{X_i}$, preserving $1$, the projections $\\pi^L_m$ and the transitions $(A_{L,m+1})_X\\to(A_{L,m})_X$. Hence both $R_L|_{X_i}$-actions after scalar restriction are through $\\pi^L_{i,m}$ [def-pc-sheaf-restrict-scalars]. Both paths in the unit square give $r_ip\\otimes1$; both paths in the transition square give $r_ip\\otimes\\overline{r_ia}$, because restriction preserves the quotient maps. The same bilinear universal property as step 4 proves equality of the maps. These $d_m$ therefore give the required natural strict tower isomorphism, including units, for ramified as well as unramified extensions.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-integral-scalar-extension",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-pur-clopen-derived-scalar-compositor",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "For the exact additive restriction functor, prove preservation of countable products by composing with the faithful module-to-presheaf forgetful functor, which reflects limits. The clopen site restriction commutes with the corresponding presheaf product and the completed coefficient scalar transport is an equivalence. Apply the additive Roos comparison of [lem-pur-roos-additive-comparison], using the strict shifted-cone coordinate formulas of [lem-pur-injective-tower-roos-shifts]. Its first and second projections give exactly RoosNormalized for the identity tower comparison. Thus the comparison is a natural isomorphism before localization, including unbounded towers.",
+   "uses": [
+    "lem-pur-roos-additive-comparison",
+    "lem-pur-injective-tower-roos-shifts",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "Localize step 6. The specified representative comparisons of [lem-pur-integral-operations-well-defined] and [lem-weil-integral-scalar-extension-well-defined] identify both sides with the respective derived operation functors on flat-term K-flat inputs. Step 1 gives the admissible component resolutions. To justify naturality beyond such inputs, apply [lem-sc-nattrans-from-resolving-class] on the homotopy category, with $W$ the quasi-isomorphisms, $P$ the flat-term K-flat objects, and $A,B$ the two already defined derived functors precomposed with localization. Here $W$ admits right fractions by [lem-pc-quasi-isomorphisms-multiplicative-system], every object receives a $W$-map from $P$ by [lem-pc-kflat-resolution], and $A$ inverts $W$. The chain naturality of steps 2-6 gives the hypothesis on maps between $P$-objects. For tensor apply this first in one variable, then the other; the naturality equations in the second variable persist after the first extension because they hold on representatives and can be conjugated by the invertible images of their resolution maps. The inverse chain comparisons extend too; these conjugation equations show their two composites are identities. Finally [lem-weil-pbc-localization-universal-property](2) descends these natural isomorphisms from homotopy categories to derived categories, in each variable. The same equations force compatibility with any resolution computation comparison. Thus the derived comparisons are natural and independent of resolutions, retaining the coefficient and unit maps already calculated. This construction localizes strict cone maps only.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  },
+  {
+   "text": "Empty components have zero module, complex and derived categories by [lem-pur-clopen-ringed-module-gluing] and [lem-pur-clopen-unbounded-derived-localization]. Every displayed map there is the unique map and is an isomorphism. If $I$ is empty, the covering hypothesis forces $X=\\varnothing$, so the same applies globally. No preceding step assumes boundedness or completeness of $M,N$; the only resolution hypotheses used are K-flatness, flat terms and a quasi-isomorphism, and the coefficient maps of step 5 require no unramifiedness.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-clopen-unbounded-derived-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-pur-clopen-derived-scalar-compositor",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-integral-derived-operations",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-pur-roos-additive-comparison",
+  "lem-pur-injective-tower-roos-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3), Definition 3.5.2; agent strict-clopen calculation using the specified operation models. Q5: exactness and admissibility proved via clopen detection and tensor transport along the coefficient isomorphism. Q5: the normalized Roos restriction is proved directly from the additive Roos comparison and its explicit shifted-cone coordinates; countable-product preservation is checked through the module-to-presheaf forgetful functor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Clopen restriction identifies strict towers defining completed integral tensor products and ramified scalar extension with component towers including quotient level maps and coefficient units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {T : Type u_4} [inst_5 : CommRing T] [inst_6 : Algebra R T]\\n  [inst_7 : Algebra S T] [IsScalarTower R S T],\\n  Function.Bijective ⇑(TensorProd\", \"doc\": \"Given a scalar tower $ R \\to S \\to T $ of commutative rings with compatible algebra structures, if the integral closure maps $ \\\\text{IntegralClosure}(R,S,B) $ and $ \\\\text{IntegralClosure}(S,T,S \\\\otimes_\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"TensorProduct.toIntegralClosure\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (B : Type u_4) →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                TensorProduct R S ↥(integralClosure R B) →ₐ[S] ↥(integral\", \"doc\": \"The algebra homomorphism from $ S \\\\otimes_R \\\\overline{B}^R $ to $ \\\\overline{S \\\\otimes_R B}^S $, where $ \\\\overline{B}^R $ denotes the integral closure of $ R $ in $ B $, and $ \\\\overline{S \\\\otimes_R B}^\"}\n  {\"name\": \"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (x : TensorProduct R S p.ResidueField), ∃ r ∉ p, ∃ s, r • x = s ⊗ₜ[R] 1\", \"doc\": \"For any element $ x $ in the tensor product $ S \\\\otimes_R \\\\text{ResidueField}(p) $, there exists an element $ r \\\\notin p $ and an element $ s \\\\in S $ such that $ r \\\\cdot x = s \\\\otimes 1 $.\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.FormallyUnramified.elem\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → [Algebra.FormallyUnramified R S] → [Algebra.EssFiniteType R S] → TensorProduct R S S\", \"doc\": \"An element in the tensor product $ S \\\\otimes_R S $ that arises in the characterization of formally unramified algebras. This element is constructed via an existential choice from the proof that $ S $ \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (ι : Type u_4) [Finite ι],\\n  Function.Bijective ⇑(AdicCompletion.ofTensorProduct I (ι → R))\", \"doc\": \"Given a finite index type $\\\\iota$ and a commutative ring $R$ with ideal $I$, the canonical linear map from the tensor product of the $I$-adic completion of $R$ with the product module $\\\\iota \\\\to R$ to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion of finite modules, restriction composition, and sheaf limits do not compare these completed derived tensor and ramified coefficient-extension strict towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\", \"restrict\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion of finite modules, restriction composition, and sheaf limits do not compare these completed derived tensor and ramified coefficient-extension strict towers."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|disjoint).*(completedTensor|scalarExtension|tensor)|roos.*(tensor|scalar)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"132\", \"text\": \"linearly disjoint, linearly independent, tensor product\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean\", \"line\": \"313\", \"text\": \"    Disjoint (LinearMap.range (ι R : M →ₗ[R] TensorAlgebra R M))\"}\n  {\"file\": \"Mathlib/LinearAlgebra/LinearDisjoint.lean\", \"line\": \"128\", \"text\": \"linearly disjoint, linearly independent, tensor product\"}\n  {\"file\": \"Mathlib/RingTheory/LinearDisjoint.lean\", \"line\": \"130\", \"text\": \"linearly disjoint, linearly independent, tensor product\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion of finite modules, restriction composition, and sheaf limits do not compare these completed derived tensor and ramified coefficient-extension strict towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves to clopen components commutes naturally with completed tensor products and integral coefficient extension computed as Roos cones of strict quotient towers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion f] [IsOpenImmersion g] : restrictFunctor (f ≫ g) ≅ restrictFunctor g ⋙ restrictFunctor f\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.EqualizerProducts\", \"type\": \": res F U ≫ leftRes F U = res F U ≫ rightRes F U\", \"doc\": \"For a presheaf $F$ on a topological space and an open cover $\\\\{U_i\\\\}$, the composition of the restriction morphism $F(\\\\bigcup U_i) \\\\to \\\\prod F(U_i)$ with the left restriction morphism to intersections\"}\n  {\"name\": \"TopCat.Presheaf.SheafConditionEqualizerProducts.res_π\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.EqualizerProducts\", \"type\": \"(i : ι) : res F U ≫ limit.π _ ⟨i⟩ = F.map (Opens.leSupr U i).op\", \"doc\": \"For a presheaf $ F $ on a topological space $ X $ with values in a category $ \\\\mathcal{C} $ having products, and for any family of open subsets $ \\\\{U_i\\\\}_{i \\\\in \\\\iota} $, the composition of the restri\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.restrict\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"{U : TopCat} (X : SheafedSpace C) {f : U ⟶ (X : TopCat)} (h : IsOpenEmbedding f) : SheafedSpace C\", \"doc\": \"Given a sheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U$ of $X$'s underlying topological space, and an open embedding $f: U \\\\to X$, this constructs the restricted sheafed space over\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib.Condensed.Light.Monoidal\", \"type\": \": MonoidalClosed (Sheaf (coherentTopology LightProfinite.{u}) (ModuleCat.{u} R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"SheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": (restrictScalars.{v} α).Additive\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, the restriction of scalars functor from the category of sheaves\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion of finite modules, restriction composition, and sheaf limits do not compare these completed derived tensor and ramified coefficient-extension strict towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict K flat resolutions to an open and closed component and compare tensor reduction systems and change of coefficient rings before taking the shifted one minus shift cone",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.LeftResolution.chainComplexXIso\", \"module\": \"Mathlib/Algebra/Homology/LeftResolution/Basic\", \"type\": \"{A : Type u_1} →\\n  {C : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_2} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_1} A] →\\n        {ι : CategoryTheory.Functor C A} →\\n          (Λ : CategoryTheory.Abelian.LeftResolution ι) →\\n            (X : A) →\\n              [inst_2 : ι.Full] →\", \"doc\": \"For each natural number $ n $, the object at index $ n + 2 $ in the chain complex associated with a left resolution $ \\\\Lambda $ is isomorphic to the image under the resolution functor $ F $ of the ker\"}\n  {\"name\": \"CochainComplex.cm5b.i\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.EnoughInjectives C] →\\n        {K L : CochainComplex C ℤ} →\\n          (K ⟶ L) → (K ⟶ CochainComplex.mappingCone (CategoryTheory.CategoryStruct.id (CochainComplex\", \"doc\": \"A morphism from a cochain complex $ K $ to the direct sum of the mapping cone of the identity morphism on its injective replacement complex $ I K $ (with zero differentials) and another complex $ L $,\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"CategoryTheory.Abelian.LeftResolution.chainComplexMap\", \"module\": \"Mathlib/Algebra/Homology/LeftResolution/Basic\", \"type\": \"{A : Type u_1} →\\n  {C : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_2} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_1} A] →\\n        {ι : CategoryTheory.Functor C A} →\\n          (Λ : CategoryTheory.Abelian.LeftResolution ι) →\\n            {X Y : A} →\\n              (X ⟶ Y) →\\n       \", \"doc\": \"Given a left resolution $\\\\Lambda$ of a full and faithful functor $\\\\iota: \\\\mathcal{C} \\\\to \\\\mathcal{A}$ in an abelian category $\\\\mathcal{A}$, and a morphism $f: X \\\\to Y$ in $\\\\mathcal{A}$, this construct\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"CategoryTheory.Abelian.LeftResolution.chainComplex\", \"module\": \"Mathlib/Algebra/Homology/LeftResolution/Basic\", \"type\": \"{A : Type u_1} →\\n  {C : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_2} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_1} A] →\\n        {ι : CategoryTheory.Functor C A} →\\n          CategoryTheory.Abelian.LeftResolution ι →\\n            A →\\n              [ι.Full] →\\n                [ι.F\", \"doc\": \"The chain complex in category $\\\\mathcal{C}$ indexed by natural numbers $\\\\mathbb{N}$, constructed from a left resolution $\\\\Lambda$ of a full and faithful functor $\\\\iota: \\\\mathcal{C} \\\\to \\\\mathcal{A}$ in\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [X.IsStrictlyLE n],\\n  ∃ X',\\n    ∃ (_ : X'.IsStrictlyLE n),\\n      ∃ s,\\n        ∃ \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic completion of finite modules, restriction composition, and sheaf limits do not compare these completed derived tensor and ramified coefficient-extension strict towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open and closed component commutes with towers defining completed derived tensor products and integral scalar extension",
+   "results": "8 hits: Algebra.TensorProduct.map_restrictScalars_comp_includeRight, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProduct_tmul, TensorProduct.toIntegralClosure, AdicCompletion.ofTensorProduct, TensorProduct.toIntegralClosure_bijective_of_tower, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary module completion, monoidal sheaves, or scalar restriction; none states the clopen strict quotient-tower/Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|restrict).*(completedTensor|roos|scalarExtension)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary module completion, monoidal sheaves, or scalar restriction; none states the clopen strict quotient-tower/Roos comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves to a clopen component preserves completed derived tensor product computed by a cone of one minus shift on quotient towers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict_obj, ModuleCat.Tilde.toOpen, AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.res_apply, SheafOfModules.restrictScalars, ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary module completion, monoidal sheaves, or scalar restriction; none states the clopen strict quotient-tower/Roos comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\", \"restrict\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary module completion, monoidal sheaves, or scalar restriction; none states the clopen strict quotient-tower/Roos comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal component restriction on sheaves commutes with derived change of rings and the homotopy inverse limit of tensor reductions including units and transition maps",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.ihomPoints_symm_comp, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary module completion, monoidal sheaves, or scalar restriction; none states the clopen strict quotient-tower/Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|tensorObj|tensor).*",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean. Directory: Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits concern ordinary module completion, monoidal sheaves, or scalar restriction; none states the clopen strict quotient-tower/Roos comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-roos-integral-descent",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion of def-pur-section-invariant, expanded finite-clopen integral passage; returned lem-pur-clopen-roos-integral-descent steps 8-9 and operations part of step 10.",
+   "via": [
+    "lem-pur-clopen-roos-integral-descent",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-completed-operation-towers",
+  "worker": "stage1",
+  "summary": "No new nodes: assemble existing clopen coefficient, total-tensor, scalar-compositor and strict-Roos statements, writing out the quotient, unit and semilinear transition squares and descending by the existing well-definedness results. Added only notation/definition links to the statement. No hypotheses or conclusions changed. Repair after dependency statement change: revalidated all current cited statements, made the exact flatness/K-flatness clauses explicit in step 1, and rewrote step 3 around the current b_{i,P_n,Q_n} chain comparison and signed formulas; replaced its stale citation quote.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant: finite-clopen integral passage, through lem-pur-finite-clopen-derived-decomposition and lem-pur-clopen-roos-integral-descent, operations clauses (returned steps 8-9).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor universal property; used as a black box, not as a replacement for the clopen route."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic well-definedness of the specified strict-Roos operation; used as a black box, not as a replacement for the clopen route."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Generic well-definedness of the specified strict-Roos operation; used as a black box, not as a replacement for the clopen route."
+   },
+   {
+    "node": "lem-sc-nattrans-from-resolving-class",
+    "why": "Generic resolving-class naturality or K-flat localization tool; used as a black box, not as a replacement for the clopen route."
+   },
+   {
+    "node": "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "why": "Generic resolving-class naturality or K-flat localization tool; used as a black box, not as a replacement for the clopen route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolving-class naturality or K-flat localization tool; used as a black box, not as a replacement for the clopen route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization of natural transformations; used as a black box, not as a replacement for the clopen route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-636e487e8",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-636e487e8 (reviewer sub-agent of L); spot-checked: Read the whole item: 8 steps, no new nodes, statement the same as live except for one added definition-link sentence, and every cited statement is identical to live. I checked Bhatt–Scholze Def 3.4.10, Lemma 3.4.12(4), Prop 3.5.1(3) and Def 3.5.2 as context. The proof is agent-written against the two strict-Roos model definitions: rho_m=(iota_m)_X pi^E_m, Res along pi^L_m, and the coefficient categories are D(O_E-hat) and D(O_L-hat). Step 1: gluing coefficient clause, plus flat and K-flat detection (both directions, unbounded), plus quasi-isomorphism detection, give admissible component resolutions. Step 2: compositor chain clause with a=pi_n, unit by s=1. Step 3: b_{i,P_n,Q_n} composed with beta tensor beta; signed differential and arbitrary unbounded complexes checked. Step 4: transitions agree on double pure tensors and are determined by the bilinear universal property applied twice. Step 5: ramified case is fine because varpi_E^m O_L is inside varpi_L^m O_L, and the constant-sheaf map is determined by the uniqueness of sheafification. Step 6: alpha composed with product of c_n intertwines 1-s; cone differential checked. Step 7: resolving-class extension, right fractions, K-flat resolutions, then localization universal property (2). Step 8: empty and zero cases. Edge cases checked: I empty, |I|=1, L=E, zero M and N. Accepted tool_uses: the generic homological tools and the two well-definedness lemmas of the operations themselves. No SGA, no cycle, no re-split note; live is still unsplit. One fault (C1), repaired: step 5 uses r_iR_L = O_L-hat on X_i, and r_i(A_{L,m})_X with pi^L_m and the L-transitions, without citing lem-pur-clopen-ringed-module-gluing, because step 1 applies it only to E. The fix adds that citation and sentence to step 5 (already in proof_deps; step is 1426 characters).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClopenCompletedOperationTowers",
+  "declaration": "WeilConjectures.ClopenCompletedOperations.clopen_completed_operation_towers",
+  "declarations": [
+   "WeilConjectures.ClopenCompletedOperations.productMap",
+   "WeilConjectures.ClopenCompletedOperations.RoosNormalized",
+   "WeilConjectures.ClopenCompletedOperations.roosMap",
+   "WeilConjectures.ClopenCompletedOperations.finiteIso",
+   "WeilConjectures.ClopenCompletedOperations.ringIso",
+   "WeilConjectures.ClopenCompletedOperations.restriction",
+   "WeilConjectures.ClopenCompletedOperations.restrictionAdditive",
+   "WeilConjectures.ClopenCompletedOperations.restriction_exact",
+   "WeilConjectures.ClopenCompletedOperations.restrictionLimits",
+   "WeilConjectures.ClopenCompletedOperations.restrictionColimits",
+   "WeilConjectures.ClopenCompletedOperations.cxRestriction",
+   "WeilConjectures.ClopenCompletedOperations.dRestriction",
+   "WeilConjectures.ClopenCompletedOperations.towerRestriction",
+   "WeilConjectures.ClopenCompletedOperations.goodRestriction_property",
+   "WeilConjectures.ClopenCompletedOperations.goodRestriction",
+   "WeilConjectures.ClopenCompletedOperations.tensorTower",
+   "WeilConjectures.ClopenCompletedOperations.localizationIso",
+   "WeilConjectures.ClopenCompletedOperations.roos_restriction",
+   "WeilConjectures.ClopenCompletedOperations.tensorPure",
+   "WeilConjectures.ClopenCompletedOperations.tensorRoosIso",
+   "WeilConjectures.ClopenCompletedOperations.tensorModelComparison",
+   "WeilConjectures.ClopenCompletedOperations.TensorComparison",
+   "WeilConjectures.ClopenCompletedOperations.scalarTower",
+   "WeilConjectures.ClopenCompletedOperations.scalarRoosIso",
+   "WeilConjectures.ClopenCompletedOperations.scalarModelComparison",
+   "WeilConjectures.ClopenCompletedOperations.ScalarComparison",
+   "WeilConjectures.ClopenCompletedOperations.clopen_completed_operation_towers"
+  ],
+  "file": "lean/Sheaf/Paper/ClopenCompletedOperationTowers.lean",
+  "statement": "theorem clopen_completed_operation_towers : (∀ i : I, TensorComparison X I Xi j hd hc l hl E i) ∧ (∀ (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (i : I), ScalarComparison X I Xi j hd hc l hl E L ι i)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97cb16949",
+  "group": "NE",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the 17 stmt_dep nodes are identical to live; lean.statement verbatim; declarations match the file. Node clauses match the Lean: finite disjoint clopen partition (hd, hc); prime l invertible on X; E finite over Q_l; restriction = clopenModuleRestriction then restrictScalars (ringIso.inv), with ringIso/finiteIso the uniquely pinned .choose of clopen_integral_coefficients. Admissible resolutions = integralOperationsGoodComplex, unbounded, via named goodRestriction_property. Tensor tower = functor iso pinned by the double pure-tensor formula on every summand; cone map pinned on both coordinates to piComparison by RoosNormalized; derived iso is a bifunctor iso pinned on representatives to the localized cone map. Scalar extension holds for all finite L and all embeddings with the existing integralScalarRho; tensor and unit formulas plus the same cone/derived pinning. Edge cases covered: I empty, empty component, n=0, L=E, ramified L. H5/H6/H8/H9 clean. integralCompletedTensor is the node's strict-Roos model, publicly re-exported by the recorded module: accepted. Advisories: decls from nodes outside stmt_deps; redundant unused roos_restriction; compositor proof_dep module not imported; brief second-reading section. No compile (no file changed); worker reports clean compiles in 40.6 s and 33.8 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T033939-L-179687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

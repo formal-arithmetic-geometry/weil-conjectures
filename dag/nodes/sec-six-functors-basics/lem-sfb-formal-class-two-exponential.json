@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-formal-class-two-exponential",
+ "kind": "statement",
+ "title": "Formal exponential factorization for elements with central pairwise brackets",
+ "statement": "Let $A$ be any associative unital $\\mathbf Q$-algebra, not assumed commutative. Write $A[[s,t]]$ for formal power series in central commuting indeterminates, with coefficientwise addition and Cauchy multiplication. For a series $Z$ with zero constant coefficient set $\\exp(Z)=\\sum_{n\\geq0}Z^n/n!$; each coefficient is a finite sum. Fix $r\\geq0$ and $Z_1,\\ldots,Z_r\\in(s,t)A[[s,t]]$. Use the commutator Lie algebra [def-wf-lie-algebra] on this associative algebra of series, with $[X,Y]=XY-YX$ (the alternating and Jacobi identities follow by expanding products). Assume $[[Z_i,Z_j],Z_k]=0$ for every $1\\leq i,j,k\\leq r$. Then\n$$\\exp\\!\\left(\\sum_{i=1}^rZ_i\\right)=\\left(\\prod_{i=1}^r\\exp(Z_i)\\right)\\exp\\!\\left(-\\frac12\\sum_{1\\leq i<j\\leq r}[Z_i,Z_j]\\right),$$\nwhere the product is in increasing index order. This includes $r=0$, with empty sum zero and empty product one.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153), printed p.510, motivates formal root exponentials but does not state this identity. Agent-stated class-two formal exponential identity. WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapter II, Campbell--Hausdorff series, its central-bracket specialization."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-sfb-bivariate-formal-exponential"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=A[[s,t]]$, $X_i=Z_i$, $S=\\sum_iX_i$, $C_{ij}=X_iX_j-X_jX_i$ and $C=\\sum_{i<j}C_{ij}$. All sums over $i$ below run from $1$ to $r$. The bracket notation is that of [def-wf-lie-algebra]; we use its associative commutator example, with the bracket explicitly specified in the item. The hypothesis says precisely $C_{ij}X_k=X_kC_{ij}$. Thus $C$ commutes with every $X_k$, and consequently with every power of $X_k$ and with every coefficient of the series $E_k$ defined next: the power assertion follows by induction, and the coefficient assertion by rational linearity. We do not assume these commutators commute with all of $B$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: notation and the exact consequence of the triple-bracket hypothesis"
+   }
+  },
+  {
+   "text": "Adjoin one more central variable $u$ and work in $B[[u]]$. Define\n$$E_i(u)=\\sum_{n\\geq0}\\frac{u^nX_i^n}{n!},\\qquad E_S(u)=\\sum_{n\\geq0}\\frac{u^nS^n}{n!},\\qquad Q(u)=\\sum_{n\\geq0}\\frac{u^{2n}(-C/2)^n}{n!}.$$\nThese are well-defined series in $u$, without evaluating $u$ anywhere. Write $D(\\sum a_nu^n)=\\sum(n+1)a_{n+1}u^n$. This operator is additive and obeys $D(FG)=(DF)G+F(DG)$ even though $B$ need not be commutative: at degree $n$, the two sums on the right contain $a_p b_q$ with $p+q=n+1$, weighted respectively by $p$ and $q$ (the boundary terms of weight zero may be inserted); their sum is $(n+1)\\sum_{p+q=n+1}a_p b_q$, the coefficient on the left. The order $a_p b_q$ never changes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: the auxiliary variable and a direct finite-sum proof of the noncommutative product rule"
+   }
+  },
+  {
+   "text": "The defining coefficients give $DE_i=X_iE_i$ and $DE_S=SE_S$: at degree $n$, $(n+1)X_i^{n+1}/(n+1)!=X_iX_i^n/n!$, and the same calculation applies to $S$. Also $DQ=-uCQ$. Indeed both sides have zero coefficients in even degrees, and at degree $2n-1$ for $n\\geq1$ the required equality is\n$$\\frac{2n(-C/2)^n}{n!}=-C\\,\\frac{(-C/2)^{n-1}}{(n-1)!}.$$\nEvery $E_i$, $E_S$ and $Q$ has constant coefficient $1$. By step 1, $C$ commutes coefficientwise with each $E_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: coefficient computations of the three derivatives and initial values"
+   }
+  },
+  {
+   "text": "For $i<j$ we claim\n$$X_i^nX_j=X_jX_i^n+nC_{ij}X_i^{n-1}\\quad(n\\geq1).$$\nAt $n=1$ this is the definition of $C_{ij}$. If it holds at $n$, multiplication on the left by $X_i$, followed by $X_iX_j=X_jX_i+C_{ij}$ and $X_iC_{ij}=C_{ij}X_i$, gives\n$$X_i^{n+1}X_j=X_jX_i^{n+1}+C_{ij}X_i^n+nC_{ij}X_i^n.$$\nThis proves the induction. Compare coefficients of $u^n$ and divide by $n!$; at $n=0$ both sides are $X_j$. We obtain\n$$E_iX_j=(X_j+uC_{ij})E_i.$$\nHere the shifted term at degree $n\\geq1$ is $C_{ij}X_i^{n-1}/(n-1)!$, so no rearrangement of an infinite sum is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: the explicit power induction giving the elementary commutation calculation"
+   }
+  },
+  {
+   "text": "Let $P_j=E_1\\cdots E_{j-1}$, including $P_1=1$. For fixed $j$, move $X_j$ through this prefix using step 4, beginning with $E_{j-1}X_j$. Each correction $C_{ij}$ commutes with every earlier $E_k$ by the hypothesis and the coefficient argument of step 1. Explicitly, if\n$$E_m\\cdots E_{j-1}X_j=(X_j+u\\sum_{i=m}^{j-1}C_{ij})E_m\\cdots E_{j-1},$$\nleft multiplication by $E_{m-1}$ and step 4 add exactly $uC_{m-1,j}$ to the sum. The base case is the empty suffix, where the sum is zero. Descending induction therefore gives\n$$P_jX_j=(X_j+u\\sum_{i<j}C_{ij})P_j.$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: the prefix induction, with its base case and the commuting correction terms"
+   }
+  },
+  {
+   "text": "Set $F=E_1\\cdots E_r$, with $F=1$ if $r=0$. Repeatedly apply the product rule of step 2 and $DE_j=X_jE_j$ from step 3. The summand where $E_j$ is differentiated is $P_jX_jE_j\\cdots E_r$. Substitute step 5 into this summand and add over $j$:\n$$DF=\\sum_j(X_j+u\\sum_{i<j}C_{ij})F=(S+uC)F.$$\nThe finite product rule itself follows by induction on $r$ from the two-factor rule, with $D1=0$. This also verifies the displayed formula at $r=0$, where $S=C=0$. Since every factor commutes with $C$, so does $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: differentiate the ordered product and identify the sign of the bracket sum"
+   }
+  },
+  {
+   "text": "Put $H=FQ$. Using the two derivatives already computed and $FC=CF$, the product rule gives\n$$DH=(S+uC)FQ-uFCQ=SH.$$\nAlso $H(0)=1$. Write $H=\\sum h_nu^n$. Its differential equation is exactly $(n+1)h_{n+1}=Sh_n$ for $n\\geq0$. Starting at $h_0=1$, induction and division by the nonzero rational integer $n+1$ give $h_n=S^n/n!$. This division is valid in every unital $\\mathbf Q$-algebra; no integral-domain hypothesis is used. Consequently\n$$E_S(u)=\\bigl(E_1(u)\\cdots E_r(u)\\bigr)Q(u)\\quad\\text{in }B[[u]].$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: cancel the correction derivative and solve the explicit coefficient recurrence"
+   }
+  },
+  {
+   "text": "It remains to justify the specialization $u=1$ in this particular identity. A product of $n$ series in $(s,t)B$ has zero coefficient in every total degree less than $n$: in its Cauchy product every factor contributes positive total degree. Thus $X_i^n$ and $S^n$ have this bound, while $C^n$ has zero coefficients below total degree $2n$, since each $C_{ij}$ is a difference of products of two such series. For fixed $a,b\\geq0$, taking the coefficient of $s^at^b$ in each of $E_i,E_S,Q$ therefore gives a polynomial in $u$ of degree at most $a+b$. The same holds for their finite products: split $(a,b)$ among the finitely many factors in the Cauchy formula, and add the respective bounds on the $u$ degrees. Hence step 7 gives an equality of polynomials in the central variable $u$ with coefficients in $A$, separately at every $(a,b)$. Evaluation at $u=1$ preserves finite sums and ordered products of these polynomials. The resulting coefficients are precisely those of $\\exp(S)$, $\\exp(X_i)$ and $\\exp(-C/2)$, respectively, by their defining finite coefficient sums. Equality for every $(a,b)$ proves the formula in the item. When $r=0$ it reads $\\exp(0)=1\\cdot\\exp(0)=1$, and when $r=1$ the correction is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), printed p.510, motivation only; agent-supplied formal coefficient argument: finite coefficient specialization, rather than evaluation of an arbitrary u-adic series"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153), printed p.510, motivates formal exponentials but supplies no Campbell--Hausdorff proof. The complete noncommutative coefficient and differential-recurrence proof is supplied by Q41; Bourbaki Chapter II remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"exp\", Commute",
+   "results": "{\"t\": \"2026-10-23T22:59:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"exp\\\", Commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"add_pow_expChar_of_commute\", \"sub_pow_expChar_of_commute\", \"add_pow_expChar_pow_of_commute\", \"sub_pow_expChar_pow_of_commute\", \"add_pow_eq_mul_pow_add_pow_div_expChar_of_commute\", \"sub_pow_eq_mul_pow_sub_pow_div_expChar_of_commute\", \"IsNilpotent.exp_add_of_commute\", \"Commute.exp_left\"], \"digest\": \"d3d191b5603375e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsNilpotent.exp_add_of_commute (RingTheory/Nilpotent/Exp.lean:81) requires commuting nilpotent elements; PowerSeries.exp_mul_exp_eq_exp_add (RingTheory/PowerSeries/Exp.lean:123) has commutative coefficients. NormedSpace.exp_sum_of_commute also requires commuting elements and analytic hypotheses. The stated formal identity permits nonzero central brackets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Baker Campbell Hausdorff exponential identity for nilpotent Lie algebra of class two in formal power series",
+   "results": "{\"t\": \"2026-10-23T22:59:32Z\", \"tool\": \"leansearch\", \"query\": \"Baker Campbell Hausdorff exponential identity for nilpotent Lie algebra of class two in formal power series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNilpotent.exp_mul_exp_neg_self\", \"NormedSpace.exp_hasFPowerSeriesOnBall\", \"NormedSpace.exp_eq_ofScalarsSum\", \"PowerSeries.exp_mul_exp_neg_eq_one\", \"IsNilpotent.exp_neg_mul_exp_self\", \"NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos\", \"PowerSeries.exp_mul_exp_eq_exp_add\", \"NormedSpace.exp_eq_tsum\"], \"digest\": \"6f31810f1c918804\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsNilpotent.exp_add_of_commute (RingTheory/Nilpotent/Exp.lean:81) requires commuting nilpotent elements; PowerSeries.exp_mul_exp_eq_exp_add (RingTheory/PowerSeries/Exp.lean:123) has commutative coefficients. NormedSpace.exp_sum_of_commute also requires commuting elements and analytic hypotheses. The stated formal identity permits nonzero central brackets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl identity exponential x exponential y equals exponential x plus y plus half bracket when double brackets vanish",
+   "results": "{\"t\": \"2026-10-23T22:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl identity exponential x exponential y equals exponential x plus y plus half bracket when double brackets vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_add_of_commute\", \"Commute.exp\", \"IsNilpotent.exp_add_of_commute\", \"NormedSpace.exp_add_of_commute_of_mem_ball\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"Commute.expUnitary_add\", \"Commute.exp_left\", \"Commute.exp_right\"], \"digest\": \"7fd5e018531c0b81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsNilpotent.exp_add_of_commute (RingTheory/Nilpotent/Exp.lean:81) requires commuting nilpotent elements; PowerSeries.exp_mul_exp_eq_exp_add (RingTheory/PowerSeries/Exp.lean:123) has commutative coefficients. NormedSpace.exp_sum_of_commute also requires commuting elements and analytic hypotheses. The stated formal identity permits nonzero central brackets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exponential of sum of noncommuting elements with central pairwise commutators equals product of exponentials times exponential of minus half commutators",
+   "results": "{\"t\": \"2026-10-23T22:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Exponential of sum of noncommuting elements with central pairwise commutators equals product of exponentials times exponential of minus half commutators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_sum_of_commute\", \"NormedSpace.exp_add_of_commute\", \"NormedSpace.exp_add_of_commute_of_mem_ball\", \"Commute.exp\", \"Commute.exp_right\", \"IsNilpotent.exp_add_of_commute\", \"Commute.exp_left\", \"Matrix.exp_sum_of_commute\"], \"digest\": \"08a6e898546afcef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsNilpotent.exp_add_of_commute (RingTheory/Nilpotent/Exp.lean:81) requires commuting nilpotent elements; PowerSeries.exp_mul_exp_eq_exp_add (RingTheory/PowerSeries/Exp.lean:123) has commutative coefficients. NormedSpace.exp_sum_of_commute also requires commuting elements and analytic hypotheses. The stated formal identity permits nonzero central brackets."
+  },
+  {
+   "tool": "grep",
+   "query": "Baker.Campbell|central.*commutator|commutator.*central",
+   "results": "{\"t\": \"2026-10-23T23:02:38Z\", \"tool\": \"grep\", \"query\": \"Baker.Campbell|central.*commutator|commutator.*central\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsNilpotent.exp_add_of_commute (RingTheory/Nilpotent/Exp.lean:81) requires commuting nilpotent elements; PowerSeries.exp_mul_exp_eq_exp_add (RingTheory/PowerSeries/Exp.lean:123) has commutative coefficients. NormedSpace.exp_sum_of_commute also requires commuting elements and analytic hypotheses. The stated formal identity permits nonzero central brackets."
+  },
+  {
+   "tool": "grep",
+   "query": "Baker.Campbell|exp_add|exp.*conj|conj.*exp",
+   "results": "{\"t\": \"2026-10-23T23:02:38Z\", \"tool\": \"grep\", \"query\": \"Baker.Campbell|exp_add|exp.*conj|conj.*exp\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\"], \"digest\": \"fbccfa1dced02b39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsNilpotent.exp_add_of_commute (RingTheory/Nilpotent/Exp.lean:81) requires commuting nilpotent elements; PowerSeries.exp_mul_exp_eq_exp_add (RingTheory/PowerSeries/Exp.lean:123) has commutative coefficients. NormedSpace.exp_sum_of_commute also requires commuting elements and analytic hypotheses. The stated formal identity permits nonzero central brackets."
+  },
+  {
+   "tool": "grep",
+   "query": "derivative_mul|coeff_derivative|derivative_add",
+   "results": "{\"t\": \"2026-10-23T23:42:35Z\", \"tool\": \"grep\", \"query\": \"derivative_mul|coeff_derivative|derivative_add\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Log.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\", \"Mathlib/RingTheory/PowerSeries/Derivative.lean\"], \"digest\": \"1a146dfb2d6a82e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.exp_mul_exp_eq_exp_add at RingTheory/PowerSeries/Exp.lean:123 requires commutative coefficients; IsNilpotent.exp_add_of_commute at RingTheory/Nilpotent/Exp.lean:81 requires commuting nilpotent elements. NormedSpace exponential identities impose analytic hypotheses and commuting inputs. None states the formal central-bracket correction. PowerSeries.derivative at RingTheory/PowerSeries/Derivative.lean:50 also assumes CommSemiring, so the noncommutative product rule is proved directly in step 2."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series exponential factorization with central pairwise commutators in a noncommutative rational algebra",
+   "results": "{\"t\": \"2026-10-23T23:42:36Z\", \"tool\": \"leanfinder\", \"query\": \"Formal power series exponential factorization with central pairwise commutators in a noncommutative rational algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_sum_of_commute\", \"PowerSeries.exp_mul_exp_eq_exp_add\", \"PowerSeries.exp_mul_exp_neg_eq_one\", \"PowerSeries.exp\", \"IsNilpotent.exp_add_of_commute\", \"PowerSeries.exp_pow_sum\", \"IsNilpotent.exp\", \"Matrix.exp_sum_of_commute\"], \"digest\": \"dcda0ac47e3e9519\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.exp_mul_exp_eq_exp_add at RingTheory/PowerSeries/Exp.lean:123 requires commutative coefficients; IsNilpotent.exp_add_of_commute at RingTheory/Nilpotent/Exp.lean:81 requires commuting nilpotent elements. NormedSpace exponential identities impose analytic hypotheses and commuting inputs. None states the formal central-bracket correction. PowerSeries.derivative at RingTheory/PowerSeries/Derivative.lean:50 also assumes CommSemiring, so the noncommutative product rule is proved directly in step 2."
+  },
+  {
+   "tool": "grep",
+   "query": "Baker.Campbell|exp_add_of_commute|exp_mul_exp_eq_exp_add",
+   "results": "{\"t\": \"2026-10-23T23:43:09Z\", \"tool\": \"grep\", \"query\": \"Baker.Campbell|exp_add_of_commute|exp_mul_exp_eq_exp_add\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/PowerSeries/Exp.lean\", \"Mathlib/RingTheory/Nilpotent/Exp.lean\", \"Mathlib/RingTheory/Nilpotent/Exp.lean\", \"Mathlib/RingTheory/Nilpotent/Exp.lean\", \"Mathlib/RingTheory/Nilpotent/Exp.lean\"], \"digest\": \"c17567d450ec653f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.exp_mul_exp_eq_exp_add at RingTheory/PowerSeries/Exp.lean:123 requires commutative coefficients; IsNilpotent.exp_add_of_commute at RingTheory/Nilpotent/Exp.lean:81 requires commuting nilpotent elements. NormedSpace exponential identities impose analytic hypotheses and commuting inputs. None states the formal central-bracket correction. PowerSeries.derivative at RingTheory/PowerSeries/Derivative.lean:50 also assumes CommSemiring, so the noncommutative product rule is proved directly in step 2."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Baker Campbell Hausdorff formula for formal exponentials with central commutator",
+   "results": "{\"t\": \"2026-10-23T23:43:09Z\", \"tool\": \"leansearch\", \"query\": \"Baker Campbell Hausdorff formula for formal exponentials with central commutator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.exp_add_of_commute\", \"Commute.exp\", \"TrivSqZeroExt.exp_def_of_smul_comm\", \"Commute.exp_right\", \"NormedSpace.expSeries\", \"Commute.exp_left\", \"NormedSpace.exp_sum_of_commute\", \"NormedSpace.exp_conj\"], \"digest\": \"7b64f59596d923e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.exp_mul_exp_eq_exp_add at RingTheory/PowerSeries/Exp.lean:123 requires commutative coefficients; IsNilpotent.exp_add_of_commute at RingTheory/Nilpotent/Exp.lean:81 requires commuting nilpotent elements. NormedSpace exponential identities impose analytic hypotheses and commuting inputs. None states the formal central-bracket correction. PowerSeries.derivative at RingTheory/PowerSeries/Derivative.lean:50 also assumes CommSemiring, so the noncommutative product rule is proved directly in step 2."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exp\", Commute",
+   "results": "{\"t\": \"2026-10-23T23:43:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"exp\\\", Commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"add_pow_expChar_of_commute\", \"sub_pow_expChar_of_commute\", \"add_pow_expChar_pow_of_commute\", \"sub_pow_expChar_pow_of_commute\", \"add_pow_eq_mul_pow_add_pow_div_expChar_of_commute\", \"sub_pow_eq_mul_pow_sub_pow_div_expChar_of_commute\", \"IsNilpotent.exp_add_of_commute\", \"Commute.exp_left\"], \"digest\": \"d3d191b5603375e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.exp_mul_exp_eq_exp_add at RingTheory/PowerSeries/Exp.lean:123 requires commutative coefficients; IsNilpotent.exp_add_of_commute at RingTheory/Nilpotent/Exp.lean:81 requires commuting nilpotent elements. NormedSpace exponential identities impose analytic hypotheses and commuting inputs. None states the formal central-bracket correction. PowerSeries.derivative at RingTheory/PowerSeries/Derivative.lean:50 also assumes CommSemiring, so the noncommutative product rule is proved directly in step 2."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl identity exp X exp Y equals exp of X plus Y plus one half bracket in a formal associative algebra",
+   "results": "{\"t\": \"2026-10-23T23:43:10Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl identity exp X exp Y equals exp of X plus Y plus one half bracket in a formal associative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_add_of_commute\", \"IsNilpotent.exp_add_of_commute\", \"NormedSpace.exp_add_of_commute_of_mem_ball\", \"Commute.exp\", \"LieAlgebra.ad_pow_lie\", \"NormedSpace.exp_sum_of_commute\", \"two_nsmul_lie_lmul_lmul_add_eq_lie_lmul_lmul_add\", \"Commute.exp_left\"], \"digest\": \"7d9a4486b8790005\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PowerSeries.exp_mul_exp_eq_exp_add at RingTheory/PowerSeries/Exp.lean:123 requires commutative coefficients; IsNilpotent.exp_add_of_commute at RingTheory/Nilpotent/Exp.lean:81 requires commuting nilpotent elements. NormedSpace exponential identities impose analytic hypotheses and commuting inputs. None states the formal central-bracket correction. PowerSeries.derivative at RingTheory/PowerSeries/Derivative.lean:50 also assumes CommSemiring, so the noncommutative product rule is proved directly in step 2."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-rank-two-straightening",
+  "date": "2026-10-24",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Section 23h, Theorem 23.71, pp.508--509, supplies the normalization assumed here, but not the divided-power identity. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-form construction, rank-two divided-power commutation in types A1 x A1, A2, B2 and G2; or Kostant, Groups over Z (1966), divided-power straightening calculations. Supporting calculation: Section 23h, equation (153), printed p.510, motivates formal root exponentials but does not state this identity. Agent-stated class-two formal exponential identity. WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapter II, Campbell--Hausdorff series, its central-bracket specialization.",
+   "via": [
+    "lem-sfb-chevalley-rank-two-straightening",
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-formal-class-two-exponential",
+  "worker": "stage1",
+  "summary": "Kept the statement and its only statement dependency. Supplied eight elementary coefficient steps: product rule in noncommutative formal series, derivatives, two explicit commutation inductions, ordered-product differential equation, correction cancellation, coefficient recurrence, and finite specialization. No new nodes are needed: all auxiliary calculations are written out rather than promoted to nodes. Read Milne equation (153), the current blueprint route, the cited Lie-algebra statement, and local Mathlib candidates. Preserved all existing source and search records; added only searches actually run by Q41.",
+  "blueprint": "The nearest blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports; retain the inherited from/via chain. This descendant supplies the class-two identity used in step 3 of lem-sfb-chevalley-rank-two-straightening, below the admissible-lattice and root-datum prerequisites of det-thm-sf-ctf-stability-direct-images (3). No unit-level route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-a714c39d6",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-a714c39d6 (reviewer sub-agent of L); spot-checked: Shape is clean: one commit with the item and its report, which has a Review by Q41. The delivery adds no new nodes. No repair note exists for this item, so the 2026-10-21 re-split rules do not apply. The statement, stmt_deps [def-wf-lie-algebra], source, chapter/unit and blueprint chain are unchanged, and proof_deps equals the union of uses. I checked all 8 elementary steps by hand. (1) The triple-bracket hypothesis is exactly C_ij X_k = X_k C_ij, extended to powers and coefficients; it is never treated as centrality in B. (2) The noncommutative Leibniz rule for D on B[[u]] keeps factor order. (3) DE=XE, and DQ=-uCQ checked at degree 2n-1. (4) The induction X_i^nX_j = X_jX_i^n + nC_ij X_i^{n-1} gives E_iX_j = (X_j+uC_ij)E_i. (5) Descending prefix induction, with the correction moved through E_{m-1} by a hypothesis instance. (6) DF=(S+uC)F and FC=CF. (7) D(FQ)=S·FQ, and the recurrence (n+1)h_{n+1}=Sh_n gives E_S=FQ. (8) The specialization u=1 is justified because each s^at^b coefficient is a polynomial in u of degree at most a+b. Edge cases: r=0, r=1, commuting inputs, and r=2, where the formula is the Weyl formula with the correct sign -1/2. The statement matches the parent lem-sfb-chevalley-rank-two-straightening step 3, which applies it in A=U to Z=ts^kY_k. Milne iAG2017 §23h eq.(153) only motivates the formula; proof_origin is agent and Bourbaki is WANTED; no SGA is cited. The DAG and blueprint searches (Campbell/class-two/exponential) found no duplicate, so same_as [] is correct. The Mathlib no-match verdicts hold at the source: exp_mul_exp_eq_exp_add needs CommRing, IsNilpotent.exp_add_of_commute needs commuting nilpotent elements, and PowerSeries.derivative needs CommSemiring. All three search kinds were recorded. No fixes; no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MvPowerSeries.FormalClassTwoExponential",
+  "declaration": "MvPowerSeries.bivariateExp_sum_eq_orderedProd_mul_correction",
+  "file": "lean/Sheaf/RingTheory/MvPowerSeries/FormalClassTwoExponential.lean",
+  "statement": "theorem bivariateExp_sum_eq_orderedProd_mul_correction {A : Type u} [Ring A] [Algebra ℚ A] (r : ℕ) (Z : Fin r → MvPowerSeries (Fin 2) A) (hZ : ∀ i : Fin r, constantCoeff (Z i) = 0) (hcentral : ∀ i j k : Fin r, ⁅⁅Z i, Z j⁆, Z k⁆ = 0) : bivariateExp (∑ i : Fin r, Z i) = (List.ofFn (fun i : Fin r => bivariateExp (Z i))).prod * bivariateExp ((-(1 / 2 : ℚ)) • (∑ i : Fin r, ∑ j ∈ Finset.univ.filter (fun j : Fin r => i < j), ⁅Z i, Z j⁆))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35a93ec4d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Item lem-sfb-formal-class-two-exponential: only lean record + new §1(A) stmt_dep def-sfb-bivariate-formal-exponential added (diffed vs side-live). bivariateExp = Σ_{n≤deg d}(n!)⁻¹•coeff d (Z^n), real data, equals full coefficientwise Σ Z^n/n! for zero-constant inputs (all uses are: ΣZ_i, Z_i, commutator correction). Statement: Ring A + Algebra ℚ A (noncommutative, no extras), MvPowerSeries (Fin 2) A, hZ constantCoeff=0 ⇔ (s,t), hcentral ⁅⁅Z i,Z j⁆,Z k⁆=0, List.ofFn ordered product, right correction exp(-(1/2)•Σ_{i<j}⁅Z i,Z j⁆), correct Weyl sign; r=0/r=1/commuting/zero algebra covered. No duplicate in Mathlib (PowerSeries.exp comm, IsNilpotent.exp nilpotent) or live Sheaf/DAG. lean.statement verbatim for both nodes; only sorry is the theorem proof; docstrings with source, blueprint and 8 proof steps; report sections present; parent rank-two-straightening use in A=U matches. No findings."
+ }
+}

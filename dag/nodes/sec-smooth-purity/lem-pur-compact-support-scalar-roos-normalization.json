@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-compact-support-scalar-roos-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), scalar-limit comparison: normalize its arithmetic restriction and strict augmentations by the unit-normalized Roos presentation.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unit-normalized arithmetic restriction of native support Roos complexes",
+ "statement": "Let l be prime, E a finite extension of Q_l, and W a scheme. Use the strict tower category and scalarLimit of [def-pur-compact-support-scalar-limit-maps]. Let kappa be any isomorphism from the strict Roos complex followed by derived localization to the actual total derived limit, satisfying the displayed ordinary-limit inclusion/right-derived-unit normalization for every complex. Then for every strict complex K and e >= 1, the fixed scalarRoosRestriction is a quasi-isomorphism with the selection/block coordinate equation; its image under kappa is exactly scalarLimitRestriction with the prescribed derived-factor inverse, and it sends every compatible strict augmentation (0,a) to the augmentation on the selected family a(e(n+1)-1).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tag 0941 (lemma-derived-limit-is-ok), arithmetic cofinal restriction and the selection/block Roos model; the unit normalization and augmentation part are the project specialization of roosArithmeticNormalization.",
+  "note": "Lean proof specialization: lean/Sheaf/Paper/CompactSupportScalarRoosNormalization.lean:49; extracted from the existing scalarRoosNormalization proof after profiling its large chosen comparison reductions."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps"
+ ],
+ "proof": [
+  {
+   "text": "The selected cofinality witness is a quasi-isomorphism and has the prescribed selection/block coordinates. Give its quasi-isomorphism and coordinate properties explicit types, and keep the chosen scalarRoosRestriction locally irreducible afterward.",
+   "uses": [
+    "def-pur-compact-support-scalar-limit-maps",
+    "lem-pur-compact-support-roos-cofinality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply roosArithmeticNormalization to these coordinates and the supplied unit-normalization equation. This identifies the derived map with the actual arithmetic scalarLimitRestriction, with its derived-factor identification.",
+   "uses": [
+    "lem-pur-roos-arithmetic-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A compatible family is compatible under the selected composite transition by roos_compatible and the inequality e(n+1)-1 <= e(n+2)-1. The augmentation conclusion of roosArithmeticNormalization gives precisely the selected augmentation. The boundary e=1 is covered by the same inequalities.",
+   "uses": [
+    "lem-pur-roos-arithmetic-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "lem-pur-compact-support-roos-cofinality",
+  "lem-pur-roos-arithmetic-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tag 0941 (lemma-derived-limit-is-ok), arithmetic cofinal restriction and the selection/block Roos model; the unit normalization and augmentation part are the project specialization of roosArithmeticNormalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roos complex arithmetic cofinal restriction selection block preserves compatible cone augmentation",
+   "results": "8 unrelated hits, including ComplexShape.Embedding.HasLift and eventually-constant cone constructions; no Roos arithmetic normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "arithmetic cofinal restriction on Roos complexes preserves strict augmentations and derived inverse limits",
+   "results": "8 unrelated truncation/augmentation and complex-embedding hits, including CochainComplex.augmentTruncate_inv_f_succ; no strict Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.pre",
+   "results": "12 generic ordinary-limit hits, including limit.pre, limit.pre_π and limit.lift_pre. No unit-normalized derived Roos restriction.",
+   "date": "2026-10-27",
+   "verdict": "partial match: ordinary limit API"
+  },
+  {
+   "tool": "grep",
+   "query": "roosArithmeticNormalization|strictRoosComplex",
+   "results": "Zero Mathlib hits. The project supplies roosArithmeticNormalization and compactSupportRoosCofinality, used here.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match; project declarations used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "group": "D4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarRoosNormalization",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarRoosNormalization.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarRoosNormalization_of_unit",
+  "statement": "theorem scalarRoosNormalization_of_unit (W : Scheme.{u})\n    (κ : roosF (A := Modules\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ⋙\n        DerivedCategory.Q ≅ DerivedCategory.Q ⋙ scalarLimit l E W)\n    (hk : ∀ K : CochainComplex (Towers\n        (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ,\n      DerivedCategory.Q.map (roosι K) ≫ κ.hom.app K =\n        DerivedCategory.Q.map\n          (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval K.asFunctor,\n            HomologicalComplex.isLimitConeOfHasLimitEval K.asFunctor⟩).hom ≫\n        Functor.rightDerivedFunctorUnitQ\n          (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤\n            Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) K)\n    (K : CochainComplex (Towers\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ)\n    (e : ℕ) (he : 1 ≤ e) :\n    QuasiIso (scalarRoosRestriction l E W K e he) ∧\n      (∀ p : ℤ,\n        (scalarRoosRestriction l E W K e he).f (p + 1) ≫\n            (strictRoosCoordinates ((CategoryTheory.StrictTowerArithmetic.complexRestriction\n              (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) e).obj K)\n                p).hom =\n          (strictRoosCoordinates K p).hom ≫\n            biprod.map ((CategoryTheory.StrictTowerArithmetic.block e K.asFunctor).f p)\n              ((CategoryTheory.StrictTowerArithmetic.selection e K.asFunctor).f (p + 1))) ∧\n      (DerivedCategory.Q.map (scalarRoosRestriction l E W K e he) ≫\n          κ.hom.app\n            ((CategoryTheory.StrictTowerArithmetic.complexRestriction\n              (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) e).obj K) ≫\n          (scalarLimit l E W).map\n            ((ordinarySubsequence l E W e).mapDerivedCategoryFactors.inv.app K) =\n        κ.hom.app K ≫\n          (scalarLimitRestriction l E W e).app (DerivedCategory.Q.obj K)) ∧\n      (∀ (P : CochainComplex\n          (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ)\n        (a : ∀ n : ℕ, P ⟶ K.asFunctor.obj (op n))\n        (ha : ∀ n : ℕ, a (n + 1) ≫\n          K.asFunctor.map (homOfLE (Nat.le_succ n)).op = a n),\n        ∃ h : ∀ n : ℕ, a (e * (n + 2) - 1) ≫\n            K.asFunctor.map\n              ((CategoryTheory.StrictTowerArithmetic.index e).map\n                (homOfLE (Nat.le_succ n)).op) = a (e * (n + 1) - 1),\n          roosAugment a ha ≫ scalarRoosRestriction l E W K e he =\n            roosAugment (fun n : ℕ ↦ a (e * (n + 1) - 1)) h)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

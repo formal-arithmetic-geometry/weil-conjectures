@@ -1,0 +1,279 @@
+{
+ "id": "lem-trf-blowup-square-pullback-quotient-data",
+ "kind": "statement",
+ "title": "Geometric and quotient data for a flat blowup square",
+ "statement": "Let $f:X\\to S$, $e:T\\to S$, $g:Y\\to T$, $j:Y\\to X$ be morphisms of schemes [def-pc-scheme] with $fj=eg$, and assume $e$ and $j$ flat [def-weil-flat-morphism]. Let $\\mathcal I\\subseteq\\mathcal O_S$ be a finite-type quasi-coherent ideal [pqf-def-coherent], put $b:B=\\operatorname{Bl}_{\\mathcal I}S\\to S$ and $b_T:B_T=\\operatorname{Bl}_{\\mathcal I\\mathcal O_T}T\\to T$ [def-nagata-global-blowup, def-nagata-extended-ideal], and let $\\operatorname{bc}_e:B_T\\to T\\times_SB$ be the specified comparison [def-nagata-blowup-flat-base-change-map]. Put $\\beta=\\operatorname{pr}_B\\operatorname{bc}_e$, $P=X\\times_SB$, $Q=Y\\times_TB_T$, with projections $p:P\\to X$, $q:P\\to B$, $r:Q\\to Y$, $s:Q\\to B_T$ [def-pc-fibre-product]. Put $D=q^{-1}b^{-1}V(\\mathcal I)$ and $D_Q=s^{-1}b_T^{-1}V(\\mathcal I\\mathcal O_T)$, regarding these as closed subsets. Then the pair $(jr,\\beta s)$ defines a morphism $u:Q\\to P$ with $pu=jr$. The comparison $\\operatorname{bc}_e$ is an isomorphism over $T$, and there is a canonical isomorphism $Q\\cong Y\\times_XP$ with projections $r,u$. The morphism $u$ is flat, and $D_Q=u^{-1}D$. Every point of $P$ has an affine neighbourhood $V$ and $a\\in\\mathcal O_P(V)$ with $D\\cap V=V(a)$; on any affine $W\\subseteq u^{-1}V$, $D_Q\\cap W=V(a_W)$, where $a_W$ is the image of $a$. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], put $H=p^*\\mathcal F$ and $H_Q=r^*j^*\\mathcal F$ [def-pc-module-pullback]. Define submodule sheaves $K\\subseteq H$ and $K_Q\\subseteq H_Q$ by $K(V)=\\{h\\in H(V):h|_{V\\setminus D}=0\\}$ and $K_Q(W)=\\{h\\in H_Q(W):h|_{W\\setminus D_Q}=0\\}$ for every open $V\\subseteq P$, $W\\subseteq Q$. These four sheaves are quasi-coherent. The two module strict transforms [def-trf-module-strict-transform] have quotient presentations $\\mathcal F^B=H/K$ and $(j^*\\mathcal F)^{B_T}=H_Q/K_Q$, with their defining quotient maps $\\pi$ and $\\pi_Q$. The identity $pu=jr$ and the composition isomorphisms for module pullback give the canonical isomorphism $\\gamma:u^*H\\xrightarrow{\\sim}H_Q$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 080D, definition-strict-transform (1); Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor. Extracted geometric and quotient-presentation argument of the returned parent proof steps 1, 2 and 3(a)-(b)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-nagata-global-blowup",
+  "def-nagata-extended-ideal",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-pc-fibre-product",
+  "def-trf-module-strict-transform"
+ ],
+ "proof": [
+  {
+   "text": "By [thm-nagata-blowup-flat-base-change], the specified $\\operatorname{bc}_e$ of [def-nagata-blowup-flat-base-change-map] is an isomorphism over $T$; hence $b\\beta=eb_T$. Using $fj=eg$ and $gr=b_Ts$ gives $f(jr)=egr=eb_Ts=b(\\beta s)$. The universal property [def-pc-fibre-product] therefore defines $u=(jr,\\beta s):Q\\to P$ with $pu=jr$ and $qu=\\beta s$.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; the specified comparison followed by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "The maps $(r,u)$ define $\\phi:Q\\to Y\\times_XP$ by [def-pc-fibre-product]. To construct its inverse, take any test scheme $R$ with maps $y:R\\to Y$, $z:R\\to P$ satisfying $jy=pz$. Then $egy=fjy=fpz=bqz$, so $(gy,qz)$ defines $R\\to T\\times_SB$. Composing with $\\operatorname{bc}_e^{-1}$ gives $t:R\\to B_T$ with $b_Tt=gy$ and $\\beta t=qz$. Thus $(y,t)$ defines $R\\to Q$. In the two composites the $Y,B_T$ projections, respectively the $Y,P$ projections, agree with the original ones; uniqueness in the fibre-product property makes both composites identities. This is the required canonical isomorphism, identifying $u$ with the projection to $P$. By [lem-weil-pbc-flat-morphism-base-change], that projection is flat, being the base change of the assumed flat $j$ along $p$. The isomorphism identifies the local ring maps, so $u$ is flat by [def-weil-flat-morphism].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up, cartesian square; morphisms.tex Tag 01U9, lemma-base-change-flat. The reassociation is written out by the universal property."
+   }
+  },
+  {
+   "text": "By [def-nagata-extended-ideal], $V(\\mathcal I\\mathcal O_T)$ is the inverse-image closed subscheme $T\\times_SV(\\mathcal I)$. Locally, a ring map $A\\to C$ and an ideal $I=(a_1,\\ldots,a_n)$ give the pushout $C\\otimes_A A/I=C/(a_1,\\ldots,a_n)C$: a map out of either side is exactly a map out of $C$ killing all the $a_i$. Thus its underlying closed set is $e^{-1}V(I)$, since a prime of $C$ contains the images of $I$ exactly when its contraction contains $I$. This also verifies finite type of the extended ideal, using the images of the same finite local generators [pqf-def-coherent]. Consequently $D_Q=(b_Ts)^{-1}e^{-1}V(\\mathcal I)=(b\\beta s)^{-1}V(\\mathcal I)=(bqu)^{-1}V(\\mathcal I)=u^{-1}D$.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JV, definition-inverse-image-closed-subscheme; affine quotient-ring universal property and inverse images of closed sets."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-pullback-quasi-coherent] first to $p$ and $\\mathcal F$, then to $j$ and $\\mathcal F$, and then to $r$ and $j^*\\mathcal F$. This gives quasi-coherence of $H=p^*\\mathcal F$ and $H_Q=r^*j^*\\mathcal F$; none of these applications requires flatness.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BG, lemma-pullback-quasi-coherent, applied three times."
+   }
+  },
+  {
+   "text": "Put $E=b^{-1}V(\\mathcal I)\\subseteq B$. By [thm-nagata-blowup-principalizes-center], its ideal is locally generated by a nonzerodivisor, so $E$ is locally principal. Apply [lem-trf-locally-principal-supported-kernel] to $(q:P\\to B,E,H)$ and $(qu:Q\\to B,E,H_Q)$. Step 3 identifies the second inverse image with $D_Q$; the sectionwise kernels in that lemma are exactly $K$ and $K_Q$. Both are therefore quasi-coherent. The same lemma makes $D$ locally principal. Shrink a neighbourhood of any point of $P$ to an affine $V$ on which its ideal is generated by $a\\in\\mathcal O_P(V)$; then $D\\cap V=V(a)$. For any affine $W\\subseteq u^{-1}V$, the ring map $\\mathcal O_P(V)\\to\\mathcal O_Q(W)$ takes $a$ to $a_W$. By the prime-ideal test in Step 3, the preimage of $V(a)$ in $W$ is $V(a_W)$, which equals $D_Q\\cap W$. No nonzerodivisor assertion is made for $a$ or $a_W$.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lem-trf-locally-principal-supported-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor; Tag 053P, lemma-pullback-locally-principal; paragraph before Tag 080D. Supported-kernel quasi-coherence: properties.tex Tag 07ZP, lemma-sections-supported-on-closed-subset."
+   }
+  },
+  {
+   "text": "By [def-trf-module-strict-transform], the strict transform for $(f,\\mathcal I,\\mathcal F)$ is $H$ modulo sections vanishing off $D$, namely $H/K$, and its defining map is the quotient $\\pi$. Applying the same definition to $(g,\\mathcal I\\mathcal O_T,j^*\\mathcal F)$ gives $H_Q/K_Q$ and $\\pi_Q$. Here the extended centre is finite type by Step 3 and $j^*\\mathcal F$ is quasi-coherent by Step 4. Finally the composition isomorphisms explicitly supplied in [def-pc-module-pullback], evaluated at $\\mathcal F$ and the equality $pu=jr$ from Step 1, give $\\gamma:u^*H=u^*p^*\\mathcal F\\xrightarrow{\\sim}(pu)^*\\mathcal F=(jr)^*\\mathcal F\\xrightarrow{\\sim}r^*j^*\\mathcal F=H_Q$. These are the asserted ordinary-pullback and quotient data.",
+   "uses": [
+    "def-trf-module-strict-transform",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080D (1), definition-strict-transform; sheaves.tex Tag 0097, lemma-push-pull-composition-modules (composition isomorphisms already stated in def-pc-module-pullback)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-flat-morphism",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "thm-nagata-blowup-principalizes-center",
+  "lem-trf-locally-principal-supported-kernel",
+  "def-trf-module-strict-transform",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0805, 02OS and 080D (1), with Properties Tag 07ZP, Modules Tag 01BG and Morphisms Tag 01U9; universal-property reassociation and affine inverse-image calculations written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat commutative square of schemes and a blowup of the base give a cartesian lifted square, matching exceptional sets and the supported section quotient presentations of quasi coherent module strict transforms",
+   "results": "8 hits: AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.flat_iff, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'. Read the returned statements: pullbackComp supplies only ordinary pullback composition; flatness and presentation declarations do not identify the exceptional sets and strict-transform quotients in this square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare the ordinary iterated pullbacks of a quasi coherent module in a flat blowup square with the quotient maps defining its two strict transforms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc. Read the returned statements: pullbackComp supplies only ordinary pullback composition; flatness and presentation declarations do not identify the exceptional sets and strict-transform quotients in this square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent strict transform quotient presentations and exceptional loci in a flat base change square of blowups",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.Presentation, AlgebraicGeometry.Flat.isStableUnderBaseChange, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk. Read the returned statements: pullbackComp supplies only ordinary pullback composition; flatness and presentation declarations do not identify the exceptional sets and strict-transform quotients in this square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: . Read the returned statements: pullbackComp supplies only ordinary pullback composition; flatness and presentation declarations do not identify the exceptional sets and strict-transform quotients in this square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|strict transform|blowup",
+   "results": "6 hits: Mathlib/Tactic/ITauto.lean, Mathlib/Tactic/GRewrite/Core.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/Algebra/HierarchyDesign.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean. Read the returned statements: pullbackComp supplies only ordinary pullback composition; flatness and presentation declarations do not identify the exceptional sets and strict-transform quotients in this square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: .  The returned flatness, Proj-chart and pullback-composition facts do not state the blowup square with its exceptional-supported kernels and strict-transform quotient maps. Read the pullbackComp source, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:241.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|strict transform|blowup",
+   "results": "0 hits: .  No strict-transform or blowup declaration in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up commutes with flat base change and module strict transforms are quotients by supported sections",
+   "results": "8 hits: RingHom.Flat.isStableUnderBaseChange, Module.Flat.isBaseChange, Module.FaithfullyFlat.instTensorProduct, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, Module.Flat.of_isLocalizedModule, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars.  The returned flatness, Proj-chart and pullback-composition facts do not state the blowup square with its exceptional-supported kernels and strict-transform quotient maps. Read the pullbackComp source, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:241.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat blowup square has cartesian lifted products and locally principal exceptional sets with quasi coherent supported kernels defining module strict transform quotients",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.flat_iff.  The returned flatness, Proj-chart and pullback-composition facts do not state the blowup square with its exceptional-supported kernels and strict-transform quotient maps. Read the pullbackComp source, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:241.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent pullback modules on base changed blowups modulo sections vanishing outside the exceptional locus and the natural composition isomorphism of pullback",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left.  The returned flatness, Proj-chart and pullback-composition facts do not state the blowup square with its exceptional-supported kernels and strict-transform quotient maps. Read the pullbackComp source, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:241.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-strict-transform-flat-pullback",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Stacks 0814 proof paragraph 1: identify the pullback of the global strict transform with the local strict transform before composing the two blowups. Extracted parent argument: steps 1, 2, 3(a)-(b), geometry, exceptional charts and ordinary-pullback quotient data.",
+   "via": [
+    "lem-trf-module-strict-transform-flat-pullback",
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-blowup-square-pullback-quotient-data",
+  "worker": "stage1",
+  "summary": "Split the geometric and quotient data into six explicit steps using existing nodes only. Verified the specified blowup comparison, universal-property inverse of the lifted cartesian square, flatness, exceptional closed-set equality, arbitrary-affine equations, quasi-coherence of all four sheaves, defining quotient maps and ordinary-pullback composition isomorphism. No statement change, no new nodes and no Lean writing or compilation.",
+  "blueprint": "Preserves the inherited flattening/strict-transform route under lem-trf-local-term-locality. Realizes the parent module strict-transform flat-pullback proof steps 1, 2 and 3(a)-(b): geometric square, exceptional charts and ordinary-pullback quotient data. The current main-20261015 ancestor has no proof text; the inherited from.place is kept as the history of this extracted supporting argument.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic blowup base-change comparison isomorphism for the specified flat e; no theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic stability of flat scheme morphisms under base change, applied to j and p."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic quasi-coherence of ordinary module pullback, applied to p, j and r."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic principalization of the finite-type blowup centre, giving the locally principal E used by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "thm-nagata-blowup-principalizes-center"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-a49f8e6d2",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-a49f8e6d2 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has 0 new nodes, and the statement and stmt_deps are unchanged from live and side-live, where the item is still unsplit; there is no repair note, so this is not a re-split. I read the source at Stacks divisors.tex 0805 (l.8351), 02OS and 080D(1) together with the paragraph before it (l.8756-8792); the quotient presentation agrees with it. Step 1: bc_e is over T (thm-nagata-blowup-flat-base-change, with T as the first factor), so b beta = e b_T and f(jr) = b(beta s), which gives u. Step 2: I checked both composites of the test-scheme inverse of (r,u) on their projections; u is flat by 01U9 as the base change of j along p; e flat and j flat are both used. Step 3: the affine pushout C/IC gives V(IO_T) = T x_S V(I) and the chain D_Q = u^{-1}D holds. As an advisory point, the quasi-coherence of IO_T is implicit in the same local computation. Step 4: 01BG applied to p, j and r in the right order. Step 5: principalizes-center and the in-unit lem-trf-locally-principal-supported-kernel applied to q and qu; its K matches K and K_Q exactly; V(a_W) follows by prime contraction, and no nonzerodivisor claim is made (a = 0 example). Step 6: both strict transforms are read literally from def-trf-module-strict-transform, and gamma comes from the composition isomorphisms of def-pc-module-pullback in the right direction. Edge cases I=O_S, I=0 and X=V(t) all hold. I accept the four generic tool uses (0805, 01U9, 01BG, 02OS nodes). The parent uses exactly these clauses without restating the item. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupSquarePullbackQuotientData",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.blowupSquare_pullback_quotientData",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.blowupSquare_pullback_quotientData",
+   "AlgebraicGeometry.Scheme.Modules.blowupSquare_strictTransform_quotientPresentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupSquarePullbackQuotientData.lean",
+  "statement": "theorem blowupSquare_pullback_quotientData {X S Y T : Scheme.{u}} (f : X ⟶ S) (e : T ⟶ S) (g : Y ⟶ T) (j : Y ⟶ X) (h : j ≫ f = g ≫ e) [Flat e] [Flat j] (I : S.IdealSheafData) [I.toModules.IsFiniteType] : IsIso (I.blowupFlatBaseChange e) ∧ I.blowupFlatBaseChange e ≫ pullback.snd I.blowupMap e = (I.comap e).blowupMap ∧ ∃ u : Limits.pullback (C := Scheme.{u}) g (I.comap e).blowupMap ⟶ Limits.pullback (C := Scheme.{u}) f I.blowupMap, ∃ hu : u ≫ pullback.fst f I.blowupMap = pullback.fst g (I.comap e).blowupMap ≫ j, u ≫ pullback.snd f I.blowupMap = pullback.snd g (I.comap e).blowupMap ≫ I.blowupFlatBaseChange e ≫ pullback.fst I.blowupMap e ∧ IsPullback (pullback.fst g (I.comap e).blowupMap) u j (pullback.fst f I.blowupMap) ∧ Flat u ∧ moduleStrictTransformOpen g (I.comap e) = u ⁻¹ᵁ moduleStrictTransformOpen f I ∧ (∀ x : Limits.pullback (C := Scheme.{u}) f I.blowupMap, ∃ V : (Limits.pullback (C := Scheme.{u}) f I.blowupMap).Opens, x ∈ V ∧ IsAffineOpen V ∧ ∃ a : (Limits.pullback (C := Scheme.{u}) f I.blowupMap).presheaf.obj (op V), V ⊓ moduleStrictTransformOpen f I = (Limits.pullback (C := Scheme.{u}) f I.blowupMap).basicOpen a ∧ ∀ (W : (Limits.pullback (C := Scheme.{u}) g (I.comap e).blowupMap).Opens) (_ : IsAffineOpen W) (hW : W ≤ u ⁻¹ᵁ V), W ⊓ moduleStrictTransformOpen g (I.comap e) = (Limits.pullback (C := Scheme.{u}) g (I.comap e).blowupMap).basicOpen ((u.appLE V W hW) a)) ∧ (I.comap e).toModules.IsFiniteType ∧ ∀ (F : X.Modules) [F.IsQuasicoherent], ((tensorPullback (pullback.fst f I.blowupMap)).obj F).IsQuasicoherent ∧ ((tensorPullback j).obj F).IsQuasicoherent ∧ ((tensorPullback (pullback.fst g (I.comap e).blowupMap)).obj ((tensorPullback j).obj F)).IsQuasicoherent ∧ (moduleStrictTransformKernel f I F).IsQuasicoherent ∧ (moduleStrictTransformKernel g (I.comap e) ((tensorPullback j).obj F)).IsQuasicoherent ∧ (∀ V : (Limits.pullback (C := Scheme.{u}) f I.blowupMap).Opens, Set.range ((kernel.ι (moduleStrictTransformRestriction f I F)).app V) = {s | ((tensorPullback (pullback.fst f I.blowupMap)).obj F).presheaf.map (homOfLE (inf_le_left : V ⊓ moduleStrictTransformOpen f I ≤ V)).op s = 0}) ∧ (∀ W : (Limits.pullback (C := Scheme.{u}) g (I.comap e).blowupMap).Opens, Set.range ((kernel.ι (moduleStrictTransformRestriction g (I.comap e) ((tensorPullback j).obj F))).app W) = {s | ((tensorPullback (pullback.fst g (I.comap e).blowupMap)).obj ((tensorPullback j).obj F)).presheaf.map (homOfLE (inf_le_left : W ⊓ moduleStrictTransformOpen g (I.comap e) ≤ W)).op s = 0}) ∧ ∃ γ : (tensorPullback u).obj ((tensorPullback (pullback.fst f I.blowupMap)).obj F) ≅ (tensorPullback (pullback.fst g (I.comap e).blowupMap)).obj ((tensorPullback j).obj F), γ = (tensorPullbackSectionComp u (pullback.fst f I.blowupMap)).symm.app F ≪≫ eqToIso (congrArg (fun k ↦ (tensorPullback k).obj F) hu) ≪≫ (tensorPullbackSectionComp (pullback.fst g (I.comap e).blowupMap) j).app F",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-762538c66",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read node, stmt_deps, upstream blowupFlatBaseChange (B×_S T order, IsIso, over T), ModuleStrictTransform defs, tensorPullbackSectionComp. All clauses match: u pinned by both projections, IsPullback r u j p, Flat u, D_Q=u⁻¹D via complement opens, local equations for every affine W≤u⁻¹V, finite type of I.comap e and qcoh of j*F derived as conclusions, qcoh of H,H_Q,K,K_Q, sectionwise kernel ranges, cokernel universal property, γ pinned to the canonical composition isos. No extra hypotheses, single universe u, no new defs, sorry-only, docstrings with source/blueprint. Node changes only lean; statement verbatim in file; no duplicate in live. Edge cases I=0, I=O, F=0, empty schemes OK. No findings."
+ }
+}

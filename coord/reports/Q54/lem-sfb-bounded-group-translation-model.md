@@ -1,0 +1,63 @@
+# Stage-1 report: lem-sfb-bounded-group-translation-model
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-bounded-group-translation-model.json`: existing statement, now split; statement and statement dependencies unchanged; five previously recorded Mathlib searches retained after reading their outputs.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-weak-neron-family-rational-property.json`: new statement, unsplit, no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-invariant-volume-translation-character.json`: new statement, unsplit, no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-smooth-model-volume-order-comparison.json`: new statement, unsplit, no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-rationally-disjoint-model-separated-gluing.json`: new statement, unsplit, no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-minimal-volume-model-smooth-base-change.json`: new statement, unsplit, no Mathlib match.
+
+`citations.json` contains the literal statement used for each step-node pair. `searches.jsonl` is the unaltered msearch log. Separate search output JSON files preserve the hits read. There are 5 new nodes and 0 Mathlib leaves. No Lean was written and no compiler or build tool was run.
+
+## Attachments
+
+None. Searched `lean/WeilConjectures/` for the item's exact blueprint tag, bounded models, translations, birational maps, smoothening, Neron and Néron. The birational declarations found concern generic hypersurface/affine models or line bundles; none states this translation-compatible model theorem. New-node concept searches likewise found no project attachment.
+
+## WANTED
+
+WANTED: Bosch–Lütkebohmert–Raynaud, *Néron Models*, 1.1 Proposition 7; 2.2 Corollary 13 and Proposition 14; 2.3 Proposition 5; 3.5 Definition 1, Theorem 2, Proposition 3 and Corollary 4; 4.2 Proposition 1, Corollary 3 and Propositions 4–5; 4.3 Lemma 1, Proposition 2, Lemma 3 and Proposition 4, for this item and its five new nodes. The repository has no local BLR PDF. I read the primary scanned book at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf (printed pp.10–11, 42–46, 74–75, 101–107; PDF offset +6). The source field retains the repository's expected literature path and explicitly records the absent copy. The assembly proof is marked agent-written as the standing brief requires in this situation. No SGA source is used; BLR 4.2 Remark 6 is unnecessary and not cited.
+
+## Corrections and scope
+
+The imported item is true and its statement is unchanged. Its local rings are exactly the local rings at generic points of special fibres of smooth test schemes, rather than arbitrary DVR extensions; the distinction is essential to BLR 3.5/4 and 4.3/3. No excellence, completeness, connectedness or properness assumption was added. No group law on the constructed model is used.
+
+The comparison input explicitly includes the finite-component, whole-domain open-immersion conclusion used at the end of BLR 4.3/4. This is a Jacobian/Zariski-main comparison assertion, not the existence or translation conclusion of the item. The separated-gluing input isolates the graph-closure argument of the first two paragraphs of BLR 4.3/4; merely quoting that gluing separated schemes gives a separated scheme would be false. The weak-family existence clause assumes the strict-henselian point set is nonempty; this is automatic for a group because of its identity point. This avoids an empty-family assertion hidden in refinement by nonempty special components.
+
+The inherited provenance has no imported blueprint ancestor: `blueprint_refs.py ancestor` prints None. I retained its null ancestor and full provenance chain, prefixed by the item on every new node, and specified the precise BLR places. Read the current `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md` and the inherited unit and chapter records. This split concerns the existing supporting BLR branch; no chapter or unit route was changed. The item is not the key node of the inherited unit, so no unit record is edited.
+
+## Not duplicates
+
+Whole-DAG and whole-blueprint searches included weak Neron/Néron, minimal model, minimal smooth model, invariant differential, differential order, volume order, bounded group, translation character, separated gluing and rationally disjoint; no blueprint node states any of the five new inputs. Searched the whole DAG statements as well as filenames, including the existing BLR source references.
+
+- lem-sfb-weak-neron-family-rational-property vs lem-sfb-bounded-group-local-neron-criterion: finite weak families have only rational extension, not a single group scheme or the Néron mapping property. The latter depends on the present item and cannot be used here.
+- lem-sfb-invariant-volume-translation-character vs lem-ag-smooth-relative-differentials-finite-locally-free: local freeness does not give invariant trivialization or the right-translation character and valuation-unit assertion.
+- lem-sfb-smooth-model-volume-order-comparison vs lem-sbc-regular-cartier-generic-stalk-dvr: the latter gives a DVR stalk under a regularity hypothesis, not the differential-order inequality or open-immersion criterion. The new node states the precise smooth-trait order and comparison facts used together by BLR 4.3/1.
+- lem-sfb-rationally-disjoint-model-separated-gluing vs lem-trf-finite-type-stalk-isomorphism-open-neighbourhood: the latter concerns a stalk isomorphism at a single point, not shrinking cross-diagonal closures or constructing a separated glued model.
+- lem-sfb-minimal-volume-model-smooth-base-change vs lem-sfb-bounded-group-translation-model: finite minimal-order birational classes and their transport contain neither a separated glued scheme nor the translation property. The item's proof constructs those. This is BLR 4.3/2–3, not a restatement of 4.3/4(iii).
+- lem-sfb-minimal-volume-model-smooth-base-change vs lem-sfb-smooth-trait-local-rational-spreading: the existing spreading lemma spreads supplied local rational maps; it does not provide minimal models or preserve differential orders.
+
+The five inputs are substantial lemmas. No elementary finite-minimum calculation, inverse-map calculation, or generic-agreement gluing argument was made into a new node. Minimality and finite equivalence classes are taken as one coherent classification result (BLR 4.3/2), with its smooth-local transport (4.3/3). Its later worker can split it further without assuming this item's conclusion.
+
+## Review by Q54
+
+I read delivery-errors B–E in full and checked the actual statements cited, not their titles or proof text. All five new nodes have complete quantified statements, exact source places and recorded searches; each is statement-only, with empty proof and proof-dependency arrays. The item's proof-dependency list is exactly the union of step uses. Each of the four steps is below 2000 characters.
+
+For the item, I read BLR 4.3/4, pp.106–107, including the construction of cross-diagonal closures and the separate left/right translation argument, as well as its inputs 3.5/2–4, 4.2/3–5 and 4.3/1–3. For the weak-family node I read 3.5/1–4 and the bounded-point characterization 1.1/7: the property applies to smooth sources with irreducible special fibre, and its base-change clause uses the strict henselization of the NEW local ring. For invariant volume I read 4.2/1, /3, /4 and /5: Haar measure results are not substitutes for algebraic differentials; the right multiplier is a character or its inverse according to convention, and both have valuation zero. For order comparison I read the order construction preceding 4.3/1 and that lemma's Jacobian and Zariski-main proof. The finite-component formulation applies this calculation on the open containing each special component and the whole generic fibre, then uses the same generically-isomorphic étale open-immersion criterion on the whole domain. For gluing I read 4.3/4's first two proof paragraphs. For minimal classes and base change I read 4.3/2–3, including the dependence on weak-family transport and the unchanged uniformizer and orders.
+
+Step 1 uses invariant volume to choose the form, the weak rational property to map every model into a family member, and the order inequality with multiplier 1 to bound all orders below by a finite minimum. The minimal-class statement supplies representatives; equal orders and the open-immersion criterion show that a rational identity between distinct representatives would contradict inequivalence. The gluing statement then supplies the separated scheme. These are exactly the portions of those five node statements recorded in citations.json. The identity section ensures the point set used for weak-family existence is nonempty.
+
+Step 2 uses the weak-family node's explicit DVR and transport clauses and its converse boundedness clause, rather than assuming boundedness persists under an arbitrary field extension. The minimal-class transport statement says that the base-changed component opens cover all minimal classes and keep order n0. I opened the three existing base-change nodes: lem-pc-proper-base-change clause (2) is smoothness, lem-weil-pbc-separated-base-change is separatedness, and lem-sfb-finite-type-composition-base-change clause (2) is finite type for arbitrary base change. None requires A to be finite type over R. They are declared generic tools in split_report, not added to the maintainer-owned tool_uses field.
+
+Step 3 applies the weak rational property over A to the given translation and to one special component at a time. Its source is smooth finite type and its special fibre is nonempty irreducible. The invariant-volume statement is applied over A only AFTER obtaining boundedness there. Thus left multiplier 1 and right multiplier a valuation unit satisfy precisely the comparison node's hypothesis. The two inequalities n0 >= n(N) >= n0 make the family member minimal. The classification statement then permits a birational identity to a representative component. Composition is made on an explicit inverse image of the base-dense domain; equal-order open immersion guarantees that this inverse image is base-dense.
+
+Step 4 uses the existing spreading node solely for its generic-uniqueness clause. It is applied with base DVR A, base scheme Spec A, and source and target Y_A; the necessary smoothness, finite type and separatedness were established in step 2. Overlapping representatives therefore agree. Both translations induce inverse permutations of the finite minimal classes, which ensures density in every target component and density of the inverse-composition domains. The comparison node's finite-component clause gives the open immersion on the entire maximal domain, rather than only a selected smaller open. Generic uniqueness identifies both composites with the identity. This proves the birational statement without assuming a model group law.
+
+I tested the boundary cases: the trivial group has dimension zero, volume 1, order zero and one special component; finite étale groups may have generic components with no special points and the definition of component opens retains the ENTIRE generic fibre; a disconnected special fibre after base change is refined component by component. There is no geometric-irreducibility assumption. The unbounded additive and multiplicative groups do not satisfy the boundedness hypothesis and cannot be used to infer existence of minimal models in general. Nonexcellent DVRs are allowed throughout; no claim about regularity of completion is used. The gluing assertion excludes duplicate equivalent models, avoiding the doubled-special-fibre counterexample.
+
+Every new node was searched using its own plain-language statement, a second semantic phrasing, Loogle and logged source grep. I read all hits and the relevant rational-map, gluing and Haar-character source interfaces: ordinary scheme rational maps and BirationalOver use total-space density rather than fibrewise density; smooth base-change instances do not classify minimal models; Weierstrass minimality only concerns curves with chosen equations. None is a one-line specialization of the inputs. All queries recorded in the nodes were run with msearch.py and preserved exactly; no unavailable search was treated as a negative result.
+
+## Unfinished work
+
+No part of this one-level split is deferred. The five new statement-only lemmas are deliberately unsplit for future workers. The absent local BLR copy remains WANTED as recorded above. Dry-run and push results are reported by the delivery tool.

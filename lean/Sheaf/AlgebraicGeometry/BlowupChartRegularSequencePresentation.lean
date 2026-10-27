@@ -7,8 +7,9 @@ module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.Blowup.Affine.ChartAlgebra
-import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
+import Sheaf.AlgebraicGeometry.BlowupChartPresentationPowerTorsion
+import Sheaf.RingTheory.KoszulRelationsQuotientTorsionfree
+import Sheaf.RingTheory.PolynomialRegularSequenceSyzygies
 
 /-!
 # Polynomial presentation of a regular-sequence blowup chart
@@ -67,6 +68,23 @@ theorem blowupChartRegularSequencePresentation
               (Ideal.span (Set.range a)) (a 0)) :
             Localization.Away (a 0)) =
           AlgebraicGeometry.AffineBlowup.chartFraction (a 0) 1 (a i.succ) := by
-  sorry
+  classical
+  have hsyzygies :=
+    (RingTheory.Sequence.polynomial_regular_sequence_syzygies
+      (s + 1) s (Nat.succ_pos s) a hreg).2
+  have htorsion := (RingTheory.koszul_relations_quotient_torsionfree s
+    (fun i ↦ MvPolynomial.C (a i)) (fun i ↦ MvPolynomial.X i) (by
+      intro v hv
+      obtain ⟨b, hb⟩ := hsyzygies v hv
+      refine ⟨b, ?_⟩
+      simpa only [← Pi.single_smul, smul_eq_mul, mul_one] using hb)).2.2
+  obtain ⟨φ, hvariables, hsurjective, hkernel⟩ :=
+    blowupChartPresentationPowerTorsion s a
+  have hinjective : Function.Injective φ := by
+    apply (injective_iff_map_eq_zero φ).2
+    intro z hz
+    obtain ⟨N, hN⟩ := (hkernel z).1 hz
+    exact htorsion N z hN
+  exact ⟨AlgEquiv.ofBijective φ ⟨hinjective, hsurjective⟩, hvariables⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-brown-integral-categorical-ext-criterion",
+ "kind": "statement",
+ "title": "Integral Brown criterion and obstruction in categorical Ext groups",
+ "statement": "Let ℓ be prime, E a finite intermediate extension of Q_ℓ with condensed valuation ring Λ [def-sfb-padic-integers-condensed-ring], and X a separated finite-type scheme over a field k of characteristic p>0 different from ℓ [sk-def-sfb-dc-setting]. Let Cons(X,Λ) denote the constant-model constructible sheaves [sk-def-sfb-constructible]. Then BrownHypothesesFor Λ X [lem-sfb-brown-hypotheses-criterion] holds if and only if for each C in Cons(X,Λ) there exists d in ℕ such that Ext^q(C,N) [def-pc-ext] is zero for every N in Cons(X,Λ) and q≥d. The bound can depend on C but is uniform in N. Consequently, if some C has nonzero Ext^q(C,N) for arbitrarily large natural q, with N allowed to depend on q, the Brown bundle is false. The HasExt infrastructure fixes Ext in universe u+1; it is available from the existing derived category and adds no vanishing hypothesis. No finiteness of the field cohomological dimension is asserted.",
+ "stmt_deps": [
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "lem-sfb-brown-hypotheses-criterion",
+  "def-pc-ext"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraph 2, integral compactness; explicit Ext-bound hypothesis of sk-prop-int-compactness-compact"
+ },
+ "proof": [
+  {
+   "text": "Apply the proved integral Brown criterion. It gives equivalence with a bound d in ℤ on the ambient Hom(C[0],N[0][q]), uniform over constructible N. Every integral and geometric hypothesis of that criterion is retained.",
+   "uses": [
+    "lem-sfb-brown-integral-ext-criterion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib Abelian.Ext.homEquiv identifies natural-degree categorical Ext with these ambient shifted Hom groups, so subsingletonness transports in both directions. Given the integer bound d use d.toNat+1 as a natural inclusive bound. Conversely, a natural inclusive bound d gives integer strict bound d, because q>d≥0 can be lifted to ℕ. Thus no negative-degree case is omitted.",
+   "uses": [
+    "def-pc-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the obstruction, apply the forward criterion to the fixed source C. Choose a target N, a degree q at least its resulting bound, and a nonzero Ext class from the unboundedness hypothesis. The criterion makes that group subsingleton; the class equals zero, a contradiction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-brown-integral-ext-criterion",
+  "def-pc-ext"
+ ],
+ "proof_origin": {
+  "by": "K4 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraph 2, integral compactness",
+  "note": "A proved Ext API for the supported conditional criterion. Does not prove or assume the disputed arbitrary-field brownHypotheses theorem, and does not add any unproved statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact objects in a derived category force uniformly bounded Ext groups into objects of the heart",
+   "results": "Eight hits on derived t-structures and HasExt; no Brown criterion. hasExt_of_hasDerivedCategory confirms the infrastructure assumption is available. Local Ext.Basic source supplies Abelian.Ext.homEquiv.",
+   "date": "2026-10-27",
+   "verdict": "canonical Ext comparison reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactObject",
+   "results": "No hits; the project-specific name is unknown to the Mathlib index. Direct project source search supplies the existing integral Brown criterion.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_uniform_hom_single_shift_bound|compact.*ext|ext.*compact; direct rg for Ext.homEquiv and categorical_ext",
+   "results": "The Mathlib search has no project-specific Brown result. Direct source inspection finds Abelian.Ext.homEquiv in Ext.Basic and the project integral Hom-bound criterion. Direct project and latest-blueprint search finds no existing categorical-Ext criterion.",
+   "date": "2026-10-27",
+   "verdict": "existing comparison and conditional criterion reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "12 hits, including Abelian.Ext, Ext.hom, Ext.homEquiv₀, Ext.chgUniv, and hasExt_iff_small_ext. The indexed Ext definition has the HasExt size infrastructure binder; Ext.hom has the desired shifted-derived-Hom codomain. Direct Ext.Basic source inspection supplies homEquiv for the proof. No project-specific Brown criterion.",
+   "date": "2026-10-27",
+   "verdict": "Ext and its canonical comparison reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-27",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2: integral compactness and its required Ext bound",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.brownHypothesesFor_padicIntegers_iff_categorical_ext_bounded",
+  "declarations": [
+   "CategoryTheory.brownHypothesesFor_padicIntegers_iff_categorical_ext_bounded",
+   "CategoryTheory.not_brownHypothesesFor_padicIntegers_of_unbounded_categorical_ext"
+  ],
+  "statement": "theorem brownHypothesesFor_padicIntegers_iff_categorical_ext_bounded\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [HasExt.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))] :\n    BrownHypothesesFor (Profinite.padicIntegersRingObj ℓ E) X ↔\n      ∀ C : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X,\n        ∃ d : ℕ,\n          ∀ N : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X,\n            ∀ q : ℕ, d ≤ q → Subsingleton (Abelian.Ext.{u + 1} C.obj N.obj q)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-27"
+ },
+ "edge_cases": "The argument allows empty schemes, zero sheaves, zero Ext groups and negative integer bounds. The inclusive natural bound is d.toNat+1, not d.toNat, in the forward direction. The obstruction requires arbitrarily large degrees, so a single nonzero degree-zero group does not refute Brown. No choice of data from an unproved existence theorem occurs.",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

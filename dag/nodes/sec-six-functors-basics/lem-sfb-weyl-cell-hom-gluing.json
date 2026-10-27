@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-weyl-cell-hom-gluing",
+ "kind": "statement",
+ "title": "Overlap and multiplication identities on Weyl translates of the open cell",
+ "statement": "Let $A$ be a nonzero commutative ring and $P=(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization [def-sfb-pinned-split-root-realization]. Use the root subgroups $U_c$, representatives $n_\\alpha$, Weyl group $W=N_G(T)/T$, groups $U^\\pm=U_{\\pm\\Phi^+}$, and open cell $\\Omega=U^-TU^+$ of [lem-sfb-split-root-subgroup-weyl-calculus]. Here $N=N_G(T)$ is the subgroup scheme whose points normalize $T$ after every further algebra extension. For a simple root put $L_\\alpha=M\\cap\\mathbf Q\\alpha$, $S_\\alpha=D_A(M/L_\\alpha)\\subset T$ and $K_\\alpha=Z_G(S_\\alpha)$; this centralizer consists of the points commuting with $S_\\alpha$ after every further algebra extension. Let $H$ be an affine $A$-group scheme, meaning an affine scheme over $\\operatorname{Spec}A$ with multiplication, identity and inverse satisfying the group diagrams. All homomorphisms preserve these operations.\nGive homomorphisms $f_N:N\\to H$ and $F_\\pm:U^\\pm\\to H$, and put $f_T=f_N|_T$ and $g_c=F_+|_{U_c}$ for positive $c$, $g_c=F_-|_{U_c}$ for negative $c$. Suppose that, on every commutative $A$-algebra $R$, for $n\\in N(R)$ with Weyl image $w$ and $u\\in U_c(R)$, one has\n$$f_N(n)g_c(u)f_N(n)^{-1}=g_{wc}(nun^{-1}),$$\ninterpreted on open-and-closed parts when $w$ is locally constant. Suppose for every simple $\\alpha$ there is a homomorphism $E_\\alpha:K_\\alpha\\to H$ restricting to $g_{\\pm\\alpha}$ on $U_{\\pm\\alpha}$ and to $f_N$ on $N\\cap K_\\alpha$.\nFor each $w\\in W$ choose a representative $n_w\\in N(A)$ which is a word in the $n_\\alpha$, choosing $n_1=1$. Set $C_w=n_w\\Omega$ and define the $A$-morphism $a_w:C_w\\to H$ by\n$$a_w(n_wvtu)=f_N(n_w)F_-(v)f_T(t)F_+(u),\\qquad v\\in U^-,\\ t\\in T,\\ u\\in U^+.$$\nThen the $C_w$ form an open cover of $G$, and $a_w=a_z$ on the scheme-theoretic open intersections $C_w\\cap C_z$. If $\\mu:G\\times_A G\\to G$ is multiplication and $p_1,p_2$ are the projections, then for every $w,z,r\\in W$ the morphism identity\n$$a_r\\circ\\mu=(a_w\\circ p_1)(a_z\\circ p_2)$$\nholds on $(C_w\\times_A C_z)\\cap\\mu^{-1}(C_r)$, where the product on the right is multiplication in $H$. These conclusions permit empty roots and nonreduced and disconnected $A$. No rank-two subgroup homomorphisms are part of the data.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.2.1 proof, printed p.199, paragraph preceding Lemma 6.2.3: word-length induction across translates of the open cell, after the positive and negative unipotent maps are homomorphisms. Technical local formulation of the omitted induction; formulated by the agent. Read online; archival literature copy WANTED. No Stacks tag states this reductive/root-system result."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:\\Omega\\to H$ for $a_1$. Normalizer equivariance for $t\\in T$ extends from each root subgroup to $U^\\pm$ by their ordered-product coordinates. Thus $B^-=U^-T$ and $B^+=TU^+$ have their semidirect-product group laws, and the formulas $F_-(v)f_T(t)$ and $f_T(t)F_+(u)$ define homomorphisms on them. In particular\n$$a(b_-x b_+)=f_{B^-}(b_-)a(x)f_{B^+}(b_+)$$\nfor $x\\in\\Omega$, since multiplying on the left by $U^-T$ or on the right by $TU^+$ preserves the displayed cell coordinates. This is an identity on all algebra points: move a torus factor past an ordered root product and use the given homomorphism laws. All the formulas below are morphisms, not just formulas on field points.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.1 proof, printed p.199: the map on the open cell after the unipotent homomorphisms have been constructed."
+   }
+  },
+  {
+   "text": "Over an algebraically closed $A$-field $F$, apply the inversion-root Bruhat factorization. A geometric point has the form $v n_w t u$ with $v\\in U_{I_w}$. Conjugation by $n_w^{-1}$ carries every root factor of $v$ into $U^-$, because $w^{-1}I_w\\subset-\\Phi^+$. Hence the point belongs to $n_w\\Omega$. This proves that the open subschemes $C_w$ cover every geometric fibre and thus all of $G$: every point of $G$ lifts to a geometric point of its fibre. The representative used in the factorization may be the chosen word $n_w$, as its statement permits arbitrary representatives.",
+   "uses": [
+    "lem-sfb-bruhat-inversion-factorization",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 1.4.12 and Corollary 1.4.14, printed pp.38--39, applied to geometric fibres as in Theorem 6.2.1, p.199."
+   }
+  },
+  {
+   "text": "For a simple $\\alpha$ use the rank-one enlargement $J_\\alpha$ and its unique coordinates $vku$. Define\n$$b_\\alpha(vku)=F_-(v)E_\\alpha(k)F_+(u).$$\nIts restriction to $\\Omega$ is $a$: in the smaller chart write $k=x_-t x_+$ and use the restrictions of $E_\\alpha$ and the homomorphism properties of $F_\\pm$. The reflection $s_\\alpha$ permutes $\\Phi^+\\setminus\\{\\alpha\\}$: it changes only the coefficient of $\\alpha$, while any other positive root has a positive coefficient at another simple root; sign coherence makes its reflected root positive and different from $\\alpha$. The same holds negatively. Root calculus therefore shows that $n_\\alpha$ normalizes $V_\\alpha^\\pm$; also $n_\\alpha\\in K_\\alpha$. Thus left multiplication by $n_\\alpha$ preserves $J_\\alpha$, and on it\n$$b_\\alpha(n_\\alpha vku)=F_-(n_\\alpha v n_\\alpha^{-1})E_\\alpha(n_\\alpha k)F_+(u)=f_N(n_\\alpha)b_\\alpha(vku).$$\nThe last equality follows from normalizer equivariance on the ordered negative root factors and from $E_\\alpha(n_\\alpha)=f_N(n_\\alpha)$. Restricting gives $a(n_\\alpha x)=f_N(n_\\alpha)a(x)$ wherever both $x$ and $n_\\alpha x$ lie in $\\Omega$.",
+   "uses": [
+    "lem-sfb-rank-one-cell-enlargement",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.1 proof, p.199: explicit rank-one calculation for its Weyl-word induction; enlarged chart from Theorems 4.1.7 and 5.1.13."
+   }
+  },
+  {
+   "text": "For a word $n=n_{\\alpha_k}\\cdots n_{\\alpha_1}$ let $p_0=1$, $p_i=n_{\\alpha_i}\\cdots n_{\\alpha_1}$ and $D=\\bigcap_{i=0}^k p_i^{-1}\\Omega$. On $D$ prove by induction on $i$ that $a(p_i x)=f_N(p_i)a(x)$. For $i=0$ this is the identity. If it holds for $i-1$, both $p_{i-1}x$ and $n_{\\alpha_i}p_{i-1}x$ lie in $\\Omega$, so step 3 and the homomorphism law of $f_N$ prove the next case. Every geometric fibre of $G$ is irreducible by the identity-component lemma, since it is connected and of finite type. Each translated cell is a nonempty open of that fibre, so $D$ is dense in each fibre of $X=\\Omega\\cap n^{-1}\\Omega$. The latter is smooth over $A$, being open in the smooth group $G$. The fibrewise-density lemma gives $\\mathcal O_X\\hookrightarrow j_*\\mathcal O_D$. Therefore the equality just proved extends to $X$: for each coordinate function of the affine scheme $H$, the two pullbacks agree on $D$, so injectivity makes them equal on $X$, which determines the two morphisms. Torus multiplication preserves $\\Omega$ and satisfies $a(tx)=f_T(t)a(x)$ by step 1. Since $n_\\alpha^{-1}=\\alpha^\\vee(-1)^{-1}n_\\alpha$ and torus factors move past normalizer factors, the same covariance holds for every finite word in $T(A)$ and $n_\\alpha^{\\pm1}$, including $n_z^{-1}n_w$.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.1 proof, p.199: explicit prefix induction and extension from a fibrewise dense open; density uses the existing universal-density statement."
+   }
+  },
+  {
+   "text": "On $C_w\\cap C_z$ write $x=n_w y$, so $y\\in\\Omega$ and $(n_z^{-1}n_w)y\\in\\Omega$. Step 4 gives\n$$a_z(x)=f_N(n_z)a((n_z^{-1}n_w)y)=f_N(n_w)a(y)=a_w(x).$$\nThese are scheme-morphism identities, including on nonreduced intersections. By morphism gluing and step 2 there is a morphism $f:G\\to H$ restricting to each $a_w$. In particular $f|_\\Omega=a$. We next prove its multiplicativity; it has not been assumed in this gluing.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.1 proof, p.199, open-cell extension; gluing is Stacks Schemes sheaf property as recorded in the cited node."
+   }
+  },
+  {
+   "text": "For a fixed word $n$ as in step 4, the two maps $x\\mapsto f(nx)$ and $x\\mapsto f_N(n)f(x)$ agree on $\\Omega\\cap n^{-1}\\Omega$. This open is dense in every geometric fibre of $G$, by irreducibility and nonemptiness of translated cells. The fibrewise-density lemma and the affine-coordinate argument of step 4 prove\n$$f(nx)=f_N(n)f(x)\\quad\\text{on }G.$$\nLikewise, the two morphisms on $U^-\\times_A G$ given by $f(vx)$ and $F_-(v)f(x)$ agree on $U^-\\times_A\\Omega$ by step 1. Each geometric fibre of the domain is irreducible: $U^-$ is an affine space by root coordinates, and its product with an integral geometric fibre of $G$ is irreducible. This domain is smooth, and that open is fibrewise dense, so the same lemma gives $f(vx)=F_-(v)f(x)$ globally. Applying precisely this argument to $T\\times_A G$ and $T\\times_A\\Omega$ gives $f(tx)=f_T(t)f(x)$. These products are smooth since their first factors are affine space and a split torus, respectively; smoothness and irreducibility can also be checked in their explicit polynomial/Laurent coordinates over $G$.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.1 proof, p.199: extending generator-equivariance from the open cell; universal schematic density replaces any reduced-base argument."
+   }
+  },
+  {
+   "text": "Choose $w_0$ carrying $\\Phi^+$ to $-\\Phi^+$ from the Bruhat input, and its already chosen word representative $n_0$. For $u\\in U^+$ put $v=n_0^{-1}un_0\\in U^-$. The ordered root products and normalizer equivariance give\n$$F_-(v)=f_N(n_0)^{-1}F_+(u)f_N(n_0).$$\nUsing step 6 first for $n_0$, then $v$, then $n_0^{-1}$, gives\n$$f(ux)=f(n_0 v n_0^{-1}x)=F_+(u)f(x).$$\nConsequently, for $q=vtu\\in\\Omega$, step 6 and this identity give $f(qx)=a(q)f(x)$. For $y=n_w q\\in C_w$, apply step 6 once more to obtain\n$$f(yx)=f_N(n_w)a(q)f(x)=f(y)f(x).$$\nThese identities hold as morphisms on $C_w\\times_A G$; those opens cover $G\\times_A G$. The equality clause of morphism gluing proves multiplicativity everywhere. Restrict it to $(C_w\\times_A C_z)\\cap\\mu^{-1}(C_r)$ to obtain exactly the asserted identity for $a_r,a_w,a_z$. No rank-two homomorphism was used. With empty roots the Bruhat factorization makes $G=T$, the same cover is a singleton and every formula is the given homomorphism $f_N$. All fibrewise-density invocations allow disconnected and nonreduced bases.",
+   "uses": [
+    "lem-sfb-bruhat-inversion-factorization",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.1 proof, p.199: completing the homomorphism calculation by the longest Weyl element and the open covering; explicit assembly by NX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-bruhat-inversion-factorization",
+  "lem-sfb-rank-one-cell-enlargement",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.2.1 proof, p.199; NX supplies the omitted Weyl-word and multiplication argument using rank-one enlarged charts and universal schematic density."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible homomorphisms on the positive unipotent subgroup, torus normalizer and rank one centralizers give matching maps on Weyl translates of the big cell of a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T11:59:52Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible homomorphisms on the positive unipotent subgroup, torus normalizer and rank one centralizers give matching maps on Weyl translates of the big cell of a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.range_weylGroup_coweightHom\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.Hom.root_weightMap\"], \"digest\": \"853b297f6c9ee41e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern root permutations, base induction, Lie-algebra constructions, abstract group lifts or general scheme gluing; none gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-24T11:59:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern root permutations, base induction, Lie-algebra constructions, abstract group lifts or general scheme gluing; none gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "big.?cell|Weyl.*(glue|hom)|reductive.*homomorphism",
+   "results": "{\"t\": \"2026-10-24T11:59:52Z\", \"tool\": \"grep\", \"query\": \"big.?cell|Weyl.*(glue|hom)|reductive.*homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\"], \"digest\": \"cc9fece3584268a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern root permutations, base induction, Lie-algebra constructions, abstract group lifts or general scheme gluing; none gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing homomorphisms on Borel subgroups and rank one subgroups of a split reductive group scheme over a ring",
+   "results": "{\"t\": \"2026-10-24T11:59:53Z\", \"tool\": \"leansearch\", \"query\": \"Gluing homomorphisms on Borel subgroups and rank one subgroups of a split reductive group scheme over a ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"AlgebraicGeometry.Scheme.GlueData.mk\", \"AlgebraicGeometry.Scheme.Cover.fromGlued\"], \"digest\": \"c7bd00f25ba2c03e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern root permutations, base induction, Lie-algebra constructions, abstract group lifts or general scheme gluing; none gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a normalizer compatible homomorphism on the positive unipotent radical by rank one subgroup maps and glue the big cell Weyl charts over any commutative ring",
+   "results": "{\"t\": \"2026-10-24T12:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a normalizer compatible homomorphism on the positive unipotent radical by rank one subgroup maps and glue the big cell Weyl charts over any commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.f\", \"RootPairing.GeckConstruction.e\", \"RootPairing.GeckConstruction.ωConj\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.weylGroupToPerm\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.weylGroup.induction'\"], \"digest\": \"cf9b5d9c838766b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern root permutations, base induction, Lie-algebra constructions, abstract group lifts or general scheme gluing; none gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible homomorphisms of positive and negative root groups and the torus normalizer agree on Weyl translates of the big cell of a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T12:24:33Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible homomorphisms of positive and negative root groups and the torus normalizer agree on Weyl translates of the big cell of a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.range_weylGroup_coweightHom\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.Hom.root_weightMap\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup.induction'\", \"RootPairing.Hom.root_weightMap_apply\"], \"digest\": \"07e621d5d7410aa1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-24T12:24:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "big.?cell|Weyl.*(glue|hom)|reductive.*homomorphism",
+   "results": "{\"t\": \"2026-10-24T12:24:34Z\", \"tool\": \"grep\", \"query\": \"big.?cell|Weyl.*(glue|hom)|reductive.*homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\"], \"digest\": \"cc9fece3584268a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing homomorphisms on Weyl translates of an open cell in a reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T12:24:34Z\", \"tool\": \"leansearch\", \"query\": \"Gluing homomorphisms on Weyl translates of an open cell in a reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected.congr_simp\", \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected.congr_simp\", \"AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected_assoc\", \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms_assoc\", \"AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected\", \"AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left_assoc\"], \"digest\": \"0d8d0cdc2f055127\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a normalizer compatible homomorphism on opposite unipotent radicals by homomorphisms on rank one centralizers over an arbitrary commutative base ring",
+   "results": "{\"t\": \"2026-10-24T12:28:00Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a normalizer compatible homomorphism on opposite unipotent radicals by homomorphisms on rank one centralizers over an arbitrary commutative base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"MonoidHom.transferSylow\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieSubalgebra.normalizer_engel\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\"], \"digest\": \"6e21c4a853552da9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern abstract Weyl groups, Lie algebras, topological open subgroups, general scheme opens or general gluing, not the asserted reductive-group scheme geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-full-root-hom-extension",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 6.2.4, printed pp.201--203, with identities (6.2.2)--(6.2.6) and the uniqueness paragraph immediately before them. This is the relation-level theorem, prior to Corollary 6.2.7. Supporting argument: Theorem 6.2.1 and its proof, printed pp.198–200, full-root/normalizer criterion; strengthened by requiring normalizer equivariance for every normalizer point rather than just simple representatives. Read Conrad online; local archival PDF WANTED. No Stacks tag states this reductive-group result. Supporting input for full-root extension: Theorem 6.2.1 proof, printed p.199, paragraph preceding Lemma 6.2.3: word-length induction across translates of the open cell, after the positive and negative unipotent maps are homomorphisms. Technical local formulation of the omitted induction; formulated by the agent.",
+   "via": [
+    "lem-sfb-full-root-hom-extension",
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weyl-cell-hom-gluing",
+  "worker": "stage1",
+  "summary": "Expanded Conrad’s omitted gluing argument: rank-one enlarged cells prove simple-representative covariance; prefix induction on a fibrewise dense open proves covariance for every normalizer word; glue, extend generator equivariance by universal schematic density and verify multiplication. Reused existing density and gluing nodes. Two strictly geometric statement-only prerequisites were searched and added. No Lean attachment, source statement change, SGA source, compilation or repository write.",
+  "blueprint": "Realizes the inherited from.place chain ending in Theorem 6.2.1, p.199, after construction of F_+ and F_-. The latest blueprint direct-image proof (3) is above this supporting algebraic-group chain; no unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme morphism gluing and equality on an open cover; no homomorphism-extension theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-2fa4ee1c5",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-2fa4ee1c5 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics checks out. One repair, to the new node lem-sfb-bruhat-inversion-factorization. It was stated only for a pinned realization over an algebraically closed field F, but item step 2 applies it to the base change of a realization over A, which silently assumes that pinned realizations base-change (Lie(G_F)=Lie(G)⊗F and matching weight spaces; no node states this). I restated the node over A with a homomorphism A→F to an algebraically closed field, factorizing (U_{I_w})_F×T_F×U^+_F→G_F. The case A=F, w_0 and the empty-root case are kept, and no citer changes. I also set its source to Milne iAG2017 Def 21.76, Prop 21.77 (136), Thm 21.80(a),(b) and Def 21.81, pp.448-450, which is in literature: there U^w has roots α>0 with w^{-1}α<0, exactly I_w, and Thm 21.80(c) proves the n_wU^-B cover by the same argument as step 2. Conrad 1.4.12 is kept as the secondary source (WANTED). New node lem-sfb-rank-one-cell-enlargement is true: it is the Levi big cell for Z_G((ker α)^0); the root sets are closed, n_α lies in K_α, and Ω=j(V^-×U_{-α}TU_α×V^+). It is not a duplicate of the relative-root-rank-one-centralizer, relative-dynamic-subgroups, standard-parabolic-levi-charts or relative-root-product-open-cell nodes. Item steps 1-7 are checked on points. Step 3: b_α restricts to a on Ω and has n_α-covariance. Step 4: the prefix induction, D is fibrewise dense via the identity-component node, and O_X injects into j_*O_D for affine H; n_α^{-1}=α^∨(-1)^{-1}n_α. Steps 5-7: overlap agreement, gluing, extension over U^-×G and T×G, the w_0 trick for U^+, and multiplicativity on the cover C_w×G. There is no cycle, the statement and stmt_deps are unchanged from live, and it is not a re-split (no repair note). The morphism-gluing citation is a Mathlib leaf, so the declared tool_use is accepted. Batch-5: the pinned definition, the Weyl calculus and the fibrewise density node reach only general lemmas filed in sec-trace-formula (fpqc smooth descent, f.g. torsion-free abelian groups are free, the fibre smoothness criterion). None of them is part of the trace formula or Poincaré duality, so no assumption leaf is needed.; 1 file(s) fixed by the reviewer"
+ }
+}

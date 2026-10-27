@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-scalar-pull-coefficient-complex-normalization",
+ "kind": "statement",
+ "title": "Single-complex normalization of the scalar/geometric comparison",
+ "statement": "Let R and S be coefficient families of commutative ring sheaves on every small pro-etale scheme site, with inverse-image coefficient identifications, and let a:R→S be compatible with these identifications [def-pur-integral-compact-support-coefficient-data]. Let g:U→V be a scheme morphism. Write F,H,G,K for geometric R pullback, scalar extension on U, scalar extension on V, and geometric S pullback, respectively; use their ordinary and derived functors [def-weil-pbc-proetale-operations, def-weil-pbc-bounded-constructible-tower]. Let gamma:G₀K₀≅F₀H₀ be the inverse left-adjoint uniqueness comparison of the ordinary composite adjunctions, with right comparison identity on direct-image sections [lem-weil-pbc-ring-sheaf-change-adjunction]. Let theta=(scalarPull a g)^{-1}:GK≅FH [def-sp-coefficient-mate-comparisons]. Let q denote localization and cF,cH,cG,cK the canonical complex computation counits. For every unbounded complex P of R_V-modules, theta_(qP);H(cF(P));cH(F₀P)=K(cG(P));cK(G₀P);q(gamma_P). No flatness of P or of a is assumed, and no tensor model occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-compose-pushforward), and the comparison argument of lemma-adjoints-push-pull-compatibility; sites-modules.tex lemma-adjoint-push-pull-modules."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sp-coefficient-mate-comparisons",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "First extend the scalar derived-adjunction unit normalization from K-flat complexes to all cochain complexes: construct the normalized adjunction by the existing resolving-class derived-adjunction theorem, use its unit equation on every homotopy representative, and identify it with pbcDerivedScalarAdjunction by the existing uniqueness clause. The geometric normalization is the derived-unit factorization for the exact module pullback. Naturality then gives the normalized Hom equations for all four cochain adjunctions.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sf-scalar-complex-adjunction-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalizedAdjunction_composition to geometric R pullback followed by scalar extension on U, and to scalar extension on V followed by geometric S pullback. The ordinary uniqueness comparison has the required cochain unit equation degree by degree. The normalized derived restriction/direct-image comparison gives the right-comparison compatibility after cancelling the exact restriction factorization isomorphisms. Apply normalizedAdjunction_uniqueness to obtain compatibility of scalarPull.hom with the two composite computation counits. Precompose by scalarPull.inv and postcompose by the localized ordinary cochain comparison; cancel the two isomorphism identities to obtain the stated formula. No computation counit for scalar extension is inverted.",
+   "uses": [
+    "def-sp-coefficient-mate-comparisons",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-normalized-adjunction-composition",
+    "lem-sf-scalar-restriction-complex-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-coefficient-mate-comparisons",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-normalized-adjunction-composition",
+  "lem-sf-scalar-complex-adjunction-normalization",
+  "lem-sf-scalar-restriction-complex-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "W7",
+  "note": "Proved by normalized Hom equations and adjoint uniqueness, using two completed supporting normalization modules; no additional sorry obligations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived scalar extension and geometric pullback comparison agrees with the ordinary comparison on complexes",
+   "results": "8 hits, including PresheafOfModules.pullback and ModuleCat.ExtendRestrictScalarsAdj.homEquiv; no derived coefficient-square counit normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with pullback and the derived tensor comparison for sheaves of modules",
+   "results": "8 hits, including SheafOfModules.conjugateEquiv_pullbackComp_inv and SheafOfModules.pullbackComp; these concern ordinary continuous pullback.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for these normalized comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits for the ordinary adjunction uniqueness API and its unit/counit equations.",
+   "date": "2026-10-27",
+   "verdict": "Used in the construction; does not supply the derived normalization or total tensor equation."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*scalar|scalar.*tensor",
+   "results": "25 hits, including module tensor/base-change results; none for the four sheaf coefficient functors and their total complex square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullTensorCoefficientCoherence",
+  "date": "2026-10-27",
+  "group": "E7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-compose-pushforward), and the comparison argument of lemma-adjoints-push-pull-compatibility; sites-modules.tex lemma-adjoint-push-pull-modules.",
+   "via": [
+    "lem-sf-scalar-pull-tensor-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarPullCoefficientComplexNormalization",
+  "file": "lean/Sheaf/Paper/ScalarPullCoefficientComplexNormalization.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.scalarPull_complex_normalization",
+  "statement": "theorem scalarPull_complex_normalization\n    {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (g : U ⟶ V)\n    (P : CochainComplex (pbcModules V (R.ring V)) ℤ) :\n    (scalarPull a g).inv.app (DerivedCategory.Q.obj P) ≫\n      (pbcDerivedExtend (a.map U)).map\n        ((proEtaleRingDerivedPullbackFactors g (R.ring V) (R.ring U)\n          (R.pull g)).hom.app P) ≫\n      pbcComplexCounit (a.map U)\n        (((proEtaleRingModulePullback g (R.ring V) (R.ring U)\n          (R.pull g)).mapHomologicalComplex (.up ℤ)).obj P) =\n    (pull S g).map (pbcComplexCounit (a.map V) P) ≫\n      (proEtaleRingDerivedPullbackFactors g (S.ring V) (S.ring U)\n        (S.pull g)).hom.app (((pbcExtend (a.map V)).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      DerivedCategory.Q.map ((scalarPullComplex a g).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.scalarPullModule",
+   "WeilConjectures.PurCompactSupport.scalarPullComplex",
+   "WeilConjectures.PurCompactSupport.scalarPull_complex_normalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T222632-L-676109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T013000-L-2355960",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

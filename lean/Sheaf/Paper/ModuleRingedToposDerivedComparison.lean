@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.SectionDerivedRealization
 public import Sheaf.Topology.ProfiniteCondensedRing
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Sheaf.Algebra.Homology.KFlatModuleObject
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
@@ -22,6 +21,7 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 import Sheaf.Paper.SectionDerivedTensorNormalization
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-! # Module-object and ringed-topos derived comparison
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,

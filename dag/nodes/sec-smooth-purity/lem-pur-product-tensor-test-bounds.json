@@ -1,0 +1,244 @@
+{
+ "id": "lem-pur-product-tensor-test-bounds",
+ "kind": "statement",
+ "title": "Detection of prescribed cohomological and Tor intervals by an exact tensor-compatible product decomposition",
+ "statement": "Let $(\\mathcal C,R)$ and $(\\mathcal C_i,R_i)$, $i\\in I$, be ringed sites, each small relative to the universe of module sheaves, with commutative ring sheaves; $I$ is a finite set, possibly empty. Write $\\mathcal M=\\operatorname{Mod}(R)$ and $\\mathcal M_i=\\operatorname{Mod}(R_i)$ [def-weil-sheaf-of-modules-category], and use their unbounded derived categories [def-weil-abstract-derived-category], cohomology sheaves $H^m$ [def-weil-derived-cohomology-sheaves] and K-flat derived tensors $\\otimes^{\\mathbf L}$ [lem-weil-pbc-site-derived-tensor-descent].\n\nSuppose $r=(r_i)_i:\\mathcal M\\simeq\\prod_i\\mathcal M_i$ is an additive exact equivalence with additive exact quasi-inverse $G$. Define $e_iN=G((N_j)_j)$ for the tuple with $N_i=N$ and $N_j=0$ for $j\\ne i$; the unit and counit identify $r_ie_iN\\cong N$ and $r_je_iN\\cong0$ for $j\\ne i$. Let $D_i:D(\\mathcal M)\\to D(\\mathcal M_i)$ be the functor induced by degreewise $r_i$. Assume natural comparisons\n$$H^m(D_iK)\\cong r_iH^m(K),\\qquad D_i(K\\otimes_R^{\\mathbf L}L)\\cong D_iK\\otimes_{R_i}^{\\mathbf L}D_iL$$\nfor all integers $m$ and all $K,L\\in D(\\mathcal M)$.\n\nFor any $K\\in D(\\mathcal M)$ and integers $a\\le b$, one has\n$$\\bigl(H^m(K)=0\\text{ for }m\\notin[a,b]\\bigr)\\quad\\Longleftrightarrow\\quad\\forall i,\\ H^m(D_iK)=0\\text{ for }m\\notin[a,b].$$\nDefine Tor amplitude in $[a,b]$ in each category to mean $H^m(K\\otimes^{\\mathbf L}M[0])=0$ for every module sheaf $M$ and every $m\\notin[a,b]$, where $M[0]$ denotes the complex concentrated in degree zero. Then\n$$K\\text{ has Tor amplitude in }[a,b]\\quad\\Longleftrightarrow\\quad\\forall i,\\ D_iK\\text{ has Tor amplitude in }[a,b].$$\nThe quantifiers in the right-hand condition include every $R_i$-module sheaf $N$: its global degree-zero test object is $(e_iN)[0]$, and the comparison identifies $D_i(K\\otimes_R^{\\mathbf L}(e_iN)[0])\\cong D_iK\\otimes_{R_i}^{\\mathbf L}N[0]$. No boundedness or constructibility assumption on $K$ is imposed. The statements hold for $I=\\varnothing$ whenever the displayed equivalence exists, and the zero object satisfies both interval conditions for every $a\\le b$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion, finite-level bounds subargument; agent exact-product formulation of returned item steps 4-6. Tor amplitude means Stacks sites-cohomology.tex, Tag 08FZ (definition-tor-amplitude)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "A module M is zero if and only if all coordinate restrictions are zero. The forward implication follows because the additive coordinate functors preserve zero objects. Conversely, a tuple of zero objects is a zero object in the product category: maps to and from any tuple are the unique coordinatewise maps. The fully faithful equivalence reflects zero objects. This proof also covers the empty product, since equality of empty tuples is automatic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent exact-product interval argument; Tor test convention from Stacks Tag 08FZ, sites-cohomology-definition-tor-amplitude."
+   }
+  },
+  {
+   "text": "For every integer $m$, apply step 1 to $A=H^m(K)$ and the assumed isomorphisms $H^m(D_iK)\\cong r_iH^m(K)$. Thus $H^m(K)=0$ if and only if all $H^m(D_iK)=0$. Quantifying over $m\\notin[a,b]$ proves the cohomological equivalence. Here cohomology is a functor on the derived category, so it carries isomorphisms to isomorphisms.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent exact-product interval argument; Tor test convention from Stacks Tag 08FZ, sites-cohomology-definition-tor-amplitude."
+   }
+  },
+  {
+   "text": "Use Mathlib CategoryTheory.Functor.mapDerivedCategorySingleFunctor at degree zero to identify D_i(M[0]) with (r_i M)[0]. The counit of the given product equivalence evaluated on the zero-insertion tuple gives r_i(e_i N) isomorphic to N, and r_j(e_i N) isomorphic to zero when j differs from i. Evaluate the assumed natural tensor comparison on (K,M[0]) and map the degree-zero comparison through the tensor bifunctor. For M=e_i N, compose with the image of the counit isomorphism under the single and tensor functors. This gives the required component tensor-test comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent exact-product interval argument; Tor test convention from Stacks Tag 08FZ, sites-cohomology-definition-tor-amplitude."
+   }
+  },
+  {
+   "text": "If $K$ has Tor amplitude in $[a,b]$, fix $i$, any $R_i$-module sheaf $N$, and $m\\notin[a,b]$. Use the global module test $M=e_iN$. The global hypothesis gives $H^m(K\\otimes_R^{\\mathbf L}(e_iN)[0])=0$. The assumed cohomology comparison, additivity of $r_i$ and step 3 give $H^m(D_iK\\otimes_{R_i}^{\\mathbf L}N[0])=0$. Since $N$ and $m$ were arbitrary, $D_iK$ has the prescribed Tor amplitude.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent exact-product interval argument; Tor test convention from Stacks Tag 08FZ, sites-cohomology-definition-tor-amplitude."
+   }
+  },
+  {
+   "text": "Conversely suppose each $D_iK$ has Tor amplitude in $[a,b]$. Fix any global module sheaf $M$ and $m\\notin[a,b]$. The tensor comparison and step 3 identify $D_i(K\\otimes_R^{\\mathbf L}M[0])$ with $D_iK\\otimes_{R_i}^{\\mathbf L}(r_iM)[0]$, whose $m$-th cohomology is zero by the component hypothesis. Apply step 2 to the object $K\\otimes_R^{\\mathbf L}M[0]$: its $m$-th cohomology is zero. Quantifying over all $M$ and $m$ proves the reverse Tor implication. No bound on $K$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent exact-product interval argument; Tor test convention from Stacks Tag 08FZ, sites-cohomology-definition-tor-amplitude."
+   }
+  },
+  {
+   "text": "The tuple argument and all quantified equivalences already include the empty index set; no choice of an index occurs. For a zero derived object K, each cohomology functor preserves zero objects by additivity. For every module M, apply the separate additivity of the fixed published derived tensor from [lem-pur-derived-tensor-additive-constraints] with the second variable M[0]. That functor preserves zero objects, so K tensor^L M[0] is zero and its cohomology in every integer degree is zero. This proves every ordered interval assertion, without constructing a new resolution.",
+   "uses": [
+    "lem-pur-derived-tensor-additive-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent exact-product interval argument; Tor test convention from Stacks Tag 08FZ, sites-cohomology-definition-tor-amplitude."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-derived-tensor-additive-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Y3 Lean proof, 2026-10-23: exact product zero detection and degree-zero tensor-test transport as in the existing plan; the zero case uses the already proved separate additivity of the published derived tensor (Stacks 0FPT)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|[Tt]or.*[Aa]mplitude",
+   "results": "Actual logged hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude and cohomology support in a fixed interval are detected under exact monoidal equivalences with finite products using component module test objects",
+   "results": "Actual logged hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Monoidal.transportStruct_tensorObj, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.Adjunction.Equivalence.instIsMonoidalCounit, DerivedCategory.TStructure.t, DerivedCategory.isGE_Q_obj_iff, ModuleCat.MonoidalCategory.symmetricCategory, CategoryTheory.exactPairingOfFullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Equivalence",
+   "results": "Actual logged hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaf categories with a finite product, commuting with cohomology and derived tensor, detects fixed cohomological and Tor amplitude intervals by zero insertion of arbitrary degree zero test modules",
+   "results": "Actual logged hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed Tor dimension interval is invariant under a tensor compatible exact product decomposition of ringed site module categories",
+   "results": "Actual logged hits: CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, LightCondensed.internallyProjective_iff_tensor_condition, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|TorAmplitude",
+   "results": "Actual logged hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Limits.IsZero",
+   "results": "Actual logged hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude is detected componentwise under an exact tensor compatible equivalence of a module category with a product of module categories",
+   "results": "Actual logged hits: TensorProduct.piLeft, TensorProduct.piRight, lTensorHomEquivHomLTensor, Module.Flat.iff_rTensor_preserves_shortComplex_exact, PiTensorProduct.congr, IsLocalization.algebraTensorEquiv, CategoryTheory.Monoidal.transportStruct_tensorHom, CategoryTheory.Monoidal.transportStruct_tensorObj",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact tensor compatible equivalence with a product of module sheaf categories detects cohomological intervals and Tor amplitude using modules supported on one factor",
+   "results": "Actual logged hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', Module.Flat.iff_lTensor_preserves_shortComplex_exact, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological support bounds and finite Tor dimension intervals are invariant under a monoidal exact equivalence with a finite product of abelian categories",
+   "results": "Actual logged hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-finite-constructibility-bounds",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: finite-clopen fixed cohomological and Tor bounds subargument of old step 8; returned item steps 4-6 (cohomology, tensor tests, and zero insertion).",
+   "via": [
+    "lem-pur-clopen-finite-constructibility-bounds",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-product-tensor-test-bounds",
+  "worker": "stage1",
+  "summary": "Proved both fixed-interval equivalences directly from the stated exact-product, cohomology and tensor hypotheses. Wrote identity-map zero detection, degree-zero transport and arbitrary component test lifting explicitly; checked empty products and the zero complex. No new nodes or statement changes.",
+  "blueprint": "def-pur-section-invariant final invertibility assertion: finite-clopen fixed cohomology and Tor bounds, through lem-pur-finite-clopen-derived-decomposition and lem-pur-clopen-finite-constructibility-bounds.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Only its already specified derived tensor bifunctor and K-flat total-tensor formula are used, as generic tools for isomorphism transport and the zero case; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-ce57668de",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ce57668de (reviewer sub-agent of L); spot-checked: I read the whole item lem-pur-product-tensor-test-bounds (6 steps, no new nodes, statement unchanged) against the statements of every cited node, the source def-pur-section-invariant in blueprint main-20261015 (it only says 'invertible by co-smoothness', so the agent-written proof is correct) and Stacks sites-cohomology.tex l.12377 definition-tor-amplitude (08FZ). The item tests Tor amplitude on every module sheaf in degree 0, exactly as Stacks does. Steps: (1) zero detection by faithfulness on the identity map, empty I included; (2) cohomology interval through the assumed H^m comparison; (3) D_i(M[0])≅(r_iM)[0], then the counit and the assumed tensor comparison give D_i(K⊗(e_iN)[0])≅D_iK⊗N[0]; (4) forward direction tested on e_iN; (5) reverse direction through r_iM and step 1; (6) empty I and the zero object via the K-flat formula. All steps are correct and use only what the cited statements say. Small cases checked: R=Z×Z on a point with K=e_1(Z/p)[0] (amplitude [-1,0] on both sides), I=∅, K=0, a=b. The parent lem-pur-clopen-finite-constructibility-bounds steps 2 and 4 supply the hypotheses through lem-pur-finite-product-derived-tensor-calculus. Duplicate search: lem-sfb-tor-interval-local-detection, lem-sf-site-tor-interval-restriction, lem-pur-finite-product-derived-tensor-calculus, lem-sf-clopen-derived-compatibility; none states this abstract equivalence, and there is no cycle. Mathlib searches cover all three kinds. I accept the declared tool use of lem-weil-pbc-site-derived-tensor-descent (generic derived tensor and K-flat formula only). FIX (B3/C): step 6 used the notion 'flat' with no citation; it now cites def-pc-flat-sheaf-modules, with proof_deps updated, in fixes/dag/nodes/sec-smooth-purity/lem-pur-product-tensor-test-bounds.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProductTensorTestBounds",
+  "declaration": "SheafOfModules.product_tensor_test_bounds",
+  "declarations": [
+   "SheafOfModules.productBoundsModules",
+   "SheafOfModules.productBoundsInsertion",
+   "SheafOfModules.productBoundsRestriction",
+   "SheafOfModules.productBoundsDerived",
+   "SheafOfModules.product_tensor_test_bounds"
+  ],
+  "file": "lean/Sheaf/Paper/ProductTensorTestBounds.lean",
+  "statement": "theorem product_tensor_test_bounds (hH : ∀ (i : I) (m : ℤ), Nonempty (productBoundsDerived J R Ji Ri e i ⋙ DerivedCategory.homologyFunctor _ m ≅ DerivedCategory.homologyFunctor _ m ⋙ productBoundsRestriction e i)) (hT : ∀ i : I, Nonempty (siteDerivedTensorIndependentCoefficients J R ⋙ productBoundsDerived J R Ji Ri e i ≅ (productBoundsDerived J R Ji Ri e i).prod (productBoundsDerived J R Ji Ri e i) ⋙ siteDerivedTensorIndependentCoefficients (Ji i) (Ri i))) : (∀ (K : DerivedCategory (productBoundsModules R)) (a b : ℤ), a ≤ b → ((∀ m : ℤ, m ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ m).obj K)) ↔ ∀ (i : I) (m : ℤ), m ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ m).obj ((productBoundsDerived J R Ji Ri e i).obj K))) ∧ ((∀ (M : productBoundsModules R) (m : ℤ), m ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ m).obj ((siteDerivedTensorIndependentCoefficients J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj M)))) ↔ ∀ (i : I) (N : productBoundsModules (Ri i)) (m : ℤ), m ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ m).obj ((siteDerivedTensorIndependentCoefficients (Ji i) (Ri i)).obj ((productBoundsDerived J R Ji Ri e i).obj K, (DerivedCategory.singleFunctor _ 0).obj N))))) ∧ (∀ (i : I) (N : productBoundsModules (Ri i)), Nonempty ((productBoundsRestriction e i).obj (productBoundsInsertion e i N) ≅ N) ∧ ∀ j : I, j ≠ i → IsZero ((productBoundsRestriction e j).obj (productBoundsInsertion e i N))) ∧ (∀ (i : I) (N : productBoundsModules (Ri i)) (K : DerivedCategory (productBoundsModules R)), Nonempty ((productBoundsDerived J R Ji Ri e i).obj ((siteDerivedTensorIndependentCoefficients J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj (productBoundsInsertion e i N))) ≅ (siteDerivedTensorIndependentCoefficients (Ji i) (Ri i)).obj ((productBoundsDerived J R Ji Ri e i).obj K, (DerivedCategory.singleFunctor _ 0).obj N))) ∧ (∀ (K : DerivedCategory (productBoundsModules R)), IsZero K → ∀ a b : ℤ, a ≤ b → (∀ m : ℤ, m ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ m).obj K)) ∧ ∀ (M : productBoundsModules R) (m : ℤ), m ∉ Set.Icc a b → IsZero ((DerivedCategory.homologyFunctor _ m).obj ((siteDerivedTensorIndependentCoefficients J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Both fixed-interval equivalences, the zero-insertion identities, the actual derived tensor test comparison, and zero-object bounds. Finite I is explicitly retained by include hI. Component additivity and exactness express the additive exact equivalence coordinatewise; exactness and additivity of its inverse follow from the equivalence. Helpers are transparent specializations or actual constructions for this node, not new categorical notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4b65729e",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read item node, the 4 stmt_dep records/decls (ringedSiteModules=SheafOfModules.{r}, DerivedCategory, homologyFunctor, siteDerivedTensorIndependentCoefficients .{u,v,r,w}), Mathlib mapDerivedCategory, module, report (Worker report + Second reading sections present). lean.statement verbatim = file signature; node differs from live only by lean field; no statement_change. Clause check: sites EssentiallySmall.{r} with CommRingCat.{r}; Finite I via include, empty allowed; e with r_i = e.functor ⋙ Pi.eval and Additive/exact instances (automatic for an equivalence, so not stronger); G = e.inverse; e_iN by dite zero insertion (no choice); D_i = mapDerivedCategory; hH/hT natural isos in the correct direction; conclusions: cohomology ↔, Tor ↔ over all M / all i,N with singleFunctor 0 and the recorded tensor, r_ie_iN≅N and r_je_iN=0, derived-category iso D_i(K⊗(e_iN)[0])≅D_iK⊗N[0], zero-object clause. Universes all bound; same default sheafify instance path as the tensor dep. Helpers have real bodies and source/blueprint docstrings; 6-step proof docstring; proof sorry. Advisory: inline Tor test matches HasRingedSiteTorAmplitudeOfUniverses (def-weil-proetale-tor-amplitude), which the citer can unfold. No recompile per the 2026-10-21 rule; no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261023T103440-L-3141153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

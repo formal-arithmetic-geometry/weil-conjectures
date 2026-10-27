@@ -1,0 +1,269 @@
+{
+ "id": "lem-per-cyclic-square-permutation-complex-splitting",
+ "kind": "statement",
+ "title": "Splitting of the cyclic permutation complex after a square-order lift",
+ "statement": "Let $\\ell$ be a prime, $A=\\mathbf F_\\ell$, $C=\\mathbf Z/\\ell^2\\mathbf Z$ and $Q=\\mathbf Z/\\ell\\mathbf Z$, with their additive group structures, and let $\\pi:C\\to Q$ be reduction. Give the finite groups the discrete topology. Let $\\operatorname{Rep}_A(C)=\\operatorname{Mod}^{\\mathrm{disc}}(A,C)$ [def-exc-discrete-modules-category], the abelian category of $A$-vector spaces with a $C$-action by linear automorphisms and equivariant linear maps. Put $M=\\operatorname{Map}(Q,A)$, with action $(c\\cdot h)(q)=h(q-\\pi(c))$, and write $\\tau=1\\in C$. Let $K$ be the cochain complex in this category with $K^0=K^1=M$, $d^0=\\tau-1$, and all other terms and differentials zero. In the ordinary derived category [def-weil-abstract-derived-category] there is an isomorphism\n$$K\\simeq A[0]\\oplus A[-1]\\quad\\text{in }D(\\operatorname{Rep}_A(C)),$$\nwhere $A$ has trivial $C$-action and $[r]$ is the cohomological shift, so $A[-1]$ is in degree one. No splitting in the category of complexes, and no canonical choice of this derived isomorphism, is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI proof of Proposition 3.4.5, root tower on p.247 and final permutation-module paragraph following Lemma 3.4.9 on p.248. Agent-formulated finite-level homological replacement: the two-extension becomes zero after inflation from the cyclic group of order ell to that of order ell squared. Periodic resolution available in Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Rep.FiniteCyclicGroup.resolution, lines 235--246; inflation formula is the existing blueprint node det-base-field-cd-inflation."
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "All modules below belong to [def-exc-discrete-modules-category]: $C$ is finite discrete, so every stabilizer is open. It is profinite and $A$ is finite, so [lem-exc-discrete-modules-abelian-structure] applies: kernels, cokernels and finite biproducts are computed on underlying $A$-modules with their induced actions. Thus the following kernel/image calculations compute the cohomology objects in the stated representation category.",
+   "uses": [
+    "def-exc-discrete-modules-category",
+    "lem-exc-discrete-modules-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JP, label definition-G-module-continuous, and Tag 0A2H, label section-group-cohomology; underlying-module kernels and cokernels."
+   }
+  },
+  {
+   "text": "For $S=\\mathbf Z/n\\mathbf Z$, $n=\\ell$ or $\\ell^2$, write $R_S=\\operatorname{Map}(S,A)$, $D_Sh(j)=h(j-1)-h(j)$, $i_S(a)=a\\mathbf1_S$, and $\\epsilon_S(h)=\\sum_{j\\in S}h(j)$. The equation $D_Sh=0$ says exactly that $h$ is constant, so $\\ker D_S=\\operatorname{im}i_S$ and $i_S$ is injective. Also $\\epsilon_SD_S=0$, and if $\\epsilon_S(h)=0$, put $v(0)=0$ and $v(j)=-\\sum_{k=1}^jh(k)$ for $1\\le j<n$. Then $D_Sv=h$, including at $j=0$ by the zero-sum hypothesis. Hence $\\operatorname{im}D_S=\\ker\\epsilon_S$; $\\epsilon_S$ is surjective since $\\epsilon_S(\\delta_0)=1$. Constants and summation are equivariant to/from the trivial representation, so these identifications have trivial $C$-action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, proof of Proposition 3.4.5, printed pp.247--248: root tower and permutation module after Lemma 3.4.9; agent-written finite-level refinement by an explicit quasi-isomorphism roof."
+   }
+  },
+  {
+   "text": "Put $R=R_C$, with regular translation action, and $M=R_Q$ with the given quotient action. Define $p:R\\to M$ by $p(r)(q)=\\sum_{\\pi(c)=q}r(c)$. Translation $c\\mapsto c-b$ bijects the corresponding fibres, so $p$ is $C$-equivariant; in particular $pD_C=D_Qp$. Each fibre has $\\ell$ elements, whence $pi_C=\\ell i_Q=0$ in characteristic $\\ell$. Partitioning $C$ by these fibres gives $\\epsilon_Qp=\\epsilon_C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, proof of Proposition 3.4.5, printed pp.247--248: root tower and permutation module after Lemma 3.4.9; agent-written finite-level refinement by an explicit quasi-isomorphism roof."
+   }
+  },
+  {
+   "text": "Construct a complex $Z$ supported in degrees $-1,0,1$ with terms $A$, $A\\oplus R$, $R$ and differentials $a\\mapsto(0,i_C(a))$ and $(a,r)\\mapsto D_Cr$. Their composite is zero. Let $T$ have $A$ in degrees $0,1$, zero differential, and trivial actions, so $T=A[0]\\oplus A[-1]$. Define $\\alpha:Z\\to T$ by $\\alpha^0(a,r)=a$, $\\alpha^1(r)=\\epsilon_C(r)$, and $\\alpha^{-1}=0$. Its chain equations are $\\alpha^0(0,i_C(a))=0$ and $\\epsilon_CD_C=0$. Define $\\beta:Z\\to K$ by $\\beta^0(a,r)=i_Q(a)+p(r)$, $\\beta^1=p$, and $\\beta^{-1}=0$. Its chain equations are $pi_C=0$ and $D_Q(i_Q(a)+p(r))=pD_Cr$. Every component is equivariant, so these are morphisms of complexes in the required category.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, proof of Proposition 3.4.5, printed pp.247--248: root tower and permutation module after Lemma 3.4.9; agent-written finite-level refinement by an explicit quasi-isomorphism roof."
+   }
+  },
+  {
+   "text": "The explicit kernels and images of Step 2 give $H^{-1}(Z)=0$, $H^0(Z)=(A\\oplus i_C(A))/(0\\oplus i_C(A))\\simeq A$, and $H^1(Z)=R/D_CR\\xrightarrow{\\epsilon_C}A$. All other cohomology vanishes. On $K$, $H^0(K)=i_Q(A)\\simeq A$ and $H^1(K)=M/D_QM\\xrightarrow{\\epsilon_Q}A$. On degree zero, both $H^0(\\alpha)$ and $H^0(\\beta)$ are the identity on $A$: the second summand contributes $pi_C=0$. On degree one they are the identity via summation, since $\\epsilon_Qp=\\epsilon_C$. Thus both maps are quasi-isomorphisms by [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, proof of Proposition 3.4.5, printed pp.247--248: root tower and permutation module after Lemma 3.4.9; agent-written finite-level refinement by an explicit quasi-isomorphism roof."
+   }
+  },
+  {
+   "text": "By the localization definition in [def-weil-abstract-derived-category], both quasi-isomorphisms become invertible. Consequently $Q(\\alpha)\\circ Q(\\beta)^{-1}:K\\xrightarrow{\\sim}T=A[0]\\oplus A[-1]$ is the asserted isomorphism. The degree-zero and degree-one description of $T$ uses the cohomological shift convention of that definition. This construction proves the existence of a derived isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RR, label section-derived-categories; Definition Tag 05RU, label definition-unbounded-derived-category, and cohomological shift convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "lem-exc-discrete-modules-abelian-structure",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, proof of Proposition 3.4.5, printed pp.247--248: root tower and permutation module after Lemma 3.4.9; agent-written finite-level refinement by an explicit quasi-isomorphism roof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bockstein|bockstein|permutation.*(cone|complex)|cyclic.*(extension|norm)",
+   "results": "{\"t\": \"2026-10-24T12:39:05Z\", \"tool\": \"grep\", \"query\": \"Bockstein|bockstein|permutation.*(cone|complex)|cyclic.*(extension|norm)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Transfer.lean\", \"Mathlib/GroupTheory/SpecificGroups/ZGroup.lean\", \"Mathlib/GroupTheory/SpecificGroups/ZGroup.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"Mathlib/FieldTheory/Finite/Extension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\"], \"digest\": \"256c6ce99c1f01c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite cyclic resolutions and cohomology formulas do not state the derived splitting after inflation; the splitting requires the two-extension argument described in report.md."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Bockstein of a cyclic torsor vanishes if it lifts to a torsor for Z modulo ell squared and the permutation two extension splits",
+   "results": "{\"t\": \"2026-10-24T12:39:06Z\", \"tool\": \"leansearch\", \"query\": \"The Bockstein of a cyclic torsor vanishes if it lifts to a torsor for Z modulo ell squared and the permutation two extension splits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff\", \"groupCohomology.H2π_eq_zero_iff\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"AlgHom.kerSquareLift\", \"Module.p_pow_smul_lift\", \"groupCohomology.coboundaries₂_le_cocycles₂\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven\", \"ZMod.isCyclic_units_two_pow_iff\"], \"digest\": \"74a6b0a944e8479f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite cyclic resolutions and cohomology formulas do not state the derived splitting after inflation; the splitting requires the two-extension argument described in report.md."
+  },
+  {
+   "tool": "loogle",
+   "query": "groupCohomology, \"cyclic\"",
+   "results": "{\"t\": \"2026-10-24T12:39:06Z\", \"tool\": \"loogle\", \"query\": \"groupCohomology, \\\"cyclic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.groupCohomologyIsoOdd\", \"Rep.FiniteCyclicGroup.groupCohomologyIsoEven\", \"Rep.FiniteCyclicGroup.groupCohomologyπOdd\", \"Rep.FiniteCyclicGroup.groupCohomologyIso₀\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven\", \"Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff\", \"Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_iff\"], \"digest\": \"f6c99000c450aa7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite cyclic resolutions and cohomology formulas do not state the derived splitting after inflation; the splitting requires the two-extension argument described in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cyclic ell torsor lifting to a cyclic ell squared torsor the two term permutation sheaf complex sigma minus one splits in the derived category as constant F ell plus constant F ell shifted minus one",
+   "results": "{\"t\": \"2026-10-24T12:39:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a cyclic ell torsor lifting to a cyclic ell squared torsor the two term permutation sheaf complex sigma minus one splits in the derived category as constant F ell plus constant F ell shifted minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r\", \"CochainComplex.mappingCone.cocycleOfDegreewiseSplit_triangleRotateShortComplexSplitting_v\", \"CochainComplex.mappingConeHomOfDegreewiseSplitXIso\", \"CochainComplex.homOfDegreewiseSplit_f\", \"CochainComplex.triangleOfDegreewiseSplit_obj₁\", \"CochainComplex.homOfDegreewiseSplit\"], \"digest\": \"5b10a215dcd7d195\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite cyclic resolutions and cohomology formulas do not state the derived splitting after inflation; the splitting requires the two-extension argument described in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "inflation|periodic",
+   "results": "{\"t\": \"2026-10-24T12:42:58Z\", \"tool\": \"grep\", \"query\": \"inflation|periodic\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\"], \"digest\": \"b0723926a55900ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite cyclic resolutions and cohomology formulas do not state the derived splitting after inflation; the splitting requires the two-extension argument described in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inflation kills the degree two extension of the trivial F p representation defined by the periodic resolution of C p when inflated along C p squared to C p",
+   "results": "{\"t\": \"2026-10-24T12:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"Inflation kills the degree two extension of the trivial F p representation defined by the periodic resolution of C p when inflated along C p squared to C p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution.π\", \"groupHomology.H1CoresCoinfOfTrivial_X₂\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.FiniteCyclicGroup.resolution\", \"Rep.FiniteCyclicGroup.normHomCompSub\", \"Rep.FiniteCyclicGroup.subCompNormHom\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven\", \"groupHomology.H1CoresCoinfOfTrivial_X₁\"], \"digest\": \"0fd7cd47a491c8f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite cyclic resolutions and cohomology formulas do not state the derived splitting after inflation; the splitting requires the two-extension argument described in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "permutation.*(complex|split)|inflation.*(split|quasi)|cyclic.*splitting",
+   "results": "{\"t\": \"2026-10-24T13:30:56Z\", \"tool\": \"grep\", \"query\": \"permutation.*(complex|split)|inflation.*(split|quasi)|cyclic.*splitting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\", \"Mathlib/FieldTheory/KummerExtension.lean\"], \"digest\": \"fd32869df3d00420\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: unrelated number-field embeddings and Kummer splitting fields; none concerns complexes of representations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a cyclic group of order p squared the inflated permutation complex Map Z mod p F p with differential generator minus one is isomorphic to F p plus F p shifted in the derived category",
+   "results": "{\"t\": \"2026-10-24T13:30:56Z\", \"tool\": \"leansearch\", \"query\": \"For a cyclic group of order p squared the inflated permutation complex Map Z mod p F p with differential generator minus one is isomorphic to F p plus F p shifted in the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution\", \"Rep.FiniteCyclicGroup.resolution_complex\", \"Rep.FiniteCyclicGroup.moduleCatChainComplex\", \"Rep.FiniteCyclicGroup.groupCohomologyIsoEven\", \"IsPGroup.cyclic_center_quotient_of_card_eq_prime_sq\", \"Rep.FiniteCyclicGroup.groupHomologyIsoOdd\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\", \"Rep.FiniteCyclicGroup.groupHomologyIsoEven\"], \"digest\": \"6ab9138708757735\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give periodic resolutions or their augmentations, not the two-term inflated permutation-complex splitting; the finite roof and fibrewise sum are additional explicit constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.FiniteCyclicGroup.resolution, QuasiIso",
+   "results": "{\"t\": \"2026-10-24T13:30:56Z\", \"tool\": \"loogle\", \"query\": \"Rep.FiniteCyclicGroup.resolution, QuasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match in this query; checked the successful quoted-name query and semantic searches before concluding absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two term cyclic permutation representation complex tau minus one over F p splits in the derived category after inflation from Z modulo p to Z modulo p squared",
+   "results": "{\"t\": \"2026-10-24T13:30:57Z\", \"tool\": \"leanfinder\", \"query\": \"The two term cyclic permutation representation complex tau minus one over F p splits in the derived category after inflation from Z modulo p to Z modulo p squared\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.FiniteCyclicGroup.resolution_complex\", \"Rep.FiniteCyclicGroup.resolution_π\", \"Rep.FiniteCyclicGroup.chainComplexFunctor\", \"Rep.FiniteCyclicGroup.resolution.π\"], \"digest\": \"9bd9a995421a0caf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give periodic resolutions or their augmentations, not the two-term inflated permutation-complex splitting; the finite roof and fibrewise sum are additional explicit constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "resolution_quasiIso|range_norm_eq_ker_applyAsHom_sub|range_applyAsHom_sub_eq_ker_linearCombination",
+   "results": "{\"t\": \"2026-10-24T13:31:41Z\", \"tool\": \"grep\", \"query\": \"resolution_quasiIso|range_norm_eq_ker_applyAsHom_sub|range_applyAsHom_sub_eq_ker_linearCombination\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\"], \"digest\": \"59435fe88fd9fb26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give periodic resolutions or their augmentations, not the two-term inflated permutation-complex splitting; the finite roof and fibrewise sum are additional explicit constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite cyclic permutation module two term complex generator minus identity becomes formal after inflating the action along a cyclic square order quotient, using a roof of quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-24T13:31:43Z\", \"tool\": \"leanfinder\", \"query\": \"A finite cyclic permutation module two term complex generator minus identity becomes formal after inflating the action along a cyclic square order quotient, using a roof of quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.FiniteCyclicGroup.resolution_π\", \"Rep.FiniteCyclicGroup.resolution_complex\", \"Rep.FiniteCyclicGroup.resolution.π\", \"Rep.FiniteCyclicGroup.resolution\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.moduleCatChainComplex\"], \"digest\": \"f02c79dbb6bc03eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give periodic resolutions or their augmentations, not the two-term inflated permutation-complex splitting; the finite roof and fibrewise sum are additional explicit constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.FiniteCyclicGroup, \"norm\"",
+   "results": "{\"t\": \"2026-10-24T13:32:19Z\", \"tool\": \"loogle\", \"query\": \"Rep.FiniteCyclicGroup, \\\"norm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Rep.FiniteCyclicGroup'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "query rejected: loogle: unknown identifier 'Rep.FiniteCyclicGroup'; no absence conclusion from this query; a subsequent quoted-name Loogle search succeeded."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rep.FiniteCyclicGroup.resolution\"",
+   "results": "{\"t\": \"2026-10-24T13:32:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Rep.FiniteCyclicGroup.resolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution\", \"Rep.FiniteCyclicGroup.resolution_complex\", \"Rep.FiniteCyclicGroup.resolution.π\", \"Rep.FiniteCyclicGroup.resolution_π\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.FiniteCyclicGroup.resolution.π_f\"], \"digest\": \"2ea4f23daf9f656d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give periodic resolutions or their augmentations, not the two-term inflated permutation-complex splitting; the finite roof and fibrewise sum are additional explicit constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-root-regular-divisor-purity",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical proof Step 3 of lem-per-artin-gabber-affine-curve, regular finite-coefficient duality input, via the listed ancestors: ILO XVI Theorem 3.6.2, final paragraph p.253, reduces to Proposition 3.5.12. Supporting input: Expose XVI Proposition 3.4.5 and its proof, printed pp.246--248 (the monic root algebra, and its Kummer cover away from the divisor). Auxiliary finite cyclic algebra for the root-tower comparison in ILO XVI 3.4.5: replace the last paragraph following Lemma 3.4.9 by the split two-term permutation complex at the second root level.",
+   "via": [
+    "lem-per-kummer-root-regular-divisor-purity",
+    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-log-smooth-trait-punctual-purity",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-cyclic-square-permutation-complex-splitting",
+  "worker": "stage1",
+  "summary": "Kept the exact statement. Replaced the prospective Ext/inflation argument with an explicit finite three-term roof: fibrewise summation kills constants because the fibres have ell elements, and both roof maps induce the identity on the two cohomology objects. Every cyclic kernel/image assertion is proved by a displayed recurrence; no new nodes or implicit Ext identifications are needed.",
+  "blueprint": "Realizes the inherited historical Step 3 of lem-per-artin-gabber-affine-curve through the existing ancestor chain: the finite-level homological input to ILO XVI Proposition 3.4.5, root tower p.247 and permutation module following Lemma 3.4.9 p.248. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-discrete-modules-abelian-structure",
+    "why": "Generic underlying-module kernel/cokernel and finite-biproduct computation for discrete representations, applied to a finite discrete group and finite field; the geometric unit supplies no different construction of this category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-discrete-modules-abelian-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-f1932ff42",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-f1932ff42 (reviewer sub-agent of L); spot-checked: Read the item, its six steps, the three cited nodes and parent Step 9 in full. No new nodes. The statement is unchanged and true: the explicit roof K <-β- Z -α-> A[0]⊕A[-1] proves it, with Z = [A → A⊕Map(C,A) → Map(C,A)] in degrees -1,0,1, differentials (0,i_C) and D_C. Checks: p(b·r)(q) = p(r)(q−πb), so p is equivariant and pD_C = D_Q p. Each fibre has ℓ elements, so p i_C = ℓ i_Q = 0; this also holds at ℓ=2, and would fail without the square lift. ε_Q p = ε_C. The partial-sum primitive v works at j=0 by the zero-sum hypothesis. Both maps are chain maps, and H^0 and H^1 are identities through constants and summation, so both are quasi-isomorphisms; inverting β in D(Rep_A(C)) per def-weil-abstract-derived-category gives the isomorphism. The shift convention puts A[-1] in degree 1. The parent's use (Step 9 of lem-per-kummer-root-regular-divisor-purity) matches the statement exactly. The tool use lem-exc-discrete-modules-abelian-structure (C is finite hence profinite, A finite) is declared and accepted. A search for duplicates found none (lem-sfb-cyclic-periodic-resolution, lem-sfb-relative-cyclic-restriction-model and lem-per-kummer-relative-cone-functor are different statements). No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CyclicSquarePermutationComplexSplitting",
+  "declaration": "Rep.CyclicSquare.permutationComplex_splitting",
+  "declarations": [
+   "Rep.CyclicSquare.reduction",
+   "Rep.CyclicSquare.translation",
+   "Rep.CyclicSquare.permutationModule",
+   "Rep.CyclicSquare.trivialModule",
+   "Rep.CyclicSquare.differential",
+   "Rep.CyclicSquare.permutationComplex",
+   "Rep.CyclicSquare.permutationComplex_splitting"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/CyclicSquarePermutationComplexSplitting.lean",
+  "statement": "theorem permutationComplex_splitting (ℓ : ℕ) [Fact ℓ.Prime] [h : Abelian (DiscreteContinuousRep.{0, 0, 0} (ZMod ℓ) (Multiplicative (ZMod (ℓ ^ 2))))] [HasDerivedCategory.{w} (DiscreteContinuousRep.{0, 0, 0} (ZMod ℓ) (Multiplicative (ZMod (ℓ ^ 2))))] : Nonempty (((DerivedCategory.Q (C := DiscreteContinuousRep.{0, 0, 0} (ZMod ℓ) (Multiplicative (ZMod (ℓ ^ 2))))).obj (@permutationComplex ℓ h)) ≅ ((DerivedCategory.singleFunctor (DiscreteContinuousRep.{0, 0, 0} (ZMod ℓ) (Multiplicative (ZMod (ℓ ^ 2)))) 0).obj (trivialModule ℓ) ⊞ ((DerivedCategory.singleFunctor (DiscreteContinuousRep.{0, 0, 0} (ZMod ℓ) (Multiplicative (ZMod (ℓ ^ 2)))) 0).obj (trivialModule ℓ))⟦(-1 : ℤ)⟧))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b1f27af6",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: ℓ prime with ZMod ℓ; C = Multiplicative(ZMod ℓ²), discrete; reduction = ZMod.castHom; translation h(q − π c); d = applyAsHom(ofAdd 1) − 𝟙; K = HomologicalComplex.double at degrees 0 and 1; Nonempty(Q K ≅ single₀ A ⊞ (single₀ A)⟦-1⟧) in DerivedCategory, with A[-1] in degree 1. The [Abelian] hypothesis is dischargeable by the proof dep discreteRep_abelian_structure, uses the same pattern as the landed ProcyclicTwoTerm, and the additive structure is unique. HasDerivedCategory.{w} is arbitrary. Carrier universe 0 is acceptable: all objects are concrete finite modules and the citer (kummer-root Step 9) uses this through an exact functor. ℓ = 2 is covered. No duplicate found (grep in Sheaf and WeilConjectures, Mathlib ofMulAction differs). Helpers have real data and docstrings; the only sorry is the theorem body; lean.statement matches the file verbatim; the report has the Worker report and Second reading sections; imports follow the rules. No changes, so no compile."
+ }
+}

@@ -1,0 +1,195 @@
+{
+ "id": "lem-sf-native-open-sheaf-tensor-existence",
+ "kind": "statement",
+ "title": "Native sheaf open tensor and K-flat preservation",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and a $k_0$-open immersion $j:U\\to Z$ between separated finite-type $k_0$-schemes. Use the actual native pro-etale Weil-sheaf categories and open functors of [def-sf-native-weil-derived-framework], the native tensor and categorical two-sided K-flatness of [def-sf-derived-weil-category-and-operations], and the data type of [def-sf-native-open-tensor-presentation-data]. There exist an extension/restriction adjunction whose unit and counit forget to the ordinary open adjunction, the generator-normalized equivariant sheaf restriction/tensor isomorphism, the equivariant sheaf open tensor isomorphism whose inverse is its specified unit transpose, and preservation of categorical two-sided K-flatness by extension and restriction. Invertibility of the lifted unit is not a conclusion here; it is deduced from the ordinary open unit by the assembling theorem. This statement concerns sheaves and complexes only; it asserts no ambient derived comparison or forgetting square.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-open-tensor-presentation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; Tags 03DJ, 03D8; native parent proof steps 1--4"
+ },
+ "proof": [
+  {
+   "text": "Use the actual module operations of [def-sf-native-weil-derived-framework]. The open is Frobenius-stable because it is defined over $k_0$. By [lem-weil-proetale-weakly-etale-localization] its geometric pro-etale site is the slice at $U$; the localized coefficient sheaf is $B_U=j^{-1}B_Z$, since both assign the same locally finite functions to every slice object. [lem-pur-site-restriction-module-adjunction-exact] gives exact restriction and exact extension, with their specified adjunction. The ordinary open unit is invertible by [lem-sf-native-adic-open-restrictions]; reflection of this property is reserved for the assembling theorem. These maps lift to Weil sheaves: restriction sends a section to itself, the open unit sends $x$ to $[x]$, and the counit sends $[x]$ to $x$ on a factoring object. Frobenius reindexes the factoring object and applies its structure map to $x$, so these formulas commute with it. Thus the underlying adjunction bijection and its inverse restrict to commuting morphisms. [lem-sf-fixed-pair-created-abelian-structure] makes forgetting faithful, exact and conservative, so the lifted operations are exact ; the assembling theorem reflects the invertibility of the ordinary unit. This also shows that $j_{0!}$ reflects acyclicity: apply $j_0^*$ and its unit.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-native-adic-open-restrictions",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-ringed-slice-tensor-generators] with $O=B_Z$. For Weil module sheaves $P,T$ the underlying forward map is $[x]_f\\otimes y\\mapsto[x\\otimes y|_U]_f$ and its inverse is $[x\\otimes z]_f\\mapsto[x]_f\\otimes z$. Here the inverse formula is interpreted locally on the slice, exactly as the cited sheaf-map assertion. These maps commute with the Weil structures specified in [def-sf-derived-weil-category-and-operations]: on a pulled-back generator the two orders both give $[\\phi_P(F_U^*x)\\otimes j^*\\phi_T(F_Z^*y)]_{F(f)}$. The coefficient action commutes because restriction and Frobenius both act on functions by precomposition and $jF_U=F_Zj$. Faithfulness of forgetting from step 1 turns this equality on the defining generators into equality of Weil-sheaf maps. The two underlying inverse identities therefore give inverse Weil maps. The same formulas prove naturality in both module morphisms.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  },
+  {
+   "text": "Apply the maps of step 2 in every bidegree and take direct sums. [lem-sf-ringed-open-total-tensor-kflat] supplies the underlying natural chain isomorphism with precisely this direct-sum convention. Coproducts in the Weil category have their underlying coproducts by [lem-sf-fixed-pair-created-abelian-structure]. Therefore the bidegree maps of step 2 assemble to a Weil chain isomorphism $\\Gamma_{P,T}:\\operatorname{Tot}(j_{0!}P\\otimes T)\\cong j_{0!}\\operatorname{Tot}(P\\otimes j_0^*T)$. Explicitly, the two composites with the differential send $[x]_f\\otimes y$ in bidegree $(p,q)$ to $[d_Px\\otimes y|_U]_f+(-1)^p[x\\otimes(d_Ty)|_U]_f$. The inverse has the same bidegrees and signs. Naturality is inherited on every summand, so holds for arbitrary unbounded complexes.",
+   "uses": [
+    "lem-sf-ringed-open-total-tensor-kflat",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  },
+  {
+   "text": "Check categorical K-flatness directly using the definition in [def-sf-derived-weil-category-and-operations]. If $P$ is K-flat on $U$ and $a:T\\to T'$ is a quasi-isomorphism on $Z$, then $j_0^*a$ is a quasi-isomorphism by step 1. Step 3 identifies $\\operatorname{Tot}(j_{0!}P\\otimes a)$ with $j_{0!}\\operatorname{Tot}(P\\otimes j_0^*a)$, hence it is a quasi-isomorphism. Conversely let $T$ be K-flat on $Z$ and $b:P\\to P'$ a quasi-isomorphism on $U$. Step 3 identifies $j_{0!}\\operatorname{Tot}(b\\otimes j_0^*T)$ with $\\operatorname{Tot}(j_{0!}b\\otimes T)$, which is a quasi-isomorphism. Reflection of acyclicity by $j_{0!}$ from step 1 proves the same for $\\operatorname{Tot}(b\\otimes j_0^*T)$. Symmetry gives the other tensor variable. These arguments concern arbitrary categorical K-flat complexes, without a flat-term restriction.",
+   "uses": [
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-weil-derived-framework",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sf-native-adic-open-restrictions",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native equivariant refinement of Stacks 0GL1/0E8I; parent argument steps 1, 2, 3, 4; full proof in Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived tensor products for an open immersion of Frobenius equivariant module sheaves",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the results concern ordinary scheme module restriction, not the native equivariant sheaf/complex construction and its specified derived normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenDerivedTensor",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native open factor of fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection; native parent steps 1, 2, 3, 4",
+   "via": [
+    "lem-sf-native-open-derived-tensor",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenSheafTensorExistence",
+  "file": "lean/Sheaf/Paper/NativeOpenSheafTensorExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_sheaf_tensor_existence",
+  "statement": "theorem native_open_sheaf_tensor_existence :\n    ∃ (adj : extensionByZero k₀ l j ⊣ upperStar k₀ l j)\n      (sheafRestriction : ∀ M N : ProEtaleWeilSheaf k₀ l Z,\n        (upperStar k₀ l j).obj (tensor k₀ l Z N M) ≅\n          tensor k₀ l U ((upperStar k₀ l j).obj N) ((upperStar k₀ l j).obj M))\n      (sheafGamma : ∀ (M : ProEtaleWeilSheaf k₀ l U) (N : ProEtaleWeilSheaf k₀ l Z),\n        tensor k₀ l Z N ((extensionByZero k₀ l j).obj M) ≅\n          (extensionByZero k₀ l j).obj (tensor k₀ l U ((upperStar k₀ l j).obj N) M)),\n      (∀ M, (adj.unit.app M).hom.f =\n        (ProEtale.adicOpenImmersionLowerShriekAdjunction l\n          (Scheme.Hom.geometricFiberMap j (comp_over j _))).unit.app M.carrier) ∧\n      (∀ N, (adj.counit.app N).hom.f =\n        (ProEtale.adicOpenImmersionLowerShriekAdjunction l\n          (Scheme.Hom.geometricFiberMap j (comp_over j _))).counit.app N.carrier) ∧\n      (∀ M N, HEq ((sheafRestriction M N).hom.hom.f)\n        ((ProEtale.adicUpperStarTensorLeftIso l\n          (Scheme.Hom.geometricFiberMap j (comp_over j _)) N.carrier).hom.app M.carrier)) ∧\n      (∀ M N, HEq (adj.homEquiv _ _ ((sheafGamma M N).inv))\n        ((tensorFunctor k₀ l U ((upperStar k₀ l j).obj N)).map (adj.unit.app M) ≫\n          (sheafRestriction ((extensionByZero k₀ l j).obj M) N).inv)) ∧\n      (∀ P, NativeIsKFlat k₀ l U P → NativeIsKFlat k₀ l Z\n        (((extensionByZero k₀ l j).mapHomologicalComplex (.up ℤ)).obj P)) ∧\n      (∀ T, NativeIsKFlat k₀ l Z T → NativeIsKFlat k₀ l U\n        (((upperStar k₀ l j).mapHomologicalComplex (.up ℤ)).obj T))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-open-sheaf-tensor-existence",
+  "worker": "G7 stage3",
+  "summary": "A strict part of the existing native open argument; full source proof in docstring, statement tested at the empty open, identity open, zero inputs and unbounded complexes.",
+  "blueprint": "Retains the native open factor in Step 1, second Hom bijection of fix-lem-tensor-adjunction.proof.md. No unit route is bypassed.",
+  "tool_uses": [
+   {
+    "node": "def-sf-native-weil-derived-framework",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-native-adic-open-restrictions",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "The parent already uses this generic module/site/localization fact as a tool. This lemma retains precisely that application within its separated proof step, rather than replacing the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

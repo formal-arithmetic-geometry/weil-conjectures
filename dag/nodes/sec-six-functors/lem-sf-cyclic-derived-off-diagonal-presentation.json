@@ -1,0 +1,205 @@
+{
+ "id": "lem-sf-cyclic-derived-off-diagonal-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence of cor-coef-verdier-weil-equivariance.proof.md; native cyclic Hom foundation, parent steps 1--8.",
+   "via": [
+    "lem-sf-cyclic-derived-hom-exact-sequence",
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict off-diagonal presentations and uniqueness of their boundary",
+ "statement": "For C,F,B,U and V of [def-sf-cyclic-derived-hom-data], every u in V^{-1}(M,N), with no boundedness requirement, admits a strict off-diagonal presentation as an underlying split short exact sequence of fixed-pair complexes with endpoint isomorphisms. Any two such presentations have the same native connecting morphism f:M→N. Consequently there is a uniquely specified native boundary c(u), characterized by admitting such a presentation. The precise presentation equations, including the sign and shifts, are those of CyclicDerivedOffDiagonalPresentation in the attached Lean module.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+ },
+ "stmt_deps": [
+  "def-sf-cyclic-derived-hom-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the data of [def-sf-cyclic-derived-hom-data]. A presentation of u:UM→UN[-1] consists of a short exact sequence A→E→J of fixed-pair complexes, an underlying chain splitting s, an off-diagonal map u₀:UJ→UA with P(s)θ_E=θ_J s+P(u₀)θ_A j, endpoint isomorphisms M≅QJ and QA[1]≅N, and the equalities identifying u and f with the transported off-diagonal class and canonical boundary.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "The triangular matrix on UA⊕UJ is the diagonal action followed by the unipotent lower isomorphism. The inclusion and projection are equivariant; exact faithful forgetting identifies their sequence with the split biproduct sequence and reflects short exactness. This construction is fully proved in Lean.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "Choose K-injective replacements of complexes representing M and N[-1]. Forgetting preserves K-injectives, so derived Hom localization surjectivity represents the transported u by a chain map UJ→UA. Apply the triangular construction and canonical shift cancellation to get a presentation. Termwise injectivity is not used. This construction is fully proved in Lean.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "For uniqueness, use the existing free resolution to obtain its chain differential and short exact sequences. The free adjuncts of s and u₀ give a morphism from the free sequence on J to the presented sequence: evaluation on summand zero proves the first square by applying F and the structure isomorphism to the inverse-action formula, and proves the second square from the section equation. Descend the natural free SES boundary through localization, keeping the two derived morphism universes independent. The localized free adjunct is the derived free image of the underlying derived class followed by the localized counit. SES-boundary naturality therefore identifies every presented boundary with this pairing. Naturality of the descended boundary and the counit makes the pairing natural in both native endpoints. Unshift each target endpoint map using the canonical shift unit; the presentation class becomes precisely the same underlying map to U(N[-1]) after composing with the inverse shift comparison. The shift triangle identity recovers the endpoint map, so both native morphisms equal the same pairing followed by the shift counit. No boundedness is used. This free-resolution comparison is fully proved in Lean.",
+   "uses": [
+    "lem-sf-free-derived-weil-resolution",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "Combine existence and uniqueness, and choose only the unique native morphism f, not an arbitrary presentation witness. Its presentation and equality to any presented f follow immediately.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "The underlying chain projection of every presented sequence has a chain section. Its localized projection is split epi, hence the distinguished SES triangle has zero third map. Exact forgetting preserves the canonical SES boundary; conjugating by the endpoint isomorphisms preserves zero. Thus forgetting every presented native boundary gives zero. This is proved independently of uniqueness.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-cyclic-derived-hom-data",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-free-derived-weil-resolution",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism into a shifted injective complex determines the connecting morphism of a split underlying extension with triangular automorphism",
+   "results": "DerivedCategory.triangleOfSESδ; ShortComplex.ShortExact.singleδ; ShortComplex.Exact.descToInjective; no cyclic action or normalized cyclic Hom sequence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cyclic equivariant derived Hom boundary is the connecting morphism of an off diagonal extension and has a five term exact sequence",
+   "results": "groupHomology.δ; groupCohomology.δ; groupCohomology.mapShortComplex₃; SnakeLemma.δ. These do not state a result for the derived category of fixed pairs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSESδ\"",
+   "results": "triangleOfSESδ, triangleOfSESδ_naturality, descShortComplex_triangleOfSESδ, DerivedCategory.map_triangleOfSESδ. These supply SES boundaries and their naturality, not the cyclic comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "offDiagonal|OffDiagonal|cyclicDerived|IsoAlgebra",
+   "results": "Only Mathlib/Algebra/Category/AlgCat/Basic.lean:243 algEquivIsoAlgebraIso, unrelated. Local source search found no alternate cyclic derived Hom sequence.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CyclicDerivedHomExactSequence",
+  "date": "2026-10-24",
+  "group": "N3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CyclicDerivedOffDiagonalPresentation",
+  "file": "lean/Sheaf/CategoryTheory/CyclicDerivedOffDiagonalPresentation.lean",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedOffDiagonalPresentation_unique",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedOffDiagonalPresentation",
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_cyclicDerivedStrictExtension",
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_cyclicDerivedOffDiagonalPresentation",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedOffDiagonalPresentation_unique",
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_unique_cyclicDerivedOffDiagonalPresentation",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedOffDiagonalBoundary",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedOffDiagonalBoundary_presentation",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedOffDiagonalBoundary_eq",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedOffDiagonalPresentation_forget_zero"
+  ],
+  "statement": "theorem cyclicDerivedOffDiagonalPresentation_unique [IsGrothendieckAbelian.{v} C]\n    {M N : DerivedCategory (IsoAlgebra F)} {u : CyclicDerivedHom F M N (-1)}\n    {f g : M ⟶ N} (hf : CyclicDerivedOffDiagonalPresentation F u f)\n    (hg : CyclicDerivedOffDiagonalPresentation F u g) : f = g",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-20ed6",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261024T224936-L-1832607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T123520-L-2314878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-formal-chart-local-preparation",
+ "kind": "statement",
+ "title": "Noetherian strict base and closed-point chart contraction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let W be a locally Noetherian fs log scheme, R a commutative monoid, Q an fs monoid, y:W -> Spec Z[R], and h:R -> Q. At a geometric point z of the toric pullback use the canonical A, baseMap and alpha defined by def-trf-formal-chart-geometric-data. Suppose zA is a lift of z to Spec A times_W Z over the canonical closed geometric point of Spec A. Let eC:Spec(A tensor_Z[R] Z[Q]) ~= Spec A times_W Z be an isomorphism whose projection to Spec A is the canonical base tensor map. Let q be the prime of zA under eC. Then A and B=C_q are Noetherian rings, and q contracts along A -> C to the maximal ideal of A. No completion or log regularity hypothesis is imposed.",
+ "stmt_deps": [
+  "def-trf-formal-chart-geometric-data",
+  "def-trf-fs-log-blowup",
+  "def-trf-chart-unit-face-data",
+  "def-per-formal-monoid-extension-data",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension)."
+ },
+ "proof": [
+  {
+   "text": "Choose a Noetherian affine neighbourhood of the image of $\\bar w$. Its ordinary local ring is Noetherian by localization. The pointed-neighbourhood/triple comparison and the strict-henselization triple theorem identify $A$ with the algebraic strict henselization of that local ring, for the separable residue closure inside $\\Omega$. Thus $A$ is nonzero Noetherian local. Put $C=A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q]$. A finite generating list $q_1,\\ldots,q_d$ of $Q$ gives a surjection $A[x_1,\\ldots,x_d]\\twoheadrightarrow C$, $x_i\\mapsto[q_i]$. Hence $C$, and then $B=C_{\\mathfrak q}$, are Noetherian. Since the chosen lift is over the closed point of $\\operatorname{Spec}A$, $\\mathfrak q\\cap A=\\mathfrak m_A$. In particular $A\\to B$ is local and $B\\ne0$. Every generator of $J$ is a nonunit of $B$, so $J\\subseteq\\mathfrak m_B$. The same finite-generation argument on the chosen affine charts of $W$ shows that $Z$ is locally Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the equation for eC over A and the closed-point equation for zA to identify the contraction with the kernel of the strict-base evaluation to Omega. Its kernel is the maximal ideal by the canonical strict-local ring construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-strict-henselization-triples",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Extracted proof steps of lem-trf-formal-chart-geometric-regularity; Noetherian strict base and closed-point chart contraction. Uses the existing inputs with the indicated Stacks comparisons."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*[Nn]oetherian|formalMonoidExtension_model",
+   "results": "{\"t\": \"2026-10-26T08:05:44Z\", \"tool\": \"grep\", \"query\": \"strictHenselization.*[Nn]oetherian|formalMonoidExtension_model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, Localization.AtPrime",
+   "results": "{\"t\": \"2026-10-26T08:05:45Z\", \"tool\": \"loogle\", \"query\": \"IsNoetherianRing, Localization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx'_eq_one_of_map_localization\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Ideal.ramificationIdx'_pos\", \"Ideal.ramificationIdx_pos\", \"Ideal.ramificationIdx_pos_of_isDedekindDomain'\", \"Ideal.ramificationIdx_pos_of_mem_minimalPrimes\", \"Ideal.ramificationIdx_pos_of_isDedekindDomain\", \"Module.injective_of_localization_maximal\"], \"digest\": \"9bd311e276f4071c\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict henselization of a locally Noetherian scheme has a Noetherian local ring and a finite type monoid tensor chart is Noetherian",
+   "results": "{\"t\": \"2026-10-26T08:05:54Z\", \"tool\": \"leanfinder\", \"query\": \"A strict henselization of a locally Noetherian scheme has a Noetherian local ring and a finite type monoid tensor chart is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\"], \"digest\": \"ffac0ab4701b6df4\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherianity and closed point contraction for finite type toric charts over a geometric strict local ring",
+   "results": "{\"t\": \"2026-10-26T08:14:10Z\", \"tool\": \"leansearch\", \"query\": \"Noetherianity and closed point contraction for finite type toric charts over a geometric strict local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.closedPoint\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"IsLocalRing.closedPoint.congr_simp\", \"AlgebraicGeometry.isNoetherian_Spec\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"IsLocalRing.comap_closedPoint\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\"], \"digest\": \"0d168e72e816d004\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalChartGeometricRegularity",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: ILO VI Proposition 1.9, the final application of log smoothness, using VI 1.8 and VI 1.4. Extraction: VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension). Specific refinement: Noetherian strict base and closed-point chart contraction",
+   "via": [
+    "lem-trf-formal-chart-geometric-regularity",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalChartLocalPreparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalChartLocalPreparation.lean",
+  "declaration": "AlgebraicGeometry.formal_chart_local_preparation",
+  "declarations": [
+   "AlgebraicGeometry.formal_chart_local_preparation"
+  ],
+  "statement": "theorem formal_chart_local_preparation (W : FineSaturatedLogScheme.{u}) (R Q : Type u) [CommMonoid R] [CommMonoid Q] (_hQ : IsFineSaturatedMonoid Q) (y : W.scheme ⟶ Spec (.of (MonoidAlgebra ℤ R))) (h : R →* Q) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ chartScheme y h) (zA : Spec (.of Ω) ⟶ pullback (baseMap y h z) (pullback.fst y (toricMap h))) (_hzA : zA ≫ pullback.snd (baseMap y h z) (pullback.fst y (toricMap h)) = z) (_hzAclosed : zA ≫ pullback.fst (baseMap y h z) (pullback.fst y (toricMap h)) = Spec.map (Scheme.strictHenselizationEval (z ≫ pullback.fst y (toricMap h)))) (eC : Spec (Algebra.monoidChartTensor (alpha y h z) h) ≅ pullback (baseMap y h z) (pullback.fst y (toricMap h))) (_heCA : eC.hom ≫ pullback.fst (baseMap y h z) (pullback.fst y (toricMap h)) = Spec.map (CommRingCat.ofHom (Algebra.monoidChartTensorBase (alpha y h z) h))) (q : Ideal (Algebra.monoidChartTensor (alpha y h z) h)) [q.IsPrime] (_hq : q = (Scheme.SpecToEquivOfField Ω _ (zA ≫ eC.inv)).1.asIdeal) : IsNoetherianRing (baseRing y h z) ∧ IsNoetherianRing (Localization.AtPrime q) ∧ Ideal.comap (Algebra.monoidChartTensorBase (alpha y h z) h) q = IsLocalRing.maximalIdeal (baseRing y h z)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 split statements (local preparation, extended model dimensions, strict comparison) against node lem-trf-formal-chart-geometric-regularity, HasExtendedFormalMonoidModel/CompletedLocalModel defs, FineSaturatedLogScheme; moved defs diffed byte-identical vs clone; 0 importers"
+ }
+}

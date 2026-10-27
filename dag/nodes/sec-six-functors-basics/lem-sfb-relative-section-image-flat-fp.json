@@ -1,0 +1,500 @@
+{
+ "id": "lem-sfb-relative-section-image-flat-fp",
+ "kind": "statement",
+ "title": "Flat finitely presented relative image from an acyclic section algebra",
+ "statement": "Let $S$ be any scheme [def-pc-scheme] and $f:Y\\to S$ a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation] morphism with nonempty geometric fibres of pure dimension one [def-weil-pure-dimension]. Let $M$ be an invertible module [def-sc-invertible-module]. Suppose $f_*\\mathcal O_Y=\\mathcal O_S$ universally. Suppose, for every $j\\geq1$, that $H^i(Y_{\\bar s},M_{\\bar s}^{\\otimes j})=0$ for every geometric point $\\bar s$ and every $i>0$, that $A_j=f_*M^{\\otimes j}$ is finite locally free (locally a finite direct sum of copies of $\\mathcal O_S$), and that its canonical comparison with the direct image on every base change is an isomorphism. Suppose evaluation $f^*A_1\\to M$ and all section-multiplication maps $\\operatorname{Sym}^j A_1\\to A_j$ are surjective, with module pullback as in [def-pc-module-pullback]. On each geometric fibre let $h_{\\bar s}:Y_{\\bar s}\\to\\mathbf P(A_1\\otimes\\kappa(\\bar s))$ be the evaluation map. Assume its scheme-theoretic image $Z_{\\bar s}$ (the closed subscheme defined by the kernel of the structure-sheaf map to the direct image) satisfies $(h_{\\bar s})_*\\mathcal O_{Y_{\\bar s}}=\\mathcal O_{Z_{\\bar s}}$ as modules on that projective space, and $R^i(h_{\\bar s})_*\\mathcal O_{Y_{\\bar s}}=0$ for $i>0$. Form $A=\\mathcal O_S\\oplus\\bigoplus_{j\\geq1}A_j$ with section multiplication [def-weil-pbc-graded-sheaf-structures]. Then $X=\\operatorname{Proj}_S A$ [def-nagata-relative-proj] is flat and finitely presented over $S$, and the quotient $\\operatorname{Sym} A_1\\to A$ defines a closed immersion $X\\hookrightarrow\\mathbf P_S(A_1)$ [def-trf-projective-bundle-morphism]. Evaluation defines a proper surjective $S$-morphism $q:Y\\to X$ with $q^*\\mathcal O_X(1)\\simeq M$ whose composite with this immersion is the evaluation map. On every geometric fibre this identifies $X_{\\bar s}$ with $Z_{\\bar s}$ as a closed subscheme and $q_{\\bar s}$ with the factor of $h_{\\bar s}$ through its scheme-theoretic image. The construction and these comparisons commute with arbitrary base change and with isomorphisms of $(Y/S,M)$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 068A (lemma-flat-finite-presentation-perfect) and 0B6G (lemma-perfect-proper-perfect-direct-image); the latter is stated over Noetherian bases and is used after finite-presentation descent. Canonical cohomology base change is perfect.tex Tag 0A1H (lemma-base-change-tensor-perfect). Relative Proj quotient is constructions.tex Tag 01O4 (lemma-apply-relative). Agent-formulated relative-image spreading consequence isolating the arbitrary-base finite-presentation issue in Knudsen Section 2 Proposition 2.1; none of these tags alone states this consequence, and the evaluation morphism is not assumed flat."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pure-dimension",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-nagata-relative-proj",
+  "def-trf-projective-bundle-morphism",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-sfb-module-base-change-map",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-tensor-power-pullback-comparisons",
+  "def-sfb-relative-proj-iso-of-graded-iso"
+ ],
+ "proof": [
+  {
+   "text": "Work over an affine open $U=\\operatorname{Spec}R$ on which $A_1$ is free of rank $r$. If $U$ is nonempty then $r>0$: otherwise the surjective evaluation map would be zero on a nonempty geometric fibre. Set $C=\\Gamma(U,A)$ and $B=R[x_1,\\ldots,x_r]$. The given multiplication surjections give the graded quotient $B\\twoheadrightarrow C$. Relative Proj functoriality gives a closed immersion $i:X_U=\\operatorname{Proj}C\\hookrightarrow P=\\mathbf P^{r-1}_U$. The projective-bundle quotient description identifies this with the stated embedding into $\\mathbf P_U(A_1)$. In particular $P/U$ and $X_U/U$ are proper, so they are quasi-compact and separated. The standard charts of $P/U$ are polynomial algebras in $r-1$ variables, so $P/U$ is of finite type, as required for the proper-image theorem in step 3. These constructions agree on restrictions to affine refinements of overlaps.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-projective-bundle-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OB (definition-projective-bundle), 01O4 (lemma-apply-relative); quotient Proj charts."
+   }
+  },
+  {
+   "text": "The adjunction evaluations in all degrees form a graded map $f^*A\\to\\bigoplus_{j\\geq0}M^{\\otimes j}$; its degree-one part is surjective. The canonical map from the generation locus into relative Proj therefore has generation locus all of $Y$, giving $q:Y\\to X$. On each affine base chart the degree-one twist comparison is an isomorphism $q^*\\mathcal O_X(1)\\simeq M$, carrying every tautological section to its evaluation. The corresponding quotient of $f^*A_1$ is exactly the original evaluation, so the projective-bundle quotient bijection identifies $i q$ with $h$, the evaluation map. Since $X/S$ is separated and $Y/S$ proper, $q$ is proper. The canonical chart comparisons in positive degrees also identify $h^*\\mathcal O_P(d)$ with $M^{\\otimes d}$ compatibly with multiplication.",
+   "uses": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-proj-invertible-map-twist-iso",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj); canonical twist comparison; proper-to-separated permanence."
+   }
+  },
+  {
+   "text": "Fix a coordinate section $s\\in C_1$. The inverse image under $h$ of the standard affine open $D_+(s)$ of $P$ is the nonvanishing open $Y_s$. Apply section localization with $\\mathcal F=\\mathcal O_Y$. Its degree-zero fractions use only nonnegative powers, whose sections are precisely $C_n$ (including $C_0=R$). Thus $\\Gamma(Y_s,\\mathcal O_Y)=C_{(s)}$, by the map $a/s^n\\mapsto a|_{Y_s}/s^n$. Proj standard-chart sections identify the same map with the unit $\\mathcal O_X\\to q_*\\mathcal O_Y$. Since q is proper, its direct image is quasi-coherent by the cited derived-direct-image theorem. The affine tilde/Gamma equivalence therefore promotes this section isomorphism to a sheaf isomorphism on each chart, hence globally. In particular $h_*\\mathcal O_Y=i_*\\mathcal O_X$, so $X$ is the scheme-theoretic image of $h$. Apply the proper-image theorem to $Y_U/U$ and the separated finite-type target $P/U$ established in step 1. Its image is exactly the closed subscheme $i(X_U)$, by the computed kernel of $\\mathcal O_P\\to h_*\\mathcal O_Y$, so its proper surjective factor is the already constructed $q$. This calculation uses no vanishing of $H^1(Y,\\mathcal O_Y)$.",
+   "uses": [
+    "lem-sc-invert-s-cohomology",
+    "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+    "prop-nagata-proj-standard-open",
+    "pqf-lem-image-proper",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 09MR (lemma-invert-s-cohomology), p=0; scheme-theoretic-image properness."
+   }
+  },
+  {
+   "text": "On the chart just used, $C_{(s)}$ is the sequential colimit $C_0\\xrightarrow{s}C_1\\xrightarrow{s}C_2\\to\\cdots$ as an $R$-module: a class of $a\\in C_n$ is $a/s^n$, and equality of fractions is exactly equality after multiplication by a further power of $s$. Every $C_n$ is finite projective over $R$ by the affine sections theorem for finite locally free modules; this includes $C_0=R$. Hence each is flat, and their filtered colimit is flat. The affine flatness criterion gives flatness of $X_U\\to U$ on every standard chart. Varying $U$ proves $X\\to S$ flat.",
+   "uses": [
+    "lem-pc-finite-flat-affine-sections-projective",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M7 (lemma-proj-sheaves), homogeneous localization charts; Algebra Tag 05UT (lemma-colimit-flat)."
+   }
+  },
+  {
+   "text": "For $j\\geq1$ put $E_j=Rf_*M^{\\otimes j}$. An invertible module is locally free of rank one and finitely presented on $Y$; since $f$ is flat it is flat over $S$. The proper finite-presentation perfect-base-change theorem therefore makes $E_j$ perfect and identifies each geometric derived fibre with $R\\Gamma(Y_{\\bar s},M_{\\bar s}^{\\otimes j})$. These fibres are concentrated in degree zero, by the assumed higher-cohomology vanishing, with dimension the rank of $A_j$ by the assumed degree-zero base change. On an open where that rank is $a$, every geometric point belongs to the degree-zero rank-$a$ perfect locus. This locus is open with the universal property in the cited statement, hence is the whole rank open. Thus $E_j\\simeq A_j[0]$. Over affine $U$, quasi-coherent cohomology vanishes in positive degrees by applying the affine Cech theorem to the one-member cover. The degenerate Leray comparison now gives $H^p(Y_U,M^{\\otimes j})=0$ for every $p>0$ and $j\\geq1$.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-perfect-locus",
+    "sk-lem-picard-cech-computes",
+    "lem-pc-leray-degenerate-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B91 (lemma-flat-proper-perfect-direct-image-general), (2); the open perfect locus with prescribed degree and rank."
+   }
+  },
+  {
+   "text": "Apply cohomology localization to $Y_U$, $M$ and $\\mathcal O_{Y_U}$ in every degree $p>0$. Each fraction $\\xi/s^n$ can be represented with $n\\geq1$ by multiplying numerator and denominator by $s$. Its numerator then lies in $H^p(Y_U,M^{\\otimes n})=0$, by the preceding step. Thus $H^p(Y_s,\\mathcal O_Y)=0$. Since $h$ is proper, its higher direct images are quasi-coherent by the derived-direct-image theorem. On the affine $D_+(s)\\subset P$, the affine Cech theorem and degenerate Leray identify $\\Gamma(D_+(s),R^p h_*\\mathcal O_Y)$ with this zero group. A quasi-coherent module on an affine scheme is determined by its sections, so $R^p h_*\\mathcal O_Y=0$ on the cover, hence globally. Together with step 3 this gives $Rh_*\\mathcal O_Y\\simeq i_*\\mathcal O_X[0]$.",
+   "uses": [
+    "lem-sc-invert-s-cohomology",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "sk-lem-picard-cech-computes",
+    "lem-pc-leray-degenerate-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 09MR (lemma-invert-s-cohomology); affine Leray and quasi-coherence of higher direct images."
+   }
+  },
+  {
+   "text": "Let $K=Rh_*\\mathcal O_Y$ on $P=\\mathbf P^{r-1}_R$. It has quasi-coherent cohomology. For each $d=0,\\ldots,r-1$, compose the projection-formula isomorphism $K\\otimes^{\\mathbf L}\\mathcal O_P(d)\\simeq Rh_*(M^{\\otimes d})$ with the normalized derived global-sections/direct-image comparison. This gives, in $D(R)$, $R\\Gamma(P,K\\otimes^{\\mathbf L}\\mathcal O_P(d))\\simeq R\\Gamma(Y_U,M^{\\otimes d})$, and the same comparison for $f_U$ identifies the latter with $R\\Gamma(U,E)$, $E=R(f_U)_*M^{\\otimes d}$. Proper finite-presentation perfect base change for $Y_U/U$ makes $E$ perfect in $D(\\mathcal O_U)$, hence pseudo-coherent; here $d=0$ uses $\\mathcal O_Y$, and no degree-zero acyclicity is needed. $E$ has quasi-coherent cohomology, so the affine derived equivalence gives $E\\simeq\\widetilde{M^\\bullet}$ for a complex $M^\\bullet$ of $R$-modules representing $R\\Gamma(U,E)$. The affine pseudo-coherence criterion then makes $M^\\bullet$ quasi-isomorphic to a bounded-above complex of finite free $R$-modules, i.e. $R\\Gamma(U,E)$ is pseudo-coherent in $D(R)$. The finite twist test therefore implies that $K$ is pseudo-coherent on $P$. Since step 6 identifies it with $i_*\\mathcal O_X[0]$, that single module is pseudo-coherent.",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-projection-formula",
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSG (lemma-pseudo-coherent-on-projective-space), (5) => (1); cohomology.tex Tag 0B54 (lemma-projection-formula-perfect) for the invertible twist, Tag 0B91 (lemma-flat-proper-perfect-direct-image-general), and cohomology.tex Tag 0D5T (derived Leray). Perfect/pseudo-coherent objects on an affine scheme: perfect.tex Tags 06Z0 (lemma-affine-compare-bounded) and 08E7 (lemma-pseudo-coherent-affine)."
+   }
+  },
+  {
+   "text": "By pseudo-coherence, locally $i_*\\mathcal O_X[0]$ has a bounded-above finite-free resolution. Remove its finitely many positive-degree terms from the top down: exactness at the top gives a surjection onto a finite free module, which splits locally, so the resulting remaining top term is finite locally free. Repetition gives a model with top degree zero, hence a finite presentation $\\mathcal O^a\\to\\mathcal O^b\\to i_*\\mathcal O_X\\to0$. Apply the finite-presentation kernel theorem to the surjection $\\mathcal O_P\\to i_*\\mathcal O_X$: its ideal kernel is locally finitely generated. Around each point of $P$, shrink the neighbourhood on which these finitely many ideal generators exist to a distinguished open $D(g)$ of a standard chart $\\operatorname{Spec}R[t_1,\\ldots,t_{r-1}]$. Quasi-coherence identifies the restricted ideal with the ideal generated by these sections in $R[t_1,\\ldots,t_{r-1}]_g$. Thus the inverse image in $X$ is the spectrum of this ring modulo finitely many equations. Explicitly the localized polynomial ring is $R[t_1,\\ldots,t_{r-1},u]/(gu-1)$, a finitely presented $R$-algebra. Quotienting by finitely many equations and composing finite presentations gives $X/S$ locally of finite presentation. Its properness from step 1 supplies quasi-compactness and quasi-separatedness, so it is finitely presented.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08E7 (pseudo-coherent affine finite-free models); Tag 01BP (lemma-kernel-surjection-finite-free-onto-finite-presentation), (1); finite presentations on standard projective charts."
+   }
+  },
+  {
+   "text": "For any $T\\to S$, the stipulated canonical comparisons $g^*A_j\\simeq(f_T)_*M_T^{\\otimes j}$, including degree zero, respect multiplication: evaluation of $1\\otimes a$ and $1\\otimes b$ gives the product $1\\otimes ab$. Thus they identify the pulled-back graded algebra with the section algebra on $T$. Arbitrary relative-Proj base change identifies $X_T$ with its Proj, and the canonical generation-locus map is compatible with this base change. The twist comparison carries $a\\in A_1$ to its evaluated section on both sides, so agrees after pullback. The quotient into the projective bundle agrees as well, by the quotient bijection. Repeating step 3 over affine opens of $T$ identifies this $X_T$ with the scheme-theoretic image of $h_T$. For $T=\\operatorname{Spec}\\kappa(\\bar s)$ this is exactly $Z_{\\bar s}$ and identifies $q_{\\bar s}$ with the indicated factor. This proves the geometric-fibre comparison without assuming that arbitrary scheme-theoretic images commute with nonflat base change.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-proj-invertible-map-twist-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01O3 (lemma-relative-proj-base-change), 01O9 (canonical generated-line map); the section-localization calculation of step 3."
+   }
+  },
+  {
+   "text": "An isomorphism of pairs $(Y/S,M)$ identifies the graded algebras by sending a section to its pullback and using the supplied line-module isomorphism in each tensor power. This respects unit, products and evaluation. Proj functoriality gives the induced isomorphism of $X$; on every standard chart it sends $a/s^n$ to the corresponding fraction. The canonical Proj maps and the twist comparisons are characterized by these evaluated sections, so the resulting squares for $q$, $i$ and $\\mathcal O(1)$ commute. The same fraction formulas show that the base-change comparisons compose and are identities for identity changes. Thus all comparisons have the claimed functoriality.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-proj-invertible-map-twist-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01O4 and 01O9: canonical morphisms and tautological quotient; functoriality on fractions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-perfect-locus",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-projection-formula",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-invert-s-cohomology",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sfb-projective-space-pseudocoherence-twist-test",
+  "lem-trf-proj-invertible-map-twist-iso",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-space-line-module-proj-map",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-proper-over-separated",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "pqf-lem-image-proper",
+  "prop-nagata-proj-standard-open",
+  "prop-nagata-relative-proj-functoriality",
+  "sk-lem-picard-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent synthesis of Tag 0CSG finite-twist pseudo-coherence, Tag 0B91 perfect direct image, and coherent.tex Tag 09MR localization; no Noetherian hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The relative Proj of the section algebra of a globally generated line bundle on a proper flat family with acyclic powers and normally generated fibres is a flat finitely presented closed projective image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj construction/properness and projective flat modules do not assert finite presentation and flatness of this relative scheme-theoretic image or identify its section algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj construction/properness and projective flat modules do not assert finite presentation and flatness of this relative scheme-theoretic image or identify its section algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "Proj.*[Ff]lat|[Ff]lat.*Proj|sectionAlgebra|sectionRing|[Nn]ormal.*[Gg]enerat",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"352\", \"text\": \"/-- The normal subgroupoid generated by the set of arrows `X` -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"356\", \"text\": \"theorem generated_le_generatedNormal : generated X ≤ generatedNormal X := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"360\", \"text\": \"theorem generatedNormal_isNormal : (generatedNormal X).IsNormal :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"363\", \"text\": \"theorem IsNormal.generatedNormal_le {S : Subgroupoid C} (Sn : S.IsNormal) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Frattini.lean\", \"line\": \"69\", \"text\": \"  have normalizer_P := frattini_nongenerating frattini_argument\"}\n  {\"file\": \"Mathlib/Topology/GDelta/MetrizableSpace.lean\", \"line\": \"29\", \"text\": \"  (@UniformSpace.completelyNormalSpace_of_isCountablyGenerated_uniformity X\"}\n  {\"file\": \"Mathlib/Condensed/TopCatAdjunction.lean\", \"line\": \"95\", \"text\": \"/-- `simp`-normal form of the lemma that `@[simps]` would generate. -/\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"25\", \"text\": \"* `Subgroup.IsFinitelyNormallyGenerated N`: says that the subgroup `N` is the normal closure of a\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"30\", \"text\": \"* `Subgroup.IsFinitelyNormallyGenerated.map`: Being the normal closure of a finite set is preserved\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"42\", \"text\": \"/-- `N.IsFinitelyNormallyGenerated` says that the subgroup `N` is the normal closure\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"44\", \"text\": \"@[to_additive /-- `N.IsFinitelyNormallyGenerated` says that the additive subgroup `N`\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"46\", \"text\": \"def Subgroup.IsFinitelyNormallyGenerated (N : Subgroup G) : Prop :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"46\", \"text\": \"* `Module.Flat.of_projective`: projective modules are flat\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"227\", \"text\": \"instance of_projective [Projective R M] : Flat R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"line\": \"48\", \"text\": \"every finitely presented flat module is projective (`Module.Flat.projective_of_finitePresentation`).\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"line\": \"287\", \"text\": \"theorem projective_of_finitePresentation [Flat R M] [FinitePresentation R M] : Projective R M :=\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Separation.lean\", \"line\": \"152\", \"text\": \"instance (priority := 100) UniformSpace.completelyNormalSpace_of_isCountablyGenerated_uniformity\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/PInfty.lean\", \"line\": \"20\", \"text\": \"projection on the normalized Moore subcomplex, with kernel the degenerate subcomplex.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Equivalence.lean\", \"line\": \"37\", \"text\": \"normalized subcomplex and of the degenerate subcomplex. The crucial observation\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"20\", \"text\": \"- `Algebra.Extension.Cotangent`: The conormal space `I/I²`. (Defined in `Generators/Basic`)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Degeneracies.lean\", \"line\": \"18\", \"text\": \"on the normalized subcomplex, parallel to the degenerate subcomplex, i.e.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"132\", \"text\": \"lemma ιNormalizedChainComplex_eq_zero (x : X _⦋n⦌) (hx : x ∈ X.degenerate n) :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"149\", \"text\": \"noncomputable abbrev cofanNormalizedChainComplex : Cofan (fun (_ : X.nonDegenerate n) ↦ R) :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"154\", \"text\": \"private lemma ιNormalizedChainComplex_eq_ι (x : X _⦋n⦌) (hx : x ∈ X.nonDegenerate n) :\"}\n  {\"file\": \"Mathlib/Tactic/Clean.lean\", \"line\": \"45\", \"text\": \"Identity functions are normally generated with terms like `show t from p`,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj construction/properness and projective flat modules do not assert finite presentation and flatness of this relative scheme-theoretic image or identify its section algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finite presentation of the projective image of a proper family defined by the complete section ring of a globally generated invertible sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] [FinitePresentation R M] : Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.finitePresentation_of_projective\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"[Projective R M] [Module.Finite R M] : FinitePresentation R M\", \"doc\": \"If a module $ M $ over a semiring $ R $ is projective (i.e., a direct summand of a free module) and finitely generated (i.e., admits a finite generating set), then $ M $ is finitely presented (i.e., a\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →+* B) : Prop\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ between commutative semirings, this proposition asserts that the algebra structure on $ B $ over $ A $ induced by $ f $ is finitely presented. An algebra is f\"}\n  {\"name\": \"Module.finitePresentation_of_projective_of_exact\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{P : Type*} [AddCommGroup P] [Module R P] [Module.FinitePresentation R N] [Module.Projective R P] (f : M →ₗ[R] N)\\n  (g : N →ₗ[R] P) (hf : Function.Injective f) (hg : Function.Surjective g) (H : Function.Exact f g) :\\n  Module.FinitePresentation R M\", \"doc\": \"Let $ R $ be a semiring. If $ N $ is a finitely presented $ R $-module, $ P $ is a projective $ R $-module, and there exist linear maps $ f : M \\to N $ and $ g : N \\to P $ such that $ f $ is injective, \"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a presentation $ p $ of a sheaf of modules $ M $ over a ring sheaf $ R $, if the generators of $ p $ are finitely generated (of finite type) and the index set of relations in $ p $ is finite, th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj construction/properness and projective flat modules do not assert finite presentation and flatness of this relative scheme-theoretic image or identify its section algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "Proj.*[Ff]lat|[Ff]lat.*Proj|sectionAlgebra|sectionRing",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general Proj properness and flat/projective module facts do not prove this relative section-image theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness and finite presentation of the projective image defined by the complete section algebra of a generated line bundle in a proper flat family",
+   "results": "OK 8 hits: Module.finitePresentation_of_projective, Module.Flat.projective_of_finitePresentation, AlgHom.FinitePresentation, Module.Flat.of_projective, RingHom.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.flat_iff, Algebra.IsStandardSmooth.finitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: general Proj properness and flat/projective module facts do not prove this relative section-image theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"Flat\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general Proj properness and flat/projective module facts do not prove this relative section-image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Proj of the section algebra of a proper flat finitely presented family with globally generated line bundle and locally free base change compatible section modules is flat and finitely presented",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Proj.valuativeCriterion_existence",
+   "date": "2026-10-22",
+   "verdict": "no match: general Proj properness and flat/projective module facts do not prove this relative section-image theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-log-canonical-deletion-algebra",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra.",
+   "via": [
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-section-image-flat-fp",
+  "worker": "stage1",
+  "summary": "Constructed the image and all comparisons using section-localization charts; flatness is a filtered colimit of projectives. Proved finite presentation over arbitrary bases by acyclic positive powers, perfect proper direct images and the projective-space pseudo-coherence finite-twist test, rather than applying the Noetherian-only Tag 0B6G outside its hypotheses. One new generic statement-only node (0CSG); statement unchanged. Repair after the 2026-10-22 landing refusal: rebased through the delivery tool onto the current DAG, reread all cited statements, and made the finite-type hypothesis and exact image identification for the proper-image application explicit in steps 1 and 3. Renewed current-DAG repair on 2026-10-23: all cited interfaces and quotations rechecked; step 8 now explicitly chooses a distinguished open and gives its finite algebra presentation, so no finiteness is inferred for an unspecified localization.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. This realizes the arbitrary-base section-algebra contraction prerequisite within the pointed-curve alteration branch, not a different unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic Derived direct image along a qcqs morphism preserves quasi-coherent cohomology used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic Sections of a finite locally free module on an affine open used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-leray-degenerate-sections",
+    "why": "Generic Degenerate Leray: H^q(X,F) = Gamma(Y, R^q f_* F) when the higher cohomology of the R^q f_* F vanishes used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-perfect-locus",
+    "why": "Generic The perfect locus with fixed degree used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "why": "Generic A perfect complex is pseudo-coherent with locally finite Tor dimension used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Generic The projection formula used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "Generic Perfectness of $Rf_*\\mathcal{G}$ and base change used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology",
+    "why": "Generic Localization of graded cohomology at a section used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-sc-mixed-global-sections-direct-image-iso",
+    "why": "Generic Normalized derived Leray with independent module localization universes used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-trf-proj-invertible-map-twist-iso",
+    "why": "Generic Canonical twist comparison on a generated Proj chart used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic Projective-bundle morphisms are proper used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic Projective bundles of arbitrary quasi-coherent modules classify invertible quotients used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-trf-space-line-module-proj-map",
+    "why": "Generic Canonical map from the generation locus of a line module into relative Proj used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic On Spec R, M ↦ M~ is left adjoint to global sections, fully faithful, and an equivalence onto quasi-coherent modules; it preserves colimits used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "Generic Filtered colimits of flat modules are flat used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic Finite presentation: base change and composition used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+    "why": "Generic The kernel of a surjection from a finite free module onto a module of finite presentation is of finite type (Stacks 01BP(1)) used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic Spec of a ring map is flat iff the ring map is flat used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+    "why": "Generic Sections and stalks of the structure sheaf of Proj on standard opens used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic Projective modules are flat used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic A morphism from a proper scheme to a separated scheme over the same base is proper used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Generic Relative Proj base change for an arbitrary morphism used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "pqf-lem-image-proper",
+    "why": "Generic Image of a proper morphism into a separated finite-type target used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "Generic Standard affine opens of Proj used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Generic Restriction, base change, and functoriality of Proj used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "sk-lem-picard-cech-computes",
+    "why": "Generic Leray's theorem for quasi-coherent sheaves used as stated in the section-algebra chart/cohomology argument; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine pseudo-coherence criterion (Tag 08E7), used in step 7 to pass from pseudo-coherence on Spec R to pseudo-coherence in D(R) as required by the twist test; this unit has no replacement for that foundational tool."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine equivalence D(R) = D_QCoh(Spec R) with inverse RGamma, used in step 7 to read the perfect direct image on the affine base U as a complex of R-modules; this unit has no replacement for that foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-perfect-locus",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-projection-formula",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-invert-s-cohomology",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-trf-proj-invertible-map-twist-iso",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-space-line-module-proj-map",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-proper-over-separated",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "pqf-lem-image-proper",
+  "prop-nagata-proj-standard-open",
+  "prop-nagata-relative-proj-functoriality",
+  "sk-lem-picard-cech-computes",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-31e0081ad",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-31e0081ad (reviewer sub-agent of L); spot-checked: I read in full the item (10 steps), the new node, the statements of all 30 proof_deps plus the affine pc nodes, and Stacks perfect.tex 0CSG (l.8556-8647, statement and proof). The statement and stmt_deps are unchanged from the base, which had no proof and has no repair note. The proof holds over any base and never uses the Noetherian 0B6G. Flatness: C_(s) is a filtered colimit of the finite projective C_n. Image: 09MR at p=0 plus the tilde/Gamma counit give h_*O_Y=i_*O_X, and pqf-lem-image-proper applies with P/U separated and of finite type, so q is surjective. Finite presentation: positive-power acyclicity comes from 0B91, the universal perfect locus and Leray. Together with step 6 this gives Rh_*O_Y=i_*O_X[0]. The 0CSG test for d=0..r-1 and the 01BP kernel argument then finish; the rewritten step 8, with R[t,u]/(gu-1) on a chart, is correct. Base change uses arbitrary relative-Proj base change and repeats the chart calculation, without assuming that images commute with base change. The new node lem-sfb-projective-space-pseudocoherence-twist-test is exactly 0CSG (5)=>(1): any ring, K in D_QCoh, d=0..N. It is statement-only and self-contained, and N=0 reduces to 08E7. rg -L finds no duplicate, and it restates no clause of the item. Fault C1/C4 in step 7: it calls RGamma(Y_U,M^d) 'perfect over R' but cites only perfectness in D(O_U), while the twist test needs pseudo-coherence in D(R). This is the same gap fixed at f4d9a814, f0969fc7 and da0ffb55, lost again. FIXED: step 7 now identifies the complex with RGamma(U,E) and cites lem-pc-affine-qcoh-derived-equivalence (06Z0) and lem-pc-affine-pseudo-coherent-criterion (08E7). proof_deps is now the union of uses (32) and two tool_uses are added. The head's new step 8 and summary are kept. Batch-5 citations: lem-pc-rf-perfect-base-change (generic 0B91; its closure reaches only a trf definition), the four lem-trf projective-bundle/Proj foundations, and sk-lem-picard-cech-computes (its closure reaches only a pod definition) are generic tools outside both assumptions, so accepted. No SGA is cited. blueprint.from.node=null is inherited from the base. No node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSectionImageFlatFP",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.relative_section_image_flat_fp",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.relativeImageDegreeOne",
+   "AlgebraicGeometry.Scheme.Modules.relativeImageEvaluation",
+   "AlgebraicGeometry.Scheme.Modules.relativeImageSymmetric",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImageIsSectionQuotient",
+   "AlgebraicGeometry.Scheme.Modules.relativeImageFibreMap",
+   "AlgebraicGeometry.Scheme.Modules.relativeImagePullbackSection",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImageBaseChangeSections",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImageStructureComparison",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImageGeometry",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImageGeometricFibres",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImageArbitraryBaseChange",
+   "AlgebraicGeometry.Scheme.Modules.RelativeImagePairIsomorphisms",
+   "AlgebraicGeometry.Scheme.Modules.relative_section_image_flat_fp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSectionImageFlatFP.lean",
+  "statement": "theorem relative_section_image_flat_fp {Y S : Scheme.{u}} (f : Y ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (M : Y.Modules) [M.IsInvertible] [hfinite : ∀ n : ℕ, ((pushforward f).obj (M.tensorPow (n + 1))).IsFiniteLocallyFree] (hfibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S), Nonempty (Limits.pullback (C := Scheme.{u}) f t) ∧ (Limits.pullback (C := Scheme.{u}) f t).IsPureDimension 1) (hO : ∀ (T : Scheme.{u}) (g : T ⟶ S), IsIso ((tensorPullbackSectionAdjunction (pullback.snd f g)).unit.app (SheafOfModules.unit T.ringCatSheaf))) (hvanish : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S) (j i : ℕ), 0 < j → 0 < i → IsZero ((RingedSpace.moduleCohomology (Limits.pullback (C := Scheme.{u}) f t).toRingedSpace i).obj (((tensorPullback (pullback.fst f t)).obj M).tensorPow j))) (hbc : ∀ (T : Scheme.{u}) (g : T ⟶ S) (j : ℕ), 0 < j → IsIso (moduleBaseChangeMap f (pullback.snd f g) g (pullback.fst f g) pullback.condition (M.tensorPow j))) (heval : Epi (relativeImageEvaluation f M)) (A : RelativeSectionAlgebra f M) (phi : relativeImageSymmetric f M ⟶ A.data) (hphi : RelativeImageIsSectionQuotient A phi) (hsurj : ∀ V : S.affineOpens, Function.Surjective (phi.app V)) (h : Y ⟶ (relativeImageSymmetric f M).relProj) (wh : h ≫ (relativeImageSymmetric f M).relProjHom = f) (hcanonical : ProjectiveBundleQuotientGeometry.IsCanonicalMap f (M.tensorPow 1) (relativeImageEvaluation f M) h) (himage : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S), RelativeImageStructureComparison (relativeImageFibreMap f (relativeImageSymmetric f M).relProjHom h wh t)) (hhigher : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ S) (i : ℕ), 0 < i → IsZero (((pushforward (relativeImageFibreMap f (relativeImageSymmetric f M).relProjHom h wh t)).rightDerived i).obj (SheafOfModules.unit (Limits.pullback (C := Scheme.{u}) f t).ringCatSheaf))) : ∃ (q : Y ⟶ A.data.relProj) (wq : q ≫ A.data.relProjHom = f), RelativeImageGeometry f M A phi hsurj h q ∧ RelativeImageGeometricFibres f M A phi hsurj h wh q wq ∧ RelativeImageArbitraryBaseChange f M A phi hsurj h q ∧ RelativeImagePairIsomorphisms f M A phi hsurj h q",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-209b953cc",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read the item (10 steps), all 17 stmt_dep records, the full module and the interfaces it uses (RelativeSectionAlgebra(+IsCanonicalMap), TautologicalQuotient/Classifies/IsCanonicalMap, GradedAlgebraData.PullbackData, relProjMap). Hypotheses match: proper/flat/LFP, Nonempty+IsPureDimension 1 geometric fibres, IsInvertible M, adjunction-unit hO universally, hvanish for i,j>0, IsFiniteLocallyFree on M^(n+1), hbc via moduleBaseChangeMap for j>0, Epi evaluation counit, section-pinned phi with affine surjectivity (degree 0 follows from hO), chart-pinned h, kernel image via Hom.image/toImage bijectivity, rightDerived vanishing. Conclusions all present: Flat/LFP/QC/QS of relProjHom, IsClosedImmersion relProjMap, A.IsCanonicalMap q (universal pin), proper, surjective, q≫i=h, normalized TautologicalQuotient twist, fibre iso e with e≫imageι=i_t and q_t≫e=toImage, base change (PullbackData graded base change pinned by sections; c pinned via psi degree-1 injectivity; q/h/immersion squares), pair isos with arbitrary l. Dep node files byte-identical to side-live; item changed only in lean and by 7 added landed def owners; statement verbatim; single sorry; no hollow defs; docstrings and proof steps present; no name clash. Notes (no RETURN, stmt_deps not fixable in S2): landed owners def-per-projective-bundle-quotient-data, def-trf-projective-bundle-comparison-data, def-nagata-graded-algebra-pullback-data, def-sc-finite-locally-free-sheaf and the scheme-image nodes are used but not cited, consistent with landed practice (8 PullbackData users uncited); the q^*O(1)≅M clause is Nonempty, but the canonical iso is recoverable from Classifies and q≫i=h. No file changed, so no compile."
+ }
+}

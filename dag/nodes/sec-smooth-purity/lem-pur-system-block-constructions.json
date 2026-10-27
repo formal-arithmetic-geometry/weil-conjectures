@@ -1,0 +1,165 @@
+{
+ "id": "lem-pur-system-block-constructions",
+ "kind": "statement",
+ "title": "Finite block constructions and ordinary coherence",
+ "statement": "Let C be a category with a Grothendieck topology J and a compatible sequence of commutative ring sheaves B with transition maps τ. For a monotone surjection t:ℕ→ℕ with finite fibers, construct the least endpoint a_i of each fiber. Then t(a_i)=i, a is monotone, a_(t(m))≤m<a_(t(m)+1), and t(m+1) equals t(m) or t(m)+1. Reindexing (m,U) by any monotone map gives a continuous functor of the coefficient sequence site. The block-index and endpoint reindexings identify their pushforward coefficient ring sheaves with the actual repeated and original ring sheaves. Define blockRepeat and blockEndpoint as module-sheaf pushforwards using these equalities, on the actual system categories of [lem-coef-semilinear-derived-sections]. Define SystemBlockRepetition as the package recording these actual functors, their section formulas, endpoint adjunction, additive exactness and preservation of K-injective complexes; this node constructs the package type, not a witness. The identity and composite block maps have finite fibers. Repetition for t followed by s is heterogeneously equal to repetition for t∘s under the specified equality of coefficient transitions; repetition for the identity map is heterogeneously equal to the identity functor with the original transitions. Given a compatible levelwise ring-sheaf map b, its repeated maps are compatible with the repeated transitions, and restriction of scalars strictly commutes with repetition on these actual module-sheaf categories. A witness of SystemBlockRepetition supplies the stated K-injective-preservation instance.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21; explicit finite-block generalization and ordinary coherence from the existing proofs in SystemBlockRepetition."
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Define a_i=Nat.find of surjectivity. Minimality and monotonicity give the interval and no-skipped-level equations. For composites, the fiber is contained in the finite union of the inner fibers indexed by the outer fiber. Continuity follows because the sequence-site covering condition is the original vertical covering condition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual system and coefficient-sequence constructions of [lem-coef-semilinear-derived-sections]. Functor extensionality and naturality on generators identify the reindexed coefficient ring sheaves. Module-sheaf pushforward along the equalities defines repetition and endpoint restriction; the package fields specify the original actions, maps and adjunct formula.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For composition, naturality of the coefficient sequence gives the transition equality; pushforward composition and uniqueness of equality transports give the heterogeneous functor equality. The identity case is equality transport along identity pushforward. For scalar restriction, the compatible ring map is a natural transformation of coefficient sequences. Its components give the repeated compatibility equation; the coefficient pushforward square commutes by its section formulas, hence module-sheaf pushforward and scalar restriction commute. All of these existing proofs are retained in the extraction.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Finite-block reindexing generalization of Construction 4.1; existing fully proved ordinary portion extracted after abstracting coefficient transport to satisfy the single-file compilation limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Repeating finite blocks of an inverse sequence of module sheaves has an exact left adjoint given by evaluation at first block endpoints, preserves K injectives, and commutes with unbounded derived direct image",
+   "results": "Recorded returned hits: localCohomology.diagram, Ext, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskeringLeft",
+   "results": "Recorded returned hits: CategoryTheory.Functor.whiskeringLeft, CategoryTheory.Functor.whiskeringLeft_obj_id, CategoryTheory.Functor.whiskeringLeft_obj_obj, CategoryTheory.Functor.whiskeringLeftObjIdIso, CategoryTheory.Functor.whiskeringLeft_obj_map, CategoryTheory.Functor.whiskeringLeft_obj_comp, CategoryTheory.Functor.whiskeringLeftObjCompIso, CategoryTheory.Functor.whiskeringLeft_map_app_app. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blockRepetition|block.repetition|semilinear.*[Ss]ystem",
+   "results": "Recorded returned hits: Mathlib/Algebra/Ring/CompTypeclasses.lean. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a surjective nondecreasing map of natural numbers with finite fibers commutes with right derived direct images of sheaf systems",
+   "results": "Recorded returned hits: CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.Sheaf.ΓRes_map, CategoryTheory.Sheaf.ΓRes, CategoryTheory.Functor.rightDerivedNatTrans, ModuleCat.Tilde.toOpen_res, TopCat.Presheaf.SheafConditionEqualizerProducts.w, Finset.restrict₂_comp_restrict. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition of sheaf module inverse systems by a monotone surjection has a first endpoint evaluation left adjoint; natural derived pushforward comparison commutes with coefficient restriction",
+   "results": "Recorded returned hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsLeftAdjointPullback, TopCat.Sheaf.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. Read the logged results; general sheaf adjunctions, derived natural transformations, whiskering and scalar semilinearity do not state block repetition for varying coefficient systems with its normalized comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemBlockRepetition",
+  "date": "2026-10-27",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: form compatible finite-level functors before inverse limits; the cofinal-indexing argument needs exact repetition of selected coefficient levels before coefficient extension.",
+   "via": [
+    "lem-pur-system-block-repetition",
+    "lem-pur-etale-system-cofinal-mate",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemBlockConstructions",
+  "file": "lean/Sheaf/Paper/SystemBlockConstructions.lean",
+  "declaration": "WeilConjectures.SemilinearSections.blockRepeat_comp",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.SystemBlockMap",
+   "WeilConjectures.SemilinearSections.SystemBlockMap.first",
+   "WeilConjectures.SemilinearSections.blockCoefficients",
+   "WeilConjectures.SemilinearSections.blockTransitions",
+   "WeilConjectures.SemilinearSections.systemBlockMap_endpoints",
+   "WeilConjectures.SemilinearSections.SystemBlockMap.firstMonotone",
+   "WeilConjectures.SemilinearSections.blockSite",
+   "WeilConjectures.SemilinearSections.blockSite_continuous",
+   "WeilConjectures.SemilinearSections.blockSiteContinuous",
+   "WeilConjectures.SemilinearSections.SystemBlockMap.endpoints",
+   "WeilConjectures.SemilinearSections.SystemBlockMap.comp_finite",
+   "WeilConjectures.SemilinearSections.SystemBlockMap.comp",
+   "WeilConjectures.SemilinearSections.SystemBlockMap.id",
+   "WeilConjectures.SemilinearSections.blockRepeatRing",
+   "WeilConjectures.SemilinearSections.blockRepeat",
+   "WeilConjectures.SemilinearSections.blockEndpointRing",
+   "WeilConjectures.SemilinearSections.blockEndpoint",
+   "WeilConjectures.SemilinearSections.SystemBlockRepetition",
+   "WeilConjectures.SemilinearSections.SystemBlockRepetition.preservesKInjective",
+   "WeilConjectures.SemilinearSections.blockRepeat_comp",
+   "WeilConjectures.SemilinearSections.blockRepeat_id",
+   "WeilConjectures.SemilinearSections.blockRepeat_restrictScalars"
+  ],
+  "statement": "theorem blockRepeat_comp (s : SystemBlockMap) :\n    ∃ _hτ : blockTransitions J (blockCoefficients B t) (blockTransitions J B τ t) s =\n        blockTransitions J B τ (t.comp s),\n      HEq (blockRepeat J B τ t ⋙\n        blockRepeat J (blockCoefficients B t) (blockTransitions J B τ t) s)\n        (blockRepeat J B τ (t.comp s))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-27",
+  "note": "Extraction of existing proved declarations and definitions with their original signatures, bodies and global attributes; no new mathematical assertion or sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1c1f1",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T235948-L-1474002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1c1f1",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T235948-L-1474002",
+  "kind": "interface",
+  "note": "independent cc review: item SystemBlockRepetition + 2 extracted modules vs clone original (sorted-line diff, #check signature diff old/new, tail byte-identical) and nodes lem-pur-system-block-{repetition,constructions,derived-comparisons}; 4 direct importers compiled OK against delivered files; axioms clean"
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "id": "lem-trf-universal-homeomorphism-nonreduced-fibre-spreading",
+ "kind": "statement",
+ "title": "Spreading and descending nonreduced fibres through a universal homeomorphism",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Let $U\\subseteq Y$ be an open subscheme, let $T$ be an irreducible scheme [def-weil-irreducible-components] with generic point $\\xi$ [def-sc-generic-point], and let $q:T\\to U$ be a universal homeomorphism [def-weil-universal-homeomorphism]. Give $T$ its $Y$-scheme structure via the composite $T\\xrightarrow{q}U\\hookrightarrow Y$. Set $P=X\\times_YT$ with projection $h:P\\to T$ [def-pc-fibre-product]. Suppose the fibre $P_\\xi$ is not reduced [def-pc-scheme-fibre, def-pc-reduced-scheme]. Then there exists a nonempty open subset $W\\subseteq T$ such that $P_t$ is not reduced for every $t\\in W$, and $V=q(W)\\subseteq U\\subseteq Y$ is nonempty and open in $Y$ with $X_y$ not geometrically reduced over $\\kappa(y)$ for every $y\\in V$ [def-weil-residue-field, def-pc-geometrically-irreducible].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood), proof: application of the nonreduced-fibre neighbourhood theorem and descent of the resulting open under the base homeomorphism"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-universal-homeomorphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Let $r:T\\to Y$ be the given composite. Since finite type means locally of finite type and quasi-compact, $f$ has both properties. Apply locally-finite-type base change and quasi-compact base change to $f$ along $r$. The projection $h:X\\times_YT\\to T$ has both properties, hence is of finite type.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-base-change",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4 (lemma-base-change-finite-type), including the proof using schemes.tex Tag 01K5 (lemma-quasi-compact-preserved-base-change)"
+   }
+  },
+  {
+   "text": "Apply the nonreduced-generic-fibre neighbourhood theorem to $h:P\\to T$. Its hypotheses hold: $h$ is of finite type by Step 1, $T$ is irreducible with generic point $\\xi$ by assumption, and $P_\\xi$ is nonreduced by assumption. It gives a nonempty open $W\\subseteq T$ with $P_t$ nonreduced for every $t\\in W$.",
+   "uses": [
+    "lem-trf-nonreduced-fibre-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood), proof: invocation of Tag 0575 (lemma-nonreduced-in-neighbourhood)"
+   }
+  },
+  {
+   "text": "For $t\\in W$, set $y=q(t)\\in U\\subseteq Y$. The morphism $r$ induces a field homomorphism $\\kappa(y)\\to\\kappa(t)$. By the definitions of fibre and fibre product, $$P_t=(X\\times_YT)\\times_T\\operatorname{Spec}\\kappa(t)\\cong X_y\\times_{\\operatorname{Spec}\\kappa(y)}\\operatorname{Spec}\\kappa(t).$$ Explicitly, maps from any test scheme $S$ to either side are exactly pairs $(a:S\\to X,b:S\\to\\operatorname{Spec}\\kappa(t))$ with $f a=r\\,i_t b$, where $i_t:\\operatorname{Spec}\\kappa(t)\\to T$ is canonical; composing $b$ with the residue-field map supplies the required map to $\\operatorname{Spec}\\kappa(y)$. These descriptions give inverse maps by uniqueness in the fibre-product universal property. If $X_y$ were geometrically reduced, its base change along the field extension $\\kappa(t)/\\kappa(y)$ would be reduced by definition. This contradicts Step 2. Thus $X_y$ is not geometrically reduced.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0576 (lemma-base-change-fibres-geometrically-reduced), first sentence of proof, and Tag 0577, final sentence; only the defining implication of geometric reducedness is needed"
+   }
+  },
+  {
+   "text": "Base changing the universal homeomorphism $q$ along $\\mathrm{id}_U$ shows directly from its definition that $q:T\\to U$ is a homeomorphism on underlying spaces. Therefore $V=q(W)=(q^{-1})^{-1}(W)$ is open in $U$ and is nonempty because $W$ is nonempty. As $U$ is open in $Y$, $V$ is open in $Y$. For each $y\\in V$, the definition of image gives $t\\in W$ with $q(t)=y$; Step 3 then says that $X_y$ is not geometrically reduced. This $W$ and $V$ have every required property.",
+   "uses": [
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood), final sentence of proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-trf-nonreduced-fibre-open",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood), final paragraph: apply Tag 0575 and descend the open through the homeomorphism; the fibre comparison is expanded from Tag 0576"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Uu]niversal[Hh]omeomorph|nonreduced|nonReduced",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this spreading-and-open-descent theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spreading nonreduced generic fibres and descending their open locus through a universal homeomorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversalHomeomorph",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.UniversalHomeomorph'; 0 hits: ; digest 4f53cda18c2baa0c. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this spreading-and-open-descent theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme morphism, a nonreduced generic fibre after universal homeomorphism of the base gives a nonempty open of non geometrically reduced original fibres",
+   "results": "8 hits: Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.isReduced_of_isOpenImmersion, Algebra.IsGeometricallyReduced, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsReduced, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; digest 4b287e2c5ba6f209. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this spreading-and-open-descent theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type family with nonreduced generic fibre has nonreduced fibres on a nonempty open and universal homeomorphisms descend this open to non geometrically reduced fibres",
+   "results": "8 hits: Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, AlgebraicGeometry.isReduced_of_isOpenImmersion, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.of_forall_fg, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral, Algebra.FormallyUnramified.isReduced_of_field; digest e200b0aca8879409. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this spreading-and-open-descent theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.IsReduced",
+   "results": "1 hits: AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced; digest 0557b5eff9c88189. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this spreading-and-open-descent theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonreduced|nonReduced|not_reduced|notReduced",
+   "results": "No hits in AlgebraicGeometry. Log: 0 hits, digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonreduced generic fibre of a finite type morphism spreads to nonreduced fibres over a nonempty open subset",
+   "results": "Hits concern reduced open subschemes, reducedness from an open cover, integral opens, flat restrictions and morphism spreading. Read SpreadingOut.lean:195-210, 320-345: these spread morphisms from stalk maps and do not imply the nonreduced-fibre neighbourhood conclusion. Log: 8 hits, digest c322c26e970383b1.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.IsReduced",
+   "results": "The hits are the definition of GeometricallyReduced, its equivalence with geometrically IsReduced, reduced fibre instances, and reducedness of flat total spaces. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:40-110. None spreads nonreduced fibres or descends their open locus. Log: 9 hits, digest ac93c37b3b6ac6cd.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism over an irreducible base, a nonreduced generic fibre remains nonreduced over a nonempty open subset, and this open descends through a universal homeomorphism",
+   "results": "Hits: IsReduced, isIntegral_of_irreducibleSpace_of_isReduced, reduced open subschemes, isReduced_of_isIntegral, isReduced_of_isOpenImmersion, isReduced_of_isReduced_stalk, isIntegral_iff_irreducibleSpace_and_isReduced, genericPoint_eq_of_isOpenImmersion. None states the item or its spreading assertion. Log: 8 hits, digest 8f902e65018942a1.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|generic.*[Rr]educed|[Rr]educed.*generic",
+   "results": "15 hits in AlgebraicGeometry: geometrically reduced definitions, affine space, smooth group schemes and generic stalk fields. Read Geometrically/Reduced.lean:40-110 and Properties.lean:218-235; none is the spreading theorem. Log: 15 hits, digest fc477d93ee57852c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus of nonreduced fibres of a finite type family contains a nonempty open if its generic fibre is nonreduced",
+   "results": "Hits: IsReduced, Algebra.isOpen_unramifiedLocus, Jacobson fibres, reduced open subschemes, reducedness from stalks and an open cover, support_nilradical. The unramified-locus result concerns a different locus. No spreading of nonreduced fibres. Log: 8 hits, digest d3fcd543a5bacfb1.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-not-geometrically-reduced-open",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "In the constructibility input, apply the generic-fibre alternative of Stacks 0579 on an irreducible closed subset; this node is the 0578 or 0577 alternative used there. Stacks 0577 proof: application of the nonreduced-fibre neighbourhood theorem and descent of the resulting open under the base homeomorphism",
+   "via": [
+    "lem-trf-generic-fibre-not-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-universal-homeomorphism-nonreduced-fibre-spreading",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its hypotheses. Proved finite type of the pullback using the existing locally-finite-type and quasi-compact base-change leaves, applied the existing Tag 0575 node, expanded the residue-field fibre-product comparison and the geometric-reducedness contradiction, and descended the nonempty open by the underlying homeomorphism. No new nodes or new Mathlib leaves. Rechecked every citation against its statement and repeated the item searches with msearch.py.",
+  "blueprint": "The inherited constructibility input below lem-trf-local-term-locality: the Tag 0577 alternative used by the generic-constancy/geometrically-reduced-locus chain; specifically Tag 0577 proof, final paragraph, applying Tag 0575 after the universal-homeomorphism preparation and descending the resulting open. The current latest blueprint ancestor and its unit were read; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-b701964c9",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-b701964c9 (reviewer sub-agent of L); spot-checked: Read the item in full (4 steps, no new nodes), every cited statement, and Stacks more-morphisms.tex Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood) with its proof. The statement and stmt_deps are byte-identical to the base and to clones/live and clones/side-live, where the item is still unsplit, so no other group has superseded it and the statement is not weakened. The item is the final 0575-plus-homeomorphism paragraph of the 0577 proof; the parent and the sibling prepared-generic-fibre node carry the other parts, so the item restates no parent clause. Step 1: finite type = lft + qc (def-weil-finite-type-morphism), and both properties survive arbitrary base change by the Mathlib leaves lem-weil-pbc-lft-base-change and lem-pc-quasi-compact-base-change (Stacks 01T4/01K5). Step 2: lem-trf-nonreduced-fibre-open (Tag 0575, same unit, no cycle) receives exactly the needed hypotheses. Step 3, elementary: P_t ≅ X_y ×_{κ(y)} κ(t) via the fibre-product universal property and the residue-field factorization; def-pc-geometrically-irreducible quantifies over every field extension, so the contradiction holds, and only the forward half of 0576 is used. Step 4, elementary: base change along id_U shows q is a homeomorphism, so V = q(W) is open and nonempty in U and hence in Y. Edge cases checked: q = id with dual numbers; empty T or X excluded; F_p(s), u^p − s, which is reduced but not geometrically reduced. Blueprint from/place filled, same_as [], acyclic. No changes."
+ }
+}

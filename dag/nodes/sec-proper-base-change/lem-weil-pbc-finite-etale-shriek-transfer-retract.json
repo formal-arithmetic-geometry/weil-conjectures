@@ -1,0 +1,234 @@
+{
+ "id": "lem-weil-pbc-finite-etale-shriek-transfer-retract",
+ "kind": "statement",
+ "title": "Derived compact-support retraction from a prime-to-primary finite etale cover",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and use $D^+(S_{\\Et},\\Lambda)$ for bounded-below derived categories of module sheaves on small etale sites [def-weil-pbc-derived-categories] [def-weil-pbc-etale-sheaves]. Let $T,X,Y$ be quasi-compact and quasi-separated schemes, $h:X\\to Y$ separated of finite type and $g:T\\to X$ finite etale [def-weil-pbc-scheme-conventions]. Choose compactifications $c_h,c_{hg}$, where a compactification is $c=(j,p)$ with $j$ a quasi-compact open immersion and $p$ proper, and set $Rh_!^c=Rp_*j_!$ [def-weil-pbc-projection-compactification] [def-weil-pbc-extension-by-zero]. Let $F$ be a sheaf of $\\Lambda$-modules on $X_{\\Et}$, let $\\ell$ be prime and $n\\geq1$, and assume $\\ell^nF=0$. Suppose every geometric fibre of $g$ has the same cardinality $d\\geq1$, with $\\ell\\nmid d$ [def-weil-pbc-geometric-fibre]. Write $g^{-1},g_*$ and $\\eta:F\\to g_*g^{-1}F$ for inverse image, direct image and their adjunction unit [def-weil-pbc-inverse-image] [def-weil-pbc-direct-image], and $G[0]$ for a sheaf placed in degree zero. There is an isomorphism in $D^+(Y_{\\Et},\\Lambda)$\n$$\\alpha:Rh_!^{c_h}((g_*g^{-1}F)[0])\\xrightarrow{\\sim}R(hg)_!^{c_{hg}}((g^{-1}F)[0]).$$\nThere are morphisms $u:Rh_!^{c_h}(F[0])\\to R(hg)_!^{c_{hg}}((g^{-1}F)[0])$ and $v$ in the reverse direction with $v\\circ u=1$, and $u=\\alpha\\circ Rh_!^{c_h}(\\eta[0])$. No invertibility of $d$ in $\\Lambda$, local constancy of $F$, or connectedness of $X,T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKY, label lemma-loc-constant-shriek-rel-dim-1, trace-splitting and shriek-composition paragraph. Derived formulation of the argument, using finite direct-image exactness and the identity compactification of a finite morphism."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put E = g^*F and take the counit t of the proved finite-etale reverse adjunction g_* ⊣ g^*. Private unit_stalk_component identifies the ordinary unit on each algebraically closed stalk with the diagonal, using naturality of upperStarCompSheafFiberIso and the ordinary adjunction triangle. Private trace_stalk_component identifies t on each summand with the pullback stalk comparison, using finiteEtaleUnit_stalk_inclusion and the reverse adjunction triangle. The finite stalk product has identity equal to the sum of projection-inclusion composites, by sheafFiberToLowerStar_stalkRestrict and its off-diagonal zero formula. Thus eta followed by t has stalk equal to a sum of Nat.card(g.GeometricFiber s) identities. Apply the given algebraically closed degree hypothesis and conservativity of algebraically closed geometric stalks. This proves private exists_trace_algClosed directly from the given hypothesis, avoiding the separably closed formulation of the existing trace-degree API.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-unit-stalk-inclusion",
+    "lemma-weil-pbc-finite-stalk-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), Definition 03SE (definition-trace-map) and the following degree formula"
+   }
+  },
+  {
+   "text": "The prime hypothesis gives Nat.Coprime d (ell^n). Private generic primary_unit_split applies Nat.gcd_eq_gcd_ab to obtain a*d + b*ell^n = 1, with a = Nat.gcdA d (ell^n). Distribute integer scalar multiplication on morphisms and use ell^n • id_F = 0. Then rho = a • t satisfies eta followed by rho = id_F. This uses the additive morphism group, not invertibility in Lambda.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), multiplication-by-degree observation; explicit Bezout normalization for the primary-torsion case of Tag 0GKY"
+   }
+  },
+  {
+   "text": "Apply the existing proved instance preservesFiniteColimits_lowerStar_of_isFinite directly with ModuleCat Lambda. It already applies to these concrete coefficients, so no auxiliary forgetful-functor argument is needed. Together with the usual finite-limit preservation it supplies exactness of g_*.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero); coefficient lift using sites-modules.tex Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "Finite g is proper. Construct cg = (id_T,g). The source isomorphism upperStarIsoOpenImmersionLowerShriekInv at Iso.refl T followed by upperStarId identifies (id_T)_! with the identity. Apply mapDerivedCategoryPlusNatIso and mapDerivedCategoryPlusIdIso, then whisker by R+g_* to identify Rg_!^cg with R+g_*. The proved specialized rightDerivedFunctorPlusIsoMapDerivedCategoryPlus for the exact g_*, together with mapDerivedCategoryPlusSingleFunctor at degree zero, gives beta: (g_*E)[0] ≅ Rg_!^cg(E[0]). The specialized canonical exact-derived API avoids constructing a general Kan-extension factorization witness.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-projection-compactification",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY (lemma-loc-constant-shriek-rel-dim-1), finite-cover composition argument; identity compactification and derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-shriek-qcqs-composition] to $T\\xrightarrow{g}X\\xrightarrow{h}Y$ and to $c_g,c_h,c_{hg}$. The schemes are qcqs, both maps are separated of finite type, and the coefficient ring is finite, exactly as required. Evaluating its natural isomorphism at $E[0]$ gives $C_E:Rh_!^{c_h}Rg_!^{c_g}(E[0])\\xrightarrow{\\sim}R(hg)_!^{c_{hg}}(E[0])$. Define $\\alpha=C_E\\circ Rh_!^{c_h}(\\beta)$. Functors preserve isomorphisms, so this is the asserted isomorphism from $Rh_!^{c_h}(H[0])$. The cited composition statement permits the originally specified compactifications independently; no compatible choice or extra compactification-independence assertion is being assumed.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-qcqs-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), applied to the finite cover; Tag 0GKY, displayed equality Rf_! g_* g^{-1}F = R(fg)_! g^{-1}F"
+   }
+  },
+  {
+   "text": "Write $A=Rh_!^{c_h}$, $K=F[0]$ and $L=H[0]$. Passing the sheaf maps of step 2 to complexes concentrated in degree zero and then localizing preserves their composite, so $\\rho[0]\\circ\\eta[0]=\\operatorname{id}_K$. Define $u=\\alpha\\circ A(\\eta[0])$ and $v=A(\\rho[0])\\circ\\alpha^{-1}$. Then $v\\circ u=A(\\rho[0])\\circ\\alpha^{-1}\\circ\\alpha\\circ A(\\eta[0])=A(\\rho[0]\\circ\\eta[0])=A(\\operatorname{id}_K)=\\operatorname{id}_{A(K)}$. These formulas give both the retraction and exactly the required formula for $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY (lemma-loc-constant-shriek-rel-dim-1), trace-splitting paragraph; explicit functorial retraction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-unit-stalk-inclusion",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-etale-shriek-qcqs-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "E1: complete Lean proof of the Tag 0GKY trace-splitting paragraph and 0F7J composition. Algebraically closed trace calculation adapted from proved FiniteEtaleModuleTraceData using its reverse-unit normalization; exactness and derived comparisons supplied directly by proved source APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite etale cover of degree prime to a prime ell compactly supported derived direct image of an ell primary sheaf is a retract of that of its pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ring-theoretic etale and abstract module-sheaf results do not state a compact-support comparison and derived trace retraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting finite etale adjunction by trace and comparing compactly supported direct images under composition in bounded below derived categories of etale module sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ring-theoretic etale and abstract module-sheaf results do not state a compact-support comparison and derived trace retraction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsSplitMono\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ring-theoretic etale and abstract module-sheaf results do not state a compact-support comparison and derived trace retraction"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]etract.*[Ee]tale|[Ee]tale.*[Rr]etract|[Ss]hriek|[Ll]owerShriek",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ring-theoretic etale and abstract module-sheaf results do not state a compact-support comparison and derived trace retraction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale trace splitting derived direct image with compact supports",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale trace splitting on primary torsion module sheaves and compactly supported derived pushforward composition",
+   "results": "[leansearch] OK 8 hit(s). Recorded results: SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, Algebra.trace_trace, Algebra.trace_comp_trace, SheafOfModules.pushforwardComp_hom_app_val_app, Algebra.intTrace.congr_simp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Algebra.FormallyEtale.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ring traces, ordinary pushforward composition or free module-sheaf pullback, not the finite-etale primary trace retraction for derived compact supports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite etale cover of degree prime to ell, derived direct image with compact supports of an ell power torsion module sheaf is a retract of compact supports of its pullback",
+   "results": "[leanfinder] OK 8 hit(s). Recorded results: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ring traces, ordinary pushforward composition or free module-sheaf pullback, not the finite-etale primary trace retraction for derived compact supports"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper: 0GKY trace splitting and the comparison Rf_! g_* g^{-1}F = R(fg)_! g^{-1}F (old item step 3), for arbitrary primary-torsion module sheaves.",
+   "via": [
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-finite-etale-shriek-transfer-retract",
+  "worker": "stage1",
+  "summary": "Split into coefficient-linear trace, Bezout normalization on the primary-torsion sheaf, coefficient lift of finite exactness, the identity compactification and exact-derived comparison, compact-support composition, and the explicit conjugated retraction. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the classical constructibility input below thm-weil-pbc-direct-image-finiteness-proper: the trace-splitting and finite-cover compact-support comparison in Tag 0GKY, as recorded in blueprint.from.place. The current main-20261015 ancestor has the same finiteness statement; the present item supplies a subordinate trace argument without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic exactness for finite direct image on abelian sheaves, used with the elementary coefficient lift in step 3; the compact-support composition node does not assert this heart-level exactness."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic fixed-coefficient direct image and its commutation with forgetting in step 3; no replacement of a geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-finite-direct-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-5c02ab6ab",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-5c02ab6ab (reviewer sub-agent of L); spot-checked: Q153 5c02ab6a, a 6-step split with no new nodes; statement and stmt_deps unchanged. I read the item and every cited statement in full. Sources checked: Stacks 0GKY (lemma-loc-constant-shriek-rel-dim-1: trace splitting F→g_*g^{-1}F→F and Rf_!g_*g^{-1}F = R(fg)_!g^{-1}F), 03SH (trace method) and 0F7J (shriek composition for separated finite-type morphisms of qcqs schemes). Step 1: the coefficient-linear trace node gives t∘η = d·id with arbitrary R and no connectedness. Advisory: that node counts lifts of separably closed points while def-weil-pbc-geometric-fibre uses algebraically closed ones. For finite étale g the counts agree (a finite étale scheme over a separably closed field is a disjoint union of copies of the point), the node itself calls its count 'the geometric fibre', and split-locally-constant-retraction reads it the same way. Step 2: Bezout ad+bℓ^n=1 and ℓ^n·id_F=0 give ρη=id; correct. Step 3: forget is faithful and exact and commutes with module g_*, so it reflects exactness of finite g_*. The two curve-estimates generic tools are declared in tool_uses, and the chapter uses sec-curve-estimates. Step 4: finite⇒proper, the identity compactification is explicit in its definition, (1_T)_!≅id from the presheaf definition, and the exact-functor node gives (g_*E)[0]≅Rg_*(E[0]). Step 5: the qcqs-composition hypotheses (finite Λ, qcqs schemes, separated finite type, three arbitrary compactifications) all hold, and α=C_E∘Rh_!(β) has the right direction. Step 6: v∘u=id with the required formula for u. Edge cases: Λ=Z/6 with ℓ=2 and d=3 (d not a unit in Λ) works; ℓ|d fails as expected; X=∅ is trivial. No cycle: the closure of qcqs-composition does not contain the item. Not on the drop list. Route: trace-degree is sk-thm-p1, forgetful is sk-thm-reduction, exact-functor is sk-def-exchange, qcqs-composition is the item's own unit; no SGA. Batch-5 flag (qcqs-composition → lem-pod-lisse-module-sheaves-as-module-objects): accepted. The item's only citer, lisse-open-relative-line-constructibility, already reaches both nodes without the item, so the closure is unchanged. The pod node (lisse = module objects in FLC) is generic and is not a step of the trace formula or Poincaré duality proofs, and 0F7J composition is a general six-functor tool. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleShriekTransferRetract",
+  "declaration": "AlgebraicGeometry.Etale.exists_finiteEtale_shriek_transfer_retract",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleShriekTransferRetract.lean",
+  "statement": "theorem exists_finiteEtale_shriek_transfer_retract (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T X Y : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (h : X ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (g : T ⟶ X) [IsFinite g] [Etale g] (ch : Compactification h) (chg : Compactification (g ≫ h)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ell n d : ℕ) (hell : ell.Prime) (hn : 1 ≤ n) (hkill : ell ^ n • 𝟙 F = 0) (hd : 1 ≤ d) (hprime : ¬ ell ∣ d) (hdeg : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X), Nat.card (g.GeometricFiber s) = d) : ∃ α : (Rf_!(ch)[ModuleCat.{u + 1} Λ]+).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj ((lowerStar (ModuleCat.{u + 1} Λ) g).obj ((upperStar (ModuleCat.{u + 1} Λ) g).obj F))) ≅ (Rf_!(chg)[ModuleCat.{u + 1} Λ]+).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) g).obj F)), ∃ (u : (Rf_!(ch)[ModuleCat.{u + 1} Λ]+).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F) ⟶ (Rf_!(chg)[ModuleCat.{u + 1} Λ]+).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) g).obj F))) (v : (Rf_!(chg)[ModuleCat.{u + 1} Λ]+).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) g).obj F)) ⟶ (Rf_!(ch)[ModuleCat.{u + 1} Λ]+).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)), u ≫ v = 𝟙 _ ∧ u = (Rf_!(ch)[ModuleCat.{u + 1} Λ]+).map ((_root_.DerivedCategory.Plus.singleFunctor _ 0).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F)) ≫ α.hom",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bfecc5b3",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L at 17c07c95 (H13/H4). The def-weil-pbc-projection-compactification record is now byte-identical to side-live (Q19, existing:true, all 8 declarations), and no dependency module changed. The item .lean is identical to the earlier delivery (sha256 5b4c758c) and the item node changes only by the added lean record; lean.statement is verbatim in the file. Re-checked against the node and Tag 0GKY: finite Lambda at u+1 (same convention as the qcqs-composition sibling), qcqs T/X/Y, separated finite-type h, finite etale g, arbitrary Compactification structures (open part quasi-compact automatically), Rf_!(c)+ = D+(i_!) then R+(p_*), ell^n smul 1_F = 0, ell prime, n>=1, d>=1, ell not dividing d, GeometricFiber count over algebraically closed Omega : Type u, unit of upperStar/lowerStar, singleFunctor 0, exists alpha iso, u >> v = 1, u = Rh_!(eta[0]) >> alpha.hom. Not hollow: it forces Rh_!(eta[0]) to be split mono. Edge cases: empty X, F=0, Lambda=0, d=1, Z/6 with ell=2 and d=3. Proof is sorry only; docstrings have source place, blueprint tag and 6 steps. No compile: no file changed. Advisory: trace node counts separably closed fibres, equivalent for finite etale g."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T143104-L-952839",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

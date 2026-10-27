@@ -151,7 +151,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      187,
+      240
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -206,11 +231,16 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(T,T_0)$ be an affine henselian pair, let $F$ be a torsion sheaf on\n$T_{\\Et}$ with restriction $F_0$ to $T_0$, and let $c\\in H^q(T_0,F_0)$ with\n$q>0$. Then there are a constructible torsion sheaf $C$ on $T$ and a\nmorphism $\\iota:C\\to F$ such that $c$ lies in the image of\n$H^q(T_0,C_0)\\to H^q(T_0,F_0)$.\n\nThe morphism $\\iota$ cannot in general be chosen to be a monomorphism: for\n$T=T_0=\\operatorname{Spec}\\prod_{\\mathbf N}\\mathbf F_2$, $F=x_*\\mathbf Z/2$ the\nskyscraper sheaf at a closed non-open point $x$ (a non-principal\nultrafilter), $q=1$ and $c$ the nonzero class of\n$H^1(T,x_*\\mathbf Z/2)=H^1(\\operatorname{Gal}(\\overline{\\mathbf F}_2/\\mathbf F_2),\\mathbf Z/2)=\\mathbf Z/2$,\nthe only subsheaf of $F$ from which $c$ comes is $F$ itself, whose support\n$\\{x\\}$ is not constructible.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a finite ring, let $(A,I)$ be a henselian pair with\n$T=\\operatorname{Spec}A$ and closed fibre $T_0=\\operatorname{Spec}A/I$, let\n$F$ be a sheaf of $\\Lambda$-modules on $T_{\\Et}$ with restriction $F_0$ to\n$T_0$, and let $c\\in H^q(T_0,F_0)$ for some $q\\ge0$. Then there are a\nconstructible sheaf of $\\Lambda$-modules $C$ on $T$ and a morphism\n$\\iota:C\\to F$ such that $c$ lies in the image of\n$H^q(T_0,C_0)\\to H^q(T_0,F_0)$.\n\nThe morphism $\\iota$ cannot in general be chosen to be a monomorphism: for\n$T=T_0=\\operatorname{Spec}\\prod_{\\mathbf N}\\mathbf F_2$, $F=x_*\\mathbf Z/2$ the\nskyscraper sheaf at a closed non-open point $x$ (a non-principal\nultrafilter), $q=1$ and $c$ the nonzero class of\n$H^1(T,x_*\\mathbf Z/2)=H^1(\\operatorname{Gal}(\\overline{\\mathbf F}_2/\\mathbf F_2),\\mathbf Z/2)=\\mathbf Z/2$,\nthe only subsheaf of $F$ from which $c$ comes is $F$ itself, whose support\n$\\{x\\}$ is not constructible.",
   "proof": [
    {
-    "text": "On the quasi-compact quasi-separated scheme $T$ the torsion sheaf $F$ is a\nfiltered colimit $F=\\operatorname{colim}_\\lambda C_\\lambda$ of constructible\ntorsion sheaves (Étale Cohomology, Lemma 59.73.2, Tag\n[03SA](https://stacks.math.columbia.edu/tag/03SA)): each $C_\\lambda$ is a\ncokernel of a map between finite direct sums of extensions by zero\n$j_!\\mathbf Z/n$ along quasi-compact etale $U\\to T$, built from finitely\nmany local sections of $F$ of finite order, and the structure maps\n$\\iota_\\lambda:C_\\lambda\\to F$ need not be injective. The closed fibre $T_0$\nis quasi-compact and quasi-separated and restriction to $T_0$ commutes with\ncolimits, so\n$H^q(T_0,F_0)=\\operatorname{colim}_\\lambda H^q(T_0,(C_\\lambda)_0)$ (Étale\nCohomology, Lemma 59.51.4, Tag [03Q5](https://stacks.math.columbia.edu/tag/03Q5)),\nand $c$ is the image of a class in $H^q(T_0,(C_\\lambda)_0)$ for some\n$\\lambda$; take $C=C_\\lambda$ and $\\iota=\\iota_\\lambda$. This is the first\nstep of the proof of Étale Cohomology, Lemma 59.82.1, Tag\n[09ZE](https://stacks.math.columbia.edu/tag/09ZE).",
+    "text": "Since $\\Lambda$ is finite, $F$ is a torsion sheaf. On the affine, hence\nquasi-compact quasi-separated, scheme $T$ it is a\nfiltered colimit $F=\\operatorname{colim}_\\lambda C_\\lambda$ of constructible\nsheaves of $\\Lambda$-modules (Étale Cohomology, Lemma 59.73.2, Tag\n[03SA](https://stacks.math.columbia.edu/tag/03SA)): each $C_\\lambda$ is a\ncokernel of a map between finite direct sums of extensions by zero\n$j_!\\underline\\Lambda$ along quasi-compact etale $U\\to T$, built from finitely\nmany local sections of $F$ (constructible because $\\Lambda$ is finite), and the structure maps\n$\\iota_\\lambda:C_\\lambda\\to F$ need not be injective. The closed fibre $T_0$\nis quasi-compact and quasi-separated and restriction to $T_0$ commutes with\ncolimits, so\n$H^q(T_0,F_0)=\\operatorname{colim}_\\lambda H^q(T_0,(C_\\lambda)_0)$ (Étale\nCohomology, Lemma 59.51.4, Tag [03Q5](https://stacks.math.columbia.edu/tag/03Q5)),\nand $c$ is the image of a class in $H^q(T_0,(C_\\lambda)_0)$ for some\n$\\lambda$; take $C=C_\\lambda$ and $\\iota=\\iota_\\lambda$. This is the first\nstep of the proof of Étale Cohomology, Lemma 59.82.1, Tag\n[09ZE](https://stacks.math.columbia.edu/tag/09ZE).",
     "uses": [],
     "elementary": null
    },
@@ -218,15 +248,8 @@
     "text": "When $T$ is noetherian the image of $\\iota$ is again constructible, so that\n$\\iota$ may then be replaced by the inclusion of a constructible subsheaf.\nOn a general $T$ this fails: the subsheaf generated by finitely many sections\nis locally constant on the locally closed equalizer loci of pairs of\ngenerators, but these loci need not be constructible, as the example in the\nstatement shows. This is why the lemma is stated with a morphism.",
     "uses": [],
     "elementary": null
-   },
-   {
-    "text": "If moreover $c$ vanishes after pullback to an integral strictly local cover\nas in [lemma-weil-pbc-finite-stage-killing], then it already vanishes on one\nfinite, finitely presented cover $T_{\\lambda_0}\\to T$; the null-homotopy on\n$T_{\\lambda_0}$ consists of finitely many sections of $F$, which come from\nsome stage $C_{\\lambda'}$ with $\\lambda'\\ge\\lambda$, so $C$ may be taken so\nthat this null-homotopy lives in $C$ as well.",
-    "uses": [
-     "lemma-weil-pbc-finite-stage-killing"
-    ],
-    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

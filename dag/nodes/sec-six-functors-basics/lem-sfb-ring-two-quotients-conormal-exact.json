@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-ring-two-quotients-conormal-exact",
+ "kind": "statement",
+ "title": "Conormal exact sequence of two compatible ring quotients",
+ "statement": "Let $\\alpha:A\\to B$ and $\\beta:B\\to C$ be homomorphisms of commutative rings, and assume that $\\pi=\\beta\\circ\\alpha:A\\to C$ is surjective (hence $\\beta$ is surjective). Put $I=\\ker\\pi$ and $J=\\ker\\beta$. Give $I/I^2$ and $J/J^2$ their canonical $C$-module structures through $A/I\\cong C$ and $B/J\\cong C$. For the Kähler differential module and universal derivation of [def-weil-pbc-kahler-differentials], there are well-defined $C$-linear maps\n$$I/I^2\\xrightarrow{u}J/J^2\\xrightarrow{v}C\\otimes_B\\Omega_{B/A},\\qquad u(a\\bmod I^2)=\\alpha(a)\\bmod J^2,\\quad v(b\\bmod J^2)=1\\otimes\\mathrm db.$$\nThe map $v$ is surjective and $\\ker v=\\operatorname{im}u$. No smoothness, flatness, finite-generation or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 065V (algebra-lemma-application-NL), with the displayed tensor factors exchanged by the canonical symmetry."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the displayed arrows directly. Since $\\beta\\alpha=\\pi$, $\\alpha(I)\\subseteq J$ and $\\alpha(I^2)\\subseteq J^2$, so $u$ is well defined. If $c\\in C$ is lifted to $a\\in A$, then $u(c[x])=[\\alpha(a)\\alpha(x)]=c\\,u([x])$; changing the lift adds an element of $I$ and changes the product by $I^2$. For $b\\in J$ put $t(b)=1\\otimes\\mathrm db$. Additivity and the Leibniz rule give $t(rb)=\\beta(r)t(b)$ for $r\\in B$, since $\\beta(b)=0$. In particular $t(bb')=0$ for $b,b'\\in J$, hence $t(J^2)=0$. It therefore descends to the stated $C$-linear $v$. Finally $v(u([a]))=1\\otimes\\mathrm d\\alpha(a)=0$. All tensor equalities here are the balancing relations in the tensor-product definition.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 065V (lemma-application-NL), the two arrows; Tag 00RO (lemma-universal-omega) and Tag 00CX (lemma-tensor-product), defining relations."
+   }
+  },
+  {
+   "text": "For any $c\\in C$ choose $a\\in A$ with $\\pi(a)=c$; then $\\beta(\\alpha(a))=c$, proving that $\\beta$ is surjective. Apply the surjection-$H_1$ node to $A\\twoheadrightarrow C$ and $B\\twoheadrightarrow C$. It gives $C$-linear isomorphisms $\\theta_A:H_1(L_{C/A})\\cong I/I^2$ and $\\theta_B:H_1(L_{C/B})\\cong J/J^2$. In the canonical presentation $A[C]\\to C$, a constant polynomial $a\\in I$ lies in the kernel and has zero formal partial derivatives, hence represents a cycle $h_a$. The node's formula, evaluating variables at chosen lifts in $A$, gives $\\theta_A(h_a)=[a]$. Likewise each $b\\in J$, viewed as a constant polynomial in $B[C]$, defines a cycle $h_b$ with $\\theta_B(h_b)=[b]$. As every conormal class has a representative, these describe the inverses of both isomorphisms on every element.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BP (lemma-NL-surjection), applied to both surjections, with its explicit presentation identification from Tag 00S1 (lemma-NL-homotopy)."
+   }
+  },
+  {
+   "text": "Use the Jacobi–Zariski node for the given triangle $A\\to B\\to C$. Denote its map $H_1(L_{C/A})\\to H_1(L_{C/B})$ by $q$, and its connecting map by $\\partial$. It gives exactness of $H_1(L_{C/A})\\xrightarrow q H_1(L_{C/B})\\xrightarrow\\partial C\\otimes_B\\Omega_{B/A}$ and of $H_1(L_{C/B})\\xrightarrow\\partial C\\otimes_B\\Omega_{B/A}\\to\\Omega_{C/A}$. The same node specifies that $q$ applies $\\alpha$ to the coefficients of $A[C]$ and fixes its variables. Consequently $q(h_a)=h_{\\alpha(a)}$ for a constant $a\\in I$. By step 2, $\\theta_B q\\theta_A^{-1}([a])=[\\alpha(a)]=u([a])$. This proves equality of these maps on all of $I/I^2$, without assuming a naturality result for the conormal identification.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00S2 (lemma-exact-sequence-NL), the middle two exactness assertions and coefficientwise map; Tag 07BP (lemma-NL-surjection)."
+   }
+  },
+  {
+   "text": "For $b\\in J$, use the constant-polynomial cycle $h_b$ of step 2 in the Jacobi–Zariski node's explicit connecting-map formula. The constant polynomial $g=b$ has just its degree-zero coefficient $b$, and the degree-zero monomial evaluates to $1\\in C$. That formula therefore yields $\\partial(h_b)=1\\otimes\\mathrm db=v([b])$. Thus $\\partial\\theta_B^{-1}=v$ on every class of $J/J^2$. This also covers $b=0$ by additivity.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00S2 (lemma-exact-sequence-NL), connecting map in the presentation diagram, with its coefficient formula made explicit in the cited node; Tag 07BP."
+   }
+  },
+  {
+   "text": "The surjection-$H_1$ node applied to $A\\twoheadrightarrow C$ also states $\\Omega_{C/A}=0$. Hence exactness at $C\\otimes_B\\Omega_{B/A}$ in step 3 makes $\\partial$ surjective, and the isomorphism $\\theta_B$ and step 4 make $v$ surjective. For $y\\in J/J^2$, set $h=\\theta_B^{-1}(y)$. If $v(y)=0$, step 4 gives $\\partial(h)=0$; exactness at $H_1(L_{C/B})$ gives $h=q(k)$ for some $k\\in H_1(L_{C/A})$. Step 3 then gives $y=u(\\theta_A(k))$. Conversely $vu=0$ by step 1. This proves $\\ker v=\\operatorname{im}u$. The only surjectivity hypotheses used were those proved from $\\pi$; no flatness or smoothness enters.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 065V (lemma-application-NL), proof from Tag 00S2 (lemma-exact-sequence-NL) and Tag 07BP (lemma-NL-surjection)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-jacobi-zariski-homology-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 065V (lemma-application-NL), following its proof via Tags 00S2 and 07BP. Constant-polynomial cycles explicitly verify both displayed maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For surjections A to C and B to C compatible with A to B, the conormal modules I/I^2 and J/J^2 have cokernel C tensor KahlerDifferential A B",
+   "results": "[leansearch] OK 8 hit(s)\nReturned names/files: KaehlerDifferential.ker_map_of_surjective, KaehlerDifferential.map_surjective, KaehlerDifferential.fromIdeal, CommRingCat.KaehlerDifferential.map, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, KaehlerDifferential.map_surjective_of_surjective, KaehlerDifferential.kerTotal_map, KaehlerDifferential.tensorProductTo_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "grep",
+   "query": "exact|surjective",
+   "results": "[grep] OK 25 hit(s)\nReturned names/files: Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Generators.Cotangent.exact",
+   "results": "[loogle] OK 1 hit(s)\nReturned names/files: Algebra.Generators.Cotangent.exact",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let A to B to C be commutative ring maps with A to C surjective and kernels I and J. The sequence I/I squared to J/J squared to C tensor over B Kahler differentials B over A to zero is exact",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned names/files: KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.H1Cotangent.exact_map_δ, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Generators.Cotangent.exact, KaehlerDifferential.exact_mapBaseChange_map, Algebra.Generators.CotangentSpace.exact",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "grep",
+   "query": "065V|application.NL|exact.*cotangent|cotangent.*exact",
+   "results": "[grep] OK 25 hit(s)\nReturned names/files: Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent.exact_map_δ",
+   "results": "[loogle] OK 1 hit(s)\nReturned names/files: Algebra.H1Cotangent.exact_map_δ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact conormal module sequence for a ring triangle of two surjective quotient maps A to C and B to C with compatible map A to B, Stacks 065V",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned names/files: Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Generators.Cotangent.exact, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.CotangentSpace.exact, Algebra.H1Cotangent.exact_δ_mapBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned cotangent/Jacobi–Zariski results involve presentation-dependent H1 modules or polynomial presentations. Identifying these with the two quotient ideals and checking the connecting map is additional mathematics, not a one-line specialization. The quotient conormal sequence alone does not identify the kernel at J/J²."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For compatible ring maps A to B to C with A to C surjective, I kernel A to C and J kernel B to C, the conormal sequence I/I squared to J/J squared to C tensor Kahler differentials B over A is right exact",
+   "results": "Available: KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, KaehlerDifferential.kerTotal_map, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.Cotangent.exact, Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.CotangentSpace.exact, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.Extension.exact_cotangentComplex_toKaehler",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned exactness lemmas use H1Cotangent or a single quotient conormal module. Passing to both quotient ideals and proving the formulas for both maps requires the presentation identifications in steps 2–4, not a one-line specialization. Existing DAG nodes supply those ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent.exact_map_δ",
+   "results": "Available: Algebra.H1Cotangent.exact_map_δ",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned exactness lemmas use H1Cotangent or a single quotient conormal module. Passing to both quotient ideals and proving the formulas for both maps requires the presentation identifications in steps 2–4, not a one-line specialization. Existing DAG nodes supply those ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "exact_map_δ|exact_δ_mapBaseChange|ofSurjective|equiv.*[Cc]otangent",
+   "results": "Available: Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned exactness lemmas use H1Cotangent or a single quotient conormal module. Passing to both quotient ideals and proving the formulas for both maps requires the presentation identifications in steps 2–4, not a one-line specialization. Existing DAG nodes supply those ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact conormal sequence for two quotient maps A to C and B to C and Kahler differential B over A",
+   "results": "Available: Algebra.Extension.exact_cotangentComplex_toKaehler, KaehlerDifferential.exact_mapBaseChange_map, CommRingCat.KaehlerDifferential.map, Algebra.Generators.CotangentSpace.exact, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, KaehlerDifferential.derivationQuotKerTotal, KaehlerDifferential.fromIdeal, RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned exactness lemmas use H1Cotangent or a single quotient conormal module. Passing to both quotient ideals and proving the formulas for both maps requires the presentation identifications in steps 2–4, not a one-line specialization. Existing DAG nodes supply those ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernel of kernel ideal conormal map I mod I squared to J mod J squared is the base changed module of relative differentials when the composite ring homomorphism is onto",
+   "results": "Available: KaehlerDifferential.range_kerCotangentToTensor, KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.kerCotangentToTensor_toCotangent, KaehlerDifferential.range_mapBaseChange, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.CotangentSpace.map, KaehlerDifferential.kerCotangentToTensor, KaehlerDifferential.cotangentComplexBaseChange_tmul",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: the returned exactness lemmas use H1Cotangent or a single quotient conormal module. Passing to both quotient ideals and proving the formulas for both maps requires the presentation identifications in steps 2–4, not a one-line specialization. Existing DAG nodes supply those ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-two-closed-immersions-conormal-exact",
+  "date": "2026-10-23",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited 0C5R exceptional-fibre argument (resolve-lemma-proper-birational-regular-surfaces, lines 4957–4961): apply the two-immersions sequence to show that relative differentials restrict to zero on the exceptional curve, then use the unramified-at-point criterion. Serves det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/regular-surface dependency chain. Supporting ring exactness in the stalkwise proof of Tag 067L.",
+   "via": [
+    "lem-sfb-two-closed-immersions-conormal-exact",
+    "lem-sfb-conormal-surjection-unramified",
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ring-two-quotients-conormal-exact",
+  "worker": "stage1",
+  "summary": "Followed Stacks 065V using existing Jacobi–Zariski and surjection-H1 nodes; constant polynomial cycles identify both arrows, with elementary well-definedness and an elementwise exactness conclusion. No new nodes and no statement correction; added the existing tensor-product definition to statement dependencies.",
+  "blueprint": "Supports the inherited 0C5R exceptional-fibre branch, via the stalkwise proof of 067L for lem-sfb-two-closed-immersions-conormal-exact, under the current direct-images proof paragraph (3). The latest blueprint direct-images proof was read. This ring-level sublemma does not replace any unit-level proof step. The existing ancestor result is None, retained rather than inventing an imported ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "why": "Generic ring-theoretic Jacobi–Zariski exactness and its explicit coefficient formula; no node of the current six-functors unit states it. Used inside the inherited 065V/067L algebraic subargument, not as a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-jacobi-zariski-homology-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-88948d34f",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-88948d34f (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 065V (algebra.tex lemma-application-NL): same hypotheses (only A→C surjective) and same maps u[a]=[α(a)] and v[b]=1⊗db; the target is C⊗_BΩ_{B/A} up to tensor symmetry, so nothing is weakened. No new nodes. Live: item unsplit, no repair note, so no supersession and no re-split order; the cited statements on live are identical to the snapshot and none is merged. Step 1 (well-definedness, C-linearity, t(rb)=β(r)t(b) because β(b)=0, v∘u=0) is elementary and correct. Step 2: constant polynomials a∈I and b∈J are cycles (zero partials under the δ of def-weil-pbc-smooth-ring-map), and the σ-evaluation formula in surjection-H1 gives θ_A^{-1}[a]=h_a and θ_B^{-1}[b]=h_b. Step 3: the JZ node's map (b) applies α to coefficients, so θ_B q θ_A^{-1}=u. Step 4: the JZ node's explicit ∂ formula on a constant g=b gives 1⊗db=v[b]. Step 5: Ω_{C/A}=0 makes ∂ and hence v onto, and ker v=θ_B(im q)=im u. The JZ Tor clause is unused. Small cases tested: k→k[x]→k; k[t]→k[t,x]→k (ker v=kt=im u); k[t]→k[t]/(t²)→k; C=0. No dependency cycle (BFS over 22 nodes). No DAG duplicate of 065V: the smooth-conormal node adds smoothness, and the two-immersions node is the parent sheaf version. Mathlib searches cover all three kinds, with no one-line match. I accept the tool use of lem-weil-pbc-jacobi-zariski-homology-sequence (generic JZ black box that 065V's proof uses). No SGA. Maintainer note: blueprint.from.node=null is inherited from the parent chain."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TwoQuotientsConormalExact",
+  "declaration": "Algebra.Extension.two_quotients_conormal_exact",
+  "file": "lean/Sheaf/RingTheory/TwoQuotientsConormalExact.lean",
+  "statement": "theorem two_quotients_conormal_exact {A : Type u} {B : Type v} {C : Type w} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] (hπ : Function.Surjective (algebraMap A C)) : ∃ hβ : Function.Surjective (IsScalarTower.toAlgHom A B C), ∃ u : (ofSurjective (Algebra.ofId A C) hπ).Cotangent →ₗ[C] (ofSurjective (IsScalarTower.toAlgHom A B C) hβ).Cotangent, (∀ (a : (ofSurjective (Algebra.ofId A C) hπ).ker) (b : (ofSurjective (IsScalarTower.toAlgHom A B C) hβ).ker), (b.1 : B) = algebraMap A B (a.1 : A) → u (Cotangent.mk a) = Cotangent.mk b) ∧ Function.Exact u (ofSurjective (IsScalarTower.toAlgHom A B C) hβ).cotangentComplex ∧ Function.Surjective (ofSurjective (IsScalarTower.toAlgHom A B C) hβ).cotangentComplex",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b35eb53bd",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 065V clause by clause: only hπ assumed (β surjectivity is the ∃ hβ conclusion); I/I², J/J² via Extension.ofSurjective(...).Cotangent with canonical C-module; u C-linear and fully pinned by the representative clause (Cotangent.mk surjective, b always exists); v is Mathlib's canonical cotangentComplex into C⊗_B Ω[B⁄A] (cotangentComplex_mk = 1⊗D b); Exact u v and Surjective v; no injectivity; independent universes u,v,w; C=0 and non-flat cases covered. Same encoding as upstream smooth_conormal_sequence_exact (which adds Smooth + injectivity, so not an existing match); no Mathlib/project duplicate. Node identical to live except new lean field; lean.statement verbatim; single sorry theorem with source/blueprint docstrings and five proof steps; report has Worker report and Second reading by Q23. No files changed, no compile needed."
+ }
+}

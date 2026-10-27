@@ -9,10 +9,10 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.Algebra.IntermediateField
 public import Mathlib.Analysis.Normed.Module.Basic
-import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.NumberTheory.Padics.RationalAlgebraicGenerator
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.Algebra.AlgebraicCard
 import Mathlib.Topology.Algebra.Module.FiniteDimension
-import WeilConjectures.NumberTheory.Padics.Extension
 
 /-! # A countable closed finite-field cover of a p-adic algebraic closure
 
@@ -68,6 +68,44 @@ theorem exists_monotone_closed_finiteIntermediateField_cover
       (∀ j : ℕ, E ≤ F j ∧ FiniteDimensional (Padic l) (F j) ∧
         IsClosed (F j : Set Ω)) ∧
       (⋃ j : ℕ, (F j : Set Ω)) = Set.univ := by
-  sorry
+  classical
+  let : Algebra ℚ Ω :=
+    ((algebraMap (Padic l) Ω).comp (algebraMap ℚ (Padic l))).toAlgebra
+  obtain ⟨b, hb⟩ := (Algebraic.countable ℚ Ω).exists_eq_range
+    ⟨0, isAlgebraic_zero⟩
+  let S (j : ℕ) : Finset Ω := (Finset.range (j + 1)).image b
+  let K (j : ℕ) : IntermediateField (Padic l) Ω :=
+    IntermediateField.adjoin (Padic l) (S j : Set Ω)
+  have hK (j : ℕ) : FiniteDimensional (Padic l) (K j) :=
+    IntermediateField.finiteDimensional_adjoin fun x _ ↦
+      (Algebra.IsAlgebraic.isAlgebraic x).isIntegral
+  let F (j : ℕ) : IntermediateField (Padic l) Ω := E ⊔ K j
+  have hF (j : ℕ) : FiniteDimensional (Padic l) (F j) := by
+    have := hK j
+    exact IntermediateField.finiteDimensional_sup E (K j)
+  refine ⟨F, ?_, ?_, ?_⟩
+  · intro i j hij
+    apply sup_le_sup_left
+    apply IntermediateField.adjoin.mono
+    exact_mod_cast Finset.image_mono b
+      (Finset.range_mono (Nat.add_le_add_right hij 1))
+  · intro j
+    have := hF j
+    exact ⟨le_sup_left, inferInstance,
+      Submodule.closed_of_finiteDimensional (F j).toSubalgebra.toSubmodule⟩
+  · apply Set.eq_univ_of_forall
+    intro x
+    obtain ⟨a, ha, hx⟩ :=
+      exists_isAlgebraic_rat_mem_adjoin_simple_of_isAlgClosure l Ω x
+    have ha : a ∈ Set.range b := by
+      rw [← hb]
+      exact ha
+    obtain ⟨n, rfl⟩ := ha
+    apply Set.mem_iUnion.mpr
+    refine ⟨n, ?_⟩
+    apply (show K n ≤ F n from le_sup_right)
+    have hbn : b n ∈ K n := IntermediateField.subset_adjoin (Padic l) (S n : Set Ω)
+      (Finset.mem_image.mpr ⟨n, Finset.mem_range.mpr (Nat.lt_succ_self n), rfl⟩)
+    exact (IntermediateField.adjoin_simple_le_iff.mpr hbn) hx
 
 end Padic

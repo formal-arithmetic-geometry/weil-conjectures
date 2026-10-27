@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-affine-exponent-transport",
+ "kind": "statement",
+ "title": "Projective trace transport implies open and ordered affine transport",
+ "statement": "Let l be prime, E a finite extension of Q_l, n natural, and A its coefficient quotient at level n+1. Let S be Noetherian with l invertible. Fix r≤s with l^(r+1)A=0 and l^(s+1)A=0. Suppose IntegrationProjectiveEquations of [def-pur-integration-exponent-transport-data] holds at these two exponents for every Noetherian base T with l invertible. Then IntegrationAffineEquations holds at S: the two actual open-chart traces commute with the coefficient transition and, for every ordered tower length, both the ordinary and the compared pro-etale counit traces commute with integrationTowerTransition. The transition is the actual coefficient descent, base root transition and inverse descent fixed in that definition. The uniform projective hypothesis applies in particular to every recursive affine prefix.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 8--9: restrict the projective trace through the actual open counit and iterate the coefficient counits in the ordered affine tower. Blueprint paragraph 2, the affine-space counit on a trivializing open; Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints."
+ },
+ "stmt_deps": [
+  "def-pur-integration-exponent-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the open counit gives a square for the shifted root map. Apply the fixed pushforward functor and compose with the assumed projective inverse-trace equation. This proves the ordinary and pro-etale restricted trace equations. Apply the given projective family at each affine prefix T; these are Noetherian and inherit invertibility of l. Thus the induction uses no missing projective base-change assertion.",
+   "uses": [
+    "def-pur-integration-exponent-transport-data",
+    "lem-pur-p1-kummer-trace-site-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient-first projection is natural in the line. Invert its naturality square and compose with tensor of the trace equation and the right unitor, obtaining equality of the coefficient counits. Induct on the ordered tower length: the zero counit is identity, and the successor is the previous counit composed with the previous left functor on the last coefficient counit. Naturality of the coefficient descent and reassociations identifies the resulting transition with integrationTowerTransition. Repeat after comparison.",
+   "uses": [
+    "def-pur-proetale-ordered-integration",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integration-exponent-transport-data",
+  "def-pur-proetale-ordered-integration",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-p1-kummer-trace-site-transport",
+  "lem-weil-finite-compact-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 8--9: restrict the projective trace through the actual open counit and iterate the coefficient counits in the ordered affine tower. Blueprint paragraph 2, the affine-space counit on a trivializing open; Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integration under a morphism of finite Tate lines, inverse projection formula, and adjunction transpose",
+   "results": "8 hits, including TopCat.Presheaf.pushforwardToOfIso, ContinuousLinearMap.integral_id_map, Module.Dual.transpose and transpose_dualTensorHom. None states finite-site coefficient integration transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv, homEquiv_unit, homEquiv_counit. These supply generic Hom calculus but not the geometric root-transition equations or their coefficient integration data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*[Ee]xponent|[Ee]xponent.*[Cc]ounit|[Tt]ensor.*[Ii]ntegrat",
+   "results": "0 hits in Mathlib. Local Sheaf search finds vectorTensorComparison and vectorExponentIndependence in VectorIntegrationSiteComparison; they are reused through separate acyclic statement records.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationExponentTransposeTransport",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Proof, inverse diagonal identification: root-normalized vector-bundle integration at the normal-bundle endpoint; Projective trace transport implies open and ordered affine transport",
+   "via": [
+    "lem-pur-integration-exponent-transpose-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegrationAffineExponentTransport",
+  "file": "lean/Sheaf/Paper/IntegrationAffineExponentTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationAffineExponentTransport",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "statement": "theorem integrationAffineExponentTransport (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (l : Γ(S, ⊤))) (r s : ℕ) (hrs : r ≤ s)\n    (hr : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (hs : ((l ^ (s + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (h : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))),\n      IntegrationProjectiveEquations l E n T hT r s hrs hr hs) :\n    IntegrationAffineEquations l E n S hS r s hrs hr hs"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new-module Lean and node JSONs (incl. head-commit nodes missing from snapshot) vs clone sheaf-dag item, VectorIntegrationSiteComparison and the owner nodes of the declarations used"
+ }
+}

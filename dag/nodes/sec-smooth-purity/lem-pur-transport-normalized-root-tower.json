@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-transport-normalized-root-tower",
+ "kind": "statement",
+ "title": "The normalized finite integral root tower commutes with pullback",
+ "statement": "Let $\\ell$ be prime, $f:X\\to Y$ a morphism of schemes, and suppose $\\ell$ is invertible in every residue field of both schemes. Write $R_Z=p_Z^*\\underline{\\mathbf Z}_\\ell$ and $F_Z(n)=R_Z\\otimes_{\\mathbf Z}\\mu_{\\ell^n,Z}$ with the actual power transitions of [def-pur-condensed-tate-twists]. Use the ordinary condensed-module pullback of [def-sfb-module-upper-star] and the generator-normalized raw maps rootTensorPull and predicate PullNormalized of [def-pur-transport-root-coordinates]. There exists a natural isomorphism $c:(f^*\\mathbin{\\circ} F_Y)\\simeq F_X$ (Lean: tateModuleSystem Y ell followed by upperStar), whose component at every $n\\geq0$ is PullNormalized by rootTensorPull ell f n. This is a finite-diagram statement: it asserts no comparison of inverse-limit objects.",
+ "stmt_deps": [
+  "def-pur-transport-root-coordinates",
+  "def-pur-condensed-tate-twists",
+  "def-sfb-module-upper-star"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity paragraph, including compatibility with Kummer maps; finite free integral coefficient transport."
+ },
+ "proof": [
+  {
+   "text": "For N=ell^n, take the finite affine root scheme over Spec Gamma(Y,O_Y), then base change it along Y.toSpecGamma. The root functor on every Y-scheme is represented by this scheme, by affineRoots_representability. The monic polynomial makes it finite; its derivative N*t^(N-1) is a unit on the root scheme, since ell and t are units, so it is etale. Inverse image of its represented sheaf is represented by its base change. The base-change formula on roots is exactly the adjunct defining proEtaleRootsOfUnityInverseImageMap. Conjugate by the generator-normalized root comparisons to identify this with rootPull. This proves rootPull is invertible.",
+   "uses": [
+    "lem-asd-affine-roots-representability",
+    "def-weil-proetale-inverse-image",
+    "def-pur-roots-of-unity-inverse-image",
+    "def-pur-transport-root-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Strong monoidal inverse image sends R_Y tensor mu to f^-1(R_Y) tensor f^-1(mu). Transport the coefficient through condensedPullbackHom, an isomorphism, and the root factor through the preceding root map. Multiplicativity of the coefficient comparison proves linearity for the free actions. Composing with the specified extendScalarsIsoComapInv comparison gives an R_X-module isomorphism. After that comparison is undone and scalars forgotten, its map is delta followed by the tensor of the coefficient and root maps, exactly rootTensorPull. Hence it is PullNormalized.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-pur-transport-root-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback of a unit commutes with exponentiation: f#(z^ell)=f#(z)^ell. Check this on root sheafification generators; their normalizations imply the corresponding equality of root sheaf maps. Tensor with the coefficient identity to get commutation with tateModuleTransition. Compose these equalities for arbitrary arrows of the opposite natural numbers and assemble the natural isomorphism. At n=0 the root group and free module are zero; the empty base has only the unique maps.",
+   "uses": [
+    "def-pur-transport-root-coordinates",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-affine-roots-representability",
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-pur-transport-root-coordinates",
+  "def-sfb-module-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-pur-condensed-tate-twists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity paragraph, including compatibility with Kummer maps; finite free integral coefficient transport.",
+  "group": "Q3",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback isomorphisms of roots of unity sheaves commute with power maps and form an isomorphism of inverse systems",
+   "results": "8 hits, including SheafOfModules.pullbackObjFreeIso, topological stalk pullback, and primitive-root power equivalences. These do not address internal condensed modules, the actual root comparison or tower naturality.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of the integral Tate module commutes with the inverse limit of roots of unity",
+   "results": "8 hits: cyclotomicCharacter.toZModPow, toFun, toFun_apply and related modular characters, number-field roots and Selmer groups. No scheme or sheaf pullback theorem.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"Tate|tateModule|rootsOfUnity|inverseImage.*[Ll]imit\" Mathlib/CategoryTheory Mathlib/AlgebraicGeometry; rg -n \"tateModule|PullNormalized|rootTensorPull\" lean/Sheaf lean/WeilConjectures",
+   "results": "Mathlib has no pro-etale Tate module construction. Project hits include TransportRoot and TransportPull, the proved local-basis theorems in PoincareDuality, and spIntegralTwist_inverseImage_isLimit for the different O_E tower. No existing declaration gives this normalized finite diagram or preserves the particular Z_ell tateModuleSystem cone.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Reuse the existing coefficient, root and limit constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.TransportPull",
+  "date": "2026-10-26",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Canonical base-change comparison of the root-tower Tate line in f* K(d)[2d]; Roots of unity paragraph, including compatibility with Kummer maps; finite free integral coefficient transport.",
+   "via": [
+    "def-pur-transport-canonical-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.TransportRootTower",
+  "file": "lean/Sheaf/SecSmoothPurity/TransportRootTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.PurityTransport.normalizedRootTower",
+  "statement": "theorem normalizedRootTower (ell : ℕ) [Fact ell.Prime]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (ell : X.residueField x)]\n    [∀ y : Y, Invertible (ell : Y.residueField y)] :\n    ∃ e : tateModuleSystem Y ell ⋙\n        CondensedRing.upperStar (Profinite.continuousMapRingObj ℤ_[ell]) f ≅\n      tateModuleSystem X ell,\n      ∀ n : ℕ, PullNormalized (Profinite.continuousMapRingObj ℤ_[ell]) f\n        (e.app (Opposite.op n)) (rootTensorPull ell f n)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T023813-L-603504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T023813-L-603504",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

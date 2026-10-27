@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-nodal-family-split-point-neighbourhood",
+ "kind": "statement",
+ "title": "Etale base neighbourhood making a prescribed nodal fibre point rational and split",
+ "statement": "Let $f_0:X_0\\to S_0$ be a flat [def-weil-flat-morphism], finitely presented (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]) morphism of schemes [def-pc-scheme], where $X_0,S_0$ are of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-weil-finite-type-morphism, def-weil-affine-spectrum]. Suppose every geometric fibre [def-weil-geometric-fibre] over an algebraically closed field $\\Omega$ is empty or equidimensional of dimension $1$ [def-weil-pure-dimension], and at every nonsmooth point [def-sbc-smooth-morphisms] its maximal-ideal-adic completed local ring [def-weil-pbc-adic-completion] is isomorphic as an $\\Omega$-algebra to $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series]. Fix $x_0\\in X_0$ where $f_0$ is not smooth, and put $s_0=f_0(x_0)$ and $k=\\kappa(s_0)$ [def-weil-residue-field]. Then there exist an affine scheme $V_1$ of finite type over $\\operatorname{Spec}\\mathbf Z$, an etale morphism $e:(V_1,v_1)\\to(S_0,s_0)$ [def-weil-etale-morphism], and a point $x_1\\in X_1=X_0\\times_{S_0}V_1$ [def-pc-fibre-product] projecting to $x_0$ and $v_1$, such that the induced field extension $K=\\kappa(v_1)$ over $k$ is finite separable [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], the base-changed morphism $f_1:X_1\\to V_1$ is flat and locally of finite presentation, the induced map $K\\to\\kappa(x_1)$ is an isomorphism, and\n$$\\widehat{\\mathcal O}_{(X_1)_{v_1},x_1}\\cong K[[u,v]]/(uv)$$\nas $K$-algebras. Here $(X_1)_{v_1}$ denotes the scheme-theoretic fibre [def-pc-scheme-fibre], and the hat denotes completion at the maximal ideal.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, second paragraph (finite separable splitting followed by an affine etale base neighbourhood); returned parent steps 2--3."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pure-dimension",
+  "def-weil-residue-field",
+  "def-trf-orgogozo-induction-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=(X_0)_{s_0}$ and let $z\\in C$ be the point over $x_0$, using the homeomorphism in [def-pc-scheme-fibre]. Finite presentation implies finite type: by [lem-weil-pbc-lfp-affine-opens-finite-presentation], for all affine opens $U\\subseteq X_0$, $V\\subseteq S_0$ with $f_0(U)\\subseteq V$ the ring map $\\mathcal O_{S_0}(V)\\to\\mathcal O_{X_0}(U)$ is of finite presentation, so the displayed finite list of variables generates $\\mathcal O_{X_0}(U)$ as an algebra; hence $f_0$ is locally of finite type by [lem-weil-pbc-lft-affine-pairs], and the quasi-compactness hypothesis is already given [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Thus $C$ is finite type over $k$ by [lem-sfb-finite-type-composition-base-change](2). The iterated base-change identification [def-pc-base-change] identifies $C_\\Omega$ with the given geometric fibre for every algebraically closed extension $\\Omega/k$, so $C$ satisfies the geometric hypotheses of [lem-trf-nodal-point-finite-separable-splitting]. Moreover $z$ is nonsmooth: $x_0$ belongs to $\\operatorname{Sing}(f_0)$, whose formation and nonsmooth underlying set commute with base change by [lem-trf-nodal-family-fitting-singular]; applying its last clause to $\\operatorname{Spec}k\\to S_0$ puts $z$ in the nonsmooth locus of $C/k$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-base-change",
+    "lem-trf-nodal-point-finite-separable-splitting",
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 (lemma-nodal-family), 0C5B (lemma-base-change-nodal-family), and 0CBY (lemma-etale-local-structure-nodal-family), first proof, residue-field paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-point-finite-separable-splitting] to $C/k$ and $z$. It supplies a finite separable extension $L/k$ and an $L$-rational point $z_L\\in C_L$ above $z$, together with an $L$-algebra isomorphism $\\widehat{\\mathcal O}_{C_L,z_L}\\cong L[[u,v]]/(uv)$. Apply [lem-weil-pbc-etale-neighbourhood-prescribed-residue-field] to $S_0,s_0,L/k$. Obtain an etale $U\\to S_0$, a point $v\\in U$ over $s_0$, and a field isomorphism $\\alpha:L\\xrightarrow{\\sim}\\kappa_U(v)$ compatible with the structural maps from $k$.",
+   "uses": [
+    "lem-trf-nodal-point-finite-separable-splitting",
+    "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), first proof, second paragraph; Tags 0CBT/0CBU/0CBW and More on Morphisms Tag 02LF (lemma-realize-prescribed-residue-field-extension-etale)."
+   }
+  },
+  {
+   "text": "Choose the affine neighbourhoods $V_1=\\operatorname{Spec}A\\subset U$ of $v$ and $W=\\operatorname{Spec}R\\subset S_0$ of $s_0$ provided by local finite presentation of $U\\to S_0$ [def-weil-etale-morphism, def-sbc-locally-finite-presentation]; thus $V_1$ maps into $W$ and $A$ is a finitely presented $R$-algebra. The restriction $e:V_1\\to S_0$ is etale by [lem-a1-etale-open-restriction], taking the target open to be all of $S_0$. Since $S_0\\to\\operatorname{Spec}\\mathbf Z$ is locally of finite type, [lem-weil-pbc-lft-affine-pairs] says $R$ is generated over $\\mathbf Z$ by finitely many elements $r_i$. If $a_j$ generate $A$ over $R$, the images of $r_i$ together with the $a_j$ generate $A$ over $\\mathbf Z$: expand each polynomial in the $a_j$ and then its coefficients in the $r_i$. Thus the affine $V_1$ is finite type over $\\mathbf Z$. Write $v_1=v$ in this open subscheme and $K=\\kappa_{V_1}(v_1)$. By [lem-weil-pbc-residue-field-point-naturality], restriction gives a residue-field isomorphism $\\kappa_U(v)\\to K$; compose it with $\\alpha$ and again call the resulting $k$-isomorphism $\\alpha:L\\xrightarrow{\\sim}K$. Hence $K/k$ is finite separable: transport a finite basis through $\\alpha$, and transport separable annihilating polynomials through the equality of its $k$-structures.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-a1-etale-open-restriction",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-residue-field-point-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LF (lemma-realize-prescribed-residue-field-extension-etale), affine reduction; Morphisms Tag 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "Form $X_1=X_0\\times_{S_0}V_1$. Its projection $f_1$ is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). The cartesian fibre identification of [lem-weil-pbc-fibre-of-base-change] gives $(X_1)_{v_1}\\cong C_K$ over $K$, compatibly with the maps to $X_0$. Regard $C_L$ as a $K$-scheme using $\\alpha^{-1}:K\\to L$. The scalar-change isomorphism $C_L\\cong C_K$ is, on each affine $\\operatorname{Spec}B\\subset C$, induced by $B\\otimes_k L\\to B\\otimes_k K$, $b\\otimes\\lambda\\mapsto b\\otimes\\alpha(\\lambda)$ [lem-weil-pbc-fibre-product-affine-spectra]. Its inverse uses $\\alpha^{-1}$; the formulas commute with restriction, hence glue. Let $z_K$ be the image of $z_L$. Its residue field is $K$, with its structural identification transported by $\\alpha$. The induced local-ring isomorphism identifies maximal ideals and all their powers, hence their inverse-limit completions. Apply $\\alpha$ coefficientwise to $L[[u,v]]/(uv)$; this respects every truncation and fixes the relation $uv$, giving the $K$-algebra isomorphism $\\widehat{\\mathcal O}_{C_K,z_K}\\cong K[[u,v]]/(uv)$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), first proof, end of second paragraph; Morphisms lemma-base-change-flat and lemma-base-change-finite-presentation; fibre-product and scalar-isomorphism bookkeeping written out."
+   }
+  },
+  {
+   "text": "Let $x_1$ be the image in $X_1$ of the point of $(X_1)_{v_1}$ corresponding to $z_K$. The fibre-product projections give $f_1(x_1)=v_1$ and image $x_0$ in $X_0$, since $z_L$ lay over $z$. To verify the residue-field clause in the total space, choose affine charts around $x_1,v_1$. By [lem-weil-pbc-fibre-product-affine-spectra] their fibre has coordinate ring $B\\otimes_A\\kappa(v_1)$. By [lem-weil-pbc-fibre-ring-residue-field-iso] the local map from the total-space local ring to the fibre local ring induces an isomorphism $\\kappa_{X_1}(x_1)\\to\\kappa_{(X_1)_{v_1}}(z_K)$. Its composite with the structural map $K\\to\\kappa_{X_1}(x_1)$ is the already bijective structural map of $z_K$. Therefore $K\\to\\kappa_{X_1}(x_1)$ is an isomorphism. The fibre isomorphism in step 4 identifies $\\widehat{\\mathcal O}_{(X_1)_{v_1},x_1}$ with $\\widehat{\\mathcal O}_{C_K,z_K}$ as $K$-algebras, so step 4 supplies exactly the requested split equation. This completes all clauses.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-ring-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H9M (remark-local-ring-fibre); assembly of the residue-field and completed-fibre clauses of curves.tex Tag 0CBY, first proof, second paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-base-change",
+  "lem-trf-nodal-point-finite-separable-splitting",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
+  "def-weil-etale-morphism",
+  "lem-a1-etale-open-restriction",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-residue-field-iso",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, second paragraph; affine restriction, scalar compatibility and total-space residue-field bookkeeping expanded from the cited general lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|splitNode|split_node|rational.*singular",
+   "results": "{\"t\": \"2026-10-22T06:00:07Z\", \"tool\": \"grep\", \"query\": \"nodal|splitNode|split_node|rational.*singular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts, separable-field etaleness, Weierstrass reduction and lifting coprime polynomial factors do not construct a rational split nodal point in this family over a pointed etale base."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T06:00:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\"], \"digest\": \"40e6e8e6e70966f3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts, separable-field etaleness, Weierstrass reduction and lifting coprime polynomial factors do not construct a rational split nodal point in this family over a pointed etale base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize a finite separable splitting field of a curve singularity by an etale neighbourhood of its base",
+   "results": "{\"t\": \"2026-10-22T06:00:13Z\", \"tool\": \"leansearch\", \"query\": \"Realize a finite separable splitting field of a curve singularity by an etale neighbourhood of its base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.is_separable_splitting_field\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Polynomial.instInhabitedSplittingField\", \"Polynomial.SplittingField\", \"IsGalois.of_separable_splitting_field\", \"separableClosure\", \"IsSepClosed.splits_of_separable\"], \"digest\": \"7c4bf442066d0875\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts, separable-field etaleness, Weierstrass reduction and lifting coprime polynomial factors do not construct a rational split nodal point in this family over a pointed etale base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented family of nodal curves over a scheme of finite type over the integers admits an etale base neighbourhood with a rational split node over a prescribed singular point",
+   "results": "{\"t\": \"2026-10-22T06:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented family of nodal curves over a scheme of finite type over the integers admits an etale base neighbourhood with a rational split node over a prescribed singular point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"9cca0d9a70b27d80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts, separable-field etaleness, Weierstrass reduction and lifting coprime polynomial factors do not construct a rational split nodal point in this family over a pointed etale base."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|split.node|prescribed.*residue|residue.*prescribed",
+   "results": "{\"t\": \"2026-10-22T06:00:42Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|split.node|prescribed.*residue|residue.*prescribed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts, separable-field etaleness, Weierstrass reduction and lifting coprime polynomial factors do not construct a rational split nodal point in this family over a pointed etale base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A singular point in a geometric nodal curve fibre becomes rational with completed fibre ring K power series u v modulo uv after an etale base extension with finite separable residue field",
+   "results": "{\"t\": \"2026-10-22T06:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"A singular point in a geometric nodal curve fibre becomes rational with completed fibre ring K power series u v modulo uv after an etale base extension with finite separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"WeierstrassCurve.IsGoodReduction\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instFormallyEtaleRing\", \"WeierstrassCurve.Affine.FunctionField\"], \"digest\": \"abbea0d962b82ed4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts, separable-field etaleness, Weierstrass reduction and lifting coprime polynomial factors do not construct a rational split nodal point in this family over a pointed etale base."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|splitNode|split_node|ordinaryDoublePoint",
+   "results": "{\"t\": \"2026-10-23T04:18:59Z\", \"tool\": \"grep\", \"query\": \"nodal|splitNode|split_node|ordinaryDoublePoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth charts, etale stability, field splitting, or Lagrange interpolation, and do not assert rational split nodal fibre points after a pointed base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "{\"t\": \"2026-10-23T04:19:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth charts, etale stability, field splitting, or Lagrange interpolation, and do not assert rational split nodal fibre points after a pointed base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize a finite separable splitting field of a nodal curve point as the residue field of an etale base neighbourhood",
+   "results": "{\"t\": \"2026-10-23T04:19:00Z\", \"tool\": \"leansearch\", \"query\": \"Realize a finite separable splitting field of a nodal curve point as the residue field of an etale base neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.is_separable_splitting_field\", \"Algebra.FormallyEtale.of_isSeparable\", \"Polynomial.IsSplittingField.instFiniteDimensionalSplittingField\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Polynomial.instInhabitedSplittingFieldAux\", \"Polynomial.instInhabitedSplittingField\", \"Polynomial.IsSplittingField.splittingField\", \"IsGalois.of_separable_splitting_field\"], \"digest\": \"4ea64c2ee27e35a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth charts, etale stability, field splitting, or Lagrange interpolation, and do not assert rational split nodal fibre points after a pointed base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented nodal curve family has an affine etale base neighbourhood where a specified nonsmooth fibre point is rational with completed local ring K[[u,v]]/(uv)",
+   "results": "{\"t\": \"2026-10-23T04:19:03Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented nodal curve family has an affine etale base neighbourhood where a specified nonsmooth fibre point is rational with completed local ring K[[u,v]]/(uv)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.etaleLocus\"], \"digest\": \"0b5a95a10006df80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth charts, etale stability, field splitting, or Lagrange interpolation, and do not assert rational split nodal fibre points after a pointed base change."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.double|split.node|completed.*fibre.*uv|nodal",
+   "results": "{\"t\": \"2026-10-23T04:27:35Z\", \"tool\": \"grep\", \"query\": \"ordinary.double|split.node|completed.*fibre.*uv|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth charts, etale stability, field splitting, or Lagrange interpolation, and do not assert rational split nodal fibre points after a pointed base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A singular ordinary double point on a relative curve becomes a rational split singularity after an etale change of the base scheme",
+   "results": "{\"t\": \"2026-10-23T04:27:40Z\", \"tool\": \"leanfinder\", \"query\": \"A singular ordinary double point on a relative curve becomes a rational split singularity after an etale change of the base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"dfdedca880d78a48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth charts, etale stability, field splitting, or Lagrange interpolation, and do not assert rational split nodal fibre points after a pointed base change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-etale-local-model",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation (1.a) of ILO VI Proposition 1.9 (citing SGA 7 XV 1.3.2 / de Jong 2.23), here in the form of Stacks Tag 0CBY used by step 3 of lem-trf-nodal-etale-chart. Re-split: Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof, second paragraph (finite separable splitting followed by an affine etale base neighbourhood); returned parent steps 2--3.",
+   "via": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-family-split-point-neighbourhood",
+  "worker": "stage1",
+  "summary": "Assemble the unchanged statement using existing finite-separable nodal splitting and prescribed-residue etale neighbourhood nodes. Check nonsmoothness in the fibre using base-change compatibility of the Fitting singular locus; choose a finite-presentation affine chart to get finite type over the integers; write the scalar-change maps and the fibre-to-total-space residue-field comparison explicitly. No new nodes, no Lean edits or builds.",
+  "blueprint": "The retained historical nodal local-equation input beneath lem-trf-local-term-locality, made precise by Stacks 0CBY first proof, second paragraph: choose a finite separable splitting field, realize it by an etale base neighbourhood, and replace the point by a rational split node. Current sk-i-curve-zero uses the contracting-correspondence route; no unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-5be09559b",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-5be09559b (reviewer sub-agent of L); spot-checked: Read the item and all 17 cited statements, and checked the source: Stacks curves 0CBY, lemma-etale-local-structure-nodal-family, first proof, second paragraph (02LF neighbourhood realizing κ(x) or κ', then base change). There are no new nodes. The 5 steps follow the source: the existing splitting node (same unit) gives L/k finite separable with an L-rational split node; the Lean-closed prescribed-residue node (02LF) gives an étale U with α: L≅κ(v) over k; an affine lfp chart V_1 is finite type over Z (generators composed via lft-affine-pairs); flat/lfp base change; the fibre iso (X_1)_{v_1}≅C_K with the α-twist written on affines; the completion transported coefficientwise; and the fibre-ring residue iso gives K≅κ(x_1). Fitting-locus base change shows z is nonsmooth. Hypotheses match the parent's step. Edge cases checked: uv=0, u²+v² over R, u²+uv+v² over F_2, empty fibres, non-separated X_0. No duplicate found among the ~50 0CBY/nodal nodes. No SGA in steps or source. FIX (C4): step 1 argued fp⇒ft chart-wise only, while def-weil-finite-type-morphism quantifies over every affine open. It now cites lem-weil-pbc-lfp-affine-opens-finite-presentation + lem-weil-pbc-lft-affine-pairs; uses and proof_deps are updated, nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalFamilySplitPointNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_nodal_family_split_point_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalFamilySplitPointNeighbourhood.lean",
+  "statement": "theorem exists_nodal_family_split_point_neighbourhood {X₀ S₀ : Scheme.{u}} (f₀ : X₀ ⟶ S₀) [Flat f₀] [LocallyOfFinitePresentation f₀] [QuasiCompact f₀] [QuasiSeparated f₀] [LocallyOfFiniteType (specULiftZIsTerminal.from X₀)] [QuasiCompact (specULiftZIsTerminal.from X₀)] [LocallyOfFiniteType (specULiftZIsTerminal.from S₀)] [QuasiCompact (specULiftZIsTerminal.from S₀)] (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S₀), (pullback (C := Scheme.{u}) f₀ g).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme.{u}) f₀ g, (¬ ∃ U : (pullback (C := Scheme.{u}) f₀ g).Opens, z ∈ U ∧ Smooth (U.ι ≫ pullback.snd f₀ g)) → Orgogozo.IsOrdinaryDoublePoint (pullback.snd f₀ g) z) (x₀ : X₀) (hx₀ : ¬ ∃ U : X₀.Opens, x₀ ∈ U ∧ Smooth (U.ι ≫ f₀)) : ∃ (V₁ : Scheme.{u}) (e : V₁ ⟶ S₀) (v₁ : V₁) (x₁ : pullback (C := Scheme.{u}) f₀ e), IsAffine V₁ ∧ LocallyOfFiniteType (specULiftZIsTerminal.from V₁) ∧ QuasiCompact (specULiftZIsTerminal.from V₁) ∧ Etale e ∧ e v₁ = f₀ x₀ ∧ pullback.fst f₀ e x₁ = x₀ ∧ pullback.snd f₀ e x₁ = v₁ ∧ (e.residueFieldMap v₁).hom.Finite ∧ @Algebra.IsSeparable (S₀.residueField (e v₁)) (V₁.residueField v₁) _ _ (e.residueFieldMap v₁).hom.toAlgebra ∧ Flat (pullback.snd f₀ e) ∧ LocallyOfFinitePresentation (pullback.snd f₀ e) ∧ Function.Bijective ((pullback.snd f₀ e).residueFieldMap x₁).hom ∧ ∃ z₁ : (pullback.snd f₀ e).fiber v₁, (pullback.snd f₀ e).fiberι v₁ z₁ = x₁ ∧ Orgogozo.IsOrdinaryDoublePoint ((pullback.snd f₀ e).fiberToSpecResidueField v₁) z₁",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ca03b240",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Node unchanged except the lean record and +stmt_dep def-trf-orgogozo-induction-data (landed Lean, cited by 36 nodes including the precedent nodal_point_finite_separable_splitting). Each clause matches the node and Stacks 0CBY first proof para 2: f0 flat+lfp+qc+qs; X0 and S0 finite type over Spec ULift Z; geometric fibres for all alg-closed Omega:Type u, IsPureDimension 1 (vacuous when empty) and IsOrdinaryDoublePoint (real ring equiv respecting scalars) at points with no smooth open nbhd; x0 nonsmooth pointwise. Conclusion: V1 affine and finite type over Z, e etale with e v1 = f0 x0, x1 in pullback with both projections, canonical residueFieldMap finite and separable, f1 flat and lfp, residueFieldMap at x1 bijective, fibre point z1 over x1 an ordinary double point via fiberToSpecResidueField (fibre completion, not total space). Edge cases (empty, disconnected, non-split, char 2, K=k, smoothing) OK. No defs, docstrings OK, sorry only, both report sections present. Not recompiled per instructions; worker compile clean."
+ }
+}

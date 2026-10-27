@@ -1,0 +1,272 @@
+{
+ "id": "lem-weil-boundary-bidual-transpose",
+ "kind": "statement",
+ "title": "Bidual transpose identities for an exceptional pairing",
+ "statement": "Let $\\mathcal T,\\mathcal Z$ be monoidal categories [def-sfb-monoidal-category] with natural involutive symmetries $\\sigma_{X,Y}:X\\otimes Y\\cong Y\\otimes X$ satisfying the hexagon identities. Suppose they are closed: for every $X$ there is an internal-Hom functor $[X,-]$ and bijections natural in all variables $\\operatorname{Hom}(B,[X,H])\\cong\\operatorname{Hom}(B\\otimes X,H)$ with evaluation $[X,H]\\otimes X\\to H$ as counit. Fix objects $\\omega_T\\in\\mathcal T$, $\\omega_Z\\in\\mathcal Z$. Put $D_WX=[X,\\omega_W]$ for $W=T,Z$, with the usual contravariant action, and define $\\delta_X:X\\to D_WD_WX$ as the transpose of $\\mathrm{ev}_X\\sigma_{X,D_WX}$.\n\nLet $s,G:\\mathcal T\\to\\mathcal Z$ be functors and let $h:G\\omega_T\\xrightarrow{\\sim}\\omega_Z$. Fix strictly full subcategories $\\mathcal S_T\\subseteq\\mathcal T$ and $\\mathcal S_Z\\subseteq\\mathcal Z$ (objects closed under isomorphism, with all ambient morphisms between them). Assume $D_T,D_Z$ preserve their respective subcategories and $s,G$ send $\\mathcal S_T$ into $\\mathcal S_Z$. Let $q_{M,N}:sM\\otimes GN\\to G(M\\otimes N)$ be given for $M,N\\in\\mathcal S_T$ and natural in both variables for morphisms of that full subcategory. No closure under internal Hom or tensor is assumed for these subcategories; those operations and the target of q are taken in the ambient categories. For every $K\\in\\mathcal S_T$ define\n$$r_K=hG(\\mathrm{ev}_K\\sigma_{K,D_TK})q_{K,D_TK}\\sigma_{GD_TK,sK},\\qquad\\alpha_K=\\operatorname{transpose}(r_K):GD_TK\\to D_ZsK.$$\nFor $L\\in\\mathcal S_T$ put $P=sD_TL$, $U=GL$, $c_L=\\alpha_{D_TL}G\\delta_L$, $b_L=hG(\\mathrm{ev}_L)q_{D_TL,L}$ and $\\beta_L=\\operatorname{transpose}(b_L):P\\to D_ZU$. Suppose for every $L\\in\\mathcal S_T$ the opposite-currying identity\n$$\\mathrm{ev}_P(c_L\\otimes1_P)=b_L\\sigma_{U,P}$$\nholds. Then the following are identities of these specified morphisms:\n$$\\beta_L=D_Z(c_L)\\delta_P,\\qquad\\beta_{D_TK}\\,s(\\delta_K)=D_Z(\\alpha_K)\\delta_{sK}.$$\nThe second equality has source $sK$ and target $D_ZGD_TK$. If $\\alpha_{D_TL}$, $\\delta_L$, and $\\delta_P$ are isomorphisms, then $c_L$ and $\\beta_L$ are isomorphisms. For the second identity, if $\\alpha_K$ is invertible, equivalently $(D_Z\\alpha_K)^{-1}\\beta_{D_TK}\\,s(\\delta_K)=\\delta_{sK}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+  "place": "Proof, second paragraph: inverse of the bidual composite is beta and evaluation identities give double-dual compatibility (old steps 6 and 9--10)."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the tensor bifunctor and composition conventions of [def-sfb-monoidal-category]; all products below involve two factors only. In either ambient category, write $D=[-,\\omega]$ and write $u_X:\\operatorname{Hom}(B,DX)\\to\\operatorname{Hom}(B\\otimes X,\\omega)$ for uncurrying in the specified adjunction bijection. Naturality in $B$, applied to $a:B\\to DX$ and $1_{DX}$, gives\n$$u_X(a)=u_X(1_{DX})\\circ(a\\otimes1_X)=\\mathrm{ev}_X\\circ(a\\otimes1_X).$$\nThe second equality is precisely the assumed counit normalization. As the inverse of a bijection, $u_X$ is injective. Thus it suffices to compare these evaluation composites when proving equality of maps into $DX$.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Counit formula and injectivity of the given adjunction bijection"
+   }
+  },
+  {
+   "text": "The usual contravariant action $Df:DB\\to DA$ for $f:A\\to B$ is induced by precomposition in the internal-Hom variable. Naturality of the given bijection in that variable, applied to $1_{DB}$, says\n$$\\mathrm{ev}_A\\circ(Df\\otimes1_A)=\\mathrm{ev}_B\\circ(1_{DB}\\otimes f).$$\nAlso, applying $u_{DX}$ to the defining transpose $\\delta_X$ gives\n$$\\mathrm{ev}_{DX}\\circ(\\delta_X\\otimes1_{DX})=\\mathrm{ev}_X\\circ\\sigma_{X,DX}.$$\nThese are direct readings of the assumed natural bijections and the definition of $\\delta$, with no invertibility assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Naturality and the defining double-dual transpose"
+   }
+  },
+  {
+   "text": "For the first identity fix $L$, and abbreviate $P=sD_TL$, $U=GL$, $c=c_L$, $b=b_L$, $D=D_Z$. Apply the preceding evaluation naturality to $f=c:U\\to DP$, then the defining equation of $\\delta_P$, and then naturality of $\\sigma$:\n$$\\begin{aligned}\nu_U(Dc\\circ\\delta_P)\n&=\\mathrm{ev}_{DP}\\circ(\\delta_P\\otimes c)\\\\\n&=\\mathrm{ev}_P\\circ\\sigma_{P,DP}\\circ(1_P\\otimes c)\\\\\n&=\\mathrm{ev}_P\\circ(c\\otimes1_P)\\circ\\sigma_{P,U}.\n\\end{aligned}$$\nThe opposite-currying hypothesis makes the last expression $b\\circ\\sigma_{U,P}\\circ\\sigma_{P,U}=b$. Since $u_U(\\beta_L)=b$ by definition and $u_U$ is injective, this proves $\\beta_L=D_Z(c_L)\\circ\\delta_P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph: identify beta with the dual of c followed by delta"
+   }
+  },
+  {
+   "text": "Under the three stated isomorphism hypotheses, $G(\\delta_L)$ has inverse $G(\\delta_L^{-1})$, by the functor identity and composition axioms. Hence $c_L=\\alpha_{D_TL}\\circ G(\\delta_L)$ has inverse $G(\\delta_L^{-1})\\circ\\alpha_{D_TL}^{-1}$. Contravariant functoriality makes $D_Z(c_L^{-1})$ the inverse of $D_Z(c_L)$. The first identity therefore gives the two-sided inverse $\\delta_P^{-1}\\circ D_Z(c_L^{-1})$ for $\\beta_L$. This verifies both asserted isomorphisms using only their listed factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "First displayed bidual composite and its canonical inverse"
+   }
+  },
+  {
+   "text": "For the second identity fix $K\\in\\mathcal S_T$ and put $A=sK$, $Q=GD_TK$, $D=D_Z$. Duality stability gives $D_TK,D_TD_TK\\in\\mathcal S_T$. Since this subcategory is full, $\\delta_K:K\\to D_TD_TK$ is a morphism to which first-variable naturality of $q$ applies. It gives\n$$q_{D_TD_TK,D_TK}\\circ(s\\delta_K\\otimes1_Q)=G(\\delta_K\\otimes1_{D_TK})\\circ q_{K,D_TK}.$$\nHere the tensor objects and the target of $q$ remain ambient; no closure of $\\mathcal S_T$ under tensor or internal Hom has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph: first-variable naturality of the exceptional tensor comparison"
+   }
+  },
+  {
+   "text": "Uncurry the left side of the desired second identity using the counit formula and the definition of $\\beta_{D_TK}$, then substitute step 5 and the defining transpose equation for $\\delta_K$ from step 2:\n$$\\begin{aligned}\nu_Q(\\beta_{D_TK}\\circ s\\delta_K)\n&=b_{D_TK}\\circ(s\\delta_K\\otimes1_Q)\\\\\n&=h\\circ G\\bigl(\\mathrm{ev}_{D_TK}\\circ(\\delta_K\\otimes1_{D_TK})\\bigr)\\circ q_{K,D_TK}\\\\\n&=h\\circ G(\\mathrm{ev}_K\\circ\\sigma_{K,D_TK})\\circ q_{K,D_TK}.\n\\end{aligned}$$\nEvery line is a map $A\\otimes Q\\to\\omega_Z$; the middle line also uses preservation of composition by $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph: uncurrying beta of the dual after s(delta)"
+   }
+  },
+  {
+   "text": "Uncurry the right side by evaluation naturality for $\\alpha_K:Q\\to DA$, the definition of $\\delta_A$, and naturality of symmetry:\n$$\\begin{aligned}\nu_Q(D\\alpha_K\\circ\\delta_A)\n&=\\mathrm{ev}_{DA}\\circ(\\delta_A\\otimes\\alpha_K)\\\\\n&=\\mathrm{ev}_A\\circ\\sigma_{A,DA}\\circ(1_A\\otimes\\alpha_K)\\\\\n&=\\mathrm{ev}_A\\circ(\\alpha_K\\otimes1_A)\\circ\\sigma_{A,Q}\\\\\n&=r_K\\circ\\sigma_{A,Q}.\n\\end{aligned}$$\nThe last equality is the defining transpose equation of $\\alpha_K$. Expanding $r_K$ cancels $\\sigma_{Q,A}\\circ\\sigma_{A,Q}=1_{A\\otimes Q}$, so the result is exactly the last expression of step 6. Injectivity of $u_Q$ proves $\\beta_{D_TK}\\circ s\\delta_K=D_Z(\\alpha_K)\\circ\\delta_{sK}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph: compare the other transpose and cancel the two symmetries"
+   }
+  },
+  {
+   "text": "If $\\alpha_K$ is invertible, the inverse of $D_Z(\\alpha_K)$ is $D_Z(\\alpha_K^{-1})$, by contravariant functoriality. Composing the second identity on the left with this inverse gives $(D_Z\\alpha_K)^{-1}\\circ\\beta_{D_TK}\\circ s(\\delta_K)=\\delta_{sK}$. Conversely, composing that equation on the left with $D_Z\\alpha_K$ recovers the second identity, by cancellation. This establishes the final equivalent form with source $sK$ and target $D_ZD_ZsK$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Second paragraph: rearranged double-dual compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+  "place": "Second proof paragraph, formal evaluation calculations from the explicitly stated closed-category hypotheses; preserved parent argument steps 9--10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|eval_naturality",
+   "results": "Hits: Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/LinearAlgebra/Dual/Defs.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Algebra/Group/AddChar.lean, Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/Analysis/Fourier/FiniteAbelian/PontryaginDuality.lean, Mathlib/Analysis/Fourier/FiniteAbelian/PontryaginDuality.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double dual evaluation compatibility with ordinary and exceptional restriction of derived sheaves",
+   "results": "Hits: Module.Dual.eval, Module.Dual.eval_naturality, Module.evalEquiv_toLinearMap, LinearEquiv.trans_dualMap_symm_flip, Module.Dual.eval_comp_comp_evalEquiv_eq, Module.evalEquiv, Module.Dual.instIsReflecive, LinearMap.IsPerfPair.dualEval",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"eval\"",
+   "results": "Hits: Module.Dual.eval, Module.bijective_dual_eval, Module.IsReflexive.bijective_dual_eval', Module.Dual.eval_apply, Module.Dual.eval_naturality, Module.Dual.eval_comp_comp_evalEquiv_eq, Module.symm_dualMap_evalEquiv, Module.DualBases.eval_of_ne",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given exceptional restriction and evaluation normalized alpha, boundary beta equals the dual of alpha composed with the double dual evaluation",
+   "results": "Hits: ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE, exteriorPower.pairingDual_apply_apply_eq_one, Module.Dual.eval_comp_comp_evalEquiv_eq, ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryLE, Module.Dual.eval_naturality, ComplexShape.Embedding.AreComplementary.Boundary.snd, ComplexShape.Embedding.op_boundaryGE_iff, ComplexShape.Embedding.AreComplementary.Boundary.fst",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived boundary duality compatibility beta of the dual composed with pullback delta equals dual alpha composed with delta",
+   "results": "Hits: CategoryTheory.ShortComplex.SnakeInput.snd_δ_inr, CategoryTheory.ShortComplex.SnakeInput.snd_δ, CategoryTheory.ShortComplex.SnakeInput.snd_δ_assoc, groupHomology.δ_apply, groupHomology.δ₀_apply, groupHomology.δ₁_apply, groupHomology.comp_d₂₁_eq, groupHomology.δ",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed symmetric monoidal categories with functors s and G and a natural map sM tensor GN to G of M tensor N: dual transposes and double dual compatibility",
+   "results": "Hits: CategoryTheory.frobeniusMorphism_mate, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.MonoidalClosed.compTranspose_eq, CategoryTheory.exp.ev_coev_assoc, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.coev_expComparison, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*curry|curry.*dual|bidual",
+   "results": "No hits (Mathlib/CategoryTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed symmetric monoidal categories with full subcategories stable under duality, and a natural exceptional tensor map only on these subcategories: beta is dual c composed with delta and evaluation compatibility",
+   "results": "Hits: CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.ExactPairing.evaluation_coevaluation'', CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.frobeniusMorphism_mate",
+   "date": "2026-10-22",
+   "verdict": "no match: module evaluation naturality, closed-category composition transposes and Cartesian Frobenius mates do not state both bidual transpose identities for an arbitrary natural exceptional tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|dual.*curry|curry.*dual",
+   "results": "{\"t\": \"2026-10-22T08:14:24Z\", \"tool\": \"grep\", \"query\": \"bidual|doubleDual|dual.*curry|curry.*dual\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed evaluation/currying laws, rigid dual-pair laws or Cartesian exponential comparisons do not state either exceptional q-transpose identity in this generality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a symmetric monoidal closed category an evaluation pairing and its opposite currying are related by double dual evaluation and the contravariant internal Hom functor",
+   "results": "{\"t\": \"2026-10-22T08:14:24Z\", \"tool\": \"leansearch\", \"query\": \"In a symmetric monoidal closed category an evaluation pairing and its opposite currying are related by double dual evaluation and the contravariant internal Hom functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exp.ev\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"CategoryTheory.MonoidalClosed.curry\", \"CategoryTheory.MonoidalClosed.homEquiv_symm_apply_eq\", \"CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app\", \"CategoryTheory.MonoidalClosed.curryHomEquiv'\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\"], \"digest\": \"2e8b1300d2a9ee40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed evaluation/currying laws, rigid dual-pair laws or Cartesian exponential comparisons do not state either exceptional q-transpose identity in this generality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.ihom.ev",
+   "results": "{\"t\": \"2026-10-22T08:14:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.ihom.ev\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.uncurry_expComparison\", \"CategoryTheory.expComparison_ev\", \"CategoryTheory.Functor.closedCounit_app_app\", \"CategoryTheory.Functor.ihom_ev_app\", \"CategoryTheory.Pi.closedCounit_app\"], \"digest\": \"a7120360e56bd054\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed evaluation/currying laws, rigid dual-pair laws or Cartesian exponential comparisons do not state either exceptional q-transpose identity in this generality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category the transpose of an opposite pairing is the dual of the other transpose composed with the canonical double dual evaluation map",
+   "results": "{\"t\": \"2026-10-22T08:14:25Z\", \"tool\": \"leanfinder\", \"query\": \"In a closed symmetric monoidal category the transpose of an opposite pairing is the dual of the other transpose composed with the canonical double dual evaluation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.compTranspose_eq\", \"CategoryTheory.exp.ev_coev_assoc\", \"CategoryTheory.ihom.ev_coev_assoc\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\"], \"digest\": \"d53383e94216edea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed evaluation/currying laws, rigid dual-pair laws or Cartesian exponential comparisons do not state either exceptional q-transpose identity in this generality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a tensor comparison s M tensor G N to G of M tensor N gives compatibility of its evaluation transposes with the canonical map to the double internal dual",
+   "results": "{\"t\": \"2026-10-22T08:28:37Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of a tensor comparison s M tensor G N to G of M tensor N gives compatibility of its evaluation transposes with the canonical map to the double internal dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.coev_expComparison\", \"Representation.dualTensorHom_comm\"], \"digest\": \"55e81366704ae919\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed evaluation/currying laws, rigid dual-pair laws or Cartesian exponential comparisons do not state either exceptional q-transpose identity in this generality"
+  },
+  {
+   "tool": "grep",
+   "query": "compTranspose_eq|ev_coev_assoc|uncurry_expComparison|expComparison_ev|tensorRightHomEquiv_whiskerLeft_comp_evaluation",
+   "results": "{\"t\": \"2026-10-22T08:30:39Z\", \"tool\": \"grep\", \"query\": \"compTranspose_eq|ev_coev_assoc|uncurry_expComparison|expComparison_ev|tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"628e6be3b4bba67c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic closed evaluation/currying laws, rigid dual-pair laws or Cartesian exponential comparisons do not state either exceptional q-transpose identity in this generality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-weil-boundary-duality-discharge",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Proof, second paragraph: inverse of the bidual composite is beta and evaluation identities give double-dual compatibility (old steps 6 and 9--10).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-boundary-bidual-transpose",
+  "worker": "stage1",
+  "summary": "Kept the abstract statement and its duality-stable full-subcategory domains unchanged. Expanded both bidual transpose identities into eight short elementary steps: the counit formula, contravariant evaluation naturality, opposite currying, explicit inverses, first-variable q naturality and two uncurry calculations. No new nodes, no Lean writing or compilation. Retained all inherited searches and appended the actual O2 search log.",
+  "blueprint": "Realizes the second paragraph of cor-weil-boundary-duality-discharge: the specified beta is the inverse bidual composite and the evaluation identities give double-dual compatibility; follows preserved parent steps 9--10. The iso hypotheses are conditional here and alpha-normalization is discharged in the parent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O2-3d00531a0",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-3d00531a0 (reviewer sub-agent of L); spot-checked: Read the item in full: all 8 steps and its single citation, def-sfb-monoidal-category, which is used only for the bifunctor and composition conventions. Also read the parent cor-weil-boundary-duality-discharge, whose step 3 uses exactly beta_L=D_Z(c_L)delta_P, the second identity and invertibility of c_L and beta_L, plus its master source md (second proof paragraph) and the unit sk-prop-sf-biduality-general. Statement and stmt_deps are byte-identical to the base and to Q145. Only the split-owned fields changed; the 8 inherited searches are kept verbatim; live and side-live are still unsplit. I recomputed every composite with its types. Step 1: u(a)=ev(a⊗1) by naturality in B, and u is injective. Step 2: contravariant evaluation naturality and the defining delta equation. Step 3: u_U(Dc∘delta_P)=ev_P(c⊗1)sigma_{P,U}, which the opposite-currying hypothesis turns into b; the two symmetries cancel by involutivity. Step 4: the inverses of c and beta use only the three stated isomorphism hypotheses. Step 5: D_T-stability and fullness make delta_K a morphism of S_T, so first-variable naturality of q applies. Steps 6 and 7: both sides uncurry to hG(ev_K sigma)q_{K,D_TK}. Step 8: cancellation by the inverse of D(alpha_K). All 8 steps are genuinely elementary, and no hypothesis is used that the item lacks. Small cases: Vect with q=lambda·id reduces to the triangle identity; lambda=0 gives 0=0; on odd super lines the sign cancellation shows both symmetries are needed. Duplicate search over dag/nodes: lem-coef-finite-bidual-transpose (one functor S, different form), lem-weil-delta-restriction, lem-weil-boundary-evaluation-currying (the hypothesis, supplied by the parent) and lem-pod-closed-uncurry-laws; none restates the item. No new nodes, no SGA, no tool uses, proof_deps equals the union of uses, and no repair note applies to this item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryBidualTranspose",
+  "declaration": "CategoryTheory.BoundaryBidualTranspose.bidual_transpose",
+  "declarations": [
+   "CategoryTheory.BoundaryBidualTranspose.exceptionalPairing",
+   "CategoryTheory.BoundaryBidualTranspose.alpha",
+   "CategoryTheory.BoundaryBidualTranspose.bidualComposite",
+   "CategoryTheory.BoundaryBidualTranspose.boundaryPairing",
+   "CategoryTheory.BoundaryBidualTranspose.beta",
+   "CategoryTheory.BoundaryBidualTranspose.bidual_transpose"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryBidualTranspose.lean",
+  "statement": "theorem bidual_transpose (SZ : ObjectProperty Z) [ST.IsClosedUnderIsomorphisms] [SZ.IsClosedUnderIsomorphisms] (hDZ : ∀ X : Z, SZ X → SZ ((ihom X).obj ωZ)) (hs : ∀ K : T, ST K → SZ (s.obj K)) (hG : ∀ K : T, ST K → SZ (G.obj K)) (q_natural : ∀ (M M' N N' : T) (hM : ST M) (hM' : ST M') (hN : ST N) (hN' : ST N') (f : M ⟶ M') (g : N ⟶ N'), (s.map f ⊗ₘ G.map g) ≫ q M' N' hM' hN' = q M N hM hN ≫ G.map (f ⊗ₘ g)) (opposite_currying : ∀ (L : T) (hL : ST L), (bidualComposite ωT ωZ s G h ST hDT q L hL ⊗ₘ 𝟙 (s.obj ((ihom L).obj ωT))) ≫ (β_ ((ihom (s.obj ((ihom L).obj ωT))).obj ωZ) (s.obj ((ihom L).obj ωT))).hom ≫ (ihom.ev (s.obj ((ihom L).obj ωT))).app ωZ = (β_ (G.obj L) (s.obj ((ihom L).obj ωT))).hom ≫ boundaryPairing ωT ωZ s G h ST hDT q L hL) : (∀ (L : T) (hL : ST L), beta ωT ωZ s G h ST hDT q L hL = toIhomIhom ωZ (s.obj ((ihom L).obj ωT)) ≫ (internalHom.flip.obj ωZ).map (bidualComposite ωT ωZ s G h ST hDT q L hL).op) ∧ (∀ (K : T) (hK : ST K), s.map (toIhomIhom ωT K) ≫ beta ωT ωZ s G h ST hDT q ((ihom K).obj ωT) (hDT K hK) = toIhomIhom ωZ (s.obj K) ≫ (internalHom.flip.obj ωZ).map (alpha ωT ωZ s G h ST hDT q K hK).op) ∧ (∀ (L : T) (hL : ST L), IsIso (alpha ωT ωZ s G h ST hDT q ((ihom L).obj ωT) (hDT L hL)) → IsIso (toIhomIhom ωT L) → IsIso (toIhomIhom ωZ (s.obj ((ihom L).obj ωT))) → IsIso (bidualComposite ωT ωZ s G h ST hDT q L hL) ∧ IsIso (beta ωT ωZ s G h ST hDT q L hL)) ∧ (∀ (K : T) (hK : ST K) [IsIso (alpha ωT ωZ s G h ST hDT q K hK)], (s.map (toIhomIhom ωT K) ≫ beta ωT ωZ s G h ST hDT q ((ihom K).obj ωT) (hDT K hK) = toIhomIhom ωZ (s.obj K) ≫ (internalHom.flip.obj ωZ).map (alpha ωT ωZ s G h ST hDT q K hK).op) ↔ s.map (toIhomIhom ωT K) ≫ beta ωT ωZ s G h ST hDT q ((ihom K).obj ωT) (hDT K hK) ≫ inv ((internalHom.flip.obj ωZ).map (alpha ωT ωZ s G h ST hDT q K hK).op) = toIhomIhom ωZ (s.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb944bb75",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Checked the node's right-factor curry/eval convention against Mathlib's left-factor ihom; it is translated by braidings. toIhomIhom equals node delta (adjacent braidings cancel); r_K, alpha, c_L, b_L, beta and opposite_currying are in the node's order; D_Z = internalHom.flip (pre). Hypotheses exact: independent universes, Symmetric+MonoidalClosed, ObjectProperty+IsClosedUnderIsomorphisms with hDT/hDZ/hs/hG, q only on admitted objects with ambient target, joint naturality equivalent to separate; no monoidal s/G, no tensor closure, omega not admitted. All 4 conclusion clauses present (iso clause conditional; inverse form as iff with inv). lean.statement verbatim; only the lean record changed; item not yet landed; no duplicate alpha/beta (parent has no decls); helpers are real constructions with docstrings; sorry only; report sections present. Edge cases: empty S_T, q=0, odd symmetries. Minor docstring typo 'uncarries'. No compile run (no change; worker scompile clean)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261024T232159-L-2309308",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.BoundaryBidualTranspose.bidual_transpose"
+  ],
+  "sorry_after": []
+ }
+}

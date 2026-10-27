@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-trait-surface-component-comparison",
+ "kind": "statement",
+ "title": "Component matching and special centres for regular trait curve models",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $T_1,T_2\\to S$ be projective, flat and finitely presented [def-kun-projective, def-weil-flat-morphism, def-sbc-locally-finite-presentation], with $T_i$ regular [def-weil-regular-scheme], nodal geometric curve fibres and smooth generic fibres. Fix a $K$-isomorphism $\\alpha:(T_1)_K\\cong(T_2)_K$. Then each $T_i$ is a finite disjoint union of open and closed integral regular surfaces of dimension two [def-pc-integral-scheme, def-weil-open-immersion, def-weil-closed-immersion, def-kun-topological-krull-dimension]. Every such component dominates $S$, its generic fibre is nonempty integral and dense, and taking generic fibres gives a bijection between these components and the irreducible components of $(T_i)_K$ [def-weil-irreducible-components]. Thus $\\alpha$ uniquely matches the components and gives an isomorphism of dense generic open subschemes for each matched pair. For every matched pair there exists a regular integral common $S$-scheme $V$ with two morphisms to the pair inducing this prescribed generic isomorphism, each a finite composition of blowups of reduced closed points [def-nagata-global-blowup]. Every centre of either sequence is in the special fibre. More generally every closed point at every stage of any finite reduced-closed-point blowup sequence over either $T_i$ maps to the closed point of $S$, so every such sequence is unchanged generically. Taking the finite disjoint union of these componentwise comparisons gives a comparison of $T_1,T_2$. No connectedness or geometric integrality of their generic fibres is required. Here nodal geometric curve fibres are nonempty reduced geometric fibres of pure dimension one whose nonsmooth closed points over an algebraically closed field $\\Omega$ have completed local ring $\\Omega[[u,v]]/(uv)$; they may be disconnected [def-weil-geometric-fibre, def-weil-pure-dimension, def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent componentwise trait refinement of Tag 0C5S (lemma-birational-regular-surfaces): old common-model step 2, including flatness excluding vertical components and properness forcing special centres."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "def-nagata-global-blowup",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-ordinary-resolution-rule",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], every nonzero $r\\in R$ is a unit times a power of $\\pi$. Consequently $K=R[1/\\pi]$, and a nonzero prime of $R$ contains $\\pi$, so $S$ has precisely the generic point $\\eta$ and closed point $s$. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}K=D(\\pi)\\hookrightarrow S$ is an open immersion; by [lem-weil-pbc-open-immersion-base-change], $(T_i)_K$ is the corresponding open subscheme of $T_i$. Also $R$ is Noetherian because all its ideals are principal [def-sc-discrete-valuation-ring]; thus $S$ is locally Noetherian [pqf-def-locnoeth], and is quasi-compact since it has only two points. Each $T_i\\to S$ is proper by [lem-kun-projective-implies-proper].",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-sc-discrete-valuation-ring",
+    "pqf-def-locnoeth",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion; schemes.tex Tags 01I3 (lemma-standard-open-affine), 01JY (lemma-base-change-immersion); morphisms.tex Tag 01WC."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nodal-trait-finite-singular-charts] to each $T_i/S$: flatness, finite presentation, smooth generic fibre and the explicitly defined nodal geometric fibres are exactly its hypotheses. It gives that $T_i$ is Noetherian. Apply [lem-sfb-nodal-trait-regularization] to $T_i/S$. Every arrow in its sequence must blow up a point at which the preceding total scheme is not regular. Since $T_i$ is regular, a first arrow is impossible; hence the sequence has length zero. Its terminal decomposition therefore says that $T_i$ itself is a finite disjoint union of integral regular surfaces of dimension two. In a disjoint-union decomposition each summand is open and closed; equivalently its complement is the union of the other open summands. Denote these summands by $C_{ia}$.",
+   "uses": [
+    "lem-sfb-nodal-trait-finite-singular-charts",
+    "lem-sfb-nodal-trait-regularization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), clause (1) and the length-zero case; dimension/component refinement already stated by lem-sfb-nodal-trait-regularization."
+   }
+  },
+  {
+   "text": "For any $C=C_{ia}$ choose a point $x$. If its image is $\\eta$, then $C_K$ is nonempty. If its image is $s$, the local map $R=\\mathcal O_{S,s}\\to A=\\mathcal O_{C,x}$ is flat by [def-weil-flat-morphism] (the local ring is unchanged on an open summand). Its maximal ideal lies over $(\\pi)$. Apply [lem-sc-flat-going-down] to $(0)\\subset(\\pi)$ and this maximal ideal: a prime of $A$ lies over $(0)$. By [lem-weil-pbc-affine-open-stalk-localization], primes of $A$ are primes contained in the prime of $x$ in any affine neighbourhood, so this prime gives a generalization of $x$ in $C_K$. Thus $C_K$ is nonempty in both cases. It is an open subscheme of the integral scheme $C$, hence integral: its nonempty affine opens have domain rings, and it is nonempty [def-pc-integral-scheme]. It is dense since a nonempty open in an irreducible space is dense. In particular $C$ dominates $S$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS (lemma-flat-going-down); schemes.tex Tag 01HV (lemma-spec-sheaves), stalk/localization interpretation; properties.tex Tags 01OK, 01ON."
+   }
+  },
+  {
+   "text": "The opens $C_{ia,K}$ partition $(T_i)_K$ into finitely many nonempty closed and open integral subschemes. An irreducible subset can meet only one of these summands: intersections with a summand and its complement would disconnect it. Each summand is itself irreducible and closed, so they are exactly the maximal irreducible closed subsets, namely the irreducible components. This proves the generic-fibre bijection. The isomorphism $\\alpha$ carries maximal irreducible closed subsets bijectively to maximal irreducible closed subsets, and therefore determines a unique matching $a\\leftrightarrow b$ with $\\alpha(C_{1a,K})=C_{2b,K}$. Its restriction is an isomorphism of these dense open subschemes. The induced open structures agree because these are open subschemes of the generic fibres.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Agent component bookkeeping preceding the application of Tag 0C5S; elementary finite disjoint-union argument."
+   }
+  },
+  {
+   "text": "For a matched pair $C_1,C_2$, their closed immersions into the proper schemes $T_1,T_2$ make them proper over $S$ by [lem-weil-pbc-closed-immersion-proper]. Step 2 gives integrality, regularity and dimension two, Step 1 gives that $S$ is Noetherian, and Steps 3--4 give the prescribed $S$-isomorphism between dense generic open subschemes. These are all hypotheses of [lem-sfb-common-regular-surface-resolution]. Obtain a regular integral common $S$-scheme $V$ and morphisms $q_j:V\\to C_j$, each a finite tower of reduced-closed-point blowups inducing that prescribed birational identification. No geometric integrality or connectedness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-common-regular-surface-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5S (lemma-birational-regular-surfaces), with the specified rational map; morphisms.tex Tag 01W5 (lemma-closed-immersion-proper)."
+   }
+  },
+  {
+   "text": "Consider any reduced-closed-point blowup tower $Z_r\\to\\cdots\\to Z_0$, where $Z_0$ is either $T_i$ or one of its summands. Initially $Z_0\\to S$ is proper by Steps 1 and 5, hence $Z_0$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $S$ is Noetherian and proper morphisms are finite type [def-weil-proper-morphism]. Inductively, the ideal of a reduced closed point on a Noetherian scheme is of finite type (on a Noetherian affine neighbourhood it is an ideal in a Noetherian ring). Its blowup is proper by [thm-nagata-global-blowup-proper], and the next structure map is proper by [lem-weil-pbc-proper-composition]. The same finite-type-over-Noetherian statement makes the next scheme Noetherian, completing the induction. At any stage a closed singleton has closed image in $S$, since its structure map is closed by [def-weil-proper-morphism]. This nonempty singleton image cannot be $\\{\\eta\\}$, which is not closed; it is $\\{s\\}$. Thus every closed point of every stage, and in particular every centre, is special.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "thm-nagata-global-blowup-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective); properness as recorded by thm-nagata-global-blowup-proper; morphisms.tex Tags 01T6, 01W1, 01W3."
+   }
+  },
+  {
+   "text": "By [thm-nagata-global-blowup-complement], each arrow of any tower in Step 6 is an isomorphism off its centre. Since the centre is special, its restriction on generic fibres is an isomorphism. Composing proves the generic invariance for arbitrary finite towers, including the empty tower, and for both towers supplied in Step 5. In particular $q_{j,K}$ are isomorphisms. To check that $q_{2,K}=\\alpha\\circ q_{1,K}$ on the whole generic fibre, the prescribed birational identification gives agreement on a dense open of $V$. Intersect it with the nonempty open $V_K$; the intersection is nonempty and dense in the integral scheme $V_K$. This intersection is schematically dense: on each nonempty affine domain chart, a section zero on a nonempty principal open is killed by a nonzero element, so is zero. The target $C_2$ is separated over $S$ by properness [def-weil-proper-morphism]. Thus [lemma-nagata-ext-scheme-theoretically-dominant-separated] extends the equality from that dense open to all of $V_K$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "def-weil-proper-morphism",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5S, specified birational map; divisors.tex Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), clause (1); separated uniqueness as in the cited blueprint lemma."
+   }
+  },
+  {
+   "text": "Finally take $W=\\coprod_a V_a$ over the finitely many matched pairs. The two families of composites $V_a\\to C_{ia}\\hookrightarrow T_i$ give morphisms $W\\to T_i$ by [lem-weil-pbc-scheme-coproduct-family]. Their generic restrictions are the componentwise isomorphisms of Step 7, with compatibility $q_{2,K}=\\alpha\\circ q_{1,K}$ on each open summand; these equations give the same compatibility globally by the coproduct mapping property. This is the required comparison. The matching used only ordinary integral generic fibres, and did not require them to remain integral over an algebraic closure or require either whole generic fibre to be connected.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), disjoint-union gluing applied to the componentwise Tag 0C5S comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-sc-discrete-valuation-ring",
+  "pqf-def-locnoeth",
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-nodal-trait-finite-singular-charts",
+  "lem-sfb-nodal-trait-regularization",
+  "def-weil-flat-morphism",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-common-regular-surface-resolution",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "thm-nagata-global-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Componentwise application of Tag 0C5S (lemma-birational-regular-surfaces), with nodal regularization length zero from models.tex Tag 0CDE, flat going down Tag 00HS and closedness of proper structure maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vertical.*component|component.*genericFiber|closedPoint.*specialFiber",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"grep\", \"query\": \"vertical.*component|component.*genericFiber|closedPoint.*specialFiber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic isomorphism matches components of regular proper flat curve schemes over a trait and closed points lie over its closed point",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"leansearch\", \"query\": \"A generic isomorphism matches components of regular proper flat curve schemes over a trait and closed points lie over its closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.Scheme.Hom.isIso_base\", \"AlgebraicGeometry.instSurjectiveOfIsIsoScheme\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.Scheme.residueFieldCongr\"], \"digest\": \"eea1cb95a461ccb3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"irreducibleComponents\"",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"irreducibleComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents\", \"AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv\", \"AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv_apply_coe\", \"AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv_symm_apply_coe\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"], \"digest\": \"154f7ee7266a450b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat regular proper relative curves have no vertical irreducible components and reduced closed point blowups preserve the generic fibre",
+   "results": "{\"t\": \"2026-10-22T07:28:09Z\", \"tool\": \"leanfinder\", \"query\": \"Flat regular proper relative curves have no vertical irreducible components and reduced closed point blowups preserve the generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"9243c442c36a109f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular proper flat curve models over a discrete valuation ring have matching integral surface components under a generic isomorphism and all closed point blowup centres are in the special fibre",
+   "results": "{\"t\": \"2026-10-22T07:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"Regular proper flat curve models over a discrete valuation ring have matching integral surface components under a generic isomorphism and all closed point blowup centres are in the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"2d9806c9389894a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|BlowUp|birational.*regular|regular.*birational",
+   "results": "{\"t\": \"2026-10-23T04:27:08Z\", \"tool\": \"grep\", \"query\": \"blowup|BlowUp|birational.*regular|regular.*birational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass integral/minimal models, normalization, rational-map representatives or the definition of birationality, and do not provide componentwise common point-blowup models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Birational\"",
+   "results": "{\"t\": \"2026-10-23T04:27:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass integral/minimal models, normalization, rational-map representatives or the definition of birationality, and do not provide componentwise common point-blowup models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular proper flat curve models over a discrete valuation ring have matching integral surface components and a common sequence of closed point blowups",
+   "results": "{\"t\": \"2026-10-23T04:27:09Z\", \"tool\": \"leansearch\", \"query\": \"Regular proper flat curve models over a discrete valuation ring have matching integral surface components and a common sequence of closed point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.integralModel.congr_simp\", \"WeierstrassCurve.integralModel\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"AlgebraicGeometry.flat_iff\", \"WeierstrassCurve.exists_isMinimal\"], \"digest\": \"a7bbd7121d75e1d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass integral/minimal models, normalization, rational-map representatives or the definition of birationality, and do not provide componentwise common point-blowup models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic isomorphism between regular proper flat curve models over a discrete valuation ring extends to a common model by point blowups",
+   "results": "{\"t\": \"2026-10-23T04:27:20Z\", \"tool\": \"leanfinder\", \"query\": \"A generic isomorphism between regular proper flat curve models over a discrete valuation ring extends to a common model by point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.minimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"RingHom.isStandardSmoothOfRelativeDimension_respectsIso\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.Projective.comp_equiv_comp\"], \"digest\": \"89712f03c6810d2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass integral/minimal models, normalization, rational-map representatives or the definition of birationality, and do not provide componentwise common point-blowup models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Birational regular integral proper surfaces admit a common resolution by blowing up closed points",
+   "results": "{\"t\": \"2026-10-23T04:27:20Z\", \"tool\": \"leanfinder\", \"query\": \"Birational regular integral proper surfaces admit a common resolution by blowing up closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"cbc4732c190a4ce0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass integral/minimal models, normalization, rational-map representatives or the definition of birationality, and do not provide componentwise common point-blowup models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent componentwise trait refinement of Tag 0C5S (lemma-birational-regular-surfaces): old common-model step 2, including flatness excluding vertical components and properness forcing special centres.",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-trait-surface-component-comparison",
+  "worker": "stage1",
+  "summary": "Eight-step proof using only existing nodes: identify the generic open, recover the surface decomposition by the length-zero regularization case, prove generic density by flat going down, match components, apply the existing common-resolution theorem to the specified generic map, prove properness and specialness at every point-blowup stage, recover full generic compatibility by separated uniqueness, and assemble finite disjoint unions. Statement and statement dependencies are unchanged. No new nodes or Mathlib leaves. All cited statements were opened, with verbatim quotations in citations.json, and transitive dependencies have no path back to this item.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent componentwise trait refinement of Tag 0C5S (lemma-birational-regular-surfaces): old common-model step 2, including flatness excluding vertical components and properness forcing special centres.; all clauses of this prerequisite to the old common-model proof step 2 are realized by steps 1--8.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme, commutative-algebra, properness or gluing tool used with its stated hypotheses inside the componentwise trait comparison; the unit has no replacement for this general fact."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme, commutative-algebra, properness or gluing tool used with its stated hypotheses inside the componentwise trait comparison; the unit has no replacement for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-1a3a5ef2a",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-1a3a5ef2a (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with every cited statement open. The delivery has one commit: the item plus its report, with no new nodes. The statement is identical to live, where the item is still unsplit; there is no repair note for it, so the re-split rule does not apply. I checked the sources: Stacks resolve.tex 0C5S (S Noetherian, proper integral regular surfaces of dimension 2, with the given rational map kept), models.tex 0CDE(1), Algebra 00HS and Divisors 02OS(1). No SGA is cited. Step 1: the DVR unit-times-uniformizer leaf gives K=R_pi; the principal-localization and base-change open-immersion leaves give the generic open; S is Noetherian; projective implies proper, with the same def-kun-projective notion. Step 2: every hypothesis of lem-sfb-nodal-trait-regularization holds. Its statement says each arrow blows up a nonregular point, and T_i is regular, so the tower has length 0. Its endpoint clause then gives the decomposition into integral regular dimension-2 surfaces. This is a valid use of the statement alone. Step 3: the local map is flat, the maximal ideal contracts to (pi), going down and the stalk-localization leaf give a generic generalization, so each component is dominant with an integral dense generic fibre. Step 4 is elementary clopen-component bookkeeping. Step 5: clopen summands are proper through closed-immersion-proper(c), and all hypotheses of lem-sfb-common-regular-surface-resolution hold. Step 6: induction on properness and Noetherianity using blowup-proper with a finite-type ideal and proper-composition; a universally closed map makes the image of every closed point s. Step 7: the blowup-complement node (it agrees with its blueprint_update) shows each tower is a generic isomorphism; separated extension gives q2=alpha∘q1 on all of V_K. This is slightly redundant, because q1^{-1}(U1)=V_K already, but correct. Step 8: coproduct-family leaf. Small cases checked: P^1_R; disjoint copies; xy=pi z^2; P^1 over an unramified quadratic R', giving an integral but not geometrically integral generic fibre; imperfect k. Cycle check is clean and proof_deps equals the union of the step uses. I accept the tool use of lem-kun-projective-implies-proper as a generic fact; the other off-unit citations are in route and Lean-closed. Batch-5 flag: lem-sfb-common-regular-surface-resolution reaches def-trf-ordinary-resolution-rule. That node is a general definition of blowup towers and resolution rules, with empty proof_deps and only generic definitions as stmt_deps. It is neither the trace formula nor Poincare duality nor a step of their proofs. The other trf nodes in that closure are generic curve and surface birational lemmas and commutative algebra. The cited node is therefore outside the assumed statements, and the flag is not a RETURN. No duplicates were found: lem-sfb-regular-trait-curve-surface-components and lem-sfb-minimal-comparison-good-centres state different things. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitSurfaceComponentComparison",
+  "declaration": "AlgebraicGeometry.exists_trait_surface_component_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitSurfaceComponentComparison.lean",
+  "statement": "theorem exists_trait_surface_component_comparison (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (T : Fin 2 → Over (Spec (.of R))) [∀ i, IsHProjective (T i).hom] [∀ i, Flat (T i).hom] [∀ i, LocallyOfFinitePresentation (T i).hom] [∀ i, Smooth (pullback.snd (T i).hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))] (hregular : ∀ i, IsRegularScheme (T i).left) (hfib : ∀ (i : Fin 2) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback (T i).hom g) ∧ IsReduced (pullback (T i).hom g) ∧ (pullback (T i).hom g).IsPureDimension 1) (hnodal : ∀ (i : Fin 2) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)) (x : ↥(pullback (T i).hom g)), IsClosed ({x} : Set ↥(pullback (T i).hom g)) → x ∉ (pullback.snd (T i).hom g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (T i).hom g).presheaf.stalk x)) ((pullback (T i).hom g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) (α : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj (T 0) ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj (T 1)) : ∃ (n : Fin 2 → ℕ) (C : ∀ i, Fin (n i) → Over (Spec (.of R))) (j : ∀ i a, C i a ⟶ T i), (∀ i, IsIso (Sigma.desc (fun a ↦ (j i a).left))) ∧ (∀ i a, IsOpenImmersion (j i a).left ∧ IsClosedImmersion (j i a).left ∧ IsIntegral (C i a).left ∧ IsRegularScheme (C i a).left ∧ topologicalKrullDim (C i a).left = 2 ∧ DenseRange (C i a).hom ∧ IsIntegral (pullback (C i a).hom (Spec.map (CommRingCat.ofHom (algebraMap R K)))) ∧ IsOpenImmersion (pullback.fst (C i a).hom (Spec.map (CommRingCat.ofHom (algebraMap R K)))) ∧ DenseRange (pullback.fst (C i a).hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))) ∧ (∃ E : ∀ i, Fin (n i) ≃ ↥(irreducibleComponents ↥(((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj (T i)).left)), ∀ i a, (E i a).val = Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j i a)).left)) ∧ (∃ σ : Fin (n 0) ≃ Fin (n 1), (∀ a, α.hom.left '' Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j 0 a)).left) = Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j 1 (σ a))).left)) ∧ (∀ τ : Fin (n 0) ≃ Fin (n 1), (∀ a, α.hom.left '' Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j 0 a)).left) = Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j 1 (τ a))).left)) → τ = σ) ∧ ∃ (V : Fin (n 0) → Over (Spec (.of R))) (q₀ : ∀ a, V a ⟶ C 0 a) (q₁ : ∀ a, V a ⟶ C 1 (σ a)) (β : ∀ a, (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj (C 0 a) ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj (C 1 (σ a))), (∀ a, IsRegularScheme (V a).left ∧ IsIntegral (V a).left ∧ (β a).hom ≫ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j 1 (σ a)) = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (j 0 a) ≫ α.hom ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (q₀ a)) ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (q₁ a)) ∧ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (q₁ a) = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map (q₀ a) ≫ (β a).hom ∧ (∃ (A : OrdinaryBlowupTower (C 0 a).left) (e : (V a).left ≅ A.level (Fin.last A.length)), e.hom ≫ A.toBase (Fin.last A.length) = (q₀ a).left ∧ ∀ b : Fin A.length, ∃ (p : A.level b.castSucc) (hp : IsClosed ({p} : Set _)), A.center b = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩ ∧ (A.toBase b.castSucc ≫ (C 0 a).hom) p = IsLocalRing.closedPoint R) ∧ (∃ (A : OrdinaryBlowupTower (C 1 (σ a)).left) (e : (V a).left ≅ A.level (Fin.last A.length)), e.hom ≫ A.toBase (Fin.last A.length) = (q₁ a).left ∧ ∀ b : Fin A.length, ∃ (p : A.level b.castSucc) (hp : IsClosed ({p} : Set _)), A.center b = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩ ∧ (A.toBase b.castSucc ≫ (C 1 (σ a)).hom) p = IsLocalRing.closedPoint R)) ∧ ∃ (W : Over (Spec (.of R))) (e : W.left ≅ ∐ (fun a ↦ (V a).left)) (p₀ : W ⟶ T 0) (p₁ : W ⟶ T 1), e.hom ≫ Sigma.desc (fun a ↦ (q₀ a).left ≫ (j 0 a).left) = p₀.left ∧ e.hom ≫ Sigma.desc (fun a ↦ (q₁ a).left ≫ (j 1 (σ a)).left) = p₁.left ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₀) ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₁) ∧ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₁ = (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₀ ≫ α.hom) ∧ (∀ (i : Fin 2) (A : OrdinaryBlowupTower (T i).left), (∀ b : Fin A.length, ∃ (p : A.level b.castSucc) (hp : IsClosed ({p} : Set _)), A.center b = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩) → (∀ (b : Fin (A.length + 1)) (p : A.level b), IsClosed ({p} : Set (A.level b)) → (A.toBase b ≫ (T i).hom) p = IsLocalRing.closedPoint R) ∧ ∀ b : Fin (A.length + 1), IsIso (pullback.snd (A.toBase b) (pullback.fst (T i).hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32a6c9897",
+  "group": "NE",
+  "result": "pass",
+  "note": "Item record differs from live only in lean and stmt_deps (+landed def-trf-ordinary-resolution-rule for OrdinaryBlowupTower, +landed def-pc-reduced-scheme for IsReduced, both used); statement verbatim; single sorry, no defs. Hypotheses: DVR/fraction field, IsHProjective/Flat/LocallyOfFinitePresentation, IsRegularScheme, smooth generic fibre, hfib/hnodal identical to landed exists_nodal_trait_regularization (ring iso of completion equivalent to Omega-algebra iso via the associated graded ring), alpha in Over(Spec K). Conclusions: actual coproduct decomposition, clopen integral regular dim-2 components, dominance, integral dense open generic fibres, E pinned to ranges of base-changed inclusions, unique sigma, beta pinned to alpha, regular integral V with OrdinaryBlowupTowers of special reduced closed-point centres and q_K iso compatible with beta, W = coproduct with p1_K = p0_K ≫ alpha, all-stage specialness and generic invariance of arbitrary point towers (true by properness and the blowup complement). Edge cases (empty tower, n=0, permuted components, non-geometrically-integral generic fibre) and universes ok; no duplicate declaration; docstrings and source places present; imports exist. No recompile (no change)."
+ }
+}

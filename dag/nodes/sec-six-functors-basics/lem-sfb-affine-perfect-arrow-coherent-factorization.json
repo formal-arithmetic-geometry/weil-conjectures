@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-affine-perfect-arrow-coherent-factorization",
+ "kind": "statement",
+ "title": "Affine finite coherent factorization of a perfect coefficient arrow",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $D\\to A$ be a homomorphism of commutative rings, and let $S$ be a commutative finite type $D$-algebra [def-weil-pbc-finite-type-algebra]. Put $Y=\\operatorname{Spec}S$ [def-weil-affine-spectrum, def-pc-scheme] and, for a commutative $D$-algebra $E$ with a specified map $E\\to A$, put $Y_E=\\operatorname{Spec}(S\\otimes_D E)$ and let $\\pi_E:Y_A\\to Y_E$ be the projection [def-pc-fibre-product]. On $Y$, use $\\mathcal B=\\mathcal O_Y\\otimes_D R_A$, $D_{\\mathrm{QCoh}}(\\mathcal B)$, $U$, $\\Phi_E$, $\\widehat K$, perfection, and the action arrow $\\nu_E$ of [def-sfb-dg-coefficient-realization]. Let $H$ be perfect over $\\mathcal B$, let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y_A})$ [def-pc-derived-category], let $u:H\\to\\widehat K$ be a dg-derived morphism, and let $m\\in\\mathbf Z$. Assume $H^i(Uu)$ is surjective as a morphism of sheaves for every $i\\ge m$.\n\nThere exist a finite type commutative $D$-algebra $E$ with $D\\to E\\to A$, an object $G\\in D(\\mathcal O_{Y_E})$ with bounded coherent cohomology [pqf-def-coherent], an ordinary scheme-derived morphism $\\gamma:G\\to R\\pi_{E*}K$ [def-pc-derived-direct-image], and $\\sigma:H\\to\\Phi_E(G)$ in $D_{\\mathrm{QCoh}}(\\mathcal B)$, such that $\\nu_E(\\gamma)\\circ\\sigma=u$ and $H^i(U\\sigma)$ is surjective for every $i\\ge m$. The coefficient maps need not be flat; no injectivity of $H^i(Uu)$ or relative pseudo-coherence of $K$ is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated affine factorization subproblem of the descente input for the unnumbered Kiehl assertion following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). This affine dg-arrow assertion is not stated there. WANTED: Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, affine finite coherent factorization with a cohomologically surjective first factor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-sfb-dg-coefficient-realization",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine dg comparison with $C_E=S\\otimes_D R_E$ and $T_E=S\\otimes_D E$. It sends $H$ to a perfect $P\\in D(C_A)$, $K$ to an ordinary $T_A$-complex $L$, and $u$ to $v:P\\to\\operatorname{Res}_{C_A}^{T_A}L$. Cohomology is identified by associated sheaves, including the stated surjectivity hypotheses. The comparison gives an integer $b_H$ with $H^i(UH)=0$ for $i>b_H$.",
+   "uses": [
+    "lem-sfb-affine-dg-coefficient-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly of the affine descente subproblem following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); the paragraph itself does not prove this assertion."
+   }
+  },
+  {
+   "text": "Descend $P$ to a perfect $P_E$ over $C_E$, with $E$ finite type over $D$ and $C_A\\otimes_{C_E}^{\\mathbf L}P_E\\simeq P$. By the dg scalar adjunction, $v$ has an adjoint $a:P_E\\to\\operatorname{Res}_{C_E}^{T_A}L$. Put $F=T_E\\otimes_{C_E}^{\\mathbf L}P_E$. Extension is exact and carries the regular module to $T_E$ and retracts to retracts; hence $F$ is perfect in the ordinary sense, by the perfectness compatibility in the affine comparison. If $s_1,\\ldots,s_a$ and $e_1,\\ldots,e_c$ generate $S$ and $E$ over $D$, then $s_j\\otimes1$ and $1\\otimes e_k$ generate $T_E$ over $D$. The finite-type Noetherianity theorem makes $T_E$ Noetherian. The affine equivalence sends $F$ to a perfect ordinary object $G$ on the Noetherian affine scheme $Y_E$; the perfect-cohomology theorem makes $G$ bounded coherent.",
+   "uses": [
+    "lem-sfb-affine-perfect-dg-finite-stage-descent",
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-pc-perfect-noetherian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly of the affine descente subproblem following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); the paragraph itself does not prove this assertion."
+   }
+  },
+  {
+   "text": "The same adjunction along $C_E\\to T_E$ transposes $a$ to $c:F\\to\\operatorname{Res}_{T_E}^{T_A}L$. Under the affine comparison this is an ordinary $\\gamma:G\\to R\\pi_{E*}K$. Let $\\eta:P_E\\to\\operatorname{Res}_{C_E}^{T_E}F$ be the unit and extend it to $C_A$. Using the descent isomorphism and the comparison with $\\Phi_E$, this gives $s:H\\to\\Phi_E(G)$. The triangle identity says that extending $a$ and applying the $C_A$-action counit recovers $v$. Substituting $a=\\operatorname{Res}(c)\\eta$ gives $\\nu_E(\\gamma)s=u$, since the comparison identifies the actual action counit with $\\nu_E$.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-affine-dg-coefficient-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly of the affine descente subproblem following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); the paragraph itself does not prove this assertion."
+   }
+  },
+  {
+   "text": "The object $G$ is bounded above, say in degrees $\\le b_G$. By the affine comparison, $\\Phi_E(G)$ is the extension along $C_E\\to C_A$ of the restriction of an ordinary $T_E$-module complex representing $G$, which may be truncated to vanish above $b_G$ (keeping its $T_E$-action), and $U$ is its underlying complex. The coefficient resolutions are nonpositive, so their relative bar extension of a representative zero above $b_G$ has no terms above $b_G$: each bar suspension lowers degree, and every algebra factor has nonpositive degree. Consequently $H^i(U\\Phi_E(G))=0$ for $i>b_G$. Take $b=\\max(m,b_H,b_G)$. The supplied factorization from step 3 is then surjective on underlying cohomology for every $i>b$, since its target is zero there.",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+    "lem-sfb-affine-dg-coefficient-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly of the affine descente subproblem following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); the paragraph itself does not prove this assertion."
+   }
+  },
+  {
+   "text": "Induct down the finite list $b,b-1,\\ldots,m$. At a stage $r$, retain a finite type coefficient algebra and a bounded coherent factorization with first map onto in degrees $i>r$. The one-degree refinement applies: $H^r(Uu)$ is onto because $r\\ge m$. Its output extends the coefficient algebra and supplies a new factorization with first map onto for all $i\\ge r$, which is precisely the hypothesis $i>r-1$ for the next stage. After $b-m+1$ applications obtain $E_f,G_f,\\gamma_f,s_f$ onto in every degree $i\\ge m$. At each extension adjoin its finite set of algebra generators to the generators already retained; a finite union of finite sets is finite, so $E_f$ is finite type over $D$. Every refinement retains the ordinary type of $\\gamma_f$ and the actual equation $\\nu_{E_f}(\\gamma_f)s_f=u$. These data are the requested witnesses. For an empty $Y$, all objects are zero and the same conclusion follows by taking $E=D$ and $G=0$.",
+   "uses": [
+    "lem-sfb-affine-coefficient-one-degree-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly of the affine descente subproblem following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); the paragraph itself does not prove this assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-dg-coefficient-module-comparison",
+  "lem-sfb-affine-perfect-dg-finite-stage-descent",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-pc-perfect-noetherian-cohomology",
+  "def-sfb-dg-coefficient-realization",
+  "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "lem-sfb-affine-coefficient-one-degree-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent assembly of the affine descente subproblem following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general); the paragraph itself does not prove this assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On an affine finite type scheme over a Noetherian ring a cohomologically surjective arrow from a perfect derived coefficient dg module factors through a bounded coherent finite coefficient stage",
+   "results": "{\"t\": \"2026-10-24T03:20:39Z\", \"tool\": \"leanfinder\", \"query\": \"On an affine finite type scheme over a Noetherian ring a cohomologically surjective arrow from a perfect derived coefficient dg module factors through a bounded coherent finite coefficient stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"d26f729406e72881\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme-limit maps, ordinary derived fractions, model-category factorizations and coimage factorizations do not give a bounded coherent finite coefficient model of an affine sheaf dg arrow."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"factor\"",
+   "results": "{\"t\": \"2026-10-24T03:20:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"factor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.homologyFunctorFactors\", \"DerivedCategory.homologyFunctorFactorsh\", \"DerivedCategory.homologyFunctorFactors_hom_naturality\", \"DerivedCategory.homologyFunctorFactors_hom_naturality_assoc\", \"DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj\", \"DerivedCategory.homologyFunctorFactorsh_inv_app_quotient_obj\", \"DerivedCategory.homologyFunctorFactorsh_inv_app_quotient_obj_assoc\", \"DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj_assoc\"], \"digest\": \"ecf7122a1b4de881\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme-limit maps, ordinary derived fractions, model-category factorizations and coimage factorizations do not give a bounded coherent finite coefficient model of an affine sheaf dg arrow."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*dg|cohomolog.*surject.*factor|coherent.*factoriz",
+   "results": "{\"t\": \"2026-10-24T03:20:34Z\", \"tool\": \"grep\", \"query\": \"coefficient.*dg|cohomolog.*surject.*factor|coherent.*factoriz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme-limit maps, ordinary derived fractions, model-category factorizations and coimage factorizations do not give a bounded coherent finite coefficient model of an affine sheaf dg arrow."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine finite coherent coefficient factorization of a perfect differential graded module morphism retaining surjectivity on cohomology",
+   "results": "{\"t\": \"2026-10-24T03:20:34Z\", \"tool\": \"leansearch\", \"query\": \"Affine finite coherent coefficient factorization of a perfect differential graded module morphism retaining surjectivity on cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantBrownFactorization\", \"ModuleCat.monoFactorisation\", \"DerivedCategory.left_fac\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b.fac\", \"CochainComplex.cm5b\", \"CategoryTheory.Abelian.coimageStrongEpiMonoFactorisation\", \"HomotopicalAlgebra.CofibrantBrownFactorization.toMapFactorizationData\"], \"digest\": \"20f34f20392577fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme-limit maps, ordinary derived fractions, model-category factorizations and coimage factorizations do not give a bounded coherent finite coefficient model of an affine sheaf dg arrow."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine nonflat scalar descent of an epimorphism on high cohomology from a perfect sheaf dg module to an ordinary module complex",
+   "results": "{\"t\": \"2026-10-24T03:20:38Z\", \"tool\": \"leanfinder\", \"query\": \"Affine nonflat scalar descent of an epimorphism on high cohomology from a perfect sheaf dg module to an ordinary module complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.opEpi_comp\", \"groupCohomology.cochainsMap_id_f_map_epi\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"groupCohomology.cochainsMap_f_map_epi\", \"CochainComplex.cm5b\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"CochainComplex.degreewiseEpiWithInjectiveKernel\"], \"digest\": \"b917d13ab5ea7ff9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme-limit maps, ordinary derived fractions, model-category factorizations and coimage factorizations do not give a bounded coherent finite coefficient model of an affine sheaf dg arrow."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine finite coherent factorization of a perfect coefficient dg arrow with cohomologically surjective first factor",
+   "results": "{\"t\": \"2026-10-24T04:37:47Z\", \"tool\": \"leansearch\", \"query\": \"Affine finite coherent factorization of a perfect coefficient dg arrow with cohomologically surjective first factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantBrownFactorization\", \"DerivedCategory.right_fac\", \"HomotopicalAlgebra.CofibrantBrownFactorization.mk\", \"DerivedCategory.left_fac\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"HomotopicalAlgebra.CofibrantBrownFactorization.mk'\", \"HomotopicalAlgebra.ModelCategory.cm5b\", \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.fac_app\"], \"digest\": \"db10ba8848fc94e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions and model-category factorizations do not assert finite coherent dg coefficient factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite coherent factorization of a perfect coefficient dg arrow with cohomologically surjective first factor",
+   "results": "{\"t\": \"2026-10-24T04:37:48Z\", \"tool\": \"leanfinder\", \"query\": \"Affine finite coherent factorization of a perfect coefficient dg arrow with cohomologically surjective first factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac\", \"DerivedCategory.right_fac\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"CochainComplex.cm5b.fac\"], \"digest\": \"68a32dc8b22c1c5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions and model-category factorizations do not assert finite coherent dg coefficient factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CochainComplex, compact, factorization",
+   "results": "{\"t\": \"2026-10-24T04:37:49Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CochainComplex, compact, factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'compact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions and model-category factorizations do not assert finite coherent dg coefficient factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(factor|compact)|coherent.*complex|dg.*module",
+   "results": "{\"t\": \"2026-10-24T04:37:49Z\", \"tool\": \"grep\", \"query\": \"perfect.*(factor|compact)|coherent.*complex|dg.*module\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions and model-category factorizations do not assert finite coherent dg coefficient factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-perfect-coefficient-arrow-finite-realization",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted.",
+   "via": [
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-perfect-arrow-coherent-factorization",
+  "worker": "stage1",
+  "summary": "Keep the statement unchanged. Obtain an initial factorization by finite coefficient descent of the perfect dg source and two extension--restriction adjunctions; the unit and triangle identity produce the actual normalized arrow. Use a common upper bound to initialize a finite downward induction of conditional one-degree refinements, giving surjectivity through the requested cutoff. Three new statement-only inputs isolate affine sheaf/dg comparison, source descent, and a single-degree refinement; no claim of a finite-cell representative for every perfect source and no flat coefficient map is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. This split realizes the independent affine factorization input by finite perfect-source descent, adjunction assembly and a finite single-degree induction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Hilbert basis theorem ensures that the finite-type coordinate tensor algebra is Noetherian; no node of this unit supplies this commutative algebra theorem."
+   },
+   {
+    "node": "lem-pc-perfect-noetherian-cohomology",
+    "why": "Generic bounded coherent cohomology theorem for ordinary perfect objects on a Noetherian scheme; this does not replace the coefficient dg factorization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-pc-perfect-noetherian-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-14665a894",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-14665a894 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, five agent steps), the three new nodes, the cited statements (dg-coefficient-realization, sheaf-dg localization, ringed-dg scalar adjunction, relative bar extension, Noetherian leaf, perfect-Noetherian cohomology, affine qcoh equivalence, def-pc-perfect-complex), the parent finite-realization step 3, and the 0CSD/Kiehl source note (agent route, Kiehl WANTED, no SGA). Steps 1-3 check: the comparison identifies H, K and u; descent, then the adjoint a, then the transpose c; the triangle identity gives nu_E(gamma)s=u as an equation of arrows; T_E is finite type and Noetherian, so G is bounded coherent. Step 4: the bar degree count is correct (V_n[n] vanishes above b_G-n). Step 5: the downward induction r=b..m meets the lemma's hypotheses at every stage. Small cases: one-degree lemma holds for A finite type, E=A (cone with T_A^n[-r] killing the finitely generated cokernel; gamma extends because gamma(z_j)=0); descent holds for P=0 and A=0 and follows from filtered colimits of finite cells and idempotents; comparison with S=E=D is the ordinary equivalence. No duplicates: the realization-comparison affine clause goes through a polynomial chart Q_A and loses perfectness; single-degree cone-cancellation concerns an ordinary cone. Tool uses accepted: finite-type-algebra-noetherian (Mathlib leaf) and perfect-noetherian-cohomology (generic). Batch 5: all listed citations reach sec-trace-formula only through def-trf-cotangent-resolution-data (standard resolution, a general definition) or lem-trf-triangulated-subcategory-cone-system (Mathlib-leaf Verdier localization); both are outside the assumed statements, and the item already cited def-sfb-dg-coefficient-realization on the base. FIX (2): (1) item step 4 now cites lem-sfb-affine-dg-coefficient-module-comparison for the truncated T_E-module representative of Phi_E(G) (C1); (2) comparison node now cites [def-pc-perfect-complex] for perfect ordinary complexes (B3), introduces Y_E, Y_A and pi_E, and states that Res_{T_E}^{T_A}K corresponds to R pi_{E*}K~, which step 3 used implicitly; stmt_deps gain def-pc-perfect-complex, def-pc-derived-direct-image and def-pc-fibre-product.; 2 file(s) fixed by the reviewer"
+ }
+}

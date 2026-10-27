@@ -1,0 +1,153 @@
+{
+ "id": "lem-sp-pullback-ordered-tate-bounds",
+ "kind": "statement",
+ "title": "Uniform pullback and ordered shifted Tate tensor bounds",
+ "statement": "In the setting of [def-sp-twisted-pullback-tower-domain-data], but without G, an adjunction or an orientation, let K belong to the constructible finite-Tor tower subcategory and suppose every level has Tor interval [a,z], a<=z. For the bounds predicate of [lem-sp-tower-chart-admissibility], B has cohomological and Tor intervals [a,z]. The degree-d finite Tate line is constructible and locally free of rank one [def-amb-finite-locally-free-module], and is isomorphic to the coefficient unit when d=0. P=B tensor orderedLine(d), and also orderedLine(d) tensor B, have both intervals [a-2d,z-2d]; orderedLine(d) has both intervals [-2d,-2d]. Use [lem-sf-pullback-tor-amplitude], [lem-pur-twist-sheaf-locally-free], [def-coefficient-twists-detailed], [def-weil-proetale-constructible-sheaf], [def-weil-proetale-tor-amplitude], [det-sp-tower-shriek-levels] and [sk-def-sp-normalized-towers] for the finite-level meanings.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "paragraph (2), uniform tensor-transpose domain checks"
+ },
+ "stmt_deps": [
+  "def-sp-twisted-pullback-tower-domain-data",
+  "lem-sp-tower-chart-admissibility",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sp-normalized-towers",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Smooth pullback preserves bounded constructibility and the given Tor interval at every finite quotient. Test against the coefficient unit for the cohomological interval. Finiteness over the field supplies the Noetherian hypotheses.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite Tate line and all nonnegative tensor powers are locally free of rank one with finite constant local models; the zeroth power is the unit. Tensoring with the line is exact and preserves the constructible stratification.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the ordered line construction. Exact tensor, associativity and the shift by 2 at each step subtract 2 from both endpoints. The same local computation with the line on the left gives the reverse tensor bounds. Level comparison identifies the actual evaluations. The result is independent of n, and no orientation or exceptional adjoint is used.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "sk-def-sp-normalized-towers",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-pullback-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "def-weil-proetale-constructible-sheaf",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "paragraph (2), uniform tensor-transpose domain checks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback tensor a Tate line preserves uniform constructible Tor bounds in coefficient towers",
+   "results": "Eight algebraic pullback/tensor hits; no result about constructible Tor bounds for coefficient towers. Local rg finds the original node and the declared pullback/Tate inputs.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "Zero hits. The ringed-site Tor-amplitude API is in the project library.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*twist|constructible.*Tor|Tor.*amplitude",
+   "results": "Two hits in Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, unrelated to coefficient towers.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of strict coefficient towers detects a uniform cohomological lower bound and finite constructible etale origins preserve Tor amplitude",
+   "results": "Eight hits: CochainComplex.isStrictlyGE_of_ge; HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits; SheafOfModules.Finite.evaluationPreservesFiniteLimits; HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits; MvPowerSeries.coe_aeval; CochainComplex.isStrictlyGE_iff; CochainComplex.isStrictlyGE_of_iso; Algebra.FormallyEtale.instTensorProduct. Generic cochain support and exactness results only; use the project finite-ring comparison and exact-derived-evaluation API.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search \"uniform Tor\"; search \"etale origin\"; search \"twisted pullback\"; ancestor lem-sp-twisted-pullback-tower-domain",
+   "results": "3, 10, and 0 imported blueprint matches respectively. Uniform Tor hits concern compact-support output bounds, affine-limit cohomological dimension and biduality; etale-origin hits concern fixed-scalar comparison, exceptional images and base change. None states this extracted data or the two tower steps. Ancestor is det-sp-integral-adjunction-bijection.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint statement; same_as is empty."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackTowerDomain",
+  "date": "2026-10-25",
+  "group": "F8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity; gamma paragraph (2)",
+   "via": [
+    "lem-sp-twisted-pullback-tower-domain",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackTowerBounds",
+  "file": "lean/Sheaf/Paper/TwistedPullbackTowerBounds.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTwistedTowerDomain.pullback_ordered_tate_bounds",
+  "statement": "theorem pullback_ordered_tate_bounds\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)\n    (q : SpTowerCalculus.Coordinates l E b)\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X Y : Over (Spec (CommRingCat.of D.k)))\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) [IsSeparated f.left] (d : ℕ) [SmoothOfRelativeDimension d f.left]\n    (w : SpChartAdmissibility.Twists l E X.left)\n    (K : SpTowerCalculus.C l E b q Y.left) (a z : ℤ) (haz : a ≤ z)\n    (hTor : ∀ n : ℕ, HasProEtaleTorAmplitude Y.left (SpTowerShriek.R l E n)\n      ((SpTowerShriek.Ev l E Y.left n).obj\n        ((SpTowerGamma.realization l E b q Y.left).obj K)) a z) :\n    SpChartAdmissibility.bounds l E X.left (B l E b o q f.left K) a z a z ∧\n    (∀ n : ℕ,\n      IsConstructibleProEtaleModuleSheaf X.left (SpTowerShriek.R l E n)\n        (spEllTwistLine l E X.left n (d : ℤ)) ∧\n      (spEllTwistLine l E X.left n (d : ℤ)).IsFiniteLocallyFreeOfRank 1 ∧\n      (d = 0 → Nonempty (spEllTwistLine l E X.left n (d : ℤ) ≅\n        SheafOfModules.unit ((sheafCompose (ProEt.topology X.left)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n            (SpTowerShriek.B l E X.left n))))) ∧\n    SpChartAdmissibility.bounds l E X.left (P l E b o q f.left w d K)\n      (a - 2 * d) (z - 2 * d) (a - 2 * d) (z - 2 * d) ∧\n    SpChartAdmissibility.bounds l E X.left (SpTowerGamma.orderedLine l E b X.left w d)\n      (-2 * d) (-2 * d) (-2 * d) (-2 * d) ∧\n    SpChartAdmissibility.bounds l E X.left\n      ((SpTowerShriek.tensor l E b X.left).obj\n        (SpTowerGamma.orderedLine l E b X.left w d, B l E b o q f.left K))\n      (a - 2 * d) (z - 2 * d) (a - 2 * d) (z - 2 * d)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3e8dc",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T163626-L-734076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3e8dc",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T163626-L-734076",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules vs clone item (verbatim def move, unchanged theorem signature) and node JSONs vs statement owners; sandbox run_set rc 0, axioms as expected"
+ }
+}

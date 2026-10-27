@@ -1,0 +1,285 @@
+{
+ "id": "lem-pd-sheaf-scalar-extension-constraint-coherence",
+ "kind": "statement",
+ "title": "Scalar-extension tensor and unit constraints descend and are coherent",
+ "statement": "Let $C$ be a site small in a fixed ring and module universe [def-weil-pbc-sites-and-cohomology], let $A,S$ be sheaves of commutative rings, and let $\\alpha:A\\to S$ be a unital ring-sheaf map. For an $A$-module sheaf $H$ [def-weil-sheaf-of-modules-category], let $T(H)=(U\\mapsto S(U)\\otimes_{A(U)}H(U))^\\#$ be scalar extension using module sheafification [def-weil-presheaf-modules-sheafification], with maps induced by $1\\otimes h$, and let $q_H(h)$ denote the sheafification image of $1\\otimes h$. All tensors are sheafified balanced tensors [def-pur-sheaf-tensor-product], with the canonical associators and unitors [lem-pc-sheaf-modules-tensor-closed]. For each $H,K$ there is a unique $S$-linear sheaf map $D_{H,K}:T(H\\otimes_AK)\\to T(H)\\otimes_ST(K)$ satisfying\n$$D_{H,K}(q_{H\\otimes_AK}(h\\otimes k))=q_H(h)\\otimes q_K(k)$$\non every object of $C$. These maps form a natural family. The scalar formula $D_0:T(A)\\to S$, given on local generators by $s\\otimes a\\mapsto s\\alpha(a)$, is a well-defined sheaf isomorphism with inverse $s\\mapsto s\\otimes1$. Each $D_{H,K}$ is a sheaf isomorphism with formulas\n$$D_{H,K}(s\\otimes(h\\otimes k))=(s\\otimes h)\\otimes(1\\otimes k),\\quad D_{H,K}^{-1}((s\\otimes h)\\otimes(t\\otimes k))=st\\otimes(h\\otimes k).$$\nThe family $(D,D_0)$ satisfies all three oplax constraint equations, written with $\\circ$ applied from right to left:\n$$ (1\\otimes D_{K,H'})D_{H,K\\otimes H'}T(a_{H,K,H'})=a_{TH,TK,TH'}(D_{H,K}\\otimes1)D_{H\\otimes K,H'}, $$\n$$\\lambda_{TH}(D_0\\otimes1)D_{A,H}=T(\\lambda_H),\\qquad \\rho_{TH}(1\\otimes D_0)D_{H,A}=T(\\rho_H).$$\nHere $H,K,H'$ are arbitrary $A$-module sheaves. The inverse tensor and unit maps satisfy the corresponding lax constraint equations. The assertions include compatibility with restrictions and descent through module sheafification; no flatness, nonzero-ring or enough-points hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual sheafification adjunction and tensorObjIsoSheafification to test binary maps on local pure tensors. The induced lax monoidal forgetful functor gives their naturality, associativity and unit formulas. Transport the proved tensor_trilinear_universal pure-triple equality criterion along tensorIsoSite and tensoring its inner inverse with the identity, obtaining the canonical nested equality test. No global generation assertion for sheaf sections is used.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "lem-pd-sheaf-trilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  },
+  {
+   "text": "Identify changeOfRingsPresheaf with changeOfRingsPresheafOfUniverses by the identity on sections, checking restrictions with the two generator formulas. Sheafify to obtain extensionIso. Identify the localization tensor with the explicit site tensor using tensorObjIsoSheafification and siteTensorRightIso. Both identifications preserve the sheafification images of pure tensors.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  },
+  {
+   "text": "Transport scalarTensorBinaryIso along these identifications to define the tensor comparison. Its proved forward formula sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y); its inverse formula multiplies the two scalar factors. No choice of an unspecified tensor isomorphism is made. The binary generator equality test proves uniqueness and naturality.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  },
+  {
+   "text": "Compose extensionIso on the tensor unit with scalarExtensionUnitIso. Its forward generator formula is scalar multiplication. Its inverse formula follows by applying the inverse to that formula at a=1 and using the isomorphism identities.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  },
+  {
+   "text": "Test the oplax associativity composites on the image of (x tensor y) tensor z, using the nested equality test. The transported forward formula, scalar-extension naturality and actual associator formula send both sides to q(x) tensor (q(y) tensor q(z)).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  },
+  {
+   "text": "Test the two unit composites on the images of a tensor x and x tensor a. The forward comparison, multiplication unit map and actual unitors send both to alpha(a) times q(x). A-linearity of insertion identifies this with q(a times x).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  },
+  {
+   "text": "Derive the three lax equations from the three oplax equations by cancellation with the invertible forward constraints and the tensor and whiskering inverse identities.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), algebraic scalar-extension formula, associativity and sheafification; agent extraction of parent Steps 5–6 including both unit and inverse constraint diagrams."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pd-sheaf-trilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CY and 0GMW. H7 transports the proved binary scalar-extension and multiplication-unit isomorphisms from lem-sp-scalar-extension-binary-coherence to the canonical localization tensor using the proved siteTensorRightIso of lem-weil-pbc-independent-sheaf-tensor-colimits. Generator equality tests and the monoidal sheafification API prove uniqueness, naturality and all six coherence equations. The proved trilinear equality criterion supplies the nested equality test by transport along the same tensor presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified extension of scalars with canonical tensor insertion comparison and scalar multiplication unit satisfies associativity and both unit diagrams and its inverse is multiplication of the scalar factors",
+   "results": "{\"n_hits\": 8, \"top\": [\"PresheafOfModules.Sheafify.mul_smul\", \"PresheafOfModules.Sheafify.one_smul\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.Sheafify.map_smul\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.Sheafify.add_smul\", \"PresheafOfModules.Sheafify.smulCandidate\"], \"note\": \"\", \"digest\": \"4567ee54e8a87c32\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar extension, sheafification scalar laws and functor composition constraints do not state the sheaf tensor comparison with all three tensor/unit diagrams and their inverse constraints"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Functor.OplaxMonoidal",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar extension, sheafification scalar laws and functor composition constraints do not state the sheaf tensor comparison with all three tensor/unit diagrams and their inverse constraints"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]onoidal|[Oo]plax|[Aa]ssociat|[Uu]nitor",
+   "results": "{\"n_hits\": 7, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\"], \"note\": \"\", \"digest\": \"12077ae6e4a1a5dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar extension, sheafification scalar laws and functor composition constraints do not state the sheaf tensor comparison with all three tensor/unit diagrams and their inverse constraints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars for sheaves of modules has coherent tensor and unit comparison maps given by s tensor (m tensor n) mapping to (s tensor m) tensor (1 tensor n)",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.ExtendScalars.map'\", \"ModuleCat.extendScalars\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.ExtendScalars.map_tmul\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.ExtendScalars.smul_tmul\", \"ModuleCat.ExtendScalars.hom_ext\", \"TensorProduct.CompatibleSMul.unit\"], \"note\": \"\", \"digest\": \"eee216f8ebc94550\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar extension, sheafification scalar laws and functor composition constraints do not state the sheaf tensor comparison with all three tensor/unit diagrams and their inverse constraints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified extension of scalars is strong monoidal with tensor comparison inverse multiplying scalar factors and coherent associativity and unit constraints",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"PresheafOfModules.Sheafify.mul_smul\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategoryLightCondMod\"], \"note\": \"\", \"digest\": \"1ec107bd4187430a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules, fixed-coefficient sheaves or presheaf monoidal structures, not extension along arbitrary sheaves of rings with these generator formulas and diagrams"
+  },
+  {
+   "tool": "grep",
+   "query": "monoidal|oplax|tensor.*[Cc]ompar|[Cc]ompar.*tensor",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules, fixed-coefficient sheaves or presheaf monoidal structures, not extension along arbitrary sheaves of rings with these generator formulas and diagrams"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Functor.Monoidal",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules, fixed-coefficient sheaves or presheaf monoidal structures, not extension along arbitrary sheaves of rings with these generator formulas and diagrams"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafified extension of scalars tensor product comparison associativity left right unit coherence",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Sheaf.sheafifyCocone_ι_app_val_assoc\", \"PresheafOfModules.monoidalCategoryStruct\", \"CategoryTheory.sheafifyLift_id_toSheafify_assoc\", \"PresheafOfModules.Sheafify.mul_smul\", \"PresheafOfModules.monoidalCategory\", \"CategoryTheory.sheafComposeIso_hom_fac_assoc\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"PresheafOfModules.Sheafify.smul.congr_simp\"], \"note\": \"\", \"digest\": \"2d40f18806b94a01\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules, fixed-coefficient sheaves or presheaf monoidal structures, not extension along arbitrary sheaves of rings with these generator formulas and diagrams"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|instMonoidalFunctorOppositePresheafToSheaf|sheafComposeIso|monoidalCategory",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean\", \"Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean\", \"Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean\"], \"note\": \"\", \"digest\": \"903c3504481b15cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules, fixed-coefficient sheaves or presheaf monoidal structures, not extension along arbitrary sheaves of rings with these generator formulas and diagrams"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of commutative rings the functor S tensor A modules preserves tensor products and unit via scalar multiplication with coherent constraints",
+   "results": "{\"n_hits\": 8, \"top\": [\"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.monoidalCategoryStruct\", \"PresheafOfModules.monoidalCategory\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"PresheafOfModules.Monoidal.tensorObjMap\"], \"note\": \"\", \"digest\": \"fc29cc116e2005d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary modules, fixed-coefficient sheaves or presheaf monoidal structures, not extension along arbitrary sheaves of rings with these generator formulas and diagrams"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-ordinary-oplax-normalization",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded target nt-target-poincare-isiso, Step 2: canonical open projection and module-object comparison; refinement of lem-pd-module-ringed-topos-derived-comparison (Ordinary module pullback oplax mate on balanced generators). No imported ancestor exists. Re-split of lem-pd-section-ordinary-oplax-normalization: proof Steps 5–6 (balanced inverse and associativity/unit constraints).",
+   "via": [
+    "lem-pd-section-ordinary-oplax-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "worker": "stage1",
+  "group": "Q15",
+  "summary": "Constructed tensor comparison and inverse from existing bilinear and sheafification universal properties; checked restrictions, both balances, naturality, associativity, both units and inverse diagrams. Statement unchanged; no new nodes needed.",
+  "blueprint": "Seeded target nt-target-poincare-isiso, Step 2: canonical open projection and module-object comparison; refinement of lem-pd-module-ringed-topos-derived-comparison (Ordinary module pullback oplax mate on balanced generators). No imported ancestor exists. Re-split of lem-pd-section-ordinary-oplax-normalization: proof Steps 5–6 (balanced inverse and associativity/unit constraints).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property of sheaf tensors, used to construct comparisons and test equality; the unit has no substitute for this universal property."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic unique extension of bilinear maps from presheaves to their module sheafifications, used for inverse construction and equality; the unit has no replacement."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic canonical associator and unitors for sheaf modules, needed to identify the actual constraint diagrams; the unit does not construct these."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-5a65ec547",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-5a65ec547 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement, and Stacks sites-modules section-tensor-product 03EK (lines 3551-3640: the scalar-extension and associativity displays, and lemma-sheafification-tensor whose proof is 'Omitted' with a bilinear hint). Live and side-live clones still have the item unsplit with byte-equal statement and stmt_deps, so the statement is unchanged and nobody superseded it. No re-split note, no new nodes, no SGA cited. Checked each step: D's balance (s alpha(a) b(x) = s b(ax)) and descent through module sheafification; both A-balances of B's sectionwise rule (uses commutativity of S); bilinear-extension lemma applied with O=S; BD=1 and DB=1 through the equality tests; D0 and its inverse. Associativity: both sides are maps T((H⊗K)⊗H') -> TH⊗(TK⊗TH') and agree on q((h⊗k)⊗l). Both unit equations reduce to alpha(a)q_H(h) = q_H(ah). The lax equations follow by inverting the oplax ones and are the standard lax axioms. Small cases tested: A=S with alpha the identity, Z->Z/n on a point, the zero ring, and a site with an empty cover. No duplicate found: lem-pd-ringed-tensor-adjunction-mate gives inverses but no coherence diagrams; lem-sfb-internal-extension-monoidal is for internal monoid objects, not a one-line specialization (advisory overlap). Accepted the three generic sk-thm-picard-semicon tool_uses. FIX (E5/C3): Step 1's 'iterate these tests for nested tensors, fixing one section at a time' implied a localization that no cited node supplies. Replaced it with the exact nested-source test Step 5 needs: bilinear sheafification uniqueness on (H⊗_{p,A}K)×H', where H⊗K is the module sheafification of the presheaf tensor; added def-pur-sheaf-tensor-product to Step 1 uses and to proof_deps. Corrected file: fixes/dag/nodes/sec-poincare-duality/lem-pd-sheaf-scalar-extension-constraint-coherence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionConstraintCoherence",
+  "declaration": "SheafOfModules.scalarExtension_constraint_coherence",
+  "declarations": [
+   "SheafOfModules.ScalarExtensionConstraintModules",
+   "SheafOfModules.scalarExtensionConstraintPureTensor",
+   "SheafOfModules.scalarExtensionConstraintTmul",
+   "SheafOfModules.ScalarExtensionConstraintData",
+   "SheafOfModules.scalarExtension_constraint_coherence"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarExtensionConstraintCoherence.lean",
+  "statement": "theorem scalarExtension_constraint_coherence {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C} [EssentiallySmall.{w} C] [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})] (A S : Sheaf J CommRingCat.{w}) (α : A ⟶ S) : Nonempty (ScalarExtensionConstraintData.{uC, vC, w} A S α)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of 923ff45747f7: independent site object and Hom universes and coefficient/module universe w, with EssentiallySmall.{w} C; item helpers replace the unused line-evaluation theorem dependency. The mathematical statement and all coherence clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c2c12d62",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after the 923ff457 RETURN; both faults repaired. H2: line-evaluation theorem stmt_dep and its import dropped; node differs from live only in lean, stmt_deps = the 5 live ones; ScalarExtensionConstraintModules (abbrev for ringedSiteModules) and scalarExtensionConstraintPureTensor (sheafification unit, then tensorObjIsoSheafification.inv) now live in the item module with real bodies and source/blueprint docstrings. H3/H9: C : Type uC, Category.{vC}, rings/modules in w with EssentiallySmall.{w} C and HasSheafCompose forget₂, the same interface as cochainModulesMonoidal/changeOfRings; universe order of ringedSiteModules.{w,w,vC,uC} and changeOfRings.{vC,uC,w} checked; worker type-checked the pro-étale case (t+1,t,t+1). All clauses match the node: insertion, uniqueness, naturality, unit hom/inv, tensor hom/inv, 3 oplax and 3 lax equations with canonical associators/unitors and the order reversal checked. Not hollow (isos pinned by unique and unit formulas); only the theorem is sorry; lean.statement verbatim; no name collisions; edge cases id, Z->Z/n, zero ring/modules, empty site, pro-étale universes. Advisory: proof-only imports unused by the statement; tensorObjIsoSheafification from the existing Monoidal.lean. No FIX, no compile (worker: clean, 42.4 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T190016-L-3836449",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

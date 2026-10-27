@@ -30,72 +30,44 @@
    }
   },
   {
-   "text": "By [def-weil-finite-type-morphism], choose a member $U=\\operatorname{Spec}A$ of the affine finite-type cover of $X\\to\\operatorname{Spec}K$ containing $x$. Then $A$ is a finitely generated $K$-algebra and is a nonzero domain by [def-pc-integral-scheme]. The singleton $\\{x\\}$ is closed in $U$ because it is closed in $X$; write $\\mathfrak m$ for its maximal ideal. The one-member affine cover shows that $U$ is of finite type over $K$. Hence [lem-kun-closed-point-field](a), applied to $U$, says that $\\kappa_U(x)/K$ is finite. The stalks, maximal ideals and residue fields on $U$ and on $X$ at $x$ agree: neighbourhoods contained in $U$ are cofinal among neighbourhoods of $x$, so the same germ equivalence relation computes both stalks [def-weil-pbc-module-stalk, def-weil-residue-field]. Thus $\\kappa_X(x)/K$ is finite.",
+   "text": "Apply [lem-trf-closed-point-affine-dimension-data] to this closed point $x$. It supplies $U=\\operatorname{Spec}A$, its maximal ideal $\\mathfrak m$ representing $x$, the structural $K$-fraction-field identification $L=\\operatorname{Frac}(A)$, and $\\dim A=\\dim A_{\\mathfrak m}=r\\in\\mathbf Z_{\\geq0}$. It also supplies the finite extension $\\kappa_X(x)/K$.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "def-pc-integral-scheme",
-    "lem-kun-closed-point-field",
-    "def-weil-pbc-module-stalk",
-    "def-weil-residue-field"
+    "lem-trf-closed-point-affine-dimension-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02JX, equality proof, finite residue extension; Tag 0478, lemma-locally-finite-type-Jacobson (1), and the finite-extension clause of Morphisms lemma-jacobson-finite-type-points."
+    "place": "Tag 02JX, lemma-alteration-dimension, equality proof: the closed point of the generic fibre has finite residue extension and local dimension r; affine-chart expansion using Algebra Tag 00P0, lemma-dimension-prime-polynomial-ring, and Morphisms Tag 01RV, lemma-integral-scheme-rational-functions."
    }
   },
   {
-   "text": "By [lem-sc-integral-function-field-affine-fraction], the generic point $\\eta$ belongs to $U$ and the germ map $A\\to L$ makes $L$ a fraction field of $A$. This identification respects $K$: a scalar is its constant section, whose germ is precisely the structural scalar map to $L$. Apply [lem-weil-pbc-finite-type-domain-dimension-trdeg] to the finite type $K$-domain $A$ and this fraction field. It gives that $r$ is a finite nonnegative integer and that $\\dim A=\\dim A_{\\mathfrak m}=r$. Here $A_{\\mathfrak m}$ is the fraction localization defined in [def-weil-pbc-localization-at-prime].",
+   "text": "Apply [lem-trf-full-dimension-local-chain-contraction] to this domain $A$, maximal ideal $\\mathfrak m$ and integer $r$. Choose the chain in $A_{\\mathfrak m}$ supplied there and contract it to obtain $(0)=\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r=\\mathfrak m$ in $A$.",
    "uses": [
-    "lem-sc-integral-function-field-affine-fraction",
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "def-weil-pbc-localization-at-prime"
+    "lem-trf-full-dimension-local-chain-contraction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00P0, lemma-dimension-prime-polynomial-ring, both conclusions; this is the field-base dimension computation in Tag 02JX."
+    "place": "Tag 00E3, lemma-spec-localization: prime extension and contraction; finite-supremum attainment and endpoint maximality expand the maximal-local-chain argument of Morphisms Tag 02JX, lemma-alteration-dimension, equality proof."
    }
   },
   {
-   "text": "By [def-weil-pbc-krull-dimension-ring], the equality $\\dim A_{\\mathfrak m}=r$ supplies a strict prime chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_r$ in $A_{\\mathfrak m}$. Indeed a set of nonnegative integers with finite supremum $r$ contains $r$: for $r>0$ otherwise all its members are at most $r-1$; for $r=0$ the maximal ideal $\\mathfrak mA_{\\mathfrak m}$ supplies a chain of length zero [def-weil-pbc-localization-at-prime]. Apply part (1) of [lem-weil-pbc-localization-prime-residue-field-iso] with $W=A\\setminus\\mathfrak m$ and $A'=A_{\\mathfrak m}$. The fraction description in [def-weil-pbc-localization-at-prime] verifies its conditions (a)--(c): each $w/1$ has inverse $1/w$; every element is $a/w$; and $a/1=0$ means $ua=0$ for some $u\\in W$. Contracting the primes gives a strict chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r\\subseteq\\mathfrak m$ in $A$: contraction preserves inclusion, and equality of two contractions would imply equality of the primes by the cited inverse extension map.",
+   "text": "In $\\operatorname{Spec}A$ [def-weil-affine-spectrum], a closed set $V(I)$ contains $\\mathfrak p$ exactly when $I\\subseteq\\mathfrak p$, so $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$. Thus the strict prime inclusions of step 3 give distinct successive specializations. The generic point $\\eta\\in U$ corresponds to $(0)$: its closure in $U$ is $U$ by [def-sc-generic-point], so its prime lies in every prime, including $(0)$. The other endpoint is $x$. The open inclusion $U\\subseteq X$ preserves distinctness and specializations, since closure in a subspace is the intersection with ambient closure. Index these points as $\\xi_{-r},\\ldots,\\xi_0$. For $r=0$ the sole point is $\\eta=x$. Together with the residue extension in step 2, this proves the statement.",
    "uses": [
-    "def-weil-pbc-krull-dimension-ring",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00E3, lemma-spec-localization, with $W=A\\setminus\\mathfrak m$; definition of ring dimension. Expansion of the maximal-chain sentence of Tag 02JX."
-   }
-  },
-  {
-   "text": "Since $A$ is a domain, $(0)$ is prime. If $\\mathfrak p_0\\ne(0)$, prepend $(0)$ to the chain of step 4; if $\\mathfrak p_r\\ne\\mathfrak m$, append $\\mathfrak m$. Either would give a prime chain of length $r+1$ in $A$, contrary to $\\dim A=r$ [def-weil-pbc-krull-dimension-ring]. Thus $\\mathfrak p_0=(0)$ and $\\mathfrak p_r=\\mathfrak m$. In $\\operatorname{Spec}A$, the closure of the point $\\mathfrak p$ is $V(\\mathfrak p)$, so strict inclusions of these prime ideals give distinct successive specializations. The point $(0)$ is $\\eta$: the prime corresponding to the generic point lies in every prime (its closure is all of $U$), hence lies in $(0)$. The other endpoint is $x$. The inclusion of the open subspace $U$ into $X$ preserves these specializations and distinctness. Numbering its $r+1$ points as $\\xi_{-r},\\ldots,\\xi_0$ proves the claimed chain. This also covers $r=0$, when both endpoints equal $\\eta=x$. The residue extension is the finite extension proved in step 2.",
-   "uses": [
-    "def-weil-pbc-krull-dimension-ring",
     "def-weil-affine-spectrum",
     "def-sc-generic-point"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02JX, lemma-alteration-dimension, equality proof, maximal-chain sentence; elementary endpoint argument using Tag 00P0 and the Zariski topology."
+    "place": "Tag 02JX, lemma-alteration-dimension, equality proof: maximal local chain; elementary Zariski-topology conversion and reindexing."
    }
   }
  ],
  "proof_deps": [
   "lem-sc-lft-over-field-jacobson-space",
-  "def-weil-finite-type-morphism",
-  "def-pc-integral-scheme",
-  "lem-kun-closed-point-field",
-  "def-weil-pbc-module-stalk",
-  "def-weil-residue-field",
-  "lem-sc-integral-function-field-affine-fraction",
-  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-trf-closed-point-affine-dimension-data",
+  "lem-trf-full-dimension-local-chain-contraction",
   "def-weil-affine-spectrum",
   "def-sc-generic-point"
  ],
@@ -205,25 +177,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-generic-fibre-closed-chain",
   "worker": "stage1",
-  "summary": "Preserved the statement and made its implicit generic-point, stalk and residue-field dependencies explicit. Split the Stacks 02JX field-fibre argument into the Jacobson choice, a finite-type affine chart and finite residue extension, the existing 00P0 dimension theorem, localization prime correspondence, and an elementary endpoint/maximal-chain argument. No new nodes and no Lean attachment.",
-  "blueprint": "Realizes the recorded ancestor lem-trf-local-term-locality, proof (1)--(2), normal-cone specialization branch: the generic-fibre closed point and dimension chain used by lem-trf-closed-dominant-dimension, itself the dimension input for alterations. The item is auxiliary commutative algebra/topology, not a replacement of any trace or purity step.",
-  "tool_uses": [
-   {
-    "node": "lem-kun-closed-point-field",
-    "why": "Step 2 uses only the closed-point finite-residue-extension clause on a finite-type affine chart. This is the generic Nullstellensatz input explicitly used by 02JX; the trace-formula unit supplies no such field lemma."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "why": "Step 3 uses the finite-type domain dimension/transcendence-degree equality and the equal dimension at every maximal ideal (00P0), precisely the field-base dimension input of 02JX. The sibling local-dimension node states only an inequality and cannot supply this equality."
-   },
-   {
-    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
-    "why": "Step 4 uses only its localization prime bijection, the general algebraic input converting local prime chains to affine specializations; no trace-formula-unit node states that bijection."
-   }
-  ]
+  "summary": "Repair of the mandatory re-split: preserved the statement and all maintainer fields. Two comparable statement-only unsplit nodes separate affine residue/function-field/dimension data from local prime-chain attainment, contraction and forced endpoints. The item chooses the closed point and assembles the chain in four steps. The report preserves the entire prior argument verbatim and assigns every part to the two new tasks or the assembly.",
+  "blueprint": "The same normal-cone specialization branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-closed-dominant-dimension: field-base closed point and maximal dimension chain in Stacks 02JX. No change of unit or purity route."
  },
  "tool_uses": [
   "lem-kun-closed-point-field",
@@ -231,12 +189,12 @@
   "lem-weil-pbc-localization-prime-residue-field-iso"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q22-122b67a96",
-  "group": "Q22",
+  "reviewer": "NT-cc-NA-a44b6c647",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-122b67a96 (reviewer sub-agent of L); spot-checked: I read all of it. The item and every cited node statement were checked against Stacks morphisms.tex 02JX (lemma-alteration-dimension, generic-fibre paragraph of the equality proof), algebra.tex 00P0 (both clauses), algebra.tex 00E3 and varieties.tex 0478(2); all tags were checked in tags/tags. There are no new nodes. The only statement change adds def-weil-residue-field to stmt_deps, and the mathematical content is unchanged and true. The statement still requires the chain to start at the generic point and its points to be distinct, which is stronger than the source sentence, and it gives the parent lem-trf-closed-dominant-dimension exactly what that node uses. Small cases tested: Spec E with E/K finite (r=0), A^r, a closed point of Q[t] with residue field Q(sqrt2), and non-separated or non-quasi-compact integral schemes; in the last case only one affine chart is used. Step checks: step 1 takes a closed point from the Jacobson leaf with Z=X. Step 2 applies lem-kun-closed-point-field(a) on a finite-type affine chart U, not on X, which is only locally of finite type, and residue fields agree on the open U. Step 3 uses the fraction field from 01RV plus 00P0, giving dim A = dim A_m = r, which is finite. Step 4 contracts a chain of length r from A_m using 00E3(1), with conditions (a)-(c) checked. Step 5 is correctly marked elementary: the endpoints are forced to be (0) and m because the chain cannot be lengthened, and the specialization direction is right. proof_deps equals the union of the step uses. A DFS over 145 dependency nodes finds no cycle back to the item. No SGA source is cited. I accept the three declared off-unit tool uses (lem-kun-closed-point-field, lem-weil-pbc-finite-type-domain-dimension-trdeg, lem-weil-pbc-localization-prime-residue-field-iso): they are generic algebra that 02JX itself invokes. The duplicate search found only ingredient nodes in pbc and sc, so same_as=[] is correct. The recorded Mathlib searches report no match and my own grep agrees. No fixes were needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a44b6c647 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 done correctly. I checked the base against clones/live and side-live (old 5 steps: 272/821/587/1030/975 chars; the report preserves them verbatim). Old step 1 is now item step 1 (Jacobson leaf with Z=X). Old steps 2-3 became lem-trf-closed-point-affine-dimension-data: affine chart Spec A ∋ x, nonzero f.g. K-domain, m represents x, η∈U, K-compatible Frac A = L, O_{U,x}≅O_{X,x}, κ_X(x)/K finite, dim A = dim A_m = r. All parts are stated, and it is provable from lem-kun-closed-point-field(a), lem-sc-integral-function-field-affine-fraction and 00P0 (algebra.tex lemma-dimension-prime-polynomial-ring, read). Old step 4 plus the endpoint argument of step 5 became lem-trf-full-dimension-local-chain-contraction: in a domain A with dim A = dim A_m = r, a chain of length r exists in A_m, and every such chain contracts strictly to (0)=p_0 ⊊ … ⊊ p_r=m. This is true by 00E3 and the fact that the chain cannot be lengthened; tested on a field, a DVR and k[x,y]_(x,y), and on k[x]_(x)[y] with m=(xy-1), where the hypothesis correctly fails. The Spec-topology conversion stays in the item as elementary step 4. The item proof is 1659 chars and proof_deps equals the union of uses. The two new nodes are comparable (~1400 chars of old argument each), neither restates the item, and nothing was shortened. B1-B9 hold: statement-only, unsplit, self-contained, tags checked in tags/tags (02JX, 00P0, 00E3, 01RV, 0478), blueprint.from = lem-trf-local-term-locality via [item, closed-dominant-dimension], searches recorded (LeanSearch honestly 'unavailable' for node 1, the other kinds present). Duplicate search found only supremum or ingredient nodes (localization-dimension-chains-below-prime, finite-type-domain-dimension-local-ring, scheme-stalk-dimension-generalization-chains, closed-point-dimension-local-ring); none states either node. No SGA, no cycle. Minor: the item's merge-owned tool_uses (3 generic algebra nodes) are now used only by the future proofs of the new nodes; the report lists a citations.json that is not in the commit. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -261,5 +219,16 @@
   "note": "Maintainer review fix: the residue-field K-algebra is the project's existing AlgebraicGeometry.Scheme.Hom.residueFieldAlgebraMap (WeilConjectures.ZetaSeries), as in lem-kun-closed-point-field; the duplicate helper residueFieldBaseRingHom was removed. functionFieldBaseRingHom is the canonical composite ΓSpecIso.inv ≫ appTop ≫ germToFunctionField ⊤ (the same composite as the curve-local abbrev Scheme.functionFieldRingHom in WeilConjectures.AlgebraicGeometry.Curve.SerreDuality, which is not imported here because that module is a heavy curve-duality module).",
   "fixed_by": "NT-stage2-cc-307575ce3"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

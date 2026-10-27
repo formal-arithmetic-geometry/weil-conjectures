@@ -1,0 +1,144 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-reflector-core",
+   "place": "The corresponding directional implication in the fixed-object criterion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 099F; the fixed-object criterion split into its two implications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally derived complete object has invertible augmented extended Cech completion unit",
+   "results": "No exact general ringed-site theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyDerivedRingedIdealComplete IsIso ringedCechCompletionUnit",
+   "results": "No exact match.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "complete.*unit|unit.*complete",
+   "results": "No reusable theorem outside the assigned criterion and its parent.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "id": "lem-weil-pbc-extended-cech-complete-implies-unit-isIso",
+ "kind": "statement",
+ "title": "Complete objects have invertible augmented Cech units",
+ "statement": "For a small ringed site and finite type ideal with a local extended Cech description, local derived completeness of a single object implies that the actual augmented Cech unit is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-local-extended-cech-description",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "For a single global section s, use the canonical degreewise split stupid-truncation sequence of L = [O → O[1/s]] at degrees 0 and 1. Its kernel truncation is concentrated in degree one and is isomorphic to O[1/s][-1]. The cokernel truncation maps isomorphically to O[0], and its composite with the truncation projection is the specified augmentation. Apply contravariant derived internal Hom into E to the distinguished triangle of this short exact sequence. Vanishing of RHom(O[1/s],E), and the source-shift comparison, annihilate the third object of the opposite triangle, so precomposition by the augmentation is invertible.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-contravariant-exact",
+    "lem-pur-derived-internal-hom-shift-left"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the ordered tensor definition of the finite extended Cech complex. Its factors, each partial Cech complex, and O[0] are K-flat, as proved by the auxiliary constructions for Cech unit idempotence. For two augmented K-flat factors P and L, the natural currying isomorphism identifies precomposition by a tensor b with the composite of precomposition by a into RHom(O,E) and RHom(P,-) applied to precomposition by b into E. Evaluation at one identifies RHom(O,E) with E, so both maps are invertible from the induction hypotheses. The tensor augmentation followed by the ring unitor is the specified Cech augmentation. The empty tensor has identity augmentation.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech",
+    "lem-weil-pbc-kflat-rhom-currying",
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+    "def-weil-pbc-ringed-completion-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite generating slices cover the site. Each member of its specified generating list lies in the image of I → O by evaluation of the corresponding generating section at the terminal slice object. Local derived completeness gives vanishing for each of these individual localization sheaves. Apply the finite-list result to the restriction of E. The augmented local Cech description and naturality of the derived internal-Hom restriction comparison transport invertibility to the restriction of precomposition by the actual augmentation ε.",
+   "uses": [
+    "lem-weil-pbc-finite-ideal-generating-cover",
+    "def-weil-pbc-ringed-ideal-generating-index",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete",
+    "def-weil-pbc-local-extended-cech-description",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact slice restriction commutes with every derived homology functor. A morphism whose restrictions to a covering family are invertible therefore induces isomorphisms on all homology sheaves, since sheaf isomorphisms descend along a covering family. Hence global precomposition by ε is invertible. The specified completion unit is its composite with the canonical invertible evaluation-at-one map E → RHom(O,E), and is consequently invertible.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-ringed-completion-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-internal-hom-contravariant-exact",
+  "lem-pur-derived-internal-hom-shift-left",
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-weil-pbc-kflat-rhom-currying",
+  "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+  "def-weil-pbc-ringed-completion-unit",
+  "lem-weil-pbc-finite-ideal-generating-cover",
+  "def-weil-pbc-ringed-ideal-generating-index",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-local-extended-cech-description",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099B, lemma-derived-completion, final paragraph; tensor-factor induction using the actual ordered tensor definition, and Tag 099F for descent along finite generating slices."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompleteUnitCriterion",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExtendedCechCompleteImpliesUnitIso",
+  "file": "lean/Sheaf/Paper/ExtendedCechCompleteImpliesUnitIso.lean",
+  "declaration": "CategoryTheory.ringedExtendedCech_complete_implies_unit_isIso",
+  "statement": "theorem ringedExtendedCech_complete_implies_unit_isIso\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (O : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]\n    [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))]\n    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    [Mono ι] [I.IsFiniteType]\n    (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O)\n    (hK : HasLocalExtendedCechDescription O I ι K ε)\n    (E : ringedSiteDerived O) :\n    IsLocallyDerivedRingedIdealComplete O I ι E →\n      IsIso (ringedCechCompletionUnit O K ε E)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T001427-L-4192313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T024142-L-642112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

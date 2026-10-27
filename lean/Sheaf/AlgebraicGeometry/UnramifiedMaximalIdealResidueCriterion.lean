@@ -28,6 +28,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- A locally finite type morphism is unramified on a neighbourhood of a point exactly when
 its actual stalk map extends the target maximal ideal to the source maximal ideal and its
 induced residue-field extension is finite separable algebraic.
@@ -54,6 +55,57 @@ theorem unramified_neighbourhood_iff_maximalIdeal_residue
         (f.residueFieldMap x).hom.Finite ∧
         @Algebra.IsSeparable (S.residueField (f x)) (X.residueField x) _ _
           (f.residueFieldMap x).hom.toAlgebra := by
-  sorry
+  have hn : (∃ V : X.Opens, x ∈ V ∧ IsUnramified (V.ι ≫ f)) ↔
+      (f.stalkMap x).hom.FormallyUnramified := by
+    constructor
+    · rintro ⟨V, hx, hV⟩
+      have := hV.2
+      have : FormallyUnramified (V.ι ≫ f) := inferInstance
+      let y : V := ⟨x, hx⟩
+      have h := FormallyUnramified.stalkMap (V.ι ≫ f) y
+      rw [Scheme.Hom.stalkMap_comp, CommRingCat.hom_comp] at h
+      have h' := h.comp (RingHom.FormallyUnramified.of_surjective
+        (ConcreteCategory.bijective_of_isIso (V.stalkIso y).hom).2)
+      change ((f.stalkMap x ≫ V.ι.stalkMap y) ≫
+        (V.stalkIso y).hom).hom.FormallyUnramified at h'
+      rw [Category.assoc, ← Scheme.Opens.stalkIso_inv,
+        Iso.inv_hom_id, Category.comp_id] at h'
+      exact h'
+    · intro h
+      obtain ⟨V, hx, hV⟩ := FormallyUnramified.exists_neighbourhood_of_stalkMap f x h
+      have := hV
+      exact ⟨V, hx, inferInstance, inferInstance⟩
+  rw [hn]
+  algebraize [(f.stalkMap x).hom]
+  have : IsLocalHom (algebraMap (S.presheaf.stalk (f x)) (X.presheaf.stalk x)) :=
+    inferInstanceAs <| IsLocalHom (f.stalkMap x).hom
+  have : Algebra.EssFiniteType (S.presheaf.stalk (f x)) (X.presheaf.stalk x) :=
+    LocallyOfFiniteType.stalkMap f x
+  have e : (f.residueFieldMap x).hom.toAlgebra =
+      (inferInstance : Algebra (IsLocalRing.ResidueField (S.presheaf.stalk (f x)))
+        (IsLocalRing.ResidueField (X.presheaf.stalk x))) := by
+    refine Algebra.algebra_ext _ _ fun r ↦ ?_
+    obtain ⟨r, rfl⟩ := IsLocalRing.residue_surjective r
+    rfl
+  change Algebra.FormallyUnramified (S.presheaf.stalk (f x)) (X.presheaf.stalk x) ↔ _
+  constructor
+  · intro h
+    have := h
+    refine ⟨Algebra.FormallyUnramified.map_maximalIdeal, ?_, ?_⟩
+    · change @Module.Finite _ _ _ _ (f.residueFieldMap x).hom.toAlgebra.toModule
+      rw [e]
+      exact inferInstanceAs <| Module.Finite
+        (IsLocalRing.ResidueField (S.presheaf.stalk (f x)))
+        (IsLocalRing.ResidueField (X.presheaf.stalk x))
+    · rw [e]
+      exact inferInstanceAs <| Algebra.IsSeparable
+        (IsLocalRing.ResidueField (S.presheaf.stalk (f x)))
+        (IsLocalRing.ResidueField (X.presheaf.stalk x))
+  · rintro ⟨hm, _, hs⟩
+    rw [e] at hs
+    have : Algebra.IsSeparable
+        (IsLocalRing.ResidueField (S.presheaf.stalk (f x)))
+        (IsLocalRing.ResidueField (X.presheaf.stalk x)) := hs
+    exact Algebra.FormallyUnramified.of_map_maximalIdeal hm
 
 end AlgebraicGeometry

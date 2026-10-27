@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-adic-immersion-residue-comparison-etale",
+ "kind": "statement",
+ "title": "Etale-origin residue comparison",
+ "statement": "The second conjunct of lem-sfb-adic-immersion-residue-comparison: for every etale coefficient complex C, derived sfbFixedResiduePull applied to comparisonUpperStar(C) is isomorphic to adicResidueComparison applied to sfbImmersionResidue(C).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-adic-immersion-completed-model",
+  "lem-sfb-adic-immersion-residue-transport",
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-sfb-adic-immersion-residue-comparison-core"
+ ],
+ "proof": [
+  {
+   "text": "Define the canonical map from the constant etale-model ring sheaf to the continuous direct image of the constant pro-etale-model ring sheaf by the sheafification adjunction. Its composite with each constant section is the corresponding target constant section. The constantCommuteCompose identity identifies the CommRingCat and RingCat units. Consequently normalized constant-scalar restriction commutes with continuous module direct image: the sectionwise identity maps are linear, natural and invertible.",
+   "uses": [
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constant inverse-image scalar normalization to the supplied adicResidueComparisonData. Its coefficient map is the transpose of the preceding canonical direct-image map. The proved supplied_adjunction and siteContinuousRingedTopos helpers in the ringed-pullback-presentation module therefore give an adjunction for this actual ConstantCompletion.pull, without selecting a different algebraic lift. Uniqueness of left adjoints identifies it, after normalized constant-scalar restriction, with fixed-coefficient comparison inverse image on the small sites. A second uniqueness comparison identifies the AsSmall model-coordinate pullback with the original etale/pro-etale comparison pullback.",
+   "uses": [
+    "lem-sf-constant-inverse-image-scalar-normalization",
+    "lem-pur-ringed-pullback-presentation-on-sites",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-sfb-adic-immersion-residue-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the existing comparisonUpperStarUpperStarIso by the model and scalar equivalences, then compose with the ordinary comparison just constructed. This gives an ordinary natural isomorphism from comparisonUpperStar followed by sfbFixedResiduePull to sfbImmersionResidueFunctor followed by ConstantCompletion.pull. The latter pull is left exact by the ordinary comparison and right exact by its adjunction, so its termwise functor preserves quasi-isomorphisms. Use the universal property retained by ConstantCompletion.derivedPull to make its comparison invertible (Functor.isIso_of_isLeftDerivedFunctor_of_inverts). At the displayed complex compose mapDerivedCategoryFactors, localization of the termwise ordinary isomorphism, and the inverse derived-pull comparison.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sfb-adic-immersion-residue-transport",
+    "def-sfb-adic-immersion-residue-comparison-core",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-sf-constant-inverse-image-scalar-normalization",
+  "lem-pur-ringed-pullback-presentation-on-sites",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-immersion-residue-transport",
+  "lem-weil-pbc-comparison-pullback",
+  "def-sfb-adic-immersion-residue-comparison-core"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.5.8; Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; finite-projection and comparison-pullback squares"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Module inverse image and adjoint-push-pull-modules; the etale/pro-etale comparison square from the original source plan",
+  "note": "S1, 2026-10-26: complete Lean proof from existing declarations. Use the supplied ringed-pullback adjunction and scalar normalization, identify left adjoints through direct images, and apply the universal derived comparison after proving exactness. No new split statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived residue comparison under an immersion",
+   "results": "No exact theorem; project transport APIs only.",
+   "date": "2026-10-26",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty derived category isomorphism functor pullback residue",
+   "results": "No exact theorem for the specified functors.",
+   "date": "2026-10-26",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "sfbImmersion_residueComparison|adicResidueComparison",
+   "results": "Only this planned statement; no existing proof.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionResidueComparison",
+  "date": "2026-10-26",
+  "group": "X9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-immersion-residue-comparison",
+   "place": "The corresponding conjunct, split strictly below the parent statement"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionResidueComparisonEtale",
+  "file": "lean/Sheaf/Paper/AdicImmersionResidueComparisonEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersion_residueComparison_etale",
+  "statement": "theorem sfbImmersion_residueComparison_etale {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) : letI := HasDerivedCategory.standard (ConstantCompletion.Mod (ConstantCompletion.constant (proEtaleModelTopology S) (A ⧸ I ^ (0 + 1)))) ∀ C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ, Nonempty ((Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2} (SfbResidueComparisonCore.sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj (DerivedCategory.Q.obj (((ProEtale.comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) X).mapHomologicalComplex (.up ℤ)).obj C)) ≅ (adicResidueComparison.{u, 0} S (A ⧸ I ^ (0 + 1))).obj (sfbImmersionResidue i I C))",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-18f57",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261026T071516-L-3943000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T092534-L-3440928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

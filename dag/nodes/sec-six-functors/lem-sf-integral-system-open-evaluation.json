@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-integral-system-open-evaluation",
+ "kind": "statement",
+ "title": "Invertibility of the prescribed open evaluation mate",
+ "statement": "For a prime l, a finite extension E of Q_l, an open immersion j:U→X, any exact ordinary Open a of [def-strict-coefficient-system-operation-data], and n≥0, the inverse mate of the fixed pullbackTensorDerivedEvaluation.hom under a.adj and finiteOpenAdj is an isomorphism of functors from the full derived system category of U to the finite derived category of X. The comparison is the specified mate, including the empty open and arbitrary unbounded complexes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Strict-system realization: the construction argument recorded in lem-sf-integral-system-operation-models; Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI, 09AE, 0E8I and 0941."
+ },
+ "stmt_deps": [
+  "def-strict-coefficient-system-operation-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply ordinaryOpenFiniteEvaluation to the supplied ordinary open adjunction. It gives an invertible evaluation comparison and its counit equation in the specified level-pullback coordinates. Transport the finite adjunction on the right along pullbackTensorLevelIntrinsic. Its inverse and forward components cancel in the counit equation. The adjunction Hom equivalence and mateEquiv_counit identify the inverse of this comparison with the inverse mate of the ordinary composite of pullbackTensorSequenceInverseEvaluation inverse and pullbackTensorLevelIntrinsic. Finally use left-adjoint uniqueness to replace the finite left adjoint by sfIntrinsicExtensionByZero without changing invertibility.",
+   "uses": [
+    "lem-sf-ordinary-open-finite-evaluation",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the ordinary composite comparison degreewise to cochain complexes. HomologicalComplex.hom_ext and the degreewise identity components of mapHomologicalComplexCompIso show that it is the prescribed inverse-evaluation-complex comparison followed by the intrinsic finite comparison. The exactSquare_fac identity therefore proves that its standard derived square satisfies pullbackTensorDerivedEvaluationNormalization. Uniqueness in pullbackTensorDerivedEvaluation_existsUnique identifies that derived square with the fixed comparison in the statement.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact_localization_inverse_mate to the ordinary adjunctions and ordinary comparison. All six functors are additive and exact. The ordinary inverse mate is invertible by the first step, so its inverse mate under the specified exact localized adjunctions is invertible. Substitute the equality of derived comparisons from the second step. These localized adjunctions are definitionally a.adj and finiteOpenAdj. No boundedness, support, or nonempty-open assumption has been introduced.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ordinary-open-finite-evaluation",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pod-derived-exact-square-composition",
+  "lem-sf-exact-localization-inverse-mate",
+  "def-sf-integral-system-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Y6: use the existing ordinary finite-evaluation counit theorem, identify the mate by the Hom equivalence, and descend with exact_localization_inverse_mate; identify the fixed normalization using exactSquare_fac and uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a coefficient system with evaluation compatibility and extension by zero",
+   "results": "8 hits, including localCohomology.diagram and locally constant module functors; none treats normalized sequence-site derived evaluation or its open mates.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem. Generic localization and adjunction results are used for assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits, including Functor.mapDerivedCategory, mapDerivedCategoryCompIso and mapDerivedCategoryIdIso. These construct exact localizations, without the specific sequence-site comparison.",
+   "date": "2026-10-27",
+   "verdict": "Exact localization API applies to the assembly, but does not state the missing comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientDerivedImage|sequenceDirect|sequenceExtension",
+   "results": "msearch Mathlib grep returned 0 hits. Local searches found CoefficientSystemUnboundedComparison and SemilinearProperOpenMatePasting; their presentations must be identified with the fixed finite intrinsic comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate with the specified finite adjunction and cochain normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemOperationModels",
+  "date": "2026-10-27",
+  "group": "W4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence: Invertibility of the prescribed open evaluation mate.",
+   "via": [
+    "lem-sf-integral-system-operation-models",
+    "lem-sf-integral-canonical-system-coherence",
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemOpenEvaluation",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemOpenEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemOpenEvaluation_isIso",
+  "statement": "theorem integralSystemOpenEvaluation_isIso {U X : Scheme.{u}} (j : U ⟶ X)\n    [IsOpenImmersion j] (a : Open l E j) (n : ℕ) :\n    IsIso ((mateEquiv a.adj (finiteOpenAdj l E j n)).symm\n      (pullbackTensorDerivedEvaluation l E j n).hom).natTrans",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T021417-L-2770290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261027T103518-L-1094397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "V8 stage 2",
+  "old_statement": "For a prime l, a finite extension E of Q_l, an open immersion j:U→X, any exact ordinary Open a of [def-sf-integral-system-operations], and n≥0, the inverse mate of the fixed pullbackTensorDerivedEvaluation.hom under a.adj and finiteOpenAdj is an isomorphism of functors from the full derived system category of U to the finite derived category of X. The comparison is the specified mate, including the empty open and arbitrary unbounded complexes.",
+  "what": "Dependency-interface refinement only: replace a broad owner containing later compact-support/completion realization by the existing lower geometric or strict-system declarations actually used. The Lean statement, hypotheses, conclusion and proof stay verbatim. This prevents the lower ordinary construction from acquiring a circular dependency on strict proper reduction.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+   "place": "Strict-system realization: the construction argument recorded in lem-sf-integral-system-operation-models; Zheng Construction 4.1 and Lemma 4.10, Stacks 03DI, 09AE, 0E8I and 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-system-operation-models",
+    "holds": true,
+    "note": "Identical Lean declaration and mathematical assertion; only the cited interface is narrowed."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sf-integral-system-operations"
+  ]
+ }
+}

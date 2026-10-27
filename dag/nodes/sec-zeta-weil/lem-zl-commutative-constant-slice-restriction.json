@@ -1,0 +1,135 @@
+{
+ "id": "lem-zl-commutative-constant-slice-restriction",
+ "kind": "statement",
+ "title": "Constant module restriction with commutative coefficient transport",
+ "statement": "Let C be a category with objects in universe u and morphisms in v, J a Grothendieck topology, R a commutative ring in max(u,v), and U an object. Restrict modules over the constant commutative ring sheaf to C/U, then restrict scalars along the canonical constantSheafOverIso from constant R on C/U to the restricted constant R sheaf. This functor, commutativeConstantSliceRestriction, is additive and exact. Constant realization [def-sfb-site-derived-constant-module-functor] followed by this functor is naturally isomorphic to constant realization on C/U.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Remark 3.2, restriction of constants; Stacks Modules on Sites Sections 03CY and 03DH"
+ },
+ "stmt_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The source constantSheafOverIso carries the slice sheafification unit of each scalar r to the restricted original unit. Apply this identity to show that the restricted module sheafification unit is linear after the specified coefficient transport.",
+   "uses": [
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module sheafification Hom equivalence extends that linear presheaf map to a module sheaf map. Its underlying sheaf map composed with the slice unit is the restricted original unit. Restricted original units are locally bijective since slice coverings are underlying coverings. Cancel the slice unit in the local-injectivity and local-surjectivity criteria to prove the map is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the naturality square with the slice sheafification unit. The factorization formula reduces it to naturality of the original unit, which proves the claimed natural isomorphism. Exactness follows from exact slice restriction and exact scalar restriction.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-constant-restriction",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "P8",
+  "date": "2026-10-25",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Remark 3.2, restriction of constants; Stacks Modules on Sites Sections 03CY and 03DH",
+  "note": "Explicit elaboration of the slice-restriction and balanced-tensor argument in HRS Remark 3.2, using Stacks Modules on Sites 03CY/03DH and Cohomology on Sites 06YY/07A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a slice site commutes with constant modules and extension of scalars for sheaves of modules",
+   "results": "SheafOfModules.restrictScalars, SheafOfModules.over, ModuleCat.extendRestrictScalarsAdj; no commutative-coefficient slice comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use sheafification and restriction interfaces; no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaves of modules commute with restriction to slice site and coefficient ring comparison",
+   "results": "PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.restrictScalars_obj_val, SheafOfModules.freeFunctorCompPullbackIso; no exact module-coefficient comparison.",
+   "date": "2026-10-25",
+   "verdict": "Related building blocks, not the asserted comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheafOverIso\"",
+   "results": "No results from the search service; the adopted source defines constantSheafOverIso.",
+   "date": "2026-10-25",
+   "verdict": "Reuse source theorem; module linearity still needs proof."
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|constantSheafOver|slice.*coefficient|coefficient.*slice",
+   "results": "Mathlib Sites.Over and CoverLifting, source ConstantSheafOver; no natural isomorphism for the fixed derived coefficient models.",
+   "date": "2026-10-25",
+   "verdict": "Construct the comparison from the named interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedProfiniteScalarCompatibility",
+  "date": "2026-10-25",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Scalar realization (3.1)-(3.2), Remark 3.2: Remark 3.2, restriction of constants; Stacks Modules on Sites Sections 03CY and 03DH",
+   "via": [
+    "lem-zl-condensed-profinite-scalar-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommutativeConstantSliceRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeConstantSliceRestriction.lean",
+  "declaration": "CategoryTheory.commutative_constant_slice_restriction",
+  "statement": "theorem commutative_constant_slice_restriction : Nonempty (commutativeSiteConstantModuleFunctor J R ⋙ commutativeConstantSliceRestriction J R U ≅ commutativeSiteConstantModuleFunctor (J.over U) R)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261025T095725-L-3472945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261025T095725-L-3472945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

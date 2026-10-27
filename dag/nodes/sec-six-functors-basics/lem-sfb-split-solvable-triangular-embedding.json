@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-split-solvable-triangular-embedding",
+ "kind": "statement",
+ "title": "A split solvable group admits a faithful upper triangular representation",
+ "statement": "Let $k$ be a field [def-weil-field] and let $H$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme]. Assume $H$ is split solvable [def-sfb-split-solvable-right-torsors]: there is a finite descending series of smooth connected closed $k$-subgroups, each normal in its predecessor, whose represented fppf quotients are $\\mathbf G_a$ or $\\mathbf G_m$, with $\\mathbf G_a(A)=(A,+)$ and $\\mathbf G_m(A)=A^\\times$. Then there are an integer $n\\geq1$ and a closed immersion of $k$-group schemes $H\\hookrightarrow B_n$, where $B_n$ is the subgroup scheme of $\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group] whose points over every commutative $k$-algebra are the invertible upper triangular matrices. Closed immersion has the meaning of [def-weil-closed-immersion]. The trivial group is allowed, and no perfection or characteristic-zero assumption is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.52, forward implication, printed p.343, together with Proposition 16.2(a) implies (c), printed pp.324--325. Only the forward implication is used: its converse requires perfection."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-split-solvable-right-torsors",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sfb-upper-triangular-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-group-faithful-linear-representation] to $H$. It gives $n\\geq1$ and a closed group-scheme immersion $\\rho:H\\hookrightarrow\\operatorname{GL}_{n,k}$, injective on every algebra's points. Its hypotheses hold because $H$ is affine and finite type over the field $k$.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.52, first sentence, p.343; Theorem 4.9, p.87."
+   }
+  },
+  {
+   "text": "By [lem-sfb-complete-linear-flag-scheme], $X=\\operatorname{Fl}_{n,k}$ is proper and finite type, with a scheme action of $\\operatorname{GL}_{n,k}$. Restrict this action along $\\rho$. The coordinate flag $k^i\\times0^{n-i}$ is a $k$-point of $X$. Apply [lem-sfb-split-solvable-rational-fixed-point]: split solvability is assumed, and the required rational point has just been specified. Obtain a complete flag $0=V_0\\subset\\cdots\\subset V_n=k^n$ such that $\\rho_A(h)(V_i\\otimes_k A)=V_i\\otimes_k A$ for every $k$-algebra $A$ and $h\\in H(A)$.",
+   "uses": [
+    "lem-sfb-complete-linear-flag-scheme",
+    "lem-sfb-split-solvable-rational-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.52, p.343; Propositions 7.29--7.30, p.146, and Theorem 16.51, p.343."
+   }
+  },
+  {
+   "text": "Choose $e_i\\in V_i\\setminus V_{i-1}$ successively. Since $\\dim_kV_i=i$, induction gives $V_i=\\langle e_1,\\ldots,e_i\\rangle$, so $e_1,\\ldots,e_n$ is a basis. Let $P\\in\\operatorname{GL}_n(k)$ have these columns and set $\\rho'=P^{-1}\\rho P$. Over every $A$, preservation of $V_j\\otimes_k A$ says that column $j$ of $\\rho'_A(h)$ has zero entries in rows $i>j$. This uses all algebra-valued points, including nonreduced algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.52 and the definition of a trigonalizable representation before Proposition 16.2, pp.324,343."
+   }
+  },
+  {
+   "text": "Explicitly $B_n$ is the closed affine subscheme of $\\operatorname{GL}_{n,k}$ cut out by $x_{ij}=0$ for $i>j$, with coordinate algebra $k[x_{ij}:i\\leq j][(\\prod_i x_{ii})^{-1}]$. The below-diagonal coefficients of $\\rho'$ vanish: evaluate the preceding universal assertion on the universal point $\\operatorname{id}_H\\in H(k[H])$. Thus the coordinate map factors through this quotient, giving a morphism $b:H\\to B_n$. Upper triangular invertible matrices and their inverses preserve the coordinate flag, so $B_n$ is a finite-type affine group scheme; the group identities for $b$ follow from those for $\\rho'$. The maps $b_A$ are injective since $P^{-1}\\rho_A P$ is injective. Therefore [lem-sfb-geometric-unipotence-faithful-closed-immersion] makes $b$ a closed immersion. The construction also covers $H=1$ and $n=1$.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-faithful-closed-immersion",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(b) implies (c), pp.324--325; Corollary 3.35, p.75; Proposition 16.52, p.343."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-sfb-complete-linear-flag-scheme",
+  "lem-sfb-split-solvable-rational-fixed-point",
+  "lem-sfb-geometric-unipotence-faithful-closed-immersion",
+  "def-sc-general-linear-group"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.52, forward implication, p.343, and Proposition 16.2(b) implies (c), pp.324--325."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected split solvable algebraic group over a field embeds as a closed subgroup into invertible upper triangular matrices",
+   "results": "{\"t\": \"2026-10-24T14:05:30Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected split solvable algebraic group over a field embeds as a closed subgroup into invertible upper triangular matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"Matrix.SpecialLinearGroup.isEmbedding_toGL\", \"Matrix.SpecialLinearGroup.isEmbedding_mapGL\", \"Matrix.GeneralLinearGroup.upperRightHom_apply\", \"Matrix.SpecialLinearGroup.isInducing_toGL\", \"Subgroup.instIsArithmeticRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL\", \"Matrix.SpecialLinearGroup.isInducing_mapGL\"], \"digest\": \"714aac3e0ba807ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological embeddings of matrix groups are not closed immersions of group schemes; Lie triangularizability and characteristic-zero Lie theorems do not give a faithful rational triangular representation of a split solvable algebraic group over an arbitrary field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Matrix\"",
+   "results": "{\"t\": \"2026-10-24T14:05:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"Matrix\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological embeddings of matrix groups are not closed immersions of group schemes; Lie triangularizability and characteristic-zero Lie theorems do not give a faithful rational triangular representation of a split solvable algebraic group over an arbitrary field."
+  },
+  {
+   "tool": "grep",
+   "query": "splitSolvable|[Tt]rigonaliz|[Ss]olvable.*[Tt]riang|[Tt]riang.*[Ss]olvable",
+   "results": "{\"t\": \"2026-10-24T14:05:31Z\", \"tool\": \"grep\", \"query\": \"splitSolvable|[Tt]rigonaliz|[Ss]olvable.*[Tt]riang|[Tt]riang.*[Ss]olvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/LieTheorem.lean\", \"Mathlib/Algebra/Lie/LieTheorem.lean\"], \"digest\": \"8d6a65df219ea484\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological embeddings of matrix groups are not closed immersions of group schemes; Lie triangularizability and characteristic-zero Lie theorems do not give a faithful rational triangular representation of a split solvable algebraic group over an arbitrary field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split solvable affine algebraic group admits a faithful upper triangular rational representation over its base field",
+   "results": "{\"t\": \"2026-10-24T14:05:31Z\", \"tool\": \"leansearch\", \"query\": \"A split solvable affine algebraic group admits a faithful upper triangular rational representation over its base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"LieModule.IsTriangularizable\", \"LieModule.instIsTriangularizableSubtypeEndMemLieSubalgebraRangeToEnd\", \"Rep.instInjective\", \"gal_isSolvable_of_splits\", \"IsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\"], \"digest\": \"27ef16dc91c0d529\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological embeddings of matrix groups are not closed immersions of group schemes; Lie triangularizability and characteristic-zero Lie theorems do not give a faithful rational triangular representation of a split solvable algebraic group over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lie Kolchin theorem over arbitrary ground fields for split solvable algebraic groups faithful triangularizable representation",
+   "results": "{\"t\": \"2026-10-24T14:05:32Z\", \"tool\": \"leanfinder\", \"query\": \"Lie Kolchin theorem over arbitrary ground fields for split solvable algebraic groups faithful triangularizable representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieModule.IsTriangularizable\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"c186066b756a92ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological embeddings of matrix groups are not closed immersions of group schemes; Lie triangularizability and characteristic-zero Lie theorems do not give a faithful rational triangular representation of a split solvable algebraic group over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected split solvable affine group scheme over any field embeds into upper triangular matrices",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.GeneralLinearGroup.upperRightHom_apply\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] (x : R),\\n  Matrix.GeneralLinearGroup.upperRightHom x =\\n    { val := !![1, x; 0, 1], inv := !![1, -x; 0, 1], val_inv := ⋯, inv_val := ⋯ }\", \"doc\": \"For any ring $ R $ and element $ x \\\\in R $, the additive character $ \\\\chi : R \\\\to \\\\mathrm{GL}(2,R) $ maps $ x $ to the invertible $ 2 \\\\times 2 $ matrix $ \\\\begin{pmatrix} 1 & x \\\\\\\\ 0 & 1 \\\\end{pmatrix} $\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isEmbedding_toGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_5} {R : Type u_8} [inst : Fintype n] [inst_1 : DecidableEq n] [inst_2 : CommRing R]\\n  [inst_3 : TopologicalSpace R] [IsTopologicalRing R], Topology.IsEmbedding ⇑Matrix.SpecialLinearGroup.toGL\", \"doc\": \"The inclusion map from the special linear group $\\\\mathrm{SL}(n, R)$ to the general linear group $\\\\mathrm{GL}(n, R)$ is a topological embedding, meaning the subspace topology on $\\\\mathrm{SL}(n, R)$ (in\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.upperRightHom\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"{R : Type u_1} → [inst : Ring R] → AddChar R (GL (Fin 2) R)\", \"doc\": \"For a ring $R$, this defines an additive character $\\\\chi : R \\\\to \\\\mathrm{GL}(2, R)$ that maps each element $x \\\\in R$ to the invertible $2 \\\\times 2$ matrix $\\\\begin{pmatrix} 1 & x \\\\\\\\ 0 & 1 \\\\end{pmatrix}\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isEmbedding_mapGL\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_11} [inst : Fintype n] [inst_1 : DecidableEq n] {A : Type u_12} {B : Type u_13} [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [inst_5 : TopologicalSpace A] [inst_6 : TopologicalSpace B]\\n  [IsTopologicalRing B],\\n  Topology.IsEmbedding ⇑(algebraMap A B) → Topology.\", \"doc\": \"If the canonical ring homomorphism from $ A $ to $ B $ is a topological embedding, then the induced map from the special linear group $ \\\\mathrm{SL}(n, A) $ to the general linear group $ \\\\mathrm{GL}(n,\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {𝒢 : Subgroup (GL (Fin 2) K)}\\n  [𝒢.HasDetPlusMinusOne] {g : GL (Fin 2) K},\\n  g ∈ 𝒢 →\\n    ↑g 1 0 = 0 →\\n      (g.IsParabolic ↔\\n        (∃ x, x ≠ 0 ∧ g = Matrix.GeneralLinearGroup.upperRightHom x) ∨\\n          ∃ x, x ≠ 0 \", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra triangularization and topological matrix embeddings do not state rational group-scheme triangularization over arbitrary fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Matrix\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra triangularization and topological matrix embeddings do not state rational group-scheme triangularization over arbitrary fields."
+  },
+  {
+   "tool": "grep",
+   "query": "splitSolvable|trigonaliz|solvable.*triangular|triangular.*solvable",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"214\", \"text\": \"    [IsSolvable L] [LieModule.IsTriangularizable k L V] [Module.Finite k L] :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"242\", \"text\": \"    [IsSolvable L] [LieModule.IsTriangularizable k L V] :\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra triangularization and topological matrix embeddings do not state rational group-scheme triangularization over arbitrary fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split solvable algebraic group over an arbitrary field admits a faithful upper triangular rational representation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(L' : LieSubalgebra R L) [IsTriangularizable R L M] : IsTriangularizable R L' M\", \"doc\": \"If a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is triangularizable, then $ M $ is also triangularizable as a module over any Lie subalgebra $ \\\\mathfrak{g}' $ o\"}\n  {\"name\": \"LieModule.IsTriangularizable\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] → [inst_4 : Module R M] → [inst_5 : LieRingModule L M] → [LieModule R L M] → Prop\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, the proposition that $ M $ is triangularizable as \"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeEndMemLieSubalgebraRangeToEnd\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsTriangularizable R L M] : IsTriangularizable R (LieModule.toEnd R L M).range M\", \"doc\": \"If an $ R $-module $ M $ is triangularizable as a Lie module over a Lie algebra $ L $, then the image of the Lie algebra homomorphism from $ L $ to the endomorphism ring $ \\\\mathrm{End}_R(M) $ is also \"}\n  {\"name\": \"LieModule.IsTriangularizable.mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  (∀ (x : L), ⨆ φ, ((LieModule.toEnd R L M) x).maxGenEigenspace φ = ⊤) → LieMod\", \"doc\": \"If for every element $ x $ in the Lie algebra $ L $, the supremum of the generalized eigenspaces of the endomorphism associated to $ x $ acting on $ M $ equals the entire module $ M $, then $ M $ is t\"}\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.GeckConstruction.Basic\", \"type\": \": LieModule.IsTriangularizable R (cartanSubalgebra' b) (b.support ⊕ ι → R)\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra triangularization and topological matrix embeddings do not state rational group-scheme triangularization over arbitrary fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational Lie Kolchin theorem for split solvable algebraic groups over a nonperfect base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSolvable L], ∃ k, LieAlgebra.derivedSeries R L k = ⊥\", \"doc\": \"For a solvable Lie algebra $ L $ over a commutative ring $ R $, there exists a non-negative integer $ k $ such that the $ k $-th term of the derived series of $ L $ is the zero submodule, i.e., $ L^{(\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable_int\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {L : Type v} {inst : LieRing L} [self : LieAlgebra.IsSolvable L], ∃ k, LieAlgebra.derivedSeries ℤ L k = ⊥\", \"doc\": \"Every solvable Lie algebra $\\\\mathfrak{g}$ over the integers $\\\\mathbb{Z}$ has a derived series $\\\\mathfrak{g}^{(k)}$ that terminates at the zero submodule $\\\\{0\\\\}$ after finitely many steps, i.e., there \"}\n  {\"name\": \"Function.Surjective.lieAlgebra_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w₁} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] {f : L' →ₗ⁅R⁆ L} [hL' : LieAlgebra.IsSolvable L'],\\n  Function.Surjective ⇑f → LieAlgebra.IsSolvable L\", \"doc\": \"Let $ L $ and $ L' $ be Lie algebras over a commutative ring $ R $. If there exists a surjective Lie algebra homomorphism $ f : L \\to L' $ and $ L' $ is solvable, then $ L $ is solvable.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebra triangularization and topological matrix embeddings do not state rational group-scheme triangularization over arbitrary fields."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-simple-multiplicity-one-weight",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 22.2 and 22.18(b): obtain a multiplicity-one torus character before the scalar-endomorphism argument of 22.4. Supporting input: Proposition 16.52, forward implication, printed p.343, together with Proposition 16.2(a) implies (c), printed pp.324--325. Only the forward implication is used: its converse requires perfection.",
+   "via": [
+    "lem-sfb-split-simple-multiplicity-one-weight",
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-solvable-triangular-embedding",
+  "worker": "stage1",
+  "summary": "Followed Milne 16.52 through a faithful linear representation, the projective full flag scheme and rational fixed point theorem 16.51. Wrote the adapted-basis and universal-coordinate factorization arguments, retaining arbitrary fields and the trivial group. Created exactly the two independent geometric prerequisites; reused the existing faithful representation and faithful closed-immersion nodes. No statement change.",
+  "blueprint": "Supporting representation-theoretic input in det-thm-sf-ctf-stability-direct-images proof (3), reached through the inherited chain: split-simple multiplicity-one weight. This split supplies the faithful triangular embedding using Milne 16.52; the current blueprint direct-image step remains unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-8792fe083",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-8792fe083 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. Sources checked: Milne iAG2017 Prop. 16.52 (p.343), whose forward direction needs no perfectness; Prop. 16.2 (b)⇒(c) (pp.324-325); Thm 16.51 (p.343); and §7g with Props 7.29-7.30 (p.146). Step 1: lem-sfb-affine-group-faithful-linear-representation needs only an affine finite-type group over a field, which H is. It gives a closed-immersion ρ that is injective on all A-points. Step 2: the new flag node gives a proper finite-type Fl_n with GL_n acting by g·F=gF; the action restricts along ρ, and the coordinate flag is a k-point. The new fixed-point node's hypotheses (split solvable, X proper, X(k)≠∅) all hold. Its universal fixedness is exactly ρ_A(h)(V_i⊗A)=V_i⊗A. Step 3 is the adapted basis, checked by hand. Step 4: GL_n/(x_ij, i>j) = k[x_ij : i≤j][1/∏x_ii]; the universal point gives the factorization b; and lem-sfb-geometric-unipotence-faithful-closed-immersion (injective on all points ⇒ closed immersion) applies to H and B_n, both affine of finite type. Both new nodes are true and statement-only. The fixed-point theorem holds for nonreduced proper X via the valuative extension and separatedness, and agrees with the existing torus case. The flag scheme holds over any field. Neither new node restates the item. Not duplicates: lem-sfb-split-torus-rational-fixed-point (tori only), lem-sfb-solvable-proper-fixed-point (algebraically closed field), lem-sfb-solvable-subgroup-flag-realization (algebraically closed field), lem-sfb-free-quotient-grassmann-projective (one Grassmannian), lem-sfb-lie-kolchin-triangular-embedding (algebraically closed field). No cycle; all ids exist and none is merged; the route stays in unit sk-thm-sf-ctf-stability; no tool_uses needed. Batch-5: the flagged path ends at lem-trf-flat-tensor-preserves-injection, a Mathlib leaf saying flat tensor preserves injections. It is generic algebra, neither part of the trace formula or Poincaré duality nor of their proofs, so the citation is acceptable. Cosmetic issues, not changed: source.place says 16.2(a)⇒(c) while proof_origin correctly says (b)⇒(c); the item's statement has no stmt_deps for smooth, connected and finite type, though def-sfb-split-solvable-right-torsors cites all three (this predates the delivery)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitSolvableTriangularEmbedding",
+  "declaration": "AlgebraicGeometry.split_solvable_triangular_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitSolvableTriangularEmbedding.lean",
+  "statement": "theorem split_solvable_triangular_embedding {k : Type u} [Field k] (H : Grp (Over (Spec (.of k)))) (hsm : Smooth H.X.hom) (hc : ConnectedSpace H.X.left) (haff : IsAffine H.X.left) (hft : LocallyOfFiniteType H.X.hom) (hqc : QuasiCompact H.X.hom) (hsplit : IsSplitSolvable H) : ∃ n : ℕ, 0 < n ∧ ∃ b : H.X ⟶ UpperTriangularGroup.scheme k n, IsMonHom b ∧ IsClosedImmersion b.left",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6ed960a7",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Item Lean matches the node clause by clause: Field k; H : Grp (Over Spec k) with Smooth, ConnectedSpace, IsAffine, LocallyOfFiniteType+QuasiCompact (recorded finite-type convention), IsSplitSolvable (read SplitSolvableLength: closed normal, fppf quotient, G_a/G_m, length 0 trivial); conclusion ∃ n>0, b : H.X ⟶ B_n with IsMonHom b and IsClosedImmersion b.left. No extra hypotheses or universe restriction; sorry proof; docstring has the 4 steps, source and blueprint tag. New def node def-sfb-upper-triangular-group-scheme: real ideal span of x_ij (j<i) in the upstream GL CoordinateRing, scheme and inclusion are abbrevs of the upstream subgroupScheme/subgroupSchemeι (group and closed-immersion instances inherited); sorries only in the Prop Hopf-ideal instance (true: counit, Δ index split, antipode) and the points theorem over all CommRing A. Not a duplicate: absent from side-live Lean and DAG; other triangular defs in this run are U_n or PGL. Item JSON differs from side-live only in lean and the added stmt_dep; lean.statement verbatim in both files; all deps resolve; report sections present. Edge cases H=1, n=1 (B_1=G_m), nonreduced algebras, imperfect k checked. No compile: no file changed; worker's report records clean compiles. Cosmetic pre-existing: source.place says 16.2(a)⇒(c), proof_origin says (b)⇒(c)."
+ }
+}

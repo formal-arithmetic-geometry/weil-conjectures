@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-graded-qc-section-algebra-construction",
+ "kind": "statement",
+ "title": "Quasi-coherent graded direct-image algebras from homogeneous section products",
+ "statement": "Let $S$ be a scheme and $T$ a scheme over $S$ [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $f:X\\to T$ be a morphism over $S$ that is quasi-compact and separated [lem-trf-space-qc-separated-etale-local]. Regard $T$ as its representable algebraic space [def-trf-scheme-algebraic-space]. Use the small etale module direct image and tensor pullback [def-trf-space-etale-module-functors]. Let $(B_d)_{d\\geq0}$ be quasi-coherent $\\mathcal O_X$-module sheaves [def-trf-space-quasi-coherent-module], with $\\mathcal O_X$-bilinear homogeneous products $B_m\\otimes B_n\\to B_{m+n}$ and a unit $\\mathcal O_X\\to B_0$, compatible with restrictions and satisfying associativity, ordinary commutativity, and the unit laws. Tensor products mean sheaf tensor products [def-pur-sheaf-tensor-product]; the total graded object is the coproduct in module sheaves, not an assertion that sections on every open commute with infinite coproducts. For each $d$, restriction of $f_*B_d$ to Zariski opens is a quasi-coherent Zariski module $A_d$, and its associated small etale module is canonically $f_*B_d$, with the comparison identity on sections of opens [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. There is a canonical commutative unital graded structure on the family $(A_d)$ [def-weil-pbc-graded-sheaf-structures]: on an open $V\\subseteq T$, its product is the product of compatible sections of $B_m$ and $B_n$ over $X\\times_TV$; its unit is pullback of regular functions followed by the unit of $B_0$. The sheaf coproduct $A=\\bigoplus_{d\\geq0}A_d$ with these products is a quasi-coherent Zariski algebra [def-weil-pbc-quasi-coherent-algebra], and its associated etale module is canonically $\\bigoplus_{d\\geq0}f_*B_d$, respecting every summand and homogeneous product. In particular these conclusions apply to $B_d=L^{\\otimes d}$ for any line module $L$ on $X$, with $B_0=\\mathcal O_X$ and the canonical tensor-power products; every such $B_d$ is quasi-coherent and the tensor-power products satisfy the stated graded algebra laws.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C (lemma-descending-property-ample), proof: section-algebra paragraph; spaces-morphisms.tex Tag 03M9 (lemma-pushforward) and preceding representable-pushforward discussion, applied degreewise."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $C_d=f_*B_d$. The quasi-coherent pushforward theorem applies to each $B_d$: its source is an algebraic space, its target is the scheme $T$ regarded as an algebraic space, and its required quasi-compactness and separatedness are hypotheses. Hence $C_d$ is quasi-coherent on $T_{\\mathrm{et}}$. The Zariski--etale equivalence now gives the quasi-coherent Zariski module $A_d(V)=C_d(V\\hookrightarrow T)$ and its canonical comparison $E(A_d)\\simeq C_d$, where $E=\\epsilon_T^*$. The equivalence explicitly identifies this comparison on open-subscheme sections with the identity.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M9, lemma-pushforward; descent.tex Tag 03DX, proposition-equivalence-quasi-coherent (small etale equivalence)."
+   }
+  },
+  {
+   "text": "Construct the products before restricting to opens. For an etale test scheme $V\\to T$, use the chart-limit description of $C_d(V)$. If $s\\in C_m(V)$ and $t\\in C_n(V)$, define $st$ by its projection at each chart $(U,a)$ over $X$ and $V$: $\\pi_{U,a}(st)=\\mu_{m,n}(\\pi_{U,a}s\\otimes\\pi_{U,a}t)$. The right sides form a compatible family because every chart restriction commutes with $\\mu$. For $r\\in\\Gamma(V,\\mathcal O_V)$, scalar multiplication on that chart is through $a^\\sharp$, so bilinearity of $\\mu$ gives $(rs)t=r(st)=s(rt)$. The chart family $a^\\sharp(r)\\,1_{B_0|U}$ similarly defines the unit map $\\mathcal O_T\\to C_0$. These formulas commute with maps of $V$, since the chart projections defining direct image do. Thus they define bilinear sheaf products and a linear sheaf unit; the tensor and sheafification universal properties turn the bilinear products into maps $C_m\\otimes C_n\\to C_{m+n}$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8, lemma-compute-pushforward, proof; sites-modules.tex Section 03EK, section-tensor-product."
+   }
+  },
+  {
+   "text": "Every chart projection sends $(st)u$ and $s(tu)$ to equal sections by associativity of the given products on $B$; it sends $st$ and $ts$ to equal sections by ordinary commutativity, and $1s,s1$ to $s$ by the unit laws. Equality in the defining limit is equality of all projections, so the laws hold for $C_d$. Restrict these operations to open subschemes of $T$. They make $(A_d)$ a commutative unital graded sheaf algebra in the specified sense. For an open $V$, the displayed product is exactly the product of compatible sections over $X\\times_TV$, and the unit formula is pullback of regular functions followed by the given unit. These are sheaf products; no sectionwise commutation with an infinite sum is involved.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, lemma-descending-property-ample, section-algebra paragraph; spaces-morphisms.tex Tag 03M8, chart-section description."
+   }
+  },
+  {
+   "text": "Form the categorical module-sheaf coproduct $A=\\bigoplus_{d\\geq0}A_d$. Extend the homogeneous products by the direct-sum and sheafification construction in the definition of graded sheaf structures. Explicitly, on the presheaf direct sum use the finite convolution $(xy)_k=\\sum_{m+n=k}x_my_n$; finite support makes this defined, and restrictions preserve it. Bilinearity and sheafification extend it to the sheaf coproduct, with the degree-zero unit. Associativity is the equality of the two finite sums indexed by $i+j+k=d$; commutativity swaps $m,n$; the unit law has only the degree-zero term. These identities extend by the same universal properties. The coproduct-closure theorem applies to the small indexing set $\\mathbb N$ and the quasi-coherent $A_d$, so $A$ is quasi-coherent as a module and therefore as an algebra.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "def-weil-pbc-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Section 01LA, section-quasi-coherent, item (3); sites-modules.tex Section 03EK; spaces-descent.tex Tag 0D3C, section-algebra paragraph."
+   }
+  },
+  {
+   "text": "The association functor $E$ is tensor pullback along $\\epsilon_T$, by the Zariski--etale equivalence. The ringed-topos module adjunction makes it a left adjoint. Apply preservation of colimits to the discrete small category $\\mathbb N$: $E(A)$ is the coproduct of the $E(A_d)$. Composing the inverse of that canonical coproduct comparison with the degreewise comparisons of Step 1 gives $\\alpha:E(A)\\xrightarrow{\\sim}\\bigoplus_d C_d$. By construction, $\\alpha\\circ E(\\iota_d)$ is the $d$th inclusion composed with $E(A_d)\\simeq C_d$, so it respects each specified summand.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE, lemma-equivalence-quasi-coherent-limits, item (2); sites-modules.tex Tag 03D7, lemma-adjoint-pullback-pushforward-modules; categories.tex Tag 0038, lemma-adjoint-exact (1)."
+   }
+  },
+  {
+   "text": "Use the canonical tensor-pullback comparison to view the associated homogeneous product as a map $E(A_m)\\otimes E(A_n)\\to E(A_{m+n})$. On local tensor generators its comparison is $(b\\otimes s)\\otimes(c\\otimes t)\\mapsto bc\\otimes(s\\otimes t)$. Under the degreewise counits $q_d:E(A_d)\\simeq C_d$, the generator $b\\otimes s$ maps to $b\\,s|_U$ on an etale chart $U\\to T$, since $E\\dashv\\epsilon_{T,*}$ is the tensor adjunction and $\\epsilon_{T,*}C_d=A_d$. Consequently both compared products send this pair to $bc\\,(st)|_U$, using the restriction formula of Step 2; the unit comparison sends $b\\otimes r$ to $b\\,r|_U\\,1$. Tensor products and pullbacks are sheafifications of these locally generated tensors, so the universal properties extend these equalities uniquely. The same equalities on each pair of summands prove that $\\alpha$ respects all homogeneous products and the unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-graded-sheaf-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE, lemma-equivalence-quasi-coherent-limits (7); sites-modules.tex Tag 03EL, lemma-tensor-product-pullback, and Tag 03D7, tensor adjunction proof."
+   }
+  },
+  {
+   "text": "Finally suppose $L$ is a line module. On a trivializing etale chart choose a frame $e$. Define $B_0=\\mathcal O_X$ and $B_d=L^{\\otimes d}$ for $d>0$. The same chart identifies $B_d$ with $\\mathcal O_X$ by $e^{\\otimes d}$, including the empty tensor $1$ at $d=0$. Hence $B_d$ has there the presentation $0\\to\\mathcal O_X\\xrightarrow{\\sim}B_d\\to0$, and is quasi-coherent by the site-local presentation definition. Canonical tensor-power multiplication sends $(a e^{\\otimes m})\\otimes(b e^{\\otimes n})$ to $ab e^{\\otimes(m+n)}$. Associativity, ordinary commutativity and the unit laws are thus the ring identities $(ab)c=a(bc)$, $ab=ba$ and $1a=a1=a$. A change of frame $e\\mapsto u e$ multiplies both sides by $u^{m+n}$, so these formulas are the canonical products and agree on overlaps; in degree zero $u^0=1$. The sheaf axiom gives the identities globally. Steps 1--6 therefore apply.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-space-quasi-coherent-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C, section-algebra paragraph; spaces.tex Tag 025Y and spaces-properties.tex Tag 03G9 (site-local presentations); sites-modules.tex Section 03EK (tensor powers)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-graded-sheaf-structures",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C, lemma-descending-property-ample, section-algebra paragraph; degreewise Tag 03M9, descent Tag 06VE, and the tensor/sheafification constructions expanded in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact separated morphism from an algebraic space to a scheme the direct images of the homogeneous pieces of a quasi coherent graded commutative algebra form a quasi coherent graded algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.SheafedSpace CommRingCat\", \"doc\": \"The sheafed space constructed on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, where the underlying topological space is the projective spectrum equipped with the \"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                \", \"doc\": \"A morphism in the category of commutative rings that maps the localization of a graded ring $ A $ at the submonoid generated by powers of a homogeneous element $ f $ to the global sections of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"graded\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*pushforward|pushforward.*graded|graded.*[Qq]uasi[Cc]oherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The section algebra obtained by pushing forward each degree of a graded quasi coherent algebra on an algebraic space is quasi coherent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": algebraMap R ((Spec.topMap f _* (structureSheaf S).1).stalk p) = (f ≫ StructureSheaf.toPushforwardStalk f p).hom\", \"doc\": \"The algebra map from $ R $ to the stalk of the pushforward structure sheaf at $ p $ is equal to the composition of the ring homomorphism $ f $ with the stalk map at $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ pushforward g ≅ pushforward (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforwardSections_coe\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any section $ s $ of a sheaf of modules $ M $ over a ring sheaf $ R $, and for any object $ x $ in the opposite category $ \\\\mathcal{C}^{\\\\text{op}} $, the coercion of the pushforward section $ F_*\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"GradedAlgebra\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {A : Type u_3} →\\n      [DecidableEq ι] →\\n        [AddMonoid ι] →\\n          [inst : CommSemiring R] →\\n            [inst_1 : Semiring A] → [inst_2 : Algebra R A] → (ι → Submodule R A) → Type (max u_1 u_3)\", \"doc\": \"A structure on an algebra $ A $ over a commutative semiring $ R $, indexed by an additive monoid $ \\\\iota $, where each element $ i \\\\in \\\\iota $ corresponds to an $ R $-submodule $ \\\\sigma_i $ of $ A $. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Push forward multiplication of homogeneous sheaf sections then take the coproduct to construct a graded commutative algebra on a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.mul_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring assigns to each open set $ U $ the ring of sections locally represented by homogeneous fractions $ r/s $, where $ s $ is a homogeneous e\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (U : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ) →\\n                CommRing (\", \"doc\": \"For any open set $ U $ in the projective spectrum $ \\\\text{Proj}(\\\\mathcal{A}) $ of a graded ring $ \\\\mathcal{A} $, the sections of the structure sheaf over $ U $ form a commutative ring under the operat\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → TopCat.Presheaf CommRingCat (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"A presheaf of commutative rings on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, assigning to each open set $U$ the commutative ring of sections locally represente\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → TopCat.Sheaf CommRingCat (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"The sheaf of commutative rings on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, assigning to each open set $U$ the ring of sections locally represented by homogene\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → TopCat.Sheaf (Type u_1) (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring $\\\\mathcal{A}$, constructed by applying the subsheaf-to-types construction to the local predicate of being expressible as homogeneous fra\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (U : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ),\\n  ↑((AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing 𝒜).obj U\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and any open set $U$ in the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, the underlying set of the commutative ring structure presheaf $\\\\mathcal{O}_{\\\\text{Proj}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                  \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, this defines a ring homomorphism from the homogeneous localization $\\\\mathcal{A}_{(f)}$ to the sections of the structure sheaf over the ba\"}\n  {\"name\": \"AlgebraicGeometry.Proj.add_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"For any sections $s$ and $t$ of the structure sheaf on the projective spectrum of a graded ring, and for any point $x$ in their domain, the evaluation of the sum $s + t$ at $x$ equals the sum of the e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the graded sheaf construction, section normalization, and site compatibility of this node"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*pushforward|pushforward.*graded|graded.*[Qq]uasi[Cc]oherent",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Proj, scheme modules, or algebraic direct sums, not this algebraic-space graded direct-image and topology-change construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the degreewise etale direct image of a graded quasi coherent algebra on an algebraic space gives a Zariski quasi coherent graded algebra",
+   "results": "OK 8 hits; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.res_apply, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.instQuasiSeparatedMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Proj, scheme modules, or algebraic direct sums, not this algebraic-space graded direct-image and topology-change construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"graded\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Proj, scheme modules, or algebraic direct sums, not this algebraic-space graded direct-image and topology-change construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded family of quasi coherent modules pushed forward from an algebraic space to a scheme forms a quasi coherent graded section algebra compatible with etale association",
+   "results": "OK 8 hits; AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Proj, scheme modules, or algebraic direct sums, not this algebraic-space graded direct-image and topology-change construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct graded commutative multiplication on the sheaf direct sum of degreewise direct images using bilinear products on compatible chart sections",
+   "results": "OK 8 hits; TensorProduct.gradedCommAux, TensorProduct.gradedMul, AlgebraicGeometry.Proj.mul_apply, TensorProduct.gradedMul_def, TensorProduct.gradedComm_gradedMul, DirectSum.gMulLHom_apply_apply, TensorProduct.gradedComm_of_tmul_of, DirectSum.GAlgebra.map_mul",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern Proj, scheme modules, or algebraic direct sums, not this algebraic-space graded direct-image and topology-change construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-section-algebra-etale-base-change",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical polarized-descent branch of lem-trf-local-term-locality, realized by lem-trf-algebraic-space-ample-local Step 3 (section algebra and evaluation in Stacks 0D3C). Returned steps 1--3: tensor powers, degreewise quasi-coherent pushforward, section products, and sheaf coproduct.",
+   "via": [
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-graded-qc-section-algebra-construction",
+  "worker": "stage1",
+  "summary": "Constructed homogeneous direct-image products explicitly by their chart projections, proved their graded laws, and used existing degreewise pushforward, topology comparison, coproduct closure and pullback tools for the quasi-coherent algebra and its etale identification. Tensor-generator calculations verify compatibility; local line frames verify the tensor-power specialization. No statement change and no new nodes. Explicitly supplied the S-structure on T and specified that f is over S, as required to type the original statement in its cited algebraic-space category and as in the Stacks source; reported as STATEMENT-DISPUTED.",
+  "blueprint": "Historical polarized-descent input carried by lem-trf-algebraic-space-ample-local Step 3 (Stacks 0D3C section algebra); Steps 1--6 here realize the generic section-algebra construction and topology comparison, Step 7 the line-power input. The current latest lem-trf-local-term-locality is contracting-local-term theory; its historical ancestry is retained without asserting that its current proof contains this branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic Zariski module-sheaf coproduct closure supplies quasi-coherence of the total graded module; no result of this unit states that closure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic underived module tensor adjunction identifies the topology-change functor as a left adjoint and gives its counit on tensor generators; this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived tensor comparison for ringed topoi supplies the tensor comparison for Zariski--etale association; no unit result states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-475e7e8f6",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-475e7e8f6 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, every cited statement and Stacks 0D3C. The 0D3C section-algebra paragraph cites 03M9; the item makes it precise with Y = the scheme T. No new nodes. proof_deps equals the union of uses and stmt_deps match the inline citations; no SGA is cited and there is no repair note. Live is still unsplit, so nothing supersedes the delivery. Statement change: T is now a scheme over S, f is over S, and T is regarded as h_T. This is needed for typing in def-trf-algebraic-space and matches 0D3C; it is not a weakening. Both citers still apply: section-algebra-etale-base-change already says 'over S', and sfb relative-ampleness-fpqc-descent uses S=T with qc and separated descended in its step 2. Cosmetic: the split_report summary says 'No statement change' although the report discloses the change. Steps: (1) the qc pushforward lemma uses the same f_* as the item, and the Zariski-etale equivalence gives A_d with E(A_d) ≅ C_d. (2)-(3) chart-limit projectionwise products, the a♯-bilinear unit and the laws by equality of projections are correct elementary steps. (4) the graded-structure definition supplies the extension to the sum, and coproduct closure holds for any small I. (5) E is a left adjoint, so E commutes with the ℕ-coproduct and preserves summands. (6) the tensor comparison and adjunction counit b⊗s ↦ b·s|_U give equal products bc(st)|_U; the counit agrees with the equivalence comparison. (7) a line frame gives a one-generator presentation of each tensor power; the products in frames are coefficient multiplication, and rank one gives commutativity. Edge cases checked: X empty, B=0, d=0, trivial L, infinite sums. No duplicate found; siblings for evaluation, etale restriction and the scheme-only version are distinct. tool_uses accepted: pbc coproduct-closure, module-adjunction and pullback-tensor, all generic. Batch-5: def-trf-scheme-algebraic-space is a general definition, and the qc-separated quasi-coherent pushforward (Stacks 03M9) is a generic result outside both assumptions and their proofs, so both are OK."
+ }
+}

@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-etale-descent-composition-refinement-calculus",
+ "kind": "statement",
+ "title": "Composition, refinement, and base localization of etale descent",
+ "statement": "For each quasi-separated scheme $T$ [def-pc-scheme], let $\\mathcal F(T)$ be the category whose objects are finitely presented chartwise etale algebraic spaces $X\\to T$ [def-trf-algebraic-space, lem-trf-space-chartwise-etale-permanence] and whose arrows are all maps over $T$. Finite presentation means local finite presentation on charts [def-sbc-locally-finite-presentation], quasi-compactness on affine scheme tests, and quasi-compact relative diagonal. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the universes [def-weil-size-convention]. For $q:T'\\to T$, an object of $\\operatorname{Desc}_{\\mathcal F}(q)$ is $X'\\in\\mathcal F(T')$ with an isomorphism between its two pullbacks to $T'\\times_TT'$, identity on the diagonal and satisfying the triple-product cocycle. Arrows commute with these isomorphisms. Call $q$ a universal $\\mathcal F$-descent morphism if the canonical functor $\\mathcal F(V)\\to\\operatorname{Desc}_{\\mathcal F}(T'\\times_TV\\to V)$ is fully faithful for every quasi-separated scheme $V\\to T$; call it universal effective descent if each such functor is an equivalence. Then: (i) the composite of two universal effective descent morphisms is universal effective descent; (ii) if $X\\xrightarrow{a}Y\\xrightarrow{b}T$ has universally effective composite $ba$, then $b$ is universal effective descent; (iii) suppose $q:T'\\to T$ is universal descent and $g:V\\to T$ is universal effective descent. A datum for $q$ is effective if its pullback along $g$ is effective. These assertions include specified compatible realization isomorphisms, not just isomorphism classes.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Propositions (5.6) and (5.7), printed p.19, for the fibre category E_qc of Notation (5.1), identified with finitely presented etale spaces by Remark (5.2). Read online; local copy WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-fp-etale-space-descent"
+ ],
+ "proof": [
+  {
+   "text": "Use sheaf pullbacks from [lem-trf-space-fibre-products-etale-covers]. All bases stay quasi-separated: for quasi-separated $T'\\to T\\leftarrow V$, the map $T'\\to T$ is quasi-separated, so its base change $T'\\times_TV\\to V$ is quasi-separated and $T'\\times_TV$ is quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (1)-(3); hence $T'\\times_TT'$, triple products and all base changes used below are again quasi-separated schemes [def-weil-quasi-separated-morphism]. The space pullbacks preserve chartwise etaleness by [lem-trf-space-chartwise-etale-permanence], hence local finite presentation on scheme charts by [def-weil-etale-morphism]. The quasi-compactness of both the structural map and its relative diagonal is preserved by base change by [lem-sfb-space-quasicompact-affine-tests]; the new relative diagonal is the pullback of the old one. Thus these pullbacks stay in $\\mathcal F$. Reassociation of compatible tuples gives the pullback comparison isomorphisms, satisfying the unit and associativity identities. We can apply the pseudofunctor lemma below to this $\\mathcal F$. Work throughout with arbitrary additional quasi-separated scheme base changes, so every use of a universal hypothesis is legitimate.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Notation (5.1), Remark (5.2), printed pp.17-18; spaces-properties.tex Tag 03FU and spaces-morphisms.tex Tag 03HF"
+   }
+  },
+  {
+   "text": "Prove (ii) first. Write $K_b:\\mathcal F(T)\\to\\operatorname{Desc}(b)$ and $R=a^*$. Since $ba$ is universal effective descent, it is universal descent. By [lem-sfb-descent-data-refinement-hom], $R$ is fully faithful and $RK_b\\cong K_{ba}$. For $C,D\\in\\mathcal F(T)$ the map on Hom sets for $RK_b$ is bijective, as is the map induced by $R$; hence the map for $K_b$ is bijective. Given a $b$-datum $D$, choose $C$ and a specified isomorphism $K_{ba}C\\cong RD$. Fullness of $R$ lifts this isomorphism and its inverse to arrows $K_bC\\rightleftarrows D$; faithfulness gives their inverse identities. Thus $K_b$ is an equivalence. This applies after every base change, proving the universal assertion and preserving the specified realization comparison.",
+   "uses": [
+    "lem-sfb-descent-data-refinement-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), second assertion, printed p.19"
+   }
+  },
+  {
+   "text": "For (iii), write the datum as $(A,\\alpha)$ on $T'$ and choose a realization $B\\in\\mathcal F(V)$ and compatible isomorphism $\\beta:B|_{T'\\times_TV}\\xrightarrow{\\sim}A|_{T'\\times_TV}$. Put $V_n=V\\times_T\\cdots\\times_TV$ ($n$ factors), $W_n=T'\\times_TV_n$. On $W_2$, the two pullbacks $\\beta_1,\\beta_2$ have the same target $A|_{W_2}$. Set $\\delta=\\beta_2^{-1}\\beta_1:B_1|_{W_2}\\to B_2|_{W_2}$. This is an arrow between the canonical descent data for $W_2\\to V_2$: on $T'\\times_TT'\\times_TV_2$, compatibility of each $\\beta_i$ with $\\alpha$ reads $\\alpha\\beta_i^{(1)}=\\beta_i^{(2)}$, whence $\\delta^{(2)}=(\\beta_2^{(2)})^{-1}\\beta_1^{(2)}=(\\beta_2^{(1)})^{-1}\\beta_1^{(1)}=\\delta^{(1)}$ under the canonical identifications. Full faithfulness in the universal-descent hypothesis on $q$, applied over $V_2$, uniquely lifts $\\delta$ and $\\delta^{-1}$ to inverse arrows $\\lambda:B_1\\xrightarrow{\\sim}B_2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.7), printed p.19: constructing the descent datum on a local realization"
+   }
+  },
+  {
+   "text": "The diagonal identity for $\\lambda$ follows after pullback along $W_1\\to V$, where it is $\\beta^{-1}\\beta=1$; this pullback is faithful on arrows by universal descent for $q$. On $W_3$ the cocycle is $(\\beta_3^{-1}\\beta_2)(\\beta_2^{-1}\\beta_1)=\\beta_3^{-1}\\beta_1$. Faithfulness over $V_3$ gives $\\lambda_{23}\\lambda_{12}=\\lambda_{13}$. Thus $(B,\\lambda)$ is a $g$-datum. Effective descent for $g$ gives $C\\in\\mathcal F(T)$ and a specified compatible isomorphism $\\gamma:C|_V\\xrightarrow{\\sim}B$. By the equation defining $\\lambda$, $\\beta\\gamma$ on $T'\\times_TV$ commutes with the canonical descent datum for the projection to $T'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.7), printed p.19: diagonal and triple-product checks, then effectivity for g"
+   }
+  },
+  {
+   "text": "The projection $T'\\times_TV\\to T'$ is a base change of $g$. Its fully faithful canonical comparison uniquely descends $\\beta\\gamma$ and its inverse to an isomorphism $\\eta:C|_{T'}\\xrightarrow{\\sim}A$. To check that $\\eta$ is a $q$-datum arrow, pull the required equation back along $T'\\times_TT'\\times_TV\\to T'\\times_TT'$. There it is precisely $\\alpha\\beta_1=\\beta_2$ and the canonical pullback identity for $C$. This projection is again a base change of $g$, so its faithfulness gives the equation before pullback. Therefore $\\eta$ realizes the original datum, proving (iii). This is arrow lifting from the assumed Hom bijections, not an unproved effectivity-locality assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.7), printed p.19: descending the realization isomorphism and checking its compatibility"
+   }
+  },
+  {
+   "text": "For (i), let $X\\xrightarrow{a}Y\\xrightarrow{b}T$ have both maps universal effective descent and put $c=ba$. First $c$ is universal descent. Indeed, for objects $C,D\\in\\mathcal F(T)$, a map $u:C|_X\\to D|_X$ satisfying the $c$ equalizer condition also satisfies the $a$ condition, so uniquely descends to $v:C|_Y\\to D|_Y$. The two pullbacks of $v$ to $Y\\times_TY$ agree after pullback to $X\\times_TX$ by the condition on $u$. The latter map to $Y\\times_TY$ is a composite of two base changes of $a$, changing one factor at a time. Each is faithful on arrows by universal descent for $a$; hence so is their composite (injectivity composes). Thus $v$ satisfies the $b$ condition, so uniquely descends to $C\\to D$. Uniqueness is successively that for $a$ and $b$. Repeating this argument after any base change proves the asserted universal full faithfulness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), first assertion, printed p.19: Hom equalizer calculation"
+   }
+  },
+  {
+   "text": "Pull $c$ back along $b:Y\\to T$. Its pullback is $r:X\\times_TY\\to Y$, second projection. The graph $s:X\\to X\\times_TY$, $x\\mapsto(x,a(x))$, is defined by the fibre-product universal property, and $rs=a$. Since $a$ is universal effective descent, the already proved (ii) applied to $s,r$ says that $r$ is universal effective descent. This does not assume composition of effective descent maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), first assertion, printed p.19: refinement by the graph after base change"
+   }
+  },
+  {
+   "text": "Given any $c$-datum, its pullback along $b$ is effective by step 7. Step 6 gives universal descent for $c$, and $b$ is universal effective descent; thus the already proved (iii), steps 3-5, makes the datum effective with its specified realization isomorphism. Together with step 6 this proves (i). Perform the same construction after every base change to obtain the universal assertion. All comparisons used above are either the specified realization comparisons or unique lifts along fully faithful functors: identities and compositions of lifts agree because their images agree. In particular the conclusions concern actual compatible isomorphisms of data, not merely classes of objects. Identity and empty-scheme cases use the same Hom bijections and require no choice of a point or a nonempty cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Propositions (5.6)-(5.7), printed p.19: final assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-sfb-descent-data-refinement-hom",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Explicit proof by Q09 of Propositions (5.6)-(5.7), which Rydh states without proofs; direct Hom descent, refinement, base localization, then composition. No external reduction theorem assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal effective descent morphisms of a fibred category compose and descend along refinements",
+   "results": "{\"t\": \"2026-10-23T21:16:19Z\", \"tool\": \"leanfinder\", \"query\": \"Universal effective descent morphisms of a fibred category compose and descend along refinements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EffectiveEpi.fac\", \"CategoryTheory.effectiveEpiFamilyStructCompIso_aux\", \"CategoryTheory.EffectiveEpiStruct.fac\", \"CategoryTheory.Functor.effectiveEpiOver\", \"CategoryTheory.EffectiveEpiFamily.fac\", \"CategoryTheory.EffectiveEpiStruct.desc\", \"CategoryTheory.EffectiveEpi.fac_assoc\", \"CategoryTheory.EffectiveEpiFamilyStruct.desc\"], \"digest\": \"c69e3361f97ef824\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveDescent\"",
+   "results": "{\"t\": \"2026-10-23T21:16:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"EffectiveDescent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ffective[Dd]escent|[Dd]escent.*[Rr]efin|[Dd]escent.*[Cc]ompos",
+   "results": "{\"t\": \"2026-10-23T21:16:13Z\", \"tool\": \"grep\", \"query\": \"[Ee]ffective[Dd]escent|[Dd]escent.*[Rr]efin|[Dd]escent.*[Cc]ompos\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"2b98e63e60a6d507\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composition of universal effective descent morphisms is effective descent and a right factor of an effective descent morphism is effective descent",
+   "results": "{\"t\": \"2026-10-23T21:16:14Z\", \"tool\": \"leansearch\", \"query\": \"The composition of universal effective descent morphisms is effective descent and a right factor of an effective descent morphism is effective descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.instEffectiveEpiComp\", \"CategoryTheory.instEffectiveEpiFamilyCompOfIsSplitEpi\", \"CategoryTheory.effectiveEpiFamilyStructOfComp\", \"CategoryTheory.instEffectiveEpiFamilyComp\", \"CategoryTheory.EffectiveEpi.fac\", \"CategoryTheory.EffectiveEpiFamilyStruct.fac\", \"CategoryTheory.EffectiveEpiFamily.fac_assoc\", \"CategoryTheory.EffectiveEpiStruct.fac\"], \"digest\": \"f11fb5aec6c36b62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a pseudofunctor to categories, effective descent is stable under composition, refinement, and change of base by an effective descent cover",
+   "results": "{\"t\": \"2026-10-23T21:17:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a pseudofunctor to categories, effective descent is stable under composition, refinement, and change of base by an effective descent cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\"], \"digest\": \"6bed906fca86fdaf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sStackFor|[Ii]sPrestackFor",
+   "results": "{\"t\": \"2026-10-23T21:17:58Z\", \"tool\": \"grep\", \"query\": \"[Ii]sStackFor|[Ii]sPrestackFor\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"f16000be41abc315\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStackFor\", \"comp\"",
+   "results": "{\"t\": \"2026-10-23T21:17:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStackFor\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudofunctor which is a stack for a composite covering is a stack for the coarser covering; stack descent is transitive",
+   "results": "{\"t\": \"2026-10-23T21:18:00Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudofunctor which is a stack for a composite covering is a stack for the coarser covering; stack descent is transitive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\"], \"digest\": \"4cc738d156bf73aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ffective|[Rr]efine|[Cc]ompos|[Tt]ransitiv",
+   "results": "{\"t\": \"2026-10-23T21:17:59Z\", \"tool\": \"grep\", \"query\": \"[Ee]ffective|[Rr]efine|[Cc]ompos|[Tt]ransitiv\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentDataAsCoalgebra.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\"], \"digest\": \"171532a6fa62d287\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: EffectiveEpi descends individual arrows, not objects in fibre categories. Pseudofunctor.IsStackFor and Precoverage.lean supply useful machinery but the displayed hypotheses are local universal descent for individual maps, without a pre-existing Grothendieck topology or prestack instance. Composition and the objectwise base-change criterion are not one-line specializations of the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStackFor.of_le|IsStack.of_precoverage|EffectiveDescent",
+   "results": "{\"t\": \"2026-10-23T21:55:31Z\", \"tool\": \"grep\", \"query\": \"IsStackFor.of_le|IsStack.of_precoverage|EffectiveDescent\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"3a8d2e973c7590b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a category fibred over schemes universal effective descent morphisms compose and a right factor is universal effective descent",
+   "results": "{\"t\": \"2026-10-23T21:55:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a category fibred over schemes universal effective descent morphisms compose and a right factor is universal effective descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab\", \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_snd\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_snd\", \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_fst\", \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms_assoc\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hb\", \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_fst\"], \"digest\": \"546bfed3bed40045\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal descent for a category fibred over schemes: composition and refinement preserve effective descent and effectivity can be checked after an effective descent base change",
+   "results": "{\"t\": \"2026-10-23T21:55:57Z\", \"tool\": \"leansearch\", \"query\": \"Universal descent for a category fibred over schemes: composition and refinement preserve effective descent and effectivity can be checked after an effective descent base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EffectiveEpiFamilyStruct.fac\", \"CategoryTheory.EffectiveEpiFamily.fac\", \"CategoryTheory.EffectiveEpiFamily.desc\", \"CategoryTheory.effectiveEpiFamilyStructOfComp\", \"CategoryTheory.instEffectiveEpiFamilyComp\", \"CategoryTheory.EffectiveEpiFamilyStruct.uniq\", \"CategoryTheory.MorphismProperty.instDescendsAlongOfIsStableUnderBaseChangeOfHasOfPrecompPropertyOfRespectsRight\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\"], \"digest\": \"7e677ea13affad31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of objects for a pseudofunctor can be checked locally after an effective descent morphism when morphisms already descend universally",
+   "results": "{\"t\": \"2026-10-23T21:55:57Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of objects for a pseudofunctor can be checked locally after an effective descent morphism when morphisms already descend universally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj_hom\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\"], \"digest\": \"e3fe8ff0e5973f48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulPullFunctor|faithful_pullFunctor|full_pullFunctor",
+   "results": "{\"t\": \"2026-10-23T21:58:41Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulPullFunctor|faithful_pullFunctor|full_pullFunctor\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"03c4b57f7e1ffa14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally fully faithful descent comparison for a composite morphism implies that restriction from descent data for the right factor to descent data for the composite is fully faithful",
+   "results": "{\"t\": \"2026-10-23T21:58:42Z\", \"tool\": \"leansearch\", \"query\": \"A universally fully faithful descent comparison for a composite morphism implies that restriction from descent data for the right factor to descent data for the composite is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Functor.FullyFaithful.ofCompFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.mk\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Functor.Full.comp\"], \"digest\": \"a8484750fac5ca03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulPullFunctor\"",
+   "results": "{\"t\": \"2026-10-23T21:58:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"fullyFaithfulPullFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.fullyFaithfulPullFunctor\"], \"digest\": \"43b7929d2971428b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of descent data along a refinement is fully faithful if the finer morphism is universally of descent for a category fibred over a category with pullbacks",
+   "results": "{\"t\": \"2026-10-23T21:58:43Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of descent data along a refinement is fully faithful if the finer morphism is universally of descent for a category fibred over a category with pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_hom\"], \"digest\": \"440bdad4bc66dc85\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A refinement map between Cech descent categories is fully faithful whenever its composite to the base is universally a morphism of descent, without any topology or prestack assumption",
+   "results": "{\"t\": \"2026-10-23T22:00:36Z\", \"tool\": \"leanfinder\", \"query\": \"A refinement map between Cech descent categories is fully faithful whenever its composite to the base is universally a morphism of descent, without any topology or prestack assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.GrothendieckTopology.fullyFaithfulUliftYoneda\", \"CategoryTheory.fullyFaithfulSheafCompose\"], \"digest\": \"a12a45a263a42a19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "grep",
+   "query": "pullFunctor|FullyFaithful",
+   "results": "{\"t\": \"2026-10-23T22:01:25Z\", \"tool\": \"grep\", \"query\": \"pullFunctor|FullyFaithful\", \"sub\": \"CategoryTheory/Sites/Descent/DescentData.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"179\", \"180\", \"192\", \"199\"], \"digest\": \"2994fffc21d0b092\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of Cech descent data along a cartesian square is fully faithful if the map between bases universally descends morphisms",
+   "results": "{\"t\": \"2026-10-23T22:01:25Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of Cech descent data along a cartesian square is fully faithful if the map between bases universally descends morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.MorphismProperty.of_isPullback_of_descendsAlong\", \"CategoryTheory.Pseudofunctor.DescentData.pullHom_hom\", \"CategoryTheory.Functor.relativelyRepresentable.isPullback_of_map\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\"], \"digest\": \"82b5e57703dd533c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\", \"pullFunctor\"",
+   "results": "{\"t\": \"2026-10-23T22:01:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentData\\\", \\\"pullFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_inverse\"], \"digest\": \"3a519b77a3990494\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change by a universal descent morphism is fully faithful on the category of Cech descent data for any fixed map",
+   "results": "{\"t\": \"2026-10-23T22:01:26Z\", \"tool\": \"leanfinder\", \"query\": \"Base change by a universal descent morphism is fully faithful on the category of Cech descent data for any fixed map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.GrothendieckTopology.fullyFaithfulUliftYoneda\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\"], \"digest\": \"d627ccb7cf3f8c09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulPullFunctor|pullFunctorCompIso|fullyFaithfulToDescentData",
+   "results": "{\"t\": \"2026-10-23T22:02:02Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulPullFunctor|pullFunctorCompIso|fullyFaithfulToDescentData\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"5eccbbfbece1e4e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between two descent data glue uniquely along a morphism of bases which has universal descent for morphisms",
+   "results": "{\"t\": \"2026-10-23T22:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms between two descent data glue uniquely along a morphism of bases which has universal descent for morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.hom_ext\", \"CategoryTheory.Pseudofunctor.DescentData.Hom.ext\", \"CategoryTheory.Pseudofunctor.DescentData.Hom.mk.inj\", \"CategoryTheory.Pseudofunctor.DescentData.hom\", \"CategoryTheory.Pseudofunctor.DescentData.Hom.ext_iff\", \"CategoryTheory.Pseudofunctor.DescentData.Hom\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj_hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq\"], \"digest\": \"1b684abc1471beed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: searches return effective epimorphisms or topology/prestack-based descent machinery, not the three single-map universal descent assertions for the present fibre category. Candidate hypotheses inspected in Precoverage.lean lines 49-56 and 323-376 and IsStack.lean lines 45-72."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qc-subtrusive-etale-descent",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the application of Proposition (5.6) to the flat/proper composite and its refinement; base-locality implicit in the first reduction",
+   "via": [
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-descent-composition-refinement-calculus",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Added one general Hom-only refinement lemma, not an effectiveness clause. Proved refinement via its fully faithful restriction, proved base localization by constructing and checking the local realization cocycle, and proved composition by a Hom equalizer calculation and graph refinement after base change. All realization isomorphisms are retained.",
+  "blueprint": "Inherited support chain under det-thm-sf-ctf-stability-direct-images, current latest proof (3) compactification/direct-image route. This helper implements Rydh (5.6)-(5.7) used by the pre-existing subtrusive-descent support chain. blueprint_refs ancestor returns null; retained the supplied null ancestor and complete via chain. No chapter or unit route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space pullback or etale/compactness permanence used only to keep the fibre category closed under base change; not a replacement for a direct-image route step."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space pullback or etale/compactness permanence used only to keep the fibre category closed under base change; not a replacement for a direct-image route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-a57484e5a",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-a57484e5a (reviewer sub-agent of L); spot-checked: I read the item, the one new node, every cited statement and the report in full. The Rydh PDF has no local copy; the source record was already on the base item and Rydh gives (5.6)-(5.7) without proofs, so I checked the proof step by step against the item statement and the cited node statements. The item statement and stmt_deps are byte-identical to base. The base had no proof, so this is a first split, not a re-split. Steps: 2 proves (ii) through the new node, (3-5) proves (iii) by building the datum lambda and descending beta-gamma along base changes of g, 6 proves the Hom part of (i) (X×X→Y×Y is a composite of two base changes of a), 7 proves r universal effective by applying (ii) to the graph s=(id,a), and 8 applies (iii). The order ii→iii→i has no cycle. All steps are correct. New node lem-sfb-descent-data-refinement-hom (if ba is universal descent, a^*: Desc(b)→Desc(ba) is fully faithful) is true. I checked the report's argument h=β^{-1}vα on Y×_SU and the case Y=T⊔T, a a non-surjective inclusion. It is not a duplicate: the galois fpqc refinement and fully-faithful nodes are scheme/fpqc-specific. It is strictly smaller than the item and statement-only. Fixes (2 faults): (C1) step 1 never said that the fibre products of quasi-separated bases are quasi-separated, which the pseudofunctor F on quasi-separated schemes needs; added a sentence citing lem-weil-pbc-qcqs-morphism-permanence (Mathlib leaf) and def-weil-quasi-separated-morphism, and extended uses and proof_deps. (B3) the new node cited only def-pc-scheme for 'quasi-separated' and nothing for U×_SU; added def-weil-quasi-separated-morphism and def-pc-fibre-product to its text and stmt_deps. Batch-5 flag: lem-sfb-space-quasicompact-affine-tests reaches sec-trace-formula only through def-trf-algebraic-space, which is a general definition the base item already cites; accepted. The trf tool_uses (space fibre products, chartwise étale permanence) are generic facts; accepted. No SGA source is cited. Advisory: the item's base statement also cites only def-pc-scheme for 'quasi-separated'.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDescentCompositionRefinement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_descent_composition_refinement_calculus",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etale_descent_composition_refinement_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDescentCompositionRefinement.lean",
+  "statement": "theorem etale_descent_composition_refinement_calculus {S : Scheme.{u}} : (∀ (X Y T : Over S), QuasiSeparatedSpace X.left → QuasiSeparatedSpace Y.left → QuasiSeparatedSpace T.left → ∀ (a : X ⟶ Y) (b : Y ⟶ T), (IsUniversalEffectiveFpEtaleDescent a → IsUniversalEffectiveFpEtaleDescent b → IsUniversalEffectiveFpEtaleDescent (a ≫ b)) ∧ (IsUniversalEffectiveFpEtaleDescent (a ≫ b) → IsUniversalEffectiveFpEtaleDescent b)) ∧ (∀ (X T V P : Over S), QuasiSeparatedSpace X.left → QuasiSeparatedSpace T.left → QuasiSeparatedSpace V.left → QuasiSeparatedSpace P.left → ∀ (q : X ⟶ T) (g : V ⟶ T) (h : P ⟶ X) (r : P ⟶ V) (square : IsPullback h r q g), IsUniversalFpEtaleDescent q → IsUniversalEffectiveFpEtaleDescent g → ∀ (D : FpEtaleDescentData q) (E : FpEtaleDescentData r), FpEtaleDatumPullback square D E → Nonempty E.Realization → Nonempty D.Realization)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8102fbd0",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Statement correct vs node and Rydh (5.6)-(5.7): (i) composite of universal effective descent maps, (ii) ba universal effective => b, with no hypothesis on a, (iii) local effectivity via FpEtaleDatumPullback; full faithfulness as a kernel-pair Hom equalizer with unique lift; realizations carry the cartesian map and invariance under the descent datum (compatible isos, not iso classes); the four F(T) conditions match; all bases quasi-separated, P's implied; identity/empty/non-surjective-a cases covered. Gates pass: no hollow defs, only sorry, docstrings with source and blueprint plus the 8 proof steps, item lean.statement verbatim, no duplicate (Over.DescentDatum reused). F1 (H2/B3) FIXED: new def-sfb-fp-etale-space-descent cited theorems lem-trf-space-chartwise-etale-permanence (IsChartwiseEtale, schemeSpace) and lem-sfb-space-quasicompact-affine-tests (IsQuasiCompactPresheafMap). fixes/def-sfb-fp-etale-space-descent.json swaps stmt_deps and text citations to def-sfb-space-chartwise-etale-morphism, def-trf-scheme-algebraic-space and def-sfb-space-quasi-compact-presheaf-map, all landed before the base. No Lean change, so no compile; the worker's per-file compiles stand. Advisories: base item stmt_dep lem-trf-space-chartwise-etale-permanence (an S2 fix cannot change it); theorem-module imports in FpEtaleSpaceDescent."
+ }
+}

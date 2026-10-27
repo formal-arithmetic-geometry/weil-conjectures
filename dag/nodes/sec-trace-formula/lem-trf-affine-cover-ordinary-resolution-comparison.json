@@ -1,0 +1,162 @@
+{
+ "id": "lem-trf-affine-cover-ordinary-resolution-comparison",
+ "kind": "statement",
+ "title": "Descent of a single smooth ordinary-resolution comparison",
+ "statement": "For a linear order L and an affine descent datum D as in [def-trf-labeled-ordinary-resolution-descent-data], every smooth rational morphism h:T->S has a labeled Comparison h (D.tower S) (D.tower T). For every finite affine cover U of S and V of T and every smooth rational map v:V.total->U.total with v followed by U.map equal to V.map followed by h, this comparison restricts to the prescribed D.localRule comparison via D.cover S U and D.cover T V, in the precise sense of Restricts. This asserts one comparison for one smooth map and its restrictions, with no identity/composition, canonical-step, surjective-nondeletion or empty-input conclusion.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+ },
+ "stmt_deps": [
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine target cover and a finite affine refinement of its inverse image on the source. The whole disjoint-union inputs are embeddable. Smooth restriction and source locality make the induced map of these inputs smooth. Apply the localRule comparison to this whole map, and transport its ordered survivor embedding and count along the two uncontracted cover length equalities.",
+   "uses": [
+    "def-trf-labeled-ordinary-resolution-descent-data",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "Use smooth flatness, flat base change and [thm-nagata-blowup-flat-base-change] at every original level to obtain the uncontracted pullback tower. Its centers are the extended ideals. On overlaps refine source opens by affine neighbourhoods mapping into affine target neighbourhoods in the overlap. The datum cocycle identifies the ideals; [lem-trf-ordinary-resolution-level-map-rigidity] identifies maps over the base. Glue the maps and their inverses. The cartesian squares, transition equations, retained ideals and deleted-unit equivalence follow after restriction to the covering. The label equation is transported through the cover identifications.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "thm-nagata-blowup-flat-base-change",
+    "def-pc-fibre-product",
+    "def-nagata-extended-ideal",
+    "lem-trf-ordinary-resolution-level-map-rigidity",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  },
+  {
+   "text": "For any other pair of subordinate covers use common affine refinements, without assuming affine intersections. The cover cocycle and rigidity identify the maps and the ideal restrictions; labels identify the survivor embeddings and their uniquely determined counts. Gluing uniqueness proves the count, survivor and level-map equations of Restricts for every pair of covers at once. Empty covers and unit identity stages are included; disjoint unions are whole inputs throughout.",
+   "uses": [
+    "def-trf-labeled-ordinary-resolution-descent-data",
+    "lem-trf-ordinary-resolution-level-map-rigidity",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-weil-finite-type-morphism",
+  "lem-trf-ordinary-resolution-level-map-rigidity",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "sbc-lem-smooth-criterion",
+  "thm-nagata-blowup-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9 and 2.3.4--2.3.5(ii), printed pp.88,91--92; W2 expansion using the proved ordinary blowup universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of smooth comparisons between finite labeled blowup towers from finite affine covers",
+   "results": "IsZariskiLocalAtTarget.descendsAlong, Algebra.Smooth.exists_finiteType, isSmooth_isStableUnderBaseChange and smoothness recursion/base-change declarations. None constructs a labeled contracted comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; morphism-property descent is not descent of tower maps and ordered contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing a contracted labeled blowup tower comparison from comparisons on finite affine covers",
+   "results": "Scheme.ExistsHomHomCompEqCompAux.exists_eq, ExistsHomHomCompEqCompAux.hii', ExistsHomHomCompEqCompAux.ᵋD, Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, Scheme.Cover.gluedCover_t'. None states this descent assertion.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; the generic gluing API must be combined with finite-index contraction data."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(tower|unique|rigid)|contracted.*tower (msearch grep, Mathlib); OrdinaryResolutionComparison and CanonicalSteps (both library roots)",
+   "results": "No Mathlib hits. Project hits are the tower/comparison definitions, the assigned theorem and analogous globalization theorems with different data. No existing theorem gives a comparison on the fixed towers of Datum with restriction to every specified cover comparison.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendedResolutionSmoothComparisons",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Original descended-comparison proof Steps 1--6 (single-map gluing) and Steps 7--8 (identity/composition), ILO VIII 2.1.9 and 2.3.4--2.3.5. This node isolates the descent of one comparison and its cover independence, before coherence is assembled.",
+   "via": [
+    "lem-trf-descended-resolution-smooth-comparisons",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoverOrdinaryResolutionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoverOrdinaryResolutionComparison.lean",
+  "declaration": "AlgebraicGeometry.OrdinaryResolutionDescent.affineCover_ordinaryResolution_comparison",
+  "statement": "theorem affineCover_ordinaryResolution_comparison\n    {L : Type w} [LinearOrder L] (D : Datum.{u, w} L)\n    (S T : RationalResolutionInput.{u}) (h : T.scheme ⟶ S.scheme)\n    (over : h ≫ S.structureMap = T.structureMap) [Smooth h] :\n    ∃ c : Comparison h (D.tower S) (D.tower T),\n      ∀ (U : AffineCover S) (V : AffineCover T)\n        (v : V.total.scheme ⟶ U.total.scheme) (_square : v ≫ U.map = V.map ≫ h)\n        (overV : v ≫ U.total.structureMap = V.total.structureMap) [Smooth v],\n        Nonempty (Restricts c U V (D.cover S U) (D.cover T V)\n          (D.localRule.comparison U.total V.total U.embeddable V.embeddable v overV))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083350-L-2334502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083350-L-2334502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

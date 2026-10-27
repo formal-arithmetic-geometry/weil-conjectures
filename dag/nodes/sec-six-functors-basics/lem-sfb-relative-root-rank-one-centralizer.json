@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-relative-root-rank-one-centralizer",
+ "kind": "statement",
+ "title": "Relative rank-one centralizer of a root kernel torus",
+ "statement": "Let $A$ be a commutative ring and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is a group object in schemes over $S$ [def-pc-scheme], with multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme] over this base. Put $\\mathbf G_{m,S}=\\operatorname{Spec}A[t,t^{-1}]$ with multiplication of units and $\\mathbf G_{a,S}=\\operatorname{Spec}A[x]$ with addition. For a smooth group $H/S$ [def-sbc-smooth-morphisms], write $\\operatorname{Lie}(H)=\\ker(H(A[\\epsilon]/(\\epsilon^2))\\to H(A))$, with addition from multiplication and scalar action from $\\epsilon\\mapsto a\\epsilon$. Let $G/S$ be smooth affine of finite presentation [def-sbc-locally-finite-presentation] with every geometric fibre connected reductive: it has no nontrivial smooth connected normal unipotent closed subgroup, where unipotent means unipotent geometric matrices in a faithful representation. Let $T=\\mathbf G_{m,S}^r\\hookrightarrow G$ be a closed subgroup [def-weil-closed-immersion] which is a maximal torus on every geometric fibre, with $r\\geq0$, $M=\\mathbf Z^r$, characters $\\chi_m(z)=z^m$, and conjugation weight modules $\\mathfrak g_m\\subseteq\\mathfrak g=\\operatorname{Lie}(G)$ defined by the coaction equation $\\rho(v)=v\\otimes z^m$. Suppose $\\alpha\\in M\\setminus\\{0\\}$ and $\\mathfrak g_\\alpha$ is locally free of rank one. Write $\\alpha=d\\alpha_0$ with $d>0$ and $\\alpha_0$ primitive, and put $T_\\alpha=\\ker\\chi_{\\alpha_0}$, a split torus of rank $r-1$ (the trivial group if $r=1$). The centralizer functor\n$$H(B)=\\{g\\in G(B):g_Cu=ug_C\\text{ for every }B\\text{-algebra }C\\text{ and }u\\in T_\\alpha(C)\\}$$\nis represented by a smooth affine finitely presented closed subgroup $H\\subseteq G$ with connected reductive geometric fibres and with $T_\\alpha$ central in $H$. One has\n$$\\operatorname{Lie}(H)=\\operatorname{Lie}(T)\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}\\subseteq\\mathfrak g,$$\nand $\\mathfrak g_{-\\alpha}$ is locally free of rank one. Each geometric fibre of $(H,T)$ has precisely the nonzero roots $\\{\\alpha,-\\alpha\\}$. These centralizer, Lie inclusion and weight-module identifications commute with arbitrary and successive ring base changes. Here connectedness is [def-weil-connected-scheme], and a torus over an algebraically closed field is a product of multiplicative groups. No global trivialization of either root line is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Lemma 4.1.3 and proof, printed pp.108-109; the centralizer and tangent base-change properties used there. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative algebraic-group theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-sfb-relative-root-centralizer-interfaces",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-torus-centralizer-normalizer] with the rank-zero torus in $G$: its centralizer is $G$ itself. This supplies the finite locally free tangent module $\\mathfrak g$ and its natural arbitrary-base-change comparisons. Work on affine open neighbourhoods where this module is finite free, hence finite projective. Apply [lem-sfb-relative-torus-bundle-weights] there to the conjugation coaction. Its coefficient projections are uniquely determined by $\\rho(v)=\\sum_m v_m\\otimes z^m$, so agree on intersections. Thus they give $\\mathfrak g=\\bigoplus_m\\mathfrak g_m$ globally, with finite projective summands on each such neighbourhood and arbitrary-base-change comparisons. A finite subcover exists since the base is affine; the union of its finite weight supports is finite. The tangent operations are the stipulated ones: writing a tangent point as $e+\\epsilon D$, the unit identities for group multiplication make the product have coefficient $D+E$, while $\\epsilon\\mapsto a\\epsilon$ multiplies $D$ by $a$.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-relative-torus-bundle-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Section 4 introduction, printed p.107, and Lemma 4.1.3 proof, printed p.109; supporting Lemma 2.2.4, printed pp.64-66. Read online; WANTED locally."
+   }
+  },
+  {
+   "text": "Put $L=\\mathbf Z\\alpha_0=M\\cap\\mathbf Q\\alpha$. Primitive means that the coordinates of $\\alpha_0$ have greatest common divisor one. Integer elementary row operations, using Euclidean division on successive coordinate pairs, carry $\\alpha_0$ to the first standard basis vector. They give Laurent-monomial changes of coordinates identifying $M/L$ with $\\mathbf Z^{r-1}$ and $T_\\alpha$ with $\\mathbf G_m^{r-1}$. Equivalently its coordinate map is $A[M]\\twoheadrightarrow A[M/L]$, $z^m\\mapsto z^{\\bar m}$; its kernel is generated by $z^{\\alpha_0}-1$. It is a closed subgroup of $T$ and hence of $G$. Apply [lem-sfb-relative-torus-centralizer-normalizer] to this split torus. Its functor is exactly the displayed universal commuting functor in the item, so it gives $H$ smooth affine finitely presented and closed in $G$, with $\\operatorname{Lie}(H)=\\mathfrak g^{T_\\alpha}$, and gives arbitrary base change for these identifications. Here $\\alpha\\ne0$ implies $r\\geq1$.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Section 4 introduction, printed p.107, and Lemma 4.1.3 proof, printed p.109; supporting Lemma 2.2.4, printed pp.64-66. Read online; WANTED locally."
+   }
+  },
+  {
+   "text": "Fix any geometric point $\\bar s$ of $S$. Step 1 identifies $\\mathfrak g_m\\otimes_A\\kappa(\\bar s)$ with the full character-weight space in $\\operatorname{Lie}(G_{\\bar s})$. The assumed line $\\mathfrak g_\\alpha$ therefore makes $\\alpha$ a root there. Apply [lem-sfb-reductive-rank-one-reflections] to the connected reductive group $G_{\\bar s}$ and its split maximal torus $T_{\\bar s}$. Its statement gives the zero-weight space $\\operatorname{Lie}(T_{\\bar s})$, dimension one for both opposite root spaces, and $\\Phi_{\\bar s}\\cap\\mathbf Q\\alpha=\\{\\alpha,-\\alpha\\}$. Moreover the centralizer of the largest subtorus killed by $\\alpha$ is connected reductive of semisimple rank one. That subtorus is $(T_\\alpha)_{\\bar s}$: by step 2 it is a torus, contained in $\\ker\\alpha$ since $\\chi_\\alpha=\\chi_{\\alpha_0}^d$; conversely, on a subtorus $U\\cong\\mathbf G_m^k$ of $\\ker\\alpha$ the restriction of $\\chi_{\\alpha_0}$ is a character with trivial $d$-th power, and characters of $\\mathbf G_m^k$ are the grouplike elements, i.e. the monomials, of $\\kappa(\\bar s)[\\mathbf Z^k]$, with $\\mathbf Z^k$ torsion free, so $U\\subseteq\\ker\\chi_{\\alpha_0}$. That centralizer is $H_{\\bar s}$ by the base-change clause of [lem-sfb-relative-torus-centralizer-normalizer]. Thus all geometric fibres of $H$ are connected reductive. Since $T\\subseteq H$ and $T_{\\bar s}$ is maximal in $G_{\\bar s}$, it is also maximal in $H_{\\bar s}$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-relative-torus-centralizer-normalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 21.1-21.2, printed pp.424-425, and Theorem 21.11(a)-(b), printed pp.428-429."
+   }
+  },
+  {
+   "text": "On each affine neighbourhood used in step 1, every $\\mathfrak g_m$ is finite projective by [lem-sfb-relative-torus-bundle-weights]. By [lem-weil-pbc-finite-projective-prime-local-free], near any prime it is a finite free module. Its free rank is its dimension after passing to an algebraic closure of that prime's residue field. Step 3 therefore shows that $\\mathfrak g_{-\\alpha}$ is locally free of rank one, and that $\\mathfrak g_m=0$ for $m\\in L\\setminus\\{0,\\alpha,-\\alpha\\}$. For the latter conclusion the free rank is zero on each such neighbourhood, so all prime localizations vanish. Explicitly, if a vector $v$ were nonzero, its proper annihilator would be contained in a maximal ideal $\\mathfrak p$; $v/1=0$ at $\\mathfrak p$ would give $a\\notin\\mathfrak p$ with $av=0$, a contradiction. Thus vanishing is over $A$, even when $A$ is nonreduced; it is not an inference that a matrix vanishing on reduced fibres vanishes over $A$.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, finite projective implies finite locally free; elementary local-basis arguments below."
+   }
+  },
+  {
+   "text": "Conjugation by $T$ on itself is trivial, so the tangent inclusion induces $j:A^r=\\operatorname{Lie}(T)\\to\\mathfrak g_0$. The identification $\\operatorname{Lie}(T)=A^r$ sends $(a_i)$ to the tuple of units $(1+\\epsilon a_i)$, and is valid over every $A$-algebra. By [lem-sfb-relative-torus-bundle-weights] and [lem-weil-pbc-finite-projective-prime-local-free], on the affine neighbourhoods of step 1 the target is finite free locally at each prime. Step 3 and the tangent and weight comparisons of [lem-sfb-relative-torus-centralizer-normalizer] show that every geometric fibre of $j$ is the isomorphism onto the zero-weight space in [lem-sfb-reductive-rank-one-reflections]. Choose a free neighbourhood at a prime $\\mathfrak p$; the target rank is $r$ by that fibre isomorphism. The matrix of $j$ there is square and its determinant is outside $\\mathfrak p$, since it becomes invertible over the algebraic closure of the residue field. Inverting that determinant makes $j$ invertible, with inverse its adjugate divided by its determinant. These neighbourhoods cover $S$, so $j$ is an isomorphism. It identifies the actual submodules $\\operatorname{Lie}(T)=\\mathfrak g_0$ of $\\mathfrak g$.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, finite projective implies finite locally free; elementary local-basis arguments below."
+   }
+  },
+  {
+   "text": "Apply the restriction-invariants clause of [lem-sfb-relative-torus-bundle-weights] to $L\\subset M$ and the free quotient $M/L$. Together with [lem-sfb-relative-torus-centralizer-normalizer] this gives $\\operatorname{Lie}(H)=\\bigoplus_{m\\in L}\\mathfrak g_m$. Steps 4-5 turn this into precisely $\\operatorname{Lie}(T)\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$ inside $\\mathfrak g$. After any geometric base change it has exactly the two nonzero characters $\\alpha,-\\alpha$. Finally $T_\\alpha$ lies in $H$ because it commutes with itself, and every point of $H$ commutes universally with $T_\\alpha$ by the defining functor. This proves that $T_\\alpha$ is central in $H$.",
+   "uses": [
+    "lem-sfb-relative-torus-bundle-weights",
+    "lem-sfb-relative-torus-centralizer-normalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Section 4 introduction, printed p.107, and Lemma 4.1.3 proof, printed p.109; supporting Lemma 2.2.4, printed pp.64-66. Read online; WANTED locally."
+   }
+  },
+  {
+   "text": "For $A\\to B$, the Laurent quotient $B[M]\\to B[M/L]$ is obtained from that of step 2 by tensoring, so $(T_\\alpha)_B$ is the same root-kernel torus for $G_B$. The centralizer comparison in [lem-sfb-relative-torus-centralizer-normalizer] identifies $H_B$ with its centralizer as subfunctors of $G_B$: on every $B$-algebra both demand precisely the same universal commutation. Thus this identification and its inclusion in $G_B$ commute with a further extension $B\\to B'$, since all the maps are the identity on the corresponding $G$-points. The tangent comparisons from the same node, and the weight and invariant comparisons in [lem-sfb-relative-torus-bundle-weights], identify $B\\otimes_A\\mathfrak g_m$ with $(\\operatorname{Lie}(G_B))_m$ and $B\\otimes_A\\operatorname{Lie}(H)$ with $\\operatorname{Lie}(H_B)$, with their inclusions. For successive extensions $A\\to B\\xrightarrow{h}B'$, write a tangent vector as a derivation $D$ at the identity. The comparison on $b\\otimes D$ has coefficient $bD(c)$ on a coordinate $c$ of $G$. Both successive and direct comparisons on $b'\\otimes(b\\otimes D)$ have coefficient $b'h(b)D(c)$; therefore they agree, since pure tensors generate. Restricting this formula to each homogeneous summand proves the asserted successive compatibility for the root lines, zero weight and invariant module. All decomposition maps are inclusions and sums of these summands, so they agree too. No flatness assumption on $B$, basis of a root line, or restriction on residue characteristic has entered. If $A=0$ all schemes and modules here are empty or zero, so the assertions hold; if $r=0$ there is no allowed $\\alpha$.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-relative-torus-bundle-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Section 4 introduction, printed p.107, and Lemma 4.1.3 proof, printed p.109; supporting Lemma 2.2.4, printed pp.64-66. Read online; WANTED locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Agent-written affine assembly following Conrad Lemma 4.1.3, printed pp.108-109, read online; local-basis and successive-base-change calculations made explicit. Local PDF remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reductive group scheme centralizer of a split subtorus is reductive smooth and commutes with base change",
+   "results": "{\"t\": \"2026-10-24T05:17:54Z\", \"tool\": \"leansearch\", \"query\": \"Reductive group scheme centralizer of a split subtorus is reductive smooth and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"AddSubgroup.centralizer\", \"Subsemigroup.centralizer\", \"Submonoid.centralizer\", \"Subring.centralizer\", \"AddSubgroup.normal_centralizer\", \"AddSubgroup.characteristic_centralizer\", \"Subsemigroup.centralizer_le\"], \"digest\": \"b542fe5a514bc64d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results are abstract subgroup centralizers or characteristic-zero Lie-algebra root strings; none gives the relative reductive group-scheme centralizer or its base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T05:17:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results are abstract subgroup centralizers or characteristic-zero Lie-algebra root strings; none gives the relative reductive group-scheme centralizer or its base change."
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer|Centralizer|reductive",
+   "results": "{\"t\": \"2026-10-24T05:17:55Z\", \"tool\": \"grep\", \"query\": \"centralizer|Centralizer|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results are abstract subgroup centralizers or characteristic-zero Lie-algebra root strings; none gives the relative reductive group-scheme centralizer or its base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Centralizer of the codimension one subtorus killed by a root in a reductive group scheme has Lie weights zero and plus or minus that root",
+   "results": "{\"t\": \"2026-10-24T05:17:58Z\", \"tool\": \"leanfinder\", \"query\": \"Centralizer of the codimension one subtorus killed by a root in a reductive group scheme has Lie weights zero and plus or minus that root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieSubalgebra.root\", \"LieModule.lie_mem_genWeightSpaceChain_of_genWeightSpace_eq_bot_left\", \"LieModule.lie_mem_genWeightSpaceChain_of_genWeightSpace_eq_bot_right\", \"LieAlgebra.mapsTo_toEnd_genWeightSpace_add_of_mem_rootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff\"], \"digest\": \"d7f16779b3155083\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results are abstract subgroup centralizers or characteristic-zero Lie-algebra root strings; none gives the relative reductive group-scheme centralizer or its base change."
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer|Centralizer|reductive",
+   "results": "{\"t\": \"2026-10-24T07:16:01Z\", \"tool\": \"grep\", \"query\": \"centralizer|Centralizer|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie-algebra Cartan/Killing-form results do not state the relative reductive group-scheme theorem; grep and Loogle have no group-scheme centralizer hit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive group scheme with split maximal torus has reduced geometric root systems and the centralizer of a root kernel torus has only the two opposite roots",
+   "results": "{\"t\": \"2026-10-24T07:16:01Z\", \"tool\": \"leansearch\", \"query\": \"A reductive group scheme with split maximal torus has reduced geometric root systems and the centralizer of a root kernel torus has only the two opposite roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"RootPairing.IsG2.toIsReduced\", \"AlgebraicGeometry.IsReduced\", \"RootPairing.IsReduced.casesOn\", \"RootPairing.isReduced_iff'\", \"RootPairing.IsNotG2.toIsReduced\", \"RootPairing.IsReduced.rec\"], \"digest\": \"f1afe438f67cdacd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie-algebra Cartan/Killing-form results do not state the relative reductive group-scheme theorem; grep and Loogle have no group-scheme centralizer hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T07:16:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie-algebra Cartan/Killing-form results do not state the relative reductive group-scheme theorem; grep and Loogle have no group-scheme centralizer hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Centralizer of a codimension one root kernel subtorus in a reductive group scheme has Lie algebra torus plus opposite root lines, compatibly with arbitrary ring base change",
+   "results": "{\"t\": \"2026-10-24T07:16:10Z\", \"tool\": \"leanfinder\", \"query\": \"Centralizer of a codimension one root kernel subtorus in a reductive group scheme has Lie algebra torus plus opposite root lines, compatibly with arbitrary ring base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"LieAlgebra.corootSpace\", \"LieAlgebra.mem_corootSpace'\", \"LieAlgebra.mem_corootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"LieAlgebra.rootSpace_zero_eq\"], \"digest\": \"07798473df3d22ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie-algebra Cartan/Killing-form results do not state the relative reductive group-scheme theorem; grep and Loogle have no group-scheme centralizer hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic centralizer of a split torus in a smooth affine group scheme is smooth and its tangent module is the invariant direct summand",
+   "results": "{\"t\": \"2026-10-24T07:18:39Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme theoretic centralizer of a split torus in a smooth affine group scheme is smooth and its tangent module is the invariant direct summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"LieAlgebra.corootSpace\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieAlgebra.InvariantForm.orthogonal_isCompl\", \"LieIdeal.le_killingCompl_top_of_isLieAbelian\"], \"digest\": \"fe7f811f8f2fc439\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie-algebra Cartan/Killing-form results do not state the relative reductive group-scheme theorem; grep and Loogle have no group-scheme centralizer hit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-canonical-root-exponential",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Theorem 4.1.4, printed p.110, and its proof, pp.116-118; Remark 4.2.4. Closed canonical exponential of the root line, uniqueness and arbitrary base change.  Supporting prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 and proof, printed pp.108-109; the centralizer and tangent base-change properties used there.",
+   "via": [
+    "lem-sfb-relative-canonical-root-exponential",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-root-rank-one-centralizer",
+  "worker": "stage1",
+  "summary": "Retained the statement; supplied seven proof steps using the existing relative centralizer, relative weight decomposition, field rank-one structure and finite-projective local-freeness nodes. No new nodes. Checked nonreduced bases, nonprimitive roots, rank one, the empty base and arbitrary successive base change.",
+  "blueprint": "Nearest blueprint ancestor reported by blueprint_refs.py is None. This retains the existing provenance via relative-canonical-root-exponential and det-thm-sf-ctf-stability-direct-images (3); realizes the Conrad Lemma 4.1.3 structural input named in blueprint.from.place. Searched all imported blueprint nodes for centralizer and root, and read the latest unit and direct-image proof; none states this relative centralizer theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Generic finite-projective local-freeness criterion, Stacks 00NX; used for rank and determinant calculations over an arbitrary base ring. The group-scheme unit has no substitute for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-cccf0b89d",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-cccf0b89d (reviewer sub-agent of L); spot-checked: All 7 steps of the split were read against the full statements of every cited node: relative-torus-centralizer-normalizer, relative-torus-bundle-weights, reductive-rank-one-reflections and finite-projective-prime-local-free (00NX). There are no new nodes, and the statement and stmt_deps are unchanged. Steps 1, 2 and 4-7 are correct. Step 1 applies the centralizer node at r=0 and the weight node on free charts, then glues. Step 2 builds the primitive kernel torus as a GL_r(Z) coordinate change. Step 4 does the rank and vanishing over nonreduced A through annihilators. Step 5 is the determinant argument. Step 6 uses the L-invariants clause. Step 7 checks successive base change on pure tensors. FIX in step 3 (E5): the field node's T_alpha is 'the largest subtorus of ker alpha', and the step identified it with ker chi_{alpha_0} only 'by quotient coordinates'. I added the argument: ker chi_{alpha_0} lies in ker alpha because chi_alpha = chi_{alpha_0}^d, and on any subtorus G_m^k of ker alpha the restriction of chi_{alpha_0} has trivial d-th power, so it is trivial, since characters are monomials and Z^k is torsion-free. Edge cases checked: r=1, SL2 in characteristic 2, PGL2, GL2 over dual numbers, A=0, and G a torus. No duplicate: corank-one-centralizer-reductivity-test is field-level, and relative-tangent-weight-base-change needs a Noetherian base. Tool use lem-weil-pbc-finite-projective-prime-local-free (generic 00NX) is accepted. Batch-5: def-trf-algebraic-space is a general definition and lem-trf-smooth-fpqc-base-descent is a general Mathlib-leaf descent fact; neither is the trace formula, Poincaré duality, or a step of their proofs, so both are acceptable. Conrad's Reductive group schemes Lemma 4.1.3 is not in literature/ and is recorded as WANTED. coord/dag-sync.md is absent from the snapshot.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeRootRankOneCentralizer",
+  "declaration": "AlgebraicGeometry.RelativeRootCentralizer.relative_root_rankOne_centralizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeRootRankOneCentralizer.lean",
+  "statement": "theorem relative_root_rankOne_centralizer {A : Type u} [CommRing A] (r : ℕ) (G : Grp (Over (Spec (.of A)))) [Smooth G.X.hom] [IsAffine G.X.left] [LocallyOfFinitePresentation G.X.hom] (i : RingGroupSchemes.splitTorus A r ⟶ G) [IsClosedImmersion i.hom.hom.left] (hred : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsReductive ((extend f).obj G)) (hmax : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsMaximalTorus ((extend f).map i)) (α : Fin r → ℤ) (hα : α ≠ 0) (hline : IsLine (A := A) (weight i α)) (α0 : Fin r → ℤ) (d : ℕ) (hd : 0 < d) (hdiv : α = d • α0) (hprimitive : ∃ c : Fin r → ℤ, ∑ j : Fin r, c j * α0 j = 1) : ∃ (K H : Grp (Over (Spec (.of A)))) (k : K ⟶ RingGroupSchemes.splitTorus A r) (h : H ⟶ G) (j : RingGroupSchemes.splitTorus A r ⟶ H) (q : K ⟶ H), IsClosedImmersion k.hom.hom.left ∧ Nonempty (K ≅ RingGroupSchemes.splitTorus A (r - 1)) ∧ (∀ (B : Type u) [CommRing B] [Algebra A B], Set.range (fun t : points K.X B ↦ t ≫ k.hom.hom) = {t | characterValue r α0 t = 1}) ∧ IsClosedImmersion h.hom.hom.left ∧ Smooth H.X.hom ∧ IsAffine H.X.left ∧ LocallyOfFinitePresentation H.X.hom ∧ (∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsReductive ((extend f).obj H)) ∧ j ≫ h = i ∧ q ≫ h = k ≫ i ∧ (∀ (B : Type u) [CommRing B] [Algebra A B] (t : points K.X B) (x : points H.X B), Commute (t ≫ q.hom.hom) x) ∧ (∀ (B : Type u) [CommRing B] [Algebra A B], centralizer (k ≫ i) B = Set.range (fun x : points H.X B ↦ x ≫ h.hom.hom)) ∧ lieImage h = lieImage i ⊔ weight i α ⊔ weight i (-α) ∧ Disjoint (lieImage i) (weight i α ⊔ weight i (-α)) ∧ Disjoint (weight i α) (weight i (-α)) ∧ IsLine (A := A) (weight i (-α)) ∧ (∀ (F : Type u) [Field F] [IsAlgClosed F] [Algebra A F], ReductiveTorusCentralizer.IsMaximalTorus ((extend (algebraMap A F)).map j) ∧ ∀ m : Fin r → ℤ, (m ≠ 0 ∧ weightBase j F m ≠ ⊥) ↔ m = α ∨ m = -α) ∧ (∀ (B : Type u) [CommRing B] [Algebra A B], ∃ (eG : B ⊗[A] GrpObj.Lie G.X ≃ₗ[B] GrpObj.Lie ((extend (algebraMap A B)).obj G).X) (eH : B ⊗[A] GrpObj.Lie H.X ≃ₗ[B] GrpObj.Lie ((extend (algebraMap A B)).obj H).X), IsLieComparison G B eG.toLinearMap ∧ IsLieComparison H B eH.toLinearMap ∧ (∀ m : Fin r → ℤ, ((weight i m).baseChange B).map eG.toLinearMap = weightBase i B m) ∧ ((lieImage h).baseChange B).map eG.toLinearMap = lieImage ((extend (algebraMap A B)).map h) ∧ ((lieImage i).baseChange B).map eG.toLinearMap = lieImage ((extend (algebraMap A B)).map i) ∧ (∀ (C : Type u) [CommRing C] [Algebra B C], centralizer ((extend (algebraMap A B)).map (k ≫ i)) C = Set.range (fun x : points ((extend (algebraMap A B)).obj H).X C ↦ x ≫ ((extend (algebraMap A B)).map h).hom.hom))) ∧ ComparisonsCompose G ∧ ComparisonsCompose H",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cce1aedd",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Item theorem and new def-sfb-relative-root-centralizer-interfaces read against the node (Conrad 4.1.3) and its deps (splitTorus, IsReductive/IsMaximalTorus, GrpObj.Lie/points/tangentPoint, DualNumber.scale). All clauses match: the kernel of χ_{α0} is pinned by its point image; the centralizer is represented on all B; Lie(H)=Lie(T)⊕g_α⊕g_{−α} via ⊔ and two Disjoint clauses; IsLine for g_{−α}; fibre roots exactly ±α; base-change maps defined by their value on b⊗v (unique), with weight/Lie-image/centralizer transport; successive compatibility. Checked edge cases A=0, r=0/1, nonprimitive roots and char 2, nonflat B. lean.statement verbatim in both records; stmt_deps added only definitions; no hollow defs; docstrings and proof plan present. Note: Q128 715fdd0059d2 (PASS, unlanded) delivers the same item with the same new node id and file paths but different content — only one may land, the later must not overwrite."
+ }
+}

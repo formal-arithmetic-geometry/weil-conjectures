@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-affine-free-split-torus-invariants",
+ "kind": "statement",
+ "title": "Affine quotient of a free split-torus action is the spectrum of invariants",
+ "statement": "Let $R$ be a Noetherian commutative ring and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum] [def-weil-pbc-noetherian-ring]. Let $A$ be a finite-type commutative $R$-algebra [def-weil-finite-type-morphism], and put $X=\\operatorname{Spec}A$. Let $T=\\mathbf G_{m,S}^r$ for a finite integer $r\\geq0$ [def-sc-gm-ga] act on $X$ over $S$ by a morphism satisfying the action identities [def-pc-fibre-product]. Assume the action is free on all $S$-schemes: for every $S$-scheme $V$, $t\\cdot x=x$ with $t\\in T(V)$ and $x\\in X(V)$ implies $t=1$ [def-pc-scheme]. Let $A^T=\\{a\\in A:\\rho(a)=1\\otimes a\\}$, where $\\rho:A\\to R[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]\\otimes_RA$ is the coaction; equivalently $A^T=A_0$ for the associated $\\mathbf Z^r$-grading. Then the fppf sheafification of $V\\mapsto X(V)/T(V)$ is represented by $\\operatorname{Spec}(A^T)$, with quotient morphism induced by $A^T\\hookrightarrow A$ [def-pc-fppf-site] [def-weil-pbc-sheafification]. In particular this fppf quotient is affine over $S$; the statement concerns a free action, not a categorical quotient for an arbitrary action.",
+ "source": {
+  "document": "literature/cesnavicius-torsors-regular.pdf",
+  "place": "Sections 1.2.3 and 1.3.1, printed pp.4–6, arXiv:2201.06424v4: affine free-action quotient for a reductive group (reference there to Alper Proposition 9.7.8), specialized to a split torus; identification of its affine algebra as invariants by the sheaf equalizer. WANTED local copy."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sfb-affine-relation-invariants"
+ ],
+ "proof": [
+  {
+   "text": "Write $M=\\mathbf Z^r$. Expand $\\rho(a)=\\sum_{m\\in M}t^m\\otimes p_m(a)$. Counit gives $a=\\sum_m p_m(a)$; coassociativity, by comparing Laurent coefficients, gives $p_n p_m=0$ for $n\\ne m$ and $p_m^2=p_m$. Thus $A_m=\\operatorname{im}p_m$ are additive subgroups with $A=\\bigoplus_m A_m$. Since $\\rho$ is an algebra homomorphism, $A_mA_n\\subseteq A_{m+n}$, $1\\in A_0$, and the image of $R$ lies in $A_0$. Comparing coefficients again gives $A^T=A_0$. This is the coefficient proof of Tag 0EKK with multi-indices in place of integers; no reducedness or field hypothesis is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK (lemma-complete-reducibility-Gm), coefficient proof with M=Z^r"
+   }
+  },
+  {
+   "text": "In $A[M]=A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$, form $I=(a(t^m-1):a\\in A_m)$ and $J=(t^m-1:m\\in M)$. Clearly $I\\subseteq J$. Put $C=A[M]/I$. Its coefficient homomorphism $A\\to C$ gives $x\\in X(\\operatorname{Spec}C)$ by [def-weil-affine-spectrum]; the images of the $t_i$ are units and give $t\\in T(\\operatorname{Spec}C)$. Each homogeneous $a$ satisfies $x(a)t^m=x(a)$ by the defining relations, hence $t\\cdot x=x$ on all of $A$. Freeness on this particular $S$-scheme forces every $t_i=1$ in $C$. The quotient kernel is $I$ by [def-weil-pbc-algebra-hom-quotient], so $t_i-1\\in I$ and therefore $J\\subseteq I$. We have proved $I=J$ without replacing scheme-theoretic freeness by freeness on geometric points.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK grading and Definition Tag 07S1 (definition-free-action); universal stabilizer-algebra calculation supplied by Q20"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-graded-stabilizer-strong-products] to the grading of Step 1 and the ideal equality of Step 2. For each standard basis vector $e_i$ of $M$, obtain a finite expression $1=\\sum_j a_{ij}b_{ij}$ with $a_{ij}\\in A_{e_i}$ and $b_{ij}\\in A_{-e_i}$. Set $B=A_0$. Each $f_{ij}=a_{ij}b_{ij}$ belongs to $B$. These are actual opposite-degree products, rather than arbitrary homogeneous generators; this distinction supplies the homogeneous units in the next step.",
+   "uses": [
+    "lem-sfb-graded-stabilizer-strong-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent algebraic auxiliary lem-sfb-graded-stabilizer-strong-products to Tag 0EKK; argument preserved in report.md"
+   }
+  },
+  {
+   "text": "For each $i$, the $f_{ij}$ generate the unit ideal of $B$, so their principal opens cover $Y=\\operatorname{Spec}B$ by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Taking all finite choices $j_i$ gives a cover by $D(f)$, $f=\\prod_i f_{i j_i}$. For $r=0$ the sole product is $f=1$. On $A[1/f]$ each $a_{i j_i}$ is a unit, with inverse $b_{i j_i}\\prod_{k\\ne i}f_{k j_k}/f$, of degree $-e_i$ [def-weil-ring-localization-away]. Localization at the degree-zero $f$ retains the direct grading: a finite homogeneous sum vanishes iff a power of $f$ kills it, and the original directness then kills each component. In particular the degree-zero ring is $B[1/f]$. By [lem-weil-pbc-principal-localization-open-immersion], $D(f)=\\operatorname{Spec}B[1/f]$, and its inverse image under $q:\\operatorname{Spec}A\\to Y$ is $\\operatorname{Spec}A[1/f]$: the primes in that inverse image are exactly those not containing $f$.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (lemma-standard-open-affine); algebra.tex Tag 00E0 (lemma-Zariski-topology); homogeneous-unit calculation supplied"
+   }
+  },
+  {
+   "text": "Fix one of these $f$ and abbreviate the chosen degree-$e_i$ units by $u_i$. The homomorphism $B[1/f][z_1^{\\pm1},\\ldots,z_r^{\\pm1}]\\to A[1/f]$, $z_i\\mapsto u_i$, has inverse sending a homogeneous element $c$ of degree $m$ to $(c u^{-m})z^m$, and extending by finite sums. Indeed $cu^{-m}$ has degree zero; products add degrees, and the two composites fix each homogeneous element and each Laurent monomial. This proves an isomorphism over $B[1/f]$, equivariant because $\\rho(u_i)=t_i\\otimes u_i$. The spectrum functor [def-weil-affine-spectrum] and the affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] therefore identify $q^{-1}D(f)\\to D(f)$ with $T\\times_S D(f)\\to D(f)$, with translation on the first factor. The tensor identification here is coefficientwise: $R[M]\\otimes_R B[1/f]\\simeq B[1/f][M]$, $t^m\\otimes b\\mapsto bt^m$. Thus $q$ has Zariski local sections and each local fibre functor is one free $T$-orbit.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), with explicit homogeneous Laurent inverse; compare Abramovich--Temkin Lemma 5.4.4 (local copy WANTED)"
+   }
+  },
+  {
+   "text": "The functor $h_Y$ is an fppf sheaf by [def-trf-scheme-algebraic-space]. To verify its quotient property, let $H$ be any fppf sheaf and let $h_X\\to H$ be $T$-invariant. On each $D(f)$ pull its section on $X$ back along the identity section of the trivialization in Step 5. On an overlap the two chosen sections differ by a morphism to $T$ (their Laurent coordinates give its unit coordinates), so invariance makes their pullbacks to $H$ equal. Since Zariski open covers are fppf covers [def-pc-fppf-site], they glue uniquely to a section of $H(Y)$. Its pullback to $X$ is the original section: this holds on each trivialization because every point $(t,y)$ is $t$ times the identity section. Uniqueness follows by pulling back to those same local sections. A section of $H(Y)$ gives the natural map $h_Y\\to H$ by restriction along each test map to $Y$; conversely evaluate such a map at $\\mathrm{id}_Y$. Hence $h_Y$ has precisely the universal property for maps from the orbit presheaf into sheaves. By [def-weil-pbc-sheafification] it is the required sheafification. Its map from $h_X$ is $q$, induced by $A^T=B\\hookrightarrow A$. Since $Y$ is an affine spectrum, this also proves the asserted affineness over $S$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint), universal property; representable sheaf input from def-trf-scheme-algebraic-space and descent.tex Tag 023Q"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-graded-stabilizer-strong-products",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-trf-scheme-algebraic-space",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Independent graded stabilizer-ideal proof by Q20, starting with Tag 0EKK. Quotient claim checked online against Cesnavicius Sections 1.2.3/1.3.1; local homogeneous-unit route compared with Abramovich--Temkin Lemma 5.4.4. Both local copies WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of an affine scheme by a free action of a split torus is the spectrum of the invariant ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv\\n      (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRing\", \"doc\": \"When $ S $ is an affine scheme, the inverse of the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $, composed with the \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [AlgebraicGeometry.IsAffine S] →\\n      AlgebraicGeometry.AffineSpace n S ≅\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n ↑(S.presheaf.obj (Opposite.op ⊤)),\\n            commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over an affine scheme $S$ is defined as the global section of the structure sheaf corresponding to\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.SpecIso\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (R : CommRingCat) →\\n    AlgebraicGeometry.AffineSpace n (AlgebraicGeometry.Spec R) ≅\\n      AlgebraicGeometry.Spec { carrier := MvPolynomial n ↑R, commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"For a commutative ring $ R $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)} $ over the scheme $ \\\\operatorname{Spec}(R) $ is isomorphic to the scheme $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv =\\n    AlgebraicGeometry.AffineSpace.homOfVector\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRingCat.ofHom MvPolynomial.C)) S.iso\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the inverse of the canonical isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"invariants\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "grep",
+   "query": "(torus|diagonalizable).*quotient|quotient.*(torus|diagonalizable)|Spec.*invariant",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A free action of a diagonalizable group on an affine scheme has affine sheaf quotient given by the degree zero ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddAction.selfEquivOrbitsQuotientProd'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} →\\n  {β : Type v} →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] →\\n        {φ : Quotient (AddAction.orbitRel α β) → β} →\\n          Function.LeftInverse Quotient.mk'' φ →\\n            (∀ (b : β), AddAction.stabilizer α b = ⊥) → β ≃ Quotient (AddAction.orbitRel α β) × α\", \"doc\": \"If an additive group $G$ acts freely on a type $\\\\beta$ (i.e., all stabilizers are trivial), then $\\\\beta$ is in bijection with the product of the orbit space $\\\\beta/\\\\sim$ (quotient by the orbit equival\"}\n  {\"name\": \"MulAction.selfEquivOrbitsQuotientProd\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(h : ∀ b : β, MulAction.stabilizer α b = ⊥) : β ≃ Quotient (MulAction.orbitRel α β) × α\", \"doc\": \"Given a group $\\\\alpha$ acting freely on a set $\\\\beta$ (i.e., all stabilizers are trivial), this constructs an equivalence between $\\\\beta$ and the product of the orbit space $\\\\beta/\\\\sim$ (where $\\\\sim$ \"}\n  {\"name\": \"MulAction.selfEquivOrbitsQuotientProd'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{φ : Quotient (MulAction.orbitRel α β) → β} (hφ : Function.LeftInverse Quotient.mk'' φ)\\n  (h : ∀ b : β, MulAction.stabilizer α b = ⊥) : β ≃ Quotient (MulAction.orbitRel α β) × α\", \"doc\": \"Given a group $\\\\alpha$ acting on a set $\\\\beta$ with all stabilizers trivial (i.e., the action is free), and a section $\\\\phi$ of the quotient map $\\\\beta \\\\to \\\\beta/\\\\sim$ (where $\\\\sim$ is the orbit equiv\"}\n  {\"name\": \"AddAction.selfEquivOrbitsQuotientProd\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} →\\n  {β : Type v} →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] → (∀ (b : β), AddAction.stabilizer α b = ⊥) → β ≃ Quotient (AddAction.orbitRel α β) × α\", \"doc\": \"If an additive group $\\\\alpha$ acts freely on a type $\\\\beta$ (i.e., all stabilizers are trivial), then $\\\\beta$ is in bijection with the product of the orbit space $\\\\beta/\\\\sim$ (quotient by the orbit eq\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor_obj_V\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] (X : Rep k G),\\n  ((Rep.quotientToInvariantsFunctor k S).obj X).V =\\n    ModuleCat.of k ↥(Representation.invariants (MonoidHom.comp X.ρ S.subtype))\", \"doc\": \"For a commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $X$ of $G$, the underlying module of the quotient-to-invariants functor applied to $X$ is t\"}\n  {\"name\": \"Rep.diagonalSuccIsoFree\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → [inst_1 : Group G] → (n : ℕ) → Rep.diagonal k G (n + 1) ≅ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, there exists a canonical isomorphism in the category $ \\\\text{Rep}(k,G) $ between the diagonal representation $ \\\\text{Rep.diagonal}(\"}\n  {\"name\": \"groupCohomology.H0IsoOfIsTrivial\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": H0 A ≅ A.V\", \"doc\": \"For a commutative ring $ k $, group $ G $, and a trivial $ k $-representation $ A $ of $ G $, the zeroth group cohomology module $ H^0(G, A) $ is isomorphic to the underlying module $ A $. This follow\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(R : CommRingCat) : IsAffine (Spec R)\", \"doc\": \"For any commutative ring $R$, the scheme $\\\\operatorname{Spec}(R)$ constructed from the prime spectrum of $R$ equipped with the Zariski topology and structure sheaf is an affine scheme.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a freely acting multiplicative group on Spec of a graded algebra the fppf quotient is Spec of the degree zero subalgebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              AlgebraicGeometry.Proj 𝒜 ⟶\\n                AlgebraicGeometry.Spec { carrier := ↥(𝒜 0), comm\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpecTopComponent\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, there is a homeomorphism between the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ and the pr\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f)\", \"doc\": \"The morphism of locally ringed spaces from the basic open set $ D_+(f) $ in the projective spectrum $ \\\\text{Proj}(A) $ to the affine spectrum $ \\\\text{Spec}(A_f) $ is an isomorphism, induced by the $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (x :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"For a homogeneous element $ f $ of positive degree in a graded ring $ \\\\mathcal{A} $, the composition of the continuous map from the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ to the prim\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f).base\", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous base map underlying the morphism from the basic open set $ D_+(f) \\\\subseteq \\\\operatorname{Proj}(A) $ to \"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"The continuous map sending prime ideals in the degree-zero localization $ A_f^0 $ of a graded ring $ \\\\mathcal{A} $ to homogeneous prime ideals in $ \\\\text{Proj}(\\\\mathcal{A}) $ that do not contain the h\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "grep",
+   "query": "(torus|diagonalizable).*quotient|quotient.*(torus|diagonalizable)|Spec.*invariant",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Spectrum.lean\", \"line\": \"252\", \"text\": \"/-- **Spectral permanence.** The spectrum of an element is invariant of the (closed)\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"229\", \"text\": \"then it is pre-ergodic with respect to any finite inner regular left invariant measure. -/\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"233\", \"text\": \"then it is pre-ergodic with respect to any finite inner regular left invariant measure. -/]\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"250\", \"text\": \"then `f` is ergodic with respect to any finite inner regular left invariant measure. -/\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"254\", \"text\": \"then `f` is ergodic with respect to any finite inner regular left invariant measure. -/]\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/RadonNikodym.lean\", \"line\": \"37\", \"text\": \"with respect to a σ-finite invariant measure is an invariant measure. -/\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/RadonNikodym.lean\", \"line\": \"59\", \"text\": \"with respect to a σ-finite invariant measure is an invariant measure. -/\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/RadonNikodym.lean\", \"line\": \"71\", \"text\": \"with respect to another finite invariant measure of `f` is a.e. invariant under `f`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"493\", \"text\": \"/-- If `L/K` is finite and normal, then `spectralNorm K L = invariantExtension K L`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"494\", \"text\": \"theorem spectralNorm_eq_invariantExtension [hu : IsUltrametricDist K] :\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"495\", \"text\": \"    spectralNorm K L = invariantExtension K L := by\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"516\", \"text\": \"  rw [spectralNorm_eq_invariantExtension K L]\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"524\", \"text\": \"  map_zero' := by rw [spectralNorm_eq_invariantExtension K L, map_zero]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"87\", \"text\": \"theorem StructureGroupoid.LocalInvariantProp.section_spec (hG : LocalInvariantProp G G' P)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"18\", \"text\": \"The action of this special element gives a projection onto the subspace of invariants.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"23\", \"text\": \"  we define its orthogonal complement with respect to a non-degenerate invariant bilinear form `Φ`\"}\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"69\", \"text\": \"The orthogonal complement of a Lie submodule `N` with respect to an invariant bilinear form `Φ` is\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"line\": \"48\", \"text\": \"it, we use a change of variables to express integrals with respect to a left-invariant measure as\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"line\": \"49\", \"text\": \"integrals with respect to a given right-invariant measure (with a suitable density function).\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"373\", \"text\": \"  integral of a function `f` on `G` with respect to a right-invariant measure `μ` is equal to the\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"376\", \"text\": \"  additive group `G`, the integral of a function `f` on `G` with respect to a right-invariant\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Quotient.lean\", \"line\": \"438\", \"text\": \"  `G' ⧸ Γ'` with respect to a right-invariant measure `μ` on `G'`, is equal to the integral over\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"117\", \"text\": \"      respect to a left-invariant measure is 0. -/]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"127\", \"text\": \"      respect to a right-invariant measure is 0. -/]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/LIntegral.lean\", \"line\": \"33\", \"text\": \"/-- The Lebesgue integral of a function with respect to an inverse invariant measure is\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine space, Proj, set-theoretic orbit decompositions and unrelated analytic spectra do not assert this relative fppf quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf sheaf quotient of a free split torus action on an affine scheme is the spectrum of invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv =\\n    AlgebraicGeometry.AffineSpace.homOfVector\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRingCat.ofHom MvPolynomial.C)) S.iso\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the inverse of the canonical isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [AlgebraicGeometry.IsAffine S] →\\n      AlgebraicGeometry.AffineSpace n S ≅\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n ↑(S.presheaf.obj (Opposite.op ⊤)),\\n            commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over an affine scheme $S$ is defined as the global section of the structure sheaf corresponding to\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine space, Proj, set-theoretic orbit decompositions and unrelated analytic spectra do not assert this relative fppf quotient theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A free action of a multiplicative group on an affine scheme has quotient the spectrum of the degree zero graded subring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddAction.selfEquivOrbitsQuotientProd'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} →\\n  {β : Type v} →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] →\\n        {φ : Quotient (AddAction.orbitRel α β) → β} →\\n          Function.LeftInverse Quotient.mk'' φ →\\n            (∀ (b : β), AddAction.stabilizer α b = ⊥) → β ≃ Quotient (AddAction.orbitRel α β) × α\", \"doc\": \"If an additive group $G$ acts freely on a type $\\\\beta$ (i.e., all stabilizers are trivial), then $\\\\beta$ is in bijection with the product of the orbit space $\\\\beta/\\\\sim$ (quotient by the orbit equival\"}\n  {\"name\": \"MulAction.selfEquivOrbitsQuotientProd\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(h : ∀ b : β, MulAction.stabilizer α b = ⊥) : β ≃ Quotient (MulAction.orbitRel α β) × α\", \"doc\": \"Given a group $\\\\alpha$ acting freely on a set $\\\\beta$ (i.e., all stabilizers are trivial), this constructs an equivalence between $\\\\beta$ and the product of the orbit space $\\\\beta/\\\\sim$ (where $\\\\sim$ \"}\n  {\"name\": \"AddAction.selfEquivOrbitsQuotientProd\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} →\\n  {β : Type v} →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] → (∀ (b : β), AddAction.stabilizer α b = ⊥) → β ≃ Quotient (AddAction.orbitRel α β) × α\", \"doc\": \"If an additive group $\\\\alpha$ acts freely on a type $\\\\beta$ (i.e., all stabilizers are trivial), then $\\\\beta$ is in bijection with the product of the orbit space $\\\\beta/\\\\sim$ (quotient by the orbit eq\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Proj 𝒜 ⟶ Spec (.of <| 𝒜 0)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (basicOpen 𝒜 f).toScheme ≅ Spec (.of <| Away 𝒜 f)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, the canonical morphism from the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"MulAction.selfEquivOrbitsQuotientProd'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{φ : Quotient (MulAction.orbitRel α β) → β} (hφ : Function.LeftInverse Quotient.mk'' φ)\\n  (h : ∀ b : β, MulAction.stabilizer α b = ⊥) : β ≃ Quotient (MulAction.orbitRel α β) × α\", \"doc\": \"Given a group $\\\\alpha$ acting on a set $\\\\beta$ with all stabilizers trivial (i.e., the action is free), and a section $\\\\phi$ of the quotient map $\\\\beta \\\\to \\\\beta/\\\\sim$ (where $\\\\sim$ is the orbit equiv\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : QuasiCompact (Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine space, Proj, set-theoretic orbit decompositions and unrelated analytic spectra do not assert this relative fppf quotient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"invariants\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: affine space, Proj, set-theoretic orbit decompositions and unrelated analytic spectra do not assert this relative fppf quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free diagonalizable group action on an affine scheme gives a torsor over the invariant ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv =\\n    AlgebraicGeometry.AffineSpace.homOfVector\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRingCat.ofHom MvPolynomial.C)) S.iso\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the inverse of the canonical isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [AlgebraicGeometry.IsAffine S] →\\n      AlgebraicGeometry.AffineSpace n S ≅\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n ↑(S.presheaf.obj (Opposite.op ⊤)),\\n            commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over an affine scheme $S$ is defined as the global section of the structure sheaf corresponding to\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (f : { f // AlgebraicGeometry.Scheme.Hom.IsOver f S }) (i : n),\\n  (AlgebraicGeometry.AffineSpace.homOverEquiv S) f i =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop ↑f))\\n \", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural bijection between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections of\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    {F : CategoryTheory.Functor C FintypeCat} →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          (X : C) →\\n            [CategoryTheory.PreGaloisCategory.IsConnected\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine space, Proj, set-theoretic orbit decompositions and unrelated analytic spectra do not assert this relative fppf quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "(torus|diagonalizable).*quotient|quotient.*(torus|diagonalizable)|Spec.*invariant",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: affine space, Proj, set-theoretic orbit decompositions and unrelated analytic spectra do not assert this relative fppf quotient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: each invariant affine chart in the split cover has schematic affine fppf quotient. This supplies affine charts, not global representability or descent of the group quotient.",
+   "via": [
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-free-split-torus-invariants",
+  "worker": "stage1",
+  "summary": "Checked no exact project declaration; proved the quotient by extracting the graded stabilizer ideal, one new algebraic augmentation-ideal lemma, explicit local Laurent coordinates and the sheaf universal property. Preserved the original statement and source. Both missing external source copies requested in report.md; independent proof is marked agent-written.",
+  "blueprint": "This created node has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). The inherited place is the affine free split-torus quotient input to relatively-ample-subtorus-quotient-schematicity. Steps 1--3 provide homogeneous unit-ideal expressions; Steps 4--5 construct affine quotient charts over Spec A_0; Step 6 verifies the fppf quotient. The current blueprint search found no matching node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Generic affine-spectrum unit-ideal cover test; no node of this unit gives this algebraic topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Generic scheme identification of a principal open with a localization spectrum, used for the explicit Laurent charts."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product/tensor formula identifies the local Laurent spectrum with the relative split torus product."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-764874ef3",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-764874ef3 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-graded-stabilizer-strong-products, every cited statement and Stacks 0EKK/07S1 (groupoids.tex l.2340, tag table). The item's statement, stmt_deps, source and blueprint are identical to clones/live (still unsplit there). No repair note, no SGA. Step 1 is the 0EKK coefficient proof with multi-indices, plus multiplicativity. Step 2: C=A[M]/I gives t·x=x on a possibly nonreduced test scheme; freeness gives t_i-1 in I, so I=J. Step 3 applies the new lemma with ±e_i. Step 4: the products f cover Y; inverse check a·b∏f_k/f=1; the grading survives localization at a degree-zero f; r=0 gives f=1. Step 5: Laurent iso z_i↦u_i with inverse c↦(cu^{-m})z^m, both composites checked, equivariant. Step 6: universal property checked: overlaps differ by τ:D(fg)→T and invariance gives equality; Zariski covers are fppf; q^*s_Y=s via id=pr_T·σq; uniqueness via σ^*. Sheafification is used only through its universal property. The new lemma is correct and checked through the report's graded-field proof: at κ(p), D=C/H is a graded field, I=J forces N=M, and lifted d, d^{-1} multiply to 0 in C_0 but to 1 in D_0, a contradiction. Small cases k[x], k[x^{±1}], A=0, m=0 and trivial grading all behave. It is self-contained, statement-only, and not a restatement of the item. Duplicate search over 9 torus/grading nodes and Mathlib found nothing. Batch-5 flag def-trf-scheme-algebraic-space: a general definition with empty proof_deps, cited only for 'h_Y is an fppf sheaf'. It is outside the trace-formula and Poincaré-duality assumptions, so accepted. The three generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeSplitTorusInvariants",
+  "declaration": "AlgebraicGeometry.affine_free_splitTorus_invariants",
+  "declarations": [
+   "AlgebraicGeometry.affineSplitTorusActionCoordinates",
+   "AlgebraicGeometry.affine_free_splitTorus_invariants"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeSplitTorusInvariants.lean",
+  "statement": "theorem affine_free_splitTorus_invariants (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [IsNoetherianRing R] [Algebra.FiniteType R A] (r : ℕ) [ModObj ((Spec (.of (AddMonoidAlgebra R (Fin r → ℤ)))).asOver (Spec (.of R))) ((Spec (.of A)).asOver (Spec (.of R)))] (hfree : ∀ (V : Over (Spec (.of R))) (t : V ⟶ (Spec (.of (AddMonoidAlgebra R (Fin r → ℤ)))).asOver (Spec (.of R))) (x : V ⟶ (Spec (.of A)).asOver (Spec (.of R))), t • x = x → t = 1) : ∃ m : Spec (.of (affineRelationInvariants (affineSplitTorusActionCoordinates R A r) (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[R] AddMonoidAlgebra R (Fin r → ℤ) ⊗[R] A))))) ⟶ Spec (.of R), ∃ hq : affineRelationQuotientMap (affineSplitTorusActionCoordinates R A r) (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[R] AddMonoidAlgebra R (Fin r → ℤ) ⊗[R] A))) ≫ m = Spec.map (CommRingCat.ofHom (algebraMap R A)), ∃ e : sheafify (Scheme.fppfTopology.over (Spec (.of R))) (coequalizer (yoneda.map (ModObj.smul (M := (Spec (.of (AddMonoidAlgebra R (Fin r → ℤ)))).asOver (Spec (.of R))) (X := (Spec (.of A)).asOver (Spec (.of R))))) (yoneda.map (CartesianMonoidalCategory.snd ((Spec (.of (AddMonoidAlgebra R (Fin r → ℤ)))).asOver (Spec (.of R))) ((Spec (.of A)).asOver (Spec (.of R))))) ⋙ uliftFunctor.{u + 1, u}) ≅ yoneda.obj (Over.mk m) ⋙ uliftFunctor.{u + 1, u}, Functor.whiskerRight (coequalizer.π (yoneda.map (ModObj.smul (M := (Spec (.of (AddMonoidAlgebra R (Fin r → ℤ)))).asOver (Spec (.of R))) (X := (Spec (.of A)).asOver (Spec (.of R))))) (yoneda.map (CartesianMonoidalCategory.snd ((Spec (.of (AddMonoidAlgebra R (Fin r → ℤ)))).asOver (Spec (.of R))) ((Spec (.of A)).asOver (Spec (.of R)))))) uliftFunctor.{u + 1, u} ≫ toSheafify (Scheme.fppfTopology.over (Spec (.of R))) _ ≫ e.hom = Functor.whiskerRight (yoneda.map (Over.homMk (affineRelationQuotientMap (affineSplitTorusActionCoordinates R A r) (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[R] AddMonoidAlgebra R (Fin r → ℤ) ⊗[R] A)))) hq)) uliftFunctor.{u + 1, u}",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The split torus is expressed directly using Mathlib Hopf Spec of R[Z^r], without a new torus definition. The existing affineRelationInvariants and affineRelationQuotientMap are reused through their definition-node owner def-sfb-affine-relation-invariants. Sheafification uses the common canonical ULift to Type (u+1); its isomorphism preserves the inclusion-induced quotient map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62d83b84a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN on a310955fbee2: theorem stmt_dep lem-a1-finite-flat-affine-relation-quotient replaced by new def node def-sfb-affine-relation-invariants (existing:true on FiniteFlatAffineRelationQuotient, declarations affineRelationInvariants/affineRelationQuotientMap: plain defs, eqLocus of Spec.homEquiv maps and Spec.map of subtype; source Stacks 03BF equation-invariants verified in groupoids.tex l.4204; no competing owner in live/side-live/runs). Item node differs from side-live only in lean and that stmt_deps addition. Lean differs from returned version only by dropping unused StandardGroupSchemes import (A2). Clause check: Noetherian R, FiniteType A, T=Spec R[Z^r] with Mathlib Hopf group law, ModObj action, hfree over all V : Over S, A^T=eqLocus(rho, includeRight) with pullbackSpecIso orientation matching snd, sheafify(fppf.over S) of Yoneda coequalizer ≅ ULift yoneda(Spec A^T) compatible with Spec of inclusion, m unique; edge cases r=0, A=0, R=0 ok; statement verbatim; no hollow def, sorry only, docstrings ok. Advisory: RingGroupSchemes.splitTorus (Q74, r-fold product) is not defeq to Spec R[Z^r] and has no coordinate ring for the coaction; the Mathlib form is not a duplicate project def; report records the comparison. Not compiled (no file changed)."
+ }
+}

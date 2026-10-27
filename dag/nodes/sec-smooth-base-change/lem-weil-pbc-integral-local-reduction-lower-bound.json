@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-integral-local-reduction-lower-bound",
+ "kind": "statement",
+ "title": "A completed integral local reduction loses at most one lower degree",
+ "statement": "Let l be prime and E/Q_l a finite extension with integral coefficient datum d [def-weil-pbc-adic-coefficient-datum]. For schemes g:Y→X and the actual inverse-image completed ring g⁻¹B_X [def-weil-pbc-bounded-constructible-complete], let L be a cochain complex of g⁻¹B_X-modules whose terms below a vanish. For every quotient index n≥0, its derived scalar extension to g⁻¹R_n has zero cohomology in all degrees q<a−1. No identification of g⁻¹B_X with the completed coefficient ring newly formed on Y is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, proof of (2): pull the completed two-term quotient resolution to each local-model domain; Stacks sites-modules.tex Tag 093M and sites-cohomology.tex Tag 06YU."
+ },
+ "proof": [
+  {
+   "text": "Over the lifted valuation ring A, multiplication by the nonzero uniformizer power varpi^(n+1) and the ordinary quotient map give a short exact sequence A→A→A/(varpi^(n+1)). Exact constant sheafification followed by the flat completed coefficient extension preserves this sequence. The finite-coefficient comparison identifies the last object with Res(R_n). The section computation of the finite-reduction map shows that its quotient map sends 1 to 1. This is the private completed_principal_resolution, generalized from the existing completed quotient calculation to the lifted integral datum.",
+   "uses": [
+    "lem-weil-pbc-adic-reduction-cohomology-sequence",
+    "lem-weil-pbc-standard-quotients-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact pro-etale inverse image along g. The unit and coefficient-restriction inverse-image isomorphisms identify the three objects with the regular inverse-image completed module, itself, and the restricted inverse-image quotient. Their section formulas and naturality of the coefficient adjunction unit identify the transported quotient with the coefficient ring map, which sends 1 to 1. Exactness is retained.",
+   "uses": [
+    "def-sfb-proetale-inverse-image-unit-section",
+    "def-sfb-proetale-unit-normalized-adjunction",
+    "lem-weil-pbc-local-derived-restriction-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized scalar-extension triangle to Q(L). Since Q(L) is bounded below by a, the outer terms H^q(L) and H^(q+1)(L) in the long exact cohomology sequence vanish whenever q<a−1. The restricted reduced cohomology is therefore zero. Exact scalar restriction commutes with cohomology and has the same underlying abelian sheaf. Faithful forgetting reflects zero, giving the claimed bound. The argument includes the zero complex and empty scheme.",
+   "uses": [
+    "lem-weil-pbc-adic-reduction-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-reduction-cohomology-sequence",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "lem-weil-pbc-local-derived-restriction-comparisons",
+  "lem-weil-pbc-adic-reduction-triangle"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, proof of (2): pull the completed two-term quotient resolution to each local-model domain; Stacks sites-modules.tex Tag 093M and sites-cohomology.tex Tag 06YU. Complete G1 proof restored by E1 from returned repair packet 48160399e7852af6."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LevelwiseAdicTruncations",
+  "date": "2026-10-22",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Proof of (2), the lower bound for the local-model reduction before global vanishing and local effectivity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLocalReductionLowerBound",
+  "file": "lean/Sheaf/Paper/IntegralLocalReductionLowerBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralLocalReduction_isGE",
+  "statement": "theorem integralLocalReduction_isGE\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (L : CochainComplex (pbcModules Y\n      ((adicTowerInverseImage g).obj (pbcAdicCompletion X (pbcIntegralDatum l E)))) ℤ)\n    (a : ℤ) [L.IsStrictlyGE a] (n : ℕ) :\n    (adicTowerLocalReduction (pbcIntegralDatum l E) g L n).IsGE (a - 1)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product with a quotient by a nonzero divisor lowers the cohomological lower bound by at most one",
+   "results": "DerivedCategory bounds for Q, isLE_Q_obj_iff and isGE_Q_obj_iff; regular-sequence flat tensor and Tor lemmas. No normalized sheaf coefficient-quotient lower-bound theorem.",
+   "date": "2026-10-22",
+   "verdict": "Use Q lower bounds and construct the normalized coefficient triangle from the project API."
+  },
+  {
+   "tool": "loogle",
+   "query": "triangleOfSES_distinguished",
+   "results": "DerivedCategory.triangleOfSES_distinguished in Mathlib.Algebra.Homology.DerivedCategory.ShortExact.",
+   "date": "2026-10-22",
+   "verdict": "The existing normalized reduction-triangle theorem already uses this result; reuse that theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedTensorCohomologicalBounds|isZero_homologyFunctor_of_isZero",
+   "results": "No Mathlib match from msearch; local project search locates the ringed bound and faithful exact cohomology comparison APIs.",
+   "date": "2026-10-22",
+   "verdict": "The ordinary upper tensor bound does not provide this lower bound. Use the explicit length-one completed quotient resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product with a quotient by a nonzero divisor lowers the cohomological lower bound by at most one",
+   "results": "TensorProduct.tensorQuotientEquiv (Mathlib.LinearAlgebra.TensorProduct.Quotient); TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk (Mathlib.LinearAlgebra.TensorProduct.Quotient); TensorProduct.tensorQuotientEquiv_apply_mk_tmul (Mathlib.LinearAlgebra.TensorProduct.Quotient); TensorProduct.quotientTensorEquiv (Mathlib.LinearAlgebra.TensorProduct.Quotient); TensorProduct.quotientTensorQuotientEquiv (Mathlib.LinearAlgebra.TensorProduct.Quotient); TensorProduct.quotTensorEquivQuotSMul (Mathlib.LinearAlgebra.TensorProduct.Quotient); TensorProduct.tensorQuotEquivQuotSMul (Mathlib.LinearAlgebra.TensorProduct.Quotient); QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop (Mathlib.RingTheory.QuotSMulTop)",
+   "date": "2026-10-22",
+   "verdict": "No exact match: the quotient tensor equivalences are underived module statements, not a lower bound for derived change of sheaf coefficients on the actual inverse-image completion."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

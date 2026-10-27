@@ -1,0 +1,334 @@
+{
+ "id": "lem-per-symmetric-conormal-free-locus-exact-sequence",
+ "kind": "statement",
+ "title": "Symmetric presentation conormal exact sequence over the free locus",
+ "statement": "Let $P$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I=(g_1,\\ldots,g_m)\\subseteq P$ with $m\\geq0$, $A=P/I$, $M=I/I^2$, $q:A^{\\oplus m}\\twoheadrightarrow M$ given by $e_j\\mapsto[g_j]$, and $K=\\ker q$. Put $C=\\operatorname{Sym}_A(M)$ with canonical map $\\iota:M\\to C$ [lem-weil-pbc-symmetric-algebra-universal-property]. Let $Q=P[y_1,\\ldots,y_m]$ [def-weil-pbc-mv-polynomial-ring], $\\varphi:Q\\twoheadrightarrow C$ send coefficients through $P\\to A\\to C$ and $y_j\\mapsto\\iota([g_j])$, and $J=\\ker\\varphi$. Let $h\\in C$, $T=C[1/h]$ [def-weil-pbc-module-localization-away], and suppose that for every prime $\\mathfrak q\\subset T$, with contraction $\\mathfrak p\\subset A$, the module $M_{\\mathfrak p}=A_{\\mathfrak p}\\otimes_A M$ is finite free over $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime, def-weil-pbc-free-module, def-weil-pbc-module-tensor-product]. Then $M\\otimes_A T$ and $K\\otimes_A T$ are finite projective $T$-modules [def-weil-pbc-projective-module], and coefficient reduction modulo $I$ induces a split short exact sequence\n$$0\\longrightarrow M\\otimes_A T\\xrightarrow{\\alpha}(J/J^2)\\otimes_C T\\xrightarrow{\\beta}K\\otimes_A T\\longrightarrow0.$$\nHere $\\alpha([g]\\otimes t)=[g]\\otimes t$ for $g\\in I$. More explicitly, put $L=\\ker(A[y_1,\\ldots,y_m]\\to C)$ and $\\ell(k)=\\sum_j k_j y_j$ for $k=(k_j)\\in K$. The map $K\\otimes_A T\\to(L/L^2)\\otimes_C T$, $k\\otimes t\\mapsto[\\ell(k)]\\otimes t$, is an isomorphism, and $\\beta$ is reduction $Q\\to A[y_1,\\ldots,y_m]$ on conormal classes followed by its inverse. Also the base change of $q$ gives a split short exact sequence $0\\to K\\otimes_A T\\to T^{\\oplus m}\\to M\\otimes_A T\\to0$. No projectivity of $M$ on all of $\\operatorname{Spec}A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CE (lemma-improve-presentation), proof, equation-sequence and equation-sequence-localized (lines 357–418), restricted to an arbitrary affine open over the locally free locus of I/I². The projective calculation is local on Spec A; the general 07EV conormal-isomorphism claim is not used away from that locus. Compare Elkik II, Lemma 3, printed pp.562–564, https://www.numdam.org/item/10.24033/asens.1258.pdf (archival copy WANTED)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $M_T=M\\otimes_A T$ and $K_T=K\\otimes_A T$. The ring $A=P/I$ is Noetherian by the finite-type permanence lemma. Since $K\\subseteq A^m$, the Noetherian submodule lemma gives finitely many generators of $K$. Thus $A^s\\to A^m\\xrightarrow{q}M\\to0$ is a finite presentation. Tensor right exactness gives $T^s\\to T^m\\xrightarrow{q_T}M_T\\to0$, so $M_T$ is finitely presented, and also $K_T\\to T^m\\to M_T\\to0$ is right exact. No injectivity of $K_T\\to T^m$ has yet been claimed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00IK (lemma-Noetherian-basic), 00DF (lemma-tensor-product-exact)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$ of $T$ and put $\\mathfrak p=\\mathfrak q\\cap A$, $\\widetilde{\\mathfrak p}=(P\\to A)^{-1}(\\mathfrak p)$, and $S=P\\setminus\\widetilde{\\mathfrak p}$. Write $P'=S^{-1}P$, $I'=S^{-1}I$ and $A'=A_{\\mathfrak p}=P'/I'$. Exact localization identifies $I'/I'^2$ with $M_{\\mathfrak p}=:M'$ and $\\ker(A'^m\\to M')$ with $K_{\\mathfrak p}=:K'$; here localization of ideal squares follows from extension commuting with powers. Symmetric base change identifies $C'=S^{-1}C$ with $\\operatorname{Sym}_{A'}M'$. Coefficientwise fractions identify $S^{-1}Q=P'[y]$ and $S^{-1}(A[y])=A'[y]$; for example $\\sum_j(a_j/s_j)y^j$ is the fraction with denominator $\\prod_js_j$ obtained by multiplying its finitely many coefficients to that denominator. Exact localization then identifies their presentation kernels with $S^{-1}J$ and $S^{-1}L$, and their conormals with $S^{-1}(J/J^2)$ and $S^{-1}(L/L^2)$. All identifications send a numerator class to that same class over denominator one.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-localization-module-exact",
+    "lemma-nagata-localization-ideal-pow",
+    "lem-weil-pbc-symmetric-algebra-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CT (proposition-localize-quotient), 00CS (proposition-localization-exact), 0C6F (lemma-tensor-algebra-localization); coefficientwise localization of the finite polynomials."
+   }
+  },
+  {
+   "text": "The hypothesis makes $M'$ finite free, hence projective: its finite basis identifies it with a finite free module, which is its own direct summand. Apply the projective coefficient-reduction exactness theorem to $(P',I',q_{\\mathfrak p})$ and the projective symmetric-presentation conormal equivalence to $(A',M',q_{\\mathfrak p})$. They give an exact row $0\\to C'\\otimes_{A'}M'\\to S^{-1}(J/J^2)\\to S^{-1}(L/L^2)\\to0$ and the isomorphism $C'\\otimes_{A'}K'\\cong S^{-1}(L/L^2)$, with the stated coefficient and linear-form formulas. The surjection $q_{\\mathfrak p}$ splits since $M'$ is projective. Tensoring the section and retraction identities with $T_{\\mathfrak q}$ therefore gives an injective $K'\\otimes_{A'}T_{\\mathfrak q}\\to T_{\\mathfrak q}^m$, without a flatness hypothesis on $A'\\to T_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-projective-symmetric-conormal-reduction-exact",
+    "lem-weil-pbc-projective-symmetric-presentation-conormal-equiv",
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), equation-sequence on the projective locus; Tag 05CF (lemma-characterize-projective)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak r$ be the contraction of $\\mathfrak q$ to $C'$. The map $C'\\to T_{\\mathfrak q}$ is localization at $C'\\setminus\\mathfrak r$: a fraction from $C$ or $T=C_h$ has a denominator outside the corresponding contracted prime, and conversely every element outside $\\mathfrak r$ becomes invertible. The universal properties of these rings of fractions give inverse maps fixing $C$. Thus exact localization of the row and equivalence of step 3 gives the same row and linear-form equivalence over $T_{\\mathfrak q}$. Localization commutes with the tensors by the cited tensor-localization theorem. Associativity identifications here send $(m/s)\\otimes t$ to $m\\otimes s^{-1}t$, with inverse $m\\otimes t\\mapsto(m/1)\\otimes t$. In particular the first arrow is $[g]\\otimes t\\mapsto[g]\\otimes t$, and reduction is $[z]\\otimes t\\mapsto[\\bar z]\\otimes t$. This checks the actual maps, as well as the modules.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CS (proposition-localization-exact), 00DK (lemma-tensor-localization); the rings-of-fractions universal property and explicit tensor formulas."
+   }
+  },
+  {
+   "text": "Construct the global maps before descending their properties. Polynomial coefficient conormal inclusion gives $i:M\\otimes_A C\\to J/J^2$ with $i([g]\\otimes c)=c[g]$. Coefficient reduction sends $J$ into $L$ and $J^2$ into $L^2$, hence gives $r:J/J^2\\to L/L^2$. Its composite with $i$ is zero because constants from $I$ reduce to zero. The corrected symmetric-algebra conormal statement supplies the well-defined map $\\lambda:K\\otimes_A C\\to L/L^2$, $k\\otimes c\\mapsto c[\\ell(k)]$. Tensor these three maps with $T$ to get $i_T,r_T,\\lambda_T$. The tensor universal property gives precisely their formulas in the question. Localizing these formulas at $\\mathfrak q$ gives the maps of step 4: coefficient reduction fixes the variables and acts only on coefficients, and $\\ell(k)/s=\\ell(k/s)$. Thus $(i_T)_{\\mathfrak q}$ is injective, its image is $\\ker(r_T)_{\\mathfrak q}$, $(r_T)_{\\mathfrak q}$ is surjective and $(\\lambda_T)_{\\mathfrak q}$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-polynomial-coefficient-conormal-inclusion",
+    "lem-weil-pbc-cotangent-complex-symmetric-algebra",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00S2 (lemma-exact-sequence-NL), coefficient reduction; Tag 07EV (lemma-cotangent-complex-symmetric-algebra), only the corrected linear-form map, not its false unrestricted injectivity."
+   }
+  },
+  {
+   "text": "The preceding local properties imply the global properties by the following elementary annihilator test. If a nonzero element $x$ of any $T$-module vanished in every maximal localization, choose a maximal ideal containing its proper annihilator. Vanishing there gives $s x=0$ with $s$ outside that maximal ideal, contradicting containment of the annihilator. Apply this to $\\ker i_T$, $\\ker\\lambda_T$, $\\operatorname{coker}\\lambda_T$, $\\operatorname{coker}r_T$, and $\\ker r_T/\\operatorname{im}i_T$. Exact localization identifies their localizations with the defects just shown to vanish. Apply it also to the kernel of $K_T\\to T^m$, which vanishes by step 3 and the tensor identifications of step 4. Consequently $\\lambda_T$ is an isomorphism, $0\\to M_T\\xrightarrow{i_T}(J/J^2)\\otimes_C T\\xrightarrow{r_T}(L/L^2)\\otimes_C T\\to0$ is exact, and $0\\to K_T\\to T^m\\xrightarrow{q_T}M_T\\to0$ is exact.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HN (lemma-characterize-zero-local), annihilator argument written out; Tag 00CS (proposition-localization-exact)."
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak q$ of $T$, the tensor identifications of step 4 give $(M_T)_{\\mathfrak q}=M_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}T_{\\mathfrak q}$, finite free by the hypothesis: tensor its finite basis and inverse coordinate map. Since $M_T$ is finitely presented by step 1, the local criterion gives that $M_T$ is finite projective. The exact row with $q_T$ therefore splits. Its retraction $\\rho:T^m\\to K_T$ makes $K_T$ a direct summand of $T^m$, so it is projective by the definition's direct-summand characterization and finite because the $m$ elements $\\rho(e_j)$ generate it. This proves both finiteness/projectivity assertions and the last split exact row.",
+   "uses": [
+    "lem-trf-finite-projective-local-free",
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), conditions (4) and (2); Tag 05CF (lemma-characterize-projective)."
+   }
+  },
+  {
+   "text": "Set $\\alpha=i_T$ and $\\beta=\\lambda_T^{-1}r_T$. Step 6 and the isomorphism $\\lambda_T$ give exactly the displayed short exact sequence and its specified coefficient-reduction map. Since $K_T$ is projective by step 7, the short exact sequence splits. No choices in this splitting change $\\alpha$, $\\beta$ or $\\lambda_T$. If $T=0$ (including $I=P$ or nilpotent $h$), all displayed $T$-modules are zero and all conclusions hold; the annihilator argument has no nonzero element to consider. If $m=0$, then $I=M=K=J=L=0$, and the same formulas give the zero sequences.",
+   "uses": [
+    "lem-weil-pbc-ses-projective-quotient-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07CE (lemma-improve-presentation), equation-sequence; Tag 05CF (lemma-characterize-projective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-module-exact",
+  "lemma-nagata-localization-ideal-pow",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-projective-symmetric-conormal-reduction-exact",
+  "lem-weil-pbc-projective-symmetric-presentation-conormal-equiv",
+  "lem-weil-pbc-ses-projective-quotient-splits",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-polynomial-coefficient-conormal-inclusion",
+  "lem-weil-pbc-cotangent-complex-symmetric-algebra",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-trf-finite-projective-local-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CE, equation-sequence, localized at contractions of primes of T; extension to an arbitrary principal open and explicit descent written by Q25. Uses the existing corrected projective nodes instead of the false unrestricted injectivity in 07EV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric algebra presentation of a conormal module has free kernel modulo its square on any open where the original conormal module is locally projective",
+   "results": "{\"t\": \"2026-10-24T09:05:54Z\", \"tool\": \"leanfinder\", \"query\": \"A symmetric algebra presentation of a conormal module has free kernel modulo its square on any open where the original conormal module is locally projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.SubmersivePresentation.free_cotangent\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Algebra.instFreeCotangentToExtensionUnitLocalizationAway\", \"Algebra.formallySmooth_iff\", \"SheafOfModules.relationsOfIsCokernelFree\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\"], \"digest\": \"bab0555e57938367\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*conormal|conormal.*symmetric|SymmetricAlgebra",
+   "results": "{\"t\": \"2026-10-24T09:06:27Z\", \"tool\": \"grep\", \"query\": \"symmetric.*conormal|conormal.*symmetric|SymmetricAlgebra\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus.",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module of the presentation of the symmetric algebra of a conormal module is free wherever that module is locally projective",
+   "results": "{\"t\": \"2026-10-24T09:06:27Z\", \"tool\": \"leansearch\", \"query\": \"The conormal module of the presentation of the symmetric algebra of a conormal module is free wherever that module is locally projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.freeLocus\", \"SymmetricAlgebra\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.projective_of_localization_maximal\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.Flat.projective_of_finitePresentation\", \"Algebra.Generators.exists_presentation_of_free_cotangent\"], \"digest\": \"fc2aa97367b5771d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"SymmetricAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T09:06:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cotangent\\\", \\\"SymmetricAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*Cotangent|Cotangent.*SymmetricAlgebra|conormal.*symmetric|symmetric.*conormal",
+   "results": "{\"t\": \"2026-10-24T09:09:22Z\", \"tool\": \"grep\", \"query\": \"SymmetricAlgebra.*Cotangent|Cotangent.*SymmetricAlgebra|conormal.*symmetric|symmetric.*conormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elkik stabilization gives one retract presentation whose localized defining equations have maximal Jacobian minors generating one on each principal smooth open",
+   "results": "{\"t\": \"2026-10-24T09:09:22Z\", \"tool\": \"leansearch\", \"query\": \"Elkik stabilization gives one retract presentation whose localized defining equations have maximal Jacobian minors generating one on each principal smooth open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.localizationAway_jacobian\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.PreSubmersivePresentation.localizationAway_jacobiMatrix\", \"Algebra.SubmersivePresentation.localizationAway\", \"Algebra.SubmersivePresentation.mk.congr_simp\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"7a9341c25f892e66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"Cotangent\"",
+   "results": "{\"t\": \"2026-10-24T09:09:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SymmetricAlgebra\\\", \\\"Cotangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated ideal I of a ring P, the canonical presentation P[y] to Sym_(P/I)(I/I squared) has free conormal after localization above the locally free locus of I/I squared",
+   "results": "{\"t\": \"2026-10-24T09:09:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated ideal I of a ring P, the canonical presentation P[y] to Sym_(P/I)(I/I squared) has free conormal after localization above the locally free locus of I/I squared\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.free_cotangent\", \"Algebra.instFreeCotangentToExtensionUnitLocalizationAway\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.instFreeCotangentSpaceToExtension\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\"], \"digest\": \"63959b0c0f7ba03a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern already submersive presentations, a basis assuming free conormal, or projectivity criteria; none supplies the symmetric-presentation conormal exact sequence over an arbitrary principal open above the free locus."
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*Cotangent|Cotangent.*SymmetricAlgebra|conormal.*symmetric|symmetric.*conormal",
+   "results": "{\"t\": \"2026-10-24T09:35:11Z\", \"tool\": \"grep\", \"query\": \"SymmetricAlgebra.*Cotangent|Cotangent.*SymmetricAlgebra|conormal.*symmetric|symmetric.*conormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned basis, localization-presentation and cotangent-space declarations do not assert coefficient-reduction exactness or its arbitrary free-locus hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module of a polynomial presentation of a symmetric algebra is a sum of the original conormal module and the relation module on the free locus",
+   "results": "{\"t\": \"2026-10-24T09:35:11Z\", \"tool\": \"leansearch\", \"query\": \"The conormal module of a polynomial presentation of a symmetric algebra is a sum of the original conormal module and the relation module on the free locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.R\", \"Module.Relations.Quotient\", \"Module.Presentation.cokernelRelations_R\", \"Algebra.Extension.Cotangent\", \"Module.Presentation.cokernel_R\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"SymmetricAlgebra\", \"Module.Basis.symmetricAlgebra\"], \"digest\": \"02eaeb9209aad7f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned basis, localization-presentation and cotangent-space declarations do not assert coefficient-reduction exactness or its arbitrary free-locus hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"Cotangent\"",
+   "results": "{\"t\": \"2026-10-24T09:35:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SymmetricAlgebra\\\", \\\"Cotangent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned basis, localization-presentation and cotangent-space declarations do not assert coefficient-reduction exactness or its arbitrary free-locus hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a symmetric algebra of I modulo I squared, coefficient reduction gives a split conormal exact sequence after localization over the locally free locus",
+   "results": "{\"t\": \"2026-10-24T09:35:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a symmetric algebra of I modulo I squared, coefficient reduction gives a split conormal exact sequence after localization over the locally free locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl\", \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Generators.CotangentSpace.exact\"], \"digest\": \"13f5c2b849077d20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned basis, localization-presentation and cotangent-space declarations do not assert coefficient-reduction exactness or its arbitrary free-locus hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentCompLocalizationAwayEquiv|CotangentSpace.exact",
+   "results": "{\"t\": \"2026-10-24T09:38:16Z\", \"tool\": \"grep\", \"query\": \"cotangentCompLocalizationAwayEquiv|CotangentSpace.exact\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basis.lean\"], \"digest\": \"1cdf911eaa102cf2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned basis, localization-presentation and cotangent-space declarations do not assert coefficient-reduction exactness or its arbitrary free-locus hypothesis.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial presentation of the symmetric algebra of a projective module has a split short exact sequence of conormal modules induced by coefficient reduction",
+   "results": "{\"t\": \"2026-10-24T09:38:17Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial presentation of the symmetric algebra of a projective module has a split short exact sequence of conormal modules induced by coefficient reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SymmetricAlgebra.IsSymmetricAlgebra.mvPolynomial\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\", \"IsSymmetricAlgebra\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Module.Basis.symmetricAlgebra_repr_apply\", \"Algebra.SubmersivePresentation.sectionCotangent\", \"SymmetricAlgebra\"], \"digest\": \"c397d33778ab40a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned basis, localization-presentation and cotangent-space declarations do not assert coefficient-reduction exactness or its arbitrary free-locus hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-conormal-smooth-open-chart",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3 via the recorded creation chain; the latest ancestor proof no longer contains this branch. This lemma serves the bounded-section-lifting argument: Lemma 5.4.12, printed p.151, special case U=Spec(B) minus V(IB); cited there as Elkik, Chapter II, Theorem 2 bis; Elkik II Theorem 2 bis, induction base with a principal ideal, carried by Lemma 4 (pp.564–566). Auxiliary input: Elkik II, Lemma 3, printed pp.562–564, and the ambient-neighbourhood equations reduction in the proof of Lemma 4, pp.564–565; algebraic coefficient-reduction exact sequence for the symmetric presentation, over the inverse image of the original conormal free locus.",
+   "via": [
+    "lem-per-elkik-conormal-smooth-open-chart",
+    "lem-per-elkik-principal-section-approximation",
+    "lem-per-elkik-generic-smooth-section-approximation",
+    "lem-per-gabber-ramero-henselian-section-lifting",
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-symmetric-conormal-free-locus-exact-sequence",
+  "worker": "stage1",
+  "summary": "Q25 checked Stacks 07CE and the corrected projective conormal inputs. Retained the arbitrary free-locus hypothesis and all map formulas; proved the result by localizing P at the inverse image of each contracted prime, applying existing projective lemmas, and descending by the explicit annihilator test. No new nodes. Normalized doubled TeX backslashes only.",
+  "blueprint": "Inherited auxiliary formal-resolution branch of ancestor Step 3 via the recorded creation chain; the latest ancestor proof no longer contains this branch. This lemma serves the bounded-section-lifting argument: Lemma 5.4.12, printed p.151, special case U=Spec(B) minus V(IB); cited there as Elkik, Chapter II, Theorem 2 bis; Elkik II Theorem 2 bis, induction base with a principal ideal, carried by Lemma 4 (pp.564–566). Auxiliary input: Elkik II, Lemma 3, printed pp.562–564, and the ambient-neighbourhood equations reduction in the proof of Lemma 4, pp.564–565; algebraic coefficient-reduction exact sequence for the symmetric presentation, over the inverse image of the original conormal free locus.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-base-change",
+    "why": "Generic commutative algebra input for the local coefficient-reduction argument of Stacks 07CE; the perverse-sheaf unit contains no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-symmetric-conormal-reduction-exact",
+    "why": "Generic commutative algebra input for the local coefficient-reduction argument of Stacks 07CE; the perverse-sheaf unit contains no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-symmetric-presentation-conormal-equiv",
+    "why": "Generic commutative algebra input for the local coefficient-reduction argument of Stacks 07CE; the perverse-sheaf unit contains no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-coefficient-conormal-inclusion",
+    "why": "Generic commutative algebra input for the local coefficient-reduction argument of Stacks 07CE; the perverse-sheaf unit contains no replacement for this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-cotangent-complex-symmetric-algebra",
+    "why": "Generic commutative algebra input for the local coefficient-reduction argument of Stacks 07CE; the perverse-sheaf unit contains no replacement for this algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-projective-symmetric-conormal-reduction-exact",
+  "lem-weil-pbc-projective-symmetric-presentation-conormal-equiv",
+  "lem-weil-pbc-polynomial-coefficient-conormal-inclusion",
+  "lem-weil-pbc-cotangent-complex-symmetric-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e5103bd3d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e5103bd3d (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and Stacks 07CE (smoothing.tex lines 357-418). The statement is unchanged from live apart from backslashes, and there is no repair note, so this is an ordinary split. It is true: I checked T=0, m=0, the case k[e]/(e^2) with I=(e), redundant generators, and that the 07EV counterexample is excluded by the free-locus hypothesis. Step 2 localizes at S=P minus the preimage of p; S^{-1}A=A_p (00CT), and Nagata gives (J^2)Q'=(JQ')^2. Step 3: the projective reduction-exact and linear-form equivalence nodes apply to (P',I',q_p), and the split q_p gives injectivity after tensoring without flatness. Step 4: T_q=C_{r0} is a localization of C'. Step 5 builds the global i, r and lambda from coefficient-inclusion, 07EV(2) and the tensor universal property, and they agree on generators with the local maps. Step 6 is the 00HN annihilator test, fairly marked elementary. Step 7: M_T is finitely presented and locally free, so it is finite projective by 00NX, and K_T is a direct summand of T^m. Step 8: beta = lambda_T^{-1} r_T, split because K_T is projective. Batch 5: lem-trf-finite-projective-local-free is a Mathlib leaf (Module.projective_of_localization_maximal, 00NX) with no proof deps, generic algebra outside both assumptions, so accepted. The five declared tool_uses are generic sk-thm-p1 algebra and accepted. No new nodes, no duplicates, no changes."
+ }
+}

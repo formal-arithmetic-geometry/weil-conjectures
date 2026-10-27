@@ -128,5 +128,61 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.prime_biproduct_unconditional_iff"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.prime_biproduct_unconditional_iff",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.PrimeBiproductUnconditional",
+     "lines": [
+      135,
+      222
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring, $k$ a field, $X$ a scheme and $f:X\\to\\operatorname{Spec}k$.\nLet $I$ be a finite index set and $G_a$ module sheaves on the small etale site of $X$.\nLet $H$ be a module sheaf equipped with an isomorphism $e:H\\simeq\\bigoplus_a G_a$,\nthe finite direct sum (biproduct). The predicates $C_1,\\ldots,C_8$\nare those of [def-weil-pbc-eight-curve-assertions], with their stated conditional hypotheses.\nAssume each $G_a$ and $H$ is constructible [def-weil-pbc-etale-constructible-sheaf]. Then\n$(C_1(H)\\land C_2(H)\\land C_5(H)\\land C_7(H)\\land C_8(H))$ holds if and only if\n$C_1(G_a)\\land C_2(G_a)\\land C_5(G_a)\\land C_7(G_a)\\land C_8(G_a)$ holds for every $a$.\nThere is no prime annihilator hypothesis.",
+  "proof": [
+   {
+    "text": "*Cohomology of a finite direct sum.* Taking underlying abelian sheaves and taking cohomology $H^q$ are additive functors. Applied to the isomorphism $e$, their composite identifies $H^q(X,H)$ with the finite product $\\prod_aH^q(X,G_a)$, with coordinate maps induced by $e$ followed by the projections $\\bigoplus_bG_b\\to G_a$; this holds also for the empty index set. A product is a singleton if and only if every factor is, since every factor contains zero, and a finite product is finite if and only if every factor is.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Pullback maps.* For any morphism of schemes $a$ and degree $q$, the cohomology pullback along $a$ [def-weil-pbc-cohomology-pullback] is natural in the sheaf, so in the product coordinates it is the product of the pullback maps of the summands. Surjectivity of the product map is equivalent to surjectivity of each factor: for the forward direction lift vectors supported in one coordinate, for the converse choose coordinate preimages. Injectivity is equivalent too: each summand $G_a$ is a retract of $H$ via the inclusion $G_a\\to\\bigoplus_bG_b$ followed by $e^{-1}$, and $e$ followed by the projection, which with naturality gives the forward implication; the converse follows from joint injectivity of the coordinates. Bijectivity combines both.",
+    "uses": [
+     "def-weil-pbc-cohomology-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The assertions.* Unfold $C_1,C_2,C_5,C_7,C_8$ of [def-weil-pbc-eight-curve-assertions] and apply these coordinatewise tests degree by degree. For $C_2$ and $C_7$ the affineness or properness hypothesis is common to $H$ and the $G_a$. For $C_5$ use the assumed constructibility of $H$ in one direction and that of the $G_a$ in the other. Assembling the five equivalences gives the statement.",
+    "uses": [
+     "def-weil-pbc-eight-curve-assertions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

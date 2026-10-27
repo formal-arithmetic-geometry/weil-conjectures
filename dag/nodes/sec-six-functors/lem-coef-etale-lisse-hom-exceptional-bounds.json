@@ -1,0 +1,143 @@
+{
+ "id": "lem-coef-etale-lisse-hom-exceptional-bounds",
+ "kind": "statement",
+ "title": "Exceptional pullback bounds on the lisse stratum",
+ "statement": "Let k, l≠p and A=O_E/(ϖ_E^(n+1)) be as in [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let X be a separated finite-type k-scheme [def-weil-scheme-morphism-properties] with topological dimension at most d_X∈N, g:Z→X a closed immersion and j:S→Z an open immersion [def-weil-closed-immersion, def-weil-open-immersion]. Let M be a bounded constructible complex of A-modules on X_et with Tor amplitude in [a,b] [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Then N=j^* Rg^! M, with Rg^! the right adjoint of the closed direct image [lem-exc-closed-ambient], is bounded constructible on S with Tor amplitude in [a,b+2d_X+1].",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "lem-exc-closed-ambient",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "proof": [
+  {
+   "text": "A has invertible exponent on Spec k [lem-coef-etale-lisse-hom-coefficient-invertible-exponent], and X is Noetherian because it is quasi-compact and locally of finite type over a field.",
+   "uses": [
+    "lem-coef-etale-lisse-hom-coefficient-invertible-exponent",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "Apply [thm-pur-open-complement-unconditional] to the open complement h:X∖Z→X with bound d_X: R^qh_* vanishes for q>2d_X and preserves constructibility. Then [prop-exc-closed-tor] with c=2d_X gives Rg^!M bounded constructible with Tor amplitude in [a,b+2d_X+1]; uniqueness of right adjoints identifies it with the chosen right adjoint.",
+   "uses": [
+    "thm-pur-open-complement-unconditional",
+    "prop-exc-closed-tor",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "The open restriction j^* is exact, preserves constructibility and commutes with derived tensor products, so N keeps both properties and the interval.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-lisse-hom-coefficient-invertible-exponent",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "thm-pur-open-complement-unconditional",
+  "prop-exc-closed-tor",
+  "lem-exc-closed-ambient",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etaleLisseHomExceptionalBounds",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived category coefficient Hom",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLisseHomExceptionalBounds",
+   "results": "Only this local declaration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Lisse Hom reduction proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLisseHomReduction",
+  "file": "lean/Sheaf/Paper/EtaleLisseHomReduction.lean",
+  "declaration": "WeilConjectures.etaleLisseHomExceptionalBounds",
+  "statement": "theorem etaleLisseHomExceptionalBounds (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (n : ℕ) (X Z S : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (g : Z ⟶ X) [IsClosedImmersion g] (j : S ⟶ Z) [IsOpenImmersion j] (dX : ℕ) (_hdX : topologicalKrullDim X ≤ (dX : WithBot ℕ∞)) (M : finiteHomEtale l E X n) (a b : ℤ) (_hM : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X M) (_hTor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X a b M) : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S ((lisseHomStratumExceptional l E n g j).obj M) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S a (b + 2 * (dX : ℤ) + 1) ((lisseHomStratumExceptional l E n g j).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

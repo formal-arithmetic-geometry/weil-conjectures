@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-compact-support-quotient-raw-output-identity",
+ "kind": "statement",
+ "title": "Original presentation of the output quotient identity",
+ "statement": "The ambient compact-support output identity transports to the intrinsic compact-support expressions used by the target theorem, by the definitional equality of the two fixed coefficient presentations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-coef-compact-support-reduction-maps",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-coef-scalar-restriction-identity",
+  "lem-coef-compact-support-restriction-identity",
+  "lem-coef-compact-support-quotient-native",
+  "def-coef-compact-support-coefficient-presentation",
+  "lem-coef-compact-support-quotient-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite the intrinsic compact-support functor to the identical ambient presentation and apply the proved ambient output identity.",
+   "uses": [
+    "lem-coef-compact-support-restriction-identity",
+    "lem-coef-compact-support-quotient-native",
+    "def-coef-compact-support-coefficient-presentation",
+    "lem-coef-compact-support-quotient-output-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-compact-support-restriction-identity",
+  "lem-coef-compact-support-quotient-native",
+  "def-coef-compact-support-coefficient-presentation",
+  "lem-coef-compact-support-quotient-output-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension composition isomorphism and the cocycle of quotient reduction maps defined by adjunction units",
+   "results": "OK 8 hits, including ModuleCat.homEquiv_extendScalarsComp and cotangent-complex comparisons.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary module adjunction composition lemma is related, but does not state the normalized unbounded sheaf coefficient maps, their K-flat models, or the compact-support comparisons. Generic adjunction composition is used directly for the categorical part."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars on sheaf modules is computed by a K flat complex and restriction comparisons preserve coefficient identity and composition",
+   "results": "OK 8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, Scheme.Modules.restrictFunctorComp and ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-27",
+   "verdict": "No exact match for these specified derived coefficient arrows and their normalized representative or compact-support squares."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_hom_app|map_cocycle",
+   "results": "OK 3 hits: group cohomology cocycles and Mathlib/CategoryTheory/Adjunction/CompositionIso.lean lines 100, 116.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic leftAdjointCompIso API in the proved categorical calculation. No compact-support or K-flat representative theorem is returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportQuotientCocycle",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-compact-support",
+   "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6.",
+   "via": [
+    "lem-coef-compact-support-quotient-cocycle"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportQuotientRawOutputIdentity",
+  "file": "lean/Sheaf/Paper/CompactSupportQuotientRawOutputIdentity.lean",
+  "declaration": "WeilConjectures.compactSupportQuotient_raw_output_identity",
+  "declarations": [
+   "WeilConjectures.compactSupportQuotient_raw_output_identity"
+  ],
+  "statement": "theorem compactSupportQuotient_raw_output_identity\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))\n    (hid :\n    (∀ n : ℕ, compactSupportQuotientNativeMap l E X n n le_rfl K ≫\n      (compactSupportQuotientNativeResId l E X n).hom.app\n        ((compactSupportQuotientNativeLevel l E X n).obj K) = 𝟙 _)) :\n    (∀ n : ℕ, ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map\n        (compactSupportReductionMap l E X n n le_rfl K) ≫\n      (sfCompactSupportRestriction c (compactSupportLevelQuotient l E n n le_rfl)).hom.app\n        ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) ≫\n      (compactSupportQuotientResId l E Y n).hom.app\n        ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj\n          ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) = 𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c35df",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261027T135438-L-3708061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c35df",
+  "group": "Q3",
+  "result": "fix",
+  "landing": "20261027T135438-L-3708061",
+  "kind": "interface",
+  "note": "independent cc review: Q3 c35df53c819c (byte-identical to fd5b): item theorems vs published signatures, 20 new modules vs their nodes, node proof_deps vs step uses and merge rules (stage3_delivery check_nodes), both direct importers compiled against the delivered modules"
+ }
+}

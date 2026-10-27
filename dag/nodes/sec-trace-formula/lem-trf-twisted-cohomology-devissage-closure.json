@@ -1,0 +1,286 @@
+{
+ "id": "lem-trf-twisted-cohomology-devissage-closure",
+ "kind": "statement",
+ "title": "Exact invertible twists and closure of eventual cohomology vanishing",
+ "statement": "Let $X$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], and let $\\mathcal L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Tensor products and powers mean [def-pur-sheaf-tensor-product], with $\\mathcal L^{\\otimes0}=\\mathcal O_X$; cohomology means the right derived functors of global sections [pqf-def-cohomology]. For a coherent module $\\mathcal E$ [pqf-def-coherent] define\n$$\\mathcal P_{\\mathcal L}(\\mathcal E)\\quad\\Longleftrightarrow\\quad\\exists n_0\\in\\mathbf N\\;\\forall n\\ge n_0\\;\\forall p\\ge1,\\quad H^p(X,\\mathcal E\\otimes\\mathcal L^{\\otimes n})=0.$$\nThen:\n(1) For every $n\\ge0$, $\\mathcal L^{\\otimes n}$ is invertible, and $-\\otimes\\mathcal L^{\\otimes n}$ is an additive exact functor on $\\mathcal O_X$-modules. Consequently the functors $\\mathcal E\\mapsto H^p(X,\\mathcal E\\otimes\\mathcal L^{\\otimes n})$ are additive and take every short exact sequence [def-weil-pbc-exact-sequence] to its long exact cohomology sequence. In particular they preserve finite direct sums.\n(2) The zero module has $\\mathcal P_{\\mathcal L}$. For a short exact sequence $0\\to\\mathcal E_1\\to\\mathcal E\\to\\mathcal E_2\\to0$ of coherent modules, if the end terms have $\\mathcal P_{\\mathcal L}$, then the middle term does, with the maximum of any two witnessing bounds as a witnessing bound.\n(3) Every finite direct sum of coherent modules is coherent, including the empty sum. If $\\mathcal E$ is coherent and $r\\ge1$, $\\mathcal P_{\\mathcal L}(\\mathcal E^{\\oplus r})$ implies $\\mathcal P_{\\mathcal L}(\\mathcal E)$ with the same witnessing bound. Here $\\mathcal E^{\\oplus r}$ is the direct sum of $r$ copies of $\\mathcal E$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, verification of conditions (1) and (2) of Tag 01YM, lemma-property-higher-rank-cohomological; zero case explicit"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-cohomology",
+  "pqf-def-coherent",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $n$. The power at $0$ is $\\mathcal O_X$, locally free of rank one; the invertible tensor-product assertion of [lem-pc-tensor-dual-invertible] gives the successor. Each power is therefore finite locally free of rank one. Apply [lem-sc-ext-tensor-exact] to it and use the symmetry of [lem-pc-sheaf-modules-tensor-closed] to obtain exactness of $T_n=-\\otimes\\mathcal L^{\\otimes n}$ from exactness of left tensoring. The latter node also gives additivity of $T_n$.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, verification of condition (1)"
+   }
+  },
+  {
+   "text": "The module category is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives], and $\\Gamma(X,-)$ is additive and left exact by [lem-sc-global-sections-left-exact]. Thus [lem-weil-pbc-right-derived-universal-delta-functor] applies: every $H^p(X,-)=R^p\\Gamma(X,-)$ is additive and the derived functors form a long exact sequence on every short exact sequence. Apply this to the short exact sequence obtained using $T_n$ in Step 1. Composition with the additive $T_n$ gives additivity of $A_{n,p}(\\mathcal E)=H^p(X,T_n\\mathcal E)$.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B, lemma-higher-derived-functors, parts (1), (2), (4)"
+   }
+  },
+  {
+   "text": "Write $A=A_{n,p}$. For a finite sum with inclusions $i_j$ and projections $q_j$, $q_ji_k=\\delta_{jk}$ and $\\sum_j i_jq_j=1$. Additivity and functoriality from Step 2 preserve both identities; the maps $(A(q_j))_j$ and $\\sum_j A(i_j)$ are inverse. Hence $A$ preserves finite sums. For the zero module, $1_0=0$ implies $1_{A(0)}=A(1_0)=A(0)=0$, so $A(0)=0$. Thus every $n\\ge0$ and $p\\ge1$ vanishes for the zero module, and $n_0=0$ witnesses its property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, additivity in condition (2); empty sum made explicit"
+   }
+  },
+  {
+   "text": "Let $b_1,b_2$ witness the property for the two end terms of the given short exact sequence. If $n\\ge\\max(b_1,b_2)$ and $p\\ge1$, the long exact sequence of Step 2 contains $0=H^p(X,T_n\\mathcal E_1)\\to H^p(X,T_n\\mathcal E)\\to H^p(X,T_n\\mathcal E_2)=0$. Exactness says that every element of the middle group is the image of zero, so the group is zero. The bound is independent of $p$ and is precisely $\\max(b_1,b_2)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, verification of condition (1) of Tag 01YM"
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-weil-pbc-coherent-modules-kernel-cokernel-sum] to the finite family of coherent modules. It gives coherence of their sum, including the zero module when the family is empty. In particular $\\mathcal E^{\\oplus r}$ is coherent, so the property used in the last assertion is defined.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BY, lemma-coherent-abelian, coherent finite sums including zero"
+   }
+  },
+  {
+   "text": "For $r\\ge1$ choose one summand inclusion $i:\\mathcal E\\to\\mathcal E^{\\oplus r}$ and its projection $q$, so $qi=1$. Functoriality gives $A_{n,p}(q)A_{n,p}(i)=1$. If $b$ witnesses vanishing for the sum, then for every $n\\ge b$ and $p\\ge1$ this composite factors through the zero group. Therefore the identity on $A_{n,p}(\\mathcal E)$ is zero and that group is zero. The same $b$ works for $\\mathcal E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, verification of condition (2) of Tag 01YM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, conditions (1) and (2), with derived Tag 015B and modules Tag 01BY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally Noetherian scheme and invertible sheaf L, eventual vanishing in every positive degree of H^p(X,F tensor L^n) is closed under coherent extensions and retracts of finite sums",
+   "results": "[leanfinder] OK 8 hit(s) Returned: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.isGE_iff. Returned homological support/projective Tor/Ext or basic-open section results, not exact invertible twists and the uniform-in-positive-degree eventual-vanishing closure statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaf tensor powers are exact functors; their cohomology has long exact sequences and preserves finite direct sums, so eventual positive cohomology vanishing is extension closed and descends to retracts",
+   "results": "[leanfinder] OK 8 hit(s) Returned: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, Rep.isZero_Tor_succ_of_projective, DerivedCategory.isGE_Q_obj_iff, isZero_Ext_succ_of_projective, CategoryTheory.Sheaf.H. Returned homological support/projective Tor/Ext or basic-open section results, not exact invertible twists and the uniform-in-positive-degree eventual-vanishing closure statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventual.*vanish|vanish.*twist|twist.*vanish",
+   "results": "[grep] OK 2 hit(s) Returned: Mathlib/Analysis/SpecialFunctions/RegularizedHypergeometric.lean:178, Mathlib/Analysis/Asymptotics/Defs.lean:1505. Returned homological support/projective Tor/Ext or basic-open section results, not exact invertible twists and the uniform-in-positive-degree eventual-vanishing closure statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor.Additive",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.Additive' Returned: none. Returned homological support/projective Tor/Ext or basic-open section results, not exact invertible twists and the uniform-in-positive-degree eventual-vanishing closure statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Additive\"",
+   "results": "[loogle] OK 10 hit(s) Returned: CategoryTheory.Functor.Additive, CategoryTheory.Functor.Additive.of_isZero, CategoryTheory.Functor.additive_of_iso, CategoryTheory.Functor.additive_iff_of_iso, CategoryTheory.Functor.additive_of_preserves_binary_products, CategoryTheory.Functor.additive_of_preservesBinaryBiproducts, CategoryTheory.Functor.additive_of_comp_faithful, CategoryTheory.Functor.additive_of_full_essSurj_comp, CategoryTheory.Functor.Additive.map_add, CategoryTheory.Functor.Additive.mk. Returned homological support/projective Tor/Ext or basic-open section results, not exact invertible twists and the uniform-in-positive-degree eventual-vanishing closure statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre eventual twist cohomology vanishing property stable under short exact sequences and finite direct sum retracts",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"} Returned: none. Service rate limited; no absence conclusion drawn.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "eventual.*vanish|vanish.*twist|twist.*vanish",
+   "results": "2 hits: Mathlib/Analysis/SpecialFunctions/RegularizedHypergeometric.lean, Mathlib/Analysis/Asymptotics/Defs.lean. Read the returned types: basic-open section vanishing, presheaf tensors, abstract sheaf cohomology, or module invertibility, not all clauses of this coherent-twist closure statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eventual vanishing of higher cohomology after tensoring with powers of an invertible sheaf is stable under extensions and direct summands",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.MorphismProperty.instIsStableUnderCoproductsMonomorphismsOfAB4OfSize, TensorProduct.finsuppLeft, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsTop, Module.Invertible.instTensorProduct, Module.Invertible.instTensorProduct_2. Read the returned types: basic-open section vanishing, presheaf tensors, abstract sheaf cohomology, or module invertibility, not all clauses of this coherent-twist closure statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app. Read the returned types: basic-open section vanishing, presheaf tensors, abstract sheaf cohomology, or module invertibility, not all clauses of this coherent-twist closure statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally Noetherian scheme and invertible sheaf L, eventual vanishing of positive cohomology of F tensor L to the n is closed under extensions and descends from nonempty finite sums",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.LocalGeneratorsData.IsFiniteType. Read the returned types: basic-open section vanishing, presheaf tensors, abstract sheaf cohomology, or module invertibility, not all clauses of this coherent-twist closure statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring by a line bundle is an exact additive functor and higher coherent sheaf cohomology is additive with long exact sequences",
+   "results": "8 hits: CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian. Read the returned types: basic-open section vanishing, presheaf tensors, abstract sheaf cohomology, or module invertibility, not all clauses of this coherent-twist closure statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-surjective-ample-reflection",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: finite-surjective descent and ascent of absolute ampleness (0B5V). Subargument: Stacks 0B5V conditions (1),(2), the returned proof Step 3 (exact twists, long exact sequences, finite sums, retractions, and zero).",
+   "via": [
+    "lem-trf-finite-surjective-ample-reflection",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-twisted-cohomology-devissage-closure",
+  "worker": "stage1",
+  "summary": "Verified all clauses against Stacks 0B5V and 01YM; reused invertible tensor closure, finite locally free tensor exactness, additive monoidal sheaf tensor, enough injectives, left exact global sections, the derived delta-functor theorem and coherent finite sums. Wrote the maximum-bound and split-retraction arguments explicitly. No statement correction and no new nodes.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: finite-surjective descent and ascent of absolute ampleness (0B5V). Subargument: Stacks 0B5V conditions (1),(2), the returned proof Step 3 (exact twists, long exact sequences, finite sums, retractions, and zero).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Closure of invertible modules under tensor products supplies the power induction; a generic line-bundle tool. No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Exactness of tensoring with a finite locally free module supplies exact twists; a generic module tool. No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "The symmetric monoidal structure and additivity of ordinary sheaf tensor give right-tensor exactness and additivity. No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Enough injectives for ordinary structure-module sheaves verifies the derived-functor theorem hypothesis. No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Left exactness and additivity of ordinary global sections verify the derived-functor theorem hypothesis. No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic derived-functor theorem supplies both additivity and the long exact sequence, not a replacement geometric route. No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Generic coherent finite-sum closure, including zero, gives precisely clause (3). No node of sk-i-curve-zero states this ordinary coherent-module fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-9c142d70b",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-9c142d70b (reviewer sub-agent of L); spot-checked: Read the item and all seven cited statements in full. The statement is byte-identical to the live and side-live copies (unsplit, empty proof) and there is no repair note, so this is a first split and nothing was weakened. There are no new nodes. Sources checked: Stacks coherent.tex 0B5V proof (P matches P_L; (1) from long exact sequence plus exact invertible twist, (2) from additivity) and 01YM (1) extension closure end terms implies middle, (2) r>=1 retract, matching item clauses (2) and (3). Also derived 015B and modules 01BY labels. Steps: (1) power induction via lem-pc-tensor-dual-invertible; O_X is invertible by def-sc-invertible-module; lem-sc-ext-tensor-exact applies with d=1; right-tensor exactness and additivity via the symmetry and additivity of lem-pc-sheaf-modules-tensor-closed. (2) enough injectives (ringed space) plus additive left-exact Gamma meet every hypothesis of lem-weil-pbc-right-derived-universal-delta-functor, whose delta-functor definition supplies additivity and the long exact sequence; pqf-def-cohomology is R^p Gamma on O_X-modules. (3)-(4) and (6) are genuinely elementary (biproduct identities, zero module, max bound uniform in p, split retract; r>=1 needed). (5) clause (3) of lem-weil-pbc-coherent-modules-kernel-cokernel-sum includes r=0. Tested n=0, E=0, empty sum, r=1, empty X; locally Noetherian is unused but retained. No duplicate found (0B5V/01YM grep hits are the parent, the devissage theorems and the (3)(c) comparison node). Parent citer uses only the zero, extension and retract cases. All seven tool_uses are generic module or homological facts and are accepted. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TwistedCohomologyDevissageClosure",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.twistedCohomology_devissage_closure",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.TwistedCohomologyVanishingBound",
+   "AlgebraicGeometry.Scheme.Modules.HasEventualTwistedCohomologyVanishing",
+   "AlgebraicGeometry.Scheme.Modules.twistedCohomology_devissage_closure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TwistedCohomologyDevissageClosure.lean",
+  "statement": "theorem twistedCohomology_devissage_closure (X : Scheme.{u}) [IsLocallyNoetherian X] (L : X.Modules) [L.IsInvertible] : (∀ n : ℕ, (L.tensorPow n).IsInvertible ∧ (tensorRight (L.tensorPow n)).Additive ∧ PreservesFiniteLimits (tensorRight (L.tensorPow n)) ∧ PreservesFiniteColimits (tensorRight (L.tensorPow n)) ∧ (∀ p : ℕ, (tensorRight (L.tensorPow n) ⋙ RingedSpace.moduleCohomology X.toRingedSpace p).Additive ∧ ∀ r : ℕ, PreservesColimitsOfShape (Discrete (Fin r)) (tensorRight (L.tensorPow n) ⋙ RingedSpace.moduleCohomology X.toRingedSpace p)) ∧ ∃ G : CohomologicalDeltaFunctor X.Modules (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))), G.F = fun p : ℕ ↦ tensorRight (L.tensorPow n) ⋙ RingedSpace.moduleCohomology X.toRingedSpace p) ∧ HasEventualTwistedCohomologyVanishing L (0 : X.Modules) ∧ (∀ (S : ShortComplex X.Modules), S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → ∀ b₁ b₂ : ℕ, TwistedCohomologyVanishingBound L S.X₁ b₁ → TwistedCohomologyVanishingBound L S.X₃ b₂ → TwistedCohomologyVanishingBound L S.X₂ (max b₁ b₂)) ∧ (∀ (r : ℕ) (E : Fin r → X.Modules), (∀ i : Fin r, RingedSpace.IsCoherent X.toRingedSpace (E i)) → RingedSpace.IsCoherent X.toRingedSpace (∐ E)) ∧ (∀ (E : X.Modules), RingedSpace.IsCoherent X.toRingedSpace E → ∀ r : ℕ, 1 ≤ r → ∀ b : ℕ, TwistedCohomologyVanishingBound L (∐ fun _ : Fin r ↦ E) b → TwistedCohomologyVanishingBound L E b)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d109bc0f",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_dep records, module, report (Worker report + Second reading by O2), Stacks 0B5V/01YM. Tensor: X.Modules ⊗ from Invertible.lean = SheafOfModules.monoidalCategory, identical def to recorded cochainModulesMonoidal (only Prop instance arg differs). LES via CohomologicalDeltaFunctor with G.F = T_n ⋙ moduleCohomology, same form as pqf-def-cohomology. P_L = ∃b ∀n≥b ∀p≥1 Subsingleton H^p(E⊗L^n), matches 0B5V. (1) invertible/additive/exact twist, additive H^p, Fin r coproducts incl. r=0; (2) zero, SES of coherent modules with max b₁ b₂ witness; (3) IsCoherent (01BV) finite sums incl. empty, r≥1 retract with same b. Edge cases n=0, p=0, b=0, E=0, r=0/1, empty X ok; one universe u. Only lean field differs from side-live node; statement verbatim; one sorry; docstrings with source/blueprint/6 steps; helper defs real and node-local; no H4 duplicate found. No findings."
+ }
+}

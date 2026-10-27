@@ -174,7 +174,18 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-thm-pe-classical-sheaves",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
@@ -184,5 +195,30 @@
   "landing": "20261018T135904-L-2959270",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme and $\\Lambda$ a ring. For every sheaf of $\\Lambda$-modules\n$F$ on $X_{\\Et}$ the unit $\\eta_F\\colon F\\to\\nu_{X,*}\\nu_X^*F$ is an\nisomorphism. Consequently\n$\\nu_X^*\\colon\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(X_{\\Proet},\\Lambda)$ is fully\nfaithful: for sheaves $F,F'$ of $\\Lambda$-modules on $X_{\\Et}$ the map\n$\\Hom(F,F')\\to\\Hom(\\nu_X^*F,\\nu_X^*F')$, $\\varphi\\mapsto\\nu_X^*\\varphi$, is\nbijective.",
+  "proof": [
+   {
+    "text": "Let $V\\to X$ be affine and étale. Then $V$ is an object of both sites, and\n$(\\nu_{X,*}\\nu_X^*F)(V)=(\\nu_X^*F)(V)$ since $\\nu_{X,*}$ is restriction to the\nétale subsite ([def-weil-pbc-site-comparison-morphism]). The inverse image\n$\\nu_X^*F$ is the sheafification of the presheaf inverse image $P$, the left\nKan extension along the inclusion of sites; since the inclusion is fully\nfaithful, $P(V)=F(V)$, and the unit of the presheaf adjunction is the identity\nthere. By [lem-weil-pbc-comparison-sections], applied to the constant system at\n$V$, the sheafification map $P(V)\\to(\\nu_X^*F)(V)$ is an isomorphism. Hence\n$\\eta_F(V)$ is an isomorphism for every affine étale $V$, and as affine étale\nobjects form a basis of $X_{\\Et}$, $\\eta_F$ is an isomorphism of sheaves.",
+    "uses": [
+     "def-weil-pbc-site-comparison-morphism",
+     "lem-weil-pbc-comparison-sections"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For full faithfulness, the adjunction gives a bijection\n$\\Hom(\\nu_X^*F,\\nu_X^*F')\\cong\\Hom(F,\\nu_{X,*}\\nu_X^*F')$, and the composite\n$\\Hom(F,F')\\to\\Hom(\\nu_X^*F,\\nu_X^*F')\\cong\\Hom(F,\\nu_{X,*}\\nu_X^*F')$ is\n$\\varphi\\mapsto\\eta_{F'}\\circ\\varphi$. Since $\\eta_{F'}$ is an isomorphism, this\ncomposite is bijective, hence so is $\\varphi\\mapsto\\nu_X^*\\varphi$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

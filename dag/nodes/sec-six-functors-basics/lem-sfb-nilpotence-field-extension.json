@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-nilpotence-field-extension",
+ "kind": "statement",
+ "title": "Nilpotence of a smooth connected affine group is invariant under field extension",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ be a field extension [def-pc-field-extension], and let $G$ be an affine $k$-group scheme [def-pc-scheme, def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], smooth [def-sbc-smooth-morphisms] and connected [def-weil-connected-scheme]. Write $G_K=G\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ for its scalar extension [def-pc-base-change]. A group $H$ is nilpotent if there are an integer $s\\geq0$ and a descending sequence $H=H_0\\supseteq\\cdots\\supseteq H_s=1$ of closed normal subgroup schemes [def-sc-group-scheme-subgroup] such that, for every commutative algebra $A$ over its base field, $g\\in H(A)$ and $h\\in H_j(A)$, the commutator $ghg^{-1}h^{-1}$ belongs to $H_{j+1}(A)$. Then $G$ is nilpotent if and only if $G_K$ is nilpotent. No perfectness or algebraicity hypothesis is imposed on $K/k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 6.24 and Remark 6.25, printed p.131; Proposition 6.38, printed p.133; scalar-extension compatibility of the generated subgroup, Section 2h, Propositions 2.46–2.48, printed pp.54–55. Agent synthesis for the descending central series; not a separate corollary in Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-base-change",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-nilpotent-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Construct $C_0=G$ and, inductively, $C_{j+1}=[G,C_j]$ using [lem-sfb-smooth-connected-relative-commutator]. Its statement gives at each stage a smooth connected normal closed subgroup of $G$, contained in $C_j$, and containing every commutator of $G$ with $C_j$ on every $k$-algebra. The induction starts because $G$ is normal in itself. Each $C_{j+1}$ is minimal among all closed subgroups containing those commutators, with no regularity assumption on the competing subgroup.",
+   "uses": [
+    "lem-sfb-smooth-connected-relative-commutator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 6.24, Remark 6.25(b), p.131; descending central series preceding Proposition 6.38, p.133."
+   }
+  },
+  {
+   "text": "For each $j$, put $X=G\\times_kC_j$ and $c(g,h)=ghg^{-1}h^{-1}$. The affine-product lemma [lem-weil-pbc-fibre-product-affine-spectra] and finite-type composition/base change [lem-sfb-finite-type-composition-base-change] make $X$ affine of finite type. The identity pair is a rational point and $c(e,e)=e$ by [def-sc-group-scheme]. Normality from [def-sc-group-scheme-subgroup] gives $ghg^{-1}\\in C_j(R)$ and the identity $c(g,h)^{-1}=c(g^{-1},ghg^{-1})$, so the image is inversion stable for every $R$. Membership of every commutator in a closed subgroup is equivalent to factorization of $c$: test the universal point of the affine scheme $X$; its pullback kills the defining ideal, hence descends to the quotient, by [def-weil-affine-spectrum, def-weil-closed-immersion]. Thus the minimality in step 1 meets exactly the hypotheses of [lem-sfb-pointed-generated-subgroup-field-extension]. Consequently $(C_{j+1})_K$ is minimal among closed subgroups of $G_K$ containing the commutator map $G_K\\times_K(C_j)_K\\to G_K$. The latter map is $c_K$, since products and group operations base change functorially [def-pc-base-change, def-sc-group-scheme].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "lem-sfb-pointed-generated-subgroup-field-extension",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 2.46–2.47, pp.54–55, applied to Definition 6.24, p.131. Finite-type products: Stacks Tags 01T3 and 01T4."
+   }
+  },
+  {
+   "text": "If $G=H_0\\supseteq\\cdots\\supseteq H_s=1$ is a central series over $k$, base change each closed immersion using [lem-weil-pbc-proper-fp-permanence](b). For every $K$-algebra $R$, the fibre-product definition [def-pc-base-change] identifies $(H_j)_K(R)=H_j(R)$ and $G_K(R)=G(R)$ with $R$ regarded as a $k$-algebra. Hence the subgroup and normality conditions of [def-sc-group-scheme-subgroup], and each commutator containment of the given series, hold for these same groups. Its endpoints are $G_K$ and $1_K$. It is therefore a nilpotent series for $G_K$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-pc-base-change",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 6.34 and Remark 6.35, p.133, evaluated on extension-field algebras. Closed immersions under base change: Stacks Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "Conversely let $G_K=H_0\\supseteq\\cdots\\supseteq H_s=1_K$ be a nilpotent series over $K$. We prove $(C_j)_K\\subseteq H_j$ for $0\\leq j\\leq s$. The case $j=0$ is equality. Given the inclusion at $j<s$, each commutator of $G_K(R)$ with $(C_j)_K(R)$ belongs to $H_{j+1}(R)$ for every $K$-algebra $R$. Testing on the universal point of $G_K\\times_K(C_j)_K$ as in step 2 gives factorization of the commutator morphism through $H_{j+1}$. Step 2 and [lem-sfb-pointed-generated-subgroup-field-extension] give $(C_{j+1})_K\\subseteq H_{j+1}$. This proves the induction. Since every subgroup contains the identity, its last inclusion gives $(C_s)_K=1_K$. The competing $H_j$ need not be smooth or connected.",
+   "uses": [
+    "lem-sfb-pointed-generated-subgroup-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.38, p.133, inclusion induction; Proposition 2.47, p.55, for the central terms after scalar extension."
+   }
+  },
+  {
+   "text": "Write $C_s=\\operatorname{Spec}B$ and let $\\epsilon:B\\to k$ be its identity-point homomorphism [def-weil-affine-spectrum, def-sc-group-scheme]. The affine-product lemma [lem-weil-pbc-fibre-product-affine-spectra] identifies its scalar-extension coordinate ring with $B\\otimes_kK$. Step 4 says the base-changed identity is an isomorphism, so for every $b\\in B$ the element $(b-\\epsilon(b)1)\\otimes1$ is zero. The map $k\\to K$ is faithfully flat by [lem-sfb-nonzero-field-algebra-faithfully-flat]. Apply [lem-weil-pbc-faithfully-flat-universally-injective] to the $k$-module $B$: $b\\mapsto b\\otimes1$ is injective. Thus $b=\\epsilon(b)1$ for all $b$, and $B=k$ compatibly with its identity point. Hence $C_s=1$. Step 1 now supplies the required nilpotent series $G=C_0\\supseteq\\cdots\\supseteq C_s=1$ over $k$. For $s=0$ this same argument says $G=1$, so it also treats the zero-length case.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-nonzero-field-algebra-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.38, p.133, final termination argument; Stacks Tag 05CK, lemma-faithfully-flat-universally-injective, applied over the ground field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-connected-relative-commutator",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-sfb-pointed-generated-subgroup-field-extension",
+  "def-pc-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-nonzero-field-algebra-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Synthesis of Proposition 2.47, Definition 6.24, Remark 6.25(b), Definition 6.34, Remark 6.35 and Proposition 6.38 (pp.55, 131, 133), with faithful-flat injectivity from Stacks Tag 05CK. The field-invariance assertion is not a separately stated corollary in Milne."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nilpoten|commutator",
+   "results": "{\"t\": \"2026-10-24T07:48:06Z\", \"tool\": \"grep\", \"query\": \"nilpoten|commutator\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\"], \"digest\": \"f08caa9837f3a9e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group and Lie algebra central series do not supply closed subgroup schemes or field-extension descent; algebraic-geometry hits concern abelian groups or nilpotent ring sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nilpotence of a smooth affine group scheme descends along a field extension",
+   "results": "{\"t\": \"2026-10-24T07:48:06Z\", \"tool\": \"leansearch\", \"query\": \"Nilpotence of a smooth affine group scheme descends along a field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.instIsNilpotentTensor\", \"Group.IsNilpotent\", \"Group.nilpotencyClass\", \"Group.isNilpotent_congr\", \"nilpotent_of_mulEquiv\", \"CommGroup.isNilpotent\", \"IsNilpotent.to_isSolvable\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"93a67a07b7a8daa3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group and Lie algebra central series do not supply closed subgroup schemes or field-extension descent; algebraic-geometry hits concern abelian groups or nilpotent ring sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"lowerCentralSeries\"",
+   "results": "{\"t\": \"2026-10-24T07:48:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"lowerCentralSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LieModule.iInf_lowerCentralSeries_eq_bot_of_isNilpotent\", \"AddSubgroup.isNilpotent_of_lowerCentralSeries_eq_bot\", \"Subgroup.isNilpotent_of_lowerCentralSeries_eq_bot\", \"AddSubgroup.isNilpotent_iff_lowerCentralSeries\", \"Subgroup.isNilpotent_iff_lowerCentralSeries\"], \"digest\": \"160e6e17396d8f15\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group and Lie algebra central series do not supply closed subgroup schemes or field-extension descent; algebraic-geometry hits concern abelian groups or nilpotent ring sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotence of an affine algebraic group is invariant under extension of the ground field, detected by iterated commutator morphisms",
+   "results": "{\"t\": \"2026-10-24T07:48:09Z\", \"tool\": \"leanfinder\", \"query\": \"Nilpotence of an affine algebraic group is invariant under extension of the ground field, detected by iterated commutator morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Surjective.lieAlgebra_isNilpotent\", \"LieEquiv.nilpotent_iff_equiv_nilpotent\", \"Function.Injective.lieAlgebra_isNilpotent\", \"lowerCentralSeries_eq_bot_iff_nilpotencyClass_le\", \"isNilpotent_of_ker_le_center\", \"Function.Surjective.lieModuleIsNilpotent\", \"LieModule.IsNilpotent.mk\", \"LieModule.IsNilpotent.nilpotent_int\"], \"digest\": \"e7181d7ad5f0fca8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group and Lie algebra central series do not supply closed subgroup schemes or field-extension descent; algebraic-geometry hits concern abelian groups or nilpotent ring sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The descending central series of a smooth connected affine algebraic group commutes with field extension and terminates exactly when it is nilpotent",
+   "results": "{\"t\": \"2026-10-24T07:50:54Z\", \"tool\": \"leanfinder\", \"query\": \"The descending central series of a smooth connected affine algebraic group commutes with field extension and terminates exactly when it is nilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_iff_finite_descending_central_series\", \"nilpotent_iff_lowerCentralSeries\", \"lowerCentralSeries_nilpotencyClass\", \"nilpotent_iff_finite_ascending_central_series\", \"Group.IsNilpotent.nilpotent\", \"lowerCentralSeries_eq_bot_iff_nilpotencyClass_le\", \"Group.IsNilpotent.nilpotent'\", \"Group.isNilpotent_iff\"], \"digest\": \"7abe0a6a4cf425ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group and Lie algebra central series do not supply closed subgroup schemes or field-extension descent; algebraic-geometry hits concern abelian groups or nilpotent ring sections."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpoten|commutator|centralSeries",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group lower central series and Lie algebra scalar extension do not provide closed subgroup schemes or descent of group-scheme nilpotence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nilpotence of an affine algebraic group descends along a field extension",
+   "results": "8 hits: LieModule.instIsNilpotentTensor, Group.IsNilpotent, Group.nilpotencyClass, nilpotent_of_mulEquiv, Group.isNilpotent_congr, IsNilpotent.to_isSolvable, isNilpotent_tensor_residueField_iff, CommGroup.isNilpotent",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group lower central series and Lie algebra scalar extension do not provide closed subgroup schemes or descent of group-scheme nilpotence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"lowerCentralSeries\"",
+   "results": "5 hits: LieModule.iInf_lowerCentralSeries_eq_bot_of_isNilpotent, AddSubgroup.isNilpotent_of_lowerCentralSeries_eq_bot, Subgroup.isNilpotent_of_lowerCentralSeries_eq_bot, AddSubgroup.isNilpotent_iff_lowerCentralSeries, Subgroup.isNilpotent_iff_lowerCentralSeries",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group lower central series and Lie algebra scalar extension do not provide closed subgroup schemes or descent of group-scheme nilpotence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotence of a smooth connected affine group scheme is invariant under arbitrary extension of its base field",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.FormallyUnramified.ext', isNilpotent_tensor_residueField_iff, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyUnramified.ext, AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, Algebra.FormallyUnramified.lift_unique'",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group lower central series and Lie algebra scalar extension do not provide closed subgroup schemes or descent of group-scheme nilpotence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group is nilpotent exactly when its descending central subgroup series terminates, and this property is unchanged by extension of scalars",
+   "results": "8 hits: nilpotent_iff_finite_descending_central_series, nilpotent_iff_lowerCentralSeries, nilpotent_iff_finite_ascending_central_series, Group.isNilpotent_iff, Group.IsNilpotent.nilpotent, Group.IsNilpotent.nilpotent', LieModule.isNilpotent_iff, LieModule.isNilpotent_iff_int",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group lower central series and Lie algebra scalar extension do not provide closed subgroup schemes or descent of group-scheme nilpotence."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-kernel-chain-termination",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, the sentence beginning \"Eventually\". This is the termination assertion, separated from construction and torus lifting; Milne refers for its details to Springer 1998, 13.3.5, which is not present locally. Supporting geometric reduction: nilpotence is invariant under extension of the base field.",
+   "via": [
+    "lem-sfb-semisimple-kernel-chain-termination",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotence-field-extension",
+  "worker": "stage1",
+  "summary": "Q43: verified Milne pp.54–55,131,133; reused the smooth connected relative commutator lemma, isolated only the generic generated-subgroup scalar-extension theorem, wrote the central-series inclusion induction and faithful-flat triviality descent explicitly. Statement and stmt_deps unchanged; no field-perfection assumption introduced. No exact project or Mathlib match.",
+  "blueprint": "Inherited supporting prerequisite below det-thm-sf-ctf-stability-direct-images clause (3), semisimple-kernel termination. The latest blueprint direct-images proof now uses compactification and contains no nilpotence or generated-subgroup theorem; this split realizes the existing Milne central-series prerequisite rather than changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-8e2c4c555",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-8e2c4c555 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and the new node lem-sfb-pointed-generated-subgroup-field-extension in full. The item's statement and stmt_deps are unchanged from live; no repair note, so this is not a re-split. The new node is Milne iAG2017 Prop 2.47 (printed p.55, PDF p.67) in the 2.46 setting, which I checked in the PDF. Its hypotheses are narrower than Milne's (X affine; inversion stability for all k-algebras). I verified independently that it is true: tensoring with the free module K commutes with arbitrary intersections. Small cases phi=e and phi=id check out. It is not a duplicate of affine-pointed-map-generated-subgroup (no base change), derived-commutator-word-arbitrary-field (D(G) only, cannot be iterated), smooth-connected-derived-subgroup (algebraically closed field only) or tensor-family-zero-detection (an ingredient). It does not restate a clause of the item. Step checks: (1) the relative-commutator hypotheses hold inductively for C_j. (2) X=G x C_j is affine of finite type; the identity c(g,h)^{-1}=c(g^{-1},ghg^{-1}) holds by direct multiplication; factorization is equivalent to commutators lying in K(R), tested at the universal point; c_K is the commutator map of G_K. (3) Closed immersions base change by proper-fp-permanence (b); the functor-of-points identification is correct. (4) The induction (C_j)_K in H_j uses only minimality, with arbitrary H_j; the inclusion direction is correct. (5) B tensor K = K, k->K is faithfully flat, Tag 05CK injectivity gives B=k; s=0 is covered. Batch-5 flag: lem-trf-smooth-composition is the generic mathlib fact that a composite of smooth morphisms is smooth; it is not given by the trace-formula or Poincare assumption and is not a step of their proofs, so the citation is accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NilpotenceFieldExtension",
+  "declaration": "AlgebraicGeometry.isNilpotentGroupScheme_iff_fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NilpotenceFieldExtension.lean",
+  "statement": "theorem isNilpotentGroupScheme_iff_fieldExtension (k K : Type u) [Field k] [Field K] [Algebra k K] (G : Grp (Over (Spec (.of k)))) (haff : IsAffine G.X.left) (hft : LocallyOfFiniteType G.X.hom) (hqc : QuasiCompact G.X.hom) (hsm : Smooth G.X.hom) (hconn : ConnectedSpace G.X.left) : IsNilpotentGroupScheme G ↔ IsNilpotentGroupScheme ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.obj G)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-202162708",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Item record matches live except the lean record and the added stmt_dep def-sfb-nilpotent-group-scheme; statement, proof and proof_deps unchanged. New def IsNilpotentGroupScheme is real data and matches Milne Def 6.34/Rem 6.35 (read in the PDF) clause by clause: closed normal subgroups of G via the recorded IsClosed/IsNormalSubgroupScheme, IsIso at 0, trivial last term, inclusion by factorization, commutator ghg^-1h^-1 on all k-algebras. No duplicate in Sheaf/WeilConjectures/DAG (the SolvableGroupStructure node has only IsSolvable). Item Lean: arbitrary K/k (same universe forced by Spec), affine + LocallyOfFiniteType + QuasiCompact + Smooth + ConnectedSpace, G_K = Over.pullback mapGrp (same term as MultiplicativeType.baseChange), iff conclusion. Edge cases s=0, trivial G, empty G and imperfect or transcendental K all covered. Docstrings carry the source place, blueprint id and the 5-step proof; proof is sorry only; recorded lean.statement fields match the files verbatim. Advisory: unused private imports; the second reading is the worker's self-check. No compile, since nothing was changed."
+ }
+}

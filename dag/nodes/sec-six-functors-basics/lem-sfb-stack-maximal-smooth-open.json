@@ -1,0 +1,199 @@
+{
+ "id": "lem-sfb-stack-maximal-smooth-open",
+ "kind": "statement",
+ "title": "Maximal smooth open of an algebraic stack and flat base change",
+ "statement": "Schemes and algebraic spaces are as in [def-pc-scheme, def-trf-algebraic-space], with universes as in [def-weil-size-convention]. An algebraic stack is a category fibred in groupoids on schemes, with effective etale descent for objects and sheaf descent for isomorphisms, whose diagonal is representable by algebraic spaces and which has a smooth surjective scheme atlas. Representable means that every scheme-valued 2-base change is an algebraic space. An open substack is a full substack whose pullback by every scheme-valued object is an open subscheme. Smoothness, flatness and local finite presentation of morphisms to schemes are tested after smooth scheme atlases of the source, using [def-sbc-smooth-morphisms, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $S$ be a scheme and $f:\\mathcal X\\to S$ an algebraic stack over it. There exists a largest open substack $\\mathcal U_f\\subseteq\\mathcal X$ such that $f|_{\\mathcal U_f}$ is smooth. If $f$ is locally of finite presentation and $g:S'\\to S$ is flat, then, for $f':\\mathcal X\\times_SS'\\to S'$, one has $\\mathcal U_{f'}=\\mathcal U_f\\times_SS'$. The fibre product is the 2-fibre product: its objects are pairs of objects together with an isomorphism of their images, and its arrows are pairs compatible with that isomorphism. Scheme fibre products are [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DZR, lemma-where-smooth, existence and clause (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-moduli-scheme-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:P\\to\\mathcal X$, and put $h=f\\circ p$ and $R=P\\times_{\\mathcal X}P$, with projections $s,t:R\\to P$. The presentation in [lem-sfb-invariant-open-substack-descent] gives this algebraic space $R$. Both projections are smooth, being base changes of $p$ by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Apply [lem-sfb-space-maximal-smooth-open] to $h:P\\to S$, with no flatness or finite-presentation assumption, obtaining its largest smooth open $W\\subseteq P$.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-maximal-smooth-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DZR (lemma-where-smooth), first paragraph, with target atlas the identity of S."
+   }
+  },
+  {
+   "text": "For $r\\in|R|$, [lem-sfb-space-smooth-source-point-locality] applied to $s$ gives $s(r)\\in W$ if and only if $h\\circ s$ is smooth at $r$: membership in $W$ means smoothness on a neighbourhood, by its maximality. The same statement holds for $t$. The isomorphism $p\\circ s\\simeq p\\circ t$ makes the two composites to the scheme $S$ equal. Thus $s^{-1}(W)=t^{-1}(W)$ as open subspaces. By [lem-sfb-invariant-open-substack-descent], $W$ descends to an open substack $\\mathcal U\\subseteq\\mathcal X$ with $P\\times_{\\mathcal X}\\mathcal U=W$.",
+   "uses": [
+    "lem-sfb-space-smooth-source-point-locality",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DZR (lemma-where-smooth), invariant atlas open; stacks-properties.tex Tag 0507 (lemma-substacks-presentation)."
+   }
+  },
+  {
+   "text": "The map $W\\to\\mathcal U$ is a smooth surjective scheme atlas by base change of $p$, using [lem-sfb-stack-chartwise-smooth-etale-calculus], and its composite $h|_W$ to $S$ is smooth. The atlas test in the statement, read for every smooth scheme atlas, follows from one atlas: let $Q_1,Q_2$ be smooth surjective scheme atlases of an algebraic stack $\\mathcal Z$ over $S$ with $Q_1\\to S$ smooth. Then $Q_{12}=Q_1\\times_{\\mathcal Z}Q_2$ is an algebraic space, smooth and surjective over $Q_1$ and over $Q_2$ by [lem-sfb-stack-chartwise-smooth-etale-calculus]. By [lem-sfb-space-smooth-source-point-locality], $Q_{12}\\to S$ is smooth at every point, and, since every point of $Q_2$ is the image of a point of $Q_{12}$, $Q_2\\to S$ is smooth at every point, hence smooth by source locality on the open cover. Thus $f|_{\\mathcal U}$ is smooth. If $\\mathcal V\\subseteq\\mathcal X$ is another smooth open, its atlas $P\\times_{\\mathcal X}\\mathcal V$, an open of $P$, therefore has smooth composite to $S$. Maximality of $W$ puts this open inside $W$, and the inclusion-preserving correspondence of [lem-sfb-invariant-open-substack-descent] gives $\\mathcal V\\subseteq\\mathcal U$. Therefore $\\mathcal U=\\mathcal U_f$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-smooth-source-point-locality",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DZR (lemma-where-smooth), maximality paragraph, using the smooth-atlas definition."
+   }
+  },
+  {
+   "text": "Now suppose $f$ is locally of finite presentation and $g:S^\\prime\\to S$ is flat. The pullback stack $\\mathcal X^\\prime$ is algebraic: triples in its 2-fibre product descend componentwise, its diagonal is the pullback of that of $\\mathcal X$, and $P^\\prime=P\\times_SS^\\prime\\to\\mathcal X^\\prime$ is a smooth surjective scheme atlas by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The atlas definition of local finite presentation makes $h:P\\to S$ locally of finite presentation. By the flat-base-change clause of [lem-sfb-space-maximal-smooth-open], the largest smooth open of $h^\\prime:P^\\prime\\to S^\\prime$ is $W^\\prime=W\\times_SS^\\prime$. Applying steps 1--3 to $p^\\prime$ shows that $\\mathcal U_{f^\\prime}$ pulls back to $W^\\prime$. But the open $\\mathcal U_f\\times_SS^\\prime$ also pulls back to $W^\\prime$, by associativity of the defining triples in the 2-fibre product. The injective atlas-open correspondence of [lem-sfb-invariant-open-substack-descent] identifies these two open substacks. This is the required equality, without assuming that $g$ is surjective or locally of finite presentation.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-maximal-smooth-open",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DZR (lemma-where-smooth), clause (3) and final proof paragraph, via spaces-morphisms.tex Tag 0DZI clause (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-maximal-smooth-open",
+  "lem-sfb-space-smooth-source-point-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DZR, lemma-where-smooth: scheme target, smooth atlas, invariant-open descent and flat base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism of algebraic stacks has a largest open smooth locus which commutes with flat base change for locally finitely presented morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth locus of an algebraic stack morphism is open and preserved by flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism of algebraic stacks has a largest open smooth locus which commutes with flat base change for locally finitely presented morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] {f : A} :\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"smoothLocus\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.smoothLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] : X.Opens\", \"doc\": \"The set of points smooth over a base, as a `Scheme.Opens`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsReduced X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : Dense ↑(AlgebraicGeometry.Scheme.Hom.smoothLocus f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsIntegral X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : genericPoint ↥X ∈ AlgebraicGeometry.Scheme.Hom.smoothLocus f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.smoothLocus_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Smooth f] : AlgebraicGeometry.Scheme.Hom.smoothLocus f = ⊤\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.smoothLocus_eq_top_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.Scheme.Hom.smoothLocus f = ⊤ ↔ AlgebraicGeometry.Smooth f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preimage_smoothLocus_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y U : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.LocallyOfFinitePresentation g] : (TopologicalSpace.Opens.map f.base).obj (AlgebraicGeometry.Scheme.Hom.smoothLocus g) = AlgebraicGeometry.Scheme.Hom.smoothLocus (CategoryTheory.Catego\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpen_smoothLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] : IsOpen {x | (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).FormallySmooth}\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.mem_smoothLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.LocallyOfFinitePresentation f] {x : ↥X} : x ∈ AlgebraicGeometry.Scheme.Hom.smoothLocus f ↔ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).FormallySmooth\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothLocus|[Ss]tack.*[Ss]mooth",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"43\", \"text\": \"  rw [← Scheme.Hom.smoothLocus_eq_top_iff, ← TopologicalSpace.Opens.coe_eq_univ,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"47\", \"text\": \"    nonempty_inter_closedPoints H f.smoothLocus.2.isClosed_compl.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"48\", \"text\": \"  obtain ⟨y, hy : y ∈ f.smoothLocus, hyc⟩ := nonempty_inter_closedPoints\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"49\", \"text\": \"    f.dense_smoothLocus_of_perfectField.nonempty f.smoothLocus.2.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"60\", \"text\": \"  rw! [← hα', ← α.hom.left.mem_preimage, Scheme.Hom.preimage_smoothLocus_eq,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"251\", \"text\": \"      hV.primeIdealOf ⟨x, hx⟩ ∈ Algebra.smoothLocus Γ(Y, U) Γ(X, V) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"296\", \"text\": \"lemma Scheme.Hom.isOpen_smoothLocus [LocallyOfFinitePresentation f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"305\", \"text\": \"def Scheme.Hom.smoothLocus (f : X ⟶ Y) [LocallyOfFinitePresentation f] : X.Opens :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"306\", \"text\": \"  ⟨{ x | (f.stalkMap x).hom.FormallySmooth }, f.isOpen_smoothLocus⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"308\", \"text\": \"lemma Scheme.Hom.mem_smoothLocus {f : X ⟶ Y} [LocallyOfFinitePresentation f] {x : X} :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"537\", \"text\": \"@[stacks 00T2 \\\"In the stacks project, the definition of smooth is completely different, and tag\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"19\", \"text\": \"- `Algebra.smoothLocus` : The set of primes that are smooth over the base.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"20\", \"text\": \"- `Algebra.basicOpen_subset_smoothLocus_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"22\", \"text\": \"- `Algebra.smoothLocus_eq_univ_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"24\", \"text\": \"- `Algebra.isOpen_smoothLocus` : The smooth locus is open.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"41\", \"text\": \"but it can be shown that this is equivalent to the stacks project definition that `A` is smooth\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"24\", \"text\": \"- `Algebra.mem_smoothLocus_of_formallySmooth_fiber`:\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"193\", \"text\": \"@[stacks 00TF \\\"We require the whole fiber to be smooth instead\\\"]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"242\", \"text\": \"  refine ⟨smoothLocus_eq_univ_iff.mp (Set.eq_univ_iff_forall.mpr fun q ↦ ?_), ‹_›⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"54\", \"text\": \"lemma etaleLocus_eq_unramfiedLocus_inter_smoothLocus :\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"55\", \"text\": \"    etaleLocus R A = unramifiedLocus R A ∩ smoothLocus R A :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"90\", \"text\": \"  rw [etaleLocus_eq_unramfiedLocus_inter_smoothLocus]\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"91\", \"text\": \"  exact isOpen_unramifiedLocus.inter isOpen_smoothLocus\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"line\": \"137\", \"text\": \"  rw [← Algebra.smoothLocus_eq_univ_iff, ← Set.univ_subset_iff, ← TopologicalSpace.Opens.coe_top,\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"line\": \"140\", \"text\": \"    Algebra.basicOpen_subset_smoothLocus_iff, ← formallySmooth_algebraMap]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, rings or ordinary categorical limits, not algebraic stacks or their marked Artinian deformation groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack over a scheme has a largest smooth open substack compatible with flat base change if locally finitely presented",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, Algebra.isOpen_smoothLocus, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-smooth-locus-deformation-test",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the initial maximal smooth open and its flat base change to the coefficient ring.",
+   "via": [
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-maximal-smooth-open",
+  "worker": "stage1",
+  "summary": "Read Stacks 0DZR, 0DZI, 06F2, 0507 and the chartwise permanence statement. Construct the smooth atlas locus, prove invariance under the presentation projections, descend it and prove maximality, then compare the two opens after flat base change. Two statement-only algebraic-space prerequisites; no Lean attachment or Mathlib leaf. Statement and inherited metadata retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the initial maximal smooth open and its flat base change to the coefficient ring. Steps 1--4 expand its maximal-smooth-open prerequisite using Stacks 0DZR. Current latest direct-images proof has the shorter compactification formulation; no unit step is replaced. The ancestor tool reports None; inherited from.node=null and via are preserved, and new nodes extend that chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-c6badf5b9",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-c6badf5b9 (reviewer sub-agent of L); spot-checked: FIX after a full read. Sources checked: Stacks 0DZR (stacks-morphisms l.7439), 0DZI (spaces-morphisms l.7296) and 06F2 (spaces-descent l.2542). The item statement is unchanged from live and is 0DZR existence plus clause (3) with a scheme target; nothing is weakened. New node lem-sfb-space-maximal-smooth-open is 0DZI existence plus clause (2): arbitrary h, flat base change, h lfp. It is true and self-contained. It is not a duplicate of lem-sfb-space-flat-smooth-locus or lem-sfb-flat-space-smooth-locus, which both need f flat and lfp, while the atlas composite here is neither. New node lem-sfb-space-smooth-source-point-locality is the pointwise form of 06F2. It is true in both directions without q surjective, and no DAG node gives smooth-source descent for spaces. Steps 1, 2 and 4 are correct. In step 2, h∘s = h∘t because S is a scheme, and equal point sets give equal open subspaces through scheme pullbacks. One fault (E5/E1) in step 3: it treated smoothness of f|_U as proved from the single atlas W. It then used the specific atlas P×_X V for another smooth open V. That needs the atlas test to be independent of the atlas, which was never proved; step 4's lfp use also needs it. Repair: step 3 now reads the test for every atlas and proves that one atlas suffices. It does this through Q1×_Z Q2 (smooth and surjective over both by the chartwise calculus) and both directions of the point-locality node, and it now cites that node, which was already in proof_deps. A second repair corrects node 2's source.place, which cited 04XL for openness; it now cites 042S and 04TA. Batch-5 flags: all four come only through def-trf-algebraic-space, a general definition, and the descent and calculus nodes are stack foundations (0507, 04XB). None of them is a step of the trace formula or Poincaré duality, so all are accepted. No tool_uses are needed: everything is in sk-thm-sf-ctf-stability. No SGA source is used and there is no cycle.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackMaximalSmoothOpen",
+  "declaration": "CategoryTheory.exists_maximal_smooth_open_moduliSubstack",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackMaximalSmoothOpen.lean",
+  "statement": "theorem exists_maximal_smooth_open_moduliSubstack {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) : ∃ U : OpenModuliSubstack F, IsSmoothModuliStack U.category ∧ (∀ V : OpenModuliSubstack F, IsSmoothModuliStack V.category → V.IsContainedIn U) ∧ ((∃ (P : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj P)) F), IsSmoothModuliAtlas F P a ∧ LocallyOfFinitePresentation P.hom) → ∀ (S' : Scheme.{u}) (g : S' ⟶ S), Flat g → ∃ U' : OpenModuliSubstack (moduliSchemeBaseChange F g), IsSmoothModuliStack U'.category ∧ (∀ V' : OpenModuliSubstack (moduliSchemeBaseChange F g), IsSmoothModuliStack V'.category → V'.IsContainedIn U') ∧ ∀ x : (moduliSchemeBaseChange F g).obj, U'.property x ↔ U.property x.obj.left)",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Existence, maximality and flat base change are clauses of a single theorem. Scheme-base-change equality is extensional equality of full-substack object predicates on the existing iso-comma construction. The three added statement dependencies already carry the algebraic-stack, open-substack and base-change notions introduced inline in the node. No mathematical statement correction or new notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c773e908e",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Node differs from live only in lean + 3 added stmt_deps (def-sfb-algebraic-moduli-stack, def-sfb-open-moduli-substack, def-sfb-moduli-scheme-base-change), all landed and used. Statement matches Stacks 0DZR existence + clause (3) with scheme target: IsAlgebraicModuliStack hypothesis only; largest via IsContainedIn for all smooth opens; IsSmoothModuliStack = smooth atlas with smooth structural map per def; lfp antecedent as ∃ smooth atlas with lfp P.hom (equivalent to ∀ by smooth-locality, same interface as landed StackInfinitesimalSmoothCriterion/OpenStackAlgebraicLfp); arbitrary flat g with no extra conditions; U' smooth+largest on moduliSchemeBaseChange (iso-comma) with U'.property x ↔ U.property x.obj.left = full-substack equality. Edge cases (empty, nowhere smooth, non-surjective flat g, universes u,v,w free) OK. No duplicates, no new defs, single sorry, source/blueprint docstrings with 4-step proof, statement verbatim, proof-only import exists live. No fixes."
+ }
+}

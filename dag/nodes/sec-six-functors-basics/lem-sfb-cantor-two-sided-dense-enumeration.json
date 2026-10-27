@@ -1,0 +1,846 @@
+{
+ "id": "lem-sfb-cantor-two-sided-dense-enumeration",
+ "kind": "statement",
+ "title": "A two-sided tail-dense enumeration in Cantor space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Give $V=\\{0,1\\}^{\\mathbb N}$ its product topology, each factor being discrete, and its lexicographic order. Let\n$$c(x)=\\sum_{n\\ge0}2x_n3^{-n-1},\\qquad D=\\{w(01)^\\infty:w\\text{ a finite binary word}\\},\\qquad A=V\\setminus D.$$\nThen $V$ is nonempty, compact Hausdorff, totally disconnected (every connected subset has at most one point), and metrizable. The map $c:V\\to[0,1]$ is continuous, injective, and strictly order preserving. The set $D$ is countably infinite, none of its points is eventually constant, and every nonempty basic cylinder specified by a finite initial word contains infinitely many points of $D$. There exists a bijection $v:\\mathbb N\\to D$; for any such enumeration, every nonempty open $B\\subseteq V$ and every $N\\in\\mathbb N$ admit $k\\ge N$ with $v_k\\in B$. The set $A$ is dense in $V$. For each $d\\in D$ there are sequences $(x_m^-),(x_m^+)$ in $A$ converging to $d$ such that $c(x_m^-)<c(d)<c(x_m^+)$ for every $m$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated pure-topology auxiliary, old proof Step 1: binary Cantor space, eventually alternating dense subset, and two-sided approximation. No theorem in the blueprint asserts this fact; external reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For a binary word $w$ of length $r$, put $[w]=\\{x:x_i=w_i\\ (i<r)\\}$. These cylinders form a basis: a finite list of coordinate conditions is refined at any of its points by fixing the initial segment through its largest coordinate. Each cylinder is open and closed, since its complement is the union of the other finitely many length-$r$ cylinders. The all-zero sequence makes $V$ nonempty. Two different points differ in a coordinate, whose two disjoint clopen fibres separate them; hence $V$ is Hausdorff. A connected subset containing both points would be separated by those fibres, so every connected subset has at most one point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Binary product topology and coordinate separation."
+   }
+  },
+  {
+   "text": "Every binary factor is compact: from any open cover choose an open containing $0$ and one containing $1$. Apply [lem-weil-pbc-tychonoff-product-quasi-compact] (products of quasi-compact spaces, i.e. spaces in which every open cover has a finite subcover, are quasi-compact) to get compactness of $V$. For metrizability apply [lem-sfb-compact-countable-separating-metrizable] with $X=V$, $Y_n=\\{0,1\\}$ with its discrete metric, and $u_n(x)=x_n$. The projections are continuous by the product topology and separate distinct sequences. All hypotheses of that node, including compactness of $X$, now hold.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-sfb-compact-countable-separating-metrizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Compactness and metrizability of Cantor space."
+   }
+  },
+  {
+   "text": "For $x\\in V$ set $a_i=2x_i\\in\\{0,1,2\\}$. The coordinate map $x\\mapsto a$ is continuous: the inverse image of any finite-coordinate cylinder is open. Apply [lem-sfb-real-positional-digit-expansion] with $b=3$. Its series is exactly $c(x)$, is convergent, has values in $[0,1]$, and depends continuously on $x$. A map into $[0,1]$ is continuous when its composition with inclusion into $\\mathbb R$ is continuous, directly by the subspace topology. The same node supplies the prefix-tail formula and bounds for all ternary digit sequences.",
+   "uses": [
+    "lem-sfb-real-positional-digit-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Definition and continuity of the ternary coordinate."
+   }
+  },
+  {
+   "text": "If $x<y$ lexicographically, let $j$ be their first unequal coordinate, so $x_j=0$, $y_j=1$. Split both series after $j+1$ terms using [lem-sfb-real-positional-digit-expansion]. Writing $X=F_3((2x_{j+1+i})_i)$ and $Y=F_3((2y_{j+1+i})_i)$ gives $$c(y)-c(x)=3^{-j-1}(2+Y-X)\\geq3^{-j-1}>0,$$ since $0\\leq X,Y\\leq1$. Thus $c$ is strictly order preserving. Any two distinct binary sequences have a first unequal coordinate, and one is lexicographically smaller; consequently $c$ is injective.",
+   "uses": [
+    "lem-sfb-real-positional-digit-expansion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. First-unequal-digit calculation."
+   }
+  },
+  {
+   "text": "Finite binary words are countable: encode a length-$r$ word $w$ by $2^r+\\sum_{i<r}w_i2^i$, lying in $[2^r,2^{r+1})$. The interval recovers $r$, and successive remainders modulo $2$ recover the digits. To each $d\\in D$ assign the least code of a word $w$ with $d=w(01)^\\infty$. Equal codes give equal words and hence equal $d$, so this is an injection $D\\to\\mathbb N$. Every $d\\in D$ contains infinitely many $0$s and $1$s in its alternating tail, and is therefore not eventually constant.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Countability and non-endpoint property of the prescribed set."
+   }
+  },
+  {
+   "text": "Fix a word $w$. For each $r\\geq0$ the sequence $d_r=w0^r1(01)^\\infty$ belongs to $[w]\\cap D$. These sequences are distinct: if $r<s$, their digits at position $|w|+r$ are $1$ and $0$ respectively. Thus every cylinder contains infinitely many points of $D$. In particular, using the empty word shows $D$ is infinite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. An explicit infinite family in every cylinder."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-countable-infinite-bijection] to $\\mathbb N$ and the countable infinite set $D$ obtained above, yielding a bijection $v:\\mathbb N\\to D$. For any such $v$, any nonempty open $B$, and any $N$, choose a cylinder $[w]\\subseteq B$ through one point of $B$. The infinite set $D\\cap[w]$ cannot be contained in the finite set $\\{v_0,\\ldots,v_{N-1}\\}$. Choose $d$ outside that finite set and use surjectivity to write $d=v_k$; injectivity then forces $k\\geq N$. This proves tail density for every bijective enumeration, including $N=0$.",
+   "uses": [
+    "lem-sfb-countable-infinite-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Existence of an enumeration and the elementary finite-exclusion argument."
+   }
+  },
+  {
+   "text": "Every cylinder $[w]$ contains $w0^\\infty$. This sequence is eventually constant, whereas no member of $D$ is; hence it belongs to $A$. Every nonempty open contains a cylinder, so meets $A$, which proves that $A$ is dense.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Dense complement by eventually zero sequences."
+   }
+  },
+  {
+   "text": "Fix $d\\in D$. For each $m\\geq0$, choose indices $p_m,q_m\\geq m$ with $d_{p_m}=1$, $d_{q_m}=0$; they exist because the alternating tail has both digits arbitrarily far out. Define $x_m^-$ to agree with $d$ below $p_m$, to have digit $0$ at $p_m$, and to be constantly $0$ thereafter. Define $x_m^+$ to agree below $q_m$, have digit $1$ at $q_m$, and be constantly $0$ thereafter. Both are eventually zero and thus in $A$. Their first unequal digits with $d$ give $x_m^-<d<x_m^+$, so Step 4 gives $c(x_m^-)<c(d)<c(x_m^+)$. For each fixed prefix length $r$, all $m\\geq r$ make both sequences agree with $d$ on that prefix. By the cylinder basis this is exactly convergence to $d$ in $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem. Explicit approximating sequences on both lexicographic sides."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-sfb-compact-countable-separating-metrizable",
+  "lem-sfb-real-positional-digit-expansion",
+  "lem-sfb-countable-infinite-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated pure-topology auxiliary below the countably split profinite cover; the blueprint supplies context, not this topology theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cantor space admits a countable dense set of non-endpoints with distinct enumeration every tail dense and two-sided approximation by its complement",
+   "results": {
+    "t": "2026-10-22T06:09:38Z",
+    "tool": "leanfinder",
+    "query": "Cantor space admits a countable dense set of non-endpoints with distinct enumeration every tail dense and two-sided approximation by its complement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "cantorSequence_mem_cantorSet",
+     "TopologicalSpace.denseSeq",
+     "cantorSet",
+     "Dense.exists_countable_dense_subset_no_bot_top",
+     "Metric.PiNatEmbed.distDenseSeq",
+     "exists_countable_dense_no_bot_top",
+     "TopologicalSpace.denseRange_denseSeq",
+     "ofDigits_bool_to_fin_three_mem_cantorSet"
+    ],
+    "digest": "0ddf85811158f1d1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: denseSeq and separability do not give the prescribed eventually alternating set, an injective enumeration with dense tails, or two-sided approximation; ofDigits supplies only the Cantor embedding ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cantor\"",
+   "results": {
+    "t": "2026-10-22T06:09:39Z",
+    "tool": "loogle",
+    "query": "\"Cantor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Function.cantor_injective",
+     "Function.cantor_surjective",
+     "Cardinal.cantor",
+     "Cardinal.cantor'",
+     "CantorScheme.Antitone",
+     "CantorScheme.Disjoint",
+     "CantorScheme.ClosureAntitone",
+     "CantorScheme.VanishingDiam"
+    ],
+    "digest": "6b77f9de3cd04953"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: denseSeq and separability do not give the prescribed eventually alternating set, an injective enumeration with dense tails, or two-sided approximation; ofDigits supplies only the Cantor embedding ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "Cantor|cantor",
+   "results": {
+    "t": "2026-10-22T06:09:39Z",
+    "tool": "grep",
+    "query": "Cantor|cantor",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+     "Mathlib/Topology/UniformSpace/Path.lean",
+     "Mathlib/Topology/UniformSpace/CompareReals.lean",
+     "Mathlib/Topology/ExtremallyDisconnected.lean",
+     "Mathlib/Topology/CantorBendixson.lean",
+     "Mathlib/Topology/CantorBendixson.lean",
+     "Mathlib/Topology/CantorBendixson.lean",
+     "Mathlib/Topology/CantorBendixson.lean"
+    ],
+    "digest": "6d71ced8a60ee733"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: denseSeq and separability do not give the prescribed eventually alternating set, an injective enumeration with dense tails, or two-sided approximation; ofDigits supplies only the Cantor embedding ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "binary sequence space has countable dense eventually alternating sequences and uncountably many points in every cylinder",
+   "results": {
+    "t": "2026-10-22T06:09:40Z",
+    "tool": "leansearch",
+    "query": "binary sequence space has countable dense eventually alternating sequences and uncountably many points in every cylinder",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopologicalSpace.instSeparableSpaceForallOfCountable",
+     "TopologicalSpace.separableSpace_iff",
+     "TopologicalSpace.Countable.to_separableSpace",
+     "TopologicalSpace.exists_countable_dense",
+     "TopologicalSpace.SeparableSpace.exists_countable_dense",
+     "TopologicalSpace.SeparableSpace.of_denseRange",
+     "TopologicalSpace.denseSeq",
+     "TopologicalSpace.SeparableSpace.mk"
+    ],
+    "digest": "fbc596f00c4900fc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: denseSeq and separability do not give the prescribed eventually alternating set, an injective enumeration with dense tails, or two-sided approximation; ofDigits supplies only the Cantor embedding ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "ofDigits_bool|continuous.*ofDigits|cantorSet",
+   "results": {
+    "t": "2026-10-22T06:11:51Z",
+    "tool": "grep",
+    "query": "ofDigits_bool|continuous.*ofDigits|cantorSet",
+    "sub": "Topology/Instances/CantorSet.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "24",
+     "25",
+     "26",
+     "27",
+     "31"
+    ],
+    "digest": "a97b4461015887c3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: denseSeq and separability do not give the prescribed eventually alternating set, an injective enumeration with dense tails, or two-sided approximation; ofDigits supplies only the Cantor embedding ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "ofDigits|continuous.*tsum|hasSum_geometric",
+   "results": {
+    "t": "2026-10-23T11:45:54Z",
+    "tool": "grep",
+    "query": "ofDigits|continuous.*tsum|hasSum_geometric",
+    "sub": "Topology/Instances/CantorSet.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "10",
+     "30",
+     "31",
+     "33",
+     "151"
+    ],
+    "digest": "669bd8741b916b5f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Real.ofDigits",
+   "results": {
+    "t": "2026-10-23T11:45:55Z",
+    "tool": "loogle",
+    "query": "Real.ofDigits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Real.ofDigits",
+     "Real.ofDigits_le_one",
+     "Real.ofDigits_nonneg",
+     "Real.continuous_ofDigits",
+     "Real.ofDigits_const_last_eq_one",
+     "Real.ofDigits_SurjOn",
+     "Real.ofDigits_const_last_eq_one'",
+     "Real.ofDigits_digits"
+    ],
+    "digest": "286663dc66c80df7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "binary Cantor space ternary expansion continuous strictly monotone and countable eventually alternating dense subset",
+   "results": {
+    "t": "2026-10-23T11:46:01Z",
+    "tool": "leanfinder",
+    "query": "binary Cantor space ternary expansion continuous strictly monotone and countable eventually alternating dense subset",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "cantorToHilbert",
+     "cantorToBinary",
+     "cantorSet",
+     "cantorToTernary",
+     "Real.fromBinary",
+     "cantorSequence",
+     "cantorSpaceHomeomorphNatToCantorSpace",
+     "cantorToHilbert_continuous"
+    ],
+    "digest": "8704630ffe97a8dc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "ofDigits_eq_sum|continuous_ofDigits|ofDigits_nonneg|ofDigits_le_one|ofDigitsTerm",
+   "results": {
+    "t": "2026-10-23T11:49:18Z",
+    "tool": "grep",
+    "query": "ofDigits_eq_sum|continuous_ofDigits|ofDigits_nonneg|ofDigits_le_one|ofDigitsTerm",
+    "sub": "Analysis/Real/OfDigits.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "35",
+     "37",
+     "40",
+     "41",
+     "42"
+    ],
+    "digest": "27eb547aa5fdec47"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A countably infinite set admits a bijection with the natural numbers",
+   "results": {
+    "t": "2026-10-23T11:49:18Z",
+    "tool": "leansearch",
+    "query": "A countably infinite set admits a bijection with the natural numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Nat.Subtype.denumerable",
+     "Denumerable.nat",
+     "instCountableNat",
+     "nonempty_denumerable",
+     "Set.countable_infinite_iff_nonempty_denumerable",
+     "nonempty_equiv_of_countable",
+     "Set.countable_iff_exists_injective",
+     "countable_iff_nonempty_embedding"
+    ],
+    "digest": "0feb98806cb233d5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable product of finite discrete spaces is compact Hausdorff and metrizable",
+   "results": {
+    "t": "2026-10-23T11:49:21Z",
+    "tool": "leanfinder",
+    "query": "A countable product of finite discrete spaces is compact Hausdorff and metrizable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.pi",
+     "TopologicalSpace.IsCompletelyPseudoMetrizableSpace.pi_countable",
+     "TopologicalSpace.IsCompletelyMetrizableSpace.pi_countable",
+     "LightProfinite.instCountableDiscreteQuotient",
+     "CompHausLike.instHasPropSigma",
+     "Metric.PiNatEmbed.toPiNatHomeo",
+     "Metric.PiNatEmbed.TopologicalSpace.MetrizableSpace.of_countable_separating",
+     "TopologicalSpace.instSeparableSpaceForallOfCountable"
+    ],
+    "digest": "23242e1b5d81bebb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_equiv_of_countable",
+   "results": {
+    "t": "2026-10-23T11:58:23Z",
+    "tool": "grep",
+    "query": "nonempty_equiv_of_countable",
+    "sub": "Logic",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Logic/Denumerable.lean"
+    ],
+    "digest": "69c3731999a3b1ad"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*(compactSpace|t2Space|metrizableSpace)|theorem ofDigits_eq_sum_add_ofDigits|theorem continuous_ofDigits|theorem ofDigits_nonneg|theorem ofDigits_le_one",
+   "results": {
+    "t": "2026-10-23T11:50:08Z",
+    "tool": "grep",
+    "query": "instance.*(compactSpace|t2Space|metrizableSpace)|theorem ofDigits_eq_sum_add_ofDigits|theorem continuous_ofDigits|theorem ofDigits_nonneg|theorem ofDigits_le_one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean",
+     "Mathlib/NumberTheory/ModularForms/Cusps.lean",
+     "Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean"
+    ],
+    "digest": "6a75ada66e753879"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pi\" CompactSpace",
+   "results": {
+    "t": "2026-10-23T11:50:08Z",
+    "tool": "loogle",
+    "query": "\"pi\" CompactSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: Function expected at\n  \"pi\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  CompactSpace",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no result: loogle: Function expected at\n  \"pi\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  CompactSpace"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Pp]i|MetrizableSpace.*∀|pi_countable",
+   "results": {
+    "t": "2026-10-23T11:51:41Z",
+    "tool": "grep",
+    "query": "instance.*[Pp]i|MetrizableSpace.*∀|pi_countable",
+    "sub": "Topology/Metrizable/Basic.lean",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "100",
+     "101",
+     "150"
+    ],
+    "digest": "e669f0747249df70"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Pp]i|Pi.*[Tt]2|pi.*[Tt]2|T2Space.*∀",
+   "results": {
+    "t": "2026-10-23T11:51:41Z",
+    "tool": "grep",
+    "query": "instance.*[Pp]i|Pi.*[Tt]2|pi.*[Tt]2|T2Space.*∀",
+    "sub": "Topology/Separation/Hausdorff.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "139",
+     "160",
+     "390",
+     "391",
+     "394"
+    ],
+    "digest": "086152051632e10b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "CompactSpace.*∀|instance.*[Pp]i|Tychonoff",
+   "results": {
+    "t": "2026-10-23T11:51:41Z",
+    "tool": "grep",
+    "query": "CompactSpace.*∀|instance.*[Pp]i|Tychonoff",
+    "sub": "Topology/Compactness/Compact.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "308",
+     "810",
+     "942",
+     "948",
+     "1162"
+    ],
+    "digest": "100e8a8a6fb7206c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ternary Cantor space has a dense set consisting of finite binary words followed by an alternating tail",
+   "results": {
+    "t": "2026-10-23T11:51:41Z",
+    "tool": "leansearch",
+    "query": "The ternary Cantor space has a dense set consisting of finite binary words followed by an alternating tail",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ofDigits_bool_to_fin_three_mem_cantorSet",
+     "cantorSetEquivNatToBool",
+     "ofDigits_zero_two_sequence_mem_cantorSet",
+     "cantorSet_eq_zero_two_ofDigits",
+     "cantorToBinary",
+     "cantorSet",
+     "dense_of_exists_between",
+     "Dense"
+    ],
+    "digest": "ebc6e6b33c35fb27"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "instance Pi.compactSpace",
+   "results": {
+    "t": "2026-10-23T11:55:03Z",
+    "tool": "grep",
+    "query": "instance Pi.compactSpace",
+    "sub": "Topology/Compactness",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Compactness/Compact.lean"
+    ],
+    "digest": "9d5cd020bd8e6257"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (continuous_ofDigits|ofDigits_eq_sum_add_ofDigits|ofDigits_nonneg|ofDigits_le_one|summable_ofDigitsTerm)",
+   "results": {
+    "t": "2026-10-23T11:55:03Z",
+    "tool": "grep",
+    "query": "theorem (continuous_ofDigits|ofDigits_eq_sum_add_ofDigits|ofDigits_nonneg|ofDigits_le_one|summable_ofDigitsTerm)",
+    "sub": "Analysis/Real",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Real/OfDigits.lean",
+     "Mathlib/Analysis/Real/OfDigits.lean",
+     "Mathlib/Analysis/Real/OfDigits.lean",
+     "Mathlib/Analysis/Real/OfDigits.lean",
+     "Mathlib/Analysis/Real/OfDigits.lean"
+    ],
+    "digest": "3356a6ef806612ab"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Real base b digit expansions are continuous lie between zero and one and split as finite prefix plus scaled tail",
+   "results": {
+    "t": "2026-10-23T11:55:04Z",
+    "tool": "leansearch",
+    "query": "Real base b digit expansions are continuous lie between zero and one and split as finite prefix plus scaled tail",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Real.ofDigits_eq_sum_add_ofDigits",
+     "Real.continuous_ofDigits",
+     "Real.digits",
+     "Real.fromBinary_continuous",
+     "Real.ofDigits",
+     "Real.ofDigitsTerm",
+     "Real.ofDigits_le_one",
+     "Nat.getD_digits"
+    ],
+    "digest": "c1cb7b5f81bda139"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nonempty_equiv_of_countable\"",
+   "results": {
+    "t": "2026-10-23T11:55:04Z",
+    "tool": "loogle",
+    "query": "\"nonempty_equiv_of_countable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "nonempty_equiv_of_countable"
+    ],
+    "digest": "1a34228295aee656"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pi.compactSpace\"",
+   "results": {
+    "t": "2026-10-23T11:55:04Z",
+    "tool": "loogle",
+    "query": "\"Pi.compactSpace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Pi.compactSpace"
+    ],
+    "digest": "4502b649f8ba2195"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary product of compact topological spaces is compact",
+   "results": {
+    "t": "2026-10-23T11:55:04Z",
+    "tool": "leansearch",
+    "query": "An arbitrary product of compact topological spaces is compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Pi.compactSpace",
+     "Function.compactSpace",
+     "instCompactSpaceProd",
+     "isCompact_univ_pi",
+     "isCompact_pi_infinite",
+     "IsCompact.prod",
+     "TopologicalSpace.Compacts.prod",
+     "TopologicalSpace.Compacts.instSProdProd"
+    ],
+    "digest": "d5bceddccc435d2c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ofDigits_eq_sum_add_ofDigits\"",
+   "results": {
+    "t": "2026-10-23T11:55:04Z",
+    "tool": "loogle",
+    "query": "\"ofDigits_eq_sum_add_ofDigits\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Real.ofDigits_eq_sum_add_ofDigits"
+    ],
+    "digest": "2051ae629ffc54b9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tychonoff theorem arbitrary product compact spaces compact",
+   "results": {
+    "t": "2026-10-23T11:55:11Z",
+    "tool": "leanfinder",
+    "query": "Tychonoff theorem arbitrary product compact spaces compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Pi.compactSpace",
+     "Function.compactSpace",
+     "isCompact_pi_infinite",
+     "instCompactSpaceProd",
+     "isCompact_univ_pi",
+     "Pi.isCompact_iff",
+     "Pi.locallyCompactSpace",
+     "Pi.exists_compact_superset_iff"
+    ],
+    "digest": "80e2e2e5dbb37b9d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Real ofDigits continuous finite prefix sum tail nonnegative bounded one",
+   "results": {
+    "t": "2026-10-23T11:55:12Z",
+    "tool": "leanfinder",
+    "query": "Real ofDigits continuous finite prefix sum tail nonnegative bounded one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Real.continuous_ofDigits",
+     "Real.fromBinary_continuous",
+     "Real.hasSum_ofDigitsTerm_digits",
+     "Real.ofDigits",
+     "Real.ofDigitsTerm",
+     "Real.sum_ofDigitsTerm_digits_le",
+     "Real.le_sum_ofDigitsTerm_digits",
+     "Real.summable_ofDigitsTerm"
+    ],
+    "digest": "a86f1dcf08d03bac"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable infinite types have a bijection to natural numbers",
+   "results": {
+    "t": "2026-10-23T11:55:13Z",
+    "tool": "leanfinder",
+    "query": "Countable infinite types have a bijection to natural numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "nonempty_denumerable",
+     "nonempty_equiv_of_countable",
+     "nonempty_denumerable_iff",
+     "Set.countable_infinite_iff_nonempty_denumerable",
+     "nonempty_embedding_nat",
+     "Denumerable.ofEncodableOfInfinite",
+     "countable_iff_nonempty_embedding",
+     "Cardinal.denumerable_iff"
+    ],
+    "digest": "c766462d35699aff"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_equiv_of_countable",
+   "results": {
+    "t": "2026-10-23T11:58:23Z",
+    "tool": "grep",
+    "query": "nonempty_equiv_of_countable",
+    "sub": "Logic",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Logic/Denumerable.lean"
+    ],
+    "digest": "69c3731999a3b1ad"
+   },
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: generic compactness, positional-digit and enumeration hits are recorded separately as Mathlib leaves; no hit states the prescribed D and its two-sided A-approximation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-countable-split-profinite-cover",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent topology auxiliary in the countably split profinite-cover construction: binary product, ternary coordinate, eventually alternating dense set, tail enumeration and explicit approximation. The current blueprint does not state this auxiliary.",
+   "via": [
+    "lem-sfb-countable-split-profinite-cover",
+    "lem-sfb-norm-algcl-profinite-cech-exact",
+    "lem-sfb-norm-algcl-bar-augmentation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cantor-two-sided-dense-enumeration",
+  "worker": "stage1",
+  "summary": "Proved the unchanged explicit Cantor-space statement in nine steps. Reused the existing compact countable-separating metrizability leaf and the existing Tychonoff leaf lem-weil-pbc-tychonoff-product-quasi-compact, added two general Mathlib leaves, and supplied explicit word codes, infinitely many points in each cylinder, finite exclusion for every enumeration tail, and digit flips followed by zero tails for both side limits. Searches found no blueprint or project attachment. External reference for the agent topology auxiliary remains WANTED.",
+  "blueprint": "Current latest direct-images proof paragraph (3) is contextual only; the item refines Step 1 of lem-sfb-countable-split-profinite-cover. Steps 1-2 handle the binary topology, 3-4 the real coordinate, 5-7 the alternating set and enumeration, and 8-9 its dense complement and side approximation. No change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-6ee13bc65",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-6ee13bc65 (reviewer sub-agent of L); spot-checked: I read the whole item and every new node. All nine steps are correct. Step 4: c(y)−c(x)=3^{-j-1}(2+Y−X)≥3^{-j-1}, checked against ofDigits_eq_sum_add_ofDigits in Real/OfDigits.lean 86-89. Step 5: the least word code gives an injection. Step 6: w0^r1(01)^∞ are distinct, so every cylinder holds infinitely many points of D. Step 7: finite exclusion gives k≥N for every bijection. Step 9: flip a late digit, then zeros. Edge cases checked: empty word, N=0, (01)^∞, m=0. The digit leaf (OfDigits.lean 37-38/55/66-73/86-89/198) and the bijection leaf (Denumerable.lean 333-337) are exact. Two repairs. C5: the new node lem-sfb-product-compact-spaces duplicates the existing Mathlib leaf lem-weil-pbc-tychonoff-product-quasi-compact (same Pi.compactSpace, same statement, already cited by 16 nodes). It is dropped, and step 2 and proof_deps now cite the existing leaf. B3: lem-sfb-countable-infinite-bijection now cites def-sfb-finite-infinite-set and def-sfb-countable-set in its statement and stmt_deps. The paragraph (3) source is honestly marked as agent-formulated with an external reference WANTED. No SGA, no tool_uses.; 2 file(s) fixed by the reviewer"
+ }
+}

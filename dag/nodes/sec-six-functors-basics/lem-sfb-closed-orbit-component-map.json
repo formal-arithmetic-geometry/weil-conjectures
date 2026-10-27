@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-closed-orbit-component-map",
+ "kind": "statement",
+ "title": "Closed orbit maps on spaces with disjoint clopen components",
+ "statement": "Let $X,Z$ be sober topological spaces, meaning that each nonempty irreducible closed subset has a unique generic point [def-sc-generic-point]. Assume each space is the disjoint union of its finitely many irreducible components, all of which are open and closed [def-weil-irreducible-components]. Let a finite group $H$ act on $X$ by homeomorphisms. Let $q:X\\to Z$ be continuous, surjective, closed (the image of every closed set is closed), and invariant: $q(hx)=q(x)$. Suppose $q(x)=q(y)$ if and only if $y=hx$ for some $h\\in H$. For an orbit $O$ of components of $X$, set $T_O=\\bigcup_{C\\in O}C$. Then $q^{-1}(q(T_O))=T_O$, $q(T_O)$ is open and closed, and $q(T_O)=q(C)$ for every $C\\in O$. Each such image is exactly one irreducible component of $Z$, and $O\\mapsto q(T_O)$ is a bijection onto the components of $Z$. If $\\eta_C$ is the generic point of $C$, then $q(\\eta_C)$ is the generic point of $q(C)$, and $\\{h:h\\eta_C=\\eta_C\\}=\\{h:hC=C\\}$. Empty spaces are allowed.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Agent topological consequence of Tag 004V (definition-irreducible-components) and Tag 004X (definition-generic-point), for closed orbit maps; applied to the point quotient of groupoids.tex Tag 03BL (lemma-points)."
+ },
+ "stmt_deps": [
+  "def-sc-generic-point",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Every $h\\in H$ permutes the components. Indeed, if $hC$ is the union of two relatively closed subsets, their inverse images under $h$ give a closed decomposition of $C$, so one is all of $hC$. If an irreducible subset $E$ contains $hC$, the same argument for $h^{-1}$ makes $h^{-1}E$ irreducible and containing $C$; maximality gives $h^{-1}E=C$. Thus $hC$ is a maximal irreducible subset, using [def-weil-irreducible-components].",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V (definition-irreducible-components); elementary closed-cover and inverse-homeomorphism argument."
+   }
+  },
+  {
+   "text": "Fix a component orbit $O$ and $C\\in O$. Invariance and bijectivity of $h$ give $q(hC)=q(C)$, so $q(T_O)=q(C)$. The union $T_O$ is $H$-stable. If $x\\in q^{-1}(q(T_O))$, choose $t\\in T_O$ with $q(x)=q(t)$; the fibre hypothesis gives $x=ht$ for some $h\\in H$, hence $x\\in T_O$. The reverse inclusion holds for every map, proving $q^{-1}(q(T_O))=T_O$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Elementary set-theoretic argument from the assumed invariant point-orbit fibres; compare groupoids.tex Tag 03BL (lemma-points), whose conclusion is a hypothesis here."
+   }
+  },
+  {
+   "text": "The finitely many clopen components make $T_O$ clopen: it is a finite union of closed sets and a union of open sets. Since $q$ is closed, both $q(T_O)$ and $q(X\\setminus T_O)$ are closed. Saturation from Step 2 makes these images disjoint, and surjectivity makes their union $Z$. Thus $Z\\setminus q(T_O)=q(X\\setminus T_O)$ is closed, so $q(T_O)$ is open as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Elementary finite-union, complement, and closed-map argument."
+   }
+  },
+  {
+   "text": "Write $B_O=q(T_O)=q(C)$. It is nonempty since $C$ is nonempty. If $B_O=F_1\\cup F_2$ with $F_i$ relatively closed, then $C=(q|_C)^{-1}F_1\\cup(q|_C)^{-1}F_2$ is a relatively closed decomposition by continuity. Irreducibility of $C$ forces one inverse image to equal $C$, and surjectivity of $q|_C:C\\to q(C)$ gives $F_i=B_O$. Therefore $B_O$ is irreducible by [def-weil-irreducible-components].",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V (definition-irreducible-components); the closed-cover calculation in lemma-image-irreducible-space, written out rather than used as a black box."
+   }
+  },
+  {
+   "text": "The nonempty clopen sets $B_O$ form a disjoint partition of $Z$: surjectivity gives the cover, and a point in two images would lift into both orbit unions by Step 2, forcing the orbits equal. Any irreducible subset $E$ meeting $B_O$ lies in $B_O$, since $E=(E\\cap B_O)\\cup(E\\cap(Z\\setminus B_O))$ is a relatively closed decomposition with first term nonempty. Thus no irreducible subset properly contains $B_O$, so it is a component. Conversely, any component $D$ has a point in some $B_O$, hence $D\\subseteq B_O$ and maximality gives equality. The nonempty disjoint images distinguish the orbits. This proves the required bijection using [def-weil-irreducible-components].",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V (definition-irreducible-components); direct maximality argument for a clopen irreducible partition."
+   }
+  },
+  {
+   "text": "By sobriety choose the generic point $\\eta_C$ of $C$, so $\\overline{\\{\\eta_C\\}}=C$ by [def-sc-generic-point]. The closed set $q(C)=B_O$ contains $q(\\eta_C)$, so $\\overline{\\{q(\\eta_C)\\}}\\subseteq q(C)$. If $F\\subseteq Z$ is any closed set containing $q(\\eta_C)$, its closed inverse image contains $\\eta_C$, hence contains $C$; thus $q(C)\\subseteq F$. Intersecting all such $F$ proves $q(C)=\\overline{\\{q(\\eta_C)\\}}$. This is the required generic-point assertion.",
+   "uses": [
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004X (definition-generic-point), parts (1) and (4); elementary characterization of closure by closed supersets."
+   }
+  },
+  {
+   "text": "For a homeomorphism $h$, the closed set $hC$ contains $h\\eta_C$, so $\\overline{\\{h\\eta_C\\}}\\subseteq hC$. Conversely the inverse image of $\\overline{\\{h\\eta_C\\}}$ under $h$ is closed and contains $\\eta_C$, hence contains $C$; therefore $hC\\subseteq\\overline{\\{h\\eta_C\\}}$. Thus $h\\eta_C$ is generic for $hC$ by [def-sc-generic-point]. If $h\\eta_C=\\eta_C$, their closures give $hC=C$. If $hC=C$, uniqueness of the generic point in the sober space $X$ gives $h\\eta_C=\\eta_C$. The two stabilizers are equal. If $X$ is empty, surjectivity forces $Z$ empty; both component sets are empty and every assertion about a component is vacuous.",
+   "uses": [
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004X (definition-generic-point), parts (1) and (4); elementary closed-set calculation and the stated sobriety hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "def-sc-generic-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Elementary argument from Tag 004V (definition-irreducible-components) and Tag 004X (definition-generic-point); closed-cover image argument checked against lemma-image-irreducible-space."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed surjective continuous map with finite group orbit fibres between sober spaces with finitely many disjoint clopen irreducible components induces component orbit bijections and maps generic points to generic points",
+   "results": "{\"t\": \"2026-10-22T06:01:10Z\", \"tool\": \"leanfinder\", \"query\": \"A closed surjective continuous map with finite group orbit fibres between sober spaces with finitely many disjoint clopen irreducible components induces component orbit bijections and maps generic points to generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"irreducibleComponentsEquivOfIsPreirreducibleFiber\", \"genericPoints.component_surjective\", \"DiscreteQuotient.comp_finsetClopens\", \"image_mem_irreducibleComponents_of_isPreirreducible_fiber\", \"preimage_mem_irreducibleComponents_of_isPreirreducible_fiber\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_target\", \"PrimeSpectrum.isQuotientMap_of_generalizingMap\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint\"], \"digest\": \"baeced2d050a971e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the component equivalences in Mathlib/Topology/Irreducible.lean:463-520 assume preirreducible fibres; finite group orbits can be disconnected, and no hit gives the orbit-of-components assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, irreducibleComponents",
+   "results": "{\"t\": \"2026-10-22T06:01:28Z\", \"tool\": \"loogle\", \"query\": \"IsClosedMap, irreducibleComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the component equivalences in Mathlib/Topology/Irreducible.lean:463-520 assume preirreducible fibres; finite group orbits can be disconnected, and no hit gives the orbit-of-components assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|IsGenericPoint|IsClosedMap",
+   "results": "{\"t\": \"2026-10-22T06:01:45Z\", \"tool\": \"grep\", \"query\": \"irreducibleComponents|IsGenericPoint|IsClosedMap\", \"sub\": \"Topology/Irreducible.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"107\", \"111\", \"116\", \"117\", \"121\"], \"digest\": \"f8f11318928fafc4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the component equivalences in Mathlib/Topology/Irreducible.lean:463-520 assume preirreducible fibres; finite group orbits can be disconnected, and no hit gives the orbit-of-components assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed quotient by a finite group identifies orbits of disjoint clopen irreducible components and their generic points",
+   "results": "{\"t\": \"2026-10-22T06:01:46Z\", \"tool\": \"leansearch\", \"query\": \"A closed quotient by a finite group identifies orbits of disjoint clopen irreducible components and their generic points\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "image_mem_irreducibleComponents|irreducibleComponentsEquiv|orbit.*irreducible|irreducible.*orbit",
+   "results": "{\"t\": \"2026-10-22T06:02:55Z\", \"tool\": \"grep\", \"query\": \"image_mem_irreducibleComponents|irreducibleComponentsEquiv|orbit.*irreducible|irreducible.*orbit\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\"], \"digest\": \"adb1083992c9842f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the component equivalences in Mathlib/Topology/Irreducible.lean:463-520 assume preirreducible fibres; finite group orbits can be disconnected, and no hit gives the orbit-of-components assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible components of the orbit space of a finite group action on a disjoint union of irreducible spaces correspond to component orbits",
+   "results": "{\"t\": \"2026-10-22T06:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"Irreducible components of the orbit space of a finite group action on a disjoint union of irreducible spaces correspond to component orbits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.selfEquivSigmaOrbits\", \"MulAction.selfEquivSigmaOrbits'\", \"MulAction.sigmaFixedByEquivOrbitsProdGroup\", \"AddAction.sigmaFixedByEquivOrbitsProdAddGroup\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"MulAction.selfEquivSigmaOrbitsQuotientStabilizer\", \"AddAction.selfEquivSigmaOrbits\", \"AddAction.selfEquivSigmaOrbits'\"], \"digest\": \"c690a1fdba639fee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the component equivalences in Mathlib/Topology/Irreducible.lean:463-520 assume preirreducible fibres; finite group orbits can be disconnected, and no hit gives the orbit-of-components assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*irreducible|irreducible.*orbit|image_mem_irreducibleComponents|IsGenericPoint.image",
+   "results": "{\"t\": \"2026-10-23T09:39:58Z\", \"tool\": \"grep\", \"query\": \"orbit.*irreducible|irreducible.*orbit|image_mem_irreducibleComponents|IsGenericPoint.image\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Irreducible.lean\"], \"digest\": \"507b5b5a79c2f95a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: component image/equivalence hits assume preirreducible fibres, which finite disconnected group orbits need not satisfy; quotient-covering trivializations require disjoint translates, unavailable for nonfree actions; generic-point definitions and orbit decompositions do not give the combined assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible components and generic points of a closed quotient by a finite group acting on disjoint clopen irreducible components",
+   "results": "{\"t\": \"2026-10-23T09:39:58Z\", \"tool\": \"leansearch\", \"query\": \"Irreducible components and generic points of a closed quotient by a finite group acting on disjoint clopen irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"genericPoints.component\", \"genericPoints.isGenericPoint\", \"genericPoints.ofComponent\", \"genericPoints.component_ofComponent\", \"irreducibleSetEquivPoints\", \"IsGenericPoint.isIrreducible\", \"genericPoint\"], \"digest\": \"6240e63f706bf243\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: component image/equivalence hits assume preirreducible fibres, which finite disconnected group orbits need not satisfy; quotient-covering trivializations require disjoint translates, unavailable for nonfree actions; generic-point definitions and orbit decompositions do not give the combined assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, irreducibleComponents",
+   "results": "{\"t\": \"2026-10-23T09:39:58Z\", \"tool\": \"loogle\", \"query\": \"IsClosedMap, irreducibleComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: component image/equivalence hits assume preirreducible fibres, which finite disconnected group orbits need not satisfy; quotient-covering trivializations require disjoint translates, unavailable for nonfree actions; generic-point definitions and orbit decompositions do not give the combined assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed surjective continuous map whose fibres are finite group orbits induces a bijection from orbits of clopen irreducible components to irreducible components and preserves generic points",
+   "results": "{\"t\": \"2026-10-23T09:40:08Z\", \"tool\": \"leanfinder\", \"query\": \"A closed surjective continuous map whose fibres are finite group orbits induces a bijection from orbits of clopen irreducible components to irreducible components and preserves generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"irreducibleComponentsEquivOfIsPreirreducibleFiber\", \"genericPoints.component_surjective\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint\", \"image_mem_irreducibleComponents_of_isPreirreducible_fiber\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint\", \"preimage_mem_irreducibleComponents_of_isPreirreducible_fiber\", \"IsQuotientCoveringMap.apply_eq_iff_mem_orbit\", \"Topology.IsQuotientMap.isCoveringMapOn_of_smul_disjoint\"], \"digest\": \"a41b8c0b4eb7e4c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: component image/equivalence hits assume preirreducible fibres, which finite disconnected group orbits need not satisfy; quotient-covering trivializations require disjoint translates, unavailable for nonfree actions; generic-point definitions and orbit decompositions do not give the combined assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible components of an orbit space of a group acting by homeomorphisms on a finite disjoint union of irreducible spaces are the orbits of the components",
+   "results": "{\"t\": \"2026-10-23T09:40:55Z\", \"tool\": \"leanfinder\", \"query\": \"Irreducible components of an orbit space of a group acting by homeomorphisms on a finite disjoint union of irreducible spaces are the orbits of the components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint\", \"IsQuotientCoveringMap.apply_eq_iff_mem_orbit\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_target\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_source\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint\", \"MulAction.selfEquivSigmaOrbits'\", \"MulAction.selfEquivSigmaOrbits\"], \"digest\": \"ccc507d3a8d3fa5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: component image/equivalence hits assume preirreducible fibres, which finite disconnected group orbits need not satisfy; quotient-covering trivializations require disjoint translates, unavailable for nonfree actions; generic-point definitions and orbit decompositions do not give the combined assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-quotient-generic-fields",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Generic fields and component orbits in a finite quotient of a normal scheme. Repair extraction of old proof steps 3-4: closed saturated component unions and generic-point stabilizers.",
+   "via": [
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-orbit-component-map",
+  "worker": "stage1",
+  "summary": "Seven explicit elementary steps prove every clause using only the two existing definition leaves. Homeomorphism transport of irreducibility and maximality, saturation, clopen descent, irreducibility of images, component maximality and exhaustion, closure of generic-point images, and the stabilizer equality are all written out. No new node, no statement correction, no Lean attachment and no compilation. Read all cited statements and local Stacks sources, repeated the item searches through the required logged command, and checked empty spaces and nonfree actions.",
+  "blueprint": "Inherited auxiliary input to det-thm-sf-ctf-stability-direct-images, proof (3), via the global-alteration/generic-fields chain recorded in blueprint.from. The current latest proof (3) is the compactification/direct-image assembly. This split supplies the elementary topology needed by lem-sfb-finite-quotient-generic-fields Step 3 and preserves that route. tools/blueprint_refs.py ancestor returns None, so inherited from.node=null and via are retained; whole-blueprint searches for irreducible component and orbit found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-84d865f12",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-84d865f12 (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement and all 7 steps. There are 0 new nodes. I also read both cited definitions (def-weil-irreducible-components, def-sc-generic-point), the citer lem-sfb-finite-quotient-generic-fields Step 3 (it supplies exactly this item's hypotheses and uses the bijection, generic-image and stabilizer clauses), and Stacks topology.tex 004V, 004X(1),(4) and 0379 lemma-image-irreducible-space. I checked the tags against the tag list. Step checks: (1) h permutes components, proved by pulling back closed covers and by maximality through h^-1. (2) Saturation follows from the iff orbit-fibre hypothesis. (3) q(T_O) is clopen: q is closed, q(T_O) and q(X\\T_O) are disjoint by saturation and cover Z by surjectivity. (4) The image of C is irreducible; this is the 0379 argument written out in three lines, which C1 allows. (5) The B_O partition Z, any irreducible set meeting a clopen B_O lies inside it, which gives maximality and exhaustion, and distinct orbits have distinct images. (6) q(eta_C) is generic, shown by both closure inclusions; Z sober gives uniqueness (the step leaves this implicit, which is wording only). (7) h eta is generic for hC and the stabilizers are equal by sobriety of X; the empty case is handled. Edge cases tested: the empty space, a swap of two discrete points over a point, a trivial non-faithful action, and the Sierpinski space. Duplicate search with grep -R over dag/nodes found no node to cite instead. No SGA is used, there is no re-split note, proof_deps is the union of the step uses, and there is no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedOrbitComponentMap",
+  "declaration": "Topology.closed_orbit_component_map",
+  "file": "lean/Sheaf/Topology/ClosedOrbitComponentMap.lean",
+  "statement": "theorem closed_orbit_component_map {X : Type u} {Z : Type v} {H : Type w} [TopologicalSpace X] [TopologicalSpace Z] [QuasiSober X] [T0Space X] [QuasiSober Z] [T0Space Z] [Group H] [Finite H] [MulAction H X] [ContinuousConstSMul H X] (hXfinite : (irreducibleComponents X).Finite) (hXdisjoint : (irreducibleComponents X).PairwiseDisjoint id) (hXclopen : ∀ C ∈ irreducibleComponents X, IsClopen C) (hZfinite : (irreducibleComponents Z).Finite) (hZdisjoint : (irreducibleComponents Z).PairwiseDisjoint id) (hZclopen : ∀ D ∈ irreducibleComponents Z, IsClopen D) (q : X → Z) (hqcontinuous : Continuous q) (hqsurjective : Function.Surjective q) (hqclosed : IsClosedMap q) (hqinvariant : ∀ (h : H) (x : X), q (h • x) = q x) (hqfibres : ∀ x y : X, q x = q y ↔ ∃ h : H, y = h • x) : (∀ O : Set (Set X), (∃ C ∈ irreducibleComponents X, O = MulAction.orbit H C) → q ⁻¹' (q '' (⋃₀ O)) = ⋃₀ O ∧ IsClopen (q '' (⋃₀ O)) ∧ ∀ C ∈ O, q '' (⋃₀ O) = q '' C) ∧ Set.BijOn (fun O : Set (Set X) ↦ q '' (⋃₀ O)) {O | ∃ C ∈ irreducibleComponents X, O = MulAction.orbit H C} (irreducibleComponents Z) ∧ (∀ C ∈ irreducibleComponents X, ∀ η : X, IsGenericPoint η C → IsGenericPoint (q η) (q '' C) ∧ {h : H | h • η = η} = {h : H | h • C = C})",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f4aff447",
+  "group": "ND",
+  "result": "pass",
+  "note": "Only the lean field changed; lean.statement is verbatim in the file; one sorry, no definitions; source/blueprint docstrings and all 7 proof steps present. Every clause matches the node: QuasiSober+T0 sobriety; finite, disjoint, clopen components (Z-side ones redundant but stated by the node); finite group acting by homeomorphisms via ContinuousConstSMul; q continuous, surjective, closed, invariant, with orbit fibres; orbits are MulAction.orbit H C under the pointwise set action; saturation, clopen image and per-component image clauses; Set.BijOn onto irreducibleComponents Z; generic-point image and stabilizer equality. Statement checked to be true. Empty spaces, non-free actions and non-closed generic points covered; universes u, v, w independent. No duplicate in Mathlib or lean/Sheaf. Not recompiled (no file changed); the worker reports a clean compile. No findings."
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-resolution-local-class-edge-single",
+ "kind": "statement",
+ "title": "Normalization of the constructed edge on single complexes",
+ "statement": "Let $g:T\\to S$ be a scheme map, $q\\in\\mathbf Z$, and $M$ an $\\mathcal O_T$-module. Let $e_K$ be the specified resolution edge [def-weil-pbc-resolution-local-class-edge], and $u:S_S^q(g_*M)\\to Rg_*(S_T^qM)$ the single direct-image comparison [lem-weil-pbc-integer-single-adjunction-transpose], where $S_X^q(N)$ is the complex concentrated in degree $q$. With $E_X(N):H^q(S_X^qN)\\simeq N$ the standard single/homology isomorphism, one has $H^q(u)e_{S_T^qM}=E_S(g_*M)g_*(E_T(M)^{-1})$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "cohomology.tex Tags 0BKJ (lemma-sheafification-cohomology), 0D5X (lemma-unbounded-describe-higher-direct-images), 079W (lemma-adjoint); derived.tex Tag 0156 (section-right-derived-functor). The kernel/cokernel and unit calculations are agent-derived."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-resolution-local-class-edge",
+  "lem-weil-pbc-integer-single-adjunction-transpose"
+ ],
+ "proof": [
+  {
+   "text": "For any complex J lift the inverse fixed-representative isomorphism to b:J→I. Naturality of the complex derived unit and invertibility of its component on I identify the composite with the comparison isomorphism as Q(g*b). Naturality of homology factorization and of the kernel/cokernel edge cancels b, yielding the raw edge for J.",
+   "uses": [
+    "def-weil-pbc-resolution-local-class-edge",
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "lem-sc-left-exact-upper-truncation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take J to be the single complex. Precompose with the cycle quotient and postcompose with the single/homology identification. The kernel comparison and the single-map component formula reduce the equation to the identity on M. Expanding only the standard single/homology isomorphism and the complex derived-unit definition gives the desired normalization.",
+   "uses": [
+    "def-weil-pbc-left-exact-homology-edge",
+    "lem-weil-pbc-integer-single-adjunction-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-resolution-local-class-edge",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-sc-left-exact-upper-truncation-comparison",
+  "def-weil-pbc-left-exact-homology-edge",
+  "lem-weil-pbc-integer-single-adjunction-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "cohomology.tex Tags 0BKJ (lemma-sheafification-cohomology), 0D5X (lemma-unbounded-describe-higher-direct-images), 079W (lemma-adjoint); derived.tex Tag 0156 (section-right-derived-functor). The kernel/cokernel and unit calculations are agent-derived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a left exact functor there is a canonical natural map from homology of the image of a complex to image of homology, isomorphism on single complexes",
+   "results": "8 hits: CategoryTheory.ShortComplex.mapLeftHomologyIso, CategoryTheory.ShortComplex.leftHomologyFunctorIso, CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.homologyFunctorIso. These supply stronger homology-preservation comparisons or structural APIs, but no simultaneous left-exact edge and fixed derived/local normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "12 hits: CategoryTheory.ShortComplex.instPreservesFiniteLimitsπ₁, CategoryTheory.ShortComplex.instPreservesFiniteLimitsπ₂, CategoryTheory.ShortComplex.instPreservesFiniteLimitsπ₃, CategoryTheory.ShortComplex.ShortExact.map_of_exact, CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.preservesFiniteLimits_tfae, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass. These supply stronger homology-preservation comparisons or structural APIs, but no simultaneous left-exact edge and fixed derived/local normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyComparison|leftHomologyComparison",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean. These supply stronger homology-preservation comparisons or structural APIs, but no simultaneous left-exact edge and fixed derived/local normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a left exact additive functor, homology of the mapped complex maps naturally to the image of homology, compatibly with single complexes and local cycle classes",
+   "results": "8 hits: CategoryTheory.ShortComplex.LeftHomologyData.map_leftHomologyMap', CategoryTheory.ShortComplex.mapHomologyIso', CategoryTheory.ShortComplex.mapLeftHomologyIso, CategoryTheory.ShortComplex.HomologyData.map_left, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality, CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.ShortComplex.HomologyData.map_homologyMap', CategoryTheory.ShortComplex.hasLeftHomology_of_preserves. These supply stronger homology-preservation comparisons or structural APIs, but no simultaneous left-exact edge and fixed derived/local normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedLocalClassEdge",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. The top-degree normalization of the derived-to-ordinary module adjoint. Local normalization on the upper truncation of the derived direct image. The local-class edge and its single-complex normalization. Normalization of the constructed edge on single complexes.",
+   "via": [
+    "lem-weil-pbc-local-class-edge-single-normalization",
+    "lem-weil-pbc-truncated-counit-local-class",
+    "lem-weil-pbc-derived-adjunction-top-edge",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedResolutionEdgeSingle",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedResolutionEdgeSingle.lean",
+  "declaration": "AlgebraicGeometry.resolutionLocalClassEdge_single",
+  "statement": "theorem resolutionLocalClassEdge_single {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)\n    (M : SheafOfModules.{u} (moduleRings T.toRingedSpace)) :\n    (DerivedCategory.homologyFunctor.{w, u, u + 1}\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).map\n        (topEdgeSingleDirectImageMap g q M) ≫\n      resolutionLocalClassEdge g q ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj M) =\n    (DerivedCategory.singleFunctorCompHomologyFunctorIso\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).hom.app\n        ((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).obj M) ≫\n      (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).map\n        ((DerivedCategory.singleFunctorCompHomologyFunctorIso\n          (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T114129-L-2267584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T114129-L-2267584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

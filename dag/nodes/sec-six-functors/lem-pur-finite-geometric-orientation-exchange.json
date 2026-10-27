@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-finite-geometric-orientation-exchange",
+ "kind": "statement",
+ "title": "Geometric base change of the inverse orientation factor",
+ "statement": "Fix P, separated finite-type k0-models X0,Y0 and a separated finite-type f0 whose geometric base change f is smooth of pure relative dimension d. Let Q=gX* and R=gY*, b the specified gamma(zeta)-normalized source comparison [def-pur-finite-geometric-purity-coordinates]. For every fixed-scalar pro-etale complex M on Y, use the factors a_M, comparison S_M and canonical unit exceptional exchange e_omega of [lem-pur-finite-geometric-purity-factorization]. Then Q(a_M);S_M;(1 tensor e_omega)=b_M;a_(RM). This concerns the normalized inverse diagonal orientation, the tensor/shift comparisons and the root line, with no tensor counit transpose theta or exceptional exchange at M.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "Geometric base change of the inverse orientation factor"
+ },
+ "stmt_deps": [
+  "def-pur-finite-geometric-purity-coordinates",
+  "lem-pur-finite-geometric-purity-factorization",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Retag by Spec gamma. The underlying sites and compactification are unchanged, as is the normalized diagonal orientation under the counit-preserving exceptional comparison. Apply the finite orientation clause of finite_factors to this k-linear square, transport from its canonical pullback to the actual Cartesian Frobenius square, and undo comparison. The resulting unit exceptional exchange is e_omega by its explicit ordinary-unit formula.",
+   "uses": [
+    "def-pur-finite-geometric-purity-coordinates",
+    "lem-pur-orientation-ground-field-retagging",
+    "det-sp-purity-bc-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Clause (1), retagging and unit exchange"
+   }
+  },
+  {
+   "text": "Identify the finite-general-ring orientation with the direct-A diagonal orientation. The level projection from the integral root line gives the same finite twist; roots-of-unity inverse image is transition compatible and sends zeta to gamma(zeta). Thus the tensor/shift source comparison is the existing b in every primitive-root chart, including degree zero.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-finite-geometric-purity-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Coefficient and root normalization"
+   }
+  },
+  {
+   "text": "Tensor the inverse-orientation equation by the pulled-back f* input. Tensor naturality and the inverse-image square yield S; conjugate by u_M and u_RM and reassociate the shift. This is exactly Q(a_M);S_M;(1 tensor e_omega)=b_M;a_RM.",
+   "uses": [
+    "lem-pur-finite-geometric-purity-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Clause (1), tensor and shift reassociation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-geometric-purity-coordinates",
+  "lem-pur-orientation-ground-field-retagging",
+  "det-sp-purity-bc-factors",
+  "det-sp-finite-general-ring",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-roots-of-unity-inverse-image-iso",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-finite-geometric-purity-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "The two factors (1)--(2), in the fixed-scalar Frobenius coordinates of the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change of the normalized diagonal orientation on finite coefficient sheaves with a roots of unity twist",
+   "results": "IsBaseChange.finsuppPow and MorphismProperty.IsStableUnderBaseChange.diagonal; neither states purity of finite coefficient sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor counit transpose commutes with compact support base change, exceptional adjunction mate",
+   "results": "CategoryTheory.coev_expComparison and ExponentiableMorphism.pushforwardComp_hom_counit; general mate tools, no normalized finite geometric purity identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityTheta|diagonalDualizing|tensorCounit",
+   "results": "No hits. These constructions belong to this project.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Steps 1--2: finite purity square and compact-support counit mate; Geometric base change of the inverse orientation factor",
+   "via": [
+    "lem-pur-finite-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteGeometricOrientationExchange",
+  "file": "lean/Sheaf/Paper/FiniteGeometricOrientationExchange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.geometricPurityOrientation_exchange",
+  "statement": "theorem geometricPurityOrientation_exchange\n    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology (P.frobeniusFiber Y₀).left)\n      (ModuleCat.{u + 1} P.Coefficient))) :\n    (P.smoothPurityPullback (P.frobeniusGaloisMap X₀)).map\n        (P.geometricPurityOrientationFactor (P.frobeniusMap f₀)\n          (P.frobeniusFiber Y₀).hom d M) ≫\n      (P.geometricPurityTensorSquare (P.frobeniusMap f₀) (P.frobeniusFiber Y₀).hom\n        (P.frobeniusGaloisMap X₀) (P.frobeniusGaloisMap Y₀)\n        (P.field.frobenius_square_cartesian X₀ Y₀ f₀).2.2.2.2.1 M).hom ≫\n      ((smoothPurityTensor P.Coefficient (P.frobeniusFiber X₀).left).obj\n        ((P.smoothPurityPullback (P.frobeniusMap f₀)).obj\n          (P.geometricPurityRealized (P.frobeniusFiber Y₀).left\n            ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M)))).map\n        (P.geometricPurityDualizingExchange (P.frobeniusMap f₀)\n          (P.frobeniusFiber Y₀).hom (P.frobeniusGaloisMap X₀)\n          (P.frobeniusGaloisMap Y₀)\n          (P.field.frobenius_square_cartesian X₀ Y₀ f₀).2.2.2.2.2.1) =\n    (P.geometricPuritySource X₀ Y₀ f₀ d M).hom ≫\n      P.geometricPurityOrientationFactor (P.frobeniusMap f₀) (P.frobeniusFiber Y₀).hom d\n        ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (byte-identical); FiniteGeometricPurityCoordinates vs clone FiniteGeometricPurityMate (verbatim extraction + 4 rfl private lemmas + 3 helpers made public); 4 new node lean.statements vs Lean text; two sorry statements read for truth against the parent equation and the published base-change map definitions"
+ }
+}

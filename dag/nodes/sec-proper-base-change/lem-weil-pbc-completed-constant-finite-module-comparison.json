@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-completed-constant-finite-module-comparison",
+ "kind": "statement",
+ "title": "The finite-module tensor-to-completed-constant comparison",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, I an ideal, C its adic completion, and H the inverse limit of the constant quotient ring sheaves A/I^(n+1). Let phi: constant(C) -> H have completion evaluations as all finite projections. For every finite C-module N there is an isomorphism, over constant A, from H tensor_(constant C) constant N to the inverse limit of constant(N/I^(n+1)N). These isomorphisms are natural in C-linear module maps on every quotient projection. They are linear for completed scalars in the projection sense: if a constant A-section a and a completed scalar r have the same n-th residue, the n-th projection of e_N(r x) equals a times that of e_N(x). This asserts neither exactness of the realization functor nor local lissity. All realization, scalar and quotient-module maps are those of [def-weil-pbc-completed-constant-realization-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M, together with more-algebra.tex Tag 0912 (lemma-limit-flat)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-constant-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the compatible canonical quotient projections for every completion module, with their pure-tensor, scalar-linearity and module-map naturality identities. Form the comparison map by the limit universal property.",
+   "uses": [
+    "def-weil-pbc-completed-constant-projection-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite completion module use invertibility of this fixed comparison map to form asIso. Its composites with limit projections are the previously constructed finite projections. Rewrite the two requested formulas with this equality, then use their proved scalar-linearity and naturality identities.",
+   "uses": [
+    "def-weil-pbc-completed-constant-projection-maps",
+    "lem-weil-pbc-completed-constant-comparison-is-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-constant-projection-maps",
+  "lem-weil-pbc-completed-constant-comparison-is-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-27",
+  "description": "Construct the canonical finite projections and their identities first; reduce only invertibility of the resulting specified map to the finite-presentation tensor-limit calculation in Stacks 0912 and 093J--093M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite module over the adic completion of a Noetherian ring, scalar extension of its constant sheaf to the completed constant ring sheaf is naturally the limit of its constant quotients",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and related ordinary-module theorems; none includes constant sheaves or their sheafified scalar extension.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension from the constant adic completion ring to its completed constant sheaf realizes finite modules as the inverse limit of constant quotient module sheaves and is exact",
+   "results": "AdicCompletion.map_exact, ofTensorProductEquivOfFiniteNoetherian and ordinary completion module instances; no sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsAdicComplete",
+   "results": "AdicCompletion.ofLinearEquiv and ofAlgEquiv concern ordinary completed modules, not sheafified tensor realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*limit|limit.*tensor|[Ff]inite.*constant in Mathlib/CategoryTheory/Sites and Mathlib/Algebra/Category/ModuleCat/Sheaf; completed_constant_module in both project roots",
+   "results": "The project item assembles the comparison and exactness; Mathlib has no finite-module tensor-to-constant-completion comparison. The existing ConstantModuleSectionProperties and LimitFlatModules are the two ingredients of the displayed section calculation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantModuleModel",
+  "date": "2026-10-27",
+  "group": "T4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): bounded adic-lisse finite-type terms; module-level completion comparison; the tensor-to-limit comparison, with projection linearity and naturality",
+   "via": [
+    "lem-weil-pbc-completed-constant-module-model",
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantFiniteModuleComparison",
+  "file": "lean/Sheaf/Paper/CompletedConstantFiniteModuleComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_constant_finite_module_comparison",
+  "statement": "theorem completed_constant_finite_module_comparison (X : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)\n    (hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem X I) (op n) =\n      (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (AdicCompletion.evalₐ I (n + 1)).toRingHom)) :\n    ∃ e : ∀ (N : ModuleCat.{u + 1} (AdicCompletion I A))\n        (_hN : Module.Finite (AdicCompletion I A) N),\n      (SheafOfModules.restrictScalars ((adicLisseForget X).map\n        (completedConstantBaseMap X I φ))).obj\n          ((completedConstantRealization X I φ).obj N) ≅\n        adicLisseCompletedModule X I (completedConstantUnderlyingModule I N),\n      (∀ (N : ModuleCat.{u + 1} (AdicCompletion I A))\n          (hN : Module.Finite (AdicCompletion I A) N) (n : ℕ) (U : X.ProEtᵒᵖ)\n          (r : ((adicLisseCompletedRing X I).obj.obj U))\n          (a : (adicLisseConstantRing X A).obj.obj U)\n          (x : ((completedConstantRealization X I φ).obj N).val.obj U),\n        ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map\n          (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))).hom.app U a =\n            (limit.π (adicLisseRingSystem X I) (op n)).hom.app U r →\n        (limit.π (adicLisseModuleSystem X I (completedConstantUnderlyingModule I N))\n          (op n)).val.app U ((e N hN).hom.val.app U (r • x)) =\n          a • (limit.π (adicLisseModuleSystem X I (completedConstantUnderlyingModule I N))\n            (op n)).val.app U ((e N hN).hom.val.app U x)) ∧\n      (∀ (M N : ModuleCat.{u + 1} (AdicCompletion I A))\n          (hM : Module.Finite (AdicCompletion I A) M)\n          (hN : Module.Finite (AdicCompletion I A) N) (f : M ⟶ N) (n : ℕ)\n          (U : X.ProEtᵒᵖ) (x : ((completedConstantRealization X I φ).obj M).val.obj U),\n        (limit.π (adicLisseModuleSystem X I (completedConstantUnderlyingModule I N))\n            (op n)).val.app U ((e N hN).hom.val.app U\n              (((completedConstantRealization X I φ).map f).val.app U x)) =\n          (((adicLisseConstantModules X A).map (completedConstantQuotientMap I\n            ((ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).map f)\n              n)).val.app U)\n            ((limit.π (adicLisseModuleSystem X I (completedConstantUnderlyingModule I M))\n              (op n)).val.app U ((e M hM).hom.val.app U x)))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T235939-L-1472778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T034731-L-3680206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

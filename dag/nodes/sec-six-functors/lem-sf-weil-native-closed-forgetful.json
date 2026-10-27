@@ -1,0 +1,218 @@
+{
+ "id": "lem-sf-weil-native-closed-forgetful",
+ "kind": "statement",
+ "title": "Native Weil derived tensor and internal Hom under forgetting Frobenius",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and let $g_T$ be geometric Frobenius [def-weil-frobenius-detailed]. On the small pro-etale site of $T$, let $R_T$ be the coefficient sheaf whose sections on a quasi-compact object $V$ are continuous functions $|V|\\to\\Omega$ with values in one finite intermediate extension of $\\mathbf Q_\\ell$; on general objects impose this condition locally [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal A_T=\\operatorname{Mod}(R_T)$ for its module sheaves [def-weil-sheaf-of-modules-category] and $\\mathcal B_T$ for pairs $(F,\\theta:g_T^*F\\xrightarrow{\\sim}F)$ in $\\mathcal A_T$, with intertwining morphisms [def-weil-endofunctor-fixed-pair-category]. Derived categories mean localization of complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\mathcal W(T_0)\\subset D(\\mathcal B_T)$ be the full subcategory with bounded cohomology whose underlying cohomology sheaves admit a finite locally closed stratification with pro-etale locally finite free restrictions over $R_T$. This is the native category `AlgebraicGeometry.WeilComplex`, not the category of fixed pairs in $D(\\mathcal A_T)$.\n\nLet $U_T:D(\\mathcal B_T)\\to D(\\mathcal A_T)$ be induced by termwise forgetting $\\theta$. The source has a symmetric closed derived tensor structure obtained from the tensor of module sheaves with diagonal Weil structure. Its internal Hom is the product total Hom complex of K-injective representatives used by `AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom`, with the contragredient Weil structure, rather than derived global Hom. The functor $U_T$ is exact and conservative, commutes with cohomology, and restricts to a functor from $\\mathcal W(T_0)$ to the bounded constructible full subcategory of $D(\\mathcal A_T)$. For $K,L\\in D(\\mathcal B_T)$ the canonical natural comparisons\n$$U_T(K\\otimes^{\\mathbf L}L)\\xrightarrow{\\sim}U_TK\\otimes^{\\mathbf L}_{R_T}U_TL,\\qquad U_TR\\mathcal Hom_{\\mathcal B_T}(K,L)\\xrightarrow{\\sim}R\\mathcal Hom_{R_T}(U_TK,U_TL)$$\nare isomorphisms and preserve symmetry and evaluation. Explicitly the image under $U_T$ of $R\\mathcal Hom_{\\mathcal B_T}(K,L)\\otimes^{\\mathbf L}K\\to L$ is ordinary module evaluation under these comparisons. The tensor--Hom adjunction therefore gives, for every $W\\in D(\\mathcal B_T)$, a natural morphism $\\delta^W_K:K\\to R\\mathcal Hom_{\\mathcal B_T}(R\\mathcal Hom_{\\mathcal B_T}(K,W),W)$, defined as the transpose of evaluation after symmetry, and its image under $U_T$ is the analogous transpose for $U_TW$. No invertibility of $\\delta^W_K$ is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and transposition of evaluation; native derived upgrade formulated by Q10, with the actual Hom-complex construction read in lean/WeilConjectures/WeilSheaf/DerivedHom.lean lines 107-113 and Category.lean lines 134-180."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "For the exact native forgetful functor use the existing mapDerivedCategory triangulated instance and cohomology natural isomorphism. A morphism whose image is invertible has every underlying cohomology map invertible. Ordinary forgetting reflects these isomorphisms, so DerivedCategory.isIso_iff proves derived conservativity. Exact derived forgetting preserves boundedness. Transport K.property.2 across the cohomology comparison to obtain constructibility.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the native two-injective model, and convert it to row-sign representative models using the row comparison lemma. Transport the tensor and its normalized adjunction onto those fixed models. Substitute the equal Hom models and comparison, keeping the representative compatibility proof.",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-row-hom-comparison",
+    "lem-sf-weil-native-tensor-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove evaluation compatibility by uncurrying the specified Hom comparison and cancelling the tensor isomorphism. For bidual naturality, uncurry both sides, use symmetry naturality and contravariant evaluation naturality. For bidual compatibility, uncurry the iterated comparison, move the tensor isomorphism through symmetry, and cancel the Hom isomorphism with its inverse in the contravariant variable. Injectivity of the ordinary adjunction gives equality. These categorical arguments are explicit Lean proofs, using only the extracted closed-model definitions. Assemble these three facts with the supplied representative square and tensor coherence.",
+   "uses": [
+    "lem-sf-native-closed-transposition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sf-ringed-forget-two-injective-hom",
+  "lem-sf-weil-native-row-hom-comparison",
+  "lem-sf-weil-native-tensor-transport",
+  "lem-sf-native-closed-transposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native comparison: direct derived exactness proof, fixed row-Hom and tensor transport, followed by explicit uncurrying proofs of evaluation and biduality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For pro etale module sheaves with a Frobenius isomorphism forgetting the action commutes with derived internal Hom and evaluation",
+   "results": "8 hits: LightCondensed.ihomPoints_apply, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.forget_obj_val_map; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "3 hits: algEquivIsoAlgebraIso, algEquivIsoAlgebraIso_hom, algEquivIsoAlgebraIso_inv; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|bifunctorRHom|mapDerivedCategory.*[Rr]eflect",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category of equivariant sheaves exact conservative forgetful functor preserves tensor internal Hom",
+   "results": "8 hits: CategoryTheory.sheafForget, CategoryTheory.ExactFunctor.forget_obj, SheafOfModules.forgetPreservesLimitsOfShape, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, AlgebraicGeometry.LocallyRingedSpace.preservesCoequalizer, AlgebraicGeometry.SheafedSpace.instPreservesColimitsTopCatForgetOfHasLimits, SheafOfModules.fullyFaithfulForget; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "native Weil derived tensor internal Hom under forgetting Frobenius",
+   "results": "LightCondensed.ihomPoints, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints_apply, LightCondensed.ihom_map_val_app, PresheafOfModules.Monoidal.tensorObj, ModuleCat.ihom_ev_app, CategoryTheory.IsGrothendieckAbelian.tensorObj, ModuleCat.ihom_coev_app; read relevant source: no twisted action-site presentation or native derived comparison. Ordinary functor-category closedness, ordinary algebra equivalences and sheaf descent do not specialize to this assertion in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category of equivariant sheaves exact conservative forgetful functor preserves tensor internal Hom",
+   "results": "CategoryTheory.sheafForget, CategoryTheory.ExactFunctor.forget_obj, SheafOfModules.forgetPreservesLimitsOfShape, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, AlgebraicGeometry.LocallyRingedSpace.preservesCoequalizer, AlgebraicGeometry.SheafedSpace.instPreservesColimitsTopCatForgetOfHasLimits, SheafOfModules.fullyFaithfulForget; read relevant source: no twisted action-site presentation or native derived comparison. Ordinary functor-category closedness, ordinary algebra equivalences and sheaf descent do not specialize to this assertion in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorRHom|IsoAlgebra|[Ee]quivariant.*[Ss]heaf|[Ss]heaf.*[Ee]quivariant",
+   "results": "Mathlib/Algebra/Category/AlgCat/Basic.lean; read relevant source: no twisted action-site presentation or native derived comparison. Ordinary functor-category closedness, ordinary algebra equivalences and sheaf descent do not specialize to this assertion in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "No hits; read relevant source: no twisted action-site presentation or native derived comparison. Ordinary functor-category closedness, ordinary algebra equivalences and sheaf descent do not specialize to this assertion in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact forgetful functor from derived equivariant module sheaves preserves K flat resolutions K injectives and internal Hom",
+   "results": "instAbelianCondensedMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, instAbelianLightCondMod, Condensed.instAB5CondensedMod, SheafOfModules.instAbelian, CondensedMod.IsSolid; read relevant source: no twisted action-site presentation or native derived comparison. Ordinary functor-category closedness, ordinary algebra equivalences and sheaf descent do not specialize to this assertion in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-biduality",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The parent is a maintainer-created native Lean obligation with no created.item ancestor (blueprint_refs.py ancestor prints None). Its supplied textual provenance is lem-a1-local-boundary-duality, using Weil biduality, and the evaluation and biduality sentence of thm-coef-qbar-verdier; this comparison realizes that sentence in the native derived category.",
+   "via": [
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-native-closed-forgetful",
+  "worker": "stage1",
+  "summary": "Re-split the returned eight-step argument into three comparable independent statement-only obligations: Frobenius ringed-site/resolutions; two-injective internal Hom; tensor/normalized uncurrying/bidual transpose. Parent statement and its definition dependencies unchanged. All original arguments retained verbatim in report and assigned to new nodes. Searches and citations checked; no Lean written or compiled.",
+  "blueprint": "The original ancestry prints None. Retained its existing provenance and realizes the internal-Hom comparison, evaluation and transposition paragraph of cor-coef-verdier-weil-equivariance through the same native ringed-action-site route. New nodes inherit the biduality unit; no chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-32b0942e4",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-32b0942e4 (reviewer sub-agent of L); spot-checked: Re-split under the released human note of 2026-10-21 (keep_plan; ≥2 nodes). The live item is still N0's version and only proof, proof_deps and split_report differ; the statement is unchanged. All 8 old steps reappear as new node statements: A frobenius-action-resolutions takes steps 1-3 (site automorphism, R_T invariance, twisted action site, exact/conservative D(U), H^n commutation, constructibility, preservation of flat-term K-flat and K-injective resolutions via the exact LEFT adjoint). B ringed-forget-two-injective-hom takes steps 4 and 6 (two-K-injective model, the precomposition q-iso Hom(J,I)→Hom(K,I), the derived-form χ, the native derivedHom, which matches DerivedHom.lean 107-113 bifunctorRHom/ihomBifunctor). C ringed-forget-tensor-transposition takes steps 5, 7 and 8 (μ with signs, unique extension, normalized uncurry equation, evaluation, δ with no invertibility). The nodes are comparable in size, none restates the item, and no duplicates were found (fixed-pair-derived-forget-comparison covers only part of A; no same-day sibling dup). The assembly is 3 steps and under 3000 chars. Hand checks: empty T; a point with trivial action (R[t^±1]-modules); open restriction for B and C; odd·odd signs; the uncurry equation types; non-reflexive W. Source cor-coef-verdier-weil-equivariance.proof.md read; no SGA. Fixes: (1) C presupposed B's χ and used Hom complex/sheaf Hom/tensor complex/sheaf tensor without stmt_deps: added lem-sf-ringed-forget-two-injective-hom, def-pur-hom-complex, def-pur-sheaf-hom, def-pc-tensor-complex-sheaves, def-pur-sheaf-tensor-product and cited B in the χ sentence; (2) item step 2 said B 'gives' the closed structure and normalized adjunction, which B only fixes in its hypotheses: it now cites lem-sf-ringed-derived-closed-symmetric-monoidal and lem-sf-ringed-derived-tensor-hom-adjunction (same unit), and proof_deps were recomputed; (3) A: added def-weil-pbc-ringed-topos-morphism. Advisory: the item's merge-owned tool_uses still lists 9 off-unit nodes that the new assembly no longer cites.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilClosedForgetful",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_closed_forgetful",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.native_closed_forgetful"
+  ],
+  "file": "lean/Sheaf/Paper/NativeWeilClosedForgetful.lean",
+  "statement": "theorem native_closed_forgetful [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] : (nativeForget k₀ l X).IsTriangulated ∧ (nativeForget k₀ l X).ReflectsIsomorphisms ∧ (∀ n : ℤ, Nonempty (nativeForget k₀ l X ⋙ DerivedCategory.homologyFunctor _ n ≅ DerivedCategory.homologyFunctor _ n ⋙ Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X))) ∧ (∀ K : WeilComplex k₀ l X, DerivedCategory.TStructure.t.bounded ((nativeForget k₀ l X).obj K.obj) ∧ ∀ n : ℤ, ProEtale.IsAdicConstructibleSheaf ((DerivedCategory.homologyFunctor _ n).obj ((nativeForget k₀ l X).obj K.obj))) ∧ (∃ C : NativeClosedComparison k₀ l X, C.Compatible)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the actual native derived Weil category and product-total internal Hom. The comparison conclusion includes representative normalization, the componentwise ordinary tensor-Hom adjunction, Koszul symmetry, tensor coherence, evaluation, and biduality naturality/forgetting. Helper definitions contain no postponed data; auxiliary additive-instance theorems have source and full proof docstrings. R4 repairs NativeAdjunctionNormalization: degree-zero uncurrying for the native row-sign Hom differential is unsigned; the independent Koszul signed-swap condition is unchanged. The mathematical node statement and its dependency route are unchanged. Definitions used by targets require renewed semantic review after this correction; native_closed_forgetful remains unproved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-617235216",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Statement faithful: hypothesis only Closed; conclusion ∃ hp:Permitted, ∃ natural delta = nativeBidual with the signed ev-transpose equation, j≫Uδ≫b = ρ(commonBidual M_K) and b natural; t = preimage(j_{D_XK}≫c_K) matches the unit transport; no δ invertibility. 41f0 H2 repaired (new def node def-sf-weil-dual-realization-comparison-data owns Datum/ω/M,j,h/c_K as a direct Iso, theorem node out of stmt_deps); H13 repaired (tensor_transport + TransportNormalized pin the section tensor; native_closed_forgetful back in the dep record). FIX: the new def module's commonDual used CoefQbarVerdier.homDual (owned by thm-coef-qbar-verdier, not cited by the def node) → inlined lift ⋙ commonStageDerivedInternalHom (def-weil-derived-pullback-tensor-hom); fixes/NativeDualRealizationComparisonData.lean; nt_compile --json of the delivered sibling + fixed module (10.7 s) + item (11.2 s) exit 0, no error or warning in the visible tail. Advisory: the dep record drops the old helper names (nativeBidual etc.; publicly re-exported, not fixable at S2); stage 3 must prove native_section_closed_forgetful; some definition owners uncited; second reading by the same worker."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-556bf",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T124141-L-1939079",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules/nodes against clone (byte-identical moved defs and unchanged item statement), node statements vs Lean, 6 direct importers compiled in sandbox, #print axioms"
+ }
+}

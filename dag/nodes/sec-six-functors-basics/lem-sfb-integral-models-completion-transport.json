@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-integral-models-completion-transport",
+ "kind": "statement",
+ "title": "All complete complexes under integral coefficient restriction",
+ "statement": "For a prime l, a finite extension E of Q_l and a Noetherian scheme X, let F be the exact completed section realization [def-sfb-integral-constant-model-realization] and Res the specified constant-to-continuous scalar restriction [def-sfb-integral-models-stacks-data]. For every internal continuous-coefficient complex K, IsSfbAdicComplete(FK) is equivalent to local derived completeness of Res K for the kernel of the discrete first residue map. Moreover Res induces an equivalence of these two full subcategories of all complete complexes, together with a natural isomorphism of the inclusion composites. There is no boundedness, constructibility or Tor hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)–(2): coefficient-presentation comparison in det-lem-integral-models-stacks"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact section-action and small-site equivalences. Their restriction comparison is the identity on sections; localize it using mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. Chosen representatives agree with these exact derived functors through mapDerivedCategoryFactors.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary scalar map is flat, its discrete residue kernel is finite type, and it identifies the quotient by this ideal. Apply flat_ringed_ideal_complete_equivalence to obtain the equivalence of locally derived complete section modules, with its inclusion isomorphism. The exact restriction theorem preserves and reflects completeness for the extended ideal.",
+   "uses": [
+    "lem-sfb-integral-models-flat-residue",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-restriction-local-completeness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed realization tests local completeness for precisely this extended residue ideal. Completeness is invariant under the representative isomorphisms since slice restriction and internal Hom are functors. Restrict both ambient equivalences to their full complete subcategories and compose with the equivalence from the previous step. Whiskering its inclusion isomorphism with the ambient equivalences and using full faithfulness yields the required natural isomorphism with the original restriction functor.",
+   "uses": [
+    "lem-sfb-integral-models-complete-section-predicate",
+    "def-sfb-integral-constant-model-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "lem-weil-pbc-restriction-local-completeness",
+  "lem-sfb-integral-models-complete-section-predicate",
+  "def-sfb-integral-constant-model-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099I and 099C applied to the reconstructed section rings; exact-equivalence transport, retaining blueprint integral-models unit step (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars equivalence between derived complete modules for adic completion on a ringed site",
+   "date": "2026-10-24",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, AdicCompletion.module, RestrictScalars.addEquiv, LinearEquiv.restrictScalars, Submodule.restrictScalarsEquiv, AdicCompletion.ofAlgEquiv, AdicCompletion.of_ofAlgEquiv_symm, ModuleCat.restrictScalarsEquivalenceOfRingEquiv",
+   "verdict": "No exact match for the specified coefficient presentation comparison; generic constant-sheaf, scalar-restriction or etale declarations do not identify these local predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars equivalence between derived complete modules for adic completion on a ringed site",
+   "date": "2026-10-24",
+   "results": "8 hits: AdicCompletion.congr, AdicCompletion.ofLinearEquiv, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.congr_apply, AdicCompletion.module, AdicCompletion.instModuleOfIsScalarTower, AdicCompletion.instIsScalarTower_1, AdicCompletion.instIsScalarTower",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsComplete\", \"equivalence\"",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete.*equiv|equiv.*derivedComplete",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsStacks",
+  "date": "2026-10-24",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Unit proof (1)–(2): All complete complexes under integral coefficient restriction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsCompletionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsCompletionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.completion_transport",
+  "statement": "theorem completion_transport (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X] :\n    let A := fun K ↦ Scheme.IsSfbAdicComplete X (IntegralConstantCompletion.ideal l E)\n      ((IntegralConstantModel.derived l E X).functor.obj K)\n    let B := fun L ↦ ConstantCompletion.IsComplete (smallMap X (residueMap l E X))\n      (smallDerivedObject X _ L)\n    (∀ K, A K ↔ B ((restriction l E X).obj K)) ∧\n    ∃ e : ObjectProperty.FullSubcategory A ≌ ObjectProperty.FullSubcategory B,\n      Nonempty (e.functor ⋙ ObjectProperty.ι B ≅\n        ObjectProperty.ι A ⋙ restriction l E X)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122450-L-1774752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

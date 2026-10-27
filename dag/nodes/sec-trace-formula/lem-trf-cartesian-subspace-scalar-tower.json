@@ -1,0 +1,442 @@
+{
+ "id": "lem-trf-cartesian-subspace-scalar-tower",
+ "kind": "statement",
+ "title": "Orthogonal subspaces and restriction through a cartesian field extension",
+ "statement": "Let $K$ be a field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value. A norm on a $K$-vector space $V$ means a definite function $N:V\\to\\mathbf R_{\\ge0}$ with $N(x+y)\\le\\max(N(x),N(y))$ and $N(ax)=|a|N(x)$. A finite family $v_i$ is orthogonal if $N(\\sum_i a_iv_i)=\\max_i|a_i|N(v_i)$ for all coefficients. (1) If $V$ has a finite orthogonal basis, every $K$-linear subspace of $V$, with the restricted norm, has an orthogonal basis. (2) Let $F/K$ be an isometric extension of such valued fields such that every finite-dimensional $K$-linear subspace of $F$ has an orthogonal $K$-basis. Let $W$ be a normed $F$-vector space (so $N(aw)=|a|_F N(w)$). If every finite-dimensional $F$-linear subspace of $W$ has an orthogonal $F$-basis, then every finite-dimensional $K$-linear subspace of $W$ has an orthogonal $K$-basis. Zero spaces are allowed, with maximum of the empty family equal to $0$.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 2.4.1/5, printed p.96 (scan PDF p.104), and Lemma 2.4.3/4, printed p.100 (scan PDF p.108); applied in Section 5.3.4, printed p.220. Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "For clause (1), the norm satisfies $N(-v)=N(v)$ since $|-1|=1$. Thus all hypotheses of [lem-trf-cartesian-subspace] hold for the given finite orthogonal basis and every $K$-subspace $U$. Its conclusion is exactly the asserted finite orthogonal basis of $U$, including $U=0$.",
+   "uses": [
+    "lem-trf-cartesian-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent finite-coefficient argument for the imported BGR 2.4.1/5 and 2.4.3/4 input; archival source unavailable, WANTED in report. Subspace theorem supplied by lem-trf-cartesian-subspace."
+   }
+  },
+  {
+   "text": "For clause (2), fix a finite-dimensional $K$-subspace $U\\subset W$. If $U=0$, take the empty basis. Otherwise take a finite $K$-basis $u_1,\\ldots,u_m$. The space $M=\\sum_{j=1}^m Fu_j\\subset W$ is finite-dimensional over $F$: deleting dependent vectors from this finite spanning list gives an $F$-basis. By the hypothesis on $W$, choose an orthogonal $F$-basis $e_1,\\ldots,e_r$ of $M$, and write $u_j=\\sum_i c_{ij}e_i$ with $c_{ij}\\in F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent finite-coefficient argument for the imported BGR 2.4.1/5 and 2.4.3/4 input; archival source unavailable, WANTED in report. Subspace theorem supplied by lem-trf-cartesian-subspace."
+   }
+  },
+  {
+   "text": "For each $i$, put $A_i=\\operatorname{span}_K\\{c_{i1},\\ldots,c_{im}\\}\\subset F$. It is finite-dimensional, since the displayed finite list spans it. The hypothesis on $F/K$ supplies an orthogonal $K$-basis $a_{i1},\\ldots,a_{is_i}$ of $A_i$, where $s_i=0$ when $A_i=0$. Let $b_{i\\ell}=a_{i\\ell}e_i$ and $V_0=\\operatorname{span}_K\\{b_{i\\ell}\\}\\subset W$. Each coefficient $c_{ij}$ is a $K$-linear combination of the $a_{i\\ell}$, so the displayed expressions for $u_j$ show $U\\subseteq V_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent finite-coefficient argument for the imported BGR 2.4.1/5 and 2.4.3/4 input; archival source unavailable, WANTED in report. Subspace theorem supplied by lem-trf-cartesian-subspace."
+   }
+  },
+  {
+   "text": "For arbitrary $d_{i\\ell}\\in K$, put $z_i=\\sum_\\ell d_{i\\ell}a_{i\\ell}\\in F$. Orthogonality of the $e_i$ and then of each coefficient basis give $$N\\left(\\sum_{i,\\ell}d_{i\\ell}b_{i\\ell}\\right)=N\\left(\\sum_i z_ie_i\\right)=\\max_i |z_i|_F N(e_i)=\\max_{i,\\ell}|d_{i\\ell}|_K|a_{i\\ell}|_F N(e_i)=\\max_{i,\\ell}|d_{i\\ell}|_K N(b_{i\\ell}).$$ Here the equality $|d|_F=|d|_K$ uses the isometric embedding. Empty coefficient blocks contribute zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent finite-coefficient argument for the imported BGR 2.4.1/5 and 2.4.3/4 input; archival source unavailable, WANTED in report. Subspace theorem supplied by lem-trf-cartesian-subspace."
+   }
+  },
+  {
+   "text": "Every $b_{i\\ell}$ has positive norm, since $a_{i\\ell}\\ne0$, $e_i\\ne0$, and the norm is definite. If a linear combination of the $b_{i\\ell}$ is zero, the equality in Step 4 makes each $|d_{i\\ell}|_K N(b_{i\\ell})$ zero, hence every $d_{i\\ell}=0$. Thus these vectors are linearly independent, and they span $V_0$ by its definition: they form a finite orthogonal $K$-basis. If there are no such vectors, this is the empty basis of $V_0=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent finite-coefficient argument for the imported BGR 2.4.1/5 and 2.4.3/4 input; archival source unavailable, WANTED in report. Subspace theorem supplied by lem-trf-cartesian-subspace."
+   }
+  },
+  {
+   "text": "The restricted norm on $V_0$ is a definite ultrametric $K$-norm: scalar homogeneity follows from $F$-homogeneity and $|a|_F=|a|_K$ for $a\\in K$; symmetry follows from $|-1|=1$. Apply [lem-trf-cartesian-subspace] to its finite orthogonal basis from Step 5 and the subspace $U\\subseteq V_0$ from Step 3. It gives an orthogonal $K$-basis of $U$. Since $U$ was arbitrary, clause (2) follows.",
+   "uses": [
+    "lem-trf-cartesian-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Independent finite-coefficient argument for the imported BGR 2.4.1/5 and 2.4.3/4 input; archival source unavailable, WANTED in report. Subspace theorem supplied by lem-trf-cartesian-subspace."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cartesian-subspace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Independent coefficient-expansion proof; BGR local archival copy unavailable, WANTED in report. Clause (1) reuses the existing DAG subspace statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional subspaces of an ultrametric space with an exact orthogonal basis have orthogonal bases and cartesian scalar restriction is transitive for normed field towers",
+   "results": {
+    "t": "2026-10-24T15:47:27Z",
+    "tool": "leanfinder",
+    "query": "Finite dimensional subspaces of an ultrametric space with an exact orthogonal basis have orthogonal bases and cartesian scalar restriction is transitive for normed field towers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DirectSum.IsInternal.subordinateOrthonormalBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate",
+     "Module.Basis.restrictScalars",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex_def",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis"
+    ],
+    "digest": "72e552954a5b6899"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: restrictScalars constructs algebraic bases or normed structures; GramSchmidt and orthonormalBasis require an inner product. No theorem gives exact ultrametric orthogonality for these subspaces and scalar towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUltrametricDist\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T15:47:28Z",
+    "tool": "loogle",
+    "query": "\"IsUltrametricDist\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: restrictScalars constructs algebraic bases or normed structures; GramSchmidt and orthonormalBasis require an inner product. No theorem gives exact ultrametric orthogonality for these subspaces and scalar towers."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal[Bb]asis|[Cc]artesian|exists.*orthogonal",
+   "results": {
+    "t": "2026-10-24T15:47:28Z",
+    "tool": "grep",
+    "query": "orthogonal[Bb]asis|[Cc]artesian|exists.*orthogonal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/ModelTheory/Definability.lean",
+     "Mathlib/ModelTheory/Definability.lean",
+     "Mathlib/ModelTheory/Definability.lean",
+     "Mathlib/ModelTheory/Definability.lean"
+    ],
+    "digest": "04866dd18f8ab5c8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: restrictScalars constructs algebraic bases or normed structures; GramSchmidt and orthonormalBasis require an inner product. No theorem gives exact ultrametric orthogonality for these subspaces and scalar towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional subspaces of an ultrametric space with an exact nonarchimedean orthogonal basis have nonarchimedean orthogonal bases and cartesian scalar restriction is transitive for normed field towers",
+   "results": {
+    "t": "2026-10-24T15:47:29Z",
+    "tool": "leansearch",
+    "query": "Finite dimensional subspaces of an ultrametric space with an exact nonarchimedean orthogonal basis have nonarchimedean orthogonal bases and cartesian scalar restriction is transitive for normed field towers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "stdOrthonormalBasis",
+     "IsUltrametricDist.of_normedAlgebra",
+     "NormedSpace.restrictScalars",
+     "Module.RestrictScalars.normedSpaceOrig",
+     "Submodule.IsOrtho",
+     "IsUltrametricDist.isNonarchimedean_algNormOfAlgEquiv",
+     "instNormedAddCommGroupRestrictScalars"
+    ],
+    "digest": "0913c5d1f51b6052"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: restrictScalars constructs algebraic bases or normed structures; GramSchmidt and orthonormalBasis require an inner product. No theorem gives exact ultrametric orthogonality for these subspaces and scalar towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean exact orthogonal bases in subspaces and transitivity of cartesian normed scalar restriction",
+   "results": {
+    "t": "2026-10-24T15:52:11Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean exact orthogonal bases in subspaces and transitivity of cartesian normed scalar restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.IsPerfPair.restrictScalars_of_field",
+     "LinearMap.IsPerfPair.restrictScalars",
+     "Module.Basis.norm_isNonarchimedean",
+     "NormedSpace.restrictScalars_eq",
+     "Module.Basis.restrictScalars",
+     "Module.RestrictScalars.normedSpaceOrig",
+     "Module.Basis.ofZLatticeBasis_comap",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate"
+    ],
+    "digest": "4e574dfb17e3595f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: restrictScalars constructs algebraic bases or normed structures; GramSchmidt and orthonormalBasis require an inner product. No theorem gives exact ultrametric orthogonality for these subspaces and scalar towers."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal[Bb]asis|[Cc]artesian|exists.*orthogonal",
+   "results": {
+    "t": "2026-10-24T16:24:28Z",
+    "tool": "grep",
+    "query": "orthogonal[Bb]asis|[Cc]artesian|exists.*orthogonal",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean"
+    ],
+    "digest": "b8cb6ac42e7e5d34"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every linear subspace of a finite dimensional nonarchimedean normed space with an exact orthogonal basis has an exact orthogonal basis",
+   "results": {
+    "t": "2026-10-24T16:24:28Z",
+    "tool": "leansearch",
+    "query": "Every linear subspace of a finite dimensional nonarchimedean normed space with an exact orthogonal basis has an exact orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InnerProductSpace.gramSchmidtBasis",
+     "Submodule.HasOrthogonalProjection.ofCompleteSpace",
+     "InnerProductSpace.gramSchmidtOrthonormalBasis",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "OrthonormalBasis.mk",
+     "stdOrthonormalBasis",
+     "OrthonormalBasis.casesOn"
+    ],
+    "digest": "eddb629c551ea75c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUltrametricDist\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T16:24:28Z",
+    "tool": "loogle",
+    "query": "\"IsUltrametricDist\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear subspace of a finite dimensional ultrametric normed vector space admitting an orthogonal basis admits an orthogonal basis; cartesian normed scalar restriction is transitive",
+   "results": {
+    "t": "2026-10-24T16:24:29Z",
+    "tool": "leanfinder",
+    "query": "A linear subspace of a finite dimensional ultrametric normed vector space admitting an orthogonal basis admits an orthogonal basis; cartesian normed scalar restriction is transitive",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_orthonormalBasis",
+     "Orthonormal.exists_orthonormalBasis_extension",
+     "Orthonormal.exists_orthonormalBasis_extension_of_card_eq",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate",
+     "maximal_orthonormal_iff_basis_of_finiteDimensional",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex",
+     "Orthonormal.codRestrict"
+    ],
+    "digest": "38d76ac7918b3808"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|cartesian",
+   "results": {
+    "t": "2026-10-24T16:25:17Z",
+    "tool": "grep",
+    "query": "orthogonal|cartesian",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean"
+    ],
+    "digest": "c2f91693be0f04e0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm_isNonarchimedean\"",
+   "results": {
+    "t": "2026-10-24T16:25:17Z",
+    "tool": "loogle",
+    "query": "\"norm_isNonarchimedean\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean"
+    ],
+    "digest": "1963a01e45080c8c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean normed spaces cartesian orthogonal bases restriction of scalars along a tower of valued fields",
+   "results": {
+    "t": "2026-10-24T16:25:18Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean normed spaces cartesian orthogonal bases restriction of scalars along a tower of valued fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.restrictScalars",
+     "Module.Basis.restrictScalars_apply",
+     "Module.Basis.ofZLatticeBasis_comap",
+     "IsBaseChange.basis",
+     "NumberField.mixedEmbedding.stdBasis",
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis_map_eq"
+    ],
+    "digest": "a8be8b8944e50b68"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inner-product orthonormal bases require RCLike; Module.Basis.restrictScalars is algebraic and Module.Basis.norm_isNonarchimedean constructs a basis norm, neither proves orthogonality of the given norm or cartesian scalar transitivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 2.4.1/5, printed p.96 (scan PDF p.104), and Lemma 2.4.3/4, printed p.100 (scan PDF p.108); applied in Section 5.3.4, printed p.220.",
+   "via": [
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-cartesian-subspace-scalar-tower",
+  "worker": "stage1",
+  "summary": "Reused existing lem-trf-cartesian-subspace for clause (1) and for the final restriction in clause (2). Expanded the scalar-tower argument through finitely many coefficient subspaces and an explicit product-basis max-norm identity. No new nodes or extra hypotheses. BGR archival copy absent, so the independent proof is marked agent-written and the source is WANTED. All fresh searches are recorded verbatim from msearch.py.",
+  "blueprint": "Historical below-node analytic branch recorded in blueprint.from: the cartesian scalar-restriction input to Gauss-field stability in BGR Section 5.3.4. The current latest lem-trf-local-term-locality proof has the contracting-correspondence route; this split does not replace it or change the chapter/unit. Searches of all imported blueprint nodes for orthogonal basis, cartesian norm and ultrametric found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NH-317de0822",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-317de0822 (reviewer sub-agent of L); spot-checked: I read the item and its full 6-step split in full, and the full statement of the one cited node, lem-trf-cartesian-subspace (same unit sk-i-curve-zero, unsplit, no cycle, no tool_uses). There are no new nodes. Step 1: the norm is symmetric because |-1|=1, so the cited node's hypotheses hold and its conclusion is clause (1) exactly. Steps 2-5 are elementary and I checked each line. U has a finite K-basis; M=ΣFu_j is finite-dimensional over F and has an orthogonal F-basis e_i. Each A_i=span_K(c_ij) is finite-dimensional and has an orthogonal K-basis a_iℓ, and U⊆V_0. The identity N(Σd b)=max|d|_K N(b) uses F-orthogonality, then K-orthogonality in A_i with |d|_F=|d|_K (the isometry), then pulling N(e_i)≥0 out of a finite max. Independence follows from N(b)>0 and definiteness. Step 6 applies the cited node to V_0 and U. Nothing assumes [F:K]<∞; the zero and empty-block cases are consistent. Small cases tested: K=F with weighted K^2; F=Q_p(√p) over K=Q_p with U=span(1,√p). An rg search for orthogonal-basis/cartesian nodes found no duplicate of clause (2); the only node stating clause (1) is the cited one, created later. BGR is absent locally: it is declared WANTED and the proof is marked agent-written. Advisory: the item's pre-existing source.place still says 'Primary scan read online', which contradicts the report. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.NormedSpace.CartesianSubspaceScalarTower",
+  "declaration": "Module.exists_orthogonal_basis_subspace",
+  "declarations": [
+   "Module.exists_orthogonal_basis_subspace",
+   "Module.exists_orthogonal_basis_restrictScalars"
+  ],
+  "file": "lean/Sheaf/Analysis/NormedSpace/CartesianSubspaceScalarTower.lean",
+  "statement": "theorem exists_orthogonal_basis_subspace {K : Type u} [Field K] (abv : AbsoluteValue K ℝ≥0) (h_nontrivial : abv.IsNontrivial) (h_nonarch : IsNonarchimedean abv) {V : Type v} [AddCommGroup V] [Module K V] (N : V → ℝ≥0) (h_definite : ∀ x : V, N x = 0 ↔ x = 0) (h_ultra : IsNonarchimedean N) (h_smul : ∀ (a : K) (x : V), N (a • x) = abv a * N x) (n : ℕ) (b : Module.Basis (Fin n) K V) (h_orthogonal : ∀ a : Fin n → K, N (∑ i, a i • b i) = Finset.univ.sup (fun i ↦ abv (a i) * N (b i))) (U : Submodule K V) : ∃ (m : ℕ) (c : Module.Basis (Fin m) K U), ∀ a : Fin m → K, N (↑(∑ i, a i • c i) : V) = Finset.univ.sup (fun i ↦ abv (a i) * N (↑(c i) : V))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The first declaration states clause (1); exists_orthogonal_basis_restrictScalars states clause (2). Orthogonality is the explicit finite-supremum identity in NNReal, with empty supremum zero. Norms remain unbundled functions as in the node; no completeness or global finite-dimensionality of the scalar extension or W is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b29f69dc",
+  "group": "NV",
+  "result": "fix",
+  "note": "Lean exact vs node: AbsoluteValue K ℝ≥0 nontrivial+IsNonarchimedean; unbundled definite/ultrametric/homogeneous N; Finset.sup orthogonality (empty=0); clause (1) arbitrary Submodule with Fin m basis; clause (2) isometric Algebra K F, h_extension/h_space over FiniteDimensional subspaces, IsScalarTower pins restriction, conclusion for finite-dim K-subspaces; hF_nontrivial implied (not stronger); zero/empty/infinite-degree cases covered; universes bound; lean.statement verbatim; sorry-only, no defs, docstrings with source and steps; no H4 duplicate. Sole fault H11: the second-reading section is the author's own pass, so fixes/lem-trf-cartesian-subspace-scalar-tower.report.md has the worker report verbatim plus an independent reading. Advisory: future lem-trf-cartesian-subspace Lean should reuse Module.exists_orthogonal_basis_subspace."
+ }
+}

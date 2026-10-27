@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-finite-presentation-fibre-dimension-levels",
+ "kind": "statement",
+ "title": "Constructible fibre-dimension levels over a Noetherian base",
+ "statement": "Let $T$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $h:Y\\to T$ be a morphism of finite presentation: it is locally of finite presentation [def-sbc-locally-finite-presentation], the inverse image of every affine open is quasi-compact, and its diagonal $Y\\to Y\\times_TY$ is quasi-compact [def-weil-quasi-separated-morphism, def-pc-fibre-product]. For $t\\in T$ let $Y_t=Y\\times_T\\operatorname{Spec}\\kappa(t)$ be its scheme-theoretic fibre [def-pc-scheme-fibre]. For every integer $n\\geq0$, the subset $E_n=\\{t\\in T:\\dim |Y_t|=n\\}$ is constructible [def-weil-constructible-subset], where dimension is topological Krull dimension [def-kun-topological-krull-dimension], with $\\dim\\varnothing=-\\infty$. No smoothness, flatness, separatedness, or properness of $h$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05F9, lemma-dimension-fibres-constructible: locally constructible level sets for a finite-presentation morphism; on a Noetherian base these are constructible by a finite affine cover. Only the finite nonnegative levels are asserted here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-constructible-subset",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n\\geq0$. Local Noetherianity gives an affine cover of $T$ by spectra of Noetherian rings; quasi-compactness selects a finite subcover. Finite presentation implies finite type: the affine presentations have finitely many algebra generators and $h$ is quasi-compact. Apply [lem-fin-finite-type-fibre-dimension-bound] to $h$ to obtain $d\\geq0$ with $\\dim Y_t\\leq d$ for every $t$. Thus every nonempty fibre has dimension a finite nonnegative integer.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F9, lemma-dimension-fibres-constructible, second proof paragraph: Noetherian case; boundedness made explicit using morphisms.tex Tag 0A3V."
+   }
+  },
+  {
+   "text": "Let $Z\\subseteq|T|$ be any nonempty irreducible closed subset. Give it its reduced induced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme], and choose its generic point $\\xi$ by [lem-weil-pbc-scheme-sober]. The projection $h_Z:Y\\times_TZ\\to Z$ is finitely presented by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], hence finite type. For $z\\in Z$, its residue field in $Z$ equals its residue field in $T$: locally $Z=\\operatorname{Spec}(A/I)$ and $z$ corresponds to $\\mathfrak p\\supseteq I$, so both residue fields are $\\operatorname{Frac}(A/\\mathfrak p)$. Associativity from the fibre-product universal property therefore identifies $(Y\\times_TZ)_z$ with $Y_z$. In particular their dimensions agree, including the empty case.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "def-weil-residue-field",
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F9, second proof paragraph: irreducible closed subscheme and its generic point; fibre identification expanded from the definitions."
+   }
+  },
+  {
+   "text": "If $Y_\\xi=\\varnothing$, apply [lem-sbc-generic-fibre-closed-avoidance] to $h$, $y=\\xi$ and the closed subset $C=Y$. It gives an ambient open $V\\subseteq T$ containing $\\xi$ such that $h^{-1}(V\\cap\\overline{\\{\\xi\\}})=\\varnothing$. Since $\\overline{\\{\\xi\\}}=Z$, the nonempty relatively open $W=V\\cap Z$ has only empty fibres. Their dimensions are $-\\infty\\ne n$, so $W\\cap E_n=\\varnothing$.",
+   "uses": [
+    "lem-sbc-generic-fibre-closed-avoidance",
+    "def-kun-topological-krull-dimension",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F9, second proof paragraph: generic constancy, empty-fibre case supplied by Tag 054W, lemma-empty-generic-fibre."
+   }
+  },
+  {
+   "text": "Otherwise Step 1 gives $\\dim Y_\\xi=m$ for some integer $m\\geq0$. Apply [lem-trf-generic-fibre-dimension-neighborhood] to the finite-type morphism $h_Z$ and generic point $\\xi$. There is a nonempty open $W\\subseteq Z$ on which every fibre has dimension $m$. By Step 2 these are the original fibres $Y_z$. If $m=n$, then $W\\subseteq E_n$; if $m\\ne n$, then $W\\cap E_n=\\varnothing$.",
+   "uses": [
+    "lem-trf-generic-fibre-dimension-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F9, second proof paragraph: apply Tag 05F7, lemma-dimension-in-neighbourhood."
+   }
+  },
+  {
+   "text": "Steps 3 and 4 provide the required nonempty relatively open subset for every irreducible closed $Z\\subseteq|T|$. The finite affine Noetherian cover from Step 1 supplies the base hypothesis of [lem-trf-noetherian-constructible-subset-criterion]. Apply that criterion to $E_n\\subseteq|T|$ to conclude that $E_n$ is constructible. This applies to every $n\\geq0$; if $T$ is empty the criterion is vacuous.",
+   "uses": [
+    "lem-trf-noetherian-constructible-subset-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F9, second proof paragraph: Topology Tag 053Z, lemma-characterize-constructible-Noetherian."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "lem-trf-generic-fibre-dimension-neighborhood",
+  "lem-trf-noetherian-constructible-subset-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05F9, lemma-dimension-fibres-constructible, second proof paragraph (Noetherian case), using 05F7 and 053Z; empty fibres treated with 054W, finiteness with morphisms.tex 0A3V."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The set of base points where fibres of a finitely presented morphism have a given Krull dimension is locally constructible",
+   "results": "Hits: Topology.IsLocallyConstructible, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, Topology.IsLocallyConstructible.isConstructible Read the returned types: constructible images, finite fibres, and a polynomial fibre-dimension estimate do not give dimension level sets.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(krullDim|[Dd]imension)|([Dd]imension|krullDim).*fiber|[Cc]onstructible.*[Dd]im|[Dd]im.*[Cc]onstructible",
+   "results": "Hits: Mathlib/RingTheory/KrullDimension/Polynomial.lean Read the returned types: constructible images, finite fibres, and a polynomial fibre-dimension estimate do not give dimension level sets.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"fiber\"",
+   "results": "No hits. Read the returned types: constructible images, finite fibres, and a polynomial fibre-dimension estimate do not give dimension level sets.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented morphism of schemes every level set of the function giving Krull dimension of the fibre is locally constructible",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton Read the returned types: constructible images, finite fibres, and a polynomial fibre-dimension estimate do not give dimension level sets.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of finite presentation over a Noetherian scheme the set of points where the fibre has Krull dimension n is constructible",
+   "results": "{\"t\": \"2026-10-24T07:29:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of finite presentation over a Noetherian scheme the set of points where the fibre has Krull dimension n is constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"PrimeSpectrum.isConstructible_range_comap\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"PrimeSpectrum.isConstructible_comap_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"chevalley_mvPolynomial_mvPolynomial\", \"ChevalleyThm.chevalley_mvPolynomialC\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"e215553e00507832\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Chevalley image/preimage, finite fibres, Jacobson fibres or component finiteness; none states constructibility of fibre-dimension levels."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(fiber|fibre|krullDim)|(fiber|fibre|krullDim).*constructible",
+   "results": "{\"t\": \"2026-10-24T07:30:09Z\", \"tool\": \"grep\", \"query\": \"constructible.*(fiber|fibre|krullDim)|(fiber|fibre|krullDim).*constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Chevalley image/preimage, finite fibres, Jacobson fibres or component finiteness; none states constructibility of fibre-dimension levels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the fibres of a finitely presented morphism of schemes has constructible level sets",
+   "results": "{\"t\": \"2026-10-24T07:30:09Z\", \"tool\": \"leansearch\", \"query\": \"The dimension of the fibres of a finitely presented morphism of schemes has constructible level sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"PrimeSpectrum.isConstructible_comap_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"PrimeSpectrum.isConstructible_range_comap\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.recOn\"], \"digest\": \"748e5c28da7c16ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Chevalley image/preimage, finite fibres, Jacobson fibres or component finiteness; none states constructibility of fibre-dimension levels."
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-24T07:30:09Z\", \"tool\": \"loogle\", \"query\": \"Topology.IsConstructible, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Chevalley image/preimage, finite fibres, Jacobson fibres or component finiteness; none states constructibility of fibre-dimension levels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre dimension function of a finite type scheme morphism is constant on a dense open of every irreducible closed base stratum, giving constructible strata on a Noetherian base",
+   "results": "{\"t\": \"2026-10-24T07:31:05Z\", \"tool\": \"leanfinder\", \"query\": \"The fibre dimension function of a finite type scheme morphism is constant on a dense open of every irreducible closed base stratum, giving constructible strata on a Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\"], \"digest\": \"3a58a1f5e7c67c6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Chevalley image/preimage, finite fibres, Jacobson fibres or component finiteness; none states constructibility of fibre-dimension levels."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-closed-fibre-codimension-locus",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Proposition 21.14.3(ii), proof: approximation by normal finite type Z-subalgebras and descent of the closed pair; IV3 7.8.3(ii),(iii),(vi),(vii), 8.3.11, 8.5, IV4 17.7.8, and IV2 6.1.4, as cited there. Lower input: constructibility and field-extension invariance of the fibre-codimension conditions in the arithmetic approximation paragraph of EGA IV4 21.14.3(ii). Supporting input: Stacks 05F9 applied to the closed subscheme on each constant-relative-dimension piece. This split realizes the Noetherian-base paragraph of Stacks 05F9 through generic fibre-dimension constancy and the 053Z criterion.",
+   "via": [
+    "lem-sfb-smooth-closed-fibre-codimension-locus",
+    "lem-sfb-normal-arithmetic-closed-pair-approximation",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-presentation-fibre-dimension-levels",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all existing searches. Split the Noetherian paragraph of Stacks 05F9 using existing 05F7, 053Z, 054W, 0A3V and scheme-permanence nodes. Explicitly checked closed-stratum fibres, finite generic dimension and empty generic fibres. No new nodes, no Lean changes.",
+  "blueprint": "Supporting 05F9 input to the inherited smooth-closed-fibre codimension/arithmetic closed-pair branch. Latest sk-thm-sf-ctf-stability direct-images proof (3) retains compactification and preservation; this is only a split of its already-dispatched lower scheme tool. Five steps realize 05F9 second proof paragraph; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Uniform finite-dimensional fibre bound 0A3V excludes an infinite generic dimension; the inherited arithmetic-model branch has no substitute for this general scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "01J3 equips each closed subset in 053Z with a scheme structure so 05F7 applies; this generic construction is not a replacement for any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Clause (3) preserves finite presentation on restriction to a closed base stratum, exactly the 05F9 generic-stratum argument."
+   },
+   {
+    "node": "lem-sbc-generic-fibre-closed-avoidance",
+    "why": "054W supplies a stratum-open with empty fibres when the generic fibre is empty, a case outside the nonnegative-dimensional 05F7 node."
+   },
+   {
+    "node": "lem-trf-generic-fibre-dimension-neighborhood",
+    "why": "05F7 is explicitly used by the source 05F9; only its general finite-type scheme statement is used, not trace-formula hypotheses or results."
+   },
+   {
+    "node": "lem-trf-noetherian-constructible-subset-criterion",
+    "why": "053Z is explicitly used by 05F9 to assemble generic closed-stratum alternatives into constructibility; only the generic topology criterion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "lem-trf-generic-fibre-dimension-neighborhood",
+  "lem-trf-noetherian-constructible-subset-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-450a11028",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-450a11028 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement and Stacks more-morphisms.tex Tag 05F9 (lemma-dimension-fibres-constructible), statement and proof. The 5 steps follow the source's Noetherian paragraph. Step 1: finite Noetherian affine cover, finite presentation implies finite type, and 0A3V (lem-fin-finite-type-fibre-dimension-bound; T is quasi-compact) bounds the fibre dimension, so every nonempty fibre has finite dimension at least 0. Step 2: reduced induced structure on Z by 01J3 clause 2, generic point by 01IS, base change preserves finite presentation by lem-weil-pbc-qcqs-morphism-permanence clause 3, and an elementary residue-field / fibre-product check gives (Y×_T Z)_z ≅ Y_z. Step 3: 054W (lem-sbc-generic-fibre-closed-avoidance) with C=Y covers an empty generic fibre. Step 4: 05F7 applied to h_Z gives a constant dimension m near the generic point. Step 5: the 053Z criterion. I checked every hypothesis. Edge cases tested: T empty, Y empty, id_T, a closed point into a trait, D(t)→A^1, a disjoint union of A^1 and A^2, and a nonreduced T. The statement is unchanged, there are no new nodes, and it is not a re-split. Batch-5 finding: lem-trf-generic-fibre-dimension-neighborhood (Stacks 05F7) and lem-trf-noetherian-constructible-subset-criterion (053Z) are general scheme/topology lemmas with only generic pbc/sbc/kun proof_deps. In the item's full closure of 253 nodes these two are the only trace-formula or Poincaré-duality chapter nodes, and neither assumption leaf supplies them, so I accept them as generic tools. All six declared tool_uses are general tools and are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationFibreDimensionLevels",
+  "declaration": "AlgebraicGeometry.isConstructible_fibre_dimension_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationFibreDimensionLevels.lean",
+  "statement": "theorem isConstructible_fibre_dimension_eq {Y T : Scheme.{u}} (h : Y ⟶ T) [IsLocallyNoetherian T] [CompactSpace T] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] (n : ℕ) : Topology.IsConstructible {t : T | topologicalKrullDim (h.fiber t) = (n : WithBot ℕ∞)}",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a55d591f0",
+  "group": "NK",
+  "result": "pass",
+  "note": "Statement isConstructible_fibre_dimension_eq matches the node and Stacks 05F9 (Noetherian paragraph) clause by clause: IsLocallyNoetherian + CompactSpace base; LocallyOfFinitePresentation + QuasiCompact + QuasiSeparated (all three required by the node); h.fiber t; topologicalKrullDim = (n : WithBot ℕ∞), so empty fibres (⊥) fall in no level; Topology.IsConstructible. All 9 stmt_dep records are the exact Mathlib declarations. lean.statement is verbatim the file signature; one sorry, no definitions; source and blueprint docstrings with the 5 proof steps; universe u bound, autoImplicit off; proof-only imports are plain and all exist live. Only the node's lean field changes; no new nodes. No duplicate in the project's Lean trees. Edge cases (empty T, empty fibres, n=0, n above the bound) are fine. No findings."
+ }
+}

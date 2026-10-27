@@ -26,75 +26,63 @@
    }
   },
   {
-   "text": "By [def-pc-geometrically-irreducible], $T_L$ is connected and nonempty. In particular $X_L$ is nonempty since $f_L$ maps $T_L$ to it. The morphisms $p:X_L\\to X$ and $q:X_L\\to X_E$ are surjective: [lem-pc-field-extension-surjective] applies to $L/k$ and $L/E$, respectively, and [lem-weil-pbc-surjective-base-change] applies after base change by $X\\to\\operatorname{Spec}k$ and $X_E\\to\\operatorname{Spec}E$. For $q$ use the iterated base-change identification $X_L\\simeq X_E\\times_{\\operatorname{Spec}E}\\operatorname{Spec}L$ supplied by [def-pc-base-change].",
+   "text": "By [def-pc-geometrically-irreducible], $T_L$ is connected and nonempty. Its morphism $f_L$ makes $X_L$ nonempty. If $X_L$ were not connected, the definition [def-weil-connected-scheme] would give a partition $X_L=A\\amalg B$ with both parts nonempty and clopen.",
    "uses": [
     "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-galois-connected-image-invariant-separation] to $f$, $L/k$ and that partition. The finite Galois and connected-source hypotheses hold by steps 1--2. Obtain a nontrivial clopen partition $X_L=P\\amalg Q$ invariant under every $\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma)$.",
+   "uses": [
+    "lem-trf-galois-connected-image-invariant-separation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, invariant-intersection construction."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-galois-invariant-clopen-partition-descent] to $L/k$, $X$ and $P,Q$. Its hypotheses are exactly the invariance and partition assertions from step 3. The resulting partition $X=P_0\\amalg Q_0$ has two nonempty clopen parts, contrary to connectedness of $X$ [def-weil-connected-scheme]. Thus $X_L$ is connected.",
+   "uses": [
+    "lem-trf-galois-invariant-clopen-partition-descent",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, invariant closed-set descent and contradiction."
+   }
+  },
+  {
+   "text": "Let $\\tau:E\\to L$ be the $k$-embedding from step 1. Its spectrum map is a morphism $j:\\operatorname{Spec}L\\to\\operatorname{Spec}E$ over $\\operatorname{Spec}k$, because $\\tau$ commutes with the structure maps. The induced map $q:X_L\\to X_E$ is the cartesian base-change map of [def-pc-base-change]. The map $j$ is surjective by [lem-pc-field-extension-surjective], so $q$ is surjective by [lem-weil-pbc-surjective-base-change]. A continuous surjection from the connected, nonempty $X_L$ makes $X_E$ connected [def-weil-connected-scheme]: its image is the whole target and the continuous image of a connected space is connected.",
+   "uses": [
     "lem-pc-field-extension-surjective",
     "lem-weil-pbc-surjective-base-change",
-    "def-pc-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038C, lemma-tricky, connectedness of the source after extension; Morphisms Tag 01S1, lemma-base-change-surjective."
-   }
-  },
-  {
-   "text": "Suppose $X_L=A\\amalg B$ with $A,B$ nonempty and clopen. Their inverse images under $f_L$ form a clopen partition of the connected nonempty $T_L$, so, after interchanging $A,B$, its nonempty image $S=f_L(T_L)$ lies in $A$. For each $\\sigma\\in G=\\operatorname{Aut}(L/k)$, let $\\sigma_T=\\mathrm{id}_T\\times\\operatorname{Spec}(\\sigma)$ and $\\sigma_X=\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma)$. Functoriality in [def-weil-affine-spectrum] and [def-pc-base-change] gives inverse automorphisms using $\\sigma^{-1}$ and $f_L\\circ\\sigma_T=\\sigma_X\\circ f_L$: both composites have $X$-projection $f$ times the $T$-projection, and $\\operatorname{Spec}L$-projection $\\operatorname{Spec}(\\sigma)$ times the other projection. Hence $\\sigma_X(S)=S$, and $S\\subseteq\\sigma_X(A)$ for every $\\sigma$.",
-   "uses": [
-    "def-weil-connected-scheme",
-    "def-weil-affine-spectrum",
-    "def-pc-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038C, lemma-tricky, first paragraph; base-change action in equation-galois-action-base-change-kbar."
-   }
-  },
-  {
-   "text": "The group $G$ is finite by [lem-weil-pbc-finite-galois-fixed-field]. Set $P=\\bigcap_{\\sigma\\in G}\\sigma_X(A)$ and $Q=X_L\\setminus P$. These are clopen because the intersection is finite and each $\\sigma_X$ is a homeomorphism. The set $P$ is nonempty because it contains $S$; $Q$ is nonempty because the identity belongs to $G$, giving $P\\subseteq A$ and $B\\subseteq Q$. For $\\tau\\in G$, applying $\\tau_X$ to $P$ just permutes its factors: the contravariance of $\\operatorname{Spec}$ makes the resulting indices $\\sigma\\circ\\tau$, which still run over all $G$. Thus both $P$ and $Q$ are $G$-invariant.",
-   "uses": [
-    "lem-weil-pbc-finite-galois-fixed-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038C, lemma-tricky, finite intersection and union construction; Fields Tag 09I1, lemma-finite-Galois, for finiteness of G."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-galois-invariant-closed-subset-descends] twice, to the $G$-invariant closed subsets $P,Q$ of $X_L$. Its hypotheses hold because $L/k$ is Galois, $X$ is a $k$-scheme, and its action is precisely $\\sigma_X$. Obtain closed subsets $P_0,Q_0\\subseteq X$ with $p^{-1}(P_0)=P$ and $p^{-1}(Q_0)=Q$. Surjectivity of $p$ from step 2 implies $P_0\\cap Q_0=\\varnothing$ and $P_0\\cup Q_0=X$: lift a putative point in the intersection or outside the union to contradict the partition upstairs. Each is nonempty, since an element of $P$ or $Q$ projects into it. They are complements of closed subsets, hence also open. This contradicts connectedness of $X$ as defined in [def-weil-connected-scheme]. Thus $X_L$ is connected.",
-   "uses": [
-    "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "def-pc-base-change",
     "def-weil-connected-scheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038C, lemma-tricky, descent of the invariant partition using Tag 038B, lemma-closed-fixed-by-Galois; the final contradiction."
+    "place": "Tag 038C, finite Galois case; Morphisms Tag 01S1, lemma-base-change-surjective; connectedness descends by pulling back a partition."
    }
   },
   {
-   "text": "The surjection $q:X_L\\to X_E$ from step 2 makes $X_E$ nonempty. If $X_E$ had a partition into two nonempty clopen subsets, their inverse images under the continuous map $q$ would be clopen, disjoint and covering, and each would be nonempty by surjectivity. This would contradict connectedness of $X_L$. Therefore $X_E$ is connected, using exactly the definition [def-weil-connected-scheme].",
-   "uses": [
-    "def-weil-connected-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 038C, lemma-tricky, finite Galois argument; elementary descent of connectedness along the projection from a Galois closure."
-   }
-  },
-  {
-   "text": "Since $E/k$ was arbitrary among finite separable extensions, apply [lem-weil-pbc-geometrically-connected-finite-separable-test] with $Y=X$. Every base change required by its right-hand condition is connected by step 6, so $X$ is geometrically connected over $k$.",
+   "text": "Since $E/k$ was arbitrary finite separable, apply [lem-weil-pbc-geometrically-connected-finite-separable-test] with $Y=X$. Step 5 verifies its right-hand condition; hence $X$ is geometrically connected over $k$.",
    "uses": [
     "lem-weil-pbc-geometrically-connected-finite-separable-test"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 056R, lemma-geometrically-connected-criterion, via Tag 038C, lemma-tricky, and Tag 0389, lemma-characterize-geometrically-disconnected."
+    "place": "Tag 056R, lemma-geometrically-connected-criterion, using Tag 0389, lemma-characterize-geometrically-disconnected."
    }
   }
  ],
@@ -102,18 +90,17 @@
   "lem-weil-pbc-finite-galois-receiving-separable-extensions",
   "def-pc-base-change",
   "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "lem-trf-galois-connected-image-invariant-separation",
+  "lem-trf-galois-invariant-clopen-partition-descent",
   "lem-pc-field-extension-surjective",
   "lem-weil-pbc-surjective-base-change",
-  "def-weil-connected-scheme",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-finite-galois-fixed-field",
-  "lem-weil-pbc-galois-invariant-closed-subset-descends",
   "lem-weil-pbc-geometrically-connected-finite-separable-test"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 056R (lemma-geometrically-connected-criterion), 038C (lemma-tricky), 038B (lemma-closed-fixed-by-Galois), and 0389 (lemma-characterize-geometrically-disconnected): the source Galois-intersection argument written in the finite Galois case, then the existing finite separable test."
+  "place": "Tags 056R and 038C, finite Galois case, followed by the finite separable test of Tag 0389. Lean assembly uses the existing invariant-separation and clopen-partition-descent declarations; the final projection is baseChangeMap and its cartesian square is isPullback_baseChangeMap."
  },
  "mathlib_searches": [
   {
@@ -213,21 +200,28 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-geometrically-connected-image-criterion",
   "worker": "stage1",
-  "summary": "Verified Tag 056R and expanded its reference to 038C. Reused the finite separable test, finite Galois closure, finite Galois automorphism group and invariant closed-set descent. The proof writes the invariant finite intersection, both nonemptiness arguments, the descended partition, and connectedness descent explicitly. No new nodes or changed hypotheses.",
-  "blueprint": "The inherited ancestry points to lem-trf-local-term-locality through the alteration/component chain; this item realizes the connected-point criterion used in lem-trf-connected-point-geometrically-connected (Tag 04KV), specifically its application of Tag 056R. The existing from.place is retained. No change to unit sk-i-curve-zero or its realization.",
+  "summary": "Repair of the 3743-character proof return: extracted two independent, statement-only tasks of comparable size. The first constructs a nonempty Galois-invariant separation using the connected image and finite orbit intersection (former steps 3--4). The second descends the invariant partition, including projection surjectivity and the point-lifting checks (former step 2 in part and step 5). The parent retains the Galois-closure reduction, connected-source and target nonemptiness, final contradiction, descent along L/E, and finite-separable test. Every former argument is retained verbatim in report.md with assignment to the new nodes. No statement change. Revalidated after the side-completion promotion refusal against the current live DAG: the original live item is unchanged, all twelve citation quotes still match current statements verbatim, both extracted node ids remain fresh, and the released re-split order remains applicable. The delivery is rebuilt on current origin/sheaf-dag; report.md records this return and the renewed source/dependency review. Renewed the audit for the 12:30 UTC return of branch head 7be7c4d0640: first dry run passed at c21392b283a; reread all current citation and notion statements and confirmed the unchanged original-node snapshot. Corrected two invalid-query verdicts in the retained search records without changing their logged tool/query/results. Expanded the duplicate comparisons for the current same-tag nodes.",
+  "blueprint": "The inherited ancestry points to lem-trf-local-term-locality through the alteration/component chain; this item realizes the connected-point criterion used in lem-trf-connected-point-geometrically-connected (Tag 04KV), specifically its application of Tag 056R. The existing from.place is retained. No change to unit sk-i-curve-zero or its realization. Repair extracts the invariant-intersection and invariant-partition-descent arguments while retaining the same finite-Galois route; both new nodes inherit this item in blueprint.from.via.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
     "why": "Generic field-theory normal-closure tool for one finite separable extension; the local-term unit has no such field lemma."
-   },
-   {
-    "node": "lem-weil-pbc-galois-invariant-closed-subset-descends",
-    "why": "Generic Galois closed-set descent (Tag 038B) explicitly used by the item source Tag 038C; no node of the local-term unit supplies it."
    },
    {
     "node": "lem-weil-pbc-geometrically-connected-finite-separable-test",
@@ -241,12 +235,12 @@
   "lem-weil-pbc-geometrically-connected-finite-separable-test"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q96-10190f145",
-  "group": "Q96",
+  "reviewer": "NT-cc-Q92-6730b722a",
+  "group": "Q92",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-10190f145 (reviewer sub-agent of L); spot-checked: Read the item, cited nodes, blueprint route, unit, and cited Stacks sources. All seven proof steps are valid with the stated hypotheses; finite Galois reduction, base-change projections, invariant clopen descent, and finite-separable testing are correctly applied. Edge cases and non-quasi-compact, non-surjective, nonreduced, imperfect-characteristic cases checked. No new nodes, duplicates, circularity, route-pivot violations, hidden long steps, or missing hypotheses found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-6730b722a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks varieties.tex 038B/0389/038C/056R (lines 898-1080) in full. The item statement equals 056R and is unchanged. Re-split mapping against the base proof (7 steps, 3743 chars): base steps 3-4 (equivariance, image in A, finite intersection over Aut(L/k) and reindexing) become lem-trf-galois-connected-image-invariant-separation. Base step 5 (038B applied twice, point lifting along surjective p, nonemptiness, clopenness) plus the p-surjectivity part of base step 2 become lem-trf-galois-invariant-clopen-partition-descent. Base steps 1, 6 and 7 are kept as parent steps 1, 5 and 6. Nothing was dropped or summarised, and the parent is a 2067-char six-step assembly. Both new statements are true and neither restates a clause of the item (node 1 has no connectedness of X; node 2 has no T and no connectedness). Small cases checked: L=k; R⊂C with X=Spec C, which correctly admits no source T; X = Spec R ⊔ Spec R, which descends; empty X and empty T_L are excluded. Every hypothesis matches: the finite Galois triple from the normal-closure node, the same σ_X as in the 038B node, the X_L ≅ X_E ×_E Spec L clause of def-pc-base-change, and the hypothesis-free surjective base change. No duplicate found among the 038A/B/C and Galois/clopen nodes. The tool_uses for the normal-closure tool and the 0389 finite-separable test are accepted. Maintainer note: the node-level tool_uses still lists lem-weil-pbc-galois-invariant-closed-subset-descends, which the parent no longer cites; harmless. No SGA source is used."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.GeometricallyConnectedImageCriterion",
@@ -265,5 +259,15 @@
   "group": "Q04",
   "result": "pass",
   "note": "Tag 056R statement and Lean signature match; dependencies and docstrings verified; no hollow definitions or route-pivot violations; scompile completed cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T235956-L-1475919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

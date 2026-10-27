@@ -82,7 +82,32 @@
   "def-sc-curves"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+     "lines": [
+      250,
+      428
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
@@ -109,5 +134,40 @@
    "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field, $C$ an integral scheme, smooth of relative\ndimension one and proper over $k$, $f\\in k(C)$\n([def-sc-function-field]) transcendental over $k$ (for $k$\nalgebraically closed: $f\\in k(C)\\setminus k$),\nand $\\pi_f:C\\to\\mathbf P^1_k$ the morphism of\n[lem-sc-rational-function-morphism]. Then $\\pi_f$ is\nfinite surjective and flat of degree $[k(C):k(f)]$.",
+  "proof": [
+   {
+    "text": "By [lem-sc-rational-function-morphism], $\\pi_f$ is defined\nwith $\\pi_f^*t=f$.",
+    "uses": [
+     "lem-sc-rational-function-morphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Surjectivity and finiteness.* The image of $\\pi_f$ is closed\n(properness) and irreducible. It is not a point: a closed point $y$ of\n$\\mathbf P^1_k$ has residue field $\\kappa(y)$ finite over $k$, and if\nthe generic point of $C$ mapped to $y$, then $f=\\pi_f^*t$ (or $1/f$, if $y=\\infty$) would lie in\nthe image of $\\kappa(y)\\to k(C)$, hence $f$ would be algebraic over $k$,\ncontrary to the hypothesis. So the image has dimension one, hence is\nall of $\\mathbf P^1_k$: $\\pi_f$ is surjective. The fibres of $\\pi_f$ are finite: the fibre over\n$y\\in\\mathbf P^1$ is a proper closed subscheme of $C$ not equal\nto $C$, hence of dimension zero and finite by\n[lem-sc-dim0-finite]. A proper morphism with finite fibres is\nfinite ([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter, i.e. proper and quasi-finite implies finite:\n*Stacks Project, Cohomology of Schemes, [Tag 02OG](https://stacks.math.columbia.edu/tag/02OG) = Lemma 30.21.1*), so\n$\\pi_f$ is finite.",
+    "uses": [
+     "lem-sc-dim0-finite",
+     "thm-pqf-finite-iff-proper-finite-fibres"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Flatness and degree.* The coherent sheaf\n$\\mathcal E:=(\\pi_f)_*\\mathcal O_C$ is a subsheaf of the constant\nsheaf $k(C)$ on $\\mathbf P^1$: the natural map\n$\\pi_{f*}\\mathcal O_C\\to j_*j^*\\pi_{f*}\\mathcal O_C=j_*(k(C))$ (for\n$j$ the generic point) is injective because $\\pi_f$ is dominant.\nHence $\\mathcal E$ is torsion-free. A coherent torsion-free sheaf\non the smooth curve $\\mathbf P^1$ is locally free: at a closed\npoint $y$, the stalk $\\mathcal E_y$ is a finitely generated\nmodule over the discrete valuation ring $\\mathcal O_{\\mathbf P^1,y}$\n([lem-sc-smooth-regular],\n[lem-sc-regular-dim1-dvr]) and is torsion-free, hence free\n(finitely generated torsion-free modules over a discrete valuation\nring are free). A finite morphism is flat if and only if its\npushforward is locally free, so $\\pi_f$ is finite flat. Its degree\nis the rank of the locally free sheaf $\\mathcal E$, which equals\n$[k(C):k(f)]$: the generic stalk of $\\mathcal E$ is the field\n$k(C)$, viewed as a $k(\\mathbf P^1)=k(t)$-vector space (and\n$k(C)$ is a finite extension of $k(t)$ by standard field theory:\na finitely generated field of transcendence degree one over $k$ is\nfinite over $k(t)$ for any transcendental $t$).",
+    "uses": [
+     "lem-sc-smooth-regular",
+     "lem-sc-regular-dim1-dvr"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

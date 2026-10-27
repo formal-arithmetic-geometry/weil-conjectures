@@ -22,159 +22,70 @@
  ],
  "proof": [
   {
-   "text": "Put $m=\\ell^n$. In the valuation-ring description of [def-weil-l-adic-coefficient-extension], $|\\ell|_E=\\ell^{-1}<1$, so $\\ell\\in\\mathfrak m_E=(\\varpi_E)$ and $mA=0$; $A$ is finite. Here is an explicit reading of the finite twist in either topology. Put $M_T=\\mathbf Z_\\ell(1)_T$. By [lem-pur-twist-sheaf-locally-free](2), $M_T\\otimes_{\\widehat{\\mathbf Z}_{\\ell,T}}(\\mathbf Z/m)_T\\cong\\mu_{m,T}$; clause (3) of the same node for $E=\\mathbf Q_\\ell$, $\\varpi_E=\\ell$ (so that $\\mathcal O_E(1)_T=M_T$ and $A_{E,n}=\\mathbf Z/m$) identifies this with $M_T\\otimes_{(\\mathbf Z_\\ell)_T}(\\mathbf Z/m)_T$, which is $M_T/mM_T$: the maps $u\\otimes\\bar a\\mapsto\\overline{au}$ and $\\bar u\\mapsto u\\otimes1$ are well defined, are inverse on pure tensors, and commute with restriction, hence give inverse maps after sheafification in [def-pur-sheaf-tensor-product]. Hence $M_T/mM_T\\cong\\mu_{m,T}$. From the tensors defining [def-coefficient-twists-detailed], associativity and $mA=0$ give\n$$A(1)_T\\cong M_T\\otimes_{\\mathbf Z_\\ell}A\\cong(M_T/mM_T)\\otimes_{\\mathbf Z/m}A\\cong\\mu_{m,T}\\otimes_{\\mathbf Z/m}A.$$\nOn the etale site use the finite Tate line and its signed tensor powers of [lem-asd-etale-finite-twist-pullback]. Choose a primitive $m$-th root $\\zeta\\in k$ by [lem-sc-primitive-root]. On every $k$-scheme $T$, $a\\mapsto\\zeta^a$ identifies $(\\mathbf Z/m)_T$ with $\\mu_{m,T}$ in both topologies: the factorization $z^m-1=\\prod_a(z-\\zeta^a)$ has pairwise unit differences, so every root on an object $V$ is uniquely one of the $\\zeta^a$ on a clopen partition of $V$. Conversely such a locally constant choice gives a root. These descriptions commute with restriction. Thus the same root identifies $A(1)_T$ with $A_T$, and its tensor powers and dual basis identify every $A(r)_T$ with $A_T$, including $r=0$ and $r<0$. These auxiliary trivializations commute with every $k$-morphism and with coefficient maps at this common annihilating level. For a map between different finite coefficient levels, choose a common power $m$ annihilating both and its primitive root; use the compatible power of that root at a smaller exponent. The exponent-transition clause of [lem-asd-etale-finite-twist-pullback] identifies these finite descriptions. They also identify the etale finite twist with its pro-etale inverse image. Only the test for invertibility uses this choice; the map being tested is always the canonical unit.",
+   "text": "By [lem-pur-finite-twist-root-trivialization], $A$ is finite with $\\ell$-power order, $\\ell^nA=0$, and a common primitive root trivializes every signed twist in both sites, compatibly with pullback, coefficient maps and site comparison. It suffices to test the canonical etale unit on the constant module $A$.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-pur-twist-sheaf-locally-free",
-    "def-coefficient-twists-detailed",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-sc-primitive-root",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-finite-twist-root-trivialization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Coefficients and final twist sentence of Reduction to a geometric fibre; explicit all-n, all-signed-twist interpretation"
+    "place": "Coefficients; finite signed twists"
    }
   },
   {
-   "text": "First compute $R\\Gamma(\\mathbf A^1_k,B)$ for every finite abelian group $B$ killed by a power of $\\ell$. For $B=\\mathbf Z/\\ell$, apply [thm-pur-kummer-affine-line](1) with $N=1$ and free coefficient module $\\mathbf Z/\\ell$; the root trivialization of step 1 identifies its twist with this constant sheaf, with its degree-zero isomorphism the constants map. The zero group has zero cohomology by the resolution definition [def-weil-pbc-sites-and-cohomology]. For any other $B$, argue by induction on its cardinality: choose $x\\ne0$ and the least $s\\geq1$ with $\\ell^s x=0$. Then $y=\\ell^{s-1}x$ has order $\\ell$, $C=\\langle y\\rangle\\cong\\mathbf Z/\\ell$, and $D=B/C$ has smaller cardinality and is still killed by the same power $\\ell^a$. The exact sequence $0\\to C\\to B\\to D\\to0$, regarded as modules over the finite ring $\\mathbf Z/\\ell^a$, remains exact for constant sheaves by [lem-constructible-constant-exact]. We use the underlying abelian sheaves: the kernel and cokernel of a module-sheaf map carry the induced module actions, so forgetting those actions preserves this short exact sequence. Apply the long exact sequence of [lem-weil-pbc-right-derived-universal-delta-functor] to global sections. The vanishing for $C$ and the induction hypothesis for $D$ give $H^q(\\mathbf A^1_k,B)=0$ for $q>0$ and a short exact sequence $0\\to H^0(C)\\to H^0(B)\\to H^0(D)\\to0$. In its comparison with $0\\to C\\to B\\to D\\to0$, the outer constants maps are isomorphisms. The middle map is injective because an element mapping to zero first maps to zero in $D$ and then comes from a zero element of $C$; it is surjective because a section can first be matched in $D$ and its remaining difference then lifted from $C$. Hence $B\\to H^0(\\mathbf A^1_k,B)$ is the constants isomorphism. The same induction proves that $|B|$ is a power of $\\ell$: $|0|=1$, $|C|=\\ell$, and $|B|=|C||D|$ by partitioning $B$ into the cosets of $C$. In particular this holds for the additive group of every $A_{E,n}$; no freeness of $A$ over a cyclic coefficient ring and no divisibility of $n$ by the ramification index has been assumed.",
-   "uses": [
-    "thm-pur-kummer-affine-line",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-constructible-constant-exact",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Degrees 0 and 1, affine-line part, and Coefficients: write out the finite-coefficient devissage"
-   }
-  },
-  {
-   "text": "Let $\\bar x$ be any geometric point of the arbitrary $k$-scheme $X$ and put $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$. The local polynomial description in [def-sbc-affine-space] makes $p$ affine: over every affine open $\\operatorname{Spec}R\\subset X$ its inverse image is $\\operatorname{Spec}R[t]$. It is therefore quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence], regardless of whether $X$ is quasi-compact, separated or Noetherian. Its strict-local base change is $\\mathbf A^1_S$. Apply [prop-weil-pbc-strict-henselization-stalk-formula] to the underlying torsion abelian sheaf $A$ to identify\n$$(Rp_*A)_{\\bar x}\\cong R\\Gamma(\\mathbf A^1_S,A).$$\nThis is the canonical restriction identification. On degree zero the stalk of the adjunction unit is the constants map $A\\to H^0(\\mathbf A^1_S,A)$: in the formula for [def-weil-pbc-direct-image] the unit restricts a locally constant section to the fibre product, and then to the strict-local limit.",
+   "text": "By [def-sbc-affine-space], over $\\operatorname{Spec}R\\subset X$ the projection is $\\operatorname{Spec}R[t]\\to\\operatorname{Spec}R$, hence affine and qcqs by [lem-weil-pbc-affine-morphism-permanence]. For each geometric point put $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$, a strictly henselian local $k$-scheme. Apply [lem-pur-strict-local-smooth-transfer] to obtain $R\\Gamma(\\mathbf A^1_k,A)\\cong R\\Gamma(\\mathbf A^1_S,A)$ by pullback preserving constants. By [lem-pur-affine-line-finite-group-devissage], the first complex is $A[0]$ via constants. Thus the constants hypothesis of [lem-pur-strict-local-constant-unit-criterion] holds at every point; that criterion proves the canonical unit for $A$ invertible in the fixed-ring module category.",
    "uses": [
     "def-sbc-affine-space",
     "lem-weil-pbc-affine-morphism-permanence",
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "def-weil-pbc-direct-image"
+    "lem-pur-strict-local-smooth-transfer",
+    "lem-pur-affine-line-finite-group-devissage",
+    "lem-pur-strict-local-constant-unit-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Reduction to a geometric fibre: strict-henselization stalk formula; Stacks Tag 03Q9, theorem-higher-direct-images"
+    "place": "Reduction to a geometric fibre and Degrees 0 and 1"
    }
   },
   {
-   "text": "Write $f:\\mathbf A^1_k\\to\\operatorname{Spec}k$, $g:S\\to\\operatorname{Spec}k$, $h:\\mathbf A^1_S\\to\\mathbf A^1_k$ and $e:\\mathbf A^1_S\\to S$. The square $fh=ge$ is Cartesian. Here $f$ is smooth by [sbc-lem-affine-space-smooth]; $g$ is affine (source and target are affine), hence qcqs by [lem-weil-pbc-affine-morphism-permanence]. The finite additive group of $A$ has invertible order: it is killed by $\\ell^n$, so its order is a power of $\\ell$, whereas $\\operatorname{char}k=p\\ne\\ell$. Thus [sbc-thm-smooth-base-change] applies with its smooth side $f$ and its qcqs side $g$, and gives $f^{-1}R^qg_*A\\cong R^qh_*A$. By [sbc-lem-strict-henselian-constant-cohomology], $H^0(S,A)=A$ by constants and $H^q(S,A)=0$ for $q>0$. The natural constant-sheaf identification of [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], also for abelian sheaves by transporting their group operations, identifies $R^qg_*A$ with the constant sheaf of its sections over $\\operatorname{Spec}k$, which are its stalk at the identity geometric point. That stalk is $H^q(S,A)$ by [prop-weil-pbc-strict-henselization-stalk-formula] for the qcqs $g$: the strict henselization of the separably closed field $k$ at the identity point is $k$ itself, so the fibre product is $S$. Thus $R^qg_*A$ is the constant sheaf of the groups $H^q(S,A)$. In degree zero the base-change map [sbc-def-base-change-map] carries a constant section to that same constant section, by its counit transpose formula. Therefore the canonical unit $A_{\\mathbf A^1_k}\\to Rh_*A$ induces an isomorphism on degree zero, and its target has zero positive cohomology sheaves; negative cohomology is zero for a sheaf's right derived direct image. The cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] makes this unit invertible. Applying derived sections and the etale composition formula (5) of [lem-weil-derived-direct-image-composition] gives\n$$h^*:R\\Gamma(\\mathbf A^1_k,A)\\xrightarrow{\\sim}R\\Gamma(\\mathbf A^1_S,A).$$\nThe map is pullback: the composition comparison is the canonical one, and on constants both paths send $a$ to the constant section $a$. Step 2 now implies that $A\\to H^0(\\mathbf A^1_S,A)$ is an isomorphism and all its higher cohomology groups vanish.",
+   "text": "Conjugate by the compatible sheaf isomorphisms of step 1. Naturality of the adjunction unit [def-weil-pbc-inverse-image] identifies the resulting map with $A(r)_X\\to Rp_*A(r)_{\\mathbf A^1_X}$, so it is invertible. Apply [lem-pur-ordinary-unit-site-sections-transport] to the qcqs $p$ and the degree-zero finite etale twist: it gives the actual pro-etale unit, both ordinary cohomology pullbacks in every degree, and equality of these maps under the canonical site comparison. The finite pro-etale coefficient object is the prescribed twist by step 1.",
    "uses": [
-    "sbc-lem-affine-space-smooth",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "sbc-thm-smooth-base-change",
-    "sbc-lem-strict-henselian-constant-cohomology",
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "sbc-def-base-change-map",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-weil-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Reduction to a geometric fibre: the square with smooth side A1_k -> Spec k; Stacks Tags 0EYU and 03QO"
-   }
-  },
-  {
-   "text": "By steps 3 and 4, at every geometric stalk the unit $A_X\\to Rp_*A_{\\mathbf A^1_X}$ is an isomorphism on degree zero and both sides have zero cohomology in every other degree. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the cohomology-sheaf maps and then [lem-weil-pbc-unbounded-derived-iso-cohomology] to conclude that it is invertible on the etale site. This also proves the assertion in the fixed-ring module derived category: the canonical, unit-compatible forgetful comparison in [lem-weil-pbc-module-abelian-derived-direct-image-comparison] identifies the underlying unit with the one just tested. Forgetting coefficients detects an isomorphism on each cohomology module sheaf (the inverse of a bijective module homomorphism is module-linear), and hence detects the required derived isomorphism. Conjugate by the sheaf trivializations of step 1. Naturality of the adjunction unit then gives precisely the same result for the canonical map $A(r)_X\\to Rp_*A(r)_{\\mathbf A^1_X}$, for every signed integer $r$.",
-   "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Reduction to a geometric fibre: conservativity of geometric stalks; coefficient and twist conclusion"
-   }
-  },
-  {
-   "text": "Transport the actual unit to the pro-etale site, with constant ring $A$ and the etale finite twist as witness. Use the notation $A_T=\\nu_T^*$, $l=p_{\\mathrm{et}}^{-1}$, $r=Rp_{\\mathrm{et},*}$, $P=Lp_{\\mathrm{proet}}^*$, $s=Rp_{\\mathrm{proet},*}$, $a:A_{\\mathbf A^1_X}l\\cong PA_X$ and $b:A_Xr\\to sA_{\\mathbf A^1_X}$ in [lem-weil-pbc-comparison-direct-image-canonical-mate]. Its hypotheses hold because $p$ is qcqs and the input $lL$, $L=A(r)_X$, is in degree zero. By that node $b$ is an isomorphism and is the transpose of $A_{\\mathbf A^1_X}(\\varepsilon^e)a^{-1}$. Transposing\n$$s(a_L)\\circ b_{lL}\\circ A_X(\\eta^e_L):A_XL\\longrightarrow sPA_XL$$\nand using naturality of $a$ gives $A_{\\mathbf A^1_X}(\\varepsilon^e_{lL}\\circ l\\eta^e_L)$ conjugated by $a_L$, hence the identity by the etale triangle identity. This composite is consequently the pro-etale unit $\\eta^p_{A_XL}$, since an adjunction transpose is a bijection. Every factor is invertible by step 5 and the cited comparison, so the pro-etale unit is invertible. Step 1 identifies its coefficient object with the specified detailed finite twist. This proves equality under comparison of the canonical unit maps, not merely existence of abstract isomorphisms of their endpoints.",
-   "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
-    "place": "Transport paragraph of lem-pur-a1-direct-image.proof.md, with named-unit verification; Stacks 099R and 0B65"
-   }
-  },
-  {
-   "text": "For the etale cohomology conclusion apply $R\\Gamma(X,-)$ to the unit proved invertible in step 5. Its target identifies canonically with $R\\Gamma(\\mathbf A^1_X,A(r))$. To see this at the resolution level, take a bounded-below injective resolution $I$ on $\\mathbf A^1_X$. By [prop-weil-pbc-inverse-image-modules-exact] the inverse image is exact and left adjoint to $p_*$; hence $p_*$ sends an injective to an injective, since lifting a morphism into $p_*I$ along a monomorphism transposes to lifting into $I$ along its inverse-image monomorphism. Thus $p_*I$ computes both $Rp_*$ and its derived sections. The section complexes agree termwise by [def-weil-pbc-direct-image], $\\Gamma(X,p_*I)=\\Gamma(\\mathbf A^1_X,I)$. The resulting map is the ordinary cohomology pullback, since the unit first pulls back sections and then maps to the resolution. It is therefore an isomorphism in every degree. For the pro-etale cohomology conclusion use the natural global comparison [lem-weil-pbc-comparison-global-cohomology] for both $X$ and $\\mathbf A^1_X$. It applies to arbitrary schemes and degree-zero etale twists with finite ring $A$. Compatibility with pullback is the all-support case $C=X$ of [lem-pur-supported-cup-functoriality]. In its commuting square the horizontal comparisons and the etale vertical pullback are isomorphisms, so the pro-etale vertical pullback is an isomorphism as well. For $q<0$ both groups are zero by the nonnegative injective resolution convention [def-weil-pbc-sites-and-cohomology].",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-comparison-global-cohomology",
-    "lem-pur-supported-cup-functoriality",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Consequences of the unit: derived sections, all degrees and canonical site comparison"
-   }
-  },
-  {
-   "text": "The isomorphisms obtained are always the canonical pullback maps, with no chosen-root factor in their definition. Fix a $k$-morphism $v:X'\\to X$. For completeness, naturality also holds for the derived units themselves. Write $w=\\mathbf A^1_v$, $p'=p_{X'}$, and $L=A(r)_X$. In the etale topology let $\\theta:p'^{-1}v^{-1}\\xrightarrow{\\sim}w^{-1}p_X^{-1}$ be the canonical inverse-image square identification and let $\\beta:v^{-1}Rp_{X,*}\\to Rp'_*w^{-1}$ be the exchange map of [sbc-def-base-change-map], applied with the sides of the projection square exchanged. Its transpose is $w^{-1}\\varepsilon_{p_X}\\circ\\theta_{Rp_{X,*}}$. Consequently the transpose of\n$$Rp'_*(\\theta_L^{-1})\\circ\\beta_{p_X^{-1}L}\\circ v^{-1}(\\eta_{p_X,L})$$\nis\n$$\\theta_L^{-1}\\circ w^{-1}(\\varepsilon_{p_X,p_X^{-1}L}\\circ p_X^{-1}\\eta_{p_X,L})\\circ\\theta_L=\\operatorname{id}.$$\nNaturality of $\\theta$ gives the displayed equality, and the triangle identity gives its final value. The composite is therefore exactly $\\eta_{p',v^{-1}L}$. Both units are invertible by step 5, so this also makes the exchange map invertible on this coefficient object. For the pro-etale etale-origin twists, [lem-weil-pbc-comparison-pullback] respects the chosen square identification. Together with the named counit-mate normalization used in step 6, it identifies the two exchange maps: their adjoint transposes are the same square identification followed by the same counit. The identical unit equation follows by the injectivity of the adjunction transpose. Thus the derived-unit isomorphisms, as well as their cohomology consequences, are natural in $X$. For a $k$-morphism $v:X'\\to X$, the square of projections satisfies $p_X\\circ\\mathbf A^1_v=v\\circ p_{X'}$. The identity-and-composition clauses of [lem-pur-supported-cup-functoriality], with full support, therefore give $(\\mathbf A^1_v)^*p_X^*=p_{X'}^*v^*$ in both topologies, and that node also identifies these operations under the canonical comparison. Naturality of the sheaf inverse-image unit [def-weil-pbc-inverse-image], and the functorial resolution definition [def-weil-pbc-sites-and-cohomology], give $p^*\\circ H^q(u)=H^q(p^{-1}u)\\circ p^*$ for every finite coefficient morphism $u$, including quotient coefficient maps; no tensor-exactness or flatness of such a map is used. The same statement on pro-etale sites follows either from the unit identity of step 6 or from the natural comparison of [lem-weil-pbc-comparison-global-cohomology]. The inverse isomorphisms inherit these commuting squares by composing with inverses. If $X$ is empty, its sheaf cohomology groups and direct-image unit have zero source and target, so that case is included.",
-   "uses": [
-    "lem-pur-supported-cup-functoriality",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-comparison-global-cohomology",
-    "sbc-def-base-change-map",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-pur-ordinary-unit-site-sections-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-    "place": "Base change on Y paragraph; coefficient naturality and comparison clause"
+    "place": "Transport and ordinary-sections consequence"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-ordinary-unit-exchange-naturality] to any base map $v:X'\\to X$ and any finite coefficient map. Its unit equation gives naturality of the derived isomorphisms, its pullback equations give naturality of their cohomology maps, and its comparison clause identifies these equations on the two sites. Both units are invertible by steps 2 and 3, so exchange is invertible on these coefficients and the inverse isomorphisms satisfy the same naturality squares. Negative degrees and the empty base are included in the cited criteria. No chosen primitive root enters the definition of these canonical maps.",
+   "uses": [
+    "lem-pur-ordinary-unit-exchange-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Base change on Y; coefficient and site naturality"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-l-adic-coefficient-extension",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-coefficient-twists-detailed",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-sc-primitive-root",
-  "def-pur-sheaf-tensor-product",
-  "thm-pur-kummer-affine-line",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-constructible-constant-exact",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-pur-finite-twist-root-trivialization",
   "def-sbc-affine-space",
   "lem-weil-pbc-affine-morphism-permanence",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "def-weil-pbc-direct-image",
-  "sbc-lem-affine-space-smooth",
-  "sbc-thm-smooth-base-change",
-  "sbc-lem-strict-henselian-constant-cohomology",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "sbc-def-base-change-map",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-derived-direct-image-composition",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-pur-supported-cup-functoriality",
+  "lem-pur-strict-local-smooth-transfer",
+  "lem-pur-affine-line-finite-group-devissage",
+  "lem-pur-strict-local-constant-unit-criterion",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-pur-ordinary-unit-site-sections-transport",
+  "lem-pur-ordinary-unit-exchange-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
-  "place": "Reduction to a geometric fibre, Coefficients, Degrees 0 and 1 (affine-line part), and Base change on Y; all-n and arbitrary-base details written out"
+  "place": "Four-step assembly of six statement-only extractions of the retained eight-step ordinary-invariance proof; full original arguments preserved in report.md."
  },
  "mathlib_searches": [
   {
@@ -382,109 +293,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-affine-line-ordinary-invariance",
   "worker": "stage1",
-  "summary": "NG audited and completed the existing eight-step split against the current main-20261015 blueprint and every cited statement. Retained the arbitrary-base, all-level and signed-twist statement, existing coefficient devissage and named-unit calculations. Replaced the uncited appeal to tensor right exactness by explicit inverse quotient maps with the sheaf tensor definition cited. No new nodes, no attachment and no Mathlib match. Refreshed actual search evidence, citation evidence and the signed self-review.",
-  "blueprint": "Realizes lem-pur-frame-independence shear paragraph via its ordinary affine-line input and unit sk-prop-a1-kummer: Reduction to a geometric fibre (steps 3-6), Coefficients and Degrees 0 and 1 affine-line part (steps 1-2), Base change on Y (step 8), and the ordinary-cohomology consequence (step 7).",
-  "tool_uses": [
-   {
-    "node": "def-weil-l-adic-coefficient-extension",
-    "why": "Only the coefficient-ring definition and finiteness are used to check invertible torsion; no unit route step is replaced."
-   },
-   {
-    "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Its finite root quotient identifies the already specified twist for arbitrary n; the Kummer unit does not itself supply this coefficient identity."
-   },
-   {
-    "node": "def-coefficient-twists-detailed",
-    "why": "The prescribed signed-twist definition is expanded, without replacing the affine-line Kummer route."
-   },
-   {
-    "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Generic finite etale Tate-line pullback, needed to type the etale-origin twist and all signed powers; no purity theorem is imported."
-   },
-   {
-    "node": "lem-sc-primitive-root",
-    "why": "Primitive roots trivialize finite twists over the fixed algebraically closed field."
-   },
-   {
-    "node": "def-weil-pbc-sites-and-cohomology",
-    "why": "The generic injective-resolution cohomology model supplies its degree conventions and functoriality."
-   },
-   {
-    "node": "lem-constructible-constant-exact",
-    "why": "Generic exactness of finite constant sheaves is used in the coefficient devissage, not an alternate affine-line theorem."
-   },
-   {
-    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
-    "why": "Generic long exact cohomology sequences supply the finite coefficient induction."
-   },
-   {
-    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
-    "why": "Generic qcqs stalk formula is the unit's explicit first reduction."
-   },
-   {
-    "node": "def-weil-pbc-direct-image",
-    "why": "Evaluation and the fixed derived functor name the actual unit and Leray section complexes."
-   },
-   {
-    "node": "sbc-lem-affine-space-smooth",
-    "why": "Checks smoothness of A1_k -> Spec k, the smooth side used in the unit's square."
-   },
-   {
-    "node": "sbc-thm-smooth-base-change",
-    "why": "This is the smooth-base-change theorem expressly required by the unit's reduction; it is applied to the smooth base-changing side."
-   },
-   {
-    "node": "sbc-lem-strict-henselian-constant-cohomology",
-    "why": "Generic strict-local constant cohomology is used in the unit's fibre reduction."
-   },
-   {
-    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "why": "Identifies the higher-image sheaves on Spec k from their groups of sections; the unit uses this point calculation."
-   },
-   {
-    "node": "sbc-def-base-change-map",
-    "why": "Its counit formula verifies that the smooth base-change isomorphism preserves the constants unit."
-   },
-   {
-    "node": "lem-weil-derived-direct-image-composition",
-    "why": "Only its ordinary etale all-schemes clause (5) transfers sections in the strict-local square."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic geometric-stalk conservativity is the unit's stated final etale reduction."
-   },
-   {
-    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-    "why": "Unit-compatible forgetting prevents any silent identification of module and abelian derived direct images."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Generic qcqs site-comparison mate transports the actual unit; it is a comparison tool, not an alternate purity route."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic exact inverse image and its adjunction justify the resolution calculation of derived sections."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-global-cohomology",
-    "why": "Generic bounded-below site comparison identifies ordinary cohomology on the two sites."
-   },
-   {
-    "node": "def-weil-pbc-inverse-image",
-    "why": "Its unit and naturality define the canonical coefficient and pullback maps."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Its chosen-square coherence identifies the ordinary etale and pro-etale exchange mates in the explicit derived-unit naturality calculation; it does not replace the Kummer fibre computation."
-   },
-   {
-    "node": "def-pur-sheaf-tensor-product",
-    "why": "The sheafified tensor construction checks the two explicit quotient maps; it supplies no alternative affine-line proof."
-   }
-  ]
+  "summary": "Q116 repair after L refused side-project-only completion: rebased the retained six-node re-split onto the current live sheaf DAG through deliver.py, re-read current cited statements and compared retained statement snapshots, checked all nine assembly citations, and preserved the unchanged statement and all eight original arguments. Six independent statement-only nodes and a four-step assembly under 3000 characters remain; the updated report documents this landing return separately from the earlier re-split order.",
+  "blueprint": "Shear paragraph of lem-pur-frame-independence, via lem-pur-supported-affine-line-homotopy: sk-prop-a1-kummer Coefficients, Reduction to a geometric fibre, Degrees 0 and 1, Transport and Base change on Y.",
+  "tool_uses": []
  },
  "tool_uses": [
   "def-weil-l-adic-coefficient-extension",
@@ -513,12 +327,12 @@
   "def-pur-sheaf-tensor-product"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NG-d17378f66",
-  "group": "NG",
+  "reviewer": "NT-cc-Q116-d12571e3a",
+  "group": "Q116",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-d17378f66 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statements of all 39 cited nodes, unit sk-prop-a1-kummer, the main-20261015 sk-prop-a1-kummer.proof.md and lem-pur-a1-direct-image.proof.md, and Stacks 0EYU and 03Q9. The delivery has no new nodes and no cycle; its only citer is the parent lem-pur-supported-affine-line-homotopy. The statement is unchanged and true. p is affine, hence qcqs, so X can be arbitrary. Step 2 handles non-free A_{E,n} by an induction on |B| that I checked. Step 4 orients smooth base change exactly as 0EYU does: f = A1_k -> Spec k is smooth and g = S -> Spec k is qcqs, and the identification of R^q g_* on Spec k is cited. I recomputed the step 6 canonical-mate transpose and the step 8 unit/exchange identity, and both are correct. Long steps 1, 2, 4 and 8 are each one argument written in full, with no hidden lemma. No existing node states the arbitrary-base result; lem-pur-a1-direct-image and prop-pur-gm-relative-kummer cover only finite-type bases. All 24 declared tool_uses are generic and accepted. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-d12571e3a (reviewer sub-agent of L); spot-checked: Read in full: the item, all six new nodes, the cited node statements (canonical-mate, comparison-pullback, global-cohomology, strict-henselization stalk formula, smooth base change, thm-pur-kummer-affine-line, affine-permanence, def-sbc-affine-space, twist-sheaf-locally-free), unit sk-prop-a1-kummer, and Stacks 03Q9 and 0EYU (labels for 03QO, 099R, 0B65 and 03PK verified). The re-split meets the 2026-10-21 order: each of the 8 old steps, kept verbatim in the report, now sits in a self-contained node (root bases, finite-group devissage, strict-local transfer, stalk criterion, site/sections transport, exchange naturality). The nodes are comparable in size, none restates the item, and the item proof is a 4-step, roughly 2.2k-character assembly. Every assembly step checks out: p is affine hence qcqs; A^1_X×_X S = A^1_S; the transfer and devissage nodes supply the criterion's constants hypothesis; the criterion gives the unit in the module category; twist conjugation follows from unit naturality; transport and naturality give the pro-etale unit, the pullbacks and the naturality. All six new statements are true: 0EYU is applied with smooth side A^1_k→Spec k and qcqs side S→Spec k; I recomputed the transport transpose and the exchange mate identity; I checked B=0 and Z/ℓ, non-free A_{E,n}, r≤0, X empty or not quasi-compact, and non-Noetherian R. No duplicates: lem-per-noetherian-affine-line-unit is Noetherian with Z/ℓ^n, and thm-pur-kummer-affine-line needs free coefficients. The later Q160 relative-kummer siblings (strict-local-invariance, exchange-generators, site-normalization) overlap single clauses but only for free coefficients (e|n); maintainer note only. No SGA, route clean, searches recorded (devissage LeanSearch honestly marked unavailable). The files are byte-identical to the earlier f088e51d review except split_report, and that review's FIX was lost. FIX (B3) re-applied: missing stmt_deps for definitions the statements cite in brackets, in root-trivialization (etale/proetale site), unit-criterion (etale site/sheaves), site-sections-transport (derived-categories, proetale-modules, inverse-image, direct-image) and exchange-naturality (coefficient-twists-detailed, asd-etale-finite-twist-pullback, inverse-image, direct-image, proetale-operations, sites-and-cohomology). Advisory: the item's top-level tool_uses still lists the 24 tool uses of the old proof.; 4 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -590,5 +404,16 @@
   "note": "Repair the existing Q124 module in place: switch the two pro-etale GlobalSections and Coherence imports to their published FiniteCoefficient counterparts, matching FixedComparisonDirectImageMate and preventing duplicate upperStarIsoLowerStarInv declarations. All declarations, signatures, definitions and docstrings are unchanged; no parallel statement or semantic change.",
   "file": "lean/Sheaf/Paper/AffineLineOrdinaryInvariance.lean"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

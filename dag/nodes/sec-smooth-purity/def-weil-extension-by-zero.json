@@ -58,7 +58,18 @@
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "pointers": [
   {
    "to": "def-weil-finite-torsion-constructibility",
@@ -106,9 +117,20 @@
   "note": "§1(B): The recorded upstream extension by zero acts on fixed-scalar ModuleCat-valued sheaves, whereas this item needs the recorded intrinsic constant-ring module category. This module composes that same upstream construction with the canonical published realization equivalences; no alternative extension-by-zero notion or arbitrary coefficient identification is introduced."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $A$ be a finite commutative ring, let $U$ and $\\overline X$ be schemes,\nand let $j:U\\hookrightarrow\\overline X$ be an open immersion\n[def-weil-scheme-morphism-properties] of schemes, and use the small pro-etale\nsites [def-weil-pbc-proetale-site]. Use the constant coefficient\nsheaf $A$. This includes the rings $A_{E,n}$ of the finite-torsion\ncoefficient construction [def-weil-finite-torsion-constructibility]. For a\nmodule sheaf $M$ on $U_{\\mathrm{proet}}$, define extension by zero by\nsheafifying the module presheaf\n\n$$\n P_M(V)=\n \\begin{cases}\n M(V\\to U),&\\text{if }V\\to\\overline X\\text{ factors through }U,\\\\\n 0,&\\text{otherwise}.\n \\end{cases}\n$$\n\nSuch a factorization is unique because $j$ is an open immersion. Restriction\nis the restriction in $M$ whenever the source factors through $U$, and is the\nzero map otherwise. This defines the functor\n\n$$\n j_!: \\Sh(U_{\\mathrm{proet}},A)\n \\longrightarrow \\Sh(\\overline X_{\\mathrm{proet}},A)\n$$\n\nby its action on sections and sheafification.",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be a Grothendieck abelian coefficient category, for instance the\nmodules over a finite commutative ring $A$; this includes the rings $A_{E,n}$ of the\nfinite-torsion coefficient construction [def-weil-finite-torsion-constructibility]. Let $U$\nand $\\overline X$ be schemes, let $j:U\\hookrightarrow\\overline X$ be an open immersion\n[def-weil-scheme-morphism-properties] of schemes, and use the small pro-etale\nsites [def-weil-pbc-proetale-site]. For an $\\mathcal A$-valued sheaf $M$ on\n$U_{\\mathrm{proet}}$, define extension by zero by sheafifying the presheaf\n\n$$\n P_M(V)=\n \\begin{cases}\n M(V\\to U),&\\text{if }V\\to\\overline X\\text{ factors through }U,\\\\\n 0,&\\text{otherwise}.\n \\end{cases}\n$$\n\nSuch a factorization is unique because $j$ is an open immersion. Restriction\nis the restriction in $M$ whenever the source factors through $U$, and is the\nzero map otherwise. This defines the functor\n\n$$\n j_!: \\Sh(U_{\\mathrm{proet}},\\mathcal A)\n \\longrightarrow \\Sh(\\overline X_{\\mathrm{proet}},\\mathcal A)\n$$\n\nby its action on sections and sheafification. Equivalently, $P_M$ is the left Kan extension of\n$M$ along the localization functor $U_{\\mathrm{proet}}\\to\\overline X_{\\mathrm{proet}}$, so $j_!$ is\nthe sheafification of that left Kan extension.",
+  "proof": [
+   {
+    "text": "An open immersion is weakly étale, so composition with $j$ is a functor\n$\\ell\\colon U_{\\mathrm{proet}}\\to\\overline X_{\\mathrm{proet}}$,\n$(T\\to U)\\mapsto(T\\to U\\to\\overline X)$, the localization functor. The left Kan extension\nalong $\\ell^{\\mathrm{op}}$ exists without further hypotheses because $j$ is a monomorphism.\nFor $V\\in\\overline X_{\\mathrm{proet}}$ the indexing category of\n$(\\operatorname{Lan}_{\\ell^{\\mathrm{op}}}M)(V)$ consists of the $T\\in U_{\\mathrm{proet}}$ with\nan $\\overline X$-map $V\\to T$. A factorization of $V\\to\\overline X$ through $U$ is unique if it\nexists, since $j$ is a monomorphism. If it exists, $(V\\to U,\\mathrm{id})$ is a terminal object\nof the indexing category, and the value is $M(V\\to U)$. Otherwise the category is empty and\nthe value is $0$. This is $P_M(V)$, compatibly with restrictions. Sheafification exists on\n$\\overline X_{\\mathrm{proet}}$ since $\\mathcal A$ is Grothendieck abelian.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

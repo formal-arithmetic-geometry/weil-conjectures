@@ -1,0 +1,214 @@
+{
+ "id": "lem-pur-diagonal-orientation-choice-independent",
+ "kind": "statement",
+ "title": "Choice independence of the normalized diagonal orientation",
+ "statement": "Fix primes $p\\ne\\ell$, $q=p^a$ with $a\\ge1$, $k=\\overline{\\mathbf F}_q$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-pur-conventions]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated finite-type $k$-morphism of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms]. Use the ordinary constant-$A$ module derived categories on the small pro-etale sites, the derived pullback and tensor, and the constructible exceptional functor $Rf^!$ [def-pur-co-smoothness]. Put $\\omega_f=Rf^!A_Y$.\nPut $W=X\\times_YX$, let $p_1:W\\to X$ be the first projection and $\\Delta:X\\hookrightarrow W$ the diagonal. Set $C_\\Delta=L\\Delta^*Rp_1^!A_X$ and let $\\alpha:C_\\Delta\\xrightarrow{\\sim}\\omega_f$ be the specified diagonal base-change comparison [lem-pur-diagonal-base-change]. Let $\\pi:N_\\Delta\\to X$ be the rank-$d$ normal bundle with zero section $z$ [def-pur-normal-bundle, lem-pur-diagonal-regular-immersion], and put $C_N=Lz^*R\\pi^!A_X$ [def-pur-section-invariant].\nFor $i=1,2$, let $\\delta_i:C_\\Delta\\xrightarrow{\\sim}C_N$ be a DNC comparison normalized to the identity on standard zero-section pairs [thm-pur-dnc-invariance], realized using any etale coordinate cover near $\\Delta$. Let $t_i:R\\pi_!A_{N_\\Delta}(d)[2d]\\to A_X$ be a vector-bundle integration realized using any trivializing cover and frames, restricting on every trivializing open to the specified Kummer-normalized affine-space trace [thm-amb-vector-bundle-purity]. Write $\\beta_i:C_N\\xrightarrow{\\sim}A_X(d)[2d]$ for the zero-section restriction of the inverse adjoint vector-bundle purity map defined by $t_i$, with the canonical finite-coefficient site comparison and twists [cor-pur-vector-bundle-purity, def-coefficient-twists-detailed]. Then the two derived morphisms\n$$\\Pi_i=\\beta_i\\circ\\delta_i\\circ\\alpha^{-1}:\\omega_f\\xrightarrow{\\sim}A_X(d)[2d]$$\nare equal and are the specified canonical orientation of [thm-pur-diagonal-dualizing-object]. Thus the diagonal/DNC construction with this fixed normalization is independent of its etale coordinates, trivializing covers and bundle frames. This includes $d=0$. No assertion of uniqueness among arbitrary isomorphisms $\\omega_f\\cong A_X(d)[2d]$ is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+  "place": "Second sentence, uniquely normalized diagonal/DNC identification; returned proof step 4."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-co-smoothness",
+  "lem-pur-diagonal-base-change",
+  "def-pur-normal-bundle",
+  "lem-pur-diagonal-regular-immersion",
+  "def-pur-section-invariant",
+  "thm-pur-dnc-invariance",
+  "thm-amb-vector-bundle-purity",
+  "cor-pur-vector-bundle-purity",
+  "def-coefficient-twists-detailed",
+  "thm-pur-diagonal-dualizing-object",
+  "def-sbc-smooth-morphisms",
+  "def-pur-diagonal-dnc-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply uniqueness in existsUnique_dncInvariance to the two normalizations; their predicate is exactly DiagonalChoiceDncNormalized. This gives equality of the actual DNC isomorphisms.",
+   "uses": [
+    "thm-pur-dnc-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing unique normalized integration-gluing theorem. By fullness of the single-degree embedding, every normalized derived trace can be written using the same normalized source identification and a sheaf map. Both resulting pairs satisfy its uniqueness predicate, so their sheaf maps and hence their derived traces agree. This uses the definition-level gluing theorem directly rather than the larger ambient vector-purity theorem.",
+   "uses": [
+    "def-amb-vector-integration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction hom equivalence is a function. Equal traces therefore have equal displayed transposes. The two gamma homs agree, so Iso.ext gives equality of gamma, and substitution gives the first asserted equality of three-factor composites.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The selected vectorBundleIntegration satisfies the same frame normalization. The uniqueness argument identifies the first trace with it. Apply the normal-model section orientation theorem to the canonical conormal vector bundle, the actual normal cone and the canonical projection- and zero-preserving model. Mapping the resulting equality by the finite site comparison and composing the fixed normal comparison identifies diagonalChoiceBeta with chartDiagonalBeta.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-pur-normal-model-section-orientation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "DNC uniqueness identifies the first delta with chartDiagonalDelta. Substitute this equality and the beta equality. The global canonical assembly theorem identifies the resulting fixed three-factor composite with diagonalDualizingObject, giving the second asserted equality.",
+   "uses": [
+    "thm-pur-dnc-invariance",
+    "lem-pur-diagonal-dnc-assembly-global"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pur-dnc-invariance",
+  "def-amb-vector-integration",
+  "lem-pur-normal-model-section-orientation",
+  "lem-pur-diagonal-dnc-assembly-global"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+  "place": "S2: DNC uniqueness, normalized trace-pair uniqueness, adjunction congruence, normal-model section normalization and globalization of the fixed assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal deformation to the normal cone smooth purity orientation is independent of etale coordinates and normal bundle frames with fixed Kummer normalization",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; StandardEtalePair.instFormallyEtaleRing; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; StandardEtalePresentation.toSubmersivePresentation Read hits: generic category/commutative-algebra/manifold results do not state this finite-coefficient pro-etale assertion. The abstract Hom naturality lemma is only one ingredient, not a one-line specialization proving the projection square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*purity|purity.*orientation|deformationToNormal",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of the smooth diagonal purity orientation normalized on standard zero section pairs implies independence of coordinates and trivializing covers",
+   "results": "Trivialization.contMDiffOn_section_iff; ContMDiffSection.ext; Bundle.contMDiff_zeroSection; Trivialization.contMDiffAt_iff; Trivialization.contMDiffOn_section_baseSet_iff; ContMDiffWithinAt.change_section_trivialization; ContMDiffSection.mk.inj; Trivialization.mk.noConfusion Read hits: generic category/commutative-algebra/manifold results do not state this finite-coefficient pro-etale assertion. The abstract Hom naturality lemma is only one ingredient, not a one-line specialization proving the projection square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*purity|purity.*orientation|deformationToNormal",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of a normalized vector bundle integration trace and deformation to the normal cone comparison implies independence of smooth dualizing orientation from choices",
+   "results": "Read the returned hits: MDifferentiableWithinAt.change_section_trivialization, ContMDiffWithinAt.change_section_trivialization, VectorBundle.mk, ContDiffBump.integral_normed_smul, Bundle.ContMDiffRiemannianMetric.mk.injEq, Bundle.ContMDiffRiemannianMetric.noConfusionType, Trivialization.mdifferentiable, Bundle.ContMDiffRiemannianMetric.mk.inj",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "Read the returned hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized deformation to the normal cone isomorphism and vector bundle integration give a smooth purity orientation independent of etale coordinates and frames",
+   "results": "Read the returned hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In etale sheaf derived categories smooth purity identifies the exceptional dualizing complex with the Tate twist using a uniquely normalized deformation comparison and integration trace",
+   "results": "Read the returned hits: Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.etaleLocus_eq_compl_support, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.smoothLocus_eq_compl_support_inter, Algebra.Etale.formallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-smooth-purity-naturality-cover",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-smooth-purity-naturality-cover",
+   "place": "Second sentence, uniquely normalized diagonal/DNC identification; returned proof step 4.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-diagonal-orientation-choice-independent",
+  "worker": "stage1",
+  "summary": "Expanded choice independence into DNC uniqueness, integration uniqueness, equality of adjoint transposes and zero-section restrictions, and equality of composites. Identified the common arrow with the canonical orientation using the existing affine-chart normalization statement and degree-zero derived-map equality test. No new nodes; statement and normalization unchanged.",
+  "blueprint": "Second sentence of prop-pur-smooth-purity-naturality-cover.proof.md: uniqueness of the normalized diagonal/DNC orientation. The final step unfolds the specified composite of thm-pur-diagonal-dualizing-object.proof.md Steps 1--2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence checks the base hypothesis of the vector-bundle integration theorem; this is not a replacement for any purity route step."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-fbf09bd73",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-fbf09bd73 (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps, no new nodes; statement and stmt_deps byte-identical to the Q90 creation), the main-20261015 naturality-cover proof (second sentence), the statement of every cited node, and the current proof of thm-pur-diagonal-dualizing-object. Step 1: thm-pur-dnc-invariance is applied to (p_1,Δ) over X. Its hypotheses hold (X and W separated finite type, Δ a closed regular section of codimension d), and its uniqueness clause gives δ1=δ2. Step 2: k is Noetherian, so X is Noetherian (01T6 leaf), and ℓ≠p. thm-amb-vector-bundle-purity states that t_π is unique; the site comparison t^pβ_π=C(t^e) with β_π invertible carries this to the pro-étale side. Step 3 (equal transposes, then inverse, Lz^*, Tate) is elementary. Step 4 is substitution. Step 6: lem-pur-degree-zero-derived-map-gluing applies, and its degree-zero hypothesis is proved first via Π[-2d]. Fault (C1/E5) in Step 5: Lj^*α=α_h was taken from 'canonical comparisons' with no node. orientation-refinement covers only affine V'⊆V, not a non-affine Y. Also, β was restricted only through the étale cor-pur-vector-bundle-purity equation. FIX rewrites Step 5. It cites lem-pur-diagonal-section-pasting (same unit; its last clause says α commutes with source/target open restriction, applied with g=1_Y). It adds the η^p=C_V(η^e) transport of lem-pur-vector-integration-site-comparison on X and on U. proof_deps is recomputed; there is no cycle. Edge cases checked: d=0, empty X, disconnected X. No duplicate: lem-pur-diagonal-orientation-compatibility is a coefficient-change statement. Batch-5: chart-normalization (via lem-trf-smooth-section-centred-coordinates) is already in the base closure. The closure is 20468 nodes with and without the item and with the fix, and the trf node is generic smooth-section coordinate geometry, so this is accepted. The tool use lem-weil-pbc-finite-type-over-noetherian (Mathlib leaf) is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalOrientationChoiceIndependent",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalOrientationChoiceIndependent",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.DiagonalChoiceDncNormalized",
+   "WeilConjectures.PurityFiniteSetting.diagonalChoiceBeta",
+   "WeilConjectures.PurityFiniteSetting.DiagonalOrientationChoiceIndependentConclusion",
+   "WeilConjectures.PurityFiniteSetting.diagonalOrientationChoiceIndependent"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalOrientationChoiceIndependent.lean",
+  "statement": "theorem diagonalOrientationChoiceIndependent (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [SmoothOfRelativeDimension d f] (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : P.DiagonalOrientationChoiceIndependentConclusion d f aY",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The conclusion quantifies two genuinely frame-normalized integration traces and their actual adjoint-transpose isomorphisms, and two normalized DNC comparisons. It compares the resulting pro-etale derived arrows and identifies their common value with the published canonical orientation. The canonical conormal model transports the normal cone, projection and zero section; no arbitrary bundle or orientation is substituted. The existing definition node def-pur-diagonal-dnc-chart-data records the published chart arrow constructions and their typing facts used by the statement. The chart-normalization theorem remains only a proof dependency (Step 5)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-adca1d97f",
+  "group": "Q26",
+  "result": "fix",
+  "note": "Re-delivery of the b287e4cfd4e3 H2 RETURN. The Lean file is byte-identical (sha256 13a3402b) and its lean.statement matches the file signature. The item now cites only the new existing:true def node def-pur-diagonal-dnc-chart-data instead of theorem lem-pur-diagonal-dnc-chart-normalization, which stays in proof_deps; compared with live, only that stmt_dep and the lean record differ. Mathematics re-read: δ1 and δ2 carry the ∃! predicate of Dnc.existsUnique_dncInvariance; t1 and t2 carry VectorIntegrationNormalization; each gamma_i is pinned to homEquiv t_i; the conclusion is Pi1 = Pi2 and Pi1 = diagonalDualizingObject.hom as derived arrows; d=0, empty X and all n>=1 are covered; no extra hypotheses. New node: check_existing on the live DiagonalDncChartNormalization is clean and the statement is verbatim chartDiagonalAlpha; all 7 chart declarations exist; the TeX matches the Lean (u_g, alpha_h composite, typing facts, r_h and e_h pinned with the pi/z equations, etale restriction hypotheses); check_new_node passes. FIX: the new node uses SheafOfModules.IsFiniteLocallyFreeOfRank, owned by def-amb-finite-locally-free-module, without citing it. fixes/def-pur-diagonal-dnc-chart-data.json adds it to stmt_deps and cites it in the statement (text edit only); check_new_node on the fixed record has no failures. Advisory: the theorem-owned plain defs Dnc.sourceComparison/sourceSection/compactifiable, Etale.tensorMateEtalePrecompLocalityIso and Etale.leftDerivedUpperStarIsoMapDerivedCategory have no definition-node owner. No Lean changed, so no compile; the worker reports clean 14.0 s and 15.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191000-L-200798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

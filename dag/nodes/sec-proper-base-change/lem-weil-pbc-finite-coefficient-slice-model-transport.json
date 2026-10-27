@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-slice-model-transport",
+ "kind": "statement",
+ "title": "Transport of a supplied constant complex through a marked slice origin",
+ "statement": "Let X be any scheme, B finite commutative, R a commutative ring sheaf on X_proet and phi:constant(B)->R an isomorphism. Use the exact fixed-scalar chart restriction F_V of [def-weil-pbc-finite-coefficient-slice-restriction]. Let K be any derived R-module object, V an etale chart, and L an etale ULift(B)-module derived object on V.left, with a supplied isomorphism comparisonUpperStar.mapDerivedCategory(L) ~= F_V.mapDerivedCategory(K). For every W->V and every algebraic B-module cochain complex P, a supplied isomorphism from the derived etale pullback of L on W.left to the etale constant realization of the universe-lifted P implies an isomorphism of the actual ringed proetale W-slice restriction of K with the actual W-slice restriction of completedAdicDerivedChange(phi)(Q(finiteModelConstantComplex(X,B,P))). Realizations are [def-weil-pbc-finite-perfect-quotient-model-data]. There is no boundedness or local constancy hypothesis on K, L or P; no origin or model existence is asserted.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Small-site and constant-scalar comparison 099R, 099Y, 09AL; naturality on complexes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the constant-scalar restriction equivalence for a locally bijective map from a constant ring presheaf to a ring sheaf, using module sheafification. Apply it on the W slice and compose with the site equivalence Over(W) ~= W.left_proet. The resulting equivalence identifies ordinary ringed restriction with finiteCoefficientSliceRestriction. Reflect exactness through this equivalence, and use the exact-functor factorization at the chosen complex representative to obtain the derived identification.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "def-weil-pbc-finite-coefficient-slice-restriction",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the upper-star composition isomorphism and the comparison/pullback square to pull the supplied origin marking from V to W. Apply derived comparison to the supplied etale constant-complex isomorphism; the constant-sheaf comparison is a natural isomorphism of functors, so it applies to the entire unbounded complex including its differentials.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-slice-restriction",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Show that constant-module sheafification followed by constant-scalar restriction is naturally isomorphic to the fixed-module constant-sheaf functor. Restriction along the isomorphism phi is an equivalence, hence so is its exact derived functor. Apply the existing canonical derived scalar adjunction pbcDerivedScalarAdjunction: its unit is invertible and its left functor is definitionally completedAdicDerivedChange. Combine the inverse unit with exact-functor factorization, the natural constant-sheaf localization isomorphism to identify the fixed-coefficient image of the completed constant model with the proetale constant complex.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two identifications with the proetale constant complex. Lift the resulting isomorphism through the fully faithful derived W-slice coordinate equivalence to obtain the isomorphism of the two actual ringed slice restrictions.",
+   "uses": [
+    "def-weil-pbc-finite-coefficient-slice-restriction",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R, 099Y, 09AL; constant-scalar sheafification and the existing canonical derived scalar adjunction (Tags 06YY, 0DVC). Explicit functorial transport by group S5, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to constant scalars identifies sheaves of modules over a constant ring sheaf on an etale chart with fixed coefficient module sheaves and transports constant complexes",
+   "results": "8 hits, including SheafOfModules.restrictScalars, forgetToSheafModuleCat, evaluation and over. No etale/proetale slice descent or normalized complex transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the scalar restriction and evaluation APIs; the project-specific slice comparisons need separate statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.restrictScalars\"",
+   "results": "10 hits: sheaf and presheaf restriction of scalars and object/map formulas.",
+   "date": "2026-10-27",
+   "verdict": "These construct scalar restriction but do not supply etale origin or the normalized derived constant-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientSliceRestriction|finiteCoefficient_slice_heart_origin|plusEtaleOrigin_of_etaleOriginHomology|finiteCoefficient_slice_model_transport",
+   "results": "0 Mathlib hits. Project rg found the proved source-library plusEtaleOrigin_of_etaleOriginHomology API; it is used directly.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match; reuse the existing project bounded-origin theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent of finite locally constant module sheaves and exact change of scalars on a localized scheme site",
+   "results": "8 hits, including Scheme.smallEtaleTopology, SheafOfModules.restrictScalars, Scheme.Etale, and unrelated condensed locally constant module APIs. No etale/proetale slice comparison or marked complex transport theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the scalar restriction and site definitions already available; the project-specific slice coherence steps remain separate statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientEtaleSliceOrigin",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Transport of a supplied constant complex through a marked slice origin; step of lem-weil-pbc-finite-coefficient-etale-slice-origin",
+   "via": [
+    "lem-weil-pbc-finite-coefficient-etale-slice-origin"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientSliceModelTransport",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSliceModelTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteCoefficient_slice_model_transport",
+  "statement": "theorem finiteCoefficient_slice_model_transport\n    (X : Scheme.{t})\n    (B : Type t) [CommRing B] [Finite B]\n    [(koszulConstantFunctor X B).PreservesZeroMorphisms]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})\n    (φ : adicConstantRing X B ⟶ R) (hφ : IsIso φ)\n    (K : DerivedCategory (SheafOfModules.{t + 1} ((sheafCompose (ProEt.topology X)\n      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R))) (V : X.Etale)\n    (L : DerivedCategory\n      (Sheaf V.left.smallEtaleTopology (ModuleCat.{t + 1} (ULift.{t + 1} B))))\n    (hL : Nonempty\n      ((comparisonUpperStar (ModuleCat.{t + 1} (ULift.{t + 1} B)) V.left).mapDerivedCategory.obj L ≅\n        (finiteCoefficientSliceRestriction X B R φ V).mapDerivedCategory.obj K))\n    (W : X.Etale) (g : W ⟶ V) (P : CochainComplex (ModuleCat.{t} B) ℤ) :\n        Nonempty\n          ((AlgebraicGeometry.Etale.upperStar\n              (ModuleCat.{t + 1} (ULift.{t + 1} B)) g.left).mapDerivedCategory.obj L ≅\n            DerivedCategory.Q.obj\n              (((constantSheaf W.left.smallEtaleTopology\n                (ModuleCat.{t + 1} (ULift.{t + 1} B))).mapHomologicalComplex (.up ℤ)).obj\n                (((ModuleCat.uliftFunctor.{t + 1, t} B ⋙\n                  ModuleCat.restrictScalars.{t + 1}\n                    (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom\n                  ).mapHomologicalComplex (.up ℤ)).obj P))) →\n        Nonempty\n          (ringedSiteDerivedRestrictionOfUniverses\n              ((sheafCompose (ProEt.topology X)\n                  (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)\n              ((toProEt X).obj W) K ≅\n            ringedSiteDerivedRestrictionOfUniverses\n              ((sheafCompose (ProEt.topology X)\n                  (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)\n              ((toProEt X).obj W) ((completedAdicDerivedChange X φ).obj\n                (DerivedCategory.Q.obj (finiteModelConstantComplex X B P))))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T084350-L-3673238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T112430-L-1583063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

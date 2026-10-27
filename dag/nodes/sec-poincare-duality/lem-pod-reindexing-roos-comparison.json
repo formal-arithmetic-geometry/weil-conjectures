@@ -1,0 +1,106 @@
+{
+ "id": "lem-pod-reindexing-roos-comparison",
+ "kind": "statement",
+ "title": "The diagonal Roos comparison of an exact equivalence",
+ "statement": "For abelian categories A and B with countable products and an additive functor F:A→B, the canonical Roos map has the first and second coordinate formulas given by the product comparison, and is natural in every strict tower. If F is an equivalence, this map is an isomorphism, on arbitrary unbounded towers. [def-pod-completion-reindex-models]",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models"
+ ],
+ "proof": [
+  {
+   "text": "use scalarRoosMap, which is uniquely specified by both cocone coordinates\nand every product projection. Its degree-i coordinate matrix is the direct sum\nof the product comparisons in degrees i and i-1. Those comparisons are invertible\nbecause an equivalence preserves products. The additive functor preserves the\nbiproduct decomposition of the source cocone, so the displayed matrix proves\ninvertibility in every degree. A chain map invertible in every degree is an\nisomorphism of complexes. No acyclicity, boundedness, or completeness is needed.",
+   "uses": [
+    "def-sf-additive-roos-map",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-additive-roos-map",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence preserves the mapping cocone Roos complex and signed shifts of countable towers",
+   "results": "Eight mappingCone.mapHomologicalComplexIso and mapCochainComplexShiftIso matches; no full normalized Roos comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use native Roos calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "Seven matches including mapBiprod and hom/inv formulas.",
+   "date": "2026-10-25",
+   "verdict": "Use degreewise biproduct preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*(equiv|shift)|unit_leftAdjointUniq_hom_app",
+   "results": "Adjunction.Unique.unit_leftAdjointUniq_hom_app and two applications. Project searches found isomorphismReductionTower, normalizedCompletedOperationModels and integralTowerInverseImageUnit_existsUnique.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the library declarations; remaining normalization is project-specific."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completion-unit-tensor",
+   "place": "Ambient comparison, proof steps 1--5 and signed shifts in step 8."
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingRoosComparison",
+  "file": "lean/Sheaf/Paper/PodReindexingRoosComparison.lean",
+  "declaration": "WeilConjectures.podReindexingRoosComparison",
+  "statement": "theorem podReindexingRoosComparison (F : A ⥤ B) [F.Additive] [F.IsEquivalence]\n    (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) : IsIso (scalarRoosMap F C)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.podReindexingRoosCoordinates",
+   "WeilConjectures.podReindexingRoosNaturality",
+   "WeilConjectures.podReindexingRoosComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

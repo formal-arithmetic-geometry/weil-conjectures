@@ -1,0 +1,329 @@
+{
+ "id": "lem-sp-ordered-tate-scalar-normalization",
+ "kind": "statement",
+ "title": "Ordered Tate right comparisons agree with canonical scalar extension",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. All schemes and morphisms are separated finite-type $k$-schemes and $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\varphi:A\\to B$ be a unital map of finite commutative rings and let $N=\\ell^n\\geq1$ annihilate both. On small ordinary etale sites use the constant-ring module derived categories [def-weil-pbc-derived-categories]. Write $\\mathcal C_{T,R}=D^b_{ctf}(T_{et},R)$ for the full subcategory of complexes with bounded constructible cohomology and finite Tor amplitude, meaning that derived tensor with every degree-zero module sheaf has cohomology in one fixed finite interval [det-sp-et-proet-adjunction-transfer]. Put $T_T=-\\otimes^L_{A_T}B_T$ [lem-pur-derived-change-of-rings], $R_T(1)=\\mu_{N,T}\\otimes_{(\\mathbf Z/N)_T}R_T$, and $R_T(d)=R_T(1)^{\\otimes d}$ for $d\\geq0$, with $R_T(0)=R_T$ [lem-asd-finite-etale-twist-line].\nFor a base $S$ let $X_0=S$, $X_{r+1}=\\mathbf A^1_{X_r}$, $u_r:X_{r+1}\\to X_r$, $p_0=1_S$, $p_{r+1}=p_ru_r$ [def-amb-affine-trace-tower]. On each line write $W_{r,R}=j_r^*q_r^*(-)(1)[2]$, for its standard open chart and projective-line projection. Let $h_r:T_{X_{r+1}}j_{r,A}^*\\xrightarrow{\\sim}j_{r,B}^*T_{P_r}$ and $a_r:T_{P_r}q_{r,A}^*(-)(1)[2]\\xrightarrow{\\sim}q_{r,B}^*T_{X_r}(-)(1)[2]$ be the canonical tensor/pullback, Tate and shift comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and put $a^{u_r}=j_{r,B}^*(a_r)\\circ h_r(q_{r,A}^*(-)(1)[2])$. Define $\\mathcal G_{0,R}=1$, $\\mathcal G_{r+1,R}=W_{r,R}\\mathcal G_{r,R}$ and comparisons $A_0=1$, $A_{r+1}=W_{r,B}(A_r)\\circ a^{u_r}\\mathcal G_{r,A}$. Let\n$$I_{d,R}:\\mathcal G_{d,R}\\xrightarrow{\\sim}G_{d,R}=p_d^*(-)(d)[2d]$$\nbe the ordered right normal form of the affine-space adjunction [lem-amb-affine-space-top-trace], using canonical pullback composition, Tate pullback and tensor reassociation [lem-asd-etale-finite-twist-pullback]. Let $a_{d,K}:T_{X_d}G_{d,A}K\\xrightarrow{\\sim}G_{d,B}T_SK$ be the direct canonical derived tensor/pullback, Tate and shift comparison. For every $d\\geq0$ and $K\\in\\mathcal C_{S,A}$ the specified maps satisfy\n$$I_{d,B,T_SK}\\circ A_d(K)=a_{d,K}\\circ T_{X_d}(I_{d,A,K}).$$\nThis is equality of the named morphisms in the derived category, including $I_{0,R}=A_0=a_0=1$, and uses the ordered Tate factors and accumulated even shift $[2d]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: Ordered Tate right comparisons agree with canonical scalar extension; retained affine-counit proof steps 4"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-derived-categories",
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-pur-derived-change-of-rings",
+  "lem-asd-finite-etale-twist-line",
+  "def-amb-affine-trace-tower",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-finite-tate-scalar-source-normalization",
+  "def-sp-ordered-affine-right-normal-form"
+ ],
+ "proof": [
+  {
+   "text": "Compute all maps on a common flat-term K-flat representative $P$ of $K$, provided by [lem-pc-kflat-resolution]. Geometric module inverse image and coefficient extension are ringed-topos pullbacks, so [lem-weil-pbc-ringed-pullback-preserves-kflat] applies to both, including the nonflat map $A\\to B$. The Tate sheaves are flat by [lem-asd-finite-etale-twist-line]; their degree-zero complexes are K-flat directly because their tensor functors are exact. Tensoring these complexes with the pulled-back $P$ stays flat-term K-flat by [lem-pur-kflat-total-tensor-model]. Shifts preserve this property by reindexing the complex and its acyclic test tensors. Thus every successive tensor, scalar extension and pullback in the displayed normal forms can be computed on these representatives. [lem-pur-derived-change-of-rings] identifies the resulting coefficient-change maps with the specified derived functors; [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies their tensor comparisons with the total-complex comparisons. This does not require a bounded resolution of $B$ or flatness of $B$ over $A$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-asd-finite-etale-twist-line",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY and 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "The coefficient identification of a single Tate line is the balanced tensor map $((t\\otimes a)\\otimes b)\\mapsto t\\otimes\\varphi(a)b$ from $(\\mu_N\\otimes_{\\mathbf Z/N}A)\\otimes_A B$ to $\\mu_N\\otimes_{\\mathbf Z/N}B$; its inverse sends $t\\otimes b$ to $(t\\otimes1)\\otimes b$. The balancing relations prove that these are inverse, including for the zero rings. Iterating the same formula gives $A_T(r)\\otimes_A B\\cong B_T(r)$: on an ordered pure tensor its output is $\\bigotimes_{i=1}^r(t_i\\otimes1)$ multiplied by $b\\prod_i\\varphi(a_i)$. At $r=0$ this is $A\\otimes_A B\\cong B$. Equality on these tensors is equality of sheaf maps by the sheaf-tensor bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal], applied successively. The root pullbacks in [lem-asd-etale-finite-twist-pullback] send each $t_i$ to its pullback and are compatible with tensor products and composition; consequently they commute with this coefficient formula term by term. This checks the coefficient-line identification without choosing any global primitive root.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, bilinear universal property and Tag 03EL (lemma-tensor-product-pullback); etale-cohomology.tex Tag 03PK for the roots"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-ringed-derived-monoidal-comparisons] for the geometric inverse images and for the identity-topos ring morphisms $A_T\\to B_T$. It gives canonical monoidal pullback compositors computed by ordinary module composition on the representatives of Step 1. The coefficient square for a geometric map commutes because the constant-section map commutes with $\\varphi$. Its two ringed-topos paths have the same composite; their canonical comparison is therefore the scalar/pullback comparison. On representatives it moves $b$ across inverse image and sends a tensor to the tensor of its inverse images, with $b$ inserted in the first factor. The coefficient and composition equations of [lem-pur-cochain-pullback-tensor-coherence] assert exactly that these comparisons commute with tensor splitting and with composition, as chain maps. In particular the comparison for $q_rj_r=u_r$ is the pasted comparison $h_r$ followed by $j_{r,B}^*(a_r)$, after the Tate identification of Step 2 and the shifts of Step 4. This identifies the named $a^{u_r}$, rather than merely producing another isomorphism with the same endpoints.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition) and 07A4; sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "Keep the canonical integer shift maps throughout. [lem-weil-pbc-total-tensor-integer-shifts] gives the shift-addition laws, the unsigned first-factor comparison, and the second-factor sign $(-1)^{np}$ on a first-factor element of degree $p$. [lem-weil-pbc-cochain-pullback-tensor-shift] says the prescribed pullback tensor comparisons commute with these very maps, for geometric pullback and scalar pullback alike. Every extracted shift here is even, so any second-factor sign is $(-1)^{2rp}=1$, and interchanging extraction of $[2r]$ and $[2]$ has sign $(-1)^{4r}=1$. Termwise inverse image and scalar extension preserve degrees, hence commute with reindexing and with these signs. We may thus combine the successive shifts by $[2r][2]=[2(r+1)]$ in both paths using precisely the canonical shift comparisons, without a residual sign.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-cochain-pullback-tensor-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor in section-sign-rules; sites-cohomology.tex Tag 07A4 for total pullback tensor comparison"
+   }
+  },
+  {
+   "text": "Unpack the specified ordered right normal form. Write $J_{r,R}:W_{r,R}G_{r,R}\\xrightarrow{\\sim}G_{r+1,R}$ for its final normalization: first identify $j_r^*q_r^*$ with $u_r^*$, move pullback through the old tensor and shift, identify $u_r^*p_r^*$ with $p_{r+1}^*$, and identify $u_r^*R_{X_r}(r)$ with $R_{X_{r+1}}(r)$ by [lem-asd-etale-finite-twist-pullback]. Append the new $R(1)$ to the old ordered $r$ factors and reassociate, then add the shifts as in Step 4. These are the canonical pullback/tensor maps of [lem-sfb-ringed-derived-monoidal-comparisons]. By the definition of $I$, $I_{r+1,R}=J_{r,R}\\circ W_{r,R}(I_{r,R})$. At zero the unit, identity-pullback and zero-shift identifications give $I_{0,R}=1$. This only spells out the chosen normalization; it makes no new choice of $I$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D and 07A4; the ordered normal-form identification specified in the item, realizing det-sp-reduction-exceptional, Charts, iterated projective-line integration"
+   }
+  },
+  {
+   "text": "For this single successor normalization, Steps 2--4 give the square\n$$J_{r,B,T_SK}\\circ W_{r,B}(a_{r,K})\\circ a^{u_r}_{G_{r,A}K}=a_{r+1,K}\\circ T_{X_{r+1}}(J_{r,A,K}).$$\nHere $a_{r,K}$ denotes the direct comparison indexed by dimension $r$. To check the square explicitly, expand $J$ as in Step 5 on a degree-$m$ element $x$ of the pulled-back $P$, ordered local root tensors $(t_i\\otimes a_i)$, and a scalar $b\\in B$. Both paths send its scalar part to $b\\prod_i\\varphi(a_i)$, pull back $x$ along $p_{r+1}$, and retain the root factors in the order $t_1,\\ldots,t_r,t_{r+1}$. Each tensor splitting and reassociation commutes with coefficient change by [lem-pur-cochain-pullback-tensor-coherence]; pullback composition uses the normalized monoidal compositors of [lem-sfb-ringed-derived-monoidal-comparisons]. The Tate pullbacks commute with this formula by Step 2. Pure tensors determine the sheaf maps by [lem-pc-sites-sheaf-tensor-bilinear-universal], and the even-shift calculation of Step 4 gives the same chain map in every degree. Localizing this equality of chain maps on the representatives of Step 1 proves the displayed equality of the specified derived morphisms. This is one tensor calculation for the final normalization, not an assumption that the full tower already commutes.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0D6D, representative tensor and composition formulas; more-algebra.tex Tag 0FNH for the signs"
+   }
+  },
+  {
+   "text": "Induct on $r$, with claim $I_{r,B}A_r=a_rT(I_{r,A})$ as natural transformations in the input. For $r=0$ both sides are the identity, by the stipulated normalizations. In the following calculation omit component subscripts but retain all functors. The recursion and the induction hypothesis give\n$$I_{r+1,B}A_{r+1}=J_{r,B}W_{r,B}(I_{r,B}A_r)a^{u_r}_{\\mathcal G_{r,A}}=J_{r,B}W_{r,B}(a_r)W_{r,B}(T(I_{r,A}))a^{u_r}_{\\mathcal G_{r,A}}.$$\nNaturality of $a^{u_r}$ at $I_{r,A}:\\mathcal G_{r,A}\\to G_{r,A}$ rewrites the last two factors as $a^{u_r}_{G_{r,A}}T(W_{r,A}(I_{r,A}))$. Apply the successor square of Step 6. The result is\n$$a_{r+1}T(J_{r,A})T(W_{r,A}(I_{r,A}))=a_{r+1}T(I_{r+1,A}),$$\nwhich is the claim at $r+1$. This proves the required equality for every $d$ and $K$; all maps were compared in the ordinary etale derived category, and evaluation on the stated $\\mathcal C_{S,A}$ inputs gives the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: iterated projective-line integration, explicit induction realizing the ordered right-comparison normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-cochain-pullback-tensor-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: iterated projective-line integration; explicit ordered normalization proof using Stacks 06YS, 0G7E, 07A4, 0D6D and 0FNH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordered tensor pullback Tate twist and even shift comparisons commute with derived finite coefficient extension over affine coordinate towers",
+   "results": "{\"t\": \"2026-10-22T05:55:14Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered tensor pullback Tate twist and even shift comparisons commute with derived finite coefficient extension over affine coordinate towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\"], \"digest\": \"bc6b77f6546682a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this ordinary-etale geometric comparison of specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension isomorphism for twisted pullback along a polynomial projection equals the pasted one dimensional twisted pullback comparisons",
+   "results": "{\"t\": \"2026-10-22T05:56:00Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical scalar extension isomorphism for twisted pullback along a polynomial projection equals the pasted one dimensional twisted pullback comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\"], \"digest\": \"a6c401503f9ebda3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this ordinary-etale geometric comparison of specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory.associator_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.associator_naturality\"], \"digest\": \"a18c4771c7d30588\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this ordinary-etale geometric comparison of specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(tate|twist).*(scalar|coefficient)|scalar.*(tate|twist)",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"grep\", \"query\": \"(tate|twist).*(scalar|coefficient)|scalar.*(tate|twist)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NoZeroSMulDivisors/Defs.lean\", \"Mathlib/Analysis/Analytic/Constructions.lean\", \"Mathlib/Algebra/Group/UniqueProds/Basic.lean\", \"Mathlib/Algebra/Order/Module/HahnEmbedding.lean\", \"Mathlib/Algebra/Group/Action/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/BaseExists.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Combinatorics/Enumerative/Pentagonal/PowerSeries.lean\"], \"digest\": \"8453a7bad6c471f1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this ordinary-etale geometric comparison of specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived coefficient extension and iterated pullback of Tate twist complexes with even shifts",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"leansearch\", \"query\": \"Coherence of derived coefficient extension and iterated pullback of Tate twist complexes with even shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.instHasShiftInt\", \"CochainComplex.shiftFunctorAdd'\", \"CochainComplex.instAdditiveIntShiftFunctor\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"CategoryTheory.Functor.commShiftMapCochainComplex\", \"CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\"], \"digest\": \"0f4550c7bbe996d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this ordinary-etale geometric comparison of specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|tateTwist|tate_twist",
+   "results": "{\"t\": \"2026-10-22T05:55:47Z\", \"tool\": \"grep\", \"query\": \"Tate|tateTwist|tate_twist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\"], \"digest\": \"4c7e813e9d775847\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this ordinary-etale geometric comparison of specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|tate_twist|TateTwist",
+   "results": "{\"t\": \"2026-10-22T06:28:07Z\", \"tool\": \"grep\", \"query\": \"tateTwist|tate_twist|TateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and associator naturality do not state the specified derived etale Tate-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension preserves composition of pullback and tensor with Tate sheaves",
+   "results": "{\"t\": \"2026-10-22T06:28:08Z\", \"tool\": \"leansearch\", \"query\": \"Derived coefficient extension preserves composition of pullback and tensor with Tate sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.Derivation.postcomp_d_apply\", \"Algebra.Extension.CotangentSpace.map_tmul\", \"PresheafOfModules.Derivation'\", \"Derivation.tensorProductTo_tmul\", \"Algebra.Extension.CotangentSpace.map_comp\"], \"digest\": \"309f1ffd291e9c48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and associator naturality do not state the specified derived etale Tate-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality",
+   "results": "{\"t\": \"2026-10-22T06:28:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory.associator_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.associator_naturality\"], \"digest\": \"a18c4771c7d30588\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and associator naturality do not state the specified derived etale Tate-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension commutes with ordered Tate twist pullback and reassociation in the derived category of etale sheaves",
+   "results": "{\"t\": \"2026-10-22T06:28:19Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical scalar extension commutes with ordered Tate twist pullback and reassociation in the derived category of etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"bd73b7ece0c58e11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and associator naturality do not state the specified derived etale Tate-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated tensor powers of roots of unity commute with derived change of coefficient rings and pullback composition",
+   "results": "{\"t\": \"2026-10-22T06:28:33Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated tensor powers of roots of unity commute with derived change of coefficient rings and pullback composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"cyclotomicCharacter.toFun_spec\", \"modularCyclotomicCharacter.comp\", \"LinearEquiv.baseChange_zpow\", \"cyclotomicCharacter.spec\", \"Algebra.TensorProduct.cancelBaseChange_symm_tmul\"], \"digest\": \"e1f78e654bcdd28e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback composition and associator naturality do not state the specified derived etale Tate-tower comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-affine-counit-scalar",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, iterated projective-line integration: Ordered Tate right comparisons agree with canonical scalar extension (retained affine-counit proof steps 4)",
+   "via": [
+    "lem-sp-affine-counit-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-ordered-tate-scalar-normalization",
+  "worker": "stage1",
+  "group": "Q70",
+  "summary": "Kept the statement and all imported metadata; supplied a seven-step representative computation and ordered induction, checking actual comparison maps, even shifts, dimension zero and arbitrary nonflat coefficient maps. Reused existing generic nodes, with no new nodes.",
+  "blueprint": "det-sp-reduction-exceptional, Charts, final sentence on the canonical coefficient isomorphism; the affine-space right normal form part of iterated projective-line integration, through lem-sp-affine-counit-scalar retained Step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat representatives on ordinary ringed sites; a generic resolution tool. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Preservation of flat-term K-flat complexes for both geometric inverse image and arbitrary scalar extension. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Closure and computation of total tensors on K-flat representatives. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Normalization and resolution independence of arbitrary derived coefficient extension. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical derived tensor comparison computed by total-complex pullback. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Bilinear universal property detects equality of sheaf tensor maps. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos tensor/compositor normalization, applied on ordinary etale sites; no replacement of the unit chart route. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "why": "Both signed shift squares for the specified tensor comparison; generic chain calculus. The unit contains no separate statement of this general tool."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Flatness of the finite etale Tate lines R_T(r) (exact tensor), used in Step 1 to make the degree-zero Tate complexes K-flat; the item's statement already takes the Tate line from this node and no node of unit sk-lem-sp-reduction states it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Canonical root pullback identifications v^{-1}A_T(a) = A_{T'}(a), compatible with tensor products and composition, used in Steps 2 and 5; the item's statement defines I through these maps and no node of unit sk-lem-sp-reduction states them."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Chain-level equations of the cochain tensor/pullback comparison with composition and with coefficient change, used in Steps 3 and 6; generic ringed-topos chain calculus that no node of unit sk-lem-sp-reduction states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-1bb85a19d",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-1bb85a19d (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and all 12 cited statements in full. The delivery creates no new nodes, so there is nothing new to check for duplicates or restated clauses. Shape: one commit; the statement and stmt_deps are unchanged; proof_deps equals the union of the step uses. The 10 Stacks tags (06YS, 0G7E, 06YY, 07A4, 0D6D, 03EK, 03EL, 03PK, 03D8, 0FNH) all exist, and there is no SGA citation. Source: the blueprint main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts lines 20-36, and unit step 2 assert the canonical isomorphism (e^*p_d^*K(d)[2d])_B ≃ e^*p_d^*(K_B)(d)[2d] without an argument. The item supplies that coherence for the parent lem-sp-affine-counit-scalar, steps 3 and 4, and stays on the projective-line chart route. Duplicate search with rg -L over the DAG: no existing node states it. The nearest are lem-sp-etale-chart-comparison-isos, lem-sp-chart-counit-scalar-transport, lem-sp-affine-line-scalar-mates and lem-sp-p1-ordered-projection-scalar-square, and each states a different equation. Mathematics: Step 1 uses flat-term K-flat representatives; preservation by geometric and scalar pullback has no flatness hypothesis; a flat Tate line in degree 0 is K-flat. Step 2: I checked the balanced formula (t⊗a)⊗b ↦ t⊗φ(a)b and its inverse; equality of the maps follows from the bilinear universal property. Step 3: both paths are the same ringed morphism (u, u^{-1}A→B), so the comparisons agree by the compositors of lem-sfb-ringed-derived-monoidal-comparisons and the chain equations of lem-pur-cochain-pullback-tensor-coherence. Step 4: the shift signs match Stacks 0FNH, (-1)^{pb}, and are all 1 for even shifts. Step 5 reads I_d as the recursion I_{r+1}=J_r W_r(I_r); I accept this reading of 'ordered normal form'. Step 6: I traced a pure-tensor generator along both paths and both give p_{r+1}^{-1}x⊗(t_1⊗1)…(t_{r+1}⊗1)·b∏φ(a_i). Step 7: the induction is correct, including the naturality of a^u at I_{r,A}. Small cases d=0, 1, 2, zero rings and nonflat Z/ℓ²→Z/ℓ all hold; the proof uses no flatness of B over A. FIX: step 6 was marked elementary but carries the main square using three nodes, so I set it to elementary=false (C2). Three off-route uses were not declared as tool uses: lem-asd-finite-etale-twist-line, lem-asd-etale-finite-twist-pullback and lem-pur-cochain-pullback-tensor-coherence. I added them to split_report.tool_uses and accept them, together with the 8 the worker declared (generic ringed-topos and chain tools). The corrected item is fixes/dag/nodes/sec-smooth-purity/lem-sp-ordered-tate-scalar-normalization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrderedTateScalarNormalization",
+  "declaration": "AlgebraicGeometry.Etale.ordered_tate_scalar_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.orderedTateScalarIso",
+   "AlgebraicGeometry.Etale.orderedAffineDirectScalarIso",
+   "AlgebraicGeometry.Etale.ordered_tate_scalar_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/OrderedTateScalarNormalization.lean",
+  "statement": "theorem ordered_tate_scalar_normalization (ell p n : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) (S : Scheme.{u}) [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] : ∃ hS : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤)), ∀ (d : ℕ) (K : DerivedCategoryModule A S) (_hK : ProEtale.AdjunctionTransfer.etaleProperty A S K), (ProEtale.reductionEtaleAffineScalarIso φ S (ell ^ n) hA hB hS d K).hom ≫ (orderedAffineRightIso B (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hB S hS d).hom.app ((scalarExtension φ S).obj K) = (scalarExtension φ (affineTraceTower S d)).map ((orderedAffineRightIso A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA S hS d).hom.app K) ≫ (orderedAffineDirectScalarIso φ (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA hB S hS d K).hom",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The equality is in the ambient ordinary etale derived category on exactly the bounded constructible finite-Tor inputs. The existential invertibility proof supplies a proof forced by the characteristic assumptions, not an additional hypothesis. All comparisons are real canonical constructions; dimension zero is normalized to the identity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bd966db1",
+  "group": "O2",
+  "result": "pass",
+  "note": "Lean byte-identical to the returned head ddc80, whose maths was already checked; I re-checked every clause, the edge cases (d=0, N=1, empty S, nonflat φ) and the universes. H13 of both returns fixed: lem-amb-affine-space-top-trace record restored byte-identical to live. New §1(A) node def-sp-ordered-affine-right-normal-form owns orderedAffineRight, orderedAffineRightIso and orderedTateProductIso as prescribed, with the §5 fields and real bodies (identity at 0); no definition node duplicates it. Both statement fields verbatim. Theorem stmt_dep lem-pur-finite-tate-scalar-source-normalization is genuine (the item uses its IsIso clause and the .choose of the unique β; β is pinned on generators, so it agrees with reductionEtaleTateMap) → PASS on the mechanical finding. Advisories: A_d helpers owned by det-sp-reduction-exceptional and affineTraceRight by def-amb-affine-trace-construction, neither cited; module docstring cites sk-prop-an instead of the node's source place. No compile (no file changed)."
+ }
+}

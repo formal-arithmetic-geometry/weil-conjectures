@@ -1,0 +1,246 @@
+{
+ "id": "lem-per-japanese-quotients-noetherian-normalization",
+ "kind": "statement",
+ "title": "Japanese proper prime quotients make finite-extension normalizations Noetherian",
+ "statement": "Let $R$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], with fraction field $K$. Suppose that $R/\\mathfrak q$ is Japanese (N-2) [def-weil-pbc-japanese-domain] for every nonzero prime ideal $\\mathfrak q\\subset R$. For every finite field extension $L/K$ [def-pc-field-extension], the integral closure $T$ of $R$ in $L$ [def-weil-pbc-integral-closure] is a Noetherian ring. No separability of $L/K$ or normality of $R$ is assumed.",
+ "source": {
+  "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+  "place": "Marot, Sur les anneaux universellement japonais (1975), Lemma 1.2, printed pp.104-105, with the stronger hypothesis on all nonzero primes used in Proposition 2.3, printed p.107."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-integral-closure",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a $K$-basis $x_1,\\ldots,x_d$ of $L$. Each $x_i$ satisfies a monic equation $X^{m_i}+\\sum_{j<m_i}c_{ij}X^j=0$ over $K$, since its powers are linearly dependent. Choose $0\\ne a_i\\in R$ clearing all coefficient denominators. Then $y_i=a_ix_i$ satisfies the monic equation $Y^{m_i}+\\sum_{j<m_i}a_i^{m_i-j}c_{ij}Y^j=0$ over $R$. Thus $y_i\\in T$ by [def-weil-pbc-integral-closure]. By [lem-sc-finite-generated-integral-subring], $B=R[y_1,\\ldots,y_d]\\subset T$ is a finite $R$-module, and [lem-weil-pbc-finite-algebra-noetherian] makes $B$ Noetherian. It is a domain as a subring of $L$. Its fraction field is $L$: it contains $K$ and $x_i=y_i/a_i$, hence the whole $K$-linear span of this basis.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-sc-finite-generated-integral-subring",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Lemma 1.2, printed p.104, finite subalgebra B with fraction field L; explicit scaled-basis construction. Supporting finiteness is the cited Mathlib leaf, and Noetherian permanence is Stacks Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "The ring $T$ is the integral closure of $B$ in $L$. Indeed, every element of $T$ satisfies a monic equation over $R\\subset B$. Conversely let $E$ be the integral closure of $B$ in $L$. The inclusion $B\\subset T$ makes $B$ integral over $R$, and $E$ is integral over $B$ by [def-weil-pbc-integral-closure]. Therefore [lem-weil-pbc-integral-transitive] makes every element of $E$ integral over $R$, so $E\\subset T$. Apply [lem-trf-normalization-integral-closure-krull] to the Noetherian domain $B$ with its own fraction field $L$: it gives that $T$ is a Krull domain, without presupposing that $T$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-transitive",
+    "lem-trf-normalization-integral-closure-krull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Lemma 1.2, printed p.104: A′ is the normalization of the finite subalgebra B and is a Krull domain. Integrality transitivity: Stacks Tag 00GN (lemma-integral-transitive)."
+   }
+  },
+  {
+   "text": "Let $P\\subset T$ be any height-one prime and put $q=P\\cap R$. This is a prime of $R$, and it is nonzero. To see the latter directly, choose $0\\ne z\\in P$. Among monic equations for $z$ over $R$ choose one of least positive degree $m$. Its constant coefficient $r_0$ is nonzero: otherwise cancellation of $z\\ne0$ in the field $L$ gives a monic equation of smaller degree (degree zero would say $1=0$). The equation shows $r_0=-z(z^{m-1}+r_{m-1}z^{m-2}+\\cdots+r_1)\\in P\\cap R$. Thus the hypothesis applies to $R/q$, which is Japanese.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Lemma 1.2, printed p.104, nonzero contraction; the integral equation argument is written out. The stronger all-nonzero-primes hypothesis is exactly that used in Proposition 2.3, printed p.107, so the associated-prime detour is unnecessary."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-almost-finite-residue-field-degree] with base $R$, field extension $L/K$, subring $C=T$, and prime $P$. It gives that $F=\\operatorname{Frac}(T/P)$ is finite over $k=\\operatorname{Frac}(R/q)$. By [def-weil-pbc-japanese-domain], the integral closure $U$ of $R/q$ in $F$ is finite over $R/q$. There is an injective $R/q$-linear map $T/P\\hookrightarrow U$: the domain $T/P$ embeds in its fraction field, and reduction modulo $P$ of each monic equation over $R$ shows its elements are integral over $R/q$, as defined in [def-weil-pbc-integral-closure]. The ring $R/q$ is Noetherian by [lem-weil-pbc-surjective-image-noetherian] applied to $R\\twoheadrightarrow R/q$. Consequently [lem-weil-pbc-noetherian-submodule-finite] makes $T/P$ finite over $R/q$, and [lem-weil-pbc-finite-algebra-noetherian] makes it a Noetherian ring.",
+   "uses": [
+    "lem-trf-almost-finite-residue-field-degree",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Lemma 1.1, printed p.104: finite residue fraction-field degree (Nagata 33.10) and embedding in the finite integral closure. Supporting Stacks Tags 00FN (lemma-Noetherian-permanence) and 00IK (lemma-Noetherian-basic)."
+   }
+  },
+  {
+   "text": "Step 2 proves that $T$ is Krull, and Steps 3–4 prove that $T/P$ is Noetherian for every height-one prime $P$ of $T$. Apply [lem-per-krull-height-one-quotients-noetherian] to $T$ to conclude that $T$ is a Noetherian ring. This is the asserted conclusion for the arbitrary finite extension $L/K$ fixed at the start.",
+   "uses": [
+    "lem-per-krull-height-one-quotients-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Lemma 1.2, printed p.104, height-one quotient criterion and footnote (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-sc-finite-generated-integral-subring",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-integral-transitive",
+  "lem-trf-normalization-integral-closure-krull",
+  "lem-trf-almost-finite-residue-field-degree",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-krull-height-one-quotients-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+  "place": "Explicit assembly following Marot Lemmas 1.1–1.2, printed pp.104–105, and the all-nonzero-primes application in Proposition 2.3, printed p.107. Read online; local document WANTED in report. The stronger hypothesis removes the need for the associated-prime contraction argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-japanese-quotients-noetherian-normalization: For a Noetherian domain whose nonzero prime quotients are Japanese every normalization in a finite fraction field extension is Noetherian",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsIntegralClosure.isNoetherian\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a Noetherian $ A $-module, i.e., every $ A $-submodule of $ C $ is finitely generated.\"}\n  {\"name\": \"integralClosure.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] [inst_5 : Algebra K L] [inst_6 : Algebra A L] [IsScalarTower A K L]\\n  [FiniteDimensional K L] [IsDomain A] [Algebra.IsSeparable K L] [IsIntegrallyClo\", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then the integral closure of $ A $ in any field extension $ L $ is also a Noetherian ring. This means that when $ A $ satisfies both the ascending cha\"}\n  {\"name\": \"IsIntegralClosure.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is also a Noetherian ring.\"}\n  {\"name\": \"FractionalIdeal.isNoetherian\", \"module\": \"Mathlib/RingTheory/FractionalIdeal/Operations\", \"type\": \"∀ {R₁ : Type u_3} [inst : CommRing R₁] {K : Type u_4} [inst_1 : Field K] [inst_2 : Algebra R₁ K] [IsFractionRing R₁ K]\\n  [IsDomain R₁] [IsNoetherianRing R₁] (I : FractionalIdeal (nonZeroDivisors R₁) K), IsNoetherian R₁ ↥↑I\", \"doc\": \"If $ R_1 $ is a Noetherian ring, then every fractional ideal $ I $ of $ R_1 $ in the field $ K $ is a Noetherian $ R_1 $-module. This means that when $ R_1 $ satisfies the ascending chain condition on\"}\n  {\"name\": \"IsDedekindDomainInv.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Basic\", \"type\": \"∀ {A : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A], IsDedekindDomainInv A → IsNoetherianRing A\", \"doc\": \"If a commutative ring $ A $ has the property that every non-zero fractional ideal is invertible, then $ A $ is a Noetherian ring (i.e., every ideal of $ A $ is finitely generated).\"}\n  {\"name\": \"IsIntegralClosure.finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a finitely generated $ A $-module.\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsNoetherianRing R]\\n  [IsDomain R] [IsFractionRing R S], completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"∀ (Fq : Type u_1) (F : Type u_2) [inst : Field Fq] [inst_1 : Field F] [inst_2 : Algebra (Polynomial Fq) F]\\n  [inst_3 : Algebra (RatFunc Fq) F] [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] [FunctionField Fq F]\\n  [Algebra.IsSeparable (RatFunc Fq) F], IsNoetherian (Polynomial Fq) ↥(FunctionField.ring\", \"doc\": \"If $ F $ is a function field that is a separable extension of the rational function field $ \\\\text{RatFunc}(\\\\mathbb{F}_q) $, then the ring of integers of $ F $ (defined as the integral closure of $ \\\\ma\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean lines 53-60, 91-92, 147-177; IsIntegralClosure.finite and isNoetherianRing require IsIntegrallyClosed of the base and Algebra.IsSeparable K L, neither assumed here. Other hits concern finite modules or almost integral elements, not this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"IsNoetherianRing\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"integralClosure.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \" {A : Type u_1} {K : Type u_2} [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u_3) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [FiniteDimensional K L] [IsDomain A] [Algebra.IsSeparable K L] [IsIntegrallyClosed A] [IsNoetherianRing A] : IsNoetherianRing ↥(integral\", \"doc\": \"If `L` is a finite separable extension of `K = Frac(A)`, where `A` is\\nintegrally closed and Noetherian, the integral closure of `A` in `L` is\\nNoetherian.\"}\n  {\"name\": \"IsIntegralClosure.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \" (A : Type u_1) (K : Type u_2) [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u_3) [Field L] (C : Type u_4) [CommRing C] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [FiniteDimensional K L] [IsDomai\", \"doc\": \"If `L` is a finite separable extension of `K = Frac(A)`, where `A` is\\nintegrally closed and Noetherian, the integral closure `C` of `A` in `L` is\\nNoetherian.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean lines 53-60, 91-92, 147-177; IsIntegralClosure.finite and isNoetherianRing require IsIntegrallyClosed of the base and Algebra.IsSeparable K L, neither assumed here. Other hits concern finite modules or almost integral elements, not this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/FunctionField.lean\", \"line\": \"134\", \"text\": \"  IsIntegralClosure.isNoetherian _ F⟮X⟯ K _\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"line\": \"301\", \"text\": \"  IsIntegralClosure.isNoetherian _ ℚ K _\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"line\": \"372\", \"text\": \"  IsIntegralClosure.isNoetherian (𝓞 K) K L (𝓞 L)\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"152\", \"text\": \"theorem IsIntegralClosure.isNoetherian [IsIntegrallyClosed A] [IsNoetherianRing A] :\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"168\", \"text\": \"theorem IsIntegralClosure.isNoetherianRing [IsIntegrallyClosed A] [IsNoetherianRing A] :\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"170\", \"text\": \"  isNoetherianRing_iff.mpr <| isNoetherian_of_tower A (IsIntegralClosure.isNoetherian A K L C)\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"175\", \"text\": \"theorem IsIntegralClosure.finite [IsIntegrallyClosed A] [IsNoetherianRing A] :\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"line\": \"177\", \"text\": \"  have := IsIntegralClosure.isNoetherian A K L C\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"line\": \"119\", \"text\": \"  extends IsNoetherian A A, DimensionLEOne A, IsIntegralClosure A A (FractionRing A)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean lines 53-60, 91-92, 147-177; IsIntegralClosure.finite and isNoetherianRing require IsIntegrallyClosed of the base and Algebra.IsSeparable K L, neither assumed here. Other hits concern finite modules or almost integral elements, not this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-japanese-quotients-noetherian-normalization: Japanese proper prime quotients imply Noetherian integral closure in finite field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsIntegralClosure.isNoetherian\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \"[IsIntegrallyClosed A] [IsNoetherianRing A] : IsNoetherian A C\", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a Noetherian $ A $-module, i.e., every $ A $-submodule of $ C $ is finitely generated.\"}\n  {\"name\": \"IsIntegralClosure.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \"[IsIntegrallyClosed A] [IsNoetherianRing A] : IsNoetherianRing C\", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is also a Noetherian ring.\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral\", \"type\": \"[IsNoetherianRing R] [IsDomain R] [IsFractionRing R S] : completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"Ring.instIsIntegrallyClosedNormalClosure\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": IsIntegrallyClosed T\", \"doc\": \"The integral closure $ T $ of a commutative ring $ S $ in a field $ E $ is integrally closed. That is, every element of $ E $ that is integral over $ T $ is already contained in $ T $.\"}\n  {\"name\": \"integralClosure.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \"[IsIntegrallyClosed A] [IsNoetherianRing A] : IsNoetherianRing (integralClosure A L)\", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then the integral closure of $ A $ in any field extension $ L $ is also a Noetherian ring. This means that when $ A $ satisfies both the ascending cha\"}\n  {\"name\": \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"module\": \"Mathlib.NumberTheory.FunctionField\", \"type\": \"[Algebra.IsSeparable (RatFunc Fq) F] : IsNoetherian Fq[X] (ringOfIntegers Fq F)\", \"doc\": \"If $ F $ is a function field that is a separable extension of the rational function field $ \\\\text{RatFunc}(\\\\mathbb{F}_q) $, then the ring of integers of $ F $ (defined as the integral closure of $ \\\\ma\"}\n  {\"name\": \"instIsIntegralQuotientIdeal\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"{I : Ideal A} [Algebra.IsIntegral R A] : Algebra.IsIntegral R (A ⧸ I)\", \"doc\": \"If $ A $ is an $ R $-algebra where every element is integral over $ R $, then the quotient ring $ A/I $ by any ideal $ I $ also has the property that every element is integral over $ R $.\"}\n  {\"name\": \"Ring.instFiniteNormalClosure_1\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": Module.Finite R T\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $, consisting of all elements of $ E $ integral over $ S $, is equipped with a canonical $ S $-algebra structure. This means the subalge\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean lines 53-60, 91-92, 147-177; IsIntegralClosure.finite and isNoetherianRing require IsIntegrallyClosed of the base and Algebra.IsSeparable K L, neither assumed here. Other hits concern finite modules or almost integral elements, not this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-japanese-quotients-noetherian-normalization: Marot criterion integral closure Noetherian if proper domain quotients are N2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsIntegralClosure.isNoetherian\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a Noetherian $ A $-module, i.e., every $ A $-submodule of $ C $ is finitely generated.\"}\n  {\"name\": \"IsIntegralClosure.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is also a Noetherian ring.\"}\n  {\"name\": \"integralClosure.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] [inst_5 : Algebra K L] [inst_6 : Algebra A L] [IsScalarTower A K L]\\n  [FiniteDimensional K L] [IsDomain A] [Algebra.IsSeparable K L] [IsIntegrallyClo\", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then the integral closure of $ A $ in any field extension $ L $ is also a Noetherian ring. This means that when $ A $ satisfies both the ascending cha\"}\n  {\"name\": \"isIntegral_of_noetherian\", \"module\": \"Mathlib/RingTheory/IntegralClosure/Algebra/Basic\", \"type\": \"∀ {R : Type u_1} {B : Type u_3} [inst : CommRing R] [inst_1 : Ring B] [inst_2 : Algebra R B],\\n  IsNoetherian R B → ∀ (x : B), IsIntegral R x\", \"doc\": \"If $ B $ is a Noetherian $ R $-module, then every element $ x \\\\in B $ is integral over $ R $.\"}\n  {\"name\": \"IsIntegralClosure.finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is an integrally closed Noetherian ring, then its integral closure $ C $ in an extension ring is a finitely generated $ A $-module.\"}\n  {\"name\": \"IsDedekindDomainInv.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Basic\", \"type\": \"∀ {A : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A], IsDedekindDomainInv A → IsNoetherianRing A\", \"doc\": \"If a commutative ring $ A $ has the property that every non-zero fractional ideal is invertible, then $ A $ is a Noetherian ring (i.e., every ideal of $ A $ is finitely generated).\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsNoetherianRing R]\\n  [IsDomain R] [IsFractionRing R S], completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"isDedekindRing_iff\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Basic\", \"type\": \"∀ (A : Type u_2) [inst : CommRing A] (K : Type u_4) [inst_1 : CommRing K] [inst_2 : Algebra A K] [IsFractionRing A K],\\n  IsDedekindRing A ↔\\n    IsNoetherianRing A ∧ Ring.DimensionLEOne A ∧ ∀ {x : K}, IsIntegral A x → ∃ y, (algebraMap A K) y = x\", \"doc\": \"A commutative ring $ A $ is a Dedekind domain if and only if it is Noetherian, has Krull dimension at most one, and every element of its fraction field $ K $ that is integral over $ A $ is contained i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean lines 53-60, 91-92, 147-177; IsIntegralClosure.finite and isNoetherianRing require IsIntegrallyClosed of the base and Algebra.IsSeparable K L, neither assumed here. Other hits concern finite modules or almost integral elements, not this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure",
+   "results": "{\"t\": \"2026-10-24T07:10:47Z\", \"tool\": \"grep\", \"query\": \"integralClosure.*[Nn]oetherian|[Nn]oetherian.*integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"Mathlib/NumberTheory/FunctionField.lean\", \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\"], \"digest\": \"d7518fabdb320f75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IntegralClosure.lean:53-60,91-92,147-177 read; the normalization theorems assume IsIntegrallyClosed of the base and Algebra.IsSeparable K L. Neither is assumed here. Quotient finiteness results and finite number-field special cases do not supply the criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-japanese-quotients-noetherian-normalization: Marot Noetherian normalization Japanese proper prime quotients",
+   "results": "{\"t\": \"2026-10-24T07:10:47Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-japanese-quotients-noetherian-normalization: Marot Noetherian normalization Japanese proper prime quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientMapQuotient.isNoetherian\", \"Submodule.IsQuotientEquivQuotientPrime\", \"FractionalIdeal.isNoetherian_coeIdeal\", \"Ideal.Quotient.isNoetherianRing\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"isNoetherian_quotient\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"0812e737e1a22131\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IntegralClosure.lean:53-60,91-92,147-177 read; the normalization theorems assume IsIntegrallyClosed of the base and Algebra.IsSeparable K L. Neither is assumed here. Quotient finiteness results and finite number-field special cases do not supply the criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"IsNoetherianRing\"",
+   "results": "{\"t\": \"2026-10-24T07:10:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"IsNoetherianRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"integralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\"], \"digest\": \"b9149a8eb2c5b4e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IntegralClosure.lean:53-60,91-92,147-177 read; the normalization theorems assume IsIntegrallyClosed of the base and Algebra.IsSeparable K L. Neither is assumed here. Quotient finiteness results and finite number-field special cases do not supply the criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-japanese-quotients-noetherian-normalization: Noetherian domain with Japanese nonzero prime quotients has Noetherian integral closure in any finite fraction field extension",
+   "results": "{\"t\": \"2026-10-24T07:10:54Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-japanese-quotients-noetherian-normalization: Noetherian domain with Japanese nonzero prime quotients has Noetherian integral closure in any finite fraction field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.isNoetherian\", \"IsIntegralClosure.isNoetherianRing\", \"integralClosure.isNoetherianRing\", \"IsIntegralClosure.finite\", \"NumberField.RingOfIntegers.extension_isNoetherian\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"IsDedekindDomainInv.isNoetherianRing\"], \"digest\": \"29aaefbaf49dfc87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IntegralClosure.lean:53-60,91-92,147-177 read; the normalization theorems assume IsIntegrallyClosed of the base and Algebra.IsSeparable K L. Neither is assumed here. Quotient finiteness results and finite number-field special cases do not supply the criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-nagata-lifting",
+  "date": "2026-10-24",
+  "group": "Q153"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, and Appendix A, printed p.15: Marot’s lifting property for Nagata rings (reference [8]). Marot lifting input, Proposition 2.3: Marot, Sur les anneaux universellement japonais (1975), Lemma 1.2, printed pp.104-105, with the stronger hypothesis on all nonzero primes used in Proposition 2.3, printed p.107.",
+   "via": [
+    "lem-per-adic-nagata-lifting",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-japanese-quotients-noetherian-normalization",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including inseparable extensions and a possibly nonnormal base. Realized Marot’s height-one quotient argument using the existing birational Mori–Nagata theorem and finite residue-field-degree node. Created only Nishimura’s general Krull-domain criterion. Wrote the finite integral model, normalization identity, nonzero contraction, and Japanese quotient finiteness explicitly. Checked all citations against their statements and recorded one quote per use.",
+  "blueprint": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, and Appendix A, printed p.15: Marot’s lifting property for Nagata rings (reference [8]). Marot lifting input, Proposition 2.3: Marot, Sur les anneaux universellement japonais (1975), Lemma 1.2, printed pp.104-105, with the stronger hypothesis on all nonzero primes used in Proposition 2.3, printed p.107. This split realizes the Marot Noetherian-normalization input through finite integral models, Krull normalization, Japanese prime quotients, and the height-one Noetherianity criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normalization-integral-closure-krull",
+    "why": "Generic birational Mori–Nagata theorem applied to the finite domain B; this unit supplies no ring-theoretic normalization theorem."
+   },
+   {
+    "node": "lem-trf-almost-finite-residue-field-degree",
+    "why": "Generic finite residue-field-degree theorem for an integral subring in a finite fraction-field extension; this unit supplies no such commutative-algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-normalization-integral-closure-krull",
+  "lem-trf-almost-finite-residue-field-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-b767f04a6",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-b767f04a6 (reviewer sub-agent of L); spot-checked: I read Marot (Numdam, Bull. SMF 103, 1975), printed pp.104-106. Lemma 1.2's route matches the delivery: a finite model B, Mori-Nagata (thm 4 of [5]), reduction to height-one quotients, then Lemma 1.1 via Nagata 33.10. Footnote (1) is exactly the new node: Nishimura's theorem that a Krull domain with Noetherian height-one quotients is Noetherian. The new node is self-contained, uses the same Krull definition as the existing trf Krull nodes, has no proof, and checks out on a field, Z and k[x1,x2,...] (hypothesis fails there). It is strictly more general than the item, so not a restatement, and the DAG and Mathlib have no duplicate. Step checks: (1) the scaled-basis monic equations are correct; B is finite and Noetherian with Frac B = L, and no separability is used. (2) T is the integral closure of B in L by transitivity, and Mori-Nagata is applied to B in its own fraction field. (3) A least-degree monic equation gives a nonzero constant term in P∩R, so q is nonzero. (4) The residue-degree node applies to C=T with no finiteness needed, then N-2 for R/q gives U finite, T/P sits inside U, and T/P is finite and Noetherian. (5) Assembly by the new node. Every cited statement says what is used. Batch-5: lem-trf-normalization-integral-closure-krull and lem-trf-almost-finite-residue-field-degree are generic commutative algebra (Swanson-Huneke 4.10.5 and 4.8.5). Their full dependency closures contain only normalization, completion and flat-tensor trf algebra lemmas and no trace-formula or Poincare statement, so I accept them as genuinely outside both assumptions. Maintainer note: the item's only citer is lem-per-adic-nagata-lifting. With the route-pivot drop list excluded, the item is unreached from the targets; it is reached only through the dropped lem-per-gabber-absolute-equivariant-modification. It cites no dropped node, has no twin, and is generic and correct, so PASS with this note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JapaneseQuotientsNoetherianNormalization",
+  "declaration": "RingTheory.isNoetherianRing_integralClosure_of_isN2_nonzero_prime_quotients",
+  "file": "lean/Sheaf/RingTheory/JapaneseQuotientsNoetherianNormalization.lean",
+  "statement": "theorem isNoetherianRing_integralClosure_of_isN2_nonzero_prime_quotients (R : Type u) (K : Type v) (L : Type w) [CommRing R] [IsDomain R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] [Field L] [Algebra K L] [Algebra R L] [IsScalarTower R K L] [FiniteDimensional K L] (hR : ∀ (q : Ideal R) [q.IsPrime], q ≠ ⊥ → IsN2 (R ⧸ q) (FractionRing (R ⧸ q))) : IsNoetherianRing (integralClosure R L)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35764cdeb",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Clause-by-clause match: R CommRing+IsDomain+IsNoetherianRing; K IsFractionRing; hR ∀ prime q ≠ ⊥, IsN2 (R⧸q) (FractionRing (R⧸q)) (recorded IsN2, test universe = Type u of the quotient's fraction field, not weaker); L any FiniteDimensional field ext in Type w with composite IsScalarTower; conclusion IsNoetherianRing (integralClosure R L), not module-finite. No separability/normality/char assumptions; universes u v w bound; edge cases R field, L=K, inseparable, non-normal covered. lean.statement verbatim; sorry only; source+blueprint docstrings with steps 1-5; no defs/new nodes/dep modules; proof-dep imports exist in side-live, no cycle; no duplicate in Sheaf/WeilConjectures/Mathlib (Mathlib versions need IsIntegrallyClosed+separable). H11 self-reading advisory only. No fixes."
+ }
+}

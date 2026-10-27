@@ -1,0 +1,273 @@
+{
+ "id": "lem-pur-coherent-derived-pullback-tensor",
+ "kind": "statement",
+ "title": "K-flat-normalized derived coherent pullback tensor comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and schemes in a universe $u$ [def-pc-scheme]. For a scheme $W$, use its small pro-etale ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$, whose index $n\\geq0$ means $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$, with actual quotient ring maps; put $A_W=\\lim_nB_{W,n}$ and let $\\mathscr S_W$ be its category of module sheaves, equivalently strict quotient-semilinear systems [def-coef-ringed-sequence-site]. Write $e_{W,n}$ for exact evaluation, $\\operatorname{Res}_{W,n}$ for restriction along $A_W\\to B_{W,n}$ and $U_W:\\mathscr S_W\\to\\operatorname{Tow}(\\operatorname{Mod}(A_W))$ for their simultaneous exact scalar restriction. Use ordinary unbounded integer-indexed cochain and derived categories, with localization $q_W$ for $A_W$-modules, $q^s_W$ for sequence modules and $q^t_W$ for towers [def-weil-abstract-derived-category]. Use the fixed derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, with $\\mathcal L_W=R\\lim\\circ D(U_W)$, and the specified derived tensor and cochain tensor models on the sequence site [lem-coef-derived-system-evaluation-calculus]. A good integral complex is K-flat with flat terms; K-flat means that its direct-sum total tensor with every acyclic module complex is acyclic [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. All comparisons below use the actual chosen adjunctions, not arbitrary isomorphisms between their objects. No boundedness, constructibility, completeness of inputs, or invertibility of $\\ell$ on the schemes is assumed. For a scheme morphism $f:X\\to Y$, let $b_f$ on sequence sites be $(n,V)\\mapsto(n,X\\times_Y V)$. Its ring map is the actual constant-section coefficient map at every $n$; let $f^s_*:\\mathscr S_X\\to\\mathscr S_Y$ be its module direct image, $F_f:\\mathscr S_Y\\to\\mathscr S_X$ its specified left adjoint, $\\eta^f$ the unit, and $D_f=D(F_f)$ the exact induced derived inverse image [def-trf-integral-comparison-sequence-systems]. Finite module pullback $f_n^*$ is equipped with its actual adjunction unit. The direct-image/evaluation comparison is identity on sections; the fixed inverse-image/evaluation isomorphism $v_{f,n}:f_n^* e_{Y,n}\\xrightarrow{\\sim}e_{X,n}F_f$ is its inverse mate under the specified finite and sequence adjunctions. Let $z_f$ be the pure-tensor-unit-normalized cochain comparison [lem-pur-sequence-pullback-tensor-cochain], and use K-flat preservation [lem-pur-sequence-pullback-kflat]. For K-flat $P,Q$ put $\\tau_W(P,Q):q_W^s\\operatorname{Tot}_W(P,Q)\\xrightarrow{\\sim}q_W^sP\\otimes_W^Lq_W^sQ$, exactly the coherent calculus tensor model. Write $\\delta_P:D_f(q_Y^sP)\\xrightarrow{\\sim}q_X^s(F_f^cP)$ for the fixed exact-derived factorization. There exists a unique natural isomorphism\n$$\\zeta_f:D_f(-\\otimes_Y^L-)\\xrightarrow{\\sim}D_f(-)\\otimes_X^LD_f(-)$$\nsatisfying, for every pair of K-flat sequence complexes $P,Q$,\n$$(\\delta_P\\otimes_X^L\\delta_Q)\\circ\\zeta_{f,(q_Y^sP,q_Y^sQ)}\\circ D_f(\\tau_Y(P,Q))\n=\\tau_X(F_f^cP,F_f^cQ)\\circ q_X^s(z_{f,P,Q})\\circ\\delta_{\\operatorname{Tot}_Y(P,Q)}.$$\nBoth sides go from $D_f(q_Y^s\\operatorname{Tot}_Y(P,Q))$ to $q_X^s(F_f^cP)\\otimes_X^Lq_X^s(F_f^cQ)$. This is pullbackTensorSystemComparison_existsUnique, as a map of whole coherent derived systems before applying any inverse limit; there is no termwise-flatness assumption on $P,Q$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 06YU (definition-derived-tor), Tag 0941 (ringed sequence-site construction); specified comparison square on all K-flat pairs is project-specific.",
+  "lean_module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "lean_file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+  "lean_line": 414,
+  "declaration": "WeilConjectures.pullbackTensorSystemComparison_existsUnique"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-sequence-pullback-tensor-cochain",
+  "lem-pur-sequence-pullback-kflat",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved kFlatLocalization for the ringed sequence site: localization of all K-flat cochain complexes at quasi-isomorphisms gives the derived category. Its proof uses K-flat resolutions and includes complexes with arbitrary terms. Products of localization functors are localizations, so Mathlib Localization.fullyFaithfulWhiskeringLeft gives full faithfulness of precomposition with the product of K-flat localizations.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorComparisonDescent with q=qprime=Q, F the termwise pullbackTensorSequenceInverse, LF=pullbackTensorSequenceDerived, and epsilon the hom of mapDerivedCategoryFactors. Take source and target representative classes to be all K-flat complexes; pullbackTensorSequenceGood gives preservation. The two representative tensor isomorphisms are exactly systemTensorModel.comparison of the two recorded calculi, and the chain isomorphism is pullbackTensorSequenceCochain. Exactness makes every component of epsilon invertible, including the component at the total tensor. All hypotheses of the categorical theorem are therefore met.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-pur-sequence-pullback-kflat",
+    "lem-pur-sequence-pullback-tensor-cochain",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YN, 07A4 and 0941; assembly of the existing Lean declarations named in this step."
+   }
+  },
+  {
+   "text": "The conclusion of tensorComparisonDescent is the displayed existence and uniqueness equation verbatim: its representative models evaluate to pullbackTensorSystemModel on every K-flat pair. Since all K-flat complexes were used as representatives, this includes those without flat terms. The isomorphism lives on the whole sequence-site derived category before taking any limit, retaining all transitions.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YN, 07A4 and 0941; assembly of the existing Lean declarations named in this step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-pur-sequence-pullback-kflat",
+  "lem-pur-sequence-pullback-tensor-cochain",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YN, 07A4 and 0941; M3 Lean proof from the existing normalized coefficient calculus, componentwise exactness and resolving-representative descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapDerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId\"], \"digest\": \"3c19c5efb5a73fc2\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|pullback.*[Tt]ensor|tensor.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryFactors|pullback.*[Tt]ensor|tensor.*[Pp]ullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\"], \"digest\": \"5e53a5e05b3f9aad\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coherent sequence inverse image commutes with tensor uniquely by the prescribed K-flat cochain tensor comparison and localization model square",
+   "results": "{\"t\": \"2026-10-27T06:10:20Z\", \"tool\": \"leansearch\", \"query\": \"Derived coherent sequence inverse image commutes with tensor uniquely by the prescribed K-flat cochain tensor comparison and localization model square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"Module.Flat.rTensor_exact\", \"Module.Flat.lTensor_exact\", \"CategoryTheory.LocalizerMorphism.catCommSq\", \"LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm\", \"HomologicalComplex.rightUnitor'_inv_comm\", \"Module.Flat.rTensor_shortComplex_exact\", \"Algebra.tensorH1CotangentOfIsLocalization\"], \"digest\": \"2746d672b3acac96\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coherent sequence inverse image commutes with tensor uniquely by the prescribed K-flat cochain tensor comparison and localization model square",
+   "results": "{\"t\": \"2026-10-27T06:10:23Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coherent sequence inverse image commutes with tensor uniquely by the prescribed K-flat cochain tensor comparison and localization model square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\"], \"digest\": \"d7ef44858634e5b1\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor pullback comparison on unbounded coherent coefficient systems is uniquely normalized by total tensor models and exact inverse image factorization",
+   "results": "{\"t\": \"2026-10-27T06:10:28Z\", \"tool\": \"leanfinder\", \"query\": \"The derived tensor pullback comparison on unbounded coherent coefficient systems is uniquely normalized by total tensor models and exact inverse image factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"e4efc1105ed1a223\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|fullyFaithfulWhiskeringLeft",
+   "results": "{\"t\": \"2026-10-27T07:13:23Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Tt]ensor|[Tt]ensor.*pullback|fullyFaithfulWhiskeringLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\"], \"digest\": \"3a8030f087d26c44\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "{\"t\": \"2026-10-27T07:13:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.fullyFaithfulWhiskeringLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.fullyFaithfulWhiskeringLeft\"], \"digest\": \"59ab625b708f174b\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image on ringed sequence module sheaves commutes with unbounded derived tensor uniquely normalized on K-flat pairs",
+   "results": "{\"t\": \"2026-10-27T07:13:24Z\", \"tool\": \"leansearch\", \"query\": \"An exact inverse image on ringed sequence module sheaves commutes with unbounded derived tensor uniquely normalized on K-flat pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_exact\", \"Module.Flat.rTensor_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"LinearMap.tensorKerEquivOfSurjective_symm_tmul\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.instIsLeftAdjointPullback\"], \"digest\": \"720e426581870cd3\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image on ringed sequence module sheaves commutes with unbounded derived tensor, uniquely normalized on every K-flat pair by cochain tensor comparison",
+   "results": "{\"t\": \"2026-10-27T07:13:25Z\", \"tool\": \"leanfinder\", \"query\": \"An exact inverse image on ringed sequence module sheaves commutes with unbounded derived tensor, uniquely normalized on every K-flat pair by cochain tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"Module.FaithfullyFlat.rTensor_exact_iff_exact\"], \"digest\": \"20e2a4d32eb6a59a\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|RightCalculus|rightCalculus|surjective|Full",
+   "results": "{\"t\": \"2026-10-27T07:14:06Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|RightCalculus|rightCalculus|surjective|Full\", \"sub\": \"Algebra/Homology/HomotopyCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\"], \"digest\": \"192e53e137ebff70\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between derived bifunctors descend uniquely from their restrictions to resolving K-flat cochain representatives",
+   "results": "{\"t\": \"2026-10-27T07:14:09Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between derived bifunctors descend uniquely from their restrictions to resolving K-flat cochain representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.NatTrans.leftDerived\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.ProjectiveResolution.leftDerived_app_eq\", \"CategoryTheory.Functor.leftDerived_ext\"], \"digest\": \"43155106bd4f4bd5\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "{\"t\": \"2026-10-27T07:15:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_assoc\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app\"], \"digest\": \"e17e653f4cf1657b\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits supply general flat-module, exact-derived-functor or localization tools, not the fixed ringed-sequence tensor comparison with its all-K-flat normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-completed-pullback-tower-realizations",
+  "date": "2026-10-27",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
+   "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+   "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+   "line": 414,
+   "statement": "theorem pullbackTensorSystemComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃! e : (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙\n        pullbackTensorSequenceDerived l E f ≅\n      ((pullbackTensorSequenceDerived l E f).prod (pullbackTensorSequenceDerived l E f)) ⋙\n        (pullbackTensorCalculus l E X).systemClosed.tensor,\n      ∀ (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n        (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))\n          (pullbackTensorSequenceSmall Y) (coefficientSequenceTopology (ProEt.topology Y))\n          (coefficientSequenceCommRingSheaf l E Y) P)\n        (hQ : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))\n          (pullbackTensorSequenceSmall Y) (coefficientSequenceTopology (ProEt.topology Y))\n          (coefficientSequenceCommRingSheaf l E Y) Q),\n        (pullbackTensorSequenceDerived l E f).map\n          (pullbackTensorSystemModel l E Y P Q hP hQ).hom ≫\n          e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n          (pullbackTensorCalculus l E X).systemClosed.tensor.map\n            (Prod.mkHom ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P)\n              ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app Q)) =\n        (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app _ ≫\n          DerivedCategory.Q.map ((pullbackTensorSequenceCochain l E f).hom.app (P,Q)) ≫\n          (pullbackTensorSystemModel l E X _ _\n            (pullbackTensorSequenceGood l E f P hP)\n            (pullbackTensorSequenceGood l E f Q hQ)).hom",
+   "proposed_module": "Sheaf.Paper.CoherentDerivedPullbackTensor",
+   "note": "Existing local declaration ownership for the released stage-1 re-split, not a closed-proof attachment. Current module is authoritative; proposed module is a future stage-2/3 extraction only."
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-coherent-derived-pullback-tensor",
+  "worker": "stage1",
+  "summary": "NA: retained the statement verbatim. Constructed the normalized comparison on all K-flat pairs, descended from flat-term K-flat pairs by existing cochain tensor-model rigidity, and verified the equation on all K-flat pairs by two resolution maps. No new nodes. Added the definition of the already specified natural tensor model as an explicit statement dependency.",
+  "blueprint": "The latest def-weil-frobenius-coefficient-twists sentence that Frobenius actions commute with finite reduction and scalar extension is the documentary association inherited from the parent; this split supplies only the exact whole-system tensor/pullback obligation named in from.place. Steps 1-3 realize the retained resolving-localization argument, Step 4 checks all K-flat representatives, Step 5 gives uniqueness. The computed ancestry remains broken (ancestor None), as already documented; no ancestry is invented.",
+  "retained_arguments_status": "Unverified inherited argument, not an accepted proof. Kept verbatim to satisfy the repair order; further splitting must justify every non-elementary inference.",
+  "retained_arguments": [
+   {
+    "old_step": 16,
+    "step": {
+     "text": "pullbackTensorSystemComparison_existsUnique: restrict the pure-tensor cochain comparison to K-flat pairs. Exact inverse\nimage preserves these pairs. The displayed square is the localization descent\nsquare with the prescribed tensor and pullback models. The K-flat resolving\nlocalization gives existence and uniqueness, including all system transitions.",
+     "uses": [
+      "lem-coef-derived-system-evaluation-calculus",
+      "def-coef-ringed-sequence-site",
+      "def-sf-strict-roos-functor",
+      "def-weil-derived-pullback-tensor-hom",
+      "lem-weil-pbc-resolving-representative-whiskering",
+      "lem-pc-kflat-resolution"
+     ],
+     "elementary": false
+    }
+   }
+  ],
+  "blueprint_ancestry_note": "The documented blueprint.from.node=null represents the broken created.item chain. The parent’s historical from.node association and exact declaration obligation remain in from.place; parent provenance fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-cochain-tensor-model-rigidity",
+    "why": "Generic full faithfulness of restricting derived bifunctors to flat-term K-flat cochain pairs on any small ringed site; this unit has no such categorical descent statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions on a ringed site; applied to the sequence ringed site to verify the equation without adding flatness assumptions."
+   }
+  ]
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The computed created.item ancestry is broken at the parent module name; blueprint_refs.py ancestor returns None. Documentary association retained from the parent: def-weil-frobenius-coefficient-twists, The coefficient twists commute with finite reduction and scalar extension; the coherent reduction and strict tower normalizations are the data used in the completed tensor/pullback comparison. Extracted obligation: pullbackTensorSystemComparison_existsUnique.",
+   "via": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-68079a949",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-68079a949 (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery adds no new nodes. The statement is unchanged; its stmt_deps gain def-coef-ringed-tensor-hom-model, which defines the natural tensor model on K-flat pairs that the statement already uses as tau_W. The statement matches the Lean candidate pullbackTensorSystemComparison_existsUnique: same direction of zeta, same square, same delta, and K-flat inputs with no flat-terms condition. Step 1: the last clause of lem-sf-cochain-tensor-model-rigidity says restriction to flat-term K-flat pairs is fully faithful on functors into any category, and it applies to the sequence ringed site. Step 2: c = d^-1 b a^-1 has the right source and target and is natural on cochain maps of K-flat pairs. tau is natural by the tensor-model definition, z_f by the cochain node, delta by the exact-functor factorization (Mathlib leaf; F_f is exact by def-trf-integral-comparison-sequence-systems), and K-flatness of F^cP by the sequence K-flat node. Step 3 lifts c and c^-1 by fullness and gets zeta invertible by faithfulness. Step 4 handles K-flat pairs without flat terms: lem-pc-kflat-resolution gives flat-term resolutions, q inverts the quasi-isomorphisms, and comparing the two naturality squares and cancelling A(v) gives zeta = c everywhere. Step 5 gives uniqueness by faithfulness. Sources checked in Stacks sites-cohomology.tex: 06YS (l.3207), 06YU (l.3300), 07A4 (l.3684, its proof matches the route). Advisory, not changed: the inherited source cites 'Tag 0941' for the sequence-site construction, but 0941 is lemma-derived-limit-is-ok. Accepted tool_uses: the rigidity lemma and lem-pc-kflat-resolution, both generic and neither replaces a purity route. No duplicate found (lem-pur-derived-pullback-tensor-iso and the signed-representatives node state different results), no cycle, no SGA source. Edge cases checked: f = id, zero complexes, complexes in one degree, unbounded K-flat complexes without flat terms. No fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "declaration": "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
+  "statement": "theorem pullbackTensorSystemComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃! e : (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙\n        pullbackTensorSequenceDerived l E f ≅\n      ((pullbackTensorSequenceDerived l E f).prod (pullbackTensorSequenceDerived l E f)) ⋙\n        (pullbackTensorCalculus l E X).systemClosed.tensor,\n      ∀ (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n        (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))\n          (pullbackTensorSequenceSmall Y) (coefficientSequenceTopology (ProEt.topology Y))\n          (coefficientSequenceCommRingSheaf l E Y) P)\n        (hQ : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))\n          (pullbackTensorSequenceSmall Y) (coefficientSequenceTopology (ProEt.topology Y))\n          (coefficientSequenceCommRingSheaf l E Y) Q),\n        (pullbackTensorSequenceDerived l E f).map\n          (pullbackTensorSystemModel l E Y P Q hP hQ).hom ≫\n          e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n          (pullbackTensorCalculus l E X).systemClosed.tensor.map\n            (Prod.mkHom ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P)\n              ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app Q)) =\n        (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app _ ≫\n          DerivedCategory.Q.map ((pullbackTensorSequenceCochain l E f).hom.app (P,Q)) ≫\n          (pullbackTensorSystemModel l E X _ _\n            (pullbackTensorSequenceGood l E f P hP)\n            (pullbackTensorSequenceGood l E f Q hQ)).hom",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing statement at CompletedPullbackTowerRealizations.lean:414–439. Section parameters l : ℕ, Fact l.Prime, E : Type u, Field E, Algebra (Padic l) E and FiniteDimensional (Padic l) E are explicit in the source. The unique natural isomorphism satisfies exactly the specified square for every K-flat sequence pair, without flat-term hypotheses, at site object/morphism/module universes u+1/u/u+1. This is a stage-2 statement attachment; the existing theorem has a sorry proof, with no closed-proof claim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16701c7cd",
+  "group": "NH",
+  "result": "pass",
+  "note": "existing:true attachment of WeilConjectures.pullbackTensorSystemComparison_existsUnique (CompletedPullbackTowerRealizations.lean:414-439, sorry proof). Node diff vs base: only lean (was null). Statement verbatim in source. Clauses checked: section binders l/Fact prime/E finite over Q_l; Scheme.{u}, f arbitrary; universes u+1/u/u+1 with pullbackTensorSequenceSmall = essentiallySmallSelf; tensor = (coefficientDerivedSystemEvaluationCalculus).choose systemClosed.tensor (cited calc node); tau = CoefficientTensorModels.iso Q Tot -> QP⊗QQ (def-coef-ringed-tensor-hom-model); F_f = leftAdjoint of direct image along id×proEtaleBaseChange, proved equal to integralComparisonSequencePullback; D_f = mapDerivedCategory; delta = mapDerivedCategoryFactors.hom (Q⋙D_f -> mapHC⋙Q, correct direction); z_f, Good = recorded decls of cited lem-pur-sequence-pullback-tensor-cochain/-kflat. ∃! natural iso of whole bifunctors, square on all K-flat pairs without flat-term hyp, composition order matches node. No extra hypotheses; edge cases f=id, empty schemes, zero/unbounded complexes OK. Consumers use exact signature. Advisory: Core-owned thin copies (owner def-pur-completed-pullback-tower-core) uncited but equal to cited notions, and item stmt_deps cannot grow by existing nodes at stage 2; Tag 0941 miscitation inherited. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

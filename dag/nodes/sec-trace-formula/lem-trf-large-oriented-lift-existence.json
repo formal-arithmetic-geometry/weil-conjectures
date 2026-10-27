@@ -1,0 +1,202 @@
+{
+ "id": "lem-trf-large-oriented-lift-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the external-product comparison used by lem-trf-trace-specialization; existence and universal property of the oriented product on which the vanishing topos of def-trf-oriented-nearby-cycles is built; ILO XI §1.6, formula (1.a); Stacks sites.tex Tags 00X6, 03A1, 03CI",
+   "via": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of compatible geometric lifts to the large triple site",
+ "statement": "Use [def-trf-large-oriented-site-data]. Let C1,C2,D be finite-limit sites in independent universes; F,G are continuous and preserve finite limits, f,g have the stated associated-representable comparisons etaF,etaG. Suppose p1,p2 and comparisons pi1,pi2 are given and tau satisfies LargeOrientationFormula. For every Grothendieck topos E and every oriented cone (a:E→Sh(C1), b:E→Sh(C2), t:(gb)_*→(fa)_*), there exist a geometric morphism h:E→Sh(C), direct-image isomorphisms alpha:(p1h)_*≅a_* and beta:(p2h)_*≅b_*, such that paste(tau,h,alpha,beta)=t. This asserts existence only, with no uniqueness, pullback-formula assertion or construction of the projections.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI §1.6, formula (1.a); Stacks sites.tex Tags 00X6, 03A1, 03CI; Lean: lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeLiftExistence.lean"
+ },
+ "stmt_deps": [
+  "def-trf-large-oriented-site-data"
+ ],
+ "proof": [
+  {
+   "text": "Given $(\\mathcal E,a,b,t)$ as in the statement, define a functor on the triple category by $H(U\\to V\\leftarrow W)=a^{-1}(U^a)\\times_{(gb)^{-1}(V^a)}b^{-1}(W^a)$, with left structural map $a^{-1}(U^a)\\to(fa)^{-1}(V^a)\\xrightarrow{t^\\flat}(gb)^{-1}(V^a)$. On triple morphisms use the three component maps and the universal property of pullback; naturality of $t^\\flat$ gives the required commuting squares, and uniqueness in that universal property gives identities and composition. The associated-representable functors preserve finite limits by Yoneda and [lem-weil-pbc-sheafification-sets-exact], as do the inverse images by the geometric-morphism definition. Finite limits of these pullback diagrams commute with pullbacks: on any presentation of $\\mathcal E$ this is the bijection of tuples satisfying the same equations in either order, by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Thus $H$ preserves finite limits.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.6, formula (1.a)"
+   }
+  },
+  {
+   "text": "Check covers before extending $H$. A type-(a) family maps to the pullback of the jointly epimorphic family $a^{-1}(U_i^a)\\to a^{-1}(U^a)$; type (b) gives the pullback of $b^{-1}(W_i^a)\\to b^{-1}(W^a)$. The original sheafified covering families are jointly epimorphic: maps from their target into any sheaf are determined by restriction, by the sheaf axiom and Yoneda. Inverse images preserve them because they preserve coproducts and coequalizers as left adjoints and epimorphisms are coequalizers of their kernel pairs [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer]. Joint epimorphy is stable under pullback by the local-surjectivity criterion [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]: locally lift the section of the target and retain its given component in the other factor. For type (c), $b^{-1}(W'^a)=b^{-1}(W^a)\\times_{(gb)^{-1}(V^a)}(gb)^{-1}(V'^a)$. Naturality of $t^\\flat$ and the specified factorization of $U\\to f^{-1}V$ give a lift $a^{-1}(U^a)\\to(gb)^{-1}(V'^a)$ of its map to $(gb)^{-1}(V^a)$. Pullback cancellation now gives $H(Z')\\cong H(Z)$, with no assumption that the naturality square of $t^\\flat$ itself is cartesian. These properties persist under composites of covering families.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.6, continuity check for types (a), (b), (c); epimorphism facts supplied by Stacks sites.tex Tags 086K and 00WN through the cited existing nodes."
+   }
+  },
+  {
+   "text": "Extend the functor H of step 6, whose cover images were checked in step 7: Present $\\mathcal E$ on any small site and take the full subcategory of its sheaves containing all its sheafified representables, all $H(Z)$ and the final object, and close it under finite limits. This still has a set of objects (at each stage there are only a set of finite diagrams). By [lem-weil-pbc-site-of-sheaf-generators] it is a site presenting $\\mathcal E$, with covers exactly the jointly epimorphic families. Regard $H$ as a finite-limit and cover-preserving functor to this site, include the specified image covers among its representative coverings, and apply the continuous finite-limit site-functor construction of Stacks Tag 00X6 (the same set-valued Mathlib sheafPullback API used for the projections). Composing with the presentation equivalence constructs $h:\\mathcal E\\to P$ with $h^{-1}(Z^a)\\cong H(Z)$, as follows from the adjunction/Yoneda calculation of step 3. All indexing categories may first be replaced by AsSmall in the containing universe; the generator category is indexed by a set of generators and a set of finite diagrams, with homs in that universe. This makes the small-category generator theorem applicable, without requiring a Small instance on the original independent-universe sites.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "lem-weil-pbc-site-of-sheaf-generators",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI (lemma-topos-good-site) and 03A1 (lemma-special-equivalence) for a small presenting site containing the set of H(Z); Tag 00X6 (proposition-get-morphism) for extension of the finite-limit and cover-preserving H. This supplies the site-theoretic existence input in ILO Exposé XI 1.6."
+   }
+  },
+  {
+   "text": "Since the three inverse images send final objects to final objects, $H(k_1(U))=a^{-1}(U^a)$ and $H(k_2(W))=b^{-1}(W^a)$. These give isomorphisms $\\alpha:p_1h\\cong a$ and $\\beta:p_2h\\cong b$: for example for $M\\in\\mathcal E$ the value of the direct image of $p_1h$ on $U$ is $\\operatorname{Hom}_{\\mathcal E}(a^{-1}(U^a),M)=(a_*M)(U)$, naturally in $U,M$, and the calculation for $b$ is identical with $W,b$ in place of $U,a$. For $V\\in\\mathcal D$, $H(T_V)=(fa)^{-1}(V^a)\\times_{(gb)^{-1}(V^a)}(gb)^{-1}(V^a)$; its projection to $(fa)^{-1}(V^a)$ is $H(r_V)$ and its projection to $(gb)^{-1}(V^a)$ is $H(s_V)$. The inverse of the first projection sends $x$ to $(x,t^\\flat(x))$, so the second projection after this inverse is exactly $t^\\flat$. This verifies the required compatibility on the site objects. On arbitrary sheaves it follows by naturality and the sheafification adjunction: each sheaf is the sheafification of the colimit of its representables indexed by pairs $(V,s)$ (a section is the image of $\\mathrm{id}_V$); all inverse-image functors preserve these colimits. Taking mates gives exactly $g\\beta^{-1};\\tau h;f\\alpha=t$.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.6, final computation of the induced transformation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-large-oriented-site-data",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-of-sheaf-generators",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI §1.6, formula (1.a); Stacks sites.tex Tags 00X6, 03A1, 03CI; generic site extension in Stacks sites.tex Tags 00X6, 03A1, 03CI where specified."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Oriented product of topoi: triple category site projections and universal compatible lifts",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.lift₃_p₃; CategoryTheory.CartesianMonoidalCategory.lift; CategoryTheory.Limits.Pi.lift_π; CategoryTheory.Functor.relativelyRepresentable.lift₃_p₃_assoc; CategoryTheory.Localization.Lifting₃; CategoryTheory.Limits.Pi.lift_π_assoc; CategoryTheory.CartesianMonoidalCategory.lift_lift_associator_hom; CategoryTheory.Localization.lift₃",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible cone of geometric morphisms extends to a geometric morphism into the oriented product by the pullback formula",
+   "results": "CompHausLike.pullback.cone_π; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.PresheafedSpace.GlueData.vPullbackConeIsLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.LocallyRingedSpace.GlueData.vPullbackConeIsLimit; AlgebraicGeometry.PresheafedSpace.GlueData.diagramOverOpenπ",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.*(product|cone)|compatible.*lift",
+   "results": "Mathlib/MeasureTheory/Measure/Haar/InnerProductSpace.lean; Mathlib/RingTheory/WittVector/Truncated.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"largeCompatibleLift|largeOrientationExists|largeSiteMorphism|largeAssociatedComparison|universalComparison|LargeOrientationFormula\" in Mathlib/CategoryTheory, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search oriented product, compatible lift, universal cone",
+   "results": "No existing declaration with the new names or the corresponding oriented triple-site statements; no matching blueprint node. Existing original node contains the complete construction, not these separate results.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate. The definitions are moved from the assigned item rather than independently restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.OrientedProductLargeSites",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductLargeLiftExistence",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeLiftExistence.lean",
+  "declaration": "CategoryTheory.OrientedProduct.largeCompatibleLiftExists",
+  "statement": "theorem largeCompatibleLiftExists\n    [F.IsContinuous K.toGrothendieck J₁.toGrothendieck]\n    [G.IsContinuous K.toGrothendieck J₂.toGrothendieck]\n    (hτ : LargeOrientationFormula F G J₁ J₂ K f g ηF ηG p₁ p₂ π₁ π₂ τ)\n    (E : Type e) [Category.{ve} E] (hE : IsGrothendieckTopos.{max v w} E)\n    (a : GeometricMorphism E (Sheaf J₁.toGrothendieck (Type (max v w))))\n    (b : GeometricMorphism E (Sheaf J₂.toGrothendieck (Type (max v w))))\n    (t : (b.comp g).direct ⟶ (a.comp f).direct) :\n    ∃ (h : GeometricMorphism E (Sheaf (largeTopology J₁ J₂ F G) (Type (max v w))))\n      (α : (h.comp p₁).direct ≅ a.direct) (β : (h.comp p₂).direct ≅ b.direct),\n      paste f g p₁ p₂ τ h a b α β = t",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-large-oriented-lift-existence",
+  "worker": "stage3",
+  "summary": "Existence of compatible geometric lifts to the large triple site. This is a separate part of the original ten-step argument, with the precise Lean statement attached. No replacement of the unit normal-cone route.",
+  "blueprint": "ILO XI §1.6, formula (1.a); Stacks sites.tex Tags 00X6, 03A1, 03CI of the oriented-product input to the normal-cone specialization in the ancestor proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic sheaf or site tool in the explicit ILO triple-site construction; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-of-sheaf-generators",
+    "why": "Generic sheaf or site tool in the explicit ILO triple-site construction; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "why": "Generic sheaf or site tool in the explicit ILO triple-site construction; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic sheaf or site tool in the explicit ILO triple-site construction; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; 12 moved defs vs live item block (docstring tags only); 2 sorry lift lemmas vs ILO XI 1.5/1.6; 25 direct importers compiled against the delivered modules"
+ }
+}

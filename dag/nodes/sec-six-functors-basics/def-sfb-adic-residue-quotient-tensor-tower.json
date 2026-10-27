@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-adic-residue-quotient-tensor-tower",
+ "kind": "definition",
+ "title": "The strict actual quotient coefficient tower and its tensor",
+ "statement": "Let X be a scheme, A a commutative ring in the coefficient universe, J an ideal, and U an object of the small pro-etale site [def-sfb-adic-residue-lift-comparisons]. Put R=(completed A)|U and B_n=underline(A/J^(n+1))|U, with the actual projections and quotient maps [lem-weil-pbc-constant-completion-equivalence]. Regard B_n as the rank-one B_n-module restricted to R. The quotient ring successor is R-linear because its composite with the R-projection is the preceding projection. Place these modules in degree zero to obtain a strict coefficient tower C. For any cochain complex P of R-modules, form the strict tower P tensor_R C_n using the ordered total tensor [def-weil-pbc-ringed-koszul-system], and transpose it into a complex of towers. Its nth unit is the inverse tensor right unitor followed by tensoring the actual coefficient quotient R[0] to B_n[0]. These are constructions from the specified ring maps, without any existential choice of data.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M), strict coefficient tensor calculation; algebraization.tex, lemma-derived-completion-koszul (0A0E); more-algebra.tex, lemma-sequence-Koszul-complexes."
+ },
+ "proof": [
+  {
+   "text": "Restrict the actual quotient coefficient modules to R and place them in degree zero. The limit projection identity gives linearity of the successor. Functor.ofOpSequence, total tensor and the functor/complex equivalence construct the tower and its transposition; the rank-one unitHomEquiv constructs the coefficient unit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V7",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M), strict coefficient comparison before taking Rlim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension on a K flat sheaf complex computes its tensor product with the quotient ring, compatibly with quotient transitions and adjunction units",
+   "results": "8 hits on cotangent modules, module scalar descent and flat tensor exactness.",
+   "verdict": "No matching ringed derived tower theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"single\"",
+   "results": "10 hits, on graded-object single/tensor unitor comparisons.",
+   "verdict": "Useful graded generalities, but no derived scalar tower identification.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*restrictScalars|restrictScalars.*tensor|mappingCone.*tensor|tensor.*mappingCone",
+   "results": "25 hits on ordinary tensor products, scalar restriction and ModuleCat descent.",
+   "verdict": "No matching sheaf-complex tower or normalized derived comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension on a K flat sheaf complex computes its tensor product with the quotient ring, compatibly with quotient transitions and adjunction units",
+   "results": "8 hits: ordinary ModuleCat.extendRestrictScalarsAdj, flat tensor exactness, faithfully flat descent and ordinary tensor base change.",
+   "verdict": "The ordinary module adjunction does not state the sheaf-complex comparison, derived unit normalization, or tower naturality.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueStrictKoszulAugmentation",
+  "date": "2026-10-26",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), the application of Stacks 099M: The strict actual quotient coefficient tower and its tensor.",
+   "via": [
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueQuotientTensorTower",
+  "file": "lean/Sheaf/Paper/AdicResidueQuotientTensorTower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidueQuotientTensorComplex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidueQuotientRing",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientModule",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientProjection_step",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientModuleStep",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientCoefficientTower",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientCoefficientUnit",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientTensorTower",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientTensorComplex",
+   "AlgebraicGeometry.Scheme.adicResidueQuotientTensorUnit"
+  ],
+  "statement": "def adicResidueQuotientTensorComplex\n    (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T100438-L-30686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T100438-L-30686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

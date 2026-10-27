@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-component-lift-section-normalization",
+ "kind": "statement",
+ "title": "Evaluation and functoriality of component-lift sections",
+ "statement": "For every commutative condensed ring Lambda, all schemes U,V,W and all morphisms g:V→U and h:W→V, ComponentLiftSectionIdentity Lambda g and ComponentLiftSectionNaturality Lambda g [def-sfb-component-lift-section-data] hold. For every internal Lambda_T-module L, componentLiftHomSection Lambda T L is bijective. The section map for id_T becomes the identity under upperStarId. The section maps satisfy ComponentLiftSectionComposition Lambda g h under the specified upperStarComp. There are no lisseness, affineness, component-space, or contractibility assumptions. This asserts evaluation and the exact naturality, identity and composition formulas, without asserting that section pullback itself is bijective.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Old proof steps 4-6; HRS Definition 3.3, Lemma 4.1, Proposition 4.3(3) and equation (4.2); Stacks Tag 08JJ, sites-cohomology.tex label lemma-dual-perfect-complex, global Hom formula at the coefficient unit. Agent-formulated map normalization for component lifts."
+ },
+ "stmt_deps": [
+  "def-sfb-component-lift-section-data"
+ ],
+ "proof": [
+  {
+   "text": "The fully faithful singleFunctor identifies each derived Hom between degree-zero complexes with ordinary module Hom. A map t from the regular coefficient module to L is determined by the section s=t_T(1); at a test W it sends r to r times the restriction of s. Conversely this formula defines a module map, compatible with every restriction. These two constructions are inverse, proving bijectivity of componentLiftHomSection for every T and L. Naturality of the module adjunction unit with respect to t, and the mate relation of the coefficient map, identify the adjoint of the pullback of t with t followed by this unit. Evaluation at one therefore gives precisely the section map defined by the module unit followed by terminal base-change restriction. The single-functor comparison of the exact derived pullback is the displayed ComponentLiftSectionIdentity. This statement concerns the specified maps and asserts no bijectivity of section pullback.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-sfb-condensed-module-sections",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 coefficient modules and global sections; Lemma 4.1 and equation (4.2), interpreted at degree zero."
+   }
+  },
+  {
+   "text": "For a module morphism L→Lprime, naturality of the adjunction unit and the restriction square of the underlying sheaf morphism give ComponentLiftSectionNaturality. For W→V→U the unit of the composite adjunction is the unit for g followed by g_* of the unit for h. The canonical module composition isomorphism is the adjunction mate of the pushforward composition, so evaluating this unit equality at the terminal tests gives ComponentLiftSectionComposition under upperStarComp. The identity adjunction similarly gives the identity equation under upperStarId. For empty schemes all the same unit and naturality formulas remain valid; no coefficient discreteness, completeness, rank, connectedness or t-admissibility assumption has been used.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-condensed-module-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(3); naturality and composition of the specified inverse images and adjunction units."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-sfb-condensed-module-sections",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Original component-lift section-comparison proof, factored without changing its route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Connected component relative profinite inverse image is monoidal and gives an equivalence on dualizable derived modules for weakly contractible affine schemes",
+   "results": "Equivalence.inverseMonoidal; Profinite.toCompHausEquivalence; no component-lift coefficient or derived normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free internal modules on a ringed site have locally free duals and their degree zero complexes are K-flat and dualizable",
+   "results": "SheafOfModules.IsFiniteType, IsFinitePresentation and free; no combined internal-module K-flat duality theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "unitHomEquiv, unitHomEquiv_apply_coe, pushforwardSections_unitHomEquiv; these concern sectionwise sheaves, and do not supply the normalized derived internal-module pullback.",
+   "date": "2026-10-26",
+   "verdict": "nearby elementary API, not the stated comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "component.*[Cc]omparison|[Ll]isse.*[Kk][Ff]lat|[Kk][Ff]lat.*[Ll]isse|componentLift|ComponentLift",
+   "results": "Only an unrelated text-linter component-path comparison in Mathlib; no component-lift statement. Local library search finds LisseModuleInverseImage for the separate lisse pullback clause.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match; existing project constructions retained"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ComponentLiftLisseSectionComparison",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, open direct image; Proof (3), open direct image; component-lift section-comparison subargument, Evaluation and functoriality of component-lift sections.",
+   "via": [
+    "lem-sfb-component-lift-lisse-section-comparison",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComponentLiftSectionNormalization",
+  "file": "lean/Sheaf/Paper/ComponentLiftSectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_lift_section_normalization",
+  "statement": "theorem component_lift_section_normalization\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] :\n    (∀ (U V : Scheme.{u}) (g : V ⟶ U),\n      ComponentLiftSectionIdentity Λ g ∧ ComponentLiftSectionNaturality Λ g) ∧\n    (∀ (T : Scheme.{u})\n      (L : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T)),\n      Function.Bijective (componentLiftHomSection Λ T L)) ∧\n    (∀ (T : Scheme.{u})\n      (L : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T))\n      (s : (condensedModuleSections Λ.X T).obj L),\n      (condensedModuleSections Λ.X T).map ((upperStarId Λ.X T).hom.app L)\n        ((componentLiftSectionPullback Λ (𝟙 T) L) s) = s) ∧\n    (∀ (U V W : Scheme.{u}) (g : V ⟶ U) (h : W ⟶ V),\n      ComponentLiftSectionComposition Λ g h)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "worker": "M4",
+  "summary": "A strictly separate part of the existing seven-step proof; no target, coefficient or section-map definition changed.",
+  "blueprint": "Keeps the original component-equivalence route below direct-image stability.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic tool used for the same component-site, duality or derived normalization subargument as in the reviewed parent plan."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic tool used for the same component-site, duality or derived normalization subargument as in the reviewed parent plan."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical), moved defs vs clone item module (verbatim), 3 new sorried theorems vs their nodes and the original clauses, item node proof/proof_deps vs Lean proof"
+ }
+}

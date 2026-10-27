@@ -1,0 +1,157 @@
+{
+ "id": "lem-pur-etale-graph-ambient-source-pasting",
+ "kind": "statement",
+ "title": "The e-side source lift under ambient projection",
+ "statement": "Let A be finite commutative and d1,d2 supplied interchange diagrams for f:X→Y and g:Y→Z. Use the selected side n, the ambient data and sourceTransport of [def-pur-etale-graph-product-ambient-geometry]. Write af for the f-side ambientLambda, qG:G.U→Y for the middle support projection and cG:R(id_Y)→R(G.a) RqG for the inverse proper compositor for G.a qG=id_Y. Then normalization of the identity proper image on the selected source word followed by sourceTransport equals af whiskered by R(id_Y), then cG whiskered by F.functor, then liftInterchange whiskered by RqG (with the explicit associator). This concerns only the e-side square and B: no supplied k-square or Q exchange is present.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), final A--F comparison; Tags 0F7C and 0F7D for vertical and horizontal pasting. Agent formalization of the ambient subgrid of the product-graph extension, not a claim that the source states this extension verbatim."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-product-ambient-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the Cartesian-normalization and vertical-pasting clauses of the fixed chosen normalized exchange family to B above the e-side square. Transport along BW qH=qF and BV qN=prF, obtaining the outer Cartesian f-side exchange. This is exchange_vertical in Lean.",
+   "uses": [
+    "def-pur-etale-graph-product-ambient-geometry",
+    "lem-pur-etale-proper-open-exchange-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (vertical proper/open pasting); Tag 0F7J, final A--F comparison, with functorial direct-image associativity and its unit law."
+   }
+  },
+  {
+   "text": "For an arbitrary source complex, precompose the outer exchange by the inverse graph compositor. Cancel the B exchange with its inverse. Naturality of the e-side exchange moves the zF BW=zH compositor past it; inverse associativity for zF,BW,qH then gives source_core. Reuse comp_assoc and comp_assoc_inv proved in the Cartesian ambient-transport composition module; only their general proper direct-image coherence is used.",
+   "uses": [
+    "lem-pur-etale-proper-ambient-transport-composition",
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (vertical proper/open pasting); Tag 0F7J, final A--F comparison, with functorial direct-image associativity and its unit law."
+   }
+  },
+  {
+   "text": "At an arbitrary complex on F.P, apply proper compositor associativity to F.p,G.a,qG, to BV,R,qG, and to BV,qN,r. The equations G.a qG=id, BV R=F.p G.a, R qG=qN r, BV qN=prF and prF r=F.p identify the composite maps. Cancel the intermediate compositors and use the proved direct_image_right_unit helper from OpenExchangeTower to identify the identity compositor with rightDerivedLowerStarIdIso. This gives proper_tail, a calculation involving no open exchange.",
+   "uses": [
+    "def-pur-etale-graph-product-ambient-geometry",
+    "lem-pur-etale-proper-ambient-transport-composition",
+    "lem-amb-shriek-open-tower-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (vertical proper/open pasting); Tag 0F7J, final A--F comparison, with functorial direct-image associativity and its unit law."
+   }
+  },
+  {
+   "text": "Combine proper_tail and source_core. Naturality first moves the identity direct-image comparison through the source Cartesian transport, then moves the terminal exchange and graph compositor through the two proper terminal compositors. Functoriality groups the result into source_core. Instantiate this general source_grid calculation for First and Second; expand the specified words and use extensionality of natural transformations and isomorphisms. No k-square, Q exchange or open-composition law is used.",
+   "uses": [
+    "def-pur-etale-graph-product-ambient-geometry",
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (vertical proper/open pasting); Tag 0F7J, final A--F comparison, with functorial direct-image associativity and its unit law."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-product-ambient-geometry",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-pur-etale-proper-ambient-transport-composition",
+  "lem-amb-natural-transformation-whisker-exchange",
+  "lem-amb-shriek-open-tower-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), specialized to the e/B subgrid of Tag 0F7J (lemma-shriek-composition). Complete component calculation by Z9, using the already proved direct-image associativity and unit helpers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "vertical pasting proper open exchange identifies an inverse exchange followed by a proper ambient transport",
+   "results": "CategoryTheory.GlueData.t_comp_eq_pullbackSymmetry and related gluing identities; no derived proper/open ambient source or square identity.",
+   "date": "2026-10-26",
+   "verdict": "No matching result; use the project normalized proper/open exchange family."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.associator\"; \"whiskerLeft_comp_whiskerRight\"",
+   "results": "CategoryTheory.Functor.associator, associator_hom_app, associator_inv_app, whiskerLeft_comp_whiskerRight and its reassociated form.",
+   "date": "2026-10-26",
+   "verdict": "Categorical assembly tools only; no scheme-derived comparison identity."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*(pasting|compose)|ambient.*(source|square) in Mathlib CategoryTheory and AlgebraicGeometry",
+   "results": "No matches. Local project search additionally found etaleProperAmbientTransport_comp, which handles consecutive Cartesian transports but does not state either displayed subgrid identity with its terminal graph splitting.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib statement for these derived scheme grids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProductAmbientPasting",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument. Proper ambient / graph shrinking factorization: the ambient subgrid. Explicit e/B and k/Q subgrids of ambient pasting.",
+   "via": [
+    "lem-pur-etale-graph-product-ambient-pasting",
+    "lem-pur-etale-graph-product-row-pasting",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphAmbientSourcePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphAmbientSourcePasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphAmbientSourcePasting",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphAmbientSourcePasting"
+  ],
+  "statement": "theorem etaleGraphAmbientSourcePasting\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}\n    (d₁ d₂ : EtaleGraphInterchangeDiagram f g) (second : Bool) :\n    (match second with\n    | false =>\n      let af := EtaleGraphPresentation.ProductRow.ambientLambda\n        d₁.sourcePresentation d₂.sourcePresentation false A\n      let qg := EtaleGraphPresentation.ProductRow.q\n        (EtaleGraphPresentation.ofCompactification d₁.compactification)\n        (EtaleGraphPresentation.ofCompactification d₂.compactification) false\n      let cg := (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A)\n        (EtaleGraphInterchangeDiagram.ProductRow.First.G d₁ d₂).a qg (𝟙 Y)\n        (EtaleGraphPresentation.ProductRow.z_q\n          (EtaleGraphPresentation.ofCompactification d₁.compactification)\n          (EtaleGraphPresentation.ofCompactification d₂.compactification) false)).symm\n      (Functor.isoWhiskerLeft (d₁.sourcePresentation.functor A)\n          (rightDerivedLowerStarIdIso A Y) ≪≫\n        Functor.rightUnitor _ ≪≫\n        EtaleGraphInterchangeDiagram.ProductRow.First.sourceTransport d₁ d₂ A) =\n      (Functor.isoWhiskerRight af R((𝟙 Y)_*[ModuleCat.{u + 1} A]) ≪≫\n        Functor.isoWhiskerLeft _ cg ≪≫\n        (Functor.associator _ _ _).symm ≪≫\n        Functor.isoWhiskerRight\n          (EtaleGraphInterchangeDiagram.ProductRow.First.liftInterchange d₁ d₂ A)\n          R((qg)_*[ModuleCat.{u + 1} A]))\n    | true =>\n      let af := EtaleGraphPresentation.ProductRow.ambientLambda\n        d₁.sourcePresentation d₂.sourcePresentation true A\n      let qg := EtaleGraphPresentation.ProductRow.q\n        (EtaleGraphPresentation.ofCompactification d₁.compactification)\n        (EtaleGraphPresentation.ofCompactification d₂.compactification) true\n      let cg := (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A)\n        (EtaleGraphInterchangeDiagram.ProductRow.Second.G d₁ d₂).a qg (𝟙 Y)\n        (EtaleGraphPresentation.ProductRow.z_q\n          (EtaleGraphPresentation.ofCompactification d₁.compactification)\n          (EtaleGraphPresentation.ofCompactification d₂.compactification) true)).symm\n      (Functor.isoWhiskerLeft (d₂.sourcePresentation.functor A)\n          (rightDerivedLowerStarIdIso A Y) ≪≫\n        Functor.rightUnitor _ ≪≫\n        EtaleGraphInterchangeDiagram.ProductRow.Second.sourceTransport d₁ d₂ A) =\n      (Functor.isoWhiskerRight af R((𝟙 Y)_*[ModuleCat.{u + 1} A]) ≪≫\n        Functor.isoWhiskerLeft _ cg ≪≫\n        (Functor.associator _ _ _).symm ≪≫\n        Functor.isoWhiskerRight\n          (EtaleGraphInterchangeDiagram.ProductRow.Second.liftInterchange d₁ d₂ A)\n          R((qg)_*[ModuleCat.{u + 1} A])))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-861ca",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T065319-L-2810813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261026T093134-L-3539840",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity",
+ "kind": "statement",
+ "title": "Affine fppf acyclicity with only flat locally finitely presented comparison maps",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. Let $U$ be an affine scheme [def-pc-scheme], meaning a scheme isomorphic to the spectrum of a commutative ring [def-weil-affine-spectrum]. On its big fppf site $(\\mathit{Sch}/U)_{\\mathrm{fppf}}$ [def-pc-fppf-site], with structure sheaf $\\mathcal O(v:V\\to U)=\\Gamma(V,\\mathcal O_V)$, let $G$ be a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Suppose its restriction to $U_{\\mathrm{et}}$ [def-weil-pbc-etale-site] is the associated etale sheaf $M_{\\mathrm{et}}$ of a quasi-coherent Zariski $\\mathcal O_U$-module $M$ [pqf-def-coherent], with $M_{\\mathrm{et}}(v:V\\to U)=\\Gamma(V,v^*M)$ on etale objects. Suppose that for every flat, locally finitely presented $g:V\\to U$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation], the canonical comparison\n$$g_{\\mathrm{et}}^*(G|_{U_{\\mathrm{et}}})\\longrightarrow G|_{V_{\\mathrm{et}}}$$\nis an isomorphism; tensor pullback is [def-pc-module-pullback]. Then $H^q((\\mathit{Sch}/U)_{\\mathrm{fppf}},G)=0$ for all $q>0$. Here cohomology is the right derived functor of global sections in the category of structure-module sheaves, computed by injective module resolutions [def-sp-injective-resolutions]. There is no Noetherian, finite-generation, separation or comparison hypothesis for maps $V\\to U$ that are not flat and locally of finite presentation.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), with tau = etale and g = id_U, followed by affine quasi-coherent etale acyclicity (the affine vanishing application in stacks-sheaves.tex, section-change-topology)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "pqf-def-coherent",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-module-pullback",
+  "def-sp-injective-resolutions",
+  "def-sfb-scheme-fppf-etale-module-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=A_U(M)$ using [lem-sfb-scheme-big-fppf-quasicoherent-equivalence], so $A(v)=\\Gamma(V,v^*M)$. Let $\\alpha:M_{\\mathrm{et}}\\xrightarrow{\\sim}G|_{U_{\\mathrm{et}}}$ be the given isomorphism. Restriction to opens gives $\\beta:M\\xrightarrow{\\sim}\\epsilon_{U,*}G$, since the inverse of the Zariski-etale equivalence is restriction to opens. The big-fppf-to-Zariski comparison identifies $A=\\epsilon_U^*M$: its section presheaf is already a sheaf by the associated-sheaf equivalence. Under the ringed-topos module adjunction let $\\varphi:A\\to G$ be the adjunct of $\\beta$. Thus there is a single morphism of big-site module sheaves, without assuming that $G$ is quasi-coherent on the whole big site.",
+   "uses": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-big-fppf-zariski-ringed-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), first two sentences of proof; Tag 070S (lemma-compare-sites)(1) and Tag 03FH (remark-change-topologies-ringed-sites)(1)."
+   }
+  },
+  {
+   "text": "For $g:V\\to U$ flat and locally of finite presentation, the restriction of $\\varphi$ to $V_{\\mathrm{et}}$ is the composite $ (g^*M)_{\\mathrm{et}}\\simeq g_{\\mathrm{et}}^*M_{\\mathrm{et}}\\xrightarrow{g_{\\mathrm{et}}^*\\alpha}g_{\\mathrm{et}}^*(G|_{U_{\\mathrm{et}}})\\xrightarrow{c_g}G|_{V_{\\mathrm{et}}}$. Here the first comparison is the pullback comparison in the Zariski-etale equivalence. To check the equality of maps, on an open $W\\subset V$ both adjuncts send a section $m$ of $M$ on an open of $U$ containing $g(W)$ to its image under $\\beta$, restricted along $W\\to U$; tensor extension sends $a\\otimes m$ to $a\\,\\beta(m)|_W$. This is the defining adjunct of the canonical comparison $c_g$. Naturality of the module adjunction and the identity-on-opens normalization therefore give the displayed equality. All three arrows are isomorphisms by the hypothesis on $c_g$. In particular $\\varphi(V):A(V)\\to G(V)$ is bijective.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-big-fppf-zariski-ringed-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), comparison map and its small-site restrictions; Tag 03FH (remark-change-topologies-ringed-sites)(2)."
+   }
+  },
+  {
+   "text": "Form $K=\\ker\\varphi$, $I=\\operatorname{im}\\varphi$ and $C=\\operatorname{coker}\\varphi$ in the abelian module-sheaf category. Kernels are sectionwise, so $K(V)=0$ on every flat locally finitely presented $V\\to U$. For $C$, the quotient $G\\to C$ is an epimorphism. Exact forgetting to abelian sheaves preserves this epimorphism, so local surjectivity gives, for any $s\\in C(V)$, lifts $t_i\\in G(V_i)$ on an fppf covering of $V$. Each $V_i\\to U$ is flat and locally of finite presentation by composition, so $t_i$ is in the image of $\\varphi(V_i)$ by step 2. Its image $s|_{V_i}$ in $C(V_i)$ is therefore zero. By the sheaf uniqueness axiom $s=0$. Thus $C(V)=0$ as well. Apply [lem-sfb-fppf-flat-lfp-zero-cohomology] to $K$ and $C$, at $\\operatorname{id}_U$, to get $H^q(K)=H^q(C)=0$ for every $q\\geq0$. The identity is flat and locally of finite presentation directly from the definitions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "def-pc-fppf-site",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sfb-fppf-flat-lfp-zero-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), kernel and cokernel paragraph; Tag 0755 (lemma-cohomology-parasitic)(1)."
+   }
+  },
+  {
+   "text": "The chosen site is small in the common universe, so its module category is Grothendieck and has enough injectives by [prop-pur-kinjective-resolutions-exist] and [lem-sp-grothendieck-enough-injectives]. Evaluation at $\\operatorname{id}_U$ is additive and left exact, since kernels and finite products of module sheaves are sectionwise. Apply the long exact derived-functor sequence to $0\\to K\\to A\\to I\\to0$ and $0\\to I\\to G\\to C\\to0$. The first gives $H^q(A)\\simeq H^q(I)$ because both adjacent groups $H^q(K)$ and $H^{q+1}(K)$ vanish; the second gives $H^q(I)\\simeq H^q(G)$ because $H^{q-1}(C)$ and $H^q(C)$ vanish (in degree zero use the initial left-exact segment). Therefore $H^q(\\varphi)$ is an isomorphism for every $q\\geq0$. All these groups use injective module resolutions.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), the two short exact sequences; derived.tex Tag 015B (lemma-higher-derived-functors)."
+   }
+  },
+  {
+   "text": "For the associated sheaf $A=M^a$ on this affine $U$, [lem-sfb-affine-scheme-fppf-qcoh-acyclic] gives $H^q((\\mathit{Sch}/U)_{\\mathrm{fppf}},A_{ab})=0$ for $q>0$. The module/abelian evaluation comparison applies, using the small site, its commutative structure ring and the enough-injectives conclusion of step 4. It identifies this group with $H^q(A)$ computed in structure-module sheaves. Hence $H^q(A)=0$, and the isomorphism $H^q(\\varphi)$ of step 4 proves $H^q(G)=0$ for all $q>0$. No comparison on any non-flat or non-locally-finitely-presented test map was used.",
+   "uses": [
+    "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), final sentence, with Tag 03DW (proposition-same-cohomology-quasi-coherent)(1) and coherent.tex Tag 01XB (lemma-quasi-coherent-affine-cohomology-zero); sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-big-fppf-zariski-ringed-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-pc-fppf-site",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-fppf-flat-lfp-zero-cohomology",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sfb-affine-scheme-fppf-qcoh-acyclic",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0756 (lemma-quasi-coherent-and-flat-base-change), proof via parasitic kernel and cokernel; Tag 0755 (lemma-cohomology-parasitic)(1); final affine vanishing uses the existing Tag 03DW + Tag 01XB node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fppf cohomology on an affine scheme vanishes for big module sheaves whose small etale restriction is quasi coherent and flat locally finitely presented comparison maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T20:00:08Z\", \"tool\": \"leanfinder\", \"query\": \"Fppf cohomology on an affine scheme vanishes for big module sheaves whose small etale restriction is quasi coherent and flat locally finitely presented comparison maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"49a0b56d9880538e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define quasi-coherent or finitely presented module sheaves or affine limits; none proves fppf cohomology vanishing for this possibly noncartesian big-site sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi coherent big fppf module with comparison isomorphisms over flat locally finitely presented maps has zero positive cohomology over an affine scheme",
+   "results": "{\"t\": \"2026-10-23T20:00:06Z\", \"tool\": \"leansearch\", \"query\": \"A locally quasi coherent big fppf module with comparison isomorphisms over flat locally finitely presented maps has zero positive cohomology over an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent.rec\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"ed5ccdee0372a7a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define quasi-coherent or finitely presented module sheaves or affine limits; none proves fppf cohomology vanishing for this possibly noncartesian big-site sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T20:00:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define quasi-coherent or finitely presented module sheaves or affine limits; none proves fppf cohomology vanishing for this possibly noncartesian big-site sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*cohom|cohom.*fppf|flat.*comparison",
+   "results": "{\"t\": \"2026-10-23T20:00:06Z\", \"tool\": \"grep\", \"query\": \"fppf.*cohom|cohom.*fppf|flat.*comparison\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define quasi-coherent or finitely presented module sheaves or affine limits; none proves fppf cohomology vanishing for this possibly noncartesian big-site sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of affine fppf cohomology for modules with quasi coherent restriction and flat finite presentation base change",
+   "results": "{\"t\": \"2026-10-23T20:00:09Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of affine fppf cohomology for modules with quasi coherent restriction and flat finite presentation base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"42bc365f84bcf920\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits define quasi-coherent or finitely presented module sheaves or affine limits; none proves fppf cohomology vanishing for this possibly noncartesian big-site sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf cohomology on an affine scheme vanishes for big module sheaves whose small etale restriction is quasi coherent and flat locally finitely presented comparison maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T20:49:35Z\", \"tool\": \"leanfinder\", \"query\": \"Fppf cohomology on an affine scheme vanishes for big module sheaves whose small etale restriction is quasi coherent and flat locally finitely presented comparison maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"49a0b56d9880538e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern module quasi-coherence, finite presentations and affine limits, not the stated fppf acyclicity with weak comparison hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi coherent big fppf module with comparison isomorphisms over flat locally finitely presented maps has zero positive cohomology over an affine scheme",
+   "results": "{\"t\": \"2026-10-23T20:49:34Z\", \"tool\": \"leansearch\", \"query\": \"A locally quasi coherent big fppf module with comparison isomorphisms over flat locally finitely presented maps has zero positive cohomology over an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent.rec\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"ed5ccdee0372a7a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern module quasi-coherence, finite presentations and affine limits, not the stated fppf acyclicity with weak comparison hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T20:49:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern module quasi-coherence, finite presentations and affine limits, not the stated fppf acyclicity with weak comparison hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*cohom|cohom.*fppf|flat.*comparison",
+   "results": "{\"t\": \"2026-10-23T20:49:34Z\", \"tool\": \"grep\", \"query\": \"fppf.*cohom|cohom.*fppf|flat.*comparison\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern module quasi-coherence, finite presentations and affine limits, not the stated fppf acyclicity with weak comparison hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of affine fppf cohomology for modules with quasi coherent restriction and flat finite presentation base change",
+   "results": "{\"t\": \"2026-10-23T20:49:36Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of affine fppf cohomology for modules with quasi coherent restriction and flat finite presentation base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"42bc365f84bcf920\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern module quasi-coherence, finite presentations and affine limits, not the stated fppf acyclicity with weak comparison hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-lqc-lfp-topology-comparison",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Scheme-local affine acyclicity input to the topology-comparison prerequisite.",
+   "via": [
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity",
+  "worker": "stage1",
+  "summary": "Followed the parasitic-kernel/cokernel proof of Stacks 0756. Reused the existing associated big-fppf sheaf, big-to-small ringed comparison, module adjunction, small-etale comparison and affine acyclicity. Added only the section-zero parasitic vanishing input 0755. Checked the cokernel locally using composition of flat locally finitely presented maps, and explicitly compared module-derived and abelian cohomology. Statement unchanged.",
+  "blueprint": "Realizes the existing blueprint.from.place scheme-local affine acyclicity prerequisite of det-thm-sf-ctf-stability-direct-images, proof (3), via Stacks 0756. The inherited null ancestor is retained, as blueprint_refs.py ancestor reports None. Whole-blueprint searches found no equivalent fppf weak-comparison or parasitic statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic input for the explicitly cited Zariski and small etale quasi-coherent modules agree functorially, used in the scheme-local Stacks 0756 argument; the unit does not supply a replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic input for the explicitly cited Module pullback and pushforward adjunction on arbitrary ringed topoi, used in the scheme-local Stacks 0756 argument; the unit does not supply a replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic input for the explicitly cited Colimits of sheaves of modules and the forgetful functor to abelian sheaves, used in the scheme-local Stacks 0756 argument; the unit does not supply a replacement theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic input for the explicitly cited Existence of K-injective resolutions of sheaves of modules, used in the scheme-local Stacks 0756 argument; the unit does not supply a replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic input for the explicitly cited Long exact sequence of the right derived functors of a left exact functor, used in the scheme-local Stacks 0756 argument; the unit does not supply a replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic input for the explicitly cited Module and abelian cohomology over an object of a ringed site agree, used in the scheme-local Stacks 0756 argument; the unit does not supply a replacement theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-744d090e8",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-744d090e8 (reviewer sub-agent of L); spot-checked: Read descent.tex 06ZL, 0755 and 0756 (lines 3755-3880). The item's statement is unchanged against side-live (only split-owned fields differ) and matches 0756 with tau = etale over an affine base. There is no repair note and live is unsplit, so this is neither a re-split nor superseded. Step 1: A=A_U(M) is already a sheaf, so A = eps^*M. beta: M ≅ eps_*G comes from alpha and identity-on-opens. phi is the adjunct of beta. Step 2: both maps out of (g^*M)_et send 1⊗m to beta(m)|_W, and c_g is the adjunct of restriction. So phi|_{V_et} = c_g∘g^*alpha∘(comparison), and phi(V) is bijective exactly for flat lfp g. Step 3: K(V)=0 because kernels are sectionwise. C(V)=0 because the forgetful functor is exact, epi means locally surjective on a general site, and flat/lfp composition keeps fppf covering pieces in the test class. Then the new node applies at id_U. Step 4: enough injectives (Grothendieck on a small site). I checked the long exact sequences in each degree, including q=0, which needs the H^0 vanishing of C. Step 5: affine fppf qcoh acyclicity for A plus the module/abelian comparison give H^q(A)=0. The new node lem-sfb-fppf-flat-lfp-zero-cohomology is Stacks 0755(1) for fppf, with the 06ZL condition written out (any flat lfp V together with id_S is a covering). It is true, statement-only and smaller than the item. A search for parasitic/0755 over the DAG finds no duplicate; lem-weil-pbc-site-cech-vanishing-criterion (03F9) is its future tool, not a duplicate. Small cases: empty S, O[p] on Spec Z. Batch-5 flags: all four citations reach only generic trf foundations (def-trf-space-quasi-coherent-module, fppf-is-fpqc, the Zariski–etale qcoh equivalence, algebraic-space covers). None is a step of the trace formula or Poincare duality, and the computed closures reach no sec-poincare-duality or trace theorem, so all are accepted. The six declared tool_uses are generic black boxes and are accepted. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeFppfFlatLfpAffineAcyclicity",
+  "declaration": "AlgebraicGeometry.Scheme.scheme_fppf_flat_lfp_affine_acyclicity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.scheme_fppf_flat_lfp_affine_acyclicity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeFppfFlatLfpAffineAcyclicity.lean",
+  "statement": "theorem scheme_fppf_flat_lfp_affine_acyclicity (U : Scheme.{u}) [IsAffine U] (G : ringedSiteModules.{u + 1} (sfbFppfRings U)) (M : U.Modules) [M.IsQuasicoherent] (_het : Nonempty ((sfbFppfEtaleRestriction U).obj G ≅ (sfbZariskiEtaleExtension U).obj (sfbModuleULift M))) (_hcomp : ∀ (V : Scheme.{u}) (g : V ⟶ U), Flat g → LocallyOfFinitePresentation g → IsIso (sfbFppfEtaleComparison g G)) (q : ℕ) (_hq : 0 < q) : IsZero (((sfbFppfModuleGlobalSections U).rightDerived q).obj G)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18d2b6ffc",
+  "group": "Q104",
+  "result": "fix",
+  "note": "Re-delivery after the d39475f5 H12/H2 return. The item module and node are unchanged; the earlier clause-by-clause check holds (IsAffine, arbitrary G, quasi-coherent M only, comparison iso only for Flat ∧ LocallyOfFinitePresentation g, IsZero of rightDerived q for 0<q, universes u/u+1). Return points (a)-(c) are addressed: new existing:true def nodes def-sfb-scheme-big-fppf-structure-rings (03DU(1), matches sfbGlobalFppfRings/sfbFppfStructureSheaf/sfbFppfRings) and def-sfb-scheme-small-etale-module-direct-image (matches smallEtaleModuleRingMap/Pushforward); the comparison node cites both; Classical.choose removed. FIX F1 (H4): the new sorried sfbOpenEtaleContinuous duplicates the proved upstream AlgebraicGeometry.gabberOpenEtale_continuous (GabberH0ZariskiConstructions.lean:40) → letI := gabberOpenEtale_continuous U, theorem removed from module and node declarations, node TeX sentence reworded. FIX F2: the small-etale direct-image source cites Tag 03LC but the label remark-change-topologies-ringed is Tag 070R → corrected. The fixed SchemeFppfEtaleModuleComparison.lean compiles cleanly via nt_compile (22.2 s)."
+ }
+}

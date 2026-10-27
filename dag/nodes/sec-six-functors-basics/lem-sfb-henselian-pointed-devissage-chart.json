@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-henselian-pointed-devissage-chart",
+ "kind": "statement",
+ "title": "A pointed complete devissage chart over a henselian local base",
+ "statement": "Let $A\\to B$ be a local homomorphism of commutative local rings, with maximal ideal $\\mathfrak m$ of $A$, and suppose $A$ is henselian [def-weil-pbc-henselian-terminology]. Suppose $B$ is essentially of finite type over $A$, meaning a localization of a finitely generated $A$-algebra, and let $P$ be a finite $B$-module [def-weil-finitely-generated-module]. There exist a finite-type $A$-algebra $C$, a finite $C$-module $N$, a prime $\\mathfrak q\\subset C$ over $\\mathfrak m$, a faithfully flat local $A$-algebra map $B\\to D=C_{\\mathfrak q}$ [def-weil-pbc-faithfully-flat-ring-map], and a $D$-linear isomorphism $N_{\\mathfrak q}\\cong P\\otimes_B D$. Moreover $N/C/A$ has a complete algebra devissage $(S_i,T_i,M_i,\\alpha_i)_{1\\le i\\le n}$ over $\\mathfrak m$ [def-trf-complete-algebra-devissage], with $S_i$ denoting the finite $T_i$-algebra and $\\alpha_i:T_i^{\\oplus r_i}\\to M_i$. Each $A\\to T_i$ is flat and finitely presented [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra], and $T_i\\otimes_A K$ is a nonzero integral domain for every prime $\\mathfrak a\\subset A$ and every field extension $K/\\kappa(\\mathfrak a)$. There are primes $\\mathfrak q_i\\subset T_i$ over $\\mathfrak m$ and unique primes $\\mathfrak p_i\\subset S_i$ over $\\mathfrak q_i$, with inverse image $\\mathfrak q$ under $C\\to S_1$, and with inverse image $\\mathfrak q_i$ under $T_i\\to S_{i+1}$ for $i<n$. In particular $N\\cong M_1$ as $C$-modules, $\\operatorname{coker}\\alpha_i\\cong M_{i+1}$ over $T_i$ for $i<n$, and $\\operatorname{coker}\\alpha_n=0$, as in the devissage definition. The length-zero case is allowed when $N=0$. Tensor products, localizations and residue fields are [def-weil-pbc-module-tensor-product, def-weil-pbc-module-localization, def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tags 05I1 (lemma-existence-algebra), 05HZ (definition-complete-devissage-at-x-algebra), and 05PG (theorem-flattening-local), first proof paragraph: pointed chart after flat local enlargement over henselian A; retain the marked primes omitted by the unpointed existence node. Smooth affine algebras are flat and finitely presented, with geometrically integral fibres here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-trf-complete-algebra-devissage",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite-type $A$-algebra $C_0$ and a multiplicative set $W$ with $B=W^{-1}C_0$. Let $\\mathfrak q_0$ be the inverse image of the maximal ideal of $B$. Since $B$ is local, every element outside $\\mathfrak q_0$ maps to a unit. The two localization universal properties give $B\\cong(C_0)_{\\mathfrak q_0}$ (the maps agree on $C_0$, and every element is a fraction). Its prime contracts to $\\mathfrak m$ because $A\\to B$ is local. Choose finitely many generators $p_j$ of $P/B$, and let $N_0\\subset P$ be their $C_0$-span. The map $(N_0)_{\\mathfrak q_0}\\to P$, $v/s\\mapsto s^{-1}v$, is surjective by writing the coefficients of a $B$-linear combination of the $p_j$ over a common denominator, and injective because $s$ acts invertibly on $P$ and $N_0$ is a submodule. Thus $N_0$ is finite and $(N_0)_{\\mathfrak q_0}\\cong P$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05PG (theorem-flattening-local), first proof paragraph; explicit finite module model for its initial localization reduction."
+   }
+  },
+  {
+   "text": "Put $X_0=\\operatorname{Spec}C_0$, $B_0=\\operatorname{Spec}A$ and $\\mathcal F_0=\\widetilde{N_0}$. The affine finite-type criterion makes $X_0\\to B_0$ locally finite type. The tilde theorem and its global-sections isomorphism, followed by the affine finite-type module criterion, make $\\mathcal F_0$ quasi-coherent of finite type. Apply [lem-sfb-pointed-affine-devissage-etale-existence] at $\\mathfrak q_0$. Write its affine output as $X\\prime=\\operatorname{Spec}E$, $B\\prime=\\operatorname{Spec}A\\prime$, with marked primes $\\mathfrak t,\\mathfrak m\\prime$. We have elementary etale maps to $X_0,B_0$, a pointed affine chain for the pulled-back module, and $\\kappa(\\mathfrak m\\prime)=\\kappa(\\mathfrak m)$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sfb-pointed-affine-devissage-etale-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 05HR (proposition-existence-complete-at-x), 05I1 (lemma-existence-algebra); affine input dictionary as in 05I0 (remark-same-notion)."
+   }
+  },
+  {
+   "text": "The henselian-local root-lifting equivalence and the etale retraction theorem give an $A$-algebra map $\\tau:A\\prime\\to A$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m\\prime$. Base change the pointed chain along $\\operatorname{Spec}A\\to\\operatorname{Spec}A\\prime$ using [lem-trf-devissage-pointed-restriction](1); its residue-field hypothesis is the marked residue isomorphism. Put $C=E\\otimes_{A\\prime}A$ and $N=N_0\\otimes_{C_0}C$. The affine fibre-product and tilde-pullback comparisons identify the new initial scheme and module with $\\operatorname{Spec}C,\\widetilde N$. Let $\\mathfrak q$ be its marked prime. The section $\\operatorname{Spec}A\\to\\operatorname{Spec}A\\prime$ is etale by cancellation, since its composite with the etale base map is the identity. Its pullback to $X\\prime$ is etale, so composition makes $\\operatorname{Spec}C\\to\\operatorname{Spec}C_0$ etale. The affine finite-presentation criterion makes $C$ finitely presented over $C_0$, hence finite type over $A$ by concatenating generators. The elements $p_j\\otimes1$ generate $N/C$.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-root-lifting-etale-retraction",
+    "lem-trf-devissage-pointed-restriction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05PG first proof paragraph; Tag 05HK (lemma-base-change-complete-at-x); algebra.tex Tag 04GG (lemma-characterize-henselian), (8)."
+   }
+  },
+  {
+   "text": "Set $D=C_{\\mathfrak q}$. The marked prime $\\mathfrak q$ contracts to $\\mathfrak q_0$, so the etale map $\\operatorname{Spec}C\\to\\operatorname{Spec}C_0$ induces a flat local map $B=(C_0)_{\\mathfrak q_0}\\to D$: etale includes flatness on local rings, and affine stalks are the indicated localizations. It is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. The localization/tensor identification gives $N_{\\mathfrak q}\\cong P\\otimes_BD$. Explicitly both are $N_0\\otimes_{C_0}D$; the comparison sends $(v\\otimes c)/s$ to $v\\otimes(c/s)$, with inverse on pure tensors $v\\otimes(c/s)\\mapsto(v\\otimes c)/s$. The identification $P=(N_0)_{\\mathfrak q_0}$ from Step 1 inserts only denominators already units in $D$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05PG (theorem-flattening-local), first paragraph; algebra.tex Tag 00HR (lemma-local-flat-ff)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-pointed-devissage-affine-translation] to the chain over $\\operatorname{Spec}A$, obtaining the complete algebra devissage of $N/C/A$. Retain its points rather than discarding them: put $S_i=\\Gamma(Z_i,\\mathcal O)$ and $T_i=\\Gamma(Y_i,\\mathcal O)$, and let $\\mathfrak p_i,\\mathfrak q_i$ be the primes of $z_i,y_i$. By the chain definition $\\pi_i(z_i)=y_i$ and $\\pi_i^{-1}(y_i)=\\{z_i\\}$, hence $\\mathfrak p_i$ is the unique prime of $S_i$ above $\\mathfrak q_i$. The first closed immersion sends $z_1$ to $\\mathfrak q$, and the next closed immersion sends $z_{i+1}$ to $y_i$; on rings these are exactly the required contractions under $C\\to S_1$ and $T_i\\to S_{i+1}$. All points lie over $\\mathfrak m$. The module isomorphisms, successive cokernels and last zero cokernel are supplied by the translation. If the chain is empty, its initial module is zero and the asserted pointing conditions are vacuous.",
+   "uses": [
+    "lem-trf-pointed-devissage-affine-translation",
+    "def-trf-pointed-scheme-devissage-data",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 05I0 (remark-same-notion), 05HX (definition-complete-devissage-algebra), 05HZ (definition-complete-devissage-at-x-algebra). The connecting-prime contraction is along the displayed map $T_i\to S_{i+1}$."
+   }
+  },
+  {
+   "text": "For each $i$, $Y_i=\\operatorname{Spec}T_i\\to\\operatorname{Spec}A$ is smooth with geometrically irreducible fibres by the chain definition. Smooth-flatness and the affine flatness criterion show that $A\\to T_i$ is flat; smoothness includes local finite presentation, so the affine finite-presentation criterion makes this map finitely presented. Smooth fibres are geometrically reduced by [sbc-lem-smooth-geometrically-reduced]. For any $\\mathfrak a\\subset A$ and extension $K/\\kappa(\\mathfrak a)$, the affine fibre $\\operatorname{Spec}(T_i\\otimes_AK)$ is therefore reduced and irreducible. Irreducible includes nonempty, so the integral-scheme characterization makes this affine scheme integral and its coordinate ring a nonzero integral domain. This verifies the fibre-ring clause for every prime and every extension, not just the distinguished closed fibre.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-geometrically-irreducible",
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 05HX and 05HZ; morphisms.tex Tags 01VE (lemma-smooth-locally-finite-presentation), 01VF (lemma-smooth-flat); varieties.tex Tag 056T (lemma-smooth-geometrically-normal)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-trf-pointed-scheme-devissage-data",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-smooth-flat",
+  "lem-sfb-pointed-affine-devissage-etale-existence",
+  "lem-trf-devissage-pointed-restriction",
+  "lem-trf-pointed-devissage-affine-translation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-root-lifting-etale-retraction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05PG (theorem-flattening-local), first proof paragraph, with the pointed chart of Tags 05HR / 05I1 and henselian retraction Tag 04GG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|completeDevissage|pointed.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T23:47:26Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|completeDevissage|pointed.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Henselian and smooth/etale presentation results do not produce a complete pointed chain with successive module cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-23T23:47:26Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Henselian and smooth/etale presentation results do not produce a complete pointed chain with successive module cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian local base complete devissage of a finite module after etale localization",
+   "results": "{\"t\": \"2026-10-23T23:47:26Z\", \"tool\": \"leansearch\", \"query\": \"Henselian local base complete devissage of a finite module after etale localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing\", \"HenselianLocalRing.mk\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"2e946467d3ce00af\"} Henselian and smooth/etale presentation results do not produce a complete pointed chain with successive module cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a local essentially finitely presented algebra over a henselian ring admits a pointed complete devissage after a faithfully flat local extension",
+   "results": "{\"t\": \"2026-10-23T23:47:30Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a local essentially finitely presented algebra over a henselian ring admits a pointed complete devissage after a faithfully flat local extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"HenselianLocalRing\", \"HenselianRing\", \"HenselianLocalRing.TFAE\", \"IsHausdorff.of_isLocalRing\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"df1d33d3aad5cbd0\"} Henselian and smooth/etale presentation results do not produce a complete pointed chain with successive module cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local complete devissage finite module smooth geometrically integral algebras generic basis and successive cokernels",
+   "results": "{\"t\": \"2026-10-23T23:47:31Z\", \"tool\": \"leanfinder\", \"query\": \"Etale local complete devissage finite module smooth geometrically integral algebras generic basis and successive cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Etale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"d8004e0d504a600e\"} Henselian and smooth/etale presentation results do not produce a complete pointed chain with successive module cokernels.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module admits a pointed complete devissage after elementary etale neighborhoods of source and base",
+   "results": "{\"t\": \"2026-10-24T00:33:50Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type quasi coherent module admits a pointed complete devissage after elementary etale neighborhoods of source and base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"e9e0058b8daa910c\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Module.Finite",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|Devissage",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"grep\", \"query\": \"devissage|dévissage|Devissage\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete pointed Raynaud Gruson devissage of a coherent module after etale base change",
+   "results": "{\"t\": \"2026-10-24T00:34:19Z\", \"tool\": \"leansearch\", \"query\": \"Complete pointed Raynaud Gruson devissage of a coherent module after etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.formallyEtale\", \"FinitePresentation.of_isBaseChange\", \"IsBaseChange.rank_eq\", \"IsBaseChange.finrank_eq\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"355802dd1b7808ec\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson complete devissage at a point of a finite type scheme for a finite type quasi coherent sheaf",
+   "results": "{\"t\": \"2026-10-24T00:35:03Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Gruson complete devissage at a point of a finite type scheme for a finite type quasi coherent sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"aedde89d360646ef\"} Read the hits: local generators and quasi-coherence, etale base change, and spreading-out morphisms do not construct a complete pointed devissage chain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-henselian-fp-module-quotient-flattening-ideal",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of sk-thm-sf-ctf-stability-direct-images: compactification and direct-image preservation, inherited algebraic flattening prerequisite; Tag 05PG first paragraph, reducing to a complete devissage at the marked prime using Tag 05I1 / Tag 05HR.",
+   "via": [
+    "lem-sfb-henselian-fp-module-quotient-flattening-ideal",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-henselian-pointed-devissage-chart",
+  "worker": "stage1",
+  "summary": "Constructed a finite module model, retained the scheme-theoretic pointed chain through the henselian etale retraction, and translated its marked points to the required primes. Added one general scheme-existence input because the existing algebra existence node explicitly forgets pointing. Checked local faithful flatness, all fibre rings, and the zero-module case.",
+  "blueprint": "Proof (3) of sk-thm-sf-ctf-stability-direct-images: compactification and direct-image preservation, inherited algebraic flattening prerequisite; Tag 05PG first paragraph, reducing to a complete devissage at the marked prime using Tag 05I1 / Tag 05HR.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-devissage-pointed-restriction",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-trf-pointed-devissage-affine-translation",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-root-lifting-etale-retraction",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic affine, henselian or pointed-devissage interface used in the Tag 05PG prerequisite argument; the six-functor unit has no replacement for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-devissage-pointed-restriction",
+  "lem-trf-pointed-devissage-affine-translation",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-root-lifting-etale-retraction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-3a4f18902",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-3a4f18902 (reviewer sub-agent of L); spot-checked: I read all six steps of the item and the new node in full, with flat.tex 05PG (first proof paragraph), 05HR, 05HI, 05HZ and 05I0 open. The item statement is unchanged from live. In live and side-live it is still unsplit, there is no repair note, and no SGA source is cited. The steps hold. Step 1 builds the localization model B≅(C_0)_{q_0} and shows N_0 is finite. Step 3 applies the henselian root-lifting and etale retraction to get τ with τ⁻¹(m)=m'. The residue-field hypothesis of restriction (1) holds because κ(m')→κ(m) is an isomorphism (A→A'→A is the identity). Cancellation, base change and composition make C étale over C_0, hence finitely presented. Step 4 gets B→D flat and local, hence faithfully flat. Step 5 reads the pointing from the chain definition: π⁻¹(y)={z} gives the unique prime, and i_1(z_1)=q and i_j(z_j)=y_{j-1} give the contractions. Step 6 gets flat and finitely presented from smoothness, and every fibre ring is reduced and irreducible, which includes nonempty, so it is a nonzero domain. I tested P=0, a field base and a non-finitely-presented P. The new node is true: it is Stacks 05HR with the auxiliary chain of the definition node. It is not a duplicate: the existing trf existence node forgets the pointing in its statement, though its proof Steps 2-8 prove this node's affine case and can be transcribed when it is split. It is also not a restatement of the item. FIX (B2): the new statement used f' without introducing it and did not require f'(x')=b'. The corrected statement introduces f':X'→B' locally of finite type with f'(x')=b' and f∘g=e∘f', and makes the chain explicitly for (g*F,X',B',x',b'). Only the statement changes. Batch 5: the closure of def-trf-pointed-scheme-devissage-data, lem-trf-devissage-pointed-restriction and lem-trf-pointed-devissage-affine-translation contains only generic commutative-algebra dévissage nodes, with no trace-formula, Poincaré or nt-assume node. They are neither of the two assumptions nor steps of their proofs, so I accepted them. The split_report generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianPointedDevissageChart",
+  "declaration": "AlgebraicGeometry.exists_henselian_pointed_devissage_chart",
+  "declarations": [
+   "AlgebraicGeometry.henselianChartLocalization",
+   "AlgebraicGeometry.exists_henselian_pointed_devissage_chart"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselianPointedDevissageChart.lean",
+  "statement": "theorem exists_henselian_pointed_devissage_chart (A B : Type u) [CommRing A] [CommRing B] [HenselianLocalRing A] [IsLocalRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] [Algebra.EssFiniteType A B] (P : Type v) [AddCommGroup P] [Module B P] [Module.Finite B P] : ∃ (C : CommAlgCat.{u} A) (_ : Algebra.FiniteType A C) (N : ModuleCat.{max u v} C) (_ : Module.Finite C N) (q : PrimeSpectrum C) (f : B →ₐ[A] Localization.AtPrime q.asIdeal), q.asIdeal.comap (algebraMap A C) = IsLocalRing.maximalIdeal A ∧ IsLocalHom f.toRingHom ∧ f.toRingHom.FaithfullyFlat ∧ Nonempty (henselianChartLocalization q N ≃ₗ[Localization.AtPrime q.asIdeal] (ModuleCat.extendScalars f.toRingHom).obj (ModuleCat.of B P)) ∧ ∃ d : CompleteAlgebraDevissage A C (IsLocalRing.maximalIdeal A) N, (∀ i : Fin d.n, (algebraMap A (d.B i)).Flat ∧ Algebra.FinitePresentation A (d.B i)) ∧ (∀ (i : Fin d.n) (a : PrimeSpectrum A) (K : Type (max u w)) [Field K] [Algebra a.asIdeal.ResidueField K] [Algebra A K] [IsScalarTower A a.asIdeal.ResidueField K], IsDomain (d.B i ⊗[A] K)) ∧ ∃ (qi : ∀ i : Fin d.n, PrimeSpectrum (d.B i)) (pi : ∀ i : Fin d.n, PrimeSpectrum (d.A i)), (∀ i, (qi i).asIdeal.comap (algebraMap A (d.B i)) = IsLocalRing.maximalIdeal A) ∧ (∀ i, (pi i).asIdeal.comap (d.bToA i).toRingHom = (qi i).asIdeal) ∧ (∀ (i : Fin d.n) (p : PrimeSpectrum (d.A i)), p.asIdeal.comap (d.bToA i).toRingHom = (qi i).asIdeal → p = pi i) ∧ (∀ (i : Fin d.n) (hi : i.val = 0), (pi i).asIdeal.comap (d.sToA i hi).toRingHom = q.asIdeal) ∧ (∀ (i j : Fin d.n) (hij : j.val = i.val + 1), (pi j).asIdeal.comap (d.bToAnext i j hij).toRingHom = (qi i).asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d17ff1043",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Node diff vs live/side-live: only the lean record, plus one stmt_dep def-weil-pbc-essentially-finite-type-algebra (status mathlib, accepted as landed by stage2_delivery; Algebra.EssFiniteType is used in the Lean). lean.statement is verbatim in the file. Checked against Stacks 05PG/05HZ and the live CompleteAlgebraDevissage structure, clause by clause: henselian local A, local B, local hom, EssFiniteType, finite P (no finite presentation); C finite type, N finite, q over m, f: B→ₐ[A] C_q local and faithfully flat, Nonempty D-linear iso LocalizedModule q N ≃ D⊗[B] P; d over maximalIdeal A; each A→T_i flat and finitely presented; IsDomain(T_i⊗K) for all primes a and all K/κ(a) with K in Type(max u w); qi/pi with uniqueness and the C→S_1 and T_i→S_{i+1} contractions. Edge cases: P=0 gives n=0 with vacuous pointing; field base OK. Docstrings carry the sources, the blueprint id and all six proof steps; the helper is real data; sorry only; no clash in live/side-live. Advisory: A and B share universe u (harmless, B is essentially of finite type over A); Mathlib's Shrink-based ModuleCat.localizedModule could have been reused. No compile (no file changed)."
+ }
+}

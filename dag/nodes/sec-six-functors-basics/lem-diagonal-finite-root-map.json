@@ -1,0 +1,126 @@
+{
+ "id": "lem-diagonal-finite-root-map",
+ "kind": "statement",
+ "title": "The kernel-normalized finite root comparison",
+ "statement": "For a scheme X and every positive N invertible in global sections, there exists FiniteRoots X N of [def-sfb-diagonal-coefficient-diagrams]. Its isomorphism is cartierRootsIso and its composite with the inclusion into pro-etale units is exactly the pulled-back etale kernel inclusion followed by cartierUnitsComparison.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite Cartier root identification"
+ },
+ "proof": [
+  {
+   "text": "Use the canonical Cartier root isomorphism. Its underlying map is the kernel lift cartierRootsComparison, so the defining kernel-lift equation gives the exact inclusion normalization.",
+   "uses": [
+    "lem-sp-cartier-reduction-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartier-reduction-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "U4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite Cartier root identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cone of root projections followed by free module units induces a map into the inverse limit of integral Tate twists. Coefficient quotient by a regular element commutes with geometric pullback and direct image.",
+   "results": "Eight hits concerning adic-completion projections, perfectoid untilts, and inverse limits; no diagonal root-cone or scalar/pullback compatibility theorem.",
+   "date": "2026-10-24",
+   "verdict": "Use the ordinary limit universal property and the existing free-module adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.isLimitOfPreserves",
+   "results": "Eight hits, including isLimitOfPreserves and preserves_lift_mapCone. isLimitOfPreserves gives exactly the underlying-module limit used by the root map.",
+   "date": "2026-10-24",
+   "verdict": "Reuse isLimitOfPreserves."
+  },
+  {
+   "tool": "grep",
+   "query": "freeForgetAdjunction|spIntegralTwistSystem|QuotientPullMap|BaseSquares",
+   "results": "Eighteen Mathlib hits for freeForgetAdjunction, none for the project-specific compatibility structures. Local rg found their definitions but no complete construction.",
+   "date": "2026-10-24",
+   "verdict": "The project-specific comparison statements are new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite Cartier root identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteRootMap",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteRootMap.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalFiniteRoots_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalFiniteRoots_exists"
+  ],
+  "statement": "theorem diagonalFiniteRoots_exists (X : Scheme.{u}) (N : ℕ) (hN : 0 < N)\n    (hX : IsUnit (N : Γ(X, ⊤))) : Nonempty (FiniteRoots X N)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "independent cc review: item module diff + 13 new modules/nodes vs clone (Family, ScalarCompatibility, FiniteReductions, FamilyPullback, SupportedSource defs; unit sk-prop-diagonal-tower realized=empty; importer grep = 0)"
+ }
+}

@@ -1,0 +1,368 @@
+{
+ "id": "lem-sfb-pointwise-finite-ultrametric-cochain-series",
+ "kind": "statement",
+ "title": "Pointwise finite ultrametric cochain series sum continuously before completion",
+ "statement": "Let $V$ be a normed field, meaning a field [def-weil-field] with a multiplicative real-valued absolute value and metric $d(v,w)=|v-w|$, satisfying $|v+w|\\leq\\max(|v|,|w|)$. No completeness of $V$ is assumed. Let $\\iota:V\\hookrightarrow\\widehat V$ be its isometric field embedding into the complete normed field [lem-sfb-normed-field-completion]. Let $S$ be a profinite space (compact Hausdorff with clopen basis), $G$ a profinite group (compact Hausdorff with open normal subgroup basis), and $n\\geq1$, using [def-weil-size-convention]. Write $C^r(P,G;V)=C(P\\times G^r,V)$ for all continuous maps, with trivial group action, $d^0=0$, and for $r\\geq1$\n$$(dc)(s;g_1,\\ldots,g_{r+1})=c(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^r(-1)^a c(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}c(s;g_1,\\ldots,g_r).$$\nLet $b_i\\in C^{n-1}(S,G;V)$, $i\\geq0$, satisfy $\\|b_i\\|_\\infty\\to0$ and, for each fixed $(s,x)$, $b_i(s,x)=0$ for all sufficiently large $i$. Then the partial sums $b^{(N)}=\\sum_{i=0}^N b_i$ converge uniformly in $\\widehat V$; their limit is $\\iota\\circ b$ for the pointwise finite sum $b(s,x)=\\sum_i b_i(s,x)\\in V$. The function $b:S\\times G^{n-1}\\to V$ is continuous in the original norm topology, the same partial sums converge uniformly to it in $V$, and\n$$\\|b-b^{(N)}\\|_\\infty\\leq\\sup_{i>N}\\|b_i\\|_\\infty.$$\nIf $e_i=db_i$ and the partial sums $\\sum_{i=0}^N e_i$ converge uniformly to $z\\in C^n(S,G;V)$, then $db=z$. This includes $n=1$ with $d^0=0$ and the empty $S$, with all supremum norms of its functions understood as zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is motivation only; agent-formulated analytic lemma extracted from old proof step 10: uniform summation in the completion, algebraic values, continuity and differential. WANTED: exact norm-topological reference."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-normed-field-completion",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=S\\times G^{n-1}$ and $a_i=\\|b_i\\|_\\infty$. Since $a_i\\to0$, the nonnegative real sequence $a_i$ is bounded (bound a finite initial segment and use $a_i<1$ afterwards). Thus $t_N=\\sup_{i>N}a_i$ exists and is finite. Given $\\epsilon>0$, eventually all $a_i<\\epsilon/2$, so eventually $0\\le t_N\\le\\epsilon/2<\\epsilon$; hence $t_N\\to0$. Induction on the number of summands gives $|\\sum_{j\\in F}v_j|\\le\\max_{j\\in F}|v_j|$ for nonempty finite $F$: the induction step is exactly the assumed two-term ultrametric inequality. The empty sum has norm zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion: finite ultrametric sums and real tail bounds"
+   }
+  },
+  {
+   "text": "For each $x\\in X$, choose $K_x$ with $b_i(x)=0$ for $i>K_x$ and define $b(x)=\\sum_{i=0}^{K_x}b_i(x)$. Adding zero terms makes this independent of the choice. For any $N$, $b(x)-b^{(N)}(x)$ is the finite sum over $N<i\\le\\max(N,K_x)$. Step 1 bounds its norm by $t_N$, independently of $x$. Taking the supremum proves the claimed tail inequality and uniform convergence in $V$. In particular $|b(x)|\\le\\max(a_0,t_0)$, so this supremum norm and the difference norms are finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion: pointwise finite construction and tail estimate"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and $\\epsilon>0$. Each $b^{(N)}$ is continuous: intersect the finitely many neighborhoods where $|b_i(y)-b_i(x)|<\\epsilon$ for $0\\le i\\le N$ and apply the finite ultrametric inequality. Choose $N$ with $t_N<\\epsilon$, and a neighborhood where $|b^{(N)}(y)-b^{(N)}(x)|<\\epsilon$. On it, write $b(y)-b(x)$ as $(b-b^{(N)})(y)+(b^{(N)}(y)-b^{(N)}(x))+(b^{(N)}-b)(x)$. All three terms have norm less than $\\epsilon$, so their sum does too. This proves continuity in the original norm topology, without a completeness hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion: original-field continuity"
+   }
+  },
+  {
+   "text": "The embedding supplied by [lem-sfb-normed-field-completion] is an isometry and a ring homomorphism. Consequently the partial sums of $\\iota\\circ b_i$ equal $\\iota\\circ b^{(N)}$ and $|\\iota(b(x))-\\iota(b^{(N)}(x))|=|b(x)-b^{(N)}(x)|\\le t_N$. They therefore converge uniformly in $\\widehat V$ to $\\iota\\circ b$, as required.",
+   "uses": [
+    "lem-sfb-normed-field-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion: isometric completion compatibility"
+   }
+  },
+  {
+   "text": "For $r=n-1\\ge1$, every term of $dh$ is a signed value of $h$, so the displayed differential and the finite ultrametric inequality imply $\\|dh\\|_\\infty\\le\\|h\\|_\\infty$. Expanding the same finite formula gives $d(b-b^{(N)})=db-\\sum_{i=0}^Ndb_i$. Thus $\\|db-\\sum_{i=0}^Ne_i\\|_\\infty\\le t_N$. Since these sums also converge uniformly to $z$, at each point $|db-z|\\le\\max(t_N,|\\sum_{i=0}^Ne_i-z|)$ tends to zero, proving $db=z$. The cochain $db$ is continuous: the argument maps in each term of $d$ are continuous projections or use continuous multiplication in $G$; the finite-neighborhood argument of step 3 handles their signed sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion: finite differential estimate and equality of limits"
+   }
+  },
+  {
+   "text": "If $n=1$, the preceding summation and continuity arguments apply to $X=S\\times G^0=S$. Here $db=d^0b=0$ and every $e_i=0$, so uniform convergence forces $z=0$, giving $db=z$. If $S$ is empty, all functions involved are the unique empty functions, all norms are zero by the stated convention, and every asserted continuity, convergence, bound and equality holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion: degree zero and empty-space cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-field-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is motivation only; direct finite-sum and epsilon proof of the extracted analytic lemma, not an assertion that the blueprint contains this proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an incomplete nonarchimedean normed field pointwise eventually zero continuous cochains with supremum norms tending to zero sum uniformly to a continuous cochain and commute with differential",
+   "results": {
+    "t": "2026-10-22T06:04:05Z",
+    "tool": "leanfinder",
+    "query": "In an incomplete nonarchimedean normed field pointwise eventually zero continuous cochains with supremum norms tending to zero sum uniformly to a continuous cochain and commute with differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.Cochain.InductionUp.limitSequence",
+     "NonarchimedeanAddGroup.summable_iff_tendsto_cofinite_zero",
+     "NonarchimedeanAddGroup.summable_of_tendsto_cofinite_zero",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.MultiInd.complex",
+     "CochainComplex.HomComplex.Cochain.ofHoms_zero",
+     "CochainComplex.HomComplex.Cochain.comp_zero_cochain_v",
+     "CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo"
+    ],
+    "digest": "001caced8d105532"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: complete nonarchimedean summability and completion range criteria do not alone state uniform convergence, original-field continuity and the cochain differential conclusion under pointwise finiteness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasSum\", \"IsUltrametricDist\"",
+   "results": {
+    "t": "2026-10-22T06:03:54Z",
+    "tool": "loogle",
+    "query": "\"HasSum\", \"IsUltrametricDist\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: complete nonarchimedean summability and completion range criteria do not alone state uniform convergence, original-field continuity and the cochain differential conclusion under pointwise finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "(ultrametric|nonarchimedean).*(uniform|tsum|hasSum)|(uniform|tsum|hasSum).*(ultrametric|nonarchimedean)",
+   "results": {
+    "t": "2026-10-22T06:03:54Z",
+    "tool": "grep",
+    "query": "(ultrametric|nonarchimedean).*(uniform|tsum|hasSum)|(uniform|tsum|hasSum).*(ultrametric|nonarchimedean)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 24,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/Padics/MahlerBasis.lean",
+     "Mathlib/FieldTheory/RatFunc/Valuation.lean",
+     "Mathlib/Topology/MetricSpace/Ultra/Basic.lean",
+     "Mathlib/Topology/UniformSpace/Ultra/Constructions.lean",
+     "Mathlib/Topology/UniformSpace/Ultra/Constructions.lean",
+     "Mathlib/Topology/UniformSpace/Ultra/Constructions.lean",
+     "Mathlib/Topology/UniformSpace/Ultra/Constructions.lean"
+    ],
+    "digest": "9bce496d9b1fda3d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: complete nonarchimedean summability and completion range criteria do not alone state uniform convergence, original-field continuity and the cochain differential conclusion under pointwise finiteness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform sum of pointwise finite continuous functions into an incomplete ultrametric field when supremum norms tend to zero",
+   "results": {
+    "t": "2026-10-22T06:03:54Z",
+    "tool": "leansearch",
+    "query": "Uniform sum of pointwise finite continuous functions into an incomplete ultrametric field when supremum norms tend to zero",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion uniform Cauchy sum of continuous functions lands in the original normed field because every point has only finitely many nonzero terms",
+   "results": {
+    "t": "2026-10-22T06:04:06Z",
+    "tool": "leanfinder",
+    "query": "Completion uniform Cauchy sum of continuous functions lands in the original normed field because every point has only finitely many nonzero terms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "summable_iff_cauchySeq_finset_and_tsum_mem",
+     "summable_iff_summable_compl_and_tsum_mem",
+     "Summable.toCompl_tsum",
+     "hasSum_iff_hasSum_compl",
+     "summable_iff_cauchySeq_finset",
+     "HasSum.of_sigma",
+     "cauchySeq_finset_iff_tsum_vanishing",
+     "cauchySeq_finset_iff_sum_vanishing"
+    ],
+    "digest": "3e4ad31616e0f07a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: complete nonarchimedean summability and completion range criteria do not alone state uniform convergence, original-field continuity and the cochain differential conclusion under pointwise finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise finite series of continuous functions into a nonarchimedean normed field converges uniformly if the supremum norms tend to zero",
+   "results": {
+    "t": "2026-10-23T04:25:15Z",
+    "tool": "leanfinder",
+    "query": "Pointwise finite series of continuous functions into a nonarchimedean normed field converges uniformly if the supremum norms tend to zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "tendstoUniformly_tsum",
+     "tendstoUniformlyOn_tsum",
+     "tendstoUniformly_tsum_nat",
+     "tendstoUniformlyOn_tsum_nat",
+     "tendstoUniformlyOn_tsum_nat_eventually",
+     "HasSumUniformlyOn.of_norm_le_summable",
+     "tendstoUniformly_tsum_of_cofinite_eventually",
+     "tendstoUniformlyOn_tsum_of_cofinite_eventually"
+    ],
+    "digest": "dfffdeb543af247d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the full incomplete-field pointwise-finite cochain statement is not a one-line specialization; FunctionSeries requires a complete target and a summable real majorant, and Nonarchimedean summability requires completeness. Uniform-limit continuity alone covers only a subsidiary fact."
+  },
+  {
+   "tool": "grep",
+   "query": "summable_iff_tendsto_cofinite_zero|continuous_of_uniform|TendstoUniformly.continuous",
+   "results": {
+    "t": "2026-10-23T04:25:39Z",
+    "tool": "grep",
+    "query": "summable_iff_tendsto_cofinite_zero|continuous_of_uniform|TendstoUniformly.continuous",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean",
+     "Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean",
+     "Mathlib/Topology/UniformSpace/UniformConvergence.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/Equicontinuity.lean"
+    ],
+    "digest": "58d40f751fb2d8cb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the full incomplete-field pointwise-finite cochain statement is not a one-line specialization; FunctionSeries requires a complete target and a summable real majorant, and Nonarchimedean summability requires completeness. Uniform-limit continuity alone covers only a subsidiary fact."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform convergence of pointwise eventually finite sums of continuous ultrametric valued functions with norms tending to zero",
+   "results": {
+    "t": "2026-10-23T04:25:40Z",
+    "tool": "leansearch",
+    "query": "Uniform convergence of pointwise eventually finite sums of continuous ultrametric valued functions with norms tending to zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SummableUniformlyOn",
+     "SummableUniformlyOn.hasSumUniformlyOn",
+     "HasSumUniformly",
+     "HasSumUniformlyOn.of_norm_le_summable",
+     "tendstoUniformlyOn_tsum_of_cofinite_eventually",
+     "SummableUniformly.hasSumUniformly",
+     "summableUniformlyOn_iff_hasSumUniformlyOn",
+     "SummableUniformlyOn.exists"
+    ],
+    "digest": "048b80513c229a2f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the full incomplete-field pointwise-finite cochain statement is not a one-line specialization; FunctionSeries requires a complete target and a summable real majorant, and Nonarchimedean summability requires completeness. Uniform-limit continuity alone covers only a subsidiary fact."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TendstoUniformly\", \"Continuous\"",
+   "results": {
+    "t": "2026-10-23T04:25:41Z",
+    "tool": "loogle",
+    "query": "\"TendstoUniformly\", \"Continuous\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "UniformContinuous₂.tendstoUniformly",
+     "UniformContinuous.comp_tendstoUniformly",
+     "UniformContinuous.comp_tendstoUniformlyOn",
+     "UniformContinuous.comp_tendstoUniformlyOnFilter",
+     "UniformContinuousOn.tendstoUniformlyOn",
+     "UniformContinuousOn.tendstoUniformly",
+     "TendstoUniformly.uniformContinuous",
+     "TendstoUniformly.continuous"
+    ],
+    "digest": "ef7a9d9026ad7954"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the full incomplete-field pointwise-finite cochain statement is not a one-line specialization; FunctionSeries requires a complete target and a summable real majorant, and Nonarchimedean summability requires completeness. Uniform-limit continuity alone covers only a subsidiary fact."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a nonarchimedean group a series is summable if and only if its terms tend to zero, without completeness if pointwise supports are finite",
+   "results": {
+    "t": "2026-10-23T04:26:26Z",
+    "tool": "leanfinder",
+    "query": "In a nonarchimedean group a series is summable if and only if its terms tend to zero, without completeness if pointwise supports are finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NonarchimedeanAddGroup.summable_iff_tendsto_cofinite_zero",
+     "NonarchimedeanAddGroup.summable_of_tendsto_cofinite_zero",
+     "NonarchimedeanAddGroup.cauchySeq_sum_of_tendsto_cofinite_zero",
+     "NonarchimedeanGroup.multipliable_iff_tendsto_cofinite_one",
+     "NonarchimedeanGroup.multipliable_of_tendsto_cofinite_one",
+     "summable_iff_vanishing",
+     "summable_iff_tsum_vanishing",
+     "summable_iff_nat_tsum_vanishing"
+    ],
+    "digest": "dcaaa33aabca031e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the full incomplete-field pointwise-finite cochain statement is not a one-line specialization; FunctionSeries requires a complete target and a summable real majorant, and Nonarchimedean summability requires completeness. Uniform-limit continuity alone covers only a subsidiary fact."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion of the old finite-quotient-descent proof step 10: summing pointwise finite small cochains in their original normed field, then embedding isometrically into the completion.",
+   "via": [
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pointwise-finite-ultrametric-cochain-series",
+  "worker": "stage1",
+  "summary": "Q157 checked the original-field and empty-space hypotheses and wrote a direct finite-tail proof. No new nodes: each estimate and continuity argument is elementary and written out; only the already-existing Mathlib completion leaf is cited. The differential estimate is expanded rather than hidden behind a continuity-of-operator claim. Statement unchanged.",
+  "blueprint": "Main 20261015 direct-images proof paragraph (3), analytic expansion inherited from the finite-quotient-descent step 10: steps 1-3 construct the original-field limit, step 4 identifies its completion image, steps 5-6 prove the differential and edge cases. Blueprint searches for ultrametric and cochain series found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-2b6985de1",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-2b6985de1 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged from the base and there are 6 steps, no new nodes, no unit edits and no tool_uses. Source: main-20261015 direct-images proof paragraph (3) is about proper and open direct images preserving D_ctf and has no summation argument, so the agent origin and the 'motivation only' place are accurate. The only citer is lem-sfb-prime-to-ell-cochain-finite-quotient-descent, step 5. Its step 4 supplies continuous b_i in C^{n-1}(S_0,G;Ω) with db_i=e_i, ||b_i||->0 and each b_i(s,x) eventually zero; S_0 and G are profinite, and the sums of e_i converge uniformly to z_0 in the noncomplete Ω. So every hypothesis is met, and the differential and d^0=0 convention are written exactly as in the citer. Step checks: (1) t_N=sup_{i>N}||b_i|| tends to 0, and the ultrametric bound on finite sums follows by induction; ||b_i|| is finite because X is compact (implicit, advisory only). (2) b is the pointwise finite sum, and each tail is a finite sum with norm at most t_N, which gives the stated bound without completeness. (3) Continuity in V follows from an ε/3 argument with the ultrametric inequality. (4) lem-sfb-normed-field-completion is used only for 'ring homomorphism and isometry', which its statement says, with matching hypotheses (no completeness). (5) ||dh||<=||h|| since each sign has |±1|=1; by linearity ||db-ΣΣ_{i<=N}e_i||<=t_N, hence db=z. (6) For n=1, d^0=0 forces z=0; empty S is trivial. Small cases tested: n=1, empty S, finitely many nonzero b_i, V=Ω, characteristic 2. Duplicate search with rg -L: lem-wf-ultrametric-family-summability needs a complete field; lem-sfb-nonarchimedean-finite-evaluation-calculus and lem-sfb-rectangle-corrected-pointwise-finite-primitives are not series lemmas. There is no duplicate, the Mathlib search records are adequate, and there is no SGA, no cycle and no relabelling."
+ }
+}

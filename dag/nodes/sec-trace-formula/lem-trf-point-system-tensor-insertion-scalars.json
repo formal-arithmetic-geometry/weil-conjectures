@@ -1,0 +1,128 @@
+{
+ "id": "lem-trf-point-system-tensor-insertion-scalars",
+ "kind": "statement",
+ "title": "The tensor insertion transports scalars through the inverse coefficient map",
+ "statement": "Fix D,l,E and a point automorphism g as in [def-trf-coefficient-conventions], with no characteristic hypothesis, and an arbitrary strict coefficient module system M on the ringed sequence site [def-coef-ringed-sequence-site]. For a natural index n and a pro-etale object U, let j_(n,M,U)(x) be the actual finite pullback adjunction-unit generator restricted along the canonical comma arrow [def-weil-inverse-image-pullback-comparison, def-pur-integral-finite-pullback], for x in the original module M_n(gU). If c_n:F_n(B_n)->B_n is the canonical coefficient isomorphism, then j_(n,M,U)(c_n(U)^(-1)(a)*x)=a*j_(n,M,U)(x) for every a in B_n(U). The scalar action on x is the original strict-system action, including the evaluation coefficient-ring identification. No normalized-system or transition hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Scalar extension commutes with pullbacks and their units; strict-system tensor-transition step of lem-trf-point-system-transport-descent, following Stacks Tags 03CZ, 03EK and 0941."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-coef-ringed-sequence-site",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-integral-finite-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For a generic module-sheaf pushforward through a ring morphism, restriction of scalars gives the source action by applying that ring morphism to the scalar. A morphism from that pushforward is therefore linear for the transported action. Apply this to the normalized ordinary tensor comparison of lem-trf-point-system-finite-tensor-comparison at the evaluated finite module.",
+   "uses": [
+    "lem-trf-point-system-finite-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+    "place": "Scalar extension commutes with pullbacks and their units; strict-system tensor-transition step of lem-trf-point-system-transport-descent, following Stacks Tags 03CZ, 03EK and 0941."
+   }
+  },
+  {
+   "text": "Evaluation is pushforward on the level slice through an equality cast of coefficient rings. The identity-on-sections normalization of lem-trf-point-system-ordinary-evaluation-comparisons says each component of this ring cast is the identity. Thus its module action is the original system action. Substitute this identity in the preceding linearity equation and use the normalized tensor-unit formula on both sides. This proves the asserted equality for every scalar and section.",
+   "uses": [
+    "lem-trf-point-system-ordinary-evaluation-comparisons",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+    "place": "Scalar extension commutes with pullbacks and their units; strict-system tensor-transition step of lem-trf-point-system-transport-descent, following Stacks Tags 03CZ, 03EK and 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-system-finite-tensor-comparison",
+  "lem-trf-point-system-ordinary-evaluation-comparisons",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Scalar extension commutes with pullbacks and their units; strict-system tensor-transition step of lem-trf-point-system-transport-descent, following Stacks Tags 03CZ, 03EK and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module inverse image along an isomorphism has a unique tensor unit comparison, and its scalar multiplication transports scalars through the inverse coefficient ring map",
+   "results": "8 hits including LinearMap.inverse, TensorProduct.congr_symm_tmul, ModuleCat.hom_inv_leftUnitor, ModuleCat.hom_inv_rightUnitor, and TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul. These are scalar and tensor ingredients, not the normalized isomorphism or scalar formula for the recorded pro-etale pullback and evaluated strict system.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.map_smul",
+   "results": "LinearMap.map_smul in Mathlib.Algebra.Module.LinearMap.Defs gives linearity of an abstract linear map. It is used for the ordinary comparison but does not identify the transported and evaluated coefficient actions.",
+   "date": "2026-10-27",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "PresheafOfModules.map_smul, ModuleCat.restrictScalars.smul_def, SheafOfModules.pushforward, and NatIso.isIso_of_isIso_app in Mathlib",
+   "results": "Read these generic linearity, scalar-restriction, and componentwise-isomorphism constructions. They supply the elementary steps, but none specifies the actual finite pro-etale tensor-unit comparison or its strict-system scalar normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemTransportDescent",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Tensor-transition step of the strict point-system transport prerequisite; transport the original horizontal restrictions through the finite tensor-unit comparison.",
+   "via": [
+    "lem-trf-point-system-tensor-transition",
+    "lem-trf-point-system-transport-descent",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemTensorInsertionScalars",
+  "file": "lean/Sheaf/Paper/PointSystemTensorInsertionScalars.lean",
+  "declaration": "WeilConjectures.PointSystemTensorTransition.tensor_insertion_smul",
+  "statement": "theorem tensor_insertion_smul (n : ℕ)\n    (M : coefficientSequenceModules l E (Spec (.of D.k)))\n    (U : (Spec (.of D.k)).ProEt)\n    (a : (integralCoefficientSheaf l E (Spec (.of D.k)) n).obj.obj (op U))\n    (x : M.val.obj (op (n, (proEtaleIsoPostcompose g).obj U))) :\n    (fun y : M.val.obj (op (n, (proEtaleIsoPostcompose g).obj U)) ↦\n      (((integralOperationsLevelPullback.{t, u} l E g n).obj\n        ((coefficientSequenceEvaluation l E (Spec (.of D.k)) n).obj M)).val.map\n          (proEtaleIsoCommaArrow g U).op)\n          (integralOperationsPullbackGenerator l E g n\n            ((coefficientSequenceEvaluation l E (Spec (.of D.k)) n).obj M)\n            ((proEtaleIsoPostcompose g).obj U) y))\n        (@HSMul.hSMul _ (M.val.obj (op (n, (proEtaleIsoPostcompose g).obj U)))\n          (M.val.obj (op (n, (proEtaleIsoPostcompose g).obj U))) inferInstance\n          ((inv (inverseImageFiniteCoefficientMap l E g n)).hom.app (op U) a) x) =\n      a • (fun y : M.val.obj (op (n, (proEtaleIsoPostcompose g).obj U)) ↦\n      (((integralOperationsLevelPullback.{t, u} l E g n).obj\n        ((coefficientSequenceEvaluation l E (Spec (.of D.k)) n).obj M)).val.map\n          (proEtaleIsoCommaArrow g U).op)\n          (integralOperationsPullbackGenerator l E g n\n            ((coefficientSequenceEvaluation l E (Spec (.of D.k)) n).obj M)\n            ((proEtaleIsoPostcompose g).obj U) y)) x",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T222615-L-673735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T222615-L-673735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

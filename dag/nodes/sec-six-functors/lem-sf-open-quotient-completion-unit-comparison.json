@@ -1,0 +1,326 @@
+{
+ "id": "lem-sf-open-quotient-completion-unit-comparison",
+ "kind": "statement",
+ "title": "Open strict quotient comparison and actual completion-unit normalization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$ and a uniformizer $t$, and put $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Assume $(R,(t))$ satisfies [def-weil-pbc-adic-coefficient-datum]. On the small pro-etale site of each scheme $T$ put $B_T=\\varprojlim_n(A_n)_T$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients], and use the ordinary unbounded derived category $D(B_T)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For $H\\in D(B_T)$ write $Q_T(H)_n=\\operatorname{Res}_n(H\\otimes^L_{B_T}(A_n)_T)$ for the strict quotient tower on a single flat-term K-flat representative, with transitions induced by $A_{n+1}\\to A_n$ and augmentation $x\\mapsto x\\otimes1$ [def-weil-integral-reduction-tower, def-pc-kflat-complex, def-pc-flat-sheaf-modules, lem-pc-kflat-resolution]. Put $C_T(H)=R\\lim Q_T(H)$, using total right derived inverse limit on strict towers, and let $\\eta_{T,H}:H\\to C_T(H)$ be the map induced by this augmentation [lem-cbc-exact-product-functor-strict-limit].\nLet $e:V\\hookrightarrow W$ be an open immersion of schemes [def-weil-open-immersion]. Identify the two finite coefficient systems and their limits by the constant-section and projection-normalized maps [lem-weil-pbc-profinite-coefficient-inverse-image]. Write $e^*$ for exact ringed-slice restriction [lem-pur-site-restriction-module-adjunction-exact]; under the identification of the slice site $W_{\\mathrm{proet}}/V$ with $V_{\\mathrm{proet}}$ [lem-weil-proetale-weakly-etale-localization] it is the inverse image $e^{-1}$ [lem-sfb-proetale-object-inverse-image-restriction], so the preceding coefficient identifications apply to it. For every $H\\in D(B_W)$ there is a natural isomorphism of derived strict $B_V$-towers\n$$\\tau_H:e^*Q_W(H)\\xrightarrow{\\sim}Q_V(e^*H).$$\nOn flat-term K-flat representatives it is induced by the balanced tensor restriction maps sending $x\\otimes a$ to the same restricted tensor. It commutes with every quotient transition and carries the pulled strict augmentation to the quotient augmentation of $e^*H$. It is independent of the representative through the canonical derived computation comparisons.\nLet $\\lambda_N:e^*R\\lim N\\xrightarrow{\\sim}R\\lim e^*N$ be the normalized exact-product comparison of [lem-cbc-exact-product-functor-strict-limit]. The natural derived isomorphisms\n$$b_H=R\\lim\\tau_H:R\\lim e^*Q_W(H)\\xrightarrow{\\sim}C_V(e^*H),\\qquad\n\\rho_H=b_H\\lambda_{Q_W(H)}:e^*C_W(H)\\xrightarrow{\\sim}C_V(e^*H)$$\nsatisfy $\\rho_H e^*\\eta_{W,H}=\\eta_{V,e^*H}$. More precisely, if $\\alpha_H:e^*H\\to R\\lim e^*Q_W(H)$ is the map of the pulled strict quotient augmentation, then\n$$\\alpha_H=\\lambda_{Q_W(H)}e^*\\eta_{W,H},\\qquad b_H\\alpha_H=\\eta_{V,e^*H}.$$\nHere $\\lambda_N=\\theta_{e^*N}^{-1}\\kappa_N e^*(\\theta_N)$ on the signed Roos models $\\mathsf H_N^q=(\\prod N_n)^q\\oplus(\\prod N_n)^{q-1}$, $d(x,y)=(dx,(1-s)x-dy)$: $\\kappa_N$ is the canonical product comparison on both summands. Under the canonical exact-localization identification of derived open pullback, $\\alpha_H$ is the augmented construction of [def-weil-pbc-completed-pullback]. Thus $b_H$ identifies its ordinary-to-completed comparison with precisely the actual $\\eta_{V,e^*H}$ whenever that completed functor is defined on complete inputs; the displayed augmented construction and equations hold for arbitrary $H$, without completeness, boundedness, constructibility or a quasi-compactness hypothesis on $e$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), proof of (5); completed-ring strict augmentation refinement of old Steps 5–6. Tensor pullback input: sites-cohomology.tex Tags 0G7E, lemma-pullback-K-flat, and 07A4, lemma-pullback-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-reduction-tower",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-completed-pullback",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-sf-augmented-strict-integral-completion",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-sf-integral-open-operations",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "proof": [
+  {
+   "text": "Construct the exact open operation presentation from normalizedOpenSections and openCoefficientOperationsExistence, then obtain its strict augmented tensor descent s. Obtain normalized signed Roos compatibility and its constant-tower unit equation for the same presentation and the graph-normalized ordinary pullback isomorphism. Apply Mathlib leftDerivedNatIso to the termwise ordinary comparison and the existing universal derivedCounit; exact restriction computes its own left derived functor. The leftDerivedNatTrans_app equation is exactly the required counit normalization of tower.",
+   "uses": [
+    "lem-sf-open-strict-quotient-descent",
+    "lem-sf-open-normalized-roos-restriction",
+    "lem-sf-open-exact-pullback-localization",
+    "def-a1-integral-completed-tower-pullback-universes",
+    "lem-sf-open-coefficient-operations-existence",
+    "lem-sf-normalized-open-section-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define constantPull as the inverse constantRestriction followed by deltaW whiskered with the inverse tower comparison. Cancelling tower inverse with tower proves constantPull_normalized. Naturality of tower at augmentation_W then gives completedComparison after applying Rlim.",
+   "uses": [
+    "def-sf-augmented-strict-integral-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand alpha and the completion unit. The constant-tower unit equation supplied by normalized Roos restriction and naturality of lambda at augmentation_W give alpha_eq. This uses only functoriality and does not add a quotient-specific inverse-limit hypothesis.",
+   "uses": [
+    "lem-sf-open-normalized-roos-restriction",
+    "def-sf-augmented-strict-integral-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand alpha and the target completion unit. Combine the two Rlim maps using functoriality, substitute the strict augmented square from s, and cancel constantRestriction inverse with constantRestriction. This proves b_alpha without a further Roos assertion.",
+   "uses": [
+    "lem-sf-open-strict-quotient-descent",
+    "def-sf-augmented-strict-integral-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use alpha_eq supplied by the normalized Roos comparison, reassociate the composite and substitute b_alpha. This proves rho_unit. Assemble the three comparison records and these proved normalization identities, preserving every statement field.",
+   "uses": [
+    "lem-sf-open-normalized-roos-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-strict-quotient-descent",
+  "lem-sf-open-normalized-roos-restriction",
+  "lem-sf-open-exact-pullback-localization",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "lem-sf-open-coefficient-operations-existence",
+  "lem-sf-normalized-open-section-existence",
+  "def-sf-augmented-strict-integral-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), proof of (5); completed-ring strict augmentation refinement of old Steps 5–6. Tensor pullback input: sites-cohomology.tex Tags 0G7E, lemma-pullback-K-flat, and 07A4, lemma-pullback-tensor-product.",
+  "note": "Lean assembly of strict tensor descent, signed Roos restriction and exact pullback localization; all completedPullback and target-unit identities follow by naturality, functoriality and cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completedPullback|completionUnit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The balanced tensor isomorphism on an open slice induces a strict augmented reduction tower isomorphism and preserves the canonical derived completion unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_2) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] → TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M\", \"doc\": \"A linear map from the tensor product of the $ I $-adic completion of a commutative ring $ R $ with an $ R $-module $ M $ to the $ I $-adic completion of $ M $, defined by scalar multiplication. This m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction on arbitrary unbounded completed coefficient sheaves commutes with strict quotient completion by normalized Roos models and identifies the completed pullback comparison with the actual unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"module\": \"Mathlib/CategoryTheory/Sites/ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory\", \"doc\": \"For a category $\\\\mathcal{C}$ with Grothendieck topology $J$, a presheaf $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$, a covering sieve $S$ on $X$, and a morphism $f: Y \\\\to X$, the action of the plus c\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposite.op V)))).eqLocus\\n    \", \"doc\": \"Let $F$ be a sheaf of commutative rings on a topological space $X$, and let $U$ and $V$ be two open subsets of $X$. The sheaf condition provides an isomorphism between the ring of sections $F(U \\\\cup V\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (D : AlgebraicGeometry.PresheafedSpace.GlueData C)\\n  [inst_1 : CategoryTheory.Limits.HasLimits C] (i j k : D.J) (U : TopologicalSpace.Opens ↑↑(D.U i)),\\n  ∃ (eq :\\n    Opposite.op\\n        ((AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opens\", \"doc\": \"For any objects $i,j,k$ in the indexing category $J$ of gluing data $D$ and any open subset $U$ of the topological space $D.U(i)$, there exists an equality $eq$ such that the composition of the image-\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposite.op V)))).eqLocus\\n    \", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, and open subsets $ U $ and $ V $ of $ X $, applying the sheaf's morphism corresponding to the inclusion $ U \\\\subseteq U \\\\cup V $ to\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) {U V W UW VW : TopologicalSpace.Opens ↑X} (e : W ≤ U ⊔ V)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposi\", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, given open subsets $ U, V, W $ with $ W \\\\subseteq U \\\\cup V $, and elements $ x $ in the product of sections over $ U $ and $ V $, t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction tensor quotient tower comparison preserves augmentation and gives the unit normalized isomorphism between pullback of derived completion and completion of pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M = AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] (x : AdicCompletion I R ⊗[R] M) :\\n  ofTensorProductEquivOfFiniteNoetherian I M x = ofTensorProduct I M x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] : ofTensorProductEquivOfFiniteNoetherian I M = ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.congr\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, an $ R $-linear equivalence between $ M $ and $ N $ induces a linear equivalence between their $ I $-adic completions\"}\n  {\"name\": \"TensorProduct.tensorQuotientEquiv\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \"(n : Submodule R N) :\\n  M ⊗[R] (N ⧸ (n : Submodule R N)) ≃ₗ[R] (M ⊗[R] N) ⧸ (LinearMap.range (map (LinearMap.id : M →ₗ[R] M) n.subtype))\", \"doc\": \"For a commutative ring $ R $, $ R $-module $ M $, and submodule $ n $ of an $ R $-module $ N $, the tensor product $ M \\\\otimes_R (N/n) $ is naturally isomorphic to the quotient module $ (M \\\\otimes_R N\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"module\": \"Mathlib.RingTheory.QuotSMulTop\", \"type\": \": M ⊗[R] QuotSMulTop r M' ≃ₗ[R] QuotSMulTop r (M ⊗[R] M')\", \"doc\": \"A linear equivalence between the tensor product of a module $ M $ with the quotient module $ M' / rM' $ and the quotient module of the tensor product $ M \\\\otimes_R M' $ by $ r(M \\\\otimes_R M') $, const\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimitsOfShape, CategoryTheory.Sheaf",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.plusPlusSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"The sheafification functor, as a functor taking values in `Sheaf`.\"}\n  {\"name\": \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.plusPlusAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"The sheafification functor is left adjoint to the forgetful functor.\"}\n  {\"name\": \"CategoryTheory.plusPlusSheaf_obj_obj\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.plusPlusSheaf_preservesZeroMorphisms\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.presheaf_mono_of_mono\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.plusPlusSheaf_map_hom\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w} [CategoryTheory.Category.{t, w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColimi\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesLimitsOfShape_presheafToSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w} [CategoryTheory.Category.{t, w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColimi\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.plusPlusIsoSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{t, w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColimi\", \"doc\": \"`plusPlus` is isomorphic to `sheafify`.\"}\n  {\"name\": \"CategoryTheory.plusPlusFunctorIsoSheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{t, w} D] [∀ (P : CategoryTheory.Functor Cᵒᵖ D) (X : C) (S : J.Cover X), CategoryTheory.Limits.HasMultiequalizer (S.index P)] [∀ (X : C), CategoryTheory.Limits.HasColimi\", \"doc\": \"`plusPlusFunctor` is isomorphic to `sheafification`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary adic modules, sheafification or ordinary pullback, not the stated derived strict quotient completion and its actual unit."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|completionUnit|completedPullback",
+   "results": "{\"t\": \"2026-10-23T04:25:22Z\", \"tool\": \"grep\", \"query\": \"Roos|roos|completionUnit|completedPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits do not state the strict derived quotient/completion-unit comparison; ordinary completion and condensed-module or ordinary sheaf-pullback interfaces only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction commutes with derived adic completion with compatibility of its strict quotient augmentation unit",
+   "results": "{\"t\": \"2026-10-23T04:25:22Z\", \"tool\": \"leansearch\", \"query\": \"Open restriction commutes with derived adic completion with compatibility of its strict quotient augmentation unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.module\", \"AdicCompletion\", \"IsAdicComplete.mkQ_comp_lift\", \"AdicCompletion.lift\", \"AdicCompletion.mkₐ\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.of_comp_lift\", \"AdicCompletion.congr\"], \"digest\": \"3c6cac40a5a14d70\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits do not state the strict derived quotient/completion-unit comparison; ordinary completion and condensed-module or ordinary sheaf-pullback interfaces only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, PreservesLimits",
+   "results": "{\"t\": \"2026-10-23T04:25:22Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, PreservesLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'PreservesLimits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: query rejected with loogle: unknown identifier 'PreservesLimits'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact open restriction on ringed proetale sheaves preserves strict derived quotient towers and their augmentations and commutes with derived inverse limit preserving the completion unit",
+   "results": "{\"t\": \"2026-10-23T04:25:26Z\", \"tool\": \"leanfinder\", \"query\": \"Exact open restriction on ringed proetale sheaves preserves strict derived quotient towers and their augmentations and commutes with derived inverse limit preserving the completion unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"AdicCompletion.map_exact\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.comp\"], \"digest\": \"7a47b5da29cdcdab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits do not state the strict derived quotient/completion-unit comparison; ordinary completion and condensed-module or ordinary sheaf-pullback interfaces only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction functor on sheaves of modules preserves tensor quotients and their strict augmented towers and the normalized derived inverse limit comparison",
+   "results": "{\"t\": \"2026-10-23T04:26:31Z\", \"tool\": \"leanfinder\", \"query\": \"An exact restriction functor on sheaves of modules preserves tensor quotients and their strict augmented towers and the normalized derived inverse limit comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"Condensed.instAB4StarCondensedMod\"], \"digest\": \"054495510afe63cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits do not state the strict derived quotient/completion-unit comparison; ordinary completion and condensed-module or ordinary sheaf-pullback interfaces only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-23T04:27:08Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits do not state the strict derived quotient/completion-unit comparison; ordinary completion and condensed-module or ordinary sheaf-pullback interfaces only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-roos-unit-adjunction",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor: both composites restrict to the identity; strict open restriction and actual completed-pullback unit comparison (old Steps 5–6).",
+   "via": [
+    "lem-sf-open-roos-unit-adjunction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-open-quotient-completion-unit-comparison",
+  "worker": "stage1",
+  "summary": "Verified the statement against the completed-pullback route; assembled tensor restriction, strict transition and augmentation equations, localization independence, exact-product hypotheses, and the actual normalized completion-unit equations. No new nodes and no statement change.",
+  "blueprint": "prop-sf-pf-coherence proof, base-change paragraph, open factor: both composites restrict to the identity; realizes the quotient/completion-unit refinement extracted through lem-sf-pf-open-factor-coherence and lem-sf-open-roos-unit-adjunction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the open site with the ringed slice; a general site-localization tool. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Provides projection and transition normalized finite and completed coefficient identifications. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides arbitrary unbounded flat-term K-flat representatives. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Provides exact restriction and its extension-by-zero left adjoint. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Preserves the good representative class under ringed pullback. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes quotient reductions and preserves quasi-isomorphisms between K-flat representatives. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Provides the pure-tensor normalized algebraic inverse-image comparison. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Provides the equivalence localizing flat-term K-flat representatives. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Detects strict tower quasi-isomorphisms and exactness levelwise. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "det-pe-products-exact",
+    "why": "Supplies exact countable products for arbitrary completed ring sheaves on pro-etale sites. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Supplies the specified Roos normalization and preservation of strict augmentations. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies functorial total derived inverse limit on strict towers. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Identifies the zero-shifted-component augmented Roos map with the actual derived augmentation. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Identifies exact functor localization with termwise derived action. This unit has no replacement for this generic interface."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies pro-etale inverse image along an object (here the open V of W) with slice restriction for sheaves of sets, abelian groups and rings; needed to apply the inverse-image coefficient lemma to e^*. Generic site tool; no node of this unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Identifies actual module inverse image over a non-constant ring sheaf (B_W) with slice restriction at a monic open object, for the comparison with completed pullback in Step 7. Generic tool; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-tower-category-levelwise-abelian",
+  "det-pe-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-proetale-ringed-open-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-0747590bd",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-0747590bd (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, every cited statement (16 stmt_deps, 18 proof_deps), Stacks proetale 099N l.4336 (clauses (2),(5) and the proof of (5)), the unit sk-prop-sf-pf-coherence and the parent lem-sf-open-roos-unit-adjunction Step 5. The delivery has no new nodes and leaves the statement unchanged. The mathematics is correct. (1) Coefficient datum: R/t^n is finite, torsion and perfect via [R→R]. (2) Step 1: e^*P stays flat-term K-flat by ringed-topos-kflat-pullback with c=id. (3) Step 2: the pure-tensor-normalized inverse-image tensor comparison is used with B_V-linearity via the projection equation. (4) Step 3 is elementary: the γ_n/τ_n squares. (5) Step 4 descends through W^{-1}P≃D(R), using levelwise quasi-isomorphisms and change of rings. (6) Step 5 checks every hypothesis of cbc-exact-product-functor-strict-limit: exact products by det-pe-products-exact (any scheme), e^* exact, and the product comparison via the e_!⊣e^* Hom computation. Its augmentation clause gives α=λe^*η. (7) Step 6: naturality of the Roos ρ in strict maps sends ((e^*γ_n),0) to ((γ'_n),0), so bα=η. (8) Step 7: e^* is exact, so the derived tower pullback is termwise, and the claim is restricted to complete inputs. Edge cases checked: e=id, V=∅, H=0, n=1, unbounded H, non-quasi-compact e. No duplicate: open-roos-restriction-unit lacks τ and works over finite-type k-schemes, and integral-roos-derived-pullback-unit is a different decomposition. No SGA source and no cycle. Fault C4/C1: the statement, Step 1 and Step 7 identify slice restriction with the topos inverse image e^{-1}, which the profinite-coefficient lemma and def-weil-pbc-completed-pullback need. They cite only lem-weil-proetale-weakly-etale-localization, which identifies the sites and constant rings but not e^{-1} with restriction. Repair: the statement, stmt_deps and Step 1 now cite lem-sfb-proetale-object-inverse-image-restriction (clause 1: r^{-1}G≅G|_W for sets/abelian groups/rings). Step 7 also cites lem-weil-pbc-proetale-ringed-open-comparison (module inverse image over a non-constant ring equals slice restriction at a monic open). proof_deps is recomputed and both nodes are added to split_report.tool_uses. All 14 declared tool_uses are accepted as generic.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenQuotientCompletionUnitComparison",
+  "declaration": "WeilConjectures.OpenQuotientCompletion.openQuotientCompletionUnitComparison",
+  "declarations": [
+   "WeilConjectures.OpenQuotientCompletion.RoosComparison",
+   "WeilConjectures.OpenQuotientCompletion.PullbackComparison",
+   "WeilConjectures.OpenQuotientCompletion.Comparison",
+   "WeilConjectures.OpenQuotientCompletion.openQuotientCompletionUnitComparison"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenQuotientCompletionUnitComparison.lean",
+  "statement": "theorem openQuotientCompletionUnitComparison (_d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)) (_hd : _d.ideal = Ideal.span {Padic.coefficientExtensionUniformizer l E}) : ∃ o : IntegralOpenReduction.Operations l E e, Nonempty (Comparison l E e o)",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe37d4ceb",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Read item, 7 steps, both delivered modules, the new def node, and dependency Lean (IntegralOpenReduction.Coefficients/Operations, CompletedTowerIndependent reductionPair/pull/derivedPull, exactProductFunctorStrictLimit, StrictRoosModel). Dependency records unchanged vs side-live; item adds 4 used stmt_deps; statements verbatim. Every clause rendered: tau (strict + tensor + transitions + computes + augmented), lambda via theta (K-injective normalization) and kappa (both summands), alpha_eq, b_alpha, rho_unit, completedComparison via pinned PullbackComparison (unit generators, derived counit). All data fields pinned; the ∃ o binder only uses pinned fields (finiteMap, completedMap, integral), not the twistable openSystems ones. New def node: real data; augmentation = choose of a sorried ∃! well-definedness theorem with docstring (true: counit iso on good reps). Theorem stmt_dep lem-weil-pbc-ring-sheaves-grothendieck supplies the IsGrothendieckAbelian instance needed for rlim, a genuine dependency on its conclusion, PASS on that point. No extra hypotheses, independent universes t,u, edge cases n=0, V empty, e=id, H=0, unbounded, non-qc covered. No file changed, so no compile; relied on worker's per-file compile. Notes: second reading is a self reading; alpha is matched to the def-a1 O_E completed pullback (acceptable specialization)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261027T084516-L-3687329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

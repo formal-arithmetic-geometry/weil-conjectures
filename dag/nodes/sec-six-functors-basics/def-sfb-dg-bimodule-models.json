@@ -1,0 +1,266 @@
+{
+ "id": "def-sfb-dg-bimodule-models",
+ "kind": "definition",
+ "title": "Coordinate models and shift comparisons for DG bimodule tensor and Hom",
+ "status": "split",
+ "statement": "Use the integer cochain DG algebras, right modules, underlying complexes, quasi-isomorphisms and standard derived localizations of [def-sfb-dg-derived-category]. Let A and B be associative unital DG algebras over Z and let N be an (A,B)-bimodule: a complex with unital associative chain-map actions A tensor N to N and N tensor B to N satisfying the commuting-actions square. This is Mathlib's monoidal bimodule notion. Write rho_M for a right module's chain action and evaluate actions using the inclusions of homogeneous pure tensors. A degree-r cochain f:X to Y is right B-linear if f(xb)=f(x)b for all homogeneous x,b, with no sign. A right DG B-module I is homotopically injective if, for every acyclic right DG B-module C, every closed homogeneous right B-linear cochain C to I in every integer degree r is the differential of a right B-linear cochain in degree r-1, where delta(f)=d_I f-(-1)^r f d_C.\nA balanced tensor model for a functor F:Mod(A) to Mod(B) is a natural chain map pi_M:M tensor_Z N to F(M) exhibiting its underlying complex as the coequalizer of rho_M tensor 1 and (1 tensor actLeft) after reassociation, whose right B-action is induced by actRight on N. Thus this model specifies exactly the balanced tensor, with direct-sum totalization and differential d(m tensor n)=d(m) tensor n+(-1)^|m| m tensor d(n).\nA bimodule Hom model for G:Mod(B) to Mod(A) consists, in every degree r and at every Y, of an injective linear coordinate map from G(Y)^r onto all homogeneous right B-linear degree-r cochains N to Y. Coordinates intertwine the differential delta, the action (fa)(n)=f(an), and postcomposition by every morphism Y to Y'. An ordinary adjunction F left-adjoint to G is currying when its transpose sends g to m mapping to n mapping to g(pi_M(m tensor n)).\nFor a shift S isomorphic to M[k] as in [def-sfb-dg-derived-category], a tensor model's shift comparison F(S) isomorphic to F(M)[k] is sign free on pi(m tensor n), shifting the M element. A Hom model's shift comparison G(S) isomorphic to G(Y)[k], for S isomorphic to Y[k], is sign free on every homogeneous coordinate, shifting its output. These definitions are universal-property and coordinate specifications; no existence or adjunction theorem is part of them.",
+ "stmt_deps": [
+  "def-sfb-dg-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Sections bimodules and tensor product, bimodules and internal hom; Tag 09LN (lemma-tensor-hom-adjunction); Tags 0FQN and 0FQR, sign-free source-tensor and target-Hom shifts; homotopical injectivity, Tags 09KU and 09KY."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DGAlgebra|DgAlgebra|Bimod|Homotopically",
+   "results": {
+    "t": "2026-10-24T01:47:01Z",
+    "tool": "grep",
+    "query": "DGAlgebra|DgAlgebra|Bimod|Homotopically",
+    "sub": "CategoryTheory/Monoidal",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+     "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+     "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+     "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+     "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+     "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+     "Mathlib/CategoryTheory/Monoidal/Action/Basic.lean"
+    ],
+    "digest": "1e68f346bac1c02a"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib Bimod, CochainComplex.HomComplex.Cochain and δ, and the published DG derived category. No existing declaration packages the right-module tensor/Hom coordinate models or their shift normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bimod\", \"Adjunction\"",
+   "results": {
+    "t": "2026-10-24T01:47:02Z",
+    "tool": "loogle",
+    "query": "\"Bimod\", \"Adjunction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib Bimod, CochainComplex.HomComplex.Cochain and δ, and the published DG derived category. No existing declaration packages the right-module tensor/Hom coordinate models or their shift normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived tensor Hom adjunction for arbitrary differential graded bimodules",
+   "results": {
+    "t": "2026-10-24T01:47:03Z",
+    "tool": "leanfinder",
+    "query": "Unbounded derived tensor Hom adjunction for arbitrary differential graded bimodules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.tensorHom",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasTensorTensorUnit",
+     "HomologicalComplex.instHasTensorTensorUnit_1",
+     "HomologicalComplex.HasGoodTensor₂₃"
+    ],
+    "digest": "041c8c23788aedcc"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib Bimod, CochainComplex.HomComplex.Cochain and δ, and the published DG derived category. No existing declaration packages the right-module tensor/Hom coordinate models or their shift normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded balanced tensor and complex of homogeneous right linear maps for DG bimodules",
+   "results": {
+    "t": "2026-10-24T01:47:40Z",
+    "tool": "leansearch",
+    "query": "Differential graded balanced tensor and complex of homogeneous right linear maps for DG bimodules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "GradedTensorProduct.tmul",
+     "TensorProduct.algebraMap_gradedMul",
+     "GradedTensorProduct.hom_ext",
+     "TensorProduct.gradedMul",
+     "GradedTensorProduct.includeRight",
+     "CochainComplex.HomComplex.δ_hom",
+     "TensorProduct.gradedComm",
+     "GradedTensorProduct.mulHom"
+    ],
+    "digest": "80bcb998dc4e797b"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib Bimod, CochainComplex.HomComplex.Cochain and δ, and the published DG derived category. No existing declaration packages the right-module tensor/Hom coordinate models or their shift normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "DG bimodule balanced tensor coequalizer homogeneous right linear Hom complex",
+   "results": {
+    "t": "2026-10-24T01:53:16Z",
+    "tool": "leansearch",
+    "query": "DG bimodule balanced tensor coequalizer homogeneous right linear Hom complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Bimod.TensorBimod.X",
+     "Bimod.TensorBimod.π_tensor_id_actRight",
+     "Bimod.tensorBimod_actRight",
+     "Bimod.tensorBimod",
+     "Bimod.TensorBimod.actRight.congr_simp",
+     "Bimod.tensorBimod_X",
+     "Bimod.TensorBimod.actRight",
+     "Bimod.RightUnitorBimod.hom"
+    ],
+    "digest": "a07a8c0c58d49e46"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib Bimod, CochainComplex.HomComplex.Cochain and δ, and the published DG derived category. No existing declaration packages the right-module tensor/Hom coordinate models or their shift normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopically injective differential graded modules over associative differential graded algebras",
+   "results": {
+    "t": "2026-10-24T01:53:17Z",
+    "tool": "leanfinder",
+    "query": "Homotopically injective differential graded modules over associative differential graded algebras",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomotopyEquiv.isKInjective",
+     "CochainComplex.IsKInjective.homotopyZero_def",
+     "CochainComplex.IsKInjective.nonempty_homotopy_zero",
+     "CochainComplex.IsKInjective.homotopyZero",
+     "CochainComplex.IsKInjective",
+     "CochainComplex.isKInjective_of_injective",
+     "CochainComplex.IsKProjective.homotopyZero_def",
+     "CochainComplex.isKInjective_of_injective_aux"
+    ],
+    "digest": "8a5682d585e837f2"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse Mathlib Bimod, CochainComplex.HomComplex.Cochain and δ, and the published DG derived category. No existing declaration packages the right-module tensor/Hom coordinate models or their shift normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsRightLinearCochain|BalancedTensorModel|BimoduleHomModel|IsHomotopicallyInjective in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs.py search dg bimodule; rg over dag/nodes",
+   "results": "No existing model declarations or definition node. Bimod and its balanced tensor construction exist in Mathlib and are used; ordinary commutative-ring DerivedBimoduleTensorHom is a specialization. DG derived category is owned by def-sfb-dg-derived-category. blueprint search: 0 matching blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "The new notion is a coordinate and universal-property interface on the published right-module encoding, not a new bimodule or tensor definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-bimodule-derived-adjunction",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections.",
+   "via": [
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgBimoduleModels",
+  "declaration": "CategoryTheory.DgAlgebra.BalancedTensorModel",
+  "file": "lean/Sheaf/CategoryTheory/DgBimoduleModels.lean",
+  "statement": "structure BalancedTensorModel {A B : Algebra.{u}} (N : Bimod A B) (F : RightModule A ⥤ RightModule B)",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.DgAlgebra.rightAction",
+   "CategoryTheory.DgAlgebra.homogeneousAction",
+   "CategoryTheory.DgAlgebra.IsRightLinearCochain",
+   "CategoryTheory.DgAlgebra.IsHomotopicallyInjective",
+   "CategoryTheory.DgAlgebra.tensorBalanceLeft",
+   "CategoryTheory.DgAlgebra.tensorBalanceRight",
+   "CategoryTheory.DgAlgebra.BalancedTensorModel",
+   "CategoryTheory.DgAlgebra.BimoduleHomModel",
+   "CategoryTheory.DgAlgebra.IsBimoduleCurrying",
+   "CategoryTheory.DgAlgebra.shiftedElement",
+   "CategoryTheory.DgAlgebra.IsTensorShift",
+   "CategoryTheory.DgAlgebra.IsHomShift"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39e22f43d",
+  "group": "Q73",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39e22f43d",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Read item, 3 stmt_deps, landed DgAlgebraDerivedCategory, both delivered modules and Stacks dga.tex 09LN/09LT/0FQN/0FQR. All clauses match: Bimod N; BalancedTensorModel coequalizer + induced B-action; BimoduleHomModel injective onto right-linear cochains, delta = d f-(-1)^r f d, (fa)(n)=f(an); currying pinned; T right Kan / U left Kan (correct directions); h-injective resolutions + beta iso; homEquiv normalization; IsTriangulated; adj.CommShift; no extra hypotheses or universes. No duplicate or name clash (live, O1, Q46, Q16); record diff only lean+stmt_deps; statements verbatim; 12 declarations match; docstrings and 5 steps present. Finding (H3): shift squares over all k tie commShiftIso k to DerivedStructure.shiftIso k, which has no additivity coherence; shiftIso' n=(-1)^{n(n-1)/2} shiftIso n is a valid instance, and with it on B the squares contradict CommShift.add at 1+1, so the theorem is false. FIX: squares at k=1 only (a Z-CommShift is determined by degree one); fixes/DgBimoduleDerivedAdjunction.lean + fixes/lem-sfb-dg-bimodule-derived-adjunction.lean-record.json; refit_record OK; nt_compile --json clean (17.6 s / 2.8 s). Advisories: DerivedStructure shift coherence; redundant KanExtension import in the models module."
+ }
+}

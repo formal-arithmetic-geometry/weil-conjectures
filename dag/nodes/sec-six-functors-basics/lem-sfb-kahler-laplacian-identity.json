@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-kahler-laplacian-identity",
+ "kind": "statement",
+ "title": "Kähler comparison of the real and Dolbeault Laplacians",
+ "statement": "All vector spaces below are over the complex field $\\mathbf C$ [def-weil-field]. Let $M$ be a complex manifold without boundary of complex dimension $n\\geq0$, equipped with a Kähler metric: a smooth positive definite Hermitian metric whose associated real $(1,1)$-form is closed. Let $A^k(M;\\mathbf C)$ be smooth complex differential forms of total degree $k$, let $A^{p,q}(M)$ be their type subspaces, and let $d=\\partial+\\bar\\partial$ be the exterior derivative. Let $d^*$ and $\\bar\\partial^*$ be the formal adjoints for the metric volume and pointwise Hermitian inner products (characterized by integration against compactly supported smooth test forms). Define $\\Delta_d=dd^*+d^*d$ and $\\Delta_{\\bar\\partial}=\\bar\\partial\\bar\\partial^*+\\bar\\partial^*\\bar\\partial$. On smooth complex differential forms one has the identity $$\\Delta_d=2\\Delta_{\\bar\\partial}.$$ No compactness assumption is needed for this identity of differential operators.",
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "WANTED locally: Wenrui Kong, Notes on Complex Geometry (April 9, 2025), §6.4, Proposition 6.12, printed p.26; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The Laplacian equality in the Kähler identities."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hermitian-dolbeault-data",
+  "def-sfb-kahler-coordinate-data",
+  "def-sfb-formal-dolbeault-operators"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\partial$ and $B=\\bar\\partial$, acting on the direct sum of all total degrees. The differential relations in [lem-sfb-dolbeault-acyclic-resolution] give $A^2=B^2=AB+BA=0$. Only these stated relations are used, not resolution exactness or acyclicity. They can be applied on holomorphic coordinate domains, which are Hausdorff and second countable, and then hold globally because equality of smooth forms is local. Put $A^*=\\partial^*$, $B^*=\\bar\\partial^*$ and $\\Delta_A=AA^*+A^*A$, $\\Delta_B=BB^*+B^*B$. The defining formal-adjoint relation gives $d^*=A^*+B^*$: for compactly supported test forms $u,v$, expand $\\langle(A+B)u,v\\rangle_{L^2}$ and move $A$ and $B$ separately to the other entry. This identifies the adjoint uniquely: if the difference $T$ of two proposed adjoints paired to zero with every test $u$, choose $u=\\chi Tv$ with $\\chi\\geq0$ supported in a chart to obtain $\\int\\chi|Tv|^2=0$, forcing $Tv=0$ there. The same compact-support test gives the pointwise identity for arbitrary smooth $v$.",
+   "uses": [
+    "lem-sfb-dolbeault-acyclic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "§3.1, Theorem 3.4 (type differentials); §6.1 formal adjoints; explicit adjoint-sum argument by Q58"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-kahler-first-order-commutators] with the given metric, with $L=\\omega\\wedge(-)$ and $Q=\\Lambda=L^*$. Its hypotheses are exactly the complex manifold, positive Hermitian metric and closed associated form in the statement. With $[P,R]=PR-RP$, its two formulas read $[Q,A]=iB^*$ and $[Q,B]=-iA^*$, equivalently $B^*=-i(QA-AQ)$ and $A^*=i(QB-BQ)$. The adjoints here are the same formal adjoints used in step 1, defined with the same metric and volume.",
+   "uses": [
+    "lem-sfb-kahler-first-order-commutators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "§6.4, Definition 6.10, Lemma 6.11, Proposition 6.12, first-order commutator lines"
+   }
+  },
+  {
+   "text": "The mixed terms vanish by direct expansion, using the differential relations of [lem-sfb-dolbeault-acyclic-resolution] and the substitutions from [lem-sfb-kahler-first-order-commutators]: $$AB^*+B^*A=-i(AQA-A^2Q+QA^2-AQA)=0,$$ $$BA^*+A^*B=i(BQB-B^2Q+QB^2-BQB)=0.$$ Products mean composition, so these cancellations use associativity and distributivity, not an interchange of noncommuting factors.",
+   "uses": [
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-kahler-first-order-commutators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "§6.4, Proposition 6.12, Laplacian line; explicit mixed-term expansion by Q58"
+   }
+  },
+  {
+   "text": "The same substitutions give $$\\Delta_A=i(AQB-ABQ+QBA-BQA),$$ $$\\Delta_B=-i(BQA-BAQ+QAB-AQB).$$ Therefore $$\\Delta_A-\\Delta_B=i\\bigl(Q(AB+BA)-(AB+BA)Q\\bigr)=0,$$ by $AB+BA=0$ from [lem-sfb-dolbeault-acyclic-resolution]. These expansions use precisely the two first-order identities in [lem-sfb-kahler-first-order-commutators]; thus $\\Delta_A=\\Delta_B$.",
+   "uses": [
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-kahler-first-order-commutators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "§6.4, Proposition 6.12, Laplacian line; explicit diagonal-term expansion by Q58"
+   }
+  },
+  {
+   "text": "Finally expand $d=A+B$ and $d^*=A^*+B^*$: $$\\Delta_d=\\Delta_A+\\Delta_B+(AB^*+B^*A)+(BA^*+A^*B)=2\\Delta_B=2\\Delta_{\\bar\\partial}.$$ The mixed terms vanish by step 3 and the diagonal terms agree by step 4. Every identity acts on arbitrary smooth forms and every adjoint is formal, so no global integrability, compactness, completeness, or boundary condition has entered. With zero spaces outside the allowed degrees the calculation also includes the top and bottom degrees, dimension zero and the empty manifold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "§6.4, Proposition 6.12, Laplacian line; explicit final expansion by Q58"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dolbeault-acyclic-resolution",
+  "lem-sfb-kahler-first-order-commutators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Kong §6.4, Proposition 6.12, p.26, read online; local PDF WANTED. Q58 writes the full algebraic derivation from the first-order identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kahler identity exterior derivative Laplacian equals twice the Dolbeault Laplacian on smooth complex differential forms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F}, ContDiff 𝕜 r ω → minSmoothness 𝕜 2 ≤ r → \", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {x : E}, ContDiffAt 𝕜 r ω x → minSmoothnes\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ (w z : ℂ), (Complex.orientation.kahler w) z = z * (starRingEnd ℂ) w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"∀ {ι : Type u_1} {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : NormedAddCommGroup E] [inst_6 : InnerProductSpace ℝ E] [inst_7 : F\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"∀ {F : Type u_3} [inst : NormedAddCommGroup F] [inst_1 : NormedSpace ℝ F] (f : ℂ → F),\\n  Laplacian.laplacian f = fun x => (iteratedFDeriv ℝ 2 f x) ![1, 1] + (iteratedFDeriv ℝ 2 f x) ![Complex.I, Complex.I]\", \"doc\": \"For any function $ f : \\\\mathbb{C} \\\\to F $, the Laplacian $ \\\\Delta f $ evaluated at $ x $ is equal to the sum of the second Fréchet derivatives of $ f $ at $ x $ in the directions $[1, 1]$ and $[i, i]$\"}\n  {\"name\": \"extDerivWithin_extDerivWithin_eqOn\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {s : Set E},\\n  ContDiffOn 𝕜 r ω s →\\n    mi\", \"doc\": \"If a differential form $\\\\omega$ is continuously differentiable of class $C^r$ on a set $s$ with $r \\\\geq \\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2)$, and $s$ satisfies unique differentiability, then the seco\"}\n  {\"name\": \"extDerivWithin_extDerivWithin_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {s : Set E} {x : E},\\n  ContDiffWithinAt 𝕜 \", \"doc\": \"For a differential form $\\\\omega$ over a nontrivially normed field $\\\\mathbb{K}$, if $\\\\omega$ is $C^r$-smooth within a set $s$ at a point $x \\\\in s$ with $r \\\\geq \\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2)$, an\"}\n  {\"name\": \"extDerivWithin_apply_vectorField\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/VectorField\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {s : Set E} {x : E}\\n  {ω : E → E [⋀^Fin (n + 1)]→L[𝕜] F} {V : Fin (n + 2) → E → E},\\n  Diff\", \"doc\": \"For a differential form $\\\\omega$ and vector fields $V_0, \\\\dots, V_{n+1}$ differentiable within a set $S$ at a point $x$ with unique differentiability, the exterior derivative $\\\\mathrm{d}\\\\omega$ evalua\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Kaehler differentials, the Euclidean function Laplacian and a two-dimensional Hermitian form do not compare the differential-form Laplacians on a Kahler manifold."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"laplacian\", \"form\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Kaehler differentials, the Euclidean function Laplacian and a two-dimensional Hermitian form do not compare the differential-form Laplacians on a Kahler manifold."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|Kahler.*[Ii]dentit|Kaehler.*[Ii]dentit|laplacian.*[Ff]orm|[Ff]orm.*laplacian",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"line\": \"20\", \"text\": \"We define a Laplacian based on the sum of second derivatives formula and prove that the Laplacian\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"23\", \"text\": \"standard formula for computing the Laplacian in terms of orthonormal bases of `E`.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"160\", \"text\": \"Standard formula, computing the Laplacian from any orthonormal basis.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"170\", \"text\": \"Standard formula, computing the Laplacian from any orthonormal basis.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"180\", \"text\": \"Standard formula, computing the Laplacian from the standard orthonormal basis of a real inner\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"191\", \"text\": \"Standard formula, computing the Laplacian from the standard orthonormal basis of a real inner\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/TwoDim.lean\", \"line\": \"48\", \"text\": \"* `Orientation.kahler_mul`: the identity `o.kahler x a * o.kahler a y = ‖a‖ ^ 2 * o.kahler x y`\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Kaehler differentials, the Euclidean function Laplacian and a two-dimensional Hermitian form do not compare the differential-form Laplacians on a Kahler manifold."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a Kahler manifold Delta d equals two times Delta bar partial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Laplacian.termΔ\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The Laplacian operator, denoted by $\\\\Delta$, is a second-order differential operator defined as the divergence of the gradient, typically expressed in $n$-dimensional Euclidean space as $\\\\Delta = \\\\sum\"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) (x) (i) : (mvPolynomialBasis R σ).repr (D _ _ x) i = MvPolynomial.pderiv i x\", \"doc\": \"For a commutative ring $ R $ and a type $ \\\\sigma $, the representation of the Kähler differential $ D(x) $ of a polynomial $ x \\\\in R[\\\\sigma] $ in the standard basis $ \\\\{dX_s\\\\}_{s \\\\in \\\\sigma} $ is give\"}\n  {\"name\": \"KaehlerDifferential.D_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(s : S) :\\n  KaehlerDifferential.D R S s =\\n    (KaehlerDifferential.ideal R S).toCotangent\\n      ⟨1 ⊗ₜ s - s ⊗ₜ 1, KaehlerDifferential.one_smul_sub_smul_one_mem_ideal R s⟩\", \"doc\": \"For any element $ s $ in an $ R $-algebra $ S $, the Kähler differential $ d(s) $ is equal to the equivalence class of $ 1 \\\\otimes s - s \\\\otimes 1 $ in the cotangent module $ \\\\Omega_{S/R} $.\"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_D\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) (x) :\\n  (mvPolynomialBasis R σ).repr (D _ _ x) = MvPolynomial.mkDerivation R (Finsupp.single · (1 : MvPolynomial σ R)) x\", \"doc\": \"For a commutative ring $ R $ and type $ \\\\sigma $, the representation of the differential $ dX_x $ in the standard basis $ \\\\{dX_s\\\\}_{s \\\\in \\\\sigma} $ of the Kähler differentials $ \\\\Omega_{R[\\\\sigma]/R} $\"}\n  {\"name\": \"InnerProductSpace.termΔ[_]_\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $\\\\Delta[\\\\cdot]$, representing the Laplacian operator applied to an expression in the context of an inner product space. This parser constructs the syntax $\\\\Delta[\\\\text{expr}]$ where $\\\\tex\"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_comp_D\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) : (mvPolynomialBasis R σ).repr.toLinearMap.compDer (D _ _) = MvPolynomial.mkDerivation _ (Finsupp.single · 1)\", \"doc\": \"The composition of the canonical basis representation map for Kähler differentials of a multivariate polynomial ring $ R[\\\\sigma] $ with the Kähler differential derivation $ D $ coincides with the deri\"}\n  {\"name\": \"KaehlerDifferential.D\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Derivation R S Ω[S⁄R]\", \"doc\": \"The $ R $-linear derivation from an $ R $-algebra $ S $ to the module of Kähler differentials $ \\\\Omega_{S/R} $ that sends each element $ s \\\\in S $ to its differential $ ds $, satisfying the Leibniz ru\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_tmul_D\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[Algebra.IsPushout R S A B] (b a) : tensorKaehlerEquiv R S A B (b ⊗ₜ D _ _ a) = b • D S B (algebraMap A B a)\", \"doc\": \"For any elements $ b $ in the tensor product and $ a $ in the algebra, the tensor product equivalence between Kähler differentials satisfies $ \\\\operatorname{tensorKaehlerEquiv}(b \\\\otimes d(a)) = b \\\\cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Kaehler differentials, the Euclidean function Laplacian and a two-dimensional Hermitian form do not compare the differential-form Laplacians on a Kahler manifold."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Kähler identities identify the de Rham and complex Laplace operators on differential forms with factor two",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ (w z : ℂ), (Complex.orientation.kahler w) z = z * (starRingEnd ℂ) w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F}, ContDiff 𝕜 r ω → minSmoothness 𝕜 2 ≤ r → \", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"Orientation.kahler_apply_apply\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (x y : E), (o.kahler x) y = ↑(inner ℝ x y) + (o.areaForm x) y • Complex.I\", \"doc\": \"For any vectors $x, y$ in a two-dimensional real inner product space $E$, the Kähler structure $o.\\text{kahler}$ evaluated at $x$ and $y$ equals the real inner product $\\\\langle x, y\\\\rangle$ plus the sy\"}\n  {\"name\": \"Orientation.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"{E : Type u_1} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] → [Fact (Module.finrank ℝ E = 2)] → Orientation ℝ E (Fin 2) → E →ₗ[ℝ] E →ₗ[ℝ] ℂ\", \"doc\": \"The Kähler structure is defined as a complex-linear map constructed by combining the real inner product $\\\\langle \\\\cdot, \\\\cdot \\\\rangle$ with the complex structure $i$ and symplectic form $\\\\omega$. Spec\"}\n  {\"name\": \"Orientation.kahler_mul\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (a x y : E), (o.kahler x) a * (o.kahler a) y = ↑‖a‖ ^ 2 * (o.kahler x) y\", \"doc\": \"For vectors $x, a, y$ in the space $E$, the product of the Kähler maps $o.\\\\text{kähler}(x, a)$ and $o.\\\\text{kähler}(a, y)$ equals the square of the norm of $a$ multiplied by the Kähler map $o.\\\\text{kä\"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {x : E}, ContDiffAt 𝕜 r ω x → minSmoothnes\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"∀ {ι : Type u_1} {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : NormedAddCommGroup E] [inst_6 : InnerProductSpace ℝ E] [inst_7 : F\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"Orientation.kahler_swap\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (x y : E), (o.kahler x) y = (starRingEnd ℂ) ((o.kahler y) x)\", \"doc\": \"For any vectors $x, y$ in the two-dimensional real inner product space $E$, the Kähler form satisfies $\\\\mathcal{K}(x, y) = \\\\overline{\\\\mathcal{K}(y, x)}$, where $\\\\mathcal{K}(x, y) = \\\\langle x, y \\\\rangl\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Kaehler differentials, the Euclidean function Laplacian and a two-dimensional Hermitian form do not compare the differential-form Laplacians on a Kahler manifold."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a Kahler manifold the de Rham Laplacian equals twice the Dolbeault Laplacian",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"InnerProductSpace.InnerProduct.laplacian\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $ \\\\Delta $ maps elements of the inner product space $ E $ to elements of $ F $, representing the second-order linear differential operator in distribution theory.\"}\n  {\"name\": \"Laplacian.termΔ\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The Laplacian operator, denoted by $\\\\Delta$, is a second-order differential operator defined as the divergence of the gradient, typically expressed in $n$-dimensional Euclidean space as $\\\\Delta = \\\\sum\"}\n  {\"name\": \"SchwartzMap.laplacianCLM_eq'\", \"module\": \"Mathlib.Analysis.Distribution.SchwartzSpace.Deriv\", \"type\": \"(f : 𝓢(E, F)) : laplacianCLM ℝ E 𝓢(E, F) f = Δ f\", \"doc\": \"For any function $ f $ in the Schwartz space $ \\\\mathcal{S}(E, F) $, where $ E $ is a finite-dimensional real inner product space and $ F $ is a real normed vector space, the Laplacian operator defined\"}\n  {\"name\": \"InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Laplacian\", \"type\": \"(f : ℂ → F) : Δ f = fun x ↦ iteratedFDeriv ℝ 2 f x ![1, 1] + iteratedFDeriv ℝ 2 f x ![Complex.I, Complex.I]\", \"doc\": \"For any function $ f : \\\\mathbb{C} \\\\to F $, the Laplacian $ \\\\Delta f $ evaluated at $ x $ is equal to the sum of the second Fréchet derivatives of $ f $ at $ x $ in the directions $[1, 1]$ and $[i, i]$\"}\n  {\"name\": \"LineDeriv.laplacianCLM\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \": V₁ →L[R] V₃\", \"doc\": \"The Laplacian operator is defined as the sum over all indices $i$ of the composition of two continuous linear maps: first applying the linear derivative operator $\\\\partial_{e_i}$ associated with the $\"}\n  {\"name\": \"SchwartzMap.laplacianCLM_eq\", \"module\": \"Mathlib.Analysis.Distribution.SchwartzSpace.Deriv\", \"type\": \"[RCLike 𝕜] [NormedSpace 𝕜 F] (f : 𝓢(E, F)) : laplacianCLM 𝕜 E 𝓢(E, F) f = Δ f\", \"doc\": \"For any real closed-like field $\\\\mathbb{K}$, normed vector space $F$ over $\\\\mathbb{K}$, and Schwartz function $f$ in the Schwartz space $\\\\mathcal{S}(E, F)$, the Laplacian operator $\\\\Delta$ acting on $\"}\n  {\"name\": \"Orientation.kahler_map_complex\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(f : E ≃ₗᵢ[ℝ] ℂ) (hf : Orientation.map (Fin 2) f.toLinearEquiv o = Complex.orientation) (x y : E) :\\n  o.kahler x y = f y * conj (f x)\", \"doc\": \"For a two-dimensional real inner product space $E$ equipped with an orientation $o$, if $f : E \\\\to\\\\cong_{\\\\mathbb{R}} \\\\mathbb{C}$ is a linear isometric equivalence such that $f$ preserves the orientati\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_tmul_D\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[Algebra.IsPushout R S A B] (b a) : tensorKaehlerEquiv R S A B (b ⊗ₜ D _ _ a) = b • D S B (algebraMap A B a)\", \"doc\": \"For any elements $ b $ in the tensor product and $ a $ in the algebra, the tensor product equivalence between Kähler differentials satisfies $ \\\\operatorname{tensorKaehlerEquiv}(b \\\\otimes d(a)) = b \\\\cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean function Laplacians and two-dimensional Hermitian pairings do not compare de Rham and Dolbeault form Laplacians on a Kähler manifold."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"laplacian\", \"form\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean function Laplacians and two-dimensional Hermitian pairings do not compare de Rham and Dolbeault form Laplacians on a Kähler manifold."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|Kahler.*[Ii]dentit|Kaehler.*[Ii]dentit|laplacian.*[Ff]orm|[Ff]orm.*laplacian",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"line\": \"20\", \"text\": \"We define a Laplacian based on the sum of second derivatives formula and prove that the Laplacian\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"23\", \"text\": \"standard formula for computing the Laplacian in terms of orthonormal bases of `E`.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"160\", \"text\": \"Standard formula, computing the Laplacian from any orthonormal basis.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"170\", \"text\": \"Standard formula, computing the Laplacian from any orthonormal basis.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"180\", \"text\": \"Standard formula, computing the Laplacian from the standard orthonormal basis of a real inner\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Laplacian.lean\", \"line\": \"191\", \"text\": \"Standard formula, computing the Laplacian from the standard orthonormal basis of a real inner\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/TwoDim.lean\", \"line\": \"48\", \"text\": \"* `Orientation.kahler_mul`: the identity `o.kahler x a * o.kahler a y = ‖a‖ ^ 2 * o.kahler x y`\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean function Laplacians and two-dimensional Hermitian pairings do not compare de Rham and Dolbeault form Laplacians on a Kähler manifold."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-harmonic-representatives",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: operator identity used before deducing d-closedness by adjointness",
+   "via": [
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kahler-laplacian-identity",
+  "worker": "stage1",
+  "summary": "Preserved the statement; reused the existing Dolbeault differential relations, isolated two first-order Kähler commutator identities as one statement-only input, and wrote every noncommutative expansion giving the Laplacian comparison. Searched project Lean, the full DAG, blueprint and Mathlib; checked signs on the flat complex line.",
+  "blueprint": "Retains the inherited supporting route through projective harmonic representatives, ultimately det-thm-sf-ctf-stability-direct-images proof (3). The ancestor command returns None for the inherited broken chain, so from.node stays null and its existing place/via are retained. Steps 1--2 identify the differential and first-order inputs; steps 3--5 realize the analytic Laplacian comparison used for d-closedness of harmonic representatives."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-bb600e52a",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bb600e52a (reviewer sub-agent of L); spot-checked: Ordinary one-level split; no repair note, so the re-split rule does not apply. I read the item and the new node lem-sfb-kahler-first-order-commutators in full. The item's statement and stmt_deps are byte-identical to the base copy created by Q81. The new node is self-contained and statement-only: it defines h, J, g=Re h, ω=g(J·,·) with dω=0, formal adjoints by compact-support tests, and Λ as the pointwise adjoint of L. It states [Λ,∂]=i∂̄* and [Λ,∂̄]=−i∂*, which agrees with Huybrechts Prop 3.1.12. I recomputed the signs on flat C: Λ(dz∧dz̄)=−2i and ∂*(f dz)=−2f_z̄, so [Λ,∂̄](f dz)=2i f_z̄ ✓. The node is strictly smaller than the item, not a clause of it (D1 ok). Step 1 takes ∂²=∂̄²=∂∂̄+∂̄∂=0 from the actual statement of lem-sfb-dolbeault-acyclic-resolution, applied on coordinate domains so its Hausdorff and second-countability hypotheses hold, then proves d*=∂*+∂̄* with a valid uniqueness argument. Steps 2–5: I re-expanded A*=i[Q,B], B*=−i[Q,A], the vanishing mixed terms, Δ_A−Δ_B=i[Q,AB+BA]=0 and Δ_d=2Δ_∂̄ term by term; all are correct. Duplicate search: rg -L over dag/nodes and blueprint_refs search ('Kahler', 'Laplacian' each return 0 nodes); the nearby analytic nodes (hermitian orthogonal decomposition, harmonic representatives, algebraic Dolbeault comparison) do not state the commutators. Five real Mathlib searches are recorded (LeanFinder ×2, LeanSearch, Loogle, grep); unsplit is correct. No SGA, both cited nodes are in the same unit, no tool_uses, no cycle, proof_deps equals the union of uses. Notes: the Kong PDF is WANTED, so proof_origin=agent is correct; blueprint.from.node is null through the inherited broken ancestor chain, a base-node fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.KahlerLaplacianIdentity",
+  "declaration": "ComplexManifold.kahler_laplacian_identity",
+  "file": "lean/Sheaf/Geometry/Manifold/KahlerLaplacianIdentity.lean",
+  "statement": "theorem kahler_laplacian_identity (n : ℕ) (M : Type u) [TopologicalSpace M] [ChartedSpace (Model n) M] [IsManifold (𝓘(ℂ, Model n)) ∞ M] [T2Space M] [MeasurableSpace M] [BorelSpace M] (g : HermitianMetric n M) (hclosed : IsKahlerMetric g) (μ : MetricVolume g) (D : FormalDolbeaultOperators g μ) : (D.dbar + D.del).comp D.dAdjoint + D.dAdjoint.comp (D.dbar + D.del) = (2 : ℂ) • (D.dbar.comp D.dbarAdjoint + D.dbarAdjoint.comp D.dbar)",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-208888c13",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Item: Lean (d̄+∂)d*+d*(d̄+∂) = 2(∂̄∂̄*+∂̄*∂̄) on all smooth forms matches the node clause by clause (holomorphic manifold + T2 convention, Hermitian metric, IsKahlerMetric, metric volume; no compactness or L² assumption). lean.statement verbatim; stmt_deps all used; only sorry in the theorem; docstrings carry source, blueprint and 5 proof steps; report sections present. New def node def-sfb-formal-dolbeault-operators is justified: landed DolbeaultOperators needs the adjoint identity for all smooth pairs, which fails on noncompact M with Lean integrals. Its compact-test IsSmoothFormalAdjoint (compact α, arbitrary η) determines the adjoints; d is pinned in every degree (exterior_zero + chart extDerivWithin); ∂̄/∂ pinned by bidegree; structure is inhabited and not hollow. No duplicate in DAG, lean/Sheaf, WeilConjectures, Mathlib or parallel runs. Edge cases n=0, empty M, degrees above 2n, out-of-range types, noncompact M covered; identity is robust to per-degree pairing normalisation. No file changed, so no compile. Advisories: exterior_zero redundant; new node does not cite def-weil-field directly."
+ }
+}

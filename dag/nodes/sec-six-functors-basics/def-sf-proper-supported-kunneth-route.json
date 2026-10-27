@@ -1,0 +1,131 @@
+{
+ "id": "def-sf-proper-supported-kunneth-route",
+ "kind": "definition",
+ "title": "Explicit canonical Kunneth route for proper supports",
+ "statement": "For finite commutative A and a cartesian square p:W→X, q:W→Y, f:X→S, g:Y→S, with f,g,q,h proper and q;g=h, construct the isomorphism Rh!(p*E⊗q*K)≅Rf!E⊗Rg!K as follows: transport the specified compact-support compositor along q;g=h; apply Rg! to inverse q-projection followed by inverse proper exchange tensored with K and the canonical swap; apply inverse g-projection; finally swap the output factors. All maps are the existing concrete maps underlying [def-sf-supported-diagonal-calculus], and the swap is the canonical signed symmetry [lem-kun-tensor-sym]. Generic supportedTensorSwapIso, properRouteCompIso, properRouteProjection and properRouteExchange expose the components of these actual maps. There is no equality-of-routes or Kunneth theorem in the data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First supported coordinate extraction before a trace; the coordinate triangle computation before applying its scalar trace"
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "Compose the displayed constructed isomorphisms. Properness supplies quasi-compactness and canonical exchange invertibility. Projection is the existing projectionIso, exchange is the existing rightDerivedLowerShriekBaseChangeMap wrapped componentwise as an isomorphism, composition is the existing specified compactification compositor conjugated by its equality isomorphism, and the swap is the component of derivedTensorSymmetry. Each object and each morphism is written explicitly; each inverse is uniquely determined by its specified forward map, and no arbitrary witness of mere existence supplies data. The component equations and swap naturality are rfl and naturality of the already constructed bifunctor symmetry.",
+   "uses": [
+    "def-sf-supported-diagonal-calculus",
+    "lem-kun-tensor-sym",
+    "lem-kun-proper-base-change-torsion-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-supported-diagonal-calculus",
+  "lem-kun-tensor-sym",
+  "lem-kun-proper-base-change-torsion-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, canonical mixed-counit transpose and proper forget-supports transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For proper morphisms the canonical relative Kunneth isomorphism with compact support agrees with the ordinary Kunneth morphism through the forget supports comparison",
+   "results": "Eight unrelated proper/support complex results, none comparing these specified relative Kunneth and forget-supports maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth projection formula base change two coordinate factorizations proper derived direct image",
+   "results": "Eight unrelated Proj pullback results; no derived Kunneth factorization. Loogle CategoryTheory.Adjunction.projectionMap returned no result.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "kunnethMap_eq|projectionMap.*symmetry|rightDerivedLowerShriek.*comp.*LowerStar; Kunneth|kunneth|forgetSupports in Mathlib/CategoryTheory/Monoidal and Mathlib/AlgebraicGeometry",
+   "results": "Mathlib has no such Kunneth statement. The source library has proved kunnethMap_eq_of_isPullback and braided pullback tensor comparison, but no Kunneth tensor symmetry and no normalization of the supported relative route.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing source-library equations; add only the missing one-route normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedFirstExtraction",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; canonical-mate step of the first coordinate calculation.",
+   "via": [
+    "lem-sf-proper-relative-kunneth-supports",
+    "lem-sf-supported-first-extraction",
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportedKunnethRoute",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportedKunnethRoute.lean",
+  "declaration": "AlgebraicGeometry.Etale.properSupportedKunnethRoute",
+  "statement": "def properSupportedKunnethRoute {S X Y W : Scheme.{u}}\n    {p : W ⟶ X} {q : W ⟶ Y} {f : X ⟶ S} {g : Y ⟶ S}\n    (sq : IsPullback p q f g) (h : W ⟶ S) (w : q ≫ g = h)\n    [IsProper f] [IsProper g] [IsProper q] [IsProper h]\n    (E : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :\n    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) h).obj\n        (((derivedTensor (ModuleCat.{u + 1} A) W).obj\n          ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.obj E)).obj\n            ((upperStar (ModuleCat.{u + 1} A) q).leftDerivedFunctor.obj K)) ≅\n      ((derivedTensor (ModuleCat.{u + 1} A) S).obj\n        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj E)).obj\n          ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).obj K)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedTensorSwapIso",
+   "AlgebraicGeometry.Etale.supportedTensorSwapIso_hom_naturality_left",
+   "AlgebraicGeometry.Etale.properRouteCompIso",
+   "AlgebraicGeometry.Etale.properRouteProjection",
+   "AlgebraicGeometry.Etale.properRouteProjection_hom",
+   "AlgebraicGeometry.Etale.properRouteExchange",
+   "AlgebraicGeometry.Etale.properRouteExchange_hom",
+   "AlgebraicGeometry.Etale.properSupportedKunnethInner",
+   "AlgebraicGeometry.Etale.properSupportedKunnethRoute",
+   "AlgebraicGeometry.Etale.supportedTensorSwapIso_inv_naturality_left",
+   "AlgebraicGeometry.Etale.supportedTensorSwapIso_inv_naturality_right",
+   "AlgebraicGeometry.Etale.properSupportedKunnethInner_inv",
+   "AlgebraicGeometry.Etale.properSupportedKunnethRoute_inv"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

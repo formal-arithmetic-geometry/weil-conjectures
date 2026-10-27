@@ -1,0 +1,171 @@
+{
+ "id": "def-sfb-component-slice-comparison-data",
+ "kind": "definition",
+ "title": "Data and normalizations for the component slice square",
+ "statement": "Fix a commutative condensed ring $\\Lambda$ [sk-def-sfb-condensed-ring]. On the finite-cover profinite slice over $S$, put $\\operatorname{Modules}(\\Lambda,S)=\\operatorname{Mod}(\\Lambda_S)$, where $\\Lambda_S=q_S^*\\Lambda$ [lem-zl-component-relative-profinite-site]. For a map $T\\to S$, RestrictionData consists of literal precomposition restriction, its strong braided tensor structure extending the prescribed lax structure, the section-identity coefficient isomorphism, exactness on module objects, and the balanced tensor equation. For an affine scheme $W$, PullbackData packages the actual component inverse image, its exact braided structure, its absolute coefficient factorization, and its normalized unbounded evaluation [lem-sfb-component-pullback-unbounded-evaluation]. For an affine pro-etale $U\\to W$, OrdinaryComparison is a natural isomorphism $r_UF_W\\cong F_Ur_T$ whose value on each w-contractible affine test $V\\to U$ is the identity on $M(\\pi_0(V)\\to\\pi_0(W))$, transported by componentCompositionIso. OrdinaryMonoidal asserts its monoidality with the scheme restriction tensor structure transported from native upper star. DerivedComparison is ExactSquareComparison for the exact termwise localization of this same isomorphism: it records derived tensor structures with their homotopy-representative and unit equations, normalized right-derived sections, the evaluation and section squares for internal Hom, their formula on every integer-shifted Hom, and the fully faithful isomorphism test. The classes of sections are fixed using the degree-zero coefficient identity and the canonical homology shift; their Hom identification must send each such class to the evaluation transpose. These are record types and formula predicates, without an assertion of inhabitance.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), equation (4.2); notation for Stacks Tags 08JA, 08JB, 08J9, 07A4."
+ },
+ "stmt_deps": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-component-pullback-unbounded-evaluation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), equation (4.2); notation for Stacks Tags 08JA, 08JB, 08J9, 07A4.; explicit normalization argument by K1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary monoidal comparison of component inverse image with restriction to a scheme slice",
+   "results": "8 hits: morphismRestrict_appLE, arrowResLEAppIso, morphismRestrictRestrict, opensDiagram_map, Scheme.restrictFunctorΓ_inv_app, Scheme.Hom.resLE_appLE, Γ_map_morphismRestrict, morphismRestrictRestrictBasicOpen. None supplies the component-site module comparison or its specified normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "10 displayed hits concerning exact-derived identity, composition, shift, and natural transformations; these provide termwise localization but no normalized component-slice tensor/Hom square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|overMapPullback",
+   "results": "11 displayed hits, including Over.lean overMapPullback and its identity/composition isomorphisms; no normalized component-slice comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Profinite component pullback commutes with slice restriction as tensor functors and derived internal Hom sections",
+   "results": "8 hits concerning cartesian tensor in Over, LightCondensed.ihomPoints, SheafOfModules.pullbackComp, iterated slice pullback, ring base change, and profinite products. None gives the requested comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentSliceHomComparison",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: unbounded derived internal functions comparison on the w-contractible affine basis; general component theorem used as a tool, not the parameter statement. HRS Proposition 4.3(1): Proposition 4.3(1), final sentence of proof using (4.2) on slices; expanded using Stacks Tags 08JA (lemma-section-RHom-over-U), 08JB (lemma-restriction-RHom-to-U), sites-cohomology.tex. The supporting slice lemma, Proposition 4.3(1), equation (4.2); notation for Stacks Tags 08JA, 08JB, 08J9, 07A4.",
+   "via": [
+    "lem-sfb-component-slice-hom-comparison-test",
+    "lem-sfb-wcontractible-component-derived-hom",
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentSliceComparisonData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentSliceComparisonData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.ExactSquareComparison",
+  "statement": "structure ExactSquareComparison\n    {C : Type c} [Category.{u + 1} C] [Abelian C]\n    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]\n    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]\n    {D : Type d} [Category.{u + 1} D] [Abelian D]\n    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D] [MonoidalPreadditive D]\n    [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]\n    {E : Type v} [Category.{u + 1} E] [Abelian E]\n    [IsGrothendieckAbelian.{u + 1} E] [MonoidalCategory E] [MonoidalPreadditive E]\n    [MonoidalClosed E] [BraidedCategory E] [Abelian.HasFunctorialFlatResolution E]\n    {H : Type z} [Category.{u + 1} H] [Abelian H]\n    [IsGrothendieckAbelian.{u + 1} H] [MonoidalCategory H] [MonoidalPreadditive H]\n    [MonoidalClosed H] [BraidedCategory H] [Abelian.HasFunctorialFlatResolution H]\n    (F : C ⥤ D) (G : E ⥤ H) (R : C ⥤ E) (S : D ⥤ H)\n    [F.Additive] [G.Additive] [R.Additive] [S.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F.Monoidal]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G] [G.Monoidal]\n    [PreservesFiniteLimits R] [PreservesFiniteColimits R] [R.Monoidal]\n    [PreservesFiniteLimits S] [PreservesFiniteColimits S] [S.Monoidal]\n    (derivedIso : F.mapDerivedCategory ⋙ S.mapDerivedCategory ≅\n      R.mapDerivedCategory ⋙ G.mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.Modules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.restrictSheaf",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionCoefficient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.restrictModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData.modules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData.limits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData.colimitsModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData.monoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData.additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.RestrictionData.derived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData.modules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData.modulesLimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData.modulesColimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData.modulesMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData.modulesAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.PullbackData.derived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.componentMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.MonoidalSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.sections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.derivedSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.DerivedMonoidalNormalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.homComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.shiftedHomMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.unitDerivedIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.unitClass",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.sectionClass",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.homShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.sectionTranspose",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.HomSectionsIdentification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.SectionComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.localSectionsComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.transportHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.ExactSquareComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.schemeRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.schemeCanonicalMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.schemeRestrictionLimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.schemeRestrictionColimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.schemeRestrictionAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.compositeTest",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.compositeTestAffine",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.compositeTestWContractible",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.componentCompositionIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.basisSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.restrictionSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.OrdinaryBasisFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.OrdinaryComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.OrdinaryMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.OrdinaryComparison.derived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.DerivedComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-400a3",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082337-L-2163875",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-400a3",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082337-L-2163875",
+  "kind": "interface",
+  "note": "independent cc review: published item vs new ComponentSliceComparisonData (verbatim except blueprint tags); item statement byte-identical; 2 new sorry lemmas vs item conjuncts and pinned records; sandbox axioms probe"
+ }
+}

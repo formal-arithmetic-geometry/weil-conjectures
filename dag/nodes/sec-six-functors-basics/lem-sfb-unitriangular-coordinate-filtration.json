@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-unitriangular-coordinate-filtration",
+ "kind": "statement",
+ "title": "Coordinate central filtration of the unitriangular group with diagonal conjugation weights",
+ "statement": "Let $k$ be a field [def-weil-field] and $n\\geq1$. Group schemes are as in [def-sc-group-scheme], finite type as in [def-weil-finite-type-morphism], closed subgroups as in [def-sc-group-scheme-subgroup], and closed immersions as in [def-weil-closed-immersion]. Let $B_n\\subseteq\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group] be the invertible upper triangular matrix group scheme, and let $U_n\\subseteq B_n$ be its upper unitriangular subgroup. Thus $U_n(R)$ consists of matrices with diagonal entries $1$ and all entries below the diagonal zero, for every commutative $k$-algebra $R$. Put $m=n(n-1)/2$ and order the pairs $(i,j)$ with $1\\leq i<j\\leq n$ by increasing $j-i$, then increasing $i$; write them $C_1,\\ldots,C_m$. For $0\\leq r\\leq m$ let $U^{(r)}\\subseteq U_n$ be the closed subscheme given by $u_{ij}=0$ for $(i,j)=C_l$ with $l\\leq r$. These are closed normal subgroup schemes of $B_n$, with $U^{(0)}=U_n$ and $U^{(m)}=1$. For each $1\\leq r\\leq m$, writing $C_r=(i_r,j_r)$, the coordinate map\n$$p_r:U^{(r-1)}\\longrightarrow\\mathbf G_a,\\qquad u\\longmapsto u_{i_rj_r}$$\nis a faithfully flat finitely presented group-scheme homomorphism with scheme-theoretic kernel $U^{(r)}$, and induces an isomorphism $U^{(r-1)}/U^{(r)}\\simeq\\mathbf G_a$. Here $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ [def-sc-gm-ga]; the quotient is the sheafification of $R\\mapsto U^{(r-1)}(R)/U^{(r)}(R)$ for faithfully flat finitely presented coverings. For every commutative $k$-algebra $R$, every $b\\in B_n(R)$ and $u\\in U^{(r-1)}(R)$,\n$$p_r(bub^{-1})=(b_{i_ri_r}b_{j_rj_r}^{-1})p_r(u).$$\nIn particular the conjugation action on this additive quotient factors through the diagonal homomorphism $B_n\\to\\mathbf G_m^n$ and is given by the character $(t_1,\\ldots,t_n)\\mapsto t_{i_r}t_{j_r}^{-1}$; $U_n$ acts trivially on every quotient. When $n=1$ the filtration has length zero and $U_n=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 6.49(a)--(c), printed pp.136--137; Theorem 16.21 proof, printed p.330, uses precisely these coordinate quotients."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-sfb-fppf-group-quotient-presentation",
+  "def-sfb-standard-group-coordinate-points"
+ ],
+ "proof": [
+  {
+   "text": "Write $x_l=x_{C_l}$. The affine coordinate rings are\n$$k[B_n]=k[d_1^{\\pm1},\\ldots,d_n^{\\pm1},x_1,\\ldots,x_m],\\qquad k[U^{(r)}]=k[x_{r+1},\\ldots,x_m].$$\nIndeed, on upper triangular matrices the determinant expansion has only the identity-permutation term, $\\prod_i d_i$: a permutation with $\\sigma(i)\\leq i$ for every $i$ must be the identity. A unit product in a commutative ring has each factor a unit. Thus these presentations follow by imposing the below-diagonal equations in $\\operatorname{GL}_n$, then $d_i=1$, then $x_l=0$ for $l\\leq r$. The resulting surjections of coordinate rings give closed immersions. The displayed rings have finitely many generators (write $d_i^{-1}$ as an additional generator with relation $d_i d_i^{-1}=1$), so the schemes are of finite type over $k$. Polynomial substitutions give all morphisms used below, by contravariance of affine spectra.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49(a)--(c), printed pp.136--137; explicit coordinate-ring verification of the displayed filtration."
+   }
+  },
+  {
+   "text": "For a strictly upper triangular matrix $N$, the entries of $N^q$ are sums over chains of $q$ strictly increasing steps from the row to the column, so $N^n=0$. Consequently $(I+N)^{-1}=I-N+\\cdots+(-N)^{n-1}$, as multiplication telescopes. If $I+N,I+M\\in U^{(r)}(R)$ and $C_l=(a,b)$ with $l\\leq r$, then\n$$(NM)_{ab}=\\sum_{a<c<b}N_{ac}M_{cb}=0,$$\nsince $(a,c)$ has smaller height than $(a,b)$ and is among the killed coordinates. The same chain formula makes $(N^q)_{ab}=0$ for every $q\\geq1$. Thus $I+N+M+NM$ and $(I+N)^{-1}$ satisfy all the defining equations; identity does too. These are polynomial identities, valid over every commutative $k$-algebra, and define closed subgroup schemes. The empty and full equation lists give $U^{(0)}=U_n$ and $U^{(m)}=1$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49(a)--(c), printed pp.136--137; explicit coordinate-ring verification of the displayed filtration."
+   }
+  },
+  {
+   "text": "Let $b\\in B_n(R)$. Put $D=\\operatorname{diag}(b_{11},\\ldots,b_{nn})$ and $b=D(I+T)$ with $T$ strictly upper triangular. The preceding finite inverse formula shows $b^{-1}$ is upper triangular with $(b^{-1})_{jj}=b_{jj}^{-1}$. For $u=I+N$,\n$$(bub^{-1}-I)_{ab}=\\sum_{a\\leq p<q\\leq b} b_{ap}N_{pq}(b^{-1})_{qb}.$$\nIf $C_l=(a,b)$ with $l\\leq r$ and $u\\in U^{(r)}(R)$, every proper subinterval $(p,q)$ has smaller height and its entry $N_{pq}$ vanishes; the remaining term has $N_{ab}=0$. Entries on and below the diagonal vanish as well. Hence conjugation by $b$ preserves $U^{(r)}(R)$; applying this also to $b^{-1}$ gives equality. This proves normality in $B_n$ for every $r$. If instead $u\\in U^{(r-1)}(R)$ and $(a,b)=C_r$, exactly the proper-subinterval terms vanish, giving\n$$(bub^{-1})_{i_rj_r}=b_{i_ri_r}b_{j_rj_r}^{-1}u_{i_rj_r}.$$\nAll formulas hold on the coordinate rings, so they also give the scheme identities.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49(a)--(c), printed pp.136--137; explicit coordinate-ring verification of the displayed filtration."
+   }
+  },
+  {
+   "text": "Fix $1\\leq r\\leq m$, with $C_r=(i,j)$. For $u,v\\in U^{(r-1)}(R)$, multiplication gives\n$$(uv)_{ij}=u_{ij}+v_{ij}+\\sum_{i<c<j}u_{ic}v_{cj}=u_{ij}+v_{ij},$$\nbecause each $(i,c)$ has smaller height than $C_r$. Thus the polynomial coordinate map $p_r$ is a group-scheme homomorphism to $\\mathbf G_a$. The section $s_r(a)=I+aE_{ij}$ belongs to $U^{(r-1)}(R)$, satisfies $p_rs_r(a)=a$, and is itself a homomorphism since $E_{ij}^2=0$. The scheme-theoretic kernel is computed on rings by\n$$k[x_r,\\ldots,x_m]\\otimes_{k[t]}k=k[x_{r+1},\\ldots,x_m],\\qquad t\\mapsto x_r,\\quad t\\mapsto0.$$\nThis is precisely $U^{(r)}$, including its scheme structure, by the fibre-product definition of kernel.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-sc-gm-ga",
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49(a)--(c), printed pp.136--137; explicit coordinate-ring verification of the displayed filtration."
+   }
+  },
+  {
+   "text": "Under the coordinate rings, $p_r$ is the polynomial projection associated to $k[t]\\hookrightarrow k[t][x_{r+1},\\ldots,x_m]$, where $t=x_r$. It is flat by [lem-nagata-polynomial-projection-flat], with coefficient ring $B=k[t]$ and finite variable set $\\{r+1,\\ldots,m\\}$. It is surjective because its scheme section $s_r$ supplies a preimage for every point. Thus it is faithfully flat. It is locally of finite presentation by the displayed presentation, with finitely many variables and no relations. Both source and target are affine. The target is separated by [lem-weil-pbc-affine-source-morphism-separated], applied to its structure morphism to $\\operatorname{Spec}\\mathbf Z$. Hence $p_r$ is affine by [lem-weil-pbc-affine-source-separated-target-affine-morphism], and quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. Together these give finite presentation in [def-sbc-locally-finite-presentation]. This includes $r=m$, when there are no remaining variables and $p_m$ is an isomorphism.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5 (lemma-flat-characterize), Tag 01TP (definition-finite-presentation), Tag 01SG (lemma-affine-permanence, part (4)), and Tag 01S7 (lemma-affine-separated); applied to the coordinate projection in Milne 6.49(b)."
+   }
+  },
+  {
+   "text": "On every commutative $k$-algebra $R$, the homomorphism $p_r$ induces a bijective homomorphism\n$$U^{(r-1)}(R)/U^{(r)}(R)\\longrightarrow (R,+).$$\nIts inverse sends $a$ to the coset of $s_r(a)$: for any $u$, the element $u\\,s_r(p_r(u))^{-1}$ is in the kernel, so this inverse also recovers the coset of $u$. Both maps commute with every algebra homomorphism, hence give an isomorphism of group-valued presheaves. The presheaf $R\\mapsto R=\\mathbf G_a(R)$ is an fppf sheaf: apply [lem-weil-pbc-fpqc-representable-descent] to $X=\\mathbf G_a$, restricting to affine test schemes. Faithfully flat finitely presented affine coverings are fpqc coverings in [def-weil-pbc-fpqc-covering]. The descended morphism remains over $k$ by uniqueness applied to the structure maps. Therefore the presheaf quotient is already this represented sheaf. Its sheafification is canonically unchanged by the universal property in [def-weil-pbc-sheafification]. It follows that $U^{(r-1)}/U^{(r)}\\simeq\\mathbf G_a$ as group sheaves, represented by this group scheme.",
+   "uses": [
+    "def-sc-gm-ga",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; applied after the explicit coset calculation for Milne Example 6.49(b)."
+   }
+  },
+  {
+   "text": "For upper triangular matrices $(bc)_{ii}=b_{ii}c_{ii}$, so the diagonal coordinates define a homomorphism $\\delta:B_n\\to\\mathbf G_m^n$. The conjugation identity of step 3, transported along the explicit quotient identification of step 6, is multiplication by $b_{ii}b_{jj}^{-1}$. This is exactly the character $(t_1,\\ldots,t_n)\\mapsto t_it_j^{-1}$ composed with $\\delta$. It follows that the action factors through the diagonal; $U_n$ acts trivially since all its diagonal entries are $1$. In particular the filtration is central as a filtration of $U_n$. For $n=1$ there are no pairs, $m=0$, and the ring $k[U_n]=k$ makes the claimed length-zero filtration and $U_n=1$ explicit.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49(a)--(c), printed pp.136--137; explicit coordinate-ring verification of the displayed filtration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-general-linear-group",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "lem-nagata-polynomial-projection-flat",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 6.49(a)--(c), printed pp.136--137; explicit coordinate-ring verification of the displayed filtration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The upper unitriangular group scheme has a normal central filtration with additive group quotients and diagonal conjugation weights",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"upperCentralSeries_normal\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G] (n : ℕ), (upperCentralSeries G n).Normal\", \"doc\": \"For any group $ G $, each term in the upper central series of $ G $ is a normal subgroup of $ G $. The upper central series is recursively defined by starting with the trivial subgroup and taking the \"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"instNormalUpperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal], (upperCentralSeriesStep H).Normal\", \"doc\": \"For any group $G$ and a subgroup $H$ of $G$, the upper central series step starting at $H$ is a normal subgroup of $G$. This asserts that each term in the upper central series construction is invarian\"}\n  {\"name\": \"upperCentralSeries_isAscendingCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G], IsAscendingCentralSeries (upperCentralSeries G)\", \"doc\": \"For any group $G$, the upper central series of $G$ forms an ascending central series. This means that each term in the series contains the previous one, and for every element $x$ in the $(n+1)$th term\"}\n  {\"name\": \"upperCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → Subgroup G\", \"doc\": \"For a group $ G $, the $ n $th term of the upper central series is recursively defined by starting with the trivial subgroup and taking the centralizer of the previous term in $ G $. Each term forms a\"}\n  {\"name\": \"lowerCentralSeries_normal\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (n : ℕ), (lowerCentralSeries G n).Normal\", \"doc\": \"For any group $ G $ and natural number $ n $, the $ n $-th term $ \\\\gamma_n(G) $ of the lower central series of $ G $ is a normal subgroup of $ G $. This means that for every $ g \\\\in G $ and $ h \\\\in \\\\g\"}\n  {\"name\": \"Group.IsNilpotent.nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G] [Group.IsNilpotent G], ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"For any nilpotent group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the upper central series of $ G $ is equal to $ G $ itself.\"}\n  {\"name\": \"IsAscendingCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"{G : Type u_1} → [inst : Group G] → (ℕ → Subgroup G) → Prop\", \"doc\": \"A sequence of subgroups $ H : \\\\mathbb{N} \\\\to \\\\text{Subgroup } G $ is an ascending central series if $ H(0) $ is the trivial subgroup and for all $ n \\\\in \\\\mathbb{N} $, every element $ x \\\\in H(n+1) $ sa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give central series of abstract groups and closure of block triangular matrices under multiplication, not represented additive quotients or conjugation characters of matrix group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successively killing upper triangular matrix coordinates gives a central series with one dimensional additive factors equivariant under the Borel group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"upperCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → Subgroup G\", \"doc\": \"For a group $ G $, the $ n $th term of the upper central series is recursively defined by starting with the trivial subgroup and taking the centralizer of the previous term in $ G $. Each term forms a\"}\n  {\"name\": \"upperCentralSeries_isAscendingCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G], IsAscendingCentralSeries (upperCentralSeries G)\", \"doc\": \"For any group $G$, the upper central series of $G$ forms an ascending central series. This means that each term in the series contains the previous one, and for every element $x$ in the $(n+1)$th term\"}\n  {\"name\": \"IsAscendingCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"{G : Type u_1} → [inst : Group G] → (ℕ → Subgroup G) → Prop\", \"doc\": \"A sequence of subgroups $ H : \\\\mathbb{N} \\\\to \\\\text{Subgroup } G $ is an ascending central series if $ H(0) $ is the trivial subgroup and for all $ n \\\\in \\\\mathbb{N} $, every element $ x \\\\in H(n+1) $ sa\"}\n  {\"name\": \"IsDescendingCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"{G : Type u_1} → [inst : Group G] → (ℕ → Subgroup G) → Prop\", \"doc\": \"A function $ H : \\\\mathbb{N} \\\\to \\\\text{Subgroup}(G) $ is a descending central series if $ H(0) = G $ and for every $ x \\\\in H(n) $ and $ g \\\\in G $, the commutator $ xgx^{-1}g^{-1} $ lies in $ H(n+1) $. \"}\n  {\"name\": \"upperCentralSeries_normal\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G] (n : ℕ), (upperCentralSeries G n).Normal\", \"doc\": \"For any group $ G $, each term in the upper central series of $ G $ is a normal subgroup of $ G $. The upper central series is recursively defined by starting with the trivial subgroup and taking the \"}\n  {\"name\": \"mem_upperCentralSeries_succ_iff\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {n : ℕ} {x : G},\\n  x ∈ upperCentralSeries G (n + 1) ↔ ∀ (y : G), x * y * x⁻¹ * y⁻¹ ∈ upperCentralSeries G n\", \"doc\": \"For any element $x$ of a group $G$ and natural number $n$, $x$ belongs to the $(n+1)$th term of the upper central series of $G$ if and only if for every element $y$ of $G$, the commutator $[x, y] = x \"}\n  {\"name\": \"lowerCentralSeries_isDescendingCentralSeries\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G], IsDescendingCentralSeries (lowerCentralSeries G)\", \"doc\": \"The lower central series of a group $ G $, defined recursively by $ \\\\gamma_0(G) = G $ and $ \\\\gamma_{n+1}(G) = [\\\\gamma_n(G), G] $, satisfies the condition of a descending central series: for every $ x \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give central series of abstract groups and closure of block triangular matrices under multiplication, not represented additive quotients or conjugation characters of matrix group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unitriangular matrices have a central series with successive quotients isomorphic to the additive group and diagonal torus action by a character",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"upperCentralSeries\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(n : ℕ) : Subgroup G\", \"doc\": \"For a group $ G $, the $ n $th term of the upper central series is recursively defined by starting with the trivial subgroup and taking the centralizer of the previous term in $ G $. Each term forms a\"}\n  {\"name\": \"IsAscendingCentralSeries\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(H : ℕ → Subgroup G) : Prop\", \"doc\": \"A sequence of subgroups $ H : \\\\mathbb{N} \\\\to \\\\text{Subgroup } G $ is an ascending central series if $ H(0) $ is the trivial subgroup and for all $ n \\\\in \\\\mathbb{N} $, every element $ x \\\\in H(n+1) $ sa\"}\n  {\"name\": \"lowerCentralSeries\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(G : Type*) [Group G] : ℕ → Subgroup G\", \"doc\": \"The lower central series of a group $ G $ is a sequence of subgroups defined recursively by $ \\\\gamma_0(G) = G $ and $ \\\\gamma_{n+1}(G) = [\\\\gamma_n(G), G] $, where $ [\\\\cdot, \\\\cdot] $ denotes the commuta\"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \": ℕ → Σ' H : Subgroup G, Normal H\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"upperCentralSeries_normal\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(n : ℕ) : Normal (upperCentralSeries G n)\", \"doc\": \"For any group $ G $, each term in the upper central series of $ G $ is a normal subgroup of $ G $. The upper central series is recursively defined by starting with the trivial subgroup and taking the \"}\n  {\"name\": \"Group.IsNilpotent.nilpotent\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"(G : Type*) [Group G] [IsNilpotent G] : ∃ n : ℕ, upperCentralSeries G n = ⊤\", \"doc\": \"For any nilpotent group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the upper central series of $ G $ is equal to $ G $ itself.\"}\n  {\"name\": \"upperCentralSeries_one\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \": upperCentralSeries G 1 = center G\", \"doc\": \"The first term of the upper central series of a group $G$ is equal to the center of $G$, i.e., $\\\\mathrm{upperCentralSeries}(G, 1) = \\\\mathrm{center}(G)$.\"}\n  {\"name\": \"Group.isNilpotent_iff\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"∀ (G : Type u_2) [inst : Group G], Group.IsNilpotent G ↔ ∃ n, upperCentralSeries G n = ⊤\", \"doc\": \"A group $G$ is nilpotent if and only if there exists a natural number $n$ such that the $n$th term of its upper central series equals the entire group $G$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give central series of abstract groups and closure of block triangular matrices under multiplication, not represented additive quotients or conjugation characters of matrix group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"BlockTriangular\", \"mul\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Matrix.BlockTriangular.mul\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Block\", \"type\": \" {α : Type u_1} {m : Type u_2} {R : Type v} {b : m → α} [LinearOrder α] [Fintype m] [NonUnitalNonAssocSemiring R] {M N : Matrix m m R} (hM : M.BlockTriangular b) (hN : N.BlockTriangular b) : (M * N).BlockTriangular b\", \"doc\": \"\"}\n  {\"name\": \"Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Block\", \"type\": \" {α : Type u_1} {m : Type u_2} {R : Type v} {M : Matrix m m R} {b : m → α} [CommRing R] [DecidableEq m] [Fintype m] [LinearOrder α] [Invertible M] (hM : M.BlockTriangular b) (k : α) : ((M⁻¹.toBlock (fun i => b i < k) fun i => b i < k) * M.toBlock (fun i => b i < k) fun i => b i < k) = 1\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give central series of abstract groups and closure of block triangular matrices under multiplication, not represented additive quotients or conjugation characters of matrix group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "unitriangular|trigonalizable|centralSeries.*[Mm]atrix|[Mm]atrix.*centralSeries",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give central series of abstract groups and closure of block triangular matrices under multiplication, not represented additive quotients or conjugation characters of matrix group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The upper unitriangular group scheme has coordinate central filtration with additive quotients and diagonal conjugation weights",
+   "results": "8 hits: upperCentralSeries_isAscendingCentralSeries, upperCentralSeries, LieModule.iSup_ucs_eq_genWeightSpace_zero, upperCentralSeriesAux, LieModule.iSup_ucs_le_genWeightSpace_zero, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, comap_upperCentralSeries_quotient_center, RootPairing.GeckConstruction.isNilpotent_f",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central-series and modular-form matrix-subgroup results do not state the coordinate group-scheme filtration, its represented additive quotients, or its diagonal weights."
+  },
+  {
+   "tool": "grep",
+   "query": "unitriangular|Unitriangular|IsDescendingCentralSeries.*Matrix",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central-series and modular-form matrix-subgroup results do not state the coordinate group-scheme filtration, its represented additive quotients, or its diagonal weights."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unitriangular matrix group scheme has a normal filtration with additive group quotients and diagonal conjugation characters",
+   "results": "8 hits: upperCentralSeries, upperCentralSeries_normal, instNormalUpperCentralSeriesStep, upperCentralSeriesAux, Subgroup.periods, Subgroup.strictPeriods, Matrix.instIsUniformAddGroup, Subgroup.normal_of_characteristic",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central-series and modular-form matrix-subgroup results do not state the coordinate group-scheme filtration, its represented additive quotients, or its diagonal weights."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"BlockTriangular\", \"mul\"",
+   "results": "2 hits: Matrix.BlockTriangular.mul, Matrix.BlockTriangular.toBlock_inverse_mul_toBlock_eq_one",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central-series and modular-form matrix-subgroup results do not state the coordinate group-scheme filtration, its represented additive quotients, or its diagonal weights."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successively setting upper triangular matrix entries to zero gives normal subgroups with one dimensional additive factors equivariant for the diagonal torus",
+   "results": "8 hits: Subgroup.strictPeriods, Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular, CongruenceSubgroup.Gamma_normal, Subgroup.periods, CongruenceSubgroup.Gamma1_mem, Subgroup.mem_strictPeriods_iff, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, Subgroup.IsArithmetic",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract central-series and modular-form matrix-subgroup results do not state the coordinate group-scheme filtration, its represented additive quotients, or its diagonal weights."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-triangular-diagonal-kernel",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, use of 16.6 and 16.10; the concrete matrix kernel in present proof step 1, before descent. Supporting input: Milne Example 6.49(a)--(c), the coordinate central filtration used in Theorem 16.21 and the induction of Theorem 16.26(a).",
+   "via": [
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unitriangular-coordinate-filtration",
+  "worker": "stage1",
+  "summary": "Q58 read Milne Example 6.49 and Theorem 16.21 and the latest blueprint. Kept the statement unchanged; gave explicit coordinate-ring, inverse, normality, homomorphism, kernel, finite-presentation, quotient-presheaf and character calculations. Reused the existing polynomial-projection flatness and fpqc representable-descent Mathlib leaves, together with the existing affine-morphism permanence leaves for quasi-compactness and quasi-separatedness. No new nodes; no project attachment. Added definition dependencies for the already present flatness, finite-presentation and fppf-sheafification notions.",
+  "blueprint": "Supporting coordinate-filtration input on the inherited alteration chain for det-thm-sf-ctf-stability-direct-images, proof (3), as in blueprint.from.place. Steps 1--4 and 7 realize Milne 6.49(a)--(c); steps 5--6 verify the geometric quotient assertions explicitly. The ancestor command returns None, as in the inherited item; no ancestor was invented."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-0525c1a94",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-0525c1a94 (reviewer sub-agent of L); spot-checked: I read every step in full. The statement is byte-identical to live, the item is still unsplit live with no parallel split, and there are no new nodes. I checked it against Milne, Algebraic Groups (2017) §6.49(a)-(c) (height-then-row order, U^(r), normality in T_n, G_a quotients, weight a_ii/a_jj) and Thm 16.21; Milne leaves the proofs to the reader. Step 1: det of a triangular matrix is the product of the diagonal, so k[B_n]=k[d^±,x] and k[U^(r)]=k[x_{r+1..m}]. Step 2: N nilpotent, the inverse is a finite geometric series, and killed coordinates are closed under taking subintervals of smaller height. Step 3: the conjugation sum gives normality and the weight b_ii b_jj^-1. Step 4: p_r is additive, the section I+aE_ij is a homomorphism, and the kernel computed by tensor product is U^(r). Step 5: flatness from the polynomial-projection Mathlib leaf (B=k[t]), surjectivity from the section, lfp from the presentation, and qc+qs from the affine-source-separated and affine-permanence(3) leaves (Stacks 01SG(4), read). Step 6: the coset presheaf is isomorphic to (R,+); G_a is an fpqc sheaf by the representable-descent leaf (Stacks 023Q, read); single faithfully flat fp coverings are fpqc coverings; a sheaf is its own sheafification by the universal property. Step 7: the diagonal character and trivial U_n action. Small cases checked: n=1, n=2, n=3 (cross term u12 v23), r=m, nilpotent coefficients and any characteristic. proof_deps equals the union of uses. All cited nodes exist and are unmerged definitions or Mathlib leaves, so no route or tool_uses issue. The rg -L duplicate search found only citers of this filtration, no node stating it. The added stmt_deps name notions the statement already uses. Minor cosmetic point only: in step 3 the letter b is both the matrix and an index. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnitriangularCoordinateFiltration",
+  "declaration": "AlgebraicGeometry.unitriangular_coordinate_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnitriangularCoordinateFiltration.lean",
+  "statement": "theorem unitriangular_coordinate_filtration (k : Type u) [Field k] (n : ℕ) (hn : 1 ≤ n) : ∃ (C : Fin (n * (n - 1) / 2) ≃ {p : Fin n × Fin n // p.1 < p.2}) (B : Grp (Over (Spec (.of k)))) (β : B ⟶ Grp.mk (GeneralLinearGroup (LinearGroupSchemes.Index.{u} n) k)) (H : Fin (n * (n - 1) / 2 + 1) → Grp (Over (Spec (.of k)))) (inc : ∀ r, H r ⟶ B) (a : ∀ r : Fin (n * (n - 1) / 2), H r.succ ⟶ H r.castSucc) (p : ∀ r : Fin (n * (n - 1) / 2), H r.castSucc ⟶ Grp.mk (StandardGroupSchemes.additive k)) (delta : Fin n → (B ⟶ Grp.mk (StandardGroupSchemes.multiplicative k))), (∀ l t, l < t ↔ ((C l).val.2.val - (C l).val.1.val < (C t).val.2.val - (C t).val.1.val ∨ ((C l).val.2.val - (C l).val.1.val = (C t).val.2.val - (C t).val.1.val ∧ (C l).val.1 < (C t).val.1))) ∧ IsClosedSubgroupScheme β.hom.hom ∧ LocallyOfFiniteType B.X.hom ∧ QuasiCompact B.X.hom ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] (x : StandardGroupSchemes.affine k R ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} n) k), (∃ b : StandardGroupSchemes.affine k R ⟶ B.X, b ≫ β.hom.hom = x) ↔ ∀ i j : Fin n, j < i → GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k R x ⟨i⟩ ⟨j⟩ = 0) ∧ (∀ r, IsClosedSubgroupScheme (inc r).hom.hom ∧ IsNormalSubgroupScheme (inc r).hom.hom ∧ LocallyOfFiniteType (H r).X.hom ∧ QuasiCompact (H r).X.hom) ∧ (∀ (r : Fin (n * (n - 1) / 2 + 1)) (R : Type u) [CommRing R] [Algebra k R] (b : StandardGroupSchemes.affine k R ⟶ B.X), (∃ x : StandardGroupSchemes.affine k R ⟶ (H r).X, x ≫ (inc r).hom.hom = b) ↔ (∀ i : Fin n, GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k R (b ≫ β.hom.hom) ⟨i⟩ ⟨i⟩ = 1) ∧ (∀ l : Fin (n * (n - 1) / 2), l.val < r.val → GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k R (b ≫ β.hom.hom) ⟨(C l).val.1⟩ ⟨(C l).val.2⟩ = 0)) ∧ IsIso (H (Fin.last (n * (n - 1) / 2))).X.hom ∧ (∀ r, a r ≫ inc r.castSucc = inc r.succ) ∧ (∀ r, IsClosedSubgroupScheme (a r).hom.hom ∧ Flat (p r).hom.hom.left ∧ Surjective (p r).hom.hom.left ∧ LocallyOfFinitePresentation (p r).hom.hom.left ∧ QuasiCompact (p r).hom.hom.left ∧ QuasiSeparated (p r).hom.hom.left ∧ IsFppfGroupQuotient (a r) (p r)) ∧ (∀ (r : Fin (n * (n - 1) / 2)) (R : Type u) [CommRing R] [Algebra k R] (x : StandardGroupSchemes.affine k R ⟶ (H r.castSucc).X), x ≫ (p r).hom.hom = StandardGroupSchemes.additiveCoordinatePoint k R (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k R (x ≫ (inc r.castSucc).hom.hom ≫ β.hom.hom) ⟨(C r).val.1⟩ ⟨(C r).val.2⟩)) ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] (b : StandardGroupSchemes.affine k R ⟶ B.X) (i : Fin n), StandardGroupSchemes.multiplicativeCoordinateValue k (b ≫ (delta i).hom.hom) = GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k R (b ≫ β.hom.hom) ⟨i⟩ ⟨i⟩) ∧ (∀ (r : Fin (n * (n - 1) / 2)) (R : Type u) [CommRing R] [Algebra k R] (b : StandardGroupSchemes.affine k R ⟶ B.X) (x : StandardGroupSchemes.affine k R ⟶ (H r.castSucc).X), ∃ y : StandardGroupSchemes.affine k R ⟶ (H r.castSucc).X, y ≫ (inc r.castSucc).hom.hom = b * (x ≫ (inc r.castSucc).hom.hom) * b⁻¹ ∧ y ≫ (p r).hom.hom = StandardGroupSchemes.additiveCoordinatePoint k R (StandardGroupSchemes.multiplicativeCoordinateValue k (b ≫ (delta (C r).val.1).hom.hom) * StandardGroupSchemes.multiplicativeCoordinateValue k (b⁻¹ ≫ (delta (C r).val.2).hom.hom) * GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k R (x ≫ (inc r.castSucc).hom.hom ≫ β.hom.hom) ⟨(C r).val.1⟩ ⟨(C r).val.2⟩)) ∧ (∀ (r : Fin (n * (n - 1) / 2)) (R : Type u) [CommRing R] [Algebra k R] (b : StandardGroupSchemes.affine k R ⟶ (H 0).X) (x : StandardGroupSchemes.affine k R ⟶ (H r.castSucc).X), ∃ y : StandardGroupSchemes.affine k R ⟶ (H r.castSucc).X, y ≫ (inc r.castSucc).hom.hom = (b ≫ (inc 0).hom.hom) * (x ≫ (inc r.castSucc).hom.hom) * (b ≫ (inc 0).hom.hom)⁻¹ ∧ y ≫ (p r).hom.hom = x ≫ (p r).hom.hom) ∧ (n = 1 → IsIso (H 0).X.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09699455b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q30 present), module, all 13 stmt_dep records and the exact declarations (IsFppfGroupQuotient, GeneralLinearGroup.homMulEquiv, LinearGroupSchemes.Index, StandardGroupSchemes.affine/additive/multiplicative, additiveCoordinatePoint/multiplicativeCoordinateValue, Is{Closed,Normal}SubgroupScheme). Every clause matches: C pinned by the height-then-row order; B and H r pinned by lift criteria on all k-algebra points (scheme-theoretic); closed+normal in B; H last trivial; consecutive inclusions a r; p r a Grp map pinned to the C r entry; flat+surjective+lfp+qc+qs; IsFppfGroupQuotient gives the kernel pullback and the fppf sheafified coset quotient; delta pinned to diagonal entries; conjugation weight delta_i(b)·delta_j(b⁻¹); trivial U_n action; n=1 → H 0 trivial. Zero-based indexing consistent. Edge cases n=1,2,3, last r, nonreduced and zero rings, any characteristic. lean.statement verbatim; only change vs live: two existing def stmt_deps added, both used. No hollow defs, sorry only, docstrings with source and blueprint, single universe u, no pro-étale. No parallel S2 delivery. No compile run (no file changed). Minor non-blocking extras: finite type of B/H r and the torsor clause inside IsFppfGroupQuotient."
+ }
+}

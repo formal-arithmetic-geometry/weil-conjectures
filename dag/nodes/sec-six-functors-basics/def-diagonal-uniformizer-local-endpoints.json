@@ -1,0 +1,131 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction"
+ },
+ "proof_origin": {
+  "by": "D7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction",
+  "note": "Endpoint constructions factored out after profiler-guided simplification of concrete coefficient inference."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a completed Kummer first Chern class to finite quotient coefficients",
+   "date": "2026-10-27",
+   "results": "8 hits, chiefly Selmer groups, Kummer extensions, and roots-of-unity maps; none is a sheaf-derived Chern reduction theorem.",
+   "verdict": "Use the project-specific completion, endpoint, and derived-unit normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-27",
+   "results": "1 hit: the generic adjunction naturality lemma in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "verdict": "Useful for formal assembly; does not identify the supplied derived squares."
+  },
+  {
+   "tool": "grep",
+   "query": "chern.*[Nn]atur|[Nn]atur.*[Cc]hern",
+   "date": "2026-10-27",
+   "results": "0 Mathlib hits; local search found finite tower Chern realization but no completed-to-uniformizer comparison.",
+   "verdict": "No duplicate of either new step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerChernNormalization",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction",
+   "via": [
+    "lem-diagonal-uniformizer-chern-normalization",
+    "lem-diagonal-uniformizer-trace-chern-degree",
+    "lem-diagonal-uniformizer-trace-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "id": "def-diagonal-uniformizer-local-endpoints",
+ "title": "Explicit local coefficient functor and endpoint maps",
+ "statement": "For UniformizerChernNormalizationData l Y [def-diagonal-uniformizer-chern-transport], define localFunctor on the derived category of completed modules on P=ProjectiveLine Y by composing completedP realization, integral scalar extension, quotient scalar extension, and finite realization eP [def-sfb-diagonal-coefficient-reference, def-sfb-diagonal-coefficient-scalars, def-sfb-diagonal-coefficient-finite-realization]. Compose their specified unit isomorphisms to define localUnitIso, over abstract coefficients, and specialize its inverse as localUnitInv. Define localLine as the composite of their shifted positive-line endpoints, with the supplied QuotientLineRealization as last endpoint [def-sfb-diagonal-coefficient-quotient-line]. These are actual constructions; no Chern normalization or existence choice enters them. LocalChernNormalized(s,z) names the equation that localUnitInv followed by localFunctor(z) followed by localLine equals geoP1Comparison of geoP1EtaleChern with the supplied positive exponent and annihilator [sk-lem-geo-p1-cohomology]. This is an explicit predicate, not an asserted equation.",
+ "stmt_deps": [
+  "def-diagonal-uniformizer-chern-transport",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Compose the four exact/derived coefficient functors. Compose the four unit isomorphisms by functorial image; their inverses give the inverse endpoint. Compose the shifted line maps in the same order, using the given quotient-line endpoint at the end. No theorem is assumed in these constructions. Name the displayed local positive Kummer equation as LocalChernNormalized.",
+   "uses": [
+    "def-diagonal-uniformizer-chern-transport",
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-coefficient-scalars",
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-sfb-diagonal-coefficient-quotient-line",
+    "sk-lem-geo-p1-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-diagonal-uniformizer-chern-transport",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerLocalEndpoints",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerLocalEndpoints.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.localFunctor",
+  "statement": "def localFunctor (s : UniformizerChernNormalizationData l Y) :\n    DerivedCategory (DiagonalCompleted l (ProjectiveLine Y)) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology (ProjectiveLine Y))\n        (ModuleCat.{u + 1} (ULift.{u + 1} (completedResidue l s.E s.π s.n))))",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ChernCoefficientDiagram.localUnitIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.localFunctor",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.localLine",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.localUnitInv",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.UniformizerChernNormalizationData.LocalChernNormalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T123430-L-2297006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T123430-L-2297006",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,9 +11,8 @@ public import Sheaf.Topology.SpectralLimitCohomologyMap
 
 public import Sheaf.Topology.SpectralLimitCohomologyZeroLaws
 
-import Sheaf.Topology.SpectralLimitCohomologyDegreeZero
-import Sheaf.CategoryTheory.SiteCohomologyPullbackComposite
-import Sheaf.CategoryTheory.SiteCohomologyPullbackUnique
+import Sheaf.Topology.SpectralLimitCohomologyMapIdentity
+import Sheaf.Topology.SpectralLimitCohomologyMapComposition
 import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 
 /-! # Functor and cocone laws for normalized cohomology maps
@@ -29,6 +28,16 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace TopCat.Sheaf
+
+attribute [local irreducible] spectralLimitCohomologyMap
+
+private theorem app_heq {X : TopCat.{u}}
+    {A B : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}} (φ : A ⟶ B)
+    {U V : Opens X} (e : U = V) {s : A.obj (op U)} {t : A.obj (op V)}
+    (h : HEq s t) : HEq ((φ.app (op U)).hom s) ((φ.app (op V)).hom t) := by
+  subst V
+  cases h
+  rfl
 
 /-- Normalized cohomology maps satisfy the diagram and cocone laws.
 No limit-space or compactness hypothesis is required.
@@ -108,6 +117,50 @@ theorem spectralLimit_cohomology_laws
         (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv
           (F i) (colimit P) ((eP i).inv ≫ colimit.ι P i)) q
     CohomologyMapLaws a b := by
-  sorry
+  dsimp only
+  let δ (i : I) :
+      (sheafPullback (Opens.map (p i)) AddCommGrpCat.{u}
+        (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).obj (F i) ⟶
+      colimit P := (eP i).inv ≫ colimit.ι P i
+  let leg (i : I) : F i ⟶ (pushforward AddCommGrpCat.{u} (p i)).obj (colimit P) :=
+    (sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u}
+      (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv
+      (F i) (colimit P) (δ i)
+  constructor
+  · intro i
+    exact spectralLimitCohomologyMap_id (f i i le_rfl) (hfid i) (cf i i le_rfl)
+      (hcf i i le_rfl) (α i i le_rfl) (hαid i) q
+  · intro i j k hij hjk
+    exact spectralLimitCohomologyMap_comp (f i j hij) (f j k hjk) (f i k (hij.trans hjk))
+      (hfcomp i j k hij hjk) (cf i j hij) (cf j k hjk) (cf i k (hij.trans hjk))
+      (hcf i j hij) (hcf j k hjk) (hcf i k (hij.trans hjk))
+      (α i j hij) (α j k hjk) (α i k (hij.trans hjk)) (hαcomp i j k hij hjk) q
+  · intro i j h
+    refine spectralLimitCohomologyMap_comp (f i j h) (p j) (p i) (hpcomp i j h)
+      (cf i j h) (cp j) (cp i) (hcf i j h) (hcp j) (hcp i) (α i j h)
+      (leg j) (leg i) ?_ q
+    intro U s
+    have hu := hP i j h U s
+    have e : (Opens.map (p i)).obj U =
+        (Opens.map (p j)).obj ((Opens.map (f i j h)).obj U) := by
+      change (Opens.map (p i)).obj U = (Opens.map (p j ≫ f i j h)).obj U
+      rw [hpcomp]
+    have hv := app_heq (δ j).hom e hu
+    have hd : ((eP i).inv ≫ P.map (homOfLE h) ≫ (eP j).hom) ≫ δ j = δ i := by
+      simp [δ, Category.assoc]
+    have he := congrArg (fun τ ↦ (τ.hom.app (op ((Opens.map (p i)).obj U))).hom
+      ((((sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u}
+      (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).unit.app
+        (F i)).hom.app (op U)).hom s)) hd
+    have hi := (sheafAdjunctionContinuous (Opens.map (p i)) AddCommGrpCat.{u}
+      (Opens.grothendieckTopology (S i)) (Opens.grothendieckTopology X)).homEquiv_unit (f := δ i)
+    have hj := (sheafAdjunctionContinuous (Opens.map (p j)) AddCommGrpCat.{u}
+      (Opens.grothendieckTopology (S j)) (Opens.grothendieckTopology X)).homEquiv_unit (f := δ j)
+    change HEq (((leg i).hom.app (op U)).hom s)
+      (((leg j).hom.app (op ((Opens.map (f i j h)).obj U))).hom
+        (((α i j h).hom.app (op U)).hom s))
+    dsimp only [leg]
+    rw [hi, hj]
+    exact (heq_of_eq he.symm).trans hv
 
 end TopCat.Sheaf

@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-directed-algebra-tail-base-change",
+ "kind": "statement",
+ "title": "Upper-tail ring colimits and compatible tensor base-change identifications",
+ "statement": "Let $R,B$ be commutative rings with $B$ an $R$-algebra, $I$ a nonempty directed preorder, and $(S_i,a_{ij})$ a diagram of commutative $R$-algebras with colimit $(S,a_i)$ in commutative $R$-algebras [def-weil-pbc-category-colimit]. Work in a common universe containing the index and all ring carriers. Fix $i\\in I$ and put $J_i=\\{j\\in I\\mid i\\le j\\}$. Then $(S,(a_j)_{j\\in J_i})$ is a colimit of the restricted diagram both in commutative $R$-algebras and in commutative rings: for every commutative ring $U$ and compatible ring maps $b_j:S_j\\to U$ for $j\\in J_i$, there is exactly one ring map $b:S\\to U$ with $ba_j=b_j$. Set $D_j=S_j\\otimes_R B$ and $D=S\\otimes_R B$, with algebra multiplication $(s\\otimes x)(s'\\otimes x')=ss'\\otimes xx'$ [def-weil-pbc-module-tensor-product]. For $T=S_j$ with $j\\ge i$, and for $T=S$, give $T$ its $S_i$-algebra structure through the transition or coprojection $\\alpha_T:S_i\\to T$. There are $T$-algebra isomorphisms $\\theta_T:T\\otimes_{S_i}D_i\\xrightarrow{\\sim}T\\otimes_R B$ and $\\lambda_T:T\\otimes_{S_i}S_i\\xrightarrow{\\sim}T$ with $\\theta_T(t\\otimes(s\\otimes x))=t\\alpha_T(s)\\otimes x$, $\\theta_T^{-1}(t\\otimes x)=t\\otimes(1\\otimes x)$, $\\lambda_T(t\\otimes s)=t\\alpha_T(s)$, and $\\lambda_T^{-1}(t)=t\\otimes1$. For every transition or coprojection $h:T\\to T'$ on this tail, $\\theta_{T'}(h\\otimes1_{D_i})=(h\\otimes1_B)\\theta_T$ and $\\lambda_{T'}(h\\otimes1_{S_i})=h\\lambda_T$. Writing $\\varphi_i:S_i\\to D_i$ for $s\\mapsto s\\otimes1$, these identifications give $\\theta_T(1_T\\otimes\\varphi_i)\\lambda_T^{-1}(t)=t\\otimes1$ and $\\theta_T(1\\otimes x_i)=(\\alpha_T\\otimes1_B)(x_i)$ for all $t\\in T$ and $x_i\\in D_i$. No injectivity, flatness or finite-presentation assumptions are imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof: upper-tail commutative-ring colimit and compatible tensor identifications needed before the singleton application of Tag 07RG, lemma-colimit-finite (former step 4)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Given compatible ring maps $b_j:S_j\\to U$ on $J_i$, for each $k\\in I$ choose $j\\ge i,k$ and set $c_k=b_j a_{kj}$. If $j,j'$ are two choices, choose $l\\ge j,j'$; compatibility gives $b_j a_{kj}=b_l a_{kl}=b_{j'}a_{kj'}$. Thus $c_k$ is independent of the choice, and is a ring map. For $k\\le k'$, choose $j\\ge i,k'$ to get $c_{k'}a_{kk'}=b_j a_{k'j}a_{kk'}=c_k$. For $k\\in J_i$, taking $j=k$ gives $c_k=b_k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF (lemma-integral-closure-commutes-colim-smooth), explicit upper-tail cocone extension underlying its filtered-colimit argument."
+   }
+  },
+  {
+   "text": "Write $r_k:R\\to S_k$ and $r_S:R\\to S$ for the structure maps. Give $U$ the $R$-algebra structure $\\rho=b_i r_i$. For $j\\ge i,k$, $c_k r_k=b_j r_j=b_j a_{ij}r_i=\\rho$, so every $c_k$ is an $R$-algebra map. The given colimit universal property supplies a unique $R$-algebra map $b:S\\to U$ with $ba_k=c_k$, hence $ba_j=b_j$ on the tail. Any ring map $d:S\\to U$ with those tail restrictions satisfies $dr_S=da_i r_i=\\rho$ and, choosing $j\\ge i,k$, $da_k=da_j a_{kj}=c_k$. It is consequently an $R$-algebra map and equals $b$ by the same uniqueness. This proves the ring-colimit assertion. If $U$ was already an $R$-algebra and the $b_j$ were $R$-algebra maps, $\\rho$ is its given structure map, proving the algebra-colimit assertion too.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002F (definition-colimit), applied to the cocone explicitly extended in step 1."
+   }
+  },
+  {
+   "text": "For $T=S_j$ or $S$, the transition/cocone equations make $R\\to S_i\\xrightarrow{\\alpha_T}T$ its given $R$-algebra structure. Apply [lem-weil-pbc-tensor-cancel-base-change] with its intermediate ring $S=S_i$ and its algebra $A=T$. It supplies a $T$-algebra isomorphism $\\theta_T$ with exactly the two asserted pure-tensor formulas. Its hypotheses are commutativity and the scalar tower just verified; no flatness or injectivity is required.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (section-tensor-product) and 00D2 (lemma-tensor-with-bimodule); algebra cancellation in the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebra-tensor-pushout-universal-property] over $S_i$ to $\\mathrm{id}_T$ and $\\alpha_T$ to obtain $\\lambda_T(t\\otimes s)=t\\alpha_T(s)$. Its proposed inverse $t\\mapsto t\\otimes1$ is the canonical algebra inclusion. One composite sends $t$ to $t$; the other sends $t\\otimes s$ to $t\\alpha_T(s)\\otimes1=t\\otimes s$ by $S_i$-balancing. Pure tensors generate by [def-weil-pbc-module-tensor-product], so these composites are identities. Both maps preserve the $T$-structure, hence this is the asserted $T$-algebra isomorphism.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product), tensor universal property and balancing; algebra universal property as in Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "For a transition or coprojection $h:T\\to T'$, $h\\alpha_T=\\alpha_{T'}$. On $t\\otimes(s\\otimes x)$ the two sides of the $\\theta$-naturality equation are respectively $h(t)\\alpha_{T'}(s)\\otimes x$ and $h(t\\alpha_T(s))\\otimes x$, which agree. On $t\\otimes s$ the two sides of the $\\lambda$ equation are $h(t)\\alpha_{T'}(s)$ and $h(t\\alpha_T(s))$. All maps are additive, and nested pure tensors generate by [def-weil-pbc-module-tensor-product], proving both equations on the whole tensor products.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), generation by pure tensors; naturality checked with the explicit formulas."
+   }
+  },
+  {
+   "text": "The composite $\\theta_T(1_T\\otimes\\varphi_i)\\lambda_T^{-1}$ sends $t$ successively to $t\\otimes1$, $t\\otimes(1\\otimes1)$, and $t\\otimes1$, as asserted. For $x_i=s\\otimes x$, the second required identity is $\\theta_T(1\\otimes(s\\otimes x))=\\alpha_T(s)\\otimes x=(\\alpha_T\\otimes1_B)(s\\otimes x)$. Additivity and generation of $D_i$ by pure tensors [def-weil-pbc-module-tensor-product] extend it to every $x_i$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX (lemma-tensor-product) and 00D2 (lemma-tensor-with-bimodule), explicit structure-map and element formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q41",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CBF (lemma-integral-closure-commutes-colim-smooth), elementary upper-tail details; Tags 00CX and 00D2 for tensor calculations, together with the existing algebra tensor Mathlib leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of commutative R algebras is a ring colimit on every upper tail and iterated scalar extension tensor products cancel naturally",
+   "results": "{\"t\": \"2026-10-22T06:13:42Z\", \"tool\": \"leanfinder\", \"query\": \"A directed colimit of commutative R algebras is a ring colimit on every upper tail and iterated scalar extension tensor products cancel naturally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.coproductCoconeIsColimit\", \"CommRingCat.coproductCoconeIsColimit_desc\", \"instHasColimitsCommAlgCat\", \"CommAlgCat.binaryCofanIsColimit\", \"CommRingCat.FilteredColimits.colimitCocone\", \"TensorProduct.directLimitRight\", \"CommRingCat.pushoutCoconeIsColimit\", \"Submodule.FG.rTensor.directLimit_apply\"], \"digest\": \"ee9456f8dae5955f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor cancellation exists, but the complete statement additionally constructs the upper-tail ring-colimit universal property from an algebra colimit and proves compatibility with its specified maps; colimit existence or binary coproducts do not supply it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct, CategoryTheory.Limits.IsColimit",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"loogle\", \"query\": \"Algebra.TensorProduct, CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: invalid identifier in pattern; valid quoted-name Loogle search also run"
+  },
+  {
+   "tool": "grep",
+   "query": "Preserves.*Colimit|preserves.*colimit|IsColimit|isColimit",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"grep\", \"query\": \"Preserves.*Colimit|preserves.*colimit|IsColimit|isColimit\", \"sub\": \"Algebra/Category/CommAlgCat\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\"], \"digest\": \"21c53fd25ebef3af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor cancellation exists, but the complete statement additionally constructs the upper-tail ring-colimit universal property from an algebra colimit and proves compatibility with its specified maps; colimit existence or binary coproducts do not supply it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a directed system of commutative R algebras the colimit on an upper tail is also a colimit of rings and tensor base change from a chosen stage cancels",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"leansearch\", \"query\": \"For a directed system of commutative R algebras the colimit on an upper tail is also a colimit of rings and tensor base change from a chosen stage cancels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.DirectLimit.commRing\", \"Ring.DirectLimit\", \"Ring.DirectLimit.ring\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"ModuleCat.directLimitIsColimit\", \"ModuleCat.directLimitIsColimit_desc\", \"CommRingCat.FilteredColimits.colimit\", \"CommRingCat.FilteredColimits.R\"], \"digest\": \"0f66da2cf9513bd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor cancellation exists, but the complete statement additionally constructs the upper-tail ring-colimit universal property from an algebra colimit and proves compatibility with its specified maps; colimit existence or binary coproducts do not supply it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|baseChange.*[Aa]ssoc|tensor.*[Aa]ssoc|[Aa]ssoc.*tensor",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"grep\", \"query\": \"cancelBaseChange|baseChange.*[Aa]ssoc|tensor.*[Aa]ssoc|[Aa]ssoc.*tensor\", \"sub\": \"RingTheory/TensorProduct\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Maps.lean\", \"Mathlib/RingTheory/TensorProduct/Free.lean\", \"Mathlib/RingTheory/TensorProduct/Finite.lean\", \"Mathlib/RingTheory/TensorProduct/Basic.lean\"], \"digest\": \"b192496a0142043e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor cancellation exists, but the complete statement additionally constructs the upper-tail ring-colimit universal property from an algebra colimit and proves compatibility with its specified maps; colimit existence or binary coproducts do not supply it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a filtered diagram of commutative algebras to the indices above a fixed stage, forget to rings, and identify the base changed stage algebra T tensor over S_i of S_i tensor over R B with T tensor over R B naturally",
+   "results": "{\"t\": \"2026-10-22T06:14:21Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a filtered diagram of commutative algebras to the indices above a fixed stage, forget to rings, and identify the base changed stage algebra T tensor over S_i of S_i tensor over R B with T tensor over R B naturally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.FilteredColimits.R\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"CommRingCat.Under.tensorProductFan'\", \"CommRingCat.FilteredColimits.colimitCocone\", \"CommRingCat.Under.tensorProductFan\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"CommRingCat.tensorProd\", \"CommRingCat.Under.tensorProductFanIso\"], \"digest\": \"158c70220d4a882f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor cancellation exists, but the complete statement additionally constructs the upper-tail ring-colimit universal property from an algebra colimit and proves compatibility with its specified maps; colimit existence or binary coproducts do not supply it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommAlgCat\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-22T06:14:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"CommAlgCat\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"instHasColimitsCommAlgCat\", \"CommAlgCat.binaryCofanIsColimit\"], \"digest\": \"6150a4fae9459360\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor cancellation exists, but the complete statement additionally constructs the upper-tail ring-colimit universal property from an algebra colimit and proves compatibility with its specified maps; colimit existence or binary coproducts do not supply it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimit|PreservesColimit|isColimit|IsColimit",
+   "results": "{\"t\": \"2026-10-23T04:12:37Z\", \"tool\": \"grep\", \"query\": \"preservesColimit|PreservesColimit|isColimit|IsColimit\", \"sub\": \"Algebra/Category/CommAlgCat\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\"], \"digest\": \"21c53fd25ebef3af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide existence of algebra/ring colimits, ring-to-type forgetful preservation, or binary tensor coproducts; none states all upper-tail algebra-to-ring colimit and specified tensor compatibility clauses. Existing tensor cancellation and tensor universal-property Mathlib leaves are reused in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a directed algebra colimit to an upper tail and forget the algebra structure to obtain the colimit in commutative rings",
+   "results": "{\"t\": \"2026-10-23T04:12:37Z\", \"tool\": \"leansearch\", \"query\": \"Restrict a directed algebra colimit to an upper tail and forget the algebra structure to obtain the colimit in commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.DirectLimit\", \"Ring.DirectLimit.commRing\", \"CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits\", \"CommRingCat.FilteredColimits.forget_preservesFilteredColimits\", \"CommRingCat.Colimits.colimit\", \"CommRingCat.Colimits.ColimitType\", \"Ring.DirectLimit.ring\", \"CommRingCat.Colimits.colimitIsColimit\"], \"digest\": \"3b17e59bf06cb823\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide existence of algebra/ring colimits, ring-to-type forgetful preservation, or binary tensor coproducts; none states all upper-tail algebra-to-ring colimit and specified tensor compatibility clauses. Existing tensor cancellation and tensor universal-property Mathlib leaves are reused in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommAlgCat\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T04:12:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"CommAlgCat\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"instHasColimitsCommAlgCat\", \"CommAlgCat.binaryCofanIsColimit\"], \"digest\": \"6150a4fae9459360\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide existence of algebra/ring colimits, ring-to-type forgetful preservation, or binary tensor coproducts; none states all upper-tail algebra-to-ring colimit and specified tensor compatibility clauses. Existing tensor cancellation and tensor universal-property Mathlib leaves are reused in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit of a directed diagram of commutative R algebras restricts to a ring colimit on every upper tail with natural tensor cancellation isomorphisms",
+   "results": "{\"t\": \"2026-10-23T04:12:44Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit of a directed diagram of commutative R algebras restricts to a ring colimit on every upper tail with natural tensor cancellation isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasColimitsCommAlgCat\", \"CommRingCat.Colimits.hasColimits_commRingCat\", \"CommRingCat.FilteredColimits.R\", \"CommRingCat.FilteredColimits.colimitCocone\", \"CommRingCat.FilteredColimits.colimit\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CommRingCat.FilteredColimits.colimitCommRing\", \"CommRingCat.Colimits.colimit\"], \"digest\": \"574d4f9551b88476\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide existence of algebra/ring colimits, ring-to-type forgetful preservation, or binary tensor coproducts; none states all upper-tail algebra-to-ring colimit and specified tensor compatibility clauses. Existing tensor cancellation and tensor universal-property Mathlib leaves are reused in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from commutative R algebras to commutative rings preserves connected colimits and a directed upper tail is cofinal",
+   "results": "{\"t\": \"2026-10-23T04:13:42Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from commutative R algebras to commutative rings preserves connected colimits and a directed upper tail is cofinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasColimitsCommAlgCat\", \"CommRingCat.FilteredColimits.forget_preservesFilteredColimits\", \"CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits\", \"CommSemiRingCat.FilteredColimits.forget_preservesFilteredColimits\", \"RingCat.FilteredColimits.forget_preservesFilteredColimits\", \"CommRingCat.Colimits.hasColimits_commRingCat\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\"], \"digest\": \"e4266a7c978cec13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide existence of algebra/ring colimits, ring-to-type forgetful preservation, or binary tensor coproducts; none states all upper-tail algebra-to-ring colimit and specified tensor compatibility clauses. Existing tensor cancellation and tensor universal-property Mathlib leaves are reused in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-closure-ind-etale-base-change",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof, paragraph (3), open direct image: finite tame root extension input; comparison of the concrete finite normalization with its strict-local pullback. Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof: upper-tail commutative-ring colimit and compatible tensor identifications needed before the singleton application of Tag 07RG, lemma-colimit-finite (former step 4).",
+   "via": [
+    "lem-sfb-integral-closure-ind-etale-base-change",
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-directed-algebra-tail-base-change",
+  "worker": "stage1",
+  "group": "Q41",
+  "summary": "Preserved the statement. Proved the upper-tail universal property by extending compatible ring maps and equipping the target with its forced R-algebra structure; reused existing tensor cancellation and algebra tensor universal-property Mathlib leaves. Wrote the unit isomorphism, both naturality equations and both structure/element identities explicitly. No new nodes.",
+  "blueprint": "Realizes the inherited main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, through the existing normalization/strict-local-pullback chain: the upper-tail and tensor identifications required by the parent integral-closure ind-etale base-change proof (Tag 0CBF before the singleton use of 07RG). The existing from.node is null and is preserved; ancestor reports None. Searches for upper tail and directed algebra found no blueprint duplicate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-ce41cdccd",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-ce41cdccd (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery creates no new nodes. Compared with the base item from the Q86 snapshots (sha f563fb45, unsplit), only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed; statement, stmt_deps and blueprint are byte-identical, so nothing is weakened. Source: Stacks 0CBF (algebra.tex l.40749) has a one-line proof, which this item makes explicit; every cited tag maps to the label named; no SGA is cited. Step 1 extends the tail cocone using common upper bounds and preorder functoriality. Step 2 cites the colimit definition: with rho=b_i r_i the extended cocone is an R-algebra cocone, any ring map d with the tail restrictions satisfies d r_S = rho and so is an R-algebra map, which gives uniqueness among ring maps, and the algebra case uses the given structure. Step 3 applies cancelBaseChange (A=T, S=S_i); I checked the scalar tower a_ij r_i=r_j and a_i r_i=r_S, and its formulas match the item's. Step 4 builds lambda_T from productMap(id_T, alpha_T) over S_i; the inverse t->t⊗1 holds by balancing and generation by pure tensors. Steps 5 and 6: naturality and the two identities hold on pure tensors and extend by additivity. proof_deps equals the union of uses. Small cases checked: Z->Z/2 over {0<=1}, a preorder with 0<=1<=0, zero rings, a constant diagram. Duplicate candidates are not duplicates: directed-cofinal reindexing, a1 cocone recognition (needs an elementwise description), the subalgebra colimit node and the infinity-cofinal nodes. Route: only definitions and Mathlib leaves are cited, so tool_uses=[] is correct. The proof matches exactly what parent lem-sfb-integral-closure-ind-etale-base-change step 3 uses. The null from.node is inherited from the Q86-created node and is not a fault of this delivery."
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-torus-action-connected-group-lie-rigidity",
+ "kind": "statement",
+ "title": "Torus automorphism actions on connected groups are detected on tangent spaces",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $T\\simeq\\mathbf G_{m,k}^r$, $r\\geq0$, be a split torus, where $\\mathbf G_m(B)=B^\\times$. Suppose $a:T\\times_kH\\to H$ is an action by group-scheme automorphisms, meaning that $a(1,h)=h$, $a(tu,h)=a(t,a(u,h))$, and $a(t,hh')=a(t,h)a(t,h')$ on all algebra-valued points. Write $\\mathfrak h=T_{H/k,e}$ for the tangent space at the identity [def-sc-scheme-tangent-space], with its induced $T$-representation: for every commutative $k$-algebra $B$ and $t\\in T(B)$ it is the differential at the identity of $a(t,-):H_B\\to H_B$. Then $a$ is the projection $T\\times_kH\\to H$ if and only if this entire $T$-representation on $\\mathfrak h$ is trivial. Triviality of the representation means identity linear maps after every commutative algebra extension, not vanishing of its differential. The group $H$ may be nonreduced and need not be smooth or reductive.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 3.3.8 proof, printed p.102, paragraph beginning Since T is of multiplicative type: the connected finite-type group version, explicitly used for the possibly nonreduced identity component of the adjoint kernel. Conrad cites CGP Corollary A.8.11 here. Read online; local Conrad and CGP copies WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Assume the tangent representation is trivial. Apply [lem-sfb-universal-fixed-subscheme] to the $T$-action on $H$ to obtain the closed fixed subscheme $F\\hookrightarrow H$. The schemes are separated: on an affine scheme its diagonal is the closed immersion given by the surjective multiplication map on coordinate rings. For every $k$-algebra $B$, $F(B)$ is a subgroup of $H(B)$, since the action fixes the identity and preserves multiplication and inverses after every algebra extension. Thus $F$ is a closed subgroup by [def-sc-group-scheme-subgroup], and $e\\in F(k)$. Put $R=\\mathcal O_{H,e}$, with maximal ideal $\\mathfrak m$. By [lem-sfb-rational-point-thickenings-base-change], $R$ is Noetherian local with residue $k$. By [lem-sfb-torus-fixed-local-ideal-jets], the local map to $F$ is $R\\to R/J$, where $J=(t^*f-f:t\\in T(k),f\\in\\mathfrak m)$; each $R/\\mathfrak m^{n+1}$ and its ideal $\\mathfrak m/\\mathfrak m^{n+1}$ carry the stated finite-dimensional rational representations, with equivariant quotient to $V=\\mathfrak m/\\mathfrak m^2$.",
+   "uses": [
+    "lem-sfb-universal-fixed-subscheme",
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-rational-point-thickenings-base-change",
+    "lem-sfb-torus-fixed-local-ideal-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1, printed pp.138-139; Lemma 13.4 and proof of Lemma 13.6, printed pp.255-256; fixed-point jet construction of Proposition 8.9, p.150. No smoothness is used in these cited local constructions."
+   }
+  },
+  {
+   "text": "For $t\\in T(k)$ apply [lem-sc-rational-tangent-cotangent-duality] to the $k$-automorphism $a(t,-):H\\to H$ fixing $e$. Its tangent map is identity by hypothesis, so the dual of its induced map on $V$ is identity. Since $V$ is finite-dimensional by step 1, its coordinate functionals separate vectors; hence $t^*|_V=\\mathrm{id}$. This uses the entire tangent representation, and makes no inference from a vanishing Lie-algebra differential.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2E (lemma-tangent-space-rational-point) and 0B2F (lemma-map-tangent-spaces), applied at the rational identity."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$. Apply [lem-sfb-gm-representation-weight-basis] successively to the $r$ commuting multiplicative-group factors on each of $V$ and $W_n=\\mathfrak m/\\mathfrak m^{n+1}$ from step 1. Each factor preserves the weight spaces of the preceding factors, since its coaction commutes with theirs; comparison of Laurent monomial coefficients proves this assertion. This gives simultaneous integer weights, and equivariant maps preserve them by the same coefficient comparison. All weights of $V$ are zero: step 2 fixes every rational point; for a nonzero integer exponent $a$, some $z\\in k^\\times$ satisfies $z^a\\ne1$, since $k$ is infinite and a nonzero polynomial has finitely many roots. Choose a basis $v_1,\\ldots,v_d$ of $V$. In any preimage of $v_i$ under $W_n\\twoheadrightarrow V$, its weight-zero component still maps to $v_i$. Call this component $w_i$, and lift it to $u_i\\in\\mathfrak m$. The $w_i$ generate $R/\\mathfrak m^{n+1}$ as a $k$-algebra: first express an element of $\\mathfrak m$ linearly in the $u_i$ modulo $\\mathfrak m^2$; in its remainder, replace each factor by that linear expression, increasing the residual degree; after degree $n$ the remainder vanishes. Every generator $w_i$ and scalar is fixed by the full torus coaction, so this jet algebra has trivial torus action. For $d=0$ the same degree-raising argument says that the jet algebra is $k$; for $r=0$ its action is already the identity.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-sfb-torus-fixed-local-ideal-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234-235; weight-zero specialization of the lifting argument in the proof of Lemma 13.6, printed p.256. The truncated algebra generation argument does not require regularity."
+   }
+  },
+  {
+   "text": "Step 3 implies $t^*f-f\\in\\mathfrak m^{n+1}$ for every $t\\in T(k)$, $f\\in\\mathfrak m$, and $n\\geq1$. Thus $J\\subseteq\\bigcap_{n\\geq1}\\mathfrak m^{n+1}$. Apply [lem-weil-pbc-krull-intersection-jacobson] with the Noetherian local ring $R$, ideal $\\mathfrak m$, and cyclic module $R$. Its maximal ideal is its Jacobson radical. The intersection is zero; deleting exponents $0,1$ does not change it because the powers are nested. Consequently $J=0$, and the actual local-ring map $\\mathcal O_{H,e}\\to\\mathcal O_{F,e}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ, lemma-intersection-powers-ideal-module, part (2); the jet/Krull method also occurs in Milne Proposition 8.9, printed p.150."
+   }
+  },
+  {
+   "text": "The closed subgroup $F\\hookrightarrow H$ satisfies [lem-sfb-closed-subgroup-identity-stalk-detection]: $H$ is affine, finite type and connected over the algebraically closed field $k$, and step 4 proves the identity-stalk condition. Hence $F=H$ as group schemes. The restricted-action clause of [lem-sfb-universal-fixed-subscheme] now says that $a:T\\times_kH\\to H$ is the projection. In particular this is an equality of morphisms and remains true on all algebra-valued points, including nonreduced algebras.",
+   "uses": [
+    "lem-sfb-closed-subgroup-identity-stalk-detection",
+    "lem-sfb-universal-fixed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Translation/homogeneity argument of 1.8, printed p.9, and Theorem 7.1, pp.138-139; general identity-stalk criterion isolated as a separate supporting node."
+   }
+  },
+  {
+   "text": "Conversely, if $a$ is the projection, then after any commutative $k$-algebra extension $B$ and for every $t\\in T(B)$, the automorphism $a(t,-):H_B\\to H_B$ is identity. Its tangent map is identity: by [def-sc-scheme-tangent-space] it sends a dual-number point $\\theta$ to $\\mathrm{id}\\circ\\theta=\\theta$. This is precisely triviality of the entire representation in the statement.",
+   "uses": [
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2C, definition-tangent-space, and Tag 0B2F, lemma-map-tangent-spaces: functoriality of the tangent map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-universal-fixed-subscheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-rational-point-thickenings-base-change",
+  "lem-sfb-torus-fixed-local-ideal-jets",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-sfb-closed-subgroup-identity-stalk-detection",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent assembly of the nonreduced torus case invoked by Conrad Proposition 3.3.8, printed p.102 (online primary source read). Uses the finite-jet and weight-zero argument of Milne 13.6 and Krull intersection; no regularity or smoothness hypothesis is imported. General identity-stalk globalization is isolated in its own statement-only node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torus action by automorphisms on a connected affine group scheme is trivial if its action on the Lie algebra is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [C\", \"doc\": \"If the group homomorphism $\\\\phi: G \\\\to \\\\mathrm{Aut}(F)$ is surjective, then for every connected object $X$ in the pre-Galois category $\\\\mathcal{C}$, the induced action of $G$ on the finite set $F(X)$ \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"LieModule.maxTrivEquiv_of_refl_eq_refl\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ {R : Type u} {L : Type v} {M : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.maxTrivEquiv LieModuleEquiv.refl = LieModuleEquiv.refl\", \"doc\": \"The maximal trivial equivalence associated with the identity Lie module equivalence is equal to the identity equivalence itself, i.e., $\\\\text{maxTrivEquiv}(\\\\text{id}_{M}) = \\\\text{id}_{M}$ for the iden\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X],\\n  CategoryTheory.PreGaloisCategory.IsGalois\", \"doc\": \"For a connected object $X$ in a pre-Galois category, $X$ is a Galois object if and only if the automorphism group $\\\\mathrm{Aut}(X)$ acts pretransitively on the finite type $F(X)$, where pretransitivit\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], MulAction.IsPretransitive (CategoryTheory.A\", \"doc\": \"For any connected object $X$ in a pre-Galois category $\\\\mathcal{C}$ and fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, the automorphism group $\\\\mathrm{Aut}(F)$ acts pretransitively on the fini\"}\n  {\"name\": \"LieAlgebra.isEngelian_of_subsingleton\", \"module\": \"Mathlib/Algebra/Lie/Engel\", \"type\": \"∀ {R : Type u₁} {L : Type u₂} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Subsingleton L],\\n  LieAlgebra.IsEngelian R L\", \"doc\": \"If $\\\\mathfrak{g}$ is a Lie algebra over a commutative ring $R$ and $\\\\mathfrak{g}$ is a subsingleton (i.e., has at most one element), then $\\\\mathfrak{g}$ is Engelian. This follows because the trivial m\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "MulAction.IsTrivial, LieAlgebra",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'MulAction.IsTrivial'",
+   "date": "2026-10-24",
+   "verdict": "no match: invalid identifier in Loogle query; corrected below"
+  },
+  {
+   "tool": "grep",
+   "query": "torus|multiplicative.?type",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A diagonalizable algebraic group acting on a connected group scheme acts faithfully on its tangent space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.IsFaithful.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Nilpotent\", \"type\": \"∀ (R : Type u) (L : Type v) (M : Type w) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.IsFaithful R L M = LieModule.IsFaithful R L M\", \"doc\": \"A Lie module $ M $ over a Lie algebra $ L $ is faithful if and only if the action of $ L $ on $ M $ is injective, i.e., the only element of $ L $ that acts as zero on all elements of $ M $ is the zero\"}\n  {\"name\": \"LieModule.instIsFaithfulSubtypeMemLieSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"[IsFaithful R L M] {L' : LieSubalgebra R L} : IsFaithful R L' M\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ acts faithfully on a Lie module $ M $, then any Lie subalgebra $ \\\\mathfrak{g}' $ of $ \\\\mathfrak{g} $ also acts faithfully on $ M $. This\"}\n  {\"name\": \"AddAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": FaithfulSMul (AddAut M) M\", \"doc\": \"The action of the additive automorphism group on M is faithful, meaning that if two automorphisms agree on all elements of M, then they are equal.\"}\n  {\"name\": \"LinearEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \": FaithfulSMul (M ≃ₗ[R] M) M\", \"doc\": \"The action of the automorphism group of a module $ M $ over a semiring $ R $ on $ M $ is faithful. This means that if two automorphisms act identically on every element of $ M $, then they are equal a\"}\n  {\"name\": \"Subgroup.instFaithfulSMulSubtypeMem\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Actions\", \"type\": \"[MulAction G α] [FaithfulSMul G α] (S : Subgroup G) : FaithfulSMul S α\", \"doc\": \"If a group $G$ acts faithfully on a type $\\\\alpha$, then every subgroup $S \\\\subseteq G$ also acts faithfully on $\\\\alpha$. This means that for any two elements $s_1, s_2 \\\\in S$, if $s_1 \\\\cdot x = s_2 \\\\c\"}\n  {\"name\": \"AlgEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Algebra.Equiv\", \"type\": \": FaithfulSMul (A₁ ≃ₐ[R] A₁) A₁\", \"doc\": \"The action of the group of R-algebra automorphisms on A₁ is faithful, meaning that if two automorphisms act identically on every element of A₁, then they are equal.\"}\n  {\"name\": \"faithfulVAdd_iff\", \"module\": \"Mathlib.Algebra.Group.Action.Faithful\", \"type\": \"∀ {G : Type u_2} {α : Type u_3} [inst : AddGroup G] [inst_1 : AddAction G α],\\n  FaithfulVAdd G α ↔ ∀ (g : G), (∀ (a : α), g +ᵥ a = a) → g = 0\", \"doc\": \"The additive action of an additive group $ G $ on a type $ \\\\alpha $ is faithful if and only if for every element $ g \\\\in G $, the condition $ g \\\\cdot a = a $ for all $ a \\\\in \\\\alpha $ implies $ g = 0 $\"}\n  {\"name\": \"FaithfulVAdd\", \"module\": \"Mathlib.Algebra.Group.Action.Faithful\", \"type\": \"(G : Type u_4) → (P : Type u_5) → [VAdd G P] → Prop\", \"doc\": \"The additive action of $ G $ on $ P $ is faithful.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torus automorphism action on a possibly nonreduced connected algebraic group detected by tangent representation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"mulInvariantVectorField\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"For a Lie group $G$ modeled on a normed vector space $E$ via a model with corners $I$, the left-invariant vector field associated to an element $v$ of the Lie algebra $\\\\mathfrak{g} = T_eG$ is defined \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, establ\"}\n  {\"name\": \"addInvariantVectorField\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, and an additive group $G$ modeled on $E$ via a charted space structure with corners $I$, this constructs the \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutHomeo_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"For any element $g$ in a compact topological group $G$, the homeomorphism $\\\\text{toAutHomeo}(F, G)$ evaluated at $g$ coincides with the group homomorphism $\\\\text{toAut}(F, G)$ evaluated at $g$, i.e., \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [inst_3 : (X : C) → MulAction G (F.obj X).carrier] →\\n              [C\", \"doc\": \"There is a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the functor $ F $, established by the bijective group homomorphism m\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutHomeo\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [inst_3 : (X : C) → MulAction G (F.obj X).carrier] →\\n              [C\", \"doc\": \"The canonical homeomorphism from a compact topological group $ G $ to the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $ in a pre-Galois category $ \\\\m\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_isHomeomorph\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"The multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the functor $ F $ is a homeomorphism, meaning it is a continuous bijection \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_isHomeomorph\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"The group homomorphism from the compact topological group $ G $ to the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $ in a pre-Galois category $ \\\\math\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "MulAction.fixedPoints",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"MulAction.fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \" (M : Type u_1) (α : Type u_3) [Monoid M] [MulAction M α] : Set α\", \"doc\": \"The set of elements fixed under the whole action.\"}\n  {\"name\": \"MulAction.fixed_eq_iInter_fixedBy\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \" (M : Type u_1) (α : Type u_3) [Monoid M] [MulAction M α] : MulAction.fixedPoints M α = ⋂ m, MulAction.fixedBy α m\", \"doc\": \"\"}\n  {\"name\": \"MulAction.mem_fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \" {M : Type u_1} {α : Type u_3} [Monoid M] [MulAction M α] {a : α} : a ∈ MulAction.fixedPoints M α ↔ ∀ (m : M), m • a = a\", \"doc\": \"\"}\n  {\"name\": \"MulAction.mem_fixedPoints'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \" {M : Type u_1} {α : Type u_3} [Monoid M] [MulAction M α] {a : α} : a ∈ MulAction.fixedPoints M α ↔ ∀ a' ∈ MulAction.orbit M a, a' = a\", \"doc\": \"\"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib.GroupTheory.GroupAction.ConjAct\", \"type\": \" {G : Type u_3} [Group G] : MulAction.fixedPoints (ConjAct G) G = ↑(Subgroup.center G)\", \"doc\": \"The set of fixed points of the conjugation action of `G` on itself is the center of `G`.\"}\n  {\"name\": \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction\", \"type\": \" {G : Type u_1} [Group G] {α : Type u_2} [MulAction G α] {H : Subgroup G} [hH : H.Normal] : MulAction G ↑(MulAction.fixedPoints (↥H) α)\", \"doc\": \"\"}\n  {\"name\": \"smul_mem_fixedPoints_of_normal\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction\", \"type\": \" {G : Type u_1} [Group G] {α : Type u_2} [MulAction G α] {H : Subgroup G} [hH : H.Normal] (g : G) {a : α} (ha : a ∈ MulAction.fixedPoints (↥H) α) : g • a ∈ MulAction.fixedPoints (↥H) α\", \"doc\": \"\"}\n  {\"name\": \"coe_smul_fixedPoints_of_normal\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction\", \"type\": \" {G : Type u_1} [Group G] {α : Type u_2} [MulAction G α] {H : Subgroup G} [hH : H.Normal] (g : G) (a : ↑(MulAction.fixedPoints (↥H) α)) : ↑(g • a) = g • ↑a\", \"doc\": \"\"}\n  {\"name\": \"MulActionHom.map_mem_fixedPoints\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixedPoints\", \"type\": \" {G : Type u_1} {A : Type u_2} {B : Type u_3} [Monoid G] [MulAction G A] [MulAction G B] (f : A →ₑ[id] B) {H : Submonoid G} {a : A} (ha : a ∈ MulAction.fixedPoints (↥H) A) : f a ∈ MulAction.fixedPoints (↥H) B\", \"doc\": \"`MulActionHom` maps `fixedPoints` to `fixedPoints`.\"}\n  {\"name\": \"fixedPoints_antitone\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Monoid M] [MulAction M α] : Antitone fun P => MulAction.fixedPoints (↥P) α\", \"doc\": \"\"}\n  {\"name\": \"fixedPoints_subgroup_antitone\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Group M] [MulAction M α] : Antitone fun P => MulAction.fixedPoints (↥P) α\", \"doc\": \"\"}\n  {\"name\": \"fixedPoints_submonoid_iSup\", \"module\": \"Mathlib.GroupTheory.GroupAction.FixingSubgroup\", \"type\": \" (M : Type u_1) (α : Type u_2) [Monoid M] [MulAction M α] {ι : Sort u_3} {P : ι → Submonoid M} : MulAction.fixedPoints (↥(iSup P)) α = ⋂ i, MulAction.fixedPoints (↥(P i)) α\", \"doc\": \"Fixed points of iSup of submonoids is intersection\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra or ordinary group-action facts do not provide the scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|[Aa]djoint|[Ll]ie[Aa]lgebra",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra or ordinary group-action facts do not provide the scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orus|[Tt]angent|[Cc]otangent",
+   "results": "0 hits: . Searched AlgebraicGeometry/Group; logged digest 4f53cda18c2baa0c. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Galois categories or Lie-algebra modules, not rational torus actions on possibly nonreduced affine group schemes; the AlgebraicGeometry/Group grep has no hits. Lie/Abelian.lean:39-45 was read to distinguish the full torus action from its differential."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an action of a diagonalizable group on a connected finite type group scheme the action is trivial exactly when it is trivial on the Lie algebra",
+   "results": "8 hits: TrivialLieModule, LieModule.IsTrivial, GroupLieAlgebra, Action.diagonalSuccIsoTensorTrivial, LieIdeal.isLieAbelian_of_trivial, LieModule.instIsTrivialOfSubsingleton', LieModule.IsFaithful.congr_simp, LieModule.traceForm_eq_zero_of_isTrivial. Searched service index; logged digest 2363948e72bdaced. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Galois categories or Lie-algebra modules, not rational torus actions on possibly nonreduced affine group schemes; the AlgebraicGeometry/Group grep has no hits. Lie/Abelian.lean:39-45 was read to distinguish the full torus action from its differential."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"MulAction\"",
+   "results": "0 hits: . Searched service index; logged digest 4f53cda18c2baa0c. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Galois categories or Lie-algebra modules, not rational torus actions on possibly nonreduced affine group schemes; the AlgebraicGeometry/Group grep has no hits. Lie/Abelian.lean:39-45 was read to distinguish the full torus action from its differential."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus acting by automorphisms on a connected possibly nonreduced affine group scheme acts trivially if its full tangent representation is trivial",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive, CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, groupCohomology.H1ofAutOnUnitsUnique, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois. Searched service index; logged digest 1c9dc2ed08c74ebb. Signatures returned by the search were read.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Galois categories or Lie-algebra modules, not rational torus actions on possibly nonreduced affine group schemes; the AlgebraicGeometry/Group grep has no hits. Lie/Abelian.lean:39-45 was read to distinguish the full torus action from its differential."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adjoint-action-kernel-is-centre",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to lem-sfb-adjoint-action-kernel-is-centre: Conrad Proposition 3.3.8 proof, printed p.102; Torus automorphism actions on connected groups are detected on tangent spaces. The item supports the root-coordinate prerequisite to the existing geometric-reductivity/alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3).",
+   "via": [
+    "lem-sfb-adjoint-action-kernel-is-centre"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-action-connected-group-lie-rigidity",
+  "worker": "stage1",
+  "summary": "Unchanged statement, including nonreduced connected groups and triviality of the full tangent representation. Fixed local ideal and finite rational jets are reused; cotangent duality and weight-zero lifts show every jet is fixed, and Krull intersection kills the fixed ideal at the identity. One general closed-subgroup identity-stalk criterion is stated separately. All citations were read and checked hypothesis by hypothesis.",
+  "blueprint": "Supporting input to lem-sfb-adjoint-action-kernel-is-centre: Conrad Proposition 3.3.8 proof, printed p.102; Torus automorphism actions on connected groups are detected on tangent spaces. The item supports the root-coordinate prerequisite to the existing geometric-reductivity/alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3). Steps 1-4 supply the tangent-to-formal-fixed implication, step 5 globalizes using the group law, and step 6 gives the converse. The latest unit and direct-images proof (3) were read; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Generic rational-point tangent/cotangent naturality from Stacks 0B2E/0B2F; the unit has no replacement for this linear algebra comparison."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Generic Noetherian local algebra tool to pass from all infinitesimal neighbourhoods to the identity stalk; this implements the prescribed torus rigidity input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-7007acf32",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-7007acf32 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full and checked the steps against Milne iAG 1.8 (p.9), Prop. 8.9 and Cor. 8.10 (p.150), the p.150 errata, and Lemma 13.6 (p.256). The item statement is unchanged. Step 1: the fixed-subscheme node gets the separatedness it needs from affineness, and F(B) is a subgroup after every algebra extension. The thickenings node needs no smoothness and gives R Noetherian local with residue field k. The jets node's hypotheses hold (k algebraically closed, affine finite-type X, F represents the fixed functor, e in F(k)). Step 2: tangent/cotangent duality at e for a(t,-) with t in T(k); V is finite-dimensional. Step 3: weights per G_m factor; z^a=1 for all z in k^x forces a=0. The weight-zero component of a preimage still maps to v_i because the surjection is equivariant. Lifts of a basis of m/m^2 generate R/m^{n+1}, written out without regularity. Since the coaction is an algebra map, t^* is the identity on every jet. Step 4: Krull with R Noetherian local, I=m, M=R, so J=0. Step 5: the new node applies with every hypothesis present, then the restricted-action clause gives a = projection. Step 6 is elementary. No cycle: the transitive closure of the item's proof_deps and the new node's stmt_deps (628 nodes) does not contain the item. New node lem-sfb-closed-subgroup-identity-stalk-detection is true: I checked the report's argument (finite generation gives D(f) inside K; translate by K(k); Jacobson closed points; clopen plus connected; I vanishes on the cover, nilpotents retained). Edge cases: alpha_p inside alpha_{p^2} fails the stalk hypothesis; dropping connectedness makes it fail. It meets B1-B7, has the item's chapter, unit and blueprint ancestry, and does not restate a clause of the item. Duplicate search (rg -L): lem-sfb-flat-subgroup-identity-neighbourhood-open (an open-immersion conclusion from an open identity neighbourhood, so a different statement; recommended as input when the new node is split), lem-sfb-finite-type-group-identity-subgroup, lem-sfb-fixed-point-action-finite-jets and lem-sfb-conjugation-finite-jet-kernel (smooth cases), and lem-sfb-connected-action-multiplicative-type-rigidity. None of them states the criterion. Accepted tool_use: lem-sc-rational-tangent-cotangent-duality, which is needed because the item is phrased through def-sc-scheme-tangent-space; Krull is a Mathlib leaf. No SGA is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusActionLieRigidity",
+  "declaration": "AlgebraicGeometry.torus_action_connected_group_iff_tangent_trivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusActionLieRigidity.lean",
+  "statement": "theorem torus_action_connected_group_iff_tangent_trivial {k : Type u} [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [IsAffine H.left] [ConnectedSpace H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (T : Grp (Over (Spec (.of k)))) (r : ℕ) (hT : Nonempty (T ≅ MultiplicativeType.splitTorus k r)) [ModObj T.X H] (hgroup : ∀ (B : CommAlgCat.{u} k) (t : (algSpec (.of k)).obj (op B) ⟶ T.X) (h h' : (algSpec (.of k)).obj (op B) ⟶ H), t • (h * h') = (t • h) * (t • h')) : γ[T.X, H] = snd T.X H ↔ ∀ (B : CommAlgCat.{u} k) (t : (algSpec (.of k)).obj (op B) ⟶ T.X) (θ : (algSpec (.of k)).obj (op (CommAlgCat.of k (DualNumber B))) ⟶ H), (algSpec (.of k)).map (CommAlgCat.ofHom (TrivSqZeroExt.fstHom k B B)).op ≫ θ = 1 → ((algSpec (.of k)).map (CommAlgCat.ofHom (TrivSqZeroExt.inlAlgHom k B B)).op ≫ t) • θ = θ",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The full tangent representation is written by its defining dual-number formula over every commutative k-algebra B: theta is a B[epsilon]-point reducing to the identity and the B-point t is lifted along B -> B[epsilon]. Equality on every theta is equality of the induced linear map with the identity. The original statement is unchanged; the two added statement dependencies name the already landed split torus and dual numbers used in that formula."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca3e766ff",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, module, report, algSpec/ModObj/splitTorus/fstHom/inlAlgHom, GrpObj.Lie/tangentPoint, adjointKernelPoints, ActsByGroupAutomorphisms. Node diff vs live: only stmt_deps (+def-sfb-tori-multiplicative-type, +def-sc-dual-numbers, both landed and used) and lean; statement/proof unchanged; lean.statement verbatim; one sorry, no defs; source/blueprint docstrings and 6 proof steps present. H3: alg-closed k; GrpObj H affine, ConnectedSpace, LocallyOfFiniteType+QuasiCompact; T group-iso to splitTorus k r (r=0 allowed); ModObj = unit/assoc laws; hgroup on all CommAlgCat.{u} k points as the node says (equivalent to morphism level since T×H×H affine); conclusion γ = snd as morphisms ↔ for all B, t∈T(B), θ∈H(B[ε]) reducing to 1, (t lifted along inl)•θ=θ, i.e. identity on T_e(H_B/B)≅𝔥⊗B for every t (not Lie(T), so p-divisible weights kept). No extra hypotheses or universe restriction. Edge cases r=0, trivial H, α_p, char p, B=0, nilpotent B ok. H4: Lie API only gives k-points, so the inline dual-number formula is needed (same idiom as landed adjointKernelPoints); no Lie decl used, so the def-wf-lie-algebra-derivation dep is not needed. Notes: inline multiplicativity instead of ActsByGroupAutomorphisms (equivalent); parallel Q32 delivery 260c8e2f of the same item with an equivalent statement, not landed: whichever lands second must be rebound. No compile (no file changed)."
+ }
+}

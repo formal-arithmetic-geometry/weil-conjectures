@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-left-derived-object-cohomology",
+ "kind": "statement",
+ "title": "Cohomology and canonical degree-zero comparison of a total left derived functor on objects",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian]. Suppose $\\mathcal A$ has enough projectives, meaning that every object admits an epimorphism from an object $P$ for which every morphism $P\\to Y$ lifts along every epimorphism $X\\to Y$. Let $V:\\mathcal A\\to\\mathcal B$ be additive and right exact, meaning that it preserves cokernels and finite direct sums. Write $Q_{\\mathcal A}:K(\\mathcal A)\\to D(\\mathcal A)$ and $Q_{\\mathcal B}:K(\\mathcal B)\\to D(\\mathcal B)$ for the localizations at quasi-isomorphisms [def-weil-abstract-derived-category], and let $K(V)$ apply $V$ termwise. Assume that the total left derived functor of $Q_{\\mathcal B}K(V)$ is defined at every object: for each $C\\in K(\\mathcal A)$ the diagram $(s:C'\\to C)\\mapsto Q_{\\mathcal B}V(C')$ over quasi-isomorphisms into $C$ is essentially constant as in [def-pur-saturated-triangulated-localization]. Denote its value by $LV(Q_{\\mathcal A}C)$ and its canonical natural comparison by $\\varepsilon_C:LV(Q_{\\mathcal A}C)\\to Q_{\\mathcal B}V(C)$. For $M\\in\\mathcal A$, put $T^q(M)=H^q(LV(Q_{\\mathcal A}(M[0])))$, where $M[0]$ is concentrated in degree zero. Then $T^q(M)=0$ for every $q>0$, and the canonical map\n$$c_M=H^0(\\varepsilon_{M[0]}):T^0(M)\\longrightarrow V(M)$$\n(using $H^0(Q_{\\mathcal B}(V(M)[0]))\\cong V(M)$) is an isomorphism. These maps are natural: $c_N\\circ T^0(f)=V(f)\\circ c_M$ for every $f:M\\to N$. Moreover $\\varepsilon_{M[0]}$ is an isomorphism if and only if $T^q(M)=0$ for every $q<0$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Duals of Tag 05TC (lemma-negative-vanishing), Tag 05TD (lemma-left-exact-higher-derived), and Tag 015C (lemma-F-acyclic); Tag 05T5 (lemma-irrelevant), clauses (3) and (4), compares unbounded and bounded-above left derivation on M[0]. Naturality is that of the canonical comparison."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-subcategory-left-resolution] to $K=M[0]$, bound $0$ and $\\mathcal P$ the projectives: $P^q$ is projective, $P^q=0$ for $q>0$, and $a:P\\to M[0]$ is a quasi-isomorphism; put $p_0=a^0$. As $P^1=0$, $H^0(a):\\operatorname{Coker}(d^{-1})\\to M$ is invertible, so $p_0$ is a cokernel of $d^{-1}$. By [lem-sc-bounded-above-projective-kprojective], chain maps from $P$ to acyclic complexes (degree-zero cocycles of the Hom complex) are null-homotopic ($dh+hd$), so $1_P$ is initial in $S/P$ by [lem-trf-kprojective-denominator-initial].",
+   "uses": [
+    "lem-sfb-subcategory-left-resolution",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-trf-kprojective-denominator-initial",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0646 (lemma-projective-resolutions-exist) for the resolution; dual of Tag 05TH (lemma-injective-acyclic) and Definition 05S9 for the initial denominator."
+   }
+  },
+  {
+   "text": "For $F=Q_{\\mathcal B}K(V)$, the given essential-value cone has legs $u_s=\\varepsilon_Y LV(Q_{\\mathcal A}s)^{-1}$. Thus $u_{1_P}=\\varepsilon_P$, which is invertible by [lem-trf-essential-pro-initial-evaluation]. Since $a$ is a quasi-isomorphism, $LV(Q_{\\mathcal A}a)$ is invertible. Define the derived-category isomorphism $i_M=\\varepsilon_P\\circ LV(Q_{\\mathcal A}a)^{-1}:LV(Q_{\\mathcal A}(M[0]))\\xrightarrow{\\sim}Q_{\\mathcal B}V(P)$. Naturality of the given comparison at $a$ says $\\varepsilon_{M[0]}\\circ LV(Q_{\\mathcal A}a)=Q_{\\mathcal B}V(a)\\circ\\varepsilon_P$. Multiplication by the inverse gives the precise normalization $\\varepsilon_{M[0]}=Q_{\\mathcal B}V(a)\\circ i_M$.",
+   "uses": [
+    "lem-trf-essential-pro-initial-evaluation",
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TH, lemma-injective-acyclic, dual projective-resolution computation; naturality of the canonical comparison from Definition Tag 05S9."
+   }
+  },
+  {
+   "text": "Additivity sends a zero object to a zero object: $1_{V(0)}=V(1_0)=V(0)=0$. Hence $V(P)^q=0$ for $q>0$. The kernel/image definition gives $H^q(V(P))=0$ in these degrees, so applying $H^q$ to $i_M$ proves $T^q(M)=0$ for every $q>0$. In degree zero, $d^0_{V(P)}=0$, whence $H^0(V(P))=\\operatorname{Coker}(V(d^{-1}))$. Step 1 makes $p_0$ a cokernel of $d^{-1}$; preservation of cokernels makes $V(p_0)$ a cokernel of $V(d^{-1})$. Therefore the induced $H^0(V(a)):H^0(V(P))\\to V(M)$ is the unique comparison of these two cokernels and is invertible. Taking $H^0$ of the normalized equality in step 2 yields $c_M=H^0(V(a))\\circ H^0(i_M)$, so the specified canonical map $c_M$ is an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Duals of Tag 05TC, lemma-negative-vanishing (1), and Tag 05TD, lemma-left-exact-higher-derived (3); direct cokernel calculation on the projective resolution."
+   }
+  },
+  {
+   "text": "For $f:M\\to N$, apply naturality of $\\varepsilon$ to $f[0]$ and then apply $H^0$. On the source this is $T^0(f)$ by definition, and on the target the natural identification $H^0(V(M)[0])\\cong V(M)$ sends the map of single complexes to $V(f)$. The resulting equation is exactly $c_N\\circ T^0(f)=V(f)\\circ c_M$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD, lemma-left-exact-higher-derived (3), canonical natural comparison; cohomology functoriality."
+   }
+  },
+  {
+   "text": "If $\\varepsilon_{M[0]}$ is invertible, its image under each $H^q$ is invertible, and $H^q(V(M)[0])=0$ for $q<0$, so $T^q(M)=0$ in all negative degrees. Conversely, suppose all these negative-degree objects vanish. The isomorphism $i_M$ makes $H^q(V(P))=0$ for $q<0$. Thus $V(a):V(P)\\to V(M)[0]$ induces isomorphisms on negative cohomology (both objects are zero), on degree zero by step 3, and on positive cohomology by the support calculation in step 3. It is therefore a quasi-isomorphism, by definition. The localization $Q_{\\mathcal B}$ inverts it. Step 2 expresses $\\varepsilon_{M[0]}$ as the composite of this isomorphism with $i_M$, proving the reverse implication.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Dual of Tag 015C, lemma-F-acyclic (1) and (2), with the quasi-isomorphism represented explicitly by the augmented projective resolution."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-subcategory-left-resolution",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-trf-kprojective-denominator-initial",
+  "def-weil-abstract-derived-category",
+  "lem-trf-essential-pro-initial-evaluation",
+  "def-pur-saturated-triangulated-localization",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Projective-resolution realization of the duals of Tags 05TC (lemma-negative-vanishing), 05TD (lemma-left-exact-higher-derived), and 015C (lemma-F-acyclic), using Tag 0646 (lemma-projective-resolutions-exist) and the dual of Tag 05TH (lemma-injective-acyclic). The denominator-cone inverse and actual comparison normalization are written out by Q63. Q96 re-split: returned step 1 is carried by lem-sfb-subcategory-left-resolution (projectives, K=M[0]), returned step 2 by the O4 node lem-trf-kprojective-denominator-initial, step 3 by the pro-cone evaluation node; steps 4-7 remain the parent assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedZero|leftDerived.*[Hh]omology|isZero.*leftDerived",
+   "results": "{\"t\": \"2026-10-22T04:23:05Z\", \"tool\": \"grep\", \"query\": \"leftDerivedZero|leftDerived.*[Hh]omology|isZero.*leftDerived\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"d348cef2eab9a75f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313 defines the resolution-based fromLeftDerivedZero and its naturality; lines 341-367 prove it invertible and define leftDerivedZeroIsoSelf. These do not identify H^0 of the total pointwise-derived counit, nor give the total-derived positive-cohomology vanishing and acyclicity criterion. Read these lines and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58; the comparison between those constructions remains a nontrivial input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison from a total left derived functor to a right exact functor is an isomorphism on zeroth cohomology of an object concentrated in degree zero",
+   "results": "{\"t\": \"2026-10-22T04:23:05Z\", \"tool\": \"leansearch\", \"query\": \"The canonical comparison from a total left derived functor to a right exact functor is an isomorphism on zeroth cohomology of an object concentrated in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\"], \"digest\": \"eef00aef8f960628\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313 defines the resolution-based fromLeftDerivedZero and its naturality; lines 341-367 prove it invertible and define leftDerivedZeroIsoSelf. These do not identify H^0 of the total pointwise-derived counit, nor give the total-derived positive-cohomology vanishing and acyclicity criterion. Read these lines and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58; the comparison between those constructions remains a nontrivial input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedZero\"",
+   "results": "{\"t\": \"2026-10-22T04:23:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftDerivedZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"CategoryTheory.Functor.fromLeftDerivedZero\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app\"], \"digest\": \"941c688bdc9410b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313 defines the resolution-based fromLeftDerivedZero and its naturality; lines 341-367 prove it invertible and define leftDerivedZeroIsoSelf. These do not identify H^0 of the total pointwise-derived counit, nor give the total-derived positive-cohomology vanishing and acyclicity criterion. Read these lines and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58; the comparison between those constructions remains a nontrivial input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the total left derived functor of an additive right exact functor, H zero of its canonical counit on a degree zero object is an isomorphism, positive cohomology vanishes, and acyclicity is equivalent to vanishing negative cohomology",
+   "results": "{\"t\": \"2026-10-22T04:23:16Z\", \"tool\": \"leanfinder\", \"query\": \"For the total left derived functor of an additive right exact functor, H zero of its canonical counit on a degree zero object is an isomorphism, positive cohomology vanishes, and acyclicity is equivalent to vanishing negative cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.instIsIsoFromLeftDerivedZero'\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\"], \"digest\": \"e08eec4387c29f1b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313 defines the resolution-based fromLeftDerivedZero and its naturality; lines 341-367 prove it invertible and define leftDerivedZeroIsoSelf. These do not identify H^0 of the total pointwise-derived counit, nor give the total-derived positive-cohomology vanishing and acyclicity criterion. Read these lines and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58; the comparison between those constructions remains a nontrivial input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right exact functor has zeroth left derived functor equal to itself and its total left derived value on an object has no positive cohomology",
+   "results": "{\"t\": \"2026-10-22T04:23:16Z\", \"tool\": \"leanfinder\", \"query\": \"A right exact functor has zeroth left derived functor equal to itself and its total left derived value on an object has no positive cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"21e5d8e1dad90131\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/LeftDerived.lean:302-313 defines the resolution-based fromLeftDerivedZero and its naturality; lines 341-367 prove it invertible and define leftDerivedZeroIsoSelf. These do not identify H^0 of the total pointwise-derived counit, nor give the total-derived positive-cohomology vanishing and acyclicity criterion. Read these lines and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58; the comparison between those constructions remains a nontrivial input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived counit of a right exact functor on an object induces an isomorphism on zeroth cohomology and has zero positive cohomology",
+   "results": "{\"t\": \"2026-10-22T04:36:28Z\", \"tool\": \"leanfinder\", \"query\": \"The total left derived counit of a right exact functor on an object induces an isomorphism on zeroth cohomology and has zero positive cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\"], \"digest\": \"21daa7a8d3eaa6b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:259-270,302-313,341-367. These results concern the resolution-based classical leftDerived and its cokernel augmentation, not the total pointwise-derived counit. The total-derived identification and normalization are proved in steps 2-4 rather than assumed. The second LeanFinder query also finds ProjectiveResolution.isoLeftDerivedObj, again for classical derived functors."
+  },
+  {
+   "tool": "grep",
+   "query": "fromLeftDerivedZero|leftDerivedZeroIsoSelf|leftDerivedFunctor.*homology|homology.*leftDerivedFunctor",
+   "results": "{\"t\": \"2026-10-22T04:36:37Z\", \"tool\": \"grep\", \"query\": \"fromLeftDerivedZero|leftDerivedZeroIsoSelf|leftDerivedFunctor.*homology|homology.*leftDerivedFunctor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\", \"Mathlib/CategoryTheory/Abelian/LeftDerived.lean\"], \"digest\": \"a9235a03ffc8db91\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:259-270,302-313,341-367. These results concern the resolution-based classical leftDerived and its cokernel augmentation, not the total pointwise-derived counit. The total-derived identification and normalization are proved in steps 2-4 rather than assumed. The second LeanFinder query also finds ProjectiveResolution.isoLeftDerivedObj, again for classical derived functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from zeroth cohomology of a total left derived functor to the original right exact functor is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T04:36:38Z\", \"tool\": \"leansearch\", \"query\": \"The canonical map from zeroth cohomology of a total left derived functor to the original right exact functor is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf\"], \"digest\": \"6b58274b89005fac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:259-270,302-313,341-367. These results concern the resolution-based classical leftDerived and its cokernel augmentation, not the total pointwise-derived counit. The total-derived identification and normalization are proved in steps 2-4 rather than assumed. The second LeanFinder query also finds ProjectiveResolution.isoLeftDerivedObj, again for classical derived functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedZero\"",
+   "results": "{\"t\": \"2026-10-22T04:36:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftDerivedZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedZeroIsoSelf\", \"CategoryTheory.Functor.fromLeftDerivedZero\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app\"], \"digest\": \"941c688bdc9410b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:259-270,302-313,341-367. These results concern the resolution-based classical leftDerived and its cokernel augmentation, not the total pointwise-derived counit. The total-derived identification and normalization are proved in steps 2-4 rather than assumed. The second LeanFinder query also finds ProjectiveResolution.isoLeftDerivedObj, again for classical derived functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a projective resolution in nonpositive cochain degrees an additive right exact functor preserves its augmentation cokernel so the total derived counit has invertible degree zero cohomology",
+   "results": "{\"t\": \"2026-10-22T04:37:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a projective resolution in nonpositive cochain degrees an additive right exact functor preserves its augmentation cokernel so the total derived counit has invertible degree zero cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'\", \"CategoryTheory.Functor.mapProjectiveResolution_complex\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj\", \"CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'\", \"CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'_assoc\", \"CategoryTheory.instIsIsoFromLeftDerivedZero'\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\"], \"digest\": \"18fba2c390534dba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:259-270,302-313,341-367. These results concern the resolution-based classical leftDerived and its cokernel augmentation, not the total pointwise-derived counit. The total-derived identification and normalization are proved in steps 2-4 rather than assumed. The second LeanFinder query also finds ProjectiveResolution.isoLeftDerivedObj, again for classical derived functors."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Functor.leftDerivedZeroIsoSelf",
+  "file": "Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+  "lines": [
+   365,
+   367
+  ],
+  "reason": "Classical resolution-derived degree-zero normalization only; not the full statement about the total counit."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-left-acyclic-short-exact",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Supporting object-level input: closure of left-acyclic objects under extensions and kernels of epimorphisms, dual of Stacks 015D. Supporting single-object cohomology input: the degree-zero counit and positive-degree vanishing used before the long exact sequence.",
+   "via": [
+    "lem-trf-left-acyclic-short-exact",
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-left-derived-object-cohomology",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: extracted two statement-only unsplit lemmas with comparable separate arguments (projective replacement and full denominator initiality; essential pro-cone evaluation at an initial stage). Retained the exact statement and all four original final proof arguments, adjusting only their step numbers; the new first step assembles the two new results. Preserved the complete seven-step returned argument and search evidence in report.md. No Lean or repository writes. Landing-return repair: compared the retained original proof and all non-split metadata with the current live DAG, re-read all existing cited interfaces, revalidated every literal citation, and distinguished the newly present injective cone-comparison node sharing Tag 05TH. The two extracted obligations and 2,748-character assembly remain valid on the current base; the delivery tool rebases onto freshly fetched origin/sheaf-dag. Repeated landing-return repair: rechecked the unchanged retained seven-step source against the current read-copy, every existing cited statement and all eight literal parent citations; reviewed and distinguished three newly present 05TH injective finite-total/comparison-descent nodes. Retained all prior arguments and logged searches, and refreshed the report before rebuilding the delivery on current main. Current-DAG repair 2026-10-23: the mandatory first dry run passed at 0a778856feb; compared every retained original argument and all protected item fields with the current DAG, re-read the four definition statements and two K-projective leaf statements, and verified all eight literal step citations. None of those statements changed. Preserved the full original arguments, two statement-only obligations and the exact canonical-comparison assembly; refreshed the signed current-base report before a new dry run and push on freshly fetched main. Review FIX 2026-10-23: the extracted node lem-trf-projective-replacement-initial-denominator was dropped as a duplicate. Its denominator-initiality half is the bounded-above projective case of the same-unit O4 node lem-trf-kprojective-denominator-initial (in base since 2026-10-22). Its resolution half is the case P = projectives, K = M[0], a = 0 of lem-sfb-subcategory-left-resolution. Step 1 now cites these two nodes and the K-projective criterion; one new node remains (count waiver). Re-applied 2026-10-23 on head 84cb5e63: that FIX was lost when the landing was refused ('not in the live DAG'), and the head re-pushed both extracted nodes unchanged (only split_report differs from bb4be0d8). The cited statements are unchanged on this base, so the same drop and step-1 re-citation apply.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Supporting object-level input: closure of left-acyclic objects under extensions and kernels of epimorphisms, dual of Stacks 015D. Supporting single-object cohomology input: the degree-zero counit and positive-degree vanishing used before the long exact sequence. Steps 1-7 supply precisely the single-object cohomology input in the last sentence of that place; they do not replace the surrounding semistable/local-term route. Whole-blueprint searches for left derived and degree-zero comparison found no identical node. Q96: old step 1 is lem-sfb-subcategory-left-resolution, old step 2 is lem-trf-kprojective-denominator-initial, old step 3 is a new statement-only node; the parent keeps the derived isomorphism and canonical normalization in D(B), cohomology calculation, naturality, and both directions of the acyclicity criterion.",
+  "tool_uses": [
+   "lem-sfb-subcategory-left-resolution"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-84cb5e637",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-84cb5e637 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. This is the 5th push. Apart from split_report, the item and both new nodes are identical to bb4be0d8. That head got a FIX dropping lem-trf-projective-replacement-initial-denominator, but the FIX was lost when its landing was refused as 'not in the live DAG' (svc.log 12:14:38), and the worker re-pushed the same nodes. The live item is still the 7-step proof and differs only in proof fields, and neither new id is live, so the delivery is not superseded. Every node the fix cites has the same statement in the bb4b snapshot, this snapshot and live. The only node added to the base since bb4b that bears on this split, lem-sfb-abelian-projective-resolution-lift, is the lifting comparison and is not needed here. Node B (essential-pro-initial-evaluation) is true: w u_i = r u_{j0} = 1 by naturality, and precomposing the common-stage identity at j=i with G(iota_k) gives u_i w = 1. Its hypothesis is Stacks 05PU(2) (categories.tex l.2928). B is kept, because the item's eps comes with the given canonical cone, not O4's witness cone F(t_s). Node A is a duplicate (C5/D1). Its initiality half is the bounded-above projective case of the same-unit node lem-trf-kprojective-denominator-initial, reached via lem-sc-bounded-above-projective-kprojective and the elementary H^0 Hom = chain maps mod dh+hd translation. Its resolution half is lem-sfb-subcategory-left-resolution (Stacks 05T7(1), derived.tex l.5302) with P = projectives, K = M[0], a = 0, plus the elementary cokernel step from P^1 = 0. FIX: I re-applied the bb4b fix file. Step 1 re-cites those nodes, proof_deps is the union of the steps' uses, and the assembly is 2886 characters. I checked that no node still cites A and ran a DFS: none of the re-cited nodes reaches the item. Old step 1 is now carried by the sfb node, old step 2 by the O4 node, old step 3 by B, and old steps 4-7 are parent steps 2-5 verbatim. One new node remains, so a count waiver is needed. tool_uses: lem-sfb-subcategory-left-resolution, since no sk-i-curve-zero node gives projective resolutions. Edge cases: M=0, M projective, V=id or 0, and V=-⊗Z/2 with M=Z/2 (T^{-1}≠0 while c_M is an isomorphism). Sources: Stacks 0646, 05TH (used dually), 05T7, 05S8/05S9 and 05PU. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftDerivedObjectCohomology",
+  "declaration": "CategoryTheory.Functor.leftDerived_object_cohomology",
+  "declarations": [
+   "CategoryTheory.Functor.leftDerivedObjectComparison",
+   "CategoryTheory.Functor.leftDerived_object_cohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedObjectCohomology.lean",
+  "statement": "theorem leftDerived_object_cohomology {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [EnoughProjectives A] (V : A ⥤ B) [V.Additive] [PreservesFiniteColimits V] (LV : DerivedCategory A ⥤ DerivedCategory B) (ε : DerivedCategory.Qh ⋙ LV ⟶ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) (hLV : LV.IsRightKanExtension ε) (hdefined : ∀ X : HomotopyCategory A (ComplexShape.up ℤ), ∃ Y : DerivedCategory B, IsEssentiallyConstantProDiagram (MorphismProperty.Over.forget (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ⊤ X ⋙ Over.forget X ⋙ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) Y) : (∀ (M : A) (q : ℤ), 0 < q → IsZero ((DerivedCategory.homologyFunctor B q).obj (LV.obj ((DerivedCategory.singleFunctor A 0).obj M)))) ∧ (∀ M : A, IsIso (leftDerivedObjectComparison V LV ε M)) ∧ (∀ (M N : A) (f : M ⟶ N), (DerivedCategory.homologyFunctor B 0).map (LV.map ((DerivedCategory.singleFunctor A 0).map f)) ≫ leftDerivedObjectComparison V LV ε N = leftDerivedObjectComparison V LV ε M ≫ V.map f) ∧ (∀ M : A, IsIso (ε.app ((HomotopyCategory.singleFunctor A 0).obj M)) ↔ ∀ q : ℤ, q < 0 → IsZero ((DerivedCategory.homologyFunctor B q).obj (LV.obj ((DerivedCategory.singleFunctor A 0).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e475b330b",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Only the lean field changed vs live (live lean null); lean.statement is verbatim. H3: Abelian A/B, EnoughProjectives, Additive+PreservesFiniteColimits (equivalent to the node's cokernel/finite-sum right exactness), Qh and mapHomotopyCategory as K(-), hdefined is definitionally the recorded IsTriangulatedLeftDerivedValue body over all of K(A) (written out to avoid an unused saturation proof, as the landed siblings do), hLV is IsRightKanExtension = IsLeftDerivedFunctor unfolded, so ε is the canonical counit. All four clauses are correct: positive vanishing, IsIso of a canonical H^0 comparison (quotientCompQhIso components are identities), naturality in the right order, both-ways iff for the counit with negative vanishing. Edge cases M=0, M projective, -⊗Z/2 with M=Z/2 (T^-1≠0, c_M iso). The seven reviewed proof steps are sound and in the docstring. No hollow def, only one sorry, docstrings and imports fine, no name clash. Not recompiled per instructions, no fix made. Advisory: the citer leftAcyclic_shortExact uses ε over Q (cochain complexes) while this item follows its node over Qh, so stage 3 needs the Q = quotient ⋙ Qh bridge; IsEssentiallyConstantProDiagram (def-pc) is reached only through the def-pur stmt_dep, as in the siblings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

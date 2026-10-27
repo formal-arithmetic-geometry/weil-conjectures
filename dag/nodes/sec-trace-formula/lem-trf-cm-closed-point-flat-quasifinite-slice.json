@@ -20,103 +20,52 @@
  ],
  "proof": [
   {
-   "text": "We prove a slightly stronger induction claim: for every flat locally finitely presented $g:Y\\to S$, every closed $y\\in Y_s$ with Noetherian fibre local ring $A$ satisfying $\\operatorname{depth}(A)\\ge\\dim A$, there is a slice with all the conclusions of the item. By [lem-weil-pbc-noetherian-local-finite-krull-dimension], $d=\\dim A$ is a finite nonnegative integer. Induct strongly on $d$, uniformly over $g,Y,S,s,y$. The original hypotheses imply this induction hypothesis at $g=f,y=x$, since equality implies the required inequality. The strengthening permits exactly the depth inequality supplied by the quotient lemma below.",
+   "text": "For each $n\\in\\mathbf N$, let $P(n)$ assert: for every flat locally finitely presented $g:Y\\to S$, $s\\in S$, and closed $y\\in Y_s$ whose local ring $A=\\mathcal O_{Y_s,y}$ is Noetherian with $\\dim A=n$ and $\\operatorname{depth}A\\ge n$, there are $i:Z\\to Y$ and $z\\in Z_s$ with $i_s(z)=y$, $Z_s=\\{z\\}$, and $g\\circ i$ flat, locally finitely presented and locally quasi-finite. Prove all $P(n)$ by strong induction. Here $Z_s$ is the fibre of $g\\circ i$, with projection $p_Z:Z_s\\to Z$. For the item, $R$ is a nonzero local ring (its maximal ideal is proper), so [lem-weil-pbc-noetherian-local-finite-krull-dimension] gives $\\dim R\\in\\mathbf N$; the depth equality lets us apply $P(\\dim R)$ to $f,s,x$.",
    "uses": [
     "lem-weil-pbc-noetherian-local-finite-krull-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0570, lemma-slice-CM, induction setup; use local-ring dimension as the induction parameter."
+    "place": "Tag 0570, lemma-slice-CM, induction on fibre dimension; use the equivalent local-ring dimension parameter."
    }
   },
   {
-   "text": "Suppose $d=0$. Choose affine opens $V=\\operatorname{Spec}C\\subseteq S$ containing $s$ and $U=\\operatorname{Spec}B\\subseteq Y$ containing $y$, with $g(U)\\subseteq V$ and $C\\to B$ finitely presented [def-sbc-locally-finite-presentation]. In particular it is finite type. By [lem-weil-pbc-fibre-product-affine-spectra], $U_s=\\operatorname{Spec}F$ with $F=B\\otimes_C\\kappa(s)$; the images of any finite set of algebra generators of $B$ generate $F$ over $\\kappa(s)$. The point $y$ is closed in $U_s$, hence corresponds to a maximal ideal $\\mathfrak n$ of $F$, and $F_{\\mathfrak n}=A$. Thus [lem-weil-pbc-closed-point-dimension-local-ring] gives $\\dim_y\\operatorname{Spec}F=\\dim A=0$. Apply [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension] to $C\\to B$ at the prime of $y$: it is quasi-finite at that prime. The affine pair $(U,V)$ therefore makes $g$ quasi-finite at $y$ by [pqf-def-quasifinite].",
+   "text": "For $P(0)$, the closed point $y$ and the locally finitely presented $g$ satisfy every hypothesis of [lem-trf-zero-dimensional-closed-fibre-open-slice]. Take $Z=V$, $i=j$, $z=v$. The child gives $j_s(v)=y$, hence $i_s(z)=y$, and $V_s=\\{v\\}$, hence $Z_s=\\{z\\}$. It also gives local quasi-finiteness and local finite presentation of $g\\circ i$. Its conditional flatness applies because $g$ is flat. These are all conclusions of the induction claim.",
    "uses": [
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-closed-point-dimension-local-ring",
-    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-    "pqf-def-quasifinite"
+    "lem-trf-zero-dimensional-closed-fibre-open-slice"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0570, lemma-slice-CM, case d=0; Tag 0397, morphisms-lemma-locally-quasi-finite-rel-dimension-0; Tag 00OU, algebra-lemma-dimension-closed-point-finite-type-field."
+    "place": "Tag 0570, lemma-slice-CM, zero-dimensional case (old steps 2--3)."
    }
   },
   {
-   "text": "By [lem-sc-quasi-finite-points-open], the quasi-finite locus is an open neighbourhood $W$ of $y$ and $W\\to S$ is locally quasi-finite. The map $g$ is locally of finite type because its local finite presentations give finitely many algebra generators. Hence [lem-weil-pbc-quasi-finite-at-point-isolated] makes $\\{y\\}$ open in $Y_s$. By the subspace-topology assertion of [def-pc-scheme-fibre], choose an open $O\\subseteq Y$ with $O\\cap Y_s=\\{y\\}$. Put $Z=O\\cap W$ with its open-subscheme structure and take $i:Z\\to Y$ to be the inclusion; then $Z_s=\\{y\\}$. The restriction is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens]. It is flat because the stalk rings and their maps are unchanged on an open subscheme [def-weil-flat-morphism]. It is locally finitely presented: inside each finitely presented affine chart, principal opens form a basis; if $B=C[t_1,\\ldots,t_r]/(P_1,\\ldots,P_m)$ and $b$ is represented by $Q(t)$, then $B_b=C[t_1,\\ldots,t_r,u]/(P_1,\\ldots,P_m,uQ-1)$. These principal charts cover the restriction and give its finite presentations [def-sbc-locally-finite-presentation]. This finishes the base case.",
+   "text": "For $P(d)$ with $d>0$, apply [lem-trf-cm-fibre-hypersurface-dimension-drop] to the flat locally finitely presented $g$, the closed $y\\in Y_s$, and $A$ with $\\dim A=d$ and $\\operatorname{depth}A\\ge d$. It supplies $D\\to U\\to Y$, a closed $y_D\\in D_s$ over $y$, and a flat locally finitely presented $D\\to S$. Set $A_D=\\mathcal O_{D_s,y_D}$. The child's last assertion gives Noetherianity of this actual fibre local ring, $\\dim A_D=d-1$, and $\\operatorname{depth}A_D\\ge d-1$, not merely these properties for an abstract quotient. As $d>0$ is an integer, $0\\le d-1<d$. These are exactly the smaller-dimensional induction data, including when $d=1$.",
    "uses": [
-    "lem-sc-quasi-finite-points-open",
-    "lem-weil-pbc-quasi-finite-at-point-isolated",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-lqf-restriction-to-opens",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation"
+    "lem-trf-cm-fibre-hypersurface-dimension-drop"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0570, lemma-slice-CM, zero-dimensional case; Tag 01TI, morphisms-lemma-quasi-finite-points-open; Tag 01K1, schemes-lemma-fibre-topological."
+    "place": "Tag 0570, lemma-slice-CM, positive-dimensional cut and quotient (old steps 4--5 and the quotient part of 6)."
    }
   },
   {
-   "text": "Now let $d>0$. By [def-weil-pbc-depth], the inequality $\\operatorname{depth}(A)\\ge d>0$ implies that there is a nonempty regular sequence in the maximal ideal of $A$: otherwise the supremum of its possible lengths would be zero. Its first element $\\bar h$ is a nonzerodivisor in that maximal ideal by [def-weil-pbc-regular-sequence]. By [lem-sbc-scheme-fibre-stalk-quotient], $\\mathcal O_{Y,y}\\twoheadrightarrow A$ is the quotient by $\\mathfrak m_s\\mathcal O_{Y,y}$. Lift $\\bar h$ to $h\\in\\mathcal O_{Y,y}$. This lift lies in the maximal ideal: a unit would have unit image in the nonzero local ring $A$, whereas $\\bar h$ is in its maximal ideal. Since $g$ is flat at $y$ and locally finitely presented, [lem-trf-fibre-regular-element-flat-hypersurface] supplies an affine open neighbourhood $U=\\operatorname{Spec}B$ of $y$, a representative $a$ of $h$, and $D=\\operatorname{Spec}(B/(a))\\subseteq U$ containing $y$, such that $D\\to S$ is flat and locally of finite presentation.",
-   "uses": [
-    "def-weil-pbc-depth",
-    "def-weil-pbc-regular-sequence",
-    "lem-sbc-scheme-fibre-stalk-quotient",
-    "lem-trf-fibre-regular-element-flat-hypersurface"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 0570 and 056Z, lemma-slice-CM and lemma-slice-once; Tag 056Y, lemma-slice-given-element."
-   }
-  },
-  {
-   "text": "Write $y_D$ for the point of $D_s$ mapping to $y$. The affine definition of the closed subscheme [def-weil-closed-immersion] and the fibre stalk quotient [lem-sbc-scheme-fibre-stalk-quotient] identify its local ring as $A_D=A/(\\bar h)$. Explicitly, if $T=\\mathcal O_{Y,y}$, the local ring of $D$ is $T/(h)$: localization commutes with quotient by sending $b/t\\bmod a$ to $(b\\bmod a)/(t\\bmod a)$, with inverse given by the same fraction before quotient. Its fibre local ring is therefore $(T/(h))/\\mathfrak m_s(T/(h))=T/(h,\\mathfrak m_sT)=(T/\\mathfrak m_sT)/(\\bar h)=A/(\\bar h)$. These identifications send the original germ to its named class. The point $y_D$ is closed in $D_s$, since $D_s\\to U_s$ is the closed subscheme cut out by the image of $a$ (the same quotient computation on affine charts), and $y$ is closed in $Y_s$.",
-   "uses": [
-    "def-weil-closed-immersion",
-    "lem-sbc-scheme-fibre-stalk-quotient"
-   ],
+   "text": "Write $k:D\\to Y$ for $D\\to U\\to Y$ and $g_D=g\\circ k$. Apply the uniform induction hypothesis to $g_D,s,y_D$: step 3 supplies its flatness, local finite presentation, and closed fibre point with Noetherian local ring of dimension $d-1\\ge0$ and depth at least $d-1$, and $d-1<d$. Obtain $j:Z\\to D$ and $z\\in Z_s$ with $j_s(z)=y_D$, singleton fibre, and all three required properties for $g_D\\circ j$. Put $i=k\\circ j$. Associativity gives $g\\circ i=g_D\\circ j$; hence its fibre over $s$ and all three morphism properties are exactly those supplied by induction. The universal property of the fibre product identifies the induced map $i_s:Z_s\\to Y_s$ with $k_s\\circ j_s$: their projections to $Y$ are $k\\circ j$ composed with the fibre projection, and their projections to $\\operatorname{Spec}\\kappa(s)$ agree. Thus $i_s(z)=k_s(y_D)=y$. Writing $p_Y:Y_s\\to Y$ for the fibre projection, this also gives $i(p_Z(z))=p_Y(y)$, exactly the point-image assertion in the item. This completes the induction.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0570, lemma-slice-CM, local-ring identification in the induction step; Tag 0HA1, schemes-lemma-local-ring-fibre."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm] to $A$ and $\\bar h$. Its hypotheses hold: $A$ is Noetherian local of finite dimension $d$, has depth at least $d$, and $\\bar h$ is a nonzerodivisor in its maximal ideal. It follows that $A_D$ is Noetherian local, $\\dim A_D=d-1$, and $\\operatorname{depth}(A_D)\\ge d-1$. Thus the induction claim applies to the flat locally finitely presented map $D\\to S$ and the closed point $y_D\\in D_s$. It yields $j:Z\\to D$ and $z\\in Z_s$ mapping to $y_D$, with $Z_s=\\{z\\}$ and $Z\\to S$ flat, locally finitely presented and locally quasi-finite. Compose $j$ with $D\\to U\\to Y$ to obtain $i:Z\\to Y$. The structural morphism $Z\\to S$ is exactly the one supplied by induction, so all its three properties persist without any assertion that the immersion itself is flat. Its singleton fibre point maps to $y$. This proves the induction step and, with the first step, proves the item.",
-   "uses": [
-    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0570, lemma-slice-CM, positive-dimensional induction; Tag 02JN, algebra-lemma-reformulate-CM. Regularity of the final immersion is not required by this item."
+    "place": "Tag 0570, lemma-slice-CM, induction and composition of the resulting slice; regularity of the immersion is not required."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-  "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-closed-point-dimension-local-ring",
-  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-  "pqf-def-quasifinite",
-  "lem-sc-quasi-finite-points-open",
-  "lem-weil-pbc-quasi-finite-at-point-isolated",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-lqf-restriction-to-opens",
-  "def-weil-flat-morphism",
-  "def-weil-pbc-depth",
-  "def-weil-pbc-regular-sequence",
-  "lem-sbc-scheme-fibre-stalk-quotient",
-  "lem-trf-fibre-regular-element-flat-hypersurface",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm"
+  "lem-trf-zero-dimensional-closed-fibre-open-slice",
+  "lem-trf-cm-fibre-hypersurface-dimension-drop"
  ],
  "proof_origin": {
   "by": "document",
@@ -229,41 +178,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-cm-closed-point-flat-quasifinite-slice",
   "worker": "stage1",
-  "summary": "Kept the statement and its hypotheses. Expanded Stacks 0570 into a strong induction on fibre local-ring dimension, including the affine zero-dimensional base case, isolation of the unique fibre point, lifting a nonzerodivisor, the explicit quotient-fibre identification and the induction application. Added only the statement-only 056Y hypersurface lemma; reused existing dimension, quasi-finite-locus and Cohen–Macaulay quotient nodes. Logged five searches each for the item and the new node; no Mathlib match or project attachment.",
-  "blueprint": "Realizes the inherited 055W -> 0570 slicing ingredient below lem-trf-local-term-locality: the zero-dimensional open slice and the positive-dimensional regular-element cut. Whole-blueprint searches for slice, Cohen, 056Y, hypersurface, nonzerodivisor and quasi-finite found no equivalent blueprint node. This is an existing algebraic-geometric input below the recorded unit route, not a replacement of a unit step.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-closed-point-dimension-local-ring",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: Dimension at a closed point of a finite type algebra over a field is the dimension of the local ring. No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   },
-   {
-    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: Quasi-finiteness at a prime is zero fibre dimension at that point. No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   },
-   {
-    "node": "lem-sc-quasi-finite-points-open",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: The quasi-finite locus is open. No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: Quasi-finite at a point implies isolated in the fibre. No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   },
-   {
-    "node": "lem-weil-pbc-lqf-restriction-to-opens",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: Restriction of a locally quasi-finite morphism to open subschemes is locally quasi-finite (Stacks 01TH (4)). No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   },
-   {
-    "node": "lem-sbc-scheme-fibre-stalk-quotient",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: The local ring of a scheme-theoretic fibre is a quotient of the local ring. No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   },
-   {
-    "node": "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
-    "why": "Generic algebraic-geometric tool for the Stacks 0570 induction: Quotient of a Cohen–Macaulay local ring by a nonzerodivisor is Cohen–Macaulay. No node of sk-i-curve-zero states this input; this does not replace a step of the unit."
-   }
-  ]
+  "summary": "Q79 repair of reader-approved but unlanded head db7ff596356 (return 2026-10-23 14:08 UTC). Required initial resumed dry run passed at 33439cf8dc3. Reconstructed parent from current shared DAG with only proof, proof_deps and split_report overlaid; reread every current parent citation and original proof input. Replaced the implicit induction setup with an explicit assertion P(n) for every natural n, quantified over all schemes, morphisms and designated fibre points, and separately justified its application to the item by finite nonnegative dimension. Retained two statement-only children, all migrated original arguments and eleven genuine search records. The prescribed delivery tool rebases onto current origin; the return identifies live-DAG promotion as the maintainer operation.",
+  "blueprint": "Realizes the inherited 055W -> 0570 slicing ingredient below lem-trf-local-term-locality: the zero-dimensional open slice and the positive-dimensional regular-element cut. Whole-blueprint searches for slice, Cohen, 056Y, hypersurface, nonzerodivisor and quasi-finite found no equivalent blueprint node. This is an existing algebraic-geometric input below the recorded unit route, not a replacement of a unit step. The 0570 zero-dimensional argument is now carried by lem-trf-zero-dimensional-closed-fibre-open-slice; the positive-dimensional reduction before induction by lem-trf-cm-fibre-hypersurface-dimension-drop; the parent retains the uniform induction and final composition."
  },
  "tool_uses": [
   "lem-weil-pbc-closed-point-dimension-local-ring",
@@ -275,12 +194,12 @@
   "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q19-c8f97e61a",
-  "group": "Q19",
+  "reviewer": "NT-cc-Q79-8aba73f13",
+  "group": "Q79",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-c8f97e61a (reviewer sub-agent of L); spot-checked: Reviewed the item and new node against Stacks Tags 0570 and 056Y, all cited DAG statements, the unit/chapter route, and edge cases. The induction, base-case quasi-finiteness, fibre quotient, flat hypersurface, and dimension/depth descent are correctly supported. No duplicate, route violation, long-step issue, false hypothesis, or missing repair was found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-8aba73f13 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the 13th push of the Q79 re-split. The 12 earlier heads, a3fb through db7f, were all PASSed and came back only because landing or promotion was refused, so no earlier fix could have been lost. Live and side-live still hold the old 6-step proof (5387 characters), with no children, and the stage-1 re-split note is still released, so the delivery is not superseded. The live Lean record has a sorry proof. Both new nodes are byte-identical to db7f (sha256 85902c40, 9fdede78). In the item, only step 1, the case labels of steps 2-3 and the summary changed. Step 1 now states an explicit claim P(n), uniform over g, Y, s and y: dim A = n and depth A >= n give the slice. It proves all P(n) by strong induction and applies P(dim R) to the item, using the Mathlib leaf lem-weil-pbc-noetherian-local-finite-krull-dimension (R is nonzero, so dim R is finite). This is correct. Step 2 meets every hypothesis of the d=0 open-slice child, and that child's conditional flatness applies because g is flat. Step 3 meets every hypothesis of the dimension-drop child, which gives a closed y_D whose fibre local ring A/(h) is Noetherian of dimension d-1 with depth >= d-1, exactly the hypotheses of P(d-1). Step 4 is elementary: i = k∘j, g∘i = g_D∘j, i_s = k_s∘j_s. The parent proof is 2785 characters. I read Stacks Tag 0570 (lemma-slice-CM) in full, both the d=0 case via 0397/01TI/01K1 and the d>0 case via 056Z/056Y and 02JN. Both child statements are true; I tested them on k[eps]/eps^2, on Z_p[x]/(px-1) and on A^1_Z at (p,x) cut by x. Every old argument has a new place, and neither child restates the item. rg -L found no new duplicate: lem-sfb-scheme-fibre-regular-slice-flat is the r-tuple 056Y result with the regular elements given, not a duplicate. The route stays in sk-i-curve-zero, no SGA source is used, and no tool_uses are declared."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.Morphisms.CohenMacaulayClosedPointSlice",
@@ -300,5 +219,16 @@
   "result": "fix",
   "note": "Statement, dependencies, source, universes, edge cases, and per-file compilation passed. Replaced the H11 second-reading placeholder with a complete independent review in fixes/lem-trf-cm-closed-point-flat-quasifinite-slice.report.md. Full findings are in review.md; no Lean or node changes needed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

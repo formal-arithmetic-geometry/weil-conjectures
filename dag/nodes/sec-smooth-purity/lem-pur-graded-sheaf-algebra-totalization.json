@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-graded-sheaf-algebra-totalization",
+ "kind": "statement",
+ "title": "Totalizing a homogeneous sheaf algebra",
+ "statement": "Let $Z$ be a scheme and $C=(C_n)_{n\\ge0}$ a family of $\\mathcal O_Z$-modules with a commutative unital graded sheaf algebra structure $D$ [def-weil-pbc-graded-sheaf-structures]. There exist a sheaf of commutative $\\mathcal O_Z$-algebras $A$ [def-weil-pbc-comm-algebra-sheaf] and module maps $j_n:C_n\\to A$ whose cofan is a coproduct [def-weil-sheaf-of-modules-category]. For each open $V\\subseteq Z$, $a\\in C_m(V)$ and $b\\in C_n(V)$ one has $j_m(a)j_n(b)=j_{m+n}(D_{m,n}(a,b))$. For $r\\in\\mathcal O_Z(V)$ one has $j_0(D_{\\rm unit}(r))=\\rho_A(r)$, where $\\rho_A:\\mathcal O_Z\\to A$ is its structure map. No closed immersion, ideal, affine chart or representative formula is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0630, paragraph preceding definition-conormal-sheaf; the direct-sum graded algebra also occurs in Cohomology of Schemes, Tag 087Z."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply AlgebraicGeometry.GradedSheafAlgebra.exists_total to the same family C and homogeneous algebra D, obtaining A, the inclusions j, their colimit witness, multiplication compatibility and scalar compatibility. Keep the witnesses and the colimit and scalar clauses. For the multiplication clause reorder the quantified variables from V,m,n to m,n,V and use symmetry of the supplied equality. The input hypotheses and universes are identical; no quasi-coherence, finiteness or nonemptiness is needed.",
+   "uses": [
+    "lem-trf-graded-sheaf-algebra-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-graded-sheaf-algebra-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0630, paragraph preceding definition-conormal-sheaf; totalization construction already proved by lem-trf-graded-sheaf-algebra-total.",
+  "method": "Reuse the existing complete totalization theorem; only reorder binders and reverse its homogeneous multiplication equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous sheaf algebra has a total commutative algebra sheaf with underlying module the sheaf coproduct and affine sections the direct sum of its graded modules",
+   "results": "8 hits: SheafOfModules.free, GradedAlgebra, HomogeneousSubmodule.noConfusion, Algebra.directSumGAlgebra, AlgebraicGeometry.Scheme.Modules, Submodule.galgebra, DirectSum.decomposeAlgEquiv, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*sheaf|sheaf.*graded|conormal|coprodIsoDirectSum",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/ModuleCat/Products.lean, Mathlib/Algebra/Category/FGModuleCat/Colimits.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|[Dd]irect[Ss]um|[Cc]oproduct",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: the hits do not supply this sheaf construction or its normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous sheaf algebra has a total commutative algebra sheaf with underlying module the sheaf coproduct and affine sections the direct sum of its graded modules",
+   "results": "8 hits: Submodule.galgebra, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, DirectSum.IsInternal.gradedAlgebra, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, GradedAlgebra, SetLike.GradeZero.instAlgebra, DirectSum.GAlgebra",
+   "date": "2026-10-25",
+   "verdict": "No exact match: graded algebraic direct sums and the structure sheaf of Proj do not totalize a given family of module sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebraConstruction",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-normal-bundle",
+   "place": "Definition of the normal cone as relative Spec of the direct sum of ideal-power quotients: Totalizing a homogeneous sheaf algebra.",
+   "via": [
+    "lem-pur-conormal-graded-algebra-construction",
+    "lem-pur-conormal-graded-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GradedSheafAlgebraTotalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GradedSheafAlgebraTotalization.lean",
+  "declaration": "AlgebraicGeometry.exists_gradedSheafAlgebra_totalization",
+  "statement": "theorem exists_gradedSheafAlgebra_totalization {Z : Scheme.{u}}\n    (C : ℕ → Z.Modules) (D : GradedSheafAlgebra C) :\n    ∃ (A : Z.CommAlgebraSheaf) (j : ∀ n, C n ⟶ A.toModule),\n      Nonempty (IsColimit (Cofan.mk A.toModule j)) ∧\n      (∀ (m n : ℕ) (V : Z.Opens)\n        (a : (C m).val.obj (op V)) (b : (C n).val.obj (op V)),\n        (@id (A.right.obj.obj (op V)) ((j m).val.app (op V) a)) *\n          (@id (A.right.obj.obj (op V)) ((j n).val.app (op V) b)) =\n          (j (m + n)).val.app (op V) (D.mul m n V a b)) ∧\n      (∀ (V : Z.Opens) (r : Γ(Z, V)),\n        (j 0).val.app (op V) (D.unit.val.app (op V) r) = A.hom.hom.app (op V) r)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T001706-L-22631",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T070413-L-3578664",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

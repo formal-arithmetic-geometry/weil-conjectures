@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-chevalley-scheme-line-stabilizer",
+ "kind": "statement",
+ "title": "Chevalley scheme-theoretic line stabilizer theorem",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an affine group scheme of finite type over $k$ [def-sc-group-scheme, def-pc-scheme, def-weil-finite-type-morphism], and $H\\subseteq G$ a closed subgroup scheme [def-sc-group-scheme-subgroup]. There exist a nonzero finite-dimensional $k$-vector space $E$ [def-weil-finite-dimensional-subspace], a rational representation $\\rho:G\\to\\mathrm{GL}(E)$, and a one-dimensional $k$-subspace $D\\subseteq E$ such that, for every commutative $k$-algebra $A$, $$H(A)=\\{g\\in G(A):\\rho_A(g)(D\\otimes_k A)=D\\otimes_k A\\}.$$ Here a rational representation is a homomorphism of $k$-group schemes; after a basis choice $\\mathrm{GL}(E)=\\mathrm{GL}_{\\dim E,k}$ [def-sc-general-linear-group], and its $A$-points act as the $A$-linear automorphisms of $E\\otimes_k A$. The equality is natural in $A$; no smoothness or reducedness of $G$ or $H$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27 (Chevalley), printed pp.94--95, and Remark 4.30, printed p.96 (scheme-theoretic stabilizer on every k-algebra)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-weil-finite-dimensional-subspace",
+  "def-sfb-rational-representation-finite-basis"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[G]$. By [def-weil-closed-immersion], $H=\\operatorname{Spec}(C/I)$ for an ideal $I$. By [lem-pc-affine-finite-type-algebra], $C$ is a finite-type $k$-algebra. A field is Noetherian since its only ideals are $(0)$ and $(1)$; hence [lem-weil-pbc-finite-type-algebra-noetherian] and [def-weil-pbc-noetherian-ring] give finitely many ideal generators $f_1,\\ldots,f_s$ of $I$ (the empty list is permitted).",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  },
+  {
+   "text": "The coproduct and counit on $C$ have the coalgebra identities by [lem-sfb-affine-group-coordinate-hopf]. Apply [lem-sfb-coalgebra-finite-subcoalgebra] to $\\{1,f_1,\\ldots,f_s\\}$ to obtain a finite-dimensional subspace $V\\subset C$ containing these elements and satisfying $\\Delta(V)\\subset V\\otimes_k V\\subset V\\otimes_k C$. In particular $V\\ne0$. The restricted coproduct is a coaction, so [lem-sfb-rational-representation-comodule-dictionary] gives a rational representation $r:G\\to\\mathrm{GL}(V)$, with $r_A(x)(v\\otimes1)=(1\\otimes x)\\Delta(v)$ for $x:C\\to A$. This is the restricted right regular representation used in Milne's proof; the existing subcoalgebra lemma supplies a stronger form of his Proposition 4.7.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-coalgebra-finite-subcoalgebra",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  },
+  {
+   "text": "Put $W=I\\cap V$, choose a basis $e_1,\\ldots,e_d$ of $W$, and extend it to $e_1,\\ldots,e_n$ of $V$. Write $\\Delta(e_j)=\\sum_{i=1}^n e_i\\otimes a_{ij}$ and let $q:C\\to C/I$. The subgroup laws [def-sc-group-scheme-subgroup] imply $(q\\otimes q)\\Delta(e_j)=0$ and $\\epsilon(e_j)=0$ for $j\\le d$: multiplication of two $H$-points and the identity factor through $H$. Here the coordinate maps are the pullbacks in [lem-sfb-affine-group-coordinate-hopf]. Since $q(e_{d+1}),\\ldots,q(e_n)$ are linearly independent, applying their coordinate functionals (extended to a basis of $C/I$) to the first tensor factor gives $q(a_{ij})=0$ for $i>d$, $j\\le d$. Thus all these $a_{ij}$ lie in $I$. Conversely, the counit identity gives $e_j=\\sum_i\\epsilon(e_i)a_{ij}=\\sum_{i>d}\\epsilon(e_i)a_{ij}$ for $j\\le d$. Since the $f_t$ lie in $W$, the $e_j$, $j\\le d$, generate $I$ as an ideal. Therefore $I=(a_{ij}:i>d,\\ j\\le d)$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  },
+  {
+   "text": "Fix any commutative $k$-algebra $A$ and $g\\in G(A)$, represented by $x:C\\to A$. By [def-weil-closed-immersion], $g\\in H(A)$ if and only if $x(I)=0$, equivalently $x(a_{ij})=0$ for $i>d$, $j\\le d$. By the action formula of [lem-sfb-rational-representation-comodule-dictionary], these are precisely the coefficients of $r_A(g)e_j$ outside $W_A$. Consequently $r_A(g)W_A=W_A$ implies $g\\in H(A)$. Conversely, if $g\\in H(A)$, both $g$ and $g^{-1}$ belong to $H(A)$ by [def-sc-group-scheme-subgroup], so both $r_A(g)$ and its inverse carry $W_A$ into itself, proving equality. We have proved $H(A)=\\{g:r_A(g)W_A=W_A\\}$ without replacing $A$ by a field or taking radicals.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  },
+  {
+   "text": "Set $E=\\bigwedge_k^d V$ and $w=e_1\\wedge\\cdots\\wedge e_d$ (for $d=0$, $w=1$), using [def-weil-pbc-exterior-algebra]. The free exterior basis [lem-weil-pbc-exterior-power-free-basis] shows that $E$ is finite-dimensional, $w\\ne0$, and $D=kw\\subset E$ is a line. It also identifies $E\\otimes_k A$ with $\\bigwedge_A^d(V\\otimes_k A)$: the map sends each base-changed ordered wedge basis vector to the same ordered wedge, hence sends a basis bijectively to a basis. For each $g\\in G(A)$, the tensor-algebra map induced by $r_A(g)$ preserves the ideal generated by $v\\otimes v$, so induces $\\rho_A(g)=\\bigwedge^d r_A(g)$. It respects multiplication and inverses because this holds on pure wedges. Its matrix entries are minors of those of $r_A(g)$, so the maps are natural in $A$. By [lem-sfb-rational-representation-comodule-dictionary], this finite-dimensional natural representation is a homomorphism of group schemes $\\rho:G\\to\\mathrm{GL}(E)$.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  },
+  {
+   "text": "We check the exterior-line test directly in these bases, as in Milne Lemma 4.28. For any $A$, [lem-weil-pbc-exterior-power-free-basis] gives\n$$W_A=\\{v\\in V_A:w\\wedge v=0\\},$$\nsince for $v=\\sum b_i e_i$, $w\\wedge v=\\sum_{i>d}b_i(e_1\\wedge\\cdots\\wedge e_d\\wedge e_i)$, with distinct basis vectors. If $\\alpha=r_A(g)$ preserves $W_A$ with equality, its restriction is an automorphism of $W_A$; taking its top exterior power gives $(\\bigwedge^d\\alpha)D_A=D_A$. Conversely, this line equality means $(\\bigwedge^d\\alpha)w=cw$ for a unit $c\\in A$: the restriction to the free rank-one module $D_A$ is bijective. For $v\\in W_A$,\n$$0=(\\bigwedge^{d+1}\\alpha)(w\\wedge v)=cw\\wedge\\alpha(v),$$\nso $\\alpha(v)\\in W_A$. Apply the identical calculation to $\\alpha^{-1}$ to obtain equality. Thus $\\rho_A(g)D_A=D_A$ if and only if $r_A(g)W_A=W_A$. These computations use the quotient construction in [def-weil-pbc-exterior-algebra] and work also for $d=0$, when $w\\wedge v=v$, and for $d=n$, when $W_A=V_A$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  },
+  {
+   "text": "Combining steps 4 and 6 gives the required equality for every $A$, with the single pair $(E,D)$ constructed over $k$. All matrices and their exterior minors are evaluated by the map $C\\to A$; applying a $k$-algebra map $A\\to B$ applies it entrywise, and [def-weil-module-base-change] sends the chosen basis of $D_A$ to that of $D_B$. Thus these equalities describe the same subfunctor of $G$ and are natural in $A$, as asserted in Milne Remark 4.30. The nonzero vector $w\\in E$ ensures $E\\ne0$. No step imposed smoothness, reducedness, or a characteristic restriction.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-coalgebra-finite-subcoalgebra",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27 and Lemma 4.28, printed pp.94–95; Remark 4.30, printed p.96."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley theorem every closed subgroup scheme is the scheme theoretic stabilizer of a line in a finite dimensional rational representation",
+   "results": "{\"t\": \"2026-10-23T14:27:11Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley theorem every closed subgroup scheme is the scheme theoretic stabilizer of a line in a finite dimensional rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fixingSubgroup_isClosed\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"normalClosure_of_stabilizer_eq_top\", \"InfiniteGalois.fixingSubgroup_isClosed\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"IntermediateField.fixingSubgroup_isOpen\", \"finite_compl_fixedBy_closure_iff\"], \"digest\": \"c38070c348237048\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Submodule\"",
+   "results": "{\"t\": \"2026-10-23T14:27:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Submodule.stabilizer_coe\", \"Submodule.mem_stabilizer_submodule_iff_map_eq\", \"LinearEquiv.mem_stabilizer_fixedSubmodule\", \"LinearEquiv.mem_stabilizer_submodule_of_le_fixedSubmodule\"], \"digest\": \"1fd907e0769449c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|stabilizer.*line|line.*stabilizer",
+   "results": "{\"t\": \"2026-10-23T14:27:12Z\", \"tool\": \"grep\", \"query\": \"Chevalley|stabilizer.*line|line.*stabilizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\"], \"digest\": \"f6081e2d8c8e4c26\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup of an affine algebraic group is the isotropy group of a rational point of a projective representation",
+   "results": "{\"t\": \"2026-10-23T14:27:53Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subgroup of an affine algebraic group is the isotropy group of a rational point of a projective representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fixingSubgroup_isClosed\", \"InfiniteGalois.fixingSubgroup_isClosed\", \"OnePoint.exists_mem_SL2\", \"MulAction.IwasawaStructure.T\", \"InfiniteGalois.fixingSubgroup_fixedField\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"fixingSubgroup\", \"FixedPoints.subgroup\"], \"digest\": \"55ab855ce5ca628b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley closed subgroup algebraic group line stabilizer rational representation",
+   "results": "{\"t\": \"2026-10-23T14:27:54Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley closed subgroup algebraic group line stabilizer rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup\", \"AddAction.stabilizer\", \"ClosedSubgroup.recOn\", \"MulAction.stabilizer\", \"ClosedSubgroup.isClosed'\", \"ClosedSubgroup.instSubgroupClass\", \"AddAction.fixingAddSubgroup_le_stabilizer\"], \"digest\": \"5f0da433d08dd026\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.*(Submodule|subspace)|stabilizer.*line|line.*stabilizer|chevalley",
+   "results": "{\"t\": \"2026-10-23T14:27:54Z\", \"tool\": \"grep\", \"query\": \"stabilizer.*(Submodule|subspace)|stabilizer.*line|line.*stabilizer|chevalley\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|line.*stabilizer|stabilizer.*line",
+   "results": "{\"t\": \"2026-10-23T16:21:26Z\", \"tool\": \"grep\", \"query\": \"Chevalley|line.*stabilizer|stabilizer.*line\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"94219d14698fc6fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract group stabilizers, projectivization actions on field-valued vector spaces, Galois fixing subgroups, or constructible-image Chevalley theorems; none is the all-algebra scheme-theoretic existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Submodule\"",
+   "results": "{\"t\": \"2026-10-23T16:21:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Submodule.stabilizer_coe\", \"Submodule.mem_stabilizer_submodule_iff_map_eq\", \"LinearEquiv.mem_stabilizer_fixedSubmodule\", \"LinearEquiv.mem_stabilizer_submodule_of_le_fixedSubmodule\"], \"digest\": \"1fd907e0769449c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract group stabilizers, projectivization actions on field-valued vector spaces, Galois fixing subgroups, or constructible-image Chevalley theorems; none is the all-algebra scheme-theoretic existence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subgroup of an affine group scheme is the stabilizer of a line in a representation",
+   "results": "{\"t\": \"2026-10-23T16:21:26Z\", \"tool\": \"leansearch\", \"query\": \"Closed subgroup of an affine group scheme is the stabilizer of a line in a representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup\", \"AddAction.stabilizer\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.mk\", \"ClosedSubgroup.ctorIdx\", \"MulAction.stabilizer\", \"AddAction.le_stabilizer_iff_vadd_le\", \"ClosedAddSubgroup\"], \"digest\": \"9dc8ed43dbf793c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract group stabilizers, projectivization actions on field-valued vector spaces, Galois fixing subgroups, or constructible-image Chevalley theorems; none is the all-algebra scheme-theoretic existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley theorem a closed subgroup scheme is a line stabilizer in a finite dimensional rational representation",
+   "results": "{\"t\": \"2026-10-23T16:21:30Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley theorem a closed subgroup scheme is a line stabilizer in a finite dimensional rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fixingSubgroup_isClosed\", \"normalClosure_of_stabilizer_eq_top\", \"IntermediateField.fixingSubgroup_isOpen\", \"InfiniteGalois.fixingSubgroup_isClosed\", \"MulAction.IwasawaStructure.T\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\"], \"digest\": \"ccca6cb5c1005ec2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract group stabilizers, projectivization actions on field-valued vector spaces, Galois fixing subgroups, or constructible-image Chevalley theorems; none is the all-algebra scheme-theoretic existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic subgroup can be realized as the isotropy group of a point in projective space",
+   "results": "{\"t\": \"2026-10-23T16:21:31Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic subgroup can be realized as the isotropy group of a point in projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.Subspace\", \"Projectivization.exists_smul_eq_mk_rep\", \"MulAction.IwasawaStructure.T\", \"Projectivization.smul_mk\", \"Projectivization.smul_def\", \"Projectivization.mk''\", \"Projectivization.mk''_submodule\", \"Projectivization.generalLinearGroup_smul_def\"], \"digest\": \"1a472c1efd20e5b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract group stabilizers, projectivization actions on field-valued vector spaces, Galois fixing subgroups, or constructible-image Chevalley theorems; none is the all-algebra scheme-theoretic existence theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-character-cancellation",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Theorem 4.27 and Corollary 4.29, printed pp.94--95; Remark 4.30, p.96, specifies the stabilizer on all algebras. The inverse character in Corollary 4.29 is written multiplicatively here. Supporting input: Milne Theorem 4.27, the initial line before cancellation in Corollary 4.29.",
+   "via": [
+    "lem-sfb-chevalley-character-cancellation",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-scheme-line-stabilizer",
+  "worker": "stage1",
+  "summary": "Checked Milne 4.27–4.28 and Remark 4.30 against all-algebra points. Wrote the defining-ideal coefficient calculation and the exterior-line equivalence, including both inverse arguments over general rings and the zero exterior degree. Reused the existing finite-subcoalgebra and comodule-dictionary nodes; no new nodes. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Theorem 4.27 and Corollary 4.29, printed pp.94--95; Remark 4.30, p.96, specifies the stabilizer on all algebras. The inverse character in Corollary 4.29 is written multiplicatively here. Supporting input: Milne Theorem 4.27, the initial line before cancellation in Corollary 4.29.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine finite-type coordinate-algebra input for C=k[G]; no change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-19c30a5f0",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-19c30a5f0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item plus the report, with zero new nodes. The item is still unsplit in live and side-live and has no repair note, so this is an ordinary split and not a re-split. Statement, stmt_deps, source and blueprint are byte-identical to the base, so nothing is weakened. I checked the statement against Milne iAG2017 Thm 4.27 (pp.94-95), Lemma 4.28 (p.95) and Rem 4.30 (p.96): affine finite-type G, closed H, nonzero finite-dimensional E, a line D, and the stabilizer equality for every k-algebra A. All 7 steps are correct. Step 1: the closed-immersion definition gives H=Spec(C/I), C is a finitely generated k-algebra, and the Hilbert basis theorem gives finitely many generators of I. Step 2: the finite subcoalgebra node gives V containing 1 and the generators; restricting the coproduct to V satisfies the comodule-dictionary axioms, which gives the representation r. Step 3: from the subgroup definition, (q⊗q)Δ(I)=0 and ε(I)=0; the images q(e_i), i>d, are independent because I∩V=W; the counit identity then gives I=(a_ij : i>d, j≤d). Step 4: H(A)=Stab(W_A), with equality obtained from g⁻¹. Step 5: ∧^d of r is natural and its entries are minors, so it is a group-scheme homomorphism. Step 6: Lemma 4.28 holds over any ring A, with c a unit because D_A is free of rank one, and the edge cases d=0 and d=n work. Step 7: the assembly is elementary. Small cases checked: H=G, the trivial subgroup and α_p in G_a, including A=k[ε]. No duplicate exists: the only nodes on Milne 4.27-4.29 or 4.7 are the citers (character-cancellation and solvable-flag) and the 4.7 subcomodule/subcoalgebra nodes. No cycle and no SGA. Accepted tool use: lem-pc-affine-finite-type-algebra, a generic coordinate-algebra fact. Minor point: the report lists citations.json and searches.jsonl as files written, but they are not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ChevalleyLineStabilizer",
+  "declaration": "AlgebraicGeometry.exists_rational_line_stabilizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ChevalleyLineStabilizer.lean",
+  "statement": "theorem exists_rational_line_stabilizer {k : Type u} [Field k] (G : Scheme.{u}) [G.Over (Spec (.of k))] [GrpObj (G.asOver (Spec (.of k)))] [IsAffine G] [LocallyOfFiniteType (G ↘ Spec (.of k))] [QuasiCompact (G ↘ Spec (.of k))] (H : Over (Spec (.of k))) [GrpObj H] (i : H ⟶ G.asOver (Spec (.of k))) [IsClosedSubgroupScheme i] : ∃ (E : Type u) (_ : AddCommGroup E) (_ : Module k E) (_ : FiniteDimensional k E), Nontrivial E ∧ ∃ (ρ : GeneralLinearGroup.RationalHom (G.asOver (Spec (.of k))) (RationalRepresentation.FiniteIndex (k := k) E)) (_ : IsMonHom ρ) (D : Submodule k E), Module.finrank k D = 1 ∧ ∀ (A : Type u) [CommRing A] [Algebra k A], Set.range (fun h : points H A ↦ h ≫ i) = {g : points (G.asOver (Spec (.of k))) A | Submodule.map (Matrix.GeneralLinearGroup.toLin' ((RationalRepresentation.finiteBasis (k := k) E).baseChange A) (GeneralLinearGroup.homMulEquiv (RationalRepresentation.FiniteIndex (k := k) E) k A (g ≫ ρ))).toLinearEquiv.toLinearMap (D.baseChange A) = D.baseChange A}",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing finite index and finite basis owned by def-sfb-rational-representation-finite-basis, plus the existing general linear group scheme. The dictionary theorem remains solely a proof dependency. The equality is on all algebra-valued points, with D.baseChange A and the actual matrix action. Lean source unchanged from returned head dc81fdb6821d."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c82ff2514",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Re-delivery of RETURN dc81fdb6821d (H2). The item's stmt_deps replace the theorem node lem-sfb-rational-representation-comodule-dictionary with the new definition node def-sfb-rational-representation-finite-basis: existing:true record of FiniteIndex (abbrev ULift (Fin finrank)) and finiteBasis (finBasis.reindex Equiv.ulift.symm), statement verbatim from def to :=, TeX matches the code, deps field + finite-dim space, source Milne Ch.4(a) p.83, no other owner in live DAG or Mathlib. Dictionary theorem kept in proof_deps only. Lean module byte-identical to the reviewed head; all statement clauses rechecked against Milne Thm 4.27/Lemma 4.28/Rem 4.30 (affine finite type, closed subgroup, nonzero finite-dim E, IsMonHom rho, finrank D = 1, image equality for all u-algebras including 0 and nilpotent). Edge cases d=0, d=n, alpha_p, A=0 covered. Gates OK; report sections present. No file changed, so no compile."
+ }
+}

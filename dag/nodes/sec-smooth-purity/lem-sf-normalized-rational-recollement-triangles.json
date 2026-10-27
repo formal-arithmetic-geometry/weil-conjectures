@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-normalized-rational-recollement-triangles",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact triangles and orthogonality from integral and rational normalization",
+ "statement": "Fix a prime $l$ and a finite extension $E/\\mathbf Q_l$. Let $i:Z\\hookrightarrow X$ be a closed immersion with $X$ Noetherian. Let $P$ and $Q$ be integral and rational recollement presentations. Assume the integral normalization fixes the completed sheaf kernel and closed unit on every representative complex, and $Q$ is normalized from $P$ by raw rational localization [def-sf-recollement-presentation-data, def-weil-rationalization-karoubi]. Then the specified counit and unit of $Q$ extend to a distinguished triangle at every object. For independent rational objects $K,L$ and every integer $n$, $\\operatorname{Hom}(Q_{\\mathrm{open}}K[n],Q_{\\mathrm{closed}}L)=0$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Extend the two integral normalization equations from images of complexes to arbitrary objects using essential surjectivity of DerivedCategory.Q. Lift the representative isomorphism to the full constructible category. Naturality of both comparison isomorphisms and of the specified counit and unit transports the two equations. The completed sheaf short exact sequence then gives the distinguished ambient triangle with exactly those arrows. Lift the connecting arrow through the fully faithful triangulated inclusion, correcting by its shift isomorphism; the explicit comparison triangle isomorphism proves distinguishedness.",
+   "uses": [
+    "lem-sf-exact-localization-triangle",
+    "def-sf-recollement-presentation-data",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  },
+  {
+   "text": "The completed closed adjunction has invertible counit. Exact localization kernel orthogonality gives all shifted ambient cross-object Hom vanishings. Conjugate by the two integral normalization isomorphisms and the inclusion shift comparison, and use faithfulness of the inclusion. Apply exact raw scalar localization to the integral triangles. Its Hom groups are tensor products of the integral groups, so they remain subsingletons. Conjugate by the rational normalization isomorphisms to obtain the given Q arrows and vertices.",
+   "uses": [
+    "lem-sf-exact-localization-triangle",
+    "def-sf-recollement-presentation-data",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-localization-triangle",
+  "def-sf-recollement-presentation-data",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact localization functors on a derived category give a distinguished triangle and the kernel is left orthogonal to the localized objects",
+   "results": "DerivedCategory.triangleOfSES, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, DerivedCategory.triangleOfSESδ.congr_simp, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the recorded sheaf and coefficient theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_distinguished",
+   "results": "CategoryTheory.Functor.map_distinguished, CategoryTheory.Triangulated.Octahedron.map, CategoryTheory.Triangulated.Octahedron.map_m₁, CategoryTheory.Triangulated.Octahedron.map_m₃",
+   "date": "2026-10-25",
+   "verdict": "Generic ingredients only, no normalized recollement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*CommShift|triangle_morphism_extension|SfRecollement",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean",
+   "date": "2026-10-25",
+   "verdict": "The generic shift and triangle interfaces do not state normalized recollement transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfNormalizedRecollementTriangles",
+  "file": "lean/Sheaf/Paper/SfNormalizedRecollementTriangles.lean",
+  "declaration": "WeilConjectures.sfNormalizedRationalRecollement_triangle_orthogonality",
+  "declarations": [
+   "WeilConjectures.sfNormalizedRationalRecollement_triangle_orthogonality"
+  ],
+  "statement": "theorem sfNormalizedRationalRecollement_triangle_orthogonality\n    (P : SfRecollementPresentation (sfIntegralConstructibleCategory l E X))\n    (Q : SfRecollementPresentation (sfRationalConstructibleCategory l E X))\n    (hp : SfIntegralRecollementNormalization l E i hX P)\n    (hq : SfRationalRecollementNormalization l E X P Q) :\n    (∀ K, ∃ δ, Triangle.mk (Q.counit.app K) (Q.unit.app K) δ ∈ distTriang _) ∧\n    ∀ (K L : sfRationalConstructibleCategory l E X) (n : ℤ),\n      Subsingleton ((Q.openTerm.obj K)⟦n⟧ ⟶ Q.closedTerm.obj L)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T095659-L-3464608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T095659-L-3464608",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-perfect-coinduction-tor-independent-exchange",
+ "kind": "statement",
+ "title": "Tor-independent scalar exchange for perfect derived coinduction",
+ "statement": "Let $P\\to A$ and $P\\to T$ be homomorphisms of commutative rings and put $A_T=A\\otimes_PT$. Assume $A$ and $T$ are Tor independent over $P$, meaning $A[0]\\otimes_P^{\\mathbf L}T\\simeq A_T[0]$. Use ordinary module derived categories [def-weil-abstract-derived-category], derived scalar extension [lem-pc-derived-tensor-second-factor-functor], and derived coinduction $C_A^P$ with its precomposition action [def-trf-derived-coinduction]. Write $U$ and $U_T$ for restriction along $P\\to A$ and $T\\to A_T$, and $\\epsilon_M:UC_A^P(M)\\to M$ for the evaluation-at-one counit [lem-trf-derived-coinduction-adjunction]. For every $N\\in D(A)$ the canonical tensor comparison is an isomorphism\n$$\\theta_N:U_T(N\\otimes_A^{\\mathbf L}A_T)\\xrightarrow{\\sim}(UN)\\otimes_P^{\\mathbf L}T.$$\nFor every $M\\in D(P)$ there is a canonical natural map in $D(A_T)$\n$$\\gamma_M:C_A^P(M)\\otimes_A^{\\mathbf L}A_T\\longrightarrow C_{A_T}^T(M\\otimes_P^{\\mathbf L}T),$$\ncharacterized as the adjoint of $(\\epsilon_M\\otimes_P^{\\mathbf L}T)\\circ\\theta_{C_A^P(M)}$. If $A[0]$ is perfect over $P$ [def-pc-perfect-ring-complex], then $\\gamma_M$ is an isomorphism for every unbounded $M$. For a bounded finite projective resolution $F^\\bullet\\to A[0]$ and a finite projective $P$-module $L$ in degree zero, its underlying $T$-map, under $\\theta$, is the localization of\n$$\\operatorname{Hom}_P^\\bullet(F,L)\\otimes_PT\\longrightarrow\\operatorname{Hom}_T^\\bullet(F\\otimes_PT,L\\otimes_PT),\\qquad(h\\otimes t)(z\\otimes s)=ts(h(z)\\otimes1).$$\nHere $F\\otimes_PT$ resolves $A_T$ by Tor independence. The comparison is natural in derived morphisms of $M$ and in maps between such resolutions. It is compatible with further scalar extension $T\\to T'$ whenever $A$ and $T'$ are Tor independent over $P$; after the canonical tensor associators, direct and successive comparisons agree. No flatness of $P\\to T$, surjectivity of $P\\to A$, Noetherianity, or boundedness of $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZP (lemma-bc-surjection), with the counit-defined equation-base-change in section-base-change-trivial-duality; tensor restriction comparison: more-algebra.tex Tag 0661 (lemma-base-change-comparison). Agent explicit resolution formula and successive-base-change compatibility of this counit mate."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-trf-derived-coinduction",
+  "lem-trf-derived-coinduction-adjunction",
+  "def-pc-perfect-ring-complex",
+  "def-sc-module-total-hom-complex",
+  "def-trf-module-hom-precomposition"
+ ],
+ "proof": [
+  {
+   "text": "Choose an $A$-K-flat representative $Q$ of $N$ and a $P$-K-flat resolution $s:E\\to UQ$. The cited resolution theorem supplies both choices. Computing $A[0]\\otimes_P^{\\mathbf L}T$ on a free resolution of $A$, the definition of Tor in def-weil-pbc-tor-modules turns the hypothesis into $\\operatorname{Tor}_i^P(A,T)=0$ for $i>0$. This and lem-pc-tor-independent-kflat-resolution-tensor make $s\\otimes_PT$ a quasi-isomorphism. The normalized ordinary balancing isomorphism of lem-pc-base-tensor-ordinary-iso identifies $Q\\otimes_PT$ with $U_T(Q\\otimes_A A_T)$, by $q\\otimes t\\mapsto q\\otimes(1\\otimes t)$, after the degree-zero tensor flips. Hence the comparison $c_N:(UN)\\otimes_P^{\\mathbf L}T\\to U_T(N\\otimes_A^{\\mathbf L}A_T)$ represented by $s\\otimes_PT$ and this balancing is invertible. Set $\\theta_N=c_N^{-1}$. The scalar-extension functor and its canonical resolution comparisons show that this is independent of $Q,E,s$ and natural on derived morphisms. This is the comparison of the source, with its direction inverted.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-tor-independent-kflat-resolution-tensor",
+    "lem-pc-base-tensor-ordinary-iso",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661 (lemma-base-change-comparison), with equation-comparison-map immediately before it; construction on an A-K-flat complex and a base-K-flat resolution."
+   }
+  },
+  {
+   "text": "Apply the coinduction adjunction for $T\\to A_T$ to $X=C_A^P(M)\\otimes_A^{\\mathbf L}A_T$ and $Y=M\\otimes_P^{\\mathbf L}T$. The map $b_M=(\\epsilon_M\\otimes_P^{\\mathbf L}T)\\circ\\theta_{C_A^P(M)}:U_TX\\to Y$ has a unique adjunct $\\gamma_M:X\\to C_{A_T}^T(Y)$. In particular $\\epsilon_Y\\circ U_T\\gamma_M=b_M$. For $u:M\\to M'$ the naturality equations of $\\epsilon$ and $\\theta$ give $b_{M'}\\circ U_T(C_A^P(u)\\otimes1)=(u\\otimes1)\\circ b_M$. Naturality of the adjunction bijection therefore gives naturality of $\\gamma$ on arbitrary derived morphisms. Neither this construction nor step 1 used perfectness.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "section-base-change-trivial-duality, equation-base-change and the paragraph defining it by the evaluation counit."
+   }
+  },
+  {
+   "text": "Identify the underlying map by transposing twice, first through coinduction and then through the tensor-Hom adjunction of lem-sf-ringed-derived-closed-symmetric-monoidal. The inverse coinduction correspondence of lem-trf-algebraic-shriek-derived-hom-adjunction sends $g$ to $x\\mapsto(a\\mapsto g(ax))$. Thus the transpose of $U_T\\gamma_M$, after $\\theta$, is scalar extension of the evaluation $R\\operatorname{Hom}_P(A,M)\\otimes_P^{\\mathbf L}A\\to M$: evaluation at $a$ is evaluation at $1$ after the precomposition action by $a$. This is an identity of the cited Hom-complex correspondences, hence remains true after localization, not only on degree-zero cohomology. After replacing $A\\otimes_P^{\\mathbf L}T$ by $A_T[0]$, this is exactly the evaluation transpose defining the canonical derived-Hom scalar comparison. For a perfect-source representative its localization is the normalized $\\chi$ of def-pc-perfect-rhom-base-change-map: uncurrying its coordinate formula gives $h,z,t,s\\mapsto ts(h(z)\\otimes1)$, the same scalar-extended evaluation. Uniqueness of the two adjunction correspondences identifies these maps. This identifies an already constructed map in $D(A_T)$; it does not manufacture an algebra action from a map in $D(T)$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "lemma-check-base-change-is-iso, proof: apply restriction and identify equation-base-change with equation-base-change-RHom by the evaluation adjunctions; explicit uncurrying verification."
+   }
+  },
+  {
+   "text": "Assume $A[0]$ perfect over $P$, and choose a bounded finite projective resolution $F\\to A[0]$ and an arbitrary K-flat representative $Q$ of $M$. The cited resolution and bounded-projective extension results make $F$ K-flat and $F\\otimes_PT$ bounded projective; Tor independence makes the latter a resolution of $A_T[0]$: its cohomology in degree $-i$ is $\\operatorname{Tor}_i^P(A,T)$ by def-weil-pbc-tor-modules, zero for $i>0$, and $H^0$ is $A\\otimes_PT$ by right exactness. The representative factorization in def-pc-perfect-rhom-base-change-map computes the underlying map identified in step 3 by $\\chi:\\operatorname{Hom}_P^\\bullet(F,Q)\\otimes_PT\\to\\operatorname{Hom}_T^\\bullet(F\\otimes_PT,Q\\otimes_PT)$. Lem-pc-perfect-ring-hom-kflat makes its source compute the derived scalar extension, and lem-pc-perfect-ring-hom-scalar-extension says $\\chi$ is a chain isomorphism. Thus $U_T\\gamma_M$ is an isomorphism for arbitrary unbounded $M$. Conservativity in lem-trf-derived-coinduction-adjunction proves $\\gamma_M$ invertible in $D(A_T)$. In particular take $Q=L[0]$, K-flat by bounded projectivity. The defining coordinate equation for $\\chi$, flipping the degree-zero $T$ factor, is precisely $(h\\otimes t)(z\\otimes s)=ts(h(z)\\otimes1)$, the requested localized formula. No flatness of $P\\to T$ has been used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-ring-bounded-projective-extension",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-perfect-rhom-base-change-map",
+    "lem-pc-perfect-ring-hom-kflat",
+    "lem-pc-perfect-ring-hom-scalar-extension",
+    "lem-trf-derived-coinduction-adjunction",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A (lemma-base-change-RHom), equation-base-change-RHom and case (1); normalized finite-projective representative formula."
+   }
+  },
+  {
+   "text": "For a chain map $a:F'\\to F$ between augmented finite projective resolutions, the two comparison composites have the same value $ts(h(a(z))\\otimes1)$ on $h\\otimes t,z\\otimes s$. For a target chain map $v:L\\to L'$ both give $ts(v(h(z))\\otimes1)$. These equalities on every Hom-coordinate and pure tensor prove the two naturality squares for $\\chi$. Localizing these chain squares and using the canonical representative identifications in def-pc-perfect-rhom-base-change-map proves the asserted resolution compatibility; target derived naturality already holds for every $M$ by step 2. Thus no choice of resolution or of a lift of multiplication on $F$ changes the map.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "equation-base-change-RHom, functoriality in both variables; explicit coordinate verification for the chosen resolutions."
+   }
+  },
+  {
+   "text": "Let $T\\to T'$ and put $A_{T'}=A\\otimes_PT'$. Derived scalar associativity identifies $A_T\\otimes_T^{\\mathbf L}T'$ with $A\\otimes_P^{\\mathbf L}T'$, by first identifying $A_T$ with $A\\otimes_P^{\\mathbf L}T$. Thus it is $A_{T'}[0]$, and the second square is Tor independent too. Use the scalar associators normalized by $((x\\otimes t)\\otimes t')\\mapsto x\\otimes tt'$. The two successive balancing comparisons of step 1 agree with the direct one: their ordinary balanced maps have this same formula, and the canonical derived comparisons preserve it. Transpose the successive $\\gamma$ composite through the final coinduction adjunction. Twice substituting $\\epsilon\\circ U\\gamma=(\\epsilon\\otimes1)\\theta$ from step 2 cancels the intermediate counit against its defining adjunct. After these associators the result is $(\\epsilon_M\\otimes_PT')\\theta^{P,T'}_{C_A^P(M)}$, the transpose of the direct $\\gamma$. Injectivity of the adjunction bijection proves equality. This also proves the identity case (the scalar unit is multiplication).",
+   "uses": [
+    "lem-pur-system-scalar-coherence",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "section-base-change-trivial-duality, equation-base-change; agent verification of successive mates with the scalar associators of more-algebra.tex derived tensor construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-tor-independent-kflat-resolution-tensor",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pc-perfect-rhom-base-change-map",
+  "lem-pc-ring-bounded-projective-extension",
+  "lem-pc-perfect-ring-hom-kflat",
+  "lem-pc-perfect-ring-hom-scalar-extension",
+  "lem-pur-system-scalar-coherence",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "section-base-change-trivial-duality, equation-base-change, Tag 0BZP; explicit normalization and coherence assembled using existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coinduction.*baseChange|coextend.*baseChange|derivedHom.*baseChange|dualizing|relativeDualizing",
+   "results": "OK: 10 hits; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a perfect algebra commutes with Tor independent base change with its quotient algebra module action",
+   "results": "OK: 8 hits; RingHom.IsStableUnderBaseChange, IsBaseChange.dual, IsBaseChange.toDualBaseChange, IsBaseChange.linearMapLeftRight, Module.Dual.baseChange, RingHom.IsStableUnderBaseChange.mk, DerivedCategory.quotientCompQhIso, RingHom.finite_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"baseChange\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction of a perfect algebra commutes with Tor independent extension of scalars, and the comparison is the mate of the evaluation counit",
+   "results": "OK: 8 hits; CategoryTheory.Adjunction.derived'_counit, comonadicExtendScalars, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app, Rep.Tor_map, CategoryTheory.Adjunction.derivedε, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex Hom tensor comparison under arbitrary extension of scalars is an isomorphism and retains a quotient algebra action",
+   "results": "OK: 8 hits; Module.Invertible.rTensorEquiv, Rep.torIso, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, ModuleCat.extendScalarsComp_hom_app_one_tmul, Algebra.tensorH1CotangentOfIsLocalization, Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso, Module.Invertible.rTensorInv, AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction along a perfect algebra commutes with Tor independent extension of scalars, with comparison adjoint to evaluation at one",
+   "results": "OK: 8 hits; Algebra.Extension.tensorH1Cotangent, comonadicExtendScalars, Algebra.Extension.tensorCotangent, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Rep.Tor_map, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent, generic derived-category, K-projective and ordinary scalar adjunction declarations do not state the Tor-independent derived-coinduction mate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coinduction.*baseChange|derivedHom.*baseChange|RHom.*baseChange",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent, generic derived-category, K-projective and ordinary scalar adjunction declarations do not state the Tor-independent derived-coinduction mate theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a perfect complex commutes with arbitrary change of rings",
+   "results": "OK: 8 hits; RingHom.Flat.isStableUnderBaseChange, PerfectRing.liftEquiv_trans, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, RingHom.IsStableUnderBaseChange, DerivedCategory.instLinear, CochainComplex.HomComplex.δ_map, RingHom.finite_isStableUnderBaseChange, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent, generic derived-category, K-projective and ordinary scalar adjunction declarations do not state the Tor-independent derived-coinduction mate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of derived Hom from a bounded finite projective complex for an arbitrary unbounded target complex",
+   "results": "OK: 8 hits; Ext, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.Abelian.Ext, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.extMk_hom, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.isoExt",
+   "date": "2026-10-23",
+   "verdict": "no match: returned cotangent, generic derived-category, K-projective and ordinary scalar adjunction declarations do not state the Tor-independent derived-coinduction mate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-duality-polynomial-base-change",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Proper nodal dualizing line over an arbitrary base. Within that prerequisite: steps 6-8 and 12-13 of lem-sfb-proper-nodal-dualizing-base-change, the identification of the relative dualizing module with the Koszul adjunction line at a Noetherian stage and its compatibility with both base-change comparison systems. General prerequisite: the intrinsic relative-duality base-change map has the normalized polynomial derived-Hom expression, before the nodal Koszul computation. Auxiliary input: Tor-independent counit exchange, before specializing to a polynomial quotient.",
+   "via": [
+    "lem-sfb-relative-duality-polynomial-base-change",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison",
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "worker": "stage1",
+  "summary": "Constructed the general tensor restriction comparison from K-flat resolutions and its counit mate; identified its restriction by the explicit evaluation adjunctions and proved invertibility on the existing normalized finite-projective Hom-complex models. Wrote the resolution formula, naturality and successive-mate equation. No new nodes and no statement changes. Removed the near-duplicate coinduction base-change citation after the server detected its new reverse dependency.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), via the inherited prerequisite chain: scalar exchange for polynomial relative duality before the nodal Koszul computation. The inherited ancestry has blueprint.from.node=null; retained rather than inventing an imported ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pc-tor-independent-kflat-resolution-tensor",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pc-base-tensor-ordinary-iso",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pc-ring-bounded-projective-extension",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-kflat",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-scalar-extension",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "lem-pur-system-scalar-coherence",
+    "why": "Generic ordinary-module resolution, tensor/Hom adjunction, scalar coherence or finite-projective Hom tool; no geometric route step is replaced."
+   },
+   {
+    "node": "def-weil-pbc-tor-modules",
+    "why": "Generic definition of Tor modules by projective resolutions, used only to translate the derived Tor-independence hypothesis; no geometric route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-tor-independent-kflat-resolution-tensor",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-ring-bounded-projective-extension",
+  "lem-pc-perfect-ring-hom-kflat",
+  "lem-pc-perfect-ring-hom-scalar-extension",
+  "lem-pur-system-scalar-coherence",
+  "def-weil-pbc-tor-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-559dfaf73",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-559dfaf73 (reviewer sub-agent of L); spot-checked: Read the item's statement and all six steps in full. Statement unchanged from base (unsplit, Q42); no new nodes, no SGA. Checked against Stacks dualizing.tex section-base-change-trivial-duality: gamma = adjoint of (can⊗id) after the inverse of the comparison of more-algebra 0661 = equation-base-change; Tag 0BZP gives the perfect, unbounded-K iso. Small cases: P=k[x,y], A=P/(x), T=P/(y) is Tor independent and works termwise; P=k[x], A=T=k (Stacks' counterexample) is excluded. The chi formula of def-pc-perfect-rhom-base-change-map agrees with ts(h(z)⊗1) up to degree-0 flips. Step 1 = Stacks 0661 via lem-pc-tor-independent-kflat-resolution-tensor plus lem-pc-base-tensor-ordinary-iso. Step 2 = unique adjunct and naturality. Step 3 = explicit unwinding: the inverse g↦(x↦(a↦g(ax))) evaluated on h⊗t gives chi. Step 4 = 0BZP/0A6A route via bounded-projective K-flatness, lem-pc-perfect-ring-hom-scalar-extension and conservativity. Step 5 = elementary pure-tensor naturality. Step 6 = associativity (lem-pur-system-scalar-coherence) plus mate pasting. FIX: steps 1 and 4 used Tor_i^P(A,T)=0 and 'F⊗T resolves A_T' derived from the D(T) hypothesis A⊗^L T≃A_T[0] without citing the Tor definition. Added def-weil-pbc-tor-modules with an explicit translation sentence, and updated proof_deps and tool_uses. Batch-5 flag: lem-trf-algebraic-shriek-derived-hom-adjunction is generic commutative algebra (the restriction/coinduction Hom adjunction with explicit inverse). It is neither given by nor a step of the trace-formula or Poincaré proofs, it is also cited by lem-per-algebraic-dualizing-quotient, and it was already in the item's closure as a proof_dep of the base stmt_dep lem-trf-derived-coinduction-adjunction. Accepted. Duplicates: lem-sfb-perfect-coinduction-tor-independent-base-change is downstream and cites this item (the cycle was removed correctly); lem-pc-base-change-rhom-perfect is a component, not a restatement; no other duplicate found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectCoinductionTorIndependentExchange",
+  "declaration": "ModuleCat.perfectCoinduction_torIndependent_exchange",
+  "declarations": [
+   "ModuleCat.CoinductionScalarPair",
+   "ModuleCat.CoinductionTensorNormalized",
+   "ModuleCat.coinductionScalarExchange",
+   "ModuleCat.CoinductionHomModel",
+   "ModuleCat.CoinductionHomScalarFormula",
+   "ModuleCat.CoinductionExchangeResolutionFormula",
+   "ModuleCat.CoinductionScalarCompNormalized",
+   "ModuleCat.CoinductionExchangeTower",
+   "ModuleCat.perfectCoinduction_torIndependent_exchange"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectCoinductionTorIndependentExchange.lean",
+  "statement": "theorem perfectCoinduction_torIndependent_exchange {R A T B : Type u} [CommRing R] [CommRing A] [CommRing T] [CommRing B] [Algebra R A] [Algebra R T] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wT} (ModuleCat.{u} T)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] (a : A →+* B) (b : T →+* B) (eB : (A ⊗[R] T) ≃+* B) (ha : a = eB.toRingHom.comp (algebraMap A (A ⊗[R] T))) (hb : b = eB.toRingHom.comp (Algebra.TensorProduct.includeRight : T →ₐ[R] A ⊗[R] T).toRingHom) (dR : CoinductionScalarPair (algebraMap R T)) (dA : CoinductionScalarPair a) (hTor : Nonempty (dR.F.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj (of R A)) ≅ (DerivedCategory.singleFunctor (ModuleCat.{u} T) 0).obj ((restrictScalars b).obj (of B B)))) : ∃ θ : dA.F ⋙ (restrictScalars b).mapDerivedCategory ≅ (restrictScalars (algebraMap R A)).mapDerivedCategory ⋙ dR.F, CoinductionTensorNormalized (algebraMap R A) (algebraMap R T) a b dR dA θ ∧ (∀ (M : DerivedCategory (ModuleCat.{u} R)), (restrictScalars b).mapDerivedCategory.map (coinductionScalarExchange (algebraMap R A) b dR dA θ M) ≫ (derivedCoinductionAdjunction b).counit.app (dR.F.obj M) = θ.hom.app ((derivedCoinduction (algebraMap R A)).obj M) ≫ dR.F.map ((derivedCoinductionAdjunction (algebraMap R A)).counit.app M)) ∧ (∀ (M N : DerivedCategory (ModuleCat.{u} R)) (v : M ⟶ N), dA.F.map ((derivedCoinduction (algebraMap R A)).map v) ≫ coinductionScalarExchange (algebraMap R A) b dR dA θ N = coinductionScalarExchange (algebraMap R A) b dR dA θ M ≫ (derivedCoinduction b).map (dR.F.map v)) ∧ CoinductionExchangeResolutionFormula (algebraMap R A) (algebraMap R T) a b dR dA θ ∧ CoinductionExchangeTower (algebraMap R A) (algebraMap R T) a b dR dA θ ∧ (DerivedCategory.IsPerfectRingComplex ((DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj (of R A)) → ∀ M : DerivedCategory (ModuleCat.{u} R), IsIso (coinductionScalarExchange (algebraMap R A) b dR dA θ M))",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The scalar pairs present the existing total left derived scalar extensions by universal counits, with independent localization universes. The tensor-algebra carrier B is explicitly identified with A tensor_R T by eB and ha/hb; this avoids repeated tensor-ring elaboration. The normalized inverse tensor comparison, its actual coinduction counit mate, derived naturality, localized finite-projective Hom formula, resolution naturality, scalar associativity and successive-mate equation are all retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f77c7d29",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (c33ca25a4c3b). Lean module byte-identical (sha256 29f13556…); the only node change is the stmt_dep swap lem-trf-hom-dual-preserves-homotopies → def-trf-module-hom-precomposition (existing:true owner of CochainComplex.moduleHomPrecomp, used at lines 248-249; Q92 PASS 2026-10-22, on base, record identical to live). Report keeps Worker report plus Second reading by Q03 and its dependency list is updated. Item not landed live by another group. Mathematics as previously verified: hTor = Tor independence, θ pinned on A-K-flat models, γ = homEquiv(θ≫F ε) in D(B) with counit equation and derived naturality, perfect ⇒ IsIso for all unbounded M, resolution formula/χ/eR/eT pinned, tower with normalized associators; sorry-only proof, docstrings present, no extra hypotheses. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-norm-pencil-differential-polynomial",
+ "kind": "statement",
+ "title": "Polynomial alternating differential of a parametrized pencil",
+ "statement": "Let $F$ be a field [def-weil-field] and $C$ a smooth projective geometrically integral finite-type $F$-scheme of dimension one [def-sbc-smooth-morphisms, def-kun-projective, def-pc-geometrically-irreducible, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Let $M$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module], put $\\omega=\\Omega^1_{C/F}$ with its universal derivation $d$ [def-weil-pbc-kahler-differentials], and put $J=\\Gamma(C,M)$ and $Q=\\Gamma(C,\\omega\\otimes M^{\\otimes2})$ [def-pur-sheaf-tensor-product]. Then $\\omega$ is invertible and $J,Q$ are finite-dimensional $F$-vector spaces. The formula\n$$\\delta(s,t)=(\\beta\\,d\\alpha-\\alpha\\,d\\beta)e^{\\otimes2},\\qquad s=\\alpha e,\\quad t=\\beta e,$$\nin a local frame $e$ of $M$ is independent of that frame and defines an $F$-bilinear alternating map $\\delta:J\\times J\\to Q$. Let $P=\\mathbf A^m_F$ for any finite $m\\geq0$, and let $s_P,t_P$ be sections of the pullback of $M$ to $C\\times_FP$ whose coordinates under the canonical identification with $J\\otimes_F F[P]$ are polynomials on $P$. There is a polynomial map $\\Delta:P\\to\\mathbf A(Q)$ with $\\Delta(v)=\\delta(s_v,t_v)$ after every extension field $E/F$; here $\\mathbf A(Q)$ is the affine space associated to $Q$. More precisely for every commutative $F$-algebra $R$ one has the canonical isomorphisms $\\omega_R\\simeq\\Omega^1_{C_R/R}$ and $Q\\otimes_FR\\simeq\\Gamma(C_R,\\Omega^1_{C_R/R}\\otimes M_R^{\\otimes2})$, taking $1\\otimes df$ to $d(1\\otimes f)$ and the pullback of $\\delta$ to the same local formula over $R$ [def-pc-base-change, def-pc-module-pullback]. Thus the formula over the coordinate ring $F[P]$ and its specialization agree. In any basis of $Q$, the finitely many coordinate polynomials of $\\Delta$ cut out a closed zero locus; its open complement $D_\\Delta$ satisfies $v\\in D_\\Delta(E)$ exactly when $\\delta(s_v,t_v)\\ne0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RV, lemma-differentials-base-change; morphisms.tex Tag 02G1, lemma-smooth-omega-finite-locally-free; coherent.tex Tag 02KH, lemma-flat-base-change-cohomology. Agent local-frame cancellation and polynomial-coordinate argument of returned lem-sfb-separating-pair-open steps 11–12 and zero-locus part of step 13."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-kahler-differentials",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-relative-differential-sheaf",
+  "def-sbc-affine-space",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "The structure morphism of $C$ is proper by [lem-kun-projective-implies-proper]. The field $F$ is Noetherian: its only ideals are $0$ and $F$. Hence $\\operatorname{Spec}F$ is Noetherian and [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. These facts supply the properness and Noetherian hypotheses for coherent cohomology below.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; projective properness as in the cited blueprint lemma"
+   }
+  },
+  {
+   "text": "Since $C$ is integral of dimension one, its sole irreducible component has dimension one. Its sole fibre over $\\operatorname{Spec}F$ is therefore equidimensional of dimension one; the smooth-relative-dimension convention of [def-sbc-smooth-morphisms] gives relative dimension one. Apply [lem-sc-smooth-omega-finite-locally-free] with $d=1$: $\\omega$ is locally free of rank one, hence invertible. In local frames $M$ and $\\omega\\otimes M^{\\otimes2}$ are each $\\mathcal O_C$. Thus both are quasi-coherent of finite type, by the definitions of invertibility and sheaf tensor product. By [pqf-lem-coherent-ft-locnoeth] both are coherent on the Noetherian $C$. Apply [lem-pc-coherent-hi] with base $\\operatorname{Spec}F$ and $i=0$ to each: $J$ and $Q$ are finite $F$-modules, equivalently finite-dimensional vector spaces.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; Tag 02O6, lemma-proper-over-affine-cohomology-finite; morphisms.tex Tag 02G1, lemma-smooth-omega-finite-locally-free"
+   }
+  },
+  {
+   "text": "Use the affine-local differential sheaf [def-sc-relative-differential-sheaf]. On an open with frame $e$ write $s=\\alpha e,t=\\beta e$ and set $w_e=(\\beta\\,d\\alpha-\\alpha\\,d\\beta)e^{\\otimes2}$. For another frame $e'=ue$, with $u$ a unit, the coefficients become $u^{-1}\\alpha,u^{-1}\\beta$. The derivation rules [def-weil-pbc-kahler-differentials] give\n$$d(u^{-1}\\alpha)=u^{-1}d\\alpha-u^{-2}\\alpha\\,du,$$\nand likewise for $\\beta$. Consequently\n$$(u^{-1}\\beta)d(u^{-1}\\alpha)-(u^{-1}\\alpha)d(u^{-1}\\beta)=u^{-2}(\\beta\\,d\\alpha-\\alpha\\,d\\beta).$$\nMultiplication by $(e')^{\\otimes2}=u^2e^{\\otimes2}$ cancels this factor. The expressions agree on intersections and under restriction, so the sheaf gluing axiom gives a unique section $\\delta(s,t)$ of $\\omega\\otimes M^{\\otimes2}$.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BK, definition-differentials, derivation rules; agent frame-change cancellation"
+   }
+  },
+  {
+   "text": "The same local formula is additive separately in $\\alpha$ and $\\beta$. For $a\\in F$ the universal derivation has $da=0$, so $d(a\\alpha)=a\\,d\\alpha$, and $w_e(a\\alpha,\\beta)=a\\,w_e(\\alpha,\\beta)=w_e(\\alpha,a\\beta)$. Finally $w_e(\\alpha,\\alpha)=0$ by cancellation of its two identical terms. Equality of sections is local, so $\\delta$ is $F$-bilinear and alternating, including in characteristic two.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BK, definition-differentials; agent bilinearity and alternatingness calculation"
+   }
+  },
+  {
+   "text": "Fix any commutative $F$-algebra $R$ and let $p_R:C_R\\to C$ be the projection. Apply [lem-trf-relative-differential-sheaf-base-change] to $C\\to\\operatorname{Spec}F$ and $\\operatorname{Spec}R\\to\\operatorname{Spec}F$: the canonical map $c:p_R^*\\omega\\to\\Omega^1_{C_R/R}$, characterized locally by $1\\otimes df\\mapsto d(p_R^\\sharp f)$, is an isomorphism $\\omega_R\\simeq\\Omega^1_{C_R/R}$. On $U=\\operatorname{Spec}A\\subset C$ it is the map $(R\\otimes_FA)\\otimes_A\\Omega_{A/F}\\to\\Omega_{R\\otimes_FA/R}$, $b\\otimes df\\mapsto b\\,d(1\\otimes f)$, of [lem-weil-pbc-kahler-differentials-base-change], and these agree on overlaps (the statement of that node; no affine intersection is assumed). The pullback and tensor definitions identify $p_R^*(\\omega\\otimes M^{\\otimes2})$ with $\\omega_R\\otimes M_R^{\\otimes2}$: on an open with frame $e$ of $M$ both sides are $p_R^*\\omega$, locally $\\eta\\otimes e^{\\otimes2}\\mapsto p_R^*\\eta\\otimes e_R^{\\otimes2}$, and a frame change $e'=ue$ multiplies both sides by $u^2$, resp. $(p_R^\\sharp u)^2$. Since $c(1\\otimes d\\alpha)=d(p_R^\\sharp\\alpha)$, pulling back $w_e(\\alpha,\\beta)$ gives exactly the relative formula $w_{e_R}(p_R^\\sharp\\alpha,p_R^\\sharp\\beta)$; by Step 3 these glue, so $p_R^*\\delta(s,t)$ is the relative formula on $p_R^*s,p_R^*t$. For an $F$-algebra map $R\\to R'$ the composite of the canonical maps for $R$ and $R\\to R'$ sends $1\\otimes df$ to $d(1\\otimes f)$, hence is the canonical map for $R'$.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-sc-relative-differential-sheaf",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V0, lemma-base-change-differentials (sheafified algebra.tex Tag 00RV, lemma-differentials-base-change); agent frame comparison"
+   }
+  },
+  {
+   "text": "Every $F$-algebra $R$ is flat over $F$: every exact sequence of vector spaces splits, and its tensor product remains split exact. The structure morphism $C\\to\\operatorname{Spec}F$ is proper (Step 1), hence of finite type, so quasi-compact, and separated, hence quasi-separated by [lem-pc-separated-quasi-separated]. Apply [lem-pc-flat-base-change-cohom] to the cartesian square of $C_R=C\\times_F\\operatorname{Spec}R$, with $g:\\operatorname{Spec}R\\to\\operatorname{Spec}F$ flat, $i=0$, and the quasi-coherent sheaves $M$ and $\\omega\\otimes M^{\\otimes2}$ (equivalently [lem-sc-flat-base-change-coherent] with $k=F,k'=R$). The base change map is an isomorphism; on global sections over $\\operatorname{Spec}R$ in degree $0$ it is the map $s\\otimes r\\mapsto r\\,p_R^*s$, adjunction unit of $p_R^*$ followed by the $R$-module structure. This gives the canonical isomorphisms\n$$J\\otimes_FR\\simeq\\Gamma(C_R,M_R),\\qquad Q\\otimes_FR\\simeq\\Gamma(C_R,\\Omega^1_{C_R/R}\\otimes M_R^{\\otimes2}),$$\nusing Step 5 for the second target. For $r,r'\\in R$, the relative derivation kills $r,r'$, hence the local formula on $r\\,p_R^*s,r'\\,p_R^*t$ is $rr'\\,p_R^*\\delta(s,t)$. Additivity extends this identity to all finite sums of pure tensors. Thus, under these canonical isomorphisms, the formula over $R$ is precisely the scalar extension of the bilinear map $\\delta$; since pullbacks compose, $p_{R'}^*=q^*p_R^*$ for $q:C_{R'}\\to C_R$, and this identity commutes with maps $R\\to R'$.",
+   "uses": [
+    "lem-pc-separated-quasi-separated",
+    "lem-pc-flat-base-change-cohom",
+    "lem-sc-flat-base-change-coherent",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero over a field; algebra.tex Tag 07BK, definition-differentials"
+   }
+  },
+  {
+   "text": "Choose bases $u_1,\\ldots,u_N$ of $J$ and $q_1,\\ldots,q_r$ of $Q$, allowing either basis to be empty. Write $\\delta(u_i,u_j)=\\sum_k c_{kij}q_k$, with $c_{kij}\\in F$. Put $B=F[P]=F[x_1,\\ldots,x_m]$ and write the given sections as $s_P=\\sum_i a_i u_i,t_P=\\sum_j b_j u_j$ with $a_i,b_j\\in B$ under Step 6. That step identifies their relative differential with\n$$\\sum_{k=1}^r h_kq_k,\\qquad h_k=\\sum_{i,j=1}^N c_{kij}a_i b_j\\in B.$$\nUnder the basis identification $\\mathbf A(Q)=\\mathbf A^r_F$, the ring homomorphism $F[y_1,\\ldots,y_r]\\to B$, $y_k\\mapsto h_k$, defines the required polynomial map $\\Delta$ by [def-weil-affine-spectrum, def-sbc-affine-space]. A change of either basis transforms this coordinate expression by the corresponding invertible linear matrix; it represents the same $Q\\otimes_FB$ element and hence the same map to $\\mathbf A(Q)$. For every $F$-algebra map $v:B\\to R$, applying $v$ to the displayed finite sums gives the relative formula on $s_v,t_v$ by Step 6. In particular this is $\\Delta(v)=\\delta(s_v,t_v)$ over every extension field $E/F$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/def-sbc-affine-space.md",
+    "place": "Definition of affine space and the agent finite-coordinate expansion of the local differential formula"
+   }
+  },
+  {
+   "text": "Let $I=(h_1,\\ldots,h_r)\\subset B$. By the Zariski topology on the affine spectrum, $V(I)$ is closed; its complement is $D_\\Delta=\\bigcup_kD(h_k)$. An $E$-point $v$ lies there precisely when some $h_k(v)$ is nonzero, precisely when $\\sum_k h_k(v)q_k$ is nonzero in $Q\\otimes_FE$, since the $q_k$ remain a basis. By Step 7 this is $\\delta(s_v,t_v)\\ne0$. The ideal and zero locus are independent of the basis of $Q$: an invertible linear coordinate change replaces the list of generators by invertible linear combinations. If $r=0$ or all $h_k$ vanish, $I=0$ and $D_\\Delta$ is empty, as required. If $m=0$, all formulas hold in $B=F$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine-spectrum Zariski topology and agent evaluation of the explicit coordinate polynomials"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sbc-smooth-morphisms",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-separated-quasi-separated",
+  "lem-pc-flat-base-change-cohom",
+  "lem-sc-flat-base-change-coherent",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent local-frame and polynomial-coordinate argument; sources of the inputs are recorded in the individual steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two sections s and t of a line bundle M on a smooth curve the expression t ds minus s dt is a global section of differentials tensor M squared compatible with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.DLinearMap_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : S),\\n  (KaehlerDifferential.DLinearMap R S) s = (KaehlerDifferential.ideal R S).toCotangent ⟨1 ⊗ₜ[R] s - s ⊗ₜ[R] 1, ⋯⟩\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ is equipped with the structure of an additive commutative group, inherited from its module structure over $S$. This group opera\"}\n  {\"name\": \"KaehlerDifferential.D_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (s : S),\\n  (KaehlerDifferential.D R S) s = (KaehlerDifferential.ideal R S).toCotangent ⟨1 ⊗ₜ[R] s - s ⊗ₜ[R] 1, ⋯⟩\", \"doc\": \"For any element $ s $ in an $ R $-algebra $ S $, the Kähler differential $ d(s) $ is equal to the equivalence class of $ 1 \\\\otimes s - s \\\\otimes 1 $ in the cotangent module $ \\\\Omega_{S/R} $.\"}\n  {\"name\": \"Algebra.Generators.toKaehler_tmul_D\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  {P : Algebra.Generators R S ι} (i : ι),\\n  P.toExtension.toKaehler (1 ⊗ₜ[P.toExtension.Ring] (KaehlerDifferential.D R P.Ring) (MvPolynomial.X i)) =\\n    (KaehlerDifferential.D R S) (P.val i)\", \"doc\": \"For an algebra extension $ P $ generated by a set $ \\\\iota $ over a commutative ring $ R $, the Kähler differential of the generator $ X_i $ satisfies the identity $ 1 \\\\otimes d(X_i) = d(P(X_i)) $ in t\"}\n  {\"name\": \"Algebra.Extension.Hom.sub_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For algebra homomorphisms $ f,g:P\\\\to P' $ between algebra extensions, and elements $ r \\\\in R $, $ x \\\\in P $, the difference $ f - g $ applied to the tensor product $ r \\\\otimes dx $ equals $ r $ multip\"}\n  {\"name\": \"Algebra.Extension.Hom.sub_one_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra homomorphisms $ f, g : P \\\\to P' $ between algebra extensions and any $ x $ in the cotangent space of $ P $, the action of $ f - g $ on the tensor product $ 1 \\\\otimes dx $ equals the im\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"sectionOfRetractionKerToTensorAux\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebr\", \"doc\": \"An $ R $-algebra homomorphism from $ S $ to $ P $ constructed by adjusting a given section $ \\\\sigma: S \\\\to P $ with a term involving the Kähler differential derivation $ d $ and a linear map $ l: S \\\\o\"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A : Type u_2) →\\n      (B : Type u_3) →\\n        [inst_1 : CommRing A] →\\n          [inst_2 : CommRing B] →\\n            [inst_3 : Algebra R A] →\\n              [inst_4 : Algebra A B] →\\n                [inst_5 : Algebra R B] → [IsScalarTower R A B] → TensorProd\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ an $ R $-algebra, $ B $ an $ A $-algebra, and $ B $ an $ R $-algebra via the scalar tower $ R \\\\to A \\\\to B $, this defines the $ B $-linear is\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Wronskian t ds minus s dt of polynomially parametrized sections defines a polynomial map with closed zero locus and commutes with scalar extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.wronskian\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"(a b : R[X]) : R[X]\", \"doc\": \"The Wronskian of two polynomials $ a $ and $ b $ is defined as $ a \\\\cdot b' - a' \\\\cdot b $, where $ b' $ and $ a' $ denote the formal derivatives of $ b $ and $ a $, respectively. This results in a po\"}\n  {\"name\": \"Polynomial.wronskianBilin\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \": R[X] →ₗ[R] R[X] →ₗ[R] R[X]\", \"doc\": \"For any commutative ring $ R $, this bilinear form on the polynomial ring $ R[X] $ maps a pair of polynomials $ (f, g) $ to their Wronskian $ f'g - fg' $, where $ f' $ and $ g' $ denote the formal der\"}\n  {\"name\": \"Polynomial.wronskian_neg_eq\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"(a b : R[X]) : -wronskian a b = wronskian b a\", \"doc\": \"For any polynomials $a$ and $b$ over a commutative ring $R$, the negative of their Wronskian equals the Wronskian of $b$ and $a$, i.e., $-\\\\text{Wronskian}(a, b) = \\\\text{Wronskian}(b, a)$.\"}\n  {\"name\": \"Polynomial.wronskian_neg_left\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"(a b : R[X]) : wronskian (-a) b = -wronskian a b\", \"doc\": \"For any polynomials $a$ and $b$ over a commutative ring $R$, the Wronskian of $-a$ and $b$ is equal to the negative of the Wronskian of $a$ and $b$, i.e., $\\\\operatorname{Wronskian}(-a, b) = -\\\\operator\"}\n  {\"name\": \"Polynomial.wronskianBilin_apply\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"(a b : R[X]) : wronskianBilin R a b = wronskian a b\", \"doc\": \"For any commutative ring $ R $ and polynomials $ a, b \\\\in R[X] $, the Wronskian bilinear form evaluated at $ (a, b) $ is equal to the Wronskian of $ a $ and $ b $, i.e., $ \\\\text{wronskianBilin}_R(a, b\"}\n  {\"name\": \"Polynomial.wronskian_add_right\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"(a b c : R[X]) : wronskian a (b + c) = wronskian a b + wronskian a c\", \"doc\": \"For any polynomials $a, b, c$ over a commutative ring $R$, the Wronskian satisfies $\\\\operatorname{Wronskian}(a, b + c) = \\\\operatorname{Wronskian}(a, b) + \\\\operatorname{Wronskian}(a, c)$, where the Wro\"}\n  {\"name\": \"Polynomial.wronskian_add_left\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"(a b c : R[X]) : wronskian (a + b) c = wronskian a c + wronskian b c\", \"doc\": \"For any polynomials $a$, $b$, and $c$ over a commutative ring $R$, the Wronskian of $a + b$ and $c$ is equal to the sum of the Wronskians of $a$ and $c$ and of $b$ and $c$, i.e., $ \\\\text{Wronskian}(a \"}\n  {\"name\": \"Polynomial.degree_wronskian_lt_add\", \"module\": \"Mathlib.RingTheory.Polynomial.Wronskian\", \"type\": \"{a b : R[X]} (ha : a ≠ 0) (hb : b ≠ 0) : (wronskian a b).degree < a.degree + b.degree\", \"doc\": \"For any non-zero polynomials $ a $ and $ b $ over a commutative ring $ R $, the degree of their Wronskian $ ab' - a'b $ satisfies $ \\\\deg(ab' - a'b) < \\\\deg(a) + \\\\deg(b) $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, AlgebraicGeometry.Scheme",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ww]ronskian|alternatingDifferential|pencilDifferential|normPencil",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A frame independent alternating differential of two line bundle sections commutes with flat base change and gives polynomial coordinates on their parameter space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.toKaehler_tmul_D\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  {P : Algebra.Generators R S ι} (i : ι),\\n  P.toExtension.toKaehler (1 ⊗ₜ[P.toExtension.Ring] (KaehlerDifferential.D R P.Ring) (MvPolynomial.X i)) =\\n    (KaehlerDifferential.D R S) (P.val i)\", \"doc\": \"For an algebra extension $ P $ generated by a set $ \\\\iota $ over a commutative ring $ R $, the Kähler differential of the generator $ X_i $ satisfies the identity $ 1 \\\\otimes d(X_i) = d(P(X_i)) $ in t\"}\n  {\"name\": \"Algebra.Generators.cotangentSpaceBasis_repr_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  (P : Algebra.Generators R S ι) (r : S) (x : P.Ring) (i : ι),\\n  (P.cotangentSpaceBasis.repr (r ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) x)) i =\\n    r * (MvPolynomial.aeval P.val) ((MvPolynom\", \"doc\": \"For a commutative ring $ R $, a set of generators $ \\\\iota $, and an algebra extension $ P = R[\\\\iota] $, the representation of the tensor product $ r \\\\otimes d(x) $ in the cotangent space basis $ \\\\{1 \\\\\"}\n  {\"name\": \"Algebra.Presentation.differentials.comm₂₃'\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ),\\n  pres.toExtension.toKaehler ∘ₗ ↑pres.cotangentSpaceBasis.repr.symm =\\n    Finsupp.linearCombination S fun g => (KaehlerDifferential.D R S) (\", \"doc\": \"The composition of the Kähler differential map with the inverse of the cotangent space basis representation equals the linear combination of derivations applied to the generators of the algebra presen\"}\n  {\"name\": \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  (P : Algebra.Generators R S ι) (x : P.toExtension.Ring) (i : ι),\\n  (P.cotangentSpaceBasis.repr (1 ⊗ₜ[P.toExtension.Ring] (KaehlerDifferential.D R P.toExtension.Ring) x)) i =\\n    (MvPolynomial.\", \"doc\": \"For a commutative ring $ R $ with algebra generators $ \\\\{X_i\\\\}_{i \\\\in \\\\iota} $, the representation of the tensor product $ 1 \\\\otimes dX_i $ in the cotangent space basis evaluates to the partial deriva\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.baseChange_jacobian\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (T : Type u_1) [inst_3 : CommRing T] [inst_4 : Algebra R T] (P : Algebra.PreSubmersivePresentation R S ι σ)\\n  [inst_5 : Finite σ], (Algebra.PreSubmersivePresentation.baseChange T \", \"doc\": \"For a finite type $\\\\sigma$, the Jacobian determinant of the base-changed presentation $P_{T}$ equals the tensor product of $1$ with the original Jacobian determinant, i.e., $\\\\text{Jacobian}(P_{T}) = 1\"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_symm_single\", \"module\": \"Mathlib/RingTheory/Kaehler/Polynomial\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (σ : Type u_1) (i : σ) (x : MvPolynomial σ R),\\n  (KaehlerDifferential.mvPolynomialBasis R σ).repr.symm (Finsupp.single i x) =\\n    x • (KaehlerDifferential.D R (MvPolynomial σ R)) (MvPolynomial.X i)\", \"doc\": \"For a commutative ring $ R $ and type $ \\\\sigma $, applying the inverse of the canonical basis representation map for Kähler differentials $ \\\\Omega_{R[\\\\sigma]/R} $ to the finite support function with v\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"(R : Type u₁) →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta_{\\\\text{Aux}}: Q.\\\\text{Ring} \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ constructed by summing over finite supports, where each term is the tensor product of elements from $T$ and Kähler diff\"}\n  {\"name\": \"sectionOfRetractionKerToTensorAux_prop\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] (l : TensorProduct P S Ω[P⁄R] →ₗ[P] ↥(RingHom.ker (algebraMap P S))),\\n  l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id →\\n    ∀ (x \", \"doc\": \"For elements $x, y$ in a ring $P$ with a ring homomorphism $\\\\text{algebraMap}: P \\\\to S$, if $\\\\text{algebraMap}(x) = \\\\text{algebraMap}(y)$, then $x - l(1 \\\\otimes d x) = y - l(1 \\\\otimes d y)$ in the mod\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this scheme-level construction or its full conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "def wronskian|def wronskianBilin|mapBaseChange",
+   "results": "Mathlib/RingTheory/Polynomial/Wronskian.lean:43,48 defines Polynomial.wronskian and wronskianBilin for R[X]; read lines 35–65. They do not state line-bundle gluing or scheme cohomology base change. KaehlerDifferential.mapBaseChange in RingTheory/Kaehler/Basic.lean:719 is an algebraic ingredient only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bilinear alternating map on finite dimensional global sections of a line bundle given by a Wronskian differential defines polynomial equations for its vanishing locus",
+   "results": "msearch.py: OK, 8 hits; LinearMap.IsAlt, LinearMap.BilinForm.IsAlt, Polynomial.wronskianBilin, Polynomial.wronskian, LinearMap.IsAlt.isRefl, AlternatingMap.mk, LinearMap.IsAlt.self_eq_zero, Polynomial.wronskian_neg_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial Wronskians and algebraic cotangent constructions do not give the scheme-level line-bundle formula, base change, and parameter-space conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The alternating differential t ds minus s dt of two sections of an invertible sheaf on a smooth projective curve gives a polynomial map on parameter space compatible with arbitrary scalar extension",
+   "results": "msearch.py: OK, 8 hits; Algebra.Generators.H1Cotangent.δAux, Algebra.PreSubmersivePresentation.aevalDifferential, Algebra.PreSubmersivePresentation.differential, Algebra.Generators.cotangentCompAwaySec, WeierstrassCurve.Affine.CoordinateRing.YClass, Algebra.Generators.H1Cotangent.δAux_monomial, WeierstrassCurve.Affine.CoordinateRing.XClass, WeierstrassCurve.Affine.CoordinateRing.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial Wronskians and algebraic cotangent constructions do not give the scheme-level line-bundle formula, base change, and parameter-space conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a vector bundle on a proper scheme are finite dimensional and base change gives the relative Wronskian of a family of sections",
+   "results": "msearch.py: OK, 8 hits; Polynomial.wronskianBilin_apply, Polynomial.isAlt_wronskianBilin, KaehlerDifferential.finite, Polynomial.wronskianBilin, Polynomial.wronskian_self_eq_zero, Polynomial.wronskian_eq_of_sum_zero, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, Algebra.PreSubmersivePresentation.jacobian",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial Wronskians and algebraic cotangent constructions do not give the scheme-level line-bundle formula, base change, and parameter-space conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separating-pair-open",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, clause (3), alteration reduction: local separating pencils in the equivariant curve input; lem-sfb-separating-pair-open, returned steps 11–12 and zero-locus part of step 13. This item proves frame independence, scalar extension, polynomial coordinates, and the nonzero open locus. The inherited created.item chain leaves the imported DAG, so blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sfb-separating-pair-open",
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-norm-pencil-differential-polynomial",
+  "worker": "stage1",
+  "summary": "Proved the frame cancellation, alternating bilinearity, arbitrary-algebra base change, finite polynomial coordinate expansion, and zero-locus characterization. Reused all required non-elementary inputs in the existing DAG; no new nodes. Preserved the statement and inherited searches, and added missing definition dependencies for the relative differential sheaf and affine spaces. Checked characteristic two, vanishing section spaces, m=0, and nonreduced base algebras. Repair after the live-DAG promotion return: rebased the retained delivery through the current-origin packaging tool, re-read every proof dependency and checked all 22 citation quotes against the current statements. Made the overlap calculation explicit in Step 5, including localization denominators and affine refinements.",
+  "blueprint": "Realizes the local-pencil auxiliary argument under direct-image clause (3), specifically the returned separating-pair proof steps 11–12 and zero-locus part of step 13. No change of unit or chapter route. Inherited ancestry has no imported DAG endpoint; ancestor prints None.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-implies-proper input for coherent cohomology; no local-pencil node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence over the field, needed to apply coherent-finiteness."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Generic smooth differential rank theorem; gives the line bundle of differentials."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion for the locally rank-one sheaves; this is not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic proper coherent-cohomology finiteness, specialized to degree zero over a field."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-base-change",
+    "why": "Generic algebraic base-change isomorphism on affine charts, including its action on df."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "Generic flat base change for global sections; its statement explicitly permits a general commutative F-algebra, not only a field extension."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic sheaf-level base change of relative differentials (Stacks 01V0) with its explicit local formula; identifies the pullback of omega with the relative differentials over R (reviewer FIX)."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Flat base change stated for the canonical base change map, so the degree-zero comparison is s tensor r to r p_R^* s (reviewer FIX)."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Separated implies quasi-separated, hypothesis of flat base change (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-sc-flat-base-change-coherent",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-86caa2c48",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-86caa2c48 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statement of each of the 15 cited nodes plus the 3 nodes added below. I checked Stacks 01V0 (morphisms.tex lemma-base-change-differentials), 02KH (coherent.tex lemma-flat-base-change-cohomology) and 00RV at the cited places. There are no new nodes, no SGA citation and no re-split note. The statement is unchanged and is not weakened. This head re-delivers the split after a promotion return. Compared with the earlier head a677, only the Step 5 overlap text changed, and the earlier reviewer FIX is not in it; I checked both faults again on this head. Small cases tested: Q=0, J=0 or proportional s,t, m=0, characteristic 2, finite F and nonreduced R. I recomputed Step 3: the u^-3 terms cancel and e'^2=u^2e^2 removes the factor u^-2. Steps 1-4 and 7-8 are correct. Fault 1 (Step 5, C1/C4): the step identifies p_R^*omega on Spec(R⊗A) with (R⊗A)⊗_AΩ_{A/F}, which no cited node states, and it asserts the overlap gluing. Repair: it now cites the existing lem-trf-relative-differential-sheaf-base-change (01V0: the canonical map is an isomorphism with the local formula, and the local identifications agree on overlaps); this creates no cycle. Fault 2 (Step 6, C4): lem-sc-flat-base-change-coherent gives only an abstract isomorphism, but Steps 6-8 need the canonical map s⊗r↦r p_R^*s. Repair: it now cites lem-pc-flat-base-change-cohom (02KH, the base change map is an isomorphism). Its hypotheses hold: R is flat over F, and C→Spec F is proper, so finite type gives quasi-compact and separated gives quasi-separated via lem-pc-separated-quasi-separated. Batch 5: lem-pc-coherent-hi (02O5/02O6, finiteness of coherent cohomology for proper morphisms) is outside both assumptions; its trf/pod closure is a definition and generic limit and base-change lemmas reached through the Chow lemma. lem-trf-relative-differential-sheaf-base-change is generic 01V0 with no other trf/pod/nt-assume node in its closure. Both are accepted. The worker's 7 tool_uses are accepted, and my 3 additions are of the same generic kind. The fix file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-norm-pencil-differential-polynomial.json: Steps 5 and 6, proof_deps and tool_uses; the statement and stmt_deps are untouched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormPencilDifferentialPolynomial",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.norm_pencil_differential_polynomial",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.pencilSections",
+   "AlgebraicGeometry.Scheme.Modules.pencilTarget",
+   "AlgebraicGeometry.Scheme.Modules.PencilLocalFormula",
+   "AlgebraicGeometry.Scheme.Modules.pencilCurve",
+   "AlgebraicGeometry.Scheme.Modules.pencilProjection",
+   "AlgebraicGeometry.Scheme.Modules.pencilStructure",
+   "AlgebraicGeometry.Scheme.Modules.pencilModule",
+   "AlgebraicGeometry.Scheme.Modules.PencilDifferentialBaseChange",
+   "AlgebraicGeometry.Scheme.Modules.pencilCoordinatePolynomials",
+   "AlgebraicGeometry.Scheme.Modules.PencilPolynomialLaw",
+   "AlgebraicGeometry.Scheme.Modules.norm_pencil_differential_polynomial"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormPencilDifferentialPolynomial.lean",
+  "statement": "theorem norm_pencil_differential_polynomial {F : Type u} [Field F] {C : Scheme.{u}} (f : C ⟶ Spec (.of F)) [Smooth f] [IsHProjective f] [GeometricallyIntegral f] [IsIntegral C] [LocallyOfFiniteType f] [QuasiCompact f] (_hdim : topologicalKrullDim C = 1) (M : C.Modules) [M.IsInvertible] : f.relativeDifferentials.IsInvertible ∧ FiniteDimensional F (pencilSections f M) ∧ FiniteDimensional F (pencilSections f (pencilTarget f M)) ∧ ∃ δ : pencilSections f M →ₗ[F] pencilSections f M →ₗ[F] pencilSections f (pencilTarget f M), (∀ s, δ s s = 0) ∧ PencilLocalFormula f M (fun s t ↦ δ s t) ∧ ∃ bc : ∀ (R : Type u) [CommRing R] [Algebra F R], PencilDifferentialBaseChange f M δ R, PencilPolynomialLaw f M δ bc",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper declarations expand only this node’s objects and conclusions. Base-change comparisons are fixed on actual tensor-pullback sections and universal differentials. Tensor factors are written R ⊗[F] Γ, canonically the same as the statement’s Γ ⊗[F] R. Polynomial morphisms and arbitrary-algebra specialization are stated explicitly in every finite basis; no statement correction or additional hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-659d86e7b",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Read node, all 15 stmt_dep records, module, report (Worker report + Second reading by Q55 present). Hypotheses and conclusions match clause by clause: Smooth/IsHProjective/GeometricallyIntegral/IsIntegral/LocallyOfFiniteType+QuasiCompact/topologicalKrullDim=1, M.IsInvertible; ω invertible, J,Q finite-dim; δ bilinear alternating with PencilLocalFormula over every IsFreeGenerator frame (sign b da − a db), which pins δ uniquely. Base-change data omegaIso/targetIso/sectionsM/sectionsQ/differential all normalized on actual pullback sections and d, for every R : Type u. Polynomial law: Δ pinned by SpecIso diagram = Spec.map(aeval h); h_k = Σ c_kij a_i b_j recomputed; specialization for all algebras; zeroLocus closed/open complement; E-point criterion checked. Edge cases char 2, N=0/r=0, m=0, nonreduced R checked. Statement verbatim, declarations complete, no name clash in side-live, node otherwise unchanged vs live. Only sorry, no hollow defs. Not compiled (no change). Note: IsIntegral C redundant but listed by the node."
+ }
+}

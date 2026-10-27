@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-sheaf-pullback-cone",
+ "kind": "definition",
+ "title": "Explicit compatible-pair presheaf pullback cone",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $F,G,H:(\\mathrm{Sch}/S)^{\\mathrm{op}}\\to\\mathrm{Sets}$ be presheaves of sets (with natural transformations as in [def-weil-pbc-sites-and-cohomology]), with values in the same universe as the schemes, and let $f:F\\to H$, $g:G\\to H$. Define the compatible-pair pullback cone of $f,g$ to have vertex the presheaf $P(T)=\\{(x,y)\\in F(T)\\times G(T):f_T(x)=g_T(y)\\}$, restriction $P(a)(x,y)=(F(a)(x),G(a)(y))$, and cone legs the two coordinate projections $P\\to F$ and $P\\to G$. Naturality of $f,g$ preserves the displayed equality. This definition applies to arbitrary presheaves; no sheaf or representability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 04T9 (lemma-fibre-product-spaces-over-sheaf-with-representable-diagonal), first sentence of proof, and 02X2 (lemma-fibre-product-spaces), universal-property paragraph; explicit pointwise presheaf construction underlying these sheaf fibre products."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The presheaf pullback of two natural transformations to a type valued functor has compatible pairs as sections with componentwise restriction",
+   "results": "8 hits: TopCat.Presheaf.map_restrict; CategoryTheory.NatTrans.onPresheaf; CategoryTheory.Presieve.FamilyOfElements.Compatible.pullback; TopCat.Presheaf.IsCompatible.sectionPairwise; CategoryTheory.Presieve.Arrows.PullbackCompatible; TopCat.Presheaf.IsCompatible; CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback; TopCat.Presheaf.pushforwardPullbackAdjunction",
+   "date": "2026-10-22",
+   "verdict": "No separately owned scheme-presheaf compatible-pair construction. Mathlib supplies the generic PullbackCone.combine and explicit type pullback; specialize those by moving the existing project abbreviation unchanged, without a duplicate definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PullbackCone.combine",
+   "results": "5 hits: CategoryTheory.Limits.PullbackCone.combine; CategoryTheory.Limits.PullbackCone.combineIsLimit; CategoryTheory.Limits.PullbackCone.combine_pt_obj; CategoryTheory.Limits.PullbackCone.combine_pt_map; CategoryTheory.Limits.PullbackCone.combine_π_app",
+   "date": "2026-10-22",
+   "verdict": "No separately owned scheme-presheaf compatible-pair construction. Mathlib supplies the generic PullbackCone.combine and explicit type pullback; specialize those by moving the existing project abbreviation unchanged, without a duplicate definition."
+  },
+  {
+   "tool": "grep",
+   "query": "def combine|abbrev sheafPullbackCone|def pullbackCone",
+   "results": "17 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean; Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean; Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "No separately owned scheme-presheaf compatible-pair construction. Mathlib supplies the generic PullbackCone.combine and explicit type pullback; specialize those by moving the existing project abbreviation unchanged, without a duplicate definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n sheafPullbackCone lean/Sheaf lean/WeilConjectures; rg -l \"sheafPullbackCone|compatible.pair.*presheaf|pointwise.*pullback.*presheaf\" dag/nodes; blueprint_refs.py search \"presheaf pullback\"",
+   "results": "Only Sheaf/AlgebraicGeometry/SheafPullbackDiagonal.lean defines sheafPullbackCone; no WeilConjectures match. DAG search finds theorem nodes and unrelated categorical nodes, no definition node for this construction. Blueprint search returns def-weil-pbc-etale-sheaves, not a pullback definition. The theorem node lem-trf-sheaf-pullback-diagonal bundled the abbreviation and is repaired in this packet.",
+   "date": "2026-10-22",
+   "verdict": "No definition node owns the existing abbreviation; extract it rather than duplicating it."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-presheaf-pullback-etale-point-lifting",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Explicit compatible-pair presheaf underlying the scheme-test reassociation and field-extension lifting in old proof steps 6 and 7 of lem-trf-space-fibre-products-etale-covers, below lem-trf-local-term-locality.",
+   "via": [
+    "lem-trf-presheaf-pullback-etale-point-lifting",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SheafPullbackCone",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.sheafPullbackCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafPullbackCone.lean",
+  "statement": "abbrev sheafPullbackCone {S : Scheme.{u}} {F G H : (Over S)ᵒᵖ ⥤ Type u}\n    (f : F ⟶ H) (g : G ⟶ H) : PullbackCone f g",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "C3 restoration after quarantine: the same compatible-pair abbreviation is constructed directly with Types.PullbackObj, componentwise restriction and coordinate projections, rather than PullbackCone.combine. Its name, binders, universe and result type are unchanged; the mathematical definition and dependency edges remain unchanged. Both archived consumers remain unchanged. The unused SiteCoveringAxioms import and generic functor-category pullback assembly import are removed; Over.Basic is imported explicitly."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "maintenance-NC-point-lifting",
+  "group": "NC",
+  "result": "pass",
+  "note": "Maintenance ownership extraction requested by the immutable-head H2/C5 return. Checked Stacks spaces.tex Tags 04T9/02X2 and exact identity with the existing reviewed compatible-pair construction. No new mathematical assertion; statement/proof dependencies and blueprint ancestry checked."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "maintenance-NC-point-lifting",
+  "group": "NC",
+  "result": "pass",
+  "note": "Definition body and binders are byte-identical to the previous abbreviation in SheafPullbackDiagonal. Public import preserves the old API, with one declaration owner. Validated through tools/lean_file.sh separately with 60-second limits before committing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T102516-L-2912642",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

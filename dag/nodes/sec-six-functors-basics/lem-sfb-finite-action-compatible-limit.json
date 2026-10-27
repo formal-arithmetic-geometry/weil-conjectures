@@ -1,0 +1,383 @@
+{
+ "id": "lem-sfb-finite-action-compatible-limit",
+ "kind": "statement",
+ "title": "Compact compatible-family limits of finite continuous actions",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $G$ be any topological group and let $I$ be a small nonempty partially ordered set, not assumed directed. For each $i\\in I$ let $Q_i$ be a finite set with its discrete topology and a jointly continuous left $G$-action. For $i\\le j$ let $r_{ji}:Q_j\\to Q_i$ be $G$-equivariant maps satisfying $r_{ii}=\\mathrm{id}$ and $r_{ki}=r_{ji}\\circ r_{kj}$ for $i\\le j\\le k$. Put $T=\\prod_{i\\in I}Q_i$ with product topology and\n$$Q=\\{z\\in T:r_{ji}(z_j)=z_i\\text{ for all }i\\le j\\}$$\nwith subspace topology. The space $T$ is compact Hausdorff and totally disconnected, the compatibility subset $Q$ is closed in $T$, and $Q$ is compact Hausdorff and totally disconnected. The formulas $(gz)_i=gz_i$ define a jointly continuous left $G$-action on $Q$, and every projection $Q\\to Q_i$ is continuous and equivariant. Empty stages and an empty compatible-family space are permitted, and no transition map is assumed surjective.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Stacks Tags 08ZU (theorem-tychonov), 08ZV (lemma-inverse-limit-quasi-compact), 08ZY (lemma-profinite, (1) implies (2)), 0A2P (lemma-describe-limits); agent expansion of coordinate action in Bhatt–Scholze Example 4.1.10, p. 28. Returned parent proof steps 8–10."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Every $Q_i$ is quasi-compact: from an open cover choose one member per point, giving a finite subcover (empty if $Q_i$ is empty). Apply [lem-weil-pbc-tychonoff-product-quasi-compact] to this small family. Thus $T$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZU, theorem-tychonov; finite-space specialization."
+   }
+  },
+  {
+   "text": "For $a\\in Q_i$, the cylinder $C_{i,a}=\\{z:z_i=a\\}$ is open; its complement is the union of the other $i$-coordinate cylinders, so it is closed too. Distinct tuples differ at some $i$ and are separated by $C_{i,a}$ and its complement. These sets also separate any subset containing those tuples, making it disconnected. Hence $T$ is Hausdorff and totally disconnected. Intersecting these cylinders with $Q$ proves the same two properties for its subspace topology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZY, lemma-profinite, proof of (1) implies (2): distinct-coordinate separation, written out for the product and its subspace."
+   }
+  },
+  {
+   "text": "If $z\\notin Q$, choose $i\\le j$ with $r_{ji}(z_j)\\ne z_i$. The open cylinder fixing coordinates $i,j$ to $z_i,z_j$ contains $z$ and is disjoint from $Q$. Thus $T\\setminus Q$ is open and $Q$ is closed. This argument requires neither directedness nor surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZV, lemma-inverse-limit-quasi-compact: closedness of the compatibility locus; direct discrete-cylinder argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-closed-in-quasi-compact] with $X=T$ and $E=Q$, using step 1 and step 3. It gives quasi-compactness of $Q$ in exactly the induced topology. Together with step 2, $T$ and $Q$ are compact Hausdorff and totally disconnected.",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005C, lemma-closed-in-quasi-compact; applied as in Tag 08ZV."
+   }
+  },
+  {
+   "text": "For $z\\in Q$, equivariance gives $r_{ji}(gz_j)=g r_{ji}(z_j)=gz_i$, so coordinatewise action preserves $Q$. The identities $(1z)_i=z_i$ and $((gh)z)_i=g(hz_i)$ prove the action laws by equality of coordinates. The projection $p_i(z)=z_i$ is equivariant because $p_i(gz)=gz_i=g p_i(z)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28; agent expansion of the coordinatewise action on pro-objects in finite discrete G-sets."
+   }
+  },
+  {
+   "text": "Each $p_i$ is continuous since $p_i^{-1}(U)=Q\\cap\\pi_i^{-1}(U)$ is open for open $U\\subseteq Q_i$. The map $b_i:G\\times Q\\to G\\times Q_i$, $(g,z)\\mapsto(g,p_i(z))$, is continuous: inverse images of open rectangles are $V\\times p_i^{-1}(U)$. Write $a_i$ for the given jointly continuous stage action and $a$ for step 5. Then $a^{-1}(p_i^{-1}(U))=b_i^{-1}(a_i^{-1}(U))$ is open. Finite intersections and unions of the sets $p_i^{-1}(U)$ give every open of $Q$, by the product and subspace definitions. Therefore $a$ is jointly continuous, also when $Q$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28; agent expansion using the defining bases of product and subspace topologies, also described before Stacks Tag 0A2P (without using its cofiltered-only conclusion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-closed-in-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZU, 08ZV and 08ZY (1) implies (2), with the elementary coordinate-action expansion of Bhatt-Scholze Example 4.1.10, p. 28."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The compatible family limit of finite discrete continuous group actions is compact Hausdorff totally disconnected with continuous coordinatewise action",
+   "results": {
+    "t": "2026-10-22T06:09:41Z",
+    "tool": "leanfinder",
+    "query": "The compatible family limit of finite discrete continuous group actions is compact Hausdorff totally disconnected with continuous coordinatewise action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemSubgroupLimitConePtAux",
+     "ProfiniteAddGrp.instCompactSpaceSubtypeForallCarrierToTopTotallyDisconnectedSpaceToProfiniteObjMemAddSubgroupLimitConePtAux",
+     "ProfiniteGrp.toLimit",
+     "ProfiniteGrp.limit",
+     "ProfiniteGrp.instIsTopologicalGroupCarrierToTopTotallyDisconnectedSpacePtProfiniteLimitConeCompForget₂",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "Profinite.indexCone_isLimit",
+     "LightProfinite.instTotallyDisconnectedSpaceCarrierToTopTruePtCompHausLimitConeCompLightProfiniteToCompHaus"
+    ],
+    "digest": "0f4e8c8c12a41d18"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ProfiniteGrp limits concern group-valued diagrams, not finite G-sets with possible empty stages. TopCat.partialSections.closed supplies only closedness; no hit supplies the compatible-family action and its joint continuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small diagram of finite discrete G sets has a closed compatible family space with a jointly continuous group action",
+   "results": {
+    "t": "2026-10-22T06:10:53Z",
+    "tool": "leanfinder",
+    "query": "A small diagram of finite discrete G sets has a closed compatible family space with a jointly continuous group action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+     "ProperlyDiscontinuousSMul",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "Finite.to_properlyDiscontinuousSMul",
+     "TopCat.partialSections.closed",
+     "ProperSMul",
+     "CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup"
+    ],
+    "digest": "f260303b52f530ec"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ProfiniteGrp limits concern group-valued diagrams, not finite G-sets with possible empty stages. TopCat.partialSections.closed supplies only closedness; no hit supplies the compatible-family action and its joint continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TopCat\", \"limitCone\", \"ContinuousSMul\"",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "loogle",
+    "query": "\"TopCat\", \"limitCone\", \"ContinuousSMul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ProfiniteGrp limits concern group-valued diagrams, not finite G-sets with possible empty stages. TopCat.partialSections.closed supplies only closedness; no hit supplies the compatible-family action and its joint continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*(ContinuousSMul|continuousSMul)|(ContinuousSMul|continuousSMul).*limit",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "grep",
+    "query": "limit.*(ContinuousSMul|continuousSMul)|(ContinuousSMul|continuousSMul).*limit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ProfiniteGrp limits concern group-valued diagrams, not finite G-sets with possible empty stages. TopCat.partialSections.closed supplies only closedness; no hit supplies the compatible-family action and its joint continuity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limits of finite discrete continuous actions of a topological group are profinite spaces with continuous action",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "leansearch",
+    "query": "Inverse limits of finite discrete continuous actions of a topological group are profinite spaces with continuous action",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of finite discrete spaces with coordinatewise continuous group actions has a closed invariant space of compatible families and jointly continuous action",
+   "results": {
+    "t": "2026-10-22T10:23:22Z",
+    "tool": "leanfinder",
+    "query": "A product of finite discrete spaces with coordinatewise continuous group actions has a closed invariant space of compatible families and jointly continuous action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instProperConstSMulForall",
+     "isClosed_setOf_map_smul",
+     "TopCat.partialSections.closed",
+     "ProperSMul",
+     "instProperConstSMulProd",
+     "MulAction.isClosedMap_quotient",
+     "instProperSMulSubtypeMemSubgroupOfIsClosedCoe",
+     "ProperSMul.isProperMap_smul_pair_set"
+    ],
+    "digest": "ff3b997be43e1a0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: Profinite and ProfiniteGrp limit constructions supply underlying spaces or groups, not finite G-set actions with this invariant compatibility locus. TopCat.partialSections.closed supplies closedness only; Action.ofMulActionLimitCone concerns discrete diagrams of types without topology. Read the returned declarations; the coordinate action and joint continuity still require the written argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousSMul\", \"Pi\"",
+   "results": {
+    "t": "2026-10-22T10:23:23Z",
+    "tool": "loogle",
+    "query": "\"ContinuousSMul\", \"Pi\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "MvPowerSeries.WithPiTopology.instContinuousSMul",
+     "SeparatingDual.instNontrivialContinuousLinearMapIdOfContinuousSMul"
+    ],
+    "digest": "ff143c89fd10a231"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: Profinite and ProfiniteGrp limit constructions supply underlying spaces or groups, not finite G-set actions with this invariant compatibility locus. TopCat.partialSections.closed supplies closedness only; Action.ofMulActionLimitCone concerns discrete diagrams of types without topology. Read the returned declarations; the coordinate action and joint continuity still require the written argument."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousSMul.*(Pi|[Ll]imit)|[Ll]imit.*continuousSMul|partialSections.closed|Pi\\.continuousSMul",
+   "results": {
+    "t": "2026-10-22T10:23:31Z",
+    "tool": "grep",
+    "query": "continuousSMul.*(Pi|[Ll]imit)|[Ll]imit.*continuousSMul|partialSections.closed|Pi\\.continuousSMul",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/TopCat/Limits/Konig.lean",
+     "Mathlib/Topology/Category/TopCat/Limits/Konig.lean",
+     "Mathlib/Topology/Category/TopCat/Limits/Konig.lean"
+    ],
+    "digest": "a3140af73a23b294"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: Profinite and ProfiniteGrp limit constructions supply underlying spaces or groups, not finite G-set actions with this invariant compatibility locus. TopCat.partialSections.closed supplies closedness only; Action.ofMulActionLimitCone concerns discrete diagrams of types without topology. Read the returned declarations; the coordinate action and joint continuity still require the written argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Limits in the category of continuous actions of a topological group on compact totally disconnected spaces are constructed on compatible tuples",
+   "results": {
+    "t": "2026-10-22T10:23:32Z",
+    "tool": "leanfinder",
+    "query": "Limits in the category of continuous actions of a topological group on compact totally disconnected spaces are constructed on compatible tuples",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.limit",
+     "Profinite.hasLimits",
+     "ProfiniteGrp.limitConeIsLimit",
+     "Profinite.indexCone_isLimit",
+     "ProfiniteGrp.limitCone",
+     "ProfiniteGrp.instHasLimit",
+     "LightProfinite.limitConeIsLimit",
+     "Profinite.limitConeIsLimit"
+    ],
+    "digest": "ee88acdaae6a5710"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: Profinite and ProfiniteGrp limit constructions supply underlying spaces or groups, not finite G-set actions with this invariant compatibility locus. TopCat.partialSections.closed supplies closedness only; Action.ofMulActionLimitCone concerns discrete diagrams of types without topology. Read the returned declarations; the coordinate action and joint continuity still require the written argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of finite discrete G sets is a compact Hausdorff totally disconnected space with a continuous group action",
+   "results": {
+    "t": "2026-10-22T10:23:33Z",
+    "tool": "leansearch",
+    "query": "Inverse limit of finite discrete G sets is a compact Hausdorff totally disconnected space with a continuous group action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.ofFiniteGrp",
+     "LightProfinite.instTotallyDisconnectedSpaceCarrierToTopTruePtCompHausLimitConeCompLightProfiniteToCompHaus",
+     "ProfiniteGrp.of",
+     "Profinite.lim",
+     "ProfiniteGrp.isIso_toLimit",
+     "Action.ofMulActionLimitCone",
+     "Profinite.isoAsLimitConeLift",
+     "Profinite.asLimit"
+    ],
+    "digest": "613636e411b0dabb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: Profinite and ProfiniteGrp limit constructions supply underlying spaces or groups, not finite G-set actions with this invariant compatibility locus. TopCat.partialSections.closed supplies closedness only; Action.ofMulActionLimitCone concerns discrete diagrams of types without topology. Read the returned declarations; the coordinate action and joint continuity still require the written argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-finite-quotients",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Field-site presentation in Paragraph (3), Bhatt-Scholze Example 4.1.10: passage from finite discrete Galois sets to continuous profinite Galois sets; generic equivariant finite-quotient input. Stacks Tags 08ZU (theorem-tychonov), 08ZV (lemma-inverse-limit-quasi-compact), 08ZY (lemma-profinite, (1) implies (2)), 0A2P (lemma-describe-limits); agent expansion of coordinate action in Bhatt–Scholze Example 4.1.10, p. 28. Returned parent proof steps 8–10.",
+   "via": [
+    "lem-sfb-profinite-action-finite-quotients",
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-action-compatible-limit",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 08ZU, 08ZV, 08ZY and 005C and Bhatt-Scholze Example 4.1.10. Reused the two existing compactness leaves; wrote clopen-cylinder separation, compatibility-locus closedness, invariance, action laws and joint continuity explicitly. No new nodes, hypotheses or statement changes. Checked empty stages, empty limit and nondirected indexing. The source of Tag 0A2P is used only for its general product/subspace-basis description, not its cofiltered-only conclusions.",
+  "blueprint": "Retains the inherited from.node=null and via chain (blueprint_refs.py ancestor also returns None). Realizes the inverse-limit direction of lem-sfb-profinite-action-finite-quotients, currently its proof step 4, under the inherited field-site paragraph (3) / Bhatt-Scholze Example 4.1.10 provenance. Whole-blueprint searches for Tychon, totally disconnected, and product topology find no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-556551ca7",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-556551ca7 (reviewer sub-agent of L); spot-checked: Read the item and its six steps in full. There are no new nodes. The statement (topological limit of finite discrete G-sets over any nonempty poset) and stmt_deps are unchanged and the statement is true. I tested an empty stage, a singleton I, a non-directed poset with nonempty stages but empty Q (the four-element flip example, rechecked) and non-surjective transitions. Step 1 applies lem-weil-pbc-tychonoff-product-quasi-compact (Pi.compactSpace) to finite discrete spaces, matching Stacks 08ZU. Step 2 is elementary: clopen coordinate cylinders give Hausdorff and totally disconnected for T and Q, as in the proof of 08ZY (1)=>(2). Step 3 is elementary: the two-coordinate cylinder around an incompatible point misses Q (i<j forced by r_ii=id), the discrete case of the 08ZV argument, with no directedness used. Step 4 applies lem-weil-pbc-closed-in-quasi-compact (IsClosed.isCompact), Stacks 005C, with the hypotheses from steps 1 and 3. Step 5 checks invariance and action laws from equivariance. Step 6 proves joint continuity on the subbasis p_i^{-1}U via b_i^{-1}(a_i^{-1}U), which is correct. The only citer, lem-sfb-profinite-action-finite-quotients step 4, uses exactly these conclusions, in a special case (directed I, profinite G). Duplicate search over the snapshot DAG (finite-group-limit-profinite, closed-subgroup-product, cofinal-clopen-partition-reconstruction, partition-incidence-limit, finite-quotient-fiber-product, galois-krull-finite-limit) found no node stating the item. No SGA citation, proof_deps equal the union of the step uses, and no re-split note applies. The null blueprint from.node and the chapter/unit mismatch are inherited and untouched. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FiniteActionCompatibleLimit",
+  "declaration": "finiteActionCompatibleLimit",
+  "file": "lean/Sheaf/Topology/FiniteActionCompatibleLimit.lean",
+  "statement": "theorem finiteActionCompatibleLimit (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (I : Type v) [PartialOrder I] [Nonempty I] (Q : I → Type v) [∀ i : I, Finite (Q i)] [∀ i : I, TopologicalSpace (Q i)] [∀ i : I, DiscreteTopology (Q i)] [∀ i : I, MulAction G (Q i)] [∀ i : I, ContinuousSMul G (Q i)] (r : ∀ (i j : I), i ≤ j → Q j → Q i) (r_id : ∀ (i : I) (x : Q i), r i i le_rfl x = x) (r_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Q k), r i k (le_trans hij hjk) x = r i j hij (r j k hjk x)) (r_smul : ∀ (i j : I) (hij : i ≤ j) (g : G) (x : Q j), r i j hij (g • x) = g • r i j hij x) : CompactSpace (∀ i : I, Q i) ∧ T2Space (∀ i : I, Q i) ∧ TotallyDisconnectedSpace (∀ i : I, Q i) ∧ IsClosed {z : ∀ i : I, Q i | ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i} ∧ CompactSpace {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i} ∧ T2Space {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i} ∧ TotallyDisconnectedSpace {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i} ∧ ∃ a : MulAction G {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i}, Continuous (fun p : G × {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i} => a.smul p.1 p.2) ∧ ∀ i : I, Continuous (fun z : {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i} => z.val i) ∧ ∀ (g : G) (z : {z : ∀ i : I, Q i // ∀ (i j : I) (hij : i ≤ j), r i j hij (z j) = z i}), (a.smul g z).val i = g • z.val i",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86e01d364",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Item lem-sfb-finite-action-compatible-limit: node changed only by the new lean field; lean.statement matches the file verbatim; single sorry; no helpers, new nodes or statement change. Clause by clause the Lean matches the node with no stronger assumptions: arbitrary topological group G; nonempty PartialOrder I with no directedness; Finite+DiscreteTopology+MulAction+ContinuousSMul stages; r_id, r_comp and equivariance r_smul; no surjectivity. Conclusions present: product compact/T2/totally disconnected, compatibility set closed, compatible-family subtype compact/T2/totally disconnected, and an existential MulAction determined uniquely by its coordinate formula, with joint continuity of that action and continuous, equivariant projections. Edge cases (empty stage, empty limit over non-directed I, singleton I, trivial group) covered. Universe v shared by I and stages, the same as the only user profiniteAction_finite_quotients. Searches found no duplicate in Mathlib or the project. Docstrings carry source, blueprint tag and all six proof steps. Not recompiled because no file was changed. The second-reading section is a self-review by the worker, noted in review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T043206-L-1689365",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "finiteActionCompatibleLimit"
+  ],
+  "sorry_after": []
+ }
+}

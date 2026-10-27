@@ -1,0 +1,82 @@
+{
+ "id": "lem-sfb-sheaves-grothendieck-with-sheafification",
+ "kind": "statement",
+ "title": "Sheaves with a left exact reflector inherit Grothendieckness",
+ "statement": "Fix a universe $\\mathcal U$ [def-weil-size-convention]. Let $C$ be a $\\mathcal U$-small category with a Grothendieck topology $J$, and let $\\mathcal A$ be a Grothendieck abelian category relative to $\\mathcal U$, with $\\mathcal U$-small morphism sets [def-sp-grothendieck-abelian]. Write $\\operatorname{Sh}(C,J;\\mathcal A)$ for the full category of functors $C^{\\mathrm{op}}\\to\\mathcal A$ for which $\\operatorname{Hom}_{\\mathcal A}(T,F(-))$ is a sheaf of sets for every $T\\in\\mathcal A$. Suppose the inclusion into presheaves has a left adjoint which preserves finite limits (left exact sheafification [def-weil-pbc-sheafification]). Then $\\operatorname{Sh}(C,J;\\mathcal A)$ is Grothendieck abelian. In particular $\\operatorname{Sh}(C,J;\\mathrm{Ab}_{\\mathcal U})$ is Grothendieck abelian, with no extra assumption on $J$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CO (lemma-limits-colimits-abelian-sheaves), abelian-valued colimits and exactness; the general categorical theorem is CategoryTheory.Sheaf.instIsGrothendieckAbelian, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:72-74, read together with Sites/Abelian.lean:40-42 and Algebra/Category/Grp/AB.lean:109."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of abelian groups on any essentially small site form a Grothendieck abelian category",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.instCategorySheaf, CategoryTheory.IsGrothendieckAbelian.mk, CategoryTheory.IsGrothendieckAbelian.wellPowered, CategoryTheory.IsGrothendieckAbelian.hasColimits, CategoryTheory.Sheaf.instInhabitedHom",
+   "date": "2026-10-25",
+   "verdict": "match: general conditional sheaf theorem at Sheaf.lean:72-74; Ab specialization uses Grp/AB.lean:109 and the concrete sheafification instance LeftExact.lean:308-311."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "results": "1 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-25",
+   "verdict": "match: general conditional sheaf theorem at Sheaf.lean:72-74; Ab specialization uses Grp/AB.lean:109 and the concrete sheafification instance LeftExact.lean:308-311."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves valued in a Grothendieck abelian category with left exact sheafification form a Grothendieck abelian category on a small site",
+   "results": "8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.hasExactColimitsOfShape, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian",
+   "date": "2026-10-25",
+   "verdict": "match: general conditional sheaf theorem at Sheaf.lean:72-74; Ab specialization uses Grp/AB.lean:109 and the concrete sheafification instance LeftExact.lean:308-311."
+  },
+  {
+   "tool": "grep",
+   "query": "HasSheafify|IsGrothendieckAbelian",
+   "results": "5 hits: 58, 62, 67, 73, 74 (searched CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean)",
+   "date": "2026-10-25",
+   "verdict": "match: general conditional sheaf theorem at Sheaf.lean:72-74; Ab specialization uses Grp/AB.lean:109 and the concrete sheafification instance LeftExact.lean:308-311."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGrothendieckAbelian",
+   "results": "1 hits: 109 (searched Algebra/Category/Grp/AB.lean)",
+   "date": "2026-10-25",
+   "verdict": "match: general conditional sheaf theorem at Sheaf.lean:72-74; Ab specialization uses Grp/AB.lean:109 and the concrete sheafification instance LeftExact.lean:308-311."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+  "file": "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean",
+  "line": 72,
+  "how": "Exact general assertion at lines 72-74: the stated left exact reflector is HasSheafify J A (Sites/Sheafification.lean:57-63); abelian structure is CategoryTheory.sheafIsAbelian, Sites/Abelian.lean:40-42. The Ab clause specializes A to AddCommGrpCat.{u}, Grothendieck by Algebra/Category/Grp/AB.lean:109; HasSheafify is the concrete small-site instance Sites/LeftExact.lean:308-311. Each clause is a direct instance, with no tensor or ring-object comparison."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-modobj-grothendieck-any-ring",
+  "date": "2026-10-25",
+  "group": "NG"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-formal-closed-support",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-formal-closed-support",
+   "place": "Adjunction paragraph: existence of K-injective resolutions, through Grothendieckness of the abelian-sheaf coefficient category.",
+   "via": [
+    "lem-sfb-sheaf-modobj-grothendieck-any-ring",
+    "lem-route-formal-closed-support-adjunction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sp-purity-conjugates-tower-reduction",
+ "kind": "statement",
+ "title": "Finite purity conjugates actual exceptional tower reduction",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated morphism of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$, and put $R_n=\\mathcal O_E/\\ell^n=A_{E,en}$ for $n\\geq1$. Use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, def-weil-abstract-derived-category], their uniform constructible finite-Tor full subcategories $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ [sk-def-sp-normalized-towers], and ordinary derived tensor products [def-weil-derived-tensor]. Twists are [def-coefficient-twists-detailed], and $F_\\bullet=Rf_{!,\\bullet}\\dashv G_\\bullet=f^!_\\bullet$ with finite units, counits and evaluations is [det-sp-tower-gluing]. Put $\\mathbf1_{\\bullet,T}=(R_{n,T})_n$ and $\\omega_\\bullet=G_\\bullet\\mathbf1_{\\bullet,Y}$, so $\\omega_n=f^!_{R_n}R_{n,Y}$; pullback means levelwise finite derived pullback [def-weil-derived-pullback-tensor-hom].\n\nLet $K_\\bullet\\in\\mathcal C_Y$ with canonical reductions $\\rho^K_{n,m}:(K_n)_{R_m}\\to K_m$ [det-sp-coefficient-towers-abelian], and put $P_\\bullet=f_\\bullet^*K_\\bullet(d)[2d]$. This tower belongs to $\\mathcal C_X$; if the $K_n$ have common Tor interval $[a,b]$, its common cohomological and Tor interval is $[a-2d,b-2d]$. Under the canonical derived pullback, twist and coefficient identifications [lem-pur-derived-pullback-tensor-iso, det-sp-scalar-extension-functor], its actual reductions are\n$$\\rho^P_{n,m}=f^*_{R_m}(\\rho^K_{n,m})(d)[2d].$$\nLet $c_{n,m}$ be the exceptional coefficient comparison [det-sp-reduction-compatibilities], and let $\\gamma_{f,R_n}$ be the finite inverse-diagonal-orientation/tensor-transpose map [def-pur-smooth-purity-map], identified with the general-ring purity map [det-sp-finite-general-ring]. The actual reductions of $G_\\bullet K_\\bullet$ and their purity square satisfy\n$$\\rho^{GK}_{n,m}=f^!_{R_m}(\\rho^K_{n,m})\\circ c_{n,m}(K_n),$$\n$$\\rho^{GK}_{n,m}\\circ(\\gamma_{f,R_n}(K_n))_{R_m}=\\gamma_{f,R_m}(K_m)\\circ\\rho^P_{n,m}.$$\nIn particular, since the finite purity comparisons are isomorphisms,\n$$\\rho^{GK}_{n,m}=\\gamma_{f,R_m}(K_m)\\circ\\rho^P_{n,m}\\circ((\\gamma_{f,R_n}(K_n))_{R_m})^{-1}.$$\nThese formulas hold without a normalization assumption on $K_\\bullet$, for nonflat quotient coefficient maps as well, and use scalar extension with its target-ring module structure.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), pullback reductions, naturality for rho, and solving the exceptional reduction square; retained proof step 10"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "det-sp-coefficient-towers-abelian",
+  "lem-pur-derived-pullback-tensor-iso",
+  "det-sp-scalar-extension-functor",
+  "det-sp-reduction-compatibilities",
+  "def-pur-smooth-purity-map",
+  "det-sp-finite-general-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sp-purity-pullback-level-bounds separately at each positive coefficient level to obtain constructibility and the shifted Tor interval. Test the intrinsic Tor interval against the coefficient unit: transport to the fixed-ring derived presentation by intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn, apply homologyConcentratedIn_of_torAmplitudeIn, and transport cohomology back through the exact realization. Unpack the input tower common Tor interval [c,t], apply the single-level result at every n, and use [c-2d,t-2d] for both uniform output intervals in sk-def-sp-normalized-towers. The two interval inequalities follow by subtracting the same 2d. Separately repeat the level calculation for any specified common input interval [a,z] to obtain the quantified bounds. This is the complete Lean proof of pullbackTower_bounds; its only new open step is the strictly single-level constructibility/Tor calculation.",
+   "uses": [
+    "lem-sp-purity-pullback-level-bounds",
+    "def-weil-proetale-tor-amplitude",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(3), pullback and twist preserve the tower category; finite-level part of lem-sp-purity-conjugates-tower-reduction, Step 1"
+   }
+  },
+  {
+   "text": "The comparisons are the unchanged definitions now owned by def-sp-purity-reduction-comparisons. Prove sourceComparison invertible: inputWord is a composite of isomorphisms; pullWord preserves this; the ordered line comparison is invertible by induction on d, using the unit at zero and tensor/root comparisons at successors. targetComparison is likewise a composite of isomorphisms. finiteGeneralRingOrientation supplies normalized alpha_n for every level. smooth_tensor_duality makes its ordinary gamma invertible at each origin. Define gamma_n as the inverse sourceComparison followed by the transported finite gamma and targetComparison. The normalization equation follows by hom-inverse cancellation.",
+   "uses": [
+    "def-sp-purity-reduction-comparisons",
+    "lem-sp-general-ring-orientation",
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(3), actual pullback and exceptional reductions and coefficient compatibility"
+   }
+  },
+  {
+   "text": "For m≤n apply pullback_reduction_transport to obtain the canonical line comparison e, actual origin arrow r, its origin equation hr and source reduction equation hp. Apply finite_purity_reduction_transport with the normalized orientations, e and r. Precompose the desired gamma square by scalar extension of sourceComparison(n), an isomorphism. Functor.map_comp and the normalization equation identify its left side with the finite beta square; hp and the normalization equation at m identify its right side. Cancellation proves the square. The first exceptional formula is exactly lv.reduction.",
+   "uses": [
+    "lem-sp-purity-pullback-reduction-transport",
+    "lem-sp-purity-finite-reduction-transport",
+    "det-sp-tower-gluing",
+    "def-sp-purity-reduction-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(3), actual pullback and exceptional reductions and coefficient compatibility"
+   }
+  },
+  {
+   "text": "Precompose the gamma square by scalar extension of gamma_n inverse and cancel the adjacent functor-mapped inverse pair. Reassociate to obtain the explicit exceptional conjugacy formula. Return e,r,hr,hp from the pullback step. No input reduction is inverted.",
+   "uses": [
+    "def-sp-purity-reduction-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(3), actual pullback and exceptional reductions and coefficient compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-purity-pullback-level-bounds",
+  "def-weil-proetale-tor-amplitude",
+  "sk-def-sp-normalized-towers",
+  "def-sp-purity-reduction-comparisons",
+  "lem-sp-general-ring-orientation",
+  "thm-asd-smooth-tensor",
+  "lem-sp-purity-pullback-reduction-transport",
+  "lem-sp-purity-finite-reduction-transport",
+  "det-sp-tower-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(3), actual pullback and exceptional reductions and coefficient compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pullback tower reduction maps are conjugate by finite smooth purity to the reduction maps of shifted twisted pullback",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_fst_snd. Hits concern ordinary scheme pullbacks or abstract naturality, not the specified exceptional coefficient comparison and smooth-purity conjugacy.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UpperShriek\"",
+   "results": "0 hit(s): . Hits concern ordinary scheme pullbacks or abstract naturality, not the specified exceptional coefficient comparison and smooth-purity conjugacy.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*reduction|purity.*reduction",
+   "results": "0 hit(s): . Hits concern ordinary scheme pullbacks or abstract naturality, not the specified exceptional coefficient comparison and smooth-purity conjugacy.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and coefficient compatibility of finite smooth purity conjugate exceptional reduction to twisted pullback reduction",
+   "results": "8 hit(s): CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjTransformObjSquare_iso_hom_naturality₂, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, ContMDiffVectorBundle.pullback, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackId_hom, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.Limits.CategoricalPullback.mkNatIso, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_naturality₂. Hits concern ordinary scheme pullbacks or abstract naturality, not the specified exceptional coefficient comparison and smooth-purity conjugacy.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and coefficient compatibility of finite smooth purity conjugate exceptional reduction to twisted pullback reduction",
+   "results": "8 hit(s): SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd. Hits concern ordinary scheme pullbacks or abstract naturality, not the specified exceptional coefficient comparison and smooth-purity conjugacy.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*reduction|exceptional.*reduction|smoothPurity",
+   "results": "0 hit(s): . Read the returned types: scheme pullback transitions, underived module sheaf pullback compatibilities, or scheme smoothness; none states this exceptional coefficient-tower reduction and purity conjugacy.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image commutes with derived coefficient reduction and finite purity intertwines the transition maps of coefficient towers",
+   "results": "8 hit(s): AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmooth.recOn, instContMDiffInv₀OfTopWithTopENat, mdifferentiableOn_symm_coordChangeL, Trivialization.contMDiffOn_symm_trans, instContMDiffInv₀OfSomeENatTopOfLEInfty, AlgebraicGeometry.isSmooth_isStableUnderBaseChange. Read the returned types: scheme pullback transitions, underived module sheaf pullback compatibilities, or scheme smoothness; none states this exceptional coefficient-tower reduction and purity conjugacy.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothPurityIso\"",
+   "results": "0 hit(s): . Read the returned types: scheme pullback transitions, underived module sheaf pullback compatibilities, or scheme smoothness; none states this exceptional coefficient-tower reduction and purity conjugacy.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pullback tower reduction maps are conjugate by finite smooth purity to shifted twisted pullback reduction maps",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst. Read the returned types: scheme pullback transitions, underived module sheaf pullback compatibilities, or scheme smoothness; none states this exceptional coefficient-tower reduction and purity conjugacy.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of smooth purity and extension of scalars identifies exceptional transition morphisms with conjugates of pullback Tate twist transitions",
+   "results": "8 hit(s): SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, LightCondensed.ihomPoints_symm_comp. Read the returned types: scheme pullback transitions, underived module sheaf pullback compatibilities, or scheme smoothness; none states this exceptional coefficient-tower reduction and purity conjugacy.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gamma",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (3), pullback reductions, naturality for rho, and solving the exceptional reduction square; retained proof step 10",
+   "via": [
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-purity-conjugates-tower-reduction",
+  "worker": "stage1",
+  "summary": "Q30 gives the uniform-domain check, derives the actual pullback reduction, takes the actual exceptional reduction from tower gluing, then pastes coefficient compatibility with finite purity naturality and cancels the finite purity isomorphism. No new nodes, normalization hypothesis, flatness assumption, or statement change.",
+  "blueprint": "Ancestor det-sp-integral-adjunction-bijection: Normalization and Purity paragraphs; tower-geometric gamma proof (3), actual reductions and the purity square. Steps 1-2 check the pullback tower; Steps 3-6 prove exceptional conjugacy.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Finite-level bounded constructibility and the unchanged Tor interval; generic pullback tool, not a replacement of the tower argument."
+   },
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Twisting by a finite Tate line preserves bounded constructibility and the exact Tor interval; generic coefficient tool."
+   },
+   {
+    "node": "def-weil-proetale-tor-amplitude",
+    "why": "The definition supplies the degree-zero coefficient-unit test giving the cohomological interval."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical finite pullback/tensor comparison with finite coefficient-reduction compatibility."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Target-ring derived scalar extension, its finite-Tor preservation, twist comparisons and functorial action."
+   },
+   {
+    "node": "det-sp-reduction-compatibilities",
+    "why": "The finite coefficient-purity square is the black box pasted with naturality; the unit has no replacement for this finite compatibility."
+   },
+   {
+    "node": "det-sp-finite-general-ring",
+    "why": "Naturality and invertibility of the specified diagonal/tensor purity map over the finite ring R_m."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-1550e90d3",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-1550e90d3 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, 0 new nodes, statement and stmt_deps unchanged, no re-split note for this item. I read the source, main-20261015 tower-geometric gamma proof (3) (latest has the same text), and every cited statement. Step 1: lem-sf-pullback-tor-amplitude is applied at index en and prop-weil-twist-preserves carries the Tor interval; the shift gives [a-2d,b-2d]. Step 2: ρ^P=H_m(ρ^K)∘j follows from the adjoint of the transitions (coefficient-towers-abelian (3)), μ of lem-pur-derived-pullback-tensor-iso and scalar-extension (1),(3). Step 3: tower-gluing (3) gives exactly ρ^GK=f^!(ρ^K)∘c with no normalization assumption. Step 4: reduction-compatibilities (3) is the square, with (K_n)_{R_m} in Dctf by scalar-extension (2) and no flatness needed. Step 5: I recomputed the pasting with the naturality of finite-general-ring (3); it is correct. Step 6: the cancellation is correct. Edge cases checked: m=n, d=0, ramified E, zero transitions, nonflat Z/ℓ²→Z/ℓ. Duplicate candidates (lem-sp-tower-reduction-transpose, lem-pur-adic-normalized-purity-lift, lem-sp-twisted-pullback-tower-domain, lem-sp-compact-support-tower-reduction) do not state the conjugacy. No cycle, no SGA. I accept the declared tool_uses as generic finite tools. FIX, 2 citation gaps: (a) step 1 never showed that f is of finite type, which lem-sf-pullback-tor-amplitude requires; I added the smooth + Noetherian quasi-compactness argument citing def-sbc-smooth-morphisms. (b) The statement identifies the def-pur-smooth-purity-map γ with the general-ring γ of finite-general-ring, but no step justified it; step 5 now cites the same-unit sibling lem-sp-finite-orientation-reduction, whose statement gives that agreement at index en. proof_deps were rebuilt as the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityConjugatesTowerReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.SpPurityReduction.purity_conjugates_tower_reduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpPurityReduction.pullbackTower_bounds",
+   "AlgebraicGeometry.ProEtale.SpPurityReduction.purity_conjugates_tower_reduction"
+  ],
+  "file": "lean/Sheaf/Paper/PurityConjugatesTowerReduction.lean",
+  "statement": "theorem purity_conjugates_tower_reduction (D : FiniteFieldDatum.{u}) [CharP D.k D.p] (hne : l ≠ D.p) {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p] [(j ≫ p).IsOver (Spec (.of D.k))] [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)] (d : ℕ) [SmoothOfRelativeDimension d (j ≫ p)] (w : SpChartAdmissibility.Twists l E X) (hF : ∀ M : SpTowerCalculus.C l E b q X, spConstructibleTorTowers l E Y (q.abelian Y) ((SpTowerCalculus.F l E b o q (SpTowerGamma.factorization j p)).obj M.obj)) (G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X) (adj : SpTowerGluing.support l E b o q (SpTowerGamma.factorization j p) hF ⊣ G) (lv : SpTowerGluing.Levels l E b o q (SpTowerGamma.factorization j p) hF G adj) (roots : SpCoordinateAdjunction.RootLines l E X) (unitsX : ∀ n : ℕ, IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))) (cc : ∀ n : ℕ, SpTowerP1.CoefficientCoordinates l E n X (unitsX n)) (tc : ∀ n : ℕ, SpTowerP1.TensorCoordinates l E n b X) (gc : ∀ n : ℕ, SpTowerP1.GeometricCoordinates l E n (j ≫ p)) (K : SpTowerCalculus.C l E b q Y) : ∃ gamma : ∀ n : ℕ, ((spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj (pullbackTower l E o q (j ≫ p) w d K)) ≅ ((spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj (G.obj K).obj), (∀ n : ℕ, IsIso (sourceComparison l E o q (SpTowerGamma.factorization j p) w d hF G adj lv roots unitsX cc tc gc n K) ∧ IsIso (targetComparison l E o q (SpTowerGamma.factorization j p) hF G adj lv n K) ∧ ∃ dg : Etale.FiniteRingSectionDeformation.Geometry d (pullback.fst (j ≫ p) (j ≫ p)) (pullback.diagonal (j ≫ p)), ∃ alpha : Etale.dualizingComplex (ModuleCat.{u + 1} (SpTowerP1.levelRing l E n)) (j ≫ p) ≅ (Etale.FiniteSmoothPurity.line (SpTowerP1.levelRing l E n) (l ^ (n + 1)) (SpTowerP1.levelAnnihilates l E n) X d), Etale.FiniteSmoothPurity.OrientationNormalized (SpTowerP1.levelRing l E n) (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _) (SpTowerP1.levelAnnihilates l E n) (j ≫ p) d dg (unitsX n) alpha ∧ (sourceComparison l E o q (SpTowerGamma.factorization j p) w d hF G adj lv roots unitsX cc tc gc n K) ≫ (gamma n).hom = (reductionSite (SpTowerShriek.R l E n) X).map (Etale.FiniteSmoothPurity.gamma (SpTowerP1.levelRing l E n) (j ≫ p) (Etale.FiniteSmoothPurity.line (SpTowerP1.levelRing l E n) (l ^ (n + 1)) (SpTowerP1.levelAnnihilates l E n) X d) alpha ((lv.realization n).origin.obj ((SpTowerGluing.level l E b q Y n).obj K)) ≫ (SpTowerGamma.finiteRightComparison (SpTowerShriek.R l E n) j p (lv.finite_closed n) (lv.right n) (lv.adjunction n) (lv.realization n)).inv.app _) ≫ (targetComparison l E o q (SpTowerGamma.factorization j p) hF G adj lv n K)) ∧ ∀ (m n : ℕ) (h : m ≤ n), ((scalarExtensionFunctor (SpTowerCalculus.quotient l E h) X).map ((lv.comparison n).hom.app K).hom ≫ (SpTowerGluing.coefficientMate l E b (SpTowerGamma.factorization j p) m n h (lv.finite_closed n) (lv.finite_closed m) (lv.scalarX m n h) (lv.scalarY m n h) (lv.right n) (lv.right m) (lv.adjunction n) (lv.adjunction m) ((SpTowerGluing.level l E b q Y n).obj K) (lv.direct_image_iso m n h ((SpTowerGluing.level l E b q Y n).obj K))).hom ≫ ((lv.right m).map (ObjectProperty.homMk (SpTowerCalculus.reduction l E Y (q.abelian Y) h (q.scalar Y h) K.obj))).hom = SpTowerCalculus.reduction l E X (q.abelian X) h (q.scalar X h) (G.obj K).obj ≫ ((lv.comparison m).hom.app K).hom) ∧ ((scalarExtensionFunctor (SpTowerCalculus.quotient l E h) X).map (gamma n).hom ≫ SpTowerCalculus.reduction l E X (q.abelian X) h (q.scalar X h) (G.obj K).obj = (SpTowerCalculus.reduction l E X (q.abelian X) h (q.scalar X h) (pullbackTower l E o q (j ≫ p) w d K)) ≫ (gamma m).hom) ∧ (SpTowerCalculus.reduction l E X (q.abelian X) h (q.scalar X h) (G.obj K).obj = (scalarExtensionFunctor (SpTowerCalculus.quotient l E h) X).map (gamma n).inv ≫ (SpTowerCalculus.reduction l E X (q.abelian X) h (q.scalar X h) (pullbackTower l E o q (j ≫ p) w d K)) ≫ (gamma m).hom) ∧ ∃ e : Etale.FiniteSmoothPurity.CoefficientLineComparison (RingHom.ulift.{u + 1, u + 1, u, u} (SpTowerCalculus.quotient l E h)) (l ^ (n + 1)) (l ^ (m + 1)) (SpTowerP1.levelAnnihilates l E n) (SpTowerP1.levelAnnihilates l E m) X, ∃ r : (Etale.FiniteSmoothPurity.ordinaryScalar (RingHom.ulift.{u + 1, u + 1, u, u} (SpTowerCalculus.quotient l E h)) Y).obj ((lv.realization n).origin.obj ((SpTowerGluing.level l E b q Y n).obj K)) ⟶ ((lv.realization m).origin.obj ((SpTowerGluing.level l E b q Y m).obj K)), ((reductionSiteScalarIso (SpTowerCalculus.quotient l E h) Y).inv.app ((lv.realization n).origin.obj ((SpTowerGluing.level l E b q Y n).obj K)) ≫ (scalarExtensionFunctor (SpTowerCalculus.quotient l E h) Y).map ((lv.realization n).originIso.hom.app _) ≫ (SpTowerCalculus.reduction l E Y (q.abelian Y) h (q.scalar Y h) K.obj) = (reductionSite (SpTowerShriek.R l E m) Y).map r ≫ (lv.realization m).originIso.hom.app _) ∧ ((scalarExtensionFunctor (SpTowerCalculus.quotient l E h) X).map (sourceComparison l E o q (SpTowerGamma.factorization j p) w d hF G adj lv roots unitsX cc tc gc n K) ≫ (SpTowerCalculus.reduction l E X (q.abelian X) h (q.scalar X h) (pullbackTower l E o q (j ≫ p) w d K)) = (reductionSiteScalarIso (SpTowerCalculus.quotient l E h) X).hom.app ((Etale.FiniteSmoothPurity.puritySource (SpTowerP1.levelRing l E n) (j ≫ p) (Etale.FiniteSmoothPurity.line (SpTowerP1.levelRing l E n) (l ^ (n + 1)) (SpTowerP1.levelAnnihilates l E n) X d)).obj ((lv.realization n).origin.obj ((SpTowerGluing.level l E b q Y n).obj K))) ≫ (reductionSite (SpTowerShriek.R l E m) X).map ((Etale.FiniteSmoothPurity.pullbackTwistComparison (j ≫ p) d e ((lv.realization n).origin.obj ((SpTowerGluing.level l E b q Y n).obj K))).hom ≫ (Etale.FiniteSmoothPurity.puritySource (SpTowerP1.levelRing l E m) (j ≫ p) (Etale.FiniteSmoothPurity.line (SpTowerP1.levelRing l E m) (l ^ (m + 1)) (SpTowerP1.levelAnnihilates l E m) X d)).map r) ≫ (sourceComparison l E o q (SpTowerGamma.factorization j p) w d hF G adj lv roots unitsX cc tc gc m K))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The two theorems jointly state the uniform-domain/bounds clauses and all actual reduction, purity-square and conjugacy clauses. Finite purity is pinned to normalized inverse-diagonal orientation and tensor transpose through explicit canonical source/target comparisons; no normalization or coefficient-flatness assumption. Existing canonical word definitions are reused; no downstream tower-purity theorem is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e16975ff6",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Lean and records correct. Hypotheses are the node's or follow from it (Noetherian, qc f, unitsX, a Nagata j≫p); no normalization or flatness hypothesis, rhoK never inverted. First formula = Levels.reduction verbatim (c = counit-transpose coefficientMate). Square and conjugacy in correct diagrammatic order. gamma pinned by explicit source/target comparisons (asserted iso) and the OrientationNormalized finite gamma, as in the landed tower_gamma.FiniteLevels. CoefficientLineComparison unique; r tied to the actual rhoK. Bounds sign [a-2d,b-2d] correct; a<=z drops only the empty interval. Edge cases m=n, d=0, empty, K=0, ramified E, nonflat quotient OK. Sole fault H11: the second reading was a self-review (no independent reader) -> FIX fixes/lem-sp-purity-conjugates-tower-reduction.report.md (worker report verbatim + clause-by-clause second reading + validation). No compile (module unchanged). Advisory M1: plain helpers of the det-sp-tower-gamma module, whose proof cites the item; rule-7 left-out import listed; move them to a def-node module. M2: uncited def owners (def-sp-p1-*, coordinate-right-comparisons, chart-tate-tower-data, coefficient-tower-shriek-interfaces, finite-smooth-canonical-maps, finite-smooth-coefficient-arrows, finite-ring-section-data, proetale-tor-amplitude)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50a02",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261025T201344-L-2447557",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); moved defs vs clone bodies (identical); two sorried transport statements vs item conclusion clauses and pinned structures CoefficientLineComparison/OrientationNormalized; node proof fields vs Lean proof"
+ }
+}

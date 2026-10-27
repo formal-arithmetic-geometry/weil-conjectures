@@ -25,142 +25,87 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}S$ of $x$. By [lem-weil-pbc-lft-affine-pairs], $S$ is a finitely generated $k$-algebra. Write $\\mathfrak p$ for the maximal ideal representing $x$, $A=S_{\\mathfrak p}$ and $\\mathfrak m=\\mathfrak pA$. By [lem-trf-geometric-field-stalk-descent], $F=S/\\mathfrak p$ is finite over $k$, and every point of $U_{\\bar k}$ over $x$ is closed with residue field $\\bar k$. Write $B=(S\\otimes_k\\bar k)_{\\mathfrak q}$ for the local ring of one such point, and $\\mathfrak n$ for its maximal ideal. Let $J_A$ and $J_B$ be the respective first Fitting ideals of the differential modules. The definition of $Z$ identifies $\\mathcal O_{Z,x}$ with $A/J_A$ when $x\\in Z$. Thus $\\mathcal O_{Z,x}=F$ via the residue map means exactly $J_A=\\mathfrak m$; in particular it implies $x\\in Z$.",
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}S$ of $x$. By [lem-weil-pbc-lft-affine-pairs], $S$ is finite type over $k$. Use [lem-weil-pbc-affine-open-stalk-localization] to write $A=\\mathcal O_{C,x}=S_{\\mathfrak p}$, $F=S/\\mathfrak p$, and $\\mathfrak m=\\mathfrak pA$. By [def-trf-first-fitting-singular-subscheme], with $J_A=\\operatorname{Fit}_1(\\Omega_{S/k})A$ (the localization clause there), the stalk $\\mathcal O_{Z,x}$ is $A/J_A$ (zero when $x\\notin Z$). Hence $\\mathcal O_{Z,x}=F$ via the residue map means exactly $J_A=\\mathfrak m$, and in particular it forces $x\\in Z$. The open base-change and affine fibre-product identifications [lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra] identify a geometric stalk over $x$ with $B=(S\\otimes_k\\bar k)_{\\mathfrak q}$; [lem-trf-geometric-field-stalk-descent] gives its residue field $\\bar k$.",
    "uses": [
     "lem-weil-pbc-lft-affine-pairs",
-    "lem-trf-geometric-field-stalk-descent",
-    "def-trf-first-fitting-singular-subscheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "0C4D: affine reduction, closed residue fields and the meaning of the Fitting field-stalk condition"
-   }
-  },
-  {
-   "text": "Suppose that $x$ is a node, and choose the point above $x$ whose completion is $\\bar k[[u,v]]/(uv)$. Apply [lem-trf-separable-closed-point-formal-presentation] to the finite-type $\\bar k$-algebra $S\\otimes_k\\bar k$ and its rational closed point. It gives a power-series presentation of $\\widehat B$ and identifies its Jacobian cokernel with $\\Omega_{B/\\bar k}\\otimes_B\\widehat B$. The node hypothesis gives only a ring isomorphism $\\widehat B\\cong\\bar k[[u,v]]/(uv)$, and $uv$ has discriminant $1$ in every characteristic; so condition (c) of [lem-trf-formal-jacobian-quadratic-criterion] holds for this presentation, and implication (c) to (a) gives $\\operatorname{depth}(\\widehat B)=1$ and makes the ideal of the Jacobian minors its maximal ideal. By [lem-trf-fitting-ideal-independence-base-change], that ideal is $J_B\\widehat B$. Hence $J_B\\widehat B=\\mathfrak n\\widehat B$.",
-   "uses": [
-    "lem-trf-separable-closed-point-formal-presentation",
-    "lem-trf-formal-jacobian-quadratic-criterion",
-    "lem-trf-fitting-ideal-independence-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "0C4C and 0C49: the model uv and the formal Jacobian criterion; 0C4D: algebraically closed computation"
-   }
-  },
-  {
-   "text": "The completion map $B\\to\\widehat B$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat]. Contracting step 2 with [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $J_B=\\mathfrak n$. Thus $B/J_B=\\bar k$. The module $\\Omega_{S/k}$ is finite: if $s_1,\\ldots,s_d$ generate $S$ as a $k$-algebra, repeated use of additivity and Leibniz expresses every $\\mathrm ds$ as an $S$-linear combination of $\\mathrm ds_i$ [def-weil-pbc-kahler-differentials]. By [lem-weil-pbc-kahler-differentials-base-change] with $R=k$, $R'=\\bar k$, and [lem-weil-pbc-kahler-differentials-localization] at $\\mathfrak p$ and $\\mathfrak q$, the differential modules defining $J_A$ and $J_B$ are obtained from $\\Omega_{S/k}$ by the respective scalar extensions. Hence [lem-trf-fitting-ideal-independence-base-change] identifies the base-changed first-Fitting subscheme with the singular subscheme computed over $\\bar k$. Its local ring at our point is the field just computed.",
-   "uses": [
-    "lem-weil-pbc-local-completion-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "lem-trf-fitting-ideal-independence-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "0C4D: descent from the geometric Fitting point; Algebra 00RV and 00RT for differential base change and localization"
-   }
-  },
-  {
-   "text": "Let $J\\subset S$ be the first Fitting ideal before localization and put $T=S/J$. Step 3 shows that the image of $\\mathfrak q$ defines a point of $\\operatorname{Spec}(T\\otimes_k\\bar k)$ whose local ring is $\\bar k$. Its image is the maximal ideal $\\mathfrak p/J$, since $J_B\\subset\\mathfrak n$ implies $J\\subset\\mathfrak p$. The algebra $T$ is finitely generated, by the images of any finite generating set of $S$. Apply [lem-trf-geometric-field-stalk-descent] to $T$ and this point. It gives $T_{\\mathfrak p/J}=F$ via the residue map and makes $F/k$ finite separable. Since $T_{\\mathfrak p/J}=A/J_A$, this proves the residue-field and Fitting-stalk requirements in the forward implication.",
-   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
     "lem-trf-geometric-field-stalk-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "0C4D: arbitrary-field paragraph descending the reduced geometric singular point"
+    "place": "0C4D (lemma-nodal), affine and geometric reduction"
    }
   },
   {
-   "text": "Now $F/k$ is finite separable, so [lem-trf-separable-closed-point-formal-presentation] applies to $A$ and to the embedding $F\\hookrightarrow\\bar k$ determined by $\\mathfrak q$. It says that $A\\to B$ is flat local with closed fibre $\\bar k$, and that the completion of each local ring has the same residue field as that local ring. Apply [lem-weil-pbc-flat-local-depth-formula] first to $B\\to\\widehat B$ (flat by [lem-weil-pbc-local-completion-faithfully-flat]), then to $A\\to B$, and finally to $A\\to\\widehat A$. In each application the closed fibre is a field and has depth $0$, since its maximal ideal is zero and no element of it is a nonzerodivisor. Thus step 2 yields $\\operatorname{depth}B=\\operatorname{depth}A=\\operatorname{depth}\\widehat A=1$.",
+   "text": "If $x$ is a node, apply [lem-trf-geometric-node-fitting-depth] to its chosen geometric stalk: $J_B=\\mathfrak m_B$ and $\\operatorname{depth}B=1$. Apply [lem-trf-geometric-fitting-depth-descent] to obtain finite separability of $F/k$, $J_A=\\mathfrak m$, and depth one for $A$.",
    "uses": [
-    "lem-trf-separable-closed-point-formal-presentation",
-    "lem-weil-pbc-flat-local-depth-formula",
-    "lem-weil-pbc-local-completion-faithfully-flat"
+    "lem-trf-geometric-node-fitting-depth",
+    "lem-trf-geometric-fitting-depth-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "0C4D: flat-local depth comparison; 07NW via the depth formula"
+    "place": "0C4D (lemma-nodal), geometric calculation and descent"
    }
   },
   {
-   "text": "Use the presentation $\\widehat A=F[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)$ supplied by [lem-trf-separable-closed-point-formal-presentation]. Its Jacobian cokernel is $\\Omega_{A/k}\\otimes_A\\widehat A$, so [lem-trf-fitting-ideal-independence-base-change] and step 4 make the ideal of its $(n-1)$-minors $J_A\\widehat A=\\mathfrak m\\widehat A$. Together with depth one from step 5, [lem-trf-formal-jacobian-quadratic-criterion] gives $\\widehat A\\cong F[[u,v]]/(Q)$ with $Q=au^2+buv+cv^2$ and $b^2-4ac\\ne0$. In particular $Q\\ne0$. Its multiplication on $F[[u,v]]$ is injective: under the total-degree-then-lexicographic order, the least nonzero monomial of a product of two nonzero series is the product of their least nonzero monomials and has nonzero coefficient. Also $Q\\in(u,v)$, so $(Q)$ is a regular sequence. By [lem-trf-completion-local-complete-intersection], some $S_g$, $g\\notin\\mathfrak p$, is a local complete intersection over $k$. The principal open $\\operatorname{Spec}S_g\\subset U\\subset C$ is the required affine neighbourhood of $x$.",
+   "text": "The conditions just obtained satisfy [lem-trf-depth-fitting-quadratic-lci]. Choose its $g\\notin\\mathfrak p$. Then $\\operatorname{Spec}S_g\\subseteq U$ is an affine LCI neighbourhood of $x$, completing the forward implication.",
    "uses": [
-    "lem-trf-separable-closed-point-formal-presentation",
-    "lem-trf-fitting-ideal-independence-base-change",
-    "lem-trf-formal-jacobian-quadratic-criterion",
-    "lem-trf-completion-local-complete-intersection"
+    "lem-trf-depth-fitting-quadratic-lci"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "0C4C/0C49 followed by 0C4E: formal quadratic hypersurface gives the affine LCI neighbourhood"
+    "place": "0C4E (lemma-nodal-lci), completion gives LCI neighbourhood"
    }
   },
   {
-   "text": "For the converse, choose the assumed affine local-complete-intersection neighbourhood $U=\\operatorname{Spec}S$ of $x$, and retain $A=S_{\\mathfrak p}$ and $F=S/\\mathfrak p$. The hypotheses give finite separability of $F/k$ and $J_A=\\mathfrak m$. By [lem-sbc-equidimensional-open-local-dimension] with $O=C$ and $n=1$, the local topological dimension of $C$ at $x$ is $1$. This is also the dimension at $x$ in its open neighbourhood $U$: the open neighbourhoods contained in $U$ are cofinal among the open neighbourhoods of $x$. By [lem-weil-pbc-closed-point-dimension-local-ring], $\\dim A=1$. The depth conclusion of [lem-trf-completion-local-complete-intersection], applied to the LCI algebra $S$, therefore gives $\\operatorname{depth}A=1$.",
+   "text": "Conversely, choose the assumed affine LCI neighbourhood. By [lem-sbc-equidimensional-open-local-dimension], pure dimension one gives dimension at $x$ equal to one; [lem-weil-pbc-dimension-at-point-open-subspace] and [lem-weil-pbc-closed-point-dimension-local-ring] give $\\dim A=1$. By [lem-trf-completion-local-complete-intersection], $\\operatorname{depth}A=\\dim A=1$. Finite separability and $J_A=\\mathfrak m$ are hypotheses, so [lem-trf-depth-fitting-quadratic-lci] gives a quadratic completion with a $k$-algebra coefficient section and nonzero discriminant.",
    "uses": [
     "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
     "lem-weil-pbc-closed-point-dimension-local-ring",
-    "lem-trf-completion-local-complete-intersection"
+    "lem-trf-completion-local-complete-intersection",
+    "lem-trf-depth-fitting-quadratic-lci"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "0C4E: LCI implies Cohen-Macaulay, and dimension at a closed point is one"
+    "place": "0C4E (lemma-nodal-lci), Cohen-Macaulay converse; 0C4D/0C49, quadratic completion"
    }
   },
   {
-   "text": "Apply [lem-trf-separable-closed-point-formal-presentation] to $A$. Its completion is Noetherian local with maximal ideal $\\mathfrak m\\widehat A$ and residue field $F$. Its completion map is flat by [lem-weil-pbc-local-completion-faithfully-flat], so [lem-weil-pbc-flat-local-depth-formula] and the field closed fibre give $\\operatorname{depth}\\widehat A=\\operatorname{depth}A=1$. In its formal presentation, the differential-cokernel comparison in the presentation node and [lem-trf-fitting-ideal-independence-base-change] identify the Jacobian-minor ideal with $J_A\\widehat A=\\mathfrak m\\widehat A$. Therefore [lem-trf-formal-jacobian-quadratic-criterion] gives a complete local $F$-algebra isomorphism $\\widehat A\\cong F[[u,v]]/(Q)$ with $Q=au^2+buv+cv^2$ and $b^2-4ac\\ne0$.",
-   "uses": [
-    "lem-trf-separable-closed-point-formal-presentation",
-    "lem-weil-pbc-local-completion-faithfully-flat",
-    "lem-weil-pbc-flat-local-depth-formula",
-    "lem-trf-fitting-ideal-independence-base-change",
-    "lem-trf-formal-jacobian-quadratic-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "0C4D: the depth-one Fitting condition gives the nondegenerate quadratic completion"
-   }
-  },
-  {
-   "text": "By [lem-trf-geometric-field-stalk-descent], there is a geometric point over $x$ with residue field $\\bar k$. Its residue map determines an embedding $F\\hookrightarrow\\bar k$. The base-change clause of [lem-trf-separable-closed-point-formal-presentation], applied to the quadratic presentation just obtained (a continuous $F$-algebra surjection $F[[u,v]]\\to\\widehat A$ for the section of step 8, with $n=2$ and kernel $(Q)\\subseteq(u,v)$), gives $\\widehat B\\cong\\bar k[[u,v]]/(Q)$. Over the algebraically closed field $\\bar k$, the binary quadratic $Q$ factors as a scalar times two linear forms. The forms are distinct and linearly independent: if they were proportional, $Q$ would be a square up to scalar and its discriminant would vanish, including in characteristic $2$. A change to these two linear coordinates and absorption of the nonzero scalar consequently identify this quotient with $\\bar k[[u,v]]/(uv)$. This is the required geometric nodal completion, proving the converse.",
+   "text": "Choose a geometric lift by [lem-trf-geometric-field-stalk-descent]. It is a prime $\\mathfrak q$ of $S\\otimes_k\\bar k$ over $\\mathfrak p$ with $(S\\otimes_k\\bar k)/\\mathfrak q=\\bar k$; the induced map $F=S/\\mathfrak p\\to\\bar k$ is a $k$-embedding $\\iota$, and $\\mathfrak q$ is the kernel of $s\\otimes\\lambda\\mapsto\\iota(\\bar s)\\lambda$, since that map is the quotient map. By step 1, $B=(S\\otimes_k\\bar k)_{\\mathfrak q}$ is the local ring of a point of $C_{\\bar k}$ over $x$. Apply [lem-trf-quadratic-completion-geometric-splitting] to the quadratic completion from the preceding step. It gives $\\widehat B\\cong\\bar k[[u,v]]/(uv)$, which is the required node condition.",
    "uses": [
     "lem-trf-geometric-field-stalk-descent",
-    "lem-trf-separable-closed-point-formal-presentation"
+    "lem-trf-quadratic-completion-geometric-splitting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "0C49 and 0C4D: extend the nondegenerate binary quadratic to the algebraic closure and split it"
+    "place": "0C4D (lemma-nodal), split the quadratic after geometric base change"
    }
   }
  ],
  "proof_deps": [
   "def-trf-first-fitting-singular-subscheme",
-  "def-weil-pbc-kahler-differentials",
   "lem-sbc-equidimensional-open-local-dimension",
   "lem-trf-completion-local-complete-intersection",
-  "lem-trf-fitting-ideal-independence-base-change",
-  "lem-trf-formal-jacobian-quadratic-criterion",
+  "lem-trf-depth-fitting-quadratic-lci",
   "lem-trf-geometric-field-stalk-descent",
-  "lem-trf-separable-closed-point-formal-presentation",
+  "lem-trf-geometric-fitting-depth-descent",
+  "lem-trf-geometric-node-fitting-depth",
+  "lem-trf-quadratic-completion-geometric-splitting",
+  "lem-weil-pbc-affine-open-stalk-localization",
   "lem-weil-pbc-closed-point-dimension-local-ring",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
-  "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-kahler-differentials-base-change",
-  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-lft-affine-pairs",
-  "lem-weil-pbc-local-completion-faithfully-flat"
+  "lem-weil-pbc-open-fibre-product"
  ],
  "proof_origin": {
   "by": "document",
@@ -260,47 +205,39 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-nodal-point-local-criterion",
   "worker": "stage1",
-  "summary": "Retained the statement and split it into nine steps following Stacks 0C4D/0C4C/0C4E. Four genuine general auxiliary statements record the formal Jacobian quadratic criterion, separable closed-point formal and differential comparisons, geometric field-stalk descent, and the completion criterion for LCI neighbourhoods with its depth consequence. Existing nodes supply Fitting base change, faithful-flat contraction, the local depth formula and closed-point dimension. The proof explicitly descends the geometric singular field stalk before using a separable coefficient field.",
-  "blueprint": "Retains the imported ancestor and via chain. This is the pointwise nodal ingredient of the nodal-curve LCI criterion in the imported nodal-family geometry branch below the historical specialization/normal-cone argument of lem-trf-local-term-locality; the current unit does not itself state the auxiliary local algebra.",
+  "summary": "Repaired the 2026-10-22 re-split return: the unchanged statement is assembled in five short steps from four new statement-only local algebra nodes. Every argument of the former nine-step proof is assigned to these nodes or retained in the assembly; the report preserves the complete original text and its allocation. No Lean was changed or compiled.",
+  "blueprint": "Retains the imported ancestor and via chain. This is the pointwise nodal ingredient of the nodal-curve LCI criterion in the imported nodal-family geometry branch below the historical specialization/normal-cone argument of lem-trf-local-term-locality; the current unit does not itself state the auxiliary local algebra. Refines the pointwise nodal argument at the recorded from.place; new nodes cover old steps 2-6 and 8-9, while the affine reduction and pure-dimension argument stay in the parent.",
   "tool_uses": [
    {
-    "node": "def-weil-pbc-kahler-differentials",
-    "why": "Generic Module of Kähler differentials of a ring map used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    },
    {
-    "node": "lem-sbc-equidimensional-open-local-dimension",
-    "why": "Generic Local dimension of a pure-dimensional locally algebraic open used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    },
    {
     "node": "lem-weil-pbc-closed-point-dimension-local-ring",
-    "why": "Generic Dimension at a closed point of a finite type algebra over a field is the dimension of the local ring used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    },
    {
-    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "why": "Generic Ideals are contracted from a faithfully flat extension used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    },
    {
-    "node": "lem-weil-pbc-flat-local-depth-formula",
-    "why": "Generic Depth formula for a flat local homomorphism of Noetherian local rings used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-kahler-differentials-base-change",
-    "why": "Generic Kähler differentials commute with base change used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-kahler-differentials-localization",
-    "why": "Generic Kähler differentials commute with localization of the algebra used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    },
    {
     "node": "lem-weil-pbc-lft-affine-pairs",
-    "why": "Generic Locally of finite type is checked on all pairs of affine opens used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    },
    {
-    "node": "lem-weil-pbc-local-completion-faithfully-flat",
-    "why": "Generic The completion of a Noetherian local ring is faithfully flat used in the local algebra proof; the unit has no statement supplying this tool and its geometric route is unchanged."
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic affine/stalk or local dimension tool used for the unchanged nodal local-algebra route; no statement of this unit supplies this identification."
    }
   ]
  },
@@ -313,15 +250,19 @@
   "lem-weil-pbc-kahler-differentials-base-change",
   "lem-weil-pbc-kahler-differentials-localization",
   "lem-weil-pbc-lft-affine-pairs",
-  "lem-weil-pbc-local-completion-faithfully-flat"
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q11-c05d29cd7",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q95-2cf84a97e",
+  "group": "Q95",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-c05d29cd7 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited node statement in full. Sources checked: Curves 0C49, 0C4C, 0C4D and 0C4E plus definition-multicross; Varieties 0C52, 0C54, 0C4Y, 0C50 and 0384; DPA 09Q1, 09Q3 and 09Q6. The item statement agrees with 0C4D (1)<=>(5) combined with 0C4E and is unchanged. All 9 steps check against their cited statements, all hypotheses are present, there is no cycle and no SGA is used. The four new nodes are true, are not duplicates (I grepped all the tags) and none restates a clause of the item. Small cases tested: uv, the smooth line, the double line, char-2 u^2+uv+v^2, a purely inseparable residue field, and the field, regular-curve and nodal-hypersurface cases of the CI lemma. Repairs: (E1) Step 2 applied formal-Jacobian (b)=>(a), which needs an isomorphism of complete local F-algebras, but the node hypothesis (def-trf-nodal-geometric-fibres and Stacks) gives only a ring isomorphism. I added the equivalent condition (c), a ring-isomorphism form, to lem-trf-formal-jacobian-quadratic-criterion; it follows from 0C49 (1) being invariant under ring isomorphism, then 0C49 (1)=>(3). Step 2 now cites (c)=>(a). (E5/B2) lem-trf-separable-closed-point-formal-presentation did not require the surjection to be F-linear through the section, and did not say its base-change clause holds for every presentation, which step 9 relies on. I clarified both and reworded step 9 to match. All the generic commutative-algebra tool_uses declared in the split_report are accepted. The corrected files are under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-2cf84a97e (reviewer sub-agent of L); spot-checked: The re-split of the 9-step proof is sound: 4 statement-only new nodes of comparable size carry the old arguments, the statement is unchanged, and the assembly is 2038 chars (2604 after the fix). Node A (geometric-node-fitting-depth) carries old steps 2, 3 and the B̂→B depth step of 5. Node B (geometric-fitting-depth-descent) carries the differential base change of old step 3, all of old step 4 (descent on S/J via geometric-field-stalk-descent) and the A→B, A→Â depth steps. Node C (depth-fitting-quadratic-lci) carries old steps 6 and 8. Node D (quadratic-completion-geometric-splitting) carries old step 9. All four are true and checked against Stacks curves 0C4C (lemma-fitting-ideal (3): depth 1 and minors = m, no dimension hypothesis), 0C4D and 0C4E. Small cases checked: uv, u²+v² over R, u²+uv+v² in char 2, purely inseparable residue field, cusp and double line. None duplicates the existing nodes read: rational-node-quadratic-completion, sfb-separable-node-quadratic-completion, field-extension-completion-presentation, formal-jacobian-quadratic-criterion, node-algebraically-closed-extension and nodal-point-finite-separable-splitting. None restates a clause of the item. No SGA in any delivered source. Not superseded: live still has the 9-step proof, and the item is not in the dropped list. Tool use of the generic topological lem-weil-pbc-dimension-at-point-open-subspace is accepted. FIX in the item only (uses, proof_deps and statement unchanged). Step 1: restored the shortened old-step-1 argument that O_{Z,x}=A/J_A via the localization clause of the first-Fitting definition, so O_{Z,x}=F ⇔ J_A=m, forcing x∈Z. Step 5: made explicit that the geometric lift q is the kernel of s⊗λ↦ι(s̄)λ for the induced embedding ι, as node D requires, and that B is a local ring of C_k̄ over x by step 1.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -341,5 +282,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,261 @@
+{
+ "id": "lem-sf-weil-upper-shriek-verdier-conjugate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: $Rf^!=D_Xf^*D_Y$ (thm-coef-qbar-verdier)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The exceptional inverse image of Weil complexes is the Verdier conjugate of the pullback",
+ "statement": "Let $k_0$ be a finite field, $\\ell$ a prime different from the characteristic of $k_0$, and $\\overline{\\mathbf Q}_\\ell$ an algebraic closure of $\\mathbf Q_\\ell$ (Lean `PadicAlgCl ℓ`). Weil complexes on a $k_0$-scheme $X$ are the objects of the category $\\mathrm{WC}(X)$ of [def-weil-weil-sheaf-complex] (Lean `WeilComplex k₀ ℓ X`). Let $f\\colon X\\to Y$ be a separated, quasi-compact morphism locally of finite type of $k_0$-schemes, where $X$ and $Y$ are separated $k_0$-schemes of finite type (structure morphisms separated, quasi-compact, locally of finite type). Assume that $Ra_{X,0!}$, $Ra_{Y,0!}$ and $Rf_{0!}$ have right adjoints $Ra_X^!$, $Ra_Y^!$, $Rf^!$ ([def-weil-exceptional-inverse-image]), and let $D_X$, $D_Y$ be the Verdier duals $R\\mathcal Hom(-,\\omega_X)$, $R\\mathcal Hom(-,\\omega_Y)$ of [lem-sf-weil-verdier-dual-preserves-weil-complexes], with $\\omega_X=Ra_X^!\\overline{\\mathbf Q}_\\ell$, $\\omega_Y=Ra_Y^!\\overline{\\mathbf Q}_\\ell$. Then for every Weil complex $L$ on $Y$ there is an isomorphism $Rf^!L\\cong D_X\\,f^*\\,D_YL$ of Weil complexes on $X$, $f^*$ the pullback of Weil complexes ([def-weil-derived-pullback-tensor-hom]).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
+  "place": "thm-coef-qbar-verdier: $Rf^!=D_Xf^*D_Y$; Lean: upstream file lean/WeilConjectures/WeilSheaf/VerdierDual.lean, declaration AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso (module WeilConjectures.WeilSheaf.VerdierDual, lines 171-174, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Fix L and put D=D_Y L. Native tensor-Hom adjunction, the nativeModel comparison to derivedHom, fullness of the constructible inclusion, and the structure adjunction give Hom(M,D_X(f*D)) ≃ Hom(A_X(M tensor f*D),Omega). The private helper exists_dualizing_hom_equiv_reversed proves this bijection and its naturality in M directly, using right-tensor currying without a symmetry swap.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, tensor-Hom adjunction and projection formula; combine with Verdier biduality and the assumed exceptional adjunction."
+   }
+  },
+  {
+   "text": "The inverse Hom bijection from native_compact_structure_tensor_comparison changes the latter group to Hom(A_Y(Rf!M tensor D),Omega). Its last naturality square is applied with u=g and v=identity D, giving contravariant naturality in M.",
+   "uses": [
+    "lem-sf-weil-compact-structure-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, tensor-Hom adjunction and projection formula; combine with Verdier biduality and the assumed exceptional adjunction."
+   }
+  },
+  {
+   "text": "The inverse structure Hom bijection on Y identifies this group with Hom(Rf!M,D_Y D). Postcompose with the inverse of the component at L of Verdier biduality to get Hom(Rf!M,L). The structure Hom square and associativity give naturality of this chain in M.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, tensor-Hom adjunction and projection formula; combine with Verdier biduality and the assumed exceptional adjunction."
+   }
+  },
+  {
+   "text": "Apply the assumed Rf! ⊣ upperShriek adjunction to obtain Hom(M,upperShriek L). Its left naturality finishes the naturality of the composite equivalence. The proved private Yoneda helper isoOfNaturalHomEquiv yields D_X(f*D_Y L) ≅ upperShriek L; take its inverse to obtain the stated isomorphism. No native-to-fixed-pair comparison or ordinary direct-image exchange is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, tensor-Hom adjunction and projection formula; combine with Verdier biduality and the assumed exceptional adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-weil-compact-structure-tensor-comparison",
+  "lem-sf-weil-verdier-biduality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, tensor-Hom adjunction and projection formula; combine with Verdier biduality and the assumed exceptional adjunction.",
+  "note": "F8: direct native Hom-chain proof; all private glue proved, no new statements or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality dualizing complex exceptional inverse image right adjoint of compactly supported direct image etale",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instIsRightAdjointPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf), Equivalence.isRightAdjoint_inverse, Functor.IsLeftAdjoint.op: generic adjunctions only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\" and \"dualizingComplex\" (name substrings)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'verdier|dualizingComplex|dualizing complex ; upperShriek|lowerShriek|LowerShriek|exceptional inverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only CategoryTheory/Triangulated/* (Verdier's triangulated categories, not Verdier duality); no exceptional functors",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|upperShriek|exceptional.inverse",
+   "results": "none; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality exceptional inverse image of constructible Weil sheaves is dual pullback dual",
+   "results": "TopCat.Sheaf.pullback; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\"",
+   "results": "none; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bounded constructible Weil complexes the exceptional inverse image is Verdier duality composed with pullback and Verdier duality",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.pullbackComp; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|Verdier.dual|dualizing.complex|extraordinary|exceptional.pullback",
+   "results": "Mathlib/Geometry/Manifold/Bordism.lean; Mathlib/Geometry/Manifold/Bordism.lean; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "none; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on constructible sheaves right adjoint to compact support is obtained by conjugating inverse image by dualities",
+   "results": "TopCat.Sheaf.instIsRightAdjointPushforward; CondensedSet.compactlyGeneratedAdjunction; LightCondSet.LocallyConstant.adjunction; CategoryTheory.Functor.sheafAdjunctionContinuous; CondensedSet.LocallyConstant.adjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CompHausLike.LocallyConstant.adjunction; CondensedMod.LocallyConstant.adjunction; no Verdier exceptional-inverse-image theorem; returned adjunction/pullback declarations concern ordinary sheaves, and extraordinary hits concern bordism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      169,
+      174
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.VerdierDual",
+  "file": "lean/WeilConjectures/WeilSheaf/VerdierDual.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso"
+  ],
+  "statement": "theorem nonempty_upperShriek_obj_iso [HasUpperShriek k₀ l f] (L : WeilComplex k₀ l Y) :\n    Nonempty ((upperShriek f).obj L ≅\n      (verdierDual k₀ l X).obj (op ((upperStar f).obj ((verdierDual k₀ l Y).obj (op L))))) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-upper-shriek-verdier-conjugate",
+  "worker": "stage1",
+  "summary": "Q63 repair: retained statement and statement dependencies; extracted three balanced statement-only arguments (chosen duality normalization, abstract specified projection-Hom transpose, and equivariant exchange data). All six old proof arguments are mapped and retained verbatim in report.md. Assembly uses only their stated conclusions and categorical adjoint uniqueness. Reviewer FIX: the abstract transpose node duplicated the existing lem-sfb-projection-internal-hom-formal and was dropped; Step 2 cites that node and the nodes supplying its hypotheses.",
+  "blueprint": "The exceptional conjugacy clause of thm-coef-qbar-verdier and its use in lem-a1-local-boundary-duality. The live created.item chain is broken, so blueprint_refs.py ancestor returns None; new nodes record that computed null ancestor and the explicit mathematical place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic categorical assembly of the displayed natural Hom bijections into an adjunction."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic comparison of right adjoints with the same left adjoint."
+   },
+   {
+    "node": "lem-sfb-projection-internal-hom-formal",
+    "why": "Generic formal lemma: transposing an invertible projection map followed by evaluation gives an invertible map; used as a black box for tau_M, no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-coef-verdier-weil-equivariance",
+  "fix-prop-adjunctions",
+  "lem-pod-constructible-mate-coherence",
+  "lem-pod-formal-verdier-exchange-equivariance",
+  "fix-prop-projection-formula",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "det-sp-unique-right-adjoint",
+  "lem-sfb-projection-internal-hom-formal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-01b68a269",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-01b68a269 (reviewer sub-agent of L); spot-checked: I read in full the item, the three new nodes, the returned 6-step proof (the live Q09 2d08 proof), the released re-split note, and every cited statement: thm-coef-qbar-verdier, cor-coef-verdier-weil-equivariance, fix-prop-adjunctions, fix-prop-projection-formula, def-fix-six-functor-datum, def-weil-derived-pullback-tensor-hom at all stages, sk-def-sf-operations(i), lem-weil-pbc-adjunction-of-natural-bijection, det-sp-unique-right-adjoint, def-weil-weil-sheaf-complex, lem-sf-weil-verdier-dual-preserves-weil-complexes. Not superseded: live and side-live still hold the old proof. The re-split order is met. Old Step 1 goes to chosen-duality-hom. Old Steps 2, 3 and the c half of Step 4 go to chosen-duality-exchange. The τ Yoneda argument goes to an existing node. Old Steps 5–6 stay as an assembly of cited bijections. Assembly is 2726 characters. Two comparable new nodes remain, neither a restatement of the item. Faults repaired: (1) C5/D duplicate: lem-sf-closed-projection-hom-transpose is the existing split lem-sfb-projection-internal-hom-formal (Lean projectionInternalHomMap_isIso: the successive transpose of ev∘φ is invertible and natural). The new node only adds an unused postcomposition clause and an unneeded symmetric-monoidal hypothesis, so it is dropped and Step 2 repointed, with a tool_use declared. (2) C1 in Step 2: the formal lemma needs internal Hom on all of common-stage D^b_c(−,Q̄_ℓ), where def-weil-derived-pullback-tensor-hom defines RHom only partially, plus the adjunctions and PF on all of D^b_c. Step 2 now cites cor-coef-integral-internal-hom, def-weil-derived-pullback-tensor-hom, sk-def-sf-operations(i), thm-coef-qbar-verdier, fix-prop-adjunctions(1), fix-prop-projection-formula and def-weil-finite-tor-amplitude (D^b_ctf=D^b_c). (3) B3: the exchange node now cites def-weil-exceptional-inverse-image for G_f and def-fix-six-functor-datum for the compact-support composition isomorphism. Also fixed a stray \\' artefact in Step 1 (B4). Mathematics checked: c_f types and is invertible as the mate of an iso; τ_M is exactly the formal transpose with N=ω_Y; inverting e is a one-line Weil equation; the variance of the Hom chain (u↦D_X(u), then δ_M) is right; the Step 4 uniqueness transposes stay inside the pair category; f lft+qc gives finite type. Edge cases: f=id gives c=τ=id; empty schemes; a point with scalar Frobenius and no lattice; singular X and Y. No cycle; no SGA. Batch-5: both chosen-duality nodes cite cor-coef-verdier-weil-equivariance, whose closure reaches lem-pod-derived-automorphism-hom-evaluation. That node is the generic Weil comparison P·RHom≅RHom(P−,P−) for a scheme isomorphism; it is neither the non-Weil PD_p leaf nor a step of PD or of the trace formula, and it was already in the base proof's closure. Accepted. The added Step-2 citations add no new sec-poincare-duality or trace nodes. Maintainer note (inherited, keep_plan): the item's first sentence takes WC to be the fixed-pair category of def-weil-weil-sheaf-complex, but its D_X stmt_dep lem-sf-weil-verdier-dual-preserves-weil-complexes (restated by Q03/Q11), its siblings verdier-biduality and verdier-exchange, and its Lean declaration nonempty_upperShriek_obj_iso are all native D(𝒲_T). The delivery proves the pair reading correctly and reports the conflict openly. A decision on which model the item states is needed; if it becomes native, the two pair nodes stop being reached.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso",
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso"
+  ]
+ }
+}

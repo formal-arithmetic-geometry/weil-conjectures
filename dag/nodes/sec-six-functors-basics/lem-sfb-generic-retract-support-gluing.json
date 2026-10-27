@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-generic-retract-support-gluing",
+ "kind": "statement",
+ "title": "Two localization triangles for gluing a generic retract",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, and a finite normed extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. All schemes are separated of finite type over $k$ [sk-def-sfb-dc-setting]. Put $A_{E,T}=p_T^*C(-,E)$ and $A_{\\mathcal O_E,T}=p_T^*C(-,\\mathcal O_E)$, with continuous-map condensed rings and their norm topologies [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use internal modules and their ordinary unbounded derived categories [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull]. Write $\\Dbc(T,A_E)$ for bounded complexes with finite constant local models on finite constructible stratifications [sk-def-sfb-constructible]. Lisse means pro-etale locally finite free, including rank zero [def-sfb-lisse-coefficient-module].\n\nA full thick subcategory means a full subcategory containing zero and closed under isomorphisms, shifts, finite sums, distinguished-triangle cones and retracts [def-weil-triangulated-category]; a retract is a pair of maps whose composite on the smaller object is its identity. Let $a:S\\hookrightarrow U$ be a locally closed immersion with $S$ nonempty integral and $Z=\\overline S\\subseteq U$. Let $v:S_0\\hookrightarrow S$ be a nonempty dense open immersion and $z:B=(S\\setminus S_0)_{\\rm red}\\hookrightarrow S$ its closed complement. Put $F=\\overline B\\subseteq U$. Then $F$ is a proper closed subset of $Z$. Let $M,N\\in\\Dbc(S,A_E)$, and suppose maps\n$$v^*M\\xrightarrow{\\iota}v^*N\\xrightarrow{\\rho}v^*M,\\qquad\\rho\\iota=1_{v^*M}$$\nare given in $D(S_0,A_E)$. All locally closed extensions have the exact normalized meaning of [lem-sfb-locally-closed-extension-coherence]. There are distinguished triangles in $D(U,A_E)$\n$$ (av)_!v^*N\\longrightarrow a_!N\\longrightarrow a_!z_*z^*N\\longrightarrow ((av)_!v^*N)[1],$$\n$$ (av)_!v^*M\\longrightarrow a_!M\\longrightarrow a_!z_*z^*M\\longrightarrow ((av)_!v^*M)[1].$$\nBoth third terms belong to $\\Dbc(U,A_E)$ and restrict to zero on $U\\setminus F$. The maps $(av)_!\\iota,(av)_!\\rho$ exhibit $(av)_!v^*M$ as a retract of $(av)_!v^*N$. Consequently, if a full thick subcategory $\\mathcal H\\subseteq D(U,A_E)$ contains $a_!N$ and every bounded constructible complex supported on $F$, then it contains $(av)_!v^*N$, $(av)_!v^*M$ and $a_!M$. If $S_0=S$, the error terms are zero. This conclusion uses only the two displayed triangles and the displayed retract, without extending the projector to $a_!N$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Agent derived support consequence of Tag 09AH (lemma-ses-associated-to-open), via the existing internal module localization and locally closed coherence inputs; original item steps 8-9."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-triangulated-category",
+  "def-pc-integral-scheme",
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian (its only ideals are $0,k$), so every scheme in the statement is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-sfb-noetherian-complementary-stratifications] to each open/closed pair below: all its schemes are qcqs and its open immersion is quasi-compact. Topologically, a locally closed subset $S$ is open in its closure $Z$: if $S=V\\cap C$ with $V$ open and $C$ closed in $U$, then $Z\\subseteq C$ and $Z\\cap V=S$. Thus $S_0$ is a nonempty open subset of $Z$. The closed subset $Z\\setminus S_0$ of $U$ contains $B$, hence contains $F=\\overline B$. Consequently $F\\subsetneq Z$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-complementary-stratifications"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+   }
+  },
+  {
+   "text": "Use $\\Lambda=C(-,E)$. The Cartesian coefficient isomorphisms and exact pullback of [sk-prop-sfb-cartesian-coefficients] identify all inverse-image rings with the specified $A_{E,T}$. Apply [lem-weil-pbc-proetale-ringed-open-closed] to $(v,z)$ on $S$. By [lem-sfb-internal-module-operations-transport], its exact functors, specified units/counits and short exact sequence transport to internal modules. For every internal module $L$ we obtain $0\\to v_!v^*L\\to L\\to z_*z^*L\\to0$. The same inputs apply to any other complementary pair used below; in particular closed direct image restricts to zero on the complementary open. The quasi-compactness hypothesis is supplied by step 1.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+   }
+  },
+  {
+   "text": "For $K=N$ and $K=M$, choose a complex representing $K$. The natural sequence of step 2 is degreewise short exact and hence a sequence of complexes. By [lem-weil-pbc-complex-ses-triangle] it gives the distinguished triangle $v_!v^*K\\to K\\to z_*z^*K\\to(v_!v^*K)[1]$. The functor $a_!$ is exact by [lem-sfb-locally-closed-extension-coherence]; its termwise derived functor is triangulated by [lem-weil-pbc-exact-functor-derived-factorization]. Apply it to this triangle. The normalized composition isomorphism $a_!v_!\\cong(av)_!$ from the coherence node identifies the first and shifted terms, giving exactly the two triangles asserted in the item.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+   }
+  },
+  {
+   "text": "For $K=M,N$, [lem-sfb-pullback-constant-model-constructible] makes every $z^*H^q(K)$ constructible in the finite constant scalar-model sense. By [lem-sfb-scalar-model-immersion-extension], $z_*$ preserves those models. Factor $a$ as closed followed by open and apply that same node to the two extension factors; [lem-sfb-locally-closed-extension-coherence] identifies their composite with $a_!$. All these functors are exact, so they preserve kernels, images and their quotients, giving $H^q(a_!z_*z^*K)\\cong a_!z_*z^*H^q(K)$. This vanishes outside the finite cohomological interval for $K$ and is constructible within it. Thus both third terms belong to $\\Dbc(U,A_E)$ as defined in [sk-def-sfb-constructible]. A finite $E$ can be embedded in an algebraic closure for the admissible-coefficient lemmas; their coefficient is the continuous condensed ring of that same finite field.",
+   "uses": [
+    "lem-sfb-pullback-constant-model-constructible",
+    "lem-sfb-scalar-model-immersion-extension",
+    "lem-sfb-locally-closed-extension-coherence",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+   }
+  },
+  {
+   "text": "Put $t=az:B\\hookrightarrow U$. Composition coherence gives $a_!z_*\\cong t_!$, using the closed comparison $z_!=z_*$. Since $B$ is reduced, [lem-trf-reduced-scheme-image] identifies the scheme-theoretic image of $t$ with the reduced closed scheme on $F$. The canonical immersion factorization in [def-sfb-locally-closed-coefficient-extension] is therefore $t=i_F b$, with $b:B\\hookrightarrow F$ open and $i_F:F\\hookrightarrow U$ closed; the normalized coherence node identifies $t_!\\cong i_{F,*}b_!$. For the complementary open $w:U\\setminus F\\hookrightarrow U$, [lem-weil-pbc-proetale-ringed-open-closed] and [lem-sfb-internal-module-operations-transport] give $w^*i_{F,*}=0$. Termwise this proves $w^*(a_!z_*z^*K)=0$ for $K=M,N$. This uses the scheme-theoretic image theorem, not just set-theoretic containment to assert a factorization.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-trf-reduced-scheme-image",
+    "def-sfb-locally-closed-coefficient-extension",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+   }
+  },
+  {
+   "text": "Functoriality gives $((av)_!\\rho)\\circ((av)_!\\iota)=(av)_!(\\rho\\iota)=1$, the claimed retract. Write $C_K=a_!z_*z^*K$. Steps 4 and 5 put $C_M,C_N$ in $\\mathcal H$. Rotate the $N$ triangle backwards, using TR2 of [def-weil-triangulated-category], to $C_N[-1]\\to(av)_!v^*N\\to a_!N\\to C_N$. Equivalently $(av)_!v^*N$ is the cone, shifted by $-1$, of $a_!N\\to C_N$; cone and shift closure put it in $\\mathcal H$. Retract closure puts $(av)_!v^*M$ there. Rotating the $M$ triangle backwards shows $a_!M$ is the cone of $C_M[-1]\\to(av)_!v^*M$, so it also belongs to $\\mathcal H$. If $S_0=S$, then $B=\\varnothing$: the empty covering forces every module on its site to be zero, so both $z^*K$ and both error terms are zero. These constructions use only the given maps on $S_0$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-complementary-stratifications",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-pullback-constant-model-constructible",
+  "lem-sfb-scalar-model-immersion-extension",
+  "sk-def-sfb-constructible",
+  "lem-trf-reduced-scheme-image",
+  "def-sfb-locally-closed-coefficient-extension",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AH (lemma-ses-associated-to-open), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion); agent assembly with the cited derived and immersion-coherence lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "triangEnvelope|IsThick",
+   "results": "5 hits: Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean, Mathlib/CategoryTheory/Triangulated/Generators.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(localization|recollement).*(retract|thick)|(retract|thick).*(support|localization)",
+   "results": "3 hits: Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/Analysis/Calculus/Rademacher.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.Retract",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed recollement two localization triangles imply thick generation from generic retract and smaller support error terms",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Subcategory.ext₂, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.TStructure.recOn, CategoryTheory.Triangulated.Subcategory.ext₂', DerivedCategory.instIsTriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a thick subcategory a generic retract of a supported constructible derived complex extends across a smaller closed support by two open closed localization triangles",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsLE",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed localization triangles and a retract on a dense open imply thick generation modulo complexes supported on the boundary",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: derived-category infrastructure or scheme structure-sheaf restriction does not state the pro-etale continuous-coefficient generic-retract support-gluing assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two open closed localization triangles glue a retract on a dense open modulo bounded constructible complexes supported on the boundary",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.Localization.pretriangulated, Topology.IsConstructible, IsRetrocompact.isLocallyConstructible, Topology.IsLocallyConstructible, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec",
+   "date": "2026-10-22",
+   "verdict": "no match: derived-category infrastructure or scheme structure-sheaf restriction does not state the pro-etale continuous-coefficient generic-retract support-gluing assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openImmersionLowerShriek|ses.*[Oo]pen",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: derived-category infrastructure or scheme structure-sheaf restriction does not state the pro-etale continuous-coefficient generic-retract support-gluing assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for locally closed immersions of pro etale sheaves of continuous coefficient modules preserves a retract and the open closed exact sequence",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: derived-category infrastructure or scheme structure-sheaf restriction does not state the pro-etale continuous-coefficient generic-retract support-gluing assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-pair-proper-generators",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; extracted original item steps 8-9",
+   "via": [
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-generic-retract-support-gluing",
+  "worker": "stage1",
+  "summary": "Q89: preserved the statement; assembled the two triangles from existing internal/sectionwise localization, complex-SES and exact-derived-functor nodes; checked finite scalar-model constructibility, scheme-theoretic support and the generic retract. No new nodes.",
+  "blueprint": "The existing added input has no imported blueprint ancestor (blueprint_refs ancestor returns None). Realizes det-thm-sf-ctf-stability-direct-images proof (3), via the recorded continuous-coefficient support reduction and original tame-pair-generator steps 8-9. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-noetherian-complementary-stratifications",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "lem-sfb-pullback-constant-model-constructible",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "lem-sfb-scalar-model-immersion-extension",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic geometric, coefficient-module, or exact immersion tool; used with its stated hypotheses to assemble the prescribed two localization triangles. The unit has no equivalent input; no direct-image finiteness route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-noetherian-complementary-stratifications",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-pullback-constant-model-constructible",
+  "lem-sfb-scalar-model-immersion-extension",
+  "lem-trf-reduced-scheme-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-a79914027",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-a79914027 (reviewer sub-agent of L); spot-checked: I read the item in full along with the statement of every cited node. The statement and stmt_deps are identical to the Q63 base, there are no new nodes, proof_deps equals the union of the step uses, and there is no cycle. Step 1: k Noetherian makes every scheme Noetherian (finite-type-over-noetherian); complementary-stratifications supplies the qcqs schemes and the quasi-compact j that 09AH needs (proetale.tex 5135ff.). F ⊊ Z holds because S is open in Z, so S0 is open in Z and F ⊆ Z∖S0. Step 2: Cartesian coefficients, ringed-open-closed (SES, j⁻¹i_*=0) and internal-module transport give the localization sequence for internal modules. Step 3: complex-SES triangle, the exact termwise a_! (coherence node plus exact-functor-derived-factorization) and γ_{a,v} give both triangles. Step 4: pullback-constant-model and scalar-model-immersion-extension, applied to z_* and to both factors of a, put the error terms in Dbc(U,A_E). The finite E embeds isometrically in Q̄_ℓ, so its condensed ring is the same C(−,E). Step 5: B is reduced, so the scheme-theoretic image of t is F_red; the canonical factorization t = i_F∘b and coherence give t_! ≅ i_{F*}b_!, and w*i_{F*} = 0. Step 6 is elementary: the retract by functoriality, then TR2 rotation with cone, shift and retract closure. I tested S0=S, M=0, N=0, dim 0, and U=A¹ with S0=A¹∖{0}; all are consistent. Batch-5 check: lem-trf-reduced-scheme-image is the generic Stacks 056B node, and its 20-node closure is pure scheme theory with no trace-formula, Poincaré or nt- node. It is outside the assumed statements, so the citation is accepted. The eight declared tool_uses are generic black-box tools; the unit sk-thm-sf-ctf-stability has no node giving them, and no route step is replaced, so I accept them. A grep for generic-retract / localization-retract statements found no duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GenericRetractSupportGluing",
+  "declaration": "AlgebraicGeometry.ProEtale.genericRetractSupportGluing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GenericRetractSupportGluingAssertions",
+   "AlgebraicGeometry.ProEtale.genericRetractSupportGluing"
+  ],
+  "file": "lean/Sheaf/Paper/GenericRetractSupportGluing.lean",
+  "statement": "theorem genericRetractSupportGluing (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ) {k : Type u} [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (U S : Over (Spec (.of k))) [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] (a : S ⟶ U) [IsImmersion a.left] [IsIntegral S.left] {S₀ B : Scheme.{u}} (v : S₀ ⟶ S.left) [IsOpenImmersion v] [Nonempty S₀] (_hv : DenseRange v) (z : B ⟶ S.left) [IsClosedImmersion z] [IsReduced B] (_hz : Set.range z = (Set.range v)ᶜ) : GenericRetractSupportGluingAssertions (normContinuousRing E).X U S a v z",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff1f8824",
+  "group": "Q99",
+  "result": "pass",
+  "note": "First S2 delivery; only the item's lean record changed, statement verbatim, docstrings and 6-step proof plan present, proof sorry, assertions Prop real. Clause check: normed finite E/Q_l with continuousMapRingObjOfUniverse.{u,u} coefficients; Over Spec k finite type and separated; IsImmersion, IsIntegral; dense nonempty open v; reduced closed complement z; F = closure(range(z≫a)) ⊂ Z; M,N in constantModelBoundedConstructible; retract ι≫ρ=𝟙 on termwise v^*; a_! = SupportedCommonField.support (open lower shriek to scheme-theoretic image, then closed pushforward, the coherence node's i_*u_!); existential distinguished triangles for K=M,N; third terms Dbc with zero restriction to the complement of F; e0.map ι≫e0.map ρ=𝟙; thick P (IsTriangulated + iso-closed + retract-stable, equivalent to the node's list) gives P(o N), P(o M), P(a_!M); S0=S gives zero error terms. Edge cases and universe OK; no import cycle from proof_dep modules. Advisories: owners def-sfb-normalized-internal-support-scalars and def-sfb-norm-continuous-monodromy-data not in stmt_deps; termwise mapDerivedCategory used for exact pullback/pushforward; same-worker second reading is thin. No compile (no change); worker reports clean 21.8 s / 15.5 s."
+ }
+}

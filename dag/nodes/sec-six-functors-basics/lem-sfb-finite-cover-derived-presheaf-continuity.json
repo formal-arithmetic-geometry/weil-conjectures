@@ -1,0 +1,520 @@
+{
+ "id": "lem-sfb-finite-cover-derived-presheaf-continuity",
+ "kind": "statement",
+ "title": "Derived-presheaf continuity on a fixed finite-cover site",
+ "statement": "Let $\\mathcal C$ be a site, small in the chosen sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], presented by finite covering families containing isomorphisms and stable under composition and pullback, with pullbacks along covering arrows [def-weil-pbc-finite-precoverage]. Let $\\iota:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{PAb}(\\mathcal C)$ be inclusion and derive it on bounded-below complexes by injective resolutions [def-sp-injective-resolutions, def-weil-abstract-derived-category]. Let $I$ be any small filtered category, meaning nonempty and admitting a cocone on every finite diagram, and let $F:I\\to\\operatorname{Ab}(\\mathcal C)$ have colimit $F_\\infty$ [def-weil-pbc-category-colimit]. The comparison induced by its actual coprojections is an isomorphism\n$$\\delta_F:\\operatorname{colim}_{i\\in I}R\\iota(F_i[0])\\xrightarrow{\\sim}R\\iota(F_\\infty[0])\\quad\\text{in }D(\\operatorname{PAb}(\\mathcal C)).$$\nHere the source means the localization of the termwise filtered colimit of compatible nonnegative injective-resolution presheaf complexes, equivalently the exact derived filtered colimit. For every $q\\ge0$, evaluation of $H^q(\\delta_F)$ at $W\\in\\mathcal C$, under the canonical resolution identifications, is exactly\n$$\\operatorname{colim}_i H^q(W,F_i)\\longrightarrow H^q(W,F_\\infty).$$\nThese identifications are natural in coefficient diagrams and in $W$; all negative cohomology vanishes. More precisely, adjoin a strict initial object $o$ to $I$ and extend $F$ by $F_o=0$. The category $I^+$ is small and filtered, the extended diagram has the same colimit, and the constant inverse system of sites on $(I^+)^{\\mathrm{op}}$ has colimit site canonically equivalent to $\\mathcal C$. At $(o,W)$ the arrow-indexed diagram of object cohomology in [lem-weil-pbc-cohomology-colimit-of-sites] identifies with the extended $I^+$-diagram, and its canonical comparison identifies with the displayed coprojection-induced map. No cohomological-dimension bound is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP (lemma-colimit), constant inverse system on the opposite of the index with an initial zero coefficient adjoined; Section 01FT (section-cohomology-sheaves), injective-resolution evaluation. Agent derived-presheaf formulation of former parent steps 2 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-finite-precoverage",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lem-sc-site-cohomology-right-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Form $I^+$ with the old objects and arrows, a new object $o$, exactly one arrow $o\\to i$ for each old object, and no arrow from an old object to $o$. Every finite diagram has a cocone: first choose one in $I$ for its old part (choose any old object if that part is empty), then use the unique arrows out of $o$. Thus $I^+$ is small and filtered. Extend $F$ by zero. A cocone on this extension is exactly a cocone on $F$, since its leg from zero is unique. This identifies their colimits and actual coprojections, in sheaves and in abelian groups. The same observation applies to the extended cohomology diagram, since the zero resolution computes $H^q(W,0)=0$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YP (lemma-colimit): explicit initial-zero augmentation for the constant-site specialization"
+   }
+  },
+  {
+   "text": "Take the constant system with value $\\mathcal C$ on $(I^+)^{\\mathrm{op}}$, with every transition the identity morphism of sites. All finite-cover and covering-pullback hypotheses of [lem-weil-pbc-colimit-of-sites] hold by the hypotheses on $\\mathcal C$. Its colimit site is canonically $\\mathcal C$: on objects and arrows the cocone from a nonempty connected constant diagram is the identity cocone, and the union of the covering families is the original precoverage. At $o$, the arrow-index category in [lem-weil-pbc-cohomology-colimit-of-sites] is $\\operatorname{Under}_{I^+}(o)$. The functor sending an arrow $o\\to i$ to $i$ is an isomorphism of categories, since that arrow is unique. For an old arrow $b:i\\to j$, the corresponding arrow in $\\operatorname{Under}_{I^+}(o)$ is the triangle $(o\\to i)\\to(o\\to j)$ with side $b$. In the cited transition formula, site pullback is the identity and the coefficient map is $F(b)$, so its transition is exactly $H^q(W,F(b))$; arrows from $o$ give the unique maps from zero. Thus this is an identification of diagrams, not just their objects. Identity site pullback is the identity on object cohomology, so the cited theorem gives $\\operatorname{colim}_i H^q(W,F_i)\\cong H^q(W,F_\\infty)$ for every $q\\ge0$. Its stated formula for each cocone leg is precisely $H^q(W,F_i\\to F_\\infty)$; step 1 removes the zero term. This identifies the map, rather than only its source and target.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YP (lemma-colimit), with Sites Tags 09YL and 0A35, constant identity system"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-sheaf-tensor-closed] with coefficients $\\operatorname{Ab}$ and the sheafification of [def-weil-pbc-sheafification]. Thus $\\operatorname{Ab}(\\mathcal C)$ is Grothendieck abelian. The functorial injective embeddings of [lem-weil-pbc-grothendieck-functorial-injective-embedding] and the lower-bound-preserving resolution functor $\\mathsf J$ of [lem-weil-pbc-functorial-bounded-injective-resolution] give $K_i=\\mathsf J(F_i[0])$ and $K_\\infty=\\mathsf J(F_\\infty[0])$. These are nonnegative injective resolutions, strictly compatible with all arrows of $I$ and the actual coprojections $\\lambda_i:F_i\\to F_\\infty$. The augmentation is natural. By [lem-weil-pbc-right-derived-plus-injective], $Q\\iota K_i$ represents $R\\iota(F_i[0])$, and $Q\\iota\\mathsf J(\\lambda_i[0])$ represents $R\\iota(\\lambda_i[0])$, with the canonical resolution identifications.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0141 (lemma-functorial-injective-resolutions), 05TI and 05TH; injectives.tex Tags 079H and 01DP"
+   }
+  },
+  {
+   "text": "In $\\operatorname{PAb}(\\mathcal C)$, colimits are pointwise: define their values and restrictions by the abelian-group colimits, and the componentwise universal property gives precisely the natural transformations out of that presheaf. Kernels and cokernels are likewise pointwise by their universal properties. The category is abelian by [lem-weil-pbc-functor-abelian-colimits]. Hence [lem-weil-pbc-filtered-colimit-abelian-groups-exact] makes its filtered colimits exact. Colimits of complexes are termwise by the same construction, with differentials induced by the colimit legs. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to the exact functors $\\operatorname{colim}_I$ and evaluation at $W$ gives, naturally and with the colimit-leg normalization, $$H^q((\\operatorname{colim}_i\\iota K_i)(W))\\cong\\operatorname{colim}_i H^q(K_i(W)).$$ In particular termwise filtered colimits preserve objectwise quasi-isomorphisms. The exact functor therefore descends through localization, giving the exact derived filtered colimit specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-functor-abelian-colimits",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), applied to filtered colimit and evaluation; algebra.tex Tag 00DB"
+   }
+  },
+  {
+   "text": "The chain cocone $\\iota\\mathsf J(\\lambda_i[0])$ defines $$c:\\operatorname{colim}_i\\iota K_i\\longrightarrow\\iota K_\\infty.$$ The resolution formula of [def-weil-pbc-sites-and-cohomology], also as a presheaf in [lem-weil-pbc-object-cohomology-presheaf-resolution], identifies $H^q(K_i(W))$ with $H^q(W,F_i)$. By [lem-weil-pbc-derived-functor-map-via-lift], the map of section cohomology induced by each cocone leg is exactly $H^q(W,\\lambda_i)$. Consequently, under step 4, $H^q(c)(W)$ is the unique map whose composites with the coprojections are those maps: it is exactly the map proved invertible in step 2. For $q<0$ both complexes vanish, so their cohomology vanishes. An inverse of every component of a presheaf morphism is natural: multiply its naturality square on the two sides by the component inverses. Thus every $H^q(c)$ is a presheaf isomorphism. By the definition of quasi-isomorphism and localization, $Q(c)$ is an isomorphism, and step 3 identifies it with $\\delta_F$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-object-cohomology-presheaf-resolution",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 01FT (section-cohomology-sheaves); derived.tex Tags 05TD and 05TI; the actual 09YP cocone"
+   }
+  },
+  {
+   "text": "For completeness the model is independent of a strict compatible choice $r_i:F_i[0]\\to L_i$ of nonnegative injective resolutions. There is a natural zigzag of presheaf complexes $$\\iota\\mathsf J(F_i[0])\\longrightarrow\\iota\\mathsf J(L_i)\\longleftarrow\\iota L_i,$$ given by $\\mathsf J(r_i)$ and the resolution augmentation. Both maps are quasi-isomorphisms after $\\iota$: their sources and targets are bounded-below injective complexes, so the natural injective comparisons of [lem-weil-pbc-right-derived-plus-injective] identify their localized images with $R\\iota$ of sheaf quasi-isomorphisms. The augmentation square shows that $\\mathsf J(r_i)$ is a sheaf quasi-isomorphism. Since cohomology factors through localization, an invertible localized image has invertible cohomology maps, which proves the asserted presheaf quasi-isomorphisms. These zigzags commute strictly with every transition and, when a resolution cocone is supplied, with its legs. Step 4 preserves them under colimit. They thus identify its localized comparison with $Q(c)$. For a map of coefficient diagrams, the functor $\\mathsf J$ gives the comparison square on complexes; it commutes after each colimit coprojection by functoriality, hence commutes by the universal property. Restrictions $W\\prime\\to W$ commute with every chain map and the cycles and quotient maps. This proves coefficient and object naturality with the identifications of step 5. Every complex used remains nonnegative; no cohomological-dimension bound or infinite totalization occurs.",
+   "uses": [
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141 and Tags 05TI, 05TH: natural resolution comparison; exact-colimit localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-functor-abelian-colimits",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-object-cohomology-presheaf-resolution",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP (lemma-colimit), constant-site specialization and Section 01FT, assembled with derived.tex Tags 0141 and 05TI and homology.tex Tag 010N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a small site with finite covering families the derived inclusion of abelian sheaves into presheaves commutes with filtered colimits of degree zero sheaves",
+   "results": {
+    "t": "2026-10-22T06:10:00Z",
+    "tool": "leanfinder",
+    "query": "For a small site with finite covering families the derived inclusion of abelian sheaves into presheaves commutes with filtered colimits of degree zero sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+     "CategoryTheory.GrothendieckTopology.plusCompIso",
+     "CategoryTheory.plusPlusSheaf_preservesZeroMorphisms",
+     "CategoryTheory.GrothendieckTopology.ι_plusCompIso_hom",
+     "CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms",
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+     "CategoryTheory.sheafIsAbelian",
+     "CategoryTheory.Sheaf.sheafifyCocone_ι_app_val_assoc"
+    ],
+    "digest": "533afdb5dc07313b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf AB5, sheafification and colimit existence results do not establish continuity of the derived inclusion into presheaves; this requires finite-cover cohomological continuity, not merely exactness of sheaf colimits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": {
+    "t": "2026-10-22T06:09:49Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"rightDerived\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf AB5, sheafification and colimit existence results do not establish continuity of the derived inclusion into presheaves; this requires finite-cover cohomological continuity, not merely exactness of sheaf colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|rightDerived|derived).*(filtered|[Cc]olimit)|(filtered|[Cc]olimit).*(cohomology|rightDerived|derived)",
+   "results": {
+    "t": "2026-10-22T06:09:49Z",
+    "tool": "grep",
+    "query": "(cohomology|rightDerived|derived).*(filtered|[Cc]olimit)|(filtered|[Cc]olimit).*(cohomology|rightDerived|derived)",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean"
+    ],
+    "digest": "e5e85254713439d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf AB5, sheafification and colimit existence results do not establish continuity of the derived inclusion into presheaves; this requires finite-cover cohomological continuity, not merely exactness of sheaf colimits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology presheaves computed using injective resolutions on a finite cover site preserve small filtered colimits in the derived category of presheaves",
+   "results": {
+    "t": "2026-10-22T06:09:49Z",
+    "tool": "leansearch",
+    "query": "Cohomology presheaves computed using injective resolutions on a finite cover site preserve small filtered colimits in the derived category of presheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall",
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize",
+     "CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf",
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber",
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "CategoryTheory.preservesFiniteLimits_presheafToSheaf",
+     "CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification",
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone"
+    ],
+    "digest": "abb3a6642fbf669e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf AB5, sheafification and colimit existence results do not establish continuity of the derived inclusion into presheaves; this requires finite-cover cohomological continuity, not merely exactness of sheaf colimits."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|rightDerived|derived).*(filtered|[Cc]olimit)|(filtered|[Cc]olimit).*(cohomology|rightDerived|derived)",
+   "results": {
+    "t": "2026-10-22T12:03:02Z",
+    "tool": "grep",
+    "query": "(cohomology|rightDerived|derived).*(filtered|[Cc]olimit)|(filtered|[Cc]olimit).*(cohomology|rightDerived|derived)",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean"
+    ],
+    "digest": "e5e85254713439d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf colimit existence, AB5 and point fibers do not prove derived presheaf continuity on finite-cover sites."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*[Cc]olimit|[Cc]olimit.*homologyFunctor|homologyFunctorIso",
+   "results": {
+    "t": "2026-10-22T12:03:02Z",
+    "tool": "grep",
+    "query": "homologyFunctor.*[Cc]olimit|[Cc]olimit.*homologyFunctor|homologyFunctorIso",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Functor.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+    ],
+    "digest": "4e4ffcc9028fb321"
+   },
+   "date": "2026-10-22",
+   "verdict": "generalization already represented in the DAG: exact functors preserve homology; reused lem-weil-pbc-exact-functor-complex-cohomology instead of creating a node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"rightDerived\"",
+   "results": {
+    "t": "2026-10-22T12:03:02Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Sheaf, \"rightDerived\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf colimit existence, AB5 and point fibers do not prove derived presheaf continuity on finite-cover sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Object cohomology of sheaves on a site with finite coverings commutes with filtered colimits",
+   "results": {
+    "t": "2026-10-22T12:03:02Z",
+    "tool": "leansearch",
+    "query": "Object cohomology of sheaves on a site with finite coverings commutes with filtered colimits",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall",
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "CategoryTheory.Sheaf.ab5ofSize",
+     "CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup",
+     "CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf",
+     "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+     "CategoryTheory.Sheaf.createsColimitOfIsSheaf",
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone"
+    ],
+    "digest": "caf89d40da9425a6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf colimit existence, AB5 and point fibers do not prove derived presheaf continuity on finite-cover sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"preserves\"",
+   "results": {
+    "t": "2026-10-22T12:03:03Z",
+    "tool": "loogle",
+    "query": "\"homology\", \"preserves\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.PreservesHomology",
+     "CategoryTheory.Functor.PreservesLeftHomologyOf",
+     "CategoryTheory.Functor.PreservesRightHomologyOf",
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf",
+     "CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf",
+     "CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology",
+     "CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology"
+    ],
+    "digest": "5917ed2211d1f561"
+   },
+   "date": "2026-10-22",
+   "verdict": "generalization already represented in the DAG: exact functors preserve homology; reused lem-weil-pbc-exact-functor-complex-cohomology instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact colimit functor commutes with homology of complexes and preserves quasi isomorphisms",
+   "results": {
+    "t": "2026-10-22T12:03:13Z",
+    "tool": "leanfinder",
+    "query": "An exact colimit functor commutes with homology of complexes and preserves quasi isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+     "HomologicalComplex.quasiIso_map_of_preservesHomology",
+     "HomologicalComplex.quasiIsoAt_map_iff_of_preservesHomology",
+     "HomologicalComplex.quasiIso_map_iff_of_preservesHomology",
+     "CategoryTheory.ShortComplex.quasiIso_map_iff_of_preservesRightHomology",
+     "CategoryTheory.ShortComplex.quasiIso_map_of_preservesRightHomology",
+     "exactAt_iff_of_quasiIsoAt",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism"
+    ],
+    "digest": "6e005e534d4a3f0e"
+   },
+   "date": "2026-10-22",
+   "verdict": "generalization already represented in the DAG: exact functors preserve homology; reused lem-weil-pbc-exact-functor-complex-cohomology instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inclusion of abelian sheaves into presheaves on a finite cover site preserves small filtered colimits of sheaves",
+   "results": {
+    "t": "2026-10-22T12:03:14Z",
+    "tool": "leanfinder",
+    "query": "The derived inclusion of abelian sheaves into presheaves on a finite cover site preserves small filtered colimits of sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.ab5ofSize",
+     "CategoryTheory.Sheaf.instHasFiniteColimits",
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall",
+     "CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits",
+     "CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+     "CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf",
+     "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology"
+    ],
+    "digest": "a283145ee8023965"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf colimit existence, AB5 and point fibers do not prove derived presheaf continuity on finite-cover sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For each degree cohomology presheaves computed by injective resolutions commute with filtered colimits on a finitary site",
+   "results": {
+    "t": "2026-10-22T12:21:16Z",
+    "tool": "leanfinder",
+    "query": "For each degree cohomology presheaves computed by injective resolutions commute with filtered colimits on a finitary site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "CategoryTheory.preservesFiniteColimits_preadditiveYonedaObj_of_injective",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.injective_of_preservesFiniteColimits_preadditiveYonedaObj",
+     "CategoryTheory.Presheaf.isLocallyInjective_toSheafify'",
+     "CategoryTheory.Presheaf.isLocallyInjective_toPlus",
+     "PresheafOfModules.instIsLocallyInjectiveToSheafify"
+    ],
+    "digest": "49cbb83723dabcb4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheaf colimit existence, AB5 and point fibers do not prove derived presheaf continuity on finite-cover sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-derived-functions-filtered-colimit",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic coefficient comparison via profinite derived functions: former continuity proof steps 2-3, augmented constant-site system and objectwise derived presheaves.",
+   "via": [
+    "lem-sfb-profinite-derived-functions-filtered-colimit",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-cover-derived-presheaf-continuity",
+  "worker": "stage1",
+  "summary": "Proved the constant finite-cover specialization of 09YP with the initial-zero augmentation and its actual cocone maps, then constructed the derived comparison on functorial nonnegative injective resolutions and proved it a quasi-isomorphism via exact pointwise filtered colimits. Reused existing DAG nodes throughout; no new nodes and no statement change. Included resolution independence and coefficient/object naturality. Repair of the promotion return: reconciled the retained split with the current DAG, reread all dependency statements and checked every saved quotation; made the arrow-index transition calculation and the localization-to-cohomology inference explicit.",
+  "blueprint": "Paragraph (3), arithmetic coefficient comparison via profinite derived functions: former continuity proof steps 2-3, augmented constant-site system and objectwise derived presheaves.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-colimit-of-sites",
+    "why": "Generic constant-site colimit construction required for the 09YP specialization, already named by the item."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-colimit-of-sites",
+    "why": "Generic cohomology continuity theorem 09YP explicitly required by the statement, specialized without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "why": "Generic strict simultaneous resolution tool for coefficient diagrams and their cocones; no sheaf continuity assertion is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic normalized injective computation of the derived inclusion and its morphisms."
+   },
+   {
+    "node": "lem-weil-pbc-object-cohomology-presheaf-resolution",
+    "why": "Generic identification of resolution presheaf cohomology with object cohomology, with its universe convention."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-object-cohomology-presheaf-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-b6b06cf3f",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-b6b06cf3f (reviewer sub-agent of L); spot-checked: I read the whole item: 6 steps, no new nodes. The statement, stmt_deps, source and blueprint match clones/live word for word; the item is still unsplit live and in side-live; there is no repair note; proof_deps is the union of the step uses; there is no SGA citation. This is a repair re-delivery of the PASSed head 8a32c203. Only steps 2 and 6 changed, both by additions: step 2 now writes out each Under(o) transition as H^q(W,F(b)) plus the zero-source arrows from o, and step 6 adds that cohomology factors through localization. The old dagsnap was cleaned, so I reread every cited statement in this snapshot. Source: Stacks sites-cohomology 09YP (lemma-colimit) in the 0EXZ situation (cofiltered index, finite coverings), with no dimension bound; the DAG nodes colimit-of-sites and cohomology-colimit-of-sites carry the leg and transition formulas. Step 1 (elementary): I+ with a strict initial o is small and filtered, and cocones on F extended by zero are cocones on F. Step 2: the constant identity system on (I+)^op has colimit site C; the arrow index at o is Under(o) ≅ I+, whereas an old index would only give an undercategory. For the identity morphism of sites, u_p F = F and the unit is the canonical isomorphism, so the legs are H^q(W,λ_i). Step 3: sheaf-tensor-closed clause (1) for Ab makes Ab(C) Grothendieck abelian; the functorial embedding and the lower-bound-preserving resolution functor give strict nonnegative K_i; right-derived-plus-injective (2) with naturality of α identifies Qι K_i with Rι(F_i[0]). Step 4: presheaf colimits, kernels and cokernels are pointwise, filtered colimits of abelian groups are exact, and exact-functor-complex-cohomology applied to colim and to evaluation is compatible with the coprojections. Step 5: object-cohomology-presheaf-resolution (natural in objects) plus derived-functor-map-via-lift (for the coefficient legs) give H^q(c)(W) = the 09YP map; negative degrees vanish; Q(c) = δ_F is invertible. Step 6: the zigzag between bounded-below injective complexes is a presheaf quasi-iso via α, without claiming ι is exact; this gives resolution independence and naturality in coefficients and in W. Edge cases: one-object I, parallel arrows, a diagram consisting only of o, zero coefficients, empty coverings, empty site. The parent's step 2 uses exactly δ_F. No duplicate in the DAG. I accept the 5 declared generic tool_uses. Minor, no change needed: the item writes D(PAb) where the comparison node gives D+(PAb), a full subcategory."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCoverDerivedPresheafContinuity",
+  "declaration": "CategoryTheory.FiniteCoverDerivedPresheaf.comparison_isIso",
+  "declarations": [
+   "CategoryTheory.FiniteCoverDerivedPresheaf.ResolutionCocone",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.ResolutionCocone.at",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.ResolutionCocone.cocone",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.onComplexes",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.comparison",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.zeroExtension",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.zeroExtensionCocone",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.constantSiteCocone",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.resolutionSectionsIso",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.resolutions_exist",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.comparison_isIso",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.comparison_cohomology",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.cohomology_presheaf_identification",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.comparison_object_cohomology",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.negative_homology",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.comparison_naturality",
+   "CategoryTheory.FiniteCoverDerivedPresheaf.augmented_constant_site"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoverDerivedPresheafContinuity.lean",
+  "statement": "theorem comparison_isIso (hP : P.IsSiteForCoverings) [P.IsStableUnderFiniteComposition] [P.IsStableUnderFiniteBaseChange] (hfinite : ∀ (W : C) (S : Presieve W), S ∈ P W → Finite S.uncurry) [HasDerivedCategory.{w} (Cᵒᵖ ⥤ AddCommGrpCat.{u})] (I : Type u) [SmallCategory I] [IsFiltered I] (F : I ⥤ Sheaf P.toGrothendieck AddCommGrpCat.{u}) (c : Cocone F) (hc : IsColimit c) (R : ResolutionCocone F c) : IsIso (comparison P.toGrothendieck R.cocone)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The derived comparison is the localization of the termwise presheaf colimit comparison of compatible nonnegative resolutions. Companion statements record existence, canonical cohomology normalization, object cohomology, coefficient and object naturality, negative vanishing, and the initial-zero constant-site specialization. ResolutionCocone and the other helper constructions belong to this same comparison notion; no arbitrary map or resolution is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-512a08a75",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Checked every clause of the node against FiniteCoverDerivedPresheafContinuity: the isomorphism comparison_isIso in D(PAb) on the termwise colimit of compatible injective resolutions (the node's own model) with the actual legs over c.ι; the cohomology-at-W formula (comparison_cohomology, and comparison_object_cohomology with Mathlib H', true for every natural identification b); naturality; vanishing for n<0; the augmented constant-site clause (WithInitial, zero extension with the same vertex, identity Cat cocone, Under.forget equivalence). Hypotheses are exactly IsSiteForCoverings, finite composition/base change and hfinite. Universes are u-small (size convention) with w free. No hollow definitions, all theorems sorry, docstrings and statement verbatim OK, no duplicate notion. Mechanical theorem-stmt_dep finding: lem-sc-site-cohomology-right-derived-sections supplies no definitions (its module has only private defs; cohomologyPresheafFunctor is Mathlib); it only shows the hypothesis type of b is inhabited, so PASS on that point. §1(B) repoint of lem-weil-pbc-cohomology-colimit-of-sites to a sorried finite-composition generalization of the proved cohomology_colimit_of_sites: needed for finite-cover sites, strictly more general, old module untouched, so PASS with a note that stage 3 must re-prove it (consider keeping the old proved declaration in the record)."
+ }
+}

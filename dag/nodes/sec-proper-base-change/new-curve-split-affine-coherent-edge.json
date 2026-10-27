@@ -1,0 +1,139 @@
+{
+ "id": "new-curve-split-affine-coherent-edge",
+ "kind": "statement",
+ "title": "Compatible affine edges from a split structural direct image",
+ "statement": "Let f:X→S be flat, quasi-compact and separated [def-pc-scheme]. Put K=Rf_*(O_X[0]) and E=H¹(K) [lem-weil-pbc-flat-curve-derived-structure-model]. Suppose E is finite locally free [def-sc-finite-locally-free-sheaf], the structural H⁰ unit is invertible, and locally on S the restriction of K is O_S[0]⊕E[-1]. Then there are simultaneous Γ(T,O_T)-linear equivalences H¹(X×_S T,(pr_X)^*O_X)≃Γ(T,g^*E) for every affine scheme T and every g:T→S. They commute with the canonical module-cohomology pullback and the section-normalized tensor-pullback restriction of E [lem-weil-pbc-coherent-affine-base-change-edge-naturality]. All derived categories use the fixed recorded derived-category choices.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0GKA, split structure complex and base change; cohomology.tex Tags 0ATM and 01F2, affine Leray edge"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-flat-curve-derived-structure-model",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-weil-pbc-coherent-affine-base-change-edge-naturality"
+ ],
+ "proof": [
+  {
+   "text": "The structural H⁰ unit gives O_S≅H⁰(K), hence H⁰(K) is finite locally free. Transport the local splitting from modules on the localized open site to modules on the open subscheme through the exact equivalence. Exact functors commute with single objects, finite biproducts and shifts; a degree-zero single shifted by -1 is a degree-one single.",
+   "uses": [
+    "lem-weil-pbc-flat-curve-derived-structure-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit module is invertible and intrinsically flat. Its canonical derived tensor counit on a single complex is invertible. Flat invertible canonical base change makes the base-change mate invertible, so their pinned composite is invertible.",
+   "uses": [
+    "lem-pc-flat-module-canonical-derived-pullback",
+    "lem-pc-flat-invertible-canonical-derived-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coherent affine base-change edge naturality to the unit module. Retain its simultaneous linear comparisons and their restriction equation.",
+   "uses": [
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-curve-derived-structure-model",
+  "lem-pc-flat-module-canonical-derived-pullback",
+  "lem-pc-flat-invertible-canonical-derived-base-change",
+  "lem-weil-pbc-coherent-affine-base-change-edge-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0GKA, split structure complex and base change; cohomology.tex Tags 0ATM and 01F2, affine Leray edge"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally split derived structure direct image with invertible flat base change has natural affine linear first cohomology comparisons",
+   "results": "8 hits: cotangent H1 functoriality, flatness on affine sections and group-cohomology low-degree maps; no coherent affine edge theorem.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"biprod\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*edge.*split|affine.*cohomology.*split",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural affine cohomology comparisons for a split structural direct image; pullback symmetry and structural scalar normalization of etale higher images",
+   "results": "8 hits: affine-cover pullback identities, affine pullback instances, presheaf pullback adjunction, affine-space pullback identities and additive module pullback. No cohomology comparison or normalized scalar-class realization theorem.",
+   "date": "2026-10-24",
+   "verdict": "No exact matching statement; the recorded structural and cohomological interfaces are supplied by project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages",
+  "date": "2026-10-22",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+   "place": "Explicit interface normalization in the existing proof route",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CurveAffineEdge",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveAffineEdge.lean",
+  "declaration": "AlgebraicGeometry.exists_curve_coherentEdge",
+  "statement": "theorem exists_curve_coherentEdge {X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] [Flat f]\n    [hDU : ∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [SheafOfModules.IsFiniteLocallyFree (derivedStructureH1.{u, w} f)]\n    (hzero : IsIso ((DerivedCategory.homologyFunctor.{w, u, u + 1}\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map\n      (derivedStructureUnit.{u, w} f)))\n    (hsplit : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧\n      Nonempty ((@Functor.mapDerivedCategory.{w, w, u, u, u + 1, u + 1}\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace))\n        SheafOfModules.instCategory (curveEdge_schemeAbelian S) (hD S)\n        (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))\n        SheafOfModules.instCategory (curveEdge_overAbelian S U) (hDU U)\n        (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U)\n        (curveEdge_overAdditive S U) (curveEdge_overLimits S U) (curveEdge_overColimits S U)).obj\n          (derivedStructureImage.{u, w} f) ≅\n        (DerivedCategory.singleFunctor.{w, u, u + 1}\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n            (SheafOfModules.unit ((moduleRings S.toRingedSpace).over U)) ⊞\n        ((DerivedCategory.singleFunctor.{w, u, u + 1}\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n            ((derivedStructureH1.{u, w} f).over U))⟦(-1 : ℤ)⟧)) :\n    ∃ e : ∀ (T : Scheme.{u}) (g : T ⟶ S) (_ : IsAffine T),\n        coherentEdgeH.{u} f (SheafOfModules.unit X.ringCatSheaf) g ≃ₗ[Γ(T, ⊤)]\n          (RingedSpace.globalSectionsFunctor T.toRingedSpace).obj\n            ((tensorPullback g).obj\n              (coherentEdgeCohomology.{u, w} f (SheafOfModules.unit X.ringCatSheaf) 1)),\n      ∀ (T T' : Scheme.{u}) (g : T ⟶ S) (h : T' ⟶ T)\n        (hT : IsAffine T) (hT' : IsAffine T')\n        (x : coherentEdgeH.{u} f (SheafOfModules.unit X.ringCatSheaf) g),\n        e T' (h ≫ g) hT' (coherentEdgePullback.{u} f\n          (SheafOfModules.unit X.ringCatSheaf) g h x) =\n          coherentEdgeRho.{u} g h\n            (coherentEdgeCohomology.{u, w} f (SheafOfModules.unit X.ringCatSheaf) 1)\n              (e T g hT x)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.exists_curve_coherentEdge",
+   "AlgebraicGeometry.curveEdge_schemeAbelian",
+   "AlgebraicGeometry.curveEdge_overAbelian",
+   "AlgebraicGeometry.curveEdge_overAdditive",
+   "AlgebraicGeometry.curveEdge_overLimits",
+   "AlgebraicGeometry.curveEdge_overColimits",
+   "AlgebraicGeometry.curveEdge_overHasColimits"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

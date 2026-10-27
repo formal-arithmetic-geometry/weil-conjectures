@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-exact-localization-open-compositor",
+ "kind": "statement",
+ "title": "Exact localization of the normalized open compositor",
+ "statement": "For abelian categories A, B, C with chosen unbounded derived categories [def-weil-abstract-derived-category], let F:A→B, G:B→C, H:A→C and P:B→A, Q:C→B, T:C→A be additive exact functors with specified adjunctions a:F⊣P, b:G⊣Q and c:H⊣T [def-weil-exact-derived-adjunction]. For an isomorphism e:Q⋙P≅T, let ν:F⋙G≅H be its canonical left-adjoint composition comparison. The left-adjoint composition comparison for the three exact localized adjunctions, taken at the standard exact localization of e, equals the inverse standard exact-functor composition isomorphism followed by the exact localization of ν.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, exact localization of adjunction units and counits; Stacks sites-cohomology.tex Tag 07A7, unit-square-counit convention."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary left-adjoint compositor is characterized by its unit equation. Apply that equation degreewise to cochain complexes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use normalized adjunction composition and uniqueness [lem-pur-normalized-adjunction-composition] with the exact-functor factorization isomorphisms. The unit equation identifies the localized compositor at every complex.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization uniqueness on natural transformations [lem-weil-pbc-localization-universal-property] extends the comparison to every derived object.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-adjunction-composition",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, exact localization of adjunction units and counits; Stacks sites-cohomology.tex Tag 07A7, unit-square-counit convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of adjunctions preserves the left adjoint composition isomorphism normalized by the units",
+   "results": "8 hits, including Adjunction.localization_unit_app, localization_counit_app, derivedη_fac_app and derivedε_fac_app.",
+   "date": "2026-10-27",
+   "verdict": "Ingredients found; the specified compositor normalization is not a single existing Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits including leftAdjointCompIso, its component formula and conjugateEquiv_leftAdjointCompIso_inv.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing unit/compositor characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Cc]omp|normalizedAdjunction_composition",
+   "results": "6 Mathlib hits for the exact-derived factorization API; the local library supplies normalizedAdjunction_composition and normalizedAdjunction_uniqueness.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved local lemmas; no new unproved dependency."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization of adjunctions preserves the left adjoint composition isomorphism normalized by the units",
+   "results": "8 hits including Adjunction.localization, derived, localization_unit_app and leftAdjointCompIso.",
+   "date": "2026-10-27",
+   "verdict": "Reuse localization and the canonical compositor; the specified compatibility calculation is proved in the delivery."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits: intrinsic proper/open mate and pasting argument (parent step 2); Normalization required in the intrinsic proper/open pasting and identity proof.",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactClopenNormalization",
+  "file": "lean/Sheaf/CategoryTheory/ExactClopenNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Normalization.open_comp_localized",
+  "statement": "theorem open_comp_localized\n    {A B D : Type v₁} [Category.{h₁} A] [Category.{h₁} B] [Category.{h₁} D]\n    [Abelian A] [Abelian B] [Abelian D]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₁} B]\n    [HasDerivedCategory.{w₁} D]\n    {F : A ⥤ B} {P : B ⥤ A} {G : B ⥤ D} {Q : D ⥤ B}\n    {H : A ⥤ D} {T : D ⥤ A}\n    [F.Additive] [P.Additive] [G.Additive] [Q.Additive] [H.Additive] [T.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits P] [PreservesFiniteColimits P]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    (a : F ⊣ P) (b : G ⊣ Q) (c : H ⊣ T) (e : Q ⋙ P ≅ T) :\n    Adjunction.leftAdjointCompIso (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction a)\n      (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction b)\n      (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction c)\n      (Functor.exactDerivedRestrictionComposition Q P T e) =\n        (Functor.mapDerivedCategoryCompIso F G).symm ≪≫\n          Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointCompIso a b c e)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

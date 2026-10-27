@@ -33,6 +33,13 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
   [HasSheafify (J.over V) AddCommGrpCat.{max c v r}]
   [(J.over V).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
+local instance : (localizedSystemExtension.{c, v, r} R V).Additive :=
+  localizedSystemExtensionAdditive.{c, v, r} R V
+local instance : PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R V) :=
+  localizedSystemExtensionLimits.{c, v, r} R V
+local instance : PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R V) :=
+  localizedSystemExtensionColimits.{c, v, r} R V
+
 /-- Full coefficient-linear evaluation data, fixed at the ordinary and derived levels.
 The final equation says literally that evaluation of rho is scalar restriction of kappa.
 Source: Stacks 0E8I and 06YU
@@ -75,29 +82,48 @@ structure LinearEvaluation
     slice.scalar.T ⋙
       (localizedSystemExtension.{c, v, r} (S.obj n).right V).mapDerivedCategory
   /-- Its component on every resolving representative is the localized linear chain map. -/
-  normalized : ∀ (P : CochainComplex (Modules.{max c v, v, r} (R.over V)) ℤ),
-    Resolving.{max c v, v, r} (R.over V) P →
-    base.scalar.T.map
-      ((localizedSystemExtension.{c, v, r} R V).mapDerivedCategoryFactors.hom.app P) ≫
-    base.scalar.ε.app
-      (((localizedSystemExtension.{c, v, r} R V).mapHomologicalComplex (.up ℤ)).obj P) ≫
-    DerivedCategory.Q.map ((scalarComparisonOnComplexes.{c, v, r} R V (S.obj n)
-      base.scalar slice.scalar ordinary).hom.app P) =
-    derived.hom.app (DerivedCategory.Q.obj P) ≫
-    (localizedSystemExtension.{c, v, r} (S.obj n).right V).mapDerivedCategory.map
-      (slice.scalar.ε.app P) ≫
-    (localizedSystemExtension.{c, v, r} (S.obj n).right V).mapDerivedCategoryFactors.hom.app
-      ((slice.scalar.E.mapHomologicalComplex (.up ℤ)).obj P)
+  normalized :
+    letI := base.scalar.additive
+    letI := slice.scalar.additive
+    letI := localizedSystemExtensionAdditive.{c, v, r} R V
+    letI := localizedSystemExtensionLimits.{c, v, r} R V
+    letI := localizedSystemExtensionColimits.{c, v, r} R V
+    letI := localizedSystemExtensionAdditive.{c, v, r} (S.obj n).right V
+    letI := localizedSystemExtensionLimits.{c, v, r} (S.obj n).right V
+    letI := localizedSystemExtensionColimits.{c, v, r} (S.obj n).right V
+    NormalizedExactDescent
+      (A := Modules.{max c v, v, r} (R.over V)) (B := Modules.{c, v, r} R)
+      (C := Modules.{max c v, v, r}
+        ((sliceAlgebras.{c, v, r} R V).obj (S.obj n)).right)
+      (D := Modules.{c, v, r} (S.obj n).right)
+      (localizedSystemExtension.{c, v, r} R V)
+      (localizedSystemExtension.{c, v, r} (S.obj n).right V)
+      base.scalar.E slice.scalar.E base.scalar.T slice.scalar.T
+      base.scalar.ε slice.scalar.ε (Resolving.{max c v, v, r} (R.over V)) ordinary derived
   /-- The evaluated rho is scalar restriction of the linear derived comparison. -/
-  evaluated : ∀ K : D.{max c v, v, r} (R.over V),
-    (evaluation.{c, v, r} R n).mapDerivedCategory.map (ρ.hom.app K) ≫
-      (evaluationExtensionDerived.{c, v, r} R V n).hom.app
-        ((mV.F.obj (S ⋙ sliceAlgebras.{c, v, r} R V)).obj K) ≫
-      (localizedSystemExtension.{c, v, r} R V).mapDerivedCategory.map
-        (slice.derived.hom.app K) ≫
-      (scalarExtensionDerived.{c, v, r} R V (S.obj n) restriction).hom.app
-        (slice.scalar.T.obj K) =
-    base.derived.hom.app ((localizedSystemExtension.{c, v, r} R V).mapDerivedCategory.obj K) ≫
-      (scalars.{c, v, r} R (S.obj n)).mapDerivedCategory.map (derived.hom.app K)
+  evaluated :
+    letI := localizedSystemExtensionAdditive.{c, v, r} R V
+    letI := localizedSystemExtensionLimits.{c, v, r} R V
+    letI := localizedSystemExtensionColimits.{c, v, r} R V
+    letI := localizedSystemExtensionAdditive.{c, v, r} (S.obj n).right V
+    letI := localizedSystemExtensionLimits.{c, v, r} (S.obj n).right V
+    letI := localizedSystemExtensionColimits.{c, v, r} (S.obj n).right V
+    DerivedEvaluationSquare
+      (A := Modules.{max c v, v, r} (R.over V)) (B := Modules.{c, v, r} R)
+      (C := ℕᵒᵖ ⥤ Modules.{max c v, v, r} (R.over V))
+      (D := ℕᵒᵖ ⥤ Modules.{c, v, r} R)
+      (E := Modules.{max c v, v, r}
+        ((sliceAlgebras.{c, v, r} R V).obj (S.obj n)).right)
+      (F := Modules.{c, v, r} (S.obj n).right)
+      (localizedSystemExtension.{c, v, r} R V) (towerExtension.{c, v, r} R V)
+      (evaluation.{c, v, r} R n) (evaluation.{max c v, v, r} (R.over V) n)
+      (localizedSystemExtension.{c, v, r} (S.obj n).right V)
+      (scalars.{c, v, r} R (S.obj n))
+      (scalars.{max c v, v, r} (R.over V)
+        ((sliceAlgebras.{c, v, r} R V).obj (S.obj n)))
+      (m.F.obj S) (mV.F.obj (S ⋙ sliceAlgebras.{c, v, r} R V))
+      base.scalar.T slice.scalar.T
+      (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)) restriction
+      ρ base.derived slice.derived derived
 
 end SheafOfModules.LocalizedStrictTensor

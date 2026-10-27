@@ -1,0 +1,221 @@
+{
+ "id": "lem-per-qcqs-etale-limit-presentation-exists",
+ "kind": "statement",
+ "title": "Existence of normalized finite-cover presentations of qcqs etale limit sites",
+ "statement": "Let I be a small nonempty cofiltered category and D : I → Scheme a diagram of quasi-compact quasi-separated schemes with quasi-compact quasi-separated transition morphisms [def-weil-pbc-scheme-conventions] and [def-weil-size-convention]. There exists a Presentation D in the precise sense of [def-per-qcqs-etale-limit-presentation]: a strict equivalent system of the qcqs small etale categories, their finite-cover object-and-arrow colimit site with finite limits and the specified terminal objects, and normalized projection geometric morphisms with their restriction comparisons. No assertion of the topos universal property, factorization of points, conservativity or reindexing invariance is included.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 09YL and 0A35; ILO XX 4.4, printed p.373 (literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, PDF p.379)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-scheme-conventions",
+  "def-per-qcqs-etale-limit-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q(T)$ for the full qcqs subcategory of the small etale site of a qcqs scheme $T$. Its arrows, including affine open covers, are etale by [lem-weil-pbc-etale-composition-cancellation]. By [lem-weil-pbc-qcqs-morphism-permanence], every arrow between its objects is qcqs, and fibre products over its objects remain qcqs. Thus [lem-weil-pbc-etale-base-change-finite-limits] restricts to finite limits and finite-limit-preserving pullback functors on $Q(T)$. The finite covers are closed under pullback by [lem-weil-pbc-etale-base-change-continuous]; identities and finite composites cover by surjectivity. By [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings], every etale cover of an object of $Q(T)$ refines to a finite affine etale cover. Every etale object is covered by affine opens, which are qcqs. Hence the finite topology on $Q(T)$ is induced from the full small etale site. The fully faithful comparison [lem-pc-fppf-dense-sheaf-equivalence], with set coefficients, gives $\\operatorname{Sh}(T_{\\mathrm{et}})\\simeq\\operatorname{Sh}(Q(T))$. Finally [lem-weil-pbc-sets-etale-inverse-image-exact] identifies the scheme-induced direct image with precomposition by pullback; the restrictions just constructed therefore identify these morphisms with those of the small etale topoi. This proves all the stage-site assertions used below.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-pc-fppf-dense-sheaf-equivalence",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "topologies.tex Tags 021D, 04HR, 021I; schemes.tex Tags 03GI, 01KV, 01KU; morphisms.tex Tags 02GP, 02GN, 02GW; etale-cohomology.tex Tag 03Q4."
+   }
+  },
+  {
+   "text": "Normalize the identity pullbacks and apply [lem-coef-pseudofunctor-split-family-strictification] with $J=I^{\\mathrm{op}}$ and $H$ the constant empty category. Evaluation equivalences and their coherent comparisons replace the pullback pseudofunctor by a strict one. Transfer finite covers along evaluation: a finite family covers exactly when its evaluated family covers. Equivalences preserve finite limits, so the strict transitions retain Step 1's properties. Apply [lem-pc-fppf-dense-sheaf-equivalence] to the evaluation equivalences with these induced topologies and set coefficients to identify the old and new sheaf topoi.",
+   "uses": [
+    "lem-coef-pseudofunctor-split-family-strictification",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Strictification: categories.tex Tag 004A; comparison for equivalent sites with induced topologies."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-colimit-of-sites], stage coverings define the colimit site and the structure functors define projection geometric morphisms. For all finite limits, lift a finite diagram to a stage and take its limit there. Given a test object, move it to a common later stage. The Hom formula of [lem-weil-pbc-filtered-colimit-categories](3) and [lem-weil-pbc-filtered-colimits-commute-finite-limits] identify maps to that proposed limit with compatible families of maps to the diagram. This proves its universal property and preservation by each structure functor. The same calculation for the empty diagram gives singleton Hom sets, so every image of $Y_i/Y_i$ is terminal.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 09YL and 0A35; categories.tex Tag 002W, extending the Hom calculation of 09YL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-pc-fppf-dense-sheaf-equivalence",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-coef-pseudofunctor-split-family-strictification",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Adaptation of Steps 1-3 of lem-per-qcqs-etale-topos-inverse-limit; checked against the cited local sources and ILO XX 4.4, printed p.373."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cofiltered system of qcqs etale sites admits a strict colimit finite-cover site with projection geometric morphisms",
+   "results": "Eight hits, including Scheme.exists_isOpenCover_and_isAffine, Limits.colimitLimitIso and Scheme.compactSpace_of_isLimit. The scheme-limit results require affine transitions and do not construct the topos presentation.",
+   "date": "2026-10-26",
+   "verdict": "No match for this statement; use the existing category and site declarations for the construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of small etale categories can be strictified with equivalent evaluation functors",
+   "results": "Eight hits about LightProfinite equivalences and ordered inverse systems. None constructs strict etale sites and normalized projection morphisms.",
+   "date": "2026-10-26",
+   "verdict": "No match for this statement; use the existing category and site declarations for the construction."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*site|limit.*topos|limit.*topoi (Mathlib/CategoryTheory/Sites); QcqsEtaleLimit|IsToposLimit in both library roots; tools/blueprint_refs.py search limit topos",
+   "results": "Mathlib hits: Coherent/SequentialLimit.lean and Equivalence.lean only. Local QcqsEtaleLimit and IsToposLimit occur only in the definition and parent theorem modules. The blueprint search found zero matches. The existing parent is the conjunction being decomposed; no component declaration exists.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; the new theorem isolates a proper part of the original argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsEtaleToposInverseLimit",
+  "date": "2026-10-26",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The projective-limit etale topos and its geometric points of ILO XX 4.4, printed p.373, in the completion argument serving the inherited Step 3 provenance of lem-per-artin-gabber-affine-curve; component 1: Existence of normalized finite-cover presentations of qcqs etale limit sites.",
+   "via": [
+    "lem-per-qcqs-etale-topos-inverse-limit",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcqsEtaleLimitPresentationExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsEtaleLimitPresentationExists.lean",
+  "declaration": "AlgebraicGeometry.QcqsEtaleLimit.presentation_nonempty",
+  "statement": "theorem presentation_nonempty\n    (I : Type u) [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})\n    [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : I) (a : i ⟶ j), QuasiCompact (D.map a)]\n    [∀ (i j : I) (a : i ⟶ j), QuasiSeparated (D.map a)] :\n    Nonempty (Presentation D)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.AlgebraicGeometry.QcqsEtaleToposInverseLimit",
+  "summary": "A strictly smaller component of the existing seven-step argument, with its original generic inputs retained. No chapter or unit route is replaced.",
+  "edge_cases": "Cofiltered means nonempty; empty schemes are allowed, with empty covering families and potentially empty conservative point family. Identity reindexing compares arbitrary strictifications. Scheme isomorphisms preserve qcqs. No affine-transition or limit-scheme hypothesis is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-pc-fppf-dense-sheaf-equivalence",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-coef-pseudofunctor-split-family-strictification",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-of-sites",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-categories",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "This is an already approved generic tool in the parent node; the split retains its original role in the same unit argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T091759-L-3375895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T091759-L-3375895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

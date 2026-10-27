@@ -254,7 +254,87 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "HomogeneousLocalization.Away.overlapEquiv_cocycle",
+    "HomogeneousLocalization.Away.overlapEquiv",
+    "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
+    "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
+    "HomogeneousLocalization.Away.overlapEquiv_self",
+    "HomogeneousLocalization.Away.overlapEquiv_symm"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "HomogeneousLocalization.Away.overlapEquiv_cocycle",
+     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+     "lines": [
+      535,
+      551
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "HomogeneousLocalization.Away.overlapEquiv",
+     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+     "lines": [
+      497,
+      501
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "HomogeneousLocalization.Away.overlapEquiv_awayMap_left",
+     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+     "lines": [
+      503,
+      507
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "HomogeneousLocalization.Away.overlapEquiv_awayMap_right",
+     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+     "lines": [
+      509,
+      513
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "HomogeneousLocalization.Away.overlapEquiv_self",
+     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+     "lines": [
+      515,
+      519
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "HomogeneousLocalization.Away.overlapEquiv_symm",
+     "module": "WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization",
+     "lines": [
+      521,
+      526
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-def-nagata-sketch-data",
  "split_report": {
@@ -308,15 +388,20 @@
   "note": "Existing published chart-coherence family, read using scompile.py --source (the local slopmaster2 checkout predates it). The overlap rings are represented by Away at fg and gf; Mathlib Away.isLocalization_mul identifies these with the two restricted chart rings. overlapEquiv and the two awayMap compatibility lemmas supply the canonical equivalence; self and symm supply identity and inverse; overlapEquiv_cocycle identifies all three further restrictions with the common Away ring at fgh. Specialize the general grading to ℕ and the homogeneous degrees to positive ones."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For positive-degree homogeneous $f,g,h$, localization induces canonical\nequivalences between the restrictions of $(R_{(f)})_0$ and\n$(R_{(g)})_0$ to the overlap indexed by $fg$. These equivalences are the\nidentity for $f=g$, are inverse under exchange of $f$ and $g$, and satisfy\nthe cocycle equality on the triple localization indexed by $fgh$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f,g,h\\in R$ be homogeneous. Localization induces a canonical ring\nisomorphism $\\varphi_{fg}\\colon R_{(fg),0}\\xrightarrow{\\sim}R_{(gf),0}$\nbetween the two overlap rings indexed by $fg$, compatible with the\nlocalization maps from $R_{(f),0}$ and from $R_{(g),0}$. These\nisomorphisms are the identity for $f=g$, satisfy\n$\\varphi_{fg}^{-1}=\\varphi_{gf}$, and satisfy the cocycle equality on the\ntriple overlap: after composing with the localization maps into\n$R_{(fgh),0}$, each of $\\varphi_{fg}$, $\\varphi_{gh}$, $\\varphi_{fh}$\nbecomes the identity, so $\\varphi_{gh}\\circ\\varphi_{fg}=\\varphi_{fh}$ there.",
   "proof": [
    {
-    "text": "Use the canonical maps between the homogeneous localizations at $f$, $g$,\nand $fg$. On a representative $x/f^m$ each map sends the fraction to its\nimage in the localization at $fg$; the localization relation proves\nindependence of representatives. The identity, inverse, and triple\ncocycle equations follow because both sides are the same map into the\nlocalization at $fgh$. These are the compatibilities used by the verified\ndeclarations `Proj.basicOpenIsoSpec` and\n`Proj.affineOpenCover`.",
+    "text": "Use the canonical maps between the homogeneous localizations at $f$, $g$,\nand $fg$. On a representative $x/f^m$ each map sends the fraction to its\nimage in the localization at $fg$; the localization relation proves\nindependence of representatives. The identity, inverse, and triple\ncocycle equations follow because both sides are the same map into the\nlocalization at $fgh$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

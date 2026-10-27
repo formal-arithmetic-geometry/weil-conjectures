@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-normal-cone-directrix-minimal-primes",
+ "kind": "statement",
+ "title": "The linear vertex of a flat normal-cone fibre survives every minimal-prime quotient",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local commutative ring containing $\\mathbf Q$, and suppose $R$ has no nonzero nilpotent elements [def-weil-pbc-noetherian-ring]. Let $I\\subseteq\\mathfrak m$ be an ideal, put $A=R/I$, $k=R/\\mathfrak m$, and $G=\\operatorname{gr}_I R$ [def-weil-pbc-associated-graded-ring]. Assume $G$ is flat over $A$, meaning that tensoring injections of $A$-modules with $G$ preserves injectivity [def-weil-pbc-module-tensor-product]. Let $B$ be a standard graded $k$-algebra [def-pc-standard-graded-algebra], let $e\\ge0$, and fix a graded $k$-algebra isomorphism\n$$\\theta:G\\otimes_A k\\xrightarrow{\\sim}B[T_1,\\ldots,T_e],\\quad \\deg T_i=1$$\n[def-weil-pbc-mv-polynomial-ring]. Let $\\epsilon:B[T_1,\\ldots,T_e]\\twoheadrightarrow k[T_1,\\ldots,T_e]$ be the quotient by $B_+=\\bigoplus_{j>0}B_j$. For every minimal prime $\\mathfrak p$ of $R$ (a prime containing no strictly smaller prime), put $\\bar I=(I+\\mathfrak p)/\\mathfrak p$ and let\n$$q_{\\mathfrak p}:G\\otimes_A k\\twoheadrightarrow\\operatorname{gr}_{\\bar I}(R/\\mathfrak p)\\otimes_A k$$\nbe the canonical graded quotient map. Then\n$$\\ker q_{\\mathfrak p}\\subseteq\\ker(\\epsilon\\circ\\theta).$$\nEquivalently, the quotient $\\epsilon\\circ\\theta$ factors through $q_{\\mathfrak p}$ as a surjective graded map onto $k[T_1,\\ldots,T_e]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written filtered-algebra synthesis for the ILO VIII 2.3.13 synchronization input. Supporting algebra: Tag 00IP, lemma-intersect-powers-ideal-module-zero (separated I-adic filtration); Tag 00MH, lemma-free-fibre-flat-free (finite flat modules over a local ring are free); Tag 00EW, lemma-reduced-ring-sub-product-fields, part (3) (minimal-prime elements are zero divisors). None of these tags alone states this polynomial-vertex assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a minimal prime $\\mathfrak p\\subset R$; it is contained in $\\mathfrak m$. Put $\\mathfrak n=\\mathfrak m/I\\subset A$ and $F=G\\otimes_Ak$. On degree $j$, the elementary quotient-tensor identification $M\\otimes_A(A/\\mathfrak n)=M/\\mathfrak nM$ gives $F_j=I^j/(I^{j+1}+\\mathfrak mI^j)=I^j/\\mathfrak mI^j$, since $I\\subseteq\\mathfrak m$. The target of $q_{\\mathfrak p}$ in degree $j$ is $(I^j+\\mathfrak p)/(\\mathfrak mI^j+\\mathfrak p)$. Here $\\bar I^{j+1}$ disappears because it lies in $\\mathfrak m\\bar I^j$. Consequently every $h\\in(\\ker q_{\\mathfrak p})_j$ has a representative $a\\in I^j\\cap\\mathfrak p$: if a representative $x\\in I^j$ has $x=b+a$ with $b\\in\\mathfrak mI^j$, $a\\in\\mathfrak p$, then $a=x-b\\in I^j$. The quotient-tensor identification used here sends $m\\otimes\\bar c$ to $cm$ modulo $\\mathfrak nM$, with inverse $m\\mapsto m\\otimes1$; bilinearity verifies both compositions.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent quotient calculation from the associated-graded definition and the tensor universal property; no flatness of R/p is asserted."
+   }
+  },
+  {
+   "text": "Both $q_{\\mathfrak p}$ and $\\epsilon\\theta$ preserve degree. Therefore it suffices to prove the kernel inclusion on homogeneous elements: decompose any kernel element into its finitely many homogeneous components. Degree zero of $q_{\\mathfrak p}$ is the identity $k\\to k$ by the preceding formula. If $e=0$, $k[T_1,\\ldots,T_e]=k$ has no positive degrees, so the inclusion already follows. Otherwise suppose for contradiction that a homogeneous $h\\in(\\ker q_{\\mathfrak p})_n$ has $H=\\epsilon\\theta(h)\\ne0$. Then $n>0$ and $e>0$. Choose its representative $a\\in I^n\\cap\\mathfrak p$ as above, and write $\\alpha=a\\bmod I^{n+1}\\in G_n$. Its reduction in $F_n$ is $h$.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent homogeneous reduction, including the degree-zero and e=0 cases."
+   }
+  },
+  {
+   "text": "The residue field $k$ contains $\\mathbf Q$: a nonzero rational is a unit in $R$ and has nonzero residue. Thus $k$ is infinite. Apply [lem-trf-graded-polynomial-vertex-regularity] to $f=\\theta(h)$, which is homogeneous of degree $n>0$, with $e>0$ and $\\epsilon(f)=H\\ne0$. Multiplication by $f$ is injective; the isomorphism $\\theta$ therefore makes multiplication by $h$ injective on $F$.",
+   "uses": [
+    "lem-trf-graded-polynomial-vertex-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written algebraic refinement of the item, former steps 5--6. Supporting Tag 07BV, lemma-colimit-syntomic (monic polynomial regularity in its proof). Infinite-field direction input: existing lem-trf-infinite-field-top-form-direction; no Stacks tag asserts this full graded-polynomial comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-graded-fibre-regular-lift] to the given $R,I,n,a$. Its flatness hypothesis is assumed in the item, and its residue initial form is exactly $h$. It follows that $a$ is a nonzerodivisor in $R$.",
+   "uses": [
+    "lem-trf-flat-graded-fibre-regular-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written filtered-algebra synthesis of the item, former steps 1--2 and 7--8. Supporting Tag 00NZ, lemma-finite-flat-local; the finite-free case of Tag 00ME, lemma-mod-injective; Tag 00IP, lemma-intersect-powers-ideal-module-zero, or Tag 00IQ, lemma-intersection-powers-ideal-module (2). These tags supply the local module inputs, not the full filtered statement."
+   }
+  },
+  {
+   "text": "But $a\\in\\mathfrak p$ and $R$ is reduced. The statement [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes] therefore gives a $b\\ne0$ with $ab=0$. This contradicts the preceding step, so $\\epsilon\\theta(h)=0$ for every homogeneous $h\\in\\ker q_{\\mathfrak p}$. The homogeneous reduction proves $\\ker q_{\\mathfrak p}\\subseteq\\ker(\\epsilon\\theta)$ for every minimal prime $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EW, lemma-reduced-ring-sub-product-fields, part (3)."
+   }
+  },
+  {
+   "text": "For the equivalent formulation, define the descended map on a class $q_{\\mathfrak p}(x)$ by $\\epsilon\\theta(x)$. The kernel inclusion makes this well defined; addition, multiplication and grading follow from those of the original maps. It is surjective because $\\epsilon\\theta$ is surjective, and its composite with $q_{\\mathfrak p}$ is $\\epsilon\\theta$ by construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent quotient universal-property calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-standard-graded-algebra",
+  "lem-trf-graded-polynomial-vertex-regularity",
+  "lem-trf-flat-graded-fibre-regular-lift",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Filtered-algebra synthesis written here. Supporting results read: Tags 00NZ (lemma-finite-flat-local), 00ME (lemma-mod-injective, only the explicit finite-matrix special case used), 00IQ/00IP (Krull intersection), 00EW (minimal-prime zero divisors), and the existing polynomial Mathlib leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normal-cone-directrix-minimal-primes: for a reduced Noetherian local ring normally flat along an ideal, the linear directrix of the normal cone fibre is contained in the normal cone fibre of every minimal prime quotient",
+   "results": "{\"t\": \"2026-10-22T04:41:18Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normal-cone-directrix-minimal-primes: for a reduced Noetherian local ring normally flat along an ideal, the linear directrix of the normal cone fibre is contained in the normal cone fibre of every minimal prime quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"Ideal.minimalPrimes_eq_comap\", \"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"Ideal.exists_minimalPrimes_le\", \"Ideal.exists_mul_mem_of_mem_minimalPrimes\", \"Ideal.exists_comap_eq_of_mem_minimalPrimes\", \"Algebra.HasGoingDown.of_flat\", \"Ideal.mem_minimalPrimes_span_of_mem_minimalPrimes_span_insert\"], \"digest\": \"811c4d90f94b2e0b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned minimal-prime, going-down and homogeneous-ideal declarations do not compare a polynomial factor of an associated graded fibre with every minimal-prime quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\", \"AssociatedGraded\"",
+   "results": "{\"t\": \"2026-10-22T04:41:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"minimalPrimes\\\", \\\"AssociatedGraded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned minimal-prime, going-down and homogeneous-ideal declarations do not compare a polynomial factor of an associated graded fibre with every minimal-prime quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "directrix|normal.?cone.*minimal|[Aa]ssociated[Gg]raded.*[Mm]inimal[Pp]rime",
+   "results": "{\"t\": \"2026-10-22T04:41:17Z\", \"tool\": \"grep\", \"query\": \"directrix|normal.?cone.*minimal|[Aa]ssociated[Gg]raded.*[Mm]inimal[Pp]rime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned minimal-prime, going-down and homogeneous-ideal declarations do not compare a polynomial factor of an associated graded fibre with every minimal-prime quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A translation invariant linear subspace of the special fibre of a flat associated graded algebra lies in the initial cone of every minimal prime of a reduced local ring",
+   "results": "{\"t\": \"2026-10-22T04:41:17Z\", \"tool\": \"leansearch\", \"query\": \"A translation invariant linear subspace of the special fibre of a flat associated graded algebra lies in the initial cone of every minimal prime of a reduced local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.le_toIdeal_homogeneousHull\", \"Ideal.Filtration.submoduleInfHom\", \"Subalgebra.LinearDisjoint.of_le_left_of_flat\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Algebra.HasGoingDown.of_flat\", \"Ideal.IsHomogeneous.radical_eq\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"Ideal.IsPrime.homogeneousCore\"], \"digest\": \"def1de67896f3986\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned minimal-prime, going-down and homogeneous-ideal declarations do not compare a polynomial factor of an associated graded fibre with every minimal-prime quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "directrix|normal.?cone.*minimal|[Aa]ssociated[Gg]raded.*[Mm]inimal[Pp]rime",
+   "results": "{\"t\": \"2026-10-22T05:08:30Z\", \"tool\": \"grep\", \"query\": \"directrix|normal.?cone.*minimal|[Aa]ssociated[Gg]raded.*[Mm]inimal[Pp]rime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned types; going-down, localization flatness, Proj membership, regular-sequence base change and Weierstrass power-series results do not give this associated-graded minimal-prime comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The linear polynomial factor of a flat normal cone special fibre survives every irreducible component of a reduced local ring",
+   "results": "{\"t\": \"2026-10-22T05:08:31Z\", \"tool\": \"leansearch\", \"query\": \"The linear polynomial factor of a flat normal cone special fibre survives every irreducible component of a reduced local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"Polynomial.Splits.of_degree_eq_one\", \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"RingHom.Flat.ofLocalizationPrime\", \"Polynomial.splits_of_map_degree_eq_one\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.holdsForLocalizationAway\", \"Polynomial.factor\"], \"digest\": \"65779681b7be58f6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned types; going-down, localization flatness, Proj membership, regular-sequence base change and Weierstrass power-series results do not give this associated-graded minimal-prime comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-22T05:08:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AssociatedGraded\\\", \\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned types; going-down, localization flatness, Proj membership, regular-sequence base change and Weierstrass power-series results do not give this associated-graded minimal-prime comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normally flat associated graded ring over a reduced Noetherian local ring has its polynomial vertex contained in the normal cone of every minimal prime quotient",
+   "results": "{\"t\": \"2026-10-22T05:08:33Z\", \"tool\": \"leanfinder\", \"query\": \"A normally flat associated graded ring over a reduced Noetherian local ring has its polynomial vertex contained in the normal cone of every minimal prime quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff'\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\"], \"digest\": \"e2c461bdd9dad080\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned types; going-down, localization flatness, Proj membership, regular-sequence base change and Weierstrass power-series results do not give this associated-graded minimal-prime comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an element of a filtered local ring has a regular initial form on the residue fibre of a flat associated graded algebra then the element is a nonzerodivisor",
+   "results": "{\"t\": \"2026-10-22T05:08:49Z\", \"tool\": \"leanfinder\", \"query\": \"If an element of a filtered local ring has a regular initial form on the residue fibre of a flat associated graded algebra then the element is a nonzerodivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"Polynomial.IsDistinguishedAt.map_ne_zero_of_eq_mul\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\"], \"digest\": \"253061344d201a92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned types; going-down, localization flatness, Proj membership, regular-sequence base change and Weierstrass power-series results do not give this associated-graded minimal-prime comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-equality-component-rigidity",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: The linear vertex of a flat normal-cone fibre survives every minimal-prime quotient.",
+   "via": [
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normal-cone-directrix-minimal-primes",
+  "worker": "stage1",
+  "summary": "Repair of released stage-1 re-split order: statement and statement dependencies unchanged. Extracted two independent statement-only arguments: homogeneous polynomial vertex regularity (former steps 5--6), and residue-fibre regularity lifting (former steps 1--2,7--8). All former steps are preserved verbatim with their allocation in report.md; the remaining quotient, homogeneous reduction, minimal-prime contradiction and descent are the short assembly. No Lean or compilation. Promotion-return repair: rechecked the current DAG statements and retained all extracted arguments; restored the definition of the residue maximal ideal in assembly step 1 after its old defining step was extracted. Delivery is rebuilt on current origin/sheaf-dag, preserving maintainer records. Current promotion-return verification (2026-10-23): initial current-base dry run 59409cdcc8c passed; re-read all assembly citations and parent hypotheses against the current read clone. No cited statement changed; all seven literal quotations remain valid. Retained both unsplit helpers, the restored residue-maximal-ideal definition and the 2906-character assembly for promotion to the live DAG.",
+  "blueprint": "Refines the inherited historical resolution branch below lem-trf-local-term-locality, through lem-trf-hilbert-samuel-equality-component-rigidity: its Step 2 needs the polynomial vertex in each component cone. The ten steps supply precisely this filtered-algebra input to the ILO VIII 2.3.13 synchronization refinement; neither the current contracting-correspondence unit route nor any unit/chapter record is changed. The two new nodes refine the polynomial and filtered-local-algebra subarguments only."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-7dcce82a4",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-7dcce82a4 (reviewer sub-agent of L); spot-checked: PASS. This is the 4th push of the re-split after the promotion return. The two new nodes are byte-identical (sha256) to those of the earlier heads 748cbf0a, 9b85b1bb and a0716e09, which were all PASSed. The item changed only in split_report. Live and side-live still have the old 10-step proof and neither new node, so nothing supersedes the delivery. Re-split note: all 10 old steps are kept in the report. Old steps 1,2,7,8 became lem-trf-flat-graded-fibre-regular-lift and old steps 5,6 became lem-trf-graded-polynomial-vertex-regularity, about 2063 and 1151 characters of old argument. Old steps 3,4,9,10 are now the 2906-character assembly. Neither new node restates the item. I re-checked the item steps myself. F_j=I^j/mI^j. The q_p target is (I^j+p)/(mI^j+p), with kernel representatives in I^j∩p. Degree 0 is the identity, e=0 is trivial, and Q⊆k makes k infinite. The vertex node gives that f=θ(h) is a nonzerodivisor, the lifting node then makes a a nonzerodivisor, and 00EW plus the reduced-zerodivisor leaf give the contradiction. I proved both new nodes. Vertex node: the T_1^n coefficient of σ_M(f) is H(v)∈k^×, since only the B_0 part has T-degree n; tested with B=k[u]/(u^2). Lifting node: G_j is a retract of G, finite and flat, so free by 00NZ (algebra.tex:19223); a lifted left inverse (finite-free case of 00ME, algebra.tex:23424) and Krull 00IP (algebra.tex:12241) finish it; tested with n=0, I=0 and k[[x,y]]/(xy). A duplicate search with rg -L found nothing. Same unit, no SGA, no tool_uses needed, no fixes. Maintainer note: the item's source.place still cites 00MH/lemma-free-fibre-flat-free where 00NZ/lemma-finite-flat-local is meant. source is not split-owned, so this needs a hand correction."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalConeDirectrixMinimalPrimes",
+  "declaration": "Ideal.normalCone_directrix_minimalPrimes",
+  "declarations": [
+   "Ideal.normalConeResidueAlgebra",
+   "Ideal.normalConeFibre",
+   "Ideal.normalConeFibreCommRing",
+   "Ideal.normalConeFibreAlgebra",
+   "Ideal.normalConeFibreClass",
+   "Ideal.normalConeFibreComponentRelations",
+   "Ideal.normalCone_directrix_minimalPrimes"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalConeDirectrixMinimalPrimes.lean",
+  "statement": "theorem normalCone_directrix_minimalPrimes {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Algebra ℚ R] [IsReduced R] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) [Module.Flat (R ⧸ I) (associatedGraded I)] {B : Type v} [CommRing B] [Algebra (IsLocalRing.ResidueField R) B] (𝒜 : ℕ → Submodule (IsLocalRing.ResidueField R) B) [GradedAlgebra 𝒜] [GradedAlgebra.IsStandard 𝒜] (e : ℕ) (θ : normalConeFibre I hI ≃ₐ[IsLocalRing.ResidueField R] MvPolynomial (Fin e) B) (hθ : ∀ (n : ℕ) (a : (I ^ n : Ideal R)) (b : Fin e →₀ ℕ), MvPolynomial.coeff b (θ (normalConeFibreClass I hI n a)) ∈ 𝒜 (n - b.degree) ∧ (n < b.degree → MvPolynomial.coeff b (θ (normalConeFibreClass I hI n a)) = 0)) : ∀ p ∈ minimalPrimes R, RingHom.ker (Ideal.Quotient.mk (normalConeFibreComponentRelations I hI p)) ≤ RingHom.ker ((MvPolynomial.map (GradedRing.projZeroRingHom' 𝒜)).comp θ.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The tensor factors are reversed by the canonical symmetry. The component target is its canonical quotient presentation by the initial classes of I^n intersect p; the degree-n quotient is (I^n+p)/(m I^n+p), exactly the special fibre of gr_(I mod p)(R/p). The vertex target is B_0[T], identified with k[T] by the standard grading. Its map is the actual degree-zero projection on coefficients. These concrete models introduce no hypotheses or choices."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c8e79b9d",
+  "group": "O2",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node: Noetherian local, Algebra ℚ, reduced, I ≤ m, Flat (R⧸I) associatedGraded, standard graded B (IsStandard, B₀ = k), e, θ as a k-algebra equivalence from k⊗_A G with hθ equivalent to θ graded (classes span F_n), ε = map of projZeroRingHom' (kernel = coefficients in B₊), ∀ p ∈ minimalPrimes. q_p is given as Quotient.mk of span{1⊗[a] : a ∈ I^n∩p}; recomputed the degree-n kernel I^n∩(mI^n+p) = classes of I^n∩p (also at n=0), so the ideal is exactly ker q_p. Edge cases e=0, I=0, R a field are covered; universes u, v free. Helpers have real data and docstrings; no duplicate found in live Sheaf/WeilConjectures; sorry only in the theorem; all 10 proof steps in the docstring; plain imports are the proof-dependency modules; lines ≤100; only the lean field changed vs side-live; statement verbatim; Worker report and Second reading present. No file changed, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

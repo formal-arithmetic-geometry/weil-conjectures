@@ -1,0 +1,98 @@
+{
+ "id": "def-pur-diagonal-etale-restricted-dualizing-transport",
+ "kind": "definition",
+ "title": "Normalized dualizing transport over the restricted target",
+ "statement": "Fix the finite purity setting P with coefficient ring A [def-pur-conventions]. Let f:X→Y and g:Z→Y be separated quasi-compact locally finite-type maps, and X,Z,Y Noetherian. Let aY:Y→Spec(k) be quasi-compact and locally of finite type, V an affine open in Y, N a normalized compact-support datum [def-sp-etale-compact-support-normalization], and U a Noetherian scheme. Let j:U→X and v:U→Z be separated etale maps with v≫g=j≫f. Let O⊆U be open with maps jO:O→f⁻¹V and vO:O→g⁻¹V satisfying jO≫(f⁻¹V).ι=O.ι≫j and vO≫(g⁻¹V).ι=O.ι≫v. Write fV=f|V, gV=g|V, nu for the ordinary/pro-etale comparison, and h=jO≫fV=vO≫gV. For omega(q)=nu*(Rq! of the monoidal unit) [def-pur-diagonal-orientation-refinement-data], construct L:jO*omega(fV)≅vO*omega(gV). First use the specified pullComparison to pass to ordinary coordinates, then apply normalized monoidal-unit locality for (jO,fV), equality transport from jO≫fV to vO≫gV, and inverse normalized locality for (vO,gV). Finally invert pullComparison for vO. No section invariant, alpha, rho, coefficient-unit change, deformation or orientation enters this construction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-orientation-refinement-data",
+  "def-pur-etale-exceptional-precomp-locality",
+  "def-sp-etale-compact-support-normalization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of diagonal section dualizing complex under etale source pullback and smooth base change",
+   "results": "8 hits: diagonal_SpecMap, diagonal_Spec_map, diagonalRestrictIsoDiagonal and pullback projection formulas. No dualizing/locality compatibility.",
+   "date": "2026-10-27",
+   "verdict": "Use the project specified counit mates and pullback comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits including CategoryTheory.Functor.map_comp in Mathlib.CategoryTheory.Functor.Basic.",
+   "date": "2026-10-27",
+   "verdict": "Use map_comp and category associativity to combine the two factor equations."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplexBaseChangeMap|tensorMateEtalePrecompLocalityIso",
+   "results": "msearch Mathlib grep: zero hits. Project rg finds the source transport, exceptional locality, section inverse-exchange naturality and ChartDiagonalSourceSquare. The latter imports a chain reaching the item and cannot be used.",
+   "date": "2026-10-27",
+   "verdict": "No acyclic existing declaration gives either full factor equation; separate alpha from target-open/unit compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalEtaleSourceDualizing",
+  "date": "2026-10-27",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3",
+   "via": [
+    "lem-pur-diagonal-etale-source-dualizing-square",
+    "lem-pur-diagonal-etale-dnc-dualizing-square",
+    "lem-pur-diagonal-dnc-etale-naturality-twist-square",
+    "lem-pur-diagonal-dnc-etale-naturality",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalEtaleRestrictedDualizingData",
+  "file": "lean/Sheaf/Paper/DiagonalEtaleRestrictedDualizingData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.DiagonalEtaleComparison.restrictedDualizingTransport",
+  "statement": "def restrictedDualizingTransport (P : PurityFiniteSetting.{u})\n    {X Z Y : Scheme.{u}} (f : X ⟶ Y) (g : Z ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    [IsNoetherian X] [IsNoetherian Z] [IsNoetherian Y]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    (U : Scheme.{u}) [IsNoetherian U]\n    (j : U ⟶ X) [Etale j] [IsSeparated j]\n    (v : U ⟶ Z) [Etale v] [IsSeparated v]\n    (w : v ≫ g = j ≫ f)\n    (O : U.Opens) (jO : O.toScheme ⟶ (f ⁻¹ᵁ V.1).toScheme)\n    (vO : O.toScheme ⟶ (g ⁻¹ᵁ V.1).toScheme)\n    (hj : jO ≫ (f ⁻¹ᵁ V.1).ι = O.ι ≫ j)\n    (hv : vO ≫ (g ⁻¹ᵁ V.1).ι = O.ι ≫ v) :\n    (OrientationRefinement.pull P jO).obj\n        (OrientationRefinement.omega P (f ∣_ V.1) (V.1.ι ≫ aY)) ≅\n      (OrientationRefinement.pull P vO).obj\n        (OrientationRefinement.omega P (g ∣_ V.1) (V.1.ι ≫ aY))",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T034805-L-3687053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T034805-L-3687053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-group-space-unramified-base-locus",
+ "kind": "statement",
+ "title": "The maximal unramified base locus of a group algebraic space",
+ "statement": "Let $S$ be a scheme, let $B$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $q:G\\to B$ be a group algebraic space locally of finite type. Here a group algebraic space means an algebraic space $G$ with multiplication $G\\times_B G\\to G$, identity section $B\\to G$ and inverse $G\\to G$ satisfying the group identities. There exists a largest open subspace $V(G/B)\\subseteq B$ such that $G\\times_B V(G/B)\\to V(G/B)$ is unramified. Every open subspace $W\\subseteq B$ for which $G\\times_B W\\to W$ is unramified is contained in $V(G/B)$. For every morphism of algebraic spaces $h:B'\\to B$, the base-changed group $G'=G\\times_B B'$ is locally of finite type over $B'$ and $V(G'/B')=B'\\times_B V(G/B)$ as open subspaces of $B'$. An open subspace means an open immersion, tested after scheme base change; For a morphism of algebraic spaces, locally of finite type and unramified are tested etale locally on source and target using [def-weil-finite-type-morphism] and [def-weil-unramified-morphism], respectively.",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 0DSJ (lemma-open-over-which-unramified-or-lqf), part (1), including arbitrary base-change compatibility."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-open-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For any $h:B^\\prime\\to B$, [lem-trf-space-fibre-products-etale-covers] supplies the algebraic space $G^\\prime=G\\times_B B^\\prime$. On a test scheme $T\\to B^\\prime$, its sections are the sections of $G$ over $T\\to B$; the original multiplication, identity and inverse therefore define its group operations and satisfy the same identities. For every scheme $T\\to B$, the same fibre-product statement makes $G\\times_B T$ an algebraic space. Thus $q$, viewed as a map of algebraic stacks, is representable by algebraic spaces, as required by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Its arbitrary-base-change clause for locally finite type morphisms gives local finite type of $q^\\prime:G^\\prime\\to B^\\prime$. In particular this applies to restriction along every open $W\\hookrightarrow B$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSJ (1), base-change setup; lemma-base-change-group-space; Tag 03XH (lemma-base-change-finite-type) for local finite type."
+   }
+  },
+  {
+   "text": "Let $e:B\\to G$ be the identity section. Apply [lem-sfb-space-unramified-locus-base-change] to $q$ and write $U=U(q)\\subseteq G$. Define $V=B\\times_{G,e}U$, as a subfunctor of $B$, using [lem-trf-space-fibre-products-etale-covers]. It is an open subspace: for every scheme $T\\to B$, the pullback is $T\\times_G U$, an open subscheme of $T$ by the definition of an open subspace. This is precisely the scheme open-immersion convention [def-weil-open-immersion], and proves openness without an assertion about the image of a morphism.",
+   "uses": [
+    "lem-sfb-space-unramified-locus-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSJ (1), proof: take U=e^{-1}(W), with W the unramified source locus from Tag 05W2."
+   }
+  },
+  {
+   "text": "For $q_V:G\\times_B V\\to V$, [lem-sfb-space-unramified-locus-base-change] gives $U(q_V)=(G\\times_B V)\\times_G U$. Let $v:V\\to B$ and $a:V\\to U$ be the projections defining $V=B\\times_G U$, so $j a=e v$, where $j:U\\hookrightarrow G$. The identity $e_V:V\\to G\\times_B V$ has composite $e v$ with the projection to $G$. Thus $(e_V,a)$ defines a map $V\\to U(q_V)$ by [lem-trf-space-fibre-products-etale-covers], factoring $e_V$ through this open. Hence $q_V$ is unramified at every identity point. Step 1 supplies the group structure and local finite type. Applying [lem-sfb-group-space-unramified-identity-test] to $q_V$ proves that it is unramified on its entire source.",
+   "uses": [
+    "lem-sfb-space-unramified-locus-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-group-space-unramified-identity-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSJ (1), proof: apply Tag 0DSI to the base change over e^{-1}(W)."
+   }
+  },
+  {
+   "text": "Let $w:W\\hookrightarrow B$ be open with $q_W:G\\times_B W\\to W$ unramified. Its entire source is an admissible unramified open, so maximality of the source locus gives $U(q_W)=G\\times_B W$. By [lem-sfb-space-unramified-locus-base-change], this is $(G\\times_B W)\\times_G U$. Thus the projection to $G$ factors through $j:U\\hookrightarrow G$. Compose this factorization with the identity of $q_W$ to obtain $u:W\\to U$ with $j u=e w$. The fibre-product universal property of [lem-trf-space-fibre-products-etale-covers] gives the unique map $(w,u):W\\to B\\times_G U=V$ over $B$. Both $W$ and $V$ are subfunctors of $B$, so this is the inclusion $W\\subseteq V$. Step 3 proves that $V$ itself works, hence it is the largest such open.",
+   "uses": [
+    "lem-sfb-space-unramified-locus-base-change",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSJ (1), maximality of U=e^{-1}(W) in its proof."
+   }
+  },
+  {
+   "text": "For arbitrary $h:B^\\prime\\to B$, let $p:G^\\prime\\to G$ be the projection and $e^\\prime:B^\\prime\\to G^\\prime$ the pulled-back identity, so $p e^\\prime=e h$. Step 1 gives a locally finite type group over $B^\\prime$. By [lem-sfb-space-unramified-locus-base-change], $U(q^\\prime)=G^\\prime\\times_G U$. Steps 2--4 over $B^\\prime$ construct its largest base open as $B^\\prime\\times_{G^\\prime,e^\\prime}(G^\\prime\\times_G U)$. Write $j:U\\hookrightarrow G$. On any scheme $T$, an element of this last fibre product is a pair $b^\\prime:T\\to B^\\prime$, $u:T\\to U$ with $e h b^\\prime=j u$: the intervening $G^\\prime$ coordinate is forced to equal $e^\\prime b^\\prime$. The same pair determines $(b^\\prime,(h b^\\prime,u))$ in $B^\\prime\\times_B(B\\times_G U)=B^\\prime\\times_B V$, and forgetting the forced coordinate is its inverse. These maps commute with every pullback of $T$ and preserve $b^\\prime$. The sheaf fibre-product universal property in [lem-trf-space-fibre-products-etale-covers] therefore identifies the two open subfunctors over $B^\\prime$. This proves $V(G^\\prime/B^\\prime)=B^\\prime\\times_B V(G/B)$ for every $h$, including nonreduced base changes.",
+   "uses": [
+    "lem-sfb-space-unramified-locus-base-change",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSJ (1), arbitrary base-change compatibility, using Tag 05W2 and the pulled-back identity section."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-unramified-locus-base-change",
+  "def-weil-open-immersion",
+  "lem-sfb-group-space-unramified-identity-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 0DSJ (lemma-open-over-which-unramified-or-lqf), part (1), with its cited inputs 05W2 and 0DSI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group algebraic space locally of finite type over an algebraic space has a largest open base over which it is unramified, compatible with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unramified base locus of a locally finite type group algebraic space is open and commutes with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Unramified R A] : Unramified B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"Algebra.Unramified\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → (A : Type u_2) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, this is the proposition that $ A $ is unramified over $ R $.\"}\n  {\"name\": \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \": IsStableUnderBaseChange FormallyUnramified\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally unramified, then the corresponding ring homomo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unramifiedLocus\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] : Set (PrimeSpectrum A)\", \"doc\": \"`Algebra.unramifiedLocus R A` is the set of primes `p` of `A` that are unramified.\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] [Algebra.EssFiniteType R A] : IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_compl_support\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.unramifiedLocus R A = (Module.support A Ω[A⁄R])ᶜ\", \"doc\": \"\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramifiedLocus_inter_smoothLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "unramifiedLocus|group.*algebraic.*space",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"55\", \"text\": \"    etaleLocus R A = unramifiedLocus R A ∩ smoothLocus R A :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"91\", \"text\": \"  exact isOpen_unramifiedLocus.inter isOpen_smoothLocus\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"103\", \"text\": \"  refine Algebra.basicOpen_subset_unramifiedLocus_iff.mpr ?_ hrx\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"359\", \"text\": \"    rw [← basicOpen_subset_unramifiedLocus_iff] at this\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"18\", \"text\": \"- `Algebra.unramifiedLocus` : The set of primes that is unramified over the base.\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"19\", \"text\": \"- `Algebra.basicOpen_subset_unramifiedLocus_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"21\", \"text\": \"- `Algebra.unramifiedLocus_eq_univ_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"23\", \"text\": \"- `Algebra.isOpen_unramifiedLocus` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"49\", \"text\": \"/-- `Algebra.unramifiedLocus R A` is the set of primes `p` of `A` that are unramified. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image by the identity section of the unramified locus of a finite type group gives the maximal open of the base with unramified group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = (Module.support A Ω[A⁄R])ᶜ\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the complement of the support of the module of Kähler differentials $ \\\\Omega_{A/R} $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type group algebraic space has a maximal open base with unramified restriction compatible with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"Algebra.Unramified.finiteType\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {A : Type u_2} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Unramified R A], Algebra.FiniteType R A\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then $ A $ is finitely generated as an $ R $-algebra, i.e., there exist elements $ s_1, \\\\ldots, s_n \\\\in A $ such that every element of \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern rings or schemes and do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unramifiedLocus\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] : Set (PrimeSpectrum A)\", \"doc\": \"`Algebra.unramifiedLocus R A` is the set of primes `p` of `A` that are unramified.\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] [Algebra.EssFiniteType R A] : IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_compl_support\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.unramifiedLocus R A = (Module.support A Ω[A⁄R])ᶜ\", \"doc\": \"\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramifiedLocus_inter_smoothLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern rings or schemes and do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "unramifiedLocus|GroupAlgebraicSpace",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"359\", \"text\": \"    rw [← basicOpen_subset_unramifiedLocus_iff] at this\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"18\", \"text\": \"- `Algebra.unramifiedLocus` : The set of primes that is unramified over the base.\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"19\", \"text\": \"- `Algebra.basicOpen_subset_unramifiedLocus_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"21\", \"text\": \"- `Algebra.unramifiedLocus_eq_univ_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"23\", \"text\": \"- `Algebra.isOpen_unramifiedLocus` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"49\", \"text\": \"/-- `Algebra.unramifiedLocus R A` is the set of primes `p` of `A` that are unramified. -/\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"103\", \"text\": \"  refine Algebra.basicOpen_subset_unramifiedLocus_iff.mpr ?_ hrx\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"55\", \"text\": \"    etaleLocus R A = unramifiedLocus R A ∩ smoothLocus R A :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"91\", \"text\": \"  exact isOpen_unramifiedLocus.inter isOpen_smoothLocus\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern rings or schemes and do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal open base over which a group algebraic space is unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and every affine open subset $ V $ of $ X $ contained in $ f^{-1}(U) $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(V) $ is formal\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.FormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(R : Type v) → (A : Type u) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, the proposition that $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"Algebra.Unramified\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → (A : Type u_2) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, this is the proposition that $ A $ is unramified over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern rings or schemes and do not state this algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-dm-point-stabilizer",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Stabilizer criterion for membership in the DM locus. Atlas construction and field-point test of Tag 0DSN, supporting the infinitesimal DM-locus input. Proof step 2: the invariant maximal open on an atlas; proof step 5: its base-change identification on the fibre over an arbitrary field point.",
+   "via": [
+    "lem-sfb-algebraic-stack-dm-point-stabilizer",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-space-unramified-base-locus",
+  "worker": "stage1",
+  "summary": "Followed 0DSJ (1): construct the inverse image of the unramified source locus along the identity, prove it works using 0DSI, then prove maximality and arbitrary base change by fibre-product identities. Added two statement-only source inputs after duplicate and Mathlib searches. Statement unchanged. Repair of the 2026-10-22 landing return: rebased the retained split through the delivery tool onto the current live unsplit node, reread all existing cited statements, added direct statement dependencies for open immersions and algebraic-space fibre products, and spelled out the maximality argument in step 4. Fresh repair verification: compared the retained delivered files with the current unsplit live item and reopened every cited statement. Added the fibre-product citation to step 4, wrote its maps explicitly, and replaced step 5's abbreviated identification by mutually inverse natural maps on every test scheme. Repair following the return at 54b9d613528: rechecked the current unsplit live item and all cited statements after the initial successful dry run at 149e4be7f32; step 3 now constructs the identity factorization by the fibre-product universal property with its explicit citation. Repair of the current promotion return (2026-10-23): initial rebased dry run c7d29542fab passed; reread every proof and statement dependency in the current DAG and checked every citation quote. Step 1 now verifies representability by algebraic spaces on every scheme base change before applying the calculus node, and defines the pulled-back group operations on test schemes. The statement, two source inputs and logged search questions are unchanged.",
+  "blueprint": "Supports the inherited from.place chain: det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite, and the atlas invariant open and field-point base-change steps of lem-sfb-algebraic-stack-dm-point-stabilizer (steps 2 and 5). The ancestor command returns None for this non-blueprint lineage; its existing null ancestor and complete via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The category of algebraic spaces has sheaf fibre products; this is a foundational tool for the identity pullback, not trace-formula reasoning."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-bd3b35c1b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bd3b35c1b (reviewer sub-agent of L); spot-checked: This is the 5th delivery of this split. The earlier four (ff1b0071, 546dab54, 54b9d613, e8b73fda) were PASSed and then returned at landing as unpromoted side completions. In clones/live and side-live the item is still unsplit, with no reviewed record and no repair note, and neither new id exists. Diff against the e8b73fda snapshot: the new nodes are identical, and the item's statement, source and deps are unchanged. Only step 1 and the split_report differ. Step 1 now checks that q is representable by algebraic spaces (G x_B T is an algebraic space for every scheme T, by the fibre-product node) before it applies the calculus node's base-change clause for local finite type. This is correct. Sources read: Stacks 0DSJ(1) and 0DSI (spaces-groupoids.tex 334-390), 05W2 (spaces-morphisms.tex 7578-7633) and 03XH. The item is exactly 0DSJ(1). The new nodes are 05W2 with Z=Y and the unramified clause of 0DSI; both are statement-only, self-contained and strictly smaller than the item. Steps: 2 shows V=B x_{G,e} U is open by testing on schemes; 3 factors e_V through U(q_V) and then applies 0DSI; 4 proves maximality by a factorization, not an image argument; 5 identifies the open subfunctors explicitly with p e'=e h, for every h. A duplicate search over the DAG (tags plus statements mentioning both algebraic space and unramified) found none: the 05X9, permanence, descent and field group-scheme nodes all state other things. The parent dm-point-stabilizer (steps 2, 4, 5, 6) is fully supplied. Batch-5 citations: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are a general definition and foundational fibre-product facts, not trace-formula or Poincare content, so they are accepted, and the tool_use is accepted. No SGA. Small cases checked: trivial group, G_a, constant etale group, mu_p over Z giving D(p) with base change to F_p and to Q, and the empty base. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupSpaceUnramifiedBaseLocus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.groupSpace_unramified_base_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupSpaceUnramifiedBaseLocus.lean",
+  "statement": "theorem groupSpace_unramified_base_locus {S : Scheme.{u}} (B G : AlgebraicSpace S) (q : G ⟶ B) [@GrpObj (Over B.obj) _ (Over.cartesianMonoidalCategory B.obj) (Over.mk q.hom)] (hlft : MapIsLocally (@LocallyOfFiniteType) q) : ∃ (V : AlgebraicSpace S) (v : V ⟶ B), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) v.hom.hom ∧ MapIsLocally (@IsUnramified) (enlargedFibreProductFst v q) ∧ (∀ (W : AlgebraicSpace S) (w : W ⟶ B), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) w.hom.hom → MapIsLocally (@IsUnramified) (enlargedFibreProductFst w q) → ∃ i : W ⟶ V, i ≫ v = w) ∧ (∀ (B' : AlgebraicSpace S) (h : B' ⟶ B), MapIsLocally (@LocallyOfFiniteType) (enlargedFibreProductFst h q) ∧ MapIsLocally (@IsUnramified) (enlargedFibreProductFst (enlargedFibreProductFst h v) (enlargedFibreProductFst h q)) ∧ (∀ (W : AlgebraicSpace S) (w : W ⟶ B'), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) w.hom.hom → (MapIsLocally (@IsUnramified) (enlargedFibreProductFst w (enlargedFibreProductFst h q)) ↔ ∃ i : W ⟶ enlargedFibreProduct h v, i ≫ enlargedFibreProductFst h v = w)))",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The arbitrary-base-change clause characterizes the pulled-back open by admissibility and the factorization iff for all open subspaces, so it states equality of the largest opens without choosing their representatives. GrpObj uses the explicit standard pullback cartesian structure on Over B.obj. Two landed statement dependencies name the existing chart test and bundled sheaf fibre products."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa0ca5888",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery of e4db86ade2f7 (H2 RETURN). The only node change is the stmt_dep swap lem-trf-space-enlarged-etale-ringed-site-model -> def-sfb-space-sheaf-fibre-product (existing:true owner of enlargedFibreProduct/enlargedFibreProductFst, real pullback defs at side-live EnlargedEtaleRingedSite.lean l.230-238). Lean byte-identical (sha256 da79d08d). Clauses match Stacks 0DSJ(1) (spaces-groupoids.tex l.366-378): GrpObj on Over.mk q in Over.cartesianMonoidalCategory, MapIsLocally lft hypothesis, open V by IsRepresentableWith IsOpenImmersion, unramified restriction, maximality over all open W, and for every h: B'->B lft of G', unramified over B'xV and the iff for opens W (equality of opens). Edge cases: empty base, trivial group, G_a, mu_p over Z with base change to F_p/Q. Single universe u; sorry only; source and blueprint docstrings; lean.statement verbatim; item not yet landed in side-live; report has Worker report and Second reading by NQ. Advisory: openness of B'xV not stated explicitly (derivable). No file changed, no compile."
+ }
+}

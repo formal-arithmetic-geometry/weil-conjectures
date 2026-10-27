@@ -1,0 +1,262 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Paragraph (2), first paragraph: ordinary ambient direct-sum preservation, via the closed-fibre heart comparison. Agent-extracted obligation; exact full-generality reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-constructible",
+  "def-sfb-qcqs-open-closed-tree"
+ ],
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "id": "lem-sfb-supported-finite-model-scalar-rigidity",
+ "title": "Closed-pair restriction for a supported finite scalar local model",
+ "statement": "Let ell be prime and Lambda a commutative condensed ring isomorphic to one of the\nfive coefficient rings in lem-sfb-supported-three-term-scalar-rigidity: a finite discrete\ncommutative ring killed by an ell power, Z_ell, O_E, Q_ell, or E for a finite intermediate\nextension E/Q_ell. Let t:T0→T be\na closed immersion of qcqs schemes whose restriction maps on every torsion abelian etale\nsheaf are bijective in every nonnegative cohomological degree. Let p be an arbitrary path\nfrom S to the root T in a finite qcqs open-closed tree, with quasi-compact complementary\nopen at each closed edge, and let J be its actual composite of open extension by zero and\nclosed direct image on internal Lambda modules. If N on S has a pro-etale cover on which\nit is pulled back from a finitely presented Lambda-module on the point, then the actual\nderived restriction RΓ(T,JN[0])→RΓ(T0,t*JN[0]) is an isomorphism in D(Ab). No assertion is\nmade about arbitrary images, kernels or homology of morphisms of local models.",
+ "proof": [
+  {
+   "text": "First prove finite-model comparison for every admissible chain rooted in $T$. For finite discrete $A$, each finite scalar local model is a locally constant finite $A$-module by the finite-discrete encoding lemma. The finite-local-system descent theorem makes it classical. Along a chain, extension by zero is still constructible: at an open arrow append the closed complementary zero stratum, and at a closed arrow append the open complementary zero stratum. Pull back the finite stratification on the image and use the restriction and vanishing identities for $a_!,a_*$; every complement involved is constructible because the specified open is quasi-compact. Thus $JL$ is constructible in the definition used by the discrete constructible-comparison theorem, so is classical. Since the finite ring is Noetherian, this theorem and the classical-module equivalence supply an étale $A$-module $F$ with $\\nu_T^*F\\cong JL$. Its underlying abelian sheaf is locally torsion (indeed killed by the exponent of $A$).",
+   "uses": [
+    "lem-pe-finite-discrete-scalar-constant-models",
+    "det-pe-finite-local-systems-twist",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "det-pe-constructible-comparison-classical",
+    "sk-thm-pe-classical-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+   }
+  },
+  {
+   "text": "Use discrete derived site comparison on $F[0]$ and on $t_{\\mathrm{et}}^{-1}F[0]$. The canonical pullback comparison identifies the latter's pro-étale realization with $t^*JL[0]$. These comparisons carry restriction to restriction: before deriving, both composites are the unit for restriction followed by the comparison unit; the equality is the naturality of the unit for the composite inverse-image adjunction. Derive that equality on injective resolutions. On each cohomology group the coefficient-forgetting comparison identifies the étale module restriction with the underlying abelian restriction. The hypothesis of the item makes this map bijective for every nonnegative degree; all negative groups vanish. Consequently the actual restriction is an isomorphism in $D(\\mathbf{Ab})$. This proves $\\mathsf B_A(t)$, meaning comparison for every supported finite scalar model, uniformly in the support chain.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-derived-module-underlying-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+   }
+  },
+  {
+   "text": "For R=Z_ell or R=O_E, apply the supported integral-model restriction-tower theorem to obtain its normalized RestrictionComparison. For each finite-level etale module F_n, ellPower makes its underlying abelian sheaf torsion. Forgetting scalars and evaluating the normalized derived sections identifies the actual restriction on every nonnegative cohomology group with ht; negative groups vanish. Exact evaluation of strict towers commutes with cohomology. Thus the homology of the tower restriction is a natural transformation whose every component is invertible; NatTrans.isIso_iff_isIso_app and DerivedCategory.isIso_iff prove invertibility of the tower restriction itself. Apply the right-derived inverse-limit functor, which preserves isomorphisms. The iso field of RestrictionComparison is an isomorphism in the arrow category from integralArrows to etaleArrows. Arrow.isIso_hom_iff_isIso_hom_of_isIso transports invertibility back to the original integral restriction. Transport along the coefficient isomorphisms to handle the stated presentations. This proves the integral single-model comparison uniformly in paths, without any assertion that arbitrary images are complete.",
+   "uses": [
+    "lem-sfb-supported-integral-model-restriction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+   }
+  },
+  {
+   "text": "Apply the rational transfer implication first to $(R,K)=(\\mathbf Z_\\ell,\\mathbf Q_\\ell)$ and then to $(\\mathcal O_E,E)$ for each finite intermediate $E$. Its additional premise is the universal finite-model property proved in the previous step; the torsion-pair premise is unchanged. This yields $\\mathsf B_{\\mathbf Q_\\ell}(t)$ and every $\\mathsf B_E(t)$. Together with the finite discrete case this supplies $\\mathsf B_\\Lambda(t)$ for every coefficient in the item.",
+   "uses": [
+    "lem-sfb-supported-rational-model-rigidity-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Precisely old proof steps 2--5 of the assigned node: finite-discrete comparison, integral strict towers, and the two conditional coefficient transfers."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedThreeTermScalarRigidity",
+  "date": "2026-10-24",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-supported-three-term-scalar-rigidity",
+   "place": "Proof steps 2--5: the independent single-model comparison, before the image and two-triangle arguments.",
+   "via": []
+  }
+ },
+ "proof_deps": [
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "det-pe-finite-local-systems-twist",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "det-pe-constructible-comparison-classical",
+  "sk-thm-pe-classical-sheaves",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-derived-module-underlying-comparison",
+  "lem-sfb-supported-integral-model-restriction-tower",
+  "lem-sfb-supported-rational-model-rigidity-transfer"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global section restriction for finite discrete locally constant modules and their open closed supported extensions under torsion etale cohomology equivalence",
+   "date": "2026-10-24",
+   "results": "Eight hits: condensed discrete functors and locally constant modules; none concerns a torsion-rigid closed pair or supported derived restriction.",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedPullback\"",
+   "date": "2026-10-24",
+   "results": "Zero hits.",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*model.*rigidity|finite.*model.*restriction",
+   "date": "2026-10-24",
+   "results": "Zero Mathlib hits. The library has the integral strict-tower reconstruction and conditional rational and algebraic-closure transfer statements, but no unconditional single-model comparison.",
+   "verdict": "No match; use the existing reconstruction and transfer nodes."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedFiniteModelScalarRigidity",
+  "file": "lean/Sheaf/Paper/SupportedFiniteModelScalarRigidity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.supported_finite_model_scalar_rigidity",
+  "statement": "theorem supported_finite_model_scalar_rigidity\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]\n    (hΛ :\n      (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)\n          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),\n        Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))))\n    {T₀ T S : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]\n    [CompactSpace T₀] [QuasiSeparatedSpace T₀]\n    (t : T₀ ⟶ T) [IsClosedImmersion t]\n    (ht : ∀ (F : Sheaf T.smallEtaleTopology Ab.{u + 1}),\n      Scheme.IsTorsionAbelianSheaf F → ∀ q : ℕ,\n        Function.Bijective (Etale.cohomologyMap t F q))\n    (tree : QcqsOpenClosedTree T) (p : tree.Path S)\n    (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))\n    (hN : HasFiniteConstantLocalModel Λ S N) :\n    IsIso ((supportedModelDerivedRestriction Λ t p).app N)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190509-L-4073204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190509-L-4073204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal)",
+  "old_statement": "Let ell be prime and Lambda a commutative condensed ring isomorphic to one of the\nsix coefficient rings in lem-sfb-supported-three-term-scalar-rigidity: a finite discrete\ncommutative ring killed by an ell power, Z_ell, O_E, Q_ell, E for a finite intermediate\nextension E/Q_ell, or the full norm-topological algebraic closure of Q_ell. Let t:T0→T be\na closed immersion of qcqs schemes whose restriction maps on every torsion abelian etale\nsheaf are bijective in every nonnegative cohomological degree. Let p be an arbitrary path\nfrom S to the root T in a finite qcqs open-closed tree, with quasi-compact complementary\nopen at each closed edge, and let J be its actual composite of open extension by zero and\nclosed direct image on internal Lambda modules. If N on S has a pro-etale cover on which\nit is pulled back from a finitely presented Lambda-module on the point, then the actual\nderived restriction RΓ(T,JN[0])→RΓ(T0,t*JN[0]) is an isomorphism in D(Ab). No assertion is\nmade about arbitrary images, kernels or homology of morphisms of local models.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient. The blueprint's algebraic-closure coefficient of sk-def-localizing-closure is the finite-subextension-valued ring (sk-def-sfb-qlbar-condensed), which this statement never listed. The all-continuous case was dropped from this statement and from its Lean hypothesis; the remaining coefficients are unchanged.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   },
+   {
+    "id": "lem-sfb-supported-three-term-scalar-rigidity",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "First prove finite-model comparison for every admissible chain rooted in $T$. For finite discrete $A$, each finite scalar local model is a locally constant finite $A$-module by the finite-discrete encoding lemma. The finite-local-system descent theorem makes it classical. Along a chain, extension by zero is still constructible: at an open arrow append the closed complementary zero stratum, and at a closed arrow append the open complementary zero stratum. Pull back the finite stratification on the image and use the restriction and vanishing identities for $a_!,a_*$; every complement involved is constructible because the specified open is quasi-compact. Thus $JL$ is constructible in the definition used by the discrete constructible-comparison theorem, so is classical. Since the finite ring is Noetherian, this theorem and the classical-module equivalence supply an étale $A$-module $F$ with $\\nu_T^*F\\cong JL$. Its underlying abelian sheaf is locally torsion (indeed killed by the exponent of $A$).",
+    "uses": [
+     "lem-pe-finite-discrete-scalar-constant-models",
+     "det-pe-finite-local-systems-twist",
+     "sk-def-sfb-constructible",
+     "lem-weil-pbc-proetale-ringed-open-closed",
+     "det-pe-constructible-comparison-classical",
+     "sk-thm-pe-classical-sheaves"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+     "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+    }
+   },
+   {
+    "text": "Use discrete derived site comparison on $F[0]$ and on $t_{\\mathrm{et}}^{-1}F[0]$. The canonical pullback comparison identifies the latter's pro-étale realization with $t^*JL[0]$. These comparisons carry restriction to restriction: before deriving, both composites are the unit for restriction followed by the comparison unit; the equality is the naturality of the unit for the composite inverse-image adjunction. Derive that equality on injective resolutions. On each cohomology group the coefficient-forgetting comparison identifies the étale module restriction with the underlying abelian restriction. The hypothesis of the item makes this map bijective for every nonnegative degree; all negative groups vanish. Consequently the actual restriction is an isomorphism in $D(\\mathbf{Ab})$. This proves $\\mathsf B_A(t)$, meaning comparison for every supported finite scalar model, uniformly in the support chain.",
+    "uses": [
+     "sk-prop-sf-comparison",
+     "lem-weil-pbc-comparison-pullback",
+     "lem-weil-pbc-derived-module-underlying-comparison"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+     "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+    }
+   },
+   {
+    "text": "For R=Z_ell or R=O_E, apply the supported integral-model restriction-tower theorem to obtain its normalized RestrictionComparison. For each finite-level etale module F_n, ellPower makes its underlying abelian sheaf torsion. Forgetting scalars and evaluating the normalized derived sections identifies the actual restriction on every nonnegative cohomology group with ht; negative groups vanish. Exact evaluation of strict towers commutes with cohomology. Thus the homology of the tower restriction is a natural transformation whose every component is invertible; NatTrans.isIso_iff_isIso_app and DerivedCategory.isIso_iff prove invertibility of the tower restriction itself. Apply the right-derived inverse-limit functor, which preserves isomorphisms. The iso field of RestrictionComparison is an isomorphism in the arrow category from integralArrows to etaleArrows. Arrow.isIso_hom_iff_isIso_hom_of_isIso transports invertibility back to the original integral restriction. Transport along the coefficient isomorphisms to handle the stated presentations. This proves the integral single-model comparison uniformly in paths, without any assertion that arbitrary images are complete.",
+    "uses": [
+     "lem-sfb-supported-integral-model-restriction-tower"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+     "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+    }
+   },
+   {
+    "text": "Apply the rational transfer implication first to $(R,K)=(\\mathbf Z_\\ell,\\mathbf Q_\\ell)$ and then to $(\\mathcal O_E,E)$ for each finite intermediate $E$. Its additional premise is the universal finite-model property proved in the previous step; the torsion-pair premise is unchanged. This yields $\\mathsf B_{\\mathbf Q_\\ell}(t)$ and every $\\mathsf B_E(t)$. Apply the separate norm-topological algebraic-closure transfer, whose premise requires every such finite $E$, to obtain $\\mathsf B_\\Omega(t)$. This invokes that transfer theorem for all continuous functions; no expression of $C(-,\\Omega)$ as a filtered union of finite-field function rings, and no global lattice, is used. Together with the finite discrete case this supplies $\\mathsf B_\\Lambda(t)$ for every coefficient in the item.",
+    "uses": [
+     "lem-sfb-supported-rational-model-rigidity-transfer",
+     "lem-sfb-supported-norm-algcl-model-rigidity-transfer"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+     "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pe-finite-discrete-scalar-constant-models",
+   "det-pe-finite-local-systems-twist",
+   "sk-def-sfb-constructible",
+   "lem-weil-pbc-proetale-ringed-open-closed",
+   "det-pe-constructible-comparison-classical",
+   "sk-thm-pe-classical-sheaves",
+   "sk-prop-sf-comparison",
+   "lem-weil-pbc-comparison-pullback",
+   "lem-weil-pbc-derived-module-underlying-comparison",
+   "lem-sfb-supported-integral-model-restriction-tower",
+   "lem-sfb-supported-rational-model-rigidity-transfer",
+   "lem-sfb-supported-norm-algcl-model-rigidity-transfer"
+  ]
+ }
+}

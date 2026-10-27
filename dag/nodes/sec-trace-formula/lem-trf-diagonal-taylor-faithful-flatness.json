@@ -1,0 +1,325 @@
+{
+ "id": "lem-trf-diagonal-taylor-faithful-flatness",
+ "kind": "statement",
+ "title": "Faithfully flat Taylor realization at the residue-field diagonal point",
+ "statement": "Let $k$ be a field, $U$ a finite-type $k$-scheme with an etale chart $x=(x_1,\\ldots,x_n):U\\to\\mathbf A_k^n$, $n\\ge0$ [def-weil-field, def-weil-finite-type-morphism, def-weil-etale-morphism, def-sbc-affine-space]. Let $b\\in U$ be any point, $L=\\kappa(b)$ [def-weil-residue-field], and $b_L$ the $L$-rational point of $U_L=U\\times_k\\operatorname{Spec}L$ induced by $b$ [def-pc-fibre-product]. On an affine neighbourhood $\\operatorname{Spec}A$ of $b$, let $\\mathfrak p$ be its prime, $C=A\\otimes_kL$, $\\varepsilon:C\\to L$, $a\\otimes\\lambda\\mapsto a(b)\\lambda$, and $J=\\ker\\varepsilon$. Put $P=L[X_1,\\ldots,X_n]$ and $I=(X_1,\\ldots,X_n)$ [def-weil-pbc-mv-polynomial-ring]. The map $P\\to C$, $X_i\\mapsto x_i-x_i(b)$, induces compatible isomorphisms $P/I^q\\simeq C/J^q\\simeq C_J/(JC_J)^q$ for every $q\\ge1$. Their inverse limit gives $\\widehat{C_J}\\simeq L[[X_1,\\ldots,X_n]]$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The composite\n$$\\tau_b:\\mathcal O_{U,b}=A_{\\mathfrak p}\\longrightarrow C_J=\\mathcal O_{U_L,b_L}\\longrightarrow\\widehat{C_J}\\simeq L[[X]]$$\nis independent of the affine neighbourhood, sends $x_i$ to $x_i(b)+X_i$, has constant coefficient equal to evaluation at $b$, and is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. In particular this assertion does not require $b$ to be closed or $L/k$ to be algebraic. For every field extension $L\\hookrightarrow K$, let $b_K$ be the induced $K$-rational point of $U_K$. The analogous quotient isomorphisms and completed Taylor map over $K$ commute with the coefficient homomorphism $L[[X]]\\to K[[X]]$ and the natural maps from $A$ and its localizations. This includes $n=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0H1D (lemma-formally-etale-lift-infinitesimal), 00HT (lemma-flat-localization), 00HR (lemma-local-flat-ff), 00MC (lemma-completion-faithfully-flat), 00FN (lemma-Noetherian-permanence); Morphisms Tag 02GO (lemma-base-change-etale). Agent assembly at the residue-field diagonal point, not a claim that any one tag states this entire lemma. Retained parent steps 3, 11 (Taylor-map naturality), 12 and 13."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-etale-open-restriction] to the chosen affine neighbourhood of $b$, then [lem-weil-pbc-etale-scheme-base-change] over $L$. The affine tensor chart and its arrow are identified by [lem-weil-pbc-affine-triple-tensor-base-change] (interchange the tensor factors by $\\lambda\\otimes a\\mapsto a\\otimes\\lambda$). Thus $\\operatorname{Spec}C\\to\\mathbf A_L^n$ is etale. Replacing the target coordinates $t_i$ by $X_i=t_i-x_i(b)$ is a change of affine coordinates: its inverse is $t_i=X_i+x_i(b)$, by [def-weil-pbc-mv-polynomial-ring]. Consequently the centered map $P\\to C$ is the ring map of this etale chart. Evaluation $\\varepsilon$ is surjective since $\\varepsilon(1\\otimes\\lambda)=\\lambda$; hence $J$ is maximal, $C/J=L$, and its inverse image in $P$ is $I$, because evaluation at $X=0$ has kernel the polynomials with zero constant term.",
+   "uses": [
+    "lem-a1-etale-open-restriction",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-affine-triple-tensor-base-change",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GJ (lemma-etale-characterize), 02GO (lemma-base-change-etale); Schemes Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-augmented-etale-associated-graded] with its $A=P$, $C=C$, $J=\\ker\\varepsilon$. Its etale sufficient hypothesis holds by step 1, and $P\\to C/J=L$ is evaluation with kernel $I$. It gives the actual maps $f_q:P/I^q\\xrightarrow{\\sim}C/J^q$, $[p]\\mapsto[p(x-x(b))]$, for all $q\\ge1$. Its naturality assertion gives compatibility with the reduction maps, not merely abstract isomorphisms.",
+   "uses": [
+    "lem-sfb-augmented-etale-associated-graded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), canonical quotient isomorphisms and their naturality."
+   }
+  },
+  {
+   "text": "For $s\\in C\\setminus J$, put $c=\\varepsilon(s)\\in L^\\times$ and $u=1-c^{-1}s\\in J$. In $C/J^q$ the element $s$ has inverse $c^{-1}\\sum_{r=0}^{q-1}u^r$, since the product is $1-u^q=1$. The fraction formula of [def-weil-pbc-localization-at-prime] therefore defines an inverse to $C/J^q\\to C_J/(JC_J)^q$. To check the kernel explicitly, if $a/1$ lies in $(JC_J)^q$, clearing its finitely many denominators gives $ta\\in J^q$ for some $t\\notin J$; $t$ is invertible modulo $J^q$, so $a\\in J^q$. These maps and inverses commute with reduction because each is induced by localization. This proves the second quotient isomorphism without requiring $J=IC$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D followed by the elementary finite geometric-series calculation in the nilpotent quotient; localization fractions."
+   }
+  },
+  {
+   "text": "The affine stalk identifications in [lem-weil-pbc-affine-open-stalk-localization] give $C_J=\\mathcal O_{U_L,b_L}$. Apply [lem-trf-etale-chart-rational-point-taylor-iso] to $U$, $L$ and its $L$-rational point $b_L$: its residue field is exactly $L$ by $C/J=L$, and its coordinates have values $x_i(b)$. This gives an isomorphism $\\theta:L[[X]]\\to\\widehat{C_J}$ whose $q$th projection sends $\\sum_Ea_EX^E$ to $\\sum_{|E|<q}a_E(x-x(b))^E$. These are exactly the inverse-limit maps from steps 2--3: a polynomial modulo $I^q$ is represented uniquely by its monomials of degree less than $q$. By the compatible-sequence definition [def-weil-pbc-adic-completion], equality on every projection proves equality in the limit. Thus the claimed inverse-limit identification is $\\theta^{-1}$, with the stated coordinate and constant-term formulas.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-etale-chart-rational-point-taylor-iso",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 039M (lemma-characterize-etale-completions) and residue-degree remark, in the existing rational-coordinate lemma; Algebra Section 00M9 (section-completion)."
+   }
+  },
+  {
+   "text": "The map $A\\to C$, $a\\mapsto a\\otimes1$, is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat]. Its inverse image of $J$ is $\\mathfrak p$, since $\\varepsilon(a\\otimes1)=a(b)$. Therefore [lem-weil-pbc-flat-local-ring-maps] gives a flat local map $A_{\\mathfrak p}\\to C_J$, and [lem-pc-local-flat-faithful-flat-reflects-surjective] makes it faithfully flat. By [lem-weil-pbc-affine-open-stalk-localization], this map is the map of local rings induced by $U_L\\to U$. No algebraicity of $L/k$ and no closedness of $b$ is used.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI (lemma-flat-base-change), 00HT (lemma-flat-localization), 00HR (lemma-local-flat-ff)."
+   }
+  },
+  {
+   "text": "The etale affine map $\\operatorname{Spec}C\\to\\operatorname{Spec}P$ makes $C$ a finitely presented, hence finitely generated, $P$-algebra by [lem-weil-pbc-etale-algebra-finite-presentation-localization]. A field is Noetherian because its only ideals are $0$ and the whole field. Apply [lem-weil-pbc-finite-type-algebra-noetherian] first to $L\\to P$ and then to $P\\to C$, and [lem-weil-pbc-localization-noetherian] to $C\\to C_J$. Hence $C_J$ is Noetherian local, so [lem-weil-pbc-local-completion-faithfully-flat] applies. Composing its faithfully flat map with that in step 5 remains faithfully flat directly from [def-weil-pbc-faithfully-flat-ring-map]: the tensor functor of the composite is the composite of the two tensor functors, so it preserves and reflects exactness. Finally transport along $\\theta^{-1}$. This proves faithful flatness of $\\tau_b$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U1 (definition-etale), 00FN (lemma-Noetherian-permanence), 00MC (lemma-completion-faithfully-flat), 00HB (definition-flat)."
+   }
+  },
+  {
+   "text": "The first arrow in $\\tau_b$ is the intrinsic stalk arrow of $U_L\\to U$, by step 5. Its completed target is the intrinsic completed stalk at $b_L$, by step 4. In any two affine neighbourhoods, [lem-weil-pbc-affine-open-stalk-localization] identifies the germs of each $x_i$ and each scalar with the same germs in that stalk. The truncation formula in step 4 consequently gives identical projections for $\\theta$ on both neighbourhoods. Compatible sequences are equal if all their entries are equal, so $\\theta$, and hence $\\tau_b$, are independent of the neighbourhood. Step 4 also shows that its constant coefficient is evaluation at $b$, including for fractions $a/s$ with $s\\notin\\mathfrak p$, since their constant coefficient is $a(b)/s(b)$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves) and Example 01HF (example-open-subspace), intrinsic stalk identifications; Algebra Section 00M9."
+   }
+  },
+  {
+   "text": "Let $L\\hookrightarrow K$. Write $C_K=A\\otimes_kK$, $\\varepsilon_K(a\\otimes\\mu)=a(b)\\mu$ and $J_K=\\ker\\varepsilon_K$, interpreting $a(b)$ in $K$. The map $h:C\\to C_K$, $a\\otimes\\lambda\\mapsto a\\otimes\\lambda$, satisfies $\\varepsilon_Kh=\\iota\\varepsilon$, hence $h^{-1}(J_K)=J$. It therefore induces $C_J\\to(C_K)_{J_K}$ and every quotient map. Repeat steps 1--4 over $K$. The square $L[X]\\to C$, $K[X]\\to C_K$ commutes on coefficients and each $X_i$, so [lem-sfb-augmented-etale-associated-graded] gives commuting quotient isomorphisms. The localization inverses of step 3 commute as well, since both send a fraction to numerator times the inverse of its denominator. Taking compatible sequences gives a commuting completion square. Under the truncation formula of step 4 its map on power series sends $\\sum a_EX^E$ to $\\sum\\iota(a_E)X^E$: each finite truncation has precisely those coefficients. The tensor maps agree on $a\\otimes1$, and all denominators outside $\\mathfrak p$ evaluate nonzero in both fields, proving the asserted Taylor-map compatibility on $A$ and its localizations. For $n=0$, $P=L$, $I=0$, and each of these formulas is still defined; the rational-coordinate lemma gives $C_J=L$ and its completion $L$. Thus the argument includes the empty coordinate list.",
+   "uses": [
+    "lem-sfb-augmented-etale-associated-graded",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), functoriality of its canonical maps; Section 00M9 (section-completion). Explicit coefficient calculation supplied by Q58."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-etale-open-restriction",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-affine-triple-tensor-base-change",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-augmented-etale-associated-graded",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-etale-chart-rational-point-taylor-iso",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 0H1D, 00HT, 00HR, 00FN, 00MC with Morphisms 02GO and the existing rational-point Taylor lemma (Etale 039M). Explicit localization, restriction and coefficient-naturality calculations by Q58."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-diagonal-taylor-faithful-flatness: Taylor map from a local ring in an etale chart into residue field power series via the rational diagonal point is faithfully flat even at nonclosed points",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-diagonal-taylor-faithful-flatness: Taylor map from a local ring in an etale chart into residue field power series via the rational diagonal point is faithfully flat even at nonclosed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RatFunc.instFaithfulSMulPolynomialLaurentSeries\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.FaithfullyFlat.toFlat\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"Module.FaithfullyFlat.iff_zero_iff_lTensor_zero\", \"RingHom.Flat.holdsForLocalizationAway\"], \"digest\": \"5faa3d77b7c06cb3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat local homomorphisms and faithfully flat base change are separate existing inputs. No hit identifies the residue-field diagonal completion with the natural coordinate Taylor map and establishes its faithful flatness at arbitrary points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-diagonal-taylor-faithful-flatness: completed local ring after extending scalars to the residue field is power series and the original local ring maps faithfully flat to it",
+   "results": "{\"t\": \"2026-10-22T07:04:29Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-diagonal-taylor-faithful-flatness: completed local ring after extending scalars to the residue field is power series and the original local ring maps faithfully flat to it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Module.flat_of_isLocalized_maximal\", \"instFlatAtPrime\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"9587a4fcf669e5f7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat local homomorphisms and faithfully flat base change are separate existing inputs. No hit identifies the residue-field diagonal completion with the natural coordinate Taylor map and establishes its faithful flatness at arbitrary points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-diagonal-taylor-faithful-flatness: etale coordinates and rational point give natural truncated Taylor isomorphisms compatible with field extensions",
+   "results": "{\"t\": \"2026-10-22T07:04:31Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-diagonal-taylor-faithful-flatness: etale coordinates and rational point give natural truncated Taylor isomorphisms compatible with field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.homEquiv\", \"RingHom.Etale.toAlgebra\", \"RingHom.etale_algebraMap\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"1aa27c8be08462f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat local homomorphisms and faithfully flat base change are separate existing inputs. No hit identifies the residue-field diagonal completion with the natural coordinate Taylor map and establishes its faithful flatness at arbitrary points."
+  },
+  {
+   "tool": "grep",
+   "query": "of_flat_of_isLocalHom|localRingHom|AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T07:07:07Z\", \"tool\": \"grep\", \"query\": \"of_flat_of_isLocalHom|localRingHom|AdicCompletion\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\"], \"digest\": \"5c4e8e340e22ecf9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat local homomorphisms and faithfully flat base change are separate existing inputs. No hit identifies the residue-field diagonal completion with the natural coordinate Taylor map and establishes its faithful flatness at arbitrary points."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat local homomorphisms and faithfully flat base change are separate existing inputs. No hit identifies the residue-field diagonal completion with the natural coordinate Taylor map and establishes its faithful flatness at arbitrary points."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]aylor.*[Ff]lat|[Ff]lat.*[Tt]aylor|[Ee]tale.*completion|completion.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"grep\", \"query\": \"[Tt]aylor.*[Ff]lat|[Ff]lat.*[Tt]aylor|[Ee]tale.*completion|completion.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat local homomorphisms and faithfully flat base change are separate existing inputs. No hit identifies the residue-field diagonal completion with the natural coordinate Taylor map and establishes its faithful flatness at arbitrary points."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]aylor.*[Ff]lat|[Ff]lat.*[Tt]aylor|[Ee]tale.*completion|completion.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T12:01:29Z\", \"tool\": \"grep\", \"query\": \"[Tt]aylor.*[Ff]lat|[Ff]lat.*[Tt]aylor|[Ee]tale.*completion|completion.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: completion/power-series equivalences and flat local maps cover separate inputs; the canonical residue-diagonal quotient and naturality assembly is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-diagonal-taylor-faithful-flatness: etale coordinates identify completion at a rational point with formal power series naturally under field extension",
+   "results": "{\"t\": \"2026-10-23T12:01:29Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-diagonal-taylor-faithful-flatness: etale coordinates identify completion at a rational point with formal power series naturally under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"AnalyticAt.hasFPowerSeriesAt\", \"LaurentSeries.coe_X_compare\", \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\", \"LaurentSeries.comparePkg_eq_extension\", \"RingHom.FormallyEtale\"], \"digest\": \"1f23e9abe00a1406\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: completion/power-series equivalences and flat local maps cover separate inputs; the canonical residue-diagonal quotient and naturality assembly is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-23T12:01:29Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: completion/power-series equivalences and flat local maps cover separate inputs; the canonical residue-diagonal quotient and naturality assembly is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-diagonal-taylor-faithful-flatness: residue field diagonal point of an etale coordinate chart has completed local ring the multivariate power series ring and gives a faithfully flat Taylor map",
+   "results": "{\"t\": \"2026-10-23T12:01:37Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-diagonal-taylor-faithful-flatness: residue field diagonal point of an etale coordinate chart has completed local ring the multivariate power series ring and gives a faithfully flat Taylor map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale\", \"Algebra.IsEtaleAt\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"823bc91bacd160b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: completion/power-series equivalences and flat local maps cover separate inputs; the canonical residue-diagonal quotient and naturality assembly is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-diagonal-taylor-faithful-flatness: local ring maps faithfully flat to the completion of the local ring at the rational point after extending the ground field to the residue field",
+   "results": "{\"t\": \"2026-10-23T12:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-diagonal-taylor-faithful-flatness: local ring maps faithfully flat to the completion of the local ring at the rational point after extending the ground field to the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.localRingHom\", \"instFlatAtPrime\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.FaithfullyFlat\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Module.FaithfullyFlat.of_specComap_surjective\"], \"digest\": \"ec71ac4272639a73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: completion/power-series equivalences and flat local maps cover separate inputs; the canonical residue-diagonal quotient and naturality assembly is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-implicit-taylor-coordinate-calculus",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: Lemma 3.5 and Remarks 3.7, 9.9 and 9.11 (pp.231--232,279--280); faithful-flat Taylor realization at nonclosed points is the algebraic extension using the completed diagonal after residue-field extension; re-split local coordinate-calculus input: Tags 0H1D (lemma-formally-etale-lift-infinitesimal), 00HT (lemma-flat-localization), 00HR (lemma-local-flat-ff), 00MC (lemma-completion-faithfully-flat), 00FN (lemma-Noetherian-permanence); Morphisms Tag 02GO (lemma-base-change-etale). Agent assembly at the residue-field diagonal point, not a claim that any one tag states this entire lemma. Retained parent steps 3, 11 (Taylor-map naturality), 12 and 13.",
+   "via": [
+    "lem-trf-implicit-taylor-coordinate-calculus",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-diagonal-taylor-faithful-flatness",
+  "worker": "stage1",
+  "summary": "Q58: proved all quotient, completion, locality, faithful-flatness and field-extension clauses using existing nodes. No new nodes. Checked arbitrary residue fields and the empty coordinate list. The statement is unchanged.",
+  "blueprint": "Retains the inherited local coordinate-calculus input (parent steps 3, 11, 12, 13) of the historical alteration branch under lem-trf-local-term-locality; no change to the current unit or chapter route. Current latest blueprint main-20261023-1620 read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-triple-tensor-base-change",
+    "why": "Generic affine tensor coordinate comparison for the base-changed chart arrow; the trace unit supplies no affine-chart construction."
+   },
+   {
+    "node": "lem-sfb-augmented-etale-associated-graded",
+    "why": "Generic formally etale infinitesimal comparison, used with P -> C to obtain the actual ideal-power quotient maps and their naturality; the unit supplies no commutative algebra substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-triple-tensor-base-change",
+  "lem-sfb-augmented-etale-associated-graded"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-94877b20d",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-94877b20d (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. There are 0 new nodes and the statement is unchanged; there is no re-split repair note and no SGA. Steps 1-8 check out against the cited statements. Step 1 (triple-tensor base change with S=Spec k, X_0=Spec A, T=Spec L; restriction; 02GO; affine translation) gives Spec C -> A^n_L etale, and P -> C -> C/J=L is evaluation at 0 with kernel I. Step 2 is 0H1D via lem-sfb-augmented-etale-associated-graded; its maps [a]->[phi(a)] and the naturality come from the node's statement. Step 3 is an elementary localization argument; I checked the geometric-series inverse and the kernel by clearing denominators. Step 4 meets every hypothesis of the rational-point Taylor iso (k-extension L, kappa(b_L)=L by the identity map, c_i=x_i(b)), and theta's truncations equal the step 2-3 maps. Step 5: field-extension base change is faithfully flat, the contraction of J is p, the flat-local lemma gives a flat local map, and flat local implies faithfully flat (00HR). Step 6: finitely presented etale -> finite type over Noetherian -> localization Noetherian -> 00MC, and composites of faithfully flat maps are faithfully flat from the definition. Step 7: independence follows from theta's uniqueness and the stalk germ formulas; the constant term is a(b)/s(b). Step 8: eps_K h = iota eps, the polynomial square commutes on X_i, and the naturality clause plus the truncation formula give coefficientwise iota; n=0 is covered. Small cases: generic point of A^1 (L=k(t), f(t) -> f(t+X)), q=1, n=0, characteristic p. Stacks labels 0H1D/00HT/00HR/00MC/00FN/02GO all verified. There is no cycle (closure of 604 nodes excludes the item). The tool_uses triple-tensor-base-change and sfb-augmented-etale-associated-graded are generic and accepted. No duplicate of the whole item exists."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalTaylorFaithfulFlatness",
+  "declaration": "AlgebraicGeometry.diagonalTaylor_faithfullyFlat",
+  "declarations": [
+   "AlgebraicGeometry.diagonalTaylorLocalRing",
+   "AlgebraicGeometry.diagonalTaylorLocalization",
+   "AlgebraicGeometry.diagonalTaylorLocalIdeal",
+   "AlgebraicGeometry.diagonalTaylorCentered",
+   "AlgebraicGeometry.DiagonalTaylorAffineData",
+   "AlgebraicGeometry.DiagonalTaylorAffineExtension",
+   "AlgebraicGeometry.diagonalTaylorAffineAt",
+   "AlgebraicGeometry.diagonalTaylorExtensionAt",
+   "AlgebraicGeometry.diagonalTaylor_faithfullyFlat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalTaylorFaithfulFlatness.lean",
+  "statement": "theorem diagonalTaylor_faithfullyFlat {k : Type u} [Field k] (U : Scheme.{u}) (n : ℕ) (c : MvPolynomial (Fin n) k →+* Γ(U, ⊤)) (hchart : Etale (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom c))) (hft : LocallyOfFiniteType (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (c.comp MvPolynomial.C)))) (hqc : QuasiCompact (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (c.comp MvPolynomial.C)))) (b : U) : ∃ T : U.presheaf.stalk b →+* MvPowerSeries (Fin n) (U.residueField b), T.FaithfullyFlat ∧ (∀ a : U.presheaf.stalk b, MvPowerSeries.constantCoeff (T a) = U.residue b a) ∧ (∀ j : Fin n, T (U.presheaf.germ ⊤ b (by trivial) (c (MvPolynomial.X j))) = MvPowerSeries.C (U.Γevaluation b (c (MvPolynomial.X j))) + MvPowerSeries.X j) ∧ (∀ (V : U.Opens) (hV : IsAffineOpen V) (hb : b ∈ V), ∃ D : diagonalTaylorAffineAt c b V hb (RingHom.id _) T, ∀ (K : Type (max u v)) [Field K] (i : U.residueField b →+* K), ∃ E : diagonalTaylorAffineAt c b V hb i ((MvPowerSeries.map i).comp T), Nonempty (diagonalTaylorExtensionAt c b V hb i T D E))",
+  "branch": "sheaf-dag",
+  "by": "Q89",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The coordinate chart is presented as its ring homomorphism into global sections and the associated morphism to the polynomial spectrum, the standard affine presentation of affine space. Helpers package the canonical affine quotient and completion maps, pinned on representatives. The single intrinsic-stalk map factors through these maps on every affine neighbourhood, with coefficient-extension squares at every quotient and at completion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45bb60237",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Node unchanged from the Q58 split that passed review (only lean added); first stage-2 delivery. Single T on the intrinsic stalk with FaithfullyFlat, constantCoeff = residue and x_i ↦ C(x_i(b)) + X_i. ∀ affine V ∃ DiagonalTaylorAffineData whose fields are all pinned (augmentation on tmul, quotient/localQuotient on mk with reduction compatibility, completion.symm on projections via truncTotal (degree < q), stalkEquiv/localMap on germs, factorization of T), so neighbourhood independence holds. ∀ K : Type (max u v) and i, ∃ E plus an Extension with pinned tensor, quotient, local, localQuotient and completion maps and their squares, completion_square = MvPowerSeries.map i. Hypotheses: Etale chart via Γ–Spec plus LOFT ∧ QC = finite type, no stronger assumptions. n = 0, non-closed b and any characteristic covered. lean.statement verbatim; source/blueprint docstrings and 8-step proof present; single sorry; no hollow defs. Advisory: fibre-product and affine-space stmt_deps realised via the affine tensor and Spec k[X] presentations (project convention). No compile run since no file changed."
+ }
+}

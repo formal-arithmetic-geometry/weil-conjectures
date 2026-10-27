@@ -1,0 +1,241 @@
+{
+ "id": "lem-weil-pbc-finite-field-degree-isomorphism-transport",
+ "kind": "statement",
+ "title": "Finite degree and global sections under compatible field and scheme isomorphisms",
+ "statement": "Let $K,L$ be fields, let $\\varphi:K\\xrightarrow{\\sim}L$ be a field isomorphism and put $j=\\operatorname{Spec}(\\varphi):\\operatorname{Spec}L\\xrightarrow{\\sim}\\operatorname{Spec}K$ [def-weil-affine-spectrum]. Let $Z,T$ be schemes [def-pc-scheme], $h:Z\\to\\operatorname{Spec}K$, $q:T\\to\\operatorname{Spec}L$ structure morphisms, and $u:T\\xrightarrow{\\sim}Z$ an isomorphism satisfying $h\\circ u=j\\circ q$. Give $A=\\Gamma(Z,\\mathcal O_Z)$ and $B=\\Gamma(T,\\mathcal O_T)$ the algebra structures $\\alpha:K\\to A$ and $\\beta:L\\to B$ induced by $h$ and $q$. Then $u^*:A\\xrightarrow{\\sim}B$ is a ring isomorphism satisfying $u^*\\circ\\alpha=\\beta\\circ\\varphi$, hence $u^*(\\alpha(a)v)=\\beta(\\varphi(a))u^*(v)$ for all $a\\in K$ and $v\\in A$. For any index set $I$, a family $(v_i)_{i\\in I}$ is a $K$-basis of $A$ if and only if $(u^*v_i)_{i\\in I}$ is an $L$-basis of $B$. Moreover, $h$ is finite if and only if $q$ is finite [def-weil-finite-integral-morphism]. When they are finite, their degrees [def-weil-pbc-fibre-degree-bound] satisfy $\\dim_K A=\\dim_L B$, with the dimensions taken using precisely $\\alpha$ and $\\beta$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), proof of (1) => (2), first paragraph, especially the identification of the field-valued pullback with the scalar extension of the residue fibre; auxiliary argument expanded from the returned proof of lem-weil-pbc-fibre-degree-bound-field-points; returned proof step 1, comparison of choices, and steps 5 and 6 (finite compositions and the compatible semilinear global-sections isomorphism)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fibre-degree-bound",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply asIso to u.hom.appTop, which is an isomorphism by functoriality of global sections on scheme isomorphisms [def-weil-locally-ringed-space-morphism]. Its commRingCatIsoToRingEquiv is e, and its forward ring homomorphism is definitionally u.hom.appTop.hom.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HB (definition-locally-ringed-space), morphisms; Tag 01IJ (definition-scheme); composition of structure-sheaf maps, expanded directly"
+   }
+  },
+  {
+   "text": "Apply global sections to $h\\circ u=j\\circ q$. By the composition formula this says $e\\circ h^*=q^*\\circ j^*$. The statement [lem-weil-pbc-spec-map-global-sections] with $\\psi=\\varphi$ identifies $j^*$ with $\\varphi$ through the canonical identifications $\\Gamma(\\operatorname{Spec}K,\\mathcal O)=K$ and $\\Gamma(\\operatorname{Spec}L,\\mathcal O)=L$. Consequently $e\\circ\\alpha=\\beta\\circ\\varphi$. Multiplicativity of $e$ now gives $e(\\alpha(a)v)=e(\\alpha(a))e(v)=\\beta(\\varphi(a))e(v)$. Inverting this identity gives $e^{-1}(\\beta(b)w)=\\alpha(\\varphi^{-1}(b))e^{-1}(w)$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-spec-map-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I2 (lemma-category-affine-schemes), together with Tag 01HV (lemma-spec-sheaves) (1); composition equation evaluated on global sections"
+   }
+  },
+  {
+   "text": "Use the private proved helper transport_basis: for a semilinear equivalence f:M ≃ₛₗ[φ] N and an R-basis b indexed by I, form the S-linear equivalence N → (I →₀ S) by composing f⁻¹, b.repr, and Finsupp.mapRange.linearEquiv φ.toSemilinearEquiv. The scalar homomorphisms compose to the identity, so Basis.ofRepr gives an S-basis. Its vector at i is f(b i), since the coefficient equivalence fixes the single coefficient 1. For global sections take f to have additive equivalence e.toAddEquiv and prove its semilinearity by step 2 using precisely h.ΓAlgebra and q.ΓAlgebra. Apply the helper to f and to f.symm, respectively, and use e.symm_apply_apply to obtain both directions of the basis assertion. No finiteness or nonemptiness of I is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "paragraph before Tag 03J4 (definition-universally-bounded): degree as vector-space dimension; elementary basis calculation supplied by NP"
+   }
+  },
+  {
+   "text": "The field equivalence φ is bijective, so CommRingCat.ofHom φ.toRingHom is an isomorphism and so is its image under Spec. Mathlib gives IsFinite a RespectsIso instance from its multiplicativity [lem-weil-pbc-finite-composition] and finiteness of isomorphisms [def-weil-finite-integral-morphism]. Apply MorphismProperty.cancel_left_of_respectsIso to u.hom and h, rewrite by comm, and apply cancel_right_of_respectsIso to q and Spec.map φ. This yields IsFinite h iff IsFinite q.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH (definition-integral), finite-morphism clause; Tag 01WK (lemma-composition-finite). Finiteness of isomorphisms checked directly from the definition"
+   }
+  },
+  {
+   "text": "Install exactly the algebra structures h.ΓAlgebra and q.ΓAlgebra. Apply Mathlib Algebra.finrank_eq_of_equiv_equiv to φ and e with the symmetric ring-map compatibility of step 2. The result is the equality of finrankΓ by its definition [def-weil-pbc-fibre-degree-bound], using Module.finrank [def-weil-vector-space-dimension]. This argument applies even without finite-dimensionality, and hence proves the stated implication from IsFinite h, including the zero-ring case.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "paragraph before Tag 03J4 (definition-universally-bounded), degree of a finite scheme over a field; elementary finite spanning-list reduction supplied by NP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-spec-map-global-sections",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-composition",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-fibre-degree-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03J5 (lemma-characterize-universally-bounded), isomorphism-invariance auxiliary argument; paragraph before Tag 03J4 for degree. H6 formalization uses the canonical global-sections isomorphism, ΓSpecIso_inv_naturality, a proved coordinate-equivalence basis transport, Mathlib finite-morphism cancellation, and Algebra.finrank_eq_of_equiv_equiv. The finite-dimensionality dependency is unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between schemes over isomorphic fields compatible with their structure morphisms preserves finiteness and the dimension of the ring of global sections, with a semilinear isomorphism on global sections",
+   "results": "AlgebraicGeometry.IsFinite.instOfIsIsoScheme; AlgebraicGeometry.affineAnd_respectsIso; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.sourceAffineLocally_respectsIso; AlgebraicGeometry.AffineTargetMorphismProperty.respectsIso_of; AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.affineLocally_respectsIso; 8 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite schemes over isomorphic fields have the same degree under a commuting scheme isomorphism",
+   "results": "Field.finInsepDegree_eq_of_equiv; Field.sepDegree_eq_of_equiv; Field.finSepDegree_eq_of_equiv; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; Ideal.inertiaDeg_map_eq; Field.insepDegree_eq_of_equiv; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.IsFinite.toIsAffineHom; 8 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, IsIso",
+   "results": "; loogle: unknown identifier 'IsIso'; 0 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "unavailable: invalid unqualified identifier; corrected qualified query also run"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*equiv.*equiv|finrank.*[Ii]so|[Ii]so.*finrank|[Ii]so.*[Ii]sFinite",
+   "results": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; subdirectory Mathlib/AlgebraicGeometry; 8 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of schemes with horizontal isomorphisms over a field isomorphism induces a semilinear ring isomorphism on global sections preserving bases and finite degree",
+   "results": "AlgebraicGeometry.AffineSpace.mapSpecMap; AlgebraicGeometry.arrowIsoΓSpecOfIsAffine; AlgebraicGeometry.AffineSpace.map_Spec_map; AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop; AlgebraicGeometry.AffineSpace.map_SpecMap; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp; AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; 8 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_eq_of_equiv_equiv|finrank_eq.*[Ee]quiv|[Ss]emilinear.*finrank",
+   "results": "Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean; Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean; Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean; Mathlib/LinearAlgebra/Dimension/Free.lean; Mathlib/LinearAlgebra/Dimension/Free.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dual/Lemmas.lean; Mathlib/LinearAlgebra/Dimension/RankNullity.lean; subdirectory Mathlib/LinearAlgebra; 9 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ingredients, not the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.finrank_eq_of_equiv_equiv",
+   "results": "Algebra.finrank_eq_of_equiv_equiv; 1 hits; full output in search-results-degree-transport.txt",
+   "date": "2026-10-22",
+   "verdict": "partial: algebraic dimension invariance only; does not construct the scheme-induced compatible ring isomorphism or transport finiteness"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_eq_of_equiv_equiv|mapBasis|instIsIsoCommRingCatApp",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean; Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean; 17 hits; actual output read in NP session, digest 64f34be78189e422",
+   "date": "2026-10-22",
+   "verdict": "no match: ingredients only; no declaration gives all clauses with these scheme and field data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commuting isomorphism of schemes over isomorphic fields preserves finiteness and sends every basis of global sections to a basis",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; RingHom.finite_respectsIso; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.IsFinite.instOfIsIsoScheme; AlgebraicGeometry.arrowIsoΓSpecOfIsAffine; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; 8 hits; actual output read in NP session, digest a693fc4607829769",
+   "date": "2026-10-22",
+   "verdict": "no match: ingredients only; no declaration gives all clauses with these scheme and field data"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.finrank_eq_of_equiv_equiv",
+   "results": "Algebra.finrank_eq_of_equiv_equiv; 1 hits; actual output read in NP session, digest ffeb368261867894",
+   "date": "2026-10-22",
+   "verdict": "no match: ingredients only; no declaration gives all clauses with these scheme and field data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms of schemes and base fields induce semilinear isomorphisms on global sections and preserve arbitrary bases and finite degree",
+   "results": "galLiftEquiv; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop; AlgebraicGeometry.AffineSpace.homOverEquiv; AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop; AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe; AlgebraicGeometry.AffineSpace.homOverEquiv_apply; 8 hits; actual output read in NP session, digest 912173a0ad114baf",
+   "date": "2026-10-22",
+   "verdict": "no match: ingredients only; no declaration gives all clauses with these scheme and field data"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fibre-degree-bound-field-points",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules'); auxiliary to 03J5: returned proof step 1, comparison of choices, and steps 5 and 6 (finite compositions and the compatible semilinear global-sections isomorphism)",
+   "via": [
+    "lem-weil-pbc-fibre-degree-bound-field-points",
+    "lem-weil-pbc-composition-fibre-degree-bound",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-finite-field-degree-isomorphism-transport",
+  "worker": "stage1",
+  "group": "NP",
+  "summary": "No statement change and no new nodes. Expanded global-section inverse and composition maps, checked the canonical Spec section identifications, proved basis transport by finite sums in both directions, proved finiteness of isomorphisms directly from the definition and used existing finite composition, and compared finite dimensions through the same basis. Existing DAG Mathlib leaves supply all non-elementary inputs.",
+  "blueprint": "Auxiliary to the existing from.place: finite-degree comparisons in the 03J5 field-valued fibre criterion below constructible finite-pushforward generation. The current main-20261015 ancestor proof uses constructible approximation and the finite-pushforward lemma; this is the same lower-level degree-bound input, not a replacement of its unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NP-d7ea3be43",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-d7ea3be43 (reviewer sub-agent of L); spot-checked: Read the item's statement and all five steps in full. The statement is byte-identical to live; the only stmt_dep added is def-weil-vector-space-dimension, which the statement needs for dim_K A. Live has the item unsplit, there is no repair note and the item is not in any route-pivot-dropped list. No new nodes. Source checked: Stacks morphisms.tex, the paragraph before 03J4 (degree = dim_k A) and 03J5; tags 01HV, 01I2, 01WK, 03J4, 03J5 confirmed in tags/tags. proof_origin agent is right because 03J5 does not print this lemma. Step 1: whole-space evaluation of the composition formula in def-weil-locally-ringed-space-morphism makes u^* invertible with inverse (u^{-1})^*. Step 2: lem-weil-pbc-spec-map-global-sections (ΓSpecIso_naturality) gives e∘α = e h^* ε_K = q^* j^* ε_K = q^* ε_L φ = β∘φ; composition directions checked. Step 3: basis transport by finite sums in both directions with coefficients through φ and φ^{-1}, any index set. Step 4: isomorphisms are finite straight from the definition (affine preimages, iso ring map generated by 1). The DAG has no separate node for this. Then q = j^{-1} h u and h = j q u^{-1} by lem-weil-pbc-finite-composition. Step 5: lem-weil-pbc-finite-over-field-affine-finite-dim gives finite dimension for exactly α and β; shrinking a spanning list gives a finite basis, carried across by step 3. Tested: empty scheme, identity, complex conjugation on Spec C (semilinear), K[ε]/ε², A^1 (not finite). Both uses in the citer lem-weil-pbc-fibre-degree-bound-field-points match the statement. Unit sk-thm-p1 route: only same-unit Mathlib leaves and definitions are cited, no tool_uses needed, no duplicate found, no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldDegreeIsomorphismTransport",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.finite_field_degree_isomorphism_transport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldDegreeIsomorphismTransport.lean",
+  "statement": "theorem finite_field_degree_isomorphism_transport {K L : Type u} [Field K] [Field L] (φ : K ≃+* L) {Z T : Scheme.{u}} (h : Z ⟶ Spec (CommRingCat.of K)) (q : T ⟶ Spec (CommRingCat.of L)) (u : T ≅ Z) (comm : u.hom ≫ h = q ≫ Spec.map (CommRingCat.ofHom φ.toRingHom)) : ∃ e : Γ(Z, ⊤) ≃+* Γ(T, ⊤), e.toRingHom = u.hom.appTop.hom ∧ e.toRingHom.comp (((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ h.appTop).hom) = (((Scheme.ΓSpecIso (CommRingCat.of L)).inv ≫ q.appTop).hom).comp φ.toRingHom ∧ (∀ (a : K) (v : Γ(Z, ⊤)), e ((((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ h.appTop).hom a) * v) = (((Scheme.ΓSpecIso (CommRingCat.of L)).inv ≫ q.appTop).hom (φ a)) * e v) ∧ (∀ (I : Type w) (v : I → Γ(Z, ⊤)), (∃ b : @Module.Basis I K Γ(Z, ⊤) _ _ (@Algebra.toModule K Γ(Z, ⊤) _ _ h.ΓAlgebra), ∀ i : I, b i = v i) ↔ (∃ b : @Module.Basis I L Γ(T, ⊤) _ _ (@Algebra.toModule L Γ(T, ⊤) _ _ q.ΓAlgebra), ∀ i : I, b i = e (v i))) ∧ (IsFinite h ↔ IsFinite q) ∧ (IsFinite h → h.finrankΓ = q.finrankΓ)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb8b4f4c6",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Only the lean field differs from the live node, the five dependency records are byte-identical to live and lean.statement appears verbatim in the file. Clauses match the node: j = Spec.map φ (direction correct), the square is u.hom ≫ h = q ≫ Spec.map φ, α and β are the defining maps of ΓAlgebra, and e is fixed to u.hom.appTop.hom. Semilinearity is stated as a ring-map equality and elementwise. The basis iff covers every I : Type w with module structures fixed through h.ΓAlgebra and q.ΓAlgebra. IsFinite iff and the degree equality use the same finrankΓ as BoundsFiberDegrees. The common universe u is forced by Spec (CommRingCat.of K) : Scheme.{u}; no extra hypotheses. Edge cases checked: empty scheme, empty or infinite index, non-finite h, non-identity φ. finrankΓ_eq_of_iso gives only the degree clause, so it is not an existing match. No definitions, sorry only, docstrings carry source, blueprint tag and the five steps. No file changed, so no recompile. Advisory H9: four plain imports are proof-only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261023T105032-L-3483522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

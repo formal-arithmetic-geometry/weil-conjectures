@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-scheme-chart-qc-separated-presheaf",
+ "kind": "statement",
+ "title": "Recognizing presheaf quasi-compactness and separation from scheme charts",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $g:X\\to T$ be a presheaf map. Let $(t_i:T_i\\to T)_{i\\in I}$ be an etale jointly surjective family of schemes [def-trf-algebraic-space-jointly-surjective-family]. Suppose scheme etale charts $V_i\\to X$ and maps $p_i:V_i\\to T_i$ give specified cartesian squares $V_i=X\\times_T T_i$. If every scheme map $p_i$ is quasi-compact [def-weil-finite-type-morphism] and separated [def-weil-proper-morphism], then $g$ satisfies IsQuasiCompactPresheafMap [def-sfb-space-quasi-compact-presheaf-map] and IsSeparatedPresheafMap [def-sfb-presheaf-map-separated-diagonal]. The index universe is arbitrary.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KG and 03KM; schemes.tex Tag 01K5 and morphisms.tex Tag 01QR; original preparation Step 7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an affine test of each p_i, scheme base change is quasi-compact; since the test is affine, the source is quasi-compact. Its identity supplies a surjective etale atlas, proving the local presheaf quasi-compactness predicate.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The diagonal of p_i is a closed immersion; its arbitrary scheme tests remain closed immersions by base change. Hence the local presheaf separatedness predicate holds.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the specified cartesian squares to transport these two predicates to the local base changes of g. View T as its represented algebraic space and apply etale locality for the jointly surjective point cover.",
+   "uses": [
+    "lem-trf-space-qc-separated-etale-local",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-quasi-compact-base-change",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KG and 03KM; schemes.tex Tag 01K5 and morphisms.tex Tag 01QR; original preparation Step 7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact separated scheme morphisms satisfy the algebraic space representable diagonal and quasi compact atlas predicates and those predicates descend along etale covers",
+   "results": "Results are scheme QuasiSeparated.diagonalQuasiCompact, quasiSeparated_eq_diagonal_is_quasiCompact and related scheme facts.",
+   "date": "2026-10-26",
+   "verdict": "No algebraic-space presheaf recognition theorem; the project etale-locality theorem requires a bridge from scheme properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact and separated scheme charts over a jointly surjective etale cover imply quasi compactness and separatedness of an algebraic space morphism",
+   "results": "Eight hits: instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, QuasiCompactCover.homCover, QuasiCompact.of_comp, QuasiCompactCover.of_hom, Scheme.quasiCompactCover, QuasiCompactCover.singleton, QuasiCompactCover, Scheme.quasiCompactCover_iff.",
+   "date": "2026-10-26",
+   "verdict": "No algebraic-space presheaf recognition theorem; scheme cover and scheme composition lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeRestriction|OrdinaryEtaleIdentification|IsQuasiCompactPresheafMap",
+   "results": "msearch grep returned zero Mathlib hits. Repository rg locates OrdinaryEtaleIdentification, AlgebraicSpaceInvertibleDescent and the item. blueprint_refs search scheme test returned zero imported blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "The concrete predicates and their assembly are project-specific. Reuse their existing definition owners; extract the six remaining existing equations without changing data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.AmpleSchemeTestLinePreparation",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation).; Recognizing presheaf quasi-compactness and separation from scheme charts",
+   "via": [
+    "lem-trf-ample-scheme-test-line-preparation",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.SchemeChartQCSeparatedPresheaf",
+  "file": "lean/Sheaf/TraceFormula/SchemeChartQCSeparatedPresheaf.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcSeparatedPresheafMap_of_schemeCharts",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.qcSeparatedPresheafMap_of_schemeCharts"
+  ],
+  "statement": "theorem qcSeparatedPresheafMap_of_schemeCharts {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (g : X.obj.obj ⟶ yoneda.obj T) (I : Type v) (Tᵢ : I → Over S) (t : ∀ i : I, Tᵢ i ⟶ T) (he : ∀ i : I, Etale (t i).left) (hs : IsJointlySurjective (fun i : I ↦ yoneda.map (t i))) (V : I → X.EtaleSite) (p : ∀ i : I, (V i).obj.left ⟶ Tᵢ i) (hp : ∀ i : I, IsPullback (V i).obj.hom (yoneda.map (p i)) g (yoneda.map (t i))) (hq : ∀ i : I, QuasiCompact (p i).left) (hsep : ∀ i : I, IsSeparated (p i).left) : IsQuasiCompactPresheafMap g ∧ IsSeparatedPresheafMap g",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "independent cc review: 6 defs moved byte-identical to clone; item signature/structure vs node lean.statement; 3 new sorry statements vs their nodes and the definitions of the qc/separated presheaf properties; no importers of item in clone"
+ }
+}

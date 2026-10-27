@@ -1,0 +1,156 @@
+{
+ "id": "lem-sf-finite-restriction-normalized-adjunction",
+ "kind": "statement",
+ "title": "Normalized adjunction for literal finite-Tor restrictions",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum $D$ and prime $\\ell\\ne p$ [def-weil-finite-field-fiber], finite-type $k$-schemes $X,Y$, a separated finite-type $k$-map $f:X\\to Y$ [def-weil-scheme-morphism-properties], a compactification $c$ [def-weil-compactifications-refinements], and a positive finite coefficient stage $(E,n)$. Use the full categories $\\mathcal C_T=D^b_{ctf}(T,A_{E,n})$ [def-weil-finite-tor-amplitude] and the fixed realization formulas of [def-sf-finite-operation-realizations]. Suppose $F:\\mathcal C_X\\to\\mathcal C_Y$ and $G:\\mathcal C_Y\\to\\mathcal C_X$ are literal restrictions of intrinsic support and the specified intrinsic exceptional functor: their composites with the full inclusions equal the ambient functors on objects and morphisms. There exist an additive integer-shift structure on $F$ and an adjunction $F\\dashv G$, such that $F$ is triangulated, and, with exactly the adjoint integer-shift structure on $G$, the two prescribed realization isomorphisms commute with shifts. Every realized object is bounded below, every source object has an etale-origin witness, and for every such witness the realized adjunction Hom bijection is exactly the specified ordinary etale site-comparison Hom chain. This statement gives no preservation or uniform-bound assertion and does not construct $F$ or $G$.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.23; original lem-sf-exceptional-finite-operations steps 4--5; blueprint sk-thm-sf-tensor-hom, Complement."
+ },
+ "stmt_deps": [
+  "def-sf-finite-operation-realizations",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-constructible-intervals",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sfb-finite-derived-lower-shriek-compactification",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sf-specified-exceptional-hom-chain"
+ ],
+ "proof": [
+  {
+   "text": "For every finite-Tor object, use its intrinsic constructibility and finite homology support in the finite-ring essential-image criterion. The resulting bounded constructible etale object lifts through the canonical coefficient equivalence to a fixed-module origin; exact comparison transports its lower bound. This proves all hX, hY and source origin assertions.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the specified relative Hom chain. Lift any arrow between two origins by comparison full faithfulness. Naturality of the compact-support comparison and the two adjunction Hom equivalences gives left naturality for arbitrary origins and right naturality. Taking the identity arrow gives independence of origin.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the relative Hom equivalence across rF, rG and the fully faithful coefficient realizations. Define the restricted bijections by these compositions, prove both naturality laws by faithfulness and cancellation of rG, and apply Adjunction.mkOfHomEquiv. Change-of-origin naturality proves the required normalization for every retained origin.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect additivity through the faithful realization. Lift the left shifts through rF with Functor.CommShift.ofComp; its compatibility theorem gives rF shift compatibility. Reflect distinguished triangles through the fully faithful triangulated realization. All ambient functors and realizations here have their existing derived structures.",
+   "uses": [
+    "lem-weil-finite-ctf-triangulated",
+    "lem-compact-support-direct-image-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the strictly smaller normalized-right-realization shift lemma to the constructed adjunction, its normalization, and the proved boundedness/origin assertions. Package the result with the prescribed realization isomorphisms and all proved clauses.",
+   "uses": [
+    "lem-sf-specified-exceptional-realization-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-compact-support-direct-image-triangulated",
+  "lem-sf-specified-exceptional-realization-shift",
+  "lem-weil-finite-ctf-triangulated",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "thm-sf-ambient-adjoint-class",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/_section.md",
+  "place": "Complement; original normalized restriction proof steps 1--3, with only the right shift comparison split off"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict the etale exceptional adjunction to full constructible finite Tor categories with normalized Hom and shifts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[F.IsTriangulated] : adj.IsTriangulated\", \"doc\": \"An adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ D \"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[G.IsTriangulated] : adj.IsTriangulated\", \"doc\": \"An adjunction between functors $ F: C \\\\to D $ and $ G: D \\\\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ \"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \"{X : C} {Y : D} (f : L.obj X ⟶ Y) :\\n  (adj.restrictFullyFaithful hiC hiD comm1 comm2).homEquiv X Y f =\\n    hiC.preimage (adj.unit.app (iC.obj X) ≫ R'.map (comm1.hom.app X) ≫ R'.map (iD.map f) ≫ comm2.hom.app Y)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given an adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ in pretriangulated categories equipped with integer-parameterized shift operations, where both $ F $ and $ G $ commute with the shi\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : C \\to D $ and $ G : D \\to C $ form an adjunction between pretriangulated categories $ C $ and $ D $, where both functors commute with integer-parameterized shift operations and the adjunction r\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical tools do not supply this specified geometric finite-coefficient interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized site comparison Hom equivalence induces adjunction on full constructible finite Tor categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.transportSheafificationAdjunction\", \"module\": \"Mathlib/CategoryTheory/Sites/Equivalence\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (K : CategoryTheory.GrothendieckTopology D) →\\n            (e : C ≌ D) →\\n              (A : Type u₃\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a categorical equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, this adjunction combines the transported s\"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom-set equivalence in the adjunction between the continuous and cocontin\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n    \", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"LightCondSet.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"LightCondSet.LocallyConstant.functor ⊣ LightCondensed.underlying (Type u)\", \"doc\": \"There is an adjunction between the functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces and the underlying functor that evaluates light condensed sheaves at the \"}\n  {\"name\": \"LightCondSet.topCatAdjunction\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"lightCondSetToTopCat ⊣ topCatToLightCondSet\", \"doc\": \"The adjunction between the category $\\\\mathbf{Top}$ of topological spaces and the category $\\\\mathbf{LightCondSet}$ of light condensed sets, where the left adjoint functor $\\\\topCatToLightCondSet$ constr\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical tools do not supply this specified geometric finite-coefficient interface."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*restrict|adjunction.*fullSubcategory",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"425\", \"text\": \"def restrictAdjunction : restrictFunctor f ⊣ pushforward f := by\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"341\", \"text\": \"/-- The adjunction between restriction to `Over x` and pushforward along `Over.star x`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"line\": \"31\", \"text\": \"  EnoughInjectives.of_adjunction (ModuleCat.restrictCoextendScalarsAdj.{max v u} (algebraMap ℤ R))\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"12\", \"text\": \"# The monoidal adjunction between the extension and the restriction of scalars\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Adjunction.Restrict\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"14\", \"text\": \"`Adjunction.restrictFullyFaithful` shows that an adjunction can be restricted along fully faithful\"}\n  {\"file\": \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"line\": \"163\", \"text\": \"The adjunction `lightCondSetToTopCat ⊣ topCatToLightCondSet` restricted to sequential\"}\n  {\"file\": \"Mathlib/Condensed/Light/TopCatAdjunction.lean\", \"line\": \"168\", \"text\": \"  topCatAdjunction.restrictFullyFaithful (iC := 𝟭 _) (iD := sequentialToTop)\"}\n  {\"file\": \"Mathlib/Condensed/TopCatAdjunction.lean\", \"line\": \"179\", \"text\": \"The adjunction `condensedSetToTopCat ⊣ topCatToCondensedSet` restricted to compactly generated\"}\n  {\"file\": \"Mathlib/Condensed/TopCatAdjunction.lean\", \"line\": \"184\", \"text\": \"  topCatAdjunction.restrictFullyFaithful (iC := 𝟭 _) (iD := compactlyGeneratedToTop)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"173\", \"text\": \"noncomputable def uliftYonedaAdjunction : L ⊣ restrictedULiftYoneda.{max w v₁} A :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"205\", \"text\": \"  simp [uliftYonedaAdjunction, restrictedULiftYonedaHomEquiv,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"line\": \"711\", \"text\": \"    (((sheafificationAdjunction J A).homEquiv _ _).trans IsCoverDense.restrictHomEquivHom)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Adjunction.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Adjunction.Restrict\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Adjunction.lean\", \"line\": \"49\", \"text\": \"  Adjunction.restrictFullyFaithful ((adj.whiskerRight Cᵒᵖ).comp (sheafificationAdjunction J D))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Adjunction.lean\", \"line\": \"60\", \"text\": \"    Adjunction.map_restrictFullyFaithful_unit_app, Adjunction.comp_unit_app,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Adjunction.lean\", \"line\": \"74\", \"text\": \"    (Adjunction.map_restrictFullyFaithful_counit_app _ _ (Functor.FullyFaithful.id _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Adjunction.Restrict\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"line\": \"77\", \"text\": \"  ((G.op.lanAdjunction A).comp (sheafificationAdjunction K A)).restrictFullyFaithful\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Adjunction.Restrict\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"324\", \"text\": \"  (G.op.ranAdjunction A).restrictFullyFaithful\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"332\", \"text\": \"  apply ((G.op.ranAdjunction A).map_restrictFullyFaithful_unit_app\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"350\", \"text\": \"  ((G.op.ranAdjunction A).map_restrictFullyFaithful_counit_app\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"367\", \"text\": \"    (((G.op.ranAdjunction A).restrictFullyFaithful_homEquiv_apply\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Adjunction.Restrict\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical tools do not supply this specified geometric finite-coefficient interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFiniteOperations",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Complement: the constructible exceptional adjunction Rf_! dashv f^! and compatibility with shifts; Normalized adjunction for literal finite-Tor restrictions",
+   "via": [
+    "lem-sf-exceptional-finite-operations",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFiniteRestrictionAdjunction",
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteRestrictionAdjunction.lean",
+  "declaration": "WeilConjectures.sfFiniteOperations_restrictedAdjunction",
+  "statement": "theorem sfFiniteOperations_restrictedAdjunction (D : FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (E : ConstructibleExceptionalCoefficients.FieldStage.{u} l) (n : ℕ+)\n    (F : finiteTorConstructibleCategory l E.carrier n n.pos X ⥤\n          finiteTorConstructibleCategory l E.carrier n n.pos Y)\n      (G : finiteTorConstructibleCategory l E.carrier n n.pos Y ⥤\n          finiteTorConstructibleCategory l E.carrier n n.pos X)\n      (eF : F ⋙ (finiteTorConstructible l E.carrier n n.pos Y).ι =\n        (finiteTorConstructible l E.carrier n n.pos X).ι ⋙\n          sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E.carrier n))\n      (eG : G ⋙ (finiteTorConstructible l E.carrier n n.pos X).ι =\n        (finiteTorConstructible l E.carrier n n.pos Y).ι ⋙\n          sfFiniteOperationsIntrinsicRight l E n c) :\n    ∃ (_ : F.Additive) (_ : F.CommShift ℤ) (adj : F ⊣ G),\n    letI := adj.rightAdjointCommShift ℤ\n    F.IsTriangulated ∧\n      ∃ (rF : F ⋙ sfFiniteOperationsRealization l E n Y ≅\n          sfFiniteOperationsRealization l E n X ⋙\n            ProEtale.rightDerivedLowerShriekOfCompactification\n              (ModuleCat.{u + 1} (ULift.{u + 1, u}\n                (Padic.coefficientExtensionRing l E.carrier n))) c)\n        (rG : G ⋙ sfFiniteOperationsRealization l E n X ≅\n          sfFiniteOperationsRealization l E n Y ⋙ ProEtale.sfFiniteExceptionalAt\n            (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n)) c)\n        (hX : ∀ K : finiteTorConstructibleCategory l E.carrier n n.pos X,\n          DerivedCategory.TStructure.t.plus ((sfFiniteOperationsRealization l E n X).obj K))\n        (hY : ∀ L : finiteTorConstructibleCategory l E.carrier n n.pos Y,\n          DerivedCategory.TStructure.t.plus ((sfFiniteOperationsRealization l E n Y).obj L)),\n      rF = sfFiniteOperationsLeftRealization l E n c F eF ∧\n      rG = sfFiniteOperationsRightRealization l E n c G eG ∧\n      rF.hom.CommShift ℤ ∧ rG.hom.CommShift ℤ ∧\n      (∀ K : finiteTorConstructibleCategory l E.carrier n n.pos X,\n        Nonempty (FixedEtaleOriginWitness X\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n))\n          ⟨(sfFiniteOperationsRealization l E n X).obj K, hX K⟩)) ∧\n      (∀ (K : finiteTorConstructibleCategory l E.carrier n n.pos X)\n        (L : finiteTorConstructibleCategory l E.carrier n n.pos Y)\n        (W : FixedEtaleOriginWitness X\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E.carrier n))\n          ⟨(sfFiniteOperationsRealization l E n X).obj K, hX K⟩) (a : F.obj K ⟶ L),\n        (sfFiniteOperationsRealization l E n X).map (adj.homEquiv K L a) ≫ rG.hom.app L =\n          sfFiniteOperationsHomEquiv l E n D.k (Y ↘ Spec (.of D.k)) c\n            ⟨(sfFiniteOperationsRealization l E n X).obj K, hX K⟩ W\n            ⟨(sfFiniteOperationsRealization l E n Y).obj L, hY L⟩\n            (rF.inv.app K ≫ (sfFiniteOperationsRealization l E n Y).map a))",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-330ed",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164918-L-1127780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261027T094441-L-229735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

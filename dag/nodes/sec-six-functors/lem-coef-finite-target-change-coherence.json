@@ -1,0 +1,235 @@
+{
+ "id": "lem-coef-finite-target-change-coherence",
+ "kind": "statement",
+ "title": "Evaluation and cocycle for an internal-Hom target changed with coefficients",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and the finite rings $A_j=\\mathcal O_E/\\varpi_E^j$ for $j\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the ordinary module-sheaf derived categories on the small etale or pro-etale site [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Bounded constructibility means [def-weil-pbc-constructible-complexes] on the etale site and [def-weil-finite-torsion-constructibility] on the pro-etale site. A complex has Tor interval $[a,b]$ if its derived tensor with every degree-zero module sheaf has zero cohomology outside $[a,b]$; $D^b_{ctf}$ means bounded constructible with some finite Tor interval [def-weil-finite-tor-amplitude]. For $i\\ge j\\ge1$, write $S_{i,j}=-\\otimes^L_{A_i}A_j$ for the quotient scalar extension [lem-pur-derived-change-of-rings].\n\nFix one of the two sites. Write $H_j(U,V)=R\\mathcal Hom_{A_j}(U,V)$ [def-pur-derived-internal-hom], with its tensor-Hom evaluation. Fix $N\\ge1$, objects $\\Omega_j\\in D^b_{ctf}(X,A_j)$ for $1\\le j\\le N$, and isomorphisms $u_{i,j}:S_{i,j}\\Omega_i\\xrightarrow{\\sim}\\Omega_j$ for $N\\ge i\\ge j\\ge1$. Assume $u_{i,i}=1$ and $u_{i,r}=u_{j,r}\\circ S_{j,r}(u_{i,j})$, using the canonical scalar units and reassociations [lem-fix-operation-reduction]. Let $v^{i,j}_{U,V}$ be the evaluation-defined internal-Hom comparison of [thm-coef-finite-hom]. For $K\\in D^b_{ctf}(X,A_i)$ define\n$$h^{i,j}_{K,\\Omega}=H_j(S_{i,j}K,u_{i,j})\\circ v^{i,j}_{K,\\Omega_i}:S_{i,j}H_i(K,\\Omega_i)\\longrightarrow H_j(S_{i,j}K,\\Omega_j).$$\nThese are natural isomorphisms, contravariant in $K$, with the following specified evaluation identity:\n$$\\operatorname{ev}_{S_{i,j}K,\\Omega_j}\\circ(h^{i,j}_{K,\\Omega}\\otimes1)=u_{i,j}\\circ S_{i,j}(\\operatorname{ev}_{K,\\Omega_i}),$$\nwhere $S_{i,j}(H_i(K,\\Omega_i)\\otimes^L_{A_i}K)$ is identified with $S_{i,j}H_i(K,\\Omega_i)\\otimes^L_{A_j}S_{i,j}K$. For $i\\ge j\\ge r$ they satisfy\n$$h^{i,r}_{K,\\Omega}=h^{j,r}_{S_{i,j}K,\\Omega}\\circ S_{j,r}(h^{i,j}_{K,\\Omega}),\\qquad h^{i,i}_{K,\\Omega}=1.$$\nThe construction is natural also in a morphism of target families $(\\Omega_j,u_{i,j})$. The targets are arbitrary finite-Tor constructible complexes; no assertion that they are geometric dualizing objects is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Proof: 'The resulting map is d', evaluation compatibility, and 'The cocycle is their quotient cocycle'; returned steps 2, 3 and 5"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "lem-fix-operation-reduction",
+  "thm-coef-finite-hom",
+  "def-weil-pbc-normalized-origin-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "On the etale site, [lem-coef-finite-hom-domain-calculus] gives $S_{i,j}K\\in D^b_{ctf}(X,A_j)$; on the pro-etale site this is the first assertion of [lem-coef-closed-scalar-domains], applied with $L=E$ and the quotient map. Thus all subsequent applications are in the required domains. Apply [thm-coef-finite-hom] to $(K,\\Omega_i)$: $v^{i,j}_{K,\\Omega_i}$ is an isomorphism, with the specified evaluation, naturality and successive-quotient equations. Write $K_j=S_{i,j}K$ and suppress only the canonical scalar reassociations throughout.",
+   "uses": [
+    "lem-coef-finite-hom-domain-calculus",
+    "lem-coef-closed-scalar-domains",
+    "thm-coef-finite-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "'Apply thm-coef-finite-hom with second argument'; domains and specified comparison"
+   }
+  },
+  {
+   "text": "By the bifunctoriality in [def-pur-derived-internal-hom], $H_j(K_j,u_{i,j})$ has inverse $H_j(K_j,u_{i,j}^{-1})$. Consequently $h^{i,j}_{K,\\Omega}$ is invertible. For $f:K\\to L$, naturality of $v$ in [thm-coef-finite-hom] and commutation of the two variables of $H$ give $H_j(S_{i,j}f,1)\\circ h^{i,j}_{L,\\Omega}=h^{i,j}_{K,\\Omega}\\circ S_{i,j}H_i(f,1)$. Indeed first commute $H_j(Sf,1)$ past $H_j(SL,u_{i,j})$, and then use the naturality square for $v_{-,\\Omega_i}$. This is contravariant naturality.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "thm-coef-finite-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "'The resulting map is d'; invertibility and contravariant naturality"
+   }
+  },
+  {
+   "text": "Evaluation is the counit of the tensor-Hom adjunction used in [thm-coef-finite-hom], hence is natural in its target. With $u=u_{i,j}$, this is $\\mathrm{ev}_{K_j,\\Omega_j}\\circ(H_j(K_j,u)\\otimes1)=u\\circ\\mathrm{ev}_{K_j,S_{i,j}\\Omega_i}$. Compose this equality with $v^{i,j}_{K,\\Omega_i}\\otimes1$. The evaluation equation of the same theorem replaces the last evaluation composed with $v\\otimes1$ by $S_{i,j}(\\mathrm{ev}_{K,\\Omega_i})$, under its specified tensor comparison. This gives exactly the claimed evaluation identity.",
+   "uses": [
+    "thm-coef-finite-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "'Evaluation compatibility follows from the two comparisons already proved'"
+   }
+  },
+  {
+   "text": "Fix $i\\ge j\\ge r$. Set $F=S_{i,j}$, $G=S_{j,r}$, $Q=FK$, and write $v^F,v^G$ for the specified comparisons. Naturality in the second variable in [thm-coef-finite-hom], applied to $u_{i,j}:F\\Omega_i\\to\\Omega_j$, says $v^G_{Q,\\Omega_j}\\circ G(H_j(Q,u_{i,j}))=H_r(GQ,G u_{i,j})\\circ v^G_{Q,F\\Omega_i}$. Expanding the proposed composite therefore gives\n$$\\begin{aligned}h^{j,r}_{Q,\\Omega}\\circ G(h^{i,j}_{K,\\Omega})&=H_r(GQ,u_{j,r})\\circ H_r(GQ,G u_{i,j})\\circ v^G_{Q,F\\Omega_i}\\circ G(v^F_{K,\\Omega_i})\\\\&=H_r(GQ,u_{j,r}\\circ G u_{i,j})\\circ v^{i,r}_{K,\\Omega_i}\\\\&=H_r(S_{i,r}K,u_{i,r})\\circ v^{i,r}_{K,\\Omega_i}=h^{i,r}_{K,\\Omega}.\\end{aligned}$$\nThe second equality is Hom functoriality [def-pur-derived-internal-hom] and the quotient cocycle for $v$ in the cited theorem; the third is precisely the assumed target-family cocycle. All equations use the same scalar associators as that theorem, so the two occurrences of $GQ$ are identified with $S_{i,r}K$ by the specified identification.",
+   "uses": [
+    "thm-coef-finite-hom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "'The cocycle is their quotient cocycle'; explicit target-map calculation"
+   }
+  },
+  {
+   "text": "For $i=j$, scalar extension and its tensor comparison are identified with the identity by the canonical scalar unit. The identity on $H_i(K,\\Omega_i)$ has transpose $\\mathrm{ev}_{K,\\Omega_i}$, so uniqueness of the evaluation transpose in [thm-coef-finite-hom] gives $v^{i,i}_{K,\\Omega_i}=1$. Since $u_{i,i}=1$, functoriality gives $h^{i,i}=1$. Finally let $t_j:\\Omega_j\\to\\Omega'_j$ be a morphism of target families, meaning $t_j\\circ u_{i,j}=u'_{i,j}\\circ S_{i,j}t_i$. Covariant naturality of $v$ and Hom functoriality give\n$$\\begin{aligned}H_j(K_j,t_j)\\circ h^{i,j}_{K,\\Omega}&=H_j(K_j,t_j\\circ u_{i,j})\\circ v_{K,\\Omega_i}^{i,j}\\\\&=H_j(K_j,u'_{i,j})\\circ H_j(K_j,S_{i,j}t_i)\\circ v_{K,\\Omega_i}^{i,j}\\\\&=h^{i,j}_{K,\\Omega'}\\circ S_{i,j}H_i(K,t_i).\\end{aligned}$$\nThis proves naturality for arbitrary target-family morphisms, without requiring the $t_j$ to be invertible or the targets to be dualizing objects.",
+   "uses": [
+    "thm-coef-finite-hom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+    "place": "'The resulting map is d' and 'quotient cocycle'; units and naturality in target identifications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-hom-domain-calculus",
+  "lem-coef-closed-scalar-domains",
+  "thm-coef-finite-hom",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-finite-verdier.proof.md",
+  "place": "Explicit formal expansion of the resulting map, evaluation compatibility and quotient cocycle; arbitrary compatible finite-Tor targets"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom evaluation transpose target change isomorphism scalar extension cocycle",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.monoidalClosedHomEquiv, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.ihom_ev_app, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ihom_coev_app",
+   "date": "2026-10-22",
+   "verdict": "no match: module Hom and Cartesian exponential comparison do not give derived tensor scalar change with a coherent family of finite-Tor constructible targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "postcompose base change internal Hom with coefficient compatible target maps preserves evaluation and composition",
+   "results": "8 hits: IsBaseChange.endHom, IsBaseChange.endHom_comp, IsBaseChange.endHom_comp_apply, IsBaseChange.endHom_apply, IsBaseChange.linearMapLeftRightHom_comp_apply, IsBaseChange.linearMapRight, IsBaseChange.linearMapLeftRightHom_comp, IsBaseChange.linearMapLeftRightHom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: module Hom and Cartesian exponential comparison do not give derived tensor scalar change with a coherent family of finite-Tor constructible targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"expComparison\"",
+   "results": "0 hits: . loogle: Loogle is currently under load, please try again later.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison|coe[vv].*ev|ihom",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module Hom and Cartesian exponential comparison do not give derived tensor scalar change with a coherent family of finite-Tor constructible targets",
+   "subdirectory": "CategoryTheory/Monoidal/Closed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom scalar extension target comparison evaluation cocycle",
+   "results": "0 hits: . service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|ihom.*ev|ev_naturality",
+   "results": "21 hits: Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; inspected Closed/Basic.lean:93-111 and Closed/Functor.lean:42-87. Generic evaluation naturality and Cartesian exponential comparison do not state derived finite-coefficient Hom invertibility or target-family tower compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory/Monoidal/Closed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom coefficient change target family naturality evaluation composition",
+   "results": "8 hits: CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.ihom.ev_naturality, CategoryTheory.Functor.HomObj.naturality_assoc, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.coev_naturality_app, CategoryTheory.Functor.HomObj.naturality, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_naturality_app, ModuleCat.ihom_map_apply, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map_app_comp_π; inspected Closed/Basic.lean:93-111 and Closed/Functor.lean:42-87. Generic evaluation naturality and Cartesian exponential comparison do not state derived finite-coefficient Hom invertibility or target-family tower compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"ev\"",
+   "results": "12 hits: CategoryTheory.ihom.coev, CategoryTheory.ihom.ev, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.MonoidalClosed.whiskerLeft_curry'_ihom_ev_app_assoc, CategoryTheory.ihom.coev_naturality; inspected Closed/Basic.lean:93-111 and Closed/Functor.lean:42-87. Generic evaluation naturality and Cartesian exponential comparison do not state derived finite-coefficient Hom invertibility or target-family tower compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom scalar extension with compatible target family evaluation identity and quotient cocycle",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.map'_hom_apply_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, ModuleCat.CoextendScalars.map_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction; inspected Closed/Basic.lean:93-111 and Closed/Functor.lean:42-87. Generic evaluation naturality and Cartesian exponential comparison do not state derived finite-coefficient Hom invertibility or target-family tower compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcompose internal Hom base change comparison with a compatible family of target isomorphisms preserves naturality evaluation and composition",
+   "results": "8 hits: CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.expComparison_ev, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.MonoidalClosed.pre_comm_ihom_map, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; inspected Closed/Basic.lean:93-111 and Closed/Functor.lean:42-87. Generic evaluation naturality and Cartesian exponential comparison do not state derived finite-coefficient Hom invertibility or target-family tower compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-coef-finite-verdier",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-coef-finite-verdier",
+   "place": "Proof: 'The resulting map is d', evaluation compatibility, and 'The cocycle is their quotient cocycle'; returned steps 2, 3 and 5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-target-change-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied five explicit steps using existing domain preservation and finite Hom comparison statements. No new nodes; wrote the target-family cocycle and naturality calculations rather than extracting the clauses as lemmas.",
+  "blueprint": "cor-coef-finite-verdier.proof.md: first sentence and resulting map (steps 1-2), evaluation compatibility (step 3), quotient cocycle (step 4), and explicit units and target-family functoriality of the same construction (step 5)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-dd2d4632e",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-dd2d4632e (reviewer sub-agent of L); spot-checked: PASS: I read the item, every cited statement and the main-20261015 source in full. The delivery adds proof steps only and creates no new nodes. Statement and stmt_deps are byte-identical to N0 127f88c3's version, and the item is unsplit on live and side-live, so nothing supersedes it. Source: cor-coef-finite-verdier.proof.md, 'resulting map is d', 'evaluation compatibility' and 'quotient cocycle'. The five steps work these out for a general compatible ctf target family. Step 1: S_ij K and S_ij Ω_i are ctf over A_j by lem-coef-finite-hom-domain-calculus (étale) and the first paragraph of lem-coef-closed-scalar-domains with L=E (pro-étale). This puts every application inside the domain of thm-coef-finite-hom. Step 2: H_j(K_j,u) is invertible by bifunctoriality (def-pur-derived-internal-hom), and the contravariant square follows from naturality of v in K. I checked the directions. Step 3: evaluation is a counit, so it is natural in the target; then the theorem's evaluation clause applies. The étale adjunction is stated in domain-calculus; on the pro-étale site the theorem's 'unique transpose' clause presupposes it. Step 4: I checked the four-term composite. Naturality of v^G in M along u_ij gives H_r(GQ, G u_ij); the theorem's cocycle with K_B=FK and M_B=FΩ_i, together with the u cocycle hypothesis, gives h^{i,r}. Step 5: v^{i,i}=1 follows from uniqueness of the transpose with n=m; target-family naturality follows from naturality of v in M, with no invertibility of t needed. Edge cases checked: N=1, i=j, j=r, zero objects, Spec k with Ω=A_j, zero morphisms of target families. No SGA. proof_deps equals the union of the step uses. Searches are recorded with 'unavailable' where a service was down. All cited nodes are in the same unit or are definitions, so no tool_uses are needed. Advisory only, in review.md: the statement's citation of lem-fix-operation-reduction for finite-quotient reassociations would be better as lem-coef-finite-hom-domain-calculus. This is unchanged base content, not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTargetChangeCoherence",
+  "declaration": "WeilConjectures.finiteTargetChange_coherence",
+  "declarations": [
+   "WeilConjectures.FiniteTargetChangeFamily",
+   "WeilConjectures.finiteTargetChangeArrow",
+   "WeilConjectures.FiniteTargetChangeLaws",
+   "WeilConjectures.finiteTargetEtaleUnit",
+   "WeilConjectures.finiteTargetIntrinsicUnit",
+   "WeilConjectures.finiteTargetIntrinsicData",
+   "WeilConjectures.finiteTargetChange_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTargetChangeCoherence.lean",
+  "statement": "theorem finiteTargetChange_coherence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (N : ℕ) (_hN : 1 ≤ N) : FiniteTargetChangeLaws (finiteHomEtaleData l E X) (finiteHomEtaleAssoc l E X) (finiteTargetEtaleUnit l E X) (fun n ↦ finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X) N ∧ FiniteTargetChangeLaws (finiteTargetIntrinsicData l E X) (finiteHomIntrinsicAssoc l E X) (finiteTargetIntrinsicUnit l E X) (fun n ↦ finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X) N",
+  "branch": "sheaf-dag",
+  "by": "Q90",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Both ordinary-etale and intrinsic pro-etale presentations of the same target-family statement. Fin N indexes positive exponents 1 through N by n.val + 1. Helper records spell out the family and all six clauses; the arrow is the existing evaluation-defined comparison followed by the target isomorphism. Canonical unit maps are constructed as adjunction mates. No statement or dependency correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7c4cdd10",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Read the item, thm-coef-finite-hom (node, Lean statement, FiniteCoefficientHomChange/EtaleFiniteCoefficientHomArrow), normalized-origin units, NormalizedDVRTower, CoefDerivedSystemEvaluationCalculus and the source. finiteTargetChangeArrow is the dependency's evaluation-defined coefficientBaseChangeHom followed by H(1,u). The isIso, contravariant naturality, evaluation (μ.inv convention of FiniteHomEvaluation), cocycle (α_H and H(α_K.inv,1), matching FiniteHomQuotientCocycleAux), unit (h_ii≫H(ε_K⁻¹,1)=ε_H) and target-family naturality without invertibility clauses are all typed and correct, on both the étale and the intrinsic site. Units are canonical mates coherent with the dependency's associators (ofIsRightAdjoint mates; leftAdjointIdIso and leftAdjointCompIso of the same quotient adjunction, pinned by unit_model and tensor_model). Hypotheses: separated finite type, no properness, N≥1, Fin N = levels 1..N, single universe. Statement field verbatim, 7 declarations listed, the added landed stmt_dep def-weil-pbc-normalized-origin-scalar-comparisons is allowed, docstrings and both report sections present. Delivery = item node + new module only. Advisories: the BasicOperationsCoefficientReduction public import appears unused; normalizedDVRResUnit's owner def-coef-normalized-dvr-tower is reached via thm-coef-finite-hom, not a direct stmt_dep."
+ }
+}

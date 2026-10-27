@@ -1,0 +1,534 @@
+{
+ "id": "lem-sfb-cotangent-ext-smooth-support",
+ "kind": "statement",
+ "title": "Finite positive cotangent Ext modules localize and vanish on the smooth locus",
+ "statement": "Let $k$ be a field [def-weil-field], let $P$ be a commutative finite-type $k$-algebra [def-weil-pbc-finite-type-algebra], and let $N$ be a finite $P$-module [def-weil-finitely-generated-module]. Use the full standard polynomial cotangent complex $L_{P/k}$ of [def-trf-cotangent-resolution-data] and put $T^j(P,N)=\\operatorname{Hom}_{D(P)}(L_{P/k},N[j])$ in the derived category of ordinary $P$-modules [def-weil-abstract-derived-category]. For every integer $j\\geq1$, $T^j(P,N)$ is a finite $P$-module. For every multiplicative subset $S\\subset P$, the canonical localization map induces an isomorphism of $S^{-1}P$-modules\n$$S^{-1}T^j(P,N)\\xrightarrow{\\sim}T^j(S^{-1}P,S^{-1}N).$$\nHere module localization is [def-weil-pbc-module-localization]. If $\\mathfrak q\\subset P$ is a prime at which $\\operatorname{Spec}P\\to\\operatorname{Spec}k$ is smooth [def-weil-affine-spectrum, def-sbc-smooth-morphisms], then $T^j(P,N)_{\\mathfrak q}=0$ for every $j\\geq1$. Thus the support, defined by $\\operatorname{Supp}_P T=\\{\\mathfrak q:T_{\\mathfrak q}\\neq0\\}$, is contained in the nonsmooth locus. The assertion concerns positive cotangent Ext, not merely the first homology of the naive cotangent complex.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PX, proposition-polynomial (finite polynomial resolution over a Noetherian base), Tag 08SF, lemma-localize, Tag 08R5, lemma-when-projective; flat localization of derived Hom is more-algebra.tex Tag 0A6A, lemma-base-change-RHom. Compare examples-defos.tex lemma-first-order-localization for the degree-one argument."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-localization",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Every ideal of $k$ is either zero or all of $k$: an ideal containing $a\\ne0$ contains $a^{-1}a=1$. Thus $k$ is Noetherian. Apply [lem-sfb-finite-polynomial-simplicial-resolution] to $k\\to P$, obtaining $Q_\\bullet$. By [lem-trf-cotangent-resolution-coherence], $E^{-n}=P\\otimes_{Q_n}\\Omega^1_{Q_n/k}$, with alternating faces and zero positive terms, represents the specified full $L_{P/k}$. For $Q_n=k[x_1,\\ldots,x_{r_n}]$, [lem-weil-pbc-kahler-differentials-polynomial-extension] applied to $k\\to k$ gives the basis $\\mathrm dx_i$: $\\Omega_{k/k}=0$ since every $k$-derivation of $k$ vanishes. Consequently $E^{-n}\\cong P^{r_n}$, so $E$ is a bounded-above complex of finite free modules. This uses no truncation of the cotangent complex.",
+   "uses": [
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-kahler-differentials-polynomial-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PX (proposition-polynomial) and 08QI (remark-resolution); algebra.tex Tag 00RX (lemma-differentials-polynomial-ring)."
+   }
+  },
+  {
+   "text": "Put $C^\\bullet=\\operatorname{Hom}^\\bullet_P(E,N[0])$, with the usual signed differential; its degree-$j$ term is just $\\operatorname{Hom}_P(E^{-j},N)\\cong N^{r_j}$ when $j\\geq0$, and is zero when $j<0$. By [lem-sc-bounded-above-projective-kprojective], $E$ is K-projective. Acyclicity of its Hom into acyclic complexes says exactly that every chain map into such a complex is null-homotopic (degree-zero cycles are maps and boundaries are homotopies). Thus [lem-coef-kprojective-derived-hom-bijection] applies and gives $T^j(P,N)\\cong H^j(C)$. Explicitly a cycle is a map $E^{-j}\\to N$ killing the preceding differential, hence a chain map $E\\to N[j]$; boundaries are precisely null-homotopic maps. These identifications are $P$-linear and natural in $N$ and in maps of projective representatives.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B (lemma-morphisms-from-projective-complex); cycles and homotopies in the ordinary Hom complex."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-algebra-noetherian], $P$ is Noetherian. Each $C^j$ is finite, since a finite generating family of $N$ in each of the $r_j$ coordinates generates $N^{r_j}$. By [lem-weil-pbc-noetherian-submodule-finite], $Z^j(C)\\subset C^j$ is finite. Its quotient $Z^j(C)/B^j(C)$ is finite, using the images of these generators. Step 2 therefore proves finiteness of $T^j(P,N)$ for every $j\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence) and 00IK (lemma-Noetherian-basic)."
+   }
+  },
+  {
+   "text": "Let $P'=S^{-1}P$ and $N'=S^{-1}N$. The isomorphism $E\\simeq L_{P/k}$ of step 1 is a chain of quasi-isomorphisms in $D(P)$; by the clause of [lem-trf-cotangent-augmentation-localization] that degreewise tensor with $P'$ preserves quasi-isomorphisms, it gives $E'=E\\otimes_PP'\\simeq L_{P/k}\\otimes_PP'$, and composing with the quasi-isomorphism $\\lambda$ of that node, $E'$ represents $L_{P'/k}$; it has finite free terms $P'^{r_n}$. In each degree the canonical map $S^{-1}\\operatorname{Hom}_P(E^{-j},N)\\to\\operatorname{Hom}_{P'}(E^{-j}\\otimes_PP',N')$ sends $\\phi/s$ to $(e\\otimes a/t\\mapsto a\\phi(e)/(st))$. With the chosen finite basis of $E^{-j}$, both sides are $(N')^{r_j}$ and this map is the identity on the coordinates, hence an isomorphism. It commutes with the signed Hom differentials because these are precomposition with the matrix of $d_E$. Exact localization, including its cohomology comparison in [lem-trf-cotangent-augmentation-localization], gives $S^{-1}H^j(C)\\cong H^j(\\operatorname{Hom}_{P'}^\\bullet(E',N'[0]))$. Apply [lem-sc-bounded-above-projective-kprojective] and [lem-coef-kprojective-derived-hom-bijection] over $P'$ as in step 2. This proves the desired isomorphism, and the displayed formula identifies it with the canonical map obtained by localizing derived morphisms and extending $P'$-linearly. This works also when $0\\in S$, when both sides are zero.",
+   "uses": [
+    "lem-trf-cotangent-augmentation-localization",
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SF (lemma-localize); explicit finite-free proof of the special case of more-algebra.tex Tag 0A6A (lemma-base-change-RHom), clause (3)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be a smooth point of $X=\\operatorname{Spec}P\\to\\operatorname{Spec}k$. Choose $g\\notin\\mathfrak q$ such that $U=D(g)=\\operatorname{Spec}P_g$ is an affine open on which this morphism is smooth. The affine-comparison clause of [lem-trf-lci-cotangent-presentation] describes $L_{X/k}$ on the chart $X$ by the normalized complex of the standard resolution; by [lem-cbc-normalized-alternating-homotopy-equivalence] (in the abelian category of $P$-modules, reindexed $n\\mapsto-n$) that complex is homotopy equivalent to the alternating complex $L_{P/k}$, hence by step 1 to $E$. Sheafifying termwise preserves these quasi-isomorphisms (stalks, below), so the sheaf associated termwise to $E$ represents $L_{X/k}$. By the compatibility with restriction to the smaller affine chart $U$, $L_{X/k}|_U$ is $L_{U/k}$, and the smooth clause applied to $U\\to\\operatorname{Spec}k$ gives $L_{X/k}|_U\\simeq\\Omega^1_{U/k}[0]$. The latter sheaf is finite locally free by [lem-ag-smooth-relative-differentials-finite-locally-free]: near $\\mathfrak q$ it is $\\mathcal O_U^r$ for a finite $r$. Take stalks. They preserve quasi-isomorphisms, since the kernel and cokernel statements in [lem-weil-pbc-module-stalk-exact] identify the cohomology stalk with the cohomology of the stalk complex. By [lem-weil-pbc-spec-tilde-stalk-localization], the stalk of the termwise associated $E$ is $E_{\\mathfrak q}$. Consequently $E_{\\mathfrak q}\\simeq P_{\\mathfrak q}^{r}[0]$ in $D(P_{\\mathfrak q})$. The comparison is an isomorphism of derived objects, not merely an assertion about one homology group.",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-cbc-normalized-alternating-homotopy-equivalence",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08T3 (lemma-morphism-affine-schemes) and Tag 08R5 (lemma-when-projective); morphisms.tex Tag 02G1 (lemma-smooth-omega-finite-locally-free)."
+   }
+  },
+  {
+   "text": "Take $S=P\\setminus\\mathfrak q$ in step 4. Using step 5, its target is $\\operatorname{Hom}_{D(P_{\\mathfrak q})}(P_{\\mathfrak q}^{r}[0],N_{\\mathfrak q}[j])$. The source complex $P_{\\mathfrak q}^{r}[0]$ is K-projective by [lem-sc-bounded-above-projective-kprojective], so [lem-coef-kprojective-derived-hom-bijection] computes this as chain maps modulo homotopy. For $j\\geq1$, the target has its sole nonzero term in degree $-j$, while the source is in degree zero. Every degree-preserving chain map is therefore zero. This proves $T^j(P,N)_{\\mathfrak q}=0$. By the definition of support in the statement, none of these smooth primes belongs to the support, so the support is contained in the nonsmooth locus.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B (lemma-morphisms-from-projective-complex), applied to the degree-zero finite free model at a smooth point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-polynomial-simplicial-resolution",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-trf-cotangent-augmentation-localization",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Assembly from Tags 08PX, 08QI, 08SF, 08T3, 08R5; the explicit finite-free Hom calculation is the module-target case of more-algebra.tex Tag 0A6A (3), following the localization argument of examples-defos.tex lemma-first-order-localization but for the full complex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Positive Ext of the cotangent complex with finite coefficients commutes with localization and vanishes on the smooth locus",
+   "results": {
+    "t": "2026-10-22T06:27:51Z",
+    "tool": "leanfinder",
+    "query": "Positive Ext of the cotangent complex with finite coefficients commutes with localization and vanishes on the smooth locus",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.smoothLocus_eq_compl_support_inter",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv"
+    ],
+    "digest": "37ad4c3ad8f1c3c2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: H1Cotangent localization and smoothLocus formulas concern cotangent homology, not positive Ext with arbitrary finite coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cotangent cohomology modules over a Noetherian algebra are supported on its nonsmooth locus",
+   "results": {
+    "t": "2026-10-22T06:28:21Z",
+    "tool": "leanfinder",
+    "query": "Finite cotangent cohomology modules over a Noetherian algebra are supported on its nonsmooth locus",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.smoothLocus_eq_compl_support_inter",
+     "Algebra.Extension.Cotangent.finite",
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Ideal.instIsNoetherianCotangentOfSubtypeMem",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField"
+    ],
+    "digest": "c0a4f4fe70b69c69"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: H1Cotangent localization and smoothLocus formulas concern cotangent homology, not positive Ext with arbitrary finite coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, Algebra.H1Cotangent",
+   "results": {
+    "t": "2026-10-22T06:27:41Z",
+    "tool": "loogle",
+    "query": "Algebra.FormallySmooth, Algebra.H1Cotangent",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Algebra.FormallySmooth.subsingleton_h1Cotangent",
+     "Algebra.FormallySmooth.mk",
+     "Algebra.formallySmooth_iff",
+     "Algebra.Extension.equivH1CotangentOfFormallySmooth",
+     "Algebra.Extension.cotangentComplex_injective_iff",
+     "Algebra.FormallySmooth.kerCotangentToTensor_injective_iff"
+    ],
+    "digest": "c546628e048d474d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: H1Cotangent localization and smoothLocus formulas concern cotangent homology, not positive Ext with arbitrary finite coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Ee]xt|[Ee]xt.*cotangent|cotangent.*[Ll]ocaliz",
+   "results": {
+    "t": "2026-10-22T06:27:40Z",
+    "tool": "grep",
+    "query": "cotangent.*[Ee]xt|[Ee]xt.*cotangent|cotangent.*[Ll]ocaliz",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/ExtendScalars.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+     "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean"
+    ],
+    "digest": "e57c288cc2669dc2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: H1Cotangent localization and smoothLocus formulas concern cotangent homology, not positive Ext with arbitrary finite coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cotangent complex Ext finite modules localization smooth locus",
+   "results": {
+    "t": "2026-10-22T06:27:40Z",
+    "tool": "leansearch",
+    "query": "Cotangent complex Ext finite modules localization smooth locus",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp",
+     "Algebra.smoothLocus",
+     "Algebra.tensorH1CotangentOfIsLocalization",
+     "Algebra.H1Cotangent.isLocalizedModule",
+     "Algebra.smoothLocus_comap_of_isLocalization",
+     "RingHom.Smooth.holdsForLocalizationAway",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Extension.H1Cotangent"
+    ],
+    "digest": "656526fdbcce14fa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: H1Cotangent localization and smoothLocus formulas concern cotangent homology, not positive Ext with arbitrary finite coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*complex|simplicial.*resolution",
+   "results": {
+    "t": "2026-10-23T09:28:06Z",
+    "tool": "grep",
+    "query": "cotangent.*complex|simplicial.*resolution",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cotangent complex of a finite type algebra over a noetherian ring is pseudo coherent",
+   "results": {
+    "t": "2026-10-23T09:28:07Z",
+    "tool": "leansearch",
+    "query": "Cotangent complex of a finite type algebra over a noetherian ring is pseudo coherent",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.SubmersivePresentation.cotangentComplex_injective",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "Algebra.FormallySmooth.subsingleton_h1Cotangent",
+     "Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+     "Algebra.Extension.Cotangent.finite",
+     "Algebra.SubmersivePresentation.cotangentComplexAux_surjective"
+    ],
+    "digest": "64212119baa7d60e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, Module.Finite",
+   "results": {
+    "t": "2026-10-23T09:28:07Z",
+    "tool": "loogle",
+    "query": "Algebra.H1Cotangent, Module.Finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential"
+    ],
+    "digest": "306fb432c828bbba"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian base a finite type algebra has a cotangent complex represented by a bounded above complex of finite free modules",
+   "results": {
+    "t": "2026-10-23T09:28:08Z",
+    "tool": "leanfinder",
+    "query": "Over a Noetherian base a finite type algebra has a cotangent complex represented by a bounded above complex of finite free modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.Cotangent.finite",
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "Ideal.instIsNoetherianCotangentOfSubtypeMem",
+     "Algebra.SubmersivePresentation.free_cotangent",
+     "Algebra.SubmersivePresentation.cotangentEquiv_apply",
+     "IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "KaehlerDifferential.finite"
+    ],
+    "digest": "1da9cc84cc9d513b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*complex|pseudo.?coherent",
+   "results": {
+    "t": "2026-10-23T09:29:57Z",
+    "tool": "grep",
+    "query": "cotangent.*complex|pseudo.?coherent",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Perfectoid/FontaineTheta.lean",
+     "Mathlib/RingTheory/Smooth/Basic.lean",
+     "Mathlib/RingTheory/Smooth/Basic.lean"
+    ],
+    "digest": "24fb0400c459b4f8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise finite polynomial simplicial resolution makes the full cotangent complex pseudo coherent",
+   "results": {
+    "t": "2026-10-23T09:30:08Z",
+    "tool": "leanfinder",
+    "query": "A degreewise finite polynomial simplicial resolution makes the full cotangent complex pseudo coherent",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.Extension.exact_cotangentComplex_toKaehler",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange"
+    ],
+    "digest": "0fedaa8cceeff81d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned results concern finite presentations or naive cotangent modules, not a simplicial resolution with finite polynomial terms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-isolated-deformation-lift",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points",
+   "via": [
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cotangent-ext-smooth-support",
+  "worker": "stage1",
+  "summary": "Constructed one statement-only input for finite polynomial simplicial resolutions (08PX/08QI). The item proves finite free cotangent terms, computes derived morphisms by chain maps modulo homotopy, proves finiteness by Noetherian submodules, writes the localization comparison on coordinates, and uses the smooth sheaf-cotangent identification and exact stalks to prove positive-degree vanishing. Statement unchanged; no naive two-term truncation used. All Mathlib searches were run and logged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; supporting algebra for finite support of the obstruction and difference modules. Current latest blueprint direct-images proof (3) has evolved; no unit or chapter route is replaced. The ancestor tool reports null for this existing imported ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-trf-cotangent-augmentation-localization",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-sc-finite-locally-free-sheaf",
+    "why": "Generic algebra, cotangent-complex, or derived-morphism tool for the isolated-deformation auxiliary lemma; no step of the six-functor unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-trf-cotangent-augmentation-localization",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-851d46b22",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-851d46b22 (reviewer sub-agent of L); spot-checked: Read Stacks cotangent 08PX proposition-polynomial and 08QI remark-resolution in full. The new node lem-sfb-finite-polynomial-simplicial-resolution is exactly that content: A Noetherian, B of finite type, finite polynomial terms with no uniform bound. It is self-contained and statement-only. It does not duplicate any trf resolution node (none asserts existence with finite terms) and restates no clause of the item. Small cases B=A, B=0 and B=k[eps]/eps^2 hold. Item steps: 1 (coherence comparison plus polynomial Kähler basis gives finite free E), 2 (K-projective Mathlib leaves, Hom_K = H^j Hom), 3 (Noetherian submodules), 4 (localization node: degreewise tensor and H^i comparison, lambda quasi-iso, 0 in S allowed) and 6 (no chain maps P_q^r[0] to N_q[j]) are correct. Two repairable faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-cotangent-ext-smooth-support.json. (C1/C4) Step 5: the affine clause of lem-trf-lci-cotangent-presentation is stated for the normalized complex, while E and L_{P/k} are alternating. Added lem-cbc-normalized-alternating-homotopy-equivalence (a Mathlib leaf) to the step uses and proof_deps. U is now taken as an affine D(g), so the restriction compatibility gives L_{X/k}|_U = L_{U/k} before the smooth clause is applied. (E5) Step 4: 'E tensor P' represents L_{P'/k}' is now spelled out (the chain of quasi-isos from step 1, tensor preserves quasi-isos, then compose with lambda). Statement unchanged; no nodes dropped. Batch-5: the four flagged trf citations (resolution-coherence, augmentation-localization, lci-cotangent-presentation, def-trf-cotangent-resolution-data) are general cotangent and simplicial algebra, not results either assumption gives and not steps of the trace-formula or Poincaré-duality proofs. The item's 893-node closure contains no trace, local-term, Frobenius, Lefschetz, Poincaré or nt-assume nodes, so they are accepted as generic. The tool_uses in split_report (trf cotangent, pbc stalk/Noetherian/Kähler, ag smooth differentials) are accepted as generic tools. No SGA; no repair note; live is still unsplit; no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentExtSmoothSupport",
+  "declaration": "Algebra.CotangentResolution.cotangentExt_finite_localization_smooth_support",
+  "declarations": [
+   "Algebra.CotangentResolution.cotangentExt",
+   "Algebra.CotangentResolution.cotangentExtModule",
+   "Algebra.CotangentResolution.localizedArrow",
+   "Algebra.CotangentResolution.localizationSquare",
+   "Algebra.CotangentResolution.localizedCoefficient",
+   "Algebra.CotangentResolution.localizedCotangentExtModule",
+   "Algebra.CotangentResolution.IsCotangentExtLocalization",
+   "Algebra.CotangentResolution.cotangentExt_finite_localization_smooth_support"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentExtSmoothSupport.lean",
+  "statement": "theorem cotangentExt_finite_localization_smooth_support (C : Coherence.{u}) (f : Arrow CommRingCat.{u}) (_hk : IsField f.left) (_hfinite : RingHom.FiniteType f.hom.hom) (N : ModuleCat.{u} f.right) [Module.Finite f.right N] (j : ℤ) (_hj : 1 ≤ j) : Module.Finite f.right (cotangentExt C f N j) ∧ (∀ S : Submonoid f.right, ∃ (ι : N ⟶ (ModuleCat.restrictScalars (localizationSquare f S).right.hom).obj (localizedCoefficient S N)), (∀ n : N, ι n = LocalizedModule.mk n 1) ∧ ∃ e : localizedCotangentExtModule C f N S j ≅ cotangentExtModule C (localizedArrow f S) (localizedCoefficient S N) j, ∀ ξ : cotangentExt C f N j, IsCotangentExtLocalization C f N S j ι ξ (e.hom (LocalizedModule.mk ξ 1))) ∧ (∀ q : PrimeSpectrum f.right, (∃ U : (Spec f.right).Opens, q ∈ U ∧ AlgebraicGeometry.Smooth (U.ι ≫ Spec.map f.hom)) → Subsingleton (LocalizedModule q.asIdeal.primeCompl (cotangentExt C f N j))) ∧ {q : PrimeSpectrum f.right | ¬ Subsingleton (LocalizedModule q.asIdeal.primeCompl (cotangentExt C f N j))} ⊆ {q : PrimeSpectrum f.right | ¬ ∃ U : (Spec f.right).Opens, q ∈ U ∧ AlgebraicGeometry.Smooth (U.ι ≫ Spec.map f.hom)}",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full standard polynomial derived cotangent Ext. The localization isomorphism is characterized by the cotangent ring-square map, exact restriction of scalars, canonical single/shift comparisons, and the coefficient map n ↦ n/1. IsField asserts the field property of the already bundled source ring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e19b90099",
+  "group": "Q04",
+  "result": "pass",
+  "note": "First S2 delivery; only the item lean record and the new module Sheaf.RingTheory.CotangentExtSmoothSupport changed; stmt_deps/statement/proof unchanged. H3: IsField f.left, RingHom.FiniteType, Module.Finite N, cotangentExt = Hom(cotangentComplex C f, single N⟦j⟧) with Linear module structure, j≥1 finiteness, ∀ S localization iso in ModuleCat(Localization S) pinned canonically (ι = n↦n/1, IsCotangentExtLocalization square through cotangentMap + restrictScalars commShift/single comparisons determines e via adjunction + 08SF), smooth-at-q = Smooth on an open nbhd ⇒ Subsingleton localization, support inclusion literal. The Coherence module (side-live) pins standard terms, DifferentialModel and cotangentMap, so ∀ C is no extra hypothesis. Edge cases j=1, N=0, P=0, 0∈S, all primes, any characteristic OK; universes bound (u, Hom in u+1 as the dependency). H4: localizationSquare/localizedArrow/MarkedSchemeLifts.Ext elsewhere are different namespaces/notions; no dup. Statement verbatim, declarations recorded, one sorry, no hollow defs, docstrings with source+blueprint+6-step proof, lines ≤100, standard direct-delivery second-reading text. No compile (no fix)."
+ }
+}

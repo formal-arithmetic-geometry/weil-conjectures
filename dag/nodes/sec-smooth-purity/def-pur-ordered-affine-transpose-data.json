@@ -1,0 +1,118 @@
+{
+ "id": "def-pur-ordered-affine-transpose-data",
+ "kind": "definition",
+ "title": "Canonical data for the ordered affine transpose and projection",
+ "statement": "Fix the finite-coefficient purity setting and the ordered affine comparison [def-pur-affine-space-comparison]. On the ordinary finite-coefficient pro-etale derived categories define the unit presentation unitEtaleIso and unitPlus; compact is identity at zero and standing compact support at positive dimension; counit is the normalized identity or the standing exceptional counit. The transpose is compact.map(Γ_d,K) followed by counit. The ordered coefficient tate, canonical tensor reassociations powerIso/sourceIso, unitPull and tateSourceIso identify the source with pulled-back K tensor T_d and identify F_d(A) with T_d. Integration is compact.map(tateSourceIso.inv) followed by transpose at unitPlus. Projection is the right unitor at zero and, at positive dimension, the specified coefficient-first canonical compactification projection followed by compact.map(sourceIso.inv); projectionInverse inverts exactly this map under an IsIso proof. fixedSourceTransport is the actual proper/open comparison and ordinary compactification comparison; lineUnitSourceIso and lineNormalizedIntegration use these canonical transports and the recorded normalized affine-line trace. BlockLaw denotes the explicit pasted-counit equation for consecutive blocks, universally over the retained finite-Tor etale representative of F_b(K). These are the original concrete constructions, with no new choice or theorem asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Canonical trace/projection constructions underlying lem-pur-ordered-affine-transpose-projection, Steps 1--6; sk-prop-an Steps 5--6."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-affine-space-comparison",
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a comparison defined by iterated adjunction transpose and the projection formula",
+   "results": "Generic naturality and adjunction counit lemmas only; none fixes the project ordered affine maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "Adjunction.counit_naturality, homEquiv_counit and comp_counit_app are useful generic tools, not the ordered affine assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At the unit coefficient the adjunction transpose of the affine line purity map equals the normalized compact support trace",
+   "results": "No Mathlib declaration specifies the project affine purity and trace maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|inv_hom_id|comp_counit_app",
+   "results": "Generic categorical identities only. Searched both project roots for orderedAffine, tateSourceIso, BlockLaw and lineNormalizedIntegration. Only the assigned module contains these constructions; AffineSpaceTraceFactorization is a consumer. Blueprint searches for ordered affine comparison natural, transpose projection and affine line transpose normalization gave no exact prior node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrderedAffineTransposeProjection",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Canonical trace/projection constructions underlying lem-pur-ordered-affine-transpose-projection, Steps 1--6; sk-prop-an Steps 5--6.",
+   "via": [
+    "lem-pur-ordered-affine-transpose-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedAffineTransposeData",
+  "file": "lean/Sheaf/Paper/OrderedAffineTransposeData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.transpose",
+  "statement": "def transpose (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y)\n    (hKe : etaleFiniteTor (Ring P) Y Ke)\n    (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :\n    (compact P Y d).obj ((orderedSource P Y d).obj K.obj) ⟶ K.obj",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.unitEtaleIso",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.unitPlus",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.counit",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.transpose",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.powerIso",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.sourceIso",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.tateSourceIso",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.projection",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.projectionInverse",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.fixedSourceTransport",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.lineUnitSourceIso",
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.BlockLaw"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, Data module and 3 child modules + nodes compared with clone sheaf-dag (theorem header byte-identical, 17 defs verbatim plus @[irreducible]); reader gate compiled the 5 delivered modules and 4 clone consumers (AffineSpaceTraceProductData/SuccessorContraction/ContractionProduct/Factorization) together, all OK; children's statements read against the AffineSpacePurity and AffineLinePurity defs"
+ }
+}

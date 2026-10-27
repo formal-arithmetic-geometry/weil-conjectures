@@ -1,0 +1,284 @@
+{
+ "id": "lem-per-ordinary-uniformization-local-reduction",
+ "kind": "statement",
+ "title": "Ordinary marked uniformization reduces to normal complete local schemes",
+ "statement": "Use $U(S,Z)$ from [def-per-ordinary-alteration-topology]. For every integer $d\\ge0$ the following implication holds. Suppose $U(\\operatorname{Spec}A,Z)$ holds for every nonzero normal complete Noetherian local domain $A$ of Krull dimension at most $d$ and every nowhere dense closed subset $Z\\subset\\operatorname{Spec}A$. Then $U(S,Z)$ holds for every reduced quasi-excellent Noetherian scheme $S$ of Krull dimension at most $d$ and every nowhere dense closed subset $Z\\subset S$. There is also an unbounded version: if the complete-local hypothesis holds in every finite dimension, then $U(S,Z)$ holds for every reduced quasi-excellent Noetherian scheme $S$, without assuming that $S$ has finite global Krull dimension.\n\nHere Noetherian means a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring], quasi-excellent means having an affine open cover by spectra of quasi-excellent rings [def-exc-excellent-ring], normal means integrally closed in the fraction field [def-weil-pbc-normal-ring], and complete means complete for the maximal-ideal-adic topology [def-weil-pbc-adically-complete-ring]. Dimension is the supremum of lengths of strict chains of irreducible closed subsets [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 4.3.3, pp.33--34; III Proposition 6.2 and its proof, pp.43--45 (ordinary-alt alternative); VII 2.1--2.3, p.81, for the bounded dimension reduction. No invertible prime is needed in the ordinary alternative."
+ },
+ "stmt_deps": [
+  "def-per-ordinary-alteration-topology",
+  "def-weil-pbc-noetherian-ring",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "First consider a normal excellent henselian Noetherian local domain $B$ of dimension at most $d$, and a nowhere dense closed $W\\subset S_B=\\operatorname{Spec}B$. The preparation theorem gives a normal Noetherian local domain $\\widehat B$ and nowhere dense $\\widehat W$; the completion-dimension theorem gives $\\dim\\widehat B=\\dim B\\leq d$. The hypothesis therefore supplies an ordinary alteration cover $(\\widehat X_i\\to\\widehat S_B)_i$ with integral regular sources and the marked boundaries. Apply marked finite-diagram approximation to obtain a model containing all boundary components and intersections and a congruence threshold ensuring regular marked neighborhoods of the whole closed fibres. Apply ordinary cover approximation to that very model; increase the index and take the maximum of the two thresholds. The latter lemma ensures that the reduced dominant parts of every sufficiently close specialization form an ordinary covering.",
+   "uses": [
+    "lem-per-henselian-normal-completion-preparation",
+    "lem-weil-pbc-completion-dimension",
+    "lem-per-marked-finite-diagram-approximation",
+    "lem-per-ordinary-alteration-cover-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, p.44, completion and simultaneous approximation; III 3.1(ii), 5.4"
+   }
+  },
+  {
+   "text": "Choose a section meeting both thresholds as follows. The finite type model algebra has a presentation $B[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ by the Noetherian finite-presentation lemma. Its inclusion in $\\widehat B$ is a simultaneous solution of the $f_j$. Excellence includes the G-ring condition. Apply henselian-pair approximation to $(B,\\mathfrak m_B)$ and the common threshold $N\\geq1$. The resulting solution in $B$ defines a $B$-algebra map $u$ from the model algebra, congruent to the inclusion modulo $\\mathfrak m_B^N\\widehat B$; congruence on the generators implies congruence on every polynomial and hence on every element. Thus the same $u$ preserves the entire finite marking diagram. Denote its specialized sources by $M_i$ and their reduced dominant parts by $P_i$. Step 1 gives a finite ordinary cover $(P_i\\to S_B)_i$ and regular marked opens $V_i\\subset M_i$ containing the whole closed fibres, with $O_i=V_i\\cap P_i$ open and closed in $V_i$. Hence each $O_i$ is regular and has the restricted boundary with the prescribed support.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-per-marked-finite-diagram-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III section 2, pp.35--36, and Proposition 6.2, pp.44--45; Stacks smoothing.tex Tag 0AH5 (lemma-henselian-pair), case (2)"
+   }
+  },
+  {
+   "text": "To retain covering after this shrinking, apply ordinary proper refinement to $(P_i\\to S_B)_i$. Obtain an integral proper surjective $p:P\\to S_B$, finite generically, and a finite open cover $(P_j)$ with maps $P_j\\to P_{i(j)}$. Let $P_j^0$ be the inverse image of $O_{i(j)}$ and $P^0=\\bigcup_jP_j^0$. Every point over the closed point $s_B$ lies in some $P_j$ and maps into $O_{i(j)}$, so $P^0$ contains the whole closed fibre. By the definition of proper, $p(P\\setminus P^0)$ is closed and misses $s_B$. A nonempty closed subset of the spectrum of a local ring contains its closed point; thus this image is empty and $P^0=P$. The opens $P_j^0$ cover $P$ and factor through the $O_i$. Since $p$ and this open cover are covering generators, the sieve generated by the $O_i$ is covering by transitivity of the topology. This proves that $(O_i\\to S_B)_i$ is an ordinary alteration cover.",
+   "uses": [
+    "lem-per-ordinary-alteration-proper-refinement",
+    "def-weil-proper-morphism",
+    "def-per-ordinary-alteration-topology",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Proposition 4.1.1 and its proof, p.31; III Proposition 6.2, p.44 (ordinary-alt shrinking)"
+   }
+  },
+  {
+   "text": "The finite type $B$-schemes $M_i$ are Noetherian by the finite-type-over-Noetherian lemma, hence their open subschemes $O_i$ are Noetherian. Replace each $O_i$ by its nonempty connected components. There are finitely many: its finitely many irreducible components partition into finitely many connected unions, each closed; the complementary finite union is closed, so each connected component is also open. By the connected-regular lemma these nonempty connected components are integral. Their regularity and boundary conditions are restrictions to opens: in the boundary definition retain the nonempty open restrictions of each integral component and of its intersections, whose local rings and local codimensions do not change. Their open-cover refinements remain covering by transitivity. We have proved $U(S_B,W)$. This also works in dimension zero and for an empty boundary.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-regular-connected-integral",
+    "def-trf-strict-normal-crossings-boundary",
+    "def-per-ordinary-alteration-topology",
+    "def-weil-pbc-topos",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, p.44, connected regular neighborhoods; boundary restriction is immediate from its definition"
+   }
+  },
+  {
+   "text": "Now let $S$ be as in the bounded conclusion and fix $s\\in S$. Its local ring $R=\\mathcal O_{S,s}$ is reduced by definition and quasi-excellent by localization of a quasi-excellent affine chart. A prime chain in $R$ is a specialization chain in $S$, so $\\dim R\\leq d$. Preparation gives the excellent henselization $H=R^h$ and a finite surjective birational componentwise normalization $\\coprod_a\\operatorname{Spec}B_a\\to\\operatorname{Spec}H$, with $B_a$ normal excellent henselian local and $\\dim B_a\\leq\\dim H=\\dim R\\leq d$. The preimages of $Z$ are nowhere dense. Steps 1--4 give the required finite regular marked cover over each $B_a$. The normalization is finite, hence proper, and is an object of $\\operatorname{alt}/\\operatorname{Spec}H$ because it is componentwise birational. It is therefore a covering generator. The finite disjoint family of its factors is a Zariski cover. Compose their regular marked coverings by the topology's transitivity axiom, obtaining a finite ordinary alteration cover of $\\operatorname{Spec}H$. The sources and boundary supports are unchanged. Finite type is preserved under composition; generic points map to generic points and the residue-field extensions remain finite because they are towers of finite extensions.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-per-quasi-excellent-localization",
+    "lem-per-henselian-normal-completion-preparation",
+    "lem-weil-pbc-finite-proper",
+    "def-per-ordinary-alteration-topology",
+    "def-weil-pbc-topos",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, pp.43--44, henselian and finite normalization reductions; II Proposition 4.3.3, p.33"
+   }
+  },
+  {
+   "text": "Spread this specified cover of $\\operatorname{Spec}H$ by ordinary henselian regular-pair spreading. It yields a pointed etale neighborhood $e_s:S_s\\to S$ with an unchanged residue field at the chosen point over $s$, and a finite regular marked ordinary cover over $S_s$. As $s$ varies these etale neighborhoods are completely decomposed pointwise. The finite-subcover lemma extracts finitely many that are still completely decomposed, and in particular jointly surjective. They form an ordinary covering generator. Composing the finite covers over these neighborhoods gives a finite ordinary cover of $S$, with regular sources and boundaries supported exactly over $Z$. Finite type of the composites follows from composition; the spreading lemma makes $S_s\\to S$ an object of $\\operatorname{alt}/S$, so the finite generic residue extensions compose. Split the regular sources into nonempty integral connected components as in Step 4. This proves $U(S,Z)$. For $S=\\varnothing$, use the allowed empty family.",
+   "uses": [
+    "lem-per-ordinary-henselian-regular-pair-spreading",
+    "lem-per-completely-decomposed-etale-finite-subcover",
+    "def-per-ordinary-alteration-topology",
+    "def-weil-pbc-topos",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II proof of Proposition 4.3.3, pp.33--34; III Proposition 6.2, first paragraph, pp.43--44; II Corollary 2.2.4, p.27"
+   }
+  },
+  {
+   "text": "For the unbounded assertion repeat Steps 5--6 separately at each $s$. The Noetherian local ring $R$ has finite dimension; preparation gives finitely many $B_a$ of dimension at most $\\dim R$, and completion preserves their dimensions. Thus the hypothesis in every finite dimension permits all applications of Steps 1--4. Finite extraction in Step 6 still applies to the Noetherian scheme $S$, independently of the supremum of these local dimensions. No bound on the dimensions of the finite type approximation algebras or of the etale neighborhoods is used.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-per-henselian-normal-completion-preparation",
+    "lem-weil-pbc-completion-dimension",
+    "lem-per-completely-decomposed-etale-finite-subcover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 2.1--2.3, p.81; II Proposition 4.3.3, pp.33--34; III Proposition 6.2, pp.43--45"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-pc-reduced-scheme",
+  "def-per-ordinary-alteration-topology",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-topos",
+  "def-weil-proper-morphism",
+  "lem-per-completely-decomposed-etale-finite-subcover",
+  "lem-per-henselian-normal-completion-preparation",
+  "lem-per-marked-finite-diagram-approximation",
+  "lem-per-ordinary-alteration-cover-approximation",
+  "lem-per-ordinary-alteration-proper-refinement",
+  "lem-per-ordinary-henselian-regular-pair-spreading",
+  "lem-per-quasi-excellent-localization",
+  "lem-sc-regular-connected-integral",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-henselian-pair-approximation",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "II Proposition 4.3.3; III Proposition 6.2, ordinary-alt alternative, with the closed-fibre shrinking argument of II Proposition 4.1.1; VII 2.1--2.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-uniformization-local-reduction: Regular marked alteration coverings of complete normal local rings imply regular marked coverings of all quasi excellent Noetherian schemes with a bounded dimension version",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-ordinary-uniformization-local-reduction: Regular marked alteration coverings of complete normal local rings imply regular marked coverings of all quasi excellent Noetherian schemes with a bounded dimension version",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{ι : Type*} {U : ι → X.Opens} (hU : TopologicalSpace.IsOpenCover U) (hU' : ∀ i, IsAffineOpen (U i)) :\\n  IsLocallyArtinian X ↔ ∀ i, IsArtinianRing Γ(X, U i)\", \"doc\": \"For a scheme $X$ with an open cover $\\\\{U_i\\\\}$ consisting of affine open subsets, $X$ is locally Artinian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is an Artinian ring for\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsLocallyNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsLocallyNoetherian X) →\\n      ((component_noetherian : ∀ (U : ↑X.affineOpens), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))) →\\n          motive ⋯) →\\n        motive t\", \"doc\": \"Given a scheme $X$ and a proof that it is locally Noetherian, this function allows reducing arguments to the case where every affine open subset $U \\\\subseteq X$ has an associated Noetherian ring $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.OpenCover} (i) [IsLocallyNoetherian X] : IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alteration\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|uniformi[sz]ation|quasi.?excellent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-uniformization-local-reduction: Regular normal crossings proper etale generically finite coverings of complete normal local rings imply regular normal crossings coverings of all quasi excellent Noetherian schemes with a bounded dimension version",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-uniformization-local-reduction: marked regular alteration coverings of complete normal Noetherian local rings imply uniformization of all quasi excellent schemes",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|uniformi[sz]ation|quasi.?excellent",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-ordinary-uniformization-local-reduction: reduction of regular normal crossings alteration covers from quasi excellent schemes to complete normal local rings",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.IsLocallyNoetherian.casesOn, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alteration\"",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-weak-uniformization-cover",
+  "date": "2026-10-24",
+  "group": "Q147"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. This auxiliary lemma supplies Ordinary weak uniformization with an integral proper covering witness. More precisely: Expose II Proposition 4.3.3, pp.33--34; III Proposition 6.2 and its proof, pp.43--45 (ordinary-alt alternative); VII 2.1--2.3, p.81, for the bounded dimension reduction. No invertible prime is needed in the ordinary alternative.",
+   "via": [
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ordinary-uniformization-local-reduction",
+  "worker": "stage1",
+  "summary": "Preserved the bounded and unbounded statements. Followed ILO ordinary-alt reduction using one common marked model and one approximating section, proved closed-fibre shrinking using the proper refinement certificate, then normalized henselizations and spread prescribed covers to finitely many pointed etale neighborhoods. Created only the two ordinary-topology interfaces missing from the prime-to-ell chain. Checked every cited statement and every dimension bound.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3 regular local-model purity via the inherited weak-uniformization dependency chain; ILO II 4.3.3 and III 6.2 provide the local reduction, VII 2.1--2.3 explain the finite local dimension bound. Chapter and unit unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic The completion of a Noetherian local ring has the same dimension input for the ILO completion/spreading argument; no statement of this unit supplies this algebraic or topological fact."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-pair-approximation",
+    "why": "Generic Approximation for henselian pairs with a Noetherian G-ring input for the ILO completion/spreading argument; no statement of this unit supplies this algebraic or topological fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-henselian-pair-approximation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-c0435cb8c",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-c0435cb8c (reviewer sub-agent of L); spot-checked: First split; statement and stmt_deps byte-identical to base and live. The item is not on route-pivot-dropped.txt. It is reached from nt-target-weil-conjectures only via Q147 lem-per-qe-weak-uniformization-cover → qe chain → dropped complete-local-rigidification / gabber-absolute-equivariant-modification → lem-sfb-field-log-smooth-gabber-modification → sfb ctf-stability. The closure of lem-per-artin-gabber-affine-curve does not reach it, so the 10-19 finite-coefficient lock is untouched. Dropped cites: completely-decomposed-etale-finite-subcover (Steps 6–7, finite extraction), henselian-normal-completion-preparation (Steps 1, 5, 7) and marked-finite-diagram-approximation (Steps 1–2, ILO III 5.1/5.4). Each is needed at its named step and none has a live copy. The item's edges add 9 nodes: the 2 new ones and 7 dropped (4 split, plus gabber-graded-model-approximation, associated-graded-local-dimension and snc-boundary-parameter-criterion). That is small, so accepted. MAINTAINER NOTE: confirm or withdraw this revival of the sfb Gabber chain. Batch-5 flags (def-trf-strict-normal-crossings-boundary, def-weil-pbc-henselization-at-prime, lem-trf-regular-local-ring-isomorphism via quasi-excellent-localization) are generic definitions and algebra, not steps of the trace formula or Poincaré duality proofs, so they are OK. Sources checked in ILO arXiv 1207.3648: II 4.1.1 p.31 (closed-fibre shrink, reproved in Step 3 from proper-refinement as U = X − f(Y − Y′)); II 4.3.3 pp.33–34 and III 6.2 pp.43–45 (henselian spreading; normal reduction; regular near special fibre; dominant part; connected components; SNC). Steps 1–7 follow III 6.2. Checked: G-ring hypothesis for henselian-pair approximation; congruence on generators implies congruence on all elements; O_i = V_i ∩ P_i open-closed in the regular V_i; Step 3 shrink argument (closed image misses s_B, so P^0 = P; transitivity); regular connected implies integral; SNC restricts to opens; localization is quasi-excellent; finite implies proper; normalization is an alt object; S_s → S in alt/S; empty S, d = 0 and empty boundary. New node cover-approximation = III 3.1(ii) pp.37–38 for a finite family in the ordinary topology; true, and not a duplicate of the ℓ′ dropped twin. New node regular-pair-spreading = ordinary II 4.3.3 / III 6.2 spreading (EGA IV 8, 19.8.1, open regular locus, II 4.1.2-type covering descent); true, and not a duplicate of dropped ℓ′ henselian-regular-pair-spreading or Q80 local-alteration-diagram-spreading. stmt_deps of both new nodes are complete. Accepted tool_uses: completion-dimension, henselian-pair-approximation (generic). No fixes."
+ }
+}

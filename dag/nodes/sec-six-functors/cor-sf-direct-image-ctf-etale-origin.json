@@ -3,57 +3,170 @@
  "blueprint": {
   "is": "cor-sf-direct-image-ctf-etale-origin",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The pro-étale direct image for objects of étale origin",
- "statement": "In the setting of [cor-sf-direct-image-ctf-nonproper], let\n$K\\in D(X_{\\mathrm{proet}},A)$ be of étale origin: $K\\cong\\nu_X^*K'$\nfor the comparison morphism\nof sites and a bounded constructible complex $K'$ of $A$-modules on\n$X_{\\Et}$ of finite Tor amplitude\nin $[a,b]$. Then the pro-étale direct image $Rf_*K$ is bounded\nconstructible on $Y_{\\mathrm{proet}}$ and has finite Tor amplitude in\n$[a,b+2d]$; that is, clause (iii) of the finite-Tor preservation summary holds at\nthe finite coefficient stage $A$ for such $K$.",
+ "statement": "Fix the global finite-field datum: a prime $p$, a prime power $q=p^r$ with $r\\geq1$, a field $k_0=\\mathbf F_q$ and its algebraic closure $k$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Set $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$, the finite coefficient ring [def-weil-l-adic-coefficient-extension]. Let $d\\in\\mathbf N$, let $X,Y$ be finite-type $k$-schemes [def-weil-finite-type-morphism], and suppose $\\dim X\\leq d$ for topological Krull dimension [def-kun-topological-krull-dimension]. Let $f:X\\to Y$ be separated [def-weil-proper-morphism] and of finite type. Let $a\\leq b$ be integers and let $K'\\in D(X_{\\Et},A)$ [def-weil-pbc-derived-categories] be bounded constructible [def-weil-pbc-constructible-complexes] with Tor amplitude in $[a,b]$ [def-kun-tor-amplitude]. Here $X_{\\Et}$ denotes the small étale site [def-weil-pbc-etale-site]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\Et}$ for $T=X,Y$ denote the comparison morphism [def-weil-pbc-site-comparison-morphism], with its derived pullback [def-sf-comparison-derived-pullback]. Let $K\\in D(X_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-modules] admit a derived isomorphism $K\\cong\\nu_X^*K'$. Then the ordinary pro-étale derived direct image $Rf_*K$ [def-weil-pbc-proetale-operations] is bounded constructible on $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-modules] and has Tor amplitude in $[a,b+2d]$ [def-weil-proetale-tor-amplitude]. In particular it belongs to $D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.md",
   "place": "node cor-sf-direct-image-ctf-etale-origin, order 2194"
  },
  "stmt_deps": [
-  "cor-sf-direct-image-ctf-nonproper",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "The morphism $f$ is of finite type, hence quasi-compact and\nquasi-separated, so the comparison direct image of\n[prop-weil-pbc-comparison-direct-image] gives an isomorphism\n\n$$\n\\nu_Y^*Rf_{\\Et,*}K'\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}\\nu_X^*K'\n\\cong Rf_{\\mathrm{proet},*}K .\n$$",
+   "text": "Finite type includes quasi-compactness by [def-weil-finite-type-morphism]. The assumed separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Thus $f$ has both geometric hypotheses of the comparison theorem; $K'$ is bounded below because it is bounded.",
    "uses": [
-    "prop-weil-pbc-comparison-direct-image"
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+    "place": "first paragraph, hypotheses of comparison"
+   }
   },
   {
-   "text": "By [cor-sf-direct-image-ctf-nonproper] the complex\n$Rf_{\\Et,*}K'$ is bounded constructible on $Y_{\\Et}$ with finite Tor\namplitude in $[a,b+2d]$, and [lem-exc-comparison-tor-interval]\ntransfers that Tor amplitude to its pullback\n$\\nu_Y^*Rf_{\\Et,*}K'$, which is the finite-Tor condition of\n[def-weil-finite-tor-amplitude] on the pro-étale site; bounded\nconstructibility of that pullback is\n[lem-weil-pbc-pullback-preserves-bounded-constructible]. The\nidentification therefore exhibits $Rf_{\\mathrm{proet},*}K$ as a bounded\nconstructible pro-étale object of finite Tor amplitude in $[a,b+2d]$.\nBy [def-weil-pbc-proetale-modules] the bounded constructible\npro-étale objects are the pullbacks of the bounded constructible étale\nobjects, a reading recorded in clause (3) of\n[lem-cbc-proetale-stalk-conservative]; for those objects the\ncorollary is exactly clause (iii) of the finite-Tor preservation summary at the\nfinite coefficient stage $A$.",
+   "text": "Put $L=Rf_{\\Et,*}K'$. Apply [cor-sf-direct-image-ctf-nonproper] to $K'$: the coefficient stage $A=A_{E,n}$, finite-type $k$-schemes, separated finite-type $f$, source bound $\\dim X\\le d$, bounded constructibility and input Tor interval are precisely its hypotheses. It gives that $L$ is bounded constructible on $Y_{\\Et}$ with Tor amplitude in $[a,b+2d]$. In particular $L\\in D^+(Y_{\\Et},A)$. The private equivalence boundedConstructible_iff converts between the two recorded finite-ring constructibility predicates using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]; their boundedness conditions are equivalent by the cohomological t-structure characterization.",
    "uses": [
     "cor-sf-direct-image-ctf-nonproper",
-    "lem-exc-comparison-tor-interval",
-    "def-weil-finite-tor-amplitude",
-    "lem-weil-pbc-pullback-preserves-bounded-constructible",
-    "def-weil-pbc-proetale-modules",
-    "lem-cbc-proetale-stalk-conservative"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+    "place": "second paragraph, application of étale direct-image corollary"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-comparison-direct-image] to the bounded-below object K' on the fixed-coefficient sites. Use [src-right-derived-functor-plus-compatibility] and the exact comparison inclusion compatibility to express the resulting isomorphism for the ordinary unbounded right derived functors. Factor the intrinsic comparison as the exact fixed-scalar comparison followed by canonical coefficient realization. The section-normalized derived realization comparison of [def-sp-finite-intrinsic-direct-adjunction] identifies realization of the fixed-scalar direct image with the actual intrinsic constant-ring direct image. Compose with the direct image of the inverse of the supplied origin isomorphism to obtain e: nu_Y^* L ≅ Rf_* K. The witness (L,e) is the first conclusion, the etale-origin condition of [def-weil-pbc-proetale-modules]. Every comparison is between the specified functors; there is no choice of a new direct image.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "def-weil-pbc-proetale-modules",
+    "src-right-derived-functor-plus-compatibility",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+    "place": "first paragraph, displayed derived comparison; second paragraph, bounded constructibility"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-comparison-tor-interval] to L in D+ and the ordered interval [a,b+2d]; the order follows from a ≤ b and d ≥ 0. Its output is the intrinsic realization of the bounded-below comparison image. Exact derived inclusion compatibility and composition give an isomorphism from this object to the intrinsic comparison of L, then e identifies it with Rf_*K. For the resolution-based predicate [def-weil-proetale-tor-amplitude], transport is immediate without choosing tensors: a representative isomorphism Q(M) ≅ Rf_*K composed with the inverse comparison isomorphism is a representative isomorphism to the source. The original universal K-flat resolution test then gives exactly the same vanishing assertion. This proves the second conclusion with every intrinsic module sheaf as test object, using [def-kun-tor-amplitude].",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "def-kun-tor-amplitude",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+    "place": "second paragraph, transfer of the Tor interval and conclusion"
+   }
+  },
+  {
+   "text": "For the intrinsic bounded constructibility of [def-weil-finite-torsion-constructibility], let F be intrinsic comparison. The exact derived homology comparison [def-sfb-exact-derived-cohomology-comparison], followed by H^i(e), gives F(H^i L) ≅ H^i(Rf_*K). The finite interval [c,g] bounding the nonzero cohomology of L bounds the latter cohomology as well, since F preserves zero objects; hence its support is a subset of the finite integer interval [c,g]. For constructibility, use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to read H^i L as a constructible sheaf in the source-library convention. The proved source theorem AlgebraicGeometry.ProEtale.isConstructible_comparisonUpperStar_obj preserves that condition. The canonical restriction isomorphism [lem-sf-intrinsic-realization-origin-comparison] identifies its intrinsic realization after restriction to constant scalars with this fixed-coefficient image. Compose with the restricted homology isomorphism, transport fixed-coefficient constructibility along that isomorphism, and apply [lem-weil-pbc-proetale-constant-module-constructibility] to obtain intrinsic constructibility of H^i(Rf_*K). This directly proves the needed forward preservation statement, without the full constructible-origin equivalence. Together with the interval from step 4, the definition [def-weil-finite-tor-amplitude] gives the final conclusion. The prime inequality is used by the etale direct-image corollary; no additional invertibility hypothesis is introduced.",
+   "uses": [
+    "def-sfb-exact-derived-cohomology-comparison",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-intrinsic-realization-origin-comparison",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+    "place": "second paragraph, last sentence: the corollary is clause (iii) of the finite-Tor preservation summary; the reading of bounded constructible pro-étale objects as étale-origin objects (clause (3) of lem-cbc-proetale-stalk-conservative in the blueprint) is supplied by lem-sf-proetale-constructible-origin (ii)"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
   "cor-sf-direct-image-ctf-nonproper",
-  "lem-exc-comparison-tor-interval",
-  "def-weil-finite-tor-amplitude",
-  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-weil-pbc-comparison-direct-image",
   "def-weil-pbc-proetale-modules",
-  "lem-cbc-proetale-stalk-conservative"
+  "src-right-derived-functor-plus-compatibility",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-exc-comparison-tor-interval",
+  "def-kun-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "def-sfb-exact-derived-cohomology-comparison",
+  "lem-sf-intrinsic-realization-origin-comparison",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+  "place": "Both paragraphs, realized in Lean by D3; explicit coefficient-presentation transport and direct cohomological constructibility preservation replace use of the full constructible-origin equivalence."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn.*rightDerivedLowerStar|boundedConstructible.*rightDerivedLowerStar",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Étale to pro-étale comparison of derived direct images of constructible complexes over finite rings",
+   "results": "Hits: Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale.finitePresentation, RingHom.Etale, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.of_unramified_and_smooth, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Scheme.etalePretopology ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.IsSeparated",
+   "results": "Hits: AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.IsSeparated.of_valuativeCriterion, AlgebraicGeometry.IsSeparated.eq_valuativeCriterion ",
+   "date": "2026-10-23",
+   "verdict": "no match for item; the separated-to-quasi-separated hit is the already existing Mathlib leaf lem-pc-separated-quasi-separated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a bounded constructible étale-origin complex on the pro-étale site preserves constructibility and Tor amplitude with bound twice the dimension",
+   "results": "Hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, AlgebraicGeometry.IsEtale.of_comp ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|torAmplitude|TorAmplitude|BoundedConstructible|boundedConstructible",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image preserves constructible sheaves and finite Tor dimension for separated finite type morphisms over a field",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.Modules.pushforwardComp ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,7 +188,183 @@
   "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
- "unit": "sk-cor-sf-direct-image-ctf"
+ "unit": "sk-cor-sf-direct-image-ctf",
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the setting of [cor-sf-direct-image-ctf-nonproper], let\n$K\\in D(X_{\\mathrm{proet}},A)$ be of étale origin: $K\\cong\\nu_X^*K'$\nfor the comparison morphism\nof sites and a bounded constructible complex $K'$ of $A$-modules on\n$X_{\\Et}$ of finite Tor amplitude\nin $[a,b]$. Then the pro-étale direct image $Rf_*K$ is bounded\nconstructible on $Y_{\\mathrm{proet}}$ and has finite Tor amplitude in\n$[a,b+2d]$; that is, clause (iii) of the finite-Tor preservation summary holds at\nthe finite coefficient ring $A$ for such $K$.",
+  "proof": [
+   {
+    "text": "The morphism $f$ is of finite type, hence quasi-compact and\nquasi-separated, so the comparison direct image of\n[prop-weil-pbc-comparison-direct-image] gives an isomorphism\n\n$$\n\\nu_Y^*Rf_{\\Et,*}K'\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}\\nu_X^*K'\n\\cong Rf_{\\mathrm{proet},*}K .\n$$",
+    "uses": [
+     "prop-weil-pbc-comparison-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [cor-sf-direct-image-ctf-nonproper] the complex\n$Rf_{\\Et,*}K'$ is bounded constructible on $Y_{\\Et}$ with finite Tor\namplitude in $[a,b+2d]$, and [lem-exc-comparison-tor-interval]\ntransfers that Tor amplitude to its pullback\n$\\nu_Y^*Rf_{\\Et,*}K'$, which is the finite-Tor condition of\n[def-weil-finite-tor-amplitude] on the pro-étale site; bounded\nconstructibility of that pullback is\n[lem-weil-pbc-pullback-preserves-bounded-constructible]. The\nidentification therefore exhibits $Rf_{\\mathrm{proet},*}K$ as a bounded\nconstructible pro-étale object of finite Tor amplitude in $[a,b+2d]$.\nBy [def-weil-pbc-proetale-modules] the bounded constructible\npro-étale objects are the pullbacks of the bounded constructible étale\nobjects, a reading recorded in clause (3) of\n[lem-cbc-proetale-stalk-conservative]; for those objects the\ncorollary is exactly clause (iii) of the finite-Tor preservation summary at the\nfinite coefficient ring $A$.",
+    "uses": [
+     "cor-sf-direct-image-ctf-nonproper",
+     "lem-exc-comparison-tor-interval",
+     "def-weil-finite-tor-amplitude",
+     "lem-weil-pbc-pullback-preserves-bounded-constructible",
+     "def-weil-pbc-proetale-modules",
+     "lem-cbc-proetale-stalk-conservative"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "cor-sf-direct-image-ctf-etale-origin",
+  "worker": "stage1",
+  "summary": "Four-step assembly using existing nodes only. Checked all comparison and finite-coefficient hypotheses and the current blueprint. Use separatedness for quasi-separatedness, and the defining étale-origin witness for bounded constructibility instead of misapplying scheme pullback to the site-comparison map. Tor comparison tests all pro-étale module sheaves. No new nodes or Mathlib leaves. The inherited context reference was expanded into explicit objects and all hypotheses after preflight B2; no mathematical hypothesis was changed.",
+  "blueprint": "Latest blueprint first paragraph is realized by steps 1 and 3; its second paragraph by steps 2, 3 and 4. The existing imported unit route through étale direct-image finiteness and site comparison is retained. The latest sketch has been reorganized as an open-immersion result; this item is its existing general finite-type étale-origin corollary, not its key statement.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "The exact derived qcqs comparison already explicitly used by the blueprint; filed under proper base change, but applied as a generic site-comparison tool without imposing properness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-ae353de10",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-ae353de10 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the item, every cited statement (the live text, not blueprint_update), the latest blueprint item and proof, the unit sk-cor-sf-direct-image-ctf and the three citers. The delivery adds no new nodes. The statement is unchanged; the fixed node is fixes/dag/nodes/sec-six-functors/cor-sf-direct-image-ctf-etale-origin.json. FAULT (E6/C4), repaired: live def-weil-finite-tor-amplitude puts D^b_ctf(Y,A) inside the intrinsic D^b_c(Y,A) of def-weil-finite-torsion-constructibility. Step 3 only gives the étale-origin category Dbc(Y_proet,A) of def-weil-pbc-proetale-modules. Step 4's sentence 'together with step 3 it is the finite-stage condition' treats the two categories as the same without proof. The blueprint relied on lem-cbc-proetale-stalk-conservative (3), which the delivery dropped. The live lem-exc-comparison-tor-interval has no constructibility clause, so it does not cover this. FIX: new step 5 cites lem-sf-proetale-constructible-origin (ii). This node is in unit sk-prop-sf-comparison, which the item's unit cites, and creates no cycle. Clause (ii) gives ν_Y^*L in D^b_c(Y,A); e transports the cohomology sheaves; ℓ is invertible on Y; with step 4 this gives D^b_ctf. Step 4 now also covers a>b (testing with M=A_X gives K'≅0), because lem-exc needs a ≤ b+2d. proof_deps is again the union of all uses. The other steps check out. Step 1: finite type gives quasi-compact (def-weil-finite-type-morphism); separated gives quasi-separated (lem-pc-separated-quasi-separated); bounded gives D^+. Step 2: every hypothesis of cor-sf-direct-image-ctf-nonproper is present. Step 3: the canonical mate isomorphism of prop-weil-pbc-comparison-direct-image (qcqs, D^+, any Λ) composed with Rf_* of the given iso gives the witness (L,e), which is exactly the live Dbc definition. The delivery was right to drop the blueprint's misapplied lem-weil-pbc-pullback-preserves-bounded-constructible, which concerns pullback along scheme morphisms, not ν. Step 4: lem-exc tests against every pro-étale module sheaf; the transport along e is elementary. Accepted tool use: prop-weil-pbc-comparison-direct-image, which the sk-prop-sf-comparison sketch names itself, used with no properness. Edge cases: X empty, d=0, f=id, a>b. No SGA citation. same_as [] is acceptable; cor-sf-direct-image-ctf-proetale generalizes the item and cites it, so it is not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfDirectImageCTFEtaleOrigin",
+  "declaration": "AlgebraicGeometry.ProEtale.directImageCTFEtaleOrigin",
+  "file": "lean/Sheaf/Paper/SfDirectImageCTFEtaleOrigin.lean",
+  "statement": "theorem directImageCTFEtaleOrigin (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ) (_hab : a ≤ b) (K' : Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X) (_hK' : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) X K') (_hTor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X a b K') (K : Scheme.proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)) (_hOrigin : Nonempty (K ≅ (@finiteCoefficientIntrinsicDerivedComparison.{u} X (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj K')) : (∃ L : Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) Y, @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)) Y L ∧ Nonempty ((@finiteCoefficientIntrinsicDerivedComparison.{u} Y (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj L ≅ (Scheme.proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E n)).obj K)) ∧ Scheme.HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) ((Scheme.proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E n)).obj K) a (b + 2 * (d : ℤ)) ∧ WeilConjectures.finiteTorConstructible l E n hn Y ((Scheme.proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E n)).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Use the canonical intrinsic constant-ring realization of the exact comparison and the ordinary uncompleted K-injective direct image. The first conjunct spells out the existing etale-origin membership witness; the final conjunct uses intrinsic finiteTorConstructible separately. All finiteness evidence is supplied from the positive-level coefficient theorem, without an extra hypothesis or a new coefficient construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-351a234df",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Only statement change: 'a,b' -> 'a\\leq b', recorded in statement_change with verbatim old statement/proof. It is source-based: def-weil-proetale-tor-amplitude and Lean HasProEtaleTorAmplitude require a<=b, so the original fails at K'=K=0 with a>b+2d; the only dropped cases have K'=0. Proof step 4 loses only its a>b branch (forced); stmt_deps/proof_deps unchanged. Citer audit complete: lem-sf-completed-projection-exchange-realization holds (ordered finite-Tor inputs); cor-sf-direct-image-ctf-proetale is a blueprint mention only. Lean matches every hypothesis (finite type via LocallyOfFiniteType+QuasiCompact, separated f, dim X<=d, isBoundedConstructible, hasTorAmplitudeIn, K iso to canonical finiteCoefficientIntrinsicDerivedComparison of K') and all three conclusions (exists L bounded constructible with nu_Y^*L iso Rf_*K = Dbc membership; HasProEtaleTorAmplitude a (b+2d); finiteTorConstructible = D^b_ctf), with the same proEtaleConstantDerivedDirectImage throughout. No extra instances or universe restrictions; finiteness from finite_coefficientExtensionRing. Upstream Stability theorem not an exact match (fixed-ModuleCat lowerStar, no intrinsic Dctf clause). Proof sorry only; docstrings with source and blueprint tag; lean.statement verbatim; lines <=100. Advisory: intrinsic comparison owned by def-sp-finite-coefficient-intrinsic-derived-comparison and proEtaleConstantDerivedDirectImage missing from the def-weil-pbc-proetale-operations decl list, neither node in stmt_deps (sibling convention, S2 cannot change stmt_deps). No file changed, nothing compiled; worker compile clean.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q30 stage 2",
+  "old_statement": "Fix the global finite-field datum: a prime $p$, a prime power $q=p^r$ with $r\\geq1$, a field $k_0=\\mathbf F_q$ and its algebraic closure $k$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Set $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$, the finite coefficient ring [def-weil-l-adic-coefficient-extension]. Let $d\\in\\mathbf N$, let $X,Y$ be finite-type $k$-schemes [def-weil-finite-type-morphism], and suppose $\\dim X\\leq d$ for topological Krull dimension [def-kun-topological-krull-dimension]. Let $f:X\\to Y$ be separated [def-weil-proper-morphism] and of finite type. Let $a,b$ be integers and let $K'\\in D(X_{\\Et},A)$ [def-weil-pbc-derived-categories] be bounded constructible [def-weil-pbc-constructible-complexes] with Tor amplitude in $[a,b]$ [def-kun-tor-amplitude]. Here $X_{\\Et}$ denotes the small étale site [def-weil-pbc-etale-site]. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\Et}$ for $T=X,Y$ denote the comparison morphism [def-weil-pbc-site-comparison-morphism], with its derived pullback [def-sf-comparison-derived-pullback]. Let $K\\in D(X_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-modules] admit a derived isomorphism $K\\cong\\nu_X^*K'$. Then the ordinary pro-étale derived direct image $Rf_*K$ [def-weil-pbc-proetale-operations] is bounded constructible on $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-modules] and has Tor amplitude in $[a,b+2d]$ [def-weil-proetale-tor-amplitude]. In particular it belongs to $D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude].",
+  "what": "The node quantified arbitrary integers a,b, but its pro-etale Tor predicate includes a <= b as part of the definition. Take K' = K = 0, a=1, b=0, d=0, X=Y=Spec(k), f=id. The etale universal vanishing predicate holds, but the conclusion HasProEtaleTorAmplitude includes 1 <= 0. Make the source finite-Tor interval convention explicit as a <= b. The removed empty-interval proof branch incorrectly asserted that a zero object has the ordered predicate for an empty interval.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.md",
+   "place": "Finite Tor amplitude in [a,b], read with def-weil-proetale-tor-amplitude and def-weil-finite-tor-amplitude, both defining finite Tor amplitude using ordered integer intervals."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-completed-projection-exchange-realization",
+    "holds": true,
+    "note": "Its use supplies uniform finite-Tor bounds for witnessed finite-level intermediates; finite-Tor intervals are ordered, and finite minima/maxima preserve that condition."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Finite type includes quasi-compactness by [def-weil-finite-type-morphism]. The assumed separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Thus $f$ has both geometric hypotheses of the comparison theorem; $K'$ is bounded below because it is bounded.",
+    "uses": [
+     "def-weil-finite-type-morphism",
+     "lem-pc-separated-quasi-separated"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+     "place": "first paragraph, hypotheses of comparison"
+    }
+   },
+   {
+    "text": "Put $L=Rf_{\\Et,*}K'$. Apply [cor-sf-direct-image-ctf-nonproper] to $K'$: the coefficient stage $A=A_{E,n}$, finite-type $k$-schemes, separated finite-type $f$, source bound $\\dim X\\le d$, bounded constructibility and input Tor interval are precisely its hypotheses. It gives that $L$ is bounded constructible on $Y_{\\Et}$ with Tor amplitude in $[a,b+2d]$. In particular $L\\in D^+(Y_{\\Et},A)$.",
+    "uses": [
+     "cor-sf-direct-image-ctf-nonproper"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+     "place": "second paragraph, application of étale direct-image corollary"
+    }
+   },
+   {
+    "text": "Apply [prop-weil-pbc-comparison-direct-image] to $f$ and $K'$. Compose its derived isomorphism with the image of the given isomorphism $\\nu_X^*K'\\cong K$ under the functor $Rf_{\\mathrm{proet},*}$ to obtain $e:\\nu_Y^*L\\xrightarrow{\\sim}Rf_{\\mathrm{proet},*}K$. Since $L$ is bounded constructible, the witness $(L,e)$ is exactly the defining membership condition of $\\Dbc(Y_{\\mathrm{proet}},A)$ in [def-weil-pbc-proetale-modules]. This proves bounded constructibility of the direct image.",
+    "uses": [
+     "prop-weil-pbc-comparison-direct-image",
+     "def-weil-pbc-proetale-modules"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+     "place": "first paragraph, displayed derived comparison; second paragraph, bounded constructibility"
+    }
+   },
+   {
+    "text": "Apply the forward implication of [lem-exc-comparison-tor-interval] with $T=Y$, the finite commutative ring $A$, the object $L\\in D^+(Y_{\\Et},A)$ of step 2 and the interval $[a,b+2d]$. If $a\\le b$ then $a\\le b+2d$ since $d\\ge0$; if $a>b$, testing [def-kun-tor-amplitude] with $\\mathcal M=A_X$ gives $\\mathcal H^i(K')=0$ for all $i$, so $K'\\cong0$, $L\\cong0$ and $Rf_*K\\cong0$, for which every vanishing below is immediate. The lemma gives Tor amplitude $[a,b+2d]$ for $\\nu_Y^*L$ against every pro-étale module sheaf. For each such $M$, functoriality of derived tensor sends $e$ to an isomorphism $(\\nu_Y^*L)\\otimes_A^L M\\cong (Rf_*K)\\otimes_A^L M$; its cohomology isomorphisms identify the vanishing outside $[a,b+2d]$. This is exactly Tor amplitude in $[a,b+2d]$ in the sense of [def-weil-proetale-tor-amplitude] for $Rf_*K$.",
+    "uses": [
+     "lem-exc-comparison-tor-interval",
+     "def-kun-tor-amplitude",
+     "def-weil-proetale-tor-amplitude"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+     "place": "second paragraph, transfer of the Tor interval and conclusion"
+    }
+   },
+   {
+    "text": "Membership in $D^b_{ctf}(Y,A)$. The category $D^b_{ctf}(Y,A)$ of [def-weil-finite-tor-amplitude] is defined inside $D^b_c(Y,A)$ of [def-weil-finite-torsion-constructibility], the intrinsic bounded constructible category (finitely many nonzero cohomology sheaves, each constructible for a finite partition into locally closed constructible subschemes), not inside the étale-origin category $\\Dbc(Y_{\\mathrm{proet}},A)$ of step 3; the two are not identified by definition. Apply clause (ii) of [lem-sf-proetale-constructible-origin] with $T=Y$ and $A=A_{E,n}$ to the object $L\\in\\Dbc(Y_{\\Et},A)$ of step 2: $\\nu_Y^*L$ has finitely many nonzero cohomology sheaves, all intrinsically constructible. Since $e$ induces isomorphisms $\\mathcal H^q(\\nu_Y^*L)\\cong\\mathcal H^q(Rf_*K)$ and constructibility of a sheaf is invariant under isomorphism, $Rf_*K\\in D^b_c(Y,A)$. The prime $\\ell$ is invertible on $Y$, a $k$-scheme with $\\ell\\neq p$, as [def-weil-finite-tor-amplitude] requires. With step 4, $Rf_*K$ is an object of $D^b_c(Y,A)$ with Tor amplitude in $[a,b+2d]$, i.e. $Rf_*K\\in D^b_{ctf}(Y,A)$, which proves the final clause.",
+    "uses": [
+     "lem-sf-proetale-constructible-origin",
+     "def-weil-finite-torsion-constructibility",
+     "def-weil-finite-tor-amplitude"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-etale-origin.proof.md",
+     "place": "second paragraph, last sentence: the corollary is clause (iii) of the finite-Tor preservation summary; the reading of bounded constructible pro-étale objects as étale-origin objects (clause (3) of lem-cbc-proetale-stalk-conservative in the blueprint) is supplied by lem-sf-proetale-constructible-origin (ii)"
+    }
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-44ea4",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261024T184832-L-3215616",
+  "kind": "interface",
+  "note": "independent cc review: delivered SfDirectImageCTFEtaleOrigin.lean + node cor-sf-direct-image-ctf-etale-origin against clone (statement byte-identical, node changes only proof/proof_deps/proof_origin), unit sk-cor-sf-direct-image-ctf realized (empty), #print axioms + collectAxioms trace of the used constants"
+ }
 }

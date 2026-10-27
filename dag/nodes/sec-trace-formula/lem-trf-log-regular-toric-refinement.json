@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Write $Y=\\operatorname{Spec}A$ and let $g:P\\hookrightarrow Q$ be the inclusion. Since $Q$ is a submonoid of the group $P^{\\mathrm{gp}}$, it is integral; together with its assumed finite generation and saturation this makes it fs [def-trf-fs-log-blowup]. The homomorphism $Q^{\\mathrm{gp}}\\to P^{\\mathrm{gp}}$ induced by the inclusion is inverse to $g^{\\mathrm{gp}}$: every $q\\in Q$ is a difference of two elements of $P$, and these differences already generate $P^{\\mathrm{gp}}$. Hence $g^{\\mathrm{gp}}$ is injective with zero, in particular torsion-free, cokernel.",
+   "text": "Write $Y=\\operatorname{Spec}A$ and $g:P\\hookrightarrow Q$. The submonoid $Q\\subset P^{\\mathrm{gp}}$ is integral, hence fs by its finite generation and saturation [def-trf-fs-log-blowup]. Its inclusion extends to $h:Q^{\\mathrm{gp}}\\to P^{\\mathrm{gp}}$, with $h g^{\\mathrm{gp}}=\\mathrm{id}$. For $q\\in Q$, write $q=a-b$ in $P^{\\mathrm{gp}}$ with $a,b\\in P$. Then $q+b=a$ holds in the submonoid $Q$, so $[q]=[g(a)]-[g(b)]$ in $Q^{\\mathrm{gp}}$. Thus $g^{\\mathrm{gp}}h$ fixes every generator $[q]$ and is the identity. Therefore $g^{\\mathrm{gp}}$ is injective with zero, hence torsion-free, cokernel.",
    "uses": [
     "def-trf-fs-log-blowup"
    ],
@@ -25,46 +25,29 @@
    }
   },
   {
-   "text": "Apply [pqf-lem-affine-open-locnoeth] to the locally Noetherian scheme $Y$ and its affine open subscheme $Y=\\operatorname{Spec}A$ itself, whose ring of sections is $A$ [def-weil-affine-spectrum]: $A$ is Noetherian. Choose monoid generators $q_1,\\ldots,q_r$ of $Q$, allowing $r=0$. Then $C$ is generated as an $A$-algebra by the finitely many elements $1\\otimes z^{q_i}$. Indeed a tensor is a sum of pure tensors [def-weil-pbc-module-tensor-product], each second factor is a finite integral linear combination of monomials $z^q$, and each $q$ is a sum of the $q_i$. The multiplication $(a\\otimes u)(b\\otimes v)=ab\\otimes uv$ therefore expresses each pure tensor as an $A$-linear combination of products of these generators. Evaluation gives a surjection $A[T_1,\\ldots,T_r]\\twoheadrightarrow C$, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian. The one-member affine open covering of $X=\\operatorname{Spec}C$ by itself, with ring of sections $C$ [def-weil-affine-spectrum], shows that $X$ is locally Noetherian by the definition [pqf-def-locnoeth].",
+   "text": "Apply [lem-trf-toric-chart-fs-realization] to $A,P,Q,g$ and the given chart $\\alpha:P\\to A$. Its hypotheses hold: $\\operatorname{Spec}A$ is locally Noetherian by assumption, $P$ is fs, and $Q$ is fs by Step 1. It supplies the Noetherian ring $C$, the locally Noetherian scheme $X=\\operatorname{Spec}C$, and its associated log structure $M_X$ with the specified global $Q$ chart $q\\mapsto1\\otimes z^q$. In particular $(X,M_X)$ is fs.",
    "uses": [
-    "pqf-lem-affine-open-locnoeth",
-    "def-weil-affine-spectrum",
-    "pqf-def-locnoeth",
-    "def-weil-pbc-module-tensor-product",
-    "lem-weil-pbc-finite-type-algebra-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FN, lemma-Noetherian-permanence; properties.tex Tag 01OW, lemma-locally-Noetherian (affine open of a locally Noetherian scheme), Definition 01OV for the converse. Finite generators of the monoid algebra are written out."
-   }
-  },
-  {
-   "text": "Let $\\beta:Q\\to C$ send $q$ to $1\\otimes z^q$. Apply [lem-trf-associated-log-universal-stalks] to construct its associated log structure $M_X$. Its chart is $Q$, so $(X,M_X)$ is fs by [def-trf-fs-log-blowup]. The map $A\\to C$, $a\\mapsto a\\otimes1$, defines $f:X\\to Y$. The charts define a log morphism over $f$: a chart generator $p$ maps to the class of $g(p)$ and a local unit $u$ maps to $f^\\sharp(u)$. In the chart pushout, the relation identifying $(p+e,u)$ with $(p,\\alpha(e)u)$ maps to the same relation for $Q$, because $f^\\sharp(\\alpha(e))=\\beta(g(e))$. These formulas agree under restriction and on overlaps, hence define the map of log sheaves $f^{-1}N\\to M_X$. They also show compatibility with the structure maps. The chart description and universal property in [lem-trf-associated-log-universal-stalks] identify the resulting source log structure with the one in the statement.",
-   "uses": [
-    "lem-trf-associated-log-universal-stalks",
-    "def-trf-fs-log-blowup"
+    "lem-trf-toric-chart-fs-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.1, associated log structures and charts; VIII 3.3.8–3.3.11, toric chart construction."
+    "place": "VI 1.1, printed p.69 (fs global charts and associated etale log structures); VIII 3.3.8--3.3.11, printed pp.107--108 (chart construction). Noetherian bookkeeping: Stacks algebra.tex Tag 00FN, lemma-Noetherian-permanence; properties.tex Tag 01OW, lemma-locally-Noetherian, and Tag 01OV, definition-noetherian."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with base ring $\\mathbf Z[P]$ and algebras $A$ and $\\mathbf Z[Q]$. It identifies $Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ with $\\operatorname{Spec}C$, with both projections induced respectively by $a\\mapsto a\\otimes1$ and $z^q\\mapsto1\\otimes z^q$. Thus the comparison morphism for the charts of Step 3 is the identity of $\\operatorname{Spec}C$ under this identification. It is etale [def-weil-etale-morphism]: identity ring maps are finitely presented, flat, and have identity diagonal, an open immersion. This checks the comparison hypothesis, rather than asserting that the underlying morphism $f$ itself is etale.",
+   "text": "Apply [lem-trf-toric-chart-compatible-comparison] to the given globally charted $(Y,N)$ and to $Q,g,C$. The local Noetherianity of $X$ and its associated chart are supplied by Step 2. Writing $\\alpha:P\\to A$ for the structural chart and $\\beta(q)=1\\otimes z^q$, the required compatibility is $\\alpha(p)\\otimes1=1\\otimes z^{g(p)}=\\beta(g(p))$, the defining tensor relation. This gives the log morphism $f:(X,M_X)\\to(Y,N)$ with compatible charts $P,Q,g$, and identifies its chart comparison with the inverse of the affine tensor-product isomorphism. Thus that comparison is etale; this assertion concerns the comparison, not the underlying map $f:X\\to Y$.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-etale-morphism"
+    "lem-trf-toric-chart-compatible-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines); morphisms.tex Tag 02GI for the etale identity."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69 (associated-log chart conventions); VIII 3.3.8 and 3.3.11, printed pp.107--108 (log morphisms from chart base changes). Underlying comparison: Stacks schemes.tex Tags 01I4, lemma-fibre-product-affine-schemes, and 01JQ, lemma-fibre-product-affines; morphisms.tex Tag 02GI, definition-etale."
    }
   },
   {
-   "text": "Apply [lem-trf-log-smooth-log-regular] to $f:(X,M_X)\\to(Y,N)$. Both log schemes are locally Noetherian and fs by Steps 1–3; the target is log regular by hypothesis. The compatible global charts $P\\to N$, $Q\\to M_X$ have injective group map with torsion-free cokernel by Step 1, and their comparison is etale by Step 4. All hypotheses of that node are therefore satisfied. Its log-regular-source conclusion proves that $(\\operatorname{Spec}C,M_X)$ is log regular, which is the remaining assertion.",
+   "text": "Apply [lem-trf-log-smooth-log-regular] to $f:(X,M_X)\\to(Y,N)$. The target is locally Noetherian, fs and log regular by hypothesis; the source is locally Noetherian and fs by Step 2. The compatible global charts $P\\to N$, $Q\\to M_X$ have injective group map with torsion-free cokernel by Step 1, and their comparison is etale by Step 3. The global charts satisfy its etale-local chart hypothesis using the identity etale covers of $X$ and $Y$. All hypotheses of that node are therefore satisfied. Its log-regular-source conclusion proves that $(\\operatorname{Spec}C,M_X)$ is log regular, which is the remaining assertion.",
    "uses": [
     "lem-trf-log-smooth-log-regular"
    ],
@@ -88,14 +71,8 @@
  ],
  "proof_deps": [
   "def-trf-fs-log-blowup",
-  "pqf-lem-affine-open-locnoeth",
-  "def-weil-affine-spectrum",
-  "pqf-def-locnoeth",
-  "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-trf-associated-log-universal-stalks",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-etale-morphism",
+  "lem-trf-toric-chart-fs-realization",
+  "lem-trf-toric-chart-compatible-comparison",
   "lem-trf-log-smooth-log-regular"
  ],
  "proof_origin": {
@@ -189,20 +166,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-log-regular-toric-refinement",
   "worker": "stage1",
-  "summary": "Preserved the statement, supplied six explicit steps, and reused the existing chart-level log-smooth preservation theorem. Checked local Noetherianity via finite monoid generators and the existing Mathlib leaf pqf-lem-affine-open-locnoeth (affine open of a locally Noetherian scheme) together with the one-chart definition of local Noetherianity; the delivery's separate new affine coordinate-ring leaf was dropped on maintainer review as a combination of that node and the definition. Reused the existing associated-log construction and affine tensor fibre-product theorem, with both projection formulas. No attachment and no statement dispute.",
-  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)–(2), inherited through log-blowup-normalization. The current main-20261015 blueprint uses the contracting-correspondence theorem; this split does not alter that unit route. It supplies the already-created toric-chart preservation input via ILO VI 1.8 and VIII 3.3.11.",
+  "summary": "Repair of the human re-split return: statement unchanged. Extracted two independent statement-only construction arguments of comparable scope: Noetherian finite-monoid base-change realization with its specified fs chart, and the compatible log morphism with its affine comparison. Retained the elementary group-completion argument, application of the existing log-regular-source theorem, and empty-spectrum check. The report preserves all six previous steps verbatim and maps them to the two new worker items or retained assembly steps. No new Lean, no attachment, no statement dispute. Landing-return repair (2026-10-22): rebased by the delivery tool onto current origin/sheaf-dag; re-read all current statement and proof dependencies and revalidated every citation. The retained two-node split discharges the released stage-1 repair despite the historical side-project reviewed record. Made the inverse identity on Q group-completion generators explicit; no hypotheses, conclusion, helper statement, or proof route changed. Latest landing-return retry: revalidated the current dependency statements and saved citation quotes after the refusal at f2bca93d4ff; made the tensor relation matching the comparison lemma explicit in step 3. Corrected the Stacks 01OV label to definition-noetherian in both construction-source references. Repair of the 2026-10-22 15:00 UTC return (fe9c3312b9b): compared retained files with the current read DAG, re-read all cited statements, and confirmed verbatim citation coverage. Made explicit that the global charts meet the preservation theorem's etale-local chart hypothesis via identity covers. Initial server rebase/preflight passed at fb8ea6427a4; helper statements and recorded searches retained. Continuation after the transport interruption: the initial dry run exited OK at 0c5795221c5. Compared the retained delivery with the current DAG, re-read all dependency statements and the ILO/Stacks source passages, and rechecked all verbatim quotes. Clarified in assembly step 4 that the target properties are hypotheses while the source properties are the realization lemma conclusion; retained both helper statements and every logged search.",
+  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)–(2), inherited through log-blowup-normalization. The current main-20261015 blueprint uses the contracting-correspondence theorem; this split does not alter that unit route. It supplies the already-created toric-chart preservation input via ILO VI 1.8 and VIII 3.3.11. The new construction statements realize the retained proof steps 2--4 of this input; the elementary group argument and VI 1.8 application stay in the parent.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q65-4f54d2430",
-  "group": "Q65",
+  "reviewer": "NT-cc-NX-0b569aa35",
+  "group": "NX",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-4f54d2430 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, ILO VI 1.8 (p.70) and VIII 3.3.8-3.3.11 (pp.107-108), and Mathlib Noetherian.lean lines 57-59, 103 and 197-203. The item's statement is byte-identical to the side and live DAGs (still unsplit live), so nothing is weakened. Tested on Q=P, P=N with Q=Z, the N^2 blowup chart, trivial monoids and C=0. All six steps are correct. Step 1: g^gp is an isomorphism. Step 2: finite type over a Noetherian ring gives Noetherian. Step 3: the map f^{-1}N->M_X respects the pushout relation, since f#alpha(e)=beta(g e) is a unit; the map is compatible with structure maps and the charts. Step 4: by pullbackSpecIso with both projections, the comparison is an isomorphism, hence etale. Step 5: every hypothesis of lem-trf-log-smooth-log-regular (same unit) is matched. Step 6: C=0 is vacuous. FIX (C5): the new Mathlib leaf lem-trf-affine-locnoeth-coordinate-ring is true but redundant. Its forward direction is the existing leaf pqf-lem-affine-open-locnoeth applied to Spec A as an affine open of itself, and its converse is the definition pqf-def-locnoeth with a one-member cover. Step 2 now cites those (plus def-weil-affine-spectrum), proof_deps is recomputed, and the node is dropped; nothing else cites it. No tool_uses, no SGA, no cycle, no duplicate of the item found among the 20 log-regular nodes. Corrected item in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-0b569aa35 (reviewer sub-agent of L); spot-checked: Fourth delivery of the 2026-10-22 re-split. The earlier heads bfb31a87, f2bca93d and fe9c3312 each got a cc FIX; landing refused each one with 'L promotes it', which is a promotion problem, not a maths objection. clones/live and clones/side-live still carry the old six-step proof and neither helper id, so nothing has superseded this split. Changes since fe9c3312, field by field: lem-trf-toric-chart-fs-realization is byte-identical. lem-trf-toric-chart-compatible-comparison is byte-identical to the file before the fix, so the citation fix is lost again. In the item only step 4 and split_report changed; statement, stmt_deps, source and Lean fields are unchanged. The new step 4 says the target properties come from the hypotheses and the source is locally Noetherian and fs by Step 2. This is correct and more precise than the old 'by Steps 1-3'. It also says the global charts meet the 'etale locally on X,Y' chart hypothesis of lem-trf-log-smooth-log-regular through the identity covers. That is correct, including for empty X. I re-read everything in full. Step 1: Q in P^gp is fs. With h extending the inclusion, h g^gp = id, and q = a - b gives g^gp h = id, so g^gp is an isomorphism. Step 2: fs-realization holds. A is Noetherian, A[T_1..T_r] maps onto C (r = 0 allowed), so C is Noetherian, and L_X(Q,beta) has a global chart whose image is beta. Step 3: the comparison holds. f#(alpha e) = beta(g e) is a unit, so the pushout relation is preserved. Fibre-product uniqueness gives theta kappa = id, so kappa is an isomorphism and etale; the claim is about the comparison, not about f. Step 4: every hypothesis of lem-trf-log-smooth-log-regular is met. Step 5: the case C = 0 is vacuous. Cases checked: Q = P; N inside Z; arbitrary g such as 0 -> N^2; A = 0. Neither new node restates the parent: they assume no log regularity or group completion, and g is arbitrary. The old arguments are kept verbatim in the report and correctly assigned; the assembly is about 2580 characters, every step is under 2000, and the two new nodes are of comparable size. Duplicate search over the current snapshot (2246 trace-formula nodes, against 1794 at fe9c): the Q150 log-ideal-affine-atlas-gluing and chart-lifting-criterion nodes cover only the specific monoids Q_e, so there is no duplicate. Sources are ILO VI 1.1/1.2/1.8 and VIII 3.3.8-3.3.11, plus Stacks 00FN, 01OV, 01OW, 01I4, 01JQ and 02GI. No SGA, no cycle, no tool_uses. FIX, re-applied from the fe9c3312 review: fixes/dag/nodes/sec-trace-formula/lem-trf-toric-chart-compatible-comparison.json cites [lem-weil-pbc-fibre-product-affine-spectra] (status mathlib, created 2026-10-09) at theta and adds it to stmt_deps. Maintainer: this is the fourth promotion loop and the maths has been accepted each time. Please promote the side completion and carry this fix through.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.TraceFormula.LogRegularToricRefinement",
@@ -228,5 +205,16 @@
   "result": "pass",
   "note": "Statement, dependencies, source alignment, declarations, docstrings, edge cases, route-pivot constraints, and report sections checked; per-file scompile passed in sandbox and library forms."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

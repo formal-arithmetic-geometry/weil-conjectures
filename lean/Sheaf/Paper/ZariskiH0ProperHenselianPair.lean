@@ -7,12 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
-public import Mathlib.Topology.Sheaves.Functors
-import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
-import WeilConjectures.RingTheory.HenselianPairPrimeConnected
-import WeilConjectures.RingTheory.IntegralOverHenselianPair
+import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 import WeilConjectures.Topology.SpectralClosedRestriction
-import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-!
 # Zariski degree-zero comparison for a proper scheme over a henselian pair
@@ -27,6 +24,76 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open TopologicalSpace
+
+-- The same-universe open-set transport used in
+-- WeilConjectures.Topology.EmbeddingPushforwardTransport.
+private theorem homeomorph_opens_dense
+    {T U : Type u} [TopologicalSpace T] [TopologicalSpace U] (e : T ≃ₜ U) :
+    e.opensCongr.equivalence.functor.IsDenseSubsite
+      (Opens.grothendieckTopology T) (Opens.grothendieckTopology U) := by
+  let E := e.opensCongr.equivalence
+  change E.functor.IsDenseSubsite _ _
+  refine { functorPushforward_mem_iff := ?_ }
+  intro V R
+  constructor
+  · intro h x hx
+    have hx' : e x ∈ E.functor.obj V := by
+      change e.symm (e x) ∈ V
+      simpa using hx
+    obtain ⟨W, f, ⟨N, g, k, hg, _⟩, hw⟩ := h (e x) hx'
+    refine ⟨N, g, hg, ?_⟩
+    have hn := k.le hw
+    change e.symm (e x) ∈ N at hn
+    simpa using hn
+  · intro h y hy
+    change e.symm y ∈ V at hy
+    obtain ⟨W, f, hf, hw⟩ := h (e.symm y) hy
+    refine ⟨E.functor.obj W, E.functor.map f, ?_, hw⟩
+    exact ⟨W, f, 𝟙 _, hf, (Category.id_comp _).symm⟩
+
+-- The image part of ClosedEmbeddingRestrictionTransport, at Type u rather than
+-- Type (u + 1). The ambient space and its sheaf stay fixed, so only the image
+-- homeomorphism and the inverse-mate unit equation are needed.
+private theorem bijective_restriction_of_embedding
+    {T U : TopCat.{u}} [SpectralSpace T] (i : U ⟶ T)
+    (hi : Topology.IsClosedEmbedding i)
+    (hc : ∀ x : T, ConnectedSpace (↥(Set.range i ∩ closure ({x} : Set T))))
+    (F : T.Sheaf (Type u)) :
+    Function.Bijective
+      (((TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) i).unit.app F).hom.app
+        (op ⊤)) := by
+  let D : Set T := Set.range i
+  let j : TopCat.of D ⟶ T := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩
+  let h : D ≃ₜ U := hi.isEmbedding.toHomeomorph.symm
+  let H := h.symm.opensCongr.equivalence
+  have : H.inverse.IsDenseSubsite
+      (Opens.grothendieckTopology D) (Opens.grothendieckTopology U) :=
+    homeomorph_opens_dense h
+  let S := H.sheafCongr (Opens.grothendieckTopology U)
+    (Opens.grothendieckTopology D) (Type u)
+  let A := TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) i
+  let B := TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) j
+  let r : TopCat.Sheaf.pushforward (Type u) i ⋙ 𝟭 _ ≅
+      S.functor ⋙ TopCat.Sheaf.pushforward (Type u) j :=
+    NatIso.ofComponents (fun G ↦ ObjectProperty.isoMk _ (Iso.refl _)) (by
+      intro G G' f
+      rfl)
+  let α := (mateEquiv A B).symm
+    (TwoSquare.mk _ S.functor (𝟭 _) _ r.hom)
+  have : IsIso α.natTrans := isIso_inverseMate_of_equivalences A B r
+  have hu := unit_mateEquiv_symm A B
+    (TwoSquare.mk _ S.functor (𝟭 _) _ r.hom) F
+  change A.unit.app F ≫ (r.app _).hom =
+    B.unit.app F ≫ (TopCat.Sheaf.pushforward (Type u) j).map (α.app F) at hu
+  have heq : A.unit.app F = B.unit.app F ≫
+      (TopCat.Sheaf.pushforward (Type u) j).map (α.app F) ≫ (r.app _).inv := by
+    rw [← Category.assoc, ← hu, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have hb := TopCat.spectral_closed_restriction T D hi.isClosed_range hc F
+  have he := congrArg (fun f ↦ f.hom.app (op ⊤)) heq
+  rw [he]
+  exact (ConcreteCategory.bijective_of_isIso ((r.app _).inv.hom.app (op ⊤))).comp
+    ((ConcreteCategory.bijective_of_isIso
+      (((TopCat.Sheaf.pushforward (Type u) j).map (α.app F)).hom.app (op ⊤))).comp hb)
 
 namespace AlgebraicGeometry
 
@@ -75,6 +142,25 @@ theorem zariski_h0_proper_henselian_pair
           (pullback.fst f
             (Scheme.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)).op)).base).unit.app
               𝓕).hom.app (op ⊤)) := by
-  sorry
+  classical
+  let q := Scheme.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)).op
+  let i : pullback f q ⟶ X := pullback.fst f q
+  have : IsClosedImmersion q :=
+    IsClosedImmersion.spec_of_quotient_mk (R := .of A) I
+  have : IsClosedImmersion i := inferInstance
+  have hrange : Set.range i = f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+    rw [Scheme.Pullback.range_fst]
+    change f ⁻¹' Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk I)) = _
+    rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective]
+    simp only [Ideal.mk_ker]
+  obtain ⟨hspectral, _, hconnected⟩ :=
+    f.spectralSpace_and_isClosed_and_isConnected_inter I
+  let : SpectralSpace X := hspectral
+  have hc (x : X) : ConnectedSpace (↥(Set.range i ∩ closure ({x} : Set X))) := by
+    apply isConnected_iff_connectedSpace.mp
+    rw [Set.inter_comm, hrange]
+    exact hconnected _ isClosed_closure isIrreducible_singleton.closure
+  intro F
+  exact bijective_restriction_of_embedding i.base i.isClosedEmbedding hc F
 
 end AlgebraicGeometry

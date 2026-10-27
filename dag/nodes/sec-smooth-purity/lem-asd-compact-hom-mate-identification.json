@@ -1,0 +1,111 @@
+{
+ "id": "lem-asd-compact-hom-mate-identification",
+ "kind": "statement",
+ "title": "Canonical-map identification for compact internal adjunction mates",
+ "statement": "With the generic monoidal concrete etale coefficient hypotheses of compact internal adjunction [prop-asd-internal-adjunction], let (g-prime,f-prime,f,g) be a commuting square with compactifiable vertical maps, exceptional right adjoints and invertible compact projection maps. Let B:Rf-! ⋙ Lg-star → Lg-prime-star ⋙ Rf-prime-! be any invertible natural transformation and N∈D(X,A). Assume the compatibility of the projection squares for the pullback-composition square, the two pullback tensorators and inverse B. Then for every Q∈D(S,A), pullback of compact internal adjunction followed by internal-Hom pullback comparison and precomposition with inverse B at N equals ordinary base change [sbc-def-base-change-map], internal-Hom pullback comparison, the internal-Hom image of the exceptional mate of inverse B, and compact internal adjunction on the lower square. The statement is an explicit equality of the canonical maps, without a Cartesian or finiteness hypothesis beyond the stated compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Final paragraph: compatibility of compact projection, compact exchange, and the ordinary/exceptional adjunction pairings."
+ },
+ "stmt_deps": [
+  "prop-asd-internal-adjunction",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate compactHomMonoidalCompatibility with TX = Lg-prime-star, TY = Lg-star, M = N, the pullback-composition square sigma, inverse compact exchange rho, and b = inverse of B at N. The assumed equality of projection squares is exactly its hypothesis.",
+   "uses": [
+    "lem-asd-compact-hom-mate-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the canonical definitions: the mate of sigma is derivedBaseChangeMap, the tensorator mates are derivedHomUpperStarComparison, and the exceptional mate is mateEquiv of inverse B. The resulting equality is the displayed canonical compact-adjunction exchange square.",
+   "uses": [
+    "sbc-def-base-change-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-hom-mate-compatibility",
+  "sbc-def-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Final paragraph, compact-adjunction mate compatibility; complete Lean proof by T4, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of conjugate adjunction isomorphisms with composition of mates",
+   "results": "Eight hits including mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp and iterated_mateEquiv_conjugateEquiv. These supply the general mate identities, not the compact-adjunction specialization.",
+   "date": "2026-10-26",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_whiskerTop_conjugateEquiv",
+   "results": "No hits: unknown identifier in Mathlib search. The declaration is present in the adopted source library WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates and is used by the proof.",
+   "date": "2026-10-26",
+   "verdict": "adopted-source ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*conjugate|conjugate.*mateEquiv",
+   "results": "13 Mathlib hits, including iterated_mateEquiv_conjugateEquiv and uses of mateEquiv_conjugateEquiv_vcomp. Local source search also found the compact internal-adjunction construction in TensorHom.",
+   "date": "2026-10-26",
+   "verdict": "ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactInternalAdjunctionExchange",
+  "date": "2026-10-26",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-compact-internal-exchange",
+   "place": "Mate-calculus and canonical-map identification steps of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactInternalAdjunctionMateIdentification",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactInternalAdjunctionMateIdentification.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactInternalAdjunctionExchangeOfMateCompatibility",
+  "statement": "theorem compactInternalAdjunctionExchangeOfMateCompatibility\n    (h : letI := leftDerivedUpperStarMonoidal A g\n      let := leftDerivedUpperStarMonoidal A g'\n      let σ := TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq).hom\n      let μ := Functor.LaxMonoidal.μTwoSquare (L(upperStar A g')) N\n      let ρ := TwoSquare.mk _ _ _ _ (inv B)\n      let ν := (Functor.LaxMonoidal.μTwoSquare (L(upperStar A g))\n        ((rightDerivedLowerShriek A f).obj N)).whiskerRight\n          ((curriedTensor _).map (inv (B.app N)))\n      ν.whiskerLeft ((projectionMap A f).app N) =\n        (σ ≫ᵥ μ ≫ᵥ ρ).whiskerRight\n          ((projectionMap A f').app ((L(upperStar A g')).obj N)))\n    (Q : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A)) :\n    (L(upperStar A g)).map\n          ((((derivedHomRightDerivedLowerShriekIso A f).app (op N)).app Q).hom) ≫\n        derivedHomUpperStarComparison A g ((rightDerivedLowerShriek A f).obj N) Q ≫\n        (((derivedHom A S').map (inv (B.app N)).op).app\n          ((L(upperStar A g)).obj Q)) =\n      (derivedBaseChangeMap A sq).app _ ≫\n        (R(lowerStar A f')).map\n          (derivedHomUpperStarComparison A g' N ((rightDerivedUpperShriek A f).obj Q)) ≫\n        (R(lowerStar A f')).map\n          (((derivedHom A X').obj (op ((L(upperStar A g')).obj N))).map\n            ((mateEquiv (rightDerivedUpperShriekAdjunction A f)\n              (rightDerivedUpperShriekAdjunction A f') (inv B)).app Q)) ≫\n        ((((derivedHomRightDerivedLowerShriekIso A f').app\n          (op ((L(upperStar A g')).obj N))).app ((L(upperStar A g)).obj Q)).hom)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T111931-L-1780973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T111931-L-1780973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

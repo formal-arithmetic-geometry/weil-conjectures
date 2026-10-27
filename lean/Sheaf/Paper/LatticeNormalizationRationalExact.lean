@@ -164,7 +164,11 @@ private theorem short_exact_of_finite_fiber {T : Scheme.{u}}
     apply exact_of_exact_finite_fiber p L h₂ h₃ h₃
     exact ((L.map D).exact_iff_epi (by simp [L])).mpr h.epi_g
 
-private theorem finite_fiber_faithful {T : Scheme.{u}} (p : SfMonodromyPoint T)
+/-- The specified finite Galois correspondence makes the actual FLC stalk functor faithful.
+Source: Stacks Project, Tag 0DV5 (3). Transport faithfulness along the correspondence
+and its counit, without any finiteness hypothesis on a coefficient ring.
+(blueprint: lem-sfb-lattice-normalization-rational-exact). -/
+theorem finite_fiber_faithful {T : Scheme.{u}} (p : SfMonodromyPoint T)
     (c : GaloisLisseFiniteCorrespondence p.point p.group) :
     (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := T)) ⋙
       (pointSmallEtale p.point).sheafFiber (A := Type (u + 1))).Faithful := by
@@ -177,7 +181,11 @@ private theorem finite_fiber_faithful {T : Scheme.{u}} (p : SfMonodromyPoint T)
       Functor.isoWhiskerRight c.Φ.counitIso K ≪≫ Functor.leftUnitor K
   exact Functor.Faithful.of_iso e
 
-private theorem eq_of_finite_fiber {T : Scheme.{u}}
+/-- Maps of finite locally constant module sheaves are determined by their stalk maps.
+Source: Stacks Project, Tag 0DV5 (3). Forget to set sheaves and use the faithful FLC
+stalk functor; the forgetful functor on modules is faithful as well.
+(blueprint: lem-sfb-lattice-normalization-rational-exact). -/
+theorem eq_of_finite_fiber {T : Scheme.{u}}
     (p : SfMonodromyPoint T) (c : GaloisLisseFiniteCorrespondence p.point p.group)
     {R : Type (u + 1)} [CommRing R]
     {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)}

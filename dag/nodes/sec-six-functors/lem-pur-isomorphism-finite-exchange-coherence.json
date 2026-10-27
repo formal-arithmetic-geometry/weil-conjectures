@@ -1,0 +1,355 @@
+{
+ "id": "lem-pur-isomorphism-finite-exchange-coherence",
+ "kind": "statement",
+ "title": "Finite semilinear exchange: pasting and quotient-coefficient naturality",
+ "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite, valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $f:X\\to Y$ be separated of finite type between separated finite-type $k$-schemes. Let $g:Y'\\xrightarrow{\\sim}Y$ be an isomorphism of underlying schemes, with Cartesian pullback $f':X'\\to Y'$ and $g':X'\\xrightarrow{\\sim}X$ [def-weil-pbc-cartesian-square]; $g,g'$ need not be $k$-linear. Choose a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow pY)$ and its base change $c'=(j',p')$, with induced isomorphism $\\bar g:\\overline X'\\to\\overline X$ [def-weil-compactifications-refinements]. Use finite coefficients $A_n$, the pro-etale categories and the specified mate-followed-by-open exchange $e_f^c=\\operatorname{Ex}_!^c$ of [def-exchange-projection]. Then these actual transformations satisfy the following equations, with canonical pullback, direct-image and open-extension compositors inserted.\n\nFor the identity isomorphism $e_1^c=1$. For a second underlying-scheme isomorphism $h:Y''\\to Y'$ with induced $h':X''\\to X'$, and the successively pulled-back compactification, the horizontal equation is\n$$e_{gh}^c=(e_h^{c'}G_{g'})\\circ(G_he_g^c),\\qquad G_u=u^{-1}.$$\nFor vertical composition let $h_0:Y\\to Z$ be another separated finite-type morphism of separated finite-type $k$-schemes, $u:Z'\\xrightarrow{\\sim}Z$ an underlying-scheme isomorphism inducing the square for $f$, and choose a compatible tower of compactifications of $f,h_0,h_0f$ [lem-cbc-compactifiable-compatible-tower]. Let $F_v=Rp_{v,*}j_{v,!}$ denote the compact-support candidate for each chosen compactification, with primes denoting base change. Let $D:F_{h_0}F_f\\to F_{h_0f}$ be its canonical proper/open composition comparison, formed from the normalized proper/open interchange [lem-cbc-strict-tower-proper-open-calculus], and $D'$ its base change. Then\n$$e_{h_0f}(G_uD)=(D'G_{g'})(F_{h_0}'e_f)(e_{h_0}F_f).$$\nThis is an equality of the constituent transformations wherever they are defined; on bounded-below etale-origin inputs carrying the witnesses of [def-weil-pbc-etale-origin-witness], $D,D'$ are the canonical isomorphisms of [lem-cbc-complete-proetale-composition-pasting-coherence], evaluated on constant strict towers.\n\nFor every quotient $A_n\\to A_m$ with $1\\leq m\\leq n$, $e_f^c$ commutes with derived coefficient extension $-\\otimes^L_{A_n}A_m$ on finite constructible finite-Tor inputs [def-weil-finite-tor-amplitude], under the pullback and compact-support coefficient comparisons of [lem-fix-operation-reduction]. This equality includes the proper-factor square with its counit-defined projection map and the open-factor square with its unit-normalized coefficient comparison; it does not assert invertibility of a projection map for an arbitrary ordinary direct image. No $k$-linearity of $u,g,h$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility assembly paragraph; agent-extracted auxiliary argument, original reviewed lem-pur-weil-semilinear-exchange-reindexing steps 6,7,8."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-compactifications-refinements",
+  "def-exchange-projection",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "def-weil-finite-tor-amplitude",
+  "lem-fix-operation-reduction",
+  "lem-pur-relative-compact-support-pasting",
+  "lem-cbc-tower-mate-evaluation-scalars"
+ ],
+ "proof": [
+  {
+   "text": "For the identity square, identify the exact derived pullback unit pullId with the localization of the module identity comparator. The left and right module compositor unit laws descend to the derived category. Cancel their invertible factors to identify ordinarySquare with the unit square. Transpose under the ordinary proper adjunction and apply mateEquiv_counit to obtain the identity formula for ordinaryE. For ordinaryBeta, transpose its inverse under the exact open adjunction, use ordinaryBetaInv_unit and the same square identity, and use naturality of the open unit. Cancel beta inverse and then the mapped pullId to assemble the identity formula for ordinaryH. These are the unit-normalized operations of [lem-cbc-tower-open-beta-normalization], [lem-cbc-strict-tower-proper-open-calculus] and [lem-pur-relative-compact-support-pasting].",
+   "uses": [
+    "lem-cbc-tower-open-beta-normalization",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-pur-relative-compact-support-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change); identity specialization of the normalized proper/open composite"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-relative-compact-support-pasting] in its ordinary constant-$B$ setting, with $B=A_n$, $a=g$, $b=h$, and the successively pulled-back compactifications. Its $E,\\beta,H$ are exactly the $E,\\beta,e^c$ of Step 1 (over $S=Y$ all the maps in question are $S$-maps). Its equality $H_{a\\circ b}=(H_bA_{a_X})\\circ(A_bH_a)$ therefore reads $e_{gh}^c=(e_h^{c'}G_{g'})\\circ(G_he_g^c)$. The projection-preserving fibre-product identifications in that lemma are the compositors stipulated here.",
+   "uses": [
+    "lem-pur-relative-compact-support-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal), applied to the existing compactification-relative pasting lemma"
+   }
+  },
+  {
+   "text": "For the supplied compatible tower write $X\\xrightarrow cU\\xrightarrow b\\bar X\\xrightarrow p\\bar Y\\xrightarrow qZ$, with $i:Y\\hookrightarrow\\bar Y$ and $p_Y:U\\to Y$, as in [lem-cbc-complete-proetale-composition-pasting-coherence]. Put $B=A_n$. In the strict-tower categories the base-change identity of [lem-cbc-strict-tower-proper-open-calculus] for $Q=(b,i,p_Y,p)$ commutes the proper/open mate $\\gamma_Q$ with its base change. Whisker that identity on the left by the base-changed $R_q$ and on the right by $J_c$. Replace the consecutive proper exchanges by the exchange for their composite using clause 2 of [lem-weil-pbc-mate-pasting], and the consecutive open comparisons by that for $bc$ using [lem-cbc-tower-open-beta-normalization]. With $D=R_q\\gamma_QJ_c$ and $F_f=R_{p_Y}J_c$, $F_{h_0}=R_qJ_i$, $F_{h_0f}=R_{qp}J_{bc}$ this gives exactly the displayed vertical equation, as an equality of transformations before evaluation. Evaluate on the constant tower of any finite-coefficient input. By [lem-cbc-tower-mate-evaluation-scalars], evaluation preserves inverse image, open extension, direct image, units, counits and mates; the open maps evaluate to the specified finite maps by the beta-normalization lemma. Consequently this is the required ordinary finite transformation identity. This proves the vertical transformation identity; invertibility on retained finite origins is treated separately below.",
+   "uses": [
+    "lem-cbc-complete-proetale-composition-pasting-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-tower-open-beta-normalization",
+    "lem-cbc-tower-mate-evaluation-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), compatible-tower construction; existing strict-tower vertical interchange followed by evaluation"
+   }
+  },
+  {
+   "text": "For compositionIsIso put B=A_n with its discrete topology. The unique underlying-additive-sheaf comparison identifies etaleOriginRealization with C_B of [def-cbc-finite-constant-coefficient-transport]; exact localization and the retained witness [def-weil-pbc-etale-origin-witness] identify the input with HD of its bounded-below etale antecedent. Apply the etale open extension along the first compactification open immersion to this antecedent. The normalized hJ comparison identifies its HD realization with the actual ordinary open extension of the input. Apply [lem-cbc-single-level-finite-proper-open-transport] to the central proper/open square. Both hR maps, both hJ maps, and the etale normalizedComparison are invertible; cancel the first two factors to deduce invertibility of the central singleDerivedGamma. Naturality transfers this to the identified input. The other factors of composition are open and proper compositors and equality transports, hence isomorphisms. Their composite is therefore invertible. This argument also works for every retained witness after base change and uses no tower evaluation.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-cbc-single-level-finite-proper-open-transport",
+    "lem-cbc-tower-mate-evaluation-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), central proper/open interchange on a bounded-below finite etale antecedent."
+   }
+  },
+  {
+   "text": "Identify scalarPull with the inverse scalar-adjunction mate proEtaleReductionPullbackInv of the canonical restriction/pullback square of [def-weil-pbc-four-corners]. The iterated-mate identity and [lem-weil-pbc-ring-sheaf-change-adjunction] identify its conjugate with the specified proper-image restriction map; uniqueness of left adjoints proves the identification. Apply [lem-sp-scalar-tensor-pullback-square] to the actual quotient of the small coefficient rings and its ULift. Compose its inverse-square equation with the target square isomorphism to obtain the forward pull-comparison cube. The first conjunct of [lem-fix-basic-operation-coefficient-coherence] is coefficientOperationMateEquations, universally quantified over coefficient changes and scheme morphisms; specialize its auxiliary schemes to the empty scheme and its coefficient field to the given finite extension. Its counit equations identify the actual properComparison maps with the prescribed proper projection mates. The exchanges ordinaryE have the mateEquiv_counit equations by definition. Apply [lem-weil-pbc-coefficient-exchange-mates] to the four ordinary proper adjunctions and this cube. No proper coefficient comparison is inverted.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sp-scalar-tensor-pullback-square",
+    "lem-fix-basic-operation-coefficient-coherence",
+    "def-exchange-projection",
+    "lem-weil-pbc-coefficient-exchange-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A7 (remark-base-change), 0FPI (lemma-adjoints-push-pull-compatibility); formal coefficient-cube application"
+   }
+  },
+  {
+   "text": "The actual openRestriction comparison is the inverse of scalarJ from [lem-cbc-tower-mate-evaluation-scalars]: expand both definitions and use preservation of inverse natural isomorphisms under exact descent. The theorem scalar_open_normalized supplies its open-unit equation. Transpose this equation across the two scalar adjunctions, using the defining inverse-mate unit equations for scalarPull and openComparison. Naturality of the units and the scalar restriction/pullback square, followed by cancellation of its inverse, gives the open-unit equation for the inverse of openComparison. The inverse geometric open exchanges satisfy ordinaryBetaInv_unit from [lem-pur-relative-compact-support-pasting]. Rotate the same concrete scalar/pullback cube used for properCoefficient by cancelling invertible square and pullback comparisons. Apply [lem-pur-open-scalar-exchange-unit-mates] to the four exact ordinary open adjunctions with these specified unit equations. Both three-factor composites are invertible; equality of their inverses gives exactly the displayed forward open coefficient square. No constructibility or flatness restriction is used in this constituent identity.",
+   "uses": [
+    "lem-cbc-tower-mate-evaluation-scalars",
+    "lem-pur-relative-compact-support-pasting",
+    "lem-pur-open-scalar-exchange-unit-mates",
+    "lem-sp-scalar-tensor-pullback-square",
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Constituent-compatibility assembly paragraph; explicit open-unit argument for finite quotient coefficients"
+   }
+  },
+  {
+   "text": "The chosen-compactification coefficient comparison is\n$$\\kappa_f^c=(P_p^m\\delta_j)(\\rho_pJ_j^n):T_Y(P_p^nJ_j^n)\\longrightarrow P_p^mJ_j^mT_X.$$\nThese are the proper projection and open tensor comparisons: [lem-fix-operation-reduction] supplies the compact-support comparison on the stated constructible finite-Tor domain and says it preserves the tensor maps, units and counits specifying these factors. Substitute $e_g^a=(P_{p'}^a\\beta_g^a)(E_g^aJ_j^a)$ into both routes of the desired coefficient square. First use Step 4 at $J_j^nK$, then naturality of $\\rho_{p'}$ with respect to $\\beta_g^n$, and then Step 5. Associating these composites gives\n$$ (F_{f'}^m\\chi_{g'})(\\kappa_{f'}^{c'}G_{g'}^n)(T_{Y'}e_g^n)=(e_g^mT_X)(G_g^m\\kappa_f^c)(\\chi_gF_f^n),$$\nThis is exactly commutation with quotient extension under the stipulated comparisons. All transformations used are on underlying ringed pro-etale topoi; their hypotheses impose no $k$-linearity on the isomorphisms.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Constituent-compatibility assembly paragraph; paste the proper-factor and open-factor coefficient squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-tower-open-beta-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-pur-relative-compact-support-pasting",
+  "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-cbc-single-level-finite-proper-open-transport",
+  "def-weil-pbc-four-corners",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sp-scalar-tensor-pullback-square",
+  "lem-fix-basic-operation-coefficient-coherence",
+  "def-exchange-projection",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-pur-open-scalar-exchange-unit-mates",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent assembly. Existing identity, horizontal, composition-isomorphism and final coefficient proofs are retained. W5 implements the proper coefficient square through the concrete scalar/pullback cube and counit mate calculus, and the open coefficient square through scalar open-unit normalization and inverse mate calculus. The vertical-pasting clause retains its existing unfinished plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proetale compact support reindexing exchange along scheme isomorphisms respects horizontal vertical pasting and derived finite quotient coefficient extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n m : Type v} (i : m → n) (S : AlgebraicGeometry.Scheme),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex i S)\\n      (AlgebraicGeometry.AffineSpace m S ↘ S) =\\n    AlgebraicGeometry.AffineSpace n S ↘ S\", \"doc\": \"For any types $m$ and $n$, a reindexing function $i : m \\to n$, and a scheme $S$, the composition of the reindexing morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^m_S$ with the canonical morphism $\\\\mathbb{A}^m\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_reindex\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n₁ n₂ : Type v} (i : n₁ → n₂) {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.map n₂ f)\\n      (AlgebraicGeometry.AffineSpace.reindex i T) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex i S)\\n      (A\", \"doc\": \"For schemes $ S $ and $ T $, a morphism $ f: S \\\\to T $, and a reindexing function $ i: n_1 \\\\to n_2 $, the composition of the affine space map $ \\\\mathbb{A}^{n_2}_S \\\\to \\\\mathbb{A}^{n_2}_T $ followed by \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_over_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n m : Type v} (i : m → n) (S : AlgebraicGeometry.Scheme) {Z : AlgebraicGeometry.Scheme} (h : S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex i S)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace m S ↘ S) h) =\\n    CategoryTheory.CategoryS\", \"doc\": \"For any reindexing function $i : m \\to n$, scheme $S$, and morphism $h : S \\to Z$, the composition of the reindexing morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^m_S$ with the composition of the canonical mor\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_comp\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n₁ n₂ n₃ : Type v} (i : n₁ → n₂) (j : n₂ → n₃) (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.AffineSpace.reindex (j ∘ i) S =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex j S)\\n      (AlgebraicGeometry.AffineSpace.reindex i S)\", \"doc\": \"For any scheme $ S $ and functions $ i : n₁ → n₂ $, $ j : n₂ → n₃ $, the reindexing morphism $ \\\\mathbb{A}^{n₁}_S → \\\\mathbb{A}^{n₃}_S $ induced by the composition $ j ∘ i $ is equal to the composition \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n₁ n₂ n₃ : Type v} (i : n₁ → n₂) (j : n₂ → n₃) (S : AlgebraicGeometry.Scheme) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.AffineSpace n₁ S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.reindex (j ∘ i) S) h =\\n    CategoryTheory.CategoryStruct.comp (Algebraic\", \"doc\": \"For any types $n_1, n_2, n_3$, functions $i : n_1 \\\\to n_2$ and $j : n_2 \\\\to n_3$, a scheme $S$, and a morphism $h : \\\\mathbb{A}^{n_1}_S \\\\to Z$ in the category of schemes, the composition of the reindex\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_reindex_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n₁ n₂ : Type v} (i : n₁ → n₂) {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.AffineSpace n₁ T ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.map n₂ f)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Affi\", \"doc\": \"For any reindexing function $ i : n₁ → n₂ $, morphism $ f : S → T $ of schemes, and morphism $ h : \\\\mathbb{A}^{n₁}_T → Z $, the composition $ \\\\text{map}_{n₂}(f) ∘ (\\\\text{reindex}_i(T) ∘ h) $ equals $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero proper pushforward base change mate composition commutes with derived tensor quotient coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ pushforward g ≅ pushforward (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"LinearMap.baseChange_zero\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": baseChange A (0 : M →ₗ[R] N) = 0\", \"doc\": \"The base change of the zero linear map $ 0 : M \\\\to N $ induces the zero linear map $ 0 : A \\\\otimes_R M \\\\to A \\\\otimes_R N $, where $ A $ is an $ R $-algebra and $ M, N $ are $ R $-modules.\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"PresheafOfModules.pushforward_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \": pushforwardComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerRight (pushforwardId R) (pushforward.{v} φ) ≪≫ leftUnitor _\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$ and $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of \"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{I J K : C} (f : I ⟶ J) (g : J ⟶ K) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)]\\n  [ExponentiableMorphism f] [ExponentiableMorphism g] [ExponentiableMorphism (f ≫ g)] :\\n  pushforward (C := C) (f ≫ g) ≅ pushforward f ⋙ pushforward g\", \"doc\": \"Given composable morphisms $f : I \\\\to J$ and $g : J \\\\to K$ in a category $\\\\mathcal{C}$, if $f$, $g$, and their composition $g \\\\circ f$ are all exponentiable, then the pushforward functor associated wi\"}\n  {\"name\": \"PresheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \": pushforward.{v} ψ ⋙ pushforward.{v} φ ≅ pushforward.{v} (F := F ⋙ G) (φ ≫ whiskerLeft F.op ψ)\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$ and $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of \"}\n  {\"name\": \"PresheafOfModules.pushforward₀CompToPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \"(R : Dᵒᵖ ⥤ RingCat.{u}) : pushforward₀.{v} F R ⋙ toPresheaf _ ≅ toPresheaf _ ⋙ (whiskeringLeft _ _ _).obj F.op\", \"doc\": \"The natural isomorphism asserting that composing the pushforward functor $ F_* $ with the forgetful functor to presheaves of abelian groups is naturally isomorphic to composing the forgetful functor w\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|[Ee]xchange.*[Tt]ensor|[Bb]ase[Cc]hange.*[Cc]omp",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"line\": \"114\", \"text\": \"      whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, whiskerRight_tensor]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"line\": \"115\", \"text\": \"    simp [← whisker_exchange_assoc, tensor_whiskerLeft_symm, -tensor_whiskerLeft,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"53\", \"text\": \"section mateEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"84\", \"text\": \"def mateEquiv : TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"123\", \"text\": \"theorem mateEquiv_counit (α : TwoSquare G L₁ L₂ H) (d : D) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"124\", \"text\": \"    L₂.map ((mateEquiv adj₁ adj₂ α).app _) ≫ adj₂.counit.app _ =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"128\", \"text\": \"theorem mateEquiv_counit_symm (α : TwoSquare R₁ H G R₂) (d : D) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean\", \"line\": \"58\", \"text\": \"variable (K : Precoverage C) [K.HasIsos] [K.IsStableUnderBaseChange] [K.IsStableUnderComposition]\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Descent.lean\", \"line\": \"83\", \"text\": \"instance [Q.IsStableUnderBaseChange] [P.HasOfPrecompProperty Q] [P.RespectsRight Q] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Descent.lean\", \"line\": \"198\", \"text\": \"instance [Q.IsStableUnderCobaseChange] [P.HasOfPostcompProperty Q] [P.RespectsLeft Q] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/LocalClosure.lean\", \"line\": \"96\", \"text\": \"    [K.HasIsos] [K.IsStableUnderBaseChange] [K.IsStableUnderComposition] [K.HasPullbacks] {X Y : C}\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"255\", \"text\": \"    [IsStableUnderBaseChange P] [P.IsStableUnderComposition] {S X X' Y Y' : C} {f : X ⟶ S}\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"277\", \"text\": \"instance IsStableUnderBaseChange.hasOfPostcompProperty_monomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"278\", \"text\": \"    [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty (MorphismProperty.monomorphisms C) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"371\", \"text\": \"    [IsStableUnderCobaseChange P] [P.IsStableUnderComposition] {S X X' Y Y' : C} {f : S ⟶ X}\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"387\", \"text\": \"instance IsStableUnderCobaseChange.hasOfPrecompProperty_epimorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean\", \"line\": \"196\", \"text\": \"    [P.IsStableUnderBaseChangeAlong f] [Q.HasOfPostcompProperty Q] (hPf : P f) (hQf : Q f) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean\", \"line\": \"359\", \"text\": \"    [P.IsStableUnderCobaseChangeAlong f] [Q.HasOfPrecompProperty Q] (hPf : P f) (hQf : Q f) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"line\": \"39\", \"text\": \"the exchange property of the whiskerings. These two definitions are accessed by `tensorHom_def`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"line\": \"331\", \"text\": \"  whisker_exchange f g ▸ tensorHom_def f g\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"line\": \"771\", \"text\": \"    _ = _ := by rw [whisker_exchange, braiding_tensor_left_hom]; monoidal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"119\", \"text\": \"section mateEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"148\", \"text\": \"def mateEquiv : (g ≫ l₂ ⟶ l₁ ≫ h) ≃ (r₁ ≫ g ⟶ h ≫ r₂) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"151\", \"text\": \"lemma mateEquiv_eq_iff (α : g ≫ l₂ ⟶ l₁ ≫ h) (β : r₁ ≫ g ⟶ h ≫ r₂) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"152\", \"text\": \"    mateEquiv adj₁ adj₂ α = β ↔\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit tensor projection formula commutes with base change and the extension by zero unit, yielding coefficient naturality for compactly supported pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"Coalgebra.sum_counit_tmul_map_eq\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : AddCommMonoid A] [inst_2 : Module R A]\\n  [inst_3 : Coalgebra R A] {B : Type u_1} [inst_4 : AddCommMonoid B] [inst_5 : Module R B] {F : Type u_2}\\n  [inst_6 : FunLike F A B] [LinearMapClass F R A B] (f : F) (a : A) {repr : Coalgebra.Repr R \", \"doc\": \"For any linear map $ f : A \\\\to B $ and element $ a \\\\in A $, with coalgebra representation $ \\\\Delta(a) = \\\\sum_i \\\\Delta_L(i) \\\\otimes \\\\Delta_R(i) $, it holds that $ \\\\sum_i \\\\epsilon(\\\\Delta_L(i)) \\\\otimes f\"}\n  {\"name\": \"Algebra.IsPushout.cancelBaseChangeAux_symm_tmul\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type v₃) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (A : Type u_8)\\n  (B : Type u_9) [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R \", \"doc\": \"Let $R, A, S, B$ be commutative semirings, where $A$ and $S$ are $R$-algebras, and $B$ is an $A$-algebra and an $S$-algebra that is the pushout of $A$ and $S$ over $R$. Let $M$ be an $A$-module. Let $\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"Coalgebra.sum_map_tmul_counit_eq\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : AddCommMonoid A] [inst_2 : Module R A]\\n  [inst_3 : Coalgebra R A] {B : Type u_1} [inst_4 : AddCommMonoid B] [inst_5 : Module R B] {F : Type u_2}\\n  [inst_6 : FunLike F A B] [LinearMapClass F R A B] (f : F) (a : A) {repr : Coalgebra.Repr R \", \"doc\": \"For a coalgebra $A$ over a commutative semiring $R$ with comultiplication $\\\\Delta: A \\\\to A \\\\otimes A$ and counit $\\\\epsilon: A \\\\to R$, and for any $R$-linear map $f: A \\\\to B$ and element $a \\\\in A$, the\"}\n  {\"name\": \"Pi.counit_comp_dFinsuppCoeFnLinearMap\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"∀ {R : Type u_1} {n : Type u_2} [inst : CommSemiring R] [inst_1 : Fintype n] [inst_2 : DecidableEq n] {A : n → Type u_3}\\n  [inst_3 : (i : n) → AddCommMonoid (A i)] [inst_4 : (i : n) → Module R (A i)]\\n  [inst_5 : (i : n) → CoalgebraStruct R (A i)],\\n  CoalgebraStruct.counit ∘ₗ DFinsupp.coeFnLinearMap \", \"doc\": \"Given a commutative semiring $ R $ and a family of $ R $-modules $ \\\\{A(i)\\\\} $ each equipped with a coalgebra structure over $ R $, the space of dependent functions with finite support $ \\\\Pi₀(i : \\\\iota\"}\n  {\"name\": \"Algebra.IsPushout.cancelBaseChange_symm_tmul\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type v₃) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (A : Type u_8)\\n  (B : Type u_9) [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R \", \"doc\": \"For any elements $s \\\\in S$ and $m \\\\in M$, the inverse of the base change cancellation map applied to the tensor product $s \\\\otimes m$ equals the tensor product of the canonical algebra homomorphism $\\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proetale compact support exchange along scheme isomorphisms respects horizontal vertical pasting and derived finite quotient coefficient extension",
+   "results": "Q86 search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t; inspected returned statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-scheme reindexing, underived pushforward composition, generic mates or module/coalgebra tensors; none states all specified derived pro-etale compact-support identities and quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|[Ee]xchange.*[Tt]ensor|[Bb]ase[Cc]hange.*[Cc]omp",
+   "results": "Q86 search: 25 hits; Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean; inspected returned statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-scheme reindexing, underived pushforward composition, generic mates or module/coalgebra tensors; none states all specified derived pro-etale compact-support identities and quotient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero proper pushforward base change mate composition commutes with derived tensor quotient coefficients",
+   "results": "Q86 search: 8 hits; SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, LinearMap.baseChange_zero, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, PresheafOfModules.pushforward_id_comp, CategoryTheory.ExponentiableMorphism.pushforwardComp, PresheafOfModules.pushforwardComp, PresheafOfModules.pushforward₀CompToPresheaf; inspected returned statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-scheme reindexing, underived pushforward composition, generic mates or module/coalgebra tensors; none states all specified derived pro-etale compact-support identities and quotient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans",
+   "results": "Q86 search: 0 hits; ; inspected returned statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-scheme reindexing, underived pushforward composition, generic mates or module/coalgebra tensors; none states all specified derived pro-etale compact-support identities and quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit tensor projection formula commutes with base change and extension by zero unit yielding coefficient naturality for compactly supported pushforward",
+   "results": "Q86 search: 8 hits; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, LightCondensed.ihomPoints_symm_comp, TensorProduct.counit_tmul, Coalgebra.sum_counit_tmul_map_eq, TensorProduct.counit_def, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul, Pi.counit_comp_dFinsuppCoeFnLinearMap; inspected returned statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine-scheme reindexing, underived pushforward composition, generic mates or module/coalgebra tensors; none states all specified derived pro-etale compact-support identities and quotient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-semilinear-exchange-reindexing",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly paragraph: semilinear compact-support exchange; extracted argument of lem-pur-weil-semilinear-exchange-reindexing, reviewed proof steps 6,7,8.",
+   "via": [
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-isomorphism-finite-exchange-coherence",
+  "worker": "stage1",
+  "summary": "Q86: retained the full statement; assembled identity, horizontal and vertical pasting from existing normalized mate/open and strict-tower tools, and wrote the proper projection and open-unit quotient squares explicitly. No new nodes: all non-elementary tools already exist. Searched current Lean and Mathlib; no whole-item attachment or leaf.",
+  "blueprint": "Constituent-compatibility assembly paragraph of prop-pur-weil-equivariance-compatibilities, via lem-pur-weil-semilinear-exchange-reindexing: its finite identity, horizontal/vertical pasting and quotient-coefficient arguments.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic identity/pasting calculus for the specified adjunction mate; does not replace a geometric route. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-cbc-tower-open-beta-normalization",
+    "why": "Generic open-unit normalization, identity and finite-evaluation theorem. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-cbc-complete-proetale-composition-pasting-coherence",
+    "why": "The statement already prescribes this composition comparison; its strict-tower interchange is evaluated for finite coefficients. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-cbc-tower-mate-evaluation-scalars",
+    "why": "Generic exact-evaluation preservation of the actual derived adjunction and proper/open mate. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos tensor/composition coherence for the finite coefficient pull-comparison cube. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-coefficient-exchange-mates",
+    "why": "Generic categorical coefficient-cube theorem for actual exchange/projection mates. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic normalized ringed-site open tensor/base-change comparisons and full faithfulness. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "The statement itself specifies these coefficient comparisons and their domain/normalization. No more specialized result in this unit supplies this generic interface."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic normalized proper/open base-change identity before evaluation supplies the unrestricted transformation equation; the statement already prescribes this normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-tower-open-beta-normalization",
+  "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-sf-open-tensor-normalization",
+  "lem-fix-operation-reduction",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-6586d9cf6",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-6586d9cf6 (reviewer sub-agent of L); spot-checked: This is the first split of a Q156 re-split child (old parent steps 6-8). The item has no repair note, is still unsplit live, and its statement and stmt_deps are byte-identical to the Q156 version. The delivery has 0 new nodes and 6 steps (5852 chars). proof_deps equals the union of the uses, there is no cycle and no SGA. Old step 6 maps to steps 1-2, old 7 to step 3, old 8 to steps 4-6; nothing is dropped. Step 1: over S=Y, E_1=1 by mate-pasting clause 4 and beta_1=1 by the beta-normalization identity clause with finite evaluation; no k-linearity is needed. Step 2: lem-pur-relative-compact-support-pasting allows arbitrary base maps and identifies its H with the def-exchange-projection maps, so H_{ab}=(H_b A)(A H_a) is exactly the horizontal equation. Step 3: I recomputed by hand that the strict-tower calculus base-change equation for Q=(b,i,p_Y,p), whiskered by R_q' and J_c and combined with naturality of gamma and E_q, mate-pasting clause 2 and open composition, gives the vertical identity with D=R_q gamma_Q J_c before evaluation. Mate-evaluation then gives the finite identity. The etale-origin witnesses are used only for invertibility of D, and the identity agrees with the existing coherence node. Step 4: I matched it to the Lean coefficient_exchange_of_counit: the counit equations, alpha/delta assignments, the conclusion square and the cube (from the ringed monoidal comparisons, no flatness) all fit; rho is the counit-defined projection and is never inverted. Step 5: for g=id and ring change A_n to A_m, lem-sf-open-tensor-normalization gives delta. The source is an open extension and j'_! is fully faithful, so both routes restrict to chi_{g'}; typing checked. Step 6: I checked the assembly by hand (naturality of rho and E plus steps 4-5), and kappa is the projection followed by the open comparison that the statement prescribes. Edge cases m=n, g=h=1, j=1, empty X and the trivial tower reduce to identities. Advisory: the vertical clause duplicates the interchange identity of lem-cbc-complete-proetale-composition-pasting-coherence, and the horizontal clause is a special case of relative pasting; both are cited, not restated. The split_report lists 9 cross-unit generic tool_uses, all already used by the parent or prescribed by the statement; the maintainer records which to keep. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismFiniteExchangeCoherence",
+  "declaration": "WeilConjectures.FiniteExchangeCoherence.coefficient",
+  "declarations": [
+   "WeilConjectures.FiniteExchangeCoherence.ringFinite",
+   "WeilConjectures.FiniteExchangeCoherence.coefficientFinite",
+   "WeilConjectures.FiniteExchangeCoherence.constantSystem",
+   "WeilConjectures.FiniteExchangeCoherence.constantChange",
+   "WeilConjectures.FiniteExchangeCoherence.pullId",
+   "WeilConjectures.FiniteExchangeCoherence.pushComp",
+   "WeilConjectures.FiniteExchangeCoherence.openComp",
+   "WeilConjectures.FiniteExchangeCoherence.composition",
+   "WeilConjectures.FiniteExchangeCoherence.lower",
+   "WeilConjectures.FiniteExchangeCoherence.quotient",
+   "WeilConjectures.FiniteExchangeCoherence.tensorQuotient",
+   "WeilConjectures.FiniteExchangeCoherence.canonicalAgreement",
+   "WeilConjectures.FiniteExchangeCoherence.identity",
+   "WeilConjectures.FiniteExchangeCoherence.horizontal",
+   "WeilConjectures.FiniteExchangeCoherence.vertical",
+   "WeilConjectures.FiniteExchangeCoherence.compositionIsIso",
+   "WeilConjectures.FiniteExchangeCoherence.properCoefficient",
+   "WeilConjectures.FiniteExchangeCoherence.openCoefficient",
+   "WeilConjectures.FiniteExchangeCoherence.coefficient"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismFiniteExchangeCoherence.lean",
+  "statement": "theorem coefficient {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} [X'.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))] [QuasiCompact (X' ↘ Spec (.of P.field.k))] [IsSeparated (X' ↘ Spec (.of P.field.k))] [Y'.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of P.field.k))] [QuasiCompact (Y' ↘ Spec (.of P.field.k))] [IsSeparated (Y' ↘ Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (c' : Compactification f') (g : Y' ⟶ Y) (x : X' ⟶ X) (z : c'.Z ⟶ c.Z) [IsIso g] (sp : IsPullback z c'.g c.g g) (sj : IsPullback x c'.i c.i z) (K : DerivedCategory (Modules P.Coefficient X)) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos X K) : (tensorQuotient P m hm h Y').map ((ordinaryH P.Coefficient c c' g x z sp sj).app K) ≫ (PurCompactSupport.comparison (constantChange (quotient P m hm h)) c').app ((ordinaryG P.Coefficient x).obj K) ≫ (ordinaryJ (lower P m hm).Coefficient c'.i ⋙ ordinaryR (lower P m hm).Coefficient c'.g).map ((PurCompactSupport.scalarPull (constantChange (quotient P m hm h)) x).hom.app K) = (PurCompactSupport.scalarPull (constantChange (quotient P m hm h)) g).hom.app ((ordinaryJ P.Coefficient c.i ⋙ ordinaryR P.Coefficient c.g).obj K) ≫ (ordinaryG (lower P m hm).Coefficient g).map ((PurCompactSupport.comparison (constantChange (quotient P m hm h)) c).app K) ≫ (ordinaryH (lower P m hm).Coefficient c c' g x z sp sj).app ((tensorQuotient P m hm h X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The clauses are jointly stated by canonicalAgreement, identity, horizontal, vertical, compositionIsIso, properCoefficient, openCoefficient and coefficient. Definitions only package existing constant-ring operations, their normalized compositors, the supplied proper/open composition map and the actual quotient ring homomorphism. All eight theorem proofs are sorry. The module preserves the small-site object/morphism universes u+1/u and uses the standard derived category instance; no semilinear base map is required to be a k-morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d3d4e144",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Mechanical theorem-stmt_dep finding: genuine in both cases. ordinaryH uses ordinaryBeta = asIso via the sorried theorem ordinaryBetaInv_isIso (lem-pur-relative-compact-support-pasting); constantChange.square := coefficient_square, a theorem of lem-cbc-tower-mate-evaluation-scalars, used by all coefficient clauses. Clause check: canonicalAgreement ties ordinaryH to finiteChosenExchange (def-exchange-projection); identity; horizontal via paste with both ordinaryGComp; vertical in diagrammatic order with D = R_q singleDerivedGamma J_c plus open/proper compositors (proof step 3); compositionIsIso on DerivedCategory.Plus with FixedEtaleOriginWitness; quotient = ULift of Ideal.Quotient.factor, 1<=m<=n incl. m=n; tensorQuotient = pbcDerivedExtend; properCoefficient, openCoefficient and coefficient match proof steps 4-6 with hK finiteTorConstructible; no IsOver on g/h/u. QuasiCompact tower instances hold automatically (Noetherian targets); primed k-structures always suppliable; no universe equality. Records: only lean and stmt_deps changed, statement verbatim, 8 sorries, no line over 100, both report sections present, not superseded. Advisories: openBetaModuleGId/JComp are plain defs of theorem node lem-cbc-tower-open-beta-normalization, not in stmt_deps; several decls owned by def nodes reached only indirectly. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261026T003117-L-147743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

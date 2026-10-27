@@ -1,0 +1,228 @@
+{
+ "id": "lem-sp-twisted-pullback-tower-domain",
+ "kind": "statement",
+ "title": "Uniform twisted-pullback bounds and the domain of the tower projection formula",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated morphism of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$, and put $R_n=\\mathcal O_E/\\ell^n=A_{E,en}$ for $n\\geq1$. Use the ordinary derived categories of strict varying-coefficient towers [sk-def-sp-coefficient-towers, def-weil-abstract-derived-category], their uniform constructible finite-Tor full subcategories $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ [sk-def-sp-normalized-towers], and ordinary derived tensor products [def-weil-derived-tensor]. Twists are [def-coefficient-twists-detailed], and $F_\\bullet=Rf_{!,\\bullet}\\dashv G_\\bullet=f^!_\\bullet$ with finite units, counits and evaluations is [det-sp-tower-gluing]. Put $\\mathbf1_{\\bullet,T}=(R_{n,T})_n$ and $\\omega_\\bullet=G_\\bullet\\mathbf1_{\\bullet,Y}$, so $\\omega_n=f^!_{R_n}R_{n,Y}$; pullback means levelwise finite derived pullback [def-weil-derived-pullback-tensor-hom].\n\nLet $K_\\bullet\\in\\mathcal C_Y$, and choose integers $a\\leq b$ containing the Tor amplitude of every $K_n$ [def-weil-finite-tor-amplitude]. Suppose given an isomorphism $a_\\bullet:\\mathbf1_{\\bullet,X}(d)[2d]\\xrightarrow{\\sim}\\omega_\\bullet$ whose finite levels are the diagonal orientations [thm-pur-diagonal-dualizing-object]. Put\n$$P_\\bullet=f_\\bullet^*K_\\bullet(d)[2d],\\qquad Q_\\bullet=f_\\bullet^*K_\\bullet\\otimes^L\\omega_\\bullet.$$\nThen each $f_{R_n}^*K_n$ is constructible with Tor amplitude in $[a,b]$. Each $R_{n,X}(d)$ is a constructible locally free rank-one sheaf, including $R_{n,X}$ when $d=0$. The towers $P_\\bullet,Q_\\bullet$ are objects of $\\mathcal C_X$ with cohomology and Tor amplitude in the common interval $[a-2d,b-2d]$, and the map induced by $1\\otimes a_\\bullet$ and twist reassociation identifies $P_\\bullet$ with $Q_\\bullet$.\n\nThe schemes $X,Y$ are Noetherian, quasi-compact and quasi-separated. For every $n$ the finite Noetherian coefficient ring $R_n$ admits bounded constructible finite-Tor etale-origin witnesses for $K_n$ and $\\omega_n$ (an etale-origin witness means a bounded constructible finite-Tor complex on the small etale site together with an isomorphism of its pro-etale inverse image with the given level). Both input towers $K_\\bullet$ and $\\omega_\\bullet$ have common lower cohomological bounds, namely $a$ and $-2d$. Consequently the specified tower projection map for $(\\omega_\\bullet,K_\\bullet)$ of [det-sp-tower-shriek-levels](2a) exists and is invertible; its source and target, and $Q_\\bullet$, lie in the domains needed to take its counit transpose under $F_\\bullet\\dashv G_\\bullet$. No compatibility of the etale-origin witnesses across $n$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(2), uniform pullback/twist bounds and etale-origin hypotheses of projection; retained proof steps 4-6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-tower-shriek-levels",
+  "def-sp-twisted-pullback-tower-domain-data"
+ ],
+ "proof": [
+  {
+   "text": "Finite-type structure maps give Noetherian schemes; separation and quasi-compactness give qcqs. Coefficient ring finiteness and Noetherianity are the published instances. Apply [lem-sp-pullback-ordered-tate-bounds] to obtain pullback, line and ordered tensor bounds. Tensor the given orientation with the identity to obtain the actual isomorphism P to Q; transport bounds and membership through it.",
+   "uses": [
+    "lem-sp-pullback-ordered-tate-bounds",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the original K level predicate along the published levelComparison. Test its assumed Tor interval against the coefficient unit, using a K-flat resolution and its tensor right unitor, to obtain cohomological support. Apply [lem-sp-uniform-bounds-origin-lower] independently to K and the oriented coefficient line, yielding both families of finite origins and ambient lower bounds.",
+   "uses": [
+    "lem-sp-uniform-bounds-origin-lower",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Derive characteristic p from the finite-field datum. Apply the already stated tower compact-support projection formula to omega and realized K; this is the same specified SpTowerShriek.projection map. For its target use reverse ordered tensor bounds transported through the orientation, and the supplied hF preservation hypothesis. Conjugate through the realization counit. Transfer target membership back to the source along the projection isomorphism. Assemble the original Conclusion record; no unit step or diagonal orientation is reconstructed.",
+   "uses": [
+    "lem-sp-tower-compact-support-projection-formula",
+    "lem-sp-pullback-ordered-tate-bounds",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-pullback-ordered-tate-bounds",
+  "sk-def-sp-normalized-towers",
+  "lem-sp-uniform-bounds-origin-lower",
+  "def-weil-proetale-tor-amplitude",
+  "lem-sp-tower-compact-support-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "paragraph (2), F8 formal assembly using geometric bounds and finite-origin comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback Tate twist and shift of a constructible finite Tor coefficient tower retain uniform bounds and finite etale origin witnesses for the projection formula",
+   "results": "8 hit(s): AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd. Hits concern ordinary smooth schemes, algebraic ranks or general Tor functors, not uniform constructible pro-etale tower bounds with etale-origin witnesses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "0 hit(s): . Hits concern ordinary smooth schemes, algebraic ranks or general Tor functors, not uniform constructible pro-etale tower bounds with etale-origin witnesses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*twist|constructible.*Tor|Tor.*amplitude",
+   "results": "2 hit(s): Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean. Hits concern ordinary smooth schemes, algebraic ranks or general Tor functors, not uniform constructible pro-etale tower bounds with etale-origin witnesses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite Tor amplitude of derived inverse image tensored with a rank one local system shifted by twice a smooth relative dimension",
+   "results": "8 hit(s): AlgebraicGeometry.isSmoothOfRelativeDimension_comp, DerivedCategory.instLinearShiftFunctorInt, IsBaseChange.finrank_eq, Module.finrank_baseChange, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, Module.rankAtStalk_baseChange, Module.rankAtStalk_tensorProduct, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension. Hits concern ordinary smooth schemes, algebraic ranks or general Tor functors, not uniform constructible pro-etale tower bounds with etale-origin witnesses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform finite Tor amplitude of derived inverse image tensored with a rank one local system shifted by twice a smooth relative dimension",
+   "results": "8 hit(s): CategoryTheory.Tor, CategoryTheory.Tor', LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor'_obj_obj, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, CategoryTheory.Tor_obj. Hits concern ordinary smooth schemes, algebraic ranks or general Tor functors, not uniform constructible pro-etale tower bounds with etale-origin witnesses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform constructible finite Tor amplitude bounds for pullback tensor a Tate line in a derived category of coefficient towers",
+   "results": "8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, CategoryTheory.Tor, CategoryTheory.Tor', DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE. No hit states uniform constructible finite-Tor coefficient-tower bounds or supplies the etale-origin projection domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*twist|constructible.*Tor|Tor.*amplitude",
+   "results": "2 hit(s): Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean. No hit states uniform constructible finite-Tor coefficient-tower bounds or supplies the etale-origin projection domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback and tensoring by a locally free rank one sheaf preserve constructibility and a given Tor amplitude interval",
+   "results": "8 hit(s): SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback. No hit states uniform constructible finite-Tor coefficient-tower bounds or supplies the etale-origin projection domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "0 hit(s): . No hit states uniform constructible finite-Tor coefficient-tower bounds or supplies the etale-origin projection domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image tensored with a rank one local system shifted by twice the smooth relative dimension has uniform Tor bounds and finite etale origin witnesses",
+   "results": "8 hit(s): Algebra.Etale.exists_subalgebra_fg, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.isBaseChange_of_formallyEtale. No hit states uniform constructible finite-Tor coefficient-tower bounds or supplies the etale-origin projection domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gamma",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (2), uniform pullback/twist bounds and etale-origin hypotheses of projection; retained proof steps 4-6",
+   "via": [
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-twisted-pullback-tower-domain",
+  "worker": "stage1",
+  "summary": "Q148 supplies all uniform pullback, twist and cohomological bounds, independent finite etale-origin witnesses, and the bounded-below/projection/adjunction domain checks. Reuses existing DAG results throughout; no new node, statement correction or normalization hypothesis.",
+  "blueprint": "Realizes the tensor transpose in tower-geometric gamma proof (2), used in the Normalization and Purity paragraphs of det-sp-integral-adjunction-bijection. The assumed orientation is not reconstructed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic finite-coefficient pullback preserves the specified Tor interval; used as a black box in the tower domain argument."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic etale/pro-etale finite-Tor comparison gives levelwise witnesses, without changing the tower purity route."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic finite Tate-line local freeness and finite local constancy give the local tensor calculation; this is coefficient data, not an alternative purity proof."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic valuation-ring quotient finiteness verifies the coefficient-ring hypothesis of finite comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-4d78cf620",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-4d78cf620 (reviewer sub-agent of L); spot-checked: I read the item in full: there are no new nodes and the statement and stmt_deps are unchanged. I also read every cited node's statement and the source, main-20261015 gamma proof (2). The item supplies the domain checks that proof leaves out. Step 1: X and Y are Noetherian and qcqs, and R_n=A_{E,en} is finite because ℓ^nO=ϖ^{en}O. Step 2: f is of finite type, so lem-sf-pullback-tor-amplitude applies; its constructibility definition is the same as the one sk-def-sp-normalized-towers uses. Step 3: by lem-pur-twist-sheaf-locally-free(3), R_n(d) is a flat locally free line with Tor amplitude [0,0], and ω_n≅R_n(d)[2d]. Step 4: the shift is correct, giving [a-2d,b-2d] for P and Q, and the tensor of the twist tower evaluates levelwise by tower-shriek-levels(2). Step 5: finite-Tor comparison gives étale witnesses with the same intervals. Step 6: level evaluation is exact, so K and ω are bounded below in the tower derived category itself. Step 7: (2a) applies with witnesses for both inputs; compact-support-tower-reduction gives the bounds [a-2d,b] and [-2d,0]; and the gluing bijection gives the transpose, needing only Q∈C_X and K∈C_Y. Edge cases checked: d=0, X empty, K=0, a=b, ramified e>1, n=1. A traversal of all dependencies found no cycle. No SGA is used, and the Stacks tags 01T6, 01OW, 01OZ and 03RV exist. I accept the four tool_uses, which are all generic finiteness and coefficient inputs. Advisory: lem-sp-tower-compact-support-projection-formula (Q67) already gives a tower projection isomorphism without étale witnesses. The item still targets the (2a) map that det-sp-tower-gamma uses, so it is not a duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TwistedPullbackTowerDomain",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTwistedTowerDomain.twisted_pullback_tower_domain",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTwistedTowerDomain.twisted_pullback_tower_domain"
+  ],
+  "file": "lean/Sheaf/Paper/TwistedPullbackTowerDomain.lean",
+  "statement": "theorem twisted_pullback_tower_domain (_hl : l ≠ D.p) [IsSeparated f.left] [SmoothOfRelativeDimension d f.left] (roots : SpCoordinateAdjunction.RootLines l E X.left) (unitsX : ∀ n : ℕ, IsUnit ((l ^ (n + 1) : ℕ) : Γ(X.left, ⊤))) (cc : ∀ n : ℕ, SpTowerP1.CoefficientCoordinates l E n X.left (unitsX n)) (tc : ∀ n : ℕ, SpTowerP1.TensorCoordinates l E n b X.left) (unitsY : ∀ n : ℕ, IsUnit ((l ^ (n + 1) : ℕ) : Γ(Y.left, ⊤))) (cy : ∀ n : ℕ, SpTowerP1.CoefficientCoordinates l E n Y.left (unitsY n)) (orientation : SpTowerGamma.orderedLine l E b X.left w d ≅ omega l E b q G hU) (_hdiagonal : DiagonalLevels l E b o q D X Y f c d w hF G adj lv hU roots unitsX cc tc unitsY cy orientation) (K : SpTowerCalculus.C l E b q Y.left) (a z : ℤ) (_haz : a ≤ z) (_hTor : ∀ n : ℕ, HasProEtaleTorAmplitude Y.left (SpTowerShriek.R l E n) ((SpTowerShriek.Ev l E Y.left n).obj ((SpTowerGamma.realization l E b q Y.left).obj K)) a z) : Conclusion l E b o q D X Y f c d w G hU K a z orientation",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Original signature unchanged. Data definitions are reexported verbatim from TwistedPullbackTowerDomainDefinitions. Complete assembly proof from pullback/ordered-line bounds, the proved generic origin/lower-bound lemma, and the existing specified tower projection formula. All Conclusion fields are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c4517735",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Node fields unchanged except lean; lean.statement verbatim; imports exist; report has Worker report + Second reading by Q12. Every hypothesis matches (char p pinned via FiniteFieldDatum; hF/hU are true typing Props as in landed SpTowerGamma; DiagonalLevels = first two clauses of landed SpTowerGamma.FiniteLevels; Twists pinned to spEllTwistLine with transitions). Conclusion covers every node clause: pullback bounds [a,b]; rank-one constructible lines incl. d=0; P/Q in C_X with [a-2d,b-2d]; actual 1⊗a map invertible; Noetherian/qcqs; R_n finite Noetherian; independent per-level étale origins for K_n and ω_n with intervals; ambient IsGE a and -2d; the actual SpTowerShriek.projection (2a) is invertible with source/target/Q memberships. Edge cases d=0, empty schemes, K=0, a=b, n=0, e>1, universes OK. No hollow defs, docstrings with source and blueprint id, only sorry. Advisory: omit reverse proof-dep import into SmoothPurityTowerGamma (cycle), as the report states. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3e8dc",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T163626-L-734076",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules vs clone item (verbatim def move, unchanged theorem signature) and node JSONs vs statement owners; sandbox run_set rc 0, axioms as expected"
+ }
+}

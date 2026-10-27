@@ -5,10 +5,12 @@ Authors: SHEAF group G1
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.DerivedSquareLocalClassModels
 public import Sheaf.AlgebraicGeometry.DerivedSquareUnitMap
-public import Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+
+import Sheaf.AlgebraicGeometry.SquareResolutionLocalClass
+import Sheaf.AlgebraicGeometry.SquareLocalHypercohomology
+import Sheaf.AlgebraicGeometry.SquareLocalClassNaturality
 
 /-! # Local classes of the ordinary-unit map in a square
 
@@ -24,42 +26,42 @@ set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
+set_option synthInstance.maxSize 128 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem local_class_pasting {C : Type*} [Category C]
+    {A B D E F G L M N O P : C}
+    (s : A ⟶ D) (c : A ⟶ L) (t : L ⟶ B) (x : B ⟶ D) (y : D ⟶ B)
+    (a : B ⟶ E) (p : L ⟶ M) (b : M ⟶ E) (e : E ⟶ F)
+    (l : M ⟶ N) (r : N ⟶ F) (i : N ⟶ O) (t' : O ⟶ F)
+    (j : F ⟶ G) (m : A ⟶ P) (c' : P ⟶ O) (s' : P ⟶ G)
+    (hs : s = c ≫ t ≫ x) (ht : s' = c' ≫ t' ≫ j)
+    (hx : x ≫ y = 𝟙 B) (hn : p ≫ b = t ≫ a)
+    (he : b ≫ e = l ≫ r) (hi : r = i ≫ t')
+    (hr : c ≫ p ≫ l ≫ i = m ≫ c') :
+    s ≫ (y ≫ a ≫ e ≫ j) = m ≫ s' := by
+  calc
+    _ = (c ≫ t ≫ x) ≫ (y ≫ a ≫ e ≫ j) := by
+      exact congrArg (fun z ↦ z ≫ (y ≫ a ≫ e ≫ j)) hs
+    _ = c ≫ t ≫ (x ≫ y) ≫ a ≫ e ≫ j := by
+      simp only [Category.assoc]
+    _ = c ≫ t ≫ a ≫ e ≫ j := by rw [hx]; simp only [Category.id_comp]
+    _ = c ≫ (t ≫ a) ≫ e ≫ j := by simp only [Category.assoc]
+    _ = c ≫ (p ≫ b) ≫ e ≫ j := congrArg (fun z ↦ c ≫ z ≫ e ≫ j) hn.symm
+    _ = c ≫ p ≫ (b ≫ e) ≫ j := by simp only [Category.assoc]
+    _ = c ≫ p ≫ (l ≫ r) ≫ j := congrArg (fun z ↦ c ≫ p ≫ z ≫ j) he
+    _ = c ≫ p ≫ (l ≫ (i ≫ t')) ≫ j := congrArg (fun z ↦ c ≫ p ≫ (l ≫ z) ≫ j) hi
+    _ = (c ≫ p ≫ l ≫ i) ≫ t' ≫ j := by simp only [Category.assoc]
+    _ = (m ≫ c') ≫ t' ≫ j := congrArg (fun z ↦ z ≫ t' ≫ j) hr
+    _ = m ≫ (c' ≫ t' ≫ j) := by simp only [Category.assoc]
+    _ = m ≫ s' := congrArg (fun z ↦ m ≫ z) ht.symm
+
+
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-/-- Restrict an h-map, keeping the restriction of its global coefficient as target.
-Source: Stacks Project, Tag 01FB
-(blueprint: lem-weil-pbc-derived-square-local-classes). -/
-def restrictedDirectImageMap {Z X : Scheme.{u}} (v : Z ⟶ X)
-    {F : X.Modules} {G : Z.Modules} (φ : F ⟶ (pushforward v).obj G) (U : X.Opens) :
-    (restrictFunctor U.ι).obj F ⟶
-      (pushforward (v.resLE U (v ⁻¹ᵁ U) le_rfl)).obj
-        ((restrictFunctor (v ⁻¹ᵁ U).ι).obj G) :=
-  ((restrictAdjunction U.ι).homEquiv _ _).symm
-    (φ ≫ (pushforward v).map ((restrictAdjunction (v ⁻¹ᵁ U).ι).unit.app G) ≫
-      (pushforwardComp (v ⁻¹ᵁ U).ι v).hom.app
-        ((restrictFunctor (v ⁻¹ᵁ U).ι).obj G) ≫
-      ((pushforwardComp (v.resLE U (v ⁻¹ᵁ U) le_rfl) U.ι ≪≫
-        pushforwardCongr (v.resLE_comp_ι le_rfl)).inv.app
-          ((restrictFunctor (v ⁻¹ᵁ U).ι).obj G)))
-
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-
-/-- The canonical total/classical comparison, with the total derived-category
-universe fixed by the supplied family of scheme module categories.
-Source: total/classical right-derived compatibility
-(blueprint: lem-weil-pbc-derived-square-local-classes). -/
-def schemeSingleCohomologyComparison {X S : Scheme.{u}} (f : X ⟶ S)
-    (F : X.Modules) (q : ℕ) :
-    (DerivedCategory.homologyFunctor.{w, u, u + 1}
-      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).obj
-        ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)) ≅
-      ((pushforward f).rightDerived q).obj F :=
-  Functor.homologyRightDerivedFunctorObjSingleFunctorIso
-    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) F q
-
 
 /-- The local cocycle equation for an arbitrary coefficient h-map in a commutative
 square. The edge is specified solely by its local sheafification equation. This
@@ -127,11 +129,73 @@ theorem derivedSquareUnit_localClasses {X S Z T : Scheme.{u}}
         (restrictedDirectImageMap v φ (f ⁻¹ᵁ V)) q ≫
       resolutionSectionClass R'.resolution
         (((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex)
-        (g ⁻¹ᵁ V) (R'.sections ≪≫ eqToIso (congrArg (fun U ↦
+        (g ⁻¹ᵁ V) (R'.sections ≪≫ eqToIso (C := CochainComplex AddCommGrpCat.{u} ℕ)
+          (congrArg (β := CochainComplex AddCommGrpCat.{u} ℕ) (fun U : Z.Opens ↦
           ((RingedSpace.openModuleSections Z.toRingedSpace U).mapHomologicalComplex
-            (ComplexShape.up ℕ)).obj J.cocomplex) (by
-              rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h]))) q ≫
+            (ComplexShape.up ℕ)).obj J.cocomplex) ((Scheme.Hom.comp_preimage v f V).symm.trans
+            ((congrArg (fun t : Z ⟶ S ↦ t ⁻¹ᵁ V) h).trans
+              (Scheme.Hom.comp_preimage k g V))))) q ≫
       Hom.app (J.isoRightDerivedObj (pushforward k) q).inv (g ⁻¹ᵁ V) := by
-  sorry
+  simp only [Hom.comp_app, pushforward_map_app]
+  let K : schemeDerivedCategory T := (schemeDerivedDirectImage k).obj
+    ((DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G)
+  let A : schemeDerivedCategory S := (schemeDerivedDirectImage f).obj
+    ((DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)
+  let a := derivedSquareUnitMap f k g v h F G φ
+  let hU : v ⁻¹ᵁ (f ⁻¹ᵁ V) = k ⁻¹ᵁ (g ⁻¹ᵁ V) := by
+    rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, h]
+  have hs := squareResolution_localClass f F q V I (f ⁻¹ᵁ V) rfl R
+  have ht := squareResolution_localClass k G q (g ⁻¹ᵁ V) J
+    (v ⁻¹ᵁ (f ⁻¹ᵁ V)) hU R'
+  have hn := congrArg (fun t ↦ t.app (op V))
+    (RingedSpace.squareLocalClass_naturality (q : ℤ) a)
+  change ((RingedSpace.localHypercohomologyPresheaf S.toRingedSpace (q : ℤ)).map a).app
+      (op V) ≫
+      (RingedSpace.topEdgeLocalClass S.toRingedSpace (q : ℤ)
+        ((schemeDerivedDirectImage g).obj K)).app (op V) =
+    (RingedSpace.topEdgeLocalClass S.toRingedSpace (q : ℤ) A).app (op V) ≫
+      Hom.app ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).map a) V at hn
+  have hi : (RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom (q : ℤ) K).app
+      (op V) = (squareInverseOpenComparison g (q : ℤ) K).hom.app (op V) ≫
+        (RingedSpace.topEdgeLocalClass T.toRingedSpace (q : ℤ) K).app (op (g ⁻¹ᵁ V)) := by
+    exact congrArg (fun t ↦ t.app (op V)) (squareInverseOpenComparison_class g (q : ℤ) K)
+  have hr := square_localHypercohomology f k g v h F G φ q V I J R R'
+  change resolutionSectionClass R.resolution
+      (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
+      V R.sections q ≫ Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V = _ at hs
+  have hc := congrArg (fun t ↦ Hom.app t V)
+    (schemeSingleCohomologyComparison f F q).hom_inv_id
+  change Hom.app (schemeSingleCohomologyComparison f F q).hom V ≫
+      Hom.app (schemeSingleCohomologyComparison f F q).inv V = 𝟙 _ at hc
+  exact local_class_pasting (C := AddCommGrpCat.{u})
+    (resolutionSectionClass R.resolution
+      (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
+      V R.sections q ≫ Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V)
+    (squareLocalResolutionComparison f F q V I (f ⁻¹ᵁ V) rfl R).hom
+    ((RingedSpace.topEdgeLocalClass S.toRingedSpace (q : ℤ) A).app (op V))
+    (Hom.app (schemeSingleCohomologyComparison f F q).hom V)
+    (Hom.app (schemeSingleCohomologyComparison f F q).inv V)
+    (Hom.app ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).map
+        (derivedSquareUnitMap f k g v h F G φ)) V)
+    (((RingedSpace.localHypercohomologyPresheaf S.toRingedSpace (q : ℤ)).map a).app
+      (op V))
+    ((RingedSpace.topEdgeLocalClass S.toRingedSpace (q : ℤ)
+      ((schemeDerivedDirectImage g).obj K)).app (op V))
+    (Hom.app e V)
+    ((RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom (q : ℤ) K).hom.app (op V))
+    ((RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom (q : ℤ) K).app (op V))
+    ((squareInverseOpenComparison g (q : ℤ) K).hom.app (op V))
+    ((RingedSpace.topEdgeLocalClass T.toRingedSpace (q : ℤ) K).app (op (g ⁻¹ᵁ V)))
+    (Hom.app (schemeSingleCohomologyComparison k G q).hom (g ⁻¹ᵁ V))
+    (moduleCohomologyFMap (v.resLE (f ⁻¹ᵁ V) (v ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl)
+      (restrictedDirectImageMap v φ (f ⁻¹ᵁ V)) q)
+    (squareLocalResolutionComparison k G q (g ⁻¹ᵁ V) J
+      (v ⁻¹ᵁ (f ⁻¹ᵁ V)) hU R').hom
+    _ hs ht hc hn (he (op V)) hi hr
+
 
 end AlgebraicGeometry

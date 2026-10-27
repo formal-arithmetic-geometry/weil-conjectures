@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-integral-purity-counit-reduction",
+ "kind": "statement",
+ "title": "Reduction of the specified integral exceptional counit",
+ "statement": "Fix $D,C,E$, a smooth separated finite-type $f:X\\to Y$ of relative dimension $r$ between separated finite-type $D.k$-schemes, a normalized constructible exceptional coefficient system $S$ [lem-sf-constructible-exceptional-adjunction-coefficients], and its specified simultaneous purity family $A$ with target realization [lem-pur-adic-purity-scalar-naturality]. For an integral finite-Tor input $K$, transport the actual exceptional counit by A.targetRealization and the actual left realization S.ring.left, obtaining $\\epsilon_R:P_RG_RK\\to K$. At each finite exponent $n+1$, its derived reduction is $Q_Y(\\epsilon_R)=c_{G_RK}\\,P_n(b_K)\\,\\epsilon_n$, in Lean composition order: first the canonical support comparison, then support of the canonical target reduction, then the specified finite exceptional counit [def-pur-smooth-trace]. Here $c$ is explicitly the reductionBridge, PurCompactSupport.comparison, finiteImageIso and inverse reductionBridge composite, and $b$ is purAdicTargetReduction [def-pur-adic-purity-objects]. This is an equality of actual morphisms for this normalized realization, not an assertion about arbitrary choices of adjoints.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), integral purity transport, canonical successive quotient comparisons and actual exceptional counits; parent proof steps 2 and 6"
+ },
+ "stmt_deps": [
+  "def-pur-adic-purity-objects",
+  "lem-pur-adic-purity-scalar-naturality",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-trace",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-pur-adic-source-reduction",
+  "def-pur-adic-exceptional-reduction"
+ ],
+ "proof": [
+  {
+   "text": "use A.targetRealizationReductions to identify reduction of the inverse target\nrealization with the inverse of the prescribed exceptional mate. In the normalized\nsystem S, the compact-support coefficient comparison and its exceptional mate satisfy\nthe counit equation. Map that equation through the full-category inclusions and\nconjugate its scalar functors by their realization isomorphisms. Their naturality\ncancels the intermediate realization maps. A.finiteRightNormalized identifies the\nremaining finite exceptional realization with the ordinary etale adjoint, so its\ncounit is precisely smoothExceptionalCounit after the intrinsic equivalence.\nThe left realization S.ring.left gives the integral support term. On the finite\nside, the same open and proper units identify it with finiteImageIso. Thus the\nremaining composite is exactly c, followed by support of purAdicTargetReduction\nand the finite exceptional counit. The finite-Tor hypothesis supplies boundedness\nbelow, including the zero object and the empty scheme, so the totalized zero branch\nof smoothExceptionalCounit is never used on a nonzero unbounded input.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-pur-adic-purity-scalar-naturality",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-finite-exceptional",
+    "def-pur-smooth-trace",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-pur-adic-purity-scalar-naturality",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-coef-finite-exceptional",
+  "def-pur-smooth-trace",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), integral purity transport, canonical successive quotient comparisons and actual exceptional counits; parent proof steps 2 and 6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor reduction exceptional adjunction counit and successive quotient cocycle",
+   "results": "CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε. These are general adjunction APIs, not the prescribed integral and finite coefficient comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient reduction of smooth purity and its inverse commutes with the exceptional counit trace",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived_counit; general derived adjunction equations, no identification of the pro-etale coefficient realizations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientProjection|completedIntegralCoefficients.*π|finiteReductionRingHom",
+   "results": "msearch Mathlib grep returned no hits. Local project search found comparison_composition, finiteReductionOfPurity and the source-normalization equation, which supply parts but not the displayed combined comparisons in reconstruction coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedIntegralPurityTrace",
+  "date": "2026-10-25",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (6), integral purity transport, canonical successive quotient comparisons and actual exceptional counits; parent proof steps 2 and 6",
+   "via": [
+    "lem-sf-normalized-integral-purity-trace",
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPurityCounitReduction",
+  "file": "lean/Sheaf/Paper/IntegralPurityCounitReduction.lean",
+  "declaration": "WeilConjectures.NormalizedIntegralPurityTrace.integralPurityCounitReduction",
+  "statement": "theorem integralPurityCounitReduction (K : Cat D C E Y) (n : ℕ) (ε : (PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).obj (purAdicTarget D C E.val f K.obj) ⟶ K.obj) (hε : ε = (PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).map ((A.targetRealization E).inv.app K) ≫ (S.ring.left (integralExceptionalCompactification D f) (.integral (fieldStage D C E))).inv.app ((target D C f S E).obj K) ≫ (finiteTorConstructibleIntegral C.l E.val Y).ι.map ((operation D C f S E).adjunction.counit.app K)) (c : ∀ (N : DerivedCategory (scalarReductionSource C.l E.val X)) (n : ℕ), (scalarReductionDerivedExtension C.l E.val Y n).obj ((PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).obj N) ⟶ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).obj ((scalarReductionDerivedExtension C.l E.val X n).obj N)) (hc : c = fun (N : DerivedCategory (scalarReductionSource C.l E.val X)) (n : ℕ) ↦ (show (scalarReductionDerivedExtension C.l E.val Y n).obj ((PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).obj N) ⟶ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).obj ((scalarReductionDerivedExtension C.l E.val X n).obj N) from (reductionBridge D C E Y n).hom.app _ ≫ (PurCompactSupport.comparison.{u} (PurCompactSupport.reduction C.l E.val (n + 1) (Nat.succ_pos n)) (integralExceptionalCompactification D f)).app N ≫ (PurCompactSupport.finiteImageIso.{u} C.l E.val n (integralExceptionalCompactification D f)).hom.app _ ≫ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).map ((reductionBridge D C E X n).inv.app N))) : (scalarReductionDerivedExtension C.l E.val Y n).map ε = c (purAdicTarget D C E.val f K.obj) n ≫ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).map (purAdicTargetReduction D C E.val f r K.obj K.property n) ≫ (purAdicFiniteSetting D C E.val n).smoothExceptionalCounit f ((scalarReductionDerivedExtension C.l E.val Y n).obj K.obj)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T003144-L-150095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T003144-L-150095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

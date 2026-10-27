@@ -1,0 +1,173 @@
+{
+ "id": "lem-pur-etale-graph-shrink-first-leg",
+ "kind": "statement",
+ "title": "First projection pasting under shrinking the graph intersection",
+ "statement": "Let A be a finite commutative ring, c a compactification of h:X→Z, H a proper/open/proper presentation of h, a′:X→W proper, and v:W→H.U open with a′v=H.a. Put S=H.shrink(a′,v,fac). For the explicit first legs L1_H,L1_S and the inverse intersection triangle K of [def-pur-etale-graph-shrink-intersection-words], and L=graphFirstShrinkIso of [def-pur-etale-graph-neighborhood-words], the natural transformations satisfy L1_H.hom≫K.hom=L.hom≫L1_S.hom. This assertion involves only the first intersection projection, not the middle graph word or the second-neighborhood triangle.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7D (lemma-shriek-proper-and-open-compose-horizontal) and 0F7J (lemma-shriek-composition), the intersection subcalculation of the agent-stated product-graph extension in lem-pur-etale-graph-shrink-middle-pasting. This is an explicit new sub-obligation, not a claim that the Stacks source states this product-graph formula verbatim."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-shrink-intersection-words",
+  "def-pur-etale-graph-neighborhood-words"
+ ],
+ "proof": [
+  {
+   "text": "Use graphIntersectionShrink_graph and graphIntersectionShrink_fst for the two factorization equations. The first projections of both intersection graphs are their first graph lifts, and graphFirstLift_shrink identifies these lifts. All needed properness and openness instances are already constructed.",
+   "uses": [
+    "def-pur-etale-graph-shrink-intersection-words",
+    "def-pur-etale-graph-neighborhood-words",
+    "lem-pur-etale-graph-neighborhood-geometry",
+    "lem-sf-etale-locally-closed-graph-model",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7D (lemma-shriek-proper-and-open-compose-horizontal) and 0F7J (lemma-shriek-composition), the intersection subcalculation of the agent-stated product-graph extension in lem-pur-etale-graph-shrink-middle-pasting. This is an explicit new sub-obligation, not a claim that the Stacks source states this product-graph formula verbatim."
+   }
+  },
+  {
+   "text": "Apply the proved concrete_triangle_transport helper of EtaleRefinementGraphMiddleTransport to the identity-top square for the first projection. Postcompose by the derived identity-open comparison. The result is composition of the specified proper/open triangles: extension of the first triangle followed by the second is the inverse open compositor followed by the composite triangle. This is Cartesian exchange pasting in the normalized unbounded compact-support formalism, not a graph-comparison independence assertion.",
+   "uses": [
+    "lem-pur-etale-refinement-graph-middle-transport",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7D (lemma-shriek-proper-and-open-compose-horizontal) and 0F7J (lemma-shriek-composition), the intersection subcalculation of the agent-stated product-graph extension in lem-pur-etale-graph-shrink-middle-pasting. This is an explicit new sub-obligation, not a claim that the Stacks source states this product-graph formula verbatim."
+   }
+  },
+  {
+   "text": "Invert the triangle composition identity by cancellation of the isomorphisms. Naturality moves this inverse triangle through the open compositor. Use shComp′_assoc_inv_app and unbounded_sh_comp to identify the associativity equation with the specified derived open compositors, including the equality transport. This proves inverse_triangle_extended for arbitrary composable open inclusions and compatible proper maps.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cbc-extension-zero-composition",
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7D (lemma-shriek-proper-and-open-compose-horizontal) and 0F7J (lemma-shriek-composition), the intersection subcalculation of the agent-stated product-graph extension in lem-pur-etale-graph-shrink-middle-pasting. This is an explicit new sub-obligation, not a claim that the Stacks source states this product-graph formula verbatim."
+   }
+  },
+  {
+   "text": "Specialize the proved private first_leg_pasting lemma to the intersection inclusion, the first intersection projection, and the common ambient open inclusion. Its first-side formula is first_side, depending only on the first graph lift and its section equation. In the generic lemma substitute the equality of first lifts, cancel the identical side comparisons, and apply inverse_triangle_extended under the common ambient proper direct image, simplifying functor associators. The graph specialization uses graphFirstLift_shrink and the two projection factorization equations; it requires no simplification of dependent pullback instances. This is exactly the asserted first-leg equation.",
+   "uses": [
+    "def-pur-etale-graph-shrink-intersection-words",
+    "def-pur-etale-graph-neighborhood-words",
+    "lem-sf-etale-locally-closed-graph-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7D (lemma-shriek-proper-and-open-compose-horizontal) and 0F7J (lemma-shriek-composition), the intersection subcalculation of the agent-stated product-graph extension in lem-pur-etale-graph-shrink-middle-pasting. This is an explicit new sub-obligation, not a claim that the Stacks source states this product-graph formula verbatim."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-shrink-intersection-words",
+  "def-pur-etale-graph-neighborhood-words",
+  "lem-pur-etale-graph-neighborhood-geometry",
+  "lem-sf-etale-locally-closed-graph-model",
+  "def-pc-fibre-product",
+  "lem-pur-etale-refinement-graph-middle-transport",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cbc-extension-zero-composition",
+  "lem-amb-natural-transformation-whisker-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y8",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7D and 0F7J; the identity-top Cartesian specialization, implemented through the existing proved generic triangle transport and the normalized unbounded-formalism open compositor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The two projections of an intersection of open neighborhoods commute with shrinking one open neighborhood and the canonical extension by zero comparisons",
+   "results": "OpenNhds.infLELeft/infLERight, Opens.infLELeft, TopCat.Sheaf.interUnionPullbackCone_snd, and ordinary sheaf restriction facts; no derived graph triangle normalization.",
+   "date": "2026-10-26",
+   "verdict": "No matching derived comparison or its specified words."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection comparison of two proper graph embeddings into open neighborhoods commutes with shrinking one open neighborhood",
+   "results": "OpenNhds.infLELeft/infLERight, Opens.infLELeft_apply_mk and local topological embedding criteria; none identifies derived triangle words.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerRight\"",
+   "results": "Generic whiskering, whisker composition and exchange identities; no scheme graph constructions.",
+   "date": "2026-10-26",
+   "verdict": "Generic algebra applies to the final factorization only."
+  },
+  {
+   "tool": "grep",
+   "query": "graphIntersection|graphNeighborhoodShrink|locallyClosedGraphMiddle (Mathlib AlgebraicGeometry and CategoryTheory)",
+   "results": "No graph-specific declarations. Mathlib pullback and functor whiskering APIs construct and compose the explicit maps. Repository searches found no existing first- or second-leg theorem.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; use the existing graph and proper/open comparison definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphShrinkMiddlePasting",
+  "date": "2026-10-26",
+  "group": "A9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument. Specifically: the two projections of the smaller graph intersection and cancellation of their common inverse triangle.",
+   "via": [
+    "lem-pur-etale-graph-shrink-middle-pasting",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphShrinkFirstLeg",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphShrinkFirstLeg.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphShrinkFirstLeg",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphShrinkFirstLeg"
+  ],
+  "statement": "theorem etaleGraphShrinkFirstLeg\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)\n    (H : EtaleGraphPresentation h) (a' : X ⟶ W) (v : W ⟶ H.U)\n    [IsProper a'] [IsOpenImmersion v] (fac : a' ≫ v = H.a) :\n    (H.graphIntersectionLeg₁ c A).hom ≫ (H.graphIntersectionShrinkIso c A a' v fac).hom =\n      (H.graphFirstShrinkIso c A a' v fac).hom ≫\n        ((H.shrink a' v fac).graphIntersectionLeg₁ c A).hom",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T022812-L-453355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261026T071554-L-3951175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

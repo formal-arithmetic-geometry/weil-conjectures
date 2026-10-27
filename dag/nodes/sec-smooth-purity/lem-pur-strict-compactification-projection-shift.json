@@ -1,0 +1,253 @@
+{
+ "id": "lem-pur-strict-compactification-projection-shift",
+ "kind": "statement",
+ "title": "Shift square of the strict-system compactification projection composite",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and put $A_n=R/t^n$, $n\\geq1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism between separated finite-type $k$-schemes, and fix a compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p_c}Y)$ with $j$ quasi-compact open and $p_c$ proper [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. On the small pro-etale sites put $B_{n,W}=(A_n)_W$. Let $\\mathscr S_W$ be the category of strict semilinear $B_{\\bullet,W}$-module systems with quotient transitions, and use its ordinary unbounded derived category [lem-coef-semilinear-derived-sections, def-weil-abstract-derived-category]. Use the simultaneous ringed-diagram-site operations $P_v$, $S_{p_c}$, $J_j$ and derived system tensor of [lem-sf-integral-compactification-system-realization], with their canonical cochain-shift comparisons, and the signed second tensor comparison of [def-pc-tensor-complex-sheaves]. Put $\\mathcal F_c=S_{p_c}J_j$. For $M\\in D(\\mathscr S_X)$ and $N\\in D(\\mathscr S_Y)$ let $\\operatorname{PF}^{\\mathrm{sys},c}_{M,N}$ be the specified composite\n$$\\mathcal F_cM\\otimes^LN\\xrightarrow{\\pi_{p_c;J_jM,N}}S_{p_c}(J_jM\\otimes^LP_{p_c}N)\\xrightarrow{S_{p_c}(\\delta)}S_{p_c}J_j(M\\otimes^LP_jP_{p_c}N)\\xrightarrow{\\sim}\\mathcal F_c(M\\otimes^LP_fN).$$\nHere $\\pi$ is the counit-defined proper projection mate of [lem-weil-pbc-ringed-projection-mate-exact], $\\delta$ is the open-unit-normalized tensor map of [lem-sf-open-tensor-normalization], and the last arrow uses canonical pullback composition; these are precisely the system counterparts of the composite in [def-exchange-projection]. Define $F_M(N)=\\mathcal F_cM\\otimes^LN$ and $H_M(N)=\\mathcal F_c(M\\otimes^LP_fN)$. For every integer $r$, their canonical composite shift comparisons satisfy\n$$s_H^{(r)}\\circ\\operatorname{PF}^{\\mathrm{sys},c}_{M,N[r]}=\\operatorname{PF}^{\\mathrm{sys},c}_{M,N}[r]\\circ s_F^{(r)}.$$\nThe proper factor and the open factor separately satisfy their corresponding shift squares, and the pullback-composition comparison commutes with shift. These are identities of derived system maps before evaluation, restriction of scalars or total inverse limit, for the quotient transitions of the same simultaneous models. The assertion includes normalized systems with bounded constructible finite-Tor levels [def-coef-normalized-dvr-tower, def-weil-finite-tor-amplitude] and does not assert invertibility of the general projection map.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Unit Step 2 (the adic stage): normalized strict-system construction, expanded proper/open projection and shift calculation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "lem-sf-integral-compactification-system-realization",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-open-tensor-normalization",
+  "def-exchange-projection",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-operation-shift-data"
+ ],
+ "proof": [
+  {
+   "text": "Work on the simultaneous ringed diagram sites. By [lem-coef-semilinear-derived-sections], $\\mathscr S_W$ is the module category over the ring object $B_{\\bullet,W}$ in the inverse-sequence topos, and $P_v\\dashv S_v$ and tensor are actual operations on its unbounded derived category. The arbitrary-ring-system clause of [lem-sf-open-tensor-normalization] supplies a small diagram-site presentation and the open-unit-normalized $\\delta$. Thus the ringed-topos theorem [lem-weil-pbc-ringed-projection-mate-exact] applies to the diagram-site morphism induced by $p_c$, with $E=J_jM$. Its $L,R,\\alpha$ are exactly $P_{p_c},S_{p_c},\\pi_{p_c;J_jM,-}$: both projection maps are the transpose of $(\\varepsilon_{J_jM}\\otimes1)\\mu$. The exact inverse image has the constant-system structural ring identification, so no extension-of-scalars flatness is needed.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map); application to the ringed diagram site"
+   }
+  },
+  {
+   "text": "The theorem [lem-weil-pbc-ringed-projection-mate-exact] gives the proper-factor square for shift $[1]$, for arbitrary $J_jM,N$, with the canonical signed tensor and adjunction shifts. It gives all integer shifts as follows. The $r=0$ square is the identity equation. Paste the $[1]$ square at $N[r]$ with the $[r]$ square at $N$; the coherent shift-addition identifications turn their composite into the $[r+1]$ square. For the negative generator, apply the $[1]$ square at $N[-1]$, shift by $[-1]$, and cancel the invertible shift comparisons, using $[1][-1]\\cong[0]$; this gives the $[-1]$ square. Iterate it for negative $r$. The canonical cochain comparisons used here are coherent: on first degree $a$ their tensor signs obey $(-1)^{(r+s)a}=(-1)^{ra}(-1)^{sa}$. This proves the proper-factor assertion without invertibility of $\\pi$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 07A4; iteration of the canonical cochain shift square"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-open-system-tensor-shift] on $\\overline X$ with first input $M$ and second input $P_{p_c}N$. It applies to the actual quotient ring system and to arbitrary unbounded inputs. It gives the open-factor square for every integer $r$, with sign $(-1)^{ra}$ on a tensor summand of first degree $a$. Precompose this square by $P_{p_c}$ and apply $S_{p_c}$; [lem-weil-pbc-commshift-nattrans-comp-whisker] gives the square for the middle arrow $S_{p_c}(\\delta)$ with precisely the composite shift comparisons.",
+   "uses": [
+    "lem-pur-open-system-tensor-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), signed second-slot square on the diagram site"
+   }
+  },
+  {
+   "text": "Let $\\theta:P_jP_{p_c}\\xrightarrow{\\sim}P_f$ be the specified compositor. By [lem-coef-semilinear-derived-sections] these inverse images are exact termwise; [lem-sf-integral-compactification-system-realization] specifies the canonical composition maps as derived classes of the maps on system complexes. On a representative $N^\\bullet$, $\\theta$ in degree $b$ is the ordinary inverse-image composition isomorphism on $N^b$. After shifting by $r$, both routes are that same component on $N^{b+r}$, and both differentials have multiplier $(-1)^r$. Hence $\\theta$ commutes with $[r]$ already on system complexes. Tensoring with $M$ gives the same sign $(-1)^{ra}$ on both routes in first degree $a$; applying $J_j$ and $S_{p_c}$ gives the square for the last arrow. These equalities pass to derived classes because the specified comparisons are those derived classes.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-integral-compactification-system-realization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), computation on representatives; Tag 07A4 tensor convention"
+   }
+  },
+  {
+   "text": "Write the three displayed factors as $a_N,b_N,c_N$ and their intermediate composite shift comparisons as $s_0,s_1,s_2,s_3$, with $s_0=s_F^{(r)}$ and $s_3=s_H^{(r)}$. The preceding squares give $s_1a_{N[r]}=a_N[r]s_0$, $s_2b_{N[r]}=b_N[r]s_1$, and $s_3c_{N[r]}=c_N[r]s_2$. Substitute in succession:\n$$s_3c_{N[r]}b_{N[r]}a_{N[r]}=c_N[r]b_N[r]a_N[r]s_0=(c_Nb_Na_N)[r]s_0.$$\nThis is the required equation since the specified system projection is $cba$. Composition and reassociation preserve the indicated shifts by [lem-weil-pbc-commshift-nattrans-comp-whisker]. Every equality above was in the system derived category, with its actual transitions. Restricting the inputs to normalized bounded constructible finite-Tor systems therefore gives the stated special case; no evaluation, restriction of scalars or total inverse limit has been used.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 and 0GL1: composition of the specified proper/open projection maps and their shift squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-open-system-tensor-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor), 0D6D (lemma-derived-pullback-composition); explicit strict-system shift assembly along purity-transport Unit Step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On the derived category of strict semilinear coefficient systems the compactification projection map formed from the proper counit mate and open extension tensor comparison commutes with integer shifts in its second input before evaluation or derived inverse limit",
+   "results": "8 hits: DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, Condensed.profiniteSolidCounit, CochainComplex.shiftEval, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+   "date": "2026-10-22",
+   "verdict": "no match: no compactification projection shift equality in the derived category of coefficient systems"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|semilinear|CommShift",
+   "results": "25 hits: Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: no compactification projection shift equality in the derived category of coefficient systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Adjunction",
+   "results": "4 hits: CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.CommShift.mk', CategoryTheory.Adjunction.CommShift.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: no compactification projection shift equality in the derived category of coefficient systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The proper direct image projection mate followed by extension by zero projection comparison on a ring diagram derived category commutes with translation before evaluation",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, PresheafOfModules.pushforward₀CompToPresheaf, CategoryTheory.Limits.π_comp_cokernelComparison, CategoryTheory.ProjectiveResolution.lift_commutes, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.ProjectiveResolution.extMk_zero, CategoryTheory.ProjectiveResolution.Hom.hom_f_zero_comp_π_f_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: no compactification projection shift equality in the derived category of coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection transformation on strict inverse systems of sheaf modules preserves the second variable shift as a derived system map",
+   "results": "8 hits: LightProfinite.proj_comp_transitionMapLE, LightProfinite.proj_comp_transitionMap, LightProfinite.proj_comp_transitionMapLE', LightProfinite.proj_comp_transitionMap', InverseSystem.piLTLim_apply, LightProfinite.transitionMapLE, InverseSystem.piLTProj_intro, InverseSystem.globalEquiv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: no compactification projection shift equality in the derived category of coefficient systems"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|extensionByZero|extension_by_zero",
+   "results": "0 hits: . Directory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: no compactification projection shift equality in the derived category of coefficient systems"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|semilinear|extensionByZero",
+   "results": "0 hits: . Directory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/adjunction or unrelated declarations do not state the strict-system compactification projection equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image projection mate followed by extension by zero tensor map on strict systems of sheaves commutes with integer translation",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.ShiftedHom.map_mk₀, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, Function.ExtendByZero.linearMap, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntMapMap₂CochainComplex, TopCat.Sheaf.pushforwardForgetIso, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/adjunction or unrelated declarations do not state the strict-system compactification projection equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Adjunction",
+   "results": "4 hits: CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.CommShift.mk', CategoryTheory.Adjunction.CommShift.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/adjunction or unrelated declarations do not state the strict-system compactification projection equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection map for compact support on the derived category of strict semilinear inverse systems commutes with shifts in its second argument",
+   "results": "8 hits: DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, CochainComplex.shiftEval, HomologicalComplex₂.ι_totalShift₂Iso_inv_f, HomotopyCategory.homologyFunctor_shiftMap, CochainComplex.liftCycles_shift_homologyπ, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/adjunction or unrelated declarations do not state the strict-system compactification projection equality"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|shift_comm",
+   "results": "25 hits: Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean. Directory: CategoryTheory/Shift",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/adjunction or unrelated declarations do not state the strict-system compactification projection equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A counit defined proper projection formula map and the open extension tensor comparison commute with translation before evaluation of an inverse ring system",
+   "results": "8 hits: Condensed.profiniteSolidCounit, LightCondensed.ihomPoints_symm_comp, Profinite.NobelingProof.GoodProducts.square_commutes, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.counitAppApp, Condensed.profiniteSolidification, CompHausLike.LocallyConstant.counitApp, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/adjunction or unrelated declarations do not state the strict-system compactification projection equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-adic-projection-shift-coherence",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 1 of thm-pur-rational-and-qbar-purity: the adic purity isomorphism for the lattice; supporting Unit Step 2 (the adic stage) of sk-thm-purity-transport, proper/open projection shift equation on the normalized system itself before reconstruction.",
+   "via": [
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-strict-compactification-projection-shift",
+  "worker": "stage1",
+  "summary": "Retained the full statement and its arbitrary unbounded strict-system domain. Reused the existing general ringed projection-mate theorem and the signed open-system tensor theorem, made the all-integer proper square and the degreewise pullback-composition square explicit, and pasted the three squares before evaluation. No new nodes or Mathlib leaves are necessary.",
+  "blueprint": "thm-pur-rational-and-qbar-purity proof Step 1 (adic purity for a lattice), expanding the normalized strict-system projection calculation supporting purity-transport Unit Step 2; all three factors of the specified projection composite are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-d0bca23a0",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-d0bca23a0 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full, plus every cited statement: the ringed projection-mate theorem, lem-pur-open-system-tensor-shift, lem-sf-open-tensor-normalization, lem-coef-semilinear-derived-sections, lem-sf-integral-compactification-system-realization, def-exchange-projection, def-pc-tensor-complex-sheaves and the commshift whisker leaf. The delivery creates no new nodes. The item's statement, stmt_deps, source and created fields are identical to the statement-only node Q138 created. Step 1: the mate theorem applies to the diagram-site morphism N×X̄_proet → N×Y_proet, presented as in lem-sf-open-tensor-normalization, with E = J_jM. Its α is the transpose of (ε⊗1)μ, which is the same map as def-exchange-projection's π. The ring map f^{-1}(A_n) → (A_n) is an isomorphism, so L is just inverse image and no flatness is needed. Step 2 extends the theorem's [1] square to all r ∈ Z: pasting for positive r, cancelling invertible comparisons for r = −1, with the sign check (−1)^{(r+s)a} = (−1)^{ra}(−1)^{sa}. Step 3: the hypotheses and domains of lem-pur-open-system-tensor-shift match (X̄, open j, (A_n) systems, second input P_{p_c}N), and the whisker leaf clauses (ii)/(iii) give the S_{p_c}(δ) square. Step 4: θ is termwise and the shifts and tensor signs agree on both routes. Step 5 is a correct three-square pasting. Edge cases checked: r = 0, r = 1 with odd a, r = −1, M = 0 or N = 0, j = id, p = id, and a non-flat transition. Route: the unit's transitive closure contains sk-thm-properbasechange and sk-prop-sf-biduality-general, so tool_uses is correctly empty. Stacks labels confirmed: 0B56/0GL1/0D6D/07A4 → sites-cohomology lines 13666/4578/3658. No SGA source is cited. No duplicate: lem-sf-finite-exchange-projection-commshift is narrower (fixed finite A, bounded ctf). Two advisory points, neither changed: Step 4 uses whisker clause (ii) without citing it, which is elementary; and the realization node's bounded-input clause is used only to name the canonical maps, while lem-coef-semilinear-derived-sections covers arbitrary inputs. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.StrictCompactificationProjectionShift",
+  "declaration": "WeilConjectures.IntegralSystemRealization.strictCompactificationProjectionShift",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.strictTensorPullShift",
+   "WeilConjectures.IntegralSystemRealization.strictProperTargetShift",
+   "WeilConjectures.IntegralSystemRealization.strictOpenTargetShift",
+   "WeilConjectures.IntegralSystemRealization.strictCompactificationPullComp",
+   "WeilConjectures.IntegralSystemRealization.strictCompactificationTargetShift",
+   "WeilConjectures.IntegralSystemRealization.strictCompactificationProjectionShift"
+  ],
+  "file": "lean/Sheaf/SixFunctors/StrictCompactificationProjectionShift.lean",
+  "statement": "theorem strictCompactificationProjectionShift (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : Compactification f) (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c) : (∀ (M : System l E X) (N : System l E Y) (r : ℤ), compactificationProjection l E o c a d M (N⟦r⟧) ≫ (strictCompactificationTargetShift l E o d M N r).hom = ((tensorShifts l E).systemRight Y r).hom.app ((Operations.push l E o d.g).obj ((Operations.shriek l E o d.i).obj M), N) ≫ (compactificationProjection l E o c a d M N)⟦r⟧') ∧ (∀ (Q : System l E d.Z) (N : System l E Y) (r : ℤ), ((properProjection l E o d.g).app Q).app (N⟦r⟧) ≫ (strictProperTargetShift l E o d.g Q N r).hom = ((tensorShifts l E).systemRight Y r).hom.app ((Operations.push l E o d.g).obj Q, N) ≫ (((properProjection l E o d.g).app Q).app N)⟦r⟧') ∧ (∀ (M : System l E X) (Q : System l E d.Z) (r : ℤ), (a.projection d.i).hom.app (M, Q⟦r⟧) ≫ (strictOpenTargetShift l E o d.i M Q r).hom = ((tensorShifts l E).systemRight d.Z r).hom.app ((Operations.shriek l E o d.i).obj M, Q) ≫ ((a.projection d.i).hom.app (M, Q))⟦r⟧') ∧ (∀ (N : System l E Y) (r : ℤ), (strictCompactificationPullComp l E o c d).hom.app (N⟦r⟧) ≫ (Functor.commShiftIso (pull l E f) (self := systemPullShift l E f) r).hom.app N = (pull l E d.i).map ((Functor.commShiftIso (pull l E d.g) (self := systemPullShift l E d.g) r).hom.app N) ≫ (Functor.commShiftIso (pull l E d.i) (self := systemPullShift l E d.i) r).hom.app ((pull l E d.g).obj N) ≫ ((strictCompactificationPullComp l E o c d).hom.app N)⟦r⟧')",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four conjuncts retain the specified three-factor system projection, both constituent squares, and the inverse-image compositor. Helpers only compose existing isomorphisms. The added landed definition dependency owns the representative-normalized system cochain and signed tensor shifts; no new notion, weaker domain, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a137a46e0",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read the item, all 14 stmt_dep records and the dependency Lean (IntegralOperationShiftData, IntegralSystemOperations, IntegralCompactificationSystemRealization, OpenSystemTensorShift, Compactification, FiniteFieldDatum). Conjunct 1 is the PF^{sys,c} shift square for all r : ℤ and arbitrary M, N, using the reused compactificationProjection (proper rightAdjointProjectionMap, then S of the open-unit-normalized a.projection, then the pinned pullComp inverse and d.comm). Conjuncts 2/3/4 give the proper square for arbitrary Q, the open δ square for arbitrary second input, and the pullback-compositor shift square. All shifts are canonical: tensorShifts.systemRight characterized on K-flat representatives with sign (-1)^{ri}, localized termwise pull/open shifts, push shift as adjunction mate, compactSupport shift as the composite instance; the helpers only compose these. No stronger hypotheses (quasi-compactness of j follows from f qc and g separated), no extra universe restriction, no IsIso claim. lean.statement is verbatim the file signature; the six declaration names are not used elsewhere in the live tree; no duplicate shift statement exists. The only node change is one added stmt_dep, the landed def-pur-integral-operation-shift-data (allowed by brief-stage2 §5; its closure does not reach this item, so no cycle). Docstrings carry the source place, blueprint id and five proof steps. Advisory: several public imports are not needed for the signature. No file changed, so no compile; relied on the worker's clean scompile and dry run."
+ }
+}

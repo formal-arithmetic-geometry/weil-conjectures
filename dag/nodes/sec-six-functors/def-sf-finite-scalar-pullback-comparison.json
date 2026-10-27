@@ -1,0 +1,126 @@
+{
+ "id": "def-sf-finite-scalar-pullback-comparison",
+ "kind": "definition",
+ "title": "Specified scalar pullback comparison and curried intrinsic tensor map",
+ "statement": "For a finite commutative ring R and scheme morphism p:X→Y, form the inverse mate alpha:EY ⋙ Lp_intrinsic* ≅ Lp_fixed* ⋙ EX of the normalized derived direct-image comparison of the specified scalar realization [def-weil-proetale-inverse-image]. The sectionwise coefficient Hom bijection identifies the two intrinsic direct-image presentations. The inverse mate is invertible along the two realization equivalences [lem-stage3-inverse-mate-equivalences]. For given representative-normalized tensor models aX and aY, curry their canonical intrinsic tensor-pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. These are precisely the original finiteScalarPullbackComparison and finiteScalarCurriedTensorPullback definitions, with unchanged bodies.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, uniqueness of adjoints; Tag 07A4, tensor-pullback comparison"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the coefficient adjunction Hom bijection and its inverse to identify the coefficient maps and hence the direct-image functors. Compose the normalized derived comparison with this functor identity and take its inverse mate.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Curry the canonical intrinsic tensor-pullback comparison and compose with the standard product-composition isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, uniqueness of adjoints; Tag 07A4, tensor-pullback comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module sheaves over a constant ring identifies derived tensor products compatibly with inverse image",
+   "results": "Eight ordinary sheaf monoidal and free condensed module results; no specified unbounded realization square.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete realization and project representative descent APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaves identifies unbounded derived tensor functors uniquely on flat K flat representatives",
+   "results": "Eight hits about flat module kernels, sheaf pushforward congruence, sheaf equality and ordinary module pullback adjunctions; no exact normalized derived tensor statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "The tensorator and its monoidal isomorphism API were found; no scalar realization compatibility theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing localization tensorator."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonNatTrans|resolvingRepresentativesFullyFaithfulWhiskering",
+   "results": "Mathlib service found no hits. Repository search located the proved total comparison and resolving restriction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use the project general constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackComparison",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-comparison",
+   "place": "Specified scalar pullback comparison and curried intrinsic tensor map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarPullbackComparison",
+  "file": "lean/Sheaf/Paper/FiniteScalarPullbackComparison.lean",
+  "declaration": "WeilConjectures.finiteScalarPullbackComparison",
+  "statement": "def finiteScalarPullbackComparison (R : Type u) [CommRing R] [Finite R]\n    {X Y : Scheme.{u}} (p : X ⟶ Y) :\n    (sfIntrinsicDerivedEquivalence Y R).functor ⋙\n        proEtaleConstantRingDerivedPullback R p ≅\n      (ProEtale.upperStar\n        (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctor ⋙\n        (sfIntrinsicDerivedEquivalence X R).functor",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarPullbackComparison",
+   "WeilConjectures.finiteScalarCurriedTensorPullback"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-93767",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261027T103523-L-1098311",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (unchanged); moved defs vs clone bodies (verbatim); 7 delivered modules + direct importer FiniteScalarProperProjectionPresentation compiled in sandbox; hole statement vs its node and the pinned definitions it uses"
+ }
+}

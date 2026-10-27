@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-cauchy-green-test-function",
+ "kind": "statement",
+ "title": "Cauchy--Green reproduction of compactly supported test functions",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and planar Lebesgue measure $dA$. Put $k(w)=1/(\\pi w)$ for $w\\neq0$ and $k(0)=0$. The function $k$ is locally integrable (its norm is integrable on every compact subset of $\\mathbf C$). For every smooth $u:\\mathbf C\\to\\mathbf C$ with compact support (the closure of its nonzero locus is compact) and every $z\\in\\mathbf C$, $$\\int_{\\mathbf C} k(z-\\zeta)\\frac{\\partial u}{\\partial\\bar\\zeta}(\\zeta)\\,dA(\\zeta)=u(z),\\qquad \\frac{\\partial}{\\partial\\bar\\zeta}=\\frac12\\left(\\frac{\\partial}{\\partial x}+i\\frac{\\partial}{\\partial y}\\right),\\quad\\zeta=x+iy.$$ The integral is absolutely convergent; the value of the integrand at $\\zeta=z$ is immaterial.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. I section 3.A, formula (3.2) and proof, printed p.21: take a disk with boundary disjoint from supp u and reverse the denominator. Corollary (3.4) identifies the locally integrable kernel."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "For $c\\in\\mathbf C$, $s>0$, put $q_{c,s}(w)=|w-c|^{-1}$ when $0<|w-c|\\leq s$, and zero otherwise. This is measurable. Apply the nonnegative polar formula to $q_{c,s}$: the Jacobian $r$ cancels $1/r$, leaving the indicator of $(0,s]\\times(-\\pi,\\pi)$, whose product Lebesgue integral is $2\\pi s$. Thus $q_{c,s}$ is integrable and $\\int q_{c,s}\\,dA=2\\pi s$. The same polar formula applied to the indicator of a centered singleton or a centered circle gives area zero (the corresponding radial set is empty or a singleton). For every compact $K\\subset\\mathbf C$, choose $s$ with $K\\subset\\{|w|\\leq s\\}$; the measurable function $1_Kk$ has norm at most $q_{0,s}/\\pi$. The majorant lemma proves its integrability, so $k$ is locally integrable. This also establishes that changing its chosen pole value changes no integral.",
+   "uses": [
+    "lem-sfb-planar-polar-integration",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21. Agent argument; source not accessible during this split."
+   }
+  },
+  {
+   "text": "Fix $u,z$ and write $g=\\partial_{\\bar\\zeta}u$. Outside the compact support $K_u$, $u$ is zero on a neighborhood, hence so are all its derivatives. Thus $g$ vanishes outside $K_u$ and, being continuous on $K_u$, is bounded there by a finite $M\\geq0$. Choose $R>0$ with $K_u\\subset\\{|\\zeta-z|<R\\}$. Define $F(\\zeta)=g(\\zeta)/(z-\\zeta)$ for $\\zeta\\ne z$ and $F(z)=0$. It is measurable and $|F|\\leq Mq_{z,R}$; the majorant lemma and step 1 imply absolute convergence of $I=\\int F\\,dA$. The integral in the statement is $I/\\pi$, and its pole value is immaterial by step 1.",
+   "uses": [
+    "lem-sfb-planar-polar-integration",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21. Agent argument; source not accessible during this split."
+   }
+  },
+  {
+   "text": "For $0<\\epsilon<R$, set $A_{\\epsilon,R}=\\{\\epsilon\\leq|\\zeta-z|\\leq R\\}$ and $v(\\zeta)=u(\\zeta)/(z-\\zeta)$ on $\\mathbf C\\setminus\\{z\\}$. This is $C^1$ on a neighborhood of the closed annulus. Direct differentiation gives $\\partial_x(z-\\zeta)^{-1}=(z-\\zeta)^{-2}$ and $\\partial_y(z-\\zeta)^{-1}=i(z-\\zeta)^{-2}$, so $\\partial_{\\bar\\zeta}(z-\\zeta)^{-1}=0$ and $\\partial_{\\bar\\zeta}v=F$. The annulus lemma applies with center $z$. Since $u=0$ on the outer circle, it yields $$A_\\epsilon:=\\int_{A_{\\epsilon,R}}F\\,dA=-\\frac1{2i}\\oint_{|\\zeta-z|=\\epsilon}\\frac{u(\\zeta)}{z-\\zeta}\\,d\\zeta.$$",
+   "uses": [
+    "lem-sfb-cauchy-green-annulus-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21. Agent argument; source not accessible during this split."
+   }
+  },
+  {
+   "text": "Parametrize the inner circle by $\\zeta=z+\\epsilon e^{it}$. Since $d\\zeta=i\\epsilon e^{it}dt$ and $z-\\zeta=-\\epsilon e^{it}$, step 3 becomes $A_\\epsilon=\\tfrac12\\int_0^{2\\pi}u(z+\\epsilon e^{it})dt$. Let $\\omega(\\epsilon)=\\sup_{0\\leq t\\leq2\\pi}|u(z+\\epsilon e^{it})-u(z)|$, finite by continuity on the compact interval. The majorant estimate for the interval measure gives $|A_\\epsilon-\\pi u(z)|\\leq\\pi\\omega(\\epsilon)$. Continuity at $z$ implies $\\omega(\\epsilon)\\to0$: given $\\delta>0$, choose $\\eta>0$ so $|w-z|<\\eta$ implies $|u(w)-u(z)|<\\delta$; then every point of a circle of radius $\\epsilon<\\eta$ satisfies this bound and $\\omega(\\epsilon)\\leq\\delta$.",
+   "uses": [
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21. Agent argument; source not accessible during this split."
+   }
+  },
+  {
+   "text": "The support of $F$ lies in $\\{|\\zeta-z|<R\\}$, and the circle and singleton exceptional sets have area zero by step 1. Splitting the absolutely convergent integral into the annulus and the inner disk therefore gives $I-A_\\epsilon=\\int_{|\\zeta-z|<\\epsilon}F\\,dA$. Its integrand, extended by zero, is bounded in norm by $Mq_{z,\\epsilon}$. The polar calculation and majorant estimate give $$|I-A_\\epsilon|\\leq M\\int q_{z,\\epsilon}\\,dA=2\\pi M\\epsilon.$$",
+   "uses": [
+    "lem-sfb-planar-polar-integration",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21. Agent argument; source not accessible during this split."
+   }
+  },
+  {
+   "text": "The triangle inequality combines steps 4 and 5 into $|I-\\pi u(z)|\\leq2\\pi M\\epsilon+\\pi\\omega(\\epsilon)$ for every $0<\\epsilon<R$. The right side tends to zero, so $I=\\pi u(z)$. Dividing by $\\pi$ proves the required reproduction identity, with the absolute convergence and pole-value assertion already proved in steps 1–2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED: I §3.A, formula (3.2) proof, printed p.21. Agent argument; source not accessible during this split."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cauchy-green-annulus-formula",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-planar-polar-integration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED: I §3.A, formula (3.2), printed p.21. Agent-written punctured-disk proof; source PDF absent locally and unavailable through attempted online fetches."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cauchy.*Green|Cauchy.*Pompeiu|locallyIntegrable.*inv|integrableOn.*inv|fundamental.*solution",
+   "results": "OK 9 hits: Mathlib/Analysis/SpecialFunctions/NonIntegrable.lean, Mathlib/Analysis/SpecialFunctions/NonIntegrable.lean, Mathlib/Analysis/SpecialFunctions/NonIntegrable.lean, Mathlib/Analysis/SpecialFunctions/NonIntegrable.lean, Mathlib/Analysis/SpecialFunctions/NonIntegrable.lean, Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean, Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean, Mathlib/Analysis/SpecialFunctions/ImproperIntegrals.lean Subdirectory: Analysis",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle integral declarations assume complex differentiability; they do not reproduce arbitrary real-smooth compactly supported functions from their antiholomorphic derivative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cauchy Pompeiu formula compact support integral antiholomorphic derivative recovers function",
+   "results": "OK 8 hits: DiffContOnCl.circleIntegral_sub_inv_smul, Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable, Complex.circleIntegral_sub_inv_smul_of_differentiable_on_off_countable, DifferentiableOn.circleIntegral_sub_inv_smul, DifferentiableOn.circleIntegral_one_div_sub_center_pow_smul, Complex.differentiable_on_off_countable_deriv_eq_smul_circleIntegral, DifferentiableOn.deriv_eq_smul_circleIntegral, HasCompactSupport",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle integral declarations assume complex differentiability; they do not reproduce arbitrary real-smooth compactly supported functions from their antiholomorphic derivative"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cauchy\"",
+   "results": "OK 12 hits: Nat.cauchy_induction', Nat.cauchy_induction, Nat.cauchy_induction_two_mul, Nat.cauchy_induction_mul, Cauchy, CauchySeq, cauchy_pure, cauchy_nhds",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle integral declarations assume complex differentiability; they do not reproduce arbitrary real-smooth compactly supported functions from their antiholomorphic derivative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compactly supported smooth function u on the complex plane the integral of d bar u divided by pi times z minus w equals u at z",
+   "results": "OK 8 hits: DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Complex.circleTransformDeriv, Complex.circleTransform, Complex.IsConservativeOn.hasDerivAt_wedgeIntegral, DiffContOnCl.circleIntegral_sub_inv_smul, Complex.integral_circleTransform, Complex.cderiv, Complex.two_pi_I_inv_smul_circleIntegral_sub_inv_smul_of_differentiable_on_off_countable",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle integral declarations assume complex differentiability; they do not reproduce arbitrary real-smooth compactly supported functions from their antiholomorphic derivative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reciprocal complex coordinate one over z is locally integrable on the plane and Cauchy Green reproduces every compactly supported smooth test function from its antiholomorphic derivative",
+   "results": "OK 8 hits: Complex.circleTransformDeriv, Complex.IsExactOn, Complex.circleTransform, Complex.HadamardThreeLines.diffContOnCl_invInterpStrip, DiffContOnCl.circleIntegral_sub_inv_smul, DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, Complex.cderiv, DifferentiableOn.isExactOn_ball",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle integral declarations assume complex differentiability; they do not reproduce arbitrary real-smooth compactly supported functions from their antiholomorphic derivative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cauchy Green formula integral of antiholomorphic derivative of a compactly supported smooth function on the complex plane equals the function value",
+   "results": "{\"t\": \"2026-10-24T02:47:15Z\", \"tool\": \"leansearch\", \"query\": \"Cauchy Green formula integral of antiholomorphic derivative of a compactly supported smooth function on the complex plane equals the function value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DiffContOnCl.circleIntegral_sub_inv_smul\", \"Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable\", \"DiffContOnCl.deriv_eq_smul_circleIntegral\", \"DifferentiableOn.deriv_eq_smul_circleIntegral\", \"DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul\", \"DifferentiableOn.circleIntegral_sub_inv_smul\", \"Complex.circleIntegral_sub_inv_smul_of_differentiable_on_off_countable\", \"Complex.differentiable_on_off_countable_deriv_eq_smul_circleIntegral\"], \"digest\": \"23144eae7fa2d05b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle formulas require complex differentiability; the convolution hits differentiate a smooth factor but do not supply reproduction by the singular kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "CauchyGreen, partialDeriv, circleIntegral, Complex",
+   "results": "{\"t\": \"2026-10-24T02:47:15Z\", \"tool\": \"loogle\", \"query\": \"CauchyGreen, partialDeriv, circleIntegral, Complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CauchyGreen'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle formulas require complex differentiability; the convolution hits differentiate a smooth factor but do not supply reproduction by the singular kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth compactly supported complex function, convolution with one over pi times z recovers the function from its bar derivative",
+   "results": "{\"t\": \"2026-10-24T02:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth compactly supported complex function, convolution with one over pi times z recovers the function from its bar derivative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.hasDerivAt_convolution_left\", \"HasCompactSupport.hasFDerivAt_convolution_right\", \"HasCompactSupport.hasFDerivAt_convolution_left\", \"HasCompactSupport.hasDerivAt_convolution_right\", \"ContDiffBump.normed_convolution_eq_right\", \"SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left\", \"MeasureTheory.hasFDerivAt_convolution_right_with_param\", \"ContDiffBump.convolution_eq_right\"], \"digest\": \"63a9198b13360bf6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle formulas require complex differentiability; the convolution hits differentiate a smooth factor but do not supply reproduction by the singular kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "Cauchy.?Green|partial.*bar|circleIntegral.*inv",
+   "results": "{\"t\": \"2026-10-24T02:47:17Z\", \"tool\": \"grep\", \"query\": \"Cauchy.?Green|partial.*bar|circleIntegral.*inv\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Complex/AbsMax.lean\", \"Mathlib/Analysis/Complex/Liouville.lean\", \"Mathlib/Analysis/Complex/RemovableSingularity.lean\", \"Mathlib/Analysis/Complex/RemovableSingularity.lean\", \"Mathlib/Analysis/Complex/MeanValue.lean\", \"Mathlib/Analysis/Complex/MeanValue.lean\", \"Mathlib/Analysis/Complex/LocallyUniformLimit.lean\", \"Mathlib/Analysis/Complex/CauchyIntegral.lean\"], \"digest\": \"7407a8c568503ab5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy circle formulas require complex differentiability; the convolution hits differentiate a smooth factor but do not supply reproduction by the singular kernel."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cauchy-transform-parameters",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: I §3.C, formula (3.14) and Cauchy--Riemann criterion, printed pp.23--24; I §3.E, Lemma (3.29), smooth scalar case p=0, printed pp.28--29. The point a is translated to 0; only local solvability, not solvability on all of U, is asserted. Supporting scalar Dolbeault step: I §8, Exercise 8.5: the partial convolution F_J=(psi f_J) star_k (1/(pi z_k)) used to remove the highest antiholomorphic differential; analytic right-inverse and parameter commutation input; supporting Cauchy--Green reproduction of compactly supported test functions",
+   "via": [
+    "lem-sfb-cauchy-transform-parameters",
+    "lem-sfb-local-scalar-dolbeault",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cauchy-green-test-function",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and blueprint ancestry. Gave a punctured-disk proof with explicit radial integral 2 pi s, the C1 annulus boundary formula, and quantitative errors 2 pi M epsilon and pi omega(epsilon). Created one statement-only annular Green input and two general Mathlib leaves for centered polar integration and integrable-majorant estimates. Demailly is WANTED and the proof is marked agent-written because the PDF was not available; no source verification is claimed. No Lean writing or compilation.",
+  "blueprint": "All six steps make precise the final supporting Cauchy–Green reproduction sentence in the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry. The inherited from.node=null and full via chain are retained; blueprint searches found no equivalent node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-78a4f8a64",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-78a4f8a64 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the three new nodes in full. The item is still unsplit in live and side-live and has no repair note, so this is an ordinary first split, not a re-split. Its statement, stmt_deps, source and blueprint are unchanged, all 5 inherited searches are kept, and proof_deps equals the union of the steps' uses. Demailly I §3.A (3.2) is not in literature/, so the proof is correctly marked WANTED with proof_origin agent; I judged it on its own merits and it is correct. Mathlib leaves checked in the source: planar-polar-integration rests on Complex.lintegral_comp_polarCoord_symm (PolarCoord.lean:214-218) and integral_comp_polarCoord_symm (207-212), target Ioi 0 × Ioo(-π,π), plus the to_additive translation lemmas lintegral/integral_add_left_eq_self (LIntegral.lean:53, Integral.lean:92). integrable-majorant-estimate rests on Integrable.mono' (Integrable.lean:101-103) and norm_integral_le_of_norm_le (Bochner/Basic.lean:947-952). Both are valid one-line specializations. The annulus node is correct by Stokes (outer circle minus inner, both counterclockwise). I tested it with v=ζ̄−c̄, where both sides equal π(R²−r²), and with v=1, where both are 0. It is strictly smaller than the item, contains no proof sketch, and its four kinds of search are recorded; Mathlib has only the rectangle and holomorphic versions. Step checks: q_{c,s} integrates to 2πs, and singletons and circles are null. |F| ≤ M q_{z,R}. ∂̄(z−ζ)^{-1} = 0 and the outer boundary term vanishes. On the inner circle v dζ = −i u dt, so A_ε = ½∫u and |A_ε − πu(z)| ≤ πω(ε). The omitted disk contributes at most 2πMε. Step 6 is genuinely elementary. Edge cases checked: empty support, z outside the support, u constant near z, and the pole value. A search of the whole DAG for polar, Green, Stokes, annulus, Pompeiu and majorant found no duplicate; cauchy-circle-formula, euclidean-jacobian-integral, integration-by-parts and continuous-compact-support-integrable all state different things. No SGA source is used, no off-unit statement is cited, tool_uses is empty, and there is no cycle. from.node is null, inherited from the ancestry and not this delivery's fault. Minor: the report mentions a citations.json that is not in the commit. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.CauchyGreenTestFunction",
+  "declaration": "Complex.cauchyGreen_test_function",
+  "file": "lean/Sheaf/Analysis/Complex/CauchyGreenTestFunction.lean",
+  "statement": "theorem cauchyGreen_test_function : LocallyIntegrable (fun w : ℂ ↦ 1 / ((Real.pi : ℂ) * w)) volume ∧ ∀ (u : ℂ → ℂ), ContDiff ℝ ∞ u → HasCompactSupport u → ∀ z : ℂ, Integrable (fun ζ : ℂ ↦ (1 / ((Real.pi : ℂ) * (z - ζ))) * ((fderiv ℝ u ζ 1 + I * fderiv ℝ u ζ I) / 2)) volume ∧ (∫ ζ : ℂ, (1 / ((Real.pi : ℂ) * (z - ζ))) * ((fderiv ℝ u ζ 1 + I * fderiv ℝ u ζ I) / 2)) = u z ∧ ∀ F : ℂ → ℂ, (∀ ζ : ℂ, ζ ≠ z → F ζ = (1 / ((Real.pi : ℂ) * (z - ζ))) * ((fderiv ℝ u ζ 1 + I * fderiv ℝ u ζ I) / 2)) → Integrable F volume ∧ (∫ ζ : ℂ, F ζ) = u z",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70cd858c1",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, def-weil-field, Lean module, report, annulus proof-dep and CutoffCauchyTransform in side-live. Only the lean field differs from live; statement verbatim. Kernel 1/((π:ℂ)w), 0 at 0 by total division; LocallyIntegrable on volume; ContDiff ℝ ∞ + HasCompactSupport; ∀ z unrestricted; ∂̄ = (fderiv 1 + I·fderiv I)/2, sign and ½ correct; Integrable, ∫ = u z (sign agrees with ∂̄(1/πz)=δ, Demailly (3.2)); pole-value clause faithful. Edge cases u=0, z off/on support, z=0 OK. No defs, sorry only, source and blueprint docstrings with 6-step plan, no Mathlib ∂̄/Pompeiu duplicate, no universes. Not recompiled per instructions; worker reports a clean compile. No findings."
+ }
+}

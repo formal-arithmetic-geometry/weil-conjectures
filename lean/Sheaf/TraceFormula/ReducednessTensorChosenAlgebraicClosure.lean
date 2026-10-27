@@ -8,7 +8,7 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
-import Sheaf.RingTheory.ReducednessTensorAlgEquiv
+import Mathlib.RingTheory.Nilpotent.Defs
 
 /-!
 # Reducedness after tensoring with a chosen algebraic closure
@@ -20,7 +20,6 @@ base field), with tensor-product transport of reducedness.
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 
 @[expose] public section
 
@@ -50,6 +49,12 @@ theorem isReduced_tensorProduct_chosen_algebraicClosure_iff
     [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] :
     IsReduced (A ⊗[k] Ω) ↔
       IsReduced (A ⊗[k] (AlgebraicClosure k)) := by
-  sorry
+  let e := Algebra.TensorProduct.congr (AlgEquiv.refl (R := k) (A₁ := A))
+    (IsAlgClosure.equiv k Ω (AlgebraicClosure k))
+  constructor
+  · intro h
+    exact isReduced_of_injective e.symm e.symm.injective
+  · intro h
+    exact isReduced_of_injective e e.injective
 
 end Algebra

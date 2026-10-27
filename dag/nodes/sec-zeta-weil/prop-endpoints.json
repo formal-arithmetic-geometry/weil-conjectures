@@ -105,7 +105,8 @@
   "def-weil-poincare-trace-cup",
   "lem-weil-perfect-pairing-line-equivariance",
   "def-weil-integral-frobenius-factor",
-  "def-weil-betti-numbers"
+  "def-weil-betti-numbers",
+  "lem-pod-weil-cohomology-base-change-frobenius-power"
  ],
  "proof_origin": {
   "by": "document",
@@ -158,7 +159,18 @@
   "def-weil-ordinary-compact-cohomology"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "prop-endpoints",
@@ -183,5 +195,31 @@
    "AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.ZetaFunction.BettiSymmetry: the blueprint item prop-endpoints's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nFix a prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, and fix an\nindeterminate $T$. For $P(T)=\\sum_r c_rT^r\\in\\mathbf Z[T]$, write\n$P^{(\\ell)}(T)=\\sum_r(c_r\\cdot1_{\\Ql})T^r$ for coefficientwise extension.\nLet\n$X_0/k_0$ be smooth, proper,\ngeometrically connected of pure dimension $d\\in\\mathbf Z_{\\geq0}$. Set\n$X=X_0\\times_{k_0}k$, and let $F$ be the\ngeometric Frobenius; for every\ninteger $i$ with $0\\leq i\\leq2d$ define\n\n$$\nV_{i,\\ell}=H^i(X,\\Ql),\\qquad\nF_{i,\\ell}=F\\vert_{V_{i,\\ell}},\\qquad\nP_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell}).\n$$\n\nThe tuples $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})$ form the\nsmooth-proper\ncohomological family, with\n$V_{i,\\ell}=H^i(X,\\Ql)$, where this is the\nordinary cohomology group.\nFor every integer $i$ with $0\\leq i\\leq2d$, let $P_i(T)\\in\\mathbf Z[T]$ be the\nnormalized integral factor with\ncoefficient extension $P_i^{(\\ell)}=P_{i,\\ell}$, and put\n$b_i=\\deg P_i$, the Betti number.\nThere are Frobenius-equivariant isomorphisms\n\n$$\nH^0(X,\\Ql)\\cong\\Ql,\n\\qquad\nH^{2d}(X,\\Ql)\\cong\\Ql(-d),\n$$\n\nwhere $\\Ql(-d)$ is the\nTate twist of degree $-d$.\nGeometric Frobenius acts by $1$ on the first space and, by the\nFrobenius-on-twists\nnormalization, by $q^d$ on the second. Consequently\n\n$$\nP_0(T)=1-T,\n\\qquad\nP_{2d}(T)=1-q^dT,\n\\qquad\nb_0=b_{2d}=1.\n$$",
+  "proof": [
+   {
+    "text": "Apply the perfect pairing in [prop-poincare-pairing] to degree zero and\ntop degree. The geometric-connectedness clause of\n[def-weil-geometric-hypotheses], together with the constant-sheaf\nfiniteness statement [prop-cohomological-finiteness], gives\n$H^0(X,\\Ql)\\cong\\Ql$. The top-degree trace isomorphism [thm-pod-trace-isomorphism] (for\n$\\Lambda=\\Ql$, $X_0$ proper), with the smooth orientation and twist\nnormalization in [prop-poincare-pairing], [def-coefficient-twists-detailed],\ngives $H^{2d}(X,\\Ql)\\cong\\Ql(-d)$. The Frobenius convention in\n[def-weil-smooth-proper-cohomological-family] gives the eigenvalue $1$\non $H^0$, while the twist action in\n[def-weil-frobenius-coefficient-twists] gives the eigenvalue $q^d$\non $\\Ql(-d)$. The factor and degree identifications in\n[prop-integral-recovery], [def-weil-betti-numbers] give the displayed\nfactors and endpoint Betti numbers.",
+    "uses": [
+     "prop-poincare-pairing",
+     "def-weil-geometric-hypotheses",
+     "prop-cohomological-finiteness",
+     "thm-pod-trace-isomorphism",
+     "def-coefficient-twists-detailed",
+     "def-weil-smooth-proper-cohomological-family",
+     "def-weil-frobenius-coefficient-twists",
+     "prop-integral-recovery",
+     "def-weil-betti-numbers"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

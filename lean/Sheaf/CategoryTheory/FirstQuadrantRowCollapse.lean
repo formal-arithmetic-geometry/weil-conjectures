@@ -7,8 +7,9 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.CategoryTheory.CanonicalFiltration
-import WeilConjectures.CategoryTheory.Abelian.Filtration
-import WeilConjectures.CategoryTheory.PBCFiltration
+import Sheaf.Algebra.Homology.SpectralPageZeroPropagation
+import Sheaf.CategoryTheory.StationaryBottomRow
+import Sheaf.CategoryTheory.FiniteFiltrationLastPiece
 
 /-!
 # Collapse of a first-quadrant spectral sequence supported in its bottom row
@@ -79,6 +80,48 @@ theorem first_quadrant_row_collapse
         IsIso (f ≫ ((F n).step n).arrow))) ∧
     ((∀ n : ℕ, 0 < n → IsZero (H n)) →
       ∀ n : ℕ, 0 < n → IsZero ((E.page 2).X (n, 0))) := by
-  sorry
+  classical
+  have hsupport := (E.spectral_page_zero_propagation.2 hfirst hrow).1
+  obtain ⟨a, ha₀, ha⟩ := (spectralSequence_stationary_bottom_row E hsupport).2.2
+  let b (n r : ℕ) : (E.page 2).X (n, 0) ⟶
+      (E.page ((r : ℤ) + 2) (by omega)).cycles (n, 0) :=
+    (a n r).hom ≫ inv ((E.page ((r : ℤ) + 2) (by omega)).iCycles (n, 0))
+      (I := (ha n r).2.2.1)
+  have hb (n r : ℕ) :
+      b n r ≫ (E.page ((r : ℤ) + 2)).iCycles (n, 0) = (a n r).hom ∧
+      b n r ≫ (E.page ((r : ℤ) + 2)).homologyπ (n, 0) ≫
+          (E.iso ((r : ℤ) + 2) ((r : ℤ) + 3) (n, 0)).hom = (a n (r + 1)).hom := by
+    let : IsIso ((E.page ((r : ℤ) + 2)).iCycles (n, 0)) := (ha n r).2.2.1
+    refine ⟨by simp [b], ?_⟩
+    have hcompat := (ha n r).2.2.2.2
+    erw [← hcompat]
+    simp [b]
+  have hfinal (n : ℕ) :
+      (∃ f : (E.page 2).X (n, 0) ⟶ ((F n).step n : C),
+        f ≫ cokernel.π (Subobject.ofLE ((F n).step ((n : ℤ) + 1))
+            ((F n).step n) ((F n).antitone_step (by omega))) =
+          (a n n).hom ≫ (conv n n 0 (by omega)).inv ∧
+        IsIso (f ≫ ((F n).step n).arrow)) ∧
+      (IsZero (H n) → IsZero ((E.page 2).X (n, 0))) := by
+    have hgr (p : ℤ) (hp : 0 ≤ p) (hpn : p < n) : IsZero ((F n).gr p) := by
+      have hpcast : (p.toNat : ℤ) = p := Int.toNat_of_nonneg hp
+      have hz := hsupport ((n : ℤ) + 2) (by omega)
+        p.toNat ((n - p.toNat : ℕ) : ℤ) (Or.inr (by omega))
+      have hz' := hz.of_iso (conv n p.toNat (n - p.toNat) (by omega))
+      simpa only [DecreasingFiltration.gradedPiece, hpcast] using hz'
+    obtain ⟨_, j, ρ, hj, hρ, hlift⟩ :=
+      (F n).finite_filtration_last_piece n (by omega) (htop n) (hbottom n) hgr
+    obtain ⟨⟨f, hf, _⟩, hdesc⟩ := hlift _ _ (a n n) (conv n n 0 (by omega))
+    obtain ⟨_, e, he, _, hz⟩ := hdesc f hf
+    have he' : e.hom = f ≫ ((F n).step n).arrow := by simpa only [hj] using he
+    refine ⟨⟨f, ?_, ?_⟩, hz⟩
+    · simpa only [hρ] using hf
+    · rw [← he']
+      infer_instance
+  refine ⟨⟨fun n r ↦ (a n r).hom, b, ?_, hb, fun n ↦ (hfinal n).1⟩, ?_⟩
+  · intro n
+    simpa using congrArg Iso.hom (ha₀ n)
+  · intro hH n hn
+    exact (hfinal n).2 (hH n hn)
 
 end CategoryTheory

@@ -1,0 +1,139 @@
+{
+ "id": "lem-pe-principal-tensor-scalar-extension",
+ "kind": "statement",
+ "title": "Natural tensor identification with the canonical scalar-extension tower",
+ "statement": "For the native internal coefficient modules of [det-pe-derived-nakayama-resolution] and the actual quotient maps and adjunctions of [sk-def-pe-derived-completion], the derived right tensor functor with the pulled-back quotient module at exponent n+1 is naturally isomorphic to derived extension along the quotient followed by exact restriction. The isomorphisms intertwine tensoring quotientStep with integralStep, and the right-unitor inverse followed by tensoring ε_Q and Q(single.map(finiteUnit)) with the actual derived scalar-extension adjunction unit. No scalar cone or cone-shift normalization is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+ },
+ "stmt_deps": [
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "Specialize KFlatScalarTower.derived_realization to the native quotient tower. Its natural_computation identifies extension/restriction with termwise tensor, using the canonical mapModComapIso for the pulled-back finite modules. The scalar comparison satisfies the specified transitions and units.",
+   "uses": [
+    "lem-pe-internal-kflat-scalar-tower-realization",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  },
+  {
+   "text": "The lax tensorator of Q followed by mapBifunctorSingle₂Iso compares the actual derived right tensor with termwise right tensor. It is natural, invertible on K-flat complexes, and intertwines coefficient morphisms. Its unit equation is lax monoidal right unitality followed by the degreewise right-unitor formula.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "def-weil-abstract-derived-category",
+    "lem-pe-internal-kflat-scalar-tower-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  },
+  {
+   "text": "On K-flat complexes compose the derived tensor comparison with the inverse scalar comparison. Cancel the scalar comparison to prove transition and unit compatibility. The inclusion of K-flat complexes followed by Q is a localization. Fully faithful precomposition descends this natural isomorphism and both equations to the derived category.",
+   "uses": [
+    "lem-pe-internal-kflat-scalar-tower-realization",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-kflat-scalar-tower-realization",
+  "sk-def-pe-derived-completion",
+  "lem-sfb-derived-monoidal",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor comparison with a K-flat scalar mapping cone commutes with signed shifts",
+   "results": "8 hits: CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.shiftIso; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CochainComplex.mappingCone.shiftTriangleIso; the localizer morphism CommShift instance; Functor.mapCochainComplexShiftIso; mappingCone.shiftTrianglehIso; mapDerivedCategoryFactors CommShift instance.",
+   "date": "2026-10-25",
+   "verdict": "Generic cone and exact-functor shifts only; no comparison normalized simultaneously at quotient transitions and units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\"",
+   "results": "12 hits: Functor.CommShift.id, CommShift, CommShift.ofIso, NatTrans.CommShift.id, isoRefl_hom, NatTrans.CommShift, Functor.CommShift.comp, NatTrans.CommShiftCore, commShiftIso, isoZero', isoZero, ofHasShiftOfFullyFaithful.",
+   "date": "2026-10-25",
+   "verdict": "Transport along a natural isomorphism is available, but not either principal quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftIso|tensorScalarConeIso|extendForgetTensorIso",
+   "results": "25 hits in Mathlib: generic induced, localized, opposite and quotient shift structures. Project source TensorMappingCone provides reductionIso, reduction_reductionIso_hom and whiskerLeft_reductionIso_hom; InternalKFlatScalarTowerRealization provides objectwise K-flat comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the project comparisons for the cone and extension arguments. Neither the natural scalar-extension identification nor signed normalization is stated by these generic Mathlib hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalReductionDerivedNormalization",
+  "date": "2026-10-25",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-derived-nakayama-first-reduction",
+   "place": "On X: the free two-term resolution computes the natural scalar cone. First-reduction proof, Cones: canonical reduction maps and signed cone shifts.",
+   "via": [
+    "lem-pe-principal-reduction-derived-normalization",
+    "lem-pe-principal-reduction-cone-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalTensorScalarExtension",
+  "file": "lean/Sheaf/Paper/PrincipalTensorScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.PrincipalNormalization.principal_tensor_scalar_extension",
+  "statement": "theorem principal_tensor_scalar_extension :\n    ∃ e : ∀ n : ℕ, DerivedNakayama.reductionFunctor l E X (n + 1) ≅\n        AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n,\n      (∀ (n : ℕ) (K : DerivedNakayama.Derived l E X),\n        (DerivedNakayama.reductionMap l E X (AdicCompletion.quotientStep l E n)).app K ≫\n            (e n).hom.app K =\n          (e (n + 1)).hom.app K ≫ AdicCompletion.integralStep l E X K n) ∧\n      (∀ (n : ℕ) (K : DerivedNakayama.Derived l E X),\n        ((ρ_ K).inv ≫ K ◁\n          (Functor.LaxMonoidal.ε DerivedCategory.Q ≫ DerivedCategory.Q.map\n            ((HomologicalComplex.single _ (.up ℤ) 0).map\n              (AdicCompletion.finiteUnit l E X n)))) ≫ (e n).hom.app K =\n          (Mod.derivedExtendMapDerivedCategoryAdjunction\n            (AdicCompletion.quotient l E X n)).unit.app K)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T095833-L-3490421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T162152-L-338856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

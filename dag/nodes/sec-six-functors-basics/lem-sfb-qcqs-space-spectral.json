@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-qcqs-space-spectral",
+ "kind": "statement",
+ "title": "The point space of a qcqs algebraic space is spectral",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Give its field-valued point classes $|X|$ the atlas topology [def-a1-space-point-topology]. Assume that every open covering of $|X|$ has a finite subcover and that the absolute diagonal $X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is quasi-compact, meaning that its pullback along every affine scheme test has quasi-compact point space. Then $|X|$ is spectral [def-weil-spectral-space]: it is quasi-compact, every nonempty irreducible closed subset has a unique generic point, quasi-compact open subsets form a basis, and the intersection of two quasi-compact open subsets is quasi-compact. No Noetherian or finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0A4G (lemma-quasi-compact-quasi-separated-spectral)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "def-weil-spectral-space",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "The assumed absolute diagonal is quasi-compact by the affine-test and representable-map equivalences of [lem-sfb-space-quasicompact-affine-tests]. Its base change along $X\\times_S X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is the relative diagonal $X\\to X\\times_S X$: on every scheme test both pullbacks impose equality of the same two maps to $X$. Quasi-compactness survives this base change by the same cited statement. Thus the relative-diagonal hypothesis of [lem-sfb-quasiseparated-space-sober] holds, and that lemma gives a unique generic point for each nonempty irreducible closed subset of $|X|$.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-quasiseparated-space-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0A4G, first two sentences; Tag 06NJ (lemma-quasi-separated-sober); Tags 03HF and 03HD for the relative-diagonal test."
+   }
+  },
+  {
+   "text": "Choose an affine scheme $U$ and a representable surjective etale map $p:U\\to X$ using [lem-sfb-qc-space-affine-etale-atlas]; the quotient topology in that statement is precisely the atlas topology here by [lem-a1-space-affine-etale-cover]. For each affine open $V\\subseteq U$, let $B_V=|p|(|V|)$. The restricted map $V\\to X$ is representable etale: on every scheme test its pullback is the restriction to an open subscheme of the etale scheme map testing $p$, hence etale by parts (1) and (2) of [lem-weil-pbc-etale-composition-cancellation]. Therefore $B_V$ is open and $|V|\\to|X|$ is continuous by [lem-a1-space-point-open-calculus]. The affine scheme $V$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so $B_V$ is quasi-compact by [lem-weil-pbc-continuous-image-quasi-compact]. For any open $O\\subseteq|X|$ and $x\\in O$, lift $x$ to $u\\in U$. Continuity makes $|p|^{-1}(O)$ open; [lem-weil-pbc-affine-opens-basis] gives an affine open $u\\in V\\subseteq|p|^{-1}(O)$. Hence $x\\in B_V\\subseteq O$, proving that these quasi-compact opens form a basis.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0A4G, affine-atlas and quasi-compact-open-basis paragraph; Tags 03H6, 03BX, 01IT, 04Z9."
+   }
+  },
+  {
+   "text": "Let $A,B\\subseteq|X|$ be quasi-compact open subsets. Cover each by the basis opens from step 2 contained in it; quasi-compactness gives finite expressions $A=\\bigcup_i B_{V_i}$ and $B=\\bigcup_j B_{W_j}$ with $V_i,W_j$ affine opens of $U$. Each $V_i\\to X$ is a quasi-compact morphism by [lem-sfb-space-affine-source-qc-separated], using exactly the absolute quasi-separatedness assumed here. Consequently its pullback along the affine scheme $W_j\\to X$ is a quasi-compact scheme $V_i\\times_XW_j$. By [lem-a1-space-point-open-calculus], every pair of points of $V_i,W_j$ with equal image in $|X|$ lifts to this fibre product. It follows, in both inclusions, that the image of $|V_i\\times_XW_j|\\to|X|$ is $B_{V_i}\\cap B_{W_j}$. This point map is continuous by the same cited node, so [lem-weil-pbc-continuous-image-quasi-compact] makes this intersection quasi-compact. Finally $A\\cap B=\\bigcup_{i,j}(B_{V_i}\\cap B_{W_j})$ is quasi-compact: an open cover restricts to each of the finitely many quasi-compact pieces; combine their finite subcovers. Empty index sets give the empty intersection case automatically.",
+   "uses": [
+    "lem-sfb-space-affine-source-qc-separated",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0A4G, final intersection paragraph, with finite affine chart images in place of affine covers of the two open subspaces; Tag 0AHR (lemma-characterize-quasi-separated)."
+   }
+  },
+  {
+   "text": "Quasi-compactness of $|X|$ is the first hypothesis. Step 1 gives sobriety, step 2 a basis of quasi-compact opens, and step 3 the intersection property. These are exactly the four conditions in [def-weil-spectral-space]. Therefore $|X|$ is spectral.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0A4G, concluding sentence; Topology Tag 08YG (definition-spectral-space)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-quasiseparated-space-sober",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-space-affine-source-qc-separated",
+  "def-weil-spectral-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0A4G (lemma-quasi-compact-quasi-separated-spectral), with its affine-chart intersection argument written using finite covers by images of affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The point topology of a quasi compact quasi separated algebraic space is spectral",
+   "results": "{\"t\": \"2026-10-23T19:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"The point topology of a quasi compact quasi separated algebraic space is spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"PrimeSpectrum.instPrespectralSpace\", \"PrimeSpectrum.instSpectralSpace\"], \"digest\": \"a4c552033a5b006a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or spectra, or assume an existing SpectralSpace instance. Read Mathlib/AlgebraicGeometry/Properties.lean:43-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; none proves spectrality of the algebraic-space atlas point topology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sober quasi compact algebraic space quasi compact open basis and intersections",
+   "results": "{\"t\": \"2026-10-23T19:32:42Z\", \"tool\": \"leanfinder\", \"query\": \"Sober quasi compact algebraic space quasi compact open basis and intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.compact_open_induction_on\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"649449d9e20e3ffb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or spectra, or assume an existing SpectralSpace instance. Read Mathlib/AlgebraicGeometry/Properties.lean:43-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; none proves spectrality of the algebraic-space atlas point topology."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace",
+   "results": "{\"t\": \"2026-10-23T19:32:43Z\", \"tool\": \"loogle\", \"query\": \"SpectralSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SpectralSpace\", \"SpectralSpace.toCompactSpace\", \"SpectralSpace.toPrespectralSpace\", \"SpectralSpace.toQuasiSeparatedSpace\", \"SpectralSpace.toQuasiSober\", \"SpectralSpace.toT0Space\", \"SpectralSpace.mk\", \"Topology.IsOpenEmbedding.spectralSpace\"], \"digest\": \"458f9e10a727a8d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or spectra, or assume an existing SpectralSpace instance. Read Mathlib/AlgebraicGeometry/Properties.lean:43-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; none proves spectrality of the algebraic-space atlas point topology."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSpace|SpectralSpace|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T19:32:43Z\", \"tool\": \"grep\", \"query\": \"spectralSpace|SpectralSpace|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"e79bbfcb25d121d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or spectra, or assume an existing SpectralSpace instance. Read Mathlib/AlgebraicGeometry/Properties.lean:43-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; none proves spectrality of the algebraic-space atlas point topology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated algebraic space has a spectral underlying topological space",
+   "results": "{\"t\": \"2026-10-23T19:32:43Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact quasi separated algebraic space has a spectral underlying topological space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpectralSpace.toQuasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.Hom.isSpectralMap\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"SpectralSpace.mk\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.quasiCompact_iff_spectral\"], \"digest\": \"2f4265bbb48c4c3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern schemes or spectra, or assume an existing SpectralSpace instance. Read Mathlib/AlgebraicGeometry/Properties.lean:43-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; none proves spectrality of the algebraic-space atlas point topology."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|spectralSpace|SpectralSpace",
+   "results": "{\"t\": \"2026-10-23T20:43:14Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|spectralSpace|SpectralSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\"], \"digest\": \"34acbf0aee1197fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes and prime spectra, or the constructor/projections of SpectralSpace and PrespectralSpace. Read Mathlib/AlgebraicGeometry/Properties.lean:39-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; neither treats algebraic spaces or proves the atlas-topology assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The point space of a quasi compact quasi separated algebraic space is sober with a compact open basis",
+   "results": "{\"t\": \"2026-10-23T20:43:14Z\", \"tool\": \"leansearch\", \"query\": \"The point space of a quasi compact quasi separated algebraic space is sober with a compact open basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuasiSober\", \"SpectralSpace.mk\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"PrespectralSpace.isBasis_opens\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"PrespectralSpace.of_isTopologicalBasis'\", \"PrimeSpectrum.instSpectralSpace\", \"QuasiSober.mk\"], \"digest\": \"7751f16c2f272197\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes and prime spectra, or the constructor/projections of SpectralSpace and PrespectralSpace. Read Mathlib/AlgebraicGeometry/Properties.lean:39-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; neither treats algebraic spaces or proves the atlas-topology assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace",
+   "results": "{\"t\": \"2026-10-23T20:43:15Z\", \"tool\": \"loogle\", \"query\": \"SpectralSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SpectralSpace\", \"SpectralSpace.toCompactSpace\", \"SpectralSpace.toPrespectralSpace\", \"SpectralSpace.toQuasiSeparatedSpace\", \"SpectralSpace.toQuasiSober\", \"SpectralSpace.toT0Space\", \"SpectralSpace.mk\", \"Topology.IsOpenEmbedding.spectralSpace\"], \"digest\": \"458f9e10a727a8d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes and prime spectra, or the constructor/projections of SpectralSpace and PrespectralSpace. Read Mathlib/AlgebraicGeometry/Properties.lean:39-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; neither treats algebraic spaces or proves the atlas-topology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space has a spectral point topology",
+   "results": "{\"t\": \"2026-10-23T20:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact quasi separated algebraic space has a spectral point topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_spectral\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\"], \"digest\": \"e81e0ddc21c5879e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes and prime spectra, or the constructor/projections of SpectralSpace and PrespectralSpace. Read Mathlib/AlgebraicGeometry/Properties.lean:39-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; neither treats algebraic spaces or proves the atlas-topology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underlying topological space of a quasi separated algebraic space has a unique generic point for every irreducible closed subset and quasi compact open intersections",
+   "results": "{\"t\": \"2026-10-23T20:43:39Z\", \"tool\": \"leanfinder\", \"query\": \"Underlying topological space of a quasi separated algebraic space has a unique generic point for every irreducible closed subset and quasi compact open intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"quasiSober_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"SpectralSpace.toQuasiSober\", \"IsIrreducible.isGenericPoint_genericPoint\"], \"digest\": \"7d3f7531f1626771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes and prime spectra, or the constructor/projections of SpectralSpace and PrespectralSpace. Read Mathlib/AlgebraicGeometry/Properties.lean:39-60 and Mathlib/Topology/Spectral/Basic.lean:32-49; neither treats algebraic spaces or proves the atlas-topology assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-constructible-affine-etale-test",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Constructibility and dimension bound for bad translate tuples. Supporting general tool: Chevalley constructibility of the image of the closed incidence space, before the fibrewise dimension estimate. This lemma supplies the comparison from affine etale chart tests to topological constructibility in the Chevalley supporting input (Stacks 0ECZ). Supporting topological input: Stacks 0A4G supplies the quasi-compact-open basis and intersection property used in both directions of 0ECZ.",
+   "via": [
+    "lem-sfb-space-constructible-affine-etale-test",
+    "lem-sfb-noetherian-space-chevalley-image",
+    "lem-sfb-translate-bad-tuple-dimension",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-qcqs-space-spectral",
+  "worker": "stage1",
+  "summary": "Read Stacks 0A4G and its geometric inputs. Reused existing sobriety, affine-atlas, affine-open-basis, point calculus and quasi-compactness nodes. Made the absolute-to-relative diagonal passage explicit. Gave the open-cover proof of finite-union quasi-compactness and the fibre-product image equality; no new nodes or statement changes. Mathlib and project searches do not supply the algebraic-space result.",
+  "blueprint": "Auxiliary input below det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded Chevalley/constructible affine-etale test chain: supplies precisely the spectral topology input at Stacks 0A4G, without altering the unit route. The latest blueprint direct-images proof (3) and latest unit were read.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic scheme/space point-topology or etale-chart tool used for the Stacks 0A4G auxiliary input; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme/space point-topology or etale-chart tool used for the Stacks 0A4G auxiliary input; no step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-60e469a0c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-60e469a0c (reviewer sub-agent of L); spot-checked: I read Stacks 0A4G and 06NJ at the source. The delivery adds no new nodes, makes no statement change and leaves stmt_deps unchanged; I made no fixes. Step 1: on any test map T→X×_S X, the absolute-diagonal pullback and the relative-diagonal pullback are both {a=b}, because X×_S X→X×_Z X is a monomorphism. With the affine-test and representable equivalence in lem-sfb-space-quasicompact-affine-tests, this gives the hypothesis of lem-sfb-quasiseparated-space-sober, whose conclusion includes uniqueness of the generic point. Step 2: lem-sfb-qc-space-affine-etale-atlas needs only that |X| is quasi-compact. Each affine open V of the atlas U maps to X by a representable étale map (open immersion composed with étale). The images |p|(|V|) are open, quasi-compact and form a basis, by the point-open calculus, 04Z9 and 01IT. No qc open of U is assumed to be affine. Step 3: lem-sfb-space-affine-source-qc-separated (08IL) applies to the étale map V_i→X with X absolutely quasi-separated, so V_i×_X W_j is a quasi-compact scheme. Surjectivity onto the fibre product of point sets (03H4) makes its image exactly B_{V_i}∩B_{W_j}, and finite unions of these are quasi-compact. Step 4 matches the four conditions of def-weil-spectral-space. Edge cases checked: empty X, empty A or B, a point, and a non-separated base S. Duplicate search: rg -L for 0A4G and spectral/space keywords finds only lem-sfb-qc-diagonal-stack-spectral, which is over a field k only, and nodes about schemes; no duplicate. Batch 5: all six flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which the item already has as a stmt_dep. They are general algebraic-space topology facts and no step of the trace formula or Poincaré duality, so I accept them. I accept the two lem-a1 tool_uses as generic tools. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQcqsSpectral",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spectralSpace_of_compact_of_absolutelyQuasiSeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQcqsSpectral.lean",
+  "statement": "theorem spectralSpace_of_compact_of_absolutelyQuasiSeparated {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) : SpectralSpace (Point X.obj.obj)",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-978724f88",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read item node, all 6 stmt_dep records, module, report, Stacks 0A4G and 0AHR, and live decls AlgebraicSpace/Point/pointTopologicalSpace/IsAbsolutelyQuasiSeparated plus Mathlib SpectralSpace. Clauses match: arbitrary Scheme.{u} base, atlas point topology, CompactSpace, IsAbsolutelyQuasiSeparated = 0AHR(3) ⇔ quasi-compact absolute diagonal (non-quasi-separated base kept), SpectralSpace = 4 spectral conditions. Node diff is lean plus added stmt_dep def-sfb-space-absolute-quasi-separated (landed owner of the hypothesis). Statement verbatim; sorry only; docstrings carry source/blueprint and 4 proof steps; imports exist; report sections present; no duplicate in Sheaf/Mathlib; edge cases (empty X, empty opens, universes) fine. No compile run: no file changed."
+ }
+}

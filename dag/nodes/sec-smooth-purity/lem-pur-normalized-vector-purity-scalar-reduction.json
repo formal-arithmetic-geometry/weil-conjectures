@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-normalized-vector-purity-scalar-reduction",
+ "kind": "statement",
+ "title": "Scalar comparison of vector integration counits",
+ "statement": "For an independently integration-normalized vector purity family, the full prescribed scalar-reduction compatibility law holds, with the canonical source comparison and actual exceptional mate. This is one compatibility clause, not the vector-bundle purity theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2; assembly step 5, normalized transpose in the published vector-purity coordinates"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-finite-reduction",
+  "def-pur-vector-purity-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Map the annihilator equation through phi. Use the uniquely pure-root-normalized finite Tate\nbalancing and its ordered shifted tensor powers. Its source maps are invertible, including nonflat\ncoefficient extensions. Compact-support scalar coherence makes the actual compact comparison\ninvertible. Scalar trace descent and projection coherence identify the integration counits.\nTranspose their equality, using the inverse of this compact comparison; its adjunct is the\npublished scalar mate. Since both purity families and the source comparison are invertible, so is\nthe scalar mate. The same equation at the coefficient unit gives the required unit compatibility.\nRank zero uses the unit maps; empty schemes have unique maps.",
+   "uses": [
+    "lem-pur-normalized-vector-purity-bundle",
+    "lem-pur-vector-trace-scalar-descent",
+    "lem-pur-etale-compact-scalar-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-vector-purity-bundle",
+  "lem-pur-vector-trace-scalar-descent",
+  "lem-pur-etale-compact-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2; the independent scalar-reduction portion of vector-bundle purity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change and direct sums and scalar extension preserve integration normalized vector bundle purity",
+   "results": "IsBaseChange.directSum; IsBaseChange.directSumPow; LinearMap.baseChangeHom; TensorProduct.AlgebraTensorModule.distribBaseChange",
+   "date": "2026-10-25",
+   "verdict": "No match: algebraic module base change does not state the compact-support trace transpose with these canonical maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transposes of compact support trace are compatible with base change direct sums and change of coefficients",
+   "results": "LinearMap.trace_baseChange; LinearMap.trace_comp_comm; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-25",
+   "verdict": "No match: generic linear traces and scalar adjunctions are not the specified ordinary-etale compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "integrationCounit|IntegrationGammaNormalized|PurityBaseChangeEquation|PurityDirectSumEquation|PurityScalarReductionEquation",
+   "results": "0 Mathlib matches for the project-specific counit and compatibility predicates",
+   "date": "2026-10-25",
+   "verdict": "No published Mathlib result uses this project-specific integration normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorBundlePurity",
+  "date": "2026-10-25",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2, assembly step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedVectorPurityScalarReduction",
+  "file": "lean/Sheaf/Paper/NormalizedVectorPurityScalarReduction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vectorIntegrationCounit_scalarReduction",
+  "statement": "theorem vectorIntegrationCounit_scalarReduction (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤))) (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] [HasCompactification (VectorBundleZeroSection.π B d F)] (γ : VectorPurityGamma A N hA B d F) (hn : VectorPurityGammaNormalized A N hN hA B hB d F γ) (hi : ∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K)) (A' : Type (u + 1)) [CommRing A'] [Finite A'] (φ : A →+* A') : PurityScalarReductionEquation φ N hN hA B hB d F γ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261025T210755-L-3589124",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261025T210755-L-3589124",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

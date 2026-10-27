@@ -12,7 +12,7 @@ import all Sheaf.Paper.ProEtaleConstantReductionModels
 import all Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.CompletedOpenKFlat
-import Sheaf.Paper.AdicPullbackPresentationTransport
+import Sheaf.Paper.AdicPullbackPresentationModels
 import all Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
@@ -35,7 +35,7 @@ set_option autoImplicit false
 
 set_option synthInstance.maxSize 2048
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 universe u
 

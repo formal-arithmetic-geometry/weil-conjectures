@@ -1,0 +1,143 @@
+{
+ "id": "def-pur-product-open-tensor-projection-data",
+ "kind": "definition",
+ "title": "Named product-open tensor and projection composites",
+ "statement": "Fix a finite commutative coefficient ring A and the ordinary unbounded pro-etale A-module derived categories. For two maps a:Xbar to B and b:Zbar to B and two opens j:X to Xbar and k:Z to Zbar, retain exactly the named products, tensor and pullback comparisons of [lem-pur-finite-open-product-swap] and proper/open mate of [lem-sf-proper-open-tensor-compatibility]. Define projection and exchange by the ordinary counit-defined maps transported by the canonical exact/left-derived comparison, openUnit by the fully faithful open adjunction unit, and the objects H,J,D,F,K,KD,m,L0 and all maps e,betaI,chi,A0,B0,d,iTensorSecond,w,nu,eta,delta,Gamma,s,GammaD,projectionTail,Psi,T,restrictNu,restrictEta,mSupport,restrictW exactly as in the displayed definitions formerly in lem-pur-product-open-tensor-projection. These definitions and their types and bodies are unchanged; the shared module makes the independent normalization steps importable without a cycle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+ },
+ "stmt_deps": [
+  "def-exchange-projection",
+  "def-pc-fibre-product",
+  "def-pur-conventions",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-pur-finite-open-product-swap",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor of an open adjunction counit with an object extended by zero is an isomorphism and restricts to the identity.",
+   "results": "Adjunction.counitAsIsoOfIso and isIso_counit_of_iso (Mathlib.CategoryTheory.Monad.Adjunction) concern an equivalence, not tensor-supported objects. Scheme.Modules.restrictFunctorId concerns ordinary scheme modules. None states the finite pro-etale derived comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open tensor product comparison on two product open immersions agrees with tensoring the open counit and restricts to the open unit.",
+   "results": "Scheme.Modules.restrictFunctorComp and restrictFunctorComp_hom_app_app concern ordinary scheme module restriction. Scheme.Pullback.tensorCongr_SpecTensorTo concerns affine scheme products, not derived open extension. No matching map identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg counit.*tensor|tensor.*counit Mathlib/CategoryTheory/Adjunction Mathlib/CategoryTheory/Monoidal; rg projectionMap lean/WeilConjectures/CategoryTheory/Adjunction; rg gamma.*natur|rho.*natur lean/Sheaf/Paper lean/WeilConjectures/SixFunctors; blueprint_refs.py search open counit tensor / supported product",
+   "results": "Mathlib Monoidal/Functor map_mu_comp_counit_app_tensor needs monoidal structures on the named functors. Existing source ProjectionMap supplies adjunct and invertibility APIs; ProperOpenProjectionMate supplies the derived-coordinate equation. The exact-pullback transport and the supported product restriction identities are not already stated. The only blueprint supported-product hit is the relative Kunneth unit, whose symmetry paragraph is the source here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductOpenTensorProjection",
+  "date": "2026-10-26",
+  "group": "H5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Named product-open tensor and projection composites in the product compactification proper-reduction calculation.",
+   "via": [
+    "lem-pur-product-open-tensor-projection",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductOpenTensorProjectionData",
+  "file": "lean/Sheaf/Paper/ProductOpenTensorProjectionData.lean",
+  "declaration": "WeilConjectures.ProductOpenTensorProjection.projection",
+  "statement": "def projection {T U : Scheme.{u}} (f : T ⟶ U) (M : FiniteD A T) (N : FiniteD A U)",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.ProductOpenTensorProjection.projection",
+   "WeilConjectures.ProductOpenTensorProjection.exchange",
+   "WeilConjectures.ProductOpenTensorProjection.openUnit",
+   "WeilConjectures.ProductOpenTensorProjection.secondProper",
+   "WeilConjectures.ProductOpenTensorProjection.rightOpenQuasiCompact",
+   "WeilConjectures.ProductOpenTensorProjection.productSquare",
+   "WeilConjectures.ProductOpenTensorProjection.iSquare",
+   "WeilConjectures.ProductOpenTensorProjection.openComposition",
+   "WeilConjectures.ProductOpenTensorProjection.qSquare",
+   "WeilConjectures.ProductOpenTensorProjection.H",
+   "WeilConjectures.ProductOpenTensorProjection.J",
+   "WeilConjectures.ProductOpenTensorProjection.D",
+   "WeilConjectures.ProductOpenTensorProjection.F",
+   "WeilConjectures.ProductOpenTensorProjection.K",
+   "WeilConjectures.ProductOpenTensorProjection.KD",
+   "WeilConjectures.ProductOpenTensorProjection.m",
+   "WeilConjectures.ProductOpenTensorProjection.L0",
+   "WeilConjectures.ProductOpenTensorProjection.e",
+   "WeilConjectures.ProductOpenTensorProjection.betaI",
+   "WeilConjectures.ProductOpenTensorProjection.chi",
+   "WeilConjectures.ProductOpenTensorProjection.A0",
+   "WeilConjectures.ProductOpenTensorProjection.B0",
+   "WeilConjectures.ProductOpenTensorProjection.d",
+   "WeilConjectures.ProductOpenTensorProjection.iTensorSecond",
+   "WeilConjectures.ProductOpenTensorProjection.w",
+   "WeilConjectures.ProductOpenTensorProjection.nu",
+   "WeilConjectures.ProductOpenTensorProjection.eta",
+   "WeilConjectures.ProductOpenTensorProjection.delta",
+   "WeilConjectures.ProductOpenTensorProjection.Gamma",
+   "WeilConjectures.ProductOpenTensorProjection.s",
+   "WeilConjectures.ProductOpenTensorProjection.GammaD",
+   "WeilConjectures.ProductOpenTensorProjection.projectionTail",
+   "WeilConjectures.ProductOpenTensorProjection.Psi",
+   "WeilConjectures.ProductOpenTensorProjection.T",
+   "WeilConjectures.ProductOpenTensorProjection.restrictNu",
+   "WeilConjectures.ProductOpenTensorProjection.restrictEta",
+   "WeilConjectures.ProductOpenTensorProjection.mSupport",
+   "WeilConjectures.ProductOpenTensorProjection.restrictW"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/3 split modules vs published ProductOpenTensorProjection.lean (verbatim def move, unchanged Assertion+theorem) and upstream properOpenProjectionMate/FiniteOpenProductSwap defs; nodes vs proof"
+ }
+}

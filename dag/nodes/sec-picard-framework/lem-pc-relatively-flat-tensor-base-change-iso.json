@@ -140,14 +140,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatTensorBaseChangeIso.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RelativelyFlatTensorBaseChangeIso.lean",
   "declaration": "AlgebraicGeometry.relativelyFlat_tensor_baseChange_iso",
   "statement": "theorem relativelyFlat_tensor_baseChange_iso\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n    (g : T ⟶ S) (E : schemeDerivedCategory X)\n    (hE : schemeDerivedQCohProperty X E) (G : CochainComplex X.Modules ℤ)\n    (hGb : ∃ b : ℤ, ∀ n : ℤ, b < n → IsZero (G.X n))\n    (hGqc : ∀ n : ℤ, (G.X n).IsQuasicoherent)\n    (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f) :\n    Nonempty ((derivedPullback g).obj\n        ((schemeDerivedDirectImage f).obj (E ⊗ DerivedCategory.Q.obj G)) ≅\n      (schemeDerivedDirectImage (pullback.snd f g)).obj\n        ((derivedPullback (pullback.fst f g)).obj E ⊗\n          DerivedCategory.Q.obj\n            (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex\n              (.up ℤ)).obj G)))",
   "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-13"
+  "by": "D3",
+  "date": "2026-10-22",
+  "note": "Restore the quarantined Sheaf path as a public compatibility re-export of the adopted source theorem. The source and archived theorem signatures are identical. The full K-flat tensor/base-change proof and every mathematical dependency are retained in the source library; no new declaration or hole is introduced."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -160,14 +161,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K1",
+  "reviewer": "C-d38c6",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T040749-L-3949137",
+  "landing": "20261022T032518-L-2034226",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: the shim's re-exported WeilConjectures theorem relativelyFlat_tensor_baseChange_iso against the node lean.statement and the quarantined signature in the change record (identical); #print axioms clean"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

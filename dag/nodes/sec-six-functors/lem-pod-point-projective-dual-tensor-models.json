@@ -1,0 +1,317 @@
+{
+ "id": "lem-pod-point-projective-dual-tensor-models",
+ "kind": "statement",
+ "title": "Finite-projective point dual and tensor models",
+ "statement": "Fix the finite-field datum with $k=\\overline{\\mathbf F}_q$ and $s=\\operatorname{Spec}k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], put $A_m=(R/\\varpi^m)_s$ for $m\\ge1$ and $B=\\varprojlim_m A_m$ [def-weil-completed-integral-coefficients]. For an $R$-module $M$ let $\\underline M$ be its constant sheaf [def-weil-pbc-constant-sheaf] and put $L(M)=B\\otimes_{\\underline R}\\underline M$, using sheaf tensor [def-pur-sheaf-tensor-product]; apply $L$ and $\\Gamma=\\Gamma(s,-)$ termwise to complexes.\nAssume $R$ is Noetherian, $L$ and $\\Gamma$ are exact, $R\\xrightarrow{\\sim}\\Gamma B$ is the constant-value map, and $L\\dashv\\Gamma$ has bijection $h\\mapsto(x\\mapsto h_s(1\\otimes x))$, with inverse $t\\mapsto(b\\otimes x\\mapsto b\\,t(x)|_U)$. Let $P$ be a bounded complex of finitely generated projective $R$-modules [def-pc-perfect-ring-complex]. Put $P^\\vee=\\operatorname{Hom}_R^\\bullet(P,R[0])$, with differential $d(f)=-(-1)^{\\deg f}f d_P$ [def-pur-hom-complex], $T=\\operatorname{Tot}(P\\otimes_RP^\\vee)$, $C=L(P)$, $J=L(P^\\vee)$ and $D=\\operatorname{Tot}(C\\otimes_BJ)$, with signed total tensor [def-pc-tensor-complex-sheaves]. Then $P^\\vee,T$ are bounded finite-projective complexes, and $P,P^\\vee,T$ have finitely generated cohomology and are K-flat over $R$ [def-pc-kflat-complex]. Each term of $C,J,D$ is a summand of a finite sum of $B$; these complexes are bounded flat-term K-flat models [def-pc-flat-sheaf-modules]. The balancing map $(b\\otimes x)\\otimes(b'\\otimes f)\\mapsto bb'\\otimes(x\\otimes f)$ gives $D\\cong L(T)$, representing $C\\otimes_B^LJ$. The four complexes $B[0],C,J,D$ belong to $D^b_c(s,R)$ [def-weil-derived-complete-integral-detailed] and have finite Tor amplitude [def-weil-finite-tor-amplitude], with one bound for every finite reduction. The adjunction units of $R[0],P,P^\\vee,T$ are quasi-isomorphisms, with their actual formula $x\\mapsto1\\otimes x$ (and $r\\mapsto r$ for $R$).\nThe chain map $J\\to\\mathcal Hom_B^\\bullet(C,B[0])$ sends $b\\otimes f$ to $(b'\\otimes x\\mapsto bb'f(x))$ and is an isomorphism. Through the canonical ordinary-Hom-to-derived-Hom map, it induces the canonical isomorphism $J\\xrightarrow{\\sim}R\\mathcal Hom_B(C,B)$ [def-pur-derived-internal-hom].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: Third paragraph, actual adjunction/evaluation comparison: returned item steps 3-4, finite-projective dual/tensor realization and canonical internal-Hom model"
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-perfect-ring-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pod-point-derived-hom-models",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-module-total-hom-complex",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-point-section-scalar-functors"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit finite-support degree isomorphisms for the scalar dual and total tensor. For each of P, its dual, and its tensor, cycles are finite as submodules of finite modules over the Noetherian ring, and homology is their quotient. Projective terms are flat; bounded-above flat complexes are K-flat.",
+   "uses": [
+    "lem-pod-bounded-finite-projective-dual-tensor",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized finite-projective extension-model theorem separately to P, its dual, and its scalar total tensor. The displayed finite-free splittings give site-flatness and independent-universe K-flatness. Apply the K-flat total tensor theorem to the first two models.",
+   "uses": [
+    "lem-pod-point-finite-projective-extension-models",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized total tensor comparison. Transport the bounds and finite-free retractions of L(T) along its inverse to the actual tensor complex D. The K-flat total tensor theorem supplies its derived tensor representation.",
+   "uses": [
+    "lem-pod-point-extension-tensor-comparison",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the perfect point extension constructibility theorem to P, the dual, and the scalar total tensor. It supplies B[0] as well. For D transport integral constructibility along the localized tensor comparison. For each finite reduction compose the representative isomorphism with that reduction of the comparison; this transports the same Tor interval.",
+   "uses": [
+    "lem-pod-point-perfect-extension-constructible",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the explicit adjunction-unit theorem termwise. The single ring complex has finite-projective terms also away from degree zero because those terms are zero. Componentwise invertibility gives an isomorphism of complexes, hence a quasi-isomorphism. Keep the generator formula and normalized rank-one coefficient isomorphism furnished by that theorem.",
+   "uses": [
+    "lem-pod-point-finite-projective-adjunction-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized ordinary finite-projective dual comparison. For the canonical derived-Hom map, each term of C is a displayed finite-free retract; internal Hom from it preserves short exact sequences. The bounded exact-term Hom theorem makes Hom(C,-) preserve the fixed K-injective-resolution quasi-isomorphism. Its localized map and the defining resolution comparison are isomorphisms, so composing with the localized ordinary dual comparison gives the final assertion.",
+   "uses": [
+    "lem-pod-point-finite-projective-dual-comparison",
+    "lem-sfb-ringed-site-finite-retract-dual-exact",
+    "lem-sfb-independent-bounded-exact-term-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pod-bounded-finite-projective-dual-tensor",
+  "lem-pod-point-extension-tensor-comparison",
+  "lem-pod-point-finite-projective-adjunction-units",
+  "lem-pod-point-finite-projective-dual-comparison",
+  "lem-pod-point-finite-projective-extension-models",
+  "lem-pod-point-perfect-extension-constructible",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sfb-independent-bounded-exact-term-hom",
+  "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "T1: explicit Lean assembly of the finite-projective point argument, with normalized tensor, ordinary dual, and completed constructibility comparisons separated. Canonical derived-Hom comparison uses bounded exact terms rather than the bounded-free model theorem. B2: the unit retains its original body and records its definitionally identical concrete point-sections codomain. Proved unit_apply and unit_isIso expose its generator formula and componentwise isomorphism criterion; the original model theorem and proof are unchanged. The proved scalar_eq exposes the equality of the generic scalar map and the recorded integral point-section map. The canonical unitIso names the same asIso construction and its unitIso_apply formula is proved from unit_apply. Its inverse is uniquely determined by the unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective complex over a complete valuation ring extends to a constructible derived complete complex on a geometric point; its dual sheaf is the ordinary Hom complex and its total tensor has the same properties",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)], K.IsKProjective\", \"doc\": \"In an abelian category, if a cochain complex $ K $ is strictly supported (via the embedding $ \\\\text{embeddingUpIntLE}(d) $) and every object $ K^i $ in the complex is projective, then $ K $ satisfies \"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Finite",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsAzumaya.mk\", \"module\": \"Mathlib.Algebra.Azumaya.Defs\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommSemiring R] [Semiring A] [Algebra R A] [toProjective : Module.Projective R A] [toFaithfulSMul : FaithfulSMul R A] [toFinite : Module.Finite R A] (bij : Function.Bijective ⇑(AlgHom.mulLeftRight R A)) : IsAzumaya R A\", \"doc\": \"\"}\n  {\"name\": \"Module.Finite.exists_comp_eq_id_of_projective\", \"module\": \"Mathlib.RingTheory.Finiteness.Projective\", \"type\": \" (R : Type u_1) (M : Type u_2) [Semiring R] [AddCommMonoid M] [Module R M] [Module.Finite R M] [Module.Projective R M] : ∃ n f g, Function.Surjective ⇑f ∧ Function.Injective ⇑g ∧ f ∘ₗ g = LinearMap.id\", \"doc\": \"\"}\n  {\"name\": \"Module.instIsReflexiveOfFiniteOfProjective\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" (R : Type u_1) (N : Type u_3) [CommSemiring R] [AddCommMonoid N] [Module R N] [Module.Finite R N] [Module.Projective R N] : Module.IsReflexive R N\", \"doc\": \"\"}\n  {\"name\": \"Module.dual_finite\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" {R : Type uR} {M : Type uM} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Finite R M] [Module.Projective R M] : Module.Finite R (Module.Dual R M)\", \"doc\": \"\"}\n  {\"name\": \"Module.dual_projective\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \" {R : Type uR} {M : Type uM} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Finite R M] [Module.Projective R M] : Module.Projective R (Module.Dual R M)\", \"doc\": \"\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : TensorProduct R (Module.Dual R M) N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"If `M` is finite projective, the natural map $M^* ⊗ N → Hom(M, N)$ is an equivalence.\"}\n  {\"name\": \"dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] [DecidableEq ι] [Fintype ι] (b : Module.Basis ι R M) : dualTensorHomEquivOfBasis b = dualTensorHomEquiv R M N\", \"doc\": \"\"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] : TensorProduct R P (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] TensorProduct R P Q\", \"doc\": \"When `M` is a finite projective module, the map `lTensorHomToHomLTensor` is an equivalence. Note\\nthat `lTensorHomEquivHomLTensor` is not defined directly in terms of\\n`lTensorHomToHomLTensor`, but the \"}\n  {\"name\": \"rTensorHomEquivHomRTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] : TensorProduct R (M →ₗ[R] P) Q ≃ₗ[R] M →ₗ[R] TensorProduct R P Q\", \"doc\": \"When `M` is a finite projective module, the map `rTensorHomToHomRTensor` is an equivalence. Note\\nthat `rTensorHomEquivHomRTensor` is not defined directly in terms of\\n`rTensorHomToHomRTensor`, but the \"}\n  {\"name\": \"TensorProduct.dualDistribEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Finite R N] [Module.Projective R M] [Module.Projective R N] : TensorProduct R (Module.Dual R M) (Module.Dual R N) ≃ₗ[R] Module.Dual R (TensorProduc\", \"doc\": \"A linear equivalence between `Dual M ⊗ Dual N` and `Dual (M ⊗ N)` when `M` and `N` are finite\\nprojective modules. It sends `f ⊗ g` to the composition of `TensorProduct.map f g` with the natural\\nisomor\"}\n  {\"name\": \"toLinearMap_dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : ↑(dualTensorHomEquiv R M N) = dualTensorHom R M N\", \"doc\": \"\"}\n  {\"name\": \"homTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R N] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] [Module.Projective R N] [Module.Finite \", \"doc\": \"When `M` and `N` are finite projective `R` modules, the map `homTensorHomMap` is an equivalence.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived_complete|homModelMap|[Pp]erfect.*[Dd]ual",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite projective complex constant sheaf realization identifies its dual with derived internal Hom and its tensor with the ordinary total tensor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) (F : Sheaf J D) :\\n  IsConstant J F ↔ L.essImage F\", \"doc\": \"A sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is constant if and only if $ F $ lies in the essential image of a functo\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"[(constantSheaf J D).Faithful] [(constantSheaf J D).Full] (F : Sheaf J D) {T : C} (hT : IsTerminal T) :\\n  IsConstant J F ↔ (IsIso <| (constantSheafAdj J D hT).counit.app F)\", \"doc\": \"Given a Grothendieck topology $J$ on a category $\\\\mathcal{C}$ with a terminal object $T$, a sheaf $F$ with values in a category $\\\\mathcal{D}$ is constant if and only if the counit of the adjunction be\"}\n  {\"name\": \"CategoryTheory.constantSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \": D ⥤ Sheaf J D\", \"doc\": \"The constant sheaf functor is constructed by composing the constant functor from the opposite category $\\\\mathcal{C}^\\\\text{op}$ to a category $\\\\mathcal{D}$ with the sheafification functor that turns pr\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) [L.Faithful] [L.Full]\\n  (F : Sheaf J D) : IsConstant J F ↔ IsIso (adj.counit.app F)\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$, $\\\\mathcal{D}$ a category, and $T \\\\in \\\\mathcal{C}$ a terminal object. For an adjunction $L \\\\dashv (\\\\text{SheafSections}(J, \\\\mathcal{D})\"}\n  {\"name\": \"FDRep.dualTensorIsoLinHom\", \"module\": \"Mathlib.RepresentationTheory.FDRep\", \"type\": \"{k G V : Type u} →\\n  [inst : Field k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : AddCommGroup V] →\\n        [inst_3 : Module k V] →\\n          [inst_4 : FiniteDimensional k V] →\\n            (ρV : Representation k G V) →\\n              (W : FDRep k G) →\\n                CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a finite-dimensional representation $ V $ of a group $ G $ over a field $ k $, and any object $ W $ in the category of finite-dimensional $ k $-representations of $ G $, there is a natural isomorp\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : constantSheaf J A ⊣ Γ J A\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] {X : A} {F : Sheaf J A} : ((Functor.const _).obj X ⟶ F.val) ≃ (X ⟶ (Γ J A).obj F)\", \"doc\": \"For any object $X$ in category $\\\\mathcal{A}$ and sheaf $F$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this establishes a natural bijection between morphisms from the constant sheaf at $X$ to $F$ a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free summands compute the sheaf internal Hom of a bounded complex and have uniform finite Tor amplitude after complete scalar realization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|dual_projective|dual_finite",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Contraction.lean\", \"line\": \"170\", \"text\": \"noncomputable def dualTensorHomEquivOfBasis : Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Contraction.lean\", \"line\": \"184\", \"text\": \"theorem coe_dualTensorHomEquivOfBasis :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Contraction.lean\", \"line\": \"185\", \"text\": \"    ⇑(dualTensorHomEquivOfBasis (N := N) b) = dualTensorHom R M N := rfl\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Contraction.lean\", \"line\": \"188\", \"text\": \"theorem dualTensorHomEquivOfBasis_apply (x : Module.Dual R M ⊗[R] N) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Contraction.lean\", \"line\": \"189\", \"text\": \"    dualTensorHomEquivOfBasis b x = dualTensorHom R M N x :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Trace.lean\", \"line\": \"163\", \"text\": \"    LinearMap.trace R M = contractLeft R M ∘ₗ (dualTensorHomEquivOfBasis b).symm.toLinearMap := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Trace.lean\", \"line\": \"184\", \"text\": \"    LinearMap.trace R M = contractLeft R M ∘ₗ (dualTensorHomEquiv R M M).symm.toLinearMap := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Trace.lean\", \"line\": \"185\", \"text\": \"  rw [dualTensorHomEquiv_eq_dualTensorHomEquivOfBasis (Module.Free.chooseBasis R M)]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Trace.lean\", \"line\": \"203\", \"text\": \"  let e := dualTensorHomEquiv R M M\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Trace.lean\", \"line\": \"211\", \"text\": \"  let e := (dualTensorHomEquiv R M M).prodCongr (dualTensorHomEquiv R N N)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"line\": \"145\", \"text\": \"instance dual_projective [Projective R M] : Projective R (Dual R M) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"line\": \"149\", \"text\": \"instance dual_finite [Projective R M] : Module.Finite R (Dual R M) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Associator.lean\", \"line\": \"313\", \"text\": \"/-- This special case is useful for describing the interplay between `dualTensorHomEquiv` and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Dd]ual|derivedComplete|derived_complete|homModelMap",
+   "results": "Hits: Mathlib/Topology/Algebra/Module/PerfectPairing.lean, Mathlib/Topology/Algebra/Module/TopDualPairing.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/Geometry/Convex/Cone/Dual.lean, Mathlib/Analysis/Convex/Cone/TensorProduct.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|dual_projective|exists_comp_eq_id_of_projective",
+   "results": "Hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral coefficient sheaf finite projective complex canonical derived internal Hom and bounded tensor realization",
+   "results": "Hits: CategoryTheory.sheafHom, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, LightCondensed.ihomPoints, SheafOfModules.hasLimit, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.Hom, SheafOfModules.IsFiniteType, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  },
+  {
+   "tool": "loogle",
+   "query": "dualTensorHomEquiv",
+   "results": "Hits: dualTensorHomEquiv, dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv, dualTensorHomEquiv_eq_dualTensorHomEquivOfBasis, toLinearMap_dualTensorHomEquiv, dualTensorHomEquiv_tmul, dualTensorHom_dualTensorHomEquiv_symm, dualTensorHomEquiv_symm_dualTensorHom, LinearMap.trace_eq_contract'",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Finite",
+   "results": "Hits: IsAzumaya.mk, Module.Finite.exists_comp_eq_id_of_projective, Module.instIsReflexiveOfFiniteOfProjective, Module.dual_finite, Module.dual_projective, dualTensorHomEquiv, dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv, lTensorHomEquivHomLTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded finite projective complexes over a complete discrete valuation ring realize as derived complete constructible sheaves on a pro etale geometric point with canonical dual and tensor models",
+   "results": "Hits: Condensed.profiniteSolid, Condensed.profiniteFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a bounded finite projective complex to an inverse limit constant ring sheaf preserves duals and gives uniformly bounded constructible finite reductions",
+   "results": "Hits: Condensed.profiniteSolid, Condensed.profiniteFree, Condensed.finFree, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.functorToPresheaves, CondensedMod.IsSolid, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondMod.ofSheafLightProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic dual and finite-splitting hits are ingredients only; condensed sheaf and general site hits do not state completed point constructibility, canonical Hom and unit comparisons together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-completed-evaluation",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph, actual adjunction/evaluation comparison: returned item steps 3-4, finite-projective dual/tensor realization and canonical internal-Hom model",
+   "via": [
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-point-projective-dual-tensor-models",
+  "worker": "stage1",
+  "summary": "Q81 checked exact project declarations, algebraic retracts, canonical unit and Hom maps, signs, all finite reductions and completeness. Reused existing general tools; no new nodes. Statement unchanged.",
+  "blueprint": "The nearest ancestor thm-pod-identification-of-the-comparison, third paragraph and concluding point-category cohomology test: steps 1-3 build the perfect dual/tensor models, steps 4-5 establish their integral point domains, step 6 normalizes the unit, step 7 gives the actual internal-Hom comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary ring K-flatness of the algebraic models; the unit does not replace this general homological tool."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Canonical finite-power and matrix formulas for extension of constant sheaves, used with the assumed L; a site-level algebraic tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "K-flatness of bounded flat completed-coefficient sheaf complexes and reductions, with no change of the unit route."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "The actual total tensor of flat-term K-flat models represents derived tensor over a ringed site."
+   },
+   {
+    "node": "lem-sfb-adic-perfect-model-complete-reduction",
+    "why": "Local derived completeness of bounded finite-projective completed scalar realizations; only its completeness assertion is used."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Actual coefficient quotients and equivalence of local derived completeness with unit-compatible quotient-tower completeness."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Canonical ordinary-Hom to derived-Hom comparison on any ringed site for a bounded-above finite-free-retract source and bounded-below target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-a768a202e",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-a768a202e (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full against every cited statement. The delivery has 0 new nodes, and the statement and stmt_deps are identical to Q07's base copy (unsplit there, empty proof). There is no re-split note and no SGA citation. Step 1: the finite-free retract follows from the splitting in def-weil-pbc-projective-module; the dual comes from 07VI; the T support is [a-b,b-a]; finiteness is 00IK under the assumed Noetherian hypothesis; K-flatness is 064K. Step 2: the beta_r and matrix clauses of lem-sfb-constant-finite-free-presentation-extension show that retracts of B^r are flat; 06YS gives K-flatness; lem-pur-kflat-total-tensor-model gives the derived tensor. Step 3: I recomputed the balancing differential (Koszul sign (-1)^i); it is genuinely elementary. Step 4: lem-sfb-adic-perfect-model-complete-reduction applies with T=s, A=R and I=(varpi), which is maximal because R is a DVR. lem-weil-pbc-constant-completion-equivalence converts local completeness to the Koszul/quotient-tower unit, whose R lim models are def-weil-derived-limit, giving the Roos form of def-weil-derived-complete. Step 5: the reductions are constant finite complexes on the single stratum, with the same support interval and Tor bound for every m, and ell is invertible on s. Step 6: I checked both composites of the unit retract inverse v eta^{-1} Gamma L(u). Step 7: I checked the dual-basis composites; both differentials are -(-1)^n(.)d; 08JI (sites-cohomology.tex l.11959) gives the hypotheses for R Hom. Edge cases checked: P=0, a single free module, a two-term sign check, non-free retracts, m=1. Batch-5 flag: lem-pod-derived-exact-square-composition is a purely formal pasting lemma for derived exact functors, and the adic-perfect completeness node is a coefficient tool. Neither is the trace formula or Poincare duality or a step of their proofs, so I accept the citation. The item's own position under thm-pod-identification-of-the-comparison is base structure. The off-unit generic tools are named in the report for the maintainer's tool_uses (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointProjectiveDualTensorModels",
+  "declaration": "WeilConjectures.PointProjectiveDualTensorModels.point_projective_dual_tensor_models",
+  "declarations": [
+   "WeilConjectures.PointProjectiveDualTensorModels.R",
+   "WeilConjectures.PointProjectiveDualTensorModels.B",
+   "WeilConjectures.PointProjectiveDualTensorModels.alpha",
+   "WeilConjectures.PointProjectiveDualTensorModels.Modules",
+   "WeilConjectures.PointProjectiveDualTensorModels.ringComplex",
+   "WeilConjectures.PointProjectiveDualTensorModels.coefficient",
+   "WeilConjectures.PointProjectiveDualTensorModels.dual",
+   "WeilConjectures.PointProjectiveDualTensorModels.tensor",
+   "WeilConjectures.PointProjectiveDualTensorModels.moduleValue",
+   "WeilConjectures.PointProjectiveDualTensorModels.sheafValue",
+   "WeilConjectures.PointProjectiveDualTensorModels.model",
+   "WeilConjectures.PointProjectiveDualTensorModels.unit",
+   "WeilConjectures.PointProjectiveDualTensorModels.tensorModel",
+   "WeilConjectures.PointProjectiveDualTensorModels.sheafQ",
+   "WeilConjectures.PointProjectiveDualTensorModels.Result",
+   "WeilConjectures.PointProjectiveDualTensorModels.point_projective_dual_tensor_models",
+   "WeilConjectures.PointProjectiveDualTensorModels.unit_apply",
+   "WeilConjectures.PointProjectiveDualTensorModels.unit_isIso",
+   "WeilConjectures.PointProjectiveDualTensorModels.scalar_eq",
+   "WeilConjectures.PointProjectiveDualTensorModels.unitIso",
+   "WeilConjectures.PointProjectiveDualTensorModels.unitIso_apply"
+  ],
+  "file": "lean/Sheaf/Paper/PointProjectiveDualTensorModels.lean",
+  "statement": "theorem point_projective_dual_tensor_models (_hl : l ≠ D.p) [IsNoetherianRing (R l E)] (_hmap : ∀ {M N : ModuleCat.{u + 1} (R l E)} (f : M ⟶ N), L.map f = eqToHom (hobj M) ≫ PointDerivedHom.extensionMorphism.{u, u} D.k (B D l E) (alpha D l E) f ≫ eqToHom (hobj N).symm) (_hexplicit : PointDerivedHom.ExplicitAdjunction.{u, u} D.k (B D l E) (alpha D l E) L hobj adj) [PreservesFiniteLimits L] [PreservesFiniteColimits L] [PreservesFiniteLimits (PointDerivedHom.sections.{u, u} D.k (B D l E) (alpha D l E))] [PreservesFiniteColimits (PointDerivedHom.sections.{u, u} D.k (B D l E) (alpha D l E))] (_hsections : Function.Bijective (PointDerivedHom.scalar.{u, u} D.k (B D l E) (alpha D l E) (op (PointDerivedHom.finalObject D.k)))) (P : CochainComplex (ModuleCat.{u + 1} (R l E)) ℤ) (a b : ℤ) (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b) (_hP : ∀ i : ℤ, Module.Projective (R l E) (P.X i) ∧ Module.Finite (R l E) (P.X i)) : Result D l E L hobj adj P",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the published PointDerivedHomModels constructions and the existing ordinary module Hom complex, now cited as landed statement dependencies. Result expands every clause, including both generator-normalized isomorphisms, all four actual adjunction units, and the canonical ordinary-to-derived Hom comparison. Aliases introduce no new coefficient, constant-module, tensor or Hom construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcf15f40b",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read the node, the 16 stmt_dep records, the source place, the module and report.md, plus the exact declarations in the side-live clone (PointDerivedHomModels, IntegralHomReductionModels homModelMap/evaluate/hom = derivedInternalHomOfUniverses, finiteTorConstructibleIntegral/sfIntegralConstructible, IsKFlatIndependentCoefficients, kFlat_total_tensor_model, siteDerivedTensorIndependentCoefficients). Node diff: only lean and stmt_deps; the two added stmt_deps are landed nodes (allowed); dependency files identical to live; lean.statement verbatim. Every hypothesis matches the node: l ≠ p, Noetherian R as the node assumes, L and Γ exact, constant-value map bijective, explicit adjunction both ways, L pinned by hobj/_hmap, bounded finite-projective P with P = 0 covered. B is the completed inverse limit. Dual differential -(-1)^n f d_P checked. Every conclusion is present and every named canonical map is pinned: bounded finite-projective dual and T, finite cohomology and K-flat over R, finite-free-summand flat K-flat models, beta fixed on generators, units with formula x ↦ 1⊗x plus kappa (r ↦ r), h fixed by bb'f(x), IsIso(Q h ≫ homModelMap), finiteTorConstructibleIntegral with one uniform Tor bound for every n+1. Docstrings carry source, blueprint id and the 7 steps; one sorry; nothing hollow; lines ≤ 100. Nothing changed, so no compile; relied on the worker's clean compile. Advisory: homModelMap and siteDerivedTensorIndependentCoefficients owners are not in stmt_deps (S2 fix cannot add them); the derived-tensor clause is an existence (Nonempty) iso, the same form as the cited lem-pur-kflat-total-tensor-model; ordinary K-flatness written out inline; instances re-added globally at end of file (pattern of the passed PointCompletedEvaluation); second reading written by the delivering worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c68ff",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261026T065140-L-2717919",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointCompletedEvaluation.Result vs published Result (scratch OldPCE copy, result_iff + towerBalancing/completedEvaluation/tau equalities, recompiled against current build incl. A7's new PointEvaluationCompletionNormalization); PointProjectiveDualTensorModels aliases vs old bodies (rfl); importer CompletedHomScalarTranspose compiled against fixed set and published parent; Lean/nodes byte-identical to c03b7 delivery"
+ }
+}

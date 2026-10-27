@@ -1,0 +1,142 @@
+{
+ "id": "lem-trf-primitive-quotient-realizations-unique",
+ "kind": "statement",
+ "title": "Uniqueness of normalized primitive quotient realizations",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Fix a prime l, finite coefficient extensions E,L and an embedding i:E -> L. Let f:X -> Y be any scheme map, S a whole-system reduction calculus on Y [lem-coef-derived-system-evaluation-calculus], and rho_X,rho_L normalized Roos models. Any two IntegralComparisonPullbackModel structures for f,S,rho_X have equal natural realization isomorphisms. Any two IntegralComparisonScalarModel structures for i,Y,S,rho_L have equal natural realization isomorphisms. All models and their representative normalizations are exactly [def-trf-integral-comparison-realization-models]. Universes are independent and no constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY and 0941; parent proof step 6, uniqueness on representative-normalized primitive comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "For a good flat-term K-flat representative P obtain C,e,kappa together with both its finite-horizontal presentation equations and its whole-system adjunction coherence from coherentPrimitiveReductionPresentation. Apply both pullback normalizations to this same coherent presentation, supplying both proofs. Compare q and q-prime by the target endomorphism q-prime inverse followed by q. At level n and degree i, every target finite pullback unit generator is the image under both q and q-prime of the same source generator: choose its input using kappa inverse and the inverse identification of evaluation sections. The q-prime inverse identity then shows that this endomorphism fixes every target unit generator. The existing restricted pullback Hom extensionality theorem applies because the completed coefficient projection is locally surjective. Extensionality over chain degrees and strict tower levels gives q-prime inverse composed with q equal to the identity, hence q=q-prime. The two normalization equations now have exactly the same postcomparison. It is invertible since its composite with either realization is the prescribed pullback comparison isomorphism; cancel it to obtain equality at Q(P).",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-coherent-primitive-reduction-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YY and 0941; parent proof step 6, uniqueness on representative-normalized primitive comparisons"
+   }
+  },
+  {
+   "text": "For scalar change choose the simultaneous finite presentation from the given calculus reductionModel and the two normalized strict tower comparisons q,q-prime. Test q-prime inverse followed by q on every target balanced tensor generator s tensor x at each level and degree. The displayed scalar normalization formulas give one common source section, formed with kappa inverse and the finite scalar-unit tensor, that q and q-prime both carry to s tensor x. The inverse identity for q-prime therefore makes this endomorphism fix all these generators. Apply the existing integralScalarReduction_hom_ext theorem, which proves equality after sheafification by tensor induction, then chain and strict tower extensionality. Thus q=q-prime. The common postcomparison, including the universal cochain counit and normalized Roos factor, is invertible because either normalization equation identifies its composite with a realization isomorphism with the prescribed scalar comparison isomorphism. Cancel that postcomparison to identify the scalar realization components at Q(P).",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YY and 0941; parent proof step 6, uniqueness on representative-normalized primitive comparisons"
+   }
+  },
+  {
+   "text": "The existing good-complex localization theorem makes the good-representative localization essentially surjective. For each ambient derived object K choose a good representative P with an isomorphism Q(P) to K. Naturality of the two pullback realizations transports their equality at Q(P) to K by cancellation of the image of this isomorphism. Do the same for the scalar realizations. Natural-transformation and natural-isomorphism extensionality give the two asserted equalities. This uses no faithfulness of finite derived evaluations and imposes no constructibility, nonzero-input, or unequal-field hypothesis.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YY and 0941; parent proof step 6, uniqueness on representative-normalized primitive comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-trf-coherent-primitive-reduction-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A6 and 0941; canonical coherent quotient presentation, then the existing generator extensionality and localization argument. Restores the quarantined proof after the whole-system normalization correction (C4, 2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived quotient system normalization is preserved by inverse image and coefficient extension and normalized realization comparisons are unique",
+   "results": "Eight unrelated hits about scheme normalization and normalized factors of monoids or ideals.",
+   "date": "2026-10-26",
+   "verdict": "No match for the actual strict quotient system categories or their specified realizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived quotient system has complete realization and an invertible reconstruction adjunction counit",
+   "results": "Generic derived adjunction unit and counit constructions (CategoryTheory.Adjunction.derived_counit and derived_unit), no specialized strict quotient systems.",
+   "date": "2026-10-26",
+   "verdict": "Generic infrastructure only; use the existing project declarations for normalized systems."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*(inverse|scalar)|normaliz.*realiz.*unique in Mathlib/AlgebraicGeometry/Sites and Mathlib/CategoryTheory/Functor/Derived; blueprint_refs normalized quotient and realization comparison uniqueness",
+   "results": "No matching Mathlib assertion; zero exact blueprint matches. Project searches find generic normalized_inverseImage_closure, coefficientExtensionReductionModel and the primitive model interfaces.",
+   "date": "2026-10-26",
+   "verdict": "The specialization and comparison glue are not already stated. These are proper parts of the existing parent argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EffectiveQuotientModelDescent",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Current blueprint literature/blueprint/latest/blueprint/sec-trace-formula/sk-thm-tf-uniform-formula/sk-thm-tf-uniform-formula.proof.md, second paragraph (lines 10--24): normalized reductions, derived integral transport and coefficient descent. Tags 06YS, 06YY and 0941; parent proof step 6, uniqueness on representative-normalized primitive comparisons. The historical ancestor is retained as required by blueprint_refs.py ancestor; via the parent lem-trf-effective-quotient-model-descent.",
+   "via": [
+    "lem-trf-effective-quotient-model-descent",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrimitiveQuotientRealizationsUnique",
+  "file": "lean/Sheaf/Paper/PrimitiveQuotientRealizationsUnique.lean",
+  "declaration": "WeilConjectures.primitiveQuotientRealizations_unique",
+  "statement": "theorem primitiveQuotientRealizations_unique\n    {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (SY : CoefficientDerivedSystemCalculus l E Y)\n    (ρX : IntegralComparisonRoosModel l E X)\n    (ρL : IntegralComparisonRoosModel l L Y)\n    (α : IntegralComparisonPullbackModel l E f SY ρX)\n    (β : IntegralComparisonScalarModel l E L ι Y SY ρL) :\n    (∀ α' : IntegralComparisonPullbackModel l E f SY ρX,\n      α'.realization = α.realization) ∧\n    (∀ β' : IntegralComparisonScalarModel l E L ι Y SY ρL,\n      β'.realization = β.realization)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T001313-L-4182980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T100235-L-4158067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

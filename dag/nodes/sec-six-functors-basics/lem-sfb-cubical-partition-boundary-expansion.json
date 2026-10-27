@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-cubical-partition-boundary-expansion",
+ "kind": "statement",
+ "title": "Signed cubical partition boundary expansion and paired faces",
+ "statement": "Let $r\\geq0$, $D=\\mathbf Z^r$, and $u_1,\\ldots,u_r$ be its ordered standard basis. For each integer $a$, let $C_a$ be the free abelian group on $[v,I]$, where $v\\in D$ and $I\\subseteq\\{1,\\ldots,r\\}$ has cardinality $a$, and zero when $a<0$ or $a>r$ [def-weil-pbc-free-module]. Use the cubical differential of [lem-sfb-integral-lattice-cubical-contraction], explicitly\n$$d[v,I]=\\sum_{i\\in I}(-1)^{\\#\\{j\\in I:j<i\\}}([v+u_i,I\\setminus\\{i\\}]-[v,I\\setminus\\{i\\}]),$$\nwith $d=0$ on $C_0$. Write $u_A=\\sum_{a\\in A}u_a$, $\\epsilon(A,C)=(-1)^{\\#\\{(a,c)\\in A\\times C:c<a\\}}$, and in the total graded tensor group $T_n=\\bigoplus_{a+b=n}C_a\\otimes_{\\mathbf Z}C_b$ put\n$$d_T(x\\otimes y)=dx\\otimes y+(-1)^a x\\otimes dy\\quad(x\\in C_a),\\qquad P(v,I)=\\sum_{A\\sqcup C=I}\\epsilon(A,C)[v,A]\\otimes[v+u_A,C].$$\nHere the tensors and chain-complex terminology are those of [def-weil-pbc-module-tensor-product] and [def-weil-pbc-module-chain-complex-homology]. For $i\\in I$ and an ordered disjoint partition $B\\sqcup C=I\\setminus\\{i\\}$ define\n$$p=\\#\\{b\\in B:b<i\\},\\quad q=\\#\\{c\\in C:c<i\\},\\quad t=\\#\\{b\\in B:i<b\\},\\quad N=\\#\\{(b,c)\\in B\\times C:c<b\\}.$$\nThe first-factor face indexed by $i$ in the summand $(B\\cup\\{i\\},C)$ has coefficient\n$$(-1)^{N+q+p}=s,\\qquad s=(-1)^{p+q}\\epsilon(B,C),$$\nand the second-factor face indexed by $i$ in $(B,C\\cup\\{i\\})$, including the tensor differential sign, has coefficient\n$$(-1)^{N+t+|B|+q}=s.$$\nMore precisely these two face contributions to $d_TP(v,I)$ are respectively\n$$s\\bigl([v+u_i,B]\\otimes[v+u_B+u_i,C]-[v,B]\\otimes[v+u_B+u_i,C]\\bigr)$$\nand\n$$s\\bigl([v,B]\\otimes[v+u_B+u_i,C]-[v,B]\\otimes[v+u_B,C]\\bigr).$$\nThe indexing of all first-factor faces by $(i,B,C)$ and all second-factor faces by $(i,B,C)$ is bijective in each case. The explicit boundary expansion is:\n$$d_TP(v,I)=\\sum_{i\\in I}\\ \\sum_{B\\sqcup C=I\\setminus\\{i\\}}(-1)^{\\#\\{j\\in I:j<i\\}}\\epsilon(B,C)\\bigl([v+u_i,B]\\otimes[v+u_i+u_B,C]-[v,B]\\otimes[v+u_B,C]\\bigr).$$\nFor $I=\\varnothing$ this is the equality $0=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Integral cubical chain diagonal, original proof steps 2–3: inversion counts, paired tensor faces, and cancellation to the explicit outer-face sum. Agent-written algebraic expansion below paragraph (3); exact external reference WANTED. See the retained original proof in the delivery report."
+ },
+ "stmt_deps": [
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-cubical-partition-differential-faces] to expand the total differential into the sum, over i in I and B subset I.erase i, of the first face for (insert i B,C) and the second face for (B,insert i C), where C=I.erase i\\B. This retains all four tensor terms and their original coefficients.",
+   "uses": [
+    "lem-sfb-cubical-partition-differential-faces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+   }
+  },
+  {
+   "text": "The first indexing map is $(A,C,i)\\mapsto(i,A\\setminus\\{i\\},C)$, with inverse $(i,B,C)\\mapsto(B\\cup\\{i\\},C,i)$. The second is $(A,C,i)\\mapsto(i,A,C\\setminus\\{i\\})$, with inverse $(i,B,C)\\mapsto(B,C\\cup\\{i\\},i)$. Disjointness gives $i\\notin B\\cup C$, so removing after inserting, and inserting after removing, recover both indices. Thus each map is a bijection onto the triples in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: route location only. Agent-written finite cubical calculation, expanding original steps 2–3 of lem-sfb-integral-cubical-chain-diagonal; no external proof is claimed."
+   }
+  },
+  {
+   "text": "Fix such a triple. Counting the elements below $i$ gives $\\#\\{j\\in I:j<i\\}=p+q$, and splitting $B$ below and above $i$ gives $|B|=p+t$. The inversion pairs for $(B\\cup\\{i\\},C)$ consist of the $N$ old pairs and the $q$ pairs $(i,c)$ with $c<i$. The position of $i$ in $B\\cup\\{i\\}$ is $p$. Hence the first-face coefficient is $(-1)^{N+q+p}=(-1)^{p+q}\\epsilon(B,C)=s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: route location only. Agent-written finite cubical calculation, expanding original steps 2–3 of lem-sfb-integral-cubical-chain-diagonal; no external proof is claimed."
+   }
+  },
+  {
+   "text": "For $(B,C\\cup\\{i\\})$ the new inversion pairs are precisely the $t$ pairs $(b,i)$ with $i<b$. The position of $i$ in $C\\cup\\{i\\}$ is $q$, and the tensor sign is $(-1)^{|B|}$. Thus the second coefficient is $(-1)^{N+t+|B|+q}=(-1)^{N+p+q+2t}=s$, since $(-1)^{2t}=1$ in $\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: route location only. Agent-written finite cubical calculation, expanding original steps 2–3 of lem-sfb-integral-cubical-chain-diagonal; no external proof is claimed."
+   }
+  },
+  {
+   "text": "Unfold the definitions of the two signed faces. In the first face, the sum of directions of insert i B is u_i+u_B because i is absent from B; removing i recovers B. In the second face, removing i from insert i C recovers C. Substitute the two coefficient equalities already proved. Associativity and commutativity of lattice addition identify their middle tensor. This gives the two displayed local face identities, and their sum is s times (x-y)+(y-z)=x-z.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: route location only. Agent-written finite cubical calculation, expanding original steps 2–3 of lem-sfb-integral-cubical-chain-diagonal; no external proof is claimed."
+   }
+  },
+  {
+   "text": "For each B subset I.erase i set C=I.erase i\\B. It is disjoint from B with union I.erase i, so apply the proved local sign and face identities. Rewrite the sum of its two scalar multiples as the scalar multiple of the sum. The identical middle tensors cancel by (x-y)+(y-z)=x-z. Filter the disjoint union B union C=I.erase i below i: because i<i is false, its cardinality is the cardinality of I filtered below i. Thus p+q is the position of i in I. Commutativity and associativity of lattice addition put the translated vertex in the requested order. Equality of summands proves equality of the two finite sums. For I empty the resulting outer sum is empty, giving the final zero clause without any separate differential calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cubical-partition-differential-faces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is the route location only. Agent-written finite calculation, steps 1–2 of lem-sfb-cubical-partition-boundary-expansion, originally integral cubical diagonal proof steps 2–3. Exact external reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Expansion of the tensor boundary of a signed cubical partition sum groups into cancelling interior faces and the outer translated faces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.upperSubLower\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"{n : ℕ} →\\n  {G : Type u} →\\n    [inst : AddCommGroup G] →\\n      (I₀ : BoxIntegral.Box (Fin (n + 1))) →\\n        (i : Fin (n + 1)) →\\n          (f : ℝ → BoxIntegral.Box (Fin n) → G) →\\n            (fb : ↑(Set.Icc (I₀.lower i) (I₀.upper i)) → BoxIntegral.BoxAdditiveMap (Fin n) G ↑(I₀.face i)) →\\n          \", \"doc\": \"Given an additive commutative group $ G $, a box $ I_0 $ in $ (n+1) $-dimensional space, a coordinate index $ i $, and functions $ f : \\\\mathbb{R} \\\\to \\\\text{Box}(\\\\Fin(n)) \\\\to G $ and $ fb : [I_0.lower(\"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.upperSubLower_apply\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"∀ {n : ℕ} {G : Type u} [inst : AddCommGroup G] (I₀ : BoxIntegral.Box (Fin (n + 1))) (i : Fin (n + 1))\\n  (f : ℝ → BoxIntegral.Box (Fin n) → G)\\n  (fb : ↑(Set.Icc (I₀.lower i) (I₀.upper i)) → BoxIntegral.BoxAdditiveMap (Fin n) G ↑(I₀.face i))\\n  (hf : ∀ (x : ℝ) (hx : x ∈ Set.Icc (I₀.lower i) (I₀.upper i\", \"doc\": \"For an additive commutative group $G$, a box $I_0$ in $(n+1)$-dimensional space, coordinate index $i$, and functions $f : \\\\mathbb{R} \\\\to \\\\text{Box}(\\\\Fin(n)) \\\\to G$ and $fb : [I_0.lower(i), I_0.upper(i\"}\n  {\"name\": \"Cube.insertAt_boundary\", \"module\": \"Mathlib/Topology/Homotopy/HomotopyGroup\", \"type\": \"∀ {N : Type u_1} [inst : DecidableEq N] (i : N) {t₀ : ↑unitInterval} {t : { j // j ≠ i } → ↑unitInterval},\\n  (t₀ = 0 ∨ t₀ = 1) ∨ t ∈ Cube.boundary { j // j ≠ i } → (Cube.insertAt i) (t₀, t) ∈ Cube.boundary N\", \"doc\": \"For any index $i$ in an $N$-dimensional cube, if a point $t_0$ is either 0 or 1, or if a point $t$ lies in the boundary of the $(N-1)$-dimensional cube excluding the $i$-th coordinate, then inserting \"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.map_split_add\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"∀ {ι : Type u_1} {M : Type u_2} [inst : AddCommMonoid M] {I₀ : WithTop (BoxIntegral.Box ι)} {I : BoxIntegral.Box ι}\\n  (f : BoxIntegral.BoxAdditiveMap ι M I₀),\\n  ↑I ≤ I₀ → ∀ (i : ι) (x : ℝ), Option.elim' 0 (⇑f) (I.splitLower i x) + Option.elim' 0 (⇑f) (I.splitUpper i x) = f I\", \"doc\": \"For any additive box map $ f $ defined on boxes within $ I_0 $, if $ I $ is a box satisfying $ I \\\\leq I_0 $, then splitting $ I $ along coordinate $ i $ at real number $ x $ produces two sub-boxes $ I\"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.sum_partition_boxes'\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"∀ {ι : Type u_3} {M : Type u_4} [inst : AddCommMonoid M] {I : WithTop (BoxIntegral.Box ι)}\\n  (self : BoxIntegral.BoxAdditiveMap ι M I) (J : BoxIntegral.Box ι),\\n  ↑J ≤ I → ∀ (π : BoxIntegral.Prepartition J), π.IsPartition → ∑ Ji ∈ π.boxes, self.toFun Ji = self.toFun J\", \"doc\": \"For any additive box map $ f $ defined on an extended box $ I $, and for any box $ J $ contained in $ I $, if $ \\\\pi $ is a partition of $ J $ (i.e., every point in $ J $ lies in at least one subbox of\"}\n  {\"name\": \"BoxIntegral.BoxAdditiveMap.sum_partition_boxes\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Additive\", \"type\": \"∀ {ι : Type u_1} {M : Type u_2} [inst : AddCommMonoid M] {I₀ : WithTop (BoxIntegral.Box ι)} {I : BoxIntegral.Box ι}\\n  (f : BoxIntegral.BoxAdditiveMap ι M I₀),\\n  ↑I ≤ I₀ → ∀ {π : BoxIntegral.Prepartition I}, π.IsPartition → ∑ J ∈ π.boxes, f J = f I\", \"doc\": \"For an additive box map $ f $ defined on a box $ I_0 $, if $ I $ is a subbox of $ I_0 $ and $ \\\\pi $ is a partition of $ I $, then the sum of $ f $ evaluated on each subbox $ J $ in $ \\\\pi $ equals $ f \"}\n  {\"name\": \"SSet.boundary_eq_iSup\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Boundary\", \"type\": \"∀ (n : ℕ), SSet.boundary n = ⨆ i, SSet.stdSimplex.face {i}ᶜ\", \"doc\": \"The boundary of the standard $n$-simplex $\\\\Delta[n]$ in simplicial sets is equal to the supremum (union) over all $i \\\\in \\\\{0, 1, \\\\dots, n\\\\}$ of the faces obtained by removing the $i$-th vertex, denote\"}\n  {\"name\": \"Rep.standardComplex.d_of\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} {n : ℕ} (c : Fin (n + 1) → G),\\n  (Rep.standardComplex.d k G n) (Finsupp.single c 1) = ∑ p, Finsupp.single (c ∘ p.succAbove) ((-1) ^ ↑p)\", \"doc\": \"For any function $ c : \\\\text{Fin}(n+1) \\\\to G $, the differential $ d_n $ applied to the basis element corresponding to $ c $ is the sum over all $ p \\\\in \\\\text{Fin}(n+1) $ of $ (-1)^p $ multiplied by t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: box integrals, topological cube boundaries, bar-resolution faces and abstract total-complex signs do not state the cubical partition boundary expansion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ordered coordinate subsets the inversion shuffle signs of deleting a direction in either tensor factor coincide after the Koszul sign",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlternatingMap.domCoprod.summand_add_swap_smul_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/Alternating/DomCoprod\", \"type\": \"∀ {ιa : Type u_1} {ιb : Type u_2} [inst : Fintype ιa] [inst_1 : Fintype ιb] {R' : Type u_3} {Mᵢ : Type u_4}\\n  {N₁ : Type u_5} {N₂ : Type u_6} [inst_2 : CommSemiring R'] [inst_3 : AddCommGroup N₁] [inst_4 : Module R' N₁]\\n  [inst_5 : AddCommGroup N₂] [inst_6 : Module R' N₂] [inst_7 : AddCommMonoid Mᵢ]\", \"doc\": \"For alternating maps $ a $ and $ b $ over finite index sets $ \\\\iota_a $ and $ \\\\iota_b $, if two inputs $ v_i = v_j $ at distinct indices $ i \\\\neq j $ in the disjoint union $ \\\\iota_a \\\\sqcup \\\\iota_b $ a\"}\n  {\"name\": \"AlternatingMap.domCoprod.summand_mk''\", \"module\": \"Mathlib/LinearAlgebra/Alternating/DomCoprod\", \"type\": \"∀ {ιa : Type u_1} {ιb : Type u_2} [inst : Fintype ιa] [inst_1 : Fintype ιb] {R' : Type u_3} {Mᵢ : Type u_4}\\n  {N₁ : Type u_5} {N₂ : Type u_6} [inst_2 : CommSemiring R'] [inst_3 : AddCommGroup N₁] [inst_4 : Module R' N₁]\\n  [inst_5 : AddCommGroup N₂] [inst_6 : Module R' N₂] [inst_7 : AddCommMonoid Mᵢ]\", \"doc\": \"Given alternating maps $ a $ and $ b $ over finite index sets $ \\\\iota_a $ and $ \\\\iota_b $, this constructs an alternating multilinear map over the disjoint union $ \\\\iota_a \\\\sqcup \\\\iota_b $, taking val\"}\n  {\"name\": \"AlternatingMap.domCoprod.summand\", \"module\": \"Mathlib/LinearAlgebra/Alternating/DomCoprod\", \"type\": \"{ιa : Type u_1} →\\n  {ιb : Type u_2} →\\n    [Fintype ιa] →\\n      [Fintype ιb] →\\n        {R' : Type u_3} →\\n          {Mᵢ : Type u_4} →\\n            {N₁ : Type u_5} →\\n              {N₂ : Type u_6} →\\n                [inst : CommSemiring R'] →\\n                  [inst_1 : AddCommGroup N₁] →\\n                \", \"doc\": \"Given alternating maps $ a $ and $ b $ over finite index sets $ \\\\iota_a $ and $ \\\\iota_b $, this constructs an alternating multilinear map over the disjoint union $ \\\\iota_a \\\\sqcup \\\\iota_b $, taking val\"}\n  {\"name\": \"ComplexShape.σ_ε₁\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} {c₁ : ComplexShape I₁} (c₂ : ComplexShape I₂)\\n  (c₁₂ : ComplexShape I₁₂) [inst : TotalComplexShape c₁ c₂ c₁₂] [inst_1 : TotalComplexShape c₂ c₁ c₁₂]\\n  [inst_2 : TotalComplexShapeSymmetry c₁ c₂ c₁₂] {i₁ i₁' : I₁},\\n  c₁.Rel i₁ i₁' → ∀ (i₂ : I₂), c₁.σ \", \"doc\": \"For indices $i_1, i_1' \\\\in I_1$ with a relation $h_1$ in complex shape $c_1$ and $i_2 \\\\in I_2$, the product of the symmetry sign function $\\\\sigma$ and the sign function $\\\\varepsilon_1$ equals the prod\"}\n  {\"name\": \"ComplexShape.σ_ε₂\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} (c₁ : ComplexShape I₁) {c₂ : ComplexShape I₂}\\n  (c₁₂ : ComplexShape I₁₂) [inst : TotalComplexShape c₁ c₂ c₁₂] [inst_1 : TotalComplexShape c₂ c₁ c₁₂]\\n  [inst_2 : TotalComplexShapeSymmetry c₁ c₂ c₁₂] (i₁ : I₁) {i₂ i₂' : I₂},\\n  c₂.Rel i₂ i₂' → c₁.σ c₂ \", \"doc\": \"For complex shapes $c_1$ on index set $I_1$, $c_2$ on $I_2$, and $c_{12}$ on product index $I_{12}$, the symmetry sign function $\\\\sigma$ satisfies the identity $\\\\sigma(i_1, i_2) \\\\cdot \\\\varepsilon_2(i_\"}\n  {\"name\": \"TotalComplexShapeSymmetry.σ_ε₁\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂}\\n  {c₁₂ : ComplexShape I₁₂} {inst : TotalComplexShape c₁ c₂ c₁₂} {inst_1 : TotalComplexShape c₂ c₁ c₁₂}\\n  [self : TotalComplexShapeSymmetry c₁ c₂ c₁₂] {i₁ i₁' : I₁},\\n  c₁.Rel i₁ i₁' →\\n    ∀ (i₂ : I₂),\\n   \", \"doc\": \"For any indices $i_1, i_1' \\\\in I_1$ and $i_2 \\\\in I_2$ with $c_1$-related indices $i_1$ and $i_1'$, the symmetry sign function $\\\\sigma$ satisfies the relation $\\\\sigma(i_1, i_2) \\\\cdot \\\\varepsilon_1(i_1,\"}\n  {\"name\": \"TotalComplexShapeSymmetry.σ_ε₂\", \"module\": \"Mathlib/Algebra/Homology/ComplexShapeSigns\", \"type\": \"∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₁₂ : Type u_4} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂}\\n  {c₁₂ : ComplexShape I₁₂} {inst : TotalComplexShape c₁ c₂ c₁₂} {inst_1 : TotalComplexShape c₂ c₁ c₁₂}\\n  [self : TotalComplexShapeSymmetry c₁ c₂ c₁₂] (i₁ : I₁) {i₂ i₂' : I₂},\\n  c₂.Rel i₂ i₂' →\\n    TotalC\", \"doc\": \"For symmetric total complex shapes defined by $(c_1, c_2, c_{12})$ and $(c_2, c_1, c_{12})$, the sign function $\\\\sigma$ and complex shape sign functions $\\\\varepsilon_1, \\\\varepsilon_2$ satisfy: wheneve\"}\n  {\"name\": \"AlternatingMap.domCoprod.summand_eq_zero_of_smul_invariant\", \"module\": \"Mathlib/LinearAlgebra/Alternating/DomCoprod\", \"type\": \"∀ {ιa : Type u_1} {ιb : Type u_2} [inst : Fintype ιa] [inst_1 : Fintype ιb] {R' : Type u_3} {Mᵢ : Type u_4}\\n  {N₁ : Type u_5} {N₂ : Type u_6} [inst_2 : CommSemiring R'] [inst_3 : AddCommGroup N₁] [inst_4 : Module R' N₁]\\n  [inst_5 : AddCommGroup N₂] [inst_6 : Module R' N₂] [inst_7 : AddCommMonoid Mᵢ]\", \"doc\": \"For alternating multilinear maps $ a $ and $ b $ over disjoint finite index sets $ \\\\iota_a $ and $ \\\\iota_b $, if a permutation $ \\\\sigma \\\\in \\\\mathrm{Perm.ModSumCongr}(\\\\iota_a, \\\\iota_b) $ is invariant u\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: box integrals, topological cube boundaries, bar-resolution faces and abstract total-complex signs do not state the cubical partition boundary expansion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cubical chain diagonal boundary has cancelling middle faces indexed by a removed coordinate and a partition of the remaining directions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Cube.boundary\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(N : Type*) : Set (I^N)\", \"doc\": \"The boundary of the N-dimensional cube $[0, 1]^N$ consists of all points where at least one coordinate is either 0 or 1.\"}\n  {\"name\": \"Cube.splitAt\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(i : N) : (I^N) ≃ₜ I × I^{ j // j ≠ i }\", \"doc\": \"The homeomorphism between the N-dimensional unit cube $I^N$ and the product space $I \\\\times I^{\\\\{j \\\\mid j \\\\neq i\\\\}}$, obtained by separating the $i$-th coordinate from the remaining coordinates. This \"}\n  {\"name\": \"Rep.standardComplex.d_of\", \"module\": \"Mathlib.RepresentationTheory.Homological.Resolution\", \"type\": \"{G : Type u} {n : ℕ} (c : Fin (n + 1) → G) :\\n  d k G n (Finsupp.single c 1) =\\n    Finset.univ.sum fun p : Fin (n + 1) => Finsupp.single (c ∘ p.succAbove) ((-1 : k) ^ (p : ℕ))\", \"doc\": \"For any function $ c : \\\\text{Fin}(n+1) \\\\to G $, the differential $ d_n $ applied to the basis element corresponding to $ c $ is the sum over all $ p \\\\in \\\\text{Fin}(n+1) $ of $ (-1)^p $ multiplied by t\"}\n  {\"name\": \"AlgebraicTopology.AlternatingFaceMapComplex.d_squared\", \"module\": \"Mathlib.AlgebraicTopology.AlternatingFaceMapComplex\", \"type\": \"(n : ℕ) : objD X (n + 1) ≫ objD X n = 0\", \"doc\": \"For all natural numbers $n$, the composition of the boundary maps $d_{n+1}: X_{n+2} \\\\to X_{n+1}$ and $d_n: X_{n+1} \\\\to X_n$ in the alternating face map complex satisfies $d_n \\\\circ d_{n+1} = 0$. This \"}\n  {\"name\": \"SSet.horn₂₁.sq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HornColimits\", \"type\": \": Subcomplex.BicartSq.{u} (stdSimplex.face { 1 }) (stdSimplex.face {0, 1}) (stdSimplex.face { 1, 2 }) Λ[2, 1]\", \"doc\": \"The subcomplexes $\\\\Lambda[2,1]$, $\\\\Delta[2]_{\\\\{1\\\\}}$, $\\\\Delta[2]_{\\\\{0,1\\\\}}$, and $\\\\Delta[2]_{\\\\{1,2\\\\}}$ form a bicartesian square in the lattice of subcomplexes of the standard 2-simplex $\\\\Delta[2]$, w\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.diagonal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"{n : ℕ} : X _⦋n⦌ ⟶ X _⦋1⦌\", \"doc\": \"For each natural number $ n $, the diagonal morphism from $ X_n $ to $ X_1 $ in the simplicial object $ X $ is defined by applying the simplicial object's map to the opposite of the diagonal morphism \"}\n  {\"name\": \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"module\": \"Mathlib.AlgebraicTopology.AlternatingFaceMapComplex\", \"type\": \": ChainComplex C ℕ\", \"doc\": \"For a simplicial object $X$ in a category $\\\\mathcal{C}$, this constructs the chain complex in $\\\\mathcal{C}$ indexed by natural numbers $\\\\mathbb{N}$, where each object at level $n$ is $X_n$ and the dif\"}\n  {\"name\": \"Cube.insertAt_boundary\", \"module\": \"Mathlib.Topology.Homotopy.HomotopyGroup\", \"type\": \"(i : N) {t₀ : I} {t} (H : (t₀ = 0 ∨ t₀ = 1) ∨ t ∈ boundary { j // j ≠ i }) : insertAt i ⟨t₀, t⟩ ∈ boundary N\", \"doc\": \"For any index $i$ in an $N$-dimensional cube, if a point $t_0$ is either 0 or 1, or if a point $t$ lies in the boundary of the $(N-1)$-dimensional cube excluding the $i$-th coordinate, then inserting \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: box integrals, topological cube boundaries, bar-resolution faces and abstract total-complex signs do not state the cubical partition boundary expansion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChainComplex\", \"diagonal\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: box integrals, topological cube boundaries, bar-resolution faces and abstract total-complex signs do not state the cubical partition boundary expansion."
+  },
+  {
+   "tool": "grep",
+   "query": "(cubical|Koszul|koszul).*(diagonal|coalgebra)|(diagonal|coalgebra).*(cubical|Koszul|koszul)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: box integrals, topological cube boundaries, bar-resolution faces and abstract total-complex signs do not state the cubical partition boundary expansion."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|Serre.diagonal|partition.*boundary",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: the signed cubical partition boundary is not stated by the hits; tensor distributivity is elementary bilinearity and bar/simplicial differentials use different generators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The differential of a cubical chain diagonal is a sum over deleted coordinates and ordered partitions with shuffle signs",
+   "results": "Rep.standardComplex.d_of; Rep.standardComplex.d; HomologicalComplex.mapBifunctor₂₃.d_eq; extDeriv_apply; AlgebraicTopology.AlternatingCofaceMapComplex.objD; HomologicalComplex.mapBifunctor₂₃.D₂; inhomogeneousCochains.d_hom_apply; ChainComplex.of_d",
+   "date": "2026-10-23",
+   "verdict": "no match: the signed cubical partition boundary is not stated by the hits; tensor distributivity is elementary bilinearity and bar/simplicial differentials use different generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Finset.sum",
+   "results": "TensorProduct.sum_tmul; TensorProduct.tmul_sum; TensorProduct.exists_finset; TensorProduct.exists_sum_tmul_eq; Coalgebra.Repr.mk; Coalgebra.Repr.eq; Coalgebra.sum_counit_tmul_eq; Coalgebra.sum_tmul_counit_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: the signed cubical partition boundary is not stated by the hits; tensor distributivity is elementary bilinearity and bar/simplicial differentials use different generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The boundary of the signed cubical chain diagonal pairs first and second tensor faces with equal coefficients and cancels the middle face",
+   "results": "AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id; Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq; Rep.standardComplex.d_of; Rep.standardComplex.d_comp_ε; AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq; AlgebraicTopology.DoldKan.N₂_obj_X_d; groupHomology.inhomogeneousChains.d_def; AlgebraicTopology.DoldKan.HigherFacesVanish.comp_δ_eq_zero_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the signed cubical partition boundary is not stated by the hits; tensor distributivity is elementary bilinearity and bar/simplicial differentials use different generators."
+  },
+  {
+   "tool": "grep",
+   "query": "sum_tmul|tmul_sum|theorem d_of",
+   "results": "Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/LinearAlgebra/Coevaluation.lean; Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean; Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean; Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean; Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean; Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean; Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the signed cubical partition boundary is not stated by the hits; tensor distributivity is elementary bilinearity and bar/simplicial differentials use different generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre cubical diagonal signed ordered subset partitions inversion count tensor differential chain map",
+   "results": "AlgebraicTopology.DoldKan.PInfty; AlgebraicTopology.DoldKan.hσ; AlgebraicTopology.DoldKan.hσ'; AlgebraicTopology.DoldKan.N₂_obj_X_d; Rep.standardComplex.d_of; Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq; AlgebraicTopology.DoldKan.Γ₀.Obj.summand; AlgebraicTopology.AlternatingFaceMapComplex.objD",
+   "date": "2026-10-23",
+   "verdict": "no match: the signed cubical partition boundary is not stated by the hits; tensor distributivity is elementary bilinearity and bar/simplicial differentials use different generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-cubical-chain-diagonal",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Integral cubical chain diagonal, original proof steps 2–3: inversion counts, paired tensor faces, and cancellation to the explicit outer-face sum. Route: paragraph (3), ordinary open direct image, of det-thm-sf-ctf-stability-direct-images; the formula is an agent expansion, not a statement in that paragraph. Ancestor lookup returns None, as for the item.",
+   "via": [
+    "lem-sfb-integral-cubical-chain-diagonal",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cubical-partition-boundary-expansion",
+  "worker": "stage1",
+  "summary": "Direct finite-sum proof: explicit inverse face-index maps, inversion counts, Koszul parity and literal middle-face cancellation. Statement and prior metadata retained. No new nodes: every calculation is elementary from the displayed formulas and tensor bilinearity. Read current blueprint and cited statements; verified empty and small ranks.",
+  "blueprint": "Current direct-images proof paragraph (3) is the inherited route location, not a source for the cubical formula. Realizes original cubical diagonal steps 2–3 retained in Q87 report. Existing ancestor lookup returns None; from.node and via retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-a27979ca2",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-a27979ca2 (reviewer sub-agent of L); spot-checked: I read the full proof of lem-sfb-cubical-partition-boundary-expansion; the review is in review.md. It is an S1 split with no new nodes. The statement, stmt_deps, blueprint block and created record are unchanged from live and side-live, where the item is still unsplit, so no other group has superseded it. The item has no repair note of its own; it is a statement-only child of Q87's re-split of lem-sfb-integral-cubical-chain-diagonal. It realizes the parent's original steps 2-3 (about 1.6k chars). The six elementary steps (2350 chars) carry all of that argument: the counts p, q, t, N, both face signs, the paired contributions, the middle cancellation and the bijective face indexing. Step 2 adds explicit inverse maps, and nothing is shortened or blurred. Cited statements: the differential of lem-sfb-integral-lattice-cubical-contraction is exactly the item's d, with the sign (-1)^{#{j<i}} and upper face minus lower face; only that formula is used, so there is no cycle through the parent. Only bilinearity is used from def-weil-pbc-module-tensor-product, and the free-module and chain-complex definitions are stmt_deps only. I checked each step by hand: eps(B∪i,C)=eps(B,C)(-1)^q, eps(B,C∪i)=eps(B,C)(-1)^t, |B|=p+t, and the tensor sign (-1)^{|B|} gives (-1)^{N+2t+p+q}=s; u_{B∪i}=u_B+u_i, and the middle term cancels. An independent script computing d_T P(v,I) in full matched the stated expansion in all 62 cases (ranks 0-4, zero vertex and a vertex with negative coordinates, every I, including I=∅ and r=0). The duplicate search (rg -L for cubical and the partition-sign notation) found only the parent, its two siblings with different assertions, the contraction and the signed-coordinate homotopy; none states this expansion. No SGA is cited. The source is the inherited route location, main-20261015 direct-images paragraph (3), with by=agent and the WANTED note kept. Advisory only: the step sources use the literature/blueprint/latest symlink, whose copy of this file is identical to main-20261015's; 16 other nodes use the same path. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CubicalPartitionBoundaryExpansion",
+  "declaration": "IntegralLatticeCubical.partitionBoundaryExpansion",
+  "declarations": [
+   "IntegralLatticeCubical.partitionFirstFace",
+   "IntegralLatticeCubical.partitionSecondFace",
+   "IntegralLatticeCubical.partitionBoundaryExpansion"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CubicalPartitionBoundaryExpansion.lean",
+  "statement": "theorem partitionBoundaryExpansion (r : ℕ) (v : Fin r → ℤ) (I : Finset (Fin r)) : (∀ (i : Fin r) (B C : Finset (Fin r)), i ∈ I → Disjoint B C → B ∪ C = I.erase i → (partitionSign r (insert i B) C * (-1 : ℤ) ^ ((insert i B).filter (fun j ↦ j < i)).card = (-1 : ℤ) ^ (((B.product C).filter (fun p ↦ p.2 < p.1)).card + (C.filter (fun c ↦ c < i)).card + (B.filter (fun b ↦ b < i)).card)) ∧ ((-1 : ℤ) ^ (((B.product C).filter (fun p ↦ p.2 < p.1)).card + (C.filter (fun c ↦ c < i)).card + (B.filter (fun b ↦ b < i)).card) = (-1 : ℤ) ^ ((B.filter (fun b ↦ b < i)).card + (C.filter (fun c ↦ c < i)).card) * partitionSign r B C) ∧ (partitionSign r B (insert i C) * (-1 : ℤ) ^ B.card * (-1 : ℤ) ^ ((insert i C).filter (fun j ↦ j < i)).card = (-1 : ℤ) ^ (((B.product C).filter (fun p ↦ p.2 < p.1)).card + (B.filter (fun b ↦ i < b)).card + B.card + (C.filter (fun c ↦ c < i)).card)) ∧ ((-1 : ℤ) ^ (((B.product C).filter (fun p ↦ p.2 < p.1)).card + (B.filter (fun b ↦ i < b)).card + B.card + (C.filter (fun c ↦ c < i)).card) = (-1 : ℤ) ^ ((B.filter (fun b ↦ b < i)).card + (C.filter (fun c ↦ c < i)).card) * partitionSign r B C) ∧ (partitionFirstFace r (I.card - 1) v (insert i B) C i = ((-1 : ℤ) ^ ((B.filter (fun b ↦ b < i)).card + (C.filter (fun c ↦ c < i)).card) * partitionSign r B C) • (tensorCell r (I.card - 1) (v + unitVector r i) (v + directionSum r B + unitVector r i) B C - tensorCell r (I.card - 1) v (v + directionSum r B + unitVector r i) B C)) ∧ (partitionSecondFace r (I.card - 1) v B (insert i C) i = ((-1 : ℤ) ^ ((B.filter (fun b ↦ b < i)).card + (C.filter (fun c ↦ c < i)).card) * partitionSign r B C) • (tensorCell r (I.card - 1) v (v + directionSum r B + unitVector r i) B C - tensorCell r (I.card - 1) v (v + directionSum r B) B C))) ∧ Set.BijOn (fun x : Finset (Fin r) × Finset (Fin r) × Fin r ↦ (x.2.2, x.1.erase x.2.2, x.2.1)) {x | Disjoint x.1 x.2.1 ∧ x.1 ∪ x.2.1 = I ∧ x.2.2 ∈ x.1} {y | y.1 ∈ I ∧ Disjoint y.2.1 y.2.2 ∧ y.2.1 ∪ y.2.2 = I.erase y.1} ∧ Set.BijOn (fun x : Finset (Fin r) × Finset (Fin r) × Fin r ↦ (x.2.2, x.1, x.2.1.erase x.2.2)) {x | Disjoint x.1 x.2.1 ∧ x.1 ∪ x.2.1 = I ∧ x.2.2 ∈ x.2.1} {y | y.1 ∈ I ∧ Disjoint y.2.1 y.2.2 ∧ y.2.1 ∪ y.2.2 = I.erase y.1} ∧ ((HomologicalComplex.tensorObj (chainComplex r) (chainComplex r)).d I.card (I.card - 1)) (diagonalComponent r I.card (cell r (I.card : ℤ) v I)) = ∑ i ∈ I, ∑ B ∈ (I.erase i).powerset, ((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card * partitionSign r B (I.erase i \\ B)) • (tensorCell r (I.card - 1) (v + unitVector r i) (v + unitVector r i + directionSum r B) B (I.erase i \\ B) - tensorCell r (I.card - 1) v (v + directionSum r B) B (I.erase i \\ B)) ∧ (I = ∅ → ((HomologicalComplex.tensorObj (chainComplex r) (chainComplex r)).d I.card (I.card - 1)) (diagonalComponent r I.card (cell r (I.card : ℤ) v I)) = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-819208892",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: actual Mathlib tensor complex differential (sign (-1)^a on the second factor), P(v,I)=diagonalComponent, four coefficient identities (N+q+p, N+t+|B|+q, both = s), face defs partitionFirstFace/SecondFace are the literal i-th faces (hand-expanded), two Set.BijOn checked, final expansion and I=∅ case correct; r=0, B/C empty and negative v covered. Node unchanged except lean; record complete and verbatim; no extra hypotheses, nothing hollow, sorry only, docstrings with source/blueprint and the 6 steps, lines ≤100, no pro-etale. Nothing changed, so no compile (worker reports clean 6.2/7.5 s). Maintainer note N1 (stages/2 §3 rule 7, listed in the report): the item imports parent theorem module IntegralCubicalChainDiagonal (lem-sfb-integral-cubical-chain-diagonal, whose proof_deps cite the item) for plain helpers chainComplex/directionSum/partitionSign/tensorCell/diagonalComponent, so the parent's stage-3 proof import would be cyclic; move those helpers (same names) into an existing:true def-node module imported by the parent and its three re-split children."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T082134-L-2140865",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

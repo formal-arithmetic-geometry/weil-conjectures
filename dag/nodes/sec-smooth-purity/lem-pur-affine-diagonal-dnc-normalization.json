@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-affine-diagonal-dnc-normalization",
+ "kind": "statement",
+ "title": "Normalized DNC arrow under the actual affine integration transposes",
+ "statement": "In the finite setting [def-pur-conventions], let Y be separated finite type over k and let ell^(r+1) annihilate A. For X=affine d-space over Y and W=X×_Y X, let s be the diagonal. For every normalized Rees comparison and every J,Q isomorphism whose hom maps equal the presented transposes on W→X and its normal cone→X from [def-pur-affine-diagonal-integration-constructions], let T be diagonal restriction of J with the canonical Tate/source comparisons. Let beta be zero restriction of Q inverse with the canonical normal/Tate comparisons. The chosen normalized arrow delta of [thm-pur-dnc-invariance] satisfies delta followed by beta = T inverse. This assertion does not involve I on X→Y or the dualizing base-change comparison alpha.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-amb-vector-integration",
+  "lem-pur-vector-integration-site-comparison",
+  "def-exchange-projection",
+  "def-pur-section-invariant",
+  "def-pur-normal-bundle",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "thm-amb-vector-bundle-purity",
+  "def-pur-co-smoothness"
+ ],
+ "proof": [
+  {
+   "text": "Use the geometric DNC coordinate identity: delta followed by the normal comparison and geometric normal coordinates is the source comparison and geometric source coordinates. Independently the two restricted integration transposes agree in these geometric coordinates. Map that ordinary equation by nu*, cancel the geometric coordinate isomorphism, and then cancel the normal restricted transpose. Associativity and the inverse identities give delta followed by beta equal to T inverse.",
+   "uses": [
+    "lem-pur-affine-diagonal-dnc-coordinate-identity",
+    "lem-pur-affine-diagonal-restricted-transposes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-diagonal-dnc-coordinate-identity",
+  "lem-pur-affine-diagonal-restricted-transposes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space integration trace commutes with base change and diagonal restriction of its exceptional transpose",
+   "results": "LinearMap.trace_baseChange and algebraic field trace lemmas; no etale exceptional transpose or DNC normalization theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone of the diagonal of affine space is the constant standard pair after translation by the tautological section",
+   "results": "AffineSpace, AffineSpace.over, homOfVector, isoOfIsAffine_inv_over and polynomial coordinate maps; no statement of the required derived map equalities.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*trace|trace.*diagonal|diagonal.*dnc across Mathlib, WeilConjectures and Sheaf; blueprint_refs search diagonal trace restriction and diagonal dnc normalization",
+   "results": "Only the existing parent orientation module and unrelated trace-diagonal constructions; no matching split statement. The two blueprint searches each returned zero matches.",
+   "date": "2026-10-25",
+   "verdict": "new step statements needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "group": "P2",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC",
+   "via": [
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalDncNormalization",
+  "file": "lean/Sheaf/Paper/AffineDiagonalDncNormalization.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalDncNormalization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalDncNormalization"
+  ],
+  "statement": "theorem affineDiagonalDncNormalization (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (d r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0) : let p := affineDiagonalProjection Y d let X := affineDiagonalSpace Y d let W := pullback p p let p₁ := pullback.fst p p let s := pullback.diagonal p let aX := p ≫ aY letI := affineDiagonalProjection_smooth Y d letI := SmoothOfRelativeDimension.smooth d p letI := Dnc.compactifiable P p aY letI := Dnc.compactifiable P p₁ aX let L := Etale.affineLinearBaseCoefficient P.Coefficient (P.coefficients.l ^ (r + 1)) hA let F := fun {U B : Scheme.{u}} (f : U ⟶ B) ↦ (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor let C := fun B : Scheme.{u} ↦ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory let δ := (Dnc.existsUnique_dncInvariance P d p₁ aX s (pullback.diagonal_fst p)).exists.choose ∀ (q : s.ker.normalCone ≅ PurityNormalBundle.normalCone s) (hq : Etale.FiniteSmoothPurity.ReesConeNormalized s q), let πN := Scheme.Hom.normalConeProj p₁ s let z := s.normalConeZeroSection letI := Dnc.normalQuasiCompact d p₁ s (pullback.diagonal_fst p) letI := Dnc.normalCompactifiable P d p₁ aX s (pullback.diagonal_fst p) letI := (affineDiagonalNormalCoordinates_spec Y d q hq).1 letI := (affineDiagonalProductCoordinates_spec Y d).1 ∀ (J : L W d ≅ Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) p₁) (Q : L s.ker.normalCone d ≅ Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) πN), J.hom = P.affineDiagonalPresentedTranspose d p₁ aX r hA (asIso (affineDiagonalProductCoordinates Y d)) (affineDiagonalProductCoordinates_spec Y d).2 → Q.hom = P.affineDiagonalPresentedTranspose d πN aX r hA (asIso (affineDiagonalNormalCoordinates Y d q)) (affineDiagonalNormalCoordinates_spec Y d q hq).2 → (let T := (C X).mapIso ((P.affineDiagonalTateRestriction r hA s (p₁ ≫ aX) d).symm ≪≫ (F s).mapIso J) ≪≫ (Dnc.sourceComparison P d p₁ aX s).symm let β := Dnc.normalComparison P d p₁ aX s (pullback.diagonal_fst p) ≪≫ (C X).mapIso ((F z).mapIso Q.symm ≪≫ P.affineDiagonalTateRestriction r hA z (πN ≫ aX) d) δ.hom ≫ β.hom = T.inv)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6f558",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163943-L-914488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203320-L-2803393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "def-weil-pbc-finite-perfect-quotient-model-data",
+ "kind": "definition",
+ "title": "Actual finite-quotient constant model predicates",
+ "statement": "For a scheme X, an adic coefficient datum (A,I), comparison maps phi from the constant finite coefficient sheaves to the actual finite coefficient sheaves, and a derived completed-coefficient object M, FinitePerfectModelsOn at n,V,a,b means that an etale covering sieve of V provides algebraic finite-projective complexes over A/I^(n+1) supported in [a,b], whose termwise constant realization, changed by phi, is isomorphic on the concrete localized pro-etale site to the actual quotient reduction of M. Its auxiliary definitions give the termwise universe lift and constant realization, a cover with one interval working at every finite level, constant-section normalization of phi, and the two quotient/scalar compatibility equations. All are the already published definitions, relocated unchanged. The standard derived-category and slice sheafification instances remain unchanged.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes; sites-cohomology.tex Tag 094I, perfect-residue ideal-filtration argument; connected etale perfect constancy."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-projective-module",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the standard derived localization and essentially-small-site sheafification instances. Realize each algebraic complex termwise by the existing universe-lift, scalar-restriction, and constant-module functors. The local-model, uniform-cover, normalization and compatibility predicates are exactly the displayed existential and equality formulas; no data or proof is postulated.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Unchanged interface extracted from the existing finite-perfect quotient-model module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded derived complex with finite locally constant cohomology is locally a bounded complex of finite modules, and Tor amplitude over a nilpotent quotient is detected after reduction",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, standard localization and bounded-complex lemmas. No finite constant-model or nilpotent Tor detection theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf or finite-coefficient statement in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect residue model implies finite projective constant complexes for finite adic quotient reductions",
+   "results": "BDeRhamPlus, AdicCompletion approximation and functoriality, IsAdicComplete.henselianRing, IsLocalRing.finite_quotient_iff.",
+   "date": "2026-10-27",
+   "verdict": "Only ring-theoretic completion and quotient results, no derived sheaf lifting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the project has the algebraic Tor-amplitude API."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*perfect|perfect.*nilpotent|residue.*torAmplitude",
+   "results": "Only perfect-field/nilpotence statements in Mathlib.LinearAlgebra.JordanChevalley and Mathlib.GroupTheory.IsPerfect. Project search found BoundedFiniteTorPerfect, SiteBoundedConstantModel and the abstract TorAmplitudeResidueIdeal API.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing algebraic bounded-finite-Tor perfectness theorem; neither coefficient-filtration sheaf statement is duplicated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectQuotientModels",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-residue-perfect-finite-quotient-models",
+   "place": "The existing concrete model definitions, separated to avoid a proof import cycle"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectQuotientModelData",
+  "file": "lean/Sheaf/Paper/FinitePerfectQuotientModelData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FinitePerfectModelsOn",
+  "statement": "def FinitePerfectModelsOn (X : Scheme.{t}) {A : Type t} [CommRing A]\n    (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (V : X.Etale)\n    (a b : ℤ) : Prop",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectModelsAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsAlgebraHasDerived",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsRingHasDerived",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsSliceAbSheafify",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsSliceAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsSliceHasDerived",
+   "AlgebraicGeometry.Scheme.finiteModelConstantComplex",
+   "AlgebraicGeometry.Scheme.FinitePerfectModelsOn",
+   "AlgebraicGeometry.Scheme.HasUniformFinitePerfectModels",
+   "AlgebraicGeometry.Scheme.FinitePerfectModelsNormalized",
+   "AlgebraicGeometry.Scheme.FinitePerfectModelsCompatible"
+  ],
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ccff",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T052607-L-456495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ccff",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T052607-L-456495",
+  "kind": "interface",
+  "note": "independent cc review: delivered FinitePerfectQuotientModelData/FinitePerfectQuotientModels against the clone (verbatim relocation, signatures unchanged); the two new sorry statements against Stacks 094I/094G and their nodes; 5 direct importers compiled in a /tmp sandbox (4 OK, StratumInput INFRA)"
+ }
+}

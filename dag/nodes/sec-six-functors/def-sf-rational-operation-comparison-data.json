@@ -1,0 +1,121 @@
+{
+ "id": "def-sf-rational-operation-comparison-data",
+ "kind": "definition",
+ "title": "Rational operation comparison interfaces",
+ "statement": "Use the finite-field datum, completed integral and raw rational constructible categories, derived operations and rational Verdier data. A permitted-pair lift homPair restricts the identity product functor to permitted rational Hom pairs. tensorLeft fixes the first tensor input; homRight fixes the first Hom input; homDual fixes its target. coefficientUnit is the localization of the constructed completed regular integral module. dualFormula is D_Y.rightOp followed by opposite completed rational pullback and D_X. ExceptionalIdentification consists of a comparison from the normalized system right adjoint to dualFormula, the transported adjunction against actual compact support, and the equations preserving its unit and counit. Identification packages integral dualizing data, rational dualities, their Hom identifications and exceptional comparison. dualScalar is the given source-duality comparison followed contravariantly by the inverse target-duality and pullback scalar comparisons. ScalarCompatibility records both normalized duality extensions and equality with the actual exceptional mate comparison. HomScalarCompatibility is the equation preserving evaluation under the recorded rational tensor and Hom scalar comparisons. Conclusion existentially asserts systems at f and at the structure map, then for every finite-field embedding asserts the two identifications, their scalar comparison, both Hom scalar squares and both structure dualizing identifications. These are interfaces, not existence assertions except for the proposition Conclusion itself.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
+  "place": "Published interfaces of RationalOperations.lean, relocated verbatim to RationalOperationsData for acyclic proof dependencies."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "thm-coef-rational-verdier",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-sf-rational-verdier-identifications"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor Hom adjunction descends to scalar localization",
+   "results": "ModuleCat.monoidalClosedHomEquiv; IsLocalizedModule.mapExtendScalars; scalar module facts only, no normalized pro-etale constructible adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of a tensor internal Hom adjunction and compatibility of exceptional inverse image with finite scalar extension",
+   "results": "LightCondensed.ihomPoints_symm_comp; Grothendieck tensorObjPreadditiveCoyonedaObjAdjunction. Different categories and no coefficient normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "ofNatIsoRight and component laws; used with ofNatIsoLeft to construct exceptionalIdentificationOfIso. Does not give the geometric isomorphism or scalar square.",
+   "date": "2026-10-25",
+   "verdict": "tool for the proved adjunction-transport construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "HomIdentification|DualizingIdentification|rational.*[Aa]djunction",
+   "results": "msearch Mathlib: zero hits. rg of source RationalOperations: etale-domain rational adjunction requires ambient adjoints and omits scalar compatibility, hence does not specialize. Project exact interfaces occur only in assigned module and its consumers; no theorem supplying these separate assertions.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalOperations",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Existing operation-comparison interfaces; relocation for the split proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalOperationsData",
+  "file": "lean/Sheaf/SixFunctors/RationalOperationsData.lean",
+  "declaration": "WeilConjectures.RationalOperations.homPair",
+  "declarations": [
+   "WeilConjectures.RationalOperations.homPair",
+   "WeilConjectures.RationalOperations.tensorLeft",
+   "WeilConjectures.RationalOperations.homRight",
+   "WeilConjectures.RationalOperations.homDual",
+   "WeilConjectures.RationalOperations.coefficientUnit",
+   "WeilConjectures.RationalOperations.dualFormula",
+   "WeilConjectures.RationalOperations.ExceptionalIdentification",
+   "WeilConjectures.RationalOperations.Identification",
+   "WeilConjectures.RationalOperations.dualScalar",
+   "WeilConjectures.RationalOperations.ScalarCompatibility",
+   "WeilConjectures.RationalOperations.HomScalarCompatibility",
+   "WeilConjectures.RationalOperations.structureIsOverSpec",
+   "WeilConjectures.RationalOperations.Conclusion"
+  ],
+  "statement": "def homPair (h : ∀ K M : sfRationalConstructibleCategory l E X,\n    constructibleRationalHomPairs l E X (op K, M)) :\n    (sfRationalConstructibleCategory l E X)ᵒᵖ × sfRationalConstructibleCategory l E X ⥤\n      (constructibleRationalHomPairs l E X).FullSubcategory",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25",
+  "note": "All declarations are moved unchanged from RationalOperations, whose public import re-exports them. No new mathematical definition or choice."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-849a5",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261025T100911-L-3636679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-849a5",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261025T100911-L-3636679",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalOperationsData vs published RationalOperations prefix (verbatim, imports only differ); item proof vs exists_system/coef_rational_verdier/dualizingDatum_nonempty + 3 new sorry statements read against RationalVerdier.Datum/TensorPresentation/DualizingDatum pinning; nodes vs Lean; 11 direct importers compiled against sandbox build"
+ }
+}

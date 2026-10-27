@@ -9,8 +9,9 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.SetTheory.Cardinal.ENat
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
+import Sheaf.AlgebraicGeometry.DominantAffineChartData
+import Sheaf.AlgebraicGeometry.AffineLocalDimensionTermComparison
 import Sheaf.RingTheory.AffineDimensionInequality
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Local dimension inequality for an integral dominant morphism
@@ -89,6 +90,29 @@ theorem local_dimension_formula
         (Cardinal.toENat
           (@Algebra.trdeg S.functionField X.functionField _ _
             (Scheme.Hom.dominantFunctionFieldAlgebra f)) : WithBot ℕ∞) := by
-  sorry
+  obtain ⟨U, V, hV, hVU, _, hx, _, _, hN, hA, hB, hft, hinj, _⟩ :=
+    dominant_affine_chart_data f f.denseRange
+      (fun U : S.affineOpens ↦ (U : S.Opens)) (fun U ↦ U.property)
+      (fun U ↦ IsLocallyNoetherian.component_noetherian U)
+      (iSup_affineOpens_eq_top S) x
+  let y : V := ⟨x, hx⟩
+  let p := U.property.primeIdealOf ⟨f x, hVU hx⟩
+  let q := hV.primeIdealOf y
+  obtain ⟨hc, eS, eX, _, _, _, hdimS, hdimX, rS, rX, _, _, _, hres, hgen⟩ :=
+    affine_local_dimension_term_comparison f U U.property V hV hVU y p q rfl rfl
+  let : IsNoetherianRing Γ(S, U) := hN
+  let : IsDomain Γ(S, U) := hA
+  let : IsDomain Γ(X, V) := hB
+  let : Algebra Γ(S, U) Γ(X, V) := (f.appLE U V hVU).hom.toAlgebra
+  let : Algebra.FiniteType Γ(S, U) Γ(X, V) := hft
+  have h := Ideal.height_add_trdeg_residueField_le hinj p.asIdeal q.asIdeal hc
+  rw [hdimX, hdimS, hres]
+  change (q.asIdeal.height : WithBot ℕ∞) + _ ≤
+    (p.asIdeal.height : WithBot ℕ∞) +
+      (Cardinal.toENat
+        (@Algebra.trdeg S.functionField X.functionField _ _
+          (f.functionFieldMap f.apply_genericPoint_of_isDominant).hom.toAlgebra) : WithBot ℕ∞)
+  rw [← hgen]
+  exact_mod_cast h
 
 end AlgebraicGeometry

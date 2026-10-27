@@ -23,138 +23,66 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian because its only ideals are $0$ and $k$. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Apply [lem-trf-complementary-pure-subcurve-components] to $Y\\subseteq X$: $Y$ is the reduced union of a subset of the finitely many irreducible components, and the reduced closure of $X\\setminus Y$ is the union of the remaining components. The open $X\\setminus Y$ is reduced (its stalks are stalks of $X$), so [lem-trf-reduced-scheme-image] identifies that reduced closure with the scheme-theoretic closure $Z$ in the statement. Put $T=Y\\cap Z$. No generic point of an irreducible component of $X$ lies in both unions. Any nonclosed point of a Noetherian scheme of dimension one is generic in a component: otherwise its closure lies strictly between that component and a closed specialization, giving a chain of length two. Hence all points of $T$ are closed in $X$. Since $T$ is closed in $X$, an irreducible closed subset of $T$ is an irreducible closed subset of the scheme $X$ and so has a generic point; that point is closed, so the subset is a single point. Thus $\\dim T\\leq0$. The closed subscheme $T$ is Noetherian: locally its rings are quotients of Noetherian rings and its underlying closed subset is quasi-compact. Empty $Y$ or empty $Z$ gives empty $T$ and is allowed.",
+   "text": "Finite type gives Noetherianity and the Jacobson property. Apply complementary-pure-subcurve-boundary-finite to obtain finite and discrete T and closed ambient boundary points.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-trf-complementary-pure-subcurve-components",
-    "lem-trf-reduced-scheme-image"
+    "lem-trf-complementary-pure-subcurve-boundary-finite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, first paragraph; identification of the complementary closure by Tag 056B."
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
    }
   },
   {
-   "text": "Fix a closed point $y\\in Y$, also closed in $X$. If $X$ is smooth over $k$ at $y$, take a smooth affine neighbourhood. By [lem-weil-pbc-smooth-over-field-regular-local] its local ring at $y$ is regular, hence a domain by [lem-sc-regular-local-domain]. By [lem-weil-pbc-spec-irreducible-components-minimal-primes] only one component passes through $y$: on an affine open $\\operatorname{Spec}R$ containing $y=\\mathfrak p$, the components of $X$ through $y$ are the closures of the components $V(\\mathfrak q)$ of $\\operatorname{Spec}R$ with $\\mathfrak q\\subseteq\\mathfrak p$ minimal, and these $\\mathfrak q$ are exactly the minimal primes of $R_{\\mathfrak p}$ under the prime correspondence of localization. Remove the other finitely many components from a neighbourhood of $y$. The union description in Step 1 then identifies $Y$ and $X$ on that neighbourhood, since the unique incident component belongs to $Y$. Consequently $Y$ is smooth at $y$ and $y\\notin T$.",
+   "text": "Apply split-nodal-subcurve-local-dichotomy at each closed point of Y. The second alternative is smooth on Y, so any nonsmooth Y point is in the stalk-isomorphism alternative. Transfer finiteness and separability through the canonical residue-field isomorphism and transfer the nodal completion through split-node-completion-transport. The germ-stalk-map identity proves compatibility of the transported scalar maps.",
    "uses": [
-    "lem-weil-pbc-smooth-over-field-regular-local",
-    "lem-sc-regular-local-domain",
-    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+    "lem-trf-split-nodal-subcurve-local-dichotomy",
+    "lem-trf-split-node-completion-transport",
+    "lem-weil-pbc-surjective-stalks-residue-field-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, smooth-point case; Algebra Tags 00TT, 00NP and 00ES."
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
    }
   },
   {
-   "text": "Now suppose $X$ is not smooth at $y$. Write $A=\\mathcal O_{X,y}$, $\\mathfrak m=\\mathfrak m_y$, $F=\\kappa(y)$ and identify $C=\\widehat A$ with $F[[u,v]]/(uv)$ as in the hypothesis; $F/k$ is finite separable. The ring $A$ is Noetherian and has dimension one: on each component through the closed point $y$, its generic point strictly specializes to $y$, and no chain of length two exists. By [lem-weil-pbc-local-completion-faithfully-flat], $A\\to C$ is faithfully flat and its map on spectra is surjective. The one-variable power-series rings are local domains of dimension one by [lem-weil-pbc-power-series-field-cohen-regular-complete]. Therefore the prime ideals of $C$ are exactly $(u)$, $(v)$ and $(u,v)$: a prime contains $u$ or $v$, and its image in the corresponding one-variable quotient is either zero or the maximal ideal. By [lem-weil-pbc-local-completion-local-ring], the maximal ideal of $C$ is $\\mathfrak mC$ and contracts to $\\mathfrak m$. Every minimal prime of $A$ is strictly smaller than $\\mathfrak m$ and has a prime above it, so it is the contraction of $(u)$ or $(v)$. Thus $A$ has at most two minimal primes and $X$ at most two components through $y$, using [lem-weil-pbc-spec-irreducible-components-minimal-primes].",
+   "text": "For t in T the first alternative of the local dichotomy is impossible: the pullback condition places the ambient image in the complementary closure. Thus X is nonsmooth there, Y is smooth, and the T stalk is a field. The original nodal hypothesis supplies precisely the required ambient completion, with its scalar identity.",
    "uses": [
-    "lem-weil-pbc-local-completion-faithfully-flat",
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+    "lem-trf-split-nodal-subcurve-local-dichotomy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, two-branch argument, using the prescribed split completion in place of the geometric-branches comparison."
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
    }
   },
   {
-   "text": "If $Y$ contains all components through this nonsmooth $y$ (including the case of a single component), remove the finitely many components not passing through $y$. Step 1 shows that $Y$ and $X$ coincide on the resulting neighbourhood. Their local $k$-algebras, residue fields and completions at $y$ agree. Thus $y$ is a split node on $Y$ with residue field finite separable over $k$, and $y$ does not lie in $Z$. It remains to consider the case where two distinct components pass through $y$ and exactly one belongs to $Y$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, unique-component and both-components cases."
-   }
-  },
-  {
-   "text": "In this remaining case let $\\mathfrak p_1,\\mathfrak p_2$ be the two minimal primes of $A$, with the first corresponding to $Y$ and the second to $Z$. Both are nonzero, since a zero prime would be contained in the other. Each $A/\\mathfrak p_i$ is a reduced local domain essentially of finite type over $k$, of dimension one: $\\mathfrak p_i\\subsetneq\\mathfrak m$ is a chain of length one and no longer chain exists. The completion clause of [lem-trf-curve-normalization-completion] says that $\\widehat{A/\\mathfrak p_i}$ is reduced of dimension one. By [lem-weil-pbc-local-completion-quotient] this ring is canonically $C/\\mathfrak p_iC$. Hence $\\mathfrak p_iC$ is radical and its quotient has dimension one. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], a radical ideal is the intersection of its containing primes. The three-prime list in Step 3 therefore leaves only $0,(u),(v)$ when the quotient has dimension one: the intersection of both axes is zero, as the unique expansion $c+uf(u)+vg(v)$ shows, and the maximal ideal alone gives dimension zero. By [lem-weil-pbc-faithfully-flat-ideal-contraction], $\\mathfrak p_iC$ contracts to the nonzero ideal $\\mathfrak p_i$, excluding $0$; the same contraction identity shows the two extended ideals differ. After exchanging $u,v$, they are $(v)$ and $(u)$, respectively. In particular the completed quotient maps to $Y$ and $Z$ are exactly the two axis projections, not merely abstract isomorphisms of their targets.",
+   "text": "All boundary stalks are fields, hence T is reduced. The composite closed immersion T→X induces residue-field isomorphisms; therefore the finite separable ambient residue fields give finite separable residue fields for T. Apply finite-reduced-discrete-residue-fields to obtain the coproduct and its equations over Spec k.",
    "uses": [
-    "lem-trf-curve-normalization-completion",
-    "lem-weil-pbc-local-completion-quotient",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+    "lem-trf-finite-reduced-discrete-residue-fields",
+    "lem-weil-pbc-surjective-stalks-residue-field-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, identification of the completed component maps; Varieties Tag 0C3V and Algebra Tags 00MA, 05CK supply the expanded justification."
-   }
-  },
-  {
-   "text": "The reduced component description of Step 1 identifies the local ideals of $Y$ and $Z$ at this point with $\\mathfrak p_1$ and $\\mathfrak p_2$. Their sum defines the scheme-theoretic intersection. Step 5 gives $(\\mathfrak p_1+\\mathfrak p_2)C=(u,v)$. By [lem-weil-pbc-local-completion-local-ring], $(u,v)=\\mathfrak mC$ and the residue field is unchanged. Contracting these equal ideals with [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $\\mathfrak p_1+\\mathfrak p_2=\\mathfrak m$. Thus $\\mathcal O_{T,y}=A/(\\mathfrak p_1+\\mathfrak p_2)=F$ with its original $k$-algebra structure. In particular this is a reduced intersection of length one over its residue field.",
-   "uses": [
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, sum-of-ideals calculation for the boundary; Algebra Tags 05GI, 05GG, 05CK."
-   }
-  },
-  {
-   "text": "The completion of $\\mathcal O_{Y,y}=A/\\mathfrak p_1$ is $F[[u]]$ by Step 5. This is a regular local ring by [lem-weil-pbc-power-series-field-cohen-regular-complete]. Apply [lem-weil-pbc-completion-regular-local] to the Noetherian local quotient $A/\\mathfrak p_1$: it is regular. Take an affine neighbourhood of $y$ on $Y$, whose coordinate ring is finite type over $k$ since it is a closed subscheme of a finite-type affine neighbourhood on $X$. Its residue field is the same $F$ as that of $X$ at $y$, finite and separable algebraic over $k$. Hence $F/k$ is separable in the sense of [def-weil-pbc-separable-field-extension]: a transcendence basis of the algebraic extension $F/k$ is empty, and every subextension $K'/k$ is separable algebraic, so separably generated with the empty transcendence basis. Therefore [lem-weil-pbc-regular-local-separable-residue-smooth] applies and proves that $Y\\to\\operatorname{Spec}k$ is smooth at $y$.",
-   "uses": [
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-completion-regular-local",
-    "lem-weil-pbc-regular-local-separable-residue-smooth",
-    "def-weil-pbc-separable-field-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, final paragraph; More on Algebra Tag 07NY and Algebra Tag 00TV."
-   }
-  },
-  {
-   "text": "Every closed point of $Y$ has now been considered. Step 2 makes it smooth if its ambient point is smooth; Step 4 preserves the prescribed split node when all incident components belong to $Y$; Step 7 makes it smooth when only one of two incident components belongs to $Y$. This proves (1). Every point of $T$ is closed by Step 1. It cannot be in the smooth case of Step 2 or the all-components case of Step 4, so it is in the two-components case. It is therefore a nonsmooth point of $X$ with exactly the completed local ring required by the original hypothesis, proving (2)(b), and Step 7 proves (2)(c). Step 6 supplies its residue field and its reduced local intersection ring.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38, assembly of the local cases."
-   }
-  },
-  {
-   "text": "Apply [lem-sc-zero-dim-noetherian-finite-discrete] to the Noetherian zero-dimensional scheme $T$ from Step 1. It has finitely many points, and each singleton is open. An open singleton in a scheme is the spectrum of its local ring: choose an affine neighbourhood of its point inside that open singleton, which must be the entire singleton, and then every denominator outside its unique prime is a unit. Step 6 identifies this ring as $F=\\kappa(y)$ with its given $k$-algebra structure. Thus $T$ is a finite disjoint union of $\\operatorname{Spec}\\kappa(y)$, each $\\kappa(y)/k$ finite separable, proving (2)(a), including the empty union.",
-   "uses": [
-    "lem-sc-zero-dim-noetherian-finite-discrete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0E38 (2)(a), together with Properties Tag 0AAX and quasi-compactness for finiteness."
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-separable-field-extension",
-  "lem-sc-regular-local-domain",
-  "lem-sc-zero-dim-noetherian-finite-discrete",
-  "lem-trf-complementary-pure-subcurve-components",
-  "lem-trf-curve-normalization-completion",
-  "lem-trf-reduced-scheme-image",
-  "lem-weil-pbc-completion-regular-local",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-local-completion-faithfully-flat",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-local-completion-quotient",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-regular-local-separable-residue-smooth",
-  "lem-weil-pbc-smooth-over-field-regular-local",
-  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+  "lem-trf-complementary-pure-subcurve-boundary-finite",
+  "lem-trf-split-nodal-subcurve-local-dichotomy",
+  "lem-trf-split-node-completion-transport",
+  "lem-weil-pbc-surjective-stalks-residue-field-iso",
+  "lem-trf-finite-reduced-discrete-residue-fields"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), full proof, specialized to the prescribed split completions. The component-map identification is expanded by Tags 0C3V, 00MA and 05CK."
+  "place": "Tag 0E38; Lean separates boundary finiteness, local dichotomy, scalar-compatible transport, and residue-field coproduct. Only the completed boundary component calculation remains as its own node.",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -340,13 +268,11 @@
  },
  "tool_uses": [
   "lem-sc-regular-local-domain",
-  "lem-sc-zero-dim-noetherian-finite-discrete",
   "lem-weil-pbc-completion-regular-local",
   "lem-weil-pbc-local-completion-faithfully-flat",
   "lem-weil-pbc-local-completion-local-ring",
   "lem-weil-pbc-local-completion-quotient",
   "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-regular-local-separable-residue-smooth",
   "lem-weil-pbc-smooth-over-field-regular-local",
   "lem-weil-pbc-spec-irreducible-components-minimal-primes"
  ],
@@ -376,5 +302,26 @@
   "result": "pass",
   "note": "Lean matches node clause by clause: finite type = LocallyOfFiniteType+QuasiCompact; componentwise topologicalKrullDim=1; nonsmooth = no open nbhd with Smooth; finite+IsSeparable via canonical residueFieldAlgebraMap; k-compatible AdicCompletion ≃+* κ[[X0,X1]]/(X0X1); Z = openComplement.ι.imageι (scheme-theoretic image), Y∩Z = pullback; (2)(a) coproduct of Spec of finite separable K_a over Spec k (n=0 allowed); (2)(b),(c) per pullback point. Statement verbatim; dep records used; no hollow defs; sorry only (axioms checked); docstrings with source/blueprint/9 steps. nt_compile --json clean (exit 0, 4.0 s). Advisory only: openComplementOfIsClosedImmersion/residueFieldAlgebraMap owners not in stmt_deps; second reading by the same worker."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-finite-proper-exchange",
+ "kind": "definition",
+ "title": "The canonical finite-coefficient ambient exchange on a commutative square",
+ "statement": "Let Λ be a commutative condensed ring and let g′:X′ → X, p′:X′ → Y′, p:X → Y and g:Y′ → Y be a commutative square of schemes. Define its ambient exchange R p_* then L g* → L g′* then R p′_* as the mate, under the specified derived geometric adjunctions, of the derived pullback comparison obtained from the two pullback compositors and the equality p′;g = g′;p. This is the existing unit-square-counit construction before any properness or invertibility assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Coefficient transport and clauses (2)--(3), canonical-map identifications."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Form the isomorphism from Lg* followed by Lp′* to Lp* followed by Lg′* using the inverse first compositor, equality of composite scheme maps, and second compositor. Apply Mathlib mateEquiv to the specified derived pullback/direct-image adjunctions. This constructs the natural transformation and uses no chosen inverse to a geometric arrow.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Expanded normalized coefficient transport; existing source-library proofs are used where available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of the derived pullback composition comparison over a commutative square gives the base change natural transformation",
+   "results": "Eight hits: chosen-pullback composition units/counits, presheaf-module pullback composition, and categorical pullback component equations. None states this internal derived mate.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing geometric compositors and Mathlib mateEquiv."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, its unit/counit equations, and vertical/horizontal composition equations.",
+   "date": "2026-10-23",
+   "verdict": "mateEquiv constructs the arrow once the geometric pullback square is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ee]xchange|[Ee]xchange.*derived",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib specialization for the internal derived operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of a pullback composition isomorphism under derived pullback pushforward adjunctions is the proper base change natural transformation on sheaves, and derived projection formula transports across exact equivalences",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; PresheafOfModules.pullback_comp_id; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.toOverPullbackIsoToOver; SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "General adjunction, equivalence and underived module-sheaf pullback comparisons; no match for the specified geometric derived operation statement. Reuse the recorded source-library proof or construct the operation from the existing geometric adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperBaseChange",
+  "date": "2026-10-23",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof, coefficient transport and canonical exchange/projection comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProperExchange",
+  "file": "lean/Sheaf/Paper/FiniteProperExchange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperExchange",
+  "statement": "def finiteProperExchange {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {p' : X' ⟶ Y'} {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' p' p g) : (lowerStar Λ p).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor ⟶ (upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ p').rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-25",
+  "note": "Compile-interface repair: the exposed unit-square-counit mate expanded through derived adjunctions during downstream kernel checking and caused a deterministic timeout in boundaryVanishing_finite. The existing canonical definition is now no_expose; its real construction and signature are unchanged. FiniteProperBaseChange drops only the redundant local irreducible attribute on this now opaque imported declaration. No new choice or hypothesis is introduced.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finitePullbackCongr",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finitePullbackCongr_rfl",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finitePullbackCongr_eqToIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finitePullbackSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteProperExchange_eq_mate"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T204629-L-2985599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c2a429cf",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the e965 H2 return. The item module is identical to e965 except that the IntegralLocalizingCompactSupport import is now non-public. The item node drops theorem stmt_dep det-prop-int-brown-construction and keeps def-pur-canonical-purity-source-transports; statement, proof and proof_deps are unchanged. Dependency repairs change only the lean records: pull/push are abbrevs of moduleDerivedPullback/Pushforward, checked literally equal to (upperStar Λ f).leftDerivedFunctor and (lowerStar Λ f).rightDerivedFunctor; @[no_expose] finiteProperExchange keeps its body and signature; FiniteProperBaseChange drops one local irreducible entry. Recorded signatures match the source. Independent reading of Result: SourceLocalizationNormalization pins hLocalization (good-line conjunct holds), so eta is the transport of Q(I.gamma); hShift is fixed by its shift compatibility; a = sourceScalar; b = system rationalComparison.b with the counit-transpose clause; scalarLocalization = Q(scalarBridge); the two PuritySquares match the node's displayed equations; unit, associator and shift clauses are present; edge cases E=F, chains, ramified extensions, d=0, empty schemes and integer shifts are covered; no hollow definitions; report sections present. Advisories: no_expose hides the mate body from stage-3 proofs in other modules (needs import all or an _eq lemma); uncited helper owners follow family precedent. No compile was run (no file changed); the worker reports a clean four-module compile and a passed dry run at 4ed7d68b928."
+ }
+}

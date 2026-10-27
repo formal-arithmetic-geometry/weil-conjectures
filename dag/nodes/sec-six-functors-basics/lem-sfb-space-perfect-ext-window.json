@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-space-perfect-ext-window",
+ "kind": "statement",
+ "title": "Finite cohomology window for Hom out of a perfect algebraic-space complex",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. For each perfect $P\\in D(\\mathcal O_X)$ there exist integers $a\\le b$ such that, for every $F\\in C_X$, if $\\mathcal H^q(F)=0$ for every $a\\le q\\le b$, then $\\operatorname{Hom}_{D(\\mathcal O_X)}(P,F)=0$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, assertion (1)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=P^\\vee=R\\mathcal Hom_{\\mathcal O_X}(P,\\mathcal O_X)$. By [lem-sfb-ringed-site-perfect-duality], $D$ is perfect. Apply [lem-sfb-space-perfect-uniform-tor] to $D$: it has quasi-coherent cohomology and Tor amplitude in some $[u,v]$. Choose $N\\geq0$ from [lem-sfb-space-global-sections-amplitude]. Set $a=-N-v$ and $b=-u$. Then $a\\leq b$ because $u\\leq v$ and $N\\geq0$. These integers depend on $X,P$, not on $F$.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-space-perfect-uniform-tor",
+    "lem-sfb-space-global-sections-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, proof of (1); equivalent truncation-tail form of its tensor spectral-sequence calculation."
+   }
+  },
+  {
+   "text": "Let $F\\in C_X$ have zero cohomology on $[a,b]$. Use [lem-sf-derived-truncation-triangle] at $a$ to form $A\\to F\\to B\\to A[1]$ with $A=\\tau_{\\leq a-1}F$ and $B=\\tau_{\\geq a}F$. Thus $A$ has zero cohomology above $a-1$. For $i\\geq a$ the long exact cohomology sequence identifies $\\mathcal H^i(B)$ with $\\mathcal H^i(F)$, since both adjacent cohomology sheaves of $A$ are zero. Hence $B$ has zero cohomology below $b+1$: below $a$ by truncation and from $a$ to $b$ by the hypothesis on $F$. Similarly $\\mathcal H^i(A)=\\mathcal H^i(F)$ below $a$, and all other cohomology sheaves of $A$ vanish. Consequently both $A,B$ have quasi-coherent cohomology.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, proof of (1); equivalent truncation-tail form of its tensor spectral-sequence calculation."
+   }
+  },
+  {
+   "text": "The module-sheaf category has a closed additive symmetric tensor by [lem-pc-sheaf-modules-tensor-closed], is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], and has functorial flat resolutions by [lem-trf-site-functorial-flat-resolution]. Thus the categorical tensor bounds apply to its K-flat derived tensor. By [lem-sc-source-tor-amplitude-upper-tensor-bound], $D\\otimes^{\\mathbf L}A$ has no cohomology above $v+a-1=-N-1$. By [lem-sc-source-tor-amplitude-lower-tensor-bound], $D\\otimes^{\\mathbf L}B$ has no cohomology below $u+b+1=1$. Both tensors have quasi-coherent cohomology by [lem-sfb-space-derived-qcoh-pullback-tensor].",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-sc-source-tor-amplitude-upper-tensor-bound",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "lem-sfb-space-derived-qcoh-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, proof of (1); equivalent truncation-tail form of its tensor spectral-sequence calculation."
+   }
+  },
+  {
+   "text": "Tensor the triangle of Step 2 with $D$. This preserves the distinguished triangle by [lem-sc-source-kflat-tensor-left-triangulated], using a K-flat representative supplied by [lem-weil-pbc-site-derived-tensor-descent]. Apply $R\\Gamma(X,-)$ to that triangle; it preserves distinguished triangles by [lem-pc-right-derived-functor-triangulated]. By [lem-sfb-space-global-sections-amplitude], its first term has zero cohomology in all degrees greater than $(-N-1)+N=-1$, and its third term has zero cohomology below $1$. The degree-zero part of the long exact sequence therefore has zero groups on both sides of $H^0R\\Gamma(X,D\\otimes^{\\mathbf L}F)$, which is consequently zero.",
+   "uses": [
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, proof of (1); equivalent truncation-tail form of its tensor spectral-sequence calculation."
+   }
+  },
+  {
+   "text": "The evaluation isomorphism of [lem-sfb-ringed-site-perfect-duality] identifies $D\\otimes^{\\mathbf L}F$ with $R\\mathcal Hom(P,F)$ in the derived category. Taking zeroth derived global sections and using [lem-pur-rhom-global-sections] gives $\\operatorname{Hom}_{D(\\mathcal O_X)}(P,F)\\cong H^0R\\Gamma(X,D\\otimes^{\\mathbf L}F)=0$, as required.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, proof of (1); equivalent truncation-tail form of its tensor spectral-sequence calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-space-perfect-uniform-tor",
+  "lem-sfb-space-global-sections-amplitude",
+  "lem-sf-derived-truncation-triangle",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-sc-source-tor-amplitude-upper-tensor-bound",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09MB, lemma-ext-from-perfect-into-bounded-QCoh, proof of (1); equivalent truncation-tail form of its tensor spectral-sequence calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Hom\"",
+   "results": {
+    "hits": 2,
+    "top": [
+     "IsPerfectClosure.equiv_toRingHom",
+     "IsPerfectClosure.equiv_symm_toRingHom"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a quasi compact quasi separated algebraic space has a finite cohomology window detecting vanishing of Hom",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.isLE_iff",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isZero_of_isGE",
+     "DerivedCategory.isZero_of_isLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|PerfectComplex|ext.*[Ww]indow",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exist integers a b such that Hom from a perfect complex to L is zero whenever H i L vanishes between a and b",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.isZero_of_isLE",
+     "ComplexShape.Embedding.AreComplementary.hom_ext'",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "ComplexShape.Embedding.AreComplementary.hom_ext",
+     "HomologicalComplex.instHasZeroMorphisms",
+     "HomologicalComplex.isZero_stupidTrunc_iff",
+     "CochainComplex.HomComplex.CohomologyClass.mk_zero",
+     "CochainComplex.isZero_of_isGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from a perfect object vanishes if target cohomology vanishes in a fixed finite interval",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.HasInjectiveDimensionLT.mk",
+     "CategoryTheory.HasProjectiveDimensionLT.mk",
+     "CategoryTheory.hasInjectiveDimensionLT_iff",
+     "CategoryTheory.InjectiveResolution.extMk_zero",
+     "CategoryTheory.ProjectiveResolution.extMk_zero",
+     "CategoryTheory.HasInjectiveDimensionLT.subsingleton'",
+     "CategoryTheory.HasInjectiveDimensionLT.subsingleton",
+     "CategoryTheory.HasProjectiveDimensionLT.subsingleton"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|PerfectComplex|ext.*[Ww]indow",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Tactic/Linter/TextBased.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/GroupTheory/IsPerfect.lean",
+     "Mathlib/FieldTheory/IsPerfectClosure.lean",
+     "Mathlib/FieldTheory/IsPerfectClosure.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space finite Hom-window theorem; generic t-structure bounds do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exist integers a b such that Hom from a perfect complex to L is zero whenever H i L vanishes between a and b",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.isZero_of_isLE",
+     "ComplexShape.Embedding.AreComplementary.hom_ext'",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "ComplexShape.Embedding.AreComplementary.hom_ext",
+     "HomologicalComplex.instHasZeroMorphisms",
+     "HomologicalComplex.isZero_stupidTrunc_iff",
+     "CochainComplex.HomComplex.CohomologyClass.mk_zero",
+     "CochainComplex.isZero_of_isGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space finite Hom-window theorem; generic t-structure bounds do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Hom\"",
+   "results": {
+    "hits": 2,
+    "top": [
+     "IsPerfectClosure.equiv_toRingHom",
+     "IsPerfectClosure.equiv_symm_toRingHom"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space finite Hom-window theorem; generic t-structure bounds do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a quasi compact quasi separated algebraic space has a finite cohomology window detecting vanishing of Hom",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.isLE_iff",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.isZero_of_isGE",
+     "DerivedCategory.isZero_of_isLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space finite Hom-window theorem; generic t-structure bounds do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from a perfect object vanishes if target cohomology vanishes in a fixed finite interval",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.HasInjectiveDimensionLT.mk",
+     "CategoryTheory.HasProjectiveDimensionLT.mk",
+     "CategoryTheory.hasInjectiveDimensionLT_iff",
+     "CategoryTheory.InjectiveResolution.extMk_zero",
+     "CategoryTheory.ProjectiveResolution.extMk_zero",
+     "CategoryTheory.HasInjectiveDimensionLT.subsingleton'",
+     "CategoryTheory.HasInjectiveDimensionLT.subsingleton",
+     "CategoryTheory.HasProjectiveDimensionLT.subsingleton"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space finite Hom-window theorem; generic t-structure bounds do not specialize in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-generator-detects-lower-bound",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Current split: Tag 09MB(1), perfect dual, finite Tor interval and the finite cohomological amplitude of global sections; tensor the two truncation tails.",
+   "via": [
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-ext-window",
+  "worker": "stage1",
+  "summary": "Checked Stacks 09MB(1) against its actual hypotheses. Kept the statement; extracted uniform perfect-space Tor bounds and unbounded quasi-coherent global-sections amplitude as two statement-only inputs. Reused general tensor bounds and the truncation triangle; no tensor-gap node is created. All cited statements were read and all required searches logged.",
+  "blueprint": "Supporting coherent-space toolkit reached through the inherited det-thm-sf-ctf-stability-direct-images paragraph (3) chain. The current latest blueprint does not state this auxiliary lemma; it is Stacks 09MB(1). The source proof is realized by dualization, uniform bounds, and the equivalent tensor-truncation-tail argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-trf-site-functorial-flat-resolution",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sc-source-tor-amplitude-upper-tensor-bound",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ringed-site or homological-algebra tool used to bound the two truncation tails or identify their degree-zero global Hom; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Exactness of K-injective right derived global sections is a generic derived-functor tool, needed for the cohomology sequence of the tensor truncation triangle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-sc-source-tor-amplitude-upper-tensor-bound",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-e5883a917",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-e5883a917 (reviewer sub-agent of L); spot-checked: I read all of it. The item statement is unchanged and matches Stacks 09MB(1) (spaces-perfect.tex l.4110-4170) hypothesis by hypothesis. The five steps replace the source's spectral sequence with a truncation-tail argument. Arithmetic checked: a=-N-v, b=-u; D⊗τ≤a-1F ≤ -N-1, so RΓ of it ≤ -1; D⊗τ≥aF ≥ u+b+1=1, so RΓ of it ≥ 1; hence H^0=0. This is the Stacks window [-b-N,-a], one degree tighter in N. Every cited statement was read and fits its step: the duality evaluation isomorphism; the truncation triangle; the tensor-closed, Grothendieck and functorial-flat ambient hypotheses of the generic Tor bounds, whose Tor-amplitude definition matches the new node; qcoh-tensor; K-flat triangulated; RΓ triangulated; RHom global sections. New node uniform-tor is true: take an affine atlas and a finite refinement, and summands of finite free modules are flat and quasi-coherent (08JL, 08G8). Quasi-compactness is needed (counterexample ⊔Spec Z). New node global-sections-amplitude is 08F7(3) with a=-∞ for Γ, plus 072C (N=c-1) and 05TC. Tested on affine X (N=0), P^1 (N≥1, from O(-2)) and empty X. Neither new node is a clause of the item. Not duplicates of the 08F7 node (which takes the qcoh bound as a hypothesis), the affine-chart vanishing node, the pushforward upper bound, perfect-objects-compact, site-tor-interval-restriction, internal-hom-dual-tor-amplitude or etale-local-dual-interval. Batch 5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions; lem-trf-site-functorial-flat-resolution is a generic site fact, not a step of the trace-formula or Poincaré proofs; qcoh-pullback-tensor reaches sec-trace-formula only through the definition. All accepted. The nine generic tool_uses are accepted. No SGA. proof_deps equals the union of uses. blueprint.from.node is null, inherited from Q124 (maintainer note only). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectExtWindow",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfect_ext_window",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectExtWindow.lean",
+  "statement": "theorem perfect_ext_window {S : Scheme.{u}} (X : AlgebraicSpace S) [CompactSpace (Point X.obj.obj)] (hqs : X.IsAbsolutelyQuasiSeparated) [HasDerivedCategory.{w} X.SmallModules] (P : X.DerivedModules) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P) : ∃ a b : ℤ, a ≤ b ∧ ∀ F : X.DerivedQCoh, (∀ q : ℤ, a ≤ q → q ≤ b → IsZero ((DerivedCategory.homologyFunctor X.SmallModules q).obj F.obj)) → Subsingleton (P ⟶ F.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published equivalent small affine ringed model and its D_QCoh full subcategory. The added statement dependencies own that model, the derived categories, the point topology and absolute quasi-separatedness; no mathematical hypothesis or conclusion changes. The Hom group is zero exactly when its underlying type is Subsingleton."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b07bdf8de",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09MB(1) clause by clause, with no added hypotheses: CompactSpace |X| plus IsAbsolutelyQuasiSeparated for qcqs; D(O_X) and D_QCoh are the landed owners on the small affine model (def-sfb-space-derived-module-calculus); IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} allows local bounds and ranks; ∃ a≤b is chosen before ∀ F; vanishing on [a,b] is inclusive; Subsingleton Hom is equivalent to a zero Hom group. The node diff only adds the lean record and four landed definition stmt_deps, each used in the signature, with no theorem stmt_dep. Statement text unchanged; lean.statement verbatim. No clash or duplicate; 09M4 scheme analogue is distinct. Docstrings carry source, blueprint id and the five proof steps; proof is sorry only; report has both sections. Edge cases (empty X, P=0, a=b, unbounded F) covered. No file changed, so no compile; worker dry run OK. No findings."
+ }
+}

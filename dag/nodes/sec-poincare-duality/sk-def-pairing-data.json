@@ -31,7 +31,12 @@
   "def-weil-finite-coefficient-point",
   "lem-sf-point-fibre-derived-tensor",
   "sk-def-sf-exchanges",
-  "sk-def-sf-orientation"
+  "sk-def-sf-orientation",
+  "def-sf-constructible-projection-mates",
+  "def-pod-pairing-tensor-generators",
+  "def-pod-pairing-tensor-normalization",
+  "def-pod-pairing-finite-tensor-transport",
+  "def-pod-pairing-coefficient-unit"
  ],
  "proof": [],
  "proof_deps": [],
@@ -142,5 +147,73 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-7c5645a8b (reviewer sub-agent of L); spot-checked: I read the item, the unit and all 19 cited nodes in full, including the blueprint_update texts where present, against the main-20261015 sk-def-pairing-data/_section.md (order 2760) and the current sk-def-set, sk-def-ops, sk-def-sf-orientation and sk-def-sf-exchanges (PF, lines 36-44) sources. Setting: the hypotheses are exactly those of sk-def-set: smooth of relative dimension d, separated finite type, geometrically connected, base change to k, no properness, no admissibility. The four coefficient stages are the pro-étale categories of sk-def-ops (completed integral, rationalized, common finite stage) and are not identified with the étale Lean categories. Cup product: the composite is PF_{a_X,K,Ra_{X*}L} : Ra_!K ⊗ Ra_*L -> Ra_!(K ⊗ La^*Ra_*L), then Ra_!(1 ⊗ counit), then passage to complexes through the tensor and unit isomorphisms of lem-sf-point-fibre-derived-tensor for objects of D^b_ctf(s). The resulting type matches the source. Ra_*L in D^b_ctf(s) comes from the sk-def-ops/sk-def-set operations package, not a new claim. Trace: the canonical orientation goes Lambda_X(d)[2d] -> Ra^!Lambda_s, which is the direction of sk-def-sf-orientation (a_X is base-changed smooth of relative dimension d, so pure), followed by the constructible exceptional counit and Fib_s(Lambda_s) = Lambda. This agrees with def-pur-smooth-trace for Y = s. Edge cases checked: d=0 forces X=s with identity adjunctions; empty X is excluded by connectedness; A^1 is non-proper and uses Ra_!; P^1 gives a two-degree complex; zero arguments; n=1; ell invertible for the twists. Form: there are no new nodes and no proof steps. Inline citations equal stmt_deps, every id exists and none is merged. The dependency closure has no cycle (the only citer is sk-def-pairing). TeX is single-escaped. same_as=[] is justified: def-sf-cup and def-pod-mixed-support-cup-product cover only the cup clause, def-pur-smooth-trace only the finite trace, and def-sf-pairing/sk-def-pairing compose further. No SGA source is used. Not attaching the étale Lean definitions is correct, since they take a supplied orientation or finite coefficients. Unit: only the realized and realized_by fields changed. Side remark, not this delivery's fault: sk-def-sf-setting puts the finite stage on the étale site while sk-def-ops uses the pro-étale site; the item follows sk-def-ops as its source requires. No fixes, no tool_uses."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.mixedSupportCupProduct",
+    "AlgebraicGeometry.Etale.smoothTrace",
+    "AlgebraicGeometry.Etale.TateOrientation.smoothTrace"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.mixedSupportCupProduct",
+    "AlgebraicGeometry.Etale.smoothTrace",
+    "AlgebraicGeometry.Etale.TateOrientation.smoothTrace"
+   ]
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PairingData",
+  "declaration": "WeilConjectures.SixFunctorDatum.pairingData",
+  "declarations": [
+   "WeilConjectures.pairingPointIdentifications",
+   "WeilConjectures.pairingGeometricSpace",
+   "WeilConjectures.pairingStageCup",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteInput",
+   "WeilConjectures.SixFunctorDatum.pairingIntegralInput",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteSupport",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteDirect",
+   "WeilConjectures.SixFunctorDatum.pairingIntegralSupport",
+   "WeilConjectures.SixFunctorDatum.pairingIntegralDirect",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteTensorCoordinates",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteCounit",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteSiteCup",
+   "WeilConjectures.SixFunctorDatum.pairingFiniteTargetCoordinates",
+   "WeilConjectures.SixFunctorDatum.finitePairingCup",
+   "WeilConjectures.SixFunctorDatum.integralPairingCup",
+   "WeilConjectures.SixFunctorDatum.rationalPairingCup",
+   "WeilConjectures.SixFunctorDatum.commonPairingCup",
+   "WeilConjectures.pairingIntegralZero",
+   "WeilConjectures.pairingFiniteZero",
+   "WeilConjectures.pairingIntegralZeroInSystem",
+   "WeilConjectures.pairingRationalZero",
+   "WeilConjectures.pairingCommonZero",
+   "WeilConjectures.smoothTraceOfOrientation",
+   "WeilConjectures.SixFunctorDatum.finiteNormalizedSmoothTrace",
+   "WeilConjectures.SixFunctorDatum.integralNormalizedSmoothTrace",
+   "WeilConjectures.SixFunctorDatum.rationalNormalizedSmoothTrace",
+   "WeilConjectures.SixFunctorDatum.commonNormalizedSmoothTrace",
+   "WeilConjectures.SixFunctorDatum.pairingData"
+  ],
+  "file": "lean/Sheaf/Paper/PairingData.lean",
+  "statement": "def pairingData (S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))) (O : SfOrientationDatum S) (d : ℕ) (G : PoincareDualitySetting D.k₀ d) (c : Compactification (G.structureMorphism D.k))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H3: all eight arrows now have coefficient-complex endpoints, applying tensorIso.inv and unitIso.hom. Actual S support/direct finite-Tor objects, tensor normalization and zero-line unit comparisons are used. Repairs H2/H13: finite cup is formed here from S.finite using ConstructibleProjectionMates; no change to the held def-sf-cup record or module. Repairs H9: the unused PoincareOperations import and dependency packet are removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-efa7656b3",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Real repair of RETURNed 677972139168/ccb35eef308e, not a re-push. H3 fixed: each of the 4 cups = tensorIso.inv ≫ stage tensor normalization ≫ Fib(PF component at (K,Ra_*L) ≫ Ra_!(1⊗counit of pull⊣direct)), source RΓ_c(K)⊗RΓ(L), target RΓ_c(K⊗L). Each of the 4 traces = Fib(Ra_!γ ≫ exceptional counit) ≫ zero-line comparison ≫ unitIso.hom, landing in Λ. Finite cup uses S.finite via the landed CompactSupportFiniteProjection.component, with finite-Tor memberships from S.*Coherence. H2/H13 fixed: def-sf-cup module and NL record untouched; vs live dag only the item (lean, plus 5 landed/new stmt_deps) and 4 new nodes change. H9 fixed: PoincareOperations dropped; source path is main-20261015. New nodes def-pod-pairing-{tensor-generators,tensor-normalization,finite-tensor-transport,coefficient-unit}: no duplicate exists (intrinsic_realization_tensor_complex_iso is only Nonempty; no canonical 1≅A_X[0]); the ∃! normalizations are sound (pure-tensor generation plus K-flat resolutions; unit fixed via P=unit and left unitor); the HEq sides are defeq (derivedTensor = curriedTensor); §5 fields, verbatim lean.statement and docstrings ok; sorry only in the two ∃! theorems. Edge cases m=0, d=0, zero objects, non-proper X, empty X ok; no universe restriction. Advisory: transitive-only owners (def-sf-orientation-finite-reduction-comparisons, def-sf-point-fibre-tensor-system, def-weil-rationalization-karoubi); component types inferred. No compile (no FIX); relied on worker scompile and dry-run OK at 81acc8c1593."
+ }
 }

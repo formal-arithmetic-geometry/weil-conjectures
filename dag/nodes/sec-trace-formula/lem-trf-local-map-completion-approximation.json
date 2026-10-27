@@ -21,93 +21,55 @@
  ],
  "proof": [
   {
-   "text": "The assertion is local on X, Y, and S. Choose affine neighbourhoods S=Spec(R), X=Spec(A), and Y=Spec(B) containing s, x, and y, and write x and y as primes p of A and q of B. Put r=p intersected with R and replace R,A,B by their localizations at R\\r; then R=O_{S,s} is a G-ring, A and B are finite type R-algebras, and A_p and B_q are the local rings at x and y. The finite-type G-ring transfer of Stacks Tag 07PV, recorded in [lem-weil-pbc-finite-type-over-g-ring], makes A a G-ring, and its localization clause makes A_p a G-ring. The given map is a local map B_q to the p-adic completion of A_p.",
+   "text": "Apply [lem-trf-local-map-affine-chart-dictionary] to choose actual affine open charts $S_0=\\operatorname{Spec}R$, $X_0=\\operatorname{Spec}A$, $Y_0=\\operatorname{Spec}B$, their marked primes $\\mathfrak r,\\mathfrak p,\\mathfrak q$, and a finite presentation $B=R[T_1,\\ldots,T_n]/(F_1,\\ldots,F_m)$. It supplies Noetherian $A$ and a G-ring $A_{\\mathfrak p}$, and identifies the given map with a local $R$-algebra map $\\theta:B_{\\mathfrak q}\\to\\widehat{A_{\\mathfrak p}}$. Set $a_i=\\theta(\\overline T_i/1)$; the equations $F_j(a)=0$ follow by applying this ring map to the defining relations of $B$.",
    "uses": [
-    "def-pc-scheme",
-    "pqf-def-locnoeth",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-g-ring",
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-finite-type-over-g-ring"
+    "lem-trf-local-map-affine-chart-dictionary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAU, proof, first paragraph; G-ring transfer is More on Algebra Tag 07PV."
+    "place": "Tag 0CAU, lemma-map-approximation, statement and proof at lines 11017–11068; Artin approximation input is Smoothing Ring Maps Tag 0CAR, lemma-approximation-property-variant."
    }
   },
   {
-   "text": "Choose a presentation B=R[x_1,...,x_n]/(f_1,...,f_m). Let a_i in the completion of A_p be the images of x_i under B to B_q to the completion of A_p. The images in A[x_1,...,x_n] of the f_j vanish at the a_i. Apply [lem-trf-artin-approximation-etale-local-map] with base ring A, prime p, these A-coefficient polynomials, the completed solution (a_i), the G-ring A_p, and N. It gives an etale map A to A', a prime p' over p with kappa(p) to kappa(p') an isomorphism, and b_i in A' solving the same equations with a_i-b_i in (p')^N times the completion of A'_{p'}.",
-   "uses": [
-    "lem-trf-artin-approximation-etale-local-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAU, proof, lines 11049–11063, invoking Smoothing Ring Maps Tag 0CAR."
-   }
-  },
-  {
-   "text": "The b_i define an R-algebra map phi:B to A'. For every polynomial h in R[x_1,...,x_n], the difference h(b_1,...,b_n)-h(a_1,...,a_n), after mapping the second term to the completion of A'_{p'}, lies in (p')^N times that completion: expand h into monomials and use that each b_i-a_i lies in this ideal. This gives the congruence for the image under phi of every element represented by a polynomial.",
+   "text": "View the $F_j$ as polynomials over $A$. Apply [lem-trf-artin-approximation-etale-local-map] with the Noetherian ring $A$, prime $\\mathfrak p$, G-ring $A_{\\mathfrak p}$, solution $(a_i)$, and the prescribed $N\\geq1$. Obtain an étale $h:A\\to A\\prime$, a prime $\\mathfrak p\\prime$ over $\\mathfrak p$, an isomorphism $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p\\prime)$, and a solution $(b_i)$ in $A\\prime$ congruent to $(a_i)$ in $\\widehat{A\\prime_{\\mathfrak p\\prime}}$ modulo $J=(\\mathfrak p\\prime A\\prime_{\\mathfrak p\\prime})^N\\widehat{A\\prime_{\\mathfrak p\\prime}}$. The affine chart dictionary also supplies Noetherianity of $A\\prime$.",
    "uses": [
     "lem-trf-artin-approximation-etale-local-map",
-    "def-weil-pbc-adic-completion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAU, proof, lines 11054–11060, extending the generator congruences."
-   }
-  },
-  {
-   "text": "The induced map on residue fields from the local map B_q to the completion of A_p is injective from kappa(q) into kappa(p). If c is in q, its image under the given map has zero residue; the congruence of Step 3 therefore makes phi(c) have zero residue at p', so phi(c) is in p'. Conversely, if phi(c) is in p', the same congruence makes the image of c under the given local map have zero residue in kappa(p); injectivity on residue fields gives c in q. Hence phi^{-1}(p')=q. This is the required inverse-image equality, not merely the inclusion q subseteq phi^{-1}(p').",
-   "uses": [
-    "lem-trf-artin-approximation-etale-local-map",
-    "def-weil-residue-field",
-    "def-weil-pbc-adic-completion"
+    "lem-trf-local-map-affine-chart-dictionary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAU, proof, lines 11059–11067, locality at the selected prime."
+    "place": "Tag 0CAU, lemma-map-approximation, statement and proof at lines 11017–11068; Artin approximation input is Smoothing Ring Maps Tag 0CAR, lemma-approximation-property-variant."
    }
   },
   {
-   "text": "Because phi^{-1}(p')=q, phi localizes to a local map B_q to A'_{p'}. Its contravariant map is an S-morphism f:Spec(A') to Spec(B), and f(p')=q. For a fraction h/s in B_q with s outside q, both evaluations of s are units in the two local rings. The identity (h(b)/s(b))-(h(a)/s(a)) = (h(b)s(a)-h(a)s(b))/(s(b)s(a)), together with the polynomial congruences and the analogous congruence for s, shows that the difference belongs to (p')^N in the completed local ring. Thus the congruence holds for every element of B_q.",
+   "text": "Apply [lem-trf-generator-congruence-localization] to this presentation, $h$, the marked primes, $\\theta$ and $(b_i)$. Its $R$-algebra map $\\phi:B\\to A\\prime$ satisfies $\\phi^{-1}(\\mathfrak p\\prime)=\\mathfrak q$, and its localized map $\\phi_{\\mathfrak q}$ satisfies $\\widehat h_{\\mathfrak p}(\\theta(z))-\\iota(\\phi_{\\mathfrak q}(z))\\in J$ for every $z\\in B_{\\mathfrak q}$, including fractions.",
    "uses": [
-    "lem-trf-artin-approximation-etale-local-map",
-    "def-weil-pbc-adic-completion"
+    "lem-trf-generator-congruence-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAU, proof, lines 11054–11067, passage from polynomial generators to the localization B_q."
+    "place": "Tag 0CAU, lemma-map-approximation, statement and proof at lines 11017–11068; Artin approximation input is Smoothing Ring Maps Tag 0CAR, lemma-approximation-property-variant."
    }
   },
   {
-   "text": "The etale ring map A to A' induces an etale morphism p:U=Spec(A') to X=Spec(A), with u=p' mapping to x=p; the residue-field isomorphism is the one supplied in Step 2. The localized map B_q to A'_{p'} gives an S-morphism f:U to Y with f(u)=y. Under the affine identifications, the congruence of Step 5 is exactly that the two completion maps differ by an element of m_u^N times the completed local ring, where m_u=p'A'_{p'}. Shrinking back through the chosen affine opens transports these data to the original schemes and proves the stated conclusion for the arbitrary N.",
+   "text": "Use the output part of [lem-trf-local-map-affine-chart-dictionary] with $h$ and $\\phi$. It gives $U=\\operatorname{Spec}A\\prime$, $u=\\mathfrak p\\prime$, an étale $p_U:U\\to X$ with unchanged residue field at $u$, and an $S$-morphism $f_U:U\\to Y$ taking $u$ to $y$. Its identifications of stalk maps, induced completion maps, and extended maximal-ideal powers turn the preceding congruence into precisely the stated congruence for every $a\\in\\mathcal O_{Y,y}$. These are the required witnesses for the arbitrary $N$.",
    "uses": [
-    "def-weil-etale-morphism",
-    "def-weil-residue-field",
-    "def-weil-pbc-adic-completion"
+    "lem-trf-local-map-affine-chart-dictionary"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAU, conclusion of Tag 0CAU proof at lines 11064–11068."
+    "place": "Tag 0CAU, lemma-map-approximation, statement and proof at lines 11017–11068; Artin approximation input is Smoothing Ring Maps Tag 0CAR, lemma-approximation-property-variant."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-etale-morphism",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-adic-completion",
-  "def-weil-pbc-g-ring",
-  "def-weil-residue-field",
   "lem-trf-artin-approximation-etale-local-map",
-  "lem-weil-pbc-finite-type-over-g-ring",
-  "pqf-def-locnoeth"
+  "lem-trf-generator-congruence-localization",
+  "lem-trf-local-map-affine-chart-dictionary"
  ],
  "proof_origin": {
   "by": "document",
@@ -164,7 +126,6 @@
    "node": "lem-trf-local-term-locality",
    "place": "The local-algebra approximation input to Tag 0CAV used in the first paragraph of Tag 0GDX, under the nodal local-model branch of lem-trf-local-term-locality; specifically Tag 0CAU approximates the given local map before the graded-ring argument makes the second leg etale.",
    "via": [
-    "lem-trf-local-map-completion-approximation",
     "lem-trf-isomorphism-completion-approximation",
     "lem-trf-relative-completion-etale-approximation",
     "lem-trf-nodal-family-etale-local-model",
@@ -181,20 +142,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-local-map-completion-approximation",
   "worker": "stage1",
-  "summary": "Repaired the Tag 0CAU split after review: the affine proof now distinguishes the base ring R from the coordinate ring A, explicitly transfers the G-ring hypothesis from the localized base to A_p using Tag 07PV, applies the Artin approximation child with base A and A_p G-ring, and proves the inverse-image equality phi^{-1}(p')=q before localizing. The statement remains unchanged.",
+  "summary": "Q156 repair of the refused side-completion landing, rebased by the delivery tool onto the freshly fetched current DAG. Retained both independent statement-only children and the four-step assembly (2128 characters); compared returned-item.json with the current live item (no differing fields), re-read all current cited statements and Stacks 0CAU/0CAR/07PV, and verified all five citation quotes. The current retained-files dry run passed at e5c0fbd038c. The released keep_plan re-split order remains in force; the historical reviewed split is not treated as completion. Statement, statement dependencies, citations and logged Mathlib searches remain unchanged.",
   "blueprint": "Realizes the Tag 0CAU local-algebra approximation input used by the historical nodal local-model branch under lem-trf-local-term-locality, with the corrected affine A-base and locality argument.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q13-8c9964c59",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q156-10210053f",
+  "group": "Q156",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-8c9964c59 (reviewer sub-agent of L); spot-checked: Read the required materials, item, new child, cited statements, unit route, and Stacks Tags 0CAU, 0CAR, and 07PV. Verified hypotheses, completion/base-change maps, residue-field locality, denominator calculation, edge cases, searches, duplicates, and route compliance. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-10210053f (reviewer sub-agent of L); spot-checked: Fifth delivery of the same split. The new nodes lem-trf-generator-congruence-localization and lem-trf-local-map-affine-chart-dictionary are byte-identical to eea15f71, 1817555e, 67d02799 and 8a1c077f; the item differs only in split_report. Live and side-live still hold the old 6-step split of 2026-10-18 and neither child exists live, so the item is not superseded. I re-read the mathematics in full. The item statement matches Stacks 0CAU lemma-map-approximation (more-morphisms.tex 11016-11068) hypothesis by hypothesis, the target is not weakened, and no SGA source is cited. The Artin node gives exactly what step 2 uses (0CAR inputs Noetherian A and G-ring A_p; outputs étale A', p' over p, κ isomorphism, N-th power congruences). A_p is a G-ring by 07PV through R_r while the actual affine opens are kept, so p_U stays étale. Re-split check: old steps 1 and 6 became the dictionary, old step 2 is the existing Artin node, old steps 3-5 became the congruence node; nothing was dropped. The children have comparable sizes (2378 and 1822 characters), neither restates the item, and the item is a 4-step assembly of 2128 characters. My own proof of the congruence node: ψ1=ĥθ·loc and ψ2=ι·loc·φ agree mod J on generators, hence on all of B; J lies in the maximal ideal of the local completion for N>=1 and all maps are local, so φ^{-1}(p')=q with both containments; fractions follow because s outside q has unit images. N=0 fails (k[T], q=(T), b=1), while n=0, m=0 and nilpotents are fine. The dictionary is true (Noetherian charts, finite presentation, A' Noetherian, standard stalk and completion identifications). The rg -L duplicate search found only 0CAV isomorphism-completion-approximation, a different statement. There are no tool_uses. FIX (B3): both new statements use ĥ_p, the induced map on maximal-ideal completions, but cite only def-weil-pbc-adic-completion. I added lem-weil-pbc-fs-adic-completion-map-local inline and to stmt_deps in fixes/dag/nodes/sec-trace-formula/{lem-trf-generator-congruence-localization,lem-trf-local-map-affine-chart-dictionary}.json. These files are identical to the earlier fixes and differ from the current nodes only in statement and stmt_deps. Maintainer note: promote the side completion or land this FIX; the split has now looped five times.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -218,5 +179,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

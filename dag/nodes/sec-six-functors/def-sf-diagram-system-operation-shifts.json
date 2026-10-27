@@ -1,0 +1,120 @@
+{
+ "id": "def-sf-diagram-system-operation-shifts",
+ "kind": "definition",
+ "title": "Canonical cochain shifts of semilinear system operations",
+ "status": "split",
+ "statement": "Let $u$ be a universe, $C:\\mathbb N\\to\\operatorname{CommRing}$ a sequence of commutative rings in universe $u+1$, and $\\tau_n:C_{n+1}\\to C_n$ arbitrary ring homomorphisms. For schemes in universe $u$, use the strict semilinear systems $\\mathscr S_X$, their ordinary unbounded derived categories $D_X$, the ordinary inverse image $v^*_\\bullet$, direct image $v_{*,\\bullet}$, open extension $j_{!,\\bullet}$ and their derived operations $P_v$, $R_v$, $J_j$ of [def-sp-semilinear-constant-ring-operations]. For any cochain complex $M$ and integer $h$, use $M[h]^p=M^{p+h}$ and $d_{M[h]}^p=(-1)^h d_M^{p+h}$. Define the integer-shift structure on $P_v$ to be the one induced by the exact termwise functor $v^*_\\bullet$ on complexes and its localization. For any open immersion $j:U\\hookrightarrow X$, define the integer-shift structure on $J_j$ to be the one induced by the exact termwise functor $j_{!,\\bullet}$ and its localization. Define the integer-shift structure on $R_v$ to be its standard right-derived, K-injective shift structure: shift a K-injective representative, apply $v_{*,\\bullet}$ termwise and use the standard localization comparisons. Each structure consists of the canonical natural isomorphisms $F(M[h])\\cong F(M)[h]$ with their zero and addition coherence. These definitions impose no flatness, boundedness, constructibility or nonemptiness assumptions.",
+ "stmt_deps": [
+  "def-sp-semilinear-constant-ring-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F (lemma-right-derived-exact-functor); ordinary termwise cochain shifts and their localization. Open exactness: sites-modules.tex, Tag 03DJ (lemma-extension-by-zero-exact); right-derived K-injective model: derived.tex, Tag 070H (definition-K-injective), and sites-cohomology.tex, Tag 07A6 (lemma-adjoint). These specialize the three published DiagramShift instances."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical integer cochain shifts on derived inverse image extension by zero and right derived direct image of semilinear sheaf systems",
+   "results": "{\"t\": \"2026-10-24T03:59:39Z\", \"tool\": \"leansearch\", \"query\": \"Canonical integer cochain shifts on derived inverse image extension by zero and right derived direct image of semilinear sheaf systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.shift\", \"CochainComplex.shiftFunctorZero_inv_app_f\", \"CochainComplex.HomComplex.Cochain.rightUnshift\", \"CochainComplex.instHasShiftInt\", \"CochainComplex.HomComplex.Cochain.rightUnshift_zero\", \"CochainComplex.shiftFunctor\", \"CochainComplex.HomComplex.Cochain.rightShift_zero\", \"CochainComplex.shiftEval\"], \"digest\": \"c08b0d66bc78d03c\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic complex-shift and exact-functor shift interfaces found. The precise three specialized system instances already exist in Sheaf.Paper.DiagramOpenClopenShiftModels and are reused, not redefined; no definition node owns them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.CommShift",
+   "results": "{\"t\": \"2026-10-24T03:59:39Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.CommShift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"6998883a0fb4bc0b\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic complex-shift and exact-functor shift interfaces found. The precise three specialized system instances already exist in Sheaf.Paper.DiagramOpenClopenShiftModels and are reused, not redefined; no definition node owns them."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*CommShift|rightDerivedFunctor.*CommShift|instance.*commShift",
+   "results": "{\"t\": \"2026-10-24T03:59:38Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory.*CommShift|rightDerivedFunctor.*CommShift|instance.*commShift\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"327e8571575274c9\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic complex-shift and exact-functor shift interfaces found. The precise three specialized system instances already exist in Sheaf.Paper.DiagramOpenClopenShiftModels and are reused, not redefined; no definition node owns them."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "rg -l DiagramShift\\.(pullShift|extensionShift|directShift) dag/nodes; rg -l pullShift|extensionShift|directShift lean/WeilConjectures lean/Sheaf; blueprint_refs.py search \"diagram system operation shifts\"",
+   "results": "Only lem-pur-diagram-open-clopen-shift-models names these instances in the DAG; this is the Models theorem, not a definition node. No upstream WeilConjectures hit. Sheaf hits: DiagramOpenClopenShiftModels.lean, RationalLocalizedHom.lean, CondensedLocalizationHom.lean. blueprint_refs.py: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the three existing instances with an existing:true definition-node record, as the independent review requires."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-system-proper-open-scalar-square",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical cochain-shift structures used in the scalar-square statement; its final shift-compatibility clause and proof step 7. blueprint_refs.py ancestor reports None for the item.",
+   "via": [
+    "lem-sf-system-proper-open-scalar-square",
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.DiagramOpenClopenShiftCore",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.pullShift",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.pullShift",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.extensionShift",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.directShift"
+  ],
+  "statement": "instance pullShift {X Y : Scheme.{u}} (v : X ⟶ Y) : (P C τ v).CommShift ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by L H2 on returned head fe3335f14970. Reuses exactly the three published plain instances: inferInstanceAs for exact mapDerivedCategory on pull/extension and rightDerivedFunctor on push. No choice from diagramOpenClopenShiftModels or Models assertion is used. No new Lean module and no theorem assertion.",
+  "file": "lean/Sheaf/Paper/DiagramOpenClopenShiftCore.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a97ae43",
+  "group": "Q18",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a97ae43",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery of the fe3335f1 H2 RETURN. Item Lean byte-identical to fe3335 (substance accepted there and re-read: square in node order, chi = mateEquiv of ell, which is pinned by an identity-on-sections ∃!, beta = inverse of the inverse open mate, sComp/sId composition and identity clauses, CommShift clauses, arbitrary M, no extra hypotheses, all proofs sorry, docstrings OK, lean.statement verbatim, 21 declarations present). Stmt_deps: the theorem lem-pur-diagram-open-clopen-shift-models is replaced by the new def node def-sf-diagram-system-operation-shifts (existing:true on live Sheaf.Paper.DiagramOpenClopenShiftModels; pullShift/extensionShift/directShift are plain inferInstanceAs mapDerivedCategory/rightDerivedFunctor CommShift instances, signatures match, no Models choice; stmt_dep def-sp-semilinear-constant-ring-operations owns P/R/J/pull/push/extension; Stacks 015F/03DJ/070H/07A6 exist; no other def owner). Also adds the landed def owners def-coef-semilinear-proper-open-mate (gamma) and def-sf-semilinear-proper-open-comparisons (sComp/sId/jAdj). Only def nodes added vs base; the theorem stays in proof_deps; item unlanded live. No compile (no FIX, Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

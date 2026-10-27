@@ -1,0 +1,401 @@
+{
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Use the Zariski-etale quasi-coherent equivalence to write $\\mathcal I=F_{\\mathrm{et}}$ for a quasi-coherent Zariski module $F$, with its specified open-section normalization. On every etale $V\\to T$ its restriction is $(a^*F)_{\\mathrm{et}}$. For affine $U\\to T$, affine etale acyclicity gives $H^1(U_{\\mathrm{et}},\\mathcal I|_U)=0$. Apply the long exact sequence of the underlying additive sheaves, using the Ext/derived comparison and the natural degree-zero identification with sections. It gives $0\\to\\mathcal I(U)\\to\\mathcal A(U)\\to\\mathcal O_U(U)\\to0$. In particular the restriction to Zariski opens is an exact sequence of sheaves: the quotient is surjective on an affine open basis, and kernels are computed sectionwise. The same argument applies on every etale $V$. No $\\mathcal O_T$-module structure on $\\mathcal A$ is asserted or needed.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZT (lemma-first-order-thickening), first two proof paragraphs"
+   }
+  },
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}B\\subset T$ and put $R=\\mathcal A(U)$ and $K=\\mathcal I(U)$. Step 1 identifies $B=R/K$, with $K^2=0$. Every prime of $R$ contains $K$, since $k^2=0$ implies $k$ belongs to every prime. Taking inverse images and quotients therefore gives inverse bijections between primes of $B$ and $R$. They identify $D_B(\\overline r)$ with $D_R(r)$ for every $r\\in R$; these sets are bases of the respective Zariski topologies. Thus $|U|\\simeq|\\operatorname{Spec}R|$ canonically.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV (lemma-first-order-thickening), affine case: homeomorphism of underlying spaces"
+   }
+  },
+  {
+   "text": "For $r\\in R$ put $W=D_B(\\overline r)$. It is affine, with ring $B_{\\overline r}$. The image of $r$ in $\\mathcal A(W)$ is a unit: lift the inverse of $\\overline r$ using step 1, and correct the resulting product $1+k$ by multiplying by $1-k$, since $k^2=0$. Hence restriction gives $R_r\\to\\mathcal A(W)$. Localize $0\\to K\\to R\\to B\\to0$ at $r$; exactness of localization makes its row short exact. Compare it with the section row of step 1 on $W$. The right comparison is $B_{\\overline r}\\simeq\\mathcal O_U(W)$. For the left comparison, the quasi-coherent equivalence and the affine pullback-section formula identify $K_r=K\\otimes_B B_{\\overline r}\\simeq\\mathcal I(W)$ by $k/r^n\\mapsto\\overline r^{-n}k|_W$. Thus the short five lemma, applied to the underlying additive groups, makes $R_r\\to\\mathcal A(W)$ a ring isomorphism. All maps are restriction maps and inverses to powers of $r$, so these isomorphisms commute with restrictions between principal opens.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sc-p1-localization-short-exact",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV (lemma-first-order-thickening), affine comparison, written on principal opens instead of stalks"
+   }
+  },
+  {
+   "text": "The principal-open structure-sheaf formula for $\\operatorname{Spec}R$ and step 3 give a ring-sheaf isomorphism $\\mathcal O_{\\operatorname{Spec}R}\\simeq\\mathcal A|_{U_{\\mathrm{Zar}}}$ over the homeomorphism of step 2: extend the compatible basis maps to any open by sheaf gluing. Thus $(U,\\mathcal A|_U)$ is canonically $\\operatorname{Spec}R$. The identifications agree on overlaps because their maps are the original restrictions of $\\mathcal A$; one can cover an overlap by affine opens without assuming the overlap itself affine. These local identifications show directly that $(|T|,\\mathcal A|_{T_{\\mathrm{Zar}}})$ is a scheme. Its quotient to $\\mathcal O_T$ defines the identity-on-points closed immersion by the definition of closed immersion; its kernel has square zero sectionwise. Taking $U=T$ proves both affine assertions.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-pc-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05YV (lemma-first-order-thickening), conclusion from the affine comparisons"
+   }
+  },
+  {
+   "text": "Apply steps 1--4 to the restriction of the extension on every etale $V\\to T$. For a morphism $h:V\\to W$ over $T$, the restriction maps of the original site sheaf give on Zariski opens a map $h^{-1}(\\mathcal A|_{W_{\\mathrm{Zar}}})\\to\\mathcal A|_{V_{\\mathrm{Zar}}}$. Together with $|h|$ it is a morphism of locally ringed spaces: in each stalk the quotient by its square-zero ideal is the original local ring of $V$ or $W$, and an element is a unit exactly when its residue is a unit (lift an inverse and use $(1+k)^{-1}=1-k$). Localness therefore follows from localness of the stalk map of $h$. Identity and composition equations hold on every section because they hold for the restrictions of $\\mathcal A$. This constructs the functor $V\\mapsto V^+$ and the commutative squares of thickenings.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZT (lemma-first-order-thickening), first two proof paragraphs"
+   }
+  },
+  {
+   "text": "Let $U\\subset T$ be affine and $V\\subset a^{-1}U$ affine. Set $R=\\mathcal A(U)$, $S=\\mathcal A(V)$, $B=\\mathcal O_T(U)$, $C=\\mathcal O_V(V)$, $K=\\mathcal I(U)$ and $L=\\mathcal I(V)$. These are exact square-zero section extensions by step 1. The quasi-coherent equivalence and the affine pullback-section formula identify the canonical map $K\\otimes_B C\\to L$ with $k\\otimes c\\mapsto c\\,k|_V$, and it is an isomorphism. The scheme maps $V\\to U$ and $V^+|_V\\to U^+$ are $\\operatorname{Spec}$ of the restriction maps $B\\to C$ and $R\\to S$, morphisms into affine schemes being determined by global sections (steps 4 and 5 identify $V^+|_V=\\operatorname{Spec}S$ and $U^+=\\operatorname{Spec}R$). Since $a$ is etale, target locality makes $a^{-1}U\\to U$ etale and source locality, for the open cover $\\{V,a^{-1}U\\}$ of $a^{-1}U$, makes $\\operatorname{Spec}C=V\\to U=\\operatorname{Spec}B$ etale; this is the hypothesis of the criterion in its stated form. Apply the square-zero ring-extension criterion to conclude $R\\to S$ is etale. Also $L=KS$: every tensor is a finite sum of $k\\otimes c$, and $c$ lifts to $S$ by step 1. Thus $S\\otimes_R B=S/KS=S/L=C$, and since the fibre product of affine spectra is the spectrum of the tensor product with the canonical projections, the affine square is consequently cartesian, with the canonical maps, not just abstractly isomorphic rings.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-square-zero-etale-extension-criterion",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "lem-weil-pbc-etale-local-on-source",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZT (lemma-first-order-thickening), first two proof paragraphs"
+   }
+  },
+  {
+   "text": "For each affine open $U\\subset T$, cover $a^{-1}U$ by affine opens $V$. Their thickenings are exactly the corresponding opens of $V^+$ and $T^+$, since both constructions use the same topological spaces and restricted sheaves. Step 6 and source locality show $(a^+)^{-1}(U^+)\\to U^+$ is etale; target locality then shows $a^+$ is etale. The cartesian identifications of step 6 agree on overlaps, being induced by the already constructed arrows. Gluing their inverses gives $V\\simeq V^+\\times_{T^+}T$, so the entire square is cartesian.",
+   "uses": [
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZT (lemma-first-order-thickening), first two proof paragraphs"
+   }
+  },
+  {
+   "text": "Pullback along $T\\hookrightarrow T^+$ is an equivalence of small etale sites. By step 7, the functor already constructed is its inverse on objects and arrows: each $V^+$ pulls back canonically to $V$, and full faithfulness supplies the unique compatible comparison with any other lift. The transported structure sheaf has value $\\Gamma(V^+,\\mathcal O_{V^+})=\\Gamma(|V|,\\mathcal A|_{V_{\\mathrm{Zar}}})=\\mathcal A(V)$, and its maps are precisely the original restriction maps by step 5. This is an isomorphism of the entire ring sheaf, not merely its restriction to Zariski opens. Its quotient and kernel agree sectionwise with the original ones. Joint surjectivity of lifted families follows also from the unchanged spaces and point maps. Finally pullback preserves the finite fibre products of etale schemes, and its full faithfulness reflects the universal properties of the lifted diagrams; hence the inverse construction preserves all the stated finite fibre-product diagrams.",
+   "uses": [
+    "sbc-lem-thickening-etale-site",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZT (lemma-first-order-thickening), first two proof paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sc-p1-localization-short-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-short-five-lemma",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "lem-sfb-square-zero-etale-extension-criterion",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZT (lemma-first-order-thickening), first two proof paragraphs; affine comparison from more-morphisms.tex Tag 05YV, and ring criterion from algebra.tex Tag 05YT."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-square-zero-ringed-realization",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "lem-sfb-scheme-etale-square-zero-chart-construction",
+ "title": "Scheme charts of square-zero extensions on the small etale site",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention]. On its small etale site [def-weil-pbc-etale-site] let $0\\to\\mathcal I\\to\\mathcal A\\to\\mathcal O_T\\to0$ be an exact sequence of sheaves [def-weil-sheaf-of-modules-category], where $\\mathcal A$ is a sheaf of commutative unital rings, its last map is a ring homomorphism, and its kernel is an ideal with square zero and is quasi-coherent with its quotient $\\mathcal O_T$-action [def-trf-space-quasi-coherent-module]. The locally ringed space $T^+=(|T|,\\mathcal A|_{T_{\\mathrm{Zar}}})$ is a scheme; the quotient defines a closed immersion $T\\hookrightarrow T^+$ [def-weil-closed-immersion] with square-zero ideal and the same underlying topological space. For affine $T$ it is canonically $\\operatorname{Spec}\\mathcal A(T)$ and $\\mathcal A(T)\\to\\mathcal O_T(T)$ is surjective. For every etale scheme map $a:V\\to T$ [def-weil-etale-morphism], restrict this extension to $V_{\\mathrm{et}}$ and form $V^+$ in the same way. The ring-sheaf restriction maps give an etale map $a^+:V^+\\to T^+$, functorially for identities and composition, and the square with $V\\to T$ and the two closed immersions is cartesian [def-pc-fibre-product]. These maps identify the sheaf $\\mathcal O_{T^+}$, transported along the equivalence of small etale sites given by pullback along the thickening $T\\hookrightarrow T^+$ [sbc-lem-thickening-etale-site], with the entire sheaf $\\mathcal A$ on $T_{\\mathrm{et}}$, compatibly with the quotient, the kernel, and etale restrictions. Jointly surjective etale families and finite fibre-product diagrams of etale $T$-schemes are preserved by this construction.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 05YV (more-morphisms lemma-first-order-thickening), including affine section model; Tag 05YT (algebra lemma-lift-etale-infinitesimal); scheme-chart construction in spaces-more-morphisms lemma-first-order-thickening, first two proof paragraphs, using descent proposition-same-cohomology-quasi-coherent and proposition-equivalence-quasi-coherent-functorial."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "sbc-lem-thickening-etale-site",
+  "def-sbc-first-order-thickening",
+  "def-sfb-scheme-zariski-etale-module-constructions"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Square zero extensions of the structure sheaf on a scheme etale site have affine models Spec of sections with etale restriction maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V \\\\subseteq f^{-1}(U)$. Then the ring homomorp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme etale categories and square-zero ring formulas do not supply this algebraic-space or ring-sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine etale charts of a ring sheaf extension with quasi coherent square zero ideal are spectra of sections and recover that ring sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme etale categories and square-zero ring formulas do not supply this algebraic-space or ring-sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine sections of a square zero sheaf extension with quasi coherent kernel form etale compatible infinitesimal ring extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"(P : Extension R S) : Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"derivationOfSectionOfKerSqZero_apply_coe\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra R S] (f : P →ₐ[R] S) (hf' : RingHom.ker f ^ 2 = ⊥) (g : S →ₐ[R] P)\\n  (hg : f.comp g = AlgHom.id R S) (x : P), ↑((derivationOfSectionOfKerSqZero f \", \"doc\": \"For commutative rings $ R $, $ P $, and $ S $ with $ R $-algebra structures, let $ f : P \\\\to S $ be an $ R $-algebra homomorphism whose kernel satisfies $ \\\\ker(f)^2 = 0 $, and let $ g : S \\\\to P $ be a\"}\n  {\"name\": \"retractionOfSectionOfKerSqZero\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \": S ⊗[P] Ω[P⁄R] →ₗ[P] RingHom.ker (algebraMap P S)\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings. Let $f: P \\\\to S$ be an $R$-algebra homomorphism with kernel $I = \\\\ker(f)$, and assume that $I$ is a square-zero ideal (i.e., $I^2 = \\\\{0\\\\}$). Suppose there e\"}\n  {\"name\": \"derivationOfSectionOfKerSqZero.congr_simp\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra R S] (f : P →ₐ[R] S) (hf' : RingHom.ker f ^ 2 = ⊥) (g g_1 : S →ₐ[R] P)\\n  (e_g : g = g_1) (hg : f.comp g = AlgHom.id R S),\\n  derivationOfSectionOfK\", \"doc\": \"Given commutative rings $ R $, $ P $, and $ S $ with $ R $-algebra structures on $ P $ and $ S $, let $ f : P \\\\to S $ be an algebra homomorphism whose kernel satisfies $ \\\\ker(f)^2 = 0 $. If two algebr\"}\n  {\"name\": \"TrivSqZeroExt\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(R : Type u) (M : Type v)\", \"doc\": \"The trivial square-zero extension of a ring $ R $ by an $ R $-module $ M $, defined as the direct product $ R \\times M $ equipped with component-wise addition and multiplication where the product of an\"}\n  {\"name\": \"Algebra.Extension.toInfinitesimal\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"(P : Extension R S) : P.Hom P.infinitesimal\", \"doc\": \"The canonical homomorphism from an algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $ to its infinitesimal extension $ P/I^2 $, constructed by quotienting $ P $ by the squ\"}\n  {\"name\": \"derivationOfSectionOfKerSqZero\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \"(f : P →ₐ[R] S) (hf' : (RingHom.ker f) ^ 2 = ⊥) (g : S →ₐ[R] P) (hg : f.comp g = AlgHom.id R S) :\\n  Derivation R P (RingHom.ker f)\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings, where $P$ and $S$ are $R$-algebras. Given an $R$-algebra homomorphism $f: P \\\\to S$ whose kernel $\\\\ker(f)$ is a square-zero ideal (i.e., $(\\\\ker(f))^2 = \\\\{0\\\\}\"}\n  {\"name\": \"TrivSqZeroExt.inl\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Zero M] (r : R) : tsze R M\", \"doc\": \"The function maps each element $ r $ of a ring $ R $ to the pair $ (r, 0) $ in the trivial square-zero extension $ R \\times M $, where $ M $ is an $ R $-module. This extension forms a ring structure wi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme etale categories and square-zero ring formulas do not supply this algebraic-space or ring-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TrivSqZeroExt\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme etale categories and square-zero ring formulas do not supply this algebraic-space or ring-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero.*sheaf|sheaf.*square.zero|lift_etale_infinitesimal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme etale categories and square-zero ring formulas do not supply this algebraic-space or ring-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero.*sheaf|sheaf.*square.zero|lift_etale_infinitesimal",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a scheme from an exact square zero extension of its structure sheaf on the small etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Extension.infinitesimal, TrivSqZeroExt.inl, AlgebraicGeometry.Scheme.mk.noConfusion, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.mk, derivationToSquareZeroEquivLift",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero extension of the etale structure sheaf by a quasi coherent ideal is represented by a scheme thickening with functorial etale charts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified, Algebra.Etale.formallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero.*sheaf|sheaf.*square.zero|lift_etale_infinitesimal",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a scheme from an exact square zero extension of its structure sheaf on the small etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Extension.infinitesimal, TrivSqZeroExt.inl, AlgebraicGeometry.Scheme.mk.noConfusion, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.mk, derivationToSquareZeroEquivLift",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero extension of the etale structure sheaf by a quasi coherent ideal is represented by a scheme thickening with functorial etale charts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified, Algebra.Etale.formallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero.*sheaf|sheaf.*square.zero|lift_etale_infinitesimal",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a scheme from an exact square zero extension of its structure sheaf on the small etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Extension.infinitesimal, TrivSqZeroExt.inl, AlgebraicGeometry.Scheme.mk.noConfusion, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.mk, derivationToSquareZeroEquivLift",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero extension of the etale structure sheaf by a quasi coherent ideal is represented by a scheme thickening with functorial etale charts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified, Algebra.Etale.formallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: small etale-site definitions, split square-zero rings and formal-etale lifting do not reconstruct an arbitrary ring sheaf extension with all the asserted compatibilities."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Local construction input in Tag 05ZT, first two proof paragraphs, before choosing an algebraic-space presentation.",
+   "via": [
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-etale-square-zero-chart-construction",
+  "worker": "stage1",
+  "summary": "Constructed the scheme on affine principal-open bases, verified canonical kernel comparisons for the ring etaleness criterion, proved cartesianness and the full etale ring-sheaf recovery. One new statement-only commutative-algebra lemma (05YT); existing quasi-coherent and cohomological statements reused.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Local construction input in Tag 05ZT, first two proof paragraphs, before choosing an algebraic-space presentation. This realizes the scheme-chart prerequisite of Tag 05ZT without invoking the parent algebraic-space realization.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   },
+   {
+    "node": "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic scheme, sheaf-cohomology, quasi-coherent or small-etale-site tool used with exactly its stated hypotheses in the chart construction; this alteration/deformation unit has no substitute for this basic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-9c3e3d6d6",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-9c3e3d6d6 (reviewer sub-agent of L); spot-checked: Verdict FIX, after reading all eight steps and the new node against Stacks 05ZT (spaces-more-morphisms l.1838, first two proof paragraphs), 05YV (more-morphisms l.92) and 05YT (algebra l.39590). The item statement is identical to live; this is a first split, not a re-split, and no SGA source is used. One repair, in step 6 (C4/C1). The step derived 'B→C etale' only from def-weil-etale-morphism, whose affine form gives some affine cover, not every affine V⊂a^{-1}U over an affine U. It also left implicit that the chart maps are Spec(B→C) and Spec(R→S), and that Spec(S⊗_R B) is the fibre product. The fix cites lem-weil-pbc-closed-finite-etale-zariski-local (3) for a^{-1}U→U and lem-weil-pbc-etale-local-on-source with the cover {V,a^{-1}U}, which gives Spec C→Spec B etale, exactly the criterion's hypothesis. It also cites lem-weil-pbc-morphism-into-affine-scheme and lem-weil-pbc-fibre-product-affine-spectra. All four are mathlib-status nodes and are added to proof_deps; only proof/proof_deps change. Steps 1–5, 7 and 8 check out. Step 1: H^1 vanishing on affine etale objects plus the long exact sequence give exact section rows. Step 3: unit correction (1+k)(1−k)=1, K_r=K⊗_B B_r̄ through the quotient action, five lemma. Step 4: gluing to Spec R. Step 5: local stalk maps. Step 6: kernel map c·k|_V = u^+(k)c̃. Step 7: source then target locality. Step 8: Q is a quasi-inverse of pullback for the thickening (03SI node), and the transported structure sheaf equals the entire etale sheaf A. New node lem-sfb-square-zero-etale-extension-criterion is 05YT exactly, with the 'J = I⊗_A B' equality made the canonical-map isomorphism. It is true (flatness by the local criterion, then iso with the etale lift), self-contained and statement-only. I tested zero kernels, the zero ring, split extensions, and the counterexample k→k[ε] when the tensor hypothesis is dropped. A DAG search for 05YT and for etale plus square-zero/infinitesimal statements found no duplicate; exc-etale-algebra-lift, 09ZA lift and the conormal flatness node are different statements. Batch-5 check: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the generic Zariski/etale quasi-coherent equivalence (03DX/03LC). Its closure of 953 nodes contains only foundational sk-i-curve-zero trf nodes and no trace-formula or Poincaré statement or assumption leaf, so it is accepted as a generic tool. The declared tool_uses are accepted: trf QC equivalence, sc affine QC vanishing, pbc long exact sequence, Ext/RΓ bridge, H^0=Γ, affine pullback sections, sbc topological invariance. Maintainer note: blueprint.from.node is null, inherited from the Q159 parent chain, a base-node fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleSquareZeroChartConstruction",
+  "declaration": "AlgebraicGeometry.scheme_etale_square_zero_chart_construction",
+  "declarations": [
+   "AlgebraicGeometry.etaleSquareZeroChartOpens",
+   "AlgebraicGeometry.etaleSquareZeroChartTopIso",
+   "AlgebraicGeometry.etaleSquareZeroChartSpace",
+   "AlgebraicGeometry.etaleSquareZeroChartReduction",
+   "AlgebraicGeometry.scheme_etale_square_zero_chart_construction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleSquareZeroChartConstruction.lean",
+  "statement": "theorem scheme_etale_square_zero_chart_construction (T : Scheme.{u}) (A : Sheaf T.smallEtaleTopology CommRingCat.{u}) (p : A.obj ⟶ T.etaleStructurePresheaf) (M : CategoryTheory.ringedSiteModules.{u} (Scheme.Modules.smallEtaleModuleRing T)) [M.IsQuasicoherent] (j : ∀ U : T.Etale, M.val.obj (op U) →+ A.obj.obj (op U)) (hj : ∀ (U V : T.Etale) (f : U ⟶ V) (m : M.val.obj (op V)), A.obj.map f.op (j V m) = j U (M.val.map f.op m)) (hinj : ∀ U : T.Etale, Function.Injective (j U)) (hker : ∀ (U : T.Etale) (a : A.obj.obj (op U)), p.app (op U) a = 0 ↔ ∃ m : M.val.obj (op U), j U m = a) (hsurj : ∀ (U : T.Etale) (a : T.etaleStructurePresheaf.obj (op U)), ∃ R : Sieve U, R ∈ T.smallEtaleTopology U ∧ ∀ (V : T.Etale) (f : V ⟶ U), R f → ∃ b : A.obj.obj (op V), p.app (op V) b = T.etaleStructurePresheaf.map f.op a) (hsq : ∀ (U : T.Etale) (m n : M.val.obj (op U)), j U m * j U n = 0) (hscalar : ∀ (U : T.Etale) (a : A.obj.obj (op U)) (m : M.val.obj (op U)), j U (p.app (op U) a • m) = a * j U m) : ∃ (Tplus : Scheme.{u}) (i : T ⟶ Tplus), IsFirstOrderThickening i ∧ IsHomeomorph i.base ∧ ∃ eT : Tplus.toPresheafedSpace ≅ etaleSquareZeroChartSpace A (Scheme.Etale.mk (𝟙 T)), i.toLRSHom.toHom ≫ eT.hom = etaleSquareZeroChartReduction p (Scheme.Etale.mk (𝟙 T)) ∧ (IsAffine T → Function.Surjective (p.app (op (Scheme.Etale.mk (𝟙 T)))) ∧ IsIso (Tplus.toSpecΓ ≫ Spec.map (A.obj.map (etaleSquareZeroChartTopIso (Scheme.Etale.mk (𝟙 T))).hom.op ≫ PresheafedSpace.Γ.map eT.hom.op))) ∧ ∃ (E : T.Etale ≌ Tplus.Etale) (r : Scheme.Etale.forget T ⋙ Over.forget T ⟶ E.functor ⋙ Scheme.Etale.forget Tplus ⋙ Over.forget Tplus) (γ : A.obj ≅ E.functor.op ⋙ Tplus.etaleStructurePresheaf) (ε : E.functor ⋙ i.Etale ≅ 𝟭 T.Etale), E.functor.IsContinuous T.smallEtaleTopology Tplus.smallEtaleTopology ∧ E.inverse.IsContinuous Tplus.smallEtaleTopology T.smallEtaleTopology ∧ PreservesFiniteLimits E.functor ∧ (∀ U : T.Etale, IsFirstOrderThickening (r.app U) ∧ IsPullback U.hom (r.app U) i (E.functor.obj U).hom ∧ (ε.inv.app U).left ≫ pullback.fst (E.functor.obj U).hom i = r.app U ∧ (ε.inv.app U).left ≫ pullback.snd (E.functor.obj U).hom i = U.hom ∧ γ.hom.app (op U) ≫ Scheme.Γ.map (r.app U).op = p.app (op U) ∧ ∃ e : (E.functor.obj U).left.toPresheafedSpace ≅ etaleSquareZeroChartSpace A U, (r.app U).toLRSHom.toHom ≫ e.hom = etaleSquareZeroChartReduction p U ∧ A.obj.map (etaleSquareZeroChartTopIso U).hom.op ≫ PresheafedSpace.Γ.map e.hom.op = γ.hom.app (op U)) ∧ (∀ U : T.Etale, IsAffine U.left → Function.Surjective (p.app (op U)) ∧ IsIso ((E.functor.obj U).left.toSpecΓ ≫ Spec.map (γ.hom.app (op U)))) ∧ (∀ (J : Type v) (U : T.Etale) (V : J → T.Etale) (f : ∀ k : J, V k ⟶ U), (∀ x : U.left, ∃ (k : J) (y : (V k).left), (f k).left y = x) → ∀ x : (E.functor.obj U).left, ∃ (k : J) (y : (E.functor.obj (V k)).left), (E.functor.map (f k)).left y = x)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four helpers are the actual chart-open functor, top-open identification, restricted ringed space and quotient. The theorem supplies marked realizations, a site equivalence inverse to actual base change, the natural full-ring-sheaf identification with quotient compatibility, canonical affine comparisons, and covering and finite-limit preservation. No extension algebra or scheme is chosen from a sorried existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09f201c58",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of 6d1b08bea29f (RETURN H2×2). Lean byte-identical; item node differs only in stmt_deps; proof/statement/proof_deps equal live; no live lean record or module for the item. Both H2 faults fixed: theorem stmt_dep lem-trf-scheme-zariski-etale-quasi-coherent-equivalence replaced by definition owner def-sfb-scheme-zariski-etale-module-constructions (existing:true record, owns smallEtaleModuleRing; theorem kept in proof_deps); unused def-weil-pbc-gabber-h0-zariski-constructions dropped. Re-checked all clauses vs Stacks 05ZT/05YV/05YT: natural ring map p, quasi-coherent kernel M with injective natural j, image = ker p, square zero, quotient action, local surjectivity only; conclusions: first-order thickening + homeomorphism, eT to (|T|,A|Zar) with reduction, canonical affine Spec, E pinned by ε as inverse of i.Etale, cartesian squares, natural γ with γ≫Γ(r)=p, affine charts, continuity, finite limits, jointly surjective families in universe v. Edge cases (empty T, M=0, empty J, non-affine overlaps) covered. Helpers non-hollow, docstrings with source/blueprint, 8-step proof docstring, statement verbatim, report has Worker report and Second reading by NE. No compile: no file changed."
+ }
+}

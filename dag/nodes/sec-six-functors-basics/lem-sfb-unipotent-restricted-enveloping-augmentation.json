@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-unipotent-restricted-enveloping-augmentation",
+ "kind": "statement",
+ "title": "PBW dimension and nilpotent augmentation for a Borel unipotent restricted algebra",
+ "statement": "Let $F$ be an algebraically closed field of prime characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: smooth, connected, affine and of finite type, with no nontrivial smooth connected solvable normal subgroup, and such that every surjective homomorphism $S'\\to S$ from a semisimple group scheme with finite central kernel is an isomorphism. Solvable means that iterated commutator subgroup schemes become trivial, and finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$, with unipotent radical $U$, projection $\\pi_T:B\\to T$, character lattice $X=X^*(T)$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, and coroot pairing as in [lem-sfb-reductive-borel-pair-structure]. A split torus is a product of copies of $\\mathbf G_m$; Borel means maximal smooth connected solvable closed subgroup, and the unipotent radical is the largest smooth connected normal unipotent subgroup, where unipotent means unipotent geometric matrices in a faithful representation. Put $Q=S/B$ and $N=|\\Phi^+|$. Write $\\mathfrak u=\\operatorname{Lie}(U)$, the tangent space at the identity with bracket from commutators and restricted operation $x\\mapsto x^{[p]}$ obtained by taking the $p$th iterate of the corresponding invariant derivation. Its restricted enveloping algebra $A=u(\\mathfrak u)$ is the quotient of the tensor algebra $T_F(\\mathfrak u)$ by $xy-yx-[x,y]$ and $x^p-x^{[p]}$. Its augmentation $\\epsilon:A\\to F$ sends $\\mathfrak u$ to zero, and $J=\\ker\\epsilon$. Then $\\dim_F A=p^N$ and there is an integer $h\\ge1$ with $J^h=0$. A rational $U$-module is an $F$-vector space $W$ with a coaction $W\\to W\\otimes_F F[U]$ satisfying the counit and coassociativity identities. The algebra acts on such a module by differentiating its coaction; this action obeys $x^p=x^{[p]}$. The assertions allow $U=1$, in which case $A=F$ and $J=0$.",
+ "source": {
+  "document": "literature/mathieu-tilting-modules-2000.pdf",
+  "place": "Section 1, restricted enveloping algebra definition, Theorem 1.2 and Corollary 1.3, printed pp.148--150; positive-root grading of the Borel radical in Section 1, printed pp.151--152. The nilpotent augmentation assertion is the bounded positive-root grading consequence, not a claim that x^[p] is always zero. WANTED: not stored in literature/. Read online at https://www.imsc.res.in/~knr/vdk/mathieu.pdf; all-characteristic semisimple version includes products of simple factors."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-restricted-enveloping-algebra",
+  "def-sfb-affine-group-distribution-calculus",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-reductive-borel-pair-structure] to the semisimple (hence reductive) group $S$: $B=U\\rtimes T$. Apply [lem-sfb-regular-cocharacter-borel-description] to choose a regular cocharacter $\\lambda$ with $B=P(\\lambda)$ and $\\operatorname{Lie}(B)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi^+}\\mathfrak s_\\alpha$, where $d_\\alpha=\\langle\\alpha,\\lambda\\rangle>0$. On dual-number points, the product isomorphism $U\\times T\\simeq B$ identifies $\\operatorname{Lie}(U)$ with the kernel of $d\\pi_T$ and makes $d\\pi_T$ the identity on $\\operatorname{Lie}(T)$. Since $\\pi_T$ commutes with conjugation by $T$ and conjugation on $T$ is trivial, $d\\pi_T$ kills every nonzero character space: comparing Laurent monomials in the split-torus coordinates forces a linear map from character $\\alpha\\ne0$ to character zero to vanish. Thus $\\mathfrak u=\\bigoplus_{\\alpha\\in\\Phi^+}\\mathfrak s_\\alpha$. By [lem-sfb-reductive-rank-one-reflections] each summand has dimension one. Choose $e_\\alpha\\ne0$ in each, in any order; these form an $N$-element basis.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b)--(c), pp.428--429; Propositions 21.29, 21.31 and Theorem 21.32, pp.433--435; semidirect product in Theorem 16.33(d)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-restricted-rational-differentiation], $\\mathfrak u$ has the restricted operation used in the item, and conjugation by each $t\\in T(F)$ preserves it. Therefore $t(e_\\alpha^{[p]})=(\\alpha(t)e_\\alpha)^{[p]}=\\alpha(t)^p e_\\alpha^{[p]}$, so $e_\\alpha^{[p]}$ has character $p\\alpha$. By [lem-sfb-reductive-rank-one-reflections], the only roots rationally proportional to $\\alpha$ are $\\alpha$ and $-\\alpha$; since $p\\ge2$, $p\\alpha$ is absent. Comparing characters in the direct sum from Step 1 gives $e_\\alpha^{[p]}=0$. Similarly bracket preservation gives $[\\mathfrak s_\\alpha,\\mathfrak s_\\beta]\\subseteq\\mathfrak s_{\\alpha+\\beta}$, interpreted as zero when that character is absent. These are identities of torus characters, not their differentials, so remain valid in bad characteristic.",
+   "uses": [
+    "lem-sfb-restricted-rational-differentiation",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph preceding Proposition 11.36, p.223; Theorem 21.11(b)--(c), pp.428--429. Explicit character comparison in the restricted Lie algebra."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-restricted-pbw-basis] for the restricted Lie algebra $\\mathfrak u$ and the ordered basis $e_\\alpha$. Its monomials $\\prod_\\alpha e_\\alpha^{a_\\alpha}$ with $0\\le a_\\alpha<p$ are a basis of $A$. There are $p$ choices for each of its $N$ exponents, hence $\\dim_F A=p^N$. The same theorem presents $A$ using only the basis commutator relations and $e_\\alpha^p=e_\\alpha^{[p]}=0$.",
+   "uses": [
+    "lem-sfb-restricted-pbw-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.40 and Corollary 10.41, p.207, including the basis-generator kernel assertion in the proof."
+   }
+  },
+  {
+   "text": "Give the free words in the $e_\\alpha$ degree $d_\\alpha=\\langle\\alpha,\\lambda\\rangle$. Each commutator relation is homogeneous of degree $d_\\alpha+d_\\beta$, since $d_{\\alpha+\\beta}=d_\\alpha+d_\\beta$, and $e_\\alpha^p=0$ is homogeneous of degree $pd_\\alpha$. By the basis-generator presentation [lem-sfb-restricted-pbw-basis], these generate the whole relation ideal. That ideal is the span of products of words with these homogeneous relations; decomposing the words into their degrees makes each such product homogeneous. Consequently the quotient is a direct sum $A=\\bigoplus_{d\\ge0}A_d$ and $A_dA_e\\subseteq A_{d+e}$. Its PBW basis is homogeneous, with degrees at most $D=(p-1)\\sum_{\\alpha\\in\\Phi^+}d_\\alpha$. Hence $A_d=0$ for $d>D$ and $A_0=F\\cdot1$.",
+   "uses": [
+    "lem-sfb-restricted-pbw-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.40, p.207: homogeneous use of its basis-generator presentation; agent-written positive-cocharacter grading argument."
+   }
+  },
+  {
+   "text": "The map from the free algebra sending every $e_\\alpha$ to zero kills the homogeneous defining relations, so factors through the augmentation $\\epsilon:A\\to F$ of the item. On the PBW basis it sends $1$ to $1$ and every other monomial to zero. Thus $J=\\ker\\epsilon=\\bigoplus_{d>0}A_d$. Expand a product of $D+1$ elements of $J$ into its homogeneous terms. Every term has degree at least $D+1$, so vanishes by Step 4; finite sums of these products constitute $J^{D+1}$. Therefore $J^{D+1}=0$, with $h=D+1\\ge1$. When $U=1$, the basis is empty, $N=D=0$, $A=F$, and this same calculation gives $J^1=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.40, p.207, with the explicit graded-algebra augmentation calculation of Step 4; agent-written deduction."
+   }
+  },
+  {
+   "text": "For any rational $U$-module $W$, apply [lem-sfb-restricted-rational-differentiation] to $H=U$ and its specified coaction. It yields $\\rho(x)=(\\operatorname{id}_W\\otimes x)\\alpha$, with $\\rho([x,y])=[\\rho(x),\\rho(y)]$ and $\\rho(x^{[p]})=\\rho(x)^p$. The resulting action of $A$ is exactly differentiation of that coaction. This proves the module assertion without assuming $W$ finite-dimensional.",
+   "uses": [
+    "lem-sfb-restricted-rational-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, pp.207--208, interpreted by its coaction formula; restricted operation in the paragraph preceding Proposition 11.36, p.223."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-restricted-rational-differentiation",
+  "lem-sfb-restricted-pbw-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.40 and Sections 10k--10l, 11e and 11h, with the positive-cocharacter grading argument written out using 21.11 and 21.29--21.32. Mathieu Section 1 is the original reference, read online but not stored locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The restricted enveloping algebra of the nilpotent radical of a Borel subgroup has nilpotent augmentation ideal and one dimensional socle with PBW basis exponents less than p",
+   "results": "8 hits; RootPairing.GeckConstruction.isNilpotent_e, RootPairing.GeckConstruction.isNilpotent_f, RootPairing.GeckConstruction.instHasTrivialRadical, LieAlgebra.IsEngelian, LieAlgebra.zeroRootSubalgebra, LieAlgebra.le_zeroRootSubalgebra, LieModule.isNilpotent_toEnd_sub_algebraMap, LieAlgebra.mem_zeroRootSubalgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PBW basis and one dimensional annihilator of the augmentation ideal in the restricted enveloping algebra of a Borel unipotent radical",
+   "results": "8 hits; RootPairing.GeckConstruction.cartanSubalgebra', RootPairing.GeckConstruction.cartanSubalgebra, RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u, RootPairing.GeckConstruction.h', RootPairing.GeckConstruction.h_mem_cartanSubalgebra', RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, LieAlgebra.rootSpace, RootPairing.GeckConstruction.span_range_h'_eq_top",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalEnvelopingAlgebra\"",
+   "results": "12 hits; UniversalEnvelopingAlgebra, instInhabitedUniversalEnvelopingAlgebra, instRingUniversalEnvelopingAlgebra, instAlgebraUniversalEnvelopingAlgebra, UniversalEnvelopingAlgebra.Rel, UniversalEnvelopingAlgebra.ι, UniversalEnvelopingAlgebra.lift, UniversalEnvelopingAlgebra.ringCon",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restricted enveloping algebra of a unipotent Lie algebra in characteristic p is a local Frobenius algebra",
+   "results": "8 hits; UniversalEnvelopingAlgebra, LinearMap.frobenius, UniversalEnvelopingAlgebra.lift_unique, instRingUniversalEnvelopingAlgebra, UniversalEnvelopingAlgebra.lift, FiniteField.frobeniusAlgEquiv, UniversalEnvelopingAlgebra.lift_ι_apply, UniversalEnvelopingAlgebra.Rel.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "restricted.envelop|PBW|Poincar.*Birkhoff.*Witt|nilpotent.*augmentation",
+   "results": "3 hits; Mathlib/Algebra/Lie/Free.lean, Mathlib/Algebra/Lie/Free.lean, Mathlib/Algebra/Lie/SerreConstruction.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positively graded Borel unipotent radical has restricted enveloping algebra with nilpotent augmentation ideal",
+   "results": "8 hits: RootPairing.GeckConstruction.isNilpotent_e, RootPairing.GeckConstruction.isNilpotent_f, LieAlgebra.IsEngelian, LieAlgebra.maxNilpotentIdealIsNilpotent, TrivSqZeroExt.isNilpotent_inr, LieAlgebra.le_zeroRootSubalgebra, LieAlgebra.nilpotent_ad_of_nilpotent_algebra, LieModule.isNilpotent_toEnd_sub_algebraMap",
+   "date": "2026-10-24",
+   "verdict": "no match: the nilpotent Lie-algebra hits do not concern the augmentation of a restricted associative algebra; ordinary universal enveloping definitions do not prove this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation ideal of the restricted enveloping algebra of a Borel unipotent radical is nilpotent",
+   "results": "8 hits: UniversalEnvelopingAlgebra, LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra, LieIdeal.instIsNilpotentSubtypeMemLieSubmoduleOfIsNilpotent, LieSubmodule.isNilpotentOfIsNilpotentSpanSupEqTop, LieSubalgebra.IsCartanSubalgebra.nilpotent, LieAlgebra.maxNilpotentIdealIsNilpotent, LieAlgebra.IsEngelian, instIsNilpotentSubtypeMemLieSubalgebraTop",
+   "date": "2026-10-24",
+   "verdict": "no match: the nilpotent Lie-algebra hits do not concern the augmentation of a restricted associative algebra; ordinary universal enveloping definitions do not prove this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalEnvelopingAlgebra\"",
+   "results": "12 hits: UniversalEnvelopingAlgebra, instInhabitedUniversalEnvelopingAlgebra, instRingUniversalEnvelopingAlgebra, instAlgebraUniversalEnvelopingAlgebra, UniversalEnvelopingAlgebra.Rel, UniversalEnvelopingAlgebra.ι, UniversalEnvelopingAlgebra.lift, UniversalEnvelopingAlgebra.ringCon",
+   "date": "2026-10-24",
+   "verdict": "no match: the nilpotent Lie-algebra hits do not concern the augmentation of a restricted associative algebra; ordinary universal enveloping definitions do not prove this item."
+  },
+  {
+   "tool": "grep",
+   "query": "restricted.envelop|Poincar.{0,8}Birkhoff|PBW|p.structure|restrictedLie",
+   "results": "3 hits: Mathlib/Algebra/Lie/SerreConstruction.lean, Mathlib/Algebra/Lie/Free.lean, Mathlib/Algebra/Lie/Free.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the nilpotent Lie-algebra hits do not concern the augmentation of a restricted associative algebra; ordinary universal enveloping definitions do not prove this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-frobenius-rho-pushforward",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Section 1, restricted enveloping algebra definition, Theorem 1.2 and Corollary 1.3, printed pp.148--150; positive-root grading of the Borel radical in Section 1, printed pp.151--152. The nilpotent augmentation assertion is the bounded positive-root grading consequence, not a claim that x^[p] is always zero.",
+   "via": [
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-restricted-enveloping-augmentation",
+  "worker": "stage1",
+  "summary": "Proved the dimension using general restricted PBW and proved nilpotence directly by a bounded positive-cocharacter grading. Reused existing Borel and root-space statements and introduced only general restricted PBW and rational differentiation inputs. Checked arbitrary rational modules, bad characteristic and the empty root system. Statement unchanged.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs.py ancestor agrees). This supports the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite through Haboush and the Andersen--Haboush flag argument, specifically the PBW dimension and bounded positive-root augmentation argument of the parent flag-Frobenius split. No unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-a877493a2",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-a877493a2 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Statement unchanged and all hypotheses kept, including U=1. Step 1: B=U⋊T comes from the borel-pair-structure statement, B=P(λ) and the Lie(B) root decomposition from the regular-cocharacter statement, and dim 𝔤_α=1 from rank-one-reflections. Lie(U)=ker dπ_T, and the T-equivariance argument correctly gives ⊕𝔰_α. Step 2: e_α^{[p]} has weight pα, which is not in Φ because ℚα∩Φ={±α}, so it is 0. Only root vectors are claimed to have zero p-power, and the report's char-2 SL3 counterexample shows sums need not. Steps 3–5: the PBW basis gives dim p^N. The basis-generator presentation gives homogeneous relations of degrees d_α+d_β and p·d_α, so A is graded, A_0=F and A_d=0 above D. Hence J^{D+1}=0, and the step is elementary given the cited statements. Step 6: the coaction clause holds for arbitrary W. New nodes checked against Milne iAG Def 10.39, Thm 10.40 and its proof (pp.206–207), 11.25–11.26 (p.217) and the paragraph before 11.36 (p.223). The Jacobson s_i convention is right, including p=2, and the basis-relation generation follows from the central c_i and p-semilinearity. I checked the differentiation formulas and signs: ε∘D_xD_y=(x⊗y)Δ, so ρ([x,y])=[ρ(x),ρ(y)] and ρ(x^{[p]})=ρ(x)^p. For GL_n the bracket is XY−YX. Both new nodes are statement-only and self-contained, with all four search kinds recorded. Small cases checked: G_a, G_m, SL2 Borel, U=1. No duplicates found among rational-pbw (ℚ), enveloping-universal-property (ℚ), char-zero-differentiation-hom, borel-simple-root-distribution-calculus, restricted-induced-infinitesimal-invariants, steinberg-weyl-restricted-freeness and graded-bialgebra-coordinate-derivations. Neither new node restates the item. Route stays in the unit and no SGA is used. Batch 5: both flagged citations reach only lem-trf-smooth-fpqc-base-descent, a Mathlib leaf for Stacks 02VL (fpqc descent of smoothness, used for 'smooth connected multiplicative type is a torus'). It is generic and not part of the trace formula or Poincaré duality, so the flag does not justify a RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnipotentRestrictedEnvelopingAugmentation",
+  "declaration": "AlgebraicGeometry.BorelDistributions.unipotent_restricted_enveloping_augmentation",
+  "declarations": [
+   "AlgebraicGeometry.BorelDistributions.leftInvariantOperator",
+   "AlgebraicGeometry.BorelDistributions.unipotent_restricted_enveloping_augmentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnipotentRestrictedEnvelopingAugmentation.lean",
+  "statement": "theorem unipotent_restricted_enveloping_augmentation (F : Type u) [Field F] [IsAlgClosed F] (S T B : Grp (Over (Spec (.of F)))) (U : Scheme.{u}) [U.Over (Spec (.of F))] [GrpObj (U.asOver (Spec (.of F)))] [IsAffine U] (p : ℕ) [Fact p.Prime] [CharP F p] (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (jT : T ⟶ B) (iU : Grp.mk (U.asOver (Spec (.of F))) ⟶ B) (hTB : jT ≫ iB = iT) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsBorelGroupScheme iB.hom.hom) (hU : IsClosedSubgroupScheme iU.hom.hom ∧ IsNormalSubgroupScheme iU.hom.hom ∧ Smooth (U ↘ Spec (.of F)) ∧ ConnectedSpace U ∧ SolvableGroupStructure.IsUnipotent (Grp.mk (U.asOver (Spec (.of F)))) ∧ ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ Grp.mk (U.asOver (Spec (.of F))), f ≫ iU = iN) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] [ModObj T.X S.X] [ModObj T.X B.X] (hconjS : γ[T.X,S.X] = (iT.hom.hom ⊗ₘ 𝟙 S.X) ≫ GrpObj.conj S.X) (hconjB : γ[T.X,B.X] = (jT.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) [P.IsReduced] (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ TorusCharacterTangent.weightSpace T S χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ TorusCharacterTangent.weightSpace T B α.val.toMul ≠ ⊥) (πT : B ⟶ T) (hπT : jT ≫ πT = 𝟙 T) (hker : IsPullback iU.hom.hom (toUnit (U.asOver (Spec (.of F)))) πT.hom.hom η[T.X]) (hsd : IsIso ((fst (U.asOver (Spec (.of F))) T.X ≫ iU.hom.hom) * (snd (U.asOver (Spec (.of F))) T.X ≫ jT.hom.hom))) : ∃ (d : GrpObj.Lie (U.asOver (Spec (.of F))) →ₗ[F] fullDual (.of F) U) (q : GrpObj.Lie (U.asOver (Spec (.of F))) → GrpObj.Lie (U.asOver (Spec (.of F)))), (∀ (x : GrpObj.Lie (U.asOver (Spec (.of F)))) (f : Γ(U, ⊤)), d x f = ((Scheme.ΓSpecIso (.of (DualNumber F))).hom ((GrpObj.tangentPoint x).left.appTop f)).snd) ∧ (∀ x : GrpObj.Lie (U.asOver (Spec (.of F))), leftInvariantOperator F U (d (q x)) = leftInvariantOperator F U (d x) ^ p) ∧ LieAlgebra.IsRestrictedOperation F p q ∧ Module.finrank F (RestrictedEnvelopingAlgebra F (GrpObj.Lie (U.asOver (Spec (.of F)))) p q) = p ^ Nat.card {α : Φ // b.IsPos α} ∧ ∃ ε : RestrictedEnvelopingAlgebra F (GrpObj.Lie (U.asOver (Spec (.of F)))) p q →ₐ[F] F, (∀ x : GrpObj.Lie (U.asOver (Spec (.of F))), ε (RestrictedEnvelopingAlgebra.ι F p q x) = 0) ∧ (∃ h : ℕ, 1 ≤ h ∧ RingHom.ker ε.toRingHom ^ h = ⊥) ∧ (∀ (W : Type v) [AddCommGroup W] [Module F W] (c : W →ₗ[F] W ⊗[F] Γ(U, ⊤)), IsCoordinateCoaction (.of F) U c → ∃ ρ : RestrictedEnvelopingAlgebra F (GrpObj.Lie (U.asOver (Spec (.of F)))) p q →ₐ[F] Module.End F W, (∀ x : GrpObj.Lie (U.asOver (Spec (.of F))), ρ (RestrictedEnvelopingAlgebra.ι F p q x) = moduleAction (.of F) U c (d x)) ∧ ∀ x : GrpObj.Lie (U.asOver (Spec (.of F))), ρ (RestrictedEnvelopingAlgebra.ι F p q (q x)) = ρ (RestrictedEnvelopingAlgebra.ι F p q x) ^ p) ∧ (Nonempty (Grp.mk (U.asOver (Spec (.of F))) ≅ Grp.trivial (Over (Spec (.of F)))) → Nonempty (RestrictedEnvelopingAlgebra F (GrpObj.Lie (U.asOver (Spec (.of F)))) p q ≃ₐ[F] F) ∧ RingHom.ker ε.toRingHom = ⊥)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coordinate tangent map is pinned to epsilon coefficients of the actual tangentPoint, and the restricted operation to pth iteration of the explicit invariant operator. Both are conclusions. The augmentation and actions are likewise conclusions characterized on the existing tensor quotient generators. Added only three already-landed terminology dependencies; no statement correction or dependency repair. Maintainer review FIX: leftInvariantOperator is now an abbrev of the landed BorelDistributions.moduleAction for the regular coaction Coalgebra.comul (definitionally the same operator, checked by rfl), so the differentiated action has one definition.",
+  "fixed_by": "NT-stage2-cc-36b3227ab"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36b3227ab",
+  "group": "Q21",
+  "result": "fix",
+  "note": "The statement matches the node clause by clause. The hypotheses copy the landed reductive_borel_pair_structure interface and the landed hsc convention of simplyConnected_character_lattice. d is pinned by tangentPoint, q by D_{qx}=D_x^p (unique), A is the existing RestrictedEnvelopingAlgebra with finrank = p^N, epsilon is unique with ideal power J^h=0 (h>=1), the action on arbitrary rational W is moduleAction, and U=1 gives A≅F, J=0. Edge cases checked: N=0, p=2, infinite-dimensional W, rank-0 torus. The Lie owner is reached transitively via torus-character-tangent-weights -> sk-d-tangent (precedent). H4: the new helper leftInvariantOperator duplicates landed BorelDistributions.moduleAction (.of F) U Coalgebra.comul. FIX: made it an abbrev of moduleAction, with name, signature and statement unchanged. The fixed module compiled clean via nt_compile --json (3.5 s) with an rfl check against the delivered body. Fix files: fixes/UnipotentRestrictedEnvelopingAugmentation.lean and fixes/<item>.lean-record.json (verbatim statement)."
+ }
+}

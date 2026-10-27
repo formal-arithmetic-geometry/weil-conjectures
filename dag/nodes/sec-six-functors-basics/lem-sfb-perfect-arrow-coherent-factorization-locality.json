@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-perfect-arrow-coherent-factorization-locality",
+ "kind": "statement",
+ "title": "Uniform two-open locality of perfect-arrow coherent coefficient factorization",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $D\\to A$ be a homomorphism of commutative rings, and let $Y\\to\\operatorname{Spec}D$ be separated and of finite type [def-pc-scheme, def-pc-morphism-conventions]. For every quasi-compact open subscheme $W\\subseteq Y$ [def-weil-open-immersion, def-weil-pbc-quasi-compact-scheme], put $\\mathcal B_W=\\mathcal O_W\\otimes_D R_A$ and use $D_{\\mathrm{QCoh}}(\\mathcal B_W)$, the forgetful functor $U_W$, perfection, $\\widehat K$, and the coefficient constructions of [def-sfb-dg-coefficient-realization] on $W$. For a commutative $D$-algebra $E$ with a specified map $E\\to A$, put $W_E=W\\times_D\\operatorname{Spec}E$ and let $\\pi_{W,E}:W_A\\to W_E$ be the projection [def-pc-fibre-product]; write $\\Phi^W_E$ and $\\nu^W_E$ for those coefficient constructions.\n\nDefine $\\mathscr P(W)$ as the following uniform assertion. For every perfect $H\\in D_{\\mathrm{QCoh}}(\\mathcal B_W)$, every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{W_A})$ [def-pc-derived-category], every $m\\in\\mathbf Z$, and every morphism $u:H\\to\\widehat K$ such that $H^i(U_Wu)$ is surjective as a morphism of sheaves for every $i\\ge m$, there exist a commutative finite type $D$-algebra $E$ with $D\\to E\\to A$, an object $G\\in D(\\mathcal O_{W_E})$ with bounded coherent cohomology [pqf-def-coherent], an ordinary scheme-derived morphism $\\gamma:G\\to R\\pi_{W,E*}K$ [def-pc-derived-direct-image], and a morphism $\\sigma:H\\to\\Phi^W_E(G)$ in $D_{\\mathrm{QCoh}}(\\mathcal B_W)$ such that $\\nu^W_E(\\gamma)\\circ\\sigma=u$ and $H^i(U_W\\sigma)$ is surjective for every $i\\ge m$.\n\nLet $O,V$ be quasi-compact open subschemes of $Y$, with $V$ affine [def-weil-affine-spectrum] and $O\\cap V$ quasi-compact. If $\\mathscr P(O)$, $\\mathscr P(V)$ and $\\mathscr P(O\\cap V)$ hold, then $\\mathscr P(O\\cup V)$ holds. Each premise quantifies over all the indicated sources, targets, cutoffs and cohomologically surjective arrows on its own open, including ones not obtained by restricting any fixed global data. The coefficient algebras and witnesses may depend on these inputs. No compatibility between chosen witnesses, flatness of coefficient maps, relative pseudo-coherence of $K$, or injectivity of $H^i(U_Wu)$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated UNIFORM conditional two-open locality subproblem below the unnumbered Kiehl assertion following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). The predicate covers all perfect sources, ordinary targets and arrows surjective on cohomology above every cutoff. This locality assertion is not stated there. WANTED: Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, Math. Ann. 198, pp.287--316, finite coherent coefficient-model descent. Assembly follows coherent.tex Tag 08DR (lemma-induction-principle); ordinary gluing in cohomology.tex Tag 08DG (lemma-glue) alone does not supply this assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product",
+  "def-sfb-dg-coefficient-realization",
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Set $W=O\\cup V$. It is quasi-compact since a finite union of quasi-compact opens is quasi-compact. Fix arbitrary $H,K,m,u$ as quantified in $\\mathscr P(W)$. If $W$ is empty take $E=D$, $G=0$, $\\gamma=0$, and $\\sigma=0$; every sheaf in question is zero. In the remaining steps assume $W$ is nonempty. The three uniform local premises will be retained for every degree of the induction; they are not replaced by a choice of witnesses for restrictions of this fixed arrow.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+   }
+  },
+  {
+   "text": "Apply perfect sheaf dg descent on this quasi-compact open $W$. Obtain $E$ finite type over $D$, a perfect $H_E$ over $\\mathcal C_E=\\mathcal O_W\\otimes_D R_E$, and $\\alpha:\\mathcal B_W\\otimes_{\\mathcal C_E}^{\\mathbf L}H_E\\simeq H$. Scalar adjunction transposes $u\\alpha$ to $a:H_E\\to\\operatorname{Res}_{\\mathcal C_E}\\widehat K$. The target has its action through $\\mathcal T_E=\\mathcal O_W\\otimes_D E=p_{E*}\\mathcal O_{W_E}$, since $\\widehat K$ carries the given $A$-action and $D\\to E\\to A$ is a commuting base triangle. Adjunction along the augmentation $\\mathcal C_E\\to\\mathcal T_E$ therefore transposes $a$ to $c:F\\to\\operatorname{Res}_{\\mathcal T_E}\\widehat K$, where $F=\\mathcal T_E\\otimes_{\\mathcal C_E}^{\\mathbf L}H_E$. Both adjunctions use left modules, through the opposite-algebra clause of the cited adjunction theorem.",
+   "uses": [
+    "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "def-sfb-dg-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}E\\to\\operatorname{Spec}D$ is affine by the affine-schemes lemma, so its base change $p_E:W_E\\to W$ is affine by permanence. On each affine open of $W$, the affine dg comparison identifies $F$ with an ordinary perfect complex on its $E$-base change. Thus $F$ has quasi-coherent $\\mathcal T_E$-cohomology. The derived affine-morphism equivalence for $p_E:W_E\\to W$ gives an ordinary object $G$ with $Rp_{E*}G\\simeq F$. The projection $\\pi_{W,E}:W_A\\to W_E$ is the base change of the affine morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}E$, hence affine by the same two lemmas, so the affine derived-cohomology lemma gives $R\\pi_{W,E*}K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{W_E})$ and $Rp_{E*}R\\pi_{W,E*}K\\in D_{\\mathrm{QCoh}}(\\mathcal T_E)$; full faithfulness of the equivalence therefore applies to this target. It carries $c$ to an ordinary morphism $\\gamma:G\\to R\\pi_{W,E*}K$, using the coefficient-linear composition identification in the definition of $\\widehat K$ and $\\nu_E$. Local perfectness of $G$ follows from the same affine comparison. To check bounded coherence, cover $W$ by finitely many affine opens $\\operatorname{Spec}S_j$. Each $S_j$ is finite type over $D$ by the affine-pairs criterion for $Y/D$. Their $E$-base changes have rings $S_j\\otimes_D E$, finite type over $D$ by the two finite generating lists. They are Noetherian. These finitely many affines cover $W_E$, making it Noetherian. The perfect-cohomology theorem now makes $G$ bounded coherent.",
+   "uses": [
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sc-finite-affine-derived-equivalence",
+    "def-sfb-dg-coefficient-realization",
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-pc-perfect-noetherian-cohomology",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sc-affine-derived-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+   }
+  },
+  {
+   "text": "Let $\\eta:H_E\\to\\operatorname{Res}_{\\mathcal C_E}F$ be the augmentation adjunction unit. Define $s:H\\to\\Phi^W_E(G)$ as $\\alpha^{-1}$ followed by derived extension of $\\eta$ to $\\mathcal B_W$. The adjunction equation $\\operatorname{Res}(c)\\eta=a$, followed by the other adjunction's action counit, gives $\\nu^W_E(\\gamma)s=u$. This is the action counit specified in the coefficient definition, not a map selected by cohomology. Choose $b_G$ with $H^i(G)=0$ for $i>b_G$. On the same finite affine cover the comparison represents $Rp_{E*}G$ by ordinary module complexes zero above $b_G$. The relative bar model for $R_E\\to R_A$ has terms $R_A\\otimes_D R_E^{\\otimes_D n}\\otimes_D M[n]$. Both coefficient algebras are nonpositive, and the shift $[n]$ lowers degrees by $n\\ge0$, so these terms are zero above $b_G$. Thus $H^i(U_W\\Phi^W_E(G))=0$ for $i>b_G$, as can be checked on this cover. Put $b=\\max(m,b_G)$. The supplied $s$ is surjective in degrees $i>b$, because its target is zero there.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-sheaf-dg-relative-flat-bar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+   }
+  },
+  {
+   "text": "Starting with the supplied global factorization of step 4, descend through $r=b,b-1,\\ldots,m$. At the start of a stage the invariant is a finite type $D$-algebra $E$ mapping to $A$, a bounded-coherent $G$, an ordinary $\\gamma$, and $s$ with $\\nu^W_E(\\gamma)s=u$ and $H^i(U_Ws)$ surjective for $i>r$. The three local uniform assertions remain those for the original $D\\to A$ and the original opens. Since $r\\ge m$, the hypothesis on $u$ gives surjectivity of $H^i(U_Wu)$ for every $i\\ge r$. These are precisely the premises of the binary single-degree quotient lemma. It produces $E',G',\\gamma',s'$ with the same composite $u$, ordinary $\\gamma'$, bounded coherence, and surjectivity for all $i\\ge r$. The map $E\\to E'\\to A$ extends the supplied coefficient map. Appending the finitely many generators of $E'/E$ to those of $E/D$ proves that $E'/D$ is finite type. Hence its output is the invariant for the next integer $r-1$. No new local predicate over $E$ is being assumed.",
+   "uses": [
+    "lem-sfb-binary-coefficient-one-degree-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+   }
+  },
+  {
+   "text": "After $b-m+1$ stages, the final $E,G,\\gamma,s$ have $\\nu^W_E(\\gamma)s=u$ and $H^i(U_Ws)$ surjective for every $i\\ge m$. These are exactly the witnesses required for the fixed arbitrary $H,K,m,u$. Universal generalization gives $\\mathscr P(W)$ and hence the claimed implication. The finite iteration is meaningful for every integer $m$, including negative cutoffs; there is no infinite descent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "def-sfb-dg-coefficient-realization",
+  "lem-sfb-affine-dg-coefficient-module-comparison",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-affine-derived-cohomology",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-pc-perfect-noetherian-cohomology",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "lem-sfb-binary-coefficient-one-degree-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent finite downward induction for the uniform locality subproblem beneath the unnumbered Kiehl assertion after Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). Perfect descent analogy: Tag 09RF (lemma-descend-perfect); ordinary gluing input only: cohomology.tex Tag 08DG (lemma-glue)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two-open Zariski locality of finite coherent coefficient factorizations of a fixed perfect dg source arrow with cohomologically surjective first factor",
+   "results": "{\"t\": \"2026-10-24T03:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"Two-open Zariski locality of finite coherent coefficient factorizations of a fixed perfect dg source arrow with cohomologically surjective first factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.HasRingHomProperty.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.sourceAffineLocally_isLocal\", \"AlgebraicGeometry.HasAffineProperty.isZariskiLocalAtSource\", \"AlgebraicGeometry.HasAffineProperty.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\"], \"digest\": \"e65ad05da8c0999f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme gluing, Zariski locality of ring-map properties and Mayer--Vietoris exact sequences do not match unrelated finite coherent coefficient models or preserve the prescribed perfect-source factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "{\"t\": \"2026-10-24T03:20:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme gluing, Zariski locality of ring-map properties and Mayer--Vietoris exact sequences do not match unrelated finite coherent coefficient models or preserve the prescribed perfect-source factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*factoriz|coefficient.*factoriz|derived.*glue",
+   "results": "{\"t\": \"2026-10-24T03:20:34Z\", \"tool\": \"grep\", \"query\": \"coherent.*factoriz|coefficient.*factoriz|derived.*glue\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme gluing, Zariski locality of ring-map properties and Mayer--Vietoris exact sequences do not match unrelated finite coherent coefficient models or preserve the prescribed perfect-source factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue finite coherent factorizations of a perfect differential graded source morphism on two open subschemes allowing different coefficient algebras",
+   "results": "{\"t\": \"2026-10-24T03:20:34Z\", \"tool\": \"leansearch\", \"query\": \"Glue finite coherent factorizations of a perfect differential graded source morphism on two open subschemes allowing different coefficient algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Pullback.gluedIsLimit\", \"AlgebraicGeometry.Scheme.Pullback.gluing\"], \"digest\": \"8804e81b10a6b623\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme gluing, Zariski locality of ring-map properties and Mayer--Vietoris exact sequences do not match unrelated finite coherent coefficient models or preserve the prescribed perfect-source factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris descent for existence of epimorphic coherent coefficient models of a fixed perfect source map without compatible local choices",
+   "results": "{\"t\": \"2026-10-24T03:20:42Z\", \"tool\": \"leanfinder\", \"query\": \"Mayer Vietoris descent for existence of epimorphic coherent coefficient models of a fixed perfect source map without compatible local choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"SheafOfModules.GeneratingSections.ofEpi\", \"LightCondMod.epi_iff_locallySurjective_on_lightProfinite\", \"SheafOfModules.GeneratingSections.ofEpi_I\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf\", \"LightCondensed.epi_π_app_zero_of_epi\"], \"digest\": \"1aa45e8b57392ff3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned scheme gluing, Zariski locality of ring-map properties and Mayer--Vietoris exact sequences do not match unrelated finite coherent coefficient models or preserve the prescribed perfect-source factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*factoriz|perfect.*locality|dg.*coefficient",
+   "results": "{\"t\": \"2026-10-24T03:39:27Z\", \"tool\": \"grep\", \"query\": \"coherent.*factoriz|perfect.*locality|dg.*coefficient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned ordinary derived fraction and cochain factorization statements, scheme morphism locality, and sheaf Mayer--Vietoris constructions. None states uniform existence of bounded coherent finite coefficient factorizations of sheaf dg arrows. Loogle and grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T03:39:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned ordinary derived fraction and cochain factorization statements, scheme morphism locality, and sheaf Mayer--Vietoris constructions. None states uniform existence of bounded coherent finite coefficient factorizations of sheaf dg arrows. Loogle and grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If coherent finite coefficient factorizations exist for all perfect dg sources and all cohomologically surjective maps on two opens and their intersection then they exist on the union",
+   "results": "{\"t\": \"2026-10-24T03:39:28Z\", \"tool\": \"leansearch\", \"query\": \"If coherent finite coefficient factorizations exist for all perfect dg sources and all cohomologically surjective maps on two opens and their intersection then they exist on the union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Opens.mayerVietorisSquare'\", \"TopCat.Sheaf.interUnionPullbackCone_pt\", \"TopCat.Presheaf.IsGluing\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"Opens.coe_mayerVietorisSquare_X₄\", \"TopCat.Presheaf.IsSheafPairwiseIntersections\", \"TopCat.GlueData.ofOpenSubsets\", \"TopCat.Presheaf.IsSheafOpensLeCover\"], \"digest\": \"0326072cdb8b2539\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned ordinary derived fraction and cochain factorization statements, scheme morphism locality, and sheaf Mayer--Vietoris constructions. None states uniform existence of bounded coherent finite coefficient factorizations of sheaf dg arrows. Loogle and grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski induction for all compact source maps with surjective high cohomology factoring through bounded coherent objects at finite coefficient stages",
+   "results": "{\"t\": \"2026-10-24T03:39:30Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski induction for all compact source maps with surjective high cohomology factoring through bounded coherent objects at finite coefficient stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"CompHausLike.precoherent\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"CondensedMod.epi_iff_locallySurjective_on_compHaus\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\"], \"digest\": \"4f24a0cfcf5782a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned ordinary derived fraction and cochain factorization statements, scheme morphism locality, and sheaf Mayer--Vietoris constructions. None states uniform existence of bounded coherent finite coefficient factorizations of sheaf dg arrows. Loogle and grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform two-open locality of finite coherent coefficient factorizations for every perfect sheaf dg module source and every arrow to an ordinary complex surjective on cohomology above an integer cutoff",
+   "results": "{\"t\": \"2026-10-24T03:39:31Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform two-open locality of finite coherent coefficient factorizations for every perfect sheaf dg module source and every arrow to an ordinary complex surjective on cohomology above an integer cutoff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\"], \"digest\": \"391479abda458d18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned ordinary derived fraction and cochain factorization statements, scheme morphism locality, and sheaf Mayer--Vietoris constructions. None states uniform existence of bounded coherent finite coefficient factorizations of sheaf dg arrows. Loogle and grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform Zariski locality for finite coherent coefficient factorizations of perfect differential graded module arrows surjective on high cohomology",
+   "results": "{\"t\": \"2026-10-24T06:58:13Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform Zariski locality for finite coherent coefficient factorizations of perfect differential graded module arrows surjective on high cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Perfection.coeff_surjective\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CategoryTheory.Sheaf.instIsLocallySurjectiveAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"CochainComplex.cm5b\"], \"digest\": \"61d789055b51e4d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned ordinary sheaf Mayer--Vietoris squares, cochain fraction factorizations and unrelated ring perfection. None gives the specified finite coherent coefficient factorization and normalized dg-linear composite."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris descent of bounded coherent coefficient models for every perfect dg source arrow without compatible local choices",
+   "results": "{\"t\": \"2026-10-24T06:58:08Z\", \"tool\": \"leansearch\", \"query\": \"Mayer Vietoris descent of bounded coherent coefficient models for every perfect dg source arrow without compatible local choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion\", \"Opens.mayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"Opens.mayerVietorisSquare'\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\"], \"digest\": \"fb5e81b44c249c6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned ordinary sheaf Mayer--Vietoris squares, cochain fraction factorizations and unrelated ring perfection. None gives the specified finite coherent coefficient factorization and normalized dg-linear composite."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T06:58:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned ordinary sheaf Mayer--Vietoris squares, cochain fraction factorizations and unrelated ring perfection. None gives the specified finite coherent coefficient factorization and normalized dg-linear composite."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*quotient|coherent.*factoriz|dg.*refine",
+   "results": "{\"t\": \"2026-10-24T06:58:08Z\", \"tool\": \"grep\", \"query\": \"coefficient.*quotient|coherent.*factoriz|dg.*refine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned ordinary sheaf Mayer--Vietoris squares, cochain fraction factorizations and unrelated ring perfection. None gives the specified finite coherent coefficient factorization and normalized dg-linear composite."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-perfect-coefficient-arrow-finite-realization",
+  "by": "worker",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Uniform Mayer--Vietoris locality step: the predicate on each open covers all perfect sources, ordinary targets, integer cutoffs and arrows surjective on cohomology above the cutoff; conditional on this full predicate on both opens and their intersection.",
+   "via": [
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-arrow-coherent-factorization-locality",
+  "worker": "stage1",
+  "summary": "Separated sheaf dg perfect-object descent from the genuinely conditional one-degree binary quotient problem, then constructed an initial ordinary bounded-coherent factorization by two scalar adjunctions and iterated the supplied-witness refinement finitely many times. Retained all three original uniform local premises, no flatness or relative pseudo-coherence assumptions, and the normalized action arrow. No statement change or Lean writing.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), inherited Kiehl descente prerequisite, uniform two-open perfect-arrow locality. Current latest blueprint read; new descent and one-degree quotient obligations make its inherited subsidiary proof precise.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-affine-derived-equivalence",
+    "why": "Generic Affine morphism gives a quasi-coherent derived equivalence used for the ordinary coefficient-envelope construction; no same-unit statement gives this generic interface."
+   },
+   {
+    "node": "lem-pqf-finite-affine-cover-qc-open",
+    "why": "Generic Finite affine cover of a quasi-compact open used for the ordinary coefficient-envelope construction; no same-unit statement gives this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic Locally of finite type is checked on all pairs of affine opens used for the ordinary coefficient-envelope construction; no same-unit statement gives this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Finitely generated algebras over Noetherian rings are Noetherian used for the ordinary coefficient-envelope construction; no same-unit statement gives this generic interface."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic Locally Noetherian schemes used for the ordinary coefficient-envelope construction; no same-unit statement gives this generic interface."
+   },
+   {
+    "node": "lem-pc-perfect-noetherian-cohomology",
+    "why": "Generic Bounded coherent cohomology of a perfect complex on a Noetherian scheme used for the ordinary coefficient-envelope construction; no same-unit statement gives this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affineness and base-change permanence needed to apply the affine-morphism derived equivalence to p_E; no same-unit statement gives it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affineness and base-change permanence needed to apply the affine-morphism derived equivalence to p_E; no same-unit statement gives it."
+   },
+   {
+    "node": "lem-sc-affine-derived-cohomology",
+    "why": "Generic: derived direct image along an affine morphism stays in D_QCoh with H^i(Rf_*E)=f_*H^i(E); needed so that the affine-morphism equivalence is fully faithful on the target Rp_{E*}Rpi_{W,E*}K in step 3. No same-unit statement gives it. Added by the reviewer (FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-pc-perfect-noetherian-cohomology",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sc-affine-derived-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-6f20207f1",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-6f20207f1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement and the sources in full (Stacks perfect.tex 09RF and the Kiehl paragraph after 0CSD; cohomology.tex 08DG). Kiehl 1972 is WANTED; the item stays an agent proof. The item statement is unchanged against the latest Q70 parent snapshot. The split follows the accepted affine split: descent of H to a finite stage E, then two scalar adjunctions (along C_E->B_W and C_E->T_E), then the affine-morphism equivalence to get an ordinary bounded-coherent G, then the bar degree count to get b=max(m,b_G), then a finite downward induction using a global one-degree lemma that keeps the three original uniform local premises. Step 4 checks the equation nu(gamma)s=u from the triangle identity and the actual action counit. The descent node is a strict generalization of the affine descent node: R_A is the filtered colimit of the R_E, and W is qcqs. I tested H=0, A=0, D=A, W empty and W affine. The one-degree node is not a restatement of the item and not the cone-vanishing patching ancestor; I tested an already-surjective factorization, the empty W and the affine cone toy. FIX 1 (C1/E1): step 3 used full faithfulness of the equivalence for the target Rp_*Rpi_{W,E*}K without showing Rpi_{W,E*}K is in D_QCoh. I added that pi_{W,E} is affine and cited lem-sc-affine-derived-cohomology (step uses, proof_deps and tool_uses). FIX 2 (E1): the one-degree node assumed only that H^r(U u) is onto, so its uniform local premises, which need arrows onto in all degrees at or above a cutoff, could not be applied to the restrictions of u. Its hypothesis is now 'onto for all i>=r', which makes the node weaker, and step 5 is reworded to match; the item's own hypothesis on u supplies this because r>=m. Batch-5 findings: def-trf-cotangent-resolution-data is a general definition, and lem-trf-triangulated-subcategory-cone-system is a Mathlib-leaf Verdier localization. Both are outside the assumed trace-formula and Poincare-duality statements, so I accepted them. The null blueprint.from.node is inherited from the item's broken ancestry and the report says so.; 2 file(s) fixed by the reviewer"
+ }
+}

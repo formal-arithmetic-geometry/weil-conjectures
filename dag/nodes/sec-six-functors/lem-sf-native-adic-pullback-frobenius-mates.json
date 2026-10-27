@@ -1,0 +1,556 @@
+{
+ "id": "lem-sf-native-adic-pullback-frobenius-mates",
+ "kind": "statement",
+ "title": "Exact native adic pullback and Frobenius mate compatibility",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between separated finite-type $k_0$-schemes. Use the coefficient sheaves $B_X,B_Y$, their module-sheaf categories $\\mathcal A_X,\\mathcal A_Y$ and geometric Frobenii $F_X,F_Y$ of [def-sf-native-weil-derived-framework]. Let $L=\\bar f^*:\\mathcal A_Y\\to\\mathcal A_X$ be the actual module inverse image $B_X\\otimes_{\\bar f^{-1}B_Y}\\bar f^{-1}(-)$, and let $R=\\bar f_*:\\mathcal A_X\\to\\mathcal A_Y$ use the coefficient map $B_Y\\to\\bar f_*B_X$ given by precomposition of locally finite continuous functions. Equip them with the canonical ringed-topos adjunction $L\\dashv R$ of [lem-weil-pbc-ringed-topoi-module-adjunction], with unit $\\eta$ and counit $\\varepsilon$.\n\nThe functor $L$ is additive and exact, and $R$ is additive. The native Frobenius functors $P_T=(F_T^{-1})_*\\cong F_T^*$ on $\\mathcal A_T$ for $T=X,Y$ are additive autoequivalences. Let\n$$e:P_XL\\xrightarrow{\\sim}LP_Y,\\qquad b:P_YR\\xrightarrow{\\sim}RP_X$$\nbe the canonical module comparisons used to lift these functors to Weil sheaves in the framework: $b$ is the direct-image composition comparison for $\\bar f F_X^{-1}=F_Y^{-1}\\bar f$, and $e$ is the pullback composition comparison for $F_Y\\bar f=\\bar f F_X$, conjugated by the specified identifications $P_T\\cong F_T^*$. Products of functors in this statement denote ordinary composition, with the rightmost functor applied first. The actual comparison $b$ is the adjunction mate [def-weil-pbc-adjunction-mate] of $e^{-1}$: for every $M\\in\\mathcal A_X$,\n$$b_M=R(P_X(\\varepsilon_M))\\circ R(e^{-1}_{RM})\\circ\\eta_{P_YRM}:P_YRM\\longrightarrow RP_XM.$$\nThe comparisons are those of `ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso` and `ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`, with the coefficient actions specified above.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/GeometricFrobenius.lean",
+  "place": "adicLowerStarGeometricFiberMapCompFrobeniusIso and adicUpperStarGeometricFiberMapCompFrobeniusIso, lines 82–105; Module.lean lines 117–178 (actual module functors, adjunction and exactness), and WeilSheaf/Category.lean lines 128–141. The mate equality is the compatibility of these specified compositors, recorded here as an agent statement to be split; no derived adjunction is asserted."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=\\bar f$, $a=F_X$, $b=F_Y$. Their relation $Ja=bJ$ follows by projecting $\\bar f=f_0\\times\\mathrm{id}_k$ and $F_T=\\mathrm{id}_{T_0}\\times\\operatorname{Frob}_k^{-1}$ to the two factors; the first projections are $f_0$ and the second are $\\operatorname{Frob}_k^{-1}$. Composing with the inverses gives $Ja^{-1}=b^{-1}J$. Apply [lem-sf-native-adic-pullback-exact-lisse] to the scheme morphism $g=J:\\bar X\\to\\bar Y$; its coefficient sheaves are the $B_X,B_Y$ of [def-sf-native-weil-derived-framework] and its coefficient map is the same map $\\alpha_J:J^{-1}B_Y\\to B_X$ adjoint to precomposition $B_Y\\to J_*B_X$ (the framework names this adjoint, with $J^{-1}$ the geometric inverse image of [def-weil-proetale-inverse-image]). That lemma gives that $\\alpha_J$ is an isomorphism and that $L(M)=B_X\\otimes_{J^{-1}B_Y}J^{-1}M$ is exact. $L$ is additive: $J^{-1}$ is additive on abelian sheaves and $B_X\\otimes_{J^{-1}B_Y}(-)$ is additive, both by construction on Hom groups. The ringed-topos adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] for the morphism of topoi $J$ with ring map $c=\\alpha_J$ has as left adjoint exactly this tensor formula and as right adjoint $J_*$ with the action through the adjunct of $\\alpha_J$, which is the precomposition map; so it is the specified $L\\dashv R$, not an adjunction with independently chosen unit or counit.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "def-sf-native-weil-derived-framework",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+    "place": "Module.lean lines 117–178; UpperStar.lean lines 263–312 (upperStarAdicConstantSheafIso). Geometric commutation uses the two product projections."
+   }
+  },
+  {
+   "text": "Direct image sends a module map to its precomposition on sections, so $R(u+v)=R(u)+R(v)$ and $R(0)=0$. For $T=X,Y$, put $P_T=(F_T^{-1})_*$ and $A_T=(F_T)_*$. The composition comparisons identify $A_TP_T$ and $P_TA_T$ with the identity. They are module maps: on each section precomposition sends $sm$ to $(s\\circ t)(m\\circ t)$, exactly the prescribed coefficient action. Their inverse identities and triangle equations reduce to the unique maps between iterated fibre products with the same projections. Thus they give the specified additive inverse equivalences, with unit the inverse of $A_TP_T\\cong\\mathrm{id}$. Both $F_T^*$ and $P_T$ are left adjoint to $A_T$; the comparison $F_T^*\\cong P_T$ is the unique one whose conjugate is $\\mathrm{id}_{A_T}$ under the conjugation bijection. This is precisely adicUpperStarIsoLowerStarInv, by its definition using leftAdjointUniq.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+    "place": "GeometricFrobenius.lean lines 47–76: adicLowerStarEquivalence and adicUpperStarIsoLowerStarInv."
+   }
+  },
+  {
+   "text": "Use $A=a_*$, $B=b_*$, $P=(a^{-1})_*$ and $Q=(b^{-1})_*$. Denote by $C:RA\\to BR$ the direct-image composition comparison through $(Ja)_*=(bJ)_*$. Expand the specified $e^{-1}:LQ\\to PL$ into its five defining factors, in application order: replace $Q$ by $b^*$; use $Lb^*\\cong(bJ)^*$; change along $bJ=Ja$; use $(Ja)^*\\cong a^*L$; replace $a^*$ by $P$. The two replacement comparisons were normalized in Step 2 to conjugate to identities. For each composition factor, the adicUpperStarComp definition is inverse conjugation of adicLowerStarComp; for the equality factor, adicUpperStarCongr is equality transport and its conjugate is the inverse equality transport of direct images. These are definitions of the actual named maps in Module.lean, not assertions that arbitrary comparison maps are normalized.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+    "place": "Module.lean lines 299–357; GeometricFrobenius.lean lines 95–105; ExchangeMate.lean lines 121–146."
+   }
+  },
+  {
+   "text": "Conjugation reverses composition. Apply mate pasting to the five factors in Step 3, including the whiskered identity conjugates at the ends. Under the composite adjunctions $PL\\dashv RA$ and $LQ\\dashv BR$ the result is the three-factor direct-image word $RA\\to(Ja)_*=(bJ)_*\\to BR$, namely $C$. No tensor coefficient is changed: every constituent uses the same precomposition map. This computes the full conjugate of the specified $e^{-1}$, and not merely the existence of an isomorphism of its source and target.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+    "place": "conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv, lines 108–157."
+   }
+  },
+  {
+   "text": "The actual $b:QR\\to RP$ is the direct-image word through $(b^{-1}J)_*=(Ja^{-1})_*$. Forget its module actions. The unit-square lemma, applied to $J,a,b$ and the underlying abelian sheaf of $M$, gives $C_{PM}\\circ R(\\nu^a_M)=B(b_M)\\circ\\nu^b_{RM}$. The underlying units are exactly $\\nu^a,\\nu^b$: adicLowerStarEquivalence defines them by the same composition and identity maps. The equality therefore holds as a module equality, since forgetting a module map is injective. Under $Q\\dashv B$, the transpose of $b_M$ is $B(b_M)\\circ\\nu^b_{RM}$, so the displayed equation says that $b$ is the inverse mate of $C$ for $P\\dashv A$, $Q\\dashv B$. Equivalently, the mate of $b$ along these equivalences equals $C$. This deduction uses the unit characterization of the mate bijection, without assuming that the direct-image exchange is already the desired mate under $L\\dashv R$.",
+   "uses": [
+    "lem-sf-proetale-direct-image-unit-square",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+    "place": "mateEquiv_adicLowerStarComp_hom and mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom, lines 198–253."
+   }
+  },
+  {
+   "text": "Apply the iterated-square-mate identity to $\\alpha=e^{-1}:LQ\\to PL$, with the horizontal adjunctions both $L\\dashv R$ and the vertical adjunctions $Q\\dashv B$ and $P\\dashv A$. Its first mate is $\\beta:QR\\to RP$; its second mate is, by that identity, the conjugate under $PL\\dashv RA$ and $LQ\\dashv BR$ computed in Step 4, hence $C$. Step 5 says the second mate of the actual $b$ is also $C$. Injectivity of this mate bijection gives $\\beta=b$. Expanding the first mate definition at $M$ now gives exactly\n$$b_M=R(P(\\varepsilon_M))\\circ R(e^{-1}_{RM})\\circ\\eta_{QRM}.$$\nHere $P=P_X$, $Q=P_Y$, and the units and counits are the specified ones from Step 1. Together with Steps 1–2 this proves every clause.",
+   "uses": [
+    "lem-trf-iterated-square-mates",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+    "place": "mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv, lines 261–275."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-proetale-direct-image-unit-square",
+  "lem-trf-iterated-square-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExchangeMate.lean",
+  "place": "The source proof, especially lines 108–157 and 198–275, together with Module.lean 117–178 and the definitions GeometricFrobenius.lean 47–105; expanded as a natural-language split for the exact native coefficient objects."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adicUpperStarLowerStarAdjunction|adicUpperStarGeometricFiberMapCompFrobeniusIso|upperStarAdicConstantSheaf",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image and direct image of adic module sheaves commute with geometric Frobenius compatibly with their adjunction unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction"
+    ],
+    "digest": "a3cf1126facc6ef8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.pullbackPushforwardAdjunction",
+     "PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "TopCat.Presheaf.pullbackPushforwardAdjunction",
+     "TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk",
+     "TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc"
+    ],
+    "digest": "9cfcb2990028bacf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of modules over the locally finite continuous l adic coefficient sheaf has Frobenius commuting comparisons that are adjunction mates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackIso"
+    ],
+    "digest": "4a387163b64a2e57"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical inverse image of the locally finite continuous Q l bar coefficient sheaf is an isomorphism and the Frobenius pullback and pushforward squares are mates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal"
+    ],
+    "digest": "369d87a935cbc53e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match: ordinary module adjunctions and abstract derived-adjunction APIs do not identify the native adic coefficient pullback or its specified Frobenius comparisons; relevant source signatures were read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical inverse image of the pro etale sheaf of locally finite continuous Q l bar valued functions is an isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom",
+     "CondensedMod.IsSolid.isIso_solidification_map",
+     "Condensed.isoLocallyConstantOfIsColimit_inv",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+     "LightCondensed.isoLocallyConstantOfIsColimit_inv",
+     "CompHausLike.LocallyConstant.functorToPresheavesIso",
+     "Condensed.isoLocallyConstantOfIsColimit"
+    ],
+    "digest": "ade77e6f02b1516e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyFiniteFunctions|upperStarAdicConstantSheaf|adicUpperStarGeometricFiberMapCompFrobeniusIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of locally finite continuous l adic coefficient sheaves on the pro etale site",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LocallyFinite.preimage_continuous",
+     "CategoryTheory.Functor.sheafPullback",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app",
+     "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+     "Condensed.locallyConstantPresheaf",
+     "Condensed.lanSheafProfinite"
+    ],
+    "digest": "d5cdbf24da3ccc52"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.conjugateEquiv",
+     "CategoryTheory.conjugateEquiv_id",
+     "CategoryTheory.conjugateEquiv_iso",
+     "CategoryTheory.conjugateEquiv_of_iso",
+     "CategoryTheory.conjugateEquiv_symm_id",
+     "CategoryTheory.conjugateEquiv_symm_iso",
+     "CategoryTheory.conjugateEquiv_symm_of_iso",
+     "CategoryTheory.conjugateEquiv_adjunction_id"
+    ],
+    "digest": "ad29fee7616564af"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar_map_unit_comp_lowerStarComp|mateEquiv_eq_of_unit|sheafPushforwardContinuousComp",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Point/Map.lean",
+     "Mathlib/CategoryTheory/Sites/Over.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+     "Mathlib/CategoryTheory/Sites/Continuous.lean",
+     "Mathlib/CategoryTheory/Sites/Continuous.lean"
+    ],
+    "digest": "bafe122af0ffdcd8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_eq_of_unit",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.mateEquiv_eq_of_unit'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward composition along a commutative square of isomorphisms respects the adjunction units of the inverse direct image equivalences",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ExponentiableMorphism.pushforwardComp",
+     "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp",
+     "CategoryTheory.CommSq.right_adjoint",
+     "CategoryTheory.ExponentiableMorphism.comp_pushforward",
+     "CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom"
+    ],
+    "digest": "36d4c2a62d9f038d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commuting scheme isomorphisms a and b and a map f, the direct image composition comparison commutes with the units of inverse pushforward equivalences",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app"
+    ],
+    "digest": "d29e8f4d87d58856"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "digest": "b8ac30fd6644aa85"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the sheaf of continuous functions with values locally in a finite extension of Q l commutes with arbitrary scheme base change",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackObjFreeIso",
+     "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality"
+    ],
+    "digest": "7e965e5ed7210fad"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of pushforward along an inverse scheme isomorphism is compatible with a commutative square under canonical iterated fiber product restriction maps",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp"
+    ],
+    "digest": "d532e227a49784cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of native adic module sheaves and the mate identity for the specified geometric Frobenius exchange isomorphisms",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "LightCondensed.ihomPoints_symm_comp",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.ιFree_mapFree_inv",
+     "AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app"
+    ],
+    "digest": "4eb96e3ea72f953a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match for the whole native statement: generic mate calculus is reused through existing Mathlib leaves; Mathlib does not identify these locally finite coefficient maps or the specified adic Frobenius exchanges."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, final Hom bijection; the ordinary pullback/direct-image adjunction used in fix-cor-verdier-exchange.proof.md Steps 1–2, in the native derived-Weil realization. The seeded ancestor is null (blueprint_refs.py ancestor reports None); via lem-sf-weil-verdier-exchange. Underived geometric input: exact adic inverse image and the mate identity for its two actual Frobenius exchange maps.",
+   "via": [
+    "lem-sf-derived-weil-pullback-pushforward-adjunction",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-pullback-frobenius-mates",
+  "worker": "stage1",
+  "summary": "Preserved the exact native statement. Proved exactness by the canonical coefficient inverse-image isomorphism and geometric module inverse image, then computed the two iterated mates of the actual comparisons. One genuine smaller input is stated only: an ordinary direct-image unit-square identity. Native coefficient base change and exactness of the module inverse image are cited from the existing lem-sf-native-adic-pullback-exact-lisse (reviewer FIX: the delivered coefficient base-change node restated that node's first clause and was dropped). No whole-clause mate lemma was substituted for the item.",
+  "blueprint": "fix-lem-tensor-adjunction.proof.md Step 1, final Hom bijection; the ordinary pullback/direct-image adjunction used in fix-cor-verdier-exchange.proof.md Steps 1–2, in the native derived-Weil realization. The seeded ancestor is null (blueprint_refs.py ancestor reports None); via lem-sf-weil-verdier-exchange. Underived geometric input: exact adic inverse image and the mate identity for its two actual Frobenius exchange maps.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-native-adic-pullback-exact-lisse",
+    "why": "Native coefficient base change g^{-1}B_X≅B_Y and exactness of the tensor module inverse image for an arbitrary scheme morphism; stated in the framework unit sk-thm-sf-package, no node of sk-prop-sf-biduality-general gives it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "The prescribed ordinary tensor-formula adjunction for arbitrary ringed topoi; fixes the exact unit and counit used in the native category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-10385d34b",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-10385d34b (reviewer sub-agent of L); spot-checked: FIX for one repairable fault (C5/B9 duplicate); the rest of the mathematics is sound. Fault: the new node lem-sf-native-adic-coefficient-cartesian restates the first clause of the existing NH node lem-sf-native-adic-pullback-exact-lisse. That node already says, for every scheme morphism g and the same B and map, that the precomposition-adjoint map g^{-1}B_X→B_Y is an iso and that g^*M is exact. Lean isIso_upperStarAdicConstantSheafHom (UpperStar.lean 263-312) confirms the content. Repair: dropped the new node; Step 1 now cites lem-sf-native-adic-pullback-exact-lisse for both the iso α_J and exactness of L, with additivity marked elementary. lem-trf-geometric-inverse-image-exact is no longer cited. The ringed-topos adjunction identification is kept. tool_uses now lists exact-lisse (from unit sk-thm-sf-package) and the ringed-topos adjunction. No cycle: exact-lisse has no proof_deps. Item checks: the statement types correctly under def-weil-pbc-adjunction-mate (L1=L2=L, G=P_Y, H=P_X, α=e^{-1}), giving exactly the displayed b_M. Ja=bJ was checked by projections. The five-factor expansion of e^{-1} and its conjugate C:RA→(Ja)_*=(bJ)_*→BR follow conjugate-composition reversal and mate-pasting clause 2. Step 5 correctly reads the unit-square equation as d = inverse mate of C under P⊣A, Q⊣B. Step 6 index matching for iterated_mateEquiv_conjugateEquiv checked (F1=Q, F2=P); bijectivity gives β=b. New node lem-sf-proetale-direct-image-unit-square kept: it matches Lean lowerStar_map_unit_comp_lowerStarComp (ExchangeMate.lean 56-100) side by side and is true by the fibre-product universal property; edge cases id and empty checked; it is not a clause of the item; no duplicate found by rg -L over the compositor nodes; searches recorded. Batch-5: lem-trf-iterated-square-mates is a pure category-theory Mathlib leaf whose closure has no trace-formula or Poincaré-duality content, accepted. lem-trf-geometric-inverse-image-exact is generic topos exactness whose closure has only trf definitions; it would be acceptable but is no longer cited after the FIX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate",
+  "declaration": "AlgebraicGeometry.ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv",
+   "AlgebraicGeometry.ProEtale.adicUpperStar",
+   "AlgebraicGeometry.ProEtale.adicLowerStar",
+   "AlgebraicGeometry.ProEtale.adicUpperStarLowerStarAdjunction",
+   "AlgebraicGeometry.ProEtale.instAdditiveAdicSheafAdicUpperStar",
+   "AlgebraicGeometry.ProEtale.instPreservesFiniteLimitsAdicSheafAdicUpperStar",
+   "AlgebraicGeometry.ProEtale.instPreservesFiniteColimitsAdicSheafAdicUpperStar",
+   "AlgebraicGeometry.ProEtale.instAdditiveAdicSheafAdicLowerStar",
+   "AlgebraicGeometry.ProEtale.adicLowerStarEquivalence",
+   "AlgebraicGeometry.ProEtale.isEquivalence_adicLowerStar",
+   "AlgebraicGeometry.ProEtale.adicUpperStarIsoLowerStarInv",
+   "AlgebraicGeometry.ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso",
+   "AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso",
+   "AlgebraicGeometry.ProEtale.adicConstantSheafToLowerStar",
+   "AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafIso"
+  ],
+  "statement": "lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :\n    (mateEquiv (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))\n        (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))\n        (TwoSquare.mk _ _ _ _\n          (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)).natTrans =\n      (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom",
+  "branch": "slopmaster2",
+  "by": "Q23",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing native mate theorem and its public imported module functors, canonical adjunction, additive/exactness instances, Frobenius equivalence and the two specified comparisons. All clauses are matched in the worker report. The upstream declarations hold for arbitrary scheme morphisms over a finite field, so apply to the stated separated finite-type case and to primes different from the characteristic. No replacement coefficient object, arbitrary comparison, extra hypothesis or derived adjunction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf9218bce",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Existing:true attachment to the upstream proved lemma ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv (ExchangeMate.lean 261-275) plus 14 declarations from Module/GeometricFrobenius. Node differs from side-live only in lean; statement verbatim. L=modLeft (iso coefficient map, the node's tensor pullback), R=modRight along precomposition, adjunction = canonical modAdjunction; instances give L additive and exact, R additive; P_T=adicLowerStar F.inv = framework frobeniusPullback, equivalence via adicLowerStarEquivalence, F^*≅P via leftAdjointUniq; e and b are the isos used by ProEtaleWeilSheaf.upperStar/lowerStar; with Mathlib mateEquiv conventions the component is eta ≫ R(e^-1) ≫ R(P_X eps), exactly the node's b_M. Lean hypotheses weaker than the node (no separated/finite-type, any l); universes match the framework; no other node owns these declarations. Advisories: ringed-topoi adjunction stmt_dep (an existence theorem) unused in Lean; released stage-1 re-split note concerns the proof only; no worker second reading (policy). No files changed, no compile."
+ }
+}

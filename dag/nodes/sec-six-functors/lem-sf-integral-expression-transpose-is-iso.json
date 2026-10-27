@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-expression-transpose-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the explicit expression coefficient transpose",
+ "statement": "Fix prime l, finite E/Q_l, D, o, and primitives d [def-sf-integral-expression-recursion-data]. Suppose rec: Reconstruction supplies reduction and limit closure and invertibility of the actual unit and counit on the specified constructible and Good domains. For every typed finite expression e with its geometric conditions and K in e.domain [def-sf-integral-system-expression-domain], the component transposeComparison(d,e)_K is an isomorphism. The associated canonicalComparisons is defined as the inverse of this explicit natural transformation; the inverse adjunction hom-set equivalence gives its whole-system coefficient identity. This statement asserts neither the unary/tensor recursion equations nor direct compactification agreement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11."
+ },
+ "stmt_deps": [
+  "def-sf-integral-expression-recursion-data"
+ ],
+ "proof": [
+  {
+   "text": "At a variable, transposeComparison is the actual unit because coefficientMap is identity. Reconstruction.unit applies to the constructible input. The coefficientTransformation_app theorem identifies the natural and component recursions.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Inductively write H for the child integral value and M for its system value. Its transpose H -> L M is an isomorphism. Since M is Good, Reconstruction.limit implies L M is constructible. Reconstruction.reduction and the invertible counit at M give Good R L M; Good A M transports across A(e_M) to Good A R L M. Thus d_A at L M has exactly its basicUnaryDomain witness. Counit naturality and unaryTranspose identify the parent transpose with A_int of the child transpose followed by d_A(L M)^(-1) and L A(e_M). Every factor is invertible. Good and constructibility transport along isomorphisms by transporting normalization, cohomological and Tor intervals, and the compatible Origins evaluation isomorphisms; the quotient squares remain true by naturality.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data",
+    "def-sf-integral-system-expression-domain",
+    "lem-sf-integral-basic-realization",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For tensor perform the same calculation with the pair of child isomorphisms and B(e_M,e_N), using tensorTranspose. Both tensor branches are strictly smaller even when variables repeat. For compact support do the open unary step followed by the proper unary step. The intermediate open Good condition belongs to e.domain; properness over the finite-type root gives the finite-type compactification scheme.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data",
+    "def-sf-integral-system-expression-domain",
+    "lem-sf-integral-basic-realization",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-expression-recursion-data",
+  "def-sf-integral-system-expression-domain",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-basic-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of a natural transformation is natural and satisfies the counit identity",
+   "results": "Adjunction.counit_naturality, unit_naturality, right_triangle. These supply the formal adjunction calculation, but no expression-domain invertibility or geometric normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction tools only; specialized expression statement absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms for expression trees transported through an adjunction with invertible unit and counit",
+   "results": "Adjunction.leftAdjointCompIso, Equivalence.adjointifyη, Adjunction.unitAsIsoOfIso, conjugateIsoEquiv. No theorem for these full recursive intermediate domains.",
+   "date": "2026-10-26",
+   "verdict": "No specialized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientMap|integralExpressionRecursion|homEquiv_naturality_left",
+   "results": "Mathlib supplies Adjunction.homEquiv and its naturality; local rg finds only the assigned expression recursion and its downstream consumers, not a completed proof of the proposed steps.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate statement; use hom-set equivalence for the coefficient identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExpressionRecursion",
+  "date": "2026-10-26",
+  "group": "T2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11.",
+   "via": [
+    "lem-sf-integral-expression-recursion",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralExpressionTransposeIsIso",
+  "file": "lean/Sheaf/SixFunctors/IntegralExpressionTransposeIsIso.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.transposeComparison_isIso",
+  "statement": "theorem transposeComparison_isIso (D : FiniteFieldDatum.{u})\n    (o : Operations l E) (d : Primitives l E D o) (rec : Reconstruction l E D)\n    {I : Type u} {X : I → Over (Spec (.of D.k))}\n    {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric)\n    (K : (e.domain l E o).FullSubcategory) :\n    IsIso ((transposeComparison l E d e g).app K)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.transposeComparison_isIso",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.canonicalComparisons",
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.canonicalComparisons_coefficient"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe0fc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201708-L-3409391",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe0fc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201708-L-3409391",
+  "kind": "interface",
+  "note": "independent cc review: Item theorem type byte-identical to clones/live; 19 relocated declarations byte-identical (diff) and re-exported publicly; both direct importers compile against the delivered set (lcompile --all sandbox); the two open statements are each equivalent to a conjunct of the original item via the hom-set uniqueness of the transpose; unit realized empty; axioms show only pre-existing upstream sorryAx plus the two named holes"
+ }
+}

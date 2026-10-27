@@ -22,6 +22,8 @@ import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
 import Sheaf.RepresentationTheory.ContinuousCoefficientSubquotients
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Dense integer lattices and ordinary internal derived invariants
 

@@ -1,0 +1,143 @@
+{
+ "id": "def-per-near-point-normal-fibre-constructions",
+ "kind": "definition",
+ "title": "Centre stalk ideal, normal-fibre algebra and polynomial degree subspaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $c:C\\to X$ be a morphism of schemes and $z\\in C$ [def-pc-scheme]. Set $R=\\mathcal O_{X,c(z)}$ and let $I=\\ker(\\mathcal O_{X,c(z)}\\to\\mathcal O_{C,z})$; when $c$ is a closed immersion, this is the centre ideal in the stalk. Set $A=R/I$ [def-weil-pbc-algebra-hom-quotient] and $k=\\kappa(c(z))$ [def-weil-residue-field]. The canonical $A$-algebra structure on $k$ is the factorization of the residue map $R\\to k$ through $A$ (the kernel $I$ is contained in the maximal ideal). Define the normal-fibre algebra $S=k\\otimes_A\\operatorname{gr}_I R$, using [def-weil-pbc-associated-graded-ring] and [def-weil-pbc-module-tensor-product]. For $n\\ge0$, define its degree-$n$ subspace as the $k$-linear span of the elements $1\\otimes\\iota_n(a)$ for $a\\in I^n/I^{n+1}$, where $\\iota_n$ is the direct-sum inclusion. Separately, for any field $k$, commutative $k$-algebra $B$, family of $k$-submodules $(\\mathcal B_j)_{j\\ge0}$ of $B$, and integers $r,n\\ge0$, define the degree-$n$ polynomial subspace in $B[T_1,\\ldots,T_r]$ [def-weil-pbc-mv-polynomial-ring] to be the $k$-linear span of the monomials $bT^d$ with $b\\in\\mathcal B_j$ and $j+\\sum_i d_i=n$. These are explicit subspace constructions; no flatness, grading axiom, reducedness or near-point theorem is part of this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-residue-field",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Cossart--Jannsen--Saito, March 12 2009 preprint, section 2, Theorems 2.3 and 2.14, pp.29,36 (https://epub.uni-regensburg.de/13766/1/MP32.pdf): explicit centre-stalk and normal-cone fibre constructions and the total-degree polynomial grading used for the near-point statement. Existing Lean definitions in Sheaf.AlgebraicGeometry.HilbertSamuelNearNormalCone, lines 50--84."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normal cone fibre algebra at a point of a scheme center with tensor product grading and graded polynomial algebra",
+   "results": "{\"t\": \"2026-10-24T11:36:45Z\", \"tool\": \"leansearch\", \"query\": \"normal cone fibre algebra at a point of a scheme center with tensor product grading and graded polynomial algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedTensorProduct.instAlgebra\", \"GradedTensorProduct\", \"GradedTensorProduct.instRing\", \"GradedTensorProduct.instModule\", \"TensorAlgebra.gradedAlgebra\", \"GradedAlgebra\", \"AlgebraicGeometry.stalkToFiberRingHom\", \"AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom\"], \"digest\": \"fd27283db5e507c1\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing project constructions are the exact match; generic Mathlib tensor gradings do not specialize the scheme stalk and residue action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal cone fibre tensor product grading polynomial coefficients graded algebra",
+   "results": "{\"t\": \"2026-10-24T11:36:46Z\", \"tool\": \"leanfinder\", \"query\": \"normal cone fibre tensor product grading polynomial coefficients graded algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedTensorProduct\", \"GradedTensorProduct.of\", \"GradedTensorProduct.auxEquiv\", \"GradedTensorProduct.tmul\", \"TensorProduct.algebraMap_gradedMul\", \"TensorProduct.gradedMul_def\", \"TensorProduct.gradedMul_algebraMap\", \"GradedTensorProduct.instRing\"], \"digest\": \"40b2386d1c20a770\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing project constructions are the exact match; generic Mathlib tensor gradings do not specialize the scheme stalk and residue action."
+  },
+  {
+   "tool": "grep",
+   "query": "centerStalkIdeal|centerResidueAlgebra|normalFibreGrade|normalPolynomialGrade",
+   "results": "{\"t\": \"2026-10-24T11:36:45Z\", \"tool\": \"grep\", \"query\": \"centerStalkIdeal|centerResidueAlgebra|normalFibreGrade|normalPolynomialGrade\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Existing project constructions are the exact match; generic Mathlib tensor gradings do not specialize the scheme stalk and residue action."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l centerStalkIdeal|centerResidueAlgebra|normalFibreGrade|normalPolynomialGrade dag/nodes; rg in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search normal fibre",
+   "results": "The only existing DAG record listing the five names is the theorem node lem-trf-hilbert-samuel-near-normal-cone. No definition node owns them. All five definitions are in Sheaf.AlgebraicGeometry.HilbertSamuelNearNormalCone, lines 50--84. No occurrence in WeilConjectures. Blueprint search: 0 nodes match normal fibre.",
+   "date": "2026-10-24",
+   "verdict": "Bind the existing five plain constructions to a new definition node as required by the independent return; no Lean copied or moved."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-scheme-near-point-normal-cone",
+  "date": "2026-10-24",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Normal-fibre algebra and polynomial degree subspaces used to state the nonreduced near-point normal-cone input in the ancestor regular-resolution branch.",
+   "via": [
+    "lem-per-scheme-near-point-normal-cone",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalConeFibreConstructions",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.centerStalkIdeal",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSamuel.centerStalkIdeal",
+   "AlgebraicGeometry.HilbertSamuel.centerResidueAlgebra",
+   "AlgebraicGeometry.HilbertSamuel.normalFibre",
+   "AlgebraicGeometry.HilbertSamuel.normalFibreGrade",
+   "AlgebraicGeometry.HilbertSamuel.normalPolynomialGrade"
+  ],
+  "statement": "abbrev centerStalkIdeal {X C : Scheme.{u}} (c : C ⟶ X) (z : C) : Ideal (X.presheaf.stalk (c z))",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The five existing constructions have been moved verbatim from HilbertSamuelNearNormalCone to this shared module. Both near-point theorem modules publicly import it. This breaks the old definition-only dependency of the nonreduced theorem on the reduced theorem, allowing the reduced theorem to specialize the stronger existing theorem. No definition or instance body or signature changes.",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalConeFibreConstructions.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99f23572e",
+  "group": "Q139",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99f23572e",
+  "group": "Q139",
+  "result": "pass",
+  "note": "H2 return of ec8547 repaired: the theorem node lem-trf-hilbert-samuel-near-normal-cone is replaced in stmt_deps by the new def node def-per-near-point-normal-fibre-constructions (existing:true on Sheaf.AlgebraicGeometry.HilbertSamuelNearNormalCone, five plain declarations listed; statement checked against Lean lines 50-84: stalk kernel, Quotient.factor residue action, k⊗_A gr_I R, span gradings, j+|d|=n; fields complete; deps exist live; no competing owner). Added landed def-trf-hilbert-samuel-invariant is permitted (STMT_DEPS MAY GAIN LANDED NODES). Item otherwise unchanged vs live except lean; lean.statement verbatim; Lean file byte-identical to the ec8547 delivery whose mathematics two independent reviews confirmed (no IsReduced, canonical Rees/Proj pullback, standard graded B, r>=1, graded B[T], B_+ in prime of t, raw-near iff via canonical residueFieldMap). Sorry only, docstrings with source/blueprint/10 steps. Nothing compiled (no file changed). Advisory: the reused declarations' docstrings still name the old blueprint node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5d75a",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261026T092656-L-3452799",
+  "kind": "interface",
+  "note": "independent cc review: near_normal_cone vs near_normal_cone_nonreduced (identical but for [IsReduced X]); five moved defs vs live text (verbatim); def/item node diffs vs live; DAG reachability lem-per-scheme-near-point-normal-cone ↛ item; lean/ import graph (no other importers)"
+ }
+}

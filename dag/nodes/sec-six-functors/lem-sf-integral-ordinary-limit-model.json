@@ -1,0 +1,210 @@
+{
+ "id": "lem-sf-integral-ordinary-limit-model",
+ "kind": "statement",
+ "title": "Ordinary coefficient limit commutes with direct image",
+ "statement": "For every prime l and finite extension E/Q_l, the coefficient sequence sites and completed coefficient module categories [def-coef-ringed-sequence-site, def-weil-completed-integral-coefficients] admit an OrdinaryLimitModel l E [def-strict-coefficient-system-realization-data]. Thus the actual sequence direct image [def-pur-completed-pullback-tower-core] followed by ordinary limit is naturally isomorphic to ordinary limit followed by completed-ring direct image [def-weil-pbc-proetale-operations], and this isomorphism satisfies the actual sectionwise finite projection formula specified by OrdinaryLimitModel.projections.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-completed-integral-coefficients",
+  "def-strict-coefficient-system-realization-data",
+  "def-pur-completed-pullback-tower-core",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved unique normalized isomorphism of restricted coefficient towers. This is the actual tower assembled from finite direct-image/evaluation and scalar-restriction comparisons, with identity on every component section.",
+   "uses": [
+    "lem-sf-integral-ordinary-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved uniquely normalized identification of sfCompletedModuleDirectImage with the actual completed-ring module direct image. Transport the specified module pullback adjunction through this isomorphism. Thus the completed direct image used for the coefficient tower is a right adjoint and preserves ordinary limits.",
+   "uses": [
+    "def-strict-coefficient-completed-image-data",
+    "def-weil-pbc-proetale-operations",
+    "def-strict-coefficient-system-realization-data",
+    "lem-sf-integral-completed-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the limit functor to the tower isomorphism and compose with the inverse of preservesLimitNatIso for the completed direct image. It preserves all limits because it is the right adjoint of the specified module pullback. The equations limMap_pi and preservesLimitIso_inv_pi show that this composite preserves each tower projection up to the finite comparison. Evaluating on sections and using its identity-section formula yields exactly OrdinaryLimitModel.projections. The argument applies equally to zero modules, identity morphisms, empty schemes and arbitrary unbounded coefficient systems.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-strict-coefficient-system-realization-data",
+    "def-pur-completed-pullback-tower-core",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-completed-pullback-tower-core",
+  "def-strict-coefficient-system-realization-data",
+  "def-strict-coefficient-completed-image-data",
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-integral-completed-direct-image-comparison",
+  "lem-sf-integral-ordinary-tower-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "H8: detailed ordinary-limit portion of primitive realization Step 3; Stacks 03D7 and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint commutes with inverse limits and the corresponding left adjoints commute by conjugating the natural isomorphism",
+   "results": "{\"t\": \"2026-10-26T22:44:58Z\", \"tool\": \"leanfinder\", \"query\": \"A right adjoint commutes with inverse limits and the corresponding left adjoints commute by conjugating the natural isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightAdjointObjIsDefined_limit\", \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"CategoryTheory.Adjunction.rightAdjoint_preservesLimits\", \"CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint\", \"CategoryTheory.Limits.instIsRightAdjointFunctorLim\", \"CategoryTheory.Limits.IsLimit.ofRightAdjoint\", \"CategoryTheory.Adjunction.leftAdjointCompIso_inv_app\", \"CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint\"], \"digest\": \"902375f3b11c1927\"}",
+   "date": "2026-10-26",
+   "verdict": "The generic limit preservation and projection lemmas are used; no complete normalized coefficient-system comparison was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesLimitIso\"",
+   "results": "{\"t\": \"2026-10-26T22:45:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"preservesLimitIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.preservesLimitIso\", \"CategoryTheory.preservesLimitIso_hom_π\", \"CategoryTheory.preservesLimitIso_inv_π\", \"CategoryTheory.lift_comp_preservesLimitIso_hom\", \"CategoryTheory.preservesLimitIso_hom_π_assoc\", \"CategoryTheory.preservesLimitIso_inv_π_assoc\", \"CategoryTheory.lift_comp_preservesLimitIso_hom_assoc\"], \"digest\": \"2366cc9ab5c72845\"}",
+   "date": "2026-10-26",
+   "verdict": "The generic limit preservation and projection lemmas are used; no complete normalized coefficient-system comparison was found."
+  },
+  {
+   "tool": "grep",
+   "query": "OrdinaryLimitModel|integralReductionPullbackModel|pullbackTensorOrdinaryLimit",
+   "results": "{\"t\": \"2026-10-26T22:45:19Z\", \"tool\": \"grep\", \"query\": \"OrdinaryLimitModel|integralReductionPullbackModel|pullbackTensorOrdinaryLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "The generic limit preservation and projection lemmas are used; no complete normalized coefficient-system comparison was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint preserves limits with a natural isomorphism commuting with the limit projections",
+   "results": "{\"t\": \"2026-10-26T23:57:53Z\", \"tool\": \"leansearch\", \"query\": \"A right adjoint preserves limits with a natural isomorphism commuting with the limit projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint\", \"CategoryTheory.preservesLimitNatIso\", \"CategoryTheory.preservesLimitNatIso.congr_simp\", \"CategoryTheory.Adjunction.lim_preservesLimits\", \"CategoryTheory.Adjunction.rightAdjoint_preservesLimits\", \"CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint\", \"CategoryTheory.Functor.ranCompLimIso_hom_app\", \"CategoryTheory.Functor.ranCompLimIso\"], \"digest\": \"0adb093aac3e8fd2\"}",
+   "date": "2026-10-26",
+   "verdict": "Found preservesLimitNatIso and right-adjoint limit preservation, which the proof uses. No complete normalized coefficient-system statement was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullbackModel",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Primitive realization Step 3: commute geometric direct image with the ordinary limit of restricted coefficient systems.",
+   "via": [
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-reduction-pullback-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOrdinaryLimitModel",
+  "file": "lean/Sheaf/SixFunctors/IntegralOrdinaryLimitModel.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralOrdinaryLimitModel",
+  "statement": "theorem integralOrdinaryLimitModel : Nonempty (OrdinaryLimitModel l E)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T012847-L-2341166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261027T103518-L-1094397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "V8 stage 2",
+  "old_statement": "For every prime l and finite extension E/Q_l, the coefficient sequence sites and completed coefficient module categories [def-coef-ringed-sequence-site, def-weil-completed-integral-coefficients] admit an OrdinaryLimitModel l E [def-sf-integral-system-canonical-bridge]. Thus the actual sequence direct image [def-pur-completed-pullback-tensor-comparison] followed by ordinary limit is naturally isomorphic to ordinary limit followed by completed-ring direct image [def-weil-pbc-proetale-operations], and this isomorphism satisfies the actual sectionwise finite projection formula specified by OrdinaryLimitModel.projections.",
+  "what": "Dependency-interface refinement only: replace a broad owner containing later compact-support/completion realization by the existing lower geometric or strict-system declarations actually used. The Lean statement, hypotheses, conclusion and proof stay verbatim. This prevents the lower ordinary construction from acquiring a circular dependency on strict proper reduction.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+   "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-ordinary-reduction-pull-composition",
+    "holds": true,
+    "note": "Identical Lean declaration and mathematical assertion; only the cited interface is narrowed."
+   },
+   {
+    "id": "lem-sf-integral-reduction-pullback-model",
+    "holds": true,
+    "note": "Identical Lean declaration and mathematical assertion; only the cited interface is narrowed."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-coef-ringed-sequence-site",
+   "def-weil-completed-integral-coefficients",
+   "def-sf-integral-system-canonical-bridge",
+   "def-pur-completed-pullback-tensor-comparison",
+   "def-weil-pbc-proetale-operations"
+  ],
+  "old_proof": [
+   {
+    "text": "Use the proved unique normalized isomorphism of restricted coefficient towers. This is the actual tower assembled from finite direct-image/evaluation and scalar-restriction comparisons, with identity on every component section.",
+    "uses": [
+     "lem-sf-integral-ordinary-tower-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use the proved uniquely normalized identification of sfCompletedModuleDirectImage with the actual completed-ring module direct image. Transport the specified module pullback adjunction through this isomorphism. Thus the completed direct image used for the coefficient tower is a right adjoint and preserves ordinary limits.",
+    "uses": [
+     "def-weil-derived-direct-image",
+     "def-weil-pbc-proetale-operations",
+     "def-sf-integral-system-canonical-bridge",
+     "lem-sf-integral-completed-direct-image-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the limit functor to the tower isomorphism and compose with the inverse of preservesLimitNatIso for the completed direct image. It preserves all limits because it is the right adjoint of the specified module pullback. The equations limMap_pi and preservesLimitIso_inv_pi show that this composite preserves each tower projection up to the finite comparison. Evaluating on sections and using its identity-section formula yields exactly OrdinaryLimitModel.projections. The argument applies equally to zero modules, identity morphisms, empty schemes and arbitrary unbounded coefficient systems.",
+    "uses": [
+     "def-weil-pbc-proetale-operations",
+     "def-sf-integral-system-canonical-bridge",
+     "def-pur-completed-pullback-tensor-comparison",
+     "def-coef-ringed-sequence-site"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-coef-ringed-sequence-site",
+   "def-pur-completed-pullback-tensor-comparison",
+   "def-sf-integral-system-canonical-bridge",
+   "def-weil-derived-direct-image",
+   "def-weil-pbc-proetale-operations",
+   "lem-sf-integral-completed-direct-image-comparison",
+   "lem-sf-integral-ordinary-tower-comparison"
+  ]
+ }
+}

@@ -86,16 +86,28 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleFreeSourceHomBijective",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleFreeSourceHomBijective.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleFreeSourceHomBijective",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleFreeSourceHomBijective.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleFreeSourceHom_bijective",
-  "statement": "theorem rawModuleFreeSourceHom_bijective\n    (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)\n    (U : S.Etale) (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Function.Bijective (fun g :\n        (upperStar (ModuleCat.{u + 1} Λ) f).obj ((freeSheaf Λ S).obj U) ⟶ M ↦\n      ((upperStar AddCommGrpCat.{u + 1} f).map\n          (RawModuleScalarComparison.freeMap Λ S U) ≫\n        RawModuleScalarComparison.pullback Λ f ((freeSheaf Λ S).obj U)) ≫\n          (RawModuleScalarComparison.forget Λ X).map g)",
+  "statement": "theorem rawModuleFreeSourceHom_bijective\n    (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (f : X ⟶ S)\n    (U : S.Etale) (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Function.Bijective (fun g :\n        (upperStar (ModuleCat.{u + 1} Λ) f).obj ((freeSheaf Λ S).obj U) ⟶ M ↦\n      ((upperStar AddCommGrpCat.{u + 1} f).map\n          (RawModuleScalarComparison.freeMap Λ S U) ≫\n        RawModuleScalarComparison.pullback Λ f ((freeSheaf Λ S).obj U)) ≫\n          (moduleAbelianForget Λ X).map g)",
   "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-13"
+  "by": "G2",
+  "date": "2026-10-25",
+  "note": "Retire the duplicate Sheaf module in favor of the fully proved adopted upstream theorem. The sole statement difference is the definitional abbreviation RawModuleScalarComparison.forget = moduleAbelianForget. Both mathematical parents already import and apply this upstream theorem; no dependency or unit step is removed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -108,17 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "B2",
+  "reviewer": "C-25714",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T153934-L-1122975",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.rawModuleFreeSourceHom_bijective"
-  ],
-  "sorry_after": []
+  "landing": "20261025T051845-L-4165597",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn Sheaf rawModuleFreeSourceHom_bijective vs upstream WeilConjectures theorem (identical up to abbrev forget = moduleAbelianForget; same freeMap/pullback); node lean record vs upstream signature; zero importers"
  }
 }

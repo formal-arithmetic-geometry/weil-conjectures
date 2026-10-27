@@ -16,41 +16,51 @@
  },
  "proof": [
   {
-   "text": "Prove the general closure criterion used in Lean. If an exact ambient functor F preserves coproducts after restriction to the source hull and maps bounded source objects to bounded target objects, put P equal to the intersection of the source hull and the inverse image of the target hull. P is replete and triangulated. Lift each P-valued discrete diagram and its ambient colimit cocone to the source hull. Full faithfulness reflects its colimit property, the coproduct hypothesis maps it to a colimit, and closure of the target hull puts that image colimit in the target hull. Thus P is closed under ambient sums. Minimality of the source hull proves the claim.",
+   "text": "By [lem-sfb-adic-proper-localizing-membership], every $K\\in\\mathcal L_Z$ has $Rg_*K\\in\\mathcal L_Y$. Restrict objects and morphisms by $(K,h_K)\\mapsto(Rg_*K,h_{Rg_*K})$ and $a\\mapsto Rg_*(a)$. Since the hulls are full subcategories, the ambient identity and composition equations give the canonical functor $F_g$.",
    "uses": [
+    "lem-sfb-adic-proper-localizing-membership",
     "def-sfb-bounded-constructible-localizing-closure"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Part (1), identity compactification and restriction to localizing hulls; agent-written categorical expansion of the returned proof."
+   }
   },
   {
-   "text": "Apply the closure criterion to actual Rg_*. It is triangulated as a total right derived functor. Case elimination of the indexed adic coefficient certificate supplies the existing IsFinitenessCoefficient instance in each of its three constructors. Proper bounded-constructible preservation is the proper adic specialization of boundedConstructible_rightDerivedLowerStar_obj; the coproduct input is the preceding localizing coproduct theorem.",
+   "text": "The ambient right-derived functor commutes with integer shifts and carries distinguished triangles to distinguished triangles. Its shift isomorphisms and inverses are morphisms of the full hulls; their naturality and coherence equations are unchanged. Triangles of a hull are distinguished exactly when their ambient images are. Thus the restricted $F_g$ commutes with shifts and is triangulated.",
    "uses": [
     "lem-pc-right-derived-functor-triangulated",
-    "lem-sfb-dc-lower-star-preserves",
-    "lem-sfb-adic-proper-localizing-coproducts",
     "def-sfb-bounded-constructible-localizing-closure"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Part (1), identity compactification and restriction to localizing hulls; agent-written categorical expansion of the returned proof."
+   }
   },
   {
-   "text": "Define the restricted functor using ObjectProperty.lift and the proved membership theorem. Its shift structure and exactness are inherited by the full triangulated subcategory. Reflect preservation of coproducts along the fully faithful target inclusion, whose composite with F_g is the source inclusion followed by Rg_*.",
+   "text": "Apply [lem-sfb-adic-proper-localizing-restricted-coproducts] to this canonical restriction. It preserves every coproduct indexed by a type in universe $u+1$, including the empty type. These are exactly the remaining assertions.",
    "uses": [
-    "def-sfb-bounded-constructible-localizing-closure",
-    "lem-sfb-adic-proper-localizing-coproducts"
+    "lem-sfb-adic-proper-localizing-restricted-coproducts"
    ],
-   "elementary": true
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Part (1), identity compactification and restriction to localizing hulls; agent-written categorical expansion of the returned proof."
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-adic-proper-localizing-membership",
   "def-sfb-bounded-constructible-localizing-closure",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-sfb-dc-lower-star-preserves",
-  "lem-sfb-adic-proper-localizing-coproducts"
+  "lem-sfb-adic-proper-localizing-restricted-coproducts"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-  "place": "Part (1): proper direct image on the two localizing hulls."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "Part (1), identity compactification and restriction to localizing hulls; agent-written categorical expansion of the returned proof."
  },
  "mathlib_searches": [
   {
@@ -95,7 +105,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-cor-existence-ii",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward",
@@ -113,14 +134,12 @@
   ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "NT-cc-NH-df0da0a9e",
+  "group": "NH",
   "result": "pass",
-  "landing": "20261017T120638-L-306766",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-df0da0a9e (reviewer sub-agent of L); spot-checked: Follows the released human re-split note of 2026-10-27 (coord/repair-notes, restated 14:50 CST), which asks for one node per sorried declaration. Membership = ellAdic_localizing_rightDerivedLowerStar_obj (Lean line 47); restricted-coproducts = ellAdicLocalizingLowerStar_preservesCoproducts (line 84). The clause-shaped children are therefore what was ordered, not D1 relabelling. Diffed against the live node: the item statement, stmt_deps and lean are byte-identical. The proof is 3 steps, 936 chars, and proof_deps equals the union of uses. All three old proof steps sit verbatim in the children's source.note (checked by string containment): old steps 1-2 in membership, old step 3 in restricted-coproducts. Maths checked. Membership: P = L_Z ∩ Rg_*^{-1}L_Y is replete, triangulated (Rg_* exact via lem-pc-right-derived-functor-triangulated) and closed under u+1 sums, since lem-sfb-adic-proper-localizing-coproducts gives preservation on the hull only. B_Z ⊆ P via lem-sfb-dc-lower-star-preserves, which covers all three certificate constructors (E, O_E with E in Q̄_ℓ, Q̄_ℓ) with ℓ invertible in k; minimality then gives the claim. Restricted coproducts: i_Y F_g = Rg_* i_Z, and the full inclusion reflects colimits; the empty I works because Rg_*0 = 0. Small cases (g = id, Z empty, K = 0, I empty) are consistent. No cycle: none of the three notes' cited nodes reaches the item or the membership node. Form: no lean/proof fields on the children; four kinds of search recorded. from.node is null as computed by blueprint_refs ancestor (the item's created.item is a module name), with via = [item]. Duplicate candidates were checked and differ: det-proper-image-localizing-principle (needs ambient sums), det-proper-image-localizing-proper (Loc(Dctf) hull), det-cor-existence-ii-restriction (admissible Λ), lem-sf-full-subcategory-universe-coproduct-lift (needs ambient preservation). The tool_use of lem-pc-right-derived-functor-triangulated is accepted: a generic shift/triangle black box the old proof already used. Advisory: when membership is split, the generic closure criterion (boundedConstructibleLocalizingClosure_map_of_preservesOnClosure) needs its own node. Details in review.md."
  },
  "reviewed_proof": {
   "date": "2026-10-21",
@@ -133,5 +152,25 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [],
   "sorry_after": []
- }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sfb-adic-proper-localizing-pushforward",
+  "worker": "stage1",
+  "summary": "Repair under the human restatement of 2026-10-27 14:50 CST: two unsplit statement-only declaration nodes, no child lean/proof/proof_deps fields; complete original and expanded arguments retained verbatim in source.note. Declaration-to-node allocations are recorded in split_report.lean_declarations. Parent statement and statement dependencies are unchanged; its short proof assembles the two new nodes and the ambient triangulated-functor theorem.",
+  "blueprint": "The membership child realizes Part (1)'s intersection/minimality closure argument and the application to actual Rg_*; the restricted-coproduct child realizes Part (1)'s full-inclusion colimit-reflection argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic unbounded derived-functor shift and triangle theorem used only for the formal inherited structures, not to replace the unit route."
+   }
+  ],
+  "lean_declarations": {
+   "lem-sfb-adic-proper-localizing-membership": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_localizing_rightDerivedLowerStar_obj",
+   "lem-sfb-adic-proper-localizing-restricted-coproducts": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdicLocalizingLowerStar_preservesCoproducts"
+  }
+ },
+ "tool_uses": [
+  "lem-pc-right-derived-functor-triangulated"
+ ]
 }

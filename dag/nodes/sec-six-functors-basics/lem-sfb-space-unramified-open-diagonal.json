@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-space-unramified-open-diagonal",
+ "kind": "statement",
+ "title": "A locally finite type algebraic-space map with open diagonal is unramified",
+ "statement": "Let $S$ be a scheme and $f:X\\to Y$ a locally finite type morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-weil-finite-type-morphism]. Assume $\\Delta_{X/Y}:X\\to X\\times_YX$ is an open immersion. Then $f$ is unramified. The fibre product is the sheaf fibre product, open immersion means that every scheme base change is an open immersion [def-weil-open-immersion], and unramifiedness is tested on etale scheme charts using [def-weil-unramified-morphism].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), part (2). The reverse implication is already represented by lem-sfb-unramified-space-open-diagonal when the target is a scheme."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-unramified-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Use the chart convention in the statement explicitly: for every commutative square $fa=bh$ with schemes $U,V$, representable etale maps $a:U\\to X$, $b:V\\to Y$, and $h:U\\to V$, local finite type of $f$ means local finite type of $h$ in [def-weil-finite-type-morphism]; unramifiedness means unramifiedness of these scheme maps in [def-weil-unramified-morphism]. These are the chart definitions of Tags 03XF and 03ZH, using the all-diagrams condition of 03MJ. Fix any such square. We will prove its $h$ unramified. No surjectivity of these particular charts is required.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03XF (definition-locally-finite-type), 03ZH (definition-unramified), 03MJ (lemma-local-source-target), condition (1); Tag 05W1(2)."
+   }
+  },
+  {
+   "text": "Put $Q=X\\times_YX$, an algebraic space by [lem-trf-space-fibre-products-etale-covers], and $P=U\\times_YU$. The scheme-source fibre-product clause of [lem-trf-space-representable-etale-scheme-tests] makes $P$ a scheme. The map $P\\to Q$ factors as $U\\times_YU\\to X\\times_YU\\to X\\times_YX$. The first arrow is the base change of $a$ along $X\\times_YU\\to X$ (first projection), and the second is the base change of $a$ along $X\\times_YX\\to X$ (second projection). Both are representable etale, hence so is their composite, by the base-change and composition clauses of that same node. The pullback identifications are $U\\times_X(X\\times_YU)\\simeq U\\times_YU$ and $(X\\times_YX)\\times_XU\\simeq X\\times_YU$, respectively; each forgets the repeated $X$ coordinate, with inverse inserting $a(u)$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), diagram: product of source charts; spaces-properties.tex Tag 03EC and representable scheme tests."
+   }
+  },
+  {
+   "text": "Set $E=V\\times_YV$ and $D=U\\times_VU$, both schemes by [lem-trf-space-representable-etale-scheme-tests]. Since $b$ is representable etale, $E\\to V\\to Y$ is representable etale by base change and composition. The diagonal $V\\to E$ is therefore etale by the comparison clause of that node, applied to the two schemes $V,E$ etale over $Y$. The map $P\\to E$ sends $(u_1,u_2)$ to $(h(u_1),h(u_2))$. The square with top row $D\\to V$, bottom row $P\\to E$, and right arrow $V\\to E$ is cartesian: explicitly $D=P\\times_E V$, on each test scheme a point of $P\\times_E V$ is $(u_1,u_2,v)$ with $h(u_1)=v=h(u_2)$. Forgetting $v$ gives a point of $D$. Conversely, a point $(u_1,u_2)$ of $D$ gives a point of $P$ because $fa=bh$ implies $fa(u_1)=fa(u_2)$, and inserting $v=h(u_1)=h(u_2)$ gives a point of $P\\times_E V$. These operations are mutually inverse and natural, proving the claimed sheaf isomorphism. Thus $D\\to P$ is representable etale by base change. Composing with Step 2 gives a representable etale map $D\\to Q$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1, cartesian right square and middle vertical arrow; spaces-properties.tex Tag 03EC (lemma-etale-over-space)(2)."
+   }
+  },
+  {
+   "text": "The assumed open immersion $\\Delta_f:X\\to Q$ is representable etale: each scheme base change is an open immersion and hence etale by [lem-weil-pbc-etale-composition-cancellation](1). Consequently $U\\xrightarrow{a}X\\xrightarrow{\\Delta_f}Q$ is representable etale by [lem-trf-space-representable-etale-scheme-tests]. The diagonal $\\delta=\\Delta_h:U\\to D$ satisfies $(D\\to Q)\\delta=\\Delta_f a$: on each test scheme both maps send $u$ to $(a(u),a(u))$. The comparison clause of the same node, applied to the schemes $U,D$ representable etale over the algebraic space $Q$, now proves that $\\delta$ is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1(2), etaleness of the chart diagonal; spaces-properties.tex Tag 03EC(2)."
+   }
+  },
+  {
+   "text": "The map $\\delta:U\\to U\\times_VU$ is a monomorphism: equality of $\\delta r$ and $\\delta s$ implies $r=s$ by composing with either projection. Its etaleness from Step 4 gives flatness and local finite presentation by [def-weil-etale-morphism]. The scheme criterion [lem-pe-flat-lfp-monomorphism-open] therefore makes $\\delta$ an open immersion. Together with local finite type of $h$ from Step 1, [def-weil-unramified-morphism] says exactly that $h$ is unramified. As the chart square was arbitrary, the chart convention in Step 1 gives unramifiedness of $f$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-pe-flat-lfp-monomorphism-open",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1(2), final implication; etale.tex Tag 025G (theorem-etale-radicial-open)(3) implies (1); morphisms.tex Tag 02GE(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "lem-pe-flat-lfp-monomorphism-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), part (2). The final etale-monomorphism step is expanded using etale.tex Tag 025G, avoiding the unneeded assertion that every scheme diagonal is globally an immersion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion_diagonal|diagonal.*unramified",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"79\", \"text\": \"instance (priority := 900) [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"125\", \"text\": \"/-- The diagonal of a formally unramified morphism of finite type is an open immersion. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"126\", \"text\": \"instance isOpenImmersion_diagonal [FormallyUnramified f] [LocallyOfFiniteType f] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of algebraic spaces is unramified if and only if its diagonal is an open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion] [P.RespectsRight AlgebraicGeometry.IsOpenImmersion]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], AlgebraicGeometry.IsZariskiLocalAtSource P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski-local at the source, closed under post-composition with open immersions, and respects right composition with open immersions, then the diagonal morphis\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open diagonal characterizes unramified locally finite type maps between algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type morphism of algebraic spaces is unramified if and only if its diagonal is an open immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"RingHom.FormallyUnramified\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative semirings is formally unramified if the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formally unramified condition, meani\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isOpenImmersion_diagonal\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f] [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"The diagonal of a formally unramified morphism of finite type is an open immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isOpenImmersion_diagonal|instOfIsOpenImmersionDiagonal",
+   "results": "{\"t\": \"2026-10-22T07:21:01Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|isOpenImmersion_diagonal|instOfIsOpenImmersionDiagonal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"41434a04f3ad4661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or rings; read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:79 and :126. Neither result treats algebraic spaces or the chart comparison needed here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type morphism of algebraic spaces with open diagonal is unramified",
+   "results": "{\"t\": \"2026-10-22T07:21:01Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type morphism of algebraic spaces with open diagonal is unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"RingHom.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\"], \"digest\": \"53b9b419c0a50eec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or rings; read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:79 and :126. Neither result treats algebraic spaces or the chart comparison needed here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-22T07:21:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"4192920e706955cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or rings; read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:79 and :126. Neither result treats algebraic spaces or the chart comparison needed here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of etale charts with open relative diagonal is an unramified scheme morphism",
+   "results": "{\"t\": \"2026-10-22T07:21:13Z\", \"tool\": \"leanfinder\", \"query\": \"A map of etale charts with open relative diagonal is an unramified scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"36a47298236ba17e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or rings; read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:79 and :126. Neither result treats algebraic spaces or the chart comparison needed here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of algebraic spaces with open diagonal is unramified",
+   "results": "{\"t\": \"2026-10-22T07:21:13Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism of algebraic spaces with open diagonal is unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\"], \"digest\": \"928a7fa362e9b536\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or rings; read Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:79 and :126. Neither result treats algebraic spaces or the chart comparison needed here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-etale-atlas",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Open-diagonal criterion for unramified algebraic-space morphisms.",
+   "via": [
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-unramified-open-diagonal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 05W1(2) into explicit arbitrary chart squares, two product/base-change identifications, etale comparison over X times_Y X, monicity, and the scheme open-immersion criterion. Reused existing scheme-test and fibre-product nodes; no new nodes. Clarified the chart convention for local finite type and unramifiedness in the first step. Repair of the 2026-10-22 landing refusal: reapplied the retained split to the current unsplit live record, re-read all seven proof dependencies and all four statement dependencies, checked all citation quotations against the current statements, and expanded the product identities in Steps 2 and 3. Statement, chart hypotheses, and dependency set are unchanged. Follow-up repair of returned head 80e89542896: reapplied stage-1 fields to the current unsplit record, revalidated every current citation, and made the inverse D to P times_E V explicit, including the equality fa=bh that supplies the P coordinate.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Open-diagonal criterion for unramified algebraic-space morphisms. The five steps supply the open-diagonal converse used by lem-sfb-unramified-diagonal-etale-atlas; inherited null ancestor retained because blueprint_refs.py ancestor reports None. Searches of the whole blueprint find no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme-source representability, representable etale base change/composition, and comparison of etale schemes over an algebraic space; no node of this unit supplies these foundational scheme tests."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only the algebraic-space fibre-product existence clause is used, to make X times_Y X an algebraic space; this is a generic tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-821e0ace8",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-821e0ace8 (reviewer sub-agent of L); spot-checked: Third push of this split. b54c1c03 and 80e89542 were both PASSed and both refused at landing because the side completion was never promoted to the live DAG. In clones/live and clones/side-live the item is still unsplit with an empty proof, so no other group has superseded it. Compared with the 80e89542 snapshot, only Step 3's text and the split_report changed. Statement, stmt_deps, proof_deps, source and the other steps are identical. The new Step 3 text gives the inverse D→P×_E V explicitly (fa=bh gives fa(u1)=fa(u2), then insert v=h(u1)=h(u2)), and it is correct. Read Stacks 05W1(2) (spaces-morphisms.tex 7508-7558); the route matches it, ending with 025G applied to Δ_h through lem-pe-flat-lfp-monomorphism-open. Every step uses only stated clauses of the current cited statements, all read in full. lem-weil-pbc-etale-composition-cancellation(1) is applied only to scheme base changes. The comparison clause of lem-trf-space-representable-etale-scheme-tests is applied over Y and over the algebraic space Q, which its statement allows. Monicity and local finite type of h are used. proof_deps equals the union of the step uses. No new nodes, no SGA. Not a duplicate: lem-sfb-unramified-space-open-diagonal is the converse. Batch-5 finding: lem-trf-space-fibre-products-etale-covers (fibre products of algebraic spaces exist) and lem-trf-space-representable-etale-scheme-tests (representable étale calculus and the comparison clause) are general algebraic-space foundations in unit sk-i-curve-zero. Neither assumption leaf supplies them and they are not steps of the trace-formula or Poincaré proofs, so I accept both as tool_uses. Maintainer note: this is a side-completion promotion loop and only promotion of the side completion blocks landing."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUnramifiedOpenDiagonal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.unramified_of_open_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUnramifiedOpenDiagonal.lean",
+  "statement": "theorem unramified_of_open_diagonal {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hft : MapIsLocally (@LocallyOfFiniteType) f) (hdiag : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (pullback.diagonal f.hom.hom)) : MapIsLocally (@AlgebraicGeometry.IsUnramified) f",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed MapIsLocally chart test with LocallyOfFiniteType and IsUnramified; the open diagonal is IsRepresentableWith applied to the presheaf diagonal underlying the sheaf fibre product. No new definitions or statement corrections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cc46b270",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Stacks 05W1(2) (spaces-morphisms.tex 7508-7517) matches: hft = MapIsLocally LocallyOfFiniteType (all-compatible étale charts, no surjectivity), hdiag = IsRepresentableWith IsOpenImmersion on pullback.diagonal f.hom.hom (diagonal over Y, same pattern as landed MapIsSeparated), conclusion MapIsLocally IsUnramified (IsUnramified = LFT ∧ open diagonal, def-weil-unramified-morphism). No extra hypotheses or universe restriction. Added stmt_dep def-sfb-space-morphism-properties is landed, used, acyclic. SpaceChartwiseUnramified is a theorem-node local def and SpaceMapIsUnramified is scheme-target only, so neither competes as owner; not a duplicate of the 05W1(1) converse nodes. lean.statement verbatim; sorry only; docstrings give source place and blueprint; report sections present (NJ second reading self-described as author reread: note only). No recompile because no file changed."
+ }
+}

@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-simple-root-generation-mixed-commutation",
+ "kind": "statement",
+ "title": "Simple-root generation and mixed-sign commutation",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Reductive means smooth and connected with no nontrivial smooth connected normal unipotent subgroup; unipotent means that geometric points are unipotent matrices in a faithful representation. Split maximal tori, character lattices, roots, coroots, positive systems and simple-root bases are as in [lem-sfb-reductive-borel-pair-structure]. Let $G$ be reductive with split maximal torus $T$ and simple-root base $\\Delta$. Write $U_\\gamma$ for its root subgroups [lem-sfb-reductive-root-subgroup-parametrizations]. There is a Borel subgroup $B\\supseteq T$ whose positive roots have simple base $\\Delta$. The smallest closed subgroup containing $T$ and $U_\\alpha,U_{-\\alpha}$ for every $\\alpha\\in\\Delta$ is $G$. For distinct $\\alpha,\\beta\\in\\Delta$, the subgroup schemes $U_\\alpha$ and $U_{-\\beta}$ commute: their commutator morphism $U_\\alpha\\times_F U_{-\\beta}\\to G$ is the identity morphism to the unit section. The generation assertion includes $\\Delta=\\varnothing$, in which case $G=T$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Summary 21.41, printed p.436 (bases and Borel subgroups); Proposition 21.62, printed p.443, with 21.23, printed p.432 (generation); the mixed-simple-root commutation used in assertion 23.21, printed p.491."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=X^*(T)$ and $Y=X_*(T)$. Since $\\Delta$ is a rational basis of the span of the roots, extend the functional taking value $1$ on each member of $\\Delta$ to $X\\otimes\\mathbf Q$. The perfect lattice pairing in [lem-sfb-reductive-borel-pair-structure] realizes this as a rational cocharacter; multiplying by a common positive denominator gives $\\lambda\\in Y$. Every positive root has positive pairing with $\\lambda$, and every negative root has negative pairing, so $\\lambda$ is regular. By [lem-sfb-regular-cocharacter-borel-description], $B=P(\\lambda)$ is a Borel containing $T$ and its positive roots are exactly the roots with nonnegative $\\Delta$-coordinates. Their simple base is $\\Delta$: a member of $\\Delta$ cannot be a sum of two positive roots by independence; a different positive root is not a new simple generator since $\\Delta$ is already a base for this positive system. If $\\Delta=\\varnothing$, the base property and nonzero roots force $\\Phi=\\varnothing$; take $\\lambda=0$. The same cited result then gives $G=T$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Summary 21.41, p.436; Theorem 21.32 and Definition 21.35, pp.434--435; the prescribed-base functional is written explicitly."
+   }
+  },
+  {
+   "text": "Let $K\\subseteq G$ be any closed subgroup scheme containing $T$ and $U_{\\pm\\alpha}$ for all $\\alpha\\in\\Delta$. We prepare a rational root system without discarding central torus directions in $G$. The rank-one/reflection statement [lem-sfb-reductive-rank-one-reflections] supplies the finite normalizer Weyl group, the reflection formulas, reducedness, and the coroots. Apply [lem-sfb-root-datum-lattice-embedding] to $M=X$, $R=\\Phi$, $c_\\gamma(x)=\\langle x,\\gamma^\\vee\\rangle$. Its hypotheses hold because $X$ is a finite-rank lattice, these reflections belong to that finite Weyl group, and $\\mathbf Q\\gamma\\cap\\Phi=\\{\\gamma,-\\gamma\\}$. It gives $V=\\operatorname{span}_{\\mathbf Q}\\Phi$, the reduced crystallographic root system on $V$, and coroot functionals spanning $V^\\vee$. Use the evaluation pairing between $V$ and $V^\\vee$. The simultaneous reflection identities follow by restricting those of the root datum; hence these are a root pairing with both families spanning. The given $\\Delta$ is independent and gives every root integral coordinates of one sign. By [lem-sfb-root-base-rational-integral-spans], its coroots are also independent and every coroot or its negative is a nonnegative integral sum of them. Thus the same support defines a Mathlib base $b$ of this rational root pairing, as required by [lem-sfb-root-base-reflection-induction].",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-root-datum-lattice-embedding",
+    "lem-sfb-root-base-reflection-induction",
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.62, p.443; Appendix C.29--C.30, p.614 (restrict to the root span)."
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in\\Delta$, [lem-sfb-reductive-rank-one-reflections] makes $G_\\alpha=C_G(T_\\alpha)$ a reductive group of semisimple rank one with maximal torus $T$. Apply [lem-sfb-split-rank-one-classification] to this pair. In each of its three matrix models, the upper and lower unitriangular subgroups have the two root characters and tangent spaces $\\mathfrak g_{\\pm\\alpha}$, possibly with their labels exchanged. They therefore are $U_\\alpha,U_{-\\alpha}$ by uniqueness in [lem-sfb-reductive-root-subgroup-parametrizations]. Write $x_+(a)=I+aE_{12}$ and $x_-(a)=I+aE_{21}$. Direct multiplication gives\n$$x_+(1)x_-(-1)x_+(1)=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}=:n.$$\nThis matrix normalizes the diagonal torus and exchanges its two root spaces, in $\\operatorname{SL}_2$, $\\operatorname{GL}_2$, and their indicated image in $\\operatorname{PGL}_2$; the extra torus factor is fixed. Its inverse works if the labels are exchanged. Thus it supplies $n_\\alpha\\in K(F)\\cap N_{G_\\alpha}(T)(F)$ with nontrivial rank-one Weyl class. By the uniqueness and reflection formula in [lem-sfb-reductive-rank-one-reflections], its action on $X$ is $s_\\alpha$. The matrix remains invertible and exchanges the root characters in characteristic two.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.33 and Corollary 20.34, pp.418--419; Theorem 21.11(d),(e), pp.429--430; 21.23, p.432. The Weyl-word computation is explicit."
+   }
+  },
+  {
+   "text": "For any normalizer point $n$ with character action $w$, the subgroup $nU_\\gamma n^{-1}$ is smooth, connected and $T$-stable. Differentiating conjugation carries its tangent space to $\\mathfrak g_{w\\gamma}$: indeed $t(nun^{-1})t^{-1}=n((n^{-1}tn)u(n^{-1}t^{-1}n))n^{-1}$, which changes the character by $\\gamma(t)\\mapsto\\gamma(n^{-1}tn)$. Uniqueness in [lem-sfb-reductive-root-subgroup-parametrizations] gives $nU_\\gamma n^{-1}=U_{w\\gamma}$ as subgroup schemes. Define $p(\\gamma)$ to mean that both $U_\\gamma$ and $U_{-\\gamma}$ factor through $K$. It is unchanged by negating $\\gamma$. For $\\alpha\\in\\Delta$, conjugation by $n_\\alpha\\in K(F)$ preserves $K$ on every test algebra; the preceding equality gives $p(\\gamma)\\Rightarrow p(s_\\alpha\\gamma)$.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.2, p.424; Proposition 21.62, p.443. Normalizer conjugation of root subgroups is checked from their uniqueness."
+   }
+  },
+  {
+   "text": "For the rational root pairing of step 2, $p$ holds on $\\Delta$ by the hypothesis on $K$, is preserved by negation, and is preserved by simple reflections by step 4. Apply [lem-sfb-root-base-reflection-induction] with index set $\\Phi$ and $J=\\Delta$. It gives $p(\\gamma)$ for every root $\\gamma$, so $K$ contains every root subgroup. This is the simple-reflection induction used in the general-characteristic proof of generation; it requires no Lie bracket generation or division by structure constants.",
+   "uses": [
+    "lem-sfb-root-base-reflection-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.62, p.443; Appendix C.11,C.30, pp.610,614. Mathlib Base.induction_reflect replaces the equivalent orbit formulation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-reductive-rank-one-reflections], $\\operatorname{Lie}(G)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\gamma\\in\\Phi}\\mathfrak g_\\gamma$; by [lem-sfb-reductive-root-subgroup-parametrizations], $\\operatorname{Lie}(U_\\gamma)=\\mathfrak g_\\gamma$. The finite family consisting of $T$ and all $U_\\gamma$ consists of smooth connected closed subgroups and their tangent spaces span $\\operatorname{Lie}(G)$. All inclusions factor through $K$. Apply [lem-sfb-smooth-subgroup-tangent-generation] to conclude $K=G$, without a smoothness assumption on $K$. Therefore the smallest closed subgroup containing the stated generators is $G$. For empty roots the family is just $T$ and the same argument applies, in agreement with step 1.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(f), p.429, and Proposition 21.62, p.443; tangent generation is used only after all roots are present."
+   }
+  },
+  {
+   "text": "Fix distinct $\\alpha,\\beta\\in\\Delta$. Choose a rational linear functional on $X\\otimes\\mathbf Q$ that is positive on $\\alpha$, negative on $\\beta$, and nonzero on every root. Such functionals exist: independence of these two roots makes the first two strict inequalities a nonempty open rational cone, and finitely many proper rational hyperplanes cannot cover that cone (restrict to a rational line through an interior point, with direction outside the finitely many hyperplanes through it, and avoid finitely many parameters). The perfect lattice pairing and a positive denominator give a regular integral cocharacter $\\mu$ with these signs. By [lem-sfb-regular-cocharacter-borel-description], $B'=P(\\mu)$ is a Borel with $\\alpha,-\\beta\\in\\Psi^+$. By [lem-sfb-borel-root-product-coordinates], both root groups lie in $U'=R_u(B')$, and any ordering of its roots identifies $U'$ $T$-equivariantly with $\\prod_{\\gamma\\in\\Psi^+}U_\\gamma$. Use the additive parametrizations and their conjugation formula from [lem-sfb-reductive-root-subgroup-parametrizations] to make these polynomial coordinates $z_\\gamma$ of weight $\\gamma$. The commutator of $u_\\alpha(x)$ and $u_{-\\beta}(y)$ is thus a morphism $\\mathbf A^2_F\\to U'$, with coordinate polynomials $f_\\gamma(x,y)\\in F[x,y]$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Summary 21.41, p.436; 21.21, p.432 and 23.21, p.491; Theorem 21.68, pp.445--446 supplies ordered coordinates. The two-variable coordinate argument is supplied explicitly."
+   }
+  },
+  {
+   "text": "The commutator is the unit when $x=0$ or $y=0$, so every monomial $x^iy^j$ with a nonzero coefficient in any $f_\\gamma$ has $i,j\\geq1$. Conjugation by $T$ and the equivariance of the ordered coordinates give\n$$f_\\gamma(\\alpha(t)x,\\beta(t)^{-1}y)=\\gamma(t)f_\\gamma(x,y).$$\nCompare coefficients in $F[T][x,y]$, with $t$ the universal point of the split torus. A nonzero coefficient of $x^iy^j$ forces equality of characters $\\gamma=i\\alpha-j\\beta$: the characters are distinct Laurent monomials in $F[T]=F[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$. But its $\\Delta$-coordinates then have a positive $\\alpha$-coefficient and a negative $\\beta$-coefficient. This contradicts the same-sign property of every root in [lem-sfb-reductive-borel-pair-structure]. Thus all $f_\\gamma$ are zero. Under the coordinate isomorphism of [lem-sfb-borel-root-product-coordinates], the all-zero point is the unit, so the commutator morphism is the constant unit morphism. These are polynomial and Laurent-monomial identities, and consequently hold after substitution in every commutative $F$-algebra, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.21, p.432 and assertion 23.21, p.491; explicit character-weight polynomial verification of the mixed-simple-root case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-root-base-reflection-induction",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-borel-root-product-coordinates"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Summary 21.41; Proposition 21.62, general-characteristic Weyl argument; 21.11(f),21.21,23.21. The commutation assertion is checked in ordered-root coordinates rather than by a Lie bracket."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive algebraic group is generated by its maximal torus and positive and negative simple root subgroups; distinct positive and negative simple root groups commute",
+   "results": "{\"t\": \"2026-10-23T21:33:35Z\", \"tool\": \"leanfinder\", \"query\": \"A split reductive algebraic group is generated by its maximal torus and positive and negative simple root subgroups; distinct positive and negative simple root groups commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.weylGroup\"], \"digest\": \"28f2ddfc5becd14f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GeckConstruction.lie_e_f_ne (Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations.lean:265) is a relation between matrices in a characteristic-zero Lie algebra, not commutation of group schemes in arbitrary characteristic. CoxeterSystem.subgroup_closure_range_simple and RootPairing.weylGroup generate abstract reflection groups, not reductive algebraic groups."
+  },
+  {
+   "tool": "grep",
+   "query": "simple.*root|root.*subgroup",
+   "results": "{\"t\": \"2026-10-23T21:35:09Z\", \"tool\": \"grep\", \"query\": \"simple.*root|root.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GeckConstruction.lie_e_f_ne (Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations.lean:265) is a relation between matrices in a characteristic-zero Lie algebra, not commutation of group schemes in arbitrary characteristic. CoxeterSystem.subgroup_closure_range_simple and RootPairing.weylGroup generate abstract reflection groups, not reductive algebraic groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.GeckConstruction.lie_e_f_ne",
+   "results": "{\"t\": \"2026-10-23T21:35:10Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.GeckConstruction.lie_e_f_ne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lie_e_f_ne\"], \"digest\": \"3e953737f2819ad8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GeckConstruction.lie_e_f_ne (Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations.lean:265) is a relation between matrices in a characteristic-zero Lie algebra, not commutation of group schemes in arbitrary characteristic. CoxeterSystem.subgroup_closure_range_simple and RootPairing.weylGroup generate abstract reflection groups, not reductive algebraic groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive algebraic group is generated by simple root subgroups and the maximal torus",
+   "results": "{\"t\": \"2026-10-23T21:35:10Z\", \"tool\": \"leansearch\", \"query\": \"A reductive algebraic group is generated by simple root subgroups and the maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.subgroup_closure_range_simple\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.weylGroup\", \"CartanMatrix.Generators.F\", \"CartanMatrix.Generators.E\", \"IsSimpleGroup\", \"CartanMatrix.Generators\", \"IsSimpleAddGroup\"], \"digest\": \"adb6e70cb1ab39cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GeckConstruction.lie_e_f_ne (Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations.lean:265) is a relation between matrices in a characteristic-zero Lie algebra, not commutation of group schemes in arbitrary characteristic. CoxeterSystem.subgroup_closure_range_simple and RootPairing.weylGroup generate abstract reflection groups, not reductive algebraic groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root groups for distinct simple roots alpha and beta satisfy [U_alpha,U_minus_beta]=1 and together with the maximal torus generate the reductive group",
+   "results": "{\"t\": \"2026-10-23T21:35:12Z\", \"tool\": \"leanfinder\", \"query\": \"Root groups for distinct simple roots alpha and beta satisfy [U_alpha,U_minus_beta]=1 and together with the maximal torus generate the reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.lie_h_h\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\"], \"digest\": \"29c07f03d5100d9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: GeckConstruction.lie_e_f_ne (Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations.lean:265) is a relation between matrices in a characteristic-zero Lie algebra, not commutation of group schemes in arbitrary characteristic. CoxeterSystem.subgroup_closure_range_simple and RootPairing.weylGroup generate abstract reflection groups, not reductive algebraic groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group is generated by its torus and simple root subgroups and opposite simple root subgroups commute",
+   "results": "{\"t\": \"2026-10-23T22:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"A split reductive group is generated by its torus and simple root subgroups and opposite simple root subgroups commute\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"closureCommutatorRepresentatives\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.weylGroup\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.weylGroup.induction'\"], \"digest\": \"5472ac7b5eb4ed4d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-group statement: Weyl-group, Lie-algebra and Borel-sigma-algebra hits do not assert group-scheme generation or mixed commutation. The separate rational root-system induction is recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing, \"weylGroup\"",
+   "results": "{\"t\": \"2026-10-23T22:35:49Z\", \"tool\": \"loogle\", \"query\": \"RootPairing, \\\"weylGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"RootPairing.reflection_mem_weylGroup\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.range_weylGroupToPerm\", \"RootPairing.weylGroupRootRep\", \"RootPairing.weylGroupToPerm\", \"RootPairing.weylGroupCorootRep\"], \"digest\": \"6cb6b54d224e017e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-group statement: Weyl-group, Lie-algebra and Borel-sigma-algebra hits do not assert group-scheme generation or mixed commutation. The separate rational root-system induction is recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "rootSubgroup|rootGroup|simple.*root",
+   "results": "{\"t\": \"2026-10-23T22:35:49Z\", \"tool\": \"grep\", \"query\": \"rootSubgroup|rootGroup|simple.*root\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-group statement: Weyl-group, Lie-algebra and Borel-sigma-algebra hits do not assert group-scheme generation or mixed commutation. The separate rational root-system induction is recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel root groups generate split reductive algebraic groups",
+   "results": "{\"t\": \"2026-10-23T22:35:50Z\", \"tool\": \"leansearch\", \"query\": \"Borel root groups generate split reductive algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Generators.E\", \"CartanMatrix.Generators.F\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"Algebra.adjoin_root_eq_top_of_isSplittingField\", \"RootPairing.IsRootSystem.mk\", \"borel_eq_generateFrom_isClosed\", \"RootPairing.Base.mk'\", \"QuotientGroup.borelSpace\"], \"digest\": \"bb8df41c0b942fdd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the algebraic-group statement: Weyl-group, Lie-algebra and Borel-sigma-algebra hits do not assert group-scheme generation or mixed commutation. The separate rational root-system induction is recorded as a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-compatible-rank-one-graph-geometry",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Summary 21.41, printed p.436 (bases and Borel subgroups); Proposition 21.62, printed p.443, with 21.23, printed p.432 (generation); the mixed-simple-root commutation used in assertion 23.21, printed p.491.",
+   "via": [
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simple-root-generation-mixed-commutation",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused existing rank-one models, rational root-span comparison, Borel coordinates, smooth tangent-generation and the Mathlib reflection-induction/base-span leaves which appeared in the live DAG during this work. No new nodes. Wrote the normalizer matrix word and the universal two-variable commutator calculation; no characteristic restriction or smoothness assumption on the candidate closed subgroup was added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Summary 21.41, printed p.436 (bases and Borel subgroups); Proposition 21.62, printed p.443, with 21.23, printed p.432 (generation); the mixed-simple-root commutation used in assertion 23.21, printed p.491. Implements the generation and mixed-sign commuting input to the compatible rank-one graph construction along the stated Milne route; the current latest blueprint direct-image proof (3) is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ef6bb7923",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ef6bb7923 (reviewer sub-agent of L); spot-checked: I read the item and its 8 steps in full. There are no new nodes, and the statement and stmt_deps are unchanged. There is no re-split note. I read the source in Milne: Summary 21.41 (p.436), Prop. 21.62 with its general-characteristic Weyl proof (p.443) and 23.21 (p.491). The proof follows 21.62's Weyl-representative route. Mathlib RootPairing.Base.induction_reflect replaces W·Δ=Φ, and tangent generation lets K be any closed subgroup scheme, not necessarily smooth. Step 1: the height cocharacter is regular, P(λ) is the Borel, and Δ=∅ gives G=T. Step 2: all hypotheses of root-datum-lattice-embedding hold, including injective coroots from the root datum and a finite W; the rational-integral-spans node gives the coroot fields of the Mathlib Base. Step 3: I recomputed x+(1)x-(-1)x+(1)=[[0,1],[-1,0]], which works in all three rank-one models and in characteristic 2. The unipotent matrix subgroups have tangent spaces g_{±α}, derivable from v_α, the two roots of the model and dim g_α=1, so root-subgroup uniqueness identifies them with U_{±α}. Steps 4-6: nU_γn^{-1}=U_{wγ} as subgroup schemes, the induction premises match the Mathlib leaf, and tangent generation gives K=G. Steps 7-8: a generic μ with α>0, β<0 gives a Borel B' with ordered product coordinates; universal T-equivariance forces γ=iα-jβ with i,j≥1, which the same-sign base excludes; the identity is universal, so it covers nonreduced test algebras. I checked small cases: torus, rank one, A1×A1, SL3 adjacent roots, G2 and characteristic 2. lem-sfb-semisimple-root-subgroups-generate (semisimple, all roots) is not a duplicate. No SGA source is cited. Batch-5: the six flagged paths reach only generic Mathlib leaves (trf fpqc smooth descent, fg torsion-free free, fppf covering base change), none of which is part of the trace formula or Poincaré duality, so I accept them. No fixes."
+ }
+}

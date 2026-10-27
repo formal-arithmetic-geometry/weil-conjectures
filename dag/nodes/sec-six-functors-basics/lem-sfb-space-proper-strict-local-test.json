@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-space-proper-strict-local-test",
+ "kind": "statement",
+ "title": "Detection of properness on strict localizations of the target",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], and let $f:X\\to T$ be a finitely presented morphism from an algebraic space [def-trf-algebraic-space]. Here finite presentation means quasi-compactness, quasi-separatedness and local finite presentation on etale scheme charts [def-sfb-space-morphism-properties, def-sbc-locally-finite-presentation]. For every geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$ [def-weil-geometric-point], let $T_{(\\bar t)}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$ be the strict localization with its canonical map to $T$ [def-weil-pbc-strict-henselization-limit, def-weil-pbc-strict-henselization-structural-map], and put $f_{(\\bar t)}:X\\times_TT_{(\\bar t)}\\to T_{(\\bar t)}$ [lem-trf-space-fibre-products-etale-covers]. Then $f$ is proper if and only if $f_{(\\bar t)}$ is proper for every geometric point $\\bar t$, where proper means separated, of finite type and universally closed [def-sfb-space-morphism-properties].",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Agent-extracted strict-local corollary of Tag 08K1, lemma-eventually-proper, with strict localizations the pointed affine etale-neighbourhood limits (etale-cohomology.tex Tag 04HX, lemma-describe-etale-local-ring); etale descent: spaces-morphisms.tex Tag 083R, lemma-proper-local, or spaces-descent.tex Tag 0422. This corollary is not claimed to be the verbatim statement of 08K1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is proper, apply proper base change to $T_{(\\bar t)}\\to T$ for each geometric point. Its projection is exactly $f_{(\\bar t)}$, hence is proper.",
+   "uses": [
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04WP, lemma-base-change-proper"
+   }
+  },
+  {
+   "text": "Conversely assume every $f_{(\\bar t)}$ proper and fix $\\bar t$. Use the small cofiltered representative category $\\mathcal J_{\\bar t}$ and its affine-scheme limit $T_{(\\bar t)}$ from the strict-localization definition, with its compatible maps over $T$. Every transition is affine: its source and target are affine, so the singleton covering by the whole target has affine inverse image, and the affine-local-target criterion applies (Stacks 01SH).",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, pointed affine neighbourhood colimit; morphisms.tex Tag 01SH, lemma-morphism-affines-affine"
+   }
+  },
+  {
+   "text": "Apply cofiltered-limit directed reindexing to this small diagram and its limit cone. Obtain a small nonempty directed inverse system $(U_i)$ of affine pointed etale neighbourhoods, with affine transitions and limit $T_{(\\bar t)}$, retaining the projections over $T$. Choose an index $i_0$.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0032, lemma-directed-category-system, dual limit clause"
+   }
+  },
+  {
+   "text": "Base change $f$ to $U_{i_0}$. It is finitely presented by finite-presentation base change. For $i\\ge i_0$ its pullback to $U_i$ is $X\\times_TU_i\\to U_i$, and its limit pullback is $f_{(\\bar t)}$, by associativity of fibre products and compatibility over $T$. Eventual properness therefore gives an $i\\ge i_0$ with $X\\times_TU_i\\to U_i$ proper. All stages are affine; the initial morphism is finitely presented, and the limit morphism is proper, exactly as the cited theorem requires. The pointed lift $\\operatorname{Spec}\\Omega\\to U_i$ ensures its image contains $t$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-eventually-proper",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 084W and 08K1, situation-descent-property and lemma-eventually-proper; spaces-morphisms.tex Tag 03XR, lemma-base-change-finite-presentation"
+   }
+  },
+  {
+   "text": "Take a set of representatives of the affine etale maps $U\\to T$ for which $X\\times_TU\\to U$ is proper. This family is jointly surjective: any $t\\in T$ has a geometric point given by an algebraic closure of $\\kappa(t)$, and step 4 supplies a member whose pointed lift lies over $t$. Each member is flat and locally of finite presentation by the definition of etale. Thus this family is an fppf covering by the definition of that topology. If $T$ is empty the empty family has the same covering property.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021L, definition-fppf-covering; morphisms.tex Tags 02GI and 02GV"
+   }
+  },
+  {
+   "text": "Apply the properness clause of fppf locality to this covering. Every pullback is proper by the choice of its members, hence $f$ is proper. Together with step 1 this proves the equivalence.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0422, lemma-descending-property-proper, restricted to an fppf covering"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-weil-algebraic-closure",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sfb-space-eventually-proper",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-proper-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Strict-local corollary assembled from Tag 08K1, with etale-cohomology.tex Tag 04HX, categories.tex Tag 0032, and spaces-descent.tex Tag 0422."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism of algebraic spaces over a scheme is proper if its base change to every strict henselian local scheme at a geometric point is proper",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\nAlgebraicGeometry.IsProper.instOfIsFinite\nAlgebraicGeometry.instIsProperOfIsFinite\nAlgebraicGeometry.IsProper\nAlgebraicGeometry.IsProper.isStableUnderBaseChange\nAlgebraicGeometry.IsProper.instIsMultiplicativeScheme\nAlgebraicGeometry.isProper_eq\nAlgebraicGeometry.isProper_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local detection of properness by strictly henselian local base change for finitely presented algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\nAlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\nAlgebraicGeometry.isProper_eq\nAlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\nAlgebraicGeometry.isProper_iff\nAlgebraicGeometry.IsProper.of_valuativeCriterion\nAlgebraicGeometry.LocallyOfFinitePresentation\nAlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a finite presentation algebraic space morphism is detected on the strict henselizations of the target",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.IsProper.instOfIsFinite\nAlgebraicGeometry.instIsProperOfIsFinite\nAlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\nAlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\nAlgebraicGeometry.isProper_iff\nAlgebraicGeometry.isProper_eq\nAlgebraicGeometry.IsProper.toLocallyOfFiniteType\nAlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, HenselianLocalRing",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "(proper|Proper).*(strictHensel|strict.hensel)|(strictHensel|strict.hensel).*(proper|Proper)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism of algebraic spaces is proper if and only if it is proper after base change to every strict henselization of the base scheme",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, scheme etale permanence and local ring finite presentation do not state detection of properness for algebraic spaces by strict localizations."
+  },
+  {
+   "tool": "grep",
+   "query": "(proper|Proper).*(strictHensel|strict.hensel)|(strictHensel|strict.hensel).*(proper|Proper)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, scheme etale permanence and local ring finite presentation do not state detection of properness for algebraic spaces by strict localizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a finite presentation algebraic space morphism is detected on strict localizations of the base scheme",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, RingHom.finitePresentation_isLocal, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, scheme etale permanence and local ring finite presentation do not state detection of properness for algebraic spaces by strict localizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, HenselianLocalRing",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, scheme etale permanence and local ring finite presentation do not state detection of properness for algebraic spaces by strict localizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local criterion for proper algebraic spaces via strictly henselian base change and approximation along affine inverse limits",
+   "results": "8 hits: AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, scheme etale permanence and local ring finite presentation do not state detection of properness for algebraic spaces by strict localizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-proper-fibres-proper",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Properness of flat separated families with connected proper fibres. Present split: Detection of properness on strict localizations of the target.",
+   "via": [
+    "lem-sfb-connected-proper-fibres-proper",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-proper-strict-local-test",
+  "worker": "stage1",
+  "summary": "Q82: checked the exact algebraic-space statement, Stacks 08K1/084W/04HX/0032/0422 and existing dependency statements. Reused all needed nodes, explicitly reindexed the small cofiltered neighbourhood system before applying the directed properness theorem, checked finite-presentation base change, and assembled an fppf cover from proper neighbourhoods. No new nodes or statement correction.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), geometric properness prerequisite on the existing ancestor chain through connected proper fibres; this split supplies its strict-local properness test without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products identifies the iterated base changes; no construction of algebraic-space fibre products is provided by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-3ce95a835",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-3ce95a835 (reviewer sub-agent of L); spot-checked: I read the item and all 13 cited nodes in full. The delivery adds no new nodes and does not change the statement. Sources checked: spaces-limits.tex 08K1 (lemma-eventually-proper) in Situation 084W, etale-cohomology.tex 04HX (strict localization as a limit of pointed affine étale neighbourhoods) and spaces-descent.tex 0422 (properness is fpqc local on the base). The statement is true: finite presentation is what makes the converse work. It holds in the small cases I tested (algebraically closed point, empty T, a DVR base). No duplicate exists: I searched dag/nodes with rg -L for strict-local or strict-henselization together with proper and algebraic space; eventually-proper, qcqs-base-eventually-proper and representable-proper-fppf-target-test are different statements. Step 1 is lem-sfb-space-proper-base-change applied to the structural map. Step 2 (elementary) takes the small cofiltered affine neighbourhood category J and its scheme limit from def-weil-pbc-strict-henselization-limit; a morphism between affine schemes is affine by the one-member cover in pqf-lem-affine-local-target. Step 3 is the directed reindexing leaf lem-weil-pbc-cofiltered-limit-directed-reindex. Its statement omits that the directed set is small, but its Mathlib declaration IsFiltered.exists_directed (Directed.lean:545) returns α : Type w, so it is small; I note this as advisory. Step 4 meets every hypothesis of lem-sfb-space-eventually-proper: the stages are affine with affine transitions; X×_T U_{i0} is finitely presented by the base-change clause of fp-locality; the limit pullback is f_(t̄) by fibre-product associativity; the lift of t̄ puts t in the image. Step 5 (elementary) restricts the set of representatives from affine-etale-essentially-small-cover to those with proper pullback. That family is jointly surjective using algebraic closures of κ(t). Étale implies flat and locally finitely presented, so it is an fppf covering. Step 6 is the properness clause of fp-locality. Batch-5 flags: eventually-proper, flat-proper-fp-locality and proper-base-change are general algebraic-space lemmas (Stacks 08K1, 0422, 04WP). They reach sec-trace-formula only through the definition def-trf-algebraic-space and the generic fibre-product lemma, and they are not part of the trace formula or Poincaré duality or their proofs, so I accept all three. I also accept the tool_uses entry for lem-trf-space-fibre-products-etale-covers: it is generic fibre products, it is already a stmt_dep, and no node of this unit gives it. The route stays in unit sk-thm-sf-ctf-stability and cites no SGA. Full checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperStrictLocalTest",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_iff_strictLocalization",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.strictLocalizationSpaceMap",
+   "AlgebraicGeometry.AlgebraicSpace.proper_iff_strictLocalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperStrictLocalTest.lean",
+  "statement": "theorem proper_iff_strictLocalization {T : Scheme.{u}} (X : AlgebraicSpace T) (f : X ⟶ schemeSpace (Over.mk (𝟙 T))) (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (hlfp : MapIsLocallyOfFinitePresentation f) : MapIsProper f ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (barT : Spec (.of Ω) ⟶ T), MapIsProper (enlargedFibreProductFst (strictLocalizationSpaceMap barT) f)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0e146825",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of d19ab032c036. The Lean module is byte-identical (sha256 1cf2ffea…). The only node change is in stmt_deps: the theorem lem-trf-space-enlarged-etale-ringed-site-model is replaced by the definition owners def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-space-sheaf-fibre-product (enlargedFibreProduct/Fst). Both are existing:true and on the base; def-sfb-proper-curve-moduli (MapIsQuasiCompact) is kept. Independent clause check: algebraic-space source over the Yoneda sheaf of T; qc + quasi-compact diagonal + chartwise LocallyOfFinitePresentation = finite presentation; ∀ Ω : Type u algebraically closed with Spec Ω ⟶ T = geometric points (size convention); the strict-localization map is the Yoneda image of the recorded strictHenselizationStructuralMap, real data; f_(t̄) = enlargedFibreProductFst (factors exchanged); MapIsProper ↔ ∀ …. No extra hypotheses. Edge cases covered: empty T, empty X, algebraically closed field base, char p, non-qc T. Only proof is sorry; docstrings carry source, blueprint and the 6 steps; lean.statement verbatim; report has Worker report and Second reading by Q69; live item still has no lean record. No compile: file unchanged from the previously compiled head."
+ }
+}

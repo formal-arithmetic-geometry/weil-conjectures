@@ -329,7 +329,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-717b80f91 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, source places, and unit/chapter route. All four construction steps, the over-Spec Z triangle, functor variance, universe bounds, and empty/finite cases check out. No new nodes or repairs. Recorded detailed checks and historical report discrepancies in review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.profiniteToProEt"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.profiniteToProEt",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      201,
+      206
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
   "declaration": "AlgebraicGeometry.ProEtale.profiniteToProEt",
@@ -347,5 +372,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "Existing record AlgebraicGeometry.ProEtale.profiniteToProEt (WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic, branch slopmaster2 as in the other landed framework records). The statement is verbatim with side l.186 and live l.206, and only the lean field changed. Clause check: obj = ProEt.mk (toSpecZ (Spec LC(S,ℤ))), structure map = Spec of the constant-function map (checked by terminality), weakly étale via the lem-sfb-lc-weakly-etale instance, map = Spec.map (comapRingHom g) by rfl (contravariant), over Spec ℤ by comp_toSpecZ, functor laws present. Universes Profinite.{u}/Scheme.{u} with no extra constraint, target is Mathlib Scheme.ProEt, and the empty, point and finite cases are fine. The landed parent sk-def-sfb-pullback-from-point uses the same functor. The nt_compile check file passed in 2.5 s and print axioms shows no sorryAx. Worker report and Second reading by NJ are present. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $*_{\\mathrm{proét}}$ be the category of profinite sets\n([det-def-sfb-condensed-ring]). The functor\n$$\nu\\colon *_{\\mathrm{proét}}\\longrightarrow(\\Spec\\Z)_{\\mathrm{proét}},\\qquad\nS\\longmapsto\\bigl(\\Spec LC(S,\\Z)\\to\\Spec\\Z\\bigr),\n$$\ntakes values in the small pro-étale site of $\\Spec\\Z$\n([def-weil-pbc-proetale-site]). On morphisms, $u$ sends a continuous map\n$g\\colon S'\\to S$ to the morphism $\\Spec LC(S',\\Z)\\to\\Spec LC(S,\\Z)$ induced\nby the ring map $LC(S,\\Z)\\to LC(S',\\Z)$, $h\\mapsto h\\circ g$.",
+  "proof": [
+   {
+    "text": "By [lem-sfb-lc-weakly-etale], $\\Spec LC(S,\\Z)\\to\\Spec\\Z$ is weakly étale, so\n$u(S)$ is an object of $(\\Spec\\Z)_{\\mathrm{proét}}$. The composite of a\nlocally constant function with a continuous map is again locally constant, so\n$h\\mapsto h\\circ g$ is a well-defined ring map. The induced morphism of\nspectra lies over $\\Spec\\Z$ because $\\Spec\\Z$ is terminal. Precomposition\nrespects identities and composites, and so does $\\Spec$. Hence $u$ is a\nfunctor.",
+    "uses": [
+     "lem-sfb-lc-weakly-etale"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

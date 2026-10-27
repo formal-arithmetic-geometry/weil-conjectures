@@ -1,0 +1,220 @@
+{
+ "id": "lem-trf-restricted-flat-module-finite-presentation",
+ "kind": "statement",
+ "title": "Finite flat modules over integral restricted-series rings are finitely presented",
+ "statement": "Let $K$ be a complete field with a nontrivial real-valued nonarchimedean absolute value, and let $V=\\{a\\in K:|a|\\le1\\}$ be its valuation ring [def-trf-valuation-ring]. For an integer $r\\ge0$ put $S=V\\langle T_1,\\ldots,T_r\\rangle$, the ring of formal power series with coefficients tending to zero [def-trf-restricted-series-presentation]. Let $Q$ be a finitely generated $S$-module [def-weil-finitely-generated-module], with its $V$-module structure given by constant series. If $Q$ is flat over $V$ [def-weil-pbc-flat-ring-map], then $Q$ is finitely presented as an $S$-module [def-sc-finitely-presented-module].",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 2.3, Theorem 4, printed p. 130 (PDF page 131), height-one case; primary PDF read online, local archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-trf-valuation-ring",
+  "def-trf-restricted-series-presentation",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose generators $q_1,\\ldots,q_s$ of $Q$ [def-weil-finitely-generated-module]. Define $w:S^s\\twoheadrightarrow Q$ by $w(a_1,\\ldots,a_s)=\\sum_j a_jq_j$, and put $N=\\ker w$. This gives the exact sequence $0\\to N\\to S^s\\xrightarrow{w}Q\\to0$. The empty generating family is allowed when $Q=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Theorem 4, height-one proof, printed p. 130; online primary PDF. Uses Section 1.3, Corollary 10, printed pp. 21–22."
+   }
+  },
+  {
+   "text": "For $0\\ne a\\in V$, multiplication by $a$ on $V$ is injective, since $V\\subset K$. Flatness [def-weil-pbc-flat-ring-map] makes its tensor product with $Q$ injective. Under $V\\otimes_V Q\\to Q$, $b\\otimes q\\mapsto bq$, with inverse $q\\mapsto1\\otimes q$, this map is multiplication by $a$ on $Q$. Thus $aq=0$ implies $q=0$. In particular, if $x\\in S^s$ and $ax\\in N$, then $aw(x)=0$, hence $w(x)=0$ and $x\\in N$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Theorem 4, height-one proof, printed p. 130; online primary PDF. Uses Section 1.3, Corollary 10, printed pp. 21–22."
+   }
+  },
+  {
+   "text": "Let $D=K\\langle T_1,\\ldots,T_r\\rangle$ and let $L\\subseteq D^s$ be the $D$-span of $N$, using coefficientwise inclusions $S\\subset D$ [def-trf-restricted-series-presentation]. We prove $L\\cap S^s=N$. Choose $\\pi\\in K$ with $0<|\\pi|<1$; such an element exists by nontriviality, taking an inverse if necessary. If $x=\\sum_{i=1}^k d_in_i\\in L\\cap S^s$ with $d_i\\in D$ and $n_i\\in N$, the coefficient norms of these finitely many $d_i$ have a common finite bound $B$: outside finite sets they are less than $1$, since they tend to zero. Choose $m\\ge0$ with $|\\pi|^m B\\le1$. Then $\\pi^m d_i\\in S$, since its coefficients lie in $V$ and still tend to zero. Consequently $\\pi^m x\\in N$, and Step 2 gives $x\\in N$. The reverse inclusion follows from the definition of $L$.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Theorem 4, height-one proof, printed p. 130; online primary PDF. Uses Section 1.3, Corollary 10, printed pp. 21–22."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tate-submodule-norm-controlled-generators] to the $D$-submodule $L\\subseteq D^s$ from Step 3. It gives finitely many $v_i\\in L$ of norm $1$ and representations $x=\\sum_i f_iv_i$ with $\\|f_i\\|_G\\le\\|x\\|$. Norm at most $1$ means precisely that every coefficient belongs to $V$, so each $v_i$ lies in $S^s$, and hence in $N$ by Step 3. For $x\\in N\\subseteq S^s$ one has $\\|x\\|\\le1$, so the representing $f_i$ belong to $S$. Thus $N=\\sum_i Sv_i$.",
+   "uses": [
+    "lem-trf-tate-submodule-norm-controlled-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Theorem 4, height-one proof, printed p. 130; online primary PDF. Uses Section 1.3, Corollary 10, printed pp. 21–22."
+   }
+  },
+  {
+   "text": "Let $h$ be the number of vectors from Step 4. The map $S^h\\to S^s$ sending the $i$th standard vector to $v_i$ has image exactly $N=\\ker w$. Therefore $S^h\\to S^s\\xrightarrow{w}Q\\to0$ is exact, which is a finite presentation [def-sc-finitely-presented-module].",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 2.3, Theorem 4, height-one proof, printed p. 130; online primary PDF. Uses Section 1.3, Corollary 10, printed pp. 21–22."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-tate-submodule-norm-controlled-generators",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Bosch Section 2.3, Theorem 4, height-one proof, read in the online primary PDF. Explicit flatness, denominator-clearing and finite-presentation assembly; local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FinitePresentation",
+   "results": "6 hits: Module.FinitePresentation.isBaseChange_map, Module.Flat.projective_of_finitePresentation, Module.Flat.exists_factorization_of_finitePresentation, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.exists_basis_of_span_of_flat, Module.isLocallyConstant_rankAtStalk; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restricted.*flat|flat.*restricted|valuation.*presentation|presentation.*valuation",
+   "results": "0 hits: ; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud Gruson theorem finite flat module over Tate integral algebra is finitely presented",
+   "results": "8 hits: Module.finitePresentation_of_finite, instFiniteOfFinitePresentation, Module.FinitePresentation.iff_finitePresentation_of_finite, Module.FinitePresentation.mk, Module.FinitePresentation, Module.Presentation.finitePresentation, Module.FinitePresentation.out, Module.FinitePresentation.of_finite_of_finitePresentation; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over restricted power series over a complete rank one valuation ring that is flat over the valuation ring is finitely presented",
+   "results": "8 hits: Algebra.IsStandardSmooth.finitePresentation, PowerSeries.fg_iff_of_isPrime, Algebra.Smooth.finitePresentation, PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, IsLocalization.Away.finitePresentation, PowerSeries.instIsDiscreteValuationRing, AdicCompletion.flat_of_isNoetherian; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|IsRestricted|finitePresentation_of_finite",
+   "results": "16 hits: Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/PowerSeries/Restricted.lean, Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/Injective.lean; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated torsion free module over the integral restricted power series ring of a complete nonarchimedean field admits a finite presentation",
+   "results": "8 hits: PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, Module.FinitePresentation.of_finite_of_finitePresentation, PowerSeries.fg_iff_of_isPrime, IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, LaurentSeries.exists_powerSeries_of_memIntegers, LaurentSeries.mem_integers_of_powerSeries, LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers; inspected search signatures. Restricted-series definitions, formal power series over Noetherian rings, algebra presentations, and flatness plus already-assumed finite presentation do not give this analytic finiteness theorem. Module.FinitePresentation.fg_ker supplies only the generic final kernel step; its existing DAG leaf is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FinitePresentation",
+   "results": "6 hits: Module.FinitePresentation.isBaseChange_map, Module.Flat.projective_of_finitePresentation, Module.Flat.exists_factorization_of_finitePresentation, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.exists_basis_of_span_of_flat, Module.isLocallyConstant_rankAtStalk; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated module over integral restricted power series that is flat over the complete valuation ring is finitely presented",
+   "results": "8 hits: Algebra.IsStandardSmooth.finitePresentation, Module.FinitePresentation.of_finite_of_finitePresentation, AdicCompletion.flat_of_isNoetherian, PowerSeries.fg_iff_of_isPrime, Module.FinitePresentation.iff_finitePresentation_of_finite, Module.exists_basis_of_span_of_flat, Algebra.Smooth.finitePresentation, Module.Flat.exists_factorization_of_isFinitelyPresented; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restricted.*flat|flat.*restricted|valuation.*presentation|presentation.*valuation",
+   "results": "1 hits: Mathlib/Algebra/Lie/Loop.lean; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite torsion free module over integral Tate algebra is finitely presented",
+   "results": "8 hits: Module.finitePresentation_of_finite, Module.FinitePresentation.mk, Module.free_of_finite_type_torsion_free', Module.free_of_finite_type_torsion_free, instFiniteOfFinitePresentation, Module.Presentation.finitePresentation, Module.finitePresentation_of_projective, instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of finitely generated modules over rings of restricted power series over complete valuation rings",
+   "results": "8 hits: Module.FinitePresentation.of_finite_of_finitePresentation, Module.FinitePresentation.exists_fin, Module.FinitePresentation.iff_finitePresentation_of_finite, Algebra.FinitePresentation.of_finitePresentation, Algebra.FinitePresentation.iff, PowerSeries.fg_iff_of_isPrime, PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing; read the returned types. Restricted-series predicates and Gauss norm definitions do not give norm-controlled module generators. PID and Noetherian finiteness results have extra hypotheses and do not supply the norm bound. General finite-presentation criteria do not establish analytic finiteness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-restricted-saturated-submodule-finite",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Completeness of restricted-series quotients over a rank-one valuation ring. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Specifically, the induced-submodule topology input of Bosch 2.3/7(ii), used in the proof of 2.3/8 supporting 2.3/9. The saturated-submodule finiteness input in Bosch 2.3/7(i), used to prove 2.3/7(ii). Theorem 2.3/4, applied to the torsion-free quotient M/P in the proof of Lemma 2.3/7(i).",
+   "via": [
+    "lem-trf-restricted-saturated-submodule-finite",
+    "lem-trf-restricted-submodule-adic-topology",
+    "lem-trf-restricted-quotient-complete",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-restricted-flat-module-finite-presentation",
+  "worker": "stage1",
+  "summary": "Read Bosch 2.3/4 and its actual input 1.3, Corollary 10. Kept the statement unchanged. Wrote saturation and finite scalar-denominator arguments explicitly, extracted the independent norm-controlled generator theorem as one statement-only node, and assembled the finite presentation. Searched the project Lean source, whole DAG, whole blueprint and Mathlib; no exact attachment or analytic Mathlib match.",
+  "blueprint": "Historical analytic branch below lem-trf-local-term-locality, through Bosch 2.3/4 supporting 2.3/7(i); no replacement of the current contracting-correspondence unit proof. The new node realizes the precise invocation of 1.3/10 in the height-one argument."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-da0ea4867",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-da0ea4867 (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-trf-tate-submodule-norm-controlled-generators in full and checked them against Bosch heft378 (copy md5 92e934…, fetched by other reviewers). The new node is a faithful copy of 1.3/10 (printed pp.21–22): any T_n-submodule of T_n^s has generators of norm 1 with |f_i|≤|x|. The chapter-1 standing hypotheses (K complete, absolute value nontrivial) match it. Its proof needs no discreteness. The node is statement-only and self-contained. I tested L=0, s=0, L=D^s and r=0. It does not duplicate any DAG node: tate-ideal-best-approximation is BGR strict closedness without generators, and saturated-submodule-finite, quotient-complete and submodule-adic-topology are downstream. It creates no cycle and is not a clause of the item. The item's steps follow the height-one proof of 2.3/4 (printed p.130). Step 1 takes generators and N=ker w. Step 2 gets torsion-freeness from the tensor-injectivity definition of flatness, so N is saturated. Step 3 proves L∩S^s=N using a common coefficient bound and a power of π; this is Bosch's N⊗K∩R⟨ζ⟩^s=N. Step 4: the norm-1 v_i lie in N, and the norm bound puts the f_i in S. Step 5 matches the exact-sequence definition. Edge cases checked: Q=0, Q free, and S/(π) correctly excluded; non-discrete V is allowed. The statement is unchanged and there are no tool_uses or SGA citations. No fixes."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-source-section-stalk-cone-data",
+ "kind": "definition",
+ "title": "Source-section comparison data and its unchanged normalization predicate",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a finite-field datum $D$ with algebraically closed field $k$ [def-trf-coefficient-conventions]. On $s=\\operatorname{Spec}k$ use integral modules and their derived category [def-weil-derived-complete-integral-detailed], the completed pullback [def-pur-integral-derived-operations], exact point sections [def-weil-finite-coefficient-point], the specified inverse-image comparison [def-weil-inverse-image-pullback-comparison] and quotient-stalk towers [lem-trf-bounded-quotient-stalk-realization]. Define trfSourceSectionConeLift as the composite of chain restriction, inverseImageRoosComparisonComplex, the sections Roos comparison and the quotient germ tower map. Define j as derived restriction followed by sections of the specified kappa. Define c as sections of the inverse identity unit, inverse specified compositor, and canonical identity-composition equality transport. TrfSourceSectionData packages I with its coherence proof and the isomorphisms sigma, rho, e and R together with the natural identity lift a_0. TrfSourceSectionNormalized is the unchanged conjunction of its section/derived restriction, finite germs, reparametrization, two identity coordinates, chain and derived naturality, realization isomorphisms and arbitrary-representative comparison equations. These are the five original constructions extracted verbatim; this node asserts no existence theorem.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): restriction/insertion germ formula, combined with the specified completion normalization; agent extraction of original Steps 9--10; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-coefficient-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-geometric-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-trf-bounded-quotient-stalk-realization",
+  "lem-trf-stalk-compositor-tower-realization",
+  "lem-trf-germ-reparametrization-derived-descent",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Retain the five existing definitions and structures verbatim in a separate module. The original theorem module publicly reexports this module. No mathematical object or normalization clause is changed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stages 3 extraction of source-section proof, steps 1--7; Stacks Tags 0F4F, 05V1 and the specified strict completion model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of source sections along a field automorphism agrees with geometric stalk reparametrization on both coordinates of a Roos cone",
+   "results": "8 hits, beginning AlgebraicGeometry.opensCone_π_app and AlgebraicGeometry.Scheme.Hom.resLEStalkMap; these concern open restrictions and ordinary scheme stalks.",
+   "date": "2026-10-26",
+   "verdict": "No match for the normalized completed quotient-cone construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.hom_ext",
+   "results": "0 hits; unknown identifier 'CochainComplex.mappingCocone.hom_ext'.",
+   "date": "2026-10-26",
+   "verdict": "No matching declaration found by this query."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceSection|SourceSection|inverseImageRoosComparisonComplex_naturality",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A source section comparison with inverse image on a geometric point commutes with the two coordinates of the completed quotient tower Roos complex",
+   "results": "8 hits, including Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint and ΓSpecIso_hom_stalkClosedPointIso_inv. These concern ordinary structure-sheaf stalk maps.",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified completed quotient tower or either normalization construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SourceSectionStalkConeComparison",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers (b); source-section comparison, Source-section comparison data and its unchanged normalization predicate"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SourceSectionStalkConeData",
+  "file": "lean/Sheaf/Paper/SourceSectionStalkConeData.lean",
+  "declaration": "WeilConjectures.trfSourceSectionConeLift",
+  "declarations": [
+   "WeilConjectures.trfSourceSectionConeLift",
+   "WeilConjectures.trfSourceSectionJ",
+   "WeilConjectures.trfSourceSectionC",
+   "WeilConjectures.TrfSourceSectionData",
+   "WeilConjectures.TrfSourceSectionNormalized"
+  ],
+  "statement": "def trfSourceSectionConeLift\n    (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g]\n    (σ : pointIntegralSections l E D.k ≅\n      inverseImageIntegralModules l E g ⋙ pointIntegralSections l E D.k)\n    (e : trfQuotientSectionTower l E g ≅ trfQuotientStalkTower l E g)\n    (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) :\n    ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj P ⟶\n      integralOperationsRoos ((trfQuotientStalkTower l E g).obj P)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and three new modules vs clone item module (five declarations moved verbatim) and node lem-trf-source-section-stalk-cone-comparison; two sorry statements vs the item's original Normalized clauses"
+ }
+}

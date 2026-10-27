@@ -30,6 +30,16 @@ open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+private theorem isFreeGenerator_iso {X : Scheme.{u}} {M N : X.Modules}
+    (i : M ≅ N) {U : X.Opens} {e : Γ(M, U)} (he : IsFreeGenerator e) :
+    IsFreeGenerator (i.hom.app U e) := by
+  intro W hW
+  have hi := ConcreteCategory.bijective_of_isIso
+    ((toPresheaf X ⋙ (CategoryTheory.evaluation _ _).obj (.op W)).map i.hom)
+  change Function.Bijective (i.hom.app W) at hi
+  simpa only [Function.comp_def, Hom.app_smul, Hom.app_presheaf_map] using
+    hi.comp (he W hW)
+
 /-- On an affine open contained in the inverse image of a trivializing affine open, the
 pulled-back morphism has free generators with coefficient `g.appLE U V hVU b`.
 The pullback is `AlgebraicGeometry.Scheme.Modules.tensorPullback`, recorded by
@@ -59,6 +69,23 @@ theorem IsFreeGenerator.exists_tensorPullback_affine
       (eN' : Γ((tensorPullback g).obj N, V.1)),
       IsFreeGenerator eM' ∧ IsFreeGenerator eN' ∧
         ((tensorPullback g).map φ).app V.1 eM' = g.appLE U.1 V.1 hVU b • eN' := by
-  sorry
+  classical
+  obtain ⟨eM', eN', hM', hN', hb'⟩ := hM.exists_pullback g φ hN hb
+  let i : pullback g ≅ tensorPullback g :=
+    (pullbackPushforwardAdjunction g).leftAdjointUniq
+      (nonempty_tensorPullbackAdjunction g).some
+  let sM := ((pullback g).obj M).presheaf.map (homOfLE hVU).op eM'
+  let sN := ((pullback g).obj N).presheaf.map (homOfLE hVU).op eN'
+  refine ⟨(i.app M).hom.app V.1 sM, (i.app N).hom.app V.1 sN,
+    isFreeGenerator_iso (i.app M) (hM'.map hVU),
+    isFreeGenerator_iso (i.app N) (hN'.map hVU), ?_⟩
+  have hcoeff : ((pullback g).map φ).app V.1 sM = g.appLE U.1 V.1 hVU b • sN := by
+    dsimp [sM, sN]
+    rw [Hom.app_presheaf_map, hb', map_smul]
+    rfl
+  have hnat := congrArg (fun f ↦ f.app V.1 sM) (i.hom.naturality φ)
+  change (i.app N).hom.app V.1 (((pullback g).map φ).app V.1 sM) =
+    ((tensorPullback g).map φ).app V.1 ((i.app M).hom.app V.1 sM) at hnat
+  rw [← hnat, hcoeff, Hom.app_smul]
 
 end AlgebraicGeometry.Scheme.Modules

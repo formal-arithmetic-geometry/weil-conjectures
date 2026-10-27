@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-algebra-directed-hom-finite-presentation",
+ "kind": "statement",
+ "title": "Directed Hom factorization detects finite presentation of an algebra",
+ "statement": "Let $R$ be a commutative ring and $C$ a commutative $R$-algebra, in a fixed universe [def-weil-size-convention]. Assume that for every small nonempty directed set $I$, every directed system $(A_i)_{i\\in I}$ of commutative $R$-algebras with $R$-algebra transition maps, its colimit $A=\\varinjlim_i A_i$ in commutative $R$-algebras [def-weil-pbc-category-colimit], and every $R$-algebra homomorphism $h:C\\to A$, there are $i\\in I$ and an $R$-algebra homomorphism $h_i:C\\to A_i$ whose composite with $A_i\\to A$ is $h$. Then $C$ is finitely presented over $R$ [def-weil-pbc-finitely-presented-algebra], meaning that $C\\cong R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ as an $R$-algebra for some finite $n,m$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QO, lemma-characterize-finite-presentation, implication (3) implies (1)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal P$ be the set of all quotients $R[x_1,\\ldots,x_n]/J$ with $n\\ge0$ and $J$ a finitely generated ideal. Every finitely presented $R$-algebra is isomorphic to a member by its definition. Apply [lem-weil-pbc-algebra-colimit-fp-algebras-over-it] with $\\Lambda=C$: the category $\\mathcal J$ of these algebras equipped with an $R$-algebra map to $C$ is small and filtered, and its canonical cocone with vertex $C$ is a colimit in commutative $R$-algebras. The quotient models and their homomorphisms form sets in the fixed universe, since they are built from finite polynomial rings over $R$ and maps to $C$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-algebra-colimit-fp-algebras-over-it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QO, (3) implies (1), invoking Tag 00QN (lemma-ring-colimit-fp), first proof via Tag 0BUF."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-filtered-category-directed-cofinal] to $\\mathcal J$ and the preceding algebra diagram. This gives a nonempty directed set $I$, algebras $B_i$ of finite presentation over $R$, transition maps, and maps $v_i:B_i\\to C$ exhibiting $C$ itself as their colimit. The index is small in the same universe: the cited construction reindexes a small category by a set (its recorded declaration uses $A:\\mathrm{Type}\\,w$ when $\\mathcal J:\\mathrm{Type}\\,w$). Thus this is a system to which the hypothesis of the item applies.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0032, lemma-directed-category-system, clause (1); applied as in Algebra Tag 00QN, first proof."
+   }
+  },
+  {
+   "text": "Apply the assumed factorization property to this system and $h=\\mathrm{id}_C$. Obtain $i\\in I$ and an $R$-algebra map $u:C\\to B_i$ with $v_i\\circ u=\\mathrm{id}_C$. Put $B=B_i$ and $v=v_i$. Both maps respect the original $R$-algebra structures.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QO, (3) implies (1), factorization of the identity."
+   }
+  },
+  {
+   "text": "Choose a finite polynomial presentation of $B$ over $R$, and denote the images of its variables by $b_1,\\ldots,b_n$. Each element of $B$ is a polynomial in the $b_j$ with coefficients from $R$. Because $u$ is an $R$-algebra map, the image in $B$ of every $r\\in R$ equals $u$ of its image in $C$. The same polynomials therefore show that $b_1,\\ldots,b_n$ generate $B$ as a $C$-algebra via $u$. Hence $C\\to B$ is of finite type. The composite $C\\xrightarrow{u}B\\xrightarrow{v}C$ is the identity, of finite presentation with zero variables and zero relations.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QO, (3) implies (1), hypotheses for Tag 00F4(4)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-presentation-over-finite-type-algebra] with its base ring $C$, intermediate algebra $B$ via $u$, final algebra $C$ with its identity structure, and homomorphism $v$. Its scalar compatibility is exactly $v\\circ u=\\mathrm{id}_C$; Step 4 gives its two finiteness hypotheses. Consequently $v:B\\to C$ is of finite presentation. Now $R\\to B$ is of finite presentation by construction. Clause (2) of [lem-weil-pbc-finite-presentation-base-change-composition] makes their composite $R\\to C$ of finite presentation. This is the original structure map because $v$ is an $R$-algebra homomorphism, so the required finite polynomial presentation follows.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QO, (3) implies (1), applying Tag 00F4(4) and then (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QO, lemma-characterize-finite-presentation, (3) implies (1); Tag 00QN first proof assembled from existing Tag 0BUF and Categories Tag 0032 nodes; Tag 00F4(4),(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*[Ii]ff|[Ii]ff.*finitePresentation|[Ff]inite[Pp]resentation.*[Cc]olimit",
+   "results": "OK 12 hits: Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative algebra is finitely presented if every homomorphism from it to a directed colimit of algebras factors through a stage",
+   "results": "OK 8 hits: Algebra.FinitePresentation, AlgHom.FinitePresentation, Algebra.FinitePresentation.of_finitePresentation, Algebra.FiniteType.of_finitePresentation, RingHom.FinitePresentation, Algebra.FinitePresentation.iff, AlgHom.FiniteType.of_finitePresentation, Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitePresentation\", \"IsFinitelyPresentable\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation_iff|finitePresentation_of.*[Cc]olimit|isFinitelyPresentable.*iff|iff.*isFinitelyPresentable",
+   "results": "OK 12 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/Presentation/Finite.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|FinitePresentation|[Ff]initely[Pp]resentable",
+   "results": "OK 5 hits: 13, 81, 145, 146, 161",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative R algebra is finitely presented if all its maps into directed colimits factor through a stage",
+   "results": "OK 8 hits: Algebra.FinitePresentation, RingHom.FinitePresentation, Algebra.FinitePresentation.of_finitePresentation, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, AlgHom.FinitePresentation, Algebra.Smooth.finitePresentation, Algebra.FinitePresentation.mk, RingHom.finitePresentation_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Hom from a commutative R algebra preserves directed colimits then it is finitely presented over R",
+   "results": "OK 8 hits: CommRingCat.isFinitelyPresentable_hom, isFinitelyPresentable, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.isFinitelyPresentable_under, CommRingCat.preservesFilteredColimits_coyoneda, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, preservesFilteredColimits_coyoneda, preservesColimit_coyoneda_of_finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*[Ii]ff|[Ii]ff.*[Ff]initePresentation|[Ff]initePresentation.*[Cc]olimit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-presentation definitions and the forward implication only; CommRingCat.isFinitelyPresentable_under and preservesFilteredColimits_coyoneda assume finite presentation, whereas this node concludes it. Read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative R algebra is finitely presented if every homomorphism from it to a directed colimit of R algebras factors through one stage",
+   "results": "OK 8 hits: Algebra.FinitePresentation, AlgHom.FinitePresentation, Algebra.FinitePresentation.of_finitePresentation, RingHom.FinitePresentation, Algebra.FiniteType.of_finitePresentation, Algebra.FinitePresentation.iff, AlgHom.FiniteType.of_finitePresentation, Algebra.Presentation.finitePresentation_of_isFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the source read at Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183 assumes algebraic finite presentation to deduce preservation of filtered colimits or categorical finite presentability. This item proves the converse from stage factorization alone; the definition and module results do not state it."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation_iff|finitePresentation_of.*[Cc]olimit|isFinitelyPresentable.*iff|iff.*isFinitelyPresentable",
+   "results": "OK 12 hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/CategoryTheory/Presentable/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the source read at Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183 assumes algebraic finite presentation to deduce preservation of filtered colimits or categorical finite presentability. This item proves the converse from stage factorization alone; the definition and module results do not state it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative algebra is finitely presented if all maps out of it into directed colimits factor through a stage",
+   "results": "OK 8 hits: Algebra.FinitePresentation, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.finitePresentation_algebraMap, RingHom.FinitePresentation, Algebra.Smooth.finitePresentation, Algebra.FinitePresentation.of_finitePresentation, Algebra.FinitePresentation.iff_quotient_mvPolynomial', AlgHom.FinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the source read at Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183 assumes algebraic finite presentation to deduce preservation of filtered colimits or categorical finite presentability. This item proves the converse from stage factorization alone; the definition and module results do not state it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitePresentation\", \"IsFinitelyPresentable\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the source read at Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183 assumes algebraic finite presentation to deduce preservation of filtered colimits or categorical finite presentability. This item proves the converse from stage factorization alone; the definition and module results do not state it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Hom from a commutative R algebra preserves directed colimits then the algebra is finitely presented over R",
+   "results": "OK 8 hits: CommRingCat.isFinitelyPresentable_hom, isFinitelyPresentable, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, preservesFilteredColimits_coyoneda, preservesColimit_coyoneda_of_finitePresentation, AlgHom.FinitePresentation, CommRingCat.preservesFilteredColimits_coyoneda",
+   "date": "2026-10-23",
+   "verdict": "no match: the source read at Mathlib/Algebra/Category/Ring/FinitePresentation.lean:145-183 assumes algebraic finite presentation to deduce preservation of filtered colimits or categorical finite presentability. This item proves the converse from stage factorization alone; the definition and module results do not state it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4. Scheme input to Tag 04AK, both proof paragraphs: Tag 01ZC is used for U and R and for the converse on U -> V. Algebra input to the scheme test: Stacks 01ZC, converse (2) implies (1), invokes Algebra 00QO (3) implies (1).",
+   "via": [
+    "lem-sfb-scheme-affine-limit-lfp-criterion",
+    "lem-sfb-space-relative-affine-limit-criterion",
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebra-directed-hom-finite-presentation",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 00QO (3) implies (1) using the existing small filtered algebra presentation and directed reindexing, then explicit finite-type verification and two existing finite-presentation permanence lemmas. No new nodes, no statement change, no Lean edits or builds. Checked the source and every cited statement; tested empty finite presentations and zero rings.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof paragraph (3) through the existing alteration/curve-limits/affine-limit chain recorded in blueprint.from.place. Corrected its null blueprint ancestor to the explicit imported node already named by that place and by lem-sfb-admissible-direct-image; the created.item chain terminates at an unrecorded module id, so blueprint_refs.py ancestor prints None. The five steps realize the algebra input Tag 00QO (3) implies (1) to Tag 01ZC.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-3de31deb5",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-3de31deb5 (reviewer sub-agent of L); spot-checked: I read Stacks 00QO (algebra.tex:31886), the statement and the full proof. The item (3)=>(1) is the surjectivity form, its statement is unchanged from the base and not weakened, and it splits into 5 steps with no new nodes. Step 1: 0BUF node lem-weil-pbc-algebra-colimit-fp-algebras-over-it with Lambda=C gives a small filtered category and a colimit with vertex C; the node is Lean-closed. Step 2: clause (1) of 0032 node lem-weil-pbc-filtered-category-directed-cofinal gives a nonempty directed index with the restricted cocone still a colimit. A is small: exists_directed_reindexing has A : Type w and no sorry. Step 3: id_C factors as v∘u, elementary. Step 4: B is finite type over C via u because r·1_B = u(r·1_C), and C is fp over itself with an empty presentation; both checked against the definition nodes. Step 5: 00F4(4) applies with base C, S'=B, S=C, sigma=v (v∘u=id makes v C-linear), then 00F4(2) composes R->B->C, which is the structure map because v is R-linear. This supplies the finite-type hypothesis that the source leaves implicit. proof_deps equals the union of the step uses, stmt_deps is unchanged, and there is no cycle. Duplicate search for 00QO and lemma-characterize-finite-presentation over the snapshot DAG found no node stating it. Small cases: R[x]/(f) satisfies the hypothesis; R[x_1,x_2,...] and Q over Z fail it, consistent with not being fp; C=0, R=0 and C=R work. from.node null -> det-thm-sf-ctf-stability-direct-images is consistent with the sibling lem-sfb-admissible-direct-image. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FinitePresentationOfDirectedColimitFactorization",
+  "declaration": "CommAlgCat.finitePresentation_of_directed_colimit_factorization",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationOfDirectedColimitFactorization.lean",
+  "statement": "theorem finitePresentation_of_directed_colimit_factorization (R : Type u) [CommRing R] (C : CommAlgCat.{max u v} R) (hfactor : ∀ (I : Type (max u v)) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ CommAlgCat.{max u v} R) (c : Cocone F), IsColimit c → ∀ h : C ⟶ c.pt, ∃ (i : I) (h_i : C ⟶ F.obj i), h_i ≫ c.ι.app i = h) : Algebra.FinitePresentation R C",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88d4a1e9b",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read the node, Stacks 00QO (3)=>(1) (algebra.tex:31886), all 3 stmt_deps and the delivered module. Every clause matches: R:Type u CommRing; C:CommAlgCat.{max u v} R; ∀ I:Type(max u v) [Preorder][IsDirected][Nonempty], F:I⥤CommAlgCat, ∀ cocone c with IsColimit c, ∀ h:C⟶c.pt, ∃ i h_i, h_i≫c.ι.app i=h; conclusion Algebra.FinitePresentation R C. No extra assumptions. Provable in this universe: the 0BUF colimit is Small.{max u v} and exists_directed_reindexing keeps Type w. Citer lem-sfb-scheme-affine-limit-lfp-criterion (Scheme.{u}) fits with v:=u. Edge cases (empty I excluded, C=0, R=0, C=R) checked. lean.statement verbatim in file; node record changed only by lean; docstrings carry source, blueprint id and 5 steps; sorry-only, no defs; every proof_dep imported; no duplicate in Mathlib (forward direction only) or project. Advisory: public Filtered.Basic import not needed by the statement (H9); Second reading section says no second reading under the dispatcher policy, Worker report matches clause by clause (H11). No compile run since nothing changed."
+ }
+}

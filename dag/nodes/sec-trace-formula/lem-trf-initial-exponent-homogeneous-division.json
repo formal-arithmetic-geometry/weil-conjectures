@@ -1,0 +1,136 @@
+{
+ "id": "lem-trf-initial-exponent-homogeneous-division",
+ "kind": "statement",
+ "title": "Homogeneous supported division from prescribed first exponents",
+ "statement": "Let L be a field [def-weil-field], n a natural number, and iota any finite linearly ordered set. Let G:iota -> L[[T_1,...,T_n]], and let alpha_i be the first nonzero exponent of G_i in ascending total-degree lexicographic order [def-trf-formal-initial-diagram] [def-weil-pbc-multivariate-power-series]. Write H_i for the homogeneous component of G_i in degree |alpha_i|, viewed as a polynomial by truncation at |alpha_i|+1. For every homogeneous degree t, the indexed family T^b H_i (b in the translated first-dividing-vertex region Delta_i, |b|+|alpha_i|=t), together with the monomials of degree t outside the union of vertex orthants, is a basis: every degree-t homogeneous polynomial has unique finitely supported L-coefficients in that indexed family [def-trf-supported-homogeneous-division]. Neither monotonicity of the orthant union nor minimality or ordering of the exponents alpha_i is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997, (7.1), (7.2)(1)--(2), and Lemma 7.7; original generic-monotone-diagram step 5 (finite triangular column argument)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-formal-initial-diagram",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Fix t. The degree-t exponent set is finite. Every exponent in the generated orthant union has a least dividing index, since iota is finite and linearly ordered. Assign it to this index and subtract alpha_i; assign exponents outside the union to the remainder. This gives a bijection from DivisionIndex to the degree-t monomials, including empty quotient regions and the empty index family.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Each initial homogeneous form H_i has degree |alpha_i|, nonzero coefficient at alpha_i, and zero coefficients at earlier exponents. Translation preserves degree-lex order, so each column T^b H_i has nonzero coefficient at its assigned exponent alpha_i+b and zero earlier coefficients. Remainder columns are the assigned monomials.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Order the finite degree-t exponent set in degree-lex order. The matrix of these columns in the monomial basis is triangular with nonzero diagonal over L, hence invertible. Its inverse supplies the unique coefficient family. Finite coefficients identify with the Finsupp coefficients in HasUniqueDivision. The argument includes t below every vertex degree and n=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997, (7.1), (7.2)(1)--(2), and Lemma 7.7; original generic-monotone-diagram step 5 (finite triangular column argument). Agent-written elaboration of the owning node's argument; BM 1997 remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite homogeneous polynomial family with prescribed least monomials gives unique supported division by a triangular matrix",
+   "results": "MvPolynomial.divMonomial; MonomialOrder.div, div_single; Matrix.matrixOfPolynomials_blockTriangular; MvPolynomial.IsHomogeneous.inj_right; mem_ideal_span_monomial_image_iff_dvd; IsHomogeneous.",
+   "date": "2026-10-26",
+   "verdict": "No match. The Groebner division algorithm does not specify the first-dividing-vertex supports or uniqueness in this indexed finite homogeneous family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite degree homogeneous polynomial division basis triangular columns prescribed least monomials",
+   "results": "MonomialOrder.div, div_set, div_single, reduce, sPolynomial_decomposition, sPolynomial_decomposition'; MvPolynomial.modMonomial; Polynomial.homogenize_dvd.",
+   "date": "2026-10-26",
+   "verdict": "No exact match: these are greatest-term division/reduction lemmas and do not provide the indexed least-term homogeneous division assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFirstExponent|HasUniqueDivision|homogeneousDivision in lean/Sheaf, lean/WeilConjectures; triangular|unitriangular in Mathlib/LinearAlgebra/Basis and Matrix; basis|finrank in Mathlib/RingTheory/MvPolynomial/Homogeneous.lean",
+   "results": "SupportedFormalDivision proves formal division with estimates (still sorry); HomogeneousDivisionExtraVariables assumes homogeneous division; HomogeneousContinuousFormalDivision goes in the reverse direction; HighLengthPrefixDivision concerns monoid-series length. Matrix.det_of_isLowerTriangular and det_of_isUpperTriangular provide abstract matrix inputs. The blueprint search for homogeneous division returns no blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate or one-line specialization. General finite triangular linear algebra still requires the monomial-index partition and the initial-form coefficient calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericMonotoneDiagram",
+  "date": "2026-10-26",
+  "group": "Q9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: sections 3.5 and 7.1, the generic-coordinate monotonicity recalled at the beginning of section 8 and before Theorem 9.6, and the first paragraph of the proof of Theorem 9.6 (pp.278--279) Further input: BM 1997, (7.1), (7.2)(1)--(2), and Lemma 7.7; original generic-monotone-diagram step 5 (finite triangular column argument).",
+   "via": [
+    "lem-trf-generic-monotone-diagram",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.InitialExponentHomogeneousDivision",
+  "file": "lean/Sheaf/RingTheory/InitialExponentHomogeneousDivision.lean",
+  "declaration": "MonomialDiagram.initialExponentHomogeneousDivision",
+  "statement": "theorem initialExponentHomogeneousDivision {L : Type u} [Field L] {n : ℕ} {ι : Type} [Finite ι] [LinearOrder ι] (G : ι → MvPowerSeries (Fin n) L) (α : ι → Fin n →₀ ℕ) (hα : ∀ i : ι, IsFirstExponent (G i) (α i)) (t : ℕ) : HasUniqueDivision (generated α) α (fun i ↦ MvPowerSeries.truncTotal ((α i).degree + 1) (MvPowerSeries.homogeneousComponent (α i).degree (G i))) t",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T092400-L-3428077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T092400-L-3428077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

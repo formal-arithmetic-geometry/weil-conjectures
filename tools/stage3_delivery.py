@@ -392,9 +392,8 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
                 # quarantined text (statements, sorries, proofs), not as a new module
                 old = git.show(base, rw)
                 D["rework"] = rw
-                if p.startswith("lean/WeilConjectures/") and show(p) != old and not upstream_exception(item):
-                    f("a", f"{p}: an upstream module comes back verbatim from {rw} (tools/rework.py); make it compile by "
-                           "changing our own modules (lean/Sheaf/), not the upstream file")
+                # 2026-10-23 (the owner): syncs merge, upstream files keep our changes; a rework restore of an upstream
+                # module may change it (judged by tools/stage3_gate.py: statements stay, fills/proof repairs allowed)
             restored = False
             if p != item_file and old is None and rw:
                 mod = module_of_path(p)
@@ -402,8 +401,6 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
                     # the human, 2026-10-20: a dependent of the cluster restored in the same delivery (partial restores
                     # are fine; the root must be among them); judged against its quarantined text
                     old = git.show(base, rw_all[mod]); restored = True
-                    if p.startswith("lean/WeilConjectures/") and show(p) != old and not upstream_exception(mod):
-                        f("a", f"{p}: an upstream module comes back verbatim from {rw_all[mod]} (tools/rework.py)")
             role = "item" if p == item_file else ("restored" if restored else "new" if old is None else "adapted")
             if role == "new" and not p.startswith(f"lean/{PROJECT_ROOT}/"):
                 f("a", f"{p}: a new module goes under lean/{PROJECT_ROOT}/ (the project's root; the source root only "
@@ -428,6 +425,23 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
     for m in D["modules"]:
         m["diff"] = diff_module(m["old"], m["text"])
         D["roles"].append(f"{m['role']} module {m['file']}")
+    if rw:
+        # 2026-10-27 (the human): a rework root delivered with the quarantined text that failed is no fix: a static fail
+        # (never AUTO), returned with the build error (tools/rework_fixcheck.py; SfP1ProjectionTraceFalseTail 14:27)
+        import rework_fixcheck as rfc
+        causes = {}
+        for line in (git.show(base, "coord/rework.tsv") or "").splitlines():
+            r = line.split("\t")
+            if not line.startswith("#") and len(r) >= 6:
+                causes[r[0]] = r[5]
+        tb = rfc.tried()
+        for m in D["modules"]:
+            if m["role"] == "item" or (m["role"] == "restored" and rfc.error_root(causes.get(m["module"], ""))):
+                q = ROOT / ((rw_all.get(m["module"]) or rw) if m["role"] == "restored" else rw)
+                msg = rfc.unchanged_failing(m["module"], m["text"], [m["old"], q.read_text() if q.is_file() else None],
+                                            causes.get(m["module"], ""), tb)
+                if msg:
+                    f("a", msg)   # enforced (stage3_delivery.enforced)
     D["report"] = show(D["report_path"])
     # Ordinary proof deliveries need only their delivered records. Read the
     # entire DAG only for new nodes/sorries or statement corrections (citers).
@@ -442,7 +456,35 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
     check_nodes(D, f, git, base, group, item, nodes_base)
     check_changes(D, f, group, nodes_base)
     check_report(D, f, group)
+    advisory = [x for x in D["fails"] if not enforced(x)]
+    D["fails"][:] = [x for x in D["fails"] if enforced(x)]
+    D["advisory"] = advisory
+    D["notes"].extend(f"ADVISORY (not enforced; for the reviewer) ({L}) {x}" for L, x in advisory)
     return D
+
+
+# 2026-10-24 (the human: "预检做减法", as stage2_delivery.ENFORCED since 2026-10-23; a 102-character import line had
+# refused a sorry-free proof for hours): a stage-3 delivery is refused only for what keeps the library honest and the
+# merge mechanical: (a) the commit and the files it may touch; (f) it compiles, no axiom beyond the three, no `sorry`
+# the text check missed; honesty: no new axiom/unsafe/extern/opaque, no `sorry` in a definition, no target statement
+# changed, recorded statements are the files' signatures; DAG consistency: every `sorry` left is a named declaration a
+# node records, node files are well-formed, proof_deps match the steps, no dropped-route module. Every other rule (line
+# length, docstring form, a partial proof, node field scope and format, change records, the report) is an ADVISORY
+# note for the reviewer.
+ENFORCED = re.compile("|".join([
+    r"is not valid JSON", r"new node without", r"is not the file name", r"exists on sheaf-dag",
+    r"proof_deps is not the union", r"is not declared in", r"lean\.statement differs",
+    r"is neither delivered nor on sheaf-dag", r"a new module is the lean\.file",
+    r"route-pivot dropped", r"deleted, but still imported", r"not a file of Lean's module system",
+    r": only Mathlib\.\*", r"no axiom, no unsafe", r"hollow definition", r"private or anonymous declaration",
+    r"no node records it", r"changes the target statement",
+    r"which is no DAG node", r"introduces a DAG cycle",   # 2026-10-25 (deliver3fix): the delivered DAG edges are valid
+]))
+
+
+def enforced(failure) -> bool:
+    letter, text = failure
+    return letter in ("a", "f") or bool(ENFORCED.search(str(text)))
 
 
 
@@ -498,9 +540,15 @@ def check_lean(D, f, dmap):
             elif x["private"] or not x["name"]:
                 f("c", f"{where}: {k}: a `sorry` left in a private or anonymous declaration; a sorry left is a named "
                        "theorem with its node (AGENTS.md §5)")
-            elif not only_sorry(x["body"]):
+            elif not only_sorry(x["body"]) and x["name"] in dmap:
                 f("c", f"{where}: {k}: a partial proof with `sorry` inside; split the gap into a named theorem with "
                        "its source, a natural-language proof in its docstring and a DAG node (AGENTS.md §5)")
+            elif x["name"] not in dmap and restored_from_quarantine(D, m) and k in d["old"] and not d["old"][k]["sorry"]:
+                # 2026-10-25 (deliver3fix; the human: a delivery is not refused for touching a quarantined module unless
+                # the build fails): the quarantined copy's body did not compile; `sorry` in its place is visible and the
+                # module stays a stage-3 item. For the reviewer, who may ask for a node.
+                D["notes"].append(f"ADVISORY (quarantine restore) {where}: {k}: the quarantined copy's proof is replaced "
+                                  "by `sorry` and no node records it")
             elif x["name"] not in dmap:
                 f("c", f"{where}: {k} is left with `sorry` and no node records it (lean.declaration(s) of a node of "
                        "the base or of the delivery; AGENTS.md §5)")
@@ -520,8 +568,68 @@ def check_lean(D, f, dmap):
                    " AGENTS.md §4: only on the human's instruction)")
 
 
+def restored_from_quarantine(D, m) -> bool:
+    """m is judged against its quarantined copy (coord/rework.tsv): the item of a rework delivery, or a restored dependent"""
+    return m.get("role") == "restored" or (m.get("role") == "item" and bool(D.get("rework")))
+
+
+def edge_fails(D, nodes_base):
+    """2026-10-25 (deliver3fix; the human: DAG edits a reviewer requires are delivered, the DAG check validates them):
+    every stmt_deps/proof_deps entry a changed node adds names a node, and no added edge closes a cycle that the base
+    did not already have (a cycle the delivery did not create never blocks it).
+    2026-10-27 (J9 on StrictScalarMateFiniteEvaluation, three refusals through a cycle already on main): an added edge
+    nid -> c that puts c and nid in one strongly connected component is refused only if that component is new: its base
+    nodes do not all lie in one component that was already cyclic on the base (new split nodes joining a cycle main
+    already has are no new cycle; joining two base components, or making an acyclic base node cyclic, is)."""
+    if not nodes_base:
+        return []
+    out = []
+    graph = {i: set(n.get("stmt_deps") or []) | set(n.get("proof_deps") or []) for i, n in nodes_base.items()}
+    base_graph = {i: set(v) for i, v in graph.items()}
+    for nid, x in D["nodes"].items():
+        graph[nid] = set(x["node"].get("stmt_deps") or []) | set(x["node"].get("proof_deps") or [])
+
+    import check_dag as cd
+
+    def comps(g):
+        gl = {i: [w for w in v if isinstance(w, str) and w in g] for i, v in g.items()}
+        of, cyclic = {}, set()
+        for k, c in enumerate(cd.sccs(gl)):
+            for v in c:
+                of[v] = k
+            if len(c) > 1 or c[0] in gl[c[0]]:
+                cyclic.add(k)
+        return of, cyclic
+    new_of, _ = comps(graph)
+    base_of, base_cyclic = comps(base_graph)
+    members = collections.defaultdict(set)
+    for v, k in new_of.items():
+        members[k].add(v)
+
+    def preexisting(nid):
+        bs = {base_of[v] for v in members[new_of[nid]] if v in base_of}
+        return len(bs) == 1 and bs <= base_cyclic
+    for nid, x in D["nodes"].items():
+        if x["role"] != "changed":
+            continue
+        d, b, p = x["node"], x["base_node"] or {}, x["path"]
+        for k in ("stmt_deps", "proof_deps"):
+            added = [c for c in d.get(k) or [] if c not in (b.get(k) or [])]
+            gone = [c for c in added if not isinstance(c, str) or (c not in nodes_base and c not in D["nodes"])]
+            if gone:
+                out.append(("b", f"{p}: {k} adds {', '.join(map(str, gone[:6]))}, which is no DAG node"))
+            for c in added:
+                if c in gone:
+                    continue
+                if c == nid or (new_of.get(c) == new_of.get(nid) and not preexisting(nid)):
+                    out.append(("b", f"{p}: {k} gains {c}, which introduces a DAG cycle ({c} depends on {nid})"))
+    return out
+
+
 def check_nodes(D, f, git, base, group, item, nodes_base):
     delivered_files = {m["file"] for m in D["modules"]}
+    for L, x in edge_fails(D, nodes_base):
+        f(L, x)
     for nid, x in D["nodes"].items():
         d, b, p = x["node"], x["base_node"], x["path"]
         if x["role"] == "changed":

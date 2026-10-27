@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-closed-cover-dense-complements-component-injection",
+ "kind": "statement",
+ "title": "Dense pairwise complements in a finite closed cover give distinct components",
+ "statement": "Let $T$ be a topological space and let $I$ be a finite index set. For every $i\\in I$ let $E_i\\subseteq T$ be a nonempty closed subset. Assume $T=\\bigcup_{i\\in I}E_i$ and that, for every $i\\ne j$, the subset $E_i\\setminus E_j$ is dense in $E_i$ in its subspace topology (its closure in $E_i$ is all of $E_i$). There exist points $x_i\\in T$ and irreducible components $K_i$ of $T$ [def-weil-irreducible-components], indexed by $I$, such that $x_i\\in K_i\\subseteq E_i$ and $x_i\\notin E_j$ whenever $j\\ne i$, and the components $K_i$ are pairwise distinct. In particular the assignment $i\\mapsto K_i$ is an injection from $I$ into the set of irreducible components of $T$. Empty $I$ is allowed, in which case the covering hypothesis forces $T=\\varnothing$ and the conclusion uses the empty families. The pieces $E_i$ need not be irreducible, and no Noetherianity or separation condition on $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof: final paragraph and final sentence, the purely topological implication from nonempty closed covering pieces and nowhere-dense pairwise intersections to a component lower bound; returned Steps 7--8"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "If $I=\\varnothing$, the cover says $T=\\varnothing$. Take the empty families of points and components; all containment and distinctness assertions are vacuous and the empty map is injective. Henceforth assume $I\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof, final topological implication, with the earlier nowhere-dense intersection hypothesis retained"
+   }
+  },
+  {
+   "text": "Fix $i\\in I$ and enumerate $I\\setminus\\{i\\}$ as $j_1,\\ldots,j_m$. In the subspace $E_i$, each $O_r=E_i\\setminus E_{j_r}$ is open because $E_{j_r}$ is closed in $T$, and is dense by hypothesis. Starting with the nonempty open $W_0=E_i$, put $W_r=W_{r-1}\\cap O_r$. Inductively $W_r$ is open and nonempty: otherwise the closed complement of the nonempty open $W_{r-1}$ would contain $O_r$, hence its closure $E_i$, a contradiction. Thus choose $x_i\\in W_m$. For $m=0$ use $W_m=E_i$. Choose these points for all $i$; then $x_i\\in E_i$ and $x_i\\notin E_j$ for every $j\\ne i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof, final topological implication, with the earlier nowhere-dense intersection hypothesis retained"
+   }
+  },
+  {
+   "text": "For each chosen $x_i$, apply [lem-sc-irreducible-components-cover] to the topological space $T$. Its pointwise clause supplies an irreducible component $K_i$ of $T$ containing $x_i$. Choose one such component for every $i$. This applies to arbitrary topological spaces and requires no Noetherianity, generic point or separation assumption.",
+   "uses": [
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004W (lemma-irreducible), part (4)"
+   }
+  },
+  {
+   "text": "By [def-weil-irreducible-components], $K_i$ is nonempty and irreducible. The sets $K_i\\cap E_j$ form a finite closed cover of $K_i$. The binary closed-cover definition extends to this cover by induction on its size: a cover of size zero is impossible by nonemptiness; for positive size separate its first closed member from the finite union of the others, apply irreducibility, and if the latter equals $K_i$ apply the induction hypothesis to the remaining members. Hence $K_i\\subseteq E_j$ for some $j$. Since $x_i\\in K_i$ but $x_i\\notin E_j$ for $j\\ne i$, this index must be $i$, proving $x_i\\in K_i\\subseteq E_i$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V (definition-irreducible-components), binary closed-cover definition; finite induction as in Tag 0G2Y (lemma-pick-irreducible-components), proof, first paragraph"
+   }
+  },
+  {
+   "text": "If $i\\ne j$ and $K_i=K_j$, then $x_i\\in K_i=K_j\\subseteq E_j$, contradicting Step 2. Thus the components are pairwise distinct, and $i\\mapsto K_i$ is an injection into the set of irreducible components of $T$. Together with Steps 2--4 this proves every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof, final topological implication, with the earlier nowhere-dense intersection hypothesis retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "lem-sc-irreducible-components-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof, final topological implication, with the earlier nowhere-dense intersection hypothesis retained; the component-existence input is Topology Tag 004W (4), and finite-cover containment is the binary definition of Tag 004V iterated as in lemma-pick-irreducible-components"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A topological space covered by finitely many nonempty closed subsets, each with dense complement of every other subset, has at least as many irreducible components as covering subsets",
+   "results": "{\"t\": \"2026-10-22T06:45:59Z\", \"tool\": \"leanfinder\", \"query\": \"A topological space covered by finitely many nonempty closed subsets, each with dense complement of every other subset, has at least as many irreducible components as covering subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isIrreducible_iff_sUnion_isClosed\", \"subsingleton_of_disjoint_isClosed_iUnion_eq_univ\", \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"PreirreducibleSpace.of_isOpenCover\", \"isPreirreducible_iff_isClosed_union_isClosed\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"exists_preirreducible\"], \"digest\": \"d694adc6980a016a\"}; Read isIrreducible_iff_sUnion_isClosed and exists_preirreducible: these give respectively one irreducible subset lying in one member of a closed cover, and maximal extensions. Neither supplies private points or an injection for this family of possibly reducible pieces. The other hits require Noetherianity or pairwise disjointness. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "d694adc6980a016a"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"IsClosed\"",
+   "results": "{\"t\": \"2026-10-22T06:45:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"irreducibleComponents\\\", \\\"IsClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"isClosed_of_mem_irreducibleComponents\"], \"digest\": \"593d90916c4a16ea\"}; Read isIrreducible_iff_sUnion_isClosed and exists_preirreducible: these give respectively one irreducible subset lying in one member of a closed cover, and maximal extensions. Neither supplies private points or an injection for this family of possibly reducible pieces. The other hits require Noetherianity or pairwise disjointness. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "593d90916c4a16ea"
+  },
+  {
+   "tool": "grep",
+   "query": "(irreducibleComponents|irreducible.components).*(cover|dense|inject)|(cover|dense|inject).*(irreducibleComponents|irreducible.components)",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"grep\", \"query\": \"(irreducibleComponents|irreducible.components).*(cover|dense|inject)|(cover|dense|inject).*(irreducibleComponents|irreducible.components)\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read isIrreducible_iff_sUnion_isClosed and exists_preirreducible: these give respectively one irreducible subset lying in one member of a closed cover, and maximal extensions. Neither supplies private points or an injection for this family of possibly reducible pieces. The other hits require Noetherianity or pairwise disjointness. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite closed cover with nonempty pieces and dense pairwise relative complements admits an injection from its index set into the irreducible components",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"leansearch\", \"query\": \"A finite closed cover with nonempty pieces and dense pairwise relative complements admits an injection from its index set into the irreducible components\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a private point in each of finitely many closed covering pieces using finite intersections of dense opens, then choose distinct maximal irreducible subsets containing those points",
+   "results": "{\"t\": \"2026-10-22T06:46:05Z\", \"tool\": \"leanfinder\", \"query\": \"Choose a private point in each of finitely many closed covering pieces using finite intersections of dense opens, then choose distinct maximal irreducible subsets containing those points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"isIrreducible_iff_sUnion_isClosed\", \"exists_preirreducible\", \"exists_iUnion_eq_closed_subset\", \"exists_subset_iUnion_closed_subset\", \"TopologicalSpace.IsOpenCover.quasiSober\"], \"digest\": \"b6899000df42331b\"}; Read isIrreducible_iff_sUnion_isClosed and exists_preirreducible: these give respectively one irreducible subset lying in one member of a closed cover, and maximal extensions. Neither supplies private points or an injection for this family of possibly reducible pieces. The other hits require Noetherianity or pairwise disjointness. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "b6899000df42331b"
+  },
+  {
+   "tool": "grep",
+   "query": "(card|inject|embed|pairwise|cover).*(irreducible|component)|(irreducible|component).*(card|inject|embed|pairwise|cover)",
+   "results": "{\"t\": \"2026-10-22T06:46:29Z\", \"tool\": \"grep\", \"query\": \"(card|inject|embed|pairwise|cover).*(irreducible|component)|(irreducible|component).*(card|inject|embed|pairwise|cover)\", \"sub\": \"Topology/Irreducible.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"310\", \"432\", \"435\", \"446\", \"448\"], \"digest\": \"8fba45d3926294db\"}; Read isIrreducible_iff_sUnion_isClosed and exists_preirreducible: these give respectively one irreducible subset lying in one member of a closed cover, and maximal extensions. Neither supplies private points or an injection for this family of possibly reducible pieces. The other hits require Noetherianity or pairwise disjointness. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "8fba45d3926294db"
+  },
+  {
+   "tool": "grep",
+   "query": "(irreducibleComponents|irreducibleComponent).*(inject|cover|dense)|(inject|cover|dense).*(irreducibleComponents|irreducibleComponent)",
+   "results": "{\"t\": \"2026-10-23T23:39:44Z\", \"tool\": \"grep\", \"query\": \"(irreducibleComponents|irreducibleComponent).*(inject|cover|dense)|(inject|cover|dense).*(irreducibleComponents|irreducibleComponent)\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned component-existence result is already lem-sc-irreducible-components-cover. Finite closed-cover containment is only an ingredient, not the private-point construction or the component injection; Noetherian and disjoint-cover results have additional hypotheses. No exact match or one-line specialization for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite closed cover with dense pairwise complements gives an injection into the irreducible components",
+   "results": "{\"t\": \"2026-10-23T23:39:45Z\", \"tool\": \"leansearch\", \"query\": \"A finite closed cover with dense pairwise complements gives an injection into the irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"irreducibleComponents\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"genericPoints\", \"TopologicalSpace.IrreducibleCloseds.mk.inj\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"subsingleton_of_disjoint_isClosed_iUnion_eq_univ\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"isIrreducible_iff_sUnion_isClosed\"], \"digest\": \"7691ef096d3fbdbf\"}; The returned component-existence result is already lem-sc-irreducible-components-cover. Finite closed-cover containment is only an ingredient, not the private-point construction or the component injection; Noetherian and disjoint-cover results have additional hypotheses. No exact match or one-line specialization for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "7691ef096d3fbdbf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"IsClosed\"",
+   "results": "{\"t\": \"2026-10-23T23:39:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"irreducibleComponents\\\", \\\"IsClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"isClosed_of_mem_irreducibleComponents\"], \"digest\": \"593d90916c4a16ea\"}; The returned component-existence result is already lem-sc-irreducible-components-cover. Finite closed-cover containment is only an ingredient, not the private-point construction or the component injection; Noetherian and disjoint-cover results have additional hypotheses. No exact match or one-line specialization for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "593d90916c4a16ea"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite closed cover by nonempty subsets with dense pairwise relative complements admits distinct irreducible components contained in each covering subset",
+   "results": "{\"t\": \"2026-10-23T23:39:46Z\", \"tool\": \"leanfinder\", \"query\": \"Finite closed cover by nonempty subsets with dense pairwise relative complements admits distinct irreducible components contained in each covering subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"isIrreducible_iff_sUnion_isClosed\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent\", \"exists_mem_irreducibleComponents_subset_of_isIrreducible\", \"genericPoints.finite\", \"exists_preirreducible\"], \"digest\": \"e4b95d6efa38ea4b\"}; The returned component-existence result is already lem-sc-irreducible-components-cover. Finite closed-cover containment is only an ingredient, not the private-point construction or the component injection; Noetherian and disjoint-cover results have additional hypotheses. No exact match or one-line specialization for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "e4b95d6efa38ea4b"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of nonempty closed sets with dense open pairwise differences has a private point in each member and at least as many maximal irreducible subsets as members",
+   "results": "{\"t\": \"2026-10-23T23:40:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite family of nonempty closed sets with dense open pairwise differences has a private point in each member and at least as many maximal irreducible subsets as members\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsClosed.mk_lt_two_pow_mk_dense\", \"IsClosed.two_pow_mk_le_two_pow_mk_dense\", \"HasSeparatingCover\", \"exists_preirreducible\", \"BaireSpace\", \"subsingleton_of_disjoint_isClosed_iUnion_eq_univ\", \"nonempty_interior_of_iUnion_of_closed\", \"ShrinkingLemma.PartialRefinement.exists_gt\"], \"digest\": \"725da8908a8fbe60\"}; The returned component-existence result is already lem-sc-irreducible-components-cover. Finite closed-cover containment is only an ingredient, not the private-point construction or the component injection; Noetherian and disjoint-cover results have additional hypotheses. No exact match or one-line specialization for the item.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "725da8908a8fbe60"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-component-lower-bound",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "055A proof final paragraph: the invocation that each fibre has at least n ordinary irreducible components; In the Stacks 055A generic-constancy input to the 055B irreducible-fibre locus used by 05FH in the Noetherian-approximation branch of the blueprint proof; specifically Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FH, good irreducible-fibre locus. This input supports the constructibility proof in 055B for the irreducible-fibre locus. Subargument extracted from the returned 0554 proof: final paragraph and final sentence, the purely topological implication from nonempty closed covering pieces and nowhere-dense pairwise intersections to a component lower bound; returned Steps 7--8",
+   "via": [
+    "lem-trf-generic-fibre-component-lower-bound",
+    "lem-trf-geometric-component-count-generic-constancy",
+    "lem-trf-geometrically-irreducible-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-closed-cover-dense-complements-component-injection",
+  "worker": "stage1",
+  "summary": "Expanded the final topological inference of Stacks 0554 into explicit finite dense-open and finite closed-cover inductions, using the existing Mathlib leaf lem-sc-irreducible-components-cover for the only maximal-extension input. Kept the statement unchanged, covered empty I and singleton I, and proved containment and pairwise distinctness without assuming pieces irreducible. No new nodes.",
+  "blueprint": "Realizes the final component lower bound in Stacks 0554 within the existing recorded 055A/055B/05FH branch of lem-trf-local-term-locality. The current latest ancestor proof still uses the contracting-correspondence specialization route; no unit or chapter route is replaced. The exact local place is 0554 proof final paragraph after simultaneous density, covering and nonemptiness."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-a46ffb178",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-a46ffb178 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. Statement and stmt_deps are unchanged from the base, which was unsplit with no proof. Live and side-live still show the item unsplit, so it is not superseded. The proof has five steps. Step 1 handles empty I. Step 2 picks the private points by a finite induction W_r=W_{r-1}∩(E_i\\E_{j_r}) inside E_i; each set is open because E_j is closed and nonempty by density, base W_0=E_i nonempty. Step 3 cites lem-sc-irreducible-components-cover (Mathlib leaf; its statement puts every point of an arbitrary space in some component). Step 4 uses def-weil-irreducible-components (nonempty plus binary closed cover) and a finite induction on the closed cover K_i∩E_j, as in Stacks 0G2Y, so K_i⊆E_i. Step 5 gets distinctness and the injection from Step 2. Source checks: Stacks 0554 (more-morphisms.tex l.7393) shrinks to nowhere dense Z_{ij,y}, which for closed Z is the same as a dense relative complement, so the item's hypothesis is right. Its final sentence says 'not dense', which is too weak (counterexample: the six 2-subsets of a 4-point discrete space). Topology 004V/004W(2)-(4)/0G2Y were read (l.855-945) and the tags checked against tags/tags. No SGA source is cited. Edge cases: empty I, singleton I with T reducible, two crossing lines, non-sober cofinite ℕ, and E_1=E_2=T (hypothesis fails, as it should). The only citer, lem-trf-generic-fibre-component-lower-bound step 4, uses exactly the injection conclusion. Duplicate search with rg -L (nowhere dense/dense/at least n components) found no equivalent node. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedCoverDenseComplements",
+  "declaration": "Topology.exists_injective_components_of_closed_cover_dense_complements",
+  "file": "lean/Sheaf/Topology/ClosedCoverDenseComplements.lean",
+  "statement": "theorem exists_injective_components_of_closed_cover_dense_complements {T : Type u} [TopologicalSpace T] {I : Type v} [Finite I] (E : I → Set T) (h_nonempty : ∀ i : I, (E i).Nonempty) (h_closed : ∀ i : I, IsClosed (E i)) (h_cover : (⋃ i : I, E i) = Set.univ) (h_dense : ∀ i j : I, i ≠ j → Dense {x : E i | (x : T) ∉ E j}) : ∃ (x : I → T) (K : I → irreducibleComponents T), (∀ i : I, x i ∈ (K i : Set T) ∧ (K i : Set T) ⊆ E i ∧ ∀ j : I, j ≠ i → x i ∉ E j) ∧ Function.Injective K",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf2c08a70",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Lean theorem exists_injective_components_of_closed_cover_dense_complements matches the node clause by clause: arbitrary T : Type u, Finite I : Type v (no Nonempty), nonempty closed E i covering univ, density of E i \\ E j taken in the subspace ↥(E i); conclusion ∃ x K : I → irreducibleComponents T with x i ∈ K i ⊆ E i, x i ∉ E j for j ≠ i, and Injective K. Hypothesis agrees with Stacks 0554 (closed nowhere-dense Z_ij ⇔ dense complement); the weaker 'not dense' wording is correctly not used. Edge cases (empty I, singleton I with reducible T, equal pieces, non-sober T) are handled, with no extra assumptions. lean.statement verbatim in the file; only the lean field differs from side-live; no name or module clash; stmt_dep is the Mathlib leaf irreducibleComponents; no definitions, sorry only; docstrings give source, blueprint id and the 5-step plan; report has Worker report and the standard Second reading stub. Not recompiled (no file changed)."
+ }
+}

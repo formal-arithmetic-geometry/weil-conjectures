@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-punctured-neighborhood-spectral-system",
+ "kind": "statement",
+ "title": "Topological inverse system of punctured compact open neighborhoods",
+ "statement": "Let $T$ be a spectral space [def-weil-spectral-space], $Z\\subseteq T$ closed. Put $I=(\\operatorname{compactOpenNeighborhoods}(Z))^{\\mathrm{op}}$, ordered by reverse inclusion, using [def-weil-pbc-punctured-neighborhood-cohomology-diagram]. Define $S_i=N_i\\setminus Z$ with its subspace topology, transition maps $f_{ij}:S_j\\hookrightarrow S_i$, and projections $p_i:S\\hookrightarrow S_i$ from $S=\\{t:(\\overline{\\{t\\}}\\cap Z)\\ne\\varnothing,\\ t\\notin Z\\}$. Then $I$ is nonempty and directed. If $Z^c$ is compact, all $S_i$ are spectral and all $f_{ij}$ are spectral maps. Compatible tuples in the $S_i$ have exactly one preimage in $S$, and the topology of $S$ is $\\inf_i p_i^*\\tau_{S_i}$. Under the same compact-complement hypothesis the punctured generalization subspace itself is spectral.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0A37 and 0A3D (2); topological setup from Topology Tags 0A31, 0902, 0AP0"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram"
+ ],
+ "proof": [
+  {
+   "text": "The whole ambient space is an index; intersection of two indices is a common later index, compact by quasi-separatedness.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The punctures are compact opens by quasi-separatedness. Mathlib Topology.IsOpenEmbedding.spectralSpace gives spectrality of each subspace. For a compact open V of a stage, its ambient image is compact open; its intersection with the later puncture is compact by quasi-separatedness, and embedding reflection of compactness proves the transition is spectral.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If the closure of a point misses Z, use the compact-open basis to cover Z inside the complement of that closure. Compactness of the closed subset Z gives a finite subcover; its union is an index missing the point. Thus the intersection of all indices is exactly the generalizations of Z, including when Z is empty.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare each tuple coordinate to the whole-space index. Their ambient values are equal; that value lies in every index and outside Z, so the preceding characterization constructs the unique point of S. All projections are continuous, and the whole-space coordinate induces exactly the subspace topology. These two observations give both topology inequalities.",
+   "uses": [
+    "def-weil-pbc-punctured-neighborhood-cohomology-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the spectral directed inverse-limit theorem to this concrete system and its just proved topological limit, obtaining spectrality of the punctured generalization subspace.",
+   "uses": [
+    "lem-weil-pbc-spectral-directed-limit-spectral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram",
+  "lem-weil-pbc-spectral-directed-limit-spectral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0A37 and 0A3D (2); topological setup from Topology Tags 0A31, 0902, 0AP0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Punctured generalizations form the inverse limit of compact open neighborhoods with a closed subset removed",
+   "results": "Eight hits on punctured neighborhood filters and profinite limits, none for this spectral-subspace system.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The punctured generalization subspace of a spectral space is the inverse limit of punctured compact open neighborhoods of a closed subset",
+   "results": "SpectralSpace fields and IsRetrocompact_iff_isSpectralMap_subtypeVal; no system or inverse-limit identification.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSpace\"",
+   "results": "PrespectralSpace declarations; no punctured-neighborhood system.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSpace|IsCompact.elim_finite_subcover|isCompact_iff_compactSpace",
+   "results": "Mathlib has IsOpenEmbedding.spectralSpace and compactness lemmas, used in the complete Lean proof. No punctured system.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyEventualZero",
+  "date": "2026-10-25",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "The punctured-neighborhood continuity input below the top-degree restriction argument; Topological inverse system of punctured compact open neighborhoods.",
+   "via": [
+    "lem-weil-pbc-punctured-neighborhood-cohomology-eventual-zero",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodSpectralSystem",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodSpectralSystem.lean",
+  "declaration": "TopCat.puncturedNeighborhood_topologicalLimit",
+  "declarations": [
+   "TopCat.puncturedNeighborhoodIndex",
+   "TopCat.puncturedNeighborhoodSpace",
+   "TopCat.puncturedNeighborhoodTransition",
+   "TopCat.puncturedNeighborhoodProjection",
+   "TopCat.puncturedNeighborhoodIndex_nonempty",
+   "TopCat.puncturedNeighborhoodIndex_directed",
+   "TopCat.puncturedNeighborhoodSpace_spectral",
+   "TopCat.puncturedNeighborhoodTransition_spectral",
+   "TopCat.puncturedNeighborhood_topologicalLimit",
+   "TopCat.puncturedGeneralizations_spectral"
+  ],
+  "statement": "theorem puncturedNeighborhood_topologicalLimit {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) (hZ : IsClosed Z) : (∀ a : ∀ i : puncturedNeighborhoodIndex Z, puncturedNeighborhoodSpace Z hZ i, (∀ i j (h : i ≤ j), puncturedNeighborhoodTransition Z hZ i j h (a j) = a i) → ∃! x : puncturedGeneralizations Z, ∀ i, puncturedNeighborhoodProjection Z hZ i x = a i) ∧ (TopCat.of (puncturedGeneralizations Z)).str = ⨅ i : puncturedNeighborhoodIndex Z, TopologicalSpace.induced (puncturedNeighborhoodProjection Z hZ i) (puncturedNeighborhoodSpace Z hZ i).str",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T123233-L-1845227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T123233-L-1845227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

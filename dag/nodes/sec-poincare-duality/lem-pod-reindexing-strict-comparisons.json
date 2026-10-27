@@ -1,0 +1,107 @@
+{
+ "id": "lem-pod-reindexing-strict-comparisons",
+ "kind": "statement",
+ "title": "Strict quotient and Roos reindexing before localization",
+ "statement": "Let l be prime, E a finite extension of Q_l, and g:X→Y a scheme isomorphism with l invertible in every residue field. Fix signed Roos shift comparisons at X and Y satisfying both coordinate laws. There are simultaneous strict-tower Roos and restricted-system comparisons. The Roos comparison is natural, its first and second coordinates equal the product comparison, and it commutes with the fixed signed shifts. The restricted-system comparison is the actual pullback-unit map on every section and every quotient level. These assertions concern arbitrary unbounded strict towers, without completeness. [def-pod-completion-reindex-models]",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical scalarRoosMap. The additive-equivalence theorem makes it invertible, its defining coordinate theorem gives the first and second coordinate laws, and the naturality theorem gives naturality on all strict towers. The signed-shift compatibility theorem gives its remaining Roos law for the fixed signed shifts. Separately apply the actual inverse-image unit on coherent systems, mapped degreewise and transposed to a tower of complexes, to obtain the restricted-tower comparison with its section formula. Assemble those two isomorphism families. Good representatives are preserved by the identity-coefficient specialization of the existing K-flat model theorem.",
+   "uses": [
+    "lem-pod-reindexing-roos-comparison",
+    "lem-pod-reindexing-restricted-tower",
+    "lem-pod-reindexing-roos-shift-compatibility",
+    "lem-pod-reindexing-good-complex",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-roos-comparison",
+  "lem-pod-reindexing-restricted-tower",
+  "lem-pod-reindexing-roos-shift-compatibility",
+  "lem-pod-reindexing-good-complex",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence preserves the mapping cocone Roos complex and signed shifts of countable towers",
+   "results": "Eight mappingCone.mapHomologicalComplexIso and mapCochainComplexShiftIso matches; no full normalized Roos comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use native Roos calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "Seven matches including mapBiprod and hom/inv formulas.",
+   "date": "2026-10-25",
+   "verdict": "Use degreewise biproduct preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*(equiv|shift)|unit_leftAdjointUniq_hom_app",
+   "results": "Adjunction.Unique.unit_leftAdjointUniq_hom_app and two applications. Project searches found isomorphismReductionTower, normalizedCompletedOperationModels and integralTowerInverseImageUnit_existsUnique.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the library declarations; remaining normalization is project-specific."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completion-unit-tensor",
+   "place": "Ambient comparison, proof steps 1--5 and signed shifts in step 8."
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingStrictComparisons",
+  "file": "lean/Sheaf/Paper/PodReindexingStrictComparisons.lean",
+  "declaration": "WeilConjectures.podReindexingStrictComparisons",
+  "statement": "theorem podReindexingStrictComparisons\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (SY : PodSignedRoosShift (scalarReductionSource l E Y))\n    (SX : PodSignedRoosShift (scalarReductionSource l E X))\n    (hSY : SY.Laws) (hSX : SX.Laws) :\n    ∃ D : PodReindexingStrictData l E g, D.Laws l E g SY SX",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

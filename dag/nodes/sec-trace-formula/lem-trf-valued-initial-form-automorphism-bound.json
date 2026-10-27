@@ -1,0 +1,195 @@
+{
+ "id": "lem-trf-valued-initial-form-automorphism-bound",
+ "kind": "statement",
+ "title": "Bound on a finite group acting on valued-field initial forms",
+ "statement": "Let $F\\subseteq E$ be a finite extension of fields [def-weil-field] with compatible real-valued nonarchimedean absolute values: $|x|=0$ iff $x=0$, $|xy|=|x||y|$, $|1|=1$ and $|x+y|\\le\\max(|x|,|y|)$. For $D=F,E$ put $D^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring], $\\mathfrak m_D=\\{x:|x|<1\\}$, $k_D=D^\\circ/\\mathfrak m_D$, and $\\Gamma_D=|D^\\times|$. Assume $e=|\\Gamma_E/\\Gamma_F|$ and $f=[k_E:k_F]$ are finite. Let $p=\\operatorname{char}(k_F)$, and let $e'$ be the largest divisor of $e$ prime to $p$ if $p>0$, and $e'=e$ if $p=0$. Fix an algebraic closure $\\Omega$ of $k_F$ [def-weil-algebraic-closure], and let $s$ be the number of $k_F$-field embeddings $k_E\\hookrightarrow\\Omega$. Let $H$ be any finite subgroup of $\\operatorname{Aut}_F(E)$ such that $|h(x)|=|x|$ for all $h\\in H,x\\in E$, and define\n$$Q=\\{h\\in H:|h(x)-x|<|x|\\text{ for every }x\\ne0\\}.$$\nThen $Q$ is a normal subgroup of $H$, $1\\le s\\le f$, and\n$$[H:Q]\\le e's.$$\nMoreover $s=f$ if and only if $k_E/k_F$ is separable, meaning that every minimal polynomial over $k_F$ of an element of $k_E$ has distinct roots. Neither completeness, discreteness, normality of $E/F$, nor perfection of $k_F$ is assumed.",
+ "source": {
+  "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+  "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, final averaging argument; sixth release at the author site, PDF pp.209–211, printed pp.207–209. Local archival copy WANTED; online text read.",
+  "url": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "For $D=F,E$, the norm identities show that $D^\\circ$ is a subring and $\\mathfrak m_D$ a proper ideal. Every element outside $\\mathfrak m_D$ in $D^\\circ$ has norm $1$, so its inverse lies in $D^\\circ$; hence $k_D$ is a field. For nonzero $x$, either $x$ or $x^{-1}$ belongs to $D^\\circ$, as required by [def-trf-valuation-ring]. Compatibility gives $F^\\circ=F\\cap E^\\circ$ and $\\mathfrak m_F=F\\cap\\mathfrak m_E$, so the residue map $k_F\\to k_E$ is injective. Each $h\\in H$ preserves $E^\\circ$ and $\\mathfrak m_E$ and therefore induces $\\bar h(\\bar x)=\\overline{h(x)}$. This is well-defined because $|x-y|<1$ implies $|h(x)-h(y)|<1$. Its inverse is induced by $h^{-1}$; composition and fixation of $k_F$ follow on representatives. Put $\\rho(h)=\\bar h$ and $I=\\ker\\rho$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), PDF p.209, printed p.207. Agent writes the well-definedness, composition and kernel calculations for an arbitrary finite isometric group; the source assumes a henselian base and a Galois extension, which are not invoked here."
+   }
+  },
+  {
+   "text": "The identity lies in $Q$. For $q,t\\in Q$ and $x\\ne0$, write $qt(x)-x=q(t(x)-x)+(q(x)-x)$; the ultrametric inequality and isometry give norm strictly below $|x|$. Also $|q^{-1}(x)-x|=|x-q(x)|<|x|$. Thus $Q$ is a subgroup. For $g\\in H$, $$|gqg^{-1}(x)-x|=|q(g^{-1}x)-g^{-1}x|<|g^{-1}x|=|x|,$$ so $Q$ is normal in $H$. Finally, for $a\\in E^\\circ\\setminus\\{0\\}$ and $q\\in Q$, $|q(a)-a|<|a|\\le1$; the case $a=0$ is automatic. Hence $q$ fixes every residue class and $Q\\subseteq I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), PDF p.209, printed p.207. Agent writes the well-definedness, composition and kernel calculations for an arbitrary finite isometric group; the source assumes a henselian base and a Galois extension, which are not invoked here."
+   }
+  },
+  {
+   "text": "Write $A=\\Gamma_E/\\Gamma_F$. For $h\\in I$ and $x\\in E^\\times$, the element $h(x)/x$ has norm $1$, so its residue $c_h(x)$ belongs to $k_E^\\times$. If $|y|=|x|$, put $u=y/x$, a unit of norm $1$. Then $$c_h(y)c_h(x)^{-1}=\\overline{h(u)/u}=1$$ because $h$ fixes the residue of $u$. Thus $c_h(x)$ depends only on $|x|$. Moreover $c_h(xy)=c_h(x)c_h(y)$; and for $a\\in F^\\times$, $h(a)=a$, so $c_h(a)=1$. Consequently the rule $\\chi_h([|x|])=c_h(x)$ is a well-defined homomorphism $A\\to k_E^\\times$: replacing $x$ by an element whose norm differs by $|a|$ reduces to the equal-norm calculation after multiplication by $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), PDF p.209, printed p.207. Agent writes the well-definedness, composition and kernel calculations for an arbitrary finite isometric group; the source assumes a henselian base and a Galois extension, which are not invoked here."
+   }
+  },
+  {
+   "text": "For $h,t\\in I$ one has $$\\frac{ht(x)}x=h\\!\\left(\\frac{t(x)}x\\right)\\frac{h(x)}x.$$ The first factor is a norm-one unit, and $h$ acts trivially on its residue. Reducing gives $\\chi_{ht}=\\chi_h\\chi_t$, hence a group homomorphism $\\chi:I\\to\\operatorname{Hom}(A,k_E^\\times)$. Its kernel is exactly $Q$: for every $x\\ne0$, $$\\chi_h([|x|])=1\\ \\Longleftrightarrow\\ \\left|\\frac{h(x)}x-1\\right|<1\\ \\Longleftrightarrow\\ |h(x)-x|<|x|.$$ Here equality to $1$ in the residue field means that the difference from $1$ is in $\\mathfrak m_E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), PDF p.209, printed p.207. Agent writes the well-definedness, composition and kernel calculations for an arbitrary finite isometric group; the source assumes a henselian base and a Galois extension, which are not invoked here."
+   }
+  },
+  {
+   "text": "The group $A$ is finite abelian of order $e$ by hypothesis. The embedding $k_F\\hookrightarrow k_E$ gives $\\operatorname{char}(k_E)=p$, since an integer multiple of $1$ vanishes in one field precisely when it vanishes in the other. Apply [lem-trf-finite-abelian-character-prime-bound] to $A$ and $k_E$. Its prime-to-characteristic part of $|A|$ is the stated $e'$, including the convention when $p=0$. Therefore $\\operatorname{Hom}(A,k_E^\\times)$ is finite with at most $e'$ elements.",
+   "uses": [
+    "lem-trf-finite-abelian-character-prime-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), PDF p.209, printed p.207. Agent writes the well-definedness, composition and kernel calculations for an arbitrary finite isometric group; the source assumes a henselian base and a Galois extension, which are not invoked here."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-embedding-separability-count] to the finite extension $k_E/k_F$ of degree $f$ and the specified algebraic closure $\\Omega$. It gives $s\\ge1$ and $s=f$ exactly when $k_E/k_F$ is separable, in the stated minimal-polynomial sense. The existing bound [lem-weil-pbc-finite-extension-finitely-many-embeddings] gives $s\\le f$. Fix one such embedding $j:k_E\\hookrightarrow\\Omega$. The map $\\rho(H)\\to\\operatorname{Hom}_{k_F\\text{-alg}}(k_E,\\Omega)$, $\\alpha\\mapsto j\\circ\\alpha$, is injective: equality of the composites implies equality of $\\alpha$ by injectivity of $j$. Thus $|\\rho(H)|\\le s$.",
+   "uses": [
+    "lem-trf-finite-embedding-separability-count",
+    "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09HA (lemma-separable-equality) and 09H8 (lemma-count-embeddings-explicitly); postcomposition injection written out."
+   }
+  },
+  {
+   "text": "Count the fibres of the two homomorphisms. If $h_0\\in H$, then $\\rho(h)=\\rho(h_0)$ exactly when $h_0^{-1}h\\in I$; thus the fibre is the coset $h_0I$, in bijection with $I$. Therefore $|H|=|\\rho(H)||I|$. Likewise, since $\\ker\\chi=Q$, each nonempty fibre of $\\chi$ is a coset of $Q$, giving $|I|=|\\chi(I)||Q|$. Finally the cosets of $Q$ partition $H$ into sets of size $|Q|$, so $[H:Q]|Q|=|H|$. The positive integer $|Q|$ cancels, giving $$[H:Q]=|\\rho(H)|\\,|\\chi(I)|\\le s\\,e'=e' s.$$ The two bounds are Steps 5 and 6. Along with Steps 2 and 6 this gives all conclusions. These are finite-set partitions and multiplication bijections, with no normality or separability assumption on the valued extension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+    "place": "Section 6.2.8, pairing (6.2.9), PDF p.209, printed p.207. Agent writes the well-definedness, composition and kernel calculations for an arbitrary finite isometric group; the source assumes a henselian base and a Galois extension, which are not invoked here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "lem-trf-finite-abelian-character-prime-bound",
+  "lem-trf-finite-embedding-separability-count",
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+  "place": "Explicit arbitrary-isometric-group assembly modeled on Gabber–Ramero §6.2.8 pairing (6.2.9), with field-count results from Stacks Tags 09HA and 09H8. The stronger henselian/Galois hypotheses of the source are not imported; all pairing calculations are written here. Local Gabber–Ramero archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite isometric automorphism group of a valued field extension bounded by separable residue degree times prime to residue characteristic ramification index modulo initial form kernel",
+   "results": "{\"t\": \"2026-10-24T13:28:40Z\", \"tool\": \"leanfinder\", \"query\": \"Finite isometric automorphism group of a valued field extension bounded by separable residue degree times prime to residue characteristic ramification index modulo initial form kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"NumberField.InfinitePlace.card_stabilizer\", \"NumberField.InfinitePlace.nat_card_stabilizer_eq_one_or_two\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"IsUnramifiedAtInfinitePlaces_of_odd_card_aut\", \"NumberField.InfinitePlace.isUnramified_iff_card_stabilizer_eq_one\", \"NumberField.InfinitePlace.even_nat_card_aut_of_not_isUnramified\"], \"digest\": \"261f1c21f4e20b18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ValuationSubring.inertiaSubgroup only defines inertia; Ideal.card_inertia_eq_ramificationIdxIn and the other finite-prime formulas require Dedekind hypotheses. None supplies the non-discrete initial-form quotient bound. The character-count argument remains to be split."
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring.inertiaSubgroup",
+   "results": "{\"t\": \"2026-10-24T13:28:40Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring.inertiaSubgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\"], \"digest\": \"07c86484565a02f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ValuationSubring.inertiaSubgroup only defines inertia; Ideal.card_inertia_eq_ramificationIdxIn and the other finite-prime formulas require Dedekind hypotheses. None supplies the non-discrete initial-form quotient bound. The character-count argument remains to be split."
+  },
+  {
+   "tool": "grep",
+   "query": "inertiaSubgroup|ramificationGroup|wildInertia",
+   "results": "{\"t\": \"2026-10-24T13:28:40Z\", \"tool\": \"grep\", \"query\": \"inertiaSubgroup|ramificationGroup|wildInertia\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/RamificationGroup.lean\"], \"digest\": \"fd62dd0047274201\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ValuationSubring.inertiaSubgroup only defines inertia; Ideal.card_inertia_eq_ramificationIdxIn and the other finite-prime formulas require Dedekind hypotheses. None supplies the non-discrete initial-form quotient bound. The character-count argument remains to be split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inertia character injects quotient of inertia by wild kernel into homomorphisms from value group quotient to residue units",
+   "results": "{\"t\": \"2026-10-24T13:28:41Z\", \"tool\": \"leansearch\", \"query\": \"Inertia character injects quotient of inertia by wild kernel into homomorphisms from value group quotient to residue units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"ValuationSubring.unitGroupToResidueFieldUnits\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"ValuationSubring.principalUnitGroup_injective\", \"ValuationSubring.surjective_unitGroupToResidueFieldUnits\", \"AddSubgroup.inertia_map_subtype\", \"QuotientAddGroup.kerLift_injective\", \"QuotientGroup.kerLift_injective\"], \"digest\": \"c571effcff3ec291\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ValuationSubring.inertiaSubgroup only defines inertia; Ideal.card_inertia_eq_ramificationIdxIn and the other finite-prime formulas require Dedekind hypotheses. None supplies the non-discrete initial-form quotient bound. The character-count argument remains to be split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Valued field inertia pairing character group of value group quotient bounds size by prime to p ramification index and separable residue degree",
+   "results": "{\"t\": \"2026-10-24T13:30:33Z\", \"tool\": \"leanfinder\", \"query\": \"Valued field inertia pairing character group of value group quotient bounds size by prime to p ramification index and separable residue degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.inertiaDeg_le_finrank\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"NumberField.InfinitePlace.card_isUnramified\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.sum_ramification_inertia\", \"Ideal.inertiaDegIn_ne_zero\"], \"digest\": \"4a33fcf0ececebd1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ValuationSubring.inertiaSubgroup only defines inertia; Ideal.card_inertia_eq_ramificationIdxIn and the other finite-prime formulas require Dedekind hypotheses. None supplies the non-discrete initial-form quotient bound. The character-count argument remains to be split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-galois-graded-wild-kernel",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited semistable-modification/Temkin ramification auxiliary under lem-trf-local-term-locality, proof (1)--(2), through lem-trf-galois-graded-wild-kernel. The latest locality proof states the contracting-correspondence theorem and does not itself prove this auxiliary. Here: inertia pairing and the residue-embedding count bounding the action on initial forms.",
+   "via": [
+    "lem-trf-galois-graded-wild-kernel",
+    "lem-trf-valued-finite-ramification-calculus",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valued-initial-form-automorphism-bound",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Seven steps construct the residue action and inertia character directly, prove normality and identify the kernel, apply the general character-count input and existing embedding upper bound plus a Mathlib separability test, and count explicit coset fibres. Two new nodes: one unsplit finite abelian character-count lemma and one Mathlib embedding-count/equality leaf. No Lean written or compiled.",
+  "blueprint": "Inherited semistable-modification/Temkin ramification auxiliary under lem-trf-local-term-locality, proof (1)--(2), through lem-trf-galois-graded-wild-kernel. The latest locality proof states the contracting-correspondence theorem and does not itself prove this auxiliary. Here: inertia pairing and the residue-embedding count bounding the action on initial forms.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+    "why": "Generic field-homomorphism cardinality bound for the finite residue extension; this is already a Mathlib leaf and changes no geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-5d83dce6d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-5d83dce6d (reviewer sub-agent of L); spot-checked: Shape: one commit; the item statement is the same as on the base (compared with side-live, where the item is unsplit). I checked all 7 steps: (1) residue action, (2) Q is a subgroup and normal, and Q⊆I, with the conjugation and inverse norm calculations checked, (3) χ_h is well defined on Γ_E/Γ_F via u=y/x, (4) χ_{ht}=χ_hχ_t and ker χ=Q, (5) the character bound applied with char k_E = char k_F and e'=n', (6) s≥1 and s=f⇔separable from the new leaf, s≤f from the existing 09H8 leaf, and ρ(H) injects into the embeddings by postcomposing with j, (7) [H:Q]=|ρ(H)||χ(I)|≤se'. The new unsplit node lem-trf-finite-abelian-character-prime-bound is true (Hom(A,k^×)=∏μ_{n_i}(k) and μ_{p^a m}(k)=μ_m(k)); tested on ℝ with ℤ/3, 𝔽_p with ℤ/p, 𝔽_3 with (ℤ/2)², and ℂ. It is statement-only and self-contained, and differs from lem-per-finite-character-dual-cardinality (which assumes roots of unity), lem-exc-dvr-inertia-order-prime-part and the torus-character nodes. The new Mathlib leaf lem-trf-finite-embedding-separability-count matches SeparableDegree.lean finSepDegree_eq_of_isAlgClosed (l.237, needs IsAlgebraic and IsAlgClosed), instNeZeroFinSepDegree (l.145) and finSepDegree_eq_finrank_iff (l.774), one per clause; Stacks 09HA l.1384 and 09H8 l.1326 agree. It is not a duplicate of the existing 09H8 upper-bound leaf. Gabber–Ramero is WANTED, so the proof is marked agent-written and every step is checked directly. The worker's tool_uses entry names a Mathlib leaf, so it is redundant and harmless; accepted. No changes."
+ }
+}

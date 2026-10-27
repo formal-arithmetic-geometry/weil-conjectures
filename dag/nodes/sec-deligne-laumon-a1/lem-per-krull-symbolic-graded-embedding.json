@@ -1,0 +1,265 @@
+{
+ "id": "lem-per-krull-symbolic-graded-embedding",
+ "kind": "statement",
+ "title": "Consecutive symbolic powers at a height-one prime of a Krull domain embed into its prime quotient",
+ "statement": "Let $D$ be a commutative integral domain with fraction field $F$. A height-one prime means a nonzero prime ideal having no prime strictly between $(0)$ and it. Suppose (i) for each height-one prime $Q$, the localization $D_Q$ [def-weil-pbc-localization-at-prime] is a Noetherian [def-weil-pbc-noetherian-ring] normal domain [def-weil-pbc-normal-ring]; (ii) $D=\\bigcap_{\\mathrm{ht}(Q)=1}D_Q$ inside $F$, with an empty intersection meaning $F$; and (iii) every nonzero element of $D$ belongs to only finitely many height-one primes. Fix a height-one prime $P$. For each integer $n\\ge0$, put\n$$P^{(n)}=\\{a\\in D:a/1\\in (PD_P)^n\\},$$\nso $P^{(0)}=D$. Then for every $n\\ge0$ there exists an injective $D$-linear map\n$$P^{(n)}/P^{(n+1)}\\longrightarrow D/P,$$\nwhere the source is the quotient of the indicated $D$-submodules and both modules have their natural scalar actions. No Noetherianity of $D$ or of $D/P$ is assumed.",
+ "source": {
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Swanson–Huneke, Integral Closure of Ideals, Rings, and Modules, Definition 4.10.1 and Theorem 4.10.7 (Mori–Nishimura), first two proof paragraphs, printed pp.92–93 (PDF pp.105–106, zero-based). Read online at https://www.math.purdue.edu/~iswanso/book/SwansonHuneke.pdf; local PDF WANTED. The injection of consecutive symbolic-power quotients is the intermediate assertion, not the Noetherianity criterion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "For every height-one prime $Q$, primes of $D_Q$ correspond, with inclusions and contraction, to primes of $D$ contained in $Q$. These are exactly $(0)$ and $Q$. Thus $D_Q$ has dimension one and maximal ideal $QD_Q$. Hypothesis (i) supplies Noetherianity and normality, so the one-dimensional normal local domain criterion makes $D_Q$ a discrete valuation ring.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization) and Tag 00PD (lemma-characterize-dvr), implication (5) to (1)."
+   }
+  },
+  {
+   "text": "Choose a generator $t$ of the nonzero maximal ideal of $D_P$. Write $t=a/u$ with $a\\in D$ and $u\\in D\\setminus P$. Since $u$ is a unit in $D_P$, the nonzero element $a$ also generates $PD_P$. Contraction of $PD_P$ is $P$, so $a\\in P$. Fix $n\\ge0$ and let $S$ be the finite set of height-one primes $Q\\ne P$ containing $a$, finite by (iii).",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, first two proof paragraphs, printed pp.92–93; online PDF pp.105–106 (zero-based) read. Local PDF WANTED. The worker supplies a denominator-clearing variant avoiding the auxiliary ring D[x]."
+   }
+  },
+  {
+   "text": "For $Q\\in S$, distinct height-one primes are incomparable, so choose $b_Q\\in Q\\setminus P$. In the DVR $D_Q$, choose a uniformizer $\\pi_Q$ and use unit-times-power factorization to write $a=u_Q\\pi_Q^{e_Q}$ and $b_Q=w_Q\\pi_Q^{f_Q}$. Both exponents are positive: exponent zero would make the element a unit, whereas both lie in $QD_Q$. Put $s=\\prod_{Q\\in S}b_Q^{ne_Q}$. Then $s\\notin P$ by primality. At $Q\\in S$, the exponent $ne_Qf_Q\\ge ne_Q$ shows $b_Q^{ne_Q}/a^n\\in D_Q$; the other factors belong to $D_Q$, so $s/a^n\\in D_Q$. At a height-one $Q\\notin S\\cup\\{P\\}$, $a$ is a unit in $D_Q$, giving the same inclusion. Empty products equal $1$; this calculation also covers $n=0$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, first two proof paragraphs, printed pp.92–93; online PDF pp.105–106 (zero-based) read. Local PDF WANTED. The worker supplies a denominator-clearing variant avoiding the auxiliary ring D[x]."
+   }
+  },
+  {
+   "text": "For $x\\in P^{(n)}$, the fraction $sx/a^n$ belongs to $D_P$, because $P^{(n)}D_P\\subseteq (PD_P)^n=a^nD_P$. At every other height-one prime it belongs to $D_Q$ by the preceding calculation and $x\\in D$. Hypothesis (ii) therefore gives $sx/a^n\\in D$. Hence $f_n:P^{(n)}\\to D/P$, $x\\mapsto sx/a^n+P$, is defined. Multiplication by the fixed fraction $s/a^n$ commutes with addition and multiplication by $D$, proving $D$-linearity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, first two proof paragraphs, printed pp.92–93; online PDF pp.105–106 (zero-based) read. Local PDF WANTED. The worker supplies a denominator-clearing variant avoiding the auxiliary ring D[x]."
+   }
+  },
+  {
+   "text": "Contraction of $PD_P$ is $P$. Since $s$ is a unit in $D_P$, for $x\\in P^{(n)}$ the kernel condition is equivalently $sx/a^n\\in P$, equivalently $sx/a^n\\in PD_P=aD_P$, equivalently $x\\in a^{n+1}D_P$. By the definition of symbolic powers the last condition is $x\\in P^{(n+1)}$. Thus $\\ker f_n=P^{(n+1)}$; no assertion about finite generation of either symbolic power was used.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, first two proof paragraphs, printed pp.92–93; online PDF pp.105–106 (zero-based) read. Local PDF WANTED. The worker supplies a denominator-clearing variant avoiding the auxiliary ring D[x]."
+   }
+  },
+  {
+   "text": "The symbolic powers are $D$-submodules and $P^{(n+1)}\\subseteq P^{(n)}$, by taking inverse images of the corresponding nested ideals of $D_P$. Define the required map by $[x]\\mapsto f_n(x)$. Changing $x$ by an element of $P^{(n+1)}$ does not change the image, and a class maps to zero precisely when its representative lies in $P^{(n+1)}$, by the kernel calculation. This proves well-definedness and injectivity, and linearity descends from $f_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.7, first two proof paragraphs, printed pp.92–93; online PDF pp.105–106 (zero-based) read. Local PDF WANTED. The worker supplies a denominator-clearing variant avoiding the auxiliary ring D[x]."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-primes-of-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Worker-written proof using finite denominator clearing for each n; compare Theorem 4.10.7, first two proof paragraphs (online read; local PDF WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "symbolic.*(quot|embed|inject)|KrullDomain|Nishimura",
+   "results": "{\"t\": \"2026-10-24T07:40:45Z\", \"tool\": \"grep\", \"query\": \"symbolic.*(quot|embed|inject)|KrullDomain|Nishimura\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give ordinary powers of a principal ideal, or require a Dedekind domain; neither gives symbolic powers at a height-one prime of an arbitrary Krull domain. Read Ideal/IsPrincipalPowQuotient.lean:36-46. No Krull-domain or symbolic-power embedding declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-krull-symbolic-graded-embedding: consecutive symbolic powers of height one prime in a Krull domain embed into R modulo P",
+   "results": "{\"t\": \"2026-10-24T07:40:46Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-krull-symbolic-graded-embedding: consecutive symbolic powers of height one prime in a Krull domain embed into R modulo P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.asIdeal\", \"Ideal.powQuotSuccInclusion\", \"Ideal.Quotient.factorPowSucc\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_le_pow_iff_mem\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"Ideal.height_le_ringKrullDim_quotient_add_one\", \"Ideal.primeHeight_eq_ringKrullDim_iff\"], \"digest\": \"e2285053ea937b4a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give ordinary powers of a principal ideal, or require a Dedekind domain; neither gives symbolic powers at a height-one prime of an arbitrary Krull domain. Read Ideal/IsPrincipalPowQuotient.lean:36-46. No Krull-domain or symbolic-power embedding declaration found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"symbolic\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T07:40:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"symbolic\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give ordinary powers of a principal ideal, or require a Dedekind domain; neither gives symbolic powers at a height-one prime of an arbitrary Krull domain. Read Ideal/IsPrincipalPowQuotient.lean:36-46. No Krull-domain or symbolic-power embedding declaration found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-krull-symbolic-graded-embedding: In a Krull domain the quotient of consecutive symbolic powers of a height one prime embeds as a module into the quotient by the prime",
+   "results": "{\"t\": \"2026-10-24T07:40:47Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-krull-symbolic-graded-embedding: In a Krull domain the quotient of consecutive symbolic powers of a height one prime embeds as a module into the quotient by the prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.powQuotSuccInclusion\", \"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"Ideal.powQuotSuccInclusion_apply_coe\", \"Ideal.quotientToQuotientRangePowQuotSucc\", \"Ideal.quotientToQuotientRangePowQuotSucc_mk\", \"Ideal.powQuotSuccInclusion_injective\", \"Ideal.quotEquivPowQuotPowSucc\"], \"digest\": \"9af80b5a1bb3b935\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give ordinary powers of a principal ideal, or require a Dedekind domain; neither gives symbolic powers at a height-one prime of an arbitrary Krull domain. Read Ideal/IsPrincipalPowQuotient.lean:36-46. No Krull-domain or symbolic-power embedding declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "quotEquivPowQuotPowSucc|quotientToQuotientRangePowQuotSucc_injective",
+   "results": "{\"t\": \"2026-10-24T07:41:27Z\", \"tool\": \"grep\", \"query\": \"quotEquivPowQuotPowSucc|quotientToQuotientRangePowQuotSucc_injective\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\"], \"digest\": \"2460fadfda24e542\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give ordinary powers of a principal ideal, or require a Dedekind domain; neither gives symbolic powers at a height-one prime of an arbitrary Krull domain. Read Ideal/IsPrincipalPowQuotient.lean:36-46. No Krull-domain or symbolic-power embedding declaration found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-krull-symbolic-graded-embedding: Symbolic power P n modulo P n plus one is isomorphic to an ideal of R modulo P for a non Noetherian Krull ring",
+   "results": "{\"t\": \"2026-10-24T07:41:28Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-krull-symbolic-graded-embedding: Symbolic power P n modulo P n plus one is isomorphic to an ideal of R modulo P for a non Noetherian Krull ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"Ideal.quotEquivPowQuotPowSuccEquiv\", \"Ideal.quotEquivPowQuotPowSucc\", \"Ideal.powQuotPowSuccEquivMapMkPowSuccPow\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"Ideal.exists_mul_add_mem_pow_succ\", \"Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\"], \"digest\": \"ec16bfd5b8ca8c7d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates give ordinary powers of a principal ideal, or require a Dedekind domain; neither gives symbolic powers at a height-one prime of an arbitrary Krull domain. Read Ideal/IsPrincipalPowQuotient.lean:36-46. No Krull-domain or symbolic-power embedding declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "symbolic.*(quot|embed|inject)|KrullDomain|Nishimura",
+   "results": "{\"t\": \"2026-10-24T08:02:19Z\", \"tool\": \"grep\", \"query\": \"symbolic.*(quot|embed|inject)|KrullDomain|Nishimura\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: principal ordinary-power equivalences require a principal ideal of the original domain; the ramification candidates require a Dedekind domain and concern different modules. Read IsPrincipalPowQuotient.lean:36-46 and RamificationInertia/Basic.lean:347-398. Neither is the symbolic-power embedding under the present non-Noetherian hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"symbolic\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T08:02:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"symbolic\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: principal ordinary-power equivalences require a principal ideal of the original domain; the ramification candidates require a Dedekind domain and concern different modules. Read IsPrincipalPowQuotient.lean:36-46 and RamificationInertia/Basic.lean:347-398. Neither is the symbolic-power embedding under the present non-Noetherian hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-krull-symbolic-graded-embedding: quotient of consecutive symbolic powers of a height one prime in a Krull domain embeds into its prime quotient",
+   "results": "{\"t\": \"2026-10-24T08:02:20Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-krull-symbolic-graded-embedding: quotient of consecutive symbolic powers of a height one prime in a Krull domain embeds into its prime quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"Ideal.powQuotSuccInclusion_apply_coe\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"Ideal.powQuotSuccInclusion\", \"Ideal.quotientToQuotientRangePowQuotSucc_surjective\", \"Ideal.quotientToQuotientRangePowQuotSucc_mk\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\"], \"digest\": \"b671b6e7670001af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: principal ordinary-power equivalences require a principal ideal of the original domain; the ramification candidates require a Dedekind domain and concern different modules. Read IsPrincipalPowQuotient.lean:36-46 and RamificationInertia/Basic.lean:347-398. Neither is the symbolic-power embedding under the present non-Noetherian hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-krull-symbolic-graded-embedding: successive symbolic powers at a height one prime in a Krull ring inject into the residue domain",
+   "results": "{\"t\": \"2026-10-24T08:03:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-krull-symbolic-graded-embedding: successive symbolic powers at a height one prime in a Krull ring inject into the residue domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.powQuotSuccInclusion_injective\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"Ideal.Quotient.factorPowSucc\", \"Ideal.powQuotSuccInclusion\", \"IsDedekindRing.toDimensionLEOne\", \"Ideal.primeHeight_le_ringKrullDim\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\"], \"digest\": \"5d135798353fbfee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: principal ordinary-power equivalences require a principal ideal of the original domain; the ramification candidates require a Dedekind domain and concern different modules. Read IsPrincipalPowQuotient.lean:36-46 and RamificationInertia/Basic.lean:347-398. Neither is the symbolic-power embedding under the present non-Noetherian hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-krull-symbolic-graded-embedding: Symbolic graded piece of a prime ideal is isomorphic to an ideal of the quotient ring in a non Noetherian Krull domain",
+   "results": "{\"t\": \"2026-10-24T08:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-krull-symbolic-graded-embedding: Symbolic graded piece of a prime ideal is isomorphic to an ideal of the quotient ring in a non Noetherian Krull domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal\", \"HomogeneousLocalization.AtPrime\", \"HomogeneousLocalization.instNontrivialAtPrime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.isPrime_carrier\"], \"digest\": \"b1321e071d959093\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: principal ordinary-power equivalences require a principal ideal of the original domain; the ramification candidates require a Dedekind domain and concern different modules. Read IsPrincipalPowQuotient.lean:36-46 and RamificationInertia/Basic.lean:347-398. Neither is the symbolic-power embedding under the present non-Noetherian hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "quotEquivPowQuotPowSucc|quotientToQuotientRangePowQuotSucc_injective",
+   "results": "{\"t\": \"2026-10-24T08:06:29Z\", \"tool\": \"grep\", \"query\": \"quotEquivPowQuotPowSucc|quotientToQuotientRangePowQuotSucc_injective\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\"], \"digest\": \"2460fadfda24e542\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: principal ordinary-power equivalences require a principal ideal of the original domain; the ramification candidates require a Dedekind domain and concern different modules. Read IsPrincipalPowQuotient.lean:36-46 and RamificationInertia/Basic.lean:347-398. Neither is the symbolic-power embedding under the present non-Noetherian hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-krull-height-one-quotients-noetherian",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, and Appendix A, printed p.15: Marot’s lifting property for Nagata rings (reference [8]). Marot lifting input, Proposition 2.3: Marot, Sur les anneaux universellement japonais (1975), Lemma 1.2, printed pp.104-105, with the stronger hypothesis on all nonzero primes used in Proposition 2.3, printed p.107. Noetherian-normalization input: Marot Lemma 1.2, proof, sentence reducing to height-one prime quotients, and footnote (1). The Mori–Nishimura proof input: Swanson–Huneke Theorem 4.10.7, first two paragraphs, realizes the symbolic-power filtration needed for this criterion.",
+   "via": [
+    "lem-per-krull-height-one-quotients-noetherian",
+    "lem-per-japanese-quotients-noetherian-normalization",
+    "lem-per-adic-nagata-lifting",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-krull-symbolic-graded-embedding",
+  "worker": "stage1",
+  "summary": "Kept the Krull-domain hypotheses and entire conclusion unchanged. Supplied an explicit denominator-clearing map on each symbolic power and computed its kernel. Reused the existing localization-prime correspondence, DVR criterion, DVR definition and uniformizer factorization leaves. No new nodes, no Noetherianity assumption on D or D/P, and no auxiliary-ring identification.",
+  "blueprint": "Realizes the symbolic-power filtration input in the existing ancestor chain from lem-per-artin-gabber-affine-curve, Step 3 (regular local model and purity), through the completion/Nagata lifting chain and Mori–Nishimura criterion specified in blueprint.from.place; latest ancestor proof checked. The entire intermediate embedding argument remains in this item.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic one-dimensional normal local domain criterion applied to D_Q, with all hypotheses supplied by (i) and localization. It supplies no replacement for a perverse-sheaf unit step; no criterion in this unit states this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-0d51ed561",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-0d51ed561 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes and no re-split repair note. Statement: Krull conditions (i)-(iii) match the parent lem-per-krull-height-one-quotients-noetherian and lem-trf-krull-principal-primary-decomposition word for word, and the conclusion P^(n)/P^(n+1) -> D/P injective and D-linear is exactly what the parent's step 1 uses. Statement unchanged. Swanson-Huneke 4.10.7 has no local PDF, so the proof is agent-written and WANTED is recorded. Cited statements read: primes-of-localization (1), whose contraction of PD_P is P; the localization def; lem-sc-normal-dim1-dvr, whose tool_use is accepted as a generic criterion, used the same way by the parent; the DVR def; the unit-times-uniformizer-power factorization, whose hypotheses hold in D_Q by (i). Steps: (1) D_Q is local of dimension one, so it is a DVR. (2) a = t*u gives a nonzero generator of PD_P with a in P, and S is finite by (iii). (3) b_Q is in Q but not P because distinct height-one primes are incomparable; e_Q and f_Q are at least 1; s/a^n lies in every D_Q with Q not P; s is not in P. (4) sx/a^n lies in D by (ii), and the map is linear. (5) The kernel is P^(n+1), by contraction and because s is a unit in D_P. (6) The map descends to the quotient. All steps are correct. Checks: n=0 gives the identity on D/P; D=k[x,y], P=(x); the non-principal case k[x,y,z]/(xy-z^2), P=(x,z), with s=y^n, sends z to y and x to 0, consistent with x in P^(2). No duplicate in dag/nodes: the symbolic-power nodes in sfb and per state different facts. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KrullSymbolicGradedEmbedding",
+  "declaration": "Ideal.exists_injective_symbolicPow_quot_succ",
+  "file": "lean/Sheaf/RingTheory/KrullSymbolicGradedEmbedding.lean",
+  "statement": "theorem exists_injective_symbolicPow_quot_succ (D : Type u) [CommRing D] [IsDomain D] (F : Type v) [Field F] [Algebra D F] [IsFractionRing D F] (hlocal : ∀ Q : PrimeSpectrum D, Q.asIdeal ≠ ⊥ ∧ (∀ q : PrimeSpectrum D, q.asIdeal < Q.asIdeal → q.asIdeal = ⊥) → IsNoetherianRing (Localization.AtPrime Q.asIdeal) ∧ IsDomain (Localization.AtPrime Q.asIdeal) ∧ IsIntegrallyClosed (Localization.AtPrime Q.asIdeal)) (hinter : Set.range (algebraMap D F) = ⋂ (Q : PrimeSpectrum D) (_ : Q.asIdeal ≠ ⊥ ∧ (∀ q : PrimeSpectrum D, q.asIdeal < Q.asIdeal → q.asIdeal = ⊥)), (Localization.subalgebra F Q.asIdeal.primeCompl Q.asIdeal.primeCompl_le_nonZeroDivisors : Set F)) (hfinite : ∀ a : D, a ≠ 0 → {Q : PrimeSpectrum D | Q.asIdeal ≠ ⊥ ∧ (∀ q : PrimeSpectrum D, q.asIdeal < Q.asIdeal → q.asIdeal = ⊥) ∧ a ∈ Q.asIdeal}.Finite) (P : Ideal D) [P.IsPrime] (hP : P ≠ ⊥ ∧ (∀ q : PrimeSpectrum D, q.asIdeal < P → q.asIdeal = ⊥)) (n : ℕ) : ∃ f : ((Ideal.comap (algebraMap D (Localization.AtPrime P)) ((P.map (algebraMap D (Localization.AtPrime P))) ^ n)) ⧸ Submodule.comap (Ideal.comap (algebraMap D (Localization.AtPrime P)) ((P.map (algebraMap D (Localization.AtPrime P))) ^ n)).subtype (Ideal.comap (algebraMap D (Localization.AtPrime P)) ((P.map (algebraMap D (Localization.AtPrime P))) ^ (n + 1)))) →ₗ[D] (D ⧸ P), Function.Injective f",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fd3e78a0",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Node copy differs from live only by the new lean record; the module has one theorem, Ideal.exists_injective_symbolicPow_quot_succ, proved by sorry; lean.statement matches the file verbatim. Every clause checked: D is a domain with fraction field F in independent universes; height-one means nonzero with only ⊥ below it; hlocal gives IsNoetherianRing ∧ IsDomain ∧ IsIntegrallyClosed on Localization.AtPrime, matching the three def deps; hinter intersects the canonical Localization.subalgebra copies of D_Q in F (AsSubring.lean:83, empty intersection = F); hfinite gives finiteness per nonzero element; P^(n) = comap of (P.map)^n, genuinely symbolic; the quotient uses Submodule.comap along the subtype; the conclusion is an injective D-linear map to D⧸P. No Noetherian assumption on D or D/P. Edge cases n=0, no height-one primes and symbolic ≠ ordinary powers are covered. No symbolic-power Lean definition exists in Mathlib or the project, so no clash. Docstrings carry the source place, the blueprint tag and the proof steps; no hollow defs; the report has both required sections. Not recompiled since no file changed. No findings."
+ }
+}

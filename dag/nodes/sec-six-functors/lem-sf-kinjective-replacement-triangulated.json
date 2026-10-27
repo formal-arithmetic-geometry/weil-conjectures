@@ -1,0 +1,233 @@
+{
+ "id": "lem-sf-kinjective-replacement-triangulated",
+ "kind": "statement",
+ "title": "K-injective replacement is an exact functor to the homotopy category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with a chosen unbounded derived category [def-weil-abstract-derived-category], and assume that every cochain complex has a quasi-isomorphism to a K-injective complex. Here $I$ is K-injective if every chain map from an acyclic complex to $I$ is null-homotopic. Write $K(\\mathcal A)$ for cochain complexes modulo homotopy, with its usual cone triangulation, and $K_{\\mathrm{inj}}(\\mathcal A)$ for its full subcategory on K-injectives. This subcategory is closed under shifts and cones, and localization restricts to a triangulated equivalence $q:K_{\\mathrm{inj}}(\\mathcal A)\\simeq D(\\mathcal A)$. In particular, for any chosen quasi-inverse $q^{-1}$, the functor $R=\\iota\\circ q^{-1}:D(\\mathcal A)\\to K(\\mathcal A)$, where $\\iota$ is the inclusion, admits coherent commutation with all integer shifts and is triangulated [def-weil-triangulated-category]; its opposite $R^{\\mathrm{op}}:D(\\mathcal A)^{\\mathrm{op}}\\to K(\\mathcal A)^{\\mathrm{op}}$ is triangulated with the opposite shift structures. These assertions apply in particular to the chosen inverse of upstream `HomotopyCategory.KInjectives.Qh` used in `DerivedCategory.bifunctorRHomOfComplex`. No exactness property of an internal-Hom bifunctor is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined), using the K-injective Hom computation; upstream model lean/WeilConjectures/FromJoel/Algebra/Homology/DerivedCategory/DerivabilityStructureKInjectives.lean:170–225; exact inverse and opposite transport in Mathlib/CategoryTheory/Triangulated/Adjunction.lean and Opposite/Functor.lean."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pur-homotopy-category-triangulated], $K(\\mathcal A)$ has the cone triangulation and $Q:K(\\mathcal A)\\to D(\\mathcal A)$ is exact. Let $\\mathcal P$ be its acyclic objects. The shift of an acyclic complex is acyclic, since $H^r(M[n])=H^{r+n}(M)=0$. The stated definition of K-injectivity identifies $K_{\\mathrm{inj}}(\\mathcal A)$ with $\\mathcal P^\\perp$: a homotopy class is zero precisely when a representative is null-homotopic. Apply [lem-sf-shift-stable-right-orthogonal] to obtain repleteness, zero, shifts and two-of-three, in particular closure under cones. By [def-weil-triangulated-subcategory] it inherits the triangulation and its inclusion $\\iota$ is exact.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "lem-sf-shift-stable-right-orthogonal",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014S (proposition-homotopy-category-triangulated), 070H (definition-K-injective), 0FXC (lemma-orthogonal-triangulated), 05QX (lemma-triangulated-subcategory)."
+   }
+  },
+  {
+   "text": "For K-injectives $I,J$, [lem-sc-kinjective-quasi-iso-comparison] gives bijectivity of $\\operatorname{Hom}_{K}(I,J)\\to\\operatorname{Hom}_{D}(QI,QJ)$. Since the K-injective subcategory is full, this is exactly the map on morphisms for $q=Q\\iota$. Thus $q$ is fully faithful. By [lem-trf-localization-essentially-surjective] every derived object is isomorphic to $Q(M)$ for some complex $M$. Choose a quasi-isomorphism $M\\to I$ with $I$ K-injective using the hypothesis. Localization inverts it, so $Q(M)\\cong Q(I)=q(I)$. Therefore $q$ is essentially surjective, and [lem-trf-fully-faithful-ess-surj-equivalence] makes it an equivalence.",
+   "uses": [
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-trf-localization-essentially-surjective",
+    "lem-trf-fully-faithful-ess-surj-equivalence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), proof (1) implies (3); Tag 070K (lemma-enough-K-injectives-implies); upstream DerivabilityStructureKInjectives.lean:193-225."
+   }
+  },
+  {
+   "text": "The shift comparison of $q=Q\\iota$ is the composite of those of $Q$ and $\\iota$. Their zero and addition coherence equations compose; a distinguished triangle is first sent by $\\iota$ to a distinguished triangle of $K(\\mathcal A)$ and then by $Q$ to one of $D(\\mathcal A)$. Thus $q$ is exact. For any chosen quasi-inverse $G$, choose the equivalence unit and counit. Equip $G$ with the comparisons uniquely determined by requiring its counit $qG\\cong\\mathrm{id}$ to commute with shifts: the comparison $G(X[n])\\to(GX)[n]$ is the unique lift under fully faithful $q$ of the isomorphism $qG(X[n])\\cong X[n]\\cong(qGX)[n]\\cong q((GX)[n])$. Naturality and zero/addition coherence follow after applying faithful $q$, where they are the corresponding equations for $q$ and the counit. The equivalence triangle identities give the unit compatibility. Apply [lem-trf-exact-equivalence-inverse] to conclude that $G$ is exact. Finally $R=\\iota G$ has the composite coherent shift comparison and takes triangles successively to distinguished triangles under $G$ and $\\iota$.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-subcategory",
+    "lem-trf-exact-equivalence-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SQ (lemma-exact-equivalence); Mathlib/CategoryTheory/Shift/Adjunction.lean:600-614 and Triangulated/Adjunction.lean:184-205."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-triangulated-functor-opposite] to the exact functor $R$. Its hypotheses hold by step 3, so $R^{\\mathrm{op}}$ has coherent shifts and preserves distinguished triangles for the opposite shift and triangle conventions, giving the asserted opposite exactness.",
+   "uses": [
+    "lem-sf-triangulated-functor-opposite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Opposite convention: Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean:41-44,246-251."
+   }
+  },
+  {
+   "text": "In the upstream model, HomotopyCategory.KInjectives is the full right orthogonal of acyclics and its Qh is the inclusion followed by DerivedCategory.Qh. Consequently its chosen inverse is a particular $G$ in step 3; the construction does not require any particular choice. The definition of DerivedCategory.bifunctorRHomOfComplex uses exactly this inverse followed by that inclusion before applying the Hom-complex functor and leftOp. Thus steps 3 and 4 apply to its replacement factor and its opposite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Upstream lean/WeilConjectures/FromJoel/Algebra/Homology/DerivedCategory/DerivabilityStructureKInjectives.lean:167-194 and lean/WeilConjectures/CategoryTheory/DerivedCategory/BifunctorHom.lean:94-98."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-homotopy-category-triangulated",
+  "lem-sf-shift-stable-right-orthogonal",
+  "def-weil-triangulated-subcategory",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-trf-localization-essentially-surjective",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "def-weil-abstract-derived-category",
+  "lem-trf-exact-equivalence-inverse",
+  "lem-sf-triangulated-functor-opposite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Assembly of Tags 070I, 070K, 0FXC, 05SQ and the read Mathlib inverse/opposite transport; final identification read in upstream source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between K injective homotopy category and unbounded derived category is triangulated",
+   "results": "8 hits: DerivedCategory.instIsTriangulated; CategoryTheory.Equivalence.IsTriangulated.symm; CategoryTheory.Equivalence.IsTriangulated.mk'; CategoryTheory.Equivalence.IsTriangulated; CochainComplex.isKInjective_iff_rightOrthogonal; CategoryTheory.Equivalence.IsTriangulated.mk''; CochainComplex.IsKInjective.rightOrthogonal; HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "namespace KInjectives|KInjectives.*Qh|isKInjective_iff_rightOrthogonal",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjectives\", \"IsEquivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective resolution equivalence unbounded derived category homotopy category exact triangulated replacement",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.InjectiveResolution.iso; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CochainComplex.IsKInjective.Qh_map_bijective; CategoryTheory.injectiveResolutions; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; HasDerivedCategory.standard; DerivedCategory.Qh",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi inverse to localization on K injective complexes preserves shifts and distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso; CategoryTheory.Triangulated.Localization.isTriangulated; HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso; HomologicalComplexUpToQuasiIso.Q; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "HasKInjectiveResolutions|IsGrothendieckAbelian.*Has|IsTriangulated.*rightOrthogonal",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic infrastructure only; the specified project construction is absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective replacement triangulated equivalence right orthogonal derived category",
+   "results": "CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated; CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated; DerivedCategory.instIsTriangulated; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; DerivedCategory.instPretriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedRightOrthogonalOfIsStableUnderShiftInt; CategoryTheory.ObjectProperty.isLocal_trW; CategoryTheory.Triangulated.Localization.pretriangulated (8 hits)",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: Hom computation and orthogonal infrastructure exist; Qh equivalence is project-specific"
+  },
+  {
+   "tool": "grep",
+   "query": "isKInjective_iff_rightOrthogonal|Qh_map_bijective|KInjectives",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean (13 hits)",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole statement: Hom computation and orthogonal infrastructure exist; Qh equivalence is project-specific"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under enough K injective resolutions localization from K injectives to the derived category is an exact equivalence and its inverse and opposite are triangulated",
+   "results": "DerivedCategory.instIsTriangulated; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; HasDerivedCategory.standard; DerivedCategory.instPretriangulated; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; HasDerivedCategory; CategoryTheory.Triangulated.Localization.isTriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match for all clauses: hits supply derived-category localization and exact-functor infrastructure, but no K-injective replacement equivalence with inverse and opposite exactness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-dual-triangulated",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Explicit source anchor lem-a1-local-boundary-duality; Exactness in thm-coef-qbar-verdier, proof paragraph 1, applied to the K-injective realization of the derived internal Hom in the upstream Weil category",
+   "via": [
+    "lem-sf-weil-verdier-dual-triangulated"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-kinjective-replacement-triangulated",
+  "worker": "stage1",
+  "summary": "Proved orthogonal closure, fully faithful and essentially surjective localization, exactness with a constructed coherent shift structure on every chosen inverse, and opposite exactness. Reused existing Hom, localization, equivalence and exact-inverse leaves; created two generic Mathlib leaves, not K-injective clause replacements. No statement change.",
+  "blueprint": "Explicit audit anchor lem-a1-local-boundary-duality via lem-sf-weil-verdier-dual-triangulated; thm-coef-qbar-verdier proof, paragraph 1: Exactness and linearity follow at a common finite stage. This supplies the exact K-injective replacement used in that duality construction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-477b131ec",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-477b131ec (reviewer sub-agent of L); spot-checked: Ordinary one-level split (no repair note), item statement unchanged. Step 1: lem-pur-homotopy-category-triangulated gives the triangulation and Q exact; K_inj = right orthogonal of the shift-stable acyclics (Stacks 070H at derived.tex:9620; Mathlib isKInjective_iff_rightOrthogonal); the new right-orthogonal leaf supplies exactly the zero/shift/extension hypotheses of def-weil-triangulated-subcategory. Step 2: Qh_map_bijective gives full faithfulness; Localization.essSurj applies to Q, the item's quasi-iso hypothesis (weaker than upstream's mono+quasi-iso) and asEquivalence give the equivalence; this matches upstream DerivabilityStructureKInjectives.lean:193-225. Step 3: q is exact as a composite; G's comparison is the unique lift so the counit commutes with shifts, with unit compatibility from the triangle identities; this is the hypothesis of lem-trf-exact-equivalence-inverse (Adjunction.lean:202). Step 4: the opposite leaf is applied to R. Step 5: checked against upstream KInjectives/Qh (lines 165-196) and bifunctorRHomOfComplex = (Qh.inv ⋙ ι ⋙ Hom).leftOp (BifunctorHom.lean:94-98). New node 1 is verified at ObjectProperty/Orthogonal.lean:38,53,63 and Triangulated/Orthogonal.lean:40,56,66 and agrees with Stacks 0FXC; it is the dual of, not a duplicate of, lem-sf-shift-stable-left-orthogonal; edge cases P empty / P everything checked. New node 2 is verified at Opposite/Basic.lean:61-64 (shift by -n), Triangle.lean:37-46 (reversed triangle with no sign, matching the statement) and Functor.lean:41-44,246-251; no existing DAG node states it. Both new nodes are generic and do not restate the item; blueprint.from.node null is inherited from the item's ancestor chain. Batch 5: lem-trf-localization-essentially-surjective (Localization.essSurj) and lem-trf-fully-faithful-ess-surj-equivalence (Functor.asEquivalence) are pure category-theory Mathlib leaves whose deps are only Mathlib-leaf definitions. They are outside both the trace formula and Poincaré duality and are not steps of their proofs, so I accept both citations. No SGA cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveReplacementTriangulated",
+  "declaration": "HomotopyCategory.KInjectives.replacement_triangulated",
+  "declarations": [
+   "HomotopyCategory.KInjectives.inclusionCommShift",
+   "HomotopyCategory.KInjectives.localizationCommShift",
+   "HomotopyCategory.KInjectives.replacement_triangulated"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveReplacementTriangulated.lean",
+  "statement": "theorem replacement_triangulated (C : Type u) [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] (h : ∀ K : CochainComplex C ℤ, ∃ (I : CochainComplex C ℤ) (i : K ⟶ I), I.IsKInjective ∧ QuasiIso i) : (subcategoryAcyclic C).rightOrthogonal.IsTriangulated ∧ CategoryTheory.IsTriangulated (KInjectives C) ∧ (ι (C := C)).IsTriangulated ∧ (Qh (C := C)).IsEquivalence ∧ (Qh (C := C)).IsTriangulated ∧ ∀ (G : DerivedCategory C ⥤ KInjectives C) (η : 𝟭 (KInjectives C) ≅ Qh ⋙ G) (ε : G ⋙ Qh ≅ 𝟭 (DerivedCategory C)), ∃ S : G.CommShift ℤ, (fun [s : G.CommShift ℤ] ↦ G.IsTriangulated ∧ (G ⋙ ι).IsTriangulated ∧ (G ⋙ ι).op.IsTriangulated) (s := S)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing upstream full subcategory and Qh, with their inherited/composite CommShift structures supplied as real instance data. The resolution hypothesis requires only a quasi-isomorphism, not a monomorphism. The universal quasi-inverse clause covers the chosen Qh.inv used by bifunctorRHomOfComplex."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c112163b0",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: quasi-iso-only resolution hypothesis (no Mono, weaker than upstream HasKInjectiveResolutions); rightOrthogonal.IsTriangulated + IsTriangulated (KInjectives C) for shift/cone closure and inherited triangulation; ι and Qh IsTriangulated with real inherited/composite CommShift instances (no clash with any existing instance in side-live); Qh.IsEquivalence; ∀ quasi-inverse G ∃ S : G.CommShift ℤ with G, G⋙ι and (G⋙ι).op triangulated under Mathlib's scoped opposite shift; covers Qh.inv used by bifunctorRHomOfComplex. lean.statement verbatim; universes u v w bound; no hollow defs, sorry only; docstrings carry Stacks 070K/070Y and blueprint tag; upstream KInjectives.equivalence exists only under stronger hypothesis so not existing:true. Advisory: redundant proof-route imports; op clause equivalent via op_isTriangulated_iff. No recompile (unchanged delivery)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261023T103134-L-3059317",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "HomotopyCategory.KInjectives.replacement_triangulated"
+  ],
+  "sorry_after": []
+ }
+}

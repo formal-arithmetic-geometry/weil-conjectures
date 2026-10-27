@@ -1,0 +1,227 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-level-exists-unique",
+ "kind": "statement",
+ "title": "Unique generator-normalized finite scalar pullback chain map",
+ "statement": "Let $\\ell$ be prime, let $E,L/\\mathbf Q_\\ell$ be finite extensions and let $\\iota:E\\to L$ be a $\\mathbf Q_\\ell$-embedding. For $F=E,L$, fix its valuation ring $\\mathcal O_F$ and a uniformizer $\\varpi_F$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, work on its small pro-etale site [def-weil-pbc-proetale-site], small relative to the universe of module sheaves. Put $R_{F,W}=\\varprojlim_{m\\geq1}(\\mathcal O_F/\\varpi_F^m)_W$ for $F=E,L$, with the canonical quotient projections [def-weil-completed-integral-coefficients]. Use the compatible quotient coefficient maps induced by the embedding [def-weil-integral-scalar-extension], and hence $j_W:R_{E,W}\\to R_{L,W}$. Let $S_W$ be ordinary, uncompleted change of rings $M\\mapsto R_{L,W}\\otimes_{R_{E,W}}M$, sheafified, applied termwise to cochain complexes with differential $1\\otimes d$ [def-pur-change-of-rings-complex, def-pur-sheaf-tensor-product]. Write $1\\otimes x$ for the canonical sheafification-unit tensor section, not an assertion that arbitrary sections are globally pure [def-sfb-scalar-extension-pure-tensor-section]. Let $f:X\\to Y$ be any scheme morphism and $n\\in\\mathbf N$. The index $n$ denotes quotient exponent $n+1$. For $F=E,L$, put $P^F_{f,n}(P)=\\operatorname{Res}_{\\pi^F_{n+1}} f^*_{F,n+1}((\\mathcal O_F/\\varpi_F^{n+1})_Y\\otimes_{R_{F,Y}}P)$, with the ordinary finite module inverse image, all functors applied termwise [lem-pur-integral-operations-well-defined, def-weil-proetale-inverse-image, def-pc-sheaf-restrict-scalars]. Here $f^*$ on a section over $V\\in Y_{\\mathrm{proet}}$ means its canonical pullback-unit section over $X\\times_Y V$. There exists exactly one natural transformation of complex-valued functors\n$$\\alpha_n:S_X\\circ P^E_{f,n}\\longrightarrow P^L_{f,n}\\circ S_Y$$\nwhose components are $R_{L,X}$-linear chain maps and which, for every complex $P$, degree $i$, object $V\\in Y_{\\mathrm{proet}}$, and $x\\in P^i(V)$, satisfies\n$$\\alpha_n(P)^i\\bigl(1\\otimes f^*(1\\otimes x)\\bigr)=f^*\\bigl(1\\otimes(1\\otimes x)\\bigr).$$\nNaturality is with respect to every chain map, without flatness, K-flatness, boundedness, constructibility or invertibility of $\\ell$ on the schemes.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-tensor-product-pullback (Tag 03EL), applied to the finite coefficient pullback and coefficient change; section-tensor-product for the balanced sheaf tensor construction. Project specialization: IntegralOperationsScalarComparisonModels.lean:112-124 and normalization:88-109.",
+  "note": "Retained original parent proof step 2 (H1, 2026-10-26), as construction material for this unsplit statement, not a completed proof: For pullback at each finite quotient level, use the scalar tensor and inverse-image adjunction universal properties to define the map sending 1 tensor f*(1 tensor x) to f*(1 tensor (1 tensor x)). The balanced relations, restriction maps, and differentials commute with this formula. Pure tensors and the inverse-image adjunction force uniqueness and naturality. For tensor at each level, the balanced tensor universal property gives 1 tensor ((1 tensor x) tensor (1 tensor y)) mapping to (1 tensor (1 tensor x)) tensor (1 tensor (1 tensor y)). The signed total differential commutes by bidegree, and the coproduct universal property gives the total chain map and its uniqueness. These are exactly the two pre-existing holes; no new comparison assertion is introduced."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-change-of-rings-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-scalar-extension-pure-tensor-section",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-proetale-inverse-image",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-integral-scalar-extension",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized natural chain transformation constructed by lem-pur-integral-scalar-pullback-level-construction. Its functors and generator equation are literally those in the present statement.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-level-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a second normalized transformation, use natural-transformation extensionality and degreewise chain-map extensionality. The scalar_pullback_hom_ext lemma from the existing pullback-level-reduction module tests equality on exactly the normalized scalar/pullback/reduction unit generators. Both maps take each generator to the same prescribed target section. Thus the constructed transformation is unique.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-level-reduction",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-pullback-level-construction",
+  "lem-pur-integral-scalar-pullback-level-reduction",
+  "def-pur-cochain-coefficient-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ, 03D7 and 03EL; normalized finite construction followed by adjunction/generator extensionality.",
+  "note": "N4, 2026-10-27: complete Lean proof; existence factored into a proved construction module for compile time, uniqueness uses existing proved private extensionality helpers. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarPullbackLevel|scalarTensorLevel|changeOfRings.*pullback|pullback.*changeOfRings",
+   "results": "{\"t\": \"2026-10-27T06:07:18Z\", \"tool\": \"grep\", \"query\": \"scalarPullbackLevel|scalarTensorLevel|changeOfRings.*pullback|pullback.*changeOfRings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension and inverse image for sheaves of modules commute on cochain complexes",
+   "results": "{\"t\": \"2026-10-27T06:07:18Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension and inverse image for sheaves of modules commute on cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"ModuleCat.coextendScalars\", \"PresheafOfModules.pullback\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"ModuleCat.extendRestrictScalarsAdj\", \"PresheafOfModules.restrictScalarsObj\"], \"digest\": \"e02ad50e1f275a6b\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-27T06:07:18Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural chain map commuting scalar extension and finite coefficient pullback of sheaf complexes, normalized on pure tensor generators",
+   "results": "{\"t\": \"2026-10-27T06:07:19Z\", \"tool\": \"leanfinder\", \"query\": \"Unique natural chain map commuting scalar extension and finite coefficient pullback of sheaf complexes, normalized on pure tensor generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"b821636a5ae801fa\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|pullback|tensor",
+   "results": "{\"t\": \"2026-10-27T06:07:49Z\", \"tool\": \"grep\", \"query\": \"hom_ext|pullback|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"43b36f0fd16cc9c8\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings of module sheaves is compatible with inverse image and preserves termwise flat K-flat cochain complexes",
+   "results": "{\"t\": \"2026-10-27T06:07:51Z\", \"tool\": \"leanfinder\", \"query\": \"Change of rings of module sheaves is compatible with inverse image and preserves termwise flat K-flat cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.Flat.shrink\", \"Module.Flat.of_shrink\", \"Module.Flat.isBaseChange\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"c2be15f5d4cddfd4\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackLevel|scalar.*[Pp]ullback|[Pp]ullback.*[Ss]calar",
+   "results": "{\"t\": \"2026-10-27T06:27:55Z\", \"tool\": \"grep\", \"query\": \"scalarPullbackLevel|scalar.*[Pp]ullback|[Pp]ullback.*[Ss]calar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/Algebra/Module/Torsion/Free.lean\", \"Mathlib/Algebra/GroupWithZero/Action/Defs.lean\", \"Mathlib/Algebra/GroupWithZero/Action/Defs.lean\"], \"digest\": \"5aa43a7a0b56bba0\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits provide ordinary scalar extension or pullback ingredients, not the normalized finite quotient scalar pullback natural chain transformation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module scalar extension and pullback unique map determined by adjunction unit sections",
+   "results": "{\"t\": \"2026-10-27T06:27:55Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf module scalar extension and pullback unique map determined by adjunction unit sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"PresheafOfModules.pullback\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullback\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"85dafbb8ea3b95db\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits provide ordinary scalar extension or pullback ingredients, not the normalized finite quotient scalar pullback natural chain transformation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-27T06:27:55Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits provide ordinary scalar extension or pullback ingredients, not the normalized finite quotient scalar pullback natural chain transformation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural transformation between scalar extension of finite coefficient module pullback and pullback of scalar extension characterized by unit tensor sections",
+   "results": "{\"t\": \"2026-10-27T06:27:56Z\", \"tool\": \"leanfinder\", \"query\": \"Unique natural transformation between scalar extension of finite coefficient module pullback and pullback of scalar extension characterized by unit tensor sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.hom_ext\", \"ModuleCat.ExtendScalars.hom_ext_iff\", \"IsBaseChange.iff_lift_unique\", \"IsBaseChange.of_lift_unique\", \"IsBaseChange.of_equiv\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.extendScalarsId_inv_app_apply\"], \"digest\": \"06c4229b3112eac0\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits provide ordinary scalar extension or pullback ingredients, not the normalized finite quotient scalar pullback natural chain transformation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules change of rings tensor extension adjunction and finite quotient pullback give a unique generator normalized map of cochain complexes",
+   "results": "{\"t\": \"2026-10-27T06:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of modules change of rings tensor extension adjunction and finite quotient pullback give a unique generator normalized map of cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\"], \"digest\": \"6a5909d93b4c4d4a\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits provide ordinary scalar extension or pullback ingredients, not the normalized finite quotient scalar pullback natural chain transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|def adjunction|pullbackPushforwardAdjunction|pullbackIso",
+   "results": "{\"t\": \"2026-10-27T06:30:35Z\", \"tool\": \"grep\", \"query\": \"def pullback|def adjunction|pullbackPushforwardAdjunction|pullbackIso\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"1d4931c85ce52beb\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: hits provide ordinary scalar extension or pullback ingredients, not the normalized finite quotient scalar pullback natural chain transformation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-scalar-finite-comparison-models",
+  "date": "2026-10-27",
+  "group": "NG"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.scalarPullbackLevel_existsUnique",
+   "module": "Sheaf.Paper.IntegralOperationsScalarComparisonModels",
+   "file": "lean/Sheaf/Paper/IntegralOperationsScalarComparisonModels.lean",
+   "line": 118,
+   "state": "sorry_here",
+   "note": "Existing sorried declaration; assignment from released 2026-10-27 re-split order. Separate node for parallel stage-3 work; no Lean source moved in stage 1."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Final paragraph of def-weil-derived-pullback-tensor-hom in literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md: compatibility with reduction modulo pi_E^n and with extension of scalars is a theorem (sk-prop-scalar-six). This is the finite-level normalized pullback construction retained in parent original proof step 2.",
+   "via": [
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-integral-scalar-pullback-level-exists-unique",
+  "worker": "stage1 NB",
+  "summary": "Construct the ordinary module map via finite reduction, finite pullback, then completed scalar adjunctions. Prove uniqueness using local lifts of finite coefficients through the completed projection. Module naturality gives the chain-map square for every complex. Reuse the existing generic adjunction nodes; no new nodes. The statement is unchanged.",
+  "blueprint": "Final paragraph of def-weil-derived-pullback-tensor-hom in literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md: compatibility with reduction modulo pi_E^n and with extension of scalars is a theorem (sk-prop-scalar-six). This is the finite-level normalized pullback construction retained in parent original proof step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic sheafified scalar extension adjunction with its unit-section Hom formula, for the three ordinary changes of rings; no derived comparison is imported."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ordinary module pullback/direct-image adjunction for the tensor-formula pullback along a morphism of sites with a ring map c:u^{-1}R->S; used for the finite coefficient pullback f^*_{E,q} of def-weil-proetale-inverse-image only."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "Mathlib-leaf set/abelian sheaf pullback adjunction as composite of Kan extension and sheafification; gives the unit section eta_f."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-1aa1c418c",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-1aa1c418c (reviewer sub-agent of L); spot-checked: Read the item in full, the statement of every cited node, and Stacks 03CZ/03D7/03EL (sites-modules.tex:933/1197/3649) and 00WK (sites.tex:2156). No new nodes and the statement is unchanged. The 7-step construction is correct: the coefficient squares, the transposes for t_M, β_M, u_M and a_M, the local lifting R_X→A_X, the 3-bijection extensionality, and naturality and chain maps from the termwise differentials. Small cases checked: zero complex, empty site, f=id, n=0, ramified ι (the map is only a quotient, not an isomorphism). It matches Lean scalarPullbackLevel_existsUnique:88-124. No duplicate found: def-pod-scalar-pullback-generator defines only the generator. Fault C3/C4, repaired: steps 2/4/6/7 cited lem-pur-ringed-pullback-presentation-on-sites, which gives only an existential presentation of an abstract inverse image with no unit, while the item's normalization needs the specified f^{-1}M⊗A_X and its unit 1⊗η_f. These steps now cite lem-weil-pbc-ringed-topoi-module-adjunction (the exact tensor-formula pullback, with R-structure through the adjunct of c^f_A=ρ^f_A) and lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (Kan extension plus sheafification, which gives the coprojection unit). Step 2 is rewritten, proof_deps and tool_uses are updated, and there is no cycle. Step 5 source tag corrected: 'lemma-mono-epi-sheafification' does not exist; it now names 00WM definition-sheaves-injective-surjective and 00WN lemma-mono-epi-sheaves. Advisory: blueprint.from.node is null (inherited); source.note still says 'unsplit'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsScalarComparisonModels",
+  "declaration": "WeilConjectures.scalarPullbackLevel_existsUnique",
+  "statement": "theorem scalarPullbackLevel_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}\n    (f : X ⟶ Y) (n : ℕ) :\n    ∃! α : integralOperationsPullbackLevel l E f n ⋙\n        (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (ComplexShape.up ℤ) ⟶\n      (integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (ComplexShape.up ℤ) ⋙\n        integralOperationsPullbackLevel l L f n,\n      scalarPullbackLevelNormalization l E L ι f n α",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing theorem at IntegralOperationsScalarComparisonModels.lean:118-125, with its scalarPullbackLevelNormalization predicate at lines 88-109. The predicate is the displayed canonical sheafification-unit and finite-pullback-unit section equation for all complexes, degrees, site objects and sections; the natural transformation has linear chain-map components. The theorem imposes no flatness, boundedness, constructibility or invertibility hypothesis. The live server source was read with scompile.py --source and agrees with the read clone. No duplicate Lean module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c0fb3cb5",
+  "group": "NB",
+  "result": "pass",
+  "note": "Lean-only existing:true attachment of WeilConjectures.scalarPullbackLevel_existsUnique (IntegralOperationsScalarComparisonModels:118-124). The statement is verbatim (substring check) and the lean record is complete. stmt_deps, proof and proof_deps are unchanged and the report has both sections. Clause checks: P^F = unrestrictedIntegralFiniteComplex ⋙ finite coefficientProEtaleModulePullback ⋙ restrictScalars π_n, level n = exponent n+1. S_W = integralOrdinaryScalar, pinned to changeOfRings/changeOfRingsHom along integralCompletedScalarMap, which is unique with composites integralScalarRho; mapHomologicalComplex gives 1⊗d. The 1⊗x sections are the toSheafify s⊗x formula (same as scalarExtensionRingIsoTmul). f^* is the adjunction-unit generator at proEtaleBaseChange. The normalization predicate quantifies P, i, V, x exactly; ∃! NatTrans with linear chain-map components; no extra hypotheses. Edge cases n=0, id embedding, ramified ι, f=id, empty scheme, zero complex and char ℓ are all covered; uniqueness holds via local lifts R_X→A_X. Advisories: the parent finite-comparison-models node still lists the theorem and predicate (14 landed precedents); owners not cited directly (def-weil-integral-reduction-tower, def-pur-integral-finite-pullback; integralOrdinaryTensorSection has no active owner) with stmt_deps unchanged from the base; docstrings carry the parent's blueprint tag; source.note says 'unsplit'. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-05af7",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T112415-L-1580767",
+  "kind": "interface",
+  "note": "independent cc review: item proofs and 4 new construction modules vs nodes pullback/tensor-level-exists-unique and 4 new nodes; removed CoefficientExtensionFinite import vs import closure (still public via IntegralOperationsWellDefined) and unit sk-thm-sf-compatibility realized (empty)"
+ }
+}

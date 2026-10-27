@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-unit-zero-iso",
+ "kind": "statement",
+ "title": "Invertibility of the recorded degree-zero completed Koszul unit",
+ "statement": "Let T be a scheme, A a commutative ring, d an adic coefficient datum on A, r a natural number, a : Fin r -> A and n a natural number. The actual map completedAdicKoszulUnitZero T d r a n from the unit module sheaf of the completed coefficient ring to degree zero of the recorded completed Koszul complex [lem-weil-pbc-completed-adic-koszul-unit-chain-map] is an isomorphism. No regularity, nonzero-ring or positive-rank hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M finite exterior Koszul complexes, exterior degree zero; Tag 03EK scalar extension of module sheaves. Expansion of the unit-invertibility step in lem-weil-pbc-completed-koszul-tensor-cone-comparison."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-completed-adic-koszul-unit-chain-map"
+ ],
+ "proof": [
+  {
+   "text": "Constant sheafification of the rank-one coefficient module identifies its generator one with the module unit. Construct the inverse by the sheafification Hom equivalence and the global section one of the ring sheaf. The unit-module/section equivalence proves one composite is the identity; the same sheafification Hom equivalence and the rank-one linear-map extensionality prove the other. Compose this isomorphism with exteriorPower.zeroEquiv inverse to get invertibility of koszulSheafUnitZero.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the actual normalized scalar extension functor to this isomorphism. Precompose with the inverse of the scalar-extension unit comparison, transported by the normalized object equality for the extension functor. The tensor formula for its inverse inserts one tensor one.",
+   "uses": [
+    "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized morphism formula for scalar extension and naturality of the sheafification unit show that this composite sends one to the sheafified tensor of one with the Koszul unit. Uniqueness in completedAdicKoszulUnitZero_exists identifies the composite with the recorded completed unit. It is a composite of isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-completed-adic-koszul-unit-chain-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, finite Koszul degree-zero unit, and Tag 03EK; explicit normalization and scalar-extension proof by P5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero unit of a Koszul complex is an isomorphism, and extension of scalars preserves the tensor unit",
+   "results": "Eight generic hits including HomologicalComplex.tensorUnitIso, ModuleCat.exteriorPower.natIso₀ and ModuleCat.extendScalarsId_inv_app_apply. No theorem identifies the recorded completed Koszul unit.",
+   "date": "2026-10-27",
+   "verdict": "Use exterior degree zero and the existing sheaf scalar-extension unit comparison; the recorded map requires a normalization proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "ExteriorPower.zeroEquiv",
+   "results": "No hit (capitalized identifier not in the index). Local library uses exteriorPower.zeroEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Read the actual local exterior-power API and the private koszulSheafUnitZero_isIso proof in KoszulQuotientLimit."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Uu]nit.*[Ii]so|[Uu]nit.*[Kk]oszul",
+   "results": "Remote index: no hits. Local source: KoszulQuotientLimit has private uncompleted unit-isomorphism lemmas; ScalarExtensionConstraintCoherence provides a proved unitIso and unit_inv formula.",
+   "date": "2026-10-27",
+   "verdict": "No existing public completed-unit theorem; prove it from the recorded constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "isIso completed Koszul degree zero unit",
+   "results": "No direct theorem; proved via scalar extension coherence and exterior degree zero.",
+   "date": "2026-10-27",
+   "verdict": "Constructed proof from existing declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorConeComparison",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Order 1248, the degree-zero unit-invertibility step of the finite tensor-cone normalization.",
+   "via": [
+    "lem-weil-pbc-completed-koszul-tensor-augmentation-component",
+    "lem-weil-pbc-completed-koszul-tensor-cone-comparison",
+    "lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero",
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulUnitZeroIso",
+  "file": "lean/Sheaf/Paper/CompletedKoszulUnitZeroIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulUnitZero_isIso",
+  "statement": "theorem completedKoszulUnitZero_isIso\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (n : ℕ) :\n    IsIso (completedAdicKoszulUnitZero T d r a n)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T034721-L-3678701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

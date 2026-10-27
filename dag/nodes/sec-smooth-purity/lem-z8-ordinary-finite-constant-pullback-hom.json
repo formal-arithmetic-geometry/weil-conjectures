@@ -1,0 +1,105 @@
+{
+ "id": "lem-z8-ordinary-finite-constant-pullback-hom",
+ "kind": "statement",
+ "title": "Canonical constant pullback component with module coefficients",
+ "statement": "Variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteConstantPullback_hom (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (constantSinglePullbackIso (ModuleCat.{u + 1} A) f (ModuleCat.of A A)).hom =\n      (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).hom.app\n          (ordinaryFiniteConstant A Y) ≫\n        (DerivedCategory.singleFunctor _ 0).map\n          ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).hom.app\n            (ModuleCat.of A A))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-z8-etale-single-pullback-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Specialize constantSinglePullbackIso_hom to the module coefficient category and the coefficient module A. The same single-degree comparison and the same constant-sheaf comparison are the two factors. This proved specialization caches the structural instance conversion before comparing the ordinary factorization.",
+   "uses": [
+    "lem-z8-etale-single-pullback-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-etale-single-pullback-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteConstantPullbackHom.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteConstantPullback_hom",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteConstantPullback_hom"
+  ],
+  "statement": "theorem ordinaryFiniteConstantPullback_hom (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (constantSinglePullbackIso (ModuleCat.{u + 1} A) f (ModuleCat.of A A)).hom =\n      (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).hom.app\n          (ordinaryFiniteConstant A Y) ≫\n        (DerivedCategory.singleFunctor _ 0).map\n          ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).hom.app\n            (ModuleCat.of A A))",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

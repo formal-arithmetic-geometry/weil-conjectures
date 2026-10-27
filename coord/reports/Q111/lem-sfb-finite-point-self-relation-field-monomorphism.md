@@ -1,0 +1,42 @@
+# Worker report
+
+1. Files written:
+   - dag/nodes/sec-six-functors-basics/lem-sfb-finite-point-self-relation-field-monomorphism.json: statement, split in five steps; Mathlib searches give no match.
+   - dag/nodes/sec-six-functors-basics/lem-sfb-pointlike-quasiseparated-space-field.json: statement-only, unsplit; Stacks 03DZ; Mathlib searches give no match.
+   - citations.json: one verbatim statement quotation per step/dependency pair.
+2. Attachments: none. The item tag and algebraic-space/field-monomorphism concepts were searched under lean/WeilConjectures; there is no exact completed project declaration.
+3. WANTED: none.
+4. No statement correction. The imported statement is precisely 03JU (3) implies (4), over the specified absolute base. The previously empty proof needed a quasi-separatedness check before invoking 03DZ: quasi-compactness of the relation alone is not the literal hypothesis of that lemma. The existing 07S4 node supplies that check. The quotient monomorphism is proved explicitly using local lifts rather than citing a restriction lemma whose ambient object would have to be a scheme.
+5. Nothing mathematical remains unfinished for this split. The new 03DZ node intentionally has no proof, as required for a one-level split.
+
+## Sources and route
+
+Read decent-spaces.tex, Tag 03JU (lemma-R-finite-above-x), especially the paragraph proving (3) implies (4). Read spaces.tex, Tags 02WW (theorem-presentation) and the adjacent presentation discussion; groupoids.tex, Tag 02VH (lemma-quotient-groupoid-restrict), for its local quotient argument; spaces-properties.tex, Tags 07S4 (lemma-quasi-separated) and 03DZ (lemma-point-like-spaces), statement and proof, including the invariant-subfield description. For the latter I also read groupoids.tex, Tag 03BM (proposition-finite-flat-equivalence), the underlying affine quotient theorem. The new node is the independently useful field-atlas classification; it does not mention an ambient X, a point of X, or the monomorphism conclusion of the item.
+
+Read the chapter/unit records, SETUP's three levels, GOAL, stage-1 rules and delivery-errors B--E in both recorded versions. Read the current latest blueprint unit and det-thm-sf-ctf-stability-direct-images proof (3). The inherited nearest imported ancestor is null, which blueprint_refs.py ancestor confirms; no ancestor is invented. The inherited route is the space-theoretic support on the existing alteration/adequate-moduli branch, not a new six-functor route.
+
+## Searches
+
+The sandbox initially had no item, report or previous split. Its searches.jsonl now contains every command search made in this session; no query is invented. Reused the current live node's historical searches without attributing them to Q111; appended this run's queries. For the new node used two LeanFinder phrasings, Loogle, grep restricted to AlgebraicGeometry, and LeanSearch. All services responded. The actual log records, with their query strings, hit names and digests, are copied as the results. The hits include scheme residue-field maps (SpecToEquivOfField, ResidueField.lean:346) and the finite-product characterization of etale algebras (Algebra.Etale.iff_exists_algEquiv_prod, RingTheory/Etale/Field.lean:271), whose sources were read. They concern schemes or etale algebras, not the representability of an algebraic-space quotient; neither is an exact match or a one-line specialization. No algebraic-space source match occurred.
+
+Searched the whole DAG for 03DZ, lemma-point-like-spaces, point-like spaces and related field-representability concepts, and blueprint_refs.py search for 03DZ, point-like, spectrum of a field, surjective etale morphism, quotient and field spectrum. No imported blueprint node states 03DZ. Read the existing quotient and field-monomorphism candidates rather than creating duplicates.
+
+## Not duplicates
+
+lem-sfb-pointlike-quasiseparated-space-field vs lem-sfb-qs-space-field-monomorphism: the existing result gives monic field representatives of points of an arbitrary quasi-separated ambient space; it does not identify a space with a field spectrum or describe a given etale field atlas.
+lem-sfb-pointlike-quasiseparated-space-field vs lem-sfb-space-qs-atlas-criterion: 07S4 only proves quasi-separatedness from a quasi-compact relation projection, not representability as a field spectrum.
+lem-sfb-pointlike-quasiseparated-space-field vs lem-a1-finite-flat-affine-relation-quotient: 03BM constructs a quotient for affine finite locally free equivalence relations; the new 03DZ statement starts with an algebraic space and its field atlas and concludes a finite separable invariant subfield. It is the source's classification input, whose later split can use 03BM.
+lem-sfb-pointlike-quasiseparated-space-field vs lem-sfb-zero-dimensional-field-space-components: the latter assumes a finite-type structure map to a field and a dimension bound. Here there is no given map Y to L, and the structure base S is arbitrary.
+No pre-existing node cites Tag 03DZ or lemma-point-like-spaces.
+
+## Review by Q111
+
+I checked each proof step against the cited statements, not their proofs. Step 1 uses the representable diagonal in def-trf-algebraic-space to make U times_X U a scheme and the fibre-product universal property in lem-trf-space-fibre-products-etale-covers to identify its test-scheme sections with pairs having equal b-images. Reflexivity, symmetry and transitivity are equality of those images; etaleness is an assumption, not a newly claimed theorem.
+
+Step 2 uses every needed clause of lem-trf-etale-relation-quotient: algebraicity, representable surjective etale atlas, its kernel-pair identity and its universal property into any fppf sheaf, here X. The input is a scheme equivalence relation, with both projections etale, over Spec Z. No quasi-compactness or finite-presentation condition has been silently added. Step 3 uses that node's explicit local lifting clause, then writes the injectivity argument: refine the two covers, obtain an R-section from equality in X, and descend equality in the sheaf Y. These are a few direct consequences of the cited clauses; no separate monomorphism lemma is hidden there.
+
+Step 4 checks both hypotheses of lem-sfb-space-qs-atlas-criterion: affine U is quasi-separated by lem-weil-pbc-affine-scheme-qcqs, and U times_Y U is precisely the given quasi-compact relation by step 2. Its conclusion is absolute quasi-separatedness, exactly the new node's convention. Step 5 applies the new 03DZ statement only after checking its surjective etale and quasi-separated hypotheses; the induced map is monic by the explicit step-3 section argument. Under the isomorphism, q is Spec of the inclusion k into L, so the two point representatives agree after extension to L, exactly the common-extension point-class equivalence of def-a1-space-point-topology (which cites its field-class definition). Quotations in citations.json were checked as literal substrings of these statements.
+
+For the new node I read 03DZ in full. The invariant set in its proof is a subfield: if nonzero a has equal s_i and t_i images, its inverse also does, so the invariant subring is closed under inverses. The proof's finite locally free quotient and etale atlas give the stated finite separable extension. The source has arbitrary S; no perfectness, finite-type or algebraic-closedness hypothesis is needed. Small cases checked: identity atlas of Spec L (k=L), a finite separable field atlas of Spec k (recover k), and non-Galois finite separable extensions (the equivalence relation is not assumed a constant group action). An empty Y cannot admit a field-spectrum atlas. An infinite separable field extension of Spec k is not etale of finite presentation, so it is not a counterexample; quasi-separatedness must not be omitted for general point-like spaces.
+
+Against B--E: the sole new node is self-contained and statement-only, has its definitions or inline meanings, precise source tag/label, searches and blueprint provenance. Existing generic quotient, fibre-product and affine results are reused with tool uses declared. No item clause is relabelled as a new node: the new lemma is an atlas classification and the item constructs the quotient and proves its monicity. All non-elementary inputs are named, every step is under 2000 characters, all proof dependencies are the union of uses, and no SGA source is used. No source error or statement dispute was found. Sandbox only; no Lean, compiler, Lake or repository mutation.

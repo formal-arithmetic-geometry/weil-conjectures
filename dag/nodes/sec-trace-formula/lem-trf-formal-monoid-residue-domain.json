@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-formal-monoid-residue-domain",
+ "kind": "statement",
+ "title": "Constant coefficients, locality, and domain property of a completed positive monoid algebra",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero Noetherian local commutative ring [def-weil-pbc-noetherian-ring], complete and separated for the powers of $\\mathfrak m$ [def-weil-pbc-adically-complete-ring]. Let $P$ be a finitely generated additive submonoid of a free abelian group $G\\cong\\mathbf Z^r$, where $r\\ge0$, and let $w:G\\to\\mathbf Z$ be a homomorphism strictly positive on $P\\setminus\\{0\\}$. Write $A[P]=\\bigoplus_{p\\in P}Az^p$, with $z^pz^q=z^{p+q}$, set $\\mathfrak b=(\\mathfrak m,z^p:p\\ne0)$ and $B=\\varprojlim_n A[P]/\\mathfrak b^n$ [def-weil-pbc-adic-completion]. Put $J=(z^p:p\\ne0)B$. The constant-coefficient map on $A[P]$ extends to a surjective $A$-algebra homomorphism $c:B\\to A$. Under the coefficient-family identification $B\\cong A^P$ with finite convolution multiplication, this map sends $(a_p)$ to $a_0$. Its kernel is $J$, and it induces the canonical $A$-algebra isomorphism $B/J\\cong A$. An element $f\\in B$ is a unit if and only if $c(f)$ is a unit of $A$. The ring $B$ is local, with maximal ideal $\\mathfrak n=c^{-1}(\\mathfrak m)=\\mathfrak bB$ and residue field $A/\\mathfrak m$. If $A$ is an integral domain (that is, $1\\ne0$ and a product of two nonzero elements is nonzero), then $B$ is an integral domain. For $P=\\{0\\}$ these maps identify $B$ with $A$ and $J$ with $0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70, agent-supplied coefficient-algebra refinement: constant-coefficient kernel, geometric-series locality, and least-monomial domain argument (old proof steps 3--4 of lem-trf-formal-monoid-ring-dimension)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-monoid-completion-coefficients] with precisely the given $A,P,G,w,\\mathfrak b$. Its completeness and finite-generation hypotheses are among ours. Identify $B$ with $A^P$ by its $A$-algebra isomorphism; multiplication is finite convolution and the image of $az^p$ is the family supported at $p$ with coefficient $a$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "Define $c(f)=f_0$. If $u+v=0$ in $P$, then $w(u)+w(v)=0$ and strict positivity forces $u=v=0$. Consequently $(fg)_0=f_0g_0$; addition and the unit are preserved coefficientwise. Thus $c$ is an $A$-algebra homomorphism extending the polynomial constant coefficient. Writing $C(a)=az^0$, one has $c(C(a))=a$, so $c$ is surjective.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "Choose nonzero monoid generators $g_1,\\ldots,g_s$, with $s=0$ permitted. Every nonzero $p$ has $\\nu(p)\\ge1$, whereas $\\nu(0)=0$. For $f_0=0$, apply [lem-trf-high-length-prefix-division] at $n=1$: it expresses $f=f^{\\ge1}$ as the finite sum $\\sum_{i=1}^s z^{g_i}c^i$, so $f\\in J$. Conversely every generator $z^p$ of $J$ has constant coefficient zero, hence $J\\subseteq\\ker c$. Therefore $\\ker c=J$. The induced map $B/J\\to A$ has inverse $a\\mapsto C(a)+J$: for $f\\in B$, $f-C(c(f))\\in J$, which verifies the other inverse identity. Both maps preserve the $A$-algebra structure.",
+   "uses": [
+    "lem-trf-high-length-prefix-division",
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "If $f$ is a unit then $c(f)$ is a unit by applying $c$ to an inverse. Conversely put $a=c(f)\\in A^\\times$ and $h=1-C(a^{-1})f$, so $h_0=0$. The finite convolution formula, by induction on $k$, gives $(h^k)_p=0$ for $k>w(p)$: each nonzero summand requires $k$ nonzero exponents whose positive integer weights sum to $w(p)$. Define the family $s_p=\\sum_{k=0}^{w(p)}(h^k)_p$. It belongs to $A^P=B$, without any convergence assertion. For a fixed $p$, all pairs $u+v=p$ are finite, and $w(u),w(v)\\le w(p)$. Thus in computing $((1-h)s)_p$ one may replace $s$ by $\\sum_{k=0}^{w(p)}h^k$. The polynomial identity $(1-h)\\sum_{k=0}^Nh^k=1-h^{N+1}$ and the same support bound give $((1-h)s)_p=1_p$. Hence $fC(a^{-1})s=1$, giving the required inverse.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients",
+    "lem-trf-positive-monoid-adic-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "By the unit criterion, the nonunits of $B$ are exactly $\\mathfrak n=c^{-1}(\\mathfrak m)$, a proper ideal. Every proper ideal contains only nonunits, hence is contained in $\\mathfrak n$; this proves locality and that $\\mathfrak n$ is the unique maximal ideal. For $f\\in\\mathfrak n$, $f=C(c(f))+(f-C(c(f)))$ with the first term in $\\mathfrak m B$ and the second in $J$. The reverse inclusion follows by applying $c$, so $\\mathfrak n=\\mathfrak mB+J=\\mathfrak bB$. Explicit inverse maps between $B/\\mathfrak n$ and $A/\\mathfrak m$ are $f+\\mathfrak n\\mapsto c(f)+\\mathfrak m$ and $a+\\mathfrak m\\mapsto C(a)+\\mathfrak n$. This identifies the residue field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "Now assume $A$ is a domain. Choose coordinates $G\\cong\\mathbf Z^r$ and order $P$ lexicographically by $(w(p),p_1,\\ldots,p_r)$. This is a total order preserved by translation. Each nonempty subset of $P$ has a least element: take its least nonnegative integer weight, then its least element in that finite weight fibre; finiteness follows from [lem-trf-positive-monoid-adic-filtration]. For nonzero $f,g\\in A^P$ let $p,q$ be their least supported exponents. If $f_ug_v\\ne0$, then $u\\ge p$ and $v\\ge q$. Translation invariance makes $u+v>p+q$ if either inequality is strict. Thus the only nonzero summand in the finite convolution at $p+q$ is $f_pg_q\\ne0$. Hence $fg\\ne0$. Also $C(1)_0=1\\ne0$, so $B$ is nonzero and is an integral domain.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients",
+    "lem-trf-positive-monoid-adic-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "When $P=\\{0\\}$ the coefficient-family isomorphism is $B\\cong A^{\\{0\\}}=A$, and $c$ and $C$ are its inverse maps. There are no nonconstant monomials, so $J=0$; the inverse formula reduces to $s=1$ and all preceding identifications specialize to these maps.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monoid-completion-coefficients",
+  "lem-trf-high-length-prefix-division",
+  "lem-trf-positive-monoid-adic-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70: agent-written coefficient-algebra refinement, not a theorem stated in ILO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsDomain|isUnit.*constantCoeff|constantCoeff.*isUnit",
+   "results": "{\"t\": \"2026-10-22T06:13:21Z\", \"tool\": \"grep\", \"query\": \"IsDomain|isUnit.*constantCoeff|constantCoeff.*isUnit\", \"sub\": \"RingTheory/HahnSeries\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HahnSeries/Valuation.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"Mathlib/RingTheory/HahnSeries/Multiplication.lean\", \"Mathlib/RingTheory/HahnSeries/Multiplication.lean\"], \"digest\": \"7a16ad572f0d5d2f\"}; No exact or one-line match. PowerSeries/MvPowerSeries unit and domain results apply to free monoids. HahnSeries domain results require an identification with this adic completion; neither the monomial ideal kernel nor the completion/locality comparison is supplied.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal monoid series over a complete local domain have zero constant coefficient ideal as augmentation kernel and are integral domains",
+   "results": "{\"t\": \"2026-10-22T06:13:21Z\", \"tool\": \"leansearch\", \"query\": \"Formal monoid series over a complete local domain have zero constant coefficient ideal as augmentation kernel and are integral domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.ker_coeff_eq_max_ideal\", \"PowerSeries.instIsDomain\", \"PowerSeries.maximalIdeal_eq_span_X\", \"PowerSeries.constantCoeff\", \"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.instAddMonoid\", \"MvPowerSeries.constantCoeff\", \"MvPowerSeries.coeff_zero_eq_constantCoeff\"], \"digest\": \"bfab77c72e24f03b\"}; No exact or one-line match. PowerSeries/MvPowerSeries unit and domain results apply to free monoids. HahnSeries domain results require an identification with this adic completion; neither the monomial ideal kernel nor the completion/locality comparison is supplied.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HahnSeries.isDomain, HahnSeries.constantCoeff",
+   "results": "{\"t\": \"2026-10-22T06:13:22Z\", \"tool\": \"loogle\", \"query\": \"HahnSeries.isDomain, HahnSeries.constantCoeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HahnSeries.isDomain'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. PowerSeries/MvPowerSeries unit and domain results apply to free monoids. HahnSeries domain results require an identification with this adic completion; neither the monomial ideal kernel nor the completion/locality comparison is supplied.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed positive affine monoid algebra over a complete local domain is a domain with constant coefficient quotient and units detected by constant coefficient",
+   "results": "{\"t\": \"2026-10-22T06:13:29Z\", \"tool\": \"leanfinder\", \"query\": \"A completed positive affine monoid algebra over a complete local domain is a domain with constant coefficient quotient and units detected by constant coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instIsDomain\", \"HahnSeries.instNoZeroDivisorsFinsuppNat\", \"MvPowerSeries.instIsLocalRing\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"PowerSeries.instIsDiscreteValuationRing\", \"PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain\", \"PowerSeries.not_isField\", \"LaurentSeries.mem_integers_of_powerSeries\"], \"digest\": \"07b72b665087b040\"}; No exact or one-line match. PowerSeries/MvPowerSeries unit and domain results apply to free monoids. HahnSeries domain results require an identification with this adic completion; neither the monomial ideal kernel nor the completion/locality comparison is supplied.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant term map of generalized power series has kernel generated by nonconstant monomials and detects units and products of nonzero series",
+   "results": "{\"t\": \"2026-10-22T06:14:52Z\", \"tool\": \"leanfinder\", \"query\": \"Constant term map of generalized power series has kernel generated by nonconstant monomials and detects units and products of nonzero series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.ker_coeff_eq_max_ideal\", \"MvPowerSeries.isUnit_iff_constantCoeff\", \"MvPowerSeries.isUnit_constantCoeff\", \"PowerSeries.isUnit_iff_constantCoeff\", \"PowerSeries.map_constantCoeff_le_self_of_X_mem\", \"PowerSeries.isUnit_constantCoeff\", \"MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff\", \"MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff\"], \"digest\": \"9892087c0e6289d7\"}; No exact or one-line match. PowerSeries/MvPowerSeries unit and domain results apply to free monoids. HahnSeries domain results require an identification with this adic completion; neither the monomial ideal kernel nor the completion/locality comparison is supplied.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDomain|isUnit_iff_constantCoeff|constantCoeff",
+   "results": "{\"t\": \"2026-10-23T04:15:24Z\", \"tool\": \"grep\", \"query\": \"IsDomain|isUnit_iff_constantCoeff|constantCoeff\", \"sub\": \"RingTheory/HahnSeries\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HahnSeries/Valuation.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"Mathlib/RingTheory/HahnSeries/Multiplication.lean\", \"Mathlib/RingTheory/HahnSeries/Multiplication.lean\", \"Mathlib/RingTheory/HahnSeries/HEval.lean\", \"Mathlib/RingTheory/HahnSeries/HEval.lean\"], \"digest\": \"ba4d19e77fed4dc0\"}; Read the hits. HahnSeries has a domain instance (Multiplication.lean:1038) and MvPowerSeries.isUnit_iff_constantCoeff (Inverse.lean:138), but neither identifies this adic completion or proves the nonconstant-monomial kernel for a nonfree positive monoid. No exact or one-line match for all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal series on a finitely generated positive lattice monoid over a domain are a local domain if the coefficient ring is complete local",
+   "results": "{\"t\": \"2026-10-23T04:15:25Z\", \"tool\": \"leansearch\", \"query\": \"Formal series on a finitely generated positive lattice monoid over a domain are a local domain if the coefficient ring is complete local\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instIsLocalRing\", \"PowerSeries.instIsDomain\", \"PowerSeries.WithPiTopology.instCompleteSpace\", \"IsLocalization.isDomain_localization\", \"HahnSeries.instNoZeroDivisorsFinsuppNat\", \"PowerSeries.ker_coeff_eq_max_ideal\", \"isLocalRing_of_isAdicComplete_maximal\", \"PowerSeries.instAddMonoid\"], \"digest\": \"83eddb1be826dab6\"}; Read the hits. HahnSeries has a domain instance (Multiplication.lean:1038) and MvPowerSeries.isUnit_iff_constantCoeff (Inverse.lean:138), but neither identifies this adic completion or proves the nonconstant-monomial kernel for a nonfree positive monoid. No exact or one-line match for all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.isUnit_iff_constantCoeff, HahnSeries",
+   "results": "{\"t\": \"2026-10-23T04:15:25Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.isUnit_iff_constantCoeff, HahnSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits. HahnSeries has a domain instance (Multiplication.lean:1038) and MvPowerSeries.isUnit_iff_constantCoeff (Inverse.lean:138), but neither identifies this adic completion or proves the nonconstant-monomial kernel for a nonfree positive monoid. No exact or one-line match for all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed positive affine monoid algebra over a complete local domain has augmentation quotient the base ring, units detected by constant coefficient, and no zero divisors",
+   "results": "{\"t\": \"2026-10-23T04:15:26Z\", \"tool\": \"leanfinder\", \"query\": \"A completed positive affine monoid algebra over a complete local domain has augmentation quotient the base ring, units detected by constant coefficient, and no zero divisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.isDomain\", \"instCommRingBDeRhamPlus\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"MvPowerSeries.instIsLocalRing\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"LaurentSeries.powerSeriesAlgEquiv\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"af85e7d12dd6e489\"}; Read the hits. HahnSeries has a domain instance (Multiplication.lean:1038) and MvPowerSeries.isUnit_iff_constantCoeff (Inverse.lean:138), but neither identifies this adic completion or proves the nonconstant-monomial kernel for a nonfree positive monoid. No exact or one-line match for all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant term of formal semigroup series is a ring homomorphism whose kernel is the nonconstant monomial ideal and invertibility is determined by constant term",
+   "results": "{\"t\": \"2026-10-23T04:16:07Z\", \"tool\": \"leanfinder\", \"query\": \"Constant term of formal semigroup series is a ring homomorphism whose kernel is the nonconstant monomial ideal and invertibility is determined by constant term\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.isUnit_iff_constantCoeff\", \"PowerSeries.isUnit_iff_constantCoeff\", \"MvPowerSeries.isUnit_constantCoeff\", \"PowerSeries.isUnit_constantCoeff\", \"PowerSeries.ker_coeff_eq_max_ideal\", \"MvPowerSeries.invOfUnit_mul\", \"MvPowerSeries.constantCoeff_invOfUnit\", \"MvPowerSeries.mul_invOfUnit\"], \"digest\": \"66fc06622dc7a6df\"}; Read the hits. HahnSeries has a domain instance (Multiplication.lean:1038) and MvPowerSeries.isUnit_iff_constantCoeff (Inverse.lean:138), but neither identifies this adic completion or proves the nonconstant-monomial kernel for a nonfree positive monoid. No exact or one-line match for all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-monoid-ring-dimension",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Independent completed-local algebra input for the toric chart case of VI 1.8: VI 1.6(i)--(ii), printed p. 70: commutative-algebra dimension input for the displayed formal monoid models (agent-supplied refinement). Hilbert--Samuel dimension theorem: Stacks algebra.tex Tag 00KQ, proposition-dimension; completion dimension: more-algebra.tex Tag 07NV, lemma-completion-dimension. Extracted argument: VI 1.6(i)--(ii), printed p. 70, agent-supplied coefficient-algebra refinement: constant-coefficient kernel, geometric-series locality, and least-monomial domain argument (old proof steps 3--4 of lem-trf-formal-monoid-ring-dimension).",
+   "via": [
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-monoid-residue-domain",
+  "worker": "stage1",
+  "group": "Q70",
+  "summary": "Statement unchanged. Reused the existing completion-coefficient, positive monoid filtration and prefix-division nodes. Wrote the constant-term quotient maps, finite geometric inverse, maximal ideal and residue maps, and least supported exponent product argument explicitly; no new nodes or Lean files. Checked nonfree and zero monoids and coefficient rings with zero divisors.",
+  "blueprint": "Realizes the coefficient-algebra refinement of ILO VI 1.6(i)--(ii), printed p.70, extracted from old proof steps 3--4 of lem-trf-formal-monoid-ring-dimension under the historical alteration input of lem-trf-local-term-locality proof (1)--(2). The existing blueprint.from chain is retained; searches for monoid algebra, monomial and convolution find no equivalent imported blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-4ae82a17e",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-4ae82a17e (reviewer sub-agent of L); spot-checked: PASS after reading the whole delivery. This is the first split of the item: one commit touching only the item JSON and the report. There are no new nodes and no tool_uses. The statement and stmt_deps are byte-identical to the unsplit node in all four Q158 snapshots, so no target is weakened. It still carries every clause the parent lem-trf-formal-monoid-ring-dimension uses at its step 2. Source check: ILO VI 1.6(i)–(ii), printed p.70 (PDF p.76), only displays the formal models, and the node correctly records the proof as agent-written. All three cited nodes are in the same unit (sk-i-curve-zero), they do not lead back to the item, and each step uses them only through their statements. Steps checked: step 2 gets (fg)_0=f_0g_0 from positivity. Step 3 uses prefix-division at n=1, where H_1=P∖{0}, to give ker c=J, and writes out the inverse of B/J→A. Step 4 is a finite geometric inverse: (h^k)_p=0 for k>w(p) because w is integer-valued, and since w(v)≤w(p) for u+v=p, ((1−h)s)_p=(1−h^{N+1})_p=1_p. Step 5 shows the nonunits are c^{-1}(m), which equals mB+J=bB. Step 6 orders P lexicographically by (w,coordinates), which is total and translation-invariant; it is a well-order because the weight fibres are finite, so a product of nonzero elements has nonzero least term. Step 7 covers P={0}. Edge cases checked: P={0}; P=ℕ; P=⟨2,3⟩, where ν is only superadditive and no step needs more; A=k[ε]/(ε²); r=0. No SGA is cited. An rg -L duplicate search over dag/nodes found no other node with the unit criterion, locality or domain statement. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalMonoidResidueDomain",
+  "declaration": "AddMonoidAlgebra.formalMonoid_residue_domain",
+  "file": "lean/Sheaf/RingTheory/FormalMonoidResidueDomain.lean",
+  "statement": "theorem formalMonoid_residue_domain (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (P : Type v) [AddCommMonoid P] [AddMonoid.FG P] (G : Type w) [AddCommGroup G] (ι : P →+ G) (hι : Function.Injective ι) (wgt : G →+ ℤ) (hpos : ∀ p : P, p ≠ 0 → 0 < wgt (ι p)) (hfree : ∃ r : ℕ, Nonempty (G ≃+ (Fin r → ℤ))) : ∃ (b : Ideal (AddMonoidAlgebra A P)), b = Ideal.map (algebraMap A (AddMonoidAlgebra A P)) (IsLocalRing.maximalIdeal A) ⊔ Ideal.span {x | ∃ p : P, p ≠ 0 ∧ x = AddMonoidAlgebra.single p (1 : A)} ∧ ∃ (ring : CommRing (P → A)) (alg : @Algebra A (P → A) _ ring.toSemiring) (coeff : @AlgEquiv A (AdicCompletion b (AddMonoidAlgebra A P)) (P → A) _ _ ring.toSemiring _ alg), (∀ (a f : P → A) (p : P), (@Add.add (P → A) ring.toAdd a f) p = a p + f p) ∧ (∀ (a f : P → A) (p : P), (@Mul.mul (P → A) ring.toMul a f) p = ∑ᶠ q : {q : P × P // q.1 + q.2 = p}, a q.1.1 * f q.1.2) ∧ (∀ p : P, Set.Finite {q : P × P | q.1 + q.2 = p}) ∧ (∀ (a : A) (p q : P), coeff (AdicCompletion.of b (AddMonoidAlgebra A P) (AddMonoidAlgebra.single p a)) q = if q = p then a else 0) ∧ ∃ (c : AdicCompletion b (AddMonoidAlgebra A P) →ₐ[A] A) (J : Ideal (AdicCompletion b (AddMonoidAlgebra A P))), J = Ideal.span {x | ∃ p : P, p ≠ 0 ∧ x = algebraMap (AddMonoidAlgebra A P) (AdicCompletion b (AddMonoidAlgebra A P)) (AddMonoidAlgebra.single p (1 : A))} ∧ Function.Surjective c ∧ (∀ x : AdicCompletion b (AddMonoidAlgebra A P), c x = coeff x 0) ∧ (∀ f : AddMonoidAlgebra A P, c (AdicCompletion.of b (AddMonoidAlgebra A P) f) = f.coeff 0) ∧ RingHom.ker c = J ∧ (∃ q : (AdicCompletion b (AddMonoidAlgebra A P) ⧸ J) ≃ₐ[A] A, ∀ x : AdicCompletion b (AddMonoidAlgebra A P), q (Ideal.Quotient.mk J x) = c x) ∧ (∀ f : AdicCompletion b (AddMonoidAlgebra A P), IsUnit f ↔ IsUnit (c f)) ∧ ∃ hB : IsLocalRing (AdicCompletion b (AddMonoidAlgebra A P)), @IsLocalRing.maximalIdeal _ _ hB = Ideal.comap c (IsLocalRing.maximalIdeal A) ∧ @IsLocalRing.maximalIdeal _ _ hB = Ideal.map (algebraMap (AddMonoidAlgebra A P) (AdicCompletion b (AddMonoidAlgebra A P))) b ∧ (∃ res : (AdicCompletion b (AddMonoidAlgebra A P) ⧸ @IsLocalRing.maximalIdeal _ _ hB) ≃ₐ[A] (A ⧸ IsLocalRing.maximalIdeal A), ∀ x : AdicCompletion b (AddMonoidAlgebra A P), res (Ideal.Quotient.mk _ x) = Ideal.Quotient.mk _ (c x)) ∧ (IsDomain A → IsDomain (AdicCompletion b (AddMonoidAlgebra A P))) ∧ (Subsingleton P → Function.Bijective c ∧ J = ⊥)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a2f3e92e",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Item node unchanged apart from the new lean record; lean.statement matches the file signature exactly. Hypotheses match the node with nothing stronger: CommRing/IsNoetherianRing/IsLocalRing (gives nonzero), IsAdicComplete 𝔪, FG P with injective ι into G ≅ ℤ^r, positive weight; separate universes u, v, w. Every conclusion clause is present: b and J fixed by equations; B = AdicCompletion b A[P]; coefficient identification with the dependency's conventions (convolution, finite decomposition sets, monomial formula), uniquely determined by continuity; c surjective, c = coeff 0, extends f.coeff 0; ker c = J; canonical B/J ≃ₐ A; unit criterion; IsLocalRing witness with maximal ideal = comap c 𝔪 = extension of b; canonical residue iso; IsDomain A → IsDomain B; Subsingleton P → c bijective and J = ⊥. Edge cases r=0, P={0}, A with zero divisors, non-free monoids covered. No definitions, one sorry theorem, source and blueprint docstrings with the 7-step proof plan, no name collision, nothing pro-étale. No file changed, so no compile."
+ }
+}

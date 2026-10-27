@@ -14,26 +14,40 @@
  ],
  "proof": [
   {
-   "text": "constant-scalar restriction keeps the additive sheaf, and its scalar action\nextends uniquely back across the locally bijective constant-ring sheafification\nunit. Over a Noetherian ring each finite local model is finitely presented. The\nfinite-presentation local-system comparison makes its restriction to each stratum\nan etale inverse image. Localize first on affine open subsets; restriction pulls\nback the same finite partition and its models. On each affine, induct on the\nfinite constructible partition, using affine\nshrinking to expose a nonempty open stratum. The open-closed exact sequence has\netale antecedents for extension by zero and closed direct image, by comparison\nwith these two operations. The classical subcategory is closed under extensions,\nso the remaining closed partition and the open stratum give an etale antecedent\nfor the restricted module. Etale origin is Zariski local, so these local\nantecedents descend to the entire module. Empty strata can first be removed, and the empty partition\non the empty scheme gives the zero sheaf. On an affine presentation, etale sections\nof an inverse image form the prescribed filtered colimit by finite-presentation\nfactorization of maps into etale schemes. This identifies the canonical\ncontinuity map, including its A-action, with a colimit comparison isomorphism.\nAll this takes place on the equivalent coefficient-sized sites: an object and a\ncover retain their underlying scheme, and AsSmall sends every projection to that\nsame projection. Hence it gives exactly the map displayed below.",
+   "text": "Restrict the intrinsic module to constant scalars, obtaining E. For each stratum and every object, retain its covering sieve, constant module and local isomorphism. Noetherianity upgrades the finite module to a finitely presented one, by Module.finitePresentation_of_finite. Apply coefficientFpLocalSystem_essImage on that stratum.",
    "uses": [
-    "det-pe-finite-local-systems-twist",
     "lem-sc-noetherian-finite-module-finite-presentation",
-    "lem-weil-pbc-comparison-stratified-essential-image",
-    "det-pe-classical-sheaves-modules"
+    "lem-pe-coefficient-fp-local-system-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientFixed_essImage_of_stratification to E and these stratum origins. Obtain an etale module G and a sheaf isomorphism from its canonical fixed-scalar comparison inverse image to E. This uses the same finite-stratification induction as the original plan, with coefficients in the independent universe.",
+   "uses": [
+    "lem-pe-coefficient-stratified-essential-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the given affine presentation, coefficientFixedComparison_isColimit makes the restriction cocone of the comparison inverse image of G a colimit. The canonical colimit descent map is therefore invertible. Whisker the sheaf isomorphism with AsSmall.up.op. Naturality of continuityMap identifies the two maps through the induced colimit isomorphism and the component isomorphism at the vertex. Cancel the induced colimit isomorphism to obtain invertibility of the requested continuity map.",
+   "uses": [
+    "lem-pe-coefficient-comparison-continuity",
+    "det-pe-classical-definition-continuity-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "det-pe-classical-sheaves-modules",
-  "det-pe-finite-local-systems-twist",
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-weil-pbc-comparison-stratified-essential-image"
+  "lem-pe-coefficient-fp-local-system-origin",
+  "lem-pe-coefficient-stratified-essential-image",
+  "lem-pe-coefficient-comparison-continuity",
+  "det-pe-classical-definition-continuity-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-equivalence.proof.md",
-  "place": "part (1); local/classical detail for the finite stratification arguments"
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y and 09AK, fixed-scalar local-system and stratification argument, followed by the canonical affine comparison section colimit; J3 coefficient-universe interfaces and complete Lean assembly"
  },
  "mathlib_searches": [
   {
@@ -124,14 +138,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-9e836",
-  "group": "B2",
-  "result": "fix",
-  "landing": "20261021T012347-L-2179661",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T180758-L-4033505",
   "kind": "interface",
-  "note": "independent cc review: 14 delivered modules + 3 live direct importers compiled in a sandbox (clean); moved Data defs diffed verbatim vs live item; item statement diffed vs live; #print axioms; the 3 sorry statements read against Stacks 09AI-09AL/BS 5-6 and the existing Type(u+1) interfaces; per-import removal compiles for all 61 import lines"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

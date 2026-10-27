@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Module.Shrink
 public import Mathlib.RingTheory.Finiteness.Small
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 
 /-!

@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-cofactor-local-descent",
+ "kind": "statement",
+ "title": "Local descent and uniqueness of the projective cofactor map",
+ "statement": "Let $A$ be a commutative ring, let $c\\geq0$, and let $P,Q$ be finite projective $A$-modules (direct summands of finite free modules [def-weil-pbc-projective-module]) of ranks $c,c+1$ at every prime. Let $u:P\\to Q$ be any $A$-linear map, and put $C=Q/u(P)$ and $D_u=(\\bigwedge^c_A P)^\\vee\\otimes_A\\bigwedge^{c+1}_A Q$, where $V^\\vee=\\operatorname{Hom}_A(V,A)$ and exterior powers are [def-weil-pbc-exterior-algebra]. There exists a finite family $f_i\\in A$ generating the unit ideal such that $P_{f_i},Q_{f_i}$ are free of these ranks [lem-weil-pbc-finite-projective-standard-free-cover]. The module $J=\\bigwedge^c_A P$ is finite projective. For every localization $B=S^{-1}A$ [def-weil-pbc-module-localization], the canonical pure-wedge, tensor and dual maps identify $B\\otimes_A J$ with $\\bigwedge^c_B(B\\otimes_A P)$ and $B\\otimes_A D_u$ with $(\\bigwedge^c_B(B\\otimes_A P))^\\vee\\otimes_B\\bigwedge^{c+1}_B(B\\otimes_A Q)$. In particular the dual comparison sends $b\\otimes\\lambda$ to $(b'\\otimes x\\mapsto bb'\\lambda(x))$; these identifications agree under successive localizations.\nThere is a unique $A$-linear map $w_u:C\\to D_u$ with the following property. On any localization $B=S^{-1}A$ on which $P_B$ is free with ordered basis $p_1,\\ldots,p_c$, every $v\\in Q_B$ satisfies\n$$w_{u,B}(\\bar v)=(p_1\\wedge\\cdots\\wedge p_c)^\\vee\\otimes\\bigl(u_B(p_1)\\wedge\\cdots\\wedge u_B(p_c)\\wedge v\\bigr),$$\nwhere $C_B=Q_B/u_B(P_B)$ is identified with $B\\otimes_A C$, and $w_{u,B}$ is scalar extension of $w_u$. The right hand side is independent of the basis and the lift $v$. On every finite standard free cover its values on $v/1$, for $v\\in Q$, are a matching family in the localizations of $D_u$ and are the localizations of a unique element of $D_u$ [lem-weil-pbc-cover-module-exact]; this characterizes $w_u$ independently of the cover. For $c=0$ it is the canonical identification $Q\\cong\\bigwedge^1_A Q$ (as $P=0$). The assertions include the zero ring and impose no injectivity on $u$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula and omitted well-definedness check; algebra.tex Tag 00NX (lemma-finite-projective), Tag 00EK (lemma-cover-module), Tags 00DM and 0C6F. Agent-formulated construction for arbitrary differentials, without the source sequence injectivity hypothesis."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-cover-module-exact",
+  "def-sfb-cofactor-local-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-projective-standard-free-cover] separately to $P$ and $Q$. Refine the covers $D(a_i)$ and $D(b_j)$ to $D(a_ib_j)$: the products generate the unit ideal since $1=(\\sum r_i a_i)(\\sum s_j b_j)$. Bases remain bases after further scalar extension by [lem-weil-pbc-free-base-change-tower]. At a nonzero chart, their lengths are $c,c+1$: localizing a chart basis at any prime preserves its length, and [lem-weil-pbc-finite-projective-rank-locally-constant] identifies this length with the assumed stalk rank. Zero charts have the zero module, which admits a basis of either prescribed length. This yields the asserted common cover.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-weil-pbc-free-base-change-tower",
+    "lem-weil-pbc-finite-projective-rank-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), (3) equivalent to (7),(8); common refinement"
+   }
+  },
+  {
+   "text": "Choose a splitting $P\\xrightarrow{i}A^n\\xrightarrow{r}P$, $ri=1$. Applying $i,r$ to each wedge factor gives maps on $c$th exterior powers: multilinearity and the relations $x\\wedge x=0$ make them well defined, and their composite is the identity on the spanning pure wedges. Hence $J$ is a direct summand of $\\bigwedge^c A^n$, which is finite free by [lem-weil-pbc-exterior-power-free-basis]. Thus $J$ is finite projective. The same argument applies to every exterior power of either $P$ or $Q$, including degree zero.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra), alternating relations and finite-free wedge basis; retract argument"
+   }
+  },
+  {
+   "text": "Apply the exterior and dual comparisons of [lem-trf-projective-exterior-scalar-comparisons] to $P,Q,J$ and $A\\to B=S^{-1}A$. Their hypotheses hold by step 2. Combine them with [lem-weil-pbc-localization-tensor-product] for the two factors of $D_u$. This gives exactly the stated identifications of $J_B$ and $(D_u)_B$; the dual comparison evaluates $b\\otimes\\lambda$ on $b\\prime\\otimes x$ as $bb\\prime\\lambda(x)$. The cited scalar-comparison statement includes evaluation and tower compatibility; the tensor comparison multiplies denominators, so it too agrees under successive localizations. Applying [lem-weil-pbc-localization-module-exact] to $P\\to Q\\to C\\to0$ identifies $B\\otimes C$ with $Q_B/u_B(P_B)$, by the map $(v+u(P))/s\\mapsto v/s+u_B(P_B)$. Surjectivity follows by writing a localized vector as a fraction.",
+   "uses": [
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C6F (lemma-tensor-algebra-localization), Tag 00DL (lemma-tensor-product-localization), Tag 00CS (proposition-localization-exact); more-algebra.tex Tag 0FJ9 scalar comparisons"
+   }
+  },
+  {
+   "text": "On a ring $B$ where $P_B$ has ordered basis $p=(p_1,\\ldots,p_c)$, put $e=p_1\\wedge\\cdots\\wedge p_c$. By [lem-weil-pbc-exterior-power-free-basis], $e$ is a basis of $J_B$, with dual $e^\\vee$. Define $t_p(v)=e^\\vee\\otimes(u_B(p_1)\\wedge\\cdots\\wedge u_B(p_c)\\wedge v)$. It is linear in $v$. If $v$ is replaced by $v+u_B(x)$, expand $x=\\sum a_i p_i$; every extra summand has two identical factors $u_B(p_i)$, hence vanishes. Thus $t_p$ kills $u_B(P_B)$ and descends to the quotient, without requiring injectivity. The same argument covers the empty tuple, whose image is $u_B(0)=0$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula: lift independence and linearity, omitted in the source"
+   }
+  },
+  {
+   "text": "For another basis $p\\prime$ write $p\\prime_j=\\sum_i g_{ij}p_i$ and $p_j=\\sum_i h_{ij}p\\prime_i$. Let $a=\\sum_{\\sigma}\\operatorname{sgn}(\\sigma)\\prod_j g_{\\sigma(j),j}$, and define $b$ similarly for $h$. Multilinearity and alternation give $e\\prime=ae$, $e=be\\prime$, and $u_B(p\\prime_1)\\wedge\\cdots\\wedge u_B(p\\prime_c)=a(u_B(p_1)\\wedge\\cdots\\wedge u_B(p_c))$: only permutations survive the expansions. Since $e$ is a basis, $ba=1$; consequently $(e\\prime)^\\vee=be^\\vee$. Balancing the tensor cancels $ba$, proving $t_{p\\prime}=t_p$. For $c=0$ the permutation sum is $1$. The comparisons in step 3 take these expressions to the same expressions on further localizations; every factor, scalar and dual evaluation has the stated pure-tensor formula.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), omitted basis independence: explicit alternating expansion, also valid in characteristic two"
+   }
+  },
+  {
+   "text": "Use the finite common cover of step 1. For each $v\\in Q$, step 4 gives $t_i(v/1)\\in(D_u)_{f_i}$. On $A_{f_if_j}$ the two bases of $P$ give the same value by step 5 and the tower comparisons of step 3. By [lem-weil-pbc-cover-module-exact] this matching family has a unique global value $t(v)\\in D_u$. The local equalities $t_i(v+v\\prime)=t_i(v)+t_i(v\\prime)$ and $t_i(av)=a t_i(v)$ imply the corresponding global equalities, using the injectivity clause of that same node. Likewise $t(u(x))=0$, since its local values vanish by step 4. Thus $t$ factors uniquely through an $A$-linear map $w_u:C\\to D_u$. On each chart the localized maps agree on all $v/1$, hence on every $v/f_i^n=f_i^{-n}(v/1)$.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EK (lemma-cover-module), matching-family gluing and separatedness"
+   }
+  },
+  {
+   "text": "Let $B=S^{-1}A$ be arbitrary with $P_B$ free and choose its basis $p$. The images of the $f_i$ still generate $1$ in $B$. On $B_{f_i}$, the scalar extension of $w_u$ agrees with the formula in the original chart basis by steps 3 and 6. That basis and the localization of $p$ are both bases by [lem-weil-pbc-free-base-change-tower], so step 5 identifies the value with $t_p$. Injectivity in [lem-weil-pbc-cover-module-exact], now over $B$ for the target module, proves equality on $B$. Any other proposed map agrees on the original cover, hence globally by the same injectivity. Any other finite standard free cover gives this same map, so its values glue exactly as claimed. If $c=0$, the rank-zero module $P$ is zero: its chart localizations vanish, and cover injectivity kills every element. Then $C=Q$, $J=A$, and the formula is $v\\mapsto1^\\vee\\otimes v$, the canonical $Q\\cong\\bigwedge^1Q$: on the free charts this is the degree-one identification of [lem-weil-pbc-exterior-power-free-basis], and the defining tensor quotient gives its global inverse (degree-one tensors map identically to $Q$). The tensor unit removes $A^\\vee$. If $A=0$, all modules vanish, and every map and matching family is unique; no prime, nonempty cover, nonzero scalar, or division is required.",
+   "uses": [
+    "lem-weil-pbc-free-base-change-tower",
+    "lem-weil-pbc-cover-module-exact",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), arbitrary-chart formula and uniqueness; algebra.tex Tag 00EK, including empty-cover and degree-zero cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-free-base-change-tower",
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), supplying the omitted well-definedness check for arbitrary maps, with Tags 00NX, 00DM, 00EK and 0C6F; existing scalar-comparison node used as generic algebra."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A basis independent cofactor map from a cokernel of a map of finite projective modules of ranks c and c plus one to the dual top exterior power tensor top exterior power is constructed by localization and gluing",
+   "results": "{\"t\": \"2026-10-23T04:15:07Z\", \"tool\": \"leanfinder\", \"query\": \"A basis independent cofactor map from a cokernel of a map of finite projective modules of ranks c and c plus one to the dual top exterior power tensor top exterior power is constructed by localization and gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exteriorPower.alternatingMapToDual\", \"exteriorPower.presentation.isPresentationCore\", \"exteriorPower.presentation\", \"exteriorPower.pairingDual\", \"Module.Basis.det\", \"exteriorPower.pairingDual_ιMulti_ιMulti\", \"exteriorPower.pairingDual_apply_apply_eq_one\", \"exteriorPower.alternatingMapToDual_apply_ιMulti\"], \"digest\": \"2aae591e91231ab3\"} Read exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57 and cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33. These give exterior pairing or summand extraction, not the descended cofactor map of an arbitrary differential. Square endomorphism determinants do not supply this cokernel construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a linear map between finite projective modules of ranks n and n plus one its basis independent cofactor map to the determinant line descends from local free charts",
+   "results": "{\"t\": \"2026-10-23T04:15:47Z\", \"tool\": \"leanfinder\", \"query\": \"Given a linear map between finite projective modules of ranks n and n plus one its basis independent cofactor map to the determinant line descends from local free charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.detAux\", \"LinearMap.detAux_def\", \"LinearMap.coe_det\", \"LinearMap.detAux_def''\", \"Module.Basis.det\", \"LinearMap.det_def\", \"LinearMap.detAux_def'\", \"Module.Basis.det_comp_basis\"], \"digest\": \"df72c81e8ea1b3ec\"} Read exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57 and cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33. These give exterior pairing or summand extraction, not the descended cofactor map of an arbitrary differential. Square endomorphism determinants do not supply this cokernel construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the cofactor wedge map on finite projective modules by gluing local basis formulas and prove independence of basis and lift",
+   "results": "{\"t\": \"2026-10-23T04:14:59Z\", \"tool\": \"leansearch\", \"query\": \"Construct the cofactor wedge map on finite projective modules by gluing local basis formulas and prove independence of basis and lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.detAux_def\", \"ExteriorAlgebra.ιMulti\", \"ExteriorAlgebra.liftAlternating\", \"ModuleCat.exteriorPower.mk\", \"Module.Basis.det\", \"exteriorPower.linearMap_ext\", \"exteriorPower.ιMulti\", \"Module.Basis.det_smul_mk_coord_eq_det_update\"], \"digest\": \"823ccac975842f05\"} Read exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57 and cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33. These give exterior pairing or summand extraction, not the descended cofactor map of an arbitrary differential. Square endomorphism determinants do not supply this cokernel construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"coker\"",
+   "results": "{\"t\": \"2026-10-23T04:14:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"exteriorPower\\\", \\\"coker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57 and cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33. These give exterior pairing or summand extraction, not the descended cofactor map of an arbitrary differential. Square endomorphism determinants do not supply this cokernel construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor|determinantLine|coker.*exterior|exterior.*locali",
+   "results": "{\"t\": \"2026-10-23T04:14:59Z\", \"tool\": \"grep\", \"query\": \"cofactor|determinantLine|coker.*exterior|exterior.*locali\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Vandermonde.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\"], \"digest\": \"f97b8c2e48df0329\"} Read exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57 and cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33. These give exterior pairing or summand extraction, not the descended cofactor map of an arbitrary differential. Square endomorphism determinants do not supply this cokernel construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a map between finite projective modules of ranks n and n plus one construct the basis independent cofactor map from its cokernel to the determinant line by localizing and gluing",
+   "results": "{\"t\": \"2026-10-23T09:28:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a map between finite projective modules of ranks n and n plus one construct the basis independent cofactor map from its cokernel to the determinant line by localizing and gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.detAux\", \"LinearMap.detAux_def\", \"Module.Basis.det\", \"LinearMap.coe_det\", \"LinearMap.det_def\", \"LinearMap.detAux_def''\", \"LinearMap.detAux_def'\", \"Matrix.cramer\"], \"digest\": \"f494e03051902099\"} Read candidate cofactorLinear/cofactorToLeft in Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:25-35: a split-product alternating map, not the projective cokernel descent. Semantic hits give square determinants, exterior presentations or ordinary cokernel universal properties, not the complete construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor|coker.*exterior|exterior.*locali",
+   "results": "{\"t\": \"2026-10-23T09:30:28Z\", \"tool\": \"grep\", \"query\": \"cofactor|coker.*exterior|exterior.*locali\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Vandermonde.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\"], \"digest\": \"f97b8c2e48df0329\"} Read candidate cofactorLinear/cofactorToLeft in Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:25-35: a split-product alternating map, not the projective cokernel descent. Semantic hits give square determinants, exterior presentations or ordinary cokernel universal properties, not the complete construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofactor wedge map on the cokernel of a map of finite projective modules by localization and gluing",
+   "results": "{\"t\": \"2026-10-23T09:30:29Z\", \"tool\": \"leansearch\", \"query\": \"Cofactor wedge map on the cokernel of a map of finite projective modules by localization and gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopModuleCat.isColimitCoker\", \"ModuleCat.cokernelIsColimit\", \"Module.Presentation.cokernel\", \"Module.Presentation.ofExact\", \"rTensor.toFun\", \"LinearMap.toKerIsLocalized_apply_coe\", \"Module.Presentation.nonempty_cokernelData\", \"Module.Presentation.cokernelSolution\"], \"digest\": \"d769fbb65cae81a4\"} Read candidate cofactorLinear/cofactorToLeft in Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:25-35: a split-product alternating map, not the projective cokernel descent. Semantic hits give square determinants, exterior presentations or ordinary cokernel universal properties, not the complete construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"coker\"",
+   "results": "{\"t\": \"2026-10-23T09:30:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"exteriorPower\\\", \\\"coker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read candidate cofactorLinear/cofactorToLeft in Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:25-35: a split-product alternating map, not the projective cokernel descent. Semantic hits give square determinants, exterior presentations or ordinary cokernel universal properties, not the complete construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis independent linear map from a cokernel to the tensor of determinant modules given by wedging the images of a basis and descending local formulas",
+   "results": "{\"t\": \"2026-10-23T09:30:30Z\", \"tool\": \"leanfinder\", \"query\": \"A basis independent linear map from a cokernel to the tensor of determinant modules given by wedging the images of a basis and descending local formulas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.det\", \"LinearMap.detAux\", \"exteriorPower.toTensorPower\", \"LinearMap.detAux_def\", \"LinearMap.det_def\", \"LinearMap.coe_det\", \"exteriorPower.presentation\", \"exteriorPower.presentation.relationsSolutionEquiv\"], \"digest\": \"66141ae945e5e5f3\"} Read candidate cofactorLinear/cofactorToLeft in Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:25-35: a split-product alternating map, not the projective cokernel descent. Semantic hits give square determinants, exterior presentations or ordinary cokernel universal properties, not the complete construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-two-term-cofactor-naturality",
+  "date": "2026-10-23",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; algebra input for invariance of the conormal cofactor map under the determinant comparisons of two presentations; returned proof steps 1--3: exterior and dual localization, basis/lift independence, and gluing the cofactor map",
+   "via": [
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cofactor-local-descent",
+  "worker": "stage1",
+  "summary": "Seven-step construction with no new nodes: common fixed-rank cover; exterior retract finite projectivity; existing scalar comparisons and exact localization; explicit lift and basis computations; module-cover descent; arbitrary-chart formula and uniqueness, including c=0 and zero rings. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; algebra input for invariance of the conormal cofactor map under the determinant comparisons of two presentations; returned proof steps 1--3: exterior and dual localization, basis/lift independence, and gluing the cofactor map The latest direct-images proof (3) uses compactification and direct-image stability; this inherited chain is its alteration-related algebra prerequisite. Ancestor command returns None, retained as inherited; no unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-exterior-scalar-comparisons",
+    "why": "Its first two displayed isomorphisms and scalar-extension coherence are generic finite-projective algebra; no cofactor construction is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-cover-module-exact",
+    "why": "Generic module matching-family exactness supplies gluing and uniqueness, not a replacement of any unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-free-base-change-tower",
+    "why": "Generic preservation of a given finite basis under further scalar extension is needed on overlaps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-weil-pbc-cover-module-exact",
+  "lem-weil-pbc-free-base-change-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-b61d26d4c",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-b61d26d4c (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, every cited statement and the source in full. The item has no new nodes, its statement is unchanged, and there is no re-split repair note. Source: Stacks duality.tex 0E9Y (lemma-determinant, line 7510). The item is the r=1 case of the displayed wedge formula, whose well-definedness Stacks omits. It writes the target as (∧^cP)^∨ rather than ∧^c(P^∨), which is canonically isomorphic, and it rightly does not assume u injective. I tested the statement on u=0, on c=0 (identity Q≅∧^1Q), on k[ε] with c=1 and u(a)=(εa,0), on a unit rescaling of the basis, and on A=0. Steps: (1) common cover from 00NX via the standard-free-cover node, the free-base-change tower and the rank hypothesis, with zero charts handled. (2) Exterior-power retract argument, elementary, giving J finite projective. (3) Exterior and dual comparisons, tensor localization 00DL (which also identifies B⊗_A N with S^{-1}N in one line) and exact localization 00CS for the cokernel. (4) Lift independence by repeated factors. (5) Basis independence by determinant sums with ba=1 and no division, so characteristic 2 and zero divisors cause no problem. (6) Gluing and linearity from the gluing and injectivity clauses of 00EK. (7) Formula on any localization, uniqueness and cover independence by injectivity over B, plus the c=0 and A=0 cases. proof_deps equals the union of the step uses, and there is no cycle. Duplicate search: lem-sfb-virtual-rank-one-cofactor-descent is the scheme-level gluing over derived models and lem-sfb-surjective-cofactor-compatibility takes w as given, so neither is a duplicate; no blueprint node states the item. Tool uses accepted (generic algebra): the trf scalar-comparison node, cover-module-exact and free-base-change-tower. Batch-5 flag on lem-trf-projective-exterior-scalar-comparisons: the node is generic commutative algebra (exterior powers and duals of finite projective modules under scalar extension, Stacks 0FJ9/0FJY). Neither the trace-formula nor the Poincaré-duality assumption gives it, and its 21-node closure reaches no trace-formula or Poincaré-duality proof node, so it is outside the assumptions and the flag is not a RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CofactorLocalDescent",
+  "declaration": "Module.existsUnique_cofactor_local_descent",
+  "declarations": [
+   "Module.cofactorLocalizationTransition",
+   "Module.CofactorComparisonsCoherent",
+   "Module.CofactorCoverDescent",
+   "Module.existsUnique_cofactor_local_descent"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/CofactorLocalDescent.lean",
+  "statement": "theorem existsUnique_cofactor_local_descent {A : Type u} [CommRing A] (P : Type v) (Q : Type w) [AddCommGroup P] [Module A P] [AddCommGroup Q] [Module A Q] [Module.Finite A P] [Module.Projective A P] [Module.Finite A Q] [Module.Projective A Q] (c : ℕ) (u : P →ₗ[A] Q) (hP : ∀ p : PrimeSpectrum A, Module.rankAtStalk P p = c) (hQ : ∀ p : PrimeSpectrum A, Module.rankAtStalk Q p = c + 1) : (∃ (n : ℕ) (f : Fin n → A), Ideal.span (Set.range f) = ⊤ ∧ ∀ i : Fin n, Nonempty (Module.Basis (Fin c) (Localization.Away (f i)) (Localization.Away (f i) ⊗[A] P)) ∧ Nonempty (Module.Basis (Fin (c + 1)) (Localization.Away (f i)) (Localization.Away (f i) ⊗[A] Q))) ∧ Module.Finite A (⋀[A]^c P) ∧ Module.Projective A (⋀[A]^c P) ∧ ∃ e : ∀ S : Submonoid A, CofactorScalarComparison (Localization S) u c, CofactorComparisonsCoherent u c e ∧ CofactorCoverDescent u c e ∧ ∃! w : (Q ⧸ LinearMap.range u) →ₗ[A] CofactorTarget A P Q c, IsLocalCofactor u c e w ∧ (∀ hc : c = 0, Subsingleton P ∧ ∀ v : Q, (hc ▸ w) ((LinearMap.range u).mkQ v) = (exteriorPower.zeroEquiv (R := A) (M := P)).toLinearMap ⊗ₜ[A] (exteriorPower.oneEquiv (R := A) (M := Q)).symm v)",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 return on lem-sfb-surjective-cofactor-compatibility: the old module bundled the cofactor target, local basis value, normalized scalar comparisons and IsLocalCofactor with the existence theorem, so consumers could only cite a theorem node for pure definition data. These four declarations are moved unchanged to Sheaf.LinearAlgebra.CofactorLocalData, owned by def-sfb-cofactor-local-data, and publicly re-exported here. All remaining declarations and the theorem signature/proof/docstring are unchanged. This is the explicitly requested §1(B) lean-only ownership repair; no definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c72fe6df4",
+  "group": "N9",
+  "result": "pass",
+  "note": "Only the module and the node's lean record changed (statement, stmt_deps and proof identical to live and side-live); lean.statement is verbatim in the file and all 8 declarations are listed. Every clause matches the node: finite projective P and Q with stalk ranks c and c+1, the common standard free cover, J finite projective, the localization comparisons, their coherence under S<=T, the unique w with the chart formula for every basis and lift (pairingDual determinant functional), the matching-family descent using coverModuleExact's overlap maps, d=w(mkQ v), and c=0 giving 1^dual ⊗ v. The ∃ e of CofactorScalarComparison is pinned: every field is fixed on spanning elements, so the structure is a subsingleton and e is canonical, not an arbitrary map. Edge cases checked: A=0 with n=0, S containing 0, u=0, non-injective u over a nonreduced ring, independent universes. No duplicate declaration in the project; downstream TwoTermCofactorNaturality not imported. Docstrings, blueprint tags and the 7 proof steps are present, the proof is sorry only, and the report has both sections. Not compiled because nothing was changed. Minor: two unused imports, harmless."
+ }
+}

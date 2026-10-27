@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-cartesian-scalar-tensor-square",
+ "kind": "statement",
+ "title": "The cartesian scalar pullback square agrees with the derived tensor pullback square",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes with small pro-etale sites in the module universe [def-weil-pbc-scheme-conventions, def-weil-pbc-proetale-site, def-weil-size-convention]. For $Z=X,Y$ let $R_Z,S_Z$ be sheaves of commutative rings and $a_Z:R_Z\\to S_Z$ ring maps. Specify $c_R:f^{-1}R_Y\\xrightarrow{\\sim}R_X$ and $c_S:f^{-1}S_Y\\xrightarrow{\\sim}S_X$ with $a_Xc_R=c_Sf^{-1}a_Y$. Use module sheaves and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], exact termwise scalar restriction $U_Z$ [def-pc-sheaf-restrict-scalars], and K-flat scalar extension $T_Z=S_Z\\otimes_{R_Z}^{\\mathbf L}-$ with its representative-normalized adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Write $B_Z=U_Z(S_Z)$, placed in degree zero. Let $L_R,L_S$ be the exact cartesian-coefficient derived pullbacks [def-weil-pbc-proetale-operations], and let $b:U_XL_S\\xrightarrow{\\sim}L_RU_Y$ be the canonical action comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. Let $\\lambda:L_ST_Y\\xrightarrow{\\sim}T_XL_R$ be the localization of the balanced inverse-image/scalar comparison, with the normalization of [lem-sfb-kflat-scalar-comparison-normalization], transported along $c_R,c_S$.\n\nThere are natural isomorphisms\n$$e_{Z,A}:U_ZT_ZA\\xrightarrow{\\sim}B_Z\\otimes_{R_Z}^{\\mathbf L}A,$$\nwhose map on any flat-term K-flat representative $P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules] is the localized ordinary balanced map sending $s\\otimes p$ to $s\\otimes p$. In particular, for every derived morphism $v:A\\to A'$, $e_{Z,A'}U_ZT_Z(v)=(1\\otimes v)e_{Z,A}$. Let $\\mu_{B_Y,A}:L_R(B_Y\\otimes^{\\mathbf L}A)\\xrightarrow{\\sim}L_RB_Y\\otimes^{\\mathbf L}L_RA$ be the canonical derived tensor pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and let $\\kappa:L_RB_Y\\xrightarrow{\\sim}B_X$ be induced by $c_S$. For every $A\\in D(R_Y)$ there is equality of the specified natural transformations\n$$e_{X,L_RA}\\,U_X(\\lambda_A)\\,b_{T_YA}^{-1}\\,L_R(e_{Y,A}^{-1})=(\\kappa\\otimes1)\\,\\mu_{B_Y,A}.$$\nOn each flat-term K-flat representative $P$, both sides are the localization of the same ordinary cochain isomorphism; after the cartesian action identifications its degree-$i$ formula is $f^{-1}(s\\otimes p)\\mapsto c_S(f^{-1}s)\\otimes f^{-1}p$ on local balanced generators, using sheafified tensor [def-pur-sheaf-tensor-product]. These representative identifications are natural under cochain maps and quasi-isomorphisms between such representatives and determine the displayed equation on the whole derived category. No flatness of $a_Z$, boundedness, or projection-formula invertibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; agent scalar-restriction and K-flat localization normalization of its actual balanced comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q$ for each derived localization. Fix the canonical total-tensor closed structure supplied by ringed-derived-closed-symmetric-monoidal and its simultaneous K-flat representative comparison supplied by site-derived-tensor-descent; these are the existing derived tensor of the statement. For any ring sheaf $R$, any $R$-module $B$ in degree zero, and any flat-term K-flat $P$, the canonical augmentation $\\rho_{B,P}:QB\\otimes_R^{\\mathbf L}QP\\to Q(B\\otimes_RP)$ is invertible. Here is the normalization check, needed because $B$ need not be flat. Choose a flat-term K-flat resolution $r:V\\to B[0]$. The one-sided tensor comparison gives $t_{B,P}:Q(B\\otimes P)\\cong QB\\otimes^{\\mathbf L}QP$, natural for $(r,1_P)$ and agreeing with the simultaneous comparison $t_{V,P}$. The augmentation theorem gives $\\rho_{B,P}(Qr\\otimes1)=Q(r\\otimes1)\\rho_{V,P}$ and $\\rho_{V,P}=t_{V,P}^{-1}$. Naturality of $t$ therefore gives $t_{B,P}\\rho_{B,P}(Qr\\otimes1)=Qr\\otimes1$. Cancel the isomorphism $Qr\\otimes1$ to get $t_{B,P}\\rho_{B,P}=1$, so $\\rho_{B,P}=t_{B,P}^{-1}$. This identifies the one-sided model with the specified derived tensor, rather than an unspecified isomorphic tensor functor.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-ringed-tensor-comparison-extension",
+    "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), construction preceding 06YU, and 0FPH (lemma-tensor-pull-compatibility), augmentation normalization"
+   }
+  },
+  {
+   "text": "For $Z=X,Y$, let $E_Z$ denote ordinary scalar extension and put $j_{Z,P}:U_ZE_ZP\\cong B_Z\\otimes_{R_Z}P$. Take the inverse, if necessary, of the ordinary extension/tensor comparison: its balanced formula in this direction is $s\\otimes p\\mapsto s\\otimes p$. Applied degreewise this is a chain isomorphism, since both differentials send $s\\otimes p$ to $s\\otimes dp$. The normalized scalar adjunction computes $T_Z(QP)$ by $Q(E_ZP)$; exact scalar restriction computes $U_ZQ(E_ZP)$ termwise. Define on these representatives $e_{Z,QP}=\\rho_{B_Z,P}^{-1}Q(j_{Z,P})$ using Step 1. The ordinary comparison and the one-sided comparison are natural for cochain maps; their chain naturality also respects chain homotopies, by applying the same equation to each degree of a homotopy. Thus they give a natural isomorphism on the homotopy category of flat-term K-flat complexes. Its two endpoint functors are the restrictions of $U_ZT_Z$ and $B_Z\\otimes^{\\mathbf L}-$, so they invert quasi-isomorphisms. The equivalence between the localization of these representatives and $D(R_Z)$, together with the natural-transformation localization property, extends it uniquely to $e_Z$. This proves $e_{Z,A'}U_ZT_Z(v)=(1\\otimes v)e_{Z,A}$ for every derived arrow, including inverse denominators.",
+   "uses": [
+    "lem-weil-pbc-extension-tensor-comparison",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor and preceding localization construction) and 07A6 (lemma-adjoint); ordinary balanced comparison in sites-modules.tex Section 03EK; agent scalar-restriction assembly"
+   }
+  },
+  {
+   "text": "Denote the ordinary cartesian module inverse images by $I_R,I_S$. Their transported module presentations are supplied by geometric-module-construction with coefficient rings $f^{-1}R_Y,f^{-1}S_Y$, then transported along $c_R,c_S$, as in proetale-operations. They are exact and give $L_R,L_S$ termwise. If $P$ is flat-term K-flat on $Y$, preservation under ringed pullback makes $I_RP$ flat-term K-flat on $X$; apply the theorem with structural ring isomorphism $c_R$. Let $\\chi_P:I_SE_YP\\cong E_XI_RP$ be the ordinary scalar comparison, transported along $c_R,c_S$. Its localization is precisely the specified $\\lambda_{QP}$ by scalar-comparison normalization. The ordinary action comparison $b^0:U_XI_S\\cong I_RU_Y$ localizes to the specified $b$. Consequently, under the representative identifications of Step 2, the left side of the required equation at $QP$ is the localization of the ordinary chain map\n$$d_P=j_{X,I_RP}\\,U_X(\\chi_P)\\,(b^0_{E_YP})^{-1}\\,I_R(j_{Y,P}^{-1}):I_R(B_Y\\otimes P)\\longrightarrow B_X\\otimes I_RP.$$\nThe two $j$ maps retain their actual balanced normalization, and the action map changes only the ring action. Thus this expression is a computation of the specified composite, with no choice of a different scalar comparison.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-extension-tensor-comparison",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat); scalar-normalization representative theorem based on sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); agent cartesian action transport"
+   }
+  },
+  {
+   "text": "Apply the derived/ordinary tensor pullback compatibility theorem to the two complexes $B_Y[0],P$. In its notation, $\\alpha$ is invertible on every complex, because the cartesian-coefficient $I_R$ is exact and its derived functor is termwise. Step 1 identifies both $\\rho_{B_Y,P}$ and $\\rho_{I_RB_Y,I_RP}$ as isomorphisms, since $I_RP$ is flat-term K-flat by Step 3. Cancel these comparisons in the theorem's equation\n$$Q(\\delta)\\alpha_{B_Y\\otimes P}L_R(\\rho_{B_Y,P})=\\rho_{I_RB_Y,I_RP}(\\alpha_{B_Y}\\otimes^{\\mathbf L}\\alpha_P)\\mu_{B_Y,QP}.$$\nIt follows that $\\mu_{B_Y,QP}$ is computed, in these one-sided models, by the ordinary tensor comparison $\\delta:I_R(B_Y\\otimes P)\\cong I_RB_Y\\otimes I_RP$. The ordinary map $k:I_RB_Y\\cong B_X$ induced by $c_S$ is $R_X$-linear because $a_Xc_R=c_Sf^{-1}a_Y$, and its termwise localization is the stated $\\kappa$. Naturality of the one-sided tensor comparison for $(k,1)$ now identifies $(\\kappa\\otimes1)\\mu_{B_Y,QP}$ with $Q((k\\otimes1)\\delta)$. No K-flatness of $B_Y$ or of $B_Y\\otimes P$ has been asserted or used.",
+   "uses": [
+    "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+    "def-weil-pbc-proetale-operations",
+    "lem-sfb-ringed-tensor-comparison-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH (lemma-tensor-pull-compatibility), with exact cartesian module inverse image; Tag 07A4 (lemma-pullback-tensor-product); agent cancellation of the one-sided comparisons"
+   }
+  },
+  {
+   "text": "Compare the two ordinary maps from Steps 3 and 4. After the cartesian action identifications, both are induced by the bilinear pairing\n$$(f^{-1}s,f^{-1}p)\\longmapsto c_S(f^{-1}s)\\otimes f^{-1}p.$$\nFor $d_P$, $j_Y^{-1}$ and $j_X$ retain the two tensor entries, $b^{-1}$ only restores the $S$-action, and $\\chi$ is the inverse-image balancing comparison of scalar-normalization. For $(k\\otimes1)\\delta$, the normalized inverse-image tensor comparison first separates the two entries, then $k$ applies $c_S$ to the first. The coefficient compatibility makes these pairings balanced over the transported $R_Y$: the images of $(a_Y(r)s,p)$ and $(s,rp)$ agree by the tensor balancing relation and $a_Xc_R=c_Sf^{-1}a_Y$. Use the generalized-pairing formula of the inverse-image tensor comparison and the sheaf tensor universal property to conclude equality of the sheaf maps in each degree. This tests pairings from arbitrary test sheaves, and does not assume that every section of an inverse-image tensor is pure. The ring factor is in degree zero; both differentials are $1\\otimes d_P$, so this is equality of the cochain maps $d_P=(k\\otimes1)\\delta$. Localizing proves the required equation at $QP$.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback) and preceding bilinear universal property; elementary equality of the normalized balanced maps"
+   }
+  },
+  {
+   "text": "Every object $A\\in D(R_Y)$ is isomorphic to $QP$ for a flat-term K-flat resolution. Both displayed composites are already natural transformations: Step 2 supplies naturality of $e$, and $b,\\lambda,\\kappa,\\mu$ are the specified natural comparisons. If $u:QP\\xrightarrow{\\sim}A$, naturality expresses either component at $A$ as $G(u)$ followed by its component at $QP$ followed by $F(u)^{-1}$, where $F(A)=L_R(B_Y\\otimes^{\\mathbf L}A)$ and $G(A)=B_X\\otimes^{\\mathbf L}L_RA$. Equality at $QP$ therefore implies equality at $A$. The same naturality equations for cochain maps between representatives and their inverted quasi-isomorphisms give precisely the claimed representative compatibility. This proves equality of the specified transformations on the entire unbounded derived category.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), localization construction preceding 06YU; extension of an equality along the resolving equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-operations",
+  "lem-pc-kflat-resolution",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+  "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-extension-tensor-comparison",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback) and sites-cohomology.tex Tags 06YS, 06YT, 06YU, 0G7E, 07A4, 0FPH; explicit scalar restriction and normalized-comparison assembly using the existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of sheaves of coefficient rings scalar restriction of the derived scalar pullback comparison equals the canonical derived tensor inverse image arrow on K-flat representatives",
+   "results": "8 hits; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar and pullback infrastructure does not give this normalized unbounded derived square for arbitrary ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits; PresheafOfModules.pullbackId; PresheafOfModules.pullbackObjIsDefined; PresheafOfModules.pullback; PresheafOfModules.pullbackObjIsDefined_eq_top; PresheafOfModules.pullbackObjIsDefined_free_yoneda; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar and pullback infrastructure does not give this normalized unbounded derived square for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|[Tt]ensor.*[Pp]ullback|[Pp]ullback.*[Tt]ensor",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar and pullback infrastructure does not give this normalized unbounded derived square for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting scalars of K-flat derived extension of sheaf rings naturally identifies its pullback comparison with the tensor monoidal comparison on every balanced pure tensor",
+   "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar and pullback infrastructure does not give this normalized unbounded derived square for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For ring sheaves the restriction of derived extension of scalars is tensor with the restricted coefficient ring and geometric pullback respects this canonical identification",
+   "results": "8 hits; ModuleCat.restrictScalars; PresheafOfModules.restrictScalarsObj; RestrictScalars; ModuleCat.RestrictScalars.obj'; PresheafOfModules.restrictScalars; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; PresheafOfModules.pullback",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar and pullback infrastructure does not give this normalized unbounded derived square for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars|derived.*[Tt]ensor.*[Pp]ullback",
+   "results": "25 hits; Mathlib/Algebra/Lie/TensorProduct.lean; Mathlib/Algebra/Algebra/Epi.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Module/LinearMap/Polynomial.lean; Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean; Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean; Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar or site pullback declarations do not state the specified normalized unbounded ring-sheaf derived square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars for sheaves of rings and the canonical tensor pullback comparison",
+   "results": "8 hits; ModuleCat.ExtendScalars.obj'; SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; PresheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackObjFreeIso.congr_simp; ModuleCat.extendRestrictScalarsAdj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar or site pullback declarations do not state the specified normalized unbounded ring-sheaf derived square"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar or site pullback declarations do not state the specified normalized unbounded ring-sheaf derived square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of derived extension of ring sheaves equals derived tensor with the coefficient ring and commutes with cartesian pullback",
+   "results": "8 hits; SheafOfModules.restrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.pullback; SheafOfModules.restrictScalars_map_val; PresheafOfModules.Derivation'; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; PresheafOfModules.Derivation.d_map; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar or site pullback declarations do not state the specified normalized unbounded ring-sheaf derived square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On unbounded derived categories of module sheaves the canonical scalar restriction extension tensor isomorphism intertwines geometric inverse image tensorator",
+   "results": "8 hits; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scalar or site pullback declarations do not state the specified normalized unbounded ring-sheaf derived square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-scalar-projection-mate",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Last paragraph, passage from finite E to the algebraic closure: normalization of the actual scalar pullback/tensor comparison; extracted arguments in old item steps 4 and 5",
+   "via": [
+    "lem-sfb-internal-scalar-projection-mate",
+    "lem-sfb-qlbar-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cartesian-scalar-tensor-square",
+  "worker": "stage1",
+  "summary": "Six-step split using only existing nodes. Constructs e from the ordinary balanced comparison and the canonical one-sided K-flat tensor map, descends its naturality, computes the specified scalar composite, identifies the specified tensor composite by 0FPH, checks their ordinary balanced pairings, and extends equality to all unbounded objects. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the last paragraph of lem-sfb-dc-lower-star-preserves.proof.md: scalar extension in the passage from finite E to the algebraic closure. This item is the normalization extracted via lem-sfb-qlbar-direct-image-comparison and lem-sfb-internal-scalar-projection-mate; the tensor inverse-image route is expanded in latest det-prop-scalar-six-pullback.proof.md (1).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General small-site flat-term K-flat resolutions, needed for one-sided tensor normalization and passage to every unbounded object. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-ringed-tensor-comparison-extension",
+    "why": "General one-sided K-flat tensor computation natural for the actual maps; needed because the restricted coefficient ring need not be flat. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+    "why": "Actual augmentation normalization for arbitrary pairs of complexes; identifies the one-sided isomorphism with the fixed tensor comparison. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-extension-tensor-comparison",
+    "why": "Ordinary sheaf-ring scalar extension/restriction balanced comparison, the construction of e. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Specified representative computation of arbitrary ring-sheaf derived scalar extension without flatness. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Termwise localization of exact scalar restriction on all complexes. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Localization equivalence for flat-term K-flat representatives and natural simultaneous tensor comparisons. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Descent of natural transformations, including inverse denominators; the unit has no general category localization substitute. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General ringed-topos preservation of flat-term K-flat models for cartesian pullback. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Specified ordinary balancing map and its normalized derived scalar comparison, not merely an isomorphism of endpoints. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Specified scalar restriction/geometric pullback action comparison b. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+    "why": "Compatibility of the canonical derived tensor pullback arrow with arbitrary ordinary tensor complexes; prevents an unwarranted flatness assumption on B. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Normalized inverse-image tensor comparison on generalized pairings, valid on topoi without a pure-section presentation. These are generic tools for the existing scalar-comparison route; sk-prop-open-coefficients contains no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-construction",
+    "why": "General transported module presentation of geometric inverse image, used to instantiate the algebraic inverse-image tensor comparison on arbitrary test sheaves; the open-coefficients unit supplies no general construction."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Supplies the canonical unbounded total-tensor closed structure required to instantiate the existing one-sided tensor comparison; the open-coefficients unit supplies no such general ringed-site construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+  "lem-weil-pbc-extension-tensor-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-a0b5ad9c4",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-a0b5ad9c4 (reviewer sub-agent of L); spot-checked: Read the whole delivery. It changes one item and the report, adds no new nodes, and leaves the statement and stmt_deps unchanged. It is a first split of NY's unsplit item, not a 2026-10-21 re-split. proof_deps equals the union of the step uses, and there is no cycle (checked 650 transitive deps). Sources checked: Stacks 03EL (sites-modules.tex l.3649) for the ordinary comparison delta, and 0FPH (sites-cohomology.tex l.3849), which is the equation in lem-sfb-ringed-pullback-derived-ordinary-tensor. Types of the target composite and the directions of b and lambda=Q(chi)=theta^{-1} match the cited statements. Step 1: t rho (Qr x 1)=Qr x 1, so rho_{B,P}=t^{-1}. This relies on identifying the descent tensor with the closed-structure tensor and its T-model, which the DAG already treats as one tensor (def-coef-ringed-tensor-hom-model, lem-pd-ringed-kflat-native-model-identification). Step 2: e=rho^{-1}Q(j) via c_P and exact termwise U_Z. It extends through the W^{-1}P equivalence and clause (2) of the localization universal property. Step 3: the types of d_P check, and I_RP is flat-term K-flat with c=c_R. Step 4: I re-derived the algebra. Solving the 0FPH equation and using naturality for (k,1), with k R_X-linear from a_X c_R=c_S f^{-1}a_Y, reduces the claim to d_P=(k x 1)delta. Neither B_Y nor B_Y x P is assumed K-flat. Step 5 is correctly marked elementary: both maps are the pairing f^{-1}s, f^{-1}p -> c_S(f^{-1}s) x f^{-1}p (chi is B_X-linear and sends p to 1 x p), and equality uses the generalized-pairing clause rather than pure sections. Step 6 conjugates along QP=A. Tested cases: f=id; Z->Z/2 with P=[Z -2-> Z]; S=0; unbounded complexes. The 15 cross-unit tool_uses are generic ringed-site infrastructure that the open-coefficients unit does not supply, so they are accepted. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartesianScalarTensorSquare",
+  "declaration": "AlgebraicGeometry.Scheme.CartesianScalarTensor.cartesian_scalar_tensor_square",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.restrictionLimits",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.restrictionColimits",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.coefficient",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.coefficientComplex",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.tensorCoefficient",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.derivedTensorCoefficient",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.scalarPure",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.OrdinaryNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.ordinaryComplexIso",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.DerivedNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.representativeIso",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.CoefficientNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.derivedCoefficientIso",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.BalancedNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.ordinaryRoute",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.ScalarRepresentativeNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.RoutePureNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.SquareCommutes",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.SquareRepresentativeNormalized",
+   "AlgebraicGeometry.Scheme.CartesianScalarTensor.cartesian_scalar_tensor_square"
+  ],
+  "file": "lean/Sheaf/Paper/CartesianScalarTensorSquare.lean",
+  "statement": "theorem cartesian_scalar_tensor_square (comm : cR.hom ≫ aX = (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aY ≫ cS.hom) (mY : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2} aY) (mX : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2} aX) (tY : ProEtaleTensorModel Y RY) (tX : ProEtaleTensorModel X RX) : ∃ (jY : mY.E ⋙ proEtaleRingRestrictScalars aY ≅ tensorCoefficient aY) (jX : mX.E ⋙ proEtaleRingRestrictScalars aX ≅ tensorCoefficient aX) (eY : mY.T ⋙ (proEtaleRingRestrictScalars aY).mapDerivedCategory ≅ derivedTensorCoefficient aY tY) (eX : mX.T ⋙ (proEtaleRingRestrictScalars aX).mapDerivedCategory ≅ derivedTensorCoefficient aX tX) (k : (proEtaleRingModulePullback f RY RX cR).obj (coefficient aY) ≅ coefficient aX) (χ : mY.E ⋙ proEtaleRingModulePullback f SY SX cS ≅ proEtaleRingModulePullback f RY RX cR ⋙ mX.E) (lambda : mY.T ⋙ proEtaleRingDerivedPullback f SY SX cS ≅ proEtaleRingDerivedPullback f RY RX cR ⋙ mX.T) (aAdjY : mY.E ⊣ proEtaleRingRestrictScalars aY) (aAdjX : mX.E ⊣ proEtaleRingRestrictScalars aX) (dY : mY.T ⊣ (proEtaleRingRestrictScalars aY).mapDerivedCategory) (dX : mX.T ⊣ (proEtaleRingRestrictScalars aX).mapDerivedCategory), OrdinaryNormalized mY jY ∧ OrdinaryNormalized mX jX ∧ DerivedNormalized mY tY jY eY ∧ DerivedNormalized mX tX jX eX ∧ CoefficientNormalized f RY SY RX SX aY aX cR cS k ∧ BalancedNormalized f RY SY RX SX aY aX cR cS mY mX χ ∧ (∀ (M : proEtaleRingModules Y RY) (V : Y.ProEtᵒᵖ) (p : M.val.obj V), (aAdjY.unit.app M).val.app V p = scalarPure mY M V 1 p) ∧ (∀ (M : proEtaleRingModules X RX) (V : X.ProEtᵒᵖ) (p : M.val.obj V), (aAdjX.unit.app M).val.app V p = scalarPure mX M V 1 p) ∧ (∀ (P : CochainComplex (proEtaleRingModules Y RY) ℤ), proEtaleFlatRepresentatives Y RY P → dY.unit.app (DerivedCategory.Q.obj P) ≫ (proEtaleRingRestrictScalars aY).mapDerivedCategory.map (mY.ε.app P) ≫ (proEtaleRingRestrictScalars aY).mapDerivedCategoryFactors.hom.app ((mY.E.mapHomologicalComplex (.up ℤ)).obj P) = DerivedCategory.Q.map ((aAdjY.mapHomologicalComplex (.up ℤ)).unit.app P)) ∧ (∀ (P : CochainComplex (proEtaleRingModules X RX) ℤ), proEtaleFlatRepresentatives X RX P → dX.unit.app (DerivedCategory.Q.obj P) ≫ (proEtaleRingRestrictScalars aX).mapDerivedCategory.map (mX.ε.app P) ≫ (proEtaleRingRestrictScalars aX).mapDerivedCategoryFactors.hom.app ((mX.E.mapHomologicalComplex (.up ℤ)).obj P) = DerivedCategory.Q.map ((aAdjX.mapHomologicalComplex (.up ℤ)).unit.app P)) ∧ (lambda.inv = SheafOfModules.ScalarPullback.mate dY dX (proEtaleRingRestrictionDerivedPullback f RY SY RX SX aY aX cR cS comm).inv) ∧ ScalarRepresentativeNormalized f RY SY RX SX aY aX cR cS mY mX χ lambda ∧ RoutePureNormalized f RY SY RX SX aY aX cR cS comm mY mX jY jX χ ∧ SquareCommutes f RY SY RX SX aY aX cR cS comm mY mX tY tX eY eX k lambda ∧ SquareRepresentativeNormalized f RY SY RX SX aY aX cR cS comm mY mX tY tX jY jX eY eX k χ",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3debcb234",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read node, 14 stmt_dep records (none differ from live), the module, the report, and the upstream decls (ProEtaleTensorModel/canonical comparison, ScalarPullback.mate/θ_h/kflat_scalar_comparison_normalization, DerivedChangeOfRingsCochainModel); Stacks 03EL l.3649. Only lean changed; statement field verbatim; declarations list exact. Every clause matches the node: the ∃ package (j via the s⊗p formula, e via the resolved-B[0] K-flat representative equation, k via cS on unit sections, χ via the balanced pure formula, λ.inv = mate dY dX b.inv = dependency θ plus inverted counit equation, adjunctions via unit clauses) is fully pinned; SquareCommutes is e_X U_X(λ) b⁻¹ L_R(e_Y⁻¹) = (κ⊗1)μ with μ = proEtaleCanonicalTensorComparison; SquareRepresentativeNormalized and RoutePureNormalized give the common ordinary route and its generator formula. No flatness, boundedness or universe restriction; edge cases f=id, S=0, non-flat a, unbounded covered. scalarPure is justified because ScalarPullback.pure is single-universe; the DerivedScalarMateThickLocus helpers are theorem-owned with B last, so not H4. Docstrings, proof plan, a single sorry and line lengths are fine. No fixes, so no compile. Advisory only: DerivedChangeOfRingsCochainModel's owner def-sfb-derived-change-of-rings-cochain-model is not in the unchanged stmt_deps, and H2 forbids adding it in stage 2."
+ }
+}

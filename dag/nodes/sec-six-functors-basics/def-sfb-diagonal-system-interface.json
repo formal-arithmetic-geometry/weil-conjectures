@@ -1,0 +1,165 @@
+{
+ "id": "def-sfb-diagonal-system-interface",
+ "kind": "definition",
+ "title": "Simultaneous derived reduction and normalized diagonal-system predicates",
+ "status": "split",
+ "statement": "Let $\\ell$ be a natural number, $\\mathcal A,\\mathcal B$ abelian categories with chosen unbounded derived categories [def-weil-abstract-derived-category], and $L:\\mathcal A\\to\\mathcal B$ a functor. Use strict inverse systems [def-weil-inverse-system], indexed by $n\\geq0$ with coefficient exponent $n+1$. An ordinary reduction presentation is an additive functor $E:\\mathcal A\\to(\\mathbf N^{\\mathrm{op}}\\to\\mathcal B)$ with natural maps $\\pi_n:L\\to E_n$ exhibiting $E_n(M)$ as the cokernel of $\\ell^{n+1}$ on $L(M)$ and commuting with the quotient transitions. A simultaneous derived reduction consists of this presentation, a functor $T:D(\\mathcal A)\\to D(\\mathbf N^{\\mathrm{op}}\\to\\mathcal B)$, its universal left-derived counit $QT\\to E_{\\mathrm{complex}}Q$, the pointwise existence condition at every complex, and exactness with a shift comparison.\n\nFor prime $\\ell$ and a scheme $X$, on the small pro-etale site [def-weil-pbc-proetale-site], define scalar extension from abelian sheaves to sheaves of discrete constant $\\mathbf Z_\\ell$-modules [def-weil-pbc-constant-sheaf], [def-weil-sheaf-of-modules-category] by sectionwise extension along $\\mathbf Z\\to\\mathbf Z_\\ell$ followed by sheafification. For a simultaneous derived reduction $D$ of this functor, the completion predicate means: there are an integral reduction presentation for the identity, total right derived limits on both tower categories, an isomorphism between the resulting completion functors after forgetting scalars, and a natural unit into this completion whose output is right orthogonal to every complex on which $\\ell$ is invertible and which induces a bijection on maps to every such complete object.\n\nFor a scheme $Y$ with $\\ell$ invertible, put $P=\\mathbf P^1_Y$, $W=P\\times_Y P$ and let $\\Delta:P\\hookrightarrow W$ be the diagonal. The diagonal-cycle-system predicate for $D$ on $W$ means that there exist one strict system $H$ identified with the roots tower of [def-pur-roots-of-unity-sheaf], [sk-def-sp-tate-twist], source and shifted-target isomorphisms, and a degree-two system Ext class. Its source isomorphism is exactly the single-object comparison of the universal derived counit. Its class is the image under $T$ of the positive Cartier pole boundary [def-sp-cartier-pole-boundary], through these isomorphisms. At every $n\\geq0$ there are supported constant and Tate-line identifications: the former preserves the quotient-unit generator, the latter is the specified root-to-line map, and the transported Ext class equals the finite pro-etale Cartier class of [def-sfb-cartier-reduction-data] with exponent $\\ell^{n+1}$. All size/localization instances are part of the supplied presentations. These define data and predicates, not their existence.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sp-tate-twist",
+  "def-sp-cartier-pole-boundary",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.md",
+  "place": "Clauses 2--4: reduction functor, derived completion, and the normalized system class"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, Mathlib.Tactic.Module.reduceCoefficientwise, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Module.qNF.toNF, Mathlib.Tactic.LinearCombination.normStx, Mathlib.Tactic.tacticReduce__, SimplexCategoryGenRel.exists_normal_form_P_σ, Mathlib.Tactic.LinearCombination'.normStx, FixedDetMatrices.reduce_reduceStep, Algebra.SubmersivePresentation.comp",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "rg",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream WeilConjectures matches. Sheaf matches: DiagonalTowerSystem, DiagonalTowerLimit, DiagonalTowerTrace (the definitions); DiagonalTowerTraceLimit, DiagonalCoefficientReference, DiagonalTowerCoefficients, DiagonalCoefficientCategory, CoefficientBidualEvaluationShiftOne (consumers).",
+   "date": "2026-10-23",
+   "verdict": "Exact existing project definitions; new nodes supply ownership only."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'diagonal derived reduction'; search 'normalized source'",
+   "results": "0 blueprint nodes for either query. DAG rg found the three theorem records and existing trace/reference definition consumers, but no definition node owning these eight declarations.",
+   "date": "2026-10-23",
+   "verdict": "Extract definition ownership from theorem modules, as requested by return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-triangle",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Clauses 2--4: reduction functor, derived completion, and the normalized system class",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerSystemInterface",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalDerivedReduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalAb",
+   "AlgebraicGeometry.ProEtale.DiagonalMod",
+   "AlgebraicGeometry.ProEtale.DiagonalSystems",
+   "AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian",
+   "AlgebraicGeometry.ProEtale.diagonalAbSheafAbelian",
+   "AlgebraicGeometry.ProEtale.diagonalScalarExtension",
+   "AlgebraicGeometry.ProEtale.diagonalForget",
+   "AlgebraicGeometry.ProEtale.diagonalScalarAdjunction",
+   "AlgebraicGeometry.ProEtale.diagonalForget_exact",
+   "AlgebraicGeometry.ProEtale.diagonalForgetLimits",
+   "AlgebraicGeometry.ProEtale.diagonalForgetColimits",
+   "AlgebraicGeometry.ProEtale.diagonalForget_additive",
+   "AlgebraicGeometry.ProEtale.DiagonalReductionPresentation",
+   "AlgebraicGeometry.ProEtale.DiagonalDerivedReduction",
+   "AlgebraicGeometry.ProEtale.diagonalDerivedSingleCounit",
+   "AlgebraicGeometry.ProEtale.diagonalResidue",
+   "AlgebraicGeometry.ProEtale.diagonalResidueProjection",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadic",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadic_exact",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadicLimits",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadicColimits",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadicAdditive",
+   "AlgebraicGeometry.ProEtale.diagonalSurface",
+   "AlgebraicGeometry.ProEtale.diagonalImmersion",
+   "AlgebraicGeometry.ProEtale.diagonalImmersion_cartier",
+   "AlgebraicGeometry.ProEtale.diagonalSurface_power_unit",
+   "AlgebraicGeometry.ProEtale.diagonalIntegralSource",
+   "AlgebraicGeometry.ProEtale.diagonalComparisonUnits",
+   "AlgebraicGeometry.ProEtale.diagonalIntegralBoundary",
+   "AlgebraicGeometry.ProEtale.DiagonalCompletionSpec",
+   "AlgebraicGeometry.ProEtale.DiagonalSourceNormalization",
+   "AlgebraicGeometry.ProEtale.DiagonalCycleSystemSpec",
+   "AlgebraicGeometry.ProEtale.transportBoundarySource",
+   "AlgebraicGeometry.ProEtale.normalizedBoundaryTarget",
+   "AlgebraicGeometry.ProEtale.normalizedBoundarySystem",
+   "AlgebraicGeometry.ProEtale.normalizedBoundarySystem_iff_target",
+   "AlgebraicGeometry.ProEtale.exactFunctorExtImage",
+   "AlgebraicGeometry.ProEtale.diagonalBoundaryTarget"
+  ],
+  "statement": "structure DiagonalDerivedReduction\n    (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] (L : A ⥤ B)\n    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wS} (ℕᵒᵖ ⥤ B)]",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing interface extracted and re-exported by the original item module; see change record diagonal-tower-system-interface.md.",
+  "file": "lean/Sheaf/Paper/DiagonalTowerSystemInterface.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of the 69f9 H2 RETURN. Lean signature and body are byte-identical; only imports changed (5 definition modules made public imports, DiagonalTowerCoefficients made a plain proof import). stmt_deps drop det-prop-diagonal-tower-coefficients and -trace (both kept in proof_deps) and cite def-sfb-diagonal-coefficient-reference, -trace-limit-characterization, -trace-models plus three new existing:true ownership nodes (system-interface, completed-endpoints, normalized-source). check_existing is clean on all three; statements are verbatim with live; the prose matches the live declarations and the source places exist. No cycle, no theorem stmt_dep, no Lean moved. Seven dependency modules and records are unchanged from 69f9. H3 substance accepted at 69f9 still holds. Advisories: diagonalSurface in the signature is owned only by det-prop-diagonal-tower-system but is reached through the closure; second readings are self-readings; inherited ∃ CommShift in unitCounit_exact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb77b",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T101147-L-3663305",
+  "kind": "interface",
+  "note": "independent cc review: Delivered interface vs published DiagonalTowerSystem.lean (diff); DiagonalCycleSystemSpec old/new forms via normalizedBoundarySystem_iff_target; sorry statements vs Stacks 099M/091S/091Z and the old spec; nodes vs Lean; 6 delivered modules + 9 direct importers compiled clean (400 s limit); #print axioms"
+ }
+}

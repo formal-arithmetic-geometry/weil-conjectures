@@ -1,0 +1,147 @@
+{
+ "id": "lem-cbc-completed-open-exchange-limit-normalization",
+ "kind": "statement",
+ "title": "The chosen completed open exchange is normalized by the strict exchange",
+ "statement": "Let d be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and let (v:U'→U,j':U'→T',j:U→T,g:T'→T) be a cartesian open square with j quasi-compact [def-cbc-open-immersion-square]. Fix a finite generating tuple of the adic ideal, K intrinsically derived complete, and j!K intrinsically derived complete [def-weil-pbc-intrinsic-completion]. Let R_V denote the strict derived quotient reduction, J_j the actual completed-ring open extension, and L_V its completed-ring derived inverse limit [def-cbc-completed-open-scalar-quotient-interface]. Form omega_K by completedTowerPullback(g) of the canonical quotient/open source comparison followed by the simultaneous strict exchange [def-cbc-completed-strict-open-exchange]. Transport it to theta_K : d.towerPull(g)(R_T(j!K)) → J_j'(d.towerPull(v)(R_U K)) by precomposing the inverse cbcDatumTowerTransport at g and postcomposing J_j' of the forward transport at v [def-cbc-completed-pullback-counit-transport]. The specified cbcDatumCompletedExchange [lem-cbc-completed-extension-zero-comparison], followed by cbcRealizationLimitMap(J_j') at d.towerPull(v)(R_U K), equals L_T'(theta_K). This equality of completed-ring derived morphisms retains the ordinary-to-completed unit; it involves no constant-scalar restriction or constant-coefficient beta comparison.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-derived-completion (Tag 091N), bijectivity on maps into complete objects; extension normalization is the explicit Hom formula of sites-modules.tex lemma-extension-by-zero (Tag 03DI)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-open-immersion-square",
+  "def-cbc-completed-strict-open-exchange",
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "def-cbc-completed-pullback-counit-transport",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "The representative normalization of the simultaneous strict exchange is the ordinary open-unit exchange on every strict quotient of a flat-term K-flat representative. Its transition and differential equations give one strict map before taking derived inverse limit.",
+   "uses": [
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, and literature/stacks-project/more-algebra.tex lemma-derived-completion: the completion universal property; strict finite exchange followed by derived limit."
+   }
+  },
+  {
+   "text": "The constant-diagram mate for open extension commutes with strict quotient augmentations by transposing its defining compConstIso. Apply Rlim to the strict exchange and then the inverse open/limit comparison. The quotient-unit equation is exactly the defining equation in cbcCompletedExchange_exists. Completeness identifies this map uniquely with cbcCompletedExchange.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, and literature/stacks-project/more-algebra.tex lemma-derived-completion: the completion universal property; strict finite exchange followed by derived limit."
+   }
+  },
+  {
+   "text": "Transport the equality through cbcDatumCompletedTransport at g and v, whose counit equations retain the quotient units. Compose on the right with the forward open/limit comparison and cancel its inverse. This gives the displayed equation, in the specified order.",
+   "uses": [
+    "def-cbc-completed-pullback-counit-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, and literature/stacks-project/more-algebra.tex lemma-derived-completion: the completion universal property; strict finite exchange followed by derived limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-completed-ring-strict-finite-exchange",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-cbc-completed-pullback-counit-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-derived-completion (Tag 091N), bijectivity on maps into complete objects; extension normalization is the explicit Hom formula of sites-modules.tex lemma-extension-by-zero (Tag 03DI)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse base change map for open extension by zero is the adjoint transpose of the pulled back open unit",
+   "results": "8 results: TopCat.Presheaf.pushforwardToOfIso, IsBaseChange.toDual_apply, IsBaseChange.toDual, OpenPartialHomeomorph.extend_coe_symm, IsOpenMap.adjunctionNhds, SheafOfModules.pullbackObjUnitToUnit, Module.Dual.baseChange, Topology.IsInducing.adjunction. No strict tower or completed exchange normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking derived inverse limit of the strict open exchange equals the canonical completed open base change morphism",
+   "results": "8 scheme pullback/gluing isomorphism results, none compares these normalized derived morphisms.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cbcStrictExchange|cbcDatumCompletedExchange|cbcRealizationLimitMap; adjunction mates and exact cubes in Mathlib, WeilConjectures, Sheaf",
+   "results": "CompletedStrictOpenExchange gives representative normalization; CompletedOpenExchangeTransport gives the completed unit equation; CompleteProetaleStrictTowerRealization defines the limit mate. Mathlib has formal mates but neither concrete normalization. ExchangeMateCube and UnboundedExactAdjunctionSquare provide the categorical cube tools.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing definitions and categorical tools; no theorem of the displayed normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedOpenStrictMateIdentification",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence); Tag 03DI (lemma-extension-by-zero), explicit unit transpose; finite scalar/tower refinement and ordered completed limit in old item Steps 4, 7; compare current blueprint def-cbc-completed-exchange-map, final open factor.",
+   "via": [
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedOpenExchangeLimitNormalization",
+  "file": "lean/Sheaf/Paper/CompletedOpenExchangeLimitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedOpenExchangeLimitNormalization",
+  "statement": "theorem completedOpenExchangeLimitNormalization [QuasiCompact j]\n    (sq : OpenImmersionSquare v j' j g)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (K : (cbcCompleteProperty d U r a ha).FullSubcategory)\n    (_hJK : cbcCompleteProperty d T r a ha\n      ((cbcDerivedOpenShriek d j inferInstance).obj K.obj)) :\n    (cbcDatumCompletedExchange d sq r a ha).app K ≫\n        (cbcRealizationLimitMap (cbcOpenShriek d j' inferInstance)).app\n          ((d.towerPull v).obj ((completedReductionTower U d).obj K.obj)) =\n      (completedRlim T' (d.completedRing T')).map\n        ((cbcDatumTowerTransport d g).inv.app\n            ((completedReductionTower T d).obj\n              ((cbcDerivedOpenShriek d j inferInstance).obj K.obj)) ≫\n          ((completedTowerPullback g d).map (cbcRealizationReduction d j K.obj).hom ≫\n            (cbcReductionStrictExchange d sq).hom.app K.obj) ≫\n          (cbcRealizationJ d j').map\n            ((cbcDatumTowerTransport d v).hom.app\n              ((completedReductionTower U d).obj K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T201858-L-2634090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T201858-L-2634090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

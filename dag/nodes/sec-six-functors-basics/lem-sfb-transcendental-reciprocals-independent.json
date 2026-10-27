@@ -1,0 +1,91 @@
+{
+ "id": "lem-sfb-transcendental-reciprocals-independent",
+ "kind": "statement",
+ "title": "Reciprocals of translates of a transcendental element are linearly independent",
+ "statement": "Let $F$ and $E$ be fields [def-weil-field] with a unital field homomorphism $\\iota:F\\to E$. Let $x\\in E$ be transcendental over $F$, meaning that $P(x)\\ne0$ for every nonzero polynomial $P\\in F[t]$ (coefficients mapped by $\\iota$). Then the family $((x-\\iota(a))^{-1})_{a\\in F}$ is linearly independent over $F$: for every finite set $S\\subseteq F$, if $c_a\\in F$ and $\\sum_{a\\in S}\\iota(c_a)(x-\\iota(a))^{-1}=0$, then $c_a=0$ for every $a\\in S$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00FT (lemma-dimension), proof, the linear independence of the elements 1/(t-lambda), after embedding F(t) into E by t mapped to x; Mathlib states the resulting field-extension form directly."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If x is transcendental over a field F in a field extension E then the family of inverses (x-a) indexed by a in F is linearly independent over F",
+   "results": "{\"t\": \"2026-10-23T18:55:37Z\", \"tool\": \"leanfinder\", \"query\": \"If x is transcendental over a field F in a field extension E then the family of inverses (x-a) indexed by a in F is linearly independent over F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Transcendental.linearIndependent_sub_inv\", \"linearIndependent_pow\", \"AlgebraicIndependent.linearIndependent\", \"AlgebraicIndependent.transcendental\", \"AlgebraicIndependent.polynomial_aeval_of_transcendental\", \"MvPolynomial.algebraicIndependent_polynomial_aeval_X\", \"algebraicIndependent_of_finite'\", \"AlgebraicIndependent.option_iff_transcendental\"], \"digest\": \"86c94460313f1790\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Transcendental.linearIndependent_sub_inv; source signature read at Mathlib/RingTheory/Algebraic/LinearIndependent.lean:28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Transcendental.linearIndependent_sub_inv",
+   "results": "{\"t\": \"2026-10-23T18:55:35Z\", \"tool\": \"loogle\", \"query\": \"Transcendental.linearIndependent_sub_inv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Transcendental.linearIndependent_sub_inv\"], \"digest\": \"c494439067ef5ac8\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Transcendental.linearIndependent_sub_inv; source signature read at Mathlib/RingTheory/Algebraic/LinearIndependent.lean:28"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverses of x minus a for a in a field are linearly independent if x is transcendental",
+   "results": "{\"t\": \"2026-10-23T18:55:35Z\", \"tool\": \"leansearch\", \"query\": \"The inverses of x minus a for a in a field are linearly independent if x is transcendental\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Transcendental.linearIndependent_sub_inv\", \"AlgebraicIndependent.linearIndependent\", \"algebraicIndependent_iff_transcendental\", \"AlgebraicIndependent.option_iff\", \"AlgebraicIndependent.option_iff_transcendental\", \"algebraicIndependent_singleton_iff\", \"AlgebraicIndepOn.insert\", \"linearIndependent_pow\"], \"digest\": \"fb3a7fce6cc867f9\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Transcendental.linearIndependent_sub_inv; source signature read at Mathlib/RingTheory/Algebraic/LinearIndependent.lean:28"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Transcendental.linearIndependent_sub_inv",
+   "results": "{\"t\": \"2026-10-23T18:55:34Z\", \"tool\": \"grep\", \"query\": \"theorem Transcendental.linearIndependent_sub_inv\", \"sub\": \"RingTheory/Algebraic/LinearIndependent.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"28\"], \"digest\": \"7a90ecb462372aec\"}",
+   "date": "2026-10-24",
+   "verdict": "match: Transcendental.linearIndependent_sub_inv; source signature read at Mathlib/RingTheory/Algebraic/LinearIndependent.lean:28"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Transcendental.linearIndependent_sub_inv",
+  "file": "Mathlib/RingTheory/Algebraic/LinearIndependent.lean",
+  "line": 28,
+  "how": "exact: Transcendental.linearIndependent_sub_inv at lines 28-31, with the F-algebra structure on E induced by the given unital homomorphism. Transcendental is the absence of a nonzero annihilating polynomial; LinearIndependent is precisely the finite-relation condition written here. Read lines 26-54."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cardinal-generator-nullstellensatz",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent. Auxiliary input: Tag 0B8E: choose a sufficiently large algebraically closed extension for an arbitrary etale scheme atlas. Supporting input: Nullstellensatz for an algebra with fewer generators than the cardinality of the field. Supporting step in Stacks 00FU: Tag 00FT (lemma-dimension), proof, the linear independence of the elements 1/(t-lambda), after embedding F(t) into E by t mapped to x; Mathlib states the resulting field-extension form directly.",
+   "via": [
+    "lem-sfb-cardinal-generator-nullstellensatz",
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-sfb-separated-group-space-geometric-scheme",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

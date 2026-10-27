@@ -1,0 +1,130 @@
+{
+ "id": "def-sf-finite-exceptional-compositor-maps",
+ "kind": "definition",
+ "title": "Canonical finite-Tor compact-support and exceptional compositor maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field and coefficient datum $D,B$ of [sk-def-sf-setting] and the specified operations of [sk-def-sf-operations]. For a finite coefficient stage $(E,n)$ with $n\\ge1$, write $\\mathcal C_{T,E,n}=\\Dctf(T,\\mathcal O_E/\\varpi_E^n)$ for the finite-Tor constructible category, and $\\mathcal D_{T,E,n}$ for the constructible category underlying the finite operations. Define $i_T:\\mathcal C_{T,E,n}\\to\\mathcal D_{T,E,n}$ to be the full-subcategory inclusion, forgetting only the finite-Tor condition.\n\nLet $h:U\\to V$ be a separated finite-type morphism between finite-type $k$-schemes, let $c_h$ be a compactification, and let $P_h$ be a normalized system of constructible operations and adjunctions as in [lem-sf-constructible-exceptional-adjunction-coefficients]. Write $F_h$ for its finite-stage compact-support operation and $S_h$ for the specified finite constructible compact-support operation. Define $\\lambda_h:i_VF_h\\xrightarrow\\sim S_hi_U$ as the unique lift through the fully faithful inclusion into the ambient derived category of the composite of the normalized realization of $F_h$, the canonical finite-image comparison, and the inverse of the specified realization of $S_h$.\n\nFor composable separated finite-type morphisms $f:X\\to Y$, $g:Y\\to Z$, put $x=g\\circ f$. Choose compactifications $c_f,c_g,c_x$, and normalized systems $P_f,P_g,P_x$ at these maps. Let $\\gamma:S_x\\xrightarrow\\sim S_gS_f$ be the canonical compactification composition isomorphism of [thm-sf-comp-composition], with functors here written in application order. Define $\\alpha:F_gF_f\\xrightarrow\\sim F_x$ as the unique lift through $i_Z$ of the pasted isomorphism obtained by applying $\\lambda_g$, then $\\lambda_f$, then $\\gamma^{-1}$, then $\\lambda_x^{-1}$, with the canonical functor associators. Thus the ambient image of $\\alpha$ is the specified compactification compositor; it is not an arbitrary isomorphism.\n\nFinally, let $X,Y,Z$ be schemes and let $s$ be any one coefficient stage of [lem-sf-constructible-exceptional-adjunction-coefficients]. For operations $A:F_A\\dashv G_A$, $H:F_H\\dashv G_H$, $K:F_K\\dashv G_K$ between $\\mathcal C_{X,s},\\mathcal C_{Y,s}$, between $\\mathcal C_{Y,s},\\mathcal C_{Z,s}$, and between $\\mathcal C_{X,s},\\mathcal C_{Z,s}$, respectively, and a specified $\\alpha:F_HF_A\\xrightarrow\\sim F_K$, define $c:G_AG_H\\xrightarrow\\sim G_K$ to be the conjugate isomorphism of $\\alpha^{-1}$ under the composite adjunction and $F_K\\dashv G_K$, in the sense of [def-weil-pbc-adjunction-conjugate].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Complement: compact-support composition law and its conjugate under the composite adjunction; finite-Tor restriction used in the final compatibility sentence"
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sf-operations",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support composition restricted to finite Tor constructible categories and conjugate exceptional composition",
+   "results": "HasCompactSupport.comp_homeomorph; HasCompactSupport.comp_isClosedEmbedding; HasCompactMulSupport.comp_homeomorph; HasCompactMulSupport.comp_isClosedEmbedding; CompactlySupportedContinuousMap.comp; CompactlySupported.term_→C_c_; CompactlySupportedContinuousMap.compAddMonoidHom; CompactlySupportedContinuousMapClass.mk",
+   "date": "2026-10-24",
+   "verdict": "No relevant sheaf-theoretic construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full subcategory inclusion lifts compact support composition and conjugateIsoEquiv defines exceptional composition",
+   "results": "CategoryTheory.Functor.essImage.liftFunctorCompIso; CategoryTheory.ObjectProperty.liftCompιOfLEIso; AlgebraicTopology.DoldKan.Compatibility.τ₁; CategoryTheory.ObjectProperty.liftCompιIso; AlgebraicTopology.DoldKan.Compatibility.υ; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app",
+   "date": "2026-10-24",
+   "verdict": "Generic full-subcategory infrastructure; exact construction already exists in the project."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteAlpha|exceptionalIso|finiteInclusion|finiteLeft (Mathlib/CategoryTheory)",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib definition with these names."
+  },
+  {
+   "tool": "rg",
+   "query": "finiteAlpha|exceptionalIso|finiteInclusion|finiteLeft (lean/WeilConjectures and lean/Sheaf)",
+   "results": "Exact four definitions in Sheaf/Paper/ConstructibleExceptionalCompositor.lean:149,167,239,277; other finiteLeft/finiteInclusion hits are unrelated constructions. No exact upstream construction in WeilConjectures.",
+   "date": "2026-10-24",
+   "verdict": "Reuse these four published definitions with existing:true; no duplicate module."
+  },
+  {
+   "tool": "grep / blueprint_refs.py",
+   "query": "DAG definition ownership of ConstructibleExceptionalCompositor; blueprint_refs.py search exceptional compositor",
+   "results": "No definition node owns Sheaf.Paper.ConstructibleExceptionalCompositor; 0 blueprint nodes match exceptional compositor.",
+   "date": "2026-10-24",
+   "verdict": "A new definition node is required for the four existing pure constructions; the theorem node is not their definition owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-finite-exceptional-compositor-coefficients",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Complement: the compact-support composition isomorphism and its adjunction conjugate; final coefficient compatibility sentence",
+   "via": [
+    "lem-sf-finite-exceptional-compositor-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleExceptionalCompositorData",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCompositor.finiteAlpha",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCompositor.finiteInclusion",
+   "WeilConjectures.ConstructibleExceptionalCompositor.finiteLeft",
+   "WeilConjectures.ConstructibleExceptionalCompositor.exceptionalIso",
+   "WeilConjectures.ConstructibleExceptionalCompositor.finiteAlpha"
+  ],
+  "statement": "def finiteAlpha (E : FieldStage.{u} B.l) (n : ℕ+)\n    (S : SixFunctorOperationDatum D B E.carrier n n.pos)\n    (cf : Compactification f.hom.left) (cg : Compactification g.hom.left)\n    (cx : Compactification (f ≫ g).hom.left) :\n    (P.ring.operation cf (.finite E n)).F ⋙ (Q.ring.operation cg (.finite E n)).F ≅\n      (R.ring.operation cx (.finite E n)).F",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership repair for returned delivery f98d7b5ad50c (H2). These are the four already-published pure constructions, not the theorem conclusion of lem-sf-constructible-exceptional-compositor. finiteAlpha lifts the specified compositor, finiteLeft its normalized realization, finiteInclusion forgets the Tor condition, and exceptionalIso is conjugateIsoEquiv of inverse alpha.",
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalCompositorData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d10f841f8",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d10f841f8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Fixes the earlier H2 return (Q123 05dc, N9 f98d): new existing:true definition node def-sf-finite-exceptional-compositor-maps owns finiteInclusion/finiteLeft/finiteAlpha/exceptionalIso in Sheaf.Paper.ConstructibleExceptionalCompositor; all four exist with real constructions; its lean.statement equals the finiteAlpha signature and its prose describes all four correctly; no other definition node owns the module in side-live 9a9a239. Item node differs from live only in lean and stmt_deps (theorem replaced by the definition node); statement, proof and proof_deps byte-identical; lean.statement is verbatim in the file; owner module publicly imported; only proof is sorry. Re-read the statement: alpha = finiteAlpha, c = conjugate of alpha^-1, coefficient changes are quotient / ramified extension at level e*n / extension then quotient with pinned maps, q canonical and b counit-normalized, main display plus both transpose equalities; no added flatness or smoothness; edge cases m=n, n=1, identity maps, empty schemes, zero objects covered; single universe u. Report has Worker report and Second reading by N9 (standard direct-delivery notice, advisory). Changed no file, so no compile; worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-constructible-exceptional-compositor + 5 nodes vs delivered Lean (item, Data, LeftCompositorCoherence, CompactSupportTermHomFinite) and published module; universe params [u] verified; 3 direct importers compiled"
+ }
+}

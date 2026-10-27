@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-locally-finite-compact-support-stage-action",
+ "kind": "statement",
+ "title": "The rational compact-support stage morphism",
+ "statement": "With prime l, finite-field datum D, l != D.p, X and Y finite-type over D.k, a separated finite-type D.k-morphism f, coefficient construction P for the lifted PadicAlgCl and compactification c, there is a StageAction. Its stage functors are exactly P.ring.operation at rational finiteField E, and its transition isomorphisms are exactly P.fields.rationalComparison along the actual coefficient inclusions of unlifted PadicAlgCl.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.7–6.8, especially Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; agent decomposition of lem-sf-locally-finite-adic-compact-support-realization"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Use literal transition and associator records for the source and target stage systems. The uniqueness specification of stageSystem identifies these records with the published systems. Take the P rational functor at each stage and q at every coefficient inclusion. The normalized rational left composition law gives the morphism coherence equation. Identify the composite algebra homomorphism with coefficientInclusion along the transitive relation; this removes the equality transport in the normalized associator. Transport the resulting morphism along the two whole-system equalities; its functors and q remain heterogeneously equal to the original specified data.",
+   "uses": [
+    "lem-sf-normalized-rational-left-laws",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-sf-normalized-rational-left-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The existing native compact-support realization plan, separated into native geometry, rational stage action, finite-stage comparison, and common-stage descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support of constructible adic complexes commutes with realization by extension of scalars to the locally finite algebraic closure coefficient sheaf",
+   "results": "Eight results: compact support of functions, condensed sets and the p-adic complex field. No sheaf-derived compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence realizes a common finite coefficient field derived compact support functor as compact support in locally finite adic sheaves",
+   "results": "Eight results on condensed modules, free modules and locally constant modules; none supplies the native transport or the compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "Unknown identifier in Mathlib; StageSystem is in the adopted source library.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; use the existing project stage system."
+  },
+  {
+   "tool": "grep",
+   "query": "locally_finite_adic_compact_support|NativeGeometry|rationalCocycle",
+   "results": "No Mathlib matches. Project rg located the assigned theorem, its consumers and CoefficientFieldCoherence.rationalCocycle.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific coefficient comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicCompactSupportRealization",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "Current cor-coef-verdier-weil-equivariance, final common-field-comparisons paragraph; Bhatt--Scholze Remark 6.8.15. The rational compact-support stage morphism.",
+   "via": [
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteCompactSupportStageAction",
+  "file": "lean/Sheaf/Paper/LocallyFiniteCompactSupportStageAction.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.locally_finite_compact_support_stage_action",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.locally_finite_compact_support_stage_action"
+  ],
+  "statement": "theorem locally_finite_compact_support_stage_action : Nonempty (StageAction l D hl P c)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes + verbatim Data split (diff vs clone) + Brown adaptation timed (published orig 75 s main / 76 s vs delivery, adapted 8.9 s) + axioms + 6 importers OK"
+ }
+}

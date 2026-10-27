@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-standard-graded-vertex-dimension",
+ "kind": "statement",
+ "title": "Dimension of a standard graded algebra is attained at the vertex",
+ "statement": "Let $k$ be a field [def-weil-field] and let $S=\\bigoplus_{j\\ge0}S_j$ be a standard graded $k$-algebra [def-pc-standard-graded-algebra], with $S_0=k$ and finitely many degree-one algebra generators. The irrelevant ideal $\\mathfrak m=S_+=\\bigoplus_{j>0}S_j$ is maximal, and localization [def-weil-pbc-localization-at-prime] at this ideal preserves Krull dimension [def-weil-pbc-krull-dimension-ring]: $$\\dim S_{\\mathfrak m}=\\dim S.$$ No reducedness, domain or positive-dimension hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P6, lemma-dimension-graded, proof, first equality paragraph: dim(S)=dim_x Spec(S)=dim(S_m). This part precedes, and does not use, the Hilbert-function comparison; it uses homogeneous minimal primes (Tag 00JU, lemma-graded-ring-minimal-prime) and dimension at a point (Tag 00OT, lemma-dimension-at-a-point-finite-type-over-field)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "The degree-zero projection $\\epsilon:S\\to S_0=k$ is a ring homomorphism: in a nonnegative grading, the degree-zero part of a product is the product of the degree-zero parts. It is surjective on constants and has kernel $\\mathfrak m=S_+$. Thus $S/\\mathfrak m=k$ is a field, so $\\mathfrak m$ is maximal (and prime). The finite list of degree-one generators also makes $S$ a finite type $k$-algebra.",
+   "uses": [
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, lemma-dimension-graded, assertion (1) and proof, first sentence."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be any minimal prime of $S$ (a prime containing no strictly smaller prime). By [lem-sfb-prime-homogeneous-core], its homogeneous core $\\mathfrak q^*$ is a homogeneous prime contained in $\\mathfrak q$; minimality gives $\\mathfrak q^*=\\mathfrak q$. For $a\\in\\mathfrak q$, its degree-zero component $a_0$ therefore lies in $\\mathfrak q\\cap k$. A nonzero element of $k$ is a unit in $S$, so properness forces $a_0=0$. Hence $a\\in S_+$, proving that every minimal prime is contained in $\\mathfrak m$.",
+   "uses": [
+    "lem-sfb-prime-homogeneous-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JU, lemma-graded-ring-minimal-prime, proof via Tag 00JT, lemma-smear-out; Tag 00P6, assertion (2)."
+   }
+  },
+  {
+   "text": "Put $X=\\operatorname{Spec}S$ and let $x$ correspond to $\\mathfrak m$. Apply [lem-weil-pbc-dimension-at-point-components] to the finite type $k$-algebra $S$ at $x$. It gives a non-negative integer $n=\\dim_xX$, equal to the attained maximum of $\\dim(S/\\mathfrak q)$ for minimal primes $\\mathfrak q\\subseteq\\mathfrak m$. By step 2 these are all minimal primes of $S$. The same cited statement gives $\\dim_xX=\\min_{\\mathfrak n\\supseteq\\mathfrak m}\\dim S_{\\mathfrak n}$ over maximal ideals $\\mathfrak n$. Since $\\mathfrak m$ is maximal, this family has the single member $\\mathfrak n=\\mathfrak m$, so $\\dim S_{\\mathfrak m}=n$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, proof, first equality paragraph, using Tag 00OT, lemma-dimension-at-a-point-finite-type-over-field, equality of (1), (2), (3)."
+   }
+  },
+  {
+   "text": "For any point $y\\in X$, another application of [lem-weil-pbc-dimension-at-point-components] expresses $\\dim_yX$ as the maximum of $\\dim(S/\\mathfrak q)$ over minimal primes contained in the prime of $y$. This is a subfamily of the family in step 3, so $\\dim_yX\\le n$. By [lem-weil-pbc-dimension-supremum-local-dimensions], $\\dim X=\\sup_y\\dim_yX\\le n$; the point $x$ gives the reverse inequality. Finally [lem-weil-pbc-spec-topological-krull-dimension-ring] identifies $\\dim X$ with $\\dim S$. Therefore $\\dim S= n=\\dim S_{\\mathfrak m}$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6, proof, first equality paragraph; expanded using Tag 00OT, Tag 0B7I (topology.tex, lemma-dimension-supremum-local-dimensions), and Tag 00KE (definition-Krull)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-graded-algebra",
+  "lem-sfb-prime-homogeneous-core",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P6, lemma-dimension-graded, first equality paragraph; the homogeneous-prime input is Tag 00JT and the point-dimension input is Tag 00OT. The global-dimension equality is expanded using Topology Tag 0B7I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localization of a finitely generated standard graded algebra over a field at its irrelevant maximal ideal has the same Krull dimension as the algebra",
+   "results": "8 hits: IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.krullDimLE_of_isLocalization_maximal, Algebra.Presentation.localizationAway_dimension_zero, Ring.KrullDimLE.of_isLocalization, Module.supportDim_self_eq_ringKrullDim, Ring.DimensionLEOne.localization, MvPolynomial.ringKrullDim_of_isNoetherianRing, HomogeneousLocalization.deg. These results give localization dimension as prime height, bounds using ALL maximal localizations, grading generators, or homogeneous localization definitions; none says dimension is attained at the irrelevant ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(irrelevant|homogeneous|graded)|(irrelevant|homogeneous|graded).*ringKrullDim",
+   "results": "0 hits: none. These results give localization dimension as prime height, bounds using ALL maximal localizations, grading generators, or homogeneous localization definitions; none says dimension is attained at the irrelevant ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A standard graded algebra over a field has the same Krull dimension as its localization at the homogeneous maximal ideal",
+   "results": "8 hits: Ring.krullDimLE_of_isLocalization_maximal, IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.KrullDimLE.of_isLocalization, IsLocalRing.maximalIdeal_height_eq_ringKrullDim, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Ring.DimensionLEOne.localization, HomogeneousLocalization, HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization. These results give localization dimension as prime height, bounds using ALL maximal localizations, grading generators, or homogeneous localization definitions; none says dimension is attained at the irrelevant ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"irrelevant\"",
+   "results": "0 hits: none. These results give localization dimension as prime height, bounds using ALL maximal localizations, grading generators, or homogeneous localization definitions; none says dimension is attained at the irrelevant ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of a finitely generated positively graded algebra with degree zero a field is attained at the vertex homogeneous maximal ideal",
+   "results": "8 hits: GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, HomogeneousLocalization.deg, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, HomogeneousIdeal.irrelevant_eq_span, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, HomogeneousLocalization.NumDenSameDeg.deg_one. These results give localization dimension as prime height, bounds using ALL maximal localizations, grading generators, or homogeneous localization definitions; none says dimension is attained at the irrelevant ideal.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of a standard graded algebra over a field at its irrelevant maximal ideal has the same Krull dimension",
+   "results": "{\"t\": \"2026-10-24T10:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"The localization of a standard graded algebra over a field at its irrelevant maximal ideal has the same Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Ring.KrullDimLE.of_isLocalization\", \"Ring.DimensionLEOne.localization\", \"Module.supportDim_self_eq_ringKrullDim\", \"HomogeneousLocalization.isLocalRing\", \"HomogeneousLocalization.instNontrivialAtPrime\"], \"digest\": \"6973dcb8df8f3ef5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: height/localization and general dimension bounds do not say that the irrelevant ideal attains the dimension of a finite type graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a positively graded finite type algebra over a field equals the height of the irrelevant ideal",
+   "results": "{\"t\": \"2026-10-24T10:16:10Z\", \"tool\": \"leanfinder\", \"query\": \"The dimension of a positively graded finite type algebra over a field equals the height of the irrelevant ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Module.supportDim_self_eq_ringKrullDim\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Ideal.sup_height_eq_ringKrullDim\", \"Ideal.sup_primeHeight_eq_ringKrullDim\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\"], \"digest\": \"fd54fa274eb36fd9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: height/localization and general dimension bounds do not say that the irrelevant ideal attains the dimension of a finite type graded algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-standard-graded-cumulative-dimension",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne I.3.6, printed p.18, tangent-cone dimension argument: the standard-graded Hilbert dimension input behind dim C_P(Z)=dim O_{Z,P}. Historical direct-images proof (3), alteration/Picard auxiliary branch recorded in the ancestor item. This input is the equality dim(S)=dim(S at S_+) in the proof of Stacks 00P6, before the Hilbert-function comparison.",
+   "via": [
+    "lem-sfb-standard-graded-cumulative-dimension",
+    "lem-sfb-point-tangent-cone-dimension",
+    "lem-sfb-smooth-pointed-curves-dense",
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-standard-graded-vertex-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Proved maximality by the degree-zero projection, derived homogeneity and containment of minimal primes from the Mathlib homogeneous-core prime theorem, and assembled the vertex dimension equality using the existing point-component formula and dimension-supremum formula. One new Mathlib leaf; no new unsplit nodes. Checked zero degree-one part, nilpotents, finite fields and components of different dimensions.",
+  "blueprint": "Historical direct-images proof (3), alteration/Picard auxiliary branch: the tangent-cone dimension input cited through Milne I.3.6 and the creator chain. The latest blueprint direct-images proof (3) is now the compactification assembly. This algebra lemma remains exactly the Stacks 00P6 vertex-dimension input of its recorded parent; no unit route is changed. tools/blueprint_refs.py ancestor returns None for this historical chain, retained in blueprint.from.node; all new via links explicitly continue that chain. Searches of the whole imported blueprint found no equivalent vertex-dimension or homogeneous-core node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic finite-type affine dimension formula (Stacks 00OT), explicitly the input invoked by 00P6; no node of the item unit states it. Both its maximum and minimum clauses are used."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic topological dimension identity (Stacks 0B7I) used to expand the global-dimension equality in 00P6. It is Lean-closed and does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-c4236c0db",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-c4236c0db (reviewer sub-agent of L); spot-checked: PASS: the item's statement and hypotheses (S_0=k, finitely many degree-1 generators, no domain or reducedness assumption) match Stacks 00P6 clause (1) and the first equality of (3). The four steps follow the 00P6 proof read at algebra.tex l.28423-28428. Step 1 (projection to degree 0, kernel S_+, m maximal, S of finite type) is elementary from def-pc-standard-graded-algebra. Step 2 uses the new leaf: for a minimal prime q, q*=q, so q is homogeneous; a_0 is in q∩k, which is 0, so q ⊆ S_+. This is a few lines and correctly marked elementary. Step 3: 00OT node lem-weil-pbc-dimension-at-point-components, statement read in full. Its max clause runs over all minimal primes by step 2, and its min-over-maximal clause at the maximal m reduces to the singleton {m}, giving dim S_m=n. Step 4: subfamily bound dim_y X<=n, 0B7I sup node, and the Spec/ring dimension leaf give dim S=n. New node lem-sfb-prime-homogeneous-core: a Mathlib leaf for Ideal.IsPrime.homogeneousCore (Radical.lean:144-152; ℕ meets the hypotheses at :43-46), HomogeneousIdeal.isHomogeneous (Homogeneous/Ideal.lean:79-80), homogeneousCore'/homogeneousCore (:115-116, :175-179) and toIdeal_homogeneousCore_le (:184-185). All line numbers checked. The statement is self-contained, cites def-sfb-nonnegative-graded-algebra, and was tested on the trivial grading, k[t] with p=(t-1) (core 0), and the zero ring. It does not restate an item clause. rg -L over the snapshot DAG for 00JT/00JU/homogeneousCore/minimal-prime-homogeneous finds only lem-sfb-primary-homogeneous-core (Noetherian, primary, no primality), the radical, decomposition and graded-prime-avoidance nodes, and unrelated nodes: no duplicate. Confirmed the 00JT proof typo (p⊂q should be q⊂p); it does not affect the delivery. Item tested on k, k[x]/(x^2), k[x,y]/(xy) and k[x,y,z]/(xy,xz). No cycle (the parent cumulative-dimension cites the item, not the reverse). Accepted tool_uses: lem-weil-pbc-dimension-at-point-components (generic 00OT, explicitly invoked by the source) and lem-weil-pbc-dimension-supremum-local-dimensions (Lean-closed on slopmaster2). The blueprint from.node=null continues the historical chain. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StandardGradedVertexDimension",
+  "declaration": "GradedAlgebra.IsStandard.exists_isMaximal_irrelevant_ringKrullDim_eq",
+  "file": "lean/Sheaf/RingTheory/StandardGradedVertexDimension.lean",
+  "statement": "theorem exists_isMaximal_irrelevant_ringKrullDim_eq {k : Type u} [Field k] {S : Type v} [CommRing S] [Nontrivial S] [Algebra k S] (𝒜 : ℕ → Submodule k S) [GradedAlgebra 𝒜] [IsStandard 𝒜] : ∃ (_ : (HomogeneousIdeal.irrelevant 𝒜).toIdeal.IsMaximal), ringKrullDim (Localization.AtPrime (HomogeneousIdeal.irrelevant 𝒜).toIdeal) = ringKrullDim S",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aecf03fa6",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, IsStandard owner (fg_one/adjoin_one, grade_zero_eq_one), module, report (Worker report + Second reading by NV present). Each clause matches: field k; S comm k-algebra with GradedAlgebra 𝒜 : ℕ → Submodule k S; IsStandard = finitely many degree-1 generators; [Nontrivial S] + grade_zero_eq_one encode S_0=k (not stronger; needed since S=0 satisfies IsStandard but irrelevant=⊤); maximality of HomogeneousIdeal.irrelevant is a conclusion witness; ringKrullDim (Localization.AtPrime m) = ringKrullDim S. No reducedness/domain/Noetherian/dimension assumptions; universes u,v independent. lean.statement verbatim. stmt_deps exact; proof inputs only private imports and exist in side-live. Edge cases S=k, k[x]/(x^2), k[x,y]/(xy), unequal components, finite fields covered. Single sorried theorem, docstrings with 00P6 source and blueprint id plus 4 proof steps; no duplicate notion. No compile (no change)."
+ }
+}

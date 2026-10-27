@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "id": "lem-sf-proper-projection-composition",
+ "title": "Composition coherence of proper projection maps",
+ "statement": "For finite commutative A, proper f:X→Y, g:Y→Z, r:X→Z and hr:r=f;g, put k=rightDerivedLowerShriekCongrIso A hr followed by rightDerivedLowerShriekCompIso A f g. For V∈D_A(X), M∈D_A(Z), the canonical projection maps satisfy T_Z(k_V);π_g(FV,M);G(π_f(V,g*M)) = π_r(V,M);Rr_!(T_X(V,l_M));k_(V⊗f*g*M), where l=leftDerivedUpperStarComp A f g r hr. All maps and orientations are precisely those in the attached Lean statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Projection naturality in both diagonal-coordinate triangle computations, specialized to the unit of an arbitrary proper section. Stacks Project: sites-cohomology.tex, Tag 0B56; categories.tex, Tag 0DV0."
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "first take r = f ≫ g. The concrete chosen-compactification projection square says\nπ_g; G(π_f); E = T(E); π_(fg); H(T(l)), where E is\nunboundedEtaleLowerShriekCompIso and l is leftDerivedUpperStarComp. Expanding the three\ncomparison factors identifies E with the inverse of rightDerivedLowerShriekCompIso.\nPrecompose with T(C.hom), postcompose with C.hom, and cancel inverse pairs to get the\nforward square below. Replace projectionMap.app by projectionIso.hom; the latter is the\nasIso of exactly that map. For arbitrary r and hr, eliminate hr. The equality comparison\nthen becomes the identity isomorphism, so its extra factors disappear. This argument\nneither specializes to a section nor uses a tensor unit or an identity projection law. The inverse-square cancellation is proved first for an arbitrary bifunctor. The source square uses its local tensor-instance conventions and explicit derived pullbacks. The final conversion to projectionIso and CoordinateTrace.pull is proved by congruence and proof irrelevance, keeping derived constructions folded.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-shriek-tensor-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Named normalization step of the proper-section projection argument; Composition coherence of proper projection maps. Lean implementation by P3: reuse the chosen-compactification projection square and apply functorial inverse-square cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition and identity coherence of the derived projection formula for proper direct images",
+   "results": "Eight hits: Scheme.Modules.pushforwardComp and its component lemmas, TopCat.Presheaf.Pushforward.comp and component lemmas, and PresheafOfModules.pushforwardComp. None is the unbounded derived projection-map coherence with the specified comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib result. Use the existing project canonical projection calculations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(comp|identity)|(comp|identity).*projection",
+   "results": "25 hits, mostly simps projections and topological projection compositions; no relevant derived projection coherence. Project rg additionally located projectionMap_chosen_comp, the native proper projection square, normalized_identity_projection, and derived_identity_conjugate.",
+   "date": "2026-10-27",
+   "verdict": "Existing project declarations give the mathematical ingredients; the remaining obligations concern their specified canonical comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfProperSectionProjection",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-section-projection-unit",
+   "place": "A proper-section projection proof step: Composition coherence of proper projection maps",
+   "via": [
+    "lem-sf-proper-section-projection-unit",
+    "lem-sf-diagonal-insertion-projection",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfProperProjectionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfProperProjectionComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.properProjectionCompositionOfEq",
+  "statement": "theorem properProjectionCompositionOfEq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (r : X ⟶ Z) [IsProper f] [IsProper g] [IsProper r] (hr : r = f ≫ g)\n    (V : DerivedCategoryModule A X) (M : DerivedCategoryModule A Z) :\n    let k := rightDerivedLowerShriekCongrIso A hr ≪≫ rightDerivedLowerShriekCompIso A f g\n    ((derivedTensor (ModuleCat.{u + 1} A) Z).map (k.hom.app V)).app M ≫\n      (projectionIso A g ((push A f).obj V)).hom.app M ≫\n      (push A g).map ((projectionIso A f V).hom.app ((CoordinateTrace.pull A g).obj M)) =\n    (projectionIso A r V).hom.app M ≫\n      (push A r).map (((derivedTensor (ModuleCat.{u + 1} A) X).obj V).map\n        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g r hr).hom.app M)) ≫\n      k.hom.app\n      (((derivedTensor (ModuleCat.{u + 1} A) X).obj V).obj\n        ((CoordinateTrace.pull A f).obj ((CoordinateTrace.pull A g).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T064502-L-2187715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T103458-L-1087030",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

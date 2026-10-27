@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-affine-monoscheme-hom-universal",
+ "kind": "statement",
+ "title": "Universal property of an affine unsharpened monoid spectrum",
+ "statement": "Let $P$ be a fine commutative monoid, written additively, and let $A(P)=(\\operatorname{Spec}_{\\mathrm{mon}}P,\\widetilde P)$ be its unsharpened monoid spectrum [def-trf-fine-fan-blowup] [def-trf-monoscheme-toric-realization]. Let $T$ be any topological space with a sheaf $\\mathcal A$ of commutative monoids. A local morphism $(T,\\mathcal A)\\to A(P)$ means a continuous map $f:T\\to\\operatorname{Spec}_{\\mathrm{mon}}P$ together with compatible homomorphisms $\\widetilde P(U)\\to\\mathcal A(f^{-1}U)$ for open $U$, such that each stalk homomorphism $\\widetilde P_{f(t)}\\to\\mathcal A_t$ is local: its inverse image of the units is the units. No sharpness assumption is made on $P$ or on the stalks of $\\mathcal A$. Pullback of canonical global sections, using $\\Gamma(A(P),\\widetilde P)=P$, gives a bijection\n$$\\operatorname{Hom}_{\\mathrm{loc}}((T,\\mathcal A),A(P))\\ \\simeq\\ \\operatorname{Hom}_{\\mathrm{Mon}}(P,\\Gamma(T,\\mathcal A)).$$\nThis bijection is natural in $(T,\\mathcal A)$ under local morphisms and in $P$ under monoid homomorphisms.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-affine-monoscheme-hom-ext] to local morphisms with equal canonical numerator pullback. Equality of underlying morphisms implies equality of the local-morphism subtypes by proof irrelevance. This proves injectivity.",
+   "uses": [
+    "lem-trf-affine-monoscheme-hom-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  },
+  {
+   "text": "For a homomorphism phi into global sections, [lem-trf-affine-monoscheme-hom-existence] supplies f, its stalk locality, and its prescribed numerator pullback. Bundle f with its locality proof to get a preimage of phi. Together with the preceding step this proves bijectivity.",
+   "uses": [
+    "lem-trf-affine-monoscheme-hom-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  },
+  {
+   "text": "The global-sections functor is contravariant: Gamma(k followed by f)=Gamma(f) followed by Gamma(k). Taking the underlying monoid homomorphisms and composing with the canonical numerator sections proves affinePullback(k followed by f)=Gamma(k) composed with affinePullback(f), by associativity. The private Lean helper proves this for all sheafed-space morphisms, without locality assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  },
+  {
+   "text": "Apply the surjectivity just proved with T=A(Q) and phi=affineSection(Q) composed with v, obtaining a local g. The preceding composition identity, its prescribed pullback equality, and associativity give affinePullback(f followed by g)=affinePullback(f) composed with v for every local f. Any other g satisfying the displayed conjunction has the same numerator pullback, so the injectivity already proved makes it equal to g. This proves the unique-existence and monoid-naturality clause. No separate spectrum-map construction or composite-locality theorem is required for the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-monoscheme-hom-ext",
+  "lem-trf-affine-monoscheme-hom-existence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i), printed p.99, with 3.1.2--3.1.6, pp.98--99; details of the straightforward sheaf construction written out. The Lean proof isolates existence and rigidity, then proves bijectivity, both naturalities and uniqueness by functoriality and associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidalSpace|monoscheme|monoid.*spectrum",
+   "results": "{\"t\": \"2026-10-23T10:46:07Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidalSpace|monoscheme|monoid.*spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Factorization.lean\"], \"digest\": \"d6ff0dadc3273cb5\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectrum functor for commutative monoids is right adjoint to global sections of locally monoidal spaces, with local homomorphisms on stalks.",
+   "results": "{\"t\": \"2026-10-23T10:46:07Z\", \"tool\": \"leansearch\", \"query\": \"The spectrum functor for commutative monoids is right adjoint to global sections of locally monoidal spaces, with local homomorphisms on stalks.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"CategoryTheory.Sheaf.Γ\", \"AlgebraicGeometry.Spec.faithful\", \"AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\"], \"digest\": \"9535dd99c6a02b1f\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidSpectrum\"",
+   "results": "{\"t\": \"2026-10-23T10:46:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fine commutative monoid P, local morphisms of monoidal spaces from X to the unsharpened monoid spectrum Spec P correspond naturally to monoid homomorphisms P to global sections of the monoid sheaf on X.",
+   "results": "{\"t\": \"2026-10-23T10:46:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a fine commutative monoid P, local morphisms of monoidal spaces from X to the unsharpened monoid spectrum Spec P correspond naturally to monoid homomorphisms P to global sections of the monoid sheaf on X.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_symm_apply\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\"], \"digest\": \"0ffe19dd7e16cded\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidalSpace|MonoidSpectrum|monoscheme|KatoFan",
+   "results": "{\"t\": \"2026-10-23T10:46:31Z\", \"tool\": \"grep\", \"query\": \"MonoidalSpace|MonoidSpectrum|monoscheme|KatoFan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalSpace\"",
+   "results": "{\"t\": \"2026-10-23T10:46:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a fine commutative monoid P to global sections of a sheaf of monoids uniquely defines a continuous map to prime ideals of P and compatible local maps on the localized monoid stalks.",
+   "results": "{\"t\": \"2026-10-23T10:46:33Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a fine commutative monoid P to global sections of a sheaf of monoids uniquely defines a continuous map to prime ideals of P and compatible local maps on the localized monoid stalks.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.StructureSheaf.toOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.StructureSheaf.comapFun\", \"AlgebraicGeometry.StructureSheaf.openToLocalization\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.StructureSheaf.comap_apply\"], \"digest\": \"ecf5808040262859\"} Read the returned signatures: the semantic hits are for locally ringed spaces and commutative rings, not unsharpened commutative-monoid spectra; the DedekindDomain grep hit is an unrelated identifier.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidalSpace|Monoscheme|monoscheme",
+   "results": "{\"t\": \"2026-10-23T11:45:19Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidalSpace|Monoscheme|monoscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read all returned signatures: only commutative-ring spectra/locally ringed spaces or the general global-sections functor; none supplies spectra of arbitrary commutative monoids and local maps of monoid sheaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The monoid spectrum functor is right adjoint to global sections on locally monoidal spaces.",
+   "results": "{\"t\": \"2026-10-23T11:45:19Z\", \"tool\": \"leansearch\", \"query\": \"The monoid spectrum functor is right adjoint to global sections on locally monoidal spaces.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"CategoryTheory.Sheaf.Γ\", \"AlgebraicGeometry.Spec.faithful\", \"CategoryTheory.instIsRightAdjointSheafΓ\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"AlgebraicGeometry.ΓSpec.adjunction\"], \"digest\": \"d488781a6db9e10c\"} Read all returned signatures: only commutative-ring spectra/locally ringed spaces or the general global-sections functor; none supplies spectra of arbitrary commutative monoids and local maps of monoid sheaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidSpectrum\"",
+   "results": "{\"t\": \"2026-10-23T11:45:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read all returned signatures: only commutative-ring spectra/locally ringed spaces or the general global-sections functor; none supplies spectra of arbitrary commutative monoids and local maps of monoid sheaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local morphisms from a space with a sheaf of commutative monoids to the unsharpened spectrum of a fine monoid P correspond to monoid homomorphisms P to global sections.",
+   "results": "{\"t\": \"2026-10-23T11:45:21Z\", \"tool\": \"leanfinder\", \"query\": \"Local morphisms from a space with a sheaf of commutative monoids to the unsharpened spectrum of a fine monoid P correspond to monoid homomorphisms P to global sections.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\"], \"digest\": \"8462ce2a749d3133\"} Read all returned signatures: only commutative-ring spectra/locally ringed spaces or the general global-sections functor; none supplies spectra of arbitrary commutative monoids and local maps of monoid sheaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a commutative monoid to sections of a monoid sheaf determines a continuous map to prime ideals by taking the nonunit locus at each stalk and extends to local stalk homomorphisms.",
+   "results": "{\"t\": \"2026-10-23T11:45:22Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a commutative monoid to sections of a monoid sheaf determines a continuous map to prime ideals by taking the nonunit locus at each stalk and extends to local stalk homomorphisms.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toOpen\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecFun\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.StructureSheaf.comap_apply\", \"AlgebraicGeometry.StructureSheaf.comapFun\", \"AlgebraicGeometry.StructureSheaf.openToLocalization\", \"AlgebraicGeometry.StructureSheaf.toOpen_apply\"], \"digest\": \"5b8e87f71d0811fc\"} Read all returned signatures: only commutative-ring spectra/locally ringed spaces or the general global-sections functor; none supplies spectra of arbitrary commutative monoids and local maps of monoid sheaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-saturated-blowup-product-charts",
+  "date": "2026-10-23",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, 3.1.17--3.1.23, Lemmas 3.2.9, 3.2.12 and 3.2.15, Lemma 3.2.17 and Corollary 3.2.18, printed pp.101--105; regular-over-Q application in 3.2.19, p.106. Re-split of lem-trf-toric-monoid-comparison, original step(s) 7: Saturated monomial blowup charts commute with free monoid products. Supporting input for the categorical monoscheme chart pullback: ILO VIII Lemma 3.1.8(i), p.99, the unsharpened spectrum/global-sections bijection used with the amalgamated sum in Remark 3.1.23.",
+   "via": [
+    "lem-trf-saturated-blowup-product-charts",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-monoscheme-hom-universal",
+  "worker": "stage1",
+  "summary": "Seven-step proof of ILO VIII 3.1.8(i), with no new nodes. Construct the prime map from nonunit germs, glue inverse sections, extend explicit localization maps over the basic opens by the existing sheaf-basis lemma, verify locality through the existing minimal-neighborhood numerator criterion, prove uniqueness and both inverse identities, and check both naturalities. Retain the statement and statement dependencies unchanged. No sharpness, integrality or finiteness of the target stalks is assumed. Every step is below 2000 characters.",
+  "blueprint": "Preserve the recorded historical ancestry through lem-trf-local-term-locality, proof (1)--(2), the monoidal-resolution input to the alteration branch. Its latest blueprint proof instead uses contracting correspondences; this support item does not change the unit or chapter route. The present steps realize the supporting unsharpened affine-chart universal property in ILO VIII 3.1.8(i), used by the existing saturated-blowup product-chart pullback argument and the amalgamated sum in 3.1.23."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-724776901",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-724776901 (reviewer sub-agent of L); spot-checked: I read the whole split against ILO Exposé VIII, 3.1.2–3.1.8 (printed pp.98–99, repository PDF). The item states 3.1.8(i) for fine P, with no sharpness assumed on P or on the stalks of A. Its statement and stmt_deps are byte-identical to clones/live. There are no new nodes, the proof_deps are the union of the step uses, nothing cycles back to the item, and nothing cites SGA. Step 1: x+y is a unit iff both are, so p_t is a prime (possibly empty); V_a is open by the def node's germ definition; f^{-1}D(a)=V_a. Step 2: inverses are unique so they glue; λ_a is well defined using only integrality of P, never cancelling in A; compatibility holds on the generators P and -a, including D(a)=D(a'). Step 3: clause (a) of lem-weil-pbc-sheaf-morphism-on-basis allows any coefficient category, a presheaf source and a sheaf target. Step 4: the smallest neighborhood D(b) with P_b=P-F gives the stalk, and the unit criterion p in F holds on both sides, so the stalk map is local. Steps 5-6: the prime map and the map on each D(a) are forced, and λ_0=φ. Step 7: naturality in both variables and functoriality of A(u) via Step 5, which is what the citer lem-trf-saturated-blowup-product-charts step 6 uses. Edge cases checked: T empty, P a group, P=0, P=N with a unit or nonunit value, nonintegral target stalks, V_a empty, empty generating tuple. The sharp variants (affine-fan-hom-universal, basic-map-local-lift, sharp-section-basic-chart-data) are distinct. MAINTAINER NOTE: the base already has lem-trf-monoid-spectrum-hom-universal (Q53, unsplit, 2026-10-23), which states the same 3.1.8(i) bijection plus the explicit prime and stalk formulas (this item's Steps 1 and 4). The worker's report missed it. This is a duplicate on the base, not a fault of this delivery. Split that node by citing this item, or merge the two."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineMonoschemeHomUniversal",
+  "declaration": "AlgebraicGeometry.Monoscheme.affine_hom_universal",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.affinePullback",
+   "AlgebraicGeometry.Monoscheme.affine_hom_universal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMonoschemeHomUniversal.lean",
+  "statement": "theorem affine_hom_universal (P : Type u) [CommMonoid P] (hP : FineFan.IsFine P) : (∀ T : SheafedSpace CommMonCat.{u}, Function.Bijective (fun f : {f : T ⟶ affine P // FineFan.IsLocalMorphism f} ↦ affinePullback f.val)) ∧ (∀ (T T' : SheafedSpace CommMonCat.{u}) (k : {k : T' ⟶ T // FineFan.IsLocalMorphism k}) (f : {f : T ⟶ affine P // FineFan.IsLocalMorphism f}), affinePullback (k.val ≫ f.val) = (SheafedSpace.Γ.map k.val.op).hom.comp (affinePullback f.val)) ∧ (∀ (Q : Type u) [CommMonoid Q], FineFan.IsFine Q → ∀ v : P →* Q, ∃! g : {g : affine Q ⟶ affine P // FineFan.IsLocalMorphism g}, affinePullback g.val = (affineSection Q).comp v ∧ ∀ (T : SheafedSpace CommMonCat.{u}) (f : {f : T ⟶ affine Q // FineFan.IsLocalMorphism f}), affinePullback (f.val ≫ g.val) = (affinePullback f.val).comp v)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce7f39788",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read the item, both stmt_dep records and their Lean (FineFan.IsFine, IsLocalMorphism, stalkMap; Monoscheme.affine, affineSection, numerator) and ILO VIII 3.1.8. Clauses match: fine P, arbitrary SheafedSpace CommMonCat source, unsharpened spectrumSheaf, IsLocalHom stalk locality, canonical numerator global-section pullback (real composite), Function.Bijective, source naturality via Gamma.map, P-naturality via a unique local g pinned by its pullback, any v. No extra hypotheses; single universe u forced by the category. Statement verbatim; docstrings carry source, blueprint tag and 7 steps; only sorry; stmt_deps unchanged; report sections present; no name clash with FineFan.affinePullback. One module-header compile probe fails because the published FineFanBlowup olean is still non-module, so the legacy header is required; no FIX. Advisories: base duplicate lem-trf-monoid-spectrum-hom-universal (Q53) should cite this theorem; convert to module mode once the published build catches up; locality of composites is not stated (trivial)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T092841-L-3472970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

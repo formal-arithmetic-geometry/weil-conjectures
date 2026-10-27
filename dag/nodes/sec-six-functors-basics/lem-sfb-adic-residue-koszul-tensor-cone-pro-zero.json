@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero",
+ "kind": "statement",
+ "title": "Noetherian pro-zero cones after tensoring a coefficient augmentation",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, J an ideal, U an object of the small pro-etale site, and a:Fin r to A a finite generating family of J. Let R be the completed coefficient sheaf on U and b its slice sections. Let P be a K-flat cochain complex of R-module sheaves with flat terms [def-pc-kflat-complex]. For any coefficient tower map epsilon from the dual Koszul tower [def-weil-pbc-ringed-koszul-system] to B_n[0] whose composite with the dual Koszul unit is the actual coefficient quotient [lem-sfb-adic-residue-koszul-coefficient-augmentation, def-sfb-adic-residue-quotient-tensor-tower], let alpha be its tensor with P and degreewise transpose. For every n there are m>=n such that the actual strict transition Cone(alpha)_m to Cone(alpha)_n becomes zero in D(R). This conclusion asserts only the cone calculation for an already supplied coefficient augmentation; it constructs neither epsilon nor an isomorphism to a scalar-adjoint tower.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-quotient-tensor-tower",
+  "lem-sfb-adic-residue-koszul-coefficient-augmentation",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M), strict coefficient tensor calculation; algebraization.tex, lemma-derived-completion-koszul (0A0E); more-algebra.tex, lemma-sequence-Koszul-complexes."
+ },
+ "proof": [
+  {
+   "text": "Apply ExteriorAlgebra.noetherian_koszul_augmentation_pro_zero to obtain the normalized algebraic augmentations, diagonal and quotient transitions, their strict squares, and eventually zero derived cone maps.",
+   "uses": [
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply adicResidue_koszul_coefficient_cone_comparison to these normalized algebraic maps and the supplied normalized coefficient augmentation. It gives an additive exact realization E and levelwise cone isomorphisms commuting with every transition. The proved localizedZero_map lemma carries each algebraic zero derived cone map through E; naturality of the cone isomorphisms and cancellation give FlatConstantConeProZero epsilon.",
+   "uses": [
+    "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the given K-flatness to the equivalent independent-coefficient predicate, and apply the proved flatConstantConeProZero_tensor transport lemma on the slice. This gives pro-zero strict cone maps after left tensor by P, including the signed natural tensor-cone comparison.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the actual tensor augmentation once. Its source differs from transposition of the tensored coefficient tower only by adicResidueKoszulTensorTranspose. The identity on the target and this source isomorphism form an isomorphism of arrows. Apply homotopyCofiber.mapArrowIso, then the functor equivalence, to obtain an isomorphism of the actual strict cone towers. The proved proZero_of_towerIso cancellation lemma transfers the pro-zero property to the cone tower in the statement.",
+   "uses": [
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+    "lem-sfb-adic-residue-koszul-coefficient-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "def-pc-kflat-complex",
+  "lem-sfb-adic-residue-koszul-coefficient-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M): algebraic pro-zero, finite coefficient comparison, exact realization, K-flat tensor, and strict cone isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul complex of powers over a Noetherian ring augments to the power ideal quotient with pro zero mapping cone",
+   "results": "8 hits, ordinary local cohomology diagrams, ideal quotient transitions, and AdicCompletion.map_exact.",
+   "verdict": "No match for ringed strict tensor cone transitions; use the existing project algebraic theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"Koszul\"",
+   "results": "0 hits.",
+   "verdict": "No matching Mathlib theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*pro.?zero|[Kk]oszul.*augmentation",
+   "results": "0 hits.",
+   "verdict": "No matching Mathlib theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Koszul complex of powers over a Noetherian ring augments to the power ideal quotient with pro zero mapping cone",
+   "results": "8 hits: identity-cone nullhomotopy, quotient-power transitions, ideal graded quotients and local-cohomology ideal-power diagrams.",
+   "verdict": "No theorem on the actual ringed Koszul tensor cone transitions; retain the existing project algebraic pro-zero theorem.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueStrictKoszulAugmentation",
+  "date": "2026-10-26",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), the application of Stacks 099M: Noetherian pro-zero cones after tensoring a coefficient augmentation.",
+   "via": [
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueKoszulTensorConeProZero",
+  "file": "lean/Sheaf/Paper/AdicResidueKoszulTensorConeProZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_koszul_tensor_cone_proZero",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_koszul_tensor_cone_proZero"
+  ],
+  "statement": "theorem adicResidue_koszul_tensor_cone_proZero\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = J)\n    (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))\n    (hP : P.IsAcyclicTensorKFlat) (hflat : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :\n    let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let b := fun i ↦ ringedKoszulSliceSection\n      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)\n      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)\n        (a i)) U\n    ∀ (ε : ringedKoszulDualTower R r b ⟶ adicResidueQuotientCoefficientTower X J U)\n      (_hε : ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =\n        adicResidueQuotientCoefficientUnit X J U n),\n      ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), (Q R).map\n        ((CochainComplex.mappingCone (C := ℕᵒᵖ ⥤ Mod R)\n          (adicResidueKoszulTensorAugmentation X J U r b P ε)).asFunctor.map\n            (homOfLE h).op) = 0",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T100438-L-30686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T111842-L-1753149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

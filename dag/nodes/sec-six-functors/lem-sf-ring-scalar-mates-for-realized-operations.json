@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-ring-scalar-mates-for-realized-operations",
+ "kind": "statement",
+ "title": "Normalized scalar mates for supplied ambient-realized ring operations",
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type D.k-schemes X,Y and a separated finite-type morphism f:X→Y, without structural separatedness. Suppose that for every compactification c and finite or integral ring stage s we are GIVEN an exact additive adjunction operation(c,s), an ambient compact-support left realization left(c,s), and shift compatibility of that realization [def-sf-ring-stage-assembly-data]. There exist endpoint scalar functors independent of c, with the literal equality realization for finite targets, the published completed scalar-extension equality and inverse comparison at integral generators, normalized identity tensor unitors for every actual identity coefficient map, and for every c and allowed coefficient map invertible shift-compatible q and b satisfying the counit-transpose equation and CounitQNormalized with respect to the supplied realizations. This constructs no operation, adjunction, finite exceptional realization, integral compact-support identification or scalar associator.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26; original coefficient-stage construction steps 1--4"
+ },
+ "proof": [
+  {
+   "text": "Choose the scalar restriction package at X and at Y independently of compactification, retaining all three finite/completed normalizations and the shift-compatible realizations. Reindex these choices by the endpoint Bool.",
+   "uses": [
+    "lem-sf-ring-endpoint-scalar-restrictions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed compactification and allowed coefficient map, obtain invertibility of the ambient comparison and the exceptional mate test. Compose the two scalar realization isomorphisms, the supplied left realizations and asIso of the ambient comparison. Lift that natural isomorphism through the fully faithful target inclusion to define q. Its map/preimage equation and cancellation of realization inverses prove CounitQNormalized.",
+   "uses": [
+    "lem-sf-ring-canonical-scalar-invertibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient comparison, scalar realizations and supplied left realizations commute with shifts. Composition and whiskering do too. Faithfulness of the inclusion reflects the shift equation, so q commutes with shifts. Define beta by mateEquiv of inverse q and use the geometric test to make it an isomorphism b. Mathlib mateEquiv_counit and q hom-inverse cancellation prove the counit equation. The explicit unit-square-counit word defining mateEquiv gives shift compatibility of b.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the normalized identity data supplied by the same single-endpoint scalar restriction theorem, independently at X and Y and for every actual identity coefficient map. Combine these with the finite/completed endpoint equalities and the constructed normalized CounitComparison data.",
+   "uses": [
+    "lem-sf-ring-endpoint-scalar-restrictions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ring-endpoint-scalar-restrictions",
+  "lem-sf-ring-canonical-scalar-invertibility",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Scalar-mates steps 1--6: separate endpoint restrictions and geometric invertibility; perform the full-inclusion, shift-reflection and counit-mate assembly in Lean."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical scalar mates for compact support exceptional adjunction on constructible finite Tor sheaves",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.counit_app, CategoryTheory.constantSheafΓAdj",
+   "date": "2026-10-27",
+   "verdict": "General adjoint uniqueness or scalar adjunctions only; no normalized geometric ring-scalar assembly theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-27",
+   "verdict": "General adjoint uniqueness or scalar adjunctions only; no normalized geometric ring-scalar assembly theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ring_scalar_mates|RingScalarMates|CounitQNormalized",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "General adjoint uniqueness or scalar adjunctions only; no normalized geometric ring-scalar assembly theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingStageAssembly",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Ring coefficient construction steps 2 and 4: scalar restrictions and their counit mates for already realized operations",
+   "via": [
+    "lem-sf-ring-stage-assembly",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingScalarMates",
+  "file": "lean/Sheaf/Paper/ExceptionalRingScalarMates.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_ring_scalar_mates",
+  "statement": "theorem exists_ring_scalar_mates (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (operation : ∀ (c : Compactification f) (s : RingStage.{max u v} l),\n      Operation.{u, v} l Ω X Y (s.stage l))\n    (left : ∀ (c : Compactification f) (s : RingStage.{max u v} l),\n      LeftRealization.{u, v} l Ω c s (operation c s))\n    (_leftShift : ∀ (c : Compactification f) (s : RingStage.{max u v} l),\n      letI : (RingStage.inclusion.{u, v} l Ω X s).CommShift ℤ :=\n        match s with\n        | .finite E n => @ObjectProperty.commShiftι _ _\n            (finiteTorConstructible l E.carrier n n.pos X) ℤ _ _\n            (finiteTriangulated l E n X).toIsStableUnderShift\n        | .integral E => @ObjectProperty.commShiftι _ _\n            (finiteTorConstructibleIntegral l E.carrier X) ℤ _ _\n            (integralTriangulated l E X).toIsStableUnderShift\n      letI : (RingStage.inclusion.{u, v} l Ω Y s).CommShift ℤ :=\n        match s with\n        | .finite E n => @ObjectProperty.commShiftι _ _\n            (finiteTorConstructible l E.carrier n n.pos Y) ℤ _ _\n            (finiteTriangulated l E n Y).toIsStableUnderShift\n        | .integral E => @ObjectProperty.commShiftι _ _\n            (finiteTorConstructibleIntegral l E.carrier Y) ℤ _ _\n            (integralTriangulated l E Y).toIsStableUnderShift\n      (left c s).hom.CommShift ℤ) :\n    ∃ scalar : ∀ {s t : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))\n      (ha : Allowed l a) (side : Bool),\n    Scalar.{u, v} l Ω a (endpoint X Y side),\n    ∃ finiteScalar_eq : ∀ {s : RingStage.{max u v} l} (E : FieldStage.{max u v} l) (n : ℕ+)\n      (a : PurCompactSupport.Change (s.coefficients l)\n        ((RingStage.finite E n).coefficients l))\n      (ha : Allowed l (s := s) (t := .finite E n) a) (side : Bool),\n    (scalar (s := s) (t := .finite E n) a ha side).functor ⋙\n        RingStage.inclusion.{u, v} l Ω (endpoint X Y side) (RingStage.finite E n) =\n      RingStage.inclusion.{u, v} l Ω (endpoint X Y side) s ⋙\n        pbcDerivedExtend (a.map (endpoint X Y side)),\n    (∀ {s : RingStage.{max u v} l} (E : FieldStage.{max u v} l) (n : ℕ+)\n      (a : PurCompactSupport.Change (s.coefficients l)\n        ((RingStage.finite E n).coefficients l))\n      (ha : Allowed l (s := s) (t := .finite E n) a) (side : Bool),\n    (scalar (s := s) (t := .finite E n) a ha side).realization =\n      eqToIso (finiteScalar_eq (s := s) E n a ha side)) ∧\n    (∀ (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)\n      (side : Bool),\n    (scalar (s := .integral E) (t := .integral L)\n        (PurCompactSupport.completedChange l E.carrier L.carrier i)\n        (Allowed.integral E L i) side).functor ⋙\n        RingStage.inclusion.{u, v} l Ω (endpoint X Y side) (RingStage.integral L) =\n      RingStage.inclusion.{u, v} l Ω (endpoint X Y side) (RingStage.integral E) ⋙\n        integralScalarExtensionOfUniverses l E.carrier L.carrier i (endpoint X Y side)) ∧\n    (∀ (E L : FieldStage.{max u v} l)\n      (i : E.carrier →ₐ[Padic l] L.carrier) (side : Bool)\n      (K : C.{u, v} l Ω (endpoint X Y side) (.integral E)),\n    HEq ((scalar (s := .integral E) (t := .integral L)\n        (PurCompactSupport.completedChange l E.carrier L.carrier i)\n        (Allowed.integral E L i) side).realization.inv.app K)\n      ((completedScalarComparison l E.carrier L.carrier i (endpoint X Y side)).app K.obj)) ∧\n    ∃ identityData : ∀ {s : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l))\n      (h : ∀ T : Scheme.{max u v}, a.map T = 𝟙 _) (ha : Allowed l a) (side : Bool),\n    ScalarIdentity.{u, v} l Ω h (endpoint X Y side) (scalar a ha side),\n    ∃ comparison : ∀ (c : Compactification f) {s t : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))\n      (ha : Allowed l a),\n    CounitComparison.{u, v} l Ω (operation c s) (operation c t)\n      (scalar a ha true).functor (scalar a ha false).functor,\n    ∀ (c : Compactification f) {s t : RingStage.{max u v} l}\n      (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))\n      (ha : Allowed l a),\n    CounitQNormalized.{u, v} l Ω c a (scalar a ha true) (scalar a ha false)\n      (left c s) (left c t) (comparison c a ha)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T034745-L-3682420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T103451-L-1084652",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

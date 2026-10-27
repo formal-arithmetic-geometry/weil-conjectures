@@ -1,0 +1,388 @@
+{
+ "id": "lem-sfb-relative-picard-cube-face-detection",
+ "kind": "statement",
+ "title": "Relative Picard detection by the three identity faces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. For $i=1,2,3$, let $p_i:G_i\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e_i$ and geometrically connected fibres. Group scheme means that addition, inverse and identity are morphisms over $S$ satisfying the commutative group identities; separated means that the diagonal is a closed immersion. Assume either that every $p_i$ is proper [def-weil-proper-morphism], or that $S$ is normal and every geometric fibre of every $G_i$ is semiabelian. Normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Semiabelian means that over an algebraically closed residue-field extension $k$ the fibre is an extension, exact as fppf sheaves, $1\\to(\\mathbf G_{m,k})^r\\to G_{i,k}\\to A\\to1$, where $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$, and $A$ is a proper smooth geometrically connected commutative $k$-group scheme. Put $P=G_1\\times_SG_2\\times_SG_3$ [def-pc-fibre-product] and let $j_i$ be the morphism from the product of the other two factors to $P$ inserting $e_i$ in coordinate $i$. If $M$ is any invertible $\\mathcal O_P$-module [def-sc-invertible-module] such that $j_i^*M\\simeq\\mathcal O_{\\prod_{h\\ne i}G_h}$ for each $i$, then $M\\simeq\\mathcal O_P$. Pullbacks are tensor inverse images [def-pc-module-pullback]. No trivialization of $M$, cubical structure or symmetry condition is supplied as part of this assertion.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-semiabelian-geometric-fibres"
+ ],
+ "proof": [
+  {
+   "text": "We use the following geometry throughout, also after restricting the base to an open or extending a residue field. Smoothness, flatness and local finite presentation are stable under base change and composition by [lem-sfb-stack-chartwise-smooth-etale-calculus]; finite presentation and separatedness are preserved by products using [lem-sfb-space-flat-proper-fp-locality, lem-sfb-space-separated-fp-composition]. Thus every finite product of the $G_i$ is smooth, separated and finitely presented. In case (a) its structure map is proper by [lem-weil-pbc-proper-composition] and proper base change in the locality node. Its fibres are geometrically connected: a product projection is open by [lem-weil-pbc-flat-lfp-open], flatness and local finite presentation above, and surjective by its identity section, with connected fibres, so a clopen partition of its source descends to a clopen partition of its connected target (the two images are disjoint open sets); iterate after every field extension. Each nonempty smooth geometrically connected scheme over a field is geometrically integral: apply [lem-sbc-smooth-connected-generic-geometry-core] over that field, and again over every extension field. The identity sections ensure nonemptiness. In particular all products used below have geometrically integral fibres.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-weil-pbc-proper-composition",
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BF4, first paragraph of proof: geometry and universal structure sheaf pushforward; geometry core Tags 034F, 056T, 01UA"
+   }
+  },
+  {
+   "text": "Here is the unit test needed for uniqueness. Write $H=G_1\\times_SG_2\\times_SG_3$. If a unit $u$ on $P=H$ restricts to $1$ on each single-coordinate axis, pull it back to $H^3$ by $r(h_1,h_2,h_3)=((h_1)_1,(h_2)_2,(h_3)_3)$. Its restriction to each $H$-axis is $1$. Apply [lem-sfb-relative-group-unit-axis-factorization] with group $H$ and $n=3$. Step 1 checks its smoothness, finite-presentation, connected-fibre and proper hypotheses in (a); in (b), normality implies reducedness since an integrally closed domain has no nonzero nilpotents. Thus $r^*u=1$. Pull back by $a(g_1,g_2,g_3)=((g_1,e_2,e_3),(e_1,g_2,e_3),(e_1,e_2,g_3))$, for which $ra=\\mathrm{id}_P$, to obtain $u=1$. This test applies over open subschemes and over fields. In particular two generating sections of the same line that agree on all three faces are equal: their quotient is a global unit, and each axis is contained in a face.",
+   "uses": [
+    "lem-sfb-relative-group-unit-axis-factorization",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, identity (79); reduction from different factors to the already stated repeated-factor unit lemma"
+   }
+  },
+  {
+   "text": "Fix, once on $S$, generating sections $b_i$ of $M|_{F_i}$ supplied by the three triviality assumptions, with $F_i=j_i(\\prod_{h\\ne i}G_h)$ interpreted through its parameter scheme. The section $r_0=b_1|_{(e_1,e_2,e_3)}$ generates the identity pullback. Choose a generating section $c_k$ of $M$ on each axis by restricting any $b_i$ with $i\\ne k$, then multiplying by the pullback of its identity-value ratio so that $c_k(e)=r_0$. For $\\{i,j,k\\}=\\{1,2,3\\}$ define units $a_{ij}=c_j/(b_i|_{\\text{axis }j})$, $a_{ik}=c_k/(b_i|_{\\text{axis }k})$ and $d_i=r_0/b_i(e)$ on the indicated axes or on $S$. Both $a_{ij}$ and $a_{ik}$ have identity value $d_i$. Replace $b_i$ by $b_i'=b_i\\,\\pi_j^*a_{ij}\\,\\pi_k^*a_{ik}/p^*d_i$ on $F_i$. Restriction to axis $j$ cancels $a_{ik}(e)=d_i$, giving $c_j$; similarly for $k$. The new face sections therefore agree on every pairwise intersection (an axis) and on the triple intersection. These operations are pullback, tensor multiplication and division in local rank-one bases, so commute with every base change.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6 geometric cube input; agent elementary normalization of the unchosen face trivializations"
+   }
+  },
+  {
+   "text": "Whenever $M$ has a generating section $t$ over $P_U$, it can be made to equal all three $b_i'$ there. Let $z_i:P_U\\to P_U$ replace coordinate $i$ by its identity, and for a nonempty subset $I$ write $z_I=\\prod_{i\\in I}z_i$. Put $f_I=(b_i'/t)|_{F_I}$ with $F_I$ the face where every coordinate in $I$ is the identity, choosing any $i\\in I$; step 3 makes this independent of $i$. Pull these units to $P_U$ using $z_I$. Define\n$$v=\\frac{\\prod_{|I|=1}z_I^*f_I}{\\prod_{|I|=2}z_I^*f_I}\\,z_{\\{1,2,3\\}}^*f_{\\{1,2,3\\}}.$$\nOn $F_j$, the factors indexed by $I$ and $I\\cup\\{j\\}$ cancel whenever $j\\notin I$, leaving precisely $f_{\\{j\\}}$. Hence $tv$ is a generating section with the prescribed face restrictions. Here $z_I^*$ on $f_I$ means pullback from the parameter scheme $F_I$. This gives existence of normalized sections from triviality, using no cubical structure on $M$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6; agent inclusion-exclusion formula for compatible face frames"
+   }
+  },
+  {
+   "text": "First suppose (a). Regard $P$ as $(G_1\\times_SG_3)\\times_{G_3}(G_2\\times_SG_3)$ and write $q:P\\to G_3$. Step 1 and [lem-sc-proper-flat-global-sections] give universal structure-sheaf pushforward for $G_1$, $G_2$, their product and all their base changes. Apply [lem-sc-picard-diagonal-locally-closed] to $q,M$ to get an immersion $C\\hookrightarrow G_3$ representing the locus where $M$ is pulled back from the parameter. Its finite locally free base module necessarily has rank one, by restriction along the section $(e_1,e_2,\\mathrm{id})$. The geometrically integral fibres in step 1 let [lem-sc-picard-locus-closed] make $C$ closed. At a point $c\\in C$, $M_c$ is trivial, since a line over a field is free. The two identity slices $F_1,F_2$ are trivial by hypothesis. Thus [lem-sc-picard-product-open], applied over $G_3$, gives an open neighbourhood $U$ of $c$ with $M|_{P_U}$ trivial. Its universal property makes $U\\to G_3$ factor through $C$ scheme-theoretically. Consequently $C$ is also open, with its open subscheme structure, not merely open as a set.",
+   "uses": [
+    "lem-sc-proper-flat-global-sections",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-picard-locus-closed",
+    "lem-sc-picard-product-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0BDP, 0BF0, 0BF3; proof of Tag 0BF4, closed and open triviality locus"
+   }
+  },
+  {
+   "text": "The third face says $M|_{G_1\\times_SG_2\\times_Se_3(S)}$ is trivial, so the universal property gives a factorization $e_3:S\\to C$. For each $s\\in S$, the clopen subset $C\\cap(G_3)_s$ of the connected fibre contains $e_3(s)$ and is therefore the whole fibre. Thus the open subscheme $C$ of step 5 has all points of $G_3$, hence equals $G_3$. Its representing property now gives $M\\simeq q^*N$ for a line $N$ on $G_3$. Pull back along $(e_1,e_2,\\mathrm{id})$: the left side is trivial since this map factors through $F_1$, and the right side is $N$. Thus $N$ and $M$ are trivial. This proves (a), with no connectedness assumption on $S$ and no reducedness assumption on $S$.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BF4 proof, final trivialization; replace global connectedness of Z by a section meeting every connected fibre"
+   }
+  },
+  {
+   "text": "For (b), first work over an arbitrary field $k$ with three groups satisfying the geometric semiabelian hypothesis, and a line $M$ trivial on their identity faces. Apply [lem-sfb-geometric-semiabelian-split-quotient] successively to the three groups, enlarging the field each time. After these three finite Galois extensions, take the normal closure of the composite over $k$; finite separability ensures it is again a finite Galois extension $K/k$. We have split-torus torsors $q_i:(G_i)_K\\to A_i$ with $A_i$ abelian varieties. Their product $q:P_K\\to A_1\\times_KA_2\\times_KA_3=:A$ is a torsor under the product split torus: flatness, surjectivity and finite presentation follow from base change and composition, and the torsor isomorphism is the product of the displayed kernel-action isomorphisms. By step 1 the target $A$ is a smooth separated finite-type $K$-scheme. Apply [lem-sfb-split-torus-torsor-line-pullback] to obtain an invertible module $N$ on $A$ and an isomorphism $q^*N\\simeq M_K$.",
+   "uses": [
+    "lem-sfb-geometric-semiabelian-split-quotient",
+    "lem-sfb-split-torus-torsor-line-pullback",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-semistable-reduction-abelian-varieties-2011.pdf",
+    "place": "Theorem 3.1; split-torus line pullback prerequisite, followed by the field cube argument"
+   }
+  },
+  {
+   "text": "For $I\\subseteq\\{1,2,3\\}$ let $z_I:A\\to A$ set the coordinates in $I$ equal to the corresponding identity; $z_\\varnothing=\\mathrm{id}$. Define\n$$C(N)=\\bigotimes_{I\\subseteq\\{1,2,3\\}}(z_I^*N)^{(-1)^{|I|}},$$\nwhere exponent $-1$ denotes the dual line. On the $j$-th identity face the factors for $I$ not containing $j$ pair with those for $I\\cup\\{j\\}$: the two maps agree there, and the exponents are opposite. Evaluation of a line with its dual gives a trivial line, so all three face restrictions of $C(N)$ are trivial. Each $q_i$ preserves the identity, hence $qz_I=z_Iq$. The tensor-pullback formula gives $q^*C(N)\\simeq C(q^*N)\\simeq C(M_K)$. For each nonempty $I$, $z_I$ on $P_K$ factors through an identity face, making $z_I^*M_K$ trivial. Therefore $C(M_K)\\simeq M_K$ as invertible modules. The trivializations used in this cancellation need no compatibility.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 5.1; agent face-cancellation operator on the pulled-back quotient line"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-general-theorem-of-cube] over $K$ to $X=A_1$, $Y=A_2$, $Z=A_3$, the identity points and the line $C(N)$. The first two varieties are proper and geometrically integral by step 1, the third is connected, and its identity is a $K$-point at which the third face of $C(N)$ is trivial by step 8. It follows that $C(N)$ is trivial. Pulling back gives $M_K\\simeq\\mathcal O_{P_K}$. Notice that the cube theorem has been applied to the proper abelian quotient; no properness of $(G_i)_K$ has been asserted.",
+   "uses": [
+    "lem-sc-general-theorem-of-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BF4 over a field; Milne I Theorem 5.1"
+   }
+  },
+  {
+   "text": "The normalized face sections $b_i'$ of step 3 are defined over $k$. Normalize a generating section of $M_K$ by step 4, obtaining $t_K$ restricting to their base changes. For every $\\gamma\\in\\operatorname{Gal}(K/k)$, the canonical descent comparison identifies $\\gamma^*M_K$ with $M_K$, and $\\gamma^*t_K$ and $t_K$ have identical face restrictions. Step 2, over $K$, implies they are equal. The algebra isomorphism in [lem-exc-finite-galois-tensor-decomposition](1), $K\\otimes_kK\\cong\\prod_\\gamma K$, identifies the two pullbacks of $t_K$ on the overlap with exactly these equal sections. Thus the generating section and its inverse map agree on the fpqc overlap. Apply [lem-pc-fpqc-descent] to the finite faithfully flat field cover of $P$: its full faithfulness descends the section and its inverse, giving $M\\simeq\\mathcal O_P$ over $k$. This proves the field assertion over the original residue field, including imperfect fields.",
+   "uses": [
+    "lem-exc-finite-galois-tensor-decomposition",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, full faithfulness and descent of compatible trivializations; finite Galois tensor decomposition"
+   }
+  },
+  {
+   "text": "Return to (b) over the given normal $S$. For every $s\\in S$, the residue-field groups $(G_i)_s$ are smooth separated geometrically connected and geometrically semiabelian. The face trivializations pull back to their identity faces. Steps 7--10, applied over $\\kappa(s)$, prove $M_s$ trivial over that field, not just after algebraic closure. The smooth separated finitely presented morphism $P\\to S$ has nonempty geometrically connected fibres by step 1. Hence [lem-sfb-normal-base-fibrewise-line-locality] gives an open cover $\\{U_a\\}$ of $S$ and lines $N_a$ with $M|_{P_{U_a}}\\simeq p^*N_a$. Pullback along the all-identity section makes $N_a$ isomorphic to $M$ at the identity, which is trivial by any face. Thus $M|_{P_{U_a}}$ is trivial. This is the only passage from field fibres to a possibly non-Noetherian normal base, and it is supplied by the cited locality statement.",
+   "uses": [
+    "lem-sfb-normal-base-fibrewise-line-locality",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7 and its explicitly stated arbitrary-normal-base locality prerequisite"
+   }
+  },
+  {
+   "text": "For each $a$, use step 4 to choose a generating section $t_a$ of $M|_{P_{U_a}}$ restricting to the fixed $b_i'$. On $P_{U_a\\cap U_b}$ their quotient is a unit equal to $1$ on all faces, hence on all axes. The unit test of step 2 gives $t_a=t_b$. The sheaf axiom glues these sections to a global section $t$; their local inverse maps glue as well, so $t$ generates $M$ globally. This proves (b). If $S$ is empty the sheaf is uniquely trivial; if one group is the trivial group, the corresponding face already equals the product, so the same argument includes that case. No face trivialization, symmetry or cubical structure is added to the conclusion or hypotheses: choices made in step 3 are only proof data.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6 geometric cube prerequisite; agent compatible-frame gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-weil-pbc-proper-composition",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-relative-group-unit-axis-factorization",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-picard-locus-closed",
+  "lem-sc-picard-product-open",
+  "lem-sfb-geometric-semiabelian-split-quotient",
+  "lem-sfb-split-torus-torsor-line-pullback",
+  "lem-sc-general-theorem-of-cube",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-normal-base-fibrewise-line-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I 2.6, local copy WANTED. Agent geometric proof via Stacks 0BDP/0BF0/0BF3 for proper families, torus quotients and field cube, explicit normalized-frame Galois descent, and the stated normal-base locality prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For three smooth semiabelian group schemes over a normal base, an invertible sheaf on their product trivial on each identity coordinate plane is trivial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff_free\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M = 1 ↔ Free R M\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-semimodule $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element if and only if $ M $ is a free $ \"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmooth R S] : Subsingleton (H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"smoothSheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a topological manifold $ M $, taking values in the category of commutative groups, where sections over open subsets are smooth maps to a commutative Lie group $ A $, forming commutative g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comap_bot\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \": comap ⊥ f = ⊥\", \"doc\": \"For any morphism $ f: X \\\\to Y $, the pullback of the trivial ideal sheaf $ \\\\bot $ on $ Y $ is the trivial ideal sheaf $ \\\\bot $ on $ X $, i.e., $ \\\\operatorname{comap}(\\\\bot, f) = \\\\bot $.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": (Submodule R A)ˣ ⧸ (Units.map (spanSingleton R).toMonoidHom).range ≃* relPic R A\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules (those generated by a single element) is multiplicatively isomorphic to the rela\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{R : Type u} [CommRing R] :\\n  Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommGroup M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of Picard group restriction from a triple product of abelian or semiabelian schemes to the union of the coordinate planes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pointsPi_injective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [QuasiSeparatedSpace ↥X],\\n  Function.Injective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $ X $ is a quasi-separated scheme, then the decomposition map associating to each morphism $ \\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X $ the corresponding family of morphisms $ \\\\{\\\\operatorname{Spec}(R\"}\n  {\"name\": \"Polynomial.Gal.restrictProd_injective\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"∀ {F : Type u_1} [inst : Field F] (p q : Polynomial F), Function.Injective ⇑(Polynomial.Gal.restrictProd p q)\", \"doc\": \"For any field $ F $ and polynomials $ p $ and $ q $ over $ F $, the restriction homomorphism from the Galois group $ \\\\text{Gal}((p \\\\cdot q)/F) $ to the product group $ \\\\text{Gal}(p/F) \\\\times \\\\text{Gal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : ↥X} {y : ↥Y} {s : ↥S}\\n  {hx : (CategoryTheory.ConcreteCategory.hom f.base) x = s} {hy : (CategoryTheory.ConcreteCategory.hom g.base) y = s}\\n  {x_1 : ↥X} {y_1 : ↥Y} {s_1 : ↥S} {hx_1 : (CategoryTheory.ConcreteCategory.hom f.base) x_1 = \", \"doc\": \"Given schemes $X$, $Y$, $S$ with morphisms $f: X \\to S$ and $g: Y \\to S$, if two pullback triplet structures $(x, y, s, \\text{hx}, \\text{hy})$ and $(x', y', s', \\text{hx}', \\text{hy}')$ are equal, then thei\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_injective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F],\\n  Function.Injective ⇑WeierstrassCurve.Affine.Point.toClass\", \"doc\": \"The additive homomorphism mapping points on an affine Weierstrass curve over a field to the additive class group of its coordinate ring is injective, meaning distinct points correspond to distinct ele\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_injective\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"The canonical morphism from the glued scheme constructed via colimit from the gluing data of an open cover $\\\\mathcal{U}$ to the original scheme $X$ is injective.\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.injective_sum_to\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2), Function.Injective (Profinite.NobelingProof.GoodProducts.sum_to C ho)\", \"doc\": \"The function that maps the disjoint union of the set of good products and the set of maximal products containing a specific element into the set of all products over $ I $ is injective.\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.injective\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I],\\n  Function.Injective (Profinite.NobelingProof.GoodProducts.eval C)\", \"doc\": \"The evaluation function $\\\\text{eval}_C$ that maps good products of elements in a linearly ordered set $I$—via component-wise conversion of Boolean values to integers (true $\\\\mapsto 1$, false $\\\\mapsto \"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [inst_5 : Fact (0 < n)],\\n  Function.Injective ⇑IsDedekindDomain.selmerGroup.fromUnitLift\", \"doc\": \"The group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, defined by lifting units modulo $ n $-th powers in a Dedekind domain $ R $ with frac\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.of.the.cube|theoremOfCube|cubist|cubical|Picard",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"24\", \"text\": \"the special case where `S` is the spectrum of some commutative ring `R` whose Picard group is zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"50\", \"text\": \"elliptic curves over the spectrum `Spec(R)` of `R` in the case that `R` has trivial Picard group\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theorem of the cube for line bundles on a triple product of semiabelian group schemes over a normal base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SemimoduleCat.MonoidalCategory.tensor_ext₃'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic\", \"type\": \"{f g : (M₁ ⊗ M₂) ⊗ M₃ ⟶ M₄} (h : ∀ m₁ m₂ m₃, f (m₁ ⊗ₜ m₂ ⊗ₜ m₃) = g (m₁ ⊗ₜ m₂ ⊗ₜ m₃)) : f = g\", \"doc\": \"For any morphisms $ f, g : (M_1 \\\\otimes M_2) \\\\otimes M_3 \\\\to M_4 $ in the category of semimodules over a commutative semiring $ R $, if $ f(m_1 \\\\otimes m_2 \\\\otimes m_3) = g(m_1 \\\\otimes m_2 \\\\otimes m_3\"}\n  {\"name\": \"TensorProduct.ext_threefold\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"{g h : M ⊗[R] N ⊗[R] P →ₛₗ[σ₁₂] P₂} (H : ∀ x y z, g (x ⊗ₜ y ⊗ₜ z) = h (x ⊗ₜ y ⊗ₜ z)) : g = h\", \"doc\": \"Two linear maps from the threefold tensor product $ M \\\\otimes_R N \\\\otimes_R P $ to a module $ P_2 $ are equal if they agree on all pure tensors of the form $ x \\\\otimes y \\\\otimes z $ for $ x \\\\in M $, $\"}\n  {\"name\": \"SemimoduleCat.MonoidalCategory.tensor_ext₃\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic\", \"type\": \"{f g : M₁ ⊗ (M₂ ⊗ M₃) ⟶ M₄} (h : ∀ m₁ m₂ m₃, f (m₁ ⊗ₜ (m₂ ⊗ₜ m₃)) = g (m₁ ⊗ₜ (m₂ ⊗ₜ m₃))) : f = g\", \"doc\": \"For any morphisms $ f, g : M_1 \\\\otimes (M_2 \\\\otimes M_3) \\\\to M_4 $ in the monoidal category of semimodules over a commutative semiring $ R $, if $ f(m_1 \\\\otimes (m_2 \\\\otimes m_3)) = g(m_1 \\\\otimes (m_2\"}\n  {\"name\": \"ModuleCat.MonoidalCategory.tensor_ext₃'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic\", \"type\": \"{f g : (M₁ ⊗ M₂) ⊗ M₃ ⟶ M₄} (h : ∀ m₁ m₂ m₃, f (m₁ ⊗ₜ m₂ ⊗ₜ m₃) = g (m₁ ⊗ₜ m₂ ⊗ₜ m₃)) : f = g\", \"doc\": \"For any morphisms $ f,g : (M_1 \\\\otimes M_2) \\\\otimes M_3 \\\\to M_4 $ in the category of $ R $-modules, if $ f $ and $ g $ agree on all pure tensors $ m_1 \\\\otimes m_2 \\\\otimes m_3 $ for $ m_i \\\\in M_i $, th\"}\n  {\"name\": \"groupHomology.chainsMap₃\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.Functoriality\", \"type\": \": ModuleCat.of k (G × G × G →₀ A) ⟶ ModuleCat.of k (H × H × H →₀ B)\", \"doc\": \"The linear map from the module of finite support functions on $G^3$ with values in $A$ to the module of finite support functions on $H^3$ with values in $B$, induced by the composition of the linear m\"}\n  {\"name\": \"Algebra.TensorProduct.algEquivOfLinearEquivTripleTensorProduct_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \"(f h_mul h_one x) : (algEquivOfLinearEquivTripleTensorProduct f h_mul h_one : A ⊗[R] B ⊗[R] C ≃ₐ[R] D) x = f x\", \"doc\": \"The algebra equivalence from the triple tensor product $A \\\\otimes_R B \\\\otimes_R C$ to $D$ constructed via a linear equivalence $f$ (satisfying multiplicative compatibility $h_\\\\text{mul}$ and unit pres\"}\n  {\"name\": \"IsApproximateSubgroup.of_small_tripling\", \"module\": \"Mathlib.Combinatorics.Additive.ApproximateSubgroup\", \"type\": \"[DecidableEq G] {A : Finset G} (hA₁ : 1 ∈ A) (hAsymm : A⁻¹ = A) (hA : #(A ^ 3) ≤ K * #A) :\\n  IsApproximateSubgroup (K ^ 3) (A ^ 2 : Set G)\", \"doc\": \"If $ A $ is a finite symmetric subset of a group $ G $ containing the identity element, and the cardinality of the triple product set $ A^3 $ satisfies $ |A^3| \\\\leq K |A| $, then the square $ A^2 $ is\"}\n  {\"name\": \"WeierstrassCurve.c₄_of_isShortNF_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.c₄ = 0\", \"doc\": \"For a Weierstrass curve in short normal form over a commutative ring of characteristic three, the $ c_4 $ invariant is zero, i.e., $ c_4 = 0 $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract group quotients, affine-space construction, ordinary scheme morphism properties and topological bundles do not state this geometric line-module assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract group quotients, affine-space construction, ordinary scheme morphism properties and topological bundles do not state this geometric line-module assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "theoremOfCube|theorem_of_cube|semiabelian|cubical|cubist",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract group quotients, affine-space construction, ordinary scheme morphism properties and topological bundles do not state this geometric line-module assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of restriction of the Picard group of a product of three abelian schemes to the identity coordinate planes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pointsPi_injective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [QuasiSeparatedSpace ↥X],\\n  Function.Injective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $ X $ is a quasi-separated scheme, then the decomposition map associating to each morphism $ \\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X $ the corresponding family of morphisms $ \\\\{\\\\operatorname{Spec}(R\"}\n  {\"name\": \"Polynomial.Gal.restrictProd_injective\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"∀ {F : Type u_1} [inst : Field F] (p q : Polynomial F), Function.Injective ⇑(Polynomial.Gal.restrictProd p q)\", \"doc\": \"For any field $ F $ and polynomials $ p $ and $ q $ over $ F $, the restriction homomorphism from the Galois group $ \\\\text{Gal}((p \\\\cdot q)/F) $ to the product group $ \\\\text{Gal}(p/F) \\\\times \\\\text{Gal\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_injective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F],\\n  Function.Injective ⇑WeierstrassCurve.Affine.Point.toClass\", \"doc\": \"The additive homomorphism mapping points on an affine Weierstrass curve over a field to the additive class group of its coordinate ring is injective, meaning distinct points correspond to distinct ele\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.injective\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I],\\n  Function.Injective (Profinite.NobelingProof.GoodProducts.eval C)\", \"doc\": \"The evaluation function $\\\\text{eval}_C$ that maps good products of elements in a linearly ordered set $I$—via component-wise conversion of Boolean values to integers (true $\\\\mapsto 1$, false $\\\\mapsto \"}\n  {\"name\": \"injective_toPullbackDiag\", \"module\": \"Mathlib/Data/Set/Prod\", \"type\": \"∀ {X : Type u_1} {Y : Sort u_2} (f : X → Y), Function.Injective (toPullbackDiag f)\", \"doc\": \"The diagonal map sending each element $ x \\\\in X $ to the pair $ (x, x) $ in the pullback of $ f $ with itself is injective, meaning if $ (x, x) = (x', x') $ in the pullback, then $ x = x' $.\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.injective_sum_to\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2), Function.Injective (Profinite.NobelingProof.GoodProducts.sum_to C ho)\", \"doc\": \"The function that maps the disjoint union of the set of good products and the set of maximal products containing a specific element into the set of all products over $ I $ is injective.\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.maxToGood_injective\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (hC : IsClosed C) (hsC : Profinite.NobelingProof.contained C (Order.succ o))\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n  (h₁ :\\n    ⊤ ≤\\n      Submodule.span ℤ\\n        (Set.range\\n          (P\", \"doc\": \"If the top element of the $\\\\mathbb{Z}$-module lies in the span of evaluations of products strictly less than $o = \\\\text{ord}(I, ho)$, then the function transforming maximal good products containing $\\\\\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [inst_5 : Fact (0 < n)],\\n  Function.Injective ⇑IsDedekindDomain.selmerGroup.fromUnitLift\", \"doc\": \"The group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, defined by lifting units modulo $ n $-th powers in a Dedekind domain $ R $ with frac\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract group quotients, affine-space construction, ordinary scheme morphism properties and topological bundles do not state this geometric line-module assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-cubical-rigidification",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces",
+   "via": [
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-picard-cube-face-detection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved proper branch by the existing closed/open relative Picard locus; semiabelian branch by split-torus pullback, face cancellation on an abelian quotient, finite Galois descent and normal-base locality. New prerequisites are three genuinely smaller geometric facts, not copies of either cube clause. Explicit compatible frames and unit uniqueness make all descent valid.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability direct-images proof (3), supporting alteration/moduli/Picard route recorded in inherited from.place. Ancestor command returns null; preserved its null and via chain. Steps 1--6 realize proper geometric cube; 7--10 its semiabelian field input; 11--12 normal-base locality and gluing. No unit/chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-picard-diagonal-locally-closed",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-picard-locus-closed",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-picard-product-open",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-general-theorem-of-cube",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-exc-finite-galois-tensor-decomposition",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic scheme geometry/Picard locus or descent tool, used only for its stated assertion in the geometric cube proof; no replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Step 1 uses universal openness of a flat locally finitely presented morphism to prove connectedness of product fibres; the unit has no general openness statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-composition",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-picard-locus-closed",
+  "lem-sc-picard-product-open",
+  "lem-sc-general-theorem-of-cube",
+  "lem-exc-finite-galois-tensor-decomposition",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-c685b7eda",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-c685b7eda (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, the 3 new nodes and every cited statement in full; review.md has the details. The statement is unchanged from live, the item is still unsplit on live, there are no cycles and no SGA citations. Steps 1-6 (proper case): the hypotheses of Stacks 0E0L, 0BDP, 0BF0 and 0BF3 hold. Product-open is applied over G3 to G1×G3 and G2×G3 with sections (e1,id) and (e2,id). Factoring U through C makes C a clopen open subscheme, and e3 forces C=G3. I verified the face normalization a_ik(e)=d_i (step 3) and the inclusion-exclusion cancellation (step 4) by hand. The unit-axis node applied to H=G1×G2×G3 with r∘a=id gives the unit test. Steps 7-10 (field case): split-torus quotient, then C(N) cube on the abelian quotient (0BF4 hypotheses hold, since abelian varieties are geometrically integral by step 1). The Galois descent of the normalized section follows from 03SF(1) and fpqc descent (3). Steps 11-12: locality, then gluing. The 3 new nodes are true and are not duplicates or clauses of the item: (1) maximal-torus splitting of a geometric semiabelian group over any field; (2) Pic surjectivity for split-torus torsors over a smooth base (regular scheme, 0BD9); (3) normal-base fibrewise locality (normal Noetherian approximation plus 0BD7, divisors.tex l.6968). Off-unit tool uses (Picard loci, cube, descent) are generic and accepted. Batch-5: every listed citation reaches sec-trace-formula or sec-poincare-duality only through general definitions (def-trf-algebraic-space, def-trf-schematically-dense-open, def-pod-ring-scalar-extension). None is part of the trace formula or Poincaré duality, so no leaf substitution is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePicardCubeFaceDetection",
+  "declaration": "AlgebraicGeometry.relative_picard_cube_face_detection",
+  "declarations": [
+   "AlgebraicGeometry.groupIdentityFace",
+   "AlgebraicGeometry.relative_picard_cube_face_detection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePicardCubeFaceDetection.lean",
+  "statement": "theorem relative_picard_cube_face_detection {S : Scheme.{u}} (G : Fin 3 → Over S) [∀ i : Fin 3, CommGrpObj (G i)] [∀ i : Fin 3, Smooth (G i).hom] [∀ i : Fin 3, IsSeparated (G i).hom] [∀ i : Fin 3, LocallyOfFinitePresentation (G i).hom] [∀ i : Fin 3, QuasiCompact (G i).hom] [∀ i : Fin 3, GeometricallyConnected (G i).hom] (hbase : (∀ i : Fin 3, IsProper (G i).hom) ∨ ((∀ x : S, IsDomain (S.presheaf.stalk x) ∧ IsIntegrallyClosed (S.presheaf.stalk x)) ∧ ∀ i : Fin 3, HasSemiabelianGeometricFibres (Grp.mk (G i)))) (M : (∏ᶜ G).left.Modules) [M.IsInvertible] (hfaces : ∀ i : Fin 3, Nonempty ((Scheme.Modules.tensorPullback (groupIdentityFace G i).left).obj M ≅ SheafOfModules.unit _)) : Nonempty (M ≅ SheafOfModules.unit _)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f28f8e7bd",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery resolves the H4 return of 4ece8a59a715 exactly as prescribed. The inline semiabelian block in hbase is replaced by ∀ i : Fin 3, HasSemiabelianGeometricFibres (Grp.mk (G i)) via a public import of Sheaf.AlgebraicGeometry.SemiabelianGeometricFibres; the unused Fpqc/Sites.Over/LocallySurjective/Tori imports are dropped. Module diff vs the returned head shows no other change. The node differs from side-live only in lean and stmt_deps (+def-sc-group-scheme, +def-sfb-tori-multiplicative-type, +def-sfb-semiabelian-geometric-fibres, all landed). lean.statement is verbatim in the file. The shared definition (alg-closed k : Type u, splitTorus kernel IsPullback, IsAbelianVariety quotient, fppf local surjectivity) matches the node clause; IsCommMonObj comes from CommGrpObj. Other clauses unchanged and previously verified. Edge cases (empty S, r=0, universes, proper branch without stalk conditions) OK. groupIdentityFace has real data, the only proof is sorry, 12-step docstring present, report sections present. No compile: no fix written."
+ }
+}

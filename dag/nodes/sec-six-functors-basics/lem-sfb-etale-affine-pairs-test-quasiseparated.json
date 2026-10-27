@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-etale-affine-pairs-test-quasiseparated",
+ "kind": "statement",
+ "title": "Affine etale pairs test absolute quasi-separatedness",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space, def-weil-affine-spectrum], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Absolute quasi-separatedness is the notion of [def-sfb-space-absolute-quasi-separated], equivalently quasi-compactness on scheme tests of the absolute diagonal $\\Delta_X:X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$. Then $X$ is absolutely quasi-separated if and only if, for every pair of affine schemes $U,V$ [def-pc-scheme, def-weil-affine-spectrum] and representable etale morphisms $U\\to X$ and $V\\to X$ [def-weil-etale-morphism], the scheme $U\\times_XV$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. No quasi-compactness, separation or Noetherian assumption on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1): only affine open pieces of an etale atlas are used. This etale-pair variant is also explicitly used at the start of decent-spaces.tex Tag 0BB6."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "If $X$ is absolutely quasi-separated, the affine-test definition [def-sfb-space-absolute-quasi-separated] (with $S=\\operatorname{Spec}\\mathbf Z$) applies to every pair in the question, since etale maps are in particular maps to $X$. Their fibre product is a scheme: the representable diagonal of [def-trf-algebraic-space] represents $h_U\\times_Xh_V$ by the scheme $X\\times_{X\\times X}(U\\times_{\\mathbf Z}V)$, a pair of sections with equal image in $X$ being the same as a section of $X$ together with a section of $U\\times V$ with the same image in $X\\times X$. The definition asserts quasi-compactness of its point space. For a scheme $T$ the identity is a representable surjective etale atlas of $h_T$, and $|\\mathrm{id}|:|T|\\to|h_T|$ is bijective: a map $\\operatorname{Spec}K\\to T$ with image $t$ has the class of $\\operatorname{Spec}\\kappa(t)\\to T$, and two residue-field points with a common extension have the same image. By the independence of the atlas in [lem-a1-space-affine-etale-cover], the point space of $h_T$ is therefore the Zariski space of $T$. So the quasi-compactness asserted by the definition is precisely the required quasi-compactness of the scheme $U\\times_XV$.",
+   "uses": [
+    "def-sfb-space-absolute-quasi-separated",
+    "def-trf-algebraic-space",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  },
+  {
+   "text": "Conversely assume the stated condition on affine etale pairs. Choose a representable surjective etale atlas $p:W\\to X$ with $W=\\coprod_i U_i$ and each $U_i$ affine, by [lem-a1-space-affine-etale-cover]. Each component is an open subscheme of $W$. The inclusion $h_{U_i}\\to h_W$ is representable etale: for a scheme $T$ and $h_T\\to h_W$ its pullback is represented by $U_i\\times_WT\\to T$, an open immersion by [lem-weil-pbc-open-immersion-base-change], hence etale by [lem-weil-pbc-open-immersion-etale]. Composition in [lem-trf-space-chartwise-etale-permanence], together with its equivalence of chartwise and representable etale for scheme sources, makes $p_i:U_i\\to X$ representable etale. Consequently $R_{ij}=U_i\\times_XU_j$ is a scheme and is quasi-compact by the hypothesis, for every $i,j$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  },
+  {
+   "text": "All products in the rest of the proof are over $\\operatorname{Spec}\\mathbf Z$. Set $B=W\\times W$ and $Y=X\\times X$. Factor $p\\times p$ as $W\\times W\\to X\\times W\\to X\\times X$. These arrows are base changes of $p$ along the respective projections, hence representable surjective etale by [lem-trf-space-fibre-products-etale-covers]. Their composite $q:B\\to Y$ is a surjective etale covering by [lem-trf-space-chartwise-etale-permanence]. The diagonal $\\Delta_X$ is representable by [def-trf-algebraic-space], so its pullback $j:R\\to B$ has scheme source. The fibre-product universal property identifies $R=X\\times_YB$ with $W\\times_XW$, and $j$ with its two projections into $W$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  },
+  {
+   "text": "For each $i,j$, let $Q_{ij}=U_i\\times U_j$. Its map to $B$ factors as $U_i\\times U_j\\to W\\times U_j\\to W\\times W$, two base changes of open inclusions, so it is an open inclusion by [lem-weil-pbc-open-immersion-base-change]. Its image is $\\operatorname{pr}_1^{-1}(U_i)\\cap\\operatorname{pr}_2^{-1}(U_j)$: a map to $B$ factors through it exactly when both projections factor through the indicated opens, by [def-pc-fibre-product]. These images cover $B$ because the $U_i$ cover $W$. By [lem-weil-pbc-fibre-product-affine-spectra], $Q_{ij}$ is affine, with ring $\\Gamma(U_i,\\mathcal O)\\otimes_{\\mathbf Z}\\Gamma(U_j,\\mathcal O)$. The same universal property identifies $j^{-1}(Q_{ij})=R\\times_BQ_{ij}$ with $U_i\\times_XU_j=R_{ij}$, compatibly with its map to $Q_{ij}$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  },
+  {
+   "text": "Each $Q_{ij}$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Since $R_{ij}$ is quasi-compact by step 2, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $R_{ij}\\to Q_{ij}$ a quasi-compact scheme morphism. These are the restrictions of $j$ to the open cover just constructed. Thus [lem-pc-quasi-compact-local-on-target] makes $j:R\\to B$ quasi-compact. No finiteness of the cover and no quasi-separatedness of $W$ or $R$ is required.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  },
+  {
+   "text": "The descent node [lem-sfb-space-quasicompact-fppf-local] tests quasi-compactness of a morphism on quasi-compact algebraic spaces; we first check that $j$ passes this test. Let $Z$ be a quasi-compact space with $Z\\to B$, and $T\\to Z$ a representable surjective etale map from a quasi-compact scheme. The scheme $R\\times_BT$ is quasi-compact over $T$ by the base-change clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], hence quasi-compact by its clause (2). Transitivity of fibre products identifies $R\\times_BT$ with $(R\\times_BZ)\\times_ZT$, so by [lem-trf-space-fibre-products-etale-covers] it maps representably, surjectively and etale onto $R\\times_BZ$. Thus $R\\times_BZ$ is a quasi-compact space and $j$ is quasi-compact in that sense. Apply [lem-sfb-space-quasicompact-fppf-local] to $\\Delta_X:X\\to Y$ and the singleton covering $\\{q:B\\to Y\\}$. It is jointly surjective by step 3; each scheme test of $q$ is etale and hence flat and locally of finite presentation by [def-weil-etale-morphism], exactly the descent hypotheses. Its pullback of $\\Delta_X$ is $j$, so $\\Delta_X$ is quasi-compact on quasi-compact space tests. A quasi-compact scheme is such a test, by its identity atlas and [lem-weil-pbc-affine-scheme-qcqs] for affine ones, so $\\Delta_X$ is quasi-compact in the sense of [lem-sfb-space-quasicompact-affine-tests], whose representable-morphism equivalence now gives quasi-compactness on every scheme test of $\\Delta_X$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  },
+  {
+   "text": "It remains to verify the affine-test definition [def-sfb-space-absolute-quasi-separated] itself, without using the remark on the diagonal recorded there. Let $U,V$ be affine schemes with arbitrary maps $h_U\\to X$, $h_V\\to X$. By [lem-weil-pbc-fibre-product-affine-spectra] over $\\mathbf Z$, $U\\times V$ is affine, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. As in step 1, the universal property [def-pc-fibre-product] identifies $h_U\\times_Xh_V$ with the scheme $P=X\\times_Y(U\\times V)$, the base change of $\\Delta_X$ along $U\\times V\\to Y$. By step 6, $P\\to U\\times V$ is a quasi-compact morphism of schemes; its target is quasi-compact, so $P$ is quasi-compact by clause (2) of [lem-weil-pbc-qcqs-morphism-permanence]. Its point space is its Zariski space by step 1, using [lem-a1-space-affine-etale-cover]. Hence $X$ is absolutely quasi-separated. Together with step 1 this proves the desired equivalence. Steps 1 to 7 also prove the equivalence with quasi-compactness of the absolute diagonal on scheme tests mentioned in the statement. All atlas products and the diagonal were absolute products over $\\operatorname{Spec}\\mathbf Z$.",
+   "uses": [
+    "def-sfb-space-absolute-quasi-separated",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-a1-space-affine-etale-cover",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0AHR (lemma-characterize-quasi-separated), proof of (3) implies (1), restricted to affine opens of an etale atlas; also decent-spaces.tex Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), first paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space is quasi separated if and only if fibre products of pairs of affine etale charts are quasi compact",
+   "results": "{\"t\": \"2026-10-23T15:04:36Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space is quasi separated if and only if fibre products of pairs of affine etale charts are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\"], \"digest\": \"5705ebe2f27809bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme diagonals, intersections of affine opens in a scheme, and scheme affine-target property constructors; none gives the algebraic-space etale-chart criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Test quasi compactness of the representable diagonal of an algebraic space using affine etale scheme covers",
+   "results": "{\"t\": \"2026-10-23T15:04:38Z\", \"tool\": \"leanfinder\", \"query\": \"Test quasi compactness of the representable diagonal of an algebraic space using affine etale scheme covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\"], \"digest\": \"1ab5dd893a844cb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme diagonals, intersections of affine opens in a scheme, and scheme affine-target property constructors; none gives the algebraic-space etale-chart criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasiSeparated.*etale|etale.*quasiSeparated",
+   "results": "{\"t\": \"2026-10-23T15:05:15Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasiSeparated.*etale|etale.*quasiSeparated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme diagonals, intersections of affine opens in a scheme, and scheme affine-target property constructors; none gives the algebraic-space etale-chart criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space has quasi compact diagonal if fibre products of pairs of affine etale charts are quasi compact",
+   "results": "{\"t\": \"2026-10-23T15:05:15Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space has quasi compact diagonal if fibre products of pairs of affine etale charts are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\"], \"digest\": \"96c50fc17d4a0a3f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme diagonals, intersections of affine opens in a scheme, and scheme affine-target property constructors; none gives the algebraic-space etale-chart criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T15:05:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme diagonals, intersections of affine opens in a scheme, and scheme affine-target property constructors; none gives the algebraic-space etale-chart criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space is quasi separated if and only if fibre products of pairs of affine etale charts are quasi compact",
+   "results": "{\"t\": \"2026-10-23T18:59:39Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space is quasi separated if and only if fibre products of pairs of affine etale charts are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\"], \"digest\": \"5705ebe2f27809bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not arbitrary algebraic spaces or the affine etale chart criterion; read QuasiSeparated.lean and QuasiCompact.lean; no AlgebraicSpace hit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T18:59:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not arbitrary algebraic spaces or the affine etale chart criterion; read QuasiSeparated.lean and QuasiCompact.lean; no AlgebraicSpace hit"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasiSeparated.*etale|etale.*quasiSeparated",
+   "results": "{\"t\": \"2026-10-23T18:59:39Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasiSeparated.*etale|etale.*quasiSeparated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not arbitrary algebraic spaces or the affine etale chart criterion; read QuasiSeparated.lean and QuasiCompact.lean; no AlgebraicSpace hit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space has quasi compact diagonal if fibre products of affine etale charts are quasi compact",
+   "results": "{\"t\": \"2026-10-23T18:59:40Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space has quasi compact diagonal if fibre products of affine etale charts are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\"], \"digest\": \"e7e7f5b59151e120\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not arbitrary algebraic spaces or the affine etale chart criterion; read QuasiSeparated.lean and QuasiCompact.lean; no AlgebraicSpace hit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Test quasi compactness of the representable diagonal of an algebraic space using affine etale scheme covers",
+   "results": "{\"t\": \"2026-10-23T19:01:13Z\", \"tool\": \"leanfinder\", \"query\": \"Test quasi compactness of the representable diagonal of an algebraic space using affine etale scheme covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\"], \"digest\": \"1ab5dd893a844cb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not arbitrary algebraic spaces or the affine etale chart criterion; read QuasiSeparated.lean and QuasiCompact.lean; no AlgebraicSpace hit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-noetherian-decent-quasiseparated",
+  "date": "2026-10-23",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: descent: Tag 0B8F proof, third input 0B88; descend the scheme using the finite-point affine condition. Auxiliary for the present split: quasi-separatedness needed for the finite-field-extension limit in the final paragraph of Tag 0B88. Supporting input for Tag 0BB6: Affine etale pairs test absolute quasi-separatedness.",
+   "via": [
+    "lem-sfb-locally-noetherian-decent-quasiseparated",
+    "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-affine-pairs-test-quasiseparated",
+  "worker": "stage1",
+  "summary": "Statement preserved. Supply the affine-etale-pair variant of 0AHR by an absolute atlas square, an explicitly constructed affine product open cover, scheme quasi-compactness locality and representable fppf descent. All substantive tools already have DAG nodes; no new nodes. Checked every cited statement and the empty/infinite-atlas cases.",
+  "blueprint": "Retains the inherited from.node=null and via chain (blueprint_refs.py ancestor prints None). Realizes the inherited place: the affine-pair criterion supporting the first paragraph of Tag 0BB6 in the historical direct-images/moduli chain. Read latest main-20261023-1620 sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), and its unit; no replacement of their route. Whole blueprint searches for quasi-separated and affine etale found no node stating this variant.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Existence of an arbitrary disjoint-affine etale atlas; generic algebraic-space presentation tool absent from this unit."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Composition of representable etale charts and their covering families, a generic presentation tool absent from this unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and pullback of surjective etale covers, needed for the absolute product atlas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-07ceb5194",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-07ceb5194 (reviewer sub-agent of L); spot-checked: Read Stacks 0AHR (spaces-properties lemma-characterize-quasi-separated) in full and 0BB6 (first paragraph). The item's statement is faithful: S=Spec Z; 0AHR's (3)=>(1) proof only applies the hypothesis to affine opens of an etale atlas. No new nodes. Not a duplicate: 07S4 lem-sfb-space-qs-atlas-criterion needs a quasi-compact projection U x_X U -> U, and lem-trf-space-qc-separated-etale-local also requires separatedness. No cycles. Steps 3-5 are correct: the base-change factorizations were checked, Q_ij is affine over Z, j^{-1}(Q_ij)=R_ij, and quasi-compactness is local on the target. Three faults, repaired in fixes/dag/nodes/sec-six-functors-basics/<item>.json; proof_deps unchanged and equal to the union of uses. (1) C3/C4: step 7 took its conclusion from the unproved remark 'by 0AHR equivalent to diagonal qc' inside def-sfb-space-absolute-quasi-separated. The step now checks the defining affine test directly: U x V is affine; h_U x_X h_V = X x_Y (U x V) is quasi-compact over the quasi-compact U x V by step 6, so quasi-compact by qcqs-permanence (2). (2) E5: step 6 conflated two notions of a quasi-compact morphism: tests by quasi-compact schemes (affine-tests node) and by quasi-compact spaces (fppf-local node). The bridge is written out: for Z with atlas T, R x_B T is quasi-compact by qcqs-permanence (3) and (2), and it surjects etale onto R x_B Z by fibre-products-etale-covers. (3) Steps 1 and 2: added the identification of point space with Zariski space for a scheme (via the atlas-independence of lem-a1-space-affine-etale-cover), and representability of U_i -> W via lem-weil-pbc-open-immersion-base-change. Edge cases: X empty, infinite atlases, the doubled affine line, and the doubled infinite affine space; all consistent. Accepted tool_uses (generic algebraic-space presentation tools): lem-a1-space-affine-etale-cover, lem-trf-space-chartwise-etale-permanence, lem-trf-space-fibre-products-etale-covers. Batch-5 finding: the 60 trace-formula-chapter nodes in the proof closure (via a1 affine-etale-cover, sfb qc affine-tests, sfb qc fppf-local and trf chartwise-permanence) are all algebraic-space and fppf-descent foundations, not steps of the trace formula or Poincare duality, so all four citations are kept. No SGA used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleAffinePairsQuasiSeparated",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isAbsolutelyQuasiSeparated_iff_etale_affine_pairs",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceEtaleAffinePairsQuasiSeparated.lean",
+  "statement": "theorem isAbsolutelyQuasiSeparated_iff_etale_affine_pairs (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) : IsAbsolutelyQuasiSeparated X ↔ ∀ (U V : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → IsEtale a → IsEtale b → ∃ P : Over (Spec (CommRingCat.of (ULift.{u} ℤ))), Nonempty (yoneda.obj P ≅ Limits.pullback a b) ∧ CompactSpace P.left",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e55340e6",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Only change is the item's lean record plus one module (theorem by sorry); lean.statement is verbatim the file signature. Clause check against live deps: X : AlgebraicSpace over Spec ULift.{u} ℤ (terminal, universe general); IsAbsolutelyQuasiSeparated is the recorded def-sfb affine-test def; ∀ affine U V over Spec ℤ with IsEtale (representable, étale scheme tests, no surjectivity) maps; conclusion ∃ representing P with CompactSpace P.left is equivalent to qc of U×_X V (unique up to iso, representable for étale a). No extra hypotheses. Source 0AHR (3)⇒(1) and 0BB6 match. Edge cases fine: empty X/charts, infinite atlas, doubled line, non-qs gluing. No duplicate in live Sheaf or Mathlib. Docstrings carry Stacks tags, blueprint id and all 7 proof steps; imports exist in live; report has Worker report and Second reading sections. No compile needed (no change)."
+ }
+}

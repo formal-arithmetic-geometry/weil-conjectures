@@ -1,0 +1,146 @@
+{
+ "id": "lem-asd-upstream-affine-space-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Clause (1), adopted source-library realization on arbitrary schemes. Only the ordinary-etale affine-space part is attached here; classical comparison and clause (2) remain with their existing nodes.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Adopted affine-space adjunction and canonical exceptional base change",
+ "statement": "Let $\\Lambda$ be a finite commutative ring, $S$ a scheme [def-pc-scheme], and $d\\in\\mathbb N$. Suppose a positive integer killing $\\Lambda$ is invertible on $S$. Put $a:\\mathbf A^d_S\\to S$ [def-sbc-affine-space]. On the ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories], for every normalized Tate-twist datum [def-coefficient-twists-detailed], $Ra_!$ [def-amb-etale-compact-support] is left adjoint to $La^*(-)(d)[2d]$. Moreover, in every cartesian square of $a$ [def-pc-fibre-product] whose pulled-back projection is compactifiable and quasi-compact [def-asd-compactifiable, def-weil-finite-type-morphism], the canonical exceptional base-change map [thm-amb-etale-exceptional-adjoint] is invertible. These are exactly the two clauses of the adopted theorem affineSpaceAdjunction_baseChange; no Noetherian or quasi-separatedness hypothesis is made on $S$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+  "place": "Clause (1), adopted source-library realization on arbitrary schemes. Only the ordinary-etale affine-space part is attached here; classical comparison and clause (2) remain with their existing nodes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "def-coefficient-twists-detailed",
+  "def-amb-etale-compact-support",
+  "def-pc-fibre-product",
+  "def-asd-compactifiable",
+  "def-weil-finite-type-morphism",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "The first clause is precisely the already declared source-library theorem nonempty_rightDerivedLowerShriek_adjunction_affineSpace for an arbitrary scheme, not the Noetherian-only Sheaf version attached to cor-amb-affine-space-adjunction. Introduce the two twist instances and apply that existing theorem. Its separate hole is unchanged by this delivery.",
+   "uses": [
+    "cor-amb-affine-space-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), affine-space adjunction."
+   }
+  },
+  {
+   "text": "For the affine line, factor its projection as the standard open chart into the projective line followed by the proper projection. The chart is quasi-compact because its composite with the projective projection is the quasi-compact affine projection. It admits the open-immersion compactification. Apply isIso_rightDerivedUpperShriekBaseChangeMap_of_comp: its open-immersion branch is already proved, and its projective branch is lem-asd-projective-line-exceptional-base-change. This is the private proved helper affineLineBaseChangeModel.",
+   "uses": [
+    "lem-asd-projective-line-exceptional-base-change",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), standard affine chart."
+   }
+  },
+  {
+   "text": "Induct on d, over a fixed arbitrary base S. In dimension zero the projection is an isomorphism and the existing open-immersion result applies. Identify dimension d+1 with the affine line over dimension d using the sum/reindex isomorphism. Its projection is the composite of that isomorphism, the affine-line projection and the dimension-d projection. Compactifiability of the factors and quasi-compactness of the second projections supply every hypothesis of the composition theorem. Pull the invertible exponent to the intermediate affine space. Apply the composition theorem twice, using the induction hypothesis, the affine-line helper and the open-immersion result for the isomorphism. This gives the private proved helper affineSpaceBaseChangeModel. Pair it with the first clause. No quasi-separatedness or affine-cover descent is used.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+    "place": "Proof (1), iteration of the affine-line adjunctions and their base-change maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-amb-affine-space-adjunction",
+  "def-sbc-affine-space",
+  "lem-asd-projective-line-exceptional-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-relative-affine-space-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+  "place": "Clause (1), adopted source-library realization on arbitrary schemes. Only the ordinary-etale affine-space part is attached here; classical comparison and clause (2) remain with their existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image base change for projective line projection with finite torsion coefficients",
+   "results": "Finite morphism base-change permanence and WeierstrassCurve.Projective base-change formulas.",
+   "date": "2026-10-25",
+   "verdict": "no match for exceptional inverse-image base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change for the right adjoint of compact support along an affine space projection, using projective line adjunction and counit compatibility",
+   "results": "Scheme.Modules pushforward and pullback adjunctions; SheafOfModules pullback/pushforward counit lemmas.",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module adjunctions do not assert exceptional base change"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*mateEquiv|projectiveLine.*[Bb]aseChange|affineSpaceAdjunction; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "No specialized result in Mathlib. The source library has a conditional projective-line criterion and the affine-line restriction and iteration over affine bases.",
+   "date": "2026-10-25",
+   "verdict": "no match in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange",
+  "date": "2026-10-25",
+  "group": "K4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/SmoothDuality/SmoothBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange",
+  "statement": "theorem affineSpaceAdjunction_baseChange (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :\n    (∀ [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ],\n      Nonempty (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); S) ↘ S) ⊣\n        L(((𝔸(ULift.{u} (Fin d); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙\n          twistShift Λ 𝔸(ULift.{u} (Fin d); S) d)) ∧\n    ∀ ⦃S' P' : Scheme.{u}⦄ {g : S' ⟶ S} {p' : P' ⟶ S'}\n      {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)} (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g)\n      [HasCompactification p'] [QuasiCompact p'],\n      IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T143613-L-1060958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T143613-L-1060958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

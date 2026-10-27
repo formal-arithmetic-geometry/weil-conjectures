@@ -1,0 +1,468 @@
+{
+ "id": "lem-sf-coefficient-dual-model-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-dualizable",
+   "place": "Old proof steps 4 and 10: restriction, localized unit/retract calculation, and common finite-coefficient-field transport of local dual models.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Restriction and finite-field transport of coefficient dual models",
+ "statement": "Fix a prime $\\ell$, a scheme $X$ on which $\\ell$ is invertible, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Use the small pro-etale site [def-weil-pbc-proetale-site], the completed coefficient sheaf $R_E=\\widehat{\\mathcal O}_{E,X}$ [def-weil-completed-integral-coefficients], and the integral, raw scalar-localized rational, and common-stage coefficient categories and internal Hom operations of [def-weil-derived-pullback-tensor-hom, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. For $K$ in the rational constructible domain for which the specified internal Hom into the unit is defined, put $H_E(K)=R\\mathcal Hom_E(K,E_X)$. For any coefficient-site object $U$, restriction to $X_{\\mathrm{proet}}/U$ has a natural comparison\n$$H_E(K)|_U\\xrightarrow{\\sim}H_{E,U}(K|_U),$$\nwhere the right hand side is the scalar localization of ambient ringed-site internal Hom for $R_E|_U$. These comparisons respect successive restrictions and the unit; $H_{E,U}(E_U)\\cong E_U$. If $F$ is a degree-zero module object with a displayed retraction from $E_U^{\\oplus m}$ in the localized category, the maps $H_{E,U}(p),H_{E,U}(i)$ exhibit $H_{E,U}(F)$ as a retract of $E_U^{\\oplus m}$. For a finite extension $E\\subset L$ inside a fixed algebraic closure, let $F_{E,L}=-\\otimes_E L$ be the specified scalar extension. On the domains where these Homs are defined the coefficient comparison gives\n$$F_{E,L}H_E(K)\\xrightarrow{\\sim}H_L(F_{E,L}K).$$\nIf on a coefficient-site cover $H_E(K)$ has bounded complex models $D_U$ whose terms are actual localized retracts of finite sums of $E_U$, the extended models $F_{E,L}(D_U)$ have the same degree bounds and terms retracting from the corresponding sums of $L_U$, and represent $H_L(F_{E,L}K)$ on that cover. Scalar extension carries each finite stupid-tail triangle and its comparison maps to the corresponding triangle for the extended models. The Hom, unit, restriction and scalar comparisons are natural and compatible with towers of coefficient fields. In the common-stage category the dual of $(E,K)$ is therefore represented by $(E,H_E(K))$, and these models and their extensions represent that same common-stage dual, independently of a further common finite extension. No separatedness condition on $X$, uniform bound over the cover, or lifting of rational retractions to integral ones is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable.proof.md",
+  "place": "Local dual model sentence, expanded to the coefficient conventions in def-weil-derived-pullback-tensor-hom; old proof steps 4 and 10. Ringed-site restriction input: Stacks Tag 08JB, sites-cohomology.tex, lemma-restriction-RHom-to-U. Scalar/common-stage expansion is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pur-localized-ringed-site",
+  "def-weil-linear-scalar-localization",
+  "def-pc-cochain-complex-modules",
+  "def-pur-derived-internal-hom",
+  "def-pur-integral-derived-operations",
+  "def-sf-raw-rational-slice-coefficients",
+  "def-sf-completed-slice-restriction-data",
+  "def-weil-completed-integral-scalar-data",
+  "def-fix-ringed-scalar-extension-section",
+  "def-sf-normalized-constant-coefficient-scalar-unit",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Work with the chosen small site and put $R=R_E$. The ambient restriction theorem applied to $(K,R)$ gives $R\\mathcal Hom_R(K,R)|_U\\cong R\\mathcal Hom_{R|_U}(K|_U,R|_U)$, natural in $K$ and compatible with relocalization. Restriction is exact on module sheaves, so it also restricts representatives and the coefficient unit. Now scalar-localize this isomorphism and its inverse. For an integral arrow $a$ and scalar $c\\in E$, both routes in its naturality square are the integral routes multiplied by $c$, since the rational Hom and restriction act linearly on arrows. Addition gives the assertion for every localized arrow. The successive-restriction equations similarly remain equalities after localization. This proves the first comparison on exactly the stated Hom domain, without imposing constructibility on a resolution or on every intermediate ambient object.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB, lemma-restriction-RHom-to-U; rational arrow formulas in the operation definition."
+   }
+  },
+  {
+   "text": "On a slice put $A=R|_U$ and choose a K-injective representative $A[0]\\to I$ as in the definition of derived internal Hom. Evaluation at $1$ identifies $\\mathcal Hom_A^\\bullet(A[0],I)$ with $I$, with the same differential. For $A^{\\oplus m}[0]$ the identification is $\\mathcal Hom_A^\\bullet(A^{\\oplus m}[0],I)=I^{\\oplus m}$, by evaluating at the $m$ standard generators; the inverse sends $(y_j)$ to $(a_j)\\mapsto\\sum_j a_jy_j$. The direct sum of the $m$ augmentations $A[0]\\to I$ is a quasi-isomorphism: its cycles, boundaries and quotient are the finite direct sums of those of the augmentation. Thus after scalar localization $H_{E,U}(E_U)=E_U$ and $H_{E,U}(E_U^{\\oplus m})\\cong E_U^{\\oplus m}$. These identifications respect restriction because evaluation at each standard generator does. For $m=0$ all complexes and maps are zero.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, construction of internal Hom by a K-injective target; evaluation at the standard generators."
+   }
+  },
+  {
+   "text": "Write the displayed localized retraction as $i:F\\to E_U^{\\oplus m}$, $p:E_U^{\\oplus m}\\to F$ with $pi=1_F$. Contravariance gives maps $H(p):H(F)\\to H(E_U^{\\oplus m})$ and $H(i):H(E_U^{\\oplus m})\\to H(F)$ whose composite is $H(i)H(p)=H(pi)=1_{H(F)}$. Using Step 2 identifies the middle object with $E_U^{\\oplus m}$. This proves the required retract directly in the localized category. In particular, if $i=\\sum a_j\\otimes c_j$ and $p=\\sum b_k\\otimes e_k$, the same equality follows by expanding the two finite sums and the bilinear composition law; it never requires integral arrows satisfying $pi=1$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable.proof.md",
+    "place": "Rational-level internal-Hom arrow formulas and raw localized composition; direct retract calculation."
+   }
+  },
+  {
+   "text": "Apply the integral scalar-comparison theorem to $M=K$, $N=R_E$ and the identity scheme morphism. Its natural internal-Hom isomorphism, followed by rationalization and the coefficient-unit identification, is $F_{E,L}H_E(K)\\cong H_L(F_{E,L}K)$. The integral representatives of $K$ and its Hom are in the stipulated domain, so this application does not infer constructibility of an arbitrary ambient Hom. For clarity about the specified scalar functor, the completed coefficient comparison says that $S=R_L$ is finite free over $R$ and that its ordinary derived change of rings agrees naturally with completed scalar extension on complete objects. The unit identification is multiplication $R\\otimes_RS\\to S$. On a slice use $R|_U\\to S|_U$: a finite free basis restricts, so the ambient finite-free Hom base-change theorem applies to arbitrary slice inputs. The ordinary tensor restriction map sends $x\\otimes s$ to $x\\otimes s$; applying it to representatives identifies restriction of the scalar functor with this slice functor. The ambient Hom map is characterized as the transpose of extended evaluation. Slice restriction preserves evaluation and transposes by the slice evaluation-transpose theorem. Hence restricting that defining pairing gives the same pairing for the restricted objects: on tensor generators both scalar/restriction routes send $x\\otimes s$ to $x\\otimes s$. Their transposes are therefore equal. This proves compatibility of these comparisons with restriction, rather than merely the existence of two unrelated isomorphisms.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Integral scalar comparison specialized to Hom into the unit; finite-free ordinary scalar comparison; Tag 08J9 and ordinary slice tensor restriction."
+   }
+  },
+  {
+   "text": "The preceding scalar functor can be computed termwise on every ambient complex on the slice. Indeed $S|_U\\cong(R|_U)^{\\oplus d}$ as module sheaves. After forgetting the $S|_U$ action, tensoring a module or map is its $d$-fold direct sum: $x\\otimes\\sum_j a_je_j\\mapsto(a_jx)_j$. Kernels and cokernels of these finite sums are computed componentwise, so this additive functor is exact. The exact-functor derived-factorization theorem therefore identifies its derived functor with termwise tensor on every complex, naturally also on derived maps. Its value on a K-flat resolution agrees with derived change of rings, which is computed by that resolution; hence this is the same ordinary functor used in Step 4. Localize its arrow formulas to define the same termwise computation on rational arrows. If a bounded model was supplied as a complex in the raw localized module category, the bounded localized-complex lifting assertion supplies an actual complex with the same support and a localized chain isomorphism to it. Applying the termwise functor to that isomorphism gives the identical localized model computation; no retraction is lifted.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-localized-signed-dual-presentation",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Finite-free scalar comparison; exact functors on complexes; bounded localized-complex lifting clause of the signed dual presentation."
+   }
+  },
+  {
+   "text": "For each cover member choose the given model isomorphism $Q(D_U)\\cong H_E(K)|_U$, where $Q$ denotes its realization in the ambient scalar-localized derived category. Apply the functor from Step 5, then Step 4 and Step 1, to obtain $Q(F_{E,L}D_U)\\cong H_L(F_{E,L}K)|_U$. If $D_U^r=0$ outside $[a_U,b_U]$, termwise tensor is still zero there. For its displayed term retraction $p_ri_r=1$, functoriality gives $F(p_r)F(i_r)=1$, and the middle object is $L_U^{\\oplus m_r}$: multiplication identifies $E_U\\otimes_EL$ with $L_U$ and tensor distributes over the finite sum. These are the required actual retractions in the localized category. The argument is performed separately for each $U$, so neither its interval nor its ranks must be uniformly bounded over the cover.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable.proof.md",
+    "place": "Local dual model sentence: apply the preceding comparisons to each supplied bounded model."
+   }
+  },
+  {
+   "text": "For an actual bounded model $D$, set $D_{\\ge c}$ equal to $D$ in degrees at least $c$, zero below. The sequence $0\\to D_{\\ge c+1}\\xrightarrow{i}D_{\\ge c}\\xrightarrow{p}D^c[-c]\\to0$ is split in every degree: in degree $c$ it is $0\\to0\\to D^c\\xrightarrow{1}D^c\\to0$ (splitting $r^c=0$, $s^c=1$), above $c$ it is $0\\to D^r\\xrightarrow{1}D^r\\to0\\to0$ ($r^r=1$, $s^r=0$), and below $c$ it is zero. The complex short-exact-sequence theorem gives the natural distinguished tail triangle with connecting arrow $\\delta$. By the degreewise-split connecting-morphism lemma the splitting defines a chain map $b:D^c[-c]\\to D_{\\ge c+1}[1]$, $b^k=r^{k+1}d^ks^k$; here its only nonzero component is $b^c=d_D^c:D^c\\to D^{c+1}$. The split boundary comparison says $\\delta=Q(b)$ after the canonical shift comparison of $Q$. Let $F$ be termwise extension, exact by Step 5. Applied to the sequence and its splitting it gives the tail sequence $0\\to(FD)_{\\ge c+1}\\to(FD)_{\\ge c}\\to(FD)^c[-c]\\to0$ of the extended model with splitting $F(r),F(s)$, the same identity/zero maps, since $F$ is additive and $C(F)$ commutes with the shift by the identity $\\tau$. Hence its split boundary is $C(F)(b)$, whose only nonzero component is $F(d_D^c)=d_{FD}^c$, and its connecting arrow is $\\delta'=Q(C(F)b)$ by the same two lemmas. The natural isomorphism $\\varphi$ of the derived-factorization theorem, applied to the chain maps $i,p,b$ and combined with its shift compatibility (2) for $b$, gives $\\varphi\\circ F_D(Q i)=Q(C(F)i)\\circ\\varphi$, likewise for $p$, and $\\varphi[1]\\circ\\sigma\\circ F_D(\\delta)=\\delta'\\circ\\varphi$. So $\\varphi$ is an isomorphism from the image of the tail triangle to the tail triangle of $FD$, compatible with every comparison square. Exact scalar localization carries these equalities and triangles to the localized categories. A localized chain isomorphism from Step 5 transports these equations for a localized model too.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, derived.tex, lemma-derived-canonical-delta-functor (canonical connecting map); degreewise split boundary with the shift convention of Tag 011G (homology.tex, homology-definition-shift-cochain)."
+   }
+  },
+  {
+   "text": "The integral operation comparisons are natural, are identities for $E=L$, and satisfy their coefficient-tower equation. Localizing those equations preserves them: for $E\\subset L\\subset M$, expanding any finite sum of fraction arrows multiplies their coefficients in $M$ on either route. The canonical scalar composition isomorphisms therefore identify successive extensions of our Hom comparisons and models with direct extension. Unit maps and the slice tensor identifications use multiplication and the same local tensors; further restriction changes none of their formulas. Finally the common-stage Hom of $(E,K)$ into the unit is, by its definition, $(E,H_E(K))$. At any larger finite field its representative is identified with $(L,H_L(F_{E,L}K))$ by Step 4. Their inverse isomorphisms represent inverse common-stage arrows, and the tower equation identifies these arrows after every further extension. Equality of common-stage representatives is precisely equality after a common finite extension. This proves independence of the larger field, also for the bounded models and tail maps already transported, and supplies the claimed naturality. No idempotent completion or integral splitting has entered.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable.proof.md",
+    "place": "Common-stage arrow formulas and integral identity/tower equations; local dual model sentence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-linear-scalar-localization",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-localized-signed-dual-presentation",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-sc-p1-split-ses-boundary-comparison",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable.proof.md",
+  "place": "Local dual model sentence; expansion using Stacks Tags 08JB, 08J9 and 0152 and existing integral scalar-comparison statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar.*extension|extension.*scalar|internalHom|RHom",
+   "results": "Actual logged result: 18 hits; Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Linear",
+   "results": "Actual logged result: 0 hits; none.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and finite coefficient field extension preserve bounded local finite free retract dual models in scalar localized derived categories of sheaves and their common finite stage category",
+   "results": "Actual logged result: 8 hits; SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|extendScalars|extensionOfScalars|scalarExtension",
+   "results": "Actual logged result: 0 hits; none.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\"",
+   "results": "Actual logged result: 0 hits; none.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom into the coefficient unit commutes with slice restriction rationalization and common finite field coefficient extension and transports local bounded projective presentations",
+   "results": "Actual logged result: 8 hits; LightCondensed.ihomPoints_symm_comp, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.ihom_map_val_app.  Read the returned hits. They concern ordinary module duals, external Hom complexes, truncation infrastructure or underived sheaf modules; none states this localized sheaf-Hom/coefficient-model assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local bounded projective derived dual models commute with slice restriction and finite coefficient field extension in a common stage category",
+   "results": "Actual logged result: 0 hits; none. service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom restriction to a slice site and base change along finite coefficient field extensions preserve bounded complexes of finite free retracts",
+   "results": "Actual result: 8 hits; LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod. Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rHom|internalHom|extendScalars",
+   "results": "Actual result: 25 hits; Mathlib/CategoryTheory/MarkovCategory/Positive.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean. Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom commutes with restriction to a slice site and finite free change of coefficients",
+   "results": "Actual result: 8 hits; LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, PresheafOfModules.restrictScalarsObj, LightCondensed.ihom_map_val_app, PresheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, LightCondensed.ihomPoints_symm_apply, CategoryTheory.sheafHom'Iso. Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrict\"",
+   "results": "Actual result: 12 hits; PresheafOfModules.restrictₛₗ, PresheafOfModules.restriction, PresheafOfModules.restriction_app, PresheafOfModules.restrictₛₗ_apply, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat, PresheafOfModules.restrictScalarsObj. Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om|[Hh]om.*derived|extendScalars",
+   "results": "Actual result: 25 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean. Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"ihom\"",
+   "results": "Actual result: 0 hits; . Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalized derived sheaf internal Hom and bounded projective complex models are compatible with finite free scalar extension and slice localization",
+   "results": "Actual result: 8 hits; DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', Ext, CochainComplex.IsKProjective.Qh_map_bijective, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app. Read the returned hits: ordinary presheaf restriction, condensed internal Hom, general derived-category linearity or module scalar-extension infrastructure; none states the coefficient-site assertion with its specified completed/raw-localized/common-stage categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-dualizable",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-coefficient-dual-model-transport",
+  "worker": "stage1",
+  "group": "Q101",
+  "summary": "Preserved the statement. Eight explicit assembly steps use existing unrestricted ringed-site Hom restriction and finite-free scalar comparison, compute the unit and rational retracts, identify ordinary exact termwise scalar extension with the specified completed functor, and prove bounded model and cone/tail compatibility. No new nodes: the non-elementary inputs already exist. No discrete-field realization, separatedness assumption, uniform local bound, or integral splitting is substituted.",
+  "blueprint": "prop-sf-dualizable proof: local bounded dual model sentence, expanded at rational and common-stage coefficients; the supplied item records old steps 4 and 10.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Unrestricted slice internal-Hom comparison, used on the ambient coefficient site. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction on module sheaves; generic ringed-site tool. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "The specified integral Hom comparison, its naturality and tower equations. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Identification of the specified completed extension with finite-free ordinary change of rings. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Ambient finite-free Hom comparison on arbitrary slice objects. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Canonical tensor restriction on local generators. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact termwise scalar extension computes its derived functor and respects shifts. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation identifies that exact derived functor with ordinary change of rings. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Natural distinguished triangles of the degreewise split tail sequences. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Passage of the ambient tail triangles to the raw rational category. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Canonical composition identifications for the specified finite-field transition functors. No specific node of the dualizability unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Evaluation and transpose normalization identifies restricted finite-free scalar Hom comparisons with the slice comparisons. This is a generic ringed-site tool not supplied by the dualizability unit."
+   },
+   {
+    "node": "lem-sc-p1-split-ses-boundary-comparison",
+    "why": "Generic homological algebra: identifies the canonical connecting arrow of a degreewise split short exact sequence of complexes with the split boundary chain map; used in Step 7 to transport the stupid-tail connecting arrow. No node of the dualizability unit or of def-sf-operations states it. (Added by the maintainer reader.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-085e60118",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-085e60118 (reviewer sub-agent of L); spot-checked: Read the item's eight steps and every cited statement in full. The statement and stmt_deps are unchanged from Q110's creation of the node. There are no new nodes, and this is not a re-split order. The sources check out: the blueprint prop-sf-dualizable local dual sentence, and Stacks 08JB (sites-cohomology.tex lemma-restriction-RHom-to-U) for Step 1. Steps 1-6 and 8 are correct. Step 1 applies the unrestricted ringed Hom restriction with M=R_E. Steps 2-3 (unit and retract) are elementary. Step 4 applies the integral scalar comparison to M=K, N=R_E, both in D^b_c, with the unit identification by chi at K=R and slice compatibility via the finite-free c and evaluation-transpose. The theta=c identification is not shown but is not needed by the statement. Step 5 uses exact finite-free termwise tensor and only the bounded lifting clause of lem-sf-localized-signed-dual-presentation. Step 8 is the tower and common-stage colimit. FIX for C3/C4/E5 in Step 7: it claimed that termwise extension sends the 'canonical cone presentation' of the connecting arrow, but lem-weil-pbc-complex-ses-triangle gives no cone formula, so F_D(delta)=delta' was unsupported. Rewritten to cite lem-weil-pbc-degreewise-split-connecting-morphism and lem-sc-p1-split-ses-boundary-comparison (delta=Q(b), b^k=r^{k+1}d^k s^k, here b^c=d^c), with F preserving the splitting and phi naturality plus shift compatibility (2) giving the isomorphism of triangles. Added the latter to split_report.tool_uses as a generic homological tool and recomputed proof_deps. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-coefficient-dual-model-transport.json. Edge cases checked: m=0, E=L, towers, one-term models, ramified L/E.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientDualModelTransport",
+  "declaration": "WeilConjectures.CoefficientDualModels.coefficientDualModelTransport",
+  "declarations": [
+   "WeilConjectures.CoefficientDualModels.unit",
+   "WeilConjectures.CoefficientDualModels.free",
+   "WeilConjectures.CoefficientDualModels.dual_existsUnique",
+   "WeilConjectures.CoefficientDualModels.dual",
+   "WeilConjectures.CoefficientDualModels.unitRestriction",
+   "WeilConjectures.CoefficientDualModels.integralDualRestriction",
+   "WeilConjectures.CoefficientDualModels.integralUnitEvaluation",
+   "WeilConjectures.CoefficientDualModels.freeGenerator",
+   "WeilConjectures.CoefficientDualModels.freeProjection",
+   "WeilConjectures.CoefficientDualModels.coefficientDualModelTransport",
+   "WeilConjectures.CoefficientDualModels.dualFiniteFreeRetract",
+   "WeilConjectures.CoefficientDualModels.moduleLinear_existsUnique",
+   "WeilConjectures.CoefficientDualModels.moduleLinear",
+   "WeilConjectures.CoefficientDualModels.RationalModules",
+   "WeilConjectures.CoefficientDualModels.qModules",
+   "WeilConjectures.CoefficientDualModels.freeModule",
+   "WeilConjectures.CoefficientDualModels.Models",
+   "WeilConjectures.CoefficientDualModels.RetractTerms",
+   "WeilConjectures.CoefficientDualModels.scalarRing",
+   "WeilConjectures.CoefficientDualModels.scalarData",
+   "WeilConjectures.CoefficientDualModels.scalarModules",
+   "WeilConjectures.CoefficientDualModels.scalarModulesAdditive",
+   "WeilConjectures.CoefficientDualModels.scalarComplex",
+   "WeilConjectures.CoefficientDualModels.scalarComplexAdditive",
+   "WeilConjectures.CoefficientDualModels.scalarDerived",
+   "WeilConjectures.CoefficientDualModels.scalarCounit",
+   "WeilConjectures.CoefficientDualModels.scalarSection",
+   "WeilConjectures.CoefficientDualModels.restrictionRingSection",
+   "WeilConjectures.CoefficientDualModels.scalarModuleRestriction_existsUnique",
+   "WeilConjectures.CoefficientDualModels.scalarModuleRestriction",
+   "WeilConjectures.CoefficientDualModels.scalarDerivedRestriction_existsUnique",
+   "WeilConjectures.CoefficientDualModels.scalarDerivedRestriction",
+   "WeilConjectures.CoefficientDualModels.scalarCoefficient",
+   "WeilConjectures.CoefficientDualModels.scalarExact",
+   "WeilConjectures.CoefficientDualModels.scalarRational_existsUnique",
+   "WeilConjectures.CoefficientDualModels.scalarRational",
+   "WeilConjectures.CoefficientDualModels.scalarRationalRestriction_existsUnique",
+   "WeilConjectures.CoefficientDualModels.scalarRationalRestriction",
+   "WeilConjectures.CoefficientDualModels.IntegralScalarUnitNormalized",
+   "WeilConjectures.CoefficientDualModels.ScalarTensorNormalized",
+   "WeilConjectures.CoefficientDualModels.ScalarDualNormalized",
+   "WeilConjectures.CoefficientDualModels.scalarDualComparison",
+   "WeilConjectures.CoefficientDualModels.scalarRestrictionDualCompatibility",
+   "WeilConjectures.CoefficientDualModels.scalarRationalModules_existsUnique",
+   "WeilConjectures.CoefficientDualModels.scalarRationalModules",
+   "WeilConjectures.CoefficientDualModels.scalarRationalModulesAdditive",
+   "WeilConjectures.CoefficientDualModels.scalarRationalComplex",
+   "WeilConjectures.CoefficientDualModels.scalarLocalModels",
+   "WeilConjectures.CoefficientDualModels.scalarTailTriangles",
+   "WeilConjectures.CoefficientDualModels.unit_constructible",
+   "WeilConjectures.CoefficientDualModels.integralStageUnit",
+   "WeilConjectures.CoefficientDualModels.stageUnit",
+   "WeilConjectures.CoefficientDualModels.stageDualPair",
+   "WeilConjectures.CoefficientDualModels.stageDual",
+   "WeilConjectures.CoefficientDualModels.stageDualMap",
+   "WeilConjectures.CoefficientDualModels.stageInclusion_existsUnique",
+   "WeilConjectures.CoefficientDualModels.stageInclusion",
+   "WeilConjectures.CoefficientDualModels.stageDual_ambient",
+   "WeilConjectures.CoefficientDualModels.stageScalarDual",
+   "WeilConjectures.CoefficientDualModels.commonUnit",
+   "WeilConjectures.CoefficientDualModels.commonDual_permitted",
+   "WeilConjectures.CoefficientDualModels.commonDualPair",
+   "WeilConjectures.CoefficientDualModels.commonDual",
+   "WeilConjectures.CoefficientDualModels.finiteScalarDualDomain",
+   "WeilConjectures.CoefficientDualModels.finiteScalarDualCoherence",
+   "WeilConjectures.CoefficientDualModels.commonStageDualModelTransport"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientDualModelTransport.lean",
+  "statement": "theorem coefficientDualModelTransport (_hInv : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) : ∃ (d : ∀ (U V : Option X.ProEt) (a : RestrictionArrow X U V), CompletedRestrictionComparisons l E X a), (∀ (U V : Option X.ProEt) (a : RestrictionArrow X U V), (d U V a).Normalized) ∧ CompletedRestrictionComparisons.Coherent l E X d ∧ ∃ (e : ∀ (U V : Option X.ProEt) (a : RestrictionArrow X U V), dual l E X U ⋙ restrictionRational l E X a ≅ (restrictionRational l E X a).op ⋙ dual l E X V) (η : ∀ U : Option X.ProEt, (dual l E X U).obj (op (unit l E X U)) ≅ unit l E X U), (∀ U : Option X.ProEt, HEq (η U).hom ((q l E X U).map (integralUnitEvaluation l E X U))) ∧ (∀ (U V : Option X.ProEt) (a : RestrictionArrow X U V) (K : Rational l E X U), HEq ((e U V a).hom.app (op K)) ((q l E X V).map (integralDualRestriction l E X (d U V a) K.obj).hom)) ∧ (∀ (U V : Option X.ProEt) (a : RestrictionArrow X U V), (restrictionRational l E X a).map (η U).hom ≫ (unitRestriction l E X a).hom = (e U V a).hom.app (op (unit l E X U)) ≫ (dual l E X V).map (unitRestriction l E X a).inv.op ≫ (η V).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of return at 380c636423b2: definition-only statement dependencies and canonical map normalizations on units, finite free generators, scalar-Hom base change, constructible/ambient inclusion and common stages. No mathematical hypotheses or node statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7250bb75e",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Re-delivery after the 380c636 RETURN. H2 fixed: the five theorem stmt_deps are replaced by 3 new existing:true definition ownership nodes (def-sf-raw-rational-slice-coefficients, def-sf-completed-slice-restriction-data, def-sf-normalized-constant-coefficient-scalar-unit; H12 fields OK, no collision in side-live) plus 4 existing def nodes; the base 10 stmt_deps are kept; the item changes only in stmt_deps/lean; the statement is verbatim; all 68 declarations are present; no line over 100 chars. H3 fixed: eta = q.map evaluation at 1; dualFiniteFreeRetract coordinates = evaluation on the standard generators; beta/epsilon pinned by ScalarDualNormalized (transpose of extended evaluation, then Hom of multiplication; mu/kappa fixed on generators and K-flat squares); the scalarRestrictionDualCompatibility unit square now compares pinned maps; free-sum isos pinned on generators; stageDual_ambient = identity; stageScalarDual/commonStageDualModelTransport use rationalHomScalarComparison, constantCoefficientIntegralScalarIso, unitor/operationStageTransitionIso/isoToStage; the HEq object equalities hold by unfolding (coefficient none = Q(single unit) = integralConstantCoefficientObject). Hypotheses, universes and edge cases (m=0, b<a, E=L, identity restriction) are OK; no hollow defs (scalarData = choose of a proved theorem); all proofs are sorry; docstrings present. Advisory: coefficientDualModelTransport does not require GlobalModel on d (homIso constrained by coherence and the pinned unit square only); no slice-level coefficient tower clause; derivedChangeOfRings is carried transitively via def-weil-completed-integral-scalar-data. No compile (no file changed)."
+ }
+}

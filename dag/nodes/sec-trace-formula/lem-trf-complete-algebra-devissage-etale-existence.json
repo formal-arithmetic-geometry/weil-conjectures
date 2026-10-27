@@ -14,9 +14,205 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}R$, $X=\\operatorname{Spec}S$, and $\\mathcal F=\\widetilde N$, with the points $b,x$ corresponding to $\\mathfrak p,\\mathfrak q$. The affine-spectrum dictionary identifies their residue fields with the ring residue fields. The finite generating family of $S/R$ makes $X\\to B$ locally finite type by the affine-pairs criterion. The associated sheaf is quasi-coherent, and its global sections are $N$ by the tilde/global-sections isomorphism; the affine finite-type criterion therefore makes $\\mathcal F$ finite type. We will construct a pointed affine chain of [def-trf-pointed-scheme-devissage-data] after elementary etale changes, then use [lem-trf-pointed-devissage-affine-translation].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-trf-pointed-devissage-affine-translation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I1 (lemma-existence-algebra), affine setup; Tag 05HR (proposition-existence-complete-at-x)."
+   }
+  },
+  {
+   "text": "The induction is quantified over every locally finite type morphism of affine schemes $X\\to B$, every finite-type quasi-coherent $\\mathcal F$, and every $x\\mapsto b$: after elementary etale changes of both pointed schemes there is a pointed affine devissage chain. For the nonzero fibre-stalk case use strong induction on $d=\\dim_x\\operatorname{Supp}(\\mathcal F_b)\\geq0$. This integer is finite: the affine-pairs criterion gives a finite generating family for the coordinate algebra, whose images generate its fibre algebra over $\\kappa(b)$, and the finite-type dimension theorem makes that fibre finite dimensional. The fibre sheaf is again associated to a finite module: tensor the original finite generating list, and apply the affine finite-type criterion. Its support is closed by [lem-weil-pbc-finite-type-module-support-closed]. Any chain of irreducible closed subsets in this closed support is a chain in the fibre, so its dimension and the minimum defining dimension at a point are finite too. This establishes the induction measure for every auxiliary input, not just the original module.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-kun-dimension-finite-type",
+    "def-kun-dimension",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, first proof sentence, with the induction quantified over all affine input data."
+   }
+  },
+  {
+   "text": "First handle the zero fibre-stalk case, at any induction stage. On the affine scheme write $\\mathcal F=\\widetilde L$ with $L$ finite, using the tilde/global-sections and finite-type criteria. The affine pullback and stalk formulae identify $(\\mathcal F_b)_x$ with $L_{\\mathfrak q}/\\mathfrak m_bL_{\\mathfrak q}$. The image of $\\mathfrak m_b$ lies in the maximal ideal of the local ring at $x$. Nakayama gives $L_{\\mathfrak q}=0$. The finite-type surjective-on-stalk lemma applied to $0\\to\\mathcal F$ gives an open neighbourhood on which $\\mathcal F=0$. Take an affine open neighbourhood inside it. Its inclusion is elementary etale, and the zero sheaf has the length-zero chain by definition. The base can be left unchanged. This case needs no induction hypothesis.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-nakayama-jacobson",
+    "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, terminating zero-cokernel case, with Nakayama and the finite-type zero neighbourhood written explicitly."
+   }
+  },
+  {
+   "text": "Suppose now the fibre-stalk is nonzero and its support has dimension $d$ at $x$. Apply [lem-trf-elementary-module-devissage]. Its input hypotheses are exactly local finite type, finite-type quasi-coherence, and this nonzero fibre-stalk. It gives affine elementary etale source and base changes, a finite $\\pi:Z\\to Y$, a finitely presented closed immersion $i:Z\\to X$, $i_*\\mathcal G\\cong\\mathcal F$, the singleton marked fibre, the purely transcendental residue extension, and smooth geometrically integral fibres of relative dimension $d$. Integral after all field extensions implies irreducible after all field extensions, by the definitions. Thus these are the one-step data of [def-trf-pointed-scheme-devissage-data]. Rename the changed data $B,X,\\mathcal F,x,b,Z,Y,\\mathcal G,z,y$. We retain $d$ from before the change; no unquoted assertion about invariance of support dimension under etale maps is needed.",
+   "uses": [
+    "lem-trf-elementary-module-devissage",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, first paragraph via 05H6 (lemma-elementary-devissage-variant) and 057S (lemma-elementary-devissage)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-devissage-generic-basis-drop] on $Y$ to $\\mathcal H=\\pi_*\\mathcal G$. It is quasi-coherent by the affine-pushforward theorem, since $\\pi$ is finite and hence affine. It is finite type: on affine sections $\\mathcal G$ is a finite $\\Gamma(Z,\\mathcal O_Z)$-module; this ring is finite over $\\Gamma(Y,\\mathcal O_Y)$ by finiteness of $\\pi$, and products of two finite generating lists generate the restricted module. The affine finite-type criterion applies. Obtain $\\alpha:\\mathcal O_Y^{\\oplus r}\\to\\pi_*\\mathcal G$ with the required generic-fibre isomorphism and finite-type quasi-coherent cokernel $\\mathcal Q$, whose fibre support has dimension $<d$ if nonempty. If $(\\mathcal Q_b)_y=0$, Step 3 gives an open neighbourhood of $y$ where $\\mathcal Q=0$. Choose a principal open $W$ inside it: write the complementary closed set as $V(I)$ and take $f\\in I$ outside the marked prime. Then $D(f)$ contains the marked point and misses $V(I)$. Apply the target-shrinking part of [lem-trf-devissage-pointed-restriction]. The restricted $\\alpha$ is surjective, so the first datum alone is a complete chain of length one. In particular this completes the case $d=0$.",
+   "uses": [
+    "lem-trf-devissage-generic-basis-drop",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-devissage-pointed-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, second paragraph; 05HF (lemma-existence-alpha); 05HA (lemma-shrink), target restriction."
+   }
+  },
+  {
+   "text": "If $(\\mathcal Q_b)_y\\ne0$, its support dimension at $y$ is an integer strictly less than $d$ by Step 5. Apply the strong induction hypothesis to the affine morphism $Y\\to B$ and module $\\mathcal Q$. Smoothness includes local finite presentation, hence local finite type (its local finite polynomial presentations have finitely many algebra generators). The induction gives a square of elementary pointed etale maps $(Y',y')\\to(Y,y)$ and $(B',b')\\to(B,b)$ and a pointed chain for the pullback $\\mathcal Q'$ on $Y'$. The base ring is allowed to change because the induction hypothesis in Step 2 quantified over all affine data.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, third paragraph: apply induction to the cokernel on Y."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-devissage-pointed-etale-refinement] to the first datum and the square from Step 6. Its hypotheses include the singleton marked finite fibre and purely transcendental extension, both supplied in Step 4. It produces $(B'',b'')\\to(B',b')$, elementary $(X'',x'')\\to(X,x)$, and affine $Y''\\subset X_1:=Y'\\times_{B'}B''$, with the new one-step datum and $Z''=Z\\times_YY''$. Pull back $\\alpha$ using the stated finite-pushforward comparison. Its generic residue-field map is still an isomorphism, and its cokernel is the restriction to $Y''$ of the pullback $\\mathcal Q_1$ of $\\mathcal Q'$ to $X_1$. By the pointed base-change clause of [lem-trf-devissage-pointed-restriction], the chain of Step 6 pulls back to a chain for $\\mathcal Q_1/X_1/B''$. The marked point of $X_1$ belongs to $Y''$.",
+   "uses": [
+    "lem-trf-devissage-pointed-etale-refinement",
+    "lem-trf-devissage-pointed-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, middle proof paragraphs: 05HE refinement and 05HK pointed base change."
+   }
+  },
+  {
+   "text": "Make the first datum and the tail fit exactly. Apply the initial-open shrinking clause of [lem-trf-devissage-pointed-restriction] to the chain on $X_1$ and its open neighbourhood $Y''$. This gives a principal base restriction $B_1\\subset B''$ and a principal open $V\\subset X_1$ contained in $Y''$, with a chain for $\\mathcal Q_1|_V$. Because $V$ is a principal open of $X_1$ contained in the open $Y''$, it is also the principal open in $Y''$ defined by restriction of the same function. First restrict the first datum to $B_1$, then apply its target-shrinking clause to $V$. After a further principal base restriction $B_2\\subset B_1$ its smooth target is exactly $V\\times_{B_1}B_2$. Base change the shrunken tail to $B_2$, using clause (1) of that same node. Its initial module is now exactly the cokernel of the restricted first $\\alpha$. Concatenate the first datum with this tail: the connecting module isomorphism is this cokernel identification, every generic-fibre map is an isomorphism, and the last cokernel is zero. These are every clause of the chain definition. This finishes the strong induction.",
+   "uses": [
+    "lem-trf-devissage-pointed-restriction",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, final proof paragraph: use 05HM on the tail, then 05HA on the first target, then concatenate."
+   }
+  },
+  {
+   "text": "Apply the induction just proved to Step 1 and write its final affine source and base as $\\operatorname{Spec}S_0$ and $\\operatorname{Spec}R_0$, with marked primes $\\mathfrak q_0,\\mathfrak p_0$. Their maps to the original affine schemes give the required commutative ring square, all three contractions, and both residue-field isomorphisms by the affine-spectrum dictionary and the construction. Elementary etale maps compose: their scheme maps are etale by composition, and their induced field maps are composites of isomorphisms. The pullback comparison identifies the final module with $\\widetilde{S_0\\otimes_SN}$; tensor symmetry $s_0\\otimes n\\mapsto n\\otimes s_0$, with itself as inverse, identifies it with $\\widetilde{N\\otimes_SS_0}$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I1, elementary etale square, via the complete induction of 05HR; 05HW elementary-etale-localization definition."
+   }
+  },
+  {
+   "text": "Check the algebra hypotheses before the final translation. Put $C=S\\otimes_RR_0$. The map $\\operatorname{Spec}C\\to\\operatorname{Spec}S$ is etale by base change, and the composite of $\\operatorname{Spec}S_0\\to\\operatorname{Spec}C$ with this projection is the constructed etale source map. Etale cancellation makes $\\operatorname{Spec}S_0\\to\\operatorname{Spec}C$ etale, hence locally finitely presented, and the affine finite-presentation criterion gives finitely many generators of $S_0$ over $C$. The images $s_j\\otimes1$ of the original generators of $S/R$ generate $C/R_0$; adjoining the new generators gives a finite generating family of $S_0/R_0$. If $n_j$ generate $N/S$, then $n_j\\otimes1$ generate $N\\otimes_SS_0/S_0$: write each $n$ as $\\sum s_jn_j$ in a pure tensor. Finally apply [lem-trf-pointed-devissage-affine-translation] to the constructed chain, forgetting its marked intermediate points. It gives exactly the complete algebra devissage required by the item. No flatness was used in any step.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-trf-pointed-devissage-affine-translation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I1 and 05I0 (remark-same-notion), first implication; finite type over the changed base checked explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-trf-pointed-scheme-devissage-data",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "lem-kun-dimension-finite-type",
+  "lem-trf-devissage-generic-basis-drop",
+  "lem-trf-devissage-pointed-etale-refinement",
+  "lem-trf-devissage-pointed-restriction",
+  "lem-trf-elementary-module-devissage",
+  "lem-trf-pointed-devissage-affine-translation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I1 (lemma-existence-algebra), expanded through 05HR (proposition-existence-complete-at-x) and 05I0 (remark-same-notion); dimension induction using 057S, 05HF, 05HE, 05HK, 05HA and 05HM, with support-dimension equalities omitted only in the auxiliary chain as in the weaker algebraic definition 05HX."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,7 +272,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-algebra-etale-projective-neighborhood",
@@ -111,5 +307,138 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-complete-algebra-devissage-etale-existence",
+  "worker": "stage1",
+  "summary": "Retained the statement and inherited searches. Expanded the source reformulation 05I1 into its actual 05HR induction, including zero fibre-stalk, generic-basis dimension drop without flatness, elementary etale refinement, matching standard opens, and affine translation. Five strictly supporting nodes record data and operations, not a repeated existence theorem. Read all cited statements and tested zero modules, d=0, torsion modules, non-Noetherian bases and noncartesian etale squares.",
+  "blueprint": "The inherited historical supporting-algebra branch of lem-trf-local-term-locality, clauses (1)-(2), via lem-trf-flat-algebra-etale-projective-neighborhood Step 1. The current latest ancestor uses contracting correspondences; no change to its unit route is made. This split realizes the specific 05I1 complete-devissage input retained in the inherited branch, by the 05HR induction rather than introducing another existence node. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic affine scheme/module calculus used in the 05I1/05HR argument; no node of sk-i-curve-zero provides this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-module-finite-type-surjective-on-stalk",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-1f9b76413",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-1f9b76413 (reviewer sub-agent of L); spot-checked: First split: the item is unsplit with no repair note on the base, live and side-live, and none of the five new ids exists live. Read Stacks flat.tex 057S, 05H4-05H9, 05HA, 05HE, 05HF, 05HH-05HM, 05HR, 05HW, 05HX, 05I0, 05I1; tags match. The item statement is unchanged and is 05I1 without the q0 pointing (already so on the base). Steps 1-10 follow the 05HR induction exactly: an explicit strong induction on d, the zero case by Nakayama, 057S keeping d as the relative dimension of Y, the 05HF drop, the 05HE refinement with 05HK base change, the 05HM/05HA matching and concatenation, then the 05I0 translation with étale cancellation over S tensor R0. Every cited statement checked. The five new nodes are true, strictly smaller, self-contained statements from distinct Stacks lemmas, none restating the item. Generic-basis drop: a proper closed subset of an irreducible d-dimensional space has dimension < d; r=0 and d=0 hold. Restriction: the base is shrunk into the image of W. Translation: flatness makes rC_j prime. No duplicates: 05I5/05IA generic-basis nodes need flatness, sfb devissage base change is unpointed algebra. Batch-5 flag: all six cited sec-trace-formula nodes are generic Stacks flat.tex dévissage algebra, not the trace formula or Poincaré duality or steps of their proofs, so the flag does not apply. The 17 declared generic affine-calculus tool uses are accepted. No SGA. proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompleteAlgebraDevissageEtaleExistence",
+  "declaration": "AlgebraicGeometry.exists_completeAlgebraDevissage_etale",
+  "file": "lean/Sheaf/TraceFormula/CompleteAlgebraDevissageEtaleExistence.lean",
+  "statement": "theorem exists_completeAlgebraDevissage_etale (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (N : Type v) [AddCommGroup N] [Module S N] [Module.Finite S N] (q : Ideal S) [q.IsPrime] (p : Ideal R) [p.IsPrime] (_hp : p = q.comap (algebraMap R S)) : ∃ (R₀ : CommAlgCat.{u} R) (S₀ : CommAlgCat.{u} S) (φ : R₀ →+* S₀) (q₀ : PrimeSpectrum S₀) (p₀ : PrimeSpectrum R₀) (hq : q = q₀.asIdeal.comap (algebraMap S S₀)) (hp : p = p₀.asIdeal.comap (algebraMap R R₀)), φ.comp (algebraMap R R₀) = (algebraMap S S₀).comp (algebraMap R S) ∧ p₀.asIdeal = q₀.asIdeal.comap φ ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap R R₀))) ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap S S₀))) ∧ Function.Bijective (Ideal.ResidueField.map p p₀.asIdeal (algebraMap R R₀) hp) ∧ Function.Bijective (Ideal.ResidueField.map q q₀.asIdeal (algebraMap S S₀) hq) ∧ ∃ (hft : @Algebra.FiniteType R₀ S₀ _ _ φ.toAlgebra) (hN : Module.Finite S₀ (S₀ ⊗[S] N)), Nonempty (@CompleteAlgebraDevissage R₀ S₀ _ _ φ.toAlgebra hft p₀.asIdeal inferInstance (S₀ ⊗[S] N) inferInstance inferInstance hN)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-139134015",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read Stacks flat.tex 05HW/05HX/05HY/05I0/05I1 and all five stmt_dep lean records (Module.Finite, AlgebraicGeometry.Etale, Localization.AtPrime/Ideal.ResidueField, TensorProduct, CompleteAlgebraDevissage). Clause-by-clause match: commutative square, three prime contractions, étale Spec maps, canonical Ideal.ResidueField.map bijectivity (checked Mathlib signature), finite type and dévissage both via φ.toAlgebra, S₀⊗[S]N canonical via TensorProduct.comm. No flatness/Noetherian/universe restriction; [p.IsPrime] follows from _hp; R₀,S₀ in universe u loses no generality. Node diff vs side-live is only the lean record; statement verbatim in file; one sorry, no defs; docstrings carry 05I1 source place, blueprint id and the 10-step plan; report has both required sections; proof-only imports exist in side-live. No duplicate found. No file changed, so no compile."
+ }
 }

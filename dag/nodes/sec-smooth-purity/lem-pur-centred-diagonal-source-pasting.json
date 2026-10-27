@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-centred-diagonal-source-pasting",
+ "kind": "statement",
+ "title": "Centred source coordinates transport diagonal pasting",
+ "statement": "Fix the finite purity datum [def-pur-conventions], affine finite-type k-schemes U,V,T, smooth separated finite-type maps f:U→V and g:V→T of dimensions d,e, and etale charts x:U→A^d_V and y:V→A^e_T over their maps. Let z be their ordered etale composite with coordinates (x,f*y). Choose arbitrary centred open difference-coordinate neighbourhoods for the diagonals of f,g,fg, with their section factorizations, etale difference maps and Cartesian zero-section squares [lem-pur-diagonal-dnc-chart-normalization]. For every normalized etale compact-support presentation N, assume the orientation-free ChartEquation of [lem-pur-diagonal-section-pasting]. Then kappa followed by the centred source comparison for fg equals the tensor of the centred source comparison for f and the pulled-back centred source comparison for g followed by canonical standard zero-section base change, then nu. Here kappa and nu are precisely the comparison-site transports of the existing diagonal-pasting maps, including source-origin, tensor and pullback constraints. No orientation or choice of trivialization is inserted. The assertion includes zero ranks and empty schemes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, specified compatible-chart source comparisons; compatible-chart DAG proof Steps 5--6"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-pur-diagonal-section-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Use chartGeometry for the full difference maps. The single-chart first difference equals chartCoordinateDifferences: apply affine-space extensionality and the appTop composition equation to every coordinate. The ordered coordinate formula for z identifies its first difference with differenceTotal: check the common base projection and each Fin.addCases block. This proof also covers zero blocks.",
+   "uses": [
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of f, g, and fg apply sectionEtaleRestriction_open_cancel and map the equality through the site-comparison functor, preceded by sourceComparison. This identifies each centred chartSourceCoordinateComparison with sourceComparison followed by the mapped full etaleSection. The factorization of the section suffices; no Cartesian claim is made about the full difference map.",
+   "uses": [
+    "lem-pur-section-etale-open-cancellation",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already stated difference_second_input_restriction. Rewrite each normalizedE using normalizedE_eq_etaleRestriction. Expanding etaleSection and sectionBaseChange turns that equality into gammaG followed by the second full difference comparison equals pullback of the g full difference comparison followed by the canonical standard zero-section base change.",
+   "uses": [
+    "lem-pur-difference-second-input-restriction",
+    "lem-pur-normalized-etale-restriction-comparison",
+    "lem-pur-diagonal-section-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "ChartEquation is already equality after mapping by site comparison. Tensor-comparison naturality in both variables carries its tensorComparison to the tensor of the mapped input comparisons. Naturality of pullComparison moves the g comparison across pullback. Use the previous three single-chart identifications, cancel sourceComparison inverse followed by sourceComparison, and apply bifunctoriality of tensor to obtain precisely the stated equality. All these naturality and cancellation calculations are proved private Lean helpers, with no new hypotheses or orientations.",
+   "uses": [
+    "lem-pur-diagonal-section-pasting"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-section-pasting",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-pur-section-etale-open-cancellation",
+  "lem-pur-difference-second-input-restriction",
+  "lem-pur-normalized-etale-restriction-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, compatible-chart source comparisons; formalized by D3 using open cancellation and agreement of normalized locality presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derivations of etale affine coordinates compose smooth morphisms direct sum Kahler differential frames",
+   "results": "Eight hits on formally etale differential base change and polynomial differential bases; no assertion about specified exceptional-adjunction source maps.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans, CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso_trans and general categorical coherence lemmas; no centred source-coordinate transport theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SameProEtaleMap|centred.*pasting|chartSourceCoordinateComparison",
+   "results": "Read DiagonalDncChartNormalization, PurityDiagonalSectionPasting, DifferenceCoordinateSectionIdentifications and ChartDiagonalSourceMate. The first two supply the maps and ChartEquation; neither states their centred-coordinate transport. The latter two use different intermediate identifications. Mathlib and WeilConjectures contain the general functoriality but not these project-specific maps.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCompatibleDncCharts",
+  "date": "2026-10-26",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, specified compatible-chart source comparisons; compatible-chart DAG proof Steps 5--6",
+   "via": [
+    "lem-pur-composition-compatible-dnc-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CentredDiagonalSourcePasting",
+  "file": "lean/Sheaf/Paper/CentredDiagonalSourcePasting.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.centred_diagonal_source_pasting",
+  "statement": "theorem centred_diagonal_source_pasting (P : PurityFiniteSetting.{u})\n    {U V T : Scheme.{u}} [IsAffine U] [IsAffine V] [IsAffine T]\n    (d e : ℕ) (f : U ⟶ V) (g : V ⟶ T)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]\n    (aT : T ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aT] [QuasiCompact aT]\n    (x : U ⟶ DiagonalPasting.A d V) (y : V ⟶ DiagonalPasting.A e T)\n    [Etale x] [Etale y]\n    (hx : x ≫ DiagonalPasting.pr d V = f) (hy : y ≫ DiagonalPasting.pr e T = g)\n    (z : U ⟶ DiagonalPasting.A (d + e) T) [Etale z]\n    (hz : z = AffineSpace.homOfVector (f ≫ g) fun i ↦ Fin.addCases\n      (fun j ↦ x.appTop (AffineSpace.coord V (ULift.up j)))\n      (fun j ↦ f.appTop (y.appTop (AffineSpace.coord T (ULift.up j)))) i.down)\n    (Of : (pullback f f).Opens) (sf : U ⟶ Of.toScheme)\n    (hsf : sf ≫ Of.ι = pullback.diagonal f)\n    (hef : Etale (Of.ι ≫ chartCoordinateDifferences d f x))\n    (sqf : IsPullback sf (𝟙 U) (Of.ι ≫ chartCoordinateDifferences d f x)\n      (DiagonalPasting.zero d U))\n    (Og : (pullback g g).Opens) (sg : V ⟶ Og.toScheme)\n    (hsg : sg ≫ Og.ι = pullback.diagonal g)\n    (heg : Etale (Og.ι ≫ chartCoordinateDifferences e g y))\n    (sqg : IsPullback sg (𝟙 V) (Og.ι ≫ chartCoordinateDifferences e g y)\n      (DiagonalPasting.zero e V))\n    (Ofg : (pullback (f ≫ g) (f ≫ g)).Opens) (sfg : U ⟶ Ofg.toScheme)\n    (hsfg : sfg ≫ Ofg.ι = pullback.diagonal (f ≫ g))\n    (hefg : Etale (Ofg.ι ≫ chartCoordinateDifferences (d + e) (f ≫ g) z))\n    (sqfg : IsPullback sfg (𝟙 U)\n      (Ofg.ι ≫ chartCoordinateDifferences (d + e) (f ≫ g) z)\n      (DiagonalPasting.zero (d + e) U))\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    letI := P.noetherian aT\n    letI := P.noetherian (g ≫ aT)\n    letI := P.noetherian (f ≫ g ≫ aT)\n    letI := P.comparedExponent (𝟙 (Spec (.of P.field.k)))\n    letI := (DiagonalPasting.geometryProperties d e f g).2.2.2.2\n    let tensorIso {K K' L L' : _root_.DerivedCategory\n        (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} P.Coefficient))}\n        (a : K ≅ K') (b : L ≅ L') :=\n      ((ProEtale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) U).mapIso a).app L ≪≫\n        ((ProEtale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) U).obj K').mapIso b\n    letI : IsNoetherianRing P.Coefficient := isNoetherian_of_finite P.Coefficient P.Coefficient\n    letI : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) U).PreservesFlat :=\n      ProEtale.preservesFlat_comparisonUpperStar\n    let comparisonTensor (K L : _root_.DerivedCategory\n        (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) :=\n      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso\n        (ModuleCat.{u + 1} P.Coefficient) K).app L\n    let kappa :=\n      letI := P.noetherian aT\n      letI := P.noetherian (g ≫ aT)\n      letI := P.noetherian (f ≫ g ≫ aT)\n      letI := P.comparedExponent (𝟙 (Spec (.of P.field.k)))\n      let hgeom := DiagonalPasting.geometryProperties d e f g\n      letI := hgeom.1\n      letI := hgeom.2.1\n      letI := hgeom.2.2.1\n      letI := hgeom.2.2.2.1\n      letI := hgeom.2.2.2.2\n      tensorIso\n        (Dnc.sourceComparison P d (pullback.fst f f) (f ≫ g ≫ aT) (pullback.diagonal f))\n        ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.mapIso\n          (Dnc.sourceComparison P e (pullback.fst g g) (g ≫ aT) (pullback.diagonal g)) ≪≫\n            Dnc.pullComparison P f (DiagonalPasting.diagonalSection P.Coefficient P g)) ≪≫\n      (comparisonTensor\n        (DiagonalPasting.diagonalSection P.Coefficient P f)\n        ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.obj\n          (DiagonalPasting.diagonalSection P.Coefficient P g))).symm ≪≫\n      (ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.mapIso\n          (DiagonalPasting.kappa P.Coefficient P d e f g aT) ≪≫\n      (Dnc.sourceComparison P (d + e) (pullback.fst (f ≫ g) (f ≫ g))\n        ((f ≫ g) ≫ aT) (pullback.diagonal (f ≫ g))).symm\n    let nu :=\n      (comparisonTensor (DiagonalPasting.zeroInvariant P.Coefficient P d U)\n        (DiagonalPasting.zeroInvariant P.Coefficient P e U)).symm ≪≫\n      (ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.mapIso\n          (DiagonalPasting.nu P.Coefficient P d e U (f ≫ g ≫ aT))\n    letI := Dnc.invertibleExponent P (DiagonalPasting.pr e V ≫ (g ≫ aT))\n    letI := Dnc.compactifiable P (DiagonalPasting.pr e V) (g ≫ aT)\n    letI := Dnc.compactifiable P (DiagonalPasting.pr e U) (f ≫ g ≫ aT)\n    letI := DiagonalPasting.affineDimension e V\n    let standardPullback :=\n      Dnc.pullComparison P f (P.chartStandardSection V e (g ≫ aT)) ≪≫\n        (ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.mapIso\n            (Dnc.sectionBaseChange P.Coefficient e (DiagonalPasting.pr e V)\n              (AffineSpace.isPullback_map f) (DiagonalPasting.zero e V)\n              (DiagonalPasting.zero e U) (AffineSpace.zeroSection_comp_map f))\n    let cf := P.chartSourceCoordinateComparison d f (g ≫ aT) x Of sf hsf hef sqf N\n    let cg := P.chartSourceCoordinateComparison e g aT y Og sg hsg heg sqg N\n    let cfg := P.chartSourceCoordinateComparison (d + e) (f ≫ g) aT z\n      Ofg sfg hsfg hefg sqfg N\n    DiagonalPasting.ChartEquation P.Coefficient P d e f g aT x y hx hy →\n    kappa ≪≫ cfg =\n      tensorIso cf\n        ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.mapIso cg ≪≫\n          standardPullback) ≪≫ nu",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261025T202715-L-2744279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T001202-L-4173771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

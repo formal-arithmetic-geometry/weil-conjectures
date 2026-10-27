@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-ordinary-open-finite-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the ordinary system open counit",
+ "statement": "Fix a prime l, a finite extension E/Q_l, an open immersion j:X→Y, an ordinary system open extension o as in [def-sf-integral-system-operations], and a nonnegative coefficient index n. There is a finite left adjoint L to the specified finite inverse image, with adjunction adj, and a natural isomorphism e:o.ordinary ev_Y,n ≅ ev_X,n L. For every system N on Y, evaluation of o.adjunction.counit at N equals e at the system inverse image of N, followed by L applied to the inverse of the specified inverse-image/evaluation comparison [def-pur-completed-pullback-tensor-comparison], followed by adj.counit at ev_Y,n(N). This assertion has no completed coefficient module, ordinary reduction functor or reconstruction model as input.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, open-factor normalization: the ordinary section-normalized quotient/open map."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the existing varying-ring operations to the actual positive quotient rings ULift(O_E/varpi^(n+1)) and their quotient maps. The sequence module categories and their evaluation functors are definitionally the recorded coefficientSequenceModules and coefficientSequenceEvaluation. Uniqueness of the section-normalized sequence ring map identifies pullbackTensorSequenceDirect with the varying-ring pushforward. The adjunction transpose identity identifies the finite right adjoint with the standard constant-ring direct image.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-completed-pullback-tower-realizations",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual direct-image evaluation comparison is the varying-ring moduleEvalP: both maps are identity on every section, so function extensionality and the existing module-functor isomorphism extensionality theorem identify them. Let q be the unit-preserving uniqueness isomorphism from the specified finite inverse image to the standard constant-ring inverse image. Transposing under the finite adjunction, its unit identity and the unit equation for moduleEvalG show that the specified inverse-image/evaluation comparison is evaluation whiskered with q followed by moduleEvalG inverse. Injectivity of the Hom equivalence proves equality of the natural isomorphisms. This uses the actual normalization, not an arbitrary comparison.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-sp-varying-ring-operations",
+    "lem-sp-varying-ring-module-eval-g-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved ordinaryOpenMateIso in VaryingRingOperations. Transport its invertibility to the supplied ordinary open extension by leftAdjointUniq and mateEquiv_leftAdjointUniq. The inverse of this mate supplies e. Choose the standard finite open extension as L, with its open adjunction transported on the right through q inverse. The mate counit identity gives the evaluated system counit formula in standard finite coordinates. Substitute the comparison from the preceding step; functoriality cancels q inverse against q in the transported counit, giving exactly the asserted formula. All constructions are ordinary; no completed coefficients, derived objects, coefficient flatness or nonempty-open hypothesis is used.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "def-sp-varying-ring-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-sp-varying-ring-operations",
+  "lem-sp-varying-ring-module-eval-g-existence",
+  "def-sf-integral-system-operations",
+  "def-cbc-strict-tower-open-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, open-factor normalization: the ordinary section-normalized quotient/open map. Q6: specialize the proved varying-ring ordinary open mate, identify its unit normalization by Hom-equivalence injectivity, and transport the finite counit by left-adjoint uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at a coefficient index commutes with extension by zero for open immersions and preserves the adjunction counit",
+   "results": "Eight hits on ordinary scheme module restriction and open-immersion sections; none states evaluation of the ordinary coefficient-system open counit.",
+   "date": "2026-10-27",
+   "verdict": "No match for the system assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\", \"counit\"",
+   "results": "Four generic leftAdjointUniq_hom_counit and component/assoc variants.",
+   "date": "2026-10-27",
+   "verdict": "Useful for transporting adjunction counits; does not prove finite evaluation compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_counit_app_of_iso|isIso_counit_app_iff_mem_essImage|coForAdj",
+   "results": "Eight Mathlib hits, including Adjunction.isIso_counit_app_of_iso and isIso_counit_app_iff_mem_essImage. Local rg found the proved slice presentation and sequence coextension helpers.",
+   "date": "2026-10-27",
+   "verdict": "Use fully faithful adjunction API for finite support; no actual open evaluation theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OrdinaryOpenReductionMate",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence, open-factor normalization: the ordinary section-normalized quotient/open map.",
+   "via": [
+    "lem-sf-ordinary-open-reduction-mate",
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryOpenFiniteEvaluation",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryOpenFiniteEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryOpenFiniteEvaluation",
+  "statement": "theorem ordinaryOpenFiniteEvaluation {X Y : Scheme.{u}}\n    (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j) (n : ℕ) :\n    ∃ (L : normalizedDVRModules l E X n ⥤ normalizedDVRModules l E Y n)\n      (adj : L ⊣ integralOperationsLevelPullback l E j n)\n      (e : o.ordinary ⋙ coefficientSequenceEvaluation l E Y n ≅\n        coefficientSequenceEvaluation l E X n ⋙ L),\n      ∀ N : coefficientSequenceModules l E Y,\n        (coefficientSequenceEvaluation l E Y n).map (o.adjunction.counit.app N) =\n          e.hom.app ((pullbackTensorSequenceInverse l E j).obj N) ≫\n            L.map ((pullbackTensorSequenceInverseEvaluation l E j n).inv.app N) ≫\n            adj.counit.app ((coefficientSequenceEvaluation l E Y n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T222703-L-681951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261027T012921-L-2347546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

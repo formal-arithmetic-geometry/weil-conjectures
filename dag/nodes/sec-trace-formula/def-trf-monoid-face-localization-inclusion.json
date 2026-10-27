@@ -1,0 +1,111 @@
+{
+ "id": "def-trf-monoid-face-localization-inclusion",
+ "kind": "definition",
+ "title": "Canonical map to the fraction submonoid localization",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $P$ be a commutative monoid, written multiplicatively, let $S\\subseteq P$ be a submonoid, and let $i:P\\to P^{\\rm gp}$ be the canonical Grothendieck group map. For the fraction submonoid $P_S=\\{i(p)i(s)^{-1}:p\\in P,\\ s\\in S\\}$ [def-trf-monoid-face-localization], define the canonical monoid homomorphism $j_S:P\\to P_S$ by $j_S(p)=i(p)=i(p)i(1)^{-1}$. Thus $j_S$ is $p\\mapsto p/1$, with codomain membership witnessed by numerator $p$ and denominator $1\\in S$. No integrality, finiteness, saturation, or face hypothesis is needed to define this map.",
+ "stmt_deps": [
+  "def-trf-monoid-face-localization"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII 3.1.2, printed p. 98 (localization inside the group completion and its canonical monoid map)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Define localization of an integral commutative monoid at a submonoid as fractions inside its Grothendieck group with canonical map p to p divided by one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Localization\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{M : Type u_1} → [inst : CommMonoid M] → Submonoid M → Type u_1\", \"doc\": \"For a commutative monoid $ M $ and a submonoid $ S $, $ \\\\text{Localization}(S, M) $ denotes the Ore localization of $ M $ with respect to $ S $. This is constructed as the quotient of the set of pairs\"}\n  {\"name\": \"AddLocalization\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{M : Type u_1} → [inst : AddCommMonoid M] → AddSubmonoid M → Type u_1\", \"doc\": \"The additive localization of an additive commutative monoid $ M $ with respect to an additive submonoid $ S $, forming a new additive structure where elements of $ S $ are formally invertible.\"}\n  {\"name\": \"Localization.mk\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"(x : M) (y : S) : Localization S\", \"doc\": \"The function maps an element $ x $ of the commutative monoid $ M $ and an element $ s $ of the submonoid $ S $ to the equivalence class $ [x, s] $ in the localization $ M[S^{-1}] $, representing the f\"}\n  {\"name\": \"Localization.monoidOf\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \": Submonoid.LocalizationMap S (Localization S)\", \"doc\": \"For any commutative monoid $ M $ and submonoid $ S \\\\subseteq M $, the canonical localization map $ M \\\\to M[S^{-1}] $ sending each element $ x $ to the equivalence class $ [x, 1] $ in the Ore localizat\"}\n  {\"name\": \"Localization.mkHom\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \": M × S →* Localization S\", \"doc\": \"The monoid homomorphism from $ M \\times S $ to the localization $ M[S^{-1}] $ that sends each pair $ (x, s) $ to the equivalence class $ [x, s] $, preserving the multiplicative structure by mapping ide\"}\n  {\"name\": \"OreLocalization.localizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \": S.LocalizationMap R[S⁻¹]\", \"doc\": \"The canonical localization map from a commutative monoid $ R $ to its Ore localization $ R[S^{-1}] $, defined by sending each element $ x \\\\in R $ to the equivalence class $ [x, 1] $ in $ R[S^{-1}] $. \"}\n  {\"name\": \"IsLocalization.toLocalizationMap\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \": M.LocalizationMap S\", \"doc\": \"When $ S $ is the localization of a commutative semiring $ R $ at a submonoid $ M $, this is the canonical algebra homomorphism from $ R $ to $ S $ that sends every element of $ M $ to an invertible e\"}\n  {\"name\": \"Submonoid.LocalizationMap\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{M : Type u_1} → [inst : CommMonoid M] → Submonoid M → (N : Type u_2) → [CommMonoid N] → Type (max u_1 u_2)\", \"doc\": \"A localization map from a commutative monoid $ M $ to another commutative monoid $ N $ with respect to a submonoid $ S \\\\subseteq M $, which is a monoid homomorphism sending every element of $ S $ to a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib gives quotient localization and its map. Reuse the already published project's literal fraction-submonoid construction and inclusion; no definition node currently owns these definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Submonoid of group completion consisting of fractions p f inverse and the canonical monoid homomorphism into this submonoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submonoid.divPairs\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/DivPairs\", \"type\": \"{M : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommMonoid M] → [inst_1 : CommGroup G] → ⊤.LocalizationMap G → Submonoid G → Submonoid (M × M)\", \"doc\": \"The submonoid of $ M \\times M $ consisting of all pairs $ (a, b) $ such that the division $ f(a)/f(b) $ lies in the submonoid $ s $ of the target monoid, where $ f $ is a given monoid homomorphism.\"}\n  {\"name\": \"Submonoid.isLocalizationMap_of_group\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Basic\", \"type\": \"∀ {M : Type u_1} {G : Type u_2} [inst : CommMonoid M] [inst_1 : CommGroup G] {S : Submonoid M} {f : M → G},\\n  Function.Injective f → (∀ (g : G), ∃ x, ∃ y ∈ S, g = f x / f y) → S.IsLocalizationMap f\", \"doc\": \"If $ f : M \\\\to G $ is an injective monoid homomorphism from a commutative monoid $ M $ to a commutative group $ G $, and every element $ g \\\\in G $ can be written as $ g = f(x)/f(y) $ for some $ x \\\\in \"}\n  {\"name\": \"Submonoid.LocalizationMap\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Basic\", \"type\": \"{M : Type u_1} → [inst : CommMonoid M] → Submonoid M → (N : Type u_2) → [CommMonoid N] → Type (max u_1 u_2)\", \"doc\": \"A localization map from a commutative monoid $ M $ to another commutative monoid $ N $ with respect to a submonoid $ S \\\\subseteq M $, which is a monoid homomorphism sending every element of $ S $ to a\"}\n  {\"name\": \"Submonoid.mem_divPairs\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/DivPairs\", \"type\": \"∀ {M : Type u_1} {G : Type u_2} [inst : CommMonoid M] [inst_1 : CommGroup G] {f : ⊤.LocalizationMap G} {s : Submonoid G}\\n  {x : M × M}, x ∈ Submonoid.divPairs f s ↔ f x.1 / f x.2 ∈ s\", \"doc\": \"For a monoid homomorphism $ f : M \\\\to N $ and a submonoid $ s \\\\subseteq N $, a pair $ (a, b) \\\\in M \\\\times M $ belongs to the divisor pairs submonoid $ \\\\mathrm{divPairs}(f, s) $ if and only if the divi\"}\n  {\"name\": \"Localization.monoidOf\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/Basic\", \"type\": \"{M : Type u_1} → [inst : CommMonoid M] → (S : Submonoid M) → S.LocalizationMap (Localization S)\", \"doc\": \"For any commutative monoid $ M $ and submonoid $ S \\\\subseteq M $, the canonical localization map $ M \\\\to M[S^{-1}] $ sending each element $ x $ to the equivalence class $ [x, 1] $ in the Ore localizat\"}\n  {\"name\": \"IsLocalization.toInvSubmonoid\", \"module\": \"Mathlib/RingTheory/Localization/InvSubmonoid\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (M : Submonoid R) →\\n      (S : Type u_2) →\\n        [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [IsLocalization M S] → ↥M →* ↥(IsLocalization.invSubmonoid M S)\", \"doc\": \"The monoid homomorphism from a submonoid $ M $ of a commutative semiring $ R $ to the inverse submonoid of $ S $, defined by composing the algebra map $ R → S $ with the multiplicative equivalence bet\"}\n  {\"name\": \"IsLocalization.invSubmonoid\", \"module\": \"Mathlib/RingTheory/Localization/InvSubmonoid\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] → Submonoid R → (S : Type u_2) → [inst_1 : CommRing S] → [Algebra R S] → Submonoid S\", \"doc\": \"The submonoid of $ S $ generated by the image of the algebra map $ R \\to S $, which serves as the set of denominators in the localization of $ R $ at the submonoid $ M $. This submonoid consists precis\"}\n  {\"name\": \"AddSubmonoid.subPairs\", \"module\": \"Mathlib/GroupTheory/MonoidLocalization/DivPairs\", \"type\": \"{M : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : AddCommMonoid M] → [inst_1 : AddCommGroup G] → ⊤.LocalizationMap G → AddSubmonoid G → AddSubmonoid (M × M)\", \"doc\": \"Given an additive commutative monoid $M$, an additive commutative group $G$, the top localization map from $M$ to $G$, and a submonoid $S$ of $G$, this constructs the submonoid of $M \\times M$ consisti\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib gives quotient localization and its map. Reuse the already published project's literal fraction-submonoid construction and inclusion; no definition node currently owns these definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "faceLocalization|toricLocalizationInclusion|def monoidOf|abbrev of",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/MonoidLocalization/GrothendieckGroup.lean\", \"line\": \"47\", \"text\": \"abbrev of : M →* GrothendieckGroup M := (monoidOf ⊤).toMonoidHom\"}\n  {\"file\": \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"line\": \"716\", \"text\": \"def monoidOf : Submonoid.LocalizationMap S (Localization S) :=\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib gives quotient localization and its map. Reuse the already published project's literal fraction-submonoid construction and inclusion; no definition node currently owns these definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'faceLocalization|toricLocalizationInclusion' lean/WeilConjectures lean/Sheaf/TraceFormula/FaceLocalizationFs.lean lean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean; exact declaration ownership search in dag/nodes; blueprint_refs.py search 'face localization'",
+   "results": "lean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:82:def toricLocalizationInclusion {P : Type u} [CommMonoid P] (S : Submonoid P) :\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:83:    P →* Algebra.faceLocalization P S where\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:91:    Units (Algebra.faceLocalization P S) where\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:92:  val := toricLocalizationInclusion S a.1\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:101:    MonoidAlgebra k P →+* MonoidAlgebra k (Algebra.faceLocalization P S) :=\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:102:  MonoidAlgebra.mapDomainRingHom k (toricLocalizationInclusion S)\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:110:      MonoidAlgebra k (Algebra.faceLocalization P S) :=\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:113:      change IsUnit (MonoidAlgebra.mapDomainRingHom k (toricLocalizationInclusion S)\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:117:        (MonoidAlgebra.of k (Algebra.faceLocalization P S)))\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:122:    (h : S ≤ T) : Algebra.faceLocalization P S →* Algebra.faceLocalization P T where\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:142:      MonoidAlgebra k (Algebra.faceLocalization P S) :=\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:145:    change IsUnit (MonoidAlgebra.mapDomainRingHom k (toricLocalizationInclusion S)\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:149:      (MonoidAlgebra.of k (Algebra.faceLocalization P S)))\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:155:    Algebra.faceLocalization P S →* Algebra.faceLocalization Q (S.map h) where\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:216:        MonoidAlgebra.mapDomainRingHom k (Algebra.faceLocalization P\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:226:            (toricLocalizationInclusion (Submonoid.powers a)) I)) ∧\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:227:      (∀ (I : SemigroupIdeal P) (x : Algebra.faceLocalization P (Submonoid.powers a)),\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:228:        x ∈ toricIdealExtension (toricLocalizationInclusion (Submonoid.powers a)) I ↔\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:246:        (Algebra.faceLocalization P (Submonoid.powers a ⊔ Submonoid.powers b)).subtype\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:256:        (Algebra.faceLocalization P (Submonoid.powers a ⊔ Submonoid.powers b)).subtype\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:269:        (toricIdealExtension (toricLocalizationInclusion (Submonoid.powers a)) I) =\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:270:      toricIdealExtension (toricLocalizationInclusion\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:275:        (toricIdealExtension (toricLocalizationInclusion (Submonoid.powers b)) I) =\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:276:      toricIdealExtension (toricLocalizationInclusion\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:281:        (toricIdealExtension (toricLocalizationInclusion (Submonoid.powers a)) I) =\nlean/Sheaf/RingTheory/AffineToricEquivariantIdeals.lean:282:      toricIdealExtension (toricLocalizationInclusion ((Submonoid.powers a).map h))\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:30:def faceLocalization (Q : Type u) [CommMonoid Q] (F : Submonoid Q) :\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:45:noncomputable def faceLocalizationGroupMap {Q : Type u} [CommMonoid Q]\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:47:    Algebra.GrothendieckGroup (faceLocalization Q F) →* Algebra.GrothendieckGroup Q :=\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:64:private theorem faceLocalizationGroupMap_of {Q : Type u} [CommMonoid Q]\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:65:    (F : Submonoid Q) (x : Algebra.faceLocalization Q F) :\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:66:    Algebra.faceLocalizationGroupMap F (Algebra.GrothendieckGroup.of x) = x.1 := by\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:67:  simp [Algebra.faceLocalizationGroupMap, Algebra.GrothendieckGroup.lift]\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:83:theorem faceLocalization_fineSaturated {Q : Type u} [CommMonoid Q]\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:86:    IsFineSaturatedMonoid (Algebra.faceLocalization Q F) ∧\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:87:      Function.Bijective (Algebra.faceLocalizationGroupMap F) := by\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:89:  let L := Algebra.faceLocalization Q F\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:130:  have hmap : Function.Bijective (Algebra.faceLocalizationGroupMap F) := by\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:142:      change Algebra.faceLocalizationGroupMap F\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:143:          (Algebra.GrothendieckGroup.of (⟨i a, hmem a⟩ : Algebra.faceLocalization Q F) *\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:145:              (⟨i b, hmem b⟩ : Algebra.faceLocalization Q F))⁻¹) = _\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:146:      simp only [map_mul, map_inv, faceLocalizationGroupMap_of]\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:151:    let x := Algebra.faceLocalizationGroupMap F g\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:153:      rw [← map_pow, ← hp, faceLocalizationGroupMap_of]\nlean/Sheaf/TraceFormula/FaceLocalizationFs.lean:165:    exact faceLocalizationGroupMap_of F ⟨x, hxm⟩\n\n0 blueprint nodes match 'face localization'\nNo exact declaration owner record found in dag/nodes.",
+   "date": "2026-10-24",
+   "verdict": "Exact definitions are published in FaceLocalizationFs and AffineToricEquivariantIdeals; the theorem nodes list them only as helpers. Register definition ownership with existing:true rather than duplicate their data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-monoid-face-localization-ideal-tensor",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Exposé VIII 3.1.2, p. 98: the fraction localization and its canonical map, used in the face-localization ideal-tensor comparison.",
+   "via": [
+    "lem-trf-monoid-face-localization-ideal-tensor",
+    "lem-trf-log-chart-face-tor-comparison",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineToricEquivariantIdeals",
+  "declaration": "MonoidAlgebra.toricLocalizationInclusion",
+  "statement": "def toricLocalizationInclusion {P : Type u} [CommMonoid P] (S : Submonoid P) :\n    P →* Algebra.faceLocalization P S",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership for the unchanged published helper, added in H2 repair of 60731223b912. The containing theorem is not assumed. Source definition and complete data read; no duplicate construction."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30e75df0b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30e75df0b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery of 6073 H2 RETURN. The Lean is byte-identical; the item changes only lean and stmt_deps (theorem nodes lem-trf-face-localization-fs/affine-toric-equivariant-ideals replaced by new existing:true def nodes def-trf-monoid-face-localization -> Algebra.faceLocalization and def-trf-monoid-face-localization-inclusion -> MonoidAlgebra.toricLocalizationInclusion; signatures verbatim with side-live, statements match ILO VIII 3.1.2). def-trf-monomial-quotient-tor owns LogChartFaceTor.ideal. Rechecked all clauses: integrality, face, unit chart; alphaF pinned; H_F ideal and extension; real tensor with A-action on the coefficient; IsComparison forward and inverse for every representative plus multiplication square; phi-naturality with c/cF pinned and both squares; universes u/v/w; edge cases. Advisory: Q02 ab8b (PASS, not landed) adds def-trf-face-localization owning the same Algebra.faceLocalization; the second lander is a duplicate owner -> drop-nodes/same_as and repoint citations then. No compile (no change)."
+ }
+}

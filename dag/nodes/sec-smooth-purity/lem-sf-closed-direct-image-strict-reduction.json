@@ -1,0 +1,436 @@
+{
+ "id": "lem-sf-closed-direct-image-strict-reduction",
+ "kind": "statement",
+ "title": "Closed direct image commutes with simultaneous strict derived reduction",
+ "statement": "Let $\\ell$ be a prime, $E/\\mathbf Q_\\ell$ a finite extension, $R=\\mathcal O_E$ its valuation ring, $t$ a uniformizer and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with quasi-compact open complement $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Use the small pro-etale sites, constant finite coefficient sheaves and completed coefficients $B_T=\\varprojlim_n(A_n)_T$ for $T=X,Z$ [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-completed-integral-coefficients], with the canonical identification $i^{-1}B_X\\cong B_Z$ and the finite projections of [lem-weil-pbc-profinite-coefficient-inverse-image]. Use ordinary unbounded module derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $\\mathsf S_A(T)$ be the category of strict systems of $(A_n)_T$-module sheaves with semilinear quotient transitions and levelwise exactness [lem-pur-coefficient-system-derived-comparison]. Write $I:D(\\mathsf S_A(Z))\\to D(\\mathsf S_A(X))$ for termwise closed direct image, induced by its exact sheaf functor [lem-weil-pbc-proetale-ringed-open-closed]. Let $\\mathcal R_T:D(B_T)\\to D(\\mathsf S_A(T))$ be simultaneous derived reduction, computed from one flat-term K-flat resolution by $(P\\otimes_{B_T}(A_n)_T)_n$, with transitions $1\\otimes q_{n+1,n}$ [def-weil-exceptional-inverse-image, def-weil-integral-reduction-tower].\n\nThere is a canonical natural isomorphism of actual derived systems\n$$r_P:\\mathcal R_X(i_*P)\\xrightarrow{\\sim}I\\mathcal R_Z(P)\\qquad(P\\in D(B_Z)).$$\nIts evaluation at $n$ is the canonical closed projection comparison\n$$(i_*P)\\otimes^L_{B_X}(A_n)_X\\xrightarrow{\\sim}i_*(P\\otimes^L_{B_Z}(A_n)_Z).$$\nBefore deriving, the projection map on sections is the sheafification of $s\\otimes a\\mapsto s\\otimes i^{-1}a$. The comparison $r$ is its derived comparison in the category of systems; it commutes with all quotient transitions and with the quotient augmentation from the constant $B_X$-module tower $\\Delta_Xi_*P$, after restriction of scalars to $B_X$. These are equations of transformations of derived systems. No constructibility, completeness or boundedness is assumed, and no lifting of a family of maps from the individual derived categories is part of the assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral-stage closed counit reduction: agent-extracted simultaneous comparison obligation. Exactness input: Stacks Tag 09BM, proetale.tex, lemma-closed-immersion-complement-retrocompact-exact; the tag does not itself assert the strict-system projection comparison."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-integral-reduction-tower",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-sf-strict-tensor-reduction-termwise",
+  "def-a1-flat-term-kflat-complex",
+  "def-sf-integral-strict-reduction-model",
+  "def-sf-projection-coefficient-direct-image",
+  "def-sf-finite-reduction-computation",
+  "def-sf-constant-tower-square"
+ ],
+ "proof": [
+  {
+   "text": "Identify $i^{-1}B_X=B_Z$ and $i^{-1}(A_n)_X=(A_n)_Z$ by the canonical coefficient comparisons; these identifications commute with every projection and quotient map. Write $p=i^{-1}$ and $q=i_*$ over these coefficients. The closed and open inverse images are exact, $q$ is exact, and the closed counit $pq\\to1$ is invertible: the ringed closed-kernel adjoint statement, for an arbitrary commutative ring sheaf and a quasi-compact open complement, says that the ordinary termwise closed counit gives $i^*i_*\\cong1$. Apply the specified exact derived adjunction to obtain $p\\dashv q$ on unbounded derived categories, with the localized original unit $\\eta$ and counit $\\varepsilon$. Apply the same ordinary constructions levelwise to strict systems: the adjunction equations hold levelwise, since inverse image, direct image, unit and counit are natural for the semilinear transitions. Exactness is levelwise, so this gives exact termwise functors on systems and their derived categories. No assertion about commuting a nonexact right derived functor with evaluation is required.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-exact-derived-adjunction",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "For a flat-term K-flat complex $Q$ of $B_X$-modules, put $T_X(Q)_n=Q\\otimes_{B_X}(A_n)_X$. There is a natural cochain map\n$$u_{Q,n}:Q\\otimes(A_n)_X\\xrightarrow{\\eta}q p(Q\\otimes(A_n)_X)\\xrightarrow{q\\sigma}q(pQ\\otimes(A_n)_Z).$$\nHere $\\sigma$ is the ordinary inverse-image tensor isomorphism followed by the canonical coefficient identification. The degree-$a$ section formula on a local pure tensor is $x\\otimes b\\mapsto\\eta_Q(x)\\otimes i^{-1}b$, interpreted as a section of the direct image; it follows from the unit's tensor normalization. This balanced bilinear formula respects restriction and hence sheafification. Naturality in $Q$ shows commutation with the differential, which is $d_Q\\otimes1$, and with chain maps. A chain homotopy $h$ is carried to $h\\otimes1$, so the maps are defined on the homotopy category as well.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "The maps of Step 2 form one strict-system map $u_Q:T_X(Q)\\to qT_Z(pQ)$. Indeed, for $m\\ge n$, both paths around its transition square send $x\\otimes b$ to $\\eta_Q(x)\\otimes q_{m,n}(i^{-1}b)$; the other expression is $\\eta_Q(x)\\otimes i^{-1}(q_{m,n}b)$ and these agree by the coefficient comparison. Equality on local pure tensors implies equality after sheafification. Before forgetting the level coefficient action the map is $(A_n)_X$-linear, since multiplication by $a$ sends either expression to $\\eta_Q(x)\\otimes i^{-1}(ab)$. After restriction to $B_X$, the two paths from $\\Delta_XQ$ to $qT_Z(pQ)$ agree: both send $x$ to $\\eta_Q(x)\\otimes1$. Here the paths use respectively the quotient augmentation of $T_X(Q)$ and the unit followed by $q$ of the quotient augmentation of $T_Z(pQ)$. These are equations of maps of strict complexes, not just evaluated derived equations.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "Descend this construction through the full homotopy subcategory $\\mathcal P_{B_X}$ of flat-term K-flat complexes. It localizes to $D(B_X)$ by the resolving-subcategory equivalence. For $Q\\in\\mathcal P_{B_X}$, $pQ$ is flat-term K-flat by the ringed-topos pullback theorem. For any quasi-isomorphism between such $Q$'s, tensor with each $(A_n)_X$ preserves that quasi-isomorphism; the same holds after $p$ and after exact $q$. Thus both system-valued functors in $u_Q$ invert those quasi-isomorphisms, since system cohomology is levelwise. The localization universal property descends the natural transformation, giving\n$$u_M:\\mathcal R_X(M)\\longrightarrow I\\mathcal R_Z(pM)\\quad(M\\in D(B_X)).$$\nThe factorization isomorphisms are the K-flat computations specified in the statement: this identifies the descended functors with the specified $\\mathcal R_X$ and $I\\mathcal R_Zp$. The same universal property descends the augmentation square of Step 3 to the derived category of strict $B_X$-module towers; scalar forgetting and the constant diagram are exact levelwise. Uniqueness gives independence of resolutions and naturality on all derived morphisms.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "For $P\\in D(B_Z)$ define\n$$r_P=I\\mathcal R_Z(\\varepsilon_P)\\circ u_{qP}:\\mathcal R_X(qP)\\longrightarrow I\\mathcal R_Z(P).$$\nThis is already a natural transformation with target the derived category of actual strict systems. Its evaluation is the canonical derived closed projection comparison: before deriving, for a sheaf $N$ on $Z$, the composite of Step 2 with $q(\\varepsilon_N\\otimes1)$ sends $s\\otimes a$ to $s\\otimes i^{-1}a$. Equivalently its $p\\dashv q$-transpose is $(\\varepsilon_N\\otimes1)\\sigma$, precisely the characterization of the ordinary closed projection map. These identities are natural in complexes and descend by Step 4, so evaluation gives the derived comparison for the specified change-of-rings functors, including its $(A_n)_X$-module structure.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-proetale-closed-underived-projection",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "Fix $n$ and view $e_nr_P$ as a morphism of $(A_n)_X$-module derived objects. Its closed restriction is an isomorphism: derived inverse image commutes with derived tensor, and $pqP\\xrightarrow{\\varepsilon_P}P$ is invertible, being the localization of the termwise closed counit, which is invertible by the ringed closed-kernel adjoint statement; the triangle identity identifies the restricted map with the resulting tensor identification. Its open restriction is an isomorphism between zero objects. Indeed $j^{-1}qP=0$, and the derived tensor pullback formula gives $j^{-1}(qP\\otimes^L_{B_X}(A_n)_X)=0$; the target is a closed direct image and also restricts to zero. Exact inverse images commute with cohomology. Hence the cohomology sheaves of the cone of $e_nr_P$ have zero open and closed restrictions. Open/closed zero detection, applied with ring $(A_n)_X$, makes every one of these sheaves zero. Thus the cone is acyclic and $e_nr_P$ is invertible. This uses neither a Tor bound on $P$ nor flatness of $(A_n)_X$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-exact-derived-adjunction",
+    "lem-exc-open-closed-detection",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "Let $C$ be the cone of $r_P$ in the derived category of systems. Exact evaluation gives $H^a(e_nC)=0$ for all $a,n$ by Step 6. Since kernels, cokernels and exactness in the strict-system category are levelwise, each system $H^a(C)$ has every component zero and is zero. Consequently $C=0$ and $r_P$ is an isomorphism of actual derived systems. Its transition compatibility is already part of its construction as a system map; this argument uses evaluation only to test invertibility.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  },
+  {
+   "text": "Write $a_T:\\Delta_T\\to\\operatorname{Res}\\mathcal R_T$ for the quotient augmentation. The descended equation of Step 3 is $u_M a_X(M)=q a_Z(pM)\\,\\Delta_X\\eta_M$. With $M=qP$, compose it with $q\\operatorname{Res}\\mathcal R_Z(\\varepsilon_P)$. Naturality of $a_Z$ changes the result to $q a_Z(P)\\,\\Delta_X(q\\varepsilon_P\\circ\\eta_{qP})=q a_Z(P)$, by the adjunction triangle identity. Therefore\n$$\\operatorname{Res}(r_P)\\,a_X(qP)=q a_Z(P),$$\nunder the canonical equality $\\Delta_XqP=q\\Delta_ZP$. The equation was obtained from strict-complex equations by faithful localization precomposition, so is an equation of transformations into the derived category of strict $B_X$-towers. Together with Steps 3 and 5 this proves every transition, evaluation and augmentation clause of the statement.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-integral-reduction-tower",
+  "def-weil-proetale-inverse-image",
+  "lem-exc-open-closed-detection",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-closed-underived-projection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Integral stage, closed counit reduction; agent construction on strict systems using the closed adjunction and flat-term K-flat localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact closed immersion pushforward commutes with simultaneous derived reduction in the derived category of strict varying coefficient systems preserving quotient augmentation",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(reduction|coefficient.*system)|strict.*(reduction|projectionFormula)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for closed immersion direct image and derived tensor with a whole strict tower of quotient ring sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.casesOn",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor projection formula for exact fully faithful closed direct image on a topos of inverse systems of module sheaves",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "grep",
+   "query": "(pushforward|directImage).*(kFlat|KFlat|flat)|(kFlat|KFlat).*(pushforward|directImage)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed direct image preserves flat term K-flat complexes on a ringed topos",
+   "results": "8 hits: AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_of_affine_subset, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.localizedModule, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, RingHom.Flat.ofLocalizationPrime",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules",
+   "results": "12 hits: SheafOfModules.pushforwardId, SheafOfModules.pushforward, SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver, SheafOfModules.overPushforwardOverAdj, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion direct image on proetale module sheaves with arbitrary ring coefficients preserves unbounded K-flat complexes with flat terms",
+   "results": "8 hits: AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact closed extension by zero commutes with total tensor of unbounded complexes by the projection formula and preserves K flat resolutions",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, Module.Flat.rTensor_shortComplex_exact, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(reduction|coefficient.*system)|strict.*(reduction|projectionFormula)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between closed pushforward of a derived quotient coefficient tower and simultaneous tensor reduction of closed pushforward",
+   "results": "8 hits: SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardContinuousComp, SheafOfModules.pushforwardNatTrans_id, PresheafOfModules.pushforward_id_comp, TopCat.Presheaf.pushforwardEq, CategoryTheory.Quotient.natIsoLift, SheafOfModules.pushforward_comp_id",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derive a strict system comparison from the closed adjunction unit on K-flat resolutions with coefficient transitions and augmentation",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedη_fac_app, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed direct image commutes with simultaneous derived reduction in the derived category of strict quotient coefficient systems preserving the quotient augmentation",
+   "results": "8 hits: DerivedCategory.quotientCompQhIso, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern scheme flatness, ordinary sheaf pushforward, abstract derived adjunction/localization, or module Tor; none states simultaneous strict reduction of closed direct image with the specified quotient augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-finite-exceptional-site-normalization",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral stage: the reductions of the closed counit, before identifying Q with the specified derived coefficient system",
+   "via": [
+    "lem-sf-finite-exceptional-site-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-closed-direct-image-strict-reduction",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the strict reduction comparison from the closed adjunction unit on flat-term K-flat complexes, descended it before evaluating, and proved invertibility by open/closed detection. Quotient transitions and augmentation equations are proved before localization. No new nodes; all inputs reuse existing DAG statements.",
+  "blueprint": "prop-sf-localization-all-stages, Integral stage: the reductions of the closed counit and the identification of the coherent derived coefficient system, through lem-sf-finite-exceptional-site-normalization.",
+  "tool_uses": [
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic Tensor product of sheaves of modules on a site input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic Localization of an exact adjunction to derived categories input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "def-weil-integral-reduction-tower",
+    "why": "Generic The reduction tower of a complex with completed integral coefficients input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Generic Inverse image and direct image along a morphism on small pro-etale sites input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic Detection by the open and the closed restriction input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic Derived direct image and evaluation of coefficient systems input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic Pure-tensor description and coherence of the pro-etale inverse-image tensor comparison input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-closed-underived-projection",
+    "why": "Generic Underived tensor projection for closed pro-etale immersions with arbitrary ring coefficients input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic Compatible inverse image of profinite coefficient sheaves input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic Derived tensor and K-flat representative descent on a ringed site input used as stated in the strict-complex construction and its localization; the supported-localization unit supplies no replacement for this foundational result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-integral-reduction-tower",
+  "def-weil-proetale-inverse-image",
+  "lem-exc-open-closed-detection",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-closed-underived-projection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-37b45fc3d",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-37b45fc3d (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement, plus the main-20261015 prop-sf-localization-all-stages Integral-stage paragraph. The statement, stmt_deps and blueprint are identical to live and side-live, and the delivery creates no new node. Duplicate search: lem-weil-proetale-closed-tensor-projection and lem-sfb-closed-immersion-derived-tensor-projection are single-derived-category isomorphisms, and det-sf-open-closed-* assume a qcqs X, so none duplicates this system-level statement. Step checks: Step 2's pure-tensor formula is exactly the normalization of lem-pur-proetale-inverse-image-tensor-comparison (1) followed by the coefficient iso c. In Step 4, site-derived-tensor-descent makes the flat-term K-flat homotopy category a localization, tensor-pullback keeps pQ flat-term K-flat, and change-of-rings (1) preserves quasi-isomorphisms, so the transformation descends. In Step 5, q(eps⊗1)∘qσ∘eta is the adjunct of (eps⊗1)σ, which is the definition of the map in lem-weil-pbc-proetale-closed-underived-projection. Step 8: I checked by hand that naturality of a_Z plus the triangle identity give Res(r_P)a_X(qP)=q a_Z(P). Edge cases i=id, U empty, Z empty and unbounded P all hold. FIX (C4): Steps 1 and 6 use that the closed counit pq→1 is invertible, but the cited lem-weil-pbc-proetale-ringed-open-closed only gives an unnamed isomorphism i^{-1}i_*≅id. I added lem-sf-ringed-closed-kernel-adjoint (same unit, no cycle), which states that the termwise closed counit gives i^*i_*≅1 for any commutative ring sheaf, to the uses of Steps 1 and 6 and to proof_deps. I accept the generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedDirectImageStrictReduction",
+  "declaration": "WeilConjectures.ClosedStrictReduction.closed_direct_image_strict_reduction",
+  "declarations": [
+   "WeilConjectures.ClosedStrictReduction.systemAdditive",
+   "WeilConjectures.ClosedStrictReduction.ExactImages",
+   "WeilConjectures.ClosedStrictReduction.diagonal",
+   "WeilConjectures.ClosedStrictReduction.IsAugmentationNormalized",
+   "WeilConjectures.ClosedStrictReduction.towerImage",
+   "WeilConjectures.ClosedStrictReduction.towerImageAdditive",
+   "WeilConjectures.ClosedStrictReduction.pushAdditive",
+   "WeilConjectures.ClosedStrictReduction.towerImageLimits",
+   "WeilConjectures.ClosedStrictReduction.towerImageColimits",
+   "WeilConjectures.ClosedStrictReduction.derivedRestriction",
+   "WeilConjectures.ClosedStrictReduction.pushDiagonalAdditive",
+   "WeilConjectures.ClosedStrictReduction.constantSquareDerived",
+   "WeilConjectures.ClosedStrictReduction.IsProjectionNormalized",
+   "WeilConjectures.ClosedStrictReduction.Comparison",
+   "WeilConjectures.ClosedStrictReduction.closed_direct_image_strict_reduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedDirectImageStrictReduction.lean",
+  "statement": "theorem closed_direct_image_strict_reduction [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom] (hU : Set.range U.hom = (Set.range i)ᶜ) (SX : IntegralStrictReductionModel.{t, u} l E X) (SZ : IntegralStrictReductionModel.{t, u} l E Z) : ∃ (_h : ExactImages l E i), Nonempty (Comparison l E i SX SZ)",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 34201977b17b: main theorem signature unchanged. Restore the existing reduction-tower record and move the simultaneous universal reduction model to its own new definition node. Replace the three plain-definition theorem dependencies by existing/new definition owners. Actual strict-system projection and augmentation normalizations are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3420 (H13/H4 tower rebind + cycle; H2 theorem stmt_deps). F1 fixed: def-weil-integral-reduction-tower restored byte-identical; IntegralStrictReductionModel owned by new §1(A) def-sf-integral-strict-reduction-model whose statement lists every field; DAG walk over the item's stmt_deps reaches neither the item nor its citer (no cycle). F2 fixed: theorem stmt_deps removed; plain defs owned by new existing:true def nodes def-sf-projection-coefficient-direct-image (IntegralAmbient.push/coefficientMap), def-sf-finite-reduction-computation (coefficientOrdinaryQuotient/coefficientFiniteReductionModel; theorem cite justified by asIso), def-sf-constant-tower-square (constantSquare); remaining added deps are landed def nodes (brief l.177); previously theorem-only owners, recorded signatures match the source, H12 fields ok. Item Lean byte-identical to 3420; clause-by-clause re-read ok (IsProjectionNormalized pins r, augmentation equation in D(towers), ExactImages concluded, no extra hypotheses, edge cases and independent universes ok); statement verbatim, one sorry, docstrings with 8 steps. Advisory: no node asserts existence of a model; two redundant transitive imports; scalarReductionExtension owned only by a theorem node outside stmt_deps. No compile (no file changed)."
+ }
+}

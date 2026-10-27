@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-general-group-centre-zero-dimension-affine",
+ "kind": "statement",
+ "title": "The centre of a general connected group and affineness with zero-dimensional centre",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed and normal subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. Let $G$ be a smooth connected separated finite-type $k$-group scheme. The subfunctor assigning to a commutative $k$-algebra $B$ the elements of $G(B)$ commuting with every element of $G(B^{\\prime})$ after every commutative $B$-algebra extension $B\\to B^{\\prime}$ is represented by a closed commutative normal subgroup scheme $Z\\hookrightarrow G$. Write $Z^0$ for the connected component containing the identity, with its open-subscheme structure [def-weil-open-immersion]. Put $A=(Z^0)_{\\mathrm{red}}$, the closed subscheme obtained by quotienting its structure sheaf by the nilradical [def-weil-pbc-scheme-reduction]. Then $\\dim A=\\dim Z$. If $\\dim Z=0$, then $G$ is affine. No affineness or commutativity assumption is imposed on $G$, and $Z$ need not be smooth.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.92 and following definition of the centre, printed pp.33--34; Corollary 1.35 and Proposition 1.38, printed pp.17--18 (components and reduction preserve dimension); Corollary 8.10, Corollary 8.11, printed pp.150--151, and Proposition 8.1(a), printed p.149. The zero-dimensional-centre implication is the first case of the proof of Theorem 8.26, printed p.154. No Stacks tag states this non-affine algebraic-group centre assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-reduction",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-fixed-point-action-finite-jets] to $H=G$, $X=G$, $x=e$, and the conjugation action $a(g,y)=gyg^{-1}$. The group axioms show that this is an action fixing $e$, and all its geometric hypotheses are exactly those on $G$. Choose $n\\geq n_0$ and set $Z=\\ker\\rho_n$, a closed normal finite-type subgroup scheme supplied by the cited lemma. For every $B$, its points are precisely the $g\\in G(B)$ satisfying $g_{B'}yg_{B'}^{-1}=y$ for all $B'$ and all $y\\in G(B')$, equivalently commuting with all such $y$. This represents the required subfunctor on arbitrary, possibly nonreduced, test algebras. For $z,z'\\in Z(B)$ take $B'=B$ and $y=z'$ to get $zz'=z'z$. Thus $Z$ is commutative as well as normal, by the functor-of-points definition [def-sc-group-scheme-subgroup, def-sc-group-scheme].",
+   "uses": [
+    "lem-sfb-fixed-point-action-finite-jets",
+    "def-sc-group-scheme-subgroup",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92 and centre definition, printed pp.33--34; Corollary 8.10, printed p.150."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-neutral-component-translates] to the finite-type group $Z$. Its identity component $Z^0$ is open and closed, and its finitely many connected components are translates isomorphic to $Z^0$. In a finite disjoint union of open-and-closed subsets every nonempty irreducible closed subset lies in one component: otherwise its intersections with one component and its complement decompose it into two proper closed subsets. A strictly increasing chain therefore lies in one component, so [def-kun-topological-krull-dimension] gives $\\dim Z=\\dim Z^0$. By [lem-weil-pbc-reduction-universal-homeomorphism], $A=(Z^0)_{\\mathrm{red}}$ and $Z^0$ have homeomorphic underlying spaces. Homeomorphisms biject irreducible closed chains, hence $\\dim A=\\dim Z^0=\\dim Z$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-reduction-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.35 and following dimension discussion, printed p.17; reduction leaves the underlying space unchanged, as in Proposition 1.38, printed p.18."
+   }
+  },
+  {
+   "text": "Assume $\\dim Z=0$. The dimension comparison [lem-pc-scheme-dimension-local-rings] identifies this topological dimension with the local-ring dimension used in [lem-pc-algebraic-dim-zero-affine-finite]. Apply the latter to the finite-type scheme $Z$ to obtain its affineness (indeed finiteness); properness and smoothness of $Z$ are not required. Factor the representation $\\rho_n:G\\to\\operatorname{GL}(V_n)$ by [lem-sfb-algebraic-group-homomorphism-factorization] as $G\\xrightarrow{q}I\\hookrightarrow\\operatorname{GL}(V_n)$, with $q$ faithfully flat and with the same kernel $Z$. Both source and target are separated finite-type group schemes: for the target, a basis identifies it with the spectrum of the finitely generated determinant localization in [def-sc-general-linear-group]. In particular the target is affine. By the affine description of a closed immersion [def-weil-closed-immersion], its closed subgroup $I$ is the spectrum of a quotient of that coordinate ring, and hence is affine.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-sc-general-linear-group",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.26 first case, printed p.154; Corollary 8.10, p.150; Theorem 5.39, p.108; Stacks Tag 06LH (varieties.tex, lemma-algebraic-scheme-dim-0)."
+   }
+  },
+  {
+   "text": "The homomorphism factorization gives the exact sequence $1\\to Z\\to G\\xrightarrow{q}I\\to1$ with $q$ flat and surjective and $Z$ its scheme-theoretic kernel. Both $Z$ and $I$ are affine by step 3. The affine-extension clause of [lem-sfb-exact-algebraic-group-property-permanence] now gives that $G$ is affine. This implication uses no reduction of the kernel, so it also covers a finite non-smooth centre.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-exact-algebraic-group-property-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(a), printed p.149, applied exactly as in Theorem 8.26 first case, printed p.154."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fixed-point-action-finite-jets",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-group-scheme",
+  "lem-sfb-group-neutral-component-translates",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "lem-sfb-exact-algebraic-group-property-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.92 and centre definition; Corollary 1.35; Corollary 8.10; Theorem 8.26 first case, using Proposition 8.1(a)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "center|centre|centralizer",
+   "results": "{\"t\": \"2026-10-24T08:15:36Z\", \"tool\": \"grep\", \"query\": \"center|centre|centralizer\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T08:15:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine\"], \"digest\": \"f974a08dec113b64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic group with finite scheme theoretic centre is affine",
+   "results": "{\"t\": \"2026-10-24T08:15:37Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic group with finite scheme theoretic centre is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.isAffine_of_isEmpty\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.isAffine_of_isAffineHom\"], \"digest\": \"cb01c90f3772f315\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centre of a connected algebraic group is a closed subgroup scheme and a group with zero dimensional centre is affine",
+   "results": "{\"t\": \"2026-10-24T08:15:40Z\", \"tool\": \"leanfinder\", \"query\": \"The centre of a connected algebraic group is a closed subgroup scheme and a group with zero dimensional centre is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Matrix.SpecialLinearGroup.center_eq_bot_of_subsingleton\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"commutator_eq_bot_iff_center_eq_top\", \"upperCentralSeries_one\", \"CommGroup.center_eq_top\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"Group.commGroupOfCenterEqTop\"], \"digest\": \"6c02a92f9957bdbe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer|centre|center|conjugation",
+   "results": "{\"t\": \"2026-10-24T08:50:45Z\", \"tool\": \"grep\", \"query\": \"centralizer|centre|center|conjugation\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic group with zero dimensional centre is affine",
+   "results": "{\"t\": \"2026-10-24T08:50:45Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic group with zero dimensional centre is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isAffine_of_isEmpty\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Subgroup.center.isMulCommutative\", \"Subgroup.instNormalCenter\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"LieAlgebra.isLieAbelian_iff_center_eq_top\"], \"digest\": \"e069dc09b7a013ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T08:50:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine\"], \"digest\": \"f974a08dec113b64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected algebraic group acts by conjugation on a finite infinitesimal neighbourhood of its identity with kernel equal to its centre",
+   "results": "{\"t\": \"2026-10-24T08:50:50Z\", \"tool\": \"leanfinder\", \"query\": \"A connected algebraic group acts by conjugation on a finite infinitesimal neighbourhood of its identity with kernel equal to its centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"Subgroup.Normal.pathComponentOne\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\"], \"digest\": \"2c9148a80f089fb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugat|centralizer|centre|center|infinitesimal",
+   "results": "{\"t\": \"2026-10-24T08:52:29Z\", \"tool\": \"grep\", \"query\": \"conjugat|centralizer|centre|center|infinitesimal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"6217554ae39823c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic group has a finite dimensional representation by conjugation on its local ring modulo a power of the maximal ideal whose kernel is its scheme theoretic centre",
+   "results": "{\"t\": \"2026-10-24T08:52:30Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic group has a finite dimensional representation by conjugation on its local ring modulo a power of the maximal ideal whose kernel is its scheme theoretic centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConjAct.instGroup\", \"LieAlgebra.self_module_ker_eq_center\", \"ConjAct.fixedPoints_eq_center\", \"ConjAct.instGroupWithZero\", \"Rep.instInjective\", \"LieAlgebra.ad_ker_eq_self_module_ker\", \"Representation.ofMulActionSelfAsModuleEquiv\", \"LieDerivation.ad_ker_eq_center\"], \"digest\": \"63577f5addca7d22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"LinearMap\"",
+   "results": "{\"t\": \"2026-10-24T08:52:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"LinearMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected separated algebraic group not assumed affine conjugation on the local Artinian algebra at the identity has scheme theoretic kernel the centre for all sufficiently high powers of the maximal ideal",
+   "results": "{\"t\": \"2026-10-24T08:52:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected separated algebraic group not assumed affine conjugation on the local Artinian algebra at the identity has scheme theoretic kernel the centre for all sufficiently high powers of the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"JacobsonNoether.exists_pow_mem_center_of_inseparable\", \"Algebra.Extension.ker_infinitesimal\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable'\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"804fd14d7821408e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centre of an algebraic group is the kernel of its representation on a finite order infinitesimal neighbourhood of the neutral element",
+   "results": "{\"t\": \"2026-10-24T08:52:36Z\", \"tool\": \"leanfinder\", \"query\": \"The centre of an algebraic group is the kernel of its representation on a finite order infinitesimal neighbourhood of the neutral element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.self_module_ker_eq_center\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"ConjAct.fixedPoints_eq_center\", \"upperCentralSeries_one\", \"LieDerivation.ad_ker_eq_center\", \"Subgroup.center_eq_infi'\", \"Subgroup.centralizer_univ\"], \"digest\": \"f1532080e1a9516d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudoabelian-proper-algclosed",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.26 proof, first case: the centre has dimension zero, and Corollary 8.10 and Proposition 8.1 make the group affine.",
+   "via": [
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-general-group-centre-zero-dimension-affine",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the general centre as the stable kernel of finite-jet conjugation using one new action lemma, avoiding the existing affine-only conjugation lemma. Wrote the dimension comparison by component translations and reduction homeomorphism, and assembled the zero-dimensional-centre case from the existing dimension-zero, homomorphism-factorization and affine-extension nodes. Read Milne and every cited statement; no project attachment or Mathlib match states the item.",
+  "blueprint": "Serves det-thm-sf-ctf-stability-direct-images proof (3), ordinary direct image, through the existing chain to Milne 8.26 in lem-sfb-pseudoabelian-proper-algclosed. The ancestor tool currently returns None for this existing imported-created chain; retained the item blueprint.from.node and via as supplied. Latest blueprint direct-images.proof paragraph (3) checked.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic reduction invariance of the underlying space, for the centre identity component; this unit has no replacement."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison of topological and local-ring dimensions before applying the dimension-zero scheme lemma."
+   },
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic zero-dimensional finite-type scheme affineness, used for a possibly nonreduced centre; not a change of the Milne route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-algebraic-dim-zero-affine-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NE-187adc8de",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-187adc8de (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Thm 7.1 (pp.138-139), Prop 8.1 (p.149), Prop 8.9, Cor 8.10 and Cor 8.11 (pp.150-151), the Thm 8.26 first case (p.154), and the erratum that Prop 8.9 needs X reduced. New node lem-sfb-fixed-point-action-finite-jets states the intermediate claim of Milne 8.9: the jet kernels K_n descend and stabilise at N; then 7.1 and Krull show X^N=X. Assuming X smooth and connected gives integrality, which takes care of the erratum. H is not assumed affine. The statement is true on arbitrary B-points. Tested on the trivial action, X a point, G_m scaling A^1, and mu_p on A^1 in char p. It has no proof (B1), searches of all three kinds are recorded, and it is not a duplicate: the conjugation-finite-jet-kernel, dense- and torus-fixed-jet and adjoint-kernel nodes all assume affineness, which would be circular here. It does not restate the item. Item step 1: conjugation on G with fixed point e; the kernel is the centre functor, commutative by taking y=z'. Step 2: component translates plus the reduction homeomorphism give dim A=dim Z^0=dim Z. Step 3: the local-ring dimension bridge and the dim-0 finite-type lemma (not the proper variant) make Z affine; the factorization through a closed I in the affine GL(V_n) makes I affine. Step 4: the exact sequence and the affine clause of the property-permanence node (Milne 8.1(a)) make G affine. Hypotheses checked at each step; edge cases are trivial G, an elliptic curve and SL_p with centre mu_p. Accepted tool_uses: reduction-universal-homeomorphism, scheme-dimension-local-rings and algebraic-dim-zero-affine-finite, all generic. Batch-5: lem-trf-fppf-covering-base-change and lem-trf-smooth-fpqc-base-descent are generic Mathlib-leaf facts (fppf base change, fpqc descent of smoothness). Neither is part of the trace formula or Poincaré duality statements or proofs, so both are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.GeneralCentreZeroDimensionAffine",
+  "declaration": "AlgebraicGeometry.exists_centre_reducedIdentityComponent_dim_and_isAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/GeneralCentreZeroDimensionAffine.lean",
+  "statement": "theorem exists_centre_reducedIdentityComponent_dim_and_isAffine {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] : ∃ (Z : Grp (Over (Spec (.of k)))) (i : Z ⟶ G) (Z0 : Z.X.left.Opens), IsClosedSubgroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ IsCommMonObj Z.X ∧ (∀ (B : Type u) [CommRing B] [Algebra k B], ReductiveTorusCentralizer.centralizerPoints (𝟙 G) B = Set.range (fun z : StandardGroupSchemes.affine k B ⟶ Z.X ↦ z ≫ i.hom.hom)) ∧ (Z0 : Set Z.X.left) = connectedComponent (GrpObj.onePoint Z.X) ∧ topologicalKrullDim Z0.toScheme.nilradical.subscheme = topologicalKrullDim Z.X.left ∧ (topologicalKrullDim Z.X.left = 0 → IsAffine G.X.left)",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bf26827c",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: k algebraically closed field; G smooth, connected, separated, LocallyOfFiniteType+QuasiCompact; no affine/commutative assumption on G and no smoothness on Z. Conclusion: Z closed (IsClosedSubgroupScheme), normal (IsNormalSubgroupScheme), commutative (IsCommMonObj); centralizerPoints (𝟙 G) B = range of Z's B-points for all k-algebras B (definition read: every map B→B', every G(B') point, no reducedness), which with injectivity is representability; Z0 open with set = connectedComponent(onePoint); A = Z0.toScheme.nilradical.subscheme; topologicalKrullDim equality; dim Z = 0 → IsAffine G. Only node changes: lean record plus stmt_dep def-sfb-reductive-torus-centralizer-terminology, an already-landed reviewed node (allowed). Statement verbatim in file, sorry only, docstrings with source/blueprint and 4 proof steps, public/plain imports correct and all proof modules exist. Edge cases checked: trivial G, elliptic curve, SL_p with centre mu_p, zero/non-reduced test algebras, universe u. No compile: nothing changed. No findings."
+ }
+}

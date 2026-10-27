@@ -1,0 +1,158 @@
+{
+ "id": "lem-sfb-discrete-section-coordinates",
+ "kind": "statement",
+ "title": "Restriction coordinates of a discrete coefficient section",
+ "statement": "Let $A$ be a commutative ring in universe $u$ and $\\Lambda=\\mathrm{discreteObj}(A)$ [def-sfb-integral-models-stacks-data]. Let $Y$ be a scheme and $U$ an object of its coefficient-sized pro-etale site [def-sfb-affine-locally-constructible-proetale-modules]. For a global section $x:\\mathbf{1}\\to\\Lambda_{U.left}$, there is a section $s$ at $U$ of the constant commutative ring sheaf with value $\\operatorname{ULift} A$ on this site. For every $g:V\\to U$ and $c\\in\\operatorname{ULift} A$ whose image under the constant-presheaf sheafification unit equals $s|_V$, the canonical inverse image of $x$, namely $\\epsilon_{g^*}\\,g^*(x)\\,\\alpha_g$, equals $\\epsilon_{p_V^*}\\,p_V^*(\\delta(c))$. Here $\\alpha_g:g^*\\Lambda_{U.left}\\to\\Lambda_{V.left}$ is the canonical condensed coefficient map, and $\\delta(c)$ is the explicit point unit-section: apply the sheafification unit at the one-point profinite set to $c$, take the additive map from the lifted integers sending $1$ to that element, then use the constant-sheaf adjunction and its monoidal unit. No cover, finite tuple, module arrow or matrix is asserted.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; literature/stacks-project/sites.tex, Tag 00YV, proposition-functoriality-algebraic-structures-topoi. The scalar section identification in step 1 of lem-sfb-discrete-internal-matrix-local-lifting."
+ },
+ "proof": [
+  {
+   "text": "Form coefficientAbIso by composing the comparison forgetting commutative rings to abelian groups, constantSchemeIso, and the inverse point comparison. The constant-sheaf adjunction and the lifted-integer corepresentability of the underlying-group functor give unitSectionEquiv. No object is selected from an existence statement.",
+   "uses": [
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply pushforwardContinuousSheafificationCompatibility to composition with U.hom and to AsSmall.down. Both functors are continuous and cocontinuous. Evaluating the resulting isomorphisms at the identity object gives coordinateEquiv, an explicit equivalence between small-site coordinates and unit sections of the discrete coefficient on U.left. The sheafification unit laws show that a constant coordinate c maps to constantScalarSection.",
+   "uses": [
+    "def-sfb-affine-locally-constructible-proetale-modules",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private general constantScheme_pushforward lemma in FiniteDiscreteCoefficientTerminal applies to any abelian coefficient M, any condensed abelian sheaf R, and any comparison from the point constant sheaf. A natural transformation from a constant presheaf is determined at a terminal object. Extend that terminal identity to a full presheaf identity, and take its mate under localizationRestrictionLowerStarAdjunction. Sheafification uniqueness then proves coefficientAbIso_localization.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-coefficient-terminal",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit formula for unitSectionEquiv proves its compatibility with restriction along every continuous site functor. Prove composition compatibility for the constant-sheaf comparisons using sheafify_hom_ext and their unit equations. Apply this to the three over-map functors associated to V to U to Y. Together with the monoidal upperStarIsoSheafPushforward and the coefficient localization square, this proves schemeCoordinate_naturality. Naturality of the AsSmall comparison gives coordinateEquiv_naturality.",
+   "uses": [
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "def-sfb-affine-locally-constructible-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take s = coordinateEquiv.symm x. Rewrite its restriction using coordinateEquiv_naturality and the hypothesis on c. The constant-sheaf adjunction, naturality of constantSchemeIso, and its monoidal unit law identify constantScalarSection with epsilon_p followed by p applied to discretePointScalarSection. This gives exactly the stated equality. All constructions work for empty schemes and the zero ring.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data",
+    "def-sfb-constant-sheaf-scheme-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "lem-weil-pbc-finite-discrete-coefficient-terminal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV and Tag 03CY. Implemented via Mathlib Sites.CoverLifting and constantSheafAdj, the source-library localizationRestrictionLowerStarAdjunction and monoidal upperStarIsoSheafPushforward, and the proved general constantScheme_pushforward helper in Sheaf.Paper.FiniteDiscreteCoefficientTerminal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a constant sheaf on a slice site are compatible with inverse image along the slice structure map",
+   "date": "2026-10-26",
+   "results": "8 hits including CategoryTheory.Sheaf.ΓNatIsoSheafSections, ΓObjEquivHom, and constantSheafΓAdj in Mathlib.CategoryTheory.Sites.GlobalSections.",
+   "verdict": "These identify terminal/global sections, but do not compare the specified condensed inverse image and coefficient map with restriction on the equivalent small site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of the regular module over a constant sheaf has a global section coordinate compatible with inverse image and multiplication by constant scalars",
+   "date": "2026-10-26",
+   "results": "8 hits including SheafOfModules.unitHomEquiv and unitHomEquiv_symm_comp in Mathlib/Algebra/Category/ModuleCat/Sheaf.",
+   "verdict": "No match: ordinary module-sheaf sections, without the internal condensed coefficient, scheme inverse image, and coefficient-sized localization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsLocallySurjective",
+   "date": "2026-10-26",
+   "results": "12 hits, including isLocallySurjective_toSheafify' and imageSieve_mem.",
+   "verdict": "These give local lifting once a section coordinate is known; they do not give the coefficient-section coordinate comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*section|section.*regular",
+   "date": "2026-10-26",
+   "results": "23 Mathlib hits, all unrelated regularity or section headings. Project searches read FiniteDiscreteSchemeRing, CondensedPointDiscreteConstantComparison, FiniteDiscreteOrdinaryEncoding, and ProEtaleWeaklyEtaleLocalization. Blueprint searches for regular section and constant coefficient section found respectively one unrelated Thom-class node and no nodes.",
+   "verdict": "No existing declaration combines these section comparisons. The finite-discrete ordinary encoding has finite-coefficient hypotheses absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteInternalMatrixLocalLifting",
+  "date": "2026-10-26",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Lifting one constant finite matrix to discrete point matrices; Local descent of internal free matrices to discrete point matrices; identification of a single discrete coefficient section with its constant-sheaf coordinate, before simultaneous local lifting",
+   "via": [
+    "lem-sfb-discrete-internal-matrix-local-lifting",
+    "lem-sfb-discrete-constant-presentation-lifting",
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiscreteSectionCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscreteSectionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_section_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discretePointScalarSection",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_section_coordinates"
+  ],
+  "statement": "theorem discrete_section_coordinates\n    (A : Type u) [CommRing A] {Y : Scheme.{u}}\n    (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)\n    (x : 𝟙_ (Sheaf (Scheme.ProEt.topology (AsSmall.down.obj U).left) Ab.{u + 1}) ⟶\n      condensedRingObj (discreteObj A) (AsSmall.down.obj U).left) :\n    ∃ s : ((constantSheaf (Scheme.coefficientProEtaleModelTopology.{u, u} Y)\n        CommRingCat.{u + 1}).obj (CommRingCat.of (ULift.{u + 1} A))).obj.obj (op U),\n      ∀ (V : Scheme.coefficientProEtaleSiteModel.{u, u} Y) (g : V ⟶ U)\n        (c : ULift.{u + 1} A),\n        (toSheafify (Scheme.coefficientProEtaleModelTopology.{u, u} Y)\n          ((Functor.const (Scheme.coefficientProEtaleSiteModel.{u, u} Y)ᵒᵖ).obj\n            (CommRingCat.of (ULift.{u + 1} A)))).app (op V) c =\n          ((constantSheaf (Scheme.coefficientProEtaleModelTopology.{u, u} Y)\n            CommRingCat.{u + 1}).obj (CommRingCat.of (ULift.{u + 1} A))).obj.map g.op s →\n        Functor.LaxMonoidal.ε (upperStar Ab.{u + 1} (AsSmall.down.map g).left) ≫\n            (upperStar Ab.{u + 1} (AsSmall.down.map g).left).map x ≫\n            condensedPullbackHom (discreteObj A) (AsSmall.down.map g).left =\n          Functor.LaxMonoidal.ε (upperStarFromPoint (AsSmall.down.obj V).left) ≫\n            (upperStarFromPoint (AsSmall.down.obj V).left).map\n              (discretePointScalarSection A c)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T111756-L-1727266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T135458-L-4036408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,248 @@
+{
+ "id": "lem-weil-pbc-stratified-cohomology-slice-models",
+ "kind": "statement",
+ "title": "Stratified slice-site finite models for the cohomology of a bounded constructible complex",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], and let $B$ be a finite commutative ring. Work with sheaves of modules over the constant ring sheaf $B_X$ on the small etale site [def-weil-pbc-etale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category] and their ordinary unbounded derived category [def-weil-abstract-derived-category]. Let $L$ be such a derived object and let $a\\leq b$ be integers with $H^q(L)=0$ for $q\\notin[a,b]$. Suppose each $H^q(L)$ is constructible [def-weil-pbc-etale-constructible-sheaf]. There exists a finite locally closed scheme stratification $(i_s:S_s\\to X)_{s<n}$ [def-constructible-stratification] with constructible stratum images [def-weil-constructible-subset] such that, writing $K_s=i_s^{-1}L$ for the exact derived module inverse image [def-weil-pbc-inverse-image], one has $H^q(K_s)=0$ for $q\\notin[a,b]$, and the following holds for every $q\\in\\mathbf Z$ and every etale object $V\\to S_s$. There is a covering family $(U_t\\to V)_{t\\in I}$ in $(S_s)_{\\mathrm{et}}$, with $I$ in the coefficient universe, and finite $B$-modules $M_t$ (finite as sets, hence finitely generated) with isomorphisms\n$$ H^q(K_s)|_{(S_s)_{\\mathrm{et}}/U_t}\\ \\cong\\ \\underline{M_t}_{(S_s)_{\\mathrm{et}}/U_t}. $$\nHere the restriction is to the actual localized site over $U_t$, and the constant sheaf is the sheafification of its constant module presheaf. The family is jointly surjective over $V$; its maps are morphisms over $S_s$. Empty schemes and empty strata are allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated; Tag 03RZ, lemma-constructible-abelian, proof (common partition). Derived restriction and slice transport extracted from lean/Sheaf/Paper/FiniteFieldStratifiedPerfectModels.lean, commonStratification, finiteLocalModels and homology restriction in the theorem body."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-inverse-image",
+  "def-pur-localized-ringed-site",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Convert the finite-value constructibility hypothesis for H^q(L) to IsConstructibleSheaf using isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf. Induct on a finite set t of degrees. For the empty set choose a stratification for a degree in the nonempty interval [a,b]. At insertion, intersect the existing stratification with the witnessing stratification for the new degree. inter_refines_left and inter_refines_right and Stratification.Refines.isFiniteLocallyConstantSheaf_upperStar retain finite local constancy for both groups of degrees. Apply the result to Finset.Icc a b. The intersection uses actual scheme fibre products and retains empty strata.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lemma-constructible-of-refines"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain every scheme, immersion and subset of the resulting Scheme.Stratification when constructing the required Scheme.FiniteLocallyClosedStratification; copy the constructibility proof separately. For each stratum let F be its ModuleCat B-valued upperStar. The existing exact-derived comparison mapDerivedCategoryHomologyFunctorIso gives F(H^q(L)) isomorphic to H^q(F.mapDerivedCategory(L)). Transport the given zeros along its inverse outside [a,b]. Inside the interval transport finite local constancy along the comparison. A zero sheaf is finite locally constant: it is the constant zero sheaf, its identity cover trivializes it, and its zero geometric stalks are finitely generated. Thus all restricted cohomology sheaves are finite locally constant.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private proved helper finiteSliceModels takes an arbitrary finite locally constant module sheaf G and an etale object V. Choose a LocallyConstantDatum d and base change each d.cover.f i along V.hom. Index these pullbacks by ULift of d.cover.I₀ to the coefficient universe. The theorem Etale.ofArrows_baseChange_mem_smallEtaleTopology gives a covering sieve; its joint-surjectivity hypothesis follows from d.cover.exists_eq. The original cover already has an index type in the scheme universe, so lifting suffices without choosing points or shrinking a large family.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-size-convention"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each base change W, isConstant_over_iff_upperStar identifies the original localized constant sheaf with a constant pullback on d.cover.X i. Pull that constant sheaf along the second projection using Sheaf.IsConstant.upperStar. The proved generic ModuleCat-valued upperStarComp and the pullback equation identify this iterated pullback with upperStar W.hom G. Its geometric stalks remain finitely generated under pullback. Apply exists_finite_constant_model to obtain a finitely generated constant B-module M, including when W is empty. Module.finite_of_finite makes its underlying set finite because B is finite.",
+   "uses": [
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-finite-constant-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use overSheafEquivFunctorObjOverIso to identify the image of G.over W under Etale.overSheafEquiv with upperStar W.hom G. Compose with its constant model and the inverse of constantSheafSheafCongrIso. Full faithfulness of the equivalence lifts this isomorphism back to the actual localized site. All functors and isomorphisms take values in ModuleCat B, so scalar-linearity is built in. Apply finiteSliceModels to every restricted cohomology sheaf from the second step. Empty V and empty strata are covered by the same construction and the finite constant model theorem.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lemma-constructible-pullback-locally-constant",
+    "lem-weil-pbc-finite-constant-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lemma-constructible-of-refines",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-size-convention",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-finite",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-finite-constant-model",
+  "lem-weil-pbc-etale-site-localization-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 095E and 03RZ, finite common partition; Tag 095A, pullback of locally constant sheaves; derived.tex Tag 015F. Complete Lean proof using adopted generic ModuleCat pullback, finite-stalk refinement, finite constant models and actual slice equivalences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stratif.*(homology|cohomology)|constructible.*(complex|cohomology)",
+   "results": "4 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply etale topologies, sheaf generators or ordinary restrictions, not simultaneous stratified cohomology trivializations on every etale slice"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"homology\"",
+   "results": "7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply etale topologies, sheaf generators or ordinary restrictions, not simultaneous stratified cohomology trivializations on every etale slice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a bounded constructible complex to strata so that every cohomology sheaf has finite constant local models on all etale slice sites",
+   "results": "8 hits: HomologicalComplex.restriction, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.PresheafedSpace.restrict, AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.Scheme.Opens.stalkIso, HomologicalComplex.restriction.congr_simp, AlgebraicGeometry.instLocallyQuasiFiniteResLE, HomologicalComplex.restrictionMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply etale topologies, sheaf generators or ordinary restrictions, not simultaneous stratified cohomology trivializations on every etale slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded etale complexes with constructible cohomology over a finite ring admit a common finite stratification whose restricted cohomology has finite constant trivializations on every slice site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Algebra.FormallyEtale.instForallOfFinite, CochainComplex.cm5b, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply etale topologies, sheaf generators or ordinary restrictions, not simultaneous stratified cohomology trivializations on every etale slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous constructible stratification of finitely many etale module sheaves and constant finite module models after restriction to slice sites",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.isFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply etale topologies, sheaf generators or ordinary restrictions, not simultaneous stratified cohomology trivializations on every etale slice"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(cohomology|complex)|stratif.*(cohomology|homology)",
+   "results": "4 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-sheaf, finite-generator and constructible-subset declarations do not give a simultaneous stratification of cohomology or its finite slice models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous stratification of constructible cohomology sheaves with finite constant module trivializations on localized etale sites",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Sheaf.IsConstant, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-sheaf, finite-generator and constructible-subset declarations do not give a simultaneous stratification of cohomology or its finite slice models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"homology\"",
+   "results": "7 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-sheaf, finite-generator and constructible-subset declarations do not give a simultaneous stratification of cohomology or its finite slice models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of constructible etale module sheaves over a finite ring has one finite locally closed stratification with finite constant cohomology models on every etale slice",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-sheaf, finite-generator and constructible-subset declarations do not give a simultaneous stratification of cohomology or its finite slice models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many constructible sheaves on a scheme admit a common stratification with locally constant finite module values after pullback to strata",
+   "results": "8 hits: PrimeSpectrum.ConstructibleSetData, SheafOfModules.IsFiniteType.exists_localGeneratorsData, PrimeSpectrum.BasicConstructibleSetData, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.BasicConstructibleSetData.g, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, SheafOfModules.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-sheaf, finite-generator and constructible-subset declarations do not give a simultaneous stratification of cohomology or its finite slice models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-field-stratified-perfect-models",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence, \"Choose an integral lattice for K\": residue-field stratification before integral lifting; old item proof steps 1 and 2, simultaneous finite-degree refinement followed by exact cohomology restriction and slice-site transport",
+   "via": [
+    "lem-weil-pbc-finite-field-stratified-perfect-models",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-stratified-cohomology-slice-models",
+  "worker": "stage1",
+  "summary": "Reuse existing common-refinement, module pullback, exact-derived cohomology and etale localized-site results; write the finite induction, base-changed finite models and actual slice transport explicitly. No new nodes and no mathematical statement change. Add the existing localized-site and universe definitions to statement dependencies.",
+  "blueprint": "thm-weil-pbc-finite-extension, old proof first sentence Choose an integral lattice for K; the residue-coefficient stratification subargument via lem-weil-pbc-finite-field-stratified-perfect-models, old proof steps 1 and 2. Steps 1--3 give simultaneous refinement, step 4 cohomology restriction, steps 5--7 the finite slice-site models.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-ring scalar transport and composition/localization normalization; it supplies module identifications rather than replacing the unit proof route."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic geometric inverse image of a constant B-module; it preserves the same finite module value in the explicit cover computation and under the etale slice equivalence."
+   },
+   {
+    "node": "lem-pur-exact-derived-cohomology-coherence",
+    "why": "Generic unbounded exact-functor cohomology comparison; its first displayed isomorphism identifies H^q(i_s^{-1}L) with i_s^{-1}H^q(L) without assuming boundedness of a representative."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pur-exact-derived-cohomology-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NG-2081f449d",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-2081f449d (reviewer sub-agent of L); spot-checked: I read the item in full. Its statement is byte-identical to NA's creation of the node (old steps 1-2 of the parent lem-weil-pbc-finite-field-stratified-perfect-models). The two added stmt_deps (localized site, size convention) are really used by the statement. There are no new nodes and no repair note, so this is an ordinary one-level split. I checked the route: prop-…-modules-exact (sk-def-exchange), etale-inverse-image-restriction (sk-thm-p1) and etale-site-localization-open (sk-prop-cd) are reachable from sk-thm-properbasechange. The covering base change node is a Mathlib leaf. I accept the three declared tool_uses (lem-pe-constant-left-module-inverse-image, lem-sfb-geometric-inverse-image-constant-module, lem-pur-exact-derived-cohomology-coherence) as generic black boxes. I checked the source at Stacks 03RZ (proof of (3), common partition); the tag labels are verified, there is no SGA citation, and proof_origin=agent is correct. Steps 2-6 are correct against the cited statements. Step 3 uses actual fibre products and the equation ι_k pr1 = κ_l pr2, not containment of images. Step 4 uses θ^q for exact i_s^{-1} with no boundedness. Step 6 matches F|_U(V/U)=F(V) with G|_Y and identifies the constant objects through lem-sfb applied to the site equivalence. I tested the small cases X=∅, V=∅, a=b, L=0, B=0 and B=Z/4; the statement holds in each. The duplicate search found only partial overlaps (normalized-tower-common-lisse-strata, fd-constructible-tensor-refinement-witness, sfb-adic-constructible-local-models), and none states the item. Fixes: (C4) steps 1/2/3/5 used module inverse-image compositors and attributed them to lem-pe-constant-left-module-inverse-image, whose statement only says its identifications commute with composition. They now cite lem-weil-pbc-inverse-image-composition-module-linear-core, which is on route and states the B-linear c_{u,v}. (size) Step 7 bounded the index set by the arrows of a 'coefficient-universe-small site', but def-weil-size-convention makes sites only 𝒱-small, and the cover inherits the unbounded index sets of the constructibility covers. Step 7 now reindexes by the points of V, choosing one covering member per point; the family stays jointly surjective, so it is still an étale covering. proof_deps recomputed. Corrected item: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-stratified-cohomology-slice-models.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedCohomologySliceModels",
+  "declaration": "AlgebraicGeometry.Etale.stratified_cohomology_slice_models",
+  "file": "lean/Sheaf/Paper/StratifiedCohomologySliceModels.lean",
+  "statement": "theorem stratified_cohomology_slice_models (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (B : Type (u + 1)) [CommRing B] [Finite B] (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) (a b : ℤ) (hab : a ≤ b) (hvan : ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj L)) (hconstructible : ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj L)) : ∃ S : Scheme.FiniteLocallyClosedStratification X, (∀ s : Fin S.n, Topology.IsConstructible (S.stratum s)) ∧ ∀ s : Fin S.n, (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf (S.domain s).smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj ((upperStar (ModuleCat.{u + 1} B) (S.immersion s)).mapDerivedCategory.obj L))) ∧ ∀ (q : ℤ) (V : (S.domain s).Etale), ∃ (I : Type (u + 1)) (U : I → (S.domain s).Etale) (f : ∀ t, U t ⟶ V), Sieve.ofArrows U f ∈ (S.domain s).smallEtaleTopology V ∧ ∀ t : I, ∃ M : ModuleCat.{u + 1} B, Finite M ∧ Nonempty (((DerivedCategory.homologyFunctor (Sheaf (S.domain s).smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj ((upperStar (ModuleCat.{u + 1} B) (S.immersion s)).mapDerivedCategory.obj L)).over (U t) ≅ (constantSheaf ((S.domain s).smallEtaleTopology.over (U t)) (ModuleCat.{u + 1} B)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a0648004",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Item node changed only in lean; all 13 stmt_dep files identical to side-live; statement verbatim; report has Worker report and Second reading sections. Clause-by-clause match: Noetherian X = IsLocallyNoetherian+CompactSpace; B : Type (u+1) CommRing Finite (accepted ModuleCat.{u+1} encoding); unbounded DerivedCategory; hab/hvan/hconstructible for all q; ∃ FiniteLocallyClosedStratification with explicit Topology.IsConstructible strata; K_s = upperStar(immersion).mapDerivedCategory.obj L (canonical); vanishing off [a,b]; ∀ q ∀ V : Etale, ∃ I : Type (u+1), cover sieve in smallEtaleTopology, ∃ M Finite (as set) with Sheaf.over (U t) ≅ constantSheaf on J.over (U t). Edge cases X=∅ (n=0), empty strata/V, a=b, B=0, universes all fine. Stacks 095E/03RZ labels verified; docstrings carry source, blueprint and 7 proof steps. Plain imports equal all proof_dep record modules; no duplicate or name clash. Not recompiled (no change); same types compile together in live FiniteFieldStratifiedPerfectModels.lean. Advisory only: RingedSiteModules public import (stmt_dep record module) unused by the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261023T105132-L-3506683",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

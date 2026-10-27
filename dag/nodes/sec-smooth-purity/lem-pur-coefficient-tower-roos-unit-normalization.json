@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-coefficient-tower-roos-unit-normalization",
+ "kind": "statement",
+ "title": "Roos comparison with canonical derived-unit normalization",
+ "statement": "For a prime l, a finite extension E of Q_l and every scheme W, the canonical strict Roos complex followed by localization is naturally isomorphic to localization followed by the right-derived tower limit. The comparison respects every actual finite projection. On every K-injective tower I, the actual Roos inclusion is a quasi-isomorphism, and its localized map followed by the comparison is the ordinary-limit complex identification followed by the inverse of the canonical right-derived-functor comparison. Thus the comparison is normalized on resolutions as well as projections. Equivalently, there exists the full PrimitiveCounit.RoosRealization record with projection and resolution normalization, constructed by these equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; canonical normalized K-injective construction in stage3-pur-canonical-tower-roos-comparison."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-weil-strict-roos-comparison",
+  "def-sf-primitive-tensor-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the functorial K-injective normalizedRoosIso construction of the canonical projection comparison, retaining its defining inclusion/unit equation. The Roos inclusion is a quasi-isomorphism on K-injective towers. Cancel that inclusion to verify the projection equation on K-injectives, using the canonical derived projection and the limit cone equation. Naturality along a K-injective resolution proves the equation on every complex. Finally specialize the retained inclusion equation to a K-injective complex and rewrite the right-derived-functor unit as the inverse canonical comparison.",
+   "uses": [
+    "stage3-pur-canonical-tower-roos-comparison",
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "stage3-pur-canonical-tower-roos-comparison",
+  "lem-weil-strict-roos-derivation",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and the canonical comparison construction; retain the unit equation already proved in normalizedRoosIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Roos mapping cone total right derived inverse limit strict towers natural isomorphism canonical projection",
+   "results": "Eight mapping-cone comparison lemmas, including CochainComplex.mappingCone.mapHomologicalComplexIso; no theorem giving this coefficient-tower derived-limit comparison with its canonical projections.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplexCompIso",
+   "results": "Seven comparison lemmas, including mapHomologicalComplexCompIso and its component equations; used to compare exact restriction and evaluated complexes.",
+   "date": "2026-10-21",
+   "verdict": "comparison ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|leftAdjointUniq",
+   "results": "Mathlib gives adjunction uniqueness; no specialized completed coefficient-system theorem. Project StrictRoosComparison supplies the derived-limit ingredient.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Roos complex computes right derived inverse limit of towers in an abelian category with exact countable products, with the canonical projections.",
+   "results": "CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat in Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic and CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π in Mathlib.CategoryTheory.Functor.KanExtension.Basic are general ingredients; no strict Roos comparison with the specified derived projections.",
+   "date": "2026-10-21",
+   "verdict": "no match; ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Normalized primitive comparison, Roos existence subargument.",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-completed-primitive-counit-roos-realization-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientConstantTowerRoosNormalization",
+  "file": "lean/Sheaf/Paper/CoefficientConstantTowerRoosNormalization.lean",
+  "declaration": "WeilConjectures.coefficientConstantTowerRoosNormalization",
+  "statement": "theorem coefficientConstantTowerRoosNormalization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t}) :\n    Nonempty (PrimitiveCounit.RoosRealization l E W)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules vs clone original (verbatim relocation diffed), new sorry statements vs Comparisons fields/nodes, node lean/proof fields vs Lean; 12 direct importers compiled OK against delivered .lbuild; axioms probe (roos_exists clean, comparisons_exists sorryAx only via the two new realization holes)"
+ }
+}

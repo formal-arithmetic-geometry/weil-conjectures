@@ -26,9 +26,28 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 08J9 (lemma-internal-hom), tensor-Hom adjunction; agent definition of the normalized tensor comparison used in Step 1 of lem-sfb-module-object-ringed-site-derived-comparison, using lem-pe-internal-section-tensor-comparison."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the same representative normalization using the abstract heterogeneous tensor localization square. Its parameters are exactly the original localization functors, tensor functors, comparison maps, flatness predicate and K-flat model. Unfolding this generic predicate gives the former formula by reflexivity, including the endpoint transports.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the already constructed complexTensorIso directly as totalComparison. Its endpoints are definitionally the native and explicit total endpoints, and the existing unique characterization fixes exactly this map. Name the closed-structure, tensor-model and comparison-isomorphism types without changing their data. The public totalComparison_heq equation exposes the generic total map without unfolding concrete derived data. Package iso and normalization in a generic two-field record, specialized to exactly the same endpoint types and normalization predicate.",
+   "uses": [
+    "def-sfb-internal-section-total-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-section-total-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 08J9; W7 abstract normalization predicate refactor, preserving the former formula by definitional equality."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -78,7 +97,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
  "lean": {
@@ -88,10 +118,16 @@
    "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.tensorLocalizationSquare",
    "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.totalComparison",
    "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.tensorComparisonNormalized",
-   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.TensorComparison"
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.TensorComparison",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.tensorLocalizationSquareHEq",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.GlobalClosedStructureType",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.GlobalTensorModelsType",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.GlobalTensorComparisonIsoType",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.totalComparison_heq",
+   "AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison.NormalizedGlobalTensorComparisonData"
   ],
   "file": "lean/Sheaf/Paper/InternalSectionDerivedTensorComparison.lean",
-  "statement": "structure TensorComparison (S : CoefficientClosedStructure (hom Λ X)) (T : CoefficientTensorModels.{u, u + 1, u, u + 1} (Scheme.ProEt.topology X) (ring Λ X) S)",
+  "statement": "abbrev TensorComparison (S : GlobalClosedStructureType Λ X) (T : GlobalTensorModelsType Λ X S) := NormalizedGlobalTensorComparisonData (I := GlobalTensorComparisonIsoType Λ X S) (tensorComparisonNormalized Λ X S T)",
   "branch": "newtargets-dag",
   "by": "Q30",
   "date": "2026-10-18",
@@ -113,5 +149,15 @@
   "group": "Q30",
   "result": "pass",
   "note": "Third delivery; fixes F1-F3 of the f471 RETURN. F1: the slice clause now uses the framework's native local derived tensor (Mod.derivedMonoidalCategory), MonoidalClosed.internalHom (DerivedCategory.monoidalClosed, same construction as the global CondensedRing.derivedHom) and the native counit, none of them transported from S_U. SliceTensorComparison is pinned on K-flat representatives by the unique summand/pure-tensor total comparison (exists-unique with HEq). SliceHomComparison gives theta^U on all local objects with the native evaluation equation and the Step-5 restriction square (variances checked: (c K).inv.op contravariant, (c N).hom covariant); r_U is its unique lift. Global theta/evaluation clause unchanged and correct. No extra hypotheses or universe restrictions; edge cases (empty scheme, zero ring, U=X, unbounded complexes) admitted. lean.statement verbatim for the item and the 3 owned def nodes; all declarations exist; item stmt_deps only gain def nodes used in the Lean. F2: the second reading is substantive. F3: nt_compile --json clean, no errors or warnings: 31.3/3.8/47.4/16.4 s (limit 60 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1ce9b",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261026T105350-L-1169695",
+  "kind": "interface",
+  "note": "independent cc review: W7 item internalSection_tensorLocalization (unchanged statement, proof complete, axioms propext/choice/Quot.sound) and the 4 refactored + 3 adapted unclaimed modules against the published versions and the change record; 26 sandbox compiles (7 delivered modules + 21 consumers) all rc 0"
  }
 }

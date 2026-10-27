@@ -1,0 +1,57 @@
+## Worker report
+
+Item: lem-sf-framework-common-stage-descent. Group: Q58. Stage 1 only, 2026-10-22.
+
+Written files: dag/nodes/sec-smooth-purity/lem-sf-framework-common-stage-descent.json (the item, now split), citations.json (23 step/node quotations), and this report. The statement and its statement dependencies are unchanged. The sandbox originally had no node or report, only dispatcher marker files; the item was taken from the live read-only repository. No Lean was written or compiled and no repository or launcher file was edited.
+
+## New nodes
+
+None. There are no new Mathlib leaves. The argument is the conjugation and quotient calculation itself; extracting its conclusions as new lemmas would simply repeat clauses of this item. The only non-elementary ambient facts needed are the existing common-stage category, its specified scalar associators, and the finite-subextension construction, which the steps cite. The four longer calculations are marked non-elementary to expose them to review, although they use only those facts and the item's given equations.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the exact blueprint tag, common-stage/coefficient-descent terminology, commonStage, pseudonatural, and the descent declarations. StageSystem/Functor.lean constructs an abstract quotient functor and its transformations; StageSystem/Exact.lean constructs exactness for an abstract cocone to one target category. Neither states this whole framework result, including its actual completed-integral transitions, non-strict units, Omega-linearity and all comparisons. FieldCoefficientTwoColimit.lean concerns the native Weil coefficient realization, not this framework interface. Consequently no project declaration gives every clause of this item under exactly its hypotheses.
+
+## Wanted
+
+None. This is an agent-written elaboration of the supplied blueprint descent paragraph, not a claim that an additional textbook descent theorem was consulted.
+
+## Issues found and repaired
+
+The live item had no proof. Its hypotheses and formulas are correct. The older PBC descent proposition has a similar formula but uses the PBC categories; its scheme and coefficient hypotheses are not silently substituted for the framework's arbitrary S,T and raw rationalizations. The abstract additive descent lemma assumes literally normalized identity transitions. Rather than asserting that it applies without checking units, the proof retains the given unit maps and calculates their effect explicitly in steps 1, 5 and 8. No statement dispute or route change was needed.
+
+The proof source is literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md, paragraphs “Algebraically closed stage” and “Weil structures”. I also read the current main-20261015 algebraically-closed coefficient definition in sec-proetale-coefficients/sk-def-sf-operations and the scalar-extension composition statement and proof in sec-proper-base-change/sk-thm-properbasechange, and the live definition/result nodes. The old unit and chapter records and the three blueprint levels were read; this item supplies a generic tool inside the existing descent part of that route. Neither unit nor chapter is changed.
+
+## Not duplicates
+
+No nodes are created. Existing-node and whole-blueprint searches included common stage, descent functors, coherent functors and coherent pair. The closest nodes were prop-weil-pbc-descent-functors, prop-weil-pbc-common-stage-calculus, lem-sbc-coherent-pair-functor-descent and lem-fd-common-stage-comparison-descent. The PBC nodes prescribe a different coefficient model; the SBC lemma only gives additive normalized-unit descent, not framework exact/linear descent with the given non-strict units; the Fourier lemma assumes equivalences comparing two models, which the arbitrary functors in this item need not be. Their statements were opened and read. None replaces the item under its stated hypotheses. No off-unit theorem is invoked as an unrecorded tool.
+
+## Mathlib searches
+
+All new searches ran through /home/ubuntu/weil-launcher-all/batch2/msearch.py Q58 lem-sf-framework-common-stage-descent and are recorded verbatim in searches.jsonl and mathlib_searches. The inherited Q53 searches are retained. New searches used two LeanFinder phrasings, LeanSearch, Loogle, and two grep patterns (CategoryTheory generally and CategoryTheory/Bicategory). They returned generic filtered-colimit presentations, exact functors, triangle constructors, Kan extensions and related declarations, with no match to the full coefficient-stage statement. In particular ExactFunctor.of concerns preservation of finite limits/colimits, not this descent construction; the triangulated-functor hits require an already constructed functor and shift comparison. No search failure was recorded as a no-match. No new Mathlib leaf is claimed.
+
+## Review by Q58
+
+I read delivery-errors B through E, the item, the cited statements and the source paragraphs with the files open. The source calls the operations and the two maps descended; the proof now gives the actual representative formulas and checks the required comparisons instead of treating this sentence as a theorem about the wrong categories. I kept the object map, all scalar equations, the non-strict units, and the full natural-transformation and composition conclusions.
+
+Step 1 uses def-weil-algebraically-closed-coefficients for the literal pair category, representative equality, common-stage composition and triangles, lem-weil-scalar-extension-composition for the natural associator compatible with identity extensions, and def-weil-finite-subextension-directed-set for composita. I checked the source/target of transport: the source associator is inverted, and the target one is not. The stage inclusion is written with the units on both ends; it does not pretend T(E/E) is literally the identity.
+
+Step 2 uses the same framework Hom transport and natural scalar associator, not the proof of a PBC node. Its only other inputs are the item's tower equation and naturality of beta. Expanding the tower equation at A and B gives the first displayed equality; naturality cancels the d factors and gives exactly the target transport. Thus equality after extension is preserved without assuming a transition functor faithful or a stage inclusion fully faithful. Step 3 then uses the framework's stated common-stage composition: cancellation of the adjacent beta and its inverse proves the functor laws; addition is checked at the same field. These are elementary calculations and are not new nodes.
+
+Step 4 uses the finite-subextension definition's union assertion to include each scalar in a finite field, the raw rationalization's explicit morphism scalar-extension formula to know transport is linear over the smaller field, and the common-stage Hom definition. It checks independence of the scalar field as well as Omega-linearity. No assertion that the finite-stage inclusions are fully faithful is needed. Step 5 uses the item unit equation and the literal common-stage map definition: the displayed equality is obtained by substituting Phi(u) beta = u. The triangulated-category definition supplies what a specified shift comparison means. Invertibility of its component is witnessed explicitly by the class of its inverse.
+
+Step 6 uses the framework shift and the exact-functor definition, plus the hypothesis that beta commutes with composite shift comparisons. I checked the types of h_A and v-plus: h_A runs from T(Phi(K[1])) to (T(Phi K))[1], while v-plus runs from T(K[1]) to T(H[1]). The two displayed shift equations and naturality of phi_L prove the whole shift square for a cross-field arrow. This is the main check that cannot be replaced by saying stagewise shifts are compatible. Step 7 uses exactly the definition of distinguished framework triangles as triangles isomorphic to finite-stage distinguished ones, and the triangulated definition's isomorphism closure. It applies Phi_L's given exactness at that field; the earlier unit and shift checks identify the third arrow as well as the vertices. No further constructibility, six-operation, or Karoubi theorem is used.
+
+Step 8 uses common-stage equality and the associator's compatibility with identity extensions. The prescribed tau component is first written with the E-stage units. Its representative at L is T(tau_E); the hypothesis identifies this with gamma inverse, tau_L, beta. I checked the middle cancellation using naturality of tau_L on the actual map v, which gives the displayed two-line naturality proof. Step 9 uses common-stage composition and the exact-functor shift convention only. The compatible inverse equation is written out, so invertibility does not rely on lifting an inverse from a colimit. Identity, vertical composition and equations are checked componentwise at (E,K); the shift square is the image of the given finite-stage square.
+
+Step 10 uses the existing scalar associator and the triangulated exact-functor definition; its additional inputs are precisely the two families' hypotheses. The composite scalar comparison is Xi_L(beta) after xi. Naturality of xi on beta, displayed in the step, is the interchange needed when substituting both tower equations; the resulting formula has the correct Xi_M Phi_M applied to the source associator. Step 11 uses common-stage composition and the shift convention: expansion of the two successive conjugations is exactly conjugation by this composite comparison. The object function agrees literally, and the composite shift comparison is chi at Phi_E(K) after Xi_E(phi). Thus composition is identified with all the specified comparisons, not just with an unspecified naturally isomorphic functor.
+
+For C4 I checked every node in every uses list against its statement, and citations.json copies the relevant clauses verbatim. The citations are not merely tags for background facts. For C1 the only ambient category facts are supplied by those definitions/associators; every other equality is expanded from the item's hypotheses or proved by finite-stage composition, cancellation and linearity. No step uses a cited node's proof as an unstated stronger result. Each proof step is shorter than 2000 characters; none conceals a further construction or a standard lemma requiring extraction. No new-node B checks are left outstanding because there are no new nodes, and no new Stacks citation is introduced.
+
+Small cases checked: E=F=L and repeated fields in a tower (the unit calculations still apply); identity and zero transformations; identity and zero functors; zero morphisms and their sums; non-faithful transitions (eventual equality, not injectivity, is used); different fields for the endpoints; a scalar absent from their original fields; zero objects/triangles; and empty S or T whenever the given family exists. The raw rationalization is used throughout, so no idempotent-splitting or new-object claim is smuggled in. Omega-linearity uses M-linearity at a field actually containing the scalar. The proof requires no extra finiteness or smoothness hypothesis on the schemes.
+
+The server-only preliminary review_split check passed with 0 new nodes. The full delivery dry run and push are performed after this report is written; their results are recorded by the delivery tool.
+
+## Unfinished
+
+None in the split. No Lean proof, compilation or stage-2 work is part of this authorized stage-1 delivery.

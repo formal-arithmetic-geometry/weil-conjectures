@@ -1,0 +1,287 @@
+{
+ "id": "lem-a1-qc-open-intersection-spectral-presentation",
+ "kind": "statement",
+ "title": "Spectral presentation of a directed intersection of quasi-compact opens",
+ "statement": "Let $X$ be a quasi-separated scheme [def-pc-scheme, def-weil-quasi-separated-morphism], $I$ a nonempty set, and $(U_i)_{i\\in I}$ quasi-compact open subsets such that for every $i,j$ there exists $k$ with $U_k\\subseteq U_i\\cap U_j$. Put $E=\\bigcap_iU_i$ with its subspace topology. For every $i_0\\in I$, put $Y=U_{i_0}$ and let $J$ be the set of distinct members of $(U_i)$ contained in $Y$, ordered by $V\\leq W$ if $W\\subseteq V$. Then $J$ is a small nonempty directed poset with least element $Y$; every $U_i$ contains a member of $J$, and $E=\\bigcap_{V\\in J}V$. Each $V\\in J$, with its open subscheme structure, is quasi-separated and its underlying space is spectral [def-weil-spectral-space]. For $V\\leq W$, the inclusion $W\\hookrightarrow V$ is spectral: the inverse image of every quasi-compact open in $V$ is quasi-compact. The inclusions $E\\hookrightarrow V$ exhibit $E$ as the limit of this diagram in topological spaces: compatible tuples consist of one common point in $E$, and the subspace topology on $E$ is the coarsest topology making all projections continuous. These assertions hold even when $E$ or a member of the family is empty. For an arbitrary nonempty family of quasi-compact opens in $X$, the family of intersections indexed by nonempty finite subsets of the original index set (allowing an intersection to be the empty open subset) is again a family of quasi-compact opens, is directed by reverse inclusion, has the same total intersection, and contains each original member.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Equation equation-sections-of-intersection preceding Tag 0APJ, reduction to one quasi-compact member; Topology Tag 0A31 (lemma-make-spectral-space), Properties Tag 094L (lemma-quasi-compact-quasi-separated-spectral), Schemes Tag 01KO (lemma-characterize-quasi-separated)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-spectral-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i_0$ and set $Y=U_{i_0}$. The set $J=\\{U_i:U_i\\subseteq Y\\}$ is a subset of the power set of the underlying set of $X$, hence small. Reverse inclusion is a partial order on these distinct subsets. We have $Y\\in J$ and $Y\\leq V$ for every $V\\in J$. Given $V=U_i,W=U_j\\in J$, choose $k$ with $U_k\\subseteq U_i\\cap U_j$. Then $U_k\\in J$ is an upper bound of $V,W$. This proves nonemptiness, directedness and the least-element assertion without assuming any of these opens has a point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "equation-sections-of-intersection, paragraph reducing to one member; explicit set-index construction."
+   }
+  },
+  {
+   "text": "For every original index $i$, directedness applied to $i,i_0$ gives a member $U_k\\in J$ contained in $U_i$. Consequently membership in every member of $J$ implies membership in every $U_i$; the converse holds because each member of $J$ is an original open. Thus $E=\\bigcap_{V\\in J}V$. The inverse diagram is indexed by $J^{\\mathrm{op}}$: the relation $V\\leq W$ supplies the inclusion $W\\hookrightarrow V$. Inclusions compose and have identity maps, so this is a diagram.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "equation-sections-of-intersection, reduction to indices contained in the chosen member."
+   }
+  },
+  {
+   "text": "For each indexed open V, use Mathlib Opens.isOpenEmbedding' and Topology.IsOpenEmbedding.quasiSeparatedSpace to inherit quasi-separatedness from X. The hypothesis hU supplies CompactSpace V.toScheme by isCompact_iff_compactSpace. The scheme instances T0Space, QuasiSober and PrespectralSpace from Mathlib.AlgebraicGeometry.Properties, together with compactness and quasi-separatedness, construct SpectralSpace V.toScheme, as in lem-weil-pbc-qcqs-scheme-spectral. This also works for the empty open.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 094L, lemma-quasi-compact-quasi-separated-spectral; Schemes Tag 01KO, lemma-characterize-quasi-separated, for restriction to an open subscheme."
+   }
+  },
+  {
+   "text": "For an inclusion g : V → W, Mathlib Opens.isOpenEmbedding_of_le gives an open embedding. Its range is compact, since V is compact, and open. Quasi-separatedness of W makes K ∩ range g compact for every compact open K of W, by Mathlib IsCompact.inter_of_isOpen. The embedding compactness equivalence and image_preimage_eq_inter_range identify this with compactness of g inverse image K. Together with continuity this proves IsSpectralMap g.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054D, lemma-quasi-separated-quasi-compact-open-retrocompact; the intersection fact is supplied by the cited existing node."
+   }
+  },
+  {
+   "text": "For a compatible tuple $(x_V)_{V\\in J}$, compatibility with $V\\hookrightarrow Y$ says each $x_V$ is the same underlying point as $x_Y$. This point belongs to every $V$, hence to $E$. Conversely every point of $E$ gives that tuple. Each projection $E\\hookrightarrow V$ is continuous by the subspace definition. Moreover any open of $E$ is $E\\cap O$ for $O$ open in $X$, and is the inverse image under $E\\hookrightarrow Y$ of $Y\\cap O$. Thus the subspace topology is precisely the coarsest topology making all projections continuous. Explicitly, for any space $T$ and compatible continuous maps $f_V:T\\to V$, define $f(t)=f_Y(t)\\in E$ using compatibility. For an open $E\\cap O$, its inverse image is $f_Y^{-1}(Y\\cap O)$, which is open; hence $f$ is continuous, factors every $f_V$, and is unique because its underlying point is prescribed by $f_Y$. This proves the limit universal property, also if $E$ is empty: a cone with nonempty $T$ would supply an impossible compatible tuple at each point of $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A31, lemma-make-spectral-space, proof of assertion (b), universal-property sentence expanded explicitly."
+   }
+  },
+  {
+   "text": "For each nonempty finite set F, apply Mathlib Finset.inf'_induction to the predicate that an open is compact. The initial cases are hU, and the binary step is Mathlib IsCompact.inter_of_isOpen. Finset.inf'_union shows that F union G supplies a common refinement. Singleton infima are the original opens, proving occurrence of every original member. Membership in every finite intersection implies membership in every singleton; conversely Finset.inf'_induction on membership puts a point of every U_i in every finite intersection. Empty resulting opens and empty total intersections are allowed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "paragraph preceding equation-sections-of-intersection, adding finite intersections; Topology Tag 0A31, lemma-make-spectral-space, implication (4) to (5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-scheme-spectral"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "equation-sections-of-intersection reduction paragraph; Topology Tag 0A31 assertion (b). Formalized using Mathlib open embeddings and compact intersections, avoiding the finite-affine-cover detour. By E8, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(iInter|[Ii]ntersection).*(limit|Limit|[Ss]pectral)|([Ss]pectral|[Ll]imit).*(iInter|[Ii]ntersection)",
+   "results": {
+    "t": "2026-10-22T11:59:22Z",
+    "tool": "grep",
+    "query": "(iInter|[Ii]ntersection).*(limit|Limit|[Ss]pectral)|([Ss]pectral|[Ll]imit).*(iInter|[Ii]ntersection)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/EqualizerProducts.lean",
+     "Mathlib/Topology/Sheaves/SheafCondition/EqualizerProducts.lean"
+    ],
+    "digest": "d11dabc3a37387b8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compact-intersection, scheme-limit, spectral-space constructor, or sheaf-gluing results do not state the complete cofinal topological inclusion presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intersection of a directed family of compact open subsets is the inverse limit of the inclusion diagram of spectral spaces",
+   "results": {
+    "t": "2026-10-22T11:59:23Z",
+    "tool": "leansearch",
+    "query": "The intersection of a directed family of compact open subsets is the inverse limit of the inclusion diagram of spectral spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsCompact.nonempty_sInter_of_directed_nonempty_isCompact_isClosed",
+     "IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed",
+     "exists_subset_nhds_of_isCompact'",
+     "TopologicalSpace.CompactOpens.coe_inf",
+     "exists_subset_nhds_of_isCompact",
+     "CompHaus.limitCone",
+     "PrespectralSpace.isBasis_opens",
+     "SpectralSpace.toQuasiSeparatedSpace"
+    ],
+    "digest": "494c2cbec85cc51e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compact-intersection, scheme-limit, spectral-space constructor, or sheaf-gluing results do not state the complete cofinal topological inclusion presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, QuasiSeparatedSpace",
+   "results": {
+    "t": "2026-10-22T11:59:23Z",
+    "tool": "loogle",
+    "query": "SpectralSpace, QuasiSeparatedSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "SpectralSpace.toQuasiSeparatedSpace",
+     "SpectralSpace.mk"
+    ],
+    "digest": "a64cabd30f8de022"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compact-intersection, scheme-limit, spectral-space constructor, or sheaf-gluing results do not state the complete cofinal topological inclusion presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed family of quasi compact open subsets of a quasi separated scheme forms an inverse system of spectral spaces whose topological limit is their intersection",
+   "results": {
+    "t": "2026-10-22T11:59:30Z",
+    "tool": "leanfinder",
+    "query": "A directed family of quasi compact open subsets of a quasi separated scheme forms an inverse system of spectral spaces whose topological limit is their intersection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
+     "AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+     "AlgebraicGeometry.isLimitOpensCone",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatEqualizerSchemeOfQuasiSeparatedSpace"
+    ],
+    "digest": "9d64567f028e0205"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compact-intersection, scheme-limit, spectral-space constructor, or sheaf-gluing results do not state the complete cofinal topological inclusion presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty downward directed set of open subsets with inclusion maps has intersection as its limit in the category of topological spaces",
+   "results": {
+    "t": "2026-10-22T12:00:52Z",
+    "tool": "leanfinder",
+    "query": "A nonempty downward directed set of open subsets with inclusion maps has intersection as its limit in the category of topological spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Alexandrov.isLimit",
+     "Alexandrov.lowerCone",
+     "TopCat.GlueData.ofOpenSubsets",
+     "TopCat.Presheaf.IsSheaf.isSheafPairwiseIntersections",
+     "TopCat.Presheaf.isLimitOpensLeEquivGenerate₁",
+     "TopCat.Presheaf.SheafCondition.opensLeCoverCocone",
+     "TopCat.Presheaf.IsSheaf.isSheafOpensLeCover",
+     "TopCat.Presheaf.isLimitOpensLeCoverEquivPairwise"
+    ],
+    "digest": "db03f8002415629a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compact-intersection, scheme-limit, spectral-space constructor, or sheaf-gluing results do not state the complete cofinal topological inclusion presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-sections-intersection-structure-colimit",
+  "date": "2026-10-22",
+  "group": "Q58"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67. In the Tag 0APK input, this is the equation-sections-of-intersection identification used to compute the section rings of the invariant intersection. Extracted argument: Spectral presentation of a directed intersection of quasi-compact opens.",
+   "via": [
+    "lem-a1-sections-intersection-structure-colimit",
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-qc-open-intersection-spectral-presentation",
+  "worker": "stage1",
+  "summary": "Expanded the cofinal reverse-inclusion indexing and topological limit universal property, proved open-subscheme quasi-separatedness by the affine-cover criterion, and used existing nodes for spectrality and compact intersections. No new nodes. Clarified that finite index subsets are nonempty while the resulting open intersections may be empty.",
+  "blueprint": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67. In the Tag 0APK input, this is the equation-sections-of-intersection identification used to compute the section rings of the invariant intersection. Extracted argument: Spectral presentation of a directed intersection of quasi-compact opens.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-3ab7ee14d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-3ab7ee14d (reviewer sub-agent of L); spot-checked: I read the whole split; there are no new nodes and no changes. (1) Statement: compared with the base text in the Q58 snapshot, only the refinement clause changed, from 'all nonempty finite intersections' to 'intersections indexed by nonempty finite subsets, empty results allowed'. This is a correct clarification: in Spec(k×k), dropping the empty intersection of the two clopen points leaves a family that is not directed. It matches the more-groupoids paragraph before equation-sections-of-intersection and 0A31 (4)⇒(5). The citer sections-intersection-structure-colimit is unaffected. (2) Steps 1, 2 and 5 are elementary and correct: J is small, directed, with least element Y; E is the intersection over J; and E is the limit in Top, with every open of E pulled back from Y and empty E handled. Step 3: lem-pqf-finite-affine-cover-qc-open, then 01KO clause (1) on X and clause (2) on V, then 094L, makes V quasi-separated and spectral; no affine∩affine assumption. Steps 4 and 6 use pqf-lem-qs-intersection-qc (054D) correctly, and step 6 sets up the induction on |F| properly. (3) The item supplies every hypothesis of lem-weil-pbc-spectral-limit-pullback-sections that its citer needs. (4) Route: three cited nodes are mathlib and pqf-lem-qs-intersection-qc is Lean-closed (slopmaster2 closed), so tool_uses=[] is correct; no SGA. (5) No duplicate: DAG grep for 0A31/make-spectral-space and the intersection/limit nodes found none. Searches of all three kinds are recorded with logged results. Advisory: the item's inherited source.place says 'preceding Tag 0APJ', but the paragraph comes right before 0API; not changed by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcOpenIntersectionSpectralPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.qcOpenIntersection_spectral_presentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.qcOpenIntersectionIndex",
+   "AlgebraicGeometry.Scheme.qcOpenIntersectionDiagram",
+   "AlgebraicGeometry.Scheme.qcOpenIntersectionCone",
+   "AlgebraicGeometry.Scheme.qcFiniteOpenIntersection",
+   "AlgebraicGeometry.Scheme.qcOpenIntersection_spectral_presentation",
+   "AlgebraicGeometry.Scheme.qcFiniteOpenIntersection_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QcOpenIntersectionSpectralPresentation.lean",
+  "statement": "theorem qcOpenIntersection_spectral_presentation (X : Scheme.{u}) [QuasiSeparatedSpace X] {I : Type v} [Nonempty I] (U : I → X.Opens) (hU : ∀ i : I, IsCompact (U i : Set X)) (hdir : ∀ i j : I, ∃ k : I, U k ≤ U i ⊓ U j) (i₀ : I) : Small.{u} (qcOpenIntersectionIndex U i₀) ∧ Nonempty (qcOpenIntersectionIndex U i₀) ∧ IsDirected (qcOpenIntersectionIndex U i₀) (· ≤ ·) ∧ IsLeast (α := qcOpenIntersectionIndex U i₀) Set.univ (⟨U i₀, ⟨⟨i₀, rfl⟩, le_rfl⟩⟩ : qcOpenIntersectionIndex U i₀) ∧ (∀ i : I, ∃ V : qcOpenIntersectionIndex U i₀, V.val ≤ U i) ∧ (⋂ i : I, (U i : Set X)) = ⋂ V : qcOpenIntersectionIndex U i₀, (V.val : Set X) ∧ (∀ V : qcOpenIntersectionIndex U i₀, QuasiSeparatedSpace V.val.toScheme ∧ SpectralSpace V.val.toScheme) ∧ (∀ (V W : (qcOpenIntersectionIndex U i₀)ᵒᵖ) (f : V ⟶ W), IsSpectralMap ((qcOpenIntersectionDiagram U i₀).map f)) ∧ Nonempty (IsLimit (qcOpenIntersectionCone U i₀)) ∧ (∀ t : (V : (qcOpenIntersectionIndex U i₀)ᵒᵖ) → (qcOpenIntersectionDiagram U i₀).obj V, (∀ (V W : (qcOpenIntersectionIndex U i₀)ᵒᵖ) (f : V ⟶ W), (qcOpenIntersectionDiagram U i₀).map f (t V) = t W) → ∃! x : (qcOpenIntersectionCone U i₀).pt, ∀ V : (qcOpenIntersectionIndex U i₀)ᵒᵖ, (qcOpenIntersectionCone U i₀).π.app V x = t V) ∧ (inferInstance : TopologicalSpace (qcOpenIntersectionCone U i₀).pt) = ⨅ V : (qcOpenIntersectionIndex U i₀)ᵒᵖ, TopologicalSpace.induced ((qcOpenIntersectionCone U i₀).π.app V) (inferInstance : TopologicalSpace ((qcOpenIntersectionDiagram U i₀).obj V))",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The first theorem states the directed cofinal spectral limit presentation; qcFiniteOpenIntersection_refinement states the final arbitrary-family refinement clause. The four auxiliary declarations explicitly construct the index, inclusion diagram, canonical cone, and finite intersections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d0e7bc3d",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Node unchanged apart from the new lean record, and the recorded statement appears verbatim in the file. Every clause matches the node and the Stacks source: J is OrderDual of the distinct members inside U i0 (reverse inclusion), with Small, Nonempty, IsDirected, least element Y, cofinality and equal intersections; each member is QuasiSeparatedSpace and SpectralSpace on its open subscheme; IsSpectralMap holds on the inclusion maps of the J-op diagram (direction checked); the cone of literal inclusions from the subtype intersection has Nonempty IsLimit; unique compatible tuples; subspace topology equals the infimum of the induced topologies. The finite-intersection theorem has no hdir, indexes by nonempty Finsets and allows empty values. No extra assumptions, free index universe, empty cases covered. Helpers carry real data; only the two theorem proofs are sorry; docstrings carry source, blueprint tag and proof steps; stmt_deps used through their recorded Mathlib matches. The citer sections-intersection-structure-colimit uses the same interface. Advisory: the inherited source.place says 0APJ but the paragraph precedes 0API. Not recompiled, as instructed; no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-5f475",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261023T104935-L-3466107",
+  "kind": "interface",
+  "note": "independent cc review: delivered QcOpenIntersectionSpectralPresentation.lean + node lem-a1-qc-open-intersection-spectral-presentation + change record vs live clone node/statement, unit sk-p-real-rankin, Mathlib API used; IsLeast α-correction checked against node's reverse-inclusion order"
+ }
+}

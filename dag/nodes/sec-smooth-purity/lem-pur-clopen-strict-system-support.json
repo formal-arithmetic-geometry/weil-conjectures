@@ -1,0 +1,312 @@
+{
+ "id": "lem-pur-clopen-strict-system-support",
+ "kind": "statement",
+ "title": "Strict etale coefficient systems: clopen product and compact-support comparison",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $O=\\mathcal O_E$ and uniformizer $\\varpi$, and $A_n=O/(\\varpi^n)$ for $n\\geq1$ [def-pur-conventions]. Let $g:X\\to Y$ be separated of finite type between finite-type $k$-schemes, without assuming $Y$ separated over $k$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $I$ be finite and let $j_i:X_i\\hookrightarrow X$ be pairwise disjoint open and closed immersions covering $X$, with $g_i=g\\circ j_i$ [def-weil-open-immersion, def-weil-closed-immersion]. Empty components and the empty cover of $X=\\varnothing$ are allowed.\n\nChoose a compactification $c=(a,p)$ and put $c_i=(a\\circ j_i,p)$ [def-weil-compactifications-refinements]. For a scheme $T$ let $\\mathsf S_A(T_{\\mathrm{et}})$ be the abelian category of strict systems $M_n$ of constant-$A_n$ module sheaves with $A_{n+1}$-linear transition maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$, and compatible families as morphisms. Use its ordinary unbounded derived category and its exact level evaluations $e_n$ [lem-pur-coefficient-system-derived-comparison]. Write $a_{!,A}$ for termwise open extension and $p_{A,*}$ for termwise direct image, with total derived direct image $Rp_{A,*}$ [lem-pur-etale-coefficient-system-adjoint].\n\nRestriction induces an exact equivalence\n$$\\mathsf S_A(X_{\\mathrm{et}})\\simeq\\prod_{i\\in I}\\mathsf S_A((X_i)_{\\mathrm{et}}).$$\nIts inverse is finite product of zero insertions, with all coefficient actions and semilinear transitions componentwise. The equivalence induces an equivalence of unbounded derived categories, whose restriction $r_{i,A}$ and zero insertion $E_{i,A}$ are adjoint in both orders, with the units and counits induced termwise. Evaluation commutes with these functors and their adjunction maps. The empty product is the zero category.\n\nOn these actual derived system categories put $F_{g,A}=Rp_{A,*}a_{!,A}$ and $F_{g_i,A}=Rp_{A,*}(a\\circ j_i)_{!,A}$. There is a natural isomorphism\n$$b_{i,A}:F_{g,A}E_{i,A}\\xrightarrow{\\sim}F_{g_i,A}.$$\nIt is the image under $Rp_{A,*}$ of the exact open-extension compositor $a_{!,A}E_{i,A}\\cong(a\\circ j_i)_{!,A}$, normalized by the ordinary open-adjunction units. That compositor is an isomorphism of strict systems before localization, identity on each section over the component and zero off it, and commutes with all quotient transitions. Its finite evaluations are the ordinary etale finite-level open-extension and compact-support comparisons. This includes the action on morphisms, rather than independently selected maps after evaluation.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 5.14-5.15 (open extension $j^N_!$ and gluing of $Rf^N_!$ from open immersions and proper maps) and Lemma 5.16, printed pp. 34-35. Argument: former Steps 5-6 of lem-pur-finite-clopen-exceptional-restriction, retained verbatim in coord/reports/Q121/lem-pur-finite-clopen-exceptional-restriction.md"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "First identify the given cover with a finite coproduct: morphisms from $X$ are exactly families of morphisms from the disjoint open subschemes $X_i$, since the component maps glue and there are no overlap conditions. Apply [lem-weil-pbc-etale-sheaf-clopen-product]. Its abelian-sheaf equivalence extends to constant-$A_n$ modules as follows: for each $a\\in A_n$ transport the endomorphism $a\\cdot(-)$ componentwise. Full faithfulness recovers these endomorphisms and their addition, multiplication and unit equations uniquely; it also recovers linear morphisms. The inverse on modules is $U\\mapsto\\prod_i M_i(U\\times_X X_i)$. Indeed this is the sheaf reconstructed from its restrictions, and the module operations are componentwise. The construction commutes with restriction of scalars: both sides keep these same abelian sheaves and replace the action of $a$ by that of its image in the quotient ring.",
+   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B, lemma-constant-smooth-statements, first proof paragraph; explicit module refinement of the cited clopen equivalence"
+   }
+  },
+  {
+   "text": "Apply step 1 at every $n$. A semilinear transition is a morphism $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$; step 1 identifies its source, target and Hom set componentwise, so it recovers precisely the family of component transitions. The equations for a compatible family of morphisms are recovered by faithfulness. Thus restriction $R$ and reconstruction $S$ are inverse functors on the actual strict systems of [lem-pur-coefficient-system-derived-comparison]. Their inverse identifications commute with transitions, because each is the same section-restriction identification at every level. Exactness follows levelwise: at each level this is an additive equivalence of abelian categories, hence preserves kernels and cokernels by their universal properties. Evaluation commutes with all these constructions by their formulas.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B, first proof paragraph; strict-system refinement written here"
+   }
+  },
+  {
+   "text": "In the product category let $Z_i$ insert an object in coordinate $i$ and zeros elsewhere. For a family $N$ and an object $M$ in component $i$, a map $Z_iM\\to N$ is exactly its $i$th coordinate $M\\to N_i$, while a map $N\\to Z_iM$ is exactly $N_i\\to M$: all other coordinates are the unique maps from or to zero. These inverse Hom correspondences are natural, giving $Z_i\\dashv\\mathrm{pr}_i\\dashv Z_i$. Their units and counits are the coordinate identities together with zero-coordinate maps; the triangle identities hold coordinatewise. Transport through $R,S$ gives $E_{i,A}\\dashv r_{i,A}\\dashv E_{i,A}$ for strict systems. Also $S((M_i)_i)=\\prod_i E_{i,A}M_i$: its restriction to coordinate $j$ is $M_j$ and the other factors are zero. These formulas commute with evaluation. If $I$ is empty the sheaf condition for the empty covering of the empty scheme forces every level to be zero; the system category is the zero category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B, disjoint-union reduction; elementary product-category calculation"
+   }
+  },
+  {
+   "text": "The functors $r_{i,A},E_{i,A},R,S$ are exact; finite assembly is exact because its kernels and cokernels are computed coordinatewise. By [lem-sf-exact-functor-derived-triangulated] apply each functor termwise to unbounded complexes and localize. The natural inverse maps of $R,S$ and all adjunction maps descend by [lem-weil-pbc-localization-universal-property]; composition and identities are preserved, hence so are the inverse and triangle identities. More explicitly the functors $D(\\mathsf S_A(X_{\\mathrm{et}}))\\to\\prod_iD(\\mathsf S_A((X_i)_{\\mathrm{et}}))$ and $(K_i)_i\\mapsto\\bigoplus_i E_{i,A}K_i$ are inverse: coordinatewise $r_jE_i$ is the identity for $j=i$ and zero otherwise, and $\\bigoplus_i E_ir_i\\cong\\mathrm{id}$ is the descended finite reconstruction map. Finite sums here equal finite products; their inclusions, projections and biproduct identities descend from complexes. The two adjunctions descend with their termwise units and counits. Evaluation is exact by [lem-pur-coefficient-system-derived-comparison]; its commutation with these functors and maps descends by the same localization property.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localization of the finite reconstruction and adjunction identities"
+   }
+  },
+  {
+   "text": "Identify ordinary clopen extension $(j_i)_!$ with zero insertion: by [lem-weil-pbc-extension-by-zero-adjunction] it is left adjoint to restriction, as is zero insertion by step 3. The unique unit-compatible isomorphism of these two left adjoints is supplied by [lem-weil-pbc-conjugate-iso-unit-equation]. For $a$ and $j_i$, the restriction models compose as equal functors: on an etale object $V\\to X_i$ both evaluate a sheaf at $V\\to X_i\\to X\\to\\overline X$. The composite adjunction [def-weil-pbc-composite-adjunction] and the same uniqueness node therefore give $c_{i,n}:a_!(j_i)_!\\xrightarrow{\\sim}(a j_i)_!$, with normalization $r_i r_a(c_{i,n})\\circ r_i(\\eta_a)\\circ\\eta_{j_i}=\\eta_{a j_i}$. This is the canonical compositor of [lem-cbc-extension-zero-composition]. All these functors are exact by [lem-pur-site-restriction-module-adjunction-exact], applied to the localized small etale sites and the constant coefficient ring.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction",
+    "lem-cbc-extension-zero-composition",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); adjunction-normalized composition"
+   }
+  },
+  {
+   "text": "The preceding ordinary maps commute with coefficient transitions before localization. To check this for a possibly nonflat quotient $A_{n+1}\\to A_n$, regard the target as an $A_{n+1}$-module by restriction of scalars. The presheaf formula [def-weil-extension-by-zero-presheaf] inserts a section $s$ into the summand indexed by its factorization through the open. Applying a semilinear transition $t$ replaces this generator by $t(s)$ in the same summand, on both sides of the compositor; any zero summand maps to zero. The formula commutes with restriction to every etale test object. By [def-weil-presheaf-modules-sheafification] the resulting equalities extend uniquely to the sheafifications (and to either iterated sheafification). By the explicit adjunction formula of [lem-weil-pbc-extension-by-zero-adjunction], these section maps are exactly the unit-normalized maps in step 5. The inverse compositor has the inverse section formula and satisfies the same equalities. The unit-compatible zero-insertion identification also has identity on its component and zero on the complement, so satisfies the same transition check. Consequently $c_{i,A}:a_{!,A}E_{i,A}\\cong(a j_i)_{!,A}$ is a natural isomorphism of strict systems. Naturality for a system morphism is the same calculation with $t(s)$ replaced by its image under that morphism.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, explicit presheaf and sheafification construction; semilinear generator check"
+   }
+  },
+  {
+   "text": "Open extension on systems is exact because exactness is levelwise [lem-pur-coefficient-system-derived-comparison] and each level extension is exact [lem-pur-site-restriction-module-adjunction-exact]. Descend $c_{i,A}$ and its inverse using [lem-sf-exact-functor-derived-triangulated] and [lem-weil-pbc-localization-universal-property]. For the common proper part $p$, apply the actual total derived functor $Rp_{A,*}$ of [lem-pur-etale-coefficient-system-adjoint]. This gives $b_{i,A}:Rp_{A,*}a_{!,A}E_{i,A}\\cong Rp_{A,*}(a j_i)_{!,A}$, with inverse $Rp_{A,*}(c_{i,A}^{-1})$. Naturality holds on all derived morphisms because this is the image of a natural isomorphism under a functor. Evaluation gives the ordinary finite-level compositor followed by $Rp_*$: the open comparison evaluates by step 6, and $e_nRp_{A,*}\\cong Rp_*e_n$ is the natural comparison of [lem-pur-coefficient-system-derived-comparison]. Its naturality identifies the evaluated action on every morphism. Empty components give only the unique zero maps throughout. No step uses separatedness of $Y$ over $k$.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Constructions 5.14-5.15 and Lemma 5.16, printed p. 35; clopen compositor with a fixed proper part"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-extension-zero-composition",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-etale-coefficient-system-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 5.14-5.15 and Lemma 5.16; explicit strict clopen construction refining Q121 former steps 5-6, with Stacks 03DI/03DJ and derived localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of strict inverse systems of coefficient module sheaves on a finite disjoint union is a product and extension by zero commutes with transitions",
+   "results": "Hits read: Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.isColimitLocallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.isColimitLocallyConstantPresheaf, Profinite.NobelingProof.CC_exact, InverseSystem.piEquivLim, InverseSystem.piLTLim, LightCondensed.instEpiLightCondModMapNat. Hits concern profinite limits, ordinary topological gluing or free presheaves; none gives strict varying-coefficient etale systems and their compact-support compositor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite clopen decomposition for strict varying coefficient sheaf systems with semilinear transitions and compact support direct image",
+   "results": "Hits read: exists_clopen_partition_of_clopen_cover, isClopen_iInter_of_finite, isClopen_biUnion_finset, isClopen_iUnion_of_finite, Set.Finite.isClopen_biInter, TopologicalSpace.IsOpenCover.exists_finite_clopen_cover, isClopen_biInter_finset, TopologicalSpace.Clopens.coe_finset_sup. Hits concern profinite limits, ordinary topological gluing or free presheaves; none gives strict varying-coefficient etale systems and their compact-support compositor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"prod\"",
+   "results": "Hits read: PresheafOfModules.freeYonedaCoproduct, PresheafOfModules.instEpiFromFreeYonedaCoproduct, PresheafOfModules.fromFreeYonedaCoproduct, PresheafOfModules.ιFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc, PresheafOfModules.freeYonedaCoproductMk, PresheafOfModules.ι_fromFreeYonedaCoproduct_apply. Hits concern profinite limits, ordinary topological gluing or free presheaves; none gives strict varying-coefficient etale systems and their compact-support compositor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*(system|tower)|semilinear|extensionByZero",
+   "results": "Hits read: . Hits concern profinite limits, ordinary topological gluing or free presheaves; none gives strict varying-coefficient etale systems and their compact-support compositor. Subdirectory CategoryTheory/Sites.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse sequences of sheaves with quotient ring coefficients split componentwise over disjoint open closed subschemes before derived localization",
+   "results": "Hits read: TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux. Hits concern profinite limits, ordinary topological gluing or free presheaves; none gives strict varying-coefficient etale systems and their compact-support compositor.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*(system|tower)|semilinear|extensionByZero",
+   "results": "No hits. Subdirectory CategoryTheory/Sites. No signature states the strict varying-coefficient etale clopen and compact-support assertion: hits concern topological sections, Zariski module restriction, free presheaves, or ordinary inverse-limit transition equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite clopen decomposition for inverse systems of varying coefficient module sheaves and compactly supported derived direct image",
+   "results": "Hits read: exists_clopen_partition_of_clopen_cover, DiscreteQuotient.finsetClopens, Profinite.exists_isClopen_of_cofiltered, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.mk, CondensedMod.ofSheafCompHaus, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation. No signature states the strict varying-coefficient etale clopen and compact-support assertion: hits concern topological sections, Zariski module restriction, free presheaves, or ordinary inverse-limit transition equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"prod\"",
+   "results": "Hits read: PresheafOfModules.freeYonedaCoproduct, PresheafOfModules.instEpiFromFreeYonedaCoproduct, PresheafOfModules.fromFreeYonedaCoproduct, PresheafOfModules.ιFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc, PresheafOfModules.freeYonedaCoproductMk, PresheafOfModules.ι_fromFreeYonedaCoproduct_apply. No signature states the strict varying-coefficient etale clopen and compact-support assertion: hits concern topological sections, Zariski module restriction, free presheaves, or ordinary inverse-limit transition equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict inverse systems of etale module sheaves on a finite disjoint union split as a product and open extension composition commutes with quotient coefficient transitions",
+   "results": "Hits read: Profinite.NobelingProof.GoodProducts.square_commutes, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, AdicCompletion.transitionMap_comp_eval, LightProfinite.proj_comp_transitionMap, LightProfinite.proj_comp_transitionMapLE, LightProfinite.proj_comp_transitionMapLE', AlgebraicGeometry.PresheafedSpace.GlueData.π_ιInvApp_eq_id. No signature states the strict varying-coefficient etale clopen and compact-support assertion: hits concern topological sections, Zariski module restriction, free presheaves, or ordinary inverse-limit transition equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and zero insertion are adjoint in both orders on derived categories of sheaf coefficient towers over a disjoint open closed covering",
+   "results": "Hits read: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Presheaf.generateEquivalenceOpensLe_counitIso, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app. No signature states the strict varying-coefficient etale clopen and compact-support assertion: hits concern topological sections, Zariski module restriction, free presheaves, or ordinary inverse-limit transition equations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-clopen-exceptional-restriction",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility sentence: finite-clopen component identification; Earlier returned proof steps 5-6: strict-system decomposition and extension composition",
+   "via": [
+    "lem-pur-finite-clopen-exceptional-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-strict-system-support",
+  "worker": "stage1",
+  "summary": "Q15 splits using existing nodes only. Builds the module and semilinear-system product equivalence, spells out both adjunctions and their descent, and constructs the unit-normalized compositor before localization with an explicit semilinear generator check. Statement and statement dependencies unchanged. No new nodes or Mathlib leaves.",
+  "blueprint": "Final invertibility sentence of def-pur-section-invariant, finite-clopen component identification: realizes Q121 former steps 5-6 at strict-system level.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "Finite clopen equivalence for abelian etale sheaves; the item explicitly extends its actions and transitions to strict coefficient systems. No statement in this conventions unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic descent of an exact functor to unbounded derived categories. No statement in this conventions unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent and equality of natural transformations through localization, needed for units, counits and compositors. No statement in this conventions unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of the unit-normalized isomorphism between left adjoints. No statement in this conventions unit supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Composite Hom bijection and its unit formula. No statement in this conventions unit supplies this generic tool."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Ordinary etale open-extension compositor, before the explicit system transition check. No statement in this conventions unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Ordinary etale open-extension adjunction and the section formula fixing its normalization. No statement in this conventions unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-6c0deeedd",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-6c0deeedd (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes. Statement and stmt_deps are identical to the unsplit node created by Q121 (compared against the Q121 snapshot). Old Q121 steps 5-6 are fully carried, and expanded, by steps 1-7. Sources checked: Zheng 1006.3810 Constr. 5.14-5.15 and Lem. 5.16 (printed p.34-35); Stacks 0A5B, 015F, 03DI and 03DJ, all with the right labels. Step 1: the clopen étale product lemma is on the small site, and the extension to constant-A_n modules and the product inverse formula are elementary. Step 2: transitions are recovered componentwise and exactness is levelwise. Step 3: the product-category double adjunction is correct, and for I=∅ the empty site gives the zero category. Step 4: exact termwise functors, descent of the inverse, units and counits by localization (2)-(3), and the explicit inverse ⊕E_iK_i. Step 5: the conjugate-iso uniqueness gives (j_i)_!≅E_i, the composite adjunction gives the unit-normalized c_{i,n}, and exactness holds via site-restriction. Step 6: on the small étale site the factorization is unique, and module sheafification is the abelian one, so Res commutes with a_! and no flatness is used. Step 7: Rp_{A,*} and e_nRp_{A,*}≅Rp_*e_n come from coefficient-system-derived-comparison. Coefficient category: étale strict systems, matching etale-coefficient-system-adjoint and the parent's use. I accept the 7 declared tool_uses as generic tools; the other citations are in the unit's route through sk-def-sf-operations. Duplicate search: the nearby nodes (def-pur-clopen-strict-system-comparison, finite-clopen-derived-decomposition, semilinear-clopen-unit-projector, cbc strict-tower calculus) are pro-étale or definitions only, so none is a duplicate. Advisory: (1) step 5 calls c_{i,n} 'the canonical compositor' of lem-cbc-extension-zero-composition, but that node does not fix a normalization; this is harmless because b is defined by the unit normalization. (2) The source page should be p.34-35, not p.35. (3) The report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClopenStrictSystemSupport",
+  "declaration": "AlgebraicGeometry.clopenStrictSystemSupport",
+  "declarations": [
+   "AlgebraicGeometry.strictClopenEtaleSmall",
+   "AlgebraicGeometry.strictClopenInverseAdditive",
+   "AlgebraicGeometry.strictClopenDirectAdditive",
+   "AlgebraicGeometry.strictClopenLevelInverseAdditive",
+   "AlgebraicGeometry.strictClopenLevelDirectAdditive",
+   "AlgebraicGeometry.StrictEtaleClopenOrdinaryData",
+   "AlgebraicGeometry.StrictEtaleClopenOrdinaryCoherence",
+   "AlgebraicGeometry.StrictEtaleClopenOrdinary",
+   "AlgebraicGeometry.StrictEtaleClopenDerivedData",
+   "AlgebraicGeometry.StrictEtaleClopenDerivedCoherence",
+   "AlgebraicGeometry.StrictEtaleClopenDerived",
+   "AlgebraicGeometry.StrictEtaleClopenSupportData",
+   "AlgebraicGeometry.StrictEtaleClopenSupportCoherence",
+   "AlgebraicGeometry.StrictEtaleClopenSupport",
+   "AlgebraicGeometry.clopenStrictSystemSupport"
+  ],
+  "file": "lean/Sheaf/Paper/ClopenStrictSystemSupport.lean",
+  "statement": "theorem clopenStrictSystemSupport (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {I : Type u} [Finite I] {X Y : Scheme.{u}} [X.Over (Spec (.of F.k))] [Y.Over (Spec (.of F.k))] [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))] [LocallyOfFiniteType (Y ↘ Spec (.of F.k))] [QuasiCompact (Y ↘ Spec (.of F.k))] (g : X ⟶ Y) [g.IsOver (Spec (.of F.k))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (Xi : I → Scheme.{u}) (j : ∀ i, Xi i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (_hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (_hcover : (⋃ i, Set.range (j i)) = Set.univ) (c : Compactification g) : ∃ (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) c) (Si : ∀ i, StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) (c.precomp (j i))) (R : StrictEtaleClopenOrdinary (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) Xi j) (D : StrictEtaleClopenDerived (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) Xi j c S Si R), Nonempty (StrictEtaleClopenSupport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) Xi j c S Si R D)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Conclusion packages ordinary and unbounded-derived restriction/product equivalences, both component adjunctions, the unit-normalized strict open compositor, its localization and the common-proper-image compact-support comparison. The helper data structures and coherence predicates have real definitions. The added landed definition node def-per-site-comparison-pullback-data owns the canonical supportSiteEtaleComparisonComp used in levelRightUnderlying; no theorem node is cited solely for this definition. §1(B), Q16 return repair: the evaluation-only derived image omitted the quotient restriction mate needed by proof step 6. StrictEtaleClopenDerivedData now also retains CoefficientScalarImage for each fixed image, with its ordinary tensor-unit and K-flat representative normalization. All original declarations and theorem conclusions remain, with this missing canonical scalar interface included."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f98487054",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after H3 RETURN 65f1. Diffed against the 65f1 snapshot and side-live: the finite theorem is unchanged. The system theorem now binds one family rhoLevel with per-n counit equation, explicit per-n uniqueness and the evaluation identity. The new quotient square scalar(rho_m L) ≫ Gi.quotientComparison = mu ≫ r_n(G.quotientComparison) ≫ rho_n ≫ eqToHom(sameTarget) uses both prescribed exceptional mates and the canonical restriction mate clopenRestrictionQuotient = (D.scalar i).derivedTensor.symm, which is pinned by derivedTensor_rep and the mate equations; it is not a tautology. §1(B) repair: StrictEtaleClopenDerivedData gains only a scalar : CoefficientScalarImage field on the same images. It is a superset of the live Q63 record, the live dependency theorem is still sorry, no live importers exist, and it stays consistent with CoefficientSystemUnboundedImage. Both lean.statement fields are verbatim. The node diff vs live is only lean and stmt_deps (+ landed def-pur-coefficient-system-image-data, owner of CoefficientScalarImage). Edge cases I=∅, empty components, n=1, nonseparated Y and identity/successive quotients are fine. Advisory: the dependency node lacks def-pur-coefficient-system-image-data in its stmt_deps (pattern dates from the base). No file changed, no compile."
+ }
+}

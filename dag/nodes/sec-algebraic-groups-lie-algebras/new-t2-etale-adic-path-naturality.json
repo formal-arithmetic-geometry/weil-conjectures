@@ -1,0 +1,111 @@
+{
+ "id": "new-t2-etale-adic-path-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized algebraic fibre paths",
+ "statement": "Under the hypotheses of [new-t2-etale-adic-path-data], let F,H be algebraic lisse sheaves on Y, let f:F→H be any morphism, and let τ:F_y→F_z be a path of finite etale fibre functors. Write P_F(τ) for the normalized algebraic path and f_y,f_z for the actual recorded fibre maps. Then P_F(τ) followed by f_z equals f_y followed by P_H(τ). This includes morphisms represented only after extending the coefficient field.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), (1.1.6), pp.146-150; finite path compatibility from Stacks 0BND (2)"
+ },
+ "stmt_deps": [
+  "new-t2-etale-adic-path-data"
+ ],
+ "proof": [
+  {
+   "text": "at a finite level, represent each stalk element by a finite-cover germ.\nA sheaf morphism maps its section on that same cover, so the two composites agree\nby the germ formula. Equality after every limit projection gives integral\nnaturality. Rational morphisms are represented by integral maps divided by a\npower of the uniformizer; linearity gives naturality after this division.\nAt algebraic coefficients choose a common finite coefficient extension for the\nmorphism, apply rational naturality there, and extend scalars. The balanced tensor\ncomparison for the common extension commutes with paths on pure tensors, by the\nfinite-level scalar comparison followed by limit projections. Thus the equation\ndescends through the coefficient localization to the recorded object fibres.\nThis also covers the zero morphism and rank-zero objects.",
+   "uses": [
+    "new-e5-linear-fibre-path-transport",
+    "new-e5-integral-fibre-path-construction",
+    "new-e5-algebraic-fibre-path-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-e5-linear-fibre-path-transport",
+  "new-e5-integral-fibre-path-construction",
+  "new-e5-algebraic-fibre-path-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-25",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), (1.1.6), pp.146-150; finite path compatibility from Stacks 0BND (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical geometric stalk action of a lisse l-adic sheaf is continuous and descends to a finite coefficient field; path transport commutes with sheaf morphisms and pullback",
+   "results": "Eight hits, all generic pullback/stalk APIs; no normalized etale adic path compatibility theorem.",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; use existing categorical naturality and scalar-extension APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits including NatTrans.naturality; this applies once a natural isomorphism with the recorded path components is identified.",
+   "date": "2026-10-25",
+   "verdict": "Generic naturality API only."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleAlgebraicPath|etaleWeilFrobenius|etaleGeometricRep|NatTrans.naturality|isoOfNatIso_hom_π|generalLinearEquiv",
+   "results": "Read the item, its consumers, FibreFunctorLinearTransport, IntegralFibrePathConstruction, AlgebraicFibrePathConstruction, RationalFibrePathConstruction, and Mathlib. No existing theorem states the two compatibility equations. The upstream Monodromy module proves the abstract group extension and uniqueness.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the proved group lift; split only the two missing path squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilFundamentalRepresentation",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Naturality of normalized algebraic fibre paths in the geometric and Weil fundamental representation construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleAdicPathNaturality",
+  "file": "lean/Sheaf/Paper/EtaleAdicPathNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleAlgebraicPath_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleAlgebraicPath_naturality"
+  ],
+  "statement": "theorem etaleAlgebraicPath_naturality\n    {F H : LisseAlgebraicSheaf l Y Q} (f : F ⟶ H) (τ : fiber y ≅ fiber z) :\n    (etaleAlgebraicPathIso l Q F τ).hom ≫ etaleAlgebraicFiberMap l Q z f =\n      etaleAlgebraicFiberMap l Q y f ≫ (etaleAlgebraicPathIso l Q H τ).hom",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "independent cc review: item statements byte-identical to published; EtaleAdicPathData prefix verbatim vs published item lines 1-413; two new sorry squares checked against lisseAlgebraicFiberFunctor/AutomorphismFiberIso definitions and algebraicFibrePathIso; 15 direct importers compiled against delivered modules; #print axioms"
+ }
+}

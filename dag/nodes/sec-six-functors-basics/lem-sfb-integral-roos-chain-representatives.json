@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-integral-roos-chain-representatives",
+ "kind": "statement",
+ "title": "Normalized strict cone representatives for integral pullback",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, separated finite-type schemes X,Y over a positive-characteristic field k of characteristic different from ell, and g:X -> Y, with the coefficient datum, strict towers T,U,V and coefficient restriction of [def-sfb-integral-pullback-strict-roos-data]. There exist ordinary comparison isomorphisms d, a:T~U and e:restriction(T)~V, chain maps alphaT,alphaU,alphaV to their strict Roos cones, scalar cone isomorphisms epsilon, and natural Roos-to-derived-limit isomorphisms kappaR,kappaC with ordinary-limit inclusions jR,jC. They satisfy the ordinary generator normalization of d and a; e at each level is d followed by inverse ordinaryRho; each alpha has coordinates (0,b) for its actual quotient augmentation; epsilon is diagonal product(e) with the restriction/product comparison and is natural; restriction(alphaT) epsilon = d alphaV. The ordinary inclusions have coordinates (0,z) and localize through kappa to the universal derived-limit comparison. All complexes are arbitrary and unbounded; the R and C module categories remain distinct. The eleven witnesses are fields of the generic product record RoosChainWitness, which carries no new mathematical condition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-sfb-integral-pullback-strict-roos-data"
+ ],
+ "proof": [
+  {
+   "text": "Use augmentedQuotientTowers to obtain d and a and define e as its theta. Its levelwise formula is d followed by inverse beta; the strict augmentation identities hold on tensor generators and therefore as module maps.",
+   "uses": [
+    "lem-sfb-integral-augmented-quotient-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply roosAugment to each compatible strict quotient augmentation. The signed cone formula gives coordinates (0,b). Apply augmentedScalarRoosResolution to restriction along C_X -> R_X; compose its cone comparison with Roos(e). Its product and augmentation formulas give IsENormalized and the scalar augmentation equation.",
+   "uses": [
+    "lem-sfb-augmented-scalar-roos-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact countable products and the normalized strict Roos comparison over each coefficient ring. The ordinary compatible-family inclusion has zero shifted coordinate, and localization followed by kappa is the universal total right derived limit comparison.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-augmented-quotient-towers",
+  "lem-sfb-augmented-scalar-roos-resolution",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion is the derived inverse limit of the quotient reduction tower, compatibly with its unit",
+   "results": "AdicCompletion and its module/transition APIs; no derived sheaf completion comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; these are ordinary ring/module completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Roos mapping cone augmentation agrees with the derived completion unit for a tower of quotient modules",
+   "results": "IsAdicComplete.of_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.eval_comp_of; no normalized derived Roos theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionComplexCounit|IsConstantUnitNormalized",
+   "results": "msearch grep returned zero hits. Local rg on the project found the actual coefficient definitions and counit APIs; local rg on the Mathlib derived, homotopy and adic-completion directories found no matching normalized Roos/K-flat completion theorem.",
+   "date": "2026-10-25",
+   "verdict": "The new statements only assemble the project APIs for these actual coefficient categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralRoosDerivedPullbackUnit",
+  "date": "2026-10-25",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)",
+   "via": [
+    "lem-sfb-integral-roos-derived-pullback-unit",
+    "lem-sfb-integral-pullback-strict-roos-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralRoosChainRepresentatives",
+  "file": "lean/Sheaf/Paper/IntegralRoosChainRepresentatives.lean",
+  "declaration": "WeilConjectures.IntegralPullbackStrictRoos.integralRoosChainRepresentatives",
+  "statement": "theorem integralRoosChainRepresentatives\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [g.IsOver (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] :\n    ∃ w : RoosChainWitness\n      (pullR l E g ⋙ res l E X ≅ res l E Y ⋙ pullC l E g)\n      (T l E g ≅ U l E g) (T l E g ⋙ towerRes l E X ≅ V l E g)\n      (alphaTType l E g) (alphaUType l E g) (alphaVType l E g) (EType l E g)\n      (kappaType X (R l E X)) (inclusionType X (R l E X))\n      (kappaType X (C l E X)) (inclusionType X (C l E X)),\n      PulledReduction.IsOrdinaryNormalized (datum l E) g w.d.inv ∧\n      IsLambdaNormalized l E g w.a ∧\n      (∀ (M : ModR l E Y) (n : ℕ), (w.e.hom.app M).app (op n) =\n        w.d.hom.app (((redR l E Y).obj M).obj (op n)) ≫\n          (pullC l E g).map\n            (((OrderedExchange.ordinaryRho (datum l E) Y).inv.app M).app (op n))) ∧\n      IsAugmentationNormalized l E g w.αT w.αU w.αV ∧\n      IsENormalized l E g w.e w.ε ∧\n      (∀ P : complexesR l E Y,\n        (cxRes l E X).map (w.αT P) ≫ (w.ε P).hom =\n          (dComplex l E g w.d).hom.app P ≫ w.αV P) ∧\n      IsUnitNormalized X (R l E X) w.κR w.jR ∧ IsUnitNormalized X (C l E X) w.κC w.jC",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembleRoos over 4 sorried substeps + proved reflector comparison) vs unchanged item statement and parent IsComparison/IsLocalized/IsConstantUnitNormalized defs; unit sk-lem-int-tensor realized=[] vs removed imports; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only)"
+ }
+}

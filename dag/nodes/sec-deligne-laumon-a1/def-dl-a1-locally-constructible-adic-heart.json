@@ -29,7 +29,7 @@
    "elementary": true
   },
   {
-   "text": "For dlAdicLocalCompatible_zero, first show that ofHom of a zero representative is zero: apply the injective Hom-coordinate equivalence, use its representative equation, and use that the direct-limit injection is additive. Choose a common coefficient stage for the two objects. The rational pullback is additive by its existing uniqueness specification, so maps the zero representative to zero. The common-stage pullback representative formula conjugates this zero by the comparison isomorphisms, hence also gives zero. Transport across the specified object equalities using HEq. Both sides of the compatibility square are consequently zero.",
+   "text": "For dlAdicLocalCompatible_zero, reuse the proved coefficient-stage mkHom_zero lemma: its proof identifies a zero representative under the injective Hom coordinates and the additive direct-limit injection. Choose a common coefficient stage for the two objects. The rational pullback is additive by its existing uniqueness specification, so maps the zero representative to zero. Apply a proved abstract categorical lemma to the common-stage representative formula: conjugating the zero by comparison isomorphisms is zero, and HEq transports this across the specified object equalities. Working with abstract categories avoids unfolding the large coefficient constructions. Both sides of the compatibility square are consequently zero. The zero supplied to the representative specification is explicitly typed as the cached StageHom, so its abelian-group instance is available without unfolding the pair-category toStage expression.",
    "uses": [
     "def-weil-algebraically-closed-coefficients",
     "def-weil-derived-pullback-tensor-hom"
@@ -52,7 +52,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.8, local-heart description; formal category-law verification and common-stage representative calculation by R9, 2026-10-19."
+  "place": "Section 6.8, local-heart description; category-law verification and common-stage representative calculation by R9, 2026-10-19; W6 proof-elaboration repair reusing the proved stage-zero lemma and abstract zero-map transport, 2026-10-26. D4 quarantine restoration, 2026-10-27: explicitly type the zero representative using the existing StageHom instance."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -103,7 +103,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-exact",
  "lean": {
@@ -154,12 +165,12 @@
   "note": "Re-delivery of returned f563ae1b5612; all three findings fixed. F1: lem-weil-pbc-condensed-e-realization removed from stmt_deps, its module and import dropped, compile error quoted in report. F2: the SmoothPurityQbar import and smoothQbarResidueInvertible are replaced by dlAdicGeometricResidueInvertible in the new definition node (k0 unit mapped through k0->k->residue field; Invertible is a subsingleton, so the data is canonical; the helper is listed in lean.declarations and named in the node statement). F3: landed def-weil-derived-pullback-tensor-hom and def-wf-middle-extension added to stmt_deps. The item statement field equals the base; only lean and stmt_deps differ; all 12 dependency-node copies match the side clone. The theorem signature is unchanged and the earlier clause and edge-case check still holds (all Spec k points, exact finite-dimensional fibres, joint conservativity, zero-map detection, short-exact iff fibrewise, Weil via forget, locality on locally finite-type k0-schemes with arbitrary covers). lean.statement appears verbatim once per file and all declarations exist. nt_compile --json: DlLocallyConstructibleAdicHeart 10.8 s and DlConstructibleFibresExact 7.6 s, both clean, exit 0."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R9",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261019T093558-L-2329591",
+  "landing": "20261027T135100-L-3665056",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

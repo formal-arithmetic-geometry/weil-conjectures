@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-torus-positive-ray-subgroup",
+ "kind": "statement",
+ "title": "Integration and comparison of a positive ray of torus weights",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Write $\\mathbf G_a$ and $\\mathbf G_m$ for the group schemes of [def-sc-gm-ga]. The Lie algebra of a group is its tangent space at the identity. A smooth affine group is unipotent if every geometric point is a unipotent matrix in a faithful finite-dimensional linear representation. Let $H$ be a smooth connected affine $F$-group scheme of finite type. Let $S\\simeq\\mathbf G_m^r$ be a split torus acting on $H$ by group-scheme automorphisms. Put $X^*(S)=\\operatorname{Hom}(S,\\mathbf G_m)$, written additively, and let $\\mathfrak h_\\chi$ denote the $\\chi$-weight subspace for the differentiated $S$-action on $\\mathfrak h=\\operatorname{Lie}(H)$; thus the weight is a character, not its differential. For a nonzero character $\\eta$, put $R_\\eta=\\{\\chi\\in X^*(S):m\\chi=n\\eta\\text{ for some integers }m,n>0\\}$ and $V_\\eta=\\bigoplus_{\\chi\\in R_\\eta}\\mathfrak h_\\chi$. There is a smooth connected unipotent closed subgroup $U_\\eta\\subseteq H$, stable under $S$, with $\\operatorname{Lie}(U_\\eta)=V_\\eta$. For every smooth connected $S$-stable closed subgroup $K\\subseteq H$ one has\n$$V_\\eta\\subseteq\\operatorname{Lie}(K)\\ \\Longrightarrow\\ U_\\eta\\subseteq K,\\qquad \\operatorname{Lie}(K)\\subseteq V_\\eta\\ \\Longrightarrow\\ K\\subseteq U_\\eta.$$\nIn particular $U_\\eta$ is the unique such smooth connected $S$-stable closed subgroup with tangent space $V_\\eta$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.64 and the immediately following uniqueness sentence, printed pp.348--349; unipotence follows from Proposition 16.62, printed pp.346--347, since this positive-ray tangent space has no zero weight. The action may be external, as throughout Section 16i."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-multiplicative-character-antiduality] to identify $S=D_F(X)$ with $X=X^*(S)\\simeq\\mathbf Z^r$. Apply [lem-sfb-pid-submodule-smith-bases] over $\\mathbf Z$ to $N=\\mathbf Z\\eta\\subseteq O=X$. Since $\\eta\\ne0$, the map $\\mathbf Z\\to N$, $a\\mapsto a\\eta$, is an isomorphism, so the basis of $N$ has one element, necessarily $\\eta$ or $-\\eta$. Changing the sign of the corresponding ambient basis vector gives a basis $(\\epsilon_1,\\ldots,\\epsilon_r)$ of $X$ with $\\eta=d\\epsilon_1$, $d>0$. Antiduality gives coordinates $S\\simeq\\mathbf G_m^r$ with $\\epsilon_i(t)=t_i$. Put $T=\\{t_1=1\\}\\simeq\\mathbf G_m^{r-1}$ and $\\lambda(t)=(t,1,\\ldots,1)$. A character $\\chi=\\sum_i b_i\\epsilon_i$ is trivial on $T$ precisely when $b_i=0$ for $i>1$. In that case $\\chi\\lambda(t)=t^{b_1}$, and $\\chi\\in R_\\eta$ precisely when $b_1>0$: the defining equation is $mb_1=nd$ with $m,n>0$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-pid-submodule-smith-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "p.348, character line and its subtorus; Theorem 12.9(a), pp.233--234. Smith normal form makes the primitive-coordinate choice explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-gm-representation-weight-basis] successively to the $r$ commuting coordinate copies of $\\mathbf G_m$ in $S$. After decomposing under the first $j$ factors, every summand is preserved by the remaining factors: a commuting action carries a vector of prescribed first $j$ weights to a vector with those same weights. Decomposing each summand under factor $j+1$ therefore refines the direct sum. Starting with the whole space at $j=0$ proves the character decomposition for the differentiated action on $\\mathfrak h$ and on any $S$-stable tangent subspace $\\mathfrak k$. On the summand indexed by $(b_1,\\ldots,b_r)$, the character is $\\prod_i t_i^{b_i}$. Consequently $(\\mathfrak h^T)_{\\lambda,>0}=V_\\eta$, and for an $S$-stable closed subgroup $K$ one has $(\\mathfrak k^T)_{\\lambda,>0}=\\mathfrak k\\cap V_\\eta$. All weights are group characters; no differentiation of the integers $b_i$ is used.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, pp.234--235; p.348, formula (123)."
+   }
+  },
+  {
+   "text": "Form $G=H\\rtimes S$, whose underlying scheme is $H\\times_F S$ and whose product is $(h,s)(h\\prime,s\\prime)=(h(s\\cdot h\\prime),ss\\prime)$. These regular maps and the inverse $(h,s)^{-1}=(s^{-1}\\cdot h^{-1},s^{-1})$ satisfy the group laws by the action identities. The projection $H\\times S\\to H$ is smooth by [lem-trf-split-lattice-torus-projection], and composing it with the smooth structure morphism of $H$ is smooth by [lem-trf-smooth-composition]. For every field extension $L/F$, the coordinate ring of $S_L$ is $L[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$, an integral domain; hence $S$ is geometrically connected. By [lem-weil-pbc-geometrically-connected-product-components], $H\\times S$ is connected because $H$ is connected. It is affine and of finite type from the displayed product coordinate algebra. The same construction and reasoning apply with any smooth connected $S$-stable closed subgroup $K$ in place of $H$.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16i, external torus actions; the semidirect-product device also appears in the proof of Proposition 16.62, p.347. Product facts: Stacks Tag 0385 and smooth composition."
+   }
+  },
+  {
+   "text": "Embed $T$ in $G$ by $t\\mapsto(e,t)$ and apply [lem-sfb-torus-centralizer-smooth-connected]. Its hypotheses hold by step 3; over algebraically closed $F$, connectedness is the geometric connectedness required there. Thus $C=C_G(T)$ is a smooth connected closed affine group. Direct calculation of commutation shows, on every test algebra and after every scalar extension, $$C(A)=\\{(h,s):t\\cdot h=h\\text{ for all }t\\in T(A\\prime),\\ A\\prime/A\\}\\ .$$ There is no condition on $s$, since $S$ is commutative. A tangent vector at $(e,1)$ is a pair $(v,w)\\in\\mathfrak h\\oplus\\operatorname{Lie}(S)$. Applying this same equation over dual numbers gives $\\operatorname{Lie}(C)=\\mathfrak h^T\\oplus\\operatorname{Lie}(S)$. Conjugation by $(e,\\lambda(t))$ acts by $\\lambda(t)$ on the first summand and trivially on the second. Replacing $H$ by $K$ gives $C_K=C_{K\\rtimes S}(T)$ with exactly the corresponding formulas, and its natural inclusion into $C$ is closed.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "p.348, group fixed by the character-kernel torus and formula (123); Theorem 17.38, p.363, applied in the semidirect product; tangent invariants computed by the fixed-functor equation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cocharacter-limit-smooth-structure] to $C$ and the cocharacter $t\\mapsto(e,\\lambda(t))$. Let $U$ be its contracting subgroup. It is smooth, connected, unipotent and closed in $C$. Its projection to $S$ is trivial: the projected orbit of $(h,s)$ is the constant $s$, while a contracting orbit has limit $(e,1)$. Thus $U$ is a closed subgroup of the kernel $H$ of $G\\to S$. Steps 2 and 4 and the positive-weight tangent formula in the cited node give $\\operatorname{Lie}(U)=V_\\eta$. Conjugation by $(e,s)$ for $s\\in S$ preserves $C$, commutes with $\\lambda$, and preserves the identity limit; hence it preserves $U$ as a subgroup functor. Set $U_\\eta=U$. Applying the same cited theorem in $C_K$ defines a smooth connected closed subgroup $U_K\\subseteq K$, with $\\operatorname{Lie}(U_K)=\\mathfrak k\\cap V_\\eta$. Its inclusion into $U_\\eta$ follows on all test algebras: an orbit extending in the closed subgroup $C_K$ also extends in $C$ with the same identity limit.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "p.348, definition U_(alpha) and description (124); Theorem 13.33(a),(c),(e), pp.265--266. Unipotence is already included in the cited cocharacter node."
+   }
+  },
+  {
+   "text": "Assume $V_\\eta\\subseteq\\mathfrak k$. Then $\\operatorname{Lie}(U_K)=\\mathfrak k\\cap V_\\eta=V_\\eta=\\operatorname{Lie}(U_\\eta)$. The inclusion $U_K\\to U_\\eta$ is $\\mathbf G_m$-equivariant for $\\lambda$, fixes the identity, and has isomorphic differential. Both schemes are smooth connected affine of finite type by step 5. Every source tangent weight is strictly positive by step 2. Apply [lem-sfb-positive-weight-equivariant-inverse] to conclude that this inclusion is an isomorphism. Therefore $U_\\eta=U_K\\subseteq K$ as closed subgroup schemes.",
+   "uses": [
+    "lem-sfb-positive-weight-equivariant-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.64(a), p.348; Corollary 13.42, p.270, replaces the same-dimension conclusion by a directly applicable equivariant inverse criterion."
+   }
+  },
+  {
+   "text": "Assume instead $\\mathfrak k\\subseteq V_\\eta$. Then $\\operatorname{Lie}(U_K)=\\mathfrak k$, so the closed inclusion $U_K\\to K$ has isomorphic differential. It is equivariant for $\\lambda$ and fixes the identity. The source and target are smooth connected affine of finite type, and the source tangent weights are all strictly positive. Apply [lem-sfb-positive-weight-equivariant-inverse] again, now to $U_K\\to K$, obtaining $K=U_K\\subseteq U_\\eta$. This proves the second comparison directly without asserting that the Lie algebra of a generated subgroup equals the Lie algebra generated by its inputs. If the common tangent space is zero, the same cited criterion explicitly allows the empty set of weights.",
+   "uses": [
+    "lem-sfb-positive-weight-equivariant-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.64(b), p.348, with Corollary 13.42, p.270, in place of the abbreviated generated-subgroup argument."
+   }
+  },
+  {
+   "text": "If a smooth connected $S$-stable closed subgroup $L\\subseteq H$ has $\\operatorname{Lie}(L)=V_\\eta$, both proved implications apply to $L$ and give $U_\\eta\\subseteq L\\subseteq U_\\eta$. Thus $L=U_\\eta$. This includes the case $V_\\eta=0$; no nonzero tangent weight is assumed to occur.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "p.349, uniqueness sentence immediately following Proposition 16.64."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-pid-submodule-smith-bases",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-positive-weight-equivariant-inverse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.64, pp.348--349, using the explicit character-kernel/cocharacter construction. Both comparisons use Corollary 13.42, p.270; this supplies a scheme-theoretic argument for the abbreviated comparison proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split torus acting on a smooth connected affine algebraic group has a smooth connected unipotent subgroup with tangent weights the positive rational multiples of a fixed nonzero character",
+   "date": "2026-10-23",
+   "results": "8 hits; LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.exists_isCartanSubalgebra_engel, LieModule.exists_nontrivial_weightSpace_of_isSolvable, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.zero_rootSpace_eq_top_of_nilpotent, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, LieModule.isCompl_genWeightSpace_zero_posFittingComp, LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf",
+   "verdict": "no match: the hits do not concern subgroup schemes of affine algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An action of a split multiplicative torus integrates each ray of positive weights in the Lie algebra to a unique smooth connected subgroup",
+   "date": "2026-10-23",
+   "results": "8 hits; LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.IsKilling.span_weight_isNonZero_eq_top, LieAlgebra.IsKilling.biSup_corootSpace_eq_top, NumberField.mixedEmbedding.fundamentalCone.expMap_target, NumberField.mixedEmbedding.fundamentalCone.expMapBasis_source, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, LieAlgebra.IsKilling.span_weight_eq_top, NumberField.mixedEmbedding.fundamentalCone.expMap_source",
+   "verdict": "no match: the hits do not concern subgroup schemes of affine algebraic groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrating a positive ray of torus characters to a unique connected subgroup of an algebraic group",
+   "date": "2026-10-23",
+   "results": "8 hits; term∯_InT(_,_),_, torusIntegral, TorusIntegrable.torusIntegrable_const, torusIntegral_add, torusIntegral_succ, torusIntegral_sub, TorusIntegrable.add, CharacterModule.instAddCommGroup",
+   "verdict": "no match: the hits do not concern subgroup schemes of affine algebraic groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"weight\"",
+   "date": "2026-10-23",
+   "results": "0 hits; ",
+   "verdict": "no match: the hits do not concern subgroup schemes of affine algebraic groups"
+  },
+  {
+   "tool": "grep",
+   "query": "positive.*(weight|character)|unipotent",
+   "date": "2026-10-23",
+   "results": "0 hits; ",
+   "verdict": "no match: the hits do not concern subgroup schemes of affine algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a torus acting on a smooth connected affine group, integrate a positive rational ray of character weights to a smooth subgroup and compare subgroups by tangent inclusion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AddCircle.instProperlyDiscontinuousVAddSubtypeAddOppositeRealMemAddSubgroupOpZmultiples\", \"module\": \"Mathlib/Topology/Instances/AddCircle/Real\", \"type\": \"∀ (p : ℝ), ProperlyDiscontinuousVAdd ↥(AddSubgroup.zmultiples p).op ℝ\", \"doc\": \"The additive action of the opposite of the subgroup generated by integer multiples of an element $ p $ on the real numbers $ \\\\mathbb{R} $ is properly discontinuous. This means the action is continuous\"}\n  {\"name\": \"Subgroup.strictPeriods_eq_zmultiples_strictWidthInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [DiscreteTopology ↥𝒢.strictPeriods],\\n  𝒢.strictPeriods = AddSubgroup.zmultiples 𝒢.strictWidthInfty\", \"doc\": \"For a discrete subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$, the strict periods subgroup $\\\\mathcal{G}.\\\\text{strictPeriods}$ (consisting of all $x \\\\in \\\\mathbb{R}$ such that $\\\\begin{pmatri\"}\n  {\"name\": \"AddCircle.isAddQuotientCoveringMap_nsmul_of_ne_zero\", \"module\": \"Mathlib/Topology/Covering/AddCircle\", \"type\": \"∀ {𝕜 : Type u_1} [inst : TopologicalSpace 𝕜] [inst_1 : Ring 𝕜] [IsTopologicalRing 𝕜] (p : 𝕜) [T0Space (AddCircle p)]\\n  [Algebra ℚ 𝕜] (n : ℕ) [NeZero n], IsAddQuotientCoveringMap (fun x => n • x) ↥(nsmulAddMonoidHom n).ker\", \"doc\": \"For any non-zero natural number $n$ and a field $\\\\mathbb{K}$ equipped with a $\\\\mathbb{Q}$-algebra structure, the scalar multiplication map $n \\\\cdot -$ on the additive circle $\\\\mathbb{K}/\\\\langle p \\\\ran\"}\n  {\"name\": \"AddCircle.isAddQuotientCoveringMap_zsmul_of_ne_zero\", \"module\": \"Mathlib/Topology/Covering/AddCircle\", \"type\": \"∀ {𝕜 : Type u_1} [inst : TopologicalSpace 𝕜] [inst_1 : Ring 𝕜] [IsTopologicalRing 𝕜] (p : 𝕜) [T0Space (AddCircle p)]\\n  [Algebra ℚ 𝕜] (n : ℤ) [NeZero n], IsAddQuotientCoveringMap (fun x => n • x) ↥(zsmulAddGroupHom n).ker\", \"doc\": \"Let $\\\\mathbb{K}$ be a $\\\\mathbb{Q}$-algebra and $p \\\\in \\\\mathbb{K}$. For any non-zero integer $n \\\\in \\\\mathbb{Z}$, the scalar multiplication map $n \\\\cdot -$ on the additive circle $\\\\mathbb{K}/\\\\langle p \\\\\"}\n  {\"name\": \"NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (s : AddSubgroup (Additive (NumberField.RingOfIntegers K)ˣ)),\\n  AddSubgroup.map (NumberField.Units.logEmbedding K) (s ⊔ Subgroup.toAddSubgroup (NumberField.Units.torsion K)) =\\n    AddSubgroup.map (NumberField.Units.logEmbedding K) s\", \"doc\": \"For any additive subgroup $ s $ of the unit group $ \\\\mathcal{O}_K^\\\\times $ of a number field $ K $, the image of the join of $ s $ with the torsion subgroup under the logarithmic embedding $ \\\\log\\\\text\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.torsion_smul_mem_of_mem\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : NumberField.mixedEmbedding.mixedSpace K},\\n  x ∈ NumberField.mixedEmbedding.fundamentalCone K →\\n    ∀ {ζ : (NumberField.RingOfIntegers K)ˣ},\\n      ζ ∈ NumberField.Units.torsion K → ζ • x ∈ NumberField.mixedEmbedding.fundamentalCone K\", \"doc\": \"If $ x $ belongs to the fundamental cone of the mixed embedding space of a number field $ K $, and $ \\\\zeta $ is a root of unity in the unit group $ (\\\\mathcal{O}_K)^\\\\times $, then the scalar multiplica\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.unit_smul_mem_iff_mem_torsion\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : NumberField.mixedEmbedding.mixedSpace K},\\n  x ∈ NumberField.mixedEmbedding.fundamentalCone K →\\n    ∀ (u : (NumberField.RingOfIntegers K)ˣ),\\n      u • x ∈ NumberField.mixedEmbedding.fundamentalCone K ↔ u ∈ NumberField.Units.torsion K\", \"doc\": \"For a number field $ K $, an element $ x $ in the fundamental cone of its mixed embedding space, and a unit $ u $ in the ring of integers $ \\\\mathcal{O}_K $, the scalar multiplication $ u \\\\cdot x $ lie\"}\n  {\"name\": \"Subgroup.strictPeriods_le_periods\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] (𝒢 : Subgroup (GL (Fin 2) R)), 𝒢.strictPeriods ≤ 𝒢.periods\", \"doc\": \"The strict periods subgroup of $\\\\mathcal{G}$ is contained within the periods subgroup of $\\\\mathcal{G}$, i.e., $\\\\mathcal{G}.\\\\text{strictPeriods} \\\\subseteq \\\\mathcal{G}.\\\\text{periods}$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern abstract Lie modules, analytic or additive tori, number-field units, or abstract characters; none states the subgroup-scheme assertion or torus-coordinate assertion searched"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive ray in the character lattice of a torus determines a unique unipotent closed subgroup of an algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.IsRegularAtInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"{R : Type u_1} → [inst : Ring R] → Subgroup (GL (Fin 2) R) → Prop\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\\\mathcal{G}.\\\\text{strictPeriods} = \\\\mathcal{G}.\\\\text{\"}\n  {\"name\": \"Subgroup.IsRegularAtInfty.eq\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] (𝒢 : Subgroup (GL (Fin 2) R)), 𝒢.IsRegularAtInfty → 𝒢.strictPeriods = 𝒢.periods\", \"doc\": \"If a subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity, then its strict periods subgroup $\\\\mathcal{G}.\\\\text{strictPeriods}$ equals its periods subgroup $\\\\mathcal{G}.\\\\text{period\"}\n  {\"name\": \"Subgroup.strictWidthInfty_eq_one_of_T_mem\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {Γ : Subgroup (Matrix.SpecialLinearGroup (Fin 2) ℤ)},\\n  ModularGroup.T ∈ Γ → (Subgroup.map (Matrix.SpecialLinearGroup.mapGL ℝ) Γ).strictWidthInfty = 1\", \"doc\": \"If a discrete subgroup $\\\\Gamma \\\\subseteq \\\\mathrm{SL}(2,\\\\mathbb{Z})$ contains the matrix $T = \\\\begin{pmatrix} 1 & 1 \\\\\\\\ 0 & 1 \\\\end{pmatrix}$, then its strict width at infinity is equal to 1.\"}\n  {\"name\": \"Subgroup.strictWidthInfty_SL2Z\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"(Matrix.SpecialLinearGroup.mapGL ℝ).range.strictWidthInfty = 1\", \"doc\": \"The strict width at infinity of the discrete subgroup $\\\\mathrm{SL}(2, \\\\mathbb{Z}) \\\\subseteq \\\\mathrm{GL}(2, \\\\mathbb{R})$ is equal to 1, corresponding to the generator of its cyclic additive subgroup of\"}\n  {\"name\": \"Subgroup.strictPeriods_eq_zmultiples_strictWidthInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [DiscreteTopology ↥𝒢.strictPeriods],\\n  𝒢.strictPeriods = AddSubgroup.zmultiples 𝒢.strictWidthInfty\", \"doc\": \"For a discrete subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$, the strict periods subgroup $\\\\mathcal{G}.\\\\text{strictPeriods}$ (consisting of all $x \\\\in \\\\mathbb{R}$ such that $\\\\begin{pmatri\"}\n  {\"name\": \"Subgroup.widthInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → ℝ\", \"doc\": \"The width at infinity of a subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ is defined as the strict width at infinity of the subgroup generated by adjoining additive inverses to $\\\\mathcal{G\"}\n  {\"name\": \"Subgroup.strictWidthInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → ℝ\", \"doc\": \"For a discrete subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$, the strict width at infinity is defined as the generator $g \\\\in \\\\mathbb{R}$ of the cyclic additive subgroup $\\\\mathcal{G}.\\\\tex\"}\n  {\"name\": \"Subgroup.isRegularAtInfty_iff\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [DiscreteTopology ↥𝒢.periods], 𝒢.IsRegularAtInfty ↔ 𝒢.widthInfty ∈ 𝒢.strictPeriods\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ is regular at infinity if and only if its width at infinity $\\\\mathcal{G}.\\\\text{widthInfty}$ belongs to its strict periods subgroup $\\\\mathca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern abstract Lie modules, analytic or additive tori, number-field units, or abstract characters; none states the subgroup-scheme assertion or torus-coordinate assertion searched"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth algebraic group subgroups determined by positive torus weights in tangent space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \": Type _\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"LieModule.coe_genWeightSpace_of_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : (genWeightSpace M (χ ∘ (⊤ : LieSubalgebra R L).incl) : Submodule R M) = genWeightSpace M χ\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated with $\\\\chi\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"LieModule.genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated to $\\\\chi$ \"}\n  {\"name\": \"LieModule.instLinearWeightsOfIsLieAbelian\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"[IsLieAbelian L] [IsDomain R] [Module.IsTorsionFree R M] : LinearWeights R L M\", \"doc\": \"For any abelian Lie algebra $ L $ over a domain $ R $, and any torsion-free $ R $-module $ M $, the module $ M $ admits linear weights in the context of Lie algebra representations. This follows from \"}\n  {\"name\": \"LieAlgebra.IsKilling.corootSpace_eq_bot_iff\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"{α : Weight K H L} : corootSpace α = ⊥ ↔ α.IsZero\", \"doc\": \"For a weight $\\\\alpha$, the coroot space associated with $\\\\alpha$ is the trivial subspace $\\\\{0\\\\}$ if and only if $\\\\alpha$ is the zero weight (i.e., $\\\\alpha(x) = 0$ for all $x$ in the Cartan subalgebra \"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"LieModule.weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, and a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern abstract Lie modules, analytic or additive tori, number-field units, or abstract characters; none states the subgroup-scheme assertion or torus-coordinate assertion searched"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"subgroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern abstract Lie modules, analytic or additive tori, number-field units, or abstract characters; none states the subgroup-scheme assertion or torus-coordinate assertion searched"
+  },
+  {
+   "tool": "grep",
+   "query": "positive.*(ray|weight)|cocharacter|unipotent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Height/NumberField.lean\", \"line\": \"454\", \"text\": \"      return .positive q(NumberField.totalWeight_pos $K)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/QuadraticForm/Signature.lean\", \"line\": \"242\", \"text\": \"the number of strictly positive weights is equal to `sigPos Q`. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"18\", \"text\": \"* `Matrix.SpecialLinearGroup.lineStab` : the unipotent radical attached to a subspace `L ⊆ ι → F`\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"31\", \"text\": \"/-- The \\\"unipotent radical\\\" attached to a subspace `L ⊆ ι → F`: the subgroup of\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"55\", \"text\": \"`PSL ι F` acting on the projective space `ℙ F (ι → F)`: the unipotent radical\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Ray.lean\", \"line\": \"153\", \"text\": \"/-- A positive multiple of a vector is in the same ray as that vector. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Ray.lean\", \"line\": \"165\", \"text\": \"/-- A vector is in the same ray as a positive multiple of one it is in the same ray as. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Ray.lean\", \"line\": \"169\", \"text\": \"/-- A positive multiple of a vector is in the same ray as one it is in the same ray as. -/\"}\n  {\"file\": \"Mathlib/Combinatorics/Pigeonhole.lean\", \"line\": \"179\", \"text\": \"pigeons there is nonpositive, then for at least one of these `n` pigeonholes, the total weight of\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean\", \"line\": \"16\", \"text\": \"linearly ordered, then the form is root-positive, positive-semidefinite on the weight space, and\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/RootPositive.lean\", \"line\": \"20\", \"text\": \"positive semi-definite on weight space and positive-definite on the span of roots.\"}\n  {\"file\": \"Mathlib/Combinatorics/Quiver/Path/Weight.lean\", \"line\": \"28\", \"text\": \"* `Quiver.Path.weight_pos`: If all edge weights are positive, the path weight is positive.\"}\n  {\"file\": \"Mathlib/Combinatorics/Quiver/Path/Weight.lean\", \"line\": \"96\", \"text\": \"/-- If all edge weights are positive, then the weight of any path is positive. -/\"}\n  {\"file\": \"Mathlib/Combinatorics/Quiver/Path/Weight.lean\", \"line\": \"118\", \"text\": \"/-- If all edge weights (given by a function on vertices) are positive, so is the path weight. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"740\", \"text\": \"/-- The unipotent upper triangular matrix\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"748\", \"text\": \"def Biprod.unipotentUpper {X₁ X₂ : C} (r : X₁ ⟶ X₂) : X₁ ⊞ X₂ ≅ X₁ ⊞ X₂ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"752\", \"text\": \"/-- The unipotent lower triangular matrix\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"760\", \"text\": \"def Biprod.unipotentLower {X₁ X₂ : C} (r : X₂ ⟶ X₁) : X₁ ⊞ X₂ ≅ X₁ ⊞ X₂ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Biproducts.lean\", \"line\": \"774\", \"text\": \"  ⟨Biprod.unipotentLower (-f₂₁ ≫ inv f₁₁), Biprod.unipotentUpper (-inv f₁₁ ≫ f₁₂),\"}\n  {\"file\": \"Mathlib/Analysis/MeanInequalities.lean\", \"line\": \"199\", \"text\": \"*positive* weighted version of the AM-GM inequality for real-valued nonnegative functions.\"}\n  {\"file\": \"Mathlib/Analysis/MeanInequalities.lean\", \"line\": \"314\", \"text\": \"condition for the *positive* weighted version of the AM-GM inequality for real-valued nonnegative\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Jensen.lean\", \"line\": \"155\", \"text\": \"For a strictly convex function `f` and positive weights `w`, if\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Jensen.lean\", \"line\": \"167\", \"text\": \"For a strictly concave function `f` and positive weights `w`, if\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Jensen.lean\", \"line\": \"242\", \"text\": \"For a strictly convex function `f` and positive weights `w`, we have\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Jensen.lean\", \"line\": \"262\", \"text\": \"For a strictly concave function `f` and positive weights `w`, we have\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern abstract Lie modules, analytic or additive tori, number-field units, or abstract characters; none states the subgroup-scheme assertion or torus-coordinate assertion searched"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-root-subgroup-parametrizations",
+  "date": "2026-10-23",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: Integration and comparison of a positive ray of torus weights.",
+   "via": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-positive-ray-subgroup",
+  "worker": "stage1",
+  "summary": "Kept the exact statement and statement dependencies. Realized the positive ray via primitive character coordinates, the centralizer in H semidirect S and its cocharacter contraction. Proved both comparisons using the existing positive-weight equivariant inverse, including zero tangent space and positive characteristic. Added one arbitrary-rank PID Smith-basis Mathlib leaf; all other inputs already exist.",
+  "blueprint": "Latest blueprint, sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting alteration/moduli/PGL chain recorded in blueprint.from.place, then Milne Proposition 16.64. Retained the inherited null from.node and full via chain; blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Smoothness of the split torus projection used to construct the semidirect product; a generic scheme tool, not a change of the unit route."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Compose the smooth torus projection with the given smooth group structure morphism."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-connected-product-components",
+    "why": "Connectedness of the semidirect product from its product scheme with a geometrically connected split torus; no node of this unit states this general component theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-split-lattice-torus-projection",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-geometrically-connected-product-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-2c2fb5375",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-2c2fb5375 (reviewer sub-agent of L); spot-checked: First split; the item is unsplit in both live clones and there is no repair or re-split note. Statement and stmt_deps unchanged. Checked against Milne iAG2017 pp.348-349 (16.64 with (123)-(125)) and 13.41/13.42 (pp.269-270). The route is Milne's: T_eta is the kernel torus of the character line and U is the contracting subgroup of its centralizer. Two legitimate changes: it uses the internal centralizer C_{H x| S}(T)=H^T x| S, and it applies Cor 13.42 twice in place of Milne's abbreviated dimension and generated-subgroup arguments. Step 1: Smith with N=Z eta in X gives eta=d eps_1 with d>0; I checked that R_eta is exactly b_1>0 with b_i=0 for i>1. Step 2: weight decomposition by group characters, valid in char p. Step 3: smoothness via the torus projection plus composition, connectedness via Stacks 0385. Step 4: conjugation (e,t)(h,s)(e,t)^-1=(t.h,s) gives C=H^T x| S and Lie C=h^T+Lie S; geometric connectedness holds because kbar=F. Step 5: the limit forces s=1, so U lies in H; Lie U=V_eta and Lie U_K=k cap V_eta; S-stable; U_K is in U_eta. Steps 6-7: the equivariant-inverse node (I checked it is true: graded Nakayama plus Krull intersection, connectedness needed) applied to U_K->U_eta and to U_K->K. Step 8 is elementary. New node lem-sfb-pid-submodule-smith-bases is an exact Mathlib leaf, Submodule.exists_smith_normal_form_of_le, PID.lean 492-497; not a duplicate (the DVR and full-rank Smith nodes are special cases). Edge cases checked: r=0, V_eta=0, G_a with weight p in char p, and negative multiples. Batch-5: torus-projection and smooth-composition are generic scheme facts; antiduality reaches trf only via exterior/dual base change of projective modules; the centralizer reaches trf only via a geometric-connectedness criterion. None is part of the trace formula or Poincare duality, so all are accepted. All three declared tool_uses accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusPositiveRaySubgroup",
+  "declaration": "AlgebraicGeometry.TorusCharacterTangent.exists_torus_positiveRay_subgroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusPositiveRaySubgroup.lean",
+  "statement": "theorem exists_torus_positiveRay_subgroup (F : Type u) [Field F] [IsAlgClosed F] (H S : Grp (Over (Spec (.of F)))) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth H.X.hom] [ConnectedSpace H.X.left] (r : ℕ) (hS : Nonempty (S ≅ MultiplicativeType.splitTorus F r)) [ModObj S.X H.X] (hAut : ActsByGroupAutomorphisms S H) (eta : S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (heta : eta.hom.hom ≠ 1) : ∃ (U : Grp (Over (Spec (.of F)))) (i : U ⟶ H), IsClosedSubgroupScheme i.hom.hom ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ IsStable S H i ∧ (GrpObj.differential i.hom.hom).toLinearMap.range = positiveRaySpace S H eta ∧ (∀ (K : Grp (Over (Spec (.of F)))) (j : K ⟶ H), IsClosedSubgroupScheme j.hom.hom → Smooth K.X.hom → ConnectedSpace K.X.left → IsStable S H j → (positiveRaySpace S H eta ≤ (GrpObj.differential j.hom.hom).toLinearMap.range → ∃ f : U ⟶ K, f ≫ j = i) ∧ ((GrpObj.differential j.hom.hom).toLinearMap.range ≤ positiveRaySpace S H eta → ∃ f : K ⟶ U, f ≫ i = j)) ∧ (∀ (K : Grp (Over (Spec (.of F)))) (j : K ⟶ H), IsClosedSubgroupScheme j.hom.hom → Smooth K.X.hom → ConnectedSpace K.X.left → IsStable S H j → (GrpObj.differential j.hom.hom).toLinearMap.range = positiveRaySpace S H eta → ∃ e : K ≅ U, e.hom ≫ i = j)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-406556101"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-406556101",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Statement matches Milne Prop 16.64 and its uniqueness sentence clause by clause. Checked: IsAlgClosed F; H affine, finite type (LocallyOfFiniteType+QuasiCompact), smooth, connected; S iso splitTorus F r (r=0 allowed); ModObj + ActsByGroupAutomorphisms is exactly an action by group-scheme automorphisms; eta a Grp hom to G_m, nonzero. weightSpace tests the actual character on F-points (dense in the split torus over F=Fbar), so it is correct in char p. InPositiveRay is m chi = n eta with m,n>0; positiveRaySpace is the sup underlying the direct sum. Conclusion: closed, smooth, connected, IsUnipotent (GL_n embedding with unipotent geometric points), IsStable, Lie = V_eta, both comparisons for every smooth connected S-stable closed K (no unipotence assumed), uniqueness up to a compatible iso. New node def-sfb-torus-character-tangent-weights: no duplicate (clones, DAG, Mathlib LieModule weights differentiate), section 5 fields ok, real data. Item changed only in lean + stmt_deps (new node + landed tori-multiplicative-type and solvable-group-structure); lean.statement verbatim. FIX for H9: dropped unused plain imports Mathlib.LinearAlgebra.FreeModule.PID and Mathlib.AlgebraicGeometry.Geometrically.Connected in fixes/TorusPositiveRaySubgroup.lean; signature unchanged; nt_compile --json with the helper module clean (3.4 s, 5.1 s)."
+ }
+}

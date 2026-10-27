@@ -12,84 +12,61 @@
  ],
  "proof": [
   {
-   "text": "First work on the larger family of all reduced finite-type $\\mathbf Q$-schemes, so that products with acting tori will also be in the domain. Fix one ordinary resolution rule $R$ from [lem-trf-smooth-functorial-ordinary-resolution]. For a normal member $S$, write $R(S)=(S_i,I_i)$ and put $N_0=S$, $N_i=S_i^\\nu$ for $i>0$, with centers $K_i=I_i\\mathcal O_{N_i}$. By [lem-trf-normalized-blowup-calculus], $N_{i+1}\\to N_i$ is exactly $B_{K_i}(N_i)$. Each center is coherent, nonempty and nowhere dense: the normalization maps are surjective and birational, so their inverse images of the nonempty nowhere dense ordinary centers have these properties. The terminal scheme is $S_n$, because the ordinary terminal scheme is regular and its normalization is itself. Denote this finite normalized tower by $R^\\nu(S)$.",
+   "text": "Choose one ordinary smooth-functorial resolution rule $R$ on all reduced finite-type $\\mathbf Q$-schemes, including finite disjoint unions, by [lem-trf-smooth-functorial-ordinary-resolution]. Apply [lem-trf-normalized-resolution-on-normal-inputs] to this rule. It gives $N=R^\\nu$ on normal inputs, with coherent nonempty nowhere dense centers, regular last level, and the required ordered smooth-pullback contractions and coherence laws.",
    "uses": [
     "lem-trf-smooth-functorial-ordinary-resolution",
-    "lem-trf-normalized-blowup-calculus"
+    "lem-trf-normalized-resolution-on-normal-inputs"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "2.2.4(ii), 2.2.6, 2.3.3(i), 2.3.9; here the initial S is normal."
+    "place": "Retained steps 1--2; ILO VIII 2.2.6, 2.2.9, 2.3.3(i), 2.3.12(i)."
    }
   },
   {
-   "text": "For a smooth map $T\\to S$ between normal members, compare $R(T)$ with the ordinary pulled-back tower by [lem-trf-smooth-functorial-ordinary-resolution]. Normalize its levels. Smooth comparison in [lem-trf-normalized-blowup-calculus] identifies every normalized level with the pullback of $N_i$ and every center with $K_i\\mathcal O$. All levels now are normal, including level zero. Thus if an ordinary pulled-back ideal is the unit ideal, its normalized blowup is the identity and can really be deleted. Removing these stages gives exactly $R^\\nu(T)$ with the other extended ideals in their original order. Applying the identity and composition comparisons of the two cited nodes proves the corresponding comparisons for $R^\\nu$. This argument uses normality of the starting schemes, not an assertion that normalization of an empty blowup is always the identity.",
+   "text": "Apply [lem-trf-conductor-extension-of-normalized-resolution] to $N$. This supplies the explicit rule $H=H_N$ on all reduced finite-type rational schemes by the initial conductor normalized blowup followed by the normal-input rule. Its statement gives the tower, center and terminal-regularity clauses and every smooth-comparison, identity, composition and surjectivity clause, including the valid omission of a unit conductor stage.",
    "uses": [
-    "lem-trf-smooth-functorial-ordinary-resolution",
-    "lem-trf-normalized-blowup-calculus"
+    "lem-trf-conductor-extension-of-normalized-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "2.2.9, 2.3.4 and 2.3.12(i); explicit check of contraction on normal inputs."
+    "place": "Retained steps 3--4; conductor refinement of ILO VIII 2.2.3--2.2.9 and 2.3.4--2.3.5(i)."
    }
   },
   {
-   "text": "For an arbitrary reduced finite-type $X$, let $D_X$ be the conductor ideal of [lem-trf-conductor-smooth-base-change], and set $P(X)=B_{D_X}(X)$. The center is nowhere dense, and [lem-trf-normalized-blowup-calculus] makes $P(X)$ normal and of finite type. Define $H(X)$ by the one stage $P(X)\\to X$, followed by $R^\\nu(P(X))$ from Step 1. If $D_X$ is the unit ideal, omit that first stage: the conductor criterion says that $X$ is then normal, so $P(X)=X$ and omission is valid. Otherwise $V(D_X)$ is nonempty. Hence $H(X)$ is in every case a finite normalized tower with nonempty nowhere dense centers and a regular last scheme. The empty scheme gives the trivial tower. This preliminary conductor stage is used only to handle the initial nonnormal input; it need not equal the finite normalization morphism.",
-   "uses": [
-    "lem-trf-conductor-smooth-base-change",
-    "lem-trf-normalized-blowup-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "2.2.3--2.2.9, 2.3.9--2.3.12; agent refinement for the initial nonnormal level, using Stacks 07T8 as stated in the conductor node."
-   }
-  },
-  {
-   "text": "Let $h:Y\\to X$ be any smooth map between reduced finite-type schemes. By [lem-trf-conductor-smooth-base-change], the first extended ideal is $D_Y=D_X\\mathcal O_Y$. By [lem-trf-normalized-blowup-calculus], $P(Y)=P(X)\\times_XY$ and $P(Y)\\to P(X)$ is smooth. If either first stage has unit ideal, the corresponding scheme is normal by the conductor criterion, so that stage is an identity. Step 2 now compares the remaining towers on the normal schemes $P(Y)$ and $P(X)$. Together these comparisons give $H(Y)=(h^*H(X))^c$, retaining the ordered ideals. Their identity and composition laws follow first for the conductor stage from the two cited nodes, and then for the tails from Step 2; successive deletion keeps the same ordered subsequence. If $h$ is surjective, each map of pulled-back levels is surjective, being a base change of $h$, so every nonempty zero scheme of a center has nonempty inverse image. Thus no stage is deleted for a surjective $h$.",
-   "uses": [
-    "lem-trf-conductor-smooth-base-change",
-    "lem-trf-normalized-blowup-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "2.3.4, Remark 2.3.5(i), Lemma 2.2.9; initial conductor comparison is the agent refinement."
-   }
-  },
-  {
-   "text": "By [lem-trf-toric-realization-finite-type], all the required $\\mathbf Q[M]$ and their finite disjoint unions are reduced finite-type schemes. Define $\\mathcal F(X)=H(X)$ on this family. Steps 3--4 give every tower and smooth-comparison clause of the statement, for arbitrary smooth scheme morphisms and not just monomial morphisms. To obtain equivariance without unsynchronized componentwise choices, fix one torus of a connected component; the same node says it is a smooth finite-type group. Let it act as the identity on all other components. Then $T\\times X$ is reduced and finite type and projection $p:T\\times X\\to X$ is smooth and surjective by [lem-trf-toric-realization-finite-type]; the action $a$ is also smooth and surjective, since $(t,x)\\mapsto(t,tx)$ is an automorphism with inverse $(t,x)\\mapsto(t,t^{-1}x)$ and $a$ is projection after this automorphism. Step 4 gives identical uncontracted towers $p^*H(X)=H(T\\times X)=a^*H(X)$, including their ordered centers.",
+   "text": "By [lem-trf-toric-realization-finite-type], every required $X=\\mathbf Q[M]$, including finite disjoint unions, is reduced of finite type. Restrict $H$ to these inputs and put $\\mathcal F(X)=H(X)$. The comparisons just obtained apply to every smooth scheme morphism between them, so give all the stated tower and functoriality clauses with the normalized-tower conventions of [def-trf-monoscheme-toric-realization].",
    "uses": [
     "lem-trf-toric-realization-finite-type",
-    "lem-trf-normalized-blowup-calculus"
+    "def-trf-monoscheme-toric-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "2.3.16--2.3.17 and 3.2.19; use the rule on the larger family to accommodate T times X."
+    "place": "Retained step 5; ILO VIII 3.2.19."
    }
   },
   {
-   "text": "Induct on the length of $H(X)$. At level zero, the equality of the first ideals in the two towers of Step 5 says $p^*J_0=a^*J_0$, so $J_0$ is invariant in exactly the sense of [def-trf-monoscheme-toric-realization]. The smooth normalized-blowup comparisons of [lem-trf-normalized-blowup-calculus] identify their next schemes with $T\\times X_1$ and $X_1\\times_{X,a}(T\\times X)$. Their canonical identification followed by the first projection defines the lifted action $a_1:T\\times X_1\\to X_1$. The unit and associativity diagrams are lifts of the original action diagrams: the two maps in each diagram agree by the final-object uniqueness in the normalized-blowup universal property, applied to the normal schemes $X_1$ and $T\\times T\\times X_1$ and the pulled-back invertible center. These maps dominate the relevant components; smooth pullback and the birational blowup maps preserve their generic points. Thus $a_1$ is an action. At level $i$, the same ordered-tower comparison gives $p_i^*J_i=a_i^*J_i$; repeat the construction and uniqueness argument to obtain the action on $X_{i+1}$. The induction includes every retained center, so the chosen component torus acts throughout and preserves all its ideals. Repeating for each component proves the final clause.",
+   "text": "Fix a connected component of $X$. Its torus is a finite-rank split torus by [lem-trf-toric-realization-finite-type]. Extend its action by the identity on the other components; these finitely many components are open and closed. Apply [lem-trf-smooth-functorial-tower-torus-equivariance] to this action and to the rule $H$ on the larger family of all reduced finite-type schemes. Its uncontracted projection/action comparison and lifting conclusion give actions on every level, equivariant transitions and equality of the action and projection pullbacks of each center ideal. This is precisely the invariance required by [def-trf-monoscheme-toric-realization]. Do this for each component torus; the tower is always the same $H(X)$, so the choices are synchronized.",
    "uses": [
-    "def-trf-monoscheme-toric-realization",
-    "lem-trf-normalized-blowup-calculus"
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-smooth-functorial-tower-torus-equivariance",
+    "def-trf-monoscheme-toric-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Corollary 2.3.17 proof, using 2.1.11 and the normalized universal property 2.2.4(i); unit and group-law check made explicit."
+    "place": "Retained steps 5--6; ILO VIII 2.3.17 and 3.2.19."
    }
   }
  ],
  "proof_deps": [
   "lem-trf-smooth-functorial-ordinary-resolution",
-  "lem-trf-normalized-blowup-calculus",
-  "lem-trf-conductor-smooth-base-change",
+  "lem-trf-normalized-resolution-on-normal-inputs",
+  "lem-trf-conductor-extension-of-normalized-resolution",
   "lem-trf-toric-realization-finite-type",
-  "def-trf-monoscheme-toric-realization"
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-smooth-functorial-tower-torus-equivariance"
  ],
  "proof_origin": {
   "by": "agent",
@@ -155,19 +132,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-toric-normalized-desingularization",
   "worker": "stage1",
-  "summary": "Q45 retained the statement and its dependencies. Constructed the rule from ordinary smooth-functorial resolution, normalization of its towers on normal inputs, and a preliminary conductor normalized blowup for nonnormal inputs; wrote out synchronization, surjective pullback and the equivariant lifting induction. Four genuine generic inputs remain statement-only; none is a whole-item Mathlib match or a Lean attachment.",
-  "blueprint": "Historical alteration/nearby-duality branch of lem-trf-local-term-locality through lem-trf-functorial-fan-desingularization, specifically the toric-resolution input to ILO VIII 3.2.19. The current main-20261015 blueprint instead proves the unit by contracting correspondences; this delivery preserves the assigned historical node ancestry and does not change that unit route."
+  "summary": "Q26 re-split repair: statement unchanged; three independent statement-only obligations carry retained steps 1--2 (normal-input normalization), 3--4 (conductor extension), and 5--6 (generic torus-equivariance and lifting). Four short assembly steps replace the six long arguments; the report preserves their full text and sources. All new nodes searched by two semantic phrasings, LeanSearch, Loogle and Mathlib grep.",
+  "blueprint": "Historical alteration/nearby-duality branch of lem-trf-local-term-locality through lem-trf-functorial-fan-desingularization, specifically the toric-resolution input to ILO VIII 3.2.19. The current main-20261015 blueprint instead proves the unit by contracting correspondences; this delivery preserves the assigned historical node ancestry and does not change that unit route. The three new nodes realize the same historical toric-resolution input, grouping retained steps 1--2, 3--4 and 5--6; no chapter or unit route is changed."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q45-257b3543c",
-  "group": "Q45",
+  "reviewer": "NT-cc-Q26-3177dbf72",
+  "group": "Q26",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-257b3543c (reviewer sub-agent of L); spot-checked: Read all required instructions, DAG/unit materials, item and new nodes, cited statements, ILO and Stacks sources, and checked hypotheses, base changes, edge cases, duplicates, cycles, route, and long-step rule. Wrote review.md; no repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-3177dbf72 (reviewer sub-agent of L); spot-checked: Re-split answers the live released note of 2026-10-22 (5678 characters, six steps). The item is not superseded: live and side-live still hold the six-step Q45 split. Statement and stmt_deps are byte-identical to base, and all six base steps appear verbatim in the report. The item proof is now 4 steps totalling 2046 characters. Old steps 1–2 map to new node A, lem-trf-normalized-resolution-on-normal-inputs (ILO VIII 2.2.4(ii)/2.2.6/2.2.9, pp.90–91). Steps 3–4 map to B, lem-trf-conductor-extension-of-normalized-resolution (conductor node plus calculus node; quasi-compactness holds because the source is Noetherian). Steps 5–6 map to C, lem-trf-smooth-functorial-tower-torus-equivariance (ILO Cor. 2.3.17 and its proof, pp.94–95). I checked A: normalized levels with K_i nonempty and nowhere dense via finite surjective normalization, S_n^ν=S_n, and unit stages deleted literally on normal levels. I checked B: the mixed case where D_X is non-unit but D_Y is unit (Y normal, so P(Y)=Y and the stage is correctly contracted), the surjective case, the cusp and the empty scheme. I checked C: a_0 is smooth and surjective via the automorphism (t,x)↦(t,tx); lifts are unique by density, separatedness or normalized finality, which gives the unit and associativity laws; rank 0 is trivial. B's hypotheses are exactly A's conclusions, and C's are exactly B's. The item's step 4 extends a component torus by the identity on the other components, which are open and closed, so every component uses the same synchronized H(X). The three nodes are general, self-contained and comparable in size (1.7k, 2.2k and 2.1k characters); none restates the item. DAG search found no duplicates: the per-chapter normalized-tower nodes and the Gabber finite-group modification are different statements. Mathlib searches cover all three kinds. No SGA, no tool_uses, no fixes. The null lean_audit on the new nodes is filled by tooling after merge."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SmoothFunctorialNormalizedToricDesingularization",
@@ -194,5 +171,16 @@
   "result": "fix",
   "note": "Statement correct clause by clause: Fine+IsTorsionFree domain (disjoint unions included); baseIso X_0=Q[M]; NormalizedTower with ofFiniteType, nonempty, nowhere-dense centers; regular last level; comparison for every Smooth h between realizations (over-Q automatic); NormalizedPullback+NormalizedContraction with lifts pinned by base_commutes/contraction_base and unique by separatedness and density; identity/composition HEq laws; surjective -> injective index; component torus action pinned at level 0 via torusAction/componenti, lifted by action_naturality, center_preserved = equivariance. Off-component action free but matches node Step 5, no fault. Edge cases OK (empty M, length 0, universes). No duplicate, no hollow def, only sorry is the theorem, ULift import needed, lines <=100, record matches the file. Fault H8: theorem docstring was a loose summary omitting the conductor stage, the T x X synchronization and the lifting induction; FIX replaces only that docstring with the node's six steps. nt_compile --json: delivered exit 0 (9.4 s), broken control fails, fixed file exit 0 (20.7 s)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

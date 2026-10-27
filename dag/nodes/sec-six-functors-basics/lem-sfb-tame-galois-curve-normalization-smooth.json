@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-tame-galois-curve-normalization-smooth",
+ "kind": "statement",
+ "title": "Smoothness of prime-to-characteristic Galois normalizations at separable branch points",
+ "statement": "Let $K$ be a field, $C$ a smooth integral $K$-curve, and $F=K(C)$. Let $L/F$ be a finite Galois extension of degree $d\\geq1$, where finite Galois means finite-dimensional, normal and separable, and assume that the image of $d$ is invertible in $K$. Let $\\nu:Y\\to C$ be the normalization of $C$ in $L$. Suppose $Y$ is a normal integral $K$-curve and $\\nu$ is finite. Let $D\\subset C$ be a reduced closed subscheme finite etale over $K$, and suppose $\\nu$ is etale above $C\\setminus D$. Then, for every $y\\in Y$ above $x\\in D$, the point $y$ is closed, the integer $[\\kappa(y):\\kappa(x)]$ divides $d$, and $\\kappa(y)/K$ is finite separable. Moreover $Y\\to\\operatorname{Spec}K$ is smooth. Here normal means that every local ring is an integrally closed domain; separable means that minimal polynomials have no repeated roots. The field $K$ need not be perfect, no projectivity is required, and $D=\\varnothing$ and $d=1$ are allowed.\n\nNotions: [def-weil-field], [def-pc-curve], [def-pc-integral-scheme], [def-sbc-smooth-morphisms], [def-sc-function-field], [def-pc-field-extension], [def-fin-normalization-extension], [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-weil-closed-immersion], [def-weil-residue-field], [def-weil-vector-space-dimension].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EB, lemma-galois-conclusion; varieties.tex Tag 0B8Y, lemma-regular-point-on-curve. Returned item proof steps 5--6: prime-to-characteristic residue degree, separability, and smoothness on and off the branch subscheme."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-curve",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "First locate the branch points and their residue fields. Since $D\\to\\operatorname{Spec}K$ is finite, $D=\\operatorname{Spec}H$ for a finite-dimensional $K$-algebra $H$. Its etaleness and [lem-weil-pbc-etale-algebra-over-field-product] give $H\\cong\\prod_i K_i$ with each $K_i/K$ finite separable. Every point of this finite product spectrum is closed, with residue field one of the $K_i$. The closed immersion $D\\hookrightarrow C$ takes it to a closed point $x$ of $C$ and induces $\\kappa(x)\\cong K_i$ by [lem-weil-pbc-closed-immersion-residue-field-iso]. Thus $\\kappa(x)/K$ is finite separable. This argument also treats the empty product, when there is no branch point.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, lemma-etale-over-field; morphisms.tex Tag 01WH, definition-integral; schemes.tex closed immersions and residue fields"
+   }
+  },
+  {
+   "text": "Fix $y\\mapsto x\\in D$ and an affine open $U=\\operatorname{Spec}R\\subset C$ containing $x$. Write $\\mathfrak p\\subset R$ for $x$. By [lem-sfb-curve-closed-point-affine-local-model], $\\mathfrak p$ is maximal and $A=R_{\\mathfrak p}\\cong\\mathcal O_{C,x}$ is a Noetherian local domain of dimension one, compatibly with $K$ and residue fields. By [lem-weil-pbc-smooth-scheme-over-field-regular], $A$ is regular, so [lem-sc-regular-dim1-dvr] makes $A$ a DVR. The affine function-field result gives $F=\\operatorname{Frac}R$; also $\\operatorname{Frac}A=F$, since $R\\subset R_{\\mathfrak p}\\subset\\operatorname{Frac}R$ and a quotient of two elements of $R$ is still a quotient of elements of $A$.",
+   "uses": [
+    "lem-sfb-curve-closed-point-affine-local-model",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8Y, lemma-regular-point-on-curve, opening sentence; algebra.tex Tag 00PD, lemma-characterize-dvr, (3) implies (1); varieties.tex Tag 056S, lemma-smooth-regular"
+   }
+  },
+  {
+   "text": "By the definition of normalization in $L$, $\\nu^{-1}U=\\operatorname{Spec}B$ with $B$ the integral closure of $R$ in $L$; write $\\mathfrak q\\subset B$ for $y$. Finiteness of $\\nu$ says that $B$ is a finite $R$-module. The domain $B/\\mathfrak q$ is therefore finite-dimensional over $R/\\mathfrak p=\\kappa(x)$, and is a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. Hence $\\mathfrak q$ is maximal and $y$ is closed in $\\nu^{-1}U$. Any specialization of $y$ in $Y$ maps to a specialization of the closed point $x$, hence lies over $x$ and is in $\\nu^{-1}U$. Consequently $y$ is closed in $Y$. Applying the affine local-model lemma to the curve $Y$ identifies $\\mathcal O_{Y,y}$ with $B_{\\mathfrak q}$, and identifies its residue field with that of $B_{\\mathfrak q}$ compatibly with $K$.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-sfb-curve-closed-point-affine-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite-dimensional domain criterion (rank-nullity); varieties.tex Tag 0B8Y, lemma-regular-point-on-curve, affine local rings; normalization affine description"
+   }
+  },
+  {
+   "text": "Put $S=R\\setminus\\mathfrak p$ and $T=S^{-1}B$. By [lem-weil-pbc-integral-closure-commutes-localization], $T$ is the integral closure of $A=S^{-1}R$ in $S^{-1}L=L$; the latter equality holds since all elements of $S$ are already nonzero units in $L$. The prime $\\mathfrak n=S^{-1}\\mathfrak q$ lies over the maximal ideal of $A$ and is maximal: $T/\\mathfrak n=S^{-1}(B/\\mathfrak q)=B/\\mathfrak q$, a field, since every element of $S$ has nonzero image in that field. By [lem-weil-pbc-localization-prime-residue-field-iso], $T_{\\mathfrak n}\\cong B_{\\mathfrak q}$ and $\\kappa(\\mathfrak n)\\cong\\kappa(y)$, with the residue-field scalar maps induced from $R$ unchanged; likewise $\\kappa(\\mathfrak m_A)=\\kappa(x)$. Apply [lem-sbc-dvr-galois-normalization-ramification-dvd] to the DVR $A$, its fraction field $F$, the finite Galois extension $L/F$, and $n=d=[L:F]$. It gives $f=[\\kappa(y):\\kappa(x)]\\mid d$. No unramifiedness at $y$, perfection, or projectivity is used.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-sbc-dvr-galois-normalization-ramification-dvd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EB, lemma-galois-conclusion; algebra.tex Tags 0307, lemma-integral-closure-localize, and 00E3, lemma-spec-localization"
+   }
+  },
+  {
+   "text": "Write $k=\\kappa(x)$ and $E=\\kappa(y)$. This extension is finite by the preceding step. The residue-normality theorem [lem-exc-dvr-residue-normal-action], applied to the same $A,L,T$ and $\\mathfrak n$, says that $E/k$ is normal. If $\\operatorname{char}K=p>0$, then $\\operatorname{char}k=p$ and $p\\nmid d$, because $K\\hookrightarrow k$ is an inclusion of fields and $d$ is invertible in $K$. Choose an algebraic closure of $E$ using [lem-pc-algebraic-closure-exists-unique], and apply [lem-exc-normal-field-degree-factors] to $E/k$: for its relative separable closure $E_s$, $[E:k]=s[E:E_s]$ with $[E:E_s]=p^c$. Thus $p^c\\mid f\\mid d$, so $c=0$ and $[E:E_s]=1$. The nonzero element $1$ then spans the one-dimensional $E_s$-space $E$, giving $E=E_s$; by [def-weil-pbc-relative-separable-closure] $E/k$ is separable. In characteristic zero, any minimal polynomial $P$ over $k$ has positive degree $r$ and nonzero derivative: its leading derivative coefficient is $r$ times its nonzero leading coefficient. The irreducible derivative criterion [lem-trf-irreducible-separable-derivative] therefore makes every such $P$ separable. Thus in either characteristic $E/k$ is finite separable.",
+   "uses": [
+    "lem-exc-dvr-residue-normal-action",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-exc-normal-field-degree-factors",
+    "def-weil-pbc-relative-separable-closure",
+    "lem-trf-irreducible-separable-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09HS, lemma-normal-and-automorphisms; 030L, definition-insep-degree; 09HI, lemma-finite-purely-inseparable; 09H0, lemma-irreducible-polynomials; more-algebra.tex Tag 09ED, lemma-galois-galois"
+   }
+  },
+  {
+   "text": "Step 1 gives $k/K$ finite separable and step 5 gives $E/k$ finite separable. By [lem-zl-separable-permanence], $E/K$ is separable algebraic, and by [lem-weil-pbc-field-degree-multiplicativity] it is finite, with $[E:K]=[E:k][k:K]$. Since $Y$ is a normal integral $K$-curve and $y$ is closed by step 3, [lem-sfb-normal-curve-separable-point-smooth] applies to $Y,y$: its local ring is integrally closed by the assumed normality, and its residue field is finite separable over $K$. Consequently $Y\\to\\operatorname{Spec}K$ is smooth on some open neighbourhood of every point over $D$.",
+   "uses": [
+    "lem-zl-separable-permanence",
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "lem-sfb-normal-curve-separable-point-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8Y, lemma-regular-point-on-curve; fields.tex Tags 09HB, lemma-separable-permanence, and 09G9, lemma-multiplicativity-degrees"
+   }
+  },
+  {
+   "text": "For $z\\in Y$ outside $\\nu^{-1}D$, use the assumed etaleness of $\\nu$ over $C\\setminus D$. Since $C\\to\\operatorname{Spec}K$ is smooth at $\\nu(z)$, the pointwise assertion of [lem-trf-etale-source-smoothness] makes its composite with this etale restriction smooth at $z$. Together with step 6 this proves smoothness at every point of $Y$. The open smooth neighbourhoods supplied at these points cover $Y$, so the local definition of smoothness gives smoothness of its structure morphism. If $D$ is empty, this last argument applies everywhere; if $d=1$, the divisibility argument gives $f=1$ and all preceding steps remain valid.",
+   "uses": [
+    "lem-trf-etale-source-smoothness",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036U, lemma-smooth-smooth-local-source; morphisms.tex Tag 01V6, lemma-smooth-characterize"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-sfb-curve-closed-point-affine-local-model",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-exc-dvr-residue-normal-action",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-exc-normal-field-degree-factors",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-trf-irreducible-separable-derivative",
+  "lem-zl-separable-permanence",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-sfb-normal-curve-separable-point-smooth",
+  "lem-trf-etale-source-smoothness",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of Tag 09EB (lemma-galois-conclusion), Tag 09ED (lemma-galois-galois), fields.tex separability, and varieties.tex Tag 0B8Y (lemma-regular-point-on-curve); all supporting results reused from the existing DAG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite Galois normalization of a smooth curve of degree prime to the characteristic is smooth if the branch points have separable residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The residue degree at a point in the integral closure of a discrete valuation ring divides the Galois degree so a normal curve is smooth at separable branch points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W],\\n  ↑(WeierstrassCurve.valuation_Δ_aux R W) =\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation of the discriminant $ \\\\Delta(W) $ computed via the auxiliary valuation \"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → { v // v ≤ 1 }\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.Smooth g] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"Normalization commutes with smooth base change.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*[Dd]egree.*[Gg]alois|[Gg]alois.*residue.*[Dd]egree|normalization.*[Ss]mooth",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"28\", \"text\": \"We also show that normalization commutes with disjoint unions and smooth base change.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"587\", \"text\": \"normalization. This is an isomorphism when `g` is smooth. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"609\", \"text\": \"/-- Normalization commutes with smooth base change. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]eparable.*[Ss]mooth|[Ss]mooth.*[Ss]eparable",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of the normalization of a smooth curve in a prime to characteristic Galois extension branched at separable closed points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*[Dd]egree.*[Gg]alois|normalization.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-23T04:05:14Z\", \"tool\": \"grep\", \"query\": \"residue.*[Dd]egree.*[Gg]alois|normalization.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"4a81930aa9b27ea7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states all clauses of the finite Galois curve normalization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal curve is smooth at a closed point with finite separable residue field",
+   "results": "{\"t\": \"2026-10-23T04:05:15Z\", \"tool\": \"leansearch\", \"query\": \"A normal curve is smooth at a closed point with finite separable residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.IsSmoothAt\", \"Algebra.smoothLocus\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\"], \"digest\": \"17dfd66ecb202835\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states all clauses of the finite Galois curve normalization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "{\"t\": \"2026-10-23T04:05:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.Scheme.Hom.normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\"], \"digest\": \"4d5f27beaecd7cf5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states all clauses of the finite Galois curve normalization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Galois normalization of a smooth curve of degree prime to the characteristic is smooth at separable branch points",
+   "results": "{\"t\": \"2026-10-23T04:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"A finite Galois normalization of a smooth curve of degree prime to the characteristic is smooth at separable branch points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.exists_isIntegral\"], \"digest\": \"6e7f3a714c35e338\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none states all clauses of the finite Galois curve normalization assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-radical-curve-normalization",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Re-split of lem-sfb-tame-radical-curve-normalization, returned proof steps 5--6: Smoothness of prime-to-characteristic Galois normalizations at separable branch points.",
+   "via": [
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tame-galois-curve-normalization-smooth",
+  "worker": "stage1",
+  "summary": "Reused the existing affine curve local-model, regular-to-DVR, localization, Galois residue-degree, residue-normality, separable-degree and smooth-at-separable-point results. Explicitly proved closedness, applied the Galois divisibility statement after localizing normalization, excluded inseparability using the invertibility of d, and covered the etale complement. No new nodes and no Lean changes. Repair of returned head f9bd2b408a1: rebased through the delivery tool onto the current DAG and reread all 23 cited nodes; all 25 full-statement quotes remain exact, so the approved seven-step proof and statement are retained. Current maintainer fields are preserved.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Re-split of lem-sfb-tame-radical-curve-normalization, returned proof steps 5--6: Smoothness of prime-to-characteristic Galois normalizations at separable branch points.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic A closed immersion induces an isomorphism on residue fields input used as its stated black box in the local normalization argument; no statement of this unit supplies this fact. This retains the prime-to-characteristic normalization and separable-branch-point route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic A scheme smooth over a field is regular input used as its stated black box in the local normalization argument; no statement of this unit supplies this fact. This retains the prime-to-characteristic normalization and separable-branch-point route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic Residue fields of a localization agree with those of the base input used as its stated black box in the local normalization argument; no statement of this unit supplies this fact. This retains the prime-to-characteristic normalization and separable-branch-point route."
+   },
+   {
+    "node": "lem-sbc-dvr-galois-normalization-ramification-dvd",
+    "why": "Generic Ramification and residue degrees in a Galois normalization divide the field degree input used as its stated black box in the local normalization argument; no statement of this unit supplies this fact. This retains the prime-to-characteristic normalization and separable-branch-point route."
+   },
+   {
+    "node": "lem-exc-dvr-residue-normal-action",
+    "why": "Generic Normal residue extension and surjective decomposition action input used as its stated black box in the local normalization argument; no statement of this unit supplies this fact. This retains the prime-to-characteristic normalization and separable-branch-point route."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic Smoothness is etale local on the source input used as its stated black box in the local normalization argument; no statement of this unit supplies this fact. This retains the prime-to-characteristic normalization and separable-branch-point route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-sbc-dvr-galois-normalization-ramification-dvd",
+  "lem-exc-dvr-residue-normal-action",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-dfc566c99",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-dfc566c99 (reviewer sub-agent of L); spot-checked: Third push, after landing-promotion refusals. Heads 983e7c3b and f9bd2b40 were both PASSed. The item JSON differs from both only in split_report. Statement, 7 steps, proof_deps (23, equal to the union of step uses), source and searches are unchanged. There are 0 new nodes and no repair note. I reread every step and every cited statement in full, and checked Stacks 09EB (more-algebra.tex:33192, [L:K]=nef), 09ED (more-algebra.tex:33224 (1), normal residue extension) and 0B8Y (varieties.tex:9356, (6) under separable kappa(x)). The statement is true: E/k is normal (09ED node), so [E:k]=s p^c; f divides d (09EB node, applied after localizing the integral closure, with S^{-1}L=L and n maximal because T/n=B/q); p does not divide d, so c=0 and E/k is separable; in characteristic 0 this follows from the derivative criterion. Separable permanence and degree multiplicativity make kappa(y)/K finite separable. y is closed by the specialization argument, and the 0B8Y node then gives smoothness at points over D. The 036U pointwise clause gives smoothness on the etale complement. Edge cases D empty, d=1, characteristic 0, imperfect K and e>1 all hold. Batch-5 flags: lem-trf-irreducible-separable-derivative is Stacks 09H0, a Mathlib-status field fact with no proof_deps. lem-trf-etale-source-smoothness is Stacks 036U, whose closure is generic pbc/sbc smoothness lemmas plus the generic trf smooth-composition. Both are reached only through a historical auxiliary branch of the trace-formula chapter. Neither is given by the trace formula or Poincare duality assumption, so both are genuinely outside the assumed statements and I accept them. The rg -L duplicate search found no duplicate (radical-normalization-projective-etale, finite-normal-cover-normalization and finite-normal-relative-curve-model are different statements). The parent tame-radical-curve-normalization step 3 cites the item consistently. There is no SGA citation. The generic tool_uses are accepted. No fixes. Maintainer: landing-promotion loop; the mathematics is unchanged since the two earlier PASSes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.TameGaloisNormalizationSmooth",
+  "declaration": "AlgebraicGeometry.tame_galois_curve_normalization_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/TameGaloisNormalizationSmooth.lean",
+  "statement": "theorem tame_galois_curve_normalization_smooth (K : Type u) [Field K] (C : Scheme.{u}) (q : C ⟶ Spec (.of K)) [IsIntegralCurve q] [Smooth q] (L : Type u) [Field L] [Algebra C.functionField L] [FiniteDimensional C.functionField L] [IsGalois C.functionField L] (d : ℕ) (hd : 1 ≤ d) (hdegree : Module.finrank C.functionField L = d) (hunit : IsUnit (d : K)) [IsIntegralCurve (C.fromNormalizationIn L ≫ q)] [IsFinite (C.fromNormalizationIn L)] (hnormal : ∀ y : C.normalizationIn L, IsIntegrallyClosed ((C.normalizationIn L).presheaf.stalk y)) (D : Scheme.{u}) (i : D ⟶ C) [IsClosedImmersion i] [IsReduced D] [IsFinite (i ≫ q)] [Etale (i ≫ q)] (U : C.Opens) (hU : (U : Set C) = (Set.range i)ᶜ) (hetale : Etale (C.fromNormalizationIn L ∣_ U)) : (∀ y : C.normalizationIn L, C.fromNormalizationIn L y ∈ Set.range i → IsClosed ({y} : Set (C.normalizationIn L)) ∧ @Module.finrank (C.residueField (C.fromNormalizationIn L y)) ((C.normalizationIn L).residueField y) _ _ ((C.fromNormalizationIn L).residueFieldMap y).hom.toAlgebra.toModule ∣ d ∧ ((C.fromNormalizationIn L ≫ q).residueFieldAlgebraMap y).Finite ∧ @Algebra.IsSeparable K ((C.normalizationIn L).residueField y) _ _ ((C.fromNormalizationIn L ≫ q).residueFieldAlgebraMap y).toAlgebra) ∧ Smooth (C.fromNormalizationIn L ≫ q)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-958117987",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Lean exact against the node: C smooth IsIntegralCurve q; F = C.functionField; L FiniteDimensional + IsGalois; finrank = d ≥ 1; IsUnit (d:K); Y = normalizationIn with IsIntegralCurve(ν≫q) + integrally closed stalks; IsFinite ν; D via IsClosedImmersion i + IsReduced D with IsFinite/Etale(i≫q); Etale(ν∣_U), U = (range i)ᶜ. Conclusion: ∀ y over range i, closed ∧ finrank via ν.residueFieldMap ∣ d ∧ residueFieldAlgebraMap Finite ∧ IsSeparable K, plus Smooth(ν≫q). Edge cases D=∅, d=1, char 0, imperfect K are covered; single universe u loses nothing. Statement verbatim; item differs from live only in lean; 12 stmt_dep records byte-identical; no definitions; sorry proof; docstrings carry source places, blueprint tag and 7 steps; no duplicate found (IsAffine.normalizationIn is a different statement). Sole fault H11: the second reading is the author's own pass. FIX = fixes/<item>.report.md with the worker report verbatim plus an independent clause-by-clause second reading. No Lean change, no compile."
+ }
+}

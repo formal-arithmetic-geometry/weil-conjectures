@@ -16,94 +16,84 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$. Since the site is $w$-small, [prop-pur-kinjective-resolutions-exist] applies in universe $w$ and makes $\\mathcal A$ Grothendieck abelian. Morphisms are families of sectionwise linear maps indexed by the $w$-small site, hence have $w$-small sets. The nonempty directed poset $I$ is filtered by [def-weil-pbc-category-colimit]. Thus [lem-sfb-grothendieck-filtered-finite-limits] gives all required $w$-small limits and colimits in $\\mathcal A$, and says that $\\operatorname{colim}_I:\\mathcal A^I\\to\\mathcal A$ preserves finite limits. All subsequent colimits are in $\\mathcal A$, not presheaf or sectionwise colimits.",
+   "text": "A nonempty directed poset I is filtered. Module sheaves have coefficient-small colimits and finite limits. The underlying abelian-sheaf functor toSheaf preserves these colimits, preserves and reflects finite limits. Abelian sheaves have exact filtered colimits by exact sheafification and the corresponding property of abelian groups. Apply Mathlib HasExactColimitsOfShape.domain_of_functor to toSheaf to obtain HasExactColimitsOfShape I Mod(R). Its general preservesFiniteLimits member, recorded in the Mathlib match of lem-sfb-grothendieck-filtered-finite-limits, gives left exactness of colim_I. No generator or K-injective resolution is needed, and the site need only be essentially small in the coefficient universe.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-category-colimit",
     "lem-sfb-grothendieck-filtered-finite-limits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EU, proof of (2), exactness of filtered colimits; Tag 03DB, lemma-limits-colimits."
+    "place": "Tag 03EU, lemma-colimits-flat, part (2), using Tag 03EP, part (2)."
    }
   },
   {
-   "text": "For every $X\\in\\mathcal A$, [lem-weil-pbc-independent-sheaf-tensor-colimits] applied to $X\\otimes_R-$ sends the given cocone $(P,q_i)$ to a colimit cocone. The symmetry in [lem-pc-sheaf-modules-tensor-closed] identifies this diagram and cocone with $(P_i\\otimes_R X,q_i\\otimes1_X)$. Consequently the canonical map $\\alpha_X:\\operatorname{colim}_i(P_i\\otimes_R X)\\to P\\otimes_R X$ is an isomorphism, with $\\alpha_X\\iota_{i,X}=q_i\\otimes1_X$. For $f:X\\to Y$, both composites from $\\operatorname{colim}_i(P_i\\otimes_R X)$ to $P\\otimes_R Y$ agree after each $\\iota_{i,X}$ by tensor functoriality; colimit uniqueness [def-weil-pbc-category-colimit] therefore proves naturality of $\\alpha$ in $X$.",
-   "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EP (lemma-tensor-commute-colimits), part (2), and 03EO (lemma-internal-hom-adjoint-tensor)."
-   }
-  },
-  {
-   "text": "Let $K$ be a finite category, $D:K\\to\\mathcal A$, and $(L,\\pi_k)$ a limit cone. By flatness [def-pc-flat-sheaf-modules], each tensor functor is exact, in particular it preserves finite limits; symmetry [lem-pc-sheaf-modules-tensor-closed] allows the factor $P_i$ on the left. Hence the canonical $\\gamma_i:P_i\\otimes_R L\\to\\lim_k(P_i\\otimes_R D(k))$, characterized by projection $1_{P_i}\\otimes\\pi_k$, is an isomorphism. For $i\\le j$, the two maps expressing compatibility of $\\gamma_i$ and $\\gamma_j$ have the same $k$-projection, namely $p_{ij}\\otimes\\pi_k$, so limit uniqueness proves compatibility. Thus the $\\gamma_i$ form an isomorphism of $I$-diagrams; its inverse is the family of inverses, whose naturality follows by composing the same equality with the inverses.",
+   "text": "For each i, flatness gives finite-limit preservation of siteSheafTensorRight (F_i). The comparison siteSheafTensorRightIso from lem-weil-pbc-independent-sheaf-tensor-colimits identifies it with monoidal tensorRight (F_i). The symmetry already supplied by the tensor construction identifies tensorRight (F_i) with tensorLeft (F_i). Thus every functor tensorLeft (F_i) preserves finite limits.",
    "uses": [
     "def-pc-flat-sheaf-modules",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-galois-finite-limits-colimits"
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EU, hypothesis that the stage sheaves are flat; Tag 03ER, definition-flat, item (3)."
+    "place": "Tag 03EU, lemma-colimits-flat, part (2), using Tag 03EP, part (2)."
    }
   },
   {
-   "text": "Apply [lem-sfb-grothendieck-filtered-finite-limits] to the bifunctor $(i,k)\\mapsto P_i\\otimes_R D(k)$, using the Grothendieck category and sizes from Step 1. It gives the canonical isomorphism $\\beta:\\operatorname{colim}_i\\lim_k(P_i\\otimes_R D(k))\\to\\lim_k\\operatorname{colim}_i(P_i\\otimes_R D(k))$. Compose the following isomorphisms:\n$$P\\otimes_R L\\xrightarrow{\\alpha_L^{-1}}\\operatorname{colim}_i(P_i\\otimes_R L)\\xrightarrow{\\operatorname{colim}_i\\gamma_i}\\operatorname{colim}_i\\lim_k(P_i\\otimes_R D(k))\\xrightarrow{\\beta}\\lim_k\\operatorname{colim}_i(P_i\\otimes_R D(k))\\xrightarrow{\\lim_k\\alpha_{D(k)}}\\lim_k(P\\otimes_R D(k)).$$\nThe colimit and limit of the displayed isomorphisms are isomorphisms because the corresponding functors send their inverse families to inverse maps. Denote this composite by $\\kappa$.",
+   "text": "Consider the existing curriedTensor : Mod(R) -> Fun(Mod(R), Mod(R)). Evaluation at M is tensorRight M. By lem-weil-pbc-independent-sheaf-tensor-colimits and symmetry, this evaluation preserves the colimit of F. Mathlib preservesColimit_of_evaluation therefore shows curriedTensor preserves this colimit. The unique isomorphism from the specified arbitrary cocone tip c.pt to colimit F, followed by preservesColimitIso and colimitIsoFlipCompColim, identifies tensorLeft c.pt with (F followed by curriedTensor).flip followed by colim.",
    "uses": [
-    "lem-sfb-grothendieck-filtered-finite-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EU, proof of (2), using exact filtered colimits; Tag 03DB, finite-limit formulation of exactness."
-   }
-  },
-  {
-   "text": "For $k\\in K$, precompose the $k$-projection of $\\kappa$ with $q_i\\otimes1_L=\\alpha_L\\iota_{i,L}$. By the defining projections of $\\beta$ and $\\gamma_i$ the result is $(q_i\\otimes1_{D(k)})(1_{P_i}\\otimes\\pi_k)=(1_P\\otimes\\pi_k)(q_i\\otimes1_L)$. The maps $q_i\\otimes1_L$ are colimit legs by Step 2, so colimit uniqueness [def-weil-pbc-category-colimit] identifies the $k$-projection of $\\kappa$ with $1_P\\otimes\\pi_k$. Limit uniqueness then identifies $\\kappa$ with the canonical comparison in the statement. This proves its invertibility. When $K$ is empty, Step 4 still applies: preservation of finite limits includes the terminal object, and the same cone uniqueness has no projection equations to check. Thus the empty-diagram clause is included.",
-   "uses": [
+    "def-pur-sheaf-tensor-product",
     "def-weil-pbc-category-colimit",
-    "def-galois-finite-limits-colimits"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EU, proof of (2); universal properties identifying the canonical finite-limit comparison."
+    "place": "Tag 03EU, lemma-colimits-flat, part (2), using Tag 03EP, part (2)."
    }
   },
   {
-   "text": "Finally [lem-weil-pbc-independent-sheaf-tensor-colimits] and the symmetry of [lem-pc-sheaf-modules-tensor-closed] show that $P\\otimes_R-$ also preserves all $w$-small colimits, hence finite colimits. Steps 3–5 show that it preserves finite limits. It is therefore exact (left and right exact), and symmetry gives the same property for $-\\otimes_R P$. This is precisely flatness in [def-pc-flat-sheaf-modules]. The argument used sheaf tensor products and Grothendieck exactness throughout and required neither points of the site nor sectionwise flatness.",
+   "text": "Mathlib preservesFiniteLimits_of_evaluation applied to (F followed by curriedTensor).flip gives finite-limit preservation, since its evaluations are tensorLeft (F_i). Compose this functor with the finite-limit-preserving colim_I from Step 1. Transport preservation through the natural isomorphism of Step 3. This proves PreservesFiniteLimits (tensorLeft c.pt), including terminal-object preservation, without any choice of new tensor or colimit structure.",
    "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-flat-sheaf-modules"
+    "lem-sfb-grothendieck-filtered-finite-limits",
+    "def-galois-finite-limits-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EP, part (2), and 03EU, part (2); Tag 03ER, definition-flat, item (3)."
+    "place": "Tag 03EU, lemma-colimits-flat, part (2), using Tag 03EP, part (2)."
+   }
+  },
+  {
+   "text": "Symmetry transports finite-limit preservation to tensorRight c.pt, and siteSheafTensorRightIso transports it to siteSheafTensorRight c.pt. Finite-colimit preservation follows from coefficient-sized tensor colimit preservation, shrunk to finite diagrams and the same comparison. Their conjunction is exactly IsFlatOnSite c.pt. Finally Mathlib preservation of limits makes the canonical limit.post D (tensorLeft c.pt) invertible for every finite category K, in any universe. This includes empty K because PreservesFiniteLimits includes the terminal object; no separate nonemptiness argument is used.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-galois-finite-limits-colimits",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU, lemma-colimits-flat, part (2), using Tag 03EP, part (2)."
    }
   }
  ],
  "proof_deps": [
   "def-galois-finite-limits-colimits",
   "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-category-colimit",
-  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-sheaf-of-modules-category",
   "lem-sfb-grothendieck-filtered-finite-limits",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EU (lemma-colimits-flat), part (2), filtered-colimit clause; expanded using Tags 03DB (lemma-limits-colimits), 03EO (lemma-internal-hom-adjoint-tensor), and 03EP (lemma-tensor-commute-colimits)."
+  "place": "Tag 03EU (lemma-colimits-flat), part (2), and Tag 03EP (lemma-tensor-commute-colimits), part (2). Lean implementation transfers exactness along toSheaf, identifies tensorLeft c.pt with (F followed by curriedTensor).flip followed by colim using preservesColimitIso and colimitIsoFlipCompColim, and proves finite-limit preservation by evaluation and composition. This preserves the tensor-colimit and exact-filtered-colimit argument without generators or K-injective resolutions."
  },
  "mathlib_searches": [
   {
@@ -234,9 +224,7 @@
   ]
  },
  "tool_uses": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -246,7 +234,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-bbb967d27 (reviewer sub-agent of L); spot-checked: I read the item in full and recommend PASS with no changes. The commit has one item node plus the report and no new nodes. The statement is byte-identical to the live node, which is still unsplit, so no other group has superseded it. It is not on the route-pivot dropped list, has no repair or re-split note, and cites no SGA source. Source and route: the six steps expand Stacks 03EU(2) (sites-modules.tex l.4342-4360, a filtered colimit of flat sheaves of modules is flat, 'details omitted') using 03EP(2) (l.4001-4021, tensor commutes with colimits). This is exactly the blueprint main-20261015 route in lem-sfb-qlbar-flat.proof.md: tensor commutes with colimits, and filtered colimits are exact in a Grothendieck category. Step checks: Step 1 uses only the Grothendieck clause of prop-pur-kinjective-resolutions-exist, whose small-site hypothesis holds. The Mathlib leaf lem-sfb-grothendieck-filtered-finite-limits needs V-small Hom sets, which the step justifies, and gives that colim_I preserves finite limits. Step 2: the hypotheses of lem-weil-pbc-independent-sheaf-tensor-colimits (essentially small site in w, w-small diagram) hold, the tensor-closed node's symmetry puts P_i on the left, and alpha is natural by colimit uniqueness. Step 3: tensor is additive in each variable and exact, so it preserves finite limits; gamma_i is natural in i because both composites have k-projection p_ij tensor pi_k. Step 4 composes the isomorphisms correctly. Step 5: I recomputed the k-projection of kappa composed with the colimit legs; it is (1_P tensor pi_k)(q_i tensor 1_L), so kappa is the canonical comparison. The empty diagram is covered (terminal object 0). Step 6 gives finite colimits from tensor-colimits and exactness from Steps 3-5, and symmetry matches the definition's convention. Small cases tested: Q as colim (1/n!)Z, a singleton index set, the zero diagram, and kernels. A coequalizer such as coker(2) = Z/2 is not flat, which confirms that filteredness is genuinely used. Duplicates: I checked the nodes that mention flatness and colimits; none duplicates the item (coef cotorsion foundation and pc-kflat-closure treat coproducts and countable sums only; pc-module-filtered-colimits-tensor does not state flatness). Cycle check: none of the 9 deps reaches the item. I accepted the three worker-written off-unit tool_uses (kinjective Grothendieck clause, independent-sheaf-tensor-colimits, sheaf-modules-tensor-closed); they are generic facts the unit lacks and they realize the blueprint route. Advisory only: the added stmt_dep def-galois-finite-limits-colimits is not cited in the statement text, and the citations.json and searches.jsonl named in the report are not in the commit."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FilteredColimitFlat",
   "declaration": "SheafOfModules.isFlatOnSite_of_isColimit_directed",
@@ -264,5 +263,15 @@
   "group": "Q19",
   "result": "pass",
   "note": "Clause-by-clause match to the node and Stacks 03EU(2): EssentiallySmall.{w} site with independent universes; R : Sheaf J CommRingCat.{w} and SheafOfModules.{w}, as in the recorded tensor/flatness interfaces; I : Type w nonempty directed partial order; arbitrary Cocone with IsColimit; hflat uses the recorded IsFlatOnSite; conclusion is IsFlatOnSite c.pt plus IsIso (limit.post D (tensorLeft c.pt)) for every FinCategory K in a free universe, empty K included. Probe: the MonoidalCategory instance is cochainModulesMonoidal by rfl. Statement record verbatim; node unchanged except lean; plain imports are exactly the proof-dep modules; sorry-only proof; docstrings carry source, blueprint and the 6 steps. nt_compile --json clean (11.8 s). H4: no existing statement. Advisory: ObjectProperty.flat_colimit (FreeLifting.lean:198) is a general proved lemma usable in stage 3, not a duplicate (different predicate, chosen colimit, needs MonoidalClosed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261022T144118-L-1500753",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

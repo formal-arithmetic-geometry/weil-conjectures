@@ -1,0 +1,142 @@
+{
+ "id": "lem-per-localized-ordinary-coefficient-coherence",
+ "kind": "statement",
+ "title": "Coherence of actual finite and completed coefficient maps",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite field extension with ring of integers $A$, and $\\varpi\\in A$. On small pro-etale sites use $B_W=\\varprojlim_n(A/\\mathfrak m^{n+1})_W$, $R_W=B_W[1/\\varpi]$, their actual structural maps, and the normalization predicates [def-per-localized-ordinary-pullback-data]. For all scheme morphisms $Z\\xrightarrow hY\\xrightarrow gX$, the predicate Coefficients holds: finite and completed composition and identity, the twice-projected equation, all quotient transitions and preservation of all constant scalars.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); finite coefficient composition: sites.tex Tag 03CB (lemma-composition-morphisms-sites); Bhatt–Scholze Remark 6.8.15, p. 62; explicit coefficient/localization normalization supplied by agent"
+ },
+ "stmt_deps": [
+  "def-per-localized-ordinary-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "transport the constant-sheaf composition and identity equations through\npbcLevelConstantComparison. Its naturality transports every quotient transition.\nCompose the defining projection equation twice; inverse-image compositor\nnaturality identifies the resulting finite components. Joint monicity gives\ncompleted composition and identity without exchanging inverse image and a limit.\nFinally evaluate the existing constant-scalar direct-image equation; its defining\nadjunction unit gives exactly the displayed scalar formula.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); finite coefficient composition: sites.tex Tag 03CB (lemma-composition-morphisms-sites); Bhatt–Scholze Remark 6.8.15, p. 62; explicit coefficient/localization normalization supplied by agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original normalization proof, Steps 1–7; Coherence of actual finite and completed coefficient maps. Explicit balanced-map calculations retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves of modules commutes with extension of scalars and localization compatibly with composition and identity",
+   "results": "8 hits, headed by SheafOfModules.pullbackComp, pullback_assoc, pullback_comp_id, freeFunctorCompPullbackIso. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. These ordinary pullback comparisons do not provide the normalized comparison between the actual integral and localized derived pullbacks.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "12 hits, beginning with CategoryTheory.Limits.pullbackComparison. They concern categorical pullbacks rather than the scalar-localization comparison of module-sheaf functors.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of constant sheaves is compatible with composition of morphisms of sites",
+   "results": "8 hits, including CategoryTheory.constantCommuteCompose and SheafOfModules.pullbackComp. Read the existing ProfiniteCoefficientInverseImage implementation: its proved constant comparison lemmas are usable for the coefficient proof, but none of these hits states a normalized localized edge or its derived composition square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedFiniteCoefficientMap|completedCoefficientMap",
+   "results": "Remote Mathlib grep returned 0 hits. Local rg in lean/Sheaf and lean/WeilConjectures found CompletedTowerPullback, ProfiniteCoefficientInverseImage, PbcScalarExtension and CompletedCoefficientRingedCoherence. The first three supply the coefficient proof. The last uses a different completed coefficient presentation, and does not provide the normalized localized module comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedOrdinaryPullbackNormalization",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Re-split: old proof Steps 1–2 and the ordinary identity calculation of Step 7. Substep: Coherence of actual finite and completed coefficient maps.",
+   "via": [
+    "lem-per-localized-ordinary-pullback-normalization",
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalizedOrdinaryCoefficientCoherence",
+  "file": "lean/Sheaf/Paper/LocalizedOrdinaryCoefficientCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.LocalizedOrdinary.localizedOrdinaryCoefficientCoherence",
+  "statement": "theorem localizedOrdinaryCoefficientCoherence\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y Z : Scheme.{u}} (g : Y ⟶ X) (h : Z ⟶ Y) : Coefficients l E g h",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.LocalizedOrdinaryPullbackNormalization",
+  "worker": "E8",
+  "summary": "Coherence of actual finite and completed coefficient maps; extracted as a strict substep of the original normalization proof.",
+  "blueprint": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Re-split: old proof Steps 1–2 and the ordinary identity calculation of Step 7. Substep: Coherence of actual finite and completed coefficient maps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cafe1",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261027T012824-L-2336455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cafe1",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261027T012824-L-2336455",
+  "kind": "interface",
+  "note": "independent cc review: extracted Data module vs clone item module (verbatim except blueprint tags); item theorem signature vs clone; 3 sorry statements vs their nodes; direct importer RationalScalarMixedUnitCancellation compiled against delivered modules; #print axioms on coherence + item"
+ }
+}

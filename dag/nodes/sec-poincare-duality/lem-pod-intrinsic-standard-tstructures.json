@@ -1,0 +1,150 @@
+{
+ "id": "lem-pod-intrinsic-standard-tstructures",
+ "kind": "statement",
+ "title": "Unique bounded intrinsic standard t-structures",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "Fix a finite-field datum $D$ [def-weil-finite-field-fiber], a prime $\\ell\\ne D.p$, and a scheme $Y$ of finite type over $D.k$. For every finite extension $E/\\mathbf Q_\\ell$, there is a unique t-structure $t_E$ [def-weil-t-structure] on the intrinsic raw rational category [def-weil-rationalization-karoubi] whose degree-$n$ halves are exactly sfRationalStandardClass true/false $n$ [def-weil-constructible-standard-tstructure], and every object is bounded for $t_E$. For an algebraic closure $\\Omega/\\mathbf Q_\\ell$, the actual common-stage category [def-weil-algebraically-closed-coefficients] likewise has a unique t-structure with halves sfCommonStageStandardClass true/false $n$, bounded on every object. These assertions do not include any scalar-extension or pullback truncation comparisons.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-t-structure",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "First paragraph, restriction of standard t-structures and boundedness; existing intrinsic implementation in SfConstructibleHeart.lean, lines 124-345."
+ },
+ "proof": [
+  {
+   "text": "By lem-sf-intrinsic-integral-standard-truncations the intrinsic integral full subcategory is bounded and stable under both ambient truncations. Induce the ambient t-structure on this subcategory. Its halves are precisely the vanishing conditions defining the integral standard classes. Form the isomorphism-closed images under raw rationalization. Shift compatibility propagates the bounds. Tensor induction on localized morphisms reduces orthogonality to integral orthogonality. Localize the integral truncation triangle for triangle existence. Integral bounds give rational boundedness, and equality of both class functions determines the t-structure uniquely. This is the existing proved sfRationalStandardTStructure_existsUnique, not a use of constructibleTruncations_exists.",
+   "uses": [
+    "lem-sf-intrinsic-integral-standard-truncations",
+    "def-weil-rationalization-karoubi",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite scalar extension preserves all homology vanishing conditions: exact ordinary extension preserves zero homology, and sfIntegralOrdinaryComparison identifies its derived functor with completed extension. Rational scalar extension has the same integral object action. For the common-stage halves use their prescribed existential class functions. Inclusions and their shift comparisons prove shift closure; move any morphism between opposite halves to one common coefficient field, where rational orthogonality kills it. Map the finite-stage truncation triangle through the exact inclusion. Each literal pair inherits its finite-stage bounds. Equality of both class functions again gives uniqueness. These are the steps of the existing proved sfCommonStageStandardTStructure_existsUnique.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-integral-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-intrinsic-integral-standard-truncations",
+  "def-weil-rationalization-karoubi",
+  "def-weil-constructible-standard-tstructure",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-integral-scalar-extension",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/SfConstructibleHeart.lean",
+  "place": "Existing complete proofs, lines 124-345; separate attachment for the existence clauses avoids the heart node’s statement dependency on the comparison proposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The standard t-structure on constructible derived categories is bounded and is preserved by exact finite coefficient extension",
+   "results": "8 hits: DerivedCategory.TStructure.t and generic TStructure constructors and halves; no intrinsic rational/common-stage bounded standard t-structures.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The standard cohomological classes on rational constructible complexes and their directed common-stage category form bounded t-structures",
+   "results": "8 hits: ambient DerivedCategory.TStructure.t, isLE/isGE and representative lemmas; no intrinsic rational/common-stage statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.bounded",
+   "results": "7 hits: bounded subcategory and induced ambient t-structure infrastructure, no intrinsic scalar-localized category.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[tT][sS]tructure|[tT][sS]tructure.*constructible",
+   "results": "0 hits in Mathlib; local source inspection found SfConstructibleHeart.lean:124,226, existing complete proofs of both assertions.",
+   "date": "2026-10-25",
+   "verdict": "existing project implementation"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleTruncations",
+  "date": "2026-10-25",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-constructible-truncations",
+   "place": "Proof, first paragraph: restriction of standard t-structure and boundedness; before scalar and automorphism comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.SfConstructibleHeart",
+  "file": "lean/Sheaf/Paper/SfConstructibleHeart.lean",
+  "declaration": "WeilConjectures.sfRationalStandardTStructure_existsUnique",
+  "declarations": [
+   "WeilConjectures.sfRationalStandardTStructure_existsUnique",
+   "WeilConjectures.sfCommonStageStandardTStructure_existsUnique"
+  ],
+  "statement": "theorem sfRationalStandardTStructure_existsUnique :\n    ∃! t : CategoryTheory.Triangulated.TStructure (sfRationalConstructibleCategory l E Y),\n      (∀ n : ℤ, t.le n = sfRationalStandardClass l E Y true n ∧\n        t.ge n = sfRationalStandardClass l E Y false n) ∧ ∀ K, t.bounded K",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-25",
+  "note": "Existing independent complete proofs. The heart node also owns heart identification and abelianity, and cites prop-constructible-truncations in stmt_deps; this node attaches only the independently proved existence clauses."
+ },
+ "split_report": {
+  "blueprint": "First paragraph of the current prop-constructible-truncations proof: standard restriction and boundedness, expressed through the pre-existing intrinsic interface. Scalar and automorphism compatibility are left to the parent.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-intrinsic-integral-standard-truncations",
+    "why": "Existing intrinsic standard truncation or scalar-category infrastructure, used only through its independent statement to prove the bounded standard t-structures; no Poincare duality unit step is replaced."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Existing intrinsic standard truncation or scalar-category infrastructure, used only through its independent statement to prove the bounded standard t-structures; no Poincare duality unit step is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e9ffb",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261025T011026-L-3635067",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e9ffb",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261025T011026-L-3635067",
+  "kind": "proof",
+  "note": "independent cc review: constructibleTruncations_exists proof vs prop-constructible-truncations node, the new existing:true node vs SfConstructibleHeart theorems, delivered item vs its 19 direct importers (all compile) and unit realized lists"
+ }
+}

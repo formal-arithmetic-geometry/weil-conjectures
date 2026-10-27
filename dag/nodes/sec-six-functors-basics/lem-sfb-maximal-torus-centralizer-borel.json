@@ -1,0 +1,197 @@
+{
+ "id": "lem-sfb-maximal-torus-centralizer-borel",
+ "kind": "statement",
+ "title": "A maximal-torus centralizer lies in every Borel subgroup through the torus",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms] and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$. A torus is a group scheme $T$ with $T_{\\bar k}\\simeq(\\mathbf G_m)^r$ for some integer $r\\geq0$ [def-sc-gm-ga]. A Borel subgroup of $G$ is a maximal smooth connected solvable subgroup, where solvable means that successive commutator subgroup schemes eventually become trivial. A maximal torus is a torus not strictly contained in another torus subgroup. For a subgroup $H\\subseteq G$, its centralizer functor is $C_G(H)(A)=\\{g\\in G(A):g_{A\\prime}h=hg_{A\\prime}\\text{ for every commutative }A\\text{-algebra }A\\prime\\text{ and every }h\\in H(A\\prime)\\}$. Assume that $k$ is algebraically closed, $G$ is smooth and connected, $T\\subseteq G$ is a maximal torus, and $B\\subseteq G$ is any Borel subgroup containing $T$. Then $C_G(T)\\subseteq B$ as subgroup functors: for every commutative $k$-algebra $A$ and every $g\\in C_G(T)(A)$, one has $g\\in B(A)$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.39(b), printed p.364; the proof invokes Corollaries 12.40 and 17.29. Only (b) is stated here, with the stronger base-field restriction needed by the parent proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=C_G(T)$. By [lem-sfb-torus-centralizer-smooth-connected], $C$ is a smooth connected closed subgroup scheme of $G$: over the algebraically closed field $k$ the geometric connectedness hypothesis on $G$ is its assumed connectedness. Since $T$ is commutative, $T\\subseteq C$. For every $k$-algebra $A$, every point of $C(A)$ commutes with every point of $T(A)$, so $T$ is central in $C$. Any torus of $C$ properly containing $T$ would also be a torus of $G$ properly containing $T$. Thus $T$ is a maximal torus of $C$.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.38 and Proposition 17.28; Corollary 17.39(b), pp.360,363--364."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-central-maximal-torus-nilpotent] to the smooth connected affine group $C$ and its central maximal torus $T$. It follows that $C$ is solvable.",
+   "uses": [
+    "lem-sfb-central-maximal-torus-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.23 and the proof of Corollary 17.29, pp.359--360."
+   }
+  },
+  {
+   "text": "Among smooth connected solvable closed subgroups of $G$ containing $C$, choose $B_0$ with greatest dimension. The collection is nonempty because it contains $C$; its dimensions are nonnegative integers bounded by $\\dim G$, by [lem-sfb-solvable-normal-subgroup-products]. The same cited statement says every proper closed inclusion of smooth connected group schemes strictly increases dimension. Consequently no smooth connected solvable subgroup can properly contain $B_0$. By the definition of Borel subgroup, $B_0$ is a Borel subgroup of $G$, and $T\\subseteq C\\subseteq B_0$.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 17.6 and the following paragraph, pp.353--354; proof of Corollary 17.29, p.360."
+   }
+  },
+  {
+   "text": "Both $B_0$ and the prescribed $B$ contain the maximal torus $T$. By [lem-sfb-torus-normalizer-borel-transitivity], choose $n\\in G(k)$ such that $nTn^{-1}=T$ and $nB_0n^{-1}=B$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-torus-normalizer-borel-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.11, p.355, as applied in Corollary 17.29, p.360."
+   }
+  },
+  {
+   "text": "Fix any commutative $k$-algebra $A$ and $c\\in C(A)$. For every commutative $A$-algebra $A\\prime$ and $t\\in T(A\\prime)$, the element $n_{A\\prime}tn_{A\\prime}^{-1}$ belongs to $T(A\\prime)$, so it commutes with $c_{A\\prime}$. Multiplying this identity by $n_{A\\prime}^{-1}$ on the left and by $n_{A\\prime}$ on the right shows that $n_A^{-1}cn_A$ belongs to $C(A)$. Since $C\\subseteq B_0$, this point belongs to $B_0(A)$, and hence $c\\in n_AB_0(A)n_A^{-1}=B(A)$. This proves the desired containment on every algebra, including nonreduced algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conjugation calculation in Corollary 17.29 and conclusion of Corollary 17.39(b), pp.360,364."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-central-maximal-torus-nilpotent",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-torus-normalizer-borel-transitivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.39(b), p.364, expanded using the proof of Corollary 17.29, p.360, and Theorem 17.38, p.363."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The centralizer of a maximal torus in a connected algebraic group is contained in every Borel subgroup containing the torus",
+   "results": "Search completed; 8 hits. Returned names/files: Subgroup.le_centralizer, Subgroup.le_centralizer_iff, Subgroup.centralizer_eq_top_iff_subset, Subgroup.center_le_centralizer, Subgroup.closure_le_centralizer_centralizer, Subgroup.le_centralizer_iff_isMulCommutative, commutator_centralizer_commutator_le_center, Subgroup.center_eq_infi'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel subgroups containing a maximal torus also contain its centralizer in a connected linear algebraic group",
+   "results": "Search completed; 8 hits. Returned names/files: Subgroup.centralizer, Subgroup.le_centralizer, Set.centralizer_subset, Subsemigroup.centralizer_le, AddSubgroup.centralizer, Subgroup.centralizer_le, Subgroup.centralizer_eq_top_iff_subset, AddSubgroup.centralizer_le. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"centralizer\"",
+   "results": "Search completed; 0 hits. Returned names/files: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|Borel subgroup",
+   "results": "Search completed; 0 hits. Returned names/files: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topology or other Chevalley theorems, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centralizer of a maximal torus is contained in every Borel subgroup through that torus in a smooth connected affine algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.le_centralizer\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [h : IsMulCommutative ↥H], H ≤ Subgroup.centralizer ↑H\", \"doc\": \"If $ H $ is an abelian subgroup of a group $ G $, then $ H $ is contained in its centralizer in $ G $, i.e., $ H \\\\leq C_G(H) $.\"}\n  {\"name\": \"Subgroup.le_centralizer_iff\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H K : Subgroup G}, H ≤ Subgroup.centralizer ↑K ↔ K ≤ Subgroup.centralizer ↑H\", \"doc\": \"For subgroups $ H $ and $ K $ of a group $ G $, $ H $ is contained in the centralizer of $ K $ if and only if $ K $ is contained in the centralizer of $ H $.\"}\n  {\"name\": \"Subgroup.center_le_centralizer\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (s : Set G), Subgroup.center G ≤ Subgroup.centralizer s\", \"doc\": \"For any subset $ S $ of a group $ G $, the center of $ G $ is a subgroup of the centralizer of $ S $ in $ G $. This follows because every element of the center commutes with all elements of $ G $, and\"}\n  {\"name\": \"Subgroup.centralizer_eq_top_iff_subset\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {s : Set G}, Subgroup.centralizer s = ⊤ ↔ s ⊆ ↑(Subgroup.center G)\", \"doc\": \"For any subset $ S $ of a group $ G $, the centralizer of $ S $ is equal to the entire group $ G $ if and only if $ S $ is a subset of the center of $ G $.\"}\n  {\"name\": \"commutator_centralizer_commutator_le_center\", \"module\": \"Mathlib/GroupTheory/Commutator/Basic\", \"type\": \"∀ (G : Type u_1) [inst : Group G],\\n  ⁅Subgroup.centralizer ↑(commutator G), Subgroup.centralizer ↑(commutator G)⁆ ≤ Subgroup.center G\", \"doc\": \"The centralizer of the commutator subgroup $[G, G]$ of a group $G$ is contained in the center of $G$, i.e., every element that commutes with all commutators of $G$ must commute with all elements of $G\"}\n  {\"name\": \"Subgroup.closure_le_centralizer_centralizer\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (s : Set G), Subgroup.closure s ≤ Subgroup.centralizer ↑(Subgroup.centralizer s)\", \"doc\": \"For any subset $ S $ of a group $ G $, the subgroup generated by $ S $ is contained in the centralizer of the centralizer of $ S $. In symbols, $ \\\\langle S \\\\rangle \\\\leq C_G(C_G(S)) $, where $ \\\\langle \"}\n  {\"name\": \"Subgroup.le_centralizer_iff_isMulCommutative\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {K : Subgroup G}, K ≤ Subgroup.centralizer ↑K ↔ IsMulCommutative ↥K\", \"doc\": \"For a subgroup $ K $ of a group $ G $, $ K \\\\subseteq C_G(K) $ if and only if $ K $ is an abelian group, where $ C_G(K) $ denotes the centralizer of $ K $ in $ G $.\"}\n  {\"name\": \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra], H.toLieSubmodule.normalizer = H.toLieSubmodule\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is equal to $ \\\\mathfrak{h} $ its\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Borel containing a maximal torus contains its scheme theoretic centralizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Set.centralizer_subset\", \"module\": \"Mathlib.Algebra.Group.Center\", \"type\": \"(h : S ⊆ T) : centralizer T ⊆ centralizer S\", \"doc\": \"If $ S \\\\subseteq T $, then the centralizer of $ T $ is a subset of the centralizer of $ S $.\"}\n  {\"name\": \"Subgroup.centralizer_le\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"{s t : Set G} (h : s ⊆ t) : centralizer t ≤ centralizer s\", \"doc\": \"For any subsets $ s $ and $ t $ of a group $ G $, if $ s \\\\subseteq t $, then the centralizer of $ t $ is a subgroup of the centralizer of $ s $.\"}\n  {\"name\": \"Subsemigroup.centralizer_le\", \"module\": \"Mathlib.GroupTheory.Subsemigroup.Centralizer\", \"type\": \"(h : S ⊆ T) : centralizer T ≤ centralizer S\", \"doc\": \"If $ S $ is a subset of $ T $, then the centralizer of $ T $ is a subset of the centralizer of $ S $. In symbols, $ S \\\\subseteq T $ implies $ \\\\mathrm{centralizer}(T) \\\\subseteq \\\\mathrm{centralizer}(S) \"}\n  {\"name\": \"AddSubsemigroup.centralizer_le\", \"module\": \"Mathlib.GroupTheory.Subsemigroup.Centralizer\", \"type\": \"∀ {M : Type u_1} {S T : Set M} [inst : AddSemigroup M],\\n  S ⊆ T → AddSubsemigroup.centralizer T ≤ AddSubsemigroup.centralizer S\", \"doc\": \"For any additive semigroup $ M $ and subsets $ S, T \\\\subseteq M $, if $ S \\\\subseteq T $, then the additive centralizer of $ T $ is contained in the additive centralizer of $ S $. Symbolically, $ S \\\\su\"}\n  {\"name\": \"Subgroup.centralizer\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \"(s : Set G) : Subgroup G\", \"doc\": \"The centralizer of a subset $ S $ in a group $ G $ is the subgroup consisting of all elements of $ G $ that commute with every element of $ S $. This set is closed under multiplication and taking inve\"}\n  {\"name\": \"NonUnitalSubalgebra.centralizer_le\", \"module\": \"Mathlib.Algebra.Algebra.NonUnitalSubalgebra\", \"type\": \"(s t : Set A) (h : s ⊆ t) : centralizer R t ≤ centralizer R s\", \"doc\": \"For any subsets $s$ and $t$ of $A$, if $s \\\\subseteq t$, then the centralizer of $t$ is contained in the centralizer of $s$. The centralizer of a subset refers to the non-unital subalgebra over $R$ con\"}\n  {\"name\": \"Subalgebra.centralizer_le\", \"module\": \"Mathlib.Algebra.Algebra.Subalgebra.Basic\", \"type\": \"(s t : Set A) (h : s ⊆ t) : centralizer R t ≤ centralizer R s\", \"doc\": \"For any subsets $ s $ and $ t $ of an $ R $-algebra $ A $, if $ s \\\\subseteq t $, then the centralizer of $ t $ is contained in the centralizer of $ s $, i.e., $ \\\\mathrm{centralizer}_R(t) \\\\subseteq \\\\ma\"}\n  {\"name\": \"Subring.centralizer_le\", \"module\": \"Mathlib.Algebra.Ring.Subring.Basic\", \"type\": \"(s t : Set R) (h : s ⊆ t) : centralizer t ≤ centralizer s\", \"doc\": \"For any ring $ R $ and subsets $ s, t \\\\subseteq R $, if $ s \\\\subseteq t $, then the centralizer of $ t $ in $ R $ is contained in the centralizer of $ s $ in $ R $. In symbols, $ \\\\text{centralizer}(t)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"centralizer\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|maximalTorus",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-self-centralizer",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 17.39(b), printed p.364; the proof invokes Corollaries 12.40 and 17.29. Only (b) is stated here, with the stronger base-field restriction needed by the parent proof.",
+   "via": [
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-maximal-torus-centralizer-borel",
+  "worker": "stage1",
+  "summary": "Expanded Corollary 17.39(b) through the proof of Corollary 17.29. Reused smooth connected torus centralizers and strict dimension growth; constructed an auxiliary Borel and wrote the conjugation calculation on every algebra. Two searched statement-only prerequisites: central-maximal-torus nilpotence and normalizer conjugacy of Borels. No statement change.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli/PGL route at the maximal-torus self-centralizer prerequisite: Milne 17.39(b). The current latest blueprint direct-image proof was read; this supporting Milne argument remains below the fixed unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-ffb9fae32",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-ffb9fae32 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the cited statements in full against Milne iAG2017: Def 17.6, Thm 17.9(b), 17.10, Cor 17.11 (pp.353-355), Prop 17.23, 17.28, Cor 17.29 (pp.359-360) and Thm 17.38, Cor 17.39(b) (pp.363-364). The statement and stmt_deps are unchanged and keep the scheme-theoretic all-algebras inclusion. Step 1: torus-centralizer-smooth-connected applies because connected means geometrically connected over an algebraically closed k, and T is central and maximal in C. Step 2: central-maximal-torus-nilpotent gives that C is solvable. Step 3: the dimension clauses of solvable-normal-subgroup-products make a maximal-dimension solvable group containing C a Borel; marking it elementary is correct, and the node's different solvability definition is not used. Step 4: normalizer transitivity applied with B1=B0, B2=B. Step 5: an explicit conjugation identity on A'-points, valid for nonreduced A. New node central-maximal-torus-nilpotent is true by Milne 17.23 (d)⇒(a)⇒(b)⇒(c) and lower central series; tested on G_a×G_m, unipotent groups, and T_2, where non-centrality is needed. New node torus-normalizer-borel-transitivity is the last assertion of Milne 17.11 (n=bg); tested on GL_2 with the swap matrix. Both are statement-only with all four search kinds recorded. Neither restates a clause of the item, and a DAG-wide search (nilpotent, Borel, conjugate, Milne 17.x) found no duplicates. There is no cycle and no tool use; every cited node is in unit sk-thm-sf-ctf-stability. Batch-5 flag: the path reaches lem-trf-fppf-covering-base-change, a Mathlib leaf for Stacks 021O(3) (base change of fppf coverings). That is a generic site fact outside the trace-formula and Poincaré-duality assumptions, so it is accepted. Advisory: the unchanged item statement uses 'algebraically closed' and its algebraic closure without citing def-weil-algebraic-closure (same in the sibling torus-centralizer node). No fixes."
+ }
+}

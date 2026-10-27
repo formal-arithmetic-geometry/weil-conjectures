@@ -1,0 +1,141 @@
+{
+ "id": "def-sfb-additive-vector-scheme",
+ "kind": "definition",
+ "title": "The additive vector scheme in a finite basis",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $d\\geq0$, and let $V$ be a $k$-vector space with a chosen basis $b=(b_1,\\ldots,b_d)$ (so it is finite-dimensional [def-weil-finite-dimensional-subspace]). The additive vector scheme in these coordinates is $V_a=\\operatorname{Spec}k[t_1,\\ldots,t_d]$ [def-weil-affine-spectrum, def-weil-pbc-mv-polynomial-ring]. Its group-scheme structure [def-sc-group-scheme] is coordinatewise addition, the finite-dimensional version of $\\mathbf G_a$ [def-sc-gm-ga]: the comultiplication sends $t_i$ to $t_i\\otimes1+1\\otimes t_i$, the counit sends $t_i$ to $0$, and the antipode sends $t_i$ to $-t_i$. The coordinate tensor product is that of commutative algebras [lem-weil-pbc-algebra-tensor-pushout-universal-property]. These three maps determine the group structure uniquely. For every commutative $k$-algebra $R$, the vector $X\\in R\\otimes_k V$ [def-weil-pbc-module-tensor-product] gives the point obtained by evaluating $t_i$ at the coefficient of $1\\otimes b_i$ in $X$. This is a bijection $R\\otimes_k V\\simeq V_a(R)$, carries sums to products in the additive group scheme, and commutes with every coefficient-algebra homomorphism $R\\to S$. The empty basis $d=0$ and the zero coefficient algebra are included.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.6, printed pp.40--41, the represented additive vector functor and its polynomial coordinates after a basis; 14.31, printed p.288, the additive Lie vector scheme."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The additive vector group scheme represents scalar extensions of a finite dimensional vector space",
+   "results": "8 hits; instAddCommGroupRestrictScalars, FDRep.instAddCommGroupCarrierVFGModuleCat, Rep.instAddCommGroupCarrierVModuleCat, ModuleCat.mkOfSMul', AddGroupExtension.Equiv.instAddEquivClass, AddSemigroupAction.toVAdd, ModuleCat.instAddCommGroupCarrierMkOfSMul', FiniteAddGrp.instAddGroupCarrierToAddGrp",
+   "date": "2026-10-24",
+   "verdict": "No additive vector group with specified coordinate group law and tensor-product point identification. AffineSpace and SpecIso already give the underlying affine scheme; the construction reuses Spec, MvPolynomial and the existing affine-algebra maps, not a second polynomial or spectrum definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The additive group scheme of a vector space is Spec of a multivariate polynomial ring and represents the tensor product with every coefficient algebra",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.isoOfIsAffine",
+   "date": "2026-10-24",
+   "verdict": "No additive vector group with specified coordinate group law and tensor-product point identification. AffineSpace and SpecIso already give the underlying affine scheme; the construction reuses Spec, MvPolynomial and the existing affine-algebra maps, not a second polynomial or spectrum definition."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorScheme|vectorGroup|MvPolynomial.*HopfAlgebra",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No additive vector group with specified coordinate group law and tensor-product point identification. AffineSpace and SpecIso already give the underlying affine scheme; the construction reuses Spec, MvPolynomial and the existing affine-algebra maps, not a second polynomial or spectrum definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n vectorScheme|vectorGroup|MvPolynomial.*HopfAlgebra lean/WeilConjectures lean/Sheaf; rg -l additive vector scheme|additive vector group|group scheme.*vector space|vector space.*group scheme dag/nodes --glob def-*.json; python3 tools/blueprint_refs.py search additive vector",
+   "results": "Project: charZero_commutative_unipotent_vectorGroup is a classification theorem, not the additive vector scheme. DAG definition hits: def-wf-lie-algebra-derivation, def-sfb-rational-representation-gzero, def-sfb-equivariant-coherent-groups, def-sfb-affine-group-distribution-calculus, def-sfb-rational-highest-weight-data; none defines this vector scheme. blueprint_refs: 0 matches for additive vector and vector scheme.",
+   "date": "2026-10-24",
+   "verdict": "No existing node or project declaration gives the additive vector scheme with this interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-exponential-construction",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Milne 14.31: the additive vector scheme of the identity tangent space, in the universal polynomial-point construction (item proof step 5).",
+   "via": [
+    "lem-sfb-unipotent-exponential-construction",
+    "lem-sfb-char-zero-commutative-unipotent-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteVectorGroup",
+  "declaration": "AlgebraicGeometry.FiniteVectorGroup.scheme",
+  "declarations": [
+   "AlgebraicGeometry.FiniteVectorGroup.scheme",
+   "AlgebraicGeometry.FiniteVectorGroup.comul",
+   "AlgebraicGeometry.FiniteVectorGroup.counit",
+   "AlgebraicGeometry.FiniteVectorGroup.antipode",
+   "AlgebraicGeometry.FiniteVectorGroup.group_existsUnique",
+   "AlgebraicGeometry.FiniteVectorGroup.group",
+   "AlgebraicGeometry.FiniteVectorGroup.point",
+   "AlgebraicGeometry.FiniteVectorGroup.point_represents"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteVectorGroup.lean",
+  "statement": "def scheme : Over (Spec (.of k))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78b4d5d98",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78b4d5d98",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause match with Milne 14.31: hypotheses (char 0, affine, finite type, closed subgroup embedding into GL_n with unitriangular points, n≥1); tangent_description (finite-dimensional, R⊗g ≅ strictly upper triangular matrices with I+εM ∈ G(R[ε]), all R incl. 0); construction ∃! E characterized by the finite factorial sum; coefficients_natural, embedding_independent, hom_natural (baseChange of GrpObj.differential), commuting_add; no invertibility. Matrix convention checked against upstream differential_eq_map_snd/dualUnit/homMulEquiv. New def-sfb-additive-vector-scheme: real data (Spec MvPolynomial, coordinate comul/counit/antipode, ∃!-pinned group like landed additiveGroup, point by baseChange coefficients); no duplicate found. Item JSON differs from live only in lean and allowed stmt_deps additions. Mechanical finding: lem-ag-lie-identity-tangent-equiv module holds only its constructed equivalence lieIdentityTangentEquiv; statement uses GrpObj.Lie from def-wf-lie-algebra-derivation and relies on that constructed equivalence → PASS on that point (Q38 precedent). Universes, verbatim statement, docstrings, sorry-only proofs OK; edge cases n=1, d=0, R=0, G_a⊂U_2, noncommuting E12/E23 checked. No files changed, no compile run."
+ }
+}

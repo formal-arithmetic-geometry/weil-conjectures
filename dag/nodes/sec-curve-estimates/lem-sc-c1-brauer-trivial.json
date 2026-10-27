@@ -58,7 +58,86 @@
   "def-sc-cr-field"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Algebra.IsCentral.exists_algEquiv_matrix_of_isSepClosed",
+    "Algebra.IsCentral.exists_unit_map_eq_conj",
+    "Algebra.IsCentral.exists_isHomogeneous_eval_ne_zero",
+    "IsQuasiAlgClosed.finrank_eq_one_of_isCentral",
+    "IsQuasiAlgClosed.subsingleton_brauerGroup"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Algebra.IsCentral.exists_algEquiv_matrix_of_isSepClosed",
+     "module": "WeilConjectures.Algebra.Central.ReducedNorm",
+     "lines": [
+      74,
+      91
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Algebra.IsCentral.exists_unit_map_eq_conj",
+     "module": "WeilConjectures.Algebra.Central.ReducedNorm",
+     "lines": [
+      93,
+      118
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Algebra.IsCentral.exists_isHomogeneous_eval_ne_zero",
+     "module": "WeilConjectures.Algebra.Central.ReducedNorm",
+     "lines": [
+      121,
+      174
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "IsQuasiAlgClosed.finrank_eq_one_of_isCentral",
+     "module": "WeilConjectures.FieldTheory.Cr",
+     "lines": [
+      233,
+      245
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "IsQuasiAlgClosed.subsingleton_brauerGroup",
+     "module": "WeilConjectures.FieldTheory.Cr",
+     "lines": [
+      247,
+      273
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "IsQuasiAlgClosed.subsingleton_cohomologicalBrauerGroup",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup",
+     "lines": [
+      41,
+      85
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-tsen",
  "lean": {
@@ -75,5 +154,36 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $K$ be a $C_1$ field ([def-sc-cr-field]). Then every\nfinite-dimensional central division algebra over $K$ is $K$ itself, so\nthe Brauer group of $K$ (central simple $K$-algebras up to Brauer\nequivalence) vanishes, and the cohomological Brauer group vanishes as\nwell:\n\n$$\n\\operatorname{Br}(K)=H^2(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)=0.\n$$",
+  "proof": [
+   {
+    "text": "We use the elementary structure theory of central simple algebras:\na finite central division algebra $D/K$ has dimension $d^2$,\nand over a separable closure $K_s$ it becomes $M_d(K_s)$.\nThe algebraic inputs are the splitting and Wedderburn theorems\n([Stacks Project, Tag 03R2](https://stacks.math.columbia.edu/tag/03R2))\nand the fact that automorphisms of a matrix algebra are inner\n([Stacks Project, Tag 074P](https://stacks.math.columbia.edu/tag/074P)).\nChoose a $K$-basis $b_1,\\ldots,b_{d^2}$ and a splitting\n$\\phi:D\\otimes_KK_s\\simeq M_d(K_s)$. Form the polynomial\n\n$$\nP(T_1,\\ldots,T_{d^2})=\n\\det\\left(\\sum_i T_i\\phi(b_i)\\right).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "It is homogeneous of degree $d$. Changing the splitting conjugates\nthe matrix, leaving its determinant unchanged. For every\n$\\sigma\\in\\operatorname{Gal}(K_s/K)$, applying $\\sigma$ to the\nsplitting gives another splitting, so every coefficient of $P$\nis fixed by $\\sigma$. Hence $P\\in K[T_1,\\ldots,T_{d^2}]$.\nThis defines the reduced norm; it is distinct from the determinant\nof left multiplication on the $d^2$-dimensional space $D$.\nFor any nonzero $x\\in D$, its inverse in $D$ remains an inverse\nafter applying $\\phi$, so $P(x)\\ne0$. If $d>1$, then\n$d^2>d$, and [def-sc-cr-field] supplies a nonzero zero of\n$P$, a contradiction. Therefore every central division algebra\nhas $d=1$ and equals $K$. Wedderburn's theorem now shows that\nevery central simple algebra is a matrix algebra over $K$, so\nthe Brauer group of central simple algebras is zero.",
+    "uses": [
+     "def-sc-cr-field"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the cohomological Brauer group, embed $\\mathbf G_m$ into an\ninjective sheaf $I$ on $\\operatorname{Spec}K_{\\Et}$ with cokernel $Q$.\nEvery quasi-compact etale $K$-scheme is a finite disjoint union of\nspectra of finite separable extensions of $K$, so by Hilbert 90\n([cor-sc-hilbert-90-field], applied to each of these fields) the\nsequence $0\\to\\mathbf G_m\\to I\\to Q\\to0$ stays exact on sections over\nsuch schemes, and the Čech complexes of $\\mathbf G_m$, $I$, $Q$ for a\ncovering by such schemes form a short exact sequence. Since\n$H^2(\\mathbf G_m)=H^1(Q)$ and $I$ has trivial Čech cohomology, a class\nin $H^2(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)$ vanishes as soon as the\nsecond Čech cohomology of $\\mathbf G_m$ vanishes on a cofinal family of\ncoverings. Every etale covering of $\\operatorname{Spec}K$ is refined by\n$\\operatorname{Spec}M\\to\\operatorname{Spec}K$ for a finite Galois\nextension $M/K$, and the Čech complex of $\\mathbf G_m$ for this covering\nis the complex of homogeneous cochains of $G=\\operatorname{Gal}(M/K)$\nwith values in $M^\\times$. A $2$-cocycle $f$ of $G$ with values in\n$M^\\times$ defines the crossed product algebra\n$\\bigoplus_{\\sigma\\in G}Mu_\\sigma$, with $u_\\sigma a=\\sigma(a)u_\\sigma$\nand $u_\\sigma u_\\tau=f(\\sigma,\\tau)u_{\\sigma\\tau}$, a central simple\n$K$-algebra of dimension $[M:K]^2$; it is a matrix algebra over $K$ by\nthe first part, and a splitting\n$\\bigoplus_\\sigma Mu_\\sigma\\cong\\operatorname{End}_K(M)$ restricting to\nthe identity on $M$ exhibits $f$ as a coboundary. Hence\n$H^2(G,M^\\times)=0$ for every such $M$, and\n$H^2(\\operatorname{Spec}K_{\\Et},\\mathbf G_m)=0$.",
+    "uses": [
+     "cor-sc-hilbert-90-field"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

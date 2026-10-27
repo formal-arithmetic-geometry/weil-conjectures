@@ -1,0 +1,200 @@
+{
+ "id": "lem-trf-nodal-candidate-geometric-criterion",
+ "kind": "statement",
+ "title": "Pointwise geometric recognition of the syntomic and unramified singular candidate",
+ "statement": "Let $p:Y\\to T$ be a flat morphism [def-weil-flat-morphism] of schemes [def-pc-scheme], locally of finite presentation [def-sbc-locally-finite-presentation], whose nonempty geometric fibres over algebraic closures of residue fields [def-weil-geometric-fibre] are pure of dimension one [def-weil-pure-dimension]. Write $i:Z\\hookrightarrow Y$ for the first-Fitting singular subscheme [def-trf-first-fitting-singular-subscheme], $V_p\\subseteq Y$ for the fibrewise complete-intersection locus [lem-trf-syntomic-locus-base-change], and $W\\subseteq Z$ for the unramified locus of $i\\circ p$ [lem-trf-unramified-locus-base-change]. For every algebraically closed field $\\Omega$, every $g:\\operatorname{Spec}\\Omega\\to T$, and every point $x\\in C=Y\\times_T\\operatorname{Spec}\\Omega$, its image in Y lies outside $i(Z\\setminus(i^{-1}V_p\\cap W))$ if and only if x is smooth on C over $\\Omega$ [def-sbc-smooth-morphisms] or x is closed [def-weil-closed-points] and its completed local ring [def-weil-pbc-adic-completion] is isomorphic as a ring to $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series]. This is a pointwise assertion, with no assertion of existence, openness, maximality, or a universal open-subscheme property.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0DSC (lemma-locus-where-nodal), identification of the constructed locus on geometric fibres, using Tags 0C59 and 0C4D; Divisors Tags 0C3I and 0C3K.",
+  "url": "https://stacks.math.columbia.edu/tag/0DSC"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-first-fitting-singular-subscheme",
+  "lem-trf-syntomic-locus-base-change",
+  "lem-trf-unramified-locus-base-change",
+  "def-weil-closed-points"
+ ],
+ "proof": [
+  {
+   "text": "The pure-dimension hypothesis also holds over every algebraically closed field mapping to $T$, not only the chosen algebraic closure of a residue field. For such $\\Omega$ over $t$, [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] embeds $\\overline{\\kappa(t)}$ into $\\Omega$ over $\\kappa(t)$. Associating fibre products identifies $Y_\\Omega$ with $(Y_{\\overline{\\kappa(t)}})_\\Omega$. The first fibre is locally of finite presentation, hence locally of finite type, by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply [lem-trf-relative-dimension-base-change] to its structure morphism to the field: its sole nonempty fibre is pure of dimension $1$, so the base-changed scheme is pure of dimension $1$ too. Empty fibres stay empty. Thus every geometric fibre of every base change of $p$ has the required dimension, since it is the fibre of $p$ at the composite geometric point.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0DSC, relative-dimension-one reduction; fibre products associate by their universal property."
+   }
+  },
+  {
+   "text": "Let $Z=\\operatorname{Sing}(p)\\hookrightarrow Y$ as defined in [def-trf-first-fitting-singular-subscheme]. Its formation commutes with arbitrary base change, without a nodality assumption: on affine charts [lem-weil-pbc-fibre-product-affine-spectra] gives $B'=A'\\otimes_AB$, and [lem-weil-pbc-kahler-differentials-base-change] gives $\\Omega_{B'/A'}\\cong B'\\otimes_B\\Omega_{B/A}$. Apply [lem-trf-fitting-ideal-independence-base-change](2) to the finite $B$-module $\\Omega_{B/A}$ with $k=1$. It identifies its extended Fitting ideal with $\\operatorname{Fit}_1(\\Omega_{B'/A'})$. Quotienting by this extended ideal is exactly the base change of the defining closed subscheme; the identifications agree on localizations and glue. Hence $\\operatorname{Sing}(p')=Z\\times_TT'$ canonically for every base change.",
+   "uses": [
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0DSC, use of Divisors Tag 0C3I (lemma-base-change-and-fitting-ideal-omega)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-dth-fitting-smooth-locus] with $d=1$ to $p$. Its hypotheses are the given flatness and local finite presentation and the given pure geometric-fibre dimension. It gives the open smooth locus $M=Y\\setminus|Z|$. Apply it also to each geometric fibre morphism $Y_\\Omega\\to\\operatorname{Spec}\\Omega$: flatness and local finite presentation follow from [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3), and all its geometric fibres have dimension $1$ by the pure-dimension reduction. Together with the preceding base-change identification this says $M_\\Omega$ is exactly the smooth locus of $Y_\\Omega$. In particular every point outside $Z_\\Omega$ is smooth, including nonclosed points.",
+   "uses": [
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0DSC, singular subscheme in relative dimension one; Divisors Tag 0C3K."
+   }
+  },
+  {
+   "text": "Fix an arbitrary algebraically closed coefficient field $\\Omega$ mapping to the base and a point $x$ of $C=Y_\\Omega$. The preceding base-change construction identifies $Z_\\Omega$ with $\\operatorname{Sing}(C/\\Omega)$. By [lem-trf-syntomic-locus-base-change] and [lem-trf-lci-pointwise-criterion], every point of $V_\\Omega$ has an affine open neighbourhood in $C$ which is a local complete intersection over $\\Omega$: all fibre local rings there are complete intersections, and the pointwise criterion applies to that open. If $x\\in V_\\Omega\\cap W_\\Omega$, [lem-trf-unramified-locus-base-change] gives $\\mathcal O_{Z_\\Omega,x}=\\kappa(x)$ with $\\kappa(x)/\\Omega$ finite separable. The closed immersion preserves this residue field, and [lem-trf-finite-residue-point-closed-in-fibre] applied to $C\\to\\operatorname{Spec}\\Omega$ makes $x$ closed in $C$. Now [lem-trf-nodal-point-local-criterion] applies to this pure one-dimensional locally finite-type scheme: its three right-hand conditions have just been verified, so $x$ is an ordinary node. Points of $M_\\Omega$ are smooth by the Fitting smooth-locus comparison. Here V is the fibrewise complete-intersection locus and W is the unramified locus on the singular subscheme. Use $\\Omega$ as its own algebraic closure in the nodal-point criterion, and identify the identity pullback and its stalks with C.",
+   "uses": [
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-unramified-locus-base-change",
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "lem-trf-nodal-point-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0DSC, fibrewise nodality via Tag 0C4D (pointwise form of the 0C4E criterion)."
+   }
+  },
+  {
+   "text": "Conversely, let $x$ be an ordinary node of $C$. Its closedness is part of the definition in the item. Apply [lem-trf-nodal-point-local-criterion]: $x$ has an affine local-complete-intersection neighbourhood, $\\mathcal O_{Z_\\Omega,x}=\\kappa(x)$, and $\\kappa(x)/\\Omega$ is finite separable. The local-ring implication of [lem-trf-lci-pointwise-criterion] puts $x$ in the fibrewise complete-intersection locus, hence in $V_\\Omega$ by [lem-trf-syntomic-locus-base-change]. The pointwise fibre-local-ring characterization in [lem-trf-unramified-locus-base-change] puts $x$ in $W_\\Omega$. Every smooth point belongs to $M_\\Omega$ by the Fitting smooth-locus comparison. A closed immersion is injective on points. Formation of its image commutes with base change: a geometric point over an image point lifts to the closed subscheme by the pullback universal property. Thus the inverse image of the complement of the image of the bad singular points is exactly the smooth points together with the singular points in V and W. The two implications prove the displayed pointwise equivalence. Empty fibres have no points to test.",
+   "uses": [
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0DSC, identification of the maximal nodal open on geometric fibres; Curves Tag 0C4D."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-first-fitting-singular-subscheme",
+  "lem-trf-dth-fitting-smooth-locus",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-nodal-point-local-criterion",
+  "lem-trf-relative-dimension-base-change",
+  "lem-trf-syntomic-locus-base-change",
+  "lem-trf-unramified-locus-base-change",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0DSC (lemma-locus-where-nodal), using its syntomic/unramified-locus route and the pointwise Tag 0C4D criterion to make the fibre assertion explicit. Supporting tags: Morphisms 02V3 and 0475/02GF; Divisors 0C3I and 0C3K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a geometric fibre of a flat family of pure one dimensional curves, a singular point is an ordinary node if and only if it is in the complete intersection locus and the singular subscheme is unramified there",
+   "results": "{\"t\": \"2026-10-23T11:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"On a geometric fibre of a flat family of pure one dimensional curves, a singular point is an ordinary node if and only if it is in the complete intersection locus and the singular subscheme is unramified there\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsUnramifiedAt\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.etaleLocus\", \"Algebra.smoothLocus\"], \"digest\": \"1a8eb5739d254b46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified and geometric-fibre APIs, without the nodal completion and first-Fitting criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.smoothLocus, IsOpen",
+   "results": "{\"t\": \"2026-10-23T11:20:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.smoothLocus, IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified and geometric-fibre APIs, without the nodal completion and first-Fitting criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "firstFitting|nodal|OrdinaryNode",
+   "results": "{\"t\": \"2026-10-23T11:20:37Z\", \"tool\": \"grep\", \"query\": \"firstFitting|nodal|OrdinaryNode\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified and geometric-fibre APIs, without the nodal completion and first-Fitting criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A singular point on a geometric fibre of a flat family of pure dimension one is a node precisely where the family is syntomic and its first Fitting singular subscheme is unramified",
+   "results": "{\"t\": \"2026-10-23T11:28:47Z\", \"tool\": \"leansearch\", \"query\": \"A singular point on a geometric fibre of a flat family of pure dimension one is a node precisely where the family is syntomic and its first Fitting singular subscheme is unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.FormallyUnramified\"], \"digest\": \"772724a7feea4b1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/unramified and geometric-fibre APIs, without the nodal completion and first-Fitting criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.NodalOpenLocus",
+  "date": "2026-10-23",
+  "group": "Q6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical stable-modification input to lem-trf-local-term-locality, via its stability-locus auxiliary: Temkin Lemma 5.1(i) and the first paragraph of (ii), replacing the cited local nodal description by Stacks 0DSC. This is the source-local openness input, before taking an image on the base. Pointwise Fitting/LCI/unramified recognition from the geometric-fibre portion of Stacks 0DSC; the global open construction and maximality remain in the parent.",
+   "via": [
+    "lem-trf-nodal-open-locus",
+    "lem-trf-stable-modification-constructibility",
+    "lem-trf-stable-modification-stability-locus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.NodalCandidateGeometricCriterion",
+  "file": "lean/Sheaf/TraceFormula/NodalCandidateGeometricCriterion.lean",
+  "declaration": "AlgebraicGeometry.nodalCandidate_geometric_criterion",
+  "statement": "theorem nodalCandidate_geometric_criterion\n    (Y T : Scheme.{u}) (p : Y ⟶ T) [Flat p]\n    [LocallyOfFinitePresentation p]\n    (hgeom : ∀ (t : T) (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω]\n      [IsAlgClosure (T.residueField t) Ω],\n      Nonempty (pullback (C := Scheme.{u}) p\n        (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫\n          T.fromSpecResidueField t)) →\n      (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫\n        T.fromSpecResidueField t)).IsPureDimension 1)\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ T)\n    (x : pullback (C := Scheme.{u}) p g) :\n    ((pullback.fst p g x) ∉\n      (Scheme.firstFittingSingularSubscheme p) ''\n        (((Scheme.firstFittingSingularSubscheme p) ⁻¹' p.fiberCompleteIntersectionLocus ∩\n          unramifiedLocus (Scheme.firstFittingSingularSubscheme p ≫ p))ᶜ)) ↔\n      (x ∈ (pullback.snd p g).smoothLocus ∨\n        (x ∈ closedPoints (pullback (C := Scheme.{u}) p g) ∧ Nonempty\n          (AdicCompletion\n            (IsLocalRing.maximalIdeal ((pullback p g).presheaf.stalk x))\n            ((pullback p g).presheaf.stalk x) ≃+*\n            (MvPowerSeries (Fin 2) Ω ⧸\n              Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) *\n                (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))))",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261023T131734-L-2145129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261023T131734-L-2145129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

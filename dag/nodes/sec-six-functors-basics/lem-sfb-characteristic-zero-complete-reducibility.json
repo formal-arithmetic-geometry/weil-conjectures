@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-characteristic-zero-complete-reducibility",
+ "kind": "statement",
+ "title": "Complete reducibility for semisimple algebraic groups in characteristic zero",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a semisimple $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup; solvable means that successive commutator subgroup schemes become trivial. A rational $G$-module is an $F$-vector space $V$ with a coaction $V\\to V\\otimes_F F[G]$ satisfying coassociativity and the counit identity. A submodule is a linear subspace whose coaction takes values in its tensor product with $F[G]$. Simple means nonzero with no proper nonzero submodule. Equivariance means a coaction identity, equivalently equivariance after every commutative $F$-algebra extension. Assume $\\operatorname{char}F=0$. Every finite-dimensional rational $G$-module is a finite direct sum of simple rational $G$-submodules (the empty sum is allowed for $V=0$).",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 22c, Proposition 22.41, printed p.477; characteristic zero is the standing hypothesis of Section 22c on p.475."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-hopf-action-module-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-semisimple-characters-trivial], every character of $G$ is trivial. Apply [lem-sfb-simple-hyperplane-splitting-criterion]: it remains to prove that, for every finite-dimensional rational $G$-module $U$ and every simple submodule $W$ with $\\dim_F(U/W)=1$, $W$ has a rational complement. This criterion requires an affine finite-type group and the same coaction notion of rational module, exactly as here.",
+   "uses": [
+    "lem-sfb-semisimple-characters-trivial",
+    "lem-sfb-simple-hyperplane-splitting-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, printed pp.476-477; Proposition 22.41, first reduction"
+   }
+  },
+  {
+   "text": "Fix such $U,W$. If the action on $U$ is trivial, extend a basis of $W$ by one vector: its span is a rational complement because every subspace has coaction $v\\mapsto v\\otimes1$. Otherwise [lem-sfb-semisimple-group-casimir-trace] supplies a $G$-equivariant $c=c_U$ with $\\operatorname{Tr}_U(c)=n\\cdot1_F$, $n>0$, and preserving $W$. The one-dimensional rational module $U/W$ is a character (in a basis its action is an invertible scalar), hence trivial by [lem-sfb-semisimple-characters-trivial]. The trivial-quotient clause of the Casimir node therefore gives $c(U)\\subseteq W$.",
+   "uses": [
+    "lem-sfb-semisimple-group-casimir-trace",
+    "lem-sfb-semisimple-characters-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.41, printed p.477; Casimir construction on pp.475-476"
+   }
+  },
+  {
+   "text": "The simple module $W$ is nonzero. Apply [lem-zl-alg-closed-endomorphism-eigenvalue] to $c|_W$ to obtain $a\\in F$ with nonzero eigenspace. Equivariance of $c$ makes $\\ker(c|_W-a\\,1_W)$ a rational submodule: its coaction identity follows by applying $c-a$ to the first tensor factor, and tensoring vector spaces over $F$ preserves kernels. Simplicity forces this eigenspace to equal $W$, so $c|_W=a\\,1_W$. In a basis of $W$ extended to $U$, $c(U)\\subseteq W$ gives a block matrix with diagonal blocks $aI_W$ and $0$. Thus $a\\dim_F W=\\operatorname{Tr}_U(c)=n\\cdot1_F\\ne0$, using characteristic zero. In particular $a\\ne0$.",
+   "uses": [
+    "lem-zl-alg-closed-endomorphism-eigenvalue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.41, printed p.477 (Schur step written as an eigenspace argument)"
+   }
+  },
+  {
+   "text": "Regard $p=a^{-1}c$ as a map $U\\to W$. It is equivariant and $p|_W=1_W$. Its kernel $L$ is rational by the coaction identity, and every $u\\in U$ has the decomposition $u=p(u)+(u-p(u))$ with $p(u)\\in W$ and $u-p(u)\\in L$; also $W\\cap L=0$. Hence $U=W\\oplus L$. This verifies the criterion's antecedent for every $U,W$, so [lem-sfb-simple-hyperplane-splitting-criterion] gives the claimed finite simple decomposition. The zero module has its empty decomposition.",
+   "uses": [
+    "lem-sfb-simple-hyperplane-splitting-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.41 and Lemma 22.40, printed p.477"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimple-characters-trivial",
+  "lem-sfb-simple-hyperplane-splitting-criterion",
+  "lem-sfb-semisimple-group-casimir-trace",
+  "lem-zl-alg-closed-endomorphism-eigenvalue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 22.41, via Lemma 22.40 and the Casimir construction of Section 22c, printed pp.475-477"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSemisimpleRepresentation|IsCompletelyReducible|LinearlyReductive|semisimple.*algebraic.group",
+   "results": "Search returned 7 hits: Mathlib/RepresentationTheory/Maschke.lean, Mathlib/RepresentationTheory/Maschke.lean, Mathlib/RepresentationTheory/Semisimple.lean, Mathlib/RepresentationTheory/Semisimple.lean, Mathlib/RepresentationTheory/Semisimple.lean, Mathlib/RepresentationTheory/Semisimple.lean, Mathlib/RepresentationTheory/Semisimple.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete reducibility of rational representations of semisimple algebraic groups over a field of characteristic zero",
+   "results": "Search returned 8 hits: Rep.instInjective, PerfectField.ofCharZero, Representation.IsIrreducible.toIsSimpleOrder, LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple, Representation.isIrreducible_iff, Representation.IsIrreducible.recOn, Representation.irreducible_iff_isSimpleModule_asModule, Representation.IsIrreducible.casesOn. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimpleRepresentation\"",
+   "results": "Search returned 4 hits: Representation.IsSemisimpleRepresentation, Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule, Representation.isSemisimpleModule_iff_isSemisimpleRepresentation_ofModule, MonoidAlgebra.Submodule.instIsSemisimpleRepresentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional rational representation of a semisimple algebraic group in characteristic zero is completely reducible",
+   "results": "Search returned 8 hits: FDRep.simple_iff_char_is_norm_one, FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, MonoidAlgebra.Submodule.instIsSemisimpleModule, Rep.instProjective, FDRep.instProjectiveOfNeZeroCastCard, MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra, LieModule.instIsTriangularizableOfIsAlgClosed. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of a reductive algebraic group over characteristic zero is a direct sum of irreducible representations",
+   "results": "Search returned 8 hits: FDRep.simple_iff_char_is_norm_one, RootPairing.GeckConstruction.instIsIrreducible, FDRep.finrank_hom_simple_simple, FDRep.simple_iff_end_is_rank_one, RootPairing.isSimpleModule_weylGroupRootRep, Rep.instProjective, IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end, FDRep.char_orthonormal. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, finite-group or Lie-module declarations do not state this rational algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional rational representation of a semisimple algebraic group in characteristic zero is completely reducible",
+   "results": "{\"t\": \"2026-10-23T13:51:51Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite dimensional rational representation of a semisimple algebraic group in characteristic zero is completely reducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_char_is_norm_one\", \"FDRep.simple_iff_end_is_rank_one\", \"FDRep.finrank_hom_simple_simple\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Rep.instProjective\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"LieModule.instIsTriangularizableOfIsAlgClosed\"], \"digest\": \"99eeacd04719fe06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the abstract finite-group, root-system and semisimple-module results do not prove rational complete reducibility for a semisimple algebraic group"
+  },
+  {
+   "tool": "grep",
+   "query": "LinearlyReductive|semisimple.*algebraic.group|complete.*reducib",
+   "results": "{\"t\": \"2026-10-23T13:52:55Z\", \"tool\": \"grep\", \"query\": \"LinearlyReductive|semisimple.*algebraic.group|complete.*reducib\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the abstract finite-group, root-system and semisimple-module results do not prove rational complete reducibility for a semisimple algebraic group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimpleRepresentation\"",
+   "results": "{\"t\": \"2026-10-23T13:52:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimpleRepresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Representation.IsSemisimpleRepresentation\", \"Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule\", \"Representation.isSemisimpleModule_iff_isSemisimpleRepresentation_ofModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleRepresentation\"], \"digest\": \"78740896a613262e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the abstract finite-group, root-system and semisimple-module results do not prove rational complete reducibility for a semisimple algebraic group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional rational representation semisimple algebraic group characteristic zero direct sum simple",
+   "results": "{\"t\": \"2026-10-23T13:52:55Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional rational representation semisimple algebraic group characteristic zero direct sum simple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.directSum\", \"IsSemisimpleModule.exists_linearEquiv_fin_dfinsupp\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"isSemisimpleModule_iff_exists_linearEquiv_dfinsupp\", \"IsSemisimpleModule\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"instIsSemisimpleModuleDFinsupp\", \"IsIsotypicOfType.linearEquiv_finsupp\"], \"digest\": \"1f60e4b6e9e22be1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the abstract finite-group, root-system and semisimple-module results do not prove rational complete reducibility for a semisimple algebraic group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of a reductive algebraic group over characteristic zero is a direct sum of irreducible representations",
+   "results": "{\"t\": \"2026-10-23T13:53:05Z\", \"tool\": \"leanfinder\", \"query\": \"A rational representation of a reductive algebraic group over characteristic zero is a direct sum of irreducible representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_char_is_norm_one\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"FDRep.finrank_hom_simple_simple\", \"FDRep.simple_iff_end_is_rank_one\", \"RootPairing.isSimpleModule_weylGroupRootRep\", \"Rep.instProjective\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\", \"FDRep.char_orthonormal\"], \"digest\": \"fdeebf2645a133ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the abstract finite-group, root-system and semisimple-module results do not prove rational complete reducibility for a semisimple algebraic group"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-self-duality",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules.",
+   "via": [
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-characteristic-zero-complete-reducibility",
+  "worker": "stage1",
+  "summary": "Verified Milne Proposition 22.41 and its characteristic-zero standing hypothesis; retained the statement and wrote the simple-hyperplane Casimir argument, reusing character vanishing and the general eigenvalue leaf. Created only the general splitting criterion and concrete Casimir construction as statement-only nodes.",
+  "blueprint": "Realizes the characteristic-zero simplicity input in the self-duality of rho section modules on the recorded direct-image/alteration ancestor route; no chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-25ab5eb60",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-25ab5eb60 (reviewer sub-agent of L); spot-checked: I read the whole of Milne iAG printed pp.475-477, which covers the Casimir subsection, Lemma 22.40 and Proposition 22.41; char 0 is the standing hypothesis of section 22c. The item statement is unchanged and matches Prop. 22.41; F is already algebraically closed, so Lemma 22.39 is not needed. Proof steps: Step 1 cites lem-sfb-semisimple-characters-trivial, which uses the same definition of semisimple and gives X*=0. That is exactly the character hypothesis of the hyperplane criterion. Step 2 handles a trivial action on U with any line complement. Otherwise it uses the Casimir node: U/W is one-dimensional, so it is a character and hence trivial, which gives c(U)⊆W. Step 3 is Schur's lemma written out with the general eigenvalue leaf over an algebraically closed field: the eigenspace is a rational submodule, so it is all of W, and a·dimW=n≠0 in char 0. Step 4 takes the kernel of a^{-1}c as the complement. New node lem-sfb-semisimple-group-casimir-trace: every clause is true. B is nondegenerate on h=dr(g) because g is semisimple in char 0 and h is a faithful quotient (Milne's 'use b'). The node also states basis independence, Tr=n, G-equivariance (p.476: 10.31 plus X(G)=0), n>0 for a nontrivial action (char 0 plus connectedness), preservation of W, and c(V)⊆W when the quotient is trivial. When h=0 it gives c=0. New node lem-sfb-simple-hyperplane-splitting-criterion is Lemma 22.40 (c)⇒(a) under X(G)=0, with the hypothesis taken over all modules; it is true, and I tested it on the trivial group. Neither node restates the item. All stmt_deps exist. Edge cases checked: V=0, trivial G, trivial U, a nonfaithful differential. Duplicate search over the DAG (Casimir, complete reducibility, Killing form, Cartan, 22.40/22.41, rational module) found only Q_l-bar or Lie-algebra-only nodes, so there are no duplicates. No SGA appears anywhere. Batch-5 flag: the closure reaches lem-trf-smooth-fpqc-base-descent, a Mathlib-status general fact (Stacks 02VL: smoothness is fpqc local on the base). It is neither the trace formula nor Poincare duality nor part of either proof, so it is genuinely outside the assumptions and acceptable. There is no re-split note for this item. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CharacteristicZeroCompleteReducibility",
+  "declaration": "AlgebraicGeometry.RationalHighestWeight.characteristicZero_completeReducibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CharacteristicZeroCompleteReducibility.lean",
+  "statement": "theorem characteristicZero_completeReducibility {F : Type u} [Field F] [IsAlgClosed F] [CharZero F] (G : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] (hG : IsSemisimpleGroupScheme G.X) {V : Type v} [AddCommGroup V] [Module F V] [FiniteDimensional F V] (c : V →ₗ[F] V ⊗[F] coordinateAlgebra G) (hcoassoc : HopfAction.Coassociative F (coordinateAlgebra G) V c) (hcounit : HopfAction.Counital F (coordinateAlgebra G) V c) : ∃ (n : ℕ) (N : Fin n → Submodule F V) (d : ∀ i : Fin n, N i →ₗ[F] (N i) ⊗[F] coordinateAlgebra G), iSupIndep N ∧ (⨆ i, N i) = ⊤ ∧ ∀ i : Fin n, HopfAction.Coassociative F (coordinateAlgebra G) (N i) (d i) ∧ HopfAction.Counital F (coordinateAlgebra G) (N i) (d i) ∧ IsSimple (d i) ∧ (N i).subtype.rTensor (coordinateAlgebra G) ∘ₗ d i = c ∘ₗ (N i).subtype",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed semisimple and coaction subspace definitions. The finite family has explicit induced coactions with counit, coassociativity, simplicity and intertwining inclusions; iSupIndep and spanning express the internal direct sum, including Fin 0. The affine instance is the affine clause already present in hG, exposed for coordinate Hopf typeclass inference; it adds no mathematical restriction. The statement itself is unchanged; stmt_deps only gains three already-landed definition nodes used by its signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf5fbc5c4",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Read the item node, Milne 22c/22.41 source place, the delivered module and report, and the Lean of IsSemisimpleGroupScheme, coordinateAlgebra/coordinateHopf, IsStable/IsSimple and HopfAction.Coassociative/Counital. Every hypothesis matches the node; the IsAffine instance is implied by hG. The conclusion is a Fin n family with iSupIndep and ⨆ = ⊤, each summand with a coassociative, counital, simple coaction intertwining the inclusion, so it is an internal direct sum of simple rational submodules. V=0 is covered by n=0; V has an independent universe. Versus live, only lean and three landed definition stmt_deps are added. lean.statement is verbatim, proof is sorry only, docstrings give source and blueprint, both report sections are present. No findings; nothing compiled since no file was changed."
+ }
+}

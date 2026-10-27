@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-26",
+  "note": "Extract the existing complete ordinary tensor chain proof from IntegralOperationsScalarComparisons, preserving its generator normalization, to satisfy the 60-second per-module compile limit. No theorem hole is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars on sheaves of modules commutes with total tensor products of cochain complexes, normalized on pure tensors",
+   "results": "Eight hits, including PresheafOfModules.Monoidal.tensorObj_map_tmul and HomologicalComplex.ιTensorObj, but none is the normalized ordinary scalar comparison for the recorded cochain functors.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing project proof from ringedFiniteFreeHomBaseChange_complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "NatTrans.ext supplies equality from equality of component functions, used in the uniqueness proof.",
+   "date": "2026-10-26",
+   "verdict": "Use extensionality; it does not supply the tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedFiniteFreeHomBaseChange_complex|scalarOrdinaryTensorChain_existsUnique",
+   "results": "Mathlib grep has no hit. Local project inspection finds the complete existing item proof applying ringedFiniteFreeHomBaseChange_complex followed by normalization and tensor-generator uniqueness.",
+   "date": "2026-10-26",
+   "verdict": "Move that existing complete proof to this module for compile-time isolation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F2",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-weil-normalized-ordinary-scalar-tensor-chain",
+ "title": "Normalized ordinary integral scalar tensor chain comparison",
+ "statement": "Let ell be prime, E and L finite extensions of Q_ell, iota : E → L an embedding, and W a scheme. For the recorded ordinary scalar extension [def-weil-integral-scalar-extension] S = integralOrdinaryScalar and total tensor products [def-coef-ringed-tensor-hom-model] over the completed coefficient sheaves R_E and R_L, there is a unique natural isomorphism S(P tensor Q) ≅ S(P) tensor S(Q) whose degree p+q component sends 1 tensor (x tensor y) to (1 tensor x) tensor (1 tensor y), for every local bidegree generator x in P^p and y in Q^q. The generators and scalar units are exactly the recorded coefficientTensorGenerator and integralOrdinaryTensorSection.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, and section-tensor-product (balanced scalar tensor comparison and the sheafified bilinear universal property); total-complex form also used in sites-cohomology.tex, Tag 07A4."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "apply the existing normalized ordinary scalar tensor chain comparison to the canonical completed-ring map. Identify its ordinary extension functor with integralOrdinaryScalar using their exact object and morphism formulas. The sheafification-unit formula identifies its pure scalar sections with integralOrdinaryTensorSection, giving existence with the required normalization. For uniqueness, use the ordinary scalar-extension adjunction in each degree. The adjoint maps have source the ordinary total tensor; equality on its bidegree pure tensor generators follows from the two normalization formulas. Total-tensor, chain-map, natural-transformation and isomorphism extensionality give equality. No new theorem hole is introduced; all other comparison clauses retain the preceding plan.",
+   "uses": [
+    "lem-sf-ringed-finite-free-tensor-complex",
+    "def-sfb-derived-change-of-rings-cochain-model",
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, and section-tensor-product (balanced scalar tensor comparison and the sheafified bilinear universal property); total-complex form also used in sites-cohomology.tex, Tag 07A4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-finite-free-tensor-complex",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Ordinary scalar tensor comparison on cochain representatives, used before descent and completion",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralOrdinaryTensorChain",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralOrdinaryTensorChain.lean",
+  "declaration": "WeilConjectures.normalizedIntegralOrdinaryTensorChain",
+  "statement": "theorem normalizedIntegralOrdinaryTensorChain (W : AlgebraicGeometry.Scheme.{u}) :\n    ∃! α : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W) ⋙\n          (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ≅\n      ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n          coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n            (completedIntegralCommRingSheafUnrestricted l L W),\n      ∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ) (p q : ℤ)\n        (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n        ((α.hom.app (P, Q)).f (p + q)).val.app U\n          (integralOrdinaryTensorSection l E L ι W\n            (((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n              (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)).X (p + q)) U 1\n            (coefficientTensorGenerator.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n              (completedIntegralCommRingSheafUnrestricted l E W) P Q p q (p + q) rfl U x y)) =\n        coefficientTensorGenerator.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l L W)\n          (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj P)\n          (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Q) p q (p + q) rfl U\n          (integralOrdinaryTensorSection l E L ι W (P.X p) U 1 x)\n          (integralOrdinaryTensorSection l E L ι W (Q.X q) U 1 y)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T130359-L-3453118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T130359-L-3453118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

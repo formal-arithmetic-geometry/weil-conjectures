@@ -1,0 +1,492 @@
+{
+ "id": "lem-per-local-quasi-finite-branch-purity",
+ "kind": "statement",
+ "title": "Local purity of branch locus for a quasi-finite morphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth], let $x\\in X$, and put $y=f(x)$. Suppose that $\\mathcal O_{X,x}$ is a normal domain [def-weil-pbc-normal-ring], that $\\mathcal O_{Y,y}$ is a regular local ring [def-weil-regular-scheme], and that $f$ is quasi-finite at $x$ [pqf-def-quasifinite]. Suppose also that\n$$\\dim\\mathcal O_{X,x}=\\dim\\mathcal O_{Y,y}\\geq1,$$\nwhere dimension means Krull dimension [def-weil-pbc-krull-dimension-ring]. For every point $x'\\in X$ such that $x$ belongs to the closure of $\\{x'\\}$ and $\\dim\\mathcal O_{X,x'}=1$, assume that $f$ is unramified at $x'$ [def-weil-unramified-morphism], meaning that it restricts to an unramified morphism on some open neighbourhood of $x'$. Then $f$ is etale at $x$: it restricts to an etale morphism on some open neighbourhood of $x$ [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BMB, pione-lemma-purity (Purity of branch locus), statement, lines 5117–5164. This node cites the Stacks statement and proof, not the historical references in its reference environment."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-regular-scheme",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The common local dimension $d$ is a finite integer by the Noetherian local dimension theorem. Prove the assertion for all morphisms in the statement by strong induction on $d\\geq1$. Restrict to affine neighbourhoods of $x$ and $y$ on which $f$ is of finite type, as supplied by quasi-finiteness at $x$. An open containing $x$ contains every generalization of $x$, with the same stalks, so the normality, dimension and codimension-one assumptions persist. In this restricted situation $x$ is isolated in its fibre.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, induction and local reduction; Algebra Tag 00KQ and Morphisms Tag 01TH."
+   }
+  },
+  {
+   "text": "Apply the isolated-fibre-point finite-neighbourhood theorem. It supplies an etale map $b:U\\to Y$, $u\\mapsto y$, and an open $V\\subset X\\times_YU$ for which $g:V\\to U$ is finite, has precisely one point $v$ over $u$, and sends $v$ to $x$. The projection $a:V\\to X$ is etale: it is an open immersion followed by a base change of $b$. Shrink $U$ to an affine neighbourhood of $u$ and restrict $V$ to its inverse image; finiteness and the singleton fibre persist. Write $U=\\operatorname{Spec}R$, $V=\\operatorname{Spec}S$, with primes $\\mathfrak p,\\mathfrak q$ representing $u,v$. The rings can be chosen Noetherian: $U$ is locally of finite type over the locally Noetherian $Y$, and the finite $R$-algebra $S$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-etale-local-finite-at-point-elementary",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-finite-local-on-target",
+    "def-weil-finite-integral-morphism",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LK, lemma-etale-makes-quasi-finite-finite-at-point; Morphisms Tags 02GO, 02GP, 02GN, 01WI, 01T6."
+   }
+  },
+  {
+   "text": "Put $A=R_{\\mathfrak p}=\\mathcal O_{U,u}$ and $B=S_{\\mathfrak q}=\\mathcal O_{V,v}$. The singleton-fibre stalk theorem makes $A\\to B$ finite. Etale stalk invariance for $b$ and $a$ shows that $A$ is regular local, $B$ is a normal domain and $\\dim A=\\dim B=d$. In particular both rings are Noetherian: $A$ is regular local and $B$ is finite over $A$. To identify the local-base-change scheme explicitly, set $C=(R\\setminus\\mathfrak p)^{-1}S$. Every maximal ideal of the finite $A$-algebra $C$ contracts to $\\mathfrak pA$; the prime correspondence and the singleton fibre therefore give exactly one maximal ideal. Thus $C$ is local and its map to $S_{\\mathfrak q}$ is an isomorphism: elements of $S\\setminus\\mathfrak q$ are already units in $C$. Consequently $\\operatorname{Spec}B=V\\times_U\\operatorname{Spec}A$, and its stalks are the corresponding stalks of $V$, by iterated localization.",
+   "uses": [
+    "lem-trf-finite-singleton-fibre-stalk-ring",
+    "lem-sfb-etale-stalk-invariants",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-localize-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, and its localization proof; More on Algebra Tags 07QP, 0AH0; Algebra Tags 033C, 033G, 00E3."
+   }
+  },
+  {
+   "text": "Let $z$ be a height-one prime of $B$ and let $w\\in V$ be its image. The localization identifications give $\\dim\\mathcal O_{V,w}=\\dim B_z=1$, and $w$ generalizes $v$. Since $a$ is etale, stalk dimension invariance gives $\\dim\\mathcal O_{X,a(w)}=1$; continuity makes $a(w)$ a generalization of $x$. The hypothesis makes $f$ unramified at $a(w)$. The base-change formula for the unramified locus, first for $X\\times_YU\\to U$ and then for $\\operatorname{Spec}A\\to U$, gives unramifiedness of $h:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ at $z$. Restriction to the open $V$ simply restricts the same unramified neighbourhoods. Thus $h$ has the required codimension-one assumption at every height-one prime of $B$.",
+   "uses": [
+    "lem-weil-pbc-localize-localization-at-prime",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-sfb-etale-stalk-invariants",
+    "lem-trf-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, etale-local reduction; Morphisms Tag 0475, lemma-set-points-where-fibres-unramified."
+   }
+  },
+  {
+   "text": "It suffices to prove that $h$ is etale. Here is the precise passage back to $g$ at $v$. Both $S/R$ and $B/A$ are finite, hence finitely presented algebras over their Noetherian base rings. If $h$ is etale, the etale-at-a-prime criterion applied to $A\\to B$ at its maximal ideal gives flatness of $B$ over $A$ and $\\Omega_{B/A}=0$. Localization of differentials identifies $(\\Omega_{S/R})_{\\mathfrak q}$ with $\\Omega_{B/R}$. Every $R$-derivation $D$ of $B$ kills $A=R_{\\mathfrak p}$: $D(r/t)=D(r)t^{-1}-rt^{-2}D(t)=0$. The universal property therefore identifies $\\Omega_{B/R}$ with $\\Omega_{B/A}$. Apply the same etale-at-a-prime criterion to $R\\to S$ at $\\mathfrak q$: its flatness hypothesis is exactly flatness over $R_{\\mathfrak p}=A$. It gives an open neighbourhood $N$ of $v$ in $V$ on which $g$ is etale.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sc-etale-at-prime-flat-unramified-criterion",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FP, 00RT, 00U6 and 08WD; the elementary equality of R- and R_p-derivations supplies the target-localization identification."
+   }
+  },
+  {
+   "text": "For such $N$, the composite $N\\to U\\to Y$ and the map $N\\to X$ are etale. The image $O=a(N)$ is an open neighbourhood of $x$, since etale morphisms are open. Factor $N\\to X$ through $O$. This factor is etale by etale composition cancellation with the open immersion $O\\to X$, and is surjective by the definition of $O$. Etale descent through this source cover shows that $f|_O$ is etale. Thus the local algebra conclusion promised in Step 5 proves the original assertion at $x$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-trf-etale-descent-through-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036W, lemma-etale-etale-local-source; Morphisms Tags 03WT, 02GN, 02GW."
+   }
+  },
+  {
+   "text": "The finite map $A\\to B$ is integral. Regular-local localization makes $A$ a regular ring; regular rings are normal, so its local ring $A$ is a normal domain. Let $P=\\ker(A\\to B)$, a prime because $B$ is a domain. The injection $A/P\\hookrightarrow B$ is integral, so $\\dim(A/P)=\\dim B=d$. If $P\\ne0$, a length-$d$ chain in $A/P$ lifts to a chain in $A$ starting at a prime containing $P$; prepending $(0)$ gives length at least $d+1$, a contradiction. Hence $A\\hookrightarrow B$ is injective. Consequently $B$ is torsion free over $A$: a product of two nonzero elements in the domain $B$ cannot vanish.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, finite local injection; Algebra Tags 00GK, 0AFS, 0567, 00OK. The kernel dimension argument is written out."
+   }
+  },
+  {
+   "text": "If $d=1$, the maximal ideal of $B$ is itself a height-one prime, so Step 4 makes $h$ unramified there. A regular local ring of dimension one is a DVR, hence a PID; the torsion-free module $B$ is therefore flat over $A$. Module finiteness gives finite algebra generation and hence finite presentation over the Noetherian $A$. Unramifiedness at the maximal ideal gives $\\Omega_{B/A}=0$: on an affine unramified neighbourhood the differentials vanish, and their localization at the maximal ideal of the local ring $B$ is the module itself. The flat-and-unramified etale-at-a-prime criterion now gives an etale neighbourhood of this closed point. Any open neighbourhood of the closed point of a local spectrum is the whole spectrum. Thus $h$ is etale, proving the induction base.",
+   "uses": [
+    "lem-sc-regular-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-sc-etale-at-prime-flat-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, d=1; Algebra Tag 00PD (lemma-characterize-dvr), More on Algebra Tag 0AUW, Algebra Tag 08WD."
+   }
+  },
+  {
+   "text": "Suppose $d\\geq2$. For every prime $Q\\subset B$ with contraction $P\\subset A$, one has $\\dim B_Q=\\dim A_P$. Indeed, incomparability contracts a strict prime chain ending at $Q$ to a strict chain ending at $P$. Conversely, going down for the integral extension of the normal domain $A$ lifts any chain ending at $P$ backwards, starting with the prescribed prime $Q$. Distinct contractions force distinct lifted primes. Taking suprema of chain lengths gives both height inequalities, and the localization dimension formula identifies heights with these local dimensions.",
+   "uses": [
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-going-down-normal-integral",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, going-down paragraph; Algebra Tags 00GT, 00H8, 00KF."
+   }
+  },
+  {
+   "text": "Fix a nonzero prime $Q\\ne\\mathfrak m_B$ and put $P=Q\\cap A$. The local ring $B_Q$ is normal, and $A_P$ is regular. The finite morphism $h$ is quasi-finite. Its two local dimensions are equal by Step 9, positive because $(0)\\subsetneq Q$, and less than $d$: any chain below $Q$ can be extended by $\\mathfrak m_B$. Every height-one generalization of $Q$ is a height-one prime of $B$ and is unramified by Step 4. These are precisely all the hypotheses of the induction assertion at $Q$, now at a strictly smaller positive dimension. Hence $h$ is etale at every such $Q$.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-regular-local-localization",
+    "pqf-lem-finite-qf",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, induction at a nonclosed nongeneric point; Algebra Tags 00GY, 0AFS."
+   }
+  },
+  {
+   "text": "The generic point needs no dimension-zero induction hypothesis. Choose a length-$d$ chain in the local domain $B$. A chain of maximal possible length starts at $(0)$ and ends at $\\mathfrak m_B$, since otherwise it could be extended at an end. Its first nonzero prime $Q_1$ has height one: a longer chain below $Q_1$, followed by the remaining tail, would have length greater than $d$. Since $d\\geq2$, $Q_1\\ne\\mathfrak m_B$, so Step 10 gives an etale open neighbourhood of $Q_1$. Every open containing $Q_1$ contains its generalization $(0)$. Thus $h$ is etale also at the generic point, and therefore at every point except possibly $\\mathfrak m_B$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB, lemma-purity, punctured-spectrum induction; explicit elementary treatment of the generic point left implicit in the source."
+   }
+  },
+  {
+   "text": "Let $T=\\operatorname{Spec}A$, $W=\\operatorname{Spec}B$, and $T^\\circ=T\\setminus\\{\\mathfrak m_A\\}$. The inverse image $W^\\circ$ is exactly $W\\setminus\\{\\mathfrak m_B\\}$: the map is local, and no proper subprime of $\\mathfrak m_B$ has the same contraction, by incomparability. The restriction $W^\\circ\\to T^\\circ$ is finite, and is etale by the open-cover locality of etaleness and Steps 10-11. Apply punctured-spectrum purity for the regular local ring $A$ of dimension at least two. It supplies a finite etale $E\\to T$ and an isomorphism $W^\\circ\\simeq E\\times_TT^\\circ$ over $T^\\circ$.",
+   "uses": [
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-sbc-regular-local-punctured-etale-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMA, lemma-local-purity, assertion (1), as invoked in the final paragraph of Tag 0BMB."
+   }
+  },
+  {
+   "text": "The base $T$ is locally Noetherian and integral, with integrally closed stalks: $A$ is a normal domain and normality survives localization. Every stalk of $W$ is likewise a normal domain. The open $T^\\circ$ is nonempty, since $d\\geq2$; its inverse image in $W$ contains the generic point and is dense. Apply finite-normal dense-open comparison to the finite map $h:W\\to T$, the finite etale map $E\\to T$ from Step 12, and their specified isomorphism over $T^\\circ$. It gives an isomorphism $W\\simeq E$ over $T$. Therefore $h$ is etale. Steps 5-6 give an etale neighbourhood of the original $x$. This proves the inductive step and completes the strong induction.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-pc-integral-scheme",
+    "lem-sbc-finite-normal-dense-open-comparison",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMA, assertion (2), and Tag 0BM9, lemma-reformulate-purity-normal; assembled from the existing extension and finite-normal comparison statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-local-on-target",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-trf-finite-singleton-fibre-stalk-ring",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-localize-localization-at-prime",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-trf-unramified-locus-base-change",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sc-etale-at-prime-flat-unramified-criterion",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sc-regular-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-localization-normal-domain",
+  "pqf-lem-finite-qf",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-sbc-regular-local-punctured-etale-purity",
+  "def-pc-integral-scheme",
+  "lem-sbc-finite-normal-dense-open-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BMB, lemma-purity, full dimension-induction proof; omitted local-base-change, DVR, generic-point and descent details expanded using existing DAG statements. Tag 0BMA(1) plus finite-normal dense-open comparison realizes its final appeal to 0BMA(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|ramificationLocus",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*branch|branch.*locus|codimension.*[ée]tale",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purity of branch locus: quasi-finite morphism normal source regular target equal positive local dimensions unramified in codimension one is etale at the point",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Etale, Algebra.unramifiedLocus, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.IsEtaleAt, Algebra.etaleLocus; digest cbb5c80c82b4106c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsNormal\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegular\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-finite morphism of locally Noetherian schemes is etale at a point with normal source stalk regular target stalk equal positive dimensions and no ramification at codimension one generalizations",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus; digest 9fb784284126ee8c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a regular Noetherian domain in a finite separable field extension is etale if the local Kahler differentials vanish over all height one primes",
+   "results": "Logged 8 hits: Algebra.Etale, Algebra.FormallyEtale.of_isSeparable_aux, RingHom.Etale.ofLocalizationSpan, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt, RingHom.Etale.ofLocalizationSpanTarget, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instFormallyEtaleRing; digest 9e7777f9f77be7f0. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*branch|branch.*purity|unramified.*codimension",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the etale locus, standard etale algebras, formal smoothness or localization criteria; none asserts branch-locus purity under the item hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal finite algebra over a regular local ring is etale if unramified in codimension one",
+   "results": "Logged 8 hits: Algebra.FormallyEtale.iff_unramified_and_smooth, Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.FormallyEtale.instFormallySmooth, Algebra.instEtaleOfIsStandardEtale, RingHom.Etale, Algebra.IsEtaleAt; digest ad3128af97a5a1dd. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the etale locus, standard etale algebras, formal smoothness or localization criteria; none asserts branch-locus purity under the item hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegularLocalRing\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the etale locus, standard etale algebras, formal smoothness or localization criteria; none asserts branch-locus purity under the item hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Purity of the branch locus: a quasi-finite map from a normal stalk to a regular local stalk of equal positive dimension, unramified at height one, is etale",
+   "results": "Logged 8 hits: Algebra.IsEtaleAt, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, RingHom.Etale.ofLocalizationSpan, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale, Algebra.exists_etale_of_isEtaleAt; digest cf9c21bef6013606. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the etale locus, standard etale algebras, formal smoothness or localization criteria; none asserts branch-locus purity under the item hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite local extension of a regular Noetherian local ring by a normal domain is etale if it is unramified at every height one prime",
+   "results": "Logged 8 hits: RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, Algebra.mem_etaleLocus_iff; digest f366ada3dd31ecbf. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the etale locus, standard etale algebras, formal smoothness or localization criteria; none asserts branch-locus purity under the item hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-normalization-codimension-one-purity",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited uniformization input: purity after the simultaneous parameter-root base change (ILO IX Proposition 2.1, essential-surjectivity paragraph, printed p.134), through the finite-normalization purity item; general local branch-locus criterion of Stacks Tag 0BMB.",
+   "via": [
+    "lem-per-finite-normalization-codimension-one-purity",
+    "lem-per-snc-root-punctured-torsor-splitting",
+    "lem-per-snc-parameter-root-quotient",
+    "lem-per-prime-to-order-snc-kummer-charts",
+    "lem-per-tame-normalization-log-regular",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-local-quasi-finite-branch-purity",
+  "worker": "stage1",
+  "summary": "Statement unchanged; split Stacks 0BMB into explicit etale finite-local reduction, preservation and reflection of the pointwise conditions, injectivity, the DVR base case, prime-chain dimension comparison, positive-dimensional induction, generic-point treatment, and punctured extension/comparison. Reused existing nodes throughout: no new nodes and no Mathlib leaves. No Lean attachment found.",
+  "blueprint": "The inherited uniformization input of lem-per-artin-gabber-affine-curve, through lem-per-finite-normalization-codimension-one-purity: local branch purity used after the simultaneous root base change. The latest ancestor proof is unchanged at this provenance input; this generic tool follows Stacks 0BMB, without altering the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-finite-at-point-elementary",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-finite-singleton-fibre-stalk-ring",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-sfb-etale-stalk-invariants",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-unramified-locus-base-change",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-etale-at-prime-flat-unramified-criterion",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-sbc-regular-local-punctured-etale-purity",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   },
+   {
+    "node": "lem-sbc-finite-normal-dense-open-comparison",
+    "why": "Generic local-algebra or scheme-locality tool used as stated in the Stacks 0BMB proof; this perverse/Fourier unit supplies no replacement for this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "pqf-def-locnoeth",
+  "lem-trf-finite-singleton-fibre-stalk-ring",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-trf-unramified-locus-base-change",
+  "lem-sc-etale-at-prime-flat-unramified-criterion",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-sc-regular-dim1-dvr",
+  "pqf-lem-finite-qf",
+  "lem-sbc-regular-local-punctured-etale-purity",
+  "lem-sbc-finite-normal-dense-open-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-caa2886a4",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-caa2886a4 (reviewer sub-agent of L); spot-checked: I read the item in full: 13 steps, no new nodes. Statement, stmt_deps, source and blueprint are identical to the live record, which is still unsplit, so nothing supersedes it. The statement matches Stacks 0BMB (pione.tex 5117-5164) hypothesis by hypothesis, and no SGA source is used. I checked every cited statement against the step that uses it. Steps 1-6 do the étale-local finite reduction and descend back to f; the descent goes through the image O=a(N), with N→O surjective étale. Step 3 identifies C=(R∖p)^{-1}S=S_q correctly. Step 4 applies the unramified-locus base change twice, within that node's hypotheses. Step 5 gets Ω_{S/R,q}=Ω_{B/R}=Ω_{B/A}, using that R-derivations kill R_p. Step 7 proves injectivity from the dimension count. Step 8 proves the d=1 case: DVR, so PID, so flat, and Ω_{B/A}=0 by the 02GE clause of def-weil-unramified-morphism. Step 9 gets equal heights from incomparability and going down, starting the lift at the prescribed prime. Steps 10-11 apply the induction to nonzero non-maximal primes and reach the generic point through a height-one prime. Steps 12-13 use punctured purity (0BMA(1)) plus finite-normal dense-open comparison in place of 0BMA(2), with all hypotheses checked. Small cases: t→s^n, Frobenius and closed points are excluded, as they should be. There is no cycle and no duplicate of the criterion in the DAG. Batch-5: the three trf cites (singleton-fibre stalk, 0475 unramified locus, étale source-cover descent) and the sbc purity closure, which reaches only def-trf-schematically-dense-open plus generic trf algebra lemmas, are generic scheme theory outside the assumed statements, so accepted. The 16 generic tool_uses are accepted. One minor gap, left without a FIX: finite ⇒ quasi-finite at a point is used through the elementary affine fibre argument. Existing metadata error: lem-sc-regular-dim1-dvr is tagged 00DV; the correct tag is 00PD."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalQuasiFiniteBranchPurity",
+  "declaration": "AlgebraicGeometry.exists_etale_neighborhood_of_unramified_codimension_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalQuasiFiniteBranchPurity.lean",
+  "statement": "theorem exists_etale_neighborhood_of_unramified_codimension_one {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (f : X ⟶ Y) (x : X) [IsDomain (X.presheaf.stalk x)] [IsIntegrallyClosed (X.presheaf.stalk x)] [IsRegularLocalRing (Y.presheaf.stalk (f x))] (hqf : f.IsQuasiFiniteAtPoint x) (hdim : ringKrullDim (X.presheaf.stalk x) = ringKrullDim (Y.presheaf.stalk (f x))) (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim (X.presheaf.stalk x)) (hunram : ∀ x' : X, x ∈ closure ({x'} : Set X) → ringKrullDim (X.presheaf.stalk x') = 1 → ∃ U : X.Opens, x' ∈ U ∧ IsUnramified (U.ι ≫ f)) : ∃ U : X.Opens, x ∈ U ∧ Etale (U.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3224cb87d",
+  "group": "Q131",
+  "result": "pass",
+  "note": "I read the Stacks 0BMB statement (pione.tex 5117-5145) and the item node. Lean matches clause by clause through the recorded declarations: IsLocallyNoetherian X and Y; normal-domain stalk (IsDomain ∧ IsIntegrallyClosed, per the def-weil-pbc-normal-ring record); IsRegularLocalRing on the target stalk only; IsQuasiFiniteAtPoint (01TD(1), finite type included); ringKrullDim equality and 1 ≤ dim; IsUnramified on an open around every x' with x ∈ closure{x'} and dim 1 (x' ⇝ x, correct direction; covers x itself when d=1); conclusion ∃ open U ∋ x with Etale (U.ι ≫ f). No extra assumptions, single universe u, no unbound variables. lean.statement is verbatim the signature. Only proof is sorry, no definitions. Docstrings give the source place, the blueprint id and all 13 proof steps. Imports: public for stmt_deps, plain for proof_deps. Live record is unsplit with no lean field and otherwise identical: not superseded, and no name clash in the live trees. Report has Worker report and Second reading sections. No recompile (worker's compile evidence accepted); no fixes."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-homogeneous-polynomial-model-existence",
+ "kind": "statement",
+ "title": "Existence of the pinned equivariant polynomial complex",
+ "statement": "For a prime $\\ell$, any normed field $F$ with a normed $\\mathbf Q_\\ell$-algebra structure, and any $r\\in\\mathbf N$, there is a Model in the precise sense of [def-sfb-homogeneous-polynomial-resolution-data]. Thus the monomial internal coproducts carry the specified diagonal lattice action, alternating deletion differential, individual faces and constant augmentation. No contraction or quasi-isomorphism assertion is part of this conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-homogeneous-polynomial-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "For each $n$, put $P_n(S)=A(S)[y_{a,i}:0\\leq a\\leq n,\\ 1\\leq i\\leq r]$, with coefficient restriction. This is a sheaf, by [lem-sfb-profinite-coherent-sheaf-criterion]: for a finite disjoint union, finitely many polynomial supports have finite union, so $P_n(\\coprod S_j)=\\prod P_n(S_j)$. For a surjection $T\\to S$, a polynomial on $T$ with equal pullbacks has each coefficient in the equalizer for the sheaf $A$ [def-sfb-continuous-map-condensed-ring]. Descend those finitely many coefficients; coefficients outside that finite support remain zero. Uniqueness is coefficientwise. The empty set gives the zero module. The finite-support description is exactly [def-weil-pbc-mv-polynomial-ring]. The resulting module sheaf is the coproduct of copies of $A$ indexed by monomials: maps from the summands extend uniquely by $\\sum c_m m\\mapsto\\sum c_m u_m$, naturally on sections. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], this identifies it with the internal direct sum $K^n$ and preserves its sections and restrictions. For the equivalence, the site is small in the stipulated coefficient universe; [sk-def-sfb-sheaf-tensor] explicitly includes the coherent profinite site and supplies sheafification with its strong symmetric monoidal structure. In particular tensoring a sheafification unit with any presheaf again becomes an isomorphism after sheafification, by the strong monoidal comparison. Thus local equivalences are monoidal, as required by the equivalence node.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion",
+    "def-sfb-continuous-map-condensed-ring",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written polynomial-resolution input; finite monomial sums as internal modules"
+   }
+  },
+  {
+   "text": "The polynomial universal property [def-weil-pbc-mv-polynomial-ring] defines deletion, insertion of zero, and $T_g:y_{a,i}\\mapsto y_{a,i}-g_i$ over $A(S)$. Here $g\\in C(S,L)$ and each $g_i\\in C(S,F)=A(S)$ through the continuous inclusions $\\mathbf Z_\\ell\\subset\\mathbf Q_\\ell\\subset F$. These inclusions are isometric for the given restricted norm. Substitution fixes coefficients, hence is $A(S)$-linear; it commutes with restriction since $(u^*g)_i=u^*(g_i)$. Step 1 therefore makes these internal linear maps. On generators $T_gT_t=T_{g+t}$ and $T_0=1$, with inverse $T_{-g}$. These equalities give precisely the natural section actions of [def-sfb-condensed-action-module] for the coordinatewise additive lattice [def-sfb-ladic-lattice].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-condensed-action-module",
+    "def-sfb-ladic-lattice"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written polynomial-resolution input; polynomial substitution and diagonal lattice action"
+   }
+  },
+  {
+   "text": "Expand $\\delta^{n+1}\\delta^nf$ on $(y_0,\\ldots,y_{n+2})$. For every $0\\leq a<b\\leq n+2$, omission of $a$ followed by omission of position $b-1$ and omission of $b$ followed by omission of position $a$ give the same polynomial with coefficients $(-1)^{a+b-1}$ and $(-1)^{a+b}$. All terms pair this way and cancel. Thus $\\delta^2=0$. Deleting a coordinate and translating all remaining coordinates commute, term by term, so $\\delta T_g=T_g\\delta$. Constants are fixed by every $T_g$ and $\\delta^0(c)=c-c=0$. Hence inclusion of constants, extended by zero outside degree zero, is an equivariant cochain map from $A[0]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written polynomial-resolution input; alternating-deletion cancellation and augmentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-coherent-sheaf-criterion",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-condensed-action-module",
+  "def-sfb-ladic-lattice"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The polynomial deletion complex is contracted by insertion of zero and resolves the constants",
+   "results": "Polynomial.contract_C, Polynomial.update_zero_eq_erase, Polynomial.comp_zero, Polynomial.contract, Polynomial.contract_expand, Polynomial.contract_one, Polynomial.erase, Poly.coe_zero. None constructs the internal polynomial complex or inserted-zero contraction.",
+   "date": "2026-10-26",
+   "verdict": "No match for this internal-module construction; polynomial substitution APIs are ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented cochain complex with a contracting homotopy is a quasi-isomorphism from the single coefficient object",
+   "results": "Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.exists_iso_single, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.augmentTruncate, CochainComplex.quasiIsoAt₀_iff, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.truncateAugment, HomotopyCategory.singleFunctorPostcompQuotientIso. Abstract group resolutions do not provide the internal polynomial model or its monomial formulas.",
+   "date": "2026-10-26",
+   "verdict": "No direct construction. The parent proves the formal homological consequence directly from ShortComplex exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(contract|homotop|resolution)|(contract|homotop|resolution).*polynomial; HomogeneousPolynomial in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py search homogeneous polynomial",
+   "results": "Existing HomogeneousPolynomialAugmentedResolution contains precisely the data being relocated; no separate model or contraction construction was found. Mathlib has abstract homotopy and polynomial substitution APIs. Blueprint search returned def-sc-cr-field and lem-sc-p1-monomial, neither the deletion construction.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing definitions verbatim; split the construction and its contraction, not a duplicate of the conclusion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HomogeneousPolynomialAugmentedResolution",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED.",
+   "via": [
+    "lem-sfb-homogeneous-polynomial-augmented-resolution",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HomogeneousPolynomialModelExistence",
+  "file": "lean/Sheaf/CategoryTheory/HomogeneousPolynomialModelExistence.lean",
+  "declaration": "Profinite.CondensedAction.HomogeneousPolynomial.model_nonempty",
+  "statement": "theorem model_nonempty : Nonempty (Model ell F r)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + split nodes (model/contraction existence, resolution-data def) against verbatim-moved data block, Assertion conjuncts and scratch axioms compile"
+ }
+}

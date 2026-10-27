@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-relative-adjoint-weights",
+ "kind": "definition",
+ "title": "Relative adjoint character weights through all dual-number points",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring and let $T,G$ be group schemes over $\\operatorname{Spec}A$, using the group-object diagrams of [def-sc-group-scheme] over this base. Let $i:T\\to G$ be a homomorphism and $\\chi:T\\to\\mathbf G_{m,A}$ a character, where $\\mathbf G_{m,A}$ is [def-sfb-split-torus-over-ring]. For a commutative $A$-algebra $B$, use dual numbers [def-sc-dual-numbers]. Say that $\\chi$ occurs in the adjoint tangent module over $B$ when there exists $v\\in G(B[\\epsilon])$ reducing to $1$ and different from $1$, such that for every $B$-algebra $C$ and $s\\in T(C)$, $i(s)v_C i(s)^{-1}=\\chi(s)\\cdot v_C$. Here $v_C$ is obtained by the canonical map $B[\\epsilon]\\to C[\\epsilon]$, and scalar multiplication by $c\\in C$ is substitution $\\epsilon\\mapsto c\\epsilon$. The scalar $\\chi(s)$ is the value of the Laurent coordinate of the actual character. Equivalently this is the character eigenvector equation for the full adjoint coaction, not only the action on $A$-points. Define the nonzero adjoint weight set over $B$ to consist of the nontrivial characters that occur in this sense.",
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sfb-split-torus-over-ring",
+  "def-sc-dual-numbers"
+ ],
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 4 opening, printed p.107 (graded tangent bundle); Proposition 5.2.3, pp.152--153 (relative tangent weight spaces)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative adjoint character weight of group scheme defined by dual number points over all test algebras",
+   "results": "{\"t\": \"2026-10-24T09:44:45Z\", \"tool\": \"leansearch\", \"query\": \"Relative adjoint character weight of group scheme defined by dual number points over all test algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DualNumber.range_lift\", \"DualNumber.lift\", \"RootPairingCat.coweightIsAddCommGroup\", \"LieModule.Weight.toFun\", \"FDRep.char_dual\", \"AddChar.wInner_cWeight_self\", \"CharacterModule.dual\", \"RootPairingCat.weight\"], \"digest\": \"cffde54d42f851ce\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for relative group-scheme character weights; results are unrelated Lie-algebra weights, root systems, or dual-number algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative adjoint character weight of group scheme defined by dual number points over all test algebras",
+   "results": "{\"t\": \"2026-10-24T09:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Relative adjoint character weight of group scheme defined by dual number points over all test algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent\", \"Algebra.Extension.toInfinitesimal\", \"FDRep.char_dual\", \"LieAlgebra.lieCharacterEquivLinearDual\", \"LieAlgebra.IsKilling.coroot\", \"LieAlgebra.lieCharacterEquivLinearDual_apply\", \"RootPairing.algebraMap_coroot'In_apply\", \"LieAlgebra.lieCharacterEquivLinearDual_symm_apply\"], \"digest\": \"7773a087d23b968b\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for relative group-scheme character weights; results are unrelated Lie-algebra weights, root systems, or dual-number algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "HasWeightOver|RelativeAdjointWeights|adjoint.*weight|weight.*dual",
+   "results": "{\"t\": \"2026-10-24T09:50:41Z\", \"tool\": \"grep\", \"query\": \"HasWeightOver|RelativeAdjointWeights|adjoint.*weight|weight.*dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/LinearAlgebra/RootSystem/Hom.lean\", \"Mathlib/LinearAlgebra/RootSystem/Hom.lean\", \"Mathlib/LinearAlgebra/RootSystem/Hom.lean\", \"Mathlib/LinearAlgebra/RootSystem/Hom.lean\"], \"digest\": \"632ef52cb6816210\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for relative group-scheme character weights; results are unrelated Lie-algebra weights, root systems, or dual-number algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n HasWeightOver|RelativeAdjointWeights|characterValue lean/Sheaf lean/WeilConjectures; rg -l relative adjoint weight|HasWeightOver dag/nodes; tools/blueprint_refs.py search adjoint weights",
+   "results": "No relative group-scheme weight predicate. Sheaf TorusCharacterTangentWeights.weightSpace and characterValue helpers are field-only. Lie.Ring gives points, points.map, tangentGroup and tangentPoint over arbitrary commutative rings. No blueprint nodes match adjoint weights.",
+   "date": "2026-10-24",
+   "verdict": "The new predicate uses the existing point and dual-number constructions; it extends no field-only definition by copying it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-borel-quotient-geometry",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The roots and positive roots in the relative Borel geometry, defined by the full adjoint torus coaction on the identity tangent module.",
+   "via": [
+    "lem-sfb-local-borel-quotient-geometry",
+    "lem-sfb-dvr-rho-section-modules",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeAdjointWeights",
+  "declaration": "AlgebraicGeometry.RelativeAdjointWeights.HasWeightOver",
+  "declarations": [
+   "AlgebraicGeometry.RelativeAdjointWeights.characterValue",
+   "AlgebraicGeometry.RelativeAdjointWeights.HasWeightOver",
+   "AlgebraicGeometry.RelativeAdjointWeights.rootsOver"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeAdjointWeights.lean",
+  "statement": "def HasWeightOver {A : Type u} [CommRing A] {T G : Grp (Over (Spec (.of A)))} (i : T ⟶ G) (χ : T ⟶ RingGroupSchemes.multiplicative A) (B : Type u) [CommRing B] [Algebra A B] : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f311253d",
+  "group": "Q39",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f311253d",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read the item, the new def-sfb-relative-adjoint-weights node and module, the item module, the report and the dep declarations (IsReductive, IsMaximalTorus, IsBorelGroupScheme, splitTorus/multiplicative, IsUnipotent, points). Item diff vs live: only lean and +4 used definition stmt_deps; statements verbatim. Every hypothesis matches the node, nothing stronger. Conclusions: U smooth, closed, normal on all test schemes, and the largest smooth connected normal unipotent subgroup on each geometric fibre; p a retraction with kernel U; T×U→B iso; Q smooth proper; π flat, surjective, qc, lfp; (g,b)↦(g,gb) kernel-pair pullback plus fppf local lifts = sheafified coset quotient and right torsor; the same after pullback along any S'; Φ=Φ+⊔−Φ+; character restriction bijective, roots of H and B preserved on geometric fibres; H=T gives U trivial, Q=S. HasWeightOver is the real full-coaction eigenvector condition on dual-number tangent vectors; no duplicate in live Lean or DAG. Edge cases r=0, nonreduced A, any residue characteristic, non-closed geometric points, empty or nonaffine S' checked. Only sorry; source/blueprint docstrings and proof plan present. Advisory: points/points.map come from the Lie.Ring module recorded under def-wf-lie-algebra-derivation, but they are hom-set notation only, not the Lie API. No file changed, no compile."
+ }
+}

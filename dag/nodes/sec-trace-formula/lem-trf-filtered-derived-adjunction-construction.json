@@ -1,0 +1,146 @@
+{
+ "id": "lem-trf-filtered-derived-adjunction-construction",
+ "kind": "statement",
+ "title": "Filtered right-derived lift and compatible exact-left adjunctions",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with enough injectives and derived categories, and let $T:\\mathcal A\\to\\mathcal B$ be additive and left exact. For the records of [def-trf-filtered-operation-lift-structures], there exists a filtered derived lift $T_F$ of the specified ordinary bounded-below right derived functor such that, for every additive exact $L:\\mathcal B\\to\\mathcal A$ and adjunction $L\\dashv T$, there is a termwise filtered lift of $L$ and a filtered derived adjunction to this same $T_F$. The units and counits agree with those of the specified ordinary derived adjunction under total and every graded evaluation. This assertion contains no geometric specialization or arbitrary exact-functor existence clause.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015Q (lemma-filtered-localization-functor), 015S (equation-filtered-derived-functor), 05U2 (equation-definition-filtered-derived-functor), and the following equations equation-commute-gr / equation-commute-forget. Canonical operation/adjunction lifts: literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf, Lemma 5.1.4 and §§5.2.1–5.2.2; the pro-etale compactification-relative formulation is assembled from the same filtered-injective construction."
+ },
+ "stmt_deps": [
+  "def-trf-filtered-operation-lift-structures"
+ ],
+ "proof": [
+  {
+   "text": "Construct the right-derived lift. By [lem-trf-filtered-localization-injective-model], choose a filtered injective resolution $K\\to I$ and an exact quasi-inverse $J_F:DF^+(\\mathcal A)\\to K^+(\\mathcal I^f)$. Each filtered injective term splits into finitely many injectives with the sum filtration [lem-trf-injective-graded-filtration-splits]: starting at its last nonzero graded piece, its inclusion into the preceding filtration term splits by injectivity, and one repeats downwards. An additive functor preserves these finite split sums. For left exact $T$, put $F^rT(I^n)=T(F^rI^n)\\subseteq T(I^n)$; the quotient map gives a canonical isomorphism $\\operatorname{gr}^rT(I^n)\\cong T(\\operatorname{gr}^rI^n)$, since that short exact sequence is split. This definition is functorial without choosing the splittings. Define $R^FT(K)=Q_F(T(J_FK))$. Termwise $T$ preserves filtered homotopies, shifts and split-sum cones, so this is exact. The model node says that both $\\omega I$ and $\\operatorname{gr}^rI$ are bounded-below complexes of ordinary injectives; [lem-weil-pbc-dplus-injective-representative](2) says these are K-injective. Thus they compute the ordinary $RT$ and give $\\omega R^FT\\cong RT\\omega$ and $\\operatorname{gr}^rR^FT\\cong RT\\operatorname{gr}^r$. The bijections in the model node identify resolution comparisons uniquely in the homotopy category, so these identifications are natural and independent of the chosen quasi-inverse. The construction preserves each finite filtration interval, because resolutions can be chosen in that interval.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-trf-injective-graded-filtration-splits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015Q, 015S, 05U2, 015U (equation-commute-gr), 015V (equation-commute-forget)"
+   }
+  },
+  {
+   "text": "Derive the adjunction on filtered Hom sets. Suppose $L:\\mathcal B\\to\\mathcal A$ is exact and $L\\dashv T$. For an injective $J\\in\\mathcal A$, $TJ$ is injective: a map from a subobject into $TJ$ transposes to a map into $J$ from the corresponding subobject under exact $L$, extends there, and transposes back. The split filtration in Step 2 then shows that $T$ sends filtered injectives to filtered injectives. For a bounded-below filtered complex $K$ over $\\mathcal B$ and a filtered-injective representative $I$ of an object over $\\mathcal A$, [lem-trf-filtered-localization-injective-model] gives\n$$\\operatorname{Hom}_{DF(\\mathcal A)}(L^FK,I)\n=\\operatorname{Hom}_{K_F(\\mathcal A)}(LK,I)\n\\cong\\operatorname{Hom}_{K_F(\\mathcal B)}(K,TI)\n=\\operatorname{Hom}_{DF(\\mathcal B)}(K,R^FTI).$$\nThe middle bijection is the ordinary adjunction in each cochain degree; a map preserves the filtration on one side exactly when its adjoint does on the other (apply the adjunction to each inclusion $F^rK\\to K$). The same argument transposes chain homotopies. Naturality of these bijections supplies $L^F\\dashv R^FT$, and the two triangle identities follow by applying the inverse Hom bijections to identities. Forgetting filtration computes this same resolution adjunction, so its unit and counit are the ordinary derived ones. All these functors preserve filtration intervals. Therefore [lem-trf-filtered-functor-graded-comparison], applied to the unit and counit that were just constructed, identifies their graded maps with the ordinary unit and counit as well. It also shows that any already constructed filtered comparison compatible with forgetting is invertible whenever its ordinary comparison is invertible; this does not assert that an arbitrary ordinary transformation lifts.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-filtered-functor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2 filtered adjunctions, expanded via filtered-injective Hom computation (Stacks Tag 05TY); Lemma 5.1.4(i)–(iii)"
+   }
+  },
+  {
+   "text": "The exact-left functor is given its termwise lift by lem-trf-exact-filtered-localization. The filtered injective Hom bijections construct the adjunction to the same selected right-derived lift; its evaluation unit/counit equations are those in the filtered adjunction structure.",
+   "uses": [
+    "lem-trf-exact-filtered-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015Q (lemma-filtered-localization-functor), 015S (equation-filtered-derived-functor), 05U2 (equation-definition-filtered-derived-functor), and the following equations equation-commute-gr / equation-commute-forget. Canonical operation/adjunction lifts: literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf, Lemma 5.1.4 and §§5.2.1–5.2.2; the pro-etale compactification-relative formulation is assembled from the same filtered-injective construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-filtered-localization-injective-model",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-trf-injective-graded-filtration-splits",
+  "lem-trf-filtered-functor-graded-comparison",
+  "lem-trf-exact-filtered-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Parent lem-trf-filtered-derived-operation-lifts: Steps 2–3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor induces a functor on filtered objects and finite filtered derived categories, preserving associated graded objects.",
+   "results": "8 hits: ordinary Functor.mapDerivedCategory, exactFunctor and additive-functor APIs. None constructs the finite filtered object action or the normalized filtered operation package.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor induces a functor on finite filtered derived categories and a left exact functor has a filtered right derived functor",
+   "results": "8 hits: ordinary mapDerivedCategory and its factorization isomorphisms; useful for localization descent, but no filtered object or operation construction.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerivedOperationLift|FilteredTermwiseLift|ProEtaleFilteredOperationPackage|filteredDerivedAdjunction",
+   "results": "msearch Mathlib grep: 0 hits. Direct rg of lean/Sheaf and lean/WeilConjectures finds these structures only in the assigned module, and no separate construction theorem. Existing filtered model and comparison theorems were read.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredDerivedOperationLifts",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Steps 3–4 of the imported proof: filtered compact cohomology, canonical operation lifts and identification of graded operators.",
+   "via": [
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredDerivedAdjunctionConstruction",
+  "file": "lean/Sheaf/CategoryTheory/FilteredDerivedAdjunctionConstruction.lean",
+  "declaration": "CategoryTheory.filteredDerivedAdjunctionConstruction",
+  "statement": "theorem filteredDerivedAdjunctionConstruction {A : Type uA} [Category.{vA} A] [Abelian A] [EnoughInjectives A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B] [HasDerivedCategory.{wB} B] (T : A ⥤ B) [T.Additive] [PreservesFiniteLimits T] : ∃ lift : FilteredDerivedOperationLift T.rightDerivedFunctorPlus, (∀ (L : B ⥤ A) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ T), ∃ termwiseLeft : FilteredTermwiseLift L, Nonempty (FilteredDerivedAdjunction adj.derivedPlus termwiseLeft.toFilteredDerivedOperationLift lift))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-41e21",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261026T081333-L-1923179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-41e21",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261026T081333-L-1923179",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + 29 moved structures (verbatim vs clone) + 3 new holes and their nodes against lem-trf-filtered-derived-operation-lifts; axioms via scratch --all compile"
+ }
+}

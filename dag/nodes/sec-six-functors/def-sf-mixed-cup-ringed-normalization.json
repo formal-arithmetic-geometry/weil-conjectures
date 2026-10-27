@@ -1,0 +1,217 @@
+{
+ "id": "def-sf-mixed-cup-ringed-normalization",
+ "kind": "definition",
+ "title": "Mixed-cup RingedNormalization",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the stages, operations, cohomology and scalar changes of [def-sf-mixed-cup-coefficient-data] and the normalized point scalar coordinates of [def-sf-mixed-cup-normalized-scalars]. The ringed stages are exactly finite and completed integral stages. Their forgetful functors are the existing ambient inclusions. For an arbitrary finite-ring map, integral reduction or completed integral inclusion, identify the given scalar functor with the actual ringed derived extension: by identity at finite stages, the recorded finite-reduction identification, or the pure-tensor/counit-normalized integral transport of [def-pur-operation-scalar-transport] and its constructible restriction [def-sf-constructible-operation-scalar-transport]. Such integral transports exist. Completed direct image agrees with the ringed structural direct image.\n\nFor either support choice use the operation normalizations of [def-pod-mixed-support-cup-product] to identify the actual sheaf cohomology functor with the ambient ringed direct image, or the compactification functor $Rp_*j_!$ of [def-pur-integral-compact-support-coefficient-data]. At integral compact support use its fixed finite-reduction-normalized recorded identification [def-sf-compact-support-scalar-tensor-identification]. A family $u_c,u_o$ is ringed-normalized precisely when, on every input and each of the three elementary ringed passages, its component, conjugated by these fixed operation and scalar identifications and the point-section identifications, equals the actual ordinary scalar/direct-image counit mate, or respectively the actual proper/open scalar composite. The point scalar factor is the unique map already specified by ordinary balancing and derived counits. This is a component equality, not existence of an arbitrary commuting comparison. The recorded construction data used here is that of [def-sf-operation-stages]. The finite scalar/image identifications are those of [def-pur-finite-compact-support-scalar-data]; the ordinary and proper/open counit mates are those of [def-sp-coefficient-mate-comparisons]; the finite-Tor inclusion and the coefficient-prime unit are those of [def-sf-finite-tor-integral-inclusion].",
+ "stmt_deps": [
+  "def-sf-mixed-cup-coefficient-data",
+  "def-sf-mixed-cup-normalized-scalars",
+  "def-pod-mixed-support-cup-product",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-compact-support-scalar-tensor-identification",
+  "def-sf-operation-stages",
+  "def-pur-operation-scalar-transport",
+  "def-sf-constructible-operation-scalar-transport",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sp-coefficient-mate-comparisons",
+  "def-sf-finite-tor-integral-inclusion"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+  "place": "Final coefficient compatibility sentence; item proof steps 2–9: canonical comparison normalizations."
+ },
+ "proof": [
+  {
+   "text": "For ringedSource and ringedTarget, inspect the finite, reduction and integral constructors of RingedPassage. In each case IsRinged reduces to True at the indicated endpoint, so True.intro supplies the proof.",
+   "uses": [
+    "def-sf-mixed-cup-normalized-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Equip the two small finite coefficient fields FieldAt C F and FieldAt C G with the spectral norm and its NormedAlgebra structure over Padic C.l. These structures retain the existing Field and Algebra data. Apply CompactSupportCondensedRealization.scalarModelTransport_nonempty to the recorded coefficient inclusion and W. Its conclusion is exactly scalarTransport_exists, with both the pure-tensor and universal-derived-counit normalizations.",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For integralPush_eq, the pull map of the completed coefficient system is the inverse adjunction image of sfCompletedCoefficientMap. Equiv.apply_symm_apply identifies its direct-image adjunct with sfCompletedCoefficientMap. Unfold the two ordinary module direct images; after this adjunct equality they are the same SheafOfModules.pushforward. Congruence for rightDerivedFunctor gives the required equality of derived functors.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-mixed-cup-normalized-scalars",
+  "lem-pur-compact-support-condensed-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V5",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-mixed-support-cup-product.md",
+  "place": "Constructor inspection; reuse of the existing pure-tensor/counit-normalized scalar transport; adjunction inverse laws for completed ordinary direct image."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Canonical ringed compact support coefficient comparison conjugated by point fibre identifications",
+   "results": {
+    "t": "2026-10-24T22:32:37Z",
+    "tool": "leansearch",
+    "query": "Canonical ringed compact support coefficient comparison conjugated by point fibre identifications",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.stalkMap_congr_point",
+     "IsLocalFrameOn.coeff_congr",
+     "AlgebraicGeometry.LocallyRingedSpace.stalkMap_congr_point_assoc",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact",
+     "AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkToFiberRingHom",
+     "AlgebraicGeometry.stalkToFiberRingHom",
+     "Filter.Germ.valueRingHom",
+     "AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom"
+    ],
+    "digest": "4a77ce45642b1a22"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact comparison-family normalization; reuse the recorded individual constructions."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical ringed compact support coefficient comparison conjugated by point fibre identifications",
+   "results": {
+    "t": "2026-10-24T22:33:27Z",
+    "tool": "leanfinder",
+    "query": "Canonical ringed compact support coefficient comparison conjugated by point fibre identifications",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "CompactlySupportedContinuousMap.compLinearMap",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+     "CompactlySupportedContinuousMap.compNonUnitalAlgHom"
+    ],
+    "digest": "da7054fd8c1636fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact comparison-family normalization; reuse the recorded individual constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "MixedCup|RingedCohomologyNormalized|FieldCohomologyNormalized|ReductionTensorNormalized|derivedSectionScalar|sectionScalar_existsUnique",
+   "results": {
+    "t": "2026-10-24T22:33:23Z",
+    "tool": "grep",
+    "query": "MixedCup|RingedCohomologyNormalized|FieldCohomologyNormalized|ReductionTensorNormalized|derivedSectionScalar|sectionScalar_existsUnique",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib has no match. Project rg in lean/WeilConjectures and lean/Sheaf has no matches."
+  },
+  {
+   "tool": "blueprint_refs.py search / dag grep",
+   "query": "coefficient comparison normalization",
+   "results": "0 blueprint matches. Broader DAG point-section K-flat search found normed-field internal-module comparisons, not arbitrary ringed finite/integral scalar sections or these stage-normalization predicates.",
+   "date": "2026-10-24",
+   "verdict": "New assembly predicate/coordinate construction; individual maps are imported."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-mixed-cup-coefficient-change",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pod-mixed-support-cup-product",
+   "place": "Canonical maps in the final coefficient-compatibility sentence.",
+   "via": [
+    "prop-sf-mixed-cup-coefficient-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.MixedCupRingedNormalization",
+  "declaration": "WeilConjectures.MixedCupCoefficientChange.RingedCohomologyNormalized",
+  "declarations": [
+   "WeilConjectures.MixedCupCoefficientChange.IsRinged",
+   "WeilConjectures.MixedCupCoefficientChange.ringedForget",
+   "WeilConjectures.MixedCupCoefficientChange.ringedSource",
+   "WeilConjectures.MixedCupCoefficientChange.ringedTarget",
+   "WeilConjectures.MixedCupCoefficientChange.scalarTransport_exists",
+   "WeilConjectures.MixedCupCoefficientChange.ringedScalarCoordinates",
+   "WeilConjectures.MixedCupCoefficientChange.ringedOperation",
+   "WeilConjectures.MixedCupCoefficientChange.ringedOperationMap",
+   "WeilConjectures.MixedCupCoefficientChange.integralPush_eq",
+   "WeilConjectures.MixedCupCoefficientChange.ringedSheafCohomology",
+   "WeilConjectures.MixedCupCoefficientChange.ringedOperationCoordinates",
+   "WeilConjectures.MixedCupCoefficientChange.ringedCohomologyCoordinates",
+   "WeilConjectures.MixedCupCoefficientChange.RingedCohomologyNormalized"
+  ],
+  "file": "lean/Sheaf/Paper/MixedCupRingedNormalization.lean",
+  "statement": "def RingedCohomologyNormalized (S : Operations C) (X : SixFunctorSpace D) [IsSeparated X.obj.hom] (c : Compactification (sixFunctorStructure X).hom.left) (uc : ∀ {a b : Stage C} (f : Passage C a b) (compact : Bool), cohomology C S X c compact a ⋙ pointChange C f ≅ change C X f ⋙ cohomology C S X c compact b) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-848c6a174",
+  "group": "Q72",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-848c6a174",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery after 375e RETURN H2. Lean diff vs 375e: only moduleDerived made a scoped instance (same value, all modules open the scope, no live importers). F1 fixed: existing:true def-sf-integral-tensor-finite-comparison matches the live source verbatim (IntegralOperationsPreserveConstructible:77-83); its statement describes the actual homEquiv-transpose/Roos-projection composite with no extra hypotheses; signature owners scalarReductionDerivedExtension (def-weil-integral-derived-reduction), integralOperationsGoodComplex (def-a1-flat-term-kflat-complex) and integralCompletedTensor (def-weil-derived-pullback-tensor-hom) are cited; no duplicate live owner. F2 fixed: the passages node cites lem-pod-point-sections-derived-reduction-data (a definition node owning pointReductionQuotient) in text and stmt_deps. Item statement, proof and proof_deps unchanged; every lean.statement verbatim; no dangling deps; sorry only in named postponed theorems. Advisories: theorem stmt_dep for the adjunction assertion; integralTensorFiniteComplex still theorem-owned but used only inside the owner's type. No compile run (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T164606-L-1038356",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

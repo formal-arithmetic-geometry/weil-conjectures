@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-affine-group-picard-stable-exponent",
+ "kind": "statement",
+ "title": "A field-uniform Picard exponent for a connected affine algebraic group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism]. There exists an integer $n\\geq1$ such that, for every field extension $K/k$ [def-pc-field-extension] and every invertible $\\mathcal O_{G_K}$-module $N$ [def-sc-invertible-module], one has $N^{\\otimes n}\\cong\\mathcal O_{G_K}$ [def-pur-sheaf-tensor-product]. Here $G_K=G\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ is the scheme fibre product [def-pc-fibre-product]. The same integer $n$ works for all extensions, including transcendental and inseparable extensions, and all such $N$. The trivial group is allowed. Equivalently, the groups of isomorphism classes of invertible modules on $G_K$, with tensor product as addition, are all annihilated by $n$.",
+ "source": {
+  "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+  "place": "WANTED locally: M. Brion, On Linearization of Line Bundles, J. Math. Sci. Univ. Tokyo 22 (2015), pp.113–147, Lemma 2.3 and Proposition 2.5, printed pp.117–119. Primary publisher PDF read online. Specialization to algebraically closed k; no group action on a second scheme is involved. Milne, Algebraic Groups (2017), Corollary 18.23, p.393, supplies the finite Picard group over k but does not alone supply the field-uniform assertion.",
+  "url": "https://www.ms.u-tokyo.ac.jp/journal/pdf/jms220104.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-picard-trivial-multiplicative-cover], choose a smooth connected affine group $P$ and a multiplicative isogeny $f:P\\to G$ with $\\operatorname{Pic}(P)=0$. Its scheme-theoretic kernel $A$ is $D(M)=\\operatorname{Spec}k[M]$ for a finite abelian group $M$, with the Hopf algebra described in that node. All these choices are over $k$ and precede any choice of $K$.",
+   "uses": [
+    "lem-sfb-picard-trivial-multiplicative-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22 and Corollary 18.23, printed pp.392–393; Proposition 18.18, sequence (129), printed p.391."
+   }
+  },
+  {
+   "text": "Choose a positive integer annihilating $M$ explicitly. Put $q=|M|$. For each $m\\in M$, two of $0,m,\\ldots,qm$ coincide, so some $1\\le r_m\\le q$ satisfies $r_m m=0$. Set $n=\\prod_{m\\in M}r_m\\ge1$; then $nm=0$ for every $m$. In the Hopf algebra of $A=D(M)$ from [lem-sfb-picard-trivial-multiplicative-cover], multiplication by $n$ pulls $e^m$ back to $e^{nm}=1$. Thus $[n]_A$ is the trivial homomorphism as a scheme morphism, including when $A$ is nonreduced. For every character $\\chi:A\\to\\mathbf G_m$, its pointwise $n$th power equals $\\chi\\circ[n]_A$, hence is trivial. Consequently $nX^*(A)=0$.",
+   "uses": [
+    "lem-sfb-picard-trivial-multiplicative-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22 and Corollary 18.23, printed pp.392–393; Proposition 18.18, sequence (129), printed p.391."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-character-picard-isogeny-sequence] to $f:P\\to G$. Its hypotheses hold by step 1, including the finite diagonalizable scheme-theoretic kernel. Exactness gives $X^*(A)\\xrightarrow{\\delta}\\operatorname{Pic}(G)\\xrightarrow{f^*}\\operatorname{Pic}(P)=0$. Hence $\\delta$ is surjective. For any $a\\in\\operatorname{Pic}(G)$ choose $\\chi$ with $\\delta(\\chi)=a$; then $na=\\delta(n\\chi)=0$ by step 2, since $\\delta$ is a group homomorphism.",
+   "uses": [
+    "lem-sfb-character-picard-isogeny-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22 and Corollary 18.23, printed pp.392–393; Proposition 18.18, sequence (129), printed p.391."
+   }
+  },
+  {
+   "text": "Let $K/k$ be any field extension. By [lem-sfb-affine-group-picard-field-invariance], $p_K^*:\\operatorname{Pic}(G)\\to\\operatorname{Pic}(G_K)$ is an isomorphism of abelian groups. For an invertible module $N$ on $G_K$, choose $a\\in\\operatorname{Pic}(G)$ with $p_K^*(a)=[N]$. Step 3 gives $n[N]=p_K^*(na)=p_K^*(0)=0$, which by the stated Picard group law means $N^{\\otimes n}\\cong\\mathcal O_{G_K}$. The integer $n$ chosen from $M$ in step 2 is independent of $K$ and $N$. No step assumes that $K$ is algebraic, separable or perfect. The argument also applies to the trivial group.",
+   "uses": [
+    "lem-sfb-affine-group-picard-field-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+    "place": "Lemma 2.3, pp.117–118, Remark 2.2(v), p.117, and Proposition 2.5 and the following paragraph, pp.118–119; primary publisher PDF read online, WANTED locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-picard-trivial-multiplicative-cover",
+  "lem-sfb-character-picard-isogeny-sequence",
+  "lem-sfb-affine-group-picard-field-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 18.23, p.393, using Propositions 18.18 and 18.22, pp.391–393; combined with Brion, On Linearization of Line Bundles, Lemma 2.3 and Proposition 2.5, pp.117–119 (WANTED locally, publisher PDF read online). The explicit finite-group and Hopf-algebra annihilator calculation is written by Q24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Picard|CommRing.Pic|lineariz",
+   "results": "{\"t\": \"2026-10-24T02:03:49Z\", \"tool\": \"grep\", \"query\": \"Picard|CommRing.Pic|lineariz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a positive integer killing the Picard group of every field extension of a connected linear algebraic group",
+   "results": "{\"t\": \"2026-10-24T02:03:50Z\", \"tool\": \"leansearch\", \"query\": \"There exists a positive integer killing the Picard group of every field extension of a connected linear algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.functor\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"CommRing.Pic.mk\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.mk.congr_simp\"], \"digest\": \"3907260d647be561\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-24T02:03:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape_toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape'\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape'_toTransfiniteCompositionOfShape\", \"LightProfinite.instEpiCompHausLikeAndTotallyDisconnectedSpaceCarrierSecondCountableTopologyFst\", \"LightProfinite.instEpiCompHausLikeAndTotallyDisconnectedSpaceCarrierSecondCountableTopologySnd\"], \"digest\": \"e26578df16d7ee4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group over an algebraically closed field, the Picard groups after arbitrary field extensions have a common finite exponent",
+   "results": "{\"t\": \"2026-10-24T02:03:51Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected affine algebraic group over an algebraically closed field, the Picard groups after arbitrary field extensions have a common finite exponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic\", \"FunctionField.classNumber\", \"BrauerGroup\", \"instCommGroupPic\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic.mapAlgebra\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"CommRing.Pic\"], \"digest\": \"95318af7ddeab83d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on a split connected algebraic group over any field extension has tensor power trivial with a bound depending only on the group",
+   "results": "{\"t\": \"2026-10-24T02:03:53Z\", \"tool\": \"leanfinder\", \"query\": \"Every invertible sheaf on a split connected algebraic group over any field extension has tensor power trivial with a bound depending only on the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"CommRing.relPic\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mk_tensor\", \"instCommGroupPic\", \"CommRing.Pic.mapAlgebra\"], \"digest\": \"0b0c99475e520520\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "instSubsingletonOfFiniteMaximalSpectrum|def mapAlgebra|def relPic",
+   "results": "{\"t\": \"2026-10-24T02:04:58Z\", \"tool\": \"grep\", \"query\": \"instSubsingletonOfFiniteMaximalSpectrum|def mapAlgebra|def relPic\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"555\", \"618\"], \"digest\": \"8610d5f8723bc46e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ring Picard definitions/base-change maps, semilocal rings, or abstract-group free-module linearization; none gives a field-uniform Picard exponent for a smooth connected affine group scheme or line-bundle linearization on a normal scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|CommRing.Pic",
+   "results": "{\"t\": \"2026-10-24T02:41:54Z\", \"tool\": \"grep\", \"query\": \"Picard|CommRing.Pic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite exponent for Picard groups of scalar extensions of a connected linear algebraic group",
+   "results": "{\"t\": \"2026-10-24T02:41:54Z\", \"tool\": \"leansearch\", \"query\": \"Uniform finite exponent for Picard groups of scalar extensions of a connected linear algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mk\", \"CommRing.Pic\", \"IsPurelyInseparable.hasExponent_of_finiteDimensional\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic.mapRingHom_algebraMap\", \"Submodule.mulExact_unitsToPic_mapAlgebra\"], \"digest\": \"d8b3b757250795f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"mapAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T02:41:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"mapAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapAlgebra_self\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"f6b8c6051cd6dfba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine group over an algebraically closed field one positive integer annihilates the Picard groups after every field extension",
+   "results": "{\"t\": \"2026-10-24T02:41:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected affine group over an algebraically closed field one positive integer annihilates the Picard groups after every field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.relPic_eq_top\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"CommRing.relPic\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"FunctionField.classNumber\", \"BrauerGroup\"], \"digest\": \"75d864ba92fd7801\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every line bundle on an algebraic group after any field extension has a tensor power trivial with exponent independent of the field",
+   "results": "{\"t\": \"2026-10-24T02:41:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every line bundle on an algebraic group after any field extension has a tensor power trivial with exponent independent of the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H1ofAutOnUnitsUnique\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mapAlgebra_self\", \"Action.diagonalSuccIsoTensorTrivial_hom_hom_apply\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.relPic_eq_top\"], \"digest\": \"ebdfaddf476a5f08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-line-bundle-power-linearization",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion.",
+   "via": [
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-group-picard-stable-exponent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the Picard-trivial multiplicative cover and character–Picard exact sequence. Wrote the finite kernel annihilator calculation, keeping nonreduced kernels. Added only the field-extension invariance input, statement-only after searches. It transfers the base-field annihilator to every field extension. No Lean attachment or Mathlib match.",
+  "blueprint": "Read the latest blueprint main-20261024, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3). This is the inherited supporting Picard prerequisite for the normal-line-bundle linearization branch; the latest proof has no direct Picard-group statement. Preserve the inherited null nearest blueprint ancestor and via chain, as printed by blueprint_refs.py ancestor; the new lemma serves the last supporting Picard sentence of from.place. Whole-blueprint searches for Picard, split connected, unipotent radical, reductive, split group, field extension, Pic(G, field-uniform, and Picard group of a found no equivalent group statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-e2e25c208",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-e2e25c208 (reviewer sub-agent of L); spot-checked: Read the whole item and the new node, and both cited statements. Steps 1-3 follow Milne iAG2017 Prop 18.22 and Cor 18.23 (proof via the 18.18 sequence), pp.392-393. Step 1 matches the hypotheses of lem-sfb-picard-trivial-multiplicative-cover with F=k. Step 2 is elementary: the Hopf algebra gives [n]^*e^m=e^{nm}=1, which holds for non-reduced mu_p too, and chi^n=chi∘[n]. Step 3 uses exactness at Pic(G) in lem-sfb-character-picard-isogeny-sequence with Pic(P)=0, so delta is surjective and n kills Pic(G). Step 4 uses the new node: p_K^* is a surjective group homomorphism, n is fixed before K, so the quantifiers are right. New node lem-sfb-affine-group-picard-field-invariance is exactly Brion 2015 Lemma 2.3 specialized by Remark 2.2(v). I read pp.116-119 of the publisher PDF: Lemma 2.3 holds for any extension K/k, and the remark after Prop 2.5 says n is the exponent when k is algebraically closed. It passes B1-B7: statement only, self-contained, Pic defined inline, four search tools recorded. Small cases G=1, G_a, G_m, SL_n, PGL_2 and PGL_p hold. rg -L found no duplicate node (ample-existence-field-extension, algebraically-closed-invariance and finite-field norm are different statements). It is not a restated clause of the item. Same unit, no tool_uses, no SGA. Batch 5: the reach to lem-trf-regular-local-ufd-boundary-factorization (regular local ring is a UFD) and lem-trf-fppf-covering-base-change (Mathlib leaf, fppf coverings stable under base change) is generic algebra and site facts, not trace formula or Poincare duality content, so accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupPicardStableExponent",
+  "declaration": "AlgebraicGeometry.affineGroup_picard_stable_exponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupPicardStableExponent.lean",
+  "statement": "theorem affineGroup_picard_stable_exponent (k : Type u) [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : ∃ n : ℕ, 1 ≤ n ∧ ∀ (K : Type u) [Field K] [Algebra k K] (N : (pullback G.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules), N.IsInvertible → Nonempty (N.tensorPow n ≅ 𝟙_ _)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-160efbe8b",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and all 11 stmt_dep records. k: Field + IsAlgClosed. G: GrpObj on Over (Spec k) with Smooth, ConnectedSpace, IsAffine, LocallyOfFiniteType + QuasiCompact. ∃ n ≥ 1 comes before ∀ K : Type u with [Field K] [Algebra k K], so n is uniform. G_K = pullback G.hom (Spec.map (algebraMap k K)), correct direction. N.IsInvertible → Nonempty (N.tensorPow n ≅ 𝟙_ _). tensorPow and 𝟙_ use the same X.Modules monoidal instance from the recorded Invertible module; Scheme.Modules is a plain def, so cochainModulesMonoidal cannot be chosen. For n ≥ 1, tensorPow matches the node's tensor power up to unitor/associator. Edge cases: G = 1 allowed, empty scheme excluded via ConnectedSpace, n = 0 excluded, transcendental/inseparable K admitted, same-universe K is the project convention. Node diff vs live: lean field only; statement verbatim in file; stmt_deps unchanged. No defs; sorry only. Docstrings carry Brion/Milne source places, blueprint tag and 4 proof steps. Report has both required sections. Imported modules exist live. No duplicate found. No file changed, so no compile; worker reports scompile clean. Advisory: LFT/QC redundant given Smooth."
+ }
+}

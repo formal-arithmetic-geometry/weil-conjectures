@@ -1,0 +1,106 @@
+{
+ "id": "def-sp-field-exceptional-system-iso",
+ "kind": "definition",
+ "title": "Exceptional system Iso",
+ "statement": "Given the exceptional comparison laws [def-sp-field-exceptional-system-laws], define the natural isomorphism $C_XG_E\\cong G_FC_Y$ by taking as its forward components precisely the actual counit transpose components of [def-sp-field-exceptional-system-components], and the inverses supplied by their invertibility. Naturality is the naturality clause of the given laws. This introduces no independently chosen isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), whole-system counit transpose, finite evaluation and coefficient compatibility"
+ },
+ "stmt_deps": [
+  "def-sp-field-exceptional-system-laws",
+  "def-sp-field-exceptional-system-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized coefficient tower exceptional adjunction evaluation domains counit transpose mixed scalar composition laws",
+   "results": "8 hits: CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; ModuleCat.ExtendRestrictScalarsAdj.counit_app; CategoryTheory.Adjunction.functorialityCounit; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction counits only, no specified ell-power exceptional-system interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite and tower exceptional adjunction models normalized by counit evaluation with field scalar comparison laws",
+   "results": "8 hits: Condensed.profiniteSolidCounit; CondensedMod.LocallyConstant.adjunction; Condensed.freeForgetAdjunction; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.extendRestrictScalarsAdj; CategoryTheory.LiftLeftAdjoint.otherMap; ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "No exact exceptional scalar comparison domain, normalization, transpose or law interface."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep exceptional.*(mixed|domain|adjunction|evaluation)|FieldExceptionalSystem CategoryTheory; rg -l FieldExceptionalSystem|def-sp-field-exceptional-system- dag/nodes lean/Sheaf lean/WeilConjectures Mathlib",
+   "results": "msearch: 0 hits. Local project/DAG/Mathlib name search: 0 hits. Existing generic ExceptionalSystemTransport concerns etale-origin rather than field scalar change.",
+   "date": "2026-10-25",
+   "verdict": "New definitions combine existing operations without redefining them."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search exceptional coefficient",
+   "results": "178 broad blueprint matches; none defines this coupled exceptional-system scalar comparison interface.",
+   "date": "2026-10-25",
+   "verdict": "Use existing field shriek system interfaces, finite exceptional transpose and tower adjunctions as components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-field-exceptional-system-comparison",
+  "date": "2026-10-25",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), exceptional coefficient comparison interfaces",
+   "via": [
+    "lem-sp-field-exceptional-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.FieldExceptionalSystemIso",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldExceptionalSystem.iso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldExceptionalSystem.iso"
+  ],
+  "file": "lean/Sheaf/Paper/FieldExceptionalSystemIso.lean",
+  "statement": "def iso (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (b : FieldShriekSystem.Laws P D c) (a : Domains P D c) (A : Adjoints P D c b a) (l : Laws P D c b a A) {E F : Index P} (h : E ≤ F) : A.right E ⋙ scalar P D a h X ≅ scalar P D a h Y ⋙ A.right F",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bc6d65e1",
+  "group": "ND",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bc6d65e1",
+  "group": "ND",
+  "result": "fix",
+  "note": "Read all 9 modules, the item and the 8 new def nodes, the source place towers.proof.md (2), and the dependency declarations (FieldShriekSystem Models/Laws/iso/scalarAssoc/scalarUnit, tower_gluing, reductionExceptional_isIso, AdjunctionEvaluationNormalized). c = homEquiv transpose of b^-1 then C_Y(eps_A), direction correct. Counit, unit, composition (scalarAssoc) and identity (scalarUnit) laws have the right order. evaluationLaw matches finiteComponent, which is the unique finite c of det-sp-reduction-exceptional; rightReduction, both mixed paths and transition are present; no faithfulness assumed. The exists-pinned package form matches the landed dependency and tower gluing. H3 FIX: Domains.scalar/finite/finiteScalar claimed preservation for every scheme T, but the node and the provider field_scalar_normalized_systems only cover T=X,Y and finite-scalar preservation is only given on finite-type schemes. Fixes: restrict the fields to (T = X ∨ T = Y), add an autoParam proof to scalar/level so call sites are unchanged, pass (.inl/.inr rfl) at the 5 finiteScalar sites (Components, FiniteComposite, Evaluation), and update the domains node TeX. Recompiled all 9 modules once via nt_compile --json: rc 0, no errors or warnings, every file under 60 s. Advisory: some owners are cited only transitively; Domains has unused proof-only imports."
+ }
+}

@@ -145,7 +145,32 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-extension-of-scalars",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Mod.rightDerivedComapIsoMapDerivedCategory"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.rightDerivedComapIsoMapDerivedCategory",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+     "lines": [
+      192,
+      196
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-19",
   "item": "def-sfb-derived-restrict-levelwise",
@@ -178,5 +203,24 @@
   "group": "NW",
   "result": "pass",
   "note": "existing:true record on upstream Mod.rightDerivedComapIsoMapDerivedCategory, which is also the blueprint_lean name. Statement verbatim against side-live DerivedExtendScalars.lean. Node clause, direction and objects match: Mod.comap = Res_φ, mapDerivedCategory = termwise on unbounded complexes. Body is the canonical rightDerivedFunctorIsoMapDerivedCategory. Binders are a subset of the lem-sfb-extend-scalars-kflat context, with no extra universe equation. nt_compile --json probe elaborates the statement under the full context in 19 s; axioms are only propext/choice/Quot.sound. Snapshot vs live node differs only in lean. Advisory: def-sfb-right-derived-functor is realized by both the upstream rightDerivedFunctor and the Sheaf QuasiIsoResolutions version; they are canonically isomorphic and this is the established practice of landed citers. No fixes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "In the situation of [lem-sfb-extend-scalars-kflat], there is a canonical\nisomorphism $R(\\operatorname{Res}_\\varphi)\\cong D(\\operatorname{Res}_\\varphi)$ between the\nright derived restriction of scalars and the functor\n$D(\\Mod_{\\mathcal S})\\to D(\\Mod_{\\mathcal R})$ that restricts scalars termwise.",
+  "proof": [
+   {
+    "text": "Kernels and cokernels of module objects are computed on the underlying objects, both for\n$\\mathcal R$- and for $\\mathcal S$-modules, so $\\operatorname{Res}_\\varphi$ preserves finite\nlimits and finite colimits, i.e. it is exact [det-def-sfb-change-of-scalars]. The right\nderived functor of an exact functor is the termwise functor\n[det-def-sfb-derived-categories].",
+    "uses": [
+     "det-def-sfb-change-of-scalars",
+     "det-def-sfb-derived-categories"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

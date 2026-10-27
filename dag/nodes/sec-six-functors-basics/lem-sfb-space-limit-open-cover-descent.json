@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-space-limit-open-cover-descent",
+ "kind": "statement",
+ "title": "Finite quasi-compact open covers descend along space limits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces over $S$ with their fppf sheaves and small etale structure sheaves [def-trf-algebraic-space]. All indexing sets are small in the universes of [def-weil-size-convention]. A space is quasi-compact if it admits a surjective etale chart from a quasi-compact scheme; a morphism is quasi-compact if its pullback over every affine scheme test has quasi-compact source. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$, respectively the relative diagonal for a morphism, is quasi-compact. A morphism is affine if it is representable and its pullback over every affine scheme test has affine scheme source [pqf-def-affine-morphism]. Let $I$ be a small nonempty directed set, $(X_i)_{i\\in I}$ an inverse system of quasi-compact and quasi-separated algebraic spaces over $S$ with affine transition morphisms, and suppose the fppf sheaf $X=\\varprojlim_i X_i$ is an algebraic space with its specified projections. Give spaces the atlas topology [def-a1-space-point-topology], with open subspaces represented on every scheme test by open subschemes [def-a1-space-open-subspace]. Fix $i_0\\in I$ and a finite family of quasi-compact open subspaces $W_1,\\ldots,W_n\\subset X$ whose union is $X$; $n=0$ is allowed when $X$ is empty. There exist $i\\ge i_0$ and quasi-compact open subspaces $W_{a,i}\\subset X_i$ such that $W_{a,i}\\times_{X_i}X=W_a$ for every $a$, and $\\bigcup_{a=1}^n W_{a,i}=X_i$. Every $W_{a,i}$ is quasi-separated, and for $j\\ge i$ the inverse images $W_{a,j}$ are quasi-compact and quasi-separated with affine transition maps and cover $X_j$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0827 (lemma-descend-opens); finite covering clause needed in the proof of Tag 07SR (lemma-limit-is-scheme), by descent of the empty closed complement, or after an affine atlas by scheme finite-cover descent; Tag 086W (lemma-limit-nonempty)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "pqf-def-affine-morphism",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the cofinal directed tail $i\\ge i_0$: a compatible family on this tail extends uniquely to all indices by choosing an upper bound with each index; independence follows by passing to a common upper bound. Choose a representable surjective etale atlas $U_0\\to X_{i_0}$ with $U_0$ affine. Put $U_i=X_i\\times_{X_{i_0}}U_0$. These are affine schemes with affine transitions, by affine base change and composition. Let $U=\\varprojlim U_i$ be their scheme limit, which is affine. It represents $X\\times_{X_{i_0}}U_0$: on any scheme test $T$, both sides consist of a compatible family $T\\to X_i$ and a map $T\\to U_0$ having the prescribed common map to $X_{i_0}$. This description also identifies every projection. Thus $U\\to X$ and $U_i\\to X_i$ are surjective etale atlases, and $U\\to U_i$ is affine. For any $i$, the affine map $X\\to X_i$ is detected on the atlas $U_i\\to X_i$, since its pullback is $U\\to U_i$. Since $X_i$ is qcqs, affine permanence implies that $X$ is qcqs. The affine schemes $U_i$ and $U$ are qcqs as well.",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SF (lemma-directed-inverse-system-has-limit), atlas construction and (1)-(2); Tag 03H6; affine permanence"
+   }
+  },
+  {
+   "text": "Every $W_a$ is quasi-separated, since it is a quasi-compact open subspace of the quasi-separated space $X$. The fibre product $E_a=U\\times_X W_a$ is therefore qcqs, by qcqs fibre-product permanence applied to $U,W_a,X$. By the definition of an open subspace it is an open subscheme of $U$. Apply scheme open descent to the inverse system $(U_i)$: for each $a$ there are $i_a\\ge i_0$ and a quasi-compact open subscheme $E_{a,i_a}\\subset U_{i_a}$ whose pullback to $U$ is $E_a$.",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-qcqs-source-products",
+    "def-a1-space-open-subspace",
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0827 (lemma-descend-opens), reduction to scheme Tag 01Z4(1); qcqs permanence Tag 073B"
+   }
+  },
+  {
+   "text": "Choose a common upper bound $k$ of the finitely many $i_a$ and $i_0$; when $n=0$ take $k=i_0$. Set $E_{a,k}=U_k\\times_{U_{i_a}}E_{a,i_a}$. The restricted map $E_{a,k}\\to E_{a,i_a}$ is a base change of an affine transition map, hence affine and quasi-compact. Thus $E_{a,k}$ is a quasi-compact open of $U_k$, and its inverse image in $U$ is $E_a$. For $j\\ge k$ use the same inverse-image construction; affine permanence again gives quasi-compactness of $E_{a,j}$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0827, common-index reduction using affine transitions; scheme Tag 01Z4"
+   }
+  },
+  {
+   "text": "The inclusion $E_{a,k}\\hookrightarrow U_k$ is etale as an open immersion of schemes; composing with the atlas gives a representable etale map to $X_k$. Let $V_{a,k}\\subset X_k$ be the image open subspace of the representable etale map $E_{a,k}\\to X_k$. It is quasi-compact because $E_{a,k}$ is quasi-compact. The image-open theorem commutes with arbitrary base change. In the pullback to $X$, the source is $E_{a,k}\\times_{X_k}X=E_{a,k}\\times_{U_k}U=E_a$. Its map to $X$ factors through $W_a$ and is surjective onto $W_a$, since $E_a=U\\times_X W_a$ and $U\\to X$ is a surjective etale atlas. Consequently $V_{a,k}\\times_{X_k}X=W_a$ as open subspaces. This uses image opens, and does not assume that $E_{a,k}$ is invariant under the finite-stage atlas relation.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0827 (lemma-descend-opens), made explicit by image opens; Tags 03BZ, 03IR, 03H4, 03H5"
+   }
+  },
+  {
+   "text": "Put $O_k=\\bigcup_a(U_k\\times_{X_k}V_{a,k})$, an open subscheme of $U_k$. Its inverse image in $U$ is all of $U$, since the $W_a$ cover $X$. Apply the scheme limit-image-contained-in-open lemma to the affine scheme system $(U_j)_{j\\ge k}$ and $O_k$: there is $i\\ge k$ with $U_i\\times_{U_k}O_k=U_i$. Let $W_{a,i}=X_i\\times_{X_k}V_{a,k}$. These opens cover $X_i$: their pullbacks cover the surjective atlas $U_i$, so every point of $X_i$ lies in one of them, and the point/open correspondence identifies their union with $X_i$. They pull back to $W_a$ by the preceding step. When $n=0$, $O_k$ is empty; the very same lemma gives $U_i$ empty, hence $X_i$ empty, as required.",
+   "uses": [
+    "lem-weil-pbc-limit-image-contained-in-open",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Finite covering step implicit in Tag 07SR (lemma-limit-is-scheme); scheme Tag 01Z4(3), via Tag 01Z3"
+   }
+  },
+  {
+   "text": "Each $V_{a,k}$ is quasi-separated because it is a quasi-compact open subspace of the quasi-separated $X_k$. For every $j\\ge k$, the map $X_j\\times_{X_k}V_{a,k}\\to V_{a,k}$ is affine, being the base change of $X_j\\to X_k$. Affine permanence therefore makes this open qcqs. In particular this applies at $i$ and at all $j\\ge i$. For $j'\\ge j\\ge i$ the transition $W_{a,j'}\\to W_{a,j}$ is the base change of $X_{j'}\\to X_j$, hence affine. Finally the pullbacks of the covering union $\\bigcup_a W_{a,i}=X_i$ cover $X_j$: a point over $X_i$ lies in the inverse image of whichever $W_{a,i}$ contains its image. The point/open correspondence makes this an equality of open subspaces.",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-affine-locality",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0827 with affine base-change permanence (Tag 03WI) and quasi-separated open subspaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-sfb-space-affine-locality",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-qcqs-source-products",
+  "def-a1-space-open-subspace",
+  "pqf-lem-limit-qc-open-descends",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-a1-space-etale-open-image",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-limit-image-contained-in-open",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0827 (lemma-descend-opens), expanded atlas/image proof; scheme Tag 01Z4(1),(3) supplies open and cover descent; Tag 07SF atlas construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coverings by quasi compact open subspaces of a limit of algebraic spaces descend to a finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : S.OpenCover), AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} {𝒱 : CategoryTheory.PreZeroHypercover S}\\n  (f : 𝒱.Hom 𝒰) [AlgebraicGeometry.QuasiCompactCover 𝒱], AlgebraicGeometry.QuasiCompactCover 𝒰\", \"doc\": \"If $\\\\mathcal{V}$ is a quasi-compact pre-zero hypercover of a scheme $S$ and there exists a morphism $f: \\\\mathcal{V} \\\\to \\\\mathcal{U}$ to another pre-zero hypercover $\\\\mathcal{U}$ of $S$, then $\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝒰 : X.OpenCover) → [H : CompactSpace ↥X] → Fintype 𝒰.finiteSubcover.I₀\", \"doc\": \"For any compact scheme $ X $ and an open cover $ \\\\mathcal{U} $ of $ X $, the index set $ I_0 $ of the finite subcover is finite. This follows from the compactness of $ X $, which guarantees that any o\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.instBindScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover X) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  (f : (x : 𝒰.I₀) → CategoryTheory.PreZeroHypercover (𝒰.X x)) [∀ (x : 𝒰.I₀), AlgebraicGeometry.QuasiCompactCover (f x)],\\n  AlgebraicGeometry.QuasiCompactCover (𝒰.bind f)\", \"doc\": \"Given a scheme $X$, if $\\\\mathcal{U}$ is a quasi-compact pre-zero hypercover of $X$ and for each $x \\\\in \\\\mathcal{U}.I_0$ there is a quasi-compact pre-zero hypercover $f(x)$ of $\\\\mathcal{U}.X(x)$, then \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact open subsets and finite open coverings descend along inverse systems of qcqs algebraic spaces with affine transitions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (U : c.pt.\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, given a compact open subset $U$ and an open subset $V$ in some object $i$ such that the preimage of $U$ under the cone's p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_isOpenCover_and_isAffine\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine_of_finite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I), CompactSpa\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I), CompactSpa\", \"doc\": \"Suppose `{ Xᵢ }` is an inverse system of qcqs schemes with affine transition maps.\\nThen any affine open cover of `lim Xᵢ` comes from a finite level.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isOpenCover|descend.*[Oo]pen|[Oo]pen.*[Ll]imit",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"31\", \"text\": \"open CategoryTheory MorphismProperty Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"23\", \"text\": \"open CategoryTheory Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"173\", \"text\": \"    d.toBase ⁻¹ᵁ (𝒰.f i).opensRange = (colimit.ι d.functor i).opensRange :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"182\", \"text\": \"    apply IsOpenImmersion.lift (colimit.ι d.functor i) s.snd\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"35\", \"text\": \"open CategoryTheory MorphismProperty Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"33\", \"text\": \"open CategoryTheory MorphismProperty Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"40\", \"text\": \"open CategoryTheory Limits CommRingCat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"30\", \"text\": \"open CategoryTheory Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"31\", \"text\": \"open CategoryTheory MorphismProperty Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"39\", \"text\": \"open CategoryTheory Limits Opposite\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"34\", \"text\": \"open CategoryTheory TopologicalSpace PrimeSpectrum Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"657\", \"text\": \"open Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"31\", \"text\": \"open CategoryTheory Limits TopologicalSpace SheafOfModules Bicategory\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"34\", \"text\": \"open CategoryTheory Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"195\", \"text\": \"open Limits Scheme.Pullback in\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"32\", \"text\": \"open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"45\", \"text\": \"open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"37\", \"text\": \"open CategoryTheory Opposite Limits MorphismProperty\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"417\", \"text\": \"open Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"600\", \"text\": \"lemma Scheme.Modules.exists_isOpenCover_presentation {X : Scheme.{u}} (M : X.Modules)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"628\", \"text\": \"  obtain ⟨ι, U, pres, hU, hU'⟩ := M.exists_isOpenCover_presentation\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"853\", \"text\": \"  obtain ⟨ι, U, pres, hU, hU'⟩ := M.exists_isOpenCover_presentation\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"43\", \"text\": \"open Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"31\", \"text\": \"open CategoryTheory Limits\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"32\", \"text\": \"open TopologicalSpace Opposite CategoryTheory CategoryTheory.Limits TopCat Topology\"}\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quasi compact open covers descend in inverse limits of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"{𝒰 : S.Cover K} [Scheme.JointlySurjective K] [∀ i, AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀] :\\n  QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) [Finite 𝒰.I₀] [H : ∀ i, CompactSpace (𝒰.X i)] : CompactSpace X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that the index set is finite and each open subscheme $U_i$ is compact, then $X$ itself is a compact topological space.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(𝒰 : S.OpenCover) : QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"{𝒰 : S.Cover K} [Scheme.JointlySurjective K] (h : ∀ i, IsOpenMap (𝒰.f i)) : QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"If $ S $ is a scheme equipped with a jointly surjective precoverage $ K $, and $ \\\\mathcal{U} $ is a $ K $-cover of $ S $ such that every morphism $ \\\\mathcal{U}.f(i) $ in the cover is an open map, then\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) : ObjectProperty (PreZeroHypercover.{v} S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) (𝒰 : PreZeroHypercover.{v} S) : S.quasiCompactCover 𝒰 ↔ QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quasi compact open covers descend along inverse limits of quasi compact quasi separated algebraic spaces with affine transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (U : c.pt.\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-descent/full-open lemmas and compact-open topology hits were read; none applies directly to algebraic-space sources. The scheme lemmas are reused through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_map_eq_top",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-descent/full-open lemmas and compact-open topology hits were read; none applies directly to algebraic-space sources. The scheme lemmas are reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|exists_preimage_eq|exists_map_eq_top|exists_isOpenCover_and_isAffine",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"182\", \"text\": \"lemma exists_map_eq_top\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"283\", \"text\": \"  obtain ⟨j, fji, hj⟩ := exists_map_eq_top _ _ (isLimitOpensCone D c hc i U) (i := .mk (𝟙 i))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"341\", \"text\": \"lemma exists_preimage_eq\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"910\", \"text\": \"  obtain ⟨k', fk'k, hk'⟩ := exists_map_eq_top D c hc\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1022\", \"text\": \"  obtain ⟨k, fkj, hk⟩ := exists_map_eq_top D c hc\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-descent/full-open lemmas and compact-open topology hits were read; none applies directly to algebraic-space sources. The scheme lemmas are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite coverings by compact open subspaces from a limit of algebraic spaces to one finite stage",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsCompactOpenCovered.of_finite_of_isSpectralMap\", \"module\": \"Mathlib.Topology.Sets.CompactOpenCovered\", \"type\": \"[Finite ι] [TopologicalSpace S] (hf : ∀ i, IsSpectralMap (f i)) {U : Set S} (hs : ∀ x ∈ U, ∃ i, x ∈ Set.range (f i))\\n  (hU : IsOpen U) (hc : IsCompact U) : IsCompactOpenCovered f U\", \"doc\": \"If $\\\\iota$ is a finite type, each $f_i : X_i \\\\to S$ is a spectral map, $U \\\\subseteq S$ is open and compact, and every point in $U$ lies in the image of some $f_i$, then $U$ is the union of finitely ma\"}\n  {\"name\": \"IsCompactOpenCovered.exists_mem_of_isBasis\", \"module\": \"Mathlib.Topology.Sets.CompactOpenCovered\", \"type\": \"{B : ∀ i, Set (Opens (X i))} (hB : ∀ i, IsBasis (B i)) (hBc : ∀ (i : ι), ∀ U ∈ B i, IsCompact U.1) {U : Set S}\\n  (hU : IsCompactOpenCovered f U) :\\n  ∃ (n : ℕ) (a : Fin n → ι) (V : ∀ i, Opens (X (a i))), (∀ i, V i ∈ B (a i)) ∧ ⋃ i, f (a i) '' V i = U\", \"doc\": \"Let $\\\\{X_i\\\\}_{i \\\\in I}$ be a family of topological spaces, each equipped with a basis $\\\\mathcal{B}_i$ consisting of compact open subsets. Suppose $U \\\\subseteq S$ is a set that is the union of images o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"IsCompactOpenCovered\", \"module\": \"Mathlib.Topology.Sets.CompactOpenCovered\", \"type\": \"{S ι : Type*} {X : ι → Type*} (f : ∀ i, X i → S) [∀ i, TopologicalSpace (X i)] (U : Set S) : Prop\", \"doc\": \"The proposition that the set $ U $ is the union of images of finitely many compact open subsets under the maps $ f_i : X_i \\\\to S $, i.e., there exists a finite set of indices $ s \\\\subseteq \\\\iota $ and\"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (U : c.pt.Opens) (hU : IsCompact (U : Set c.pt)) :\\n  ∃ (i : I) (V : (D.obj i).Opens), IsCompact (V : Set (D.obj i)) ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : OpenCover X) [H : CompactSpace X] : OpenCover X\", \"doc\": \"For any compact scheme $X$ and any open cover $\\\\mathcal{U}$ of $X$ (defined by a jointly surjective family of open immersions), there exists a finite subset $t$ of the indexing set such that the union\"}\n  {\"name\": \"IsCompactOpenCovered.of_finite\", \"module\": \"Mathlib.Topology.Sets.CompactOpenCovered\", \"type\": \"{U : Set S} {κ : Type*} [Finite κ] (a : κ → ι) (V : ∀ k, Opens (X (a k))) (hV : ∀ k, IsCompact (V k).1)\\n  (hU : ⋃ k, f (a k) '' V k = U) : IsCompactOpenCovered f U\", \"doc\": \"A set $ U \\\\subseteq S $ is covered by finitely many compact open subsets via maps $ f_i: X_i \\\\to S $. Specifically, there exists a finite index set $ \\\\kappa $, compact open subsets $ V_k \\\\subseteq X_{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [H : CompactSpace ↥X] (x : ↥⋯.choose),\\n  𝒰.finiteSubcover.f x = 𝒰.f (AlgebraicGeometry.Scheme.Cover.idx 𝒰 ↑x)\", \"doc\": \"For any compact scheme $X$ and open cover $\\\\mathcal{U}$ of $X$, under the compactness assumption, the function $f$ of the finite subcover evaluated at a point $x \\\\in X$ equals the original cover's fun\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme open-descent/full-open lemmas and compact-open topology hits were read; none applies directly to algebraic-space sources. The scheme lemmas are reused through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-limits-schematic-stages",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 07SF/07SQ/07SR: affine projections, eventual affine bases, and eventual schematic fibres; applies before any scheme-only limit lemma. Supporting lemma for the 07SF/07SQ/07SR proof: Finite quasi-compact open covers descend along space limits.",
+   "via": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-limit-open-cover-descent",
+  "worker": "stage1",
+  "summary": "Expanded 0827 through one affine etale atlas and image opens, then proved finite-stage covering by scheme eventual full-open descent, including the empty family. Reused existing DAG lemmas; no new nodes or statement changes. Checked all proof citations against their statements and checked that none reaches this item.",
+  "blueprint": {
+   "steps": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "coverage": "Supporting limit-geometry prerequisite for the recorded ancestor chain leading to det-thm-sf-ctf-stability-direct-images, proof (3): the finite qc open cover used in 07SR. The current latest blueprint direct-image proof (3) is the compactification assembly; this auxiliary limit lemma is below that unit route. Retained inherited blueprint.from (node null, explicit place/via), because blueprint_refs.py ancestor reports None for the pre-existing broken ancestry.",
+   "same_as_search": "Whole-DAG statement/tag searches and blueprint_refs.py search: descend opens, 0827, quasi-compact open, affine transition, affine limit chart. No algebraic-space version duplicates this item; scheme and spectral versions have different objects."
+  },
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic algebraic-space atlas, fibre-product, image-open, or qcqs permanence tool; used only for the local proof of Stacks 0827 and finite covering, not to replace a step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic algebraic-space atlas, fibre-product, image-open, or qcqs permanence tool; used only for the local proof of Stacks 0827 and finite covering, not to replace a step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space atlas, fibre-product, image-open, or qcqs permanence tool; used only for the local proof of Stacks 0827 and finite covering, not to replace a step of the constructible-stability unit."
+   },
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "Generic algebraic-space atlas, fibre-product, image-open, or qcqs permanence tool; used only for the local proof of Stacks 0827 and finite covering, not to replace a step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space atlas, fibre-product, image-open, or qcqs permanence tool; used only for the local proof of Stacks 0827 and finite covering, not to replace a step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space atlas, fibre-product, image-open, or qcqs permanence tool; used only for the local proof of Stacks 0827 and finite covering, not to replace a step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition permanence of etale maps makes the restriction of the atlas etale; it does not replace any constructible-stability argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-eeb9480ed",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-eeb9480ed (reviewer sub-agent of L); spot-checked: Verdict PASS: I read the whole split and found no fault; no fixes were needed. Item lem-sfb-space-limit-open-cover-descent. The statement and stmt_deps are unchanged against the base (checked against the Q108 snapshot). This is a first split (the base proof was empty), not a re-split, and the delivery adds no new nodes. Source check: spaces-limits.tex Tag 0827 (lemma-descend-opens, Situation 084R) and Tags 07SR and 086W, plus limits.tex Tag 01Z4 (1)-(3); the tags match tags/tags. The hypotheses are exactly those of 084R. The covering clause is the part Stacks leaves implicit in 07SR, and the proof establishes it. Steps 1-6 check out against the cited statements: (1) the affine atlas U_0 from atlas-refinement, U_i affine by affine-locality, U = lim U_i from limit-affine-transition, U represents X x_{X_i0} U_0 by a formal universal-property argument, and X qcqs via the locality criterion; (2) W_a is quasi-separated by the qc-open clause of integral-qcqs-permanence, E_a is qcqs by qcqs-source-products, and it descends by pqf-lem-limit-qc-open-descends (1); (3) a common index, with affine base change keeping the opens quasi-compact; (4) the image open of the etale map E_{a,k} -> X_k is quasi-compact and commutes with base change, and its base change to X is E_a -> X, which is surjective onto W_a, so it pulls back to W_a; (5) lem-weil-pbc-limit-image-contained-in-open gives the eventual full cover on the atlas, and the point/open calculus plus surjectivity of the atlas gives the cover of X_i, including the n=0 empty case; (6) quasi-separatedness of qc opens, affine permanence and pullback of the cover. Edge cases tested: a constant system, W=X, empty members, n=0, empty X_i0. The only minor point is a convention difference (qcqs-source-products is stated over Spec Z, the item over S); it is harmless because qcqs is absolute. No cycle: the closure of the citations (612 nodes) does not contain the item. Duplicate search found nothing: lem-kun-descent-limit-open is the affine-scheme case only, pqf-lem-limit-qc-open-descends is the scheme version and is cited, the spectral-space nodes are about other objects, and lem-sfb-affine-space-limit-schematic-stage is a citer. Batch-5: the three trf citations (qc-finite-affine-atlas-refinement, fibre-products-etale-covers, chartwise-etale-permanence) are generic algebraic-space foundations and not steps of the trace formula or of Poincare duality. The two a1 citations reach sec-trace-formula only through the general definition def-trf-algebraic-space. All five are accepted. The seven declared tool_uses are acceptable as generic off-route tools. No SGA citation and no doubled backslashes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLimitOpenCoverDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_stage_finite_qc_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLimitOpenCoverDescent.lean",
+  "statement": "theorem exists_stage_finite_qc_open_cover {S : Scheme.{u}} {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (hqc : ∀ i : Iᵒᵖ, ∃ (T : Over S) (a : yoneda.obj T ⟶ (D.obj i).obj.obj), CompactSpace T.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ i : Iᵒᵖ, IsAbsolutelyQuasiSeparated (D.obj i)) (haff : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) (D.map f).hom.hom) (X : AlgebraicSpace S) (π : (Functor.const Iᵒᵖ).obj X.obj ⟶ D ⋙ ObjectProperty.ι IsAlgebraicSpace) (hlim : IsLimit (Cone.mk X.obj π)) (i₀ : I) {A : Type u} [Finite A] (W : A → OpenSubspace X) (hWqc : ∀ a : A, ∃ (T : Over S) (b : yoneda.obj T ⟶ (W a).val.toFunctor), CompactSpace T.left ∧ IsEtale b ∧ IsSurjective b) (hcover : (⋃ a : A, pointImage (W a).val.ι) = Set.univ) : ∃ (i : I), i₀ ≤ i ∧ ∃ V : A → OpenSubspace (D.obj (op i)), (∀ a : A, (V a).val.preimage (π.app (op i)).hom = (W a).val) ∧ (∀ (j : I) (hij : i ≤ j), ∃ Vj : A → OpenSubspace (D.obj (op j)), (∀ a : A, (Vj a).val = (V a).val.preimage (D.map (homOfLE hij).op).hom.hom) ∧ (∀ a : A, ∃ (T : Over S) (b : yoneda.obj T ⟶ (Vj a).val.toFunctor), CompactSpace T.left ∧ IsEtale b ∧ IsSurjective b) ∧ (∀ (a : A) (U₁ U₂ : Over S) (b₁ : yoneda.obj U₁ ⟶ (Vj a).val.toFunctor) (b₂ : yoneda.obj U₂ ⟶ (Vj a).val.toFunctor), IsAffine U₁.left → IsAffine U₂.left → CompactSpace (Point (Limits.pullback b₁ b₂))) ∧ (⋃ a : A, pointImage (Vj a).val.ι) = Set.univ) ∧ (∀ (j k : I) (hij : i ≤ j) (hjk : j ≤ k) (a : A), ∃ q : ((V a).val.preimage (D.map (homOfLE (le_trans hij hjk)).op).hom.hom).toFunctor ⟶ ((V a).val.preimage (D.map (homOfLE hij).op).hom.hom).toFunctor, q ≫ ((V a).val.preimage (D.map (homOfLE hij).op).hom.hom).ι = ((V a).val.preimage (D.map (homOfLE (le_trans hij hjk)).op).hom.hom).ι ≫ (D.map (homOfLE hjk).op).hom.hom ∧ IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) q)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite covers use unions of point images, not sectionwise subfunctor unions. The later-stage clause includes j = i, so it also asserts quasi-compactness, absolute quasi-separatedness and covering for the descended family itself. Restricted transitions are uniquely fixed by commutation with the monic open inclusions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311b5d22c",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after the 131b RETURN (H2/H4). The Lean module is byte-identical to 131b; the item node's only change is the added stmt_dep def-sfb-space-absolute-quasi-separated (landed by Q09, owner of IsAbsolutelyQuasiSeparated), which is the requested correction. Statement, source and proof are unchanged against live; no parallel landing. Independent clause check against Stacks 084R/0827/07SR/086W and the side-live declarations found no fault: the inverse-limit setup, qcqs and affine-transition hypotheses, the point-image cover and the j=i case are all right, q is unique, and the qs condition on open subspaces is written inline because open subspaces are not bundled as algebraic spaces, which is fine now that the owner is cited. Edge cases (empty family, empty stages, base not quasi-separated, universe u) are covered. lean.statement matches the file verbatim; the only proof is a single sorry; no hollow definition; both report sections present. No compile run (no FIX); the worker reports a clean scompile."
+ }
+}

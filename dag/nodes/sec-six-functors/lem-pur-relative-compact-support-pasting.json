@@ -1,0 +1,337 @@
+{
+ "id": "lem-pur-relative-compact-support-pasting",
+ "kind": "statement",
+ "title": "Horizontal pasting for compactification-relative constant and strict-tower exchanges",
+ "statement": "Let $B$ be a commutative ring. For each scheme $T$ use the small pro-etale site and constant-$B$ module derived operations [def-weil-pbc-proetale-operations]. Work either in $D(T_{\\mathrm{proet}},\\underline B_T)$ or in $D(\\mathcal T_T)$, where $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(\\underline B_T))$, with the normalized termwise derived adjunctions and compositors of [def-cbc-strict-constant-tower-operations]. Let $f:X\\to Y$ be separated of finite type and supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ quasi-compact open and $p$ proper [def-weil-compactifications-refinements]. Let $a:Y_1\\to Y$ and $b:Y_2\\to Y_1$ be arbitrary scheme maps and use their pullback compactifications [pur713-def-base-changed-compactification], identifying $(c_a)_b$ with $c_{a\\circ b}$ by the unique projection-preserving fibre-product isomorphism [def-pc-fibre-product]. Write $a_X,b_X,\\bar a,\\bar b$ for the induced maps on opens and compactifications, $A_t$ for inverse image, $P=Rp_*$, $P_a=Rp_{a,*}$ and $J=j_!$; in the tower case these symbols mean the derived termwise operations and termwise open extension [def-cbc-strict-tower-open-extension]. Let $E_a:A_aP\\to P_aA_{\\bar a}$ be the unit--square--counit mate [def-weil-pbc-adjunction-mate], and $\\beta_a:A_{\\bar a}J\\xrightarrow{\\sim}J_aA_{a_X}$ the open-unit-normalized comparison [lem-cbc-strict-tower-proper-open-calculus]. Set $H_a=(P_a\\beta_a)\\circ(E_aJ)$, and define $E_b,\\beta_b,H_b$ on $c_a$ in the same way. Then, with the canonical pullback compositors,\n$$E_{a\\circ b}=(E_bA_{\\bar a})\\circ(A_bE_a),\\qquad\n\\beta_{a\\circ b}=(\\beta_bA_{a_X})\\circ(A_{\\bar b}\\beta_a),$$\n$$H_{a\\circ b}=(H_bA_{a_X})\\circ(A_bH_a).$$\nThese are natural-transformation equalities for the specified derived maps; in the tower case they hold before evaluation. For finite $B$, evaluation of the tower maps agrees with the ordinary constant-$B$ maps. When $B=A_{E,n}$ and the schemes and base maps satisfy the finite-coefficient hypotheses of [def-exchange-projection], these ordinary maps are exactly its chosen-compactification maps. The equations respect the projection-preserving identifications for three successive base maps, independently of parenthesization. No etale-origin hypothesis, isomorphism hypothesis on the base maps, or equivariant compactification is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47 (remark-compose-base-change-horizontal); agent extension to compactification-relative proper/open composites and derived constant-coefficient strict towers."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-compactifications-refinements",
+  "pur713-def-base-changed-compactification",
+  "def-pc-fibre-product",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Identify the iterated base-changed factorizations with the one for $a\\circ b$. Both iterated fibre products represent triples with the same projection equations. The two comparison maps preserving those projections are inverse by uniqueness. This also identifies the open maps, since their maps into the compactification are uniquely characterized by the two projection equations. For three base maps both bracketings preserve every projection, so the comparison is the same. These are precisely the identifications used below.",
+   "uses": [
+    "def-pc-fibre-product",
+    "pur713-def-base-changed-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  },
+  {
+   "text": "Evaluation commutes with the exact tower pullbacks and open extensions by localization of their termwise squares. For direct image use the existing evalR comparison, the mate of evalG inverse, which is invertible by K-injective evaluation. Apply the coefficient-exchange counit theorem to the evaluated pullback square to identify E. Use beta_evaluation for beta, after identifying ordinaryBeta with singleBeta by localization and inversion of the same module transpose. Expand supportEval and H; naturality of evalR and ordinaryE combines the two equations. These are direct equations of specified maps; no faithfulness of evaluation is asserted or used.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-coefficient-exchange-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  },
+  {
+   "text": "Apply strict pullback-square pasting to the inverse square comparisons. Invert the isomorphisms to obtain the forward-square pasting equation. For any three adjunctions, cancel the right compositor, transpose through the final adjunction, and apply the mate counit formula twice. Naturality of the second square, the forward-square equation and naturality of the right compositor give the pasted proper-mate equality. The same argument proves the ordinary assertion. For ordinary pullbacks, descend the associative section-normalized module compositors by exact localization; normalization of a square by the two compositors gives the same pullback-square pasting calculation. All base maps remain arbitrary.",
+   "uses": [
+    "lem-cbc-strict-tower-pullback-square-pasting",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-direct-image-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  },
+  {
+   "text": "Use beta_comp from the strict proper/open calculus for the tower open comparison. For ordinary modules first prove that the extension-by-zero adjunction unit is invertible: compare with the localized-site open adjunction through the fully faithful fixed-coefficient restriction functors. The cartesian module square identifies the target with an object in the fully faithful open extension image, so the counit and the transposed pulled-back unit are invertible. Localize its unit equation. Transpose successive inverse beta maps through the three open adjunctions and apply the ordinary square-pasting equation. Inverting this equality gives ordinary beta pasting. Cancellation uses only beta and the specified pullback compositors, never a proper exchange map.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "pur713-def-base-changed-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  },
+  {
+   "text": "Suppress the canonical compositors and evaluate on an arbitrary object $K$ of the derived tower category. Expanding the two $H$ factors gives\n$$P_{ab}(\\beta_{b,A_{a_X}K})\\ E_{b,J_aA_{a_X}K}\\ A_b(P_a(\\beta_{a,K}))\\ A_b(E_{a,JK}).$$\nNaturality of $E_b:A_bP_a\\to P_{ab}A_{\\bar b}$ at the morphism $\\beta_{a,K}:A_{\\bar a}JK\\to J_aA_{a_X}K$ replaces the middle two factors by $P_{ab}(A_{\\bar b}\\beta_{a,K})\\ E_{b,A_{\\bar a}JK}$. Functoriality, Step 4 and Step 3 now make the result $P_{ab}(\\beta_{ab,K})E_{ab,JK}=H_{ab,K}$. The calculation is natural in $K$, proving the transformation equality before evaluation. The identical naturality calculation combines the separately proved ordinary factors. Only naturality and functor composition were used; no $E$ or base map was inverted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  },
+  {
+   "text": "Apply the two-step pasting equations to the first two squares, the last two squares, and the two resulting pairs. Quasi-compactness of the intermediate open follows by cartesian base change. Replace each nested paste with its single composite map. The two parenthesizations of each scheme composite are equal by category associativity; equality elimination identifies their exchange, beta and H maps, including precisely the displayed eqToHom factors. Proof irrelevance identifies the supplied commutativity witnesses.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  },
+  {
+   "text": "For the quotient coefficient ring use its recorded finiteness. The canonical derived compositor, transported to constantRingIso for the composite, has its specified normalized adjunctions, direct-image section formula, module conjugate and termwise complex comparison. The canonical adjunction unit theorem identifies those adjunctions with the actual module adjunctions. The section formula uniquely identifies the direct-image compositor with moduleRComp. Conjugation identifies the module compositor with moduleGComp, and exact localization identifies the derived compositor with ordinaryGComp. This is the general normalized-comparison localization calculation exposed by the existing comparison-localization module. Hence sourceSquare equals the ordinary square. ordinaryBeta and singleBeta are the same localization of the inverse open-unit transpose. Substitute these two equalities into compactificationExchangeFromData; its definition is exactly ordinaryH, including the associators. Specialize to the literal base-changed compactification on the unchanged finite-type S domain.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-proetale-module-pullback-composition",
+    "def-weil-pbc-proetale-operations",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-pod-canonical-module-adjunction-unit",
+    "lem-pod-constant-comparison-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); verification by normalized mates, with exact open extension as in proetale.tex Tag 09AE (definition-extension-zero). Agent argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "pur713-def-base-changed-compactification",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-cbc-strict-tower-pullback-square-pasting",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-exchange-projection",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-pod-canonical-module-adjunction-unit",
+  "lem-pod-constant-comparison-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47 (remark-compose-base-change-horizontal), using exact open extension (Tag 09AE), normalized adjunction mates, and existing comparison-localization proofs. Formalized by S9, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Successive base changes of a chosen compactification: derived proper mate followed by open extension by zero satisfies horizontal pasting in constant coefficient strict towers",
+   "results": "ModuleCat.extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.extendScalars_assoc (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.extendScalars_assoc' (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.extendScalars_assoc_assoc (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); ModuleCat.homEquiv_extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings); OnePoint.map_comp (Mathlib/Topology/Compactification/OnePoint/Basic); BoundedContinuousFunction.extend_comp (Mathlib/Topology/ContinuousMap/Bounded/Basic); AbstractCompletion.compare_comp_eq_compare (Mathlib/Topology/UniformSpace/AbstractCompletion)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported direct image Rp star j shriek exchange composition for two arbitrary scheme base maps before evaluating inverse systems",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp (Mathlib/AlgebraicGeometry/Modules/Sheaf); AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app (Mathlib/AlgebraicGeometry/Modules/Sheaf); AlgebraicGeometry.Scheme.Modules.pushforwardComp (Mathlib/AlgebraicGeometry/Modules/Sheaf); AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app (Mathlib/AlgebraicGeometry/Modules/Sheaf); AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc (Mathlib/AlgebraicGeometry/Scheme); AlgebraicGeometry.Scheme.Hom.map_appLE_assoc (Mathlib/AlgebraicGeometry/Scheme); AlgebraicGeometry.Scheme.comp_appLE_assoc (Mathlib/AlgebraicGeometry/Scheme); AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc (Mathlib/AlgebraicGeometry/Scheme)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp (Mathlib.CategoryTheory.Adjunction.Mates)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Horizontal pasting of compact support base change maps on derived categories of strict inverse systems of sheaves",
+   "results": "CategoryTheory.Limits.pasteHorizIsPullback (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting); CategoryTheory.Limits.leftSquareIsPullback (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting); CategoryTheory.Limits.pasteHorizIsPushout (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting); CategoryTheory.Limits.PushoutCocone.pasteHoriz (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting); CategoryTheory.IsPushout.paste_horiz_iff (Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic); CategoryTheory.IsPullback.paste_horiz (Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic); CategoryTheory.Limits.PullbackCone.pasteHoriz (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting); CategoryTheory.Limits.pasteHorizIsPushoutEquiv (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|extensionByZero.*baseChange|baseChange.*extensionByZero",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:209: theorem mateEquiv_hcomp (α : TwoSquare G L₁ L₂ H) (β : TwoSquare H L₃ L₄ K) :; Mathlib/CategoryTheory/Adjunction/Mates.lean:252:   simp only [mateEquiv_hcomp] at vcomp; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:274: theorem mateEquiv_hcomp (α : g ≫ l₂ ⟶ l₁ ≫ h) (β : h ≫ l₄ ⟶ l₃ ≫ k) :; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:373:   have hcomp1 := mateEquiv_hcomp adj₁ adj₃ adj₂ adj₄ α β; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:374:   have hcomp2 := mateEquiv_hcomp adj₃ adj₅ adj₄ adj₆ γ δ; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:489:   have := mateEquiv_hcomp adj₁ adj₁ adj₂ adj₂' ((λ_ _).hom ≫ (ρ_ _).inv); Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:504:   have := mateEquiv_hcomp adj₁ adj₁' adj₂ adj₂",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized compact-support strict-tower/finite/completed comparison asserted here; generic mate and functor laws give only constituents already present in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|extensionByZero.*baseChange|baseChange.*extensionByZero",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general mate laws and ordinary sheaf compositors are constituents, reused via existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of compact support base change maps on derived categories of inverse systems of sheaves",
+   "results": "IsBaseChange.of_comp; IsBaseChange.comp_iff; LinearMap.baseChange_comp; IsBaseChange.comp; LinearMap.liftBaseChange_comp; AlgebraicGeometry.SheafedSpace.comp_base; IsBaseChange.linearMapRight; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general mate laws and ordinary sheaf compositors are constituents, reused via existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general mate laws and ordinary sheaf compositors are constituents, reused via existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of derived proper base change mates followed by open extension by zero in categories of strict towers of sheaves",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'; SheafOfModules.pushforwardNatTrans_comp; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general mate laws and ordinary sheaf compositors are constituents, reused via existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley horizontal composition proper pushforward open immersion extension by zero and evaluation of inverse systems",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; TopCat.Presheaf.Pushforward.comp_inv_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp; TopCat.Presheaf.Pushforward.comp; SheafOfModules.pushforwardComp_inv_app_val_app; TopCat.Presheaf.Pushforward.comp_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general mate laws and ordinary sheaf compositors are constituents, reused via existing DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-basechange-semilinear-pasting",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly paragraph: base-change compatibility; returned auxiliary lem-pur-weil-basechange-semilinear-pasting Step 3--5.",
+   "via": [
+    "lem-pur-weil-basechange-semilinear-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-compact-support-pasting",
+  "worker": "stage1",
+  "summary": "Q94 gives the normalized derived mate calculation, open comparison and explicit naturality interchange for H. No new nodes: existing generic mate, strict-square and open-calculus lemmas suffice. Corrects the out-of-domain reference to def-exchange-projection, without restricting formal pasting.",
+  "blueprint": "Constituent-compatibility assembly paragraph of prop-pur-weil-equivariance-compatibilities.proof.md: base-change constituent; relative proper/open pasting used by lem-pur-weil-basechange-semilinear-pasting Steps 1--2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coefficient-exchange-mates",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   },
+   {
+    "node": "lem-cbc-strict-tower-pullback-square-pasting",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic normalized adjunction, evaluation or open-square tool for the compactification-relative base-change constituent; does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-cbc-strict-tower-pullback-square-pasting",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-bde8e1cf7",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-bde8e1cf7 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps and the statements of all 14 cited nodes; Stacks 0E47 (sites-cohomology.tex l.4093-4123, which omits the verification); and the parent's citing step. The delivery has 0 new nodes, which is fine here: the item is an unsplit Q155 node with no repair note, so the re-split rules do not apply. Statement: the base clause identifying the maps with def-exchange-projection for every finite B was ill-typed, because that definition only exists for A_{E,n}, with ell invertible and finite-type S-schemes (F_2xF_3 is a counterexample). The delivery restricts that identification to the definition's domain and keeps the formal and evaluation claims for every B. This corrects the domain without weakening anything: the parent uses it only with A_{E,n} over finite-type k-schemes. Steps checked: Step 2 (e_nR_uM = Ru_*e_nM by K-injective evaluation, and the hypotheses of coefficient-exchange-mates hold); Step 3 typing for mate-pasting clause 1, (G,H,G2,H2)=(A_a,A_abar,A_b,A_bbar), matched to strict pullback-square pasting; Step 4 is the open-square part of the strict calculus for arbitrary B; Step 5 recomputed through naturality of E_b at beta_a. Edge cases: j=id, X empty, B=Z, non-invertible E. No cycles, no SGA, proof_deps equals the union of uses, and no duplicates (reindexing-node covers isomorphisms only; ordinary-ringed-exchange-coherence uses other coefficients). Two repairs: (1) C3/C1, Step 7 claimed 'the same adjunction mate' without showing that def-exchange-projection's theta (pullback compositor of lem-weil-pbc-proetale-derived-pullback-composition) is the conjugate-normalized tower compositor. I added that link: lem-pur-proetale-module-pullback-composition shows the termwise pullback comparison is the conjugate of the sectionwise fibre-product identification, and the derived compositor is its class. I added both citations and def-weil-pbc-proetale-operations, both are on the route and acyclic, and set elementary false. (2) Step 3 credited the horizontal compositor change to mate-pasting clause 3. It now uses clause 4 plus clause 1 for the horizontal compositors and clause 3 only for the vertical adjunction change. Tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeCompactSupportPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.RelativeCompactSupport.towerPasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.ordinaryG",
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.sourceGComp",
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.sourceSquare",
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.finiteChosenExchange",
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.quotientChosenExchange",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryR",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryJ",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryAdj",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryGComp",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryE",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryBetaInv_isIso",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryBeta",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.towerH",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryH",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.paste",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.towerPasting",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryPasting",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.quotientDomainAgreement",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.supportEval",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.finiteEvaluation",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.towerTriplePasting",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryTriplePasting"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeCompactSupportPasting.lean",
+  "statement": "theorem towerPasting {X₀ X₁ X₂ Y₀ Y₁ Y₂ : Scheme.{u}} {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} (c₀ : Compactification f₀) (c₁ : Compactification f₁) (c₂ : Compactification f₂) [QuasiCompact c₀.i] (a : Y₁ ⟶ Y₀) (b : Y₂ ⟶ Y₁) (x₁ : X₁ ⟶ X₀) (x₂ : X₂ ⟶ X₁) (z₁ : c₁.Z ⟶ c₀.Z) (z₂ : c₂.Z ⟶ c₁.Z) (sp₁ : IsPullback z₁ c₁.g c₀.g a) (sp₂ : IsPullback z₂ c₂.g c₁.g b) (sj₁ : IsPullback x₁ c₁.i c₀.i z₁) (sj₂ : IsPullback x₂ c₂.i c₁.i z₂) : (exchange B (z₂ ≫ z₁) c₂.g c₀.g (b ≫ a) (sp₂.paste_horiz sp₁).w = paste (gComp B b a) (gComp B z₂ z₁) (exchange B z₁ c₁.g c₀.g a sp₁.w) (exchange B z₂ c₂.g c₁.g b sp₂.w)) ∧ ((beta B (x₂ ≫ x₁) c₂.i c₀.i (z₂ ≫ z₁) (sj₂.paste_horiz sj₁).w (sj₂.paste_horiz sj₁)).hom = paste (gComp B z₂ z₁) (gComp B x₂ x₁) ((beta B x₁ c₁.i c₀.i z₁ sj₁.w sj₁).hom) ((beta B x₂ c₂.i c₁.i z₂ sj₂.w sj₂).hom)) ∧ (towerH B c₀ c₂ (b ≫ a) (x₂ ≫ x₁) (z₂ ≫ z₁) (sp₂.paste_horiz sp₁) (sj₂.paste_horiz sj₁) = paste (gComp B b a) (gComp B x₂ x₁) (towerH B c₀ c₁ a x₁ z₁ sp₁ sj₁) (towerH B c₁ c₂ b x₂ z₂ sp₂ sj₂))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The complete statement is distributed over towerPasting and ordinaryPasting (E, beta and H), finiteEvaluation, quotientDomainAgreement (the exact coefficient-extension domain), and towerTriplePasting/ordinaryTriplePasting. Cartesian realizations of the successive compactifications encode the specified unique projection-preserving fibre-product identifications; the literal Compactification.baseChange instantiations were compiled. All operations are the recorded constant-ring module operations or their termwise tower operations. The ordinary beta descends the existing specified open-unit transpose, whose arbitrary-ring invertibility is stated as the construction theorem ordinaryBetaInv_isIso. Definitions contain real data; every theorem is sorry. The finite and quotient instances of the recorded compactificationExchangeFromData are item-owned helpers in this module. The live def-exchange-projection Lean record, primary declaration, module, and complete declaration list remain unchanged. Only quotientDomainAgreement identifies an ordinary map with that definition, on its specified A_(E,n) domain; no arbitrary-finite-ring agreement theorem is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baac36d43",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 9a8d7d62: def-exchange-projection node+record byte-identical to live; item differs from live only in lean; ExchangeProjectionRelativeConstant.lean dropped, its 5 helpers moved verbatim into the item module as item-owned decls applying the recorded compactificationExchangeFromData; finiteChosenAgreement dropped; quotientDomainAgreement only on A_(E,n)/ℓ-invertible/finite-type-S domain, non-hollow (K-flat proEtaleCanonicalPullbackComposition theta + singleBeta vs moduleSquareG/ordinaryBeta). Clause table re-checked (arbitrary B, E/beta/H tower+ordinary pastings before evaluation, finiteEvaluation, triple pastings, no etale-origin binders); statement verbatim; 22 decls = record; 7 sorry theorems; docstrings with steps; report sections present. No compile (no change). Advisory: beta/exchange/squareG owned by def-cbc-strict-tower-proper-open-arrows, reached only via theorem stmt_dep lem-cbc-strict-tower-proper-open-calculus (stage-1 citation gap); moduleSquareG/singleBetaInv base-era unrecorded; lean.note could repeat Q14 import-clash reason."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261024T204657-L-3819409",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

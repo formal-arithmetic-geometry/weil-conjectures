@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-clopen-scalar-comparison-descent",
+ "kind": "statement",
+ "title": "Descent of the clopen scalar comparison",
+ "statement": "Let X be a scheme and j_i:Y_i→X a finite pairwise disjoint clopen cover. Use the actual small pro-etale module sheaves, scalar extension presentations p_a and their normalized successive compositor n, exact restrictions r_i and r_D,i, canonical cochain computation morphisms c_a(P), normalized identity units, and scalar comparison interfaces of [def-pur-clopen-derived-scalar-comparison-data]. For any fixed global presentations p with normalization n, and component presentations q_i with normalizations m_i, there exists a comparison family d_i. Its ordinary isomorphism E_a⋙r_i ≅ r_i⋙E_(a_i) sends s⊗x to s⊗x. Its chain comparison has degree k equal to that ordinary comparison on P^k. Its derived comparison L E_a⋙r_D,i ≅ r_D,i⋙L E_(a_i) satisfies the exact canonical computation square representative on every flat-term K-flat P. Any derived natural transformation satisfying that same representative square on all such P equals its forward map. These are the sections, degree, representative and unique predicates; computed, extended, units and compositor coherence are not asserted here.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0G7E; sites-modules.tex Tag 03EK and 05V4; indicated part of parent proof."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved ordinary scalar restriction comparison, including its pure tensor formula. Apply NatIso.mapHomologicalComplex degreewise; its component in degree k is definitionally the ordinary comparison on P.X k.",
+   "uses": [
+    "lem-pur-clopen-ordinary-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every cochain complex admits a quasi-isomorphism from a K-flat complex with tensor-flat terms. Convert the tensor-flatness clause to IsFlatOnSite through siteSheafTensorRightIso. The homotopy quotient is full and surjective on objects. The resolving full homotopy subcategory therefore localizes to the entire derived category, and restriction of natural transformations along its cochain representatives is fully faithful. This is the one-variable specialization of the proved resolving-representative whiskering argument, using its restriction_localization and fullyFaithfulWhiskeringOfFullEssSurj helpers.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the canonical computation morphisms as a natural transformation from Q followed by derived extension to termwise ordinary extension followed by Q. Normalization.computed makes this transformation invertible on flat-term K-flat complexes. Clopen tensor/K-flat detection makes it invertible also after component restriction. The exact restriction localization factors and the chain comparison give two invertible maps from the restricted derived functors to the same chainwise functor. Their quotient descends uniquely by the preceding fully faithful restriction. The preimage is an isomorphism and satisfies precisely the representative square. For any competing natural transformation, that square and cancellation of the same invertible computation map identify its restriction with this preimage; faithfulness gives uniqueness.",
+   "uses": [
+    "def-pur-clopen-derived-scalar-comparison-data",
+    "def-weil-pbc-successive-derived-quotient-data",
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "lem-pur-clopen-unbounded-derived-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ordinary-scalar-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-localization-universal-property",
+  "def-pur-clopen-derived-scalar-comparison-data",
+  "def-weil-pbc-successive-derived-quotient-data",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "lem-pur-clopen-unbounded-derived-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D. W5 implements ordinary sheafification comparison and one-variable resolving-subcategory descent, using the fixed normalization counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between derived functors extends uniquely from flat K-flat complexes and respects composition and identity",
+   "results": "Generic leftDerivedNatTrans and mapDerivedCategoryFactors hits; no theorem states the clopen scalar comparison or its normalized coherence.",
+   "date": "2026-10-24",
+   "verdict": "Use generic universal-derived and localization APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One exact hit in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-24",
+   "verdict": "Used for the scalar identity unit; does not itself provide comparison descent or coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyInjective_whisker|liftNatIso|mapHomologicalComplexIdIso",
+   "results": "Mathlib.CategoryTheory.Sites.PreservesLocallyBijective and Mathlib.CategoryTheory.Localization.Predicate contain generic tools.",
+   "date": "2026-10-24",
+   "verdict": "Ordinary sheafification and derived localization tools exist; their application and coherence remain explicit work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism on flat K-flat models descends to derived module sheaves and is compatible with scalar composition",
+   "results": "Generic localization and derived functor search; precise comparison and explicit coherence remain stated separately.",
+   "date": "2026-10-24",
+   "verdict": "No full match for the new assertions; use existing generic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarCompositor",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-derived-scalar-compositor",
+   "place": "Descent of the clopen scalar comparison"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenScalarComparisonDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenScalarComparisonDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_scalar_comparison_descent",
+  "statement": "theorem clopen_scalar_comparison_descent\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hc : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (p : Presentations.{t, u} X)\n    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := X.ProEt) (J := topology X) (hD := derived.{t, u} X) @p)\n    (q : ∀ i, Presentations.{t, u} (Y i))\n    (m : ∀ i, Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := (Y i).ProEt) (J := topology (Y i)) (hD := derived.{t, u} (Y i))\n      (fun {R S} a ↦ q i (R := R) (S := S) a))\n    : ∃ d : ∀ i, Comparison.{t, u} (j i) @p\n        (fun {R S} a ↦ q i (R := R) (S := S) a),\n      ∀ i, (d i).sections ∧ (d i).degree ∧ (d i).representative ∧ (d i).unique",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T203634-L-2835969",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

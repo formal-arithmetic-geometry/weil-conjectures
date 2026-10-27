@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-invariant-component-affine-descent",
+ "kind": "statement",
+ "title": "Affine shrinking and quasi-compact descent of an invariant section component",
+ "statement": "Let $f:X\\to B$ be a flat morphism of finite presentation of schemes [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions] with geometrically reduced fibres [def-pc-geometrically-irreducible]. Let $p:Z\\to B$ be finite locally free [def-pc-finite-locally-free], and let $\\sigma:Z\\to X$ satisfy $f\\circ\\sigma=p$. Put $Y=X\\times_B Z$, let $s=(\\sigma,\\mathrm{id}_Z)$ be its section over $Z$, and define $C\\subseteq Y$ as the union of the connected components of the fibres containing $s$ [def-pc-base-change, def-pc-scheme-fibre, def-weil-connected-scheme]. Assume $C$ is open [def-weil-open-immersion]. Put $R=Z\\times_B Z$, with structure map $q:R\\to B$, and write $a_i:X\\times_B R\\to Y$ and $h:X\\times_B R\\to R$ for the induced projections. Let $b_0\\in B$ with $Z_{b_0}\\ne\\varnothing$. Suppose an open $W\\subseteq R$ contains $q^{-1}(b_0)$ and satisfies $h^{-1}W\\cap a_0^{-1}C=h^{-1}W\\cap a_1^{-1}C$. Then there exist an affine open $V\\subseteq B$ containing $b_0$ and a unique open $U\\subseteq X_V=X\\times_B V$ such that $q^{-1}V\\subseteq W$, $p_V:Z_V\\to V$ is finite locally free and surjective [def-weil-surjective-morphism], $Z_V$ is affine, and $\\pi^{-1}U=C_V$ for $\\pi:X_V\\times_V Z_V\\to X_V$ and $C_V=C\\times_B V$. Both $p_V$ and $\\pi$ are fpqc coverings [def-weil-pbc-fpqc-covering], and both $C_V$ and $U$ are quasi-compact [def-weil-pbc-quasi-compact-scheme]. Uniqueness is for the chosen $V$ and its specified pullback $C_V$. No geometric connectedness of $X_{b_0}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057I, lemma-descent-connected-fibres, proof from finite locally free open-and-closed shrinking through fpqc descent and the final quasi-compactness paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-geometrically-irreducible",
+  "def-pc-finite-locally-free",
+  "def-pc-base-change",
+  "def-pc-scheme-fibre",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of finite locally free, $p$ is finite, flat and locally of finite presentation. The first projection $R=Z\\times_B Z\\to Z$ is finite by base change, hence its composite $q:R\\to B$ is finite. Therefore $D=q(R\\setminus W)$ is closed in $B$. Since $q^{-1}(b_0)\\subseteq W$, $b_0\\notin D$. Also $p$ is open because it is flat and locally of finite presentation, so $p(Z)$ is an open neighbourhood of $b_0$ (the fibre is nonempty). Choose an affine open $b_0\\in V\\subseteq p(Z)\\setminus D$. Then $q^{-1}V\\subseteq W$ and every point of $V$ has a preimage under $p$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I, lemma-descent-connected-fibres, affine shrinking and descent paragraphs"
+   }
+  },
+  {
+   "text": "Base change preserves finiteness, flatness, and local finite presentation, so p_V is finite locally free. The pullback-point range formula and V ⊆ range(p) prove surjectivity of p_V; finiteness over affine V gives an affine source Z_V. The projection π is finite, flat, and surjective by base change of the corresponding individual morphism properties. Apply Scheme.Hom.singleton_mem_fpqcPrecoverage to p_V and π. This verifies both singleton coverings directly rather than invoking base change of a covering family.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-finite-locally-free",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I, lemma-descent-connected-fibres, affine shrinking and descent paragraphs"
+   }
+  },
+  {
+   "text": "Put P = X_V ×_V Z_V, π:P→X_V, and ρ:P→Z_V. On Q=P×_{X_V}P, let l,r be the projections. Their composites to X_V agree, so the two maps Q→Z obtained from ρ give a map d:Q→Z×_B Z. Together with the common map Q→X this gives e:Q→X×_B(Z×_B Z). Pullback extensionality proves e composed with a_0 and a_1 equals l and r composed with restrictionMap. Its map to B factors through V, so q^{-1}(V)⊆W puts e(Q) inside h^{-1}(W). Evaluating the supplied invariance equality at e(x) gives equal pullbacks of C_V on Q. Apply openSubscheme_existsUnique_of_fpqc to the PUnit-indexed singleton family π; obtain U and its uniqueness for the chosen V.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0, lemma-open-fpqc-covering; applied as in Tag 057I"
+   }
+  },
+  {
+   "text": "Let Y=X×_B Z with g:Y→Z, and let r_Z:Z_V→Z be the restriction projection. Pullback pasting and cancellation show that restrictionMap:P→Y, together with ρ:P→Z_V, is a cartesian square, hence gives an isomorphism e:P≅Y×_Z Z_V compatible with its first projection. Let s be the section of g induced by σ. The canonical base-change specialization of the section-component cartesian theorem (Stacks 055M; preimage_setOf_mem_connectedComponentIn_preimage_singleton in SlicingFlat) identifies the inverse image of C in Y×_Z Z_V with the relative component of the base-changed section. The base Z_V is affine; base change supplies local finite presentation and quasi-compact/quasi-separated morphisms, hence compact and quasi-separated total and base spaces. Apply isCompact_setOf_mem_connectedComponentIn_preimage_singleton to get compactness there. Pull this compact open back along e.hom, a quasi-compact isomorphism, to obtain compactness of C_V. The existing compactness theorem needs neither flatness nor geometrically reduced fibres, so no field-extension argument is necessary.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-base-change",
+    "lem-trf-section-component-quasi-compact",
+    "lem-sbc-section-component-cartesian",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I, final quasi-compactness paragraph, using Tag 055P (lemma-connected-along-section-locally-constructible) through the existing section-component quasi-compactness node"
+   }
+  },
+  {
+   "text": "From π^{-1}(U)=C_V and surjectivity of π obtain π(C_V)=U using Set.image_preimage_eq. The continuous image of the compact set C_V under π is compact, so U is compact. Combine the affine shrinking, finite locally free and surjective cover, two singleton fpqc membership proofs, compactness, descent equality, and uniqueness in the required conjunction. No hypothesis of geometric connectedness was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057I, lemma-descent-connected-fibres, affine shrinking and descent paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fibre-product-points",
+  "def-pc-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "def-pc-fibre-product",
+  "lem-trf-section-component-quasi-compact",
+  "lem-sbc-section-component-cartesian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057I, lemma-descent-connected-fibres, affine shrinking, fpqc descent and quasi-compactness paragraphs; Tag 055M for section-component base change",
+  "note": "A3 Lean proof follows the five stated steps. Cover memberships are verified directly for finite flat surjections, overlap compatibility is proved by explicit universal lifts, and section-component base change plus the existing compactness theorem replace the unnecessary geometric-reducedness verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free multisection and an open section component with equal pullbacks on a neighbourhood of a double fibre descend after affine base shrinking to a quasi compact open",
+   "results": "{\"t\": \"2026-10-22T06:47:16Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free multisection and an open section component with equal pullbacks on a neighbourhood of a double fibre descend after affine base shrinking to a quasi compact open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\"], \"digest\": \"a7ca6a299aafe5b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fpqc descent of the property IsOpenImmersion assumes a morphism already given; the cover and quasi-compactness hits do not construct an invariant relative-component descent after affine shrinking"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink an affine neighbourhood so a finite flat cover is surjective and an invariant quasi compact open descends by fpqc descent",
+   "results": "{\"t\": \"2026-10-22T06:47:16Z\", \"tool\": \"leanfinder\", \"query\": \"Shrink an affine neighbourhood so a finite flat cover is surjective and an invariant quasi compact open descends by fpqc descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\"], \"digest\": \"eac92c77c549d251\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fpqc descent of the property IsOpenImmersion assumes a morphism already given; the cover and quasi-compactness hits do not construct an invariant relative-component descent after affine shrinking"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsOpenImmersion\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinite\\\", \\\"IsOpenImmersion\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fpqc descent of the property IsOpenImmersion assumes a morphism already given; the cover and quasi-compactness hits do not construct an invariant relative-component descent after affine shrinking"
+  },
+  {
+   "tool": "grep",
+   "query": "(fpqc|descent).*([Oo]pen|[Cc]ompact)|([Oo]pen|[Cc]ompact).*(fpqc|descent)",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"grep\", \"query\": \"(fpqc|descent).*([Oo]pen|[Cc]ompact)|([Oo]pen|[Cc]ompact).*(fpqc|descent)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"be0281a93fd0b589\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fpqc descent of the property IsOpenImmersion assumes a morphism already given; the cover and quasi-compactness hits do not construct an invariant relative-component descent after affine shrinking"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend a quasi compact open along a finite faithfully flat morphism after shrinking the base around a fibre",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"leansearch\", \"query\": \"Descend a quasi compact open along a finite faithfully flat morphism after shrinking the base around a fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.QuasiCompact.isCompact_preimage\"], \"digest\": \"6ab19b434a687e1c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fpqc descent of the property IsOpenImmersion assumes a morphism already given; the cover and quasi-compactness hits do not construct an invariant relative-component descent after affine shrinking"
+  },
+  {
+   "tool": "grep",
+   "query": "(descent|fpqc).*(open|component)|section.*component",
+   "results": "{\"t\": \"2026-10-23T21:17:21Z\", \"tool\": \"grep\", \"query\": \"(descent|fpqc).*(open|component)|section.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism-property descent, affine-limit approximation or general quasi-compactness, not the complete section-component shrinking and descent statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"Flat\", \"IsOpenMap\"",
+   "results": "{\"t\": \"2026-10-23T21:17:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinite\\\", \\\"Flat\\\", \\\"IsOpenMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism-property descent, affine-limit approximation or general quasi-compactness, not the complete section-component shrinking and descent statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant open subscheme descends along a finite faithfully flat cover after shrinking an affine neighborhood of a fibre",
+   "results": "{\"t\": \"2026-10-23T21:17:22Z\", \"tool\": \"leansearch\", \"query\": \"An invariant open subscheme descends along a finite faithfully flat cover after shrinking an affine neighborhood of a fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"e87f22ce33972241\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism-property descent, affine-limit approximation or general quasi-compactness, not the complete section-component shrinking and descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine shrinking and fpqc descent of a section connected component along a finite locally free multisection",
+   "results": "{\"t\": \"2026-10-23T21:17:30Z\", \"tool\": \"leanfinder\", \"query\": \"Affine shrinking and fpqc descent of a section connected component along a finite locally free multisection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\"], \"digest\": \"8494f2b36a3d6617\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism-property descent, affine-limit approximation or general quasi-compactness, not the complete section-component shrinking and descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a flat finitely presented family with reduced geometric fibers the connected component through a section is quasi compact over an affine base",
+   "results": "{\"t\": \"2026-10-23T21:17:31Z\", \"tool\": \"leanfinder\", \"query\": \"In a flat finitely presented family with reduced geometric fibers the connected component through a section is quasi compact over an affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"cba92427fbda9a0b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism-property descent, affine-limit approximation or general quasi-compactness, not the complete section-component shrinking and descent statement"
+  },
+  {
+   "tool": "grep",
+   "query": "descendsAlong_isOpenImmersion|connectedComponentIn",
+   "results": "{\"t\": \"2026-10-23T21:20:39Z\", \"tool\": \"grep\", \"query\": \"descendsAlong_isOpenImmersion|connectedComponentIn\", \"sub\": \"AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"28\", \"133\"], \"digest\": \"54fefe855ee7f477\"}; source read: Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:133, property descent for an already supplied morphism",
+   "date": "2026-10-23",
+   "verdict": "no match: descent of the property IsOpenImmersion is not the existence of the invariant section-component open after shrinking"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-locally-free-multisection-connected-open",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 057I, lemma-descent-connected-fibres, proof from finite locally free open-and-closed shrinking through fpqc descent and the final quasi-compactness paragraph.",
+   "via": [
+    "lem-trf-finite-locally-free-multisection-connected-open",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-invariant-component-affine-descent",
+  "worker": "stage1",
+  "summary": "Expanded the affine shrinking and fpqc descent tail of Stacks Tag 057I into five steps. Shrink simultaneously away from the finite image of R minus W and into the open image of p. Verify finite locally free, affine and fpqc properties before invoking open descent; reuse the existing section-component quasi-compactness theorem, checking its affine-base and geometrically reduced fibre hypotheses, then prove quasi-compactness downstairs by an open-cover argument. No new nodes or changes to the statement.",
+  "blueprint": "The existing from.place identifies the Tag 057I affine-shrinking/descent/quasi-compactness subargument in the dependency refinement of lem-trf-local-term-locality. Steps 1-2 realize shrinking and covering construction, step 3 realizes invariant-open descent, and steps 4-5 realize the final quasi-compactness paragraph. Whole-blueprint searches for invariant section component, 057I and finite locally free multisection found no duplicate imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-169b9ce18",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-169b9ce18 (reviewer sub-agent of L); spot-checked: I read the whole proof of Stacks 057I (more-morphisms lemma-descent-connected-fibres) and Descent 03N0. Geometric connectedness of X_y is used only to build W. The item takes W and the equality on h^{-1}W as hypotheses, so its statement correctly covers only the shrinking, descent and quasi-compactness tail; the statement is unchanged against live. The delivery is one commit with no new nodes. The item is still unsplit in live and side-live and has no repair note; there is no cycle; proof_deps equals the union of the uses. Step 1: q is finite (base change and composition), hence closed. D=q(R∖W) does not contain b0, p is open (flat and locally of finite presentation), and the fibre node gives b0∈p(Z), so an affine V⊆p(Z)∖D exists with q^{-1}V⊆W. Step 2: p_V is finite locally free and surjective, and Z_V is affine. The fpqc condition is checked against the actual definition (each p_V^{-1}A is affine and maps onto A), and 022D(3) makes {π} an fpqc covering. Step 3: P×_{X_V}P ≅ X×_B q^{-1}V ⊆ h^{-1}W, its projections are the restricted a_i, and the cited 03N0 node states both existence and uniqueness of U. Step 4: g is flat, finitely presented and qcqs; its fibres X_b⊗κ(z) are geometrically reduced; C_V is exactly the section-component set over Z_V; Z_V is affine. These are the hypotheses of lem-trf-section-component-quasi-compact (Lean-closed). Step 5 is elementary: π(C_V)=U by surjectivity, so U is quasi-compact as a continuous image. The off-unit open-subscheme-fpqc-descent node is Lean-closed in slopmaster2 and used as a generic tool. The DAG has no duplicate (the sibling 057I nodes state different parts). Small cases checked: identity cover, Z over a single clopen piece of B, W=R, a disconnected fibre, a non-Noetherian base. No SGA source is used and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantComponentAffineDescent",
+  "declaration": "AlgebraicGeometry.exists_affine_open_invariant_component_descent",
+  "declarations": [
+   "AlgebraicGeometry.InvariantComponentAffineDescent.overlapBase",
+   "AlgebraicGeometry.InvariantComponentAffineDescent.overlapLeft",
+   "AlgebraicGeometry.InvariantComponentAffineDescent.overlapRight",
+   "AlgebraicGeometry.InvariantComponentAffineDescent.restrictionMap",
+   "AlgebraicGeometry.exists_affine_open_invariant_component_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantComponentAffineDescent.lean",
+  "statement": "theorem exists_affine_open_invariant_component_descent {X Z B : Scheme.{u}} (f : X ⟶ B) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [GeometricallyReduced f] (p : Z ⟶ B) [p.IsFiniteLocallyFree] (σ : Z ⟶ X) (hσ : σ ≫ f = p) (C : (pullback f p).Opens) (hC : C.carrier = {y | y ∈ connectedComponentIn ((pullback.snd f p) ⁻¹' {(pullback.snd f p) y}) ((pullback.lift σ (𝟙 Z) (hσ.trans (Category.id_comp p).symm)) ((pullback.snd f p) y))}) (b₀ : B) (hb₀ : Nonempty (p.fiber b₀)) (W : (pullback p p).Opens) (hW : (overlapBase p) ⁻¹' {b₀} ⊆ W.carrier) (hInv : ((pullback.snd f (overlapBase p)) ⁻¹ᵁ W) ⊓ ((overlapLeft f p) ⁻¹ᵁ C) = ((pullback.snd f (overlapBase p)) ⁻¹ᵁ W) ⊓ ((overlapRight f p) ⁻¹ᵁ C)) : ∃ V : B.Opens, b₀ ∈ V ∧ IsAffineOpen V ∧ (overlapBase p) ⁻¹' (V : Set B) ⊆ W.carrier ∧ (pullback.snd p V.ι).IsFiniteLocallyFree ∧ Surjective (pullback.snd p V.ι) ∧ IsAffine (pullback p V.ι) ∧ Presieve.singleton (pullback.snd p V.ι) ∈ Scheme.fpqcPrecoverage V.toScheme ∧ Presieve.singleton (pullback.fst (pullback.snd f V.ι) (pullback.snd p V.ι)) ∈ Scheme.fpqcPrecoverage (pullback f V.ι) ∧ IsCompact ((restrictionMap f p V) ⁻¹' C.carrier) ∧ ∃ U : (pullback f V.ι).Opens, IsCompact U.carrier ∧ (pullback.fst (pullback.snd f V.ι) (pullback.snd p V.ι)) ⁻¹ᵁ U = (restrictionMap f p V) ⁻¹ᵁ C ∧ ∀ U' : (pullback f V.ι).Opens, (pullback.fst (pullback.snd f V.ι) (pullback.snd p V.ι)) ⁻¹ᵁ U' = (restrictionMap f p V) ⁻¹ᵁ C → U' = U",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c502d94b1",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read node, all 13 stmt_dep records, Stacks 057I statement/proof, Mathlib GeometricallyReduced/geometrically, FiberDegree IsFiniteLocallyFree, SlicingFlat isCompact_setOf_mem_connectedComponentIn_preimage_singleton. Every hypothesis matches (finite presentation = LFP+QC+QS per convention; GeometricallyReduced; IsFiniteLocallyFree; hσ; C open with carrier = section-component locus in the same form as the existing qc theorem; Nonempty p.fiber b₀; W ⊇ q⁻¹b₀; invariance on h⁻¹W via canonical pullback.map overlaps). Conclusion has all clauses: affine V ∋ b₀, q⁻¹V⊆W, p_V finite locally free + surjective, Z_V affine, both singleton fpqc memberships, C_V compact, ∃ U compact with π⁻¹U=C_V, unique among all opens for fixed V; no extra assumptions, no geometric connectedness. lean.statement verbatim, single sorry, node differs from side-live only by lean field, docstrings with source/blueprint and 5-step proof, no name collision. No changes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T091030-L-3300277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-idempotent-annihilator-generic-retraction",
+ "kind": "statement",
+ "title": "Continuous retraction onto minimal primes for a reduced ring with idempotent annihilators",
+ "statement": "Let $R$ be a commutative ring which is reduced: $a^n=0$ for $n\\geq1$ implies $a=0$. Assume that for every $a\\in R$ there is $e_a\\in R$ such that $e_a^2=e_a$ and $\\{b\\in R:ab=0\\}=e_aR$. Put $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $G\\subseteq X$ be the set of minimal prime ideals, meaning primes containing no strictly smaller prime ideal. This is also the set of generic points [def-sc-generic-point] of the irreducible components [def-weil-irreducible-components] of $X$. Every prime $\\mathfrak p$ contains exactly one minimal prime $r(\\mathfrak p)$. With $G$ given the subspace Zariski topology, the map $r:X\\to G$ is continuous and restricts to the identity on $G$. More precisely, for $D(a)=\\{\\mathfrak p\\in X:a\\notin\\mathfrak p\\}$ one has $r^{-1}(D(a)\\cap G)=D(1-e_a)$ for every $a\\in R$. The zero ring is allowed.",
+ "source": {
+  "document": "literature/hochster-totally-integrally-closed-rings-extremal-spaces.pdf",
+  "place": "Agent generalization of the retraction discussed after Proposition 5, printed pp.776-777, and the idempotent-annihilator observation after Proposition 5, p.776. Unlike the source TIC hypothesis, the stated generalization assumes only reducedness and principal idempotent annihilators; its argument is supplied in report.md. Local PDF WANTED; primary source read online.",
+  "url": "https://msp.org/pjm/1970/32-3/pjm-v32-n3-p19-p.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "The component description in Tag 00ES gives the irreducible components as $V(\\mathfrak q)$ for minimal primes $\\mathfrak q$. The point-closure formula gives $\\overline{\\{\\mathfrak q\\}}=V(\\mathfrak q)$, so $\\mathfrak q$ is their generic point by the definition of a generic point. Conversely a generic point $\\mathfrak t$ of such a component satisfies $V(\\mathfrak t)=V(\\mathfrak q)$, hence $\\mathfrak t=\\mathfrak q$ by the inclusion criterion for point closures. Thus the two descriptions of $G$ in the statement agree.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), parts (1)-(3); generic-point definition is Topology Tag 004X."
+   }
+  },
+  {
+   "text": "For any minimal prime $\\mathfrak q$ and $a\\in R$, we claim $a\\in\\mathfrak q\\Longleftrightarrow e_a\\notin\\mathfrak q$. Since $R$ is reduced, Tag 00EU gives $\\mathfrak qR_{\\mathfrak q}=0$. If $a\\in\\mathfrak q$, then $a/1=0$; by the defining equality of fractions there is $s\\notin\\mathfrak q$ with $sa=0$. Write $s=e_at$ using $\\operatorname{Ann}(a)=e_aR$. It follows that $e_a\\notin\\mathfrak q$. Conversely $ae_a=0$, because $e_a\\in\\operatorname{Ann}(a)$; if $e_a\\notin\\mathfrak q$, primality forces $a\\in\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EU (lemma-minimal-prime-reduced-ring); equality of fractions in Tag 00CO (definition-localization). The idempotent-annihilator deduction is the agent argument."
+   }
+  },
+  {
+   "text": "For any primes $\\mathfrak q\\subseteq\\mathfrak p$ and idempotent $e$, one has $e\\in\\mathfrak q\\Longleftrightarrow e\\in\\mathfrak p$. The forward implication is inclusion. If $e\\in\\mathfrak p$, then $1-e\\notin\\mathfrak p$, hence $1-e\\notin\\mathfrak q$; primality of $\\mathfrak q$ applied to $e(1-e)=0$ gives $e\\in\\mathfrak q$. Also, in any prime $\\mathfrak p$, exactly one of $e$ and $1-e$ belongs to $\\mathfrak p$, by the same product-zero identity and their sum $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent elementary prime-ideal calculation using e(1-e)=0 and e+(1-e)=1; supporting the generalization of Hochster, after Proposition 5, p.776."
+   }
+  },
+  {
+   "text": "Tag 00E0(4), applied to the zero ideal, supplies a minimal prime $\\mathfrak q\\subseteq\\mathfrak p$ for every prime $\\mathfrak p$. If $\\mathfrak q,\\mathfrak q'$ are both minimal under $\\mathfrak p$, steps 2 and 3 give, for every $a\\in R$, $a\\in\\mathfrak q\\Longleftrightarrow e_a\\notin\\mathfrak q\\Longleftrightarrow e_a\\notin\\mathfrak p\\Longleftrightarrow e_a\\notin\\mathfrak q'\\Longleftrightarrow a\\in\\mathfrak q'$. Thus $\\mathfrak q=\\mathfrak q'$. Define $r(\\mathfrak p)$ to be this unique minimal prime. For a minimal prime $\\mathfrak p$, it itself is the unique one, so $r(\\mathfrak p)=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), part (4); uniqueness and retraction are the agent argument from steps 2-3."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak q=r(\\mathfrak p)$. Steps 2 and 3, followed by the last observation of step 3, give $a\\notin\\mathfrak q\\Longleftrightarrow e_a\\in\\mathfrak q\\Longleftrightarrow e_a\\in\\mathfrak p\\Longleftrightarrow1-e_a\\notin\\mathfrak p$. This is precisely $r^{-1}(D(a)\\cap G)=D(1-e_a)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent elementary membership calculation from steps 2-4; the retraction motivated by Hochster, after Proposition 5, pp.776-777."
+   }
+  },
+  {
+   "text": "The basic-open basis theorem says every open $U\\subseteq X$ is a union of sets $D(a)$, each open. By the definition of the subspace topology every open of $G$ is $U\\cap G$, hence a union of the $D(a)\\cap G$. Step 5 makes its inverse image the corresponding union of the open sets $D(1-e_a)$, proving continuity. Together with step 4 this is the required retraction. In the zero ring there is no proper prime ideal, since $0=1$; thus $X=G=\\varnothing$, and the same assertion is the unique empty map, with all inverse images empty.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-kun-subspace-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), parts (11), (14), (16); subspace topology and inverse images of unions are definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-sc-generic-point",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-kun-subspace-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent proof of the reduced idempotent-annihilator generalization of Hochster, after Proposition 5, pp.776-777, using Stacks Tags 00E0, 00EU and 00ES and the equality of localization fractions (00CO). Hochster read online; the local PDF remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced ring whose annihilator of every element is generated by an idempotent has quasi compact space of minimal prime ideals",
+   "results": "{\"t\": \"2026-10-23T22:46:20Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced ring whose annihilator of every element is generated by an idempotent has quasi compact space of minimal prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.instSpectralSpace\", \"PrimeSpectrum.compactSpace\", \"PrimeSpectrum.instQuasiSeparatedSpace\", \"PrimeSpectrum.quasiSober\", \"PrimeSpectrum.instPrespectralSpace\", \"PrimeSpectrum.irreducibleSpace\", \"PrimeSpectrum.instQuasiSoberElemZeroLocus\", \"PrimeSpectrum.isCompact_basicOpen\"], \"digest\": \"3bac63795162cbd8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.compactSpace concerns the entire spectrum; minimalPrimes and the Noetherian finiteness lemmas do not give this retraction without Noetherianity. The idempotent/clopen equivalence does not supply unique minimal primes or continuity of their selection. Module.Baer hits concern module injectivity, not annihilator rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "minimalPrimes, IsIdempotentElem",
+   "results": "{\"t\": \"2026-10-23T22:46:21Z\", \"tool\": \"loogle\", \"query\": \"minimalPrimes, IsIdempotentElem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.compactSpace concerns the entire spectrum; minimalPrimes and the Noetherian finiteness lemmas do not give this retraction without Noetherianity. The idempotent/clopen equivalence does not supply unique minimal primes or continuity of their selection. Module.Baer hits concern module injectivity, not annihilator rings."
+  },
+  {
+   "tool": "grep",
+   "query": "Baer|Rickart|[Cc]ompact.*minimalPrimes|minimalPrimes.*[Cc]ompact|annihilator.*[Ii]dempotent",
+   "results": "{\"t\": \"2026-10-23T22:46:21Z\", \"tool\": \"grep\", \"query\": \"Baer|Rickart|[Cc]ompact.*minimalPrimes|minimalPrimes.*[Cc]ompact|annihilator.*[Ii]dempotent\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/Flat/Tensor.lean\"], \"digest\": \"6baf26d4d4de34b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.compactSpace concerns the entire spectrum; minimalPrimes and the Noetherian finiteness lemmas do not give this retraction without Noetherianity. The idempotent/clopen equivalence does not supply unique minimal primes or continuity of their selection. Module.Baer hits concern module injectivity, not annihilator rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced ring whose principal annihilators are generated by idempotents has compact minimal prime spectrum",
+   "results": "{\"t\": \"2026-10-23T22:46:22Z\", \"tool\": \"leansearch\", \"query\": \"A reduced ring whose principal annihilators are generated by idempotents has compact minimal prime spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"minimalPrimes\", \"IsArtinianRing.instFinitePrimeSpectrum\", \"PrimeSpectrum.finite_setOf_isMin\", \"minimalPrimes.finite_of_isNoetherianRing\", \"PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing\", \"IsArtinianRing.isSemisimpleRing_of_isReduced\", \"PrimeSpectrum.irreducibleSpace\", \"PrimeSpectrum.compactSpace\"], \"digest\": \"7d236976187eb678\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.compactSpace concerns the entire spectrum; minimalPrimes and the Noetherian finiteness lemmas do not give this retraction without Noetherianity. The idempotent/clopen equivalence does not supply unique minimal primes or continuity of their selection. Module.Baer hits concern module injectivity, not annihilator rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimal prime space of a commutative Rickart ring is a continuous retract of its prime spectrum, if every annihilator is idempotent generated",
+   "results": "{\"t\": \"2026-10-23T22:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"The minimal prime space of a commutative Rickart ring is a continuous retract of its prime spectrum, if every annihilator is idempotent generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply\", \"PrimeSpectrum.isIdempotentElemEquivClopens\", \"PrimeSpectrum.isIdempotentElemEquivClopens_apply_toOpens\", \"PrimeSpectrum.isIdempotentElemEquivClopens_symm_top\", \"PrimeSpectrum.isIdempotentElemEquivClopens_symm_bot\", \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"PrimeSpectrum.isClopen_iff_zeroLocus\", \"PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen\"], \"digest\": \"6ed10380a963e843\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PrimeSpectrum.compactSpace concerns the entire spectrum; minimalPrimes and the Noetherian finiteness lemmas do not give this retraction without Noetherianity. The idempotent/clopen equivalence does not supply unique minimal primes or continuity of their selection. Module.Baer hits concern module injectivity, not annihilator rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a reduced commutative ring an element belongs to a minimal prime ideal if and only if some element outside the prime annihilates it",
+   "results": "{\"t\": \"2026-10-23T23:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"In a reduced commutative ring an element belongs to a minimal prime ideal if and only if some element outside the prime annihilates it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_mul_mem_of_mem_minimalPrimes\", \"IsSMulRegular.notMem_of_mem_minimalPrimes\", \"Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes\", \"Ring.KrullDimLE.mem_minimalPrimes_iff\", \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\", \"minimalPrimes\", \"Ideal.minimalPrimes_isPrime\", \"Ring.KrullDimLE.mem_minimalPrimes_iff_le_of_isPrime\"], \"digest\": \"0c1c47f1e8808301\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: minimal-prime zero-divisor results alone do not give a retraction; spectral-space instances concern the full spectrum, clopen-idempotent equivalences do not give uniqueness of minimal primes, and the product-localization bijectivity theorem assumes discrete topology."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]ickart|[Bb]aer|annihilator.*[Ii]dempotent|[Rr]etract.*[Mm]inimal|[Mm]inimal.*[Rr]etract",
+   "results": "{\"t\": \"2026-10-23T23:16:25Z\", \"tool\": \"grep\", \"query\": \"[Rr]ickart|[Bb]aer|annihilator.*[Ii]dempotent|[Rr]etract.*[Mm]inimal|[Mm]inimal.*[Rr]etract\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/Flat/Tensor.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\"], \"digest\": \"46bd5b649bddf27c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item. Baer hits concern module injectivity. The spectrum basis, point-closure, minimal-prime existence and field-localization hits are existing DAG leaves used below, rather than a one-line proof of the retraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime spectrum of a reduced ring with principal idempotent annihilators continuously retracts onto its minimal primes",
+   "results": "{\"t\": \"2026-10-23T23:16:26Z\", \"tool\": \"leansearch\", \"query\": \"The prime spectrum of a reduced ring with principal idempotent annihilators continuously retracts onto its minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.zeroLocus_minimalPrimes\", \"PrimeSpectrum.irreducibleSpace\", \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"IsArtinianRing.primeSpectrum_asIdeal_range_eq\", \"PrimeSpectrum.isPrime\", \"PrimeSpectrum.isIrreducible_iff_vanishingIdeal_isPrime\", \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\"], \"digest\": \"f8e7cfb450658678\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the component/minimal-prime correspondence, irreducibility, maximal-spectrum range and subsingleton localization results omit the idempotent-annihilator comparison and continuity formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "minimalPrimes, IsIdempotentElem",
+   "results": "{\"t\": \"2026-10-23T23:16:26Z\", \"tool\": \"loogle\", \"query\": \"minimalPrimes, IsIdempotentElem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for the combined minimal-prime and idempotent query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative Rickart ring has a continuous retraction from its prime spectrum onto its minimal prime spectrum",
+   "results": "{\"t\": \"2026-10-23T23:17:41Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative Rickart ring has a continuous retraction from its prime spectrum onto its minimal prime spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.instSpectralSpace\", \"PrimeSpectrum.instPrespectralSpace\", \"MaximalSpectrum.toPrimeSpectrum_continuous\", \"PrimeSpectrum.toPiLocalization_bijective\", \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"PrimeSpectrum.isClopen_iff_mul_add_zeroLocus\", \"PrimeSpectrum.discreteTopology_iff_toPiLocalization_bijective\", \"MaximalSpectrum.toPrimeSpectrum_range\"], \"digest\": \"604fbc580546ca56\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: minimal-prime zero-divisor results alone do not give a retraction; spectral-space instances concern the full spectrum, clopen-idempotent equivalences do not give uniqueness of minimal primes, and the product-localization bijectivity theorem assumes discrete topology."
+  },
+  {
+   "tool": "grep",
+   "query": "zeroLocus_minimalPrimes|isTopologicalBasis_basic_opens|closure_singleton|isField_of_isReduced|exists_minimalPrimes_le",
+   "results": "{\"t\": \"2026-10-23T23:20:42Z\", \"tool\": \"grep\", \"query\": \"zeroLocus_minimalPrimes|isTopologicalBasis_basic_opens|closure_singleton|isField_of_isReduced|exists_minimalPrimes_le\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\"], \"digest\": \"20900dd10b448c10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item. Baer hits concern module injectivity. The spectrum basis, point-closure, minimal-prime existence and field-localization hits are existing DAG leaves used below, rather than a one-line proof of the retraction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-integral-compact-generics-cover",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Rydh Theorem (3.10), affine-case compact-generics reduction: the minimal-prime retraction underlying Properties (3.9)(iii), using the idempotent-annihilator property discussed by Hochster after Proposition 5. The split constructs the needed ring explicitly instead of using all TIC properties.",
+   "via": [
+    "lem-sfb-affine-integral-compact-generics-cover",
+    "lem-sfb-subtrusive-fp-flat-proper-refinement",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-idempotent-annihilator-generic-retraction",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved the annihilator/minimal-prime membership criterion from the existing reduced minimal-prime localization leaf, used comparable-prime invariance of idempotents to prove uniqueness, and computed basic-open inverse images. Reused existing spectrum/component/basis leaves; no new nodes. Added the already-used subspace-topology notion to statement dependencies. All steps are below 2000 characters. No Lean was written or compiled.",
+  "blueprint": "Rydh Theorem (3.10), affine-case compact-generics reduction: the minimal-prime retraction underlying Properties (3.9)(iii), using the idempotent-annihilator property discussed by Hochster after Proposition 5. The split constructs the needed ring explicitly instead of using all TIC properties. The current latest blueprint unit and direct-images proof were read; this node supplies the inherited compact-generics reduction. Whole-blueprint searches for minimal prime, annihilator, idempotent and retraction found no equivalent statement. The ancestor tool returns None, retained as inherited.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-eb02b8afc",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-eb02b8afc (reviewer sub-agent of L); spot-checked: I read the item in full; it adds no new nodes. The statement is byte-identical to live, and the only stmt_deps change adds def-kun-subspace-topology, which the statement uses ('subspace Zariski topology'). Live has the item unsplit with no repair note, so it is not superseded and no re-split order applies. Step 1: 00ES(1)-(3) (Stacks algebra.tex, lines 4665-4695) plus the two-sided V-inclusion criterion identify the minimal primes with the generic points of the components. Step 2: 00EU (line 4543) gives qR_q=0 for reduced R; the fraction equality of the localization node gives some u outside q with ua=0, and u in e_aR then forces e_a outside q; conversely a·e_a=0. Step 3 is elementary: for comparable primes, membership of an idempotent is the same in both, via e(1-e)=0. Step 4: 00E0(4) gives existence; uniqueness follows from the chain of equivalences in steps 2-3, and r is the identity on G. Step 5: the sign is right, r^{-1}(D(a)∩G)=D(1-e_a). Step 6: basis clause (i) plus the subspace topology give continuity; the zero ring is covered. All cited nodes are Mathlib leaves, so there is no route issue and no tool_uses are needed; no SGA is used. Tested on k×k, a domain, the zero ring and the non-uniqueness of e_a; in k[x,y]/(xy) the hypothesis fails and so does the conclusion. Duplicate searches (annihilator+minimal prime+idempotent, Rickart, retraction, quasi-compact generic points) found only the parent and unrelated nodes. Maintainer note: blueprint.from.node is null, inherited from the item's creation by Q22; the last via node points to det-thm-sf-ctf-stability-direct-images. Hochster's PDF is WANTED. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IdempotentAnnihilatorGenericRetraction",
+  "declaration": "PrimeSpectrum.exists_continuous_retraction_minimalPrimes_of_idempotent_annihilators",
+  "file": "lean/Sheaf/RingTheory/IdempotentAnnihilatorGenericRetraction.lean",
+  "statement": "theorem exists_continuous_retraction_minimalPrimes_of_idempotent_annihilators (R : Type u) [CommRing R] [IsReduced R] (hann : ∀ a : R, ∃ e : R, IsIdempotentElem e ∧ {b : R | a * b = 0} = Set.range (fun c : R ↦ e * c)) : (∀ q : PrimeSpectrum R, q.asIdeal ∈ minimalPrimes R ↔ ∃ Z ∈ irreducibleComponents (PrimeSpectrum R), IsGenericPoint q Z) ∧ ∃ r : PrimeSpectrum R → {q : PrimeSpectrum R // q.asIdeal ∈ minimalPrimes R}, (∀ p : PrimeSpectrum R, (r p).val.asIdeal ≤ p.asIdeal ∧ ∀ q : {q : PrimeSpectrum R // q.asIdeal ∈ minimalPrimes R}, q.val.asIdeal ≤ p.asIdeal → q = r p) ∧ Continuous r ∧ (∀ q : {q : PrimeSpectrum R // q.asIdeal ∈ minimalPrimes R}, r q.val = q) ∧ (∀ a e : R, IsIdempotentElem e → {b : R | a * b = 0} = Set.range (fun c : R ↦ e * c) → r ⁻¹' (Subtype.val ⁻¹' (basicOpen a : Set (PrimeSpectrum R))) = (basicOpen (1 - e) : Set (PrimeSpectrum R)))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ae9a2881",
+  "group": "NW",
+  "result": "pass",
+  "note": "The item node changes only by its lean field (statement, stmt_deps and proof identical to live); no new nodes, no dependency repairs, and the module name is new. lean.statement appears verbatim in the file, followed by sorry. Clause check: CommRing with one universe and no Nontrivial assumption; IsReduced is the node's reducedness; Ann(a)=e·R with IsIdempotentElem e; X = PrimeSpectrum R; G = minimalPrimes subtype with instTopologicalSpaceSubtype; minimal primes iff generic points of irreducibleComponents; r p ≤ p plus every minimal q ≤ p equals r p, which pins r uniquely; Continuous r; r is the identity on G; r⁻¹(D(a)∩G) = D(1−e) for every idempotent generator e, which is unique so the formula is equivalent to the node's, with the sign of step 5. basicOpen resolves to PrimeSpectrum.basicOpen; no shadowing names exist. Edge cases checked: zero ring (empty map), a=0, a=1, a domain, k×k. Searches found no H4 duplicate. Docstrings carry the source place, the blueprint tag and all six proof steps; the proof is sorry only; no definitions; no extra assumptions. The report has a Worker report and a Second reading by NW (which calls itself a self-check). Nothing compiled because no file was changed."
+ }
+}

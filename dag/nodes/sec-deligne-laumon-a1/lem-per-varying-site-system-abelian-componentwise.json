@@ -1,0 +1,152 @@
+{
+ "id": "lem-per-varying-site-system-abelian-componentwise",
+ "kind": "statement",
+ "title": "Componentwise abelian structure and exact evaluation for varying-site systems",
+ "statement": "Let I be a small category, D a VaryingSiteDiagram on I and e a VaryingSiteCoherence on D [def-per-varying-site-system]. Thus D gives small sites, additive exact abelian-sheaf inverse images for arrows, and e specifies their coherent identity and composition isomorphisms. The category S of all coherent systems, with no invertibility condition on its transition maps, admits an abelian structure for which every evaluation ev_i is additive and preserves finite limits and finite colimits. For any arrow h:F→G and kernel fork c, c is limiting if and only if ev_i(c) is limiting for every i. Dually a cokernel cofork is colimiting if and only if each evaluation is colimiting. This statement makes no assertion about injectives, adjoints to evaluation, or complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-per-varying-site-system",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Give compatible Hom families their componentwise abelian group structure, using the additive inverse images supplied by D to prove closure under addition and negation; componentwise composition is bilinear. Construct finite biproducts componentwise. Abelian sheaf categories and their finite limits and colimits exist at every site.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  },
+  {
+   "text": "For h:F→G form ker(h_i). Finite-limit preservation D.exact_limits identifies the inverse image of each such kernel with the kernel of the inverse-image arrow, so restriction of F.transition gives a unique kernel transition. Cancel the monic inclusions to prove the identity and cocycle laws. Each compatible family into F annihilating h factors componentwise; cancelling those inclusions proves compatibility and uniqueness. This proves the kernel universal property in systems, and the universal-property equivalence for any candidate fork. For cokernels repeat the argument by descent through the epic projections; each inverse image preserves cokernels because its actual sheaf adjunction makes it a left adjoint.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  },
+  {
+   "text": "Consequently coimage, image and their comparison are componentwise. The component comparisons are isomorphisms in the abelian sheaf categories. Their inverses satisfy the system square by multiplying the original square by inverses, hence give an inverse system map. The coimage-image criterion gives the required Abelian structure. Evaluation preserves the constructed kernels, cokernels and finite biproducts, hence all finite limits and colimits, and is additive by its component formula.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sp-abelian",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The category of systems of abelian sheaves with coherent exact inverse image transition functors is abelian with componentwise products kernels cokernels and exact evaluation",
+   "results": "{\"t\": \"2026-10-26T08:22:41Z\", \"tool\": \"leansearch\", \"query\": \"The category of systems of abelian sheaves with coherent exact inverse image transition functors is abelian with componentwise products kernels cokernels and exact evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"SheafOfModules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.Abelian.functorCategoryAbelian\", \"CategoryTheory.presheafToSheaf_additive\", \"CategoryTheory.instPreadditiveSheaf\"], \"digest\": \"d599cb210183e16c\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for this specified-coherence system category. Mathlib sheafIsAbelian and Abelian.ofCoimageImageComparisonIsIso supply the fibre structure and the final criterion, but not the intervening system constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian category of compatible families with componentwise kernels cokernels exact evaluation and products for a diagram of abelian categories with exact transition functors",
+   "results": "{\"t\": \"2026-10-26T08:23:34Z\", \"tool\": \"leanfinder\", \"query\": \"Abelian category of compatible families with componentwise kernels cokernels exact evaluation and products for a diagram of abelian categories with exact transition functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.instAB4CondensedMod\", \"instAB4StarAddCommGrpCat\", \"instAB4AddCommGrpCat\", \"Condensed.instAB4StarCondensedMod\", \"CategoryTheory.IsGrothendieckAbelian\", \"HomologicalComplex.isGrothendieckAbelian\", \"CategoryTheory.Abelian.ofCoimageImageComparisonIsIso\", \"instAB5AddCommGrpCat\"], \"digest\": \"e5dc32c019ebf7a8\"}",
+   "date": "2026-10-26",
+   "verdict": "No match for this specified-coherence system category. Mathlib sheafIsAbelian and Abelian.ofCoimageImageComparisonIsIso supply the fibre structure and the final criterion, but not the intervening system constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i varying.site|system.*abelian|evaluation.*adjoint Mathlib/CategoryTheory/Sites Mathlib/CategoryTheory/Adjunction/Evaluation.lean; rg VaryingSiteSystem lean/Sheaf lean/WeilConjectures",
+   "results": "Mathlib contains evaluation adjoints for ordinary functor categories. The only occurrences of VaryingSiteSystem in the project are its defining module and the assigned item. Blueprint searches for varying site, evaluation adjoint, 0EXZ and cofree returned no imported blueprint match.",
+   "date": "2026-10-26",
+   "verdict": "No match for this specified-coherence system category. Mathlib sheafIsAbelian and Abelian.ofCoimageImageComparisonIsIso supply the fibre structure and the final criterion, but not the intervening system constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.VaryingSiteSystemInjectiveResolutions",
+  "date": "2026-10-26",
+  "group": "Q7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The passage from finite-stage Leray to the limit spectral sequence in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor. Compatible resolutions used before applying continuity, refining the bounded-below derived-sections tool. This node isolates componentwise abelian structure and exact evaluation for varying-site systems, used in the system-resolution argument.",
+   "via": [
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.VaryingSiteSystemAbelian",
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteSystemAbelian.lean",
+  "declaration": "CategoryTheory.varyingSiteSystem_abelian_componentwise",
+  "declarations": [
+   "CategoryTheory.varyingSiteSystem_abelian_componentwise"
+  ],
+  "statement": "theorem varyingSiteSystem_abelian_componentwise {I : Type u} [SmallCategory I] (D : VaryingSiteDiagram.{u} I) (e : VaryingSiteCoherence D) : ∃ (_ : Abelian (VaryingSiteSystem D e)), ∃ (_ : ∀ i : I, (VaryingSiteSystem.evaluation D e i).Additive), (∀ i : I, PreservesFiniteLimits (VaryingSiteSystem.evaluation D e i) ∧ PreservesFiniteColimits (VaryingSiteSystem.evaluation D e i)) ∧ (∀ (F G : VaryingSiteSystem D e) (h : F ⟶ G) (c : KernelFork h), Nonempty (IsLimit c) ↔ ∀ i : I, Nonempty (IsLimit ((VaryingSiteSystem.evaluation D e i).mapCone c))) ∧ (∀ (F G : VaryingSiteSystem D e) (h : F ⟶ G) (c : CokernelCofork h), Nonempty (IsColimit c) ↔ ∀ i : I, Nonempty (IsColimit ((VaryingSiteSystem.evaluation D e i).mapCocone c)))",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T092350-L-3426633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T092350-L-3426633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

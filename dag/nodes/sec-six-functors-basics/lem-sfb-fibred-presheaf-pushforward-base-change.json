@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-fibred-presheaf-pushforward-base-change",
+ "kind": "statement",
+ "title": "Underived presheaf pushforward base change for fibred groupoids",
+ "statement": "Fix the universes and small-skeleton convention of [def-weil-size-convention] and a scheme $S$ [def-pc-scheme]. Let $v:\\mathcal C\\to\\mathcal X$ and $b:\\mathcal Y\\to\\mathcal X$ be functors over $\\mathit{Sch}/S$ between categories fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids], and let $\\mathcal C'=\\mathcal Y\\times_{\\mathcal X}\\mathcal C$ with projections $a:\\mathcal C'\\to\\mathcal C$ and $v':\\mathcal C'\\to\\mathcal Y$. Let $N$ be an abelian presheaf on $\\mathcal C$, meaning a contravariant functor to abelian groups [def-weil-pbc-sites-and-cohomology]. For any functor between such categories $w:\\mathcal A\\to\\mathcal B$ over $S$, define $w^{-1}$ by precomposition and $(w_*M)(z)=\\Gamma((\\mathit{Sch}/T)\\times_{z,\\mathcal B}\\mathcal A,M|_{(\\mathit{Sch}/T)\\times_{z,\\mathcal B}\\mathcal A})$ for $z$ over $T$; the restriction of $M$ is precomposition, $\\Gamma$ is the group of families compatible with every arrow, and restrictions of $w_*M$ are restriction of families along test-fibre functors. There is a canonical natural isomorphism of abelian presheaves $\\beta_N:b^{-1}v_*N\\xrightarrow{\\sim}v'_*a^{-1}N$. Its component at $y$ over $T$ restricts a compatible family along the canonical functor $(\\mathit{Sch}/T)\\times_{y,\\mathcal Y}\\mathcal C'\\to(\\mathit{Sch}/T)\\times_{b(y),\\mathcal X}\\mathcal C$, using the specified two-isomorphism $va\\cong bv'$ to identify coefficient values. The isomorphism is natural in $N$ and commutes with restriction along every arrow of $\\mathcal Y$. The assertion also applies to any specified $2$-cartesian square with these sides. No sheaf, algebraicity, or representability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075B (lemma-base-change), proof using the test-fibre equivalence; holds for abelian presheaves by applying the displayed compatible-family bijection componentwise."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the definitions of fibred groupoid and fibrewise $2$-product in [def-sfb-stable-pointed-moduli-groupoids]. Write $J_y$ for pairs $(c,\\alpha:v(c)\\to b(y))$, with arrows $t:c\\to c_1$ satisfying $\\alpha_1v(t)=\\alpha$. This is a concrete presentation of the test fibre: for $u:U\\to T$, choose a lift $u^*b(y)\\to b(y)$; its cartesian factorization property identifies an arrow $v(c)\\to b(y)$ over $u$ with a vertical isomorphism $v(c)\\cong u^*b(y)$. Changing the lift gives its unique vertical comparison, so the coefficient remains $N(c)$, with restriction $N(t)$. Similarly present the other test fibre by $K_y$, whose objects are $(y_0,c,\\theta,\\delta)$, where $\\theta:b(y_0)\\xrightarrow{\\sim}v(c)$ is vertical and $\\delta:y_0\\to y$. An arrow is $(s,t)$ with $\\delta_1s=\\delta$ and $v(t)\\theta=\\theta_1b(s)$. Define $H_y:K_y\\to J_y$ by $(y_0,c,\\theta,\\delta)\\mapsto(c,b(\\delta)\\theta^{-1})$ and $(s,t)\\mapsto t$. These equations verify that this is a functor and that its coefficient diagram is exactly the restriction of the diagram $N(c)$ on $J_y$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075B, lemma-base-change; equation-pushforward immediately before it"
+   }
+  },
+  {
+   "text": "The functor $H_y$ is fully faithful and essentially surjective, directly by [def-sfb-stable-pointed-moduli-groupoids]. Given $t:H_y(k)\\to H_y(k_1)$, the base arrows satisfy $p(\\delta_1)p(t)=p(\\delta)$. Cartesian factorization through $\\delta_1$ gives a unique $s:y_0\\to y_1$ over $p(t)$ with $\\delta_1s=\\delta$. The equation for $t$ implies $b(\\delta_1)b(s)=b(\\delta_1)\\theta_1^{-1}v(t)\\theta$; cartesian uniqueness through $b(\\delta_1)$ makes the two factors equal, giving the required square. Thus $(s,t)$ exists uniquely. For $(c,\\alpha)\\in J_y$, lift the base arrow of $\\alpha$ to $\\delta:y_0\\to y$. The arrow $b(\\delta)$ is cartesian, since every arrow of a fibred groupoid has the defining factorization property. Hence $\\alpha=b(\\delta)\\lambda$ uniquely, with $\\lambda:v(c)\\to b(y_0)$ vertical and therefore invertible. Take $\\theta=\\lambda^{-1}$; its image under $H_y$ is $(c,\\alpha)$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075B, lemma-base-change; equation-pushforward immediately before it"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-initial-functor-limit] to $H_y^{\\mathrm{op}}$ and to the set-valued diagram underlying $N(c)$. Its initiality hypothesis holds: full faithfulness and an isomorphism $H_y(k_0)\\cong j$ make the comma category of arrows $H_y^{\\mathrm{op}}(k)\\to j$ have a terminal object $(k_0,\\epsilon^{\\mathrm{op}})$; the unique arrow to it is the lift, by full faithfulness, of the required composite with $\\epsilon^{-1}$. A category with a terminal object is nonempty and any two objects are connected through that object, as required by the cited statement. The set of compatible families is a limit: its projections form a cone, and a cone from a set $A$ factors uniquely by sending each $a\\in A$ to its tuple of projected values. Consequently the cited canonical limit comparison is the bijection $s\\mapsto(s_{H_y(k)})_k$. Both groups in the item are these compatible-family groups; this bijection is the specified component $\\beta_N(y)$.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075B, lemma-base-change; equation-pushforward immediately before it"
+   }
+  },
+  {
+   "text": "Addition, zero and negatives of compatible families are coordinatewise, so the displayed restriction bijection is additive and its inverse is additive. For a morphism $\\eta:N\\to N_1$, its two composites with $\\beta$ have value $\\eta_c(s_{H_y(k)})$ at $k$, proving naturality in coefficients. For an arrow $r:y'\\to y$, the test-fibre functors send $\\alpha$ to $b(r)\\alpha$ and $\\delta$ to $r\\delta$. The equality $b(r\\delta)\\theta^{-1}=b(r)(b(\\delta)\\theta^{-1})$ shows that both composites of restriction with $\\beta$ evaluate $s$ at the very same object of $J_y$, with the same coefficient value. Thus $\\beta$ is a morphism of abelian presheaves. The inverses of these component bijections commute with restrictions by composing this equality with the inverses, hence give its presheaf inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075B, lemma-base-change; equation-pushforward immediately before it"
+   }
+  },
+  {
+   "text": "For a specified $2$-cartesian square with upper-left category $D$, the specified comparison $E:D\\to\\mathcal Y\\times_{\\mathcal X}\\mathcal C$ is an equivalence over the base and the sides, with their specified natural isomorphisms. It induces an equivalence of the test categories over each $y$: full faithfulness lifts arrows uniquely, and an isomorphism $E(d)\\cong k$ transports the structural arrow $k\\to y$ to give an object over $y$. These are the same full-faithfulness and essential-surjectivity checks as in step 2, with the side isomorphisms inserted. The coefficient diagrams agree by their specified isomorphism to $N(a(d))$. Apply [lem-weil-pbc-initial-functor-limit] to the opposite of this equivalence exactly as in step 3. Restriction along it is a bijection on compatible families. Compose it with the component already constructed. The component is restriction along the composite test-fibre functor, using the given $va\\cong bv'$. Naturality in $N$ follows by evaluating $\\eta$ on that coefficient. For $r:y'\\to y$, postcomposition of structural arrows commutes with $E$; naturality of the side isomorphisms makes the coefficient transports agree. Therefore the coordinate equality of step 4 still holds. This proves every clause for the specified square without any topology or representability assumption.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075B, lemma-base-change; equation-pushforward immediately before it"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075B, lemma-base-change; equation-pushforward immediately before it"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(beck.?chevalley|base.?change).*(ran|right.?kan)|(ran|right.?kan).*base.?change",
+   "results": "{\"t\": \"2026-10-23T22:36:11Z\", \"tool\": \"grep\", \"query\": \"(beck.?chevalley|base.?change).*(ran|right.?kan)|(ran|right.?kan).*base.?change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\"], \"digest\": \"41a23ecd7d143370\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic Kan-extension comparisons require a Guitart-exact square; the fibred-groupoid test-fibre equivalence and compatible-family comparison are not supplied by the hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for compatible families of an abelian presheaf on a two fibre product of fibred categories",
+   "results": "{\"t\": \"2026-10-23T22:36:12Z\", \"tool\": \"leansearch\", \"query\": \"Base change for compatible families of an abelian presheaf on a two fibre product of fibred categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.FamilyOfElements.Compatible.pullback\", \"CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback\", \"CategoryTheory.Presieve.FamilyOfElements.PullbackCompatible\", \"CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible\", \"CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms\", \"CategoryTheory.Equalizer.Presieve.compatible_iff\", \"CategoryTheory.Presieve.pullbackCompatible_iff\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\"], \"digest\": \"074596fbfe35ad91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic Kan-extension comparisons require a Guitart-exact square; the fibred-groupoid test-fibre equivalence and compatible-family comparison are not supplied by the hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"ran\"",
+   "results": "{\"t\": \"2026-10-23T22:36:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"ran\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearEquiv.baseChange_trans\", \"LinearMap.range_liftBaseChange\", \"Module.finrank_baseChange\", \"Module.rank_baseChange\", \"IsBaseChange.finrank_eq\", \"IsBaseChange.rank_eq\", \"IsBaseChange.lift_rank_eq\", \"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\"], \"digest\": \"c6de70f75203f80d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic Kan-extension comparisons require a Guitart-exact square; the fibred-groupoid test-fibre equivalence and compatible-family comparison are not supplied by the hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension pushforward of presheaves on categories fibred in groupoids satisfies base change for every two cartesian square",
+   "results": "{\"t\": \"2026-10-23T22:36:13Z\", \"tool\": \"leanfinder\", \"query\": \"Right Kan extension pushforward of presheaves on categories fibred in groupoids satisfies base change for every two cartesian square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.ExponentiableMorphism.pushforward\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"PresheafOfModules.pushforwardComp\", \"CategoryTheory.ran_isSheaf_of_isCocontinuous\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"CategoryTheory.GrothendieckTopology.overMapPullback\"], \"digest\": \"fc26f9cc80a0e133\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic Kan-extension comparisons require a Guitart-exact square; the fibred-groupoid test-fibre equivalence and compatible-family comparison are not supplied by the hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On big sites the canonical underived base change map from restriction of direct image to direct image of restriction is invertible for arbitrary fibred groupoids",
+   "results": "{\"t\": \"2026-10-23T22:36:14Z\", \"tool\": \"leanfinder\", \"query\": \"On big sites the canonical underived base change map from restriction of direct image to direct image of restriction is invertible for arbitrary fibred groupoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso\", \"CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft\", \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"CategoryTheory.Functor.whiskerLeft_obj_map_bijective_of_isCoverDense\", \"CategoryTheory.Functor.IsCoverDense.presheafIso\"], \"digest\": \"32736c2b119fc279\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic Kan-extension comparisons require a Guitart-exact square; the fibred-groupoid test-fibre equivalence and compatible-family comparison are not supplied by the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "ranBaseChange|beck.?chevalley|[Ff]ibered.*[Ee]xact|[Ee]xact.*[Ff]ibered",
+   "results": "{\"t\": \"2026-10-23T22:36:50Z\", \"tool\": \"grep\", \"query\": \"ranBaseChange|beck.?chevalley|[Ff]ibered.*[Ee]xact|[Ee]xact.*[Ff]ibered\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"0d3dd2e6d1d6be5f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic Kan-extension comparisons require a Guitart-exact square; the fibred-groupoid test-fibre equivalence and compatible-family comparison are not supplied by the hits."
+  },
+  {
+   "tool": "grep",
+   "query": "ranBaseChange|beck.?chevalley|[Ff]ibered.*[Ee]xact|[Ee]xact.*[Ff]ibered",
+   "results": "{\"t\": \"2026-10-23T23:00:40Z\", \"tool\": \"grep\", \"query\": \"ranBaseChange|beck.?chevalley|[Ff]ibered.*[Ee]xact|[Ee]xact.*[Ff]ibered\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"dfc9109c410083d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for compatible families of an abelian presheaf on a two fibre product of fibred categories",
+   "results": "{\"t\": \"2026-10-23T23:00:41Z\", \"tool\": \"leansearch\", \"query\": \"Base change for compatible families of an abelian presheaf on a two fibre product of fibred categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.FamilyOfElements.Compatible.pullback\", \"CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback\", \"CategoryTheory.Presieve.FamilyOfElements.PullbackCompatible\", \"CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible\", \"CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms\", \"CategoryTheory.Equalizer.Presieve.compatible_iff\", \"CategoryTheory.Presieve.pullbackCompatible_iff\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\"], \"digest\": \"074596fbfe35ad91\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"ran\"",
+   "results": "{\"t\": \"2026-10-23T23:00:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"ran\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearEquiv.baseChange_trans\", \"LinearMap.range_liftBaseChange\", \"Module.finrank_baseChange\", \"Module.rank_baseChange\", \"IsBaseChange.finrank_eq\", \"IsBaseChange.rank_eq\", \"IsBaseChange.lift_rank_eq\", \"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\"], \"digest\": \"c6de70f75203f80d\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension pushforward of presheaves on categories fibred in groupoids satisfies base change for every two cartesian square",
+   "results": "{\"t\": \"2026-10-23T23:00:42Z\", \"tool\": \"leanfinder\", \"query\": \"Right Kan extension pushforward of presheaves on categories fibred in groupoids satisfies base change for every two cartesian square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.ExponentiableMorphism.pushforward\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"PresheafOfModules.pushforwardComp\", \"CategoryTheory.ran_isSheaf_of_isCocontinuous\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"CategoryTheory.GrothendieckTopology.overMapPullback\"], \"digest\": \"fc26f9cc80a0e133\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "sections.*[Ee]quiv|[Ee]quiv.*sections|limit.*(equivalence|Equivalence)",
+   "results": "{\"t\": \"2026-10-23T23:00:59Z\", \"tool\": \"grep\", \"query\": \"sections.*[Ee]quiv|[Ee]quiv.*sections|limit.*(equivalence|Equivalence)\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/ConeCategory.lean\", \"Mathlib/CategoryTheory/Limits/Cones.lean\", \"Mathlib/CategoryTheory/Limits/Cones.lean\", \"Mathlib/CategoryTheory/Limits/Cones.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\", \"Mathlib/CategoryTheory/Limits/Creates.lean\"], \"digest\": \"2cc3193960f74c7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Precomposing a diagram with an equivalence of categories induces a bijection on compatible families of elements",
+   "results": "{\"t\": \"2026-10-23T23:01:00Z\", \"tool\": \"leansearch\", \"query\": \"Precomposing a diagram with an equivalence of categories induces a bijection on compatible families of elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LeftExtension.isUniversalPrecompEquiv\", \"CategoryTheory.Functor.instIsEquivalenceObjWhiskeringLeft\", \"CategoryTheory.Grothendieck.preEquivalence\", \"CategoryTheory.Limits.Cocones.precomposeEquivalence\", \"CategoryTheory.Presieve.natTransEquivCompatibleFamily\", \"CategoryTheory.StructuredArrow.preEquivalence\", \"CategoryTheory.Limits.IsColimit.precomposeHomEquiv\", \"CategoryTheory.Functor.instReflectsEffectiveEpiFamiliesOfIsEquivalence\"], \"digest\": \"0ff290e04345d04d\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sections, Equivalence",
+   "results": "{\"t\": \"2026-10-23T23:01:00Z\", \"tool\": \"loogle\", \"query\": \"Functor.sections, Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.sections'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of compatible families of elements of a functor along an equivalence of indexing categories is bijective",
+   "results": "{\"t\": \"2026-10-23T23:01:01Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of compatible families of elements of a functor along an equivalence of indexing categories is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.compatibleEquivGenerateSieveCompatible\", \"CategoryTheory.Presieve.compatibleEquivGenerateSieveCompatible_symm_apply_coe\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_bijective\", \"CategoryTheory.Presieve.isSheafFor_ofArrows_iff_bijective_toCompabible\", \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"CategoryTheory.Presieve.natTransEquivCompatibleFamily\", \"CategoryTheory.Presieve.restrict_inj\", \"CategoryTheory.Functor.bijective_sectionsPrecomp\"], \"digest\": \"41c83a6e5b5c1f34\"}",
+   "date": "2026-10-24",
+   "verdict": "match: CategoryTheory.Functor.bijective_sectionsPrecomp supplies the generic sections argument, already subsumed by existing lem-weil-pbc-initial-functor-limit; no new node."
+  },
+  {
+   "tool": "grep",
+   "query": "sections.*[Ee]quiv|[Ee]quiv.*sections|sections.*[Bb]ijective",
+   "results": "{\"t\": \"2026-10-23T23:01:37Z\", \"tool\": \"grep\", \"query\": \"sections.*[Ee]quiv|[Ee]quiv.*sections|sections.*[Bb]ijective\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\"], \"digest\": \"0a13f27fc1330c5a\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_sectionsPrecomp|initial_of_equivalence|initial_of_isEquivalence|IsEquivalence.*Initial",
+   "results": "{\"t\": \"2026-10-23T23:02:11Z\", \"tool\": \"grep\", \"query\": \"bijective_sectionsPrecomp|initial_of_equivalence|initial_of_isEquivalence|IsEquivalence.*Initial\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final/Type.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Equivalence.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Equivalence.lean\"], \"digest\": \"b5edaa936364a29d\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bijective_sectionsPrecomp\"",
+   "results": "{\"t\": \"2026-10-23T23:02:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"bijective_sectionsPrecomp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.bijective_sectionsPrecomp\"], \"digest\": \"a9576ca35b8c1a8d\"}",
+   "date": "2026-10-24",
+   "verdict": "match: CategoryTheory.Functor.bijective_sectionsPrecomp supplies the generic sections argument, already subsumed by existing lem-weil-pbc-initial-functor-limit; no new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of indexing categories induces a bijection by precomposition on sections of every set valued functor",
+   "results": "{\"t\": \"2026-10-23T23:02:13Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence of indexing categories induces a bijection by precomposition on sections of every set valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.sectionsEquiv\", \"CategoryTheory.Functor.toEventualRangesSectionsEquiv\", \"CategoryTheory.GradedObject.comapEquiv\", \"CategoryTheory.GradedObject.comapEquiv_functor\", \"CategoryTheory.Functor.sectionsEquivHom\", \"CategoryTheory.Functor.sectionsEquivHom_apply_app\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv_apply_app\", \"CategoryTheory.Functor.sectionsEquivHom_naturality\"], \"digest\": \"c2d828b141ab4146\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_sectionsPrecomp",
+   "results": "{\"t\": \"2026-10-23T23:04:39Z\", \"tool\": \"grep\", \"query\": \"bijective_sectionsPrecomp\", \"sub\": \"CategoryTheory/Limits/Final/Type.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"47\"], \"digest\": \"8469cc63b1fafc5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact item match: candidates concern generic sections, Kan extensions, or ordinary scheme/module base change; the test-fibre comparison still needs its explicit proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An initial functor induces a bijection on the set of compatible sections of any set valued functor",
+   "results": "{\"t\": \"2026-10-23T23:04:39Z\", \"tool\": \"leansearch\", \"query\": \"An initial functor induces a bijection on the set of compatible sections of any set valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.bijective_sectionsPrecomp\", \"CategoryTheory.Functor.sections\", \"CategoryTheory.Limits.compYonedaSectionsEquiv\", \"CategoryTheory.Functor.Initial.induction\", \"CategoryTheory.Functor.sectionsFunctor\", \"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Functor.sectionsPrecomp\"], \"digest\": \"101861bc9bfab8c9\"}",
+   "date": "2026-10-24",
+   "verdict": "match: CategoryTheory.Functor.bijective_sectionsPrecomp supplies the generic sections argument, already subsumed by existing lem-weil-pbc-initial-functor-limit; no new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An initial functor induces a bijection on the set of compatible sections of any set valued functor",
+   "results": "{\"t\": \"2026-10-23T23:04:40Z\", \"tool\": \"leanfinder\", \"query\": \"An initial functor induces a bijection on the set of compatible sections of any set valued functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.bijective_sectionsPrecomp\", \"CategoryTheory.Functor.toEventualRangesSectionsEquiv\", \"CategoryTheory.Limits.Types.sectionsEquiv\", \"CategoryTheory.Functor.Elements.isInitial\", \"CategoryTheory.Functor.Initial.exists_eq\", \"CategoryTheory.WithInitial.liftUnique\", \"CategoryTheory.Functor.initial_of_isCofiltered_pUnit\", \"CategoryTheory.Functor.initial_const_initial\"], \"digest\": \"c26efa105bcaeed1\"}",
+   "date": "2026-10-24",
+   "verdict": "match: CategoryTheory.Functor.bijective_sectionsPrecomp supplies the generic sections argument, already subsumed by existing lem-weil-pbc-initial-functor-limit; no new node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-cech-base-change",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Exact augmented relative Cech complex for stack module sheaves. Supporting input: Base change of augmented relative Cech complexes on fibred groupoids. Supporting input: Underived presheaf pushforward base change for fibred groupoids.",
+   "via": [
+    "lem-sfb-relative-cech-base-change",
+    "lem-sfb-stack-relative-cech-module-augmentation-exact",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-presheaf-pushforward-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 075B against the unchanged statement. Constructed the test-fibre comparison explicitly, proved full faithfulness and essential surjectivity from cartesian factorization, reused the existing initial-functor limit Mathlib leaf, and verified additivity, coefficient naturality, all restriction arrows and specified 2-cartesian models. No new nodes.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through relative Cech base change. The latest main-20261024 direct-images proof was read; no blueprint node states this presheaf lemma. The inherited broken ancestry has from.node=null; its detailed place and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-eff58103d",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-eff58103d (reviewer sub-agent of L); spot-checked: Read the full item, the cited def-sfb-stable-pointed-moduli-groupoids, the leaf lem-weil-pbc-initial-functor-limit and def-weil-pbc-sites-and-cohomology, and the source: Stacks stacks-sheaves.tex l.512-577 (equation-pushforward and 075B, which omits the restriction check). The statement and stmt_deps are byte-identical to the base (unsplit there, no proof); nothing is weakened, there is no re-split note and no SGA. There are no new nodes. Step 1: K_y matches the def's 2-fibre product with F=b and G=v. H_y is a functor because theta_1^-1 v(t) = b(s) theta^-1, and theta^-1 is the component of va ≅ bv', so H_y is the canonical functor of the statement. Step 2: the s over p(t) is unique by fibred-groupoid uniqueness through delta_1. The square holds because both factors lie over p(t) and agree after b(delta_1). Surjectivity holds on the nose through the vertical lambda, which is invertible. Step 3: the comma category has a terminal object, which gives the lemma's nonempty and zigzag hypotheses (n=2). The lemma's canonical comparison is the specified map s -> (s_{H(k)}). Step 4: additivity, naturality in N and restriction along r all follow from b(r delta) theta^-1 = b(r) b(delta) theta^-1; this is the check 075B omits. Step 5: the general 2-cartesian square is reduced through E with its side isomorphisms; terse but routine. proof_deps equals the union of the step uses; no cycle. The only citer, lem-sfb-relative-cech-base-change, uses exactly the clauses proved here. Edge cases (empty C, identity square, vertical automorphisms) behave correctly. Duplicate search over 075B, 06W6 and test-fibre statements found only 075H and 06X2 stack module-sheaf or derived lemmas, which are not duplicates. The inherited from.node=null blueprint ancestry is a base-node matter, recorded as a maintainer note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibredPresheafPushforwardBaseChange",
+  "declaration": "CategoryTheory.fibredPresheaf_pushforward_baseChange",
+  "declarations": [
+   "CategoryTheory.fibredPresheafSquareComparison",
+   "CategoryTheory.fibredPresheaf_pushforward_baseChange"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FibredPresheafPushforwardBaseChange.lean",
+  "statement": "theorem fibredPresheaf_pushforward_baseChange {S : AlgebraicGeometry.Scheme.{u}} {C : BasedCategory.{v₁, w₁} (Over S)} {X : BasedCategory.{v₂, w₂} (Over S)} {Y : BasedCategory.{v₃, w₃} (Over S)} {D : BasedCategory.{v₄, w₄} (Over S)} (v : BasedFunctor C X) (b : BasedFunctor Y X) (a : BasedFunctor D C) (v' : BasedFunctor D Y) (e : ModuliTwoIso (v'.comp b) (a.comp v)) (hC : IsFibredInGroupoids C) (hX : IsFibredInGroupoids X) (hY : IsFibredInGroupoids Y) (hD : IsFibredInGroupoids D) (hcart : (fibredPresheafSquareComparison v b a v' e).IsEquivalence) : ∃ β : v.toFunctor.op.ran ⋙ (Functor.whiskeringLeft _ _ AddCommGrpCat.{max v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄ t}).obj b.toFunctor.op ≅ (Functor.whiskeringLeft _ _ AddCommGrpCat.{max v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄ t}).obj a.toFunctor.op ⋙ v'.toFunctor.op.ran, ∀ (N : C.objᵒᵖ ⥤ AddCommGrpCat.{max v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄ t}) (y : Y.obj) (d : D.obj) (δ : v'.obj d ⟶ y), (β.hom.app N).app (op y) ≫ (v'.toFunctor.op.ran.obj (a.toFunctor.op ⋙ N)).map δ.op ≫ (v'.toFunctor.op.ranCounit.app (a.toFunctor.op ⋙ N)).app (op d) = (v.toFunctor.op.ran.obj N).map (e.val.inv.app d ≫ b.map δ).op ≫ (v.toFunctor.op.ranCounit.app N).app (op (a.obj d))",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coefficient-natural presheaf isomorphism is characterized by its explicit compatible-family evaluation at every test-fibre object. Right Kan extension computes the specified direct image. Separate object and morphism universes are retained for each total category. The helper constructs the specified comparison to the recorded fibrewise 2-product; its IsEquivalence hypothesis encodes an arbitrary specified 2-cartesian square."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66a612a59",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 075B. Direct image = Mathlib ran, i.e. the source's limit over arrows v(c)→y; inverse image = precomposition. ∃β is a functor iso b⁻¹v_* ≅ v'_*a⁻¹ on AddCommGrpCat.{max v₁..w₄ t}-presheaves (naturality in N and Y built in), uniquely pinned by the coordinate equation β(s)_(d,δ) = s_(a d, e⁻¹_d ≫ bδ), matching the node's canonical test-fibre functor with va≅bv'. Specified 2-cartesian squares are covered by hcart: IsEquivalence of the real helper fibredPresheafSquareComparison to moduliTwoFiberProduct b v. No extra hypotheses (hD redundant but harmless); all universes bound and independent. Item JSON differs from live only in lean; statement verbatim; source/blueprint docstrings and proof steps present; sorry only; no duplicate in live Sheaf (FibredLimitCalculus, FibredRelativeCech differ) or Mathlib (GuitartExact is left-Kan). Truth checked: test-fibre functor is an equivalence via cartesian lifting. No compile run (no file changed)."
+ }
+}

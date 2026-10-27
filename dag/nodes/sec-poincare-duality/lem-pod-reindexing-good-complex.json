@@ -1,0 +1,105 @@
+{
+ "id": "lem-pod-reindexing-good-complex",
+ "kind": "statement",
+ "title": "Preservation of good complexes under coefficient-normalized reindexing",
+ "statement": "Let l be prime, E a finite extension of Q_l, and g:X→Y a scheme isomorphism with l invertible in every residue field of X and Y. The completed coefficient map specified by finite projections equals the map used by the existing inverse image. Ordinary sectionwise reindexing along this map takes every flat-term K-flat complex over Y to a flat-term K-flat complex over X, with no bound on its degrees. [def-pod-completion-reindex-models]",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models"
+ ],
+ "proof": [
+  {
+   "text": "identify the two completed coefficient maps by composing with every finite\nprojection. They then induce the identical sectionwise module inverse image.\nSpecialize the existing coefficient-compatible K-flat model theorem to the identity\nextension of E. Its first preservation assertion gives exactly the result, without\nany bound on the complex or any completeness hypothesis.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict quotient and Roos comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence preserves the mapping cocone Roos complex and signed shifts of countable towers",
+   "results": "Eight mappingCone.mapHomologicalComplexIso and mapCochainComplexShiftIso matches; no full normalized Roos comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use native Roos calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapBiprod",
+   "results": "Seven matches including mapBiprod and hom/inv formulas.",
+   "date": "2026-10-25",
+   "verdict": "Use degreewise biproduct preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*(equiv|shift)|unit_leftAdjointUniq_hom_app",
+   "results": "Adjunction.Unique.unit_leftAdjointUniq_hom_app and two applications. Project searches found isomorphismReductionTower, normalizedCompletedOperationModels and integralTowerInverseImageUnit_existsUnique.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the library declarations; remaining normalization is project-specific."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-completion-unit-tensor",
+   "place": "Ambient comparison, proof steps 1--5 and signed shifts in step 8."
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingGoodComplex",
+  "file": "lean/Sheaf/Paper/PodReindexingGoodComplex.lean",
+  "declaration": "WeilConjectures.podReindexingGoodComplex",
+  "statement": "theorem podReindexingGoodComplex\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (P : CochainComplex (scalarReductionSource l E Y) ℤ)\n    (hP : integralOperationsGoodComplex l E Y P) :\n    integralOperationsGoodComplex l E X ((isoReductionIntegralComplex l E g).obj P)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.podCompletedCoefficientMap_eq",
+   "WeilConjectures.podReindexingGoodComplex"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102029-L-3768661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

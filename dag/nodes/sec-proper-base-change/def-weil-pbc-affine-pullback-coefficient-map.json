@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-affine-pullback-coefficient-map",
+ "kind": "definition",
+ "title": "Typed affine chart map and canonical tensor coefficient morphism",
+ "statement": "For schemes A,B,C [def-pc-scheme], arrows a:A→B, b:B→C, c:A→C, an equality w:a≫b=c and a C-module G, construct the coefficient morphism a^*(b^*G)→c^*G as normalized tensor composition followed by equality transport [lem-sc-etale-qcoherent-presheaf-functorial]. Its tensor adjunct induces the existing cohomology restriction [def-tensor-composite-cohomology-restriction]. For a map f:X→S and an etale chart map h:V′→V, name the induced arrow V′×_S X→V×_S X with these explicit scheme types and its projection equality. Specializing the generic coefficient morphism to this arrow gives affineRealizationCoefficientMap, with source and target the existing affineRealizationCoefficient modules [def-weil-pbc-coherent-higher-image-classes]. No geometric hypothesis or new choice is used.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8 and 01FB, coefficient maps on cohomology; descent.tex Tag 03DR, normalized tensor composition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-tensor-composite-cohomology-restriction",
+  "def-weil-pbc-coherent-higher-image-classes"
+ ],
+ "proof": [
+  {
+   "text": "Construct the generic coefficient morphism using tensorSectionsComp and the named equality of pulled-back coefficient objects. Its equation with the direct congrArg transport follows by congruence and proof irrelevance. Compose this equation with tensorCompositeCohomologyRestriction_eq to obtain the cohomology formula. Define the chart map as the left component of the base-change functor on h, with its actual fibre-product source and target fixed. Its projection equality is the Over morphism square. Specialize the generic coefficient morphism to this arrow and the two projections. The defining equation is reflexivity. All constructions and equations also apply to empty charts, zero modules, identity arrows, and degree zero.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-tensor-composite-cohomology-restriction",
+    "def-weil-pbc-coherent-higher-image-classes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-tensor-composite-cohomology-restriction",
+  "def-weil-pbc-coherent-higher-image-classes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8 and 01FB, coefficient maps on cohomology; descent.tex Tag 03DR, normalized tensor composition."
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback composition coefficient morphism and transport along a commutative square induces module cohomology restriction",
+   "results": "8 group-cohomology functoriality and cocycle-map hits; none concerns the project tensor coefficient construction.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing normalized tensor composition and cohomology restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToHom",
+   "results": "12 equality-transport lemmas; no formula for the project coefficient map.",
+   "date": "2026-10-26",
+   "verdict": "Equality transport exists; project specialization must be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorCompositeCoefficientMap|tensorCompositeCohomologyRestriction_eq_coefficient",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No existing Mathlib specialization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-comparison-pullback",
+   "place": "Prescribed tensor-composition coefficient morphism on the two fibre products."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePullbackCoefficientMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePullbackCoefficientMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationCoefficientMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorCompositeCoefficientMap",
+   "AlgebraicGeometry.Scheme.Modules.tensorCompositeCoefficientMap_eq",
+   "AlgebraicGeometry.Scheme.Modules.tensorCompositeCohomologyRestriction_eq_coefficient",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationChartMap",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationChartMap_w",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationCoefficientMap",
+   "AlgebraicGeometry.Scheme.Modules.affineRealizationCoefficientMap_eq"
+  ],
+  "statement": "def affineRealizationCoefficientMap {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) {V V' : S.Etale} (h : V' ⟶ V) :\n    (tensorPullback (affineRealizationChartMap f h)).obj\n      (affineRealizationCoefficient f G V) ⟶ affineRealizationCoefficient f G V'",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ }
+}

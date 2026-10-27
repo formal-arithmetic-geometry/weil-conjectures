@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-space-relative-pseudo-coherent-complex",
+ "kind": "definition",
+ "title": "Relative pseudo-coherence of derived objects on algebraic spaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], $g:X\\to Y$ a locally finite type morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, using the existing small ringed model and canonical derived scheme-chart restriction [def-sfb-space-derived-module-calculus]. For $m\\in\\mathbf Z$, define $K$ to be $m$-pseudo-coherent relative to $Y$ if for every commutative square $U\\to V$, $U\\to X$, $V\\to Y$ with $U,V$ schemes and the vertical maps etale, the corresponding Zariski derived object $K|_U$ is $m$-pseudo-coherent relative to $V$ [def-sfb-relative-pseudo-coherent-complex]. Define relative pseudo-coherence by this condition for every integer $m$. The covers and closed embeddings in the scheme condition may depend on $m$ and on the charts. The Lean predicate records local finite type of each scheme chart map along with the scheme condition; on the stated locally finite type domain these witnesses are automatic.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0CSY and 0CSX, definition-relative-pseudo-coherence (1)-(2) and lemma-qcoh-relative-pseudo-coherence-characterize (1)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherence of complexes on algebraic spaces defined on all etale scheme charts",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instHasPullbacksEtale; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; AlgebraicGeometry.Scheme.etalePretopology; Algebra.Etale.formallyEtale; AlgebraicGeometry.IsEtale.instIsSmooth; Algebra.IsEtaleAt.comp.",
+   "date": "2026-10-24",
+   "verdict": "No relative pseudo-coherence predicate on algebraic spaces; only etale schemes and ring maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of m pseudo coherent relative to a base for a derived quasi coherent object on an algebraic space using every etale square of schemes",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme.",
+   "date": "2026-10-24",
+   "verdict": "No matching space-level relative pseudo-coherence definition."
+  },
+  {
+   "tool": "grep",
+   "query": "IsMPseudoCoherentRelativeTo|IsPseudoCoherentRelativeTo",
+   "results": "[grep] OK 0 hit(s) in Mathlib. rg in lean/WeilConjectures and lean/Sheaf finds only Scheme.IsMPseudoCoherentRelativeTo, Scheme.IsPseudoCoherentRelativeTo, the ring relative predicate, and scheme consumers. DAG title/statement search finds the scheme definition and relative-locality statement nodes but no definition of the algebraic-space predicate. python3 tools/blueprint_refs.py search \"relative pseudo\": 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the scheme definition and existing derivedSchemeRestriction; a space-level definition node is missing."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0CTT conclusion uses relative pseudo-coherence of algebraic spaces, defined in Tag 0CSY by every etale scheme-chart square (Tag 0CSX (1)).",
+   "via": [
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceRelativePseudoCoherentComplex",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsPseudoCoherentRelativeTo",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceRelativePseudoCoherentComplex.lean",
+  "statement": "def IsPseudoCoherentRelativeTo {S : Scheme.{u}} {X Y : AlgebraicSpace S} [HasDerivedCategory.{w} X.SmallModules] [∀ T : Scheme.{u}, HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (g : X ⟶ Y) (K : X.DerivedQCoh) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsMPseudoCoherentRelativeTo",
+   "AlgebraicGeometry.AlgebraicSpace.IsPseudoCoherentRelativeTo"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-115dbf33d",
+  "group": "Q73",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-115dbf33d",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Item matches Stacks 0CTT clause by clause. Separated = diagonal is a closed immersion; fp = qc + qs (diagonal qc) + chartwise lfp; K in DerivedQCoh; test over all pseudo-coherent E; A-linear RΓ of E⊗K pseudo-coherent in D(A); conclusion is the new space predicate. New def-sfb-space-relative-pseudo-coherent-complex renders 0CSY/0CSX(1): all étale chart squares, scheme IsMPseudoCoherentRelativeTo of derivedSchemeRestriction, ∀ m. Its LFT witness is automatic from MapIsLocally LFP. No duplicate found in Lean, DAG or runs. statement unchanged; stmt_deps additions are owner nodes; lean.statement verbatim; universes w/wZ independent; sorry only; docstrings and 8 proof steps present; proof-dep imports exist. Notes: qs inlined (defeq to MapIsQuasiSeparated, item does not cite def-sfb-stack-qcqs-morphism); MapIsQuasiCompact owner def-sfb-proper-curve-moduli reached via def-sfb-space-morphism-properties, as in landed siblings. No files changed, no compile."
+ }
+}

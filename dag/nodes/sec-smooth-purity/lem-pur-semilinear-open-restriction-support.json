@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-semilinear-open-restriction-support",
+ "kind": "statement",
+ "title": "Scalar restriction preserves ordinary open support of semilinear systems",
+ "statement": "Let $C_n$ and $D_n$ be commutative rings with arbitrary adjacent maps, and use their constant ring sheaves on the vertical sequence sites of schemes [lem-sf-semilinear-proper-open-mate-pasting]. Let $j:U\\to X$ be an open immersion, and let $a:C_X\\to D_X$ be any map of the resulting ring-system sheaves. Write $\\operatorname{res}_a$ for the exact scalar restriction on module systems [def-coef-semilinear-system-models]. For every ordinary $D$-module system $M$ on $U$, $\\operatorname{res}_a(j_!M)$ belongs to the essential image of $j_!$ from ordinary $C$-module systems on $U$ to ordinary $C$-module systems on $X$. This asserts support only, not a comparison map or a mate equation.",
+ "stmt_deps": [
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact; scalar-action refinement of the direct-sum construction for the open subtopos of the vertical sequence site."
+ },
+ "proof": [
+  {
+   "text": "Use the initial commutative ring ULift Z and its unique maps to every coefficient ring. These maps commute with arbitrary adjacent coefficient maps. The existing ordinary scalar-restriction theorem supplies exact section-normalized functors rho_C and rho_D from the two system categories to strict integer-module towers. A morphism whose rho_C image is invertible is invertible: the level comparison and the conservative underlying abelian presheaf functor detect invertibility on every section.",
+   "uses": [
+    "lem-sf-semilinear-scalar-restriction",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each index n, continuous module pushforward along the level inclusion identifies integer restriction of evaluation with pushforward along the unique map from the initial constant integer sheaf. The fullness of forgetting commutativity and initiality identify the two coefficient maps after composing with a. The pushforward composition and congruence isomorphisms are identity on sections. Compose them with the two level comparisons, and use the prescribed adjacent-transition equations to obtain an isomorphism rho_C(res_a N) ≅ rho_D(N) of strict integer towers, for every ambient D-system N.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-sf-semilinear-scalar-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing ordinary scalar-adjunction package to both integer restrictions. For N=j!_D M the preceding isomorphism and the D open-extension comparison identify rho_C(res_a N) with j!_Z(rho_D M). The D open-unit equation and invertibility of the ordinary D open unit make the integer open unit at rho_D M invertible. The left triangle identity makes the integer open counit at its extension invertible; naturality transfers this to rho_C(res_a N).",
+   "uses": [
+    "lem-sf-semilinear-scalar-adjunctions",
+    "def-sp-varying-ring-operations",
+    "lem-sf-semilinear-scalar-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The C open-unit equation identifies the restriction comparison with the mate of the inverse extension comparison. The counit mate equation expresses rho_C of the C open counit at res_a N as a composite of the invertible integer counit and the comparison isomorphisms. Conservativity of rho_C therefore makes this C counit invertible, and its own counit supplies the required extension witness. Identify the chosen SemilinearProperOpen and VaryingRing extensions by their equal ring maps and chosen adjoints. No flatness, boundedness, or nonempty-open hypothesis is used.",
+   "uses": [
+    "lem-sf-semilinear-scalar-adjunctions",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-semilinear-scalar-restriction",
+  "def-sp-varying-ring-operations",
+  "def-coef-semilinear-system-models",
+  "lem-sf-semilinear-scalar-adjunctions",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ, using the existing integer scalar-adjunction comparisons instead of reconstructing the direct-sum extension. T6, 2026-10-26: conservativity, sectionwise integer comparison, open-unit equation, triangle identity, and counit mate equation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars preserves extension by zero sheaves modules",
+   "results": "Only generic module restriction-of-scalars declarations; none for open support of ringed sequence systems.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalar restriction preserves objects extended by zero from open subsite",
+   "results": "Generic scalar restriction declarations only; no essential-image preservation theorem for the actual derived system functors.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "openSupported|restrictScalars.*extensionByZero",
+   "results": "No matching Mathlib theorem. Repository search found RingedOpenScalarAdjunction.comparison for localized ordinary modules and scalar_open_existsIso for varying-to-constant rings; neither states support preservation for two varying systems.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10 of def-pur-semilinear-compact-support-coefficient-transport: support substep for the open-unit coefficient mate. The assigned node has no resolved imported blueprint ancestor.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOpenRestrictionSupport",
+  "file": "lean/Sheaf/Paper/SemilinearOpenRestrictionSupport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.scalarRestriction_ordinaryOpenSupported",
+  "statement": "theorem scalarRestriction_ordinaryOpenSupported\n    (C D : ℕ → CommRingCat.{u + 1})\n    (τ : ∀ n, C (n + 1) ⟶ C n) (σ : ∀ n, D (n + 1) ⟶ D n)\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (a : ringSystem C τ X ⟶ ringSystem D σ X) (M : Modules D σ U) :\n    (extension C τ j).essImage\n      ((SemilinearSections.res a).obj ((extension D σ j).obj M))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T070144-L-3420529",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T092706-L-3454366",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

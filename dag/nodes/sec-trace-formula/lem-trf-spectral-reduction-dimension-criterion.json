@@ -1,0 +1,494 @@
+{
+ "id": "lem-trf-spectral-reduction-dimension-criterion",
+ "kind": "statement",
+ "title": "Reduction dimension and exact orthogonality",
+ "statement": "Let $K$ be a field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value. A norm $N$ on a $K$-vector space means $N(x)=0$ exactly for $x=0$, $N(x+y)\\le\\max(N(x),N(y))$, and $N(ax)=|a|N(x)$. Put $\\widetilde K=\\{|a|\\le1\\}/\\{|a|<1\\}$ and $\\widetilde V=\\{N(v)\\le1\\}/\\{N(v)<1\\}$. If $V$ has finite dimension and an orthogonal basis (a basis $v_i$ with $N(\\sum a_iv_i)=\\max_i|a_i|N(v_i)$), and $N(V\\setminus\\{0\\})\\subset |K^\\times|$, then $\\dim_{\\widetilde K}\\widetilde V=\\dim_K V$. For every finite field extension $L/K$ with spectral norm $s$ [lem-trf-incomplete-spectral-algebra-norm], $s(z^m)=s(z)^m$ for $m\\ge1$, its reduction $\\widetilde L=\\{s\\le1\\}/\\{s<1\\}$ is a nonzero finite-dimensional reduced $\\widetilde K$-algebra, and $\\dim_{\\widetilde K}\\widetilde L\\le[L:K]$. Moreover, equality $\\dim_{\\widetilde K}\\widetilde L=[L:K]$ holds if and only if $L$ admits a basis $v_i$ satisfying $s(v_i)=1$ and $s(\\sum a_iv_i)=\\max_i|a_i|$. Neither completeness nor separability is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Corollary 2.5.1/6; Theorem 3.2.1/2; Proposition 3.6.2/8, printed p.161 (scan PDF p.169); used at equations (2)–(3) in 5.3.3, printed p.216. Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $K^\\circ=\\{a:|a|\\le1\\}$ and $K^{\\circ\\circ}=\\{a:|a|<1\\}$. The absolute-value inequalities make the first a ring and the second a proper ideal. Every element outside the ideal has norm $1$, so its inverse lies in $K^\\circ$; consequently $\\widetilde K$ is a field. For a normed vector space $(W,N)$, the sets $W^\\circ=\\{N\\le1\\}$ and $W^{\\circ\\circ}=\\{N<1\\}$ are $K^\\circ$-modules, and $K^{\\circ\\circ}W^\\circ\\subset W^{\\circ\\circ}$ by scalar homogeneity. Thus $W^\\circ/W^{\\circ\\circ}$ is a $\\widetilde K$-vector space: changing a scalar or vector representative changes its product by a vector of norm $<1$. In particular a class represented by $w\\in W^\\circ$ is nonzero exactly when $N(w)=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: coefficient normalization and reduction of independent residues. The vector-norm adaptation and orthogonal-basis calculations below are written by Q26, not asserted to be the statement of this tag."
+   }
+  },
+  {
+   "text": "For the first assertion, let $v_1,\\ldots,v_n$ be the given orthogonal basis. Choose $c_i\\in K^\\times$ with $|c_i|=N(v_i)$, using the value-group hypothesis, and put $e_i=c_i^{-1}v_i$. Then $N(\\sum a_ie_i)=\\max_i|a_i|$. It follows that $\\sum a_ie_i\\in V^\\circ$ exactly when all $a_i\\in K^\\circ$, and that it belongs to $V^{\\circ\\circ}$ exactly when all $a_i\\in K^{\\circ\\circ}$. Reducing coefficients therefore gives a bijective linear map $\\widetilde K^n\\to\\widetilde V$, with basis the classes of the $e_i$. By [def-weil-vector-space-dimension], both dimensions are $n$. If $V=0$, the empty basis gives $\\widetilde V=0$ and both dimensions are $0$.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: coefficient normalization and reduction of independent residues. The vector-norm adaptation and orthogonal-basis calculations below are written by Q26, not asserted to be the statement of this tag."
+   }
+  },
+  {
+   "text": "Now let $L/K$ be finite and $s=s_{L/K}$. The algebra norm properties in [lem-trf-incomplete-spectral-algebra-norm] show that $L^\\circ=\\{s\\le1\\}$ is a commutative ring, that $L^{\\circ\\circ}=\\{s<1\\}$ is an ideal, and that $s(a\\cdot1)=|a|$. Hence the quotient is a $\\widetilde K$-algebra and the scalar map is injective: $a\\in K^\\circ$ maps to zero exactly when $|a|<1$. Since $s(1)=1$, its unit is nonzero. A finite field extension is algebraic, so [lem-trf-algebraic-spectral-norm-powers] gives $s(z^m)=s(z)^m$ without completeness or separability. If $\\bar z^m=0$ for some $m\\ge1$, then $s(z)^m=s(z^m)<1$, whence $s(z)<1$ and $\\bar z=0$. Thus $\\widetilde L$ is reduced.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-algebraic-spectral-norm-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "spectralAlgNorm, lines 663–671; isNonarchimedean_spectralNorm, line 645; spectralNorm_one, line 577; isPowMul_spectralNorm, lines 627–642. Quotient and nilpotent calculation written here."
+   }
+  },
+  {
+   "text": "For a finite independent family $\\bar w_1,\\ldots,\\bar w_r$ in $\\widetilde L$, choose lifts $w_i\\in L^\\circ$; each has $s(w_i)=1$. Given coefficients $a_i\\in K$ not all zero, choose $j$ with $|a_j|=M=\\max_i|a_i|>0$. The vector $y=\\sum_i(a_i/a_j)w_i$ has $s(y)\\le1$. If $s(y)<1$, reduction would give $\\sum_i\\overline{a_i/a_j}\\,\\bar w_i=0$, contradicting independence since the $j$th coefficient is $1$. Therefore $s(y)=1$ and $s(\\sum_i a_iw_i)=M$. For zero coefficients both sides are zero. In particular every such lifted family is $K$-linearly independent.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: coefficient normalization and reduction of independent residues. The vector-norm adaptation and orthogonal-basis calculations below are written by Q26, not asserted to be the statement of this tag."
+   }
+  },
+  {
+   "text": "Put $n=[L:K]$. Applying [lem-weil-independent-family-card-le-dimension] to the lifted family of Step 4 gives $r\\le n$ for every finite independent family in $\\widetilde L$. Start with the empty family in $\\widetilde L$ and append a vector outside its span whenever the span is proper. The appended family is independent: in a relation, a nonzero last coefficient would express the new vector in the old span, and a zero last coefficient reduces to old independence. This must terminate at or before $n$ vectors, since otherwise the first $n+1$ vectors contradict the bound. The resulting independent spanning family is a finite basis. Its size is $\\dim_{\\widetilde K}\\widetilde L$ by [def-weil-vector-space-dimension], so the reduction is finite-dimensional and its dimension is at most $n$.",
+   "uses": [
+    "lem-weil-independent-family-card-le-dimension",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: coefficient normalization and reduction of independent residues. The vector-norm adaptation and orthogonal-basis calculations below are written by Q26, not asserted to be the statement of this tag."
+   }
+  },
+  {
+   "text": "Assume equality in the dimension bound. A basis of $\\widetilde L$ has $n$ elements by [def-weil-vector-space-dimension]. Lift it as in Step 4 to $w_1,\\ldots,w_n$. These are independent over $K$. If their span in $L$ were proper, appending a vector outside that span would give $n+1$ independent vectors (the relation argument in Step 5), contradicting [lem-weil-independent-family-card-le-dimension] for the $n$-dimensional space $L$. They therefore form a $K$-basis. Step 4 gives $s(w_i)=1$ and exactly the required norm formula for every coefficient family. Conversely, a basis with the stated formula is orthogonal and all nonzero values on $L$ belong to $|K^\\times|$, because a nonzero finite coefficient family attains a nonzero maximum. Step 2 then gives equality of the dimensions.",
+   "uses": [
+    "def-weil-vector-space-dimension",
+    "lem-weil-independent-family-card-le-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASH, lemma-inequality-general, proof: coefficient normalization and reduction of independent residues. The vector-norm adaptation and orthogonal-basis calculations below are written by Q26, not asserted to be the statement of this tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-dimension",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-algebraic-spectral-norm-powers",
+  "lem-weil-independent-family-card-le-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Q26 direct norm/reduction argument; comparison with the coefficient-normalization calculation in Tag 0ASH, lemma-inequality-general. BGR Corollary 2.5.1/6 and Proposition 3.6.2/8 remain WANTED locally; their proofs are not claimed as read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite spectral field extension is strictly cartesian if and only if its residue algebra dimension equals its field degree",
+   "results": {
+    "t": "2026-10-24T15:47:18Z",
+    "tool": "leanfinder",
+    "query": "A finite spectral field extension is strictly cartesian if and only if its residue algebra dimension equals its field degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.instFiniteResidueFieldOfFormallyUnramified",
+     "Algebra.FormallyUnramified.iff_map_maximalIdeal_eq",
+     "Algebra.QuasiFinite.instFiniteResidueField",
+     "Algebra.FormallyUnramified.of_map_maximalIdeal",
+     "Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+     "Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+     "Algebra.isUnramifiedAt_iff_map_eq",
+     "IsLocalRing.ResidueField.finite_of_finite"
+    ],
+    "digest": "430ad91b892e467d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: residue-degree and ramification results returned concern Dedekind or local rings and separable-degree comparisons; they do not give the spectral reduction criterion over an incomplete valued field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"finrank\"",
+   "results": {
+    "t": "2026-10-24T15:47:18Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"finrank\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: residue-degree and ramification results returned concern Dedekind or local rings and separable-degree comparisons; they do not give the spectral reduction criterion over an incomplete valued field."
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*(residue|reduction)|strictlyCartesian|defectless",
+   "results": {
+    "t": "2026-10-24T15:47:18Z",
+    "tool": "grep",
+    "query": "spectral.*(residue|reduction)|strictlyCartesian|defectless",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: residue-degree and ramification results returned concern Dedekind or local rings and separable-degree comparisons; they do not give the spectral reduction criterion over an incomplete valued field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite spectral field extension is strictly cartesian if and only if its residue algebra dimension equals its field degree",
+   "results": {
+    "t": "2026-10-24T15:47:19Z",
+    "tool": "leansearch",
+    "query": "A finite spectral field extension is strictly cartesian if and only if its residue algebra dimension equals its field degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.Algebra.IsSeparable.finSepDegree_eq",
+     "Field.finSepDegree_eq_finrank_of_isSeparable",
+     "Field.finSepDegree_eq_finrank_iff",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "FiniteField.instFiniteExtension",
+     "Field.insepDegree",
+     "Field.sepDegree",
+     "Field.finSepDegree"
+    ],
+    "digest": "4b66a785e1dad6cf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: residue-degree and ramification results returned concern Dedekind or local rings and separable-degree comparisons; they do not give the spectral reduction criterion over an incomplete valued field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly orthogonal nonarchimedean vector spaces reduction preserves dimension and residue degree criterion for spectral extensions",
+   "results": {
+    "t": "2026-10-24T15:52:07Z",
+    "tool": "leanfinder",
+    "query": "Strictly orthogonal nonarchimedean vector spaces reduction preserves dimension and residue degree criterion for spectral extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.inertiaDeg_le_finrank",
+     "Ideal.rank_pow_quot_aux",
+     "Ideal.inertiaDeg",
+     "Ideal.inertiaDeg_algebraMap",
+     "IsLocalRing.finrank_CotangentSpace_eq_one",
+     "Ideal.Factors.finrank_pow_ramificationIdx",
+     "IsLocalRing.finrank_quotient_map",
+     "Ideal.finrank_quotient_map"
+    ],
+    "digest": "6aee8e30acdfd204"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: residue-degree and ramification results returned concern Dedekind or local rings and separable-degree comparisons; they do not give the spectral reduction criterion over an incomplete valued field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral algebra norm of an algebraic field extension is power multiplicative without completeness",
+   "results": {
+    "t": "2026-10-24T16:28:30Z",
+    "tool": "leanfinder",
+    "query": "The spectral algebra norm of an algebraic field extension is power multiplicative without completeness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm_isPowMul",
+     "isPowMul_spectralNorm",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm_mul",
+     "spectralNorm_unique",
+     "spectralNorm_mul",
+     "spectralNorm_smul",
+     "norm_le_spectralNorm"
+    ],
+    "digest": "e3c0db08549dceef"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the power identity only: reuse existing lem-trf-algebraic-spectral-norm-powers; not a match for the entire item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralAlgNorm_isPowMul\"",
+   "results": {
+    "t": "2026-10-24T16:28:31Z",
+    "tool": "loogle",
+    "query": "\"spectralAlgNorm_isPowMul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "spectralAlgNorm_isPowMul"
+    ],
+    "digest": "776dd4781954781b"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the power identity only: reuse existing lem-trf-algebraic-spectral-norm-powers; not a match for the entire item"
+  },
+  {
+   "tool": "grep",
+   "query": "isPowMul_spectralNorm|spectralAlgNorm_isPowMul",
+   "results": {
+    "t": "2026-10-24T16:28:31Z",
+    "tool": "grep",
+    "query": "isPowMul_spectralNorm|spectralAlgNorm_isPowMul",
+    "sub": "Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "63",
+     "513",
+     "514",
+     "632",
+     "641"
+    ],
+    "digest": "e5ea0f07843460d8"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the power identity only: reuse existing lem-trf-algebraic-spectral-norm-powers; not a match for the entire item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectral norm on any algebraic extension of a nonarchimedean field is power multiplicative",
+   "results": {
+    "t": "2026-10-24T16:28:31Z",
+    "tool": "leansearch",
+    "query": "The spectral norm on any algebraic extension of a nonarchimedean field is power multiplicative",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm_isPowMul",
+     "isPowMul_spectralNorm",
+     "spectralAlgNorm_mul",
+     "spectralMulAlgNorm",
+     "spectralNorm",
+     "norm_le_spectralNorm",
+     "spectralAlgNorm",
+     "spectralNorm.normedField"
+    ],
+    "digest": "94e1a4b8123cbf14"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the power identity only: reuse existing lem-trf-algebraic-spectral-norm-powers; not a match for the entire item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dimensional nonarchimedean normed vector space the residue dimension is at most the dimension and equality gives an orthonormal basis",
+   "results": {
+    "t": "2026-10-24T16:29:55Z",
+    "tool": "leanfinder",
+    "query": "For a finite dimensional nonarchimedean normed vector space the residue dimension is at most the dimension and equality gives an orthonormal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "Module.Basis.norm_isNonarchimedean",
+     "Module.Basis.ofZLatticeBasis",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "NumberField.mixedEmbedding.euclidean.stdOrthonormalBasis",
+     "ZLattice.rank",
+     "ZLattice.exists_forall_abs_repr_le_norm",
+     "Real.finrank_eq_int_finrank_of_discrete"
+    ],
+    "digest": "0aebb326d8e573f9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for this item: returned field norm, residue-field, lattice or generic dimension facts do not assert the reduction/orthogonality criterion; the explicit reduction argument remains necessary"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orthonormal\", \"residue\"",
+   "results": {
+    "t": "2026-10-24T16:29:55Z",
+    "tool": "loogle",
+    "query": "\"orthonormal\", \"residue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for this item: returned field norm, residue-field, lattice or generic dimension facts do not assert the reduction/orthogonality criterion; the explicit reduction argument remains necessary"
+  },
+  {
+   "tool": "grep",
+   "query": "orthonormal.*(residue|reduction)|(residue|reduction).*orthogonal",
+   "results": {
+    "t": "2026-10-24T16:29:56Z",
+    "tool": "grep",
+    "query": "orthonormal.*(residue|reduction)|(residue|reduction).*orthogonal",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for this item: returned field norm, residue-field, lattice or generic dimension facts do not assert the reduction/orthogonality criterion; the explicit reduction argument remains necessary"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue vector space dimension is bounded by valued vector space dimension with equality for a basis of norm one",
+   "results": {
+    "t": "2026-10-24T16:29:56Z",
+    "tool": "leansearch",
+    "query": "Residue vector space dimension is bounded by valued vector space dimension with equality for a basis of norm one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valued.ResidueField",
+     "IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation",
+     "IsLocalRing.finrank_CotangentSpace_eq_one",
+     "Module.Basis.finite_ofVectorSpaceIndex_of_rank_lt_aleph0",
+     "Valued.integer.totallyBounded_iff_finite_residueField",
+     "Module.instFiniteDimensionalOfIsReflexive",
+     "WithAbs.instFiniteDimensional",
+     "Module.finrank_eq_card_basis'"
+    ],
+    "digest": "8f7a18cbee3748db"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for this item: returned field norm, residue-field, lattice or generic dimension facts do not assert the reduction/orthogonality criterion; the explicit reduction argument remains necessary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifts of linearly independent residue classes in a nonarchimedean normed vector space have norm equal to the maximum of scalar coefficients",
+   "results": {
+    "t": "2026-10-24T16:31:37Z",
+    "tool": "leanfinder",
+    "query": "Lifts of linearly independent residue classes in a nonarchimedean normed vector space have norm equal to the maximum of scalar coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "ZLattice.normBound",
+     "Module.Basis.norm",
+     "PadicInt.norm_mahlerTerm",
+     "ZLattice.le_norm_of_le_abs_repr",
+     "ZLattice.normBound_spec",
+     "ClassGroup.norm_lt"
+    ],
+    "digest": "108d6f31fb61b725"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for this item: returned field norm, residue-field, lattice or generic dimension facts do not assert the reduction/orthogonality criterion; the explicit reduction argument remains necessary"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(finrank|linearIndependent)|linearIndependent.*(residue|reduction)|strictlyCartesian",
+   "results": {
+    "t": "2026-10-24T16:31:37Z",
+    "tool": "grep",
+    "query": "residue.*(finrank|linearIndependent)|linearIndependent.*(residue|reduction)|strictlyCartesian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+     "Mathlib/Algebra/Module/SpanRankOperations.lean"
+    ],
+    "digest": "0a901721e601276e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for this item: returned field norm, residue-field, lattice or generic dimension facts do not assert the reduction/orthogonality criterion; the explicit reduction argument remains necessary"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Corollary 2.5.1/6; Theorem 3.2.1/2; Proposition 3.6.2/8, printed p.161 (scan PDF p.169); used at equations (2)–(3) in 5.3.3, printed p.216.",
+   "via": [
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-spectral-reduction-dimension-criterion",
+  "worker": "stage1",
+  "summary": "Q26: retained the statement, proved the reduction/vector-space comparison by explicit coefficient normalization and a bounded greedy basis construction, reused the existing algebraic spectral-norm power leaf and finite independent-family dimension leaf, and checked the incomplete/inseparable cases. No new nodes. BGR is absent locally, so this is an agent-written proof.",
+  "blueprint": "Historical analytic supporting branch from lem-trf-local-term-locality through the Temkin distinguished-presentation normalization chain, specifically the reduction-dimension comparison used in BGR 5.3.3 equations (2)–(3) by lem-trf-gauss-rational-function-stability. The latest blueprint contracting-correspondence proof and unit route are retained; this split only resolves the assigned auxiliary norm lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-9fe197284",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-9fe197284 (reviewer sub-agent of L); spot-checked: PASS. One commit with the item and the report, no new nodes, no repairs. The item is not a 2026-10-21 re-split; it had no proof on the base. The statement is unchanged and true. Small cases: V=0; L=K; a scaled norm with r outside |K^x| has Ṽ=0, so the value-group hypothesis is needed; Q_p(p^{1/e}) has dim 1<e. It meets every use made by its citer lem-trf-gauss-rational-function-stability: the bound and reducedness for E/R, the first clause for B(ν), the orthonormal-basis clause and power multiplicativity. Step 1: K̃ is a field and the quotient is a K̃-space, both checked from the axioms. Step 2: renormalizing by c_i with |c_i|=N(v_i) gives a bijection K̃^n→Ṽ. Step 3: uses the clauses of lem-trf-incomplete-spectral-algebra-norm as stated (s(1)=1, s(-z)=s(z), homogeneity, the ultrametric inequality, submultiplicativity) and lem-trf-algebraic-spectral-norm-powers (finite implies algebraic, no completeness or separability) for reducedness. Step 4: dividing by the largest coefficient gives the norm formula and independence of the lifts. Step 5: a greedy basis bounded by lem-weil-independent-family-card-le-dimension, with the hypotheses checked, shows finite dimension before the dimension is used. Step 6: lifts of a basis span by the n+1 contradiction, and the converse reduces to Step 2 with values in |K^x|. Every non-elementary use is a cited statement, and both trf leaves are Mathlib leaves. The sec-zeta-weil nodes are generic Mathlib leaves, so no tool_uses are needed. No SGA. BGR is absent locally; the proof is agent-written and complete, and the WANTED entry remains. DAG search found no duplicate: the cartesian-subspace and almost-orthogonal-basis nodes are different results."
+ }
+}

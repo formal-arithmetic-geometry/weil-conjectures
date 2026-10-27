@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-stratum-completion-unit-restriction",
  "kind": "statement",
  "title": "Restriction and finite-stratum detection of the adic completion unit",
- "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], put $R_n=(A/I^n)_X$ and $B_X=\\varprojlim_nR_n$ on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $K\\in D(\\operatorname{Mod}(B_X))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $u$ be either a locally closed stratum immersion $S\\to X$, restriction to a pro-etale site object $U\\to X$, or a composite of these two restrictions. For each restricted scheme $Y=S$ or $U$, put $B_Y=\\varprojlim_{n\\ge1}(A/I^n)_Y$. Identify coefficient sheaves by the maps induced from the quotient projections. Then $u^{-1}B_X\\cong B_S$ (respectively $B_U$), module pullback is exact, and there are canonical isomorphisms\n$$u^{-1}(K\\otimes^L_{B_X}R_n)\\cong u^{-1}K\\otimes^L_{B_S}(A/I^n)_S,$$\nwith $S$ replaced by $U$ as necessary. They commute with quotient transitions and normalization maps. For the specified strict quotient tower let $\\eta_K:K\\to R\\lim_n(K\\otimes^L_{B_X}R_n)$ be the quotient completion unit [lem-weil-pbc-constant-completion-equivalence]. Its inverse image identifies with $\\eta_{u^{-1}K}$, including the map from $u^{-1}K$. Intrinsic derived $I$-completeness [def-weil-pbc-intrinsic-completion] is preserved by these restrictions. For any finite stratification of $X$ [def-constructible-stratification] and chosen pro-etale covering of each stratum, $K$ is intrinsically complete if and only if all its restrictions to those covering members are intrinsically complete.",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], put $R_n=(A/I^n)_X$ and $B_X=\\varprojlim_nR_n$ on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $K\\in D(\\operatorname{Mod}(B_X))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $u$ be either a locally closed stratum immersion $S\\to X$, restriction to a pro-etale site object $U\\to X$, or a composite of these two restrictions. For each restricted scheme $Y=S$ or $U$, put $B_Y=\\varprojlim_{n\\ge1}(A/I^n)_Y$. Identify coefficient sheaves by the maps induced from the quotient projections. Then $u^{-1}B_X\\cong B_S$ (respectively $B_U$), module pullback is exact, and there are canonical isomorphisms\n$$u^{-1}(K\\otimes^L_{B_X}R_n)\\cong u^{-1}K\\otimes^L_{B_S}(A/I^n)_S,$$\nwith $S$ replaced by $U$ as necessary. They commute with quotient transitions and normalization maps. For the specified strict quotient tower, define $\\eta_K:K\\to R\\lim_n(K\\otimes^L_{B_X}R_n)$ as the derived constant/Rlim adjunction unit followed by Rlim of the normalized strict quotient augmentation [def-weil-pbc-exact-pullback-interface, def-weil-pbc-reduction-augmentation]. This is the quotient completion unit normalized by [lem-weil-pbc-constant-completion-equivalence]. Its inverse image identifies with $\\eta_{u^{-1}K}$, including the map from $u^{-1}K$. Intrinsic derived $I$-completeness [def-weil-pbc-intrinsic-completion] is preserved by these restrictions. For any finite stratification of $X$ [def-constructible-stratification] and chosen pro-etale covering of each stratum, $K$ is intrinsically complete if and only if all its restrictions to those covering members are intrinsically complete.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.8(1),(2); Proposition 6.6.11, reverse implication (completeness devissage)"
@@ -18,9 +18,10 @@
   "def-weil-pbc-intrinsic-completion",
   "def-constructible-stratification",
   "def-weil-pbc-four-corners",
-  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-exact-pullback-interface",
   "def-pur-completed-rlim-functor",
-  "def-weil-pbc-ring-restriction-pullback-comparison"
+  "def-weil-pbc-ring-restriction-pullback-comparison",
+  "def-weil-pbc-reduction-augmentation"
  ],
  "proof": [
   {
@@ -37,11 +38,12 @@
    }
   },
   {
-   "text": "Write $F$ for module inverse image with scalars transported through $c_u$. For a locally closed immersion, the immersion lemma states that $F$ is additive, exact and preserves all small limits. For a pro-etale object $U\\to X$, weakly etale localization identifies its site with $X_{\\mathrm{proet}}/U$. Module restriction there is exact by the ringed-site restriction lemma, and is additive termwise. Limits of module sheaves are sectionwise, so evaluating the restricted limit at $V\\to U$ gives the limit evaluated at that same object over $X$; hence restriction preserves all small limits. Transport along a ring isomorphism changes none of these properties. A composite of these functors remains additive, exact and countable-product preserving. In particular their termwise derived functors are the ordinary inverse images used here.",
+   "text": "For the actual stratumModulePull, exactness and additivity are the existing canonical module-pullback instances. To prove all-limit preservation, first establish it for set inverse image: use the immersion theorem or weakly-etale restriction theorem, and the canonical composition comparison for either mixed composite. Transfer this to abelian sheaves through the underlying-set comparison and the conservative limit-preserving forgetful functor. Transfer again to pure module inverse image through its natural underlying-abelian comparison. Finally use the scalar-extension equivalence along the canonical completed coefficient isomorphism. This proves stratumRestriction_limits without a Noetherian hypothesis on Y; its projection clause is the existing projection_comm theorem.",
    "uses": [
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-proetale-restriction-preserves-limits",
+    "lem-weil-pbc-proetale-module-inverse-image-comparison",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
     "lem-weil-pbc-module-sheaves-limits-sectionwise"
    ],
    "elementary": false,
@@ -51,9 +53,18 @@
    }
   },
   {
-   "text": "Apply normalized strict reduction-tower pullback with $R_Y$ there equal to $B_X$, $R_X$ there equal to $B_Y$, and quotient algebra tower $Q_{Y,n}=R_n$. Its hypotheses hold by the coefficient isomorphism and exactness just proved. The pulled-back algebra tower is precisely $((A/I^n)_Y)_n$, because the isomorphism in step 1 respects every projection and quotient transition. The theorem gives an isomorphism of entire derived strict towers $F^{\\operatorname{Tow}}(K_\\bullet)\\cong(FK)_\\bullet$. Its evaluations give the displayed finite-reduction isomorphisms, and it identifies the strict augmentations from the constant towers. In particular this proves transition compatibility for the actual reduction maps, independently of choices of K-flat representatives.",
+   "text": "Construct the ordinary normalized comparison before passing to the derived category. At each quotient level, let b be the published ordinary restriction/pullback comparison. Its mate under the two geometric module adjunctions is the sectionwise-identity direct-image comparison. Take its inverse mate under the two scalar-extension adjunctions. The iterated-mate/conjugation identity identifies its conjugate with that direct-image isomorphism, so the scalar mate is invertible. Compose b with scalar restriction of the inverse scalar mate. The unit-mate identity proves that this level isomorphism carries the pulled-back quotient unit to the target quotient unit. The specified units agree with the scalar adjunction units by their formulas on tensor generators. Each completed coefficient projection is sectionwise surjective; hence every ordinary quotient unit is epi, as proved in completed-constant-coefficient-equivalence. Exact module pullback preserves these epis. For the level comparisons, precompose each proposed transition or module-naturality square with this epi: the unit equations and the existing augmentation's naturality make both paths equal. Cancellation assembles the level isomorphisms into one natural strict-tower isomorphism and proves its uniqueness. Then keep the existing derived construction: resolve complexes by K-flat complexes with flat terms, use ringed-topos pullback preservation of K-flatness and the computing reduction counits, and descend the ordinary comparison uniquely along the fully faithful restriction to resolving representatives. The universal-counit equation extends to every complex by naturality and cancellation of the invertible image of a resolution. This gives exactly StratumReductionFormula. Only finite evaluation and quotient-normalization remain existing named obligations.",
    "uses": [
-    "lem-weil-pbc-reduction-pullback-derived-tower"
+    "def-weil-pbc-derived-reduction-comparison-formula",
+    "def-weil-pbc-reduction-augmentation",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-pc-kflat-resolution",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "lem-weil-pbc-completed-constant-coefficient-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
    "elementary": false,
    "source": {
@@ -62,23 +73,28 @@
    }
   },
   {
-   "text": "The normalization isomorphisms for two quotients $b\\ge a$ are, by the adic datum, represented by $(x\\otimes q)\\otimes t\\mapsto x\\otimes q_{b,a}(q)t$. The representative comparison in step 3 sends $F(x\\otimes q)$ to $F(x)\\otimes F(q)$. Applying these two maps in either order gives $F(x)\\otimes q'_{b,a}(F(q))F(t)$, since the constant coefficient comparison respects multiplication and $q_{b,a}$. These are equal balanced maps of sheaf tensor complexes, so they agree after localization. This proves compatibility with normalization maps as well as with the quotient augmentations $x\\mapsto x\\otimes1$.",
+   "text": "The finite coefficient naturality square is proved using the constant-ring comparison. For finite quotient normalization, identify the source and target normalization maps as conjugates of the inverse scalar restriction compositors using lem-weil-pbc-reduction-normalization-scalar-mate. The restriction/pullback squares respect scalar composition by lem-weil-pbc-restriction-pullback-scalar-composition. Apply the horizontal mates composition law and the two conjugation/vertical-composition laws to obtain the inverse finite-pullback square, then cancel its three invertible finite comparisons. This proves stratumReduction_normalization. Finite evaluation remains its existing named obligation. For strict augmentation compatibility, first prove the general exact-square localization-factor equation from mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac. On a flat-term K-flat representative P, postcompose the desired augmentation square with the target reduction counit and the invertible exact-pullback factor. The defining representative equation of the strict reduction comparison rewrites one path. The chosen normalization of completedReductionTowerUnit rewrites both augmentation edges as localizations of their ordinary strict quotient-unit maps. Naturality of the exact tower-pullback localization factor and the ordinary comparison's defining augmentation equation identify the two paths. Cancel the invertible target counit. Fully faithful restriction to flat-term K-flat representatives extends this equality of natural transformations to all derived objects. Pullback preserves K-flatness for these representatives by the ringed-topos pullback theorem. This proves stratumReduction_augmentation for the actual chosen maps and every f, without imposing any stratum hypothesis on f.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-reduction-pullback-derived-tower"
+    "def-weil-pbc-derived-reduction-comparison-formula",
+    "def-weil-pbc-reduction-augmentation",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-reduction-normalization-scalar-mate",
+    "lem-weil-pbc-restriction-pullback-scalar-composition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EL (lemma-tensor-product-pullback); explicit quotient-normalization formula in def-weil-pbc-adic-coefficient-datum."
    }
   },
   {
-   "text": "Countable products are exact in both $\\operatorname{Mod}(B_X)$ and $\\operatorname{Mod}(B_Y)$, even when $Y$ is not Noetherian. Apply the exact-product-functor strict-limit theorem to $F$ from step 2. For the strict quotient tower it gives the canonical isomorphism $F(R\\lim K_\\bullet)\\cong R\\lim F^{\\operatorname{Tow}}K_\\bullet$. Compose with the derived limit of the tower isomorphism from step 3 to obtain $F(R\\lim K_\\bullet)\\cong R\\lim(FK)_\\bullet$. This uses total derived inverse limit of strict towers, with its normalized Roos comparison, rather than selecting a completion of a triangle.",
+   "text": "stratumRestriction_limits supplies all-limit preservation for the actual module pullback, hence its canonical countable product comparisons are invertible. Apply the fully proved product-preserving-derived-limit-mate theorem to this functor. Its ordinary identity-component constant square is the inverse of d.constantPullbackIso; exact localization respects this inverse. Expanding the mate formula identifies its component with the specified stratumRlimComparison, so that actual map is invertible on every strict derived tower. Compose with derived limit of the normalized reduction-tower isomorphism for completion comparison invertibility. This preserves the prescribed comparison, arbitrary unbounded towers, and arbitrary non-Noetherian Y.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-pbc-reduction-pullback-derived-tower"
+    "lem-weil-pbc-product-preserving-derived-limit-mate"
    ],
    "elementary": false,
    "source": {
@@ -87,22 +103,18 @@
    }
   },
   {
-   "text": "The strict-limit comparison also preserves maps induced by strict augmentations. Apply its augmentation clause to $\\Delta K\\to K_\\bullet$, and then use the augmentation equation of step 3. It follows that the isomorphism of step 5 carries $F(\\eta_K)$ to $\\eta_{FK}$, with source exactly $FK$. Concretely, the signed Roos fiber has differential $(x,y)\\mapsto(dx,(1-s)x-dy)$, and the unit has coordinates $((x\\otimes1)_n,0)$. The comparison is the canonical product comparison on both coordinates; it therefore sends this unit to $((F(x)\\otimes1)_n,0)$. These are the quotient completion units fixed in the constant-completion equivalence, so no unspecified isomorphism of endpoint objects is being used.",
-   "uses": [
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
+   "text": "Prove the specified completion-unit equation directly by adjunction naturality and triangle identities, using the existing stratumReduction_augmentation declaration. Write F for derived module pullback, G for derived tower pullback, E for the constant/pullback isomorphism, and R for the target Rlim. Naturality of the target adjunction unit moves F(eta_K) past that unit; naturality of E.inv moves the source constant functor across F(eta_K). The source counit naturality and triangle identity reduce constant(eta_K) followed by the counit to the quotient augmentation. Apply the strict augmentation identity and cancel E.inv with E.hom. Functoriality of R gives exactly the target completion unit, with its specified source. Invertibility of the comparison follows by composing stratumRlimComparison_isIso with R of the tower isomorphism. Strict augmentation compatibility is proved by the preceding representative calculation; inverse-limit invertibility is proved in step 5.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0941 (lemma-derived-limit-is-ok), normalized kernel inclusion in the proof; proetale.tex Tag 099M (lemma-naive-completion), with unit compatibility supplied by the cited statements."
    }
   },
   {
-   "text": "The constant-completion equivalence identifies the completed-coefficient Koszul completion with the strict quotient completion and respects their units. Hence the intrinsic condition of def-weil-pbc-intrinsic-completion is equivalent to invertibility of the quotient unit $\\eta_K$, and the same equivalence applies on $Y$. Step 6 identifies its inverse image with $\\eta_{FK}$. A functor carries an invertible map to an invertible map, which proves preservation of intrinsic completeness for each restriction and for their composites.",
+   "text": "Apply completedKoszulQuotientComparison separately on X and Y to the supplied representatives. It identifies each intrinsic completion unit followed by an isomorphism with the actual quotient completion unit. Thus invertibility of the source intrinsic unit implies invertibility of its quotient unit. Pull it back and compose with the isomorphism stratumCompletionComparison; the unit equation of the preceding step gives invertibility of the target quotient unit. Cancel the target Koszul/quotient comparison isomorphism to obtain invertibility of the specified target intrinsic unit. No new representative or generating list is substituted.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-completed-koszul-quotient-comparison",
     "def-weil-pbc-intrinsic-completion"
    ],
    "elementary": false,
@@ -112,10 +124,11 @@
    }
   },
   {
-   "text": "Fix the finite stratification and the chosen pro-etale covering families in the statement. If all covering-member restrictions of $K$ are intrinsically complete, step 7 identifies their quotient units as isomorphisms. Step 6 identifies these maps with the restrictions of the single morphism $\\eta_K$ in $D(\\operatorname{Mod}(B_X))$. Noetherian stratum detection, applied with ring sheaf $R=B_X$, says that these exact inverse images jointly detect isomorphisms; thus $\\eta_K$ is invertible. The constant-completion equivalence then gives intrinsic completeness of $K$. Conversely, apply the preservation already proved to every stratum and covering-member composite. This proves the equivalence for the specified arbitrary covering families.",
+   "text": "Preservation gives the forward implication for each composite of a stratum immersion with a chosen covering-member weakly-etale morphism. Conversely, choose a complex representative of each pulled-back object and use the hypothesis and the Koszul/quotient comparison to make each local quotient unit invertible. The completion comparison and its unit equation then make every pullback of the global quotient unit invertible. For joint detection, upgrade the supplied locally closed partition to the existing constructible Stratification using the Noetherian underlying space. The canonical module/abelian unit mate gives a natural isomorphism between the underlying identified-coefficient module pullback and abelian inverse image. Apply the existing abelian stratum-cover zero-detection theorem to the underlying cohomology sheaves in every degree. Exact pullback commutes with cohomology, so it jointly detects zero derived objects. Apply that to a distinguished cone of the global quotient unit, using triangulatedness of exact pullback, to conclude that the global unit is invertible. Cancel the global Koszul/quotient comparison to recover the specified intrinsic condition. Empty strata and covers, unbounded complexes, and non-Noetherian covering members require no additional hypotheses.",
    "uses": [
     "lem-weil-pbc-noetherian-stratum-detection",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-weil-pbc-completed-koszul-quotient-comparison",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -125,24 +138,34 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-sfb-ringed-site-restriction-kflat",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-pbc-noetherian-stratum-detection",
+  "prop-weil-pbc-proetale-constant-ring-map",
   "lem-weil-pbc-proetale-immersion-limit-preservation",
   "lem-weil-pbc-proetale-restriction-preserves-limits",
+  "lem-weil-pbc-proetale-module-inverse-image-comparison",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-pbc-derived-reduction-comparison-formula",
+  "def-weil-pbc-reduction-augmentation",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-pc-kflat-resolution",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-weil-pbc-completed-constant-coefficient-equivalence",
+  "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-pbc-reduction-pullback-derived-tower",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+  "lem-weil-pbc-reduction-normalization-scalar-mate",
+  "lem-weil-pbc-restriction-pullback-scalar-composition",
+  "lem-weil-pbc-product-preserving-derived-limit-mate",
+  "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-noetherian-stratum-detection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.8(1),(2), and completeness devissage in Proposition 6.6.11, reverse implication. Strict-tower and unit details follow Stacks Tags 03EL, 0941, 099M, 0A0E and the existing normalized strict-tower comparison statements."
+  "place": "Lemma 6.5.8(1),(2) and Proposition 6.6.11 reverse implication. The ordinary strict comparison is normalized by its quotient augmentation and descended using computing counits. B4 proves finite quotient normalization by identifying each scalar normalization with the mate of inverse restriction composition, proving geometric pullback coherence for successive scalar restrictions, and applying a generic proved composition law for mates. The existing finite evaluation obligation remains. Strict augmentation, limit comparison, completion-unit and completeness proofs are retained. No statement, definition, chosen datum or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -265,8 +288,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-ringed-site-restriction-kflat",
   "lem-weil-proetale-countable-products-exact",
   "lem-cbc-exact-product-functor-strict-limit"
  ],
@@ -278,7 +299,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-6f7228b0d (reviewer sub-agent of L); spot-checked: Q32 6f7228b0: the item (statement unchanged; compared with the live node, only status/proof/proof_deps/proof_origin/split_report/mathlib_searches differ) gets an 8-step proof with no new nodes. Source checked: Bhatt–Scholze Lemma 6.5.8(1),(2) and its proof (k^* commutes with limits and with ⊗R/m), Prop. 6.6.11 reverse direction ('complete by 6.5.8 and standard sequences'), and Remark 6.5.10. Each step checked against the cited statements. S1: constant-ring-map applies because each A/I^n is finite and u is arbitrary; the immersion and weakly-étale limit lemmas give c_u; its projections and transitions are the specified ones. S2: the immersion lemma's transported-scalar clause; slice identification plus restriction exactness plus sectionwise limits for U. S3: every hypothesis of reduction-pullback-derived-tower holds, and Q_X=((A/I^n)_Y) with π_n. S4 (elementary): the balancing formulas of the adic datum and of τ agree; a genuine representative calculation. S5: products are exact on every scheme; exact-product strict-limit hypotheses hold. S6: its augmentation clause with γ=i_{X,K} and τF(i)=i_{FK} gives F(η_K)=η_{FK}; no arbitrary cone isomorphism. S7: Koszul Q_m of the intrinsic-completion definition equals Q_m(Â) of constant-completion-equivalence, whose units agree. S8: Noetherian stratum detection with R=B_X on the single morphism η_K. Implicit and accepted as elementary: inverse image along a pro-étale object equals slice restriction (initial object of I_W in def-weil-proetale-inverse-image). Edge cases checked: empty strata/members, I=A, I=0, unbounded K, non-Noetherian U. check_dag: no cycle or route error through the item. No duplicates; no SGA. Accepted tool_uses: lem-weil-proetale-weakly-etale-localization, lem-sfb-ringed-site-restriction-kflat, lem-weil-proetale-countable-products-exact, lem-cbc-exact-product-functor-strict-limit (generic, needed, no unit node gives them)."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.StratumCompletionUnitRestriction",
   "declaration": "AlgebraicGeometry.Scheme.stratum_completion_unit_restriction",
@@ -318,5 +350,64 @@
   "group": "NA",
   "result": "fix",
   "note": "Re-delivery, byte-identical in Lean/item/new-node to 7603bd08 and ac665650 (both FIXed; fixes lost on landing). Independent re-read: item vs live differs only in lean/stmt_deps (9 base deps kept, 4 def-node additions, no theorem stmt_deps); clauses match BS 6.5.8(1),(2)/6.6.11: Noetherian hypotheses on X only, IsAdicStratumRestriction covers immersion/weakly-etale/both composites, ∃!-pinned ordinary and derived tower comparisons, explicit Rlim adjunction mate, unit equation from (d.pull f).obj K, all-level normalization, intrinsic predicate preserved and detected over arbitrary covers of a finite locally closed stratification; edge cases allowed; 11 sorry, signature verbatim. nt_compile --json clean 26.6 s exit 0. FIX fixes/def-weil-pbc-ring-restriction-pullback-comparison.json (re-applied): lean.statement starts at def (verbatim in live ProEtaleRingSheafChangeAdjunction), declarations add proEtaleRingRestrictionDirectImage and its _existsUnique. MAINTAINER: the earlier landing refusals ('def-weil-pbc-ring-restriction-pullback-comparison is not reached from a target') happen because the item itself is orphaned in live: its only citer lem-weil-pbc-perfect-strata-uniform-reductions is no longer cited by lem-weil-pbc-integral-stratified-perfect-characterization (NF re-split reopened; live proof is K2's 6-step version). No group change can fix this (import_flags is maintainer-owned; dropping the node reopens H2). Hold dispatch until the parent re-split re-cites the chain or the orphans are flagged, then land this FIX. Advisories: ProEtaleOperations pullback/adjunction have no DAG owner; Q33 lem-sfb-adic-stratum-completion-unit near-duplicate."
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "J1 stage 2",
+  "old_statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], put $R_n=(A/I^n)_X$ and $B_X=\\varprojlim_nR_n$ on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $K\\in D(\\operatorname{Mod}(B_X))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $u$ be either a locally closed stratum immersion $S\\to X$, restriction to a pro-etale site object $U\\to X$, or a composite of these two restrictions. For each restricted scheme $Y=S$ or $U$, put $B_Y=\\varprojlim_{n\\ge1}(A/I^n)_Y$. Identify coefficient sheaves by the maps induced from the quotient projections. Then $u^{-1}B_X\\cong B_S$ (respectively $B_U$), module pullback is exact, and there are canonical isomorphisms\n$$u^{-1}(K\\otimes^L_{B_X}R_n)\\cong u^{-1}K\\otimes^L_{B_S}(A/I^n)_S,$$\nwith $S$ replaced by $U$ as necessary. They commute with quotient transitions and normalization maps. For the specified strict quotient tower let $\\eta_K:K\\to R\\lim_n(K\\otimes^L_{B_X}R_n)$ be the quotient completion unit [lem-weil-pbc-constant-completion-equivalence]. Its inverse image identifies with $\\eta_{u^{-1}K}$, including the map from $u^{-1}K$. Intrinsic derived $I$-completeness [def-weil-pbc-intrinsic-completion] is preserved by these restrictions. For any finite stratification of $X$ [def-constructible-stratification] and chosen pro-etale covering of each stratum, $K$ is intrinsically complete if and only if all its restrictions to those covering members are intrinsically complete.",
+  "old_stmt_deps": [
+   "pqf-def-locnoeth",
+   "def-weil-pbc-quasi-compact-scheme",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-proetale-site",
+   "def-weil-sheaf-of-modules-category",
+   "def-weil-abstract-derived-category",
+   "lem-weil-pbc-constant-completion-equivalence",
+   "def-weil-pbc-intrinsic-completion",
+   "def-constructible-stratification",
+   "def-weil-pbc-four-corners",
+   "def-weil-pbc-completed-pullback",
+   "def-pur-completed-rlim-functor",
+   "def-weil-pbc-ring-restriction-pullback-comparison"
+  ],
+  "what": "Stage-3 interface repair, using the legacy statement-change record format: the prose now explicitly defines the already specified quotient completion unit by the derived constant/Rlim adjunction and normalized strict quotient augmentation. Its earlier constructions replace the coarse dependency on the later completed-pullback comparison, which would otherwise be circular. No mathematical hypothesis, conclusion, or Lean declaration signature changes.",
+  "source": {
+   "document": "Blueprint proper base change and the existing CompletedPullback completionUnit construction; Stacks Project Tags 06YY, 079P, 099N",
+   "place": "Completed pullback: the quotient unit is the constant/Rlim adjunction unit followed by the derived limit of the normalized quotient augmentation."
+  },
+  "citers": [
+   {
+    "id": "lem-ag-uniform-complete-tensor",
+    "holds": true,
+    "note": "The same normalized quotient unit is specified explicitly; all hypotheses, conclusions and Lean signatures remain unchanged."
+   },
+   {
+    "id": "prop-weil-pbc-direct-image-limits",
+    "holds": true,
+    "note": "The same normalized quotient unit is specified explicitly; all hypotheses, conclusions and Lean signatures remain unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-integral-padic-local-perfect-criterion",
+    "holds": true,
+    "note": "The same normalized quotient unit is specified explicitly; all hypotheses, conclusions and Lean signatures remain unchanged."
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T053006-L-503091",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation",
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation_on_KFlat"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation_on_KFlat"
+  ]
  }
 }

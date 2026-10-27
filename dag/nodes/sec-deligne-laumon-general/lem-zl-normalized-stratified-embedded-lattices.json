@@ -1,0 +1,178 @@
+{
+ "id": "lem-zl-normalized-stratified-embedded-lattices",
+ "kind": "statement",
+ "title": "Reduced refined embedded lattices for fixed normalized coefficients",
+ "statement": "Fix a finite-field datum D, a prime l≠D.p, a finite normed Q_l-extension E and any CoefficientFamily c [def-zl-continuous-constructible-lattice-data]. Let X be separated finite type over D.k and F an ordinary module over its rational coefficient sheaf. For every finite locally closed partition S on which the naive inverse images of F are finite locally free, there exists Stratified l E X c.atScheme F S: a finite refinement factoring through S, genuine internal integral lattice inclusions with their sectionwise encodings and induced localization isomorphisms, the same reduced strata, and pulled lattice inclusions for the reductions and every further locally closed immersion. The empty X uses the empty refinement. Coefficients are held fixed throughout.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Proposition 6.8.4 and Remark 6.8.15; agent transport between condensed internal and continuous sectionwise modules, expanded from old item steps 4-6 and blueprint paragraph 6."
+ },
+ "stmt_deps": [
+  "def-zl-continuous-constructible-lattice-data"
+ ],
+ "proof": [
+  {
+   "text": "First check the geometric hypotheses for every scheme to which the coefficient and lattice results will be applied. A field is Noetherian since its only ideals are zero and itself, and its spectrum is a quasi-compact single affine open; thus the finite-type-over-Noetherian lemma makes $W$ and $T$ Noetherian. The closed-subsets-minimal lemma gives their Noetherian underlying spaces. Every subspace of a Noetherian space is Noetherian: an ascending chain of relative opens lifts to an ascending chain of ambient opens by taking successive unions. Thus a locally closed subscheme $S$ has quasi-compact underlying space, as do its opens. Its immersion is locally of finite type by the immersion lemma and its composite to $\\operatorname{Spec}k$ is locally of finite type by permanence. Consequently $S$ is finite type over $k$: the source is quasi-compact and the target has one point. It is locally Noetherian by the locally-finite-type lemma and hence Noetherian. An immersion is separated (its relative diagonal is an isomorphism), so permanence also makes $S/k$ separated. These observations apply to successive strata and their reductions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T5 (lemma-immersion-locally-finite-type), 01T6 (lemma-finite-type-noetherian); properties.tex, Noetherian topology"
+   }
+  },
+  {
+   "text": "Choose the finite lisse partition of $F$. On each member $S$, apply sk-lem-stratified-lattice to its inverse rational encoding, using step 1 for the standing separated finite-type hypotheses and step 5 for internal lisseness. It supplies a finite refinement and actual embedded internal lisse $A$-lattices $N\\subseteq F^{\\mathrm{int}}|_R$ at this same field $E$. Take the union of the finitely many refinements; a composite of locally closed immersions is an immersion by permanence, so this is a finite locally closed partition of $T$. Encode each inclusion and call its image $L\\subseteq F|_R$. Steps 4 and 5 preserve the inclusion and lisseness. The embedded-lattice coefficient-comparison lemma identifies the inclusion-induced rationalization with ordinary scalar extension, explicitly by $m/\\ell^d\\mapsto\\ell^{-d}\\otimes m$. Step 2 identifies the rational coefficient ring with $B_R[1/\\varpi]$, so the universal property of localization identifies that same scalar-extension map with $L[1/\\varpi]\\to F|_R$. It is an isomorphism because the internal lattice rationalization is. No lattice is glued across the different strata.",
+   "uses": [
+    "sk-lem-stratified-lattice",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-embedded-lattice-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph, using Proposition 6.8.4(6); internal lattice theorem and embedded coefficient comparison"
+   }
+  },
+  {
+   "text": "For every refined member $R$, replace it by $r:R_{\\mathrm{red}}\\to R$. The reduction lemma gives a reduced scheme and a surjective closed immersion with the same underlying subset. Its composite into $T$ is still an immersion by permanence, so the reduced members still form the same finite partition. Pull back the internal inclusion, and then encode. Sheaf inverse image is exact by the left-exact-site lemma, so it preserves its monomorphism; the locally-free-pullback lemma preserves lisseness. The same inverse image preserves the rationalization isomorphism, and step 4 identifies its tensor comparison with the one induced by the pulled inclusion. Step 3 identifies the coefficient rings with $B_{R_{\\mathrm{red}}}$ and $E_{R_{\\mathrm{red}}}$ by the specified maps. This proves all assertions about reduction. The identical argument applies to any further locally closed restriction. For empty $T$ choose no strata; for a zero module choose the zero integral submodule, whose localization and free rank are zero. Varying ranks require no extra choice, by step 5.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-continuous-locally-free-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054M (lemma-reduction-universal-homeomorphism); Bhatt--Scholze Remark 6.8.15 and Definition 6.8.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sk-lem-stratified-lattice",
+  "lem-sfb-embedded-lattice-coefficient-comparison",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-continuous-locally-free-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Definitions 6.8.1 and 6.8.3, Lemma 6.8.2 and Remark 6.8.15; normalized internal/sectionwise assembly from existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars under equivalence of internal modules and sheaves of modules preserves tensor generators",
+   "results": "ModuleCat.extendScalars and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; ordinary module results only.",
+   "date": "2026-10-25",
+   "verdict": "No match for the internal sheaf encoding, normalized coefficient family, geometric coherence or reduced embedded lattice refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free rational pro etale sheaves admit integral lattices on reduced finite locally closed refinement of a constructible partition",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.IsIntegral.component_integral; algebraic localizations and etale loci only.",
+   "date": "2026-10-25",
+   "verdict": "No match; these concern structure sheaves rather than the continuous coefficient rings and encoded internal modules."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralCoefficient|finiteContinuousCoefficient|stratified.*lattice Mathlib/AlgebraicGeometry Mathlib/Condensed; rg sectionModuleEquivalence|sectionModuleComapIso Mathlib/CategoryTheory Mathlib/Algebra/Category/ModuleCat",
+   "results": "No matching declarations in Mathlib. Repository search finds the existing generic coefficient, encoding and internal stratified-lattice dependencies, but no theorem with the combined normalized interfaces.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use existing DAG dependencies to prove the separate assembly steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ContinuousConstructibleStratifiedLattices",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 6, normalized coefficient/lattice interpretation; original node proof steps 1, 6, 7.",
+   "via": [
+    "lem-zl-continuous-constructible-stratified-lattices",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.NormalizedStratifiedEmbeddedLattices",
+  "file": "lean/Sheaf/DeligneLaumon/NormalizedStratifiedEmbeddedLattices.lean",
+  "declaration": "WeilConjectures.StratifiedContinuousLattices.normalized_stratified_embedded_lattices",
+  "statement": "theorem normalized_stratified_embedded_lattices (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (c : CoefficientFamily l E) (X : PerAdic.Base D.k) (F : pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E)) (S : Scheme.FiniteLocallyClosedStratification X.scheme) (hS : ∀ i : Fin S.n, ((proEtaleModuleInverseImage (S.immersion i) (rationalCoefficientSheaf l X.scheme E)).obj F).IsFiniteLocallyFree) : Nonempty (Stratified l E X.scheme c.atScheme F S)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-zl-normalized-stratified-embedded-lattices",
+  "worker": "stage3",
+  "summary": "Isolated the indicated proper part of the existing argument as a named Lean theorem. No statement weakens the original Family conclusion.",
+  "blueprint": "Paragraph 6, normalized coefficient/embedded lattice interpretation.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-stratified-lattice",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-sfb-embedded-lattice-coefficient-comparison",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-locally-free-pullback",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "independent cc review: 22 interface decls in new ContinuousConstructibleLatticeData vs live item module (verbatim, re-exported publicly); item proof = Family constructor from 4 sorry components vs Family fields; item proof_deps vs the 4 new nodes; importer RawHeartAdicStrataBridge compiled rc 0 against the delivered modules"
+ }
+}

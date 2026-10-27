@@ -60,7 +60,40 @@
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      164,
+      171
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      173,
+      179
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-weil-sheaf-complex",
@@ -120,5 +153,51 @@
    "WeilConjectures.FiniteFieldDatum.geometricFiber_coefficientPrimeInvertible"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, where\n$q=p^a$, and a prime $\\ell\\neq p$. Choose an algebraic closure $\\Qlb$ of\n$\\Ql$ and a finite extension $E/\\Ql$ contained in $\\Qlb$, and let\n$\\Lambda\\in\\{\\underline E,\\underline{\\Qlb}\\}$ be the corresponding condensed\nring ([det-def-sfb-condensed-ring], [det-def-sfb-qlbar-condensed]); we write\n$\\Lambda\\in\\{E,\\Qlb\\}$. Let $Y_0$ be a finite-type\n[def-weil-scheme-morphism-properties] $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$,\nand let $g_Y:Y\\to Y$ be the geometric-Frobenius automorphism of\n[def-weil-frobenius-detailed]. On the small pro-étale site\n[def-weil-pbc-proetale-site] put $\\Lambda_Y=p_Y^*\\Lambda$\n([det-def-sfb-pulled-back-coefficients]). Since $g_Y$ is an automorphism of\nschemes and $p_Y\\circ g_Y=p_Y$, the inverse image $g_Y^*$ is an exact\nautoequivalence of $\\Mod(Y_{\\mathrm{proét}},\\Lambda)$, with a canonical\nisomorphism $g_Y^*\\Lambda_Y\\cong\\Lambda_Y$; being exact it needs no deriving\n([det-def-sfb-derived-categories]), and we also write $Lg_Y^*=g_Y^*$ on\n$D(Y_{\\mathrm{proét}},\\Lambda)$. It preserves constructible sheaves and hence the\ntriangulated subcategory $\\Dbc(Y,\\Lambda)$ ([det-def-sfb-bounded-constructible],\n[sk-cor-coefficient-heart-ii]).\n\n**Weil sheaves.** Write\n$\\Sh_c(Y,\\Lambda)=\\Cons(Y,\\Lambda)$ for the abelian category of constructible\n$\\Lambda_Y$-modules ([sk-lem-coefficient-heart] (1)); it is the heart of the\nstandard $t$-structure on $\\Dbc(Y,\\Lambda)$. A *Weil $\\Lambda_Y$-module* is a pair\n$(M,\\theta)$ with $M\\in\\Mod(Y_{\\mathrm{proét}},\\Lambda)$ and an isomorphism\n\n$$\n \\theta:g_Y^*M\\xrightarrow{\\sim}M;\n$$\n\nmorphisms are module maps commuting with $\\theta$. Since $g_Y^*$ is exact,\nthese form an abelian category $\\Mod_{\\mathrm W}(Y,\\Lambda)$ in which kernels,\ncokernels and extensions are computed on the underlying modules. A\n*constructible Weil sheaf* (a *Weil sheaf* for short) is a Weil module with\n$M\\in\\Sh_c(Y,\\Lambda)$. By [sk-lem-coefficient-heart] (1), Weil sheaves form a\nfull abelian subcategory $\\Sh_{c,\\mathrm W}(Y,\\Lambda)$ of\n$\\Mod_{\\mathrm W}(Y,\\Lambda)$, closed under kernels, cokernels and extensions.\n\n**Weil complexes.** Let $D^b_{c,\\mathrm W}(Y,\\Lambda)$ be the full subcategory\nof the derived category $D(\\Mod_{\\mathrm W}(Y,\\Lambda))$\n([det-def-sfb-derived-categories]) of bounded complexes all of whose\ncohomology objects are Weil sheaves. It is a triangulated subcategory: in a\ntriangle $K\\to L\\to C\\to K[1]$ the object $H^i(C)$ is an extension of\n$\\ker(H^{i+1}K\\to H^{i+1}L)$ by $\\operatorname{coker}(H^iK\\to H^iL)$, and both\nare Weil sheaves by the closure properties above. The standard truncations of\ncomplexes of Weil modules preserve it, so the standard $t$-structure\nrestricts to $D^b_{c,\\mathrm W}(Y,\\Lambda)$, with heart\n$\\Sh_{c,\\mathrm W}(Y,\\Lambda)$. Its objects are called *Weil complexes*.\n\n**Forgetful functor and Frobenius.** The forgetful functor\n$\\Mod_{\\mathrm W}(Y,\\Lambda)\\to\\Mod(Y_{\\mathrm{proét}},\\Lambda)$ is exact, so it\ninduces a $t$-exact triangulated functor\n\n$$\n \\operatorname{For}:D^b_{c,\\mathrm W}(Y,\\Lambda)\n \\longrightarrow \\Dbc(Y,\\Lambda).\n$$\n\nIf $K$ is represented by a complex $(M^\\bullet,\\theta^\\bullet)$ of Weil\nmodules, the termwise isomorphisms $\\theta^m$ form an isomorphism of complexes\n$g_Y^*M^\\bullet\\to M^\\bullet$, and hence the derived Frobenius isomorphism\n\n$$\n \\theta_K:Lg_Y^*\\operatorname{For}(K)\n \\xrightarrow{\\sim}\\operatorname{For}(K)\n \\quad\\text{in }\\Dbc(Y,\\Lambda),\n$$\n\nnatural in $K$ and compatible with shifts and distinguished triangles. Thus\nevery Weil complex gives a pair $(\\operatorname{For}(K),\\theta_K)$ consisting\nof an object of the condensed category $\\Dbc(Y,\\Lambda)$ and an isomorphism\n$Lg_Y^*\\operatorname{For}(K)\\cong\\operatorname{For}(K)$.\n\n**Strict Weil complexes.** A pair $(K,\\theta)$ with $K\\in\\Dbc(Y,\\Lambda)$ and\n$\\theta:Lg_Y^*K\\xrightarrow{\\sim}K$ is a *strict Weil complex*; a morphism\n$(K,\\theta)\\to(L,\\theta')$ is a morphism $h:K\\to L$ of $\\Dbc(Y,\\Lambda)$ with\n$h\\circ\\theta=\\theta'\\circ Lg_Y^*(h)$. Where only such a pair is used (traces of\nFrobenius on stalks and on cohomology, weights, equivariant maps), a strict\nWeil complex is also called a Weil complex. Strict Weil complexes form a\ncategory of pairs over $\\Dbc(Y,\\Lambda)$, which is not triangulated, and\n$K\\mapsto(\\operatorname{For}(K),\\theta_K)$ is a functor from\n$D^b_{c,\\mathrm W}(Y,\\Lambda)$ to it. On the hearts it is an equivalence: a pair\n$(\\mathcal F,\\theta)$ with $\\mathcal F\\in\\Sh_c(Y,\\Lambda)$ is exactly a Weil\nsheaf, since morphisms in the heart are morphisms of sheaves. It is not\nfaithful: on $Y=\\operatorname{Spec}k$ a nonsplit Frobenius extension of\n$\\Lambda$ by $\\Lambda$ (a Jordan block) is a nonzero morphism\n$\\Lambda\\to\\Lambda[1]$ of $D^b_{c,\\mathrm W}(Y,\\Lambda)$, while\n$\\Hom_{\\Dbc(Y,\\Lambda)}(\\Lambda_Y,\\Lambda_Y[1])=0$.\n\n**Descent to a finite field of coefficients** (a consequence, not part of the\ndefinition). For finite extensions $E\\subset F$ inside $\\Qlb$, extension of\nscalars $M\\mapsto M_F=F_Y\\otimes_{E_Y}M$, and likewise $M\\mapsto M_{\\Qlb}$, is\nexact and commutes with $g_Y^*$, so it carries Weil modules to Weil modules and\ninduces triangulated functors\n$D^b_{c,\\mathrm W}(Y,E)\\to D^b_{c,\\mathrm W}(Y,F)\\to D^b_{c,\\mathrm W}(Y,\\Qlb)$\ncompatible with $\\operatorname{For}$. Then:\n\n1. every strict Weil complex $(K,\\theta)$ over $\\Qlb$, for instance a Weil\n   sheaf or the pair $(\\operatorname{For}(K),\\theta_K)$ of a Weil complex, is\n   isomorphic to the extension of scalars of a strict Weil complex\n   $(K_F,\\theta_F)$ over some finite $F$, with $K_F$ a sheaf when $K$ is one,\n   and morphisms of strict Weil complexes descend in the same way;\n2. for $K,L\\in D^b_{c,\\mathrm W}(Y,E)$ and every integer $r$, extension of\n   scalars induces an isomorphism\n   $$\n   \\varinjlim_{F\\supset E}\\Hom_{D^b_{c,\\mathrm W}(Y,F)}(K_F,L_F[r])\n   \\xrightarrow{\\ \\sim\\ }\n   \\Hom_{D^b_{c,\\mathrm W}(Y,\\Qlb)}(K_{\\Qlb},L_{\\Qlb}[r]),\n   $$\n   the colimit running over finite extensions $F$ of $E$ in $\\Qlb$;\n3. every Weil complex over $\\Qlb$ is isomorphic to $K_{\\Qlb}$ for some finite\n   $E\\subset\\Qlb$ and some $K\\in D^b_{c,\\mathrm W}(Y,E)$.",
+  "proof": [
+   {
+    "text": "*The Jordan block.* On $Y=\\operatorname{Spec}k$, evaluation at the point is exact\non $\\Lambda_Y$-modules ([def-weil-finite-coefficient-point]), so\n$\\Hom_{\\Dbc(Y,\\Lambda)}(\\Lambda_Y,\\Lambda_Y[1])=H^1(Y_{\\mathrm{proét}},\\Lambda_Y)=0$.\nIn $D(\\Mod_{\\mathrm W}(Y,\\Lambda))$, on the other hand,\n$\\Hom(\\Lambda,\\Lambda[1])=\\operatorname{Ext}^1_{\\Mod_{\\mathrm W}}(\\Lambda,\\Lambda)$\ncontains the class of a nonsplit extension $0\\to\\Lambda\\to J\\to\\Lambda\\to0$ of\nWeil modules, for instance $J=\\Lambda_Y^2$ with $\\theta$ given by a unipotent\nJordan block.",
+    "uses": [
+     "def-weil-finite-coefficient-point"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Extension of scalars.* For $E\\subset F$ finite inside $\\Qlb$, $F_Y$ and\n$\\overline{\\mathbf Q}_{\\ell,Y}$ are flat over $E_Y$\n([sk-prop-sfb-finite-extension-compatibility] (1)), so $M\\mapsto M_F$ and\n$M\\mapsto M_{\\Qlb}$ are exact. Since $g_Y^*$ is monoidal and\n$g_Y^*F_Y\\cong F_Y$, there is a natural isomorphism\n$g_Y^*(M_F)\\cong(g_Y^*M)_F$, and $(M,\\theta)\\mapsto(M_F,\\theta_F)$ is an exact\nfunctor $\\Mod_{\\mathrm W}(Y,E)\\to\\Mod_{\\mathrm W}(Y,F)$ commuting with the\nforgetful functors. It induces a triangulated functor on derived categories with\n$H^i(K_F)=H^i(K)_F$, which preserves bounded complexes with constructible\ncohomology ([lem-sfb-extend-subfield-constructible],\n[lem-sfb-extend-to-qlbar-constructible]); the same holds for $\\Qlb$. Moreover\n$M\\to M_{\\Qlb}$ is injective for every $F_Y$-module $M$: by\n[sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,Y}=\\varinjlim_{F'}F'_Y$,\nand $F'\\cong F^{[F':F]}$ as condensed $F$-modules with $F$ a direct summand, so\n$F'_Y$ is a free $F_Y$-module having $F_Y$ as a direct summand.",
+    "uses": [
+     "lem-sfb-extend-subfield-constructible",
+     "lem-sfb-extend-to-qlbar-constructible",
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(1) Strict Weil complexes.* Let $(K,\\theta)$ be a strict Weil complex over\n$\\Qlb$. By [sk-thm-sfb-qlbar-two-colimit] (3) there are a finite\n$E\\subset\\Qlb$ and $K_E\\in\\Dbc(Y,E)$ with $K\\cong(K_E)_{\\Qlb}$. As $g_Y^*$ commutes\nwith extension of scalars, $\\theta$ and $\\theta^{-1}$ are morphisms between\nobjects defined over $E$. By [sk-thm-sfb-qlbar-two-colimit] (2) with $r=0$ they\ncome from morphisms $\\theta_F,\\theta'_F$ over some finite $F\\supset E$, and after\nenlarging $F$ the identities $\\theta_F\\theta'_F=\\mathrm{id}$ and\n$\\theta'_F\\theta_F=\\mathrm{id}$ hold over $F$. So\n$(K,\\theta)\\cong((K_E)_F,\\theta_F)_{\\Qlb}$. If $K$ is a sheaf, then\n$H^i((K_E)_F)_{\\Qlb}=H^i(K)=0$ for $i\\neq0$, hence $H^i((K_E)_F)=0$ by\ninjectivity of $M\\to M_{\\Qlb}$, and $(K_E)_F$ is a sheaf. A morphism of strict\nWeil complexes between objects defined over $F$ comes from a morphism over some\nfinite $F'\\supset F$ by [sk-thm-sfb-qlbar-two-colimit] (2), and the identity\nexpressing compatibility with $\\theta$ holds after enlarging $F'$.",
+    "uses": [
+     "sk-thm-sfb-qlbar-two-colimit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2) Hom groups.* Let $\\Lambda$ be $F$ or $\\Qlb$. For a $\\Lambda_Y$-module $M$\nput $\\operatorname{Ind}M=\\bigoplus_{n\\in\\mathbf Z}(g_Y^n)^*M$, a Weil module\nwith $\\theta$ the isomorphism\n$g_Y^*\\operatorname{Ind}M=\\bigoplus_n(g_Y^{n+1})^*M\\to\\operatorname{Ind}M$\nthat matches the summands. The functor $\\operatorname{Ind}$ is exact, as $g_Y^*$\nand direct sums are exact, and left adjoint to the forgetful functor: a map of\nWeil modules $\\operatorname{Ind}M\\to(N,\\theta_N)$ is determined by its\nrestriction $M\\to N$ to the summand $n=0$, the other components being forced by\ncompatibility with $\\theta_N$. For a Weil module $(N,\\theta_N)$ the counit\n$\\varepsilon:\\operatorname{Ind}N\\to N$, which is the iterate of $\\theta_N$ on\nthe $n$-th summand, sits in a short exact sequence of Weil modules\n\n$$\n0\\to\\operatorname{Ind}N\\xrightarrow{\\ 1-s\\ }\\operatorname{Ind}N\n\\xrightarrow{\\ \\varepsilon\\ }N\\to0,\n$$\n\nwhere $s$ maps the $n$-th summand to the $(n+1)$-st by\n$(g_Y^n)^*(\\theta_N^{-1})$. Summand by summand this is\n$N\\otimes_{\\mathbf Z}$ of the exact sequence\n$0\\to\\mathbf Z[t^{\\pm1}]\\xrightarrow{1-t}\\mathbf Z[t^{\\pm1}]\\to\\mathbf Z\\to0$.\nApplied termwise to a complex $K$ of Weil modules it gives a distinguished\ntriangle\n$\\operatorname{Ind}\\operatorname{For}K\\to\\operatorname{Ind}\\operatorname{For}K\n\\to K\\to$ in $D(\\Mod_{\\mathrm W}(Y,\\Lambda))$. Since $\\operatorname{Ind}$ and\n$\\operatorname{For}$ are exact and adjoint, the adjunction passes to derived\ncategories, and $\\Hom(\\operatorname{Ind}\\operatorname{For}K,L[r])\n=\\Hom(\\operatorname{For}K,\\operatorname{For}L[r])$. Applying $\\Hom(-,L[r])$ to\nthe triangle therefore gives the long exact sequence\n\n$$\n\\cdots\\to\\Hom_{\\mathrm W}(K,L[r])\\xrightarrow{\\operatorname{For}}\n\\Hom(\\operatorname{For}K,\\operatorname{For}L[r])\\xrightarrow{\\ 1-\\varphi\\ }\n\\Hom(\\operatorname{For}K,\\operatorname{For}L[r])\\to\n\\Hom_{\\mathrm W}(K,L[r+1])\\to\\cdots,\n$$\n\nwith $\\Hom_{\\mathrm W}$ computed in $D(\\Mod_{\\mathrm W}(Y,\\Lambda))$, hence in\n$D^b_{c,\\mathrm W}(Y,\\Lambda)$ for $K,L$ there, the middle terms in\n$D(Y_{\\mathrm{proét}},\\Lambda)$, and\n$\\varphi(h)=\\theta_L[r]\\circ Lg_Y^*(h)\\circ\\theta_K^{-1}$.\n\nNow let $K,L\\in D^b_{c,\\mathrm W}(Y,E)$. Extension of scalars commutes with\n$\\operatorname{Ind}$, $\\operatorname{For}$, $s$ and $\\varepsilon$, so it maps the\nsequence for $(K_F,L_F)$ to the one for $(K_{F'},L_{F'})$ and to the one for\n$(K_{\\Qlb},L_{\\Qlb})$, compatibly. Filtered colimits of exact sequences of\nabelian groups are exact, so the colimit over $F\\supset E$ of the sequences for\n$(K_F,L_F)$ is exact and maps to the sequence for $(K_{\\Qlb},L_{\\Qlb})$. On the\nterms $\\Hom(\\operatorname{For}K_F,\\operatorname{For}L_F[r])$ this map is the\nisomorphism of [sk-thm-sfb-qlbar-two-colimit] (2), applied to\n$\\operatorname{For}K,\\operatorname{For}L\\in\\Dbc(Y,E)$. By the five lemma it is an\nisomorphism on the terms $\\Hom_{\\mathrm W}$, which is (2).",
+    "uses": [
+     "sk-thm-sfb-qlbar-two-colimit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(3) Weil complexes.* Let $K\\in D^b_{c,\\mathrm W}(Y,\\Qlb)$; we induct on the\nnumber of nonzero cohomology sheaves. If there is at most one, $K\\cong G[-m]$\nfor a Weil sheaf $G$, which descends to a Weil sheaf over some finite $F$ by (1).\nOtherwise let $m$ be the top degree and consider the truncation triangle\n$\\tau^{<m}K\\to K\\to H^m(K)[-m]\\xrightarrow{\\delta}(\\tau^{<m}K)[1]$ in\n$D^b_{c,\\mathrm W}(Y,\\Qlb)$. By induction $\\tau^{<m}K\\cong A_{\\Qlb}$ and\n$H^m(K)[-m]\\cong B_{\\Qlb}$ with $A,B$ over finite extensions, which we may take\nto be a common $E$. By (2) with $r=1$, $\\delta$ comes from some\n$\\delta_F:B_F\\to A_F[1]$ over a finite $F\\supset E$. The cocone $C$ of $\\delta_F$\nlies in the triangulated subcategory $D^b_{c,\\mathrm W}(Y,F)$, and as extension\nof scalars is triangulated, $C_{\\Qlb}$ is a cocone of $\\delta$, hence\n$C_{\\Qlb}\\cong K$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

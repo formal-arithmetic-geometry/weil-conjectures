@@ -1,0 +1,482 @@
+{
+ "id": "lem-sfb-reduced-target-dominant-group-flatness",
+ "kind": "statement",
+ "title": "Dominant affine group homomorphisms with reduced target are faithfully flat",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. A commutative Hopf $k$-algebra here means a unital commutative $k$-algebra $A$ with $k$-algebra maps $\\Delta_A:A\\to A\\otimes_k A$, $\\epsilon_A:A\\to k$, $S_A:A\\to A$ such that $(\\Delta_A\\otimes1)\\Delta_A=(1\\otimes\\Delta_A)\\Delta_A$, $(\\epsilon_A\\otimes1)\\Delta_A=(1\\otimes\\epsilon_A)\\Delta_A=1_A$, and $\\mu_A(S_A\\otimes1)\\Delta_A=\\mu_A(1\\otimes S_A)\\Delta_A=\\eta_A\\epsilon_A$, under the usual tensor unit and associativity identifications; $\\mu_A$ and $\\eta_A$ are multiplication and unit. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. A Hopf homomorphism $u:P\\to Q$ means a $k$-algebra homomorphism with $\\Delta_Qu=(u\\otimes u)\\Delta_P$, $\\epsilon_Qu=\\epsilon_P$ and $S_Qu=uS_P$. Let $A,B$ be commutative Hopf $k$-algebras, both finitely generated as $k$-algebras [def-weil-pbc-finite-type-algebra], and let $i:A\\to B$ be an injective Hopf homomorphism. Assume $A$ is reduced, meaning that $a^n=0$ for $n\\geq1$ implies $a=0$. Then $i$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. No reducedness of $B$, connectedness, smoothness, or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 1.69 and Proposition 1.70, printed p.28, with Proposition 1.65(a), pp.26--27, and the first paragraph of Theorem 3.31, p.73; their affine coordinate-algebra formulation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=\\operatorname{Spec}B$, $H=\\operatorname{Spec}A$, and $f=\\operatorname{Spec}i$. By [lem-sfb-hopf-spectrum-functor], these are affine group schemes and $f$ is a homomorphism. The counits give $k$-points, so both schemes are nonempty. The finite algebra generators give finite-type structure maps and also make $B$ a finite-type $A$-algebra: the same generators work, since the image of $k$ lies in $i(A)$. Thus $f$ is finite type, using [def-weil-finite-type-morphism] and the quasi-compactness of affine schemes [lem-weil-pbc-affine-scheme-qcqs]. The scheme $H$ is reduced by [lem-weil-pbc-affine-scheme-reduced-iff].",
+   "uses": [
+    "lem-sfb-hopf-spectrum-functor",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.69 and Proposition 1.70, p.28; Proposition 3.6, pp.66--67, coordinate interpretation."
+   }
+  },
+  {
+   "text": "The morphism $f$ has dense image. Indeed its kernel sheaf on a principal open $D(a)\\subset H$ is the kernel of $A_a\\to B_{i(a)}$. If $r/a^n$ maps to zero, some $i(a)^m i(r)$ is zero; injectivity of $i$ gives $a^m r=0$, hence $r/a^n=0$. Principal opens form the defining affine basis, so the sheaf kernel is zero. As $f$ is quasi-compact, [lemma-nagata-scheme-image-ideal-qc] identifies the closure of its image with the vanishing locus of its kernel ideal, which is therefore all of $H$. This argument does not require $B$ reduced.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.69, p.28: dominance hypothesis, checked on coordinate rings; scheme-theoretic image formulation."
+   }
+  },
+  {
+   "text": "By [lem-wf-affine-constructible-open], $f(G)$ is constructible and its density supplies a nonempty open $U\\subset H$ contained in $f(G)$. We use [lem-sc-lft-over-field-jacobson-space] to detect nonempty locally closed subsets of $G,H$ by closed points: write one as $Z\\cap O$ with $Z$ closed and $O$ open; density of closed points in $Z$ gives a closed point in $Z\\cap O$. By [lem-wf-affine-nullstellensatz-vanishing](1), these closed points are $k$-points. Moreover every $k$-point $u\\in f(G)$, with maximal ideal $\\mathfrak m=\\ker(u:A\\to k)$, lifts to $G(k)$: choose a prime $\\mathfrak q\\subset B$ with $i^{-1}(\\mathfrak q)=\\mathfrak m$ and a maximal ideal $\\mathfrak n\\supseteq\\mathfrak q$ of $B$; then $i^{-1}(\\mathfrak n)$ is a prime ideal containing the maximal $\\mathfrak m$, so equals it. By the same assertion (1) for $B$, $\\mathfrak n$ is the kernel of a $k$-algebra map $g:B\\to k$, and $g\\circ i:A\\to k$ is a $k$-algebra map with kernel $\\mathfrak m$, hence equals $u$ since $A/\\mathfrak m=k$ as $k$-algebras. Thus $f(g)=u$; in particular $U(k)$ lifts. Put $S=f(G(k))\\subset H(k)$. Thus $U(k)\\subset S$. The subgroup property of $S$ follows from the homomorphism in step 1.",
+   "uses": [
+    "lem-wf-affine-constructible-open",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.68, p.28, and Proposition 1.65(b), p.27; explicit closed-point and fibre checks."
+   }
+  },
+  {
+   "text": "For $s\\in S$, left translation $L_s$ on $H$ is an isomorphism with inverse $L_{s^{-1}}$, by the group laws [def-sc-group-scheme]. Set $V=\\bigcup_{s\\in S}L_s(U)$. This is nonempty open. Choose $u_0\\in U(k)$ by step 3. Its $k$-points are exactly $S$: containment in $S$ follows from $U(k)\\subset S$, and $s=(s u_0^{-1})u_0$ proves the reverse. Hence $V$ contains all $k$-points of $U$ and all $S$. In fact $V$ contains $f(G)$: otherwise the constructible subset $f(G)\\setminus V$ would contain a closed $k$-point by step 3, which lifts to $G(k)$ by the lifting argument of step 3 and so belongs to $S\\subset V$, a contradiction. Density of $f(G)$ makes $V$ dense. If $y\\in H(k)\\setminus S$, then $V\\cap L_y(V)$ is nonempty open because $V$ is dense. It has a $k$-point by step 3. Such a point lies both in $S=V(k)$ and in $yS=L_y(V)(k)$, contradicting disjointness of distinct cosets. Therefore $S=H(k)$.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.68 and Corollary 1.69, p.28; the open-subgroup/coset argument written out."
+   }
+  },
+  {
+   "text": "The complement $H\\setminus f(G)$ is constructible, since $f(G)$ is constructible by step 3. If nonempty, a locally closed piece of this complement has a closed $k$-point by the closed-point test of step 3. This contradicts $f(G(k))=H(k)$ from step 4. Thus $f$ is surjective on all underlying points, including nonclosed ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.69, p.28; passage from closed points to all points expanded."
+   }
+  },
+  {
+   "text": "There is a nonempty open $U_0\\subset H$ over which $f$ is flat. To see this without assuming $H$ irreducible, [lem-wf-affine-noetherian-components] gives finitely many irreducible components $C_1,\\ldots,C_r$. Choose $C_1$ and let $W=H\\setminus\\bigcup_{j>1}C_j$. It is a nonempty open contained in $C_1$, hence irreducible: maximality of components prevents $C_1$ being covered by the other finitely many components. It is reduced since its local rings are those of the reduced $H$ [def-pc-reduced-scheme]. Thus $W$ is integral by [def-pc-integral-scheme]. By [lem-sfb-finite-type-composition-base-change](2), $f^{-1}W\\to W$ is finite type. Apply [lem-sbc-generic-flatness] to obtain a nonempty open $U_0\\subset W$ with $f^{-1}U_0\\to U_0$ flat. This is also an open of $H$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sbc-generic-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(a), p.27, generic-flatness paragraph; component reduction makes the integral-base hypothesis explicit."
+   }
+  },
+  {
+   "text": "Choose $u\\in U_0(k)$ by step 3. For every $h\\in H(k)$, step 4 gives $g\\in G(k)$ with $f(g)=hu^{-1}$. The group laws give $f L_g=L_{f(g)}f$, and both translations are isomorphisms with inverses given by inverse elements [def-sc-group-scheme]. Hence the restriction over $L_{f(g)}U_0$ is isomorphic to the flat restriction over $U_0$. Explicitly, translation carries each local ring map to the same map conjugated by the induced local-ring isomorphisms; tensoring a module sequence after such ring isomorphisms has the same exactness, so flatness is preserved. By [def-weil-flat-morphism] it is flat at every point above this translated open. These opens contain every $h\\in H(k)$, because $h=f(g)u$. Their union is all of $H$: its closed complement, if nonempty, has a closed $k$-point by step 3. Therefore $f$ is flat at every source point, hence flat. This uses no reducedness of $G$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(a), p.27, translated-open cover; Proposition 1.70, p.28."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-morphism-affine-criterion] to the whole affine schemes $G,H$: the map on their coordinate rings is $i$, so $i$ is flat. Its prime-spectrum map is the surjective $f$ of step 5. Now [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] proves that $i$ is faithfully flat, exactly in the sense of [def-weil-pbc-faithfully-flat-ring-map]. All uses of reducedness were on $A$ or $H$, and the argument did not assume connectedness, smoothness or any characteristic restriction.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.70, p.28, concluding faithful flatness; affine criterion and algebraic faithful-flatness criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hopf-spectrum-functor",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "def-weil-affine-spectrum",
+  "lem-wf-affine-constructible-open",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "def-sc-group-scheme",
+  "lem-wf-affine-noetherian-components",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sbc-generic-flatness",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 1.65(a), 1.68, Corollary 1.69 and Proposition 1.70, pp.26--28; coordinate-ring and closed-point details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A dominant homomorphism of algebraic group schemes over an algebraically closed field with reduced target is faithfully flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:26Z",
+    "tool": "leanfinder",
+    "query": "A dominant homomorphism of algebraic group schemes over an algebraically closed field with reduced target is faithfully flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.flat_and_surjective_SpecMap_iff",
+     "AlgebraicGeometry.Flat",
+     "Module.FaithfullyFlat.of_specComap_surjective",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "RingHom.FaithfullyFlat.codescendsAlong_surjective",
+     "AlgebraicGeometry.Flat.of_stalkMap"
+    ],
+    "digest": "5d40cac166dceafb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits characterize faithful flatness for an already flat and surjective affine morphism or give descent; they do not infer flatness from group translation and a reduced target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of finite type group schemes onto a reduced algebraic group is flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:25Z",
+    "tool": "leanfinder",
+    "query": "A surjective homomorphism of finite type group schemes onto a reduced algebraic group is flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "RingHom.FaithfullyFlat.codescendsAlong_surjective",
+     "AlgebraicGeometry.flat_and_surjective_SpecMap_iff"
+    ],
+    "digest": "c7a459aead0045f5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits characterize faithful flatness for an already flat and surjective affine morphism or give descent; they do not infer flatness from group translation and a reduced target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominant group scheme homomorphism with reduced target is faithfully flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:25Z",
+    "tool": "leansearch",
+    "query": "Dominant group scheme homomorphism with reduced target is faithfully flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat",
+     "RingHom.FaithfullyFlat.iff_flat_and_comap_surjective",
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "AlgebraicGeometry.IsDominant",
+     "AlgebraicGeometry.ext_of_isDominant",
+     "RingHom.FaithfullyFlat.flat",
+     "AlgebraicGeometry.flat_and_surjective_SpecMap_iff",
+     "AlgebraicGeometry.Scheme.Hom.denseRange"
+    ],
+    "digest": "13657928b4efd78d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits characterize faithful flatness for an already flat and surjective affine morphism or give descent; they do not infer flatness from group translation and a reduced target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grp\", \"Flat\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:25Z",
+    "tool": "loogle",
+    "query": "\"Grp\", \"Flat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits characterize faithful flatness for an already flat and surjective affine morphism or give descent; they do not infer flatness from group translation and a reduced target."
+  },
+  {
+   "tool": "grep",
+   "query": "dominant.*flat|flat.*dominant|Surjective.*Grp|Grp.*Surjective",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T14:47:25Z",
+    "tool": "grep",
+    "query": "dominant.*flat|flat.*dominant|Surjective.*Grp|Grp.*Surjective",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Group/Affine.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean"
+    ],
+    "digest": "ce3ba41c9b7f724b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits characterize faithful flatness for an already flat and surjective affine morphism or give descent; they do not infer flatness from group translation and a reduced target."
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf|dominant.*flat|flat.*dominant",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T19:20:50Z",
+    "tool": "grep",
+    "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf|dominant.*flat|flat.*dominant",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean"
+    ],
+    "digest": "8c1d2a555c063689"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume flatness, characterize faithful flatness, give descent, or discuss scheme-theoretic dominance; none proves the stated Hopf inclusion theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dominant homomorphism of affine algebraic groups with reduced target is faithfully flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:20:51Z",
+    "tool": "leansearch",
+    "query": "A dominant homomorphism of affine algebraic groups with reduced target is faithfully flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat",
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "RingHom.Flat",
+     "RingHom.FaithfullyFlat.iff_flat_and_comap_surjective",
+     "RingHom.FaithfullyFlat.injective",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "RingHom.FaithfullyFlat.of_bijective",
+     "AlgebraicGeometry.IsDominant"
+    ],
+    "digest": "38886624c5f39f8a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume flatness, characterize faithful flatness, give descent, or discuss scheme-theoretic dominance; none proves the stated Hopf inclusion theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"FaithfullyFlat\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:20:51Z",
+    "tool": "loogle",
+    "query": "\"HopfAlgebra\", \"FaithfullyFlat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume flatness, characterize faithful flatness, give descent, or discuss scheme-theoretic dominance; none proves the stated Hopf inclusion theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective map of finitely generated commutative Hopf algebras over an algebraically closed field with reduced domain is faithfully flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:20:52Z",
+    "tool": "leanfinder",
+    "query": "An injective map of finitely generated commutative Hopf algebras over an algebraically closed field with reduced domain is faithfully flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "RingHom.FaithfullyFlat.injective",
+     "Algebra.IsGeometricallyReduced.of_injective",
+     "RingHom.FaithfullyFlat.of_bijective",
+     "RingHom.FaithfullyFlat",
+     "Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective",
+     "RingHom.FaithfullyFlat.codescendsAlong_bijective"
+    ],
+    "digest": "debd5ea735452783"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume flatness, characterize faithful flatness, give descent, or discuss scheme-theoretic dominance; none proves the stated Hopf inclusion theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism of finite type affine group schemes over an algebraically closed field onto a reduced group scheme is flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:22:16Z",
+    "tool": "leanfinder",
+    "query": "A dominant morphism of finite type affine group schemes over an algebraically closed field onto a reduced group scheme is flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat.of_stalkMap"
+    ],
+    "digest": "4fac16bfe6344b4c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits assume flatness, characterize faithful flatness, give descent, or discuss scheme-theoretic dominance; none proves the stated Hopf inclusion theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hopf-subalgebra-faithfully-flat",
+  "date": "2026-10-24",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Corollary 1.69 and Proposition 1.70, printed p.28, with Proposition 1.65(a), pp.26--27, and the first paragraph of Theorem 3.31, p.73; their affine coordinate-algebra formulation.",
+   "via": [
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reduced-target-dominant-group-flatness",
+  "worker": "stage1",
+  "summary": "Statement retained. Reused the existing DAG without new nodes. Expanded affine dominance, constructible image, the open-subgroup argument on k-points, full surjectivity, generic flatness on an isolated component, translation of flatness, and the affine faithfully-flat criterion. Every cited statement was opened and quoted.",
+  "blueprint": "Inherited alteration/quotient route recorded in blueprint.from.place; discharges the reduced-target prerequisite of the Hopf-subalgebra theorem by Milne 1.65 and 1.68--1.70. The ancestor search returns None, retained as in the inherited chain. Whole-blueprint searches found no exact statement.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "Generic tool for Chevalley constructibility and open pieces of constructible sets; no same-unit node gives this statement. Used within the inherited Milne proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic tool for Residue fields of closed points and the vanishing principle; no same-unit node gives this statement. Used within the inherited Milne proof, without replacing the unit route."
+   },
+   {
+    "node": "lem-sbc-generic-flatness",
+    "why": "Generic tool for Generic flatness for a finite type morphism to an integral scheme; no same-unit node gives this statement. Used within the inherited Milne proof, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-constructible-open",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sbc-generic-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-ebf671aa6",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-ebf671aa6 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 8 steps (no new nodes), every cited statement, Milne iAG2017 pp.26-28 (1.65(a), 1.68, 1.69, 1.70) and the 3.31 use in the parent lem-sfb-hopf-subalgebra-faithfully-flat. The statement, stmt_deps and source are byte-identical to the base; the item is still unsplit on live and side-live. The statement is the coordinate-ring form of Milne 1.69+1.70 and is true. No cycle, no SGA. Step checks: step 2 shows the A_a->B_{i(a)} kernel vanishes, and the scheme-image node gives the closure of the image as H. Step 3 uses Chevalley (1)/(2), the Jacobson closed-point test and Nullstellensatz (1). Step 4's open-subgroup coset argument (V(k)=S, V contains f(G) and so is dense even when H is reducible, V and yV meet) is correct. Step 5 gives surjectivity on all points via constructibility. Step 6 isolates an integral open component W, so the integral-base hypothesis of generic flatness holds; this is the only use of A reduced. Step 7 translates flatness using f L_g = L_{f(g)} f. Step 8 applies the affine flatness criterion and flat + Spec-surjective => faithfully flat. Edge cases checked: A=k, disconnected H, Frobenius k[t^p] in k[t], nonreduced B. The 3 recorded generic tool_uses (Chevalley, Nullstellensatz, generic flatness) are accepted. One C1 fault fixed: the k-point lifting in step 3 relied on the uncited identification of the fibre with Spec(B tensor_A k). It is replaced by a direct maximal-ideal lift using only Nullstellensatz (1) for B, and step 4 now cites that step-3 argument. Only the proof field changes; uses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.ReducedTargetDominantFlatness",
+  "declaration": "HopfAlgebra.faithfullyFlat_of_injective_of_isReduced",
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/ReducedTargetDominantFlatness.lean",
+  "statement": "theorem faithfullyFlat_of_injective_of_isReduced (k : Type u) (A : Type v) (B : Type w) [Field k] [IsAlgClosed k] [CommRing A] [CommRing B] [HopfAlgebra k A] [HopfAlgebra k B] (hA : (algebraMap k A).FiniteType) (hB : (algebraMap k B).FiniteType) [IsReduced A] (i : A →ₐ[k] B) (hcomul : (Bialgebra.comulAlgHom k B).comp i = (Algebra.TensorProduct.map i i).comp (Bialgebra.comulAlgHom k A)) (hcounit : (Bialgebra.counitAlgHom k B).comp i = Bialgebra.counitAlgHom k A) (hantipode : (antipodeAlgHom k B).comp i = i.comp (antipodeAlgHom k A)) (hi : Function.Injective i) : i.toRingHom.FaithfullyFlat",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49e103fd1",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; lean.statement verbatim in file. Clauses match the node and Milne 1.69/1.70: IsAlgClosed k; Mathlib HopfAlgebra (comulAlgHom/counitAlgHom/antipodeAlgHom) = node's Hopf axioms; hcomul/hcounit/hantipode = the three Hopf-hom equations in source order; RingHom.FiniteType for both algebras; injective i; [IsReduced A] on the coordinate ring of the target group (correct direction); conclusion RingHom.FaithfullyFlat of i. No extra hypotheses; universes u v w independent. Edge cases k, k[t]/(t^p), Frobenius, k×k admitted. No existing Mathlib/project theorem; no defs; sorry-only proof; docstrings with source place, blueprint id and 8-step proof plan; report has Worker report and Second reading sections. No findings."
+ }
+}

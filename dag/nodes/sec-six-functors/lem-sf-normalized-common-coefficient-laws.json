@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-normalized-common-coefficient-laws",
+ "kind": "statement",
+ "title": "Common-stage laws from normalized morphism representatives",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "For a normalized construction ring R, fields F and common-stage data M, the left and right common comparisons commute with transition between finite coefficient subfields. These are the two displayed heterogeneous equations in CoefficientCommonCoherence, with the same rational comparisons, common inclusions and canonical transitions. No ring, rational or refinement cocycle is concluded. All categories, geometric hypotheses and normalizations are those of [lem-sf-constructible-exceptional-coefficient-construction]. The actual records and generic action predicates are defined in [def-sf-constructible-exceptional-coefficient-construction-data].",
+ "stmt_deps": [
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "def-sf-constructible-exceptional-coefficient-construction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "The construction paragraph of the constructible exceptional adjunction blueprint; this is the normalized coefficient construction split from the assembly theorem."
+ },
+ "proof": [
+  {
+   "text": "Specialize the common representative-action equation to the identity arrow on the coefficient-transition image. Functoriality sends its identity to an identity. Cancel the adjacent inverse comparison and transition isomorphisms; this is the left common-stage equation. For the right equation apply the common adjunction Hom bijection and precompose by the left comparison at G_i L. Naturality of q_j, the finite counit equation and the common counit equation identify its left side with I_j T_ij of the i-counit. Replace the precomposition using the proved left common-stage equation. Counit naturality at the inverse transition, the common counit equation at i and transition naturality give the same morphism. Cancel the precomposition isomorphism and use injectivity of the adjunction bijection. This works for repeated indices and zero objects without faithfulness of a stage inclusion.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "The construction paragraph of the constructible exceptional adjunction blueprint; this is the normalized coefficient construction split from the assembly theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Direct generic naturality and counit calculation from the repaired representative-action normalization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized coefficient change mates for compact support adjunctions satisfy composition and identity coherence",
+   "results": "Hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CondensedSet.compactlyGeneratedAdjunction, CompactlySupportedContinuousMap.compLinearMap, TestFunction.postcompCLM, TestFunction.coe_ofSupportedInCLM, ContDiffMapSupportedIn.structureMapCLM, TestFunction.coe_ofSupportedInLM, ContDiffMapSupportedIn.postcompCLM_apply",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "Hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison_right_cocycle_of_left|coefficient_construction_coherence",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of integral functor scalar comparison composition and identity laws and common coefficient stage transition mates",
+   "results": "Hits: CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.compUniqFunctor, CategoryTheory.Localization.fac, CategoryTheory.Localization.homEquiv_trans, CategoryTheory.MorphismProperty.LeftFraction.map_comp_map_eq_map, CategoryTheory.LocalizerMorphism.smallHomMap'_comp, CategoryTheory.LocalizerMorphism.homMap_comp, CategoryTheory.MorphismProperty.LeftFraction.map_compatibility",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.hext",
+   "results": "Hits: CategoryTheory.Functor.hext",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized_rational_left_laws|normalized_common_coefficient_laws|normalized_ring_refinement_laws",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCoefficientCoherence",
+  "date": "2026-10-25",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Exceptional inverse-image coefficient compatibility: the relevant component of the normalized coherence assembly.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCommonCoefficientLaws",
+  "file": "lean/Sheaf/Paper/NormalizedCommonCoefficientLaws.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.normalized_common_coefficient_laws",
+  "statement": "theorem normalized_common_coefficient_laws (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))\n    (F : CoefficientConstructionFields.{u, v} l Ω D hl R)\n    (M : CoefficientConstructionCommon.{u, v} l Ω D hl (X := X) (Y := Y) R F) :\n    normalizedCommonLeft.{u, v} l Ω D hl (f := f) R F M ∧\n      normalizedCommonRight.{u, v} l Ω D hl (f := f) R F M",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.normalizedCommonLeft",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.normalizedCommonRight",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.normalized_common_coefficient_laws"
+  ],
+  "note": "D6 stage 3: strictly separate component of the existing coherence argument; uses literal normalized input maps, with all original geometric hypotheses and universes."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d718e",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261025T162157-L-343722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d718e",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261025T162157-L-343722",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new nodes/modules + ConstructionData field additions (rationalAction, common_morphism_normalized) + NormalizedRingCompactScalar universe generalization, against the unchanged item node statement (rational and common MORPHISM normalizations), the change records, and the clone base 2c8acd4; reader gate: all delivered modules and the 2 external importers compiled"
+ }
+}

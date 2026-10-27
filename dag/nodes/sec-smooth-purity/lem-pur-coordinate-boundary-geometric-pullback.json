@@ -1,0 +1,234 @@
+{
+ "id": "lem-pur-coordinate-boundary-geometric-pullback",
+ "kind": "statement",
+ "title": "Coordinate Kummer boundary under arbitrary geometric pullback",
+ "statement": "Fix the finite purity datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$. Put $A=\\mathcal O_E/\\varpi_E^n$, assume $e=e(E/\\mathbf Q_\\ell)\\mid n$, and put $N=n/e\\geq1$ and $m=\\ell^N$, so $mA=0$. Let $Y$ be a separated finite-type $k$-scheme. In the affine-line datum [def-pur-affine-line-datum] write $X=\\mathbf A^1_Y$, $s:Y\\hookrightarrow X$ for the zero section, $U=\\mathbf G_{m,Y}$ for its complement, $j:U\\hookrightarrow X$, and $F=A_X(1)$. The coefficient comparison is $\\theta_T:A_T(1)\\xrightarrow{\\sim}\\mu_{m,T}\\otimes_{\\mathbf Z/m}A$, and $\\varphi_T(u)=\\theta_T^{-1}(u\\otimes1_A)$.\n\nUse the support boundary [thm-pur-with-support-exactness] and the supported-Hom identifications [lem-pur-supported-hom, lem-pur-supported-hom-pullback]. Let $g:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point, with $\\Omega$ algebraically closed; no finite-type hypothesis on $\\operatorname{Spec}\\Omega$ over $k$ is imposed. Write $X'=\\mathbf A^1_\\Omega$, $U'=\\mathbf G_{m,\\Omega}$, $s':\\operatorname{Spec}\\Omega\\hookrightarrow X'$, and $h:X'\\to X$, $h_U:U'\\to U$ for the induced maps, with $t'=h^*t$ and $F'=h^*F$. On the etale site define\n$$\\kappa_{A,\\mathrm{et}}(t')=H^1(u\\mapsto u\\otimes1_A)(\\delta_{m,U'}(t'))\\in H^1(U',\\mu^{\\mathrm{et}}_{m,U'}\\otimes_{\\mathbf Z/m}A),$$\nwhere $\\delta_m$ is the ordinary Kummer connecting map of the datum. Its pro-etale comparison image, read through $\\theta_{U'}$, is denoted $\\kappa(t')$. The exponent $m$ and coefficient map are unchanged by this pullback. Put $\\alpha=\\partial\\kappa(t)$, $\\alpha'=\\partial'\\kappa(t')$, and $M=\\chi_{s,F}^2(\\alpha):s_*A_Y\\to F[2]$. With $c:h^*s_*A_Y\\xrightarrow{\\sim}s'_*A_\\Omega$ the canonical supported-constant comparison, the following simultaneous equalities hold:\n$$h_U^*\\kappa(t)=\\kappa(t'),\\qquad h^*\\alpha=\\alpha',\\qquad \\chi_{s',F'}^2(\\alpha')=h^*M\\circ c^{-1}.$$\nThese are identities on the ordinary etale models and, with the canonical twist, shift and supported-constant comparisons, on their small pro-etale images. In particular the support pullback is the coordinate boundary formed with the same coefficient extension, not just some generator of its group.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "Proof, geometric-fibre sentence: 'its geometric fibre is the coordinate boundary'; returned proof steps 3-4, including the unchanged coefficient map.",
+  "external": [
+   {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 9.4 and Ext description, Example 9.5, pp. 65-67; closed-support adjunction preceding Theorem 16.7, pp. 111-112; relative coefficient and site refinements are agent-written."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "thm-pur-with-support-exactness",
+  "lem-pur-supported-hom",
+  "lem-pur-supported-hom-pullback",
+  "def-pur-support-boundary-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Over an affine neighbourhood $\\operatorname{Spec}R$ of the image of $g$, the base-changed polynomial and Laurent polynomial rings are $\\Omega\\otimes_R R[t]=\\Omega[t]$ and $\\Omega\\otimes_R R[t,t^{-1}]=\\Omega[t,t^{-1}]$. The quotient $R[t]/(t)=R$ pulls back to $\\Omega[t]/(t)=\\Omega$. Thus the zero sections and their open complements form the required Cartesian squares, and the coordinate is exactly $t\\mapsto t'$. These identities use the explicit geometry in [def-pur-affine-line-datum] and do not require $\\Omega$ to be finite type over $k$.",
+   "uses": [
+    "def-pur-affine-line-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+    "place": "Geometric-fibre sentence; explicit coordinate-ring verification of its Cartesian zero-section square."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-relative-kummer-coefficient-normalization] to $h_U:U'\\to U$, with $r=m=\\ell^N$ and the unit $t$. Its hypotheses hold: $e\\mid n$ gives a finite free $\\mathbf Z/m$-algebra $A$, and $m$ is invertible on all $k$-schemes. Its naturality formula gives $h_U^*\\kappa_{U,A}(t)=\\kappa_{U',A}(t')$ on the etale site. Here the same coefficient morphism is used: in its compatible root coordinates $\\zeta^a\\otimes b\\mapsto ab$, $u\\mapsto u\\otimes1_A$ remains $\\zeta^a\\mapsto a1_A$ after pullback. Neither $m$ nor $1_A$ changes. Apply [lem-pur-relative-kummer-site-normalization] to identify these precise etale classes with the datum's pro-etale classes through $\\theta$, and to obtain the same equality under pro-etale pullback. Both cited statements allow every $k$-morphism, including this $g$.",
+   "uses": [
+    "lem-pur-relative-kummer-coefficient-normalization",
+    "lem-pur-relative-kummer-site-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, label lemma-kummer-sequence; coefficient and site normalization supplied by the cited nodes, with the pure-tensor calculation written here."
+   }
+  },
+  {
+   "text": "Use [thm-pur-with-support-exactness] for the two pairs $(X,s(Y))$ and $(X',s'(\\operatorname{Spec}\\Omega))$, and their map $h$ from step 1. Its functoriality in the pair and coefficients gives $h^*\\circ\\partial=\\partial'\\circ h_U^*$. Consequently $h^*\\alpha=h^*\\partial\\kappa(t)=\\partial' h_U^*\\kappa(t)=\\partial'\\kappa(t')=\\alpha'$. This applies on both sites: $F$ is a finite torsion sheaf and the theorem explicitly includes the pro-etale finite-torsion case. The boundary is the one in the datum throughout.",
+   "uses": [
+    "thm-pur-with-support-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 9.4, pp. 65-67; functorial Ext construction of the localization boundary; pro-etale refinement as stated in the cited node."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-supported-hom-pullback] with $i=s$, $i'=s'$, $a=2$ and the sheaf $F$ in degree zero. Step 1 supplies its Cartesian square, and it requires no finiteness of $h$ or $X'$. Its formula and step 3 give $\\chi_{s',F'}^2(\\alpha')=\\chi_{s',F'}^2(h^*\\alpha)=h^*(\\chi_{s,F}^2(\\alpha))\\circ c^{-1}=h^*M\\circ c^{-1}$. The same node explicitly identifies the etale and pro-etale supported-Hom maps through exact site inverse image, shift comparison and the canonical supported-constant comparison, compatibly with $h^*$ and $c$. Therefore these are the specified representatives on both sites. Combined with step 2, the pulled-back class is the coordinate boundary with its original coefficient map.",
+   "uses": [
+    "lem-pur-supported-hom-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Example 9.5 and the Ext proof of Theorem 9.4, pp. 66-67; arbitrary-pullback and site compatibility in the cited supported-Hom node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-line-datum",
+  "lem-pur-relative-kummer-coefficient-normalization",
+  "lem-pur-relative-kummer-site-normalization",
+  "thm-pur-with-support-exactness",
+  "lem-pur-supported-hom-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "Geometric-fibre sentence, expanded using the existing coefficient-normalization, localization and supported-Hom pullback statements; checked against Milne Theorem 9.4 and Stacks Tag 03PL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back the coefficient extended Kummer class of the affine line coordinate to an algebraically closed geometric point commutes with the support boundary and its derived supported Hom representative.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T) (i : n),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.map n f)))\\n      (AlgebraicGeometry.AffineSpace.coord T i) =\\n    AlgebraicGeometry.AffineSpace.coord S i\", \"doc\": \"For schemes $S$ and $T$, a morphism $f: S \\to T$, and an index $i$, applying the induced morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T$ to the $i$-th coordinate function on $T$ yields the $i$-th coordinat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))) (i : n),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.homOfVector f v)))\\n      (AlgebraicGeometry.AffineSpace.coord S i) =\\n   \", \"doc\": \"For a scheme $ S $ and an index $ i $, applying the sheaf component of the morphism induced by a vector $ v $ (constructed via $ \\\\text{homOfVector} $) to the $ i $-th coordinate function $ \\\\text{coord\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {S X : AlgebraicGeometry.Scheme} →\\n    (X ⟶ S) → (n → ↑(X.presheaf.obj (Opposite.op ⊤))) → (X ⟶ AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"Given a morphism $ f : X \\\\to S $ and a vector $ v $ consisting of global sections of the structure sheaf of $ X $, this function constructs the corresponding morphism from $ X $ to the affine space $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (f : { f // AlgebraicGeometry.Scheme.Hom.IsOver f S }) (i : n),\\n  (AlgebraicGeometry.AffineSpace.homOverEquiv S) f i =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop ↑f))\\n \", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural bijection between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.reindex_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n m : Type v} (i : m → n) (S : AlgebraicGeometry.Scheme) (j : m),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.reindex i S)))\\n      (AlgebraicGeometry.AffineSpace.coord S j) =\\n    AlgebraicGeometry.AffineSpace.coord S (i j)\", \"doc\": \"For types $m$ and $n$, a reindexing function $i : m \\to n$, a scheme $S$, and an index $j : m$, applying the reindexing morphism $\\\\mathbb{A}^n_S \\to \\\\mathbb{A}^m_S$ induced by $i$ to the $j$-th coordina\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.map n f)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n T) =\\n    AlgebraicGeometry.AffineSpace.toSpecMvPoly n S\", \"doc\": \"For any morphism $ f: S \\\\to T $ of schemes, the composition of the induced morphism $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_T $ with the projection $ \\\\mathbb{A}^n_T \\\\to \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"KummerExtension.«termK[_√_]»\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"\"}\n  {\"name\": \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥) (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = ⊤) (hx' : IsIntegral R x) (hf : I\", \"doc\": \"\"}\n  {\"name\": \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥) (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = ⊤) (hx' : IsIntegral R x) : ↑{J |\", \"doc\": \"The first half of the **Kummer-Dedekind Theorem**, stating that the prime\\nfactors of `I*S` are in bijection with those of the minimal polynomial of the generator of `S`\\nover `R`, taken `mod I`.\"}\n  {\"name\": \"KummerDedekind.quotMapEquivQuotQuotMap\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = ⊤) (hx' : IsIntegral R x) : S ⧸ Ideal.map (algebraMap R S) I ≃+* P\", \"doc\": \"The isomorphism of rings between `S / I` and `(R / I)[X] / minpoly x` when `I`\\nand `(conductor R x) ∩ R` are coprime.\"}\n  {\"name\": \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥) (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = ⊤) (hx' : IsIntegral R x) {J : Id\", \"doc\": \"The second half of the **Kummer-Dedekind Theorem**, stating that the\\nbijection `FactorsEquiv'` defined in the first half preserves multiplicities.\"}\n  {\"name\": \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hI : I.IsMaximal) {Q : Polynomial R} (hQ : Polynomial.map (Ideal.Quotient.mk I) Q ∈ UniqueFactorizationMonoid.normalizedFa\", \"doc\": \"Let `Q` be a lift of factor of the minimal polynomial of `x`, a generator of `S` over `R`, taken\\n`mod I`. Then (the reduction of) `Q` corresponds via\\n`normalizedFactorsMapEquivNormalizedFactorsMinPoly\"}\n  {\"name\": \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥) (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = ⊤) (hx' : IsIntegral R x) : Uniqu\", \"doc\": \"The **Kummer-Dedekind Theorem**.\"}\n  {\"name\": \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {x : S} {I : Ideal R} [IsDomain R] [IsIntegrallyClosed R] [IsDedekindDomain S] [Module.IsTorsionFree R S] (hx : Ideal.comap (algebraMap R S) (conductor R x) ⊔ I = ⊤) (hx' : IsIntegral R x) (Q : Polynomial R) : (KummerDedekind.quo\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "kummerBoundary|restrictSupportedClass|supportCohomology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer coordinate class support localization boundary arbitrary geometric base change etale proetale",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the localization connecting homomorphism for the punctured affine line and of its supported derived morphism under geometric fibre pullback.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Spec_Γ_naturality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) {Z : CommRingCat}\\n  (h :\\n    AlgebraicGeometry.LocallyRingedSpace.Γ.obj\\n        (Opposite.op (AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op S))) ⟶\\n      Z),\\n  CategoryTheory.CategoryStruct.comp f (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.\", \"doc\": \"Let $R, S, Z$ be commutative rings. Let $f: R \\\\to S$ be a ring homomorphism. Let $\\\\eta_R: R \\\\to \\\\Gamma(\\\\operatorname{Spec} R)$ denote the canonical map from a ring to the ring of global sections of it\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec (Y.presheaf.obj (Opposite.op U)) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj U).toSpecΓ\\n      (CategoryTheory.CategoryStruct.comp (Algebra\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes and any open subset $ U $ of $ Y $, the composition of the morphism $ (f_{\\\\text{base}}(U))_{\\\\text{toSpecΓ}} $, the Spec-induced morphism from $ \\\\Gamma(Y, U) \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj U).toSpecΓ\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.app f U)) =\\n    CategoryTheory.CategoryStruct.comp (f ∣_ U) U.toSpecΓ\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $U$ be an open subset of $Y$. Let $f^{-1}(U)$ be the preimage of $U$ under the continuous map associated with $f$. The theorem asserts the commutativ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec (Y.presheaf.obj (Opposite.op ⊤)) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp f (CategoryTheory.CategoryStruct.comp Y.toSpecΓ h) =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (Categor\", \"doc\": \"Let $X, Y, Z$ be schemes, let $f: X \\\\to Y$ be a morphism of schemes, and let $h: \\\\mathrm{Spec}(\\\\Gamma(Y, \\\\mathcal{O}_Y)) \\\\to Z$ be another morphism. Let $\\\\eta_S: S \\\\to \\\\mathrm{Spec}(\\\\Gamma(S, \\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ_naturality\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp f Y.toSpecΓ =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f: X \\\\to Y$ be a morphism of schemes. For any scheme $Z$, there is a canonical morphism, denoted `Z.toSpecΓ`, from $Z$ to the spectrum of its ring of global sectio\"}\n  {\"name\": \"AlgebraicGeometry.Spec_Γ_naturality\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.toSpecΓ S) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.toSpecΓ R)\\n      (AlgebraicGeometry.LocallyRingedSpace.Γ.map (AlgebraicGeometry.Spec.toLocallyRingedSpace.map f.op).op)\", \"doc\": \"For any commutative rings $R$ and $S$ and a ring homomorphism $f: R \\to S$, the canonical ring homomorphism from $R$ to the global sections of $\\\\operatorname{Spec}(R)$ satisfies the naturality conditio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U U' : Y.Opens} (i : Opposite.op U' ⟶ Opposite.op U) {Z : CommRingCat}\\n  (h : X.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map f.base).obj U)) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.map i)\\n      (CategoryTheory.CategoryStruct.co\", \"doc\": \"For any morphism of schemes $ f : X \\to Y $, open subsets $ U $ and $ U' $ of $ Y $, a morphism $ i : U' \\to U $ in the opposite category of open sets, and a morphism $ h $, the composition of the presh\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under arbitrary scheme pullback of the Kummer class of a unit with finite coefficients and its localization support boundary",
+   "results": "Hits: AlgebraicGeometry.Scheme.toSpecΓ_naturality, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme, sheaf or arithmetic statements do not give the three Kummer/support/derived-representative identities on both sites"
+  },
+  {
+   "tool": "grep",
+   "query": "kummerBoundary|restrictSupportedClass|supportCohomology",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme, sheaf or arithmetic statements do not give the three Kummer/support/derived-representative identities on both sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "Hits: KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme, sheaf or arithmetic statements do not give the three Kummer/support/derived-representative identities on both sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback commutes with Kummer connecting homomorphism of a unit and localization cohomology with supports",
+   "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.Limits.pullbackComparison, TopCat.Presheaf.germ_stalkPullbackHom, AlgebraicGeometry.Scheme.Cover.pullbackHom_map, CategoryTheory.Subobject.pullback_comp, CategoryTheory.Limits.pullback.lift', SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme, sheaf or arithmetic statements do not give the three Kummer/support/derived-representative identities on both sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of cohomology connecting morphisms for exact inverse image of sheaves and supported Hom identification",
+   "results": "Hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓRes_naturality, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme, sheaf or arithmetic statements do not give the three Kummer/support/derived-representative identities on both sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-affine-line-orientation",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Proof, geometric-fibre sentence: 'its geometric fibre is the coordinate boundary'; returned proof steps 3-4, including the unchanged coefficient map.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-coordinate-boundary-geometric-pullback",
+  "worker": "stage1",
+  "summary": "Four-step assembly using existing arbitrary-base Kummer coefficient/site normalization, functorial support localization, and normalized supported-Hom pullback. The statement and its unrestricted geometric point are preserved; no new nodes and no purity or exceptional-exchange invertibility is assumed.",
+  "blueprint": "Realizes thm-pur-affine-line-orientation.proof.md, the sentence 'its geometric fibre is the coordinate boundary', retaining the unchanged exponent and pure-tensor coefficient map."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-c675ecda6",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-c675ecda6 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 4 steps in full, plus each cited statement (def-pur-affine-line-datum, lem-pur-relative-kummer-coefficient-normalization, lem-pur-relative-kummer-site-normalization, thm-pur-with-support-exactness, lem-pur-supported-hom-pullback, lem-pur-supported-hom). Sources checked: the blueprint geometric-fibre sentence of thm-pur-affine-line-orientation.proof.md (main-20261015), Milne LEC pp. 66-67 (Example 9.5 and the Ext proof of Thm 9.4), and Stacks 03PL. Step 1 is elementary: the coordinate rings of the datum give the Cartesian squares with Z'=Spec Ω and t'=h^*t. Step 2: the relative-Kummer nodes cover arbitrary k-morphisms and non-finite-type Ω, give the etale and pro-etale naturality of κ with the same m=ℓ^N and z↦z⊗1_A, and identify κ with the datum's θ-twist. Step 3: the support sequence is functorial in the pair, on both sites (finite torsion), so h^*α=α'. Step 4: lem-pur-supported-hom-pullback gives exactly χ(α')=h^*M∘c^{-1}, with the pro-etale clause and the correct direction of c. No new nodes. No cycle (transitive closure checked). All cited statements are in unit sk-prop-a1-kummer, so no tool_uses are needed. No SGA. Not superseded: the item is still unsplit in live and side-live, and the cited Q160 nodes are present there with identical statements. Duplicate candidates are not restatements: lem-asd-supported-kummer-boundary-pullback is a predicate-based, etale-only result for Cartier divisors in another unit, and lem-pur-support-comparison-boundary and lem-pur-affine-line-boundary-realization state other things. Edge cases checked: empty Y, n=e, Ω not of finite type, sign of the boundary. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoordinateBoundaryGeometricPullback",
+  "declaration": "WeilConjectures.PurityFiniteSetting.coordinate_boundary_geometric_pullback",
+  "declarations": [
+   "CategoryTheory.Abelian.Ext.coordinatePullbackIdentity",
+   "CategoryTheory.Abelian.Ext.coordinateSectionMap",
+   "WeilConjectures.PurityFiniteSetting.coordinateClassSection",
+   "WeilConjectures.PurityFiniteSetting.coordinateOpenSectionsIso",
+   "WeilConjectures.PurityFiniteSetting.coordinateBoundaryZeroClosed",
+   "WeilConjectures.PurityFiniteSetting.coordinateBoundaryOpen",
+   "WeilConjectures.PurityFiniteSetting.coordinateEtaleInput",
+   "WeilConjectures.PurityFiniteSetting.coordinateProInput",
+   "WeilConjectures.PurityFiniteSetting.coordinateOpenDerivedIso",
+   "WeilConjectures.PurityFiniteSetting.coordinateEtaleOpenClass",
+   "WeilConjectures.PurityFiniteSetting.CoordinateBoundaryModel",
+   "WeilConjectures.PurityFiniteSetting.CoordinateBoundaryModel.openProClass",
+   "WeilConjectures.PurityFiniteSetting.CoordinateBoundaryModel.alphaEtale",
+   "WeilConjectures.PurityFiniteSetting.CoordinateBoundaryModel.alphaPro",
+   "WeilConjectures.PurityFiniteSetting.coordinateLineMap",
+   "WeilConjectures.PurityFiniteSetting.coordinateEtaleCoefficientPullback",
+   "WeilConjectures.PurityFiniteSetting.coordinateProCoefficientPullback",
+   "AlgebraicGeometry.SupportHomPair.Transport.coefficientGroupMap",
+   "AlgebraicGeometry.SupportHomPair.Transport.coefficientHomMap",
+   "AlgebraicGeometry.SupportHomPair.Transport.CoefficientCompatible",
+   "WeilConjectures.PurityFiniteSetting.coordinateEtaleKummer",
+   "WeilConjectures.PurityFiniteSetting.CoordinateKummerPullback",
+   "WeilConjectures.PurityFiniteSetting.CoordinateBoundaryPullback",
+   "WeilConjectures.PurityFiniteSetting.CoordinateBoundarySiteAgreement",
+   "WeilConjectures.PurityFiniteSetting.coordinate_boundary_geometric_pullback"
+  ],
+  "file": "lean/Sheaf/Paper/CoordinateBoundaryGeometricPullback.lean",
+  "statement": "theorem coordinate_boundary_geometric_pullback (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : ∃ D : CoordinateBoundaryModel P Y, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (CommRingCat.of Ω) ⟶ Y), ∃ D' : CoordinateBoundaryModel P (Spec (CommRingCat.of Ω)), ∃ e : etaleSupportHomTransport P (zeroSection Y) (zeroSection (Spec (CommRingCat.of Ω))) (coordinateLineMap g), ∃ p : proEtaleSupportHomTransport P (zeroSection Y) (zeroSection (Spec (CommRingCat.of Ω))) (coordinateLineMap g), ∃ v : siteSupportHomTransport P (zeroSection Y), ∃ v' : siteSupportHomTransport P (zeroSection (Spec (CommRingCat.of Ω))), P.CoordinateKummerPullback h g a ∧ P.CoordinateBoundaryPullback h g a D D' e p ∧ P.CoordinateBoundarySiteAgreement h a D v ∧ P.CoordinateBoundarySiteAgreement h (g ≫ a) D' v' ∧ SupportHomSquareCoherent P (zeroSection Y) (zeroSection (Spec (CommRingCat.of Ω))) (coordinateLineMap g) e p v v'",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4224c450",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 170df082 (H2 + H11). Both fixed: (1) theorem stmt_dep lem-pur-support-comparison-boundary replaced by new def node def-pur-support-boundary-normalization (definition, split, existing:true on Sheaf.AlgebraicGeometry.SupportComparisonBoundary; 4 declarations present in live; statement verbatim lines 206-209; text matches the Lean predicate and unit/base-change/H^q comparison; deps are live definitions, no cycle; no other owner; source Stacks 09XP section-cohomology-support confirmed). (2) Second reading by NW is now a 9-point clause-by-clause reading; Worker report present. Lean diff vs the returned head: coordinatePullbackIdentity HasExt→IsGrothendieckAbelian (abstract helper only, instance-found, HasExt is Prop, no new theorem hypothesis); new coordinateSectionMap composes the same evaluation maps in the same order, real data, docstrings, listed in declarations. Theorem signature byte-identical; lean.statement verbatim. Mathematics re-checked: unrestricted alg-closed Ω, Kummer pullback on both sites with the same m and u⊗1, h*α=α', χ(α')=h*M∘c⁻¹, site agreement at Y and Spec Ω plus SupportHomSquareCoherent; existentials pinned. Advisory: base-era theorem stmt_dep lem-pur-supported-hom-pullback used only for structures; existing module docstrings name the theorem node. No compile run (no file changed); worker reports clean per-file compiles."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-per-postnikov-stable-pages",
+ "kind": "statement",
+ "title": "Additive stabilized Postnikov entries",
+ "statement": "Let A and B be abelian categories, and suppose D(A) is a derived category with its standard t-structure. For any PostnikovPageData P, there exists PostnikovStableData P: on the full subcategory where finite cycles and boundaries eventually stabilize at a fixed bidegree, the stabilized entries are additive functors, their late-page isomorphisms are natural and commute with the next-page homology projection. The witness interfaces are defined in [def-per-postnikov-additive-witness-data].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011T and 012U: cycles and boundaries and stationary-page quotients; morphism additivity follows from uniqueness of restriction and descent."
+ },
+ "stmt_deps": [
+  "def-per-postnikov-additive-witness-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose at each object a finite stationarity cutoff, and take the cokernel of the stationary boundary inclusion into stationary cycles. Every later cycle-tower projection is epi with that kernel, so gives a unique quotient isomorphism to the late page. Couple maps preserve finite cycles and boundaries; choose a common later cutoff for a pair and descend the restricted initial E-map to the stationary quotient. Cancellation proves cutoff independence, identities, composition and addition, and the successor-projection equation proves transition compatibility. Uses [def-sp-convergence], [lem-sp-derived-couple-functoriality]. Once cycles stop shrinking, cycleLift followed by the outgoing kernel inclusion is the old epimorphic projection composed with an isomorphism. The kernel inclusion is therefore epi and mono, hence invertible, and cycleLift is epi. This proves the final transition equation by epic cancellation.",
+   "uses": [
+    "def-sp-convergence",
+    "lem-sp-derived-couple-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "lem-sp-derived-couple-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011Q, 011R, 011S and 0AMJ, with the canonical Postnikov triangles of derived.tex Tag 08J5; explicit additive-functor argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Postnikov|postnikov|BigradedExactCouple",
+   "results": "{\"t\": \"2026-10-23T10:15:51Z\", \"tool\": \"grep\", \"query\": \"Postnikov|postnikov|BigradedExactCouple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged theorem; the listed exactness and spectral-object declarations supply ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-23T10:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.SpectralSequence.pageFunctor\", \"CategoryTheory.SpectralSequence.pageFunctor_obj\", \"CategoryTheory.SpectralSequence.pageFunctor_map\"], \"digest\": \"634c6cb9303f834b\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged theorem; the listed exactness and spectral-object declarations supply ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postnikov truncation tower additive homological functor exact couple spectral sequence",
+   "results": "{\"t\": \"2026-10-23T10:15:52Z\", \"tool\": \"leanfinder\", \"query\": \"Postnikov truncation tower additive homological functor exact couple spectral sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homologySequence_exact\\u2082\", \"CategoryTheory.Functor.homologySequence_exact\\u2081\", \"CategoryTheory.Functor.homologySequence_exact\\u2083\", \"HomologicalComplex.shortComplexTruncLEX\\u2083ToTruncGE\", \"ComplexShape.Embedding.\\u03c0TruncGENatTrans\", \"HomotopyCategory.spectralObjectMappingCone\", \"CategoryTheory.Triangulated.TStructure.truncGE\\u03b4LT\", \"CochainComplex.shortComplexTruncLE\"], \"digest\": \"73ab2ef0bf6c6584\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching packaged theorem; the listed exactness and spectral-object declarations supply ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive diagram of exact couples has functorial spectral sequence pages and stable quotients",
+   "results": "8 hits: CategoryTheory.Functor.instAdditiveOfIsHomological; CategoryTheory.ShortComplex.leftHomologyFunctor_additive; CategoryTheory.ShortComplex.rightHomologyFunctor_additive; CategoryTheory.ShortComplex.homologyFunctor_additive and additive category infrastructure.",
+   "date": "2026-10-24",
+   "verdict": "No packaged exact-couple diagram construction; these give component additivity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.PostnikovAdditiveExactCouple",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 1: the Postnikov exact-couple and additive-map passage used through lem-per-bounded-above-rhom-hyperext, old proof Steps 4–5 and 9. Additive stabilized Postnikov entries",
+   "via": [
+    "lem-per-postnikov-additive-exact-couple",
+    "lem-per-bounded-above-rhom-hyperext"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PostnikovStablePages",
+  "file": "lean/Sheaf/CategoryTheory/PostnikovStablePages.lean",
+  "declaration": "DerivedCategory.exists_postnikov_stable_data",
+  "statement": "theorem exists_postnikov_stable_data {T : DerivedCategory A ⥤ B}\n    {C : PostnikovCoupleData T} (P : PostnikovPageData C) :\n    Nonempty (PostnikovStableData P)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9054e",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T190629-L-4168682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9054e",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T190629-L-4168682",
+  "kind": "interface",
+  "note": "independent cc review: item exists_postnikov_additive_exact_couple (statement unchanged) assembled from 4 proved Postnikov lemmas + 2 new sorry lemmas (spectral-sequence realization, half-plane abutment); 10 witness defs moved verbatim to PostnikovAdditiveExactCoupleData (diff vs live), owned by new def node; #print axioms clean on all proved decls"
+ }
+}

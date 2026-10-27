@@ -13,44 +13,66 @@
   "def-kun-derived-tensor",
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-pc-flat-sheaf-modules",
-  "lem-kun-tensor-sym"
+  "lem-kun-tensor-sym",
+  "def-pur-etale-flat-single-tensor-compatibility-data"
  ],
  "proof": [
   {
-   "text": "On cochain complexes the functor concentrated in degree zero has tensorator the single/total-tensor isomorphism and identity unit comparison. Check naturality, associativity, both units and braiding on the unique nonzero degree-(0,0) or degree-(0,0,0) summand. All other summands have a zero factor. The Koszul sign is one in degree zero.",
-   "uses": [],
+   "text": "Use naturality in both variables of the specified flat single tensorators. The tensor L tensor M is flat because both factors are flat. For the associativity field move S(f) tensor 1 past the next tensorator, and move 1 tensor S(h) past the tensorator on the other side.",
+   "uses": [
+    "lem-pur-etale-single-tensorator-naturality",
+    "def-pc-flat-sheaf-modules"
+   ],
    "elementary": true
   },
   {
-   "text": "Compose with the strong braided homotopy quotient and the lax braided Qh localization. The canonical single/quotient comparison identifies this with the degree-zero derived functor. A flat left sheaf has K-flat degree-zero complex, so expanding this tensorator gives exactly singleFunctorObjTensorIso.hom. Functoriality and the lax associativity and braiding axioms carry arbitrary ordinary pairing diagrams to the first two displayed equations.",
+   "text": "Apply the canonical tensorator associator equation. Combine the remaining mapped arrows by functoriality and apply exactly the supplied ordinary associativity equality w. This proves the associativity field for all of its original arbitrary pairing maps.",
    "uses": [
-    "def-kun-derived-tensor",
-    "def-weil-abstract-derived-category",
-    "def-pc-flat-sheaf-modules",
-    "lem-kun-tensor-sym"
+    "lem-pur-etale-single-tensorator-associativity"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The single/termwise-exact-functor comparison preserves the same degree-zero tensor summands and the unit. The derived counit is monoidal: its tensor axiom is leftDerivedUpperStarTensorComparison_app_app_comp after canceling the invertible oplax tensorators; its unit axiom is leftDerivedUpperStarUnitIso_hom_comp_ε after canceling the invertible unit comparison. Whisker and compose these monoidal transformations. Expanding the exact single comparison, using the leftDerivedFunctorIsoMapDerivedCategory counit factorization and naturality of the single/quotient comparison, identifies their composite with singleFunctorCompLeftDerivedUpperStarIso.hom. These arguments are uniform for zero objects and empty schemes. Apply the tensor equation of this transformation, naturality and the given ordinary pairing square to get the third displayed equation.",
+   "text": "Apply the canonical tensorator symmetry equation, combine the two remaining single-functor maps, and use exactly the supplied ordinary symmetry equality w.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pur-etale-single-tensorator-symmetry"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For pullback, first use naturality of the fixed single/pullback comparison on f. Apply the given ordinary square w, expand its image under the single functor, and apply the canonical single/pullback tensor equation. Naturality of the flat single tensorators on b and c then moves the maps to the two tensor factors. Tensor functoriality combines them with γ(L), γ(M), yielding exactly the displayed original pullback field.",
+   "uses": [
+    "lem-pur-etale-single-tensorator-naturality",
+    "lem-pur-etale-single-tensorator-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the abstract pairing associativity and pullback assembly lemmas to the canonical tensorator equations. The only remaining symmetry assembly uses functoriality directly. This separates the general diagram chase from the costly sheaf structure declarations.",
+   "uses": [
+    "lem-pur-flat-pairing-associativity-assembly",
+    "lem-pur-flat-pairing-pullback-assembly",
+    "def-pur-etale-flat-single-tensor-compatibility-data",
     "def-kun-derived-tensor"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-derived-tensor",
-  "def-weil-abstract-derived-category",
+  "lem-pur-etale-single-tensorator-naturality",
   "def-pc-flat-sheaf-modules",
-  "lem-kun-tensor-sym",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-pur-etale-single-tensorator-associativity",
+  "lem-pur-etale-single-tensorator-symmetry",
+  "lem-pur-etale-single-tensorator-pullback",
+  "lem-pur-flat-pairing-associativity-assembly",
+  "lem-pur-flat-pairing-pullback-assembly",
+  "def-pur-etale-flat-single-tensor-compatibility-data",
+  "def-kun-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Canonical degree-zero specialization of the tensor localization and the exact-functor tensor/counit equations. This is the separate categorical result used in step 9 of lem-pur-etale-closed-constant-tensor, without any closed supports, supported multiplications or support maps."
+  "place": "F2: Lean reduction of arbitrary ordinary pairing diagrams to the canonical tensorator equations using proved tensorator naturality, functoriality and the exact supplied ordinary equalities. The canonical associator and pullback equations are separate proof steps, not restatements with arbitrary pairing data."
  },
  "mathlib_searches": [
   {
@@ -110,11 +132,7 @@
   "by": "U4",
   "date": "2026-10-21",
   "declarations": [
-   "AlgebraicGeometry.Etale.singleFunctorFlatPairing",
-   "AlgebraicGeometry.Etale.EtaleFlatSingleTensorCompatibility",
-   "AlgebraicGeometry.Etale.etaleSingleFunctor_monoidalCompatibility",
-   "AlgebraicGeometry.Etale.derivedTensorPairMap",
-   "AlgebraicGeometry.Etale.singleFunctorPullbackMap"
+   "AlgebraicGeometry.Etale.etaleSingleFunctor_monoidalCompatibility"
   ]
  },
  "reviewed": {
@@ -128,14 +146,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-6f105",
-  "group": "U4",
-  "result": "pass",
-  "landing": "20261020T233227-L-908718",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
   "kind": "interface",
-  "note": "independent cc review: delivered PurEtaleClosedConstantTensor + new EtaleSingleFunctorMonoidalCompatibility vs live clone, node records, change records; rfl defeq of constantModuleSheaf; axioms; importers SupportedCup/PurityFramePrincipalBoundary/PurityFrameClass compiled against the delivery"
+  "note": "independent cc review: item proof and 8 new nodes vs Lean; moved data decls byte-identical to clone item; axioms via scratch #print axioms; 3 SLOW importers vs published baselines; original FTSPP vs delivered build"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

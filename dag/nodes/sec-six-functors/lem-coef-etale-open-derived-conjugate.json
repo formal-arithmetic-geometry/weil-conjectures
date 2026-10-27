@@ -1,0 +1,102 @@
+{
+ "id": "lem-coef-etale-open-derived-conjugate",
+ "kind": "statement",
+ "title": "The canonical derived open/scalar comparison is conjugate to the derived restriction square.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let A and B be arbitrary commutative rings, φ:A→B a ring homomorphism, and j:U→X an open immersion. Form the two composite adjunctions of the fixed derived open adjunctions and chosen derived scalar adjunctions. Conjugation of openScalarExtension φ j under these adjunctions is precisely the hom of openDerivedRestrictScalarsIso φ j. There is no additional flatness hypothesis.",
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof step 2: the canonical derived q is conjugate to the derived restriction/scalar square. Stacks 0E8I and 06YY."
+ },
+ "proof": [
+  {
+   "text": "The canonical comparison is defined by leftAdjointUniq after transporting the right adjoint of the second composite adjunction along openDerivedRestrictScalarsIso. Expand the formula for leftAdjointUniq and the inverse conjugation equivalence; their components agree. Applying the conjugation equivalence and cancelling its inverse gives the claimed identity.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-open-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof step 2: the canonical derived q is conjugate to the derived restriction/scalar square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates commute with passage to cochain complexes and localization to the derived category, including the scalar extension unit representative",
+   "results": "Adjunction.derived_unit, derivedη_fac_app and localization_unit_app; these provide generic unit formulas, not the stated normalization of the fixed etale comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate of the exact localization comparison is the inverse restriction localization factor, and left adjoint uniqueness is compatible with cochain complexes",
+   "results": "Adjunction.localization_counit_app, Localization.ε_app and derivedε_fac_app; generic localization formulas only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv|mapHomologicalComplex_unit_app_f|localization_unit_app",
+   "results": "Mathlib CategoryTheory.Adjunction.Mates, Unique and CompositionIso; Localization.Adjunction.localization_unit_app. These prove the categorical ingredients; the fixed etale comparison is not stated there.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenExtensionNormalization",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof step 2: the canonical derived q is conjugate to the derived restriction/scalar square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenDerivedConjugate",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenDerivedConjugate.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenScalarDerivedConjugate",
+  "statement": "theorem etaleOpenScalarDerivedConjugate\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    conjugateEquiv\n      ((Adjunction.ofIsRightAdjoint\n        (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)).comp\n        (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j))\n      ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).comp\n        (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)))\n      (openScalarExtension φ j).hom = (openDerivedRestrictScalarsIso φ j).hom",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

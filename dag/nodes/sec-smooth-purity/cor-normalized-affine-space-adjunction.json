@@ -1,0 +1,154 @@
+{
+ "id": "cor-normalized-affine-space-adjunction",
+ "kind": "statement",
+ "title": "Affine-space adjunction for the normalized source-library twist",
+ "statement": "Let $\\Lambda$ be a finite commutative ring with a normalized Tate datum as specified below, $d\\in\\mathbf N$, and $S$ any scheme [def-pc-scheme] admitting a positive integer $n$ with $n\\Lambda=0$ and $n$ invertible on $S$. On the ordinary unbounded etale derived categories of module sheaves [def-weil-pbc-derived-categories], the projection $p_d:\\mathbf A^d_S\\to S$ [def-sbc-affine-space] admits an adjunction $Rp_{d!}\\dashv Lp_d^*\\mathbin{;}\\operatorname{twistShift}_{\\mathbf A^d_S}(d)$, using the compactification construction [def-amb-etale-compact-support] of the adopted source library, which is defined for every compactifiable morphism, not just Noetherian schemes. Here a normalized Tate datum means the adopted-source HasTateTwist and HasTateTwist.IsNormalized parameters: for every scheme $X$ and integer $m$, a tensor-invertible bounded constructible finite-Tor object $\\Lambda_X(m)$, represented by a locally constant rank-one module sheaf in degree zero; zero, addition and derived-pullback isomorphisms, with the unit, associativity, pullback-composition and pullback-product laws. It underlies natural multiplicative Kummer classes $\\kappa(u):\\Lambda_X\\to\\Lambda_X(1)[1]$ whose coordinate boundary for $\\mathbf A^1_B$, after adjunction to its zero section $s$, is an isomorphism $\\Lambda_B\\to Rs^!(\\Lambda(1)[2])$ for every $B$ separated and locally of finite type over a field. The functor $\\operatorname{twistShift}_X(m)$ is $K\\mapsto(K\\otimes^L\\Lambda_X(m))[2m]$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+  "place": "First paragraph (open/projective composition), d=0 identity case, and coordinate-tower induction with addition of twists."
+ },
+ "proof": [
+  {
+   "text": "For any base S compactify A1_S by the standard chart j into P1_S and proper projection q. Compose [lem-normalized-projective-line-adjunction] with the exact open extension/restriction adjunction, replacing exact derived pullback by L(j)^*. The private pullTwist isomorphism moves the twist through j^*, and leftDerivedUpperStarComp identifies j^*q^* with p1^*. Transport the left functor using rightDerivedLowerShriekIso for the explicit compactification. This proves the affine-line adjunction.",
+   "uses": [
+    "lem-normalized-projective-line-adjunction",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+    "place": "First paragraph (open/projective composition), d=0 identity case, and coordinate-tower induction with addition of twists."
+   }
+  },
+  {
+   "text": "The private twistZero, pullTwist and addTwist are explicit natural isomorphisms of functors: use the Tate zero-object isomorphism and right tensor unitor, the derived pullback tensor comparison and Tate pullback, and the tensor associator with Tate addition. CommShift moves even shifts past pullback and tensor and shiftFunctorAdd combines them. composeTwist combines these with leftDerivedUpperStarComp.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+    "place": "First paragraph (open/projective composition), d=0 identity case, and coordinate-tower induction with addition of twists."
+   }
+  },
+  {
+   "text": "For d=0 the affine projection p is an isomorphism. The existing rightDerivedUpperShriekIsoOfIso identifies its exceptional right adjoint with Lp^*. Adjoin the trivial zero twist using twistZero, giving the desired adjunction.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+    "place": "First paragraph (open/projective composition), d=0 identity case, and coordinate-tower induction with addition of twists."
+   }
+  },
+  {
+   "text": "Induct on d. The private successorIso is reindexIso followed by sumIso, identifying A^(d+1)_S with A1_(A^d_S), and successorIso_over proves equality of structural maps. Let e be this isomorphism, q the affine-line projection, p the d-space projection. Compose the adjunctions of e, q and p. Use nonempty_iso_rightDerivedLowerShriek_comp twice to identify their composite with R((e q)p)_!, using the inherited compactification instances. pullTwist moves the one-fold twist past e^*, and composeTwist adds d and 1 while composing pullbacks. The private lowerShriekCongr transports the compactification-dependent functor along the structural-map equality without unfolding it. The pullback-composition comparison uses the same equality explicitly, and Nat.cast_succ supplies the twist index. This gives the exact successor statement. No new geometric purity assumption is introduced.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+    "place": "First paragraph (open/projective composition), d=0 identity case, and coordinate-tower induction with addition of twists."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-sbc-affine-space",
+  "def-weil-pbc-composite-adjunction",
+  "lem-normalized-projective-line-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+  "place": "First paragraph (open/projective composition), d=0 identity case, and coordinate-tower induction with addition of twists."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projective line etale derived direct image is left adjoint to pullback twisted by a normalized Kummer Tate datum shifted by two",
+   "results": "Eight ordinary sheaf/structure-module pullback adjunction hits, including Scheme.Modules.pullbackPushforwardAdjunction and SheafOfModules.PullbackConstruction.adjunction; none supplies projective-line etale twisted duality.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Adjunction",
+   "results": "Six hits: opensFunctorAdjunction, GammaSpec, kerAdjunction, algGammaAlgSpecAdjunction, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.restrictAdjunction. None is a twisted etale derived projective-line adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*[Aa]djunction|[Aa]djunction.*projective|[Tt]ate[Tt]wist",
+   "results": "Mathlib hits concern preservation of projective objects, not projective-space duality. Existing ProjectiveLineFullAdjunction and SfAffineBaseP1TraceAdjunction use explicit finite Tate coefficients, the former also a Noetherian base; neither accepts an arbitrary normalized HasTateTwist datum. Source AffineSpaceAdjunction is the parent, not an input.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction",
+  "date": "2026-10-25",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-amb-affine-space-adjunction",
+   "place": "Entire affine-space induction, for the existing normalized source-library interface over arbitrary bases.",
+   "via": []
+  },
+  "same_as": [
+   "cor-amb-affine-space-adjunction"
+  ]
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace",
+  "statement": "theorem nonempty_rightDerivedLowerShriek_adjunction_affineSpace [HasTateTwist.IsNormalized Λ]\n    (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :\n    Nonempty (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); S) ↘ S) ⊣\n      L(((𝔸(ULift.{u} (Fin d); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙\n        twistShift Λ 𝔸(ULift.{u} (Fin d); S) d)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-25",
+  "note": "Attachment of the existing adopted-source declaration, whose proof is supplied here. The original cor-amb-affine-space-adjunction retains its distinct explicit finite-Tate Noetherian Sheaf attachment."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261025T165014-L-1157137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261025T165014-L-1157137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

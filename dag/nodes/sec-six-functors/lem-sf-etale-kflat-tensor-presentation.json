@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-etale-kflat-tensor-presentation",
+ "kind": "statement",
+ "title": "Etale localization tensor on K-flat representatives",
+ "status": "split",
+ "statement": "For every full subcategory of etale cochain complexes whose objects are K-flat, the total tensor followed by localization is naturally isomorphic to the chosen closed derived tensor of the localizations. Its inverse on every pair is the specified etale localization tensorator.",
+ "stmt_deps": [
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Stacks Project, Cohomology on Sites, Tag 07A4; site-transport paragraph."
+ },
+ "proof": [
+  {
+   "text": "The lax tensorator of localization is invertible when the right input is K-flat, by the K-flat computation of derived tensor and the strong monoidal homotopy quotient.",
+   "uses": [
+    "lem-kun-derived-tensor-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict its naturality to pairs of objects in the given full subcategory and invert this componentwise isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The etale closed and representative normalizations identify its tensor functor and inverse components with the specified chosen data. Keep the specified model-map carrier shared through specialization and express the inverse-component certificate as heterogeneous equality. At the abstract combination step its endpoints coincide, so eq_of_heq recovers precisely the original component equation.",
+   "uses": [
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "lem-kun-derived-tensor-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-22",
+  "note": "Construct the native K-flat localization isomorphism, identify the chosen data, and transport it with all functor data kept abstract."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso_μNatTrans_Qh_app_app_of_kFlat|isIso_counit_app_app_of_kFlat_right",
+   "results": "The adopted derived monoidal library proves invertibility on K-flat homotopy complexes.",
+   "date": "2026-10-22",
+   "verdict": "Compose with the homotopy quotient and restrict naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization tensorator for cochain complexes is an isomorphism on K-flat representatives",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) → DerivedCategory.singleFunctor C n ≅ (CochainComplex.singleFunctor C n).comp DerivedCategory.Q\", \"doc\": \"For each integer $ n $, the single-term complex functor from category $ \\\\mathcal{C} $ to its derived category is naturally isomorphic to the composition of the single-term cochain complex functor (con\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {E : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Category.{v_3, u_3} E]\\n  [inst_3 : CategoryTheory.MonoidalCategory E] (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismP\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this theorem establishes a natural isomorphism between the composition of whiskered curried tensor pre-functo\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"module\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (L : CategoryTheory.Functor C D) →\\n          (W : CategoryTheory.MorphismProperty C) →\\n            [inst_2 : CategoryTheory.MonoidalCategory C] →\\n  \", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C",
+   "date": "2026-10-22",
+   "verdict": "Use the adopted generic derived-monoidal localization API."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.LaxMonoidal.μ'\n",
+   "date": "2026-10-22",
+   "verdict": "No additional specialized lemma found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localization tensorator is an isomorphism on K-flat cochain complexes and gives a natural tensor comparison",
+   "results": {
+    "t": "2026-10-22T03:42:55Z",
+    "tool": "leansearch",
+    "query": "The localization tensorator is an isomorphism on K-flat cochain complexes and gives a natural tensor comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocalization.tensorProduct_isLocalizedModule",
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "RingHom.Flat.ofLocalizationSpanTarget",
+     "IsLocalizedModule.rTensor",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "RingHom.Flat.holdsForLocalizationAway",
+     "CategoryTheory.Localization.Monoidal.rightUnitor_hom_app",
+     "CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost"
+    ],
+    "digest": "a534af5e71eef2e0"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact match: ring localization and general monoidal localization results do not supply the specified K-flat derived-category representative equation. The proof uses the native K-flat tensorator theorem and the existing chosen-model normalization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientSiteHomArrow",
+  "date": "2026-10-22",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sf-finite-coefficient-site-hom-arrow",
+   "place": "K-flat computation of the source localization tensor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleKFlatTensorPresentation",
+  "file": "lean/Sheaf/Paper/EtaleKFlatTensorPresentation.lean",
+  "declaration": "WeilConjectures.finiteHomEtaleKFlatTensorPresentation",
+  "statement": "theorem finiteHomEtaleKFlatTensorPresentation (n : ℕ)\n    (P : ObjectProperty (CochainComplex (Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1, u}\n        (Padic.coefficientExtensionRing l E (n + 1))))) ℤ))\n    (hP : ∀ Y, P Y → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Y) :\n    FiniteHomSourceTensorPresentationAux (finiteHomEtaleQ l E X n)\n      (finiteHomCochainTensorGeneral _) (finiteHomEtaleClosed l E X n).tensor P\n      (finiteHomEtaleTensorModel l E X n)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-22",
+  "declarations": [
+   "WeilConjectures.FiniteHomSourceTensorPresentationAux",
+   "WeilConjectures.finiteHomEtaleKFlatTensorPresentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 91a912d9 vs prior FIXed head 4ada08f3 (cmp: all Lean/node files identical, only change record status + report differ) and live (CoefficientRingedTensorHomModel and importer IntegralTensorReductionTowerComparison unchanged); fixed set of 10 modules compiled with run_set, exit 0; checker rule stage3_delivery.py:602-606 (Status must start with open)"
+ }
+}

@@ -9,8 +9,11 @@ public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import Mathlib.Topology.ContinuousMap.Compact
 public import Mathlib.Topology.Category.Profinite.Basic
-import Mathlib.Topology.Separation.DisjointCover
 import Mathlib.Analysis.Normed.Operator.Extend
+import Mathlib.Topology.ContinuousMap.Algebra
+import Sheaf.Analysis.FiniteQuotientContractiveAverage
+import Sheaf.Topology.OpenNormalQuotientFunctionsDense
+import Sheaf.Topology.CompactParameterFunctional
 
 /-!
 # Complete-scalar averaging on pro-prime-to-ell groups
@@ -87,6 +90,60 @@ theorem primeToEll_completeScalar_integral
           J P' (f.comp (a.prodMap (ContinuousMap.id K))) = (J P f).comp a) ∧
         (∀ (P : Profinite.{w}) (n : ℕ) (f : Fin n → C(P × K, B)),
           J P (∑ j, f j) = ∑ j, J P (f j)) := by
-  sorry
+  classical
+  let : Algebra (Padic ell) B := iota.toAlgebra
+  let : NormedAlgebra (Padic ell) B :=
+    { norm_smul_le := fun r x ↦ by
+        change ‖iota r * x‖ ≤ ‖r‖ * ‖x‖
+        rw [norm_mul, hiota.norm_map_of_map_zero iota.map_zero] }
+  obtain ⟨hfinite, D, hD, hconst, A, hformula, _hrefine, hbound, hone, htrans⟩ :=
+    ContinuousMap.exists_finiteQuotientContractiveAverage ell B hultra K hbasis hprime
+  have hdense : DenseRange D.subtype := by
+    apply denseRange_subtype_val.mpr
+    simpa only [← hD] using
+      (ContinuousMap.openNormalQuotientFunctions_dense.{u, v, 0} K B hbasis).2.2.2
+  have hbound' (f : D) : ‖A f‖ ≤ 1 * ‖D.subtype f‖ := by
+    simpa only [one_mul, Submodule.subtype_apply] using hbound f
+  let I : C(K, B) →L[B] B := A.extendOfNorm D.subtype
+  have hagree (f : D) : I (f : C(K, B)) = A f :=
+    A.extendOfNorm_eq hdense ⟨1, hbound'⟩ f
+  have hI (f : C(K, B)) : ‖I f‖ ≤ ‖f‖ := by
+    simpa only [one_mul] using A.norm_extendOfNorm_apply_le hdense 1 hbound' f
+  refine ⟨I, hI, ?_, ?_, ?_, ?_⟩
+  · have hmem : (1 : C(K, B)) ∈ D := hconst 1
+    exact (hagree ⟨1, hmem⟩).trans (hone ⟨1, hmem⟩ rfl)
+  · intro a f
+    let l : C(K, K) := ⟨fun h ↦ a * h, continuous_const.mul continuous_id⟩
+    let r : C(K, K) := ⟨fun h ↦ h * a, continuous_id.mul continuous_const⟩
+    have heqL : I.comp (l.compCLM B B) = I := by
+      apply ContinuousLinearMap.ext
+      apply congr_fun (hdense.equalizer
+        (I.continuous.comp (l.compCLM B B).continuous) I.continuous ?_)
+      funext d
+      obtain ⟨dL, dR, hdL, _hdR, hAL, _hAR⟩ := htrans a d
+      have heq : (d : C(K, B)).comp l = (dL : C(K, B)) :=
+        ContinuousMap.ext fun h ↦ (hdL h).symm
+      change I ((d : C(K, B)).comp l) = I (d : C(K, B))
+      rw [heq, hagree, hagree, hAL]
+    have heqR : I.comp (r.compCLM B B) = I := by
+      apply ContinuousLinearMap.ext
+      apply congr_fun (hdense.equalizer
+        (I.continuous.comp (r.compCLM B B).continuous) I.continuous ?_)
+      funext d
+      obtain ⟨dL, dR, _hdL, hdR, _hAL, hAR⟩ := htrans a d
+      have heq : (d : C(K, B)).comp r = (dR : C(K, B)) :=
+        ContinuousMap.ext fun h ↦ (hdR h).symm
+      change I ((d : C(K, B)).comp r) = I (d : C(K, B))
+      rw [heq, hagree, hagree, hAR]
+    exact ⟨DFunLike.congr_fun heqL f, DFunLike.congr_fun heqR f⟩
+  · intro U g f hf
+    let : Finite (K ⧸ U.toSubgroup) := (hfinite U).1
+    let := Fintype.ofFinite (K ⧸ U.toSubgroup)
+    have hmem : f ∈ D := (hD f).mpr ⟨U, g, hf⟩
+    rw [hagree ⟨f, hmem⟩, hformula ⟨f, hmem⟩ U g hf]
+    simp only [finsum_eq_sum_of_fintype, tsum_fintype]
+  · obtain ⟨J, hJ, _hestimate, hscalar, hsum, hnatural⟩ :=
+      ContinuousMap.exists_compactParameterFunctional B K I.toLinearMap hI
+    exact ⟨J, hJ, hscalar, hnatural, fun P n f ↦ hsum P (Fin n) f⟩
 
 end WeilConjectures

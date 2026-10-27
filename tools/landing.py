@@ -243,6 +243,14 @@ def drop_plan(ids, open_records=None) -> tuple[list[dict], dict, list[str]]:
     want, first, dropped, notes = set(ids), {}, [], []
     for r in recs:
         paths = [f["path"] for f in r["files"]]
+        if r["id"] not in want and any(p in first for p in paths) and (r.get("upsync") or r.get("group") == "L"):
+            # 2026-10-24: an upstream sync or a maintenance landing (group L) is never taken out with an earlier landing
+            # (on 10-24 the chain pulled the 538-file sync into a drop and reverted it); the files it changed later keep
+            # their present version: the dropped landing's change to them is not undone
+            for q in paths:
+                first.pop(q, None)
+            notes.append(f"{r['id']} ({r['group']}) kept: its files keep their present version")
+            continue
         if r["id"] in want or any(p in first for p in paths):
             if r["id"] not in want:
                 by = sorted({first[p]["id"] for p in paths if p in first})
@@ -345,10 +353,26 @@ def revert_mq(rid: str, reason: str) -> int:
                 else:
                     dst.parent.mkdir(parents=True, exist_ok=True); dst.write_bytes(data)
             paths = [f"{lean_rel}/{rel}" for rel in restore_to]
+            # 2026-10-26: the library modules whose imports reach a removed module leave with it, same commit
+            # (tools/red_rework.py take_out_importers; left behind they fail the next build with "bad import")
+            moved_prev = None
+            try:
+                import red_rework
+                tr = red_rework.take_out_importers(f"importers of the modules removed by the take-out of {rid}")
+                if tr is not None:
+                    paths += [x for x in tr[0] if x not in paths]; moved_prev = tr[2]
+                    notes = list(notes) + [f"{len(tr[1])} importer(s) of removed modules moved to quarantine/ as rework"]
+            except Exception as exc:  # noqa: BLE001
+                print(f"importer take-out failed ({exc!r})"[:300], file=sys.stderr)
             subprocess.run(["git", "add", "-A", "--", *paths], cwd=li.ROOT, capture_output=True)
             subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
                             f"Take out landing {rid}: {reason[:200]}\n\n" + "\n".join(notes) +
                             "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths], cwd=li.ROOT, capture_output=True)
+            if moved_prev:
+                try:
+                    red_rework._record(moved_prev, f"red build rework: importers of the modules removed by the take-out of {rid}")
+                except Exception as exc:  # noqa: BLE001
+                    print(f"landing record of the importer take-out failed ({exc!r})"[:300], file=sys.stderr)
             drop_close(dropped, reason)
     for x in notes:
         print(x)

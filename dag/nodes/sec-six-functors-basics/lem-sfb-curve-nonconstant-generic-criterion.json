@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-curve-nonconstant-generic-criterion",
+ "kind": "statement",
+ "title": "Nonconstancy detected at the generic point of a smooth curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], let $T$ be an integral $k$-scheme [def-pc-integral-scheme], [def-weil-scheme-over-base], and let $C$ be a smooth integral $k$-curve of dimension one [def-sc-curves]. Let $\\eta_T,\\eta_C$ be their generic points [def-sc-generic-point]. For any $k$-morphism $u:T\\to C$,\n$$u(\\eta_T)=\\eta_C\\quad\\Longleftrightarrow\\quad\\text{there is no }k\\text{-point }c:\\operatorname{Spec}k\\to C\\text{ with }u=c\\circ s_T,$$\nwhere $s_T:T\\to\\operatorname{Spec}k$ is the structure morphism and a $k$-point means a section of the structure morphism of $C$ [def-weil-affine-spectrum]. If $u(\\eta_T)\\ne\\eta_C$, its entire set-theoretic image is the single closed point $y=u(\\eta_T)$, its residue field is $\\kappa_C(y)=k$ [def-weil-residue-field], and $u$ factors through that $k$-point. If $u(\\eta_T)=\\eta_C$, its local-ring map is an injective $k$-homomorphism $u^*:k(C)\\hookrightarrow k(T)$ [def-sc-function-field], [def-pc-field-extension], sending each germ near $\\eta_C$ to the germ of its pullback.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), paragraph before the theorem and third proof paragraph, nonconstant maps send generic point to generic point. Extracts old steps 3, 4 and the nonconstancy test at the end of steps 7 and 9."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-integral-scheme",
+  "def-weil-scheme-over-base",
+  "def-sc-curves",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-sc-function-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $y=u(\\eta_T)$. Every point $t\\in T$ belongs to $\\overline{\\{\\eta_T\\}}$, so continuity gives $u(t)\\in\\overline{\\{y\\}}$. If $y\\ne\\eta_C$, the irreducible closed subset $Z=\\overline{\\{y\\}}$ is proper in $C$, by uniqueness of generic points. If $z\\in Z$ were different from $y$, sobriety would give the strict chain $\\overline{\\{z\\}}\\subsetneq Z\\subsetneq C$, of length two. This contradicts $\\dim C=1$. Thus $Z=\\{y\\}$ is closed and the image of $u$ is exactly $\\{y\\}$.",
+   "uses": [
+    "def-sc-generic-point",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1, theorem-curves-rational-maps, third proof paragraph: justify the generic-point assertion by dimension and continuity."
+   }
+  },
+  {
+   "text": "Assume $y\\ne\\eta_C$. Since $C$ is of finite type over the algebraically closed field $k$, the structural map $a:k\\to\\kappa_C(y)$ is an isomorphism. The canonical residue-field point $i_y:\\operatorname{Spec}\\kappa_C(y)\\to C$ is a closed immersion: on any affine neighbourhood $\\operatorname{Spec}A$ of the closed point $y$, it is the quotient map $A\\to A/\\mathfrak m=\\kappa_C(y)$; on affine opens avoiding $y$ its inverse image is empty. These descriptions satisfy the affine criterion for a closed immersion. Define $c=i_y\\circ\\operatorname{Spec}(a^{-1})$. Its composite with the structure map of $C$ is the identity, since that composite is induced by $a^{-1}\\circ a$. Thus $c$ is a $k$-point with closed image $\\{y\\}$.",
+   "uses": [
+    "def-sc-curves",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1, paragraph defining constant morphisms; Morphisms Tags 01TB (lemma-jacobson-finite-type-points), 01TF (lemma-closed-point-fibre-locally-finite-type); the residue-field point is the affine quotient."
+   }
+  },
+  {
+   "text": "The integral scheme $T$ is reduced. Step 1 places its image inside the closed immersion $c:\\operatorname{Spec}k\\to C$ from step 2, so reduced-source factorization supplies $v:T\\to\\operatorname{Spec}k$ with $u=c\\circ v$. Applying the structure morphism $s_C$ gives $s_T=s_C\\circ u=s_C\\circ c\\circ v=v$. Hence $u=c\\circ s_T$, with no finite-type assumption on $T$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (lemma-map-into-reduction), applied to the closed residue-field point constructed in step 2."
+   }
+  },
+  {
+   "text": "Conversely, suppose $u=c\\circ s_T$ for a $k$-point $c$, and write $z=c(\\operatorname{Spec}k)$. The induced field maps $k\\to\\kappa_C(z)\\to k$ have identity composite. The second map is injective; for $b\\in\\kappa_C(z)$ its image in $k$ therefore shows $b$ equals the image of an element of $k$. Thus $\\kappa_C(z)=k$ as a structural extension, in particular it is finite. The closed-point criterion for finite-type schemes makes $z$ closed. It cannot equal $\\eta_C$: a closed generic point would make $C$ a singleton and have dimension zero. Thus $u(\\eta_T)=z\\ne\\eta_C$. Together with step 3 this proves the required equivalence.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-scheme-over-base",
+    "lem-kun-closed-point-field",
+    "def-sc-generic-point",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1, paragraph before theorem-curves-rational-maps; Morphisms Tag 01TF (lemma-closed-point-fibre-locally-finite-type), reverse direction."
+   }
+  },
+  {
+   "text": "Finally assume $u(\\eta_T)=\\eta_C$. The generic stalks of the integral schemes are the fields $k(C)$ and $k(T)$. The stalk homomorphism of the scheme morphism gives $u^*:\\mathcal O_{C,\\eta_C}\\to\\mathcal O_{T,\\eta_T}$. It commutes with the structural maps from $k$, because $u$ is a $k$-morphism. A unital homomorphism of fields is injective: if a nonzero $b$ mapped to zero, applying it to $bb^{-1}=1$ would give $0=1$. By the definition of the stalk map, the germ of a section maps to the germ of its pullback. This proves every assertion about $u^*$.",
+   "uses": [
+    "lem-sc-rational-functions-generic-stalks",
+    "def-sc-function-field",
+    "def-weil-residue-field",
+    "def-weil-scheme-over-base",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1, theorem-curves-rational-maps, third proof paragraph; Tag 01RV (lemma-integral-scheme-rational-functions), generic local rings are fields."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "def-sc-curves",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-scheme-over-base",
+  "lem-kun-closed-point-field",
+  "lem-sc-rational-functions-generic-stalks",
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (theorem-curves-rational-maps), paragraph before theorem and third proof paragraph; expanded to arbitrary integral sources using Schemes Tag 0356 and Morphisms Tag 01TF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nonconstant|constant.*genericPoint|genericPoint.*constant",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"grep\", \"query\": \"nonconstant|constant.*genericPoint|genericPoint.*constant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsDominant is only a definition; genericPoint_eq_of_isOpenImmersion assumes an open immersion and does not give the nonconstant criterion or rational-point factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonconstant map to an integral finite type curve over an algebraically closed field is dominant",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"leansearch\", \"query\": \"A nonconstant map to an integral finite type curve over an algebraically closed field is dominant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.IsDominant.rec\", \"AlgebraicGeometry.IsDominant.casesOn\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\"], \"digest\": \"43d47ff9c78bdccd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsDominant is only a definition; genericPoint_eq_of_isOpenImmersion assumes an open immersion and does not give the nonconstant criterion or rational-point factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genericPoint\", \"IsDominant\"",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"genericPoint\\\", \\\"IsDominant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsDominant is only a definition; genericPoint_eq_of_isOpenImmersion assumes an open immersion and does not give the nonconstant criterion or rational-point factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from an integral scheme to an integral curve over an algebraically closed field is nonconstant if and only if it sends the generic point to the generic point",
+   "results": "{\"t\": \"2026-10-23T04:14:45Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from an integral scheme to an integral curve over an algebraically closed field is nonconstant if and only if it sends the generic point to the generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral.nonempty\"], \"digest\": \"a794c2f480c53bfc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsDominant is only a definition; genericPoint_eq_of_isOpenImmersion assumes an open immersion and does not give the nonconstant criterion or rational-point factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonconstant means not factoring through a rational point; such a morphism from an integral scheme to a smooth one dimensional curve over an algebraically closed field sends generic point to generic point",
+   "results": "{\"t\": \"2026-10-23T04:16:50Z\", \"tool\": \"leanfinder\", \"query\": \"Nonconstant means not factoring through a rational point; such a morphism from an integral scheme to a smooth one dimensional curve over an algebraically closed field sends generic point to generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.functionField\"], \"digest\": \"f0d194ff0859bacd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsDominant is only a definition; genericPoint_eq_of_isOpenImmersion assumes an open immersion and does not give the nonconstant criterion or rational-point factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "nonconstant|constant.*genericPoint|genericPoint.*constant",
+   "results": "{\"t\": \"2026-10-23T09:38:30Z\", \"tool\": \"grep\", \"query\": \"nonconstant|constant.*genericPoint|genericPoint.*constant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern dominance or rational maps, not the full nonconstancy criterion and rational-point factorization for arbitrary integral sources"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonconstant morphisms to integral curves are dominant and induce injective homomorphisms of function fields",
+   "results": "{\"t\": \"2026-10-23T09:38:30Z\", \"tool\": \"leansearch\", \"query\": \"Nonconstant morphisms to integral curves are dominant and induce injective homomorphisms of function fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"7f52ebef81793e53\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern dominance or rational maps, not the full nonconstancy criterion and rational-point factorization for arbitrary integral sources"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genericPoint\", \"IsDominant\"",
+   "results": "{\"t\": \"2026-10-23T09:38:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"genericPoint\\\", \\\"IsDominant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern dominance or rational maps, not the full nonconstancy criterion and rational-point factorization for arbitrary integral sources"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from an integral scheme to an integral curve over an algebraically closed field is nonconstant exactly when it maps generic point to generic point",
+   "results": "{\"t\": \"2026-10-23T09:38:31Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from an integral scheme to an integral curve over an algebraically closed field is nonconstant exactly when it maps generic point to generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegral.nonempty\"], \"digest\": \"fe38467a9ca65b08\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern dominance or rational maps, not the full nonconstancy criterion and rational-point factorization for arbitrary integral sources"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map to a curve which is not dominant factors through a rational point when its source is reduced and irreducible",
+   "results": "{\"t\": \"2026-10-23T09:41:40Z\", \"tool\": \"leanfinder\", \"query\": \"A map to a curve which is not dominant factors through a rational point when its source is reduced and irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\"], \"digest\": \"ed83660eeaa00ba8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern dominance or rational maps, not the full nonconstancy criterion and rational-point factorization for arbitrary integral sources"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-curve-function-field-morphisms",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, second sentence: the intermediate field and its embeddings correspond to curve morphisms. Repair extraction: Tag 0BY1 (curves-theorem-curves-rational-maps), paragraph before the theorem and third proof paragraph, nonconstant maps send generic point to generic point. Extracts old steps 3, 4 and the nonconstancy test at the end of steps 7 and 9.",
+   "via": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-nonconstant-generic-criterion",
+  "worker": "stage1",
+  "summary": "Proved the generic-point dichotomy by dimension, constructed the rational closed point, applied the existing reduced-source factorization, proved the converse using the finite-residue closed-point criterion, and verified the induced injective k-homomorphism on generic stalks. No new nodes; no extra hypothesis on T. All statement clauses retained.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), preservation by direct images; the inherited auxiliary alteration/high-genus curve argument uses the generic-point criterion of Stacks 0BY1. The recorded ancestor chain is broken (blueprint_refs ancestor returns None); inherited from.node and via retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Uniqueness of generic points for the dimension-one closed-point dichotomy; generic scheme topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Rationality of closed points over algebraically closed fields; generic finite-type geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Converts singleton image into an actual factorization; generic reduced-scheme tool."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Only the finite-residue implies closed direction is used for a k-point of C; generic finite-type geometry tool."
+   },
+   {
+    "node": "lem-sc-rational-functions-generic-stalks",
+    "why": "Only the integral-scheme generic-stalk-is-a-field assertion is used; generic function-field tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-kun-closed-point-field",
+  "lem-sc-rational-functions-generic-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-dc2a4bbc0",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-dc2a4bbc0 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to the live unsplit node and the delivery adds no new nodes; there is no re-split note. Step 1 is correct: continuity puts u(T) inside the closure of {y}, and uniqueness of generic points (lem-sc-scheme-sober) plus dim C=1 force that closure to be {y}, which is closed. Step 2: lem-weil-pbc-closed-point-residue-field-base gives k≅κ(y). The map i_y is a closed immersion by the affine criterion (A→A/m around y, empty preimage elsewhere). c=i_y∘Spec(a^{-1}) has the right direction and s_C∘c=id. Step 3: T is reduced, so Stacks 0356 (schemes.tex l.2269), through the reduced-source factorization node, gives a factorization v, and v=s_T. Step 4: residue maps k→κ(z)→k compose to the identity, so κ(z)=k is finite and z is closed by lem-kun-closed-point-field (a) (Stacks 01TF). A closed generic point would give dim C=0, so z≠η_C. Step 5: the generic stalks are fields (integral clause of lem-sc-rational-functions-generic-stalks; k(T) for any integral T by def-sc-function-field). The stalk map is a k-linear field map, hence injective, and acts on germs by pullback. Stacks 0BY1 (curves.tex l.152-205), including its third proof paragraph, was checked. Edge cases: T=Spec k is constant; T=Spec k(C) is generic and shows T must not be assumed of finite type; Frobenius is generic; nonreduced Spec k[ε] shows why reduced is needed. Accepted generic tool_uses: scheme tools outside the unit. Advisory: the existing node lem-a1-nonconstant-curve-stalk-torsion-free overlaps step 5 and one direction of the item. It is not a fault, since the item is pre-existing and adds the k-point factorization and converse. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.NonconstantGenericCriterion",
+  "declaration": "AlgebraicGeometry.curve_nonconstant_generic_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NonconstantGenericCriterion.lean",
+  "statement": "theorem curve_nonconstant_generic_criterion (k : Type u) [Field k] [IsAlgClosed k] (T C : Scheme.{u}) (sT : T ⟶ Spec (.of k)) (sC : C ⟶ Spec (.of k)) [IsIntegral T] [IsIntegral C] [IsCurve sC] [Smooth sC] (hCdim : topologicalKrullDim C = 1) (u : T ⟶ C) (hu : u ≫ sC = sT) : (u (genericPoint T) = genericPoint C ↔ ¬ ∃ c : Spec (.of k) ⟶ C, c ≫ sC = 𝟙 _ ∧ sT ≫ c = u) ∧ (u (genericPoint T) ≠ genericPoint C → IsClosed ({u (genericPoint T)} : Set C) ∧ Set.range u = {u (genericPoint T)} ∧ Function.Bijective (sC.residueFieldAlgebraMap (u (genericPoint T))) ∧ ∃ c : Spec (.of k) ⟶ C, c ≫ sC = 𝟙 _ ∧ sT ≫ c = u) ∧ (∀ h : u (genericPoint T) = genericPoint C, Function.Injective (u.functionFieldMap h).hom ∧ ((Scheme.ΓSpecIso (.of k)).inv ≫ sC.appTop ≫ C.presheaf.germ ⊤ (genericPoint C) trivial ≫ u.functionFieldMap h) = ((Scheme.ΓSpecIso (.of k)).inv ≫ sT.appTop ≫ T.presheaf.germ ⊤ (genericPoint T) trivial) ∧ ∀ (U : C.Opens) (hU : genericPoint C ∈ U) (a : Γ(C, U)), u.functionFieldMap h (C.presheaf.germ U (genericPoint C) hU a) = T.presheaf.germ (u ⁻¹ᵁ U) (genericPoint T) (Eq.mpr (congrArg (fun x : C ↦ x ∈ U) h) hU) (u.app U a))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e9b3c59d",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Item node changed only in lean; the 10 stmt_dep records equal live; lean.statement verbatim. First S2 delivery, not a rebind. Hypotheses match the node with nothing stronger: Field+IsAlgClosed k; IsIntegral T with no finiteness; IsIntegral C, IsCurve sC (separated, finite type, dim<=1, as def-sc-curves says), Smooth sC, topologicalKrullDim C = 1; u ≫ sC = sT. Conclusions complete and true: iff with no section c with sT ≫ c = u; non-generic case gives IsClosed {y}, range u = {y}, bijective structural residueFieldAlgebraMap (ZetaSeries:224, sk-def-zeta) and a rational-point factorization; generic case gives the injective existing functionFieldMap (stalkSpecializes ≫ stalkMap), k-compatibility through ΓSpecIso/appTop/germ, and the germ-pullback formula with an Eq.mpr membership transport. Matches Stacks 0BY1 (curves.tex l.152-205). Edge cases checked: T=Spec k, T=Spec k(C), identity, empty/0-dim excluded, char p, one universe u. No new defs; docstrings carry source, blueprint and 5 steps; sorry only; imports exist. Advisory: def-sfb-dominant-function-field-map wraps the same stalk map under IsDominant. No compile (no FIX)."
+ }
+}

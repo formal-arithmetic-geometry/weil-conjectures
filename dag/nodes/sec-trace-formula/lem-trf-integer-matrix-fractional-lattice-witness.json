@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-integer-matrix-fractional-lattice-witness",
+ "kind": "statement",
+ "title": "Fractional coordinates produce an integral point outside a proper column sublattice",
+ "statement": "Let $r\\geq1$ and let $A$ be an $r\\times r$ integer matrix with $\\det A\\ne0$ [def-weil-pbc-matrix-determinant]. Regard its columns $v_1,\\ldots,v_r$ as elements of $\\mathbf Z^r\\subset\\mathbf Q^r$. These columns are linearly independent over $\\mathbf Q$. For every $y\\in\\mathbf Z^r$ outside their integer span $\\{\\sum_i m_i v_i:m_i\\in\\mathbf Z\\}$, there exists a unique $b\\in\\mathbf Q^r$ with $Ab=y$. Define $z_i=\\lfloor b_i\\rfloor\\in\\mathbf Z$, where $z_i\\leq b_i<z_i+1$, put $a_i=b_i-z_i$, and put $x=y-Az\\in\\mathbf Z^r$. Then $x=Aa\\ne0$, $0\\leq a_i<1$ for every $i$, and there is $j$ with $0<a_j<1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 07DQ (algebra-lemma-matrix-left-inverse, algebra.tex lines 2688--2691), adjugate identity. The rational-coordinate floor construction is an agent-supplied refinement, not a verbatim Stacks assertion. Extracts old proof step 5 of lem-trf-fs-chart-free-factorization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Let M be the entrywise image of A in the rationals. RingHom.map_det identifies det M with the integer cast of det A, so det M is nonzero. Put C = (det M)⁻¹ • adjugate M. Apply both identities in [lem-weil-pbc-matrix-adjugate-identity] over the commutative ring ℚ. Distributing scalar multiplication and cancelling the nonzero determinant gives CM = MC = 1.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ (algebra-lemma-matrix-left-inverse), proof, adjugate identity at lines 2688--2691; rational-coordinate argument supplied by NM."
+   }
+  },
+  {
+   "text": "Mathlib Matrix.linearIndependent_cols_of_det_ne_zero applied to M gives rational independence of the columns. Multiplying M u = M v by C and using CM = 1 proves injectivity of M.mulVec. For the given integer vector y, define b = C y over ℚ. Then M b = MC y = y. If M b′ = y, injectivity applied to M b′ = M b gives b′ = b.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ (algebra-lemma-matrix-left-inverse), proof, adjugate identity at lines 2688--2691; rational-coordinate argument supplied by NM."
+   }
+  },
+  {
+   "text": "For every i use Int.floor_le and Int.lt_floor_add_one to obtain floor(b i) ≤ b i < floor(b i) + 1. Subtract floor(b i), using sub_nonneg and sub_lt_iff_lt_add′, to obtain 0 ≤ b i - floor(b i) < 1. These floor inequalities apply equally to negative rational coordinates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ (algebra-lemma-matrix-left-inverse), proof, adjugate identity at lines 2688--2691; rational-coordinate argument supplied by NM."
+   }
+  },
+  {
+   "text": "For any integer vector z, RingHom.map_mulVec says that the rational image of A z is M applied to the rational image of z. Set z i = floor(b i). Using this identity, M.mulVec_sub, and M b = y, identify the rational image of x = y - A z with M(b - z). If x = 0 then A z = y, contradicting the outside-span hypothesis. If b - z were zero, the displayed identity and injectivity of the integer cast would force x = 0. Thus one coordinate b j - z j is nonzero. Its nonnegativity makes it strictly positive, and the upper bound from the preceding step is less than one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ (algebra-lemma-matrix-left-inverse), proof, adjugate identity at lines 2688--2691; rational-coordinate argument supplied by NM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-matrix-adjugate-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "NM: elementary floor-remainder refinement of the two adjugate identities in Tag 07DQ (algebra-lemma-matrix-left-inverse), proof; the fractional-lattice conclusion is not asserted by Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a square integer matrix is nonsingular but its columns do not span the integer lattice, its half open rational parallelepiped contains a nonzero integer point",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"If a square integer matrix is nonsingular but its columns do not span the integer lattice, its half open rational parallelepiped contains a nonzero integer point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.house.exists_ne_zero_int_vec_house_le\", \"ZSpan.mem_fundamentalDomain\", \"ZSpan.fundamentalDomain_subset_parallelepiped\", \"ZSpan.fundamentalDomain\", \"ZLattice.exists_forall_abs_repr_le_norm\", \"NumberField.mixedEmbedding.exists_ne_zero_mem_ringOfIntegers_lt\", \"Int.Matrix.exists_ne_zero_int_vec_norm_le\", \"NumberField.mixedEmbedding.exists_ne_zero_mem_ringOfIntegers_of_norm_le\"], \"digest\": \"7e0a51a2e9bd19c9\"}; No exact or one-line match. ZSpan.fract_mem_fundamentalDomain (Mathlib/Algebra/Module/ZLattice/Basic.lean:194), read with lines 91--96 and 130--195, assumes a supplied basis and gives a fractional representative. It does not supply the rational basis from an integer matrix or assert integrality and nonvanishing of a representative for an integer vector outside the column sublattice. Number-field small-vector results and Siegel's lemma concern different hypotheses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "fundamentalDomain, Matrix",
+   "results": "{\"t\": \"2026-10-22T06:14:31Z\", \"tool\": \"loogle\", \"query\": \"fundamentalDomain, Matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'fundamentalDomain'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. ZSpan.fract_mem_fundamentalDomain (Mathlib/Algebra/Module/ZLattice/Basic.lean:194), read with lines 91--96 and 130--195, assumes a supplied basis and gives a fractional representative. It does not supply the rational basis from an integer matrix or assert integrality and nonvanishing of a representative for an integer vector outside the column sublattice. Number-field small-vector results and Siegel's lemma concern different hypotheses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parallelepiped|fundamentalDomain|fract",
+   "results": "{\"t\": \"2026-10-22T06:14:31Z\", \"tool\": \"grep\", \"query\": \"parallelepiped|fundamentalDomain|fract\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/Projectivization/Cardinality.lean\", \"Mathlib/LinearAlgebra/Projectivization/Cardinality.lean\", \"Mathlib/LinearAlgebra/Vandermonde.lean\"], \"digest\": \"d519b4c1820ec050\"}; No exact or one-line match. ZSpan.fract_mem_fundamentalDomain (Mathlib/Algebra/Module/ZLattice/Basic.lean:194), read with lines 91--96 and 130--195, assumes a supplied basis and gives a fractional representative. It does not supply the rational basis from an integer matrix or assert integrality and nonvanishing of a representative for an integer vector outside the column sublattice. Number-field small-vector results and Siegel's lemma concern different hypotheses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonsingular integer matrix and an integer vector outside its integer column span, subtract floors of its rational coordinates to obtain a nonzero integer vector in the unit parallelepiped",
+   "results": "{\"t\": \"2026-10-22T06:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonsingular integer matrix and an integer vector outside its integer column span, subtract floors of its rational coordinates to obtain a nonzero integer vector in the unit parallelepiped\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.house.exists_ne_zero_int_vec_house_le\", \"ZSpan.mem_fundamentalDomain\", \"ZSpan.floor\", \"ZSpan.fundamentalDomain\", \"ZLattice.exists_forall_abs_repr_le_norm\", \"ZSpan.ceil\", \"ZSpan.vadd_mem_fundamentalDomain\", \"ZSpan.fract_mem_fundamentalDomain\"], \"digest\": \"059eefcf417d237b\"}; No exact or one-line match. ZSpan.fract_mem_fundamentalDomain (Mathlib/Algebra/Module/ZLattice/Basic.lean:194), read with lines 91--96 and 130--195, assumes a supplied basis and gives a fractional representative. It does not supply the rational basis from an integer matrix or assert integrality and nonvanishing of a representative for an integer vector outside the column sublattice. Number-field small-vector results and Siegel's lemma concern different hypotheses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonsingular integer matrix whose columns span a proper sublattice has a nonzero integer point with rational coordinates in [0,1)",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"leansearch\", \"query\": \"A nonsingular integer matrix whose columns span a proper sublattice has a nonzero integer point with rational coordinates in [0,1)\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Unavailable: rate-limited service; no absence verdict inferred.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZSpan.fract_mem_fundamentalDomain",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"loogle\", \"query\": \"ZSpan.fract_mem_fundamentalDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ZSpan.fract_mem_fundamentalDomain\"], \"digest\": \"b9300a2ce1a9f7c7\"}; No exact or one-line match. ZSpan.fract_mem_fundamentalDomain (Mathlib/Algebra/Module/ZLattice/Basic.lean:194), read with lines 91--96 and 130--195, assumes a supplied basis and gives a fractional representative. It does not supply the rational basis from an integer matrix or assert integrality and nonvanishing of a representative for an integer vector outside the column sublattice. Number-field small-vector results and Siegel's lemma concern different hypotheses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fract_mem_fundamentalDomain|fract_eq_zero|fract_sub|floor_mem|mem_fundamentalDomain",
+   "results": "{\"t\": \"2026-10-22T06:15:17Z\", \"tool\": \"grep\", \"query\": \"fract_mem_fundamentalDomain|fract_eq_zero|fract_sub|floor_mem|mem_fundamentalDomain\", \"sub\": \"Algebra/Module/ZLattice\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\"], \"digest\": \"74414ac2dc956d19\"}; No exact or one-line match. ZSpan.fract_mem_fundamentalDomain (Mathlib/Algebra/Module/ZLattice/Basic.lean:194), read with lines 91--96 and 130--195, assumes a supplied basis and gives a fractional representative. It does not supply the rational basis from an integer matrix or assert integrality and nonvanishing of a representative for an integer vector outside the column sublattice. Number-field small-vector results and Siegel's lemma concern different hypotheses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonsingular integer matrix, subtract integer floors from the rational coordinates of an integer vector outside the column lattice to obtain a nonzero integral fractional representative",
+   "results": "{\"t\": \"2026-10-23T09:26:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonsingular integer matrix, subtract integer floors from the rational coordinates of an integer vector outside the column lattice to obtain a nonzero integral fractional representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZSpan.fractRestrict\", \"ZSpan.fract\", \"NumberField.house.exists_ne_zero_int_vec_house_le\", \"ZSpan.repr_fract_apply\", \"ZSpan.fract_mem_fundamentalDomain\", \"ZSpan.fract_apply\", \"ZSpan.vadd_mem_fundamentalDomain\", \"ZSpan.floor\"], \"digest\": \"4bd4173ec3f327e5\"}; The hits concern ZSpan fractional representatives for a supplied basis, lattice norm bounds or number-field small vectors. Read ZLattice/Basic.lean:91--96,130--195. They do not supply all clauses under the integer-matrix hypotheses in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Int.floor_le, Int.lt_floor_add_one",
+   "results": "{\"t\": \"2026-10-23T09:27:31Z\", \"tool\": \"loogle\", \"query\": \"Int.floor_le, Int.lt_floor_add_one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The combined floor-name query returns no hits; the single ZSpan query finds ZSpan.fract_mem_fundamentalDomain. Neither states this full integer-matrix assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (floor_le|lt_floor_add_one)|lemma (floor_le|lt_floor_add_one)",
+   "results": "{\"t\": \"2026-10-23T09:27:31Z\", \"tool\": \"grep\", \"query\": \"theorem (floor_le|lt_floor_add_one)|lemma (floor_le|lt_floor_add_one)\", \"sub\": \"Algebra/Order\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Order/Floor/Extended.lean\", \"Mathlib/Algebra/Order/Floor/Extended.lean\", \"Mathlib/Algebra/Order/Floor/Extended.lean\", \"Mathlib/Algebra/Order/Floor/Extended.lean\", \"Mathlib/Algebra/Order/Floor/Defs.lean\", \"Mathlib/Algebra/Order/Floor/Defs.lean\", \"Mathlib/Algebra/Order/Floor/Ring.lean\", \"Mathlib/Algebra/Order/Floor/Ring.lean\"], \"digest\": \"faf1706d3f9b80d0\"}; Read Mathlib/Algebra/Module/ZLattice/Basic.lean:91--96,130--195; ZSpan.fract_mem_fundamentalDomain:194 and repr_fract_apply:169 assume a supplied basis and do not give the nonsingular rational coordinates, integer remainder and nonvanishing together. Also read Int.floor_le (Floor/Defs.lean:301) and Int.lt_floor_add_one (Floor/Ring.lean:129); these give only the elementary inequalities already specified in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fract_mem_fundamentalDomain|fract_eq_zero|repr_fract_apply",
+   "results": "{\"t\": \"2026-10-23T09:28:26Z\", \"tool\": \"grep\", \"query\": \"fract_mem_fundamentalDomain|fract_eq_zero|repr_fract_apply\", \"sub\": \"Algebra/Module/ZLattice\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"Mathlib/Algebra/Module/ZLattice/Basic.lean\"], \"digest\": \"09e89c9808f82d7a\"}; Read Mathlib/Algebra/Module/ZLattice/Basic.lean:91--96,130--195; ZSpan.fract_mem_fundamentalDomain:194 and repr_fract_apply:169 assume a supplied basis and do not give the nonsingular rational coordinates, integer remainder and nonvanishing together. Also read Int.floor_le (Floor/Defs.lean:301) and Int.lt_floor_add_one (Floor/Ring.lean:129); these give only the elementary inequalities already specified in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an invertible integer matrix and an integer vector not in its column lattice, the fractional part of its rational coordinates gives a nonzero integer point in the half-open parallelepiped",
+   "results": "{\"t\": \"2026-10-23T09:28:26Z\", \"tool\": \"leansearch\", \"query\": \"For an invertible integer matrix and an integer vector not in its column lattice, the fractional part of its rational coordinates gives a nonzero integer point in the half-open parallelepiped\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZSpan.fractRestrict\", \"parallelepiped\", \"ZSpan.fract\", \"ZSpan.fract_mem_fundamentalDomain\", \"ZSpan.fract_eq_fract\", \"ZSpan.fract_eq_self\", \"ZSpan.repr_fract_apply\", \"ZSpan.coe_fract_self\"], \"digest\": \"2dc913b150f07b5c\"}; ZSpan.fract_mem_fundamentalDomain and repr_fract_apply assume a supplied basis; the parallelepiped result concerns real coefficients. Read ZLattice/Basic.lean:91--96,130--195. The rational inverse and the integral nonzero remainder still need the explicit argument; no exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integer vector outside a full rank integral column lattice has a nonzero integral representative after reducing its rational basis coordinates modulo integers",
+   "results": "{\"t\": \"2026-10-23T09:28:31Z\", \"tool\": \"leanfinder\", \"query\": \"An integer vector outside a full rank integral column lattice has a nonzero integral representative after reducing its rational basis coordinates modulo integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.house.exists_ne_zero_int_vec_house_le\", \"ZLattice.normBound_pos\", \"ZSpan.mem_fundamentalDomain\", \"NumberField.mixedEmbedding.mem_span_latticeBasis\", \"ZLattice.abs_repr_lt_of_norm_lt\", \"ZLattice.abs_repr_le\", \"ZLattice.exists_forall_abs_repr_le_norm\", \"NumberField.mixedEmbedding.fundamentalCone.ne_zero_of_mem_integerSet\"], \"digest\": \"6080a6e8a6b16ce0\"}; The hits concern ZSpan fractional representatives for a supplied basis, lattice norm bounds or number-field small vectors. Read ZLattice/Basic.lean:91--96,130--195. They do not supply all clauses under the integer-matrix hypotheses in one specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZSpan.fract_mem_fundamentalDomain",
+   "results": "{\"t\": \"2026-10-23T09:29:05Z\", \"tool\": \"loogle\", \"query\": \"ZSpan.fract_mem_fundamentalDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ZSpan.fract_mem_fundamentalDomain\"], \"digest\": \"b9300a2ce1a9f7c7\"}; The combined floor-name query returns no hits; the single ZSpan query finds ZSpan.fract_mem_fundamentalDomain. Neither states this full integer-matrix assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fs-chart-free-factorization",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Auxiliary lattice argument: old chart-factorization proof step 5 (adjugate coordinates and integer floor remainder).",
+   "via": [
+    "lem-trf-fs-chart-free-factorization",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-integer-matrix-fractional-lattice-witness",
+  "worker": "stage1",
+  "summary": "Proved the full statement without changes or new nodes. Reused the existing Mathlib adjugate-identity leaf to construct a two-sided rational inverse explicitly. The remaining steps prove independence, unique coordinates, floor bounds, integrality, nonvanishing and a strictly positive fractional coordinate. Searched the whole DAG, current blueprint and project Lean; refreshed Mathlib searches with two semantic phrasings and read the fractional-part candidates. No exact project attachment or one-line Mathlib match was found.",
+  "blueprint": "Historical auxiliary chart-factorization argument recorded in blueprint.from.place: old lem-trf-fs-chart-free-factorization step 5, through the nearby-duality/alteration ancestry of lem-trf-local-term-locality (1)--(2). Steps 1--2 give its adjugate coordinates and steps 3--4 its integer floor remainder; no current local-term theorem is claimed as the source of this lattice lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-0078597e7",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-0078597e7 (reviewer sub-agent of L); spot-checked: PASS. The item's proof is correct and complete; no fixes were needed. I read the item in full; there are no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to clones/live, where the item is still unsplit, so no target was weakened. No other group has split it and there is no repair note, so this is a first split. Step 1 cites the existing Mathlib leaf lem-weil-pbc-matrix-adjugate-identity (adj(M)M = M adj(M) = det(M)·1; Matrix.mul_adjugate:264 and adjugate_mul:269 checked). Applied over Z and mapped into Q with δ≠0, it gives the two-sided rational inverse C. Step 2 (independence, existence and uniqueness of b = Cy), step 3 (floor bounds via Euclidean division, uniqueness of z) and step 4 (x integral, Aa = x, x≠0 because y is outside the Z-span, so some a_j > 0) are genuinely elementary. Every hypothesis is used, and proof_deps equals the union of the step uses. Source: Stacks algebra.tex 2688-2691, Tag 07DQ (checked in tags/tags), adjugate identity; the floor argument is honestly marked proof_origin.by=agent. Hand checks: A=(2) with y=±1, A=(-2) with y=1 (negative floor, x=-1), diag(2,3) with y=(1,1), and A=I (the hypothesis on y is never met). A whole-DAG grep found no duplicate. Mathlib's ZSpan.fract_mem_fundamentalDomain (ZLattice/Basic.lean:194) needs a supplied basis and lacks the integrality and nonvanishing clauses, so an assembly proof is right. The only citer, lem-trf-fs-chart-free-factorization step 3, uses exactly the clauses provided. No SGA source and no tool_uses. Minor: the report lists citations.json and searches.jsonl, which are not on the branch; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.IntegerMatrixFractionalLatticeWitness",
+  "declaration": "Matrix.integer_fractional_lattice_witness",
+  "file": "lean/Sheaf/LinearAlgebra/IntegerMatrixFractionalLatticeWitness.lean",
+  "statement": "theorem integer_fractional_lattice_witness (r : ℕ) (hr : 1 ≤ r) (A : Matrix (Fin r) (Fin r) ℤ) (hA : A.det ≠ 0) : LinearIndependent ℚ (fun j : Fin r ↦ fun i : Fin r ↦ (A i j : ℚ)) ∧ ∀ y : Fin r → ℤ, (¬ ∃ m : Fin r → ℤ, A.mulVec m = y) → ∃ b : Fin r → ℚ, (A.map (Int.castRingHom ℚ)).mulVec b = (fun i ↦ (y i : ℚ)) ∧ (∀ b' : Fin r → ℚ, (A.map (Int.castRingHom ℚ)).mulVec b' = (fun i ↦ (y i : ℚ)) → b' = b) ∧ (∀ i : Fin r, (⌊b i⌋ : ℚ) ≤ b i ∧ b i < (⌊b i⌋ : ℚ) + 1) ∧ (fun i ↦ ((y - A.mulVec (fun k ↦ ⌊b k⌋)) i : ℚ)) = (A.map (Int.castRingHom ℚ)).mulVec (fun i ↦ b i - (⌊b i⌋ : ℚ)) ∧ y - A.mulVec (fun i ↦ ⌊b i⌋) ≠ 0 ∧ (∀ i : Fin r, 0 ≤ b i - (⌊b i⌋ : ℚ) ∧ b i - (⌊b i⌋ : ℚ) < 1) ∧ ∃ j : Fin r, 0 < b j - (⌊b j⌋ : ℚ) ∧ b j - (⌊b j⌋ : ℚ) < 1",
+  "branch": "sheaf-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5535d6b05",
+  "group": "Q71",
+  "result": "pass",
+  "note": "All clauses match the node: r≥1, A integer with A.det≠0 via the recorded Matrix.det dependency, rational independence of the columns (A i j), outside-span as ¬∃ m, A.mulVec m = y, b existing and unique among all solutions of Ab=y, floor bounds, x=Aa with x in ℤʳ, x≠0, 0≤aᵢ<1, and some j with 0<aⱼ<1. No extra hypotheses or universes. The lean.statement matches the file exactly and the lean field is the only change to the node. Docstrings give the source (Tag 07DQ, algebra.tex checked), the blueprint tag and all four proof steps; the proof is sorry only. The report has both required sections. No existing Mathlib declaration matches (ZSpan needs a supplied basis). Edge cases checked: r=0 excluded, unimodular A, negative coordinates. The citer fs-chart-free-factorization needs exactly these clauses. Not recompiled (no file changed); missing copyright header is cosmetic."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T092405-L-3428427",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

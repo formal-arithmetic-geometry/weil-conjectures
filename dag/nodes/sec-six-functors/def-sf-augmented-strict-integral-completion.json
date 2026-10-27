@@ -1,0 +1,233 @@
+{
+ "id": "def-sf-augmented-strict-integral-completion",
+ "kind": "definition",
+ "title": "Canonical augmented strict integral completion and normalized open strict comparison data",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and schemes in a universe $t$ independent of the field universe $u$. Use the completed module categories $\\mathcal M_T$, strict towers, standard derived categories, actual quotient-complex functor $F_T$ and universal derived reduction pair $(Q_T,\\epsilon_T)$ of [def-a1-integral-completed-tower-pullback-universes]. Let $\\Delta_T$ be the constant strict-tower functor and $L_T=R\\lim$ the total right derived functor of ordinary inverse limit, with its derived adjunction $\\Delta_T\\dashv L_T$ and its actual comparison on complex representatives [lem-cbc-exact-product-functor-strict-limit]. Use the Grothendieck structure at module size $\\max(u,t+1)$ [lem-weil-pbc-ring-sheaves-grothendieck]. Define the normalized augmentation $\\gamma_T:\\Delta_T\\to Q_T$ by the following determining property: on every flat-term K-flat representative $P$, there is one strict chain map $a:\\Delta_TP\\to F_TP$, whose degree-$i$, level-$n$ component is the recorded quotient unit $x\\mapsto x\\otimes1$, and $\\gamma_T(QP)\\epsilon_T(P)$ equals $Q(a)$ composed with the exact constant-functor computation isomorphism. Choose this uniquely determined natural transformation. Define $C_T=Q_TL_T$ and $\\eta_{T,H}$ to be the derived constant-tower adjunction unit followed by $L_T(\\gamma_{T,H})$. On the actual shifted-cone Roos functor, define signed coordinates by its recorded biproduct isomorphism, swapping the factors and negating the second, so the differential is $(dx,(1-s)x-dy)$. Define the ordinary-limit-to-Roos map by the compatible family of limit projections.\nFor an open immersion $e:V\\hookrightarrow W$ and a pinned coefficient/operation presentation $o$ [def-sf-integral-open-operations], use exact ringed-slice restriction [lem-pur-site-restriction-module-adjunction-exact], its termwise complex and strict-tower functors and their exact derived localizations. Define its constant-tower comparison by the identity on constant diagrams, and the section-transport map by the coefficient equivalence counit. Define $\\alpha_H$ to be the target constant-tower adjunction unit followed by $R\\lim$ of the pulled quotient augmentation, using that constant comparison. Define the graph into the chosen base change by the pair of the identity and the structure map. Finally define strict comparison assertion data to consist of finite and completed coefficient isomorphism properties, quotient-transition compatibility, preservation of flat-term K-flat representatives, a natural isomorphism $e^*F_W\\simeq F_Ve^*$ normalized on every local pure tensor, strict transition and actual strict augmentation squares, its derived strict-tower isomorphism, and its good-representative computation-counit and augmentation equations. This record asserts no existence of a comparison. All quotient indices $n\\in\\mathbf N$ denote exponent $n+1$.",
+ "stmt_deps": [
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-sf-integral-open-operations",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-exact-product-functor-strict-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N (2),(5), proof of (5); sites-cohomology.tex Tags 06YY, 06XN, 0941 for quotient representatives, universal descent and strict derived limit."
+ },
+ "proof": [
+  {
+   "text": "In each degree assemble the recorded unrestrictedTowerUnit maps into a morphism of strict towers. Consecutive naturality is the quotient transition formula on 1 tensor x, since the coefficient transition preserves one. NatTrans.ofOpSequence supplies naturality for all arrows. The existing chain maps supply differential compatibility, and scalar-extension adjunction-unit naturality supplies naturality in the input complex.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the exact constant-functor computation isomorphism with the derived image of this ordinary natural transformation. Apply Mathlib Functor.leftDerivedLift to the universal counit of reductionPair. Its leftDerived_fac_app identity is exactly the augmentation normalization; the strict map has the stipulated components by construction.",
+   "uses": [
+    "def-a1-integral-completed-tower-pullback-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, use the proved localization of flat-term K-flat representatives from IntegralOperationsWellDefined. On each good representative, the component formula determines the strict chain map by degreewise and levelwise extensionality. Both normalized derived maps therefore have the same composite with the reduction counit. This counit is invertible on good representatives, so cancellation gives equality there. Localization.natTrans_ext gives equality of the natural transformations on the full derived category. The remaining definitions and instances retain their original constructions.",
+   "uses": [
+    "def-a1-integral-completed-tower-pullback-universes",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q7",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099N, 06YY and 06XN: assemble the actual quotient units, use the universal left-derived lift, and cancel the computation counit on good representatives. Formalized using the existing Mathlib Kan-extension API."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completionUnit|completedPullback|quotientTower",
+   "results": "[grep] OK 0 hit(s); \n[]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, SheafOfModules.overFunctor",
+   "results": "[loogle] OK 0 hit(s); loogle: unknown identifier 'Functor.mapDerivedCategory'\n[]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of strict derived quotient towers preserves the derived completion augmentation and completion unit",
+   "results": "[leanfinder] OK 8 hit(s); \n[\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"IsAdicComplete.StrictMono.mk_lift\", \"AdicCompletion.eval_comp_of\", \"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.StrictMono.mk_comp_liftRingHom\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of strict derived quotient towers preserves the derived completion augmentation and completion unit",
+   "results": "[leanfinder] OK 8 hit(s); \n[\"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"IsAdicComplete.StrictMono.mk_lift\", \"AdicCompletion.eval_comp_of\", \"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.StrictMono.mk_comp_liftRingHom\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, SheafOfModules.overFunctor",
+   "results": "[loogle] OK 0 hit(s); loogle: unknown identifier 'Functor.mapDerivedCategory'\n[]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit|completedPullback|quotientTower",
+   "results": "[grep] OK 0 hit(s); \n[]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*augmentation|augmentation.*strict|derived.*completion.*unit",
+   "results": "[grep] OK 3 hit(s); \n[\"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\", \"Mathlib/RingTheory/Ideal/IsAugmentation.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical augmentation of the derived strict quotient tower and total derived completion unit",
+   "results": "[leansearch] OK 8 hit(s); \n[\"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derivedη\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"AdicCompletion\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"UniformSpace.Completion.coeRingHom\", \"UniformSpace.Completion.instCoe\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural transformation from the constant derived tower to the strict derived reductions is uniquely determined by scalar extension units on flat K-flat complexes",
+   "results": "[leanfinder] OK 8 hit(s); \n[\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.leftDerived_ext\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match for the independent-universe augmentation of the existing CompletedTowerIndependent.reductionPair. Ordinary adic completion and generic derived universal comparisons are reused only where applicable."
+  },
+  {
+   "tool": "rg/grep/blueprint_refs",
+   "query": "strict quotient augmentation; augmentation_existsUnique; completionUnit; strict completion, augmentation; search dag/nodes, lean/WeilConjectures, lean/Sheaf",
+   "results": "blueprint_refs search strict completion: 0 nodes; search augmentation: 15 broader blueprint nodes. Project search found IntegralOnSlice.augmentation (chain tower before deriving), completedQuotientCompletionUnit (general datum A : Type (t+1)), and actual_reflector (scheme and field universes tied). No independent-universe normalized augmentation attached to CompletedTowerIndependent.reductionPair. Existing def-sf-integral-open-operations owns the slice presentation; reused unchanged. Mathlib grep: 3 unrelated ideal augmentation hits.",
+   "date": "2026-10-24",
+   "verdict": "The missing interface specializes the existing universal strict reduction pair, without replacing its construction; retain all existing site/coefficient/tensor/tower notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-quotient-completion-unit-comparison",
+  "date": "2026-10-24",
+  "group": "Q150"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor comparison: actual strict quotient augmentation and normalized completion-unit construction.",
+   "via": [
+    "lem-sf-open-quotient-completion-unit-comparison",
+    "lem-sf-open-roos-unit-adjunction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "import_flags": [],
+ "lean": {
+  "module": "Sheaf.SixFunctors.AugmentedStrictIntegralCompletion",
+  "declaration": "WeilConjectures.OpenQuotientCompletion.unit",
+  "declarations": [
+   "WeilConjectures.OpenQuotientCompletion.abSheafify",
+   "WeilConjectures.OpenQuotientCompletion.abLocallyBijective",
+   "WeilConjectures.OpenQuotientCompletion.moduleGrothendieck",
+   "WeilConjectures.OpenQuotientCompletion.towerGrothendieck",
+   "WeilConjectures.OpenQuotientCompletion.delta",
+   "WeilConjectures.OpenQuotientCompletion.deltaAdditive",
+   "WeilConjectures.OpenQuotientCompletion.deltaD",
+   "WeilConjectures.OpenQuotientCompletion.inverseLimit",
+   "WeilConjectures.OpenQuotientCompletion.limitAdditive",
+   "WeilConjectures.OpenQuotientCompletion.rlim",
+   "WeilConjectures.OpenQuotientCompletion.constantAdjunction",
+   "WeilConjectures.OpenQuotientCompletion.AugmentationNormalized",
+   "WeilConjectures.OpenQuotientCompletion.augmentation_existsUnique",
+   "WeilConjectures.OpenQuotientCompletion.augmentation",
+   "WeilConjectures.OpenQuotientCompletion.completion",
+   "WeilConjectures.OpenQuotientCompletion.unit",
+   "WeilConjectures.OpenQuotientCompletion.signedCoordinates",
+   "WeilConjectures.OpenQuotientCompletion.rlimUnitCx",
+   "WeilConjectures.OpenQuotientCompletion.ordinaryRoosMap",
+   "WeilConjectures.OpenQuotientCompletion.restrict",
+   "WeilConjectures.OpenQuotientCompletion.restrictAdditive",
+   "WeilConjectures.OpenQuotientCompletion.restrictLimits",
+   "WeilConjectures.OpenQuotientCompletion.restrictColimits",
+   "WeilConjectures.OpenQuotientCompletion.restrictCx",
+   "WeilConjectures.OpenQuotientCompletion.restrictD",
+   "WeilConjectures.OpenQuotientCompletion.restrictTow",
+   "WeilConjectures.OpenQuotientCompletion.restrictTowAdditive",
+   "WeilConjectures.OpenQuotientCompletion.restrictTowLimits",
+   "WeilConjectures.OpenQuotientCompletion.restrictTowColimits",
+   "WeilConjectures.OpenQuotientCompletion.restrictTowCx",
+   "WeilConjectures.OpenQuotientCompletion.restrictTowD",
+   "WeilConjectures.OpenQuotientCompletion.constantRestrictionOrdinary",
+   "WeilConjectures.OpenQuotientCompletion.constantRestriction",
+   "WeilConjectures.OpenQuotientCompletion.restrictionSection",
+   "WeilConjectures.OpenQuotientCompletion.alpha",
+   "WeilConjectures.OpenQuotientCompletion.sliceGraph",
+   "WeilConjectures.OpenQuotientCompletion.StrictComparison"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AugmentedStrictIntegralCompletion.lean",
+  "statement": "def unit (T : Scheme.{t}) (H : DerivedCategory (Modules l E T)) : H ⟶ (completion l E T).obj H",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe37d4ceb",
+  "group": "Q150",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe37d4ceb",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Read item, 7 steps, both delivered modules, the new def node, and dependency Lean (IntegralOpenReduction.Coefficients/Operations, CompletedTowerIndependent reductionPair/pull/derivedPull, exactProductFunctorStrictLimit, StrictRoosModel). Dependency records unchanged vs side-live; item adds 4 used stmt_deps; statements verbatim. Every clause rendered: tau (strict + tensor + transitions + computes + augmented), lambda via theta (K-injective normalization) and kappa (both summands), alpha_eq, b_alpha, rho_unit, completedComparison via pinned PullbackComparison (unit generators, derived counit). All data fields pinned; the ∃ o binder only uses pinned fields (finiteMap, completedMap, integral), not the twistable openSystems ones. New def node: real data; augmentation = choose of a sorried ∃! well-definedness theorem with docstring (true: counit iso on good reps). Theorem stmt_dep lem-weil-pbc-ring-sheaves-grothendieck supplies the IsGrothendieckAbelian instance needed for rlim, a genuine dependency on its conclusion, PASS on that point. No extra hypotheses, independent universes t,u, edge cases n=0, V empty, e=id, H=0, unbounded, non-qc covered. No file changed, so no compile; relied on worker's per-file compile. Notes: second reading is a self reading; alpha is matched to the def-a1 O_E completed pullback (acceptable specialization)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T050637-L-248614",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

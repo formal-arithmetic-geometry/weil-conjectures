@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-single-cartier-divisorial-part",
+ "kind": "statement",
+ "title": "Cartier part along one prescribed integral divisor",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $D\\hookrightarrow X$ be an integral effective Cartier divisor, with ideal $\\mathcal L\\subseteq\\mathcal O_X$ [def-pc-integral-scheme, def-weil-closed-immersion, def-nagata-effective-cartier-ideal]. Let $\\mathcal K\\subseteq\\mathcal O_X$ be a quasi-coherent ideal [pqf-def-coherent] such that $\\operatorname{Supp}(\\mathcal O_X/\\mathcal K)\\subseteq |D|$, where support is the set of points with nonzero stalk. The generic point $\\eta$ of $D$ has $\\dim\\mathcal O_{X,\\eta}=1$. There is an integer $a\\geq0$ such that $\\mathcal K\\subseteq\\mathcal L^a$ and, at $\\eta$, $\\mathcal K_\\eta=\\mathcal L_\\eta^a$. The support of $\\mathcal L^a/\\mathcal K$ is contained in a closed subset $T\\subseteq |D|$ every irreducible component of which has codimension at least $2$ in $X$. Here $\\mathcal L^a$ denotes the ordinary ideal power [def-sbc-ideal-sheaf-powers]; the codimension of an irreducible closed subset is the dimension of the local ring at its generic point [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0AGB (divisors-lemma-codim-1-part), singleton family D and empty Z-prime; generic-stalk equality is explicit in its proof."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-effective-cartier-ideal",
+  "pqf-def-coherent",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal Q=\\mathcal O_X/\\mathcal K$. The cokernel-closure theorem makes $\\mathcal Q$ quasi-coherent; it is of finite type since its local sections are generated as a sheaf by the image of $1$. Thus the locally Noetherian coherence criterion makes it coherent. Apply the support-annihilation theorem to $\\mathcal Q$ and the ideal $\\mathcal L$: its zero set is $|D|$ by the affine closed-immersion description. The assumed support inclusion gives some $N\\geq0$ with $\\mathcal L^N\\mathcal Q=0$, equivalently $\\mathcal L^N\\subseteq\\mathcal K$. This includes $N=0$, when $\\mathcal K=\\mathcal O_X$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB (lemma-codim-1-part), choice of finite generic valuations; coherent.tex Tag 01Y9 (lemma-power-ideal-kills-sheaf) verifies their finiteness."
+   }
+  },
+  {
+   "text": "Choose an affine Cartier chart $U=\\operatorname{Spec}A$ meeting $D$, with $\\mathcal L(U)=(f)$ and multiplication by $f$ injective. The affine-open Noetherian theorem gives that $A$ is Noetherian. By the closed-immersion ideal description, $D\\cap U=\\operatorname{Spec}(A/(f))$; this is a nonempty affine open of the integral scheme $D$, so $A/(f)$ is a domain. Hence $(f)$ is prime and its point is $\\eta$. The affine module-germ localization theorem, applied to $\\mathcal O_X$ and to $\\mathcal L$, identifies $R=\\mathcal O_{X,\\eta}$ with $A_{(f)}$ and $\\mathcal L_\\eta$ with $fR$. The regular principal-prime localization theorem makes $R$ a DVR. The localization-at-prime definition identifies its maximal ideal with $(f)R$, so $\\pi=f/1$ is a uniformizer. In particular $\\dim R=1$ by the DVR dimension theorem.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "pqf-lem-affine-open-locnoeth",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-integral-scheme",
+    "lem-sbc-affine-module-germ-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sbc-regular-principal-prime-localization-dvr",
+    "lem-sc-dvr-dimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AG9 (lemma-integral-effective-Cartier-divisor-dvr), proof; Tag 0AGB, first paragraph."
+   }
+  },
+  {
+   "text": "Step 1 gives $\\pi^N R\\subseteq\\mathcal K_\\eta$. Since $R$ is a domain and $\\pi\\ne0$, this ideal is nonzero. By the definition of a DVR it is principal, say $\\mathcal K_\\eta=bR$ with $b\\ne0$. Also $R$ is Noetherian: every ideal is principal and therefore finitely generated. Apply the unit-times-uniformizer-power theorem to write $b=u\\pi^a$, with $u$ a unit and $a\\geq0$. Consequently $\\mathcal K_\\eta=\\pi^aR=\\mathcal L_\\eta^a$. This equality is intrinsic: changing the local equation multiplies $\\pi$ by a unit and leaves its power ideal unchanged.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB, first paragraph: minimal valuation in the ideal at the generic DVR; algebra.tex Tag 00PD (lemma-characterize-dvr), final assertion."
+   }
+  },
+  {
+   "text": "On any affine Cartier chart $U=\\operatorname{Spec}A$ meeting $D$, write $I=\\mathcal K(U)$ and $\\mathcal L(U)=(f)$. As in step 2, $(f)$ is prime and $f$ is a nonzerodivisor. The affine module-germ localization theorem and step 3 give $IA_{(f)}=f^aA_{(f)}$. For $h\\in I$, clearing the denominator and the localization equality gives $sh=f^ab$ in $A$ for some $s\\notin(f)$ and $b\\in A$: if the equality of fractions initially needs a further multiplier outside $(f)$, multiply both $s$ and $b$ by it. Prove by induction on $a$ that this implies $h\\in(f^a)$. The case $a=0$ is immediate. For $a>0$, primeness of $(f)$ and $s\\notin(f)$ give $h=fh_1$. Cancelling the nonzerodivisor $f$ gives $sh_1=f^{a-1}b$, so induction applies. Thus $I\\subseteq(f^a)$. The quasi-coherent affine descriptions of $\\mathcal K$ and the ideal powers give $\\mathcal K|_U\\subseteq\\mathcal L^a|_U$.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-integral-scheme",
+    "lem-sbc-affine-module-germ-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB, proof of the claim: injectivity modulo powers of one prime local equation; the singleton case needs only this elementary prime-power induction."
+   }
+  },
+  {
+   "text": "At $x\\notin|D|$, the affine closed-immersion description gives $\\mathcal L_x=\\mathcal O_{X,x}$. The support hypothesis gives $\\mathcal K_x=\\mathcal O_{X,x}$ as well: the stalk of the quotient is the quotient of the stalk ideals. Thus the inclusion is automatic off $D$. Together with step 4 on Cartier charts this proves $\\mathcal K\\subseteq\\mathcal L^a$ on all of $X$. Equality of subsheaves can be checked on stalks: a section whose germs lie in a subsheaf has local lifts, and these glue uniquely by the sheaf axiom.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB, conclusion of the local containment claim."
+   }
+  },
+  {
+   "text": "Let $\\mathcal F=\\mathcal L^a/\\mathcal K$. The ideal powers are quasi-coherent, so the cokernel-closure theorem makes $\\mathcal F$ quasi-coherent. Locally $\\mathcal L^a=(f^a)$, hence the image of $f^a$ generates the quotient as a sheaf; off $D$ the quotient is zero. Thus $\\mathcal F$ is of finite type. The finite-type support theorem shows that $T=\\operatorname{Supp}(\\mathcal F)$ is closed in $X$. Here the quotient stalk is $\\mathcal L_x^a/\\mathcal K_x$: a germ of a quotient section lifts locally to a section of $\\mathcal L^a$, and its germ is zero exactly when, on a smaller neighbourhood, that section lies in $\\mathcal K$. This follows directly from the sheaf quotient and germ equivalence relations. Step 5 gives $T\\subseteq|D|$, and step 3 gives $\\eta\\notin T$. We may take this actual support as the closed subset requested in the statement.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB, last sentence before the final UFD paragraph; morphisms.tex Tag 056J (lemma-support-finite-type), part (1), supplies the closed remainder."
+   }
+  },
+  {
+   "text": "Let $C$ be any irreducible component of $T$. It is closed in $X$, and the scheme sobriety theorem supplies its generic point $y$. Since $T\\subseteq|D|$ and $\\eta\\notin T$, $y$ is a strict specialization of $\\eta$. By step 2 and the stalk-dimension chain formula, $\\eta$ has a strict generalization $z$ (the supremum of the integer chain lengths is $1$). The concatenated chain $y,\\eta,z$ consists of two strict generalizations. Therefore the same chain formula gives $\\dim\\mathcal O_{X,y}\\geq2$. This is precisely the codimension of $C$ required in the statement. If $T$ is empty the assertion is vacuous.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB, equality at the generic divisor point and the codimension-two conclusion; properties.tex Tag 02IZ (lemma-codimension-local-ring)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-effective-cartier-ideal",
+  "pqf-lem-affine-open-locnoeth",
+  "def-pc-integral-scheme",
+  "lem-sbc-affine-module-germ-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-sc-dvr-dimension-one",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-sc-scheme-sober",
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0AGB (lemma-codim-1-part), singleton family and empty Z-prime; Tag 0AG9 for its generic DVR; the closed-remainder and codimension argument is made explicit using Tags 056J, 02IZ and 01IS. Tag 01Y9 verifies the generic ideal is nonzero."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme and an integral effective Cartier divisor D every coherent ideal supported on D has a divisorial part aD and residual quotient supported in codimension at least two",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, FractionalIdeal.finite_factors, FractionalIdeal.finite_factors', AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf construction/support and Dedekind-domain factorization do not state the prescribed Cartier-divisor extraction on a general Noetherian scheme; EffectiveCartierDivisor is unknown to Loogle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme supported on integral effective Cartier divisors agrees with a sum of multiples of those divisors away from codimension two",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_eq_eq_iInter_zeroLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf construction/support and Dedekind-domain factorization do not state the prescribed Cartier-divisor extraction on a general Noetherian scheme; EffectiveCartierDivisor is unknown to Loogle."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.EffectiveCartierDivisor",
+   "results": "OK 0 hits:  | loogle: unknown identifier 'AlgebraicGeometry.EffectiveCartierDivisor'",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf construction/support and Dedekind-domain factorization do not state the prescribed Cartier-divisor extraction on a general Noetherian scheme; EffectiveCartierDivisor is unknown to Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "codim.*part|divisorial|[Cc]artier[Dd]ivisor|effectiveCartier",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf construction/support and Dedekind-domain factorization do not state the prescribed Cartier-divisor extraction on a general Noetherian scheme; EffectiveCartierDivisor is unknown to Loogle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the zero locus of an ideal on a Noetherian scheme is contained in one integral Cartier divisor then dividing by the maximal divisor power leaves support of codimension at least two",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.support_antitone, AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet, Ideal.finite_mulSupport, AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf construction/support and Dedekind-domain factorization do not state the prescribed Cartier-divisor extraction on a general Noetherian scheme; EffectiveCartierDivisor is unknown to Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]artier|codimension|divisor",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ideal-sheaf construction/support and Dedekind-domain factorization do not state the prescribed Cartier-divisor extraction on a general Noetherian scheme; EffectiveCartierDivisor is unknown to Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "codim.*part|divisorial|[Cc]artier[Dd]ivisor|effectiveCartier",
+   "results": "OK 3 hits: Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean, Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean, Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ideal-sheaf construction or support, localization of sections, or factorization over Dedekind domains; none gives prescribed Cartier-power extraction on an arbitrary Noetherian scheme. OrderOfVanishing.lean assumes an integral ambient scheme and defines orders of rational functions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ideal sheaf supported on an integral Cartier divisor has a maximal Cartier power dividing it with residual support in codimension at least two",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, IsDedekindDomain.HeightOneSpectrum.maxPowDividing, AlgebraicGeometry.Scheme.IdealSheafData.supportSet, AlgebraicGeometry.Scheme.IdealSheafData.support_top, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff, AlgebraicGeometry.Scheme.IdealSheafData.le_radical",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ideal-sheaf construction or support, localization of sections, or factorization over Dedekind domains; none gives prescribed Cartier-power extraction on an arbitrary Noetherian scheme. OrderOfVanishing.lean assumes an integral ambient scheme and defines orders of rational functions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.EffectiveCartierDivisor",
+   "results": "OK 0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.EffectiveCartierDivisor'",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ideal-sheaf construction or support, localization of sections, or factorization over Dedekind domains; none gives prescribed Cartier-power extraction on an arbitrary Noetherian scheme. OrderOfVanishing.lean assumes an integral ambient scheme and defines orders of rational functions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme and an integral effective Cartier divisor D every quasi-coherent ideal supported on D agrees with a power of its ideal away from codimension two",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ideal-sheaf construction or support, localization of sections, or factorization over Dedekind domains; none gives prescribed Cartier-power extraction on an arbitrary Noetherian scheme. OrderOfVanishing.lean assumes an integral ambient scheme and defines orders of rational functions only."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]artier|divisorial|codimension",
+   "results": "OK 3 hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ideal-sheaf construction or support, localization of sections, or factorization over Dedekind domains; none gives prescribed Cartier-power extraction on an arbitrary Noetherian scheme. OrderOfVanishing.lean assumes an integral ambient scheme and defines orders of rational functions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a coherent ideal vanishes only on an integral Cartier divisor divide by a power of its prime local equation to obtain a quotient supported in codimension two",
+   "results": "OK 8 hits: IsDedekindDomain.HeightOneSpectrum.maxPowDividing, Ideal.finite_mulSupport_inv, Ideal.finite_mulSupport_coe, FractionalIdeal.divMod, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, FractionalIdeal.count, FractionalIdeal.finite_factors, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ideal-sheaf construction or support, localization of sections, or factorization over Dedekind domains; none gives prescribed Cartier-power extraction on an arbitrary Noetherian scheme. OrderOfVanishing.lean assumes an integral ambient scheme and defines orders of rational functions only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-surface-weak-transform-colength-drop",
+  "date": "2026-10-23",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: dominate the reduced graph modification of the regular nodal resolution by finitely many blowups of closed surface points.; Stacks 0AHI principalization of the admissible center ideal by 0AHH (lemma-make-ideal-principal). Local induction input: Stacks 0AGT (resolve-lemma-blowup-improve), finite support and strict colength decrease for the weak transform after ONE maximal-ideal blowup. Repair input: Tag 0AGB (divisors-lemma-codim-1-part), singleton family D and empty Z-prime; generic-stalk equality is explicit in its proof.",
+   "via": [
+    "lem-sfb-local-surface-weak-transform-colength-drop",
+    "lem-sfb-surface-point-ideal-principalization",
+    "lem-sfb-regular-point-blowup-domination",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-single-cartier-divisorial-part",
+  "worker": "stage1",
+  "summary": "Kept the full statement and statement dependencies. Wrote the singleton 0AGB argument in seven steps, explicitly proving contraction of a prime power with cancellation, nonvanishing of the generic ideal, closedness of the remainder, and codimension at least two by a chain through eta. Reused all smaller inputs; no new nodes. Searched the whole DAG, blueprint, project source and Mathlib and checked every cited statement.",
+  "blueprint": "Latest main-20261023-1620, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); below its inherited ILO/de Jong surface principalization input, realize Tag 0AGB for the prescribed exceptional divisor as recorded in from.place. The ancestor tool returns None on the inherited chain; retain blueprint.from.node=null and its existing exact place/via, as in the parent delivery. same_as=[] after blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "why": "Gives L^N contained in K, ruling out the zero generic ideal without assuming X integral. This is a generic Zariski or commutative algebra tool below the inherited surface-principalization input; it does not replace the unit route."
+   },
+   {
+    "node": "lem-sbc-regular-principal-prime-localization-dvr",
+    "why": "Applies to the prime nonzerodivisor equation without an ambient-domain hypothesis. This is a generic Zariski or commutative algebra tool below the inherited surface-principalization input; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-sbc-regular-principal-prime-localization-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-58c33ab48",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-58c33ab48 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a first split with no new nodes and no repair note, so the re-split rules do not apply. Source checked: divisors.tex Tag 0AG9 (lemma-integral-effective-Cartier-divisor-dvr) and Tag 0AGB (lemma-codim-1-part), whose proof claims injectivity of A/(f^n)→A_(f)/f^n and agreement at ξ_i. The item is the singleton case with Z'=∅, and its statement is unchanged. Steps: (1) quasi-coherent cokernel, coherence by qc+ft and support-power-ideal-kills give L^N⊆K, which makes the generic ideal nonzero; (2) a Noetherian chart with (f) prime and germ localization give R=A_(f), which is a DVR by the regular-principal-prime node (no domain hypothesis needed), so dim R=1; (3) K_η=bR, b=uπ^a, so K_η=L_η^a; (4) an elementary prime-power induction with cancellation by a nonzerodivisor gives I⊆(f^a); (5) the inclusion holds trivially off D and is checked on stalks; (6) F=L^a/K is qc of finite type, so its support T is closed, T⊆D and η∉T; (7) for a component's generic point y, the chain y,η,z gives dim O_{X,y}≥2 without catenarity. Every cited statement was read and its hypotheses match, and proof_deps equals the union of uses. Edge cases: K=O_X, K=L^r, (x²,xy) in k[x,y,z], (x²y,x³) in k[x,y], disconnected non-integral X. Not duplicates: lem-per-surface-codimension-one-cartier-part and lem-per-regular-prime-divisor-local-equations, which need regular integral X. Accepted tool uses: lem-weil-pbc-coherent-support-power-ideal-kills and lem-sbc-regular-principal-prime-localization-dvr, plus four generic quasi-coherent sheaf facts (cokernel-closure, coherent-ft-locnoeth, affine-module-germ-localization, finite-type-support-closed). No SGA is cited. Minor wording only: step 5 says 'equality' where inclusion is meant. No fixes."
+ }
+}

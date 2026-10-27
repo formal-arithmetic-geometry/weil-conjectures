@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-closed-test-kinjective-section-models",
+ "kind": "statement",
+ "title": "Normalized K-injective section complexes at closed lifted tests",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and on every small pro-etale site put $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal $\\Lambda_Y$-modules [sk-def-sfb-module-objects], their exact inverse images and ordinary unbounded derived direct images computed on K-injectives [sk-def-sfb-module-derived-pushpull]. All sites and section values are taken in a common sufficiently large universe. Let $A$ be a commutative ring, $\\mathfrak a\\subseteq A$ an ideal, $U=\\operatorname{Spec}A$, and $s:Z=\\operatorname{Spec}(A/\\mathfrak a)\\hookrightarrow U$. Let $v$ be the affine ind-etale closed-site lift [def-exc-closed-site-lift]. Let $V\\to Z$ be an affine ind-etale object such that $V$ and $B=v(V)$ are w-contractible [sk-def-pe-wlocal]. Let $f:X\\to U$ be a morphism of affine schemes and put $X_Z=X\\times_UZ$, with projections $h:X_Z\\to X$, $f_Z:X_Z\\to Z$. Put $T=X\\times_UB$, $T_0=X\\times_UV$ and $a:T_0\\hookrightarrow T$; products mean scheme fibre products [def-pc-fibre-product]. Let $K\\in D^+(\\operatorname{Mod}_{\\Lambda_X})$, let $\\mathcal I$ be a K-injective representative of $K$, and let $j:h^*\\mathcal I\\to\\mathcal J$ be a quasi-isomorphism with $\\mathcal J$ K-injective. Here K-injective means that every chain map from an acyclic complex is null-homotopic, and $Q$ denotes localization of complexes at quasi-isomorphisms [sk-def-sfb-derived-categories]. Then $f_*\\mathcal I$ and $(f_Z)_*\\mathcal J$ are K-injective representatives of $Rf_*K$ and $R(f_Z)_*h^*K$, respectively. There are isomorphisms in $D(\\operatorname{Ab})$\n$$\\begin{aligned}\nR\\Gamma(V,s^*Rf_*K)&\\xrightarrow{\\sim}Q((s^*f_*\\mathcal I)(V))\\xrightarrow{\\sim}Q(\\mathcal I(T)),\\\\\nR\\Gamma(V,R(f_Z)_*h^*K)&\\xrightarrow{\\sim}Q(((f_Z)_*\\mathcal J)(V))=Q(\\mathcal J(T_0)).\n\\end{aligned}$$\nThe second arrow in the first line is the inverse of the actual unit-section map $(f_*\\mathcal I)(B)\\to(s^*f_*\\mathcal I)(V)$, followed by the section formula $(f_*\\mathcal I)(B)=\\mathcal I(T)$. The other arrows are the resolution comparisons for the universal right-derived units and exact evaluation at $V$.\nThe derived section-localization identifications give\n$$Q(\\mathcal I(T))\\xrightarrow{\\sim}R\\Gamma(T,K|_T),\\qquad Q(\\mathcal J(T_0))\\xrightarrow{\\sim}R\\Gamma(T_0,(h^*K)|_{T_0}).$$\nThey are normalized by the degreewise identities on localized sections. The canonical coefficient-compatible pullback composition identifies $(h^*K)|_{T_0}\\cong a^*(K|_T)$. All displayed maps have these normalizations rather than arbitrary choices of isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6F, lemma-unbounded-cohomology-of-open, and derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives; agent closed-test specialization and unit normalization, returned proof steps 3–4."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-exc-closed-site-lift",
+  "sk-def-pe-wlocal",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-proetale-inverse-image-unit-section",
+  "def-sfb-right-derived-functor",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "The exact inverse-image adjunctions preserve K-injective complexes under their right adjoints. Apply this to L and J. The canonical rightDerivedFunctorUnitQ on a K-injective is the inverse of rightDerivedFunctorObjQIso. Composing it with the image of the supplied representative isomorphism e, or pullRepresentative formed from j, proves invertibility of the two pushModel maps.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved internal_test_preservesHomology lemma underlying closed-test unit evaluation. It makes evaluation at the closed test exact and gives finite-limit and finite-colimit preservation. Thus the canonical universal derived unit is invertible on every complex, without requiring that closed pullback preserve K-injectivity. Exact inverse image applied to the pushModel comparison is invertible. Form leftMap and rightMap as the prescribed composites and take their asIso inverses; this gives the required inverse equations by reflexivity.",
+   "uses": [
+    "lem-sfb-closed-test-unit-evaluation",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing internalSpecializationUnit_bijective calculation underlying closed-test unit evaluation: weak contractibility of the lift gives surjectivity of sheaf epimorphisms, and its closed-fibre square gives specialization of every lifted point to the fibre. Thus evaluation of the actual internal adjunction unit is invertible. The shared fiberIso makes closedFibreArrow an isomorphism, so evaluationMap along it is invertible. The original closedUnit is their composite, with the literal pushEvaluation identity. Every component of closedUnitComplex is therefore invertible; so is its image by Q. Taking its asIso inverse constructs eUnit with the required inverse equation by reflexivity.",
+   "uses": [
+    "lem-sfb-closed-test-unit-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any small pro-etale object V of X, use the existing localization_sections_iso, module_weaklyEtale_preservesKInjective and derived_pullback_iso calculations in the weakly-etale derived-evaluation-restriction module. The equality of localizationSections with its closedFibreModuleSectionsRestriction is proved by extensionality and reflexivity, including the actual diagonal arrow and the actual module unit. Therefore derivedLocalization is invertible. On the supplied K-injective L the evaluation derived unit is invertible, and the final factor is the image of e. Their composite is localizationModel, proving both localization assertions for the actual test fibres. The site objects already carry their weakly-etale morphism proofs, so a separate ring-level ind-etale stability application is unnecessary.",
+   "uses": [
+    "lem-sfb-weakly-etale-derived-evaluation-restriction",
+    "def-weil-pbc-proetale-site",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient-compatible derived composition comparison is already the concrete definition derivedTestPullbackComposition in this module. It is the termwise descent of testPullbackComposition using the existing mapDerivedCategoryNatIso and mapDerivedCategoryCompIso, with their canonical localization factors. No further existential comparison or ringed-site localization theorem is required in the final conjunction.",
+   "uses": [
+    "lem-sfb-exact-derived-composition",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-closed-test-unit-evaluation",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-weakly-etale-derived-evaluation-restriction",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6F and 08FI, derived.tex Tags 08BJ and 015F, proetale.tex Tag 09BL; S8 assembly of existing normalized concrete-map calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K injective models of derived sections of closed inverse image of derived direct image on a weakly contractible affine pro etale lifted test",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.formallyUnramified_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: Generic injective-resolution facts and affine limit lemmas do not compute the closed lifted pro-etale section models with both unit normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Generic injective-resolution facts and affine limit lemmas do not compute the closed lifted pro-etale section models with both unit normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "(KInjective|K.injective).*(section|evaluation)|(section|evaluation).*(KInjective|K.injective)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Generic injective-resolution facts and affine limit lemmas do not compute the closed lifted pro-etale section models with both unit normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections over a closed pro etale test of a module direct image are canonically the section complex on the lifted fiber product of a K injective representative",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKInjective_of_injective, SheafOfModules.GeneratingSections.ofEpi_s, CochainComplex.cm5b.I, SheafOfModules.pushforwardSections, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.isKInjective_of_iso, Module.ulift_injective_of_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: Generic injective-resolution facts and affine limit lemmas do not compute the closed lifted pro-etale section models with both unit normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute both corners of a closed pro etale base change square by section complexes I of the lifted fiber product and J of the closed fiber product",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: Generic injective-resolution facts and affine limit lemmas do not compute the closed lifted pro-etale section models with both unit normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective derived direct image section complex on a weakly contractible pro etale closed lift with canonical resolution comparison",
+   "results": "CochainComplex.cm5b.instInjectiveXIntI; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CochainComplex.isKInjective_of_injective; CochainComplex.cm5b.instInjectiveXIntMappingConeIdI; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-23",
+   "verdict": "no match: injective-resolution or sheaf evaluation declarations do not state the closed lifted-test models with the specified universal-unit and slice normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of closed inverse image of direct image on a weakly contractible lifted test are the section complex of a K injective resolution",
+   "results": "CategoryTheory.injectiveResolutions; CategoryTheory.InjectiveResolution.self; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CategoryTheory.InjectiveResolution.of_def; CategoryTheory.InjectiveResolution.ofCocomplex; CochainComplex.IsKInjective; CochainComplex.IsKInjective.mk; CochainComplex.isKInjective_of_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: injective-resolution or sheaf evaluation declarations do not state the closed lifted-test models with the specified universal-unit and slice normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "(KInjective|K.injective).*(section|evaluation)|(section|evaluation).*(KInjective|K.injective)",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: injective-resolution or sheaf evaluation declarations do not state the closed lifted-test models with the specified universal-unit and slice normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: injective-resolution or sheaf evaluation declarations do not state the closed lifted-test models with the specified universal-unit and slice normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact evaluation on module sheaves identifies derived sections with evaluation of any complex and the canonical derived functor unit",
+   "results": "SheafOfModules.evaluation; smoothSheafCommRing.ι_evalHom; smoothSheaf.ι_evalHom; SheafOfModules.unitHomEquiv; smoothSheaf.ι_evalHom_apply; smoothSheafCommRing.ι_evalHom_apply; CategoryTheory.evalEquiv_apply; SheafOfModules.Presentation.map_π_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: injective-resolution or sheaf evaluation declarations do not state the closed lifted-test models with the specified universal-unit and slice normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "def evaluation|def unitHomEquiv",
+   "results": "85; 178",
+   "date": "2026-10-23",
+   "verdict": "no match: injective-resolution or sheaf evaluation declarations do not state the closed lifted-test models with the specified universal-unit and slice normalizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-test-derived-exchange-model",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 3, 4: Normalized K-injective section complexes at closed lifted tests",
+   "via": [
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-test-kinjective-section-models",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Six steps derive the section models from the existing actual closed-test unit lemma, right-adjoint K-injective preservation, exact evaluation with its universal unit, unbounded section/slice localization, and coefficient-compatible exact slice pullback. No new nodes. Explicitly avoids assuming that closed pullback preserves K-injectives or that the two source fiber products are w-contractible.",
+  "blueprint": "The ancestor command returns None, as in the inherited blueprint.from record. This realizes the K-injective section-model obligation in returned parent steps 3–4 of lem-sfb-closed-test-derived-exchange-model, on paragraph (3) of the integral-lisse closed-base-change route recorded in blueprint.from.place; the final comparison records the same localized pullback square. Whole-blueprint searches for K-injective, localization and closed lifted test found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Base changes of the affine ind-etale test objects are objects of the source pro-etale sites; generic site validity needed before section localization."
+   },
+   {
+    "node": "lem-sfb-unbounded-sections-localization",
+    "why": "Generic ringed-site derived section/slice identity with its degreewise normalization; the closed-test unit lemma does not state this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Universal right-derived unit is invertible on every complex for exact evaluation; necessary because closed inverse image need not preserve K-injectives."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Coefficient-compatible pullback square on localized ringed sites, for the final restriction comparison."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Normalized descent of the two composites of exact inverse-image/restriction functors."
+   },
+   {
+    "node": "lem-sfb-exact-derived-natural-iso",
+    "why": "Normalized descent of the particular coefficient-compatible slice comparison, rather than an arbitrary derived isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-c48286e57",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-c48286e57 (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged, now split into 6 steps, no new nodes) and every cited statement, including lem-sfb-closed-test-unit-evaluation, lem-weil-pbc-right-adjoint-preserves-kinjective (08BJ, Lean-closed), lem-weil-pbc-exact-functor-derived-functor, lem-sfb-unbounded-sections-localization (0D6F), lem-weil-pbc-localize-ringed-site-morphism, lem-sfb-exact-derived-composition, lem-sfb-exact-derived-natural-iso, lem-weil-pbc-ind-etale-stability, def-exc-closed-site-lift and def-sfb-right-derived-functor. Checked the sources Stacks 0D6F (sites-cohomology l.4329), 08BJ (derived l.9857) and 09BL (proetale l.4852). Step checks: step 2 gets K-injectivity of f_*I and (f_Z)_*J from exact left adjoints and normalizes with the unit, which is invertible at K-injectives. Step 3 uses exact ev_V with the 'every complex computes RF' clause, so no K-injectivity of s^*f_*I is assumed. In step 4 the direction u^{-1} is correct, naturality gives an iso of complexes, and D(V)=J(T_0) holds by associativity of fibre products. In step 5, T→X and T_0→X_Z are base changes of ind-etale maps, hence weakly etale site objects, and localization carries the identity normalization. Step 6 descends the localized square with normalized exact-derived nodes. Small cases checked: 𝔞=0, 𝔞=A (empty V and T_0), X empty, unbounded I and J. No duplicate found: rg finds only the parent and the sibling chain-mate node. The split is a genuine assembly of lemmas, not a relabelling (D1-D3 ok); the 6 declared tool_uses are generic and accepted, and there is no SGA citation. One C3/C4 fault, fixed: step 6's identification h^{-1}T=X_Z×_XT=T_0 needs V=B×_UZ, which only lem-sfb-closed-test-unit-evaluation states and which step 6 did not cite. Step 6 now spells out the chain X_Z×_UB=X×_U(B×_UZ)=X×_UV and cites that node; proof_deps already contained it. The fix is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-closed-test-kinjective-section-models.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestKInjectiveSectionModels",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closed_test_kinjective_section_models",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.evaluation",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.complexes",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.pushEvaluation",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.diagonalTest",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.evaluationMap",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.localizationSections",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.derivedLocalization",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closedMap",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.liftedTest",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closedTest",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.testFibre",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closedFibreArrow",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closedUnit",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.pullRepresentative",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.localizedSections",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.localizationModel",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.testArrow",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.testPullbackComposition",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.derivedTestPullbackComposition",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.pushModel",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.exactRepresentative",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closedUnitComplex",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.closed_test_kinjective_section_models",
+   "AlgebraicGeometry.ProEtale.ClosedTestKInjectiveSectionModels.evaluationAdditive"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedTestKInjectiveSectionModels.lean",
+  "statement": "theorem closed_test_kinjective_section_models (A : Type u) [CommRing A] (a : Ideal A) {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A)) (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ a))) (w : IsPullback h fZ f (closedMap A a)) (V : (Spec (.of (A ⧸ a))).AffineProEt) [IsWContractibleRing Γ(V.left, ⊤)] [IsWContractibleRing Γ((liftedTest A a V).left, ⊤)] (K : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (L : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) [L.IsKInjective] (e : DerivedCategory.Q.obj L ≅ K.obj) (J : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology XZ) Ab.{u + 1}) (condensedRingObj Λ XZ)) ℤ) [J.IsKInjective] (j : (complexes (CondensedRing.upperStar Λ h)).obj L ⟶ J) [QuasiIso j] : CochainComplex.IsKInjective ((complexes (CondensedRing.lowerStar Λ f)).obj L) ∧ CochainComplex.IsKInjective ((complexes (CondensedRing.lowerStar Λ fZ)).obj J) ∧ IsIso (pushModel Λ f K.obj L e) ∧ IsIso (pushModel Λ fZ ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj) J (pullRepresentative Λ h K.obj L e J j)) ∧ ∃ eLeft : (evaluation Λ (closedTest A a V)).rightDerivedFunctor.obj ((CondensedRing.upperStar Λ (closedMap A a)).mapDerivedCategory.obj ((CondensedRing.moduleObjectDerivedPushforward Λ f).obj K.obj)) ≅ DerivedCategory.Q.obj ((complexes (evaluation Λ (closedTest A a V))).obj ((complexes (CondensedRing.upperStar Λ (closedMap A a))).obj ((complexes (CondensedRing.lowerStar Λ f)).obj L))), ∃ eUnit : DerivedCategory.Q.obj ((complexes (evaluation Λ (closedTest A a V))).obj ((complexes (CondensedRing.upperStar Λ (closedMap A a))).obj ((complexes (CondensedRing.lowerStar Λ f)).obj L))) ≅ DerivedCategory.Q.obj ((complexes (evaluation Λ (testFibre f (liftedTest A a V)))).obj L), ∃ eRight : (evaluation Λ (closedTest A a V)).rightDerivedFunctor.obj ((CondensedRing.moduleObjectDerivedPushforward Λ fZ).obj ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj)) ≅ DerivedCategory.Q.obj ((complexes (evaluation Λ (closedTest A a V))).obj ((complexes (CondensedRing.lowerStar Λ fZ)).obj J)), eLeft.inv = (evaluation Λ (closedTest A a V)).rightDerivedFunctorUnitQ ((complexes (CondensedRing.upperStar Λ (closedMap A a))).obj ((complexes (CondensedRing.lowerStar Λ f)).obj L)) ≫ (evaluation Λ (closedTest A a V)).rightDerivedFunctor.map (exactRepresentative (CondensedRing.upperStar Λ (closedMap A a)) (pushModel Λ f K.obj L e)) ∧ eUnit.inv = DerivedCategory.Q.map (closedUnitComplex Λ A a V ((complexes (CondensedRing.lowerStar Λ f)).obj L)) ∧ eRight.inv = (evaluation Λ (closedTest A a V)).rightDerivedFunctorUnitQ ((complexes (CondensedRing.lowerStar Λ fZ)).obj J) ≫ (evaluation Λ (closedTest A a V)).rightDerivedFunctor.map (pushModel Λ fZ ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj) J (pullRepresentative Λ h K.obj L e J j)) ∧ IsIso (localizationModel Λ (testFibre f (liftedTest A a V)) K.obj L e) ∧ IsIso (localizationModel Λ (testFibre fZ (closedTest A a V)) ((CondensedRing.upperStar Λ h).mapDerivedCategory.obj K.obj) J (pullRepresentative Λ h K.obj L e J j))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e9347777",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read the node, all 13 stmt_dep records (unchanged vs live), Stacks 09BL, the module and the live decls (upperStar/lowerStar/adjunction/upperStarComp, moduleObjectDerivedPushforward=(lowerStar f).rightDerivedFunctor, rightDerivedFunctorUnitQ, rightDerivedPullback, affine_closed_site_functor_properties). Every hypothesis matches the node (Λ comm condensed ring, A/𝔞/closedMap, AffineProEt V with IsWContractibleRing on V and B, IsAffine X, IsPullback square, K in D^+, K-injective L with e, K-injective J with quasi-iso j) with nothing stronger. Conclusions: K-injectivity of f_*L and fZ_*J; IsIso of the unit-normalized pushModel for both; eLeft/eUnit/eRight each pinned by .inv = canonical map (eUnit.inv = Q of the actual closed unit, correct direction); IsIso of the canonical localizationModel on T and T0 (degreewise identity); (h*K)|T0≅a*(K|T) as a real def from upperStarComp. All claims true (exact left adjoints; exact ev_V by w-contractibility; 09BL(2)). Edge cases 𝔞=0/A, empty X, K=0, unbounded L,J ok. Statement verbatim; 23 declarations = file; docstrings ok; one sorry. Advisories only: decls owned by non-stmt_dep nodes (module pushforward-pullback, closedSiteLiftInclusion/properties theorem), unused stmt_dep decls inverseSection/overFunctor, inverse images via mapDerivedCategory. No compile (no fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6e1ca",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T164311-L-994004",
+  "kind": "interface",
+  "note": "independent cc review: Delivered ClosedTestKInjectiveSectionModels (proof + abbrev→def/explicit types, evaluationAdditive instance) against clone HEAD 50391880, both node diffs, change record vs computed users; compiled item + all 13 unchanged downstream modules in import order (exit 0), #print axioms = propext/Classical.choice/Quot.sound"
+ }
+}

@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-representable-lft-fppf-source-descent",
+ "kind": "statement",
+ "title": "Local finite type descends through an fppf source cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, their morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. An algebraic stack is an fppf stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas [def-pc-fppf-site, def-sbc-smooth-morphisms]. A morphism is representable by algebraic spaces if every scheme base change is an algebraic space. For representable maps, flatness, local finite presentation and local finite type are tested after scheme base change on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Surjectivity means that every field-valued target object lifts, up to isomorphism, after some field extension [def-weil-field]. Let $h:\\mathcal A\\to\\mathcal B$ and $g:\\mathcal B\\to\\mathcal C$ be morphisms of algebraic stacks over $S$, both representable by algebraic spaces. Suppose $h$ is surjective, flat and locally of finite presentation. If $g h$ is locally of finite type, then $g$ is locally of finite type. No quasi-compactness of $h$ and no Noetherian assumption on any stack is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06EW (lemma-locally-finite-type-fppf-local-source), extended to representable stack morphisms by their scheme-base-change tests. This is local finite type, not Tag 06EV on local finite presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme $T\\to\\mathcal C$. Put $B_T=T\\times_{\\mathcal C}\\mathcal B$ and $A_T=B_T\\times_{\\mathcal B}\\mathcal A$. The first is an algebraic space by representability of $g$; the second is an algebraic space by [lem-sfb-representable-pullback-over-space] applied to $h$. The map $h_T:A_T\\to B_T$ is surjective, flat and locally of finite presentation by base-change stability [lem-sfb-stack-chartwise-smooth-etale-calculus]. There is a canonical identification $A_T\\simeq T\\times_{\\mathcal C}\\mathcal A$: an object $(t,b,\\alpha:g(b)\\simeq t,a,\\beta:h(a)\\simeq b)$ is sent to $(t,a,\\alpha\\circ g(\\beta))$, and its inverse takes $b=h(a)$ and $\\beta=1$ [def-sfb-stable-pointed-moduli-groupoids]. Consequently $p:A_T\\to T$ is the base change of $gh$ and is locally of finite type by the same calculus node.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 0300 (lemma-base-change-by-space-representable-by-space), Tag 045C (lemma-base-change-representable-transformations-property)"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $v:V\\to B_T$ and then a surjective etale scheme chart $w:W\\to A_T\\times_{B_T}V$, as supplied by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. The scheme map $q:W\\to V$ is surjective, flat and locally of finite presentation: its space projection is a base change of $h_T$, and $w$ is etale, hence flat and locally of finite presentation; use base-change and composition stability [lem-sfb-stack-chartwise-smooth-etale-calculus] and the agreement of chart properties with scheme properties [lem-sfb-space-local-properties-chart-test]. The projection $A_T\\times_{B_T}V\\to A_T$ is etale as a base change of $v$. Thus $r:W\\to A_T$ is etale. Etale implies smooth, locally of finite presentation and locally of finite type, so $pr:W\\to T$ is locally of finite type by the calculus node. It equals the composite $W\\xrightarrow{q}V\\to T$ because both maps are the projection to $T$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06EW (lemma-locally-finite-type-fppf-local-source), through the etale presentation construction in Tag 06ER (lemma-transfer-from-schemes)"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-lft-flat-lfp-source-descent] to the scheme maps $W\\xrightarrow{q}V\\to T$: the preceding step verifies exactly its surjectivity, flatness, local-finite-presentation and composite-local-finite-type hypotheses. It gives that $V\\to T$ is locally of finite type. Apply [lem-sfb-space-local-properties-chart-test] to $B_T\\to T$, with target chart $T\\to T$ the identity and source chart $V\\to B_T$. It follows that $B_T\\to T$ is locally of finite type. Since $T\\to\\mathcal C$ was arbitrary, this is precisely the scheme-base-change test for $g$ in the item. Neither charts nor $q$ were assumed quasi-compact, and no Noetherian hypothesis was used.",
+   "uses": [
+    "lem-a1-lft-flat-lfp-source-descent",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL (lemma-flat-finitely-presented-permanence), local-finite-type alternative; spaces-morphisms.tex Tag 040Y (lemma-finite-type-local)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06EW (lemma-locally-finite-type-fppf-local-source), expanded using the scheme-chart argument of Tag 06ER (lemma-transfer-from-schemes) and descent.tex Tag 02KL; stack extension via algebraic.tex Tag 0300 and Tag 045C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local finite type of a representable morphism of algebraic stacks descends along a surjective flat locally finitely presented cover of the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If A to B is an fppf surjection and A to C is locally of finite type then B to C is locally of finite type for algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsMultiplicative @LocallyOfFiniteType\", \"doc\": \"The property of being a morphism locally of finite type is multiplicative: if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are morphisms of schemes that are locally of finite type, then their composition $ g \\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgHom.FiniteType.comp_surjective\", \"module\": \"Mathlib.RingTheory.FiniteType\", \"type\": \"{f : A →ₐ[R] B} {g : B →ₐ[R] C} (hf : f.FiniteType) (hg : Surjective g) : (g.comp f).FiniteType\", \"doc\": \"If $ f : A \\\\to B $ is an algebra homomorphism of finite type and $ g : B \\\\to C $ is a surjective algebra homomorphism, then the composition $ g \\\\circ f : A \\\\to C $ is also of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : LocallyOfFiniteType f] [hg : LocallyOfFiniteType g] :\\n  LocallyOfFiniteType (f ≫ g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite type is again locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyOfFiniteType\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is locally of finite type if for each affine `U ⊆ Y` and\\n`V ⊆ f ⁻¹' U`, The induced map `Γ(Y, U) ⟶ Γ(X, V)` is of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] => RingHom.FiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFiniteType f] [hg : AlgebraicGeometry.LocallyOfFiniteType g] : AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y] : JacobsonSpace ↥X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType g] : AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|LocallyOfFiniteType.*(fppf|Flat)|locallyOfFiniteType.*[Ss]urjective",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"35\", \"text\": \"instance : DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For representable algebraic stack morphisms h and g, if h is surjective flat locally finitely presented and g composed with h is locally of finite type, then g is locally of finite type",
+   "results": "Logged successful search, 8 hits; returned names/files: AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.locallyOfFiniteType_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme/ring declarations do not state source descent for representable algebraic stack morphisms; no AlgebraicStack declaration returned."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType.*[Ss]urjective|LocallyOfFiniteType.*[Ff]lat|AlgebraicStack|AlgebraicSpace",
+   "results": "Logged successful search, 1 hits; returned names/files: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hit at Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean:35 is scheme target-base-change descent, not source-composition descent for stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of local finite type through a faithfully flat locally finitely presented source cover for representable morphisms of algebraic stacks",
+   "results": "Logged successful search, 8 hits; returned names/files: AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType.recOn, AlgebraicGeometry.LocallyOfFiniteType.casesOn, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.LocallyOfFiniteType.rec, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme/ring declarations do not state source descent for representable algebraic stack morphisms; no AlgebraicStack declaration returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Flat",
+   "results": "Logged successful search, 1 hits; returned names/files: AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme/ring declarations do not state source descent for representable algebraic stack morphisms; no AlgebraicStack declaration returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type map of algebraic spaces can be detected after a surjective flat locally finitely presented map to its source, without quasi compactness",
+   "results": "Logged successful search, 8 hits; returned names/files: AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme/ring declarations do not state source descent for representable algebraic stack morphisms; no AlgebraicStack declaration returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "Logged successful search, 0 hits; returned names/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme/ring declarations do not state source descent for representable algebraic stack morphisms; no AlgebraicStack declaration returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-point-residual-substack",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Locally finite type residual substack at a finite-type point. Quotient construction: Local finite type descends through an fppf source cover.",
+   "via": [
+    "lem-sfb-finite-type-point-residual-substack",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-lft-fppf-source-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reduced representable stack maps to algebraic spaces over an arbitrary scheme, then to a scheme fppf source cover by etale charts, applied existing scheme descent, and returned through the chart criterion. Reused all prerequisites; no new nodes. Read the cited statements and checked no quasi-compactness or Noetherian hypotheses are introduced.",
+  "blueprint": "Supporting quotient-construction prerequisite of the inherited direct-image/alteration branch: local finite type of the residual-substack map descends from its fppf presentation. Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) gives the surrounding direct-image route; this auxiliary descent argument is below that unit. Inherited blueprint.from.node is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Generic descent theorem for scheme morphisms, used after choosing etale charts; the unit supplies no separate scheme source-descent statement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product and etale-base-change tool used to form the compatible source chart; it replaces no unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-b840d8285",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-b840d8285 (reviewer sub-agent of L); spot-checked: I read the item, all three steps and all seven cited statements in full. There are no new nodes, the statement is unchanged, and proof_deps equals the union of the step uses. Sources checked: spaces-descent 06EW (l.2464; proof via 06ER l.2362 and the scheme lemma), descent 02KL (l.4385; lft alternative, no qc), algebraic 0300 (l.683) and 045C (l.963), spaces-morphisms 040Y (l.4398). Step 1: B_T and A_T are algebraic spaces by representability of g and by pullback-over-space applied to B_T->B. h_T is fppf and surjective by base change. I checked the reassociation (t,b,α,a,β)->(t,a,α∘g(β)) and its inverse against the 2-fibre-product convention, so p is the base change of gh and is lft. Step 2: the charts V and W come from the fibre-product and étale base-change node. q is a base change of h_T composed with an étale map, so it is surjective, flat and lfp; scheme agreement comes from the chart-test node and surjectivity from the calculus chart equivalence. r is étale, so W->T is lft. Step 3: scheme 02KL gives V->T lft, and the chart test with target chart id_T gives B_T->T lft for every T, which is the item's definition. Edge cases checked: empty B_T, the identity cover, and non-qc infinite disjoint covers; no qc or Noetherian assumption enters. Duplicates: rg for 06EW and source-descent phrasing finds only the general transfer theorem, target-locality nodes and étale-only locality, none of which states the item. Accepted tool_uses: lem-a1-lft-flat-lfp-source-descent and lem-trf-space-fibre-products-etale-covers, both generic. Batch-5 check: def-trf-algebraic-space is a general definition, lem-trf-space-fibre-products-etale-covers is the general Stacks 02X2/041F fact, and the other three cited nodes reach sec-trace-formula only through that definition; none of them is part of the trace-formula or Poincaré-duality proofs. No SGA anywhere."
+ }
+}

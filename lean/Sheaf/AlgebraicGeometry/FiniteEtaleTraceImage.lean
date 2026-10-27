@@ -9,8 +9,6 @@ public import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDefinitions
 import Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent
 import Sheaf.AlgebraicGeometry.FiniteEtaleTraceSheetLifting
 import Mathlib.CategoryTheory.Sites.Subsheaf
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.CategoryTheory.Category.ULift
 
 /-! # Finite etale trace and integral sheaf image -/
 

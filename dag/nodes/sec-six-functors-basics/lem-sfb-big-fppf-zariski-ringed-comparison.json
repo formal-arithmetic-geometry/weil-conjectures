@@ -1,0 +1,390 @@
+{
+ "id": "lem-sfb-big-fppf-zariski-ringed-comparison",
+ "kind": "statement",
+ "title": "Big fppf to Zariski ringed comparison for arbitrary modules",
+ "statement": "Fix universes and small presentations of sites as in [def-weil-size-convention]. Let $S$ be any scheme [def-pc-scheme], let $S_{\\mathrm{Zar}}$ be its site of open subschemes with open coverings [def-sc-zariski-site], and let $\\mathcal C_S=(\\mathit{Sch}/S)_{\\mathrm{fppf}}$ be its big fppf site [def-pc-fppf-site], with ring sheaf $\\mathcal O(u:T\\to S)=\\Gamma(T,\\mathcal O_T)$. There is a morphism of ringed topoi $\\epsilon_S:(\\operatorname{Sh}(\\mathcal C_S),\\mathcal O)\\to(\\operatorname{Sh}(S_{\\mathrm{Zar}}),\\mathcal O_S)$ [def-weil-pbc-ringed-topos-morphism] whose direct image on sheaves and on module sheaves is restriction to open subschemes; its structural ring map is adjoint to the identity $\\mathcal O_S=\\epsilon_{S,*}\\mathcal O$. For every Zariski $\\mathcal O_S$-module $M$ [def-weil-sheaf-of-modules-category], without any quasi-coherence hypothesis, the tensor pullback $L_SM=\\mathcal O\\otimes_{\\epsilon_S^{-1}\\mathcal O_S}\\epsilon_S^{-1}M$ [def-pur-sheaf-tensor-product] is canonically the module sheafification [def-weil-presheaf-modules-sheafification] of $P_M(u:T\\to S)=\\Gamma(T,u^*M)$ [def-pc-module-pullback]. Here restriction along $h:T'\\to T$ is pullback of sections followed by $h^*u^*M\\simeq(uh)^*M$, and $P_v(u)=\\Gamma(T,u^*v)$ for every module map $v:M\\to N$. The comparison is natural in $M$ and respects these restrictions and scalar actions. For each open $j:W\\hookrightarrow S$, the component $M(W)\\to(L_SM)(W)$ of the adjunction unit is $P_M(j)\\to P_M^\\#(j)$ under $P_M(j)=M(W)$ and $L_SM=P_M^\\#$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 070R (remark-change-topologies-ringed): ringed structure on the big-to-small morphism; Tag 070S (lemma-compare-sites), part (1), with tau = fppf, and its proof: tensor pullback is the sheafification of the section presheaf. The last unit equation specifies the canonical comparison used in that proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-pc-fppf-site",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "First check the stipulated structure ring. On every affine open $W=\\operatorname{Spec}A$ of $S$, the rank-one case of the tilde/free-module theorem gives $\\mathcal O_S|_W\\simeq\\widetilde A$; thus $\\mathcal O_S$ is quasi-coherent by the affine-local definition. For any $u:T\\to S$, the unit-normalized isomorphism $u^*\\mathcal O_S\\simeq\\mathcal O_T$ identifies pullback of its sections with the usual ring restriction. Every fppf covering is fpqc, and fpqc descent of sections, applied only to $\\mathcal O_S$, therefore says that $T\\mapsto\\Gamma(T,\\mathcal O_T)$ is an fppf sheaf. Its ring operations commute with restrictions, so it is the ring sheaf $\\mathcal O$ used below. This argument puts no quasi-coherence condition on $M$.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module",
+    "pqf-def-coherent",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-sc-etale-qcoherent-descent-fpqc-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DT (lemma-sheaf-condition-holds) and 03DU (definition-structure-sheaf); structure module is the rank-one affine tilde module"
+   }
+  },
+  {
+   "text": "Let $i:S_{\\mathrm{Zar}}\\to\\mathcal C_S$ send $W$ to $W\\hookrightarrow S$. The terminal object is sent to $S\\xrightarrow{1}S$. A fibre product of open inclusions is their intersection: a map to both opens over a third factors uniquely through the intersection. The open-preimage fibre-product lemma identifies that intersection with the scheme fibre product, so $i$ preserves finite limits. Zariski covers become fppf covers by the cited covering lemma. The finite-limit/cover-preserving site theorem now supplies a geometric adjunction $\\epsilon^{-1}\\dashv R$, with $R(G)(W)=G(W\\hookrightarrow S)$. All sites and Kan indices are small in the chosen larger universe. Since $R\\mathcal O=\\mathcal O_S$ sectionwise as rings, apply the continuous ringed-topos construction to the identity ring map $\\mathcal O_S\\to R\\mathcal O$. It gives $\\epsilon_S$ with the asserted structural map and with module direct image exactly restriction, including its scalar action.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070R (remark-change-topologies-ringed), identity scheme map and inclusion of Zariski opens; sites.tex Tag 00X6 via the cited site theorem"
+   }
+  },
+  {
+   "text": "We fix the canonical pullback comparisons precisely. Write $\\eta^u:M\\to u_*u^*M$ for the scheme-module adjunction unit. Direct images compose sectionwise. Thus $h^*u^*$ and $(uh)^*$ are left adjoint to the same functor $u_*h_*=(uh)_*$. The composite-adjunction formula and uniqueness of left adjoints give the natural isomorphism $c_{h,u}:h^*u^*\\xrightarrow{\\sim}(uh)^*$ characterized by\n$$(uh)_*(c_{h,u,M})\\,u_*(\\eta^h_{u^*M})\\,\\eta^u_M=\\eta^{uh}_M.$$\nThe identity comparison is normalized in the same way. Module direct images along composable scheme maps are equal as functors, $(uhk)_*=u_*h_*k_*$, so the associativity lemma for unit-normalized composition isomorphisms of left adjoints applies to $u,h,k$: $c_{hk,u}\\circ c_{k,h,u^*M}=c_{k,uh}\\circ k^*(c_{h,u})$ as maps $k^*h^*u^*M\\to(uhk)^*M$. For an open $k:A\\hookrightarrow T$, use the unit-compatible comparison $\\kappa_k:N|_A\\simeq k^*N$. These choices identify $(u|_A)^*M$ with $(u^*M)|_A$ compatibly with restriction and units.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0096 (lemma-adjoint-pullback-pushforward-modules), 0097 (lemma-push-pull-composition-modules), and 00A0 (lemma-j-pullback); canonical comparisons normalized by their units"
+   }
+  },
+  {
+   "text": "Define $P_M(u)=\\Gamma(T,u^*M)$ and $\\rho_h(s)=\\Gamma(c_{h,u})(\\eta^h_{u^*M}(s))$ for $h:T'\\to T$. The unit is additive and semilinear, and $c_{h,u}$ is linear, so $\\rho_h(as)=h^\\sharp(a)\\rho_h(s)$. The unit equation in step 3 gives $\\rho_1=1$ and $\\rho_{hk}=\\rho_k\\rho_h$: both are the unit for the full composite followed by the same normalized comparison. Naturality of $\\eta$ and $c$ gives $\\rho_h^N\\Gamma(T,u^*v)=\\Gamma(T',(uh)^*v)\\rho_h^M$ for every $v:M\\to N$. Since pullback is a functor, the resulting $P_v$ preserve identity maps and composition. Thus these formulas define a functor from Zariski modules to presheaves of $\\mathcal O$-modules. On an open $j:W\\hookrightarrow S$, $\\Gamma(\\kappa_j)$ identifies $M(W)$ with $P_M(j)$; the unit compatibility in step 3 makes restrictions between opens the original restrictions of $M$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S (lemma-compare-sites)(1), its section presheaf; direct verification using the scheme-module unit"
+   }
+  },
+  {
+   "text": "For a big-site module sheaf $G$ and $u:T\\to S$, put $G_u(A)=G(A\\hookrightarrow T\\xrightarrow{u}S)$ on Zariski opens $A$ of $T$. This is an $\\mathcal O_T$-module sheaf because every open cover of $A$ is an fppf cover. For $\\beta:M\\to RG$ define a module map $b_u:M\\to u_*G_u$ by\n$$b_{u,W}(m)=G(u^{-1}W\\to W)(\\beta_W(m)).$$\nIts scalar linearity and commutation with open restriction are the module-presheaf axioms for $G$ and $\\beta$. By the scheme-module adjunction there is a unique $a_u:u^*M\\to G_u$ with $u_*a_u\\circ\\eta^u_M=b_u$. Set $\\Theta(\\beta)_u=\\Gamma(T,a_u)$.",
+   "uses": [
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096 (lemma-adjoint-pullback-pushforward-modules); construction of the maps used to verify descent.tex Tag 070S(1)"
+   }
+  },
+  {
+   "text": "Check all arrows, rather than only open arrows. For $h:T'\\to T$ the restrictions of $G$ give $\\gamma_h:G_u\\to h_*G_{uh}$, whose component on $A\\subseteq T$ is $G(h^{-1}A\\to A)$. Let $d_h:h^*G_u\\to G_{uh}$ be its adjoint. Compare the two maps from $h^*u^*M$ to $G_{uh}$:\n$$a_{uh}c_{h,u}\\quad\\hbox{and}\\quad d_hh^*a_u.$$\nUnder the composite adjunction of step 3 their transposes are respectively $b_{uh}$ and $u_*\\gamma_h\\circ b_u$. On $W\\subseteq S$, both send $m$ to $G((uh)^{-1}W\\to W)(\\beta_W(m))$, since restriction in $G$ composes. Injectivity of that Hom bijection proves their equality. Finally $h_*d_h\\circ\\eta^h=\\gamma_h$ says on global sections that $\\Theta(\\beta)_{uh}\\rho_h=G(h)\\Theta(\\beta)_u$. Thus $\\Theta(\\beta)$ is a morphism of module presheaves on the whole big site, with its given scalar actions.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096 and lemma-push-pull-composition-modules: equality of adjuncts using the composite unit; explicit argument for descent.tex Tag 070S(1)"
+   }
+  },
+  {
+   "text": "Conversely, let $\\theta:P_M\\to G$ be a morphism of module presheaves. On opens set $\\beta_W=\\theta_j\\Gamma(\\kappa_j)$ for $j:W\\hookrightarrow S$; step 4 shows that this is a module-sheaf map $M\\to RG$. For fixed $u:T\\to S$, the components $\\theta_{u|_A}$ for all opens $A\\subseteq T$, through the identifications of step 3, form an $\\mathcal O_T$-linear sheaf map $a^\\theta_u:u^*M\\to G_u$. To compute its adjoint on $W\\subseteq S$, evaluate it on $\\eta^u(m)$ over $u^{-1}W$. The unit equation of step 3 identifies this section with pullback of $\\kappa_j(m)$ along $u^{-1}W\\to W$. Naturality of $\\theta$ for precisely that big-site arrow gives\n$$u_*a^\\theta_u(\\eta^u(m))=G(u^{-1}W\\to W)(\\beta_W(m))=b_{u,W}(m).$$\nHence $a^\\theta_u=a_u$ by the scheme-module adjunction, and $\\theta=\\Theta(\\beta)$. For the other composite, take $u=j$ open: $u^{-1}W$ is an intersection and the open-pullback unit is restriction, so the defining equation of $a_j$ gives $\\Theta(\\beta)_j\\Gamma(\\kappa_j)=\\beta_W$. The two assignments are therefore inverse.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096 and Tag 00A0, unit-compatible restriction to open subsets; uniqueness part of the explicit adjunction for descent.tex Tag 070S(1)"
+   }
+  },
+  {
+   "text": "These inverse bijections are natural in both variables. If $v:M'\\to M$ and $k:G\\to G'$ are module maps, the formula for $b_u$ gives $b'_u=(u_*k_u)b_uv$ for the input $R(k)\\beta v$. Naturality of the scheme-module Hom bijection gives $a'_u=k_ua_uu^*v$, and therefore $\\Theta(R(k)\\beta v)=k\\Theta(\\beta)P_v$ on each object. Apply module sheafification: its universal property gives natural bijections\n$$\\operatorname{Hom}_{\\mathcal O}(P_M^\\#,G)\\simeq\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O)}(P_M,G)\\simeq\\operatorname{Hom}_{\\mathcal O_S}(M,RG).$$\nThus $B(M)=P_M^\\#$, with the stated maps, is left adjoint to the actual restriction functor $R$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S(1), universal-property verification; sites-modules.tex Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "The ringed-topos module-adjunction theorem applied to $\\epsilon_S$ of step 2 says that $L_SM=\\mathcal O\\otimes_{\\epsilon_S^{-1}\\mathcal O_S}\\epsilon_S^{-1}M$ is also left adjoint to the same module restriction $R$. Apply the uniqueness theorem with the identity comparison of right adjoints to obtain a unique natural isomorphism $e:L_S\\xrightarrow{\\sim}B$ carrying the tensor-pullback unit to the unit of $B\\dashv R$. Its components are isomorphisms of module sheaves, so they commute with every big-site restriction and scalar action, and its naturality identifies $L_S(v)$ with the sheafification of $P_v$. This proves the asserted canonical comparison, without assuming $P_M$ itself is an fppf sheaf.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S (lemma-compare-sites)(1); module adjunction in sites-modules.tex Tag 03D3, and categories.tex Tag 0B65 via the cited uniqueness theorem"
+   }
+  },
+  {
+   "text": "Write $q_M:P_M\\to P_M^\\#$ for the sheafification map. The unit of $B\\dashv R$ is obtained by sending $1_{B(M)}$ through the two Hom bijections of step 8. The first gives $q_M$; the second restricts it to opens and composes with $\\Gamma(\\kappa_j)$. Hence on $j:W\\hookrightarrow S$ that unit is $q_M(j)\\Gamma(\\kappa_j):M(W)\\to P_M^\\#(j)$. Since $e$ carries units to units, $e_M(j)\\eta_{L,M}(W)$ is this same map. Under $P_M(j)=M(W)$ and $L_SM\\simeq P_M^\\#$, this is exactly the last equation in the statement. The formula also proves its compatibility with restrictions in $W$ and with module maps, because $q_M$ and $\\kappa_j$ are natural.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S(1), normalization of the canonical comparison by its adjunction unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 070S (lemma-compare-sites)(1). Direct universal-property proof supplied by Q86 using scheme-module adjunctions; the printed proof instead factors through the big Zariski site and uses transitivity. Ringed structure follows Tag 070R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafificationCompPullback|pullback.*[Aa]dj|[Bb]ig.*[Mm]odule|[Mm]odule.*[Bb]ig",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullback/sheafification and scheme topology definitions do not construct the big-fppf-to-Zariski morphism or identify its tensor pullback with the section presheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*[Zz]ariski|[Zz]ariski.*fppf|[Bb]ig.*[Ss]mall|[Ss]mall.*[Bb]ig",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullback/sheafification and scheme topology definitions do not construct the big-fppf-to-Zariski morphism or identify its tensor pullback with the section presheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafification of the presheaf of pullback sections on the big fppf site is left adjoint to restriction to open subschemes",
+   "results": "Hits: TopCat.Presheaf.sheafify, CategoryTheory.sheafification, CategoryTheory.presheafToSheaf, CategoryTheory.sheafify, CategoryTheory.plusPlusAdjunction, CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf, CategoryTheory.Subfunctor.sheafify, PresheafOfModules.sheafificationAdjunction. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullback/sheafification and scheme topology definitions do not construct the big-fppf-to-Zariski morphism or identify its tensor pullback with the section presheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "Hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullback/sheafification and scheme topology definitions do not construct the big-fppf-to-Zariski morphism or identify its tensor pullback with the section presheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical morphism from the big fppf ringed site of a scheme to its Zariski ringed site has module pullback equal to sheafification of sections of scheme pullback",
+   "results": "Hits: SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullback/sheafification and scheme topology definitions do not construct the big-fppf-to-Zariski morphism or identify its tensor pullback with the section presheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules on big flat scheme site tensor extension from small Zariski site is associated sheaf of pullback sections",
+   "results": "Hits: ModuleCat.tilde, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.over, PresheafOfModules.Monoidal.tensorObj_obj, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullback/sheafification and scheme topology definitions do not construct the big-fppf-to-Zariski morphism or identify its tensor pullback with the section presheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Big fppf to small Zariski ringed topos module pullback is sheafification of sections of scheme module pullback",
+   "results": "{\"t\": \"2026-10-23T15:01:28Z\", \"tool\": \"leanfinder\", \"query\": \"Big fppf to small Zariski ringed topos module pullback is sheafification of sections of scheme module pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"034a7bec3b3edd80\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected general module pullback/sheafification and scheme pullback hits; none supplies this big-fppf ringed comparison and its section-presheaf/unit formula"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*[Zz]ariski|[Zz]ariski.*fppf|sheafificationCompPullback",
+   "results": "{\"t\": \"2026-10-23T15:01:56Z\", \"tool\": \"grep\", \"query\": \"fppf.*[Zz]ariski|[Zz]ariski.*fppf|sheafificationCompPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"5ce6d4f9c445d85c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected general module pullback/sheafification and scheme pullback hits; none supplies this big-fppf ringed comparison and its section-presheaf/unit formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of pullback section presheaf on big scheme site left adjoint to restriction to Zariski opens",
+   "results": "{\"t\": \"2026-10-23T15:01:57Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of pullback section presheaf on big scheme site left adjoint to restriction to Zariski opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.presheafToSheaf\", \"CategoryTheory.sheafification\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.sheafify\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf\"], \"digest\": \"99940bda64387dfa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected general module pullback/sheafification and scheme pullback hits; none supplies this big-fppf ringed comparison and its section-presheaf/unit formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T15:01:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"], \"digest\": \"83751ccd8310f3d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected general module pullback/sheafification and scheme pullback hits; none supplies this big-fppf ringed comparison and its section-presheaf/unit formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Zariski module extended to all schemes by tensor pullback sections sheafifies to the inverse image module on the flat site",
+   "results": "{\"t\": \"2026-10-23T15:02:00Z\", \"tool\": \"leanfinder\", \"query\": \"A Zariski module extended to all schemes by tensor pullback sections sheafifies to the inverse image module on the flat site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tilde\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"ModuleCat.tildeInModuleCat\", \"ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"digest\": \"6eb721a3fcb05afb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected general module pullback/sheafification and scheme pullback hits; none supplies this big-fppf ringed comparison and its section-presheaf/unit formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The flat affine-presentation dictionary used before taking the norm of a lift of an invariant section. Supporting module theorem: descent on the fppf quotient groupoid, tensor products and cokernels, before descending multiplication and unit. Supporting input: Quasi-coherent scheme modules on the big fppf site. Supporting input to the scheme big-fppf comparison: the ringed big-to-small morphism and the sheafification formula, Stacks 070S(1).",
+   "via": [
+    "lem-sfb-scheme-big-fppf-quasicoherent-equivalence",
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-big-fppf-zariski-ringed-comparison",
+  "worker": "stage1",
+  "summary": "Proved the big-fppf ringed morphism using inclusion of opens and general geometric/ringed site tools. Constructed the section-presheaf/restriction adjunction explicitly with scheme-module units, checked every big-site arrow and both inverse Hom constructions, and normalized the final comparison by its unit. Reused existing nodes only; no quasi-coherence assumption on M and no identification of sheaf-tensor sections with tensor products of sections. Statement unchanged.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration branch already recorded in blueprint.from.place: this item supplies the ringed comparison prerequisite used by the scheme big-fppf quasi-coherent equivalence. The created.item chain terminates at the Lean module Sheaf.SixFunctors.CtfStabilityDirectImages; blueprint_refs ancestor returns None, retained faithfully. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-tilde-free-module",
+    "why": "Generic On Spec R the free module of rank n is the sheaf associated to R^n (Stacks 01HV(1)-(2), 01I7) used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-structure-sheaf",
+    "why": "Generic The pullback of the structure sheaf is the structure sheaf used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic Fppf covering families are fpqc covering families used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "why": "Generic FPQC descent of sections of a quasi-coherent pullback used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Generic The preimage of an open subscheme is the fibre product used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "Generic Zariski coverings are fppf coverings used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic Inverse image induced by a continuous left-exact site functor and its tensor structure used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+    "why": "Generic Continuous ringed-topos module direct image used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic The tensor-formula pullback of modules is left adjoint to pushforward used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic An isomorphism of right adjoints determines a unique isomorphism of left adjoints compatible with the units used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "Generic Pullback of modules along an open immersion is restriction used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi used only for its displayed statement in the ringed-site/adjunction argument; the constructible-six-functor unit has no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-8876c2d11",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-8876c2d11 (reviewer sub-agent of L); spot-checked: Item matches Stacks 070R and 070S(1) with tau = fppf (descent.tex read): arbitrary M, sheafification of T ↦ Γ(T,u^*M), plus the unit formula on opens; statement and stmt_deps unchanged, no new nodes, no SGA. The proof is a direct adjunction proof (B ⊣ R and L_S ⊣ R, then unit-normalized uniqueness) in place of Stacks' detour through the big Zariski site; this is valid and recorded as by=agent. Steps 1-10 checked against every cited statement, including the two composite-adjunction transposes in step 6 (both reduce to G((uh)^{-1}W→W)β_W), the inverse construction in step 7, and the ringed structure in step 2 (i: W ↦ W→S preserves finite limits via the open-preimage fibre product; continuous ringed-topos node with the identity O_S → R O). Edge cases checked: empty S, M = 0, open j, non-flat h. No duplicate: lem-trf-zariski-etale-tensor-sections is the small-étale analogue 070S(2). Batch-5 flag: lem-trf-fppf-covering-is-fpqc is a generic Mathlib leaf (sk-i-curve-zero), not a step of the trace formula or Poincaré duality, so accepted. The 12 split_report.tool_uses are generic site/module/adjunction tools, accepted. FIX (C1/C5): step 3 asserted the cocycle c_{hk,u}∘c_{k,h,u^*M} = c_{k,uh}∘k^*c_{h,u} for the unit-normalized pullback compositors without a node, although the existing Mathlib leaf lem-sc-left-adjoint-composition-iso-associativity proves exactly this (hypothesis (uhk)_* = u_*h_*k_* holds sectionwise). I cited it in step 3 and proof_deps and wrote out the equation; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BigFppfZariskiRingedComparison",
+  "declaration": "AlgebraicGeometry.Scheme.bigFppfZariskiRingedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/BigFppfZariskiRingedComparison.lean",
+  "statement": "theorem bigFppfZariskiRingedComparison (S : Scheme.{u}) : ∃ (_ : (fppfTopology.over S).HasSheafCompose (CategoryTheory.forget RingCat.{u})) (_ : (fppfTopology.over S).HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u})) (_ : HasWeakSheafify (fppfTopology.over S) AddCommGrpCat.{u}) (_ : (fppfTopology.over S).WEqualsLocallyBijective AddCommGrpCat.{u}) (_ : S.restrictFunctor.IsContinuous (Opens.grothendieckTopology S) (fppfTopology.over S)), ∃ (O : Sheaf (fppfTopology.over S) RingCat.{u}) (o : O.obj ≅ (Over.forget S).op ⋙ Scheme.Γ ⋙ forget₂ CommRingCat RingCat) (φ : S.ringCatSheaf ⟶ (S.restrictFunctor.sheafPushforwardContinuous RingCat.{u} (Opens.grothendieckTopology S) (fppfTopology.over S)).obj O), (∀ (W : S.Opens) (a : Γ(S, W)), o.hom.app (op (S.restrictFunctor.obj W)) (φ.hom.app (op W) a) = W.topIso.inv a) ∧ ∃ (p : RingedToposMorphismOnSites O S.ringCatSheaf) (d : p.direct ≅ S.restrictFunctor.sheafPushforwardContinuous (Type u) (Opens.grothendieckTopology S) (fppfTopology.over S)), p.modules = SheafOfModules.pushforward φ ∧ (p.adj.homEquiv _ _ p.ringMap) ≫ d.hom.app ((sheafCompose (fppfTopology.over S) (CategoryTheory.forget RingCat.{u})).obj O) = (sheafCompose (Opens.grothendieckTopology S) (CategoryTheory.forget RingCat.{u})).map φ ∧ ∃ (_ : (SheafOfModules.pushforward.{u} φ).IsRightAdjoint) (P : S.Modules ⥤ _root_.PresheafOfModules.{u} O.obj) (s : ∀ (M : S.Modules) (U : Over S), (P.obj M).obj (op U) ≃+ Γ((Modules.tensorPullback U.hom).obj M, ⊤)), (∀ (M : S.Modules) (U : Over S) (a : O.obj.obj (op U)) (x : (P.obj M).obj (op U)), s M U (a • x) = @id Γ(U.left, ⊤) (o.hom.app (op U) a) • s M U x) ∧ (∀ (M : S.Modules) (U U' : Over S) (h : U' ⟶ U) (x : (P.obj M).obj (op U)), s M U' ((P.obj M).map h.op x) = (eqToHom (congrArg (fun f ↦ (Modules.tensorPullback f).obj M) h.w)).app ⊤ (((Modules.tensorPullbackSectionComp h.left U.hom).inv.app M).app ⊤ (((Modules.tensorPullback h.left).obj ((Modules.tensorPullback U.hom).obj M)).presheaf.map (homOfLE h.left.preimage_top.ge).op (((Modules.tensorPullbackSectionAdjunction h.left).unit.app ((Modules.tensorPullback U.hom).obj M)).app ⊤ (s M U x))))) ∧ (∀ (M N : S.Modules) (v : M ⟶ N) (U : Over S) (x : (P.obj M).obj (op U)), s N U ((P.map v).app (op U) x) = ((Modules.tensorPullback U.hom).map v).app ⊤ (s M U x)) ∧ ∃ e : SheafOfModules.pullback.{u} φ ≅ P ⋙ PresheafOfModules.sheafification (𝟙 O.obj), ∀ (M : S.Modules) (W : S.Opens) (x : Γ(M, W)), (e.hom.app M).val.app (op (S.restrictFunctor.obj W)) (((SheafOfModules.pullbackPushforwardAdjunction φ).unit.app M).val.app (op W) x) = (CategoryTheory.toSheafify (fppfTopology.over S) (P.obj M).presheaf).app (op (S.restrictFunctor.obj W)) ((s M (S.restrictFunctor.obj W)).symm (((Modules.tensorPullback W.ι).obj M).presheaf.map (homOfLE W.ι_preimage_self.ge).op (((Modules.tensorPullbackSectionAdjunction W.ι).unit.app M).app W x)))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc627b57d",
+  "group": "N0",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 1016faa1c72f implements the preferred superset repair: the live RingedToposMorphism.lean is an exact byte prefix of the delivered module (cmp against live and side-live), and the appended RingedToposMorphismOnSites structure is identical to the returned one. The def-weil-pbc-ringed-topos-morphism record keeps the live module/file/declaration/statement and adds declarations [RingedToposMorphism, RingedToposMorphismOnSites] plus a §1(B) note. There is no name clash, only the two lean fields change, and there are no new nodes. Item rechecked against 070R/070S(1): arbitrary S and M with native universes; O, φ, p/d, P/s pinned by formulas; restriction clause via the unit-normalized tensorPullbackSectionComp.inv and h.w; the unit equation pins e. Edge cases covered; statement verbatim; imports exist; docstrings and sorry-only proof OK. No compile needed."
+ }
+}

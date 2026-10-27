@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-diagonalizable-group-geometric-criteria",
+ "kind": "statement",
+ "title": "Product decomposition and geometric criteria for a diagonalizable group algebra",
+ "statement": "Let $k$ be a field [def-weil-field] and let $M$ be a finitely generated additive abelian group. Define $k[M]$ to have basis $e_m$ for $m\\in M$, multiplication $e_me_n=e_{m+n}$, and Hopf operations $\\Delta(e_m)=e_m\\otimes e_m$, $\\epsilon(e_m)=1$, $S(e_m)=e_{-m}$. Let $D_k(M)=\\operatorname{Spec}k[M]$ be the associated affine group scheme [def-sc-group-scheme, def-weil-affine-spectrum]. It is of finite type [def-weil-finite-type-morphism]. If $M\\simeq\\mathbf Z^r\\oplus\\bigoplus_{i=1}^s\\mathbf Z/n_i\\mathbf Z$ with $r,s\\geq0$ and $n_i\\geq1$, there is an induced group-scheme isomorphism\n$$D_k(M)\\simeq\\mathbf G_m^r\\times_k\\prod_{i=1}^s\\mu_{n_i},$$\nwhere $\\mathbf G_m$ and $\\mu_n=\\operatorname{Spec}k[t]/(t^n-1)$ have the meanings of [def-sc-gm-ga]. In particular $D_k(\\mathbf Z^r)\\simeq\\mathbf G_m^r$.\n\nIf $\\operatorname{char}k=p>0$, then $D_k(M)$ is smooth [def-sbc-smooth-morphisms] if and only if $M$ has no nonzero element annihilated by a power of $p$; it is geometrically connected if and only if every finite-order element of $M$ is annihilated by a power of $p$. If $\\operatorname{char}k=0$, then $D_k(M)$ is smooth, and it is geometrically connected if and only if $M$ is torsion-free. Here geometrically connected means that every base change along a field extension [def-pc-field-extension] is connected [def-weil-connected-scheme], torsion-free means that $nm=0$ with an integer $n>0$ implies $m=0$, and the zero group and empty products are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Examples 12.1--12.2, Proposition 12.3, Lemma 12.4 and Remark 12.5, printed pp.231--232; Theorem 12.9(a), pp.233--234."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-field-extension",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many group generators $m_1,\\ldots,m_d$ of $M$. The $2d$ elements $e_{m_j},e_{-m_j}$ generate $k[M]$ as an algebra: write any $m$ as an integer linear combination, separate its positive and negative coefficients, and multiply the corresponding basis elements. Thus its affine spectrum is of finite type by [def-weil-finite-type-morphism]. The Hopf identities hold on each $e_m$: both iterated coproducts are $e_m\\otimes e_m\\otimes e_m$, either counit gives $e_m$, and multiplication after the antipode gives $e_0=1$. By linearity these are the group-scheme identities [def-sc-group-scheme].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 12(b), printed p.231, the group-algebra construction (using generators and their negatives)."
+   }
+  },
+  {
+   "text": "For additive abelian groups $N,P$, the maps $e_{(n,p)}\\mapsto e_n\\otimes e_p$ and $e_n\\otimes e_p\\mapsto e_{(n,p)}$ extend to inverse algebra maps: the latter is induced by $e_n\\mapsto e_{(n,0)}$, $e_p\\mapsto e_{(0,p)}$ using [lem-weil-pbc-algebra-tensor-pushout-universal-property], and the former is multiplicative on the displayed basis. Both composites fix every generator; the maps preserve coproduct, counit and antipode on these generators. Also $k[\\mathbf Z]\\cong k[t,t^{-1}]$ by $e_j\\mapsto t^j$. For $n\\geq1$, $k[\\mathbf Z/n]\\cong k[t]/(t^n-1)$ by $e_{\\bar j}\\mapsto t^j$; the inverse sends $t$ to $e_{\\bar1}$, and $t$ is invertible with inverse $t^{n-1}$. Applying these maps to the given decomposition, [lem-weil-pbc-fibre-product-affine-spectra] and [def-sc-gm-ga] give the claimed group-scheme product isomorphism. Empty tensor products are $k$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 12.1--12.2 and Proposition 12.3, printed pp.231--232."
+   }
+  },
+  {
+   "text": "For the criteria, choose a decomposition into a finite free group and finite cyclic groups using [lem-sbc-finitely-generated-abelian-group-structure] (a direct sum over a finite set is its finite product). Step 2 gives the coordinate presentation $A=k[x_1^{\\pm1},\\ldots,x_r^{\\pm1},t_1,\\ldots,t_s]/(t_i^{n_i}-1)_i$. Successive applications of [lem-weil-pbc-monic-quotient-free], over the preceding coefficient ring, give its Laurent-monomial and bounded-power basis: $x^v\\prod_i t_i^{a_i}$, $v\\in\\mathbf Z^r$, $0\\leq a_i<n_i$. In particular all these algebras are nonzero. For every field extension $K/k$, [lem-weil-pbc-fibre-product-affine-spectra] and the tensor universal property identify $K\\otimes_k k[M]$ with $K[M]$, by $c\\otimes e_m\\mapsto ce_m$; the inverse sends $ce_m$ to $c\\otimes e_m$. Thus this same presentation and basis hold after every field extension.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3 and Remark 12.5, printed p.232; scalar extension is the explicit basis calculation."
+   }
+  },
+  {
+   "text": "Suppose every $n_i$ is invertible in $k$ (automatic in characteristic zero). The presentation is finite, writing $x_j^{-1}$ as $y_j$ with relations $x_jy_j-1$. To verify formal smoothness [def-sbc-formally-smooth], take a first order thickening of affine schemes over $k$ [def-sbc-first-order-thickening]: $T'=\\operatorname{Spec}B$ and $T=\\operatorname{Spec}(B/J)$ with $J^2=0$, $B$ a commutative $k$-algebra. By [def-weil-affine-spectrum] a $k$-morphism $T\\to\\operatorname{Spec}A$ is a $k$-algebra map $A\\to B/J$, and an extension to $T'$ is a $k$-algebra map $A\\to B$ lifting it. Each invertible $\\bar x_j$ lifts to a unit $x_j$: lift its inverse too, and correct their product $1+z$, $z\\in J$, by multiplying by $1-z$. Lift each $\\bar t_i$ to $u_i$; then $u_i$ is a unit since $\\bar t_i^{n_i}=1$. Set $a_i=u_i^{n_i}-1\\in J$ and $v_i=u_i-a_i/(n_i u_i^{n_i-1})$. The square-zero binomial expansion gives $v_i^{n_i}=u_i^{n_i}-a_i=1$. Sending $t_i$ to $v_i$ gives the required lift. Finite presentation [def-sbc-locally-finite-presentation] and [def-sbc-smooth-morphisms] now give smoothness, including when there are no variables or equations.",
+   "uses": [
+    "def-sbc-formally-smooth",
+    "def-sbc-locally-finite-presentation",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-first-order-thickening",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 12.5, printed p.232; explicit infinitesimal verification using Stacks Tag 02H0 (definition-formally-smooth)."
+   }
+  },
+  {
+   "text": "In characteristic $p>0$, if some $p\\mid n_i$, the element $z=t_i^{n_i/p}-1$ of $A$ is nonzero by the bounded-power basis of step 3, while $z^p=t_i^{n_i}-1=0$. A smooth scheme over a field is geometrically reduced by [sbc-lem-smooth-geometrically-reduced], hence reduced over $k$ itself; the displayed nonzero nilpotent rules out smoothness. In a finite cyclic group $\\mathbf Z/n_i$, nonzero elements annihilated by a power of $p$ exist exactly when $p\\mid n_i$: if $p\\mid n_i$, the class $n_i/p$ has order $p$; if $p\\nmid n_i$, multiplication by $p$ and every power of $p$ is invertible. The free factors have no such elements. Together with step 4 this proves the positive-characteristic smoothness equivalence and the unconditional characteristic-zero smoothness assertion.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 12.5, printed p.232; Stacks Tag 056T (varieties, lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "In characteristic $p>0$, suppose all finite cyclic orders $n_i$ are powers of $p$, allowing $n_i=1$. For every extension $K/k$ the coordinate ring in step 3 has relations $t_i^{n_i}-1=(t_i-1)^{n_i}$. The ideal $J=(t_i-1)_i$ is nilpotent: a product of $1+\\sum_i(n_i-1)$ generators contains a factor $(t_i-1)^{n_i}$. Its quotient is $L=K[x_1^{\\pm1},\\ldots,x_r^{\\pm1}]$, a domain: the polynomial ring $K[x_1,\\ldots,x_r]$ is a domain by [lem-weil-pbc-polynomial-ring-domain] and maps injectively to $L$ (Laurent-monomial basis); if $ab=0$ in $L$, multiply by a monomial to write $a=x^{-v}a'$, $b=x^{-v}b'$ with $a',b'$ polynomials, so $a'b'=0$ and $a=0$ or $b=0$. The quotient map $A_K\\to L$ is surjective with nilpotent kernel, so [lem-pur-all-element-powers-spectrum-homeomorphism] applies (each element of $L$ is already in its image). Its spectrum is irreducible by [lem-zl-spectrum-irreducible-nilradical-prime], since the nilradical of a domain is the prime ideal $(0)$. Irreducibility implies connectedness: a decomposition into two nonempty clopens would be a decomposition into two proper closed subsets [def-weil-irreducible-components, def-weil-connected-scheme]. Hence $D_k(M)$ is connected after every field extension. In characteristic zero the same proof applies with no finite cyclic factors, giving geometric connectedness for torsion-free $M$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-pur-all-element-powers-spectrum-homeomorphism",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "def-weil-irreducible-components",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 12.5, printed p.232; Stacks Tags 0BR8 (algebra, lemma-powers) and 00ES (algebra, lemma-irreducible)."
+   }
+  },
+  {
+   "text": "Conversely take an algebraic closure $K$ of $k$ [def-weil-algebraic-closure]. In characteristic $p>0$, write $n_i=p^{a_i}d_i$ with $p\\nmid d_i$; in characteristic zero put $d_i=n_i$ and $p^{a_i}=1$ in the following calculation. The polynomial $T^{d_i}-1$ has $d_i$ distinct roots in $K$: repeated division by a linear root splits it, and its derivative $d_iT^{d_i-1}$ is nonzero at every root. In positive characteristic $T^{n_i}-1=\\prod_{\\zeta^{d_i}=1}(T-\\zeta)^{p^{a_i}}$; in characteristic zero the same formula has exponent one. For distinct roots $(T-\\zeta)-(T-\\zeta')=\\zeta'-\\zeta$ is a unit, so the ideals $I_\\zeta=((T-\\zeta)^{p^{a_i}})$ are pairwise coprime (raise $1=a+b$ to the power $2p^{a_i}-1$). Hence $\\bigcap_\\zeta I_\\zeta=\\prod_\\zeta I_\\zeta=(T^{n_i}-1)$: for coprime $I,J$, $I\\cap J=(I\\cap J)(I+J)\\subseteq IJ$, and $I$ is coprime to a product of ideals each coprime to it (multiply the relations $1=a_j+b_j$); induct on the number of roots. Applying [lem-pc-crt-ideal-quotient-product] over the algebra in all other variables gives a product decomposition of $A_K$ with $d_i$ factors. Each factor is nonzero: set all $x_j=1$, all other $t_j=1$, and this $t_i=\\zeta$ to map it to $K$. If $d_i>1$ this product has a nontrivial idempotent $e=(1,0,\\ldots,0)$; $D(e)$ and $D(1-e)$ are nonempty disjoint clopens covering its spectrum, so the base change is disconnected [def-weil-connected-scheme]. Finally the torsion of the free-plus-cyclic decomposition consists exactly of the finite cyclic factors. Every torsion element is killed by a power of $p$ exactly when all $d_i=1$, and in characteristic zero the group is torsion-free exactly when all $n_i=1$. This proves both connectedness equivalences. For $M=0$ all products are empty and the scheme is $\\operatorname{Spec}k$, smooth and geometrically connected.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-pc-crt-ideal-quotient-product",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 12.5, printed p.232; Stacks Chinese remainder theorem (algebra, lemma-chinese-remainder, Tag 00DT); explicit clopen decomposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-gm-ga",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-sbc-formally-smooth",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-sbc-first-order-thickening",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "lem-pc-crt-ideal-quotient-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Examples 12.1--12.2 and Proposition 12.3, printed pp.231--232; details of Remark 12.5 supplied explicitly, using the cited Stacks lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated abelian group M the diagonalizable group scheme Spec k[M] is smooth exactly when M has no characteristic torsion and geometrically connected exactly when its prime to characteristic torsion is zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (R : Type u) [inst : CommRing R], Algebra.IsStandardSmoothOfRelativeDimension 0 R R\", \"doc\": \"The identity algebra $ R $ over itself is a standard smooth algebra of relative dimension 0.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagonalizable algebraic group is a product of multiplicative groups and schemes of roots of unity using the structure theorem for finitely generated abelian groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] (i : n)\\n  (A : ↥(Subgroup.center (Matrix.SpecialLinearGroup n R))),\\n  (Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity' i) A = rootsOfUnity.mkOfPowEq (↑↑A i i) ⋯\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and a commutative ring $R$, each element $A$ in the center of the special linear group $\\\\text{SL}(n, R)$ corresponds to a $\\\\#n$-th root of unity $\\\\zeta$ su\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          n → ↥(Subgroup.center (Matrix.SpecialLinearGroup n R)) ≃* ↥(rootsOfUnity (Fintype.card n) R)\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\#n$-th\"}\n  {\"name\": \"Rep.diagonal\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → ℕ → Rep k G\", \"doc\": \"For a commutative ring $ k $, a monoid $ G $, and a natural number $ n $, this constructs the diagonal representation in the category $ \\\\text{Rep}(k, G) $. It is defined by the component-wise action o\"}\n  {\"name\": \"CommGroup.monoidHom_mulEquiv_of_hasEnoughRootsOfUnity\", \"module\": \"Mathlib/GroupTheory/FiniteAbelian/Duality\", \"type\": \"∀ (G : Type u_1) (M : Type u_2) [inst : CommGroup G] [Finite G] [inst_2 : CommMonoid M]\\n  [HasEnoughRootsOfUnity M (Monoid.exponent G)], Nonempty ((G →* Mˣ) ≃* G)\", \"doc\": \"If the commutative monoid $ M $ has enough roots of unity, then the group of monoid homomorphisms from a commutative group $ G $ to the group of units $ M^\\times $ is multiplicatively equivalent to $ G\"}\n  {\"name\": \"Rep.diagonalHomEquiv_apply\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} {A : Rep k G} (f : Rep.diagonal k G (n + 1) ⟶ A)\\n  (x : Fin n → G),\\n  (Rep.diagonalHomEquiv n A) f x = (CategoryTheory.ConcreteCategory.hom f.hom) (Finsupp.single (Fin.partialProd x) 1)\", \"doc\": \"For a commutative ring $ k $, group $ G $, natural number $ n $, and representation $ A $ of $ G $ over $ k $, there is a $ k $-linear equivalence between the set of $ G $-equivariant $ k $-linear map\"}\n  {\"name\": \"Rep.diagonalSuccIsoFree\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] → [inst_1 : Group G] → (n : ℕ) → Rep.diagonal k G (n + 1) ≅ Rep.free k G (Fin n → G)\", \"doc\": \"For a commutative ring $ k $, group $ G $, and natural number $ n $, there exists a canonical isomorphism in the category $ \\\\text{Rep}(k,G) $ between the diagonal representation $ \\\\text{Rep.diagonal}(\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|group.algebra|MonoidAlgebra",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonalizable group of a free abelian group is a split torus and its smoothness and connectedness are determined by torsion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FreeAddGroup.instIsAddTorsionFree\", \"module\": \"Mathlib.GroupTheory.FreeGroup.CyclicallyReduced\", \"type\": \"∀ {α : Type u}, IsAddTorsionFree (FreeAddGroup α)\", \"doc\": \"For any type $\\\\alpha$, the free abelian group generated by $\\\\alpha$ is torsion-free. That is, if $n$ is a positive integer and $m$ is an element of the free abelian group such that $n \\\\cdot m = 0$, th\"}\n  {\"name\": \"FreeAbelianGroup\", \"module\": \"Mathlib.GroupTheory.FreeAbelianGroup\", \"type\": \": Type u\", \"doc\": \"The free abelian group on a set $\\\\alpha$ is constructed as the abelianization of the free group on $\\\\alpha$, denoted $\\\\text{Ab}(F(\\\\alpha))$, where $F(\\\\alpha)$ is the free group generated by $\\\\alpha$ a\"}\n  {\"name\": \"CommGroup.torsion\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \": Subgroup G\", \"doc\": \"The torsion subgroup of a commutative group $G$ consists of all elements of finite order. For any element $x$ in this subgroup, there exists a positive integer $n$ such that $x^n = 1$, and the inverse\"}\n  {\"name\": \"AddCommGroup.torsion\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \"(G : Type u_1) → [inst : AddCommGroup G] → AddSubgroup G\", \"doc\": \"The additive subgroup of an additive commutative group $ G $ consisting of all elements with finite additive order, i.e., elements $ g $ for which there exists a positive integer $ n $ such that $ n \\\\\"}\n  {\"name\": \"FreeGroup.instIsMulTorsionFree\", \"module\": \"Mathlib.GroupTheory.FreeGroup.CyclicallyReduced\", \"type\": \": IsMulTorsionFree (FreeGroup α)\", \"doc\": \"For any set $\\\\alpha$, the free group on $\\\\alpha$ is multiplicatively torsion-free. This means that for any element $a$ in the free group and any positive integer $n$, if $a^n = 1$ then $a = 1$.\"}\n  {\"name\": \"UnitAddTorus\", \"module\": \"Mathlib.Analysis.Fourier.AddCircleMulti\", \"type\": \"(d : Type*)\", \"doc\": \"The additive torus of dimension $d$, defined as the product of $d$ copies of the additive circle $\\\\mathbb{R}/\\\\mathbb{Z}$.\"}\n  {\"name\": \"AddCommGroup.finite_of_fg_torsion\", \"module\": \"Mathlib.GroupTheory.FiniteAbelian.Basic\", \"type\": \"[hG' : AddGroup.FG G] (hG : AddMonoid.IsTorsion G) : Finite G\", \"doc\": \"If $ G $ is a finitely generated torsion abelian group, then $ G $ is finite.\"}\n  {\"name\": \"IsAddTorsionFree.of_not_isOfFinAddOrder\", \"module\": \"Mathlib.GroupTheory.OrderOfElement\", \"type\": \"∀ {G : Type u_1} [inst : AddCommGroup G], (∀ ⦃a : G⦄, a ≠ 0 → ¬IsOfFinAddOrder a) → IsAddTorsionFree G\", \"doc\": \"If every non-zero element of an additive commutative group $ G $ does not have finite additive order, then $ G $ is torsion-free.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern analytic tori, abstract Galois categories, ordinary character modules, linear operators or general smooth algebras, not the stated affine group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine scheme of the group algebra of a finitely generated abelian group is a product of a split torus and roots of unity schemes with smoothness and geometric connectedness determined by torsion",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.pointsPi_surjective_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire group-scheme statement; general smoothness, finite-type group-algebra, representation or linear-algebra results do not include all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonalizable affine group scheme Spec k[M] is smooth if M has no characteristic torsion and connected if all torsion is primary for the characteristic",
+   "results": "8 hits; AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmooth_iff, Algebra.smoothLocus_eq_univ, Algebra.smoothLocus, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.AffineScheme, Algebra.smoothLocus_eq_univ_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire group-scheme statement; general smoothness, finite-type group-algebra, representation or linear-algebra results do not include all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Smooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire group-scheme statement; general smoothness, finite-type group-algebra, representation or linear-algebra results do not include all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|MonoidAlgebra",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire group-scheme statement; general smoothness, finite-type group-algebra, representation or linear-algebra results do not include all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative group algebra over a field is geometrically connected and smooth according to the primary torsion of the finitely generated character group",
+   "results": "8 hits; MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra, FDRep.simple_iff_char_is_norm_one, Algebra.FormallySmooth.of_perfectField, Algebra.IsGeometricallyReduced, Algebra.Smooth, Field.absoluteGaloisGroupAbelianization, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, AddMonoidAlgebra.finiteType_iff_group_fg",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire group-scheme statement; general smoothness, finite-type group-algebra, representation or linear-algebra results do not include all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Diagonalizable|diagonalisable|group algebra",
+   "results": "14 hits; Mathlib/Topology/Algebra/InfiniteSum/DiscreteConvolution.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/Algebra/Group/UniqueProds/Basic.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire group-scheme statement; general smoothness, finite-type group-algebra, representation or linear-algebra results do not include all its clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-type-largest-subtorus",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Remark 12.5 and Definition 12.14: geometry of the split group algebra used to identify the torsion-free character quotient as a torus.",
+   "via": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-diagonalizable-group-geometric-criteria",
+  "worker": "stage1",
+  "summary": "Q78: preserve the statement, give explicit Hopf-algebra product maps and scalar extension, square-zero smoothness lifts, the nonzero nilpotent obstruction, and all-extension connectedness and algebraic-closure disconnectedness calculations; reuse existing DAG tools, create no new nodes.",
+  "blueprint": "Supports the existing ancestry place: the diagonalizable-character input to the largest subtorus, ultimately the alteration input for det-thm-sf-ctf-stability-direct-images (3). Current latest blueprint direct-image paragraph was read; this is a supporting algebra lemma below the unit, not a replacement of its route. No blueprint node states it.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "General fact that a smooth morphism has geometrically reduced fibres, used only to exclude the explicitly exhibited nilpotent. This is a scheme-theoretic tool; the constructibility unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-68e1096df",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-68e1096df (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full; the delivery has no new nodes. The statement and stmt_deps are unchanged from base (live and side-live: unsplit, no proof). There is no re-split note, so this is a first split. Source: Milne iAG2017, printed pp.231-234 (Examples 12.1-12.2, Prop 12.3, Remark 12.5): the item agrees, with geometric connectedness over every field extension, and step 1 correctly adds inverse generators. Checked Stacks tags 02H0, 056T, 0BR8, 00ES and 00DT against tags/tags and read 0BR8 and 00DT in algebra.tex. No SGA. Read all 21 cited statements; each step uses only what they say. Steps: finite type and Hopf identities on the basis; k[N+P] = k[N] tensor k[P] via tensor (2)/(3) and the fibre-product lemma, with k[Z] = Laurent ring and k[Z/n] = k[t]/(t^n-1); prime-power structure, iterated monic-quotient basis and base change K tensor k[M] = K[M]; square-zero lifting with Newton correction (needs n_i invertible); nonzero nilpotent t^{n/p}-1 against smooth => geometrically reduced; nilpotent (t_i-1) ideal, then 0BR8 homeomorphism, then Laurent domain => irreducible => connected for every K; distinct roots, CRT, nonzero factors, idempotent => disconnected over the algebraic closure. Tested M=0, Z^r, mu_p, mu_{p^2}, prime-to-p mu_n, mu_{pd}, characteristic-0 torsion and imperfect k: all agree with Remark 12.5. Duplicate search (rg -L): the only nearby node is lem-sfb-group-algebra-group-like-basis (Lemma 12.4), a different fact; no node states the item or a clause. Tool use sbc-lem-smooth-geometrically-reduced (unit sk-def-smooth) accepted as a generic black box. Three small repairs in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-diagonalizable-group-geometric-criteria.json: (1) step 4: added def-sbc-first-order-thickening and def-weil-affine-spectrum to uses and proof_deps, and a sentence turning an affine first-order thickening and a morphism into the ring-map lifting problem; (2) step 6: replaced the vague 'embeds in its fraction field' with the explicit monomial-clearing domain argument for K[x^{±1}]; (3) step 7: the CRT node needs the quotient by the intersection of the ideals, so added the coprimality of (T-zeta)^q for distinct roots and the intersection = product argument (00DT(1), not in the node). Statement, stmt_deps and blueprint unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableGroupGeometricCriteria",
+  "declaration": "AlgebraicGeometry.diagonalizableGroup_geometric_criteria",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableGroupGeometricCriteria.lean",
+  "statement": "theorem diagonalizableGroup_geometric_criteria (k M : Type u) [Field k] [AddCommGroup M] [AddGroup.FG M] : (LocallyOfFiniteType (diagonalizableGroup k M).X.hom ∧ QuasiCompact (diagonalizableGroup k M).X.hom) ∧ (∀ (r s : ℕ) (n : Fin s → ℕ) [∀ i, NeZero (n i)], ∀ e : M ≃+ ((Fin r → ULift.{u} ℤ) × (∀ i : Fin s, ULift.{u} (ZMod (n i)))), ∃ a : diagonalizableGroup k ((Fin r → ULift.{u} ℤ) × (∀ i : Fin s, ULift.{u} (ZMod (n i)))) ≅ ((∏ᶜ fun _ : Fin r ↦ Grp.mk (StandardGroupSchemes.multiplicative k)) ⨯ (∏ᶜ fun i : Fin s ↦ Grp.mk (StandardGroupSchemes.roots k (n i)))), ∃ b : diagonalizableGroup k M ≅ ((∏ᶜ fun _ : Fin r ↦ Grp.mk (StandardGroupSchemes.multiplicative k)) ⨯ (∏ᶜ fun i : Fin s ↦ Grp.mk (StandardGroupSchemes.roots k (n i)))), b.hom = diagonalizableGroupMap k e.symm.toAddMonoidHom ≫ a.hom) ∧ (∀ r : ℕ, Nonempty (diagonalizableGroup k (Fin r → ULift.{u} ℤ) ≅ ∏ᶜ fun _ : Fin r ↦ Grp.mk (StandardGroupSchemes.multiplicative k))) ∧ (∀ (p : ℕ) [CharP k p], 0 < p → (Smooth (diagonalizableGroup k M).X.hom ↔ ∀ (m : M) (a : ℕ), (p ^ a) • m = 0 → m = 0) ∧ (GeometricallyConnected (diagonalizableGroup k M).X.hom ↔ ∀ m : M, (∃ n : ℕ, 0 < n ∧ n • m = 0) → ∃ a : ℕ, (p ^ a) • m = 0)) ∧ (∀ [CharZero k], Smooth (diagonalizableGroup k M).X.hom ∧ (GeometricallyConnected (diagonalizableGroup k M).X.hom ↔ ∀ (m : M) (n : ℕ), 0 < n → n • m = 0 → m = 0))",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-diagonalizable-group construction; its id is added to stmt_deps. All products and isomorphisms are in Grp (Over (Spec k)); the displayed equality identifies the induced isomorphism for the supplied character decomposition. ULift of integers and cyclic groups avoids restricting the common universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af04ffb21",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Item node differs from side-live only by the lean record and the added stmt_dep def-sfb-diagonalizable-group (landed, record unchanged, used in the statement). Read diagonalizableGroup/diagonalizableGroupMap (hopfSpec of AddMonoidAlgebra, mapDomainBialgHom), StandardGroupSchemes multiplicative/roots with GrpObj instances, Mathlib GeometricallyConnected/Smooth/LocallyOfFiniteType/QuasiCompact. All clauses match the node and Milne 12.1-12.5: finite type, decomposition via e : M ≃+ (Fin r → ULift ℤ) × Π ULift (ZMod n_i) with correct variance D(e.symm), free case incl. r=0, char-p smooth iff no p-power torsion, char-p geometrically connected iff torsion is p-primary, char-0 smooth and torsion-free iff geometrically connected. Edge cases M=0, empty products, n_i=1, a=0 covered; no extra hypotheses; common universe comes from the landed def. Only sorry, docstrings carry source and blueprint id, statement verbatim, imports exist, no duplicate in lean/Sheaf. Non-blocking: the iso a is existential, not coordinate-pinned, so the 'induced' equation only states existence; accepted because the node says 'there is an isomorphism' and every current citer that uses the clause needs only existence. No file changed, so no compile."
+ }
+}

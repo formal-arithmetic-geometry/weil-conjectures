@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-bounded-group-local-neron-criterion",
+ "kind": "statement",
+ "title": "Bounded unramified points give a finite-type local Néron model",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $E=\\operatorname{Frac}(R)$, and $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Choose a geometric point $\\bar t$ over the closed point of $T$ [def-weil-geometric-point]. Let $R^{\\mathrm{sh}}=\\mathcal O^{\\mathrm{sh}}_{T,\\bar t}$ be its strict henselization [def-weil-pbc-strict-henselization-limit], and write $E^{\\mathrm{sh}}=\\operatorname{Frac}(R^{\\mathrm{sh}})$. Let $G$ be a smooth separated group scheme of finite type over $E$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Suppose $G(E^{\\mathrm{sh}})$ is bounded in the following sense. There are finitely many affine opens $U_i=\\operatorname{Spec}B_i$ covering $G$, finite $E$-algebra generating lists $(b_{ij})_j$ for each $B_i$, subsets $C_i\\subseteq U_i(E^{\\mathrm{sh}})$ whose union is $G(E^{\\mathrm{sh}})$, and integers $c_i$, such that $v(b_{ij}(x))\\geq c_i$ for every $x\\in C_i$ and every $j$. Here $v$ is the discrete valuation of the DVR $R^{\\mathrm{sh}}$, with $v(0)=+\\infty$. Then there are a smooth separated finite-type $T$-scheme $M$ and an isomorphism $M_E\\simeq G$ satisfying the mapping property for every smooth $T$-scheme. The mapping property for a $T$-scheme $M$, equipped with $M_E\\simeq G$, means that restriction followed by this isomorphism is a bijection $\\operatorname{Hom}_T(X,M)\\to\\operatorname{Hom}_E(X_E,G)$ for every smooth $T$-scheme $X$, where $X_E=X\\times_T\\operatorname{Spec}E$ [def-pc-base-change, def-sbc-smooth-morphisms]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. No completeness, excellence or perfection hypothesis is imposed on $R$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; project literature copy WANTED"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-geometric-point",
+  "def-sc-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate lower bounds are precisely the affine-cover boundedness hypothesis of [lem-sfb-bounded-group-translation-model]: no change of valuation or completion is involved. Apply it to obtain a smooth separated finite-type model $Y$ of $G$, with nonempty special fibre and birational extensions of both translations after every $A=\\mathcal O_{Z,\\xi}$ in its statement. In what follows, dense over $T$ always means dense in each of its two fibres, not merely dense in the total space.",
+   "uses": [
+    "lem-sfb-bounded-group-translation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.1 Definition 2; 3.5 Theorem 2; 4.3 Proposition 4(iii); primary online scan read, local copy WANTED"
+   }
+  },
+  {
+   "text": "Consider $\\Phi_E(x,y)=(x,xy)$ and $\\Psi_E(x,y)=(xy,y)$ on $G\\times_EG$. Apply [lem-sfb-smooth-trait-local-rational-spreading] with $Z=Y$ and $V=W=Y\\times_TY$, first over the first projection and then over the second. At $A=\\mathcal O_{Y,\\xi}$ the first coordinate of $\\Phi_E$, respectively the second of $\\Psi_E$, supplies a point of $G(\\operatorname{Frac}A)$, so step 1 gives the required local birational translation. The birational clause of the spreading lemma therefore gives $T$-birational maps $\\Phi,\\Psi$. Products here are smooth by base change [lem-pc-proper-base-change](2) and composition [lem-trf-smooth-composition]. Set $m=p_2\\Phi$ on its domain, and compare with $p_1\\Psi$ on their common domain. They agree on the generic fibre and hence agree by the uniqueness clause of the spreading lemma. They define the same $T$-rational multiplication. Both universal translations are therefore those above. Associativity holds wherever both composites are defined: on such an open in $Y^3$ the two morphisms agree on the generic fibre by associativity of $G$, and the same uniqueness clause, with base $Z=T$, makes them equal. Products of the smooth finite-type $Y$ satisfy its hypotheses.",
+   "uses": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Proposition 5, universal left and right translations; primary online scan read, local copy WANTED"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-trait-birational-group-envelope] to $(Y,m)$. All its hypotheses were established: $Y$ is smooth, separated, of finite type, with nonempty special fibre; $m$ agrees with the full group law on $Y_E=G$; both universal translations are birational over $T$; and associativity holds. Obtain a smooth separated finite-type group scheme $M$ and a $T$-dense open immersion $Y\\hookrightarrow M$, identifying $M_E$ with $G$ as group schemes. It remains to establish the mapping property; it is not supplied by the envelope lemma.",
+   "uses": [
+    "lem-sfb-trait-birational-group-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Theorem 6 and 5.1 Theorem 5; primary online scan read, local copy WANTED"
+   }
+  },
+  {
+   "text": "Let $Z$ first be an affine smooth finite-type $T$-scheme and $a_E:Z_E\\to G$ any morphism. On the generic fibre define $\\tau_E:Z_E\\times_EG\\to Z_E\\times_EG$ by $(z,g)\\mapsto(z,a_E(z)g)$. Apply [lem-sfb-smooth-trait-local-rational-spreading] with $V=W=Z\\times_TM$ over $Z$. For each $\\xi\\in Z_k$ generic, evaluate $a_E$ at $\\operatorname{Spec}\\operatorname{Frac}(\\mathcal O_{Z,\\xi})$. Step 1 extends translation by that point birationally on $Y_A$. Composing its target with $Y_A\\hookrightarrow M_A$ gives a morphism on an $A$-dense open of $M_A$, since $Y_A$ is $\\operatorname{Spec}A$-dense in $M_A$: the open immersion $Y\\hookrightarrow M$ is $T$-dense, and $\\operatorname{Spec}A\\to T$ sends the closed point to the closed point and the generic point to the generic point, so the base-change clause of [lem-sfb-smooth-trait-local-rational-spreading] applies. Include the full generic fibre, where translation on $G$ is defined; the maps agree on overlaps by generic-fibre uniqueness. The spreading lemma gives a morphism $\\tau:D\\to Z\\times_TM$ on a $T$-dense open $D$ containing $(Z\\times_TM)_E$. The source and target over $Z$ are smooth by [lem-pc-proper-base-change](2); their composites to $T$ are smooth by [lem-trf-smooth-composition].",
+   "uses": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.4 Corollary 4, translation by a generic morphism; primary online scan read, local copy WANTED"
+   }
+  },
+  {
+   "text": "Compose $\\tau$ with $p_M$ to get $b:D\\to M$. Put $X=Z\\times_TM$, smooth over $T$ by step 4, hence flat [lem-pc-smooth-flat] and Noetherian. Every $x\\in X$ with $\\dim\\mathcal O_{X,x}\\leq1$ lies in $D$. If $x\\in X_E$ this holds as $D\\supseteq X_E$; if $x$ is a generic point of $X_k$ it holds as $D_k$ is dense in $X_k$. Otherwise $x\\in X_k$ is a proper specialization of a generic point $\\eta$ of $X_k$. Since $\\mathcal O_{X,\\eta}$ is flat over $R$, the uniformizer of $R$ is a nonzerodivisor in its maximal ideal, so it lies in no minimal prime and $\\dim\\mathcal O_{X,\\eta}\\geq1$; thus $\\eta$ is a proper specialization of a point of $X_E$, and $\\dim\\mathcal O_{X,x}\\geq2$. Also $D$ is dense in both fibres of $X$. Hence [lem-sfb-relative-weil-codimension-extension], with Dedekind domain $R$, base $T$, smooth source $X$, the smooth separated $T$-group $M$, $V=D$ and $u=b$, extends $b$ to $B:Z\\times_TM\\to M$. With the identity section $e:T\\to M$, define $a=B\\circ(\\operatorname{id}_Z,e\\circ p_Z):Z\\to M$. On the generic fibre its value is $a_E(z)1=a_E(z)$, so $a$ extends the prescribed map. Notice that the extension theorem is applied to the $T$-group $M$ and the smooth $T$-source $Z\\times_TM$, not to a possibly nonsmooth closure or to a group over $Z$.",
+   "uses": [
+    "lem-sfb-relative-weil-codimension-extension",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.4 Theorem 1 and Corollary 4, evaluation along the identity section; primary online scan read, local copy WANTED"
+   }
+  },
+  {
+   "text": "For any smooth $T$-scheme $Z$, cover it by affine opens $Z_i$ of finite type over $T$; smoothness is locally of finite presentation, by [lem-pc-smooth-flat]. Step 5 produces extensions on each $Z_i$. They agree on overlaps by the uniqueness clause of [lem-sfb-smooth-trait-local-rational-spreading], applied locally with base $T$ and target $M$. Its source may be restricted to affine finite-type opens in each overlap. Thus the extensions glue to a morphism $Z\\to M$. The same uniqueness clause shows that two morphisms with the same generic restriction coincide, locally on $Z$ and hence globally. Restriction is therefore both surjective and injective for every smooth $Z$, as required. If $Z_k$ is empty the argument simply uses the given generic-fibre map; the empty source also causes no exception.",
+   "uses": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.4 Corollary 4; affine-local extension and gluing; primary online scan read, local copy WANTED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-group-translation-model",
+  "lem-sfb-smooth-trait-local-rational-spreading",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sfb-trait-birational-group-envelope",
+  "lem-sfb-relative-weil-codimension-extension",
+  "lem-pc-smooth-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.3 Theorem 1, if direction, expanded through 4.3/4-6 and 4.4/1,4 from the online primary scan; local literature copy WANTED, so conservatively marked agent-written"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finite type algebraic group over the fraction field of a discrete valuation ring has a finite type Neron model if its points over the fraction field of a strict henselization are bounded",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [WeierstrassCurve.IsMinimal R W], WeierstrassCurve.IsIntegral R W\", \"doc\": \"Every minimal Weierstrass curve over the fraction field of a discrete valuation ring is integral, meaning its coordinate ring forms an integral domain.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Boundedness criterion for existence of a Neron model of a smooth algebraic group over a discrete valuation ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.eq\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \": ValuativeCriterion = Existence ⊓ Uniqueness\", \"doc\": \"For a morphism of schemes, the valuative criterion is equivalent to the conjunction of the existence and uniqueness conditions, i.e., ValuativeCriterion = Existence ∧ Uniqueness.\"}\n  {\"name\": \"of_isDiscreteValuationRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \": ValuationRing A\", \"doc\": \"Every discrete valuation ring is a valuation ring. That is, if $ A $ is a commutative ring satisfying the discrete valuation ring axioms (a domain with a valuation taking values in the integers), then\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"Valued.integer.totallyBounded_iff_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] [IsDiscreteValuationRing 𝒪[K]] :\\n  TotallyBounded (Set.univ (α := 𝒪[K])) ↔ Finite 𝓀[K]\", \"doc\": \"For a valued field with a rank one valuation and a discrete valuation ring of integers, the universal set of the ring of integers is totally bounded if and only if the residue field is finite.\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.mk\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  (IsDedekindDomain.HeightOneSpectrum.valuati\", \"doc\": \"If the valuation of the discriminant $\\\\Delta$ of a minimal Weierstrass curve $W$ over the fraction field $K$ of a discrete valuation ring $R$ equals 1, then $W$ has good reduction, meaning its coeffic\"}\n  {\"name\": \"Valued.integer.isDiscreteValuationRing_of_compactSpace\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[hn : (Valued.v : Valuation K Γ₀).IsNontrivial] [CompactSpace 𝒪[K]] : IsDiscreteValuationRing 𝒪[K]\", \"doc\": \"If $ K $ is a valued field with non-trivial valuation $ v: K → Γ₀ $ and the valuation ring $ \\\\mathcal{O}[K] $ is compact in the topology induced by the valuation, then $ \\\\mathcal{O}[K] $ is a discrete\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|bounded.*[Gg]roup|[Gg]roup.*bounded",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded unramified rational points imply existence of a smooth separated finite type model with Neron mapping property",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth algebraic group over a discretely valued field with bounded unramified points admits a finite type Neron model",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: minimal Weierstrass models and unramified ring maps do not construct Neron models of general groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a smooth separated model with the Neron mapping property from bounded rational points over a strict henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: minimal Weierstrass models and unramified ring maps do not construct Neron models of general groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: minimal Weierstrass models and unramified ring maps do not construct Neron models of general groups."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|bounded.*group.*scheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: minimal Weierstrass models and unramified ring maps do not construct Neron models of general groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded unramified points criterion for existence of a Neron model",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Unramified\", \"type\": \"(p : Ideal S) (P : Ideal T) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsUnramifiedAt R P] [EssFiniteType R S]\\n  [EssFiniteType R T] [IsDedekindDomain S] (hP₁ : P.primeCompl ≤ nonZeroDivisors T) (hP₂ : p ≠ ⊥ → P ≠ ⊥) :\\n  IsUnramifiedAt R p\", \"doc\": \"Let $ p $ be a prime ideal in a commutative ring $ S $, and let $ P $ be a prime ideal in a commutative ring $ T $ lying over $ p $ (i.e., $ P \\\\cap S = p $). Suppose $ S $ and $ T $ are finitely gener\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Unramified\", \"type\": \"{p : Ideal S} [p.IsPrime] [IsNoetherianRing S] [IsUnramifiedAt R p] (hp : p ≠ ⊥) [IsDomain S] [EssFiniteType R S] :\\n  e(p|R) = 1\", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.mk\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  (IsDedekindDomain.HeightOneSpectrum.valuati\", \"doc\": \"If the valuation of the discriminant $\\\\Delta$ of a minimal Weierstrass curve $W$ over the fraction field $K$ of a discrete valuation ring $R$ equals 1, then $W$ has good reduction, meaning its coeffic\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"(k : Type u_1) → [inst : Field k] → (K : Type u_2) → [inst_1 : Field K] → [Algebra k K] → Prop\", \"doc\": \"The field extension $ K/k $ is unramified at all infinite places, meaning that the extension does not introduce ramification in the archimedean valuations corresponding to embeddings into $ \\\\mathbb{R}\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Unramified\", \"type\": \"{p : Ideal S} [p.IsPrime] [IsDedekindDomain S] [EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S] (hp : p ≠ ⊥) : Algebra.IsUnramifiedAt R p ↔ e(p|R) = 1\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: minimal Weierstrass models and unramified ring maps do not construct Neron models of general groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-neron-model",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3",
+   "via": [
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-group-local-neron-criterion",
+  "worker": "stage1",
+  "summary": "Q59 checked the primary BLR scan and the current DAG and Lean source. The unchanged boundedness criterion is assembled from four smaller statement-only lemmas: a translation-compatible smooth model, rational-map spreading over generic points of special fibres, a birational group envelope, and the existing Weil extension node lem-sfb-relative-weil-codimension-extension (reviewer FIX: the delivered lem-sfb-trait-weil-rational-extension restated it over a DVR and was dropped). The proof constructs multiplication from both universal translations, then extends arbitrary generic morphisms by translating on the envelope and evaluating at the identity. No Neron-model clause is assumed by a new node. Searches were executed with msearch.py and read.",
+  "blueprint": "No imported blueprint ancestor exists: blueprint_refs.py ancestor returns None, matching the preserved from.node. The complete existing provenance chain is retained and prefixed on each new node. The steps realize BLR 1.3/1, the local-existence input of 1.4/3 specified in the existing from.place. Latest blueprint and the inherited sk-thm-sf-ctf-stability unit and chapter were read; no higher-level route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smooth base change, is used to form the smooth products on which the translation and extension arguments run."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic smooth-composition tool for the translation products; this unit supplies no separate version."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Only local finite presentation of smooth morphisms is used to cover an arbitrary test scheme by affine finite-type opens."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-pc-smooth-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-2b531690f",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-2b531690f (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and the cited statements. I checked each new statement with a direct argument, because BLR is WANTED and not in literature/. Item statement is unchanged and matches BLR 1.1/2 and 1.3/1. Steps 1-6 hold. Step 1 gives the translation model (BLR 3.5 + 4.3/4-5). Step 2 builds both universal translations by spreading; uniqueness of the spreading (flat source, separated target) gives associativity. Step 3 is the envelope. Steps 4-6 extend maps by translating and evaluating at the identity section, then glue. translation-model: true; A=O_{Z,xi} is a DVR. envelope: true for all of Y. 5.1/5 gives a T-dense X' containing Y_E, and the Weil extension gives Y->M birational onto regular M. Purity and ZMT then make it an open immersion. spreading: true (going-down for generic points, finite presentation, schematic density of V_E, W/Z separated). C5 duplicate: lem-sfb-trait-weil-rational-extension is BLR 4.4/1 at the same source place as the existing node lem-sfb-relative-weil-codimension-extension (same unit, Dedekind base). Dropped. Step 5 now cites the existing node plus lem-pc-smooth-flat and checks its hypothesis: a non-generic special-fibre point has local dimension >=2, by flatness, since pi is a nonzerodivisor in O_{X,eta}. Uniqueness comes from the spreading node in step 6. The vague last sentence of the spreading node (base change preserves density) is now a precise clause for Spec R'->T with closed->closed and generic->generic. Step 4 cites it for Y_A dense in M_A. Batch-5: lem-trf-smooth-composition is the Mathlib leaf for Stacks 01VA. It is a generic tool and not part of the trace-formula or Poincare-duality proofs, so accepted. lem-pc-proper-base-change(2) and lem-pc-smooth-flat are accepted as tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedGroupLocalNeronCriterion",
+  "declaration": "AlgebraicGeometry.exists_localNeronModel_of_bounded_strictHenselization_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedGroupLocalNeronCriterion.lean",
+  "statement": "theorem exists_localNeronModel_of_bounded_strictHenselization_points (R E : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field E] [Algebra R E] [IsFractionRing R E] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of R)) (hs : ∀ z : Spec (.of Ω), (s z).asIdeal = IsLocalRing.maximalIdeal R) (G : Over (Spec (.of E))) [GrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hbounded : ∃ (_ : IsDomain (Scheme.strictHenselizationRing s)) (_ : IsDiscreteValuationRing (Scheme.strictHenselizationRing s)) (j : E →+* FractionRing (Scheme.strictHenselizationRing s)), j.comp (algebraMap R E) = (algebraMap (Scheme.strictHenselizationRing s) (FractionRing (Scheme.strictHenselizationRing s))).comp (Spec.preimage (Scheme.strictHenselizationStructuralMap s)).hom ∧ ∃ (n : ℕ) (B : Fin n → CommAlgCat.{u} E) (ι : ∀ i : Fin n, Over.mk (Spec.map (CommRingCat.ofHom (algebraMap E (B i)))) ⟶ G), (∀ i : Fin n, IsOpenImmersion (ι i).left) ∧ (∀ x : G.left, ∃ (i : Fin n) (y : Spec (.of (B i))), (ι i).left y = x) ∧ ∃ (m : Fin n → ℕ) (b : ∀ i : Fin n, Fin (m i) → B i) (C : ∀ i : Fin n, Set (Over.mk (Spec.map (CommRingCat.ofHom j)) ⟶ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap E (B i)))))) (c : Fin n → ℤ), (∀ i : Fin n, Algebra.adjoin E (Set.range (b i)) = ⊤) ∧ (∀ x : Over.mk (Spec.map (CommRingCat.ofHom j)) ⟶ G, ∃ (i : Fin n) (y : Over.mk (Spec.map (CommRingCat.ofHom j)) ⟶ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap E (B i))))), y ∈ C i ∧ y ≫ ι i = x) ∧ ∀ (i : Fin n) (x : Over.mk (Spec.map (CommRingCat.ofHom j)) ⟶ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap E (B i))))), x ∈ C i → ∀ k : Fin (m i), (IsDiscreteValuationRing.maximalIdeal (Scheme.strictHenselizationRing s)).valuation (FractionRing (Scheme.strictHenselizationRing s)) ((Spec.preimage x.left).hom (b i k)) ≤ ((Multiplicative.ofAdd (-c i) : Multiplicative ℤ) : WithZero (Multiplicative ℤ))) : ∃ (M : Over (Spec (.of R))) (e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R E)))).obj M ≅ G), Smooth M.hom ∧ IsSeparated M.hom ∧ LocallyOfFiniteType M.hom ∧ QuasiCompact M.hom ∧ ∀ (X : Over (Spec (.of R))), Smooth X.hom → Function.Bijective (fun f : X ⟶ M ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R E)))).map f ≫ e.hom)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The boundedness hypothesis is expanded inline, with finite affine charts, finite algebra generators and subsets covering all strict-henselian fraction-field points. Mathlib uses the multiplicative maximal-ideal valuation, so v_add ≥ c is v_mul ≤ exp(-c). The domain/DVR structures of the specified strict henselization occur inside the boundedness witness, which already refers to that DVR and its valuation. The field embedding j is uniquely fixed by its restriction to R, using the canonical structural morphism and Spec.preimage; it is not an arbitrary field extension. Conclusion uses the actual Over.pullback map on Hom sets for every smooth test scheme. No statement, dependency or proof fields changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16099c9d1",
+  "group": "O1",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node with the Lean: DVR R with Frac E, geometric point with hs at the closed point, strictHenselizationRing s, E→Frac(R^sh) map j fixed by its action on R via strictHenselizationStructuralMap (unique, exists), IsDomain/IsDVR Prop witnesses inside hbounded (true: strict henselization of a DVR is a DVR), finite affine E-charts covering G, adjoin=⊤ generator lists, C_i covering all E^sh-points, valuation bound ≤ ofAdd(-c_i) equivalent to ord ≥ c_i (zero included), G GrpObj Smooth/IsSeparated/LocallyOfFiniteType+QuasiCompact; conclusion: M over Spec R with Over.pullback iso to G, smooth/separated/finite type, bijection for every smooth X. Edge cases and single universe u fine; lean.statement verbatim; only proof is sorry; docstrings carry source place, blueprint id and 6 proof steps; fresh record (live lean null). Advisory: owner def-weil-pbc-strict-henselization-structural-map of strictHenselizationStructuralMap is not in stmt_deps (S2 cannot add it; maintainer should add it at the next DAG edit). No fixes, no compile run."
+ }
+}

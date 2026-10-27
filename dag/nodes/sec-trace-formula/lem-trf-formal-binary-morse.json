@@ -12,71 +12,40 @@
  ],
  "proof": [
   {
-   "text": "Write $f=Q+\\sum_{d\\ge3}H_d$, where each $H_d$ is homogeneous of degree $d$. The polar linear forms of $Q$ are $L_1=2au+bv$ and $L_2=bu+2cv$; their coefficient matrix has determinant $4ac-b^2\\ne0$, so they form a basis of the degree-one forms. Thus $E_2:=f-Q\\in\\mathfrak p^3$, and we start with $x_2=u$, $y_2=v$ and $f=Q(x_2,y_2)+E_2$.",
+   "text": "Start with $x_2=u$, $y_2=v$. The hypothesis on the quadratic part gives $f-Q(x_2,y_2)\\in\\mathfrak p^3$. Inductively, suppose $x_r-u,y_r-v\\in\\mathfrak p^2$ and $f-Q(x_r,y_r)\\in\\mathfrak p^{r+1}$ for $r\\ge2$. Apply [lem-trf-binary-quadratic-order-correction] with this same fixed $f$ and these $x_r,y_r$. Choose its outputs as $x_{r+1},y_{r+1}$; they preserve tangency, have increments in $\\mathfrak p^r$, and satisfy $f-Q(x_{r+1},y_{r+1})\\in\\mathfrak p^{r+2}$. This recursion gives the two sequences with all these bounds.",
    "uses": [
-    "def-weil-pbc-multivariate-power-series"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C49, proof of lemma-nodal-algebraic, setup of the quadratic part and its polar matrix."
-   }
-  },
-  {
-   "text": "For each $r\\ge2$, the invertibility of the $L_1,L_2$ coefficient matrix means that every homogeneous form of degree $r+1$ can be written $L_1A_r+L_2B_r$ with $A_r,B_r$ homogeneous of degree $r$: this is obtained by expressing one degree-one factor in the basis $L_1,L_2$ and collecting the remaining degree-$r$ factor. This is the only finite-dimensional correction fact used below.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C49, proof of lemma-nodal-algebraic, discussion that the two polar forms are a basis and the successive-correction calculation."
-   }
-  },
-  {
-   "text": "Assume inductively that $x_r-u,y_r-v\\in\\mathfrak p^2$ and that the fixed series $f$ satisfies $f=Q(x_r,y_r)+E_r$ with $E_r\\in\\mathfrak p^{r+1}$. Let $H_{r+1}$ be the homogeneous degree-$(r+1)$ part of $E_r$, so $E_r-H_{r+1}\\in\\mathfrak p^{r+2}$. By the preceding basis calculation choose homogeneous $A_r,B_r$ of degree $r$ with $H_{r+1}=L_1A_r+L_2B_r$, and define $x_{r+1}=x_r+A_r(x_r,y_r)$ and $y_{r+1}=y_r+B_r(x_r,y_r)$. For any $x,y,A,B\\in S$ one has the exact identity $Q(x+A,y+B)=Q(x,y)+L_1(x,y)A+L_2(x,y)B+Q(A,B)$, by expanding $a(x+A)^2+b(x+A)(y+B)+c(y+B)^2$. Since $x_r\\equiv u$, $y_r\\equiv v$ modulo $\\mathfrak p^2$ and $A_r,B_r$ are homogeneous of degree $r$, we have $A_r(x_r,y_r)-A_r(u,v),B_r(x_r,y_r)-B_r(u,v)\\in\\mathfrak p^{r+1}$ and $L_i(x_r,y_r)-L_i(u,v)\\in\\mathfrak p^2$; in particular $A_r(x_r,y_r),B_r(x_r,y_r)\\in\\mathfrak p^r$. Hence $L_1(x_r,y_r)A_r(x_r,y_r)+L_2(x_r,y_r)B_r(x_r,y_r)\\equiv L_1A_r+L_2B_r=H_{r+1}\\pmod{\\mathfrak p^{r+2}}$, and $Q(A_r(x_r,y_r),B_r(x_r,y_r))\\in\\mathfrak p^{2r}\\subseteq\\mathfrak p^{r+2}$ because $r\\ge2$. Therefore $Q(x_{r+1},y_{r+1})\\equiv Q(x_r,y_r)+H_{r+1}\\pmod{\\mathfrak p^{r+2}}$, and $E_{r+1}:=f-Q(x_{r+1},y_{r+1})\\equiv E_r-H_{r+1}\\equiv0\\pmod{\\mathfrak p^{r+2}}$. The correction lies in $\\mathfrak p^r\\subseteq\\mathfrak p^2$, so $x_{r+1}-u,y_{r+1}-v\\in\\mathfrak p^2$, completing the induction from the base case of step 1.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series"
+    "lem-trf-binary-quadratic-order-correction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C49, proof of lemma-nodal-algebraic, successive corrections: change generators by elements of increasing order and raise the order of vanishing."
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), successive corrections and completeness."
    }
   },
   {
-   "text": "The increments $x_{r+1}-x_r,\\,y_{r+1}-y_r$ lie in $\\mathfrak p^r$ for $r\\ge2$ (step 3), and $\\mathfrak p^r$ consists of the series with no monomial of degree $<r$ [def-weil-pbc-multivariate-power-series]. Hence for every degree $d$ the coefficients of degree $d$ of $x_r,y_r$ are constant for $r>d$; let $x_\\infty,y_\\infty\\in S$ be the coefficientwise limits. Then $x_\\infty-x_r,\\,y_\\infty-y_r\\in\\mathfrak p^r$ for every $r\\ge2$, and $x_\\infty-u,\\,y_\\infty-v\\in\\mathfrak p^2$. By [lem-weil-pbc-power-series-field-cohen-regular-complete] (1) and (4) with $\\Lambda=F$, $d=2$, $S$ is a Noetherian local ring with maximal ideal $\\mathfrak p$ and Krull dimension $2$. The classes of $x_\\infty,y_\\infty$ in $\\mathfrak p/\\mathfrak p^2$ equal those of $u,v$, which span it; so by [lem-weil-pbc-nakayama-local-generators], applied to the finitely generated $S$-module $\\mathfrak p$, $(x_\\infty,y_\\infty)=\\mathfrak p$. Thus $(x_\\infty,y_\\infty)$ is a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. By [lem-weil-pbc-power-series-full-coordinates-field] there is an $F$-algebra isomorphism $F[[Y_1,Y_2]]\\to S$ with $Y_1\\mapsto x_\\infty$, $Y_2\\mapsto y_\\infty$; precomposing with the renaming $S\\to F[[Y_1,Y_2]]$, $u\\mapsto Y_1$, $v\\mapsto Y_2$, gives an $F$-algebra automorphism $\\beta$ of $S$ with $\\beta(u)=x_\\infty$, $\\beta(v)=y_\\infty$. Since $\\beta(\\mathfrak p)=(x_\\infty,y_\\infty)=\\mathfrak p$, we get $\\beta(\\mathfrak p^N)=\\mathfrak p^N=\\beta^{-1}(\\mathfrak p^N)$ for all $N$, so $\\beta$ and $\\beta^{-1}$ are continuous for the $\\mathfrak p$-adic topology. As $Q$ is a polynomial and $\\beta$ an $F$-algebra map, $\\beta(Q)=Q(x_\\infty,y_\\infty)$.",
+   "text": "Apply [lem-trf-binary-quadratic-successive-limit] to these sequences: the initial pair is $(u,v)$, and step 1 gives each increment in $\\mathfrak p^r$ for $r\\ge2$. It gives limiting coordinates $x_\\infty-u,y_\\infty-v\\in\\mathfrak p^2$ and an $F$-algebra automorphism $\\beta$ with $\\beta(u)=x_\\infty$, $\\beta(v)=y_\\infty$. Both $\\beta$ and $\\beta^{-1}$ are continuous and preserve every $\\mathfrak p^N$. Apply its final assertion with the same coefficients $a,b,c$ and fixed series $f$: the error bounds of step 1 hold for every $r\\ge2$, so $f=Q(x_\\infty,y_\\infty)=\\beta(Q)$.",
    "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-nakayama-local-generators",
-    "def-weil-pbc-regular-system-of-parameters",
-    "lem-weil-pbc-power-series-full-coordinates-field"
+    "lem-trf-binary-quadratic-successive-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C49, proof of lemma-nodal-algebraic, completeness passage from successive corrections to limiting coordinates."
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), successive corrections and completeness."
    }
   },
   {
-   "text": "For every $r\\ge2$, write $x_r=x_\\infty+A$, $y_r=y_\\infty+B$ with $A,B\\in\\mathfrak p^r$ (step 4). The identity of step 3 gives $Q(x_r,y_r)-Q(x_\\infty,y_\\infty)=L_1(x_\\infty,y_\\infty)A+L_2(x_\\infty,y_\\infty)B+Q(A,B)\\in\\mathfrak p^{r+1}$, so $f-\\beta(Q)=E_r+\\big(Q(x_r,y_r)-Q(x_\\infty,y_\\infty)\\big)\\in\\mathfrak p^{r+1}$. A series in every $\\mathfrak p^{r+1}$ has all coefficients zero [def-weil-pbc-multivariate-power-series], hence $f=\\beta(Q)$. Let $\\alpha=\\beta^{-1}$: an $F$-algebra automorphism, continuous by step 4, with $\\alpha(\\mathfrak p^2)=\\mathfrak p^2$. Applying $\\alpha$ to $\\beta(u)-u\\in\\mathfrak p^2$ gives $u-\\alpha(u)\\in\\mathfrak p^2$, and likewise $v-\\alpha(v)\\in\\mathfrak p^2$. Applying $\\alpha$ to $f=\\beta(Q)$ yields $\\alpha(f)=Q$. No division by $2$ occurred, so this holds in every characteristic.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series"
-   ],
+   "text": "Put $\\alpha=\\beta^{-1}$. It is continuous and preserves $\\mathfrak p^2$ by step 2. Applying $\\alpha$ to $\\beta(u)-u\\in\\mathfrak p^2$ gives $u-\\alpha(u)\\in\\mathfrak p^2$; negating gives the required tangent condition, and likewise for $v$. Applying it to $f=\\beta(Q)$ yields $\\alpha(f)=Q$. The two cited lemmas impose no characteristic restriction beyond the given discriminant condition.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C49, proof of lemma-nodal-algebraic, final limit identity after the successive corrections."
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), successive corrections and completeness."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-multivariate-power-series",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-nakayama-local-generators",
-  "def-weil-pbc-regular-system-of-parameters",
-  "lem-weil-pbc-power-series-full-coordinates-field"
+  "lem-trf-binary-quadratic-order-correction",
+  "lem-trf-binary-quadratic-successive-limit"
  ],
  "proof_origin": {
   "by": "document",
@@ -150,33 +119,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-formal-binary-morse",
   "worker": "stage1",
-  "summary": "Repaired the returned split. The induction now keeps f fixed as f=Q(x_r,y_r)+E_r, chooses positive corrections whose polar contribution cancels the leading class of E_r, and defines the final automorphism as the inverse of the limiting substitution. The elementary homogeneous-basis observation is folded into a proof step, so the spurious homogeneous-correction node is removed. Maintainer review (NT-cc Q50): the auxiliary tangent-substitution node was dropped as a special case of the existing lem-weil-pbc-power-series-full-coordinates-field; steps 4-5 now build the automorphism from that node with the power-series structure theorem and Nakayama, and step 3 writes out the congruence of the linear correction terms modulo p^(r+2).",
-  "blueprint": "Realizes the successive coordinate corrections removing cubic and higher terms in the nondegenerate-quadratic completion argument named in blueprint.from.place.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-power-series-full-coordinates-field",
-    "why": "Generic statement that a regular system of parameters of F[[u,v]] gives power-series coordinates; it produces the limiting coordinate automorphism, already an accepted tool of the parent lem-trf-formal-jacobian-quadratic-criterion in the same unit; the nodal unit contains no substitute."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "why": "Generic structure theorem (Noetherian local, maximal ideal (u,v), dimension 2) needed to call (x_inf,y_inf) a regular system of parameters; already an accepted tool of the parent."
-   }
-  ]
+  "summary": "Q86 repaired the batch5 re-split return without changing the statement. Two independent statement-only unsplit children expose the finite-order homogeneous polar correction and the full completion argument: coefficientwise limits, the limiting coordinate automorphism, and its exact quadratic evaluation identity. The parent only recurses using the first child, applies the second, and takes the inverse. Every argument of the returned five-step proof is retained verbatim with its allocation in report.md. Continued the live-DAG promotion repair against current origin: reread the cited statements and six newer same-tag nodes, added twelve nonduplicate comparisons to the report, and retained the unchanged mathematical split and source route. Renewed against the current read baseline after the resumed dry run passed at 4e06ef63dc4: all inherited fields agree; made the fixed-f induction invariant and the final tangent-condition sign explicit, and extended the current-tag duplicate audit. Renewed the returned delivery against the current DAG after dry-run 5e39416cf9f: reread both cited statements and the preserved auxiliary inputs; explicitly checked the limit lemma initial-pair and increment hypotheses in assembly step 2. Renewed the landing-return repair on 2026-10-23 after initial dry-run 0eef6440f6c passed: rebuilt the item from the current read DAG, reread the two actual cited child statements and inherited auxiliary statements, and made both continuity conclusions and the same-coefficient/fixed-f application explicit in step 2. The child statements and all retained searches are unchanged.",
+  "blueprint": "Realizes the successive coordinate corrections removing cubic and higher terms in the nondegenerate-quadratic completion argument named in blueprint.from.place."
  },
  "tool_uses": [
   "lem-weil-pbc-power-series-full-coordinates-field",
   "lem-weil-pbc-power-series-field-cohen-regular-complete"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q50-4990b9abb",
-  "group": "Q50",
+  "reviewer": "NT-cc-Q86-9d03ee5e5",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-4990b9abb (reviewer sub-agent of L); spot-checked: Read the item, the new node, the parent lem-trf-formal-jacobian-quadratic-criterion with its reviewed tool_uses, unit sk-i-curve-zero, and the statements of every cited node. Read the source Stacks curves.tex Tag 0C49 (lemma-nodal-algebraic, proof of (2)=>(3), the correction mod m^4 and the completeness passage). The item statement is unchanged and not weakened; the polar determinant 4ac-b^2 handles characteristic 2. Tested by hand: uv+u^3 in char 2 (y->v+u^2, alpha: v->v-u^2), u^2-v^2+v^3 in char 0 (E3=v^4/4), and u^2+v^2 in char 2 (excluded, discriminant 0). Steps 1-2 are correct and elementary. Step 3 is correct but left a gap, fixed under E5: it now states the exact identity Q(x+A,y+B)=Q+L1A+L2B+Q(A,B) and the congruences L_i(x_r,y_r)A_r(x_r,y_r) = L_iA_r mod p^(r+2). C5/duplicate: the new node lem-trf-binary-morse-tangent-substitution is true but is the case n=2 of the existing lem-weil-pbc-power-series-full-coordinates-field plus elementary remarks. The parent already cites that node as an accepted tool in the same unit, so I dropped the new node. Steps 4-5 now build beta from cohen-regular-complete (1),(4), Nakayama, def-regular-system-of-parameters and full-coordinates-field. They also prove continuity via beta(p^N)=p^N and the tangency of alpha=beta^{-1}. I accept the two generic sec-proper-base-change tool_uses (full-coordinates-field, cohen-regular-complete); both were already accepted for the parent. No SGA. proof_deps is the union of the uses. The corrected item is in fixes/dag/nodes/sec-trace-formula/lem-trf-formal-binary-morse.json, and rg shows no other citer of the dropped node.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-9d03ee5e5 (reviewer sub-agent of L); spot-checked: Fifth push of the same re-split. Against the previous head 8a0b34c697d7, only the step-2 wording changed: it now says β and β⁻¹ are both continuous and the final assertion is applied with the same a,b,c and fixed f. The split_report and report changed only in renewal prose. Live and side-live still have the old 5-step proof and neither child id, so the item is not superseded; its statement is unchanged and not weakened. Source: Stacks curves.tex 3873–3960, 0C49 lemma-nodal-algebraic, proof (2)⇒(3); no SGA. I reread the mathematics in full. order-correction: det[[2a,b],[b,2c]] = 4ac−b² ≠ 0, so L1 and L2 form a basis and H = L1A + L2B. Q(x',y') − Q(x,y) = L1A + L2B + Q(A,B), with L_i(x,y) − L_i ∈ p², A(x,y) − A(u,v) ∈ p^{r+1} and Q(A,B) ∈ p^{2r} ⊆ p^{r+2} for r≥2, so f − Q(x',y') ∈ p^{r+2} in every characteristic. Tested on f=Q, char-2 uv+u³ (B=U²), u²−v²+v³ (error v⁴/4), the excluded char-2 u²+v², and the tight case r=2. successive-limit: coefficients stabilize for r>d, giving a unique limit with p^r tails; β comes from x∞,y∞ being parameters, and β(p)=p gives that β^{±1} preserve p^N and are continuous. The quadratic congruence holds for any a,b,c, and ∩p^{r+1}=0 gives f=β(Q). The assembly (1480 chars) is: the recursion, whose hypotheses match child 1 exactly; then child 2; then α=β⁻¹ for tangency and α(f)=Q. Every old argument (steps 1–5) reappears in a child statement. The children are comparable in size and independent, neither restates the item, and there is no cycle. proof_deps is the union of the uses. All three kinds of search were run, with real hits. rg -L duplicate audit (0C49, Morse, polar, order-raising, power-series automorphisms; rational/sfb node completions, formal-jacobian, model-depth, cotangent invariance, pbc full-coordinates field/cohen, onto-completion): no duplicate. Maintainer note: the item's tool_uses (full-coordinates-field, cohen-regular-complete) are no longer cited by its steps; they now belong to the future proof of successive-limit. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -196,5 +155,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

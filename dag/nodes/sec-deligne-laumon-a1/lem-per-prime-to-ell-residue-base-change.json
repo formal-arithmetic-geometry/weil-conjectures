@@ -235,22 +235,40 @@
  },
  "lean": {
   "module": "Sheaf.DeligneLaumon.PrimeToEllResidueBaseChange",
-  "file": "lean/Sheaf/DeligneLaumon/PrimeToEllResidueBaseChange.lean",
   "declaration": "AlgebraicGeometry.prime_to_ell_residue_base_change",
-  "statement": "theorem prime_to_ell_residue_base_change {k L K : Type u} [Field k] [Field L] [Field K] [Algebra k L] [Algebra k K] [FiniteDimensional k L] (d ell : ℕ) (hd : Module.finrank k L = d) (hell : Nat.Prime ell) (hcop : ¬ ell ∣ d) : (∀ z : pullback (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K))), ((pullback.snd (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).residueFieldAlgebraMap z).Finite) ∧ ∃ z : pullback (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K))), ¬ ell ∣ (pullback.snd (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).degreeOver z",
+  "file": "lean/Sheaf/DeligneLaumon/PrimeToEllResidueBaseChange.lean",
+  "statement": "theorem prime_to_ell_residue_base_change (k L K : Type u) [Field k] [Field L] [Field K] [Algebra k L] [Algebra k K] [FiniteDimensional k L] (d ell : ℕ) (hd : Module.finrank k L = d) (hell : Nat.Prime ell) (hdegree : ¬ ell ∣ d) : (∀ z : ↑(pullback (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))), ((pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).residueFieldMap z).hom.Finite) ∧ ∃ z : ↑(pullback (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))), ¬ ell ∣ (pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).residueDegree z",
   "branch": "newtargets-dag",
-  "by": "N6",
-  "date": "2026-10-18",
+  "by": "O3",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.DeligneLaumon.PrimeToEllResidueBaseChange deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Finiteness is RingHom.Finite for the second projection residue-field map; residueDegree is its finrank. Since the target is Spec K, its unique residue field is canonically K. No separability or finite-dimensionality condition is placed on K/k."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bdf66af6f",
-  "group": "N6",
+  "reviewer": "NT-stage2-cc-8038d0b30",
+  "group": "O3",
   "result": "pass",
-  "note": "Clause-by-clause match vs node and ILO II Prop 1.2.7 (pp. 25-26): Field/Algebra/FiniteDimensional/finrank=d/Nat.Prime/¬ell∣d binders exact, K/k arbitrary; P = Scheme pullback of Spec.maps; clause 1 = RingHom.Finite of residueFieldAlgebraMap of pullback.snd (finite dimension over K; second reading correctly replaced the cardinality Finite); clause 2 = ∃ z, ¬ell ∣ degreeOver z (upstream ZetaSeries finrank via the same map). Shared universe forced by Scheme.{u}. Edge cases L=k, C/R with K=C, inseparable checked. lean.statement verbatim; only lean field changed vs live node; sorry-only proof; source/blueprint docstrings with 6 proof steps; no duplicate. nt_compile --json clean (2.5 s, exit 0). Advisory: degreeOver owned by a node outside stmt_deps; def-weil-field/tensor-product deps lack lean records (pre-existing)."
+  "note": "Only the lean field changed vs live; statement, stmt_deps and 7 dependency records byte-identical; lean.statement verbatim in file; no duplicate declaration. Checked against ILO II Prop 1.2.7 pp.25-26 (any K/k): binders Field/Algebra/FiniteDimensional/finrank=d/Nat.Prime/not ell∣d exact, nothing assumed on K/k; P = Scheme pullback of Spec.maps; clause 1 = RingHom.Finite of pullback.snd residueFieldMap (κ(z) over κ(q z), canonically K); clause 2 = exists z with not ell ∣ residueDegree (Mathlib finrank of the same map; junk 0 cannot satisfy it). Single universe forced by Scheme, ULift-equivalent. Edge cases L=k, C/R with K=C, inseparable non-reduced, char 0, d=0 checked. Sorry-only, docstrings with source/blueprint and 6 proof steps, private imports exist upstream with no cycle. No compile run since nothing was changed; worker dry-run compile OK. Advisory: def-weil-field and tensor-product deps lack lean records (pre-existing)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/DeligneLaumon/PrimeToEllResidueBaseChange.lean",
+  "module": "Sheaf.DeligneLaumon.PrimeToEllResidueBaseChange",
+  "declaration": "AlgebraicGeometry.prime_to_ell_residue_base_change",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

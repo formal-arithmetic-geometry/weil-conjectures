@@ -1,0 +1,111 @@
+{
+ "id": "def-trf-polynomial-presentation-category",
+ "kind": "definition",
+ "title": "Category of all small augmented polynomial algebras",
+ "statement": "Fix the universes of [def-weil-size-convention]. For a homomorphism $f:A\\to B$ of $\\mathcal U$-small commutative rings, let $\\mathcal D_f$ be the full subcategory of augmented $A$-algebras $A\\to T\\to B$ whose composite is $f$ and for which there exist a $\\mathcal U$-small set $E$ and an $A$-algebra isomorphism $A[E]\\cong T$. Morphisms are all commuting $A$-algebra maps over $B$. No surjectivity of $T\\to B$ is required. The category has objects in the containing universe; applying the canonical category universe lift makes it small there.",
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PS, category construction preceding lemma-identify-pi-shriek, with all small variable sets in the containing universe."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of polynomial algebras augmented to a ring",
+   "results": "8 hits: AlgCat.of, Algebra.Generators.instRing, Polynomial.algebraOfAlgebra, Polynomial.ring, Algebra.Generators.Ring, instIsScalarTowerPolynomial, Polynomial.CAlgHom, Polynomial.algebra.",
+   "date": "2026-10-23",
+   "verdict": "No category match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category polynomial algebras over A with augmentation to B all variable sets",
+   "results": "8 hits: MvPolynomial.ACounit, instIsPushoutPolynomial_1, Algebra.Generators.algebra, CommRingCat.free, instIsPushoutPolynomial, MvPolynomial.instIsPushout_1, MvPolynomial.instIsPushout, Algebra.mvPolynomial.",
+   "date": "2026-10-23",
+   "verdict": "No category match."
+  },
+  {
+   "tool": "grep",
+   "query": "Polynomial.*Presentation|Presentations|IsPolynomial",
+   "results": "Mathlib/CategoryTheory: 19 unrelated presentation hits. Project rg: Algebra.CotangentSites.IsPolynomial and Presentations, Sheaf.RingTheory.CotangentLowerShriek, lines 44-53. Blueprint search polynomial presentation: one unrelated sk-d-geometry result. DAG grep found lem-trf-cotangent-lower-shriek, whose helper defines exactly this category, but no independent definition node.",
+   "date": "2026-10-23",
+   "verdict": "Exact project helper found; bind it existing:true, no duplicate definition."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-presentation-homology",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Re-split: small polynomial presentation category, generator fibres and derived homology (old Steps 4–6).",
+   "via": [
+    "lem-trf-polynomial-presentation-homology",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentLowerShriek",
+  "declaration": "Algebra.CotangentSites.Presentations",
+  "declarations": [
+   "Algebra.CotangentSites.IsPolynomial",
+   "Algebra.CotangentSites.Presentations"
+  ],
+  "statement": "abbrev Presentations {A T : CommRingCat.{u}} (f : A ⟶ T)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Exact existing full subcategory of polynomial objects in Over (Under.mk f), with arbitrary Type u variable sets and no augmentation-surjectivity requirement. Its IsPolynomial helper supplies the coefficient-compatible polynomial isomorphism. AsSmall is Mathlib universe transport."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f83c642c",
+  "group": "Q82",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f83c642c",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Item statement verified clause by clause against the node and Stacks 08PS/08QI/08Q9: polynomial presentation category = AsSmall.{v} of CotangentSites.Presentations (all Type u variable sets, no surjectivity); generator-coordinate iso pinned by its projections; trivial Kan map to singleton; IsResolution homotopy-equivalence form; comparison natural iso fixed by normalization to Computation.comparison (ResolutionRoof-pinned, first-vertex bar); naturalityResolution a_{Q'} s(F(h)) = a_Q in the right direction. Edge cases: empty/infinite E, B=0, F=0, non-surjective augmentations; universes u and max (u+1) v; lean.statement verbatim. New def nodes use existing:true ownership (accepted). F1 (H4/H13): the delivery recreates the deleted module Sheaf.AlgebraicTopology.TrivialKanFibration with a fresh def SSet.Enhanced.trivialKanFibration, a duplicate of the node's Mathlib match SSet.modelCategoryQuillen.I.rlp, which every live user takes, including the step-4 theorem exists_section_homotopy_equivalence. Fix: fixes/TrivialKanFibration.lean keeps the same name and module as abbrev := SSet.modelCategoryQuillen.I.rlp p; the item module is unchanged. nt_compile --json of the fix plus the unchanged item: 1.1 s and 23.2 s, rc 0, clean. Advisory: CotangentLowerShriek.Site uses AsSmall.{0} vs the item's AsSmall.{v}."
+ }
+}

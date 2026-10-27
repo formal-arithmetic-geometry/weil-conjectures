@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-dg-countable-semi-free-resolution",
+ "kind": "statement",
+ "title": "Countable semi-free resolution over a countable DG algebra",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Assume the set $\\coprod_{i\\in\\mathbf Z}A^i$ is countable. For every right differential graded $A$-module $N$ whose groups $H^i(N)$ are all countable, there is a quasi-isomorphism $q:P\\to N$ with the following properties. As a graded right $A$-module, $P=\\bigoplus_{j\\in J}x_jA$ for a countable set $J$ of homogeneous free generators. There is a function $h:J\\to\\mathbf N$ such that $d(x_j)$ is a finite sum $\\sum_{h(k)<h(j)}x_ka_{kj}$ with homogeneous coefficients of the required degrees. The set $\\coprod_iP^i$ is countable. Thus the spans of generators with $h(j)\\leq r$ form an exhaustive filtration by differential graded submodules with graded-split inclusions and quotients direct sums of shifts of $A$.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, proof (2) to (1), countable module representative and countable property-(P) resolution paragraphs; Tags 09KN, lemma-good-quotient, and 09KP, lemma-resolve. The homogeneous basis and height are the graded splittings in property (P)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-homogeneous-basis"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dg-countable-submodule-representative] to obtain a countable DG submodule $M\\subseteq N$ whose inclusion $i$ induces all cohomology isomorphisms. It remains to construct a countable semi-free resolution of this actual DG module $M$.",
+   "uses": [
+    "lem-sfb-dg-countable-submodule-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), using Tag 09KN, lemma-good-quotient, and Tag 09KP, lemma-resolve."
+   }
+  },
+  {
+   "text": "Set $M_0=M$. Inductively apply [lem-sfb-dg-countable-free-cover] to the countable module $M_i$ to choose $\\pi_i:Q_i\\twoheadrightarrow M_i$, with basis layers $U_i,V_i$, and set $M_{i+1}=\\ker\\pi_i$. This is a countable DG submodule of $Q_i$, so the induction continues. Define $f_i:Q_i\\to Q_{i-1}$ for $i>0$ as $\\pi_i$ followed by the kernel inclusion $M_i\\hookrightarrow Q_{i-1}$. Thus $f_{i-1}f_i=0$ (with $f_0=\\pi_0$). The augmented chain of $Q_i$ is exact degreewise. It is exact on cocycles too: a cocycle in the kernel at $Q_i$ lies in $M_{i+1}$ and lifts to a cocycle of $Q_{i+1}$ by the cover property; cocycles of $M$ lift through $\\pi_0$.",
+   "uses": [
+    "lem-sfb-dg-countable-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), using Tag 09KN, lemma-good-quotient, and Tag 09KP, lemma-resolve."
+   }
+  },
+  {
+   "text": "Put $P^n=\\bigoplus_{i\\geq0}Q_i^{n+i}$, with the unchanged right $A$-action. On $x\\in Q_i^b$ put $D(x)=f_i(x)+(-1)^id_{Q_i}(x)$, interpreting the first term as zero when $i=0$. Both terms have total degree $b-i+1$. Since $f_if_{i+1}=0$ and the $f_i$ commute with the internal differentials, the two mixed terms of $D^2$ have signs $(-1)^i$ and $(-1)^{i-1}$ and cancel. For homogeneous $a$, the Leibniz coefficient is $(-1)^{i+b}=(-1)^{b-i}$, exactly the required sign in total degree $b-i$. Hence $P$ is a right DG $A$-module. Define $\\epsilon:P\\to M$ by $\\pi_0$ on $Q_0$ and zero on $Q_i$, $i>0$; $\\pi_0f_1=0$ makes this a DG map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), using Tag 09KN, lemma-good-quotient, and Tag 09KP, lemma-resolve."
+   }
+  },
+  {
+   "text": "Forget the DG action, retaining the underlying complexes of abelian groups, regarded as $\\mathbf Z$-modules. Step 2 gives precisely the exact augmented complex and exact augmented cocycle sequences required by [lem-pc-derived-total-resolution-quasi-iso]. Its column $p=-i$ is $Q_i$, so its signed direct-sum total differential is $f_i+(-1)^id_{Q_i}$ and its augmentation is $\\epsilon$. Thus $H^n(\\epsilon)$ is an isomorphism for every $n$. The composite $q=i\\epsilon:P\\to N$ is a quasi-isomorphism, since $H^n(q)=H^n(i)H^n(\\epsilon)$ is a composite of isomorphisms.",
+   "uses": [
+    "lem-pc-derived-total-resolution-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09IZ, lemma-good-resolution-gives-qis, applied in dga.tex Tag 09KP, lemma-resolve."
+   }
+  },
+  {
+   "text": "Take $J=\\coprod_{i\\geq0}(U_i\\amalg V_i)$, giving each basis vector its total degree $t_w-i$. Set $h(i,u)=2i$ for $u\\in U_i$ and $h(i,v)=2i+1$ for $v\\in V_i$. The internal differential vanishes on $e_u$ and sends $e_v$ into the span of $U_i$, with smaller height. The horizontal differential lands in $Q_{i-1}$, whose basis heights are at most $2i-1$. Every image of a basis vector has finite support, by the direct-sum definition. Consequently $D$ strictly lowers height on basis vectors. The spans of heights at most $r$ are DG submodules by Leibniz, exhaust $P$, and have graded retractions obtained by deleting other coordinates. Their quotients are direct sums of shifts of $A$, since the differential of each new basis vector is zero modulo the preceding span.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), using Tag 09KN, lemma-good-quotient, and Tag 09KP, lemma-resolve."
+   }
+  },
+  {
+   "text": "Each $U_i\\amalg V_i$ is countable in the sense of [def-sfb-countable-set], hence $J$, a union indexed by $\\mathbf N$, is countable by [lem-trf-countable-unions]. Each homogeneous element of $P$ is a finite sum of basis vectors with homogeneous coefficients in $A$. Such sums are encoded by finite lists of elements of the countable set $J\\times\\coprod_kA^k$. There are countably many finite lists; adjoining the integer degree still gives a countable set. Thus $\\coprod_nP^n$ is countable, as asserted.",
+   "uses": [
+    "def-sfb-countable-set",
+    "lem-trf-countable-unions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1), using Tag 09KN, lemma-good-quotient, and Tag 09KP, lemma-resolve."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-countable-submodule-representative",
+  "lem-sfb-dg-countable-free-cover",
+  "lem-pc-derived-total-resolution-quasi-iso",
+  "def-sfb-countable-set",
+  "lem-trf-countable-unions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, proof (2) to (1), using Tag 09KN, lemma-good-quotient, and Tag 09KP, lemma-resolve."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable.*[Rr]esolution|[Cc]ountable.*[Kk]Projective|[Ss]emi.free",
+   "results": "0 hits ; Mathlib/Algebra",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective resolutions do not assert countably many DG basis cells or an unbounded semi-free resolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"Countable\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective resolutions do not assert countably many DG basis cells or an unbounded semi-free resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable semi free resolutions of differential graded modules",
+   "results": "Hits: ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.InjectiveResolution.instHasInjectiveResolutions, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.complex",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective resolutions do not assert countably many DG basis cells or an unbounded semi-free resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded module over a countable differential graded algebra with countable cohomology admits a semi free resolution with countably many basis cells",
+   "results": "Hits: CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.of_def, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.of, CategoryTheory.ProjectiveResolution.cochainComplex",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective resolutions do not assert countably many DG basis cells or an unbounded semi-free resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module with countable cohomology over a countable DG ring has a quasi isomorphic free graded module with a countable basis and a differential lowering a natural number cell filtration",
+   "results": "Hits: CochainComplex.IsKProjective, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.IsKInjective, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective resolutions do not assert countably many DG basis cells or an unbounded semi-free resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable differential graded module with countable cohomology has a countable semi free resolution",
+   "results": "8 hits: CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, CategoryTheory.HasProjectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.of",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective/K-projective resolutions lack the countable homogeneous DG basis and height condition."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emi.?free|[Cc]ountable.*[Rr]esolution",
+   "results": "0 hits: ; Mathlib/Algebra",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective/K-projective resolutions lack the countable homogeneous DG basis and height condition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable semi free resolution of an unbounded differential graded module over a differential graded ring",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.instHasProjectiveResolution, ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions, CategoryTheory.ProjectiveResolution.of_def, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.of",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective/K-projective resolutions lack the countable homogeneous DG basis and height condition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"Countable\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective/K-projective resolutions lack the countable homogeneous DG basis and height condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded DG module with countable cohomology over a countable DG algebra has a semi free replacement on countably many homogeneous generators with differential lowering their heights",
+   "results": "8 hits: CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.cochainComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CochainComplex.cm5b.I",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective/K-projective resolutions lack the countable homogeneous DG basis and height condition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-countable-compact-telescope",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 0CRM, lemma-countable, proof (2) to (1), countable module representative and countable property-(P) resolution paragraphs; Tags 09KN, lemma-good-quotient, and 09KP, lemma-resolve. The homogeneous basis and height are the graded splittings in property (P).",
+   "via": [
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-countable-semi-free-resolution",
+  "worker": "stage1",
+  "summary": "Read Stacks 0CRM, 09KN, 09KP and 09IZ. Kept the statement; isolated the countable submodule and two-layer DG cover inputs, constructed successive kernels and the signed total module, reused the existing total-resolution quasi-isomorphism over Z, and supplied explicit countable basis heights and finite-list countability. Ordinary-ring free-resolution nodes do not cover nontrivial DG algebras.",
+  "blueprint": "Realizes the inherited 0CRM countable property-(P) subargument of latest det-thm-sf-ctf-stability-direct-images proof (3); preserves the inherited null blueprint ancestor returned by blueprint_refs.py ancestor and its complete via chain. The latest proof (3) itself is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-total-resolution-quasi-iso",
+    "why": "General good direct-sum total resolution theorem for complexes over a ring, specialized to the underlying abelian groups over Z, exactly the input cited by dga.tex Tag 09KP. No DG total-resolution node in this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-total-resolution-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-940e79719",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-940e79719 (reviewer sub-agent of L); spot-checked: Read in full against the sources: Stacks dga.tex 0CRM (proof (2)⇒(1): the countable representative and countable property-(P) paragraphs), 09KN (good-quotient), 09KP (resolve), and homology.tex 09IZ. Item statement is unchanged and correct. Step 1 cites the countable submodule representative. Step 2: the successive kernels are countable DG submodules, the chain is exact degreewise and exact on cocycles, which are exactly the hypotheses of 09IZ. Step 3: total degree b−i, D=f_i+(-1)^i d, D²=0 and the Leibniz sign (-1)^{b-i} checked; ε is a DG map. Step 4: lem-pc-derived-total-resolution-quasi-iso over ℤ with column p=−i; accepted as a tool use (generic 09IZ statement, the lemma 09KP itself cites; its closure has no cycle). Step 5: heights 2i/2i+1 and the filtration quotients ⊕A[k] checked. Step 6: countability. Both new nodes are true and self-contained. The representative node follows the adjoin-primitives argument; tested on A=ℤ, N acyclic, N=ℝ-cone⊕ℤ. The free cover is the 09KN disks-plus-spheres construction, countable when M is; tested on M=0. Neither node restates the item (the cover is not a qis). Duplicate search (rg -L for 09KN/09KP/0CRM/property (P)/semi-free) found the ordinary-ring lem-pc-* nodes and lem-coef-dg-module-semi-free-replacement, which is over dg categories with no countability, so it is not a substitute. FIX (B3): both new statements now cite [def-sfb-countable-set] in the statement and stmt_deps; item step 6 cites def-sfb-countable-set and lem-trf-countable-unions (Mathlib leaves), and both are added to proof_deps. Item statement untouched.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCountableSemiFreeResolution",
+  "declaration": "CategoryTheory.DgAlgebra.exists_countable_semiFree_resolution",
+  "file": "lean/Sheaf/CategoryTheory/DgCountableSemiFreeResolution.lean",
+  "statement": "theorem exists_countable_semiFree_resolution (A : Algebra.{u}) (N : RightModule A) (hA : Countable (Σ n : ℤ, A.X.X n)) (hN : ∀ n : ℤ, Countable (((underlying A).obj N).homology n)) : ∃ (P : RightModule A) (q : P ⟶ N) (b : HomogeneousBasis A P) (height : b.Index → ℕ), quasiIsomorphisms A q ∧ Countable b.Index ∧ Countable (Σ n : ℤ, ((underlying A).obj P).X n) ∧ ∀ j k : b.Index, height j ≤ height k → b.coordinate (b.degree j + 1) ((((underlying A).obj P).d (b.degree j) (b.degree j + 1)) (b.generator j)) k = 0",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e8ceb253",
+  "group": "NP",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_countable_semiFree_resolution against the node and Stacks 0CRM (2)=>(1): countable Σ A^n, countable H^n(N), quasi-iso q, countable homogeneous basis, strict height lowering via vanishing coordinates of d(x_j), countable Σ P^n; no extra hypotheses. New def HomogeneousBasis (actual generators, AddEquiv coordinates onto Π₀, single-coordinate law on the real act) is a genuine free graded right basis, not hollow, node fields OK. No duplicate in live DAG/lean/Sheaf/Mathlib. Item changed only in lean + stmt_deps (+new node); statements verbatim; proof sorry; docstrings carry source, blueprint tag and 6 proof steps. Edge cases N=0/acyclic, zero algebra, height 0, unbounded degrees fine. No recompile (no change)."
+ }
+}

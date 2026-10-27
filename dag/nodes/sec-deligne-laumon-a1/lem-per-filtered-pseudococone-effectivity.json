@@ -1,0 +1,153 @@
+{
+ "id": "lem-per-filtered-pseudococone-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of coherent pseudococones over filtered category colimits",
+ "statement": "Let $J$ be a small filtered category and $D:J\\to\\mathsf{Cat}$ a strict diagram of small categories [def-nagata-category, def-weil-size-convention, def-weil-pbc-category-colimit]. Let $c$ be a cocone such that the induced cocones of object sets and complete arrow sets are colimits of sets [def-weil-pbc-arrows-functor, lem-weil-pbc-filtered-colimit-categories]. Write $C=c.\\mathrm{pt}$ and $v_i:D(i)\\to C$ for its structure functors, and write a pseudococone as $(A_i,\\theta)$. For every category $A$ in arbitrary containing object and morphism universes, each coherent pseudococone $P\\in\\operatorname{PCone}(D,A)$ [def-per-strict-diagram-pseudococones] is isomorphic to the restriction of some functor $F:c.\\mathrm{pt}\\to A$. Equivalently, the specified restriction functor is essentially surjective. No full-faithfulness assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX (section-directed-colimits), finite-representative extension: Steps 1--2 of lem-per-filtered-category-pseudococones; not asserted verbatim by the tag."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "def-per-strict-diagram-pseudococones"
+ ],
+ "proof": [
+  {
+   "text": "For a pseudococone $(A_i,\\theta)$, use the canonical transports $T$ of [lem-per-filtered-pseudocone-representative-transport]. Choose a representative $r_z=(i_z,x_z)$ for each object $z$ of $C$, possible by the object colimit, and set $F(z)=A_{i_z}(x_z)$. If $h:z\\to z'$ is represented by $f:x\\to y$ in $D(i)$, define\n$$F(h)=T_{(i,y),r_{z'}}\\,A_i(f)\\,T_{r_z,(i,x)}.$$\nEvery arrow has such a representative by [lem-weil-pbc-filtered-colimit-categories]. The transport square for two equal arrow representatives, and the identity $T_{qr}T_{pq}=T_{pr}$, give the same displayed value for any representative. Thus this is an actual map on each Hom set, with the required endpoints.",
+   "uses": [
+    "lem-per-filtered-pseudocone-representative-transport",
+    "lem-weil-pbc-filtered-colimit-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of representatives. The conjugation and modification identities below are an agent formulation extending that representative calculus; they are not asserted verbatim by this tag."
+   }
+  },
+  {
+   "text": "Lift a composable pair of arrows of $C$, their composite and their endpoint relations to one stage using [lem-weil-pbc-filtered-colimit-categories]. In the formula for $F(g)F(f)$ the two transports at the middle object multiply to the identity; functoriality of $A_i$ then gives $F(gf)$. The same computation with an identity arrow gives $F(1_z)=1_{F(z)}$. Define $\\lambda_{i,x}=T_{r_{v_i x},(i,x)}:F(v_i x)\\to A_i(x)$. The transport square makes $\\lambda_i$ natural. For $a:i\\to k$, the transition formula $T_{(i,x),(k,D(a)x)}=\\theta_{a,x}^{-1}$ gives\n$$\\lambda_{i,x}=\\theta_{a,x}\\lambda_{k,D(a)x}.$$\nConsequently $\\lambda$ is an isomorphism in $\\operatorname{PCone}(D,\\mathcal A)$ from the restriction of $F$ to $(A_i,\\theta)$. This proves essential surjectivity of restriction.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-per-filtered-pseudocone-representative-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual equality of representatives. The conjugation and modification identities below are an agent formulation extending that representative calculus; they are not asserted verbatim by this tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-filtered-pseudocone-representative-transport",
+  "lem-weil-pbc-filtered-colimit-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Finite-representative extension of Tag 04AX, Steps 1--2 of lem-per-filtered-category-pseudococones. Isolates object descent only; modification descent is proved in the parent Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent pseudococone of functors on a filtered diagram of categories is isomorphic to the restriction of a functor from the colimit",
+   "results": "isColimitOfIsColimitCofanMkObj; colimit.isoColimitCocone; SmallObject.SuccStruct.restrictionLTOfCoconeIso; colimitLimitIso; MonCat.FilteredColimits.colimitCoconeIsColimit; Functor.IsEventuallyConstantFrom.isColimitCocone; IsColimit.corepresentableBy. No category-valued pseudococone effectivity theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of functors from filtered colimit of categories to coherent pseudococones is an equivalence",
+   "results": "Types.FilteredColimit.rel_equiv; Functor.Final.coconesEquiv; IsColimit.ofCoconeEquiv; Cocones.functorialityEquivalence; IsColimit.coconePointsIsoOfEquivalence; IsColimit.whiskerEquivalenceEquiv. These concern set representatives or ordinary cocones, not effectivity of coherent category-valued families.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat.objects, CategoryTheory.Limits.IsColimit",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*Cat|Cat.*isColimit; pseudococone; filteredPseudococone_effective",
+   "results": "Mathlib search found ordinary colimits and related examples. Local source search found StrictDiagramPseudococone, FilteredPseudoconeRepresentativeTransport and the parent FilteredColimitPseudococones; none states essential surjectivity separately. exists_filteredColimit_functor_descent handles strict equalities of stage functors only. Blueprint search for pseudococone: 0 imported blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; transport is the stated prerequisite, not an effectivity theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredColimitPseudococones",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Completion argument behind the ancestor proof Step 3: the projective-limit etale topos in ILO XX 4.4, printed p.373. Coherent compatibility and cofinal independence.; isolated object-effectivity part, parent Steps 1--2.",
+   "via": [
+    "lem-per-filtered-category-pseudococones",
+    "lem-per-qcqs-etale-topos-inverse-limit",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredPseudococoneEffectivity",
+  "file": "lean/Sheaf/CategoryTheory/FilteredPseudococoneEffectivity.lean",
+  "declaration": "CategoryTheory.filteredPseudococone_effective",
+  "statement": "theorem filteredPseudococone_effective\n    {J : Type z} [SmallCategory J] [IsFiltered J] (D : J ⥤ Cat.{z, z})\n    (c : Cocone D) (hobjects : IsColimit (Cat.objects.mapCocone c))\n    (harrows : IsColimit (Cat.arrows.mapCocone c))\n    (A : Type u) [Category.{v} A] :\n    (StrictDiagramPseudococone.restriction c A).EssSurj",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T092339-L-3424770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T092339-L-3424770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-normal-locally-finite-components",
+ "kind": "statement",
+ "title": "Normal schemes with locally finitely many components are disjoint unions of normal integral components",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] such that every quasi-compact open [def-weil-pbc-quasi-compact-scheme] has finitely many irreducible components [def-weil-irreducible-components]. Suppose every local ring $\\mathcal O_{X,x}$ is an integrally closed domain [def-weil-pbc-normal-ring]. Then the irreducible components $Z_i\\subseteq X$, indexed by a set $I$, are pairwise disjoint open and closed subsets covering $X$. With their induced open subscheme structures, the $Z_i$ are integral schemes [def-pc-integral-scheme] whose local rings are integrally closed domains. These open structures equal their reduced induced closed subscheme structures [def-pc-reduced-scheme, lem-weil-pbc-reduced-induced-closed-subscheme]. The canonical map $\\coprod_{i\\in I}Z_i\\to X$ [lem-weil-pbc-scheme-coproduct-family] is an isomorphism. No local Noetherianity or quasi-compactness of $X$ is assumed; $I$ may be infinite, and is empty when $X$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, implication (1) to (2) and final paragraph of proof. The reduced induced structure agrees with the open structure because the latter is reduced and has the same closed support."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-normal-ring",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open covering by lem-weil-pbc-affine-opens-basis. For any member $U=\\operatorname{Spec}R$, lem-weil-pbc-affine-scheme-qcqs makes $U$ quasi-compact, so the hypothesis gives finitely many irreducible components of $U$. By lem-weil-pbc-spec-irreducible-components-minimal-primes they are the sets $V(\\mathfrak p)$ for the minimal primes of $R$. This correspondence is injective: equality of the zero loci implies both prime inclusions by testing membership of $\\mathfrak p$ and $\\mathfrak q$ themselves. Thus $R$ has finitely many minimal primes. Domain stalks have no nonzero nilpotents, so $X$ is reduced; the open-section characterization in def-pc-reduced-scheme implies that $R$ is reduced. Finally every prime localization $R_{\\mathfrak p}$ is the corresponding local ring of $X$, by lem-weil-pbc-affine-open-stalk-localization(c). Each is an integrally closed domain, so $R$ is a normal ring in the definition of def-weil-pbc-normal-ring.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, proof of (1) implies (2); affine case, with Algebra Tag 00ES (lemma-irreducible) and Schemes Tag 01IT (lemma-basis-affine-opens)"
+   }
+  },
+  {
+   "text": "Apply implication (1) to (3) of lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions to this $R$. Step 1 verifies all three hypotheses: reducedness, finitely many minimal primes, and normality. Obtain a ring isomorphism $R\\simeq\\prod_{a\\in\\operatorname{Fin}(n)}A_a$ with every $A_a$ a normal domain. The theorem allows $n=0$, which gives the zero ring and the empty affine open. No ring or scheme Noetherian hypothesis has entered.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C, lemma-characterize-reduced-ring-normal, implication (1) to (3), used by the affine case of Properties Tag 0357"
+   }
+  },
+  {
+   "text": "Transport prime ideals through the ring isomorphism of Step 2; inverse image preserves inclusion and the sets defined by containment or noncontainment of an element. We can therefore calculate components in the finite product itself. Write $e_a$ for its coordinate idempotents and $K_a=\\ker(R\\to A_a)=(1-e_a)R$. Every prime $\\mathfrak p$ contains exactly one of $e_a$ and $1-e_a$; since $\\sum_a e_a=1$ and $e_ae_b=0$ for $a\\ne b$, exactly one $e_a$ is outside $\\mathfrak p$. Thus every prime contains exactly one $K_a$. Each $K_a$ is prime because $A_a$ is a domain, and is minimal: if a prime $\\mathfrak q\\subseteq K_a$ contains $K_b$, then $b\\ne a$ is impossible since $e_a\\in K_b$ but $e_a\\notin K_a$; hence $\\mathfrak q=K_a$. These are all minimal primes. Consequently the cited spectrum-component correspondence identifies the irreducible components of $U$ as $V(K_a)=D(e_a)$. Indeed $K_a=(1-e_a)R$ lies in a prime exactly when $e_a$ does not: the prime contains exactly one of the complementary idempotents. Hence $V(K_a)=D(e_a)$. These sets are pairwise disjoint, cover $U$, and are clopen, being both closed zero loci and basic opens. When $n=0$ there are no primes and no components.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, proof of (1) implies (2); explicit finite-product calculation in the affine case (Algebra Tag 030C)"
+   }
+  },
+  {
+   "text": "For any open $U\\subseteq X$, intersection with $U$ carries global irreducible components meeting $U$ bijectively to the irreducible components of $U$. Indeed lem-weil-pbc-open-subspace-irreducible-closed-correspondence gives inverse order-preserving operations intersection and closure on irreducible closed subsets. If $T$ is a component meeting $U$ and $T\\cap U\\subseteq D$ with $D$ irreducible closed in $U$, then $T\\subseteq\\overline D$ and maximality gives $\\overline D=T$, hence $D=T\\cap U$. Conversely, for a component $D$ of $U$, its irreducible closure is contained in a component $T$ of $X$ by lem-sc-irreducible-components-cover. Then $D\\subseteq T\\cap U$ and maximality in $U$ gives equality, so taking closures gives $\\overline D=T$. This also proves uniqueness, since the closure of $T\\cap U$ is $T$.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, proof of (1) implies (2); general case, sentence concerning the intersections of a component with the affine covering; Topology Tag 0B7I (lemma-dimension-supremum-local-dimensions) and Tag 004W (lemma-irreducible)"
+   }
+  },
+  {
+   "text": "Let $T$ be a global irreducible component. On every affine member $U$ of the covering, $T\\cap U$ is either empty or one of the clopen components calculated in Step 3. Thus $T$ is open, since its intersections with an open covering are open; it is closed by the definition of irreducible component. If global components $T,T^{\\prime}$ meet at $x$, choose an affine $U$ containing $x$. Their traces are affine components meeting at $x$, hence are equal by Step 3; Step 4 then gives $T=T^{\\prime}$. Every point belongs to a component by lem-sc-irreducible-components-cover. Hence the components are a pairwise disjoint clopen covering. They form a set because they are subsets of the set of points of $X$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, proof of (1) implies (2); final paragraph, openness and disjoint covering"
+   }
+  },
+  {
+   "text": "Give a component $T$ its open subscheme structure $Z$. An open immersion identifies the structure sheaf with the restricted ambient sheaf (def-weil-open-immersion), so its stalk at each $x\\in T$ is $\\mathcal O_{X,x}$: the neighborhoods contained in $T$ are cofinal among the neighborhoods of $x$. Thus all stalks of $Z$ are integrally closed domains. In particular they are reduced, and def-pc-reduced-scheme makes $Z$ reduced. It is nonempty and irreducible by the component definition, so the reduced-and-irreducible characterization in def-pc-integral-scheme makes $Z$ integral. No assertion that an intersection of two affine opens is affine is needed.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-reduced-scheme",
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, proof of (1) implies (2); final paragraph, integrality and normality of the open components; Tag 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "The inclusion $j:Z\\to X$ is also a closed immersion. Its underlying map is a homeomorphism onto the closed subset $T$. For every open $W\\subseteq X$, the restriction $\\mathcal O_X(W)\\to\\mathcal O_Z(W\\cap T)$ is surjective: extend a section on $W\\cap T$ by zero on $W\\setminus T$ using the sheaf axiom on this disjoint open covering of $W$. Thus the structure-sheaf map is surjective, exactly the closed-immersion criterion of def-weil-closed-immersion. By Step 6 the source is reduced. Apply the uniqueness clause (3) of lem-weil-pbc-reduced-induced-closed-subscheme to this reduced closed immersion with support $T$. It identifies the open structure with the reduced induced closed structure, as closed subschemes over $X$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme, uniqueness; Tag 01J4, definition-reduced-induced-scheme; the clopen case of Properties Tag 0357"
+   }
+  },
+  {
+   "text": "Let $C=\\coprod_{i\\in I}Z_i$ with injections $k_i$, using lem-weil-pbc-scheme-coproduct-family, and let $p:C\\to X$ be induced by the inclusions $j_i:Z_i\\to X$. On the disjoint open cover $X=\\bigcup_i Z_i$, the morphisms $k_i:Z_i\\to C$ agree on overlaps because those overlaps are empty. The existence part of lem-weil-pbc-scheme-morphism-gluing gives $q:X\\to C$ with $qj_i=k_i$. Then $pq$ restricts to $j_i$ on every $Z_i$, so the uniqueness part gives $pq=1_X$. Also $qpk_i=qj_i=k_i$ for all $i$, so the coproduct universal property gives $qp=1_C$. Hence $p$ is the asserted canonical isomorphism. For $X=\\varnothing$ there is no nonempty irreducible subset, so $I=\\varnothing$ and the same empty-cover and coproduct argument applies. Nothing uses finiteness of $I$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB and 01JC, lemma-glue and lemma-glue-schemes, disjoint gluing and mapping property; Tag 00AN, lemma-mapping-property-glue"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles, proof of (1) implies (2); using the cited Algebra Tag 030C for the affine case and expanding the open-component passage, reduced closed structure, and coproduct assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|irreducibleComponents",
+   "results": "{\"t\": \"2026-10-22T06:43:04Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|irreducibleComponents\", \"sub\": \"AlgebraicGeometry/Normal.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-22T06:43:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"irreducibleComponents\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme whose local rings are normal domains and every quasi compact open has finitely many irreducible components is a disjoint union of normal integral schemes",
+   "results": "{\"t\": \"2026-10-22T06:43:04Z\", \"tool\": \"leansearch\", \"query\": \"A scheme whose local rings are normal domains and every quasi compact open has finitely many irreducible components is a disjoint union of normal integral schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.IsIntegral.mk\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\"], \"digest\": \"d4a3eb844b22126b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal schemes with locally finitely many irreducible components are disjoint unions of open normal integral schemes",
+   "results": "{\"t\": \"2026-10-22T06:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"Normal schemes with locally finitely many irreducible components are disjoint unions of open normal integral schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\"], \"digest\": \"fd3420473ee669ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with normal domain stalks has pairwise disjoint clopen normal integral irreducible components if each affine open has finitely many components",
+   "results": "{\"t\": \"2026-10-22T06:43:48Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with normal domain stalks has pairwise disjoint clopen normal integral irreducible components if each affine open has finitely many components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"9edfb18577add36f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|irreducibleComponents",
+   "results": "{\"t\": \"2026-10-22T06:43:48Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|irreducibleComponents\", \"sub\": \"AlgebraicGeometry/Properties.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"220\", \"221\", \"229\"], \"digest\": \"b30f485894192485\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.*irreducible|irreducible.*IsIntegrallyClosed|normal.*disjoint|disjoint.*normal",
+   "results": "{\"t\": \"2026-10-22T06:45:06Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed.*irreducible|irreducible.*IsIntegrallyClosed|normal.*disjoint|disjoint.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"b7da3c107a84844d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization, integral/reduced schemes, or finiteness under Noetherian hypotheses; none gives the normal component decomposition under the stated local-finiteness hypothesis. The initial Normal.lean grep had no hits because that file is absent; Properties.lean and the full AlgebraicGeometry grep were also searched and their results read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with integrally closed domain stalks and finitely many irreducible components in every quasi compact open is the coproduct of its clopen normal integral components",
+   "results": "{\"t\": \"2026-10-23T04:14:00Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with integrally closed domain stalks and finitely many irreducible components in every quasi compact open is the coproduct of its clopen normal integral components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\"], \"digest\": \"de1d98b9b1d3253f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern normalization of an already given coproduct, Noetherian finiteness, or reduced/irreducible integrality criteria; none proves the stated locally finite normal component decomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|normal.*component|component.*normal",
+   "results": "{\"t\": \"2026-10-23T04:14:42Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|normal.*component|component.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern normalization of an already given coproduct, Noetherian finiteness, or reduced/irreducible integrality criteria; none proves the stated locally finite normal component decomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal scheme with locally finitely many irreducible components is a disjoint union of integral open subschemes",
+   "results": "{\"t\": \"2026-10-23T04:14:42Z\", \"tool\": \"leansearch\", \"query\": \"A normal scheme with locally finitely many irreducible components is a disjoint union of integral open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.IsIntegral\"], \"digest\": \"5a3d948c575fc820\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern normalization of an already given coproduct, Noetherian finiteness, or reduced/irreducible integrality criteria; none proves the stated locally finite normal component decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"irreducibleComponents\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern normalization of an already given coproduct, Noetherian finiteness, or reduced/irreducible integrality criteria; none proves the stated locally finite normal component decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local rings domains and locally finite irreducible components imply the irreducible components of a scheme are disjoint and open",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"leanfinder\", \"query\": \"Local rings domains and locally finite irreducible components imply the irreducible components of a scheme are disjoint and open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\"], \"digest\": \"dcdd8c04906171b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern normalization of an already given coproduct, Noetherian finiteness, or reduced/irreducible integrality criteria; none proves the stated locally finite normal component decomposition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalization-normal-locally-finite",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Trivial normalization of a normal scheme with locally finite components. Proof of trivial normalization: the reduction to the disjoint normal integral components in Stacks 0H7D, using Properties 0357.",
+   "via": [
+    "lem-sfb-normalization-normal-locally-finite",
+    "lem-sfb-integral-normal-generic-recognition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-locally-finite-components",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0357 through its finite normal-ring decomposition 030C, reusing existing nodes only. Expanded the idempotent calculation, the maximal-component passage through opens, and all final structural clauses. Checked every cited statement, arbitrary component index set, zero ring, empty scheme, and non-Noetherian normal domains. Added the existing reduced-induced-structure theorem as the missing notion dependency; no mathematical statement change. Repair of returned head 6304e9b0dc5: reapplied the retained split to the current unsplit live node via deliver.py, reread all 19 current statement/proof dependencies, and verified all 24 retained citation quotes. Made the complementary-idempotent justification of V(K_a)=D(e_a) explicit; the argument, hypotheses, cited nodes, and recorded searches are retained. Rechecked after the further return at f64003689e4: current live metadata agrees with the retained node outside split fields, every cited current statement was reread, and all 24 quotes still match. Explicitly transported prime ideals and their zero/basic-open loci through the Step 2 ring isomorphism before the finite-product calculation. The required first dry run on this retry passed at 1b2e88de147; delivery is rebuilt on current origin/sheaf-dag.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Trivial normalization of a normal scheme with locally finite components. Proof of trivial normalization: the reduction to the disjoint normal integral components in Stacks 0H7D, using Properties 0357. This split realizes exactly the component reduction in 0357 needed by the normal-normalization recognition argument. The inherited created.item chain ends at Sheaf.SixFunctors.CtfStabilityDirectImages, not a DAG id, so blueprint_refs ancestor prints None; retained the inherited null from.node and explicit place rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies prime localizations with stalks, to check the normal-ring hypothesis on an affine chart; a generic local algebra/scheme interface absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Finite-product normal-ring theorem 030C, explicitly used in the source 0357 affine case; a generic algebra tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Uniqueness of a reduced closed subscheme on a fixed support, needed to compare the two structures requested by the item; a generic scheme tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Gluing the inverse map on a disjoint open cover and checking its composite; a generic scheme mapping property absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-4d4f53330",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-4d4f53330 (reviewer sub-agent of L); spot-checked: I read Stacks properties.tex Tag 0357 (lemma-normal-locally-finite-nr-irreducibles) and its proof. The item matches it hypothesis by hypothesis: every quasi-compact open has finitely many components and X is normal. No Noetherian or quasi-compact hypothesis is added, I may be infinite or empty, and nothing is weakened. The extra clauses (integral components with normal stalks, open structure = reduced induced structure, the canonical map from the coproduct of the components to X is an isomorphism) are what the citer lem-sfb-normalization-normal-locally-finite uses, and Steps 6-8 prove them. This is the third push of the same split. Against heads 6304e9b0 and f6400368 only the Step 3 transport sentence and split_report changed. The earlier returns were side-completion landing refusals. Live and side-live still show the item unsplit, so it is not superseded. The statement differs from live only by the notion reference [lem-weil-pbc-reduced-induced-closed-subscheme] in the statement and stmt_deps. Every step is correct against the cited statements. Step 1: affine-opens-basis, affine qcqs, 00ES components = V(minimal prime) with injectivity, reduced via the open-sections clause of def-pc-reduced-scheme, and clause (c) of affine-open-stalk-localization gives R_p = O_{X,x}, so R is normal. Step 2: 030C (1)=>(3), whose reduced and finite-minimal-prime hypotheses were checked in Step 1. Step 3 (elementary): idempotent calculation of the primes and minimal primes K_a, V(K_a)=D(e_a) clopen. Step 4: the 0B7I open-subspace correspondence plus 004W, both maximality directions checked. Step 5 (elementary): components open and disjoint via affine traces. Step 6: open-subscheme stalks, then nonempty+reduced+irreducible gives integral. Step 7: surjectivity of O_X -> j_*O_Z by extension by zero across the clopen complement gives a closed immersion, then the 01J3(3) uniqueness clause. Step 8: coproduct plus the existence and uniqueness of morphism gluing give the inverse q, with pq=1 and qp=1. Edge cases checked: empty X, the zero ring, a non-Noetherian valuation domain, Spec(A x B), an infinite disjoint union of fields, and xy=0 (which fails the hypothesis, as it should). No duplicate: rem-pc-regular-normal(2), lem-trf-normal-topologically-noetherian-components, lem-sbc-normal-sections-finite-product and lem-a1-normal-etale-components-clopen all assume Noetherian hypotheses. A BFS over the 96-node closure finds no cycle, and proof_deps equals the union of step uses. tools/review_split.py reported 'no such node' for every cited id; this is a false alarm because it does not follow the chapter symlinks, and every node exists and was read. Accepted tool_uses for L to record: lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions (030C) and lem-weil-pbc-reduced-induced-closed-subscheme (01J3), both sk-thm-p1 generic interfaces. Maintainer note: the null blueprint.from.node is inherited from the base node (its ancestry ends at Sheaf.SixFunctors.CtfStabilityDirectImages, not a DAG node). It is not a fault of this split. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalLocallyFiniteComponents",
+  "declaration": "AlgebraicGeometry.Scheme.normal_locally_finite_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalLocallyFiniteComponents.lean",
+  "statement": "theorem normal_locally_finite_components (X : Scheme.{u}) (hfinite : ∀ U : X.Opens, CompactSpace U → (irreducibleComponents U).Finite) (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) : ∃ U : irreducibleComponents X → X.Opens, (∀ i, (U i : Set X) = i.val) ∧ (∀ i, IsClopen (U i : Set X)) ∧ Pairwise (fun i j ↦ Disjoint (U i) (U j)) ∧ (⨆ i, U i) = ⊤ ∧ (∀ i, IsIntegral (U i).toScheme ∧ ∀ x : (U i).toScheme, IsDomain ((U i).toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed ((U i).toScheme.presheaf.stalk x)) ∧ (∀ i, ∃ e : (U i).toScheme ≅ (IdealSheafData.vanishingIdeal ⟨i.val, isClosed_of_mem_irreducibleComponents i.val i.property⟩).subscheme, e.hom ≫ (IdealSheafData.vanishingIdeal ⟨i.val, isClosed_of_mem_irreducibleComponents i.val i.property⟩).subschemeι = (U i).ι) ∧ IsIso (Sigma.desc (fun i ↦ (U i).ι))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1a83b6c5",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: hypotheses are CompactSpace U → (irreducibleComponents U).Finite and domain+integrally closed stalks, no Noetherian/qc/universe restriction; witness U pinned by (U i : Set X) = i.val; clopen, pairwise disjoint, ⨆ = ⊤; IsIntegral plus normal stalks of (U i).toScheme; iso to (vanishingIdeal T).subscheme over X via subschemeι; IsIso (Sigma.desc (U i).ι). Statement verbatim; node differs from live only in lean; dep module WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme exists and is the sole declarer. Edge cases: empty X, infinite I, non-Noetherian, universe u coproduct. No duplicate (033M/NoetherianComponents, normal_topologicallyNoetherian_components, regular_normal_and_normal_decomposition, normal_etale_components_clopen all Noetherian). Docstrings carry source and blueprint id, 8 steps, sorry only. No changes, no compile."
+ }
+}

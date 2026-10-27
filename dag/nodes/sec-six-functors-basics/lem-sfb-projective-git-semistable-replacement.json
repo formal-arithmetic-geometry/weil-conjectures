@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-projective-git-semistable-replacement",
+ "kind": "statement",
+ "title": "Projective GIT semistable replacement over a trait",
+ "statement": "Let $k$ be any field [def-weil-field], $r\\geq2$, and $G=\\operatorname{PGL}_{r,k}$. Let $Z$ be a projective finite-type $k$-scheme [def-kun-projective, def-weil-finite-type-morphism] with a $G$-action and an ample $G$-linearized invertible module $A$. Use the geometric semistability convention of [lem-sfb-hilbert-plucker-pgl-linearization]. Let $R$ be a discrete valuation $k$-algebra [def-sc-discrete-valuation-ring] with fraction field $K$, and let $z:\\operatorname{Spec}K\\to Z^{ss}(A)$ be a morphism. There exist a DVR $R'$ with a local injective $k$-algebra map $R\\to R'$, fraction field $K'$ finite over $K$, an element $h\\in G(K')$, and a morphism $b:\\operatorname{Spec}R'\\to Z^{ss}(A)$ whose restriction to $\\operatorname{Spec}K'$ is $h\\cdot z_{K'}$. The map on spectra takes closed point to closed point. No characteristic-zero or linear-reductivity hypothesis is imposed. The scheme, invertible-module, projective and ample conventions are [def-pc-scheme, def-sc-invertible-module, def-kun-projective, def-weil-pbc-ample-invertible-module].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-projective-pgl-invariant-quotient] to obtain $q:Z^{ss}(A)\\to Q$. The scheme $Q$ is proper over $k$, because it is projective. The generic quotient point $q\\circ z:\\operatorname{Spec}K\\to Q$ therefore extends by the valuative existence criterion to $u:S=\\operatorname{Spec}R\\to Q$. Here $R$ is a valuation ring with its specified fraction field. Form $X=Z^{ss}(A)\\times_Q S$; since $q$ is affine and of finite type, $X=\\operatorname{Spec}B$ for a finite-type $R$-algebra $B$. The point $z$ defines a $K$-point of the generic fibre of $X$.",
+   "uses": [
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-kun-projective-implies-proper",
+    "lemma-nagata-proper-valuative-criterion-existence-api"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Corollary 11(2), printed p.17: extension of the generic quotient point; expanded using projective quotient and valuative existence."
+   }
+  },
+  {
+   "text": "Let $\\alpha:G_K\\to X_K$ be $g\\mapsto g\\cdot z$ and put $I=\\ker(B\\to K[G])$, $D=B/I$, $Y=\\operatorname{Spec}D\\subset X$. The algebra $K[G]$ is a domain: $\\operatorname{PGL}_{r,K}$ is the determinant-nonzero open in the projective space of matrices, hence is integral. Thus $D$ is a domain, $R\\hookrightarrow D$, and $Y$ is an integral finite-type $S$-scheme dominating $S$. Its generic fibre is the reduced schematic closure of the orbit image. To verify invariance over the whole trait, write $H=R\\otimes_k k[G]$. It is a free $R$-module, by choosing a $k$-basis of $k[G]$. The coaction of an element of $I$ maps to zero in $(D\\otimes_RH)[1/\\pi]$: write $\\beta:B[1/\\pi]\\to K[G]$ for the orbit homomorphism. Equivariance says $(\\beta\\otimes1)\\rho=\\Delta\\beta$, so it annihilates $I$. The injection $D[1/\\pi]\\hookrightarrow K[G]$ stays injective after tensoring over the field $K$; hence the image of $\\rho(I)$ in $(D\\otimes_RH)[1/\\pi]$ is zero. Since $D\\otimes_RH$ is a direct sum of copies of the torsion-free module $D$, localization at $\\pi$ is injective. The coaction already vanishes in $D\\otimes_RH$. Hence $I$ is preserved by the $G_S$-action and $Y$ is an invariant closed subscheme of $X$.",
+   "uses": [
+    "lem-sfb-projective-pgl-invariant-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Agent coordinate expansion of the invariant orbit-closure construction before applying the universal closed-image property; group coaction identities and injectivity of localization on a torsion-free module."
+   }
+  },
+  {
+   "text": "The universal closed-image clause of [lem-sfb-projective-pgl-invariant-quotient], with $T=S$ and $C=Y$, says that the image of $Y\\to S$ is closed. It contains the generic point, since $\\alpha$ factors through $Y_K$. The closure of that generic point is all of $S$, so $Y_s$ is nonempty. This applies to the actual base change along $u$, without any assertion that taking invariants commutes with this possibly nonflat base change.",
+   "uses": [
+    "lem-sfb-projective-pgl-invariant-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(2), universal closedness, in the projective GIT example of the introduction, pp.490--491."
+   }
+  },
+  {
+   "text": "The morphism $\\alpha:G_K\\to Y_K$ is a morphism of affine finite-type $K$-schemes. By [lem-wf-affine-constructible-open], its image is constructible and contains a nonempty open $U$ of its closure. The injection $D[1/\\pi]\\hookrightarrow K[G]$ shows that this closure is all of $Y_K$. Thus $U\\subseteq Y_K$ is nonempty open and every point of $U$ has nonempty fibre under $\\alpha$. This avoids requiring that a chosen lift of a quotient point belong to the original orbit.",
+   "uses": [
+    "lem-wf-affine-constructible-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054J, morphisms-lemma-chevalley; affine finite-type field case and dense constructible open consequence as stated in the cited node."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dense-generic-trait-selection] to $Y\\to S$ and this $U$. Step 2 gives integrality, finite type and dominance, and Step 3 gives the required nonempty special fibre. We obtain $R\\hookrightarrow R_0$, locally, with fraction field $K_0$ finite over $K$, and $c:\\operatorname{Spec}R_0\\to Y$ whose generic restriction is a point $y_0\\in U(K_0)$.",
+   "uses": [
+    "lem-sfb-dense-generic-trait-selection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, more-morphisms-lemma-quasi-finite-quasi-section-meeting-nearby-open-X; its trait consequence in the cited node, using Tag 00PH."
+   }
+  },
+  {
+   "text": "The fibre $G_K\\times_{Y_K}\\operatorname{Spec}K_0$ over $y_0$ is a nonempty affine finite-type $K_0$-scheme. Choose a maximal ideal of its nonzero coordinate ring; its residue field $K'$ is finite over $K_0$ by [lem-weil-pbc-zariski-lemma]. The resulting point is $h\\in G(K')$ with $\\alpha(h)=y_{0,K'}$. Apply [lem-sfb-local-domain-fg-field-dvr] to the Noetherian local domain $R_0$ and the finite, hence finitely generated, field extension $K'/K_0$. It gives a DVR $R'\\subset K'$ dominating $R_0$ and with fraction field $K'$. Pull $c$ back along $\\operatorname{Spec}R'\\to\\operatorname{Spec}R_0$, then compose $Y\\hookrightarrow X\\to Z^{ss}(A)$ to obtain $b$. On the generic fibre the defining equality $\\alpha(h)=y_{0,K'}$ is exactly $b_{K'}=h\\cdot z_{K'}$. The composite $R\\to R_0\\to R'$ is injective and local; hence closed points map to closed points. The tower $K\\subset K_0\\subset K'$ is finite by multiplying vector-space bases. All maps are over $k$.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "lem-sfb-local-domain-fg-field-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV, algebra-theorem-nullstellensatz, field case; Tag 00PH, algebra-lemma-exists-dvr."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-pgl-invariant-quotient",
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-wf-affine-constructible-open",
+  "lem-sfb-dense-generic-trait-selection",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-sfb-local-domain-fg-field-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Corollary 11(2), p.17, quotient/orbit-closure semistable replacement expanded by Q97, with universal invariant closed images in arbitrary characteristic and trait selection via Stacks 05GU and 00PH. Local Morrison and Alper PDFs WANTED; online sources read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Semistable replacement for a projective scheme with a linearized PGL action over a discrete valuation ring after finite field extension and change of coordinates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {O : Type u_3} [inst_4 : CommRing O] [inst_5 : IsDomain O] [ValuationRing O] {K : Type u_4}\\n  [inst_7 : Field K] [inst_8 : Algebra O K] [IsFractionRing O K\", \"doc\": \"Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\\\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\\\{x_i\\\\}_{i \\\\in I} $ of homogeneous elements in $ \\\\mathcal{A\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the valuative criterion for projective schemes only extends a point to the whole scheme; it does not provide a group translate with semistable special fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic semistable point of a projective GIT problem extends after finite base change and a group translate to a semistable integral point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence.IsStableUnderBaseChange\", \"doc\": \"If a morphism of schemes satisfies the valuative criterion for existence, then any base change (pullback) of this morphism also satisfies the valuative criterion for existence. This means the property\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the valuative criterion for projective schemes only extends a point to the whole scheme; it does not provide a group translate with semistable special fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Semistable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the valuative criterion for projective schemes only extends a point to the whole scheme; it does not provide a group translate with semistable special fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "semistable.*replacement|geometric.*invariant.*theory|PGL.*quotient",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"55\", \"text\": \"def mk : GL n R →* PGL(n, R) := QuotientGroup.mk' (Subgroup.center (GL n R))\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"221\", \"text\": \"lemma map_id : map (RingHom.id R) = MonoidHom.id (PGL(n, R)) := QuotientGroup.map_id _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the valuative criterion for projective schemes only extends a point to the whole scheme; it does not provide a group translate with semistable special fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective geometric invariant theory semistable replacement theorem over DVR in arbitrary characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"{P : MorphismProperty Scheme.{u}} (_ : HasAffineProperty P (affineAnd Q)) (hQi : RingHom.RespectsIso Q)\\n  (hQb : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[P.IsStableUnderBaseChange] : (sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ on schemes is stable under base change, then its source-local closure (the property of being locally $ P $ with respect to coverings of the source scheme) is also stable u\"}\n  {\"name\": \"Projectivization.mk_rep\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"(v : ℙ K V) : mk K v.rep v.rep_nonzero = v\", \"doc\": \"For any projective element $ v $ in $ \\\\mathbb{P}(K, V) $, the equivalence class $[v.\\\\text{rep}]$ of its representative non-zero vector $ v.\\\\text{rep} $ is equal to $ v $, i.e., $[v.\\\\text{rep}] = v$.\"}\n  {\"name\": \"Projectivization.ind\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"{P : ℙ K V → Prop} (h : ∀ (v : V) (h : v ≠ 0), P (mk K v h)) : ∀ p, P p\", \"doc\": \"For any property $ P $ defined on the projectivization $ \\\\mathbb{P}(K, V) $ of a module $ V $ over a division ring $ K $, if $ P $ holds for all equivalence classes $ [v] $ represented by non-zero vec\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"(hQi : RingHom.RespectsIso Q) (hQb : RingHom.IsStableUnderBaseChange Q) : (affineAnd Q).IsStableUnderBaseChange\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"Projectivization.finite_iff_of_finite\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Cardinality\", \"type\": \"[Finite k] : Finite (ℙ k V) ↔ Finite V\", \"doc\": \"Let $ k $ be a finite division ring and $ V $ a module over $ k $. The projectivization $ \\\\mathbb{P}(V) $ of $ V $ is finite if and only if $ V $ itself is finite.\"}\n  {\"name\": \"Projectivization.submodule_injective\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \": Function.Injective (Projectivization.submodule : ℙ K V → Submodule K V)\", \"doc\": \"The function mapping each projective point in the projectivization of a module $ V $ over a division ring $ K $ to the one-dimensional submodule generated by any representative of the point is injecti\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: the valuative criterion for projective schemes only extends a point to the whole scheme; it does not provide a group translate with semistable special fibre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED.",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-git-semistable-replacement",
+  "worker": "stage1",
+  "summary": "Expanded semistable replacement through a projective quotient, invariant schematic orbit closure, generic-open trait selection and an actual group-valued lift after a finite extension; no characteristic, excellence, completeness or finite-normalization assumptions added. Two statement-only supporting nodes, searched in Mathlib.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Converts projectivity of the GIT quotient into properness; generic scheme-theoretic tool."
+   },
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Extends the generic quotient point; generic valuative tool."
+   },
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "Produces an open inside the actual generic orbit image; generic affine Chevalley tool."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Turns a closed point of the group-element lifting fibre into a finite field extension; generic commutative algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-wf-affine-constructible-open",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-468cce468",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-468cce468 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item's statement is unchanged and it is still unsplit on live and side-live. Neither the item nor its via chain is on the 2026-10-19 drop list. The re-split note is for the parent, not this item. Step 1: the quotient gives a projective Q; Q is proper, and the valuative criterion over a valuation ring extends q∘z to S. X is affine over S. Step 2: I checked the scheme-theoretic invariance of I=ker(B→K[G]) through the coaction, flatness over K and torsion-freeness. That PGL_K is integral (it is D_+(det)) is elementary. Step 3: the closed-image clause with T=S and C=Y is a correct use of the node's statement and forces Y_s to be nonempty. Step 4: affine Chevalley, clause 2, gives a nonempty open U inside the orbit image. Step 5: all hypotheses of the trait-selection node hold. Step 6: Zariski's lemma, then 00PH via lem-sfb-local-domain-fg-field-dvr, give h∈G(K') and b with b_K'=h·z_K'. New node lem-sfb-projective-pgl-invariant-quotient is true by Alper Thms 9.1.4/9.7.6 and 5.3.1 (universal closedness of [Z^ss/G]→Q applied to the substack [C/G_T]); tested on a trivial action and on PGL2 acting on P^1 with O(2). New node lem-sfb-dense-generic-trait-selection is true by Stacks 05GU (more-morphisms l.14993) and 00PH (algebra l.29312): κ(z) is finite over K. Tested on R[x], on R[x]/(x²−π), where a degree-2 extension is needed, and on R[1/π], which the hypotheses exclude. Neither new node restates a clause of the item. I compared them with projective-pgl-stable-quotient (a stable-locus quotient only), pgl-geometric-reductivity, affine-pgl-finite-stabilizer-quotient, sbc-noetherian-specialization-trait and the local-domain DVR nodes: no duplicates. I accept the four declared tool uses (projective⇒proper, valuative existence, Chevalley, Zariski) as generic black boxes. Batch-5 flag: lem-sfb-local-domain-fg-field-dvr reaches sec-trace-formula only through def-trf-valuation-ring, a general Mathlib-leaf definition that plays no part in the trace formula or Poincaré duality, so I accept it. Minor point for the maintainer: the new nodes have no lean_audit field."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveGITSemistableReplacement",
+  "declaration": "AlgebraicGeometry.exists_projective_git_semistable_replacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveGITSemistableReplacement.lean",
+  "statement": "theorem exists_projective_git_semistable_replacement (k : Type u) [Field k] (r : ℕ) (hr : 2 ≤ r) (G : Grp (Over (Spec (.of k)))) (π : GeneralLinearGroup (LinearGroupSchemes.Index.{u} r) k ⟶ G.X) (j : StandardGroupSchemes.roots k r ⟶ LinearGroupSchemes.specialLinear k r) (hG : ProjectiveMatrixCentralCover.Presentation k r hr G π j) (Z : Over (Spec (.of k))) [IsHProjective Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (action : ModObj G.X Z) (A : Z.left.Modules) [A.IsInvertible] (hA : Scheme.Modules.IsAmple Z.left A) (D : GroupSchemeLinearization.Linearization action A) (U : Z.left.Opens) (hU : ∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] (x : PGLLinearization.fieldTest k Ω ⟶ Z), x.left (IsLocalRing.closedPoint Ω) ∈ U ↔ D.IsSemistable Ω x) (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Algebra k R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] [Algebra k K] [IsScalarTower k R K] (z : PGLLinearization.fieldTest k K ⟶ Z) (hz : z.left (IsLocalRing.closedPoint K) ∈ U) : ∃ (K' : Type u) (_ : Field K') (_ : Algebra K K') (_ : Algebra k K') (_ : IsScalarTower k K K') (_ : Module.Finite K K') (R' : Subalgebra k K') (_ : IsDiscreteValuationRing R') (_ : IsFractionRing R' K') (φ : R →ₐ[k] R'), Function.Injective φ ∧ IsLocalHom φ ∧ R'.val.comp φ = (IsScalarTower.toAlgHom k K K').comp (IsScalarTower.toAlgHom k R K) ∧ ∃ (h : PGLLinearization.fieldTest k K' ⟶ G.X) (b : specAlgOver (k := k) R' ⟶ Z), (∀ p : Spec (.of R'), b.left p ∈ U) ∧ specAlgOverMap R'.val ≫ b = GroupSchemeLinearization.act action (PGLLinearization.fieldTest k K') h (specAlgOverMap (IsScalarTower.toAlgHom k K K') ≫ z) ∧ (Spec.map (CommRingCat.ofHom φ.toRingHom)) (IsLocalRing.closedPoint R') = IsLocalRing.closedPoint R",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the general group-scheme linearization and PGL presentation exposed by the recorded Hilbert-Pluecker module. A point into the semistable open is represented equivalently by a point into Z whose image lies in U. The output DVR is identified with its image subalgebra in its fraction field, and the ring/field inclusions are explicitly compatible. No added characteristic or stabilizer restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0218cb8fb",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Only the item's lean field changed (diffed vs side-live); statement field verbatim in file. Clause-by-clause: any field k; r≥2 with PGL pinned by ProjectiveMatrixCentralCover.Presentation (Prop, ∃! fpqc universal property, same convention as HP stmt_dep); Z IsHProjective+LocallyOfFiniteType+QuasiCompact; ModObj action; invertible ample A with GroupSchemeLinearization.Linearization D; Z^ss via U with hU ↔ D.IsSemistable on all alg-closed Ω (unique and existent open, not an extra assumption); DVR R/K with tower; z with hz∈U; conclusion ∃ K' finite over K, R' DVR subalgebra with fraction field K', φ injective local k-alg map compatible with K→K', h:fieldTest K'⟶G.X, b:Spec R'→Z into U, specAlgOverMap R'.val≫b = act h (z_K') (variance checked), closed point ↦ closed point. Edge cases r=2, char|r, nonreduced Z, empty Z/U vacuous, single universe u forced by Scheme.{u}. Sorry-only, docstrings with source and six steps, lines ≤100, imports per brief l.114 (proof-dep modules plain). No duplicate found. No compile (no file changed). Advisory: Lean uses def-sfb-group-scheme-linearization, lem-sfb-projective-matrix-central-cover.Presentation and def-sfb-pgl-linearized-polarization.fieldTest, reached only through the HP stmt_dep (no HilbertPlucker.* used); stmt_deps unchanged by the delivery; maintainer may add them later."
+ }
+}

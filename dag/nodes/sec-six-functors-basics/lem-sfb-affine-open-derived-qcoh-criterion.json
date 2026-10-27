@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-affine-open-derived-qcoh-criterion",
+ "kind": "statement",
+ "title": "Affine-open criterion for comparison of unbounded quasi-coherent derived categories",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism]. For every scheme $T$, write $\\mathcal A_T=\\mathrm{QCoh}(\\mathcal O_T)$ for the full category of quasi-coherent structure-sheaf modules [pqf-def-coherent, def-weil-sheaf-of-modules-category], with its abelian structure induced from module sheaves (kernels and cokernels are the ambient ones). Let $I_T:D(\\mathcal A_T)\\to D_{\\mathrm{QCoh}}(\\mathcal O_T)$ be the functor induced by termwise inclusion [def-weil-abstract-derived-category, def-pc-derived-category]. For an affine open $U\\subseteq X$ with inclusion $j:U\\hookrightarrow X$ [def-weil-open-immersion], let $j_*$ be the direct image of module sheaves and $Rj_*:D(\\mathcal O_U)\\to D(\\mathcal O_X)$ its derived direct image, computed by K-injective resolutions [def-pc-ringed-spaces-derived-direct-image, def-pc-derived-direct-image]. Assume, for every affine open $U\\subseteq X$:\n(a) $j_*$ carries quasi-coherent $\\mathcal O_U$-modules to quasi-coherent $\\mathcal O_X$-modules, so that it restricts to an additive functor $j_*:\\mathcal A_U\\to\\mathcal A_X$;\n(b) this functor has a total right derived functor $\\Phi_j:D(\\mathcal A_U)\\to D(\\mathcal A_X)$ with unit $\\eta:Q_X\\circ j_*\\Rightarrow\\Phi_j\\circ Q_U$, in the sense of the universal property of [def-sfb-right-derived-functor] (no K-injective resolutions in $\\mathcal A_U$ are assumed);\n(c) there is a natural isomorphism $c:I_X\\circ\\Phi_j\\xrightarrow{\\sim}Rj_*\\circ I_U$ such that, for every complex $F$ of $\\mathcal A_U$, the composite $c_{Q_UF}\\circ I_X(\\eta_F)$ is the canonical map $Q(j_*F)\\to Rj_*(QF)$, namely the localization of $j_*(s):j_*F\\to j_*J$ for a K-injective resolution $s:F\\to J$ in $\\Mod(\\mathcal O_U)$ [def-pc-ringed-spaces-derived-direct-image]; here $I_X(Q_X j_*F)$ and $I_U(Q_UF)$ are identified with the localizations of the underlying module complexes by [lem-weil-pbc-exact-functor-derived-factorization].\nThen $I_X:D(\\mathcal A_X)\\to D_{\\mathrm{QCoh}}(\\mathcal O_X)$ is an equivalence of categories. All derived categories here are unbounded; the hypothesis is about the entire derived functors, not only their degree-zero sheaves.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09T6, perfect-lemma-argument-proves, statement; equivalence conclusion only, without naming its coherator quasi-inverse."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-weil-open-immersion",
+  "def-sfb-right-derived-functor",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-qcoh-grothendieck-generators"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact inclusion $i_T:\\mathcal A_T\\to\\operatorname{Mod}(\\mathcal O_T)$ and its termwise derived functor $I_T$. The cited Grothendieck result gives exactness of $i_T$; hence $H^r(I_TB)=i_TH^r(B)$, since both cohomologies use the same kernels and cokernels. In particular $I_TB=0$ implies $B=0$. Let $I_T\\dashv C_T$ be the derived coherator adjunction, with unit $e_T$ and counit $d_T$, supplied by the coherator node. Both are triangulated and their unit and counit commute with shifts. It suffices to prove $e_X(B)$ invertible for all $B$ and $d_X(E)$ invertible for all quasi-coherent $E$.",
+   "uses": [
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-scheme-derived-coherator-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, opening paragraph, the two adjunction maps"
+   }
+  },
+  {
+   "text": "Say an object is supported on $T\\subseteq X$ when all its cohomology stalks outside $T$ vanish. Induct on $n$ with the simultaneous claim: $e_X(B)$ is invertible whenever $I_XB$ is supported on a closed $T$ contained in a union of $n$ affine opens, and $d_X(E)$ is invertible whenever $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ has such support. For $n=0$, these objects have zero cohomology and so are zero; the first step also gives $B=0$. Their adjunction maps are maps between zero objects, hence invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, hypothesis $H_n$ and base case $n=0$"
+   }
+  },
+  {
+   "text": "For the induction step let $T\\subseteq U_1\\cup\\cdots\\cup U_n$ be closed and put $j:U=U_n\\hookrightarrow X$. The flat-interchange node applies to this affine-open inclusion and to the given $\\Phi_j$ (the unique unit-compatible identification with its total derived functor is understood). Hypothesis (c) is precisely its normalization hypothesis for $c$. It gives a unit $u:B\\to\\Phi_j(B|_U)$ which $I_X$, followed by $c$, sends to the ambient open unit $I_XB\\to Rj_*((I_XB)|_U)$. Choose cone triangles $B\\to\\Phi_j(B|_U)\\to B^{\\prime}\\to B[1]$ and $E\\to Rj_*(E|_U)\\to E^{\\prime}\\to E[1]$. Existence is the cone axiom; $I_X$ sends the first to a distinguished triangle for the ambient unit, by its exactness.",
+   "uses": [
+    "lem-sfb-flat-derived-coherator-interchange",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, induction step, the two displayed triangles and their canonical first arrows"
+   }
+  },
+  {
+   "text": "Apply the supported-open-unit cone theorem first to $I_XB$ and then to $E$. Its over-site restriction is identified with restriction to the scheme $U$ by the exact over-equivalence in the restriction-definition node. The open $U$ is quasi-compact, $X$ is qcqs, and $T$ is closed, so all its hypotheses hold. It says that $I_XB^{\\prime}$ and $E^{\\prime}$ have quasi-coherent cohomology, vanish off $T$, and vanish after restriction to $U$. Thus they are supported on $T\\setminus U$, a closed subset of $X$ contained in $U_1\\cup\\cdots\\cup U_{n-1}$. The induction hypothesis gives invertibility of $e_X(B^{\\prime})$ and $d_X(E^{\\prime})$. This uses no assertion that intersections of affine opens are affine.",
+   "uses": [
+    "lem-pc-supported-open-unit-cone-properties",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, the cones are supported on $T\\setminus U$"
+   }
+  },
+  {
+   "text": "The affine coherator theorem makes $e_U(B|_U)$ and $d_U(E|_U)$ invertible. In the flat-interchange node put $f=j$ and $D=B|_U$. Its first identity identifies $e_X(\\Phi_jD)$, after the isomorphisms $C_X(c_D)$ and $\\lambda_{I_UD}$, with $\\Phi_j(e_U(D))$; hence it is invertible. Its second identity expresses $d_X(Rj_*G)$, for $G=E|_U$, as $Rj_*(d_U(G))\\circ c_{C_UG}\\circ I_X(\\lambda_G)$, also a composite of isomorphisms. These are the actual adjunction maps, rather than arbitrary isomorphisms between their source and target.",
+   "uses": [
+    "lem-sfb-affine-derived-coherator",
+    "lem-sfb-flat-derived-coherator-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, last two displays and final affine application"
+   }
+  },
+  {
+   "text": "Apply the natural unit $e_X$ to the first cone triangle to obtain a morphism from that triangle to its image under the exact functor $C_XI_X$. Its components on the middle vertex and on $B^{\\prime}$ are invertible by steps 5 and 4. The two-out-of-three theorem for morphisms of distinguished triangles gives invertibility on $B$. Apply the natural counit $d_X$ from the $I_XC_X$-image of the second triangle to that triangle. Its components on $Rj_*(E|_U)$ and $E^{\\prime}$ are invertible by the same steps, so its component on $E$ is invertible. The shift compatibility in the coherator node supplies the last square of both triangle morphisms. This completes the simultaneous induction.",
+   "uses": [
+    "lem-sfb-scheme-derived-coherator-adjunction",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, application of Derived Categories Tag 014A"
+   }
+  },
+  {
+   "text": "A quasi-compact scheme has a finite affine open cover. Choose one for $X$ and use the induction with $T=X$ and its number of members. Then $e_X(B)$ is invertible for every $B\\in D(\\mathcal A_X)$ and $d_X(E)$ is invertible for every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Restricting $C_X$ to that full subcategory gives a functor back to $D(\\mathcal A_X)$; the invertible unit and counit are natural isomorphisms between the two composites and the identities, which is the required equivalence.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, perfect-lemma-argument-proves, conclusion from $H_n$ for a finite affine cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcoh-grothendieck-generators",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-scheme-derived-coherator-adjunction",
+  "lem-sfb-flat-derived-coherator-interchange",
+  "def-weil-triangulated-category",
+  "lem-pc-supported-open-unit-cone-properties",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sfb-affine-derived-coherator",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09T6, perfect-lemma-argument-proves; adjunction-map normalization made explicit using Tag 08D8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme if derived pushforward from every affine open commutes with inclusion of quasi coherent sheaves then the comparison of unbounded derived categories is an equivalence",
+   "results": "8 hits: CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, DerivedCategory.instEssSurjCochainComplexIntQ, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Functor.mapDerivedCategoryFactors, DerivedCategory.quotientCompQhIso",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comparison from the derived category of quasi coherent sheaves to complexes with quasi coherent cohomology is an equivalence provided it commutes with right derived pushforward from every affine open",
+   "results": "8 hits: DerivedCategory.isIso_Qh_map_iff, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, DerivedCategory.isIso_Q_map_iff_quasiIso, HasDerivedCategory.standard, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"equivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence criterion for the derived inclusion of quasi coherent sheaves proved by induction on closed support contained in finitely many affine open subsets using derived extension from an affine open",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.localGeneratorsData_I, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.isQuasicoherent, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*derived|derived.*quasi.?coherent|coherator",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*derived|derived.*quasi.?coherent|coherator",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf derived category comparison equivalence from affine open pushforwards",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, HasDerivedCategory.standard, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"equivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme the unbounded derived inclusion of quasi coherent modules is an equivalence if it commutes with derived pushforward from affine opens",
+   "results": "8 hits: DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.quotientCompQhIso, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instEssSurjCochainComplexIntQ, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qc-separated-quasicoherent-complex-model",
+  "date": "2026-10-23",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB. Prerequisite of the 08DB argument: Tag 09T6, affine-open derived-pushforward comparison criterion.",
+   "via": [
+    "lem-sfb-qc-separated-quasicoherent-complex-model",
+    "lem-sfb-ample-twist-hypercohomology-detection",
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-open-derived-qcoh-criterion",
+  "worker": "stage1",
+  "summary": "Reconstructed the simultaneous closed-support induction of 09T6. Reused the qcqs supported-open cone theorem and finite affine cover theorem. Added three statement-only prerequisites for the scheme-derived coherator, affine adjunction maps, and normalized flat interchange. Preserved the statement and all hypotheses; made the actual unit/counit identities explicit.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB. Prerequisite of the 08DB argument: Tag 09T6, affine-open derived-pushforward comparison criterion. The current direct-images blueprint proof (3) is the upper route; this lower prerequisite follows 09T6, opening adjunction reduction, support induction, and affine closing argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic derived-category/support/finite-affine-cover tool used in the 09T6 induction; the constructible-functor unit supplies no substitute."
+   },
+   {
+    "node": "lem-pc-supported-open-unit-cone-properties",
+    "why": "Generic derived-category/support/finite-affine-cover tool used in the 09T6 induction; the constructible-functor unit supplies no substitute."
+   },
+   {
+    "node": "def-pc-derived-open-restriction-maps",
+    "why": "Generic derived-category/support/finite-affine-cover tool used in the 09T6 induction; the constructible-functor unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic derived-category/support/finite-affine-cover tool used in the 09T6 induction; the constructible-functor unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Generic derived-category/support/finite-affine-cover tool used in the 09T6 induction; the constructible-functor unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-supported-open-unit-cone-properties",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-35bcaf99b",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-35bcaf99b (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full against Stacks perfect.tex 08D6, 08D8, 08D9 and 09T6 and properties 077P(2); all tags check against tags/tags. The item statement and stmt_deps are byte-identical to live, where the item is still unsplit, and no live or side-live node duplicates the new ones. The 7 steps follow 09T6 with nothing dropped: the I_X kernel test, the simultaneous H_n with base n=0, the triangles via the flat-node unit identity, cone support T\\U via lem-pc-supported-open-unit-cone-properties (all hypotheses checked, no affine intersections), the middle-vertex adjunction maps via the affine coherator node and the flat-node identities, 014A two-out-of-three, and the finite affine cover with T=X. I type-checked the three flat-interchange identities and checked them by mates: the unit identity follows from the 09T5 derived unit being the termwise unit followed by η, together with the normalization of c. The new nodes are true, statement-only and strictly smaller than the item. None duplicates lem-sfb-qcoh-grothendieck-generators, lem-pc-dq-coherator-adjunction, lem-pc-affine-qcoh-derived-equivalence or the new-affine-qcoh-* nodes. Edge cases tested: empty X, the zero ring, a non-Noetherian A, unbounded complexes, f=id. The tool_uses (the supported-open cone lemma, 014A, the finite affine cover, the exact-functor factorization, the open-restriction maps) are generic and accepted. The null blueprint.from.node is inherited from the base node, not a fault of this delivery. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenDerivedQuasiCoherentCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineOpen_derived_quasiCoherent_criterion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.quasiCoherentModulePushforward",
+   "AlgebraicGeometry.Scheme.Modules.quasiCoherentModulePushforward_additive",
+   "AlgebraicGeometry.Scheme.Modules.quasiCoherentPushforwardComplexIso",
+   "AlgebraicGeometry.Scheme.Modules.quasiCoherentAmbientDerivedPushforward",
+   "AlgebraicGeometry.Scheme.Modules.moduleDirectImageDerivedComparison",
+   "AlgebraicGeometry.Scheme.Modules.quasiCoherentDerivedInclusion",
+   "AlgebraicGeometry.Scheme.Modules.quasiCoherentDerivedInclusionFactors",
+   "AlgebraicGeometry.Scheme.Modules.DerivedInclusionSquareCompatible",
+   "AlgebraicGeometry.Scheme.Modules.DerivedInclusionSquareData",
+   "AlgebraicGeometry.Scheme.Modules.affineOpen_derived_quasiCoherent_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenDerivedQuasiCoherentCriterion.lean",
+  "statement": "theorem affineOpen_derived_quasiCoherent_criterion [∀ T : Scheme.{u}, HasDerivedCategory.{wA} (SheafOfModules.isQuasicoherent T.ringCatSheaf).FullSubcategory] [∀ T : Scheme.{u}, HasDerivedCategory.{wM} (SheafOfModules.{u} T.ringCatSheaf)] (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (hQC : ∀ U : X.affineOpens, ∀ M : (SheafOfModules.isQuasicoherent U.1.toScheme.ringCatSheaf).FullSubcategory, ((RingedSpace.moduleDirectImage U.1.ι.toLRSHom.toShHom).obj M.obj).IsQuasicoherent) (hDerived : ∀ U : X.affineOpens, Nonempty (DerivedInclusionSquareData (A := CochainComplex (SheafOfModules.isQuasicoherent U.1.toScheme.ringCatSheaf).FullSubcategory ℤ) (B := CochainComplex (SheafOfModules.isQuasicoherent X.ringCatSheaf).FullSubcategory ℤ) (M := CochainComplex (SheafOfModules.{u} U.1.toScheme.ringCatSheaf) ℤ) (N := CochainComplex (SheafOfModules.{u} X.ringCatSheaf) ℤ) (DA := DerivedCategory.{wA} (SheafOfModules.isQuasicoherent U.1.toScheme.ringCatSheaf).FullSubcategory) (DB := DerivedCategory.{wA} (SheafOfModules.isQuasicoherent X.ringCatSheaf).FullSubcategory) (DM := DerivedCategory.{wM} (SheafOfModules.{u} U.1.toScheme.ringCatSheaf)) (DN := DerivedCategory.{wM} (SheafOfModules.{u} X.ringCatSheaf)) DerivedCategory.Q.{wA} DerivedCategory.Q.{wA} DerivedCategory.Q.{wM} DerivedCategory.Q.{wM} ((SheafOfModules.isQuasicoherent U.1.toScheme.ringCatSheaf).ι.mapHomologicalComplex (ComplexShape.up ℤ)) ((SheafOfModules.isQuasicoherent X.ringCatSheaf).ι.mapHomologicalComplex (ComplexShape.up ℤ)) ((quasiCoherentModulePushforward U.1.ι (hQC U)).mapHomologicalComplex (ComplexShape.up ℤ)) ((RingedSpace.moduleDirectImage U.1.ι.toLRSHom.toShHom).mapHomologicalComplex (ComplexShape.up ℤ)) (quasiCoherentDerivedInclusion.{u, wA, wM} U.1.toScheme) (quasiCoherentDerivedInclusion.{u, wA, wM} X) (quasiCoherentAmbientDerivedPushforward.{u, wM} U.1.ι) (quasiCoherentDerivedInclusionFactors.{u, wA, wM} U.1.toScheme) (quasiCoherentDerivedInclusionFactors.{u, wA, wM} X) (quasiCoherentPushforwardComplexIso U.1.ι (hQC U)) (moduleDirectImageDerivedComparison.{u, wM} U.1.ι))) : ∃ h : ∀ B : DerivedCategory.{wA} (SheafOfModules.isQuasicoherent X.ringCatSheaf).FullSubcategory, schemeDerivedQCohProperty X ((quasiCoherentDerivedInclusion.{u, wA, wM} X).obj B), ((schemeDerivedQCohProperty X).lift (quasiCoherentDerivedInclusion.{u, wA, wM} X) h).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-901b3f0f6",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Item states Stacks 09T6 faithfully: qcqs X; QCoh with Mathlib induced Abelian instance (closure instances exposed by the §1(B) additive repair of lem-sfb-qcoh-grothendieck-generators, original theorem/record verbatim); (a)=hQC; (b)=Phi/eta with Kan-extension bijectivity as worded in def-sfb-right-derived-functor (equiv. IsRightDerivedFunctor), no resolutions on A_U; (c)=comparison + compatible equation with unit = beta of derivedModuleDirectImageFactorization (canonical Q(j_*s) map); conclusion = lift of the fixed I_X is an equivalence. Mechanical theorem-stmt_dep finding: statement needs the theorem's Prop closure conclusions to type the Abelian/HasDerivedCategory structure, PASS on that point. Statements verbatim, no name clashes, no hollow defs, only sorry; no compile run (no changes); live importers SchemeDerivedCoheratorAdjunction/AffineDerivedCoherator not compiled, left to the landing compile."
+ }
+}

@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-ringed-bounded-below-section-window-comparison",
+ "kind": "statement",
+ "title": "Finite cohomology windows control bounded-below derived sections",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Let $\\mathcal C$ be a site small relative to the coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and let $\\mathcal O$ be a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category] and their ordinary derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category]. Let $\\mathcal S\\subseteq\\operatorname{Mod}(\\mathcal O)$ be a strictly full subcategory containing zero and closed under kernels and cokernels of maps between its objects and under extensions. Fix $U\\in\\mathcal C$ and an integer $d\\geq0$ such that $H^p(U,M)=0$ for every $M\\in\\mathcal S$ and every $p>d$. Here $R\\Gamma(U,-)$ is the right derived functor of sections, followed by forgetting scalars, and $H^r(U,E)=H^r(R\\Gamma(U,E))$; a sheaf is placed in degree zero. Let $f:E\\to F$ be a morphism in $D(\\mathcal O)$, where $E,F$ are bounded below (each has zero cohomology below some integer, with no common bound prescribed) and all their cohomology sheaves belong to $\\mathcal S$. For integers $a\\leq b$, suppose that $H^q(f)$ is an isomorphism whenever $a-d-1\\leq q\\leq b+1$. Then the actual induced map\n$$H^r(U,f):H^r(U,E)\\longrightarrow H^r(U,F)$$\nis an isomorphism for every $a\\leq r\\leq b$. No covering-basis, exact-product, or uniform lower-bound hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6T, label lemma-olsson-laszlo-modified, proof, first paragraph: finite-window comparison of the bounded-below hypercohomology spectral sequences; formulated for an individual morphism and a single site object."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe"
+ ],
+ "proof": [
+  {
+   "text": "Put $v=\\Gamma(U,-):\\operatorname{Mod}(\\mathcal O)\\to\\operatorname{Ab}$, forgetting the section-ring action. It is additive and left exact: addition is sectionwise and a kernel of module sheaves is computed sectionwise [def-weil-sheaf-of-modules-category]. The source category is Grothendieck and admits K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. The target is Grothendieck by [lem-weil-pbc-ring-modules-grothendieck-abelian] with $R=\\mathbf Z$ (abelian groups are precisely $\\mathbf Z$-modules). Thus the derived functor $Rv$ in the hypercohomology theorem is the specified $R\\Gamma(U,-)$, and its value on $M[0]$ computes the stated $H^p(U,M)$ by [lem-sp-kinjective-computes].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, construction of derived evaluation; derived.tex Tag 015J, lemma-two-ss-complex-functor"
+   }
+  },
+  {
+   "text": "Complete $f$ to a distinguished triangle $E\\xrightarrow f F\\to C\\to E[1]$ in the derived category [def-weil-abstract-derived-category]. The long exact sequence [lem-sf-derived-homology-long-exact] gives $0\\to\\operatorname{coker}H^q(f)\\to H^q(C)\\to\\ker H^{q+1}(f)\\to0$. Since the two outer objects lie in $\\mathcal S$, so does $H^q(C)$, by exactly the kernel, cokernel and extension hypotheses. If $E,F$ vanish below $m$, then this sequence gives $H^q(C)=0$ for $q<m-1$; choose $m$ to be the minimum of their two lower bounds. Further, the assumed isomorphisms give $H^q(C)=0$ for $a-d-1\\le q\\le b$, since both $q$ and $q+1$ are in the assumed interval.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS, lemma-cohomology-homological; Tag 05RU, derived category and cone triangles"
+   }
+  },
+  {
+   "text": "The standard t-structure [def-sbc-standard-tstructure-derived-category] supplies a bounded-below complex representing $C$, because its cohomology is bounded below by Step 2. Apply [thm-sp-truncation-e2] to this complex and the functor $v$ of Step 1. It gives a convergent spectral sequence with $E_2^{p,q}=H^p(U,H^q(C))$, zero for $p<0$, and finite exhaustive separated filtrations of $H^t(U,C)$ whose graded pieces are $E_\\infty^{p,t-p}$. Its use with the specified K-injective derived sections is legitimate by [lem-sp-kinjective-computes]: a bounded-below injective resolution computes the same derived functor. All cohomology sheaves $H^q(C)$ belong to $\\mathcal S$, so the bound in the hypothesis also gives $E_2^{p,q}=0$ for $p>d$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "thm-sp-truncation-e2",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J, lemma-two-ss-complex-functor; sites-cohomology.tex Tag 0D6T, lemma-olsson-laszlo-modified, first paragraph"
+   }
+  },
+  {
+   "text": "Fix $a\\le r\\le b$ and take $t=r-1$ or $t=r$. On total degree $t$, terms with $p<0$ or $p>d$ vanish by Step 3. For $0\\le p\\le d$, the index $q=t-p$ satisfies $a-d-1\\le q\\le b$, so Step 2 makes $H^q(C)=0$ and hence $E_2^{p,q}=0$. A zero term stays zero on each later page, since each next term is the kernel of the outgoing differential modulo the image of the incoming differential. Therefore every $E_\\infty$ term on this diagonal is zero. By the finite filtration and graded-piece assertion of [thm-sp-truncation-e2], every successive quotient of the filtration of $H^t(U,C)$ is zero. Starting at its zero endpoint and inducting through its finitely many steps gives $H^t(U,C)=0$. In particular $H^{r-1}(U,C)=H^r(U,C)=0$.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6T, lemma-olsson-laszlo-modified, first paragraph; diagonal vanishing calculation using derived.tex Tag 015J"
+   }
+  },
+  {
+   "text": "The right derived functor $Rv=R\\Gamma(U,-)$ carries the triangle of Step 2 to a distinguished triangle, by [lem-pc-right-derived-functor-triangulated]; the K-injective hypotheses hold by Step 1 (and for the target by the Grothendieck resolution theorem [lem-weil-pbc-kinjective-functorial-existence]). Apply [lem-sf-derived-homology-long-exact] in $D(\\operatorname{Ab})$. The resulting exact segment is $H^{r-1}(U,C)\\to H^r(U,E)\\xrightarrow{H^r(U,f)}H^r(U,F)\\to H^r(U,C)$. The outer groups vanish by Step 4, proving that the middle arrow is an isomorphism. It is the actual arrow $H^r(R\\Gamma(U,f))$ because the triangle is obtained by applying that functor to the original triangle; no comparison map was chosen anew.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, exact derived functors on module sheaves; derived.tex Tags 05RS and 015J; cone form of the finite-window comparison in Tag 0D6T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sp-kinjective-computes",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "thm-sp-truncation-e2",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6T first paragraph, expanded by applying Tag 015J to the cone instead of comparing two spectral sequences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hypercohomology|cohomologicalDimension|cohomological.dimension|finite.window",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation, support and derived-functor universal-property lemmas do not give finite-window comparison under a bound only on a weak Serre subcategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below complex of sheaves with locally bounded cohomological dimension has hypercohomology in degree j depending only on a finite interval of its cohomology sheaves",
+   "results": "8 hits; CochainComplex.isZero_of_isGE, CategoryTheory.Sheaf.H, CochainComplex.isZero_of_isStrictlyGE, CochainComplex.isStrictlyGE_of_ge, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt, CochainComplex.isStrictlyGE_iff, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation, support and derived-functor universal-property lemmas do not give finite-window comparison under a bound only on a weak Serre subcategory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsIso\"",
+   "results": "12 hits; CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor, CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso, CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso, CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι, CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation, support and derived-functor universal-property lemmas do not give finite-window comparison under a bound only on a weak Serre subcategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site finite cohomological dimension for a weak Serre subcategory implies a morphism of bounded below complexes that is an isomorphism on a finite interval of cohomology sheaves is an isomorphism on hypercohomology in a smaller interval",
+   "results": "8 hits; CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.quasiIso_πTruncGE_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.ConnectData.homologyIsoPos, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation, support and derived-functor universal-property lemmas do not give finite-window comparison under a bound only on a weak Serre subcategory"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(IsLE|IsGE)|[Ii]sIso.*(homology|trunc)",
+   "results": "25 hits; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation, support and derived-functor universal-property lemmas do not give finite-window comparison under a bound only on a weak Serre subcategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a bounded below complex has cohomology sheaves acyclic above degree d on U, derived sections in degree j only depend on cohomology in degrees j-d through j; compare morphisms by their mapping cones",
+   "results": "8 hits; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.isKInjective_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation, support and derived-functor universal-property lemmas do not give finite-window comparison under a bound only on a weak Serre subcategory"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|cohomologicalDimension|finite.window",
+   "results": "0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: support/truncation and dimension facts do not assert the finite-window hypercohomology comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cohomological dimension implies bounded below derived sections in a degree depend only on a finite window of cohomology sheaves",
+   "results": "8 hits; CochainComplex.isZero_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.projectiveDimension_ne_top_iff, CategoryTheory.injectiveDimension_ne_top_iff, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SSet.hasDimensionLT_of_finite, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, SheafOfModules.GeneratingSections.IsFiniteType.finite; ",
+   "date": "2026-10-23",
+   "verdict": "no match: support/truncation and dimension facts do not assert the finite-window hypercohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, IsIso",
+   "results": "0 hits; ; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-23",
+   "verdict": "invalid pattern: unknown identifier; replaced by the later quoted-name Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a map of bounded below complexes inducing cohomology isomorphisms on a finite interval induces hypercohomology isomorphisms on a smaller interval under finite cohomological dimension",
+   "results": "8 hits; CochainComplex.quasiIso_truncLEMap_iff, CochainComplex.ConnectData.homologyIsoPos, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g, HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE', CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; ",
+   "date": "2026-10-23",
+   "verdict": "no match: support/truncation and dimension facts do not assert the finite-window hypercohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a left exact functor of finite cohomological dimension a bounded below object whose cohomology vanishes on a sufficiently wide interval has derived functor cohomology vanishing in a smaller interval",
+   "results": "8 hits; DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.instIsLEObjSingleFunctor; ",
+   "date": "2026-10-23",
+   "verdict": "no match: support/truncation and dimension facts do not assert the finite-window hypercohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"homology\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: support/truncation and dimension facts do not assert the finite-window hypercohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isGE_iff|isLE_iff|quasiIso_truncLEMap_iff|quasiIso_truncGEMap_iff",
+   "results": "18 hits; Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: support/truncation and dimension facts do not assert the finite-window hypercohomology comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-local-bound-stationary-limit-cohomology",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: apply the general truncation-stability lemma with N = 0; supporting input: target-site cohomology of an eventually stationary bounded-below tower (Stacks 0D6T); finite-window comparison of derived sections in the first paragraph of the proof of Stacks Tag 0D6T",
+   "via": [
+    "lem-sfb-ringed-local-bound-stationary-limit-cohomology",
+    "lem-sfb-ringed-local-bound-direct-image-truncation",
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-bounded-below-section-window-comparison",
+  "worker": "stage1",
+  "summary": "Q63 checked Stacks 0D6T and 015J and proves the comparison through the mapping cone, weak-Serre closure, diagonal vanishing and finite filtration. All prerequisites already exist in the DAG; no new nodes or stronger global dimension assumption. Statement unchanged.",
+  "blueprint": "Supports the inherited direct-image route of det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded stationary-limit/truncation/descent ancestor chain; realizes the finite-window comparison in Stacks 0D6T. The inherited blueprint ancestor is null (blueprint_refs ancestor prints None); same_as searched and none found.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small ringed-site resolution theorem; provides Grothendieckness and K-injective resolutions, without replacing the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Generic algebra tool at R=Z to verify the target of the spectral-sequence theorem is Grothendieck."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic comparison of bounded-below injective and K-injective derived-functor values."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic convergent hypercohomology spectral-sequence tool used by Stacks 0D6T; no such general spectral sequence is stated in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic Grothendieck K-injective resolution theorem, used for the target category of derived evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sp-kinjective-computes",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-17bd844cd",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-17bd844cd (reviewer sub-agent of L); spot-checked: I read the item's 5-step proof in full against Stacks sites-cohomology 0D6T (lemma-olsson-laszlo-modified, l.5726, first paragraph of the proof) and derived 015J (l.7177). Statement unchanged versus live and side-live, where the item is still unsplit with an empty proof: no supersession and no re-split note. No new nodes. Step 2: the cone sequence 0→coker H^q f→H^q C→ker H^{q+1} f→0 puts H^q(C) in S by the weak-Serre closures alone, with H^q(C)=0 on [a−d−1,b] and below min(lower bounds)−1. Steps 3–4: thm-sp-truncation-e2 clauses 2, 4, 5 and 6 on a bounded-below representative (via the standard t-structure). For t=r−1 or t=r and 0≤p≤d, q=t−p lies in [a−d−1,b], so all E_2 terms on these diagonals vanish (p>d vanishes because H^q C∈S), hence E_∞=0 and, by the finite filtration, H^t=0. Step 5: lem-pc-right-derived-functor-triangulated plus the long exact sequence give the actual map H^r(RΓ f) as an isomorphism. The parent uses a=j−1, b=j, which gives exactly the Stacks window [j−d−2,j+1]. Hypothesis sharpness checked with E=M[2], F=0. No duplicate found (finite-cd upper-bound lemmas are different). Five declared tool_uses accepted. The undeclared lem-pc-right-derived-functor-triangulated is Lean-closed (slopmaster2) and generic, so it is acceptable. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedBoundedBelowSectionWindowComparison",
+  "declaration": "CategoryTheory.ringed_boundedBelow_section_window_comparison",
+  "declarations": [
+   "CategoryTheory.ringedSiteDerivedEvaluation",
+   "CategoryTheory.ringed_boundedBelow_section_window_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedBoundedBelowSectionWindowComparison.lean",
+  "statement": "theorem ringed_boundedBelow_section_window_comparison (S : ObjectProperty (ringedSiteModules.{r, r, v, c} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) [S.IsClosedUnderIsomorphisms] (hzero : S 0) (hkernel : ∀ {M N : ringedSiteModules.{r, r, v, c} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)} (g : M ⟶ N), S M → S N → S (kernel g)) (hcokernel : ∀ {M N : ringedSiteModules.{r, r, v, c} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)} (g : M ⟶ N), S M → S N → S (cokernel g)) [S.IsClosedUnderExtensions] (U : C) (d : ℤ) (hd : 0 ≤ d) (hcd : ∀ (M : ringedSiteModules.{r, r, v, c} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)), S M → ∀ p : ℤ, d < p → IsZero ((DerivedCategory.homologyFunctor _ p).obj ((ringedSiteDerivedEvaluation R U).obj ((DerivedCategory.singleFunctor _ 0).obj M)))) {E F : DerivedCategory (ringedSiteModules.{r, r, v, c} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))} (f : E ⟶ F) (hE : ∃ m : ℤ, ∀ q : ℤ, q < m → IsZero ((DerivedCategory.homologyFunctor _ q).obj E)) (hF : ∃ m : ℤ, ∀ q : ℤ, q < m → IsZero ((DerivedCategory.homologyFunctor _ q).obj F)) (hES : ∀ q : ℤ, S ((DerivedCategory.homologyFunctor _ q).obj E)) (hFS : ∀ q : ℤ, S ((DerivedCategory.homologyFunctor _ q).obj F)) (a b : ℤ) (hab : a ≤ b) (hf : ∀ q : ℤ, a - d - 1 ≤ q → q ≤ b + 1 → IsIso ((DerivedCategory.homologyFunctor _ q).map f)) : ∀ n : ℤ, a ≤ n → n ≤ b → IsIso ((DerivedCategory.homologyFunctor _ n).map ((ringedSiteDerivedEvaluation R U).map f))",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the canonical total right derived functor of Mathlib evaluation with scalars forgotten. It retains independent site and coefficient universes using the already published coefficient-universe Grothendieck theorem; no new theorem or arbitrary derived map is used in its construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37cfd584a",
+  "group": "Q28",
+  "result": "pass",
+  "note": "All clauses match node/Stacks 0D6T: zero, kernel, cokernel and extension closure without IsSerreClass; separate lower bounds; window [a-d-1,b+1]; IsIso of H^n of RΓ applied to the actual f. Window math checked on the cone. Theorem stmt_dep lem-pur-ringed-site-grothendieck-coefficient-universe: its module holds only the theorem, whose Prop IsGrothendieckAbelian conclusion the helper ringedSiteDerivedEvaluation needs to build RΓ. Genuine dependency, no definitions to move, PASS on that point. H4: existing derived evaluations are restricted to one universe or max c v r and are theorem-owned; the universe-general helper is a real right-derived construction with docstrings (advisory only). Statement verbatim, one sorry, imports exist; node diff limited to stmt_deps and lean. No compile run because no file changed."
+ }
+}

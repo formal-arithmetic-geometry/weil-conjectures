@@ -1,0 +1,106 @@
+{
+ "id": "lem-sfb-mixed-derived-mate-unit",
+ "kind": "statement",
+ "title": "Right-derived unit normalization of a mixed exact derived mate",
+ "statement": "Let C,D,E,V be abelian categories with derived categories, and assume K-injective resolutions exist in E and V. Let additive exact functors T:C→D, L′:D→V, L:C→E and O:E→V, additive right adjoints R:E→C and P:V→D with L⊣R and L′⊣P, and an isomorphism e:T⋙L′≅L⋙O be given. Write Q for homotopy localization, D for exact derivation, R(−) for right derivation, u_R and u_P for the right-derived unit transformations, and f_T and f_O for the exact-derived homotopy factor isomorphisms. Let β be a specified derived square equal to the exact-derived square induced by e. Let Γ:R(R)⋙D(T)→D(O)⋙R(P) be the mate of β. Let χ:R⋙T→O⋙P be the ordinary mate, and let χ̄_K include the canonical homotopy composition isomorphisms. For every K in the homotopy category of E, D(T)(u_R(K)) followed by Γ(QK) and R(P)(f_O(K)) equals f_T(RK) followed by Q(χ̄_K) and u_P(OK). Conventions: [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E; formal derived-adjunction normalization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Replace the specified derived square β using its normalization equality, while all functors remain abstract. Expand the derived mate as the target adjunction unit, the exact derived square and the source counit. Move the source right-derived unit through these terms using naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the derived counit, square and unit factorization identities. Naturality of the target right-derived unit leaves the homotopy-category image of the ordinary mate.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On a complex representing the homotopy object, check degree by degree that the remaining composite is the ordinary mate. Homotopy quotient functoriality transports this equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J and 0D6E; formal categorical calculation extracted from the tower proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a derived square respects right derived functor units",
+   "results": "Eight hits: Adjunction.derived_unit, derived′_unit, derivedη_fac_app, derivedε_fac_app and related generic adjunction formulas. None gives the mixed-square unit normalization or the normalized pasting statement.",
+   "verdict": "Use the factorization API and prove the mate and pasting calculations.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\"",
+   "results": "Zero Mathlib hits; this API belongs to the adopted source library.",
+   "verdict": "No duplicate.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|rightDerivedFunctorUnit",
+   "results": "Zero Mathlib hits. Local source searches found MapDerivedCategoryMate factorization identities and the right-derived composition unit API, which are used in the proofs.",
+   "verdict": "No duplicate of the two assembled identities.",
+   "date": "2026-10-27"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitTower",
+  "date": "2026-10-27",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-exact-compactification-unit-tower",
+   "place": "Formal mate normalization and pasting steps of the compatible compactification tower proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.MixedDerivedMateUnit",
+  "file": "lean/Sheaf/CategoryTheory/MixedDerivedMateUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.mixedDerivedMateUnit",
+  "statement": "theorem mixedDerivedMateUnit\n    {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]\n    [Abelian C] [Abelian D] [Abelian E] [Abelian V]\n    [HasDerivedCategory C] [HasDerivedCategory D]\n    [HasDerivedCategory E] [HasDerivedCategory V]\n    [Abelian.HasKInjectiveResolutions E] [Abelian.HasKInjectiveResolutions V]\n    (T : C ⥤ D) (L' : D ⥤ V) (L : C ⥤ E) (O : E ⥤ V)\n    (R : E ⥤ C) (P : V ⥤ D)\n    [T.Additive] [L'.Additive] [L.Additive] [O.Additive] [R.Additive] [P.Additive]\n    [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    [PreservesFiniteLimits O] [PreservesFiniteColimits O]\n    (adj : L ⊣ R) (adj' : L' ⊣ P) (e : T ⋙ L' ≅ L ⋙ O)\n    (β : T.mapDerivedCategory ⋙ L'.mapDerivedCategory ⟶\n      L.mapDerivedCategory ⋙ O.mapDerivedCategory)\n    (hβ : (Functor.mapDerivedCategorySquareIso e).hom = β)\n    (K : HomotopyCategory E (.up ℤ)) :\n    T.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫\n        (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction\n          adj'.mapDerivedCategoryRightDerivedAdjunction\n          (TwoSquare.mk _ _ _ _ β)).natTrans.app\n          (DerivedCategory.Qh.obj K) ≫\n        P.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.hom.app K) =\n      T.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫\n        DerivedCategory.Qh.map\n          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ T)) (.up ℤ)).hom.app K ≫\n            ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans.mapHomotopyCategory\n              (.up ℤ)).app K ≫\n            (Functor.mapHomotopyCategoryCompIso (Iso.refl (O ⋙ P)) (.up ℤ)).inv.app K) ≫\n        P.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T103410-L-1066659",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T103410-L-1066659",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

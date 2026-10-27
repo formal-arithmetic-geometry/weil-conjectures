@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-index-one-valued-point-smooth-approximation",
+ "kind": "statement",
+ "title": "Smooth approximation of valued generic points at index one",
+ "statement": "Let $R\\hookrightarrow A$ be an injective local homomorphism of discrete valuation rings [def-sc-discrete-valuation-ring], let $K=\\operatorname{Frac}R$ and $L=\\operatorname{Frac}A$, and suppose $\\mathfrak m_RA=\\mathfrak m_A$ and $\\kappa(A)/\\kappa(R)$ is separable, including the possibly transcendental meaning of [def-weil-pbc-separable-field-extension]. Let $W$ be a smooth finite-type $K$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism] and let $w:\\operatorname{Spec}L\\to W$ be a $K$-morphism [def-weil-affine-spectrum]. There exist a smooth affine finite-type $R$-scheme $U$, an $R$-morphism $a:\\operatorname{Spec}A\\to U$, and a $K$-morphism $h:U_K\\to W$ such that $h\\circ a_K=w$, where $U_K=U\\times_R\\operatorname{Spec}K$ and $a_K$ is the restriction of $a$ [def-pc-base-change]. No excellence, completeness or separability of $L/K$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.6 Proposition 4, printed p.79 (PDF p.85), as used in 7.2 Theorem 1 proof, printed pp.176–177 (PDF pp.182–183): first choose an affine finite-type model of the generic point, then smooth it along the valued point. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf. Agent formulation where explicitly indicated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose $\\pi$ as in [def-sc-discrete-valuation-ring]. From the finite affine cover in the definition of finite type choose $V=\\operatorname{Spec}C\\subset W$ containing the image of $w$; $C$ is a finitely generated $K$-algebra and $w$ is an algebra map $\\psi:C\\to L$. Choose generators $c_1,\\ldots,c_r$ and integers $n_i\\geq0$ with $\\pi^{n_i}\\psi(c_i)\\in A$ (a uniformizer of $A$ is $\\pi$). In $C$ set $B_0=R[\\pi^{n_1}c_1,\\ldots,\\pi^{n_r}c_r]$. The restriction $\\varphi_0=\\psi|_{B_0}$ lands in $A$. This algebra is finite type, multiplication by $\\pi$ is injective since it is invertible in $C$, and $B_0[1/\\pi]=C$: each $c_i=\\pi^{-n_i}(\\pi^{n_i}c_i)$ and $K=R[1/\\pi]$. Its generic spectrum is therefore $V$, which is smooth by restriction of the smooth structure of $W$. The generic-fibre identification uses $B_0\\otimes_RK\\cong B_0[1/\\pi]$, with $b\\otimes(r/\\pi^n)\\mapsto rb/\\pi^n$ and inverse $b/\\pi^n\\mapsto b\\otimes\\pi^{-n}$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-ring-localization-away",
+    "def-sbc-smooth-morphisms",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 7.2 Theorem 1 proof, printed p.176 (PDF p.182), choice of a model in an affine neighbourhood; explicit scaled-generator construction by Q108"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-index-one-differential-defect-criterion] to $(B_0,\\varphi_0)$ and write $d=\\delta_{B_0}(\\varphi_0)\\in\\mathbf N$. Inductively construct $(B_j,\\varphi_j)$ for $0\\leq j\\leq d$, with compatible inclusions into $C$, generic algebra $C$, injective multiplication by $\\pi$, and $\\delta_{B_j}(\\varphi_j)\\leq\\max\\{0,d-j\\}$. The base case is the preceding step. For the induction step take $I_j=\\ker(B_j\\to A\\to\\kappa(A))$ and $B_{j+1}=B_j[I_j/\\pi]$. The dilatation estimate [lem-sfb-index-one-residue-dilatation-defect-drop] supplies finite type, injectivity of $\\pi$, unchanged generic algebra, the compatible map $\\varphi_{j+1}$, and $\\delta_{j+1}\\leq\\max\\{0,\\delta_j-1\\}\\leq\\max\\{0,d-(j+1)\\}$. All its hypotheses persist, including smooth generic spectrum $V$; the DVR extension and residue extension stay fixed. Thus $\\delta_{B_d}(\\varphi_d)=0$. This also covers $d=0$ with no dilatation.",
+   "uses": [
+    "lem-sfb-index-one-differential-defect-criterion",
+    "lem-sfb-index-one-residue-dilatation-defect-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.6 paragraph before Proposition 3, Proposition 3, and the finite iteration yielding Proposition 4, printed p.79 (PDF p.85)"
+   }
+  },
+  {
+   "text": "The criterion [lem-sfb-index-one-differential-defect-criterion] applied to $(B_d,\\varphi_d)$ gives $f\\in B_d$ with $\\varphi_d(f)$ a unit and $U=\\operatorname{Spec}(B_d[1/f])$ smooth over $R$. It is affine and finite type: generators for $B_d$, together with $1/f$, generate its coordinate algebra. The unit condition extends $\\varphi_d$ to $B_d[1/f]\\to A$, giving $a:\\operatorname{Spec}A\\to U$. By [lem-weil-pbc-fibre-product-affine-spectra], $U_K=\\operatorname{Spec}(B_d[1/f]\\otimes_RK)=\\operatorname{Spec}(C[1/f])$ (as $B_d[1/f]\\otimes_RK=B_d[1/f][1/\\pi]$ and $B_d[1/\\pi]=C$) and $a_K$ is $\\operatorname{Spec}$ of $B_d[1/f]\\otimes_RK\\to A\\otimes_RK=A[1/\\pi]$. The generic-fibre map $U_K=\\operatorname{Spec}(C[1/f])\\to\\operatorname{Spec}C=V\\subset W$ defines $h$ (here $f$ denotes its image in $C$). On rings the composite $C\\to C[1/f]\\to L$ is exactly $\\psi$, because every $\\varphi_j$ restricts to $\\varphi_0$ and the generic inclusions identify $B_j[1/\\pi]$ with $C$. Hence $h\\circ a_K=w$. Here $A[1/\\pi]=L$ since $\\pi$ generates $\\mathfrak m_A$, so this generic restriction has domain $\\operatorname{Spec}L$ as required.",
+   "uses": [
+    "lem-sfb-index-one-differential-defect-criterion",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "def-weil-ring-localization-away",
+    "def-pc-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.6 Proposition 4, printed p.79 (PDF p.85), restriction to a smooth affine neighbourhood of the lifted point; final affine-ring factorization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-sfb-index-one-differential-defect-criterion",
+  "lem-sfb-index-one-residue-dilatation-defect-drop",
+  "def-pc-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.6 Proposition 3 and the paragraph preceding it, iterated as in Proposition 4; BLR 7.2 Theorem 1 proof. Primary online scan read; local PDF WANTED. Explicit scaled-generator model and induction written by Q108."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ramification.*smooth|smooth.*approximation|Neron",
+   "results": "{\"t\": \"2026-10-24T07:55:57Z\", \"tool\": \"grep\", \"query\": \"ramification.*smooth|smooth.*approximation|Neron\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth approximation of points over ramification index one extensions of discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T07:55:57Z\", \"tool\": \"leansearch\", \"query\": \"Smooth approximation of points over ramification index one extensions of discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instIsDiscreteValuationRing\", \"Algebra.Smooth.mk\", \"LaurentSeries.exists_ratFunc_val_lt\", \"Algebra.Smooth.of_isLocalization_Away\", \"LaurentSeries.exists_Polynomial_intValuation_lt\", \"Algebra.Smooth.formallySmooth\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth.localization_away\"], \"digest\": \"4197879609340ee6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T07:55:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An L valued point of a smooth finite type variety over the fraction field of a DVR factors through a smooth R scheme when the valuation extension has index one and separable residue extension",
+   "results": "{\"t\": \"2026-10-24T07:55:58Z\", \"tool\": \"leanfinder\", \"query\": \"An L valued point of a smooth finite type variety over the fraction field of a DVR factors through a smooth R scheme when the valuation extension has index one and separable residue extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\"], \"digest\": \"1742ccd92404d769\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ramification one extension of valuation rings any map from a finitely generated smooth generic fibre algebra extends to a smooth model over the smaller valuation ring",
+   "results": "{\"t\": \"2026-10-24T07:55:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a ramification one extension of valuation rings any map from a finitely generated smooth generic fibre algebra extends to a smooth model over the smaller valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt\", \"Algebra.IsUnramifiedAt\", \"RingHom.IsStandardSmoothOfRelativeDimension.toAlgebra\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\"], \"digest\": \"63c5fe70fe550d29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned general smoothness, valuative-criterion, limit, or morphism-property results do not assert this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of a smooth variety over a fraction field factors through a smooth DVR model for an index one valuation extension",
+   "results": "{\"t\": \"2026-10-24T09:05:30Z\", \"tool\": \"leanfinder\", \"query\": \"A point of a smooth variety over a fraction field factors through a smooth DVR model for an index one valuation extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.ValuativeCommSq.K\"], \"digest\": \"e9d461507fa7adf5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; smooth-locus criteria and localization lemmas do not assert the valued-point differential-torsion criterion or the dilatation estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "dilatation|smoothening|smooth.*approximation|Neron",
+   "results": "{\"t\": \"2026-10-24T09:08:00Z\", \"tool\": \"grep\", \"query\": \"dilatation|smoothening|smooth.*approximation|Neron\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; smooth-locus criteria and localization lemmas do not assert the valued-point differential-torsion criterion or the dilatation estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An L valued smooth variety point extends to a smooth model over an index one extension of discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T09:08:01Z\", \"tool\": \"leansearch\", \"query\": \"An L valued smooth variety point extends to a smooth model over an index one extension of discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.baseChange\", \"Algebra.FormallySmooth.of_perfectField\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"397bf904e307f4c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; smooth-locus criteria and localization lemmas do not assert the valued-point differential-torsion criterion or the dilatation estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T09:08:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; smooth-locus criteria and localization lemmas do not assert the valued-point differential-torsion criterion or the dilatation estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neron smooth approximation for a generic valued point without separability of fraction fields",
+   "results": "{\"t\": \"2026-10-24T09:08:02Z\", \"tool\": \"leanfinder\", \"query\": \"Neron smooth approximation for a generic valued point without separability of fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"2687d61fd34d7863\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; smooth-locus criteria and localization lemmas do not assert the valued-point differential-torsion criterion or the dilatation estimate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-strict-local-descent-base-change",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited alteration/trait-extension prerequisite; BLR 3.6 Proposition 4, printed p.79 (PDF p.85), as used in 7.2 Theorem 1 proof, printed pp.176–177 (PDF pp.182–183): first choose an affine finite-type model of the generic point, then smooth it along the valued point.",
+   "via": [
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-index-one-valued-point-smooth-approximation",
+  "worker": "stage1",
+  "summary": "Q108: retained the statement; constructed the valued affine model by scaling a finite set of generators; isolated the arbitrary index-one valued-point defect criterion and one-step residue-centre dilatation estimate as two statement-only nodes; wrote the finite defect induction and final affine localization explicitly. No Lean attachment or Mathlib match. Existing strict-henselization defect lemmas do not have the required arbitrary-DVR hypotheses.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/trait-extension prerequisite, through the recorded Neron descent chain. Latest blueprint has no exact node (from.node remains null as returned by blueprint_refs.py ancestor). Implements BLR 7.2 Theorem 1 proof affine model and BLR 3.6 Proposition 4 through its Proposition 3 induction."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-3f68fa6e6",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-3f68fa6e6 (reviewer sub-agent of L); spot-checked: The mathematics is correct; one missing citation in step 3 is fixed. I read the BLR source pages myself from the online scan the report names (the local PDF is still WANTED): 3.2 at printed pp.62-64 (affine dilatation A[g/π]/(π-torsion) and Prop. 1), 3.3 Lemma 1 at p.65, and 3.6 Def. 1, Prop. 3 and Prop. 4 at pp.78-79. The item statement is unchanged; edge cases A=R with W=Spec K, empty W, and a transcendental separable residue extension all behave correctly. Step 1 (scaled-generator model) is a few lines from the cited definitions, so 'elementary' holds: L=A[1/π] makes the scaling possible, B_0[1/π]=C, and V is smooth as an affine open of W. Step 2 is a correct finite induction: every hypothesis of the drop node holds again at each B_j, the invariant δ_j≤max(0,d−j) has its base case and step, and phi_{j+1} restricts to phi_j by the node's own statement. Step 3 identified U_K=Spec(C[1/f]) and the domain of a_K with Spec(A⊗_R K)=Spec L by tensor products while citing only def-pc-base-change, which defines base change by the universal fibre product (fault C1). The fix adds the Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (pullbackSpecIso) to step 3's uses, proof_deps and text; it is a leaf, so there is no route issue. New node lem-sfb-index-one-differential-defect-criterion matches BLR 3.3/1 as extended in 3.6, and I checked it is true: M is finitely generated; δ=0 gives a free module of rank d, flatness gives dim_x X_k≥d, so X_k is smooth at x (Stacks 00TS) and X is smooth over R on some D(f) with phi(f) a unit; the converse holds because Ω is projective there. New node lem-sfb-index-one-residue-dilatation-defect-drop matches BLR 3.6 Prop. 3 with I the prime of the point a_k; phi' is well defined because phi(I)⊂πA. The worker's example x²=π² (δ goes from 1 to 0) and the endpoint R[x] both check out. Both new nodes are statement-only, introduce their own objects, cite definitions that say what is used, and record searches of three kinds. Neither duplicates the R^sh-only nodes lem-sfb-trait-section-differential-defect-criterion or lem-sfb-permissible-dilatation-section-estimate, nor the group dilatation nodes. Both are strictly smaller than the item, which keeps the real assembly. Everything stays in unit sk-thm-sf-ctf-stability; no tool_uses are needed; no SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndexOneValuedPointSmoothApproximation",
+  "declaration": "AlgebraicGeometry.exists_smooth_affine_factorization_of_index_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndexOneValuedPointSmoothApproximation.lean",
+  "statement": "theorem exists_smooth_affine_factorization_of_index_one (R A K L : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Algebra R A] [IsLocalHom (algebraMap R A)] (hRA : Function.Injective (algebraMap R A)) [Field K] [Algebra R K] [IsFractionRing R K] [Field L] [Algebra A L] [IsFractionRing A L] (hindex : (IsLocalRing.maximalIdeal R).map (algebraMap R A) = IsLocalRing.maximalIdeal A) (hsep : Algebra.IsSeparableExtension (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField A)) (W : Scheme.{u}) (q : W ⟶ Spec (.of K)) [Smooth q] [LocallyOfFiniteType q] [QuasiCompact q] (w : Spec (.of L) ⟶ W) (hw : w ≫ q = Spec.map (CommRingCat.ofHom (IsFractionRing.map (K := K) (L := L) hRA))) : ∃ (U : Scheme.{u}) (f : U ⟶ Spec (.of R)), IsAffine U ∧ Smooth f ∧ LocallyOfFiniteType f ∧ QuasiCompact f ∧ ∃ a : Spec (.of A) ⟶ U, a ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) ∧ ∃ h : pullback f (Spec.map (CommRingCat.ofHom (algebraMap R K))) ⟶ W, h ≫ q = pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K))) ∧ ∃ aK : Spec (.of L) ⟶ pullback f (Spec.map (CommRingCat.ofHom (algebraMap R K))), aK ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))) = Spec.map (CommRingCat.ofHom (algebraMap A L)) ≫ a ∧ aK ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K))) = Spec.map (CommRingCat.ofHom (IsFractionRing.map (K := K) (L := L) hRA)) ∧ aK ≫ h = w",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-099dafda5",
+  "group": "Q138",
+  "result": "pass",
+  "note": "The Lean statement matches the node clause by clause. DVRs R and A via IsDiscreteValuationRing; R→A local (IsLocalHom) and injective (hRA); K→L is the canonical IsFractionRing.map; hindex is m_R A = m_A exactly; residue separability is the recorded Algebra.IsSeparableExtension (transcendental allowed) on Mathlib's canonical residue algebra (ResidueField/Basic.lean:187). W is smooth and finite type over K as Smooth + LocallyOfFiniteType + QuasiCompact, with no separatedness. U is affine, smooth and finite type over R; a is an R-map; h : pullback f (Spec K→Spec R) ⟶ W is a K-map. aK is fixed by both pullback projections, so it is unique, and it exists because IsFractionRing.map is compatible with R→A; aK ≫ h = w is in the right order. No extra hypotheses (no excellence, completeness or L/K separability); one universe u is the Scheme.{u} convention. lean.statement is verbatim in the file; the theorem proof is the only sorry; there are no definitions; source and blueprint docstrings and the 3-step proof plan are present. The node changes only in lean versus side-live; no new nodes or dependency modules; the report has both sections. Edge cases (A=R, empty W, defect 0, transcendental residue extension, non-separated W) are fine. No findings; no file changed, so no compile."
+ }
+}

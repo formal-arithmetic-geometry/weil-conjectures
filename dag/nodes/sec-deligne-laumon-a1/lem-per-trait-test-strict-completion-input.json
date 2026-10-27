@@ -1,0 +1,395 @@
+{
+ "id": "lem-per-trait-test-strict-completion-input",
+ "kind": "statement",
+ "title": "Closed-point purity descends from the strict completion",
+ "statement": "Fix a prime $\\ell$, $A=\\mathbf F_\\ell$, ordinary small-etale derived categories [def-weil-pbc-derived-categories], finite Tate twists [def-asd-finite-etale-tate-twist], and the canonical Kummer class of [lem-per-regular-immersion-class-calculus], with the bounded-below closed-support adjunction [def-per-closed-support-plus-adjunction].\n\nLet $(R,\\mathfrak m)$ be a Noetherian regular local ring [def-weil-regular-scheme] with $\\ell$ invertible and $d=\\dim R$ [def-weil-pbc-krull-dimension-ring]. Fix a separable closure $k^{\\mathrm{sep}}$ of its residue field $k$ [def-weil-residue-field]. Let $R^{\\mathrm{sh}}$ be the strict henselization at this geometric closed point [def-weil-pbc-strict-henselization-limit], and let $B=\\widehat{R^{\\mathrm{sh}}}$ be its maximal-ideal completion [def-weil-pbc-adic-completion]. The ring $B$ is Noetherian regular local, complete strictly henselian [def-weil-pbc-henselian-terminology], of dimension $d$, with residue field $k^{\\mathrm{sep}}$ and with $\\ell$ invertible. Write $j_R:\\operatorname{Spec}k\\hookrightarrow\\operatorname{Spec}R$ and $j_B:\\operatorname{Spec}k^{\\mathrm{sep}}\\hookrightarrow\\operatorname{Spec}B$ for the closed immersions [def-weil-affine-spectrum, def-weil-closed-immersion]. If the canonical Kummer map $A_{k^{\\mathrm{sep}}}\\to j_B^!A_B(d)[2d]$ is an isomorphism, then $A_k\\to j_R^!A_R(d)[2d]$ is an isomorphism. No excellence hypothesis on $R$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, paragraph after Definition 3.2.1 and Proposition 3.2.4, printed p.244: strict henselization invariance and completion invariance. The one-way closed-point formulation is a new statement-only obligation, without the withdrawn ind-etale proof graph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-per-regular-immersion-class-calculus",
+  "def-per-closed-support-plus-adjunction",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The item's ring $R^{\\mathrm{sh}}$ is the affine pointed-neighbourhood colimit at the geometric point $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ induced by $R\\to k\\subset k^{\\mathrm{sep}}\\subset\\Omega$, $\\Omega$ an algebraic closure of $k^{\\mathrm{sep}}$. The geometric-triples colimit comparison, applied to the triples colimit below (a henselian local ind-etale $R$-algebra with residue surjection onto $k^{\\mathrm{sep}}$ extending $R\\to k$), gives a unique $R$-algebra isomorphism of this colimit with $R^{\\mathrm{sh}}$ compatible with the residue maps; we identify them. Put $C=R^{\\mathrm{sh}}$ and $K=k^{\\mathrm{sep}}$. The strict-henselization triples theorem gives a filtered-colimit presentation of $C$ by etale $R$-algebras, strict henselianity, maximal ideal $\\mathfrak n=\\mathfrak mC$ and the specified identification $C/\\mathfrak n=K$. The three cited strict-henselization lemmas give, respectively, Noetherianity, regularity and $\\dim C=d$. In particular $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is an affine ind-etale morphism between Noetherian schemes, and its Cartesian inverse image of $\\operatorname{Spec}k$ is exactly $\\operatorname{Spec}K$. The inverse of $\\ell$ in $R$ maps to an inverse in $C$.",
+   "uses": [
+    "lem-wf-geometric-triples-colimit-comparison",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LJ (lemma-henselization-noetherian), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension); Algebra Tag 04GP (lemma-strict-henselization)."
+   }
+  },
+  {
+   "text": "For $B=\\widehat C$, the strict-henselization-completion lemma gives Noetherianity and faithful flatness of $C\\to B$. Completion regularity and dimension give regularity and $\\dim B=d$. The local-completion lemma identifies the maximal ideal with $\\mathfrak nB$ and the residue field with $C/\\mathfrak n=K$, compatibly with the completion map. Since $\\mathfrak n$ is finitely generated, the module-completion theorem, applied to the $C$-module $C$, makes $B$ complete and separated for $(\\mathfrak nB)^r=\\mathfrak n^rB$. Complete-pair henselianity now makes $(B,\\mathfrak nB)$ henselian; its separably closed residue field makes $B$ strictly henselian. Also $\\ell$ is invertible in $B$. These establish every ring-property clause of the statement without an excellence hypothesis.",
+   "uses": [
+    "lem-sc-strict-henselization-completion-noetherian",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06LJ, 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 0ALJ (lemma-complete-henselian); Algebra Tags 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "Choose $d$ generators $t_1,\\ldots,t_d$ of $\\mathfrak m$, as allowed by the definition of regular local ring. Their images generate $\\mathfrak n$ and $\\mathfrak nB$ by Steps 1--2. The regular-local-generators lemma applied separately to $R,C,B$ makes these three lists regular sequences and their successive quotients regular local of dimensions $d-c$. Thus the three closed-point immersions are regular closed immersions of codimension $d$. The strict-henselization map is faithfully flat by the cited lemma, and the completion map is faithfully flat by Step 2, so class-calculus flat base change applies to both pairs. In particular their canonical Kummer classes, with the given sign and ordering independence, are the pullbacks of the class defined using the $t_i$. If $d=0$, each list is empty and the same class-calculus statement gives the identity class.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definition 2.3.1, Theorem 2.3.2 and Proposition 2.2.3.1; Algebra Tag 00NQ (lemma-regular-ring-CM), More on Algebra Tag 07QM (lemma-dumb-properties-henselization)."
+   }
+  },
+  {
+   "text": "Write $j_C:\\operatorname{Spec}K\\hookrightarrow\\operatorname{Spec}C$, $g:\\operatorname{Spec}C\\to\\operatorname{Spec}R$, and $h:\\operatorname{Spec}K\\to\\operatorname{Spec}k$. Apply affine ind-etale support exchange to the Cartesian closed-point square of Step 1 and $A_R(d)[2d]$. Tate pullback identifies its target with $j_C^!A_C(d)[2d]$, giving $h^*j_R^!A_R(d)[2d]\\simeq j_C^!A_C(d)[2d]$. Under this canonical counit-normalized exchange, $h^*\\eta_R$ is $\\eta_C$: class calculus gives strict-local compatibility of the supported class, and transposing its supported map through the fixed closed adjunction gives the asserted equality of morphisms. Hence it suffices to prove $\\eta_C$ is an isomorphism. Indeed, if so, $h^*\\eta_R$ is one; every geometric point $\\operatorname{Spec}\\Omega'\\to\\operatorname{Spec}k$ factors through $h$, since the separable algebraic extension $K/k$ embeds over $k$ into the algebraically closed field $\\Omega'$; pullback-stalk comparison then shows that $\\eta_R$ is an isomorphism on every geometric stalk of $\\operatorname{Spec}k$, and derived stalk conservativity proves the claim. One may use an algebraic closure $\\Omega$ containing $K$ as the geometric point; extending the chosen separable closure to such a field does not change $C$.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-per-regular-immersion-class-calculus",
+    "def-per-closed-support-plus-adjunction",
+    "lem-sf-etale-derived-pullback-stalk",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, paragraph after Definition 3.2.1, printed p.244; Expose XVI class-calculus strict-local compatibility. Support exchange source: Stacks Tags 03Q9, 0A45, 09XQ."
+   }
+  },
+  {
+   "text": "Put $X=\\operatorname{Spec}C$, $\\widehat X=\\operatorname{Spec}B$, $f:\\widehat X\\to X$, and $F=A_X(d)$ in degree zero. Tate pullback identifies $f^{-1}F$ with $A_{\\widehat X}(d)$. Since $C$ and $B$ are strictly henselian, their higher etale cohomology of these sheaves vanishes. For degree zero, choose the same geometric closed point $\\operatorname{Spec}\\Omega$, with $K\\subseteq\\Omega$ algebraically closed, on both schemes. The sections-stalk isomorphisms and inverse-image stalk comparison identify the section pullback with the identity of the stalk $F_{\\bar s}$. Thus the canonical maps $H^q(X,F)\\to H^q(\\widehat X,f^{-1}F)$ are isomorphisms for all $q$: the above handles $q\\geq0$, and negative groups vanish since $F$ is in degree zero. All identifications respect the $A$-actions.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-sf-etale-derived-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), Tag 03Q1 (lemma-stalk-pullback); Tate pullback via Tag 03PK (section-kummer)."
+   }
+  },
+  {
+   "text": "Let $s=V(\\mathfrak n)$ in $X$, $\\widehat s=V(\\mathfrak nB)$ in $\\widehat X$, $U=X\\setminus\\{s\\}$ and $\\widehat U=\\widehat X\\setminus\\{\\widehat s\\}$. By Step 2 these closed subschemes are both $\\operatorname{Spec}K$ and form a Cartesian square; $\\widehat U=f^{-1}U$. Apply the no-excellence henselian-completion open-rigidity statement with the Noetherian ring $C$, ideal $\\mathfrak n$ and torsion abelian sheaf $F|_U$. Its henselian-pair hypothesis follows from Step 1; its completion is the specified $B$. The sheaf is killed by $\\ell$, so it is torsion. It gives the canonical isomorphisms $H^q(U,F|_U)\\simeq H^q(\\widehat U,f^{-1}F|_{\\widehat U})$ for every $q\\geq0$. Negative cohomology again vanishes. This comparison applies equally when the puncture is empty.",
+   "uses": [
+    "lem-per-henselian-completion-open-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XX, section 4.4, printed p.373, CTC and its strictly local displayed assertion (*)."
+   }
+  },
+  {
+   "text": "Apply the localization long exact sequence to $(X,s,F)$ and $(\\widehat X,\\widehat s,f^{-1}F)$. Its functoriality in the pair and the sheaf gives a commutative diagram with the canonical pullbacks on whole-space, open and supported groups, including the connecting maps. For every integer $q$, take the five consecutive terms $H^{q-1}(X,F)$, $H^{q-1}(U,F)$, $H_s^q(X,F)$, $H^q(X,F)$, $H^q(U,F)$ and the corresponding bottom row. The four outer vertical maps are isomorphisms by Steps 5--6; the five lemma gives an isomorphism on the middle supported group. Thus the canonical supported pullback $\\beta:R\\Gamma_s(X,F)\\to R\\Gamma_{\\widehat s}(\\widehat X,f^{-1}F)$ is a quasi-isomorphism, since it induces isomorphisms in every degree. Here $R\\Gamma_s$ is the right-derived kernel of restriction, not an independently chosen complex with the same cohomology dimensions.",
+   "uses": [
+    "thm-pur-with-support-exactness",
+    "lem-weil-pbc-five-lemma",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (section-cohomology-support), localization triangle and long exact sequence; Homology Tag 05QB (lemma-five-lemma)."
+   }
+  },
+  {
+   "text": "For $T=X,\\widehat X$, with closed immersion $i:\\operatorname{Spec}K\\hookrightarrow T$, the supported-kernel adjunction identifies the supported subsheaf of any sheaf $M$ with $i_*i_0^!M$. This identity respects $A$-actions by its naturality with respect to multiplication by each $a\\in A$. Evaluate on a bounded-below injective module resolution $I$ of the coefficient sheaf. The definition of the closed-support adjoint and injective computation of right derived functors identify $i_0^!I$ with $i^!F_T$. Since $K$ is separably closed, it is strictly henselian as a local ring. Its global-sections functor is exact. Consequently both $R\\Gamma(K,i^!F_T)$ and $R\\Gamma_i(T,F_T)$ are represented by the same complex $\\Gamma(K,i_0^!I)=\\ker(I(T)\\to I(T\\setminus i(K)))$. These are the canonical support/counit identifications. This module complex also computes the abelian groups $H^p_{i(K)}(T,F_T)$ of Step 7: each $I^q$ is killed by $\\ell$, its underlying abelian sheaf has vanishing higher cohomology on every etale $T$-scheme by the injective-module acyclicity lemma, and $I^q(T)\\to I^q(T\\setminus i(K))$ is surjective by the injective restriction lemma, so the support sequence gives $H^p_{i(K)}(T,I^q)=0$ for $p\\geq1$. Furthermore $R\\Gamma(K,-)$ detects isomorphisms on $D^+$: exactness computes its cohomology by applying sections to cohomology sheaves, sections-stalk identifies those groups with every geometric stalk on $\\operatorname{Spec}K$, and derived stalk conservativity applies.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-per-closed-support-plus-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "thm-pur-with-support-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), supported-subsheaf adjunction and section-kernel identity; Tag 03QO. Bounded-below derived adjoint as fixed in def-per-closed-support-plus-adjunction."
+   }
+  },
+  {
+   "text": "Under Step 8 the maps $R\\Gamma(K,\\eta_C)$ and $R\\Gamma(K,\\eta_B)$ have source $A[0]$ and targets $R\\Gamma_s(X,A(d))[2d]$ and $R\\Gamma_{\\widehat s}(\\widehat X,A(d))[2d]$. Flat compatibility of the Kummer supported class (Step 3) says that the first followed by $\\beta[2d]$ is the second. This is equality of derived morphisms: a map from $A[0]$ to a complex of $A$-modules is determined by the cohomology class of the image of $1$, and these images are exactly the canonical fundamental classes that flat pullback identifies. The second map is an isomorphism by the hypothesis on $\\eta_B$; $\\beta[2d]$ is an isomorphism by Step 7. Hence $R\\Gamma(K,\\eta_C)$ is an isomorphism, and the conservativity in Step 8 makes $\\eta_C$ an isomorphism. Step 4 descends this to $\\eta_R$. This proves the required implication for the specified canonical map.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 2.2.3.1, Definition 2.3.1, completion invariance in Proposition 3.2.4, printed pp.240--244; Expose XX section 4.4 supplies Step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-geometric-triples-colimit-comparison",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-completion-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-per-closed-support-plus-adjunction",
+  "lem-sf-etale-derived-pullback-stalk",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-per-henselian-completion-open-rigidity",
+  "thm-pur-with-support-exactness",
+  "lem-weil-pbc-five-lemma",
+  "def-pur-etale-derived-supported-sections",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-pur-ringed-site-injective-mono-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, paragraph after Definition 3.2.1 and Proposition 3.2.4 (p.244), expanded using the admitted no-excellence CTC comparison, Expose XX 4.4 (pp.373--374), and Stacks 09XP/09XQ/03QO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed point Kummer etale purity is invariant under strict henselization and completion of a regular Noetherian local ring without excellence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern henselian rings, etale algebra loci, local-ring closed points or perfectoid rings; none supplies cohomological purity under strict completion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict local completion preserves the supported fundamental class isomorphism for prime torsion etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"ModuleCat.Tilde.isUnit_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (r : ↥x.asIdeal.primeCompl), IsUnit ((algebraMap R (Module.End R ↑(M.tildeInModuleCat.stalk x))) ↑r)\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$ and any element $r$ in the complement of $\\\\mathfrak{p}$, the image of $r$ under the canonical algebra map from $R\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern henselian rings, etale algebra loci, local-ring closed points or perfectoid rings; none supplies cohomological purity under strict completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"AdicCompletion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: service returned zero declarations for this combination of notions"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|punctual.*pur|strict.*completion",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"line\": \"582\", \"text\": \"          have hr' : restrict₀ (.ofClass (valuedCompletion (K := K)).v) r ≠ 0 := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerPolynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"14\", \"text\": \"# Kummer Extensions\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"17\", \"text\": \"Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"49\", \"text\": \"TODO: relate Kummer extensions of degree 2 with the class `Algebra.IsQuadraticExtension`.\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"170\", \"text\": \"scoped[KummerExtension] notation3 \\\"K[\\\" n \\\"√\\\" a \\\"]\\\" => AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"172\", \"text\": \"attribute [nolint docBlame] KummerExtension.«termK[_√_]»\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern Kummer field extensions, Kummer-Dedekind, binomial valuations or a valued-field completion, not supported etale fundamental classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale closed point purity strict henselization completion invariance",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.comap_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{S : Type v} [CommSemiring S] [IsLocalRing S] (f : R →+* S) [IsLocalHom f] :\\n  PrimeSpectrum.comap f (closedPoint S) = closedPoint R\", \"doc\": \"Given commutative semirings $ R $ and $ S $, where $ S $ is a local ring, and a local homomorphism $ f : R \\\\to S $, the preimage of the closed point (maximal ideal) in the prime spectrum of $ S $ unde\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"IsLocalRing.closedPoint.congr_simp\", \"module\": \"Mathlib.RingTheory.KrullDimension.Module\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [inst_1 : IsLocalRing R], IsLocalRing.closedPoint R = IsLocalRing.closedPoint R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal, thereby defining a closed point in the prime spectrum of $ R $.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern henselian rings, etale algebra loci, local-ring closed points or perfectoid rings; none supplies cohomological purity under strict completion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-punctual-purity-trait-test",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 first paragraph, printed p.254 (Fujiwara 2002 Corollary 6.1.5 reduction), with Proposition 3.2.4 (completion invariance) and Proposition 3.2.5 (prime-field/equal-characteristic case), printed pp.244--245. Complete-trait formulation obtained by first completing the strictly henselian regular local test ring. Fresh input: The strict-completion descent input of the mixed-characteristic test.",
+   "via": [
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-trait-test-strict-completion-input",
+  "worker": "stage1",
+  "summary": "Resolved the stale route blocker using the explicit Q112 maintenance boundary; wrote the strict-henselization reduction, all completion ring properties, whole-space and punctured comparisons, functorial supported-cohomology five-lemma argument, injective support/counit identification and canonical Kummer-class descent. Retained the exact statement, original searches and blueprint provenance. Reused existing admitted interfaces; no new nodes. Reviewer (maintainer reader) FIX: Step 1 cites the pointed-neighbourhood/triples strict-henselization comparison; Step 8 cites injective-module acyclicity and restriction surjectivity for the module/abelian supported-cohomology comparison; Step 4 states the lift of geometric points through Spec K -> Spec k.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: the finite-torsion regular local purity input behind dimension-normalized duality, through the permitted punctual-purity trait-test branch. More precisely realizes the strict-completion descent input created by lem-per-punctual-purity-trait-test, using ILO XVI 3.2.4 and XX 4.4, as authorized by coord/changes/20261024-Q112-strict-completion-inputs.md. Does not revive the excluded old strict-completion-test or the discarded affine-curve proof route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Ind-etale presentation, residue field and maximal-ideal identification needed to form the Cartesian closed-point square. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Noetherianity of the strict local ring, required by support exchange and completion comparison. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Regularity of the strict local ring, required for its Kummer regular-immersion class. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Preserves the codimension and hence the twist and shift of the closed-point class. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-completion-noetherian",
+    "why": "Noetherianity and flatness of completion, without excellence or regularity of the completion morphism. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Regularity of the completion ring; no assertion about regularity of the morphism. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Equality of dimensions of the strict local ring and its completion. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Completion has the same residue field and the extended maximal ideal. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Completeness for the extended finitely generated maximal ideal. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Completeness gives henselianity of the completed local ring. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "The chosen parameters give regular closed immersions and successive regular quotients. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Flatness needed for canonical class compatibility under strict henselization. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Canonical identification of twists under both ring maps. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-sf-etale-derived-pullback-stalk",
+    "why": "Canonical stalk comparison for whole-space pullback and conservative field descent. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Detects isomorphisms of the bounded-below closed-point complexes. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Whole-space higher-cohomology vanishing and exact sections over the separably closed residue field. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Identifies degree-zero whole-space maps and establishes field-section conservativity. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "thm-pur-with-support-exactness",
+    "why": "Functorial localization long exact sequences, including their connecting maps. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Five consecutive terms of localization compare supported cohomology. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Support-subsheaf identification used on injective complexes to identify closed-adjoint sections. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Computes the two bounded-below right derived functors on injective resolutions. This is a generic algebra, stalk, twist or localization tool; the current perverse unit supplies no replacement statement."
+   },
+   {
+    "node": "lem-wf-geometric-triples-colimit-comparison",
+    "why": "Identifies the item's pointed-neighbourhood strict henselization (def-weil-pbc-strict-henselization-limit) with the triples colimit to which the cited strict-henselization lemmas refer; generic algebra, no node of the perverse unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-injective-module-abelian-acyclic",
+    "why": "Underlying abelian sheaves of injective F_ell-module sheaves are cohomologically acyclic, so module and abelian supported cohomology agree in Step 8; generic tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-injective-mono-restriction",
+    "why": "Surjective restriction of injective module sheaves along the open immersion, needed for the same module/abelian supported-cohomology comparison; generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-completion-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sf-etale-derived-pullback-stalk",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "thm-pur-with-support-exactness",
+  "lem-weil-pbc-five-lemma",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-wf-geometric-triples-colimit-comparison",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-pur-ringed-site-injective-mono-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-71a8ab9ae",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-71a8ab9ae (reviewer sub-agent of L); spot-checked: I read the item, all 27 proof deps and 12 stmt deps, ILO XVI 3.2.1 with the following sentence and Prop. 3.2.4 (p.244), and ILO XX 4.4 CTC/(*) (pp.373-374); none of them assumes excellence. The route is authorized by coord/changes/20261024-Q112-strict-completion-inputs.md and the released repair note: open-rigidity and the ind-etale exchange are re-admitted as unsplit interfaces, the excluded strict-completion test is not cited, and no proof_dep is in route-pivot-dropped.txt. The statement is unchanged. Small cases checked: d=0 (trivial class, empty puncture), a non-excellent DVR (only regularity of the ring B is used, never of the map C->B), and an imperfect k (K separable, Omega an algebraic closure). The base proof was empty and there are no new nodes, so D1/D2 hold. Steps 2, 3, 5, 6, 7 and 9 are correct as written: 05GG completeness plus 0ALJ give strict henselianity, open-rigidity's hypotheses match C, the ideal n and B, and the five-lemma window is right. Fixes: (C1) Step 1 silently identified the item's pointed-neighbourhood R^sh (def-weil-pbc-strict-henselization-limit) with the triples colimit that the lem-sc-* lemmas use; it now cites lem-wf-geometric-triples-colimit-comparison, whose hypotheses hold. (C1/E) Step 8 computed RΓ_s with an injective A-module resolution while Step 7 uses the abelian H^q_Z of def-pur-support-cohomology; it now cites lem-weil-pbc-injective-module-abelian-acyclic and lem-pur-ringed-site-injective-mono-restriction, and the support long exact sequence gives Γ_Z-acyclicity. Step 4 now states that geometric points of Spec k lift through Spec K (text only). proof_deps recomputed, three tool_uses added, none of the added nodes creates a cycle. Statement, stmt_deps, source and blueprint untouched. Pre-existing and not caused by this delivery: class calculus uses the compact-support right adjoint i^! while the item fixes the closed-support adjunction; both are right adjoints of i_* and agree on D^+.; 1 file(s) fixed by the reviewer"
+ }
+}

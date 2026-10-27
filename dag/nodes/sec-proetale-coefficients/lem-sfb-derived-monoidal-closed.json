@@ -85,7 +85,42 @@
   "existing": false,
   "note": "The shortcut upstream closedness instance couples the Grothendieck size to the derived-localization Hom universe. This statement uses exactly the independent universes of the recorded lem-sfb-derived-monoidal interface; no universe equality is imposed."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "DerivedCategory.monoidalClosed",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed",
+     "lines": [
+      75,
+      78
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "DerivedCategory.monoidalClosed",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed",
+     "lines": [
+      207,
+      219
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-tensor-hom",
  "reviewed_lean": {
@@ -109,5 +144,41 @@
    "DerivedCategory.tensorLeft_isLeftAdjoint_of_hasFunctorialFlatResolution"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "In the situation of [lem-sfb-derived-monoidal], the monoidal category\n$(D(\\mathcal C),\\otimes^{\\mathrm L})$ is closed: for every $K\\in D(\\mathcal C)$ the\nfunctor $K\\otimes^{\\mathrm L}-$ has a right adjoint.",
+  "proof": [
+   {
+    "text": "*Homotopy level.* For complexes $P,Y$ in $\\mathcal C$, let $\\underline{\\Hom}(P,Y)$ be the\ncomplex with $\\underline{\\Hom}(P,Y)^n=\\prod_p\\underline{\\Hom}(P^p,Y^{p+n})$, with\ndifferential $df=d_Y\\circ f-(-1)^nf\\circ d_P$; the products exist because $\\mathcal C$ is\nGrothendieck abelian. Evaluation and currying give a bijection\n$\\Hom(P\\otimes Z,Y)\\cong\\Hom(Z,\\underline{\\Hom}(P,Y))$, natural in $Z$ and $Y$ and\ncompatible with homotopies. So $P\\otimes-\\dashv\\underline{\\Hom}(P,-)$ on $K(\\mathcal C)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Fixing one variable.* By [lem-sfb-derived-monoidal], $Q(P)\\otimes^{\\mathrm L}-$ is the\nleft derived functor of $P\\otimes-$.",
+    "uses": [
+     "lem-sfb-derived-monoidal"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Deriving.* By [lem-sfb-grothendieck-k-injective], $\\mathcal C$ has K-injective\nresolutions, so $\\underline{\\Hom}(P,-)$ has a right derived functor. The functor\n$P\\otimes-$ sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms: the\ncone of such a map is acyclic and K-flat, and its tensor product with $P$ is acyclic, as\none sees by replacing $P$ by a K-flat resolution. So the argument for derived\nadjunctions in [det-def-sfb-derived-categories], applied to the adjunction on\n$K(\\mathcal C)$, gives $Q(P)\\otimes^{\\mathrm L}-\\dashv R\\underline{\\Hom}(P,-)$.",
+    "uses": [
+     "lem-sfb-grothendieck-k-injective",
+     "det-def-sfb-derived-categories"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Arbitrary objects.* Every $K\\in D(\\mathcal C)$ is isomorphic to some $Q(P)$. An\nisomorphism $Q(P)\\cong K$ induces a natural isomorphism\n$Q(P)\\otimes^{\\mathrm L}-\\cong K\\otimes^{\\mathrm L}-$, along which the adjunction\ntransports. So $K\\otimes^{\\mathrm L}-$ has a right adjoint. The bifunctoriality of the\ninternal hom is then produced by the closed structure.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-affine-relative-cup-sections",
+ "kind": "statement",
+ "title": "Global and relative cup products over an affine base",
+ "statement": "Let $A\\to A'$ be a homomorphism of commutative rings, $T=\\operatorname{Spec}A$ and $T'=\\operatorname{Spec}A'$ the affine schemes [def-pc-scheme], and $h:T'\\to T$ the induced morphism. Let $p:Z\\to T$ be a quasi-compact and quasi-separated morphism of algebraic spaces [def-trf-algebraic-space]: inverse images of quasi-compact spaces are quasi-compact, and the diagonal is quasi-compact. Put $Z'=Z\\times_TT'$, with projections $h':Z'\\to Z$ and $p':Z'\\to T'$. Use module sheaves on the small etale sites [def-weil-sheaf-of-modules-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], module direct image and tensor pullback [def-trf-space-etale-module-functors], cohomology $H^q$ and higher direct images $R^qp_*$ computed by injective resolutions of module sheaves, and the relative and global cup products of [def-sfb-ringed-site-module-cup-product]. For quasi-coherent $\\mathcal O_Z$-modules $M$ let $\\theta^q_M:H^q(Z,M)\\xrightarrow{\\sim}\\Gamma(T,R^qp_*M)$ be the canonical isomorphisms of [lem-sfb-space-affine-base-higher-image-sections], and $\\theta'$ those for $p'$. Then: (i) for quasi-coherent $M,N$, integers $a,b\\geq0$, $x\\in H^a(Z,M)$ and $y\\in H^b(Z,N)$, the element $\\theta^{a+b}_{M\\otimes N}(x\\smile y)$ is the image of $\\theta^a_M(x)\\otimes\\theta^b_N(y)$ under $\\Gamma(T,R^ap_*M)\\otimes_A\\Gamma(T,R^bp_*N)\\to\\Gamma(T,R^ap_*M\\otimes R^bp_*N)$ followed by the global sections of the relative cup product $R^ap_*M\\otimes R^bp_*N\\to R^{a+b}p_*(M\\otimes N)$; (ii) for every quasi-coherent $M$ and $q\\geq0$, $\\theta'^q_{h'^*M}\\circ h'^*=\\Gamma(T',\\beta^q_M)\\circ h^*\\circ\\theta^q_M$, where $h'^*:H^q(Z,M)\\to H^q(Z',h'^*M)$ is pullback, $h^*:\\Gamma(T,R^qp_*M)\\to\\Gamma(T',h^*R^qp_*M)$ is pullback of sections and $\\beta^q_M:h^*R^qp_*M\\to R^qp'_*h'^*M$ is the canonical base-change map; (iii) the maps $\\beta$ are compatible with relative cup products: $\\beta^{a+b}_{M\\otimes N}(h^*(u\\smile v))=\\beta^a_M(h^*u)\\smile\\beta^b_N(h^*v)$ for local sections $u,v$ of $R^ap_*M$, $R^bp_*N$, under $h'^*(M\\otimes N)=h'^*M\\otimes h'^*N$. No Noetherian, flatness or finiteness assumption is made on $A\\to A'$, $p$, $M$ or $N$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPN (lemma-compose-cup-product), applied to $Z\\to T\\to\\mathrm{pt}$, and Tag 0H9A (lemma-base-change-cup-product) for the square $Z'\\to Z$ over $T'\\to T$; with spaces-cohomology.tex Tag 08EX (lemma-quasi-coherence-higher-direct-images-application) for the section isomorphisms. The combined statement is reviewer-stated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-ringed-site-module-cup-product",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "def-sfb-space-affine-cup-maps"
+ ],
+ "proof": [
+  {
+   "text": "Work on the enlarged etale ringed sites of [lem-trf-space-enlarged-etale-ringed-site-model]. They present the same module categories, have the algebraic spaces themselves as final objects, and realize all four arrows and their composition as ringed-topos morphisms. The chart-limit normalization [lem-trf-space-chart-limit-enlarged-sections] identifies their direct images with the specified module direct images. Quasi-compactness of $p'$ follows from [lem-sfb-space-quasicompact-affine-tests]; its diagonal is a base change of the quasi-compact diagonal of $p$, so the same result makes $p'$ quasi-separated. Pullback preserves local free presentations because it is a left adjoint and sends the structure module to the structure module. Tensor two presentations by taking generators $e_j\\otimes f_l$ and relations from either presentation; this again is a local free presentation. Hence $M\\otimes N$, $h'^*M$, $h'^*N$ are quasi-coherent, directly from [def-trf-space-quasi-coherent-module]. Thus [lem-sfb-space-affine-base-higher-image-sections] applies to every theta used in the statement. The cocycle description of the Leray edge in [lem-sfb-ringed-site-leray-spectral-sequence] identifies theta with the canonical composite $H^q(Z,M)=H^qR\\Gamma(T,Rp_*M)\\xrightarrow{e}\\Gamma(T,\\mathcal H^qRp_*M)$; use the adjunction-compatible global-sections compositor of [lem-sfb-ringed-derived-monoidal-comparisons]. This also fixes theta-prime, and keeps the scalar ring $A$, respectively $A'$, even if $\\Gamma(Z,\\mathcal O_Z)$ is larger.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-ringed-site-leray-spectral-sequence",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6H (lemma-Leray-unbounded); spaces-cohomology.tex Tag 08EX (lemma-quasi-coherence-higher-direct-images-application)"
+   }
+  },
+  {
+   "text": "Let $s:T\\to(\\mathrm{pt},A)$ be global sections. The composite-counit formula and monoidality of pullback composition in [lem-sfb-ringed-derived-monoidal-comparisons] give the cup identity for $sp$: transpose either composite under $L(sp)^*\\dashv R(sp)_*$. After the canonical tensor comparison, both transposes are the tensor of $\\varepsilon_{p,M}Lp^*(\\varepsilon_{s,Rp_*M})$ and $\\varepsilon_{p,N}Lp^*(\\varepsilon_{s,Rp_*N})$. These are the two counits of $sp$, so injectivity of adjunction gives $c_{sp}=Rs_*(c_p)\\circ c_s$ under the compositors. Here each $c$ is precisely the tensor-of-counits map of [def-sfb-ringed-site-module-cup-product]. The global product with scalar ring $A$ factors through tensor over $\\Gamma(Z,\\mathcal O_Z)$: both transposes send local scalars and tensors to their products, so this is also the global product in the item. Postcompose with $R(sp)_*$ of the augmentation $M[0]\\otimes^{\\mathbf L}N[0]\\to(M\\otimes N)[0]$.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPN (lemma-compose-cup-product), tensor of composite counits"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-hypercohomology-edge-tensor] to $K=Rp_*M[0]$ and $L=Rp_*N[0]$ on $T$. Its tensor edge equation, followed by edge naturality for $c_p$ and for the coefficient augmentation, takes the global cup identity in step 2 to the product of the two sections $e_K(x)$ and $e_L(y)$. By step 1 these are $\\theta_M^a(x)$ and $\\theta_N^b(y)$. By the definition of the relative product [def-sfb-ringed-site-module-cup-product], the resulting map of cohomology sheaves is $R^ap_*M\\otimes R^bp_*N\\to R^{a+b}p_*(M\\otimes N)$. The first operation is exactly tensoring sections over $A$ and mapping to sections of their sheaf tensor. This proves (i).",
+   "uses": [
+    "lem-sfb-ringed-hypercohomology-edge-tensor",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPK (lemma-cup-compatible-with-naive) and 0FPN (lemma-compose-cup-product), cohomology edge"
+   }
+  },
+  {
+   "text": "Write $B_M=Rp_*M[0]$, $D_M=Rp'_*h'^*M[0]$, and let $E_M:Lh^*B_M\\to D_M$ be the mate of the ringed square, followed by $Rp'_*$ of $Lh'^*M[0]\\to h'^*M[0]$. The mate is [def-trf-topos-derived-base-change-map]. For clarity, the ordinary canonical base-change map in degree $q$ is $\\beta_M^q=\\mathcal H^q(E_M)\\circ r_{h,B_M}^q$, using the scalar/cocycle map $r$ of [lem-sfb-ringed-hypercohomology-edge-pullback]. This is a map from $h^*R^qp_*M$, with no replacement of $h^*$ by an exact functor. Under the global-sections compositors, $P_{h,E_M}$ is the pullback $H^q(Z,M)\\to H^q(Z',h'^*M)$: by [lem-weil-pbc-mate-pasting] the square pasted with global sections has mate the global pullback unit, followed by that same coefficient augmentation. Apply the edge-pullback equation of [lem-sfb-ringed-hypercohomology-edge-pullback] with $K=B_M$, $D=D_M$, $t=E_M$. Using step 1 gives precisely $\\theta'^q_{h'^*M}h'^*=\\Gamma(T',\\beta_M^q)h^*\\theta_M^q$, proving (ii).",
+   "uses": [
+    "def-trf-topos-derived-base-change-map",
+    "lem-sfb-ringed-hypercohomology-edge-pullback",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), global-sections mate; Tag 0BKV (lemma-sheafification-cohomology)"
+   }
+  },
+  {
+   "text": "Before taking cohomology check the cup square for the derived exchange $\\operatorname{Ex}_K:Lh^*Rp_*K\\to Rp'_*Lh'^*K$. Write $\\tau:Lp'^*Lh^*\\cong Lh'^*Lp^*$. By [def-trf-topos-derived-base-change-map], $\\varepsilon_{p',Lh'^*K}Lp'^*(\\operatorname{Ex}_K)=Lh'^*(\\varepsilon_{p,K})\\tau_{Rp_*K}$. Transpose the two routes in the cup square under $Lp'^*\\dashv Rp'_*$. Substitute this equation for $K$ and $L$, and the tensor-of-counits definition of cup. Both become the tensor $Lh'^*(\\varepsilon_{p,K})\\otimes Lh'^*(\\varepsilon_{p,L})$ after $\\tau$ and the canonical pullback tensor comparisons. Monoidality of $\\tau$ follows from [lem-sfb-ringed-derived-monoidal-comparisons], since it is the composite of the two pullback compositors and the ring-compatible square identification. Hence the transposes, and so the two derived routes, agree. Naturality of tensor and of the counits allows postcomposition with the coefficient augmentations to give the same square for $E_M,E_N,E_{M\\otimes N}$ and the ordinary coefficient products of [def-sfb-ringed-site-module-cup-product]. Indeed the two augmentation maps send a local tensor $(b\\otimes m)\\otimes(c\\otimes n)$ to $bc\\otimes(m\\otimes n)$; the derived maps are those induced by these augmentations on K-flat models.",
+   "uses": [
+    "def-trf-topos-derived-base-change-map",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H9A (lemma-base-change-cup-product), explicit proof of its intended cup square"
+   }
+  },
+  {
+   "text": "Take the $(a,b)$ tensor-of-cocycles maps of [def-sfb-ringed-site-module-cup-product] in the square of step 5. The scalar maps $r$ from [lem-sfb-ringed-hypercohomology-edge-pullback] respect these pairings: locally the two routes on representatives are $1\\otimes(z\\otimes w)$ and $(1\\otimes z)\\otimes(1\\otimes w)$, identified by pullback tensor comparison. A change $z\\mapsto z+du$ changes the paired cycle by $d(u\\otimes w)$, and $w\\mapsto w+dv$ changes it by $(-1)^a d(z\\otimes v)$; thus the equality descends to classes and sheafifies. Consequently the map on each factor is $\\mathcal H^a(E_M)r^a=\\beta_M^a$ and $\\mathcal H^b(E_N)r^b=\\beta_N^b$, and on the output it is $\\beta_{M\\otimes N}^{a+b}$. This is the equality in (iii), including all local sections by bilinearity and sheaf locality. All constructions use tensor pullback, not flat pullback; none asserts that beta is invertible. Degree zero gives the ordinary tensor-of-sections identity, and the zero module or zero ring gives zero on both routes.",
+   "uses": [
+    "def-sfb-ringed-site-module-cup-product",
+    "lem-sfb-ringed-hypercohomology-edge-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H9A (lemma-base-change-cup-product), local cohomology pairing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ringed-site-module-cup-product",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-topos-derived-base-change-map",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-hypercohomology-edge-pullback",
+  "lem-sfb-ringed-hypercohomology-edge-tensor",
+  "lem-sfb-ringed-site-leray-spectral-sequence",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPN (lemma-compose-cup-product), 0H9A (lemma-base-change-cup-product), 0BKV (lemma-sheafification-cohomology); spaces-cohomology.tex Tag 08EX for the affine edge isomorphism. The omitted cup-square argument is written out using the existing normalized adjunction comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'AlgebraicSpace' Mathlib; grep -rlnE 'cupProduct|cup_product|CupProduct' Mathlib; grep -rn 'higherDirectImage|HigherDirectImage' Mathlib",
+   "results": "no hits for any of the three patterns in Mathlib/ (no algebraic spaces, no sheaf cup product, no higher direct images)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative cup product higher direct images algebraic space affine base and arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T20:59:52Z\", \"tool\": \"leanfinder\", \"query\": \"relative cup product higher direct images algebraic space affine base and arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\", \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.AffineSpace.homOfVector_over_assoc\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\"], \"digest\": \"fd92d433f7e3c353\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Functor.rightDerived",
+   "results": "{\"t\": \"2026-10-23T21:00:21Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Functor.rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T21:00:21Z\", \"tool\": \"grep\", \"query\": \"cupProduct|cup_product|AlgebraicSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology cup product relative direct image affine base change",
+   "results": "{\"t\": \"2026-10-23T21:00:22Z\", \"tool\": \"leansearch\", \"query\": \"cohomology cup product relative direct image affine base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"KaehlerDifferential.mapBaseChange_tmul\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"KaehlerDifferential.tensorKaehlerEquiv\"], \"digest\": \"9dafaa3dfc3585e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward lax monoidal global sections product comparison",
+   "results": "{\"t\": \"2026-10-23T21:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"derived pushforward lax monoidal global sections product comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.prodComparison_iso\", \"CategoryTheory.frobeniusMorphism\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"30bf44e008182f39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-abelian-coherent-exterior-base-change",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change.",
+   "via": [
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-relative-cup-sections",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and all three clauses. Identified theta with the normalized Leray edge, proved cup composition and cup exchange by their counit transposes, and separated the two generic hypercohomology edge compatibilities as statement-only inputs. Reused the enlarged etale/chart-limit model, qc base-change stability, Leray edge, normalized monoidal comparisons, square mate definition and mate pasting. Logged and read all searches; no matching Mathlib theorem or finished project declaration was found.",
+  "blueprint": "Supporting affine relative-cup comparison for det-thm-sf-ctf-stability-direct-images, proof (3), on the alteration/Picard ancestry recorded in blueprint.from.place. Steps 2-3 realize the global/relative cup identification; steps 4-6 realize its base-change naturality. The current ancestor command returns null; preserved that ancestry, with no change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos, site-presentation or algebraic-space foundation used with its stated hypotheses; no alteration, Picard, trace or purity argument is imported. The present unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic ringed-topos, site-presentation or algebraic-space foundation used with its stated hypotheses; no alteration, Picard, trace or purity argument is imported. The present unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic ringed-topos, site-presentation or algebraic-space foundation used with its stated hypotheses; no alteration, Picard, trace or purity argument is imported. The present unit has no substitute for this foundational interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-631ce7f43",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-631ce7f43 (reviewer sub-agent of L); spot-checked: Ordinary one-level split: the base is the reviewer-created unsplit node from Q11 99658f78, with no repair note. The statement and stmt_deps are identical to the base. Read Stacks 0FPN (l.8483), 0H9A (l.8529, proof omitted), 07A7, 0BKV, 0FPK and 08EX, plus all 15 cited statements. Step 1: the enlarged site model and the chart-limit α realize p, p', h, h'. p' is qcqs because its diagonal is a base change of Δ_p (quasicompact-affine-tests). M⊗N and h'^*M are quasi-coherent by tensoring/pulling back local presentations. θ is the Leray cocycle edge. Advisory: that identification rests on the affine-base node's proof (step 3/4), because its statement only says 'canonical'. Step 2: I expanded both 0FPN transposes, which reduce to (ε_pLp^*ε_s)^{⊗2}∘μ_p∘Lp^*μ_s via the composite counit and monoidal c. Step 3: edge-tensor plus edge naturality gives (i). Step 4: β^q = H^q(E_M)∘r, the 07A7 degree-q map, with no exactness assumed. The mate identity Rh_*(Ex)η_h = Rp_*(η_{h'}) (mate-pasting) plus edge-pullback with t=E_M gives (ii). Step 5: both 0H9A transposes agree by monoidality of τ = c∘δ∘c^{-1}. The augmentation maps are determined on H^0. Step 6: r is compatible with κ at cocycle level, signs checked; this gives (iii). New nodes edge-tensor (0BKV/0FPK) and edge-pullback (nonflat r, not invertible) are true generic ringed-site statements. I tested them on one-object sites (R→B; Z→F_2 Koszul). Both are statement-only, self-contained and searched with grep, loogle, leanfinder and leansearch. They are not clauses of the item. Not duplicates of pur-derived-local-class-edge-comparison, pur-site-comparison-edge-section, wf-etale-cup-functoriality, sfb-flat-space-derived-external-cup, sc/sfb module-cup comparisons or the sbc raw-restricted family. Batch-5: def-trf-topos-derived-base-change-map is the general derived-mate definition. The two trf enlarged-site/chart-limit nodes are generic site models, accepted in Q54. quasicompact-affine-tests and the cup definition reach sec-trace-formula only through the definition def-trf-algebraic-space. None of these is a step of LTF or PD. Tool uses accepted: ringed-derived-monoidal-comparisons and the two trf site models. No SGA cited. The DAG is acyclic and proof_deps = union of uses. Edge cases checked: p=id, A'=0, M=0, degree 0, h=id."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineRelativeCupSections",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_relative_cup_sections",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affine_relative_cup_sections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineRelativeCupSections.lean",
+  "statement": "theorem affine_relative_cup_sections {A B : Type u} [CommRing A] [CommRing B] {Y Y' : Over S} (e : Y.left ≅ Spec (.of A)) (e' : Y'.left ≅ Spec (.of B)) (g : Y' ⟶ Y) {X X' : AlgebraicSpace S} (f : X ⟶ schemeSpace Y) (h : X' ⟶ X) (k : X' ⟶ schemeSpace Y') (sq : IsPullback h.hom k.hom f.hom ((ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y).hom)) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hqs : IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) : (∀ (M N : X.QCoh) (a b : ℕ) (x : (affineBaseModuleCohomology A Y e X f a).obj M) (y : (affineBaseModuleCohomology A Y e X f b).obj N), (affineCupEdge A Y e X f (a + b)).app (cupTensor X (X.smallModuleRestriction.obj M.obj) (X.smallModuleRestriction.obj N.obj)) (affineGlobalCup A Y e X f (X.smallModuleRestriction.obj M.obj) (X.smallModuleRestriction.obj N.obj) a b x y) = (affineScalarSections A Y e (schemeSpace Y) (𝟙 _)).map (spaceModuleCup f (X.smallModuleRestriction.obj M.obj) (X.smallModuleRestriction.obj N.obj) a b) (affineSectionTensor A Y e (schemeSpace Y) (𝟙 _) _ _ ((affineCupEdge A Y e X f a).app (X.smallModuleRestriction.obj M.obj) x) ((affineCupEdge A Y e X f b).app (X.smallModuleRestriction.obj N.obj) y))) ∧ (∀ (M : X.QCoh) (q : ℕ), affineCupCohomologyPullback e e' g f h k (ObjectProperty.hom_ext _ sq.w) (X.smallModuleRestriction.obj M.obj) q ≫ (ModuleCat.restrictScalars (spaceAffineRingMap e e' g)).map ((affineCupEdge B Y' e' X' k q).app ((smallModuleTensorPullback h).obj (X.smallModuleRestriction.obj M.obj))) = (affineCupEdge A Y e X f q).app (X.smallModuleRestriction.obj M.obj) ≫ affineCupSectionPullback e e' g (𝟙 _) _ (𝟙 _) ((Category.comp_id _).trans (Category.id_comp _).symm) (((smallModuleDirectImage f).rightDerived q).obj (X.smallModuleRestriction.obj M.obj)) ≫ (ModuleCat.restrictScalars (spaceAffineRingMap e e' g)).map ((affineScalarSections B Y' e' (schemeSpace Y') (𝟙 _)).map (cupModuleBaseChange f _ h k (ObjectProperty.hom_ext _ sq.w) (X.smallModuleRestriction.obj M.obj) q))) ∧ (∀ (M N : X.QCoh) (a b : ℕ), (smallModuleTensorPullback (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y)).map (spaceModuleCup f (X.smallModuleRestriction.obj M.obj) (X.smallModuleRestriction.obj N.obj) a b) ≫ cupModuleBaseChange f (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y) h k (ObjectProperty.hom_ext _ sq.w) (cupTensor X (X.smallModuleRestriction.obj M.obj) (X.smallModuleRestriction.obj N.obj)) (a + b) = (SingleComplex.ordinaryTensor (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y) (((smallModuleDirectImage f).rightDerived a).obj (X.smallModuleRestriction.obj M.obj)) (((smallModuleDirectImage f).rightDerived b).obj (X.smallModuleRestriction.obj N.obj))).hom ≫ (SheafOfModules.monoidalCategory (schemeSpace Y').smallStructureSheaf).tensorHom (cupModuleBaseChange f (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y) h k (ObjectProperty.hom_ext _ sq.w) (X.smallModuleRestriction.obj M.obj) a) (cupModuleBaseChange f (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y) h k (ObjectProperty.hom_ext _ sq.w) (X.smallModuleRestriction.obj N.obj) b) ≫ spaceModuleCup k ((smallModuleTensorPullback h).obj (X.smallModuleRestriction.obj M.obj)) ((smallModuleTensorPullback h).obj (X.smallModuleRestriction.obj N.obj)) a b ≫ ((smallModuleDirectImage k).rightDerived (a + b)).map (SingleComplex.ordinaryTensor h (X.smallModuleRestriction.obj M.obj) (X.smallModuleRestriction.obj N.obj)).inv)",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9671bff0",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read item, 8 stmt_deps, new node def-sfb-space-affine-cup-maps and both modules in full, plus side-live SpaceAffineBaseHigherImageSections, RingedSiteModuleCupProduct, RingedTensorSquarePresentation, SpaceAffineHomComparison, SpaceAffineGlobalSections, SpaceDerivedPullback, SpaceDerivedTensorPullback, AlgebraicSpacePullbackTensorComparison. Hypotheses: arbitrary CommRings A,B with Y≅Spec A, Y'≅Spec B, g over S, ring map spaceAffineRingMap; IsPullback square; hqc/hqs on f only; QCoh M,N. θ=affineCupEdge, ∃!-pinned by the dependency's own injective-resolution cocycle normalization extended to all modules plus equality with exists_affineBaseHigherImageSections_iso.choose on QCoh (consistent: that normalization pins e). (i) θ(globalModuleCup via unique scalar comparison)=Γ(spaceModuleCup)(λ⁻¹≫x⊗y); spaceModuleCup is κ ≫ H(0B6C homEquiv(tensor comparison ≫ counits⊗counits) ≫ augmentation), i.e. RingedSiteCup.relative's formula on the space adjunction (RingedTensorEdge needs a literal topos inverse image). (ii) A-linear equation with Res(θ'), section pullback on the base, Γ_B(β); β = cocycle map r (∃! on flat K-flat reps, no exactness) ≫ H(counit-mate exchange ≫ Rk_*aug). (iii) g^*cup≫β = ordinaryTensor_g.hom≫(β⊗β)≫cup_k≫R k_*(ordinaryTensor_h.inv), directions checked. New node fields ok, 3 search kinds, real data, choose only of true ∃! with sourced sorry proofs; cites the theorem lem only via choose of its ∃ (already a base stmt_dep). No duplicate: spaceSectionsComposition is for spaceAffineSections, not affineScalarSections; affineDerivedCup exists but the node names the ringed-site cup. Statements verbatim, sorry-only, docstrings, lines ≤100, report sections present, universes u. Edge cases a=b=q=0, M=0, A=0/empty, g=id, nonflat g, Γ(Z,O)≠A. Advisories: 4-step docstring condenses node's 6 steps; proof-dep imports unused by the statement; redundant second CupEdgeSpec conjunct. No file changed, no compile."
+ }
+}

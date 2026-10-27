@@ -1,0 +1,225 @@
+{
+ "id": "lem-trf-countable-directed-function-closure",
+ "kind": "statement",
+ "title": "Countable directed enlargement closed under a chosen function",
+ "statement": "Let $I$ be a small nonempty partially ordered set such that every pair of elements has an upper bound in $I$. Let $s:I\\to I$ be a function, with no monotonicity assumption, and let $S\\subseteq I$ be an at most countable subset. There exists an at most countable nonempty subset $J\\subseteq I$ such that $S\\subseteq J$, $s(J)\\subseteq J$, and for every $i,j\\in J$ there is $k\\in J$ with $i\\le k$ and $j\\le k$. Thus $J$ is directed with its inherited order; $S$ may be empty and $I$ need not itself be countable. Here at most countable means that the underlying type admits an injection into $\\mathbf N$ [def-sfb-countable-set].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059W (lemma-ML-countable-colimit), proof, successive countable stabilization and directed-enlargement sets and their union; abstracted from the index-set construction."
+ },
+ "stmt_deps": [
+  "def-sfb-countable-set"
+ ],
+ "proof": [
+  {
+   "text": "Choose $i_*\\in I$. By the upper-bound hypothesis and classical choice, choose $b:I\\times I\\to I$ with $i\\le b(i,j)$ and $j\\le b(i,j)$ for every $i,j\\in I$. Define subsets by recursion on $n\\in\\mathbf N$: $T_0=S\\cup\\{i_*\\}$ and $T_{n+1}=T_n\\cup s(T_n)\\cup\\{b(i,j):i,j\\in T_n\\}$. All terms are subsets of $I$, since $s$ and $b$ take values in $I$. The defining union gives $T_n\\subseteq T_{n+1}$, and induction on $m-n$ gives $T_n\\subseteq T_m$ whenever $n\\le m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W (lemma-ML-countable-colimit), proof, successive countable enlargements and their union; explicit set-theoretic expansion of the index-set argument."
+   }
+  },
+  {
+   "text": "Every singleton is at most countable by [def-sfb-countable-set]: its unique map to $\\{0\\}\\subseteq\\mathbf N$ is injective. Thus $T_0$ is at most countable by the binary-union clause of [lem-trf-countable-unions]. Suppose $T_n$ is at most countable. Write $s(T_n)=\\bigcup_{i\\in T_n}\\{s(i)\\}$ and $\\{b(i,j):i,j\\in T_n\\}=\\bigcup_{i\\in T_n}\\bigcup_{j\\in T_n}\\{b(i,j)\\}$. The restricted-union clause of the same lemma makes the first set countable, and two applications make the second set countable (first for each fixed $i$, then over $i$). Two binary unions now make $T_{n+1}$ at most countable. Induction proves countability of every $T_n$. Set $J=\\bigcup_{n\\in\\mathbf N}T_n$; the sequence-union clause makes $J$ at most countable. No countability of the ambient $I$ was used.",
+   "uses": [
+    "def-sfb-countable-set",
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W (lemma-ML-countable-colimit), proof, successive countable enlargements and their union; explicit set-theoretic expansion of the index-set argument."
+   }
+  },
+  {
+   "text": "As $S\\subseteq T_0\\subseteq J$ and $i_*\\in T_0\\subseteq J$, the set $J$ contains $S$ and is nonempty, even when $S=\\varnothing$. If $i\\in J$, choose $n$ with $i\\in T_n$. Then $s(i)\\in s(T_n)\\subseteq T_{n+1}\\subseteq J$. Hence $s(J)\\subseteq J$; no comparison between $s(i)$ and $s(j)$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W (lemma-ML-countable-colimit), proof, successive countable enlargements and their union; explicit set-theoretic expansion of the index-set argument."
+   }
+  },
+  {
+   "text": "For $i,j\\in J$, choose $n,m\\in\\mathbf N$ with $i\\in T_n$ and $j\\in T_m$. Put $r=\\max(n,m)$. The inclusions from Step 1 put both $i$ and $j$ in $T_r$. Consequently $k=b(i,j)$ lies in $T_{r+1}\\subseteq J$, while the choice of $b$ gives $i\\le k$ and $j\\le k$. This proves directedness in the inherited order, with an upper bound lying in $J$ itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059W (lemma-ML-countable-colimit), proof, successive countable enlargements and their union; explicit set-theoretic expansion of the index-set argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-countable-set",
+  "lem-trf-countable-unions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059W (lemma-ML-countable-colimit), proof, successive countable enlargements and their union; explicit set-theoretic expansion of the index-set argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.*directed|directed.*countable|Countable.*DirectedOn|DirectedOn.*Countable",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"grep\", \"query\": \"countable.*directed|directed.*countable|Countable.*DirectedOn|DirectedOn.*Countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Order/Filter/AtTopBot/CountablyGenerated.lean\", \"Mathlib/Order/Filter/AtTopBot/CountablyGenerated.lean\", \"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"Mathlib/ModelTheory/DirectLimit.lean\", \"Mathlib/ModelTheory/DirectLimit.lean\"], \"digest\": \"e9f70db6ccf3b4ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern countable enumeration, already-directed sequences or topological completeness, not directed enlargement closed under a chosen function"
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Countable, DirectedOn",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"loogle\", \"query\": \"Set.Countable, DirectedOn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MeasureTheory.measure_biUnion_eq_iSup\", \"MeasureTheory.biSup_measure_Iic\"], \"digest\": \"a903b0624ae12760\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern countable enumeration, already-directed sequences or topological completeness, not directed enlargement closed under a chosen function"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a directed partial order and an endomorphism any countable subset has a countable directed superset closed under the endomorphism",
+   "results": "{\"t\": \"2026-10-22T06:45:21Z\", \"tool\": \"leansearch\", \"query\": \"For a directed partial order and an endomorphism any countable subset has a countable directed superset closed under the endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OmegaCompletePartialOrder.Chain.directed\", \"ChainCompletePartialOrder.IsAdmissible\", \"DirSupClosed\", \"OmegaCompletePartialOrder.ωSup\", \"LinearPMap.sSup\", \"OmegaCompletePartialOrder\", \"DirectedOn.le_sSup\", \"SupClosed.directedOn\"], \"digest\": \"3bd3d0c7131e560b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern countable enumeration, already-directed sequences or topological completeness, not directed enlargement closed under a chosen function"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable subset of a directed partially ordered set is contained in a countable directed subset closed under a given function",
+   "results": "{\"t\": \"2026-10-22T06:45:39Z\", \"tool\": \"leanfinder\", \"query\": \"A countable subset of a directed partially ordered set is contained in a countable directed subset closed under a given function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Directed.le_sequence\", \"DirectedOn.directed_val\", \"Directed.sequence\", \"Directed.rel_sequence\", \"Directed.sequence_le\", \"Directed.directedOn_range\", \"Set.countable_iff_exists_subset_range\", \"directedOn_iff_directed\"], \"digest\": \"e743e35ffe412d69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern countable enumeration, already-directed sequences or topological completeness, not directed enlargement closed under a chosen function"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed poset a countable set can be enlarged to a countable subset closed under a unary operation and containing upper bounds for pairs",
+   "results": "{\"t\": \"2026-10-22T06:45:49Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed poset a countable set can be enlarged to a countable subset closed under a unary operation and containing upper bounds for pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.exists_seq_iSup_eq_top_iff_countable\", \"Filter.atTop_countable_basis\", \"Directed.le_sequence\", \"Directed.sequence\", \"countable_image_gt_image_Iio_within\", \"Directed.sequence_le\", \"countable_image_lt_image_Iio_within\", \"Filter.exists_seq_monotone_tendsto_atTop_atTop\"], \"digest\": \"d5ede944acd7f821\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern countable enumeration, already-directed sequences or topological completeness, not directed enlargement closed under a chosen function"
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(closed|closure)|[Cc]losed.*[Cc]ountable",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"grep\", \"query\": \"countable.*(closed|closure)|[Cc]losed.*[Cc]ountable\", \"sub\": \"Data/Set\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern countable enumeration, already-directed sequences or topological completeness, not directed enlargement closed under a chosen function"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable subset of a directed partially ordered set is contained in a countable directed subset invariant under an arbitrary self map",
+   "results": "{\"t\": \"2026-10-23T22:44:12Z\", \"tool\": \"leanfinder\", \"query\": \"A countable subset of a directed partially ordered set is contained in a countable directed subset invariant under an arbitrary self map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Directed.rel_sequence\", \"Directed.le_sequence\", \"Directed.sequence_le\", \"Directed.sequence\", \"Directed.sequence_mono_nat\", \"Filter.atTop_countable_basis\", \"Filter.exists_seq_monotone_tendsto_atTop_atTop\", \"Set.exists_seq_iSup_eq_top_iff_countable\"], \"digest\": \"fdb1c08148632479\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Directed.sequence assumes the domain is already encodable and directed, and the filter results need ambient countability or a countably generated atTop filter; neither constructs this enlargement."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*directed|directed.*countable|Countable.*DirectedOn|DirectedOn.*Countable",
+   "results": "{\"t\": \"2026-10-23T22:44:39Z\", \"tool\": \"grep\", \"query\": \"countable.*directed|directed.*countable|Countable.*DirectedOn|DirectedOn.*Countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"Mathlib/Topology/Compactness/CountablyCompact.lean\", \"Mathlib/ModelTheory/DirectLimit.lean\", \"Mathlib/ModelTheory/DirectLimit.lean\", \"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Order/Filter/AtTopBot/CountablyGenerated.lean\", \"Mathlib/Order/Filter/AtTopBot/CountablyGenerated.lean\"], \"digest\": \"7708bc394cbcfc70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern already-countable directed indices or closure under countable suprema, not the present simultaneous unary and upper-bound construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every countable subset of a directed poset admits a countable directed superset closed under a prescribed unary function",
+   "results": "{\"t\": \"2026-10-23T22:44:40Z\", \"tool\": \"leansearch\", \"query\": \"Every countable subset of a directed poset admits a countable directed superset closed under a prescribed unary function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirSupClosed\", \"OmegaCompletePartialOrder.Chain.directed\", \"IsUpperSet.dirSupClosed\", \"dirSupClosed_iff_forall_sSup\", \"SupClosed.directedOn\", \"DirSupInacc\", \"ChainCompletePartialOrder.IsAdmissible\", \"Filter.CountableGenerateSets.below.superset\"], \"digest\": \"bb77b97713fad354\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: directed-supremum closure, chains and filter generation do not produce a countable unary-invariant directed enlargement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Countable, DirectedOn",
+   "results": "{\"t\": \"2026-10-23T22:44:40Z\", \"tool\": \"loogle\", \"query\": \"Set.Countable, DirectedOn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MeasureTheory.measure_biUnion_eq_iSup\", \"MeasureTheory.biSup_measure_Iic\"], \"digest\": \"a903b0624ae12760\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: both hits assume an already directed countable family and assert measure identities, not an enlargement."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_countable|countable.*[Cc]los|[Cc]ountable.*closure",
+   "results": "{\"t\": \"2026-10-23T22:45:04Z\", \"tool\": \"grep\", \"query\": \"exists_countable|countable.*[Cc]los|[Cc]ountable.*closure\", \"sub\": \"Order\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Order/CountableSupClosed.lean\", \"Mathlib/Order/Filter/CountableSeparatingOn.lean\", \"Mathlib/Order/Filter/CountableSeparatingOn.lean\", \"Mathlib/Order/Filter/CountableSeparatingOn.lean\"], \"digest\": \"c9c79065b174364d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern already-countable directed indices or closure under countable suprema, not the present simultaneous unary and upper-bound construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any countable set is contained in a countable set closed under specified unary and binary operations",
+   "results": "{\"t\": \"2026-10-23T22:45:06Z\", \"tool\": \"leanfinder\", \"query\": \"Any countable set is contained in a countable set closed under specified unary and binary operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.Countable.substructure_closure\", \"SetCoe.countable\", \"Set.Countable.to_subtype\", \"Set.to_countable\", \"FirstOrder.Language.Substructure.cg_closure\", \"Countable.to_set\", \"FirstOrder.Language.Substructure.cg_of_countable\", \"Set.Countable\"], \"digest\": \"ecdfce8b43717359\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Set.Countable.substructure_closure is a candidate for countability after encoding a first-order language with unary and binary symbols, not a one-line specialization of this poset existence statement; other hits are countability coercions."
+  },
+  {
+   "tool": "grep",
+   "query": "substructure_closure|theorem.*sequence|def sequence",
+   "results": "{\"t\": \"2026-10-23T22:45:56Z\", \"tool\": \"grep\", \"query\": \"substructure_closure|theorem.*sequence|def sequence\", \"sub\": \"ModelTheory/Substructures.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"322\"], \"digest\": \"4af4eeaf90f1970c\"}",
+   "date": "2026-10-24",
+   "verdict": "candidate only: grep with a file as its subdirectory printed the location as file=322; source read at Mathlib/ModelTheory/Substructures.lean:322-328, requiring an explicit first-order language and structure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ml-countable-colimit",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 059X/059W countable-extraction sentence, specifically Tag 059W proof, successive countable sets and their directed union in returned item Step 3.",
+   "via": [
+    "lem-trf-ml-countable-colimit",
+    "lem-trf-countable-flat-mittag-leffler-projective",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-countable-directed-function-closure",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 059W index-set argument into an explicit recursively defined chain, countability by singleton unions, and separate unary-closure and upper-bound verifications. Reused the existing countable-unions Mathlib leaf and countability definition; no new nodes, statement changes or attachments. Searches include a second formulation for operation closure; the model-theoretic closure result requires an extra language encoding and is not a one-line specialization.",
+  "blueprint": "The retained ancestor is lem-trf-local-term-locality via the existing Tag 059X/059W countable-extraction supporting chain. Steps 1 and 2 expand the successive countable enlargement sentence of Tag 059W, lemma-ML-countable-colimit; Steps 3 and 4 verify closure under the chosen stabilization function and directedness of the union. The latest ancestor proof has changed to the contracting-correspondence route, but this delivery only splits the already assigned supporting node and changes neither unit nor ancestor route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-f08d7f5a2",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-f08d7f5a2 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. Statement unchanged; the item had no proof on base and no re-split note applies. Source checked: Stacks algebra.tex Tag 059W lemma-ML-countable-colimit (≈22053-22091); the item abstracts its alternating 'adjoin stabilisation index / directed enlargement' union, with s = stabilisation choice, and parent lem-trf-ml-countable-colimit Step 3 uses it exactly so. Step 1: seed i_*, chosen binary bound b, recursion T_{n+1}=T_n∪s(T_n)∪b(T_n×T_n), monotone; elementary. Step 2: uses only the statements of def-sfb-countable-set (injection into N; singletons countable) and the Mathlib leaf lem-trf-countable-unions: (c) binary union for T_0, (a) restricted union indexed by T_n⊆I for s(T_n) and twice for b-values, (b) sequence union for J; X=I is allowed. Steps 3-4: S⊆J, nonempty via i_*, s-closure via the next stage, upper bound b(i,j)∈T_{max+1}⊆J; elementary. Tested S=∅, singleton I, nonmonotone swap on {0<1}, uncountable I (finite subsets); empty I is excluded and the exclusion is needed. rg -L duplicate search: lem-coef-filtered-presentation-common-refinement and colimit-subdiagram-approximation are κ-filtered ∞-categorical, other hits unrelated; no duplicate. No cycle, no SGA, same unit, no tool_uses, blueprint from/via intact. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Order.CountableDirectedFunctionClosure",
+  "declaration": "Set.exists_countable_directed_superset_closed",
+  "file": "lean/Sheaf/Order/CountableDirectedFunctionClosure.lean",
+  "statement": "theorem exists_countable_directed_superset_closed {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (s : I → I) (S : Set I) (hS : S.Countable) : ∃ J : Set I, J.Countable ∧ J.Nonempty ∧ S ⊆ J ∧ s '' J ⊆ J ∧ DirectedOn (· ≤ ·) J",
+  "branch": "sheaf-dag",
+  "by": "Q150",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b294209c",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: Type u poset, Nonempty, IsDirected (pairwise upper bounds), arbitrary s, S.Countable; conclusion J.Countable ∧ J.Nonempty ∧ S ⊆ J ∧ s '' J ⊆ J ∧ DirectedOn (bound inside J). No extra hypotheses. Set.Countable = Countable of the subtype = def-sfb-countable-set Mathlib leaf. Edge cases checked: empty S, one-element I, non-monotone s, uncountable I; Nonempty I is necessary. Consumer MLCountableColimit uses the same index hypotheses. Item node changed only in lean; lean.statement verbatim; not landed live; no name collision or duplicate after own rg/Mathlib search. Single sorry theorem; docstrings carry source place, blueprint id and the 4 proof steps; imports used, lines under 100 chars; report has Worker report and Second reading sections. No fixes, so no compile; the worker reports a clean compile."
+ }
+}

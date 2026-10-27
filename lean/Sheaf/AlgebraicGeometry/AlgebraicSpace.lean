@@ -13,6 +13,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.CategoryTheory.CochainCoefficientUniverseTransport
 
 /-!
 # Algebraic spaces, their small étale sites, and line modules
@@ -81,6 +83,25 @@ namespace AlgebraicSpace
 
 variable {S : Scheme.{u}}
 
+/-- Composite representable étale maps are representable étale.
+Source: Stacks, Spaces, relative representable properties preceding Tag 025Y
+(blueprint: def-trf-algebraic-space).
+Proof: base change the second map by a test scheme and represent its fibre product by a
+scheme `V`. Base change the first map by `V` and represent that fibre product by `W`.
+Pasting the two pullback squares gives the required representing square for the composite;
+the scheme projection `W → V → T` is étale because both factors are étale. -/
+theorem isEtale_comp {G H K : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ H) (g : H ⟶ K)
+    (hf : IsEtale f) (hg : IsEtale g) : IsEtale (f ≫ g) := by
+  intro T a
+  obtain ⟨V, p, q, hq, hp⟩ := hg T a
+  obtain ⟨W, r, s, hs, hr⟩ := hf V q
+  refine ⟨W, r ≫ p, s, ?_, ?_⟩
+  · simpa only [Functor.map_comp] using hs.paste_vert hq
+  · have := hp
+    have := hr
+    change Etale (r.left ≫ p.left)
+    infer_instance
+
 /-- The objects of the small étale site of `F` are schemes over `S` with representable
 étale maps to `F`; morphisms are commuting triangles of natural transformations.
 Source: Stacks, Properties of Spaces, Tag 03ED (blueprint: def-trf-algebraic-space). -/
@@ -107,6 +128,118 @@ Source: Stacks, Tag 03ED (blueprint: def-trf-algebraic-space). -/
 abbrev etaleTopology (F : AlgebraicSpace S) : GrothendieckTopology F.EtaleSite :=
   F.etalePrecoverage.toGrothendieck
 
+private theorem isEtale_yoneda {U V : Over S} (r : U ⟶ V) (hr : Etale r.left) :
+    IsEtale (yoneda.map r) := by
+  intro T a
+  let b : T ⟶ V := yoneda.preimage a
+  refine ⟨Limits.pullback r b, Limits.pullback.snd r b,
+    yoneda.map (Limits.pullback.fst r b), ?_, ?_⟩
+  · have hb : yoneda.map b = a := yoneda.map_preimage a
+    rw [← hb]
+    exact (IsPullback.of_hasPullback r b).map yoneda
+  · exact MorphismProperty.of_isPullback
+      ((IsPullback.of_hasPullback r b).map (Over.forget S)) hr
+
+private instance forget_faithful (F : AlgebraicSpace S) : F.etaleForget.Faithful := by
+  unfold etaleForget
+  infer_instance
+
+private instance forget_reflects_pullbacks (F : AlgebraicSpace S) :
+    ReflectsLimitsOfShape WalkingCospan (etaleForget F) := by
+  unfold etaleForget
+  infer_instance
+
+private theorem covering_pullback {F : AlgebraicSpace S} {U V T : F.EtaleSite}
+    (a : U ⟶ T) (b : V ⟶ T) (ha : Etale ((etaleForget F).map a)) :
+    ∃ (W : F.EtaleSite) (p : W ⟶ U) (q : W ⟶ V),
+      IsPullback p q a b ∧
+        IsPullback ((etaleForget F).map p) ((etaleForget F).map q)
+          ((etaleForget F).map a) ((etaleForget F).map b) := by
+  let P := Limits.pullback a.hom.left b.hom.left
+  let p : P ⟶ U.obj.left := Limits.pullback.fst _ _
+  let q : P ⟶ V.obj.left := Limits.pullback.snd _ _
+  have hq : Etale q.left := MorphismProperty.of_isPullback
+    ((IsPullback.of_hasPullback a.hom.left b.hom.left).map (Over.forget S)) ha
+  let W : F.EtaleSite := ⟨CostructuredArrow.mk (yoneda.map q ≫ V.obj.hom),
+    isEtale_comp _ _ (isEtale_yoneda q hq) V.property⟩
+  let p' : W ⟶ U := ObjectProperty.homMk (CostructuredArrow.homMk p (by
+    dsimp [p, q, W]
+    rw [← CostructuredArrow.w a.hom, ← CostructuredArrow.w b.hom,
+      ← Category.assoc, ← Category.assoc,
+      ← Functor.map_comp, ← Functor.map_comp, Limits.pullback.condition]))
+  let q' : W ⟶ V := ObjectProperty.homMk (CostructuredArrow.homMk q (by rfl))
+  have hpq : IsPullback ((etaleForget F).map p') ((etaleForget F).map q')
+      ((etaleForget F).map a) ((etaleForget F).map b) :=
+    (IsPullback.of_hasPullback a.hom.left b.hom.left).map (Over.forget S)
+  refine ⟨W, p', q', ?_, hpq⟩
+  exact hpq.of_map_of_faithful (etaleForget F)
+
+private theorem precoverage_eq_comap (F : AlgebraicSpace S) :
+    F.etalePrecoverage = Scheme.etalePrecoverage.comap F.etaleForget := by
+  ext T R
+  obtain ⟨I, U, a, rfl⟩ := R.exists_eq_ofArrows
+  rw [Precoverage.mem_comap_iff, Presieve.map_ofArrows]
+  change _ ↔ Presieve.ofArrows _ _ ∈ Scheme.precoverage (@Etale) _
+  rw [Scheme.ofArrows_mem_precoverage_iff]
+  constructor
+  · intro h
+    refine ⟨fun x ↦ ?_, fun i ↦ h.1 _ _ ⟨i⟩⟩
+    obtain ⟨V, f, ⟨i⟩, y, hy⟩ := h.2 x
+    exact ⟨i, y, hy⟩
+  · intro h
+    refine ⟨?_, fun x ↦ ?_⟩
+    · rintro V f ⟨i⟩
+      exact h.2 i
+    · obtain ⟨i, y, hy⟩ := h.1 x
+      exact ⟨U i, a i, ⟨i⟩, y, hy⟩
+
+private theorem forget_preserves_covering_pullback {F : AlgebraicSpace S}
+    {U V T : F.EtaleSite} (a : U ⟶ T) (b : V ⟶ T)
+    (ha : Etale ((etaleForget F).map a)) :
+    PreservesLimit (cospan a b) F.etaleForget := by
+  obtain ⟨W, p, q, h, h'⟩ := covering_pullback a b ha
+  exact h.preservesLimit_cospan_iff.mpr h'
+
+private instance etalePrecoverage_hasPullbacks (F : AlgebraicSpace S) :
+    F.etalePrecoverage.HasPullbacks where
+  hasPullbacks_of_mem b hR := ⟨fun ha ↦ by
+    obtain ⟨W, p, q, h, _⟩ := covering_pullback _ b (hR.1 _ _ ha)
+    exact h.hasPullback⟩
+
+private instance etaleForget_preserves_coveringPullbacks (F : AlgebraicSpace S) :
+    F.etalePrecoverage.PullbacksPreservedBy F.etaleForget where
+  preservesPairwisePullbacks_of_mem {_X _R} hR :=
+    ⟨fun {_U _V _a _b} ha _ ↦
+      forget_preserves_covering_pullback _ _ (hR.1 _ _ ha)⟩
+
+private instance scheme_etalePrecoverage_isStableUnderBaseChange :
+    Scheme.etalePrecoverage.{u}.IsStableUnderBaseChange := by
+  unfold Scheme.etalePrecoverage
+  infer_instance
+
+private instance scheme_etalePrecoverage_hasPullbacks :
+    Scheme.etalePrecoverage.{u}.HasPullbacks := by
+  unfold Scheme.etalePrecoverage
+  infer_instance
+
+private instance etalePrecoverage_isStableUnderBaseChange (F : AlgebraicSpace S) :
+    F.etalePrecoverage.IsStableUnderBaseChange where
+  mem_coverings_of_isPullback {ι} {T} {U} a ha {V} b {W} p q h := by
+    rw [precoverage_eq_comap, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
+    have ha' := ha
+    rw [precoverage_eq_comap, Precoverage.mem_comap_iff, Presieve.map_ofArrows] at ha'
+    apply Precoverage.mem_coverings_of_isPullback _ ha' (F.etaleForget.map b)
+      (fun i ↦ F.etaleForget.map (p i)) (fun i ↦ F.etaleForget.map (q i))
+    intro i
+    have := forget_preserves_covering_pullback (a i) b (ha.1 _ _ ⟨i⟩)
+    have := preservesPullback_symmetry F.etaleForget (a i) b
+    exact (h i).map F.etaleForget
+
+private theorem etaleForget_isContinuous (F : AlgebraicSpace S) :
+    F.etaleForget.IsContinuous F.etaleTopology Scheme.etaleTopology := by
+  apply Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy
+  exact (precoverage_eq_comap F).le
+
 /-- The structure presheaf has value `Γ(T, O_T)` and the usual restriction maps.
 Source: Stacks, Tag 03G7 (blueprint: def-trf-algebraic-space). -/
 def structurePresheaf (F : AlgebraicSpace S) : F.EtaleSiteᵒᵖ ⥤ RingCat.{u} :=
@@ -121,7 +254,11 @@ that cover is the sheaf equalizer for this presheaf. The same holds for every ge
 covering sieve, by the sheaf criterion for a generating precoverage. -/
 theorem structurePresheaf_isSheaf (F : AlgebraicSpace S) :
     Presheaf.IsSheaf F.etaleTopology F.structurePresheaf := by
-  sorry
+  have := etaleForget_isContinuous F
+  exact GrothendieckTopology.HasSheafCompose.isSheaf
+    (F := forget₂ CommRingCat RingCat) (F.etaleForget.op ⋙ Scheme.Γ)
+    (Functor.op_comp_isSheaf_of_isSheaf F.etaleForget _ _ _
+      (Scheme.isSheaf_Γ Scheme.etaleTopology))
 
 /-- The structure sheaf: its data are the explicit global-sections presheaf; only the
 sheaf-condition proof is postponed in the preceding named theorem.
@@ -133,17 +270,6 @@ def structureSheaf (F : AlgebraicSpace S) : Sheaf F.etaleTopology RingCat.{u} :=
 Source: Stacks, Tags 03G7 and 0409 (blueprint: def-trf-algebraic-space). -/
 abbrev Modules (F : AlgebraicSpace S) :=
   ringedSiteModules.{u} F.structureSheaf
-
-/-- Composite representable étale maps are representable étale.
-Source: Stacks, Spaces, relative representable properties preceding Tag 025Y
-(blueprint: def-trf-algebraic-space).
-Proof: base change the second map by a test scheme and represent its fibre product by a
-scheme `V`. Base change the first map by `V` and represent that fibre product by `W`.
-Pasting the two pullback squares gives the required representing square for the composite;
-the scheme projection `W → V → T` is étale because both factors are étale. -/
-theorem isEtale_comp {G H K : (Over S)ᵒᵖ ⥤ Type u} (f : G ⟶ H) (g : H ⟶ K)
-    (hf : IsEtale f) (hg : IsEtale g) : IsEtale (f ≫ g) := by
-  sorry
 
 /-- An étale map induces the inclusion of small étale sites by composition of maps.
 It leaves underlying schemes and scheme morphisms unchanged.
@@ -165,7 +291,24 @@ covering equalizers for a sheaf restrict to covering equalizers on the source si
 theorem etaleMap_isContinuous {G F : AlgebraicSpace S} (f : G ⟶ F)
     (hf : IsEtale f.hom.hom) :
     Functor.IsContinuous (etaleMap f hf) G.etaleTopology F.etaleTopology := by
-  sorry
+  have : G.etalePrecoverage.PullbacksPreservedBy (etaleMap f hf) := by
+    constructor
+    intro T R hR
+    constructor
+    intro U V a b ha hb
+    have : PreservesLimit (cospan a b) G.etaleForget :=
+      forget_preserves_covering_pullback a b (hR.1 _ _ ha)
+    have : PreservesLimit (cospan a b) (etaleMap f hf ⋙ F.etaleForget) := this
+    exact preservesLimit_of_reflects_of_preserves (etaleMap f hf) F.etaleForget
+  apply Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy
+  intro T R hR
+  rw [Precoverage.mem_comap_iff]
+  obtain ⟨I, U, a, rfl⟩ := R.exists_eq_ofArrows
+  rw [Presieve.map_ofArrows, precoverage_eq_comap, Precoverage.mem_comap_iff,
+    Presieve.map_ofArrows]
+  change Presieve.ofArrows (fun i ↦ G.etaleForget.obj (U i))
+    (fun i ↦ G.etaleForget.map (a i)) ∈ Scheme.etalePrecoverage _
+  rwa [precoverage_eq_comap, Precoverage.mem_comap_iff, Presieve.map_ofArrows] at hR
 
 /-- Pullback of modules along an étale map is precomposition on the small étale sites.
 The ring map is the identity on the regular functions of each underlying scheme.

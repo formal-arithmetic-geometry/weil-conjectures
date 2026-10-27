@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-zariski-cech-module-derived-unit",
+ "kind": "statement",
+ "title": "Degree-zero module cohomological descent for an open-cover face total site",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $(W_i\\hookrightarrow T)_{i\\in I}$ a set-indexed open cover [def-weil-open-immersion, def-weil-size-convention]. Set $T_n=\\coprod_{(i_0,\\ldots,i_n)\\in I^{n+1}}(W_{i_0}\\cap\\cdots\\cap W_{i_n})$. Retain only the injective order maps and their index-dropping morphisms. Form the small Zariski ringed total site [def-sc-zariski-site] with the structure sheaves $\\mathcal O_{T_n}$, its ordinary module category $\\mathscr M$, and the augmentation $a$ of [lem-sfb-semisimplicial-ringed-total-category]. Thus $(a^*G)_n$ is the restriction of $G$ to each tuple intersection. Use module sheaves [def-weil-sheaf-of-modules-category] and their ordinary unbounded derived categories [def-weil-abstract-derived-category]. For every $\\mathcal O_T$-module sheaf $G$, regarded as a complex in degree zero, the canonical derived adjunction unit is an isomorphism\n$$\\eta_G:G[0]\\xrightarrow{\\sim}Ra_*(a^*G[0]).$$\nHere $Ra_*$ is the ambient right derived augmentation pushforward computed by K-injective resolutions. There is no quasi-coherence hypothesis on $G$, no finiteness condition on the cover, and no quasi-compactness or quasi-separatedness hypothesis on $T$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules, injective alternating-face resolution proof; combined with cohomology.tex Tag 01EQ, lemma-cech-cohomology, and Tag 01EP, lemma-injective-trivial-cech. Agent-supplied small-Zariski, injective-order-map adaptation: the derived unit for a module in degree zero, not the unbounded descent equivalence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sc-zariski-site",
+  "def-sfb-zariski-cech-face-total-site"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonnegative injective resolution $G[0]\\to K^\\bullet$ in $\\operatorname{Mod}(\\mathcal O_T)$: [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives] apply to the small Zariski ringed site. Open restriction is exact and preserves injectives by [lem-weil-pbc-module-open-restriction-injectives]. Thus $a^*$ and every face pullback are exact: their components are restrictions to tuple intersections, and exactness in the total category is componentwise by [lem-sfb-semisimplicial-ringed-total-category]. Put $J=a^*K$. This resolves $a^*G$, and every $J_p^q$ is injective. Indeed modules on a disjoint union are families of modules on the summands (sections and maps glue uniquely on the disjoint open cover); a lifting problem into such a family is a family of lifting problems into $K^q|_{W_{i_0}\\cap\\cdots\\cap W_{i_p}}$. Each has a lift by the cited restriction lemma, and choosing these set-many lifts supplies a lift in the product category.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E1, lemma-cohomology-of-open; disjoint-open gluing and componentwise exactness"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-face-component-injective-total-model] with $F=a^*G$, $J=a^*K$, $\\phi=\\operatorname{id}_{a^*G}$ and $t=\\operatorname{id}_{a^*K}$. All its exactness and componentwise injectivity hypotheses were verified in step 1. Its total complex has\n$$C^{p,q}=\\prod_{\\mathbf i\\in I^{p+1}}j_{\\mathbf i,*}(K^q|_{W_{\\mathbf i}}),\\qquad W_{\\mathbf i}=\\bigcap_{r=0}^pW_{i_r},$$\nwhere $j_{\\mathbf i}:W_{\\mathbf i}\\hookrightarrow T$: on an open $V\\subseteq T$, sections of the disjoint union over $V$ are exactly $\\prod_{\\mathbf i}K^q(V\\cap W_{\\mathbf i})$. The face transposes are restrictions with the alternating signs. The same cited theorem identifies the morphism represented by the restriction augmentation $b:K^\\bullet\\to\\operatorname{Tot}(C)$ with the canonical unit $\\eta_G$, as a derived morphism, not merely on cohomology.",
+   "uses": [
+    "lem-sfb-face-component-injective-total-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules, double-complex proof using lemma-simplicial-resolution-augmentation-modules and lemma-augmentation-cech-complex-modules. Agent adaptation to injective order maps and componentwise injective resolutions, including augmentation normalization."
+   }
+  },
+  {
+   "text": "For every open $V\\subseteq T$, the row augmentation $K^q(V)[0]\\to C^{\\bullet,q}(V)$ is the ordinary Čech restriction augmentation for the open cover $(V\\cap W_i)_i$ of the scheme $V$. Its coefficient module $K^q|_V$ is injective by [lem-weil-pbc-module-open-restriction-injectives]. Consequently [lem-sc-injective-module-cech-augmentation] makes this row augmentation a quasi-isomorphism. The degree-zero projections here are precisely restrictions, and restriction of scalars at $V$ is along the identity ring map, so the normalization hypotheses of that node hold. Hence $0\\to K^q\\to C^{0,q}\\to C^{1,q}\\to\\cdots$ is an exact sequence of sheaves: its section sequence is exact on every open, which implies sheaf exactness directly by the local criterion for the image sheaf. The rowwise quasi-isomorphism criterion [lem-sc-first-quadrant-column-augmentation], with the horizontal face degree as its resolution direction, now shows that $b$ is a quasi-isomorphism. Its chain-map condition is restriction commuting with $d_K$; its horizontal-kernel condition is $s|_{V\\cap W_j\\cap W_i}-s|_{V\\cap W_i\\cap W_j}=0$. Both indices are nonnegative, so each total diagonal is finite even when $I$ is infinite.",
+   "uses": [
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "lem-sc-injective-module-cech-augmentation",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01EP, lemma-injective-trivial-cech, and 01EQ, lemma-cech-cohomology, augmented-row argument; homology.tex Tag 0133, lemma-double-complex-gives-resolution, second-variable variant"
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], the quasi-isomorphism $b$ becomes invertible under $Q$. Composing with $G[0]\\simeq QK$ and the total-model isomorphism of step 2 gives exactly $\\eta_G$, so $\\eta_G$ is invertible. No assertion about convergence of an unbounded double complex is involved: the object being resolved here is a module in degree zero and both resolution indices are nonnegative.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, bounded-below resolution proof, combined with the augmented-row argument of cohomology.tex Tag 01EQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sc-injective-module-cech-augmentation",
+  "lem-sfb-face-component-injective-total-model",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7F adapted to the face-only ringed total site; cohomology.tex Tags 01EP and 01EQ give the injective Čech row argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomologicalDescent|cohomological_descent|derived.*unit.*cech|cech.*derived.*unit",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules satisfy cohomological descent along an open covering via the derived augmentation pushforward on the Cech total site",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.pushforwardSections, SheafOfModules, SheafOfModules.pushforward_obj_val, TopCat.Presheaf.IsSheaf.isSheafOpensLeCover, AlgebraicGeometry.SheafedSpace.IsSheaf, TopCat.Presheaf.IsSheafOpensLeCover",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"cech\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski open cover Cech ringed total site augmentation derived unit is an isomorphism for every sheaf of modules in degree zero",
+   "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, TopCat.Presheaf.generateEquivalenceOpensLe_unitIso, TopCat.Presheaf.generateEquivalenceOpensLe_counitIso, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso, CategoryTheory.GrothendieckTopology.isoToPlus, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any sheaf of rings and any sheaf of modules on a scheme the Cech open cover total topos augmentation has invertible derived adjunction unit on that module",
+   "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.plusPlusAdjunction_unit_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.GrothendieckTopology.instIsIsoSheafAppFunctorOppositeSheafComposeNatTransPlusPlusAdjunction, CategoryTheory.plusPlusAdjunction_counit_app_val, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define underived sheaves, sheafification, quasi-coherent presentation data or ordinary derived categories; none asserts the ringed face-total augmentation derived unit or unbounded descent equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every sheaf of modules in degree zero satisfies cohomological descent for an arbitrary Zariski open cover: the derived adjunction unit of the Cech face total augmentation is invertible",
+   "results": "8 hits; SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.coversTop, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived sheafification, quasi-coherent presentations or pullback of a tensor unit, not derived augmentation descent for arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived unit G to Ra star a star G is an isomorphism for any module sheaf and any Zariski open covering Cech total site",
+   "results": "8 hits; CategoryTheory.sheafificationIso, CategoryTheory.isoSheafify, CategoryTheory.isIso_toSheafify, AlgebraicGeometry.StructureSheaf.globalSectionsIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.IsCoverDense.sheafIso, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, CategoryTheory.Functor.IsCoverDense.Types.sheafIso",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern underived sheafification, quasi-coherent presentations or pullback of a tensor unit, not derived augmentation descent for arbitrary modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zariski-total-quasicoherent-descent",
+  "date": "2026-10-24",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary unbounded descent only after an actual cartesian total object has been constructed; no strictification of a diagram in homotopy categories is asserted. Supporting input: canonical derived unit on an ordinary module in degree zero for the Zariski open-cover face total augmentation (hypothesis (3) of 0D7V).",
+   "via": [
+    "lem-sfb-zariski-total-quasicoherent-descent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-zariski-cech-module-derived-unit",
+  "worker": "stage1",
+  "summary": "Proved the unchanged module-in-degree-zero unit by restricting one base injective resolution, computing the derived face augmentation using a new general componentwise injective total-model lemma, and applying existing injective Čech augmentation and first-quadrant totalization lemmas. Canonical-unit normalization is explicit; no quasi-coherence, finite cover, or unbounded convergence assumption was introduced.",
+  "blueprint": "The item is a supporting prerequisite below det-thm-sf-ctf-stability-direct-images, proof (3); the current blueprint gives proper/open direct-image assembly, while the inherited deeper locality route requires open-cover derived descent. Steps 1–4 provide its degree-zero unit hypothesis. The inherited created.item chain ends at a Lean module rather than a node, so blueprint_refs.py ancestor returns None; retained the inherited null from.node and filled the precise place.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-injective-module-cech-augmentation",
+    "why": "Generic injective Čech row exactness, for arbitrary scheme open covers; the unit does not provide the resolution argument."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Generic first-quadrant row-augmentation totalization criterion; no route-specific geometry is replaced."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives theorem used to choose the base resolution."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic module-category existence theorem for the small Zariski ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-module-open-restriction-injectives",
+    "why": "Generic open-restriction exactness and preservation of injectives needed on tuple intersections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-injective-module-cech-augmentation",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-module-open-restriction-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-4abb39d7a",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-4abb39d7a (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The item statement is byte-identical to live, and the item is still unsplit in both live and side-live. Steps 1-4 are correct. Step 1: per-summand open restriction (lem-weil-pbc-module-open-restriction-injectives) makes a^*K a componentwise injective resolution; the transitions are local isomorphisms, so their pullbacks are exact. Step 2: the new node with t=phi=id gives a_{p,*}J = prod j_*(K^q|W_i) and Qb = eta_G. Step 3: each row is the full-tuple Cech complex of the injective K^q|_V, exact by lem-sc-injective-module-cech-augmentation; lem-sc-first-quadrant-column-augmentation is used in its K.flip row convention. Step 4 is elementary. The new node lem-sfb-face-component-injective-total-model is the Delta_inj adaptation of Stacks 0D7F and the two lemmas before it (spaces-simplicial.tex l.2109-2195). I checked it is true for componentwise-injective J via comparison with a total injective resolution and per-component homotopy equivalences, and that the b_t normalization holds. It is self-contained and statement-only, and it does not restate the item: it has no cover and no unit-invertibility clause. It duplicates none of lem-sfb-face-total-derived-sections (etale, algebraic spaces, RGamma), lem-sfb-ringed-acyclic-resolution-derived-maps or lem-trf-total-site-derived-components. Batch-5 flag: lem-sfb-semisimplicial-ringed-total-category, reaching lem-trf-slice-site-total-pseudofunctor, is a generic total-site construction and is not a step of the trace formula or of Poincare duality; the item already cited it in its base statement. The generic tool_uses (Cech augmentation, column augmentation, Grothendieck/enough injectives, open restriction) are accepted. Edge cases checked: empty cover, singleton cover, infinite I, non-quasi-coherent G, non-qcqs T. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiCechModuleDerivedUnit",
+  "declaration": "AlgebraicGeometry.ZariskiCechFaceTotal.zariski_cech_module_derived_unit",
+  "declarations": [
+   "AlgebraicGeometry.ZariskiCechFaceTotal.zariski_cech_module_derived_unit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiCechModuleDerivedUnit.lean",
+  "statement": "theorem zariski_cech_module_derived_unit (X : Scheme.{u}) {I : Type u} (W : I → X.Opens) (hW : iSup W = ⊤) : ∃ A : Augmentation W, ∀ G : X.Modules, A.IsUnitIso W G",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-693c56126",
+  "group": "Q67",
+  "result": "fix",
+  "note": "Statement matches node and source. Read clause by clause: X : Scheme.{u}, I : Type u, W with iSup W = ⊤; injective-order-map tuple-basis total site (Object/Hom on SemiSimplexCategory, vertical generated topology); ring = toOpens pushforward of X.sheaf; a^* = SheafOfModules.pushforward along toOpens with the identity ring map; a_* = rightAdjoint through ofIsLeftAdjoint; mapDerivedCategoryRightDerivedAdjunction with K-injective rightDerivedFunctor; IsUnitIso = IsIso of the unit at singleFunctor 0 G; ∀ G with no qcoh/finite/qcqs hypothesis. ∃ A : Augmentation W is harmless (Prop class of proofs only, all true for any W). Edge cases (empty I, repeated opens, empty intersections, infinite I) OK. Statement fields verbatim, no duplicate notion, docstrings and report sections present. Advisory: generic Site decls are owned by theorem node lem-sfb-semisimplicial-ringed-total-category, already in the base stmt_deps. FIX: a global `instance baseHasDerived : HasDerivedCategory.{u+1} X.Modules` (standard) competes with the ambient ofIsGrothendieckAbelian D(O_X) in importers; fixes/ZariskiCechFaceTotalSite.lean makes it `scoped instance` (plus a docstring sentence). nt_compile --json of the fixed module + unchanged item: 6.7 s / 7.6 s, clean."
+ }
+}

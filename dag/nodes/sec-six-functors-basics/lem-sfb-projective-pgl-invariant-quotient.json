@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-projective-pgl-invariant-quotient",
+ "kind": "statement",
+ "title": "Projective PGL quotient with universal closed images of invariant subschemes",
+ "statement": "Let $k$ be any field [def-weil-field], $r\\geq2$, and $G=\\operatorname{PGL}_{r,k}$, the affine group scheme of invertible matrices modulo scalar matrices. Let $Z$ be a projective finite-type $k$-scheme [def-pc-scheme, def-kun-projective, def-weil-finite-type-morphism] with a $G$-action and an ample $G$-linearized invertible module $A$ [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Linearization and the geometric semistable open subscheme $Z^{ss}(A)$ have the meanings in [lem-sfb-hilbert-plucker-pgl-linearization]. There exist a projective finite-type $k$-scheme $Q$ and a surjective invariant finite-type morphism $q:Z^{ss}(A)\\to Q$ which is affine, meaning that the inverse image of every affine open subscheme is affine. Invariant means $q\\circ a=q\\circ\\mathrm{pr}_2$ for the action $a:G\\times_kZ^{ss}(A)\\to Z^{ss}(A)$. For every scheme $T$ and morphism $T\\to Q$, put $X_T=Z^{ss}(A)\\times_Q T$ and $G_T=G\\times_kT$ [def-pc-fibre-product]. For every closed subscheme $C\\hookrightarrow X_T$ [def-weil-closed-immersion] whose defining ideal is preserved by the $G_T$-action, the image of $|C|$ under $X_T\\to T$ is closed in $|T|$. The assertions include nonreduced $Z$ and arbitrary characteristic; no linear reductivity or stabilizer hypothesis is assumed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper, Adequate moduli spaces and geometrically reductive group schemes, published version, introduction pp.490--491 (projective semistable quotient); Theorems 9.1.4 and 9.7.6, finite generation Theorem 6.3.3, and universal closedness Theorem 5.3.1(2), with Proposition 5.2.9(3). Affine invariant charts give affineness of q. Local PDF WANTED; read online.",
+  "url": "https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sfb-pgl-linearized-polarization"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ample-very-ample-immersion-affine-base], some $A^{\\otimes d}$ is the pullback of $\\mathcal O(1)$ under an immersion $i:Z\\to\\mathbf P^n_k$. The scheme $Z$ is proper by [lem-pc-projective-proper], and $\\mathbf P^n_k$ is separated since it is projective and hence proper by the same node. Thus [lem-weil-pbc-proper-to-separated] makes $i$ proper, and [lem-weil-pbc-proper-immersion-closed] makes it a closed immersion. The polarization hypothesis of [lem-sfb-projective-polarization-section-algebra] is now satisfied. Put $S=\\bigoplus_{m\\geq0}\\Gamma(Z,A^{\\otimes m})$; that node gives finite generation of $S$ over $k$, finite dimension of every $S_m$, and affine finite-type charts $Z_s=\\operatorname{Spec}S_{(s)}$ for all positive-degree homogeneous $s$.",
+   "uses": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-sfb-projective-polarization-section-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed pp.490--491, invariant section-ring quotient; agent expansion of the affine-chart construction."
+   }
+  },
+  {
+   "text": "Each tensor power of $A$ is locally free of rank one, hence quasi-coherent by [def-sc-invertible-module]. The linearization [def-sfb-pgl-linearized-polarization] induces a degree-preserving rational $G$-action on $S$. Explicitly, pull back each section by $a:G\\times Z\\to Z$, identify $a^*A$ with $\\mathrm{pr}_2^*A$ by the linearization, and use [lem-sc-flat-base-change-coherent] in degree zero with coefficient algebra $k[G]$ to identify the resulting sections with $S_m\\otimes_k k[G]$. Flatness holds by [lem-weil-pbc-module-over-field-flat]; properness of $Z$ was proved in step 1. Tensor compatibility gives multiplication compatibility, and the identity and cocycle laws give counit and coassociativity. Put $R=S^G=\\bigoplus_m(S_m)^G$. By [lem-sfb-pgl-geometric-reductivity], $R$ is finitely generated. Its degree-zero part is a subspace of the finite-dimensional $S_0$, so [lem-sfb-finite-graded-proj-projective] makes $Q=\\operatorname{Proj}R$ projective and of finite type over $k$. This does not assume $R_0=k$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sfb-pgl-linearized-polarization",
+    "lem-sc-flat-base-change-coherent",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-finite-graded-proj-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed pp.490--491, invariant section-ring quotient; agent expansion of the affine-chart construction."
+   }
+  },
+  {
+   "text": "The geometric semistability convention in [lem-sfb-hilbert-plucker-pgl-linearization] is exactly the invariant-section convention in [def-sfb-pgl-linearized-polarization]. The invariant nonvanishing opens $Z_s$, for homogeneous $s\\in R_d$, $d>0$, cover $Z^{ss}(A)$ by its defining semistability condition [def-sfb-pgl-linearized-polarization]. This agrees with geometric semistability: apply [lem-sc-flat-base-change-coherent] to an algebraically closed field extension and [lem-weil-pbc-flat-tensor-exact], with [lem-weil-pbc-module-over-field-flat], to the kernel defining invariants of $S_m$. Explicitly, for an algebraically closed extension $K/k$, tensor the exact sequence $0\\to(S_m)^G\\to S_m\\xrightarrow{\\rho-\\iota}S_m\\otimes_k k[G]$, where $\\iota(v)=v\\otimes1$, with $K$. The base-change section and coaction identifications give $(S_m)^G\\otimes_kK\\cong(S_m\\otimes_kK)^{G_K}$. A nonzero value of a finite $K$-linear combination of sections from $(S_m)^G$ forces one of those sections to have nonzero value. Thus every geometrically semistable point lies in an invariant nonvanishing open defined over $k$. Every $Z_s$ is $G$-invariant, since the section $s$ is invariant on all test schemes.",
+   "uses": [
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "def-sfb-pgl-linearized-polarization",
+    "lem-sc-flat-base-change-coherent",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-module-over-field-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed pp.490--491, invariant section-ring quotient; agent expansion of the affine-chart construction."
+   }
+  },
+  {
+   "text": "For $s\\in R_d$, $d>0$, set $B_s=S_{(s)}=\\Gamma(Z_s,\\mathcal O)$ using [lem-sfb-projective-polarization-section-algebra]. Then $(B_s)^G=R_{(s)}$. Here is the denominator argument, including zero divisors: an invariant fraction $a/s^n$, $a\\in S_{nd}$, satisfies $\\rho(a)-a\\otimes1=0$ after inverting $s\\otimes1$. Thus some $(s\\otimes1)^N$ annihilates this difference, and $s^Na$ is an invariant homogeneous numerator representing the same fraction with denominator $s^{n+N}$. Conversely a fraction with invariant numerator and denominator is invariant. Injectivity follows from the same localization relation in the subring $R\\subset S$: $s^Nb=0$ in $S$ is also the identical equality in $R$. The chart isomorphism respects the action because the linearization carries the ratio $a/s^n$ to the ratio of its translates.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-sfb-pgl-linearized-polarization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed pp.490--491, invariant section-ring quotient; agent expansion of the affine-chart construction."
+   }
+  },
+  {
+   "text": "The inclusion $R_{(s)}\\hookrightarrow B_s$ defines an invariant morphism $q_s:Z_s\\to D_+(s)\\subset Q$ by [lem-weil-pbc-morphism-into-affine-scheme] and [def-pc-proj]. For $t\\in R_e$, $e>0$, [lem-weil-pbc-proj-basic-open-intersection] describes $D_+(s)\\cap D_+(t)$ inside $D_+(s)$ by invertibility of $t^d/s^e$. Its pullback is the function $t^d/s^e$ on $Z_s$, invertible exactly on $Z_s\\cap Z_t$. On this intersection both $q_s$ and $q_t$ send every degree-zero fraction from $R_{(st)}$ to the ratio of the same sections of $A$; they are equal by the affine-target bijection. Hence [lem-weil-pbc-scheme-morphism-gluing] glues them to $q:Z^{ss}(A)\\to Q$. For every $s$, the inverse image $q^{-1}(D_+(s))$ is exactly $Z_s$, by the intersection calculation on the covering $\\{Z_t\\}$. Equality of action and projection composites holds on these invariant opens, hence globally by that same gluing uniqueness.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-proj",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed pp.490--491, invariant section-ring quotient; agent expansion of the affine-chart construction."
+   }
+  },
+  {
+   "text": "The equality $q^{-1}(D_+(s))=Z_s$ and [pqf-lem-affine-local-target] show that $q$ is affine. It is also finite type directly from [def-weil-finite-type-morphism]. Indeed $Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian), and every open of $Z$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Given any affine $V\\subset Q$, cover $q^{-1}(V)$ by principal affine opens inside the affine finite-type charts $Z_s$. Each such coordinate ring is a localization $B_s[1/h]$ and is finitely generated over $k$, hence over $\\Gamma(V,\\mathcal O)$ through $q$, since the image of that algebra contains $k$. Quasi-compactness gives a finite subcover, which is precisely the finite-type criterion. This argument checks all affine $V$, not just the Proj charts.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed pp.490--491, invariant section-ring quotient; agent expansion of the affine-chart construction."
+   }
+  },
+  {
+   "text": "For each $s$, the rational $G$-algebra $B_s$ is finitely generated over $k$. The group $G$ is smooth affine and of finite type by [lem-sfb-pgl-reductive-structure], and [lem-sfb-pgl-geometric-reductivity] supplies the power-lifting hypothesis for every equivariant surjection of finite-type $G$-algebras. Apply [lem-sfb-power-lifting-adequate-affine-quotient] to obtain an adequate moduli morphism $\\phi_s:[Z_s/G]\\to\\operatorname{Spec}(B_s^G)=D_+(s)$. The canonical smooth surjective atlas $Z_s\\to[Z_s/G]$ and its composite with $\\phi_s$ are given by [lem-sfb-affine-action-stack-presentation]; the composite is $q_s$. By [lem-sfb-adequate-moduli-universal-closed-topology] with $T=D_+(s)$, $\\phi_s$ is surjective. Thus $q_s$ is surjective, and these chartwise surjections prove that $q$ is surjective.",
+   "uses": [
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-power-lifting-adequate-affine-quotient",
+    "lem-sfb-affine-action-stack-presentation",
+    "lem-sfb-adequate-moduli-universal-closed-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 9.1.4 and Remark 9.1.5; Theorem 5.3.1(1); Theorem 9.7.6."
+   }
+  },
+  {
+   "text": "Fix any $T\\to Q$ and invariant closed subscheme $C\\hookrightarrow X_T$. Work on the open cover $T_s=T\\times_QD_+(s)$ of $T$. The atlas of [lem-sfb-affine-action-stack-presentation] is representable by spaces since its target has representable diagonal. Apply [lem-sfb-stack-chartwise-smooth-etale-calculus] to its base change: $U_s=Z_s\\times_{D_+(s)}T_s\\to\\mathcal X_s=[Z_s/G]\\times_{D_+(s)}T_s$ is smooth and surjective. The cited statement defines surjectivity by lifting field-valued objects after field extension, so every point of $|\\mathcal X_s|$ comes from $U_s$. By [def-sfb-affine-action-quotient-stack], two such points agree exactly when their trivial torsors become isomorphic after common field extension. Such an isomorphism is translation by a group-valued point over the same $T_s$-point. Membership in $C\\cap U_s$ is preserved and reflected by field extension: a field map kills its ideal exactly when the extended map does. Preservation of its ideal under the action gives the same equivalence under translation, using the inverse element for the reverse implication. Thus $|C\\cap U_s|$ is saturated. Its image $W_s\\subset|\\mathcal X_s|$ has inverse image exactly $|C\\cap U_s|$ in the smooth atlas, so is closed by the atlas topology in [lem-sfb-adequate-moduli-universal-closed-topology]. Apply that theorem to the adequate morphism $\\phi_s$ and the arbitrary map $T_s\\to D_+(s)$: the image of $W_s$ in $T_s$ is closed. It equals the image of $C\\cap U_s$, hence $q_T(|C|)\\cap|T_s|$, since $U_s=q_T^{-1}(T_s)$. Closedness on this open cover proves the assertion. This uses neither flatness of $T_s\\to D_+(s)$ nor adequacy of the base-changed morphism.",
+   "uses": [
+    "lem-sfb-affine-action-stack-presentation",
+    "def-sfb-affine-action-quotient-stack",
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1(2), with Proposition 5.2.9(3); agent expansion of the atlas-topology argument for invariant closed subsets."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-sfb-projective-polarization-section-algebra",
+  "def-sc-invertible-module",
+  "def-sfb-pgl-linearized-polarization",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-sfb-pgl-geometric-reductivity",
+  "lem-sfb-finite-graded-proj-projective",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-pc-proj",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-lem-affine-local-target",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-pgl-reductive-structure",
+  "lem-sfb-power-lifting-adequate-affine-quotient",
+  "lem-sfb-affine-action-stack-presentation",
+  "lem-sfb-adequate-moduli-universal-closed-topology",
+  "def-sfb-affine-action-quotient-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Invariant section-ring construction from introduction pp.490--491; affine-chart and denominator details supplied by Q04, using Theorems 9.1.4 and 5.3.1. Local PDF WANTED; primary published PDF read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometrically.?reductive|semistab.*quotient|invariant.*section.*ring",
+   "results": "{\"t\": \"2026-10-22T05:42:53Z\", \"tool\": \"grep\", \"query\": \"geometrically.?reductive|semistab.*quotient|invariant.*section.*ring\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits about Proj properness, linear representations or module quotients do not construct the invariant quotient or prove its universal closed-image property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective GIT quotient semistable locus invariant closed subsets arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-22T05:42:53Z\", \"tool\": \"leansearch\", \"query\": \"Projective GIT quotient semistable locus invariant closed subsets arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.isClosed_zeroLocus\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\", \"PrimeSpectrum.isClosed_range_of_stableUnderSpecialization\", \"PrimeSpectrum.isClosed_zeroLocus\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"Representation.invariants_eq_inter\", \"PrimeSpectrum.stableUnderSpecialization_range_iff\", \"ProjectiveSpectrum.zariskiTopology\"], \"digest\": \"eafc41f7fec65745\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits about Proj properness, linear representations or module quotients do not construct the invariant quotient or prove its universal closed-image property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Semistable\"",
+   "results": "{\"t\": \"2026-10-22T05:42:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Semistable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits about Proj properness, linear representations or module quotients do not construct the invariant quotient or prove its universal closed-image property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive group invariant section ring Proj quotient universally closed on invariant closed subsets",
+   "results": "{\"t\": \"2026-10-22T05:43:02Z\", \"tool\": \"leanfinder\", \"query\": \"Reductive group invariant section ring Proj quotient universally closed on invariant closed subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"ProjectiveSpectrum.top\"], \"digest\": \"157a459234849edc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits about Proj properness, linear representations or module quotients do not construct the invariant quotient or prove its universal closed-image property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective geometric invariant theory quotient of semistable locus by PGL in arbitrary characteristic is projective and images of invariant closed subsets remain closed after base change",
+   "results": "{\"t\": \"2026-10-22T05:43:03Z\", \"tool\": \"leanfinder\", \"query\": \"Projective geometric invariant theory quotient of semistable locus by PGL in arbitrary characteristic is projective and images of invariant closed subsets remain closed after base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"Module.Grassmannian.projective_quotient\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"ProjectiveSpectrum.top\", \"AlgebraicGeometry.Proj.isSeparated\", \"Projectivization.smul_mk\"], \"digest\": \"45538c6c86f8ab85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits about Proj properness, linear representations or module quotients do not construct the invariant quotient or prove its universal closed-image property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective semistable quotient by PGL is projective affine and universally closed on invariant closed subschemes",
+   "results": "{\"t\": \"2026-10-22T06:28:41Z\", \"tool\": \"leanfinder\", \"query\": \"Projective semistable quotient by PGL is projective affine and universally closed on invariant closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"Module.Grassmannian.projective_quotient\", \"Projectivization.instMulAction\"], \"digest\": \"d1428555ce2729cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, ordinary group representations and projective vector spaces do not construct the semistable invariant quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "semistab|geometrically.?reductive|invariant.*section.*ring",
+   "results": "{\"t\": \"2026-10-22T06:30:52Z\", \"tool\": \"grep\", \"query\": \"semistab|geometrically.?reductive|invariant.*section.*ring\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, ordinary group representations and projective vector spaces do not construct the semistable invariant quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective GIT quotient of semistable locus by projective linear group",
+   "results": "{\"t\": \"2026-10-22T06:30:52Z\", \"tool\": \"leansearch\", \"query\": \"Projective GIT quotient of semistable locus by projective linear group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.quotientToInvariantsFunctor_obj_V\", \"Representation.quotient\", \"Rep.quotient\", \"Projectivization.generalLinearGroup_smul_def\", \"Module.Grassmannian.projective_quotient\", \"Projectivization.smul_mk\", \"Projectivization.smul_def\", \"MatrixGroups.termPSL(_,_)\"], \"digest\": \"3e7d186bd4efcfb6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, ordinary group representations and projective vector spaces do not construct the semistable invariant quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Semistable\"",
+   "results": "{\"t\": \"2026-10-22T06:30:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Semistable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj properness, ordinary group representations and projective vector spaces do not construct the semistable invariant quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-git-semistable-replacement",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes.",
+   "via": [
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-pgl-invariant-quotient",
+  "worker": "stage1",
+  "summary": "Constructed Proj of the invariant section algebra and glued explicit affine quotient maps. Verified invariant localization by clearing coaction denominators even with zero divisors; used the general adequate-moduli topology theorem after arbitrary base change, rather than assuming base change preserves adequacy. Reused all existing section-algebra, reductivity, Proj and affine quotient nodes. One new general topology theorem, no change to the item statement. Repair of the returned head f02efc2114f: compared the retained split against the current live unsplit item, re-read every cited current statement, explicitly connected the statement semistability convention in step 3, and cited existing chartwise base-change calculus in step 8 for the pulled-back atlas. Existing proof route, item statement, new theorem and logged searches retained. Current retry: expanded step 3 with the exact invariant-kernel tensor sequence and step 8 with preservation and reflection of closed-support membership under field extension and inverse translation; all 35 citation quotations rechecked against the current DAG. First diagnostic dry run 318e5ce0afa passed. Repair retry 2026-10-23: first diagnostic dry run 6301d25eda9 passed on the current base. Re-read all current dependencies and retained actual searches; added the explicit invertible-module/quasi-coherence citation for flat base change in step 2, aligned the coaction tensor order with steps 3 and 4, and made the geometric coverage conclusion in step 3 precise. The imported statement and new topology theorem remain unchanged. Returned head 75e8d39dabe, changed-citation repair: initial dry run b4a116cef89 passed; re-read the full current chartwise-calculus statement, made representability of the atlas and the field-extension lifting meaning of its surjectivity explicit in step 8, and refreshed its verbatim quotation to the full current statement. All current dependencies and 36 step citations revalidated; no statement, route, new-node or search-question change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "General An ample invertible module over an affine base: a power is the pullback of O(1) along an immersion into projective space used as a black box in the invariant affine-chart construction; this unit has no replacement for this scheme or module tool, and its route is unchanged."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "General Projective morphisms are proper used as a black box in the invariant affine-chart construction; this unit has no replacement for this scheme or module tool, and its route is unchanged."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "General Flat base change for coherent cohomology used as a black box in the invariant affine-chart construction; this unit has no replacement for this scheme or module tool, and its route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-pc-projective-proper",
+  "lem-sc-flat-base-change-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-1be502adc",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-1be502adc (reviewer sub-agent of L); spot-checked: This is the 5th delivery; the previous four heads (f02e, 8d7d, 49ca, 75e8) were PASSed. 75e8 came back from landing because lem-sfb-stack-chartwise-smooth-etale-calculus changed after review. Compared with the 75e8 snapshot: the new node lem-sfb-adequate-moduli-universal-closed-topology is byte-identical. In the item, the statement, steps 1-7, proof_deps, source and blueprint are unchanged; only step 8 wording and the split_report summary changed. Step 8 now says that the atlas U->[U/G] is representable by algebraic spaces, because the stack has representable diagonal. It also says that surjectivity in the changed chartwise statement means lifting field-valued objects after a field extension, so the base-changed atlas U_s->X_s is surjective on point spaces. Both claims are correct and are exactly what the current statement provides. The base also restated def-sfb-adequate-moduli-space as conditions (1) O_Y=phi_*O_X and (2) local power lifting over etale affines. The content is the same, matching Alper's Def 5.1.1, so step 7 and the new node are unaffected. All other cited statements are unchanged. I re-read all 8 steps on this snapshot. Step 1: the closed embedding comes from very-ample immersion plus proper and closed-immersion arguments, then the section algebra. Step 2: the k[G] coaction comes from flat base change, and finite-graded Proj applies without R_0=k. Step 3: invariants commute with tensoring by K because the kernel sequence stays exact after a flat extension. Step 4: (B_s)^G=R_(s), with zero divisors handled by clearing denominators. Steps 5-6: gluing gives q, with q^{-1}D_+(s)=Z_s, and q is affine and of finite type. Step 7: phi_s is adequate, and surjective by the new node. Step 8: the invariant support is saturated, so its image is closed in the atlas topology, and the new node gives closedness after an arbitrary (non-flat) T_s->D_+(s). I checked the edge cases: empty Z, empty semistable locus, nilpotent s, R_0 different from k, nonreduced Z, any characteristic. The new node is Alper Thm 5.3.1(1),(2), a general theorem rather than a restatement of a clause of the item. The Alper PDF is not available locally, so I checked 5.3.1 from knowledge. Batch-5 flags: every flagged citation reaches the trace-formula chapter only through generic results (def-trf-algebraic-space, Proj separated, flattening, finite implies projective, P(E) geometry). None is the trace formula, Poincare duality or a step of their proofs, so all are accepted. No SGA citation and no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectivePGLInvariantQuotient",
+  "declaration": "AlgebraicGeometry.PGLLinearization.projective_pgl_invariant_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectivePGLInvariantQuotient.lean",
+  "statement": "theorem projective_pgl_invariant_quotient (k : Type u) [Field k] (r : ℕ) (hr : 2 ≤ r) (Z : Over (Spec (.of k))) (hprojective : IsHProjective Z.hom) (hfiniteType : LocallyOfFiniteType Z.hom ∧ QuasiCompact Z.hom) (L : Z.left.Modules) [L.IsInvertible] (hample : Scheme.Modules.IsAmple Z.left L) (D : Action k r Z L) : ∃ U : Z.left.Opens, (∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] (x : fieldTest k Ω ⟶ Z), x.left.base (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum Ω) ∈ U ↔ D.IsSemistable Ω x) ∧ ∃ (Q : Over (Spec (.of k))) (q : Over.mk (U.ι ≫ Z.hom) ⟶ Q), IsHProjective Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom ∧ Surjective q.left ∧ LocallyOfFiniteType q.left ∧ QuasiCompact q.left ∧ IsAffineHom q.left ∧ (∀ (W : Over (Spec (.of k))) (g : Matrices k r W) (x y : W ⟶ Over.mk (U.ι ≫ Z.hom)), y ≫ (Over.homMk U.ι : Over.mk (U.ι ≫ Z.hom) ⟶ Z) = D.act W g (x ≫ (Over.homMk U.ι : Over.mk (U.ι ≫ Z.hom) ⟶ Z)) → y ≫ q = x ≫ q) ∧ (∀ (T : Over (Spec (.of k))) (t : T ⟶ Q) (C : Over (Spec (.of k))) (i : C ⟶ pullback q t), IsClosedImmersion i.left → (∀ (W : Over (Spec (.of k))) (g : Matrices k r W) (x : W ⟶ C), ∃ y : W ⟶ C, y ≫ i ≫ pullback.snd q t = x ≫ i ≫ pullback.snd q t ∧ y ≫ i ≫ pullback.fst q t ≫ (Over.homMk U.ι : Over.mk (U.ι ≫ Z.hom) ⟶ Z) = D.act W g (x ≫ i ≫ pullback.fst q t ≫ (Over.homMk U.ι : Over.mk (U.ι ≫ Z.hom) ⟶ Z))) → IsClosed (Set.range (i ≫ pullback.snd q t).left))",
+  "branch": "sheaf-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4380f552d",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; statement verbatim in file. Clause check: k field, r≥2, IsHProjective+LFT∧QC for Z and Q, IsInvertible+Scheme.Modules.IsAmple (recorded node decl), Action = GL/scalar-trivial encoding of PGL action+linearization; U pinned exactly by IsSemistable on alg.-closed Ω-points (matches hilbert-plucker convention); q from the open subscheme U, surjective, LFT∧QC, IsAffineHom, invariant on GL test points (≡ q∘a=q∘pr2 by fppf GL→PGL); arbitrary T→Q via Over pullback; invariant closed C as all-test-point translate factorization with fixed T-coordinate (≡ ideal preservation, descends fpqc); conclusion IsClosed range in T. Edge cases (empty Z/Z^ss/C/T, nonreduced, char|r, R_0≠k, universe u) OK. No duplicate (semistable_affine_quotient_gluing and ProjectivePGLStableQuotient are stable-locus variants). Docstrings with source/blueprint and 8 proof steps; sorry only; imports resolve. Not recompiled (no file changed). Second reading section was written by the same worker, as the report says."
+ }
+}

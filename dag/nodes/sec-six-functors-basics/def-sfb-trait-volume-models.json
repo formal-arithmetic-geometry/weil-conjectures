@@ -1,0 +1,175 @@
+{
+ "id": "def-sfb-trait-volume-models",
+ "kind": "definition",
+ "title": "Smooth trait models, bounded points and volume orders",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$ and trait $T=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. All schemes and morphisms are as in [def-pc-scheme], and products and fibres use [def-pc-base-change]. For a morphism $f:X\\to S$, put $\\Omega_f^d=\\bigwedge^d\\Omega^1_{X/S}$ using [def-sc-relative-differential-sheaf, def-sc-sheaf-exterior-power]. The canonical pullback relation between global $d$-forms along a map $q:Y\\to X$ in a base-change square is specified locally: express the source as a finite sum $\\sum_i a_i db_{i1}\\wedge\\cdots\\wedge db_{id}$ and the target as $\\sum_i q^*a_i d(q^*b_{i1})\\wedge\\cdots\\wedge d(q^*b_{id})$ on neighbourhoods of every point of $Y$. The same relation applies when the target differentials are relative to a further base; in degree zero use the empty wedge.\n\nAn open $U$ of an $S$-scheme is base-dense when its inverse image in every scheme-theoretic fibre is dense. A smooth model of an $E$-scheme $X$ is a scheme $M\\to T$ that is smooth [def-sbc-smooth-morphisms], of finite type [def-weil-finite-type-morphism], and has closed diagonal [def-weil-closed-immersion], with a specified $E$-isomorphism $M_E\\simeq X$. It is admissible when its special fibre is nonempty and irreducible. Two models are equivalent if there is an isomorphism over $T$ between base-dense opens, compatible with the identity of $X$ under the specified generic identifications; the opens may be taken to contain their entire generic fibres.\n\nWrite $H=R^{\\mathrm{sh}}$ for the geometric strict henselization [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit], with canonical structural map [def-weil-pbc-strict-henselization-structural-map], and $F=\\operatorname{Frac}H$. All $F$-points of a finite-type $E$-scheme $X$ are bounded when there are a finite affine cover $U_i$, finite algebra generating lists $b_{ij}$ of $\\Gamma(U_i,\\mathcal O_X)$ over $E$, and integers $c_i$ such that every $F$-point factors through some $U_i$ and satisfies $\\pi^{-c_i}b_{ij}(x)\\in H$ for every $j$. The inverse image of $H$ includes zero, so this is the valuation convention $v(0)=+\\infty$.\n\nFor a smooth group scheme $G/E$ [def-sc-group-scheme] of relative dimension $d$, a nowhere vanishing top form means a global section generating $\\Omega^d$ at every point, in the sense of [def-sc-section-generating-locus]. Left invariance means that multiplication and the second projection $G\\times_E G\\to G$ pull the form back to the same form relative to the first factor. For an admissible model $M$ and a nonzero such generic form $\\omega$, the order relation $\\operatorname{HasOrder}(M,n)$ means that $\\pi^{-n}\\omega$ extends to a global section of $\\Omega^d_{M/R}$ generating it at the generic point of the special fibre. Equivalently this is the stalk definition of order, because on a smooth model with irreducible special fibre the normalized form extends across the codimension-at-least-two complement. The minimum predicate means that some admissible model has the indicated order and every order of every admissible model is at least that integer. A representative list is a finite nonempty list of admissible models with that order such that every admissible model of that order is equivalent to a member; repetitions are allowed.\n\nA permitted shrinking is an open immersion of models over $T$ containing the entire generic fibre and dense in the special fibre, with the same generic identification; its closed complement is therefore contained in the special fibre and nowhere dense there. For a local trait $A$ over $R$, a component open of $M_A$ is the open submodel containing the entire generic fibre and exactly one irreducible component of its special fibre, with the generic identification induced from that of $M$. Component representatives means that every such component admits its open submodel, every component open is admissible of the indicated order, and every minimal $A$-model is equivalent to one of these opens. The smooth base-change predicate for a list and an integer $n_0$ asserts: for every smooth finite-type $Z/T$ and every generic point $\\xi$ of $Z_k$, $A=\\mathcal O_{Z,\\xi}$ is a DVR, the image of $\\pi$ is a uniformizer, and for its fraction field $L$ the canonical extension $E\\to L$ and pulled-back form $\\omega_L$ give minimum $n_0$; the component opens of the list after base change represent all minimal $A$-models, also for every permitted shrinking of the list.",
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-sc-group-scheme",
+  "def-sc-section-generating-locus"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.1 Definition 2; 2.5; 4.2; 4.3 paragraph before Lemma 1, Proposition 2 and Lemma 3, printed pp.103-106. Primary scan: https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SmoothModel|BaseDense|volumeOrder|invariantForm",
+   "results": "{\"t\": \"2026-10-24T08:49:28Z\", \"tool\": \"grep\", \"query\": \"SmoothModel|BaseDense|volumeOrder|invariantForm\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No trait-volume-model interface: only ordinary smoothness, DVRs and elliptic Weierstrass minimality. Reuse the existing component notions."
+  },
+  {
+   "tool": "grep",
+   "query": "SmoothModel|BaseDense|volumeOrder|invariantForm",
+   "results": "{\"t\": \"2026-10-24T09:24:42Z\", \"tool\": \"grep\", \"query\": \"SmoothModel|BaseDense|volumeOrder|invariantForm\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No trait-volume-model interface: only ordinary smoothness, DVRs and elliptic Weierstrass minimality. Reuse the existing component notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth trait models birational equivalence minimal volume order bounded rational points over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T09:24:42Z\", \"tool\": \"leansearch\", \"query\": \"Smooth trait models birational equivalence minimal volume order bounded rational points over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_isDiscreteValuationRing\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.isMinimal_iff\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"WeierstrassCurve.instIsMinimalMinimal\", \"le_minSmoothness\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"7a567b71b52ed937\"}",
+   "date": "2026-10-24",
+   "verdict": "No trait-volume-model interface: only ordinary smoothness, DVRs and elliptic Weierstrass minimality. Reuse the existing component notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth models over discrete valuation rings with bounded rational points and differential volume order at the generic point of the special fibre",
+   "results": "{\"t\": \"2026-10-24T09:24:43Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth models over discrete valuation rings with bounded rational points and differential volume order at the generic point of the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"973aefb04fcdca21\"}",
+   "date": "2026-10-24",
+   "verdict": "No trait-volume-model interface: only ordinary smoothness, DVRs and elliptic Weierstrass minimality. Reuse the existing component notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T09:26:22Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing\", \"IsDiscreteValuationRing.toEuclideanDomain\", \"IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization\", \"IsDiscreteValuationRing.toWithBotNat\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.addVal\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\"], \"digest\": \"17892b08ba654294\"}",
+   "date": "2026-10-24",
+   "verdict": "No trait-volume-model interface: only ordinary smoothness, DVRs and elliptic Weierstrass minimality. Reuse the existing component notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsBaseDense|TraitVolume|SmoothModel|smoothModel|volumeOrder lean/WeilConjectures lean/Sheaf dag/lean_names_upstream.json; rg -l smooth model|base-dense|volume order dag/nodes --glob def-*.json; blueprint_refs.py search trait volume; rg GeneratesAt|generatingLocus",
+   "results": "No trait model, fibrewise birational or volume-order definition. Unrelated finiteSmoothModelCoordinates is finite proetale coordinates. Blueprint search: 0 nodes. Found existing Scheme.Modules.GeneratesAt in WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus; use it through def-sc-section-generating-locus. Existing relativeDifferentials, exteriorSheaf, strictHenselizationRing and structural map are reused.",
+   "date": "2026-10-24",
+   "verdict": "The bundled trait-volume-model interface is missing. No duplication of component notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-minimal-volume-model-smooth-base-change",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR 4.3 Proposition 2 and Lemma 3: smooth models, their volume orders and component models. The ancestor tool reports None for the inherited broken blueprint chain.",
+   "via": [
+    "lem-sfb-minimal-volume-model-smooth-base-change",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitVolumeModels",
+  "declaration": "AlgebraicGeometry.TraitVolume.Model",
+  "declarations": [
+   "AlgebraicGeometry.TraitVolume.TopForms",
+   "AlgebraicGeometry.TraitVolume.expression",
+   "AlgebraicGeometry.TraitVolume.IsPullback",
+   "AlgebraicGeometry.TraitVolume.IsBaseDense",
+   "AlgebraicGeometry.TraitVolume.Model",
+   "AlgebraicGeometry.TraitVolume.Model.Admissible",
+   "AlgebraicGeometry.TraitVolume.Model.Equivalent",
+   "AlgebraicGeometry.TraitVolume.IsBounded",
+   "AlgebraicGeometry.TraitVolume.HasOrder",
+   "AlgebraicGeometry.TraitVolume.IsLeftInvariant",
+   "AlgebraicGeometry.TraitVolume.IsMinimum",
+   "AlgebraicGeometry.TraitVolume.Representatives",
+   "AlgebraicGeometry.TraitVolume.Model.IsShrinking",
+   "AlgebraicGeometry.TraitVolume.IsComponent",
+   "AlgebraicGeometry.TraitVolume.ComponentRepresentatives",
+   "AlgebraicGeometry.TraitVolume.localMap",
+   "AlgebraicGeometry.TraitVolume.SmoothBaseChange",
+   "AlgebraicGeometry.TraitVolume.strictMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitVolumeModels.lean",
+  "statement": "structure Model {T K : Scheme.{u}} (j : K ⟶ T) (G : Over K)",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-182e3b375",
+  "group": "Q15",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-182e3b375",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Lean matches BLR 4.3 Prop 2/Lemma 3/Prop 4 clause by clause (DVR/π/E, geometric closed point + landed R^sh, ι pinned by hι, IsBounded = finite affine cover + Subring.closure generators + π^{-c}b∈R^sh, GrpObj smooth rel-dim d lft+qc separated, GeneratesAt + universal left invariance, Model/Admissible/Equivalent, HasOrder via global β (same as the stalk definition on smooth models with irreducible special fibre), IsMinimum attained, Representatives finite nonempty covering, SmoothBaseChange ∀ Z ξ L with c pinned, ω_L pullback, same n₀, component opens, shrinking); statement verbatim; no hollow defs, no extra hypotheses. Fixed: (1) H3 vacuous clause 2 of TraitVolume.ComponentRepresentatives `∀ i P, ∃ C, IsComponent … → Admissible ∧ HasOrder` (true by taking a non-component C) → `∀ i P (C : Set …)`, in fixes/TraitVolumeModels.lean, compiled clean with the item module via nt_compile --json (exit 0); (2) H11 same-worker second reading → fixes/<item>.report.md with worker report verbatim + real clause-by-clause second reading. Advisory: hω uses GeneratesAt with def-sc-section-generating-locus cited only through the new node; parallel NW f3ca7290 (FIX, unlanded) has the same paths and the same new node id def-sfb-trait-volume-models with different content: only one may land."
+ }
+}

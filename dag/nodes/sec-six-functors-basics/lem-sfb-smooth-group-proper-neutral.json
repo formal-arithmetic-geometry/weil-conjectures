@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-smooth-group-proper-neutral",
+ "kind": "statement",
+ "title": "Proper neutral subgroup from local infinitesimal smoothness",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and $G\\to S$ a separated commutative group algebraic space locally of finite presentation [def-trf-algebraic-space]. For each geometric point $\\bar s\\to S$, let $G_{\\bar s}^0$ be the connected component of the identity, with its open-subspace structure. Assume each $G_{\\bar s}^0$ is smooth and proper over its geometric residue field. Assume also the following relative infinitesimal lifting condition: for every square-zero closed immersion $T_0\\hookrightarrow T$ of affine $S$-schemes, and every $g_0:T_0\\to G$ all of whose geometric images lie in these identity components, there exists an etale covering $\\{U_i\\to T\\}$ and lifts $g_i:U_i\\to G$ of $g_0|_{U_i\\times_TT_0}$. Then the subfunctor of $G$ consisting of morphisms whose geometric images lie in $G_{\\bar s}^0$ is represented by an open and closed subgroup algebraic space $G^0\\subset G$. It is proper, smooth, and of finite presentation over $S$, and has geometrically connected fibres. Its geometric fibres are $G_{\\bar s}^0$. For every scheme base change $S'\\to S$, the pullback $G^0\\times_SS'$ is the subfunctor of $G_{S'}$ defined by its geometric identity components. Proper and smooth for algebraic spaces have their etale-chart meanings, and properness includes separatedness, finite type and universal closedness.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Smoothness at points and its infinitesimal criterion, section-smooth; neutral-component openness and properness are the relative group-space version of the component argument of Kleiman, The Picard Scheme, Proposition 5.20 (WANTED locally). The extra lifting hypothesis supplies smoothness even over a nonreduced base; this is an agent-stated general group-space prerequisite.",
+  "external": [
+   {
+    "document": "literature/kleiman-the-picard-scheme.pdf",
+    "place": "Proposition 5.20 and its proof, printed p.47, open neutral subgroup and properness; WANTED."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "For each geometric fibre, separatedness and local finite presentation imply the locally separated locally finite type hypotheses of [lem-sfb-locally-separated-group-space-scheme]. Thus it is a group scheme. By [lem-sfb-locally-algebraic-group-identity-component] its identity component is an open-and-closed subgroup and its formation commutes with field extension. Consequently the neutral-component condition defines a well-defined subset $N\\subseteq|G|$, independent of the chosen geometric representative. These same results apply to geometric fibres after every scheme base change.",
+   "uses": [
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Fibrewise preliminaries: groupoids.tex Tags 0B7R and 047R; group spaces over a field reduce to schemes."
+   }
+  },
+  {
+   "text": "Let $x\\in N$. An Artinian local scheme has just one underlying point, so every map $\\operatorname{Spec}B\\to G$ centered at $x$ satisfies the lifting hypothesis of the item: all its geometric images are neutral, by Step 1. Apply [lem-sfb-space-artinian-etale-lift-smooth-point] to conclude that $G\\to S$ is smooth at $x$. Let $W\\subseteq G$ be its largest smooth open, supplied by [lem-sfb-space-maximal-smooth-open]. Then $N\\subseteq|W|$. In particular the identity section factors through $W$ by [lem-a1-space-open-factor-scheme-tests]. No smoothness of the other components of $G$ is asserted.",
+   "uses": [
+    "lem-sfb-space-artinian-etale-lift-smooth-point",
+    "lem-sfb-space-maximal-smooth-open",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0APN, pointwise infinitesimal criterion; largest smooth open: spaces-morphisms.tex Tag 0DZI."
+   }
+  },
+  {
+   "text": "Fix $\\bar s\\to S$. Its neutral component is entirely in $W_{\\bar s}$ and remains a connected component there: it is connected and clopen in $G_{\\bar s}$, so also in the open subspace $W_{\\bar s}$. It is proper by hypothesis. Apply [lem-sfb-smooth-space-proper-component-neighbourhood] to $W\\to S$, obtaining $(T,\\bar t)$ and $V\\subseteq W_T$ proper smooth finitely presented with geometrically connected fibres. The inverse image of $V$ under the identity section is an open neighbourhood of $\\bar t$; replace $T$ by that open and $V$ by its pullback. Thus the whole identity section over $T$ lies in $V$. The inclusion $V\\to G_T$ is proper by [lem-sfb-space-proper-cancellation], since $V\\to T$ is proper and $G_T\\to T$ is separated. Hence its image is closed, and it was already open. In each geometric fibre it is nonempty and connected and contains the identity. Being clopen, it is exactly the identity component: a connected component meeting a clopen subset is contained in it, and connectedness of that subset gives the reverse inclusion.",
+   "uses": [
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-sfb-space-proper-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI and its etale-neighbourhood consequence; properness cancellation: spaces-morphisms.tex lemma-universally-closed-permanence."
+   }
+  },
+  {
+   "text": "Choose the preceding pointed neighbourhoods for all geometric base points; their base maps form an etale covering of $S$. The composites $V\\hookrightarrow G_T\\to G$ are representable etale. Their images are open by [lem-a1-space-etale-open-image], and by Step 3 their union is precisely $N$ (field-extension invariance is Step 1). The same node supplies the unique open subspace $H\\subseteq G$ with point set $N$. The factorization criterion [lem-a1-space-open-factor-scheme-tests] says that $T'\\to G$ factors through $H$ exactly when all its geometric images are neutral. Thus $H$ represents the required subfunctor. On every chosen base neighbourhood $T$, $H_T$ and $V$ are opens with identical geometric point sets, hence identical subfunctors by [lem-a1-space-point-open-calculus].",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Open subspaces and images: spaces-properties.tex Tags 03BZ and 06NF; factorization: Tag 03IE."
+   }
+  },
+  {
+   "text": "Since $H_T=V$ on this etale (hence fppf) covering, [lem-sfb-space-flat-proper-fp-locality] gives properness and finite presentation of $H\\to S$. Smoothness holds because $H\\subseteq W$ and $W\\to S$ is smooth. Step 3 identifies its geometric fibres with $G^0_{\\bar s}$, so they are geometrically connected by Step 1. To see that $H$ is closed in $G$, apply [lem-sfb-space-proper-cancellation] to $H\\to G\\to S$. Its proper first composite and separated second map make $H\\to G$ proper, hence closed on point spaces. Together with the open-subspace structure this says that $H$ is open and closed.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-proper-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Properness and finite-presentation fppf locality: spaces-descent.tex Tags 0422 and 041V; proper cancellation."
+   }
+  },
+  {
+   "text": "The fibrewise subgroup assertion in Step 1 shows that the identity, inverse and multiplication of $G$ carry geometric points of $S$, $H$ and $H\\times_SH$, respectively, into $N$. By [lem-a1-space-open-factor-scheme-tests] these three maps factor uniquely through $H$. Their group identities and commutativity follow after composing with the subfunctor inclusion $H\\hookrightarrow G$, which is injective on all test-scheme sections. Finally, for an arbitrary $S'\\to S$, [lem-a1-space-open-factor-scheme-tests] identifies $H_{S'}$ with the open whose point set is the inverse image of $N$. By Step 1 this is exactly the geometric neutral-component predicate on $G_{S'}$. Hence the asserted base-change equality holds as subfunctors, including nonreduced $S'$ and test schemes.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Open factorization, spaces-properties.tex Tag 03IE; field-extension invariance from Step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-separated-group-space-scheme",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-space-artinian-etale-lift-smooth-point",
+  "lem-sfb-space-maximal-smooth-open",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-sfb-smooth-space-proper-component-neighbourhood",
+  "lem-sfb-space-proper-cancellation",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-flat-proper-fp-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Pointwise smoothness, local extension of proper components, and open-subspace assembly; Tags 0APN, 0CWI, 0E1E. Kleiman Proposition 5.20 remains WANTED, and is not used as an available proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated smooth group algebraic space locally of finite presentation whose geometric identity components are proper, the relative identity component is proper and commutes with base change",
+   "results": "8 hits; logged top: AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsProper.of_comp_of_isSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: topological connected/path components and permanence of scheme properness do not construct the relative neutral algebraic subgroup"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The neutral component of a smooth separated algebraic group space is an open subgroup and is proper when its geometric fibres are proper",
+   "results": "8 hits; logged top: OpenSubgroup, OpenNormalSubgroup.pathComponentOne, OpenNormalSubgroup.pathComponentOne_carrier, OpenNormalAddSubgroup.pathComponentZero, OpenNormalAddSubgroup.pathComponentZero_carrier, Subgroup.connectedComponentOfOne, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.isProper_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: topological connected/path components and permanence of scheme properness do not construct the relative neutral algebraic subgroup"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"connectedComponent\"",
+   "results": "2 hits; logged top: AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: topological connected/path components and permanence of scheme properness do not construct the relative neutral algebraic subgroup"
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|neutralComponent|Picard|connectedComponent",
+   "results": "25 hits; logged top: Mathlib/LinearAlgebra/Matrix/Irreducible/Defs.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/Algebra/Ring/Ideal.lean, Mathlib/Topology/Algebra/Ring/Ideal.lean, Mathlib/Topology/Algebra/Ring/Ideal.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: topological connected/path components and permanence of scheme properness do not construct the relative neutral algebraic subgroup"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of connected identity components of fibres of a smooth separated group space is an open subgroup with formation compatible with base change",
+   "results": "8 hits; logged top: Subgroup.connectedComponentOfOne, OpenNormalSubgroup.pathComponentOne, Subgroup.pathComponentOne, OpenNormalAddSubgroup.pathComponentZero, OpenNormalSubgroup.pathComponentOne_carrier, OpenNormalSubgroup.instIsClosedCoePathComponentOne, OpenSubgroup.instInhabited, Subgroup.Normal.pathComponentOne",
+   "date": "2026-10-23",
+   "verdict": "no match: topological connected/path components and permanence of scheme properness do not construct the relative neutral algebraic subgroup"
+  },
+  {
+   "tool": "grep",
+   "query": "neutralComponent|identityComponent|connectedComponent",
+   "results": "8 hits; inspected results: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative identity component of a group algebraic space is a proper smooth open subgroup if all geometric identity components are proper and the group is smooth near the identity",
+   "results": "8 hits; inspected results: OpenNormalSubgroup.pathComponentOne, OpenNormalSubgroup.pathComponentOne_carrier, Subgroup.connectedComponentOfOne, Subgroup.pathComponentOne, Subgroup.coe_pathComponentOne, Algebra.IsStandardSmoothOfRelativeDimension.id, OpenSubgroup, AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSmooth\"",
+   "results": "0 hits; inspected results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated group algebraic space locally of finite presentation with smooth proper geometric identity components and infinitesimal lifting at the identity has a proper smooth open identity subgroup",
+   "results": "8 hits; inspected results: Algebra.isOpen_smoothLocus, Subgroup.connectedComponentOfOne, NonarchimedeanGroup.exists_openSubgroup_separating, ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one, NonarchimedeanGroup.instTotallySeparated, IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one, OpenNormalSubgroup.instIsClosedCoePathComponentOne, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-space-poincare-calculus",
+  "date": "2026-10-23",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness.",
+   "via": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-group-proper-neutral",
+  "worker": "stage1",
+  "summary": "Kept the statement; derived smoothness only on the neutral locus from the given relative lifting condition, extended each proper component etale locally, and assembled the open proper subgroup with full geometric base-change compatibility. Two strictly smaller, general algebraic-space prerequisites remain statement-only.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited auxiliary Picard/abelian-space construction; supplies the proper neutral subgroup needed by lem-sfb-abelian-space-poincare-calculus. The current blueprint proof (3) states direct-image preservation and does not itself contain this auxiliary argument.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Generic algebraic-space open-subspace/point calculus, used exactly as stated; the inherited unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space open-subspace/point calculus, used exactly as stated; the inherited unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space open-subspace/point calculus, used exactly as stated; the inherited unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-1ce1503e8",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-1ce1503e8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, and Stacks 0APN, 0CWI, 0E1E, 04AM and 0DZI. The item is an ordinary first split (no re-split note), and its statement is the inherited one, which its citer lem-sfb-abelian-space-poincare-calculus uses as stated. Steps 1-6 check against what the cited nodes state. Step 1: geometric points are algebraically closed, so the identity-component node applies, and its field-extension clause makes the neutral locus N well defined. Step 2: every Artinian test at a neutral point is an instance of the item's lifting hypothesis, so smoothness holds near N and N lies in the maximal smooth open W. Steps 3-5: the new component node applied to W, then proper cancellation, the open-image and point calculus, and fppf locality of properness and finite presentation. Step 6 is genuinely elementary. New node artinian-etale-lift-smooth-point is true: 0APN plus faithfully flat descent of the obstruction in Ext^1(a^*NL, J) along the finite etale local extension. It duplicates nothing; the existing nodes are scheme versions with actual lifts, global versions, or stack versions. New node proper-component-neighbourhood is true: a qc open, strict henselisation with components defined over the separable closure (04KV), 0CWI, limits, then 0E1E. It is distinct from the henselian clopen-lift and connected-proper-fibres nodes. Neither new node restates the item, and the two are of comparable size. Batch-5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are generic foundations, outside the trace formula and Poincare duality; every other flagged citation reaches the chapter only through that definition. Accepted, as are the three a1 open-subspace tool_uses. Advisory only: Step 3 leaves 'W separated as an open of G' implicit; some stmt_deps are not bracketed in the text. No fixes."
+ }
+}

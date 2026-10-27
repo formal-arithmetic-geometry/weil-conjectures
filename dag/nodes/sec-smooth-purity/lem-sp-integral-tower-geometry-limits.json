@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-integral-tower-geometry-limits",
+ "kind": "statement",
+ "title": "Construct normalized scalar/pullback comparisons and the total derived restricted limit.",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and the integral coefficient, reduction, and strict tower constructions of [def-sp-integral-direct-image-tower-data]. Construct normalized scalar/pullback comparisons and the total derived restricted limit. The precise quantifiers, domains and canonical arrows are the Lean statement below.\n\ntheorem normalized_geometry_limits (s : Presentation l E) :\n    ∃ (q : ReductionGeometry l E s) (_hq : OpenReductionIsIso l E s q),\n      Nonempty (∀ T : Scheme.{u}, Limit l E s T)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "stmt_deps": [
+  "def-sp-integral-direct-image-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "identify the two sequence-site presentations by their identical local sections and\nrestriction maps. Scalar extension commutes with inverse image on generators: send\n1 tensor f*(x) to f*(1 tensor x). These maps commute with quotient transitions and descend\non flat-term K-flat complexes using the fixed universal derived reduction counit. Their\nrepresentative equation is the localization equation. The open mate is invertible by the\nexact slice tensor identity. Ordinary strict reduction is left adjoint to the inverse limit\nof scalar-restricted levels: transpose each tensor map, then use the limit universal property.\nThis gives the specified ordinary unit formula. Derive this adjunction using K-flat and\nK-injective resolutions; K-injectives compute the total right derived functor. The derived\nhom-equivalence on representatives is the specified normalization. All these constructions\nare valid for arbitrary schemes, including the empty scheme and zero modules.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "det-sp-reduction-tower-normalized",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-coefficient-towers",
+  "det-sp-reduction-tower-normalized",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized strict tower of finite coefficient sheaves has derived inverse limit reconstructing an integral compact support direct image",
+   "results": "SheafOfModules.hasLimitsOfShape; SheafOfModules.hasLimit; CategoryTheory.Sheaf.ΓNatIsoLim; CategoryTheory.Sheaf.createsLimitsOfShape and generic sheaf limits.",
+   "date": "2026-10-25",
+   "verdict": "No match: none provides the specialized normalized integral strict tower comparisons or projection mates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp; comp_homEquiv; triangle component identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools only; not this sheaf/tower comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported integral adic sheaf pushforward reconstructs from normalized finite quotient systems with uniform Tor amplitude and satisfies projection formula",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.mkQ_comp_lift; AdicCompletion.of_apply.",
+   "date": "2026-10-25",
+   "verdict": "No match: these are scalar algebraic completions or local cohomology, not the unbounded strict system derived functors."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|derivedComplete|normalizedTower",
+   "results": "msearch returned unrelated compact support in analysis; local algebraic-geometry site search has no integral compact-support tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem. Existing project dependencies require transports between their independently specified presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralDirectImageTower",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Proof paragraph (2), normalized reduction/limit constructions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTowerGeometryLimits",
+  "file": "lean/Sheaf/Paper/IntegralTowerGeometryLimits.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralDirectImageTower.normalized_geometry_limits",
+  "statement": "theorem normalized_geometry_limits (s : Presentation l E) : ∃ (q : ReductionGeometry l E s) (_hq : OpenReductionIsIso l E s q), Nonempty (∀ T : Scheme.{u}, Limit l E s T)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "Exact component of the original proof, with the original unit route retained. Search of the whole imported blueprint found finite-coefficient coherence but no duplicate of this integral normalized comparison.",
+  "note": "Existing dependency statements are used through coordinate transport; this lemma isolates that transport and its specified canonical maps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "independent cc review: integral_direct_image_tower signature vs clone a25e16ef939 (byte-identical); IntegralDirectImageTowerData vs old interface (identical decls, only plain imports and respectTransparency options changed); five split sorry statements vs item clauses and node pinning; new node statement fields vs Lean signatures"
+ }
+}

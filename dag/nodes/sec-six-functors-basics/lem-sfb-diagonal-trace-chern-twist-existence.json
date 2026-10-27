@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-diagonal-trace-chern-twist-existence",
+ "kind": "statement",
+ "title": "Normalized Chern and tensor-Hom twist at one scheme",
+ "statement": "Let l be a prime and T a noetherian scheme on which l is a unit. For E = ULift Q_l there exists Chern data c [def-sp-tower-class-chern] such that c is normalized, every finite evaluation is the specified finite Kummer boundary [def-sp-tower-class-finite], and tensor by its actual scalar-extended root module admits the normalized tensor/Hom equivalence Twisting [def-sp-tower-class-twisting]. This assertion has no projective model, direct image, scalar restriction to constant Z_l, or derived limit.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-twisting"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clauses (1), (2); line twist as in the unit proof, paragraph on Tate twists"
+ },
+ "proof": [
+  {
+   "text": "Construct the actual Kummer inclusion and positive-exponent power natural transformations using the prime root-transition equation and power multiplication. Their composite is zero by the kernel condition. At every level cartierProKummer_exact applies since l^(n+1) is invertible; evaluation commutes with homology, and a natural transformation is zero when all its components vanish. Thus the tower short complex is short exact, giving Kummer data k without a new existence assumption.",
+   "uses": [
+    "def-sfb-cartier-reduction-data",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalized integral Kummer reduction to k to obtain r, M, the underlying-root comparison and the two adjunction-normalized derived isomorphisms. Obtain ScalarData for the actual coefficient map from semilinearScalarData and obtain its normalized coefficient-unit isomorphism from the proved scalar-unit theorem. Assemble these concrete fields into Chern c. The three supplied normalization equations are definitionally c.Normalized.",
+   "uses": [
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-coef-semilinear-scalar-data",
+    "lem-sfb-tower-chern-scalar-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-boundary theorem applied to this normalized c gives FiniteChernNormalization. The Kummer-line tensor/Hom theorem applied to the same c gives Nonempty Twisting. Together with c and its normalization these are exactly the existential conclusion.",
+   "uses": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-kummer-line-twisting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cartier-reduction-data",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-sfb-normalized-kummer-reduction",
+  "lem-coef-semilinear-scalar-data",
+  "lem-sfb-tower-chern-scalar-unit",
+  "lem-sfb-normalized-chern-finite-boundary",
+  "lem-sfb-kummer-line-twisting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clauses (1)--(4); explicit tower Kummer construction, normalized scalar-unit proof, and separate integral reduction, finite evaluation and line-twist steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct normalized Kummer Chern systems and a derived direct image comparison for scalar restriction",
+   "results": "8 hits; galRestrict', galRestrict'_comp, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, prod_galRestrict_eq_norm, galLift_galRestrict', algebraMap_galRestrict'_apply, CommRingCat.KaehlerDifferential.map, AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\"",
+   "results": "12 hits; ContinuousLinearMap.IsInvertible, ContinuousLinearMap.IsInvertible.inverse, ContinuousLinearMap.IsInvertible.of_isInvertible_inverse, ContinuousLinearMap.isInvertible_inverse_iff, ContinuousLinearMap.isInvertible_equiv, ContinuousLinearMap.IsInvertible.inverse_inverse, ContinuousLinearMap.isInvertible_zero_iff, ContinuousLinearMap.IsInvertible.bijective",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalTrace|Chern.Normalized|FiniteChernNormalization",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceComparisonPartial",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clauses (1), (2); line twist as in the unit proof, paragraph on Tate twists"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "file": "lean/Sheaf/Paper/DiagonalTraceChernTwistExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceChernTwist",
+  "statement": "theorem exists_diagonalTraceChernTwist (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))) :\n    ∃ c : Chern l (ULift.{u} (Padic l)) T,\n      c.Normalized l (ULift.{u} (Padic l)) ∧\n      FiniteChernNormalization l (ULift.{u} (Padic l)) c ∧\n      Nonempty (Twisting l (ULift.{u} (Padic l)) c)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T235941-L-1473108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

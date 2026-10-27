@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-integral-heart-completed-comparison",
+ "kind": "statement",
+ "title": "Coefficient and scalar-complex comparison for the canonical small integral ring",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension in any universe, $L$ its canonical small presentation, $R=\\mathcal O_L^\\uparrow$, and $I=(\\pi_L^\\uparrow)$ [def-sfb-integral-heart-local-model-data, def-weil-l-adic-coefficient-extension]. Let $X$ be a Noetherian scheme [def-pc-scheme]. Write $B_X$ for its pulled-back continuous integral ring and $\\widehat R_X=\\varprojlim_{n\\geq 1}(R/I^n)_X$ [sk-def-sfb-pulled-back-coefficients, def-sfb-adic-stratified-perfect-data]. There is an equivalence $F:\\operatorname{Mod}_{\\rm int}(B_X)\\simeq\\operatorname{Mod}(\\widehat R_X)$ such that (i) an ordinary module $M$ has finite constant constructible local presentations [sk-def-sfb-constructible] if and only if $F(M)$ has completed constant stratified finitely presented models [def-sfb-completed-constant-stratified]; (ii) for every immersion $f:S\\to X$, every object $U$ of $S_{\\rm proet}$, every ordinary unbounded derived object $K$ over $B_X$, and every scalar cochain complex $P$ over $R$, the localized objects $F(K)$ and the completed constant realization of $P$ are isomorphic on the slice at $U$ if and only if $(U\\to S\\to X)^*K$ is isomorphic to the termwise integralHeartRealization of $P$ on $U.left$. Here $F(K)$ is termwise derived transport along the exact equivalence F, and the localization and completed realization are exactly sfbLocalRestriction and sfbCompletedModel [def-sfb-adic-stratified-perfect-data]. There is no boundedness, finiteness or projectivity condition on P, and no existence of local models or completion of K is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Clause (1): coefficient presentation, scalar realization and slice identifications before applying the local perfect-model theorem; Bhatt--Scholze, Section 6.5, Proposition 6.6.11 and Definition 6.8.10."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-heart-local-model-data",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-adic-stratified-perfect-data",
+  "sk-def-sfb-constructible",
+  "def-sfb-completed-constant-stratified",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For the canonical small field L, identify the continuous integer ring on the profinite point with the limit of its finite discrete positive uniformizer quotients. The finite functions sheaves are the constant quotient sheaves. Pull this projection-normalized comparison to X with the profinite coefficient inverse-image theorem. Apply sectionModuleEquivalence and restriction along the resulting ring-sheaf isomorphism to obtain an exact equivalence F of ordinary module categories. No derived object is completed.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+    "place": "Clause (1), coefficient and slice comparisons, part 1 of the detailed construction in IntegralHeartCompletedComparison.lean."
+   }
+  },
+  {
+   "text": "Identify finite presentations on the condensed point with cokernels of matrices over its terminal section ring, which is the lifted valuation ring R. Projection normalization takes every entry to its constant section in every quotient and hence in the completed ring. Exactness transports the matrix cokernels in both directions. The equivalence commutes with inverse image and slice restriction. Retain the finite constructible strata, pass between cover families and covering sieves, and use that Noetherian X is qcqs. This identifies IsConstantModelConstructible with IsCompletedConstantStratified.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-scalar-presentation-cokernel",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+    "place": "Clause (1), coefficient and slice comparisons, part 2 of the detailed construction in IntegralHeartCompletedComparison.lean."
+   }
+  },
+  {
+   "text": "For an immersion f:S to X and an object U of the pro-etale site of S, identify the slice at U with the pro-etale site of U.left. The exact equivalence induced by the same coefficient comparison identifies sfbLocalRestriction of F(K) with inverse image of K along U.hom followed by f. Its composite on completed constant scalar modules is integralHeartRealization, since both are sheafified tensor extension along the map sending each scalar to its constant continuous function. The comparison is natural in every scalar-linear map, so it identifies every scalar differential. Pass the exact equivalences and their natural isomorphisms to ordinary unbounded derived categories. They preserve and reflect the local isomorphisms in the statement for arbitrary K and P, without boundedness, projectivity or a local existence assertion.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+    "place": "Clause (1), coefficient and slice comparisons, part 3 of the detailed construction in IntegralHeartCompletedComparison.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-sfb-scalar-presentation-cokernel",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T7",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Clause (1): coefficient presentation, scalar realization and slice identifications before applying the local perfect-model theorem; Bhatt--Scholze, Section 6.5, Proposition 6.6.11 and Definition 6.8.10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes over a complete discrete valuation ring have finite projective local models on pro etale covers",
+   "results": "Eight hits on etale morphisms and affine-space finite presentation; no coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between internal modules over continuous integral coefficients and sheaves of modules over the limit of constant uniformizer quotients preserves finite constant models and scalar complex realizations",
+   "results": "CondensedMod.isDiscrete_tfae, CondensedMod.LocallyConstant.functorIsoDiscrete, SheafOfModules.sheafifyHomEquiv and related discrete-module results; no completed coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralHeartRealization|sfbCompletedModel",
+   "results": "Remote Mathlib wrapper: zero hits. Local rg finds the two different realization APIs and the fixed-universe IntegralConstantModel equivalence; no comparison for canonical small coefficients with independent field and scheme universes.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of internal modules over a continuous p-adic valuation ring and sheaves over the inverse limit of constant uniformizer quotients preserves finite constant models and scalar realization of complexes",
+   "results": "AdicCompletion.piEquivFin, ofLinearEquiv, congr and their application lemmas in Mathlib/RingTheory/AdicCompletion/{Basic,Functoriality}; these concern ordinary algebraic completions, not coefficient sheaves or their realization functors.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHeartProjectiveLocalModels",
+  "date": "2026-10-26",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-local-model",
+   "place": "Clause (1): the coefficient and realization identifications needed to apply the existing adic perfect-model theorem.",
+   "via": [
+    "lem-sfb-integral-heart-projective-local-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHeartCompletedComparison",
+  "file": "lean/Sheaf/Paper/IntegralHeartCompletedComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralHeart_completed_comparison",
+  "statement": "theorem integralHeart_completed_comparison\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n    (X : Scheme.{u}) [IsNoetherian X] :\n    let I : Ideal (integralHeartScalars.{u} ℓ E) :=\n      Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer ℓ\n        (SmallAdicCompletion.Coefficients.field ℓ E))}\n    ∃ F : SmallAdicCompletion.Modules ℓ E X ≌\n        Scheme.proEtaleRingModules X (Scheme.adicLisseCompletedRing X I),\n      letI : F.functor.Additive := Functor.additive_of_preserves_binary_products _\n      (∀ M : SmallAdicCompletion.Modules ℓ E X,\n        IsConstantModelConstructible\n            (SmallAdicCompletion.Coefficients.integerRing ℓ E) X M ↔\n          Scheme.IsCompletedConstantStratified X I (F.functor.obj M)) ∧\n      ∀ (S : Scheme.{u}) (f : S ⟶ X) [IsImmersion f] (U : S.ProEt)\n        (K : integralHeartDerivedCategory.{u} ℓ E X)\n        (P : CochainComplex (ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E)) ℤ),\n        Nonempty (Scheme.sfbLocalRestriction f (Scheme.adicLisseCompletedRing X I) U\n              (F.functor.mapDerivedCategory.obj K) ≅\n            Scheme.sfbLocalRestriction f (Scheme.adicLisseCompletedRing X I) U\n              (Scheme.sfbCompletedModel X I P)) ↔\n          Nonempty (((CondensedRing.upperStar\n              (SmallAdicCompletion.Coefficients.integerRing ℓ E)\n              (U.hom ≫ f)).mapDerivedCategory).obj K ≅\n            DerivedCategory.Q.obj\n              (((integralHeartRealization.{u} ℓ E U.left).mapHomologicalComplex\n                (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T002917-L-126415",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T002917-L-126415",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

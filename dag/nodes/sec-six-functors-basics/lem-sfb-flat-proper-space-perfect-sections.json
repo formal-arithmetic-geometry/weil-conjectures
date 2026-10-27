@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-flat-proper-space-perfect-sections",
+ "kind": "statement",
+ "title": "Perfect derived sections of a perfect complex on a flat proper space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Algebraic spaces and schemes are [def-trf-algebraic-space, def-pc-scheme]. Use the small etale site with structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the full subcategory whose cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module]. A perfect object means an object locally represented by a bounded complex of direct summands of finite free module sheaves [def-weil-pbc-strict-perfect-coefficient-package]. Let $A$ be a commutative ring and $f:X\\to\\operatorname{Spec}A$ a flat proper finitely presented algebraic space. Flatness is checked on etale charts [def-weil-flat-morphism]; proper means separated, quasi-compact, locally of finite type on etale charts and universally closed [def-weil-proper-morphism, def-weil-finite-type-morphism]; finite presentation means quasi-compact, quasi-separated and locally of finite presentation on etale charts [def-sbc-locally-finite-presentation]. For every perfect $E\\in D(\\mathcal O_X)$, the unbounded right derived global sections $R\\Gamma(X,E)$ [def-pur-ringed-site-zeroth-hypercohomology], taken as an object of $D(A)$ through $A\\to\\Gamma(X,\\mathcal O_X)$, are perfect: they are isomorphic to a bounded complex of finitely generated projective $A$-modules [def-pc-perfect-ring-complex]. Spectra are [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTM, lemma-flat-proper-perfect-direct-image-general (1), over an affine base; affine identification with ring complexes uses lemma-derived-quasi-coherent-small-etale-site."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-perfect-ring-complex",
+  "def-weil-affine-spectrum",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-affine-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=\\operatorname{Spec}A$ and $G^\\bullet=\\mathcal O_X[0]$. This is a bounded complex of quasi-coherent finitely presented modules: its only nonzero term has the one-generator presentation $0\\to\\mathcal O_X\\xrightarrow{1}\\mathcal O_X\\to0$. Its geometric stalks are flat over $U$ by flatness of $f$, and its annihilator is zero, so its support as a closed subspace is $X$, proper over $U$. Thus all coefficient-complex hypotheses of the proper-support tensor theorem hold, with $S=Y=U$ and the given finitely presented $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTM, lemma-flat-proper-perfect-direct-image-general, proof (1): take the structure module in degree zero"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-support-tensor-perfect] with this $G^\\bullet$ and the given perfect $E$. It gives a perfect object with quasi-coherent cohomology $K=Rf_*(E\\otimes^{\\mathbf L}\\mathcal O_X[0])=Rf_*E$ on $U_{\\mathrm{et}}$. The equality uses the tensor unit: on a K-flat representative for $E$, tensoring each term with $\\mathcal O_X$ is the identity, including differentials.",
+   "uses": [
+    "lem-sfb-proper-support-tensor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 0CTM(1) and 0A1P, lemma-base-change-tensor-perfect"
+   }
+  },
+  {
+   "text": "Let $L=R\\epsilon_{U,*}K$. The quasi-coherent equivalence [lem-sfb-scheme-derived-etale-qcoh-comparison] puts $L$ in $D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{Zar}})$ and gives $\\epsilon_U^*L\\cong K$. By [lem-sfb-etale-detects-perfect], $L$ is Zariski perfect. Apply [lem-pc-perfect-affine-bounded-projective] to the affine scheme $U$: there is a bounded complex $P^\\bullet$ of finite projective $A$-modules with $L\\cong\\widetilde{P^\\bullet}$.",
+   "uses": [
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sfb-etale-detects-perfect",
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 071Q, lemma-derived-quasi-coherent-small-etale-site, and 08HG, lemma-descend-perfect; perfect.tex Tag 08EB, lemma-perfect-affine"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $f:X_{\\mathrm{et}}\\to U_{\\mathrm{et}}$ followed by the global-sections map to the one-point site with ring $A$. Its composite is global sections on $X$ with scalars induced by $f$, so $R\\Gamma(X,E)\\cong R\\Gamma(U_{\\mathrm{et}},K)$ in $D(A)$. The global-sections comparison of [lem-sfb-scheme-derived-etale-qcoh-comparison] and $\\epsilon_U^*L\\cong K$ identify the latter with $R\\Gamma(U_{\\mathrm{Zar}},L)$. Finally [lem-pc-affine-qcoh-derived-equivalence] gives $R\\Gamma(U_{\\mathrm{Zar}},\\widetilde{P^\\bullet})\\cong P^\\bullet$. The composite is an isomorphism in $D(A)$, proving the claimed perfectness.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; spaces-perfect.tex Tag 08GH, remark-match-total-direct-images; perfect.tex Tag 06Z0, lemma-affine-compare-bounded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-support-tensor-perfect",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-sfb-etale-detects-perfect",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTM(1), proof by specialization of Tag 0A1P; affine translation by Tags 071Q, 08HG, 08EB and 06Z0, and derived composition Tag 0D6E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of a perfect complex on a proper flat finitely presented algebraic space over a ring is a perfect complex of modules",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : C \\\\to D $ between abelian categories with enough projectives, the $(n+1)$-th left-derived functor $ L^{n+1}F $ evaluated at any projective object $ X \\\\in C $ yields a zer\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ),\\n  K.IsKProjective ↔\\n    (HomotopyCategory.subcategoryAcyclic C).leftOrthogonal ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K)\", \"doc\": \"A cochain complex $ K $ in an abelian category is K-projective if and only if it is left orthogonal to the full subcategory of acyclic complexes in the homotopy category, meaning every morphism from $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper finite presentation algebraic spaces preserve perfect complexes under derived direct image",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, Module.Flat",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(proper|directImage)|proper.*perfect",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat algebraic space perfect complex has perfect derived global sections",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"perfectSpace_of_module\", \"module\": \"Mathlib.Topology.Algebra.Module.PerfectSpace\", \"type\": \": PerfectSpace E\", \"doc\": \"The topological space $E$ is perfect, meaning every point in $E$ is a limit point of $E$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(proper|directImage)|proper.*perfect",
+   "sub": "AlgebraicGeometry",
+   "results": "0 hits: . Read the returned statements: module-category abelianity, K-projectivity, scheme flatness/properness or smooth finite-presentation facts; none asserts perfect derived sections of an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented algebraic space over a ring has perfect derived global sections for every perfect complex",
+   "sub": "",
+   "results": "8 hits: Algebra.Smooth.finitePresentation, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.smooth_iff, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.casesOn. Read the returned statements: module-category abelianity, K-projectivity, scheme flatness/properness or smooth finite-presentation facts; none asserts perfect derived sections of an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "sub": "",
+   "results": "0 hits: . Read the returned statements: module-category abelianity, K-projectivity, scheme flatness/properness or smooth finite-presentation facts; none asserts perfect derived sections of an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of a perfect complex on a flat proper finitely presented algebraic space is a perfect complex of modules",
+   "sub": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, Ext, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.IsKProjective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_iff_leftOrthogonal. Read the returned statements: module-category abelianity, K-projectivity, scheme flatness/properness or smooth finite-presentation facts; none asserts perfect derived sections of an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat morphisms of algebraic spaces preserve perfect complexes by derived pushforward",
+   "sub": "",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact. Read the returned statements: module-category abelianity, K-projectivity, scheme flatness/properness or smooth finite-presentation facts; none asserts perfect derived sections of an algebraic space.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-pullback-limit",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof: RGamma(X,E dual) is a perfect complex of base-ring modules, before the tensor-limit comparison.",
+   "via": [
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-proper-space-perfect-sections",
+  "worker": "Q115 stage1",
+  "summary": "Specialized the existing proper-support tensor theorem to the structure module, then used existing etale/Zariski perfectness detection and affine bounded-projective realization. Every cited statement was opened and checked. No new nodes, no statement changes, no attachment and no Lean writing or compilation.",
+  "blueprint": "The inherited supporting input to the alteration/versality branch is Stacks 0D3F, proof: RGamma(X,E dual) is perfect over the base ring. Steps 1-2 realize the cited 0CTM(1) specialization, and steps 3-4 make its affine-module interpretation explicit. Current latest unit sk-thm-sf-ctf-stability was read; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "General ringed-site/affine-derived comparison tool used only to identify the perfect direct image with a bounded projective base-ring complex; it replaces no constructible-stability or alteration step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General ringed-site/affine-derived comparison tool used only to identify the perfect direct image with a bounded projective base-ring complex; it replaces no constructible-stability or alteration step."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "General ringed-site/affine-derived comparison tool used only to identify the perfect direct image with a bounded projective base-ring complex; it replaces no constructible-stability or alteration step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-1aaf29896",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-1aaf29896 (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, no new nodes, statement and stmt_deps unchanged, base proof empty. There is no repair note, and live and side-live still have the item unsplit, so it is not superseded. Source: Stacks spaces-perfect 0CTM(1) (l.6225) is literally 0A1P (l.6091) with G=O_X[0]. Step 1 (elementary) checks the hypotheses of lem-sfb-proper-support-tensor-perfect: O_X is finitely presented and quasi-coherent, flat over U because f is flat, with annihilator 0 so its support is X, proper over U; f is fp over S=Y=U, and the proper conventions agree. Step 2 takes both conclusions of that statement (perfect, qcoh cohomology) and uses the tensor unit. Step 3: the 071Q comparison node puts L=Rε_*K in D_QCoh with ε^*L≅K; etale-detects-perfect is an iff on any scheme with no hypotheses on the object, so L is Zariski perfect; 08EB gives L≅P̃ with P^• bounded finite projective, after checking L is qcoh. Step 4: the 0D6E composition, applied to X_et→U_et→(pt,A), is A-linear through A→Γ(X,O_X). The étale/Zariski global-sections identification is stated by the comparison node, or follows from composition along ε. 06Z0 gives RΓ(U,P̃)≅P in D(A). Edge cases (identity Spec A, X empty, A=0, E=0) are fine, and nothing assumes Noetherian. Duplicates: lem-sfb-proper-flat-space-derived-base-change and lem-pc-proper-flat-affine-cech-perfect-model handle a single module F, not a perfect E, so they are not duplicates. No SGA citation. Batch-5 flags: def-trf-algebraic-space is a general definition and lem-trf-zariski-etale-functor-comparison-square is the generic 03FH/03LC change-of-topology square; neither is a step of the trace formula or Poincaré duality, so both are accepted. The three tool_uses are general comparison tools and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProperSpacePerfectSections",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flatProperSpace_perfect_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatProperSpacePerfectSections.lean",
+  "statement": "theorem flatProperSpace_perfect_sections {S : Scheme.{u}} (A : Type u) [CommRing A] (Y : Over S) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) [HasDerivedCategory.{w} X.SmallModules] (_hflat : MapIsFlat f) (_hproper : MapIsProper f) (_hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (E : X.DerivedModules) (_hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E) : DerivedCategory.IsPerfectRingComplex ((affineDerivedSections A Y e X f).obj E)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64fa74997",
+  "group": "NI",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0CTM(1) clause by clause: A any comm ring; Y ≅ Spec A over arbitrary S (same as def-sfb-space-affine-global-sections); MapIsFlat, MapIsProper (sep ∧ qc+LOFT ∧ UC), fp = chartwise lfp ∧ qc ∧ qc diagonal; E : X.DerivedModules with IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} X.smallStructureSheaf (canonical predicate); conclusion IsPerfectRingComplex of affineDerivedSections (untruncated, chartwise A-action) = bounded f.g. projective model. No extra assumptions, w free. Edge cases A=0, X empty, E=0, id Spec A ok. lean.statement verbatim; only lean+stmt_deps differ from live; 4 added stmt_deps are landed defs actually used; no duplicate found; sorry only; source/blueprint docstrings and 4-step proof present. Advisory: second reading by same worker (stated openly, Q21 precedent); MapIsQuasiCompact owner def-sfb-proper-curve-moduli only transitive; step-2 dep uses its own IsPerfectAtCoefficientSize copy, so stage 3 needs the smallStructureRings bridge. No files changed, no compile."
+ }
+}

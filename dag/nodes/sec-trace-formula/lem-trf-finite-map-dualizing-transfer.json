@@ -12,26 +12,16 @@
   "def-weil-finitely-generated-module",
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-pc-ring-hom-extension-shared-definitions",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-pbc-ring-complex-godement-construction"
  ],
  "proof": [
   {
-   "text": "For ordinary modules, restriction $U_0:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$ has right adjoint $C_0(I)=\\operatorname{Hom}_A(B,I)$ with $(b\\varphi)(b')=\\varphi(b'b)$. Explicitly the adjunction sends $f:N\\to C_0(I)$ to $g:n\\mapsto f(n)(1)$, with inverse $g\\mapsto(n\\mapsto[b\\mapsto g(bn)])$. These are linear maps: $f(bn)(1)=(bf(n))(1)=f(n)(b)$, and $g(b'bn)$ verifies $B$-linearity of the inverse; both composites are identities and the formulas commute with pre- and postcomposition. Restriction preserves monomorphisms, since an injective underlying module map remains injective. Thus [lem-exc-rg-right-adjoint-preserves-injectives] applied to $U_0\\dashv C_0$ proves that each injective $A$-module $I$ gives an injective $B$-module $C_0(I)$.",
+   "text": "Choose a bounded injective representative $I^\\bullet$ of $L$, supported in some interval $[a,b]$ with $a\\leq b$. By [lem-trf-coinduction-bounded-injective-model], $J^q=\\operatorname{Hom}_A(B,I^q)$, with the stated precomposition action and postcomposition differential, represents $\\Omega_B$ and is a bounded complex of injective $B$-modules. The action agrees with that of the item because $B$ is commutative: $\\varphi(xb)=\\varphi(bx)$. Thus $\\Omega_B=C_B(L)$ with this specified comparison, proving the injective-dimension conclusion.",
    "uses": [
-    "lem-exc-rg-right-adjoint-preserves-injectives"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 08XR, lemma-hom-injective, used in the first paragraph of Tag 0AX0; ordinary adjunction written out."
-   }
-  },
-  {
-   "text": "Choose a bounded complex $I^\\bullet$ of injective $A$-modules representing $L$. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Hence [def-pur-derived-internal-hom] computes $R\\operatorname{Hom}_A(B[0],L)$ by $J^\\bullet=\\operatorname{Hom}_A^\\bullet(B[0],I^\\bullet)$. By [lem-trf-derived-coinduction-adjunction], this Hom complex with precomposition action represents $C_B(L)\\in D(B)$ and has the required underlying $A$-object. Its degree $q$ term is $\\operatorname{Hom}_A(B,I^q)$, injective over $B$ by Step 1, and it vanishes whenever $I^q$ vanishes. Consequently $\\Omega_B=C_B(L)$ has a bounded injective $B$-representative $J^\\bullet$.",
-   "uses": [
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-pur-derived-internal-hom",
-    "lem-trf-derived-coinduction-adjunction"
+    "lem-trf-coinduction-bounded-injective-model"
    ],
    "elementary": false,
    "source": {
@@ -52,10 +42,9 @@
    }
   },
   {
-   "text": "Set $T=R\\operatorname{Hom}_A(L,L)$ and let $h:A[0]\\xrightarrow{\\sim}T$ be the assumed scalar-action map. For every $n$, the good truncation $\\tau_{\\le n}B[0]$ is either zero or $B[0]$, so it has bounded-above finite cohomology. It is pseudo-coherent by [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion]. Apply [lem-trf-derived-evaluation-finite-injective] with $R=A$, $K=B[0]$ and both its targets equal to $L$. Both targets have bounded injective representatives. Moreover $T\\cong A[0]$ has Tor amplitude $[0,0]$: the free rank-one complex $A[0]$ itself computes its derived tensor, and $A[0]\\otimes_A N[0]=N[0]$. The cited evaluation theorem therefore makes the composite $$B[0]\\cong A[0]\\otimes_A^{\\mathbf L}B[0]\\xrightarrow{h\\otimes1}T\\otimes_A^{\\mathbf L}B[0]\\longrightarrow R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(B[0],L),L)$$ an isomorphism. Its transpose is evaluation, by the theorem's stated description: $h(1)=\\operatorname{id}_L$, so the subsequent composition into $L$ changes nothing. This composite is precisely the canonical biduality map $\\delta_B$.",
+   "text": "The ring $A$ is Noetherian and $B$ is a finite $A$-module. The given $L$ has a bounded injective representative and its actual scalar-action map is invertible. Thus [lem-trf-finite-module-canonical-biduality], with $M=B$, gives an isomorphism $\\delta_{B,L}:B[0]\\to R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(B[0],L),L)$, specifically the transpose of evaluation. All its hypotheses are precisely assumptions of the item.",
    "uses": [
-    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "lem-trf-derived-evaluation-finite-injective"
+    "lem-trf-finite-module-canonical-biduality"
    ],
    "elementary": false,
    "source": {
@@ -64,7 +53,7 @@
    }
   },
   {
-   "text": "Write $U:D(B)\\to D(A)$ for restriction. Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] with its rings $P=A$, $A=B$, its $X=C_B(L)$ and $Y=L$. It identifies $$U R\\operatorname{Hom}_B(C_B(L),C_B(L))\\cong R\\operatorname{Hom}_A(U C_B(L),L).$$ By [lem-trf-derived-coinduction-adjunction], the latter is $R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(B[0],L),L)$. Under this identification, the restriction of the scalar-action map sends $b$ to $[\\varphi\\mapsto(b\\varphi)(1)=\\varphi(b)]$: indeed the cited internal adjunction sends an endomorphism $f$ to $[\\varphi\\mapsto f(\\varphi)(1)]$. This is the evaluation formula for $\\delta_B$ of Step 4 (and $b$ has degree zero, so no sign occurs). Thus the restricted scalar-action map is an isomorphism. Restriction is conservative by [lem-trf-derived-coinduction-adjunction], so the scalar-action map itself is an isomorphism in $D(B)$. Together with Steps 2 and 3 this proves all three conclusions.",
+   "text": "Write $U:D(B)\\to D(A)$ for restriction and use $\\Omega_B=C_B(L)$ from Step 1. Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] with its rings $P=A$, $A=B$, its $X=C_B(L)$ and $Y=L$. Its general $\\Theta_{X,Y}$ clause gives $$U R\\operatorname{Hom}_B(C_B(L),C_B(L))\\cong R\\operatorname{Hom}_A(UC_B(L),L).$$ The underlying-object comparison in [lem-trf-derived-coinduction-adjunction] identifies the target with $R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(B[0],L),L)$. On the Hom representatives from Step 1, scalar multiplication is the chain map $b\\mapsto[\\varphi\\mapsto b\\varphi]$ on $J^\\bullet$. The cited evaluation-at-$1$ formula sends it to $b\\mapsto[\\varphi\\mapsto(b\\varphi)(1)=\\varphi(b)]$ into $I^\\bullet$, in each degree. This is the canonical evaluation transpose $\\delta_{B,L}$ of Step 3; $b$ has degree zero, so no sign occurs. The comparison therefore identifies the actual restricted scalar-action morphism with an isomorphism. By conservative restriction in [lem-trf-derived-coinduction-adjunction], the scalar-action morphism is an isomorphism in $D(B)$. Steps 1 and 2 supply the other two conclusions.",
    "uses": [
     "lem-trf-algebraic-shriek-derived-hom-adjunction",
     "lem-trf-derived-coinduction-adjunction"
@@ -77,15 +66,12 @@
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
   "def-weil-finitely-generated-module",
-  "lem-exc-rg-right-adjoint-preserves-injectives",
   "lem-trf-algebraic-shriek-derived-hom-adjunction",
   "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-trf-coinduction-bounded-injective-model",
   "lem-trf-derived-coinduction-adjunction",
-  "lem-trf-derived-evaluation-finite-injective",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+  "lem-trf-finite-module-canonical-biduality"
  ],
  "proof_origin": {
   "by": "document",
@@ -193,28 +179,57 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-finite-map-dualizing-transfer",
   "worker": "stage1",
-  "summary": "Audited Stacks 0AX0, retaining the complete original statement. Reused existing general right-adjoint injectivity, bounded-injective K-injectivity, coherent RHom finiteness, Noetherian pseudo-coherence, derived evaluation, and internal coinduction adjunction nodes. Removed two unnecessary provisional new nodes, writing their elementary specializations explicitly. The five proof steps establish the bounded B-injective model, coherent cohomology, canonical finite-module biduality and compatibility of the scalar-action morphism. No new nodes or Mathlib leaves.",
-  "blueprint": "Realizes the existing finite-map-transfer supporting input in blueprint.from.place, reached through the recorded coherent-duality chain from lem-trf-local-term-locality. Steps 1-2 give the bounded Hom(B,I) model of 0AX0, Step 3 its coherence, and Steps 4-5 its derived adjunction/biduality calculation. The long inherited ancestor chain is preserved; no unit-level route is changed.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "why": "Generic algebraic criterion makes the bounded-above coherent truncations of B[0] pseudo-coherent for the existing derived-evaluation theorem; no statement of the local-term unit supplies it."
-   }
-  ]
+  "summary": "Repair of the human re-split return: extracted two independent statement-only arguments of comparable work, the bounded coinduced injective model (old Steps 1-2) and canonical finite-module biduality (old Step 4). Retained the old finite-cohomology specialization and explicit scalar-action/evaluation compatibility as the short assembly. The statement and all maintainer-owned metadata are unchanged. All old arguments are preserved verbatim in report.md for the future workers; both new nodes are unsplit with actual logged searches. Repaired the return of head 2c9972c039c by comparing the retained delivery with the current DAG, re-reading every current proof-dependency statement and the source formulas, and rebasing through deliver.py. All immutable statement and Lean metadata agree with current main. Step 1 now makes the ordered support interval explicit and Step 4 uses exactly the canonical delta notation of Step 3; all six existing citation quotes remain valid. Current return repair (2026-10-23): retained the delivered statements, logged searches and original arguments; compared all current-main fields and reread every current citation statement. Made the commutative B-action comparison and Omega_B=C_B(L) explicit in Step 1, and specified in Step 4 that the general Theta clause, with Y=L, supplies the required adjunction. This avoids invoking the narrower shifted-base-ring clause of the current cited statement. The initial current-base dry run passed at 4f52a2cf65d; a fresh dry run follows these mathematical assembly edits. Further current-base repair: the initial dry run found a newly present 0A70 tensor-comparison node; its full statement was reread and distinguished under Not duplicates. Step 4 now writes the scalar-action chain map on the chosen J and its image in Hom_A(J,I) degree by degree, so equality with canonical biduality is checked on the specified representatives. Current statement, statement dependencies and maintainer metadata remain unchanged.",
+  "blueprint": "Preserves the recorded finite-map-transfer supporting input under lem-trf-local-term-locality. New coinduction model carries the first paragraph of 0AX0; new canonical biduality carries the 0A7C/0A69 input to its final calculation. Parent Steps 2 and 4 retain coherence and the actual homothety identification.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q83-119f00ead",
-  "group": "Q83",
+  "reviewer": "NT-cc-Q85-2524c41c0",
+  "group": "Q85",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-119f00ead (reviewer sub-agent of L); spot-checked: I read Stacks 0AX0 (dualizing.tex:2808) and its proof, and 0A7B/0A5S. The statement is unchanged from live and matches all three dualizing conditions, including the actual scalar-action map. There are no new nodes. Step 1: the U0⊣C0 formulas are correct and restriction preserves monomorphisms, so 015Z (Mathlib leaf) applies. Step 2: the bounded injective I is K-injective, and C_B(L)=Hom^•(B[0],I) is a bounded complex of B-injectives. Step 3: 0G4H with K=B[0] gives finite A-cohomology, so finite B-cohomology. Step 4: the three hypotheses of 0A69 hold (L bounded injective; T≅A[0] has Tor amplitude [0,0]; τ≤n B[0] is 0 or B[0], pseudo-coherent by 066E(2)). The transpose with h(1)=id is b↦(φ↦φ(b)), so δ_B is an isomorphism. Step 5: the general Θ formula f↦(x↦f(x)(1)) sends U(b·id) to δ_B(b); since U is conservative, the scalar-action map is an isomorphism in D(B). Edge cases B=A, B=0, a field extension and DVR→residue field all behave as expected. The grep for 0AX0/0AX1 finds no duplicate, and the cited closures do not contain the item, so there is no cycle. The off-unit tool use of 066E(2) is accepted as a generic black box. Only Stacks is cited, no SGA. Batch-5 flag: the recomputed closure reaches the item outside the trace-formula proof (via lem-per-local-cohomology-top-nonvanishing ← … ← nt-target-weil-conjectures), so the flag is real. But the four cited trf nodes (algebraic-shriek-derived-hom-adjunction 0A70/0A71, coherent-rhom-finite-injective-dimension 0G4H, derived-coinduction-adjunction 0A70, derived-evaluation-finite-injective 0A69) are generic commutative or homological algebra. Their closures contain no other trf/pd node, and none is a step of the proof of the trace formula or of Poincaré duality, so I accept them as outside the assumed statements."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-2524c41c0 (reviewer sub-agent of L); spot-checked: This is the fifth push of the Q85 re-split of 2026-10-21. Heads 2c9972c, 4635ac2, a0e2431 and 935b4e3 all passed review; their landings were refused only by the promotion loop (completed in this project's DAG but not in the live DAG). Compared with 935b, both new nodes are byte-identical. In the item only the wording of Step 4 and the split_report summary changed; the statement, stmt_deps, proof_deps and Steps 1-3 are unchanged. All eight cited statements are textually unchanged since 935b. Step 1: Hom_A(B,I^q) is B-injective by Stacks 08XR and keeps the interval [a,b]; the actions phi(xb)=phi(bx) agree because B is commutative. Step 2: coherent-rhom-finite-injective-dimension with K=B[0] gives finite A-cohomology, and A-generators also generate over B. Step 3: the biduality node with M=B; every one of its hypotheses is a hypothesis of the item. Step 4 (new wording): the general Theta formula f -> (x -> f(x)(1)) sends b.id on J to phi -> (b phi)(1) = phi(b), which is delta_{B,L}; b has degree 0, so there is no sign. The cited Theta statement contains this general formula, and the coinduction statement contains the underlying-object identification and conservativity of U. The new nodes are true. The coinduction model follows termwise from 08XR. The biduality node follows from more-algebra 0A69 with K=M[0] and both targets L: L is bounded injective, RHom(L,L)=A[0] has Tor amplitude [0,0], and the truncations of M[0] are pseudo-coherent by 066E(2). Edge cases checked: A=B, B=0, M=0, M=A, and Z/p over Z with L=[Q->Q/Z]. Duplicate check: 602 nodes are new since 935b. The relevant one, lem-trf-coinduction-tensor-comparison-model (Q92), constructs sigma_K and asserts neither termwise B-injectivity nor a kept interval, so it is not a duplicate. perfect-source-evaluation needs a perfect source; the other new nodes are unrelated. No SGA is cited, unit sk-i-curve-zero is kept, the new nodes are statement-only, and the proof is under 3k characters. Advisory: the tool_uses entry for 066E is now used only by the future proof of the biduality node. Maintainer note: this is the fifth push to pass review with identical mathematics; please promote or land this head."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteMapDualizingTransfer",
+  "declaration": "DerivedCategory.finite_map_dualizing_transfer",
+  "declarations": [
+   "DerivedCategory.finiteMapDualizingComplex",
+   "DerivedCategory.finite_map_dualizing_transfer"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FiniteMapDualizingTransfer.lean",
+  "statement": "theorem finite_map_dualizing_transfer {A B : Type u} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] (f : A →+* B) (hfinite : Module.Finite A ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B))) [HasDerivedCategory.{u} (RingSiteModules A)] [HasDerivedCategory.{u} (RingSiteModules B)] (L : DerivedCategory (RingSiteModules A)) (hL : ∀ i : ℤ, Module.Finite A (((homologyFunctor (RingSiteModules A) i).obj L).val.obj (op ⟨PUnit.unit⟩))) (hI : ∃ I : CochainComplex (RingSiteModules A) ℤ, (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero (I.X q)) ∧ (∀ q : ℤ, Injective (I.X q)) ∧ Nonempty (Q.obj I ≅ L)) (hscalar : IsIso ((SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf A) L).homEquiv _ _ (λ_ L).hom)) : (∀ i : ℤ, Module.Finite B (((homologyFunctor (RingSiteModules B) i).obj (finiteMapDualizingComplex f L)).val.obj (op ⟨PUnit.unit⟩))) ∧ (∃ J : CochainComplex (RingSiteModules B) ℤ, (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero (J.X q)) ∧ (∀ q : ℤ, Injective (J.X q)) ∧ Nonempty (Q.obj J ≅ finiteMapDualizingComplex f L)) ∧ IsIso ((SignedRingedHom.adjunction ⊥ (CochainComplex.onePointRingSheaf B) (finiteMapDualizingComplex f L)).homEquiv _ _ (λ_ (finiteMapDualizingComplex f L)).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper constructs the canonical coinduced B-object from the existing functorial K-injective replacement, evaluation at the unique site object, Mathlib coextendScalars.mapHomologicalComplex, and the existing constant-module embedding. Scalar action is the transpose of the unitor under the recorded evaluation-normalized derived adjunction. Repair of immutable head 2011bef2e601: derived-coinduction-adjunction remains only a proof dependency; ordinary coinduction data come directly from Mathlib. All original node hypotheses and conclusions remain unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-182e36376",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 2011bef2e601 repairs both faults. H2/H4: the helper now inlines Mathlib (coextendScalars f).mapHomologicalComplex (.up ℤ) with the restrictCoextendScalarsAdj additive instance, which is identical to the live coinductionComplexFunctor body (DerivedCoinductionAdjunction.lean:43); lem-trf-derived-coinduction-adjunction is dropped from stmt_deps and kept in proof_deps; plain import. H11: a real binder-by-binder second reading is present. Mechanical finding: SignedRingedHom.adjunction = (normalizedAdjunction_existsUnique J R).choose.adjunction K (RingedInternalHomSignedCalculus.lean:208-212) is an object constructed from the theorem's conclusion, so PASS on the theorem stmt_dep lem-weil-pbc-ringed-internal-hom-exact-restriction. Snapshot diff vs prior head: only lean, stmt_deps, lean.note and report changed; statement, proof and lean.statement unchanged. Hypotheses and the three conclusions re-checked against Stacks 0AX0/0A7B/0A5S (term-bounded injectives, actual homothety maps); edge cases B=0, f=id, L=0, DVR→residue field OK. No hollow data; proof is sorry only. No compile run (no file changed); report gives clean sandbox 7.1 s and library 2.6 s compiles. Advisory: kInjectiveResolutionFunctor and SheafOfModules.evaluation are used without an owning stmt_dep."
+ }
 }

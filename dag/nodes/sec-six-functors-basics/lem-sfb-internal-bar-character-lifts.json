@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-internal-bar-character-lifts",
+ "kind": "statement",
+ "title": "Character chain lifts and ordered cocycles on the internal homogeneous bar",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site and $G$ a profinite group, with $\\underline G(S)=C(S,G)$. Use internal $A$-modules, equivariant internal modules, and the coefficient universes of [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-size-convention], and ordinary derived categories [def-weil-abstract-derived-category]. Let $P^{-n}=P_n=A[\\underline G^{n+1}]$ for $n\\geq0$, and $P^i=0$ for $i>0$, with diagonal left action, differential $d_P^{-n}=\\partial_n$ given by alternating deletion, $d_P^0=0$, and augmentation $e:P\\to A[0]$ sending $[g]$ to $1$, as in [lem-sfb-condensed-internal-bar-resolution]. Give $A$ trivial action. Shifts have $d_{P[1]}=-d_P$.\n\nFor an additive condensed-group map $a:\\underline G\\to(A,+)$, the natural formulas on generalized generators after every profinite base change\n$$L_{a,n}[g_0,\\ldots,g_n]=a(g_0^{-1}g_1)[g_1,\\ldots,g_n]\\quad(n\\geq1),\\qquad L_a^0=0$$\nextend uniquely to equivariant internal $A$-linear maps and define a cochain map $L_a:P\\to P[1]$; equivalently $\\partial L_a+L_a\\partial=0$.\n\nFor every $q\\geq0$ and ordered list $a_1,\\ldots,a_q$ of such maps, set $F_0=1_P$ and\n$$F_q=L_{a_q}[q-1]\\circ\\cdots\\circ L_{a_2}[1]\\circ L_{a_1}:P\\to P[q]\\quad(q\\geq1).$$\nIts component in degree $-n$ is zero if $n<q$ and otherwise is\n$$F_q[g_0,\\ldots,g_n]=\\left(\\prod_{k=1}^q a_k(g_{k-1}^{-1}g_k)\\right)[g_q,\\ldots,g_n].$$\nThe map $e[q]F_q:P\\to A[q]$ has sole component $f_q:P_q\\to A$, satisfies $f_q\\partial_{q+1}=0$, and under the homogeneous-to-inhomogeneous coordinate change gives the internal $A$-linear cochain map\n$$c_q:A[-q]\\longrightarrow U^\\bullet,\\qquad U^n=\\underline{\\operatorname{Hom}}_A(A[\\underline G^n],A),\\qquad c_q(g_1,\\ldots,g_q)=\\prod_{k=1}^q a_k(g_k).$$\nHere $U^\\bullet$ is the complex of alternating cochains of the inhomogeneous cosimplicial internal-function diagram of [def-sfb-condensed-equivariant-bar-data] for the trivial action (first face dropping $g_1$, interior faces multiplying adjacent entries, last face dropping $g_n$), $f_0=e$, and $c_0=1$. All formulas are natural in the profinite parameter. No projectivity or underived internal-Hom acyclicity is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, agent-formulated internal bar normalization; character deletion lifts and iteration (ordered-cup argument steps 1–3); exact internal-category reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-unipotent-class"
+ ],
+ "proof": [
+  {
+   "text": "Use exists_unique_deletion from [lem-sfb-internal-bar-character-deletion] to choose for each character its uniquely specified degree-one deletion cochain map. The endpoint vanishing degreeOne_zero is proved from the zero object in positive degree.",
+   "uses": [
+    "lem-sfb-internal-bar-character-deletion",
+    "def-sfb-internal-bar-character-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct all ordered composites by orderedIterate and the augmentation by barAugmentation, both actual constructions. Their recursion and normalization are proved in [def-sfb-internal-bar-character-data]. Apply ordered_properties to the deletion family for all the homogeneous generator, equivariance and augmented closedness assertions. Package the augmented underlying map with its proved equivariance into the existing action category. Subtype.ext gives its closedness and empty-list normalization. Zero targets of shifted single complexes prove the sole-component assertion.",
+   "uses": [
+    "lem-sfb-internal-bar-character-iteration",
+    "def-sfb-internal-bar-character-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Independently use [lem-sfb-internal-bar-character-cocycles] for the product cocycle of each list, retaining its formula for every scalar, slice, and tuple.",
+   "uses": [
+    "lem-sfb-internal-bar-character-cocycles"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To establish the coordinate comparison, substitute g_k=x_k^{-1}x_(k+1) in the scalar formula of that cocycle, with T=S, f=id and r=1. Identity restriction preserves 1, so its value is exactly the homogeneous augmented generator product supplied by ordered_properties. This is a literal equality of the specified internal-function evaluation and the actual augmented component. All structure fields of Lifts are now filled by these constructions and proved equalities.",
+   "uses": [
+    "lem-sfb-internal-bar-character-iteration",
+    "lem-sfb-internal-bar-character-cocycles"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-bar-character-deletion",
+  "def-sfb-internal-bar-character-data",
+  "lem-sfb-internal-bar-character-iteration",
+  "lem-sfb-internal-bar-character-cocycles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts. R4 formal reduction into deletion existence, canonical iteration properties, and independent inhomogeneous product cocycles; recursion, augmentation, uniqueness and final coordinate comparison proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "barComplex.*(character|cocycle)|character.*(barComplex|chainMap)",
+   "results": "{\"t\": \"2026-10-22T06:01:24Z\", \"tool\": \"grep\", \"query\": \"barComplex.*(character|cocycle)|character.*(barComplex|chainMap)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rep.barComplex\"",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Rep.barComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"Rep.barComplex.d\", \"Rep.barComplex.isoStandardComplex\", \"Rep.barComplex.d_def\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"Rep.barComplex.d_single\"], \"digest\": \"446153f1265f2f78\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal homogeneous bar resolution character chain lift deleting first vertex and multiplying additive character evaluates ordered inhomogeneous cocycles",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"leansearch\", \"query\": \"Internal homogeneous bar resolution character chain lift deleting first vertex and multiplying additive character evaluates ordered inhomogeneous cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\", \"groupCohomology.toCocycles\", \"groupHomology.inhomogeneousChainsIso\", \"groupHomology.inhomogeneousChains.d_eq\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\", \"inhomogeneousCochains.d_eq\", \"inhomogeneousCochains.d\", \"groupHomology.inhomogeneousChains.d\"], \"digest\": \"05e41ee332e73195\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a profinite group and condensed coefficient ring additive characters give degree one chain maps on the internal homogeneous bar complex whose iterates are ordered products of character values",
+   "results": "{\"t\": \"2026-10-22T06:01:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a profinite group and condensed coefficient ring additive characters give degree one chain maps on the internal homogeneous bar complex whose iterates are ordered products of character values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"ContinuousCohomology.MultiInd.d_succ\", \"Rep.barComplex.d\", \"Rep.FiniteCyclicGroup.chainComplexFunctor\", \"Rep.barComplex.d_def\", \"Rep.standardComplex\", \"groupHomology.inhomogeneousChains\", \"Rep.barComplex.d_single\"], \"digest\": \"49a0cc119431deea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "grep",
+   "query": "standardComplex|barComplex|def δ₀_apply|theorem δ₀_apply",
+   "results": "{\"t\": \"2026-10-22T06:02:10Z\", \"tool\": \"grep\", \"query\": \"standardComplex|barComplex|def δ₀_apply|theorem δ₀_apply\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\"], \"digest\": \"0a72311e4f765224\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degree one cocycle on a homogeneous group resolution defines a chain map to the shifted resolution by c(g0,g1) times the remaining vertices and iterated composition multiplies cocycles in order",
+   "results": "{\"t\": \"2026-10-22T06:02:22Z\", \"tool\": \"leanfinder\", \"query\": \"A degree one cocycle on a homogeneous group resolution defines a chain map to the shifted resolution by c(g0,g1) times the remaining vertices and iterated composition multiplies cocycles in order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.iCocycles\", \"groupCohomology.coe_mapCocycles₁\", \"groupCohomology.toCocycles\", \"groupCohomology.cochainsMap\", \"CochainComplex.HomComplex.Cocycle.homOf\", \"CochainComplex.HomComplex.Cocycle.ofHom\", \"groupCohomology.coe_mapCocycles₂\", \"inhomogeneousCochains.d_eq\"], \"digest\": \"7f2d5c23bb731af1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "grep",
+   "query": "MultiInd|ContinuousCohomology|Condensed.*cup|Condensed.*character",
+   "results": "{\"t\": \"2026-10-22T06:02:45Z\", \"tool\": \"grep\", \"query\": \"MultiInd|ContinuousCohomology|Condensed.*cup|Condensed.*character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\"], \"digest\": \"6528844edbf03661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep bar complexes, group cochains, and generic Hom-complex constructions do not give the stated internal condensed character chain lifts and their ordered generator formula."
+  },
+  {
+   "tool": "grep",
+   "query": "barComplex.*(character|cocycle)|character.*(barComplex|chainMap)",
+   "results": "{\"t\": \"2026-10-23T10:32:23Z\", \"tool\": \"grep\", \"query\": \"barComplex.*(character|cocycle)|character.*(barComplex|chainMap)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.standardComplex, Rep.barComplex and their differentials (Resolution.lean:170–209, 337–404) are discrete representations over an ordinary ring. They do not state internal condensed character lifts or their ordered composite formula. CupNonvanishing.d_cupHom in the project covers only discrete trivial-coefficient cocycles for commutative groups and is only one clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Additive group characters define degree one chain maps from a homogeneous bar resolution to its shift and their iterates are ordered cup cocycles",
+   "results": "{\"t\": \"2026-10-23T10:32:24Z\", \"tool\": \"leansearch\", \"query\": \"Additive group characters define degree one chain maps from a homogeneous bar resolution to its shift and their iterates are ordered cup cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.noConfusionType\", \"AddChar.zmodChar\", \"CharacterModule\", \"AddChar.instAddCommGroup\", \"Rep.barComplex\", \"AddChar.toAddMonoidHom\", \"ZMod.toCircle\", \"AddChar.compAddMonoidHom\"], \"digest\": \"c7ec1eb18cc4a3b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.standardComplex, Rep.barComplex and their differentials (Resolution.lean:170–209, 337–404) are discrete representations over an ordinary ring. They do not state internal condensed character lifts or their ordered composite formula. CupNonvanishing.d_cupHom in the project covers only discrete trivial-coefficient cocycles for commutative groups and is only one clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rep.barComplex\"",
+   "results": "{\"t\": \"2026-10-23T10:32:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Rep.barComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"Rep.barComplex.d\", \"Rep.barComplex.isoStandardComplex\", \"Rep.barComplex.d_def\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"Rep.barComplex.d_single\"], \"digest\": \"446153f1265f2f78\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.standardComplex, Rep.barComplex and their differentials (Resolution.lean:170–209, 337–404) are discrete representations over an ordinary ring. They do not state internal condensed character lifts or their ordered composite formula. CupNonvanishing.d_cupHom in the project covers only discrete trivial-coefficient cocycles for commutative groups and is only one clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a condensed commutative ring and profinite group, additive characters define equivariant degree one chain maps on the homogeneous bar complex by deleting the first vertex, and composites evaluate ordered products",
+   "results": "{\"t\": \"2026-10-23T10:32:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a condensed commutative ring and profinite group, additive characters define equivariant degree one chain maps on the homogeneous bar complex by deleting the first vertex, and composites evaluate ordered products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d\", \"Rep.barComplex\", \"Rep.barComplex.d_single\", \"Rep.barComplex.d_def\", \"groupHomology.inhomogeneousChains.d\", \"Rep.standardComplex\", \"Rep.FiniteCyclicGroup.chainComplexFunctor\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\"], \"digest\": \"3012e1094976dd74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.standardComplex, Rep.barComplex and their differentials (Resolution.lean:170–209, 337–404) are discrete representations over an ordinary ring. They do not state internal condensed character lifts or their ordered composite formula. CupNonvanishing.d_cupHom in the project covers only discrete trivial-coefficient cocycles for commutative groups and is only one clause."
+  },
+  {
+   "tool": "grep",
+   "query": "standardComplex|cupProduct|cocycles₁",
+   "results": "{\"t\": \"2026-10-23T10:33:51Z\", \"tool\": \"grep\", \"query\": \"standardComplex|cupProduct|cocycles₁\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\"], \"digest\": \"ce26e8bfabe1837c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.standardComplex, Rep.barComplex and their differentials (Resolution.lean:170–209, 337–404) are discrete representations over an ordinary ring. They do not state internal condensed character lifts or their ordered composite formula. CupNonvanishing.d_cupHom in the project covers only discrete trivial-coefficient cocycles for commutative groups and is only one clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group homomorphism from a group to the additive group of a ring gives an anticommuting first vertex deletion on the homogeneous group chain complex",
+   "results": "{\"t\": \"2026-10-23T10:33:53Z\", \"tool\": \"leanfinder\", \"query\": \"A group homomorphism from a group to the additive group of a ring gives an anticommuting first vertex deletion on the homogeneous group chain complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.inhomogeneousChains.d\", \"groupHomology.d₁₀_single_inv\", \"Rep.standardComplex.d_of\", \"groupHomology.inhomogeneousChains.d_single\", \"Rep.barComplex.d_def\", \"Rep.standardComplex.d_eq\", \"Rep.barComplex.d\", \"Rep.standardComplex.d\"], \"digest\": \"03f63b43f7a2984f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.standardComplex, Rep.barComplex and their differentials (Resolution.lean:170–209, 337–404) are discrete representations over an ordinary ring. They do not state internal condensed character lifts or their ordered composite formula. CupNonvanishing.d_cupHom in the project covers only discrete trivial-coefficient cocycles for commutative groups and is only one clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-bar-ordered-cup",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: internal bar ordered-character normalization; equivariant character deletion lifts and their ordered composite cocycle (returned ordered-cup proof steps 1–3).",
+   "via": [
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-bar-character-lifts",
+  "worker": "stage1",
+  "summary": "Q83 checked attachment and Mathlib candidates, reused the existing internal free-module universal property and equivariance tests, and wrote the full signed deletion, shifted induction, augmented cocycle and slice-coordinate calculations. No new nodes or statement changes.",
+  "blueprint": "Latest blueprint direct-images proof, paragraph (3), open-immersion input; realizes the internal character-lift calculation extracted from ordered-cup proof steps 1–3, keeping the existing ancestry and route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-05b28b21e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-05b28b21e (reviewer sub-agent of L); spot-checked: I read the item in full: all 6 steps, the statement, the statements of the 4 proof_deps, the parent lem-sfb-internal-bar-ordered-cup, the sibling roof/cup, roof-adjunction and normalization nodes, and blueprint main-20261015 direct-images paragraph (3). That paragraph has no bar calculation, so the item is correctly marked agent-written, with WANTED recorded. The delivery is one commit with no new nodes. Statement and stmt_deps are identical to clones/live and side-live, where the item is still unsplit, so it was not superseded. It is not a 2026-10-21 re-split. There is no SGA. Equivariance holds by (ug0)^{-1}(ug1)=g0^{-1}g1. I recomputed ∂L+L∂ by hand: everything cancels except (a01+a12−a02)[g2..gn], which is 0 for noncommutative G; at n=1 it is 0 because d^0=0. The shift sign (−1)^q is right. The order of F_q is right. I checked the cocycle directly for q=0,1,2 and the trivial-G case. The face substitution h_i=b1⋯bi in step 5 matches the trivial-action inhomogeneous faces of def-sfb-condensed-equivariant-bar-data, using its slice-evaluation sentence. Each cited node's statement says what the step takes: the free-module universal property and generator equality test, equivariance detected on generators, and the augmentation with e∂1=0. Hypotheses match. No projectivity, acyclicity or injective resolution is used. The statement gives everything the parent's steps 1–3 consume, including eL[g0,g1]=a(g0^{-1}g1) and f=c(ratios) for trivial action. No duplicate found by grep. All deps are in the same unit, so no tool_uses are needed and there is no cycle. Batch-5: both flagged citations reach lem-trf-free-module-sheaf-universal-property only through the free-module node. That node is the generic universal property of the free module sheaf on a site. It is not part of the trace formula or Poincaré duality, so both are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalBarCharacterLifts",
+  "declaration": "Profinite.CondensedAction.InternalBarCharacter.exists_lifts",
+  "declarations": [
+   "Profinite.CondensedAction.InternalBarCharacter.Lifts",
+   "Profinite.CondensedAction.InternalBarCharacter.exists_lifts"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalBarCharacterLifts.lean",
+  "statement": "theorem exists_lifts (D : Resolution A.toMon G) {H : CategoryTheory.CondensedBar.InternalFunctions A} (B : CategoryTheory.CondensedBar.BarDiagram (G := G) H) : Nonempty (Lifts D B)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "R4 moves the identical shared complexes, component definitions and IsLift specification to InternalBarCharacterData, publicly reexported by the original module. Lifts and the unchanged exists_lifts signature remain in the item. Its proof constructs the ordered iteration and augmentation, applies three genuine partial-argument theorems, and proves the coordinate comparison by substitution at the regular unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68e7a1672",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Checked every clause against the node: the lift is pinned by IsLift (component equivariance and generator formula on every profinite S) and lift_unique. Anticommutation agrees with Mathlib's sign on the shifted differential and holds at n=0 ((a01+a12-a02)[g2]=0). iterate_snoc puts the new character last, the shiftFunctorAdd' iso goes K⟦1⟧⟦q⟧→K⟦q+1⟧, and shifts of maps carry no sign. iterate_generator indexing matches the node. Augmentation clauses (sole component, closedness, f_0=e) are present. The cocycle is a cochain map from single(q) into the alternating cochains of BarDiagram (trivial action, faces checked); cocycle_formula is linear in r over arbitrary slices; coordinates uses the same cocycle at successive ratios. Edge cases q=0, n<q, empty S, zero ring are covered. Statement text identical to live. Added stmt_dep def-sfb-condensed-unipotent-class is on the base and owns Character; its 297-node closure does not reach the item, so no cycle. lean.statement matches the file. Defs are real constructions; only exists_lifts is sorry; docstrings and both report sections present. InternalBarRoofAdjunction.complex is a theorem-node helper over equivariant modules, so the local complex over underlying modules is acceptable (noted). Not recompiled; no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "independent cc review: 7 moved defs vs clone (identical except blueprint docstring tags), Lifts/exists_lifts byte-identical, three new sorry statements vs Resolution boundary/diagonal/augmentation fields and Mathlib shift sign conventions, item node only proof/proof_deps/proof_origin/lean changed; no importers of the item"
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-derived-square-normalization-naturality",
+ "kind": "statement",
+ "title": "Naturality of squares normalized by right-derived units",
+ "statement": "Let F and G be additive functors between abelian categories with chosen derived categories and K-injective resolutions. Let two squares from F to G be normalized by their right-derived units, with specified localized horizontal functors and factorization isomorphisms. Any morphism of the ordinary squares compatible with those localization factorizations induces the same commuting square of natural transformations on the derived categories. The precise equation and hypotheses are given by the Lean declaration.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, uniqueness of right-derived functors and naturality of derived-composition comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Precompose the two candidate transformations on a K-injective representative by the image of the source derived unit and postcompose by the target factorization isomorphism. Substitute the two square normalizations and the two localization-factorization equations. The ordinary commuting-square equation and naturality of the target derived unit identify these composites. The source unit is invertible on K-injectives. Every derived object is isomorphic to such a representative, so naturality extends the equality to the whole category.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, derived-unit uniqueness argument."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationAdjunctionNormalization",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; Proof steps 7 and 8: compatibility of coefficient routes and actual semilinear transitions.",
+   "via": [
+    "lem-pur-algebra-diagram-evaluation-adjunction-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedExactSquareCoherence",
+  "file": "lean/Sheaf/CategoryTheory/DerivedExactSquareCoherence.lean",
+  "declaration": "CategoryTheory.ExactDerivedSquare.normalized_naturality",
+  "statement": "theorem normalized_naturality\n    (x' : A ⥤ Ap) (y' : B ⥤ Bp) [x'.Additive] [y'.Additive]\n    (X X' : DerivedCategory.{w} A ⥤ DerivedCategory.{w} Ap)\n    (Y Y' : DerivedCategory.{w} B ⥤ DerivedCategory.{w} Bp)\n    (xf : DerivedCategory.Q ⋙ X ≅ x.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (xf' : DerivedCategory.Q ⋙ X' ≅ x'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (yf : DerivedCategory.Q ⋙ Y ≅ y.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (yf' : DerivedCategory.Q ⋙ Y' ≅ y'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (c : F ⋙ y ⟶ x ⋙ G) (c' : F ⋙ y' ⟶ x' ⋙ G)\n    (b : F.rightDerivedFunctor ⋙ Y ⟶ X ⋙ G.rightDerivedFunctor)\n    (b' : F.rightDerivedFunctor ⋙ Y' ⟶ X' ⋙ G.rightDerivedFunctor)\n    (hn : unitNormalized F G x y X Y xf yf c b)\n    (hn' : unitNormalized F G x' y' X' Y' xf' yf' c' b')\n    (a : x ⟶ x') (d : y ⟶ y') (ad : X ⟶ X') (dd : Y ⟶ Y')\n    (ha : ∀ I : CochainComplex A ℤ,\n      ad.app (DerivedCategory.Q.obj I) ≫ xf'.hom.app I =\n        xf.hom.app I ≫ DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex a (.up ℤ)).app I))\n    (hd : ∀ I : CochainComplex B ℤ,\n      dd.app (DerivedCategory.Q.obj I) ≫ yf'.hom.app I =\n        yf.hom.app I ≫ DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex d (.up ℤ)).app I))\n    (hc : ∀ M : A, d.app (F.obj M) ≫ c'.app M = c.app M ≫ G.map (a.app M)) :\n    Functor.whiskerLeft F.rightDerivedFunctor dd ≫ b' =\n      b ≫ Functor.whiskerRight ad G.rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between squares normalized by the units of right derived functors induces a commuting square of right derived natural transformations",
+   "results": "Functor.rightDerivedNatTrans_fac, rightDerivedNatTrans_comp, rightDerivedNatTrans_app; no ready-made statement for different horizontal functors and their localization factors.",
+   "date": "2026-10-25",
+   "verdict": "general tools exist; prove the normalized square calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedNatTrans\"",
+   "results": "rightDerivedNatTrans_fac, rightDerivedNatTrans_app, rightDerivedNatTrans_comp",
+   "date": "2026-10-25",
+   "verdict": "universal natural-transformation API; no matching normalized-square statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*naturality|rightDerivedNatTrans.*comp",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:125, rightDerivedNatTrans_comp",
+   "date": "2026-10-25",
+   "verdict": "composition tool only"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "independent cc review: dda572889e4d vs passed delivery 983832b9a42f (diff -r: only module/node rename + one local irreducible attr) and vs clone original module/node (Defs interface line-diffed; item node field-diffed: only lean/proof/proof_deps/proof_origin); 0 importers by grep"
+ }
+}

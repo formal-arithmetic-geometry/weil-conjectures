@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-euclidean-bochner-integral-calculus",
+ "kind": "statement",
+ "title": "Euclidean Bochner integrals, representatives and parameter measurability",
+ "statement": "Use $\\mathbf R$ [def-weil-field]. Let $m,n\\geq1$ and $r\\geq0$ be integers and use Lebesgue measure on Euclidean spaces. A function $u:\\mathbf R^m\\to\\mathbf R^r$ measurable up to a null set has a Borel-measurable representative $u_0=u$ almost everywhere. Here measurable up to a null set means equal almost everywhere to a Borel-measurable function. Such a function is Bochner integrable exactly when $\\int\\|u\\|<\\infty$. For integrable $u,v$, real constants $a,b$ and an integrable scalar function $h$, one has\n$$\\int(au+bv)=a\\int u+b\\int v,\\qquad \\int h(x)c\\,dx=\\left(\\int h\\right)c\\quad(c\\in\\mathbf R^r),\\qquad \\left\\|\\int u\\right\\|\\leq\\int\\|u\\|.$$\nIntegrability and the integral are unchanged by almost-everywhere equality. If $F:\\mathbf R^m\\times\\mathbf R^n\\to\\mathbf R^r$ is Borel measurable, then $x\\mapsto\\int F(x,y)\\,dy$ is Borel measurable, where the integral is assigned zero when that section is not integrable. No integrability on the whole product is required for this measurability assertion.",
+ "source": {
+  "document": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+  "place": "integral_add:237, integral_sub:261, integral_smul:275, integral_smul_const: Bochner/ContinuousLinearMap.lean:218–221, integral_congr_ae:299, norm_integral_le_integral_norm:934. Parameter measurability: Integral/Prod.lean:68–79. Representatives: Function/StronglyMeasurable/AEStronglyMeasurable.lean:176–185,480–481; integrable_norm_iff: Function/L1Space/Integrable.lean:617–620."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bochner integral depends measurably on parameters, is linear on integrable functions, ignores almost everywhere equality, and norm integral is bounded by integral norm",
+   "results": {
+    "t": "2026-10-24T03:55:48Z",
+    "tool": "leanfinder",
+    "query": "Bochner integral depends measurably on parameters, is linear on integrable functions, ignores almost everywhere equality, and norm integral is bounded by integral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.integral",
+     "MeasureTheory.L1.integral_def",
+     "MeasureTheory.setToFun",
+     "MeasureTheory.integral_def",
+     "MeasureTheory.L1.integral",
+     "ContinuousLinearMap.integral_apply",
+     "MeasureTheory.setToFun_eq",
+     "MeasureTheory.L1.integral_of_fun_eq_integral'"
+    ],
+    "digest": "c6362ffe1751e30e"
+   },
+   "date": "2026-10-24",
+   "verdict": "candidate: Bochner integral and its L1 realization; the precise per-clause matches are in the inspected source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral of a jointly measurable function over one variable is almost everywhere strongly measurable in the other variable",
+   "results": {
+    "t": "2026-10-24T03:55:47Z",
+    "tool": "leansearch",
+    "query": "The integral of a jointly measurable function over one variable is almost everywhere strongly measurable in the other variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.StronglyMeasurable.integral_prod_left'",
+     "MeasureTheory.AEStronglyMeasurable.prodMk_right",
+     "MeasureTheory.StronglyMeasurable.integral_prod_left",
+     "AEMeasurable.lintegral_prod_left",
+     "Measurable.lintegral_prod_right'",
+     "AEMeasurable.lintegral_prod_right'",
+     "AEMeasurable.lintegral_prod_right",
+     "MeasureTheory.AEStronglyMeasurable.integral_prod_right'"
+    ],
+    "digest": "cb4ec58ae2c53edf"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: StronglyMeasurable.integral_prod_left/right and AEStronglyMeasurable.integral_prod_right'"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral_prod_right\"",
+   "results": {
+    "t": "2026-10-24T03:55:47Z",
+    "tool": "loogle",
+    "query": "\"integral_prod_right\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Measurable.lintegral_prod_right",
+     "Measurable.lintegral_prod_right'",
+     "AEMeasurable.lintegral_prod_right",
+     "AEMeasurable.lintegral_prod_right'",
+     "MeasureTheory.StronglyMeasurable.integral_prod_right",
+     "MeasureTheory.StronglyMeasurable.integral_prod_right'",
+     "MeasureTheory.AEStronglyMeasurable.integral_prod_right'",
+     "MeasureTheory.Integrable.integral_prod_right"
+    ],
+    "digest": "fa3fb4a31edbe10d"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: StronglyMeasurable.integral_prod_right; no whole-product integrability hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (integral_congr_ae|integral_sub|norm_integral_le_integral_norm|integral_mul_const|integral_const_mul)",
+   "results": {
+    "t": "2026-10-24T03:57:22Z",
+    "tool": "grep",
+    "query": "theorem (integral_congr_ae|integral_sub|norm_integral_le_integral_norm|integral_mul_const|integral_const_mul)",
+    "sub": "MeasureTheory/Integral/Bochner/Basic.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "261",
+     "266",
+     "288",
+     "292",
+     "299"
+    ],
+    "digest": "a4ffc138df1974df"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: integral_sub:261, integral_congr_ae:299; further precise norm and scalar queries below"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem norm_integral_le_integral_norm",
+   "results": {
+    "t": "2026-10-24T04:00:12Z",
+    "tool": "grep",
+    "query": "theorem norm_integral_le_integral_norm",
+    "sub": "MeasureTheory/Integral/Bochner/Basic.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "934"
+    ],
+    "digest": "c816281c7ed80d24"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Basic.lean:934"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem integral_smul",
+   "results": {
+    "t": "2026-10-24T04:00:12Z",
+    "tool": "grep",
+    "query": "theorem integral_smul",
+    "sub": "MeasureTheory/Integral/Bochner/Basic.lean",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "275",
+     "1014",
+     "1028"
+    ],
+    "digest": "6ad556e92e5c4471"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Basic.lean:275"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem integrable_norm_iff",
+   "results": {
+    "t": "2026-10-24T04:00:12Z",
+    "tool": "grep",
+    "query": "theorem integrable_norm_iff",
+    "sub": "MeasureTheory/Function/L1Space/Integrable.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "617"
+    ],
+    "digest": "f9914491b28195bd"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: L1Space/Integrable.lean:617"
+  },
+  {
+   "tool": "grep",
+   "query": "AEStronglyMeasurable.integral_prod_right",
+   "results": {
+    "t": "2026-10-24T04:00:12Z",
+    "tool": "grep",
+    "query": "AEStronglyMeasurable.integral_prod_right",
+    "sub": "MeasureTheory/Integral/Prod.lean",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "142",
+     "337"
+    ],
+    "digest": "2328a62d972cc0a9"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Integral/Prod.lean:142; also read the Borel parameter version at :68"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An almost everywhere strongly measurable function has a strongly measurable representative equal to it almost everywhere",
+   "results": {
+    "t": "2026-10-24T03:58:37Z",
+    "tool": "leanfinder",
+    "query": "An almost everywhere strongly measurable function has a strongly measurable representative equal to it almost everywhere",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.AEStronglyMeasurable.ae_eq_mk",
+     "MeasureTheory.AEEqFun.aestronglyMeasurable",
+     "MeasureTheory.AEStronglyMeasurable.stronglyMeasurable_mk",
+     "MeasureTheory.AEEqFun.stronglyMeasurable",
+     "MeasureTheory.AEFinStronglyMeasurable.ae_eq_mk",
+     "MeasureTheory.AEStronglyMeasurable.mk",
+     "MeasureTheory.AEEqFun.coeFn_mk",
+     "AEMeasurable.ae_eq_mk"
+    ],
+    "digest": "41bf66fee2044741"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: AEStronglyMeasurable.measurable_mk and ae_eq_mk, together with stronglyMeasurable_mk"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stronglyMeasurable_mk\"",
+   "results": {
+    "t": "2026-10-24T03:58:37Z",
+    "tool": "loogle",
+    "query": "\"stronglyMeasurable_mk\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "MeasureTheory.AEStronglyMeasurable.stronglyMeasurable_mk",
+     "MeasureTheory.AEFinStronglyMeasurable.finStronglyMeasurable_mk",
+     "ContinuousMap.aeStronglyMeasurable_mkD_of_uncurry",
+     "ContinuousMap.aeStronglyMeasurable_mkD_restrict_of_uncurry",
+     "ContinuousMapZero.aeStronglyMeasurable_mkD_of_uncurry",
+     "ContinuousMapZero.aeStronglyMeasurable_mkD_restrict_of_uncurry"
+    ],
+    "digest": "d9b08421f3b7fd81"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: AEStronglyMeasurable.stronglyMeasurable_mk"
+  },
+  {
+   "tool": "grep",
+   "query": "stronglyMeasurable_mk|theorem ae_eq_mk|theorem mk|def mk",
+   "results": {
+    "t": "2026-10-24T03:58:36Z",
+    "tool": "grep",
+    "query": "stronglyMeasurable_mk|theorem ae_eq_mk|theorem mk|def mk",
+    "sub": "MeasureTheory/Function/StronglyMeasurable",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/MeasureTheory/Function/StronglyMeasurable/Lp.lean",
+     "Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean",
+     "Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean",
+     "Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean",
+     "Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean",
+     "Mathlib/MeasureTheory/Function/StronglyMeasurable/AEStronglyMeasurable.lean"
+    ],
+    "digest": "868fbe2dc070685e"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: AEStronglyMeasurable.lean:172–185; Euclidean-valued measurable versions at :179"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem integral_smul_const",
+   "results": {
+    "t": "2026-10-24T04:03:21Z",
+    "tool": "grep",
+    "query": "theorem integral_smul_const",
+    "sub": "MeasureTheory/Integral/Bochner",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/MeasureTheory/Integral/Bochner/ContinuousLinearMap.lean"
+    ],
+    "digest": "237c2579f0cc514c"
+   },
+   "date": "2026-10-24",
+   "verdict": "match: Bochner/ContinuousLinearMap.lean:218, read source"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MeasureTheory.integral_add, MeasureTheory.integral_smul, MeasureTheory.integral_smul_const, MeasureTheory.integral_congr_ae, MeasureTheory.norm_integral_le_integral_norm, MeasureTheory.integrable_norm_iff, MeasureTheory.StronglyMeasurable.integral_prod_right, MeasureTheory.AEStronglyMeasurable.measurable_mk, MeasureTheory.AEStronglyMeasurable.ae_eq_mk",
+  "file": "Mathlib/MeasureTheory/Integral/Bochner/Basic.lean",
+  "line": 934,
+  "how": "One-line specializations per clause to Euclidean spaces and volume. Basic.lean:237 integral_add and integral_smul give linearity for integrable functions, Bochner/ContinuousLinearMap.lean:218 integral_smul_const gives the scalar-function formula; integral_congr_ae at :299 gives ae invariance, and norm_integral_le_integral_norm at :934 gives the norm bound. Function/L1Space/Integrable.lean:617 integrable_norm_iff supplies the norm criterion (integrability of the nonnegative scalar norm is its finite integral plus measurability); Function/L1Space/Integrable.lean:123 Integrable.congr supplies integrability invariance. The representative is AEStronglyMeasurable.mk with measurable_mk at AEStronglyMeasurable.lean:179 and ae_eq_mk at :184, using AEMeasurable.aestronglyMeasurable at :479 for second-countable Euclidean target. For Borel F, Measurable.stronglyMeasurable and StronglyMeasurable.integral_prod_right at Integral/Prod.lean:68–74 give Borel measurability of the parameter integral. The target is separable and complete including r=0, and volume is sigma-finite."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-l2-compact-kernel-approximation",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean weak Sobolev graphs and smoothing with controlled support. Supporting Euclidean input: support-controlled Sobolev smoothing: apply ordinary L2 approximate identities separately to the finitely many weak derivative representatives, without any Sobolev assumption in this analytic tool. Supporting measure-theoretic input: Borel representatives to make all joint integrands measurable, and the norm bound and linearity for their section integrals.",
+   "via": [
+    "lem-sfb-l2-compact-kernel-approximation",
+    "lem-sfb-euclidean-sobolev-graph-mollification",
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-nongeneric-point-same-field-dvr",
+ "kind": "statement",
+ "title": "A same-function-field DVR centred at a nongeneric point",
+ "statement": "Let $Z$ be an integral locally Noetherian scheme [def-pc-integral-scheme, pqf-def-locnoeth], let $\\eta$ be its generic point [def-sc-generic-point], and put $L=\\kappa(\\eta)=\\mathcal O_{Z,\\eta}$, its function field [def-sc-function-field]. For every point $z\\in Z$ with $z\\ne\\eta$, there exist a discrete valuation subring $A\\subseteq L$ [def-sc-discrete-valuation-ring], with fraction field exactly $L$, and a morphism $a:\\operatorname{Spec}A\\to Z$ [def-weil-affine-spectrum] such that $a$ maps the closed point of $\\operatorname{Spec}A$ to $z$ and $a|_{\\operatorname{Spec}L}$ is the canonical generic-point morphism $\\operatorname{Spec}L\\to Z$ (with the identity map on $L$). Moreover, under the canonical injection $\\mathcal O_{Z,z}\\hookrightarrow L$, one can choose $A$ to contain $\\mathcal O_{Z,z}$ with $\\mathfrak m_A\\cap\\mathcal O_{Z,z}=\\mathfrak m_{Z,z}$; thus $A$ dominates this local ring.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 054F, properties-lemma-locally-Noetherian-specialization-dvr, (2) for the strict specialization eta to z and the identity extension L/L; constructive affine argument in limits.tex Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, using algebra.tex Tag 00PH, algebra-lemma-exists-dvr."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}R$ containing $z$ with $R$ Noetherian, from the defining locally Noetherian cover. Put $B=\\mathcal O_{Z,z}$ and let $\\mathfrak p\\subset R$ represent $z$. The affine-stalk localization theorem identifies $B$ with $R_{\\mathfrak p}$, so localization permanence makes $B$ Noetherian. The integral-scheme stalk theorem gives that $B$ is a domain and that the canonical map $\\rho_z:B\\hookrightarrow L$, $s_z\\mapsto s_\\eta$, is injective with fraction field $L$. Regard $B$ as this subring of $L$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F, properties-lemma-locally-Noetherian-specialization-dvr, proof: the local ring and its image in the chosen field; affine localization and Algebra Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Let $c:\\operatorname{Spec}B\\to Z$ be the canonical morphism. Its image is all generalizations of $z$. Since $\\overline{\\{\\eta\\}}=Z$, this image contains both $\\eta$ and $z$. If $B$ were a field, $\\operatorname{Spec}B$ would have one point, contradicting $z\\ne\\eta$. Thus $B$ is not a field. Since $B$ is a local domain, its maximal ideal is therefore nonzero: if it were zero, every nonzero element would lie outside the maximal ideal and would be a unit, making $B$ a field.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-sc-generic-point",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F, proof, the non-field assertion marked details omitted; Schemes Tag 01J7, schemes-lemma-specialize-points."
+   }
+  },
+  {
+   "text": "Apply the existing same-field local-domain DVR lemma to $B\\subseteq L$. Its hypotheses hold by steps 1 and 2. Obtain a discrete valuation subring $A\\subseteq L$ containing $B$, with fraction field $L$ and $\\mathfrak m_A\\cap B=\\mathfrak m_B$. Write $i:B\\hookrightarrow A$ and $j:\\operatorname{Spec}L\\to\\operatorname{Spec}A$ for the morphism induced by $A\\hookrightarrow L$.",
+   "uses": [
+    "lem-sfb-local-domain-same-field-dvr",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F, proof, choose a DVR dominating the image; Algebra Tag 00PH, algebra-lemma-exists-dvr, identity field extension L/L."
+   }
+  },
+  {
+   "text": "Define $a=c\\circ\\operatorname{Spec}(i):\\operatorname{Spec}A\\to Z$. Under a map of spectra a prime maps to its inverse image. Consequently $\\operatorname{Spec}(i)$ sends $\\mathfrak m_A$ to $i^{-1}(\\mathfrak m_A)=\\mathfrak m_B$, and $c$ sends $\\mathfrak m_B$ to $z$. Thus $a$ has the required closed-point value and the already obtained containment and contraction give domination.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F, proof, induced morphism; Schemes Tag 01J6 and canonical morphism 02NA."
+   }
+  },
+  {
+   "text": "By clause (1) of the canonical-morphism theorem, $c^{-1}(U)=\\operatorname{Spec}B$ for the affine open $U$ of step 1. Thus $a\\circ j$ factors through $U$. The affine description of $c$ and functoriality of $\\operatorname{Spec}$ show that $a\\circ j$ is induced by $R\\to B\\to A\\to L$. This composite sends $r$ to $\\rho_z(r_z)=r_\\eta$. The generic point belongs to $U$, and the canonical morphism $\\operatorname{Spec}\\mathcal O_{Z,\\eta}=\\operatorname{Spec}L\\to Z$ has on $U$ precisely the same ring map $r\\mapsto r_\\eta$. The affine-spectrum correspondence therefore makes the two morphisms equal. Explicitly every element of $L$ is $r_\\eta/s_\\eta$ with $r,s\\in R$, $s\\ne0$; the resulting generic field map sends this fraction to itself. Hence it is the identity of the fixed field $L$, not merely an unspecified field isomorphism.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-affine-spectrum",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 054F (2) with the identity extension L/L; Schemes canonical morphism 02NA, affine descriptions at z and eta; compare the identical-field construction in Limits Tag 0208."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "lem-sfb-local-domain-same-field-dvr",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 054F, properties-lemma-locally-Noetherian-specialization-dvr, proof of (2), with the non-field assertion expanded using Schemes 01J7; same-field algebra input 00PH and canonical morphism 02NA as in Limits 0208."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nongeneric point of an integral locally Noetherian scheme is the closed image of a discrete valuation ring in its function field with identity generic map",
+   "results": "{\"t\": \"2026-10-22T06:09:25Z\", \"tool\": \"leanfinder\", \"query\": \"Every nongeneric point of an integral locally Noetherian scheme is the closed image of a discrete valuation ring in its function field with identity generic map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\"], \"digest\": \"aaee683cdaaa7d24\"}; no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field.",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral locally Noetherian scheme has a DVR centred at each nongeneric point with the same fraction field",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"leansearch\", \"query\": \"An integral locally Noetherian scheme has a DVR centred at each nongeneric point with the same fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.toIsNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\"], \"digest\": \"3a04c8cf6e8b43ac\"}; no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field.",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ord_add\"], \"digest\": \"7f407c7cce8e10cc\"}; no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field.",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field."
+  },
+  {
+   "tool": "grep",
+   "query": "specialization.*dvr|dvr.*specialization|dominat.*valuation|valuation.*dominat",
+   "results": "{\"t\": \"2026-10-22T06:09:14Z\", \"tool\": \"grep\", \"query\": \"specialization.*dvr|dvr.*specialization|dominat.*valuation|valuation.*dominat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field.",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an integral locally Noetherian scheme Z with function field L and a point z different from its generic point, a discrete valuation subring of L dominates the local ring at z and defines Spec A to Z with canonical generic restriction",
+   "results": "{\"t\": \"2026-10-22T06:10:04Z\", \"tool\": \"leanfinder\", \"query\": \"Given an integral locally Noetherian scheme Z with function field L and a point z different from its generic point, a discrete valuation subring of L dominates the local ring at z and defines Spec A to Z with canonical generic restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.ValuativeCommSq.field\"], \"digest\": \"84e8ab69e1727cfd\"}; no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field.",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField declarations identify the fraction field of stalks but do not construct a dominating DVR; DedekindDomain.Dvr requires a Dedekind domain, absent here. Scheme.ord_add assumes the stalk already is a DVR. No returned declaration constructs the required trait in the fixed field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every non generic point of an integral locally Noetherian scheme there exists a discrete valuation subring of its function field dominating the local ring at that point",
+   "results": "{\"t\": \"2026-10-23T04:15:05Z\", \"tool\": \"leanfinder\", \"query\": \"For every non generic point of an integral locally Noetherian scheme there exists a discrete valuation subring of its function field dominating the local ring at that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\"], \"digest\": \"853b7441c97f67f9\"}; no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain.",
+   "date": "2026-10-23",
+   "verdict": "no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-23T04:15:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ord_add\"], \"digest\": \"7f407c7cce8e10cc\"}; no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain.",
+   "date": "2026-10-23",
+   "verdict": "no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(dvr|discreteValuation)|dominat.*valuation|valuation.*dominat",
+   "results": "{\"t\": \"2026-10-23T04:15:06Z\", \"tool\": \"grep\", \"query\": \"exists.*(dvr|discreteValuation)|dominat.*valuation|valuation.*dominat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain.",
+   "date": "2026-10-23",
+   "verdict": "no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral locally Noetherian scheme has a discrete valuation ring inside its function field centered at every point other than the generic point",
+   "results": "{\"t\": \"2026-10-23T04:16:50Z\", \"tool\": \"leansearch\", \"query\": \"An integral locally Noetherian scheme has a discrete valuation ring inside its function field centered at every point other than the generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.mk\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDiscreteValuationRing\", \"IsDiscreteValuationRing.toIsLocalRing\", \"Valued.integer.isDiscreteValuationRing_of_compactSpace\"], \"digest\": \"0e0914b419072f08\"}; no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain.",
+   "date": "2026-10-23",
+   "verdict": "no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a point z of an integral locally Noetherian scheme with function field K, construct Spec A to the scheme where A is a discrete valuation subring of K with fraction field K and the generic map is identity on K",
+   "results": "{\"t\": \"2026-10-23T04:16:58Z\", \"tool\": \"leanfinder\", \"query\": \"Given a point z of an integral locally Noetherian scheme with function field K, construct Spec A to the scheme where A is a discrete valuation subring of K with fraction field K and the generic map is identity on K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"001f662f5a1d8a13\"}; no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain.",
+   "date": "2026-10-23",
+   "verdict": "no match: function-field and stalk declarations supply the fraction-field identifications, but no returned declaration constructs a dominating discrete valuation subring with this fixed fraction field and canonical generic morphism; ord_add assumes an existing DVR stalk, and the Dedekind localization theorem assumes a Dedekind domain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-dvr-properness-criterion",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.12, refined valuative criterion restricted to traits with generic point over the base generic point; repair extraction of original proof step 4: same-function-field DVR at a nongeneric boundary point",
+   "via": [
+    "lem-sfb-generic-dvr-properness-criterion",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nongeneric-point-same-field-dvr",
+  "worker": "stage1",
+  "group": "Q74",
+  "summary": "Five steps following Stacks 054F and 00PH: identify the Noetherian local domain inside the fixed function field, prove that its stalk is not a field using the image of the canonical local-spectrum morphism, reuse the existing same-field DVR node, and check closed and generic restrictions explicitly. No new nodes; no statement change. Whole-DAG and blueprint searches find no exact blueprint duplicate. Return repair: reapplied the retained split to the current DAG, re-read every cited statement, made the nonzero-maximal-ideal hypothesis and the factorization through the affine neighbourhood explicit, and retained all previous searches and provenance.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration-reduction chain, specifically the boundary-point trait used in step 3 of lem-sfb-generic-dvr-properness-criterion (Stacks 0208). Retains the inherited null blueprint.from.node and via chain, as blueprint_refs.py ancestor reports None; no new ancestry is fabricated.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme tool: its statement supplies the affine description, closed-point image and image of Spec of a stalk. The unit has no replacement for these local-spectrum properties; this does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-9d1c15a22",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-9d1c15a22 (reviewer sub-agent of L); spot-checked: PASS, with no fixes and no new nodes. Head 9d1c15a2 re-delivers 18e8783f, which was PASSed at 12:38. That landing was refused at 12:52 only because the item was not yet in the live DAG, which is a promotion fault and not a mathematical one. A field-by-field diff shows that statement, stmt_deps, proof_deps, source, created, blueprint and every step's uses are identical to the earlier head. Only two elementary expansions were added. Step 2 now says a local domain that is not a field has m_B≠0, which the same-field lemma needs. Step 5 now cites c^{-1}(U)=Spec B from clause (1) of lem-weil-pbc-spec-local-ring-canonical-morphism. Both are correct. I re-read every cited statement in this snapshot. Step 1: a Noetherian affine open from pqf-def-locnoeth; the stalk is a localization by clause (c) of the affine-open stalk node, so localization-noetherian makes it Noetherian; the integral-stalk node (2) gives a domain inside L with L as its fraction field. Step 2: η is a generalization of z, and Spec of a field has one point, so B is not a field. Step 3: all hypotheses of lem-sfb-local-domain-same-field-dvr hold (that node passed review on 2026-10-22). Step 4: Spec(i) sends m_A to m_B, and c sends m_B to z. Step 5: the two ring maps on U are both r↦r_η, so the affine-spectrum correspondence makes the morphisms equal. Source: Stacks properties.tex 054F(2) and its proof (00PH, 01J6); step 2 fills its 'details omitted'. Both citers get exactly what they use: generic-dvr-properness-criterion step 3 and dense-generic-trait-selection step 5. Duplicate check: lem-sbc-noetherian-specialization-trait is weaker (054F(1) only). Edge cases: Spec k, a DVR, and A^2 at (x,y) and at (x). Accepted tool_use: lem-weil-pbc-spec-local-ring-canonical-morphism. No SGA is cited. Advisory: blueprint.from.node is null, inherited from Q100's FIX."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NongenericPointSameFieldDvr",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dvr_subalgebra_at_nongeneric_point",
+  "file": "lean/Sheaf/AlgebraicGeometry/NongenericPointSameFieldDvr.lean",
+  "statement": "theorem exists_dvr_subalgebra_at_nongeneric_point (Z : Scheme.{u}) [IsIntegral Z] [IsLocallyNoetherian Z] (z : Z) (hz : z ≠ genericPoint Z) : ∃ (A : Subalgebra (Z.presheaf.stalk z) Z.functionField) (_ : IsDiscreteValuationRing A), IsFractionRing A Z.functionField ∧ (IsLocalRing.maximalIdeal A).comap (algebraMap (Z.presheaf.stalk z) A) = IsLocalRing.maximalIdeal (Z.presheaf.stalk z) ∧ ∃ a : Spec (CommRingCat.of A) ⟶ Z, a (IsLocalRing.closedPoint A) = z ∧ Spec.map (CommRingCat.ofHom A.val.toRingHom) ≫ a = Z.fromSpecStalk (genericPoint Z)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1815c80b4",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Every node clause is matched in the Lean: IsIntegral + IsLocallyNoetherian only; z ≠ genericPoint Z; A is a Subalgebra of Z.functionField over the stalk at z via Mathlib's canonical stalkFunctionFieldAlgebra; IsDiscreteValuationRing A; IsFractionRing A L; maximal-ideal contraction equality; ∃ a with a(closedPoint A)=z and Spec.map(A.val) ≫ a = fromSpecStalk (genericPoint Z), which keeps the identity on L. Edge cases (empty, Spec k vacuous, DVR, A² at (x,y) and at (x), non-affine, universe u) are correct. lean.statement matches the signature exactly; only the item's lean record changed against side-live; no duplicate declaration; the proof import's helper lemma exists live with a matching conclusion; docstrings carry source, blueprint id and the 5 proof steps; sorry only; no hollow definitions. No findings."
+ }
+}

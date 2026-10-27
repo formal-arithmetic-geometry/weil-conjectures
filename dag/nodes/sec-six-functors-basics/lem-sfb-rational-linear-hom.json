@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-rational-linear-hom",
+ "kind": "statement",
+ "title": "Rational conjugation representation on linear Hom",
+ "statement": "Let $k$ be a field [def-weil-field] and $G$ an affine group scheme over $k$ [def-sc-group-scheme]. Put $C=k[G]$, so $G=\\operatorname{Spec}C$ [def-weil-affine-spectrum], with comultiplication $\\Delta$ and counit $\\epsilon$ induced by the group laws. A rational $G$-module means a $k$-vector space $M$ and a $k$-linear coaction $\\rho_M:M\\to M\\otimes_k C$ [def-weil-pbc-module-tensor-product] such that $(\\rho_M\\otimes1)\\rho_M=(1\\otimes\\Delta)\\rho_M$ and $(1\\otimes\\epsilon)\\rho_M=1_M$. For any two finite-dimensional rational $G$-modules $V,W$, the vector space $H=\\operatorname{Hom}_k(V,W)$ has a rational $G$-module structure whose action, after every commutative $k$-algebra extension $A$, is\n$$(g\\cdot f)(v)=g\\cdot f(g^{-1}\\cdot v)\\qquad(g\\in G(A),\\ f\\in H\\otimes_k A=\\operatorname{Hom}_A(V\\otimes_k A,W\\otimes_k A),\\ v\\in V\\otimes_k A).$$\nFor $f\\in H$, its coaction satisfies $\\rho_H(f)=f\\otimes1$ if and only if $f$ is equivariant, meaning $\\rho_W f=(f\\otimes1)\\rho_V$, equivalently $f_A(gv)=g f_A(v)$ for every $A,g,v$ as above. No assumption of smoothness, reducedness, characteristic zero, or algebraic closedness is imposed. Scalar extensions and their induced maps have the meaning in [def-weil-module-base-change].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4, section a, Remark 4.1, printed pp.83-84 (representations and coactions); Lemma 22.40 (b) to (a), printed p.477 (natural G-module Hom and fixed maps)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-weil-affine-spectrum",
+  "def-sfb-hopf-action-module-data",
+  "def-sfb-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $V_A=V\\otimes_k A$ and $W_A=W\\otimes_k A$. The map $j_A:H\\otimes_k A\\to\\operatorname{Hom}_A(V_A,W_A)$ sends $f\\otimes a$ to $(v\\otimes b\\mapsto f(v)\\otimes ab)$. Here is its inverse explicitly. Choose finite bases $(e_i)$ of $V$ and $(w_j)$ of $W$, and let $E_{ji}(e_l)=\\delta_{il}w_j$. The scalar-extended bases have coordinate maps $e_i^*\\otimes1$, $w_j^*\\otimes1$; their expansion identities follow by extending $v=\\sum_i e_i e_i^*(v)$ and $w=\\sum_j w_j w_j^*(w)$ to pure tensors. If $F(e_i\\otimes1)=\\sum_j w_j\\otimes a_{ji}$, send $F$ to $\\sum_{j,i}E_{ji}\\otimes a_{ji}$. The two composites are identities on these bases and on pure tensors. Thus $j_A$ is an isomorphism for every commutative $k$-algebra $A$. Both its definition and matrix description commute with maps $A\\to B$. All sums are finite, including the empty sums when either space is zero.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84: finite-basis description; explicit elementary Hom base-change calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-coaction-linearization] with $E=k$, with its trivial coaction $a\\mapsto a\\otimes1$, and $M=V,W$. Both structure maps $E\\to L=C$ are the same. The given coactions therefore determine $C$-linear isomorphisms $D_M:M_C\\to M_C$, with $D_M(m\\otimes c)=\\rho_M(m)c$. Their pullbacks to the identity are identities. On $G\\times_k G$, write $D_{M,1}$ and $D_{M,2}$ for pullbacks along the first and second projections, and $D_{M,12}$ for pullback along multiplication. The cocycle supplied by the cited statement is $D_{M,12}=D_{M,1}D_{M,2}$. Its inverse formula supplies genuine inverses, without reducedness or testing on field-valued points.",
+   "uses": [
+    "lem-sfb-hopf-coaction-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, definition-equivariant-module, identity and cocycle; affine coaction-linearization correspondence specialized to the point"
+   }
+  },
+  {
+   "text": "Use $j_C$ to define a $C$-linear isomorphism $D_H$ on $H_C$ by $j_C(D_H(F))=D_Wj_C(F)D_V^{-1}$. Its inverse is $T\\mapsto D_W^{-1}TD_V$ under $j_C$. Its identity pullback is the identity. Naturality of $j_A$ from step 1 identifies all its pullbacks with the same conjugation formula. On $G\\times_kG$ the two cocycles from step 2 give, for every matrix $T$ over $C\\otimes_k C$, $$D_{H,1}D_{H,2}(T)=D_{W,1}D_{W,2}T D_{V,2}^{-1}D_{V,1}^{-1}=D_{W,12}T D_{V,12}^{-1}=D_{H,12}(T).$$ This is equality over the coordinate algebra, not merely at geometric points. Hence $D_H$ has the required identity and cocycle. Only associativity of composition and $(PQ)^{-1}=Q^{-1}P^{-1}$ were used; the latter is verified by multiplying on both sides.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40 (b) to (a), printed p.477: natural Hom action; identity and cocycle expanded explicitly"
+   }
+  },
+  {
+   "text": "Apply the reverse direction of [lem-sfb-hopf-coaction-linearization], again for $E=k$, now to $M=H$ and the isomorphism $D_H$ just constructed. It gives the coaction $\\rho_H(f)=D_H(f\\otimes1)$ and proves both its coassociativity and counit identities. For $g\\in G(A)$ let $D_M(g)$ denote pullback of $D_M$ along $g:\\operatorname{Spec}A\\to G$. Pulling the cocycle back to $(g,g^{-1})$ and $(g^{-1},g)$ gives $D_M(g)^{-1}=D_M(g^{-1})$. Pulling back the definition of $D_H$ therefore yields $g\\cdot F=D_W(g)FD_V(g^{-1})$, exactly $(g\\cdot F)(v)=g\\cdot F(g^{-1}\\cdot v)$. The cocycle and identity also give $D_M(gh)=D_M(g)D_M(h)$ and $D_M(1)=1$, so these are precisely the actions induced by the coactions.",
+   "uses": [
+    "lem-sfb-hopf-coaction-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, universal-element recovery of the coaction; Lemma 22.40, p.477, Hom action"
+   }
+  },
+  {
+   "text": "For $f\\in H$, put $f_C=f\\otimes_k C$. By construction $\\rho_H(f)=f\\otimes1$ is equivalent, under $j_C$, to $D_W f_C D_V^{-1}=f_C$, hence to $D_W f_C=f_C D_V$. The morphism clause of [lem-sfb-hopf-coaction-linearization] identifies the last equality with $\\rho_W f=(f\\otimes1)\\rho_V$. Alternatively, restrict it to $v\\otimes1$ to get that equation directly, and extend $C$-linearly for its converse. Pullback gives $D_W(g)f_A=f_AD_V(g)$ for every $A,g$, which is the asserted equivariance. Conversely, assume this equality for every $A,g$. Take $A=C$ and the universal point $g=\\operatorname{id}_G\\in G(C)$ (the morphism $\\operatorname{Spec}C=G\\to G$). The equality becomes $D_Wf_C=f_CD_V$, proving the reverse implication even for a nonreduced group scheme.",
+   "uses": [
+    "lem-sfb-hopf-coaction-linearization",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, universal element; Lemma 22.40 (b) to (a), printed p.477, fixed maps are G-homomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "lem-sfb-hopf-coaction-linearization",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Expansion of Remark 4.1 (printed pp.83-84) and the natural Hom action in Lemma 22.40 (printed p.477), using the existing affine coaction-linearization theorem (Stacks 03LF) to supply rationality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Comodule|rational.*representation|conjug",
+   "results": "{\"t\": \"2026-10-23T14:58:11Z\", \"tool\": \"grep\", \"query\": \"Comodule|rational.*representation|conjug\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"7e2b86ace38b1e70\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.linHom (Mathlib/RepresentationTheory/Basic.lean:663-675) and linHom.invariantsEquivRepHom concern abstract groups. Read their source; neither supplies rationality or a coaction for an affine group scheme. FGModuleCat internal Hom has no group coaction. The second Hopf-comodule phrasing returned coalgebra and vector-space constructions, not this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For rational representations V W of an affine algebraic group the linear maps Hom(V,W) form a rational representation with action g f = g composed f composed inverse g",
+   "results": "{\"t\": \"2026-10-23T14:58:11Z\", \"tool\": \"leansearch\", \"query\": \"For rational representations V W of an affine algebraic group the linear maps Hom(V,W) form a rational representation with action g f = g composed f composed inverse g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.linHom\", \"Rep.ihom_obj_ρ_apply\", \"Rep.ihom_obj_ρ\", \"Rep.ihom\", \"Representation.linHom_apply\", \"Rep.ihom_obj_ρ_def\", \"Rep.ihom_map_hom\", \"Representation.dual\"], \"digest\": \"58881f998a15e261\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.linHom (Mathlib/RepresentationTheory/Basic.lean:663-675) and linHom.invariantsEquivRepHom concern abstract groups. Read their source; neither supplies rationality or a coaction for an affine group scheme. FGModuleCat internal Hom has no group coaction. The second Hopf-comodule phrasing returned coalgebra and vector-space constructions, not this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"dual\"",
+   "results": "{\"t\": \"2026-10-23T14:58:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comodule\\\", \\\"dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.linHom (Mathlib/RepresentationTheory/Basic.lean:663-675) and linHom.invariantsEquivRepHom concern abstract groups. Read their source; neither supplies rationality or a coaction for an affine group scheme. FGModuleCat internal Hom has no group coaction. The second Hopf-comodule phrasing returned coalgebra and vector-space constructions, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional rational representations of an affine group scheme have a rational conjugation representation on linear Hom, whose fixed vectors are equivariant maps",
+   "results": "{\"t\": \"2026-10-23T14:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional rational representations of an affine group scheme have a rational conjugation representation on linear Hom, whose fixed vectors are equivariant maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.linHom.invariantsEquivFDRepHom\", \"FDRep.instFiniteDimensionalHom\", \"Representation.linHom.invariantsEquivRepHom\", \"Representation.linHom.invariantsEquivRepHom_apply_hom\", \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"TannakaDuality.FiniteGroup.sumSMulInv\", \"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\"], \"digest\": \"78869826f46f8d2c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.linHom (Mathlib/RepresentationTheory/Basic.lean:663-675) and linHom.invariantsEquivRepHom concern abstract groups. Read their source; neither supplies rationality or a coaction for an affine group scheme. FGModuleCat internal Hom has no group coaction. The second Hopf-comodule phrasing returned coalgebra and vector-space constructions, not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule",
+   "results": "{\"t\": \"2026-10-23T15:00:12Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.linHom (Mathlib/RepresentationTheory/Basic.lean:663-675) and linHom.invariantsEquivRepHom concern abstract groups. Read their source; neither supplies rationality or a coaction for an affine group scheme. FGModuleCat internal Hom has no group coaction. The second Hopf-comodule phrasing returned coalgebra and vector-space constructions, not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of finite dimensional comodules over a commutative Hopf algebra is a comodule via the antipode",
+   "results": "{\"t\": \"2026-10-23T15:00:18Z\", \"tool\": \"leanfinder\", \"query\": \"Internal Hom of finite dimensional comodules over a commutative Hopf algebra is a comodule via the antipode\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.ihom_obj\", \"FGModuleCat.rightRigidCategory\", \"CoalgCat.instComonObjModuleCatOfCarrier\", \"Rep.ihom_coev_app_hom\", \"Finsupp.comul_comp_lapply\", \"FGModuleCat.instIsMonoidalClosedModuleCatIsFG\", \"CoalgCat.instMonoidalCategoryAux\", \"CoalgCat.toComonObj\"], \"digest\": \"26cee462aa2237de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Representation.linHom (Mathlib/RepresentationTheory/Basic.lean:663-675) and linHom.invariantsEquivRepHom concern abstract groups. Read their source; neither supplies rationality or a coaction for an affine group scheme. FGModuleCat internal Hom has no group coaction. The second Hopf-comodule phrasing returned coalgebra and vector-space constructions, not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|linHom.invariantsEquiv|def linHom",
+   "results": "{\"t\": \"2026-10-23T20:44:25Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|linHom.invariantsEquiv|def linHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Basic.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\"], \"digest\": \"93f58bd14e9bb231\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: checked Representation.linHom (RepresentationTheory/Basic.lean:663-675) and linHom.mem_invariants_iff_comm / invariantsEquivRepHom (RepresentationTheory/Invariants.lean:190-212); these treat a fixed abstract group, not a rational affine-group-scheme coaction. The second phrasing returned FGModuleCat.ihom_obj and rigidity, which do not supply a coaction. Hopf antipode identities alone do not state this Hom construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional rational representations of an affine group scheme have a rational conjugation representation on Hom whose invariants are equivariant linear maps",
+   "results": "{\"t\": \"2026-10-23T20:44:25Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional rational representations of an affine group scheme have a rational conjugation representation on Hom whose invariants are equivariant linear maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ihom_obj_ρ_apply\", \"Rep.ihom\", \"Representation.linHom.mem_invariants_iff_comm\", \"FDRep.dualTensorIsoLinHom\", \"Rep.ihom_obj_ρ\", \"Representation.linHom\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Representation.linHom.invariantsEquivFDRepHom\"], \"digest\": \"424b0678db89d9dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: checked Representation.linHom (RepresentationTheory/Basic.lean:663-675) and linHom.mem_invariants_iff_comm / invariantsEquivRepHom (RepresentationTheory/Invariants.lean:190-212); these treat a fixed abstract group, not a rational affine-group-scheme coaction. The second phrasing returned FGModuleCat.ihom_obj and rigidity, which do not supply a coaction. Hopf antipode identities alone do not state this Hom construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T20:44:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comodule\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: checked Representation.linHom (RepresentationTheory/Basic.lean:663-675) and linHom.mem_invariants_iff_comm / invariantsEquivRepHom (RepresentationTheory/Invariants.lean:190-212); these treat a fixed abstract group, not a rational affine-group-scheme coaction. The second phrasing returned FGModuleCat.ihom_obj and rigidity, which do not supply a coaction. Hopf antipode identities alone do not state this Hom construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative Hopf algebra the linear Hom between finite dimensional comodules has a coaction by conjugation and its invariant elements are comodule morphisms",
+   "results": "{\"t\": \"2026-10-23T20:44:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative Hopf algebra the linear Hom between finite dimensional comodules has a coaction by conjugation and its invariant elements are comodule morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"HopfAlgCat.whiskerLeft_def\", \"HopfAlgCat.of_comul\", \"HopfAlgebra.mul_antipode_lTensor_comul_apply\", \"HopfAlgebra.mul_antipode_rTensor_comul_apply\", \"HopfAlgebra.mul_antipode_lTensor_comul\", \"LinearMap.convCommRing\", \"HopfAlgebra.mul_antipode_rTensor_comul\"], \"digest\": \"450a292b0bc254d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: checked Representation.linHom (RepresentationTheory/Basic.lean:663-675) and linHom.mem_invariants_iff_comm / invariantsEquivRepHom (RepresentationTheory/Invariants.lean:190-212); these treat a fixed abstract group, not a rational affine-group-scheme coaction. The second phrasing returned FGModuleCat.ihom_obj and rigidity, which do not supply a coaction. Hopf antipode identities alone do not state this Hom construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom of finite locally free comodules over a Hopf algebra carries the contragredient tensor coaction",
+   "results": "{\"t\": \"2026-10-23T20:44:53Z\", \"tool\": \"leanfinder\", \"query\": \"The internal Hom of finite locally free comodules over a Hopf algebra carries the contragredient tensor coaction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ihom_coev_app_hom\", \"FGModuleCat.ihom_obj\", \"FGModuleCat.rightRigidCategory\", \"Finsupp.comul_comp_lapply\", \"FGModuleCat.FGModuleCatCoevaluation\", \"ModuleCat.ihom_coev_app\", \"Rep.MonoidalClosed.linearHomEquivComm\", \"Rep.MonoidalClosed.linearHomEquiv\"], \"digest\": \"c5c042b7a807ad4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: checked Representation.linHom (RepresentationTheory/Basic.lean:663-675) and linHom.mem_invariants_iff_comm / invariantsEquivRepHom (RepresentationTheory/Invariants.lean:190-212); these treat a fixed abstract group, not a rational affine-group-scheme coaction. The second phrasing returned FGModuleCat.ihom_obj and rigidity, which do not supply a coaction. Hopf antipode identities alone do not state this Hom construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-hyperplane-splitting-criterion",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Complete-reducibility criterion from splitting simple hyperplanes. Supporting construction in Milne Lemma 22.40 (b) to (a): the natural rational G-module structure on linear Hom, with fixed maps exactly the equivariant ones.",
+   "via": [
+    "lem-sfb-simple-hyperplane-splitting-criterion",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-linear-hom",
+  "worker": "stage1",
+  "summary": "Constructed the conjugation linearization using the existing unrestricted affine coaction-linearization theorem, then recovered the coaction. Wrote out finite-basis Hom base change, inverse/cocycle checks, and universal-point detection of equivariance. Retained all hypotheses and clauses; no new nodes are needed. The finite-type representation/comodule dictionary is deliberately not used for an arbitrary affine group scheme.",
+  "blueprint": "The inherited ancestry has from.node=null; its recorded place is det-thm-sf-ctf-stability-direct-images proof (3), the ILO X Lemma 2.2 alteration chain, ending in the rational Hom prerequisite of Milne Lemma 22.40. Steps 1-5 realize exactly that supporting Hom construction. Full-blueprint searches for coaction, linear Hom, conjugation and linearization found no blueprint statement equal to this item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-5b9651b09",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-5b9651b09 (reviewer sub-agent of L); spot-checked: Pass after a full read of the item and every cited statement; no fixes written. Shape: one commit with the item and the report only, no new nodes. Live and side-live are both unsplit with no repair note, so nothing supersedes the delivery. Statement: the base text is kept word for word with three additions (G=Spec C via def-weil-affine-spectrum, the tensor-product citation, a sentence citing def-weil-module-base-change). Nothing was weakened; the statement still covers an arbitrary affine group scheme. Source checks in the Milne PDF: Remark 4.1 (printed pp.83-84) gives the universal-element correspondence between representations and comodules; Lemma 22.40 (b)=>(a) (p.477) gives the Hom action (gf)(v)=g f(g^-1 v) and that fixed maps are G-homomorphisms. Its X(G)=0 hypothesis is used only for the fixed line. Step 1: the Hom base-change map j_A is inverted by finite-basis matrices, natural in A; this is elementary and correct. Step 2: lem-sfb-hopf-coaction-linearization (same unit, reviewed pass by Q45, no finite-type hypothesis) with E=k, rho_E(a)=a⊗1, L=C. The pullback maps of def-sfb-hopf-action-module-data become c->c⊗1, c->1⊗c and Delta, so its cocycle reads D_1 D_2 = D_12. I recomputed this on m⊗1 against coassociativity and it holds. Step 3: I recomputed the conjugation cocycle D_W,12 T D_V,12^-1, with the inverses in the correct order. Step 4: the reverse direction of the bijection gives the coaction on H; pulling back along (g,g^-1) gives D(g)^-1 = D(g^-1), so the formula matches the item and the Remark 4.1 action. Step 5: the node's morphism clause plus the universal point id in G(C) gives both directions without reducedness. It is marked elementary while citing that clause, which is borderline; I accepted it because the step also writes out the direct check. Edge cases: V=0 or W=0, the trivial group, G_m weights a and b (D_H = t^(b-a)), and the non-reduced mu_p and alpha_p. Duplicate search with rg -L: no node states the item. The finite-type-only comodule dictionary is correctly avoided. There is no off-unit citation, so no tool_uses entry to accept, and no SGA is cited. Mathlib searches are recorded in all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.RationalLinearHom",
+  "declaration": "HopfAction.rationalLinearHom",
+  "declarations": [
+   "HopfAction.coactionPointAction",
+   "HopfAction.rationalLinearHom"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/RationalLinearHom.lean",
+  "statement": "theorem rationalLinearHom (k : Type u) [Field k] (G : Scheme.{u}) [G.Over (Spec (.of k))] [GrpObj (G.asOver (Spec (.of k)))] [IsAffine G] (V : Type v) [AddCommGroup V] [Module k V] [FiniteDimensional k V] (W : Type w) [AddCommGroup W] [Module k W] [FiniteDimensional k W] (ρV : V →ₗ[k] V ⊗[k] Γ(G, ⊤)) (ρW : W →ₗ[k] W ⊗[k] Γ(G, ⊤)) (hVcoassoc : Coassociative k Γ(G, ⊤) V ρV) (hVcounit : Counital k Γ(G, ⊤) V ρV) (hWcoassoc : Coassociative k Γ(G, ⊤) W ρW) (hWcounit : Counital k Γ(G, ⊤) W ρW) : ∃ ρH : (V →ₗ[k] W) →ₗ[k] (V →ₗ[k] W) ⊗[k] Γ(G, ⊤), Coassociative k Γ(G, ⊤) (V →ₗ[k] W) ρH ∧ Counital k Γ(G, ⊤) (V →ₗ[k] W) ρH ∧ (∀ (A : Type (max u t)) [CommRing A] [Algebra k A], ∃ j : A ⊗[k] (V →ₗ[k] W) ≃ₗ[A] (A ⊗[k] V →ₗ[A] A ⊗[k] W), (∀ (a : A) (f : V →ₗ[k] W), j (a ⊗ₜ[k] f) = a • f.baseChange A) ∧ ∀ (g : Γ(G, ⊤) →ₐ[k] A) (F : A ⊗[k] (V →ₗ[k] W)) (x : A ⊗[k] V), j (coactionPointAction k Γ(G, ⊤) (V →ₗ[k] W) A ρH g F) x = coactionPointAction k Γ(G, ⊤) W A ρW g (j F (coactionPointAction k Γ(G, ⊤) V A ρV (g.comp (HopfAlgebra.antipodeAlgHom k Γ(G, ⊤))) x))) ∧ (∀ f : V →ₗ[k] W, (ρH f = f ⊗ₜ[k] (1 : Γ(G, ⊤)) ↔ ρW ∘ₗ f = f.rTensor Γ(G, ⊤) ∘ₗ ρV) ∧ (ρW ∘ₗ f = f.rTensor Γ(G, ⊤) ∘ₗ ρV ↔ ∀ (A : Type (max u t)) [CommRing A] [Algebra k A] (g : Γ(G, ⊤) →ₐ[k] A) (x : A ⊗[k] V), f.baseChange A (coactionPointAction k Γ(G, ⊤) V A ρV g x) = coactionPointAction k Γ(G, ⊤) W A ρW g (f.baseChange A x)))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coaction is existential with its counit and coassociativity identities. The scalar-extension identification is an A-linear equivalence normalized on every pure tensor, and the point action is a real tensor-universal-property construction. Coordinate-algebra points and the canonical antipode encode all algebra-valued group points and inversion. The added landed statement dependencies provide the existing coaction predicates and canonical coordinate Hopf instance; no finite-type comodule dictionary is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3e850817",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of returned head 8d802f23ce0a. The H2 repair is exactly as requested: in stmt_deps, lem-sfb-hopf-coaction-linearization is replaced by def-sfb-coordinate-hopf-algebra (definition node, existing:true, owner of the HopfAction.coordinateHopfAlgebra instance, whose body is inferInstance of Mathlib's coordinate Hopf structure); the theorem stays in proof_deps. The Lean file is byte-identical to the previously reviewed head; only the node's stmt_deps and the report changed, and there are no new nodes or dependency modules. Independent re-check: the hypotheses (field, affine GrpObj, finite-dimensional V and W in free universes, Coassociative/Counital coactions) match the node. One ρH comes before ∀A. j is pinned on a⊗f by baseChange. The conjugation j(g·F)(x)=g·jF(g∘S·x) has the right order: coactionPointAction composes as a left action through the convolution gh, consistent with the G_m weight b−a. ρH is pinned by the universal point. Both fixed-vector iff clauses are correct, including nonreduced G. Edge cases V=0, W=0, A=0, trivial G, μ_p, α_p hold. H5: coactionPointAction is real data. H6: sorry only. H8: docstrings present. No finite-type, char or reducedness assumption; no duplicate; no live write. No compile run because no file was changed; the worker's compile of the identical file was clean. The side-live item still has no Lean record, so there is no landing conflict."
+ }
+}

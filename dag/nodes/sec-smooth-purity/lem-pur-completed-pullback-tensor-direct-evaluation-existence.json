@@ -1,0 +1,150 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-direct-evaluation-existence",
+ "kind": "statement",
+ "title": "Existence and sectionwise uniqueness of completed pullback tensor evaluation",
+ "statement": "For a scheme morphism f : X ⟶ Y, level n, and sequence coefficient map ρ equal to the canonical constant-section map integralComparisonSequenceRingMap [def-trf-integral-comparison-sequence-systems], direct image along ρ followed by level-n evaluation [def-coef-ringed-sequence-site] is naturally isomorphic to level-n evaluation followed by canonical coefficient direct image. The comparison acts as the identity on every section. For any ρ, any two comparisons satisfying this sectionwise identity are equal.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D1 and 0941, sectionwise direct image and evaluation comparison"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the canonical sequence coefficient map for ρ. Write a and b for the ring identifications of level-n evaluation on Y and X. The two site functor composites are definitionally equal. The composite ring maps agree: the components of a and b are identity ring homomorphisms, and the component of integralComparisonSequenceRingMap at (n,U) is definitionally coefficientProEtaleDirectRingMap at U. Apply Mathlib SheafOfModules.pushforwardComp to both composites and connect them by pushforwardCongr for this equality. Each of these comparisons acts as the identity on sections, so their composite does too. The private sectionwiseIdentity_trans lemma combines the three heterogeneous identity formulas using transitivity; the component identities are the existing Mathlib pushforward comparison lemmas. The common composite site functor and source ring are supplied explicitly to pushforwardCongr to fix the intended factorization.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness with arbitrary ρ, apply Iso.ext, NatTrans.ext, SheafOfModules.hom_ext and sectionwise extensionality. Transitivity of the two heterogeneous identity formulas gives equality of the underlying section maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "M3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D1 and 03D6: pushforward is restriction of scalars along the specified ring map; Mathlib pushforwardComp and pushforwardCongr"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism direct image evaluation sheaf sections identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward coefficientSequenceEvaluation Iso"
+  },
+  {
+   "tool": "grep",
+   "query": "direct image evaluation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tensor-comparison",
+   "place": "Proof step for sequence direct image/evaluation comparison."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "split_report": "Split from the proof of pullbackTensorSequenceDirectEvaluation_existsUnique: existence and sectionwise-identity uniqueness are isolated as strictly smaller statements.",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTensorDirectEvaluationExistence",
+  "declaration": "WeilConjectures.completedPullbackTensorDirectEvaluation_exists",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensorDirectEvaluationBase",
+   "WeilConjectures.completedPullbackTensorDirectEvaluation_exists",
+   "WeilConjectures.completedPullbackTensorDirectEvaluation_unique"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorDirectEvaluationExistence.lean",
+  "statement": "theorem completedPullbackTensorDirectEvaluation_exists\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (ρ : coefficientSequenceCommRingSheaf l E Y ⟶\n      ((integralComparisonSequenceBaseChange f).sheafPushforwardContinuous\n        CommRingCat.{u + 1} (coefficientSequenceTopology (ProEt.topology Y))\n        (coefficientSequenceTopology (ProEt.topology X))).obj\n        (coefficientSequenceCommRingSheaf l E X)) (n : ℕ)\n    (hρ : ρ = integralComparisonSequenceRingMap l E f) :\n    ∃ e : completedPullbackTensorDirectEvaluationBase l E f ρ ⋙\n        coefficientSequenceEvaluation l E Y n ≅\n      coefficientSequenceEvaluation l E X n ⋙\n        coefficientProEtaleModuleDirectImage.{u, u} f\n          (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1)))),\n      ∀ (M : coefficientSequenceModules l E X) (U : Y.ProEt)\n        (x : ((coefficientSequenceEvaluation l E Y n).obj\n          ((completedPullbackTensorDirectEvaluationBase l E f ρ).obj M)).val.obj (op U)),\n        HEq ((e.hom.app M).val.app (op U) x) x",
+  "branch": "newtargets-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T001614-L-12862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ea5db",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T082444-L-2179113",
+  "kind": "interface",
+  "note": "independent cc review: the new completedPullbackTensorDirectEvaluation_exists (adds hρ = integralComparisonSequenceRingMap) against node lem-pur-completed-pullback-tensor-direct-evaluation-existence, its change record and the one-line forced adaptation in CompletedPullbackTensorComparison (passes pullbackTensorSequenceRing_eq); counterexample to the old arbitrary-ρ statement checked; item and importer compiled together, axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "M3 stage 3",
+  "old_statement": "For a scheme morphism f : X ⟶ Y and level n, the direct image on coefficient sequences followed by level-n evaluation is naturally isomorphic to level-n evaluation followed by coefficient direct image. The comparison acts as the identity on every section; any two such comparisons with this sectionwise identity are equal.",
+  "what": "The former Lean existence statement allowed an arbitrary coefficient map ρ. The identity between the two underlying abelian section objects need not be linear for a twisted ρ. For f = id and an unramified quadratic coefficient extension, residue Frobenius gives such a twist on the regular module. Require equality with the canonical constant-section map, as already intended by the node and used by its sole consumer. Uniqueness remains valid for arbitrary ρ.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 03D1 and 03D6, lemma-pushforward-module and definition-pushforward: the scalar action is restricted along the specified structure morphism."
+  },
+  "citers": [
+   {
+    "id": "def-pur-completed-pullback-tensor-comparison",
+    "holds": true,
+    "note": "The consumer uses pullbackTensorSequenceRing, already proved equal to integralComparisonSequenceRingMap by pullbackTensorSequenceRing_eq. Pass that existing equality; the consumer statement and all definitions stay unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Construct the comparison on the underlying sheaves by the identity on sections. The restriction-of-scalars coefficient action does not change the underlying section map, so the identity is natural and satisfies the displayed section formula. Sheaf and module extensionality show that a comparison with this formula is unique.",
+    "uses": [
+     "def-trf-integral-comparison-sequence-systems"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-trf-integral-comparison-sequence-systems"
+  ]
+ }
+}

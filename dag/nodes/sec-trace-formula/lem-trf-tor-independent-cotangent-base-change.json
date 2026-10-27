@@ -23,94 +23,45 @@
  "status": "split",
  "proof": [
   {
-   "text": "Write $C=s(P_\\bullet)$ and $q:C\\to B[0]$ for the given augmentation. By [lem-trf-cotangent-resolution-coherence], $C^{-n}=P_n$, the differential is the alternating sum of faces, positive terms are zero, and $q$ is a quasi-isomorphism. Choose polynomial coordinates $P_n=A[X_i:i\\in I_n]$. The definition [def-weil-pbc-mv-polynomial-ring] gives unique finite coefficient expansions $\\sum_\\alpha a_\\alpha X^\\alpha$. The tensor universal property [def-weil-pbc-module-tensor-product] gives inverse maps $P_n\\otimes_A M\\leftrightarrows\\bigoplus_\\alpha M$: $p\\otimes m\\mapsto(a_\\alpha m)_\\alpha$ and $(m_\\alpha)_\\alpha\\mapsto\\sum_\\alpha X^\\alpha\\otimes m_\\alpha$. Their composites are identities by coefficient expansion and balancing. These maps commute with maps of $M$. Thus tensoring with $P_n$ preserves exact sequences coordinatewise: a family in the kernel has a preimage chosen in only its finitely many nonzero coordinates. Hence every term of $C$ is flat, for arbitrary sets $I_n$.",
+   "text": "Put $C=s(P_\\bullet)$ and let $q:C\\to B[0]$ be the augmentation. The hypothesis and [lem-trf-cotangent-resolution-coherence] give that $q$ is a quasi-isomorphism and $C$ is zero in positive degrees. Choose the polynomial coordinates supplied by the polynomial-term hypothesis and apply [lem-trf-polynomial-simplicial-tensor-model]: every term of $C$ is flat, the base-changed simplicial algebra has polynomial terms and surjective augmentations, and there is an isomorphism $\\phi:Q_{A'}(C\\otimes_A A')\\simeq Q_{A'}s(P'_\\bullet)$ carrying the actual tensor augmentation to the given augmentation $q'$ of $P'_\\bullet$.",
    "uses": [
     "lem-trf-cotangent-resolution-coherence",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-module-tensor-product"
+    "lem-trf-polynomial-simplicial-tensor-model"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
     "place": "Tag 08QP (lemma-flat-base-change), the free-module resolution s(P); Tag 08QI (remark-resolution), associated-complex convention."
    }
   },
   {
-   "text": "The complex $C$ is bounded above by degree zero and termwise flat. The ordinary-module theorem [lem-pc-module-bounded-flat-kflat] therefore makes $C$ K-flat. Since $q:C\\to B[0]$ is a quasi-isomorphism, it is a K-flat resolution in the sense of [def-pc-module-kflat-complex].",
+   "text": "By Step 1, $C$ is bounded above by zero with flat terms and $q:C\\to B[0]$ is a quasi-isomorphism. Apply [lem-trf-flat-resolution-canonical-tensor-comparison] with $N=B$, bound $b=0$, and the transported universal derived pair occurring in the statement. It supplies an isomorphism $j_q:Q_{A'}(C\\otimes_A A')\\simeq B\\otimes_A^{\\mathbf L}A'$ with $\\gamma_{B[0]}\\circ j_q=Q_{A'}(q\\otimes1)$. The hypothesis makes $\\gamma_{B[0]}$ invertible, so $Q_{A'}(q\\otimes1)$ is invertible.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "def-pc-module-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QP, computation using the free resolution; more-algebra.tex Tag 064K (lemma-derived-tor-quasi-isomorphism), bounded-above flat criterion."
-   }
-  },
-  {
-   "text": "Set $P'_\\bullet=P_\\bullet\\otimes_A A'$ and $\\epsilon'_n=\\epsilon_n\\otimes1$. The base change of the multiplication supplied by [def-weil-module-base-change] is $(p\\otimes a')(r\\otimes b')=pr\\otimes a'b'$. Hence tensoring algebra maps gives algebra maps, and its identity and composition formulas preserve all simplicial and augmentation identities. The switch $p\\otimes a'\\mapsto a'\\otimes p$ is well-defined by balancing, is its own inverse, and preserves this multiplication. Composing it with [lem-weil-pbc-polynomial-scalar-extension] yields an $A'$-algebra isomorphism $P'_n\\cong A'[X_i:i\\in I_n]$ sending $X^\\alpha\\otimes a'$ to $a'X^\\alpha$. Finally any $\\sum_j b_j\\otimes a'_j\\in B'$ lifts to $\\sum_j p_j\\otimes a'_j\\in P'_n$ by choosing $\\epsilon_n(p_j)=b_j$. Thus the tensor augmentation is degreewise surjective.",
-   "uses": [
-    "def-weil-module-base-change",
-    "def-weil-pbc-module-tensor-product",
-    "lem-weil-pbc-polynomial-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QP, base-changed polynomial algebras; Tag 08QI, polynomial and surjective conditions."
-   }
-  },
-  {
-   "text": "Degree $-n$ of both $C\\otimes_A A'$ and $s(P'_\\bullet)$ is $P_n\\otimes_A A'$. Additivity of scalar extension on maps [def-weil-module-base-change] identifies their differentials: both send $p\\otimes a'$ to $\\sum_i(-1)^i d_i(p)\\otimes a'$. Their augmentations both send $p\\otimes a'$ to $\\epsilon_0(p)\\otimes a'$ in degree zero and are zero in negative degrees. Thus the degreewise identities give a chain isomorphism preserving the actual augmentation $q\\otimes1$.",
-   "uses": [
-    "def-weil-module-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QP, identity s(P) tensor A-prime = s(P tensor A-prime), including its augmentation."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-one-point-derived-ring-identification] to the one-object site $\\mathcal T$. Its exact tensor evaluation equivalence carries $A,A'$, the complexes $C,B[0]$, the map $q$ and ordinary K-flatness to the corresponding sheaf data, and identifies their derived categories and ordinary scalar-extension functors. Consequently [lem-pur-derived-change-of-rings] supplies the universal total left derived scalar-extension pair $L:D(A)\\to D(A')$, $\\gamma:LQ_A\\to Q_{A'}T$, where $T(K)=K\\otimes_A A'$ termwise and $Q$ denotes localization. The natural-counit convention is that of [lem-pur-left-derived-from-kflat-class], transported by that equivalence. Here $L(B[0])=B\\otimes_A^{\\mathbf L}A'$ and $\\gamma_{B[0]}$ is precisely the canonical derived-to-ordinary comparison of the hypothesis.",
-   "uses": [
-    "lem-trf-one-point-derived-ring-identification",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QP, derived tensor interpreted in ordinary ring modules; sites-modules.tex Tag 03CW and sites-cohomology.tex Tag 06YY (lemma-derived-base-change); derived.tex Tag 05S9 (definition-right-derived-functor-defined)."
-   }
-  },
-  {
-   "text": "The ordinary-module counit theorem [lem-pc-kflat-scalar-extension-counit] makes $\\gamma_C$ invertible. Naturality of $\\gamma$ as explicitly supplied by [lem-pur-left-derived-from-kflat-class], applied to the homotopy image of $q$, gives\n$$\\gamma_{B[0]}\\circ L(Q_Aq)=Q_{A'}(q\\otimes1)\\circ\\gamma_C.$$\nSince $q$ is a quasi-isomorphism, $Q_Aq$ and its image under $L$ are isomorphisms [def-weil-abstract-derived-category]. Thus $j=L(Q_Aq)\\circ\\gamma_C^{-1}:Q_{A'}(C\\otimes_A A')\\xrightarrow{\\sim}L(B[0])$ is the resolution computation isomorphism, and the displayed equation says exactly $\\gamma_{B[0]}\\circ j=Q_{A'}(q\\otimes1)$. By the hypothesis and this equation every cohomology map of $q\\otimes1$ is an isomorphism. Step 4 gives this quasi-isomorphism for the specified augmentation of $s(P'_\\bullet)$. Together with Step 3, this is precisely the polynomial-resolution criterion of [lem-trf-cotangent-resolution-coherence].",
-   "uses": [
-    "lem-pc-kflat-scalar-extension-counit",
-    "lem-pur-left-derived-from-kflat-class",
-    "def-weil-abstract-derived-category",
-    "lem-trf-cotangent-resolution-coherence"
+    "lem-trf-flat-resolution-canonical-tensor-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
     "place": "Tag 08QP, final derived-to-ordinary comparison; naturality and computation in derived.tex Tags 05S9 and 06XN; ordinary module counit more-algebra.tex Tag 06Y6 (lemma-derived-base-change)."
    }
+  },
+  {
+   "text": "The first step gives $Q_{A'}(q')\\circ\\phi=Q_{A'}(q\\otimes1)$. Both $\\phi$ and the right side are isomorphisms, hence so is $Q_{A'}(q')$. By [def-weil-abstract-derived-category], each cohomology functor factors through localization. Applying it to the invertible $Q_{A'}(q')$ makes every $H^r(q')$ invertible; thus the specified $q'$ is a quasi-isomorphism. Its polynomial terms and degreewise surjective augmentation were established in the first step. These three conditions are exactly the polynomial-resolution criterion of [lem-trf-cotangent-resolution-coherence].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP, identity s(P) tensor A-prime = s(P tensor A-prime), including its augmentation."
+   }
   }
  ],
  "proof_deps": [
   "lem-trf-cotangent-resolution-coherence",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-module-tensor-product",
-  "lem-pc-module-bounded-flat-kflat",
-  "def-pc-module-kflat-complex",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-trf-one-point-derived-ring-identification",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pc-kflat-scalar-extension-counit",
+  "lem-trf-polynomial-simplicial-tensor-model",
+  "lem-trf-flat-resolution-canonical-tensor-comparison",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
@@ -243,29 +194,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-tor-independent-cotangent-base-change",
   "worker": "stage1",
-  "summary": "Repaired all return points: cite the existing multivariable polynomial definition for unique monomial expansions and the polynomial scalar-extension leaf for the algebra isomorphism; add one statement-only terminal-site evaluation/derived-pair identification; cite the existing natural universal derived counit and ordinary K-flat counit theorem, and write its naturality equation to identify the exact tensor augmentation. No mathematical statement change, no extra flatness or finiteness hypotheses.",
-  "blueprint": "Retains the Stacks 08QP resolution argument below the inherited local-term/lci-cotangent ancestry: Steps 1-2 provide the free K-flat resolution, Steps 3-4 the base-changed simplicial polynomial algebra and its actual augmentation, and Steps 5-6 the site identification and explicit canonical-comparison equation.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-module-bounded-flat-kflat",
-    "why": "Generic bounded-above flat-module K-flat criterion needed for the 08QP resolution computation; no local-term unit lemma replaces this homological algebra tool."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic sheaf K-flat scalar-extension construction, transported by the new terminal-site bridge to ordinary modules, exactly as in 08QP."
-   },
-   {
-    "node": "lem-pur-left-derived-from-kflat-class",
-    "why": "Generic universal derived-pair natural counit, used for its stated naturality and convention, not for any unstated representative formula."
-   },
-   {
-    "node": "lem-pc-kflat-scalar-extension-counit",
-    "why": "Generic ordinary-module invertibility of the derived counit on a K-flat complex; no flatness of the ring homomorphism is required."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 re-split return. Statement unchanged. Two independent statement-only nodes divide every part of the old six-step argument: Steps 1/3/4 become the augmented polynomial tensor model; Steps 2/5/6 become the general bounded-above flat-resolution counit comparison. The parent has three short assembly steps. The report preserves the full returned proof, records which node takes each argument, checks sources, hypotheses, exact citations and Mathlib searches, and explains non-duplication. Promotion-return repair: compared the retained split with the current read-only DAG and the saved original, re-read every cited current statement, and expanded the elementary cohomology argument in Step 3. The delivery tool rebases the split fields onto the current server DAG and retains its metadata. Current-base retry: re-read the revised resolution-coherence statement and the newly present 08QI nodes; made the choice of polynomial coordinates explicit in Step 1 and documented why none of the three newly flagged same-tag results states the tensor model. Promotion-return repair of 2026-10-23: compared the retained returned split with the current DAG; re-read all current citations, including the two newly flagged polynomial-resolution 08QI statements; documented their distinct hypotheses and conclusions and made the comparison theorem hypotheses explicit in Step 2. The statement, searches and exact citation quotes are retained.",
+  "blueprint": "Same inherited local-term/lci-cotangent ancestry and Stacks polynomial-resolution route. New model realizes the monomial-free terms and augmented base-change complex; new comparison realizes K-flat computation and the actual derived-to-ordinary map. The parent assembles them using the given Tor-independence, without changing any unit or chapter.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pc-module-bounded-flat-kflat",
@@ -274,12 +208,12 @@
   "lem-pc-kflat-scalar-extension-counit"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-N1-65e5db2d1",
-  "group": "N1",
+  "reviewer": "NT-cc-Q34-be1288001",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-65e5db2d1 (reviewer sub-agent of L); spot-checked: Read the item, new node, blueprint route, cited statements, and Stacks sources. All hypotheses and six proof steps check; edge cases, citations, graph, searches, and route-pivot constraints pass. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-be1288001 (reviewer sub-agent of L); spot-checked: PASS with no fixes; review.md is written. This is the 4th delivery of the same re-split (earlier: a5a2d274, d655dee3, a40b957e). Compared with all three, both new nodes are byte-identical. The item's only change from a40b is Step 2, which now opens with 'By Step 1, C is bounded above by zero with flat terms and q is a quasi-isomorphism'; this is correct and checks the hypotheses of the comparison node. The report adds two paragraphs on 08QI nodes that are new since a40b. I read both: lem-trf-polynomial-resolution-extension-trivial-kan adjoins variables over the same A and assumes the quasi-isomorphism, and lem-trf-polynomial-resolution-universal-evaluation is about derived colimits over trivial-Kan resolutions. Neither is a duplicate. The closest other node, lem-trf-bounded-above-acyclic-derived-computation, still needs flat modules to be ⊗A'-acyclic and lacks the one-point transport, so it is not a duplicate either. Re-split check: old Steps 1/3/4 go to the polynomial tensor model (monomial freeness and flatness, scalar extension with polynomial terms and surjective augmentations, T s(P) = s(P') with the augmentation). Old Steps 2/5/6 go to the flat-resolution comparison (bounded-flat implies K-flat, the transported universal pair, γ_C invertible, naturality equation γ_{N[0]} j_q = Q(q⊗1)). The two nodes are of comparable size and neither restates the item: the first assumes no quasi-isomorphism or Tor condition, and the second does not claim invertibility at N[0]. The parent is a 3-step assembly. Step 2 uses γ_{B[0]} of exactly the transported pair named in the item's statement. Step 3 uses H^r∘Q ≅ H^r from def-weil-abstract-derived-category. Small cases checked: empty variable sets, zero rings, and Z→F_p with C = [Z -p-> Z], where the comparison equation holds but γ is not invertible, as the node allows. The argument matches the proof of Stacks cotangent.tex 08QP. No SGA is cited. The four accepted tool_uses (bounded-flat-kflat, derived-change-of-rings, left-derived-from-kflat-class, kflat-scalar-extension-counit) were checked as inputs for the future proofs of the new nodes."
  },
  "lean": {
   "module": "Sheaf.RingTheory.TorIndependentCotangentBaseChange",
@@ -304,5 +238,16 @@
   "result": "pass",
   "note": "Read item, all 5 stmt_dep records/Lean (CotangentResolutionCoherence Augmentation/IsPolynomialResolution, OnePointDerivedRingIdentification scalarExtension universal pairs, DerivedChangeOfRingsCochainModel, LinearMap.baseChange), Stacks 08QP/08QI place, module and report. Node differs from live only in lean; statement verbatim; declarations match file. B'=CommRingCat pushout; hP reuses the dependency predicate; derived extension = any universal pair (L,ε,IsLeftDerivedFunctor) for extendScalars α, instantiated by Mathlib leftDerivedFunctor as in citer CotangentFlatBaseChange; hTor = counit at B[0] (target ordinary B⊗A'), not an arbitrary iso or flatness; conclusion IsPolynomialResolution of the actual levelwise-pushout augmentation (pushout.desc of P.augmentation). No extra hypotheses; wA/wS free; edge cases (zero rings, empty/infinite variables, non-flat α) covered. Helper defs real, only theorem sorry, 6-step proof docstring, source/blueprint docstrings. No duplicate construction found. nt_compile --json: 3.4 s, exit 0, clean. Advisory: unused proof-only imports; second reading is a self-check."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

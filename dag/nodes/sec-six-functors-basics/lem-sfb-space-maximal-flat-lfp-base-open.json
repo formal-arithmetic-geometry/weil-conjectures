@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-space-maximal-flat-lfp-base-open",
+ "kind": "statement",
+ "title": "The maximal flat locally finitely presented base open commutes with fppf morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $f:X\\to Y$ be any morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. For an open subspace $V\\subseteq Y$ [def-a1-space-open-subspace], write $f_V:X\\times_YV\\to V$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Flatness and local finite presentation of algebraic-space morphisms are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. There is a unique largest open subspace $W(f)\\subseteq Y$ such that $f_{W(f)}$ is flat and locally of finite presentation: $f_{W(f)}$ has these properties, and any open $V$ for which $f_V$ has them is contained in $W(f)$. If $g:Y'\\to Y$ is any flat locally finitely presented morphism of algebraic spaces, not necessarily surjective, then, for $f':X\\times_YY'\\to Y'$, one has $W(f')=Y'\\times_YW(f)$ as open subspaces of $Y'$. No finiteness, separation or reducedness hypothesis is imposed on $f,X,Y$ or $Y'$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06R2 (lemma-largest-open-of-the-base), with the property flat and locally of finite presentation and the fppf topology; target locality of these properties: Tags 041W (lemma-descending-property-flat) and 041T (lemma-descending-property-locally-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-presheaf-etale-chart-property"
+ ],
+ "proof": [
+  {
+   "text": "Write $P$ for the conjunction of flatness and local finite presentation. Let $\\mathcal G$ be the family of open subspaces $V\\subseteq Y$ for which $f_V$ has $P$. By the inclusion-preserving correspondence in [lem-a1-space-etale-open-image], open subspaces are indexed by the set of open subsets of $|Y|$; thus this is a set-indexed family in the chosen universe, rather than a family of all maps into $Y$. The union $O=\\bigcup_{V\\in\\mathcal G}|V|$ is open. The same correspondence gives the unique open subspace $W\\subseteq Y$ with point set $O$, and each $V\\in\\mathcal G$ is contained in $W$.",
+   "uses": [
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+   }
+  },
+  {
+   "text": "We show that $f_W$ has $P$. The opens $V\\subseteq W$, $V\\in\\mathcal G$, cover $W$. Their inverse images $X_V\\subseteq X_W$ cover $X_W$: on any scheme mapping to $X_W$ these are inverse image opens whose point sets cover, by [lem-a1-space-open-factor-scheme-tests]. An open inclusion is representable etale by the scheme tests of [lem-a1-space-open-chart-tests], hence flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The restriction of $f_W$ to $X_V$ is the composite $X_V\\xrightarrow{f_V}V\\hookrightarrow W$, so it has both properties by composition in that calculus. Its source-open-cover criterion now gives both properties for $f_W$. This also handles $W=\\varnothing$, when the source is empty and the criterion is vacuous.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-open-chart-tests",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+   }
+  },
+  {
+   "text": "Every good open $V$ occurs in $\\mathcal G$, so $V\\subseteq W$. Step 2 shows that $W$ is itself good. Thus $W=W(f)$ has the required largest-open property. If $W_1,W_2$ both have it, goodness of $W_1$ implies $W_1\\subseteq W_2$, and goodness of $W_2$ implies $W_2\\subseteq W_1$; antisymmetry of subfunctor inclusion gives uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+   }
+  },
+  {
+   "text": "Let $g:Y^{\\prime}\\to Y$ be flat and locally of finite presentation, and put $W^{\\prime}=W(f^{\\prime})$. The inverse image $H=Y^{\\prime}\\times_YW(f)$ is open by [lem-a1-space-open-factor-scheme-tests]. The restriction of $f^{\\prime}$ over $H$ is the base change of $f_{W(f)}$, so it has $P$ by arbitrary-base-change stability in [lem-sfb-stack-chartwise-smooth-etale-calculus]. Maximality gives $H\\subseteq W^{\\prime}$.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+   }
+  },
+  {
+   "text": "For the reverse inclusion, restrict $g$ to $h:W^{\\prime}\\to Y$. Its open source inclusion is etale by [lem-a1-space-open-chart-tests], so $h$ is flat and locally of finite presentation by the etale implications and composition in [lem-sfb-stack-chartwise-smooth-etale-calculus]. Consequently its point image $|I|=h(|W^{\\prime}|)$ is open by [lem-sfb-flat-lfp-space-universally-open], and [lem-a1-space-etale-open-image] supplies the corresponding open subspace $I\\subseteq Y$ (only its open-subspace correspondence is used). By [lem-a1-space-open-factor-scheme-tests], $h$ factors as $q:W^{\\prime}\\to I\\hookrightarrow Y$, and $W^{\\prime}\\times_YI\\simeq W^{\\prime}$. Thus $q$ is the base change of $h$ by $I\\hookrightarrow Y$ and has $P$ by the same calculus. By its defining image, $q$ is surjective on point classes. The fibre-product point-image formula of [lem-a1-space-point-open-calculus] also gives this surjectivity after any scheme base change.",
+   "uses": [
+    "lem-a1-space-open-chart-tests",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+   }
+  },
+  {
+   "text": "The base change of $f_I:X\\times_YI\\to I$ by the surjective flat locally finitely presented $q:W^{\\prime}\\to I$ is $(f^{\\prime})_{W^{\\prime}}$, since both fibre products parametrize a section of $X$ and a section of $W^{\\prime}$ with equal image in $Y$. It has $P$ by definition of $W^{\\prime}$. Apply [lem-sfb-representable-fppf-etale-open-descent], in its explicit algebraic-space case, separately to flatness and local finite presentation. It gives $P(f_I)$; hence $I\\subseteq W(f)$. Therefore $g(W^{\\prime})\\subseteq|W(f)|$. The open inverse-image and inclusion criteria of [lem-a1-space-open-factor-scheme-tests] and [lem-a1-space-point-open-calculus] give $W^{\\prime}\\subseteq H$. Together with Step 4 this proves the claimed equality of open subspaces. No surjectivity of $g$, or finiteness or separation of $f$, was used.",
+   "uses": [
+    "lem-sfb-representable-fppf-etale-open-descent",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06R2 (lemma-largest-open-of-the-base), proof, specialized to flat and locally of finite presentation; Tags 041W and 041T for target descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces there is a largest open subset of the base over which it is flat and locally of finite presentation and this open commutes with smooth base change",
+   "results": "{\"t\": \"2026-10-23T15:07:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of algebraic spaces there is a largest open subset of the base over which it is flat and locally of finite presentation and this open commutes with smooth base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\"], \"digest\": \"689e063782bf987e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness, open-immersion and IsLocalAtTarget declarations do not construct a largest good base open or its equality under fppf pullback for algebraic spaces. The Loogle hit instRepresentablyFlatOpensCarrierMap concerns categorical flatness of a functor of opens, not flat morphisms. Grep found no maximal flat base locus. Read scheme Flat.lean and FinitePresentation.lean as recorded for the companion generic-flatness node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent local properties define a maximal open of the target compatible with smooth pullback",
+   "results": "{\"t\": \"2026-10-23T15:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"Descent local properties define a maximal open of the target compatible with smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsLocalAtTarget.mk'\", \"AlgebraicGeometry.universally_isLocalAtTarget\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.mk'\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_forall_source_exists_preimage\"], \"digest\": \"a23cde1a9c7a9b3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness, open-immersion and IsLocalAtTarget declarations do not construct a largest good base open or its equality under fppf pullback for algebraic spaces. The Loogle hit instRepresentablyFlatOpensCarrierMap concerns categorical flatness of a functor of opens, not flat morphisms. Grep found no maximal flat base locus. Read scheme Flat.lean and FinitePresentation.lean as recorded for the companion generic-flatness node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Opens\"",
+   "results": "{\"t\": \"2026-10-23T15:07:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Opens\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"instRepresentablyFlatOpensCarrierMap\"], \"digest\": \"cd7fd0be416f29ab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness, open-immersion and IsLocalAtTarget declarations do not construct a largest good base open or its equality under fppf pullback for algebraic spaces. The Loogle hit instRepresentablyFlatOpensCarrierMap concerns categorical flatness of a functor of opens, not flat morphisms. Grep found no maximal flat base locus. Read scheme Flat.lean and FinitePresentation.lean as recorded for the companion generic-flatness node."
+  },
+  {
+   "tool": "grep",
+   "query": "largest.*flat|maximal.*flat|flat.*locus|locus.*flat",
+   "results": "{\"t\": \"2026-10-23T15:07:19Z\", \"tool\": \"grep\", \"query\": \"largest.*flat|maximal.*flat|flat.*locus|locus.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness, open-immersion and IsLocalAtTarget declarations do not construct a largest good base open or its equality under fppf pullback for algebraic spaces. The Loogle hit instRepresentablyFlatOpensCarrierMap concerns categorical flatness of a functor of opens, not flat morphisms. Grep found no maximal flat base locus. Read scheme Flat.lean and FinitePresentation.lean as recorded for the companion generic-flatness node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal base open for flatness and local finite presentation commutes with flat locally finitely presented base change",
+   "results": "{\"t\": \"2026-10-23T15:07:19Z\", \"tool\": \"leansearch\", \"query\": \"The maximal base open for flatness and local finite presentation commutes with flat locally finitely presented base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_of_isLocalized_maximal\", \"Algebra.FinitePresentation.baseChange\", \"RingHom.finitePresentation_isStableUnderBaseChange\"], \"digest\": \"d321fc1a049a4860\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness, open-immersion and IsLocalAtTarget declarations do not construct a largest good base open or its equality under fppf pullback for algebraic spaces. The Loogle hit instRepresentablyFlatOpensCarrierMap concerns categorical flatness of a functor of opens, not flat morphisms. Grep found no maximal flat base locus. Read scheme Flat.lean and FinitePresentation.lean as recorded for the companion generic-flatness node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces the largest open of the target over which it is flat and locally of finite presentation commutes with fppf base change",
+   "results": "{\"t\": \"2026-10-23T20:59:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of algebraic spaces the largest open of the target over which it is flat and locally of finite presentation commutes with fppf base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"a89f3a1129e8e030\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, their flatness/base-change/open-map properties and Zariski-local property constructors, not the maximal good base open of an arbitrary algebraic-space morphism and its fppf pullback equality. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:145-149, Flat.lean:78-86, FinitePresentation.lean:85-92, Sites/Fpqc.lean:32-53. The project maximalOpen in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:45-75 is also only for schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalOpen|largest.*open|fppf.*local|flat.*locus",
+   "results": "{\"t\": \"2026-10-23T20:59:44Z\", \"tool\": \"grep\", \"query\": \"maximalOpen|largest.*open|fppf.*local|flat.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"9e07ecd582c93bca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, their flatness/base-change/open-map properties and Zariski-local property constructors, not the maximal good base open of an arbitrary algebraic-space morphism and its fppf pullback equality. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:145-149, Flat.lean:78-86, FinitePresentation.lean:85-92, Sites/Fpqc.lean:32-53. The project maximalOpen in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:45-75 is also only for schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The largest flat locally finitely presented open of the target of a morphism of algebraic spaces is invariant under fppf pullback",
+   "results": "{\"t\": \"2026-10-23T20:59:44Z\", \"tool\": \"leansearch\", \"query\": \"The largest flat locally finitely presented open of the target of a morphism of algebraic spaces is invariant under fppf pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"378de5fc8722deec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, their flatness/base-change/open-map properties and Zariski-local property constructors, not the maximal good base open of an arbitrary algebraic-space morphism and its fppf pullback equality. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:145-149, Flat.lean:78-86, FinitePresentation.lean:85-92, Sites/Fpqc.lean:32-53. The project maximalOpen in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:45-75 is also only for schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalAtTarget\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T20:59:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalAtTarget\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, their flatness/base-change/open-map properties and Zariski-local property constructors, not the maximal good base open of an arbitrary algebraic-space morphism and its fppf pullback equality. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:145-149, Flat.lean:78-86, FinitePresentation.lean:85-92, Sites/Fpqc.lean:32-53. The project maximalOpen in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:45-75 is also only for schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A target local property of morphisms has a largest good open subset of the base compatible with open faithfully flat descent",
+   "results": "{\"t\": \"2026-10-23T20:59:45Z\", \"tool\": \"leanfinder\", \"query\": \"A target local property of morphisms has a largest good open subset of the base compatible with open faithfully flat descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget\", \"AlgebraicGeometry.universally_isLocalAtTarget\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.mk'\", \"AlgebraicGeometry.IsLocalAtTarget.mk'\", \"AlgebraicGeometry.IsZariskiLocalAtTarget\", \"AlgebraicGeometry.universally_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtTarget.of_range_subset_iSup\", \"AlgebraicGeometry.IsZariskiLocalAtSource.mk'\"], \"digest\": \"b95384e178db4636\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, their flatness/base-change/open-map properties and Zariski-local property constructors, not the maximal good base open of an arbitrary algebraic-space morphism and its fppf pullback equality. Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:145-149, Flat.lean:78-86, FinitePresentation.lean:85-92, Sites/Fpqc.lean:32-53. The project maximalOpen in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean:45-75 is also only for schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+  "date": "2026-10-23",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited supporting chain below latest det-thm-sf-ctf-stability-direct-images, proof (3), via the spectral-point-space prerequisite: Tag 06RC proof, largest open W and its invariance under the presentation groupoid; Tag 06R4 uses precisely this base-open theorem.",
+   "via": [
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-maximal-flat-lfp-base-open",
+  "worker": "stage1",
+  "summary": "Constructed the union of good base opens, proved goodness by open source locality and composition, and proved both fppf-pullback inclusions using the open image of the restricted base-change map and descent. All input nodes already exist; no new nodes. Statement and statement dependencies unchanged.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability direct-images proof (3), inherited supporting chain through the reduced-inertia gerbe and Tags 06RC/06R4. The ancestor command returns None, so preserve the inherited null ancestor and via chain; same_as searches found no duplicate blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only the unrestricted inclusion-preserving correspondence between open subspaces and open point subsets, needed for the union and the fppf image; no representable-etale image assertion is applied to a merely flat map."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Pullback opens and factorization through an open image for arbitrary algebraic-space maps, not only etale maps."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Open immersions have representable etale scheme tests; supplies the open-inclusion input for property composition."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point-surjectivity under arbitrary pullback and comparison of open subspaces by their point sets."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-open-chart-tests",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-50ecdb64c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-50ecdb64c (reviewer sub-agent of L); spot-checked: I read the whole item and all 7 cited statements, and found nothing to change. No new nodes; statement and stmt_deps unchanged. The statement matches Stacks 06R2 (spaces-descent.tex:1042-1092) with fppf and P = flat + locally of finite presentation (target-local by 041W/041T): existence, uniqueness and clause (2) W(f')=g^{-1}W(f) for flat lfp g, with no surjectivity of g, as in the source. Small cases tested: X or Y empty; Spec k → A^1 at 0, where W is the complement of 0; open-immersion g; a closed-point g, which shows the flatness of g is needed. All 6 steps check. S1: the open-subspace/open-set correspondence of lem-a1-space-etale-open-image (stated before its étale hypothesis) makes the good opens a set. S2: the X_V cover X_W, open inclusions are étale (open-chart-tests) hence flat and lfp, then composition and the source-open-cover clause of stack-chartwise-calculus. S3: elementary. S4: arbitrary base-change stability gives H ⊆ W'. S5: h = g restricted to W' is flat lfp, its image is open (042S node), q: W' → I is a base change of h and surjective. S6: f_I ×_I W' = f' over W', the algebraic-space case of the fppf descent node gives I ⊆ W(f), and the point-inclusion criterion gives W' ⊆ H. DAG search for 06R2 and 'largest open' found only source-locus nodes, no duplicate. Off-unit tool_uses for the four a1 topology nodes are declared and accepted. Batch-5 check: all 7 listed citations reach the trace-formula chapter only through the general definition def-trf-algebraic-space, which the item's statement already cites; they are generic algebraic-space topology and descent results, not parts of the trace formula or Poincaré duality, so accepted. Not superseded: the item is still unsplit in clones/live and side-live. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceMaximalFlatLfpBaseOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.existsUnique_maximal_flat_lfp_base_open",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsFlatLfpOverSubfunctor",
+   "AlgebraicGeometry.AlgebraicSpace.existsUnique_maximal_flat_lfp_base_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceMaximalFlatLfpBaseOpen.lean",
+  "statement": "theorem existsUnique_maximal_flat_lfp_base_open {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) : ∃! W : OpenSubspace Y, IsFlatLfpOverSubfunctor f.hom.hom W.val ∧ (∀ V : OpenSubspace Y, IsFlatLfpOverSubfunctor f.hom.hom V.val → V ≤ W) ∧ ∀ (Y' : AlgebraicSpace S) (g : Y' ⟶ Y), MapIsFlat g → MapIsLocallyOfFinitePresentation g → ∃ W' : OpenSubspace Y', W'.val = W.val.preimage g.hom.hom ∧ IsFlatLfpOverSubfunctor (Limits.pullback.snd f.hom.hom g.hom.hom) W'.val ∧ ∀ V : OpenSubspace Y', IsFlatLfpOverSubfunctor (Limits.pullback.snd f.hom.hom g.hom.hom) V.val → V ≤ W'",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Restriction is the canonical Subfunctor.fromPreimage map; the helper applies the existing OnEtaleCharts predicate separately to Flat and LocallyOfFinitePresentation. The theorem states existence, uniqueness, goodness, largestness, and equality with the inverse-image subfunctor under nonnecessarily surjective flat locally finitely presented base change. Cites the landed def-sfb-space-morphism-properties and new definition node def-sfb-presheaf-etale-chart-property, which owns existing OnEtaleCharts without depending on the nodal-locus theorem. Repair of H2 on 855f82ce619f; Lean source byte-identical, no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c11d32442",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 on 855f82ce619f. Item Lean module byte-identical (cmp); mathematics re-read against the node and Stacks 06R2: arbitrary f/X/Y/Y', no finiteness, separation or reducedness hypothesis; ∃! pinned by good+largest; any flat lfp g, no surjectivity premise; W'.val = preimage with W' good and largest; empty, identity, open-immersion and non-surjective g covered. H2 repaired: theorem stmt_dep lem-sfb-space-nodal-locus-base-change replaced by landed def-sfb-space-morphism-properties and new def-sfb-presheaf-etale-chart-property (existing:true, owns OnEtaleCharts, signature verbatim with SpaceNodalLocusBaseChange.lean:76-77, statement faithful, stmt_deps def-pc-scheme/def-weil-size-convention/def-trf-algebraic-space, tags 03MM/0410/0DSG verified, no competing owner in live or side-live). IsFlatLfpOverSubfunctor is a real listed item helper. Only sorry; docstrings with source, blueprint and 6 proof steps; report sections present. Note only: OnEtaleCharts docstring keeps the nodal-locus blueprint tag (landed module, untouched). No compile: no file changed."
+ }
+}

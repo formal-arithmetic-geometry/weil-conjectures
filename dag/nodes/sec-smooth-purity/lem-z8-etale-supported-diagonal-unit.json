@@ -1,0 +1,134 @@
+{
+ "id": "lem-z8-etale-supported-diagonal-unit",
+ "kind": "statement",
+ "title": "Etale Supported Diagonal Unit",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ndef singleUnitor (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :\n    (ordinaryFiniteTensor A X).flip.obj (ordinaryFiniteUnit A X) ≅\n      𝟭 (DerivedCategoryModule A X)\n\ntheorem singleUnitor_cancel (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})\n    (M V : DerivedCategoryModule A X) (t : V ⟶ constantComplex A X) :\n    ((ordinaryFiniteTensor A X).obj M).map\n        (t ≫ (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) X).inv) ≫\n        (singleUnitor A X).hom.app M =\n      ((ordinaryFiniteTensor A X).obj M).map t ≫\n        (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X M).hom\n\ndef diagonalTensorMap (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ordinaryFinitePullback A (pullback.fst f f) ⋙\n        (ordinaryFiniteTensor A (pullback f f)).flip.obj\n          ((ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X)) ⟶\n      ordinaryFinitePushforward A (pullback.diagonal f)\n\ntheorem diagonalTensorMap_isIso (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] :\n    IsIso (diagonalTensorMap A f)\n\ndef diagonalTensorIso (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] :\n    ordinaryFinitePullback A (pullback.fst f f) ⋙\n        (ordinaryFiniteTensor A (pullback f f)).flip.obj\n          ((ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X)) ≅\n      ordinaryFinitePushforward A (pullback.diagonal f)\n\ntheorem diagonalTensorIso_app (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] (M : DerivedCategoryModule A X) :\n    (diagonalTensorIso A f).app M =\n      CoordinateTrace.orderedProjectionIso A (pullback.diagonal f)\n        ((ordinaryFinitePullback A (pullback.fst f f)).obj M) (ordinaryFiniteUnit A X) ≪≫\n      (ordinaryFinitePushforward A (pullback.diagonal f)).mapIso\n        (((derivedTensor (ModuleCat.{u + 1} A) X).mapIso\n          ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)\n            (pullback.diagonal f) (pullback.fst f f) (pullback.diagonal_fst f)).app M)).app\n          (ordinaryFiniteUnit A X) ≪≫ (singleUnitor A X).app M)\n\ndef diagonalPushSection (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    𝟭 (DerivedCategoryModule A X) ≅ ordinaryFinitePushforward A (pullback.diagonal f) ⋙\n      ordinaryFinitePushforward A (pullback.snd f f)\n\ndef diagonalFirstPushSection (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    𝟭 (DerivedCategoryModule A X) ≅ ordinaryFinitePushforward A (pullback.diagonal f) ⋙\n      ordinaryFinitePushforward A (pullback.fst f f)\n\ndef coordinateProjection (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X) :\n    ordinaryFinitePullback A (pullback.fst f f) ⋙\n        ordinaryFinitePushforward A (pullback.snd f f) ⋙\n          (ordinaryFiniteTensor A X).flip.obj L ⟶\n      ordinaryFinitePullback A (pullback.fst f f) ⋙\n        (ordinaryFiniteTensor A (pullback f f)).flip.obj\n          ((ordinaryFinitePullback A (pullback.snd f f)).obj L) ⋙\n            ordinaryFinitePushforward A (pullback.snd f f)\n\ndef diagonalComparison (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y) :\n    (ordinaryFinitePullback A (pullback.fst f f) ⋙\n        (ordinaryFiniteTensor A (pullback f f)).flip.obj\n          ((ordinaryFinitePullback A (pullback.snd f f)).obj\n            ((ordinaryFinitePullback A f).obj L))) ⋙\n              ordinaryFinitePushforward A (pullback.snd f f) ≅\n      ordinaryFinitePushforward A f ⋙ CoordinateTrace.H A f L\n\ntheorem diagonalComparison_hom_app (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (M : DerivedCategoryModule A X) :\n    (diagonalComparison A f L).hom.app M = (CoordinateTrace.comparison A f L M).hom\n\ndef sectionTensorUnitComposite\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    (S T T' : C ⥤ E) (R : E ⥤ C) (H : C ⥤ D) (F : D ⥤ C)\n    (a : 𝟭 C ≅ S ⋙ R) (q : T ≅ S) (d : T ⟶ T')\n    (c : T' ⋙ R ≅ H ⋙ F) : 𝟭 C ⟶ H ⋙ F\n\ntheorem sectionTensorUnitComposite_app\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    (S T T' : C ⥤ E) (R : E ⥤ C) (H : C ⥤ D) (F : D ⥤ C)\n    (a : 𝟭 C ≅ S ⋙ R) (q : T ≅ S) (d : T ⟶ T')\n    (c : T' ⋙ R ≅ H ⋙ F) (M : C) :\n    (sectionTensorUnitComposite S T T' R H F a q d c).app M =\n      a.hom.app M ≫ R.map (q.inv.app M) ≫ R.map (d.app M) ≫ c.hom.app M\n\ntheorem sectionTensorUnitComposite_map_post_app\n    {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]\n    (S T T' : C ⥤ E) (R : E ⥤ C) (H : C ⥤ D) (F : D ⥤ C)\n    (a : 𝟭 C ≅ S ⋙ R) (q : T ≅ S) (d : T ⟶ T')\n    (c : T' ⋙ R ≅ H ⋙ F) (P : C ⥤ V) (M : C) {Z : V}\n    (ε : P.obj ((H ⋙ F).obj M) ⟶ Z) :\n    P.map (Adjunction.unitComponent H F\n      (sectionTensorUnitComposite S T T' R H F a q d c) M) ≫ ε =\n      P.map (Adjunction.unitComponent S R a.hom M ≫ R.map (q.inv.app M) ≫\n        R.map (d.app M) ≫ c.hom.app M) ≫ ε\n\ntheorem sectionTensorUnitComposite_post_app\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    (S T T' : C ⥤ E) (R : E ⥤ C) (H : C ⥤ D) (F : D ⥤ C)\n    (a : 𝟭 C ≅ S ⋙ R) (q : T ≅ S) (d : T ⟶ T')\n    (c : T' ⋙ R ≅ H ⋙ F) (M : C) {Z : C} (ε : (H ⋙ F).obj M ⟶ Z) :\n    (sectionTensorUnitComposite S T T' R H F a q d c).app M ≫ ε =\n      (a.hom.app M ≫ R.map (q.inv.app M) ≫\n        R.map (d.app M) ≫ c.hom.app M) ≫ ε\n\ndef supportedDiagonalUnit (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L)) :\n    𝟭 (DerivedCategoryModule A X) ⟶ ordinaryFinitePushforward A f ⋙ CoordinateTrace.H A f L\n\ntheorem supportedDiagonalUnit_app (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L)) (M : DerivedCategoryModule A X) :\n    (supportedDiagonalUnit A f L δ).app M =\n      (diagonalPushSection A f).hom.app M ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          ((diagonalTensorIso A f).inv.app M) ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (((ordinaryFiniteTensor A (pullback f f)).obj\n            ((ordinaryFinitePullback A (pullback.fst f f)).obj M)).map δ) ≫\n        (diagonalComparison A f L).hom.app M\n\ntheorem supportedDiagonalUnit_map_post_app (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L)) (M : DerivedCategoryModule A X)\n    (P : DerivedCategoryModule A X ⥤ DerivedCategoryModule A Y)\n    {Z : DerivedCategoryModule A Y}\n    (ε : P.obj ((ordinaryFinitePushforward A f ⋙ CoordinateTrace.H A f L).obj M) ⟶ Z) :\n    P.map (Adjunction.unitComponent (ordinaryFinitePushforward A f)\n      (CoordinateTrace.H A f L) (supportedDiagonalUnit A f L δ) M) ≫ ε =\n      P.map (Adjunction.unitComponent\n        (ordinaryFinitePushforward A (pullback.diagonal f))\n        (ordinaryFinitePushforward A (pullback.snd f f))\n        (diagonalPushSection A f).hom M ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          ((diagonalTensorIso A f).inv.app M) ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (((ordinaryFiniteTensor A (pullback f f)).obj\n            ((ordinaryFinitePullback A (pullback.fst f f)).obj M)).map δ) ≫\n        (diagonalComparison A f L).hom.app M) ≫ ε\n\ntheorem supportedDiagonalUnit_post_app (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L)) (M : DerivedCategoryModule A X)\n    {Z : DerivedCategoryModule A X}\n    (ε : (ordinaryFinitePushforward A f ⋙ CoordinateTrace.H A f L).obj M ⟶ Z) :\n    (supportedDiagonalUnit A f L δ).app M ≫ ε =\n      ((diagonalPushSection A f).hom.app M ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          ((diagonalTensorIso A f).inv.app M) ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (((ordinaryFiniteTensor A (pullback f f)).obj\n            ((ordinaryFinitePullback A (pullback.fst f f)).obj M)).map δ) ≫\n        (diagonalComparison A f L).hom.app M) ≫ ε",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-z8-adjunction-unit-transport",
+  "lem-z8-etale-diagonal-section-coherence",
+  "lem-z8-etale-tensor-trace-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Define the diagonal tensor comparison using the ordered projection and the canonical section pullback identification, followed by the constant-complex unitor. Proper projection makes it invertible. Define the source comparison as the conjugate section isomorphism. Invert the diagonal tensor comparison, tensor the supported class, then apply the proper exchange/projection coordinate comparison; this constructs the natural unit. The section contraction is now proved in the separate contraction module. The first triangle is calculated for an abstract section tensor unit before specializing the categories, avoiding expansion of derived constructions during rewrites.",
+   "uses": [
+    "def-asd-ordinary-finite-trace-counit",
+    "def-sfb-etale-coordinate-trace-data",
+    "lem-z8-adjunction-unit-transport",
+    "lem-z8-etale-diagonal-section-coherence",
+    "lem-z8-etale-tensor-trace-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "def-sfb-etale-coordinate-trace-data",
+  "lem-z8-adjunction-unit-transport",
+  "lem-z8-etale-diagonal-section-coherence",
+  "lem-z8-etale-tensor-trace-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportedDiagonalUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportedDiagonalUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.supportedDiagonalUnit_post_app",
+  "declarations": [
+   "AlgebraicGeometry.Etale.singleUnitor",
+   "AlgebraicGeometry.Etale.singleUnitor_cancel",
+   "AlgebraicGeometry.Etale.diagonalTensorMap",
+   "AlgebraicGeometry.Etale.diagonalTensorMap_isIso",
+   "AlgebraicGeometry.Etale.diagonalTensorIso",
+   "AlgebraicGeometry.Etale.diagonalTensorIso_app",
+   "AlgebraicGeometry.Etale.diagonalPushSection",
+   "AlgebraicGeometry.Etale.diagonalFirstPushSection",
+   "AlgebraicGeometry.Etale.coordinateProjection",
+   "AlgebraicGeometry.Etale.diagonalComparison",
+   "AlgebraicGeometry.Etale.diagonalComparison_hom_app",
+   "AlgebraicGeometry.Etale.sectionTensorUnitComposite",
+   "AlgebraicGeometry.Etale.sectionTensorUnitComposite_app",
+   "AlgebraicGeometry.Etale.sectionTensorUnitComposite_map_post_app",
+   "AlgebraicGeometry.Etale.sectionTensorUnitComposite_post_app",
+   "AlgebraicGeometry.Etale.supportedDiagonalUnit",
+   "AlgebraicGeometry.Etale.supportedDiagonalUnit_app",
+   "AlgebraicGeometry.Etale.supportedDiagonalUnit_map_post_app",
+   "AlgebraicGeometry.Etale.supportedDiagonalUnit_post_app"
+  ],
+  "statement": "theorem supportedDiagonalUnit_post_app (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A (pullback.diagonal f)).obj (ordinaryFiniteUnit A X) ⟶\n      (ordinaryFinitePullback A (pullback.snd f f)).obj\n        ((ordinaryFinitePullback A f).obj L)) (M : DerivedCategoryModule A X)\n    {Z : DerivedCategoryModule A X}\n    (ε : (ordinaryFinitePushforward A f ⋙ CoordinateTrace.H A f L).obj M ⟶ Z) :\n    (supportedDiagonalUnit A f L δ).app M ≫ ε =\n      ((diagonalPushSection A f).hom.app M ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          ((diagonalTensorIso A f).inv.app M) ≫\n        (ordinaryFinitePushforward A (pullback.snd f f)).map\n          (((ordinaryFiniteTensor A (pullback f f)).obj\n            ((ordinaryFinitePullback A (pullback.fst f f)).obj M)).map δ) ≫\n        (diagonalComparison A f L).hom.app M) ≫ ε",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

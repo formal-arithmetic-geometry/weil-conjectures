@@ -1,0 +1,392 @@
+{
+ "id": "lem-pod-frobenius-evaluation-projection-coherence",
+ "kind": "statement",
+ "title": "Frobenius evaluation and open compactification projection squares",
+ "statement": "Fix primes $p\\ne\\ell$, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, an algebraic closure $k$ of $k_0$, a finite extension $E/\\mathbf Q_\\ell$ inside a fixed $\\overline{\\mathbf Q}_\\ell$, and $\\Lambda\\in\\{E,\\overline{\\mathbf Q}_\\ell\\}$ [def-weil-finite-field-fiber]. For every finite-type $k_0$-scheme $W_0$ occurring below put $W=W_0\\times_{k_0}k$, $g_W=\\operatorname{id}_{W_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$ with geometric Frobenius, and $P_W=Lg_W^*$ [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom]. Use the rational/common-stage bounded constructible categories and Weil pairs $(K,\\theta_K:P_WK\\xrightarrow{\\sim}K)$, with morphisms $u\\theta_K=\\theta_LP_W(u)$ [def-weil-weil-sheaf-complex]. Give the underlying operations their standard lifts: $H(K,\\theta)=(HK,H(\\theta)c_{H,K})$, where $c_H:P_{\\rm out}H\\xrightarrow{\\sim}HP_{\\rm in}$ is the canonical Frobenius comparison; tensor has structure $(\\theta_M\\otimes\\theta_N)\\mu_g$, and internal Hom has structure $R\\mathcal Hom(\\theta_M^{-1},\\theta_N)h_g$. All assertions are restricted to full domains closed under the displayed composites where these operations and comparisons have the stated constructible typing. Retain all underlying finite-Tor, lattice-presentation and witnessed-origin restrictions. No separatedness of the structural morphisms $W_0\\to\\operatorname{Spec}k_0$ is imposed.\n\nLet $f_0:X_0\\to Y_0$ be separated finite type, let $f$ be its geometric base change, and choose a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. Use the actual maps $\\pi_u$, $\\gamma$ and $\\operatorname{PF}_f^c$ of [def-exchange-projection], and the ordinary adjunctions, tensor comparisons and operation Frobenius structures. Suppose the ordinary adjunction maps and tensor/pullback comparisons are already Weil morphisms; use the canonical exchange and refinement comparisons on their supplied domains. For a scheme $W$ occurring here put $H(M,N)=R\\mathcal Hom(M,N)$, and take $M,N$ such that $H(M,N)$ and the displayed tensor are in the stipulated domain. Use the evaluation-defined Hom transport $h:P_WH(M,N)\\xrightarrow{\\sim}H(P_WM,P_WN)$ and tensor transport $\\mu$ of [sk-def-sf-operations](i), [lem-pod-derived-automorphism-hom-evaluation, lem-pur-derived-pullback-tensor-iso], with evaluation $\\operatorname{ev}_{M,N}:M\\otimes^LH(M,N)\\to N$. Then\n$$\\operatorname{ev}_{M,N}(\\theta_M\\otimes H(\\theta_M^{-1},\\theta_N)h)\\mu=\\theta_NP_W(\\operatorname{ev}_{M,N}).$$\nThus evaluation is a Weil morphism, without a new site-perfectness assertion.\n\nThe ordinary projection transformation\n$$\\pi_{u;M,N}=Ru_*((\\varepsilon_{u,M}\\otimes1)\\mu_{u;Ru_*M,N})\\eta_{u,Ru_*M\\otimes N}$$\nis a Weil morphism on its domain. For an open immersion $j:U\\hookrightarrow W$ in the compactification, form its pullback $j':U'\\hookrightarrow W'$ by the Frobenius base-change isomorphism $t:W'\\to W$, with $s:U'\\to U$. Use $\\beta:Lt^*j_!\\simeq j'_!Ls^*$ and $\\gamma_{M,N}:j_!M\\otimes^LN\\simeq j_!(M\\otimes^Lj^*N)$ normalized as in [lem-sf-open-tensor-normalization]. The following equality holds, after inserting the canonical tensor and pullback composition comparisons:\n$$j'_!(\\mu_s)\\,\\beta_{M\\otimes j^*N}\\,Lt^*(\\gamma_{M,N})=\\gamma'_{Ls^*M,Lt^*N}\\,(\\beta_M\\otimes1)\\,\\mu_t.$$\nIt is the equality of maps from $Lt^*(j_!M\\otimes N)$ to $j'_!(Ls^*M\\otimes j'^*Lt^*N)$. It holds also for the strict inverse coefficient systems, their supplied integral realizations, and their localized/common-stage maps. Consequently the specified open projection comparison and $\\operatorname{PF}_{f,K,L}^c=Rp_*(\\gamma_{K,L})\\pi_{p;j_!K,L}$ are Weil morphisms, compatible with the supplied compactification refinement comparisons. This asserts equivariance on the original tensor and finite-Tor domains, not new invertibility or constructibility.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Sentence 1; lem-fix-weil-operations.proof.md, ordinary adjunction, tensor/Hom, exchange-pasting and projection paragraphs; explicit argument of returned lem-pod-constructible-mate-coherence, steps 12, 13."
+ },
+ "stmt_deps": [
+  "def-exchange-projection",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-weil-sheaf-complex",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-open-tensor-normalization",
+  "sk-def-sf-operations",
+  "def-pod-constructible-weil-model-squares"
+ ],
+ "proof": [
+  {
+   "text": "Use normalizedRationalEvaluation_naturality and normalizedCommonEvaluation_naturality for the actual Hom-first evaluations. Convert to argument-first evaluation by braiding naturality. The integral braiding naturality helper from CompletedTensorHomTranspose is proved for all schemes; localizedTensorBraiding_naturality gives every rational arrow, and [lem-pod-common-stage-tensor-braiding-naturality] descends this to common-stage arrows. For a permitted pair morphism (i inverse opposite,f), precompose Hom-first naturality with tensor(identity,i) and cancel i followed by its inverse; braiding naturality gives tensor(i,H(i inverse,f)) followed by argument-first evaluation = argument-first evaluation followed by f. Specialize to the inverse and forward Weil structures. Factor the tensor map through tensor(identity,kappa), substitute podArgumentFirst_integral_rational or podArgumentFirst_common, and use the supplied component normalizations hP,hT,hH,hSC,hkappa,hmu,hbeta. No separatedness or new domain restriction is used.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "def-weil-weil-sheaf-complex",
+    "lem-coef-normalized-rational-evaluation-naturality",
+    "lem-pod-normalized-common-evaluation-naturality",
+    "lem-coef-completed-tensor-hom-transpose",
+    "lem-coef-localized-tensor-braiding-naturality",
+    "lem-pod-common-stage-tensor-braiding-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Evaluation and projection paragraph (paragraph beginning For the ordinary adjunction)"
+   }
+  },
+  {
+   "text": "Use the supplied lifted adjunction A between IsoAlgebra categories. Its rightAdjointProjectionMap applied to the supplied Weil tensor map is a morphism in IsoAlgebra. Expand homEquiv by the unit formula. Forgetting structure sends composition and the lifted functor to the original composition and functor, and the tensor lift has the original tensor map as carrier. Substitute the supplied unit, counit and tensor normalization equations. The resulting carrier is exactly adj.rightAdjointProjectionMap mu.hom. This proves ordinary_projection without any invertibility hypothesis on that projection.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Evaluation and projection paragraph (paragraph beginning For the ordinary adjunction)"
+   }
+  },
+  {
+   "text": "For transport_exists, apply canonical_pull_tensor separately to the ambient and open pullback presentations, and the proved open_tensor_exists helper to the primed open extension. Copy their ordinary, pure-unit, resolving, signed-total and representative fields into the original PullbackTensor and Transport records. For open_square, convert its supplied comparisons to the existing PullTensor and OpenTensor records without changing any component. Complete these to the existing clopen Data record using the identity open on U prime: use the existing normalized reverse adjunction and open tensor constructions for that auxiliary open. The private transportData construction uses exactly the composite-open tensor map and the proved composite-adjunction transpose calculation of assemble_data; its tensorP, tensorQ and tensorB fields are the original supplied data by construction. Apply cartesian_tensor, whose inverse-square adjunction proof uses pullback_tensor_compatibility; combine the adjacent j-prime-shriek maps by functoriality. The extra identity-open fields do not occur in this Cartesian equation. This applies to both ordinary and systems modes before any realization, and adds no geometric or coefficient-domain assumption.",
+   "uses": [
+    "lem-sf-canonical-pull-tensor",
+    "lem-sf-clopen-cartesian-tensor-square",
+    "lem-sf-clopen-comparison-tensor-data-existence",
+    "lem-sf-clopen-reverse-module-adjunction",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-open-operation-models",
+    "lem-sf-open-tensor-support-aux"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Projection paragraph: open-extension tensor square, made explicit using its normalized adjunction units"
+   }
+  },
+  {
+   "text": "For realized_open_square, apply exchangeProjectionCoefficientRepresentative F s z to the equality open_square. Congruence proves the specified equality with all endpoint conjugations, for any supplied realization, rationalization or common-stage functor. No detection assertion or finite-level evaluation is needed. The normalized system equality in Step 3 is retained as the existing open_square obligation.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Projection paragraph: system identity, supplied integral realization, rationalization and common-stage passage"
+   }
+  },
+  {
+   "text": "For open_projection, use the left projectionMap of the supplied lifted open adjunction with the inverse lifted tensor comparison. Its carrier is the original projectionMap: compute the inverse comparison carrier by cancellation against the normalized forward comparison, then substitute the unit and counit carrier equations. The supplied gamma normalization identifies this carrier with gamma inverse. The forgetful functor reflects isomorphisms, so invert this Weil arrow. Cancellation identifies its carrier with gamma. For compact_projection apply ordinary_projection to p, compose with the lifted open_projection evaluated at (K,p^*N), and then apply the lifted proper functor. Insert J of tensor(1,phiW) for the supplied pullback compositor. The carrier equations _phi and _gammaP identify the composite exactly with compactificationProjectionFromData. These are categorical supplied-domain statements: the geometric input adjunctions and comparisons are already hypotheses, so no new model compactification is chosen.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-weil-sheaf-complex",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Evaluation and projection paragraph (paragraph beginning For the ordinary adjunction)"
+   }
+  },
+  {
+   "text": "The refinement statements supply the underlying canonical projection/refinement identity. For refinement_compatibility, faithfulness of IsoAlgebra.forget promotes that identity directly to equality of Weil arrows. For refinement_transport compose rhoS inverse, pf1, and rhoT. Its carrier equals pf2 after substitution of the underlying identity and cancellation of rhoS inverse times rhoS. The IsoAlgebra inverse/composition laws give pf1 followed by rhoT = rhoS followed by the constructed arrow. Only the supplied refinement isomorphisms are inverted. The proof retains all supplied domains and does not require either projection to be invertible.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Projection and exchange-pasting paragraph: compatibility with compactification refinements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "def-weil-weil-sheaf-complex",
+  "lem-coef-normalized-rational-evaluation-naturality",
+  "lem-pod-normalized-common-evaluation-naturality",
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-coef-localized-tensor-braiding-naturality",
+  "lem-pod-common-stage-tensor-braiding-naturality",
+  "def-exchange-projection",
+  "lem-sf-canonical-pull-tensor",
+  "lem-sf-clopen-cartesian-tensor-square",
+  "lem-sf-clopen-comparison-tensor-data-existence",
+  "lem-sf-clopen-reverse-module-adjunction",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-operation-models",
+  "lem-sf-open-tensor-support-aux"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Evaluation and projection paragraph; M1 2026-10-26 completes transport_exists and open_square from the existing canonical_pull_tensor, open_tensor_exists and cartesian_tensor declarations, assembling the supplied tensor data with an auxiliary identity open. Existing evaluation, ordinary/open/compact projection, realization and refinement proofs are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluation|projectionFormula|projection.*formula|extensionByZero",
+   "results": "25 hit(s): Mathlib/CategoryTheory/Adhesive/Basic.lean; Mathlib/CategoryTheory/Adhesive/Basic.lean; Mathlib/CategoryTheory/Square.lean; Mathlib/CategoryTheory/Square.lean; Mathlib/CategoryTheory/Square.lean; Mathlib/CategoryTheory/Square.lean; Mathlib/CategoryTheory/Square.lean; Mathlib/CategoryTheory/Localization/Bifunctor.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariant evaluation and compact support projection map using fully faithful open extension by zero",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.counit",
+   "results": "3 hit(s): CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.Pi.monoidalClosed_closed_adj_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius tensor internal Hom evaluation identity and equivariance of open extension by zero projection comparison reflected by restriction to the open",
+   "results": "8 hit(s): LightCondensed.ihomPoints_symm_comp; LightCondensed.ihomPoints; LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_apply; ModuleCat.Tilde.res_apply; ModuleCat.Tilde.toOpen_res; LightCondensed.ihomPoints_symm_apply; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical projection square for open immersion commutes with automorphism pullback and closed monoidal internal Hom evaluation",
+   "results": "8 hit(s): AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_assoc; AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom; AlgebraicGeometry.Scheme.Hom.comp_appIso; AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic mates, monoidal categories, ordinary module sheaves or other Frobenius notions; none states this specified constructible Weil comparison and coefficient-domain assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|extensionByZero|frobenius.*evaluation|evaluation.*frobenius",
+   "results": {
+    "t": "2026-10-22T09:54:32Z",
+    "tool": "grep",
+    "query": "projectionFormula|extensionByZero|frobenius.*evaluation|evaluation.*frobenius",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or condensed-module identities do not state the specified derived coefficient-system open square and Weil projection/refinement assertions; Cartesian closed comparison hits assume Cartesian monoidal categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived open extension by zero projection isomorphism commutes with automorphism pullback on coefficient systems",
+   "results": {
+    "t": "2026-10-22T09:54:32Z",
+    "tool": "leansearch",
+    "query": "Derived open extension by zero projection isomorphism commutes with automorphism pullback on coefficient systems",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.π_comp_H0Iso_hom_apply",
+     "groupCohomology.map_H0Iso_hom_f_apply",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf",
+     "groupHomology.cyclesMap_comp_cyclesIso₀_hom_apply",
+     "groupCohomology.cocyclesMap_cocyclesIso₀_hom_f_apply",
+     "groupCohomology.cochainsMap_f_0_comp_cochainsIso₀_assoc",
+     "groupCohomology.π_comp_H0Iso_hom",
+     "CategoryTheory.instIsIsoFunctorFromLeftDerivedZero"
+    ],
+    "digest": "7d824c32bf341267"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or condensed-module identities do not state the specified derived coefficient-system open square and Weil projection/refinement assertions; Cartesian closed comparison hits assume Cartesian monoidal categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.counit",
+   "results": {
+    "t": "2026-10-22T09:54:33Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Adjunction.counit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalClosed.ofEquiv_curry_def",
+     "CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+     "CategoryTheory.Pi.monoidalClosed_closed_adj_counit"
+    ],
+    "digest": "929cebf4f1076b06"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or condensed-module identities do not state the specified derived coefficient-system open square and Weil projection/refinement assertions; Cartesian closed comparison hits assume Cartesian monoidal categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariance of derived internal Hom evaluation and compact support projection formula open extension by zero",
+   "results": {
+    "t": "2026-10-22T09:54:33Z",
+    "tool": "leanfinder",
+    "query": "Frobenius equivariance of derived internal Hom evaluation and compact support projection formula open extension by zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints",
+     "CategoryTheory.expComparison_ev",
+     "LightCondensed.ihomPoints_symm_apply",
+     "CategoryTheory.coev_expComparison",
+     "CompactlySupportedContinuousMap.compLinearMap"
+    ],
+    "digest": "3abd125c1ff8aa9a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or condensed-module identities do not state the specified derived coefficient-system open square and Weil projection/refinement assertions; Cartesian closed comparison hits assume Cartesian monoidal categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monoidal equivalence preserves evaluation and the extension by zero projection square is natural for inverse image",
+   "results": {
+    "t": "2026-10-22T09:55:36Z",
+    "tool": "leanfinder",
+    "query": "Monoidal equivalence preserves evaluation and the extension by zero projection square is natural for inverse image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse",
+     "CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse",
+     "CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse_assoc",
+     "CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse_assoc",
+     "CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor",
+     "CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor",
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.tensorRightHomEquiv_symm_naturality"
+    ],
+    "digest": "5956c85728207262"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or condensed-module identities do not state the specified derived coefficient-system open square and Weil projection/refinement assertions; Cartesian closed comparison hits assume Cartesian monoidal categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-constructible-mate-coherence",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "prop-weil-operations.proof.md sentence 1 via lem-fix-weil-operations.proof.md: evaluation and projection paragraph; open comparison and compactification-refinement details of that projection argument.",
+   "via": [
+    "lem-pod-constructible-mate-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-frobenius-evaluation-projection-coherence",
+  "worker": "stage1",
+  "summary": "Expanded evaluation naturality with the contravariant inverse, compositional equivariance of the actual projection mate, and the normalized open-square calculation using full faithfulness only on the open-extension image. Proved the system equality before applying supplied integral realization and field-stage functors. Reused existing refinement compatibility and semilinear exchange coherence; no new nodes. Repaired doubled TeX escapes only, with no mathematical statement change.",
+  "blueprint": "prop-weil-operations.proof.md sentence 1 via lem-fix-weil-operations.proof.md evaluation, tensor/counit projection and exchange-pasting paragraph: Steps 1, 2, 3–5 and 6 respectively.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-derived-automorphism-hom-evaluation",
+    "why": "Evaluation-characterized transport along a scheme isomorphism, used as a tool without changing the unit route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Normalized open adjunction units and full faithfulness prove the open square by restriction."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical tensor comparison and its composition compatibility are the coordinate identifications in the open square."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Actual system maps and expression-wise realization, needed to pass an equality of system maps to the specified integral composites."
+   },
+   {
+    "node": "lem-fix-projection-compactification-comparison",
+    "why": "Underlying refinement identity for these specified projection composites; the current item adds Frobenius equivariance."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of a k_0-rational compactification of f_0, so that Step 5 has a Frobenius-invariant compactification; arbitrary compactifications then follow through the refinement comparison (reviewer repair)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-9c7c0455f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-9c7c0455f (reviewer sub-agent of L); spot-checked: Read the item in full, all ten cited statements, and the main-20261015 sources (lem-fix-weil-operations.proof.md, the 'For the ordinary adjunction' paragraph; prop-weil-operations.proof.md sentence 1). There are no new nodes. The statement is byte-identical to the version Q12 created once the B4 backslash repair is undone. No SGA source, and no cycle (BFS from every proof_dep). Neither lem-fix-weil-operations nor lem-sf-derived-weil-compact-projection-formula is a duplicate. Step 1: extranaturality of ev with a=θ_M^{-1}, composed with the characterization of lem-pod-derived-automorphism-hom-evaluation, gives the equation; variance checked; point test a·(b/a)=b. Step 2: composing Weil arrows and applying lifted functors is elementary; π_u checked verbatim against def-exchange-projection. Step 3: both endpoints lie in the image of j'_! up to isomorphism, so restriction is injective on these Hom sets; j'^*β=1 and j^*γ=1 come from lem-sf-open-tensor-normalization; the composition clause of lem-pur-derived-pullback-tensor-iso identifies μ_s with j'^*μ_t; identity-open case checked. Step 6 matches lem-fix-projection-compactification-comparison exactly, and the semilinear-cube refinement clause makes ρ Weil. FIX 1 (C4/E1): Step 4 applied lem-sf-integral-compactification-system-realization, which needs k-morphisms, to the non-k-linear Frobenius base change t,s. It now cites the relabeling clause of lem-pod-semilinear-exchange-cube-coherence. FIX 2 (E1/D5): Steps 5 and 6 needed P on X̄, i.e. a compactification defined over k_0, but the item allows any c. Step 5 now takes c_0 from thm-nagata-compactification (Y_0 is qcqs) and its base change via lemma-nagata-compactification-base-change. Step 6 then derives PF^c = ρ_{c0,c} PF^{c0} (ρ^{-1}⊗1), a composite of Weil arrows. The two Nagata nodes are added to proof_deps and thm-nagata-compactification to tool_uses. Statement and stmt_deps are unchanged; all steps are under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusEvaluationProjectionCoherence",
+  "declaration": "WeilConjectures.PodEvaluationProjection.compact_projection",
+  "declarations": [
+   "WeilConjectures.PodEvaluationProjection.rational_evaluation",
+   "WeilConjectures.PodEvaluationProjection.common_evaluation",
+   "WeilConjectures.PodEvaluationProjection.ordinary_projection",
+   "WeilConjectures.PodEvaluationProjection.OpenSquare.PullbackTensor",
+   "WeilConjectures.PodEvaluationProjection.OpenSquare.Transport",
+   "WeilConjectures.PodEvaluationProjection.OpenSquare.transport_exists",
+   "WeilConjectures.PodEvaluationProjection.OpenSquare.open_square",
+   "WeilConjectures.PodEvaluationProjection.OpenSquare.realized_open_square",
+   "WeilConjectures.PodEvaluationProjection.open_projection",
+   "WeilConjectures.PodEvaluationProjection.compact_projection",
+   "WeilConjectures.PodEvaluationProjection.refinement_compatibility",
+   "WeilConjectures.PodEvaluationProjection.refinement_transport"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusEvaluationProjectionCoherence.lean",
+  "statement": "theorem compact_projection (F : Y ⥤ X) (cF : F ⋙ PX ≅ PY ⋙ F) (phi : P ⋙ jStar ≅ F) (phiW : IsoAlgebra.mapOfNatIso cP ⋙ IsoAlgebra.mapOfNatIso cStar ≅ IsoAlgebra.mapOfNatIso cF) (_phi : ∀ N, (phiW.hom.app N).hom.f = phi.hom.app N.carrier) (muP : (Functor.postcompose₂.obj P).obj TY ≅ (((Functor.whiskeringLeft₂ B).obj P).obj P).obj TB) (muJ : (Functor.postcompose₂.obj jStar).obj TB ≅ (((Functor.whiskeringLeft₂ X).obj jStar).obj jStar).obj TX) (AP : IsoAlgebra.mapOfNatIso cP ⊣ IsoAlgebra.mapOfNatIso cR) (_unitP : ∀ K, (AP.unit.app K).hom.f = pAdj.unit.app K.carrier) (_counitP : ∀ K, (AP.counit.app K).hom.f = pAdj.counit.app K.carrier) (AJ : IsoAlgebra.mapOfNatIso cJ ⊣ IsoAlgebra.mapOfNatIso cStar) (_unitJ : ∀ K, (AJ.unit.app K).hom.f = jAdj.unit.app K.carrier) (_counitJ : ∀ K, (AJ.counit.app K).hom.f = jAdj.counit.app K.carrier) (muPW : (Functor.postcompose₂.obj (IsoAlgebra.mapOfNatIso cP)).obj (IsoAlgebra.mapOfNatIso₂ TY muY) ⟶ (((Functor.whiskeringLeft₂ (IsoAlgebra PB)).obj (IsoAlgebra.mapOfNatIso cP)).obj (IsoAlgebra.mapOfNatIso cP)).obj (IsoAlgebra.mapOfNatIso₂ TB muB)) (_muP : ∀ K N, ((muPW.app K).app N).hom.f = (muP.hom.app K.carrier).app N.carrier) (muJW : (Functor.postcompose₂.obj (IsoAlgebra.mapOfNatIso cStar)).obj (IsoAlgebra.mapOfNatIso₂ TB muB) ≅ (((Functor.whiskeringLeft₂ (IsoAlgebra PX)).obj (IsoAlgebra.mapOfNatIso cStar)).obj (IsoAlgebra.mapOfNatIso cStar)).obj (IsoAlgebra.mapOfNatIso₂ TX muX)) (_muJ : ∀ K N, ((muJW.hom.app K).app N).hom.f = (muJ.hom.app K.carrier).app N.carrier) (gamma : (((Functor.whiskeringLeft₂ B).obj J).obj (𝟭 B)).obj TB ≅ (Functor.postcompose₂.obj J).obj ((((Functor.whiskeringLeft₂ X).obj (𝟭 X)).obj jStar).obj TX)) (_normalization : gamma.inv = jAdj.projectionMap jStar TX TB muJ.inv) (gammaP : (((Functor.whiskeringLeft₂ B).obj J).obj P).obj TB ≅ (Functor.postcompose₂.obj J).obj ((((Functor.whiskeringLeft₂ X).obj (𝟭 X)).obj F).obj TX)) (_gammaP : ∀ M N, (gammaP.hom.app M).app N = (gamma.hom.app M).app (P.obj N) ≫ J.map ((TX.obj M).map (phi.hom.app N))) : ∀ (K : IsoAlgebra PX) (N : IsoAlgebra PY), ∃ w : ((IsoAlgebra.mapOfNatIso₂ TY muY).obj ((IsoAlgebra.mapOfNatIso cR).obj ((IsoAlgebra.mapOfNatIso cJ).obj K))).obj N ⟶ (IsoAlgebra.mapOfNatIso cR).obj ((IsoAlgebra.mapOfNatIso cJ).obj (((IsoAlgebra.mapOfNatIso₂ TX muX).obj K).obj ((IsoAlgebra.mapOfNatIso cF).obj N))), w.hom.f = ((compactificationProjectionFromData J F P R pAdj TX TB TY muP gammaP).app K.carrier).app N.carrier",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Evaluation in the actual rational and common-stage categories; the projection statements use the dependency's supplied-domain interface, with carrier normalizations for every unit, counit, tensor map, open comparison and pullback compositor. The open square is stated before realization for both ordinary and strict-system modes. Local helper comparison records belong to this node and characterize the canonical maps on pure tensors and flat K-flat representatives; no object is chosen from transport_exists. The final two statements include equality and transport along the supplied refinement isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0de9a1133",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read node, report, module and all dependency declarations (OpenTensorNormalizationData Operations/Assertion, ExchangeProjectionSuppliedDomains compactificationProjectionFromData/exchangeProjectionCoefficientRepresentative, ProjectionMap rightAdjointProjectionMap/projectionMap, IsoAlgebra mapOfNatIso₂, DerivedAutomorphismHomEvaluation partial closed/Hom comparisons, sfWeilFrobeniusPullback, Models). Evaluation equation matches ev(θ_M⊗H(θ_M⁻¹,θ_N)h)μ=θ_N P(ev) with correct variance; T/H/SC/κ/μ/β pinned to published decls; pair domain unchanged, hJ is a provable Prop. π_u carrier = rightAdjointProjectionMap; open square directions checked (β, γ, θ⁻¹), both modes; PullbackTensor/Transport fields fully pinned (pure-unit, K-flat representative + descent, adjunct formula as Assertion.gamma_inverse); realized square uses the dependency's representative def; PF^c carrier = compactificationProjectionFromData with gammaP=γ·J(TX φ); refinement transport inverts only ρ. Node changed only in lean+stmt_deps (added landed def-pod-constructible-weil-model-squares); statement verbatim; declarations list exact; sorry only; docstrings ok; no line >100. Advisories: PodPartialClosed/podPairPullback (def-pod-partial-closed-interfaces), podCommonClosed/HomComparison (def-sf-adic-closed-reindexing-maps) and the braiding (def-sf-rational-common-tensor-symmetries, landed after delivery) are reached only through the stage-1 theorem stmt_dep, so advisory per precedent; public imports SixFunctorOperationDatum and RefinementCategory are unused. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T202545-L-2728625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

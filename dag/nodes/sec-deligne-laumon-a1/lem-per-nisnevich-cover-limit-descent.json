@@ -15,9 +15,131 @@
   "def-weil-etale-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify the finiteness hypotheses on the given models. By [lem-weil-pbc-finite-type-over-noetherian], $P_{\\alpha_0}$ and $V_{j,\\alpha_0}$ are Noetherian, hence quasi-compact; [lem-weil-pbc-locally-noetherian-quasi-separated] makes them quasi-separated. Each $v_{j,\\alpha_0}$ is locally of finite type: near a source point choose finite-type affine charts over an affine base chart and shrink the source to a principal affine lying over a target affine chart. If its coordinate ring is generated over the base ring by $b_1,\\ldots,b_m$, the same generators generate it over the target coordinate ring, whose image contains that base ring. The target chart ring is Noetherian; [lem-weil-pbc-finite-type-noetherian-finite-presentation] therefore makes this ring map finitely presented. Thus $v_{j,\\alpha_0}$ is locally of finite presentation. The same reasoning applies to any morphism between finite-type models over $S_\\alpha$. By [lem-weil-pbc-qcqs-morphism-permanence], such morphisms are quasi-compact and quasi-separated, so these $v_{j,\\alpha_0}$ are of finite presentation. All these finiteness properties persist under base change by that node.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-limit-affine-transition], $S=\\varprojlim S_\\alpha$: the affine limit is the spectrum of the ring colimit. By [lem-weil-pbc-scheme-over-limit], $P=\\varprojlim_{\\alpha\\geq\\alpha_0}P_\\alpha$, with affine transition maps. All $P_\\alpha$ are qcqs by Step 1. Apply [lem-weil-pbc-descend-etale] to each given $v_{j,\\alpha_0}$, using its local finite presentation from Step 1. Finiteness of the family gives a common stage where all are etale. By [lem-weil-pbc-etale-scheme-base-change] they remain etale at every later stage.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  },
+  {
+   "text": "Form $V=\\coprod_j V_j$ and $v:V\\to P$ by [lem-weil-pbc-scheme-coproduct-family]. The open components cover $V$, so $v$ is locally of finite presentation, as each $v_j$ is. The pointwise hypothesis says exactly that $v$ is completely decomposed. The target $P$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], hence qcqs by Step 1. Apply [lem-per-cd-finite-presentation-section-cover] to obtain finitely many finitely presented immersions $i_a:Z_a\\to P$ covering $P$ and lifts to $V$. Replace $Z_a$ by the finitely many inverse images of the open-and-closed components $V_j$. Each is open and closed in $Z_a$, is Noetherian, and is quasi-compact; its inclusion is locally of finite presentation (the local rings are unchanged). By [lem-weil-pbc-qcqs-morphism-permanence] it is of finite presentation. Composition preserves local finite presentation by [lem-sbc-locally-finite-presentation-composition], and their quasi-compactness and quasi-separatedness give finite presentation over $P$ by the same permanence node. Restricting a closed immersion to an open-and-closed source piece is again closed: on affine charts it is the quotient followed by the idempotent quotient selecting that piece. Thus the restricted maps are still immersions. These finitely many pieces still cover $P$, and their immersions and lifts now have the form $i_a:Z_a\\to P$, $s_a:Z_a\\to V_{j(a)}$, with $v_{j(a)}s_a=i_a$. Empty pieces can be omitted.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-cd-finite-presentation-section-cover",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  },
+  {
+   "text": "Factor each immersion as $Z_a\\xrightarrow{c_a}O_a\\xrightarrow{o_a}P$, with $c_a$ closed and $o_a$ open, by [def-weil-closed-immersion]. Choose $O_a$ quasi-compact: the image of the quasi-compact $Z_a$ is covered by finitely many affine opens contained in the original open factor; their union can replace that factor, and the restricted closed immersion still has source $Z_a$. The scheme $O_a$ is locally Noetherian, as an open subscheme of $P$, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. The open immersion is locally of finite presentation, since on affine charts it is a localization at one element. By [lem-weil-pbc-qcqs-morphism-permanence] it is of finite presentation. The $Z_a$ are already finitely presented over $P$ by Step 3, and now so are the $O_a$. Apply [lem-weil-pbc-finite-presentation-family-descent] to the system $(P_\\alpha)$ to model them simultaneously at one stage. This does not yet assert that the model arrows are immersions.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-presentation-family-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-finite-diagram-lift-of-models] over the base system $(P_\\alpha)$ for the objects $P$, $V_j$, $Z_a$, $O_a$, retaining the prescribed models of $P$ and $V_j$. Lift $c_a,o_a,s_a$ and impose the finitely many equations $v_{j(a)}s_a=o_ac_a$. Its hypotheses hold: the $V_j$ have finitely presented models over $P_{\\alpha_0}$ by Step 1, and the other models were obtained in Step 4. The output equations are exact at a common finite stage, and remain exact on every later base change. Write $i_{a,\\alpha}=o_{a,\\alpha}c_{a,\\alpha}$. Since all model objects are finite type over the Noetherian $S_\\alpha$, the maps $c_{a,\\alpha},o_{a,\\alpha},i_{a,\\alpha}$ are locally of finite presentation by the affine argument of Step 1.",
+   "uses": [
+    "lem-weil-pbc-finite-diagram-lift-of-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-closed-immersion] to the finitely many $c_{a,\\alpha}$ and [lem-weil-pbc-descend-open-immersion-qcqs] to the $o_{a,\\alpha}$. Their source and target models are qcqs, their limit maps are the specified closed and open immersions, and their required local finite type/presentation hypotheses were checked in Step 5. At a common stage the $i_{a,\\alpha}$ are immersions. Closed immersions persist by [lem-weil-pbc-closed-immersion-base-change]; open immersions persist by the stated all-later-stages clause of the cited descent node. Finally [lem-weil-pbc-finite-family-joint-surjectivity-stage], applied to the finite family $i_{a,\\alpha}$, makes it jointly surjective at every later stage. Here the target is $P_\\alpha$ itself, the sources are finitely presented over it, the arrows are locally of finite presentation, and their limit images cover $P$ by Step 3. Choose $\\alpha_1$ above this stage and the etale stage of Step 2.",
+   "uses": [
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-descend-open-immersion-qcqs",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-finite-family-joint-surjectivity-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\geq\\alpha_1$ and $p\\in P_\\alpha$. Step 6 supplies $t\\in Z_{a,\\alpha}$ with $i_{a,\\alpha}(t)=p$; put $z=s_{a,\\alpha}(t)\\in V_{j(a),\\alpha}$. Step 5 gives $v_{j(a),\\alpha}(z)=p$. The immersion $i_{a,\\alpha}$ induces an isomorphism $\\kappa(p)\\to\\kappa(t)$: for its closed factor use [lem-weil-pbc-closed-immersion-residue-field-iso], and its open factor identifies local rings by [def-weil-open-immersion]. By [def-weil-residue-field], this isomorphism factors as $\\kappa(p)\\xrightarrow{u}\\kappa(z)\\xrightarrow{w}\\kappa(t)$. Identify $\\kappa(t)$ with $\\kappa(p)$ through the composite. Then $wu=1$; since the unital field map $w$ is injective, $wuw=w$ implies $uw=1$. Thus $u$ is an isomorphism. This is the required complete decomposition at every later stage, while Step 2 supplies etaleness. If the family is empty, the hypothesis forces $P=\\varnothing$; the section cover can be empty and Step 6, whose finite-family lemma allows an empty family, forces $P_\\alpha=\\varnothing$ eventually. Hence the asserted empty cases are included.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-weil-open-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Lemma 3.1.1 and its proof by a finite closed filtration with sections on successive differences, printed p.38; the same argument applies to a finite family by taking its disjoint union. The rings and models here are Noetherian as in that lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "lem-per-cd-finite-presentation-section-cover",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-over-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III Lemma 3.1.1, printed p.38, finite locally closed section certificate and permanence of its finite data; Stacks 0GTL and proof of 0GTM give the finite-presentation immersion-cover implementation, with descent in Tags 01ZM, 01ZP, 0EUU, 07RP and 07RR."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +175,108 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"CategoryTheory.Precoverage.finite\", \"module\": \"Mathlib.CategoryTheory.Sites.Finite\", \"type\": \"(C : Type u) [Category.{v} C] : Precoverage C\", \"doc\": \"The precoverage on a category $\\\\mathcal{C}$ where for each object $X$, the covering presieves are those whose uncurried set of morphisms with codomain $X$ is finite. Formally, a presieve $s$ on $X$ be\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"(S : AlgebraicGeometry.Scheme) →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    [P.IsStableUnderBaseChange] →\\n      [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X : AlgebraicGeometry.Scheme} →\\n          [X.Over S] → AlgebraicGeometry.Scheme.Cover (Alg\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes where covering families are collections of open immersions that are jointly surjective, constructed by intersecting the jointly surjective preco\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \": W.Cover (precoverage P)\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    {inst : P.IsStableUnderBaseChange} →\\n      {inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P} →\\n        {X : AlgebraicGeometry.Scheme} →\\n          {inst_2 : X.Over S} →\\n          \", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, this defines the cover of $ X $ using the preco\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.changeProp\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"[JointlySurjective K] (𝒰 : X.Cover K) (h : ∀ j, Q (𝒰.f j)) : X.Cover (precoverage Q)\", \"doc\": \"Given a jointly surjective precoverage $ K $ on schemes and a $ K $-cover $ \\\\mathcal{U} $ of a scheme $ X $, if all morphisms $ f_j $ in the zeroth component $ I_0 $ of $ \\\\mathcal{U} $ satisfy a morph\"}",
    "date": "2026-10-19",
    "verdict": "no match: ordinary etale sites, flat descent and factorization of maps at inverse limits do not give residue-field-preserving lifts at every point of a finite stage."
+  },
+  {
+   "tool": "grep",
+   "query": "Nisnevich|splittingSequence|completely.decomposed",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"5559778a21417766\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "grep",
+   "query": "Nisnevich|completely.decomposed|descend.*[Ee]tale",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"1fef2a99051d3612\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completely decomposed morphism noetherian closed filtration sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"Ideal.Filtration\", \"Ideal.Filtration.recOn\", \"CategoryTheory.instIsClosedUnderSubobjectsIsNoetherianObject\", \"Ideal.Filtration.casesOn\", \"Ideal.Filtration.Stable.of_le\"], \"digest\": \"917a15626b879739\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nisnevich covering descends to sufficiently large finite stage",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsGeneratedByOneHypercovers\", \"AlgebraicGeometry.Scheme.Cover.Over\", \"CategoryTheory.GrothendieckTopology.toCoverage\", \"CategoryTheory.Coverage.ofGrothendieck\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.Cover.changeProp\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.Scheme.instOverXBind\"], \"digest\": \"1d8be348b5946724\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"NoetherianSpace\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsLimit\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich etale morphism splitting sequence sections on locally closed strata of a Noetherian target",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"685dffa68ff8e3b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completely decomposed locally finite type morphism to a Noetherian scheme admits a finite closed filtration with sections on successive differences",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"711d6248577483fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite completely decomposed etale families descend along a filtered colimit of Noetherian rings",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instForallOfFinite\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.Etale.stableUnderComposition\"], \"digest\": \"5a17ef83836db073\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "grep",
+   "query": "completely.decomposed|Nisnevich|decompose.*section",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"1e61aad39c467298\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite covering by immersions of finite presentation with sections of a completely decomposed morphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_openCover_source\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"dfc07f9c0fb0a93c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cover a scheme by finitely many locally closed subschemes on which a rational point lifting morphism has a section",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.OpenCover\"], \"digest\": \"7d5d726cd22e5810\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completely decomposed locally finitely presented morphism over a quasi compact quasi separated scheme has a finite covering by finitely presented immersions with sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\"], \"digest\": \"a9ca3f5f68308051\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary covers, finite presentation, local spreading of individual maps, or algebraic etale descent; none supplies a finite immersion cover with sections of a completely decomposed morphism or Nisnevich descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-approximation",
@@ -85,5 +305,133 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-nisnevich-cover-limit-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read ILO III 3.1.1 and Stacks 0GTL/0GTM. Isolated the finite section certificate in one new statement-only node, and reused existing object/map/equation and property descent nodes. Checked prescribed models, Noetherian and finite-presentation hypotheses, all later stages, nonseparated models and empty families. Wrote the residue-field retraction argument explicitly. No Lean written or compiled.",
+  "blueprint": "Current main-20261024 ancestor lem-per-artin-gabber-affine-curve Step 3, finiteness/duality branch, through the recorded III 3.1 approximation input. The finite locally closed section certificate realizes the III 3.1.1 closed-stratification argument; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-open-immersion-qcqs",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-diagram-lift-of-models",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-family-descent",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-over-limit",
+    "why": "Generic scheme-theoretic finiteness, inverse-limit, descent, coproduct, or residue-field tool used with its stated hypotheses in the finite section-certificate argument; this unit has no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-over-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-5b31b00d6",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-5b31b00d6 (reviewer sub-agent of L); spot-checked: Read ILO III Lemme 3.1.1 (printed p.38) and Stacks more-morphisms.tex lemma-decompose (0GTL) and lemma-descend-cd (0GTM) in full. Item: statement unchanged, first split (no re-split order). Its 7 steps follow the 0GTM proof (ILO's filtration with sections is the same certificate as 0GTL): (1) the finite-type models over Noetherian S_α are qcqs, and their maps are of finite presentation by the generator argument plus 00FP and 03GI; (2) 07RP gives étaleness at a common stage on the qcqs affine-transition system, and 02GO gives all later stages; (3) the new 0GTL certificate is applied to the coproduct V→P and split by the clopen pieces s_a^{-1}(V_j), which remain immersions of finite presentation with v_{j(a)} s_a = i_a; (4) the immersion is factored through a quasi-compact open, and 01ZM(1) models the objects; (5) the finite-diagram lift keeps the prescribed P and v_{j,α} models; (6) 01ZP, 0EUU and 01QR give the immersions, and 07RR gives joint surjectivity at all later stages; (7) a correct retraction argument shows κ(p)→κ(z) is an isomorphism, and the empty family/target is handled. Every hypothesis of each cited node was checked against its statement. New node lem-per-cd-finite-presentation-section-cover states 0GTL exactly, statement only. It holds for an empty target, the identity, a field target and a nonreduced target. It is not a duplicate of rational-lift-locally-closed-section, of completely-decomposed-etale-finite-subcover or of the pbc stratification nodes, and no DAG node cites 0GTL or 0GTM. It is strictly smaller than the item. All 16 tool_uses are generic limit and permanence lemmas of the pbc toolkit, which I accept. Minor: the report mentions a citations.json that the commit does not contain. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NisnevichCoverLimitDescent",
+  "declaration": "AlgebraicGeometry.exists_completelyDecomposedEtale_family_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NisnevichCoverLimitDescent.lean",
+  "statement": "theorem exists_completelyDecomposedEtale_family_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)] (c : Cocone R) (hc : IsColimit c) [IsNoetherianRing c.pt] (i₀ : I) (P₀ : Over (Spec (R.obj i₀))) [LocallyOfFiniteType P₀.hom] [QuasiCompact P₀.hom] {J : Type v} [Finite J] (V₀ : J → Over (Spec (R.obj i₀))) [∀ j : J, LocallyOfFiniteType (V₀ j).hom] [∀ j : J, QuasiCompact (V₀ j).hom] (f₀ : ∀ j : J, V₀ j ⟶ P₀) (het : ∀ j : J, Etale (((Over.pullback (Spec.map (c.ι.app i₀))).map (f₀ j)).left)) (hcd : ∀ p : ((Over.pullback (Spec.map (c.ι.app i₀))).obj P₀).left, ∃ (j : J) (z : ((Over.pullback (Spec.map (c.ι.app i₀))).obj (V₀ j)).left), ((Over.pullback (Spec.map (c.ι.app i₀))).map (f₀ j)).left z = p ∧ IsIso (Scheme.Hom.residueFieldMap (((Over.pullback (Spec.map (c.ι.app i₀))).map (f₀ j)).left) z)) : ∃ (i₁ : I) (h₀₁ : i₀ ≤ i₁), ∀ (i : I) (h₁ : i₁ ≤ i), (∀ j : J, Etale (((Over.pullback (Spec.map (R.map (homOfLE (h₀₁.trans h₁))))).map (f₀ j)).left)) ∧ ∀ p : ((Over.pullback (Spec.map (R.map (homOfLE (h₀₁.trans h₁))))).obj P₀).left, ∃ (j : J) (z : ((Over.pullback (Spec.map (R.map (homOfLE (h₀₁.trans h₁))))).obj (V₀ j)).left), ((Over.pullback (Spec.map (R.map (homOfLE (h₀₁.trans h₁))))).map (f₀ j)).left z = p ∧ IsIso (Scheme.Hom.residueFieldMap (((Over.pullback (Spec.map (R.map (homOfLE (h₀₁.trans h₁))))).map (f₀ j)).left) z)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6d5e54ec",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Lean statement exact vs node and ILO III Lemme 3.1.1 (p.38): directed Noetherian I⥤CommRingCat.{u} with Noetherian colimit cocone; finite type = LocallyOfFiniteType+QuasiCompact on P₀ and V₀ j; f₀ arrows in Over; canonical Over.pullback base changes; het Etale; hcd with canonical residueFieldMap IsIso at z over p; conclusion ∃ i₁≥i₀ ∀ i≥i₁ with both clauses. Universe convention matches the cited EtaleInverseLimitDescent toolkit; empty family and empty target covered; no duplicate in Mathlib or side Lean; node changed only in lean; statement verbatim; sorry only, docstrings with source and blueprint id. Item is on the 2026-10-19 drop list but re-reached via the active lem-per-ordinary-alteration-cover-approximation. Sole fault H11: 'Second reading by Q49' is an author self-check → FIX fixes/lem-per-nisnevich-cover-limit-descent.report.md (worker report and Validation verbatim + independent second reading). No Lean changed, so no compile."
+ }
 }

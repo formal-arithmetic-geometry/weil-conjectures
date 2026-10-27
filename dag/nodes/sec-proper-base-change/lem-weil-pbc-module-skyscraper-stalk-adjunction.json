@@ -15,7 +15,7 @@
     "lem-weil-pbc-zariski-h0-proper-henselian-pair"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The skyscraper sheaf of modules at a point is right adjoint to the stalk",
@@ -33,56 +33,60 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the skyscraper is a sheaf of modules).* The restriction maps in the statement respect the action of $\\mathcal O_X$: if both opens contain $x$, $(rs)_x=r_xs_x$ by [def-weil-pbc-module-stalk], and if the smaller open does not contain $x$, both sides restrict to $0$. For an open cover $U=\\bigcup_jU_j$ and compatible sections of $i_{x,*}A$, if $x\\notin U$ every section is $0$ and the unique gluing is $0$ (also for the empty cover of $U=\\emptyset$). If $x\\in U$, choose $j_0$ with $x\\in U_{j_0}$. Any two members of the cover containing $x$ have an intersection containing $x$, where their restrictions are the identity of $A$, so their sections equal the one on $U_{j_0}$; members missing $x$ have the unique zero section. This common element of $A=(i_{x,*}A)(U)$ is the unique gluing. The sectionwise group laws and the germ action thus give a sheaf of $\\mathcal O_X$-modules in the sense of [def-weil-sheaf-of-modules-category]. For an $\\mathcal O_{X,x}$-linear $h:A\\to A'$, the maps $h$ or $0$ commute with these restrictions and actions; identities, composition, and addition of maps are checked on each open, giving the asserted additive functor.",
+   "text": "The section, restriction and scalar formulas in the statement are exactly [def-pc-ringed-module-skyscraper] on $X$. That node gives a sheaf of modules and an additive functor, proving (1).",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-weil-sheaf-of-modules-category"
+    "def-pc-ringed-module-skyscraper"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Definition Tag 009A (label definition-skyscraper-sheaf), case (4); the sectionwise verification omitted there is written out by the agent"
+    "place": "Tag 009A (definition-skyscraper-sheaf), case (4)"
    }
   },
   {
-   "text": "*Step 2 (the map on stalks).* If $s\\in\\mathcal G(U)$ and $t\\in\\mathcal G(V)$ represent the same germ at $x$, [def-weil-pbc-module-stalk] gives an open $W$ with $x\\in W\\subseteq U\\cap V$ and $s|_W=t|_W$. For a sheaf morphism $\\varphi:\\mathcal G\\to i_{x,*}A$, restriction from either $U$ or $V$ to $W$ acts as the identity on $A$; hence $\\varphi_U(s)=\\varphi_W(s|_W)=\\varphi_W(t|_W)=\\varphi_V(t)$. Thus $\\Phi(\\varphi)(s_x)=\\varphi_U(s)$ is well defined and additive. Given $r_x\\in\\mathcal O_{X,x}$ represented by $r\\in\\mathcal O_X(V)$, restrict $r$ and $s$ to $W\\ni x$ contained in $U\\cap V$. The germ action and $\\mathcal O_X(W)$-linearity of $\\varphi_W$ give $\\Phi(\\varphi)(r_xs_x)=\\varphi_W((r|_W)(s|_W))=r_x\\varphi_W(s|_W)=r_x\\Phi(\\varphi)(s_x)$. Therefore $\\Phi(\\varphi)$ is $\\mathcal O_{X,x}$-linear.",
+   "text": "For $\\varphi:\\mathcal G\\to i_{x,*}A$, put $e_U(s)=\\varphi_U(s)$ on $U\\ni x$. These maps are additive and $e_U(rs)=r_xe_U(s)$ by component linearity. Naturality of $\\varphi$ and the identity restrictions of the skyscraper give $e_V(s|_V)=e_U(s)$. Apply [lem-weil-pbc-module-stalk-compatible-evaluations] to obtain the well-defined linear map $\\Phi(\\varphi)$ with the required germ formula.",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-module-stalk-compatible-evaluations",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-ringed-module-skyscraper"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), module case; proof omitted, explicit germ calculation by the agent"
+    "place": "Tag 009C (lemma-stalk-skyscraper-adjoint), linear descent of evaluations"
    }
   },
   {
-   "text": "*Step 3 (constructing the inverse).* Given an $\\mathcal O_{X,x}$-linear $\\psi:\\mathcal G_x\\to A$, define $\\Psi(\\psi)_U(s)=\\psi(s_x)$ if $x\\in U$, and the unique zero map into $(i_{x,*}A)(U)=0$ otherwise. For $x\\in U$, $\\Psi(\\psi)_U(rs)=\\psi((rs)_x)=\\psi(r_xs_x)=r_x\\psi(s_x)$, so this component is $\\mathcal O_X(U)$-linear; the other components are linear since their targets are zero. For $V\\subseteq U$, if $x\\in V$ then $x\\in U$ and $(s|_V)_x=s_x$, so the maps commute with restriction; if $x\\notin V$, both composites land in zero. These are all cases. Thus $\\Psi(\\psi)$ is a morphism of sheaves of $\\mathcal O_X$-modules. For a germ $s_x$, $\\Phi(\\Psi(\\psi))(s_x)=\\psi(s_x)$. Conversely, if $x\\in U$, then $\\Psi(\\Phi(\\varphi))_U(s)=\\Phi(\\varphi)(s_x)=\\varphi_U(s)$, while for $x\\notin U$ both component maps have zero target. Hence $\\Phi$ and $\\Psi$ are inverse bijections.",
+   "text": "For a linear $\\psi:\\mathcal G_x\\to A$, set $e_U(s)=\\psi(s_x)$ on $U\\ni x$. Additivity and $(rs)_x=r_xs_x$ give $e_U(rs)=r_xe_U(s)$; invariance of germs under restriction gives compatibility. By [lem-weil-pbc-skyscraper-compatible-evaluations-extension] these maps extend uniquely to the morphism $\\Psi(\\psi)$, zero on the remaining opens. Thus $\\Phi(\\Psi(\\psi))(s_x)=\\psi(s_x)$. Conversely $\\Psi(\\Phi(\\varphi))_U(s)=\\varphi_U(s)$ when $x\\in U$, and both maps have zero target otherwise. Every stalk element is a germ, so these are inverse maps and prove (2).",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), module case; proof omitted, inverse and restriction checks by the agent"
-   }
-  },
-  {
-   "text": "*Step 4 (naturality).* For $g:\\mathcal G'\\to\\mathcal G$ and $s'_x$ represented by $s'\\in\\mathcal G'(U)$ with $x\\in U$, [def-weil-pbc-module-stalk] gives $g_x(s'_x)=(g_U(s'))_x$, so $\\Phi(\\varphi\\circ g)(s'_x)=\\varphi_U(g_U(s'))=\\Phi(\\varphi)(g_x(s'_x))$. For $h:A\\to A'$ linear, the component $(i_{x,*}h)_U$ is $h$ on any $U\\ni x$, so $\\Phi(i_{x,*}h\\circ\\varphi)(s_x)=h(\\varphi_U(s))=h(\\Phi(\\varphi)(s_x))$. Germs exhaust the stalk, proving both naturality equations and hence the adjunction.",
-   "uses": [
+    "lem-weil-pbc-skyscraper-compatible-evaluations-extension",
     "def-weil-pbc-module-stalk"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009C (lemma-stalk-skyscraper-adjoint), extension and the two inverse identities"
+   }
+  },
+  {
+   "text": "For $g:\\mathcal G'\\to\\mathcal G$, the stalk-map formula $g_x(s'_x)=(g_U(s'))_x$ gives $\\Phi(\\varphi\\circ g)(s'_x)=\\varphi_U(g_U(s'))=\\Phi(\\varphi)(g_x(s'_x))$. For linear $h:A\\to A'$, skyscraper maps act pointwise, so $\\Phi(i_{x,*}h\\circ\\varphi)(s_x)=h(\\varphi_U(s))=h(\\Phi(\\varphi)(s_x))$. Germs exhaust each stalk. These are both naturality identities in (3), hence the adjunction.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-ringed-module-skyscraper"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint); the naturality equations are written out by the agent"
+    "place": "Tag 009C (lemma-stalk-skyscraper-adjoint), naturality in the two variables"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-stalk",
-  "def-weil-sheaf-of-modules-category"
+  "def-pc-ringed-module-skyscraper",
+  "lem-weil-pbc-module-stalk-compatible-evaluations",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-skyscraper-compatible-evaluations-extension",
+  "def-weil-pbc-module-stalk"
  ],
  "proof_origin": {
   "by": "agent",
@@ -139,21 +143,35 @@
   "item": "lem-weil-pbc-scheme-modules-enough-injectives",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-23",
   "item": "lem-weil-pbc-module-skyscraper-stalk-adjunction",
   "worker": "stage1",
-  "summary": "Kept the explicit ringed-space module statement of Sheaves 009A(4)/009C, specialized to schemes. The Stacks proof is omitted, so four agent-written steps verify the sectionwise sheaf and additive functor, well-defined O_{X,x}-linear germ map, explicit inverse including all restriction cases, and naturality. Existing definition nodes cover the only cited notions; no new nodes are needed. The non-T1 case is included because the proof only tests whether an open contains x, and the empty open has zero module as required."
+  "summary": "Repair of the latest landing return at 882f85d1007 (2026-10-22 14:44 UTC): rebased the retained reader-approved split onto the current shared DAG, preserving its statement, statement dependencies, source, Lean and maintainer fields. Re-read all current cited statements and verified every one of the eight verbatim citation quotes; no mathematical adjustment is needed. Retain two statement-only unsplit lemmas for linear descent of compatible neighbourhood evaluations and extension into the skyscraper, with the explicit inverse and naturality assembly (1517 characters). The released keep_plan order still requires two new nodes and neither id exists in the current DAG. Refreshed the report to identify this actual returned head rather than the previous retry. No Lean was written or compiled.",
+  "blueprint": "The inherited ancestor thm-weil-pbc-henselian-idempotent-lifting, original split step 2 (0A0B): the module stalk/skyscraper adjunction used to construct enough injectives for module cohomology. New nodes refine old steps 2 and 3; old step 1 is already the existing def-pc-ringed-module-skyscraper.",
+  "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-23",
   "by": "L",
-  "group": "E1",
+  "reviewer": "NT-cc-Q104-bf633da9a",
+  "group": "Q104",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 009A(4)/009C with the proof written out: sheaf condition incl. the empty open, well-definedness and linearity of Phi on germs, inverse Psi with all restriction cases, naturality in both variables"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-bf633da9a (reviewer sub-agent of L); spot-checked: This is the fourth push of the batch5 re-split after three landing returns. Each return said the side completion was never promoted (coord/returns/Q104.md), and none was a mathematical rejection. By sha256 both new nodes are byte-identical in heads 762786c6, b16d0b86, 882f85d1 and bf633da9. With split_report removed, the item's diff against 882f85d1 is empty. The live item still has the old 4-step proof (E1 2026-10-10), and neither child id exists live, so the delivery is not superseded and the keep_plan release note applies. I read the mathematics in full myself. Source: Stacks sheaves.tex l.3332, 009C module case; its proof is 'Omitted', so proof_origin=agent is right. Also 009A(4). No SGA. The statement is unchanged. Step 1 cites the existing def-pc-ringed-module-skyscraper. Its statement gives M or 0 sections, membership restrictions, the germ action, pointwise maps and an additive functor into Mod(O_X), which is clause (1); its own split proof carries the old gluing and empty-domain argument, so citing it avoids a duplicate. Step 2 applies the new lem-weil-pbc-module-stalk-compatible-evaluations (894 characters): component linearity from def-weil-sheaf-of-modules-category plus the germ action gives e_U(rs)=r_x e_U(s), and identity restrictions give compatibility. The node is true: the colimit gives a unique additive map, and linearity follows from r_x s_x=(r|_W s|_W)_x on a common W. I checked incomparable neighbourhoods, A=0, a one-point space, the Sierpinski generic point and plain presheaves. Step 3 applies the new lem-weil-pbc-skyscraper-compatible-evaluations-extension (1119 characters). It is true: for V⊆U the restriction is the identity or the target is 0, linearity is the germ-scalar hypothesis, uniqueness holds because the components are prescribed, and I verified the pre/post-composition clauses. The parent writes out both inverse identities. Step 4 keeps the old 492-character naturality as an elementary germ computation. The assembly is 1517 characters, proof_deps equals the union of the step uses, and the two children are of comparable size, neither restating the item or circular. Duplicate search with rg -L (009C, skyscraper adjoint) and a statement scan (stalk+unique+linear, skyscraper+morphism+stalk) found only other content: def-pc-module-stalk-functor, the lem-pc-skyscraper-complex* nodes, point-module-evaluation and skyscraper-constant-on-point-closure. Searches cover three kinds, with LeanSearch honestly recorded as unavailable; Mathlib's skyscraperPresheafStalkAdjunction is fixed-category. Unit sk-thm-p1; the off-unit citations are definitions only, so no tool_uses are needed. Advisory: the parent does not use the extension node's composition clauses. Maintainer note: L must promote the side completion before this can land; that is not a delivery fault. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction",

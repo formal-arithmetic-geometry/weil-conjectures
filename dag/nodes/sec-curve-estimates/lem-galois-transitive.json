@@ -103,7 +103,18 @@
   "lem-galois-object-exists"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -157,5 +168,26 @@
   "landing": "20261019T093412-L-2306541",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $(\\mathcal C,F)$ be a Galois category, $G=\\operatorname{Aut}(F)$ and\n$X$ connected. Then $G$ acts transitively on $F(X)$.",
+  "proof": [
+   {
+    "text": "We use the axioms of [def-galois-category] throughout.\nStep 1: the directed system of Galois objects. Let $I$ be the set of\nisomorphism classes of Galois objects, choose representatives $X_i$ and\nelements $\\gamma_i\\in F(X_i)$. Write $i\\ge i'$ if there is a morphism\n$f_{ii'}:X_i\\to X_{i'}$; post-composing with an automorphism of $X_{i'}$\nwe may assume $F(f_{ii'})(\\gamma_i)=\\gamma_{i'}$, and then $f_{ii'}$ is\nunique by [lem-galois-axioms](5). The set $I$ is directed: for\n$i_1,i_2$ apply [lem-galois-object-exists] to a connected component\nof $X_{i_1}\\times X_{i_2}$.\nStep 2: $F$ is the colimit of the representable functors of the $X_i$.\nLet $F'(X)=\\varinjlim_I\\operatorname{Mor}_{\\mathcal C}(X_i,X)$ and define\n$t_X(f)=F(f)(\\gamma_i)$. Then $t_X$ is injective by\n[lem-galois-axioms](5). For surjectivity let $\\gamma\\in F(X)$; by\n[lem-galois-axioms](8) we may assume $X$ connected. By\n[lem-galois-object-exists] there are $i$ and a morphism\n$f:X_i\\to X$; $F(f)$ is surjective by [lem-galois-axioms](4) and (2),\nso $\\gamma=F(f)(\\delta)$ for some $\\delta\\in F(X_i)$, and since $X_i$\nis Galois there is $a\\in\\operatorname{Aut}(X_i)$ with\n$F(a)(\\gamma_i)=\\delta$; then $t_X(f\\circ a)=\\gamma$. Hence $t$ is an\nisomorphism.\nStep 3: the group of the system. Put $A_i=\\operatorname{Aut}(X_i)$. For\n$i\\ge i'$ there is a unique homomorphism $h_{ii'}:A_i\\to A_{i'}$ with\n$f_{ii'}\\circ a=h_{ii'}(a)\\circ f_{ii'}$ for all $a\\in A_i$, defined\nby $F(h_{ii'}(a))(\\gamma_{i'})=F(f_{ii'}\\circ a)(\\gamma_i)$ and\n[lem-galois-axioms](5); the $h$ are compatible and\n$A_i\\to A_{i'}$ is surjective because $F(X_i)\\to F(X_{i'})$ is\nsurjective and $X_{i'}$ is Galois. Let $A=\\varprojlim_IA_i$, profinite\nby [lem-galois-aut-profinite] or directly as a limit of finite\ngroups. It acts on the system $(X_i)$ and hence on $F'$ by\nprecomposition, giving $A^{\\mathrm{op}}\\to G$. Since $A\\to A_i$ is\nsurjective, $G$ acts transitively on $F(X_i)$ for every $i$.\nStep 4: conclusion. Every connected object is dominated by some $X_i$\n([lem-galois-object-exists]), and a morphism $X_i\\to X$ of connected\nobjects is an epimorphism inducing a surjection\n$F(X_i)\\to F(X)$; transitivity on $F(X_i)$ therefore implies\ntransitivity on $F(X)$.",
+    "uses": [
+     "def-galois-category",
+     "lem-galois-axioms",
+     "lem-galois-object-exists",
+     "lem-galois-aut-profinite"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

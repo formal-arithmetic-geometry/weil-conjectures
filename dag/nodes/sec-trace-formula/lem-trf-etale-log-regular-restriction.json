@@ -1,0 +1,130 @@
+{
+ "id": "lem-trf-etale-log-regular-restriction",
+ "kind": "statement",
+ "title": "Log regularity and triviality locus under etale restriction",
+ "statement": "Let X be a locally Noetherian fine saturated log scheme [def-trf-fs-log-blowup] which is log regular. Let W -> X be etale [def-weil-etale-morphism] with W locally Noetherian [pqf-def-locnoeth], and let N be a log structure whose underlying prelog structure equals the canonical slice restriction [def-trf-log-etale-restriction-stalk-comparison] of the log structure of X. Then N is fine saturated and log regular, and its triviality locus is the inverse image of the triviality locus of X.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-etale-morphism",
+  "pqf-def-locnoeth",
+  "def-trf-log-etale-restriction-stalk-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For a pointed etale object W, its pointed neighbourhood category is the corresponding slice of the pointed neighbourhood category of X. The forgetful functor is initial: a neighbourhood is refined by its fibre product with W. The colimit formula identifies the log stalk and the ring stalk, their structural maps, and units. This is the etale special case directly; the stronger ind-etale invariance theorem is unnecessary.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-log-etale-restriction-stalk-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict an fs chart after fibre product with W. The stalk isomorphisms preserve its pushout condition, its characteristic group rank, and its nonunit ideal and quotient. Hence they preserve both the stratum regularity and the dimension equation. This proves fine saturation and log regularity.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk isomorphism preserves subsingleton characteristics. For the converse at a point, lift any geometric point at its image through that point of W: the residue extension of an etale map is finite separable and its embedding extends into the algebraically closed field. The same stalk identification gives the equivalence of the universally quantified triviality conditions.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-trf-log-etale-restriction-stalk-comparison",
+  "def-trf-fs-log-blowup",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.2 and 1.6--1.7, printed pp. 69--70; characteristic faces and descent of free chart parameters, extracted from returned proof steps 7--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a log regular scheme with a free monoid chart, the nonunit coordinates extend to a regular system of parameters in each ordinary local ring",
+   "results": "8 hits, including Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal and RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem. These concern smooth algebras or regular sequences, not logarithmic charts or descent of prescribed parameter sublists.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "12 hits. Inspected IsRegularLocalRing.of_spanFinrank_maximalIdeal_le, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, and isRegularLocalRing_iff. These establish regularity from generators or transport through an isomorphism; none supplies the free log chart presentation, etale restriction, or specified strict-local parameter descent.",
+   "date": "2026-10-26",
+   "verdict": "individual tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters; etaleRestrict|IsLogRegular|trivialityLocus; strictHenselization.*parameter|parameters.*strictHenselization",
+   "results": "msearch grep returned zero hits for the combined parameter search. Local rg inspected FineSaturatedLogBlowup, LogConditionFineChartLocality, LogEtaleRestrictionStalkComparison, the strict-henselization regularity and cotangent comparison modules, RegularLocalQuotientKernelParameters, and Mathlib RegularLocalRing/Defs. No existing theorem gives any of the three exact intermediate conclusions. The definitions of the four chart functions occur only in the assigned item and are moved verbatim to their definition module.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; existing ingredients retained"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A log regular fine saturated log scheme stays log regular on an etale neighbourhood and its triviality locus pulls back",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.etaleLocus, Algebra.isOpen_etaleLocus, RingHom.Etale.propertyIsLocal, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.FormallyEtale.localization_map. Inspected returned types; none supplies this exact statement. The parameter queries return regular-sequence, characteristic-p, character or henselian structure results; the coordinate query also returns TopCat.Presheaf.Γgerm, which supplies only the ordinary germ, and unrelated affine-space coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FreeLogChartOrdinaryParameters",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-free-log-chart-ordinary-parameters",
+   "place": "Steps of the ordinary-parameter proof, factored without changing its statement or the unit route."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLogRegularRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLogRegularRestriction.lean",
+  "declaration": "AlgebraicGeometry.etale_logRegular_restriction",
+  "statement": "theorem etale_logRegular_restriction\n    (X : FineSaturatedLogScheme.{u}) (hX : X.IsLogRegular)\n    (W : X.scheme.Etale) [IsLocallyNoetherian W.left]\n    (N : EtaleLogStructure W.left)\n    (hN : N.toEtalePrelogStructure = X.logStructure.toEtalePrelogStructure.etaleRestrict W) :\n    (∃ hfs : N.IsFineSaturated,\n      FineSaturatedLogScheme.IsLogRegular ⟨W.left, inferInstance, N, hfs⟩) ∧\n      W.hom ⁻¹' X.logStructure.trivialityLocus = N.trivialityLocus",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone + node lean.statement (byte-identical); moved FreeLogChart.* defs vs clone (verbatim, re-exported, 0 importers/users); 3 new sorry statements vs FineSaturatedLogBlowup defs, ILO VI 1.1-1.2/1.6-1.7 and Stacks 06LN/07QM; node stmt_deps vs declaration owners"
+ }
+}

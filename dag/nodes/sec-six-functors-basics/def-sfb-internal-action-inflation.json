@@ -1,0 +1,105 @@
+{
+ "id": "def-sfb-internal-action-inflation",
+ "kind": "definition",
+ "title": "Trivial internal actions, action restriction, and underlying exactness data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix compatible universes [def-weil-size-convention] and a small site $(C,J)$ [def-weil-pbc-sites-and-cohomology]. Use the sectionwise linear action categories and forgetful functors of [def-sfb-internal-equivariant-module-sheaves]. For group presheaves $K,L$ and a natural group homomorphism $\\theta:L\\to K$, restrict a linear $K$-action on a module presheaf by $l\\cdot m=\\theta(l)\\cdot m$. For a sheaf of rings $S$, define inflation $\\mathcal E_K(S)\\to\\mathcal E_L(S)$ by this action, retaining the underlying module sheaf and every map. Define trivial action $\\operatorname{Mod}(S)\\to\\mathcal E_K(S)$ by letting every group section act as the identity, again retaining every module and map [def-weil-sheaf-of-modules-category]. Define ActionForgetExact to be the conjunction that the underlying module-sheaf functor is additive, preserves finite limits and finite colimits, detects exactness of short complexes and zero objects, creates each kernel and cokernel, preserves each kernel under section evaluation, and identifies its module-sheaf cokernel with module sheafification of the underlying presheaf cokernel [def-weil-presheaf-modules-sheafification]. These are definitions and a proposition specifying exactness, not an assertion that the proposition holds. No nontriviality, injectivity, surjectivity or nonzero-ring assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-internal-equivariant-module-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written internal-action categorical infrastructure; existing constructions in lem-sfb-sheaf-action-grothendieck-inflation and lem-sfb-sheaf-product-fixed-adjunction, used in steps 1 and 3 of lem-sfb-internal-restriction-module-tensor."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Trivial linear actions on sheaves of modules and restriction along a morphism of group presheaves",
+   "results": "{\"t\": \"2026-10-24T11:29:41Z\", \"tool\": \"leansearch\", \"query\": \"Trivial linear actions on sheaves of modules and restriction along a morphism of group presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restriction\", \"PresheafOfModules.restriction_app\", \"Representation.IsTrivial.mk\", \"PresheafOfModules.ofPresheaf\", \"Rep.trivialFunctor\", \"Representation.IsTrivial\", \"PresheafOfModules.restrictScalarsObj_map\", \"PresheafOfModules.map\"], \"digest\": \"e79df091149fbea4\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary module restriction and fixed-group representations, but not these internal group-presheaf action definitions. Extract the existing project declarations without duplicating them."
+  },
+  {
+   "tool": "grep",
+   "query": "inflateSheaf|trivialSheafAction|ActionForgetExact|restrictLinearAction",
+   "results": "{\"t\": \"2026-10-24T11:30:52Z\", \"tool\": \"grep\", \"query\": \"inflateSheaf|trivialSheafAction|ActionForgetExact|restrictLinearAction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary module restriction and fixed-group representations, but not these internal group-presheaf action definitions. Extract the existing project declarations without duplicating them."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Action",
+   "results": "{\"t\": \"2026-10-24T11:30:53Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, Action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary module restriction and fixed-group representations, but not these internal group-presheaf action definitions. Extract the existing project declarations without duplicating them."
+  },
+  {
+   "tool": "grep (project and DAG)",
+   "query": "rg inflateSheaf|trivialSheafAction|ActionForgetExact|restrictLinearAction lean/WeilConjectures lean/Sheaf; rg -l on dag/nodes; blueprint_refs.py search inflation",
+   "results": "No upstream WeilConjectures declarations. The exact definitions occur only in SheafActionGrothendieckInflation and SheafProductFixedAdjunction. DAG matches are theorem nodes and internal equivariant category definition (which owns neither inflation nor trivial action). Blueprint search finds only det-base-field-cd-cochains and det-base-field-cd-inflation, not these notions. ancestor returns None.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns these declarations; this is ownership and extraction of existing code, not a second construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-restriction-module-tensor",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), internal-action restriction and trivial inflation; ancestor command returns None.",
+   "via": [
+    "lem-sfb-internal-restriction-module-tensor",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalActionInflation",
+  "declaration": "CategoryTheory.InternalActionSite.inflateSheaf",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.restrictLinearAction_naturality",
+   "CategoryTheory.InternalActionSite.restrictLinearAction",
+   "CategoryTheory.InternalActionSite.inflateSheaf",
+   "CategoryTheory.InternalActionSite.ActionForgetExact",
+   "CategoryTheory.InternalActionSite.trivialSheafAction"
+  ],
+  "statement": "def inflateSheaf (J : GrothendieckTopology C) (S : Sheaf J RingCat.{u})\n    (θ : L ⟶ K) : EquivariantSheaf (K := K) J S ⥤ EquivariantSheaf (K := L) J S",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the published action definitions and exactness specification extracted unchanged by maintenance from SheafActionGrothendieckInflation and SheafProductFixedAdjunction. Both original modules publicly re-export InternalActionInflation. Declaration signatures and bodies, including the already proved restrictLinearAction_naturality, are unchanged; only blueprint ownership tags and module headers change. This record uses existing:true because the extraction is landed as library maintenance before the consumer stage-2 delivery."
+ }
+}

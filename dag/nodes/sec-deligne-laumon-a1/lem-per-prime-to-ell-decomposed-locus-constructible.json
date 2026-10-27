@@ -14,9 +14,123 @@
   "def-weil-residue-field",
   "def-weil-pbc-constructible-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{dec}_{\\ell'}(f)$. Fix $x\\in D$ and a witness $y$ of degree $d=[\\kappa(y):\\kappa(x)]$ with $\\ell\\nmid d$. Choose a member $X_0=\\operatorname{Spec}R$ of the finite Noetherian affine cover containing $x$, and an affine open $W=\\operatorname{Spec}B_0$ containing $y$ inside $f^{-1}(X_0)$. The restricted map is etale. If $\\mathfrak p$ represents $x$, put $A=R/\\mathfrak p$, $Z=\\operatorname{Spec}A$, and $K=\\operatorname{Frac}A=\\kappa(x)$. Thus $Z\\hookrightarrow X_0$ is the reduced closed subscheme with underlying set $V(\\mathfrak p)=\\overline{\\{x\\}}\\cap X_0$, and $x$ is its generic point. The quotient $A$ is Noetherian: lift an ideal to $R$ and project its finite generators. The affine pullback $W_Z=\\operatorname{Spec}B$, $B=A\\otimes_RB_0$, is etale over $Z$ by the cited ring base-change theorem. The closed-immersion residue-field isomorphism identifies $\\kappa_Z(x)$ with $\\kappa_X(x)$. The fibre-product point and residue-field statements give a lift $\\widetilde y\\in W_Z$ over $x$ with residue field $\\kappa(y)$: its tensor field is $\\kappa(y)\\otimes_{\\kappa(x)}K=\\kappa(y)$.",
+   "uses": [
+    "lem-a1-etale-open-restriction",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+   }
+  },
+  {
+   "text": "Base change once more to $K$. The affine fibre algebra $B_K=K\\otimes_AB$ is etale, hence by the cited field-algebra theorem is a finite product $\\prod_{i=1}^rL_i$ of finite separable field extensions of $K$. The point $\\widetilde y$ selects a factor, say $L_j=\\kappa(y)$, of degree $d$. Let $e_j$ have component $1$ in this factor and $0$ elsewhere. Write $e_j=b/s$ with $b\\in B$ and $0\\ne s\\in A$: a finite sum of tensors of fractions has a common denominator. Inverting $b$ kills precisely the other field factors, so $(B_b)_K=L_j$. The basic open $\\operatorname{Spec}B_b\\subset W_Z$ is affine with the indicated localization ring; its map to $Z$ is etale by open restriction. The affine etale ring criterion therefore makes $B_b$ a finitely presented, in particular finite type, $A$-algebra. Its only prime over $(0)\\subset A$ is the point of $\\operatorname{Spec}L_j$. Apply the cited generic-finiteness lemma to this finite type algebra and the minimal prime $(0)$ of the domain $A$. It gives $0\\ne a\\in A$ such that $C=(B_b)_a$ is a finite $A_a$-module. Thus $h:\\operatorname{Spec}C\\to\\operatorname{Spec}A_a$ is finite etale and its generic fibre is $\\operatorname{Spec}L_j$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-a1-etale-open-restriction",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+   }
+  },
+  {
+   "text": "By the definitions, the finite etale map $h$ is finite, flat and locally of finite presentation, hence finite locally free. Its rank at the generic point is $\\dim_K L_j=d$. The cited finite-flat rank theorem supplies an open neighbourhood $U$ of this generic point in $\\operatorname{Spec}A_a$ on which the fibre degree is constantly $d$. Regard $U$ as an open subscheme of $Z$. For each $t\\in U$, the fibre algebra $E_t=C\\otimes_{A_a}\\kappa(t)$ has $\\dim_{\\kappa(t)}E_t=d$; this is exactly the fibre degree in that theorem, using the affine fibre-product identification. Moreover $E_t$ is etale by ring base change.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-finite-integral-morphism",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+   }
+  },
+  {
+   "text": "For $t\\in U$, write $E_t\\cong\\prod_{q=1}^{m_t}M_q$ by the etale-over-field theorem. These are finite field extensions of $\\kappa(t)$, and taking vector-space dimensions gives $d=\\sum_q[M_q:\\kappa(t)]$. Indeed a basis of the finite product is the union of the bases supported in each coordinate. If $\\ell$ divided all the summands, it would divide $d$, a contradiction. Thus some factor has degree prime to $\\ell$, and its point $z$ in the fibre has residue field $M_q$. Let $y'$ be its image in $W\\subset Y$, and let $x'$ be the image of $t$ in $X_0\\subset X$. Since $Z\\hookrightarrow X_0$ is a closed immersion, $\\kappa(t)=\\kappa(x')$. The fibre-product residue formula now identifies $\\kappa(y')$ with $\\kappa(z)$: the relevant tensor product is $\\kappa(y')\\otimes_{\\kappa(x')}\\kappa(t)=\\kappa(y')$. Open restrictions preserve stalks and therefore residue fields. Consequently $[\\kappa(y'):\\kappa(x')]=[M_q:\\kappa(t)]$ is finite and prime to $\\ell$. This proves that every point of $U$ lies in $D$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-weil-open-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+   }
+  },
+  {
+   "text": "The subset $U\\subset Z$ constructed for $x$ contains $x$ and is open in the closed subset $V(\\mathfrak p)$ of the open $X_0\\subset X$. Hence it is locally closed in $X$: an open of a closed subset of $X_0$ is the intersection of an open of $X$ with the closure in $X$ of that closed subset. Step 4 gives $U\\subset D$. Taking the union over all $x\\in D$ and their choices gives $D=\\bigcup U$, a union of locally closed subsets. If $D$ is empty, take the empty union. All restrictions were chosen near a single witness point; no quasi-compactness or separatedness of the original $Y$ or $f$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+   }
+  },
+  {
+   "text": "Every Zariski open subset of $X$ is quasi-compact by the cited theorem on open subschemes of Noetherian schemes. Thus the constructible topology of the statement is generated by all Zariski opens and their complements. Every locally closed subset, an intersection of an open and a closed subset, is open in this topology, so Step 5 proves the claimed openness. Conversely a finite intersection of these subbasic sets is an intersection of a Zariski open and a Zariski closed subset, hence locally closed. Every constructible-topology open is a union of such finite intersections. This proves the stated equivalence.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constructible-topology",
+  "def-weil-residue-field",
+  "lem-a1-etale-open-restriction",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, Proposition 2.2.2, printed pp. 26--27, proof: reduction to integral affine schemes, generic finiteness, and locally constant finite-flat rank."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +159,66 @@
    "results": "[leansearch] OK 8 hit(s): Algebra.isOpen_etaleLocus; Algebra.unramifiedLocus; Algebra.etaleLocus; Algebra.etaleLocus_eq_univ_iff_etale; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; Algebra.mem_etaleLocus_iff; Algebra.basicOpen_subset_etaleLocus_iff_etale; Algebra.etaleLocus_eq_univ_iff. No declaration states this locus.",
    "date": "2026-10-19",
    "verdict": "no match: only etale-locus and generic constructibility-image results were returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism over a Noetherian scheme the locus admitting a point of residue degree prime to a fixed prime is a union of locally closed subsets",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, RingHom.Etale.propertyIsLocal, Algebra.isOpen_unramifiedLocus, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, IsLocallyConstructible",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "grep",
+   "query": "decomposed|residueDegree|IsLocallyConstructible",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphism prime to ell residue degree locus is ind constructible",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.IsEtaleAt, RingHom.Etale.propertyIsLocal, Algebra.unramifiedLocus, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a point of an etale scheme over the generic point of an integral scheme there is a dense open base and an open neighborhood finite etale with that point as generic fibre",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.IsEtale, Algebra.IsEtaleAt",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "grep",
+   "query": "genericallyFinite|exists.*[Ff]inite|finite.*[Gg]eneric",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible topology openness of the set of base points whose etale fibre has a closed point of degree not divisible by a prime",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, Algebra.isOpen_unramifiedLocus, Algebra.etaleLocus, PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible, PrimeSpectrum.isConstructible_basicOpen, AlgebraicGeometry.Polynomial.isOpen_imageOfDf, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the prime-to-ell residue-degree locus with these hypotheses. Generic etale loci and generic finiteness results do not directly state this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Scheme.Hom.residueDegree",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-decomposed-etale-finite-subcover",
@@ -77,5 +247,68 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-prime-to-ell-decomposed-locus-constructible",
+  "worker": "stage1",
+  "summary": "Expanded ILO II Proposition 2.2.2 into a pointwise locally closed neighbourhood construction. Isolated the chosen generic field factor by one explicit localization, applied existing generic finiteness and finite-flat rank theorems, and wrote out the fibre degree-sum argument. Reused existing nodes only; no new nodes. Preserved the ind-constructible statement without separation or quasi-compactness assumptions.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, latest blueprint proof Step 3, finiteness/duality input, through the existing ILO IX/II alteration-cover chain; this item supplies the prime-to-ell lifting loci used by the finite-subcover lemma. The current blueprint has no separate node with this statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Identifies residue fields on the reduced closure of a point; a generic scheme-theoretic tool, absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Identifies actual residue fields, not merely fibre-product points; used as a generic scheme-theoretic tool, absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away",
+    "why": "Makes the selected affine generic field factor finite after shrinking the base; generic commutative algebra tool, exactly the affine-finiteness reduction in ILO II 2.2.2, absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-ND-8f3eb6627",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8f3eb6627 (reviewer sub-agent of L); spot-checked: Read ILO Exposé II 2.1.1, 2.2.1, Prop 2.2.2 and its proof (printed pp. 26–27), and Cor 2.2.4. The item's statement matches the source: X Noetherian, f étale, dec_{ℓ'}(f) is ind-constructible, meaning a union of locally closed subsets. It adds no hypothesis on Y or f, and it uses the intended residue-degree direction [κ(y):κ(x)] (the PDF prints it reversed in 2.2.1). The added 'open in the constructible topology' equivalence is proved in step 6 from def-weil-pbc-constructible-topology (subbase of quasi-compact opens and their complements) and lem-weil-pbc-noetherian-open-subscheme-noetherian. The delivery replaces ILO's Noetherian induction with a direct pointwise construction. Step 1 passes to the closure of the point: affine pieces X_0=Spec R and W=Spec B_0, A=R/p, B=A⊗B_0 étale over A, κ_Z(x)=κ_X(x) by the closed-immersion residue node, and the fibre-product point and residue nodes give ỹ with κ(ỹ)=κ(y). Step 2 writes B_K as a product of fields; the idempotent e_j=b/s isolates the witness factor, so (B_b)_K=L_j; A→B_b is finitely presented by the affine étale criterion; lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away then applies with its exact hypotheses (finite type, minimal prime (0), one prime over it), giving C=(B_b)_a finite. Step 3 applies lem-weil-pbc-finite-flat-rank-iso(1) to the finite étale map: the generic rank is d, so the fibre dimension is d on an open U around the generic point. Step 4 decomposes each fibre E_t as a product of fields; d=Σ[M_q:κ(t)] gives a factor of degree prime to ℓ, and the closed-immersion, fibre-product and open-immersion residue fields identify it with [κ(y'):κ(x')]. Step 5: U is open in cl{x}∩X_0, so locally closed in X; it contains x and lies in D, so D=∪U. Edge cases checked: empty X/Y/D, X a field, non-reduced X, split fibres with ℓ-divisible factors, ℓ equal to a residue characteristic, non-qc and non-separated Y. No new nodes. No duplicate found by rg -L over dag/nodes; the only match is the parent finite-subcover node, which cites the item. No cycle and no SGA. I accept the three declared tool_uses (closed-immersion residue iso, fibre-product residue field, minimal-prime generic finiteness) as generic tools. One small point: in step 2, matching ỹ to the factor L_j is the elementary localization prime correspondence, already backed by the fibre-product nodes cited in steps 1 and 4, so I left it as written. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeToEllDecomposedLocusConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.primeToEllDecomposedLocus_indConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeToEllDecomposedLocusConstructible.lean",
+  "statement": "theorem primeToEllDecomposedLocus_indConstructible {X Y : Scheme.{u}} [IsNoetherian X] (ell : ℕ) (hell : ell.Prime) (f : Y ⟶ X) [Etale f] : (∃ S : Set (Set X), (∀ s ∈ S, IsLocallyClosed s) ∧ ⋃₀ S = {x : X | ∃ y : Y, f y = x ∧ (f.residueFieldMap y).hom.Finite ∧ ¬ ell ∣ f.residueDegree y}) ∧ IsOpen[constructibleTopology X] {x : X | ∃ y : Y, f y = x ∧ (f.residueFieldMap y).hom.Finite ∧ ¬ ell ∣ f.residueDegree y}",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-037cd6b9b",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: [IsNoetherian X] (finite Noetherian affine cover via isNoetherian_iff_of_finite_affine_openCover), ell.Prime, [Etale f], no qc/separation on Y or f; locus uses canonical residueFieldMap κ(f y)→κ(y) with an explicit RingHom.Finite conjunct and ¬ ell ∣ residueDegree (finrank via the same map, so the default 0 cannot pass as non-divisible); conclusion states both node formulations (∃ S of IsLocallyClosed sets with ⋃₀ S = locus, and IsOpen[constructibleTopology X]). Edge cases (empty locus, identity, ell = residue char, non-qc Y) covered; one universe u, all bound. lean.statement verbatim; only the item's lean field changes vs live; no rebind; docstrings carry ILO II 2.2.2 source, blueprint tag and six proof steps; proof is sorry; imported proof-dep modules exist live; no duplicate found. Not recompiled (no changes)."
+ }
 }

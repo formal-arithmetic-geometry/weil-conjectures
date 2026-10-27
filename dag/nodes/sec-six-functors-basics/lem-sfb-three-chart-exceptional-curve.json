@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-three-chart-exceptional-curve",
+ "kind": "statement",
+ "title": "Reciprocal gluing of the exceptional conic and pair of lines",
+ "statement": "Let $k$ be a field and $\\epsilon\\in\\{0,1\\}$. Let $E$ be the scheme obtained by gluing $L=\\operatorname{Spec}k[t]$, $V=\\operatorname{Spec}k[r,s]/(rs-\\epsilon)$, and $L'=\\operatorname{Spec}k[h]$ [def-weil-affine-spectrum, def-weil-polynomial-ring] as follows. Glue $D(t)\\subset L$ with $D(r)\\subset V$ by $r=t^{-1},s=\\epsilon t$, and $D(h)\\subset L'$ with $D(s)\\subset V$ by $s=h^{-1},r=\\epsilon h$. If $\\epsilon=1$ the outer opens overlap on $D(t)=D(h)$ with $h=t^{-1}$, and if $\\epsilon=0$ they are disjoint. For $\\epsilon=1$, $E$ is isomorphic to $\\mathbf P^1_k$ [def-sc-p1-standard] and to the smooth plane conic\n$$Q=\\operatorname{Proj}k[X,P,Y]/(XY-P^2)$$\n[def-nagata-affine-proj, def-sbc-smooth-morphisms]. The isomorphism $E\\to Q$ is given on the three charts by $[1:t:t^2]$, $[r:1:s]$, and $[h^2:h:1]$ respectively. The opens $D_+(X),D_+(Y)$ cover $Q$ and identify with the two outer affine lines; this includes characteristic two. For $\\epsilon=0$, $E$ is reduced [def-pc-reduced-scheme] with exactly two irreducible components [def-weil-irreducible-components], each isomorphic to $\\mathbf P^1_k$, their scheme-theoretic intersection (the fibre product of the two closed subschemes [def-weil-closed-immersion]) is the single reduced point $(r,s)=(0,0)$, and the local equation there is $rs=0$. The $r$-axis completes with $L$ and the $s$-axis with $L'$. These identifications and intersection descriptions commute with extension of the ground field [def-pc-base-change].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent exceptional-curve gluing calculation extracted from inherited steps 11--12, following the chart quotients of Tag 0804 (lemma-blowing-up-affine). The conic parametrizations, two-open cover in characteristic two, and reduced intersection are explicit agent calculations."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-sc-p1-standard",
+  "def-nagata-affine-proj",
+  "def-sbc-smooth-morphisms",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-closed-immersion",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_\\epsilon=k[r,s]/(rs-\\epsilon)$. The principal-open localization theorem gives $(A_\\epsilon)_r=k[r,r^{-1}]$, with $s=\\epsilon r^{-1}$, and $(A_\\epsilon)_s=k[s,s^{-1}]$, with $r=\\epsilon s^{-1}$. Thus $r\\mapsto t^{-1},s\\mapsto\\epsilon t$ and $s\\mapsto h^{-1},r\\mapsto\\epsilon h$ are the required overlap ring isomorphisms. Their inverses send $t\\mapsto r^{-1}$ and $h\\mapsto s^{-1}$. If $\\epsilon=1$, $D(r)=D(s)=V$ and the composite gives $h=s^{-1}=r=t^{-1}$; if $\\epsilon=0$, $D(r)\\cap D(s)=D(rs)=\\varnothing$. These computations verify the triple-overlap condition. Apply scheme gluing to obtain the three specified open embeddings and their stated intersections.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-glue-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV (lemma-spec-sheaves), 01I3 (lemma-standard-open-affine), 01JB (lemma-glue), 01JC (lemma-glue-schemes); explicit agent overlap calculation"
+   }
+  },
+  {
+   "text": "Suppose $\\epsilon=1$. Since all of $V$ is identified with $D(t)\\subset L$, the two outer opens already cover $E$. Their overlap is $k[t,t^{-1}]$, with $h=t^{-1}$. The standard cover of $\\mathbf P^1_k$ has exactly these rings and this transition. Use the identity on $k[t]$ and $k[h]$ to define maps in both directions on the two covers. Scheme-morphism gluing produces global maps, and its uniqueness clause shows both composites are the identity. Hence $E\\simeq\\mathbf P^1_k$.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JE (example-projective-line), Tag 00AN (sheaves-lemma-mapping-property-glue); comparison with def-sc-p1-standard"
+   }
+  },
+  {
+   "text": "Write $S=k[X,P,Y]/(XY-P^2)$, with all three variables of degree one. A homogeneous prime containing $X,Y$ contains $P^2$ and hence $P$, so cannot be a point of $\\operatorname{Proj}S$. Thus $D_+(X),D_+(Y)$ cover $Q$. By the standard Proj affine-chart theorem their rings are\n$$S_{(X),0}=k[a,b]/(b-a^2)\\simeq k[a],\\quad a=P/X,\\ b=Y/X,$$\n$$S_{(Y),0}=k[c,d]/(d-c^2)\\simeq k[c],\\quad c=P/Y,\\ d=X/Y,$$\nand $S_{(P),0}=k[r,s]/(rs-1)$, with $r=X/P,s=Y/P$. These presentations follow by dividing homogeneous degree-$m$ polynomials by the $m$th power of the chosen variable; the inverse substitutes $(1,a,a^2)$, $(c^2,c,1)$ or $(r,1,s)$, respectively. Every monomial fraction is a polynomial in these ratios, and substitution and inclusion are inverse. On $D_+(X)\\cap D_+(Y)$, $a^2=Y/X$ is invertible, so $a$ is invertible and $c=a^{-1}$.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (lemma-standard-open), Tag 00JP (algebra-lemma-topology-proj); explicit degree-zero quotient calculations"
+   }
+  },
+  {
+   "text": "The ring isomorphisms $a\\mapsto t$ and $c\\mapsto h$ identify the two outer charts with $D_+(X)$ and $D_+(Y)$. Their overlap relation is $h=t^{-1}$, the same as in step 2. Gluing these chart maps and their inverses, then using uniqueness on the covers, gives an isomorphism $E\\to Q$. In homogeneous coordinates its restrictions are $[1:t:t^2]$ and $[h^2:h:1]$. On $V$, $r=t^{-1},s=t$; multiplying $[1:t:t^2]$ by the unit $t^{-1}$ gives $[r:1:s]$. Equivalently the middle-chart ring maps send $X/P\\mapsto r,Y/P\\mapsto s$, so this is equality of scheme maps, not only equality on $k$-points. The argument $P^2\\in\\mathfrak p\\Rightarrow P\\in\\mathfrak p$ and all substitutions work in characteristic two.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 00AN (sheaves-lemma-mapping-property-glue); agent chartwise inverse calculation"
+   }
+  },
+  {
+   "text": "Both outer charts of $Q$ are affine lines over $k$ with the structural map induced by the inclusion of constants. By the affine-space smoothness statement for $n=1$ they are smooth over $k$. Smoothness is local on the open cover of the source, so $Q\\to\\operatorname{Spec}k$ is smooth. This proves the claimed smoothness without using the derivative $2P$ or any assumption on the characteristic.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V5 (definition-smooth), 01V6 (lemma-smooth-characterize); Algebra Tags 00T6, 00T7 (lemma-standard-smooth), as in sbc-lem-affine-space-smooth"
+   }
+  },
+  {
+   "text": "Now suppose $\\epsilon=0$. Glue $\\operatorname{Spec}k[r]$ to $L$ along $r=t^{-1}$; glue $\\operatorname{Spec}k[s]$ to $L'$ along $s=h^{-1}$. By the standard projective-line cover and morphism gluing these schemes $C_r,C_s$ are each $\\mathbf P^1_k$. On their axis charts define maps to $V$ by $A_0\\to k[r]$, $s\\mapsto0$, and $A_0\\to k[s]$, $r\\mapsto0$; on their outer charts use the given inclusions $L,L'\\to E$. They agree on the overlaps by step 1 and hence glue to maps $C_r,C_s\\to E$. For $C_r$, the inverse images of $L,V,L'$ are respectively $L,\\operatorname{Spec}k[r],\\varnothing$; for $C_s$ they are $\\varnothing,\\operatorname{Spec}k[s],L'$. This follows from the overlap formulas and $D(r)\\cap V(s)=D(r)$, $D(s)\\cap V(s)=\\varnothing$, with the variables exchanged for $C_s$. Over these target charts the maps are identities, the displayed quotient maps, or the empty closed immersion. The affine characterization of closed immersions and locality on the target therefore make both maps closed immersions.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB, 01JC (lemma-glue, lemma-glue-schemes), 01JE (example-projective-line); morphisms.tex Tag 01QO (lemma-closed-immersion), conditions (2),(3); agent component construction"
+   }
+  },
+  {
+   "text": "The ring $A_0$ has unique normal forms $c+rf(r)+sg(s)$, because the ideal $(rs)$ has exactly the monomials divisible by both $r$ and $s$. Hence the map\n$$A_0\\longrightarrow k[r]\\times k[s],\\quad F\\longmapsto(F(r,0),F(0,s))$$\nis injective: zero restrictions force each normal-form coefficient to vanish. Polynomial rings over a field are domains and therefore reduced; a nilpotent in their product, and thus in its subring $A_0$, is zero. The two outer chart rings are reduced for the same reason. The affine reducedness criterion followed by reducedness on an open cover proves $E$ reduced.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-trf-reduced-scheme-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J1 (lemma-reduced), 01J2 (lemma-affine-reduced); agent monomial normal-form calculation"
+   }
+  },
+  {
+   "text": "Every prime of $A_0$ contains $r$ or $s$, since $rs=0$. Thus the two closed images $C_r,C_s$ cover $V$, and their outer charts cover $L,L'$; hence they cover $E$. A polynomial domain $k[z]$ has the prime $(0)$ as a dense point of its spectrum: a closed set $V(I)$ containing $(0)$ has $I=0$. Thus each affine line is irreducible. In the reciprocal gluing defining each $C_r,C_s$, the two affine lines share the nonempty dense open $D(z)$. The generic points of their zero ideals are identified there, and their common image has closure containing both affine charts. It is therefore dense in the entire component, proving irreducibility. Neither closed image contains the other, since $L$ lies only in $C_r$ and $L'$ only in $C_s$. Any irreducible subset of their union lies in one of them: its two intersections with these closed sets give a finite closed cover. Consequently they are exactly the two maximal irreducible subsets of $E$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-weil-affine-spectrum",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JE (example-projective-line); explicit prime-ideal and irreducible closed-cover argument"
+   }
+  },
+  {
+   "text": "The two components cannot intersect outside $V$: on $L$ only $C_r$ occurs and on $L'$ only $C_s$ occurs. Their scheme-theoretic intersection is their fibre product over $E$, so on $V$ the affine fibre-product theorem identifies its ring with\n$$ (A_0/(s))\\otimes_{A_0}(A_0/(r))=A_0/(r,s)=k.$$\nFor the displayed tensor equality, maps from either ring to a commutative ring are exactly compatible maps from both quotients, equivalently a map from $A_0$ killing $r$ and $s$. This also verifies that the intersection is the reduced single point, not a thickening. The ambient affine neighbourhood $V$ is precisely $\\operatorname{Spec}k[r,s]/(rs)$; thus its local ring at the intersection is $(k[r,s]/(rs))_{(r,s)}$, giving the asserted local equation $rs=0$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01HV (lemma-spec-sheaves); explicit quotient tensor universal property"
+   }
+  },
+  {
+   "text": "Let $k\\to K$ be any field extension. Base change of an open immersion is an open immersion, with image the inverse image of its original open: this image assertion follows from the fibre-product universal property for maps factoring through an open subscheme. The pulled-back charts therefore cover $E_K$. Their affine fibre-product rings are $K[t],K[r,s]/(rs-\\epsilon),K[h]$: the isomorphisms send $a\\otimes F$ to $aF$ with the coefficients of $F$ mapped to $K$, and their inverses send each coordinate to $1\\otimes$ that coordinate. The overlap substitutions are unchanged on each generator. On the conic charts the same formula gives $K[a,b]/(b-a^2)$, $K[c,d]/(d-c^2)$ and $K[r,s]/(rs-1)$; hence the conic over $K$ is identified with $Q_K$ by gluing these isomorphisms and their inverses. All parametrizations from step 4, axis quotient maps from step 6, and the quotient $A_0/(r,s)=k$ from step 9 extend by exactly these coefficient maps. Equality on coordinate generators and uniqueness of glued morphisms prove compatibility of all identifications and of the intersection with ground-field extension. Repeating step 8 over $K$ shows the two components stay precisely two components.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JY (lemma-base-change-immersion), 01I4 (lemma-fibre-product-affine-schemes), 00AN (sheaves-lemma-mapping-property-glue); explicit agent coefficient maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-glue-schemes",
+  "def-sc-p1-standard",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "prop-nagata-proj-standard-open",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-trf-reduced-scheme-open-cover",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Explicit reciprocal-gluing calculation using Tags 01JB, 01JC, 01JE, 01I4 and the standard Proj affine charts (constructions.tex, Tag 01M4); not a claim that Tag 0804 itself proves the conic formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The curve glued from k[t], k[r,s]/(rs-epsilon), k[h], using r=1/t and s=1/h is P1 and the smooth conic XY=P^2 for epsilon one; for epsilon zero it is two projective lines meeting at one reduced point.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Affine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of affine Weierstrass curves over a given base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (a b : R),\\n  W'.NonsingularLift ⟦![a, b, 1]⟧ ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For elements $a, b$ in a commutative ring $R$, the projective point $[a : b : 1]$ on a Weierstrass curve $W'$ is nonsingular if and only if the corresponding affine point $(a, b)$ on the affine model \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n  {\"name\": \"WeierstrassCurve\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"Type u → Type u\", \"doc\": \"The type of Weierstrass curves over a given type $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onic|[Ee]xceptional.*([Pp]rojective|[Cc]urve)|[Pp]rojective.*[Ll]ine.*gluing",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split smooth conic XY=Z squared is projective line in characteristic two, and nodal union of two projective lines from affine reciprocal gluing.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsCharTwoNF.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {W : WeierstrassCurve R} {motive : W.IsCharTwoNF → Prop} (t : W.IsCharTwoNF),\\n  (∀ [inst_1 : W.IsCharTwoJNeZeroNF], motive ⋯) → (∀ [inst_1 : W.IsCharTwoJEqZeroNF], motive ⋯) → motive t\", \"doc\": \"A predicate asserting that a Weierstrass curve over a commutative ring of characteristic two satisfies the normal form conditions, either through the zero $ j $-invariant case or the non-zero $ j $-in\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_of_Z_ne_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"{P : Fin 3 → F} (hPz : P z ≠ 0) : W.Nonsingular P ↔ W.toAffine.Nonsingular (P x / P z) (P y / P z)\", \"doc\": \"For a projective point $ P = [X:Y:Z] $ on a Weierstrass curve $ W $ with $ Z \\neq 0 $, the point $ P $ is nonsingular on the projective curve $ W $ if and only if the corresponding affine point $ (X/Z,\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_some\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(a b : R) : W'.NonsingularLift ⟦![a, b, 1]⟧ ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For elements $a, b$ in a commutative ring $R$, the projective point $[a : b : 1]$ on a Weierstrass curve $W'$ is nonsingular if and only if the corresponding affine point $(a, b)$ on the affine model \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_some\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(a b : R) : W'.Nonsingular ![a, b, 1] ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For any elements $a, b$ in a ring $R$, the point $[a : b : 1]$ on the projective Weierstrass curve $W'$ is nonsingular if and only if the corresponding point $(a, b)$ on the affine Weierstrass curve $\"}\n  {\"name\": \"WeierstrassCurve.isCharTwoNF_of_isCharTwoJNeZeroNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"[W.IsCharTwoJNeZeroNF] : W.IsCharTwoNF\", \"doc\": \"If a Weierstrass curve over a commutative ring of characteristic two satisfies the normal form conditions for non-zero $j$-invariant, then it is in normal form.\"}\n  {\"name\": \"WeierstrassCurve.IsCharTwoNF.of_j_eq_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {W : WeierstrassCurve R} [W.IsCharTwoJEqZeroNF], W.IsCharTwoNF\", \"doc\": \"If a Weierstrass curve over a commutative ring of characteristic two has a zero $ j $-invariant, then it is in normal form.\"}\n  {\"name\": \"WeierstrassCurve.IsCharTwoJEqZeroNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"{R : Type u_1} → [CommRing R] → WeierstrassCurve R → Prop\", \"doc\": \"A predicate asserting that a Weierstrass curve over a commutative ring $ R $ of characteristic two satisfies the normal form condition when its $ j $-invariant is zero\"}\n  {\"name\": \"WeierstrassCurve.IsCharTwoJEqZeroNF.rec\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {W : WeierstrassCurve R} →\\n      {motive : W.IsCharTwoJEqZeroNF → Sort u} →\\n        ((a₁ : W.a₁ = 0) → (a₂ : W.a₂ = 0) → motive ⋯) → (t : W.IsCharTwoJEqZeroNF) → motive t\", \"doc\": \"For any property depending on a Weierstrass curve in characteristic two satisfying the normal form condition for zero $j$-invariant, if the property holds when the coefficients $a_1$ and $a_2$ are zer\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Veronese parametrization [u squared:u v:v squared] identifies the plane conic XY=P squared with projective line over any field.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"{K : Type u_3} → [inst : Field K] → Membership (Projectivization K (Fin 3 → K)) (Projectivization K (Fin 3 → K))\", \"doc\": \"For a field $ K $, two points in the projective plane $ \\\\mathbb{P}(K^3) $ are orthogonal if their representatives as vectors in $ K^3 $ have a zero dot product. This relation is well-defined because s\"}\n  {\"name\": \"Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq\", \"module\": \"Mathlib/Combinatorics/Configuration\", \"type\": \"{K : Type u_3} →\\n  [inst : Field K] →\\n    [DecidableEq K] → Configuration.ProjectivePlane (Projectivization K (Fin 3 → K)) (Projectivization K (Fin 3 → K))\", \"doc\": \"For any field $ K $ with decidable equality, the projective plane constructed from the projectivization of $ K^3 $ forms a projective plane configuration. This satisfies the axioms: (1) any two distin\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_of_equiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : Fin 3 → F},\\n  P ≈ Q → WeierstrassCurve.Projective.Point.toAffine W P = WeierstrassCurve.Projective.Point.toAffine W Q\", \"doc\": \"If two projective Weierstrass curve points $[X:Y:Z]$ and $[X':Y':Z']$ over a field are equivalent (i.e., there exists a unit $\\\\lambda$ such that $X' = \\\\lambda X$, $Y' = \\\\lambda Y$, $Z' = \\\\lambda Z$), \"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Projective.toAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve.Projective R → WeierstrassCurve.Affine R\", \"doc\": \"The function maps a projective Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ to its affine counterpart $ Y^2 = X^3 + aX + b $ by dehomogenizing with respect to the $ Z $-coordinate.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_smul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} (P : Fin 3 → F) {u : F},\\n  IsUnit u → WeierstrassCurve.Projective.Point.toAffine W (u • P) = WeierstrassCurve.Projective.Point.toAffine W P\", \"doc\": \"Let $W$ be a projective Weierstrass curve over a field $F$. For any point $P$ on $W$ and any non-zero scalar $u \\\\in F$, scaling the homogeneous coordinates of $P$ by $u$ does not change the resulting \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {X Y : F} (h : W.Nonsingular ![X, Y, 1]),\\n  WeierstrassCurve.Projective.Point.toAffine W ![X, Y, 1] = WeierstrassCurve.Affine.Point.some ⋯\", \"doc\": \"For a nonsingular projective Weierstrass curve point $[X:Y:1]$ over a field $F$, its conversion to the affine curve point $(X, Y)$ is valid, corresponding to the dehomogenization with respect to the $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme obtained by reciprocal gluing of two affine lines and Spec k[r,s]/(rs-epsilon) is the split projective conic if epsilon=1 and two projective lines meeting at a reduced point if epsilon=0.",
+   "results": "OK 8 hits. AlgebraicGeometry.AffineSpace, WeierstrassCurve.Projective, AlgebraicGeometry.Proj, WeierstrassCurve.toProjective, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.valuativeCriterion_existence, WeierstrassCurve.Projective.PointClass, AlgebraicGeometry.Proj.instIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general affine/Proj/smooth tools or unrelated Weierstrass/projective-incidence constructions, not the stated scheme isomorphisms and nodal component calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onic|[Vv]eronese|[Ee]xceptional.*[Cc]urve",
+   "results": "OK 0 hits.  (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general affine/Proj/smooth tools or unrelated Weierstrass/projective-incidence constructions, not the stated scheme isomorphisms and nodal component calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The split smooth plane conic XY=Z^2 is isomorphic as a scheme to the projective line over a field of any characteristic.",
+   "results": "OK 8 hits. AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.recOn, Algebra.FormallySmooth.of_split, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general affine/Proj/smooth tools or unrelated Weierstrass/projective-incidence constructions, not the stated scheme isomorphisms and nodal component calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"Smooth\"",
+   "results": "OK 0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general affine/Proj/smooth tools or unrelated Weierstrass/projective-incidence constructions, not the stated scheme isomorphisms and nodal component calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quadratic Veronese map from projective line to projective plane, [u:v] maps to [u^2:u*v:v^2], is an isomorphism onto the conic.",
+   "results": "OK 8 hits. Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat, Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq, WeierstrassCurve.Projective.Point.toAffine_of_equiv, WeierstrassCurve.Projective.toAffine, WeierstrassCurve.Projective, WeierstrassCurve.toProjective, WeierstrassCurve.Projective.Point.toAffineAddEquiv, WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general affine/Proj/smooth tools or unrelated Weierstrass/projective-incidence constructions, not the stated scheme isomorphisms and nodal component calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination; base steps 11 and 12: conic/projective-line identification, X,Y-cover and characteristic two, or two projective lines with one reduced intersection",
+   "via": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-three-chart-exceptional-curve",
+  "worker": "stage1",
+  "summary": "Q25 wrote ten explicit chart-calculation steps, retaining the statement and existing search history, adding definition references and reusing existing gluing, Proj-chart, smoothness, reducedness and affine fibre-product nodes. No new nodes. Characteristic two, both epsilon values and arbitrary field extension checked.",
+  "blueprint": "Inherited from.place: parent blowup-calculus steps 11--12, rational exceptional fibre in the de Jong Lemma 3.13 prerequisite on the det-thm-sf-ctf-stability-direct-images (3) route. Latest blueprint direct-images proof (3) was read. The imported created.item chain is broken, and blueprint_refs.py ancestor returns None; retained the inherited null ancestor and detailed from.place.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Step 5 uses smoothness of the affine line. This is a generic geometric tool; no exceptional-curve node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-13a191156",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-13a191156 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all 10 steps and the statement of every cited node; no fixes written. The delivery is a first split of an unsplit node with no proof (no re-split note), adds no new nodes, keeps the statement apart from added definition citations, and its proof_deps equal the union of the steps' uses. The statement is true as written: checked for eps=0 and eps=1 over F_2, for imperfect fields and for any extension K/k. Step 1: localization gives (A_eps)_r=k[r,r^-1], and the gluing conditions and cocycle (h=s^-1=r=t^-1) hold. Step 2: matches def-sc-p1-standard and Stacks 01JE; the composites are the identity by uniqueness of glued morphisms. Step 3: D_+(X), D_+(Y) cover Q because a prime containing X and Y contains P (the ideal (X,Y) does not contain S_+, so the cover clause of prop-nagata-proj-standard-open is rightly not used); chart inverses F/X^m -> F(1,a,a^2), F(c^2,c,1), F(r,1,s) checked, and c=a^-1 on the overlap. Step 4: the middle chart is checked at ring level (X/P->r, Y/P->s). Step 5: smooth via sbc-lem-affine-space-smooth and smoothness local on the source; this tool use is accepted, and the argument is valid in characteristic 2. Step 6: preimages of the three charts are (L, Spec k[r], empty) for C_r and the mirror for C_s, so both maps are closed immersions by 01QO and locality on the target. Step 7: normal form gives A_0 inside k[r] x k[s], so A_0 is reduced. Step 8: rs=0 gives the cover, generic points give irreducibility, and the closed-cover argument gives exactly two components. Step 9: A_0/(s) tensor A_0/(r) = k over V; restricting a fibre product to an open of E is used without a node, accepted as elementary; the local ring uses clause (1) only. Step 10: open-immersion base change and affine fibre products over K. Batch 5: lem-trf-reduced-scheme-open-cover is a Mathlib leaf (IsReduced.iff_of_openCover, Properties.lean:140) with no proof deps, a generic scheme fact outside the trace formula and Poincare duality, so the citation is accepted. No duplicates: binomial-blowup-chart-algebras, nodal-three-chart-gluing, nodal-point-blowup-projective-fibres and per-rdp-blowup-conic-structure all state different things. No SGA cited. Maintainer note: blueprint.from.node is null all along the inherited chain (the parent too); the ancestor should be det-thm-sf-ctf-stability-direct-images. This is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ThreeChartExceptionalCurve",
+  "declaration": "AlgebraicGeometry.ThreeChartExceptional.reciprocal_gluing_exceptional_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThreeChartExceptionalCurve.lean",
+  "statement": "theorem reciprocal_gluing_exceptional_curve (k : Type u) [Field k] (ε : Fin 2) (E : Scheme.{u}) (p : E ⟶ Spec (.of k)) (C : Charts k ε E p) : ∃ d : Description k ε E p C, ∀ (K : Type u) [Field K] [Algebra k K], ∃ C' : Charts K ε (pullback p (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap k K)))), ∃ d' : Description K ε _ _ C', CompatibleExtension k K ε E p C d C' d'",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ThreeChartExceptional.epsilonScalar",
+   "AlgebraicGeometry.ThreeChartExceptional.middleRing",
+   "AlgebraicGeometry.ThreeChartExceptional.middleCoord",
+   "AlgebraicGeometry.ThreeChartExceptional.middleConstants",
+   "AlgebraicGeometry.ThreeChartExceptional.Charts",
+   "AlgebraicGeometry.ThreeChartExceptional.coordinateSections",
+   "AlgebraicGeometry.ThreeChartExceptional.ConicData",
+   "AlgebraicGeometry.ThreeChartExceptional.NodalData",
+   "AlgebraicGeometry.ThreeChartExceptional.Description",
+   "AlgebraicGeometry.ThreeChartExceptional.CompatibleExtension",
+   "AlgebraicGeometry.ThreeChartExceptional.reciprocal_gluing_exceptional_curve"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bcf6887f",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records, the module, the report, and the reused declarations strictNodalRing, DvrNodal.coordinate/conicIdeal (XY-P^2 as T0T2-T1^2, no radical), ProjectiveSpace.homOfSections/standardOpen/map and ProjectiveLine. Charts: IsPullback overlaps tied to the embeddings with explicit coefficient-preserving substitutions r->t^-1, s->eps t and s->h^-1, r->eps h; the outer overlap/disjointness hypotheses are the U13 gluing data and are forced by the adjacent data, so no stronger assumption. eps=1: lineIso and conicIso over k, Smooth p, chart formulas [1:t:t^2]/[r:1:s]/[h^2:h:1] (checked, they pin conicIso), D+(X)/D+(Y) images and cover, no characteristic hypothesis. eps=0: IsReduced, two distinct closed P^1 components equal to irreducibleComponents, axis cartesian squares, completions and disjointness, intersection IsPullback = Spec k at r=s=0 inside k[r,s]/(rs). Base change: C' pinned to the base-changed charts; line, conic, components and origins commute with ProjectiveSpace.map; satisfiable. lean.statement verbatim; only the lean field changed; only the theorem is sorry; docstrings and lines ok. Advisories: M1 the item imports the parent theorem module DvrNodalChartBlowupCalculus (parent proof_deps contain the item), a stage-3 cycle not listed in the report, move coordinate/conicIdeal to a def-node module; M2 owners def-trf-strict-semistable-curve, def-sfb-projective-coordinate-section and the projective-space API are uncited; M3 the conic is V(XY-P^2) in P^2, isomorphic to the node's Proj. K is in the same universe u. No compile, no fixes."
+ }
+}

@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-flat-integral-free-surjection-iso-locus",
+ "kind": "statement",
+ "title": "Closed universal isomorphism locus for a finite-free quotient on a flat integral-fibre family",
+ "statement": "Let $f:X\\to S$ be an affine morphism of schemes [def-pc-scheme], [pqf-def-affine-morphism], flat [def-weil-flat-morphism] and of finite presentation, meaning locally of finite presentation, quasi-compact and quasi-separated [def-sbc-locally-finite-presentation], [def-weil-finite-type-morphism], [def-weil-quasi-separated-morphism]. Assume every fibre is nonempty and geometrically integral: after every extension of its residue field it is a nonempty reduced irreducible scheme [def-pc-geometrically-irreducible]. Let $n\\geq0$, let $G$ be a finitely presented quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], [def-weil-pbc-module-finite-type-presentation], and let $u:\\mathcal O_X^{\\oplus n}\\twoheadrightarrow G$ be a surjective module-sheaf morphism. Then there is a closed immersion $i:Z\\to S$ of finite presentation [def-weil-closed-immersion] such that, for every scheme $T$ and every $h:T\\to S$, $h$ factors through $i$ if and only if the tensor pullback $u_T:\\mathcal O_{X_T}^{\\oplus n}\\to G_T$ is an isomorphism, where $X_T=X\\times_ST$ [def-pc-fibre-product], and $G_T$ and $u_T$ are pulled back along $X_T\\to X$ [def-pc-module-pullback]. This factorization is unique whenever it exists.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05PF (theorem-flattening-map), with source module O_X^{oplus n}; Tag 05K5 (lemma-flat-geometrically-integral-fibres-pure) supplies universal purity of O_X. Finite direct sums have the same associated-point support for n>0; n=0 is the zero module."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-geometrically-irreducible",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $V=\\operatorname{Spec}A\\subseteq S$. By [pqf-def-affine-morphism], $X_V=f^{-1}(V)=\\operatorname{Spec}B$ is affine. The affine criteria [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-weil-pbc-lfp-affine-opens-finite-presentation] make $A\\to B$ flat and finitely presented. For $\\mathfrak p\\in\\operatorname{Spec}A$ and a field extension $L/\\kappa(\\mathfrak p)$, [lem-weil-pbc-fibre-product-affine-spectra] identifies the corresponding extended fibre with $\\operatorname{Spec}(B\\otimes_A L)$. It is nonempty and integral by the hypothesis. By [def-pc-integral-scheme], its affine coordinate ring $B\\otimes_A L$ is a nonzero domain. Thus the affine algebra has precisely the geometrically integral fibres required below.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FT (lemma-fibres-irreducible-flat-projective-nonnoetherian), hypotheses; affine translation by Schemes Tag 01I4 and Morphisms Tag 01TQ"
+   }
+  },
+  {
+   "text": "Set $M=B^{\\oplus n}$ and $N=\\Gamma(X_V,G|_{X_V})$. By [lem-weil-pbc-quasi-coherent-finite-type-affine], $N$ is finitely presented over $B$. The affine equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies $u|_{X_V}$ with a $B$-linear map $v:M\\to N$. This map is surjective: the image computation on affine opens in [lem-weil-pbc-quasi-coherent-module-cokernel-image] identifies $\\operatorname{im}(v)$ with the global sections of the image sheaf, which equals $G|_{X_V}$ because $u$ is surjective. Write $K=\\ker v$. For any $A$-algebra $C$, the pullback of $u$ to $X_V\\times_V\\operatorname{Spec}C$ is identified with $v_C=v\\otimes_A1_C$. Indeed the ring of that affine scheme is $B\\otimes_A C$, by [lem-weil-pbc-fibre-product-affine-spectra], and the naturality formula of [lem-weil-pbc-module-pullback-affine-sections] gives the map $v\\otimes_B1_{B\\otimes_A C}$; the identification with $v_C$ sends $m\\otimes(b\\otimes c)$ to $bm\\otimes c$, with inverse $m\\otimes c\\mapsto m\\otimes(1\\otimes c)$. Pullbacks are quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], so the affine equivalence detects whether this map is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01I9 (lemma-widetilde-pullback), 01IC; Properties Tag 01PC"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-geometrically-integral-projective] to $A\\to B$, using step 1: $B$ is projective as an $A$-module. By the split-free characterization in [def-weil-pbc-projective-module], choose $A$-linear maps $j_0:B\\to F_0$ and $r_0:F_0\\to B$, where $F_0=\\bigoplus_{\\lambda\\in\\Lambda}A$, with $r_0j_0=1$. Taking $n$ copies gives $j:M\\to F=F_0^{\\oplus n}$ and $r:F\\to M$ with $rj=1$. The vectors indexed by $\\{1,\\ldots,n\\}\\times\\Lambda$ form a basis of $F$, directly by the definition of a direct sum. No finiteness of $\\Lambda$ is required; when $n=0$, $M=F=0$.",
+   "uses": [
+    "lem-trf-affine-geometrically-integral-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FT (lemma-fibres-irreducible-flat-projective-nonnoetherian); Tag 05PE (lemma-flattening-module-map), split-free reduction"
+   }
+  },
+  {
+   "text": "Let $I\\subseteq A$ be the ideal generated by every basis coefficient of every vector $j(k)$ with $k\\in K$. For an $A$-algebra $C$ with structure map $\\varphi:A\\to C$, [lem-weil-pbc-tensor-right-exact] applied to $K\\to M\\to N\\to0$ says that $v_C$ is surjective and its kernel is the image of $K\\otimes_A C$. Tensoring $rj=1$ keeps $j_C$ split injective. Thus $v_C$ is an isomorphism exactly when $j(k)\\otimes1=0$ for every $k\\in K$. To check that condition, the tensor universal property [def-weil-pbc-module-tensor-product] identifies $F\\otimes_A C$ with the free $C$-module on the same basis, sending $e_\\lambda\\otimes c$ to $ce_\\lambda$; its inverse sends each basis vector to $e_\\lambda\\otimes1$. The coefficients of $j(k)\\otimes1$ are therefore the images under $\\varphi$ of those of $j(k)$. Vanishing of all these coefficients is equivalent to $\\varphi(I)=0$. This proves $v_C$ invertible if and only if $I\\subseteq\\ker\\varphi$, for every $C$, including nonreduced rings and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05PE (lemma-flattening-module-map), explicit coefficient-ideal argument, expanded using Algebra Tag 00DF"
+   }
+  },
+  {
+   "text": "The ideal $I$ is finitely generated. Since $M$ is finite free over $B$ and $N$ is finitely presented over $B$, [lem-trf-finite-presentation-surjective-module-kernel] gives $B$-generators $k_1,\\ldots,k_t$ of $K$. Step 4 with $C=A/I$ shows that all $k_i$ map to zero in $M\\otimes_A A/I$. By [lem-weil-pbc-tensor-right-exact] applied to $I\\to A\\to A/I\\to0$, the kernel of $M\\to M\\otimes_A A/I$ consists exactly of finite sums $\\sum a_\\ell m_\\ell$ with $a_\\ell\\in I$ and $m_\\ell\\in M$. Choose such an expression for each of the finitely many $k_i$, and let $J\\subseteq I$ be generated by the finitely many coefficients occurring in these expressions. Then $k_i\\in JM$. Because $JM$ is a $B$-submodule of $M$ ($b(am)=a(bm)$), it contains all of $K$. Right exactness now gives that $v_{A/J}$ is an isomorphism. Step 4 forces $I\\subseteq J$, so $I=J$ is finitely generated. This argument does not assume that $B$, $M$ or $N$ is finite over $A$.",
+   "uses": [
+    "lem-trf-finite-presentation-surjective-module-kernel",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05PE (lemma-flattening-module-map), with finite-presentation refinement; algebra.tex Tag 0519 (lemma-extension), part (5), and Tag 00DF"
+   }
+  },
+  {
+   "text": "Put $Z_V=\\operatorname{Spec}(A/I)$ over $V$. By the affine description in [def-weil-closed-immersion] this is a closed immersion. Its ideal sheaf is $\\widetilde I$ by [def-sbc-closed-immersion-ideal-sheaf]; the finite list of generators of $I$ gives a finite-type sheaf by [lem-weil-pbc-quasi-coherent-finite-type-affine]. Hence [lem-trf-closed-immersion-finite-presentation-ideal] makes $Z_V\\to V$ finitely presented. On an affine $V$-scheme $\\operatorname{Spec}C$, the spectrum correspondence [def-weil-affine-spectrum] and the quotient-ring universal property give a unique factorization through $Z_V$ exactly when $I$ maps to zero in $C$. Steps 2 and 4 identify this with invertibility of $u_C$. For an arbitrary $V$-scheme $T$, cover $T$ by affine opens. The inverse maps of a sheaf isomorphism agree on overlaps by uniqueness of inverse, so invertibility of $u_T$ is equivalent to invertibility on these opens. The local factorizations through $Z_V$ also agree: on an affine refinement of any overlap they are the unique ring maps from $A/I$ extending the given map from $A$, and thus glue as scheme morphisms. Consequently $Z_V$ has the required universal property on every $T$, with unique factorization.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-closed-immersion-finite-presentation-ideal",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV (lemma-closed-immersion-finite-presentation); schemes.tex Tags 01QO and 01JC for affine quotients and gluing"
+   }
+  },
+  {
+   "text": "Define $P(T,h)$ to mean that $u_T$ is an isomorphism. Restricting to an open of $T$ restricts the same module map, by the composition law in [def-pc-module-pullback]. Thus $P$ restricts to opens. If it holds on a neighbourhood of every point of $T$, those neighbourhoods pull back to a cover of $X_T$, and their inverse module maps agree on overlaps; gluing them gives the inverse of $u_T$. Apply [lem-sc-local-closed-locus-gluing] with this predicate and the closed finitely presented schemes $Z_V\\to V$ constructed in step 6 for affine opens covering $S$. It gives a closed immersion $i:Z\\to S$, locally of finite presentation, with the stated factorization equivalence on all schemes. On each $V$, its restriction is $Z_V$: the two universal properties give inverse maps, since factorization through an affine quotient is unique as established in step 6. Its ideal sheaf therefore restricts to $\\widetilde I$, a finite-type module, on every $V$. Finite type is local by [def-weil-pbc-module-finite-type-presentation], so [lem-trf-closed-immersion-finite-presentation-ideal] makes $i$ of finite presentation. Any two factorizations of $h:T\\to S$ agree on an affine refinement of the preimages of the $V$, by the uniqueness in step 6, hence agree globally. For $n=0$, surjectivity gives $G=0$, the construction has $K=I=0$ on every chart, and $Z=S$, as required.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-sc-local-closed-locus-gluing",
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-trf-closed-immersion-finite-presentation-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes); universal closed-locus gluing as in perfect.tex Tag 0BDL, final paragraph; morphisms.tex Tag 01TV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-affine-geometrically-integral-projective",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-finite-presentation-surjective-module-kernel",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "def-weil-affine-spectrum",
+  "def-pc-module-pullback",
+  "lem-sc-local-closed-locus-gluing",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tags 05FT and 05PE: affine projectivity and the explicit coefficient ideal, with a finite-generator argument for finite presentation and the existing universal closed-locus gluing lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flattening|universally.*pure|isoLocus|isomorphism.*locus",
+   "results": "OK 0 hit(s); ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern closed immersions, general local representability and finite presentations of sheaves, not the universal base isomorphism locus of a quotient on a flat integral-fibre family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a relatively flat pure finitely presented sheaf becomes isomorphic to that sheaf precisely on a finitely presented closed subscheme of the base",
+   "results": "OK 8 hit(s); AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern closed immersions, general local representability and finite presentations of sheaves, not the universal base isomorphism locus of a quotient on a flat integral-fibre family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsSmooth\"",
+   "results": "OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern closed immersions, general local representability and finite presentations of sheaves, not the universal base isomorphism locus of a quotient on a flat integral-fibre family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of a universal isomorphism condition for a surjective morphism of quasi coherent modules with flat pure source",
+   "results": "OK 8 hit(s); AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, SheafOfModules.QuasicoherentData.IsFinitePresentation, PresheafOfModules.IsLocallySurjective, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern closed immersions, general local representability and finite presentations of sheaves, not the universal base isomorphism locus of a quotient on a flat integral-fibre family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine morphism of schemes with geometrically integral nonempty fibres and a surjection from a finite free sheaf to a finitely presented quasi coherent sheaf the functor where the map becomes an isomorphism is represented by a closed immersion of finite presentation",
+   "results": "OK 8 hit(s); AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern closed immersions, general local representability and finite presentations of sheaves, not the universal base isomorphism locus of a quotient on a flat integral-fibre family"
+  },
+  {
+   "tool": "grep",
+   "query": "flattening|universally.*pure|isoLocus|isomorphism.*locus",
+   "results": "OK 0 hit(s); ; digest=4f53cda18c2baa0c; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: returned algebraic quotients, tensor-quotient identifications and morphism-property facts do not state the universal closed base locus of the given sheaf quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a projective module is universally isomorphic precisely when the coefficient ideal of its kernel vanishes",
+   "results": "OK 8 hit(s); Module.Finite.reprEquiv, LinearMap.quotKerEquivOfSurjective, Submodule.quotientQuotientEquivQuotientAux, LinearMap.quotientInfEquivSupQuotient, Module.Grassmannian.projective_quotient, ModuleCon.Quotient, TensorProduct.tensorQuotEquivQuotSMul, Ideal.quotientEquivDirectSum; digest=a7722268627669db",
+   "date": "2026-10-24",
+   "verdict": "no match: returned algebraic quotients, tensor-quotient identifications and morphism-property facts do not state the universal closed base locus of the given sheaf quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Flat\"",
+   "results": "OK 0 hit(s); ; digest=4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: returned algebraic quotients, tensor-quotient identifications and morphism-property facts do not state the universal closed base locus of the given sheaf quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal base change isomorphism locus of a finite free quotient on a flat finitely presented affine family with geometrically integral fibres is a finitely presented closed subscheme",
+   "results": "OK 8 hit(s); AlgebraicGeometry.finite_appTop_of_universallyClosed, PrimeSpectrum.exists_image_comap_of_finite_of_free, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange; digest=84c82b719da840cb",
+   "date": "2026-10-24",
+   "verdict": "no match: returned algebraic quotients, tensor-quotient identifications and morphism-property facts do not state the universal closed base locus of the given sheaf quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring map A to B with B projective over A, the base changes making a quotient of B to the n free module an isomorphism are defined by an ideal in A",
+   "results": "OK 8 hit(s); Algebra.FormallyUnramified.projective_of_restrictScalars, Module.freeLocus_eq_univ_iff, Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk, Algebra.TensorProduct.quotIdealMapEquivTensorQuot, Ideal.qoutMapEquivTensorQout, FinitePresentation.of_isBaseChange, Module.finitePresentation_of_projective; digest=17ad8d3cea7ca572",
+   "date": "2026-10-24",
+   "verdict": "no match: returned algebraic quotients, tensor-quotient identifications and morphism-property facts do not state the universal closed base locus of the given sheaf quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-generic-rank-locus-representability",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata. Subinput of Tag 05UC, paragraph applying Theorem 05PF to a finite-free generating surjection; the flat geometrically integral source is pure by Tag 05K5.",
+   "via": [
+    "lem-sfb-smooth-generic-rank-locus-representability",
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-integral-free-surjection-iso-locus",
+  "worker": "stage1",
+  "summary": "Checked the full statement against Tags 05PF and 05K5; used the affine hypothesis to reuse the existing projectivity theorem 05FT instead of creating a general flattening duplicate. Constructed the coefficient ideal explicitly as in 05PE, proved its finite generation using the finite B-kernel, proved the universal property for arbitrary test schemes, and glued with existing nodes. No new nodes or new Mathlib leaves. Statement unchanged.",
+  "blueprint": "The item has blueprint.is=null and ancestor search returns None. It is an auxiliary in the inherited chain under the current sk-thm-sf-ctf-stability proof, direct-image/compactification paragraph (3); the inherited from.place records the successive Quot/flattening and 05UC input. Steps 1–7 realize the free-surjection closed-locus input without changing any unit-level argument. The latest blueprint search found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Uses finite-presentation and finite-type criteria on affine sections for G and the constructed ideal sheaf; this is generic affine module calculus."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Uses the affine image computation to turn the given sheaf surjection into a surjective module map; this is generic affine module calculus."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Uses the natural tensor description of the specific pulled-back map on an affine base change; this is generic affine module calculus."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Ensures the pulled-back modules remain in the affine quasi-coherent equivalence; this is generic module pullback calculus."
+   },
+   {
+    "node": "lem-trf-affine-geometrically-integral-projective",
+    "why": "Projectivity of the affine algebra over its base is the generic commutative-algebra input to the coefficient construction; the unit has no such theorem."
+   },
+   {
+    "node": "lem-trf-closed-immersion-finite-presentation-ideal",
+    "why": "Converts finite generators of the constructed ideal into finite presentation of the closed immersion, locally and globally; this is a generic criterion."
+   },
+   {
+    "node": "lem-sc-local-closed-locus-gluing",
+    "why": "Glues locally representing closed schemes for an arbitrary predicate local on test schemes; this is a generic gluing tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-affine-geometrically-integral-projective",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-sc-local-closed-locus-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-73cb872ab",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-73cb872ab (reviewer sub-agent of L); spot-checked: I read the whole split. The statement and stmt_deps are unchanged from base (only proof fields and split_report changed); the item is still unsplit on live and side-live, and there is no repair note. Source checks: flat.tex 05PF (l.6671) agrees with the statement as its F=O_X^n case with 05K5 purity. The proof route uses 05FT (l.2247, no Noetherian hypothesis) and 05PE (l.6646), which I read. Steps: (1) the affine criteria 01U5/01TQ and the fibre-product node give A->B flat and finitely presented with domain fibre rings B⊗L, the exact hypothesis of lem-trf-affine-geometrically-integral-projective. (2) N is finitely presented, v is surjective by affine image sections, and u_T = v⊗(B⊗_A C) by the pullback-affine-sections naturality. (3) A split-free summand of ⊕_Λ A, with Λ possibly infinite. (4) The coefficient ideal via 00DF and split injectivity of j_C; elementary and correct. (5) Finite generation of I: K is finitely generated over B by 0519(5), K⊆IM, a finite J⊆I has K⊆JM, so I⊆J. (6) Spec(A/I) has ideal Ĩ of finite type, so it is of finite presentation by 01TV (morphisms l.4207); arbitrary T by gluing, with no affine overlaps assumed. (7) All three hypotheses of lem-sc-local-closed-locus-gluing are verified, Z|_V≅Z_V, and finite presentation is shown globally. proof_deps equals the union of the uses. Edge cases tested: B=A with G=O/(t); A[x]/(ax) gives I=(a); the k[ε] nilpotent case; n=0; empty and zero rings. Duplicate search: the only 05PE/05PF hits are the item and its parent, whose step 4 applies the item as stated. No new nodes, no SGA. Seven tool_uses, all generic, accepted. Batch-5 check: lem-trf-affine-geometrically-integral-projective (05FT), lem-trf-finite-presentation-surjective-module-kernel (0519(5), Mathlib fg_ker) and lem-trf-closed-immersion-finite-presentation-ideal (01TV) are generic commutative algebra in helper unit sk-i-curve-zero. Their closures reach no Poincaré-duality node, no nt-assume leaf, no trace-transport node and no batch-4 target, and they are not steps of either assumed proof, so accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatIntegralFreeSurjectionIsoLocus",
+  "declaration": "AlgebraicGeometry.Scheme.exists_flatIntegralFreeSurjectionIsoLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatIntegralFreeSurjectionIsoLocus.lean",
+  "statement": "theorem exists_flatIntegralFreeSurjectionIsoLocus {X S : Scheme.{u}} (f : X ⟶ S) [IsAffineHom f] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [GeometricallyIntegral f] (n : ℕ) (G : X.Modules) [G.IsQuasicoherent] [G.IsFinitePresentation] (q : SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin n)) ⟶ G) [Epi q] : ∃ (Z : Scheme.{u}) (i : Z ⟶ S), IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧ QuasiCompact i ∧ QuasiSeparated i ∧ ∀ (T : Scheme.{u}) (h : T ⟶ S), ((∃ g : T ⟶ Z, g ≫ i = h) ↔ IsIso ((Modules.tensorPullback (pullback.fst f h)).map q)) ∧ (∀ (g₁ g₂ : T ⟶ Z), g₁ ≫ i = h → g₂ ≫ i = h → g₁ = g₂)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8f7b783e",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Only the item's lean record changed; the 12 stmt_dep records equal side-live and there is no rebind. The statement field is verbatim in the file. Clause by clause: IsAffineHom, Flat, LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (the node's finite presentation); GeometricallyIntegral (Mathlib geometrically IsIntegral over every Spec K field point, and IsIntegral includes Nonempty) = nonempty geometrically integral fibres; G IsQuasicoherent+IsFinitePresentation; SheafOfModules.free (ULift (Fin n)) = O_X^n; Epi q = surjective sheaf map; conclusion is IsClosedImmersion plus the full finite presentation of i, for all T and h in the same universe, factorization iff IsIso of the real upstream tensorPullback (pullback.fst f h) applied to q, with a separate uniqueness clause. Edge cases: n=0 (G=0, Z=S), empty schemes, zero and nonreduced test rings, single universe u. No definitions, only sorry; the docstrings carry 05PF/05K5 and the 7 steps; the report has both sections; the private imports exist in side-live; no duplicate in the project lean trees or Mathlib. No compile (no file changed); the worker's scompile was clean."
+ }
+}

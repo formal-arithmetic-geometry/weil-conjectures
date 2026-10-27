@@ -190,34 +190,52 @@
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.VeryTameLocalKummerQuotient",
-  "declaration": "AlgebraicGeometry.veryTame_local_kummer_quotient",
+  "declaration": "AlgebraicGeometry.VeryTameLocalKummer.invariant_chart_and_stratum",
   "declarations": [
-   "AlgebraicGeometry.localKummerCharacter",
-   "AlgebraicGeometry.localKummerLattice",
-   "AlgebraicGeometry.localKummerMonoid",
-   "AlgebraicGeometry.localKummerInvariantRing",
-   "AlgebraicGeometry.localKummerStratumIdeal",
-   "AlgebraicGeometry.localKummerTop",
-   "AlgebraicGeometry.localKummerRingChart",
-   "AlgebraicGeometry.localKummerSource",
-   "AlgebraicGeometry.veryTame_local_kummer_quotient",
-   "AlgebraicGeometry.veryTame_local_kummer_quotient_etale_neighbourhood"
+   "AlgebraicGeometry.VeryTameLocalKummer.affineLogScheme",
+   "AlgebraicGeometry.VeryTameLocalKummer.fixedRing",
+   "AlgebraicGeometry.VeryTameLocalKummer.lattice",
+   "AlgebraicGeometry.VeryTameLocalKummer.invariantMonoid",
+   "AlgebraicGeometry.VeryTameLocalKummer.chartRingMap",
+   "AlgebraicGeometry.VeryTameLocalKummer.chartIdeal",
+   "AlgebraicGeometry.VeryTameLocalKummer.Data",
+   "AlgebraicGeometry.VeryTameLocalKummer.invariant_chart_and_stratum",
+   "AlgebraicGeometry.VeryTameLocalKummer.StalkData",
+   "AlgebraicGeometry.VeryTameLocalKummer.invariant_chart_on_pointed_etale_neighbourhood"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/VeryTameLocalKummerQuotient.lean",
-  "statement": "theorem veryTame_local_kummer_quotient (A : Type u) [CommRing A] [IsNoetherianRing A] [IsStrictlyHenselianLocalRing A] (M : EtaleLogStructure (Spec (.of A))) (hM : M.IsFineSaturated) (H : Type v) [Group H] [Finite H] (action : FSLogGroupAction H (localKummerSource A M hM)) (σ : H → A →+* A) (hσ : ∀ (h : H) (r : A), σ h r = (Scheme.ΓSpecIso (.of A)).hom ((action.baseAction h).hom.appTop ((Scheme.ΓSpecIso (.of A)).inv r))) (hresidue : ∀ (h : H) (r : A), IsLocalRing.residue A (σ h r) = IsLocalRing.residue A r) (hn : IsUnit (Nat.card H : A)) (ζ : A) (hζ : IsPrimitiveRoot ζ (Nat.card H)) (hζfixed : ∀ h : H, σ h ζ = ζ) (Q : Type u) [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (hsharp : ∀ q : Q, IsUnit q → q = 1) (a : Q →* M.monoidSheaf.obj.obj (op (localKummerTop A))) (ha : M.IsChart (localKummerTop A) a) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ Spec (.of A)) (hx : (Scheme.SpecToEquivOfField Ω (Spec (.of A)) x).1 = IsLocalRing.closedPoint A) (hchar : Function.Bijective (fun q : Q ↦ Associates.mk (M.toEtalePrelogStructure.germ x (localKummerTop A) (Over.homMk x) (a q)))) (χ : TensorProduct ℤ (Additive (Abelianization H)) (Additive (Algebra.GrothendieckGroup Q)) →+ Additive (rootsOfUnity (Nat.card H) A)) (heigen : ∀ (h : H) (q : Q), ∃ z : (M.monoidSheaf.obj.obj (op (localKummerTop A)))ˣ, (Scheme.ΓSpecIso (.of A)).hom (M.alpha.app (op (localKummerTop A)) z.val) = (localKummerCharacter χ h (Algebra.GrothendieckGroup.of q)).val.val ∧ (action.logMap h).sectionMap (localKummerTop A) (localKummerTop A) (action.baseAction h).hom (by change (action.baseAction h).hom ≫ 𝟙 _ = 𝟙 _ ≫ (action.logMap h).base simpa only [Category.comp_id, Category.id_comp] using (action.base_eq h).symm) (a q) = z.val * a q) (hstratum : ∀ (h : H) (r : A), σ h r - r ∈ localKummerStratumIdeal (localKummerRingChart M a)) (hfinite : Module.Finite (localKummerInvariantRing σ) A) : IsFineSaturatedMonoid (localKummerMonoid χ) ∧ (∀ p : localKummerMonoid χ, IsUnit p → p = 1) ∧ (Algebra.GrothendieckGroup.lift (Algebra.GrothendieckGroup.of.comp (localKummerMonoid χ).subtype)).range = localKummerLattice χ ∧ (localKummerLattice χ).FiniteIndex ∧ (∀ g : Algebra.GrothendieckGroup Q, g ^ Nat.card H ∈ localKummerLattice χ) ∧ ∃ (b : localKummerMonoid χ →* localKummerInvariantRing σ), (∀ p, (b p).val = localKummerRingChart M a p.val) ∧ (∃ (N : EtaleLogStructure (Spec (.of (localKummerInvariantRing σ)))) (d : FSLogGroupAction.InvariantDirectImage action (Spec.map (CommRingCat.ofHom (localKummerInvariantRing σ).subtype)) N) (c : localKummerMonoid χ →* N.monoidSheaf.obj.obj (op (localKummerTop (localKummerInvariantRing σ)))), N.IsChart (localKummerTop (localKummerInvariantRing σ)) c ∧ (∀ p, localKummerRingChart N c p = b p) ∧ (∀ p, d.pullbackMap (localKummerTop (localKummerInvariantRing σ)) (c p) = M.monoidSheaf.obj.map (MorphismProperty.Over.homMk (logInvariantTest (Spec.map (CommRingCat.ofHom (localKummerInvariantRing σ).subtype)) (localKummerTop (localKummerInvariantRing σ))).hom (Category.comp_id _)).op (a p.val)) ∧ Function.Bijective (fun p : localKummerMonoid χ ↦ Associates.mk (N.toEtalePrelogStructure.germ (x ≫ Spec.map (CommRingCat.ofHom (localKummerInvariantRing σ).subtype)) (localKummerTop (localKummerInvariantRing σ)) (Over.homMk (x ≫ Spec.map (CommRingCat.ofHom (localKummerInvariantRing σ).subtype))) (c p)))) ∧ ∃ e : (localKummerInvariantRing σ ⧸ localKummerStratumIdeal b) ≃+* (A ⧸ localKummerStratumIdeal (localKummerRingChart M a)), ∀ r : localKummerInvariantRing σ, e (Ideal.Quotient.mk _ r) = Ideal.Quotient.mk _ r.val",
+  "statement": "theorem invariant_chart_and_stratum {A Q : Type u} [CommRing A] [IsNoetherianRing A] [IsStrictlyHenselianLocalRing A] [CommMonoid Q] {H : Type v} [Group H] [Finite H] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (d : Data A Q H Ω) : IsFineSaturatedMonoid (invariantMonoid d.χ) ∧ (∀ p : invariantMonoid d.χ, IsUnit p → p = 1) ∧ MonoidHom.mrange (Algebra.GrothendieckGroup.lift (Algebra.GrothendieckGroup.of.comp (invariantMonoid d.χ).subtype)) = (lattice d.χ).toSubmonoid ∧ (lattice d.χ).FiniteIndex ∧ (∀ g : Algebra.GrothendieckGroup Q, g ^ Nat.card H ∈ lattice d.χ) ∧ ∃ b : invariantMonoid d.χ →* fixedRing d.σ, (fixedRing d.σ).subtype.toMonoidHom.comp b = (chartRingMap d.logStructure d.a).comp (invariantMonoid d.χ).subtype ∧ (∃ e : (fixedRing d.σ ⧸ chartIdeal b) ≃+* (A ⧸ chartIdeal (chartRingMap d.logStructure d.a)), ∀ r : fixedRing d.σ, e (Ideal.Quotient.mk (chartIdeal b) r) = Ideal.Quotient.mk (chartIdeal (chartRingMap d.logStructure d.a)) (r : A)) ∧ ∃ (N : EtaleLogStructure (Spec (.of (fixedRing d.σ)))) (i : d.action.InvariantDirectImage (Spec.map (CommRingCat.ofHom (fixedRing d.σ).subtype)) N) (c : invariantMonoid d.χ →* N.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 _)))), N.IsChart (Scheme.Etale.mk (𝟙 _)) c ∧ chartRingMap N c = b ∧ (∀ (j : Scheme.Etale.mk (𝟙 (Spec (.of A))) ⟶ logInvariantTest (Spec.map (CommRingCat.ofHom (fixedRing d.σ).subtype)) (Scheme.Etale.mk (𝟙 _))), j.left ≫ pullback.snd (𝟙 _) (Spec.map (CommRingCat.ofHom (fixedRing d.σ).subtype)) = 𝟙 _ → (d.logStructure.monoidSheaf.obj.map j.op).hom.comp ((i.pullbackMap (Scheme.Etale.mk (𝟙 _))).comp c) = d.a.comp (invariantMonoid d.χ).subtype) ∧ Function.Bijective (fun p : invariantMonoid d.χ ↦ Associates.mk (N.toEtalePrelogStructure.germ (d.point ≫ Spec.map (CommRingCat.ofHom (fixedRing d.σ).subtype)) (Scheme.Etale.mk (𝟙 _)) (Over.homMk (d.point ≫ Spec.map (CommRingCat.ofHom (fixedRing d.σ).subtype))) (c p)))",
   "branch": "newtargets-dag",
-  "by": "Q103",
-  "date": "2026-10-18",
+  "by": "Q32",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "The first theorem states all strict-local algebra and invariant-chart clauses; veryTame_local_kummer_quotient_etale_neighbourhood states the clause for data before strict localization. Supporting constructions use the actual character kernel, its inverse-image monoid, fixed subring and stratum ideals. The existing action dependency is generalized in the same delivery under section 1(B), avoiding an fs assumption on the target invariant log sheaf. 2026-10-20 (U): module Sheaf.AlgebraicGeometry.VeryTameLocalKummerQuotient deleted (dead: no target reaches it); this node is not reached either."
+  "note": "The local assertion and the original-quotient pointed-etale assertion are the two named theorems. Data and StalkData bundle precisely their hypotheses; all other declarations are explicit canonical coordinate constructions for this node. No statement correction."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b3ead00cf",
-  "group": "Q103",
+  "reviewer": "NT-stage2-cc-643efee70",
+  "group": "Q32",
   "result": "pass",
-  "note": "Item statement matches node/ILO VI 3.5(b), 3.7(b)-(c): all hypotheses present and not stronger (sigma pinned to the action's pullback, log-section eigen identity with the unit, trivial residue/stratum, invertible order, fixed root, module-finite). All conclusions present: fs/sharp P, P^gp=L as range of the canonical map (injective since integral), finite index, nQ^gp in L, b=a|P, invariant chart via InvariantDirectImage + IsChart + pullback = a + characteristic bijection; global chart on Spec B is equivalent to 'near the closed point' because B is strictly henselian; B/J->A/I pinned to the natural map. Neighbourhood theorem keeps the actual chart germ. def-per-fs-log-group-action 1(B) repair is purely additive over live, InvariantDirectImage is not hollow, record changes only lean. nt_compile --json: both files clean (9.6 s/9.3 s); importers VeryTameFSLogAction, VeryTameLogQuotient, VeryTameEquivariantSharpChart, GabberLogSmoothEquivariantModification clean. Statement verbatim, docstrings with source and blueprint, sorry only. Advisory: strictLocalRing/IsFineSaturatedMonoid owned by def-trf-log-regular-pair, not in stmt_deps (same pattern as landed siblings); second-reading section is an author self-check."
+  "note": "Node unchanged except lean (restores the statement after the 8a6a58ff1c5 dead-module prune). Checked against ILO VI 3.4/3.5(b)/3.7(b)-(c) pp.74-76. Data: Noetherian strictly henselian A; fs M with sharp global chart a and bijective characteristic at the closed geometric point; σ pinned to the log action by ΓSpecIso pullback; residue trivial; |H| a unit; H-fixed primitive root; χ curried (factors through H_ab); log-section eigenidentity with unit z; stratum σh r - r ∈ I; A finite over fixedRing. Conclusions: P fs and sharp; mrange of the canonical GrothendieckGroup map = L; FiniteIndex; g^n ∈ L; b = a|P via subtype equation; B/J≃A/I pinned to the natural map; InvariantDirectImage N on Spec B with IsChart c, chartRingMap N c = b, pullback along the canonical j equal to a|P, bijective characteristic. Theorem 2: original G-quotient (IsAdmissibleFiniteSchemeQuotient), exact stabilizer H, StalkData pinned by pullback; pointed étale W with chart, characteristic and germ = d.a on P. No regularity, dimension or freeness assumptions. Statement verbatim; 10 declarations present; docstrings and blueprint present; only sorry; imports used; no name clash. Advisory: strictLocalRing/IsFineSaturatedMonoid owned by def-trf-log-regular-pair, not in stmt_deps (transitive via def-trf-fs-log-blowup, as in the earlier PASS); second reading is a self-check. No recompile per instruction (worker clean compile 11.5/9.5 s)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/VeryTameLocalKummerQuotient.lean",
+  "module": "Sheaf.AlgebraicGeometry.VeryTameLocalKummerQuotient",
+  "declaration": "AlgebraicGeometry.veryTame_local_kummer_quotient",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

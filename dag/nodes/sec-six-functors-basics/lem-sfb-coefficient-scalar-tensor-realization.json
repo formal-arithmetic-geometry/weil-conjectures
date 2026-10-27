@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-coefficient-scalar-tensor-realization",
+ "kind": "statement",
+ "title": "Scalar adjunction and tensor realization in the coefficient ringed square",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, separated finite-type $k$-schemes $X,Y$, and a $k$-morphism $f:X\\to Y$ [sk-def-sfb-dc-setting]. Let $a:R\\to S$ be a morphism of commutative condensed rings such that $\\operatorname{Ext}_{a_Z}$ is exact for every scheme $Z$ [sk-def-sfb-coefficient-change]. On ordinary unbounded derived categories of internal module objects [sk-def-sfb-derived-categories] put $T_Z=L\\operatorname{Ext}_{a_Z}$, $U_Z=D(\\operatorname{Res}_{a_Z})$, $P_R=Lf_R^*$, $G_R=Rf_{R*}$, and similarly $P_S,G_S$ [sk-def-sfb-module-derived-pushpull]. Take the small pro-etale sites small relative to the module-sheaf universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $E_{R,Z},E_{S,Z}$ for the fixed internal-module/section-module equivalences [lem-pd-module-ringed-topos-derived-comparison, lem-sfb-internal-section-scalar-adjunction], and use their specified derived operation and adjunction identifications. The section-ring coefficient maps define identity-underlying-topos morphisms $\\phi_Z:(Z,S_Z)\\to(Z,R_Z)$ and geometric ringed-topos morphisms $f_R,f_S$. Their coefficient square commutes with identity underlying commutation. Let $\\theta:P_ST_Y\\xrightarrow{\\sim}T_XP_R$ and $C:G_RU_X\\xrightarrow{\\sim}U_YG_S$ denote, after these identifications, the canonical ringed pullback and direct-image path comparisons of [lem-sfb-ringed-comparison-tensor-adjunction], with ringed paths $f_R\\circ\\phi_X$ and $\\phi_Y\\circ f_S$ respectively.\nThe operation identifications carry $T_Z\\dashv U_Z$ to $L\\phi_Z^*\\dashv R\\phi_{Z*}$, including their unit and counit. Write $d^R,d^S$ for the actual derived geometric pullback tensor maps [def-sfb-module-object-projection-map] and $\\mu_Z:T_Z(A\\otimes_R^LB)\\xrightarrow{\\sim}T_ZA\\otimes_S^LT_ZB$ for the scalar tensor comparison [def-sfb-internal-scalar-tensor-comparison]. They carry $\\mu_Z$ to the canonical ringed derived tensor map $t_{\\phi_Z}$, in this direction, with local generalized pure-tensor normalization $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes(1\\otimes y)$ on flat-term K-flat representatives [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Consequently, for all $A,B\\in D(R_Y)$, the canonical ringed comparison $\\theta$ satisfies\n$$(\\theta_A\\otimes\\theta_B)\\circ d^S_{T_YA,T_YB}\\circ P_S(\\mu_{Y;A,B})\n=\\mu_{X;P_RA,P_RB}\\circ T_X(d^R_{A,B})\\circ\\theta_{A\\otimes_R^LB}.$$\nThis is an equality in the unbounded derived category of $S_X$-module objects, under the specified operation comparisons, without boundedness, constructibility or properness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), identity-underlying-topos scalar morphisms and composite tensorators; blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "def-sfb-module-object-projection-map",
+  "def-sfb-internal-scalar-tensor-comparison",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sfb-coefficient-scalar-tensor-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Prove the ordinary coefficient square monoidal. The canonical internal scalar oplax structure is normalized on balanced pure tensors, so its adjoint restriction lax structure equals the canonical restriction structure. The restriction/direct-image comparison preserves generalized pure tensors, and the direct-image lax structures have the normalized same tensor pairing. Thus this comparison is monoidal. The scalar and geometric adjunctions are monoidal for these structures, so monoidal conjugation gives NatTrans.IsMonoidal for (pullIso a f).symm.hom.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "def-pd-proetale-section-module-functors",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientScalarSectionRealization separately at X and Y for the first two clauses.",
+   "uses": [
+    "lem-sfb-coefficient-scalar-section-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply coefficientScalarDerivedTensorSquare to f and the ordinary monoidality just proved. Its conclusion is exactly the last clause. Combine these three clauses by conjunction introduction without changing the original statement or any geometric assumptions.",
+   "uses": [
+    "lem-sfb-coefficient-scalar-derived-tensor-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-scalar-tensor-comparison",
+  "def-pd-proetale-section-module-functors",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-coefficient-scalar-section-realization",
+  "lem-sfb-coefficient-scalar-derived-tensor-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6: ordinary coefficient-square monoidality by normalized restriction and monoidal conjugation; two explicit remaining steps for section realization and lifting the monoidal square to derived tensor comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition for a coefficient ring map has monoidal tensor comparison compatible with extension of scalars and the specified adjunction conjugate",
+   "results": "8 hits: PresheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullback_comp_id, SheafOfModules.pullbackComp, PresheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: underived pullback composition, no derived internal/section tensor normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity underlying ringed topos coefficient extension on unbounded module derived categories identifies the canonical scalar tensor comparison with the ringed derived pullback tensorator",
+   "results": "8 hits: ModuleCat.extendScalars_comp_id, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId, ModuleCat.extendScalars_id_comp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, PresheafOfModules.monoidalCategoryStruct, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, ModuleCat.extendScalarsId_inv_app_apply, LightCondensed.instMonoidalCategoryLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar extension coherence and presheaf tensors do not state the internal/section derived identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal",
+   "results": "12 hits: CategoryTheory.Functor.OplaxMonoidal.id, CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal_injective, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal",
+   "date": "2026-10-22",
+   "verdict": "no match: generic oplax structures do not identify these two specified tensor maps."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|extendScalars.*[Mm]onoidal",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat/Monoidal/Adjunction.lean:45 constructs ordinary ring-module scalar monoidality, not internal sheaf derived scalar realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal compatibility of the specified derived coefficient pullback comparison on sheaves of modules",
+   "results": "8 hits: SheafOfModules.pullback, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Over.μ_pullback_left_fst_fst', AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback adjunction and presheaf tensors do not state the specified unbounded tensor comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity underlying ringed topos extension of scalars on unbounded derived categories identifies the normalized tensor comparison under the internal to section module equivalence",
+   "results": "8 hits: ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected candidates are ordinary module scalar adjunction/monoidality or underived sheaf pullback composition, not the specified unbounded internal/section tensor realization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|extendScalars.*[Mm]onoidal",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Dialectica/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected candidates are ordinary module scalar adjunction/monoidality or underived sheaf pullback composition, not the specified unbounded internal/section tensor realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension restriction of scalars adjunction for ringed topoi with canonical monoidal tensor comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected candidates are ordinary module scalar adjunction/monoidality or underived sheaf pullback composition, not the specified unbounded internal/section tensor realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected candidates are ordinary module scalar adjunction/monoidality or underived sheaf pullback composition, not the specified unbounded internal/section tensor realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensorators for derived scalar extension and geometric pullback commute with the composition comparison of ringed topoi",
+   "results": "8 hits: SheafOfModules.pullbackComp, PresheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullback_id_comp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected candidates are ordinary module scalar adjunction/monoidality or underived sheaf pullback composition, not the specified unbounded internal/section tensor realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-projection-square",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (3), compatibility of tensor and inverse image with scalar extension: identify the actual scalar tensorator and the tensor equation for the ringed path comparison",
+   "via": [
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coefficient-scalar-tensor-realization",
+  "worker": "stage1",
+  "summary": "No new nodes: assemble the existing scalar adjunction, section tensor uniqueness and K-flat descent, then specialize ringed path tensor coherence with explicit corner labels. Statement unchanged.",
+  "blueprint": "det-thm-sfb-proper-base-change-rational proof paragraph (3): compatibility of tensor and inverse image with coefficient extension.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Normalized scalar adjunction comparison for arbitrary ring objects; supplies the identity-topos operation identifications. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic unbounded identity-topos scalar adjunction with specified unit and transpose. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact monoidal section reconstruction, total tensors and flat/K-flat preservation. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "why": "Generic uniqueness and pure-tensor formulas for section scalar tensorators. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat construction and representative preservation for ringed pullback tensorators. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic uniqueness of bifunctor natural transformations from K-flat representatives. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Generic tensor coherence of the two ringed pullback paths, specialized to the coefficient square. No node of the proper-base-change unit provides this comparison lemma."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Identifies the actual geometric internal tensor maps with ringed ones. No node of the proper-base-change unit provides this comparison lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-47305dd1f",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-47305dd1f (reviewer sub-agent of L); spot-checked: I read the item and all 9 cited statements in full. The delivery has no new nodes and leaves the statement unchanged. Sources checked: Stacks sites-cohomology 07A4 (lemma-pullback-tensor-product, l.3684), which builds the iso on flat-term K-flat representatives from the 03EL constituent maps; 07A6 (lemma-adjoint); and blueprint main-20261015 sk-thm-sfb-proper-base-change-rational proof paragraph (3), whose 'compatibility of tensor with scalar extension' the item realizes for its parent lem-sfb-coefficient-projection-square. Step 1: the internal/section scalar adjunction and the identity-topos 07A6 adjunction have the same left adjoint and the same unit (1⊗x versus x⊗1, up to symmetry), so the adjunctions coincide. Step 2: δ's defining equation transports to D(q(x⊗y))=q(x)⊗q(y), which by the 03EK uniqueness lemma gives the stated formulas. Step 3: the bidegree maps agree with the same (−1)^i sign, and bifunctor descent extends the equality. Step 4: corner labels are W=(X,S_X), X1=(X,R_X), X2=(Y,S_Y), Y=(Y,R_Y), so P1=T_X P_R, P2=P_S T_Y, d1=μ_X T_X(d^R), d2=d^S P_S(μ_Y); the ringed square commutes by the sk-def-sfb-coefficient-change square; lem-pd-module-ringed-topos-derived-comparison identifies δ_f with t_f. Step 5 is a correct substitution. Small cases: a=id, f=id, S=0, A or B=0. No cycle and no SGA. One repaired fault (C3/C4): Steps 2–3 named the 'canonical ordinary tensor comparison' and the 'K-flat construction' of t_φ, which the statement of lem-weil-pbc-ringed-topoi-derived-tensor-pullback does not give. The fix cites def-weil-pbc-ringed-tensor-square-presentation in both steps and in proof_deps; that node retains the generalized pure-tensor equation and states that t is the unique representative-normalized comparison. Batch-5 flag on lem-pd-sheaf-scalar-extension-constraint-coherence: accepted. It is the generic 03EK statement that sheaf scalar extension is strong monoidal; its stmt_deps are generic definitions only, neither assumption leaf gives it, and it is not a step of the duality or trace argument.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientScalarTensorRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensorRealization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensorRealization"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientScalarTensorRealization.lean",
+  "statement": "theorem coefficientScalarTensorRealization (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) : CoefficientScalarSectionRealization a X.left ∧ CoefficientScalarSectionRealization a Y.left ∧ ∀ A B : DerivedCategory (ModuleRingedComparison.internalModules R Y.left), (moduleObjectDerivedPullback S f.left).map (((internalScalarTensorComparison a Y.left).app A).app B) ≫ coefficientGeometricTensorComparison S f.left ((internalScalarExtension a Y.left).obj A) ((internalScalarExtension a Y.left).obj B) ≫ ((derivedTensor S X.left).map ((coefficientScalarPathIso a f.left).hom.app A)).app ((moduleObjectDerivedPullback S f.left).obj ((internalScalarExtension a Y.left).obj B)) ≫ ((derivedTensor S X.left).obj ((internalScalarExtension a X.left).obj ((moduleObjectDerivedPullback R f.left).obj A))).map ((coefficientScalarPathIso a f.left).hom.app B) = (coefficientScalarPathIso a f.left).hom.app (((derivedTensor R Y.left).obj A).obj B) ≫ (internalScalarExtension a X.left).map (coefficientGeometricTensorComparison R f.left A B) ≫ ((internalScalarTensorComparison a X.left).app ((moduleObjectDerivedPullback R f.left).obj A)).app ((moduleObjectDerivedPullback R f.left).obj B)",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The scalar realization predicate retains normalized ordinary/derived adjunctions, all generalized balanced generators, the flat-term K-flat totalization equation and the identification with the actual internal scalar tensorator. The canonical pullback path is constructed by left derivation of the ordinary coefficient square, independently of the derived pushforward comparison. Helpers belong to this realization and choose no data from mere existence. Site object universe u+1, morphism universe u and coefficient/derived Hom universe u+1 are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-840acfae2",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read item, all 13 stmt_deps, module, report, and upstream/side declarations (ChangeOfCoefficients pullIso/comapLowerStarIso, leftDerivedFunctorCompNatIso arg order, leftDerivedUpperStarTensor, internalScalarExtension/TensorComparison, InternalSectionScalarAdjunction). Hypotheses match the node (ℓ prime, char p prime ≠ ℓ, LFT+QC+separated over k, commutative condensed rings, Ext exactness only, ProEt sites with u+1/u universes, unbounded D). Equation P_S μ_Y ≫ d^S ≫ θ_A⊗θ_B = θ_{A⊗B} ≫ T_X d^R ≫ μ_X matches the node's order and direction; θ = canonical L-lift of the ordinary pullIso square, not arbitrary; d = actual leftDerivedUpperStarTensor. Realization predicate pins every existential (generator-normalized o, identity r, q = localized r, p and t by flat-term K-flat representative squares, m by s⊗(x⊗y)↦(s⊗x)⊗(1⊗y), derived adjunction = derivedExtendMapDerivedCategoryAdjunction, μ identified with t). lean.statement verbatim; node copy differs from live only in lean; docstrings/source/blueprint and 5-step proof present; single sorry; no duplicate in live. Advisories: def-pd-section-* decls used via public imports without stmt_dep; probably unused plain proof-dep imports. No compile (no change); worker reports 33.8/32.3 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7e17d",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T202241-L-2698084",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical; moved defs byte-identical to the clone's item; split statements checked against the item's conjuncts and against map_leftDerivedTensorComparison_comp_eq_of_iso (proof elaborates); both direct importers compiled"
+ }
+}

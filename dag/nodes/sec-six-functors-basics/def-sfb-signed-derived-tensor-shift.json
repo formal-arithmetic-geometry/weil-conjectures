@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-signed-derived-tensor-shift",
+ "kind": "definition",
+ "title": "Signed simultaneous derived tensor shift, second factor first",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. On $D(\\mathcal O_X)$ [def-pc-derived-category] use the K-flat derived tensor [def-pc-scheme-derived-tensor-structure] and its canonical coherent tensor shift structure [def-sc-scheme-canonical-tensor-shift]. For $M,N\\in D(\\mathcal O_X)$ and arbitrary integers $a,b$, define $t_{a,b}:M[a]\\otimes^{\\mathbf L}N[b]\\xrightarrow{\\sim}(M\\otimes^{\\mathbf L}N)[a+b]$ by first extracting the second shift $b$, then applying the first-factor shift comparison for $a$ shifted by $b$, and finally combining the shifts by the inverse of the canonical $[a+b]\\cong[a][b]$ comparison. Thus this is the specified second-shift-first Koszul comparison, with coefficient $(-1)^{bi}$ on a total K-flat model summand of shifted first-factor degree $i$, and no new tensor or shift structure is chosen.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-scheme-canonical-tensor-shift"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNH, item-shift-tensor, in the explicitly prescribed second-shift-first convention; sites-cohomology.tex Tag 06YU, definition-derived-tor, K-flat localization. Existing helper in lem-sfb-localization-tensorator-signed-shifts, attached to a definition node as requested by the returns on 45c6eda3d247 and 5719214d83fe."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of shifted objects has the canonical simultaneous shift isomorphism obtained by extracting the second shift first",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mapBifunctorHomologicalComplexShift₁Iso\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \":\\n  ((F.mapBifunctorHomologicalComplex _ _).obj (K₁⟦x⟧)).obj K₂ ≅\\n    (HomologicalComplex₂.shiftFunctor₁ D x).obj (((F.mapBifunctorHomologicalComplex _ _).obj K₁).obj K₂)\", \"doc\": \"Given a functor $ F : \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \\\\mathcal{D}] $ and an integer $ x $, this isomorphism establishes that applying the bifunctor constructed from $ F $ to a homological complex $ \"}\n  {\"name\": \"CategoryTheory.shiftShiftNeg\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \"(i : A) : X⟦i⟧⟦-i⟧ ≅ X\", \"doc\": \"For any element $i$ in an additive monoid $A$ and object $X$ in category $\\\\mathcal{C}$, the composition of the shift functor by $i$ followed by the shift functor by $-i$ yields an isomorphism $X⟦i⟧⟦-i\"}\n  {\"name\": \"CochainComplex.mapBifunctorShift₁Iso\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \": mapBifunctor (K₁⟦x⟧) K₂ F ≅ (mapBifunctor K₁ K₂ F)⟦x⟧\", \"doc\": \"Given a functor $ F : \\\\mathcal{C}_1 \\\\to [\\\\mathcal{C}_2, \\\\mathcal{D}] $ and an integer $ x $, this isomorphism establishes that applying the bifunctor constructed from $ F $ to a homological complex $ \"}\n  {\"name\": \"HomologicalComplex₂.shiftFunctor₁₂CommIso\", \"module\": \"Mathlib.Algebra.Homology.TotalComplexShift\", \"type\": \"(x y : ℤ) : shiftFunctor₂ C y ⋙ shiftFunctor₁ C x ≅ shiftFunctor₁ C x ⋙ shiftFunctor₂ C y\", \"doc\": \"For any integers $x$ and $y$, the composition of the second-direction shift functor by $y$ followed by the first-direction shift functor by $x$ is naturally isomorphic to the composition of the first-\"}\n  {\"name\": \"CategoryTheory.Functor.isoShift\", \"module\": \"Mathlib.CategoryTheory.Shift.ShiftSequence\", \"type\": \"(n : M) : shiftFunctor C n ⋙ F ≅ F.shift n\", \"doc\": \"For each element $ n $ in an additive monoid $ M $, there is a natural isomorphism between the composition of the shift functor by $ n $ with the functor $ F $ and the functor obtained by shifting $ F\"}\n  {\"name\": \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso\", \"module\": \"Mathlib.CategoryTheory.Shift.InducedShiftSequence\", \"type\": \"(n a a' : M) (ha' : n + a = a') : shiftFunctor D n ⋙ F' a ≅ F' a'\", \"doc\": \"Given a shift sequence $F$ for a category $\\\\mathcal{C}$ with an additive monoid $M$, and elements $n, a, a' \\\\in M$ satisfying $n + a = a'$, this provides a natural isomorphism between the composition \"}\n  {\"name\": \"CochainComplex.mappingCone.shiftIso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \"(n : ℤ) : (mappingCone φ)⟦n⟧ ≅ mappingCone (φ⟦n⟧')\", \"doc\": \"For any morphism $\\\\phi: K \\\\to L$ between cochain complexes in a preadditive category with binary biproducts and any integer $n$, there is a canonical isomorphism between the $n$-shifted mapping cone o\"}\n  {\"name\": \"CochainComplex.shiftFunctorObjXIso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Shift\", \"type\": \"(K : CochainComplex C ℤ) (n i m : ℤ) (hm : m = i + n) : ((shiftFunctor C n).obj K).X i ≅ K.X m\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ \\\\mathcal{C} $, integer shift $ n $, and indices $ i, m $ satisfying $ m = i + n $, the shift functor produces an isomorphism between the object \"}\n",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme, compose the canonical second and first tensor shift comparisons to identify M[a] tensor N[b] with (M tensor N)[a+b]",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e ≪≫ AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e' =\\n    AlgebraicGeometry.Scheme.Pullba\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any equalities $e:x=y$ and $e':y=z$ between pullback triplets, the composition of isomorphisms $\\\\text{tensorCongr}(e) \\\\circ \\\\text{te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z) {Z : CommRingCat} (h : z.tensor ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (CategoryTheo\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and three equal pullback triplets $x=y=z$, the composition of the tensor congruence homomorphisms $T_1.tensor \\\\to T_2.tensor$ and $T_2.t\"}\n  {\"name\": \"AlgebraicGeometry.instBraidedCategoryScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.BraidedCategory AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes is endowed with the structure of a braided category. This structure is derived from its Cartesian monoidal structure, where the braiding isomorphism for two schemes $X$ and $Y$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).inv =\\n    (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯).hom\", \"doc\": \"For any two pullback triplets $x$ and $y$ with an equality $e : x = y$, the inverse of the isomorphism $\\\\text{tensorCongr}(e)$ between their tensor pushouts is equal to the isomorphism $\\\\text{tensorCo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).symm =\\n    AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then the inverse of the isomorphism between their tensor pushouts is equal to the te\"}\n",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.shiftFunctorAdd'",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (i j k : A) (h : i + j = k) : CategoryTheory.shiftFunctor C k ≅ (CategoryTheory.shiftFunctor C i).comp (CategoryTheory.shiftFunctor C j)\", \"doc\": \"When `k = i + j`, shifting by `k` is the same as shifting by `i` and then shifting by `j`.\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_eq_shiftFunctorAdd\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (i j : A) : CategoryTheory.shiftFunctorAdd' C i j (i + j) ⋯ = CategoryTheory.shiftFunctorAdd C i j\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorComm_eq\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddCommMonoid A] [CategoryTheory.HasShift C A] (i j k : A) (h : i + j = k) : CategoryTheory.shiftFunctorComm C i j = (CategoryTheory.shiftFunctorAdd' C i j k h).symm ≪≫ CategoryTheory.shiftFunctorAdd' C j i k ⋯\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_add_zero_hom_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" {C : Type u} {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a : A) (X : C) : (CategoryTheory.shiftFunctorAdd' C a 0 a ⋯).hom.app X = (CategoryTheory.shiftFunctorZero C A).inv.app (X⟦a⟧)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_add_zero_inv_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" {C : Type u} {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a : A) (X : C) : (CategoryTheory.shiftFunctorAdd' C a 0 a ⋯).inv.app X = (CategoryTheory.shiftFunctorZero C A).hom.app (X⟦a⟧)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_add_zero\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a : A) : CategoryTheory.shiftFunctorAdd' C a 0 a ⋯ = (CategoryTheory.shiftFunctor C a).rightUnitor.symm ≪≫ (CategoryTheory.shiftFunctor C a).isoWhiskerLeft (CategoryTheory.shiftFunctorZero C \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_zero_add\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a : A) : CategoryTheory.shiftFunctorAdd' C 0 a a ⋯ = (CategoryTheory.shiftFunctor C a).leftUnitor.symm ≪≫ CategoryTheory.Functor.isoWhiskerRight (CategoryTheory.shiftFunctorZero C A).symm (Ca\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_zero_add_hom_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" {C : Type u} {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a : A) (X : C) : (CategoryTheory.shiftFunctorAdd' C 0 a a ⋯).hom.app X = (CategoryTheory.shiftFunctorZero C A).inv.app X⟦a⟧'\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_zero_add_inv_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" {C : Type u} {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a : A) (X : C) : (CategoryTheory.shiftFunctorAdd' C 0 a a ⋯).inv.app X = (CategoryTheory.shiftFunctorZero C A).hom.app X⟦a⟧'\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_assoc\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a₁ a₂ a₃ a₁₂ a₂₃ a₁₂₃ : A) (h₁₂ : a₁ + a₂ = a₁₂) (h₂₃ : a₂ + a₃ = a₂₃) (h₁₂₃ : a₁ + a₂ + a₃ = a₁₂₃) : CategoryTheory.shiftFunctorAdd' C a₁₂ a₃ a₁₂₃ ⋯ ≪≫ CategoryTheory.Functor.isoWhiskerRight\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd_assoc\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" (C : Type u) {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a₁ a₂ a₃ : A) : CategoryTheory.shiftFunctorAdd C (a₁ + a₂) a₃ ≪≫ CategoryTheory.Functor.isoWhiskerRight (CategoryTheory.shiftFunctorAdd C a₁ a₂) (CategoryTheory.shiftFunctor C a₃) ≪≫ (Categor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.shiftFunctorAdd'_assoc_inv_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Basic\", \"type\": \" {C : Type u} {A : Type u_1} [CategoryTheory.Category.{v, u} C] [AddMonoid A] [CategoryTheory.HasShift C A] (a₁ a₂ a₃ a₁₂ a₂₃ a₁₂₃ : A) (h₁₂ : a₁ + a₂ = a₁₂) (h₂₃ : a₂ + a₃ = a₂₃) (h₁₂₃ : a₁ + a₂ + a₃ = a₁₂₃) (X : C) : CategoryTheory.CategoryStruct.comp ((CategoryTheory.shiftFunctorAdd' C a₁ a₂ a₁₂ \", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeSignedDerivedTensorShift|schemeCanonicalTensorShift|commShiftIso",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean\", \"line\": \"35\", \"text\": \"  have := Functor.additive_of_iso (P.ι.commShiftIso n).symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"line\": \"222\", \"text\": \"    { le_shift _ hY := P.prop_of_iso ((F.commShiftIso n).symm.app _) (P.le_shift n _ hY) }\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"143\", \"text\": \"    L.map h ≫ (L.commShiftIso (1 : ℤ)).hom.app _ ≫ e.hom.left⟦(1 : ℤ)⟧', _, ?_, H⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"227\", \"text\": \"  exact Functor.additive_of_iso (W.Q.commShiftIso n)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"line\": \"239\", \"text\": \"  exact Functor.additive_of_iso (W.Q'.commShiftIso n)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"58\", \"text\": \"    (Iso.homCongr ((L.commShiftIso a).app X) ((L.commShiftIso b).app Y))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"117\", \"text\": \"    (L.commShiftIso a).hom.app X ≫ (equiv W L f)⟦a⟧' ≫ (L.commShiftIso a).inv.app Y :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"118\", \"text\": \"  (W.shiftLocalizerMorphism a).equiv_smallHomMap _ _ _ (L.commShiftIso a) f\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"187\", \"text\": \"  (SmallHom.equiv W L).trans ((L.commShiftIso m).app Y).homToEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean\", \"line\": \"191\", \"text\": \"    equiv W L f = (SmallHom.equiv W L) f ≫ ((L.commShiftIso m).app Y).hom :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"line\": \"229\", \"text\": \"    { commShiftIso := fun a => (i a).symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"line\": \"230\", \"text\": \"      commShiftIso_zero := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"line\": \"235\", \"text\": \"      commShiftIso_add := fun a b => by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"line\": \"245\", \"text\": \"lemma Functor.commShiftIso_eq_ofInduced (a : A) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Induced.lean\", \"line\": \"248\", \"text\": \"    F.commShiftIso a = (i a).symm := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"line\": \"145\", \"text\": \"        isoWhiskerRight (L.commShiftIso a).symm F' ≪≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"line\": \"148\", \"text\": \"        F.commShiftIso a ≪≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"line\": \"155\", \"text\": \"      F'.map ((L.commShiftIso a).inv.app X) ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"line\": \"157\", \"text\": \"        (F.commShiftIso a).hom.app X ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"line\": \"166\", \"text\": \"      (F.commShiftIso a).inv.app X ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Opposite.lean\", \"line\": \"178\", \"text\": \"  commShiftIso a := (NatIso.op (F.commShiftIso a)).symm\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Opposite.lean\", \"line\": \"179\", \"text\": \"  commShiftIso_zero := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Opposite.lean\", \"line\": \"180\", \"text\": \"    rw [commShiftIso_zero]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Opposite.lean\", \"line\": \"186\", \"text\": \"  commShiftIso_add a b := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Opposite.lean\", \"line\": \"187\", \"text\": \"    rw [commShiftIso_add]\"}\n",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n schemeSignedDerivedTensorShift|schemeCanonicalTensorShift lean/WeilConjectures",
+   "results": "schemeCanonicalTensorShift is defined in WeilConjectures/AlgebraicGeometry/SchemeCanonicalTensorShift.lean; no schemeSignedDerivedTensorShift in WeilConjectures.",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n schemeSignedDerivedTensorShift|schemeCanonicalTensorShift lean/Sheaf",
+   "results": "schemeSignedDerivedTensorShift is defined only in Sheaf/AlgebraicGeometry/LocalizationTensoratorSignedShifts.lean:58 and used in its theorem at line 95. This exact definition is reused in its original module without any source change.",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l schemeSignedDerivedTensorShift|signed-derived-tensor-shift dag/nodes; python3 tools/blueprint_refs.py search signed derived tensor shift",
+   "results": "Only lem-sfb-localization-tensorator-signed-shifts.json records the helper. 0 blueprint nodes match signed derived tensor shift. No separate definition node carries this composite.",
+   "date": "2026-10-24",
+   "verdict": "The exact existing comparison is AlgebraicGeometry.schemeSignedDerivedTensorShift in Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts. Reuse it with existing:true; general shift results supply ingredients. No other definition node owns this composite."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-module-cup-shifted-hom-comparison",
+  "date": "2026-10-24",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ordinary cup/shifted-Hom comparison uses this second-shift-first signed tensor comparison in its final identity. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Supporting tensor-coefficient identities used in the external-product calculations: associativity, signed symmetry, and both units before the group-law construction. Auxiliary for the tensor-coefficient identities: identify the ordinary unsigned cup, canonical coefficient maps and the class of one with normalized shifted derived morphisms.",
+   "via": [
+    "lem-sfb-module-cup-shifted-hom-comparison",
+    "lem-sfb-module-cup-associativity-symmetry-unit",
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalizationTensoratorSignedShifts",
+  "declaration": "AlgebraicGeometry.schemeSignedDerivedTensorShift",
+  "statement": "def schemeSignedDerivedTensorShift (M N : schemeDerivedCategory X) (a b : ℤ) :\n    M⟦a⟧ ⊗ N⟦b⟧ ≅ (M ⊗ N)⟦a + b⟧",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Reuse of the existing plain definition in its original published module, as requested by the return on 5719214d83fe. This definition node records the signed second-shift-first comparison separately from the compatibility theorem; no Lean declaration is added, moved, renamed or duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1145c3133",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1145c3133",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after 5719214d landing refusal (duplicate-name collision). Commit (4 files) now reuses the published AlgebraicGeometry.schemeSignedDerivedTensorShift via new def node def-sfb-signed-derived-tensor-shift with existing:true (verbatim header, stmt_deps def-pc-scheme/def-pc-derived-category/def-pc-scheme-derived-tensor-structure/def-sc-scheme-canonical-tensor-shift, Stacks 0FNH/06YU); item adds only that stmt_dep; no dependency module touched. Clauses rechecked: extMk_hom normalization for every injective resolution (Mathlib rightShift sign-free, so no degree sign that would break the pq-odd cup formula), coefficient naturality, degree-zero and class-of-1 clauses with zero-shift iso, cup over the unique IsModuleCupProduct, m identical to SchemeSingleTensorAugmentationCoherence's, t_{p,q} second-shift-first (-1)^{qi}, inverse unitor transported through ε which is the identity (Qh ε=𝟙, quotient εIso=refl). Edge cases p=0/q=0, non-flat F,G, empty scheme, independent u,w. Gates OK; lean.statement verbatim. No compile (no file changed). Advisory: inherited theorem stmt_deps; unused ShiftedTensorMorphismCalculus import; documented omitted ModuleCupResolutionAugmentation import."
+ }
+}

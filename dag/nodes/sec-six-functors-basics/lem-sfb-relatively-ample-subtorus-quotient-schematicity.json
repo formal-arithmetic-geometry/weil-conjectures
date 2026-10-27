@@ -1,0 +1,497 @@
+{
+ "id": "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+ "kind": "statement",
+ "title": "Schematicity of a relatively ample group quotient by a subtorus",
+ "statement": "Let $S$ be a normal locally Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth] [def-weil-pbc-normal-ring]. Let $G\\to S$ be a smooth separated commutative group scheme of finite presentation (here an $S$-group scheme is a group object in $S$-schemes, with multiplication, inverse and unit morphisms satisfying the group identities) [def-sbc-smooth-morphisms] [def-sbc-locally-finite-presentation] [def-weil-pbc-scheme-conventions] with connected geometric fibres [def-weil-connected-scheme]. Suppose $S$ has an affine open cover $\\{W_i\\}$ such that $G_{W_i}$ has an ample invertible module [def-sc-invertible-module] [def-weil-pbc-ample-invertible-module]. Let $T\\hookrightarrow G$ be a closed subgroup [def-weil-closed-immersion] which is a torus over $S$, meaning fppf locally isomorphic to $\\mathbf G_m^r$ for finite locally constant $r\\geq0$ [def-sc-gm-ga] [def-pc-fppf-site]. Suppose the fppf sheafification $F$ of $U\\mapsto G(U)/T(U)$ on $S$-schemes is an algebraic space, and write $p:G\\to F$ for the quotient map [def-weil-pbc-sheafification] [def-trf-algebraic-space]. Then $F$ is represented by a smooth separated commutative $S$-group scheme of finite presentation, and $p$ is affine. The group law on $F$ is the one induced by multiplication of local lifts in $G$. Fibre products and restrictions use [def-pc-base-change] [def-pc-fibre-product]. No semiabelian-fibre hypothesis and no maximality or generic-fibre hypothesis on $T$ are imposed.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+  "place": "Chapter VI, §§1–2 (relatively quasi-projective homogeneous spaces), and Chapter IX, §2 (subtori). WANTED: original text and precise quotient representability statement; independently formulated supporting lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-connected-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-trf-algebraic-space",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-sfb-relative-torus"
+ ],
+ "proof": [
+  {
+   "text": "First work over one of the given affine opens $W\\subseteq S$ with an ample module $L$ on $G_W$. An affine open of a locally Noetherian scheme is Noetherian. Apply [lem-sfb-normal-torus-finite-etale-splitting] to $T_W$: choose a finite étale surjection $u:W'\\to W$ with $W'=\\coprod_jW'_j$, a finite disjoint union of normal integral affine Noetherian schemes, on each of which $T$ splits. In particular $T_W$ is smooth, affine and finitely presented. All constructions of the quotient below are on the big fppf site: restricting to any base change gives the quotient of the pulled-back action, because quotient sections and equality of sections can both be checked after an fppf cover. We will construct a scheme representing $F_W$ and then glue these representations for the original opens $W$.",
+   "uses": [
+    "lem-sfb-normal-torus-finite-etale-splitting",
+    "def-weil-pbc-sheafification",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Commutativity makes multiplication on cosets well defined: changing lifts $g_1,g_2$ to $g_1t_1,g_2t_2$ changes their product by $t_1t_2\\in T$. Sheaf gluing therefore gives multiplication $F_W\\times_WF_W\\to F_W$, inverse and unit, with all group identities checked on local lifts; they are morphisms of algebraic spaces, which are natural transformations of their sheaves. Translation by $T_W$ on $G_W$ is free by cancellation. Apply [lem-sfb-free-flat-group-space-quotient] with $B=W$, $Z=G_W$, acting group $T_W$. Its hypotheses hold since $T_W$ is smooth and thus flat and locally finitely presented. It gives fppf local lifts and $T_W\\times_WG_W\\simeq G_W\\times_{F_W}G_W$, $(t,g)\\mapsto(tg,g)$. Consequently over every scheme test $V\\to F_W$ an fppf cover trivializes $G_W\\times_{F_W}V\\to V$ as $T_W\\times_WV\\to V$: a chosen lift supplies the isomorphism by translation.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-four-property-fppf-descent] to the test morphisms in step 2: their trivializations are affine, being base changes of $T_W\\to W$. Thus $p:G_W\\to F_W$ is affine (each affine scheme test has affine scheme source). Apply [lem-sfb-space-smooth-surjective-fppf-locality] on the same scheme tests: their trivializations are smooth and surjective, so $p$ is smooth and universally surjective. Smoothness and affineness are preserved by base change; in particular these assertions hold for $p':G_{W'}\\to F_{W'}$. An open $U\\subseteq G_{W'}$ has open image in every scheme test of $F_{W'}$, by [lem-sfb-smooth-atlas-open-image] applied to this smooth surjective scheme atlas. Hence $p'(U)$ is an open subspace and $U\\to p'(U)$ is a smooth surjection. Here algebraic spaces are viewed as discrete stacks: their sheaf axiom is precisely descent for objects and arrows in these discrete groupoids.",
+   "uses": [
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-smooth-atlas-open-image",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "Fix a component $W'_j$ and write $G'=G_{W'_j}$, $T'=T_{W'_j}$, $F'=F_{W'_j}$. The morphism $G'\\to W'_j$ remains smooth and finitely presented; its geometric fibres remain connected, and it is nonempty because of the unit section. Thus [lem-sbc-smooth-connected-generic-geometry] shows that $G'$ is integral and normal. Since $W'_j\\to W$ is finite, hence affine, $G'\\to G_W$ is affine by base change. Pulling back $L$ along it gives an ample module on $G'$ by [lem-weil-pbc-pullback-ample-invertible]. Therefore [lem-sfb-relative-split-torus-invariant-affines] applies to the translation action of $T'\\simeq\\mathbf G_m^{r_j}$ and covers $G'$ by invariant affine opens $U_\\alpha$. Their structure maps to $W'_j$ are of finite type: they are quasi-compact opens in the finite-type scheme $G'$ over a Noetherian base.",
+   "uses": [
+    "lem-sbc-smooth-connected-generic-geometry",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-sfb-relative-split-torus-invariant-affines"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "For each $U_\\alpha$ put $V_\\alpha=p'(U_\\alpha)$, an open subspace by step 3. It is saturated: a test point over $V_\\alpha$ locally lifts to $U_\\alpha$, and every other lift differs from it by a unique element of $T'$ by the torsor identity of step 2. Invariance of $U_\\alpha$ implies that every such lift lies in $U_\\alpha$; descent of membership in an open gives $p'^{-1}(V_\\alpha)=U_\\alpha$. The same identity and local lifts identify the sheaf $V_\\alpha$ with the fppf quotient $U_\\alpha/T'$. The action is still free on all tests. By [lem-sfb-affine-free-split-torus-invariants], this quotient is the affine scheme $\\operatorname{Spec}(\\Gamma(U_\\alpha,\\mathcal O)^{T'})$. These open affines cover $F'$. Their overlaps and identifications are already open subspaces of the same sheaf; gluing the affine schemes along those open subschemes yields a scheme $H'_j$. That $H'_j$ represents $F'$ is [lem-pc-schemes-criterion] applied to $F'$: it is an fppf, hence Zariski, sheaf; the $V_\\alpha$ are representable subfunctors whose inclusions are representable by open immersions (step 3), and they cover $F'$ because the $U_\\alpha$ cover $G'$ and $p'$ has fppf local lifts. This is exactly the local-scheme condition for the structure sheaf on an algebraic space, so the representing scheme has its original sheaf and quotient map.",
+   "uses": [
+    "lem-sfb-affine-free-split-torus-invariants",
+    "def-trf-algebraic-space",
+    "def-pc-scheme",
+    "lem-weil-pbc-glue-schemes",
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "For later descent we check all hypotheses needed for ampleness of $H'_j$. The scheme map $p':G'\\to H'_j$ is surjective, flat and locally finitely presented by step 2. Since $G'\\to W'_j$ is smooth, [lem-sbc-smooth-flat-surjective-source-descent] makes $H'_j\\to W'_j$ smooth. It has geometrically connected fibres, as each is the surjective continuous image of the connected geometric fibre of $G'$. To check separatedness, pull its diagonal back along $G'\\times_{W'_j}G'\\to H'_j\\times_{W'_j}H'_j$. The result is $G'\\times_{H'_j}G'\\hookrightarrow G'\\times_{W'_j}G'$, the inverse image of the closed subgroup $T'\\hookrightarrow G'$ under $(g_1,g_2)\\mapsto g_1g_2^{-1}$. It is closed by closed-immersion base change. The covering is a smooth surjection (products of $p'$), hence flat and locally finitely presented by smooth calculus and therefore fppf, hence fpqc, so [lem-pc-fpqc-descend-closed-immersion] makes the diagonal closed. Finally $G'$ is quasi-compact and surjects onto $H'_j$, so $H'_j$ is quasi-compact; its map to the affine base is quasi-compact. Separatedness implies quasi-separatedness. Smoothness implies local finite presentation, hence the structure map is finitely presented.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "The sheaf group law from step 2 is a group scheme law on $H'_j$, by representability. Step 6 verifies that this is a smooth separated group scheme of finite presentation with geometrically connected fibres over the normal integral affine Noetherian scheme $W'_j$. Apply [lem-sfb-affine-normal-connected-group-ample] to obtain an ample invertible module on all of $H'_j$. By [lem-sc-ample-finite-set-affine], every finite subset of $H'_j$ lies in an affine open. Put $H'=\\coprod_jH'_j$, representing $F_{W'}$. A finite subset of $H'$ meets only finitely many components; choose such affine opens in those components and take their disjoint union, leaving the other components empty. A finite disjoint union of affine schemes is affine. Thus every finite subset of $H'$ lies in an affine open. This is a finite-subset statement on all of $H'$, not just fibrewise and not merely locally on its base.",
+   "uses": [
+    "lem-sfb-affine-normal-connected-group-ample",
+    "lem-sc-ample-finite-set-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "The identification $H'\\simeq F_W\\times_WW'$ supplies a canonical transport descent datum on $H'\\to W'$ for the finite étale surjection $u:W'\\to W$: both pullbacks to $W'\\times_WW'$ identify with $F_W\\times_W(W'\\times_WW')$. The identity on this sheaf is an isomorphism of the two scheme pullbacks by Yoneda, and on triple products it satisfies the cocycle identity. Apply [lem-pd-invariant-affine-neighbourhoods], using the finite-subset property of step 7 and that $u$ is finite, flat, locally finitely presented and surjective. Every point of $H'$ then has a transport-invariant affine neighbourhood over an affine open of $W$. Apply [lem-pd-invariant-affine-descent-gluing] to this same datum: it is effective, giving a scheme $H_W\\to W$ and an isomorphism $H_W\\times_WW'\\simeq H'$ compatible with the datum. No projectivity hypothesis or general claim that schematicity is étale-local on the base is used.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-pd-invariant-affine-neighbourhoods",
+    "lem-pd-invariant-affine-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "The compatible identification after $W'\\to W$ identifies the sheaf represented by $H_W$ with $F_W$. Explicitly, for every $W$-scheme $V$ use the finite étale, hence fppf and fpqc, cover $V\\times_WW'\\to V$. A section of either sheaf is exactly a section over this cover with equal pullbacks on its double overlap. On that equalizer the identification with $H'$ respects the same transport datum. The equalizers are therefore naturally bijective. The fppf sheaf property for $F_W$ is its hypothesis; the sheaf property for $h_{H_W}$ follows from [lem-weil-pbc-fpqc-representable-descent]. Hence $H_W$ represents $F_W$ and its quotient map is the original $p$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  },
+  {
+   "text": "For each original affine $W$, repeat the scheme argument of step 6 with $G_W\\to H_W$: the free-action quotient supplies a flat surjective locally finitely presented map, so smoothness of $G_W\\to W$ descends by [lem-sbc-smooth-flat-surjective-source-descent]. The diagonal is closed by the difference-map test and fpqc closed-immersion descent, and quasi-compactness follows from the surjective image of the quasi-compact $G_W$. Thus $H_W\\to W$ is smooth, separated and finitely presented. The local schemes $H_W$ agree on intersections since they represent restrictions of the same sheaf $F$; their unique representing isomorphisms satisfy the cocycle identity. Glue them to a scheme $H\\to S$; it represents $F$ by [lem-pc-schemes-criterion], since $F$ is a Zariski sheaf and the open subfunctors $F_W\\subseteq F$, representable by $H_W$ and with inclusions representable by open immersions (pullback of $W\\subseteq S$), cover $F$. For smoothness use open-target restriction followed by smooth locality on the source. Local finite presentation is local by its definition; quasi-compactness and quasi-separatedness can be tested over affine opens, each of which has a finite affine open refinement subordinate to the $W$. The closed-diagonal condition also restricts to this open cover. Thus $H\\to S$ is smooth, separated and finitely presented. For global affineness of $p$, let $V\\to F$ be an affine scheme test. The opens $V_W=V\\times_SW$ form a Zariski, hence fppf, covering of $V$, and $G\\times_FV_W\\to V_W$ is the base change of the affine $p_W:G_W\\to F_W$ of step 3, so affine; [lem-sfb-space-four-property-fppf-descent] (property affine) makes $G\\times_FV\\to V$ affine. Finally the multiplication, inverse and unit constructed from local lifts in step 2 are morphisms of this representing scheme and satisfy the commutative group identities. This is the required commutative $S$-group scheme, with exactly the specified quotient law.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-glue-schemes",
+    "def-pc-scheme",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-pc-schemes-criterion",
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "Agent assembly of the relative torus quotient proof; original Raynaud text WANTED. The individual black-box inputs are the cited DAG statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-torus-finite-etale-splitting",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-smooth-atlas-open-image",
+  "lem-sbc-smooth-connected-generic-geometry",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-sfb-relative-split-torus-invariant-affines",
+  "lem-sfb-affine-free-split-torus-invariants",
+  "def-pc-scheme",
+  "lem-weil-pbc-glue-schemes",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-affine-normal-connected-group-ample",
+  "lem-sc-ample-finite-set-affine",
+  "def-pd-descent-datum",
+  "lem-pd-invariant-affine-neighbourhoods",
+  "lem-pd-invariant-affine-descent-gluing",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-schemes-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+  "place": "Independent finite étale splitting / invariant affine quotient / finite flat descent assembly. The original Raynaud source is unavailable locally; new geometric inputs are stated separately and searched."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subtorus|semiabelian|group.*quotient|quotient.*group",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic representability of the quotient sheaf of a relatively quasi-projective group scheme by a subtorus over a normal base",
+   "results": "8 hits; ; returned names/files: Representation.quotient_apply, Representation.ofQuotient_coe_apply, FGModuleRepr.repr, Rep.quotient, Representation.quotient, Module.Finite.reprₛ, SheafOfModules.QuasicoherentData.presentation, Rep.ofQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Quotient\"",
+   "results": "6 hits; ; returned names/files: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic space quotient of a smooth separated connected group scheme by a closed torus over a normal locally Noetherian scheme is representable by a scheme",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively quasi-projective smooth connected group divided by a subtorus has a schematic fppf quotient over a normal Noetherian base",
+   "results": "8 hits; ; returned names/files: CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, ProfiniteGrp.toFiniteQuotientFunctor, AddSubgroup.instFiniteQuotientOfContinuousAddOfCompactSpace, isAddQuotientCoveringMap_quotientMk_of_properlyDiscontinuousVAdd, Subgroup.isQuotientCoveringMap_of_comm",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a smooth separated commutative group scheme over a normal locally Noetherian base has locally relatively ample line bundles, its algebraic space quotient by a closed torus is a smooth separated scheme of finite presentation",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth commutative group scheme with locally ample line bundles over a normal base has a schematic quotient by a closed torus",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, CategoryTheory.PreGaloisCategory.has_decomp_quotients, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.Scheme.Hom.liftQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: read signatures of the returned affine-space, ring quotient, topology, normalization and representability declarations; none proves the relative group quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "subtorus|torus.*quotient|quotient.*torus",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read signatures of the returned affine-space, ring quotient, topology, normalization and representability declarations; none proves the relative group quotient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "6 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec",
+   "date": "2026-10-24",
+   "verdict": "no match: read signatures of the returned affine-space, ring quotient, topology, normalization and representability declarations; none proves the relative group quotient theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic representability of the fppf quotient of a smooth group scheme by a torus",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, Rep.quotientToInvariantsFunctor_map_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: read signatures of the returned affine-space, ring quotient, topology, normalization and representability declarations; none proves the relative group quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative homogeneous space quotient by a torus of a relatively quasi-projective group over a normal scheme",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Proj, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-24",
+   "verdict": "no match: read signatures of the returned affine-space, ring quotient, topology, normalization and representability declarations; none proves the relative group quotient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-semiabelian-generic-torus-quotient",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited generic torus quotient input: upgrade the independently constructed free-action algebraic-space quotient to a scheme using local relative ampleness of the source group.",
+   "via": [
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+  "worker": "stage1",
+  "summary": "Constructed the quotient group law and affine smooth torsor, passed to a finite étale torus-splitting cover, used relative invariant affine charts and their invariant-ring quotients, then descended the scheme using global ampleness on each normal integral affine component and the existing finite-flat invariant-affine descent lemmas. Added four statement-only geometric inputs after logged searches; reused the existing generic torsor descent tools. Clarified the meaning of relative group scheme because the inherited def-sc-group-scheme is field-only; no hypotheses or conclusions changed.",
+  "blueprint": "Realizes the inherited relatively-ample quotient schematicity input below the normal semiabelian generic torus quotient; from.node remains null as returned by blueprint_refs.py ancestor, and the existing via chain is preserved. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "def-pc-fppf-site",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "def-pc-scheme",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-sc-ample-finite-set-affine",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "def-pd-descent-datum",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-pd-invariant-affine-neighbourhoods",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-pd-invariant-affine-descent-gluing",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme/descent/ampleness tool used in the cited proof step; the current unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic Stacks 01JJ representability criterion (Zariski sheaf covered by representable open subfunctors), added by the reviewer for the gluing in steps 5 and 10; the current unit has no replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "lem-sbc-smooth-connected-generic-geometry",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "def-pc-scheme",
+  "lem-weil-pbc-glue-schemes",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation",
+  "lem-sc-ample-finite-set-affine",
+  "def-pd-descent-datum",
+  "lem-pd-invariant-affine-neighbourhoods",
+  "lem-pd-invariant-affine-descent-gluing",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-schemes-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-3f8f40d0d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-3f8f40d0d (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and the unit. First split: the item is still unsplit live and has no repair note. Statement edit accepted: def-sc-group-scheme is field-only and was replaced by an inline relative group object, with the same content (not 7b). No SGA citation. Steps 1-4 and 6-9 check out against the cited statements: free-flat quotient with T_W smooth hence flat+lfp; fppf descent of affine/smooth/surjective on trivialized tests; smooth-connected-generic-geometry gives G' integral and normal; ample pullback along the finite W'_j->W; smoothness via source descent along flat surjective lfp; closed diagonal from the preimage of T' under the difference map plus fpqc closed-immersion descent; qc/qs/fp; finite subsets of H' in affine opens, then pd invariant-affine neighbourhoods and gluing over the finite flat surjective W'->W; equalizer comparison via fpqc representable descent. Three C1 faults, repaired in fixes/dag/nodes/sec-six-functors-basics/<item>.json: (step 5) 'gluing yields a scheme representing F'' and (step 10) 'glue to H representing F' now cite lem-pc-schemes-criterion (Stacks 01JJ, used by many sfb nodes), with its hypotheses checked in the text; (step 10) global affineness of p is now argued: cover the test V by the V_W, each piece is a base change of the affine p_W, then space-four-property-fppf-descent. proof_deps = union of uses, plus a tool_uses entry. New nodes, all true and not duplicates: (1) torus finite-étale splitting: tori over a normal Noetherian base are isotrivial; empty base and rank 0 checked. (2) relative split-torus invariant affines: checked via linearizing a power of L (X normal), an equivariant immersion into P_R(V), and weight components of boundary-ideal elements; the field-only Sumihiro chain does not cover a relative base. (3) free split-torus affine quotient = Spec A^T: freeness at all field points forces Sigma_x = Z^r, else the orbit closure contains a point with nontrivial stabilizer; so A is strongly graded and Spec A -> Spec A_0 is a torsor; scaling on A^1 is correctly excluded. (4) global ample module on a smooth group over an affine normal integral Noetherian base: I fetched Guo's 2026-03-31 PDF, Cor 6.14 p.19 (ii) reads 'if S is affine integral, then X is S-quasi-projective', applied to X=H; strictly stronger than the existing local node. Batch-5 flags: the six sfb citations reach only def-trf-algebraic-space, a general definition, so accepted; lem-trf-fppf-covering-is-fpqc is a Mathlib leaf (fppfPrecoverage_le_fpqcPrecoverage, Stacks 022C), generic and cited by 47 non-trf nodes, outside both assumptions, so accepted. tool_uses for generic pbc/sbc/pc/pd/sc tools accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativelyAmpleSubtorusQuotientSchematicity",
+  "declaration": "AlgebraicGeometry.relatively_ample_subtorus_quotient_schematicity",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyAmpleSubtorusQuotientSchematicity.lean",
+  "statement": "theorem relatively_ample_subtorus_quotient_schematicity (S : Scheme.{u}) [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (G : Over S) [CommGrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [GeometricallyConnected G.hom] (hample : ∃ (I : Type u) (W : I → S.Opens), (∀ s : S, ∃ i : I, s ∈ W i) ∧ ∀ i : I, IsAffineOpen (W i) ∧ ∃ (L : (G.hom ⁻¹ᵁ W i).toScheme.Modules) (hL : L.IsInvertible), @Scheme.Modules.IsAmple (G.hom ⁻¹ᵁ W i).toScheme L hL) (T : Over S) [GrpObj T] (i : T ⟶ G) [IsMonHom i] [IsClosedImmersion i.left] (hT : IsRelativeTorus T) (F : AlgebraicSpace S) (p : yoneda.obj G ⟶ F.obj.obj) (eta : coequalizer (yoneda.map (fst G T)) (yoneda.map (lift (fst G T) (snd G T ≫ i) ≫ μ[G])) ⟶ F.obj.obj) (hp : coequalizer.π _ _ ≫ eta = p) (hF : ∀ Z : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun f : F.obj.obj ⟶ Z.obj ↦ eta ≫ f)) : ∃ (H : Over S) (_ : CommGrpObj H) (q : G ⟶ H) (e : yoneda.obj H ≅ F.obj.obj), IsMonHom q ∧ yoneda.map q ≫ e.hom = p ∧ Smooth H.hom ∧ IsSeparated H.hom ∧ LocallyOfFinitePresentation H.hom ∧ QuasiCompact H.hom ∧ QuasiSeparated H.hom ∧ IsAffineHom q.left",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-968190399",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Item: every node clause matches: normal locally Noetherian S (stalks integrally closed domains, the recorded inline form), CommGrpObj G smooth/separated/LFP/quasi-compact, Mathlib GeometricallyConnected, affine cover (I : Type u) with IsInvertible+IsAmple on G.hom⁻¹ᵁ W i, closed subgroup T (IsMonHom, IsClosedImmersion) with IsRelativeTorus. F pinned as the fppf sheafification of the orbit coequalizer by hp plus a bijective-precomposition universal property over fppf sheaves (no arbitrary map). Conclusion: H with CommGrpObj, IsMonHom q, yoneda.map q ≫ e.hom = p, Smooth/IsSeparated/LFP/QC/QS, IsAffineHom q.left. New def-sfb-relative-torus: real group-functor definition (fppf-local iso with a Fin r product of Γ-units in GrpCat, ranks vary, rank 0 and empty base allowed); no duplicate (side-live only has field-only IsTorus; lem-sfb-relative-torus-* nodes have no Lean). Both statements verbatim; proof only sorry; docstrings carry source, blueprint tag and ten steps; single universe u; imports are proof_dep modules. Node text unchanged vs live except lean and the added stmt_dep. No compile (no file changed). Advisory: statement text still cites the field-only def-sc-gm-ga for the torus; the second reading was by the same worker."
+ }
+}

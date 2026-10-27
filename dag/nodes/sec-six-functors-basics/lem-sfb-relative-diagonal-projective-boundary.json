@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-relative-diagonal-projective-boundary",
+ "kind": "statement",
+ "title": "Reduced boundary ideals for a diagonal split-torus action over a Noetherian ring",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $r,n\\geq0$, $T=\\mathbf G_{m,S}^r=\\operatorname{Spec}A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$, the base change to $S$ of the split torus of [def-sc-gm-ga]: its coordinate ring has $A$-basis the Laurent monomials $t^w=\\prod_{\\nu=1}^rt_\\nu^{w_\\nu}$ ($w\\in\\mathbf Z^r$) with $t^wt^{w'}=t^{w+w'}$, and its group law is given by $t_\\nu\\mapsto t_\\nu\\otimes t_\\nu$, counit $t_\\nu\\mapsto1$ and antipode $t_\\nu\\mapsto t_\\nu^{-1}$ (for $r=0$, $T=S$), and $R=A[z_0,\\ldots,z_n]$ with total degree $\\deg z_i=1$ [def-weil-pbc-mv-polynomial-ring]. Choose $w_i\\in\\mathbf Z^r$ and let $T$ act on $P=\\operatorname{Proj}R=\\mathbf P^n_A$ [def-pc-proj] by the homogeneous coordinate coaction $z_i\\mapsto t^{w_i}z_i$, fixing $A$, where $t^w=\\prod_{\\nu=1}^rt_\\nu^{w_\\nu}$. Let $W\\subseteq P$ be a reduced locally closed subscheme [def-pc-reduced-scheme, def-weil-closed-immersion, def-weil-open-immersion] invariant as a scheme: the action restricts to $T\\times_SW\\to W$ [def-pc-fibre-product]. Let $Z$ be the reduced induced closed subscheme on $\\overline{|W|}$ and $B$ the reduced induced closed subscheme on $|Z|\\setminus|W|$ [lem-weil-pbc-reduced-induced-closed-subscheme]. Then $W$ identifies with the open subscheme $Z\\setminus|B|$, and both $Z$ and $B$ are invariant closed subschemes of $P$, with equivariant inclusions. Define $I(B)_d\\subseteq R_d$ to consist of the total-degree-$d$ polynomials $f$ such that $f/z_i^d$ restricts to zero on $B\\cap D_+(z_i)$ for every $i$. For every $f\\in I(B)_d$, group its monomials according to the weight $\\sum_i\\alpha_iw_i$ of $z_0^{\\alpha_0}\\cdots z_n^{\\alpha_n}$, writing $f=\\sum_m f_m$ as its finite weight decomposition. Every $f_m$ belongs to $I(B)_d$, and its polynomial coaction is $f_m\\mapsto t^mf_m$. These assertions include $d=0$, empty $W$, empty $B$, $r=0$, and nonreduced $A$. No finite freeness of $I(B)_d$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 034E, lemma-reduced-local-smooth, and morphisms.tex Tag 056G, lemma-smooth-open; schemes.tex Tag 01J4, definition-reduced-induced-scheme. Agent relative diagonal-action consequence of these scheme facts and Laurent coefficient extraction; the field-only analogue lem-sfb-projective-invariant-boundary-ideals is not being applied over a ring."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-pc-proj",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Choose an open $V\\subseteq P$ in which $W$ is closed. Then $\\overline{|W|}\\cap V=|W|$, so $|W|$ is open and dense in $|Z|$, and $|Z|\\setminus|W|$ is closed in $P$. Restrict the reduced closed subscheme $Z$ to $V$. Its support is $|W|$, and it is reduced by [def-pc-reduced-scheme]. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme], applied in $V$, identifies it with $W$. Thus $W=Z\\setminus|B|$ as schemes. The standard charts of $P$ have rings $A[z_j/z_i:j\\ne i]$ by [def-pc-proj]: the graded-localization maps send each new variable to $z_j/z_i$, with inverse sending $z^\\alpha/z_i^{|\\alpha|}$ to the corresponding product of these variables, using [def-weil-pbc-mv-polynomial-ring]. Thus these maps are inverse on monomials; the charts of $Z$ and $B$ are quotients by [def-weil-closed-immersion]. Hence $Z,B\\to S$ are locally of finite type by [def-weil-finite-type-morphism]. Since $S$ is locally Noetherian by [pqf-def-locnoeth], [pqf-lem-locnoeth-lft] makes $Z$ and $B$ locally Noetherian. This does not require $A$ to be reduced.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-proj",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 01J4 (definition-reduced-induced-scheme), 0F2L (remark-reduced-induced-locally-closed); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "For $C=Z$ or $B$, the projection $q_C:T\\times_SC\\to C$ is the open subspace $D(t_1\\cdots t_r)$ of $\\mathbf A^r_C\\to C$. On an affine chart $\\operatorname{Spec}D\\subseteq C$, [lem-weil-pbc-fibre-product-affine-spectra] identifies its ring with $A[t^{\\pm1}]\\otimes_A D=D[t^{\\pm1}]$: multiply the pure tensor $t^u\\otimes b$ to $bt^u$, with inverse on these generators, using [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The same chart description holds for $\\mathbf A^r_C$ by [def-sbc-affine-space]. Therefore [sbc-lem-affine-space-smooth] and clause (a) of [lem-weil-pbc-smooth-restrict-open-subschemes] make $q_C$ smooth. Apply [lem-trf-smooth-reduced-dense-pullback] to the reduced locally Noetherian $C$ of step 1: $T\\times_SC$ is reduced. For $C=Z$ it also says that $T\\times_SW=q_Z^{-1}W$ is dense in $T\\times_SZ$, since $W$ is dense open in $Z$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034E (lemma-reduced-local-smooth); morphisms.tex Tag 01V6 (lemma-smooth-characterize); algebra.tex Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "Write $a:T\\times_SP\\to P$ for the action. The morphism $F:T\\times_SP\\to T\\times_SP$, $F(t,x)=(t,a(t,x))$, is an isomorphism with inverse $(t,x)\\mapsto(t,a(t^{-1},x))$, by the group action identities and the fibre-product universal property [def-pc-fibre-product]. The assumed action on $W$ and this same inverse give $F(T\\times_SW)=T\\times_SW$. The subset $|T\\times_SZ|$ is closed in $|T\\times_SP|$ by [lem-weil-pbc-closed-immersion-base-change]. Step 2 shows it is the closure of $|T\\times_SW|$. A homeomorphism preserving a subset preserves its closure; hence $F$ preserves $|T\\times_SZ|$. Subtract the preserved subset $|T\\times_SW|$ to see that $F$ also preserves $|T\\times_SB|$. These inverse-image subsets agree with the displayed fibre products, since the pullback of an affine quotient $E\\to E/J$ is the quotient by its extended ideal. Projecting the preserved subsets to $P$ gives $a(T\\times_SC)\\subseteq |C|$ for $C=Z,B$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QR (lemma-base-change-closed-immersion); explicit elementary product automorphism and closure argument."
+   }
+  },
+  {
+   "text": "For $C=Z,B$, the source $T\\times_SC$ is reduced by step 2 and its action image is contained in $|C|$ by step 3. Thus [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $a|_{T\\times_SC}$ through $C$. These factorizations satisfy the action identities: compose the desired equalities with the closed inclusion into $P$ and use the ambient identities. Such composition detects equality because a closed immersion is a monomorphism: locally a morphism into $\\operatorname{Spec}(E/J)$ is uniquely determined by the composite map out of $E$, since $E\\to E/J$ is surjective [def-weil-closed-immersion]. The same uniqueness proves equivariance of $B\\to Z\\to P$. The given action on $W$ agrees with the restriction of the action on $Z$, so its open inclusion is equivariant as well.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (lemma-map-into-reduction); morphisms.tex Tag 01QO (lemma-characterize-closed-immersion), affine uniqueness."
+   }
+  },
+  {
+   "text": "Fix $i$ and put $B_i=B\\cap D_+(z_i)=\\operatorname{Spec}D_i$. By [def-pc-proj] and [def-weil-closed-immersion], $D_i$ is a quotient of $A[z_j/z_i:j\\ne i]$. Step 2 and [lem-weil-pbc-fibre-product-affine-spectra] identify $T\\times_SB_i$ with $\\operatorname{Spec}D_i[t^{\\pm1}]$. The Laurent monomials form a basis over $D_i$ even if $D_i$ has zero divisors: tensor the $A$-basis specified in the statement with $D_i$. Explicitly the mutually inverse module maps send $t^u\\otimes b$ to the finite tuple having $b$ in position $u$, and $(b_u)_u$ to $\\sum_u t^u\\otimes b_u$; the tensor relations preserve both formulas. The multiplication is $t^ut^v=t^{u+v}$ by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. In particular a finite Laurent sum is zero exactly when all its coefficients are zero. The action preserves $D_+(z_i)$: under the homogeneous coordinate substitution, $z_i$ is multiplied by the unit $t^{w_i}$, so its invertibility in the graded localization is unchanged. Together with step 4 this gives the restricted action $T\\times_SB_i\\to B_i$. On chart functions its pullback sends $z_j/z_i$ to $t^{w_j-w_i}(z_j/z_i)$, by the given coordinate coaction and the localization relation $z_i(z_i^{-1})=1$.",
+   "uses": [
+    "def-pc-proj",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes); constructions.tex standard projective charts. Explicit tensor-basis and coordinate substitution calculation."
+   }
+  },
+  {
+   "text": "Let $f\\in I(B)_d$ and write $f=\\sum_m f_m$ by grouping monomials of total degree $d$ according to their weight. Finiteness and uniqueness of the polynomial coefficients are part of [def-weil-pbc-mv-polynomial-ring]. On $B_i$, write $\\overline{f/z_i^d}=0$ for the image in $D_i$. Pull this zero back along the action from step 5. Substituting each chart variable gives\n$$0=\\sum_m t^{m-dw_i}\\,\\overline{f_m/z_i^d}\\quad\\text{in }D_i[t^{\\pm1}].$$\nThe exponents $m-dw_i$ are distinct for distinct $m$. Coefficient uniqueness in step 5 therefore gives $\\overline{f_m/z_i^d}=0$ for every $m$. Repeating for every $i$ is precisely $f_m\\in I(B)_d$. On a monomial $z^\\alpha$, the polynomial coaction is $z^\\alpha\\mapsto t^{\\sum_j\\alpha_jw_j}z^\\alpha$ by multiplicativity. All monomials of $f_m$ have weight $m$, so its coaction is $f_m\\mapsto t^mf_m$ by addition. This uses coefficients over the rings $D_i$ directly, without any field-valued-point test or freeness assumption on $I(B)_d$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), followed by the explicit Laurent coefficient calculation on each projective chart."
+   }
+  },
+  {
+   "text": "The argument allows empty schemes and zero chart rings. If $W=\\varnothing$, then $Z=B=\\varnothing$ and every homogeneous polynomial is in $I(B)_d$. If $B=\\varnothing$, again all polynomials qualify. For $d=0$ all monomials have weight zero, and the formula is just $f\\mapsto f$. For $r=0$, the Laurent basis has a single element, $T=S$, and the weight decomposition has only its zero component. When $A$ is nonreduced, reducedness was used only for $Z,B$ and their smooth pullbacks, never for $A$ or $P$. The case $n=0$ has the same single standard chart. Thus every edge case in the statement is covered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 and 01J4: empty reduced closed subscheme; explicit degree-zero and rank-zero checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-proj",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Agent relative diagonal-action argument using Tag 034E and schemes.tex Tags 01J3, 01J4, 0356, 01I4; coefficient extraction is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a split torus acting diagonally on projective space over a Noetherian ring the reduced closure and boundary of an invariant locally closed reduced subscheme are invariant and their homogeneous ideals are graded by characters",
+   "results": "{\"t\": \"2026-10-24T03:39:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a split torus acting diagonally on projective space over a Noetherian ring the reduced closure and boundary of an invariant locally closed reduced subscheme are invariant and their homogeneous ideals are graded by characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"ProjectiveSpectrum.vanishingIdeal\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"ProjectiveSpectrum.vanishingIdeal_closure\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.carrier\", \"ProjectiveSpectrum.asHomogeneousIdeal\"], \"digest\": \"c1b1ee5eb8654c4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"closure\"",
+   "results": "{\"t\": \"2026-10-24T03:39:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.sourceLocalClosure.instIsZariskiLocalAtSourceIsOpenImmersionOfRespectsIsoOfRespectsLeftScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsIsoScheme\", \"AlgebraicGeometry.sourceLocalClosure.instContainsIdentitiesScheme\", \"AlgebraicGeometry.sourceLocalClosure.cover\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsRightScheme\"], \"digest\": \"0518ac917e3a99fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(ideal|boundary|closure)|torus.*grad|grad.*torus",
+   "results": "{\"t\": \"2026-10-24T03:39:31Z\", \"tool\": \"grep\", \"query\": \"invariant.*(ideal|boundary|closure)|torus.*grad|grad.*torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous ideal of a torus invariant closed subscheme of projective space over a ring is graded by the weights of the variables",
+   "results": "{\"t\": \"2026-10-24T03:39:32Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous ideal of a torus invariant closed subscheme of projective space over a ring is graded by the weights of the variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous\", \"Ideal.homogeneous_span\", \"HomogeneousIdeal.irrelevant\", \"Ideal.isHomogeneous_iff_forall_subset\", \"HomogeneousIdeal\", \"MvPolynomial.weightedGradedAlgebra\", \"Ideal.homogeneousCore\", \"Ideal.isHomogeneous_iff_subset_iInter\"], \"digest\": \"9a6fbd3b9a0b0cc6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic invariance of projective closure and reduced boundary under diagonal multiplicative group action over an arbitrary base ring",
+   "results": "{\"t\": \"2026-10-24T03:39:39Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme theoretic invariance of projective closure and reduced boundary under diagonal multiplicative group action over an arbitrary base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq\", \"AlgebraicGeometry.projIsoSpecTopComponent\"], \"digest\": \"cdcce605db164509\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Proj charts, ordinary affine covers, abstract representations and homogeneous-ideal definitions do not assert this equivariant scheme theorem over rings."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(ideal|boundary|closure)|torus.*grad|grad.*torus",
+   "results": "{\"t\": \"2026-10-24T04:01:14Z\", \"tool\": \"grep\", \"query\": \"invariant.*(ideal|boundary|closure)|torus.*grad|grad.*torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general Proj, immersion, closure and total-degree homogeneous-ideal results do not give invariant reduced boundary schemes or character-weight stability over a ring. Read returned signatures and ProjectiveSpectrum/Topology.lean:86-108; none is a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous vanishing ideal of a torus invariant closed subscheme over a ring is graded by characters",
+   "results": "{\"t\": \"2026-10-24T04:01:15Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous vanishing ideal of a torus invariant closed subscheme over a ring is graded by characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.vanishingIdeal\", \"HomogeneousIdeal.irrelevant\", \"Ideal.homogeneous_span\", \"Ideal.isHomogeneous_iff_forall_subset\", \"Ideal.homogeneousHull\", \"ProjectiveSpectrum.coe_vanishingIdeal\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\"], \"digest\": \"e34103b8785ffc8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general Proj, immersion, closure and total-degree homogeneous-ideal results do not give invariant reduced boundary schemes or character-weight stability over a ring. Read returned signatures and ProjectiveSpectrum/Topology.lean:86-108; none is a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"closure\"",
+   "results": "{\"t\": \"2026-10-24T04:01:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.sourceLocalClosure.instIsZariskiLocalAtSourceIsOpenImmersionOfRespectsIsoOfRespectsLeftScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsIsoScheme\", \"AlgebraicGeometry.sourceLocalClosure.instContainsIdentitiesScheme\", \"AlgebraicGeometry.sourceLocalClosure.cover\", \"AlgebraicGeometry.sourceLocalClosure.instRespectsRightScheme\"], \"digest\": \"0518ac917e3a99fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general Proj, immersion, closure and total-degree homogeneous-ideal results do not give invariant reduced boundary schemes or character-weight stability over a ring. Read returned signatures and ProjectiveSpectrum/Topology.lean:86-108; none is a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus diagonal action over a ring preserves the reduced closure and boundary of an invariant locally closed subscheme and its boundary ideal weight components",
+   "results": "{\"t\": \"2026-10-24T04:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus diagonal action over a ring preserves the reduced closure and boundary of an invariant locally closed subscheme and its boundary ideal weight components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\"], \"digest\": \"acc4096eb32d9a6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general Proj, immersion, closure and total-degree homogeneous-ideal results do not give invariant reduced boundary schemes or character-weight stability over a ring. Read returned signatures and ProjectiveSpectrum/Topology.lean:86-108; none is a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced projective boundary of a split multiplicative group invariant subscheme over an arbitrary base ring has weight homogeneous equations",
+   "results": "{\"t\": \"2026-10-24T04:01:17Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced projective boundary of a split multiplicative group invariant subscheme over an arbitrary base ring has weight homogeneous equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem\"], \"digest\": \"144a86ffe4b23e3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned general Proj, immersion, closure and total-degree homogeneous-ideal results do not give invariant reduced boundary schemes or character-weight stability over a ring. Read returned signatures and ProjectiveSpectrum/Topology.lean:86-108; none is a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-split-torus-invariant-affines",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Reduced projective boundary and character-homogeneous boundary equations over the affine base.",
+   "via": [
+    "lem-sfb-relative-split-torus-invariant-affines",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-diagonal-projective-boundary",
+  "worker": "stage1",
+  "group": "Q74",
+  "summary": "Statement unchanged. Reused existing nodes for reduced-induced uniqueness, smooth Laurent projections, reduced/dense smooth pullback, affine fibre products and reduced-source factorization. Wrote the product-automorphism argument and chartwise Laurent coefficient extraction explicitly. No new nodes; all clauses including nonreduced bases and empty loci are covered.",
+  "blueprint": "Supporting reduced-boundary and weight-equation argument in lem-sfb-relative-split-torus-invariant-affines, inherited relative-torus quotient prerequisite below the direct-image constructibility route. blueprint_refs.py ancestor returns None; preserve the inherited null ancestor and precise from.place. Latest blueprint unit and direct-images proof read; no unit route changed. Blueprint searches invariant boundary, projective closure, homogeneous ideal found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme/algebra tool used only for its stated conclusion under its stated hypotheses; supports the explicit boundary argument and does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-2db42c2af",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-2db42c2af (reviewer sub-agent of L); spot-checked: PASS: I read the item's whole statement, all seven steps and every cited statement, and no fixes are needed. There are no new nodes, and the statement and stmt_deps are unchanged from the unsplit base (checked against side-live). No repair note exists for this item and no other group has split it. Step checks: (1) uniqueness of the reduced induced subscheme applied in an open V gives W = Z\\|B| as schemes, and Z, B are locally Noetherian with no reducedness needed for A. (2) T×C is D(t1…tr) inside A^r_C, so it is smooth over C; lem-trf-smooth-reduced-dense-pullback is applied to the reduced base C, not to S, and gives that T×C is reduced and that T×W is dense in T×Z. (3) The automorphism (t,x)↦(t,a(t,x)) preserves T×W, hence its closure T×Z and the difference T×B. (4) The reduced-source factorization (0356) holds and the action identities follow because closed immersions are monomorphisms. (5) D_+(z_i) is preserved and D_i[t^±] has a Laurent basis over D_i even with zero divisors. (6) Comparing Laurent coefficients puts each weight component f_m in I(B)_d. Small cases checked: P^1 over a field with weights (0,1); equal weights; A=Z/4, where I(B)_1 is not free, matching the statement; W empty; d=0, r=0, n=0. Not a duplicate of lem-sfb-projective-invariant-boundary-ideals, which works over an algebraically closed field. proof_deps equal the union of the uses, and each step's citations match its uses. There is no SGA. Sources checked: descent.tex 034E (line 4952) and morphisms.tex 056G (line 7171). Batch-5 flag on lem-trf-smooth-reduced-dense-pullback: it is a generic scheme fact (smooth over reduced is reduced; preimages of dense opens are dense). Its full closure has 132 nodes and contains no other trace-formula node, no Poincaré-duality node, no sk-thm-trace-transport and no assumption leaf, so it is not a step of either assumed proof. Flag accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDiagonalProjectiveBoundary",
+  "declaration": "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.relative_diagonal_projective_boundary",
+  "declarations": [
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.projective",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.torus",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.chart",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.ratio",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.character",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.coaction",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.IsDiagonal",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.reducedClosed",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.inclusion",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.Vanishes",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.closureSet",
+   "AlgebraicGeometry.RelativeDiagonalProjectiveBoundary.relative_diagonal_projective_boundary"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDiagonalProjectiveBoundary.lean",
+  "statement": "theorem relative_diagonal_projective_boundary [IsNoetherianRing A] (w : ULift.{u} (Fin (n + 1)) → (Fin r → ℤ)) (a : ModObj (torus A r).X (projective A n)) (ha : IsDiagonal A r n w a) (W : Over (Spec (.of A))) [IsReduced W.left] (j : W ⟶ projective A n) [IsImmersion j.left] (aW : ModObj (torus A r).X W) (hj : aW.smul ≫ j = (𝟙 (torus A r).X ⊗ₘ j) ≫ a.smul) : ∃ (B : TopologicalSpace.Closeds (projective A n).left), (B : Set (projective A n).left) = closure (Set.range j.left) \\ Set.range j.left ∧ ∃ (aZ : ModObj (torus A r).X (reducedClosed A n (closureSet A n j))) (aB : ModObj (torus A r).X (reducedClosed A n B)) (jW : W ⟶ reducedClosed A n (closureSet A n j)) (jB : reducedClosed A n B ⟶ reducedClosed A n (closureSet A n j)), IsOpenImmersion jW.left ∧ IsClosedImmersion jB.left ∧ jW ≫ inclusion A n (closureSet A n j) = j ∧ jB ≫ inclusion A n (closureSet A n j) = inclusion A n B ∧ Set.range jW.left = (Set.range jB.left)ᶜ ∧ aZ.smul ≫ inclusion A n (closureSet A n j) = (𝟙 (torus A r).X ⊗ₘ inclusion A n (closureSet A n j)) ≫ a.smul ∧ aB.smul ≫ inclusion A n B = (𝟙 (torus A r).X ⊗ₘ inclusion A n B) ≫ a.smul ∧ aW.smul ≫ jW = (𝟙 (torus A r).X ⊗ₘ jW) ≫ aZ.smul ∧ aB.smul ≫ jB = (𝟙 (torus A r).X ⊗ₘ jB) ≫ aZ.smul ∧ ∀ (d : ℕ) (f : MvPolynomial (ULift.{u} (Fin (n + 1))) A), Vanishes A n B d f → ∀ m : Fin r → ℤ, Vanishes A n B d (MvPolynomial.weightedHomogeneousComponent w m f) ∧ coaction A r n w (MvPolynomial.weightedHomogeneousComponent w m f) = AddMonoidAlgebra.single (ULift.up m) (MvPolynomial.weightedHomogeneousComponent w m f)",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helpers are explicit coordinate and restriction constructions for this node: existing total-degree Proj, existing ringDiagonalizableGroup on the lifted character lattice, actual chart ratios and characters, polynomial evaluation coaction, the chartwise specification of the given diagonal action, existing reduced-induced subschemes and their inclusions, and the chartwise vanishing predicate. IsDiagonal characterizes the action supplied by the statement; it is not an arbitrary action assumption. No data are chosen using sorry. The added statement dependency is the already landed ring-valued diagonalizable-group construction; the original field-only Gm definition is not generalized privately."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b86e4af7",
+  "group": "Q65",
+  "result": "pass",
+  "note": "The item node changes only in lean and stmt_deps; the added stmt_dep def-sfb-ring-diagonalizable-group is already landed. The other 23 node files are byte-identical to side-live, and lean.statement is verbatim in the file. Clauses checked: Noetherian A with no reducedness; torus = ringDiagonalizableGroup over ULift(Fin r→ℤ), whose Hopf data match the node; P = projectiveSpaceOverAffineToSpec. IsDiagonal (charts preserved, z_j/z_i ↦ t^(w_j−w_i) z_j/z_i, action over S) determines the diagonal action uniquely and is not vacuous. W reduced, IsImmersion, ModObj plus equivariance, equivalent to the action restricting because j is mono. Z and B are canonical vanishingIdeal reduced subschemes, B's carrier forced to closure \\ range. jW is an open immersion with range equal to the complement of jB; aZ and aB exist and four equivariance equations are given. Vanishes is sectionwise vanishing of f/z_i^d on B∩D+(z_i), and f is homogeneous of degree d. Weight components are Mathlib's weightedHomogeneousComponent, with coaction f_m = single m f_m. Edge cases d=0, empty W, empty B, r=0, n=0, zero ring and nonreduced A are covered. No duplicate was found in Sheaf or WeilConjectures; helpers are real constructions; docstrings carry source and blueprint; the only sorry is the proof. Advisory: the StandardGroupSchemes public import is unused. No compile run because no file was changed."
+ }
+}

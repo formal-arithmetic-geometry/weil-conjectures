@@ -1,0 +1,133 @@
+{
+ "id": "def-a1-common-stage-cohomology-realization",
+ "kind": "definition",
+ "title": "Canonical common-stage derived cohomology realization and source identification",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a separated finite-type $k_0$-scheme $Y_0$ [def-weil-scheme-morphism-properties], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Use the finite intermediate fields [def-weil-finite-subextension-directed-set] and the actual common-stage constructible Pair category $D^b_c(Y,\\Omega)$, $Y=Y_0\\times_{k_0}k$ [def-weil-algebraically-closed-coefficients]. Choose a compactification $c_0$ for compact support [def-compact-support-direct-image-detailed]. For $\\epsilon\\in\\{\\mathrm{ordinary},\\mathrm{compact}\\}$, let $C_{E,\\epsilon}:D^b_c(Y,E)\\to D^b_{\\mathrm{fd}}(E)$ be ordinary or compact cohomology followed by the point fibre [def-weil-ordinary-compact-cohomology, def-weil-finite-coefficient-point]. Realize it in $D(\\Omega)$ by the canonical scalar-and-size extension along the actual embedding of the small coefficient model $E$ into $\\Omega$ [def-weil-frobenius-cohomology-transport]. Write $R_{E,\\epsilon}$ for this functor and $\\beta_{K,L}:R_{E,\\epsilon}(M)\\xrightarrow{\\sim}R_{L,\\epsilon}(M_L)$ for the specified change-of-coefficients comparison when $K=(E,M)$ and $E\\subset L$: the localized whole-system operation mate, point-fibre scalar comparison and balanced tensor tower, with their actual associators. Define $C_{\\Omega,\\epsilon}:D^b_c(Y,\\Omega)\\to D(\\Omega)$ to be the unique functor with object value $C_{\\Omega,\\epsilon}(E,M)=R_{E,\\epsilon}(M)$ and whose map on a common-stage representative $f:M_L\\to N_L$ of $K\\to K'$ is\n$$\\beta_{K',L}^{-1}\\circ R_{L,\\epsilon}(f)\\circ\\beta_{K,L}.$$\nThe source identification is the specified equality $C_{\\Omega,\\epsilon}(E,M)=R_{E,\\epsilon}(M)$ from this defining object formula. Equality and composition of representatives are those of the actual common-stage category, including identity enlargements. The scheme universe $u$ and coefficient-closure universe $v$ are independent; the realized target is the standard $D(\\operatorname{ModuleCat}^{\\max(u,v)}\\Omega)$. This defines the canonical cohomology functor and its source equality, without asserting invertibility of Frobenius transport.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-algebraically-closed-coefficients",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-cohomology-transport"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), p.150, finite coefficient fields and scalar localization; (1.1.7), pp.150-151, point transport; (1.1.10)-(1.1.14), pp.151-153, Weil pullback and cohomology transport. Explicit derived common-stage implementation of these constructions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived cohomology functor on algebraically closed coefficients defined by common finite coefficient stages",
+   "results": "8 hits: groupCohomology.functor, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.leftDerived, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, HasDerivedCategory.standard, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.Functor.rightDerivedToHomotopyCategory, continuousCohomology. No Mathlib declaration supplies this project-specific constructible derived coefficient construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived cohomology functor on algebraically closed coefficients defined by common finite coefficient stages",
+   "results": "8 hits: DerivedCategory.Q, groupCohomology.functor, DerivedCategory.instLinearCochainComplexIntQ, localCohomology.diagram, DerivedCategory.singleFunctor, Ext, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf. No Mathlib declaration supplies this project-specific constructible derived coefficient construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalTransport|rationalSquare|stageRealization|frobeniusCohomologyQbarFunctor",
+   "results": "0 hits: none. No Mathlib declaration supplies this project-specific constructible derived coefficient construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"rationalTransport|rationalSquare|stageRealization|frobeniusCohomologyQbarFunctor\" lean/WeilConjectures lean/Sheaf; rg -l \"rationalTransport|rationalSquare|stageRealization|frobeniusCohomologyQbarFunctor|common-stage.*cohomology.*functor\" dag/nodes; tools/blueprint_refs.py search semilinear germ; tools/blueprint_refs.py search coefficient cohomology",
+   "results": "ProperSectionsSemilinearGerms.lean and FrobeniusCohomologyTransportIso.lean contain the exact declarations. Audited definition-node lean records: the former module has only def-a1-proper-sections-germ-and-moving-point, whose owned declarations exclude these six; the latter has no definition owner for QbarFunctor/SourceEq. Other matches use these constructions or concern different rational transports and squares. Blueprint searches return 1 and 262 nodes respectively, no separate owner. Reuse the exact published definitions with existing:true; no Lean copy.",
+   "date": "2026-10-24",
+   "verdict": "exact project declarations; no existing definition-owner node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-proper-weil-iterate-germ-formula",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "Proof, first displayed evaluation formula and following local Frobenius stability: specified semilinear iterates and the common-stage coefficient realization used to state that formula.",
+   "via": [
+    "lem-a1-proper-weil-iterate-germ-formula",
+    "lem-a1-finite-weil-sections-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.SixFunctors.FrobeniusCohomologyTransportIso",
+  "declaration": "WeilConjectures.frobeniusCohomologyQbarFunctor",
+  "declarations": [
+   "WeilConjectures.frobeniusCohomologyQbarFunctor",
+   "WeilConjectures.frobeniusCohomologyQbarSourceEq"
+  ],
+  "statement": "def frobeniusCohomologyQbarFunctor (c₀ : Compactification Y₀.hom) (compact : Bool)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership-only repair requested at immutable head ac681637b6b6. Reuse the exact published functor, uniquely characterized on every object and common-stage representative by frobeniusCohomologyQbarFunctor_existsUnique, and its prescribed source equality. The functor is not chosen from bare existence. Frobenius transport invertibility remains owned by lem-weil-frobenius-cohomology-transport-iso."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-425c2b434",
+  "group": "NZ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-425c2b434",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN ac681637. Lean module byte-identical apart from 4 imports made public; mathematics re-read and correct (power formula, germ eq F^r≫e_z=e_{z_r}≫B, B factors and direction, IsIso, naturality for all Weil arrows, hfix return, closed-point HEq, Q̄ stage/model/arrow clauses, n=r-1, independent v). Statement = old_statement + ownership paragraph only; TeX cites = stmt_deps; proof_deps unchanged; sole citer finite-weil-sections-decomposition holds. New existing:true def-a1-proper-sections-semilinear-iterate-data (ProperSectionsSemilinearGerms: rationalSections/Fibre/Transport/Square, movingPoint_properties, stageRealization) and def-a1-common-stage-cohomology-realization (frobeniusCohomologyQbarFunctor pinned by ∃! on objects+representatives, SourceEq=object clause): signatures verbatim with live source, TeX matches code, no prior owner, deps on base, searches logged. Advisory: node 1 also cites lem-pod-integral-pullback-composition (same as item/landed germ owner); re-export bodies use theorem-module helpers (accepted pattern). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-71887",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T203421-L-2813352",
+  "kind": "interface",
+  "note": "independent cc review: the 14 moved declarations against the published item module (verbatim diff), the new transport lemma against the parent existsUnique statement (it follows from it), and 10 direct importers compiled against the delivered modules (all OK)",
+  "sorry_before": [
+   "WeilConjectures.frobeniusCohomologyQbarFunctor_existsUnique",
+   "WeilConjectures.frobeniusCohomologyTransport_isIso",
+   "WeilConjectures.frobeniusCohomologyTransport_natural"
+  ],
+  "sorry_after": [
+   "WeilConjectures.frobeniusCohomologyTransport_isIso",
+   "WeilConjectures.frobeniusCohomologyTransport_natural"
+  ]
+ }
+}

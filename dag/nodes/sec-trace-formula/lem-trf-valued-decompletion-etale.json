@@ -14,9 +14,130 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The isometric inclusion extends to $\\widehat F\\hookrightarrow\\widehat E$, giving continuous scalar multiplication. Choose an $F$-basis $e_1,\\ldots,e_n$ of $E$, where $n=[E:F]$. Its $\\widehat F$-span $U\\subseteq\\widehat E$ has dimension at most $n$. It is closed by [lem-sfb-finite-dimensional-subspace-closed], over the nontrivially normed complete field $\\widehat F$. It contains the dense subfield $E$, so $U=\\widehat E$. This proves finiteness and the degree bound without separability.",
+   "uses": [
+    "lem-sfb-finite-dimensional-subspace-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Preliminary completion fact used in Proposition 2.2.1; span-and-density details supplied by Q81."
+   }
+  },
+  {
+   "text": "For $H=F$ or $E$, completion preserves absolute values, so its kernel on residue classes is exactly $\\{h:|h|<1\\}$. If $u\\in\\widehat H$ satisfies $|u|\\leq1$, choose $h\\in H$ with $|u-h|<1$. Then $|h|\\leq1$ and $h,u$ have the same residue. Thus both residue maps are isomorphisms, compatibly with the field inclusion. Choose $a\\in F$ with $0<|a|<1$. Since $|a|^N\\to0$, every element in any of the four fields becomes integral after multiplication by a power of $a$. Hence $A[1/a]=F$, $B[1/a]=E$, $\\widehat A[1/a]=\\widehat F$ and $\\widehat B[1/a]=\\widehat E$, where $\\widehat A,\\widehat B$ denote the completed valuation rings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Elementary density, residue and rank-one generic-fibre identifications."
+   }
+  },
+  {
+   "text": "Suppose $A\\to B$ is etale. Base change to $F=A[1/a]$ is etale by [lem-weil-pbc-etale-scheme-base-change], with ring $B[1/a]=E$ by step 2. The etale-field-algebra theorem [lem-weil-pbc-etale-algebra-over-field-product] makes $E$ a product of finite separable $F$-fields. A nonzero field has no nontrivial product decomposition, so $E/F$ is separable.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, forward implication: separability."
+   }
+  },
+  {
+   "text": "Set $D=B\\otimes_A\\widehat A$, etale over $\\widehat A$ by [lem-weil-pbc-etale-scheme-base-change]. Let $\\mathfrak n$ be the inverse image of the maximal ideal under $D\\to\\widehat B$, $b\\otimes c\\mapsto bc$. It lies over the maximal ideal of $\\widehat A$. Since $E/F$ is separable by step 3, [lem-trf-separable-valued-completion-factors] applies: $\\widehat A$ is henselian and $D[1/a]=E\\otimes_F\\widehat F$ is the product of the completed branches. By [lem-trf-henselian-valuation-etale-local-factors], $D_{\\mathfrak n}$ is finite etale and the unique valuation ring of its fraction field extending $\\widehat A$. The map $D_{\\mathfrak n}\\to\\widehat B$ selects the given generic factor: after inverting $a$, localization of the product of fields at its selected prime is exactly $\\widehat E$. Thus its fraction field is $\\widehat E$, and uniqueness identifies $D_{\\mathfrak n}=\\widehat B$. Hence $\\widehat A\\to\\widehat B$ is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-separable-valued-completion-factors",
+    "lem-trf-henselian-valuation-etale-local-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, forward implication, local factor of the base-changed etale algebra."
+   }
+  },
+  {
+   "text": "Conversely suppose $E/F$ is separable and $\\widehat A\\to\\widehat B$ is etale. Let $C$ be the integral closure of $A$ in $E$. By [lem-trf-separable-valued-completion-factors] it has finitely many maximal ideals $\\mathfrak m_i$, indexed so $B=C_{\\mathfrak m_1}$, and completed branches $\\widehat E_i$ with $\\widehat E_1=\\widehat E$. Apply [lem-trf-henselian-valuation-etale-local-factors] to $R=\\widehat A$, $D=\\widehat B$ and its maximal ideal. Since $\\widehat B$ is already local, it is finite etale, its residue field is finite separable, and the residue-generator conclusions apply. Step 2 identifies the residue extension with $A/\\mathfrak m_A\\subseteq C/\\mathfrak m_1$.",
+   "uses": [
+    "lem-trf-separable-valued-completion-factors",
+    "lem-trf-henselian-valuation-etale-local-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse: semilocal normalization and the finite etale completed branch."
+   }
+  },
+  {
+   "text": "By [lem-trf-primitive-element-separated-valuations] choose $x\\in C$ primitive for $E/F$, with nonzero primitive residue in $C/\\mathfrak m_1$ and $x\\in\\mathfrak m_i$ for $i>1$. By [lem-trf-separable-valued-completion-factors] its monic minimal polynomial belongs to $A[T]$ and factors $f=\\prod_i f_i$ in $\\widehat A[T]$, with $f_i$ the minimal polynomial of its image $x_i\\in\\widehat E_i$, and all roots of $f_i$ of absolute value $|x|_i$. By [lem-trf-henselian-valuation-etale-local-factors] on the chosen branch, $\\overline f_1$ is the separable minimal polynomial of $\\bar x$, so $f_1'(x_1)$ is a unit of $\\widehat B$.",
+   "uses": [
+    "lem-trf-primitive-element-separated-valuations",
+    "lem-trf-separable-valued-completion-factors",
+    "lem-trf-henselian-valuation-etale-local-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse: separated primitive element and the chosen irreducible factor."
+   }
+  },
+  {
+   "text": "For $i>1$, every root of $f_i$ has absolute value $|x|_i<1$. Every nonleading coefficient is an elementary symmetric sum of products of positive numbers of roots, so has absolute value less than one. Thus $\\overline f_i=T^{d_i}$ for $d_i=\\deg f_i$. Since $\\bar x\\ne0$, the residue of $f_i(x_1)$ is $\\bar x^{d_i}\\ne0$, so it is a unit. Differentiating the product and using $f_1(x_1)=0$ gives\n$$f'(x_1)=f_1'(x_1)\\prod_{i>1}f_i(x_1),$$\na unit by step 6. The isometric inclusion $B\\hookrightarrow\\widehat B$ reflects absolute value one, hence $f'(x)$ is a unit in $B$. For one branch the empty product equals $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse, explicit elementary polynomial-factor computation."
+   }
+  },
+  {
+   "text": "The subring $D=A[x,1/f'(x)]\\subseteq B$ is isomorphic to $A[T]_{f'}/(f)$: division by the monic $f$ shows that a polynomial over $A$ vanishing at $x$ is divisible by $f$ already over $A$. By [lem-weil-pbc-standard-etale-monic-derivative], $D$ is etale over $A$. Its fraction field is $E$ since $x$ is primitive. By [lem-weil-pbc-valuation-ring-normal] and [lem-weil-pbc-etale-over-normal-ring-normal], $D$ is a normal domain. Every element of $C$ is integral over $A\\subseteq D$, hence over $D$, and thus belongs to $D$. Put $\\mathfrak n=D\\cap\\mathfrak m_B$. From $C\\subseteq D\\subseteq B$ we obtain $C_{\\mathfrak m_1}\\subseteq D_{\\mathfrak n}\\subseteq B$ by inverting elements with nonzero residue. Since $C_{\\mathfrak m_1}=B$, we get $D_{\\mathfrak n}=B$.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-valuation-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse: normal standard etale subring and its selected localization."
+   }
+  },
+  {
+   "text": "We make the localization etale rather than merely essentially etale. The only primes of $A$ are $(0)$ and $\\mathfrak m_A$: if a nonzero prime contains $b\\ne0$ with $|b|<1$, then for every $c$ with $|c|<1$ some $N$ has $c^N/b\\in A$, so $c^N\\in(b)$ and $c$ is in the prime. The generic fibre $D[1/a]=E$ has one prime, $(0)$. By [lem-weil-pbc-etale-scheme-base-change] and [lem-weil-pbc-etale-algebra-over-field-product], the closed fibre is a finite product of fields. Thus the other primes of $D$ are finitely many distinct maximal ideals $\\mathfrak n=\\mathfrak n_1,\\ldots,\\mathfrak n_s$. Choose $t_j\\in\\mathfrak n_j\\setminus\\mathfrak n$ for $j>1$ and set $t=\\prod_{j>1}t_j$, or $t=1$ if $s=1$. The ring $D_t$ has just one maximal ideal $\\mathfrak nD_t$, so every element of $D\\setminus\\mathfrak n$ is invertible there. Consequently $D_t=D_{\\mathfrak n}=B$. By [lem-weil-pbc-etale-algebra-finite-presentation-localization], this localization at one element is etale over $A$, as required.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 2.1.1 and Proposition 2.2.1, last sentence; explicit rank-one finite-spectrum argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-dimensional-subspace-closed",
+  "lem-trf-henselian-valuation-etale-local-factors",
+  "lem-trf-primitive-element-separated-valuations",
+  "lem-trf-separable-valued-completion-factors",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 2.2.1 and Lemmas 2.1.1, 2.1.6, read at https://arxiv.org/html/0707.3953v3. Local PDF missing (WANTED in report); completion-span, residue and open-localization details supplied by Q81."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -62,7 +183,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -92,5 +213,45 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valued-decompletion-etale",
+  "worker": "stage1",
+  "summary": "Preserved the statement; expanded both directions of decompletion and the completion/residue preliminaries. Created three statement-only supporting inputs. The derivative calculation and essential-etale to etale argument remain in the item.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Realizes Temkin Proposition 2.2.1 inside the existing valuation-uniformization route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic algebra tool used exactly as stated: An etale algebra over a normal ring is a normal ring. No lemma in this valuation-uniformization unit supplies that general assertion."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic algebra tool used exactly as stated: A valuation ring is a normal domain. No lemma in this valuation-uniformization unit supplies that general assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-3f0667b0f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-3f0667b0f (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and the statement of every cited node in full. Temkin arXiv:0707.3953v3 §2.1–2.2 is absent from literature/ (correctly WANTED); I read it on arXiv: Prop 2.2.1 with both directions of its proof, Lemmas 2.1.1 and 2.1.6. I also read Stacks algebra.tex 04GH(1),(3), and 04GK exists. Steps 1–9 follow Temkin's proof with the omitted details written out. Step 1: closed span gives degree ≤ n with no separability needed. Step 2: residue isomorphisms, elementary. Steps 3–4: base change and the étale-over-field product; D_n is the direct factor selected by the projection idempotent, so D_n = B̂ by uniqueness of the valuation ring. Steps 5–7: primitive x with nonzero residue generator and x ∈ m_i for i>1, so f̄_i = T^{d_i} and f'(x) is a unit. Step 8: the standard étale ring is normal and contains C, so its localization is B. Step 9: in rank one Spec D is finite, so D_t = D_n is étale; this replaces Lemma 2.1.1. All three new nodes are true, statement-only and smaller than the item. Tested: E=F, r=1, l=κ, a split prime, R a field, D=0. They do not duplicate lem-per-valuation-normalization-localizations, lem-trf-quasi-finite-henselian-tensor-factor, lem-per-henselian-finite-extension-topology or the pbc henselian nodes. Accepted tool_uses: pbc etale-over-normal-ring-normal and valuation-ring-normal, both generic. FIX (B3): the completion-factors and primitive-element nodes cited def-weil-field for 'nontrivial nonarchimedean real absolute value' and 'metric completion', which it does not define; the meanings are now written inline. Item step 4 now says separability comes from step 3. Item statement unchanged.; 3 file(s) fixed by the reviewer"
+ }
 }

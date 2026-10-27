@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-projective-order-homogeneous-approximation",
+ "kind": "statement",
+ "title": "Homogeneous approximation at a projective point",
+ "statement": "Let $k$ be a field [def-weil-field], $r\\geq0$, and $B=k[X_0,\\ldots,X_r]$ with all variables of degree one [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra]. Let $\\mathfrak p\\subset k[t_1,\\ldots,t_r]$ be a prime ideal, put $L=k[t_1,\\ldots,t_r]_{\\mathfrak p}$ and $N=\\mathfrak pL$ [def-weil-pbc-localization-at-prime], and define $\\delta_d:B_d\\to L$ by $\\delta_d(\\phi)=\\phi(1,t_1,\\ldots,t_r)/1$. Put $U_d=\\{\\phi\\in B_d:\\delta_d(\\phi)\\in N^d\\}$. For $h\\in L$ its order is $\\sup\\{n:h\\in N^n\\}$; for finite order $n$, its initial form is its class in $N^n/N^{n+1}\\subset\\operatorname{gr}_NL$ [def-weil-pbc-associated-graded-ring]. Let $b\\geq0$, $d\\geq1$, and let nonzero forms $\\phi_j\\in U_{e_j}$ have degrees $1\\leq e_j\\leq d$ for $1\\leq j\\leq b$. Let $\\psi\\in B_d$ and let $t\\geq1$. If there are $b_j\\in L$ such that\n$$\\delta_d(\\psi)-\\sum_{j=1}^b b_j\\delta_{e_j}(\\phi_j)\\in N^t,$$\nthen there are homogeneous $C_j\\in B_{d-e_j}$ such that\n$$\\delta_d\\left(\\psi-\\sum_{j=1}^b C_j\\phi_j\\right)\\in N^t.$$\nIn particular, for $t=d$ the corrected form belongs to $U_d$; for $t>d$ one has $\\psi\\in(\\phi_1,\\ldots,\\phi_b)B$. Zero polynomials are allowed as homogeneous coefficients and empty sums are zero.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Hironaka (1970), Lemma 18, pp.174–175, including its two particular consequences. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. ILO VIII 2.3.13 is ancestor motivation only; no Stacks tag states this assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-associated-graded-ring",
+  "def-trf-permissible-basis-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-projective-order-triangular-coordinates]. Permuting the affine variables preserves total degree, the local-power hypothesis, and the requested equation, so use its coordinates. Write $R=k[\\sigma_1,\\ldots,\\sigma_e]$, weighted by $\\deg\\sigma_i=q_i$, and $Y=(X_1,\\ldots,X_e)$, $W=(X_{e+1},\\ldots,X_r,X_0)$. All $\\phi_j$ lie in $R$. Put $I=(\\phi_1,\\ldots,\\phi_b)R$. Define $E\\subset\\mathbf N^e$ to consist of the lexicographically largest exponents of nonzero elements of $I$, viewed as polynomials in the algebraically independent $\\sigma_i$. The cited node gives the unique expansion $\\psi=\\sum f_{A\\beta}(W)\\sigma^AY^\\beta$, with $\\beta\\in\\Delta$ and $\\deg f_{A\\beta}=d-q\\cdot A-|\\beta|$.",
+   "uses": [
+    "lem-trf-projective-order-triangular-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written details of Hironaka (1970), (13.2), p.168, and Lemma 18, first paragraph, p.174; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Reduce this expansion as follows. If a coefficient $f_{A\\beta}\\ne0$ has $A\\in E$, choose $G\\in I$ with leading exponent $A$. Take its weighted-degree $q\\cdot A$ component and divide by its nonzero leading coefficient. This gives a monic weighted homogeneous $G_A$ with the same leading exponent. From any finite expression in the generators of $I$, taking that degree component gives $G_A=\\sum_jQ_{Aj}\\phi_j$, with $Q_{Aj}$ of weight $q\\cdot A-e_j$ (zero for negative weight). Subtract $f_{A\\beta}(W)Y^\\beta G_A$ and record its multiples $f_{A\\beta}Y^\\beta Q_{Aj}$. Each recorded coefficient is homogeneous in $B$ of degree $d-e_j$. Choose the largest offending $A$ first and clear all its finitely many $\\beta$ coefficients. Every newly introduced exponent is strictly smaller than $A$, and $q\\cdot A+|\\beta|\\le d$ throughout. There are only finitely many such pairs because all $q_i\\ge1$, so this process terminates. It produces $C_j\\in B_{d-e_j}$ and $\\psi^*=\\psi-\\sum C_j\\phi_j\\in B_d$ whose expansion has $f^*_{A\\beta}=0$ for every $A\\in E$. This is explicit finite polynomial subtraction using the basis of Step 1, not an appeal to a division theorem.",
+   "uses": [
+    "lem-trf-projective-order-triangular-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written details of Hironaka (1970), Lemma 18, descending lexicographical reduction, p.174; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Use [lem-trf-projective-order-completed-normal-form] for these triangular coordinates. Put $\\theta_j=\\delta(\\phi_j)$ and $u=\\delta(\\psi^*)$. The hypothesis still gives $u-\\sum a_j\\theta_j\\in\\widehat N^t$, where $a_j=b_j-\\delta(C_j)$ and $\\widehat N=N\\widehat L$. Suppose $u\\notin N^t$. Order preservation gives $s=\\operatorname{ord}_{\\widehat N}u<t$ and $\\operatorname{ord}_{\\widehat N}(\\sum a_j\\theta_j)=s$. We can arrange $a_j\\in\\widehat N^{\\max(0,s-e_j)}$ without changing this sum. Indeed let $m=\\min_j(\\operatorname{ord}_{\\widehat N}a_j+e_j)$. If $m<s$, the sum lies in $\\widehat N^{m+1}$, and [lem-trf-projective-order-filtered-syzygy-lifting] at $q=m$ gives an exact relation $(v_j)$ with $a_j-v_j\\in\\widehat N^{\\max(0,m+1-e_j)}$. Replace $a_j$ by $a_j-v_j$, increasing the minimum by at least one. At most $s$ repetitions suffice. A zero or empty sum cannot have finite order $s$, so those cases already contradict the supposition. All later computations take place in the completion; no descent of its coefficients is needed.",
+   "uses": [
+    "lem-trf-projective-order-completed-normal-form",
+    "lem-trf-projective-order-filtered-syzygy-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written details of Hironaka (1970), Lemma 18, use of Lemma 17 to bound coefficients, p.174; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The polynomial expansion of $\\psi^*$ dehomogenizes to $\\sum f^*_{A\\beta}(t_{e+1},\\ldots,t_r,1)\\rho^At_1^{\\beta_1}\\cdots t_e^{\\beta_e}$. Its coefficient functions belong to $L_0$. Substituting $t_i=z_i+a_i$ and expanding each coefficient in $\\widehat L_0=F[[\\omega]]$ gives the unique normal expansion $u=\\sum g_{A\\beta\\gamma}\\rho^Az^\\beta\\omega^\\gamma$. A binomial expansion only decreases each $\\beta_i$, so the bound $\\beta_i<q_i$ persists. Neither operation changes $A$, hence $g_{A\\beta\\gamma}=0$ whenever $A\\in E$. By the weighted-order formula the weight-$s$ part $u_{[s]}$ is a nonzero finite sum of these monomials. Write $\\phi_j=P_j(\\sigma)$ with $P_j$ weighted homogeneous of weight $e_j$. The coefficient comparison of the cited node gives $\\theta_j-P_j^{\\epsilon_0}(\\rho)\\in\\widehat N^{e_j+1}$. The bounds of Step 3 therefore imply\n$$u_{[s]}=\\sum_j(a_j)_{[s-e_j]}P_j^{\\epsilon_0}(\\rho).$$\nHere the bracket selects the indicated weighted normal terms, and a negative bracket is zero. To check the equality, subtract the two sides in the actual series: $u-\\sum a_j\\theta_j$ has order at least $t>s$, while replacing each $\\theta_j$ by $P_j^{\\epsilon_0}(\\rho)$ changes the sum by order at least $s+1$. The normal-order formula forces every remaining weight-$s$ coefficient to vanish. Multiplication by $P_j^{\\epsilon_0}(\\rho)$ preserves the bounded $z$ exponents, so this comparison uses the unique normal expansion directly.",
+   "uses": [
+    "lem-trf-projective-order-completed-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written details of Hironaka (1970), (14.2), (16.1)-(16.2), and Lemma 18, leading-weight comparison, pp.174-175; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Leading exponent sets of polynomial ideals are unchanged by a field extension. Here is the needed elementary verification for $k\\hookrightarrow F$ via $\\epsilon_0$. If $H=\\sum_jA_jP_j^{\\epsilon_0}$ is a nonzero member of the extended ideal in $F[S]$, take a $k$-basis $v_1,\\ldots,v_l$ of the finite-dimensional span of all coefficients of the $A_j$. Expanding in that basis writes $H=\\sum_\\nu v_\\nu H_\\nu$, with $H_\\nu\\in(P_j)k[S]$. Linear independence makes a coefficient of $H$ zero exactly when every corresponding coefficient of $H_\\nu$ is zero. Thus the largest exponent of $H$ is the largest of their leading exponents, and belongs to $E$. Conversely every exponent in $E$ survives field extension. Apply this to the identity of Step 4, and collect one fixed pair $(\\beta,\\gamma)$ for which the nonzero $u_{[s]}$ has a nonzero coefficient polynomial in $\\rho$. That polynomial lies in $(P_j^{\\epsilon_0})F[S]$, so its largest exponent is in $E$. But every exponent in it is outside $E$ by Step 4. This contradiction proves $u\\in N^t$, and Step 2 supplies the required homogeneous $C_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written details of Hironaka (1970), Lemma 18, final leading-exponent contradiction, p.175, including the scalar-extension observation preceding (16.1), p.171; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $t=d$, the definition of $U_d$ applied to $\\psi^*\\in B_d$ gives $\\psi^*\\in U_d$. For $t>d$, suppose $\\psi^*\\ne0$. Since $N^t\\subseteq N^d$, it is a nonzero member of $U_d$. The singleton family $(\\psi^*)$ minimally generates its ideal: the ideal of the other, empty family is zero. Apply [lem-trf-projective-order-initial-minimality] with $b=1$ and degree $d\\ge1$. It gives $\\operatorname{ord}_N\\delta(\\psi^*)=d$, contradicting $\\delta(\\psi^*)\\in N^t$ for $t>d$. Therefore $\\psi^*=0$ and $\\psi=\\sum C_j\\phi_j$. The argument includes $b=0$, $r=0$, zero $\\psi$, and zero coefficients.",
+   "uses": [
+    "lem-trf-projective-order-initial-minimality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written details of Hironaka (1970), Lemma 18, particular consequences (1)-(2), p.175; singleton case of Lemma 15, pp.170-171; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-order-triangular-coordinates",
+  "lem-trf-projective-order-completed-normal-form",
+  "lem-trf-projective-order-filtered-syzygy-lifting",
+  "lem-trf-projective-order-initial-minimality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Detailed reconstruction of Hironaka Lemma 18, pp.174-175, read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival source WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dehomogen.*order|standard.?bas[ei]|Hironaka|normal.?flat",
+   "results": "{\"t\": \"2026-10-23T20:11:45Z\", \"tool\": \"grep\", \"query\": \"dehomogen.*order|standard.?bas[ei]|Hironaka|normal.?flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\"], \"digest\": \"c320e739979c2970\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsHomogeneous\", \"order\"",
+   "results": "{\"t\": \"2026-10-23T20:11:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsHomogeneous\\\", \\\"order\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-projective-order-homogeneous-approximation: approximate homogeneous polynomial modulo a local prime power by homogeneous multiples of earlier maximal order forms",
+   "results": "{\"t\": \"2026-10-23T20:11:47Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-projective-order-homogeneous-approximation: approximate homogeneous polynomial modulo a local prime power by homogeneous multiples of earlier maximal order forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassMod\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.degree_weierstrassMod_lt\", \"PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\"], \"digest\": \"3d24dba18b8ca66c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous polynomial division approximates local ideal membership at a projective point by homogeneous coefficients of prescribed degrees",
+   "results": "{\"t\": \"2026-10-23T20:11:51Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous polynomial division approximates local ideal membership at a projective point by homogeneous coefficients of prescribed degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.denom_notMem\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.mk_mem_carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"Ideal.mem_span_pow_iff_exists_isHomogeneous\"], \"digest\": \"60104b1fb29e8628\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "dehomogen|homogeneous.*approximation|initial.*minimal|normalFlat|normal_flat",
+   "results": "{\"t\": \"2026-10-23T20:12:35Z\", \"tool\": \"grep\", \"query\": \"dehomogen|homogeneous.*approximation|initial.*minimal|normalFlat|normal_flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-projective-order-homogeneous-approximation: Local ideal approximation by homogeneous polynomials with coefficients of complementary degrees for maximal projective order forms",
+   "results": "{\"t\": \"2026-10-23T20:12:36Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-projective-order-homogeneous-approximation: Local ideal approximation by homogeneous polynomials with coefficients of complementary degrees for maximal projective order forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"ProjectiveSpectrum.as_ideal_le_as_ideal\", \"Ideal.isHomogeneous_iff_forall_subset\", \"Ideal.homogeneousHull_eq_iSup\", \"MvPowerSeries.IsHomogeneous\", \"ProjectiveSpectrum.as_ideal_lt_as_ideal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"ProjectiveSpectrum.gc_homogeneousIdeal\"], \"digest\": \"fda450b18a61b85d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsHomogeneous\"",
+   "results": "{\"t\": \"2026-10-23T20:12:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsHomogeneous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous\", \"MvPolynomial.isHomogeneous_X\", \"MvPolynomial.isHomogeneous_of_isEmpty\", \"MvPolynomial.IsHomogeneous.totalDegree_le\", \"MvPolynomial.isHomogeneous_of_totalDegree_zero\", \"MvPolynomial.totalDegree_zero_iff_isHomogeneous\", \"MvPolynomial.isHomogeneous_one\", \"MvPolynomial.isHomogeneous_zero\"], \"digest\": \"c4288e164db318ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern homogeneous polynomial definitions, ordinary localization, univariate Weierstrass division, smooth presentations or the equational criterion for flat modules; none states the projective maximal-order or normal-flat chart assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous polynomial local prime power approximation by multiples of forms whose order equals degree",
+   "results": "{\"t\": \"2026-10-23T21:18:46Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous polynomial local prime power approximation by multiples of forms whose order equals degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisionAt\", \"LaurentSeries.exists_Polynomial_intValuation_lt\"], \"digest\": \"236186684dd24f7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "homogen.*approxim|dehomogen.*order|Hironaka|standard.?bas[ei]",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"grep\", \"query\": \"homogen.*approxim|dehomogen.*order|Hironaka|standard.?bas[ei]\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\"], \"digest\": \"c9570b61cf457e0b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous polynomial membership in a localized ideal modulo a prime power with homogeneous coefficient degree bounds",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous polynomial membership in a localized ideal modulo a prime power with homogeneous coefficient degree bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem\", \"MvPolynomial.homogeneousComponent_of_mem\", \"Ideal.mem_span_pow_iff_exists_isHomogeneous\", \"HomogeneousLocalization.Away.mk\", \"HomogeneousLocalization.AtPrime\", \"MvPolynomial.homogeneousSubmodule\", \"Polynomial.homogenize_dvd\"], \"digest\": \"1940ae8a38972b2c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial.IsHomogeneous\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial.IsHomogeneous\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: service returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "totalDegree_le|isHomogeneous_X|mem_span_pow_iff_exists_isHomogeneous",
+   "results": "{\"t\": \"2026-10-23T21:22:13Z\", \"tool\": \"grep\", \"query\": \"totalDegree_le|isHomogeneous_X|mem_span_pow_iff_exists_isHomogeneous\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Basic.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\"], \"digest\": \"7de5079b39279699\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"totalDegree\", \"order\"",
+   "results": "{\"t\": \"2026-10-23T21:22:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"totalDegree\\\", \\\"order\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: service returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-standard-basis-one-step",
+  "date": "2026-10-24",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Q33 refinement: Hironaka (1970), Lemma 18, pp.174–175, including its two particular consequences.",
+   "via": [
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-projective-order-homogeneous-approximation",
+  "worker": "stage1",
+  "summary": "Read Hironaka Lemma 18 and its inputs (13.2), Lemma 14, Remarks 16.1-16.2 and Lemma 17. Exposed three strictly smaller structural/relation inputs. Wrote finite homogeneous reduction, finite coefficient improvement, leading-weight comparison and scalar-extension contradiction explicitly. Reused initial-minimality for the final vanishing consequence. Statement unchanged; no Lean attachment found.",
+  "blueprint": "Historical resolution branch of lem-trf-local-term-locality (1)-(2) through the recorded ancestry; latest blueprint now uses the direct contracting-correspondence route. This item discharges the previously exposed Hironaka Lemma 18 input of the historical branch, without changing the chapter or unit. All six proof steps realize Lemma 18 on that branch."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-58bcd93cc",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-58bcd93cc (reviewer sub-agent of L); spot-checked: I read the whole item, all three new nodes, initial-minimality and additive-generators. The item statement is byte-identical to the Q33 creation. stmt_deps and proof_deps are consistent. No repair note applies. The Hironaka 1970 paper is not in literature/: the worker recorded it as WANTED with proof_origin agent, so I checked every statement and step independently and could not read the source at the cited places. Triangular-coordinates is true: it follows from additive-generators (additive homogeneous forms are sums c·X^{p^k}) plus Gaussian elimination by degree, and X_0 can never be a pivot. I tested it on the rational origin, r=0 and F_p(a) with (t^p-a), where U_p=0. Completed-normal-form: the expansion is unique because ρ_i is Weierstrass-distinguished in z_i. The order formula holds because in(ρ) is monic triangular in gr=F[Ω,Z]. The ε0 comparison is immediate. The residue clause κ(p)=κ(p0) is the one claim I could not prove outright. It survived several characteristic-p counterexample attempts and a p-basis differential check, and it is attributed to Hironaka Lemma 14/(14.2). Filtered-syzygy-lifting is true: by flatness, homogeneous k-syzygies of the P_j lift exactly and generate the syzygies of the initial forms. None of the three new nodes duplicates an existing node or restates a clause of the item. Steps: 1 (I homogeneous, E = leading exponents); 2 (weight-q·A component keeps exponent A; coefficient degrees d-e_j; lex termination); 3 (q=m lifting raises the minimum, at most s rounds); 4 (substitution keeps A; the error has order ≥ s+1, giving the u_[s] identity); 5 (finite k-basis keeps leading exponents in E, a contradiction); 6 (singleton minimality gives ord = d < t). All check. Edge cases checked: b=0, r=0, e=0, ψ=0, e_j=d. Every citation is in unit sk-i-curve-zero, there is no cycle (Q53's initial-minimality proof cites only defs), and there are no tool_uses. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveOrderHomogeneousApproximation",
+  "declaration": "Hironaka.projective_order_homogeneous_approximation",
+  "file": "lean/Sheaf/RingTheory/ProjectiveOrderHomogeneousApproximation.lean",
+  "statement": "theorem projective_order_homogeneous_approximation {k : Type u} [Field k] (r b d t : ℕ) (p : PrimeSpectrum (MvPolynomial {i : Fin (r + 1) // i ≠ 0} k)) (e : Fin b → ℕ) (φ : Fin b → MvPolynomial (Fin (r + 1)) k) (ψ : MvPolynomial (Fin (r + 1)) k) (hd : 1 ≤ d) (ht : 1 ≤ t) (he : ∀ j : Fin b, 1 ≤ e j ∧ e j ≤ d) (hφ_ne : ∀ j : Fin b, φ j ≠ 0) (hφ : ∀ j : Fin b, InOrderSpace r p (e j) (φ j)) (hψ : ψ.IsHomogeneous d) (happrox : ∃ a : Fin b → Localization.AtPrime p.asIdeal, algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 ψ) - ∑ j : Fin b, a j * algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 (φ j)) ∈ IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ t) : ∃ C : Fin b → MvPolynomial (Fin (r + 1)) k, (∀ j : Fin b, (C j).IsHomogeneous (d - e j)) ∧ algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 (ψ - ∑ j : Fin b, C j * φ j)) ∈ IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) ^ t ∧ (t = d → InOrderSpace r p d (ψ - ∑ j : Fin b, C j * φ j)) ∧ (d < t → ψ ∈ Ideal.span (Set.range φ))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bde01ba45",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Item node diff vs live: only lean record plus stmt_deps gaining the landed def-trf-permissible-basis-chart-data (allowed; its InOrderSpace is exactly U_d, no duplicate). lean.statement verbatim in file; sole proof is sorry; docstrings carry Hironaka 1970 Lemma 18 pp.174-175, the blueprint id and all 6 proof steps. Clause check: Field k at universe u; B=MvPolynomial (Fin (r+1)) k with IsHomogeneous; affine ring on {i // i≠0}; L=Localization.AtPrime, N=maximalIdeal (=pL); delta=algebraMap∘dehomogenizeX k 0 (read: X0↦1); hφ via InOrderSpace (homogeneous plus delta in N^e); happrox is an exact existential; conclusion has same-C homogeneity of degree d-e_j, N^t membership, t=d→U_d, d<t→ψ∈span(range φ). Edge cases b=0, r=0, ψ=0, e_j=d and p=0 consistent; no characteristic or rationality assumption added. Hironaka paper not in repo (WANTED); statement checked by hand at the origin and at a principal prime, no counterexample. No duplicate declaration in live lean/Sheaf. No changes, so no compile."
+ }
+}

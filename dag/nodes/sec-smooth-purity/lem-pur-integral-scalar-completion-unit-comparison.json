@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-integral-scalar-completion-unit-comparison",
+ "kind": "statement",
+ "title": "Finite-free scalar extension preserves the actual integral completion unit",
+ "statement": "Let ell be prime, E and F finite extensions of Q_ell in the same universe, i an embedding of Q_ell-algebras, and W a scheme in that universe. Let T be ordinary derived extension along the actual completed coefficient map E to F, and let C_E and C_F be the specified actual integral derived completions with units eta_E and eta_F. For every unbounded derived completed-E coefficient module Q, there exists an isomorphism chi: T(C_E(Q)) to C_F(T(Q)) satisfying T(eta_E(Q)) followed by chi equals eta_F(T(Q)). There is no completeness or constructibility assumption on Q. The statement includes the identity extension, all ramified extensions, the zero complex, and the empty scheme. This statement asserts existence with the actual unit equation; uniqueness is proved separately by the parent using the completion reflector.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0941 and derived completion; finite-free tensor/product interchange and the ramified cofinal quotient-tower calculation in Step 8 of lem-pur-compact-support-scalar-projection-identification."
+ },
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing completedScalarCochainModel of the actual coefficient map and prove once that its derived functor is the ordinary scalar-extension functor. The actual normalized completed map is finite free by an integral basis. Convert its finite biproduct basis to a coproduct basis. The proved scalar_ramification calculation gives t=u v^e with e positive. Exact countable products on the pro-etale site allow supplied principal quotient completion Models for the E and F uniformizers. The existing finiteFreeQuotientRoosComparison constructs the strict balanced quotient/Roos comparison for these data.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-completed-integral-finite-free",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pur-principal-quotient-completion-exists",
+    "lem-pur-finite-free-quotient-roos-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved exchangeFromCochains helper gives a natural scalar/completion isomorphism for the supplied models, together with its unit equation. Apply the fully proved principalIntegralCompletionComparison to the source input and its scalar extension. Conjugate the model exchange by scalar extension of the inverse E comparison and the F comparison. The two unit equations and functoriality cancel the inverse E comparison; the model exchange unit equation followed by the F comparison gives exactly the actual F completion unit. All conjugation and cancellation steps are proved by a private abstract categorical helper, avoiding repeated unfolding of concrete derived functors. No uniqueness claim or completeness assumption is needed for this existence step.",
+   "uses": [
+    "lem-pur-finite-free-completion-exchange",
+    "lem-pur-integral-principal-completion-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-principal-quotient-completion-exists",
+  "lem-pur-finite-free-quotient-roos-comparison",
+  "lem-pur-finite-free-completion-exchange",
+  "lem-pur-integral-principal-completion-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F6",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0941 and derived completion; finite-free tensor/product interchange and the ramified cofinal quotient-tower calculation in Step 8 of lem-pur-compact-support-scalar-projection-identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension commutes with derived adic completion and preserves the completion unit",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.instIsScalarTower, AdicCompletion.mk_smul_top_ofAlgEquiv_symm.",
+   "verdict": "The hits concern ordinary adic rings or uniform-space completion and do not supply the normalized derived sheaf comparison. The existing project finite-free quotient/Roos exchange supplies the argument.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\", \"iso\"",
+   "results": "12 hits: UniformSpace.Completion.coe_isometry, Isometry.completion_extension, Isometry.completion_map, UniformSpace.Completion.isometry_mapRingHom, LinearIsometry.fromCompletion, LinearIsometry.completion, LinearIsometry.fromCompletion_apply_coe, LinearIsometry.coe_fromCompletion.",
+   "verdict": "The hits concern ordinary adic rings or uniform-space completion and do not supply the normalized derived sheaf comparison. The existing project finite-free quotient/Roos exchange supplies the argument.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*unit|exchangeFromCochains",
+   "results": "10 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean, Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean.",
+   "verdict": "The hits concern ordinary adic rings or uniform-space completion and do not supply the normalized derived sheaf comparison. The existing project finite-free quotient/Roos exchange supplies the argument.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-scalar-projection-identification",
+   "place": "Proof Step 8: existence of the scalar/completion isomorphism preserving the actual unit, before reflector uniqueness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarCompletionUnitComparison",
+  "file": "lean/Sheaf/Paper/IntegralScalarCompletionUnitComparison.lean",
+  "declaration": "WeilConjectures.integralScalarCompletionUnitComparison",
+  "statement": "theorem integralScalarCompletionUnitComparison (W : Scheme.{u}) :\n    letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{u} _\n    letI : HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=\n      integralCoefficientAbSheafify.{u, u} W\n    letI : (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=\n      integralCoefficientAbLocallyBijective.{u, u} W\n    ∀ Q : DerivedCategory (scalarReductionSource.{u, u} l E W),\n    ∃ χ : (pbcDerivedExtend.{u} (completedCoefficientMap.{u, u} l E F i W)).obj\n          ((IntegralOnSlice.completion.{u, u} l E W none).obj Q) ≅\n        (IntegralOnSlice.completion.{u, u} l F W none).obj\n          ((pbcDerivedExtend.{u} (completedCoefficientMap.{u, u} l E F i W)).obj Q),\n      (pbcDerivedExtend.{u} (completedCoefficientMap.{u, u} l E F i W)).map\n          ((IntegralOnSlice.completionUnit.{u, u} l E W none).app Q) ≫ χ.hom =\n        (IntegralOnSlice.completionUnit.{u, u} l F W none).app\n          ((pbcDerivedExtend.{u} (completedCoefficientMap.{u, u} l E F i W)).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a1d42",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T195134-L-2784901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a1d42",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T195134-L-2784901",
+  "kind": "interface",
+  "note": "independent cc review: moved scalarCompletion_existsUnique/scalarCompletion vs published item (elaborated-type check in old and new contexts) and DAG nodes; new modules' signatures vs their node lean.statement; axioms via scratch compile"
+ }
+}

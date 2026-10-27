@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-sequential-telescope-calculus",
+ "kind": "statement",
+ "title": "An eventually invertible sequence has stationary telescope legs",
+ "statement": "Let $\\mathcal T$ be a triangulated category with countable coproducts [def-weil-triangulated-category, def-weil-pbc-category-colimit]. Let $E_0\\xrightarrow{u_0}E_1\\to\\cdots$ be a sequence. Write $S=\\bigoplus_{r\\ge0}E_r$ with coprojections $\\iota_r$, and let $s:S\\to S$ satisfy $s\\iota_r=\\iota_{r+1}u_r$. Choose a distinguished triangle\n$$S\\xrightarrow{1-s}S\\xrightarrow{p}H\\longrightarrow S[1],$$\nso $H$ is a homotopy colimit and its legs are $\\lambda_r=p\\iota_r$ [def-kun-truncations]. If some integer $N\\ge0$ satisfies that every $u_r$ for $r\\ge N$ is an isomorphism, then $\\lambda_r:E_r\\to H$ is an isomorphism for every $r\\ge N$. The assertion holds for every chosen telescope triangle, with its actual legs; there is no compactness or t-structure hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 090Z (definition-derived-colimit), Tag 0CRH (remark-uniqueness-derived-colimit), Tag 0CRJ (lemma-hocolim-subsequence), applied to a tail; constant-tail telescope is the split triangle for 1-successor. This is the eventual-isomorphism consequence, not an ordinary-colimit assertion."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Write $f=1-s$ and $j=\\iota_N$. For $i\\le k$ write $U_{i,k}:E_i\\to E_k$ for the finite transition composite, with $U_{i,i}=1$. Put $a_i=U_{i,N}$ for $i\\le N$ and $a_i=U_{N,i}^{-1}$ for $i>N$. Then $a_{i+1}u_i=a_i$ in all cases, including $i=N$. By the coproduct universal property these components give $a:S\\to E_N$, with $aj=1$ and $af=0$. Define $l:S\\to S$ by its components\n$$l\\iota_i=\\begin{cases}\\displaystyle\\sum_{k=i}^{N-1}\\iota_kU_{i,k}&i<N,\\\\0&i=N,\\\\ \\displaystyle-\\sum_{k=N}^{i-1}\\iota_kU_{k,i}^{-1}&i>N.\\end{cases}$$\nEvery sum here is finite and every inverse has indices at least $N$. Thus the formulas define morphisms in the additive category, and the coproduct universal property defines $l$ without any assertion about maps into infinite coproducts.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z (definition-derived-colimit); explicit finite-sum calculation supplied by Q48, followed by Tags 0146 (lemma-composition-zero) and 0149 (lemma-representable-homological)."
+   }
+  },
+  {
+   "text": "On the $i$-th summand, $lf$ is $l\\iota_i-l\\iota_{i+1}u_i=\\iota_i$: for $i<N$ the forward sums cancel except for $k=i$; for $i=N$ use $l\\iota_N=0$ and $l\\iota_{N+1}=-\\iota_Nu_N^{-1}$; for $i>N$ the inverse sums cancel except for $k=i$. Also $fl\\iota_i=\\iota_i-ja_i$: for $i<N$ expand $f\\iota_k=\\iota_k-\\iota_{k+1}u_k$ and telescope; for $i=N$ both sides are zero; for $i>N$ the negative inverse sum telescopes to $\\iota_i-\\iota_NU_{N,i}^{-1}$. Equality on all coprojections therefore gives\n$$lf=1_S,\\qquad fl=1_S-ja.$$",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z (definition-derived-colimit); explicit finite-sum calculation supplied by Q48, followed by Tags 0146 (lemma-composition-zero) and 0149 (lemma-representable-homological)."
+   }
+  },
+  {
+   "text": "Let $d:H\\to S[1]$ be the last arrow of the chosen triangle. The zero-composite clause of lem-weil-pbc-hom-into-triangle-exact, first on this triangle and then on its rotations, gives $pf=0$ and $f[1]d=0$ (the twice rotated first arrow is $-f[1]$). Since $l[1]f[1]=1$ by the preceding identity and functoriality of shift, $d=l[1]f[1]d=0$. This uses only the actual supplied triangle.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z (definition-derived-colimit); explicit finite-sum calculation supplied by Q48, followed by Tags 0146 (lemma-composition-zero) and 0149 (lemma-representable-homological)."
+   }
+  },
+  {
+   "text": "Apply clause (i) of lem-weil-pbc-hom-out-of-triangle-exact to $af=0$, obtaining $b:H\\to E_N$ with $bp=a$. Consequently $bpj=aj=1$. Set $h=1_H-pjb$. Then $hp=p-pja=p(1-ja)=pfl=0$. Clause (ii) of that same cited node gives $h=kd$ for some $k:S[1]\\to H$; as $d=0$, $h=0$. Thus $pj=\\lambda_N$ and $b$ are mutually inverse. Finally $pf=0$ gives $\\lambda_i=\\lambda_{i+1}u_i$ for each $i$. Induction gives $\\lambda_N=\\lambda_rU_{N,r}$ for $r\\ge N$. The finite composite $U_{N,r}$ is invertible, so $\\lambda_r=\\lambda_NU_{N,r}^{-1}$ is an isomorphism, as required.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 090Z (definition-derived-colimit); explicit finite-sum calculation supplied by Q48, followed by Tags 0146 (lemma-composition-zero) and 0149 (lemma-representable-homological)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 090Z telescope definition and Tags 0146/0149 exactness; Q48 supplies an explicit finite-sum contraction for the eventually invertible sequence. Avoids invoking the subsequence comparison of Tag 0CRJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a triangulated category with countable coproducts sequential homotopy colimits preserve isomorphisms of sequences commute with exact coproduct preserving functors and recover eventually constant sequences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.homologySequence_exact₂\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ to an abelian category $ \\\\mathcal{A} $, and a distinguished triangle $ T = (X \\\\xrightarrow\"}\n  {\"name\": \"CategoryTheory.Functor.homologySequence_comp\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{A} $ from a pretriangulated category $ \\\\mathcal{C} $ with integer-indexed shifts to an abelian category $ \\\\mathcal{A} $, and a distinguished tr\"}\n  {\"name\": \"CategoryTheory.Functor.map_distinguished_exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : C \\\\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, and for any distingu\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] [inst_4 : CategoryTheory.Preadditive D]\\n  [inst_5 : CategoryTheory.Limits.H\", \"doc\": \"Given an additive functor $ G : C \\to D $ between preadditive categories $ C $ and $ D $, the induced functor between their homotopy categories of integer-indexed cochain complexes is triangulated. Thi\"}\n  {\"name\": \"HomotopyCategory.spectralObjectMappingCone_ω₁\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C],\\n  (HomotopyCategory.spectralObjectMappingCone C).ω₁ =\\n    (HomotopyCategory.composableArro\", \"doc\": \"The first omega functor $\\\\omega_1$ of the spectral object in the homotopy category is defined as the composition of the composable arrows functor (which maps 1-composable arrows to their mapping cones\"}\n  {\"name\": \"CochainComplex.mappingCone.mapTrianglehIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"HomotopyCategory.instIsTriangulatedIntUp\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Triangulated\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasBinaryBiproducts C] [inst_3 : CategoryTheory.Limits.HasZeroObject C],\\n  CategoryTheory.IsTriangulated (HomotopyCategory C (ComplexShape.up ℤ))\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$, the homotopy category of integer-indexed chain complexes over $\\\\mathcal{C}$ forms a triangulated category. This structure combines: (1) the category structu\"}\n  {\"name\": \"CategoryTheory.Functor.IsHomological.exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} {inst : CategoryTheory.Category.{v_1, u_1} C} {inst_1 : CategoryTheory.HasShift C ℤ}\\n  {inst_2 : CategoryTheory.Category.{v_3, u_3} A} {F : CategoryTheory.Functor C A}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject C} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5\", \"doc\": \"For a homological functor $ F : C \\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, the image under $ F $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary eventually constant colimits and triangle exactness do not assert eventual stabilization of a triangulated mapping telescope"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cone of identity minus successor on the coproduct of a sequence is a homotopy colimit and its structure maps are isomorphisms when the sequence eventually stabilizes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantTo.isLimitCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \": IsLimit h.cone\", \"doc\": \"For a cofiltered category $\\\\mathcal{J}$, a category $\\\\mathcal{C}$, and a functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$ that is eventually constant at an object $i_0 \\\\in \\\\mathcal{J}$, the cone constructed \"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \"{c : Cocone F} (hc : IsColimit c) (j : J) (ι : i₀ ⟶ j) : IsIso (c.ι.app j)\", \"doc\": \"If a cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ is a colimit, then for any object $ j $ in $ \\\\mathcal{J} $ and any morphism $ \\\\iota : i_0 \\\\to j $, the component $ \\\\iota_j : F(j) \\\\to N $ \"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \": IsColimit h.cocone\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$ that is eventually constant from an object $i_0 \\\\in \\\\mathcal{J}$, the cocone with apex $F(i_0)$ and components g\"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \"{c : Cocone F} (hc : IsColimit c) : IsIso (c.ι.app i₀)\", \"doc\": \"If $ c $ is a colimit cocone for a diagram $ F $, then the component $ \\\\iota_{i_0} $ of the natural transformation $ \\\\iota : F \\\\Rightarrow \\\\text{Const}(c.\\\\text{pt}) $ at the object $ i_0 $ is an isomo\"}\n  {\"name\": \"CategoryTheory.Limits.Cocone.isColimit_iff_isIso_colimMap_ι\", \"module\": \"Mathlib.CategoryTheory.Limits.Connected\", \"type\": \"{F : J ⥤ C} [HasColimit F] (c : Cocone F) : Nonempty (IsColimit c) ↔ IsIso (colimMap c.ι)\", \"doc\": \"For a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ with a colimit and a cocone $ c $ with apex $ N $, the cocone $ c $ is a colimit if and only if the morphism $ \\\\text{colimMap}(c.\\\\iota) : \\\\text{colimi\"}\n  {\"name\": \"CategoryTheory.Limits.coproductIsCoproduct'\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \": IsColimit (Sigma.cocone X)\", \"doc\": \"Given a discrete diagram $ X : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ indexed by a type $ \\\\alpha $, the cocone with apex the coproduct $ \\\\coprod X $ and legs the canonical inclusion morphisms $ \\\\iota_j : X(j) \"}\n  {\"name\": \"CategoryTheory.Limits.Cone.isLimitOfIsIsoLimMapπ\", \"module\": \"Mathlib.CategoryTheory.Limits.Connected\", \"type\": \"{F : J ⥤ C} [HasLimit F] (c : Cone F) [IsIso (limMap c.π)] : IsLimit c\", \"doc\": \"Given a connected category $\\\\mathcal{J}$, a category $\\\\mathcal{C}$, and a functor $F: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ with a limit, if a cone $c$ over $F$ has a limit map (constructed from its projection\"}\n  {\"name\": \"CategoryTheory.Limits.colimit.isoColimitCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F : J ⥤ C} [HasColimit F] (t : ColimitCocone F) : colimit F ≅ t.cocone.pt\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ with a colimit and a colimit cocone $ t $, this constructs an isomorphism between the colimit object $ \\\\text{colimit} \\\\, F $ and the apex $ t.\\\\text{\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary eventually constant colimits and triangle exactness do not assert eventual stabilization of a triangulated mapping telescope"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyColimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary eventually constant colimits and triangle exactness do not assert eventual stabilization of a triangulated mapping telescope"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|telescope|derived.colimit",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary eventually constant colimits and triangle exactness do not assert eventual stabilization of a triangulated mapping telescope"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|telescope",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary eventually constant colimits and triangle exactness do not assert eventual stabilization of a triangulated mapping telescope"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structure map from a sufficiently late term of an eventually isomorphic sequence in a triangulated category to its mapping telescope is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.isGE_of_iso\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"If objects $X$ and $Y$ in a triangulated category are isomorphic ($X \\\\cong Y$) and $X$ satisfies the condition of being greater than or equal to the shift by $n \\\\in \\\\mathbb{Z}$, then $Y$ also satisfie\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.isLE_of_iso\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"In a triangulated category $ \\\\mathcal{C} $, if objects $ X $ and $ Y $ are isomorphic (i.e., $ X \\\\cong Y $) and $ X $ satisfies the IsLE condition with integer $ n \\\\in \\\\mathbb{Z} $, then $ Y $ also sa\"}\n  {\"name\": \"CochainComplex.mappingCone.mapTriangleIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.triangle_iso_exists\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated C]\\n  \", \"doc\": \"In a triangulated category equipped with a t-structure, given two distinguished triangles $T$ and $T'$ with an isomorphism $e: T.obj_2 \\\\cong T'.obj_2$, if $T.obj_1$ satisfies the $\\\\leq$-condition with\"}\n  {\"name\": \"CochainComplex.mappingCone.mapTrianglehIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"DerivedCategory.triangleOfSESIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        {S : CategoryTheory.ShortComplex (CochainComplex C ℤ)} →\\n          (hS : S.ShortExact) →\\n            DerivedCategory.triangleOfSES hS ≅\\n             \", \"doc\": \"For any short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ in an abelian category $\\\\mathcal{C}$, the distinguished triangle $Q(X_1) \\\\xrightarrow{Q(f)} Q(X_2) \\\\xrightarrow{Q(g)} Q(X_3) \\\\xrightarrow\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Pretriangulated\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [hC : CategoryTheory.Pretriangulated C]\\n  (T₁ \", \"doc\": \"In a pretriangulated category $\\\\mathcal{C}$, given two distinguished triangles $T_1$ and $T_2$, if their first morphisms $T_1.\\\\text{mor}_1$ and $T_2.\\\\text{mor}_1$ are isomorphic as objects in the arro\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Pretriangulated\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [hC : CategoryTheory.Pretriangulated C]\\n  {T T\", \"doc\": \"In a pretriangulated category with integer shift, if a morphism between two distinguished triangles has its second and third components as isomorphisms, then the first component is also an isomorphism\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary colimit or cone isomorphism facts, not stabilization of the telescope"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequential homotopy colimit of an eventually constant diagram is isomorphic to each term in its constant tail",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantTo.isoMap\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \": F.obj i ≅ F.obj j\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ that is eventually constant at an object $ i_0 \\\\in \\\\mathcal{J} $, and for any morphism $ \\\\phi : i \\\\to j $ in $ \\\\mathcal{J} $ where there exists a mo\"}\n  {\"name\": \"CategoryTheory.Limits.isColimitConstCocone.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Limits.Connected\", \"type\": \"∀ (J : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} J] {C : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} C]\\n  (X : C) [inst_2 : CategoryTheory.IsConnected J],\\n  CategoryTheory.Limits.isColimitConstCocone J X = CategoryTheory.Limits.isColimitConstCocone J X\", \"doc\": \"In a connected category $\\\\mathcal{J}$, the constant cocone with apex $X$ is a colimit for the constant diagram $\\\\mathcal{J} \\\\to \\\\mathcal{C}$ at $X$. This follows from the connectedness of $\\\\mathcal{J}\"}\n  {\"name\": \"CategoryTheory.Limits.colimitConstInitial\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Terminal\", \"type\": \"{J : Type*} [Category* J] {C : Type*} [Category* C] [HasInitial C] :\\n  colimit ((CategoryTheory.Functor.const J).obj (⊥_ C)) ≅ ⊥_ C\", \"doc\": \"For categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$ where $\\\\mathcal{C}$ has an initial object $\\\\bot_\\\\mathcal{C}$, the colimit of the constant functor $\\\\mathcal{J} \\\\to \\\\mathcal{C}$ mapping all objects and m\"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \"{c : Cocone F} (hc : IsColimit c) : IsIso (c.ι.app i₀)\", \"doc\": \"If $ c $ is a colimit cocone for a diagram $ F $, then the component $ \\\\iota_{i_0} $ of the natural transformation $ \\\\iota : F \\\\Rightarrow \\\\text{Const}(c.\\\\text{pt}) $ at the object $ i_0 $ is an isomo\"}\n  {\"name\": \"CategoryTheory.Limits.Types.colimitConstPUnitIsoPUnit\", \"module\": \"Mathlib.CategoryTheory.Limits.IsConnected\", \"type\": \"[IsConnected C] : colimit (constPUnitFunctor.{w} C) ≅ PUnit.{w + 1}\", \"doc\": \"In any connected category $\\\\mathcal{C}$, the colimit of the constant functor $\\\\mathcal{C} \\\\to \\\\mathrm{Type}\\\\, w$ mapping every object to the unit type $\\\\mathrm{PUnit}$ and every morphism to the identi\"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantTo.cone_pt\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \"∀ {J : Type u_1} {C : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C] {F : CategoryTheory.Functor J C} {i₀ : J}\\n  (h : F.IsEventuallyConstantTo i₀) [inst_2 : CategoryTheory.IsCofiltered J], h.cone.pt = F.obj i₀\", \"doc\": \"The apex of the cone constructed for an eventually constant functor $ F $ at an object $ i_0 $ is equal to $ F(i_0) $.\"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \"{c : Cocone F} (hc : IsColimit c) (j : J) (ι : i₀ ⟶ j) : IsIso (c.ι.app j)\", \"doc\": \"If a cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ is a colimit, then for any object $ j $ in $ \\\\mathcal{J} $ and any morphism $ \\\\iota : i_0 \\\\to j $, the component $ \\\\iota_j : F(j) \\\\to N $ \"}\n  {\"name\": \"CategoryTheory.Functor.IsEventuallyConstantFrom.cocone_pt\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant\", \"type\": \"∀ {J : Type u_1} {C : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} J]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C] {F : CategoryTheory.Functor J C} {i₀ : J}\\n  (h : F.IsEventuallyConstantFrom i₀) [inst_2 : CategoryTheory.IsFiltered J], h.cocone.pt = F.obj i₀\", \"doc\": \"For a filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$ that is eventually constant from an object $i_0 \\\\in \\\\mathcal{J}$, the apex of the constructed cocone is equal to $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary colimit or cone isomorphism facts, not stabilization of the telescope"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*[Hh]omotopy[Cc]olimit|[Hh]ocolim|[Tt]elescope",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary colimit or cone isomorphism facts, not stabilization of the telescope"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|telescope",
+   "results": "25 hits; recorded top results: Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Summable.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean, Mathlib/Tactic/Algebraize.lean, Mathlib/Tactic/MkIffOfInductiveProp.lean, Mathlib/Tactic/MkIffOfInductiveProp.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary eventually constant colimits, individual complex cones, t-structures, or unrelated telescope syntax; no stabilization of general triangulated mapping-telescope legs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyColimit\"",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary eventually constant colimits, individual complex cones, t-structures, or unrelated telescope syntax; no stabilization of general triangulated mapping-telescope legs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An eventually constant sequence in a triangulated category has telescope isomorphic to each sufficiently late term",
+   "results": "8 hits; recorded top results: CategoryTheory.Functor.IsEventuallyConstantTo.hasLimit, CategoryTheory.Functor.IsEventuallyConstantTo.isoMap, CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit', CategoryTheory.IsCofiltered.instHasLimitOfIsEventuallyConstant, CategoryTheory.Functor.IsEventuallyConstantFrom.cocone_pt, Computation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary eventually constant colimits, individual complex cones, t-structures, or unrelated telescope syntax; no stabilization of general triangulated mapping-telescope legs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The legs of a homotopy colimit telescope in a triangulated category are isomorphisms for an eventually invertible sequence",
+   "results": "8 hits; recorded top results: HomologicalComplex.homotopyCofiber.XIso, CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.mapTriangleIso, HomotopyCategory.spectralObjectMappingCone, HomotopyCategory.Pretriangulated.distinguished_cocone_triangle, HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.shiftTrianglehIso",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary eventually constant colimits, individual complex cones, t-structures, or unrelated telescope syntax; no stabilization of general triangulated mapping-telescope legs"
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|mapping.telescope",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary eventually constant colimits, individual complex cones, t-structures, or unrelated telescope syntax; no stabilization of general triangulated mapping-telescope legs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone of identity minus shift on an eventually isomorphic sequence is the stable value in an additive triangulated category",
+   "results": "8 hits; recorded top results: CategoryTheory.Triangulated.TStructure.isGE_of_shift, CategoryTheory.Triangulated.TStructure.triangleLTGE, HomotopyCategory.spectralObjectMappingCone, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.Triangulated.TStructure.isGE_shift_iff, CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one, CochainComplex.mappingCone.mapTriangleIso",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary eventually constant colimits, individual complex cones, t-structures, or unrelated telescope syntax; no stabilization of general triangulated mapping-telescope legs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-semisimplicial-derived-realization",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Realization of a flat semisimplicial derived system. Supporting input: An eventually invertible sequence has stationary telescope legs.",
+   "via": [
+    "lem-sfb-flat-semisimplicial-derived-realization",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sequential-telescope-calculus",
+  "worker": "stage1",
+  "summary": "Read Stacks telescope and triangle exactness sources. Constructed a retraction of 1-successor by finite sums, proved the boundary zero, and constructed an inverse for the actual N-th telescope leg. Reused existing Hom exactness Mathlib leaves; no new nodes. Searched live Lean for attachment and Mathlib by two semantic phrasings, Loogle and grep. Statement unchanged.",
+  "blueprint": "Supporting input for the componentwise stationary-tower argument in lem-sfb-flat-semisimplicial-derived-realization, ultimately direct-image stability proof (3). Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) is respected; this is a general categorical prerequisite below the unit, not a replacement of its compactification route. Inherited blueprint.from.node is null as reported by blueprint_refs.py ancestor; retained that provenance and its existing detailed place/via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-f12b1d8b1",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-f12b1d8b1 (reviewer sub-agent of L); spot-checked: Read the item and the report in full. The statement is unchanged from base and from clones/live and clones/side-live (still unsplit there, no supersession). It matches Stacks derived.tex 090Z, 0CRH and 0CRJ (l.10146-10214) and the telescope of def-kun-truncations. It gives exactly what step 6 of the parent lem-sfb-flat-semisimplicial-derived-realization uses (u_r invertible for r>=m gives the leg lambda_m invertible). Step 1: I checked a_{i+1}u_i=a_i in the three cases i<N, i=N and i>N, and that aj=1 and af=0. l is a finite sum on each summand and uses inverses only of indices >=N. Step 2: I checked lf=1 and fl=1-ja on every coprojection by hand (i<N-1, N-1, N, >N), using U_{k,i+1}^{-1}u_i=U_{k,i}^{-1} and u_kU_{k,i}^{-1}=U_{k+1,i}^{-1}. Step 3: pf=0 and f[1]d=0 come from the zero-composite clause of lem-weil-pbc-hom-into-triangle-exact on the TR2 rotations; l[1]f[1]=1 then gives d=0. The phrase 'twice rotated first arrow' is harmless wording. Step 4: clauses (i) and (ii) of lem-weil-pbc-hom-out-of-triangle-exact, which I read in full, give b with bp=a, then 1-pjb=kd=0, so lambda_N is inverse to b, and lambda_r=lambda_N U_{N,r}^{-1}. Edge cases checked: N=0, a zero u_0 in the prefix, i=N, r=N, the constant identity sequence and the zero sequence. Every proof dep is a definition or a Mathlib leaf, so there is no route issue and no tool_uses. A DAG scan of hocolim/telescope statement nodes found no duplicate. A Mathlib grep found no hocolim/telescope declaration (0 hits), and IsEventuallyConstant covers only ordinary colimits, so this is not a leaf. No new nodes. blueprint.from.node=null is inherited from the base, not a fault of this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SequentialTelescopeCalculus",
+  "declaration": "CategoryTheory.sequentialTelescope_leg_isIso",
+  "file": "lean/Sheaf/CategoryTheory/SequentialTelescopeCalculus.lean",
+  "statement": "theorem sequentialTelescope_leg_isIso {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCountableCoproducts C] (E : ℕ → C) (u : ∀ r : ℕ, E r ⟶ E (r + 1)) (s : (∐ E) ⟶ (∐ E)) (hs : ∀ r : ℕ, Sigma.ι E r ≫ s = u r ≫ Sigma.ι E (r + 1)) (H : C) (p : (∐ E) ⟶ H) (d : H ⟶ (∐ E)⟦(1 : ℤ)⟧) (hT : Triangle.mk (𝟙 (∐ E) - s) p d ∈ distTriang C) (N : ℕ) (hu : ∀ r : ℕ, N ≤ r → IsIso (u r)) : ∀ r : ℕ, N ≤ r → IsIso (Sigma.ι E r ≫ p)",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7e0cf436",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Clause-by-clause check of sequentialTelescope_leg_isIso against the node: triangulated-category instances match def-weil-triangulated-category; HasCountableCoproducts; hs correctly translated to diagrammatic order (forces s = the Sigma.desc of IsSequentialHomotopyColimit); explicit H,p,d with hT covers every chosen triangle and its actual legs; hu only on the tail N≤r; conclusion IsIso (Sigma.ι E r ≫ p) for all r≥N including N. Node otherwise identical to side-live; lean.statement verbatim in file. Proof steps re-checked (lf=1, fl=1-ja, d=0, inverse of λ_N). Edge cases N=0, r=N, zero objects, non-invertible prefix covered. No duplicate in Mathlib/Sheaf/WeilConjectures. Gates: no definitions, sorry only, source and blueprint docstrings with the 4 proof steps, universes bound, report sections present. Not recompiled per instruction; no fixes."
+ }
+}

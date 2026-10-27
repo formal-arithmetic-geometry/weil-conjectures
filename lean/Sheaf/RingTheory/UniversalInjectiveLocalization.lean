@@ -57,6 +57,23 @@ theorem universally_injective_localizedModule_map
       Function.Injective ((f.restrictScalars R).lTensor L)) :
     ∀ (L : Type (max u v w x y)) [AddCommGroup L] [Module R L],
       Function.Injective (((LocalizedModule.map T f).restrictScalars R).lTensor L) := by
-  sorry
+  open TensorProduct in
+  intro L _ _
+  apply (lTensor_inj_iff_rTensor_inj L
+    ((LocalizedModule.map T f).restrictScalars R)).mpr
+  let g := AlgebraTensorModule.rTensor R L (LocalizedModule.mkLinearMap T M)
+  let g' := AlgebraTensorModule.rTensor R L (LocalizedModule.mkLinearMap T M')
+  have hinj : Function.Injective (AlgebraTensorModule.rTensor R L f) :=
+    (lTensor_inj_iff_rTensor_inj L (f.restrictScalars R)).mp (hf L)
+  have hmap : IsLocalizedModule.map T g g' (AlgebraTensorModule.rTensor R L f) =
+      AlgebraTensorModule.rTensor R L ((LocalizedModule.map T f).restrictScalars S) := by
+    apply IsLocalizedModule.linearMap_ext T g g'
+    rw [IsLocalizedModule.map_comp]
+    ext m l
+    simp [g, g']
+  have h := IsLocalizedModule.map_injective T g g'
+    (AlgebraTensorModule.rTensor R L f) hinj
+  rw [hmap] at h
+  exact h
 
 end LinearMap

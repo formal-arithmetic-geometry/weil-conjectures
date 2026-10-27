@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-fixed-tensor-kernel-stalk-criterion",
+ "kind": "statement",
+ "title": "Kernel and injectivity of a fixed tensor test at contracted primes",
+ "statement": "Let $\\varphi:R\\to A$ be a homomorphism of commutative rings, let $u:M\\to M'$ be an $A$-linear map, and fix an $R$-module $N$. Use localizations [def-weil-pbc-module-localization], spectra [def-weil-affine-spectrum], and tensor products [def-weil-pbc-module-tensor-product]. Put $T_N=u\\otimes_R1_N:M\\otimes_RN\\to M'\\otimes_RN$, with the $A$-actions on the first tensor factors, and let $K=\\{z\\in M\\otimes_RN:T_N(z)=0\\}$, an $A$-submodule. For each prime $\\mathfrak q$ of $A$ put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ and $T_{\\mathfrak q,N}=u_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}1_{N_{\\mathfrak p}}$, using the canonical $R_{\\mathfrak p}$-actions on $M_{\\mathfrak q}$ and $M'_{\\mathfrak q}$. The map induced by localizing the inclusion $K\\hookrightarrow M\\otimes_RN$ and then applying $c_{M,N}$ of [lem-trf-contracted-prime-tensor-comparison] is an $A_{\\mathfrak q}$-linear isomorphism\n$$K_{\\mathfrak q}\\xrightarrow{\\sim}\\ker(T_{\\mathfrak q,N}).$$\nMoreover, $T_N$ is injective if and only if $T_{\\mathfrak q,N}$ is injective for every prime $\\mathfrak q$ of $A$, and also if and only if $T_{\\mathfrak m,N}$ is injective for every maximal ideal $\\mathfrak m$ of $A$. No flatness, finite-generation, or finite-presentation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CL, lemma-universally-injective-check-stalks, proof: the localized kernel argument for (5) implies (1), and exact localization for (1) implies (4), with a fixed test module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-contracted-prime-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=M\\otimes_RN$, $Y=M'\\otimes_RN$, $T=T_N$, and let $i:K\\hookrightarrow X$ be the inclusion. Since $T$ is $A$-linear, $K$ is an $A$-submodule and $K\\xrightarrow{i}X\\xrightarrow{T}Y$ is exact. Apply [lem-weil-pbc-localization-module-exact] over $A$ at $A\\setminus\\mathfrak q$. The image of $i_{\\mathfrak q}$ is $\\ker T_{\\mathfrak q}$. It is injective: if $k/s$ maps to zero, the fraction criterion gives $t\\notin\\mathfrak q$ with $ti(k)=0$, hence $tk=0$ and $k/s=0$. Thus $i_{\\mathfrak q}$ identifies $K_{\\mathfrak q}$ with $\\ker T_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05CL (lemma-universally-injective-check-stalks), localized kernel argument, and 00CS (proposition-localization-exact)"
+   }
+  },
+  {
+   "text": "By [lem-trf-contracted-prime-tensor-comparison], $c_{M',N}T_{\\mathfrak q}=T_{\\mathfrak q,N}c_{M,N}$ and both $c$ maps are $A_{\\mathfrak q}$-linear isomorphisms. Consequently $c_{M,N}$ restricts to an isomorphism of kernels: $T_{\\mathfrak q}x=0$ implies $T_{\\mathfrak q,N}c_{M,N}x=0$; conversely, if $T_{\\mathfrak q,N}y=0$, set $x=c_{M,N}^{-1}y$, so $c_{M',N}T_{\\mathfrak q}x=0$ and $T_{\\mathfrak q}x=0$. Composing with step 1 gives exactly the asserted map from $K_{\\mathfrak q}$, including its normalization by the localized inclusion.",
+   "uses": [
+    "lem-trf-contracted-prime-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL (lemma-universally-injective-check-stalks), displayed tensor identities and their application to kernels"
+   }
+  },
+  {
+   "text": "If $T_N$ is injective, $K=0$, hence every $K_{\\mathfrak q}=0$ by the fraction construction. The kernel isomorphism in step 2 gives $\\ker T_{\\mathfrak q,N}=0$, so every $T_{\\mathfrak q,N}$ is injective. This includes maximal ideals, which are prime: if $ab\\in\\mathfrak m$ and $a\\notin\\mathfrak m$, write $1=r+ca$ with $r\\in\\mathfrak m$, giving $b=rb+cab\\in\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL (lemma-universally-injective-check-stalks), implication (1) to (4) for a fixed test module"
+   }
+  },
+  {
+   "text": "Conversely assume $T_{\\mathfrak m,N}$ injective for every maximal $\\mathfrak m$. Steps 1--2 give $K_{\\mathfrak m}=0$. If $0\\ne k\\in K$, its annihilator $I=\\{a\\in A:ak=0\\}$ is an ideal and is proper since $1k=k\\ne0$. By [lem-weil-pbc-proper-ideal-contained-in-maximal] choose a maximal $\\mathfrak m\\supseteq I$. Since $k/1=0$ in $K_{\\mathfrak m}$, [def-weil-pbc-module-localization] supplies $s\\notin\\mathfrak m$ with $sk=0$, contradicting $s\\in I\\subseteq\\mathfrak m$. Thus $K=0$ and $T_N$ is injective. The all-prime hypothesis implies the all-maximal one by step 3, completing both equivalences.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL (lemma-universally-injective-check-stalks), implication (5) to (1); Tag 00HN (lemma-characterize-zero-local), proof of (1), using Tag 00E0 (lemma-Zariski-topology)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-localization",
+  "lem-trf-contracted-prime-tensor-comparison",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CL (lemma-universally-injective-check-stalks), proof with N fixed; kernel identification by 00CS and the natural tensor comparison, and maximal-ideal detection expanded as in 00HN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "injective_of_localized|map_injective|lTensor.*injective|rTensor.*injective",
+   "results": "{\"t\": \"2026-10-22T06:41:46Z\", \"tool\": \"grep\", \"query\": \"injective_of_localized|map_injective|lTensor.*injective|rTensor.*injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LinearDisjoint.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\"], \"digest\": \"6cfbb7500a0f9bdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of a fixed tensor product linear map is detected by localizing both modules at algebra primes and the test module at contracted base primes",
+   "results": "{\"t\": \"2026-10-22T06:41:46Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity of a fixed tensor product linear map is detected by localizing both modules at algebra primes and the test module at contracted base primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"injective_of_isLocalized_maximal\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"IsTensorProduct.map_id_injective_of_flat_right\", \"LocalizedModule.map_injective\", \"IsLocalizedModule.injective_of_map_zero\", \"TensorProduct.map_injective_of_flat_flat\", \"injective_of_localized_maximal\", \"LinearMap.rTensor_injective_of_fg\"], \"digest\": \"55bef9ffeae63145\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective, LocalizedModule.map",
+   "results": "{\"t\": \"2026-10-22T06:41:46Z\", \"tool\": \"loogle\", \"query\": \"Function.Injective, LocalizedModule.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"LocalizedModule.map_injective\", \"IsLocalizedModule.map_injective_iff_localizedModuleMap_injective\", \"injective_of_localized_maximal\", \"injective_of_localized_span\"], \"digest\": \"6545dc9324ab62cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed base module N and an A-linear map u, injectivity of u tensor_R N is equivalent to injectivity of all maps u_q tensor over R_p N_p where p is contracted from q",
+   "results": "{\"t\": \"2026-10-22T06:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"For a fixed base module N and an A-linear map u, injectivity of u tensor_R N is equivalent to injectivity of all maps u_q tensor over R_p N_p where p is contracted from q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.lTensor_inj_iff_rTensor_inj\", \"LinearMap.rTensor_injective_of_fg\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"Submodule.injective_tensorToSpan\", \"Module.Invertible.rTensor_injective_iff\", \"Module.Invertible.lTensor_injective_iff\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"LinearMap.rTensor_injective_iff_subtype\"], \"digest\": \"58d8727cea9e21b7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ker|map_exact|injective_of_isLocalized_maximal",
+   "results": "{\"t\": \"2026-10-22T06:42:07Z\", \"tool\": \"grep\", \"query\": \"ker|map_exact|injective_of_isLocalized_maximal\", \"sub\": \"RingTheory/LocalProperties/Exactness.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"59\", \"74\", \"84\", \"87\", \"93\"], \"digest\": \"e009b2491ba7aace\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of u tensor_R N localized at a prime q of A equals the kernel of u_q tensor_{R_p} N_p, and vanishing at all maximal ideals detects injectivity for the fixed module N",
+   "results": "{\"t\": \"2026-10-22T06:42:18Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of u tensor_R N localized at a prime q of A equals the kernel of u_q tensor_{R_p} N_p, and vanishing at all maximal ideals detects injectivity for the fixed module N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ker_localizedMap_eq_localized'_ker\", \"LinearMap.localized'_ker_eq_ker_localizedMap\", \"LinearMap.tensorKerEquiv\", \"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"LinearMap.toKerLocalized_isLocalizedModule\", \"LinearMap.tensorKer\", \"LinearMap.kerLTensorEquivOfSurjective\", \"AlgHom.toKerIsLocalization_isLocalizedModule\"], \"digest\": \"730372bea8553eb4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "toKerLocalized_isLocalizedModule|ker_localizedMap_eq_localized|localized._ker",
+   "results": "{\"t\": \"2026-10-22T06:42:54Z\", \"tool\": \"grep\", \"query\": \"toKerLocalized_isLocalizedModule|ker_localizedMap_eq_localized|localized._ker\", \"sub\": \"Algebra/Module/LocalizedModule\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\"], \"digest\": \"0a8c565abc82ea4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.toKerLocalized_isLocalizedModule",
+   "results": "{\"t\": \"2026-10-22T06:42:55Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.toKerLocalized_isLocalizedModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.toKerLocalized_isLocalizedModule\"], \"digest\": \"e15c48754999ee46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: toKerLocalized_isLocalizedModule (Submodule.lean:360), the kernel equalities at :326-345, and injective_of_localized_maximal (Exactness.lean:103) concern ordinary localizations. They do not identify the kernel with the tensor map over the contracted base R_p with test N_p. Applying them needs the tensor comparisons and their naturality; the complete normalized statement is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "toKerLocalized_isLocalizedModule|injective_of_localized_maximal|ker_localizedMap_eq_localized",
+   "results": "{\"t\": \"2026-10-23T09:36:33Z\", \"tool\": \"grep\", \"query\": \"toKerLocalized_isLocalizedModule|injective_of_localized_maximal|ker_localizedMap_eq_localized\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Submodule.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\"], \"digest\": \"3962f3723ed15d3d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete statement: ordinary localization kernels and injective_of_localized_maximal do not supply the contracted-base tensor comparison with its normalization. That requires lem-trf-contracted-prime-tensor-comparison and the kernel restriction in proof step 2. Flatness and invertibility hits have extra hypotheses absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of a fixed tensor product map is detected at primes of an algebra and contracted primes of the base ring",
+   "results": "{\"t\": \"2026-10-23T09:36:34Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity of a fixed tensor product map is detected at primes of an algebra and contracted primes of the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"TensorProduct.map_injective_of_flat_flat'\", \"Module.FaithfullyFlat.injective_of_tensorProduct\", \"Algebra.TensorProduct.includeLeft_injective\", \"TensorProduct.map_injective_of_flat_flat_of_isDomain\", \"TensorProduct.map_injective_of_flat_flat\", \"Module.Invertible.rTensor_injective_iff\"], \"digest\": \"0bfae934a306547c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete statement: ordinary localization kernels and injective_of_localized_maximal do not supply the contracted-base tensor comparison with its normalization. That requires lem-trf-contracted-prime-tensor-comparison and the kernel restriction in proof step 2. Flatness and invertibility hits have extra hypotheses absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.toKerLocalized_isLocalizedModule",
+   "results": "{\"t\": \"2026-10-23T09:36:34Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.toKerLocalized_isLocalizedModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.toKerLocalized_isLocalizedModule\"], \"digest\": \"e15c48754999ee46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete statement: ordinary localization kernels and injective_of_localized_maximal do not supply the contracted-base tensor comparison with its normalization. That requires lem-trf-contracted-prime-tensor-comparison and the kernel restriction in proof step 2. Flatness and invertibility hits have extra hypotheses absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a tensor map localized at an algebra prime is the kernel of the tensor of localized maps over the contracted base prime",
+   "results": "{\"t\": \"2026-10-23T09:36:44Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of a tensor map localized at an algebra prime is the kernel of the tensor of localized maps over the contracted base prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"AlgHom.toKerIsLocalization_isLocalizedModule\", \"Algebra.TensorProduct.rTensor_ker\", \"Algebra.TensorProduct.lTensor_ker\", \"AlgHom.toKerIsLocalization_apply\", \"Algebra.Generators.comp_localizationAway_ker\", \"Algebra.TensorProduct.map_ker\", \"AlgHom.toKerIsLocalization\"], \"digest\": \"916799f7021d1746\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete statement: ordinary localization kernels and injective_of_localized_maximal do not supply the contracted-base tensor comparison with its normalization. That requires lem-trf-contracted-prime-tensor-comparison and the kernel restriction in proof step 2. Flatness and invertibility hits have extra hypotheses absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of u tensor_R N is equivalent to injectivity of u_q tensor_{R_p} N_p for every maximal ideal q of A, where p is its inverse image",
+   "results": "{\"t\": \"2026-10-23T09:37:35Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of u tensor_R N is equivalent to injectivity of u_q tensor_{R_p} N_p for every maximal ideal q of A, where p is its inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.injective_tensorToSpan\", \"injective_of_localized_maximal\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Module.Flat.iff_rTensor_injective'\"], \"digest\": \"c04d18f9cca4b06d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete statement: ordinary localization kernels and injective_of_localized_maximal do not supply the contracted-base tensor comparison with its normalization. That requires lem-trf-contracted-prime-tensor-comparison and the kernel restriction in proof step 2. Flatness and invertibility hits have extra hypotheses absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-universal-injective-check-stalks",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL. Supporting Stacks Tag 05CL: the localized kernel argument for (5) implies (1), and exact localization for (1) implies (4), with a fixed test module",
+   "via": [
+    "lem-trf-universal-injective-check-stalks",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fixed-tensor-kernel-stalk-criterion",
+  "worker": "stage1",
+  "group": "Q99",
+  "summary": "Preserved the statement; four steps prove localization of the kernel, its normalized tensor comparison, and prime/maximal injectivity criteria. Reused exact localization and maximal-ideal existence Mathlib leaves; no new nodes. Checked source, citations, no flatness or finiteness hypotheses, and zero-ring/nonflat cases.",
+  "blueprint": "Supports the inherited semistable-alteration/flatification dependency chain under lem-trf-local-term-locality, by making precise the fixed-N kernel argument of Stacks 05CL. The latest blueprint ancestor proof itself states the contracting-correspondence theorem and does not explicitly mention this lower commutative-algebra support; no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-bc5eb250e",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-bc5eb250e (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full. The delivery adds no new nodes, and the statement and stmt_deps are byte-identical to live and side-live, where the item is still unsplit (no parallel supersession). There is no re-split note for this item. Source: I read Stacks algebra.tex Tag 05CL (lemma-universally-injective-check-stalks) proof; it fixes N, uses the identities (M⊗N)_q=M_q⊗_R N=M_q⊗_{R_p}N_p and exact localization, then argues (5)⇒(1) through 00HN and (1)⇒(4); the item is exactly that fixed-N argument. Tags 05CL, 00CS, 00HN and 00E0 are verified in tags/tags. Step 1: 00CS leaf over A at A∖q, plus an explicit fraction-criterion proof that K_q→X_q is injective; correct. Step 2: the literal naturality equation of lem-trf-contracted-prime-tensor-comparison with P=M, P'=M', v=u; both kernel directions are written out, and the map is normalized as in the statement. Step 3: K=0⇒K_q=0, with an elementary proof that maximal ideals are prime. Step 4: the inline 00HN annihilator argument, citing lem-weil-pbc-proper-ideal-contained-in-maximal for an arbitrary proper ideal; elementary, and the 00E0 tag is carried by that node. proof_deps equal the union of the step uses, there are no doubled backslashes, no SGA, and no tool_uses are needed (other-unit nodes are Mathlib leaves and definitions). Duplicate scan: no node states a module version of 00HN or injectivity at maximal localizations (the bijective-at-maximal and ring-only nodes do not apply), and the only citer is the parent universal-injective node, which is strictly larger. Small cases: A=0; R=A=ℤ, u=2, N=ℤ/2, failing at (2) and vacuous at odd primes; ℤ→ℚ at q=0. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FixedTensorKernelStalkCriterion",
+  "declaration": "LocalizedModule.fixedTensor_kernel_stalk_criterion",
+  "declarations": [
+   "LocalizedModule.ContractedPrimeTensorTestInjective",
+   "LocalizedModule.ContractedPrimeTensorKernelComparison",
+   "LocalizedModule.fixedTensor_kernel_stalk_criterion"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FixedTensorKernelStalkCriterion.lean",
+  "statement": "theorem fixedTensor_kernel_stalk_criterion (R : Type u) (A : Type v) (M : Type w) (M' : Type x) (N : Type y) [CommRing R] [CommRing A] [Algebra R A] [AddCommGroup M] [AddCommGroup M'] [AddCommGroup N] [Module A M] [Module A M'] [Module R M] [Module R M'] [Module R N] [IsScalarTower R A M] [IsScalarTower R A M'] (f : M →ₗ[A] M') : (∀ q : PrimeSpectrum A, ContractedPrimeTensorKernelComparison R A M M' N f q) ∧ (Function.Injective (TensorProduct.AlgebraTensorModule.rTensor R N f) ↔ ∀ q : PrimeSpectrum A, ContractedPrimeTensorTestInjective R A M M' N f q) ∧ (Function.Injective (TensorProduct.AlgebraTensorModule.rTensor R N f) ↔ ∀ q : PrimeSpectrum A, q.asIdeal.IsMaximal → ContractedPrimeTensorTestInjective R A M M' N f q)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two public proposition abbreviations expand the actual localized tensor maps with canonical scalar structures; the theorem has no let binders. The kernel comparison uses the alpha and beta from contractedPrime_tensor_comparison, determined uniquely by that dependency’s pure-fraction formulas, and normalizes the kernel isomorphism by equality after its subtype inclusion. Prime and maximal injectivity criteria are separate equivalences. No statement changes, new nodes, or dependency repairs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8399ed563",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read the item node, the Stacks 05CL fixed-N argument, the delivered module FixedTensorKernelStalkCriterion.lean and the dependency ContractedPrimeTensorComparison.lean. All clauses match: T_N = AlgebraTensorModule.rTensor R N f; p = comap of q; canonical R_p-actions via localRingHom/compHom, the same as the dependency; the kernel equivalence is pinned by (e z).val = β(α(map T.ker.subtype z)); α and β are chosen from the cited comparison theorem in the right binder order and are uniquely determined by its pure-fraction formulas; separate injectivity criteria over all primes and over all maximal ideals. No extra hypotheses; five independent universes. Edge cases: A=0, M=0 or N=0, f=0, Z with u=2 and N=Z/2, maximal ideal with non-maximal contraction. lean.statement is verbatim in the file; only the lean record changed; no name clash with the UniversalInjectiveCheckStalks sibling; docstrings give source, blueprint id and the 4 proof steps; sorry only; Worker report and Second reading by Q82 sections present. No findings; not recompiled since nothing changed."
+ }
+}

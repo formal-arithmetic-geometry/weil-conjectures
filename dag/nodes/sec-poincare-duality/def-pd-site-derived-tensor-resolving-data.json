@@ -1,0 +1,191 @@
+{
+ "id": "def-pd-site-derived-tensor-resolving-data",
+ "kind": "definition",
+ "title": "Site derived tensor resolving data and canonical localization counit",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(C,J)$ be a ringed site [def-weil-pbc-sites-and-cohomology], with object, morphism and coefficient universes independent and $C$ essentially small relative to the coefficient universe [def-weil-size-convention], and let $R$ be its commutative ring sheaf. Write $\\mathcal M=\\operatorname{Mod}(C,J,R)$ [def-weil-sheaf-of-modules-category], $\\operatorname{Ch}(\\mathcal M)$ for unbounded integer cochain complexes, $K(\\mathcal M)$ for their homotopy category, $D(\\mathcal M)$ for a chosen-universe derived localization, $q:\\operatorname{Ch}(\\mathcal M)\\to K(\\mathcal M)$ and $Q_h:K(\\mathcal M)\\to D(\\mathcal M)$, with $Q=qQ_h$ and its fixed quotient comparison [def-weil-abstract-derived-category]. Use the canonical monoidal sheaf tensor [def-pur-sheaf-tensor-product] and its signed direct-sum total tensor $\\operatorname{Tot}$ [def-sfb-monoidal-category]. Use the derived tensor $B_R$ of the published descent witness of [lem-weil-pbc-site-derived-tensor-descent], and let the resolving-pair model map $r_{P,S}:Q\\operatorname{Tot}(P,S)\\xrightarrow{\\sim}B_R(QP,QS)$, for flat-term K-flat complexes $P,S$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], be exactly the recorded representative comparison $\\operatorname{tensorDescentPair}(P,S)$ [def-weil-pbc-tensor-descent-representative-comparison]: the inverse quotient comparison, the inverse chain/homotopy comparison, the resolving comparison of that same witness, and the quotient comparisons on both inputs. No new tensor, resolution or comparison is chosen. The canonical localization transformation $\\varepsilon^R:(Q\\times Q)B_R\\Rightarrow\\operatorname{Tot}Q$ is the unique natural transformation satisfying $\\varepsilon^R_{P,S}=r_{P,S}^{-1}$ on every flat-term K-flat pair. Thus its existence and uniqueness are part of this specification, and its value is defined by this unique characterization on all complex pairs, with no flatness or boundedness restriction on the latter.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-monoidal-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-tensor-descent-representative-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution) and 06YU (construction preceding and surrounding definition-derived-tor); canonical resolution transformation determined by inverse resolving-pair maps."
+ },
+ "proof": [
+  {
+   "text": "Identify model with KFlatFixedTensor.representativeIso. Both use the same selected homotopy and resolving comparisons. The only additional factors in tensorDescentPair are the quotient-to-derived comparison maps; these are identities, so functoriality and the identity laws remove them.",
+   "uses": [
+    "def-weil-pbc-tensor-descent-representative-comparison",
+    "def-sf-ringed-kflat-tensor-representative-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reuse the already proved total_comparison from the proof of lem-sf-ringed-kflat-single-tensor-comparison: its components on all complex pairs are normalized by representativeIso.inv on flat-term K-flat pairs. Use those same components for the desired natural transformation. The old naturality equation becomes the specified one by functoriality of the published bifunctor and by tensorHom_def for the ordinary tensor. The preceding model identification gives the required normalization.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary pair X,Y, use the functorial flat-term K-flat resolution F and augmentation π already constructed in the same comparison module. The source functor sends (π_X,π_Y) to an isomorphism because both augmentations are quasi-isomorphisms. Naturality of any two normalized transformations along this map expresses their components at X,Y through their components at F(X),F(Y). Those components equal the prescribed inverse model map. Cancel the invertible source map and apply natural-transformation extensionality. Thus the transformation is unique, without any flatness or boundedness condition on X,Y.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tensor-descent-representative-comparison",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q7",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/Sheaf/Algebra/Homology/RingedKFlatSingleTensorComparison.lean",
+  "place": "Tags 06YS and 06YU; reuse the proved total_comparison and functorial_resolution, identify the recorded model maps, and prove uniqueness by naturality and cancellation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "resolvingComparison|chainComparison|counit_existsUnique|siteDerivedTensor",
+   "results": "{\"t\": \"2026-10-24T17:52:31Z\", \"tool\": \"grep\", \"query\": \"resolvingComparison|chainComparison|counit_existsUnique|siteDerivedTensor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of the resolving-pair presentation or this site counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived tensor localization transformation of sheaves of modules is uniquely determined by its inverse comparison on flat term K-flat resolving pairs",
+   "results": "{\"t\": \"2026-10-24T17:52:31Z\", \"tool\": \"leansearch\", \"query\": \"The canonical derived tensor localization transformation of sheaves of modules is uniquely determined by its inverse comparison on flat term K-flat resolving pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac\", \"CategoryTheory.Adjunction.derived\", \"HasDerivedCategory.standard\", \"Module.Flat.localizedModule\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"61ecfa0f40c77d05\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: generic derived-functor uniqueness and module localization do not fix the site tensor representative and all-complex counit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolving pair comparison and uniquely characterized canonical derived tensor to ordinary tensor transformation for sheaves of modules on a site",
+   "results": "{\"t\": \"2026-10-24T17:52:32Z\", \"tool\": \"leanfinder\", \"query\": \"Resolving pair comparison and uniquely characterized canonical derived tensor to ordinary tensor transformation for sheaves of modules on a site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_δ\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.sheafToPresheaf_μ\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj\", \"CategoryTheory.Sheaf.symmetricCategory\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"62072d65bd75685e\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary sheaf tensor structures and tensorators do not define this resolving presentation or its all-complex counit."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"\\b(resolvingComparison|chainComparison)\\b|counit_existsUnique|SiteDerivedTensorResolvingData\" lean/WeilConjectures lean/Sheaf/Algebra/Homology/FixedTensorLocalizationComparison.lean",
+   "results": "No upstream match. Sheaf/Algebra/Homology/FixedTensorLocalizationComparison.lean:92,101 exposes chainComparison and resolvingComparison as projections of site_derived_tensor_descent_independentCoefficients. Its theorem conclusion is not needed. No published counit_existsUnique or SiteDerivedTensorResolvingData. The maintainer return explicitly requires these data in an owning definition module, not a dependency on the theorem.",
+   "date": "2026-10-24",
+   "verdict": "Extract the same published projections into the requested definition interface; no new choice of tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"resolvingComparison|chainComparison|counit_existsUnique|SiteDerivedTensorResolvingData\" lean/WeilConjectures lean/Sheaf dag/lean_names_upstream.json",
+   "results": "Related private chain comparisons in projection-tensor and fixed-tensor proofs, resolvingComparison fields in KFlatFixedTensorTriangulated, and ordinary oplax comparisons; only FixedTensorLocalizationComparison exposes these exact descent projections. No existing all-complex uniquely characterized site counit.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate complete notion."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"resolving tensor\"; rg -l \"resolving.pair data|site-derived-tensor-resolving-data|unique.*all.complex.*resolution\" dag/nodes",
+   "results": "0 blueprint nodes match 'resolving tensor'. Three incidental node proof matches: lem-weil-pbc-tower-derived-evaluation-normalization, lem-sfb-lattice-sectionwise-action-bridge, lem-sfb-cyclic-row-derived-comparison; none is a definition of site tensor resolving data or its counit.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns the required interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-conjugate-tensor-localization-counit",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical resolving-pair model maps and all-complex localization transformation used by the conjugate tensor counit comparison, original section K-flat tensor comparison Steps 3–4. Definition ownership required by returned delivery H2.",
+   "via": [
+    "lem-pd-conjugate-tensor-localization-counit",
+    "lem-pd-section-kflat-tensor-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SiteDerivedTensorResolvingData",
+  "declaration": "SheafOfModules.SiteDerivedTensorResolvingData.counit",
+  "declarations": [
+   "SheafOfModules.SiteDerivedTensorResolvingData.Modules",
+   "SheafOfModules.SiteDerivedTensorResolvingData.Complexes",
+   "SheafOfModules.SiteDerivedTensorResolvingData.sheafCompose",
+   "SheafOfModules.SiteDerivedTensorResolvingData.moduleAbelian",
+   "SheafOfModules.SiteDerivedTensorResolvingData.moduleMonoidal",
+   "SheafOfModules.SiteDerivedTensorResolvingData.moduleAdditive",
+   "SheafOfModules.SiteDerivedTensorResolvingData.moduleSymmetric",
+   "SheafOfModules.SiteDerivedTensorResolvingData.moduleColimits",
+   "SheafOfModules.SiteDerivedTensorResolvingData.complexMonoidal",
+   "SheafOfModules.SiteDerivedTensorResolvingData.complexMonoidalStruct",
+   "SheafOfModules.SiteDerivedTensorResolvingData.model",
+   "SheafOfModules.SiteDerivedTensorResolvingData.counit_existsUnique",
+   "SheafOfModules.SiteDerivedTensorResolvingData.counit"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SiteDerivedTensorResolvingData.lean",
+  "statement": "def counit : ((DerivedCategory.Q (C := Modules R)).prod DerivedCategory.Q) ⋙ siteDerivedTensorIndependentCoefficients J R ⟶ tensor (Complexes R) ⋙ DerivedCategory.Q",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer FIX (H4): the resolving-pair model map reuses the landed CategoryTheory.tensorDescentPair (def-weil-pbc-tensor-descent-representative-comparison), the same composite of the same descent-witness projections; the duplicated witness projections (resolving, tensorK, chainComparison, resolvingComparison, resolvingObject) and unused notational abbrevs are removed. New content: counit_existsUnique and counit.",
+  "fixed_by": "NT-stage2-cc-f25471123"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f25471123",
+  "group": "Q22",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f25471123",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Re-delivery after the d3e7 H2 RETURN: the item no longer cites the theorem node; its module is unchanged except for the import, open and moved declarations, and the maths was re-checked against the node (hypotheses, kappa/t/epsA/theta0/B_c, imageCounit order, Normalized formula, exists-unique theta, theta0>>v=theta, all-pair counit equation with no premise on U,V). H4: the new def node def-pd-site-derived-tensor-resolving-data re-declared the resolving-pair model map and the descent-witness projections (model/resolving/chainComparison/resolvingComparison/resolvingObject). These duplicate the landed def-weil-pbc-tensor-descent-representative-comparison (CategoryTheory.tensorDescentPair: same composite, same witness projections; landed 2026-10-21, on base). The parent lem-pd-section-kflat-tensor-comparison already uses tensorDescentPair. FIX: fixes/SiteDerivedTensorResolvingData.lean makes model an abbrev of tensorDescentPair, imports Sheaf.Paper.SiteDerivedTensorRestriction and drops the duplicates. fixes/def-pd-site-derived-tensor-resolving-data.json adds that stmt_dep, rewrites the TeX for r and prunes lean.declarations. counit_existsUnique/counit (exists-unique-pinned all-pair epsilon^R) are kept as the genuinely new content. nt_compile --json of the fixed module plus the delivered item module: clean, 8.4 s and 13.5 s at load ~60."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T002526-L-3124096",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

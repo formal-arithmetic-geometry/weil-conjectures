@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-space-perfect-tensor-test",
+ "kind": "definition",
+ "title": "The scalar-valued tensor-test functor on an algebraic space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work in the universes of [def-weil-size-convention]. Let $A$ be a commutative ring, let $Y$ be an $S$-scheme with a specified isomorphism $e:Y\\simeq\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-trf-scheme-algebraic-space]. Use the unbounded module derived category on the equivalent small ringed model and its full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, with the normalized derived tensor product, from [def-sfb-space-derived-module-calculus]. For any $E\\in D(\\mathcal O_X)$, define the tensor-test functor\n$$T_E:D_{\\mathrm{QCoh}}(\\mathcal O_X)\\longrightarrow D(A),\\qquad K\\longmapsto R\\Gamma_{X,A}(K\\otimes^{\\mathbf L}_{\\mathcal O_X}E).$$\nHere $R\\Gamma_{X,A}$ is the canonical $A$-valued right derived sections functor with the action induced by $X\\to Y\\simeq\\operatorname{Spec}A$ [def-sfb-space-affine-global-sections]. On a morphism $a:K\\to L$, the functor applies derived sections to $a\\otimes^{\\mathbf L}\\operatorname{id}_E$. This definition is valid for every $E$; for perfect $E$ [def-weil-pbc-strict-perfect-coefficient-package] it is the perfect tensor test used in Stacks Tag 0CX6. No quasi-compactness, quasi-separatedness or preservation-of-products assertion is part of this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6, lemma-compute-against-perfect (1), the expression RΓ(X,K tensor^L E) and the perfect-test functor in its proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebraic space derived global sections tensor test functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.Γ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : Sheaf J A ⥤ A\", \"doc\": \"The global sections functor, which is the left adjoint to the constant sheaf functor, assigning to each sheaf its global sections.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace\", \"type\": \": (PresheafedSpace C)ᵒᵖ ⥤ C\", \"doc\": \"The functor $\\\\Gamma$ assigns to each presheafed space over a category $\\\\mathcal{C}$ its global sections (the value of its presheaf at the terminal open set), and to each morphism of presheafed spaces \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": LocallyRingedSpace.{u}ᵒᵖ ⥤ CommRingCat.{u}\", \"doc\": \"The functor $\\\\Gamma$ that maps each locally ringed space to its global sections (the value of its structure sheaf at the terminal object) in the category of commutative rings, constructed as the compo\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \": (SheafedSpace C)ᵒᵖ ⥤ C\", \"doc\": \"The functor $\\\\Gamma$ that maps each sheafed space over a category $\\\\mathcal{C}$ to its global sections (the value of its sheaf at the terminal object) in $\\\\mathcal{C}$, constructed as the composition \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Schemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition of the opposi\"}\n  {\"name\": \"SheafOfModules.sectionsFunctor_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) (M : SheafOfModules R), (SheafOfModules.sectionsFunctor R).obj M = M.sections\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections functor from the category of sheaves of modules over $R$ to the category of types \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ = Scheme.forgetToLocallyRingedSpace.op ⋙ LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": AffineSchemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The contravariant functor that maps each affine scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the comp\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the existing project definition perfectTensorTest."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor product followed by derived global sections algebraic space over affine base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) →\\n        AlgebraicGeometry.Spec T.tensor ⟶ CategoryTheory.Limits.pullback f g\", \"doc\": \"The morphism from the spectrum of the pushout ring $ T.tensor $ to the pullback scheme of morphisms $ f: X \\to S $ and $ g: Y \\to S $, constructed by lifting the compositions of $ \\\\operatorname{Spec}(T.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.SpecOfPoint\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (t : ↥(CategoryTheory.Limits.pullback f g)) →\\n        ↥(AlgebraicGeometry.Spec (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).tensor)\", \"doc\": \"Given morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes and a point $t$ in their fiber product $X \\\\times_S Y$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\kappa(t))$ where $\\\\kappa(t)$ i\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {S X : AlgebraicGeometry.Scheme} →\\n    (X ⟶ S) → (n → ↑(X.presheaf.obj (Opposite.op ⊤))) → (X ⟶ AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"Given a morphism $ f : X \\\\to S $ and a vector $ v $ consisting of global sections of the structure sheaf of $ X $, this function constructs the corresponding morphism from $ X $ to the affine space $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).map f = AlgebraicGeometry.AffineSpace.map (Opposite.unop n) f\", \"doc\": \"For any morphism $f: X \\\\to Y$ of schemes and type $n$ in the opposite category of types, the action of the affine space functor on $f$ is given by the base change morphism $\\\\mathbb{A}^{\\\\text{unop}(n)}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint ((CategoryTheory.ConcreteCategory.hom T.SpecTensorTo.base) p) = T\", \"doc\": \"For a pullback triplet $ T $ in the category of schemes and a point $ p $ in the spectrum of $ T.tensor $, applying the $ ofPoint $ function to the morphism $ T.SpecTensorTo(p) $ yields the original t\"}\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceMap\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"{R S : CommRingCat} → (R ⟶ S) → (AlgebraicGeometry.Spec.sheafedSpaceObj S ⟶ AlgebraicGeometry.Spec.sheafedSpaceObj R)\", \"doc\": \"For commutative rings $R$ and $S$ and a ring homomorphism $f : R \\to S$, this constructs the morphism of sheafed spaces from $\\\\operatorname{Spec}(S)$ to $\\\\operatorname{Spec}(R)$. It consists of the con\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t))\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).SpecTensorTo =\\n \", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes and any point $t$ in the fiber product $X \\\\times_S Y$, the composition of the morphism $\\\\operatorname{Spec}$ induced by the tensor product \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the existing project definition perfectTensorTest."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectTensorTest|affineDerivedSections|DerivedQCoh",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the existing project definition perfectTensorTest."
+  },
+  {
+   "tool": "rg",
+   "query": "perfectTensorTest in dag/nodes lean/WeilConjectures lean/Sheaf",
+   "results": "Only lem-sfb-space-perfect-tensor-test-holim records the declaration, as a helper alongside its theorem. No definition node owns it. The only source definition is lean/Sheaf/AlgebraicGeometry/SpacePerfectTensorTestHolim.lean:37; no upstream occurrence.",
+   "date": "2026-10-24",
+   "verdict": "Existing exact project definition, to be attached without creating another declaration."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "tensor test",
+   "results": "0 blueprint nodes match 'tensor test'",
+   "date": "2026-10-24",
+   "verdict": "No duplicate blueprint definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-perfect-tests",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family effectivity prerequisite: spaces-flat.tex Tag 0CX7, proof invoking Tag 0CX6 (lemma-compute-against-perfect), tensor-test clause (1). Definition of the scalar-valued tensor test in Tag 0CX6(1), used in the conclusion and proof step 4 of lem-sfb-space-inverse-module-perfect-tests.",
+   "via": [
+    "lem-sfb-space-inverse-module-perfect-tests",
+    "lem-sfb-space-inverse-module-polynomial-model",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectTensorTestHolim",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfectTensorTest",
+  "statement": "def perfectTensorTest {S : Scheme.{u}} (A : Type u) [CommRing A]\n    (Y : Over S) (e : Y.left ≅ Spec (.of A))\n    (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y)\n    [HasDerivedCategory.{w} X.SmallModules] (E : X.DerivedModules) :\n    X.DerivedQCoh ⥤ DerivedCategory (ModuleCat.{u} A)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition owner requested by the immutable-head stage-2 review of 401e1dff652b (H2/H12). Reuses the existing plain definition at SpacePerfectTensorTestHolim.lean:37 without redeclaring it; no products/holim theorem conclusion is used to define the functor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4687dec4f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4687dec4f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery of returned 401e1dff652b: Lean module byte-identical to the one already found mathematically correct; item diff vs live only adds stmt_deps def-sfb-space-perfect-tensor-test (new), def-sfb-space-derived-module-calculus, def-weil-derived-limit and the lean record; statement, proof and proof_deps unchanged. The previous H2/H12 finding (theorem node lem-sfb-space-perfect-tensor-test-holim in stmt_deps) is repaired. New node def-sfb-space-perfect-tensor-test attaches the existing perfectTensorTest (SpacePerfectTensorTestHolim.lean:37-44) as existing:true; the signature matches verbatim and the node statement (T_E(K)=RGamma_{X,A}(K tensor^L E) on D_QCoh) matches the body. Not hollow, not a duplicate, and all its stmt_deps landed by 2026-10-23. Re-checked IsDerivedLimitTriangle (Triangle.mk p (1-shift) delta distinguished) and IsPerfectRingComplex (bounded finite projective complex up to iso). hq/HasProduct are exactly the certificates proved by the cited derived-limit theorem, which the node text cites for K. Universes u, w free; edge cases (zero ring, empty X, E=0) covered. Docstrings, source places and the 5 proof steps are present, and the report has the Worker report and Second reading sections. Advisory: the existing decl's docstring still tags the holim node. No file changed, so no compile."
+ }
+}

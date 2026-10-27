@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-integral-finite-extension-invertibility",
+ "kind": "statement",
+ "title": "Invertibility of the finite-free integral scalar comparisons",
+ "statement": "Fix D,l,E⊂L,X and coherent dualizing data wE,wL as in [def-sf-integral-finite-extension-core]. For any normalized tensor-Hom presentations a,b [def-sf-integral-hom-reduction-models], the strict completed integral scalar functor T [def-weil-integral-scalar-extension] admits a shift structure making it triangulated, its prescribed u is invertible, and its evaluation-defined comparison v(K,M) is invertible for all integral bounded constructible K,M. This asserts no reduction, biduality or coefficient coherence equations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 1-5: triangulation, finite dualizing equivalence, and finite-basis Hom calculation."
+ },
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "On K-flat representatives strict scalar extension is the Roos total limit of quotient tensors. The exact product and additive total-cone construction preserves signed triangles and shifts; localization gives triangulation.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-free counit comparisons are invertible at cofinal ramification-multiple exponents. Tensor down using finite dualizing quotient change to get invertible maps at every exponent. Coherence makes an equivalence of normalized towers. Its total limit is invertible and has the prescribed reductions; u_existsUnique identifies it with u.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-coef-finite-dualizing",
+    "lem-coef-normalized-dvr-effectivity",
+    "def-sf-integral-finite-extension-core",
+    "lem-sf-integral-finite-dualizing-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After forgetting coefficients, choose a finite free basis. The source and target Hom comparisons are finite sums of RHom(K,M). Exact scalar extension makes restriction preserve K-injectives, so the finite sum calculation applies to the Hom complexes. The evaluation transpose is the identity on each basis component. Restriction detects quasi-isomorphisms, and conjugating by completion gives invertible v. This tests maps with a basis without defining them using it.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-sf-integral-finite-extension-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-finite-extension-models",
+  "lem-coef-finite-dualizing",
+  "lem-coef-finite-free-extension",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-integral-finite-dualizing-coherence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 1-5: triangulation, finite dualizing equivalence, and finite-basis Hom calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of derived sheaves commutes with internal Hom, evaluation, identity and composition",
+   "results": "8 results: ModuleCat.extendScalarsComp, ordinary extension/restriction adjunction, free sheaves, pullback free generators. None states completed derived sheaf Hom, signed biduality or finite dualizing comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\", \"hom\"",
+   "results": "3 PresheafOfModulesOfCommRing tensorHom declarations; these give tensor on ordinary morphisms, not derived Hom scalar compatibility. LeanFinder additionally returned light condensed internal-Hom section formulas, not the completed coefficient theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|Verdier|dualizing",
+   "results": "msearch: generic triangulated/Verdier references only; no completed coefficient comparison. Project rg finds the existing Models, scalar Hom comparison, finite coefficient calculus and signedCalculus. They supply ingredients but not these three completed comparison conclusions. Blueprint search for finite extension internal Hom found no separate node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 1-5: triangulation, finite dualizing equivalence, and finite-basis Hom calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionInvertibility",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionInvertibility.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.comparison_invertibility",
+  "statement": "theorem comparison_invertibility (a : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X)) (b : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)) : (∃ (_ : (integralScalarExtensionOfUniverses l E L ι X).CommShift ℤ), (integralScalarExtensionOfUniverses l E L ι X).IsTriangulated) ∧ IsIso (u l E L ι X D hl wE wL) ∧ (∀ K M : sfIntegralConstructibleCategory l E X, IsIso (v l E L ι X a b K.obj M.obj K.property.1 M.property.1))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-integral-finite-extension + 3 new sorried lemmas and Core relocation against clone (diffed verbatim), TensorPresentation/ReductionPresentation/SignedSymmetry fields and signedCalculus conjuncts"
+ }
+}

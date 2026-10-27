@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-affine-raw-evaluation-pullback",
+ "kind": "statement",
+ "title": "Raw evaluation and structural etale chart pullback before ordinary comparison",
+ "statement": "Let f:X→S be any scheme morphism, G a quasi-coherent module, V,V′ etale over S, and h:V′→V. Let b:V′×_S X→V×_S X be the induced map, F and F′ the tensor pullbacks of G [def-weil-pbc-coherent-higher-image-classes], and psi:b*F→F′ tensor composition followed by b.w. Suppose theta:L(F_et)→b_*L(F′_et) sends each lifted tensor section to qcoherentPullbackSection for psi [lem-weil-pbc-qcoherent-pullback-sections-map]. For any q and raw class z, affineRealizationRawEvaluation of the raw restriction of z equals cohomologyMap along b of the evaluation of z, followed by H.map of the inverse-image adjoint of theta. This asserts the raw-to-Ext square only: no ordinary module cohomology or normalized coherent comparison [def-weil-pbc-affine-cohomology-comparison-data], and no affine, quasi-compactness or separatedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/descent.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 01FT, section-cohomology-sheaves; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 03DR, section-quasi-coherent-sheaves, equation-quasi-coherent-presheaf; Tag 03Q8, lemma-higher-direct-images. Agent expansion of the fixed Ext/derived evaluation naturality and tensor coefficient transport used in the parent proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-higher-image-classes",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "def-weil-pbc-etale-cohomology-presentation",
+  "def-weil-pbc-coherent-etale-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Use the presheaf isomorphism and prescribed restriction equation in rawRestrictedClassNormalization. Its naturality, rewritten using the stated component and restriction equations, gives raw-comparison chart naturality. Evaluate this bundled equality at z. No new naturality declaration is introduced.",
+   "uses": [
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the raw naturality equation by the inverse fixed evaluation. The statement sheafHDerivedEquiv_symm_restriction identifies its right side with H.map of the inverse-image composition coefficient map after cohomologyMap.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology-presentation",
+    "lem-weil-pbc-sheaf-h-derived-pullback",
+    "def-weil-pbc-raw-restricted-normalization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use coherentEtaleRestrictionIso_composition with htheta. The existing unit_coherent_raw_evaluation_formula equation exposes its coefficient isomorphism. Apply the class equality and H.map_comp_apply and cohomologyMap_map; these compose H.map and coefficient naturality to give the original conclusion.",
+   "uses": [
+    "lem-weil-pbc-coherent-etale-restriction-composition",
+    "def-weil-pbc-coherent-higher-image-classes",
+    "new-unit-coherent-raw-evaluation-formula-aux"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-raw-restricted-class-normalization",
+  "def-weil-pbc-etale-cohomology-presentation",
+  "lem-weil-pbc-sheaf-h-derived-pullback",
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "lem-weil-pbc-coherent-etale-restriction-composition",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "new-unit-coherent-raw-evaluation-formula-aux"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/descent.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Assembly from the existing rawRestrictedClassNormalization presheaf isomorphism and restriction equation, inverse fixed evaluation, and the coefficient sheaf square. The nontrivial evaluation and underived coefficient squares are isolated as strictly smaller statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of Ext sheaf cohomology at the integer generator agrees with derived cohomology pullback and tensor coefficient transport",
+   "results": "8 hits: Sheaf.H, Ext.mk₀, Ext, Ext.homEquiv, InjectiveResolution.extEquivCohomologyClass_neg, Sheaf.cohomologyPresheafFunctor, SheafOfModules.evaluation, Ext.instModule. None identifies these fixed presentations and coefficient transports.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology evaluation from derived sections is natural under pullback and coefficient morphisms",
+   "results": "8 hits: PresheafOfGroups.OneCochain.ev_precomp and groupCohomology functoriality. None concerns the fixed sheaf Ext/derived evaluation or tensor transport.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "12 standard H.map and degree-zero naturality lemmas; no fixed total-derived evaluation pullback square.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHDerivedEquiv|cohomologyMap|normalizationCohomologyRestriction",
+   "results": "Mathlib has no matching combined theorem. Local search finds the fixed evaluation in EtaleCohomologyPresentation and structural restriction in RawRestrictedClassNormalizationData; the source SheafHRightDerivedPullback and AbelianDerivedGlobalExtPullback assert existence of comparisons, not equality for the fixed comparison used here. Blueprint search for Ext evaluation and 03FD yields no duplicate blueprint statement.",
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-presentation match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCohomologyRawRestriction",
+  "date": "2026-10-25",
+  "group": "U3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "03Q8 affine coherent realization: fixed derived/Ext presentation and coefficient transport, before the normalized ordinary-cohomology square.",
+   "via": [
+    "lem-weil-pbc-affine-cohomology-raw-restriction",
+    "lem-weil-pbc-affine-cohomology-etale-module-realization",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRawEvaluationPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRawEvaluationPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineRealizationRawEvaluation_pullback",
+  "statement": "theorem affineRealizationRawEvaluation_pullback {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : X.Modules) [G.IsQuasicoherent] (V V' : S.Etale) (h : V' ⟶ V)\n    (θ : liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V) ⟶\n      (Etale.lowerStar AddCommGrpCat.{u + 1}\n        ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left).obj\n        (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V')))\n    (hθ : let b := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h\n      let ψ : (tensorPullback b.left).obj (affineRealizationCoefficient f G V) ⟶\n          affineRealizationCoefficient f G V' :=\n        (tensorSectionsComp b.left (Limits.pullback.snd V.hom f)).hom.app G ≫\n          eqToHom (congrArg (fun j ↦ (tensorPullback j).obj G) b.w)\n      ∀ (U : (Limits.pullback V.hom f : Scheme.{u}).Etale)\n        (s : (etaleTensorSectionsSheaf (affineRealizationCoefficient f G V)).obj.obj (op U)),\n        θ.hom.app (op U) (ULift.up s) = ULift.up\n          (qcoherentPullbackSection b.left _ _ ψ U\n            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ b.left).obj U)\n            (pullback.fst U.hom b.left) pullback.condition s))\n    (q : ℕ)\n    (z : (Etale.abelianHigherDirectImageRawPresheaf f q\n      (liftedCoherentEtaleSheaf G)).obj (op V)) :\n    affineRealizationRawEvaluation f G q V'\n      ((Etale.abelianHigherDirectImageRawPresheaf f q\n        (liftedCoherentEtaleSheaf G)).map h.op z) =\n      Sheaf.H.map\n        ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left).homEquiv\n          _ _ |>.symm θ) q\n        (Etale.cohomologyMap\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).map h).left\n          (liftedCoherentEtaleSheaf (affineRealizationCoefficient f G V)) q\n          (affineRealizationRawEvaluation f G q V z))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T164444-L-1018028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T022800-L-440889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

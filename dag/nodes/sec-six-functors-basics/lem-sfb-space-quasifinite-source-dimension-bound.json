@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-space-quasifinite-source-dimension-bound",
+ "kind": "statement",
+ "title": "Dimension bound for a scheme locally quasi-finite over a quasi-separated algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ a quasi-separated algebraic space over $S$ [def-trf-algebraic-space], $U$ an $S$-scheme, and $f:U\\to X$ a representable locally quasi-finite morphism. Here quasi-separated means that the diagonal of $X$ is quasi-compact on scheme tests. Locally quasi-finite means that after every etale scheme chart $V\\to X$, the morphism of schemes $U\\times_XV\\to V$ is locally quasi-finite [pqf-def-quasifinite]. Here the fibre product is the sheaf fibre product of [def-trf-algebraic-space], represented by a scheme by the representability of $f$. With the atlas topology on $|X|$ [def-a1-space-point-topology] and topological Krull dimension [def-kun-topological-krull-dimension], one has $\\dim |U|\\leq\\dim |X|$. The convention is $\\dim\\varnothing=-\\infty$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 0ABW (lemma-dimension-local-ring-quasi-finite) and 0A4J (lemma-dimension-decent-space), combined with Properties of Spaces Tag 0BAN (lemma-dimension); quasi-separated algebraic spaces are decent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "def-a1-space-point-topology",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-topological-dimension-local-rings] to the given quasi-separated $X$. In its notation put $D=\\dim|X|=\\sup_{x\\in|X|}\\delta_X(x)$. Here $\\delta_X(x)$ is the chart local-ring dimension defined in the cited statement, not the dimension of open neighbourhoods of $x$. Consequently $\\delta_X(x)\\leq D$ for every $x\\in|X|$, directly from the definition of supremum. This is the sole use of quasi-separatedness.",
+   "uses": [
+    "lem-sfb-space-topological-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JX, lemma-bounded-fibres (quasi-separated implies decent), with definition-very-reasonable; Tag 0A4J, lemma-dimension-decent-space (2); spaces-properties.tex, Tag 0BAN, lemma-dimension (1)=(2), with Tag 04NA, definition-dimension-local-ring."
+   }
+  },
+  {
+   "text": "Fix $u\\in U$. Apply [lem-sfb-space-local-ring-dimension-quasifinite] to the given representable map $f:U\\to X$. The product in both hypotheses is the sheaf fibre product, represented by a scheme since $f$ is representable. Its hypothesis is therefore precisely the chartwise locally quasi-finite hypothesis of the item, so it yields $\\dim\\mathcal O_{U,u}\\leq\\delta_X(f(u))$. Together with step 1 this gives $\\dim\\mathcal O_{U,u}\\leq D$ for every $u$. No quasi-separatedness of $U$ or global finite-type hypothesis is required.",
+   "uses": [
+    "lem-sfb-space-local-ring-dimension-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ABW, lemma-dimension-local-ring-quasi-finite. The chart definition and scheme agreement are spaces-properties.tex, Tag 04NA (definition-dimension-local-ring) and Tag 0BAM (lemma-pre-dimension-local-ring)."
+   }
+  },
+  {
+   "text": "By [lem-pc-scheme-dimension-local-rings], $\\dim|U|=\\sup_{u\\in U}\\dim\\mathcal O_{U,u}$. For every $u$, step 2 followed by the supremum bound in step 1 gives $\\dim\\mathcal O_{U,u}\\leq\\delta_X(f(u))\\leq\\sup_{x\\in|X|}\\delta_X(x)=D$. Thus $D$ is an upper bound for the entire family indexed by $U$, and the least-upper-bound property gives $\\dim|U|\\leq D=\\dim|X|$. This uses neither surjectivity of $f$ nor attainment of either supremum. For $U=\\varnothing$ its supremum is $-\\infty$, below every $D$. If $X=\\varnothing$, a point of $U$ would map to a point of $X$, so $U$ is empty too and both dimensions are $-\\infty$. The same inequalities apply when $D=\\infty$.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 04MU, lemma-dimension, (1)=(2); the same supremum argument as decent-spaces.tex, lemma-dimension-quasi-finite, after Tag 0ABW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-topological-dimension-local-rings",
+  "lem-sfb-space-local-ring-dimension-quasifinite",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "lemma-dimension-local-ring-quasi-finite (Tag 0ABW), lemma-dimension-quasi-finite and lemma-dimension-decent-space (Tag 0A4J), using spaces-properties.tex lemma-dimension (Tag 0BAN)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a scheme locally quasi finite over a quasi separated algebraic space is at most the topological dimension of the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiSeparated f ↔ QuasiSeparatedSpace ↥X\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is quasi-separated, then a morphism $f: X \\\\to Y$ is quasi-separated if and only if $X$ is a quasi-separated topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hY : QuasiSeparatedSpace ↥Y] [AlgebraicGeometry.QuasiSeparated f],\\n  QuasiSeparatedSpace ↥X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiSeparated f ↔ QuasiSeparatedSpace ↥X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local ring dimensions do not increase along a locally quasi finite morphism of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Dimension\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicSpace|dimension.*local.*quasi.?finite|quasi.?finite.*dimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi finite scheme over an algebraic space has dimension at most the target dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"Given a property $P$ of locally quasi-finite morphisms $f : X → Y$ of schemes, if $P$ holds whenever $f$ restricts to a quasi-finite ring homomorphism on affine open subsets $U ⊆ Y$ and $V ⊆ X$ with $\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      ((quasiFinite_appLE :\\n            ∀ {U : Y.Opens},\\n              AlgebraicGeometry.IsAffineOpen U →\\n                ∀ {V : X.Opens},\\n                  AlgebraicGeometry.IsAffin\", \"doc\": \"Given a property $P$ of locally quasi-finite morphisms $f : X → Y$ of schemes, if $P$ holds whenever $f$ restricts to a quasi-finite ring homomorphism on affine open subsets $U ⊆ Y$ and $V ⊆ X$ with $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes and scheme morphisms, not algebraic spaces or finite scheme groupoids; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The topological dimension of a scheme locally quasi finite over a quasi separated algebraic space is at most the dimension of the algebraic space",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.locallyQuasiFinite_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable locally quasi finite maps into algebraic spaces cannot increase topological Krull dimension when the target is decent",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"dimension\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?space|locallyQuasiFinite.*[Dd]im|[Dd]im.*locallyQuasiFinite",
+   "results": "OK 1 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme locally quasi finite over a quasi separated algebraic space has dimension at most the target dimension",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.LocallyQuasiFinite.rec, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-space-dimension-one-scheme",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD.",
+   "via": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasifinite-source-dimension-bound",
+  "worker": "stage1",
+  "summary": "Followed the source local-ring inequality and supremum argument; exposed the quasi-separated topological/local-ring comparison and the pointwise algebraic-space inequality as two statement-only inputs, reused the existing scheme supremum theorem, searched Lean and Mathlib, checked empty and infinite-dimensional cases, and normalized doubled TeX escapes without changing the statement. Repair after returned head 3e0cc403fdc: reconciled the retained split with the current unsplit item and reread its cited statements. Replaced the scheme-only fibre-product citation by the sheaf-fibre-product formulation in def-trf-algebraic-space; no mathematical hypothesis or conclusion changes. Current return 767597ffbe0: rechecked against the current unsplit DAG and all current cited statements; clarified the chart local-ring invariant in step 1, retaining the sheaf-fibre-product correction and all logged searches. The delivery tool rebases onto current origin/sheaf-dag; promotion of side completion remains the maintainer's operation. Return 083fd01f24d: reread all current cited statements, retained the valid two-input split, and made the image-indexed upper-bound argument explicit in step 3; neither surjectivity nor attainment is used. Initial current-base dry run passed at 1b9b5ee15b9.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images clause (3), through the alteration/curve-moduli chain recorded in blueprint.from.place: Tag 0ADD first paragraph needs the local dimensions of a finite scheme cover bounded by the topological dimension of the space. Steps 1-3 implement exactly the 0ABW + 0BAN + 0A4J route seeded on this item. The ancestor utility returns None for the inherited broken created.item chain; that computed null reference is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme dimension/local-ring supremum comparison (04MU), needed for the scheme source; this unit has no statement giving that comparison, and using it does not change the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-8ef04a621",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-8ef04a621 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and made no fixes. This head differs from the returned 083fd only in the step-3 wording and the split_report text; the new nodes are byte-identical, and the earlier returns were side/live promotion problems, not mathematics. Sources read: Stacks 0ABW and its proof (Algebra lemma-dimension-inequality-quasi-finite), lemma-dimension-quasi-finite, 0A4J(1),(2), the 03JX diagram, definition-very-reasonable (decent = (γ)), and spaces-properties 0BAM, 04NA and 0BAN. All tags were checked in tags/tags. The item is true as stated. Its relative quasi-separatedness gives Zariski-local absolute quasi-separatedness over affine opens of S, so (ζ)⇒(γ): X is decent and 0A4J applies. Replacing def-pc-fibre-product by the sheaf product of def-trf-algebraic-space is the correct citation. Step 1 is lem-sfb-space-topological-dimension-local-rings (0A4J(2) + 0BAN) followed by a supremum bound. Step 2 is lem-sfb-space-local-ring-dimension-quasifinite, which is 0ABW with a scheme source and exactly the item's hypotheses. Step 3 is lem-pc-scheme-dimension-local-rings (04MU) plus the least-upper-bound argument; empty U, empty X and D=∞ were checked. Both new nodes are statement-only, self-contained (δ defined inline, independence by 0BAM), strictly smaller than the item, and found as duplicates nowhere in the DAG (rg -L over tags and algebraic-space dimension statements). The citer lem-sfb-separated-space-dimension-one-scheme still matches. I accept the declared tool use of lem-pc-scheme-dimension-local-rings. On the batch-5 check, def-trf-algebraic-space and def-a1-space-point-topology are general definitions, not steps of the trace-formula or Poincaré-duality proofs, so I accept them. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiFiniteSourceDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.topologicalKrullDim_source_le_of_locallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQuasiFiniteSourceDimension.lean",
+  "statement": "theorem topologicalKrullDim_source_le_of_locallyQuasiFinite {S : Scheme.{u}} (X : AlgebraicSpace S) (U : Over S) (f : yoneda.obj U ⟶ X.obj.obj) (hqs : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (hf : IsRepresentable f) (hqf : ∀ (V : Over S) (a : yoneda.obj V ⟶ X.obj.obj), IsEtale a → ∃ (W : Over S) (p : W ⟶ V) (q : yoneda.obj W ⟶ yoneda.obj U), IsPullback q (yoneda.map p) f a ∧ p.left.IsLocallyQuasiFinite) : topologicalKrullDim U.left ≤ topologicalKrullDim (Point X.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d31aea236",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Clause-by-clause match: S, X : AlgebraicSpace S, U : Over S, f : yoneda U ⟶ X; hf representable; hqs = relative diagonal X→X×_S X QuasiCompact on scheme tests (node's definition; same inline idiom as landed modules; no owner def node; not the absolute IsAbsolutelyQuasiSeparated); hqf = for every étale chart a : h_V→X, representing pullback with projection p : W⟶V and p.left.IsLocallyQuasiFinite (recorded pqf predicate, finite-type-inclusive; ∃ ⇔ ∀ by iso-invariance). Conclusion topologicalKrullDim U.left ≤ topologicalKrullDim (Point X.obj.obj) with recorded atlas topology, WithBot ℕ∞ keeps −∞/∞. No extra hypotheses; empty U, empty X, infinite dimension checked; single universe u. Statement field verbatim; node otherwise unchanged vs live; no defs; proof sorry; source/blueprint docstrings and 3-step proof docstring present. Second reading section present (by the same worker; non-blocking). No fixes, no compile needed."
+ }
+}

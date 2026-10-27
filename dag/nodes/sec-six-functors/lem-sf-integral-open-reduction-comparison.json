@@ -30,15 +30,23 @@
    }
   },
   {
-   "text": "Apply [lem-sf-open-quotient-koszul-completeness] to the given $R,t,j,K$. Its coefficient identification and strict augmentation equality identify quotient completion with the actual unit. Since $j$ is quasi-compact and $K$ is quotient-complete, it gives quotient completeness of $j_!K$ and invertibility of the actual $u_{j_!K}$. Thus the preservation hypothesis needed below holds for every complete input.",
+   "text": "Apply the proved lem-sf-integral-open-extension-complete to the fixed operations. Its independent-universe principal Koszul/Roos transport supplies preservation of the original quotient-completeness predicate, exactly as required by the adjunction transport theorem.",
    "uses": [
-    "lem-sf-open-quotient-koszul-completeness"
+    "lem-sf-integral-open-extension-complete"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
     "place": "Tag 0A0E (lemma-derived-completion-koszul), with sites-modules.tex Tag 093M (lemma-completion-flat). Agent completed-coefficient augmentation comparison and open-completeness bridge, extracted arguments 3-4 of the returned item; completed open preservation is the theorem lem-cbc-completed-extension-zero-comparison."
    }
+  },
+  {
+   "text": "Choose the two evaluation calculi with their coherence data. Choose section-normalized semilinear open localization by lem-sf-normalized-open-section-existence, retaining the identity restriction on underlying sections required by the simultaneous tensor-model theorem.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-normalized-open-section-existence"
+   ],
+   "elementary": false
   },
   {
    "text": "Apply [lem-sf-open-semilinear-tensor-model] to $K$. It supplies $r_j(K)$ as one specified strict semilinear chain comparison on flat-term K-flat representatives. Its coefficient components are the required canonical tensor isomorphisms and commute with every quotient transition before localization. Naturality and independence are part of this cited statement. Normalization from Step 1 therefore also holds for $J_j\\mathcal R_UK$.",
@@ -53,30 +61,29 @@
    }
   },
   {
-   "text": "The hypotheses of [lem-sf-open-reduction-adjunction-transport] now hold: Step 1 supplies the actual-unit/counit inverses and completeness of total limits, Step 2 supplies preservation by $j_!$, and Step 3 supplies precisely its required generator-normalized $r$. That lemma gives completed restriction and $s$, and the isomorphism $d_j(K)=u_{j_!K}^{-1}\\circ\\mathcal L_X(r_j(K))^{-1}$, with its reduction normalization. Its system and realized unit/counit equations identify the realized open adjunction with the localized ringed-site adjunction. All comparisons use the specified simultaneous section constructions, as required.",
+   "text": "Apply lem-sf-canonical-open-restriction-model to the simultaneous extension model. Retain its isomorphism s and its identification with the mate of r inverse. Restriction completeness follows from lem-sf-open-restriction-completeness. The mate unit and counit equations give the strict-system equations. Form d and the pull realization pointwise by total limit of the inverse comparisons followed by inverse actual reconstruction units. Unit naturality proves naturality, and counit naturality and the adjunction triangle identity give reductionD. Applying total limit to the two mate equations and cancelling the actual units proves realizedUnit and realizedCounit. Keep the strict extension model directly from the simultaneous tensor-model witnesses.",
    "uses": [
-    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-canonical-open-restriction-model",
+    "lem-sf-open-restriction-completeness",
     "lem-pur-normalized-reconstruction-adjunction-calculus",
-    "lem-sf-open-quotient-koszul-completeness",
     "lem-sf-open-semilinear-tensor-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor) and Tag 0941 (lemma-derived-limit-is-ok). Agent adjunction-normalized realization refinement, extracted arguments 7-10 of the returned item; none of these tags alone asserts the system or realization equations."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pur-normalized-reconstruction-adjunction-calculus",
-  "lem-sf-open-quotient-koszul-completeness",
-  "lem-sf-open-reduction-adjunction-transport",
-  "lem-sf-open-semilinear-tensor-model"
+  "lem-sf-integral-open-extension-complete",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-normalized-open-section-existence",
+  "lem-sf-open-semilinear-tensor-model",
+  "lem-sf-canonical-open-restriction-model",
+  "lem-sf-open-restriction-completeness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0GL1 and 0941; agent proof of the strict-system realization and actual-unit normalization using the cited DAG tools"
+  "place": "Tags 0GL1 and 0941; assembly from actual-unit reconstruction, normalized tensor models, independent-universe completeness, canonical restriction mate and generic adjunction identities"
  },
  "mathlib_searches": [
   {
@@ -228,48 +235,6 @@
   "module": "Sheaf.SixFunctors.IntegralOpenReductionComparison",
   "declaration": "WeilConjectures.IntegralOpenReduction.integralOpenReductionComparison",
   "declarations": [
-   "WeilConjectures.IntegralOpenReduction.openAbSheafify",
-   "WeilConjectures.IntegralOpenReduction.openAbLocallyBijective",
-   "WeilConjectures.IntegralOpenReduction.openObject",
-   "WeilConjectures.IntegralOpenReduction.sliceSite",
-   "WeilConjectures.IntegralOpenReduction.sliceContinuous",
-   "WeilConjectures.IntegralOpenReduction.rings",
-   "WeilConjectures.IntegralOpenReduction.transitions",
-   "WeilConjectures.IntegralOpenReduction.SliceSystems",
-   "WeilConjectures.IntegralOpenReduction.sliceRing",
-   "WeilConjectures.IntegralOpenReduction.Coefficients",
-   "WeilConjectures.IntegralOpenReduction.Operations",
-   "WeilConjectures.IntegralOpenReduction.extension",
-   "WeilConjectures.IntegralOpenReduction.restriction",
-   "WeilConjectures.IntegralOpenReduction.finiteExtension",
-   "WeilConjectures.IntegralOpenReduction.finiteRestriction",
-   "WeilConjectures.IntegralOpenReduction.systemExtension",
-   "WeilConjectures.IntegralOpenReduction.systemRestriction",
-   "WeilConjectures.IntegralOpenReduction.extensionAdditive",
-   "WeilConjectures.IntegralOpenReduction.restrictionAdditive",
-   "WeilConjectures.IntegralOpenReduction.finiteExtensionAdditive",
-   "WeilConjectures.IntegralOpenReduction.systemExtensionAdditive",
-   "WeilConjectures.IntegralOpenReduction.systemRestrictionAdditive",
-   "WeilConjectures.IntegralOpenReduction.extensionLimits",
-   "WeilConjectures.IntegralOpenReduction.extensionColimits",
-   "WeilConjectures.IntegralOpenReduction.systemExtensionLimits",
-   "WeilConjectures.IntegralOpenReduction.systemExtensionColimits",
-   "WeilConjectures.IntegralOpenReduction.ordinaryAdjunction",
-   "WeilConjectures.IntegralOpenReduction.ordinarySystemAdjunction",
-   "WeilConjectures.IntegralOpenReduction.shriek",
-   "WeilConjectures.IntegralOpenReduction.star",
-   "WeilConjectures.IntegralOpenReduction.J",
-   "WeilConjectures.IntegralOpenReduction.P",
-   "WeilConjectures.IntegralOpenReduction.openAdjunction",
-   "WeilConjectures.IntegralOpenReduction.systemAdjunction",
-   "WeilConjectures.IntegralOpenReduction.extensionEvaluation",
-   "WeilConjectures.IntegralOpenReduction.extensionSection",
-   "WeilConjectures.IntegralOpenReduction.finiteExtensionSection",
-   "WeilConjectures.IntegralOpenReduction.TensorComparison",
-   "WeilConjectures.IntegralOpenReduction.complete",
-   "WeilConjectures.IntegralOpenReduction.AugmentedPresentation",
-   "WeilConjectures.IntegralOpenReduction.StrictModel",
-   "WeilConjectures.IntegralOpenReduction.Comparison",
    "WeilConjectures.IntegralOpenReduction.integralOpenReductionComparison"
   ],
   "file": "lean/Sheaf/SixFunctors/IntegralOpenReductionComparison.lean",
@@ -288,5 +253,26 @@
   "result": "fix",
   "note": "Mathematical statement, dependencies, universes, canonical maps and route-pivot compliance checked. Immutable Lean module compiles cleanly through scompile.py. Report-only fix replaces the worker self-reading with an independent reading, resolving H11. Complete replacement is under fixes/; findings and evidence are in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e4fb9",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T124443-L-2022665",
+  "kind": "interface",
+  "note": "independent cc review: Definitions module vs live item prefix (byte-identical); item/adapted/new modules vs nodes def-sf-integral-open-operations, def-sf-integral-open-reduction-comparison-data, lem-sf-integral-open-reduction-comparison, lem-sf-integral-open-extension-complete, lem-sf-normalized-open-section-existence; sandbox build of delivered and in-between modules plus all 24 remaining direct importers compiled (rc=0); axioms traced to existing sorried library statements"
+ }
 }

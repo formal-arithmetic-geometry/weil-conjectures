@@ -1,0 +1,125 @@
+{
+ "id": "lem-amb-affine-linear-line-descent-base-change",
+ "kind": "statement",
+ "title": "Single-coordinate coefficient descent commutes with base change",
+ "statement": "Let A be a commutative ring killed by N, t a normalized ordinary finite twist transport, f:T→S a morphism of schemes with N invertible on S and T, K in D(S,A), Kprime in D(T,A), and e:f-star K ≅ Kprime. The one-coordinate affine right base-change comparison at K followed by the affine right functor applied to e and by line coefficient descent at Kprime equals affine inverse image of line coefficient descent at K, followed by the inverse canonical affine projection square at K tensor A_S(1)[2], followed by projection inverse image of the tensor pullback comparison for f and the tensor of e with the normalized shifted-line comparison. All functors and comparisons are those of [def-amb-affine-trace-construction], [def-amb-affine-linear-trace-action], and [def-asd-ordinary-finite-p1-arrows].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Coefficient comparison in the overlap calculation: one-coordinate step of the ordered affine tower."
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Expand line descent into tensor comparison along the affine chart, chart/projection composition on the input, normalized shifted-line transport along the chart and inverse projection transport, and inverse tensor comparison along the affine projection. Expand one-coordinate right base change into the inverse chart square followed by chart inverse image of projective right base change. Naturality of tensor comparison moves the two projective comparison factors through the chart tensor comparison. Monoidality of the chart square separates the input and line factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerStarProjectionBaseChange.lean",
+    "place": "derivedSquareUpperStarIso_hom_tensor; tensor naturality from UpperStarMonoidal/Comp.lean; composition associativity from UpperStarCompCoherence.lean"
+   }
+  },
+  {
+   "text": "Paste the chart square and the projective projection square using associativity of inverse-image composition. The identity chart followed by projective projection equals affine projection identifies the resulting input comparison with the affine projection square followed by projection inverse image of e. This is natural in an arbitrary input object and its comparison e.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerStarProjectionBaseChange.lean",
+    "place": "derivedSquareUpperStarIso_hom_tensor; tensor naturality from UpperStarMonoidal/Comp.lean; composition associativity from UpperStarCompCoherence.lean"
+   }
+  },
+  {
+   "text": "For the line factor apply normalized shifted-line square coherence first to the chart square, then to the affine projection square. Cancel adjacent line comparisons with their inverses. It becomes affine inverse image of the original line descent comparison, followed by the inverse affine projection square and projection inverse image of the base shifted-line comparison. Combine the two factor equalities by tensor naturality and inverse-square monoidality, cancelling the projection tensor comparison.",
+   "uses": [
+    "lem-asd-finite-shifted-line-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerStarProjectionBaseChange.lean",
+    "place": "derivedSquareUpperStarIso_hom_tensor; tensor naturality from UpperStarMonoidal/Comp.lean; composition associativity from UpperStarCompCoherence.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-shifted-line-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "X3: explicit one-coordinate calculation, using existing canonical derived tensor, inverse-image composition and shifted-line square theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of tensor products is compatible with composition and naturality of isomorphisms",
+   "results": "Eight generic Over.tensorHom and related categorical hits; no affine coefficient descent theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use project source-library derived tensor comparison and composition coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.naturality_1",
+   "results": "Four generic naturality lemmas; no scheme-specific line descent comparison.",
+   "date": "2026-10-27",
+   "verdict": "Naturality is sufficient for the formal transport steps, but the tensor and shifted-line calculation must be written."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|tensorHom_comp_tensorHom",
+   "results": "Generic Mathlib tensor composition and pullback identities. Local source search supplies leftDerivedUpperStarTensorComparison_naturality, derivedSquareUpperStarIso_hom_tensor, and canonical composition pasting.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved APIs; no exact existing affine line descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartCoefficientCore",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-vector-integration-restricted-chart-coefficient-core",
+   "place": "Successor case: naturality of one-coordinate descent.",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLinearLineDescentBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLinearLineDescentBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineLinearLineDescent_baseChange",
+  "statement": "theorem affineLinearLineDescent_baseChange\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {T S : Scheme.{u}} (f : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hT : IsUnit (N : Γ(T, ⊤)))\n    (K : DerivedCategoryModule A S) (K' : DerivedCategoryModule A T)\n    (e : (ordinaryFinitePullback A f).obj K ≅ K') :\n    affineTraceLineRightBaseChange A N hA t f (affineTraceProjectiveInvertible N S hS) K ≪≫\n      (affineTraceLineRight A N hA T).mapIso e ≪≫\n      affineLinearLineDescent A N hA t T hT K' =\n    (ordinaryFinitePullback A (AffineSpace.map PUnit.{u + 1} f)).mapIso\n        (affineLinearLineDescent A N hA t S hS K) ≪≫\n      (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n        (AffineSpace.isPullback_map (n := PUnit.{u + 1}) f).toCommSq).symm.app\n          ((derivedTensorRight (ModuleCat.{u + 1} A) S\n            ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)).obj K) ≪≫\n      (ordinaryFinitePullback A (AffineSpace PUnit.{u + 1} T ↘ T)).mapIso\n        (ordinaryFiniteTensorPullback A f K ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧) ≪≫\n          ordinaryFiniteTensorRightMapIso A T e\n            (ordinaryFiniteShiftedLinePullback A N hA t f hS))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T222809-L-697506",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T222809-L-697506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

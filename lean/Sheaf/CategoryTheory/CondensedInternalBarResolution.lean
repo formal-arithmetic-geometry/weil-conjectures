@@ -5,6 +5,8 @@ Authors: SHEAF group NO
 -/
 module
 
+public import Sheaf.CategoryTheory.CondensedInternalBarData
+
 public import Sheaf.CategoryTheory.CondensedActionModule
 public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Sheaf.CategoryTheory.SheafTensorStructure
@@ -13,12 +15,13 @@ public import Mathlib.CategoryTheory.Sites.Canonical
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
-import Sheaf.CategoryTheory.ModuleObjects.KernelStructure
-import Sheaf.CategoryTheory.ModuleObjectCokernelAction
+public import Mathlib.CategoryTheory.Sites.Coherent.CoherentSheaves
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+
+import Sheaf.CategoryTheory.CondensedGroupAlgebraExactForgetful
+import Sheaf.CategoryTheory.PointedFreeDeletionContraction
+import Sheaf.CategoryTheory.CondensedEquivariantDeletionComparison
+import Sheaf.CategoryTheory.CondensedInducedCoordinates
 
 /-! # The augmented internal homogeneous bar resolution
 
@@ -46,78 +49,8 @@ open scoped TensorProduct
 namespace Profinite.CondensedAction.InternalBar
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
-
-/-- The free internal module on a condensed set, by the two free adjunctions.
-Source: the free-module construction in step 1 of the internal bar proof
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def free : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) ⥤ Modules R :=
-  Sheaf.composeAndSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.free.{u + 1} ⋙
-    Mod.free R.X
-
-/-- The actual free-forgetful adjunction, determining the generator inclusion.
-Source: step 1, the universal property of the free internal module
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def freeAdjunction : free R ⊣
-    Mod.forget R.X ⋙ sheafCompose (coherentTopology Profinite.{u})
-      (forget AddCommGrpCat.{u + 1}) :=
-  (Sheaf.adjunction (coherentTopology Profinite.{u}) AddCommGrpCat.adj.{u + 1}).comp
-    (Mod.freeForgetAdjunction R.X)
-
 variable (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
   [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
-
-/-- The profinite space of tuples, including the one-point space in arity zero.
-Source: the objects in the homogeneous bar construction
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-abbrev tuples (n : ℕ) : Profinite.{u} := Profinite.of (Fin n → G)
-
-/-- The free internal module on the condensed profinite space G^n.
-Source: step 1, A[X] constructed by the free adjunction
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def freePower (n : ℕ) : Modules R :=
-  (free R).obj (((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj (tuples G n))
-
-/-- The canonical local generator from the unit of the free adjunction.
-Source: step 1, the generator [g_1,...,g_n]
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def generator (n : ℕ) (S : Profinite.{u}) (x : Fin n → C(S, G)) :
-    sectionModule R (freePower R G n) S :=
-  (((freeAdjunction R).unit.app
-    (((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj (tuples G n))).hom.app
-      (op S)) (ULift.up (CompHausLike.ofHom _
-        ⟨fun s i ↦ x i s, continuous_pi fun i ↦ (x i).continuous⟩))
-
-/-- Evaluate an internal module map on a section, without changing its encoding.
-Source: step 1, maps of the original underlying abelian sheaves
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-abbrev onSections {M N : Modules R} (f : M ⟶ N) (S : Profinite.{u})
-    (x : sectionModule R M S) : sectionModule R N S :=
-  (f.hom.hom.app (op S)).hom x
-
-/-- Generators in an explicitly identified copy of the canonical free object.
-Source: step 1, the unique-up-to-isomorphism free-module universal property
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def basis (n : ℕ) (M : ActionModule R G) (e : M.module ≅ freePower R G n)
-    (S : Profinite.{u}) (x : Fin n → C(S, G)) : sectionModule R M.module S :=
-  onSections R e.inv S (generator R G n S x)
-
-/-- The canonical relative pure tensor of internal modules.
-Source: step 2, the lax sheaf-inclusion tensor map followed by the relative coequalizer
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def pureTensor (M N : Modules R) (S : Profinite.{u})
-    (x : sectionModule R M S) (y : sectionModule R N S) :
-    sectionModule R (M ⊗ N) S :=
-  ((Mod.tensorObjπ M N).hom.app (op S))
-    (((Functor.LaxMonoidal.μ
-      (sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
-      M.X N.X).app (op S)) (x ⊗ₜ[ℤ] y))
-
-/-- The unit section of the regular internal module, in the reconstructed section ring.
-Source: step 3, the augmentation [g] ↦ 1
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def regularOne (S : Profinite.{u}) : sectionModule R (Mod.regular R.X) S :=
-  (1 : (InternalAbelianSheafModule.sectionRings
-    (coherentTopology Profinite.{u}) R.X).obj (op S))
 
 /-- A normalized model of the internal homogeneous bar resolution. All objects are
 identified with the actual free objects, and all maps and actions are fixed on their
@@ -262,6 +195,59 @@ translation on the first factor alone. Free linearization and step 2 yield the
 normalized equivariant induced isomorphism in every degree, including degree zero.
 -/
 theorem exists_resolution : Nonempty (Resolution R G) := by
-  sorry
+  classical
+  obtain ⟨c⟩ := PointedDeletion.exists_natural_contraction R
+  obtain ⟨d⟩ := exists_deletionComparison R G c
+  obtain ⟨i⟩ := exists_inducedCoordinates R G d.objects d.freeIso d.diagonal
+  have ex := GroupAlgebra.exact_iff R G
+  have e0 := (ex.1 _).mpr
+    ((ShortComplex.exact_iff_of_iso d.zeroIso).mpr (c.data _ (identityPoint G)).exact_zero)
+  have es (n : ℕ) := (ex.1 _).mpr
+    ((ShortComplex.exact_iff_of_iso (d.succIso n)).mpr
+      ((c.data _ (identityPoint G)).exact_succ n))
+  have ep : Epi d.augmentation := (ex.2 _ _ _).mpr
+    (((ShortComplex.exact_and_epi_g_iff_of_iso d.zeroIso).mpr
+      ⟨(c.data _ (identityPoint G)).exact_zero,
+        (c.data _ (identityPoint G)).augmentation_epi⟩).2)
+  have te0 (T : Modules R) := (ex.1 _).mpr
+    ((ShortComplex.exact_iff_of_iso (d.tensorZeroIso T)).mpr
+      ((c.data _ (identityPoint G)).tensor_exact_zero T))
+  have tes (T : Modules R) (n : ℕ) := (ex.1 _).mpr
+    ((ShortComplex.exact_iff_of_iso (d.tensorSuccIso T n)).mpr
+      ((c.data _ (identityPoint G)).tensor_exact_succ T n))
+  have tep (T : Modules R) : Epi (d.tensorAugmentation T) := (ex.2 _ _ _).mpr
+    (((ShortComplex.exact_and_epi_g_iff_of_iso (d.tensorZeroIso T)).mpr
+      ⟨(c.data _ (identityPoint G)).tensor_exact_zero T,
+        (c.data _ (identityPoint G)).tensor_augmentation_epi T⟩).2)
+  exact ⟨{
+    objects := d.objects
+    freeIso := d.freeIso
+    diagonal := d.diagonal
+    augmentation := d.augmentation
+    augmentation_generator := d.augmentation_generator
+    boundary := d.boundary
+    boundary_generator := d.boundary_generator
+    boundary_augmentation := d.boundary_augmentation
+    boundary_boundary := d.boundary_boundary
+    exact_zero := e0
+    exact_succ := es
+    augmentation_epi := ep
+    tensorObjects := d.tensorObjects
+    tensorIso := d.tensorIso
+    tensor_action := d.tensor_action
+    tensorAugmentation := d.tensorAugmentation
+    tensorAugmentation_underlying := d.tensorAugmentation_underlying
+    tensorBoundary := d.tensorBoundary
+    tensorBoundary_underlying := d.tensorBoundary_underlying
+    tensor_boundary_augmentation := d.tensor_boundary_augmentation
+    tensor_boundary_boundary := d.tensor_boundary_boundary
+    tensor_exact_zero := te0
+    tensor_exact_succ := tes
+    tensor_augmentation_epi := tep
+    induced := i.induced
+    inducedIso := i.inducedIso
+    induced_action := i.induced_action
+    coordinates := i.coordinates
+    coordinates_generator := i.coordinates_generator }⟩
 
 end Profinite.CondensedAction.InternalBar

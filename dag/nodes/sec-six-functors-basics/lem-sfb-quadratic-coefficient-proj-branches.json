@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-quadratic-coefficient-proj-branches",
+ "kind": "statement",
+ "title": "Quadratic coefficient graded chart and its geometric branch labels",
+ "statement": "Let $F$ be a field, let $a,b,c\\in F$ satisfy $a\\ne0$ and $b^2-4ac\\ne0$, put $q=aX^2+bXY+cY^2$, and set $L=F[Z]/(aZ^2+bZ+c)$ with $z$ the class of $Z$ [def-weil-polynomial-ring, def-weil-pbc-algebra-hom-quotient]. Give\n$$H=F\\oplus\\bigoplus_{n\\ge1}Lt^n\\subset L[t]$$\nits polynomial degree grading. For every unit $u\\in L^\\times$, the entire projective spectrum is its single standard chart\n$$\\operatorname{Proj}H=D_+(ut),\\qquad H[(ut)^{-1}]_0\\xrightarrow{\\sim}L,\\quad rt^n/(ut)^n\\longmapsto r/u^n$$\nfor $n\\ge1$, with constants mapped by $F\\to L$. Here Proj, charts and homogeneous localization use [def-nagata-affine-proj, def-nagata-homogeneous-localization-degree-zero], and spectra use [def-weil-affine-spectrum].\nThe $F$-algebra $L$ has dimension two and is separable: either it is $F\\times F$, or it is a degree-two field extension in which every element is separable over $F$ [def-weil-pbc-separable-algebraic-extension]. For an algebraic closure $\\Omega/F$ [def-weil-algebraic-closure], let $r_1,r_2\\in\\Omega$ be the distinct roots of $aZ^2+bZ+c$. Evaluation induces $L\\otimes_F\\Omega\\cong\\Omega\\times\\Omega$ [def-weil-pbc-module-tensor-product]. The two points of $\\operatorname{Proj}H$ over $\\Omega$ have chart coordinate $z$ equal to $r_1,r_2$ respectively. Under $X\\mapsto zt$, $Y\\mapsto t$, coefficientwise evaluation of $L[[t]]$ at these roots gives the two factors $\\Omega[[t]]$ of the integral closure of $\\Omega[[X,Y]]/(q)$ in its total ring of fractions [def-weil-pbc-multivariate-power-series, def-weil-pbc-integral-closure]. Thus the chart point indexed by $r_i$ is precisely the completed branch $X=r_iY$. Coefficient extension here means formal power series over the extended coefficient algebra, not the ordinary tensor product of an infinite power series ring. For every other invertible linear coordinate system $X',Y'$ for the same binary form in which the coefficient of $(X')^2$ is nonzero, the image of $Y'$ in $L[[t]]$ has leading coefficient a unit of $L$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), construction (3) and its omitted chart computation; Tag 0CBU (remark-trivial-quadratic-extension), split versus nonsplit interpretation and geometric branch labels."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\beta=b/a$, $\\gamma=c/a$ and $\\Delta=\\beta^2-4\\gamma=(b^2-4ac)/a^2\\ne0$. Multiplication by $a^{-1}$ does not change the defining principal ideal. Apply [lem-sfb-quadratic-homogeneous-substitution] to obtain the basis $1,z$ and relation $z^2=-\\beta z-\\gamma$. Apply [lem-sfb-quadratic-series-field-factors] to this monic quadratic: if it has a root in $F$, evaluation identifies $L$ with $F\\times F$; otherwise $L$ is a degree-two field extension. The basis gives dimension two in either case.",
+   "uses": [
+    "lem-sfb-quadratic-homogeneous-substitution",
+    "lem-sfb-quadratic-series-field-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Cases I and II; Tag 0CBU (remark-trivial-quadratic-extension)."
+   }
+  },
+  {
+   "text": "In the field case, write an arbitrary element as $w=d+ez$ with $d,e\\in F$. If $e=0$, its minimal polynomial is $T-d$, whose derivative is $1$. If $e\\ne0$, the basis $1,z$ implies $w\\notin F$. Substitution shows that the monic quadratic $g(T)=(T-d)^2+\\beta e(T-d)+\\gamma e^2$ annihilates $w$. Its minimal polynomial, the monic generator of the evaluation kernel in [def-weil-pbc-separable-algebraic-extension], divides $g$ and cannot have degree one, hence equals $g$. The identity $g'(T)^2-4g(T)=e^2\\Delta\\ne0$ shows that $g$ and $g'$ generate the unit ideal, so $g$ is separable. Thus every element is separable. This uses no division by $2$, and includes characteristic two. In the split case the two field factors are $F$ itself.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), assertion that the algebra has separable degree two; explicit verification of separability by Q14."
+   }
+  },
+  {
+   "text": "Fix $u\\in L^\\times$. For $n\\ge1$ and $r\\in L$, the identity $(rt^n)^2=(ut)(r^2u^{-1}t^{2n-1})$ is an identity in $H$: its second factor has positive degree. If a homogeneous prime contained $ut$, primality would therefore force every $rt^n$ into it, hence the whole irrelevant ideal. Such a prime is excluded from Proj by [def-nagata-affine-proj]. Consequently every point lies in $D_+(ut)$; an open subscheme containing every point is the whole scheme.",
+   "uses": [
+    "def-nagata-affine-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence with construction (3); explicit coefficient-chart computation by Q14."
+   }
+  },
+  {
+   "text": "In the degree-zero localization [def-nagata-homogeneous-localization-degree-zero], define $\\psi(rt^n/(ut)^n)=r/u^n$ for $n\\ge1$, and use the scalar inclusion on degree-zero constants. The element $ut$ is a non-zero-divisor in $L[t]$, since $u$ is a unit and multiplication by $t$ shifts coefficients. The localization equality between two homogeneous fractions therefore cancels to equality after cross multiplication; comparing coefficients gives $r/u^n=s/u^m$. Thus $\\psi$ is well-defined. Common denominators show it preserves addition and multiplication. The map $\\eta:L\\to H[(ut)^{-1}]_0$ given by $s\\mapsto(su)t/(ut)$ is a ring map: for products cancel $ut$ from $(su)t(s'u)t/(ut)^2$, and for the unit use $ut/(ut)=1$. Directly $\\psi\\eta=1$, and $\\eta\\psi(rt^n/(ut)^n)=rt^n/(ut)^n$ after multiplying numerator and denominator to degree $n+1$; constants satisfy the same identity. Hence these maps are inverse $F$-algebra isomorphisms. Apply [prop-nagata-proj-standard-open] to the degree-one element $ut$ and use step 3 to identify all of $\\operatorname{Proj}H$ with $\\operatorname{Spec}L$ [def-weil-affine-spectrum].",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "prop-nagata-proj-standard-open",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted equivalence with construction (3); explicit coefficient-chart computation by Q14."
+   }
+  },
+  {
+   "text": "Let $\\Omega/F$ be an algebraic closure [def-weil-algebraic-closure]. The monic quadratic $p(T)=T^2+\\beta T+\\gamma$ has a root $r_1$ in $\\Omega$. Set $r_2=-\\beta-r_1$; then $p=(T-r_1)(T-r_2)$, and $(r_1-r_2)^2=\\Delta\\ne0$, so the roots are distinct and exhaust the roots of $a p$. Write $z_\\Omega=z\\otimes1$. The tensor universal property [def-weil-pbc-module-tensor-product] defines an $\\Omega$-algebra map $\\epsilon:L\\otimes_F\\Omega\\to\\Omega\\times\\Omega$ by $\\epsilon((d+ez)\\otimes\\lambda)=(\\lambda(d+er_1),\\lambda(d+er_2))$. Multiplicativity follows from $p(z)=p(r_i)=0$. In the tensor algebra put $E_1=(z_\\Omega-r_2)/(r_1-r_2)$ and $E_2=(r_1-z_\\Omega)/(r_1-r_2)$. The quadratic relation gives $E_i^2=E_i$, $E_1E_2=0$, $E_1+E_2=1$ and $r_1E_1+r_2E_2=z_\\Omega$. Thus $(v_1,v_2)\\mapsto v_1E_1+v_2E_2$ is an inverse ring map: compositions fix $(1,0),(0,1)$ and fix $1,z_\\Omega$, which span all pure tensors by the basis in step 1. This proves the asserted evaluation isomorphism.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), construction (1), and Tag 0CBU (remark-trivial-quadratic-extension), applied after coefficient extension; explicit evaluation formulas by Q14."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], the geometric fibre of the $F$-scheme identified in step 4 is $\\operatorname{Spec}(L\\otimes_F\\Omega)$. Step 5 identifies this with $\\operatorname{Spec}(\\Omega\\times\\Omega)$. A prime in this product contains exactly one of the idempotents $(1,0),(0,1)$, because their product is zero and their sum is one. It therefore is the kernel of exactly one projection to the field $\\Omega$, whose only prime is zero [def-weil-affine-spectrum]. There are exactly two points. The coefficient coordinate $z$ is represented on the $ut$ chart by $(zu)t/(ut)$, and step 4 maps it to $z$; the two projections send it to $r_1,r_2$ respectively.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), constructions (1) and (3), and Tag 0CBU (remark-trivial-quadratic-extension): geometric points."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-quadratic-series-integral-closure] over the field $\\Omega$ to $aX^2+bXY+cY^2$: the nonzero discriminant stays nonzero under the field inclusion. It identifies the integral closure of $\\Omega[[X,Y]]/(q)$ in its total ring of fractions with $(\\Omega[Z]/(p))[[t]]$, through $X\\mapsto z_\\Omega t$, $Y\\mapsto t$. The basis and evaluation maps of step 5 identify its coefficient algebra with $L\\otimes_F\\Omega\\cong\\Omega\\times\\Omega$. Applying these maps coefficient by coefficient gives an isomorphism to $\\Omega[[t]]\\times\\Omega[[t]]$; this respects multiplication because each coefficient of a series product is a finite sum [def-weil-pbc-multivariate-power-series]. The two projections send $X,Y$ to $r_i t,t$. Their kernels are exactly $(X-r_iY)$: termwise use $X^jY^k-(r_iY)^jY^k=(X-r_iY)\\sum_{h=0}^{j-1}X^{j-1-h}(r_iY)^hY^k$. For a series these sums define a series quotient, since only finitely many terms contribute in each total degree. Thus a series differs from its substitution at $X=r_iY$ by a multiple of $X-r_iY$, and the substituted series lies in $\\Omega[[Y]]$, with $Y\\mapsto t$ an isomorphism. These are precisely the two completed branches, labelled by the same evaluations as the chart points in step 6. No assertion identifies an ordinary tensor product of an infinite series ring with coefficient extension.",
+   "uses": [
+    "lem-sfb-quadratic-series-integral-closure",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof, Cases I and II; Tag 0CBU (remark-trivial-quadratic-extension), branch interpretation."
+   }
+  },
+  {
+   "text": "Write the other invertible linear coordinates as $X'=AX+BY$, $Y'=CX+DY$, with $\\delta=AD-BC\\ne0$. In the original normalization substitution, $Y'=(Cz+D)t$. Expressing the same form in $X',Y'$ gives its $(X')^2$ coefficient $a'=(aD^2-bDC+cC^2)/\\delta^2$. Using the quadratic relation of step 1, compute $(Cz+D)(D-\\beta C-Cz)=D^2-\\beta CD+\\gamma C^2=\\delta^2a'/a$. The hypothesis $a'\\ne0$ makes this scalar invertible in $F$. Therefore $Cz+D$ is a unit of $L$, with inverse $(D-\\beta C-Cz)/(\\delta^2a'/a)$. It is the leading coefficient of $Y'$ as a series in $t$, proving the final clause, including when $L$ is split or the characteristic is two.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), construction (1), independence of permitted coordinates in the omitted comparison with construction (3); explicit norm identity by Q14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quadratic-homogeneous-substitution",
+  "lem-sfb-quadratic-series-field-factors",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "prop-nagata-proj-standard-open",
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-quadratic-series-integral-closure",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0CBT and 0CBU, omitted coefficient chart and geometric branch computation; explicit unit-chart, interpolation and coordinate-change details supplied by Q14, using the existing Tag 0C4A normalization nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separable quadratic algebra L over a field F the Proj of the graded ring with degree zero F and each positive degree L is Spec L and its geometric points are the two roots",
+   "results": "{\"t\": \"2026-10-23T09:34:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a separable quadratic algebra L over a field F the Proj of the graded ring with degree zero F and each positive degree L is Spec L and its geometric points are the two roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.Proj.isSeparated\", \"WeierstrassCurve.Projective\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsSeparated\"], \"digest\": \"18b6b3fd531a9f32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projIsoSpec supplies the standard chart only; the single-chart covering, coefficient identification and branch labels require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded subring F plus t L polynomial ring has a single projective chart with coordinate ring L, with evaluation at quadratic roots labeling the normalized formal branches",
+   "results": "{\"t\": \"2026-10-23T09:36:43Z\", \"tool\": \"leanfinder\", \"query\": \"The graded subring F plus t L polynomial ring has a single projective chart with coordinate ring L, with evaluation at quadratic roots labeling the normalized formal branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.toProjective\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.projIsoSpec\", \"WeierstrassCurve.Projective.Point.fromAffine_some\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"WeierstrassCurve.Projective\"], \"digest\": \"b0536c5649aea750\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projIsoSpec supplies the standard chart only; the single-chart covering, coefficient identification and branch labels require further arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjIsoSpecTopComponent\"",
+   "results": "{\"t\": \"2026-10-23T09:36:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjIsoSpecTopComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.zero_mem\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.denom_notMem\"], \"digest\": \"e01289e5999d73d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projIsoSpec supplies the standard chart only; the single-chart covering, coefficient identification and branch labels require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjIsoSpecTopComponent|quadratic.*[Bb]ranch|[Bb]ranch.*quadratic",
+   "results": "{\"t\": \"2026-10-23T09:36:44Z\", \"tool\": \"grep\", \"query\": \"ProjIsoSpecTopComponent|quadratic.*[Bb]ranch|[Bb]ranch.*quadratic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"4002e0b4fb110549\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projIsoSpec supplies the standard chart only; the single-chart covering, coefficient identification and branch labels require further arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective spectrum of a graded quadratic coefficient ring and its two geometric branches",
+   "results": "{\"t\": \"2026-10-23T09:36:44Z\", \"tool\": \"leansearch\", \"query\": \"Projective spectrum of a graded quadratic coefficient ring and its two geometric branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.mk\", \"ProjectiveSpectrum.mk.injEq\", \"ProjectiveSpectrum\", \"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.mk.congr_simp\", \"ProjectiveSpectrum.recOn\", \"ProjectiveSpectrum.ext_iff\", \"ProjectiveSpectrum.ext\"], \"digest\": \"4a7ad9d118c6153d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projIsoSpec supplies the standard chart only; the single-chart covering, coefficient identification and branch labels require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "projIsoSpec|quadratic.*[Bb]ranch|[Bb]ranch.*quadratic",
+   "results": "{\"t\": \"2026-10-23T10:44:11Z\", \"tool\": \"grep\", \"query\": \"projIsoSpec|quadratic.*[Bb]ranch|[Bb]ranch.*quadratic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"4002e0b4fb110549\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general Proj standard chart or projective spectrum definitions, not the quadratic coefficient algebra chart and normalized branch labels"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective spectrum of a graded ring whose positive homogeneous pieces are a quadratic algebra",
+   "results": "{\"t\": \"2026-10-23T10:44:11Z\", \"tool\": \"leansearch\", \"query\": \"Projective spectrum of a graded ring whose positive homogeneous pieces are a quadratic algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.mk\", \"ProjectiveSpectrum\", \"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.ext_iff\", \"ProjectiveSpectrum.ext\", \"AlgebraicGeometry.Proj.toSpecZero\", \"ProjectiveSpectrum.mk.injEq\", \"ProjectiveSpectrum.basicOpen_eq_union_of_projection\"], \"digest\": \"5a7de102f43bfcdb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general Proj standard chart or projective spectrum definitions, not the quadratic coefficient algebra chart and normalized branch labels"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.projIsoSpec, Polynomial.Separable",
+   "results": "{\"t\": \"2026-10-23T10:44:11Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.projIsoSpec, Polynomial.Separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general Proj standard chart or projective spectrum definitions, not the quadratic coefficient algebra chart and normalized branch labels"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded ring F plus t L[t] has Proj isomorphic to Spec L with roots labelling branches of a quadratic formal curve",
+   "results": "{\"t\": \"2026-10-23T10:44:13Z\", \"tool\": \"leanfinder\", \"query\": \"The graded ring F plus t L[t] has Proj isomorphic to Spec L with roots labelling branches of a quadratic formal curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"WeierstrassCurve.toProjective\", \"AlgebraicGeometry.Proj\"], \"digest\": \"3ed13c96f9c3b10c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general Proj standard chart or projective spectrum definitions, not the quadratic coefficient algebra chart and normalized branch labels"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite separable algebra L over F the graded algebra with degree zero F and every positive degree L has projective spectrum Spec L",
+   "results": "{\"t\": \"2026-10-23T10:44:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite separable algebra L over F the graded algebra with degree zero F and every positive degree L has projective spectrum Spec L\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"ProjectiveSpectrum.isPrime\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"288aefaca08cf8ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general Proj standard chart or projective spectrum definitions, not the quadratic coefficient algebra chart and normalized branch labels"
+  },
+  {
+   "tool": "grep",
+   "query": "^def projIsoSpec|^def projIsoSpecTopComponent|^def basicOpenIsoSpec",
+   "results": "{\"t\": \"2026-10-23T10:46:16Z\", \"tool\": \"grep\", \"query\": \"^def projIsoSpec|^def projIsoSpecTopComponent|^def basicOpenIsoSpec\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"07079662c77efd61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general Proj standard chart or projective spectrum definitions, not the quadratic coefficient algebra chart and normalized branch labels"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 4 and 9, permitted-coordinate part of 8: Quadratic coefficient graded chart and its geometric branch labels.",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quadratic-coefficient-proj-branches",
+  "worker": "stage1",
+  "summary": "Wrote the omitted unit-denominator chart calculation, quadratic separability and root interpolation, geometric-fibre labels, coefficientwise normalized branch maps, and permitted-coordinate norm identity. Reused the existing homogeneous-substitution, quadratic field-factor and integral-closure nodes, with no new nodes. Checked split and nonsplit cases and characteristic two; preserved the statement.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), via the existing nodal alteration/normalization dependency chain recorded in blueprint.from: this item supplies the explicit tangent coefficient chart and geometric branch labels needed by lem-sfb-nodal-local-tangent-normalization. No chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-a02b19b1c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-a02b19b1c (reviewer sub-agent of L); spot-checked: I read the whole item. Stage-1 one-level split with no new nodes and no repair note, so it is not a re-split order; the statement is unchanged and matches Stacks 0CBT construction (1)/(3) and 0CBU. Sources checked: the item proves the chart computation that 0CBT explicitly omits (D5). Step checks: (1) the homogeneous-substitution node gives the basis 1,z and the field-factors node gives the split-or-field case, with Δ=(b²−4ac)/a². (2) I recomputed g'²−4g=e²Δ, which also holds in characteristic 2. (3) (rtⁿ)²=(ut)(r²u⁻¹t^{2n−1}) forces any homogeneous prime containing ut to contain H₊, so Proj H=D₊(ut). (4) ut is a non-zero-divisor even for L=F×F; I checked ψ, η, ψη=1 and ηψ=1, and prop-nagata-proj-standard-open applies with degree 1. (5) I verified E₁²=E₁, E₁E₂=0, E₁+E₂=1 and r₁E₁+r₂E₂=z, dividing only by r₁−r₂. (6) The pullbackSpecIso leaf plus the idempotent argument gives exactly two points; the coordinate (zu)t/(ut) maps to r_i. (7) The integral-closure node is applied over Ω, and the kernel of each projection is (X−r_iY) by the telescoping identity. (8) a'=(aD²−bCD+cC²)/δ² and (Cz+D)(D−βC−Cz)=δ²a'/a. Small cases: over F₂, X²+XY and X²+XY+Y²; over ℝ, X²+Y²; over ℚ, X²−Y². Coordinate changes with a'=0 are correctly excluded. proof_deps equals the union of uses, there is no cycle and no SGA citation, and all cross-unit dependencies are Mathlib leaves, so no tool_uses. lem-trf-positive-copy-proj-affine-comparison contains the u=1 case of steps 3–4; proving it directly here is accepted. The citer lem-sfb-nodal-local-tangent-normalization uses only clauses the item states. Maintainer note: the item has no lean_audit key, inherited from Q36's creation of the node; this is not a fault of this delivery."
+ }
+}

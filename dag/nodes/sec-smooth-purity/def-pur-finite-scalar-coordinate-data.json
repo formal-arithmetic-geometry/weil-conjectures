@@ -1,0 +1,220 @@
+{
+ "id": "def-pur-finite-scalar-coordinate-data",
+ "kind": "definition",
+ "title": "Normalized finite scalar coordinates on modules and strict towers",
+ "status": "split",
+ "statement": "Let $W$ be a scheme and work on its small pro-etale site [def-weil-pbc-proetale-site]. Let $a:R\\to S$ be commutative ring sheaves, let $U$ be restriction of scalars [def-pc-sheaf-restrict-scalars], and choose $b:R^d\\simeq U(S)$, $d\\in\\mathbf N$. Use the sheafified scalar tensor and its cochain-unit-normalized left derived functor [lem-pur-derived-change-of-rings] [def-pur-change-of-rings-complex], and finite powers of complexes [lem-pur-finite-power-complex]. Define the ordinary natural coordinate isomorphism $U(S\\otimes_R M)\\simeq M^d$ as the unique one whose $j$th coordinate on every local pure tensor $s\\otimes x$ is $\\lambda_j(s)x$, where $\\lambda_j$ is the $j$th coordinate of $b^{-1}$. Finite freeness makes scalar extension exact. Define the derived coordinates by exact localization, normalized on every cochain scalar counit. Make the same constructions on whole strict $\\mathbf N^{\\mathrm{op}}$-diagrams and their ordinary derived categories [def-cbc-strict-constant-tower-operations]: the ordinary formula is imposed at every diagram index, the exact localized scalar functor has its canonical whole-cochain factor, and the derived coordinates are uniquely fixed by that factor and by localization of the ordinary coordinates followed by the canonical finite-product comparison. All constructions include $d=0$.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-change-of-rings-complex",
+  "lem-pur-finite-power-complex",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03DB, 03EK, 0E8I; sites-cohomology.tex Tags 06YY, 07A6, 0940; Bhatt--Scholze Lemmas 3.4.12 and 6.8.2(1), coefficient constructions in the item proof Steps 2--5"
+ },
+ "proof": [
+  {
+   "text": "Generalize the private finite-basis helpers of FiniteFreeScalarExtension to separate object and morphism universes. Evaluate the specified basis isomorphism on each object of the site. The resulting linear equivalence S(V) ≃ R(V)^d induces S(V) ⊗ M(V) ≃ M(V)^d, with jth component λ_j(s)x on pure tensors. Pure-tensor induction proves compatibility with restriction maps and naturality in M. The tensor presheaf is thus a finite product of sheaves, so its sheafification unit is an isomorphism. Transport the coordinate isomorphism through this unit and through the prescribed ordinary extension object equalities. Pure-tensor induction after precomposition with the unit proves uniqueness. The argument uses only finite product projections, so it includes d=0.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-change-of-rings-complex",
+    "lem-pur-finite-power-complex",
+    "lem-pur-finite-free-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars reflects isomorphisms through the forgetful functor to abelian sheaves. It preserves finite limits and colimits. Since the restricted scalar extension is naturally finite power, an exact functor, reflection gives exactness of scalar extension.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-finite-power-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An exact ordinary scalar extension inverts quasi-isomorphisms. The universal left-derived counit is therefore invertible; compose it with the quotient-to-derived comparison to identify the prescribed derived extension on cochains. Localize the ordinary natural coordinates, followed by the finite-power complex comparison and the product comparison for Q. Localization lifts this natural isomorphism uniquely; its component formula is exactly the required cochain-counit normalization.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pur-change-of-rings-complex",
+    "lem-pur-finite-power-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary coordinate isomorphism at each index of an entire strict diagram. The pointwise product comparison identifies this diagram with its categorical finite power; projection naturality proves compatibility with transition maps and pure-tensor extensionality gives uniqueness. Extension and restriction are exact pointwise. Apply the same localization construction to these entire diagram categories, using their canonical exact-localization factor. Localization uniqueness gives the required derived whole-diagram normalization before any evaluation.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "lem-pur-finite-power-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-change-of-rings-complex",
+  "lem-pur-finite-power-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-pur-finite-free-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY, 03DB, 03EK; sites-cohomology.tex Tags 06YY and 0940. Explicit finite-basis tensor calculation and localization universal property, formalized by J7."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite basis coordinates on sheafified tensor of pro-etale modules and derived strict towers normalized by the whole cochain counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Module.Basis.coe_sumCoords_of_fintype",
+     "Module.Basis.coord_apply",
+     "Module.Basis.coord",
+     "Module.Basis.coe_sumCoords_eq_finsum",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "Module.Basis.smulTower_repr_mk",
+     "Basis.piTensorProduct",
+     "Module.Basis.smulTower"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "Component APIs only; no Mathlib definition of this normalized pro-etale construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free map of ring sheaves gives unique ordinary and derived coordinates for scalar extension on modules and whole strict tower diagrams",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "IsBaseChange.of_lift_unique",
+     "IsBaseChange.iff_lift_unique",
+     "Algebra.FormallyUnramified.finite_of_free",
+     "Algebra.FormallyUnramified.projective_of_restrictScalars",
+     "Algebra.FormallyUnramified.sec",
+     "Module.Free.trans",
+     "SheafOfModules.freeHomEquiv_comp_apply",
+     "Algebra.Extension.tensorH1Cotangent"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "Component APIs only; no Mathlib definition of this normalized pro-etale construction."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryCoordinates|derivedTowerCoordinates|finiteScalarTower",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "Component APIs only; no Mathlib definition of this normalized pro-etale construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"ordinaryCoordinates|derivedTowerCoordinates|finiteScalarTower|ramifiedSheafMap|finiteTensorMap|finiteReductionIso\" lean/WeilConjectures lean/Sheaf; rg -l \"ordinaryCoordinates|derivedTowerCoordinates|finiteScalarTower|ramifiedSheafMap|finiteTensorMap|finiteReductionIso\" dag/nodes; blueprint_refs.py search \"finite scalar coordinates\"; blueprint_refs.py search \"finite coefficient arrows\"",
+   "results": "No coordinate construction in the DAG or either Lean tree. The finite coefficient arrows exist only in IntegralCompactSupportCoefficientComparison and are extracted unchanged, as the return requests. Blueprint searches each returned 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "New definition ownership for the requested canonical constructions, not a replacement of the downstream comparison theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-strict-scalar-mate",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Finite scalar proper/open mate on strict reduction towers (returned comparison Steps 3, 4); Normalized finite scalar coordinates on modules and strict towers",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteScalarCoordinateData",
+  "declaration": "WeilConjectures.PurStrictScalar.derivedTowerCoordinates",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.ordinaryCoordinates_existsUnique",
+   "WeilConjectures.PurStrictScalar.ordinaryCoordinates",
+   "WeilConjectures.PurStrictScalar.finiteScalar_exact",
+   "WeilConjectures.PurStrictScalar.derivedCoordinates_existsUnique",
+   "WeilConjectures.PurStrictScalar.derivedCoordinates",
+   "WeilConjectures.PurStrictScalar.ordinaryTowerCoordinates_existsUnique",
+   "WeilConjectures.PurStrictScalar.ordinaryTowerCoordinates",
+   "WeilConjectures.PurStrictScalar.scalarTowerRestriction_limits",
+   "WeilConjectures.PurStrictScalar.scalarTowerRestriction_colimits",
+   "WeilConjectures.PurStrictScalar.finiteScalarTower",
+   "WeilConjectures.PurStrictScalar.finiteScalarTowerCounit",
+   "WeilConjectures.PurStrictScalar.derivedTowerCoordinates_existsUnique",
+   "WeilConjectures.PurStrictScalar.derivedTowerCoordinates",
+   "WeilConjectures.PurStrictScalar.scalarTowerDerived_products",
+   "WeilConjectures.PurStrictScalar.scalarTowerExtension_additive",
+   "WeilConjectures.PurStrictScalar.scalarTowerRestriction_additive",
+   "WeilConjectures.PurStrictScalar.scalarTowerExtension_exact",
+   "WeilConjectures.PurStrictScalar.derivedTowerCoordinateNormalization",
+   "WeilConjectures.PurStrictScalar.derivedTowerCoordinates_normalized",
+   "WeilConjectures.PurStrictScalar.scalarTower_products"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteScalarCoordinateData.lean",
+  "statement": "def derivedTowerCoordinates (W : Scheme.{u}) {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) (d : ℕ) (e : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj R)) ≅ (pbcRestrict a).obj (SheafOfModules.unit ((adicLisseForget W).obj S)))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e13bc1e9",
+  "group": "N6",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e13bc1e9",
+  "group": "N6",
+  "result": "pass",
+  "note": "Delta vs PASSed-then-L-refused 3e8ec: duplicate FiniteCompactSupportScalarData.lean removed; ConstantScalarTowerAdjunction now public-imports the parent Sheaf.Paper.IntegralCompactSupportCoefficientComparison; def-pur-finite-compact-support-scalar-data is existing:true on that module (all other Lean byte-identical). Checked: record statement verbatim in live parent, 21/21 declarations present; delivered modules use no parent decl outside the record (only short-name match 'reduction' is the own PurStrictScalar.reduction); no full-name clash; DAG and import graph acyclic; all proofs sorry; item signature clauses (IsIso on D^b_ctf, evaluation = finiteTensorMap, finite isos, transition squares) as before. Maintainer notes: (1) stage 3: parent lem-pur-compact-support-integral-coefficient-comparison has this item in proof_deps while the item imports the parent module (cycle import omitted per stages/2 §3 rule 7) - relocate the 21 finite decls upstream into a def-pur-finite-compact-support-scalar-data module or prove dependent parent clauses in a separate module before the parent's stage 3; (2) advisory H9: the parent import sits in ConstantScalarTowerAdjunction, whose node does not cite the def node; (3) the 21 decls are listed in two node records. No fix; nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8a6e9",
+  "group": "J7",
+  "result": "fix",
+  "landing": "20261025T003325-L-3229127",
+  "kind": "interface",
+  "note": "independent cc review: Delivered FiniteScalarCoordinateData and FiniteFreeScalarExtension against node def-pur-finite-scalar-coordinate-data, the change records, and every direct importer in the live clone, each compiled in a sandbox; the landed import-all user DerivedFiniteFreeScalarCoordinates broke on the changed private scalarExtension_hom_ext"
+ }
+}

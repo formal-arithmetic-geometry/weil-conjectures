@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-normal-sections-algebraic-constants",
+ "kind": "statement",
+ "title": "Algebraic rational functions from finite global sections of a normal scheme",
+ "statement": "Let $A$ be a commutative integral domain, put $F=\\operatorname{Frac}A$, and let $h:X\\to\\operatorname{Spec}A$ be a dominant morphism from an integral scheme $X$ [def-pc-scheme, def-pc-integral-scheme, def-weil-affine-spectrum]. Assume that every local ring $\\mathcal O_{X,x}$ is an integrally closed domain [def-weil-pbc-normal-ring]. Put $E=k(X)=\\mathcal O_{X,\\eta}$, where $\\eta$ is the generic point [def-sc-function-field], and $R=\\Gamma(X,\\mathcal O_X)$. Regard $A\\subseteq R\\subseteq E$ through pullback and the germ at $\\eta$, and regard $F\\subseteq E$ through the induced fraction-field embedding [def-sfb-dominant-function-field-map]. Suppose $R$ is a finite $A$-module, meaning finitely generated as an $A$-module. Then, inside $E$, the field $L=\\operatorname{Frac}R$ satisfies\n$$L=\\{a\\in E:a\\text{ is algebraic over }F\\}.$$\nThis is the relative algebraic closure of [def-weil-relative-algebraic-closure]. Moreover $L/F$ is finite, and $L$ is algebraically closed in $E$: every element of $E$ algebraic over $L$ belongs to $L$. For every $a\\in E$ algebraic over $F$, there exist $0\\ne d\\in A$ and $r\\in R$ with $r=da$ in $E$ (so $a=r/d$). Algebraicity has the meaning of [def-weil-algebraic-element]. Neither properness nor a finite-type hypothesis is imposed on $h$; finiteness of $R$ is the stated module hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0358 (lemma-normal-integral-sections), local integral-elements and gluing argument adapted to algebraicity over Frac A; fields.tex Tag 09GI (lemma-algebraic-elements) and the finite-spanning-family algebraicity argument. This relative version is an agent-written consequence, not a verbatim Stacks statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-normal-ring",
+  "def-sc-function-field",
+  "def-sfb-dominant-function-field-map",
+  "def-weil-relative-algebraic-closure",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-integral-scheme-stalks-in-function-field], the generic germ embeds $R$ into the field $E$, so $R$ is a domain. With the stipulated injective map $A\\subseteq R$, [lem-trf-finite-domain-fraction-degree] gives $[L:F]<\\infty$. Apply [lem-weil-pbc-finite-algebra-is-integral] to the finite $F$-module $L$: each element of $L$ satisfies a monic (hence nonzero) polynomial over $F$, and so is algebraic over $F$. Its equality in $E$ is the same polynomial equality, since the embedding of $L$ extends that of $R$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-trf-finite-domain-fraction-degree",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GG (lemma-finite-is-algebraic); finite fraction-field extension supplied by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Fix $a\\in E$ algebraic over $F$. Divide an annihilating nonzero polynomial by its leading coefficient to write $a^n+\\sum_{i=0}^{n-1}c_i a^i=0$, $n\\ge1$, $c_i\\in F$. Write $c_i=u_i/v_i$ with $u_i,v_i\\in A$, $v_i\\ne0$, and set $d=\\prod_{i=0}^{n-1}v_i\\ne0$. Thus $dc_i=u_i\\prod_{j\\ne i}v_j\\in A$. Put $b=da$. Multiplying the equation by $d^n$ gives $b^n+\\sum_{i=0}^{n-1}e_i b^i=0$, where $e_i=d^{n-i}c_i=d^{n-i-1}(dc_i)\\in A$. This is a monic equation for $b$ over $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358 (lemma-normal-integral-sections), adapted monic-equation argument; explicit denominator calculation"
+   }
+  },
+  {
+   "text": "For each $x\\in X$, [lem-sc-integral-scheme-stalks-in-function-field] identifies $E$ with the fraction field of $\\mathcal O_{X,x}$ via the compatible map $\\rho_x$. Send the coefficients $e_i$ of step 2 through $A\\to R\\to\\mathcal O_{X,x}$. Their images in $E$ are unchanged, since all maps are pullbacks and germs of the same sections. Consequently $b$ satisfies the same monic equation over $\\mathcal O_{X,x}$. This local ring is integrally closed by hypothesis, so the definition [def-weil-pbc-normal-ring] puts $b$ in $\\rho_x(\\mathcal O_{X,x})$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358 (lemma-normal-integral-sections), local integrally closed domain argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-function-field-sections-glue] with the nonempty open $U=X$ and $g=b$. Step 3 verifies its local membership hypothesis at every point. It gives $r\\in R$ whose generic germ is $b=da$. Therefore $a=r/d\\in L$, because $d\\in A\\subseteq R$ is nonzero. This also proves the specified denominator conclusion with its nonzero denominator in $A$.",
+   "uses": [
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358 (lemma-normal-integral-sections), local representatives glue; use the existing general gluing theorem"
+   }
+  },
+  {
+   "text": "Step 1 gives $L\\subseteq\\{a\\in E:a\\text{ algebraic over }F\\}$, and steps 2--4 give the reverse inclusion. The resulting set is exactly the relative algebraic closure by [def-weil-relative-algebraic-closure]. Finiteness of $L/F$ was already proved in step 1.",
+   "uses": [
+    "def-weil-relative-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GI (lemma-algebraic-elements), identification with the relative algebraic closure"
+   }
+  },
+  {
+   "text": "If $a\\in E$ is algebraic over $L$, step 1 says that $L/F$ is algebraic. Apply [lem-sfb-algebraic-element-tower] to the compatible tower $F\\subseteq L\\subseteq E$. It makes $a$ algebraic over $F$, and the equality of step 5 then gives $a\\in L$. This is the asserted algebraic closedness of $L$ inside $E$.",
+   "uses": [
+    "lem-sfb-algebraic-element-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GJ (lemma-algebraic-permanence), elementwise algebraic transitivity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-relative-algebraic-closure",
+  "lem-sc-function-field-sections-glue",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sfb-algebraic-element-tower",
+  "lem-trf-finite-domain-fraction-degree",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0358 local monic-equation and gluing argument adapted to the base fraction field, with fields.tex Tags 09GG, 09GI, 09GJ; the relative statement is not verbatim in Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal integral scheme X dominant over a domain A whose global sections R are finite over A, the fraction field of R is the relative algebraic closure of Frac A in the function field of X",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(R : CommRingCat) → [inst : IsDomain ↑R] → Algebra ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (R : CommRingCat) [inst : IsDomain ↑R], IsFractionRing ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [inst_1 : Nonempty ↥↑U], IsFractionRing ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an integral scheme $X$ and a non-empty affine open subset $U$ of $X$, the function field of $X$ is the fraction field of the ring of sections $\\\\Gamma(X, U)$. This follows from the fact that every \"}\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}\n  {\"name\": \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (x : ↥X) → Algebra ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and any point $x$ in $X$, the function field of $X$ is equipped with an algebra structure over the stalk of the structure sheaf at $x$. This algebra is defined via the sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] →\\n    (U : X.Opens) → [Nonempty ↥↑U] → Algebra ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This algebra st\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field fraction-ring instances, rational-function denominators and IsIntegrallyClosed supply ingredients; none identifies finite global-section fractions with all algebraic rational functions on an arbitrary normal integral scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic rational function on a normal integral scheme becomes a global section after multiplying by a nonzero base denominator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RatFunc.denom_ne_zero\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \"(x : RatFunc K) : denom x ≠ 0\", \"doc\": \"For any rational function $ x $ over a commutative ring $ K $, the normalized denominator $ \\\\mathrm{denom}(x) $ is not equal to zero.\"}\n  {\"name\": \"RatFunc.denom\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \"(x : RatFunc K) : K[X]\", \"doc\": \"The function that maps a rational function $ x $ over a commutative ring $ K $ to its normalized denominator $ q $, where $ q $ is a monic polynomial coprime with the numerator $ p $, and $ q \\neq 0 $.\"}\n  {\"name\": \"RatFunc.denom_div_dvd\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \"(p q : K[X]) : denom (algebraMap _ _ p / algebraMap _ _ q) ∣ q\", \"doc\": \"For any polynomials $p$ and $q$ over a commutative domain $K$, the normalized denominator of the rational function $\\\\frac{p}{q}$ divides the polynomial $q$ in $K[X]$. The normalized denominator is a m\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"{U : Opens (PrimeSpectrum.Top R)} (f : ∀ x : U, Localizations R x) : Prop\", \"doc\": \"A function $ f $ defined on an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ is called a fraction if there exist elements $ r, s \\\\in R $ such that for every prime ideal $ \\\\mathfra\"}\n  {\"name\": \"RatFunc.denom_dvd\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \"{x : RatFunc K} {q : K[X]} (hq : q ≠ 0) : denom x ∣ q ↔ ∃ p : K[X], x = algebraMap _ _ p / algebraMap _ _ q\", \"doc\": \"For any rational function $x$ over a commutative domain $K$ and non-zero polynomial $q$, the normalized denominator of $x$ divides $q$ if and only if there exists a polynomial $p$ such that $x = \\\\frac\"}\n  {\"name\": \"RatFunc.instIsFractionRingPolynomial\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \": IsFractionRing K[X] (RatFunc K)\", \"doc\": \"For any commutative domain $ K $, the field of rational functions $ \\\\text{RatFunc}(K) $ is the fraction field of the polynomial ring $ K[X] $. This means $ \\\\text{RatFunc}(K) $ satisfies the universal \"}\n  {\"name\": \"RatFunc.num_inv_dvd\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \"{x : RatFunc K} (hx : x ≠ 0) : num x⁻¹ ∣ denom x\", \"doc\": \"For any non-zero rational function $x$ over a commutative ring $K$, the numerator of its multiplicative inverse $x^{-1}$ divides the denominator of $x$. Specifically, if $x$ is expressed in normalized\"}\n  {\"name\": \"RatFunc.noConfusionType\", \"module\": \"Mathlib.FieldTheory.RatFunc.Defs\", \"type\": \"Sort u_1 →\\n  {K : Type u} → [inst : CommRing K] → RatFunc K → {K' : Type u} → [inst' : CommRing K'] → RatFunc K' → Sort u_1\", \"doc\": \"The type of rational functions over a commutative ring $ K $, defined as the fraction ring of the polynomial ring $ K[X] $ by localizing at its non-zero divisors. This construction generalizes the fie\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field fraction-ring instances, rational-function denominators and IsIntegrallyClosed supply ingredients; none identifies finite global-section fractions with all algebraic rational functions on an arbitrary normal integral scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"isIntegral\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsIntegrallyClosed\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) [CommRing R] : Prop\", \"doc\": \"`R` is integrally closed if all integral elements of `Frac(R)` are also elements of `R`.\\n\\nThis definition uses `FractionRing R` to denote `Frac(R)`. See `isIntegrallyClosed_iff`\\nif you want to choose \"}\n  {\"name\": \"Field.instIsIntegrallyClosed\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (K : Type u_1) [Field K] : IsIntegrallyClosed K\", \"doc\": \"Any field is integral closed.\"}\n  {\"name\": \"IsIntegrallyClosedIn.inst\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] : IsIntegrallyClosedIn R R\", \"doc\": \"\"}\n  {\"name\": \"IsIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] : Prop\", \"doc\": \"`R` is integrally closed in `A` if all integral elements of `A` are also elements of `R`.\"}\n  {\"name\": \"isIntegrallyClosed_iff_isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] (K : Type u_4) [CommRing K] [Algebra R K] [IsFractionRing R K] : IsIntegrallyClosed R ↔ IsIntegrallyClosedIn R K\", \"doc\": \"`R` is integrally closed iff it is the integral closure of itself in its field of fractions.\"}\n  {\"name\": \"IsIntegrallyClosed.instIsIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] {K : Type u_3} [CommRing K] [Algebra R K] [ifr : IsFractionRing R K] [iic : IsIntegrallyClosed R] : IsIntegralClosure R R K\", \"doc\": \"Note that this is not a duplicate instance, since `IsIntegrallyClosed R` is instead defined\\nas `IsIntegrallyClosed R R (FractionRing R)`.\"}\n  {\"name\": \"isIntegrallyClosed_iff_isIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] (K : Type u_4) [CommRing K] [Algebra R K] [IsFractionRing R K] : IsIntegrallyClosed R ↔ IsIntegralClosure R R K\", \"doc\": \"`R` is integrally closed iff it is the integral closure of itself in its field of fractions.\"}\n  {\"name\": \"IsIntegrallyClosed.of_isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_4) (K : Type u_5) [CommRing R] [Field K] [Algebra R K] [FaithfulSMul R K] [IsIntegrallyClosedIn R K] : IsIntegrallyClosed R\", \"doc\": \"\"}\n  {\"name\": \"IsIntegrallyClosed.of_equiv\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R ≃+* S) [h : IsIntegrallyClosed R] : IsIntegrallyClosed S\", \"doc\": \"\"}\n  {\"name\": \"IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) (S : Type u_2) [CommRing R] [CommRing S] [Algebra R S] [IsDomain S] [FaithfulSMul R S] [IsIntegrallyClosed S] [IsIntegrallyClosedIn R S] : IsIntegrallyClosed R\", \"doc\": \"\"}\n  {\"name\": \"AlgEquiv.isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] {A : Type u_2} {B : Type u_3} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (e : A ≃ₐ[R] B) : IsIntegrallyClosedIn R A ↔ IsIntegrallyClosedIn R B\", \"doc\": \"Being integrally closed is preserved under algebra isomorphisms.\"}\n  {\"name\": \"IsIntegrallyClosedIn.algebraMap_eq_of_integral\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] [IsIntegrallyClosedIn R A] {x : A} : IsIntegral R x → ∃ y, (algebraMap R A) y = x\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field fraction-ring instances, rational-function denominators and IsIntegrallyClosed supply ingredients; none identifies finite global-section fractions with all algebraic rational functions on an arbitrary normal integral scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*[Aa]lgebraic|[Aa]lgebraic.*functionField|[Ss]ection.*[Ii]ntegrallyClosed",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"17\", \"text\": \"* `AlgebraicGeometry.Scheme.functionField`: The function field of an integral scheme.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"18\", \"text\": \"* `AlgebraicGeometry.Scheme.germToFunctionField`: The canonical map from a component into the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.FunctionField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"23\", \"text\": \"* `AlgebraicGeometry.Scheme.RationalMap.equivFunctionFieldOver`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.FunctionField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.FunctionField\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field fraction-ring instances, rational-function denominators and IsIntegrallyClosed supply ingredients; none identifies finite global-section fractions with all algebraic rational functions on an arbitrary normal integral scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The field of fractions of finite global sections of a normal integral scheme over a domain equals the algebraic closure of the fraction field of the base in its rational function field",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicClosure|isAlgebraic|IsIntegrallyClosed",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: function-field fraction-ring instances, rational-function denominators and IsIntegrallyClosed supply ingredients; none identifies finite global-section fractions with all algebraic rational functions on an arbitrary normal integral scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of finite global sections of a normal integral scheme dominant over a domain is the relative algebraic closure of the base fraction field in its function field",
+   "results": "{\"t\": \"2026-10-23T04:26:44Z\", \"tool\": \"leanfinder\", \"query\": \"The fraction field of finite global sections of a normal integral scheme dominant over a domain is the relative algebraic closure of the base fraction field in its function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\"], \"digest\": \"01c7ad7c706ef0d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole scheme statement: fraction-field/stalk instances and integral-closure definitions are ingredients only; both natural-language phrasings were inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*[Aa]lgebraic|[Aa]lgebraic.*functionField|[Ss]ections.*[Ii]ntegrallyClosed",
+   "results": "{\"t\": \"2026-10-23T04:27:42Z\", \"tool\": \"grep\", \"query\": \"functionField.*[Aa]lgebraic|[Aa]lgebraic.*functionField|[Ss]ections.*[Ii]ntegrallyClosed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"e138b3a3d449e320\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole scheme statement: fraction-field/stalk instances and integral-closure definitions are ingredients only; both natural-language phrasings were inspected"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic rational function on a normal integral scheme becomes a global section after multiplying by a nonzero element of the base domain",
+   "results": "{\"t\": \"2026-10-23T04:27:43Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic rational function on a normal integral scheme becomes a global section after multiplying by a nonzero element of the base domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.const\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"RatFunc.instIsFractionRingPolynomial\", \"RatFunc.noConfusionType\", \"RatFunc.instAlgebraOfPolynomial\", \"RatFunc.mk_eq_mk'\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"RatFunc.transcendental\"], \"digest\": \"ff24e282daafad9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole scheme statement: fraction-field/stalk instances and integral-closure definitions are ingredients only; both natural-language phrasings were inspected"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"isIntegral\"",
+   "results": "{\"t\": \"2026-10-23T04:27:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegrallyClosed\\\", \\\"isIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsIntegrallyClosed\", \"Field.instIsIntegrallyClosed\", \"IsIntegrallyClosedIn.inst\", \"IsIntegrallyClosedIn\", \"isIntegrallyClosed_iff_isIntegrallyClosedIn\", \"IsIntegrallyClosed.instIsIntegralClosure\", \"isIntegrallyClosed_iff_isIntegralClosure\", \"IsIntegrallyClosed.of_isIntegrallyClosedIn\"], \"digest\": \"e48874180cb4864e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole scheme statement: fraction-field/stalk instances and integral-closure definitions are ingredients only; both natural-language phrasings were inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-stein-constant-field",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, Stein factorization paragraph: R(Y) is algebraically closed in R(X); algebraic constant-field argument, original lem-sfb-normal-stein-constant-field proof steps 5--7 (finite localization, denominator polynomial, normal stalks and gluing, algebraic transitivity)",
+   "via": [
+    "lem-sfb-normal-stein-constant-field",
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normal-sections-algebraic-constants",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave the finite fraction-field, explicit denominator polynomial, normal-stalk, global gluing, equality and algebraic-transitivity arguments in six steps. Reused existing finite-degree, stalk, integral-algebra and gluing nodes. One new exact Mathlib leaf supplies elementwise algebraic transitivity; no properness, finite-type, Noetherian or quasi-compact assumption is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, Stein factorization paragraph: R(Y) is algebraically closed in R(X); algebraic constant-field argument, original lem-sfb-normal-stein-constant-field proof steps 5--7 (finite localization, denominator polynomial, normal stalks and gluing, algebraic transitivity)",
+  "tool_uses": [
+   {
+    "node": "lem-sc-function-field-sections-glue",
+    "why": "Generic gluing tool for a rational function lying in every local ring, used with U=X after the normal-stalk argument; this realizes the prescribed normal-section route and is not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-function-field-sections-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-cf71b470a",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-cf71b470a (reviewer sub-agent of L); spot-checked: I read the whole item, the new Mathlib leaf, every cited statement, Stacks 0358 (properties.tex l.1006-1036) and 09GJ (fields.tex l.740-759), and the Mathlib source for IsAlgebraic.restrictScalars (Integral.lean:248-271, section variables at l.141-142 and 217-219). The live and side-live clones still show the item unsplit with the same statement, and there is no repair note, so this is not a re-split. The statement is unchanged, and it gives everything the parent lem-sfb-normal-stein-constant-field uses in its step 3: the equality, finiteness and algebraic closedness. A injects into R because dominance makes A->E factor through Frac A, so calling the map 'stipulated' adds no hypothesis. Step 1: the germ embeds R in E; lem-trf-finite-domain-fraction-degree gives Frac R finite over Frac A, applied to L and not to E; finite-is-integral then gives algebraicity. Step 2: I checked the denominator computation e_i=d^{n-i-1}(d c_i) with n>=1; it is elementary. Step 3: the coefficients are germs of the same sections, and the normal-ring definition is applied via clause 2 of the stalk lemma. Step 4: function-field-sections-glue with U=X gives r=da, which also proves the denominator clause. Step 5 uses the definition of the relative algebraic closure. Step 6 applies the new leaf to F in L in E. proof_deps equals the union of the uses. The declared tool use of lem-sc-function-field-sections-glue (unit sk-def-pic) is accepted: it is generic gluing and is exactly the gluing step of 0358. Batch-5 finding: lem-trf-finite-domain-fraction-degree is a pure commutative-algebra Mathlib leaf (instFiniteDimensionalFractionRingOfFinite) with no proof_deps. It is neither the trace formula, nor Poincare duality, nor a step of their proofs, so it is genuinely outside the assumptions and the citation is accepted. New node lem-sfb-algebraic-element-tower: statement-only, self-contained, cites its definition nodes, Stacks 09GJ, has all four search kinds, and is a correct one-line specialization of IsAlgebraic.restrictScalars (fields give NoZeroDivisors and the scalar tower). Its blueprint.from and via are correct. No duplicate: I compared it with lem-pod-algebraic-extension-closure-equivalence, lem-weil-pbc-relative-algebraic-closure-algclosed, lem-zl-separable-permanence and lem-zl-independence-algebraic-base. It is strictly smaller than the item. Edge cases checked: Spec Z[i] over Z, P^1_k over k, P^1_k' over k, A^1 (excluded by the finiteness hypothesis), inseparable a, and n=1. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalSectionsAlgebraicConstants",
+  "declaration": "AlgebraicGeometry.normal_sections_algebraic_constants",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalSectionsAlgebraicConstants.lean",
+  "statement": "theorem normal_sections_algebraic_constants (A : Type u) [CommRing A] [IsDomain A] (X : Scheme.{u}) [IsIntegral X] (h : X ⟶ Spec (CommRingCat.of A)) [IsDominant h] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) (hfin : @Module.Finite A Γ(X, ⊤) _ _ (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ h.appTop).hom.toAlgebra.toModule)) : ∃ e : Algebra (Spec (CommRingCat.of A)).functionField X.functionField, e = h.dominantFunctionFieldAlgebra ∧ ∃ L : IntermediateField (Spec (CommRingCat.of A)).functionField X.functionField, L.toSubfield = Subfield.closure (Set.range (X.presheaf.germ ⊤ (genericPoint X) (by trivial))) ∧ L = algebraicClosure (Spec (CommRingCat.of A)).functionField X.functionField ∧ FiniteDimensional (Spec (CommRingCat.of A)).functionField L ∧ (∀ a : X.functionField, IsAlgebraic L a → a ∈ L) ∧ ∀ a : X.functionField, IsAlgebraic (Spec (CommRingCat.of A)).functionField a → ∃ d : A, d ≠ 0 ∧ ∃ r : Γ(X, ⊤), X.presheaf.germ ⊤ (genericPoint X) (by trivial) r = X.presheaf.germ ⊤ (genericPoint X) (by trivial) (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ h.appTop) d) * a",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a048d4cdb",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_dep records, module, report. Node JSON only adds lean record; lean.statement verbatim in file. Hypotheses match exactly (IsDomain A, IsIntegral X, IsDominant h, stalks IsIntegrallyClosed with domain from integrality, Module.Finite for the actual ΓSpecIso.inv≫h.appTop pullback algebra); no extra finite-type/proper/Noetherian assumptions; single universe forced by h : X ⟶ Spec A. Algebra F→E pinned by e = h.dominantFunctionFieldAlgebra (real canonical def, no competing global instance). Conclusions: L.toSubfield = closure of generic germs (Frac R), L = algebraicClosure F E, FiniteDimensional F L, algebraic closedness, nonzero A-denominator clause; all present, correct order. Mathematically true (Stacks 0358 + 09GG/09GI/09GJ); edge cases A field, h=id, a=0, non-normal A, A^1 excluded, inseparable. No duplicate (exists_normal_stein_constant_field is proper/finite-type Stein). No definitions, proof sorry, docstrings with source/blueprint/six steps, report has Worker report and Second reading by NU. No findings."
+ }
+}

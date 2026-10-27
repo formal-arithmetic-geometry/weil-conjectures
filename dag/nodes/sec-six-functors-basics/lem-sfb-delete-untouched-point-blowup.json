@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-delete-untouched-point-blowup",
+ "kind": "statement",
+ "title": "Deleting an untouched contracted point blowup from a surface tower",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $X_n\\xrightarrow{b_n}\\cdots\\xrightarrow{b_1}X_0$ be a finite tower of $S$-morphisms between integral regular Noetherian schemes of dimension two [def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth, def-kun-topological-krull-dimension], where Noetherian means locally Noetherian and quasi-compact. Each $b_i$ is the blowup of a reduced closed point $x_{i-1}\\in X_{i-1}$ with $\\dim\\mathcal O_{X_{i-1},x_{i-1}}=2$ [def-nagata-global-blowup, def-weil-pbc-krull-dimension-ring]. Fix $1\\le a\\le n$. Put $E_a=b_a^{-1}(x_{a-1})$ and let $E_i\\subset X_i$ for $i>a$ be its successive strict transforms [def-nagata-strict-transform]. Assume $x_{i-1}\\notin E_{i-1}$ for every $i>a$. Let $Z$ be an $S$-scheme and $f:X_n\\to Z$ an $S$-morphism whose topological image $f(E_n)$ consists of one point. Then there are a tower $p':X'_{n-1}\\to X_0$ of $n-1$ reduced-closed-point blowups between integral regular Noetherian surfaces, an $S$-morphism $c:X_n\\to X'_{n-1}$, and an $S$-morphism $f':X'_{n-1}\\to Z$, such that $p'c=b_1\\cdots b_n$ and $f'c=f$. The morphism $c$ is itself the blowup of a reduced closed point, its exceptional fibre is $E_n$, and it is an isomorphism away from that fibre. If $V\\subset X_0$ is open and every original centre maps outside $V$, every centre of $p'$ also maps outside $V$, and these maps identify with the original identity maps over $V$.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent tower refinement of Tag 0C5J (lemma-factor-through-contraction): move the untouched blowup past later disjoint centres, using divisors.tex Tag 0805 (lemma-flat-base-change-blowing-up) for open restrictions. Neither tag alone states the tower deletion assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-nagata-strict-transform",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y_{a-1}=X_{a-1}$ and $c_a=b_a:X_a\\to Y_{a-1}$, with centre $z_a=x_{a-1}$. We inductively construct $Y_{i-1}\\to\\cdots\\to Y_{a-1}$ and a point blowup $c_i:X_i\\to Y_{i-1}$ with centre $z_i$ of local dimension two, exceptional fibre $E_i$, and $c_i$ an isomorphism off $E_i$. The square with the original composite to $X_{a-1}$ must commute. These requirements hold for $i=a$ by the hypotheses and the complement isomorphism. The schemes $Y_{i-1}$ will be integral regular Noetherian surfaces. If $a=n$, there are no induction steps.",
+   "uses": [
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), part (1); initialization of the tower induction"
+   }
+  },
+  {
+   "text": "Suppose $a\\le i<n$ and the induction data are constructed. Write $T=Y_{i-1}$, $z=z_i$, $q=x_i$, and $y=c_i(q)$. The hypothesis $q\\notin E_i$ and the complement isomorphism give $y\\ne z$ and identify the local rings at $q$ and $y$. Thus $\\dim\\mathcal O_{T,y}=2$. The point $y$ is closed: $\\{q\\}$ is closed in $X_i$ and $c_i$ is proper by regular point-blowup geometry, hence closed by the definition of properness. Let $d_i:Y_i=\\operatorname{Bl}_yT\\to T$. The same geometry gives integrality, regularity, Noetherianity and the complement isomorphism for $Y_i$. It also gives local dimension two at its closed exceptional points; elsewhere the local rings are those of $T$. Consequently $\\dim Y_i\\le2$: any finite chain of specializations extends to a closed point in a Noetherian space, and is bounded by that local dimension. The closed point $z$ has a unique preimage $z'\\in Y_i$ because $z\\ne y$; its local ring is $\\mathcal O_{T,z}$, of dimension two. Therefore $\\dim Y_i=2$ and $z'$ is a reduced closed point of local dimension two.",
+   "uses": [
+    "lem-sfb-regular-point-blowup-geometry",
+    "def-weil-proper-morphism",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0AGR (lemma-blowup-regular), 0AGQ (lemma-blowup); closedness and local dimensions in the induction"
+   }
+  },
+  {
+   "text": "Form $B=\\operatorname{Bl}_{z'}Y_i$. Compare $X_{i+1}=\\operatorname{Bl}_qX_i$ with $B$ over $T$ on the open cover $U=T\\setminus\\{y\\}$, $W=T\\setminus\\{z\\}$. Flat blowup base change applies to these open inclusions: their maps on local rings are isomorphisms and hence flat. Over $U$, the $q$-blowup is the identity, $d_i$ is the identity, and the $z'$-blowup is the $z$-blowup; thus both restrictions are canonically $\\operatorname{Bl}_zU$. Over $W$, $c_i$ is the identity, $q$ is the reduced point $y$ under that identity, and the $z'$-blowup is the identity; thus both restrictions are canonically $\\operatorname{Bl}_yW$. Here centres and their ideals are identified scheme-theoretically by these isomorphisms, not merely by their supports. Over $U\\cap W$ every blowup is the complement isomorphism. The two local identifications and their inverses therefore agree there, as the identity over $U\\cap W$. Glue the maps to $B$ and the inverse maps to $X_{i+1}$ by scheme-morphism gluing; their composites are identities on each covering open, hence globally. This gives an isomorphism $h_i:X_{i+1}\\xrightarrow{\\sim}B$ over $T$. Define $c_{i+1}$ as $h_i$ followed by the blowup $B\\to Y_i$. Then $d_ic_{i+1}=c_ib_{i+1}$, since this equality holds on both opens.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805 (lemma-flat-base-change-blowing-up), restricted to the two complementary opens; Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), part (1)"
+   }
+  },
+  {
+   "text": "The fibre of $c_{i+1}$ above $z'$ lies over $U$ and there is exactly $c_i^{-1}(z)=E_i$, viewed in $X_{i+1}$ by the isomorphism away from $q$. This is $E_{i+1}$ as a closed subscheme: $E_i$ is disjoint from the centre $q$, its inverse image is closed, and that entire inverse image is already in the open used in the definition of strict transform, so taking its scheme-theoretic closure adds nothing. Thus $c_{i+1}$ has exceptional fibre $E_{i+1}$ and is an isomorphism off it. The point $z'$ has local dimension two by step 2, so all induction requirements hold at $i+1$. Repeat for $i=a,\\ldots,n-1$. Concatenate the unchanged first $a-1$ blowups with $d_a,\\ldots,d_{n-1}$. This is a tower $p':Y_{n-1}\\to X_0$ of $(a-1)+(n-a)=n-1$ point blowups of the required surfaces. Set $c=c_n$. The commuting squares, composed, give $p'c=b_1\\cdots b_n$. In the case $n=a=1$, $p'$ is the empty tower and $c=b_1$.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805 (lemma-flat-base-change-blowing-up), two-open construction; strict-transform definition for a disjoint centre"
+   }
+  },
+  {
+   "text": "Apply point-blowdown factorization to $c:X_n\\to Y_{n-1}$ and $f$. Its base is regular Noetherian of dimension two by the induction, its centre is a reduced closed point, and its exceptional fibre is $E_n$ with singleton image under $f$. It supplies a unique scheme morphism $f':Y_{n-1}\\to Z$ with $f'c=f$. This map is over $S$: writing $s_Z,s_Y,s_X$ for the structure morphisms, both $s_Zf'$ and $s_Y$ become $s_X$ after composition with $c$. They are equal by the uniqueness clause of the same point-blowdown factorization, applied now to $s_X:X_n\\to S$. This application is valid because $s_X=s_Yc$ has singleton image on the nonempty fibre $E_n$. All constructed maps to $Y_i$ and $X_0$ are already over $S$, by their construction over $T$.",
+   "uses": [
+    "lem-sfb-point-blowdown-factorization",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5J (lemma-factor-through-contraction), existence and uniqueness; apply uniqueness also to the structure map"
+   }
+  },
+  {
+   "text": "Finally suppose all original centres map outside $V\\subset X_0$. Every retained old centre has its original image. Each new centre in step 2 is $y=c_i(x_i)$, so the commuting square makes its image in $X_0$ exactly the original image of $x_i$. The moved centre $z'$ maps to $z$, and recursively to $x_{a-1}$. Hence every centre of $p'$ and of $c$ maps outside $V$. The complement isomorphism identifies each old and new blowup restriction over $V$ with the identity on $V$. The local identifications used in step 3 restrict there to the identity too (over either member of the two-open cover); scheme-morphism gluing makes these restrictions agree globally. Composing these identifications proves the claimed compatibility over $V$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), part (1); preserved-open compatibility in the two-open construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-nagata-global-blowup-complement",
+  "lem-sfb-regular-point-blowup-geometry",
+  "def-weil-proper-morphism",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-flat-morphism",
+  "def-nagata-strict-transform",
+  "lem-sfb-point-blowdown-factorization",
+  "def-weil-scheme-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent induction using the two-open specialization of divisors.tex Tag 0805, followed by resolve.tex Tag 0C5J. Neither source states the tower result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blowup.*(commut|descend|factor)|exceptional.*(contract|curve)|factor.*blowup",
+   "results": "{\"t\": \"2026-10-23T04:25:49Z\", \"tool\": \"grep\", \"query\": \"blowup.*(commut|descend|factor)|exceptional.*(contract|curve)|factor.*blowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj chart identities, flat descent and abstract regular epimorphisms do not delete an internal surface point blowup or construct the required contraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from an iterated blowup of a regular surface descends after removing a point blowup whose exceptional divisor is untouched by later blowups and mapped to a point",
+   "results": "{\"t\": \"2026-10-23T04:25:49Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from an iterated blowup of a regular surface descends after removing a point blowup whose exceptional divisor is untouched by later blowups and mapped to a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsSmooth\", \"CategoryTheory.RegularEpi.desc'\"], \"digest\": \"38f2ccfaa52443ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj chart identities, flat descent and abstract regular epimorphisms do not delete an internal surface point blowup or construct the required contraction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowupMap\"",
+   "results": "{\"t\": \"2026-10-23T04:25:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowupMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj chart identities, flat descent and abstract regular epimorphisms do not delete an internal surface point blowup or construct the required contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Delete an intermediate point blowup in a regular surface blowup tower when later centres avoid its exceptional curve and a final morphism contracts that curve",
+   "results": "{\"t\": \"2026-10-23T04:25:55Z\", \"tool\": \"leanfinder\", \"query\": \"Delete an intermediate point blowup in a regular surface blowup tower when later centres avoid its exceptional curve and a final morphism contracts that curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\"], \"digest\": \"5f2f82a7fc0b2c6a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj chart identities, flat descent and abstract regular epimorphisms do not delete an internal surface point blowup or construct the required contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Disjoint point blowups of a regular surface commute and contraction of an untouched exceptional projective line permits deleting that blowup from a tower",
+   "results": "{\"t\": \"2026-10-23T04:25:56Z\", \"tool\": \"leanfinder\", \"query\": \"Disjoint point blowups of a regular surface commute and contraction of an untouched exceptional projective line permits deleting that blowup from a tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Affine.Point.map_map\", \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\"], \"digest\": \"e04daf30532cab1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj chart identities, flat descent and abstract regular epimorphisms do not delete an internal surface point blowup or construct the required contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(commut|factor|descend)|blowdown|exceptional.*curve",
+   "results": "{\"t\": \"2026-10-23T09:35:50Z\", \"tool\": \"grep\", \"query\": \"blowup.*(commut|factor|descend)|blowdown|exceptional.*curve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization, flat descent, smoothness, Proj and elliptic-curve declarations do not state surface tower deletion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism constant on the exceptional fibre of an untouched point blowup descends through a shorter blowup tower",
+   "results": "{\"t\": \"2026-10-23T09:35:50Z\", \"tool\": \"leansearch\", \"query\": \"A morphism constant on the exceptional fibre of an untouched point blowup descends through a shorter blowup tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"b0962957f69c6715\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization, flat descent, smoothness, Proj and elliptic-curve declarations do not state surface tower deletion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-23T09:35:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization, flat descent, smoothness, Proj and elliptic-curve declarations do not state surface tower deletion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up two distinct closed points commutes; remove an untouched exceptional curve from a sequence of surface blowups",
+   "results": "{\"t\": \"2026-10-23T09:36:00Z\", \"tool\": \"leanfinder\", \"query\": \"Blowing up two distinct closed points commutes; remove an untouched exceptional curve from a sequence of surface blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Affine.Point.map_map\", \"WeierstrassCurve.Jacobian.comp_equiv_comp\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"AlgebraicGeometry.Scheme.residueFieldCongr_trans\", \"WeierstrassCurve.Projective.nonsingular_of_equiv\"], \"digest\": \"247088add17b3f68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization, flat descent, smoothness, Proj and elliptic-curve declarations do not state surface tower deletion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Delete an intermediate blowup of a regular surface when later centres avoid its exceptional divisor and a morphism contracts it",
+   "results": "{\"t\": \"2026-10-23T09:36:01Z\", \"tool\": \"leanfinder\", \"query\": \"Delete an intermediate blowup of a regular surface when later centres avoid its exceptional divisor and a morphism contracts it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"b1a7eddca67a3dc0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization, flat descent, smoothness, Proj and elliptic-curve declarations do not state surface tower deletion or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-minimal-comparison-good-centres",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent minimum-length refinement of Tag 0C5S (lemma-birational-regular-surfaces), using Tag 0C5J (lemma-factor-through-contraction) and point-blowup fibre defects. Extracted argument: expanded common-model steps 3--5; no marked model or conductor conclusion.; internal deletion of an untouched exceptional curve in the minimum-length comparison argument.",
+   "via": [
+    "lem-sfb-minimal-comparison-good-centres",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-delete-untouched-point-blowup",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the shorter tower by induction, with explicit two-open identifications and inverse maps at each swap; checked centres, local dimensions, exceptional closed subschemes, S-linearity of the descended map by uniqueness, and the identity over V. Reused existing blowup restriction, complement, regular geometry, scheme-morphism gluing and point-blowdown factorization nodes. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent minimum-length refinement of Tag 0C5S (lemma-birational-regular-surfaces), using Tag 0C5J (lemma-factor-through-contraction) and point-blowup fibre defects. Extracted argument: expanded common-model steps 3--5; no marked model or conductor conclusion.; internal deletion of an untouched exceptional curve in the minimum-length comparison argument. Steps 1--6 realize precisely the internal deletion argument below the inherited alteration/minimum-comparison route. The latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) no longer spells out these lower surface details; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic complement isomorphism for each point blowup; this unit has no replacement for the general blowup interface."
+   },
+   {
+    "node": "def-nagata-blowup-flat-base-change-map",
+    "why": "Specifies the canonical restriction comparison used on the two complementary opens."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic blowup restriction under flat open inclusions, needed for the adjacent swap construction."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic existence and uniqueness of gluing compatible scheme maps; used for the two local identifications and their inverses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-global-blowup-complement",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-95c7082ec",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-95c7082ec (reviewer sub-agent of L); spot-checked: Read the whole item and found no faults; fixes/ is empty. No new nodes, no repair note. The statement is byte-identical to Q106's unsplit version of 2026-10-23. The only stmt_deps change adds def-weil-scheme-over-base, which the statement needs because it talks about S-morphisms. Sources read: resolve.tex 0C5J lemma-factor-through-contraction, 0AGR lemma-blowup-regular; divisors.tex 0805 lemma-flat-base-change-blowing-up, 02OS(1). No SGA. Step 1: induction claim stated with base case, a=n needs no steps. Step 2: q∉E_i gives y≠z and dim O_{T,y}=2; y is closed because c_i is proper; Y_i is integral, regular, Noetherian. The bound dim≤2 holds through local dimensions at closed points, including the case where T is Spec of a local ring. z' has local dimension 2. Step 3: flat base change of the blowup to the two opens T∖{y} and T∖{z} identifies both iterated blowups with Bl_z U and Bl_y W. The overlap identifications agree because both sides map isomorphically to U∩W. Gluing the maps and their inverses gives an isomorphism over T without separatedness. Step 4: E_i lies off q, so its strict transform is the whole of E_i×X_{i+1}; the tower count is n−1; n=a=1 works. Step 5: point-blowdown factorization, with c = blowup∘iso (harmless). S-linearity comes from uniqueness applied to s_X=s_Y c. Step 6: centres keep their images in X_0, and everything restricts to the identity over V. The duplicate sweep found nothing (point-blowdown-factorization, common-regular-surface-resolution and per-tor-independent-blowup-transform are all different). Accepted split_report tool_uses: the nagata blowup complement and flat base change nodes, and the scheme-morphism gluing Mathlib leaf. These are generic interfaces with no replacement in the unit. Batch-5: lem-trf-parameter-blowup-algebra-regular (ILO VIII 4.2.9, commutative algebra) and def-trf-canonical-symmetric-graded-algebra (a general definition) are outside both the trace-formula and the Poincaré-duality assumptions, so both citations are acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DeleteUntouchedPointBlowup",
+  "declaration": "AlgebraicGeometry.exists_delete_untouched_point_blowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/DeleteUntouchedPointBlowup.lean",
+  "statement": "theorem exists_delete_untouched_point_blowup (S : Scheme.{u}) (n : ℕ) (X : Fin (n + 2) → Scheme.{u}) [∀ i : Fin (n + 2), (X i).Over S] [∀ i : Fin (n + 2), IsIntegral (X i)] [∀ i : Fin (n + 2), IsNoetherian (X i)] (hregular : ∀ i : Fin (n + 2), IsRegularScheme (X i)) (hdim : ∀ i : Fin (n + 2), topologicalKrullDim (X i) = 2) (b : ∀ i : Fin (n + 1), X i.succ ⟶ X i.castSucc) (hbS : ∀ i : Fin (n + 1), (b i).IsOver S) (q : ∀ i : Fin (n + 2), X i ⟶ X 0) (hq₀ : q 0 = 𝟙 (X 0)) (hq : ∀ i : Fin (n + 1), b i ≫ q i.castSucc = q i.succ) (x : ∀ i : Fin (n + 1), X i.castSucc) (hx : ∀ i : Fin (n + 1), IsClosed ({x i} : Set (X i.castSucc))) (hx_dim : ∀ i : Fin (n + 1), ringKrullDim ((X i.castSucc).presheaf.stalk (x i)) = 2) (hb : ∀ i : Fin (n + 1), ∃ e : X i.succ ≅ (Scheme.IdealSheafData.vanishingIdeal ⟨{x i}, hx i⟩).blowup, e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨{x i}, hx i⟩).blowupMap = b i) (a : Fin (n + 1)) (E : ∀ i : Fin (n + 2), (X i).IdealSheafData) (hEₐ : E a.succ = (Scheme.IdealSheafData.vanishingIdeal ⟨{x a}, hx a⟩).comap (b a)) (hE : ∀ i : Fin (n + 1), a < i → E i.succ = (strictTransformMap (E i.castSucc).subschemeι (b i) (⟨({x i} : Set (X i.castSucc))ᶜ, (hx i).isOpen_compl⟩ : (X i.castSucc).Opens)).ker) (havoid : ∀ i : Fin (n + 1), a < i → x i ∉ (E i.castSucc).support) (Z : Scheme.{u}) [Z.Over S] (f : X (Fin.last (n + 1)) ⟶ Z) [f.IsOver S] (himage : ∃ z : Z, f '' (E (Fin.last (n + 1))).support = {z}) : ∃ (Y : Fin (n + 1) → Scheme.{u}) (e₀ : Y 0 ≅ X 0) (d : ∀ j : Fin n, Y j.succ ⟶ Y j.castSucc) (p : ∀ j : Fin (n + 1), Y j ⟶ X 0) (y : ∀ j : Fin n, Y j.castSucc) (hy : ∀ j : Fin n, IsClosed ({y j} : Set (Y j.castSucc))) (c : X (Fin.last (n + 1)) ⟶ Y (Fin.last n)) (g : Y (Fin.last n) ⟶ Z) (z : Y (Fin.last n)) (hz : IsClosed ({z} : Set (Y (Fin.last n)))) (ec : X (Fin.last (n + 1)) ≅ (Scheme.IdealSheafData.vanishingIdeal ⟨{z}, hz⟩).blowup), p 0 = e₀.hom ∧ (∀ j : Fin n, d j ≫ p j.castSucc = p j.succ) ∧ (∀ j : Fin (n + 1), IsIntegral (Y j) ∧ IsRegularScheme (Y j) ∧ IsNoetherian (Y j) ∧ topologicalKrullDim (Y j) = 2) ∧ (∀ j : Fin n, ∃ e : Y j.succ ≅ (Scheme.IdealSheafData.vanishingIdeal ⟨{y j}, hy j⟩).blowup, e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨{y j}, hy j⟩).blowupMap = d j) ∧ c ≫ p (Fin.last n) = q (Fin.last (n + 1)) ∧ c ≫ g = f ∧ c ≫ p (Fin.last n) ≫ (X 0 ↘ S) = (X (Fin.last (n + 1)) ↘ S) ∧ g ≫ (Z ↘ S) = p (Fin.last n) ≫ (X 0 ↘ S) ∧ ec.hom ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨{z}, hz⟩).blowupMap = c ∧ E (Fin.last (n + 1)) = (Scheme.IdealSheafData.vanishingIdeal ⟨{z}, hz⟩).comap c ∧ IsIso (c ∣_ (⟨({z} : Set (Y (Fin.last n)))ᶜ, hz.isOpen_compl⟩ : (Y (Fin.last n)).Opens)) ∧ ∀ V : (X 0).Opens, (∀ i : Fin (n + 1), q i.castSucc (x i) ∉ V) → (∀ j : Fin n, p j.castSucc (y j) ∉ V) ∧ (∀ i : Fin (n + 2), IsIso (q i ∣_ V)) ∧ (∀ j : Fin (n + 1), IsIso (p j ∣_ V)) ∧ ∃ r : Limits.pullback (q (Fin.last (n + 1))) V.ι ⟶ Limits.pullback (p (Fin.last n)) V.ι, IsIso r ∧ r ≫ Limits.pullback.fst (p (Fin.last n)) V.ι = Limits.pullback.fst (q (Fin.last (n + 1))) V.ι ≫ c ∧ r ≫ Limits.pullback.snd (p (Fin.last n)) V.ι = Limits.pullback.snd (q (Fin.last (n + 1))) V.ι",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-376f4eeaa",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read node, snapshot module, report, and dep decls (Mathlib IdealSheafData.comap/vanishingIdeal/support, WeilConjectures strictTransformMap/blowup/blowupMap, IsRegularScheme). Only node change is the lean field; statement verbatim. Hypotheses match node with correct 1-based→Fin index shift: all levels integral/regular/Noetherian/dim 2, reduced closed point blowups with local dim 2, E_a scheme-theoretic comap, E_i strict transform kernels over complement of centre, avoidance for i>a, f(E_n) exactly one point. Conclusions: n-arrow tower to X0 via e0, levels integral/regular/Noetherian/dim2, d_j reduced point blowups, c≫p=q, c≫g=f, S-linearity of c,g, c blowup of reduced closed z, E_last = comap c scheme-theoretically (true since E_i is disjoint from later centres), IsIso off {z}; V clause quantified after the tower is chosen, with r pinned by both projections. Edge cases n=0, a first/last, V=∅, one universe fine. No defs, sorry only, docstrings with source and blueprint and 6 steps. No findings; no compile needed."
+ }
+}

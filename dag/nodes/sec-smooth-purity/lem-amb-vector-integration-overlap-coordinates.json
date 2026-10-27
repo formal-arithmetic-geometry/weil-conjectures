@@ -1,0 +1,153 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation before the affine counit; the two local maps are identified by linear changes of frame."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Change of trivialization for a scheme vector bundle on overlapping opens induces an invertible linear coordinate substitution",
+   "results": "8 results: Trivialization.coordChangeL_apply, Trivialization.apply_symm_apply_eq_coordChangeL, Trivialization.coordChangeL_apply', Trivialization.mk_coordChangeL, Trivialization.coe_coordChangeL', Trivialization.symm_coordChangeL, Trivialization.coe_coordChangeL, VectorBundleCore.trivializationAt_coordChange_eq",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegration.*(overlap|restrict)|transition_spec|leftDerivedUpperStarComp_assoc",
+   "results": "0 results: ",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStarComp|rightDerivedLowerShriekBaseChangeMap|coordChange",
+   "results": "25 results: Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image associativity and compact support base change pasting for a cartesian square precomposed with an automorphism",
+   "results": "8 results: AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change for a vector bundle chart is compatible with restricting the trivialization to a smaller open",
+   "results": "8 results: Trivialization.restrOpen, Trivialization.coe_coordChangeL, Trivialization.homeomorphComp, Trivialization.restrictPreimage', Trivialization.restrictPreimage, VectorBundleCore.trivializationAt_coordChange_eq, Trivialization.comp_continuousLinearEquivAt_eq_coord_change, contMDiffOn_coordChangeL",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationOverlapChartPrefix",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Overlap identification before the affine counit: geometric restriction, coefficient transport and exchange pasting.",
+   "via": [
+    "lem-amb-vector-integration-overlap-chart-prefix",
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "id": "lem-amb-vector-integration-overlap-coordinates",
+ "kind": "statement",
+ "title": "Linear coordinate relation between two restricted inverse frames",
+ "statement": "Let S be a Noetherian scheme, d≥0 and F a locally free O_S-module of constant rank d as in [def-asd-vector-bundle-zero-section]. Let U,V,V′ be opens with U≤V and U≤V′, and let e,e′ be frames of F on V,V′. The restricted chart q_e is affineTraceMap(U→V,d) followed by the inverse-frame map vectorIntegrationChart(e), as defined in [lem-amb-vector-integration-cartesian-prefix-action]. There exists g in GL_d(Gamma(U,O_U)) such that q_e′ equals affineTraceLinearMap(U,d,g) followed by q_e. The affine linear map is the actual polynomial substitution of [def-amb-affine-linear-trace-action]. No coefficient ring, trace or compact-support comparison occurs in this assertion.",
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-affine-linear-trace-action",
+  "def-amb-vector-integration-charts",
+  "lem-amb-vector-integration-cartesian-prefix-action"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restricted frame on U from restrictCompIso, restriction of the original frame, and mapFreeIso with restrictUnitIso. The restriction functor preserves the required coproduct because it is a left adjoint. Evaluate the free-basis inclusions at 1 and use naturality and restriction composition to show that its frame sections are exactly the restrictions of the original frame sections.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The symmetric-algebra inclusion and algebraIso are natural, so the degree-one coordinates of the restricted frame are the restrictions of the original coordinates. AffineSpace.hom_ext proves naturality of the forward trivialization. Induction on rank proves that affineTraceMap preserves each tower coordinate; AffineSpace.hom_ext then proves naturality of the tower-to-affine-space isomorphism. Cancel the invertible forward trivializations to identify vectorIntegrationRestrictedChart with vectorIntegrationChart of the constructed restricted frame.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-vector-integration-charts",
+    "lem-amb-vector-integration-cartesian-prefix-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two frames on the same U, apply transition_spec with the frames in reverse order, obtaining mutually inverse coefficient matrices G,H over Gamma(S,U). Transport their transposes along U.topIso.inv to obtain an element g of GL_d(Gamma(U,O_U)); transposition reverses products, so the two inverse identities follow from HG=GH=1. AffineSpace.hom_ext, the transition coordinate formula and affineTraceLinearMap_coordinate identify the forward trivializations after the corresponding linear substitution. Cancel these isomorphisms to obtain the required relation between their inverse charts. This is inverse transpose relative to the original forward transition convention, and requires no affineness assumption.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-affine-linear-trace-action",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same-open relation to the two restricted frames, and rewrite both inverse charts by their restriction identities. All constructions and finite sums include rank zero and empty opens without additional hypotheses.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-affine-linear-trace-action",
+    "def-amb-vector-integration-charts",
+    "lem-amb-vector-integration-cartesian-prefix-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-affine-linear-trace-action",
+  "def-amb-vector-integration-charts",
+  "lem-amb-vector-integration-cartesian-prefix-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation before the affine counit; implemented by restriction naturality and the reversed transition_spec coordinate formula."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationOverlapCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationOverlapCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_overlap_coordinates",
+  "statement": "theorem vectorIntegration_overlap_coordinates\n    (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (U V V' : S.Opens) (hUV : U ≤ V) (hUV' : U ≤ V')\n    (e : VectorBundleZeroSection.Trivialization S d F V)\n    (e' : VectorBundleZeroSection.Trivialization S d F V') :\n    ∃ g : Matrix.GeneralLinearGroup (Fin d) Γ(U.toScheme, ⊤),\n      vectorIntegrationRestrictedChart S d F U V' hUV' e' =\n        affineTraceLinearMap U.toScheme d g ≫\n          vectorIntegrationRestrictedChart S d F U V hUV e",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T111800-L-1729909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T130431-L-3457849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

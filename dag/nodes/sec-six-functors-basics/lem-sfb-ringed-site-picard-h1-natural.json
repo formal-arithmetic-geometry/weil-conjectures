@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-ringed-site-picard-h1-natural",
+ "kind": "statement",
+ "title": "Picard group and first cohomology of units on ringed sites, naturally in pullback",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites chosen small relative to the sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with sheaves of commutative unital rings $A,B$, respectively. A line module over either ring sheaf is a sheaf of modules [def-weil-sheaf-of-modules-category] locally isomorphic to that ring sheaf. Write $\\operatorname{Pic}(A)$ for the abelian group of isomorphism classes of line $A$-modules under sheaf tensor product, and $A^\\times$ for the abelian sheaf $U\\mapsto A(U)^\\times$; similarly for $B$. Cohomology is the right derived functor of global sections of abelian sheaves. There is a canonical group isomorphism $c_A:\\operatorname{Pic}(A)\\xrightarrow{\\sim}H^1(\\mathcal C,A^\\times)$, sending a line $L$ to the class of its sheaf of generators $\\underline{\\operatorname{Isom}}_A(A,L)$. Here a $G$-torsor is a sheaf of sets with $G$-action, locally nonempty and with $G\\times T\\to T\\times T$, $(g,t)\\mapsto(gt,t)$, an isomorphism. For any morphism of ringed topoi $f:(\\operatorname{Sh}(\\mathcal D),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ [def-weil-pbc-ringed-topos-morphism], put $f^*L=B\\otimes_{f^{-1}A}f^{-1}L$, where tensor is the sheafification of the presheaf of sectionwise tensor products, and let $\\rho:f^{-1}A^\\times\\to B^\\times$ be induced by the structural ring map. Then $f^*L$ is a line and $c_B([f^*L])=H^1(\\rho)(f^*c_A([L]))$. Here $\\Gamma(\\mathcal C,F)=\\operatorname{Hom}(*,F)$ for the final sheaf $*$, which is $F(e)$ when $\\mathcal C$ has a final object $e$. The inner map $f^*:H^1(\\mathcal C,A^\\times)\\to H^1(\\mathcal D,f^{-1}A^\\times)$ is defined by choosing injective resolutions $A^\\times\\to I^\\bullet$ and $f^{-1}A^\\times\\to J^\\bullet$ and a map of complexes $\\beta:f^{-1}I^\\bullet\\to J^\\bullet$ under $f^{-1}A^\\times$ (it exists since $f^{-1}$ is exact), and taking $H^1$ of $\\Gamma(\\mathcal C,I^\\bullet)\\xrightarrow{\\eta}\\Gamma(\\mathcal C,f_*f^{-1}I^\\bullet)=\\Gamma(\\mathcal D,f^{-1}I^\\bullet)\\xrightarrow{\\beta}\\Gamma(\\mathcal D,J^\\bullet)$, where $\\eta$ is the adjunction unit and $\\Gamma(\\mathcal C,f_*G)=\\operatorname{Hom}(f^{-1}*,G)=\\Gamma(\\mathcal D,G)$ by adjunction, $f^{-1}$ preserving the final sheaf; it does not depend on the choices. No flatness assumption on $f^{-1}A\\to B$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 040E, lemma-h1-invertible, generator-torsor construction and its inverse; naturality follows from the same construction by extension of scalars (for line modules locally free of rank one, it works on any commutative ringed site)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-ringed-site-picard-data"
+ ],
+ "proof": [
+  {
+   "text": "For a line $L$, let $T_L(U)$ be the isomorphisms $A|_U\\to L|_U$. Compatible local isomorphisms glue: glue their values on $1$ as sections of $L$ and their inverses as maps into $A$; the two inverse identities hold after restriction, hence hold globally by the sheaf condition. Thus $T_L$ is a sheaf. It has local sections by the definition of a line. For two frames $t,t'$, $t^{-1}t'$ is multiplication by the unique unit $u=(t^{-1}t')(1)$, so $t'=ut$ with the action $(ut)(a)=t(ua)$. This proves simple transitivity and identifies $T_A$ with $A^\\times$. Units themselves form a sheaf because compatible units and their inverses glue. Consequently $T_L$ is an $A^\\times$-torsor.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "For an $A^\\times$-torsor $T$, form the set presheaf $Q(U)=(T(U)\\times A(U))/\\sim$, where $(ut,a)\\sim(t,ua)$, and let $M=Q^\\#$ be its set sheafification. If $t\\in T(U)$, then on every $V\\to U$ a representative $[t',a]$ has a unique expression $[t,ua]$, with $t'=ut$. In this chart the quotient is $A|_U$. The local-section and local-equality properties of sheafification show the same for $M|_U$: represent a section locally by pairs, rewrite in the frame $t$, and glue their coefficients in $A$; equality of coefficients is checked after a covering. A change of frame $t'=ut$ changes coordinates by multiplication by $u$, an $A$-linear bijection. Define addition, zero, additive inverses and scalar multiplication in these coordinates. They agree on overlaps, so the sheaf condition glues them uniquely, and all module identities hold locally in $A$. Thus $M$ is a genuine line $A$-module. In particular no module structure is assigned to the possibly empty set $Q(U)$ before sheafification.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "The evaluation $[t,a]\\mapsto t(a)$ defines a map $M(T_L)\\to L$. On a chart with frame $t$ this is the isomorphism $a\\mapsto t(a)$, so its local inverse gives a global inverse by uniqueness on overlaps. Conversely, $t\\mapsto(a\\mapsto[t,a])$ defines an equivariant map $T\\to T_{M(T)}$. On a chart with section $t_0$ every frame is uniquely multiplication by a unit in the coordinate $M(T)\\cong A$, so it has the unique preimage $ut_0$. These local inverses glue. Both constructions carry equivariant or module isomorphisms to isomorphisms by their displayed formulas, and hence induce inverse bijections on isomorphism classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "For lines $L,N$, the frame pair $(t,s)$ gives the frame of $L\\otimes_A N$ sending $1$ to $t(1)\\otimes s(1)$. The tensor is the sheafification of the sectionwise tensor. In frames its identification with $A$ is $a\\otimes b\\mapsto ab$, with inverse $c\\mapsto c\\otimes1$; these formulas are inverse by the tensor balancing relation. Replacing $(t,s)$ by $(ut,u^{-1}s)$ fixes the tensor frame. Thus the displayed map factors through the sheafified contracted product $T_L\\wedge T_N$ and is a bijection locally, where it is multiplication of units modulo the antidiagonal action. Its local inverses glue. Apply the arbitrary-site torsor classification: $c_A([L])=\\kappa_{A^\\times}([T_L])$ is a bijection, carries tensor to addition, and carries $A$ to zero. For completeness the inverse line has sections locally given by the dual frame: the linear maps $L|_U\\to A|_U$ glue as a sheaf, have dual coordinates under frame changes, and evaluation $L\\otimes_A L^\\vee\\to A$ is locally multiplication and hence an isomorphism. This also verifies the group inverse in $\\operatorname{Pic}(A)$. It is therefore the asserted canonical group isomorphism. The identical construction applies to $B$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-site-abelian-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "For the given ringed-topos morphism, its underlying geometric inverse image is exact on abelian sheaves by the exactness node. The resolution-pullback node therefore applies with $F=A^\\times$: its $P_f^1(F)$ is exactly the composite of unit, global-section adjunction and comparison $\\beta$ written in the statement. It proves existence of $\\beta$, choice independence, and compatibility with the connecting homomorphisms that will be used below. All global sections are $\\operatorname{Hom}(*,-)$, so this application requires no final object of either site.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sfb-topos-cohomology-pullback-delta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "Set $T=T_L$ and $V=f^{-1}T$. Its map to the final sheaf is locally surjective: apply preservation of locally surjective families to $T\\to *$. Finite-limit preservation gives $(f^{-1}A^\\times)\\times V\\cong V\\times V$, hence $V$ is an $f^{-1}A^\\times$-torsor. The universal evaluation trivialization $A\\times T\\cong L\\times T$ pulls back to a trivialization of $f^{-1}L$ over the covering sheaf $V$. Here the transported module actions are the actions on underlying finite products. Extending scalars gives $B\\otimes_{f^{-1}A}f^{-1}L\\cong B$ locally over $V$: explicitly in the pulled frame $b\\otimes a\\mapsto b f^\\sharp(a)$, with inverse $b\\mapsto b\\otimes1$. The balancing relation proves the inverse identities, also after sheafification. Local sections of $V$ exist after coverings of site objects, so $f^*L$ is a line on $\\mathcal D$. Pulling back a frame and extending scalars gives a canonical map $s:V\\to T_{f^*L}$ satisfying $s(uv)=\\rho(u)s(v)$; this identity is the formula $1\\otimes(ua)=f^\\sharp(u)\\otimes a$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-local-families",
+    "lem-weil-pbc-geometric-module-construction",
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "Take the canonical extension $E_T$ in the torsor-classification node, and apply exact abelian inverse image. This gives $0\\to f^{-1}A^\\times\\to f^{-1}E_T\\to\\mathbf Z_{\\mathcal D}\\to0$. The integer sheaf is preserved: internally it is the free abelian group on the final sheaf, and its free universal property is preserved by the induced abelian adjunction and finite products; equivalently the integer sheaf is the coproduct of copies of $*$ indexed by the integers. Indeed a map from that coproduct is a family of global sections indexed by the integers, and the sheafification adjunction identifies exactly the same data with a map from the sheafified constant integer presheaf. Apply left-adjoint preservation of small colimits and finite products to this coproduct and its addition, zero and inverse maps. Finite-limit preservation identifies the fibre over $1$ with $V=f^{-1}T$. Write $j:V\\to f^{-1}E_T$ for the resulting inclusion of that fibre. The relation $j(uv)=j(v)+u$ is the inverse image of the original relation. The same classification node gives an extension $E_{T_{f^*L}}$ with generator inclusion $j'$.",
+   "uses": [
+    "lem-sfb-site-abelian-torsor-h1",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "There is a morphism of the two extension sequences from the preceding step, with end maps $\\rho$ and $\\operatorname{id}_{\\mathbf Z}$. Construct its middle map locally as follows, using additive notation for both unit sheaves. On an object with $v\\in V$, every section of the extension is uniquely $h+n j(v)$, where $h\\in f^{-1}A^\\times$ and $n$ is a section of the integer sheaf: subtract $n j(v)$ and use exactness at the kernel. Send it to $\\rho(h)+n j'(s(v))$. If $v'=u+v$, then $j(v')=j(v)+u$ and $j'(s(v'))=j'(s(v))+\\rho(u)$. Writing the same section using $v'$ replaces $h$ by $h-nu$; its proposed image is unchanged, since $\\rho(h-nu)+n(j'(s(v))+\\rho(u))=\\rho(h)+n j'(s(v))$. These additive maps commute with restriction and agree on overlaps. Since $V$ is locally inhabited, they glue to the required map, restricting to $\\rho$ on the kernel and preserving degree $n$.",
+   "uses": [
+    "lem-sfb-site-abelian-torsor-h1",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  },
+  {
+   "text": "By compatibility of resolution pullback with boundaries, $f^*c_A([L])=P_f^1\\delta_{E_T}(1)=\\delta_{f^{-1}E_T}(1)$, since the degree-zero pullback sends $1$ to $1$. Naturality of connecting homomorphisms for the extension morphism just constructed yields $H^1(\\rho)\\delta_{f^{-1}E_T}(1)=\\delta_{E_{T_{f^*L}}}(1)$. By the torsor-classification node and the definition of $c_B$, the right hand side is $c_B([f^*L])$. This is the required equation with the precise pullback map in the statement. All scalar extension calculations were on rank-one trivializations; none used flatness of $f^{-1}A\\to B$.",
+   "uses": [
+    "lem-sfb-site-abelian-torsor-h1",
+    "lem-sfb-topos-cohomology-pullback-delta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 040E (lemma-h1-invertible), generator-torsor and associated-module construction; Tag 03AJ (lemma-torsors-h1). The argument uses locally free rank one modules, so the local-ring hypothesis is unnecessary here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-site-abelian-torsor-h1",
+  "lem-sfb-topos-cohomology-pullback-delta",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-inverse-image-local-families",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 040E (lemma-h1-invertible) and 03AJ (lemma-torsors-h1), with the omitted associated-line and tensor verifications written out; extension-sequence argument for naturality for arbitrary geometric morphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Invertible sheaves on a ringed site correspond naturally to H1 of the sheaf of units",
+   "results": "8 hits; CategoryTheory.Sheaf.H, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.unitHomEquiv_apply_coe, smoothSheafCommRing.isUnit_stalk_iff, SheafOfModules.unitHomEquiv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.unit_val",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Sheaf\"",
+   "results": "4 hits; PresheafOfModules.instIsNormalEpiCategory, TopCat.Presheaf.instEpiCommRingCatToTotalQuotientPresheaf, CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify, CategoryTheory.isRegularEpiCategory_sheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of locally free rank one modules on a ringed site is naturally isomorphic to first sheaf cohomology of units",
+   "results": "8 hits; CommRing.Pic, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, CommRing.Pic.AsModule, instCommGroupPic, CommRing.Pic.mk, Submodule.unitsToPic_apply, CommRing.Pic.instCoeSortType, Submodule.unitsToPic",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible|torsor|Pic",
+   "results": "24 hits; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean (directory Mathlib/CategoryTheory/Sites/)",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line modules and unit torsors on a ringed topos classify first cohomology compatibly with tensor pullback",
+   "results": "8 hits; CategoryTheory.PresheafOfGroups.H1, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.PresheafOfGroups.instOneH1, SheafOfModules.unitHomEquiv, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, SheafOfModules.pullbackObjFreeIso, PresheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "classH1|[Tt]orsor|[Ii]nvertible",
+   "results": "0 hits;  (directory Mathlib/CategoryTheory/Sites/SheafCohomology/)",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free rank one modules on an arbitrary ringed topos classify first derived cohomology of its units naturally under tensor pullback",
+   "results": "8 hits; SheafOfModules.unit, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.ιFree, SheafOfModules.unitHomEquiv, SheafOfModules.unit_val, SheafOfModules.free, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ring Picard groups, free-module formulas and fixed-family Cech H1, not the arbitrary ringed-topos derived-cohomology statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|classH1|h1.*invertible",
+   "results": "24 hits; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean, Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ring Picard groups, free-module formulas and fixed-family Cech H1, not the arbitrary ringed-topos derived-cohomology statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard group of line module sheaves on an arbitrary ringed site is naturally H1 of units",
+   "results": "8 hits; CommRing.Pic, CommRing.Pic.mk, CommRing.Pic.mk_eq_one, CommRing.Pic.subsingleton_iff, CommRing.Pic.functor, CommRing.Pic.AsModule, SheafOfModules.unit, CommRing.Pic.mk_eq_one_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ring Picard groups, free-module formulas and fixed-family Cech H1, not the arbitrary ringed-topos derived-cohomology statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"H\"",
+   "results": "12 hits; withUnpickle, Mathlib.CrossRef.PiBaseTopic, Mathlib.CrossRef.pibaseTopic, Mathlib.CrossRef.PiBaseTopic.topology, Mathlib.CrossRef.instBEqPiBaseTopic, Mathlib.CrossRef.instHashablePiBaseTopic, Mathlib.CrossRef.instOrdPiBaseTopic, Mathlib.CrossRef.PiBaseTopic.label",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ring Picard groups, free-module formulas and fixed-family Cech H1, not the arbitrary ringed-topos derived-cohomology statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line module generator torsors and first sheaf cohomology on ringed sites commute with extension of scalars",
+   "results": "8 hits; SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.Presentation.map_π_eq, SheafOfModules.map_ιFree_mapFree_hom_assoc, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ring Picard groups, free-module formulas and fixed-family Cech H1, not the arbitrary ringed-topos derived-cohomology statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-obstruction-natural",
+  "date": "2026-10-24",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces. Ringed-site input: identify line-module classes with first cohomology of units, compatibly with tensor pullback.",
+   "via": [
+    "lem-sfb-space-picard-obstruction-natural",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-picard-h1-natural",
+  "worker": "stage1",
+  "summary": "Constructed frames and the associated line module explicitly, including sheaf-level operations when the raw quotient has no zero. Proved tensor compatibility and naturality by an explicit morphism of torsor extension sequences and the specified resolution pullback. Two general abelian-sheaf prerequisites are stated only; no imported statement was changed.",
+  "blueprint": "Supports the inherited direct-image stability proof (3), via the existing Picard obstruction ancestry. General-site frame classification and its naturality are the stated input to lem-sfb-space-picard-obstruction-natural. The current blueprint direct-image proof was read; no unit-route substitution is made.",
+  "tool_uses": [
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic definition of module sheaves used to construct the line; no replacement occurs in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "General small-site local representative and equality criterion used to put module operations on the sheafified set quotient."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "General ringed-site tensor definition used for local rank-one tensor and change-of-scalars calculations."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness for arbitrary geometric morphisms, needed for the extension sequence; site-induced or etale-only versions do not cover the item."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-local-families",
+    "why": "General left-adjoint preservation of covering families supplies local pulled frames without assuming a presenting site functor."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-construction",
+    "why": "Transport of module actions along an arbitrary geometric inverse image makes the pulled evaluation trivialization linear."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic adjunction theorem used for the integer-sheaf coproduct under geometric inverse image."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Universal property identifies the sheafified constant integers with the coproduct of copies of the final sheaf."
+   },
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Generic geometric adjunction and structural ring map used in the tensor pullback construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-inverse-image-local-families",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-1162c6b08",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-1162c6b08 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing; my review is in review.md. Live still has the item unsplit with the same statement, and neither new id exists live. Only the proof fields, status, split_report and searches changed; stmt_deps and blueprint are unchanged. I read the sources at the cited places: Stacks 03AH, 03AJ, 040E, 01FT (global sections via the final sheaf) and 08J6, plus cohomology 01F8 and derived 015B. The reported 040E source error is real: the presheaf quotient (F(U)xO(U))/O*(U) is empty where F(U) is empty, so it is not a presheaf of modules. Step 2 repairs this by sheafifying the set quotient first and defining the module operations in local frames. Steps 1-9 check out. Step 1: the frame torsor, with t'=ut. Steps 2-3: the associated line and the two inverse constructions. Step 4: frames of a tensor product give the contracted product, and the torsor node gives the bijection and group law. Step 5: P_f^1 is literally the item's eta/adjunction/beta composite. Step 6: f^{-1}T_L is a torsor, and the pulled frame with b(x)a -> b f#(a) makes f*L a line with no flatness used. Step 7: f^{-1}Z_C = Z_D because Z_C is a coproduct of copies of the final sheaf, and the fibre over 1 is f^{-1}T_L. Step 8: I recomputed that the extension morphism does not depend on the chosen frame. Step 9: the boundary clause at q=0, P^0(1)=1 and naturality give c_B[f*L]=H^1(rho)f*c_A[L]. New node lem-sfb-site-abelian-torsor-h1 is true: with a local section t0, (g,n)->g+n[t0] is an isomorphism onto E_T, which matches the 03AJ pushout; it also covers arbitrary extensions, the trivial torsor and the Baer-sum/contracted-product law. It is not a duplicate: the lem-sc and sbc torsor nodes are for schemes only, and the project Lean Torsor.lean classH1 needs a terminal object. New node lem-sfb-topos-cohomology-pullback-delta is true: beta exists because LI is a resolution, the map does not depend on the choices, degree 0 sends s to Ls, and it commutes with boundaries with no sign. It generalises the item's choice-independence clause and is not a restatement of it. Its duplicate candidates (lem-weil-pbc-site-cohomology-pullback*) need a site functor. Batch-5: lem-trf-geometric-inverse-image-exact only states that inverse image along any geometric morphism is exact. Its closure contains only two trace-formula definitions and itself, with no Poincare-duality, assumption-leaf or trace-transport node, and 41 other nodes cite it as a generic tool; so it is outside both assumptions and is accepted. def-trf-geometric-morphism is a general definition and is accepted. I accept all declared tool_uses as generic tools; no route step of the unit is replaced. Small cases (zero ring, a site with no final object, non-flat scalar change, identity morphism) give no counterexample."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RingedSitePicardH1Natural",
+  "declaration": "CategoryTheory.RingedSitePicard.picard_h1_natural",
+  "file": "lean/Sheaf/CategoryTheory/Sites/RingedSitePicardH1Natural.lean",
+  "statement": "theorem picard_h1_natural {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) [HasSheafify J AddCommGrpCat.{w}] [HasSheafify K AddCommGrpCat.{w}] [∀ U : C, HasWeakSheafify (J.over U) AddCommGrpCat.{w}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{w}] [∀ U : D, HasWeakSheafify (K.over U) AddCommGrpCat.{w}] [∀ U : D, (K.over U).WEqualsLocallyBijective AddCommGrpCat.{w}] [HasExt.{h} (Sheaf J AddCommGrpCat.{w})] [HasExt.{h} (Sheaf K AddCommGrpCat.{w})] (A : Sheaf J CommRingCat.{w}) (B : Sheaf K CommRingCat.{w}) : ∃ (cA : Comparison A) (cB : Comparison B), ∀ f : RingedToposMorphismOfUniverses (ring B) (ring A), ∃ (P : CohomologyTransport f) (ρ : P.abelian.functor.obj (units A) ⟶ units B) (F : ringedSiteModules.{w} (ring A) ⥤ ringedSiteModules.{w} (ring B)), Nonempty (F ⊣ f.modules) ∧ (∃ (AI : Sheaf K CommRingCat.{w}) (I : SheafOfModules.AlgebraicInverseImage f.inverse A AI) (c : AI ⟶ B), I.ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat.{w})).map c = f.ringMap ∧ ∀ M : ringedSiteModules.{w} (ring A), Nonempty (F.obj M ≅ SheafOfModules.changeOfRingsOfUniverses.{vD, uD, w, w} c (I.modules.obj M))) ∧ ComputesByResolutions P (units A) ∧ IsStructuralUnitsMap P ρ ∧ ∀ M : Line A, ∃ N : Line B, Nonempty (N.val ≅ F.obj M.val) ∧ cB.comparison (lineClass N) = Sheaf.H.map ρ 1 (pullback P 1 (cA.comparison (lineClass M)))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db38740fc",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery of 6b5baa38cf48 (RETURN H13/H9/H4) carries out every required correction. The duplicate RingedToposMorphismOfUniverses module is dropped; the def-weil-pbc-ringed-topos-morphism record is byte-identical to live; the data module imports the landed Sheaf.Paper.SequenceSiteCompletionProjection with hasDerived switched off file-locally; the new node cites def-pur-ringed-topos-morphism-of-universes in statement and stmt_deps. The item module is byte-identical to the returned head and both lean.statement fields match their files verbatim. Independent clause-by-clause reading: Pic is the line quotient by isomorphism with the tensor group pinned; c_A is pinned by extClass = delta(1) of generator extensions whose fibre over 1 is Isom(A,L), so it is canonical; cA and cB are quantified before f; f is RingedToposMorphismOfUniverses (ring B) (ring A) with inverse from J-sheaves to K-sheaves; the integer comparison is pinned by the image of 1; ComputesByResolutions quantifies all resolutions and every beta; rho is pinned through injective unitValues; f*L is pinned to changeOfRingsOfUniverses c over f.ringMap with no flatness; the conclusion clauses are in the node's order. Edge cases (zero ring, empty site, no final object, identity morphism, non-flat Z->Z/2) are covered. No hollow definition and only the item theorem is sorry. No compile run and no file changed; the worker reports 56.1 s and 23.2 s server compiles. Advisory only: the new node still lists def-weil-pbc-ringed-topos-morphism in its stmt_deps, which is harmless."
+ }
+}

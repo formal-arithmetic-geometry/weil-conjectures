@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-cubical-signed-coordinate-homotopy",
+ "kind": "statement",
+ "title": "Signed coordinate paths give the cubical coordinate homotopies",
+ "statement": "Let $r\\geq0$ be an integer, $D=\\mathbf Z^r$, and $u_1,\\ldots,u_r$ its ordered standard basis. For $0\\leq a\\leq r$ let $C_a$ be the free abelian group [def-weil-pbc-free-module] on $[v,I]$ with $v\\in D$, $I\\subseteq\\{1,\\ldots,r\\}$ and $|I|=a$, and set $C_a=0$ in all other integer degrees. Put $q_i(I)=\\#\\{j\\in I:j<i\\}$ and define homomorphisms by\n$$\\partial_a[v,I]=\\sum_{i\\in I}(-1)^{q_i(I)}([v+u_i,I\\setminus\\{i\\}]-[v,I\\setminus\\{i\\}])\\quad(a\\geq1),\\qquad \\partial_a=0\\quad(a\\leq0).$$\nFor $1\\leq i\\leq r$ set $\\rho_i(v)=v-v_i u_i$ and define $p_{i,a}:C_a\\to C_a$ by $p_{i,a}[v,I]=0$ when $i\\in I$ and $p_{i,a}[v,I]=[\\rho_i(v),I]$ otherwise, with zero maps outside the range. For a family $b:\\mathbf Z\\to A$ in any abelian group $A$ define the finite signed sum\n$$\\Sigma_n b=\\begin{cases}\\sum_{k=0}^{n-1}b(k)&n>0,\\\\0&n=0,\\\\-\\sum_{k=n}^{-1}b(k)&n<0.\\end{cases}$$\nFor every integer $n$ these sums satisfy\n$$\\Sigma_n\\bigl(b(k+1)-b(k)\\bigr)=b(n)-b(0),\\qquad\\Sigma_{n+1}b-\\Sigma_n b=b(n).$$\nFor $1\\leq i\\leq r$ define maps on basis elements in degree $a$ by\n$$H_{i,a}[v,I]=\\begin{cases}(-1)^{q_i(I)}\\Sigma_{v_i}\\bigl(k\\mapsto[\\rho_i(v)+ku_i,I\\cup\\{i\\}]\\bigr)&i\\notin I,\\\\0&i\\in I.\\end{cases}$$\nThese formulas extend to homomorphisms $H_{i,a}:C_a\\to C_{a+1}$, zero for $a=r$ and outside $0\\leq a\\leq r$. In every integer degree,\n$$\\partial_{a+1}H_{i,a}+H_{i,a-1}\\partial_a=1-p_{i,a}.$$\nMore explicitly, for $i\\notin I$ the left side at $[v,I]$ is $[v,I]-[\\rho_i(v),I]$, while for $i\\in I$ it is $[v,I]$. The formulas and identities hold for all signs of $v_i$, including $v_i=-1,0$, and in top degree. No translation equivariance of $H_{i,a}$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only. Agent-written coordinate lemma extracted from the returned eight-step proof of lem-sfb-integral-lattice-cubical-contraction: Paragraph (3), open direct image, integral lattice input below the tame-boundary calculation; returned cubical-contraction proof steps 3, 4 and 5: finite signed paths and both face-sign cases."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "First verify the signed-sum recurrence directly from the three cases defining $\\Sigma$. If $n\\geq1$, adjoining the last summand gives $\\Sigma_{n+1}b-\\Sigma_n b=b(n)$. For $n=0$ this is $b(0)-0=b(0)$. If $n\\leq-2$, the difference is $-\\sum_{k=n+1}^{-1}b(k)+\\sum_{k=n}^{-1}b(k)=b(n)$; at $n=-1$ it is $0-(-b(-1))=b(-1)$. Thus the recurrence holds for every integer, without any division or ordering assumption on the abelian group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  },
+  {
+   "text": "For $n>0$, cancelling successive terms in $\\sum_{k=0}^{n-1}(b(k+1)-b(k))$ leaves $b(n)-b(0)$. For $n<0$, the unsigned sum from $n$ to $-1$ is $b(0)-b(n)$, so its negative is again $b(n)-b(0)$; for $n=0$ both sides vanish. These are the first signed-sum identities in the statement. Finite distributivity also gives $\\Sigma_n(b+c)=\\Sigma_n b+\\Sigma_n c$, $\\Sigma_n(-b)=-\\Sigma_n b$, and $f(\\Sigma_n b)=\\Sigma_n(f\\circ b)$ for every homomorphism $f$, in all three cases of the definition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  },
+  {
+   "text": "For $0\\leq a<r$ and $i\\notin I$, the displayed $H$ formula is a finite sum of basis vectors of $C_{a+1}$: $I\\cup\\{i\\}$ has cardinality $a+1$. For $i\\in I$ it is zero. By the unique finite expansion in a basis in [def-weil-pbc-free-module], explicitly send $\\sum m_{v,I}[v,I]$ to $\\sum m_{v,I}H_{i,a}[v,I]$; uniqueness makes this well-defined, and addition of coefficients proves additivity. This constructs the claimed homomorphism, without invoking an unstated universal-property theorem. In degree $r$ every basis subset contains $i$, so this formula is zero; outside the range use the unique zero map. The same extension argument justifies the basis formulas for $\\partial$ and $p_i$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  },
+  {
+   "text": "Fix $i\\notin I$, put $n=v_i$, $w=\\rho_i(v)$, and $J=I\\cup\\{i\\}$. In $\\partial H_{i,a}[v,I]$, the face deleting $i$ has sign $(-1)^{q_i(I)+q_i(J)}=1$ since $q_i(J)=q_i(I)$. Its contribution is therefore $\\Sigma_n(k\\mapsto[w+(k+1)u_i,I]-[w+ku_i,I])=[v,I]-[w,I]$ by step 2. This remains valid for $n<0$ and $n=0$. It remains to cancel the faces deleting $j\\in I$ against $H_{i,a-1}\\partial_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  },
+  {
+   "text": "For each $j\\in I$ (so $j\\ne i$), the $j$-face in $\\partial H[v,I]$ is $(-1)^A\\Sigma_n(k\\mapsto[w+ku_i+u_j,J\\setminus\\{j\\}]-[w+ku_i,J\\setminus\\{j\\}])$, where $A=q_i(I)+q_j(J)$. The $j$-face in $H\\partial[v,I]$ is the very same signed sum multiplied by $(-1)^B$, where $B=q_j(I)+q_i(I\\setminus\\{j\\})$: indeed $(v+u_j)_i=n$ and $\\rho_i(v+u_j)=w+u_j$. Counting elements below an index gives $q_j(J)=q_j(I)+\\mathbf1_{i<j}$ and $q_i(I\\setminus\\{j\\})=q_i(I)-\\mathbf1_{j<i}$. Hence $A-B=\\mathbf1_{i<j}+\\mathbf1_{j<i}=1$, so the two coefficients are opposite. Explicitly, if $i<j$ then $A=q_i(I)+q_j(I)+1$ and $B=q_i(I)+q_j(I)$; if $j<i$ then $A=q_i(I)+q_j(I)$ and $B=q_i(I)+q_j(I)-1$. They cancel for every $j$, using the finite-sum additivity of step 2 even when $n<0$. If $I$ is empty, there are no such faces and $\\partial_0=0$. Along with step 4 this gives $[v,I]-[\\rho_i(v),I]$ whenever $i\\notin I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  },
+  {
+   "text": "Now suppose $i\\in I$ and put $K=I\\setminus\\{i\\}$, $n=v_i$, $w=\\rho_i(v)$. Here $H[v,I]=0$. Every face of $\\partial[v,I]$ deleting $j\\ne i$ still contains $i$, so its image under $H$ vanishes. For the remaining face, $q_i(K)=q_i(I)$, $\\rho_i(v+u_i)=w$ and $(v+u_i)_i=n+1$. Thus its two signs multiply to $1$, and $H\\partial[v,I]=\\Sigma_{n+1}(k\\mapsto[w+ku_i,I])-\\Sigma_n(k\\mapsto[w+ku_i,I])=[v,I]$ by step 1. This calculation applies also in top degree $a=r$, where $H_{i,r}=0$, and at $n=-1$ or $0$. At $n=-1$ the surviving expression is $0-(-[w-u_i,I])=[v,I]$; at $n=0$ it is $[w,I]-0=[v,I]$. Thus a vanishing path at the origin does not make the homotopy identity vanish on a cube containing $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  },
+  {
+   "text": "Steps 4--6 give $\\partial_{a+1}H_{i,a}+H_{i,a-1}\\partial_a=1-p_{i,a}$ on every basis vector in each degree $0\\leq a\\leq r$. Equality on arbitrary elements follows by applying both homomorphisms to the unique finite expansion in [def-weil-pbc-free-module]. For $a<0$ or $a>r$ the source group $C_a$ is zero, so both sides are the unique map out of zero; this includes the adjacent degrees $-1,r+1$. At $a=0$ the term through $C_{-1}$ is zero, as already used in step 5. If $r=0$, there is no index $1\\leq i\\leq r$, and the homotopy assertions are vacuous; the signed-sum assertions remain those of steps 1--2. All sums used were finite. No claim of translation equivariance was used or deduced.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; the finite signed-coordinate calculation here is agent-written."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cubical|coordinate.*homotopy|signed.*(path|sum)",
+   "results": "{\"t\": \"2026-10-22T05:58:31Z\", \"tool\": \"grep\", \"query\": \"cubical|coordinate.*homotopy|signed.*(path|sum)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy constructors and reflexivity require the homotopy identity as input; Dold-Kan uses simplicial degeneracies and the bar complex has different generators. None gives the signed finite coordinate paths or their cubical identity."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|lattice.*[Hh]omotopy|[Hh]omotopy.*lattice",
+   "results": "{\"t\": \"2026-10-22T05:58:31Z\", \"tool\": \"grep\", \"query\": \"cubical|lattice.*[Hh]omotopy|[Hh]omotopy.*lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy constructors and reflexivity require the homotopy identity as input; Dold-Kan uses simplicial degeneracies and the bar complex has different generators. None gives the signed finite coordinate paths or their cubical identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed finite path sums from zero to a negative or positive integer give a chain homotopy on free cubical chains",
+   "results": "{\"t\": \"2026-10-22T05:58:32Z\", \"tool\": \"leansearch\", \"query\": \"Signed finite path sums from zero to a negative or positive integer give a chain homotopy on free cubical chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.mkInductive\", \"Homotopy\", \"Homotopy.mk\", \"Homotopy.noConfusionType\", \"Homotopy.trans\", \"Homotopy.symm\", \"Homotopy.symm_hom\", \"Homotopy.ofEq\"], \"digest\": \"b26928474036de22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy constructors and reflexivity require the homotopy identity as input; Dold-Kan uses simplicial degeneracies and the bar complex has different generators. None gives the signed finite coordinate paths or their cubical identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"refl\"",
+   "results": "{\"t\": \"2026-10-22T05:58:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"refl\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.HomotopyEquiv.refl\", \"CategoryTheory.ShortComplex.Homotopy.refl\", \"CategoryTheory.ShortComplex.HomotopyEquiv.refl_hom\", \"CategoryTheory.ShortComplex.HomotopyEquiv.refl_inv\", \"CategoryTheory.ShortComplex.Homotopy.refl_h₀\", \"CategoryTheory.ShortComplex.Homotopy.refl_h₁\", \"CategoryTheory.ShortComplex.Homotopy.refl_h₂\", \"CategoryTheory.ShortComplex.Homotopy.refl_h₃\"], \"digest\": \"4329a729f7ca833b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy constructors and reflexivity require the homotopy identity as input; Dold-Kan uses simplicial degeneracies and the bar complex has different generators. None gives the signed finite coordinate paths or their cubical identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A signed sum of integer coordinate edges gives a homotopy from the identity of cubical lattice chains to collapse of one coordinate",
+   "results": "{\"t\": \"2026-10-22T05:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"A signed sum of integer coordinate edges gives a homotopy from the identity of cubical lattice chains to collapse of one coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant\", \"Homotopy.mkInductiveAux₂_add_one\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\"], \"digest\": \"e4932091ebe88322\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy constructors and reflexivity require the homotopy identity as input; Dold-Kan uses simplicial degeneracies and the bar complex has different generators. None gives the signed finite coordinate paths or their cubical identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the tensor chain complex of integer lines inserting a coordinate and summing edges from zero to n gives d H plus H d equals identity minus coordinate projection",
+   "results": "{\"t\": \"2026-10-22T05:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"In the tensor chain complex of integer lines inserting a coordinate and summing edges from zero to n gives d H plus H d equals identity minus coordinate projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"SimplicialObject.Splitting.ιSummand_comp_d_comp_πSummand_eq_zero\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"HomologicalComplex.unit_tensor_d₁\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"Rep.standardComplex.d_of\", \"AlgebraicTopology.DoldKan.σ_comp_P_eq_zero\"], \"digest\": \"b40c2c17b129f21d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Homotopy constructors and reflexivity require the homotopy identity as input; Dold-Kan uses simplicial degeneracies and the bar complex has different generators. None gives the signed finite coordinate paths or their cubical identity."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|coordinate.*[Hh]omotopy|[Hh]omotopy.*coordinate",
+   "results": "{\"t\": \"2026-10-22T11:18:45Z\", \"tool\": \"grep\", \"query\": \"cubical|coordinate.*[Hh]omotopy|[Hh]omotopy.*coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors require the identity as input; simplicial Dold-Kan homotopies, tensor sign structures and bar-complex differentials do not state this cubical signed-path identity. Candidate Homotopy and DoldKan source statements read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain homotopy on free cubical chains is obtained by summing oriented integer coordinate edges from zero to an integer",
+   "results": "{\"t\": \"2026-10-22T11:18:45Z\", \"tool\": \"leansearch\", \"query\": \"A chain homotopy on free cubical chains is obtained by summing oriented integer coordinate edges from zero to an integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy\", \"Homotopy.mk.congr_simp\", \"Homotopy.comm\", \"Homotopy.mk\", \"Homotopy.noConfusionType\", \"Homotopy.mkInductive\", \"Homotopy.ctorIdx\", \"Homotopy.trans\"], \"digest\": \"5fba5d4d1475387d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors require the identity as input; simplicial Dold-Kan homotopies, tensor sign structures and bar-complex differentials do not state this cubical signed-path identity. Candidate Homotopy and DoldKan source statements read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T11:18:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.instUniqueObjOppositeTruncatedTensorUnit\"], \"digest\": \"3e6838ae778983c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors require the identity as input; simplicial Dold-Kan homotopies, tensor sign structures and bar-complex differentials do not state this cubical signed-path identity. Candidate Homotopy and DoldKan source statements read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed finite paths in an integer coordinate give a chain homotopy between identity and coordinate collapse of cubical lattice chains",
+   "results": "{\"t\": \"2026-10-22T11:18:47Z\", \"tool\": \"leanfinder\", \"query\": \"Signed finite paths in an integer coordinate give a chain homotopy between identity and coordinate collapse of cubical lattice chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"Homotopy.mkInductiveAux₃\", \"AlgebraicTopology.DoldKan.Hσ\", \"AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant\", \"AlgebraicTopology.DoldKan.hσ'_eq\"], \"digest\": \"3524e511009d923f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors require the identity as input; simplicial Dold-Kan homotopies, tensor sign structures and bar-complex differentials do not state this cubical signed-path identity. Candidate Homotopy and DoldKan source statements read."
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*[Hh]omotopy|signed.*path|[Hh]omotopy.*lattice",
+   "results": "{\"t\": \"2026-10-22T11:19:14Z\", \"tool\": \"grep\", \"query\": \"lattice.*[Hh]omotopy|signed.*path|[Hh]omotopy.*lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors require the identity as input; simplicial Dold-Kan homotopies, tensor sign structures and bar-complex differentials do not state this cubical signed-path identity. Candidate Homotopy and DoldKan source statements read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Oriented sums over integer intervals telescope and inserting one basis direction contracts a tensor product of line chain complexes",
+   "results": "{\"t\": \"2026-10-22T11:19:23Z\", \"tool\": \"leanfinder\", \"query\": \"Oriented sums over integer intervals telescope and inserting one basis direction contracts a tensor product of line chain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.instTensorSignsNatDown\", \"ComplexShape.TensorSigns\", \"ComplexShape.TensorSigns.ε'_succ\", \"Rep.standardComplex.d_of\", \"ComplexShape.instTotalComplexShape\", \"Rep.barComplex.d_single\", \"ComplexShape.ε₁_ε₂\", \"Fin.neg_partialSum_add_eq_contractNth\"], \"digest\": \"73579228719e1358\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract homotopy constructors require the identity as input; simplicial Dold-Kan homotopies, tensor sign structures and bar-complex differentials do not state this cubical signed-path identity. Candidate Homotopy and DoldKan source statements read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-lattice-cubical-contraction",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, integral lattice input below the tame-boundary calculation; returned cubical-contraction proof steps 3, 4 and 5: finite signed paths and both face-sign cases.",
+   "via": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cubical-signed-coordinate-homotopy",
+  "worker": "stage1",
+  "summary": "Verified the finite signed-sum recurrence and telescoping for all integer endpoints; constructed additive extensions by basis expansion; computed the inserted-coordinate face and explicitly cancelled every other face with its opposite sign; checked the case where the coordinate is already present, top degree and zero groups. No new nodes are needed: each step is a finite elementary calculation. No statement change. Repair of the landing return for head 963ef8147b2: reconciled the retained split with the current unsplit node and re-read its sole cited current definition. Made both index-order sign cancellations and the endpoint computations at -1 and 0 explicit; retained the source, statement, searches, citations and seven-step route. Delivery is rebuilt on current origin/sheaf-dag by the prescribed delivery tool.",
+  "blueprint": "Paragraph (3) of the current main-20261015 direct-images proof: open direct image, integral lattice input below the tame-boundary calculation; realizes the finite signed paths and both face-sign cases allocated to this node by the cubical-contraction split. blueprint_refs.py ancestor returns None for the inherited ancestry; the existing blueprint.from fields are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-eb1937c34",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-eb1937c34 (reviewer sub-agent of L); spot-checked: I read the item in full; this delivery adds no new nodes. The statement and all maintainer fields are unchanged; versus the returned head 963ef8147b27, only step 5 (explicit i<j / j<i exponent cases) and step 6 (explicit endpoint values at n=-1 and n=0) changed, and both are correct. I rechecked all seven steps by hand. Step 1: Σ_{n+1}-Σ_n=b(n) holds for n≥1, n=0, n=-1 and n≤-2. Step 2: telescoping gives b(n)-b(0) for every sign of n. Step 3: the extension to homomorphisms uses the unique finite expansion stated by def-weil-pbc-free-module at R=Z, and H_{i,r}=0. Step 4: q_i(J)=q_i(I), so the i-face has sign +1 and gives [v,I]-[ρ_i v,I]. Step 5: the exponents A=q_i(I)+q_j(J) and B=q_j(I)+q_i(I\\{j}) differ by 1, with matching base points w+u_j, so the j-faces cancel. Step 6: for i in I the signs multiply to +1 and Σ_{n+1}-Σ_n=[v,I], including top degree. Step 7: the identity extends from the basis, and degrees outside 0..r and r=0 are trivial. My own Python check (ranks 1-3, v in {-2..2}^r, all I and i) passed all 3210 cases. Sources: Stacks Tag 0623 sign convention (-1)^{i+1} = (-1)^{q_i}, cited as a comparison only with proof_origin agent; no SGA is cited. The blueprint main-20261015 direct-images paragraph (3) is the inherited route, and the null from.node is inherited. Parent lem-sfb-integral-lattice-cubical-contraction steps 2-3 use exactly the identity in this statement. Duplicate search (rg -L cubical): sibling lem-sfb-cubical-boundary-coordinate-projections states ∂²=0 and properties of p_i but not the homotopy, so it is not a duplicate; no other overlaps. No tool_uses; 12 Mathlib searches are recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CubicalSignedCoordinateHomotopy",
+  "declaration": "IntegralLatticeCubical.signedCoordinateHomotopy",
+  "declarations": [
+   "IntegralLatticeCubical.signedCoordinateSum",
+   "IntegralLatticeCubical.pathResetCoordinate",
+   "IntegralLatticeCubical.pathCoordinateProjection",
+   "IntegralLatticeCubical.coordinateHomotopy",
+   "IntegralLatticeCubical.signedCoordinateHomotopy"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CubicalSignedCoordinateHomotopy.lean",
+  "statement": "theorem signedCoordinateHomotopy (r : ℕ) : (∀ (A : Type u) (_ : AddCommGroup A) (b : ℤ → A) (n : ℤ), signedCoordinateSum n (fun k ↦ b (k + 1) - b k) = b n - b 0 ∧ signedCoordinateSum (n + 1) b - signedCoordinateSum n b = b n) ∧ (∀ a : ℤ, a ≤ 0 → boundary r a = 0) ∧ (∀ (i : Fin r) (a : ℤ), a < 0 ∨ (r : ℤ) < a → pathCoordinateProjection r i a = 0) ∧ (∀ (i : Fin r) (a : ℤ), a = (r : ℤ) ∨ a < 0 ∨ (r : ℤ) < a → coordinateHomotopy r i a = 0) ∧ (∀ (i : Fin r) (a : ℤ) (v : Fin r → ℤ) (I : Directions r a), pathCoordinateProjection r i a (cell r a v I.val) = if i ∈ I.val then 0 else cell r a (pathResetCoordinate r i v) I.val) ∧ (∀ (i : Fin r) (a : ℤ) (v : Fin r → ℤ) (I : Directions r a), coordinateHomotopy r i a (cell r a v I.val) = if i ∈ I.val then 0 else (-1 : ℤ) ^ (I.val.filter (fun j ↦ j < i)).card • signedCoordinateSum (v i) (fun k ↦ cell r (a + 1) (pathResetCoordinate r i v + k • unitVector r i) (insert i I.val))) ∧ (∀ (i : Fin r) (a : ℤ), (incomingBoundary r a).comp (coordinateHomotopy r i a) + ((LinearEquiv.cast (R := ℤ) (M := Chains r) (sub_add_cancel a 1)).toLinearMap.comp (coordinateHomotopy r i (a - 1))).comp (boundary r a) = LinearMap.id - pathCoordinateProjection r i a) ∧ (∀ (i : Fin r) (a : ℤ) (v : Fin r → ℤ) (I : Directions r a), incomingBoundary r a (coordinateHomotopy r i a (cell r a v I.val)) + LinearEquiv.cast (R := ℤ) (M := Chains r) (sub_add_cancel a 1) (coordinateHomotopy r i (a - 1) (boundary r a (cell r a v I.val))) = if i ∈ I.val then cell r a v I.val else cell r a v I.val - cell r a (pathResetCoordinate r i v) I.val)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses Directions, Chains, cell, unitVector, boundary and incomingBoundary from the published IntegralLatticeCubicalContraction module, without using its contraction theorem. The four explicit helper definitions belong to this coordinate-path construction. A proof import of this module back into IntegralLatticeCubicalContraction must be omitted under stages/2-statements.md section 3 rule 7 because it would close an import cycle; stage 3 can extract the shared definitions when proving the parent. Review FIX (2026-10-24): the reset and projection helpers are named pathResetCoordinate and pathCoordinateProjection, because the parallel sibling lem-sfb-cubical-boundary-coordinate-projections (Q95 552e3325, stage-2 PASS) declares IntegralLatticeCubical.resetCoordinate and coordinateProjection (argument order r a i) with the same bodies; a joint importer would otherwise fail on duplicate names.",
+  "fixed_by": "NT-stage2-cc-770c370d8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-770c370d8",
+  "group": "N0",
+  "result": "fix",
+  "note": "Maths correct: all 8 conjuncts match the node (Σ telescoping and recurrence for all n and any A : Type u; ∂=0 for a≤0; p and H zero outside 0..r, H=0 at a=r; basis formulas with q_i via filter j<i like the published boundary; ∂H+H∂=1−p in every integer degree via canonical LinearEquiv.cast; explicit two-case basis form). Signs hand-checked; edge cases r=0, a=0, a=r, a<0, a>r, v_i=−1,0 covered. Real data, one sorry, docstrings OK, statement verbatim; reused parent defs unchanged since the NM landing. FIX H9/H4: the parallel sibling Q95 552e3325 (S2 PASS, not landed) declares IntegralLatticeCubical.resetCoordinate and coordinateProjection (same bodies, argument order r a i), which would clash at landing and in the parent's stage-3 import. Renamed to pathResetCoordinate and pathCoordinateProjection in fixes/CubicalSignedCoordinateHomotopy.lean + fixes/lem-sfb-cubical-signed-coordinate-homotopy.lean-record.json (statement, declarations, note). nt_compile --json clean, exit 0, 1.2 s. Stage-3 note: the twins are rfl-equal; extract the parent-owned defs to a definition module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T050749-L-3839372",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "IntegralLatticeCubical.signedCoordinateHomotopy"
+  ],
+  "sorry_after": []
+ }
+}

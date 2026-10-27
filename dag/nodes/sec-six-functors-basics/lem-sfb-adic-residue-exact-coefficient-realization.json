@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-adic-residue-exact-coefficient-realization",
+ "kind": "statement",
+ "title": "Exact realization of the completed coefficient ring and its quotients",
+ "statement": "For a scheme X, commutative Noetherian coefficient ring A, ideal J, and object U of the coefficient small pro-etale site, let O be the completed coefficient sheaf restricted to U and s(x) the restricted algebra section of x [def-sfb-adic-residue-quotient-tensor-tower]. There exists an additive exact functor E from A-modules to O-module sheaves, an isomorphism c:O -> E(A), and isomorphisms q_n:E(A/J^(n+1)) -> O_n, where O_n is the actual quotient coefficient module. For every x in A, c followed by E(multiplication by x) equals multiplication by s(x) followed by c. The composite c, E(quotient projection), q_n is the actual coefficient unit projection, using the canonical degree-zero single-complex identifications. This contains no Koszul complexes or cone comparisons.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-quotient-tensor-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-naive-completion (099M), scalar extension and quotient identification; Modules on Sites, Tags 03CY and 03EK."
+ },
+ "proof": [
+  {
+   "text": "Let K be commutativeSiteConstantModuleFunctor and let phi be coefficientMap. Construct E as K followed by the existing ordinary scalar-extension functor change phi and then slice restriction. K is exact. The private proved change_exact theorem makes change phi exact using the flatness clause of flat_and_quotients. The ordinary ringedOverFunctor_exactGeneral theorem supplies exact slice restriction. Thus the composite is additive and preserves finite limits and finite colimits.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every scalar module M, let generator(m) be the ordinary scalar-extension adjunction unit applied to the constant-module sheafification unit at m. The section generator(1) defines oneMap from the regular completed module to the realization of A. Compose the tensor adjunction, module sheafification Hom equivalence and regular-presheaf sections equivalence. Their composite is evaluation after precomposition with oneMap, so the coyoneda criterion makes oneMap invertible. Naturality of the adjunction unit under multiplication by a and linearity of the two units give oneMap followed by realized multiplication equals multiplication by the algebra section of a followed by oneMap.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For I=J^(n+1), transpose the constant quotient map twice, under module sheafification and tensor extension, to construct quotientMap from the realization of A/I to the actual quotient module. It sends generator(x) to the constant quotient section x. Let t send a completed scalar b to b times generator(1). Linearity shows t(phi(a))=generator(class(a)); this vanishes for a in I. By the kernel-span clause of flat_and_quotients and induction on span membership, t kills the kernel of the projection. Descend t sectionwise through that surjective projection. Its naturality follows by lifting each quotient section. One inverse identity is checked after the two adjunctions on quotient classes class(a); the other is checked after lifting through the projection. Hence quotientMap is invertible without any new unproved statement.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the regular and quotient isomorphisms to U. The restriction of a scalar map is the scalar map for the restricted section. To check the quotient normalization, cancel the singleObjXSelf identifications using single_map_f_self, then evaluate the resulting regular-module maps at 1 on every slice object. Naturality of generator sends 1 to class(1), and quotientMap sends this to the quotient section 1. This is precisely the map defining adicResidueQuotientCoefficientUnit. The same constructions include zero and unit ideals, the zero ring, and empty sites or slices.",
+   "uses": [
+    "def-sfb-adic-residue-quotient-tensor-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "def-sfb-adic-residue-quotient-tensor-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Module sheafification and lemma-adjointness-tensor-restrict (03EK); completed coefficient flatness and kernel calculation from ConstantCompletion.flat_and_quotients (093M). The explicit descending inverse follows the proved quotient_isIso argument of CompletedConstantAlgebraFlatQuotients, generalized to the coefficient-model site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor from modules to sheaves of modules constant realization extension of scalars regular module quotient ideal",
+   "results": "Eight hits, mostly condensed locally constant functors and the free module sheaf functor.",
+   "verdict": "No projection-normalized exact realization of completed coefficient quotients.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"ModuleCat\"",
+   "results": "Four condensed-module full/faithful instances.",
+   "verdict": "None gives the required scalar or quotient normalization.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*realiz|realiz.*Koszul|constant.*quotient",
+   "results": "Five unrelated Mathlib matches. Project comparisons were inspected, including WeilCompletedKoszulCoefficientComparison and WeilExteriorKoszulTensorComparison.",
+   "verdict": "Project comparisons specialize to a different site datum and successor coefficient universe; no comparison for the arbitrary coefficient-model universe in this item.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueKoszulCoefficientConeComparison",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+   "place": "Proof step 1: scalar and quotient realization only."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueExactCoefficientRealization",
+  "file": "lean/Sheaf/Paper/AdicResidueExactCoefficientRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_exact_coefficient_realization",
+  "statement": "theorem adicResidue_exact_coefficient_realization\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :\n    let O := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let s := fun x : A ↦ ringedKoszulSliceSection\n      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)\n      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)\n        x) U\n    ∃ (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O) (_hadd : E.Additive)\n      (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)\n      (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))\n      (q : ∀ n : ℕ, E.obj (ModuleCat.of A (A ⧸ J ^ (n + 1))) ≅\n        adicResidueQuotientModule X J U n),\n      (∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =\n        ringedKoszulScalar O (s x) ≫ c.hom) ∧\n      ∀ n : ℕ, c.hom ≫ E.map (ModuleCat.ofHom (J ^ (n + 1)).mkQ) ≫ (q n).hom =\n        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫\n          (adicResidueQuotientCoefficientUnit X J U n).f 0 ≫\n            (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).hom",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3caba",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T135627-L-4051345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T152606-L-1140297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

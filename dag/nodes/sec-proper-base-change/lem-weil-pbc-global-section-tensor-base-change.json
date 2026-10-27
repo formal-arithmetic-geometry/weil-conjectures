@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-global-section-tensor-base-change",
+ "kind": "statement",
+ "title": "Global scalar extension commutes with the actual tensor localization construction",
+ "statement": "Let (C,J,O) be a small commutative ringed site, A its ring of global sections, and f:Fin r to Gamma(O) a finite list. Let T be the actual global scalar-extension functor [def-weil-pbc-global-section-scalar-extension]. Form the actual augmented tensor extended Cech complex [def-weil-pbc-ringed-extended-cech] over A on its one-point ring site, and over O on C. There is an isomorphism from the latter complex to T of the former whose composite with T of the ring augmentation followed by the fixed multiplication T(A) to O is exactly the existing tensor augmentation. This only compares the two actual tensor constructions; it contains no arbitrary augmented complex, ordered-coordinate equivalences or alternating differential hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, final paragraph, and Tag 0996; assigned node proof step 1; algebra.tex Tag 00DK for localization base change"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-weil-pbc-ring-tensor-cech-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized complex strong monoidal structure; its inverse unit constraint is the specified scalar-extended augmentation on the identity complex.",
+   "uses": [
+    "lem-weil-pbc-global-section-complex-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved augmented localization-factor comparison, obtained from preservation of the scalar multiplication sequence colimit.",
+   "uses": [
+    "lem-weil-pbc-global-section-localization-factor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the length of the list. For length zero use the complex unit isomorphism and the unit inverse identity. For a successor, tensor the first-factor comparison with the induction isomorphism and compose with the complex tensorator. Tensorator naturality applied to the two projections, the monoidal left-unit coherence, and tensor composition show that its composite with the extended augmentation is exactly the recursive target augmentation. This is proved as augmented_tensor_map and the final Lean induction.",
+   "uses": [
+    "lem-weil-pbc-global-section-complex-monoidal",
+    "lem-weil-pbc-global-section-localization-factor",
+    "def-weil-pbc-ringed-extended-cech",
+    "def-weil-pbc-global-section-scalar-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-global-section-complex-monoidal",
+  "lem-weil-pbc-global-section-localization-factor",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-global-section-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B8",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, final paragraph, and Tag 0996; assigned node proof step 1; algebra.tex Tag 00DK for localization base change",
+  "note": "Actual tensor-length induction; localization factors are proved by sequential colimits. Only the module-level normalized monoidal constraint is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with tensor products of complexes and localization of ring sheaves",
+   "results": "IsLocalizedModule.map_lTensor, rTensor, isBaseChange; IsLocalization.moduleTensorEquiv; PresheafOfModules.Monoidal.tensorObj; generic module-level tools.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.tensorEquiv",
+   "results": "One hit: IsLocalization.Away.tensorEquiv in Mathlib.RingTheory.Localization.BaseChange; the sectionwise localization isomorphism, not the augmented complex comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  },
+  {
+   "tool": "grep",
+   "query": "ringFamilyGlobalExtension_tensor|ringTensorCech",
+   "results": "OK 0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with tensor products of complexes and localization of ring sheaves",
+   "results": "ModuleCat.extendScalars and its tensor formulas; IsLocalizedModule and finite-presentation scalar-extension lemmas; no comparison for this ring-site-to-sheaf functor.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "U9",
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.GlobalSectionOrderedCechTensor"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-global-section-ordered-cech-tensor, Tag 099E, final paragraph, and Tag 0996; assigned node proof step 1; algebra.tex Tag 00DK for localization base change. Inherited blueprint ancestry is null: created.item chain stops at a module name. Serves the global augmented extended Cech construction under def-weil-pbc-completed-pullback.",
+   "via": [
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionTensorBaseChange",
+  "file": "lean/Sheaf/Paper/GlobalSectionTensorBaseChange.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_tensor_iso",
+  "statement": "theorem ringFamilyGlobalExtension_tensor_iso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ e : (ringedExtendedCech O r f).1 ≅ ringFamilyGlobalExtensionComplex O\n        (ringTensorCech (ringFamilyGlobalRing O) r (ringFamilyGlobalList O r f)).1,\n      e.hom ≫ ringFamilyGlobalExtensionAugmentation O\n        (ringTensorCech (ringFamilyGlobalRing O) r (ringFamilyGlobalList O r f)).2 =\n          (ringedExtendedCech O r f).2",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T071316-L-3911986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T100219-L-4150121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

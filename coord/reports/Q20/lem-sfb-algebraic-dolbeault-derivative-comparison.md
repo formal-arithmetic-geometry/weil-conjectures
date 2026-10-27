@@ -1,0 +1,63 @@
+# Q20 stage-1 delivery
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-algebraic-dolbeault-derivative-comparison.json`: item, statement unchanged, five-step split, no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-smooth-analytification-cotangent.json`: statement-only geometric input, unsplit; Mathlib has smooth algebraic differential modules but no analytification/cotangent comparison.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-gaga-derived-coherent-sections.json`: statement-only canonical derived GAGA input for finite locally free coefficients, unsplit; no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-dolbeault-acyclic-resolution.json`: statement-only analytic acyclic-resolution input, unsplit; no Mathlib match.
+- `citations.json`: every proof-step citation, with its quoted statement copied literally. `searches.jsonl`: actual search-command log; all searches completed successfully.
+
+## Attachments
+
+None for the item or new nodes. Searched `lean/WeilConjectures/` for the exact blueprint id and Dolbeault/dolbeault, GAGA, analytification, FubiniStudy, holomorphic and cotangent terms. The results do not state the item. Existing `AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFree_relativeDifferentials` belongs to the existing `lem-ag-smooth-relative-differentials-finite-locally-free` node; read its declaration and proof in `lean/WeilConjectures/AlgebraicGeometry/SmoothRelativeDifferentialsFiniteLocallyFree.lean:34`. This is reuse of an existing node, not a new attachment. Likewise the existing enough-injectives node is already attached.
+
+## WANTED
+
+WANTED: Popa, *Kodaira dimension of algebraic varieties*, Theorem 1.6.6 proof, printed pp.26--27, for the item. Not locally in literature; read the author's online PDF https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf (PDF pages 30--31).
+
+WANTED: Serre, *Géométrie algébrique et géométrie analytique*, §§4--6,9,11--13, for the smooth-analytification and derived-GAGA nodes. Not locally in literature; read the publisher scan https://www.numdam.org/article/AIF_1956__6__1_0.pdf. §11 constructs the actual comparison using coefficient maps on opens; §12 Theorem 1 asserts bijectivity for coherent sheaves and §13 proves it. The new GAGA node uses the corresponding canonical derived arrow with finite locally free coefficients, a restricted coefficient class. The cotangent identification is an expansion using smooth charts, not a quotation of Theorem 1.
+
+WANTED: Demailly, *Complex Analytic and Differential Geometry*, I §3.E Lemma (3.29) pp.28--29; IV §6 Example (6.13), (6.14)--(6.16) p.216; VI §4 (4.1),(4.4),(4.6) pp.296--297, for the Dolbeault node and metric calculation. Not locally in literature; read the author's PDF https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. No download or literature modification was made. The item is marked proof_origin.by=agent because these documents are absent locally and the derivative compatibility is an explicit expansion.
+
+## Issues found and corrected
+
+No STATEMENT-DISPUTED: the imported statement is true with its specified augmentation-normalized sign. The proof cannot simply appeal to O-linear naturality of GAGA: d_X is only C-linear. Step 4 instead checks the coefficient-sheaf square before derived pushforward. Demailly mentions a modified sign convention in the preceding De Rham--Weil presentation; this delivery fixes the comparison by the acyclic-resolution augmentation, exactly as the item specifies, rather than importing an unspecified sign from a textbook cohomology isomorphism.
+
+The parent chain has blueprint.from.node=null; tools/blueprint_refs.py ancestor prints None. This inherited metadata was retained, with exact supporting places and via extended for the new nodes. The current `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/` records direct-images step (3); read its current proof and unit statement, and the DAG chapter/unit records. This is a supporting lemma in the existing Popa/Kodaira/moduli chain, not a replacement of that step or a change of the unit route. No unit or chapter file is changed.
+
+The first broad fine-sheaf grep found substrings of "affine" and "refine"; read its hits and repeated it with word boundaries, which gave no hits. The log and node records keep the actual outcomes. Semantic hits only concern algebraic smoothness, abstract resolutions, projective spectra or d squared zero. They do not give local d-bar solvability, GAGA, or analytic cotangent identification.
+
+## Not duplicates
+
+lem-sfb-smooth-analytification-cotangent vs lem-sfb-projective-harmonic-representatives: this new node constructs analytification and the holomorphic cotangent identification for arbitrary smooth separated finite-type complex schemes; the existing node is the compact Kähler harmonic-representative theorem and does not assert this identification.
+
+lem-sfb-gaga-derived-coherent-sections vs lem-sfb-derivation-cohomology-scalar-square: derived GAGA compares the algebraic and analytic topologies over C; scalar-square compares algebraic schemes after an extension of fields, without an analytic topology. Sharing the broad cohomology context does not identify their maps or statements.
+
+lem-sfb-dolbeault-acyclic-resolution vs lem-sfb-projective-harmonic-representatives: the former gives local exactness and global-section acyclicity on arbitrary complex manifolds, without a metric or compactness; the latter supplies harmonic representatives and d-closedness only on compact projective Kähler manifolds.
+
+lem-sfb-dolbeault-acyclic-resolution vs lem-sfb-ringed-acyclic-resolution-derived-maps: the existing theorem assumes acyclic resolutions and computes maps between them; the new node establishes that these particular analytic sheaf complexes meet those hypotheses.
+
+Searched the whole DAG for Dolbeault, GAGA, analytification, holomorphic cotangent, Fubini--Study and the prospective ids; only the parent Hodge input chain contains the analytic comparisons, and none states a new node. Blueprint searches Dolbeault, GAGA, analytification, Fubini, holomorphic cotangent return zero; Kähler returns only algebraic-differential/curve-duality nodes; holomorphic returns unrelated positive-real Euler-factor nodes. Searched the latest blueprint directly too. No new node shares a Stacks tag with an existing node: sources for the new nodes are the analytic literature. Existing Stacks facts are reused, not duplicated.
+
+## Review by Q20
+
+I read Popa's actual discussion on pp.26--27: the derivative is explicitly a C-linear sheaf homomorphism, the source and target cohomology are compared with bidegrees (0,j) and (1,j), and the vanishing argument then uses harmonic representatives. This item supplies precisely the comparison used before harmonic representatives. It does not cite the parent vanishing result and creates no cycle through harmonic vanishing.
+
+For the geometric new node I read Serre's analytification and analytic-local-ring construction (§§4--6) and analytified modules (§9). Smooth presentations give local holomorphic coordinates and identify the algebraic differential basis with dz_i; the local maps agree on overlaps by the derivation formula, so the stated map is canonical. The closed embedding clause gives the projective submanifold in step 1. The new node does not assume X connected or pure-dimensional. Step 1 proves compactness from the projective embedding and explicitly verifies the Fubini--Study metric formula, overlap gluing, positivity, closedness, and component finiteness; I compared it with Demailly VI (4.4),(4.6). The formula is harmless in dimension zero, where positivity has no nonzero tangent vector to test. Its uses cite the analytic geometry and type differential identities actually stated, not a definition standing in for an existence theorem.
+
+For the GAGA node I read Serre §11's coefficient-map construction, §12 Theorem 1 and §13. Finite locally free coefficients suffice; the node does not claim GAGA for an arbitrary C-linear map. It states the derived comparison, with the canonical arrow specified. In step 2 the existing smooth-relative-differentials theorem states exactly finite local freeness with rank allowed to vary, so it applies to X over Spec C. O_X is already rank one. I opened lem-pe-ringed-site-derived-evaluation-slice: its hypothesis is an arbitrary small ringed site with enough injectives and its conclusion is the canonical evaluation/cohomology comparison, natural in module maps. The sites of opens have the whole space as terminal object, and the ring sheaves O_X and constant C are allowed. The existing enough-injectives theorem is for every ringed space. Applying naturality to scalar multiplication gives complex linearity; it never requires d_X to be O-linear. These are declared generic off-unit tools where required.
+
+For the Dolbeault node I read Demailly I Lemma (3.29) (local exactness) and IV (6.13)--(6.16) (the resolution and acyclicity). These hypotheses require a manifold and partitions of unity, not compactness or a Kähler metric. Step 3 applies the existing lem-sfb-ringed-acyclic-resolution-derived-maps exactly to bounded-below complexes of globally acyclic C-sheaves; I read its full statement, including its canonical comparison and identity-morphism case. It asserts the derived form, so no new per-degree comparison lemma was substituted for a derived isomorphism. H^q of that composite defines the original item's comparison c. The derived-category definition explicitly factors cohomology through localization and identifies it with the stated kernel/image quotient.
+
+Step 4 uses the last formula of the cotangent statement and the defining canonical arrow in the GAGA statement, both quoted in citations.json. On every open the equation sends f to the same holomorphic derivative; applying the natural direct-to-derived-pushforward map and then RΓ proves the square for the C-linear derivative. This is a formal consequence of an actual sheaf-map equality, not assumed functoriality for differential operators.
+
+Step 5 uses the operator anticommutation asserted by the Dolbeault node and the identity-morphism naturality asserted by the existing resolution node. I checked the signs: barPartial((-1)^r partial)=(-1)^(r+1) partial barPartial, and a change by barPartial beta contributes barPartial((-1)^(q+1) partial beta). Degree-zero T is the holomorphic derivative, so the augmentation condition in the resolution theorem is exactly satisfied. This proves the formula for every representative, not just a harmonic representative. Its use of resolution naturality is valid in C-sheaves, where both maps are linear.
+
+Against B--E: all three new files contain complete independent statements and no proof or proof_deps, and are searched by their own concepts with second semantic phrasings. None restates the item's comparison with its derivative formula: the proof itself constructs that map and checks the square. Definitions of analytification, analytic coefficient extension, the forms, the type differentials and acyclicity are written in the statements; existing algebraic notions are linked. Quotient, injective-resolution and derived notation are inherited from cited nodes. All cited statement texts were opened, and citations.json is generated from those exact texts. Small cases checked: empty scheme/manifold, a finite union of complex points, P^1, an elliptic curve, X=P^1 disjoint union Spec C, p greater than a component's dimension, q=0 and q above dimension. The geometric statement is also tested on the affine line (noncompact, correctly allowed), and the Dolbeault statement on noncompact coordinate polydiscs. GAGA retains projectivity; none of the other new nodes improperly borrows it. No SGA reference is used. Every step is below 2000 characters, and the genuinely non-elementary local analytic/GAGA facts have their own nodes rather than being hidden in long steps.
+
+## Unfinished work
+
+No part of the item's assembly proof remains open. The three new nodes intentionally remain unsplit for future stage-1 workers; none is a Mathlib leaf. No Lean was written and no compiler, Lake or build tool was run. The first individual server checks passed; final dry-run and delivery results follow from the delivery tool's output.
+
+Dry-run repair: the first final preflight required an inline definition citation in the Dolbeault statement. Added [def-weil-abstract-derived-category] immediately after cochain complex (already its statement dependency), and regenerated the verbatim citation entries. No mathematical statement changed.

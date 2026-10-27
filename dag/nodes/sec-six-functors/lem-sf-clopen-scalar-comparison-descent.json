@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-clopen-scalar-comparison-descent",
+ "kind": "statement",
+ "title": "Descent of the ordinary scalar comparison with its counit square",
+ "statement": "Fix l, E, T, a clopen U and d [def-sf-clopen-restriction-data]. For an exponent n+1, assume only a natural isomorphism c between the two ordinary scalar-extension and restriction composites [lem-pur-derived-change-of-rings]. There is a natural isomorphism of the derived composites whose equation with the canonical universal counits holds for every complex P, and whose chain comparison is NatIso.mapHomologicalComplex c [def-weil-integral-reduction-tower]. No K-flat hypothesis on P is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, derived base change and pullback K-flat resolution descent."
+ },
+ "stmt_deps": [
+  "def-sf-clopen-restriction-data",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "Partition T into U and its open complement, including empty components. Apply finite-clopen K-flat detection to the raw restriction. Transport the result along the lifted completion-ring isomorphism to show the actual completed restriction preserves K-flat complexes.",
+   "uses": [
+    "lem-pur-clopen-kflat-detection",
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the universal scalar counits into natural transformations on complexes. They are isomorphisms on K-flat complexes. Apply the existing generic descendComparison using K-flat resolutions and the preservation just proved to obtain the derived comparison with its counit equation on K-flat representatives.",
+   "uses": [
+    "lem-pur-clopen-scalar-comparison-descent",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary P choose a K-flat resolution K to P. Express the two sides of the desired square as natural transformations, precompose with the resolution image, use their naturality and the equation at K, and cancel the inverted resolution. This yields exactly the square at P.",
+   "uses": [
+    "lem-pur-clopen-scalar-comparison-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-kflat-detection",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-pur-clopen-scalar-comparison-descent",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "proof_origin": {
+  "by": "W8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, derived base change and pullback K-flat resolution descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a clopen component commutes with extension of scalars on sheaves of modules and its derived functor",
+   "results": "Eight hits, none supplies the coefficient-normalized comparison or the counit equation required here. Local source search found ProEtaleClopenOrdinaryScalarComparison and ProEtaleClopenScalarComparisonDescent.",
+   "verdict": "Use the existing project comparison machinery, not a duplicate generic geometric statement.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.extensionOfScalars",
+   "results": "No match; extensionOfScalars is not an identifier of the checked-out project interface.",
+   "verdict": "Use the project scalar model and its object and map equations.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Comp|Iso)|pushforwardCongr",
+   "results": "Found generic scalar restriction composition and isomorphism APIs; local searches found normalized ring-isomorphism tensor transport and K-flat descent.",
+   "verdict": "No exact statement in Mathlib; combine the existing project lemmas and pointwise module constructions.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenScalarQuotientComparison",
+  "date": "2026-10-27",
+  "group": "W8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3. Substep: Normalized scalar extension and chain quotient comparison.",
+   "via": [
+    "lem-sf-clopen-derived-compatibility",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization",
+    "lem-sf-clopen-scalar-quotient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenScalarComparisonDescent",
+  "file": "lean/Sheaf/Paper/SfClopenScalarComparisonDescent.lean",
+  "declaration": "WeilConjectures.sf_clopen_scalar_comparison_descent",
+  "statement": "theorem sf_clopen_scalar_comparison_descent\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)\n    (hU : IsClosed (U : Set T)) (d : SfClopenCoefficientRestriction l E T U) (n : ℕ)\n    (c : scalarReductionExtension l E T n ⋙\n        sfClopenModuleRestriction U _ _ (d.finite n) ≅\n      sfClopenModuleRestriction U (completedIntegralCoefficientSheafUnrestricted l E T)\n        (completedIntegralCoefficientSheafUnrestricted l E U.toScheme) d.completion ⋙\n        scalarReductionExtension l E U.toScheme n) :\n    letI := scalarReductionExtensionAdditive l E T n\n    letI := scalarReductionExtensionAdditive l E U.toScheme n\n    letI := d.additive\n    letI := d.finite_additive n\n    ∃ reduction : scalarReductionDerivedExtension l E T n ⋙\n        sfClopenFiniteDerivedRestriction d n ≅\n      sfClopenDerivedRestriction d ⋙ scalarReductionDerivedExtension l E U.toScheme n,\n      ∀ P : CochainComplex (scalarReductionSource l E T) ℤ,\n      (sfClopenFiniteDerivedRestriction d n).map (sfClopenReductionCounit T n P) ≫\n          (sfClopenFiniteLocalizationIso d n\n            (unrestrictedTowerFiniteComplex l E T n P)).hom ≫\n          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).app P).hom =\n        reduction.hom.app (DerivedCategory.Q.obj P) ≫\n          (scalarReductionDerivedExtension l E U.toScheme n).map\n            (sfClopenLocalizationIso d P).hom ≫\n          sfClopenReductionCounit U.toScheme n ((sfClopenComplexRestriction d).obj P)",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T112444-L-1585705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T112444-L-1585705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

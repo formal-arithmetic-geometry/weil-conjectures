@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-coefficient-scalar-derived-tensor-square",
+ "kind": "lemma",
+ "title": "Derived tensor equation from the ordinary coefficient square",
+ "statement": "For commutative condensed rings R,S and a ring-object map a with exact internal scalar extension on every scheme, let f:X to Y be a scheme morphism. Suppose the ordinary pullIso(a,f).symm is monoidal for the specified internalScalarMonoidal and monoidal_upperStar structures. Then the derived scalar comparison mu, actual geometric tensor maps d, and canonical localized coefficient path theta satisfy P_S(mu_Y) followed by d_S followed by tensor(theta_A,theta_B) = theta_(A tensor B) followed by T_X(d_R) followed by mu_X, for every A,B in the unbounded derived category of internal R_Y-modules [def-sfb-coefficient-scalar-tensor-realization-data]. This states only the derived tensor equation, not section scalar realization or ordinary square monoidality.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, compatibility of composite pullbacks and tensor products; original scalar realization steps 4--5 and adopted source derived monoidal composition theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-coefficient-scalar-tensor-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Install the specified internalScalarMonoidal and monoidal_upperStar structures. Apply the adopted source theorem Functor.map_leftDerivedTensorComparison_comp_eq_of_iso with F1 = upperStar R f, F2 = extendScalars a_X, G1 = extendScalars a_Y, G2 = upperStar S f, and tau = (pullIso a f).symm. The proved private wrapper canonical_tensor_square stores this equation in the proposition TensorSquare before specializing at objects, so matching the existing monoidal data does not unfold their concrete tensor constructions. The hypothesis supplies exactly the ordinary monoidality assumption; all four functors are additive exact left adjoints preserving flat objects.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the path comparison with coefficientScalarPathIso by the defining equality of isomorphisms. Identify each scalar comparison with internalScalarTensorComparison by the defining equality of natural transformations, then evaluate at the two objects. Identify each geometric comparison using leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison, again evaluated at the two objects. Give the canonical comparison aliases their original bifunctor types and evaluate the stored TensorSquare equation. Expand tensorHom into its two whiskered factors. The proved private categorical helper tensor_square_from_inv transports the component equalities into the composite equation, precomposes with the hom component of the path isomorphism at A tensor B, cancels its inverse, and reverses the equation. This gives exactly the required displayed equation.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-scalar-tensor-comparison",
+  "def-pd-proetale-section-module-functors",
+  "def-sfb-module-object-projection-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, compatibility of composite pullbacks and tensor products; original scalar realization steps 4--5 and adopted source derived monoidal composition theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar extension is monoidal and commutes with the equivalence between internal module objects and sheaves of modules on unbounded derived categories",
+   "results": "Eight hits, concerning LightCondensed monoidal categories and exact-functor derived Ext/linearity. No normalized section scalar adjunction or derived scalar/pullback tensor square.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary monoidal transport alone does not identify the prescribed scalar pair and signed K-flat representative comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.IsMonoidal",
+   "results": "0 hits: unknown identifier 'NatTrans.IsMonoidal' in the Mathlib search index.",
+   "date": "2026-10-26",
+   "verdict": "The required comparison structures and derived composition theorem are in the adopted source extension."
+  },
+  {
+   "tool": "grep",
+   "query": "map_leftDerivedTensorComparison_comp_eq_of_iso|scalarExtension_constraint_coherence",
+   "results": "No Mathlib hits. Local adopted library contains map_leftDerivedTensorComparison_comp_eq_of_iso; Sheaf supplies the normalized scalar coherence statement.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing generic derived composition theorem rather than a new four-corner ringed presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRealization",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "Tag 07A4, compatibility of composite pullbacks and tensor products; original scalar realization steps 4--5 and adopted source derived monoidal composition theorem.",
+   "via": [
+    "lem-sfb-coefficient-scalar-tensor-realization",
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarDerivedTensorSquare",
+  "file": "lean/Sheaf/Paper/CoefficientScalarDerivedTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarDerivedTensorSquare",
+  "statement": "theorem coefficientScalarDerivedTensorSquare {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hmono : letI := internalScalarMonoidal a X\n      letI := internalScalarMonoidal a Y\n      letI := monoidal_upperStar R f\n      letI := monoidal_upperStar S f\n      NatTrans.IsMonoidal (pullIso a f).symm.hom) :\n    ∀ A B : DerivedCategory (ModuleRingedComparison.internalModules R Y),\n      (moduleObjectDerivedPullback S f).map\n          (((internalScalarTensorComparison a Y).app A).app B) ≫\n        coefficientGeometricTensorComparison S f\n          ((internalScalarExtension a Y).obj A)\n          ((internalScalarExtension a Y).obj B) ≫\n        ((derivedTensor S X).map ((coefficientScalarPathIso a f).hom.app A)).app\n          ((moduleObjectDerivedPullback S f).obj\n            ((internalScalarExtension a Y).obj B)) ≫\n        ((derivedTensor S X).obj\n          ((internalScalarExtension a X).obj\n            ((moduleObjectDerivedPullback R f).obj A))).map\n              ((coefficientScalarPathIso a f).hom.app B) =\n      (coefficientScalarPathIso a f).hom.app (((derivedTensor R Y).obj A).obj B) ≫\n        (internalScalarExtension a X).map\n          (coefficientGeometricTensorComparison R f A B) ≫\n        ((internalScalarTensorComparison a X).app\n          ((moduleObjectDerivedPullback R f).obj A)).app\n            ((moduleObjectDerivedPullback R f).obj B)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7e17d",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T202241-L-2698084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T024137-L-641776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

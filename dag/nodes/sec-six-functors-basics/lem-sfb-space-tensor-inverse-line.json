@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-space-tensor-inverse-line",
+ "kind": "statement",
+ "title": "A tensor inverse detects a line module on an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$, with its small etale site and structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space], chosen small relative to the sheaf universe [def-weil-size-convention]. Let $M,N$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and use the sheaf tensor product [def-pur-sheaf-tensor-product]. If there exists an $\\mathcal O_X$-linear isomorphism $M\\otimes_{\\mathcal O_X}N\\cong\\mathcal O_X$, then both $M$ and $N$ are locally isomorphic to $\\mathcal O_X$ on the small etale site, hence are line modules. No finite-presentation hypothesis on $M$ or $N$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0B8N (lemma-invertible), equivalence (1)-(2), and Tag 0B8Q (lemma-invertible-is-locally-free-rank-1), locally ringed converse, applied to the small etale structure sheaf of an algebraic space."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-space-quasi-coherent-algebra",
+  "def-sfb-space-comm-algebra-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Fix an object $U\\to X$ of the small etale site and write $\\psi:M\\otimes N\\xrightarrow{\\sim}\\mathcal O_X$ for the given isomorphism. Work on localized sites. By the cited restriction theorem, for every object $W$ of the small etale site there is an isomorphism of $\\mathcal O_W$-modules $(M\\otimes N)|_W\\cong M|_W\\otimes_{\\mathcal O_W}N|_W$, natural in $M,N$, sending the image of $x\\otimes y$ under the sheafification unit on the original site to the image of $x\\otimes y$ under the sheafification unit on the slice, for $x\\in M(V)$, $y\\in N(V)$, $V\\to W$. Use this identification throughout, for $W=U$ and for the members of the coverings chosen below. In particular $\\psi$ restricts to an isomorphism $M|_W\\otimes_{\\mathcal O_W}N|_W\\cong\\mathcal O_W$ on every slice, and a section of $M\\otimes N$ that is the image of a pure tensor $x\\otimes y$ corresponds on the slice to the image of the same pure tensor.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback) for the localization morphism of Section 03DH (section-localize)"
+   }
+  },
+  {
+   "text": "Apply local representability of sheafification sections to $t=\\psi^{-1}(1)\\in(M\\otimes N)(U)$. The sheaf tensor is the abelian sheafification of $P(V)=M(V)\\otimes_{\\mathcal O_X(V)}N(V)$, with its extended module action; its underlying set sheaf is therefore the set sheafification of $|P|$. The cited local-sections theorem gives an etale covering on which $t$ comes from an element of this ordinary tensor product. Every ordinary tensor is a finite sum of pure tensors (expand its expression in the generators and absorb coefficients and minus signs into the first factor). Thus on each member $U_j$ of this covering there are sections $x_i\\in M(U_j)$, $y_i\\in N(U_j)$, $1\\leq i\\leq r$, with $t|_{U_j}=\\sum_i x_i\\otimes y_i$ (images under the sheafification unit). Renaming $U_j$ as $U$, we work on one member at a time; it suffices to trivialize $M$ and $N$ on a covering of each member. We may pad a zero expression by $0\\otimes0$, so $r\\geq1$. Applying $\\psi$ gives $\\sum_i\\psi(x_i\\otimes y_i)=1$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0B8N (lemma-invertible), proof, local finite-sum representation; Tag 03CY (lemma-sheafification-presheaf-modules); Sites Tags 00YR and 00WK"
+   }
+  },
+  {
+   "text": "Put $a_i=\\psi(x_i\\otimes y_i)\\in\\Gamma(U,\\mathcal O_U)$. At every point $u$ of the scheme $U$, its local ring cannot have all germs $(a_i)_u$ in its maximal ideal, since their sum is $1$. Choose an $i$ for which $(a_i)_u$ is a unit. Represent its inverse germ by a section $b$ on a Zariski neighbourhood; the germ equality $a_i b=1$ holds on a smaller neighbourhood, by the definition of a germ. These neighbourhoods, for all $u$, form a Zariski cover on which some $a_i$ is a unit. Their inclusions are etale, so they refine our covering in the small etale site. On any member replace $x_i$ by $a_i^{-1}x_i$ and denote the resulting pair by $x,y$. Then $\\psi(x\\otimes y)=1$, and injectivity of $\\psi$ gives $\\psi^{-1}(1)=x\\otimes y$ on this slice. If $U$ is empty it is covered by the empty family, and there is nothing to check.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0B8Q (lemma-invertible-is-locally-free-rank-1), locally ringed converse; local-unit refinement written out on the scheme objects"
+   }
+  },
+  {
+   "text": "On this slice define $f:\\mathcal O_U\\to M|_U$ by $f(a)=ax$ and $g:M|_U\\to\\mathcal O_U$ by $g(m)=\\psi(m\\otimes y)$, on every object over $U$. These are module-sheaf maps because scalar multiplication and $\\psi$ commute with restrictions, and $gf=\\mathrm{id}$ since $\\psi(x\\otimes y)=1$. The endomorphism $T=fg$ of $M|_U$ is also an isomorphism: it is the composite $M\\cong M\\otimes\\mathcal O_U\\xrightarrow{1\\otimes\\psi^{-1}}M\\otimes(M\\otimes N)\\cong M\\otimes(M\\otimes N)\\xrightarrow{1\\otimes\\psi}M\\otimes\\mathcal O_U\\cong M$, where the middle isomorphism swaps the two $M$ factors using associativity and symmetry. Indeed its value on $m$ is $x\\psi(m\\otimes y)$, because $\\psi^{-1}(1)=x\\otimes y$. Every displayed arrow is an isomorphism by the cited monoidal structure and the hypothesis on $\\psi$. Now $T^2=f(gf)g=fg=T$, and composing with $T^{-1}$ gives $T=\\mathrm{id}$. Consequently $f,g$ are inverse trivializations of $M|_U$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0B8N (lemma-invertible), proof, automorphism obtained by exchanging the two copies of the first tensor factor; idempotence for a single normalized pair"
+   }
+  },
+  {
+   "text": "For $N|_U$ use the isomorphism $\\psi^{\\mathrm{op}}:N\\otimes M\\xrightarrow{c}M\\otimes N\\xrightarrow{\\psi}\\mathcal O_U$ and the normalized pair $y,x$. Explicitly set $f_N(a)=ay$, $g_N(n)=\\psi(x\\otimes n)$. Then $g_Nf_N=\\mathrm{id}$. The same displayed composite as in the previous step, with $N,M,\\psi^{\\mathrm{op}}$ substituted for $M,N,\\psi$, is an isomorphism $T_N(n)=y\\psi(x\\otimes n)=f_Ng_N(n)$. Its square is itself since $g_Nf_N=\\mathrm{id}$; hence it is the identity. These maps therefore trivialize $N$ on the same covering. Since the starting site object $U$ was arbitrary, both sheaves are locally isomorphic to $\\mathcal O_X$, which is precisely the definition of line modules. The construction never assumed finite presentation.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8N and 0B8Q, symmetry between the two factors and the rank-one conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0B8N and 0B8Q; explicit single-pair/idempotent refinement of their local automorphism argument, using the scheme objects of the small etale site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "invertible|IsTensorInvertible|rank.one",
+   "results": "0 hits; inspected: none; directory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: PicardGroup concerns modules over a ring, not module sheaves on a locally ringed etale topos; the free-locus and etale-morphism hits do not give the asserted sheaf criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the tensor product of two sheaves of modules on a locally ringed topos is the structure sheaf then each is locally free of rank one",
+   "results": "8 hits; inspected: CategoryTheory.Sheaf.tensorProd_isSheaf, Module.Invertible.instTensorProduct_1, Module.rankAtStalk_tensorProduct, SheafOfModules.free, IsLocalRing.subsingleton_tensorProduct, AlgebraicGeometry.LocallyRingedSpace.𝒪, rank_tensorProduct', SheafOfModules.ιFree",
+   "date": "2026-10-23",
+   "verdict": "no match: PicardGroup concerns modules over a ring, not module sheaves on a locally ringed etale topos; the free-locus and etale-morphism hits do not give the asserted sheaf criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Invertible\"",
+   "results": "0 hits; inspected: none",
+   "date": "2026-10-23",
+   "verdict": "no match: PicardGroup concerns modules over a ring, not module sheaves on a locally ringed etale topos; the free-locus and etale-morphism hits do not give the asserted sheaf criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the small etale site of an algebraic space a module admitting a tensor inverse is locally free of rank one",
+   "results": "8 hits; inspected: Module.mem_freeLocus_iff_tensor, ModuleCat.Tilde.isUnit_toStalk, SheafOfModules.free, SheafOfModules.LocalGeneratorsData, Algebra.Etale.formallyEtale, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-23",
+   "verdict": "no match: PicardGroup concerns modules over a ring, not module sheaves on a locally ringed etale topos; the free-locus and etale-morphism hits do not give the asserted sheaf criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor invertible sheaf of modules over the structure sheaf of an algebraic space is an etale line bundle",
+   "results": "8 hits; inspected: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.Etale.formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: PicardGroup concerns modules over a ring, not module sheaves on a locally ringed etale topos; the free-locus and etale-morphism hits do not give the asserted sheaf criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "invertible|IsTensorInvertible|rank.one",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring modules, free sheaves, Cartesian sheaf products and etale morphisms do not imply local rank one for arbitrary structure-module sheaves on an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the tensor product of two sheaves of modules on a locally ringed topos is the structure sheaf then each is locally free of rank one",
+   "results": "8 hits: CategoryTheory.Sheaf.tensorProd_isSheaf, Module.Invertible.instTensorProduct_1, Module.rankAtStalk_tensorProduct, SheafOfModules.free, IsLocalRing.subsingleton_tensorProduct, AlgebraicGeometry.LocallyRingedSpace.𝒪, rank_tensorProduct', SheafOfModules.ιFree",
+   "date": "2026-10-23",
+   "verdict": "no match: ring modules, free sheaves, Cartesian sheaf products and etale morphisms do not imply local rank one for arbitrary structure-module sheaves on an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Invertible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring modules, free sheaves, Cartesian sheaf products and etale morphisms do not imply local rank one for arbitrary structure-module sheaves on an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the small etale site of an algebraic space a module admitting a tensor inverse is locally free of rank one",
+   "results": "8 hits: Module.mem_freeLocus_iff_tensor, ModuleCat.Tilde.isUnit_toStalk, SheafOfModules.free, SheafOfModules.LocalGeneratorsData, Algebra.Etale.formallyEtale, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-23",
+   "verdict": "no match: ring modules, free sheaves, Cartesian sheaf products and etale morphisms do not imply local rank one for arbitrary structure-module sheaves on an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor invertible sheaf of modules over the structure sheaf of an algebraic space is an etale line bundle",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.Etale.formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: ring modules, free sheaves, Cartesian sheaf products and etale morphisms do not imply local rank one for arbitrary structure-module sheaves on an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-invertible-limit-descent",
+  "date": "2026-10-23",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D2X (2): descend the chosen line module to a stage of the proper-space approximation. Supporting input: 0D2X proof (2), final inference from a tensor inverse on the later stage to a line module.",
+   "via": [
+    "lem-sfb-space-invertible-limit-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-tensor-inverse-line",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-module tensor-inverse criterion by local finite sums, a local-unit refinement on scheme objects, and an explicit idempotent automorphism giving inverse trivializations of both factors. Reused existing general-site sheafification and symmetric-monoidal nodes; created no new nodes and added no finite-presentation assumption.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) proper-space approximation route: Tag 0D2X final tensor-inverse-to-line inference in lem-sfb-space-invertible-limit-descent. Checked current latest direct-images proof; this remains a subordinate generic algebraic-space tool, with no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Defines the small etale scheme objects, structure sheaf, and line modules used by this algebraic-space criterion."
+   },
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Provides sectionwise restriction to slices and their coverings."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Identifies the restriction of the sheaf tensor product to a slice of the small etale site with the slice tensor product, compatibly with images of pure tensors (Stacks 03EL for the localization morphism); added on review in place of the step-1 sketch marked elementary."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Supplies the sheafified balanced tensor on arbitrary ringed sites."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Identifies module sheafification with abelian sheafification and extends its module action."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Passes from abelian sheafification to set sheafification for local representatives."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Gives local representatives of the inverse image of 1 in the tensor sheaf."
+   },
+   {
+    "node": "def-weil-locally-ringed-space-morphism",
+    "why": "Defines local stalk rings on the scheme objects; used only for the explicit local-unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Ensures the Zariski neighbourhood refinements are etale coverings."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Gives general-ringed-site symmetry, associativity and unit isomorphisms for the explicit automorphisms."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Defines the module-sheaf maps whose sectionwise formulas construct the trivializations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-0ea31c0bd",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-0ea31c0bd (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement. The statement is unchanged from base and the item is still unsplit live, with no re-split note and 0 new nodes. Source check against Stacks sites-modules.tex: Tag 0B8N at l.5706 (the proof's local sum and automorphism) and Tag 0B8Q at l.7635 (the locally ringed converse). The statement is true and not weakened: arbitrary M and N, and 'line module' as defined in def-trf-algebraic-space. Edge cases checked: empty X or object, M=0, non-reduced or disconnected U, a field. Step 2: the abelian, set and 00WK local-section chain fits the cited statements, and the universe hypothesis holds. Step 3: the local-ring unit argument and étale Zariski refinement are correct. Step 4: I verified by hand that the composite equals fg (m↦xψ(m⊗y)); gf=id, then (fg)²=fg with fg invertible forces fg=id. Step 5: the same with ψ∘c. One fault, C1/C2/C5: step 1 was marked elementary but sketches Stacks 03EL (restriction to a slice commutes with sheaf ⊗), which the existing reviewed node lem-sfb-localized-site-tensor-restriction states, including the pure-tensor compatibility that step 4 needs. FIX: step 1 now cites it, elementary=false, source 03EL; it is added to proof_deps and gets a tool_uses entry. I also reworded step 2's covering-member sentence. No duplicate among the 0B8N/0B8Q users, no SGA, no cycle; I accept the worker's tool_uses as generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceTensorInverseLine",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isLineModule_of_tensor_inverse",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceTensorInverseLine.lean",
+  "statement": "theorem isLineModule_of_tensor_inverse {S : Scheme.{u}} (X : AlgebraicSpace S) (M N : X.Modules) (h : Nonempty ((SheafOfModules.siteSheafTensorRight (A := X.commStructureSheaf) N).obj M ≅ SheafOfModules.unit X.structureSheaf)) : X.IsLineModule M ∧ X.IsLineModule N",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bbb553fd",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Read item, 7 stmt_dep records, Stacks 0B8N (l.5706) and 0B8Q (l.7635), the module and the live declarations. Statement: S : Scheme.{u}, X : AlgebraicSpace S, arbitrary M N : X.Modules, Nonempty ((siteSheafTensorRight (A := X.commStructureSheaf) N).obj M ≅ unit X.structureSheaf) → IsLineModule M ∧ IsLineModule N. The tensor is the canonical def-pur-sheaf-tensor-product functor (sections tensored then sheafified, re-exported by CochainTensorUniverses). commStructureSheaf has the same sections as structureSheaf. IsLineModule is local isomorphism to O_X on a covering sieve of the small étale site. No f.p./qc/nonempty hypotheses and no universe equality. Edge cases (empty chart, zero modules) fine. Node diff vs live: only lean and stmt_deps; the two added stmt_deps are landed def nodes actually used (commStructureSheaf, sheafification instances). lean.statement matches the file verbatim. No new defs, proof is sorry only, docstrings carry source, blueprint and all 5 proof steps. Imports exist; no duplicate statement found. Report has both required sections. No findings."
+ }
+}

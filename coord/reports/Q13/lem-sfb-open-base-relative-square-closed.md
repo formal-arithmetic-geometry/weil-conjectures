@@ -1,0 +1,41 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-open-base-relative-square-closed.json`, `citations.json`, and this report. The item is split with its statement and statement dependencies unchanged. There are **0 new nodes and 0 new Mathlib leaves**. The existing Mathlib leaf `lem-weil-pbc-open-preimage-fibre-product` is reused.
+
+Attachments: none. Searching `lean/WeilConjectures/` for the exact blueprint tag and for relative squares, diagonal base change, closed restriction, and open fibre-product comparison found no declaration giving the whole statement. Uses of `pullbackRestrictIsoRestrict` in the library are individual comparisons, not the full item.
+
+WANTED: none.
+
+The live item had no proof. Its source, Stacks 05X9 (`spaces-more-morphisms-lemma-where-unramified-universally-injective`), suppresses the open-restriction argument in its first sentence and later identifies the base-changed diagonal. I supplied both arguments explicitly, using the universal property from Stacks 001V (`categories-definition-fibre-products`) and the existing 01JR leaf. These supplementary calculations are marked agent-written; they are not attributed to a nonexistent detailed proof in Stacks.
+
+No statement error or missing hypothesis was found. There is a provenance discrepancy: `blueprint_refs.py ancestor` reports `None`, as already recorded in the item. The inherited `from.place` quotes an old alteration paragraph of `det-thm-sf-ctf-stability-direct-images` (3). I read the current file under `literature/blueprint/latest/` (7284bb09): its (3) now assembles direct image by compactification and does not contain that paragraph. The immediate parent still calls for this precise Tag 05X9 open-restriction prerequisite. I preserved the inherited provenance and explained the discrepancy in `split_report.blueprint`; no chapter/unit route or source statement was changed.
+
+Nothing mathematical remains unfinished in this split. Server checks and delivery are run through the mandated launcher tools only.
+
+## Searches and reuse
+
+DAG searches used the item's tag and key notions, `pullbackRestrictIsoRestrict`, `isPullback_morphismRestrict`, inverse-image opens, relative self-products and diagonals. Whole-blueprint searches were `fibre product`, `diagonal`, `open preimage`, and `closed map`. They found the existing open-preimage Mathlib leaf, which gives precisely the restriction square used in step 4. `lemma-nagata-diagonal-base-change` is a narrower diagonal base-change statement; I did not create a duplicate or cite it for the stronger relative-over-B comparison. Instead steps 1--3 construct that comparison directly. No new-node duplicate checks are needed.
+
+The inherited item searches were retained. Five additional searches were run with the authorized `msearch.py` and recorded exactly from `searches.jsonl`: LeanFinder twice with different phrasings, Loogle, grep, and LeanSearch. All services answered. Loogle found `IsClosedMap.restrictPreimage`, covering the topological clause alone; the direct three-line closed-set argument in step 5 already proves it. The scheme hits concern individual restrictions, open-cover diagonal maps, or stronger universally closed hypotheses. I read `Mathlib/AlgebraicGeometry/Restrict.lean` lines 553--584: `pullbackRestrictIsoRestrict` and its projection equations match the existing leaf. No hit states the complete comparison and coherence assertion as a one-line specialization. Every fresh recorded query is in the unmodified search log; no searches were invented.
+
+## Not duplicates
+
+No new nodes. The existing open-preimage node is cited rather than recreated. No clause of the item has been moved into a new node.
+
+## Review by Q13
+
+I read the item, the chapter and unit records, the current blueprint direct-images proof, and Stacks 05X9 in `spaces-more-morphisms.tex` lines 11566 onward. The source's assumptions (2) and (3) concern ordinary closed maps p and p2; the delivered proof uses exactly those two assumptions. It does not infer closedness after arbitrary base change. I also read Stacks 01JR, `schemes-lemma-open-fibre-product`, lines 3198 onward, and Stacks 001V, `categories-definition-fibre-products`, lines 716 onward. There are no new statements requiring separate source checks.
+
+For step 1, I opened `def-pc-fibre-product`: its statement supplies the existence and projection equations of the morphism into a fibre product. Equality of the two images in C_T supplies both equality in C and the same T-projection, so the map to D times_B T is well defined. Step 2 uses the same statement's uniqueness clause, including its explicit assertion of existence of scheme fibre products. I checked p b2 = h t using p = q f and f b1 = f b2; this is necessary to construct the second A_T morphism. The inverse composites are identities by their projections. Both steps are elementary applications of the cited definition, not an invocation of an unstated associativity theorem.
+
+For step 3, the same fibre-product node defines the unique diagonal by its two identity projections. I compared the D-projection delta a and the T-projection t of both morphisms, so this checks equality of the actual diagonal morphisms. The notation always denotes morphisms, never a false set-theoretic description of points of scheme fibre products.
+
+For step 4, I opened `lem-weil-pbc-open-preimage-fibre-product` and copied its full statement into `citations.json`. It says that the inverse-image open, together with its inclusion AND the restricted map, is the fibre product. Thus it supplies all the projection data I take from it, not just an isomorphism of source schemes. Its hypotheses allow arbitrary scheme morphisms and any open subscheme, so applying it independently to p, q and p2 is valid. The relative-square identification then uses the already proved comparison. Its final compatibility with f follows from the universal property in the other cited node. This step is non-elementary because it uses the existing geometric leaf.
+
+For step 5, a relatively closed subset Z of r^{-1}(W) has form F intersect r^{-1}(W), with F closed in the original source. I checked both inclusions in r(Z) = r(F) intersect W: a point of r(F) lying in W has a preimage in F that automatically lies in r^{-1}(W). Closedness of r(F) is exactly the assumed ordinary closedness. This is an elementary subspace argument and creates no separate node.
+
+For step 6, I wrote both inverse maps for iterated base change, rather than hiding the comparison in the word 'transport'. The pair ((x, k t), t) satisfies both required equations since h = j k. The diagrams for f commute by the two specified projections; the diagonal diagrams commute because both A-projections are the identity after the source comparison. `def-pc-fibre-product` states exactly the unique-morphism property used here. Nothing about smallness, flatness, finite type, separatedness or noetherianity is required in any of these steps.
+
+Small cases: W empty makes the three restricted sources empty and both maps closed; W=B gives identity restrictions. Empty A makes both relative products empty and the diagonal calculation still valid. Taking f to be the identity gives D=A and both inverse comparison maps reduce to the ordinary base-change identity. Arbitrary nonreduced test schemes T cause no change, because all comparisons use scheme morphisms and universal properties, not just their underlying points. No new hypotheses or weakened conclusions were introduced. All six steps are below 2000 characters, and no non-elementary auxiliary comparison is hidden in a long step.
+
+Against delivery-errors B--E: there are no new nodes, unsourced definitions, added hypotheses, or duplicate clause nodes; TeX is encoded once. Every cited statement was opened and its used clause verified above; every occurrence in `uses` has a verbatim quote in `citations.json`. The only theorem beyond elementary universal properties is the explicitly cited existing 01JR leaf. I corrected the tempting but unjustified shortcut 'closed maps are stable under base change' by the explicit restriction-image calculation, and made the diagonal and iterated-base-change maps explicit. No SGA source, compiler, local preflight script, repository write, launcher edit or direct git command was used.

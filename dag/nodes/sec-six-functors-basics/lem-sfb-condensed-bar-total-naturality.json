@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-condensed-bar-total-naturality",
+ "kind": "statement",
+ "title": "Signed total homotopies and naturality of the internal condensed bar",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent site of profinite sets [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $G$ be a profinite group (compact Hausdorff and an inverse limit of finite discrete groups), with $\\underline G(S)=C(S,G)$. Write $\\mathcal M_A$ for internal $A$-modules [sk-def-sfb-module-objects] and $\\mathcal E_A$ for modules with $A$-linear $\\underline G$-action and equivariant maps [def-sfb-condensed-action-module]. Let $U:\\mathcal E_A\\to\\mathcal M_A$ forget the action and $\\Gamma_G$ take the invariant submodule, fixed after every profinite base change. For a profinite parameter $S$, $A[S]$ is the free internal module on its representable condensed set; $\\underline{\\operatorname{Hom}}_A$ is internal module Hom, right adjoint to tensor. Use the internal bar diagrams of [def-sfb-condensed-equivariant-bar-data]. For any nonnegative complex $I^\\bullet$ in $\\mathcal E_A$, write $D(I)^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI^q)$ with the action-dependent inhomogeneous differential and vertical differential induced by $I$. Use $\\operatorname{Tot}D(I)$ with differential $d_h+(-1)^p d_I$ [def-sp-double-complex-total]. An equivariant chain map $f:I^\\bullet\\to J^\\bullet$ induces a map $\\operatorname{Tot}D(f)$ commuting with the invariant augmentations $b_I,b_J$. If $f-g=d_Jh+hd_I$ for an equivariant chain homotopy $h^q:I^q\\to J^{q-1}$, then\n$$H|_{D(I)^{p,q}}=(-1)^p\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],Uh^q)$$\nis a total homotopy: $\\operatorname{Tot}D(f)-\\operatorname{Tot}D(g)=dH+Hd$. It is compatible with the homotopy obtained by applying $\\Gamma_G$ on the augmentation source.\nFor nonnegative equivariant injective resolutions of modules $N,M$ [def-sp-injective-resolutions], every map $N\\to M$ admits such a chain lift, and any two lifts induce the same map after localization [def-weil-abstract-derived-category]. Between two resolutions of $N$, lifts of the identity induce mutually inverse derived isomorphisms of bar totals. They satisfy identity and composition compatibility. Suppose $U$ is exact and preserves injectives. Under the canonical derived-unit comparisons on these resolutions [def-sfb-right-derived-functor], the column maps are precisely the derived internal-Hom maps, the invariant-source maps are precisely $R\\Gamma_G$ of the module map, and the localized augmentation square commutes. Consequently the augmentation comparison on specified resolutions is independent of resolutions and natural in the equivariant module.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-injective-resolutions",
+  "def-sfb-right-derived-functor",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the cochains functor and its induced flipped bicomplex functor. Mathlib HomologicalComplex₂.ιTotal_map gives the summand formula for a total chain map; TotalAugmentation.map.naturality gives the augmentation square. No reconstruction of internal functions or actions is necessary.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+   }
+  },
+  {
+   "text": "Package the additive functors N ↦ C^p(N) and the bar differentials as a nonnegative complex in the category of additive functors. Apply Mathlib HomologicalComplex.mapBifunctorMapHomotopy₂ to evaluation and the coefficient homotopy, with identity on this fixed complex. Its explicit summand formula has coefficient ε₂(p,q−1)=(-1)^p. The bicomplex and induced total map agree with doubleComplex and totalCochains by their definitions. If the target diagonal is absent, ιTotalOrZero is zero; the homotopy zero condition handles the q=0 boundary. This yields the stated formula with q−1 replaced by m−p. At bar degree zero, TotalAugmentation.components and Augmentation.map.naturality identify its restriction with the invariant homotopy.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+   }
+  },
+  {
+   "text": "Mathlib InjectiveResolution.desc and desc_commutes supply every lift, and InjectiveResolution.descHomotopy compares any two lifts of the same module map. Apply the proved total homotopy construction, extend it by zero, and use DerivedCategory.Q_map_eq_of_homotopy. This proves equality of the actual localized maps without any augmentation quasi-isomorphism hypothesis.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-weil-abstract-derived-category",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+   }
+  },
+  {
+   "text": "Compare each composite of opposite identity lifts with the identity using localized lift uniqueness. Functor.map_comp and Functor.map_id give the two inverse equations, which construct the required isomorphism. The same uniqueness compares an identity lift with the identity map and a chosen composite lift with the composite of two lifts, giving identity and composition coherence.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+   }
+  },
+  {
+   "text": "The assumed exact forgetful functor sends the augmentation I.ι' to a quasi-isomorphism; preservation of injectives makes its image complex termwise injective. It remains bounded below, hence is K-injective by Mathlib CochainComplex.isKInjective_of_injective. The Grothendieck hypotheses supply K-injective resolutions in the ambient categories. Define c by RF(QUι') followed by rightDerivedFunctorObjQIso on UI. The identity rightDerivedFunctorUnitQ_eq proves both unit invertibility and the normalization equation. Map the augmentation-preserving lift square with U and Q, then use the existing unbounded rightDerivedFunctor_map_Q_map_comp_objQIso_hom naturality theorem to obtain the column square.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-pur-kinjective-degreewise-existence",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+   }
+  },
+  {
+   "text": "For invariants, expand the existing normalized resolutionComparison. The lift defines InjectiveResolution.Hom, whose ι'_comp_hom' gives the integer-indexed augmentation square. Apply Q and RF, use rightDerivedFunctor_map_Q_map_comp_objQIso_hom, and then the naturality of mapExtendIso. This is the first asserted identity. The second follows by composing with the localized total augmentation and applying the strict naturality of TotalAugmentation.map. No invertibility of the total augmentation is used.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-injective-resolutions",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-pur-kinjective-degreewise-existence",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent expansion, old proof step 7: signed total homotopies, lift independence and normalized functoriality. External internal-condensed reference WANTED.",
+  "note": "E1: specialize Mathlib bifunctor homotopies to evaluation on the complex of additive bar functors; use Mathlib nonnegative injective-resolution comparisons and the existing unbounded derived-unit naturality API. All seven theorem proofs are complete, with no split-off statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain homotopy between equivariant injective resolution lifts gives the signed total homotopy on internal group bar cochains and resolution independent natural maps",
+   "results": "{\"t\": \"2026-10-22T06:05:20Z\", \"tool\": \"leanfinder\", \"query\": \"A chain homotopy between equivariant injective resolution lifts gives the signed total homotopy on internal group bar cochains and resolution independent natural maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroOne\", \"CategoryTheory.InjectiveResolution.descHomotopy\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroOne\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroSucc\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroZero\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc\", \"CategoryTheory.InjectiveResolution.descHomotopyZero\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroZero\"], \"digest\": \"d422b87d020b4eca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-22T06:05:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"bar\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|inhomogeneous).*(homotop|natural)|(homotop|natural).*(bar|inhomogeneous)",
+   "results": "{\"t\": \"2026-10-22T06:05:21Z\", \"tool\": \"grep\", \"query\": \"(bar|inhomogeneous).*(homotop|natural)|(homotop|natural).*(bar|inhomogeneous)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\"], \"digest\": \"ddbae6a8f205dec6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Totalization of internal group bar cochains sends equivariant resolution homotopies to signed chain homotopies",
+   "results": "{\"t\": \"2026-10-22T06:05:21Z\", \"tool\": \"leansearch\", \"query\": \"Totalization of internal group bar cochains sends equivariant resolution homotopies to signed chain homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.ofHomotopy\", \"Rep.barComplex\", \"CategoryTheory.ProjectiveResolution.homotopyEquiv\", \"CategoryTheory.InjectiveResolution.homotopyEquiv\", \"CategoryTheory.InjectiveResolution.descHomotopy\", \"Rep.barResolution_complex\", \"Rep.barComplex.d\", \"CochainComplex.homotopyOpEquiv\"], \"digest\": \"e304cc464d9c6255\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality and resolution independence of the internal Hom bar total via sign minus one to the column degree",
+   "results": "{\"t\": \"2026-10-22T06:05:37Z\", \"tool\": \"leanfinder\", \"query\": \"Functoriality and resolution independence of the internal Hom bar total via sign minus one to the column degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_succ_succ\", \"CategoryTheory.Abelian.LeftResolution.map_chainComplex_d\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_1\", \"CategoryTheory.Abelian.LeftResolution.map_chainComplex_d_1_0\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap_comp\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\"], \"digest\": \"63247b14d6cb1bce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep/ModuleCat resolution and scalar adjunction results and light condensed internal-Hom results do not state this internal profinite-action bar assertion over an arbitrary condensed ring; generic ingredients are reused separately."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|condensed|Condensed).*(homotop|naturality)|(homotop|naturality).*(bar|condensed|Condensed)",
+   "results": "{\"t\": \"2026-10-22T06:57:00Z\", \"tool\": \"grep\", \"query\": \"(bar|condensed|Condensed).*(homotop|naturality)|(homotop|naturality).*(bar|condensed|Condensed)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Module.lean\", \"Mathlib/Condensed/Basic.lean\"], \"digest\": \"c6967f83787d3ce6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep bar results concern ordinary representations, and generic signed bifunctor homotopies and resolution comparisons do not state the internal condensed augmentation theorem. Existing generic resolution nodes are cited in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed homotopy for total complex of group bar cochains induced by a homotopy of coefficient complexes",
+   "results": "{\"t\": \"2026-10-22T06:57:00Z\", \"tool\": \"leansearch\", \"query\": \"Signed homotopy for total complex of group bar cochains induced by a homotopy of coefficient complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.shift\", \"HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁\", \"CochainComplex.mappingCone.mapOfHomotopy\", \"HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₂_assoc\", \"HomologicalComplex.mapBifunctorMapHomotopy₂\", \"CochainComplex.HomComplex.δ_ofHomotopy\", \"Homotopy.toShortComplex\", \"HomologicalComplex.mapBifunctorMapHomotopy₁\"], \"digest\": \"915b55d461581eed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep bar results concern ordinary representations, and generic signed bifunctor homotopies and resolution comparisons do not state the internal condensed augmentation theorem. Existing generic resolution nodes are cited in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.desc, CategoryTheory.InjectiveResolution.descHomotopy",
+   "results": "{\"t\": \"2026-10-22T06:57:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution.desc, CategoryTheory.InjectiveResolution.descHomotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep bar results concern ordinary representations, and generic signed bifunctor homotopies and resolution comparisons do not state the internal condensed augmentation theorem. Existing generic resolution nodes are cited in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of internal group bar cochains and signed totalization chain homotopies for condensed modules",
+   "results": "{\"t\": \"2026-10-22T06:57:11Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of internal group bar cochains and signed totalization chain homotopies for condensed modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.εToSingle₀_comp_eq\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.inhomogeneousCochainsIso\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁\", \"groupCohomology.infNatTrans\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.barComplex.isoStandardComplex\"], \"digest\": \"eb9f4f17ecee3e00\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep bar results concern ordinary representations, and generic signed bifunctor homotopies and resolution comparisons do not state the internal condensed augmentation theorem. Existing generic resolution nodes are cited in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive cochain functor with a natural invariant augmentation sends homotopic maps of injective resolutions to the same derived total map",
+   "results": "{\"t\": \"2026-10-22T07:04:06Z\", \"tool\": \"leanfinder\", \"query\": \"An additive cochain functor with a natural invariant augmentation sends homotopic maps of injective resolutions to the same derived total map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.descHomotopy\", \"CategoryTheory.InjectiveResolution.descCompHomotopy\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroSucc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc_assoc\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroZero\", \"CategoryTheory.InjectiveResolution.descHomotopyZeroOne\"], \"digest\": \"716e3e1741d0e615\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep bar results concern ordinary representations, and generic signed bifunctor homotopies and resolution comparisons do not state the internal condensed augmentation theorem. Existing generic resolution nodes are cited in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-derived-invariant-bar",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent-formulated internal bar input, old proof step 7: signed total homotopies, lift independence and normalized functoriality.",
+   "via": [
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-bar-total-naturality",
+  "worker": "stage1",
+  "summary": "Expanded the unchanged internal-condensed naturality statement into eleven proof steps: sectionwise face calculation, finite total chain maps, signed homotopy and invariant restriction, existing injective-resolution lifts and uniqueness, coherent localized comparison isomorphisms, and the normalized derived-unit square. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Paragraph (3), open direct image, of the current direct-images proof: formal internal-bar input, old parent step 7 (signed total homotopies, lift independence and normalized functoriality). The ancestor utility returns None for this pre-existing agent-created chain; retained null from.node and the inherited via list. Whole-blueprint searches for condensed bar, bar cochains, signed total, homotopy and injective resolution found no node stating this full item.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Identifies the actual internal modules with sectionwise module sheaves so the general closed tensor-Hom theorem applies; this is a coefficient-category tool, not a replacement for the open-direct-image route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Supplies the internal tensor-Hom adjunction for fixed A[G^p]; the unit route has no separate generic sheaf-Hom adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General homotopy uniqueness into bounded-below injectives supplies the equivariant resolution comparison, without replacing a geometric step."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Its bounded-below-injectives clause verifies the hypotheses of the ordinary total derived-unit comparison on I and UI."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Supplies the already-existing normalization for specified-resolution maps at derived-object level; the explicit inverse-unit identity is written in step 10."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Fixes the ordinary total right derived functor, natural unit and computation on K-injectives used to interpret the final column and source maps."
+   },
+   {
+    "node": "def-sp-double-complex-total",
+    "why": "Fixes the finite-diagonal total and the p-dependent sign used in the explicit homotopy computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-right-derived-functor",
+  "def-sp-double-complex-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-4ca1662bf",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-4ca1662bf (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from side-live), all 15 cited nodes, the main-20261015 direct-images proof ¶(3) and Stacks 013P/013S/070J. There are no new nodes. The item is not superseded on live or side-live, it is not on the route-pivot drop list, and no SGA is cited. No duplicate exists: internal-bar-resolution, product-bar-comparison and action-injective-infrastructure state different things. Steps 2-5: I recomputed the sign calculation. Only the first face needs equivariance, dH+Hd = C(f-g) because d_h k = k d_h, the q=0 and p=0 boundaries are correct, and H b_I = b_J Γ(h). Step 6: the lift node matches 013P(2), and uniqueness uses 013S with K=N[0], α=a and target J bounded below and injective, giving an equivariant homotopy. Steps 7-8: the localization and inverse/cocycle laws hold. Steps 10-11: I recomputed QF(l)c_L = c_{L'}RF(Qv) from unit naturality and the augmentation square for β. One fault, repaired: step 9 used the invertibility of the def-sfb-right-derived-functor unit on K-injectives without discharging that definition's standing hypothesis (every complex has a K-injective resolution) for A_G(A) and M_A. FIX: step 9 now cites lem-pur-kinjective-degreewise-existence (Stacks 079P; unit sk-def-sf-operations, on route) and says why the hypothesis holds; proof_deps is updated. The declared generic tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedBarTotalNaturality",
+  "declaration": "CategoryTheory.CondensedBar.augmentation_resolution_naturality",
+  "declarations": [
+   "CategoryTheory.CondensedBar.total_chainMap_naturality",
+   "CategoryTheory.CondensedBar.total_signedHomotopy",
+   "CategoryTheory.CondensedBar.totalLocalization",
+   "CategoryTheory.CondensedBar.total_resolution_lifts",
+   "CategoryTheory.CondensedBar.total_resolution_change",
+   "CategoryTheory.CondensedBar.total_resolution_functorial",
+   "CategoryTheory.CondensedBar.augmentationComparison",
+   "CategoryTheory.CondensedBar.total_column_derived_naturality",
+   "CategoryTheory.CondensedBar.augmentation_resolution_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedBarTotalNaturality.lean",
+  "statement": "theorem augmentation_resolution_naturality {N M : Equivariant A G} (u : N ⟶ M) (I : InjectiveResolution N) (J : InjectiveResolution M) (f : I.cocomplex ⟶ J.cocomplex) (hf : I.ι ≫ f = (CochainComplex.single₀ _).map u ≫ J.ι) : (V.functor.rightDerivedFunctor.{u + 2, u + 2}.map ((DerivedCategory.singleFunctor.{u + 2} _ 0).map u) ≫ (resolutionComparison V J).hom = (resolutionComparison V I).hom ≫ DerivedCategory.Q.{u + 2}.map (HomologicalComplex.extendMap ((V.functor.mapHomologicalComplex (.up ℕ)).map f) ComplexShape.embeddingUpNat)) ∧ (V.functor.rightDerivedFunctor.{u + 2, u + 2}.map ((DerivedCategory.singleFunctor.{u + 2} _ 0).map u) ≫ augmentationComparison B V a t J = augmentationComparison B V a t I ≫ (totalLocalization B).map f)",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68b83ef20",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read the item, its 11 proof steps, all stmt_deps and the side-live bar-data, product-action and ShortExactPullback source. The node is unchanged apart from the lean field; the statement is verbatim and all 9 declarations are recorded (7 sorry theorems, 2 real defs); docstrings carry the source place, blueprint tag and proof steps; worker report and Q33 second-reading section present. Signed homotopy recomputed with Mathlib ε₂(p,q)=(-1)^p and Homotopy.comm: horizontal terms cancel, vertical give C(f-g); ιTotalOrZero formula checked at all (n,m) including q=0, n=0 and m<p, so H is fully pinned; augmentation conjunct follows from a.map naturality. Lift existence and localized uniqueness (013P/013S), inverse isos between two resolutions, and identity/composite coherence match the node. Column comparison c pinned by c≫η=RF(QUι') with η invertible; invariant source is RΓ(u[0]) via resolutionComparison; augmentation square for all lifts. ActionAbelian, IsGrothendieckAbelian and HasDerivedCategory are the landed dep's parameters (discharged via Assertion and product_action_inflation); U exact and preserves injectives as in the node; no universe restriction. Advisories: total_chainMap_naturality holds by construction under the bar-data interface (TotalAugmentation.map is a NatTrans); upstream Functor.rightDerivedFunctor used instead of the def-sfb-right-derived-functor binding, consistent with resolutionComparison. No FIX, so no compile; worker reports clean 3.5 s / 4.7 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T081555-L-2009343",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

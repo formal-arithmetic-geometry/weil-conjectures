@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-scalar-geometric-pull-composition",
+ "kind": "statement",
+ "title": "Scalar extension respects the geometric pullback compositor",
+ "statement": "For coefficient systems R and S and a compatible change a as in [def-pur-integral-compact-support-coefficient-data], let h:X→Z and k:Z→Y be morphisms. Suppose the coefficient identifications for h followed by k are the canonical composite identifications for both R and S. On any derived R_Y-module L, scalar extension of the inverse R-pullback compositor followed by scalarPull along h≫k equals scalarPull along h, followed by S-pullback of scalarPull along k, followed by the inverse S-pullback compositor. The equality concerns only scalar extension and geometric pullback, without tensors or compact supports.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 07A6: composition of inverse image and the mates correspondence"
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the ordinary inverse-image/restriction squares to their geometric mates. The normalized restriction/direct-image comparisons are identity on sections, while the normalized direct-image compositors pull sections along the same fibre-product pasting isomorphism. Thus the direct-image square commutes, and injectivity of the mate equivalence gives the ordinary inverse-image square. Exact localization preserves that square. Identify scalarPull with its scalar-adjunction mate using proEtaleRingSheafChangeAdjunction and the iterated-mate identity. Taking scalar mates of the localized square gives the desired equation, after cancelling the invertible S-compositor.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pod-derived-exact-square-composition"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "S6",
+  "date": "2026-10-27",
+  "note": "The scalar-only step underlying the tensor/open transport; the canonical right-adjoint maps are normalized on sections."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison between scalar extension and geometric pullback commutes with composition of geometric pullbacks",
+   "results": "Eight hits, including Scheme.Modules.pullbackComp; none for the arbitrary ring-sheaf systems and specified derived maps.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "conjugateIsoEquiv and its component identities in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-27",
+   "verdict": "Use the abstract mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*comp|conjugateIsoEquiv.*comp",
+   "results": "Found Mathlib adjunction composition and conjugation API. Repository searches found exact derived square composition and private general mate pasting helpers, but no equality for PurCompactSupport.scalarPull.",
+   "date": "2026-10-27",
+   "verdict": "Use normalization and categorical pasting."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenProjectionFactorCompositorTransport",
+  "date": "2026-10-27",
+  "group": "S6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-projection-factor-compositor-transport",
+   "place": "Scalar/pullback compositor compatibility in its proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarGeometricPullComposition",
+  "file": "lean/Sheaf/Paper/ScalarGeometricPullComposition.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.scalarPull_geometric_composition",
+  "statement": "theorem scalarPull_geometric_composition\n    {R S : Coefficients.{u}} (a : Change R S)\n    {X Z Y : Scheme.{u}} (h : X ⟶ Z) (k : Z ⟶ Y)\n    (hR : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k\n      (R.ring Y) (R.ring Z) (R.ring X) (R.pull k) (R.pull h))\n    (hS : S.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k\n      (S.ring Y) (S.ring Z) (S.ring X) (S.pull k) (S.pull h))\n    (L : DerivedCategory (pbcModules Y (R.ring Y))) :\n    (pbcDerivedExtend (a.map X)).map\n        ((geometricPullComposition R h k hR).inv.app L) ≫\n      (scalarPull a (h ≫ k)).hom.app L =\n    (scalarPull a h).hom.app ((pull R k).obj L) ≫\n      (pull S h).map ((scalarPull a k).hom.app L) ≫\n      (geometricPullComposition S h k hS).inv.app\n        ((pbcDerivedExtend (a.map Y)).obj L)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261027T112431-L-1583170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261027T112431-L-1583170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

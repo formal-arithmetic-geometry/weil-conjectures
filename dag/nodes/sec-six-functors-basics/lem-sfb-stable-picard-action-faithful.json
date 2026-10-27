@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-stable-picard-action-faithful",
+ "kind": "statement",
+ "title": "Stable curves have faithful action on their full multidegree-zero Picard group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $g\\geq2$, and let $C/k$ be a stable unpointed genus-$g$ curve [def-sfb-stable-pointed-moduli-groupoids], allowing singular and reducible curves. Let $\\operatorname{Pic}^0(C)$ be the group, under tensor product, of isomorphism classes of invertible $\\mathcal O_C$-modules [def-sc-invertible-module] whose degree on every irreducible component is zero; degree is computed after pullback to that component's normalization. If $a:C\\xrightarrow{\\sim}C$ is a $k$-automorphism and $a^*[L]=[L]$ for every $[L]\\in\\operatorname{Pic}^0(C)$, then $a=\\operatorname{id}_C$. There is no restriction on the characteristic or on the order of $a$.",
+ "source": {
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "Theorem 1.13, printed pp.85–87, with Lemmas 1.14–1.17; the theorem concerns the ordinary group of degree-zero-on-each-component invertible sheaves and includes reducible stable curves. Local PDF WANTED; primary PDF read online.",
+  "url": "https://www.numdam.org/item/PMIHES_1969__36__75_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sc-invertible-module",
+  "def-sc-picard-group",
+  "def-sc-pic0",
+  "def-sfb-stable-pointed-curve",
+  "lem-pc-pic-presheaf-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nodal-component-picard-gluing] to $C$: the stable-curve definition gives a connected projective reduced nodal curve. Write $\\Gamma$ for its component-intersection multigraph and $\\sigma$ for the action of $a$ on it. Restriction $r$ is surjective and equivariant. Since $a^*$ is identity on its source, it is identity on $\\prod_v\\operatorname{Pic}^0(C_v)$. If $\\operatorname{Pic}^0(C_v)$ contains a nonidentity element, put that element in the $v$-factor and identities in all other factors; its support is the singleton $\\{v\\}$, so identity on the product forces $\\sigma(v)=v$.",
+   "uses": [
+    "lem-sfb-nodal-component-picard-gluing",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.17, component restriction and fixed vertices"
+   }
+  },
+  {
+   "text": "Every vertex of degree at most two is fixed. Indeed, by the previous step a moved vertex would have trivial $\\operatorname{Pic}^0(C_v)$; [lem-sfb-nodal-component-picard-gluing] then says $C_v\\simeq\\mathbf P^1_k$. Such a component has no self-nodes. Its special points in the unpointed stable-curve definition are precisely the distinct intersection nodes with other components. Stability requires at least three of them, contradicting degree at most two.",
+   "uses": [
+    "lem-sfb-nodal-component-picard-gluing",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.17(ii)"
+   }
+  },
+  {
+   "text": "The injection $\\iota$ in [lem-sfb-nodal-component-picard-gluing] is equivariant, so precomposition by $\\sigma_*$ fixes every homomorphism $H_1(\\Gamma,\\mathbf Z)\\to k^*$. This implies $\\sigma_*=1$: if $h-\\sigma_*h\\ne0$ in the subgroup $H_1\\subset\\mathbf Z^E$, choose an edge coordinate with nonzero integer value $n$. Choose $z\\in k^*$ with $z^n\\ne1$ (a nonzero polynomial has finitely many roots and $k$ is infinite), and restrict the homomorphism $(m_e)_e\\mapsto z^{m_e}$ to $H_1$. It distinguishes $h$ and $\\sigma_*h$, a contradiction. Thus [lem-sfb-finite-graph-homology-rigidity], using the low-degree fixed vertices already proved, makes $\\sigma$ identity on vertices and edges.",
+   "uses": [
+    "lem-sfb-nodal-component-picard-gluing",
+    "lem-sfb-finite-graph-homology-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.17(iii) and graph argument on pp.86–87"
+   }
+  },
+  {
+   "text": "Consequently $a$ preserves each reduced component $Y=C_v$ and fixes each intersection node on it. Restriction surjectivity in [lem-sfb-nodal-component-picard-gluing] shows $b=a|_Y$ acts identically on $\\operatorname{Pic}^0(Y)$. Apply [lem-sfb-integral-nodal-picard-normalization-action]: on the smooth projective normalization $\\nu:\\widetilde Y\\to Y$, the lift $\\widetilde b$ acts identically on $\\operatorname{Pic}^0(\\widetilde Y)$ and fixes every branch above a self-node. A node joining $Y$ to another component is a smooth point of $Y$ with a single preimage in $\\widetilde Y$; equivariance of $\\nu$ and its unique lift therefore fix that preimage too. Hence every special point on $\\widetilde Y$ is fixed.",
+   "uses": [
+    "lem-sfb-nodal-component-picard-gluing",
+    "lem-sfb-integral-nodal-picard-normalization-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemmas 1.15 and 1.16, component normalization"
+   }
+  },
+  {
+   "text": "If $\\widetilde Y$ has genus at least two, let $J$ be its smooth separated Picard-zero variety supplied by [sk-thm-picard-main]. The induced group automorphism $a_{\\widetilde b}$ from [lem-sfb-curve-polarized-jacobian-faithfulness] is identity on all $J(k)=\\operatorname{Pic}^0(\\widetilde Y)$ by the preceding step. These points are dense by [lem-pc-rational-points-dense], since $k$ is algebraically closed and $J$ is smooth. The equalizer with $\\operatorname{id}_J$ is a closed subscheme because $J$ is separated. Its underlying closed set contains the dense rational points, hence is all of $J$; its ideal is contained in the nilradical and is zero because $J$ is reduced. Thus $a_{\\widetilde b}=\\operatorname{id}_J$, and the injectivity assertion of [lem-sfb-curve-polarized-jacobian-faithfulness] gives $\\widetilde b=\\operatorname{id}_{\\widetilde Y}$.",
+   "uses": [
+    "sk-thm-picard-main",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.15(a); smooth-case input via the existing Jacobian faithfulness node"
+   }
+  },
+  {
+   "text": "If $\\widetilde Y$ has genus one, stability gives at least one special point and it was fixed in step 4. The genus-one assertion of [lem-sfb-low-genus-pointed-automorphism-rigidity], together with identity on $\\operatorname{Pic}^0(\\widetilde Y)$, gives $\\widetilde b=\\operatorname{id}$. If its genus is zero, stability gives three distinct special points, all fixed; the genus-zero assertion of the same node again gives $\\widetilde b=\\operatorname{id}$. These alternatives and step 5 exhaust the nonnegative genus of every normalized component.",
+   "uses": [
+    "lem-sfb-low-genus-pointed-automorphism-rigidity",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.15(b),(c) and Lemma 1.16(b),(c)"
+   }
+  },
+  {
+   "text": "It follows that $a$ is identity on the disjoint union of all normalized components, and therefore on $C$. Explicitly, on the underlying points the normalization is surjective, so $a$ fixes every point. For an affine open $U\\subset C$, pullback of functions to the normalizations of its reduced components is injective: an element vanishing on each of their function fields belongs to every minimal prime of $\\mathcal O_C(U)$ and is zero because $C$ is reduced. The identity after normalization then forces $a^*f=f$ on every $U$. Thus the scheme automorphism is $\\operatorname{id}_C$. The argument never restricts the characteristic or the order of $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Conclusion of Lemma 1.16 and Theorem 1.13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-component-picard-gluing",
+  "def-sfb-stable-pointed-curve",
+  "lem-sfb-finite-graph-homology-rigidity",
+  "lem-sfb-integral-nodal-picard-normalization-action",
+  "sk-thm-picard-main",
+  "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "lem-pc-rational-points-dense",
+  "lem-sfb-low-genus-pointed-automorphism-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "Theorem 1.13, Lemmas 1.15–1.17, printed pp.85–87 (read online; local PDF WANTED). Agent formulation; high-genus smooth input reused from the existing polarized-Jacobian lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The automorphism group of a stable possibly singular curve acts faithfully by pullback on degree zero line bundles on each irreducible component",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.faithful\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ {G : Type u_1} (A : Type u_2) {B : Type u_3} {inst : Group G} {inst_1 : CommSemiring A} {inst_2 : Semiring B}\\n  {inst_3 : Algebra A B} {inst_4 : MulSemiringAction G B} [self : IsGaloisGroup G A B], FaithfulSMul G B\", \"doc\": \"If $ G $ is the Galois group of the algebra $ B $ over $ A $, then the scalar multiplication action of $ G $ on $ B $ is faithful. This means that for any two distinct elements $ g_1, g_2 \\\\in G $, the\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToAction F).Faithful\", \"doc\": \"For any pre-Galois category $\\\\mathcal{C}$ with fiber functor $F$, the functor from $\\\\mathcal{C}$ to the category of $\\\\mathrm{Aut}(F)$-actions on finite types is faithful. This means that for any objec\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_injective_of_non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G],\\n  (∀ (g : G), (∀ (X : C) (x : (F.obj X).carrie\", \"doc\": \"If a group $ G $ acts on a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $ such that any element $ g \\\\in G $ satisfying $ g \\\\cdot x = x $ for all objects $ X \\\\in \\\\mathcal{C} $ and all $ x \\\\in F(X) $\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFaithfulContActionFintypeCatAutFunctorFunctorToContAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToContAction F).Faithful\", \"doc\": \"The functor from category $\\\\mathcal{C}$ to the category of continuous actions of the automorphism group $\\\\mathrm{Aut}(F)$ on finite types is faithful. This means that for any two objects $X$ and $Y$ i\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X], MulAction.IsPretransitive (CategoryTheory.Aut \", \"doc\": \"If an object $ X $ in a pre-Galois category $ \\\\mathcal{C} $ satisfies the Galois condition, then the automorphism group $ \\\\mathrm{Aut}(F) $ of a fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X],\\n  MulAction.IsPretransitive (CategoryTheory\", \"doc\": \"For any Galois object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, the automorphism group $ \\\\mathrm{Aut}(X) $ acts pretransitively on the finite type $ F(X) $, where $ F $ is the fiber functor to f\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.action_ext_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) {G : Type u_1}\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"In a pre-Galois category, if a group element $g$ acts on an element $x$ of $F(X)$ such that $g \\\\cdot x = t_X(x)$ for a natural transformation $t$ and a Galois object $X$, then this equality extends to\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.evaluation_aut_injective_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.PreGaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (A : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A] (a : (F.obj A).carrier),\\n  Function.Injec\", \"doc\": \"For a connected object $A$ in a pre-Galois category $\\\\mathcal{C}$ and a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, if $a \\\\in F(A)$ is an element of the finite set $F(A)$, then the evaluation \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orelli|stable.*[Pp]icard|[Pp]icard.*faithful|generalizedJacobian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of a stable nodal genus at least two curve inducing identity on its generalized Jacobian is identity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autMap_id\", \"module\": \"Mathlib.CategoryTheory.Galois.GaloisObjects\", \"type\": \"{A : C} [IsGalois A] : autMap (𝟙 A) = id\", \"doc\": \"For any Galois object $ A $ in a pre-Galois category $ \\\\mathcal{C} $, the automorphism lifting map applied to the identity morphism $ \\\\text{id}_A $ satisfies $ \\\\text{autMap}(\\\\text{id}_A) = \\\\text{id} $\"}\n  {\"name\": \"WeierstrassCurve.map_id\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.map (RingHom.id R) = W\", \"doc\": \"Applying the identity ring homomorphism $\\\\text{id}_R$ to the coefficients of a Weierstrass curve $W$ over a commutative ring $R$ leaves the curve unchanged, i.e., $W.\\\\text{map}(\\\\text{id}_R) = W$.\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.map_id\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.VariableChange\", \"type\": \": C.map (RingHom.id R) = C\", \"doc\": \"For any Weierstrass curve variable change $ C $ over a commutative ring $ R $, applying the identity ring homomorphism $ \\\\text{id}_R $ to $ C $ results in $ C $ itself, i.e., $ C.\\\\text{map}(\\\\text{id}_\"}\n  {\"name\": \"WeierstrassCurve.Jacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \": Type r\", \"doc\": \"The Jacobian of a Weierstrass curve over a given type $ R $ is defined as the Weierstrass curve itself.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_id\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"(P : W'⟮F⟯) : map (Algebra.ofId F F) P = P\", \"doc\": \"For any point $ P $ on an affine Weierstrass curve $ W' $ over a field $ F $, applying the identity homomorphism on $ F $ to $ P $ results in $ P $ itself, i.e., $ \\\\text{map}(\\\\text{id}_F, P) = P $.\"}\n  {\"name\": \"CategoryTheory.Aut.ext_iff\", \"module\": \"Mathlib.CategoryTheory.Endomorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : C} {φ₁ φ₂ : CategoryTheory.Aut X},\\n  φ₁ = φ₂ ↔ φ₁.hom = φ₂.hom\", \"doc\": \"For any category $\\\\mathcal{C}$ and object $X \\\\in \\\\mathcal{C}$, two automorphisms $\\\\varphi_1, \\\\varphi_2 \\\\in \\\\text{Aut}(X)$ are equal if and only if their underlying morphisms $\\\\varphi_1.\\\\text{hom} = \\\\v\"}\n  {\"name\": \"MulAut.one_apply\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \"(m : M) : (1 : MulAut M) m = m\", \"doc\": \"For any element $ m $ in $ M $, applying the identity automorphism $ 1 $ (the identity element of the multiplicative automorphism group $ \\\\text{MulAut}(M) $) to $ m $ yields $ m $ itself, i.e., $ 1(m)\"}\n  {\"name\": \"WeierstrassCurve.toJacobian\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(W : WeierstrassCurve R) : Jacobian R\", \"doc\": \"The function maps a Weierstrass curve $ W $ over a ring $ R $ to its Jacobian, which is defined as $ W $ itself.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deligne Mumford faithfulness of automorphisms of stable curves on the Picard zero group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Action\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToAction F).Faithful\", \"doc\": \"For any pre-Galois category $\\\\mathcal{C}$ with fiber functor $F$, the functor from $\\\\mathcal{C}$ to the category of $\\\\mathrm{Aut}(F)$-actions on finite types is faithful. This means that for any objec\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFaithfulContActionFintypeCatAutFunctorFunctorToContAction\", \"module\": \"Mathlib/CategoryTheory/Galois/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (CategoryTheory.PreGaloisCategory.functorToContAction F).Faithful\", \"doc\": \"The functor from category $\\\\mathcal{C}$ to the category of continuous actions of the automorphism group $\\\\mathrm{Aut}(F)$ on finite types is faithful. This means that for any two objects $X$ and $Y$ i\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_injective\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  Function.Injective ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F)\", \"doc\": \"The group homomorphism from the automorphism group of a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $ to the product of automorphism groups of $ F(X) $ over all objects $ X \\\\in \\\\mathcal{C} $ is in\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.PreGaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F], F.Faithful\", \"doc\": \"The fiber functor $ F $ from a pre-Galois category $ \\\\mathcal{C} $ to the category of finite types is faithful, meaning the induced maps on hom-sets $ \\\\mathrm{Hom}_{\\\\mathcal{C}}(X,Y) \\\\to \\\\mathrm{Hom}_\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_injective_of_non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G],\\n  (∀ (g : G), (∀ (X : C) (x : (F.obj X).carrie\", \"doc\": \"If a group $ G $ acts on a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $ such that any element $ g \\\\in G $ satisfying $ g \\\\cdot x = x $ for all objects $ X \\\\in \\\\mathcal{C} $ and all $ x \\\\in F(X) $\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.evaluation_aut_injective_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.PreGaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (A : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A] (a : (F.obj A).carrier),\\n  Function.Injec\", \"doc\": \"For a connected object $A$ in a pre-Galois category $\\\\mathcal{C}$ and a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, if $a \\\\in F(A)$ is an element of the finite set $F(A)$, then the evaluation \"}\n  {\"name\": \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G]\\n  {η₁ η₂ : CategoryTheory.Aut (TannakaDuality.FiniteGroup.forget k G)},\\n  η₁.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep = η₂.hom.hom.app TannakaDuality.FiniteGroup.rightFDRep → η₁ = η₂\", \"doc\": \"Given two automorphisms $\\\\eta_1$ and $\\\\eta_2$ of the forgetful functor from the category of finitely generated $k$-representations of a finite group $G$ to the category of finitely generated $k$-modul\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.forgetToScheme_faithful\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.forgetToScheme.Faithful\", \"doc\": \"The inclusion functor from the category of affine schemes to the category of schemes is faithful, meaning that for any pair of affine schemes $X$ and $Y$, the induced map $\\\\text{Hom}_{\\\\text{AffineSche\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"Aut\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful actions of linear, ring and Galois automorphisms do not concern stable curves or Picard groups."
+  },
+  {
+   "tool": "grep",
+   "query": "Torelli|stable.*Picard|Picard.*faithful|generalizedJacobian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful actions of linear, ring and Galois automorphisms do not concern stable curves or Picard groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithful action of automorphisms of a stable curve on its degree zero Picard group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \": FaithfulSMul (M ≃ₗ[R] M) M\", \"doc\": \"The action of the automorphism group of a module $ M $ over a semiring $ R $ on $ M $ is faithful. This means that if two automorphisms act identically on every element of $ M $, then they are equal a\"}\n  {\"name\": \"RingAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Ring.Action.End\", \"type\": \": FaithfulSMul (RingAut R) R\", \"doc\": \"The action of the group of ring automorphisms on the ring is faithful, meaning that if two automorphisms act identically on all elements of the ring, then they are equal as automorphisms.\"}\n  {\"name\": \"AlgEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Algebra.Equiv\", \"type\": \": FaithfulSMul (A₁ ≃ₐ[R] A₁) A₁\", \"doc\": \"The action of the group of R-algebra automorphisms on A₁ is faithful, meaning that if two automorphisms act identically on every element of A₁, then they are equal.\"}\n  {\"name\": \"Action.ρAut\", \"module\": \"Mathlib.CategoryTheory.Action.Basic\", \"type\": \"{G : Type*} [Group G] (A : Action V G) : G →* Aut A.V\", \"doc\": \"The group homomorphism from $ G $ to the automorphism group $ \\\\mathrm{Aut}(A.V) $ induced by the action $ A $, mapping each element $ g \\\\in G $ to the automorphism $ \\\\rho(g) $ of $ A.V $, where $ \\\\rho\"}\n  {\"name\": \"AddAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": FaithfulSMul (AddAut M) M\", \"doc\": \"The action of the additive automorphism group on M is faithful, meaning that if two automorphisms agree on all elements of M, then they are equal.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.mulAction_def\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \"{X : C} (σ : Aut F) (x : F.obj X) : σ • x = σ.hom.app X x\", \"doc\": \"For any category $\\\\mathcal{C}$, functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and object $X \\\\in \\\\mathcal{C}$, the automorphism group $\\\\mathrm{Aut}(F)$ acts on the finite set $F(X)$. The action is d\"}\n  {\"name\": \"RelIso.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Order.Group.Action.End\", \"type\": \": FaithfulSMul (r ≃r r) α\", \"doc\": \"The action of the group of relational isomorphisms on the underlying set $\\\\alpha$ is faithful, meaning that if two automorphisms agree on all elements of $\\\\alpha$, then they are equal as relational is\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier\", \"module\": \"Mathlib.CategoryTheory.Galois.Topology\", \"type\": \"(X : C) : SMul (Aut (F.obj X)) (F.obj X)\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$, the automorphism group $\\\\text{Aut}(F(X))$ of the finite type $F(X)$ acts on $F(X)$ by applying each automorphism $\\\\sigma \\\\in \\\\text{Aut}(F(X))$ to elemen\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: faithful actions of linear, ring and Galois automorphisms do not concern stable curves or Picard groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-torsion-faithfulness",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion.",
+   "via": [
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stable-picard-action-faithful",
+  "worker": "stage1",
+  "summary": "Checked the ordinary-group statement against Deligne–Mumford Theorem 1.13, including reducible curves and arbitrary characteristic. Split the component-intersection graph reduction, its integral cycle-lattice rigidity, ordered self-node branches and low-genus normalization cases into four smaller statement-only inputs. Reused existing smooth Jacobian faithfulness, Picard representability and density, and wrote out separation of lattice elements and descent through reduced normalizations.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Steps 1–3 realize the graph part of Deligne–Mumford 1.17; steps 4–7 realize 1.15–1.16. This is the supporting rigidity input to det-thm-sf-ctf-stability-direct-images (3), not a change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-picard-main",
+    "why": "Representability, smoothness, separatedness and k-point dictionary for the smooth normalization Jacobian; generic Picard tool."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Density of k-points on that smooth Jacobian; generic smooth-scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-picard-main",
+  "lem-pc-rational-points-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-69b964e73",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-69b964e73 (reviewer sub-agent of L); spot-checked: PASS, no changes, no fixes/ files. Item statement is byte-identical to live (still unsplit there); blueprint unchanged; no repair note; no cycle; the SGA grep hit is a false positive. Source: Deligne-Mumford 1.13 via Deligne 3.5.1 (DM PDF WANTED). Stacks tags checked: 0C1M curves-lemma-glue-points, 0C6N curves-lemma-genus-zero, 0BA0 pic-lemma-picard-pieces. Steps checked against cited statements. Step 1: surjective equivariant restriction plus singleton support fixes every component with nontrivial Pic0. Step 2: a moved component is P1, its special points are its intercomponent nodes, so its degree is at least 3. Step 3: characters z^{m_e} with z^n != 1 separate points of H1, then the graph lemma applies. Step 4: unique lift fixes self-node branches and intercomponent preimages. Step 5: J(k) is dense, the equalizer is closed in separated reduced J, then injectivity of u -> a_u. Step 6: genus 1 with one fixed point, genus 0 with three. Step 7: points by surjectivity, functions by reducedness and domains injecting into their normalization. New nodes re-derived and true. Gluing: units sequence, Hom(-,k^*) exact because k^* is divisible, P1 criterion. Graph rigidity: tested theta graph, parallel-edge swap, double-edge triangle, stars and trees, bridge flip, isolated vertices. Integral normalization: (k^*)^delta in Pic Y, opposite orderings differ through z^2 != 1. Low genus: b = tau_c o alpha, PGL2 fixing 3 points. None duplicates an existing node (statement scan over the whole snapshot) or restates an item clause. Advisory: 'elliptic group law' has no definition node. Tool uses: sk-thm-picard-main and lem-pc-rational-points-dense are generic and declared. Batch-5: all four flagged paths are generic and part of neither assumption. def-trf-nodal-geometric-fibres and def-trf-projective-bundle-morphism are definitions. lem-trf-curve-euler-tensor-generic-rank is a coherent Euler/rank fact on curves. lem-trf-reduced-scheme-image is scheme-theoretic image theory."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StablePicardActionFaithful",
+  "declaration": "AlgebraicGeometry.stablePicardActionFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/StablePicardActionFaithful.lean",
+  "statement": "theorem stablePicardActionFaithful (k : Type u) [Field k] [IsAlgClosed k] (g : ℕ) (C : StablePointedModuli (Spec (.of k)) g 0) (_hbase : C.base = Over.mk (𝟙 (Spec (.of k)))) (a : C.curve ≅ C.curve) (_ha : a.hom ≫ C.projection ≫ C.base.hom = C.projection ≫ C.base.hom) (_hpic : ∀ L : C.curve.Pic, (∀ Z : irreducibleComponents C.curve, (C.curve.normalizedComponentMap Z ≫ C.projection ≫ C.base.hom).picDegree (Scheme.Pic.map (C.curve.normalizedComponentMap Z) L) = 0) → Scheme.Pic.map a.hom L = L) : a = Iso.refl C.curve",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33c36dce1",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery of the 9c75 H2 return. The diff is exactly the requested stmt_deps (def-sc-picard-group, def-sc-pic0, def-sfb-stable-pointed-curve, lem-pc-pic-presheaf-functorial) plus public imports of PicardFunctor and StablePointedCurve. The signature, docstrings, statement, proof and proof_deps are unchanged; lean.statement is verbatim in the file, which has one sorry. Theorem stmt_dep finding judged acceptable: Scheme.Pic.map is defined with the membership proof SheafOfModules.IsInvertible.pullback, the conclusion of lem-pc-pic-presheaf-functorial (pullback preserves invertibility), so a^*[L] is in Pic only through that theorem. The PicardFunctor module is also owned by the cited def-sc-picard-group. This route was authorized by the previous return. Clauses re-checked against Deligne-Mumford 1.13: IsAlgClosed with any characteristic; genus_at_least_two; unpointed Fin 0 over base Spec k; multidegree zero through normalizedComponentMap and picDegree on every irreducible component; a over k; conclusion a = Iso.refl. No hollow definitions, docstrings present, report sections present. No file changed, so no compile."
+ }
+}

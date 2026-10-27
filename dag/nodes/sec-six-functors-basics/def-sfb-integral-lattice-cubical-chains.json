@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-integral-lattice-cubical-chains",
+ "kind": "definition",
+ "title": "Integral lattice cubical chain groups and explicit maps",
+ "statement": "For $r\\in\\mathbf N$ and $a\\in\\mathbf Z$, let $\\mathcal I_{r,a}$ be the set of finite subsets $I\\subseteq\\operatorname{Fin}(r)$ with $|I|=a$, and let $C_a$ be the free abelian group [def-weil-pbc-free-module] on pairs $(v,I)$ with $v\\in\\mathbf Z^r$ and $I\\in\\mathcal I_{r,a}$. For arbitrary $I$, define $[v,I]=0$ when $|I|\\ne a$. Let $u_i$ be the standard lattice vector. Define $\\partial_a:C_a\\to C_{a-1}$ by $\\partial_a[v,I]=\\sum_{i\\in I}(-1)^{|\\{j\\in I:j<i\\}|}([v+u_i,I\\setminus\\{i\\}]-[v,I\\setminus\\{i\\}])$, extended by finite integer linear combinations. The incoming boundary $C_{a+1}\\to C_a$ is $\\partial_{a+1}$ with the canonical degree identification. Define $\\epsilon:C_0\\to\\mathbf Z$ by $\\epsilon[v,I]=1$, $s:\\mathbf Z\\to C_0$ by $s(1)=[0,\\varnothing]$, $e_a:C_a\\to C_a$ by $e_a[v,I]=[0,\\varnothing]$ (hence zero if $a\\ne0$), and $\\tau_{w,a}:C_a\\to C_a$ by $\\tau_{w,a}[v,I]=[v+w,I]$. Each formula extends linearly.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0623 (definition-koszul-complex) and 062F (lemma-regular-koszul-regular), algebraic ingredients only. Agent-formulated integral cubical contraction for the sequence t_i-1 in the integral Laurent ring; these tags do not assert its nonequivariant contracting homotopy."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The finite cubical chain complex of an integer lattice retracts onto its augmentation by a signed coordinate contracting homotopy",
+   "results": "ChainComplex.alternatingConstHomotopyEquiv; DoldKan.homotopyPInftyToId; SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv and related abstract simplicial results.",
+   "date": "2026-10-25",
+   "verdict": "No definition of the displayed lattice cells and signed boundary; abstract homotopies use different chain objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"comp\"",
+   "results": "ShortComplex.Homotopy and HomotopyEquiv constructors and operations.",
+   "date": "2026-10-25",
+   "verdict": "No cubical lattice definitions. This module relocates existing definitions verbatim rather than introducing a competing notion."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|lattice.*[Hh]omotopy|[Hh]omotopy.*lattice",
+   "results": "msearch: zero Mathlib hits. Local project search found the assigned module and its two coordinate lemmas.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing project definitions unchanged in a shared acyclic module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free abelian cubical chains on pairs of integer lattice vectors and finite coordinate subsets with signed face differential",
+   "results": "FreeAddGroup; FreeAbelianGroup; FreeAbelianGroup.basis; AlternatingFaceMapComplex.obj, objD and alternatingFaceMapComplex; ComplexShape.ε₂; AlternatingCofaceMapComplex.objD.",
+   "date": "2026-10-25",
+   "verdict": "Generic free modules and simplicial alternating complexes only. The displayed cubical chain definitions are already present in the assigned project module and are relocated unchanged."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicTopology.IntegralLatticeCubicalContraction",
+  "date": "2026-10-25",
+  "group": "V2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit definitions extracted unchanged from lem-sfb-integral-lattice-cubical-contraction to avoid an import cycle with its two proof dependencies.",
+   "via": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.IntegralLatticeCubicalDefs",
+  "file": "lean/Sheaf/AlgebraicTopology/IntegralLatticeCubicalDefs.lean",
+  "declaration": "IntegralLatticeCubical.Chains",
+  "declarations": [
+   "IntegralLatticeCubical.Directions",
+   "IntegralLatticeCubical.Chains",
+   "IntegralLatticeCubical.cell",
+   "IntegralLatticeCubical.unitVector",
+   "IntegralLatticeCubical.boundary",
+   "IntegralLatticeCubical.incomingBoundary",
+   "IntegralLatticeCubical.augmentation",
+   "IntegralLatticeCubical.sectionMap",
+   "IntegralLatticeCubical.originProjection",
+   "IntegralLatticeCubical.translate"
+  ],
+  "statement": "abbrev Chains (r : ℕ) (a : ℤ)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a351",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T071213-L-140746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a351",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T071213-L-140746",
+  "kind": "interface",
+  "note": "independent cc review: contraction signature vs clone (identical); ten moved defs in IntegralLatticeCubicalDefs vs clone bodies (identical); adapted modules vs clone (one import line each); node proof/proof_deps/lean vs Lean proof; sandbox compile of 4 delivered modules + 4 item importers OK; axioms propext/choice/Quot.sound"
+ }
+}

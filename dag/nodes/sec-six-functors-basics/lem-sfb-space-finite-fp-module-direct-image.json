@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-space-finite-fp-module-direct-image",
+ "kind": "statement",
+ "title": "Finite presentation under finite finitely presented direct image",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A morphism is finite if representable and finite on all scheme tests [def-weil-finite-integral-morphism]. Local finite presentation is tested on etale scheme charts [def-sbc-locally-finite-presentation]; finite presentation additionally requires quasi-compactness and quasi-separatedness, meaning a quasi-compact relative diagonal. Use modules on the small etale structure sheaves, quasi-coherence [def-trf-space-quasi-coherent-module], and tensor pullback and module direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it admits an exact presentation $\\mathcal O^m\\to\\mathcal O^n\\to M\\to0$ with $m,n$ finite, and of finite type if etale locally finitely generated. Let $f:X\\to Y$ be finite and of finite presentation, and let $M$ be a quasi-coherent $\\mathcal O_X$-module. Then $f_*M$ is quasi-coherent and $M$ is finitely presented over $\\mathcal O_X$ if and only if $f_*M$ is finitely presented over $\\mathcal O_Y$. No Noetherian, flatness, or absolute quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0610 (lemma-finite-finitely-presented-module); quasi-coherence of the affine direct image as in spaces-morphisms.tex, lemma-pushforward."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $q:V\\to Y$ from a scheme, and set $U=X\\times_YV$, with $p:U\\to X$ and $\\psi:U\\to V$. Representability of the finite map $f$ makes $U$ a scheme, and the fibre-product covering lemma makes $p$ surjective etale. By the scheme-test meaning of finite, $\\psi$ is finite. Apply the chart criterion for local finite presentation to $V\\to Y$ and the identity atlas of $X\\times_YV=U$: $\\psi$ is locally of finite presentation. Since a finite scheme map is affine, affine permanence makes $\\psi$ quasi-compact and separated, as required for the scheme direct-image comparison below. Restricting local presentations shows that $M_U=M|_{U_{\\mathrm{et}}}$ is quasi-coherent.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0610, lemma-finite-finitely-presented-module, first two sentences of the proof; Tag 0410, spaces-morphisms.tex lemma-finite-presentation-local."
+   }
+  },
+  {
+   "text": "Every affine scheme test of $f$ is a finite scheme morphism with affine target, hence has affine source. Thus $f$ is an affine morphism of algebraic spaces. The quasi-coherence clause of the affine direct-image theorem gives that $f_*M$ is quasi-coherent. The etale pushforward restriction comparison gives the canonical isomorphism $G=(f_*M)|_{V_{\\mathrm{et}}}\\simeq\\psi_{\\mathrm{et},*}M_U$ of $\\mathcal O_{V,\\mathrm{et}}$-modules. Its sections on an etale $W\\to V$ are the identity on the compatible sections of $M$ over $X\\times_Y W=U\\times_VW$; thus it compares the specified module direct images, including their scalar actions.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change, quasi-coherence clause; spaces-properties.tex Tag 03LX, lemma-pushforward-etale-base-change-modules, degree zero; the displayed restriction identity in the proof of Tag 0610."
+   }
+  },
+  {
+   "text": "Under the scheme Zariski-small-etale quasi-coherent equivalence, write $M_U\\simeq A_U(F)$ for a quasi-coherent Zariski module $F$ on $U$. Because $\\psi$ is quasi-compact and separated, the same equivalence identifies $\\psi_{\\mathrm{et},*}M_U$ with $A_V(\\psi_*F)$, where $\\psi_*F$ is the Zariski direct image and is quasi-coherent. The finiteness comparison says $M_U$ is finitely presented exactly when $F$ is, and $A_V(\\psi_*F)$ is finitely presented exactly when $\\psi_*F$ is. The scheme finite-pushforward preservation lemma gives $F$ finitely presented $\\Rightarrow\\psi_*F$ finitely presented; the reflection lemma gives the reverse implication. Both apply because $\\psi$ is finite and locally of finite presentation and $F$ is quasi-coherent. Consequently $M_U$ is finitely presented if and only if $G$ is finitely presented.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-finite-pushforward-preserves-finite-presentation",
+    "lem-trf-finite-pushforward-reflects-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, small-etale part; Tag 03LC, proposition-equivalence-quasi-coherent-functorial, part (3); Tag 05VG, lemma-equivalence-quasi-coherent-properties; Tag 05B4, lemma-finite-finitely-presented-module."
+   }
+  },
+  {
+   "text": "Finite presentation in the item means etale locally the cokernel of a map between finite free modules. It is therefore equivalent to finite presentation after restriction to the atlas $p:U\\to X$: one direction restricts the local exact presentations on localized sites, and the other composes their covering families with $p$. Covers pull back and compose by the cited covering calculus, and etale restriction identifies the structure sheaves and is restriction to these localized sites. The same argument applies to $q:V\\to Y$. Hence $M$ is finitely presented $\\Leftrightarrow M_U$ is finitely presented $\\Leftrightarrow G$ is finitely presented $\\Leftrightarrow f_*M$ is finitely presented. Together with step 2 this proves both assertions. All covers are allowed to be infinite; the argument imposes no absolute quasi-compactness or Noetherian or flatness hypothesis.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0610, lemma-finite-finitely-presented-module, conclusion of the proof; Tag 060T, section-descent-finiteness, introductory atlas criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-affine-module-base-change",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-trf-finite-pushforward-preserves-finite-presentation",
+  "lem-trf-finite-pushforward-reflects-finite-presentation",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0610, lemma-finite-finitely-presented-module, etale localization to the scheme theorem Tag 05B4; the explicit Zariski-small-etale comparisons are Tags 03LC and 05VG, and quasi-coherence is Tag 07U8 (also Tag 03M9)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite finitely presented morphism of algebraic spaces a quasi coherent module is finitely presented if and only if its direct image is finitely presented",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.FinitePresentation.trans and of_finite_of_finitePresentation are useful affine algebra inputs; the algebraic-space direct-image equivalence is not a one-line specialization of these. Sheaf finite-presentation definitions do not state its preservation by this direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.Finite",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"instFiniteOfFinitePresentation\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" (R : Type u_1) (M : Type u_2) [Semiring R] [AddCommMonoid M] [Module R M] [h : Module.FinitePresentation R M] : Module.Finite R M\", \"doc\": \"\"}\n  {\"name\": \"Module.finitePresentation_of_finite\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" (R : Type u_1) (M : Type u_2) [Ring R] [AddCommGroup M] [Module R M] [IsNoetherianRing R] [h : Module.Finite R M] : Module.FinitePresentation R M\", \"doc\": \"\"}\n  {\"name\": \"Module.finitePresentation_iff_finite\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" (R : Type u_1) (M : Type u_2) [Ring R] [AddCommGroup M] [Module R M] [IsNoetherianRing R] : Module.FinitePresentation R M ↔ Module.Finite R M\", \"doc\": \"\"}\n  {\"name\": \"Module.finitePresentation_of_projective\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" (R : Type u_1) (M : Type u_2) [Ring R] [AddCommGroup M] [Module R M] [Module.Projective R M] [Module.Finite R M] : Module.FinitePresentation R M\", \"doc\": \"\"}\n  {\"name\": \"Module.FinitePresentation.fg_ker\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" {R : Type u_1} {M : Type u_2} {N : Type u_3} [Ring R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] [Module.Finite R M] [h : Module.FinitePresentation R N] (l : M →ₗ[R] N) (hl : Function.Surjective ⇑l) : l.ker.FG\", \"doc\": \"\"}\n  {\"name\": \"IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" {R : Type u_3} {M : Type u_4} [CommRing R] [AddCommGroup M] [Module R M] (S : Submonoid R) {M' : Type u_1} [AddCommGroup M'] [Module R M'] (f : M →ₗ[R] M') [IsLocalizedModule S f] [Module.Finite R M] [Module.FinitePresentation R M'] : ∃ r ∈ S, IsLocalizedModule.Away r f\", \"doc\": \"If `M` is a finite `R`-module, and the localization `Mₛ` at some submonoid `S` of `R`\\nis finitely presented, then `Mₛ = M[1/r]` for some `r ∈ S`.\"}\n  {\"name\": \"Module.finitePresentation_of_free_of_surjective\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" {R : Type u_1} {M : Type u_2} {N : Type u_3} [Ring R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] [Module.Free R M] [Module.Finite R M] (l : M →ₗ[R] N) (hl : Function.Surjective ⇑l) (hl' : l.ker.FG) : Module.FinitePresentation R N\", \"doc\": \"\"}\n  {\"name\": \"Module.FinitePresentation.equiv_quotient\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" (R : Type u) (M : Type u_1) [Ring R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] [Small.{v, u} R] : ∃ L x x_1 K x_2, Module.Free R L ∧ Module.Finite R L ∧ K.FG\", \"doc\": \"A finitely presented module is isomorphic to the quotient of a finite free module by a finitely\\ngenerated submodule.\"}\n  {\"name\": \"exists_bijective_map_powers\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" {R : Type u_3} {M : Type u_4} {N : Type u_5} [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] (S : Submonoid R) {M' : Type u_1} [AddCommGroup M'] [Module R M'] (f : M →ₗ[R] M') [IsLocalizedModule S f] {N' : Type u_2} [AddCommGroup N'] [Module R N'] (g : N →ₗ[R] N') [IsLocali\", \"doc\": \"Let `M` be a finite `R`-module, and `N` be a finitely presented `R`-module.\\nIf `l : M →ₗ[R] N` is a linear map whose localization at `S : Submonoid R` is bijective,\\nthen `l` is already bijective under\"}\n  {\"name\": \"Module.FinitePresentation.exists_notMem_bijective\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \" {R : Type u_5} {M : Type u_6} {N : Type u_7} [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] [Module.Finite R M] [Module.FinitePresentation R N] (f : M →ₗ[R] N) (p : Ideal R) [p.IsPrime] {Mₚ : Type u_3} {Nₚ : Type u_4} [AddCommGroup Mₚ] [AddCommGroup Nₚ] [Module R Mₚ] [Modu\", \"doc\": \"Let `M` be a finite `R`-module and `N` be a finitely presented `R`-module. If `f : M →ₗ[R] N`\\nis a linear map whose localization at a prime ideal `p` is bijective, then there exists\\n`g ∉ p` such that \"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Finiteness.ModuleFinitePresentation\", \"type\": \" (R : Type u) (S : Type u_1) [CommRing R] [CommRing S] [Algebra R S] [Module.Finite R S] [Algebra.FinitePresentation R S] : Module.FinitePresentation R S\", \"doc\": \"If `S` is finite as a module over `R` and finitely presented as an algebra over `R`, then\\nit is finitely presented as a module over `R`.\"}\n  {\"name\": \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"module\": \"Mathlib.RingTheory.Finiteness.ModuleFinitePresentation\", \"type\": \" (R : Type u) (S : Type u_1) [CommRing R] [CommRing S] [Algebra R S] [Module.Finite R S] : Module.FinitePresentation R S ↔ Algebra.FinitePresentation R S\", \"doc\": \"If `S` is a finite `R`-algebra, finitely presented as a module and as an algebra\\nis equivalent.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.FinitePresentation.trans and of_finite_of_finitePresentation are useful affine algebra inputs; the algebraic-space direct-image equivalence is not a one-line specialization of these. Sheaf finite-presentation definitions do not state its preservation by this direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*(restrictScalars|of_restrict|tower)|finitePresentation.*(restrictScalars|of_restrict|tower)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"line\": \"120\", \"text\": \"  FinitePresentation.equiv (P.quotientEquiv.restrictScalars R)\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Basic.lean\", \"line\": \"246\", \"text\": \"  finitePresentation := .of_restrict_scalars_finitePresentation R A B\"}\n  {\"file\": \"Mathlib/RingTheory/FinitePresentation.lean\", \"line\": \"209\", \"text\": \"theorem of_restrict_scalars_finitePresentation [Algebra A B] [IsScalarTower R A B]\"}\n  {\"file\": \"Mathlib/RingTheory/FinitePresentation.lean\", \"line\": \"445\", \"text\": \"  exact Algebra.FinitePresentation.of_restrict_scalars_finitePresentation A B C\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.FinitePresentation.trans and of_finite_of_finitePresentation are useful affine algebra inputs; the algebraic-space direct-image equivalence is not a one-line specialization of these. Sheaf finite-presentation definitions do not state its preservation by this direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a finite finitely presented algebra a module is finitely presented exactly when it is finitely presented over the base ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"module\": \"Mathlib.RingTheory.Finiteness.ModuleFinitePresentation\", \"type\": \"[Module.Finite R S] : Module.FinitePresentation R S ↔ Algebra.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module, then $ S $ is finitely presented as an $ R $-module if and only if it is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Finiteness.ModuleFinitePresentation\", \"type\": \"[Module.Finite R S] [Algebra.FinitePresentation R S] : Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"FinitePresentation.of_isBaseChange\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module A N] [IsScalarTower R A N] (f : M →ₗ[R] N) (h : IsBaseChange A f)\\n  [Module.FinitePresentation R M] : Module.FinitePresentation A N\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ A $, and an $ A $-module $ N $ equipped with an $ R $-linear map $ f : M → N $ from an $ R $-module $ M $, if $ f $ satisfies the base change univers\"}\n  {\"name\": \"Module.finitePresentation_iff_finite\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"[IsNoetherianRing R] : Module.FinitePresentation R M ↔ Module.Finite R M\", \"doc\": \"For a Noetherian ring $ R $, a module $ M $ is finitely presented if and only if it is finitely generated.\"}\n  {\"name\": \"Module.finitePresentation_of_finite\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"[IsNoetherianRing R] [h : Module.Finite R M] : Module.FinitePresentation R M\", \"doc\": \"Let $ R $ be a Noetherian ring and $ M $ a finitely generated $ R $-module. Then $ M $ is finitely presented.\"}\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n  {\"name\": \"Module.finitePresentation_iff_exists_presentation\", \"module\": \"Mathlib.Algebra.Module.Presentation.Finite\", \"type\": \": Module.FinitePresentation A M ↔ ∃ (pres : Presentation.{w₀, w₁} A M), Finite pres.G ∧ Finite pres.R\", \"doc\": \"A module $ M $ over a ring $ A $ is finitely presented if and only if there exists a presentation of $ M $ with a finite set of generators and a finite set of relations.\"}\n  {\"name\": \"Module.FinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  (∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG) → Module.FinitePresentation R M\", \"doc\": \"If there exists a finite set $ s $ such that the span of $ s $ equals $ M $ and the kernel of the linear map from the free module on $ s $ to $ M $ is finitely generated, then $ M $ is finitely presen\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.FinitePresentation.trans and of_finite_of_finitePresentation are useful affine algebra inputs; the algebraic-space direct-image equivalence is not a one-line specialization of these. Sheaf finite-presentation definitions do not state its preservation by this direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars preserves and reflects finite presentation of modules over finite finitely presented algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ (R : Type w₁) (A : Type w₂) (B : Type w₃) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FinitePresentation R B] [Algebra.FiniteType R A], Algebra.FinitePresentation A B\", \"doc\": \"Let $ R $ be a commutative semiring, and let $ A $ and $ B $ be $ R $-algebras with a scalar tower structure $ R \\to A \\to B $. If $ B $ is finitely presented over $ R $ and $ A $ is finitely generated \"}\n  {\"name\": \"Module.FinitePresentation.trans\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ (R : Type u_2) (M : Type u_3) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Module.FinitePresentation R S] [Module.FinitePresentation S M], Module.FinitePresentation R\", \"doc\": \"If $ S $ is a commutative ring equipped with an $ R $-algebra structure, $ M $ is an $ S $-module satisfying the scalar tower condition $ R \\to S \\to M $, and both $ S $ is finitely presented as an $ R \"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"FinitePresentation.of_isBaseChange\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_2} {M : Type u_4} {N : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] {A : Type u_1} [inst_5 : CommRing A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A N] [inst_8 : IsScalarTower R A N] (f : M →ₗ[R] N),\\n  I\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ A $, and an $ A $-module $ N $ equipped with an $ R $-linear map $ f : M → N $ from an $ R $-module $ M $, if $ f $ satisfies the base change univers\"}\n  {\"name\": \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S],\\n  Module.FinitePresentation R S ↔ Algebra.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module, then $ S $ is finitely presented as an $ R $-module if and only if it is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Module.Presentation.restrictScalars\", \"module\": \"Mathlib/Algebra/Module/Presentation/RestrictScalars\", \"type\": \"{B : Type u_1} →\\n  [inst : Ring B] →\\n    {M : Type u_2} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module B M] →\\n          [inst_3 : DecidableEq B] →\\n            (presM : Module.Presentation B M) →\\n              [inst_4 : DecidableEq presM.G] →\\n                {A : Type u_3} →\\n           \", \"doc\": \"Given a module $ M $ over a ring $ B $ with a presentation defined by generators and relations, and a commutative ring $ A $ with an $ A $-algebra structure on $ B $, this constructs the presentation \"}\n  {\"name\": \"Module.Finite.of_restrictScalars_finite\", \"module\": \"Mathlib/RingTheory/Finiteness/Basic\", \"type\": \"∀ (R : Type u_6) (A : Type u_7) (M : Type u_8) [inst : Semiring R] [inst_1 : Semiring A] [inst_2 : AddCommMonoid M]\\n  [inst_3 : Module R M] [inst_4 : Module A M] [inst_5 : SMul R A] [IsScalarTower R A M] [hM : Module.Finite R M],\\n  Module.Finite A M\", \"doc\": \"Given semirings $R$ and $A$, an additive commutative monoid $M$, and compatible scalar actions forming an $R$-$A$-$M$ tower, if $M$ is finitely generated as an $R$-module, then it is also finitely gen\"}\n  {\"name\": \"Algebra.FinitePresentation.trans\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ (R : Type w₁) (A : Type w₂) (B : Type w₃) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FinitePresentation R A] [Algebra.FinitePresentation A B], Algebra.FinitePresentation R B\", \"doc\": \"If $A$ is a finitely presented algebra over a commutative semiring $R$, and $B$ is a finitely presented algebra over $A$ with compatible scalar actions (i.e., $R$-algebra structure on $B$ via the scal\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.FinitePresentation.trans and of_finite_of_finitePresentation are useful affine algebra inputs; the algebraic-space direct-image equivalence is not a one-line specialization of these. Sheaf finite-presentation definitions do not state its preservation by this direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*(pushforward|restrictScalars)|IsFinitePresentation.*pushforward",
+   "results": "[grep] OK 1 hit(s): Mathlib/RingTheory/Extension/Presentation/Basic.lean:120, FinitePresentation.equiv (P.quotientEquiv.restrictScalars R).",
+   "date": "2026-10-24",
+   "verdict": "no match: these define local finite presentation or concern algebra presentations; they do not state the algebraic-space module direct-image equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:265-278 and Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean:70-96; the latter only handles the algebra itself as module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of quasi coherent structure sheaf modules is preserved and reflected by direct image along a finite morphism of finite presentation",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.isFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFinitePresentation.mk, .recOn, .casesOn, all in Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent.",
+   "date": "2026-10-24",
+   "verdict": "no match: these define local finite presentation or concern algebra presentations; they do not state the algebraic-space module direct-image equivalence. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:265-278 and Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean:70-96; the latter only handles the algebra itself as module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-ideal-factor",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, choice of the two blowups whose strict transforms are open subspaces. Precise input to the Tag 087F proof: Tag 087E (lemma-flat-after-blowing-up), statement; strict transform convention spaces-divisors.tex Tag 0862 (definition-strict-transform). Supporting Tag 087E proof: Tag 087C (theorem-flatten-module); strict transform convention spaces-divisors.tex Tag 0862 (definition-strict-transform). Supporting Tag 087C proof, second paragraph: choose an ideal on the base by Tag 087B (lemma-push-ideal). Supporting Tag 087B proof: second paragraph, finite presentation of the finite direct-image module by Tag 0610.",
+   "via": [
+    "lem-sfb-space-etale-ideal-factor",
+    "lem-sfb-space-module-flattening-by-admissible-blowup",
+    "lem-sfb-space-flattening-by-admissible-blowup",
+    "lem-sfb-space-zariski-after-admissible-blowup",
+    "lem-sfb-space-common-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-finite-fp-module-direct-image",
+  "worker": "stage1",
+  "summary": "Checked Tag 0610 and its scheme input 05B4, preserved the statement, and supplied a four-step etale localization proof with all generic chart and module comparisons cited. Reused existing scheme preservation/reflection and exact finiteness comparison nodes: no new nodes. Searched the live Lean and Mathlib without an exact attachment or Mathlib match.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited compactification/direct-image supporting branch via proper-support Grothendieck existence and flattening, specifically the Tag 087B proof second paragraph use of Tag 0610 recorded in blueprint.from.place. The inherited null blueprint ancestor is confirmed by blueprint_refs.py ancestor and is retained; whole-blueprint searches for 0610 and finitely presented direct image found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre products and base change of covering atlases; supplies the chart U and the cover of X, independently of any six-functor finiteness result."
+   },
+   {
+    "node": "lem-sfb-space-local-properties-chart-test",
+    "why": "Generic chart criterion for local finite presentation; checks the precise scheme hypothesis in the Stacks 0610 reduction."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affine scheme calculus; finite scheme tests have affine source, and psi is quasi-compact and separated."
+   },
+   {
+    "node": "lem-sfb-space-affine-module-base-change",
+    "why": "Only its quasi-coherent affine-direct-image clause is used, a generic structure-sheaf module tool supporting Stacks 0610."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic localization of module pushforward with the prescribed scalar action; implements exactly the restriction identity in Stacks 0610."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of structure-sheaf module categories, with its quasi-compact separated scheme pushforward clause."
+   },
+   {
+    "node": "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "why": "Generic finite-presentation comparison under the scheme equivalence; avoids confusing etale finite presentation with Zariski finite presentation."
+   },
+   {
+    "node": "lem-trf-finite-pushforward-preserves-finite-presentation",
+    "why": "Existing forward scheme half of Stacks 05B4, explicitly called for by the proof of Stacks 0610; no unit replaces this supporting algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-finite-pushforward-reflects-finite-presentation",
+    "why": "Existing reverse scheme half of Stacks 05B4, explicitly called for by the proof of Stacks 0610; no unit replaces this supporting algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition and base change of etale covers, used only to compose finite-presentation witnesses with an atlas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-affine-module-base-change",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-trf-finite-pushforward-preserves-finite-presentation",
+  "lem-trf-finite-pushforward-reflects-finite-presentation",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-1e338c196",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-1e338c196 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-descent Tag 0610 and descent Tag 05B4 (statements and proofs). The item statement is unchanged from live and matches 0610, plus the 03M9/07U8 quasi-coherence clause. It is still unsplit in live and side-live, so no other group has superseded it, and it has no re-split note. No new nodes. proof_deps (13) equals the union of the step uses, and there is no cycle (BFS over 1648 nodes).\nStep 1: U is a scheme because f is representable. p is surjective etale by trf fibre-product covers. psi is finite (a scheme test of f) and lfp by the chart test with the identity chart of U. Finite implies affine, which implies quasi-compact and separated (pbc permanence (3)).\nStep 2: affine tests of f are finite over an affine target, so their source is affine. Hence f is affine, and 07U8 gives f_*M quasi-coherent. trf pushforward restriction gives (f_*M)|_V = psi_*M_U as modules.\nStep 3: the Zariski/etale equivalence gives M_U = A(F) and psi_* commuting with (-)_et for a quasi-compact separated map. The finiteness comparison (fp on both sides, no Noetherian hypothesis) and the two 05B4 halves (finite, lfp, quasi-coherent all hold) finish it.\nStep 4: the elementary atlas restriction and composition of fp witnesses via trf chartwise etale permanence is genuinely elementary.\nEdge cases: zero or empty; the identity on a non-Noetherian, non-quasi-compact scheme; Spec F_p -> Spec Z (not flat); Spec A/I with I not finitely generated, which shows the fp hypothesis on f is needed.\nDuplicates: the only other 0610 user is lem-sfb-space-closed-structure-finite-presentation (closed immersions, Tag 084Q), which is not a duplicate.\nBatch-5: all eight listed citations, and all 53 trace-formula/Poincare-chapter nodes in the closure, are generic foundations (algebraic-space definition, 03LX, 03DX/03LC, 06VE/05VG, 05B4, 03FT/041F). None is a trace-formula or Poincare result or assumption leaf, so all are accepted.\nNo SGA. split_report.tool_uses (10 generic off-unit tools) accepted.\nMinor: the report says source.place gained 03M9/07U8, but those tags went into proof_origin. Not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteFpModuleDirectImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_fp_moduleDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteFpModuleDirectImage.lean",
+  "statement": "theorem finite_fp_moduleDirectImage {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) f.hom.hom) (hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : X.Modules) [M.IsQuasicoherent] : ((moduleDirectImage f).obj M).IsQuasicoherent ∧ (M.IsFinitePresentation ↔ ((moduleDirectImage f).obj M).IsFinitePresentation)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4d0f3c7e",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read Stacks Tag 0610 (spaces-descent.tex l.538-557), the item node, all 10 stmt_deps and the Lean source of IsRepresentableWith, MapIsLocallyOfFinitePresentation, MapIsQuasiCompact, moduleDirectImage, X.Modules and IsQuasicoherent. Finite = IsFinite on every scheme base change; finite presentation = étale-chart local finite presentation plus relative qc plus qc diagonal; module quasi-coherent on the small étale site; conclusion = direct image quasi-coherent and finite presentation iff. No extra hypotheses. Only lean and stmt_deps changed vs live; the 2 added stmt_deps landed 2026-10-22, before the base, and own the predicates used; item still lean:null in live; statement verbatim in the file; plain imports = the proof_dep modules. No new definitions, sorry only, docstrings with source place, blueprint tag and 4-step proof. Second-reading section present but by the same worker (noted, not a fault). Advisory: the existing MapIsQuasiSeparated is identical to the inline diagonal form. No compile run (no change made)."
+ }
+}

@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-torus-equivariant-frobenius-module-basis",
+ "kind": "statement",
+ "title": "Homogeneous bases for Frobenius modules with lattice weights",
+ "statement": "Let $k$ be a field [def-weil-field] of prime characteristic $p>0$, and define $A=k_\\sigma[F]$ to consist of finite sums $\\sum_{r\\geq0}a_rF^r$, with coefficientwise addition and multiplication $(aF^r)(bF^t)=ab^{p^r}F^{r+t}$. Let $d,s\\geq0$. Let $M$ be a left $A$-module admitting a basis with $d$ elements, meaning that it is isomorphic to $A^d$ with coordinatewise left multiplication. Restriction of scalars along the constant polynomials makes $M$ a $k$-vector space. Suppose there are $k$-linear subspaces $M_\\nu$ for $\\nu\\in\\mathbf Z^s$ such that $M=\\bigoplus_{\\nu\\in\\mathbf Z^s}M_\\nu$ as a $k$-vector space (every element has a unique finite decomposition) and $F(M_\\nu)\\subseteq M_{p\\nu}$ for every $\\nu$. Then there are elements $f_1,\\ldots,f_d$ forming a left $A$-basis of $M$, and weights $\\nu_1,\\ldots,\\nu_d\\in\\mathbf Z^s$, with $f_j\\in M_{\\nu_j}$ for every $j$. No perfectness assumption is imposed on $k$. The cases $d=0$ and $s=0$, and weight zero, are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated graded algebra input for the vector-group paragraph of Conrad--Lichtenstein, Linear Algebraic Groups I, Appendix D.3, proof of Theorem D.3.2, printed p.86 (the paragraph invoking CGP B.4.3). The ungraded freeness input is Milne Proposition 14.50, printed p.296; the homogeneous refinement is not asserted to be that proposition. WANTED locally: Conrad notes and CGP, Appendix B.4. No Stacks tag is asserted."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=\\bigoplus_{\\nu\\ne0}M_\\nu$. Since $p\\nu=0$ if and only if $\\nu=0$, both $M_0$ and $N$ are left $A$-submodules and $M=M_0\\oplus N$ as left modules. The two coordinate projections commute with $k$ and $F$, hence with $A$. Project the given $d$ generators: each summand is finitely generated. Via the supplied isomorphism $M\\simeq A^d$, each summand is a finitely generated left submodule of a free module. Apply [lem-sfb-frobenius-skew-free-submodules] to obtain finite $A$-bases $(a_1,\\ldots,a_t)$ of $M_0$ and $(e_1,\\ldots,e_r)$ of $N$. Every $a_i$ is homogeneous of weight zero. The hypotheses permit the same imperfect field $k$; no division by Frobenius on $k$ is involved.",
+   "uses": [
+    "lem-sfb-frobenius-skew-free-submodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. Separate weight zero and use the ungraded freeness input."
+   }
+  },
+  {
+   "text": "Write $J=\\operatorname{span}_k F(N)$. In the $k$-basis $(F^q e_i)_{q\\geq0,1\\leq i\\leq r}$ of $N$, one has $F(\\sum c_{iq}F^qe_i)=\\sum c_{iq}^pF^{q+1}e_i$. Thus $J$ is exactly the span of the terms with $q\\geq1$, and $N/J$ has dimension $r$. In particular it is the span of $F(N)$, not necessarily the set $F(N)$. Decomposing each input into its homogeneous parts shows $J$ is the sum of its homogeneous components: the weight-$\\nu$ part is the span of $F(N_{\\nu/p})$ if $\\nu\\in p\\mathbf Z^s$, and is zero otherwise. Hence $N/J$ is internally graded. Choose a basis in each of its nonzero weight components and lift it homogeneously; their union is a basis $(\\bar b_1,\\ldots,\\bar b_r)$, since the quotient is finite-dimensional. To see this choice is finite, decompose a finite spanning set into homogeneous parts, select bases from those finite spanning parts in each weight, and use directness. Denote the lifts by $b_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. The graded quotient and its homogeneous lifts; direct coefficient and finite-dimensional vector-space calculations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dilating-weight-nakayama] with $V=N$, $T(v)=Fv$, and $\\sigma(c)=c^p$. Additivity and $T(cv)=c^pT(v)$ are the module law for $Fc=c^pF$. The grading of $N$ has zero component zero, and $T(N_\\nu)\\subseteq N_{p\\nu}$ is the given hypothesis. The $b_j$ are homogeneous and their cosets span $N/J$ by step 2. The cited conclusion says $N$ is spanned over $k$ by all $F^q b_j$. Expanding a coefficient of $A$ as a finite sum $\\sum_q c_qF^q$ now says exactly that $(b_j)$ generates $N$ as a left $A$-module.",
+   "uses": [
+    "lem-sfb-dilating-weight-nakayama"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. Apply the weight-divisibility generation lemma to the nonzero-weight summand."
+   }
+  },
+  {
+   "text": "In the given free-module coordinates $M\\simeq A^d$, use the $k$-coordinates indexed by $(i,q)$, $1\\leq i\\leq d$, $q\\geq0$. The operator $F$ raises each coefficient to its $p$-th power and moves coordinate $(i,q)$ to $(i,q+1)$. Frobenius on a field is an injective ring homomorphism: $a^p=b^p$ implies $(a-b)^p=0$ and hence $a=b$. Therefore [lem-sfb-coefficient-endomorphism-preserves-independence] shows that applying $F$ to any finite $k$-independent family in $M$ leaves it independent; shifting all coordinates by one preserves independence because a relation can be read back in the old coordinates. This applies in particular to families in $N$.",
+   "uses": [
+    "lem-sfb-coefficient-endomorphism-preserves-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. Coefficient-semilinear independence; never assume Frobenius is onto."
+   }
+  },
+  {
+   "text": "Induct on $R\\geq0$ to show $(F^q b_j)_{0\\leq q\\leq R,1\\leq j\\leq r}$ is $k$-independent. At $R=0$, reduce a relation modulo $J$ and use that the $\\bar b_j$ form a basis. For the inductive step reduce a relation modulo $J$ again: its $q=0$ coefficients vanish. The remaining vectors are the $F$-images of the independent family for $R-1$, so step 4 kills every remaining coefficient. Every finite left $A$-relation among the $b_j$ expands to one of these finite $k$-relations; thus $(b_j)$ is an $A$-basis by step 3. Concatenating it with $(a_i)$ gives a homogeneous $A$-basis of $M$. For any finite $A$-basis $(u_i)$, the quotient $M/\\operatorname{span}_kF(M)$ has as $k$-basis the cosets of $u_i$, by the same coefficient computation as step 2. The given basis shows its dimension is $d$, so $t+r=d$. Relabel the concatenated basis as $f_1,\\ldots,f_d$ and retain its weights. Empty bases and $s=0$ are covered: then $N=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. Finite-relation induction, assembly, and the basis-size calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-frobenius-skew-free-submodules",
+  "lem-sfb-dilating-weight-nakayama",
+  "lem-sfb-coefficient-endomorphism-preserves-independence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent proof of the homogeneous refinement, using the existing Milne Proposition 14.50 submodule-freeness node. The source does not assert this homogeneous refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite free module over the Frobenius skew polynomial ring with a lattice grading where Frobenius multiplies weights by p has a homogeneous free basis",
+   "results": "{\"t\": \"2026-10-24T09:02:11Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free module over the Frobenius skew polynomial ring with a lattice grading where Frobenius multiplies weights by p has a homogeneous free basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.basis\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"MvPolynomial.WeightedHomogeneousSubmodule.gradedMonoid\", \"MvPolynomial.weightedGradedAlgebra\", \"MvPolynomial.IsHomogeneous.HomogeneousSubmodule.gcommSemiring\", \"Polynomial.degreeLT.instFreeSubtypeMemSubmodule\"], \"digest\": \"1c9d81ff89d0e9e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial and SkewMonoidAlgebra.basisSingleOne construct the ring and its coefficient basis. HomogeneousSubmodule and commutative graded-algebra finite generation do not give a homogeneous basis for a free left Frobenius-skew module with multiplicatively dilated lattice degrees. Read the candidate sources."
+  },
+  {
+   "tool": "grep",
+   "query": "skew|Frobenius",
+   "results": "{\"t\": \"2026-10-24T09:13:11Z\", \"tool\": \"grep\", \"query\": \"skew|Frobenius\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/CharP/Reduced.lean\", \"Mathlib/Algebra/CharP/Reduced.lean\", \"Mathlib/Algebra/CharP/Reduced.lean\", \"Mathlib/Algebra/CharP/Reduced.lean\", \"Mathlib/Algebra/CharP/Reduced.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\"], \"digest\": \"62c5d4571fd91031\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial and SkewMonoidAlgebra.basisSingleOne construct the ring and its coefficient basis. HomogeneousSubmodule and commutative graded-algebra finite generation do not give a homogeneous basis for a free left Frobenius-skew module with multiplicatively dilated lattice degrees. Read the candidate sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any free left module of finite rank over k_sigma[F], F c=c^p F, decomposed into Z^s graded k subspaces with F(M_nu) subset M_(p nu), admits a homogeneous free basis",
+   "results": "{\"t\": \"2026-10-24T09:13:12Z\", \"tool\": \"leansearch\", \"query\": \"Any free left module of finite rank over k_sigma[F], F c=c^p F, decomposed into Z^s graded k subspaces with F(M_nu) subset M_(p nu), admits a homogeneous free basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousSubmodule.isHomogeneous\", \"Submodule.IsHomogeneous\", \"Module.finite_of_rank_eq_nat\", \"Module.Free.of_basis\", \"Module.finBasisOfFinrankEq\", \"HomogeneousSubmodule.noConfusion\", \"Module.Free.mk\", \"HomogeneousSubmodule.is_homogeneous'\"], \"digest\": \"02440a172a4847fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial and SkewMonoidAlgebra.basisSingleOne construct the ring and its coefficient basis. HomogeneousSubmodule and commutative graded-algebra finite generation do not give a homogeneous basis for a free left Frobenius-skew module with multiplicatively dilated lattice degrees. Read the candidate sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, \"homogeneous\"",
+   "results": "{\"t\": \"2026-10-24T09:13:12Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, \\\"homogeneous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LinearMap.toMvPolynomial_isHomogeneous\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\"], \"digest\": \"e835c5b623df672b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial and SkewMonoidAlgebra.basisSingleOne construct the ring and its coefficient basis. HomogeneousSubmodule and commutative graded-algebra finite generation do not give a homogeneous basis for a free left Frobenius-skew module with multiplicatively dilated lattice degrees. Read the candidate sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius skew polynomial module basis compatible with a lattice decomposition of weights, including zero weight and imperfect ground fields",
+   "results": "{\"t\": \"2026-10-24T09:13:14Z\", \"tool\": \"leanfinder\", \"query\": \"Frobenius skew polynomial module basis compatible with a lattice decomposition of weights, including zero weight and imperfect ground fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.toWeightBasis\", \"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"SkewMonoidAlgebra.basisSingleOne\", \"RootPairing.Base.toWeightBasis_apply\", \"Module.Basis.extendOfIsLattice_apply\", \"RootPairing.Base.toCoweightBasis\", \"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"RootPairing.EmbeddedG2.basis\"], \"digest\": \"c509c135ec9a0aba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial and SkewMonoidAlgebra.basisSingleOne construct the ring and its coefficient basis. HomogeneousSubmodule and commutative graded-algebra finite generation do not give a homogeneous basis for a free left Frobenius-skew module with multiplicatively dilated lattice degrees. Read the candidate sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of scalar extension of an injective linear map over a field, and preservation of a basis by extension of scalars",
+   "results": "{\"t\": \"2026-10-24T09:37:47Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity of scalar extension of an injective linear map over a field, and preservation of a basis by extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ltoFun\", \"Module.Baer.ExtensionOf.inhabited\", \"Subfield.extendScalars_injective\", \"Module.Basis.extend_apply_self\", \"Module.Basis.extendOfIsLattice\", \"Module.Basis.extend\", \"IntermediateField.extendScalars_injective\", \"LinearMap.linearIndependent_iff\"], \"digest\": \"15a2f539bcb23351\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent|LinearIndependent|Basis",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"grep\", \"query\": \"linearIndependent|LinearIndependent|Basis\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free left Frobenius skew polynomial module graded by lattice weights with F multiplying weights by p admits a homogeneous free basis",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free left Frobenius skew polynomial module graded by lattice weights with F multiplying weights by p admits a homogeneous free basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SkewMonoidAlgebra.instFree\", \"Algebra.PreSubmersivePresentation.basis\", \"MvPolynomial.WeightedHomogeneousSubmodule.gradedMonoid\", \"SkewMonoidAlgebra.basisSingleOne\", \"MvPolynomial.weightedGradedAlgebra\", \"LinearMap.toMvPolynomial_isHomogeneous\", \"Polynomial.degreeLT.instFreeSubtypeMemSubmodule\", \"Module.Basis.symmetricAlgebra\"], \"digest\": \"0af3b1d77de21437\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a homogeneous basis for a free skew polynomial module graded by integer lattice weights where Frobenius dilates the weight",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a homogeneous basis for a free skew polynomial module graded by integer lattice weights where Frobenius dilates the weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Free.exists_set\", \"Module.Free.exists_basis\", \"MvPolynomial.homogeneousSubmodule\", \"MvPolynomial.instFree\", \"MvPolynomial.weightedGradedAlgebra\", \"Polynomial.Sequence.basis\", \"Module.free_iff_set\", \"SkewMonoidAlgebra.basisSingleOne\"], \"digest\": \"68d16e6e818758fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, \"homogeneous\"",
+   "results": "{\"t\": \"2026-10-24T09:39:13Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, \\\"homogeneous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LinearMap.toMvPolynomial_isHomogeneous\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\"], \"digest\": \"e835c5b623df672b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|[Bb]asis",
+   "results": "{\"t\": \"2026-10-24T09:39:13Z\", \"tool\": \"grep\", \"query\": \"homogeneous|[Bb]asis\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of scalar extension of an injective linear map over a field, and preservation of a basis by extension of scalars",
+   "results": "{\"t\": \"2026-10-24T09:37:47Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity of scalar extension of an injective linear map over a field, and preservation of a basis by extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ltoFun\", \"Module.Baer.ExtensionOf.inhabited\", \"Subfield.extendScalars_injective\", \"Module.Basis.extend_apply_self\", \"Module.Basis.extendOfIsLattice\", \"Module.Basis.extend\", \"IntermediateField.extendScalars_injective\", \"LinearMap.linearIndependent_iff\"], \"digest\": \"15a2f539bcb23351\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent|LinearIndependent|Basis",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"grep\", \"query\": \"linearIndependent|LinearIndependent|Basis\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free left Frobenius skew polynomial module graded by lattice weights with F multiplying weights by p admits a homogeneous free basis",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free left Frobenius skew polynomial module graded by lattice weights with F multiplying weights by p admits a homogeneous free basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SkewMonoidAlgebra.instFree\", \"Algebra.PreSubmersivePresentation.basis\", \"MvPolynomial.WeightedHomogeneousSubmodule.gradedMonoid\", \"SkewMonoidAlgebra.basisSingleOne\", \"MvPolynomial.weightedGradedAlgebra\", \"LinearMap.toMvPolynomial_isHomogeneous\", \"Polynomial.degreeLT.instFreeSubtypeMemSubmodule\", \"Module.Basis.symmetricAlgebra\"], \"digest\": \"0af3b1d77de21437\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a homogeneous basis for a free skew polynomial module graded by integer lattice weights where Frobenius dilates the weight",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a homogeneous basis for a free skew polynomial module graded by integer lattice weights where Frobenius dilates the weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Free.exists_set\", \"Module.Free.exists_basis\", \"MvPolynomial.homogeneousSubmodule\", \"MvPolynomial.instFree\", \"MvPolynomial.weightedGradedAlgebra\", \"Polynomial.Sequence.basis\", \"Module.free_iff_set\", \"SkewMonoidAlgebra.basisSingleOne\"], \"digest\": \"68d16e6e818758fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, \"homogeneous\"",
+   "results": "{\"t\": \"2026-10-24T09:39:13Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, \\\"homogeneous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LinearMap.toMvPolynomial_isHomogeneous\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\"], \"digest\": \"e835c5b623df672b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|[Bb]asis",
+   "results": "{\"t\": \"2026-10-24T09:39:13Z\", \"tool\": \"grep\", \"query\": \"homogeneous|[Bb]asis\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: free coefficient bases of SkewMonoidAlgebra do not give homogeneous module bases; the homogeneous-polynomial results and commutative graded modules use a different grading law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-vector-group-linearization",
+  "date": "2026-10-24",
+  "group": "Q113"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Linearization of split-torus actions on vector groups. Present split: Agent-formulated graded algebra input for the vector-group paragraph of Conrad--Lichtenstein, Linear Algebraic Groups I, Appendix D.3, proof of Theorem D.3.2, printed p.86 (the paragraph invoking CGP B.4.3). The ungraded freeness input is Milne Proposition 14.50, printed p.296; the homogeneous refinement is not asserted to be that proposition. WANTED locally: Conrad notes and CGP, Appendix B.4. No Stacks tag is asserted.",
+   "via": [
+    "lem-sfb-torus-vector-group-linearization",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-equivariant-frobenius-module-basis",
+  "worker": "stage1",
+  "summary": "Separated the weight-zero summand, reused existing imperfect-field skew-submodule freeness, formed the correctly k-spanned Frobenius quotient, and proved generation and finite-relation independence separately. Two proper algebraic prerequisites isolate weight-divisibility generation for arbitrary semilinear vector spaces and coefficient-field-embedding independence. Statement unchanged; no perfectness assumed.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability/_section.md and direct-images.proof.md, clause (3). Retained inherited null ancestor (blueprint_refs ancestor prints None) and its full supporting-input place. This split implements the homogeneous free-basis prerequisite of the vector-group paragraph in that existing deep ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-77ea9c1e0",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-77ea9c1e0 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the cited lem-sfb-frobenius-skew-free-submodules in full. Milne iAG2017 printed p.296 (PDF p.308) gives Prop 14.50, ungraded freeness for any k; the homogeneous refinement is correctly marked as an agent proof. Step 1: M_0 and N=⊕_{ν≠0}M_ν are A-submodules because pν≠0 for ν≠0; both are f.g. inside A^d, so the free-submodules node gives bases. Step 2: J=span_k F(N) is span{F^q e_i : q≥1}, has codimension r, and is graded; homogeneous lifts exist. Step 3: all hypotheses of dilating-weight-nakayama are met (V_0=0, Frobenius-semilinear, F(V_ν)⊆V_{pν}), and k-span of the F^q b_j is A-generation. Step 4: F in the A^d coordinates is the shift composed with coefficientwise Frobenius, which is injective, so the coefficient lemma applies. Step 5: the induction mod J plus step 4 gives independence; t+r=d follows from dim M/span F(M). Both new nodes are true and strictly smaller than the item. coefficient-endomorphism-preserves-independence: a nonzero minor stays nonzero since det σ(D)=σ(det D); tested on m=0 and on F_p(t), where v=(1,t),(t,1) maps to a matrix with determinant 1−t^{2p}≠0. dilating-weight-nakayama: induction on the finite p-divisibility height of ν≠0; V_0=0 is necessary. Mathlib map_of_injective_injectiveₛ and map_of_surjective_injectiveₛ (LinearIndependent/Basic.lean:107,122) need reverse compatibility or a surjective map, so neither is a leaf; all three search kinds are recorded. DAG search (graded-nakayama-connected, perfect-skew-cyclic-decomposition, invertible-relation-minor, others) found no duplicate. Same unit, no tool_uses, no SGA, no cycle. Inherited, not a delivery fault: no characteristic stmt_dep in the unchanged statement."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.TorusEquivariantFrobeniusModuleBasis",
+  "declaration": "SkewPolynomial.exists_homogeneous_basis_of_frobenius_weights",
+  "file": "lean/Sheaf/LinearAlgebra/TorusEquivariantFrobeniusModuleBasis.lean",
+  "statement": "theorem exists_homogeneous_basis_of_frobenius_weights {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] [MulSemiringAction (Multiplicative ℕ) k] (hφ : SkewPolynomial.φ (R := k) = frobenius k p) {M : Type v} [AddCommGroup M] [Module (SkewPolynomial k) M] (d s : ℕ) (hfree : Nonempty (M ≃ₗ[SkewPolynomial k] (Fin d → SkewPolynomial k))) (W : (Fin s → ℤ) → @Submodule k M _ _ (Module.compHom M SkewPolynomial.CRingHom)) (hW : DirectSum.IsInternal W) (hF : ∀ (ν : Fin s → ℤ) (m : M), m ∈ W ν → (SkewPolynomial.X : SkewPolynomial k) • m ∈ W (p • ν)) : ∃ (b : Module.Basis (Fin d) (SkewPolynomial k) M) (ν : Fin d → (Fin s → ℤ)), ∀ j : Fin d, b j ∈ W (ν j)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-842f1b99c",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Only the item lean field and the new module TorusEquivariantFrobeniusModuleBasis.lean are delivered; lean.statement occurs verbatim once in the file. Every clause matches: SkewPolynomial k with hφ : φ = frobenius k p fixes the multiplication (aF^r)(bF^t)=ab^{p^r}F^{r+t} via φ_iterate_apply and monomial_mul_monomial, so the action binder is uniquely determined and adds no assumption; M free of rank d as Nonempty (M ≃ₗ (Fin d → A)); weight spaces are k-subspaces under Module.compHom CRingHom; DirectSum.IsInternal gives existence and uniqueness of the decomposition; X • m ∈ W (p • ν); conclusion is a Basis (Fin d) with each b j ∈ W (ν j). Edge cases d=0, s=0, zero weights and imperfect k are covered with no extra hypotheses; universes u, v are independent. Only other project SkewPolynomial use is SkewPolynomialTwoSidedDivision, a different statement with the same encoding; sibling nodes have no lean record. Source and blueprint docstrings and the proof plan are present; no definitions, only sorry; stmt_deps def-weil-field is Mathlib Field. No file changed, so no recompile; the worker reports a clean server compile and dry-run OK."
+ }
+}

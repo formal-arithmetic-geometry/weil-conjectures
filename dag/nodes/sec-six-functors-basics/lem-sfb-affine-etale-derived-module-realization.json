@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-affine-etale-derived-module-realization",
+ "kind": "statement",
+ "title": "Affine small-etale realization of the unbounded module derived category",
+ "statement": "Let $A$ be a commutative ring and $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum], with small etale site and structure sheaf $\\mathcal O_U$ [def-weil-pbc-etale-site, def-trf-algebraic-space]. For an $A$-module $M$, let $a_A(M)$ be the associated etale module sheaf, obtained by Zariski tilde followed by the canonical ringed-site extension of [def-sfb-scheme-zariski-etale-module-constructions], whose value on an affine etale $\\operatorname{Spec}B\\to U$ is $B\\otimes_A M$. Work with module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category]. The functor $a_A$ is exact and faithful. Applied termwise it induces an equivalence\n$$a_A:D(A)\\xrightarrow{\\sim}D_{\\mathrm{QCoh}}(U_{\\mathrm{et}},\\mathcal O_U),$$\nwhere the right side is the full subcategory of complexes with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Its quasi-inverse is $R\\Gamma(U_{\\mathrm{et}},-)$, computed by a K-injective resolution [def-pur-kinjective-complex]. For every $E\\in D(A)$ and integer $i$ there is a natural isomorphism $\\mathcal H^i(a_A(E))\\cong a_A(H^i(E))$, and $\\Gamma(U_{\\mathrm{et}},a_A(M))\\cong M$ naturally in $M$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 071Q (lemma-derived-quasi-coherent-small-etale-site), composed with perfect.tex lemma-affine-compare-bounded (affine module equivalence); exactness from lemma-epsilon-flat and the affine associated-module functor."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-site",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-kinjective-complex",
+  "def-sfb-scheme-zariski-etale-module-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Put $T(M)=\\widetilde M$ on the Zariski site of $U$, and $L=\\epsilon_U^*$. By [lem-weil-pbc-spec-module-tilde-sections], $\\widetilde M$ is quasi-coherent, so the two lemmas below apply to it. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $LT(M)$ is the quasi-coherent etale sheaf $v:V\\to U\\mapsto\\Gamma(V,v^*\\widetilde M)$. For affine $V=\\operatorname{Spec}B$, [lem-weil-pbc-module-pullback-affine-sections] and the unit isomorphism of [lem-weil-pbc-affine-tilde-gamma-adjunction] identify this value naturally with $M\\otimes_A B$, or $B\\otimes_A M$ by the switch $m\\otimes b\\mapsto b\\otimes m$. The section formula sends $b\\otimes m$ to $b\\,v^*\\tau_U(m)$, so a further affine restriction sends it to $g^\\sharp(b)\\otimes m$. Thus this is precisely the associated sheaf $a_A(M)$ of the statement, including its module maps. At $V=U$ the same identifications give $\\Gamma(U_{\\mathrm{et}},a_A(M))\\cong\\Gamma(U,\\widetilde M)\\cong M$, naturally. If $a_A(f)=a_A(g)$, applying these section identifications gives $f=g$, proving faithfulness.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I9 (lemma-widetilde-pullback), 01HV (lemma-spec-sheaves); descent.tex Tags 03DX and 03FH"
+   }
+  },
+  {
+   "text": "By [lem-sc-tilde-preserves-finite-limits], $T$ preserves finite limits. By [lem-weil-pbc-affine-tilde-gamma-adjunction], it also preserves all small colimits, hence finite colimits. It is therefore exact. The pullback $L$ is exact by [lem-sfb-scheme-derived-etale-qcoh-comparison]. Since $a_A=LT$ by step 1, $a_A$ is exact as a functor to all etale module sheaves. This proves exactness in the ambient module category, rather than only in its quasi-coherent full subcategory.",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), last assertion; spaces-perfect.tex Tag 08H8 (lemma-epsilon-flat)"
+   }
+  },
+  {
+   "text": "For a complex $E$, exactness identifies $\\ker a_A(d^i)$ with $a_A(\\ker d^i)$ and $\\operatorname{im}a_A(d^{i-1})$ with $a_A(\\operatorname{im}d^{i-1})$. Taking the quotient gives $\\mathcal H^i(a_A(E))\\cong a_A(H^i(E))$. These identifications commute with complex maps because they are the kernel, image and quotient comparisons. Each resulting sheaf is quasi-coherent by step 1. The exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization] gives the termwise functor on the unbounded localizations. The displayed comparisons descend to natural isomorphisms there: both sides act on a roof by its two complex maps and the inverse of its quasi-isomorphism. This uses precisely the cohomology functors and localization in [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); cohomology as kernel modulo image and localization at quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-affine-qcoh-derived-equivalence] to $U=\\operatorname{Spec}A$. It gives $T_D:D(A)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{Zar}})$ by termwise $T$, with inverse $R\\Gamma_{\\mathrm{Zar}}$. Apply [lem-sfb-scheme-derived-etale-qcoh-comparison] to the same scheme. It gives $L_D:D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{Zar}})\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_{U,\\mathrm{et}})$ and identifies $R\\Gamma_{\\mathrm{et}}L_D$ naturally with $R\\Gamma_{\\mathrm{Zar}}$. Their composite $L_DT_D$ is the termwise functor $a_A$ of step 3, since both apply $LT$ to each term and differential. Its inverse $T_D^{-1}L_D^{-1}$ is $R\\Gamma_{\\mathrm{Zar}}L_D^{-1}\\cong R\\Gamma_{\\mathrm{et}}L_DL_D^{-1}\\cong R\\Gamma_{\\mathrm{et}}$; the last comparison is the counit of the second equivalence. Composing the units and counits of these two equivalences gives both inverse comparisons. All equivalences cited here are unbounded; no convergence assertion for a bounded-below spectral sequence is used.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0 (lemma-affine-compare-bounded); spaces-perfect.tex Tags 071Q (lemma-derived-quasi-coherent-small-etale-site) and 08GH (remark-match-total-direct-images)"
+   }
+  },
+  {
+   "text": "On the small etale ringed site, [prop-pur-kinjective-resolutions-exist] gives a K-injective resolution $K\\to I$ for every unbounded complex. Apply [lem-weil-pbc-kinjective-total-derived] to the functor on homotopy categories induced by $\\Gamma(U_{\\mathrm{et}},-)$ followed by localization to $D(A)$. It is exact on homotopy categories: sections is additive, so its termwise functor preserves shifts and mapping cones, whose terms use only finite direct sums. Thus $R\\Gamma(U_{\\mathrm{et}},K)$ is represented by the $A$-module complex $\\Gamma(U_{\\mathrm{et}},I)$, as claimed. The identification $\\Gamma(U_{\\mathrm{et}},\\mathcal O_U)=A$ is the case $M=A$ of step 1. This is the same total derived sections functor appearing in step 4, by the defining universal property of the right derived functor. Together with steps 1 and 3 this proves all remaining section and cohomology assertions.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 (section-unbounded), existence and computation of module-valued derived global sections; derived.tex Tag 070K (lemma-enough-K-injectives-implies)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 071Q and 08H8, composed with perfect.tex Tag 06Z0; affine description from schemes.tex Tags 01HV and 01I9; K-injective computation from sites-cohomology.tex Section 07A5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Dd]erived|[Dd]erived.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T09:33:52Z\", \"tool\": \"grep\", \"query\": \"[Ee]tale.*[Dd]erived|[Dd]erived.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary quasicoherent presentations, generic derived localizations and the affine Zariski sheaf equivalence, not the unbounded affine small-etale module equivalence.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine etale quasi coherent derived category equivalence with module complexes preserving cohomology",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"leansearch\", \"query\": \"Affine etale quasi coherent derived category equivalence with module complexes preserving cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"SheafOfModules.isQuasicoherent\", \"DerivedCategory\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"CategoryTheory.Equivalence.precoherent_isSheaf_iff\", \"DerivedCategory.isIso_Qh_map_iff\"], \"digest\": \"6e9188de5fdcf3e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary quasicoherent presentations, generic derived localizations and the affine Zariski sheaf equivalence, not the unbounded affine small-etale module equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, AlgebraicGeometry.Spec",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, AlgebraicGeometry.Spec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary quasicoherent presentations, generic derived localizations and the affine Zariski sheaf equivalence, not the unbounded affine small-etale module equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of modules over a ring is equivalent to complexes with quasi coherent cohomology on the small etale site of its affine spectrum",
+   "results": "{\"t\": \"2026-10-23T09:34:03Z\", \"tool\": \"leanfinder\", \"query\": \"The derived category of modules over a ring is equivalent to complexes with quasi coherent cohomology on the small etale site of its affine spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"DerivedCategory.Q\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.Qh\", \"DerivedCategory\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\"], \"digest\": \"2da7b2af11250923\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary quasicoherent presentations, generic derived localizations and the affine Zariski sheaf equivalence, not the unbounded affine small-etale module equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded complexes of quasi coherent modules on an affine scheme small etale site are realized by complexes of modules over its coordinate ring",
+   "results": "{\"t\": \"2026-10-23T09:34:03Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded complexes of quasi coherent modules on an affine scheme small etale site are realized by complexes of modules over its coordinate ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"2bb206779f5a55bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary quasicoherent presentations, generic derived localizations and the affine Zariski sheaf equivalence, not the unbounded affine small-etale module equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*derived|derived.*etale",
+   "results": "{\"t\": \"2026-10-23T11:18:16Z\", \"tool\": \"grep\", \"query\": \"etale.*derived|derived.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general derived localizations, ordinary affine Zariski sheaves or exact functors; none states the affine small-etale derived equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine small etale quasi coherent unbounded derived category equivalence with modules",
+   "results": "{\"t\": \"2026-10-23T11:18:16Z\", \"tool\": \"leansearch\", \"query\": \"Affine small etale quasi coherent unbounded derived category equivalence with modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"HasDerivedCategory\", \"SheafOfModules.isQuasicoherent\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"CategoryTheory.Abelian.Ext.homEquiv\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"DerivedCategory.instAdditiveHomotopyCategoryIntUpQh\", \"CategoryTheory.hasExt_of_hasDerivedCategory\"], \"digest\": \"9dcfae224c1f64bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general derived localizations, ordinary affine Zariski sheaves or exact functors; none states the affine small-etale derived equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, AlgebraicGeometry.Spec",
+   "results": "{\"t\": \"2026-10-23T11:18:16Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, AlgebraicGeometry.Spec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general derived localizations, ordinary affine Zariski sheaves or exact functors; none states the affine small-etale derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact associated module sheaf functor on an affine scheme preserves kernels and cohomology of complexes",
+   "results": "{\"t\": \"2026-10-23T11:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"Exact associated module sheaf functor on an affine scheme preserves kernels and cohomology of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"ModuleCat.localizedModule_functor_map_exact\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Functor.exact_tfae\", \"instAbelianLightCondMod\", \"instAbelianCondensedMod\", \"CategoryTheory.Functor.preservesHomology_of_map_exact\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"82d3ba713f5cd01b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general derived localizations, ordinary affine Zariski sheaves or exact functors; none states the affine small-etale derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of modules over a ring is equivalent to complexes with quasi coherent cohomology on its affine small etale site",
+   "results": "{\"t\": \"2026-10-23T11:18:18Z\", \"tool\": \"leanfinder\", \"query\": \"The derived category of modules over a ring is equivalent to complexes with quasi coherent cohomology on its affine small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory.Qh\", \"DerivedCategory.instEssSurjHomotopyCategoryIntUpQh\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.Q\", \"DerivedCategory.quotientCompQhIso\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"HasDerivedCategory.standard\"], \"digest\": \"e8dfb176dc1836dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general derived localizations, ordinary affine Zariski sheaves or exact functors; none states the affine small-etale derived equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded quasi coherent complexes on an affine scheme small etale site are realized by complexes of modules over its coordinate ring",
+   "results": "{\"t\": \"2026-10-23T11:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded quasi coherent complexes on an affine scheme small etale site are realized by complexes of modules over its coordinate ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.AffineCover.obj\", \"AlgebraicGeometry.Scheme.AffineCover.X\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"9e18bcf95ff7d2e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern general derived localizations, ordinary affine Zariski sheaves or exact functors; none states the affine small-etale derived equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-derived-internal-hom",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0S supplies coherence and lower boundedness of the internal Hom. Affine chart reduction: Tag 071Q (lemma-derived-quasi-coherent-small-etale-site), composed with perfect.tex lemma-affine-compare-bounded (affine module equivalence); exactness from lemma-epsilon-flat and the affine associated-module functor.",
+   "via": [
+    "lem-sfb-space-coherent-derived-internal-hom",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-etale-derived-module-realization",
+  "worker": "stage1",
+  "group": "Q65",
+  "summary": "Identified the associated etale functor with Zariski tilde followed by epsilon pullback; established section normalization, faithfulness, ambient exactness, natural cohomology and the unbounded equivalence using existing DAG statements. No new nodes.",
+  "blueprint": "The affine chart prerequisite of the coherent internal-Hom input on the existing det-thm-sf-ctf-stability-direct-images proof (3) ancestry. Latest blueprint direct-image proof (3) retains compactification/proper/open assembly; this is a generic algebraic tool beneath that route. The inherited from.node is null; tools/blueprint_refs.py ancestor also returns None, so its existing via chain and precise place are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic affine associated-sheaf, exact-functor, or K-injective tool used for the affine chart realization beneath this unit; it does not replace its direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine associated-sheaf, exact-functor, or K-injective tool used for the affine chart realization beneath this unit; it does not replace its direct-image route."
+   },
+   {
+    "node": "lem-sc-tilde-preserves-finite-limits",
+    "why": "Generic affine associated-sheaf, exact-functor, or K-injective tool used for the affine chart realization beneath this unit; it does not replace its direct-image route."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine associated-sheaf, exact-functor, or K-injective tool used for the affine chart realization beneath this unit; it does not replace its direct-image route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic affine associated-sheaf, exact-functor, or K-injective tool used for the affine chart realization beneath this unit; it does not replace its direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic affine associated-sheaf, exact-functor, or K-injective tool used for the affine chart realization beneath this unit; it does not replace its direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-20b198c52",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-20b198c52 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, and Stacks 071Q, 08H8 and 06Z0 in full. The statement is unchanged from Q47's unsplit node. There are no new nodes. The item's coefficient category (O_U-modules on the small étale site, unbounded D(A)) matches 06Z0 composed with 071Q. Steps 2-5 are correct: (2) tilde is exact by its finite-limit lemma and the adjunction's colimit clause, and ε^* is exact; (3) the exact-functor factorization gives the cohomology isomorphism; (4) the 06Z0 node composed with the scheme étale/Zariski comparison gives the equivalence, and that node's own clause on derived global sections gives the inverse; (5) K-injective resolutions exist on the small étale ringed site and compute the derived functor. FIX: step 1 applied the trf 03DX equivalence and the affine pullback-sections lemma to M~ without a citation that M~ is quasi-coherent. I added the Mathlib leaf lem-weil-pbc-spec-module-tilde-sections, which states it, to step 1's text, uses and proof_deps. No duplicate exists: lem-sfb-derived-etale-zariski-equivalence and lem-sfb-scheme-derived-etale-qcoh-comparison are general scheme comparisons with no affine D(A) clause. The six tool_uses are generic tools, used as black boxes, and are accepted. Batch-5 check: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (Stacks 03DX/03LC) is general descent theory. Its closure reaches only sk-i-curve-zero quasi-coherent helpers and no trace-formula, Poincaré-duality or nt-assume node, so it is outside both assumptions and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleDerivedModuleRealization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineEtaleDerivedModuleRealization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineEtaleAssociatedFunctor",
+   "AlgebraicGeometry.Scheme.Modules.affineEtaleGlobalSections",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleDerivedQCohProperty",
+   "AlgebraicGeometry.Scheme.Modules.exists_affineEtaleDerivedModuleRealization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleDerivedModuleRealization.lean",
+  "statement": "theorem exists_affineEtaleDerivedModuleRealization (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wE} (SmallEtaleModules (Spec (.of A)))] : ∃ c : ZariskiEtaleModuleContext (Spec (.of A)), ∃ (_ha : (affineEtaleAssociatedFunctor A c).Additive) (_hg : (affineEtaleGlobalSections A c).Additive), PreservesFiniteLimits (affineEtaleAssociatedFunctor A c) ∧ PreservesFiniteColimits (affineEtaleAssociatedFunctor A c) ∧ (affineEtaleAssociatedFunctor A c).Faithful ∧ ∃ e : DerivedCategory (ModuleCat.{u} A) ≌ (smallEtaleDerivedQCohProperty (Spec (.of A))).FullSubcategory, Nonempty (DerivedCategory.Q ⋙ e.functor ⋙ (smallEtaleDerivedQCohProperty (Spec (.of A))).ι ≅ (affineEtaleAssociatedFunctor A c).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ (∃ (RG : DerivedCategory (SmallEtaleModules (Spec (.of A))) ⥤ DerivedCategory (ModuleCat.{u} A)) (η : (affineEtaleGlobalSections A c).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RG), (∀ G : DerivedCategory (SmallEtaleModules (Spec (.of A))) ⥤ DerivedCategory (ModuleCat.{u} A), Function.Bijective (fun β : RG ⟶ G ↦ η ≫ Functor.whiskerLeft DerivedCategory.Qh β)) ∧ (∀ I : CochainComplex (SmallEtaleModules (Spec (.of A))) ℤ, I.IsKInjective → IsIso (η.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))) ∧ (∀ K : CochainComplex (SmallEtaleModules (Spec (.of A))) ℤ, ∃ (I : CochainComplex (SmallEtaleModules (Spec (.of A))) ℤ) (f : K ⟶ I), I.IsKInjective ∧ QuasiIso f ∧ Nonempty (RG.obj (DerivedCategory.Q.obj K) ≅ DerivedCategory.Q.obj (((affineEtaleGlobalSections A c).mapHomologicalComplex (ComplexShape.up ℤ)).obj I))) ∧ Nonempty (e.inverse ≅ (smallEtaleDerivedQCohProperty (Spec (.of A))).ι ⋙ RG)) ∧ (∀ i : ℤ, Nonempty (e.functor ⋙ (smallEtaleDerivedQCohProperty (Spec (.of A))).ι ⋙ DerivedCategory.homologyFunctor (SmallEtaleModules (Spec (.of A))) i ≅ DerivedCategory.homologyFunctor (ModuleCat.{u} A) i ⋙ affineEtaleAssociatedFunctor A c)) ∧ Nonempty (affineEtaleAssociatedFunctor A c ⋙ affineEtaleGlobalSections A c ≅ 𝟭 (ModuleCat.{u} A))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The associated functor is the existing canonical ringed-site extension composed with Mathlib tilde; the context carries only proofs. Global sections is open restriction followed by moduleSpecΓFunctor. The full subcategory uses the existing IsQuasicoherent predicate on all cohomology objects. The theorem includes exactness, faithfulness, termwise factorization, the unbounded equivalence, the right-derived universal property, K-injective computation, and both natural cohomology/section comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3bb379d73",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of eca1a946. Item Lean byte-identical (sha256 938ed7fe…), so the prior full maths check holds: canonical a_A = tilde ⋙ canonical extension, exact and faithful, e pinned termwise, D_QCoh with IsQuasicoherent cohomology in all degrees, RΓ by its universal property plus K-injective computation, e.inverse ≅ ι ⋙ RG, natural H^i, a ⋙ Γ ≅ 𝟭, A=0 allowed, wA/wE independent. stmt_deps: theorem lem-trf-scheme-zariski-etale-quasi-coherent-equivalence replaced by new existing:true def-sfb-scheme-zariski-etale-module-constructions; theorem kept in proof_deps and step 1. The new node's statement matches the landed decls (regular-function ring presheaf/sheaf, SheafOfModules category, gabberOpenEtale ring map, pushforward restriction, SheafOfModules.pullback extension, two-Prop-field context) and Stacks 03DU/03FH/0GN7; stmt_deps exist; no concurrent owner in side-live. statement_change is citation-only; 6-citer audit complete (a 7th node mentioning the item cites it in neither stmt_deps nor proof_deps). Advisory: the node omits isSheaf/adjunction decls, which the item does not use and the trf theorem node still owns. No fixes, no compile.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "Q128 stage 2",
+  "old_statement": "Let $A$ be a commutative ring and $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum], with small etale site and structure sheaf $\\mathcal O_U$ [def-weil-pbc-etale-site, def-trf-algebraic-space]. For an $A$-module $M$, let $a_A(M)$ be the associated etale module sheaf, whose value on an affine etale $\\operatorname{Spec}B\\to U$ is $B\\otimes_A M$. Work with module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category]. The functor $a_A$ is exact and faithful. Applied termwise it induces an equivalence\n$$a_A:D(A)\\xrightarrow{\\sim}D_{\\mathrm{QCoh}}(U_{\\mathrm{et}},\\mathcal O_U),$$\nwhere the right side is the full subcategory of complexes with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Its quasi-inverse is $R\\Gamma(U_{\\mathrm{et}},-)$, computed by a K-injective resolution [def-pur-kinjective-complex]. For every $E\\in D(A)$ and integer $i$ there is a natural isomorphism $\\mathcal H^i(a_A(E))\\cong a_A(H^i(E))$, and $\\Gamma(U_{\\mathrm{et}},a_A(M))\\cong M$ naturally in $M$.",
+  "what": "Returned H2: the prior packet added a theorem to stmt_deps merely to access plain definitions in its module, without choosing that theorem's witness. The associated functor is already the canonical ringed-site extension after tilde. Explicitly cite a new existing:true definition node owning these constructions; retain the comparison theorem solely in proof_deps and proof step 1. This is a citation and construction clarification with no mathematical change.",
+  "source": {
+   "document": "literature/stacks-project/descent.tex",
+   "place": "Tags 03DU (definition-structure-sheaf), 03FH (remark-change-topologies-ringed-sites), and 0GN7 (lemma-fully-faithful-associated, restriction description in its proof)"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-affine-etale-derived-hom-realization",
+    "holds": true,
+    "note": "Only the existing canonical construction underlying a_A is now cited through its definition node; the exact functor, equivalence and all comparisons used here are unchanged."
+   },
+   {
+    "id": "lem-sfb-proper-flat-space-derived-duality",
+    "holds": true,
+    "note": "Only the existing canonical construction underlying a_A is now cited through its definition node; the exact functor, equivalence and all comparisons used here are unchanged."
+   },
+   {
+    "id": "lem-sfb-affine-adjoint-unit-properties",
+    "holds": true,
+    "note": "Only the existing canonical construction underlying a_A is now cited through its definition node; the exact functor, equivalence and all comparisons used here are unchanged."
+   },
+   {
+    "id": "lem-sfb-space-coherent-derived-internal-hom",
+    "holds": true,
+    "note": "Only the existing canonical construction underlying a_A is now cited through its definition node; the exact functor, equivalence and all comparisons used here are unchanged."
+   },
+   {
+    "id": "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "holds": true,
+    "note": "Only the existing canonical construction underlying a_A is now cited through its definition node; the exact functor, equivalence and all comparisons used here are unchanged."
+   },
+   {
+    "id": "lem-sfb-space-affine-derived-projection-formula",
+    "holds": true,
+    "note": "Uses exactness, the affine derived equivalence, derived sections and the associated-module tensor dictionary; these are unchanged by the definition-node citation."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-affine-spectrum",
+   "def-weil-pbc-etale-site",
+   "def-trf-algebraic-space",
+   "def-weil-sheaf-of-modules-category",
+   "def-weil-abstract-derived-category",
+   "def-trf-space-quasi-coherent-module",
+   "def-pur-kinjective-complex"
+  ]
+ }
+}

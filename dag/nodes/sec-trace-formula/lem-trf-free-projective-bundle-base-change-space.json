@@ -1,0 +1,291 @@
+{
+ "id": "lem-trf-free-projective-bundle-base-change-space",
+ "kind": "statement",
+ "title": "Free projective bundle agrees with base-change projective space",
+ "statement": "Let $S$ be any scheme [def-pc-scheme] and $r\\geq0$ an integer. Let $F=\\mathcal O_S^{\\oplus(r+1)}$ with ordered basis $e_0,\\ldots,e_r$, and let $\\mathcal B=\\operatorname{Sym}_{\\mathcal O_S}(F)$ be its quasi-coherent symmetric algebra sheaf [lem-weil-pbc-quasi-coherent-symmetric-algebra], with symmetric grading [lem-weil-pbc-symmetric-algebra-graded]. Write\n$$p:\\operatorname{Proj}_S(\\mathcal B)\\longrightarrow S$$\nfor relative Proj [def-nagata-relative-proj], equivalently the relative projective-space interface [def-nagata-relative-projective-space], and write\n$$q:\\mathbf P(\\{0,\\ldots,r\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}\\mathbf Z[T_0,\\ldots,T_r]\\longrightarrow S$$\nfor the base-change projective space [def-nagata-projective-space-base-change, def-pc-fibre-product], with each $T_i$ of total degree one. There is a canonical scheme isomorphism\n$$\\theta:\\operatorname{Proj}_S(\\mathcal B)\\xrightarrow{\\sim}\\mathbf P(\\{0,\\ldots,r\\};S),\\qquad q\\circ\\theta=p.$$\nFor every affine open $U=\\operatorname{Spec}R\\subseteq S$, its restriction, under the relative-Proj affine identifications, is the Proj comparison induced by the graded $R$-algebra isomorphism $\\operatorname{Sym}_R(R^{\\oplus(r+1)})\\cong R[T_0,\\ldots,T_r]$ sending $\\iota(e_i)$ to $T_i$. These local comparisons agree with restriction on the base, whose polynomial coefficient maps fix every $T_i$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NF (definition-projective-space), following paragraph identifying base-change projective space with relative Proj; Tag 01O3 (lemma-relative-proj-base-change). Applied to the symmetric algebra of the standard free module, the identification in Morphisms Tag 087S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-nagata-relative-proj",
+  "def-nagata-relative-projective-space",
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the already constructed affinePolynomialEquiv and affinePolynomial_homogeneous of [def-nagata-relative-projective-space]. Reindex its variables by ULift to obtain the graded R-algebra isomorphism R[T_i] ≅ C_V for R = Γ(V, O_S). Each total-degree-n polynomial submodule is the R-span of coefficient extensions of integral degree-n polynomials: the monomial basis has monomials with coefficient 1, all of which lift. Transport this span equality through the polynomial isomorphism. Thus integralPolynomialMap preserves degrees, its images span each degree, and the positive-degree span implies the irrelevant-ideal condition. All algebraic span and substitution assertions are proved here from Mathlib polynomial and submodule lemmas.",
+   "uses": [
+    "def-nagata-relative-projective-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF (definition-projective-space), following paragraph; Tag 01O3 (lemma-relative-proj-base-change), affine construction via Tag 01N2 (lemma-base-change-map-proj)"
+   }
+  },
+  {
+   "text": "Construct β : R ⊗_Z Z[T_i] ≅ C_V by MvPolynomial.algebraTensorAlgEquiv followed by the preceding polynomial isomorphism. Its pure-tensor formula gives β(1 ⊗ a) = ψ_V(a). Apply [lem-nagata-affine-proj-scalar-extension] with the polynomial grading, the section grading as submodules, the coefficient-to-degree-zero maps, β, ψ_V, and the homogeneous span equality. Its uniqueness clause identifies its comparison with Proj.map ψ_V via Proj.map_preimage_basicOpen and Proj.awayι_comp_map. The canonical gradeIso in [def-nagata-relative-proj] changes back to the subgroup grading, and the affine-base and terminal-object isomorphisms give a cartesian square with projections integralMap and localBase. No flatness or nonzero-ring hypothesis is used.",
+   "uses": [
+    "def-nagata-relative-proj",
+    "lem-nagata-affine-proj-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF (definition-projective-space), following paragraph; Tag 01O3 (lemma-relative-proj-base-change), affine construction via Tag 01N2 (lemma-base-change-map-proj)"
+   }
+  },
+  {
+   "text": "The standard free-basis inclusions and the symmetric-algebra inclusion in [def-nagata-relative-projective-space] are sheaf morphisms. Their naturality at 1 proves restriction of each coordinate. Naturality of the algebra unit proves restriction of coefficients. Polynomial ring-homomorphism extensionality therefore proves polynomial_restrict. Apply this calculation to integral coefficients and variables to get equality of the graded maps after restriction, and use Proj.map_comp to obtain integralMap_restrict. This is equality of the full scheme morphisms, hence also gives equality on their homogeneous-localization charts.",
+   "uses": [
+    "def-nagata-relative-projective-space",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF (definition-projective-space), following paragraph; Tag 01O3 (lemma-relative-proj-base-change), affine construction via Tag 01N2 (lemma-base-change-map-proj)"
+   }
+  },
+  {
+   "text": "For every affine V, pair its structural map to S with integralMap, after gradeIso, using [def-pc-fibre-product] to obtain comparisonChart into [def-nagata-projective-space-base-change]. Pullback pasting with the cartesian square from step 2 proves that this chart is the inverse image of V. Both projections commute with further affine restriction by step 3 and the relative-Proj grading comparison. Apply relProjIsoOfIsPullback and relProjIsoOfIsPullback_hom_comp of [lemma-nagata-relative-proj-exists] to obtain θ and qθ = π. Its chart equation, together with restriction_ι of [def-nagata-relative-proj], shows affineToIntegral θ V = integralMap V. This proves the normalization and both restriction clauses. The cited universal property already performs the affine-refinement gluing and the inverse construction; no assumption on affine intersections or finiteness is added.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-nagata-projective-space-base-change",
+    "def-nagata-relative-proj",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF (definition-projective-space), following paragraph; Tag 01O3 (lemma-relative-proj-base-change), affine construction via Tag 01N2 (lemma-base-change-map-proj)"
+   }
+  },
+  {
+   "text": "For any other normalized θ′, the structural projections agree by their structure equations. The integral projections agree after every affine chart: the normalization fixes the underlying ring homomorphism to integralPolynomialMap, graded-ring-homomorphism extensionality fixes its graded map, and Proj.map_congr fixes its Proj morphism. Use the relative-Proj colimit characterization of [lemma-nagata-relative-proj-exists] to get equality of the global integral projections. Fibre-product hom_ext from [def-pc-fibre-product] gives equality of the hom maps and Iso.ext gives θ′ = θ.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NF (definition-projective-space), following paragraph; Tag 01O3 (lemma-relative-proj-base-change), affine construction via Tag 01N2 (lemma-base-change-map-proj)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-proj",
+  "def-nagata-relative-projective-space",
+  "def-pc-fibre-product",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NF (definition-projective-space), following paragraph; Tag 01O3 (lemma-relative-proj-base-change), affine construction via Tag 01N2 (lemma-base-change-map-proj)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Proj of the symmetric algebra sheaf of a finite free module on a scheme is canonically isomorphic over the scheme to projective space defined by base change from Spec integers",
+   "results": "8 hits; top results: AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|relativeProj|relProj",
+   "results": "0 hits; top results: . Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, MvPolynomial",
+   "results": "0 hits; top results: . Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveSpace|projectiveSpace|projectiveBundle|projectiveBundle",
+   "results": "0 hits; top results: . Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Proj of the symmetric algebra of a finite free sheaf is projective space obtained by base change from the integers",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projectivization of the trivial vector bundle O_S to the power n plus one is the product over Spec Z of S with Proj Z[X_0,...,X_n]",
+   "results": "8 hits; top results: AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeProj|RelativeProj|SymmetricAlgebra",
+   "results": "Hits: ; no matching declaration",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projectivization of the trivial vector bundle is projective space over any scheme",
+   "results": "Hits: Projectivization, LinearAlgebra.Projectivization.termℙ, Projectivization.Subspace, Projectivization.rep, Projectivization.mk'', Projectivization.ind, Projectivization.Subspace.noConfusionType, Projectivization.mk'; algebraic Proj/chart results or linear-algebra projectivization, none states this relative symmetric-sheaf comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, MvPolynomial",
+   "results": "Hits: ; no matching declaration",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Proj of the symmetric algebra of a finite free sheaf is projective space defined by base change from the integers",
+   "results": "Hits: AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; algebraic Proj/chart results or linear-algebra projectivization, none states this relative symmetric-sheaf comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveSpace|ProjectiveSpace|projectiveBundle|relative.proj",
+   "results": "Hits: ; no matching declaration",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between projective space over a scheme and the relative Proj of its polynomial algebra sheaf",
+   "results": "Hits: AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec, AlgebraicGeometry.Proj.basicOpenIsoSpec; algebraic Proj/chart results or linear-algebra projectivization, none states this relative symmetric-sheaf comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-bundle-global-generated-h-projective",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting projective-bundle argument below lem-trf-local-term-locality, through lem-trf-projective-bundle-global-generated-h-projective: Tag 087S equality P(O_S^{r+1}) = P^r_S in the finite-global-generators paragraph (returned proof Step 3, integral polynomial model and coefficientwise base change).",
+   "via": [
+    "lem-trf-projective-bundle-global-generated-h-projective",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-projective-bundle-base-change-space",
+  "worker": "stage1",
+  "summary": "Q154 return repair: revalidated the preserved five-step proof and every cited statement against the current live DAG after the side-completion promotion refusal. The item remains unsplit in the current read clone; delivery overlays its split fields on current sheaf-dag and preserves maintainer fields. Made the finite-free affine section identification and the standard-coordinate Proj covering argument explicit, and checked the glued map is over Spec Z. Statement, dependency sets, blueprint route and all logged searches retained; no new nodes.",
+  "blueprint": "Realizes the supporting projective-bundle equality in Tag 087S below lem-trf-local-term-locality, through lem-trf-projective-bundle-global-generated-h-projective, step 3. Steps 1-3 construct its integral polynomial comparison; steps 4-5 prove restriction compatibility and assemble the canonical isomorphism. The current main-20261015 ancestor proof is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Affine-section identification and quasi-coherence of the symmetric algebra; a generic algebra-sheaf tool not supplied by this trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "why": "Standard-basis algebra isomorphism over each affine base; a generic commutative algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Symmetric degree is spanned by products of degree-one generators, used to check grading; a generic algebra tool."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "The affine cartesian Proj comparison including explicit homogeneous-localization formulas; it supplies the local geometric comparison used in Tag 01O3."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Compatible affine restriction isomorphisms of the relative Proj construction; a generic scheme construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Existence and uniqueness for gluing scheme morphisms and inverse maps; a generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine refinements of possibly nonaffine intersections; a generic scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-nagata-affine-proj-scalar-extension",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-773ab1a62",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-773ab1a62 (reviewer sub-agent of L); spot-checked: This is the second delivery of a split that a reader passed earlier. The first head (dee434a3054, PASS 2026-10-22) was refused at landing because of side-DAG promotion, not for any mathematical fault. The item is still unsplit in both clones/live and clones/side-live, and there is no repair note. The delivery has one commit and no new nodes; the statement and stmt_deps are byte-identical to the live node, and there is no SGA. Compared with the previous head, only steps 1 and 4 changed, and both changes are correct elementary expansions. Step 1 now says F(U)=R^{⊕(r+1)}. Step 4 replaces the loose cover remark with an explicit argument: a homogeneous prime containing every j_F(e_i)|_V contains C_V^+, so it is not a point of Proj. Step 4 also checks that the glued h lies over Spec Z. So this is not an unchanged re-push. The statement is true for any S and r≥0. It matches Stacks 01NF (constructions.tex l.2819) and its following paragraph via 01O3 (l.4081), which reduces to 01N2 (l.2245). The edge cases r=0, empty S, the zero ring and a non-separated base all hold. Step 1: clause (b) of quasi-coherent-symmetric-algebra and free-module-polynomial give α_U. α_U is graded by symmetric-algebra-graded, and restriction acts on coefficients because j_F is a sheaf map. Step 2: the isomorphism R⊗_Z Z[T]≅R[T] is written with both inverses. Step 3: affine-proj-scalar-extension applies with (Z,O(U),P,C_U,β_U) and needs no flatness. It gives the cartesian square, i_U comes from the relative-Proj definition and existence nodes, and the factorization through the open subscheme is written out. Step 4: the overlap maps induced by C_U→C_V turn r_{ψ_U} into r_{ψ_V} on the D_+(T_i) charts. The charts cover, overlaps are refined by affine opens, h glues, θ=(p,h) and qθ=p. Step 5: the inverses glue and θ is an isomorphism; the affine clause and the restriction compatibility follow. I read all 11 proof_deps and the stmt_deps; each states what is used, and nothing is taken from another node's proof. Every bracket citation equals its step's uses, and proof_deps equals their union. One advisory point: def-weil-open-immersion is in step 3's uses but is not bracket-cited in the text. The 7 declared tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeProjectiveBundleBaseChangeSpace",
+  "declaration": "AlgebraicGeometry.RelativeProjectiveSpace.existsUnique_freeProjectiveBundleBaseChangeSpace",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjectiveSpace.integralPolynomialMap",
+   "AlgebraicGeometry.RelativeProjectiveSpace.IsIntegralProjComparison",
+   "AlgebraicGeometry.RelativeProjectiveSpace.affineToIntegral",
+   "AlgebraicGeometry.RelativeProjectiveSpace.existsUnique_freeProjectiveBundleBaseChangeSpace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeProjectiveBundleBaseChangeSpace.lean",
+  "statement": "theorem existsUnique_freeProjectiveBundleBaseChangeSpace (S : Scheme.{u}) (r : ℕ) : ∃! θ : scheme S r ≅ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S, (θ.hom ≫ ProjectiveSpace (ULift.{u} (Fin (r + 1))) S ↘ S = π S r) ∧ (∀ V : S.affineOpens, IsIntegralProjComparison S r V (affineToIntegral S r θ V)) ∧ (∀ (V W : S.affineOpens) (h : W ≤ V), (algebra S r).localTransition h ≫ affineToIntegral S r θ V = affineToIntegral S r θ W) ∧ (∀ (V W : S.affineOpens) (h : W ≤ V) (p : MvPolynomial (Fin (r + 1)) (S.presheaf.obj (op V.1))), (algebra S r).restriction h (affinePolynomialEquiv S r V p) = affinePolynomialEquiv S r W (MvPolynomial.map (S.presheaf.map (homOfLE (X := S.Opens) h).op).hom p))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5aa9c78ff",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: S:Scheme.{u}, r:ℕ, no extra hypotheses; source scheme S r/π S r (relative projective-space interface), target ProjectiveSpace (ULift (Fin (r+1))) S; ∃! θ with θ.hom ≫ ↘S = π; every affine V: restrictionIso.inv ≫ ι ≫ θ.hom ≫ toProjInt = Proj.map ψ with ψ.toRingHom = integralPolynomialMap (T_i ↦ coordinate V i = j_F(e_i), via the recorded affinePolynomialEquiv); the V-component is fixed by clause 1 + restriction_over, so uniqueness holds; polynomial restriction clause = MvPolynomial.map. Directions of Proj.map, localTransition and restriction checked. Only the lean field differs from live, other snapshot nodes byte-identical, lean.statement verbatim, imports exist, helpers concrete, single sorry, docstrings with source/blueprint/5 steps. Edge cases r=0, empty S, zero ring, non-separated fine. Advisory: localTransition clause follows from RelativeProjData.restriction_compatibility for any θ (faithful rendering, not hollow); the second reading is a worker self-check. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T091932-L-3387855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

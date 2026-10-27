@@ -1,0 +1,369 @@
+{
+ "id": "lem-sfb-residual-root-tower-local-charts",
+ "kind": "statement",
+ "title": "Local active-parameter presentations of residual full root towers",
+ "statement": "Let $p$ be prime, $k$ a characteristic-$p$ field, $Y$ a regular separated finite-type $k$-scheme [def-weil-regular-scheme], and $B=\\operatorname{Spec}A\\to Y$ an affine etale chart [def-weil-etale-morphism]. Suppose $t_1,\\ldots,t_r\\in A$ cut out precisely the distinct reduced irreducible branches of a strict normal crossings boundary [def-trf-strict-normal-crossings-boundary]. Let $U=\\operatorname{Spec}R\\to B$ be affine pro-etale [def-weil-pbc-proetale-site]. For $J\\subseteq\\{1,\\ldots,r\\}$ put $B_J=\\operatorname{Spec}(A/(t_j)_{j\\in J})$ and $R_J=R/(t_j)_{j\\in J}$. Set\n$$T_J=\\operatorname{Spec}\\left(\\varinjlim_{(n,p)=1}R_J[x_{d,n}]_{d\\notin J}/(x_{d,n}^n-\\bar t_d)_{d\\notin J}\\right),$$\nusing the full parameter-root algebra [def-sfb-full-parameter-root-tower], with positive indices ordered by divisibility and power transitions.\nThen $B$ and $B_J$ are regular, separated and finite type over $k$. $B_J$ has an affine open cover $W=\\operatorname{Spec}A_W$ with a subset $L\\subseteq J^c$ for each $W$, such that $\\bar t_d$ is a unit on $W$ for $d\\notin J\\cup L$, and the subschemes $V(\\bar t_d)$, $d\\in L$, are precisely the distinct reduced integral branches of a strict normal crossings boundary on $W$. The vanishing parameters at every point of $W$ occupy distinct positions in a regular system of parameters [def-weil-pbc-regular-system-of-parameters].\nWrite $R_W=R_J\\otimes_{A/(t_j)}A_W$ and\n$$D_W=\\varinjlim_{(n,p)=1}R_W[y_{d,n}]_{d\\notin J\\cup L}/(y_{d,n}^n-\\bar t_d)_{d\\notin J\\cup L}.$$\nThe map $\\operatorname{Spec}D_W\\to W$ is affine pro-etale, and there is a canonical isomorphism\n$$T_J\\times_{B_J}W\\ \\cong\\ \\operatorname{Spec}\\left(\\varinjlim_{(n,p)=1}D_W[z_{d,n}]_{d\\in L}/(z_{d,n}^n-\\bar t_d)_{d\\in L}\\right).$$\nIt fixes coefficients, sends each inactive root to the corresponding $y_{d,n}$ and each active root to $z_{d,n}$, and respects every divisibility transition. For every $A_o\\subseteq J^c$, it identifies the open inverting $\\prod_{d\\in A_o}\\bar t_d$ with the open inverting $\\prod_{d\\in A_o\\cap L}\\bar t_d$ [def-weil-ring-localization-away]. These identifications commute with ring base change. They hold also after replacing $U$ by $U[P]$ for any profinite $P$ [def-sfb-profinite-test-objects]. Empty faces, charts and parameter sets are allowed; no connectedness of $B_J$ is required.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 0BIA, lemma-strict-normal-crossings, its local-parameter and regular-intersection argument; agent geometric extension to residual full root towers for main-20261015 direct-images paragraph (3). Unit-root etaleness is the standard-etale criterion, Tags 00UB and 00UC, in algebra.tex, definition-standard-etale and lemma-standard-etale."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-etale-morphism",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-full-parameter-root-tower",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-ring-localization-away",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-full-root-coefficient-change"
+ ],
+ "proof": [
+  {
+   "text": "First check the finiteness assertions for the base. Since $B$ is affine and $Y$ is separated, hence quasi-separated, the qcqs permanence lemma makes $B\\to Y$ quasi-compact. The etale finite-presentation lemma therefore gives that $B$ is finite type over $k$. Both $B$ and $B_J$ are affine, hence separated over $k$. If $A$ is generated over $k$ by $a_1,\\ldots,a_m$, their quotient classes generate $A/(t_j:j\\in J)$, proving finite type for $B_J$ directly. The boundary definition, including its empty-intersection clause, gives regularity of $B$ and of the scheme-theoretic intersection $B_J$. No connectedness of this intersection is used.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-kun-etale-lfp",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-finite-type-morphism",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 03GI and 01KN; etale finite-type consequence; Tag 0BIA in etale.tex for regular intersections"
+   }
+  },
+  {
+   "text": "We need the named equations, not just unnamed parameters. Fix $x\\in B$, put $H=\\mathcal O_{B,x}$ and $S_x=\\{d:t_d(x)=0\\}$. The ideals $(t_d)$ in $H$, $d\\in S_x$, are distinct primes: the branches are reduced integral closed subschemes, and distinct branches through $x$ remain distinct after localization. The boundary definition gives regular singleton quotients of codimension one and a regular quotient by their sum of codimension $|S_x|$. Part (a) of the transverse-prime parameter lemma supplies a parameter system $f_1,\\ldots,f_h$ with $(f_i)=(t_{d_i})$. Since $H$ is a domain (the regular-normal lemma) and both generators are nonzero, $t_{d_i}=u_i f_i$ for a unit $u_i$: write $t_{d_i}=a_i f_i$, $f_i=b_i t_{d_i}$ and cancel to obtain $a_i b_i=1$. Scaling the first parameters by these units preserves their generated maximal ideal. Thus the actual vanishing $t_d$ occupy distinct positions in a parameter system.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-sfb-transverse-prime-ideal-parameters",
+    "rem-pc-regular-normal",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA, converse proof, simultaneous branch equations; parameter lemma part (a)"
+   }
+  },
+  {
+   "text": "Let $x\\in B_J$ correspond to a prime $\\mathfrak p\\subset A$ containing every $t_j$, $j\\in J$. By quotient-localization its local ring is $A_{\\mathfrak p}/(t_j:j\\in J)$. In the system of step 2 permute the parameters indexed by $J$ to the beginning. The parameter-quotient theorem says this quotient is regular local of dimension $\\dim A_{\\mathfrak p}-|J|$. The images of the remaining parameters generate its maximal ideal and their number equals its dimension, so they form a parameter system by definition. Every original parameter not vanishing at $x$ is already a unit in $A_{\\mathfrak p}$ and stays a unit in the quotient. In particular the images of the remaining vanishing labels occupy distinct positions in a residual parameter system at every point.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient) and Tag 00NQ (lemma-regular-ring-CM)"
+   }
+  },
+  {
+   "text": "Put $A'=A/(t_j:j\\in J)$ and $F=\\prod_{d\\notin J}\\bar t_d$. The ring $A'$ is Noetherian since $B_J$ is regular affine, by the affine-open Noetherian lemma. At each point, step 3 writes $F$ as a unit times a product of distinct residual parameters; absorb that unit into one factor when there is a factor, and use the unit ideal when there is none. The boundary-parameter criterion applied to $V(F)\\subset B_J$ shows that this is a reduced strict normal crossings boundary. Its labels may be disconnected or reducible. The labelled-root geometry lemma explicitly permits such labels and applies by step 3: for each $x\\in B_J$ it supplies an affine neighbourhood $W$ and $L=\\{d\\notin J:\\bar t_d(x)=0\\}$ with all inactive labels units, and with the active labelled zero schemes precisely distinct reduced integral branches on $W$. These neighbourhoods cover $B_J$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sfb-snc-boundary-parameter-criterion",
+    "lem-sfb-snc-labelled-root-algebra-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA; labelled finite-root geometry, local active/inactive neighbourhood clause"
+   }
+  },
+  {
+   "text": "Fix such a $W$ and set $K=J^c\\setminus L$. The ring $R_W$ represents the base change $U\\times_B W$: the affine fibre-product formula identifies it with $R\\otimes_A A_W$, since $A\\to A_W$ kills $(t_j:j\\in J)$. Thus $\\operatorname{Spec}R_W\\to W$ is weakly etale by base change from $U\\to B$. For each positive prime-to-$p$ integer $n$, put $E_n=R_W[y_{d,n}:d\\in K]/(y_{d,n}^n-\\bar t_d)$. Every $\\bar t_d$, $d\\in K$, is a unit, and $n$ is a unit because Bezout gives integers $a,b$ with $an+bp=1$ and $p=0$ in $R_W$. Adjoin the finitely many $y_{d,n}$ successively. The unit-binomial lemma makes each adjunction finite etale, hence ind-etale. Ind-etale stability makes $R_W\\to E_n$ ind-etale and then $R_W\\to D_W=\\varinjlim_nE_n$ ind-etale, hence weakly etale. Compose with $\\operatorname{Spec}R_W\\to W$. Since both spectra are affine the resulting morphism is affine. This proves the required affine pro-etale assertion in the weakly etale convention of the stated site.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-sfb-unit-binomial-finite-etale",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 097J, 097K, 097L and 097N; etale-cohomology.tex Tag 03PL, unit-root algebra"
+   }
+  },
+  {
+   "text": "The root-tower base-change lemma and the affine fibre-product formula identify $T_J\\times_{B_J}W$ with the spectrum of $H=\\varinjlim_n R_W[x_{d,n}:d\\in J^c]/(x_{d,n}^n-\\bar t_d)$. Let $G=\\varinjlim_nD_W[z_{d,n}:d\\in L]/(z_{d,n}^n-\\bar t_d)$. Construct a homomorphism $H\\to G$ by fixing $R_W$, sending $x_{d,n}$ to $y_{d,n}\\in D_W$ for $d\\in K$ and to $z_{d,n}$ for $d\\in L$. Each equation is satisfied; for $n\\mid m$ the images satisfy $y_{d,m}^{m/n}=y_{d,n}$ and $z_{d,m}^{m/n}=z_{d,n}$. Polynomial evaluation, descent through the defining quotient, and the colimit universal property therefore give the homomorphism.",
+   "uses": [
+    "lem-sfb-root-tower-profinite-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Polynomial evaluation and quotient universal properties; compatible-root presentations; agent generator construction"
+   }
+  },
+  {
+   "text": "Conversely the compatible substitutions $y_{d,n}\\mapsto x_{d,n}$ induce $D_W\\to H$. At each active-root stage use this coefficient map and $z_{d,n}\\mapsto x_{d,n}$ to obtain a map to $H$; these maps respect every transition, so induce $G\\to H$. Both composites fix coefficients and every named root. Polynomial evaluation uniqueness, quotient surjectivity, and colimit uniqueness make the composites identity. The resulting ring isomorphism gives the claimed scheme isomorphism by contravariance of $\\operatorname{Spec}$. This argument also explains why the single divisibility index on each tower suffices: any finitely many root indices admit their least common multiple, still prime to $p$, as a common index.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-category-colimit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Universal properties applied in both directions to the compatible-root generators; agent argument"
+   }
+  },
+  {
+   "text": "For $A_o\\subseteq J^c$ write $\\prod_{d\\in A_o}\\bar t_d=u\\prod_{d\\in A_o\\cap L}\\bar t_d$, where $u=\\prod_{d\\in A_o\\cap K}\\bar t_d$ is a unit of $R_W$ and of both tower algebras. Inverting $u f$ is the same as inverting $f$: the forward map uses $f^{-1}=u(uf)^{-1}$ and the reverse uses $(uf)^{-1}=u^{-1}f^{-1}$. These maps fix coefficients and are inverse by the fraction definition of localization. The ring isomorphism of steps 6-7 fixes every $\\bar t_d$, so gives exactly this identification of principal opens, with the scheme-theoretic open structures as well as the underlying sets.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-basic-open-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization); modules.tex Tag 0H78 (remark-pullback-s-open)"
+   }
+  },
+  {
+   "text": "For any ring base change, the root-tower base-change lemma identifies the base-changed full tower, inactive tower, active tower, and indicated principal opens with the presentations having the new coefficients. On both routes around each comparison square a coefficient goes to its image in the new ring and a named root goes to the correspondingly named root. The uniqueness properties used in steps 6-7 make the square commute; the same computation is unchanged for each power transition. Finally the profinite clause of that lemma gives $U[P]=\\operatorname{Spec}(R\\otimes_{\\mathbf Z}LC(P,\\mathbf Z))$ affine pro-etale over $U$, and identifies its root algebras and opens with this very base change. Repeat step 5 for this new affine pro-etale chart and use the commuting squares just checked. If $B_J$ is empty, take the empty cover; for $L=\\varnothing$ or $K=\\varnothing$ the corresponding root algebra is its coefficient ring. All generator and localization formulas still apply for the zero ring, empty profinite parameter, empty $J$ and empty boundary.",
+   "uses": [
+    "lem-sfb-root-tower-profinite-base-change",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097J; profinite base-change lemma and explicit generator naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-kun-etale-lfp",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-finite-type-morphism",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-sfb-transverse-prime-ideal-parameters",
+  "rem-pc-regular-normal",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sfb-snc-boundary-parameter-criterion",
+  "lem-sfb-snc-labelled-root-algebra-geometry",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-sfb-unit-binomial-finite-etale",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-root-tower-profinite-base-change",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-basic-open-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; explicit residual chart and generator construction using Stacks 0BIA, 00NQ, 03PL and 097J-097N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coordinate stratum of a strict normal crossings divisor has local root tower charts with inactive unit roots absorbed into a pro etale base change",
+   "results": "8 hits: StandardEtalePresentation, StandardEtalePair.hasMap_X, StandardEtalePair, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation.P, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, StandardEtalePresentation.hasMap, StandardEtalePair.HasMap; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"IsEtale\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|rootTower|root_tower).*(strat|active|residual)|(strat|active|residual).*rootTower",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Setting a subset of regular normal crossings parameters to zero leaves a root tower locally on the remaining active parameters after adjoining roots of units",
+   "results": "8 hits: StandardEtalePair.hasMap_X, StandardEtalePair, StandardEtalePresentation, StandardEtalePresentation.toPresentation_σ', Algebra.IsStandardEtale, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, StandardEtalePresentation.hasMap, StandardEtalePair.HasMap; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coordinate face of an infinite normal crossings root tower is locally a full root tower after an etale extension adjoining roots of units",
+   "results": "8 hits: CyclotomicRing.isCyclotomicExtension, IsAdjoinRootMonic.powerBasis, AdjoinRoot.root, SeparableClosure.hasEnoughRootsOfUnity, IsCyclotomicExtension.mk, IsAdjoinRootMonic.toIsAdjoinRoot, IsCyclotomicExtension.iff_singleton, adjoinRootXPowSubCEquiv; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular strict normal crossings stratum has local active parameter root presentations after absorbing compatible roots of units into a pro etale algebra",
+   "results": "{\"t\": \"2026-10-23T09:32:36Z\", \"tool\": \"leanfinder\", \"query\": \"A regular strict normal crossings stratum has local active parameter root presentations after absorbing compatible roots of units into a pro etale algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.x\", \"StandardEtalePair\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePair.X\"], \"digest\": \"358aba6f3df0b7b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe standard etale presentations, splitting fields, polynomial root scaling or the proetale site; none states the residual SNC compatible-root presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "(rootTower|root_tower|normalCrossing|NormalCrossing|ProEtale)",
+   "results": "{\"t\": \"2026-10-23T09:33:35Z\", \"tool\": \"grep\", \"query\": \"(rootTower|root_tower|normalCrossing|NormalCrossing|ProEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe standard etale presentations, splitting fields, polynomial root scaling or the proetale site; none states the residual SNC compatible-root presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-23T09:33:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe standard etale presentations, splitting fields, polynomial root scaling or the proetale site; none states the residual SNC compatible-root presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Splitting a compatible root algebra into roots of units followed by roots of the active regular parameters commutes with scalar extension",
+   "results": "{\"t\": \"2026-10-23T09:34:30Z\", \"tool\": \"leansearch\", \"query\": \"Splitting a compatible root algebra into roots of units followed by roots of the active regular parameters commutes with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Splits.scaleRoots\", \"Polynomial.Factors.scaleRoots\", \"Polynomial.Splits.of_isScalarTower\", \"Polynomial.splits_of_isScalarTower\", \"Polynomial.IsSplittingField.IsScalarTower.splits\", \"Polynomial.Gal.mapRoots\", \"Polynomial.instIsScalarTowerElemRootSet\", \"Polynomial.SplittingField.instIsScalarTower\"], \"digest\": \"805d80580611099d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe standard etale presentations, splitting fields, polynomial root scaling or the proetale site; none states the residual SNC compatible-root presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of simultaneous root algebras splits canonically as adjoining roots for disjoint subsets of coordinates",
+   "results": "{\"t\": \"2026-10-23T09:34:40Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered colimit of simultaneous root algebras splits canonically as adjoining roots for disjoint subsets of coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure.toSplittingField\", \"Polynomial.Splits.adjoin_rootSet_eq_range\", \"Polynomial.adjoin_rootSet_eq_range\", \"Polynomial.SplittingFieldAux.algebraMap_succ\", \"Polynomial.SplittingField.algEquivSplittingFieldAux\", \"IsAdjoinRoot.aequiv_trans\", \"Polynomial.SplittingFieldAuxAux\", \"Polynomial.IsSplittingField.adjoin_rootSet_eq_range\"], \"digest\": \"d80b28dc65c33a7d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe standard etale presentations, splitting fields, polynomial root scaling or the proetale site; none states the residual SNC compatible-root presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-punctured-face-diagram",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; coordinate-face argument: regular residual charts and absorption of the roots of inactive unit parameters before applying puncture invariance. Nearest blueprint ancestor is null.",
+   "via": [
+    "lem-sfb-root-tower-punctured-face-diagram",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-residual-root-tower-local-charts",
+  "worker": "stage1",
+  "summary": "Q80: complete nine-step proof using existing nodes only. Residual parameter quotients, local active labels, inactive unit-root ind-etaleness, explicit mutually inverse compatible-generator maps, puncture opens and profinite/ring base-change coherence checked. Clarified the ambiguous pronoun It as B_J; no mathematical statement change. No new nodes or Mathlib leaves.",
+  "blueprint": "Current latest direct-images proof paragraph (3), open direct image. The item has no imported blueprint ancestor; the explicit residual chart construction serves the coordinate-face argument recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-etale-lfp",
+    "why": "Quasi-compact etale charts of finite-type schemes are finite type; a generic geometric permanence tool."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Weakly etale base change and composition for the residual and profinite charts; generic site geometry."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Finite unit-root adjunctions and their filtered colimit are ind-etale and hence weakly etale; generic ring-map permanence."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Quotienting by a subset of actual parameters leaves the complementary parameters regular; generic regular-local algebra."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regular local rings are domains, allowing equality of principal parameter ideals to imply unit multiples; generic regular-normal tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-etale-lfp",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-b0f44676a",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-b0f44676a (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all 9 steps and the statement of every cited node. There are no new nodes. The statement change is a pronoun only ('It' becomes 'B_J', the only possible referent since A_W is over A/(t_j)). On side-live the item is still unsplit with no review, so it is not superseded. proof_deps equals the union of uses and stmt_deps matches the statement's citations; there is no SGA. Sources checked: Stacks etale.tex 0BIA lemma-strict-normal-crossings, both directions; 00NQ/00NR, 00UB/00UC, 03PL, 03GI, 01KN, 00CT, 00CO, 0H78 and 097J-097N all exist under the labels the steps name; blueprint latest direct-images.proof.md paragraph (3), open immersion j. Steps: 1. B and B_J regular because the SNC definition requires every C_J to be regular, including C_empty = X; finite type by qcqs permanence plus kun-etale-lfp. 2. The hypotheses of transverse-prime-parameters (a) come from the codimension clause; units via the domain property from rem-pc-regular-normal. 3. Quotient-localization and regular quotients give residual parameter systems. 4. The boundary-parameter criterion makes V(F) SNC on B_J; the labelled-root-geometry neighbourhood clause supplies W, L and integral active branches. Inactive labels cannot vanish on a component of B_J by the codimension count. 5. p=0 makes n a unit, so the unit-binomial lemma gives finite etale steps; ind-etale stability then gives a weakly etale, affine map. 6-8. The generator maps, their inverses, lcm cofinality and the localization identification check out. 9. The profinite clause gives U[P] affine pro-etale. Small cases (k[x,y] with J={1}, J={1,2}, r=1 with J empty, empty sets) behave correctly. No duplicates: snc-universal-residual-charts, active-root-tower-normalization-splitting and snc-tame-root-etale-extension say different things. Accepted tool uses: kun-etale-lfp, ind-etale-stability, regular-local-generators-regular-sequence and rem-pc-regular-normal as generic black boxes; weakly-etale-composition-base-change was also declared but is a Mathlib leaf. Batch 5: all three flagged citations reach sec-trace-formula only through the general definition def-trf-strict-normal-crossings-boundary, which is already a stmt_dep on the base. None of them is part of the trace formula or Poincare duality or their proofs, so no assumption leaf is needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ResidualRootTowerLocalCharts",
+  "declaration": "AlgebraicGeometry.ProEtale.residualRootTower_localCharts",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.residualFaceIdeal",
+   "AlgebraicGeometry.ProEtale.ResidualFaceRing",
+   "AlgebraicGeometry.ProEtale.ResidualFaceCoefficients",
+   "AlgebraicGeometry.ProEtale.residualFaceCoefficientsAlgebra",
+   "AlgebraicGeometry.ProEtale.residualFaceParameters",
+   "AlgebraicGeometry.ProEtale.residualPrincipalIdeal",
+   "AlgebraicGeometry.ProEtale.HasResidualSNCEquations",
+   "AlgebraicGeometry.ProEtale.ResidualParametersAtPrimes",
+   "AlgebraicGeometry.ProEtale.ResidualInactiveRoots",
+   "AlgebraicGeometry.ProEtale.ResidualSplitRoots",
+   "AlgebraicGeometry.ProEtale.residualInactiveInclusion",
+   "AlgebraicGeometry.ProEtale.residualSplitCoefficients",
+   "AlgebraicGeometry.ProEtale.residualSplitBaseMap",
+   "AlgebraicGeometry.ProEtale.ResidualRootSplittingSpec",
+   "AlgebraicGeometry.ProEtale.ResidualChartTensor",
+   "AlgebraicGeometry.ProEtale.residualChartRightMap",
+   "AlgebraicGeometry.ProEtale.residualChartParameters",
+   "AlgebraicGeometry.ProEtale.residualInactiveChartMap",
+   "AlgebraicGeometry.ProEtale.residualSplitChartMap",
+   "AlgebraicGeometry.ProEtale.ResidualRootChartPresentation",
+   "AlgebraicGeometry.ProEtale.residualRootTower_localCharts"
+  ],
+  "file": "lean/Sheaf/Paper/ResidualRootTowerLocalCharts.lean",
+  "statement": "theorem residualRootTower_localCharts {I A R k : Type u} [Fintype I] [CommRing A] [CommRing R] [Algebra A R] [Field k] (p : ℕ) (hp : p.Prime) [CharP k p] (Y : Scheme.{u}) (g : Y ⟶ Spec (.of k)) (hY : IsRegularScheme Y) [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (b : Spec (.of A) ⟶ Y) [Etale b] (t : I → A) (ht : HasResidualSNCEquations t) [WeaklyEtale (Spec.map (CommRingCat.ofHom (algebraMap A R)))] (J : Finset I) : IsRegularScheme (Spec (.of A)) ∧ IsSeparated (b ≫ g) ∧ LocallyOfFiniteType (b ≫ g) ∧ QuasiCompact (b ≫ g) ∧ IsRegularScheme (Spec (.of (ResidualFaceRing t J))) ∧ IsSeparated (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (residualFaceIdeal t J))) ≫ b ≫ g) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (residualFaceIdeal t J))) ≫ b ≫ g) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (residualFaceIdeal t J))) ≫ b ≫ g) ∧ ∃ e : ∀ (S : Type u) [CommRing S] (s : {i : I // i ∉ J} → S) (L : Finset {i : I // i ∉ J}), FullParameterRootAlgebra p s ≃+* ResidualSplitRoots p s L, ResidualRootSplittingSpec p e ∧ ∃ (V : Type u) (C : V → CommAlgCat.{u} (ResidualFaceRing t J)) (L : V → Finset {i : I // i ∉ J}), (∀ v, IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap (ResidualFaceRing t J) (C v))))) ∧ (∀ x : Spec (.of (ResidualFaceRing t J)), ∃ (v : V) (y : Spec (.of (C v))), Spec.map (CommRingCat.ofHom (algebraMap (ResidualFaceRing t J) (C v))) y = x) ∧ (∀ v, (∀ i : {i : I // i ∉ J}, i ∉ L v → IsUnit (algebraMap (ResidualFaceRing t J) (C v) (residualFaceParameters t J i))) ∧ HasResidualSNCEquations (fun i : L v ↦ algebraMap (ResidualFaceRing t J) (C v) (residualFaceParameters t J i.val)) ∧ ResidualParametersAtPrimes (fun i : {i : I // i ∉ J} ↦ algebraMap (ResidualFaceRing t J) (C v) (residualFaceParameters t J i)) ∧ ResidualRootChartPresentation (R := ResidualFaceCoefficients (R := R) t J) p (residualFaceParameters t J) (C v) (L v) e ∧ ∀ P : Profinite.{u}, ResidualRootChartPresentation (R := rootTestRing (ResidualFaceCoefficients (R := R) t J) P) p (residualFaceParameters t J) (C v) (L v) e)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c0d1f6dc",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery of 3b6936b8ac6a, which was returned for H2 only. Lean module byte-identical (sha b8f197d1). Item changed only by adding stmt_dep def-sfb-full-root-coefficient-change. New def node: existing:true owner of fullRootFamilyMap/fullRootBaseMap/rootTestRing (RootTowerProfiniteBaseChange l.70/77/414). TeX matches the declarations, lean.statement is verbatim, and the U[P] tensor presentation agrees with profiniteToProEtOf (resolves the earlier H4 note). All §5 fields present; stmt_deps equal its citations; no duplicate owner. Item re-read clause by clause: hypotheses no stronger than the node (SNC-branch predicate characterizes the components exactly), conclusion covers the cover/units/SNC/parameters, the weakly-etale affine D_W, the pullback iso with fixed projections, the splitting spec (coefficients, roots, transitions, conditional principal opens, ring naturality) and the profinite clause. Edge cases and the single universe u OK. Only sorry is the theorem proof; docstrings carry source and blueprint; report sections present. No compile needed (no changes)."
+ }
+}

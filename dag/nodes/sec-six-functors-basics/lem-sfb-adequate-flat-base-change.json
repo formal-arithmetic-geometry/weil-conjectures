@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-adequate-flat-base-change",
+ "kind": "statement",
+ "title": "Flat base change of adequate moduli spaces",
+ "statement": "Let $k$ be a field [def-weil-field], $\\mathcal X/k$ an algebraic stack, and $Y,T$ algebraic spaces over $k$ [def-trf-algebraic-space]. Suppose the diagonals of $\\mathcal X,Y,T$ over $k$ are quasi-compact and separated: every scheme test of a diagonal is an algebraic space whose structural map is quasi-compact and whose relative diagonal is a closed immersion. Let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space], and let $g:T\\to Y$ be flat. Flatness is tested on etale scheme charts by [def-weil-flat-morphism]. Then the projection $\\phi_T:\\mathcal X\\times_Y T\\to T$ from the $2$-fibre product is an adequate moduli space. There is no finite-type hypothesis and no requirement that the quasi-coherent algebras quantified over on $\\mathcal X\\times_Y T$ descend from $\\mathcal X$.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Section 2 conventions; Proposition 5.2.9(1), printed p.27; its proof uses Proposition 4.2.1(6) and flat base change. Primary text read online https://arxiv.org/html/1005.2398v3; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-sfb-adequate-moduli-space",
+  "def-weil-flat-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Every algebraic space $F$ over $k$, regarded as a discrete fibred groupoid, is an algebraic stack in the sense of [def-sfb-algebraic-moduli-stack]: an fppf sheaf is an etale stack, its diagonal is representable by schemes and hence by algebraic spaces by [def-trf-algebraic-space], and its representable surjective etale scheme atlas is smooth because etale morphisms are smooth by [lem-sfb-stack-chartwise-smooth-etale-calculus]. This applies to $Y$, $T$, the $U_i$, $T_i$ and $W_{ij}$ below, so all of them may serve as the stacks of the cited stack lemmas. Hence, by [lem-sfb-algebraic-stack-fibre-products], $\\mathcal X_T$ and its further base changes are algebraic stacks. Adequacy includes quasi-compactness and quasi-separatedness by [def-sfb-adequate-moduli-space]; these properties persist under base change by [lem-sfb-stack-etale-local-qcqs-homeomorphism]. In particular all the projections considered below are qcqs. Choose a jointly surjective etale family of affine schemes $U_i=\\operatorname{Spec}R_i\\to Y$: take an etale scheme presentation from [def-trf-algebraic-space] and its affine open cover from [lem-weil-pbc-affine-opens-basis]. Open inclusions are etale by [lem-weil-pbc-open-immersion-etale], so these affine refinements remain etale by the composition statement cited below. The spaces $T_i=T\\times_Y U_i$ exist, and $(T_i\\to T)$ is an etale covering, by [lem-trf-space-fibre-products-etale-covers]. Choose likewise affine etale presentations $(W_{ij}=\\operatorname{Spec}S_{ij}\\to T_i)_j$. By [lem-trf-space-chartwise-etale-permanence], the composites $(W_{ij}\\to T)_{i,j}$ form a jointly surjective etale family. For fixed $i,j$, put $\\mathcal Z_i=\\mathcal X\\times_Y U_i$ and $\\mathcal Z_{ij}=\\mathcal Z_i\\times_{U_i}W_{ij}$. The latter identifies with $\\mathcal X_T\\times_TW_{ij}$: both groupoids have objects given by an object of $\\mathcal X$, a point of $W_{ij}$, and their specified isomorphism over $Y$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-adequate-moduli-space",
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(1), reduction to affine etale charts; algebraic.tex Tag 04T2, stacks-morphisms.tex Tags 050F and 050V, spaces-topologies.tex Tag 041F."
+   }
+  },
+  {
+   "text": "The etale-locality statement [lem-sfb-adequate-moduli-etale-locality] applied to the covering $(U_i\\to Y)$ shows that $\\phi_i:\\mathcal Z_i\\to U_i$ is an adequate moduli space. Its affine criterion gives both the canonical isomorphism $R_i\\xrightarrow{\\sim}\\Gamma(\\mathcal Z_i,\\mathcal O)$ and global power lifting for every surjection of quasi-coherent algebras on $\\mathcal Z_i$. By [lem-sfb-affine-target-adequacy-criterion], this last property says that $\\phi_i$ is adequately affine. All criteria apply because $\\phi_i$ is qcqs by Step 1.",
+   "uses": [
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-affine-target-adequacy-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Definition 5.1.1, Remark 4.1.3 and Lemma 4.1.8(3); Proposition 5.2.9(1), first sentence of proof."
+   }
+  },
+  {
+   "text": "The map $T_i\\to U_i$ is the base change of the flat map $g:T\\to Y$. Every map between algebraic spaces is representable by algebraic spaces, since its pullback by a scheme is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Therefore [lem-sfb-stack-chartwise-smooth-etale-calculus] applies: $T_i\\to U_i$ is flat, $W_{ij}\\to T_i$ is etale hence flat, and the composite $W_{ij}\\to U_i$ is flat. These endpoints are affine schemes, so [lem-weil-pbc-flat-morphism-affine-criterion], applied to the whole source and target as affine opens, says that $R_i\\to S_{ij}$ is a flat ring homomorphism. No finite presentation of $g$ is used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(1), flatness in the second sentence of proof; stacks-properties.tex Tag 04XC and morphisms.tex Tag 01U5."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adequately-affine-affine-target-base-change] with affine target $U_i$, adequately affine $\\phi_i$, and the map $W_{ij}\\to U_i$. It gives adequate affineness of $\\phi_{ij}:\\mathcal Z_{ij}\\to W_{ij}$. By [lem-sfb-affine-target-adequacy-criterion], for every surjection $\\mathcal A\\twoheadrightarrow\\mathcal B$ of quasi-coherent algebras on $\\mathcal Z_{ij}$ and every $b\\in\\Gamma(\\mathcal Z_{ij},\\mathcal B)$ there are $N>0$ and $a\\in\\Gamma(\\mathcal Z_{ij},\\mathcal A)$ mapping to $b^N$. The base-change lemma quantifies over algebras on the new stack itself, so no descent of $\\mathcal A$ or $\\mathcal B$ to $\\mathcal Z_i$ is required.",
+   "uses": [
+    "lem-sfb-adequately-affine-affine-target-base-change",
+    "lem-sfb-affine-target-adequacy-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 4.2.1(6) for an affine target, as used in Proposition 5.2.9(1); Lemma 4.1.8(3)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-flat-scalar-sections] to the qcqs map $\\phi_i$, the flat algebra $R_i\\to S_{ij}$ of Step 3, and $\\mathcal A=\\mathcal O_{\\mathcal Z_i}$. The restriction of this structure sheaf is $\\mathcal O_{\\mathcal Z_{ij}}$, directly from its value $\\Gamma(V,\\mathcal O_V)$ on every object over a scheme $V$ in [def-sfb-stack-quasi-coherent-algebra]. Thus the canonical comparison gives\n$$\\Gamma(\\mathcal Z_i,\\mathcal O)\\otimes_{R_i}S_{ij}\\xrightarrow{\\sim}\\Gamma(\\mathcal Z_{ij},\\mathcal O).$$\nUsing the canonical isomorphism in Step 2, its source identifies with $R_i\\otimes_{R_i}S_{ij}=S_{ij}$. The scalar-section lemma says explicitly that $1\\otimes s$ maps to the structural section pulled back from $s$. Hence the resulting isomorphism is the canonical structure map $S_{ij}\\to\\Gamma(\\mathcal Z_{ij},\\mathcal O)$, rather than merely some abstract isomorphism of rings.",
+   "uses": [
+    "lem-sfb-stack-flat-scalar-sections",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(1), second sentence of proof; stacks-cohomology.tex Tags 0765 and 0771(4), degree zero; stacks-sheaves.tex Tag 06WK."
+   }
+  },
+  {
+   "text": "For every $i,j$, Step 4 supplies the global power condition and Step 5 supplies the canonical structural isomorphism over the affine scheme $W_{ij}$. The affine criterion of [lem-sfb-adequate-moduli-etale-locality] therefore proves that $\\phi_{ij}$ is an adequate moduli space. Apply the etale-local assertion of that same node to the jointly surjective family $(W_{ij}\\to T)$ constructed in Step 1. Since $\\phi_T$ is qcqs and its base changes are the $\\phi_{ij}$, it is an adequate moduli space. All power tests in this argument quantify over arbitrary quasi-coherent algebras; the only application of flat scalar extension was to the structure sheaf.",
+   "uses": [
+    "lem-sfb-adequate-moduli-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(1), conclusion, with Definition 5.1.1 and the affine criterion of Lemma 4.1.8(3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-adequate-moduli-space",
+  "lem-sfb-stack-etale-local-qcqs-homeomorphism",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-adequate-moduli-etale-locality",
+  "lem-sfb-affine-target-adequacy-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sfb-adequately-affine-affine-target-base-change",
+  "lem-sfb-stack-flat-scalar-sections",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper arXiv:1005.2398v3, Proposition 5.2.9(1), proof, using Proposition 4.2.1(6). Expanded on affine etale charts using the existing DAG affine criteria, etale locality, and Stacks Tags 0765/0771 for flat scalar sections; primary source read online at https://arxiv.org/html/1005.2398v3; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of an adequate moduli space of an algebraic stack is an adequate moduli space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) →\\n      (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [Comm\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli spaces are preserved by field extension and flat base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"{P : MorphismProperty Scheme.{u}} (_ : HasAffineProperty P (affineAnd Q)) (hQi : RingHom.RespectsIso Q)\\n  (hQb : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[P.IsStableUnderBaseChange] : (sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ on schemes is stable under base change, then its source-local closure (the property of being locally $ P $ with respect to coverings of the source scheme) is also stable u\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Power lifting quasi coherent algebra quotients and structure sheaf isomorphism survive flat base change of stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequatelyAffine",
+   "results": "{\"t\": \"2026-10-23T12:13:31Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|adequatelyAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme flatness, affine scheme morphism properties, or module scalar extension, not adequate moduli spaces of algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli morphisms remain adequate after any flat extension of the base algebraic space",
+   "results": "{\"t\": \"2026-10-23T12:13:32Z\", \"tool\": \"leansearch\", \"query\": \"Adequate moduli morphisms remain adequate after any flat extension of the base algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"RingHom.Flat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"05a5c0eddc29f8c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme flatness, affine scheme morphism properties, or module scalar extension, not adequate moduli spaces of algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "{\"t\": \"2026-10-23T12:13:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme flatness, affine scheme morphism properties, or module scalar extension, not adequate moduli spaces of algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of adequate moduli spaces of algebraic stacks preserves power lifting and the structure sheaf isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:13:33Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change of adequate moduli spaces of algebraic stacks preserves power lifting and the structure sheaf isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"9c5c609531fdfaf4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme flatness, affine scheme morphism properties, or module scalar extension, not adequate moduli spaces of algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adequately affine morphism from a stack to an algebraic space with pushforward of its structure sheaf equal to the base remains an adequate moduli space under flat pullback",
+   "results": "{\"t\": \"2026-10-23T12:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"An adequately affine morphism from a stack to an algebraic space with pushforward of its structure sheaf equal to the base remains an adequate moduli space under flat pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty\", \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"AlgebraicGeometry.HasAffineProperty\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsAffineHom\"], \"digest\": \"af43421ba4ac1a56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme flatness, affine scheme morphism properties, or module scalar extension, not adequate moduli spaces of algebraic stacks; none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "isStableUnderBaseChange|class Flat|def Flat",
+   "results": "{\"t\": \"2026-10-23T12:16:22Z\", \"tool\": \"grep\", \"query\": \"isStableUnderBaseChange|class Flat|def Flat\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"42\", \"81\", \"82\"], \"digest\": \"e601547bedf2d432\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are scheme flatness, affine scheme morphism properties, or module scalar extension, not adequate moduli spaces of algebraic stacks; none specializes in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-geometric-fibres-submersion",
+  "date": "2026-10-23",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Flat base change of adequate moduli spaces.",
+   "via": [
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-flat-base-change",
+  "worker": "stage1",
+  "summary": "Q157: wrote a six-step proof of flat base change using only existing DAG results. Passed to affine etale source and target charts, used adequate-affineness base change for arbitrary algebras, and used flat scalar sections only for the canonical structure-sheaf map. Retained the entire item statement, its diagonal conventions, prior searches, source and ancestry. No new nodes and no Mathlib leaves. Checked all cited current statements, their hypotheses and transitive nondependence on this item.",
+  "blueprint": "Supports the inherited place: det-thm-sf-ctf-stability-direct-images proof (3), adequate-moduli prerequisite of the geometric-fibre argument, flat base change. The current latest blueprint direct-images proof was read; the created.item ancestry already has from.node=null, which tools/blueprint_refs.py ancestor reproduces. Kept that maintainer-owned ancestry and its specific from.place; whole-blueprint search adequate found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic construction and etale-cover base-change theorem for algebraic spaces, used only for affine etale charts; it replaces no direct-image or trace-formula argument and the assigned unit supplies no such construction."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition and base-change axioms for algebraic-space etale coverings, used only to combine the affine chart families; no result of the assigned unit supplies these axioms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-9bcd70cdc",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-9bcd70cdc (reviewer sub-agent of L); spot-checked: Read the item's six steps in full, every cited statement, and the source: Alper 1005.2398v3 Prop 5.2.9(1), whose proof uses 4.2.1(6) and flat base change. The statement agrees with the source; Alper's §2 diagonal hypotheses are kept, unused by the proof and harmless. There are no new nodes and no re-split note. Step checks: S1 builds affine étale charts U_i=Spec R_i of Y and W_ij=Spec S_ij of T_i, with covers via the trf fibre-product and permanence nodes and qcqs base change via etale-local-qcqs. S2: étale locality plus its affine clause give R_i≅Γ(Z_i,O) and power lifting, and the affine-target criterion makes φ_i adequately affine. S3: the chartwise calculus makes R_i→S_ij flat (base change, étale⇒flat, composition), then the affine flatness criterion. S4: affine-target base change (4.2.1(6)) gives adequate affineness of φ_ij and power lifting for arbitrary algebras, so no descent is needed. S5: flat-scalar-sections on O sends 1⊗s↦p_S^*s, giving the structural isomorphism. S6: the affine clause, then étale locality on (W_ij→T). Edge cases: empty T, g=id, non-flat g (only an adequate homeomorphism, 5.2.9(3)). Duplicate search (5.2.9, adequate) found no duplicate. Repaired one C1/E1 gap: the stack lemmas (fibre products, qcqs base change, affine-target base change) were applied to the spaces Y, T, U_i, T_i and the schemes W_ij without justifying that these are algebraic stacks. Step 1 now says so, citing def-sfb-algebraic-moduli-stack, def-trf-algebraic-space and the étale⇒smooth clause of the chartwise calculus; proof_deps updated. Accepted tool_uses: lem-trf-space-fibre-products-etale-covers and lem-trf-space-chartwise-etale-permanence, both generic. Batch-5 flags: all eight citations are generic geometry, or reach sec-trace-formula only through the definitions def-trf-algebraic-space and def-trf-space-quasi-coherent-module. None is a step of the trace formula or of Poincaré duality; all accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateFlatBaseChange",
+  "declaration": "CategoryTheory.adequateModuliSpace_flat_baseChange",
+  "declarations": [
+   "CategoryTheory.adequateModuliSpace_flat_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateFlatBaseChange.lean",
+  "statement": "theorem adequateModuliSpace_flat_baseChange {k : Type u} [Field k] (F : BasedCategory.{v, w} (Over (Spec (CommRingCat.of k)))) (hF : IsAlgebraicModuliStack F) (Y T : AlgebraicSpace (Spec (CommRingCat.of k))) (hFdiag : ∀ (V : Over (Spec (CommRingCat.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj V)) (moduliTwoFiberProduct (moduliBaseStructure F) (moduliBaseStructure F))), ∃ (Z : AlgebraicSpace (Spec (CommRingCat.of k))) (p : Z.obj.obj ⟶ yoneda.obj V), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure F)) V t Z p ∧ AlgebraicSpace.MapIsQuasiCompact p ∧ AlgebraicSpace.MapToSchemeIsSeparated Z V p) (hYdiag : AlgebraicSpace.MapIsQuasiCompact (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj)) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj)))) (hTdiag : AlgebraicSpace.MapIsQuasiCompact (prod.lift (𝟙 T.obj.obj) (𝟙 T.obj.obj)) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal (prod.lift (𝟙 T.obj.obj) (𝟙 T.obj.obj)))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace F hF Y φ) (g : T ⟶ Y) (hg : AlgebraicSpace.MapIsFlat g) : ∃ hFT : IsAlgebraicModuliStack (moduliTwoFiberProduct (discreteModuliMap g.hom.hom) φ), IsAdequateModuliSpace (moduliTwoFiberProduct (discreteModuliMap g.hom.hom) φ) hFT T (moduliTwoFiberFst (discreteModuliMap g.hom.hom) φ)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The stack diagonal over the base k is the relative diagonal of the landed structural functor CategoryTheory.moduliBaseStructure (def-sfb-relative-moduli-inertia, Q145, landed 2026-10-23 before this delivery's base); the delivered duplicate helper moduliBaseProjection (identical: toFunctor := F.p, w := rfl) was removed by the stage-2 reviewer (H4). Maintainer: def-sfb-relative-moduli-inertia is not in the item's stmt_deps (a stage-2 FIX cannot add it); add it when the item is next touched. Space diagonals are the canonical presheaf diagonals. Flatness uses the existing etale chart predicate MapIsFlat. The conclusion bundles algebraicity of the actual 2-fibre product with adequacy of its canonical projection; no extra hypothesis on the base change or its algebras is imposed.",
+  "fixed_by": "NT-stage2-cc-799d9758c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-799d9758c",
+  "group": "Q156",
+  "result": "fix",
+  "note": "Statement checked against node and Alper 1005.2398v3 Prop 5.2.9(1)/§2 and is correct: field k; stack F with IsAlgebraicModuliStack; Y,T algebraic spaces; hFdiag = qc + separated (closed-immersion relative diagonal) on every scheme test of the diagonal over k via moduliRelativeDiagonal into the 2-product over the terminal based category; hYdiag/hTdiag = MapIsQuasiCompact of prod.lift 𝟙 𝟙 and closed-immersion representability of its diagonal; hφ is the recorded IsAdequateModuliSpace; hg is MapIsFlat (added landed stmt_dep def-sfb-space-morphism-properties); conclusion is ∃ algebraicity of the actual T ×_Y X with adequacy of moduliTwoFiberFst. No finite-type hypothesis; adequacy ranges over all algebras on the new stack, so no descent is needed; edge cases g=id, T empty, non-qc flat g, any characteristic and the zero algebra are covered. H4 FIX: the delivered helper moduliBaseProjection (toFunctor := F.p, w := rfl) duplicates the landed CategoryTheory.moduliBaseStructure (RelativeModuliInertia, def-sfb-relative-moduli-inertia, landed 2026-10-23 15:07 UTC, before the base). The helper is removed, RelativeModuliInertia is imported publicly and hFdiag uses moduliBaseStructure F; lean-record declarations, statement and note are updated, and the report gets a maintainer section. Maintainer: add def-sfb-relative-moduli-inertia to the item's stmt_deps later; a stage-2 fix cannot add it and the landing check is only advisory. The fixed module compiled through nt_compile --json: 4.2 s, exit 0, no errors or warnings."
+ }
+}

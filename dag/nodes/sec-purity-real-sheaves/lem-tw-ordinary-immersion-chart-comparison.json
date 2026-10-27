@@ -1,0 +1,257 @@
+{
+ "id": "lem-tw-ordinary-immersion-chart-comparison",
+ "kind": "statement",
+ "title": "Ordinary derived immersion and representable-chart comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$ [def-weil-l-adic-coefficient-extension]. For every scheme $T$ use its small pro-etale site [def-weil-pbc-proetale-site], the constant ring sheaves $C_{n,T}=(R/t^n)_T$, and $B_T=\\varprojlim_{n\\geq1}C_{n,T}$ with projections $\\pi_{T,n}$ [def-weil-completed-integral-coefficients]. For a scheme morphism $g:T\\to W$ [def-weil-scheme-morphism-properties], let $g^{-1}$ and $c^g_{R/t^n}$ be the inverse image and constant-section maps [def-weil-proetale-inverse-image]. Give it the structural ring map $c_g:g^{-1}B_W\\to B_T$ characterized by $\\pi_{T,n}c_g=c^g_{R/t^n}g^{-1}(\\pi_{W,n})$. Write $g_B^*M=B_T\\otimes_{g^{-1}B_W}g^{-1}M$ for ordinary module pullback, and $P_g=Lg_B^*$ with computation counit $\\epsilon_Q:P_g[Q]\\to[g_B^*Q]$ [lem-weil-pbc-ringed-topoi-derived-pullback]. Here module sheaves and their ordinary unbounded derived categories are those of [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], $[Q]$ denotes localization, and tensor products are sheaf tensor products [def-pur-sheaf-tensor-product].\n\nLet $f:X\\to Y$ be any morphism of schemes, let $i:S\\hookrightarrow Y$ be a locally closed immersion (a closed immersion followed by an open immersion) [def-weil-closed-immersion, def-weil-open-immersion], and put $X_S=X\\times_Y S$, $j:X_S\\hookrightarrow X$, $f_S:X_S\\to S$. Let $u:U\\to S$ be an object of $S_{\\mathrm{proet}}$ and put $V=X_S\\times_S U$, $v:V\\to U$. For every $K\\in D(B_Y)$ there are natural isomorphisms\n$$j^*P_fK\\xrightarrow{\\sim}P_{f_S}(i^*K),\\qquad\n(j^*P_fK)|_V\\xrightarrow{\\sim}P_v((i^*K)|_U).$$\nHere $i^*,j^*$ are ordinary exact immersion restrictions [lem-sf-immersion-completed-pullback-comparison], and $r_U=(-)|_U$ and $r_V=(-)|_V$ are exact restrictions to the localized sites [def-pur-localized-ringed-site], identified with the sites of $U,V$ with their completed coefficient rings and finite projections. The first isomorphism is the composite of the ordinary derived composition comparisons for $fj=if_S$ and the canonical two-isomorphism transport of their structural ring maps. For the second, the canonical isomorphism $f_S^{-1}h_U\\cong h_V$, where $h_U=\\operatorname{Hom}_S(-,U)$ and $h_V=\\operatorname{Hom}_{X_S}(-,V)$, identifies the element-site ringed slice morphism $(f_S)_{h_U}$ with the ringed morphism $v$ and its map $c_v$. The second comparison is the restriction of the first followed by the inverse of the canonical derived slice comparison $P_{(f_S)_{h_U}}r_U\\cong r_VP_{f_S}$. Both isomorphisms use the ordinary K-flat representative comparisons, before completion. There is no noetherianity, completeness, boundedness, separatedness, base-field, or structural-map flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D, lemma-derived-pullback-composition, and 04IF, lemma-localize-morphism-ringed-topoi (sites-modules.tex); Bhatt--Scholze Remark 6.8.15 for ordinary exact immersion restriction. Extraction of returned proof steps 4-5 (agent argument)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary completed-coefficient pullback preserves finite limits by lem-tw-ordinary-completed-pullback-exact, while its specified adjunction gives finite colimits. Use the exact functor mapDerivedCategory for every Image. Its factorization isomorphism supplies the counit, the universal left-derived property follows by localization, and its counit is invertible on all complexes, hence on the specified Good complexes.",
+   "uses": [
+    "lem-tw-ordinary-completed-pullback-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, exact special case; sites-modules.tex Tag 04IF"
+   }
+  },
+  {
+   "text": "Take the adjuncts of completedRingMap_comp. Their composition equation makes the sectionwise module pushforward compositors linear. Compose the compositor for c,d, the sectionwise pushforward comparison across a;b=c;d (constructed from the site eqToIso with pushforwardCongr₂, avoiding whole-functor transport), and the inverse compositor for a,b. Its section map is precisely squareSiteIso by the presheaf map-comp equation. Take its unique adjunction mate to construct the ordinary Square. Apply the exact-derived square comparison. Its factorization equations give ImmersionSquare.normalization on every complex by cancellation, so no separate K-flat resolution argument is needed.",
+   "uses": [
+    "lem-tw-completed-coefficient-ringed-coherence",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, exact special case; sites-modules.tex Tag 04IF"
+   }
+  },
+  {
+   "text": "Use lem-tw-ordinary-completed-chart-comparison for the underived represented chart square with its specified section map and adjunction mate. Chart restriction preserves finite limits and finite colimits: the Over.map functor is continuous and cocontinuous, and forgetting modules identifies its pushforward with abelian restriction. The exact-derived square comparison then gives Chart.comparison. The same exact-derived factorization calculation gives Chart.normalization on every complex.",
+   "uses": [
+    "lem-tw-ordinary-completed-chart-comparison",
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, exact special case; sites-modules.tex Tag 04IF"
+   }
+  },
+  {
+   "text": "Restrict the immersion comparison by the derived exact restriction rV, reassociate, whisker the inverse chart comparison by Pi, and reassociate back. This defines Comparison.comparison with Comparison.formula by reflexivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, exact special case; sites-modules.tex Tag 04IF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-tw-ordinary-completed-pullback-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-tw-ordinary-completed-chart-comparison",
+  "lem-sf-site-perfect-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D and sites-modules.tex Tag 04IF, exact ordinary pullback and localization route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary unbounded derived pullback of sheaves of modules commutes with restriction to a locally closed immersion and then to a pro-etale chart via composition and slice comparison",
+   "results": "Hits read: SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback. The underived pullbackComp and Zariski open-immersion restriction results do not supply the unbounded derived comparison for locally closed immersion and pro-etale covering slices with these coefficient maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "Hits read: PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp. The underived pullbackComp and Zariski open-immersion restriction results do not supply the unbounded derived comparison for locally closed immersion and pro-etale covering slices with these coefficient maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|derived.*pullback|pullback.*derived",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. The underived pullbackComp and Zariski open-immersion restriction results do not supply the unbounded derived comparison for locally closed immersion and pro-etale covering slices with these coefficient maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image for ringed topoi and restriction to a locally closed subspace commute in a cartesian square and with representable slice localization",
+   "results": "Hits read: AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc. The underived pullbackComp and Zariski open-immersion restriction results do not supply the unbounded derived comparison for locally closed immersion and pro-etale covering slices with these coefficient maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves of modules on ringed topoi commutes with composition and restriction to a representable slice",
+   "results": "Hits read: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pullbackComp. Only ordinary module pullback composition and Zariski open restriction are supplied; none gives the complete ordinary unbounded immersion and pro-etale representable-chart comparison with these coefficients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|restrictFunctorIsoPullback",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. Only ordinary module pullback composition and Zariski open restriction are supplied; none gives the complete ordinary unbounded immersion and pro-etale representable-chart comparison with these coefficients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image for modules commutes with localization at a representable sheaf and with composition of ringed topoi",
+   "results": "Hits read: SheafOfModules.pullbackComp, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, ModuleCat.Tilde.stalkIso_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.StructureSheaf.stalkIso_inv. Only ordinary module pullback composition and Zariski open restriction are supplied; none gives the complete ordinary unbounded immersion and pro-etale representable-chart comparison with these coefficients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "Hits read: PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp. Only ordinary module pullback composition and Zariski open restriction are supplied; none gives the complete ordinary unbounded immersion and pro-etale representable-chart comparison with these coefficients.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-ordinary-pullback-stratified-models",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Proposition 6.6.11 and Remark 6.8.15: base-changed strata, covering slices and finite-projective ordinary pullback models. Agent extraction of original steps 2-3, with the model interfaces used by steps 1 and 4. Returned ordinary-model proof steps 4-5: ordinary derived square and representable chart comparison.",
+   "via": [
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-ordinary-immersion-chart-comparison",
+  "worker": "stage1",
+  "summary": "Assembled the ordinary immersion square comparison from normalized coefficient coherence and K-flat composition, then identified the representable ringed slice and inverted its derived comparison. Searched upstream and Mathlib, checked every cited statement and absence of cycles; no statement change or new node.",
+  "blueprint": "Realizes the existing from.place: the ordinary-model extraction steps 4--5 supporting the first sentence of the proof of lem-tw-dual-negation through its recorded realization ancestors. Keeps the ordinary composition and representable-chart route; uses no completed pullback in the argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Its finite-set clause verifies the finite-ring hypothesis for the profinite coefficient inverse-image tool; the unit contains no coefficient-ring finiteness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Supplies the projection-defined coefficient isomorphisms needed by the existing pro-etale composition interface, without adding any hypothesis to the item."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Ordinary unbounded K-flat composition is a generic ringed-topos tool; the unit realizes weight duality and does not replace this computation."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Only clause (1), stability of immersions under arbitrary base change, verifies that j is an immersion."
+   },
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Only its ordinary exact immersion restriction clause is used, on arbitrary complexes; the completed comparison is unused."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-subcanonical",
+    "why": "Checks the subcanonical-site hypothesis for the normalized representable inverse-image tool."
+   },
+   {
+    "node": "lem-pur-site-representable-algebraic-pullback",
+    "why": "Identifies inverse image of h_U with h_V with the normalized canonical map, as a generic tool about continuous finite-limit-preserving functors."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "Identifies the representable sheaf slices used by the derived theorem with the ordinary localized sites of the statement."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "The generic arbitrary-sheaf-slice unbounded derived comparison, including its ordinary K-flat representative normalization, is exactly the localization tool the item needs."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions identifies the item's P_g with the operation Lg^* used by the composition theorem; a generic tool, no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-4ee01894a",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-4ee01894a (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement, plus Stacks 0D6D, 04IF, 04J0, 03CF (statement and proof), 03CE and 04D3. The delivery has no new nodes and no SGA citation. Steps 1 and 4 are correct. Step 1: the finite-set clause of standard-quotients-perfect gives the finite tower; the profinite inverse-image c_u has the same projections as the item's c_g; the coherence lemma makes the composite identification equal to c_{fj}=c_{if_S}. Step 4: theta^{-1} has the right direction, and the slice theorem has no flatness or boundedness hypotheses. First fault, C1/C4 in step 2: the composition theorem is about Lg^* of def-weil-pbc-proetale-operations, but the item's P_g comes from lem-weil-pbc-ringed-topoi-derived-pullback, and the step never identified the two. I wrote the identification into the step (epsilon_P on flat-term K-flat complexes, plus lem-pc-kflat-resolution, declared as a tool use) and cited the nodes. Second fault, C1 in step 3: the step identified the topos slice ringed morphism (f_S)_{h_U} of lem-sbc with the localized site morphism without any cited statement. That is Stacks 03CF plus 04J0/04IF; the existing nodes (slice-site-localization, localize-ringed-site-morphism, unit-normalized-slice-inverse-image) give only the restriction square. I added the statement-only node lem-tw-representable-slice-localized-ringed-morphism (unsplit, sources 03CF/04D3/04J0/04IF). Mathlib grep of Sites/Over.lean found no match; LeanSearch and Loogle were unreachable and are recorded as unavailable. Step 3 now cites the new node. A DFS over the DAG with the fixes finds no cycle. I checked the edge cases i=id, U=S, f=id and empty strata. The statement is unchanged and the declared tool_uses are accepted.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryImmersionChartComparison",
+  "declaration": "WeilConjectures.OrdinaryImmersionChart.ordinaryImmersionChartComparison",
+  "declarations": [
+   "WeilConjectures.OrdinaryImmersionChart.ordinaryImmersionChartComparison"
+  ],
+  "file": "lean/Sheaf/Paper/OrdinaryImmersionChartComparison.lean",
+  "statement": "theorem ordinaryImmersionChartComparison {X Y S : Scheme.{t}} (f : X ⟶ Y) (i : S ⟶ Y) [IsImmersion i] (U : S.ProEt) : Nonempty (Comparison l E f i U)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem asserts existence of the normalized Comparison record. Its Image fields are universal ordinary derived pullbacks with their computation counits; ImmersionSquare and Chart retain the two natural isomorphisms, actual structural maps, sectionwise direct-image comparisons, adjunction-mate normalizations and K-flat representative equations. Comparison.formula fixes the second isomorphism as restriction of the first followed by the inverse slice comparison. All module and coefficient constructions are existing APIs; no completeness or finiteness hypothesis on schemes or complexes is added. Scheme and coefficient universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34b933653",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Clause-by-clause check of node vs Lean: IsImmersion = closed then open; X_S/j/f_S = pullback/fst/snd; V = proEtaleBaseChange f_S U; v = completedRingSliceArrow; c_g = completedRingMap (choice from the unique-existence statement with the node's projection equations); pull = Mathlib ordinary sheafified pullback; Image = IsLeftDerivedFunctor + K-flat computation. First iso fixed by normalization against square.ordinary, which is the adjunction mate of a sectionwise direct map via squareSiteIso (fibre-product compositors + eqToIso of pullback.condition). Second iso = Comparison.formula, restriction of the first then inverse Chart.comparison; types checked. Both normalizations determine the isos (counits invertible on good complexes), so no free arrows. Linearity comes from completedRingMap_equal_composites and the completedRingMap_slice c_v clause. chartRingIso choice is fixed by its constants and projection clauses. No extra hypotheses; edge cases i=id, f=id, U=S, empty schemes, zero/unbounded complexes; universes t,u independent. Only the lean field changed; statement verbatim; 21/21 declarations; docstrings with source, blueprint and 4 proof steps; no line over 100 chars; only the theorem is sorry. Not recompiled (no change); worker reports a clean compile. Advisory: (N1) decls from proof dependency lem-tw-completed-coefficient-ringed-coherence, not in stmt_deps; (N2) setPull/setAdj/representableIso not used by Comparison; (N3) r_U written as restriction along Over.map, equal section by section to overFunctor + slice equivalence; (N4) Image vs the ringed-topoi pullback dependency's changeOfRings form needs a stage-3 bridge."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5e58c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261024T190502-L-4070171",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Models/two hole modules vs live OrdinaryImmersionChartComparison.lean (verbatim extraction except declared Rings/pull/adj irreducibility), hole statements vs their nodes and Stacks 04IF/04J0, sandbox compile + #print axioms (sorryAx only via the two new holes)"
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-proper-curve-scheme-realization",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Proper scheme curves define objects of the curve stack.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Proper scheme curves define objects of the curve stack",
+ "statement": "Let k and Omega be fields [def-weil-field], a:Spec Omega -> Spec k a morphism, C a scheme [def-pc-scheme], and f:C -> Spec Omega a proper morphism [def-weil-proper-morphism] with topological Krull dimension at most one [def-kun-topological-krull-dimension]. There is a ProperCurveFamily X over a [def-sfb-proper-curve-moduli] whose algebraic-space presheaf over Spec k is isomorphic to h_C, and this isomorphism identifies the projection of X with h_f. No reducedness, connectedness or nonemptiness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "section-stack-curves and Tag 0DSW(3)(a)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Take the representable fppf sheaf of C over Spec k, with projection yoneda of f. The representable sheaf is an algebraic space: its diagonal is represented by scheme fibre products and it has the identity etale atlas. The morphism to Spec Omega is flat over a field. Properness supplies separatedness, quasi-compactness, local finite type and universal closedness. A finite-type scheme over a field is locally finitely presented and a separated morphism has quasi-compact diagonal. These properties survive etale charts and arbitrary scheme base change.",
+   "uses": [
+    "def-sfb-proper-curve-moduli",
+    "def-weil-proper-morphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "section-stack-curves and Tag 0DSW(3)(a)"
+   }
+  },
+  {
+   "text": "For any algebraically closed field extension of Omega, the geometric fibre is the corresponding base change of C. Dimension of this finite-type scheme does not increase under a field extension. On a represented presheaf its field-point topology agrees with the scheme topology. Hence every fibre has dimension at most one, giving the final field of IsProperCurveFamily. Assemble the structure with the represented presheaf; the identity comparison gives the required projection equation.",
+   "uses": [
+    "def-sfb-proper-curve-moduli",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "section-stack-curves and Tag 0DSW(3)(a)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-proper-curve-moduli",
+  "def-weil-proper-morphism",
+  "def-trf-algebraic-space",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "section-stack-curves and Tag 0DSW(3)(a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper scheme of dimension at most one over a field defines a flat proper finitely presented family of algebraic space curves",
+   "results": "AlgebraicGeometry.Scheme; AlgebraicGeometry.Scheme.mk.noConfusion; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.flat_iff; AlgebraicGeometry.IsProper; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.AffineScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and group-action results, not the project full-substack/curve comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme of dimension at most one over a field gives a flat proper finitely presented family of curves with dimension at most one geometric fibres",
+   "results": "AlgebraicGeometry.Flat; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.compactSpace_of_universallyClosed; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.IsProper.instOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match for the project moduli interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat",
+   "results": "AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match; general scheme/category API does not state the project moduli comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgebraicModuliStack|IsModuliAutomorphismSpace|ProperCurveFamily",
+   "results": "[grep] OK 0 hit(s). Direct rg also checked OpenModuliSubstack in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/FiberedCategory, with no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveStackInfinitesimalDmLocus",
+  "date": "2026-10-23",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperCurveSchemeRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperCurveSchemeRealization.lean",
+  "declaration": "AlgebraicGeometry.ProperCurveModuli.exists_scheme_family",
+  "statement": "theorem ProperCurveModuli.exists_scheme_family {k Ω : Type u} [Field k] [Field Ω]\n    (a : Spec (.of Ω) ⟶ Spec (.of k)) (C : Scheme.{u})\n    (f : C ⟶ Spec (.of Ω)) (hf : IsProper f) (hdim : topologicalKrullDim C ≤ 1) :\n    ∃ X : ProperCurveFamily (Over.mk a),\n      ∃ e : X.space.obj.obj ≅ yoneda.obj (Over.mk (f ≫ a)),\n        e.hom ≫ yoneda.map\n          (Over.homMk (U := Over.mk (f ≫ a)) (V := Over.mk a) f rfl) = X.projection",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

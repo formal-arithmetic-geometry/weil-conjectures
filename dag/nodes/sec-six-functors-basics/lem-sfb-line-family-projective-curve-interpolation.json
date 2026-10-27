@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-line-family-projective-curve-interpolation",
+ "kind": "statement",
+ "title": "Two fibres of a smooth-parameter line family have a projective-curve realization",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $Z$ be a smooth separated finite-type $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $S$ be a nonempty smooth connected separated finite-type $k$-scheme. Connected means its underlying topological space is not the disjoint union of two nonempty open subsets; separated means its diagonal is a closed immersion. Let $s_0,s_1\\in S(k)$ [def-pc-rational-point] and let $L$ be an invertible module on $Z\\times_k S$ [def-sc-invertible-module, def-pc-fibre-product]. There exist a smooth projective geometrically integral curve $C/k$ [def-pc-smooth-projective-curve, def-pc-geometrically-irreducible], points $a,b\\in C(k)$, and an invertible module $E$ on $Z\\times_k C$ such that $E_a\\cong L_{s_0}$ and $E_b\\cong L_{s_1}$. Fibres mean tensor pullbacks [def-pc-module-pullback]. The points $a,b$ need not be distinct. No properness, integrality, affineness, or dimension bound on $Z$ is assumed.",
+ "source": {
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Corollary 1.9, printed p.4, for a curve through the two parameter points, followed by normalization and completion as in Milne, Abelian Varieties, Chapter I Lemma 3.5 (printed p.18). Extension on the smooth product uses Stacks Tag 0BD9, divisors.tex lemma-extend-invertible-module, and regular-local factoriality (more-algebra.tex lemma-regular-local-UFD). This is an agent-assembled consequence, not a claim that Corollary 1.9 states the whole assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-rational-point",
+  "def-sc-invertible-module",
+  "def-pc-fibre-product",
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-smooth-scheme-over-field-regular], $S$ is regular. Its assumed nonemptiness and connectedness therefore make it integral by [lem-sc-regular-connected-integral]. Apply [lem-sfb-integral-variety-smooth-curve-interpolation] to $X=S$ and the nonempty finite set $F=\\{s_0,s_1\\}$. Obtain a smooth separated connected curve $D$, a morphism $g:D\\to S$, and $d_0,d_1\\in D(k)$ with $g(d_i)=s_i$. When the two given points agree, use the same chosen lift twice. By [lem-weil-pbc-invertible-pullback-tensor](1), $M=(\\operatorname{id}_Z\\times g)^*L$ is invertible on $Z\\times_kD$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-sfb-integral-variety-smooth-curve-interpolation",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+    "place": "Corollary 1.9, printed p.4; parameter restriction, assembled with Stacks 056S (varieties.tex lemma-smooth-regular), 01ON (properties.tex lemma-characterize-integral), and 0B8L (modules.tex lemma-pullback-invertible)."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-compactification] to $D$: there is an open immersion $j:D\\hookrightarrow C$ into a smooth proper connected curve $C/k$. Put $a=j(d_0)$ and $b=j(d_1)$. To verify projectivity rather than only properness, [lem-sc-curves-quasi-projective] gives a locally closed immersion $i:C\\hookrightarrow\\mathbf P^N_k$. The target is separated by [lem-weil-pbc-projective-space-proj-separated]. Since $C$ is proper over $k$, [lem-weil-pbc-proper-to-separated] makes $i$ proper, and [lem-weil-pbc-proper-immersion-closed] makes $i$ a closed immersion. Thus $C$ is projective over $k$.",
+   "uses": [
+    "lem-sc-compactification",
+    "lem-sc-curves-quasi-projective",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 3.5(a), printed p.18; projectivity checked using Stacks 0A25 (varieties.tex lemma-dim-1-quasi-projective), 01NH (constructions.tex lemma-projective-space-separated), and 01IQ (schemes.tex lemma-immersion-when-closed)."
+   }
+  },
+  {
+   "text": "The algebraic-closure criterion [lem-weil-geometrically-connected-algebraic-closure], applied with $\\bar k=k$, makes the nonempty connected $C$ geometrically connected. Smoothness makes it geometrically normal by [lem-trf-smooth-geometrically-normal]. It is of finite type over $k$, so [lem-trf-geonormal-geoconnected-finite-type-integral] makes $C$ geometrically integral. Together with step 2 and $\\dim C=1$, these are all the required properties of the parameter curve.",
+   "uses": [
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-trf-geonormal-geoconnected-finite-type-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0387 (lemma-characterize-geometrically-connected), 056T (lemma-smooth-geometrically-normal); connected-normal integrality on field base changes is properties.tex Tag 033M (lemma-normal-Noetherian)."
+   }
+  },
+  {
+   "text": "Put $Y=Z\\times_kC$ and $U=Z\\times_kD$. The map $u=\\operatorname{id}_Z\\times j:U\\to Y$ is an open immersion by [lem-weil-pbc-open-immersion-base-change], since its square with $j$ and $Y\\to C$ is cartesian by the product universal property. By [lem-pc-proper-base-change](2), $Y\\to C$ is smooth, and [lem-trf-smooth-composition] makes $Y\\to\\operatorname{Spec}k$ smooth. Consequently [lem-weil-pbc-smooth-scheme-over-field-regular] says that $Y$ is locally Noetherian and every local ring is regular local. By [lem-weil-pbc-regular-local-localization], each regular local ring is a regular ring in the sense required by [lem-trf-regular-local-ufd-boundary-factorization]. Applying that node with the empty parameter list ($r=0$) to each local ring shows that it is a UFD. In particular this holds on $Y\\setminus U$. Now [lem-sfb-invertible-extension-factorial-complement], applied to the invertible module $M$ on $U$, gives an invertible module $E$ on $Y$ with $u^*E\\cong M$. This does not require $Y$ to be integral or connected.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-sfb-invertible-extension-factorial-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9 (lemma-extend-invertible-module); regular local factoriality is more-algebra.tex Tag 0AG0 (lemma-regular-local-UFD); smoothness is morphisms.tex 01VA (lemma-composition-smooth), 01VB (lemma-base-change-smooth), and varieties.tex 056S."
+   }
+  },
+  {
+   "text": "For $i=0,1$ let $v_i:Z\\to U$ be $z\\mapsto(z,d_i)$ and let $w_i:Z\\to Z\\times_kS$ be $z\\mapsto(z,s_i)$. Then $(\\operatorname{id}_Z\\times g)\\circ v_i=w_i$, while $u\\circ v_0$ and $u\\circ v_1$ are the fibre inclusions at $a$ and $b$. The composition isomorphism of [lem-weil-pbc-invertible-pullback-tensor](2), applied to the actual maps, gives $E_a\\cong v_0^*u^*E\\cong v_0^*M\\cong w_0^*L=L_{s_0}$ and $E_b\\cong v_1^*u^*E\\cong v_1^*M\\cong w_1^*L=L_{s_1}$. These identities also apply if $a=b$ or $Z$ is empty.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tensor inverse image and composition: sheaves.tex Tags 0095--0096 and 0098; fibre identifications are the pullbacks along the displayed equal composites."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sfb-integral-variety-smooth-curve-interpolation",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-compactification",
+  "lem-sc-curves-quasi-projective",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-geonormal-geoconnected-finite-type-integral",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-sfb-invertible-extension-factorial-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/charles-poonen-bertini-irreducibility.pdf",
+  "place": "Corollary 1.9, with smooth completion from Milne I.3.5(a) and line extension by Stacks 0BD9; explicit assembly, no SGA source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two fibres of a line bundle family over a smooth connected variety can be realized as fibres of a family over a smooth projective connected curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.fiberι f ((CategoryTheory.ConcreteCategory.hom f.base) x)).base)\\n      (AlgebraicGeometry.Scheme.Hom.asFiber f x) =\\n    x\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any point $ x \\\\in X $, the composition of the inclusion map of the fiber $ f^{-1}(f(x)) $ into $ X $ with the fiber construction at $ x $ yields $ x $ i\"}\n  {\"name\": \"hom_trivializationAt_target\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"The target of the trivialization at $x_0$ for the hom-bundle of continuous linear maps between two vector bundles is the Cartesian product of the intersection of the base sets of the trivializations o\"}\n  {\"name\": \"hom_trivializationAt\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"For a point $x_0$ in the base space $B$, the trivialization of the fiber bundle of continuous linear maps between two vector bundles $E_1$ and $E_2$ at $x_0$ is constructed by composing the trivializa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X)\\n  [inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀] [inst_1 : 𝒰.LocallyDirected] {i j : 𝒰.I₀} (xi : ↥(𝒰.X i))\\n  (xj : ↥(𝒰.X\", \"doc\": \"For any locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ satisfy $\\\\mathcal{U}.f(i)(x_i) = \\\\mathcal{U}.f(j)(x_j)$ in $X$, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (x : ↥X) → ↥(AlgebraicGeometry.Scheme.Hom.fiber f ((CategoryTheory.ConcreteCategory.hom f.base) x))\", \"doc\": \"The function maps a point $ x $ in scheme $ X $ to the fiber of the morphism $ f $ over $ f(x) $, which is the set of all points in $ X $ mapping to $ f(x) $ under $ f $, equipped with the subspace to\"}\n  {\"name\": \"hom_trivializationAt_baseSet\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"For vector bundles $E_1$ and $E_2$ over a topological space $B$ with normed fibers, the base set of the trivialization of the hom-bundle $E_1 \\\\toSL[\\\\sigma] E_2$ at a point $x_0 \\\\in B$ is equal to the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  ↑((AlgebraicGeometry.Scheme.Hom.fiberHomeo f y) x) =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberι f y).base) x\", \"doc\": \"For any morphism $f: X \\\\to Y$ of schemes and any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is homeomorphic to its image in $X$ equipped with the subspace topology. This constructs an explicit homeomo\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverFiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).CanonicallyOver X\", \"doc\": \"For any morphism of schemes $f: X \\\\to Y$ and any point $y \\\\in Y$, the fiber of $f$ over $y$, denoted $X_y$, is endowed with a canonical structure of a scheme over $X$. This structure is defined by the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Smooth",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicEquiv|algebraically.trivial|Bertini|compactification",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic equivalence of invertible sheaves on a smooth variety is generated by families over smooth projective curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_apply_coe\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : (Submodule R A)ˣ ⧸ (Units.map ↑(Submodule.spanSingleton R)).range),\\n  ↑((Submodule.unitsQuotEquivRelPic R A) a) =\\n    ↑((QuotientGroup.quotientKerEquivRange (Subm\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules is multiplicatively isomorphic to the relative Picard subgroup $ \\\\mathrm{relPic}\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_symm_apply\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : ↥(CommRing.relPic R A)),\\n  (Submodule.unitsQuotEquivRelPic R A).symm a =\\n    (QuotientGroup.congr (Submodule.unitsToPic R A).ker (Units.map ↑(Submodule.spanSingle\", \"doc\": \"For commutative semirings $ R $ and $ A $ with a faithful $ R $-algebra structure, the quotient group of invertible submodules of $ A $ by the subgroup of principal invertible submodules (those genera\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": (Submodule R A)ˣ ⧸ (Units.map (spanSingleton R).toMonoidHom).range ≃* relPic R A\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules (those generated by a single element) is multiplicatively isomorphic to the rela\"}\n  {\"name\": \"Module.Invertible.algEquivOfRing_apply\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(x : R) : algEquivOfRing R A x = algebraMap R A x\", \"doc\": \"For any commutative semiring $ R $ and $ R $-algebra $ A $, applying the algebra equivalence $ \\\\text{algEquivOfRing} \\\\, R \\\\, A $ constructed via invertible modules to an element $ x \\\\in R $ yields the\"}\n  {\"name\": \"CommRing.Pic.mk.linearEquiv\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M ≃ₗ[R] M\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-module $ M $, there is a canonical linear equivalence between the Picard group element represented by $ M $ and $ M $ itself. This equivalence \"}\n  {\"name\": \"Submodule.unitsToPicEquiv\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(I : (Submodule R A)ˣ) : unitsToPic R A I ≃ₗ[R] I\", \"doc\": \"For an invertible submodule $ I $ of an $ R $-module $ A $, this defines an $ R $-linear equivalence between the module corresponding to $ I $'s isomorphism class in the Picard group $ \\\\mathrm{Pic}(R)\"}\n  {\"name\": \"SheafOfModules.Presentation.mk.injEq\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Two presentations of a sheaf of modules are equal if and only if their generator sets are equal and their relation sheaves are isomorphic as sheaves of modules.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": Sheaf (grothendieckTopology X) A ≌ TopCat.Sheaf A X\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of invertible sheaves on a smooth scheme can be restricted to a curve through two parameter points and extended over a projective completion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (HomogeneousLocalization.awayMa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  {x x' : ↑(X.presheaf.obj (Opposite.op ⊤))} {t t' : A} {d d' : ℕ} {H : f t = x}\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a scheme $X$, and homogeneous elements $t \\\\in \\\\mathcal{A}_d$ and $t' \\\\in \\\\mathcal{A}_{d'}$ with $d, d' > 0$, if there exists $s \\\\in \\\\mathcal{A}_n$ such that $t \\\\cdot\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the associativity of the composition involving the inverse of the isomor\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicEquiv|algebraically.trivial|Bertini|compactification",
+   "results": "{\"t\": \"2026-10-24T08:04:52Z\", \"tool\": \"grep\", \"query\": \"algebraicEquiv|algebraically.trivial|Bertini|compactification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two fibres of an invertible sheaf family on a smooth scheme parametrized by a connected smooth variety can be interpolated by a line bundle on the product with a smooth projective curve",
+   "results": "{\"t\": \"2026-10-24T08:04:52Z\", \"tool\": \"leansearch\", \"query\": \"Two fibres of an invertible sheaf family on a smooth scheme parametrized by a connected smooth variety can be interpolated by a line bundle on the product with a smooth projective curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"smoothSheaf.evalHom\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\"], \"digest\": \"687f2797175a4dc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Smooth",
+   "results": "{\"t\": \"2026-10-24T08:04:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two fibres of a line bundle family over a smooth connected parameter scheme can be realized over a smooth projective integral curve",
+   "results": "{\"t\": \"2026-10-24T08:05:32Z\", \"tool\": \"leanfinder\", \"query\": \"Two fibres of a line bundle family over a smooth connected parameter scheme can be realized over a smooth projective integral curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.asFiber\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.exists_preimage\", \"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback\", \"AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply\"], \"digest\": \"0cecf6b6a1317cc2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give scheme fibres, irreducible components, generic points, affine elliptic-curve points, smooth loci, or proper global sections, not a curve through prescribed points or the claimed line-family interpolation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-product-algebraic-equivalence",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard branch under det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-birigidified-affine-triviality-locus, proof step 2: algebraically trivial classes on the smooth affine product. Current latest blueprint direct-images proof (3) supplies the direct-image context, not this auxiliary Picard formula.",
+   "via": [
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-line-family-projective-curve-interpolation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Isolated the generic smooth-curve interpolation input (Charles--Poonen Corollary 1.9 and normalization), reused existing smooth completion and factorial-complement extension, and wrote the projectivity, geometric integrality, smooth-product regularity and actual fibre pullback calculations explicitly. No Lean attachment states the whole assertion.",
+  "blueprint": "Historical alteration/Picard branch under det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-birigidified-affine-triviality-locus, proof step 2: algebraically trivial classes on the smooth affine product. Current latest blueprint direct-images proof (3) supplies the direct-image context, not this auxiliary Picard formula. The latest direct-images proof (3) was read; this inherited Picard auxiliary branch has no direct current blueprint statement. The ancestor command returns None, so the inherited null ancestor and via chain are preserved. No same-statement blueprint node was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "General regularity of a smooth scheme over a field, used for S and Z times C; no curve-only regularity statement suffices for these schemes."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "General algebraic-closure test for geometric connectedness, applied to C with the identity extension k/k."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "General geometric normality of smooth schemes over a field, used for C; this is foundational algebraic geometry, not trace-formula content."
+   },
+   {
+    "node": "lem-trf-geonormal-geoconnected-finite-type-integral",
+    "why": "General connected-normal integrality after field extension, used to verify geometric integrality of C."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Its r=0 specialization is the regular-local UFD theorem, used for boundary local rings on Z times C. No parameter-factorization conclusion is used."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic invertible-pullback and composition identities for restriction of L and the final fibre isomorphisms."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic localization theorem supplying the regular-ring hypothesis of the existing regular-local UFD node; no geometric theorem is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-geonormal-geoconnected-finite-type-integral",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-f87cc7dd5",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-f87cc7dd5 (reviewer sub-agent of L); spot-checked: First split; the item is unsplit with no proof on side-live. The item's statement, stmt_deps, source and blueprint are identical to base, so the target is not weakened. Step checks: S is regular (056S), hence integral (regular nonempty connected), so the new node applies with X=S and F={s0,s1}. lem-sc-compactification gets D as a smooth separated connected curve. Projectivity: 0A25 gives a locally closed immersion into P^N, P^N is separated (01NH), proper-to-separated makes it proper, and 01IQ makes it a closed immersion. Geometric connectedness follows by k̄=k in 0387, geometric normality by 056T, geometric integrality by 033M. Z×D→Z×C is an open immersion as the base change of j. Z×C is smooth by base change plus 01VA, so its local rings are regular, hence UFDs (0AG0, r=0); 0BD9 (checked divisors.tex 7127-7132) then extends M. Step 5 fibre identities follow from (id×g)∘v_i=w_i and the composition isomorphisms; elementary. New node lem-sfb-integral-variety-smooth-curve-interpolation (unsplit, statement only) is true: for dim ≥2, Charles–Poonen Cor 1.9 (p.4, variety = separated finite type, needs m≥2) gives a curve through F, and its normalization is regular, smooth over perfect k and connected, and rational points lift. dim 1 is trivial (source place silent, left as is); dim 0 uses a constant map. It is strictly smaller than the item. No duplicate: rg over dag/nodes finds only the lem-zl smooth-affine finite-field curve lemmas, which need stronger hypotheses. Batch-5 flags are accepted as generic foundations (056T, 033M, 01VA/smooth_comp, 0AG0, and lem-trf-ufd-height-one via 0BD9); none is trace-formula or Poincaré content or a step specific to their proofs. The extra lem-weil-pbc-regular-local-localization citation is redundant but harmless. tool_uses accepted; no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineFamilyProjectiveCurveInterpolation",
+  "declaration": "AlgebraicGeometry.exists_projectiveCurve_lineFamily_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/LineFamilyProjectiveCurveInterpolation.lean",
+  "statement": "theorem exists_projectiveCurve_lineFamily_fibres (k : Type u) [Field k] [IsAlgClosed k] (Z S : Scheme.{u}) [Z.Over (Spec (.of k))] [S.Over (Spec (.of k))] [Smooth (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [Smooth (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [ConnectedSpace S] (s0 s1 : (S ↘ Spec (.of k)).fieldPoints k) (L : (pullback (Z ↘ Spec (.of k)) (S ↘ Spec (.of k))).Modules) [Scheme.Modules.IsInvertible L] : ∃ (C : Scheme.{u}) (f : C ⟶ Spec (.of k)), IsSmoothProjectiveCurve f ∧ GeometricallyIntegral f ∧ ∃ (a b : f.fieldPoints k) (E : (pullback (Z ↘ Spec (.of k)) f).Modules), Scheme.Modules.IsInvertible E ∧ Nonempty ((Scheme.Modules.tensorPullback (f.fieldPointBaseChange a (Over.mk (Z ↘ Spec (.of k))) ≫ (pullbackSymmetry f (Z ↘ Spec (.of k))).hom)).obj E ≅ (Scheme.Modules.tensorPullback ((S ↘ Spec (.of k)).fieldPointBaseChange s0 (Over.mk (Z ↘ Spec (.of k))) ≫ (pullbackSymmetry (S ↘ Spec (.of k)) (Z ↘ Spec (.of k))).hom)).obj L) ∧ Nonempty ((Scheme.Modules.tensorPullback (f.fieldPointBaseChange b (Over.mk (Z ↘ Spec (.of k))) ≫ (pullbackSymmetry f (Z ↘ Spec (.of k))).hom)).obj E ≅ (Scheme.Modules.tensorPullback ((S ↘ Spec (.of k)).fieldPointBaseChange s1 (Over.mk (Z ↘ Spec (.of k))) ≫ (pullbackSymmetry (S ↘ Spec (.of k)) (Z ↘ Spec (.of k))).hom)).obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b59d1b633",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Only the item's lean field changed; lean.statement matches the file signature exactly; proof is only sorry, no definitions. Every hypothesis present and none stronger: Smooth/IsSeparated/LocallyOfFiniteType+QuasiCompact for Z and S, ConnectedSpace S (includes nonempty), rational points as fieldPoints, IsInvertible L. Conclusion uses IsSmoothProjectiveCurve (includes integral and dimension 1) plus GeometricallyIntegral (recorded declaration of def-pc-geometrically-irreducible), invertible E, and two Nonempty isos of tensorPullback along fieldPointBaseChange followed by pullbackSymmetry.hom, checked to be exactly z ↦ (z,p) into Z×C and Z×S. Edge cases: empty Z, dim-0 S, a=b, any characteristic, single universe u. Docstrings give source places, blueprint tag and five proof steps; report has both required sections; imports exist. Not recompiled since no file changed (worker reports clean compile). No findings."
+ }
+}

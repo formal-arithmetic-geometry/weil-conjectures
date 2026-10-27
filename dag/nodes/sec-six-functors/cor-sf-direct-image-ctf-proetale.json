@@ -210,7 +210,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-cor-sf-direct-image-ctf",
  "split_report": {
@@ -298,5 +309,29 @@
   "landing": "20261019T093339-L-2298449",
   "kind": "proof",
   "note": "independent cc review: Delivered module (compiles 8.2 s; theorem signature identical to live; axioms propext, sorryAx (only from cited still-sorry dependency statements), Classical.choice, Quot.sound) and node proof/proof_deps/proof_origin against the Lean proof; the removed FiniteTorAmplitudeSites (étale predicate, unused before) against the empty realized list of unit sk-cor-sf-direct-image-ctf; 4 of 5 direct importers compile against the delivery"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$, $A=A_{E,n}$, and the algebraically closed field\n$k=\\overline{\\mathbf F}_q$. Let $X,Y$ be finite-type $k$-schemes with\n$\\dim X\\leq d$, let $f:X\\to Y$ be a\nseparated finite-type\nmorphism, and let $K\\in D^b_{ctf}(X_{\\Proet},A)$ be a bounded\nconstructible complex of $A$-modules on the small pro-étale site with\nfinite Tor amplitude in $[a,b]$, both notions being the intrinsic ones of\n[def-weil-finite-torsion-constructibility] and\n[def-weil-finite-tor-amplitude]. Then $Rf_*K$ is bounded\nconstructible on $Y_{\\Proet}$ and has finite Tor amplitude in\n$[a,b+2d]$. That is, clause (iii) of the finite-Tor preservation summary holds at\nthe finite coefficient ring $A$ for *every* object of\n$D^b_{ctf}(X_{\\Proet},A)$, with no restriction to the objects of étale\norigin.",
+  "proof": [
+   {
+    "text": "By [lem-sf-proetale-constructible-origin] the object $K$ is of\nétale origin: there are a bounded complex $K'$ with constructible\ncohomology on $X_{\\Et}$ and an isomorphism $K\\cong\\nu_X^*K'$, and by\npart (2) of [lem-exc-comparison-tor-interval] the complex $K'$ has finite Tor\namplitude in $[a,b]$ on the étale site.\n[cor-sf-direct-image-ctf-nonproper], whose two inputs are\n[thm-sf-direct-image-tor-amplitude] and\n[lem-sf-etale-direct-image-vanishing], therefore gives a bounded\nconstructible étale complex $Rf_{\\Et,*}K'$ with finite Tor amplitude in\n$[a,b+2d]$. The morphism $f$ is of finite type, hence quasi-compact and\nquasi-separated, so the comparison direct image of\n[prop-weil-pbc-comparison-direct-image] gives an isomorphism\n\n$$\nRf_{\\Proet,*}\\nu_X^*K'\\cong\\nu_Y^*Rf_{\\Et,*}K',\n$$\n\nand part (1) of [lem-exc-comparison-tor-interval] gives finite Tor amplitude in\n$[a,b+2d]$ and bounded constructibility for the right-hand side. As in\n[cor-sf-direct-image-ctf-etale-origin] this is clause (iii) of\nthe finite-Tor preservation summary for the finite coefficient ring $A$ for the\nobject $K$.",
+    "uses": [
+     "lem-sf-proetale-constructible-origin",
+     "lem-exc-comparison-tor-interval",
+     "cor-sf-direct-image-ctf-nonproper",
+     "thm-sf-direct-image-tor-amplitude",
+     "lem-sf-etale-direct-image-vanishing",
+     "prop-weil-pbc-comparison-direct-image",
+     "cor-sf-direct-image-ctf-etale-origin"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

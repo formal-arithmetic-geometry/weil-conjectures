@@ -1,0 +1,220 @@
+{
+ "id": "lem-trf-topos-finite-cover-calculus",
+ "kind": "statement",
+ "title": "Universal epimorphic covers and finite quasi-compact cover calculus",
+ "statement": "Let $\\mathcal E$ be a Grothendieck topos, presented as sheaves of sets on a small site, with universes as in [def-weil-size-convention] and quasi-compactness as in [def-trf-coherent-topos]. A family $(f_i:X_i\\to Y)_{i\\in I}$ is jointly epimorphic when its coproduct map $\\coprod_iX_i\\to Y$ is an epimorphism; epimorphism means right cancellation against all objects. All families below are small in the containing universe. Then:\n(1) The family is jointly epimorphic if and only if every section of $Y$ locally lifts through one of the $f_i$: on a covering of its site object, its restrictions are images of sections of individual $X_i$, with the index allowed to vary on the covering. For every $Z\\to Y$, the family $(X_i\\times_Y Z\\to Z)_i$ is jointly epimorphic whenever $(f_i)_i$ is. In particular epimorphisms are stable under pullback. If $(X_i\\to B)_i$ and $(Y_j\\to C)_j$ are jointly epimorphic and $B,C\\to A$ are any maps, then $(X_i\\times_A Y_j\\to B\\times_A C)_{i,j}$ is jointly epimorphic.\n(2) For an epimorphism $e:X\\to Y$, quasi-compactness of $X$ implies quasi-compactness of $Y$.\n(3) Every finite coproduct of quasi-compact objects is quasi-compact, including the empty coproduct. Consequently, if an object admits a finite jointly epimorphic family from quasi-compact objects, it is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent auxiliary extracting returned proof steps 1–2 of lem-trf-coherent-epimorphic-quotient. Tag 00WN (lemma-mono-epi-sheaves), Tag 00W2 (lemma-limit-sheaf), Tag 00WK (lemma-sections-sheafification), Tag 0GMP (lemma-image-of-quasi-compact), Tag 0GMQ (lemma-coproduct-quasi-compact). Local lifting and universal jointly epimorphic families are the sheaf-theoretic expansion; the empty coproduct case is included explicitly."
+ },
+ "stmt_deps": [
+  "def-trf-coherent-topos",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small site presenting $\\mathcal E$, with all site data, section sets and index sets in the containing universe of the statement. For the family $(X_i)_i$ form the presheaf $P(U)=\\coprod_i X_i(U)$, whose restrictions preserve the index. Its sheafification $P^\\#$ is the coproduct in sheaves: a natural transformation $P\\to H$ to a sheaf is exactly a family of natural transformations $X_i\\to H$, and by [def-weil-pbc-sheafification] it extends uniquely to $P^\\#\\to H$. Thus the map $p:\\coprod_iX_i\\to Y$ is induced by $(i,x)\\mapsto f_i(x)$. This proves the required coproduct identification directly from the universal property, for arbitrary small $I$, including $I=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WB (theorem-plus), universal property of sheafification; coproduct identification proved directly from the adjunction of def-weil-pbc-sheafification."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], $p$ is epic exactly when sections of $Y$ locally lift to $P^\\#$. By [lem-weil-pbc-site-sheafification-sections-local], each such lifted section is, on a further covering, represented by an element $(i,x)$ of $P$. Composing the two site coverings gives local lifts through individual $f_i$, with the index varying between covering objects. Conversely, local lifts through the $f_i$ map into $P^\\#$ and make $p$ locally surjective, hence epic by the same epimorphism criterion. Coverings compose by [def-weil-pbc-sites-and-cohomology](1)(ii). The sheafification lemma applies because our common containing universe contains the objects and morphisms of the small site, as well as all values of $P$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WN (lemma-mono-epi-sheaves); Tag 00WK (lemma-sections-sheafification); Tag 00VH (definition-site), composition axiom."
+   }
+  },
+  {
+   "text": "For $Z\\to Y$, a section $z\\in Z(U)$ has image $y\\in Y(U)$. Step 2 gives, locally, $x\\in X_i$ with $f_i(x)=y$. By the sectionwise pullback description in [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], the pair $(x,z)$ is a section of $X_i\\times_Y Z$ lifting $z$. Step 2 makes the pulled-back family jointly epic. Taking a singleton proves pullback stability of epimorphisms. For the product assertion, a section $(b,c)$ of $B\\times_A C$ first locally lifts $b$ to some $x_i$, and on each resulting covering object locally lifts $c$ to some $y_j$. On that further cover the images of $x_i,y_j$ in $A$ agree because they equal the restrictions of the images of $b,c$. Hence $(x_i,y_j)$ is a section of $X_i\\times_A Y_j$ lifting $(b,c)$. The composite is a covering by [def-weil-pbc-sites-and-cohomology](1)(ii), so step 2 proves joint epimorphy. This proves all of clause (1).",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2 (lemma-limit-sheaf), pullbacks; Tag 00VH (definition-site), composition of coverings; elementary local-lifting argument."
+   }
+  },
+  {
+   "text": "For clause (2), let $(T_j\\to Y)_{j\\in J}$ be a jointly epic family and let $e:X\\to Y$ be epic with $X$ quasi-compact. Step 3 makes $(X\\times_Y T_j\\to X)_j$ jointly epic. The definition in [def-trf-coherent-topos] supplies a finite $J_0\\subset J$ for which the corresponding coproduct map $q:\\coprod_{j\\in J_0}(X\\times_Y T_j)\\to X$ is epic. To check that the selected $(T_j\\to Y)_{j\\in J_0}$ are jointly epic, take any $a,b:Y\\to H$ agreeing on each selected $T_j$. The pullback equations give $aeq=beq$, and right cancellation first of $q$ and then of $e$ gives $a=b$. By the coproduct universal property this is exactly epimorphy of $\\coprod_{j\\in J_0}T_j\\to Y$. Every jointly epic family of $Y$ therefore has a finite jointly epic subfamily.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0GMP (lemma-image-of-quasi-compact), part (2); omitted proof expanded using clause (1) and right cancellation."
+   }
+  },
+  {
+   "text": "For clause (3), let $I$ be finite, with each $X_i$ quasi-compact, and put $S=\\coprod_{i\\in I}X_i$. Given a jointly epic family $(T_j\\to S)_{j\\in J}$, pull it back to each $X_i$ by step 3. By [def-trf-coherent-topos], choose a finite $J_i\\subset J$ such that $(X_i\\times_S T_j\\to X_i)_{j\\in J_i}$ is jointly epic. The union $J_0=\\bigcup_{i\\in I}J_i$ is finite. If $a,b:S\\to H$ agree on $T_j$ for all $j\\in J_0$, they agree after each of the jointly epic pulled-back families indexed by $J_i$, hence on $X_i$ for every $i$. The coproduct universal property gives $a=b$, proving that $(T_j\\to S)_{j\\in J_0}$ is jointly epic. If $I=\\varnothing$, use $J_0=\\varnothing$: the map from the empty subfamily is $0\\to S=0$, an isomorphism and therefore epic by right cancellation. Thus the initial sheaf is quasi-compact as well; no pointwise emptiness of this sheaf is assumed.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0GMQ (lemma-coproduct-quasi-compact); omitted proof expanded, including the additional empty-coproduct case via its universal property."
+   }
+  },
+  {
+   "text": "Finally, a finite jointly epic family $(X_i\\to Y)_{i\\in I}$ of quasi-compact objects gives an epimorphism $\\coprod_iX_i\\to Y$ by the definition of joint epimorphy. Its source is quasi-compact by step 5 and its target is quasi-compact by step 4. This also applies when $I=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0GMP (lemma-image-of-quasi-compact) and 0GMQ (lemma-coproduct-quasi-compact), immediate combination of the two proved clauses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-trf-coherent-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00WB (theorem-plus), 00WN (lemma-mono-epi-sheaves), 00WK (lemma-sections-sheafification), 00W2 (lemma-limit-sheaf), 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact). Agent expansion of omitted finite-cover proofs and elementary local-lifting calculus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck topos jointly epimorphic families are stable under pullback epimorphic images and finite coproducts of quasi compact objects are quasi compact",
+   "results": "{\"t\": \"2026-10-22T06:44:58Z\", \"tool\": \"leanfinder\", \"query\": \"In a Grothendieck topos jointly epimorphic families are stable under pullback epimorphic images and finite coproducts of quasi compact objects are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.precoherent\", \"CategoryTheory.presheafIsFinite_of_epi\", \"CategoryTheory.extensiveTopology\", \"CategoryTheory.instPrecoherentOfFinitaryPreExtensiveOfPreregular\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.extensiveTopology.subcanonical\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify\"], \"digest\": \"6ecd04aa1da4480b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-surjectivity and extensive-sheaf declarations supply ingredients, but neither those nor presheafIsFinite_of_epi assert quasi-compactness defined by finite epimorphic subfamilies; scheme quasi-compactness and condensed special cases have different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Epi\"",
+   "results": "{\"t\": \"2026-10-22T06:44:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsNormalEpiCategory\", \"PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp\", \"PresheafOfModules.epi_of_surjective\", \"PresheafOfModules.surjective_of_epi\", \"PresheafOfModules.epi_iff_surjective\", \"PresheafOfModules.instEpiFromFreeYonedaCoproduct\", \"CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi\", \"CategoryTheory.instEpiSheafTypeToImage\"], \"digest\": \"0e91be8a679a7c3c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-surjectivity and extensive-sheaf declarations supply ingredients, but neither those nor presheafIsFinite_of_epi assert quasi-compactness defined by finite epimorphic subfamilies; scheme quasi-compactness and condensed special cases have different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact|quasi.?separated|jointly.*epi",
+   "results": "{\"t\": \"2026-10-22T06:44:44Z\", \"tool\": \"grep\", \"query\": \"quasi.?compact|quasi.?separated|jointly.*epi\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\"], \"digest\": \"117c22ea064d54b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-surjectivity and extensive-sheaf declarations supply ingredients, but neither those nor presheafIsFinite_of_epi assert quasi-compactness defined by finite epimorphic subfamilies; scheme quasi-compactness and condensed special cases have different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact sheaves are closed under surjective images and finite coproducts and epimorphic families are universal under base change",
+   "results": "{\"t\": \"2026-10-22T06:45:23Z\", \"tool\": \"leansearch\", \"query\": \"Quasi compact sheaves are closed under surjective images and finite coproducts and epimorphic families are universal under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\"], \"digest\": \"fa61c3cf7f14fbb5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-surjectivity and extensive-sheaf declarations supply ingredients, but neither those nor presheafIsFinite_of_epi assert quasi-compactness defined by finite epimorphic subfamilies; scheme quasi-compactness and condensed special cases have different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite epimorphic covers of compact objects in a sheaf topos and pullback stable jointly surjective families",
+   "results": "{\"t\": \"2026-10-22T06:45:41Z\", \"tool\": \"leanfinder\", \"query\": \"Finite epimorphic covers of compact objects in a sheaf topos and pullback stable jointly surjective families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.presheafIsFinite_of_epi\", \"CompHausLike.precoherent\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff\", \"CategoryTheory.isSheaf_coherent\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"CategoryTheory.regularTopology.isLocallySurjective_sheaf_of_types\"], \"digest\": \"4060b31b02c11ce5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local-surjectivity and extensive-sheaf declarations supply ingredients, but neither those nor presheafIsFinite_of_epi assert quasi-compactness defined by finite epimorphic subfamilies; scheme quasi-compactness and condensed special cases have different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact|jointly.*epi",
+   "results": "{\"t\": \"2026-10-23T10:59:27Z\", \"tool\": \"grep\", \"query\": \"quasi.?compact|jointly.*epi\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\"], \"digest\": \"117c22ea064d54b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf epimorphism and existence/extensivity results give ingredients only; finite generation of a presheaf by sections is not quasi-compactness for epimorphic families of sheaves, and the scheme covering results concern schemes, not arbitrary topos objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every epimorphic covering family of a quasi compact sheaf has a finite subcover and finite coproducts of such objects are quasi compact",
+   "results": "{\"t\": \"2026-10-23T10:59:27Z\", \"tool\": \"leansearch\", \"query\": \"Every epimorphic covering family of a quasi compact sheaf has a finite subcover and finite coproducts of such objects are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact\", \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.homCover\"], \"digest\": \"69571f1210cf88f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf epimorphism and existence/extensivity results give ingredients only; finite generation of a presheaf by sections is not quasi-compactness for epimorphic families of sheaves, and the scheme covering results concern schemes, not arbitrary topos objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Epi\"",
+   "results": "{\"t\": \"2026-10-23T10:59:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.instIsNormalEpiCategory\", \"PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp\", \"PresheafOfModules.epi_of_surjective\", \"PresheafOfModules.surjective_of_epi\", \"PresheafOfModules.epi_iff_surjective\", \"PresheafOfModules.instEpiFromFreeYonedaCoproduct\", \"CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi\", \"CategoryTheory.instEpiSheafTypeToImage\"], \"digest\": \"0e91be8a679a7c3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf epimorphism and existence/extensivity results give ingredients only; finite generation of a presheaf by sections is not quasi-compactness for epimorphic families of sheaves, and the scheme covering results concern schemes, not arbitrary topos objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact objects defined by finite subfamilies of epimorphic covers in a Grothendieck topos",
+   "results": "{\"t\": \"2026-10-23T10:59:29Z\", \"tool\": \"leanfinder\", \"query\": \"Compact objects defined by finite subfamilies of epimorphic covers in a Grothendieck topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily\", \"CategoryTheory.presheafIsFinite_of_epi\", \"CategoryTheory.PresheafIsFinite\", \"CategoryTheory.coherentTopology\", \"CategoryTheory.coherentTopology.mem_sieves_of_hasEffectiveEpiFamily\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"CategoryTheory.extensiveTopology\", \"CategoryTheory.Precoherent\"], \"digest\": \"8bbb8946d3dcf87f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf epimorphism and existence/extensivity results give ingredients only; finite generation of a presheaf by sections is not quasi-compactness for epimorphic families of sheaves, and the scheme covering results concern schemes, not arbitrary topos objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jointly epimorphic families in sheaves are stable under pullback and epimorphic images and finite coproducts of quasi compact objects are quasi compact",
+   "results": "{\"t\": \"2026-10-23T10:59:30Z\", \"tool\": \"leanfinder\", \"query\": \"Jointly epimorphic families in sheaves are stable under pullback and epimorphic images and finite coproducts of quasi compact objects are quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify\", \"CategoryTheory.SheafOfTypes.adhesive\", \"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.presheafIsFinite_of_epi\", \"CategoryTheory.isRegularEpiCategory_sheaf\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"CompHausLike.precoherent\"], \"digest\": \"6fc3290d4d96af52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf epimorphism and existence/extensivity results give ingredients only; finite generation of a presheaf by sections is not quasi-compactness for epimorphic families of sheaves, and the scheme covering results concern schemes, not arbitrary topos objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coherent-epimorphic-quotient",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input of lem-trf-local-term-locality, through the nearby-cycle constructibility descent chain: finite-cover-site coherence and coherent base-change in Orgogozo §8.1 and Lemma 9.1.5, as used in lem-trf-proper-base-change-coherent-conservative. The last step turning the transported finite epimorphic presentation into a coherent object. Extracted subargument: Agent auxiliary extracting returned proof steps 1–2 of lem-trf-coherent-epimorphic-quotient.",
+   "via": [
+    "lem-trf-coherent-epimorphic-quotient",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-proper-base-change-coherent-conservative",
+    "lem-trf-psi-constructibility-descent",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-topos-finite-cover-calculus",
+  "worker": "stage1",
+  "summary": "Proved all three clauses in six steps using existing sheafification, local-surjectivity and sectionwise-limit nodes. No new nodes: the finite-subcover and cancellation arguments are elementary once pullback stability is proved. Retained the statement and original searches; added five logged Mathlib searches, verified the common-universe hypothesis, and treated empty coproducts explicitly.",
+  "blueprint": "Retains the inherited constructibility/coherent-quotient auxiliary route below lem-trf-local-term-locality. Steps 1–3 supply the universal-cover calculus; steps 4–6 expand Stacks 0GMP/0GMQ for the finite presentation in the inherited ancestry. The latest blueprint locality proof is the contracting-correspondence argument, not a separate duplicate of this generic topos lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representation of a section of a sheafification is a generic tool for coproducts on a site; this unit has no competing local-representation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-b6e505996",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-b6e505996 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full. The statement is unchanged from live, the item is still unsplit in the live and side-live clones, the delivery creates no new nodes, and proof_deps equals the union of the steps' uses. Step 1 builds the sheaf coproduct as the sheafification of the presheaf disjoint union, using the universal property in def-weil-pbc-sheafification. Step 2 proves 'epi iff sections locally lift through a single f_i': the epi lemma gives local lifts, the sections-local lemma represents each by θ(i,x), and coverings compose by axiom (1)(ii); the universe hypothesis of the sections-local lemma is covered by the item's containing universe. Step 3 proves the pullback and product clauses with the finite-limit case of the sectionwise limit lemma, lifting first on one covering and then on a further one. Step 4 proves Stacks 0GMP(2): pull back to X, choose finite J0 from def-trf-coherent-topos, then cancel q and e. Step 5 proves Stacks 0GMQ: take a finite J_i for each summand, use the union, and apply the coproduct property; the empty coproduct is handled correctly, which goes beyond the source's n≥1. Step 6 combines steps 4 and 5. Read sites.tex 0GMP and 0GMQ (both proofs omitted) and definition-quasi-compact-topos. Tested Sets, an identity epi, X=0, an empty family and an empty covering. Searched the DAG for 0GMP, 0GMQ and 'jointly epimorphic'; the closest nodes (sheaf-quasicompact-coproduct-calculus, site-epimorphic-family-cover-lifts, lifted-generator-quasiseparated-test) do not duplicate the item. Accepted tool_use: lem-weil-pbc-site-sheafification-sections-local, a generic site tool already used throughout sec-trace-formula. No SGA source is used, and no changes were made."
+ }
+}

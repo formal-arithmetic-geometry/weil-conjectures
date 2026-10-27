@@ -1,0 +1,89 @@
+{
+ "id": "lem-trf-monoid-algebra-injective-map",
+ "kind": "statement",
+ "title": "Injective monoid maps induce injective monoid-algebra maps",
+ "statement": "Let $R$ be a commutative ring, let $M,N$ be commutative additive monoids, and let $u:M\\to N$ be an injective additive monoid homomorphism. Write $R[M]=\\bigoplus_{m\\in M}Re^m$ with $e^me^{m\\prime}=e^{m+m\\prime}$, and similarly for $R[N]$. Then the $R$-linear monomial map $u_*:R[M]\\to R[N]$, $e^m\\mapsto e^{u(m)}$, is an injective unital ring homomorphism. Additive monoid conventions are those of [def-trf-fine-fan-blowup].",
+ "source": {
+  "document": "Mathlib/Algebra/MonoidAlgebra/MapDomain.lean",
+  "place": "AddMonoidAlgebra.mapDomain_injective generated at lines 52–54; AddMonoidAlgebra.mapDomainRingHom at lines 290–302; AddMonoidAlgebra.mapDomain_single at lines 49–50."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective additive monoid map induces an injective ring map on additive monoid algebras",
+   "results": "{\"t\": \"2026-10-22T06:10:19Z\", \"tool\": \"leanfinder\", \"query\": \"An injective additive monoid map induces an injective ring map on additive monoid algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.mapDomain_injective\", \"MonoidAlgebra.mapDomain_injective\", \"AddMonoidAlgebra.of_injective\", \"MonoidAlgebra.of_injective\", \"Finsupp.mapDomain_injective\", \"Polynomial.map_injective\", \"Polynomial.map_injective_iff\", \"Function.Injective.isDomain\"], \"digest\": \"4452b676d106fe29\"}; [leanfinder] OK 8 hit(s)\n  {\"name\": \"AddMonoidAlgebra.mapDomain_injective\", \"module\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain\", \"type\": \"∀ {R : Type u_2} {M : Type u_5} {N : Type u_6} [inst : Semiring R] {f : M → N},\\n  Function.Injective f → Function.Injective (AddMonoidAlgebra.mapDomain f)\", \"doc\": \"If $ f : M \\\\to N $ is an injective function between additive monoids, then the induced linear map from the additive monoid algebra $ R[M] $ to $ R[N] $, defined by aggregating coefficients via $ f $, \"}\n  {\"name\": \"MonoidAlgebra.mapDomain_injective\", \"module\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain\", \"type\": \"∀ {R : Type u_2} {M : Type u_5} {N : Type u_6} [inst : Semiring R] {f : M → N},\\n  Function.Injective f → Function.Injective (MonoidAlgebra.mapDomain f)\", \"doc\": \"If $ f : M \\\\to N $ is an injective function between monoids, then the induced linear map $ \\\\text{mapDomain}_f : R[M] \\\\to R[N] $, which applies $ f $ to each monoid element and aggregates coefficients \"}\n  {\"name\": \"AddMonoidAlgebra.of_injective\", \"module\": \"Mathlib/Algebra/MonoidAlgebra/Defs\", \"type\": \"∀ {M : Type u_2} {R : Type u_6} [inst : Semiring R] [Nontrivial R] [inst_2 : AddZeroClass M],\\n  Function.Injective ⇑(AddMonoidAlgebra.of R M)\", \"doc\": \"Under the conditions that the semiring $ R $ is non-trivial and $ M $ is equipped with an additive zero class, the embedding function from the multiplicative structure on $ M $ to the additive monoid \"}\n  {\"name\": \"MonoidAlgebra.of_injective\", \"module\": \"Mathlib/Algebra/MonoidAlgebra/Defs\", \"type\": \"∀ {M : Type u_2} {R : Type u_6} [inst : Semiring R] [inst_1 : MulOneClass M] [Nontrivial R],\\n  Function.Injective ⇑(MonoidAlgebra.of R M)\", \"doc\": \"The canonical homomorphism from a monoid $ M $ to the monoid algebra $ R[M] $ is injective, provided that the semiring $ R $ is non-trivial (i.e., contains at least two distinct elements).\"}\n  {\"name\": \"Finsupp.mapDomain_injective\", \"module\": \"Mathlib/Data/Finsupp/Basic\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} {M : Type u_5} [inst : AddCommMonoid M] {f : α → β},\\n  Function.Injective f → Function.Injective (Finsupp.mapDomain f)\", \"doc\": \"If $ f : \\\\alpha \\\\to \\\\beta $ is an injective function, then the induced map $ \\\\mathrm{mapDomain}\\\\, f : (\\\\alpha \\\\to_0 M) \\\\to (\\\\beta \\\\to_0 M) $, which reindexes finite support functions along $ f $, is i\"}\n  {\"name\": \"Polynomial.map_injective\", \"module\": \"Mathlib/Algebra/Polynomial/Eval/Coeff\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : Semiring R] [inst_1 : Semiring S] (f : R →+* S),\\n  Function.Injective ⇑f → Function.Injective (Polynomial.map f)\", \"doc\": \"If $ f : R \\\\to S $ is an injective ring homomorphism, then the induced polynomial map $ f^* : R[X] \\\\to S[X] $, which applies $ f $ to each coefficient of a polynomial, is also injective. This means th\"}\n  {\"name\": \"Polynomial.map_injective_iff\", \"module\": \"Mathlib/Algebra/Polynomial/Eval/Coeff\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : Semiring R] [inst_1 : Semiring S] (f : R →+* S),\\n  Function.Injective (Polynomial.map f) ↔ Function.Injective ⇑f\", \"doc\": \"The polynomial coefficient mapping via a ring homomorphism $ f $ is injective if and only if $ f $ itself is injective, i.e., $ \\\\text{Function.Injective}(\\\\text{map}\\\\, f) \\\\leftrightarrow \\\\text{Function\"}\n  {\"name\": \"Function.Injective.isDomain\", \"module\": \"Mathlib/Algebra/Ring/Hom/InjSurj\", \"type\": \"∀ {α : Type u_1} {β : Type u_2} [inst : Semiring α] [IsDomain α] [inst_2 : Semiring β] {F : Type u_3}\\n  [inst_3 : FunLike F β α] [MonoidWithZeroHomClass F β α] (f : F), Function.Injective ⇑f → IsDomain β\", \"doc\": \"If $\\\\alpha$ and $\\\\beta$ are semirings, $\\\\alpha$ is a domain (has no zero divisors), and there exists an injective semiring homomorphism $f : \\\\beta \\\\to \\\\alpha$ that preserves multiplication, zero, and \"}; The mapDomainRingHom underlying function is mapDomain by definition. Read lines 49–54 and 290–302 in the pinned source; injectivity specializes to u in one line.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra.mapDomain_injective",
+   "results": "{\"t\": \"2026-10-22T06:10:07Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra.mapDomain_injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.mapDomain_injective\"], \"digest\": \"c765323a3d2e3ab0\"}; [loogle] OK 1 hit(s)\n  {\"name\": \"AddMonoidAlgebra.mapDomain_injective\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.MapDomain\", \"type\": \" {R : Type u_3} {M : Type u_6} {N : Type u_7} [Semiring R] {f : M → N} (hf : Function.Injective f) : Function.Injective (AddMonoidAlgebra.mapDomain f)\", \"doc\": \"\"}; The mapDomainRingHom underlying function is mapDomain by definition. Read lines 49–54 and 290–302 in the pinned source; injectivity specializes to u in one line.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective|mapDomainRingHom",
+   "results": "{\"t\": \"2026-10-22T06:10:07Z\", \"tool\": \"grep\", \"query\": \"injective|mapDomainRingHom\", \"sub\": \"Algebra/MonoidAlgebra/MapDomain.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"53\", \"54\", \"109\", \"110\", \"111\"], \"digest\": \"52f29301fe1e757e\"}; [grep] OK 5 hit(s)\n  {\"file\": \"53\", \"line\": \"lemma mapDomain_injective (hf \", \"text\": \" Injective f) : Injective (mapDomain (R := R) f) :=\"}\n  {\"file\": \"54\", \"line\": \"  ofCoeff_injective.comp <| (Finsupp.mapDomain_injective hf).comp coeff_injective\", \"text\": \"\"}\n  {\"file\": \"109\", \"line\": \"/-- `MonoidAlgebra.map` of an injective function is injective. -/\", \"text\": \"\"}\n  {\"file\": \"110\", \"line\": \"@[to_additive /-- `AddMonoidAlgebra.map` of an injective function is injective. -/]\", \"text\": \"\"}\n  {\"file\": \"111\", \"line\": \"lemma map_injective (f \", \"text\": \" R →+ S) (he : Injective f) : Injective (map (M := M) f) := by\"}; The mapDomainRingHom underlying function is mapDomain by definition. Read lines 49–54 and 290–302 in the pinned source; injectivity specializes to u in one line.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective additive monoid homomorphism gives an injective ring homomorphism of additive monoid algebras",
+   "results": "{\"t\": \"2026-10-22T06:10:53Z\", \"tool\": \"leansearch\", \"query\": \"An injective additive monoid homomorphism gives an injective ring homomorphism of additive monoid algebras\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; [leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.; The mapDomainRingHom underlying function is mapDomain by definition. Read lines 49–54 and 290–302 in the pinned source; injectivity specializes to u in one line.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDomainRingHom|lemma mapDomain_injective",
+   "results": "{\"t\": \"2026-10-22T06:10:53Z\", \"tool\": \"grep\", \"query\": \"mapDomainRingHom|lemma mapDomain_injective\", \"sub\": \"Algebra/MonoidAlgebra\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\"], \"digest\": \"d5acf2a49dd30024\"}; [grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"292\", \"text\": \"  toRingHom := mapDomainRingHom A f\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"388\", \"text\": \"lemma mapDomainRingHom_comp_algebraMap (f : M →* N) :\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/Basic.lean\", \"line\": \"389\", \"text\": \"    (mapDomainRingHom A f).comp (algebraMap R A[M]) = algebraMap R A[N] := by ext; simp\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"line\": \"53\", \"text\": \"lemma mapDomain_injective (hf : Injective f) : Injective (mapDomain (R := R) f) :=\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"line\": \"296\", \"text\": \"def mapDomainRingHom (f : M →* N) : R[M] →+* R[N] where\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"line\": \"306\", \"text\": \"lemma mapDomainRingHom_id : mapDomainRingHom R (.id M) = .id R[M] := by ext <;> simp\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"line\": \"310\", \"text\": \"lemma mapDomainRingHom_comp (f : N →* O) (g : M →* N) :\"}\n  {\"file\": \"Mathlib/Algebra/MonoidAlgebra/MapDomain.lean\", \"line\": \"311\", \"text\": \"    mapDomainRingHom R (f.comp g) = (mapDomainRingHom R f).comp (mapDomainRingHom R g) := by\"}; The mapDomainRingHom underlying function is mapDomain by definition. Read lines 49–54 and 290–302 in the pinned source; injectivity specializes to u in one line.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AddMonoidAlgebra.mapDomain_injective",
+  "file": "Mathlib/Algebra/MonoidAlgebra/MapDomain.lean",
+  "line": 53,
+  "how": "specializes in one line: AddMonoidAlgebra.mapDomain_injective hu, for the underlying function of u. The map is the unital ring homomorphism AddMonoidAlgebra.mapDomainRingHom R u, generated by to_additive at lines 290–302, and its monomial formula is AddMonoidAlgebra.mapDomain_single, lines 49–50. No coefficient nontriviality hypothesis is required."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-monoid-algebra-domain-fraction",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-term-locality proof (1)–(2), nearby-cycle/alteration branch through toric monoid comparison: ILO VIII 3.2.4 and 3.2.9 use the common dense group-algebra torus; 3.2.12, first paragraph, uses that a fine torsion-free monoid algebra is integral. The unique-sum input supplies the coefficient argument for this domain assertion. Extracted supporting argument: ILO VIII 3.2.12 first proof paragraph, printed p.104: the inclusion k[P] into k[Pgp]; supporting coefficientwise injection, old item step 1.",
+   "via": [
+    "lem-trf-monoid-algebra-domain-fraction",
+    "lem-trf-affine-monoid-algebra-normalization",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

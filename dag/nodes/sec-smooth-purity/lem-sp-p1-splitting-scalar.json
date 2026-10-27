@@ -19,63 +19,57 @@
  ],
  "proof": [
   {
-   "text": "Normalize the scalar identifications before comparing arrows. For T=S,P, the sheaves A_T and A_T(1) are flat, and A_T(1) is locally free of rank one by [lem-asd-finite-etale-twist-line]. Their degree-zero complexes and shifts are K-flat by [lem-pc-kflat-closure]. Thus [lem-pur-derived-change-of-rings] computes their scalar extension by ordinary tensor. The balanced map (z\\otimes a)\\otimes b\\mapsto z\\otimes\\varphi(a)b has inverse z\\otimes b\\mapsto(z\\otimes1)\\otimes b; these formulas are balanced and mutually inverse. They give exactly the twist identifications in the statement. The scalar functor is exact and additive by the same derived-change-of-rings assertion, hence preserves shifts and finite biproducts with their inclusions and projections. Write D_R=R_S(1)[2]\\oplus R_S and identify T_S D_A=D_B by these maps.",
+   "text": "The base $S$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is finite type over the spectrum of a field. Also $N=\\ell^n$ is invertible since $\\ell\\ne\\operatorname{char}k$. Apply [lem-sp-finite-tate-balanced-scalar-pullback] with $f=q$: use its specified constant, twist, shift and biproduct identifications, and write $D_R=R_S(1)[2]\\oplus R_S$. In these identifications $T_SD_A=D_B$ and $T_P(u_A)\\lambda=u_B$.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "lem-pc-kflat-closure",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 06YY, lemma-derived-base-change; identity-topos coefficient specialization"
-   }
-  },
-  {
-   "text": "Put \\Lambda=\\mathbf Z/N and let c_\\Lambda:\\Lambda_P\\to\\mu_{N,P}[2] be the Kummer Chern morphism of the fixed line bundle \\mathcal O_P(1). Write E_{\\Lambda R} for derived scalar extension on P. The definition of the scalar-extended Kummer class in [lem-asd-ordinary-finite-p1-adjunction] says that the upstairs morphism whose q-adjunct is h_R is c_R=E_{\\Lambda R}(c_\\Lambda). Apply [lem-sfb-ringed-derived-monoidal-comparisons] to the identity-topos ring tower \\Lambda_P\\to A_P\\to B_P. Its canonical composition isomorphism \\alpha:T_P E_{\\Lambda A}\\simeq E_{\\Lambda B} is natural on c_\\Lambda, so \\alpha_{\\mu_N[2]}T_P(c_A)=c_B\\alpha_{\\Lambda_P}. The source component is the multiplication unit, and the target component is the balanced map of Step 1: the cited comparison is computed by ordinary module pullback composition on K-flat complexes. Therefore T_P(c_A)=c_B under the specified identifications. This is naturality of the image of one fixed Kummer morphism; it does not tensor the Kummer short exact sequence with a nonflat coefficient ring. The hypotheses of [lem-asd-ordinary-finite-p1-adjunction] hold for R=A,B: S is of finite type over the Noetherian scheme \\operatorname{Spec}k, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (quasi-compact and locally Noetherian, so it has a finite affine cover by spectra of Noetherian rings); N=\\ell^n is invertible on S because \\ell\\ne p=\\operatorname{char}k; and A,B are finite commutative rings with NA=NB=0.",
-   "uses": [
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-finite-tate-balanced-scalar-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: Kummer classes over A and B are images of the same class over Z/ell^n; sites-cohomology.tex Tag 0D6D, lemma-derived-pullback-composition"
+    "place": "Charts: normalized two-summand projective-line splitting"
    }
   },
   {
-   "text": "Let \\lambda_X:q_B^*T_SX\\xrightarrow{\\sim}T_Pq_A^*X be the canonical tensor/pullback comparison. It is the left square whose right mate is the specified \\beta_q: this is precisely the proper counit-transpose normalization in [lem-sp-et-proet-coefficient-compatibility]. For any v:q_A^*X\\to E let \\operatorname{adj}_R denote the inverse-image/direct-image adjunction bijection over R. Apply [lem-pur-adjunction-mate-transpose] to this square. It gives the equality of actual morphisms\n$$\\beta_q(E)T_S(\\operatorname{adj}_A(v))=\\operatorname{adj}_B(T_P(v)\\lambda_X).$$\nThe orientation can also be checked directly: the B-transpose of the left side is T_P(\\varepsilon_{A,E})\\lambda_{Rq_{*,A}E}q_B^*T_S(\\operatorname{adj}_A(v)); naturality of \\lambda and the A-triangle identity turn this into T_P(v)\\lambda_X. Thus the equality uses the named counit-transpose map rather than an arbitrarily chosen isomorphism between the endpoints.",
+   "text": "By [lem-sp-p1-kummer-derived-scalar], the upstairs scalar-extended Chern morphisms of the fixed $\\mathcal O_P(1)$ satisfy $T_P(c_A)=c_B$ in these same balanced identifications. By [lem-asd-ordinary-finite-p1-adjunction], the two components of $s_R$ are $\\operatorname{adj}_R(u_R)$ and $h_R=\\operatorname{adj}_R(c_R)$.",
+   "uses": [
+    "lem-sp-p1-kummer-derived-scalar",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: normalized two-summand projective-line splitting"
+   }
+  },
+  {
+   "text": "The comparison $\\lambda_X:q_B^*T_SX\\xrightarrow\\sim T_Pq_A^*X$ has right mate the specified $\\beta_q$, by the proper counit-transpose normalization in [lem-sp-et-proet-coefficient-compatibility]. For $v:q_A^*X\\to E$, [lem-pur-adjunction-mate-transpose] gives\n$$\\beta_q(E)T_S(\\operatorname{adj}_A(v))=\\operatorname{adj}_B(T_P(v)\\lambda_X).$$\nExplicitly the B-transpose of the left side is $T_P(\\varepsilon_{A,E})\\lambda_{Rq_{*,A}E}q_B^*T_S(\\operatorname{adj}_A(v))$; naturality of $\\lambda$ and the A-triangle identity give $T_P(v)\\lambda_X$. This fixes the orientation and the actual comparison arrow.",
    "uses": [
     "lem-sp-et-proet-coefficient-compatibility",
     "lem-pur-adjunction-mate-transpose"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change; transpose of the coefficient square, using the categorical mate-transpose identity"
-   }
-  },
-  {
-   "text": "Write u_R:q_R^*(R_S(1)[2])\\xrightarrow{\\sim}L_R for pullback of the roots-of-unity twist. By [lem-asd-etale-finite-twist-pullback] it is the canonical roots-induced identification. It satisfies T_P(u_A)\\lambda_{A_S(1)[2]}=u_B under Step 1: both composites before shifting send (q^{-1}z\\otimes a)\\otimes b to the pulled-back root z\\otimes\\varphi(a)b. Equality of these sheaf maps gives equality of their degree-zero and shifted derived maps. The tensor and unit comparisons used here are the canonical ones of [lem-sfb-ringed-derived-monoidal-comparisons]. The two components of s_R are \\operatorname{adj}_R(u_R) and \\operatorname{adj}_R(c_R), by [lem-asd-ordinary-finite-p1-adjunction]. Apply Step 3 first to v=u_A and then to v=c_A; Step 2 identifies the scalar extension in the second application. Consequently\n$$\\beta_q(L_A)T_S(\\operatorname{adj}_A(u_A))=\\operatorname{adj}_B(u_B),\\qquad \\beta_q(L_A)T_S(h_A)=h_B.$$\nHere q_B^*T_S A_S=B_P, so the latter equality has the asserted unit source, not a restriction-of-scalars source.",
-   "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-asd-ordinary-finite-p1-adjunction"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: compare the twisted-unit and Kummer components of the two rank-one summands"
+    "place": "Charts: normalized two-summand projective-line splitting"
    }
   },
   {
-   "text": "Let \\iota_{1,R},\\iota_{2,R} be the two inclusions of D_R. Step 1 identifies T_S(\\iota_{j,A}) with \\iota_{j,B}. For j=1,2 Step 4 therefore gives\n$$\\beta_q(L_A)T_S(s_A)\\iota_{j,B}=s_B\\iota_{j,B}.$$\nThe universal property of the coproduct D_B says that maps out of it agreeing on both inclusions agree. Hence \\beta_q(L_A)T_S(s_A)=s_B, the first required equation.",
+   "text": "Apply Step 3 with $E=L_A$, first $X=A_S(1)[2],v=u_A$ and then $X=A_S,v=c_A$. Steps 1 and 2 identify the two upstairs arrows with $u_B,c_B$; the constant-line comparison identifies $q_B^*T_SA_S$ with $B_P$. Thus $\\beta_qT_S(\\operatorname{adj}_A(u_A))=\\operatorname{adj}_B(u_B)$ and $\\beta_qT_S(h_A)=h_B$.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: splitting into two free rank-one summands, compare both components"
+    "place": "Charts: normalized two-summand projective-line splitting"
+   }
+  },
+  {
+   "text": "For each summand inclusion $\\iota_{j,B}$ of $D_B$, Step 1 gives $T_S(\\iota_{j,A})=\\iota_{j,B}$ and Step 4 gives $\\beta_q(L_A)T_S(s_A)\\iota_{j,B}=s_B\\iota_{j,B}$. The coproduct universal property proves $\\beta_q(L_A)T_S(s_A)=s_B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: normalized two-summand projective-line splitting"
    }
   },
   {
@@ -86,20 +80,17 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized projective-line integration is the projection onto the Kummer summand"
+    "place": "Charts: normalized two-summand projective-line splitting"
    }
   }
  ],
  "proof_deps": [
   "def-amb-p1-trace",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-finite-etale-twist-line",
   "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-pc-kflat-closure",
   "lem-pur-adjunction-mate-transpose",
-  "lem-pur-derived-change-of-rings",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-sp-et-proet-coefficient-compatibility",
+  "lem-sp-finite-tate-balanced-scalar-pullback",
+  "lem-sp-p1-kummer-derived-scalar",
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "proof_origin": {
@@ -177,6 +168,34 @@
    "results": "{\"t\": \"2026-10-21T03:26:31Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality under change of rings of the first Chern class of a line bundle in etale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec_Γ_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.Scheme.Hom.naturality\", \"AlgebraicGeometry.Scheme.ΓSpecIso_naturality\"], \"digest\": \"de1c4e8b5fa1932c\"}",
    "date": "2026-10-21",
    "verdict": "no match: the logged hits concern algebraic field extensions, cotangent cohomology, ordinary pullback or basis naturality, not the specified etale-derived Kummer splitting and trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "{\"t\": \"2026-10-22T05:55:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|chernClass|tateTwist",
+   "results": "{\"t\": \"2026-10-22T05:55:38Z\", \"tool\": \"grep\", \"query\": \"kummer|chernClass|tateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale projective line splitting by the Kummer class is natural under derived coefficient extension",
+   "results": "{\"t\": \"2026-10-22T05:55:39Z\", \"tool\": \"leansearch\", \"query\": \"The etale projective line splitting by the Kummer class is natural under derived coefficient extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"adjoinRootXPowSubCEquiv\", \"Algebra.FormallyEtale.of_isSeparable\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.FormallyEtale.of_isSeparable_aux\"], \"digest\": \"0a07accea495abf0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized projective line unit and Kummer decomposition and its trace commute with nonflat derived coefficient change",
+   "results": "{\"t\": \"2026-10-22T05:55:53Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized projective line unit and Kummer decomposition and its trace commute with nonflat derived coefficient change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.map_u\", \"WeierstrassCurve.VariableChange.map_s\", \"WeierstrassCurve.Affine.baseChange_slope\", \"WeierstrassCurve.VariableChange.map_r\", \"WeierstrassCurve.VariableChange.map_t\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Affine.Point.map_map\", \"WeierstrassCurve.VariableChange.map\"], \"digest\": \"dae2609d8604c449\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
   }
  ],
  "mathlib_match": null,
@@ -199,40 +218,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-p1-splitting-scalar",
   "worker": "stage1",
-  "group": "Q69",
-  "summary": "Proved scalar compatibility by naturality of derived coefficient composition on the common Kummer Chern morphism, the proper counit-transpose identity on its two components, the coproduct universal property, and cancellation for the normalized trace. Reused existing nodes throughout; no new nodes and no statement change.",
-  "blueprint": "Realizes the Charts paragraph of det-sp-reduction-exceptional: Kummer classes come from Z/ell^n, compare the two summands of the projective-line splitting, then the trace projection. The six steps expand the retained Steps 5 and 6 named in the item source.",
+  "group": "Q08",
+  "summary": "Repair of the human re-split return: two independent statement-only lemmas carry the balanced derived twist/pullback normalization and the derived Kummer scalar-transitivity argument. The unchanged item is assembled using those lemmas, the existing mate-transpose identity, coproduct uniqueness and trace cancellation. The report preserves the complete old argument and assigns every part to its new location.",
+  "blueprint": "Charts paragraph of det-sp-reduction-exceptional: the free rank-one scalar computation is isolated in the balanced Tate lemma; the common Z/N Kummer arrow and transitivity are isolated in the Chern lemma; assembly compares the two components and takes the trace projection.",
   "tool_uses": [
-   {
-    "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Canonical roots-induced ordinary-etale twist pullback, used to compare the first splitting component."
-   },
-   {
-    "node": "lem-asd-finite-etale-twist-line",
-    "why": "Ordinary-etale local freeness and flatness of finite twists for arbitrary finite coefficients."
-   },
    {
     "node": "lem-asd-ordinary-finite-p1-adjunction",
     "why": "Existing ordinary-etale normalized splitting and definition of its unit and Kummer components; coefficient compatibility is proved here."
    },
    {
-    "node": "lem-pc-kflat-closure",
-    "why": "General ringed-site bounded-flat K-flatness to compute extension of the two degree-zero lines; the unit does not replace this homological-algebra tool."
-   },
-   {
     "node": "lem-pur-adjunction-mate-transpose",
     "why": "Generic categorical formula for a transpose under an already specified mate square; it supplies no geometric projective-line conclusion."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "General ordinary ringed-site derived extension and its exactness, used for the specified ordinary-etale functor."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "General ringed-topos composition and unit normalization, specialized to the identity-topos coefficient tower; it does not assert the projective-line compatibility being proved."
    },
    {
     "node": "lem-sp-et-proet-coefficient-compatibility",
@@ -251,12 +250,49 @@
   "lem-sp-et-proet-coefficient-compatibility"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q69-43c3ababb",
-  "group": "Q69",
+  "reviewer": "NT-cc-Q08-a6e414cae",
+  "group": "Q08",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-43c3ababb (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full, plus the statement of every cited node, the unit sk-lem-sp-reduction, the parent det-sp-reduction-exceptional (step 2) and the blueprint main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph (lines 20-36). The split follows the Charts route: the Kummer class comes from Z/N, and the splitting has two free rank-one summands with trace = projection. No SGA source is cited. I found no duplicate. No node of sk-prop-geo-p1-adjunction states coefficient change of the splitting: det-sp-p1-trace and lem-asd-ordinary-finite-p1-adjunction cover base change only, and lem-pur-finite-smooth-adjunction-general-base covers only Z/l^r->Z/l^m reductions of gamma. lem-sp-p1-counit-scalar is the sibling counit lemma. Step 1: twist-line flatness, the K-flat closure and the termwise derived change of rings are correct; I checked that the balanced map and its inverse are mutually inverse on generators. Step 2: c_R=E_{Lambda R}(c_Lambda) is the defining construction in the p1-adjunction statement. The ringed-topos composition lemma, applied to the identity topos with Lambda->A->B, needs no flatness, and its unit equation gives the source component. Step 3: I checked the transpose formula myself; it follows from naturality of lambda and the A triangle identity, matching the B-adjoint-transpose definition of beta in lem-sp-et-proet-coefficient-compatibility and det-sp-reduction-direct-image. Step 4: I checked T_P(u_A)lambda=u_B on generators; both splitting components are adj(u_R) and adj(c_R). Steps 5 and 6 (coproduct property, cancellation) are elementary. Edge cases: a non-flat map Z/l^2->F_l, the identity map, empty S and N=1 all work. The 8 declared tool uses are accepted. FIX: step 2 applied lem-asd-ordinary-finite-p1-adjunction without checking that S is Noetherian with N invertible. I added that check, citing the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian and using l != p, and added the node to uses and proof_deps. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-sp-p1-splitting-scalar.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-a6e414cae (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the repair note (2026-10-22, at least 2 statement-only nodes, assembly of at most 3000 characters), the base proof (6 steps, 5212 characters) and the main-20261015 Charts paragraph. The item statement is unchanged. Old Steps 1 and 4 (twist pullback square) go to lem-sp-finite-tate-balanced-scalar-pullback, and old Step 2 to lem-sp-p1-kummer-derived-scalar; both are about 1.9k characters, independent and acyclic, and neither restates s_R or t_R. Old Steps 3, 5 and 6 stay in the item as an assembly of cited nodes and elementary steps; nothing was summarised away. Step 3 is checked against the Lean form of adjunctionMate_transpose (G=T_S, H=T_P, τ=β_q, α=λ): the orientation is correct. β_q is the B-linear counit transpose (lem-sp-et-proet-coefficient-compatibility). The components of s_R are the unit and h=adj(c_R) (p1-adjunction node). The hypotheses (Noetherian S, N invertible) are checked in Step 1. Both new statements are typed correctly and true; I tested N=1, φ=id and the nonflat Z/4→F_2. No duplicates: the asd twist-pullback, invertible-tensor, pro-étale det-sp-scalar-extension-functor, Kummer-naturality and Kummer-boundary-scalar nodes all differ. Searches are real (grep, leansearch, loogle, leanfinder). No SGA, and no dropped nodes. FIX (B2/E5): in lem-sp-finite-tate-balanced-scalar-pullback I replaced 'the analogous equality holds for the constant lines with θ⁰' with the explicit square θ⁰_{T'}∘E_{T'}(e_A)∘λ_{A_T}=e_B∘f_B^*(θ⁰_T), with e_R the sfb unit comparison (already a stmt_dep). Item Step 4 needs this square to identify q_B^*T_S A_S with B_P. Maintainer note: node 1 is the ordinary-étale analogue of the pro-étale det-sp-scalar-extension-functor clause 3 (which the blueprint cites), plus the pullback square, so same_as=[] is acceptable.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.P1SplittingScalar",
+  "declaration": "AlgebraicGeometry.Etale.p1SplittingScalar",
+  "declarations": [
+   "AlgebraicGeometry.Etale.p1ScalarSingleMap",
+   "AlgebraicGeometry.Etale.p1ScalarShiftedLine",
+   "AlgebraicGeometry.Etale.p1ScalarSourceMap",
+   "AlgebraicGeometry.Etale.p1ScalarPushforwardMap",
+   "AlgebraicGeometry.Etale.p1SplittingScalar"
+  ],
+  "file": "lean/Sheaf/Paper/P1SplittingScalar.lean",
+  "statement": "theorem p1SplittingScalar (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hne : ell ≠ p) (k : Type u) [Field k] [CharP k p] (S : Scheme.{u}) [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (n : ℕ) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) : ∃ (_hNoetherian : IsNoetherian S) (hS : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤))), ∃ (c0 : (ProEtale.etaleSheafExtendScalars φ S).obj (ordinaryFiniteConstant A S) ≅ ordinaryFiniteConstant B S) (c1 : (ProEtale.etaleSheafExtendScalars φ S).obj (Scheme.finiteEtaleTateLine S (ell ^ n) A hA) ≅ Scheme.finiteEtaleTateLine S (ell ^ n) B hB) (cP : (ProEtale.etaleSheafExtendScalars φ (ProjectiveLine S)).obj (Scheme.finiteEtaleTateLine (ProjectiveLine S) (ell ^ n) A hA) ≅ Scheme.finiteEtaleTateLine (ProjectiveLine S) (ell ^ n) B hB) (d0 : (scalarExtension φ S).obj (ordinaryFiniteUnit A S) ≅ ordinaryFiniteUnit B S) (d1 : (scalarExtension φ S).obj (ordinaryFiniteLine A (ell ^ n) hA S) ≅ ordinaryFiniteLine B (ell ^ n) hB S) (dP : (scalarExtension φ (ProjectiveLine S)).obj (ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S)) ≅ ordinaryFiniteLine B (ell ^ n) hB (ProjectiveLine S)), (∀ (W : S.Etaleᵒᵖ) (a : A), ((ProEtale.etaleSheafExtendScalarsAdjunction φ S).homEquiv _ _ c0.hom).hom.app W ((toSheafify S.smallEtaleTopology ((Functor.const S.Etaleᵒᵖ).obj (ModuleCat.of A A))).app W a) = (toSheafify S.smallEtaleTopology ((Functor.const S.Etaleᵒᵖ).obj (ModuleCat.of B B))).app W (φ a)) ∧ (∀ (W : S.Etaleᵒᵖ) (a : A) (z : (S.rootsOfUnitySheaf (ell ^ n)).obj.obj W), ((ProEtale.etaleSheafExtendScalarsAdjunction φ S).homEquiv _ _ c1.hom).hom.app W (Scheme.finiteEtaleTateOneGenerator A (ell ^ n) S hA W a z) = Scheme.finiteEtaleTateOneGenerator B (ell ^ n) S hB W (φ a) z) ∧ (∀ (W : (ProjectiveLine S).Etaleᵒᵖ) (a : A) (z : ((ProjectiveLine S).rootsOfUnitySheaf (ell ^ n)).obj.obj W), ((ProEtale.etaleSheafExtendScalarsAdjunction φ (ProjectiveLine S)).homEquiv _ _ cP.hom).hom.app W (Scheme.finiteEtaleTateOneGenerator A (ell ^ n) (ProjectiveLine S) hA W a z) = Scheme.finiteEtaleTateOneGenerator B (ell ^ n) (ProjectiveLine S) hB W (φ a) z) ∧ d0.hom = p1ScalarSingleMap φ S c0.hom ∧ d1.hom = p1ScalarSingleMap φ S c1.hom ∧ dP.hom = p1ScalarSingleMap φ (ProjectiveLine S) cP.hom ∧ ((scalarExtension φ S).map (projectiveLineTraceDatum (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) A hA S hS).decomposition.hom ≫ p1ScalarPushforwardMap φ (ell ^ n) hA hB S dP = p1ScalarSourceMap φ (ell ^ n) hA hB S d0 d1 ≫ (projectiveLineTraceDatum (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) B hB S hS).decomposition.hom) ∧ (p1ScalarPushforwardMap φ (ell ^ n) hA hB S dP ≫ projectiveLineTrace (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) B hB S hS = (scalarExtension φ S).map (projectiveLineTrace (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) A hA S hS) ≫ d0.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The balanced identifications are supplied together with their generator normalizations and their derived-adjunction characterization; the two final conjuncts are the specified splitting and trace equalities with all identification maps explicit. No flatness assumption, arbitrary comparison, or per-cohomology replacement is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-402aca4a3",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Statement matches lem-sp-p1-splitting-scalar clause by clause. Setting: k of char p>0, l!=p prime, S LocallyOfFiniteType+QuasiCompact+IsSeparated over k, A,B finite Type(u+1) (the universe of the p1-adjunction/trace deps), phi, common l^n with n=0 kept. Noetherian and IsUnit N are returned as Prop witnesses, not assumed. s_R = projectiveLineTraceDatum.decomposition (pinned by decomposition_hom/chern_spec). t_R = projectiveLineTrace. Balanced isos c0/c1/cP are pinned by their adjoints on generators (a->phi a, a⊗z->phi(a)⊗z). d0/d1/dP are pinned to p1ScalarSingleMap. Shift via leftAdjointCommShift, biproduct via p1ScalarSourceMap. beta = scalarMate (proper constituent of etaleCoefficientMap). Both equations are derived-morphism equalities with explicit boundaries, and no flatness is assumed. Edge cases checked: empty S, zero rings, n=0, nonflat Z/l^2->Z/l. Item differs from live only in lean; statement verbatim. Four real helper defs, only the theorem has sorry. Docstrings with source/blueprint and six proof steps; lines <=99; imports = statement modules public + proof_deps plain. Report sections present. No compile (no change; worker compiles clean 26.3/23.7 s). Advisories: scalarMate owned by def-pur-etale-scalar-mate (not a stmt_dep; S2 cannot add it); p1ScalarSingleMap = purityScalarSingleMap≫single.map c of def-pur-vector-purity-scalar-single (helper, not a duplicate notion); finiteEtaleTateOneGenerator/ordinaryFinite* owners outside stmt_deps are the deps' interface."
+ }
 }

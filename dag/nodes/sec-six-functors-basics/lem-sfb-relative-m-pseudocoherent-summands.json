@@ -1,0 +1,215 @@
+{
+ "id": "lem-sfb-relative-m-pseudocoherent-summands",
+ "kind": "statement",
+ "title": "Relative m-pseudo-coherence is closed under binary direct summands",
+ "statement": "Let $X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], let $m\\in\\mathbf Z$, and let $K,L\\in D(\\mathcal O_X)$ [def-pc-derived-category]. If $K\\oplus L$ is $m$-pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex], then both $K$ and $L$ are $m$-pseudo-coherent relative to $S$. No quasi-coherence, Noetherian or global boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UN, lemma-summands-relative-pseudo-coherent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Unpack relative $m$-pseudo-coherence of $K\\oplus L$ using [def-sfb-relative-pseudo-coherent-complex]. Keep its affine covers $V_a,U_{ab}$ and closed embeddings $i_{ab}:U_{ab}\\hookrightarrow Y_{ab}=\\mathbf A^{n_{ab}}_{V_a}$. On a fixed chart put $K_U=K|_U$ and $L_U=L|_U$. Restriction is degreewise restriction of module sheaves, which is exact and commutes with binary sums (these claims hold on every stalk). Thus $(K\\oplus L)|_U\\cong K_U\\oplus L_U$, and the witness says $Ri_*(K_U\\oplus L_U)$ is $m$-pseudo-coherent.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UN, lemma-summands-relative-pseudo-coherent, unpack Tag 09UI on its chosen charts"
+   }
+  },
+  {
+   "text": "Compute $Ri_*$ by [def-pc-derived-direct-image, def-pc-ringed-spaces-derived-direct-image]. Choose K-injective resolutions $K_U\\to I$ and $L_U\\to J$. Their direct sum is a resolution of $K_U\\oplus L_U$: cycles and boundaries split degreewise. It is K-injective by [def-pur-kinjective-complex]: a map from an acyclic complex to $I\\oplus J$ has two component null-homotopies, whose pair is a null-homotopy. By the cited computation on any K-injective resolution and the degreewise identity $i_*(I\\oplus J)=i_*I\\oplus i_*J$, obtain $Ri_*(K_U\\oplus L_U)\\cong Ri_*K_U\\oplus Ri_*L_U$ in $D(\\mathcal O_Y)$. Here localization carries the biproduct identities to biproduct identities because it is additive [lem-sfb-derived-localization-additive]. This proves the required comparison without any assertion about infinite sums.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pur-kinjective-complex",
+    "lem-sfb-derived-localization-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UN, lemma-summands-relative-pseudo-coherent, binary-sum comparison used by the definitions"
+   }
+  },
+  {
+   "text": "Compose each local approximation morphism with the preceding isomorphism; its cohomology maps remain isomorphisms above $m$ and surjective at $m$, so the defining condition [def-sfb-m-pseudo-coherent-complex] gives $m$-pseudo-coherence of $Ri_*K_U\\oplus Ri_*L_U$. Apply [lem-sfb-scheme-m-pseudocoherent-summands] on the scheme $Y=\\mathbf A^n_V$, at exactly this $m$, to obtain $m$-pseudo-coherence of both $Ri_*K_U$ and $Ri_*L_U$.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-sfb-scheme-m-pseudocoherent-summands"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UN, lemma-summands-relative-pseudo-coherent, apply the absolute summand lemma Tag 08CE"
+   }
+  },
+  {
+   "text": "The original covers $V_a,U_{ab}$ and embeddings $i_{ab}$ now satisfy [def-sfb-relative-pseudo-coherent-complex] separately for $K$ and for $L$. They therefore witness the two conclusions at the original integer $m$. All constructions were chartwise; neither a uniform cohomological bound nor quasi-coherence was required.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UN, lemma-summands-relative-pseudo-coherent, return to the relative definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pur-kinjective-complex",
+  "lem-sfb-derived-localization-additive",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-sfb-scheme-m-pseudocoherent-summands"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UN, lemma-summands-relative-pseudo-coherent; the binary K-injective calculation makes explicit its appeal to the definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Direct summands of an m pseudo coherent derived complex on a scheme relative to a base are m pseudo coherent for the same integer m",
+   "results": "OK: 8 hits; DerivedCategory.IsGE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; AlgebraicGeometry.Scheme.Modules.instAbelian; DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative finite degree pseudo coherence of complexes of sheaves on schemes is closed under binary direct summands",
+   "results": "OK: 8 hits; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; AlgebraicGeometry.instHasFiniteCoproductsScheme; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; HomologicalComplex.instHasBinaryBiproduct; CategoryTheory.instHasProjectiveDimensionLTBiprod; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Module.Flat.directSum_iff; Module.Flat.dfinsupp",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher.*summand|summand.*pseudo.?coher",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; ordinary module functors, morphism properties, cohomological bounds and finite presentation of individual sheaves do not assert the stated relative fixed-degree pseudo-coherence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a fixed integer m, direct summands of an m pseudo coherent complex of sheaves on a scheme are m pseudo coherent, and the relative version follows after closed embeddings into affine space",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every integer m, the summands of an m pseudo coherent complex on a ringed space are m pseudo coherent",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A retract in the unbounded derived category of sheaves of modules inherits a finite strictly perfect approximation in all cohomological degrees above m and a surjection at m",
+   "results": "OK: 8 hits; DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.cm5b",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a derived direct sum of two complexes on a scheme has local strictly perfect approximations in degrees at least m then both complexes have such approximations for the same m",
+   "results": "OK: 8 hits; DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  },
+  {
+   "tool": "grep",
+   "query": "strictly.?perfect|pseudo.?coherent|MPseudo",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern finite presentation of single sheaves, abelian structure, or cohomological bounds and fractions; none states closure of fixed-degree pseudo-coherence under summands."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-fppf-descent",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, final sentence: lemma-summands-relative-pseudo-coherent at the same fixed integer m.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-m-pseudocoherent-summands",
+  "worker": "stage1",
+  "summary": "Statement unchanged and checked against Tag 09UN. On the same affine embeddings prove the derived binary-sum comparison using finite sums of K-injective resolutions, apply the absolute fixed-m summand lemma Tag 08CE as one new statement-only node, and unpack relative pseudo-coherence. Existing all-m and ring-module summand nodes are not sufficient for this arbitrary sheaf fixed-m assertion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, final sentence: lemma-summands-relative-pseudo-coherent at the same fixed integer m. The current latest blueprint direct-image proof clause (3) is the inherited route. ancestor returns None: preserve the inherited null ancestor and via chain; same_as is empty after whole-blueprint searches. No chapter or unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-8ede36f51",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-8ede36f51 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and both sources in full. Stacks 09UN (more-morphisms l.17069) matches the item's statement, which is unchanged: locally finite type, fixed m, arbitrary K,L. Its proof is '08CE plus the definitions', and the split carries this out. Step 1 unpacks the existential charts of def-sfb-relative-pseudo-coherent-complex, which agrees with 09UI. Step 2 shows Ri_* commutes with binary sums: I⊕J is a K-injective resolution, by def-pur-kinjective-complex and the any-resolution clause of def-pc-ringed-spaces-derived-direct-image; i_* is additive and Q is additive (lem-sfb-derived-localization-additive). This is elementary and correct. Step 3 transports along that isomorphism and then cites the new node on A^n_V at the same m; this is the only non-elementary step. Step 4 uses the same charts again. proof_deps equals the union of the uses lists and there is no cycle. The new node lem-sfb-scheme-m-pseudocoherent-summands is the fixed-m clause of Cohomology 08CE (lemma-summands-pseudo-coherent) for a scheme. It is true, statement-only and self-contained (B1-B5 hold). I searched for duplicates among all nodes that mention 08CE and all nodes stating pseudo-coherence together with summands. lem-pc-pseudo-coherent-summand is the all-m version, and on Spec k an infinite-dimensional V in degree 0 is 1- but not 0-pseudo-coherent, so it does not cover fixed m. lem-pc-ring-pseudo-coherent-summand works over a single ring only, and the ringed-site triangle and criterion nodes do not state summand closure. So nothing is duplicated and nothing merely restates the item. No quasi-coherence, boundedness or Noetherian hypothesis is used; n=0 and negative m are fine. The node is in the same unit, no tool_uses entry is needed, and no SGA source is cited. This is not a re-split note delivery, and the item is still unsplit live. No changes made."
+ }
+}

@@ -1,0 +1,259 @@
+{
+ "id": "lem-a1-finite-locally-free-polynomial-basis-charts",
+ "kind": "statement",
+ "title": "Polynomial base change and constant polynomial bases of a finite locally free algebra",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ unital, and $p:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ finite locally free of degree $r\\ge0$ [def-weil-affine-spectrum, def-pc-finite-locally-free]. Suppose $f_1,\\ldots,f_m\\in A$ generate $A$ as an ideal and $e_{i,1},\\ldots,e_{i,r}$ are bases of $B_{f_i}$ over $A_{f_i}$ [def-weil-ring-localization-away, def-weil-pbc-module-localization-away, def-weil-pbc-free-module]. Write $C$ for inclusion as constant polynomials and $\\varphi[T]:A[T]\\to B[T]$ for the coefficientwise extension [def-weil-polynomial-ring]. The canonical ring isomorphism\n$$B\\otimes_A A[T]\\xrightarrow{\\sim}B[T],\\qquad b\\otimes\\sum_j a_jT^j\\longmapsto\\sum_j b\\varphi(a_j)T^j$$\n[def-weil-module-base-change] identifies $\\operatorname{Spec}(\\varphi[T])$ with the base change $\\operatorname{Spec}B\\times_{\\operatorname{Spec}A}\\operatorname{Spec}A[T]\\to\\operatorname{Spec}A[T]$ of $p$ along $\\operatorname{Spec}A[T]\\to\\operatorname{Spec}A$ [def-pc-fibre-product]. This morphism is finite locally free of degree $r$, and its structure-sheaf pushforward is quasi-coherent and locally free of rank $r$ [def-amb-finite-locally-free-module]. The elements $g_i=C(f_i)$ generate the unit ideal of $A[T]$. The coefficientwise localization maps give compatible isomorphisms\n$$A[T]_{g_i}\\cong A_{f_i}[T],\\qquad B[T]_{g_i}\\cong B_{f_i}[T],$$\nunder which $C(e_{i,1}),\\ldots,C(e_{i,r})$ are bases over $A_{f_i}[T]$. The assertion includes zero rings, an empty cover of the zero ring, and $r=0$.",
+ "source": {
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/morphisms.tex",
+  "place": "Tag 02DV (exercises-exercise-trace-det-rings)(3), polynomial scalar extension; Tag 02KD (morphisms-lemma-base-change-finite-locally-free); old item proof steps 4-5, including explicit polynomial tensor and common-denominator maps."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-free-module",
+  "def-weil-polynomial-ring",
+  "def-weil-module-base-change",
+  "def-amb-finite-locally-free-module",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use polyEquivTensor_symm_apply_tmul for the explicit tensor formula [lem-weil-pbc-polynomial-scalar-extension]. For the cartesian square, Polynomial.algebra and its Algebra.IsPushout instance identify B[T] as the pushout of B and A[T] over A. CommRingCat.isPushout_of_isPushout and isPullback_SpecMap_of_isPushout turn that ring pushout into the displayed affine pullback [lem-weil-pbc-fibre-product-affine-spectra]. Both algebra maps are definitionally the displayed C and coefficientwise polynomial map.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/RingTheory/PolynomialAlgebra.lean; literature/stacks-project/schemes.tex",
+    "place": "polyEquivTensor_symm_apply_tmul and polynomial Algebra.IsPushout instances; Tag 01I4"
+   }
+  },
+  {
+   "text": "Base change along the polynomial C map preserves finiteness, flatness, and local finite presentation [lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-qcqs-morphism-permanence]. Combine the three instances to obtain finite local freeness [def-pc-finite-locally-free]. The exact source-library formula Scheme.Hom.fiberDegree_of_isPullback gives the degree of the new fibre as the old fibre degree. This is the affine fibre-product description followed by invariance of vector-space dimension under residue-field extension [lem-weil-pbc-fibre-product-affine-spectra, lem-pc-finrank-field-base-change]. Apply the degree-r hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; lean/WeilConjectures/AlgebraicGeometry/Morphisms/FiberDegree.lean",
+    "place": "Tag 02KD; Scheme.Hom.fiberDegree_of_isPullback"
+   }
+  },
+  {
+   "text": "The polynomial morphism is affine, so its structure-sheaf pushforward is quasi-coherent by Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom [lem-pc-affine-morphism-hi]. Its finite local freeness of rank r follows immediately from Scheme.Modules.isFiniteLocallyFreeOfRank_pushforward_unit [lem-pc-flf-properties] and the degree-r result of the preceding step. These existing proved source-library statements include the associated-sheaf and local-basis arguments; no new tilde/Gamma comparison is needed.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-flf-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; lean/WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+    "place": "Tag 02KB; isFiniteLocallyFreeOfRank_pushforward_unit"
+   }
+  },
+  {
+   "text": "Apply Ideal.map C to the hypothesis Ideal.span (range f) = top. Ideal.map_span, Ideal.map_top, and range of a composite give exactly that the constant polynomials C(f_i) span the unit ideal [def-weil-polynomial-ring].",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex",
+    "place": "Tag 02DV(3), extension of the unit-ideal equation"
+   }
+  },
+  {
+   "text": "For R and a in R, the Mathlib theorem Polynomial.isLocalization identifies R_a[T] as the localization of R[T] at the image of the powers of a. Submonoid.map_powers identifies this submonoid with the powers of C(a). By uniqueness of localization [lem-weil-pbc-localization-away-universal-property, def-weil-ring-localization-away], IsLocalization.algEquiv supplies the comparison from Localization.Away (C(a)), and its commutes equation gives the asserted formula on every numerator polynomial. Apply this once to (A,f_i), and once to (B,phi(f_i)); Polynomial.map_C identifies the second localization parameter. Compatibility follows by IsLocalization.ringHom_ext: after precomposing with the numerator map, the square is equality of coefficientwise maps, and their coefficient ring homomorphisms agree by IsLocalization.map_eq. This proof uses no nonzero-divisor hypothesis.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; lean/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Algebra.lean",
+    "place": "Tag 00CP; Polynomial.isLocalization; IsLocalization.algEquiv and ringHom_ext"
+   }
+  },
+  {
+   "text": "For any R-algebra S with basis b, use the polynomial pushout with the scalar factors interchanged. Its IsBaseChange datum and IsBaseChange.basis transport b to an R[T]-basis of S[T] [lem-weil-pbc-free-module-base-change-free, lem-weil-pbc-polynomial-scalar-extension]. IsBaseChange.basis_apply says that its vectors are exactly C(b_j). Apply this with the explicitly specified localized coefficient algebra structure and the given basis e_i. All constructions work for empty basis, zero localizations, and zero rings; no additional assumptions are introduced.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; lean/.lake/packages/mathlib/Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean",
+    "place": "Tag 02DV(3); IsBaseChange.basis and basis_apply"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-finite-locally-free",
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-flf-properties",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-free-module-base-change-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 02DV(3), 02KD, 02KB, 01I4 and 00CP. A8 implements the argument with the polynomial pushout and localization APIs, reusing the proved source-library finite locally free pushforward theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free algebra of rank r polynomial scalar extension is finite locally free of rank r and localized bases extend coefficientwise to polynomial bases",
+   "results": "OK 8 hits: Module.FinitePresentation.exists_basis_localizedModule_powers, Module.Basis.localizationLocalization_apply, Module.Basis.localizationLocalization, Module.exists_basis_of_basis_baseChange, Algebra.Generators.baseChange, Module.Basis.localizationLocalization_repr_algebraMap, Algebra.SubmersivePresentation.baseChange, TensorProduct.toIntegralClosure_mvPolynomial_bijective. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: basis base change and rank formulas are ingredients; no hit gives the scheme polynomial base change together with localization and specified constant polynomial bases."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, Module.Basis",
+   "results": "OK 12 hits: Algebra.aeval_charpoly_leftMulMatrix, AdjoinRoot.powerBasisAux', AdjoinRoot.powerBasisAux, Polynomial.Sequence.basis, Polynomial.Sequence.basis_eq_self, Polynomial.Sequence.basis_natDegree_strictMono, Polynomial.Sequence.basis_degree_strictMono, Matrix.charpoly_toLin. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: basis base change and rank formulas are ingredients; no hit gives the scheme polynomial base change together with localization and specified constant polynomial bases."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*[Bb]asis|[Bb]asis.*polynomial|isLocalization.*[Pp]olynomial|[Pp]olynomial.*isLocalization",
+   "results": "OK 25 hits: Mathlib/NumberTheory/Cyclotomic/Discriminant.lean, Mathlib/FieldTheory/RatFunc/Luroth.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: basis base change and rank formulas are ingredients; no hit gives the scheme polynomial base change together with localization and specified constant polynomial bases."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a constant rank finite locally free affine algebra along A to A[X] and coefficientwise localization yields compatible rank r bases of B[X] over A[X]",
+   "results": "OK 8 hits: IsBaseChange.rank_eq, Module.Basis.baseChange, Module.Basis.baseChange_linearMap, IsBaseChange.rank_eq_of_le_nonZeroDivisors, Module.rankAtStalk_baseChange, LinearMap.toMvPolynomial_baseChange, IsBaseChange.basis.congr_simp, IsBaseChange.finrank_eq. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: basis base change and rank formulas are ingredients; no hit gives the scheme polynomial base change together with localization and specified constant polynomial bases."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomialEquiv|polyEquiv|basisPolynomial|polynomialBasis|isLocalization.*[Pp]olynomial|[Pp]olynomial.*isLocalization",
+   "results": "{\"t\": \"2026-10-24T00:44:09Z\", \"tool\": \"grep\", \"query\": \"polynomialEquiv|polyEquiv|basisPolynomial|polynomialBasis|isLocalization.*[Pp]olynomial|[Pp]olynomial.*isLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\"], \"digest\": \"b7beedbffeab842e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: polynomial tensor equivalences, polynomial localization and basis base change are ingredients, but none states the full affine-scheme assertion with the specified compatible localized bases. Read PolynomialAlgebra.lean:30-198, Localization/Algebra.lean:185-195 and existing DAG leaves. The second phrasing finds polyEquivTensor and Polynomial.isLocalization, not the entire item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial ring extension commutes with localization and base extension of a finite locally free algebra preserves the rank and bases",
+   "results": "{\"t\": \"2026-10-24T00:44:09Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial ring extension commutes with localization and base extension of a finite locally free algebra preserves the rank and bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\", \"Algebra.IsAlgebraic.rank_fractionRing_polynomial\", \"Algebra.Extension.localization\", \"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"IsLocalization.tensor\", \"Algebra.IsAlgebraic.finrank_of_isFractionRing\", \"Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial\", \"IsLocalization.Away.tensorEquiv\"], \"digest\": \"3467400f36668d4c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: polynomial tensor equivalences, polynomial localization and basis base change are ingredients, but none states the full affine-scheme assertion with the specified compatible localized bases. Read PolynomialAlgebra.lean:30-198, Localization/Algebra.lean:185-195 and existing DAG leaves. The second phrasing finds polyEquivTensor and Polynomial.isLocalization, not the entire item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, Module.Basis",
+   "results": "{\"t\": \"2026-10-24T00:44:09Z\", \"tool\": \"loogle\", \"query\": \"Polynomial, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.aeval_charpoly_leftMulMatrix\", \"AdjoinRoot.powerBasisAux'\", \"AdjoinRoot.powerBasisAux\", \"Polynomial.Sequence.basis\", \"Polynomial.Sequence.basis_eq_self\", \"Polynomial.Sequence.basis_natDegree_strictMono\", \"Polynomial.Sequence.basis_degree_strictMono\", \"Matrix.charpoly_toLin\"], \"digest\": \"0397ce13a7ae0f54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: polynomial tensor equivalences, polynomial localization and basis base change are ingredients, but none states the full affine-scheme assertion with the specified compatible localized bases. Read PolynomialAlgebra.lean:30-198, Localization/Algebra.lean:185-195 and existing DAG leaves. The second phrasing finds polyEquivTensor and Polynomial.isLocalization, not the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial scalar extension of a finite locally free algebra with localized constant polynomial bases and affine base change",
+   "results": "{\"t\": \"2026-10-24T00:44:10Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial scalar extension of a finite locally free algebra with localized constant polynomial bases and affine base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.baseChange\", \"Algebra.PreSubmersivePresentation.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.Generators.baseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"RingHom.finite_isStableUnderBaseChange\"], \"digest\": \"9a880d2e67e00602\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: polynomial tensor equivalences, polynomial localization and basis base change are ingredients, but none states the full affine-scheme assertion with the specified compatible localized bases. Read PolynomialAlgebra.lean:30-198, Localization/Algebra.lean:185-195 and existing DAG leaves. The second phrasing finds polyEquivTensor and Polynomial.isLocalization, not the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "B tensor over A with A polynomial X is B polynomial X; polynomial localization at constant coefficients commutes with coefficient localization",
+   "results": "{\"t\": \"2026-10-24T00:45:25Z\", \"tool\": \"leanfinder\", \"query\": \"B tensor over A with A polynomial X is B polynomial X; polynomial localization at constant coefficients commutes with coefficient localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"polyEquivTensor_apply\", \"polyEquivTensor'\", \"Polynomial.isLocalization\", \"polyEquivTensor\", \"PolyEquivTensor.toFunLinear\", \"PolyEquivTensor.toFunAlgHom\", \"MvPolynomial.isLocalization\", \"PolyEquivTensor.invFun\"], \"digest\": \"a0cc1cdc585515a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: polynomial tensor equivalences, polynomial localization and basis base change are ingredients, but none states the full affine-scheme assertion with the specified compatible localized bases. Read PolynomialAlgebra.lean:30-198, Localization/Algebra.lean:185-195 and existing DAG leaves. The second phrasing finds polyEquivTensor and Polynomial.isLocalization, not the entire item."
+  },
+  {
+   "tool": "grep",
+   "query": "def polyEquivTensor|lemma isLocalization|def baseChange|lemma baseChange_apply",
+   "results": "{\"t\": \"2026-10-24T00:48:47Z\", \"tool\": \"grep\", \"query\": \"def polyEquivTensor|lemma isLocalization|def baseChange|lemma baseChange_apply\", \"sub\": \"RingTheory/PolynomialAlgebra.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"169\", \"191\"], \"digest\": \"5833469a23f052fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: polynomial tensor equivalences, polynomial localization and basis base change are ingredients, but none states the full affine-scheme assertion with the specified compatible localized bases. Read PolynomialAlgebra.lean:30-198, Localization/Algebra.lean:185-195 and existing DAG leaves. The second phrasing finds polyEquivTensor and Polynomial.isLocalization, not the entire item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Auxiliary affine-quotient algebra in the historical expansion beneath lem-a1-affine-hc0's lissity/support argument. Precise current use: lem-a1-affine-groupoid-integral-invariants, proof step 3; Stacks groupoids-lemma-integral-over-invariants, second paragraph, monicity and Cayley-Hamilton for the norm polynomial. The earlier 'fourth paragraph' locator was stale: the master blueprint ancestor has one support paragraph and main-20261015 has no proof text. Re-split of norm-polynomial item, old proof steps 4-5 (polynomial base change and common-denominator charts).",
+   "via": [
+    "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-finite-locally-free-polynomial-basis-charts",
+  "worker": "stage1",
+  "summary": "Q36 checked the current blueprint and Stacks sources, found no exact finished project declaration, and wrote eight proof steps. Explicit polynomial inverses and common-denominator localization maps assemble existing Mathlib leaves for affine fibre products, morphism base change, basis extension and associated sheaves. No new nodes and no change to the statement. The rank convention is checked via fibre degree, with zero rings, empty covers and rank zero retained. Maintainer reader FIX: step 1 cites the existing Mathlib leaf lem-weil-pbc-polynomial-scalar-extension (one variable) for the tensor isomorphism instead of re-deriving it via the tensor pushout; step 7 cites lem-weil-pbc-principal-localization-open-immersion for the identification D(g_i)=Spec(A[T]_{g_i}) needed to apply the affine counit.",
+  "blueprint": "Current latest snapshot main-20261024: lem-a1-affine-hc0.proof.md, finite-level support argument, is the inherited historical ancestor, not a claim that it states the present algebra. The exact auxiliary source place is Exercises 02DV(3), polynomial scalar extension in the norm-polynomial construction under lem-a1-affine-groupoid-integral-invariants. Steps 1-3 realize polynomial base change, 4-6 realize the chosen polynomial basis charts, and 7-8 verify the sheaf and degenerate clauses. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-1fa136b0a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-1fa136b0a (reviewer sub-agent of L); spot-checked: Read the item and all 18 cited statements; checked Stacks 02DV(3) (exercises.tex) and 02KD (morphisms.tex, proof omitted, so agent origin is right). The delivery adds no new nodes and leaves the statement and stmt_deps unchanged; the statement covers what the parent's steps 3 and 5 use. Edge cases checked: A=0 forces B=0 and m=0 is the empty cover; r=0; f nilpotent; A=B with r=1. Steps 2-6 and 8 are correct: projections match under the tensor iso; finiteness, flatness and finite presentation pass to the base change; degree matches through the fibre-dimension rank; the g_i generate the unit ideal; the localization comparison is bijective (common denominator, fraction criterion); constant bases come from e⊗1. Two citation faults, fixed in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-finite-locally-free-polynomial-basis-charts.json, changing only proof, proof_deps and split_report.summary. (1) C5/C1: step 1 re-proves B⊗_A A[T]≅B[T] by hand, and the report wrongly says no node covers arbitrary B; the Mathlib leaf lem-weil-pbc-polynomial-scalar-extension (MvPolynomial.algebraTensorAlgEquiv, one variable) states exactly this. Step 1 now cites it and keeps the explicit inverse as a check; the tensor-pushout node leaves proof_deps. (2) C1: step 7 applies the affine counit (adjunction (3), stated for Spec R) on D(g_i) without a node identifying D(g_i) with Spec A[T]_{g_i}; it now cites lem-weil-pbc-principal-localization-open-immersion. Both added nodes are Mathlib leaves on the base, so the unit route is unaffected and no tool_uses are needed. No SGA source is used; no duplicate node exists for the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreePolynomialBasisCharts",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_polynomial_basis_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreePolynomialBasisCharts.lean",
+  "statement": "theorem finiteLocallyFree_polynomial_basis_charts {A B : Type u} [CommRing A] [CommRing B] [Algebra A B] (r m : ℕ) (h : (Spec.map (CommRingCat.ofHom (algebraMap A B))).IsFiniteLocallyFreeOfDegree r) (f : Fin m → A) (hf : Ideal.span (Set.range f) = ⊤) (e : (i : Fin m) → @Module.Basis (Fin r) (Localization.Away (f i)) (Localization.Away (algebraMap A B (f i))) _ _ (@Algebra.toModule _ _ _ _ (IsLocalization.Away.map (Localization.Away (f i)) (Localization.Away (algebraMap A B (f i))) (algebraMap A B) (f i)).toAlgebra)) : (∀ (b : B) (P : Polynomial A), (polyEquivTensor A B).symm (b ⊗ₜ[A] P) = P.sum (fun n a ↦ Polynomial.monomial n (b * algebraMap A B a))) ∧ IsPullback (Spec.map (CommRingCat.ofHom (Polynomial.C : B →+* Polynomial B))) (Spec.map (CommRingCat.ofHom (Polynomial.mapRingHom (algebraMap A B)))) (Spec.map (CommRingCat.ofHom (algebraMap A B))) (Spec.map (CommRingCat.ofHom (Polynomial.C : A →+* Polynomial A))) ∧ (Spec.map (CommRingCat.ofHom (Polynomial.mapRingHom (algebraMap A B)))).IsFiniteLocallyFreeOfDegree r ∧ ((Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom (Polynomial.mapRingHom (algebraMap A B))))).obj (SheafOfModules.unit (Spec (CommRingCat.of (Polynomial B))).ringCatSheaf)).IsQuasicoherent ∧ SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom (Polynomial.mapRingHom (algebraMap A B))))).obj (SheafOfModules.unit (Spec (CommRingCat.of (Polynomial B))).ringCatSheaf)) r ∧ Ideal.span (Set.range (fun i : Fin m ↦ Polynomial.C (f i))) = ⊤ ∧ ∀ i : Fin m, ∃ (α : Localization.Away (Polynomial.C (f i)) ≃+* Polynomial (Localization.Away (f i))) (β : Localization.Away ((Polynomial.mapRingHom (algebraMap A B)) (Polynomial.C (f i))) ≃+* Polynomial (Localization.Away (algebraMap A B (f i)))), (∀ P : Polynomial A, α (algebraMap (Polynomial A) _ P) = Polynomial.map (algebraMap A (Localization.Away (f i))) P) ∧ (∀ P : Polynomial B, β (algebraMap (Polynomial B) _ P) = Polynomial.map (algebraMap B (Localization.Away (algebraMap A B (f i)))) P) ∧ (∀ z : Localization.Away (Polynomial.C (f i)), β (IsLocalization.Away.map (Localization.Away (Polynomial.C (f i))) (Localization.Away ((Polynomial.mapRingHom (algebraMap A B)) (Polynomial.C (f i)))) (Polynomial.mapRingHom (algebraMap A B)) (Polynomial.C (f i)) z) = Polynomial.map (IsLocalization.Away.map (Localization.Away (f i)) (Localization.Away (algebraMap A B (f i))) (algebraMap A B) (f i)) (α z)) ∧ ∃ E : @Module.Basis (Fin r) (Polynomial (Localization.Away (f i))) (Polynomial (Localization.Away (algebraMap A B (f i)))) _ _ (@Algebra.toModule _ _ _ _ (Polynomial.mapRingHom (IsLocalization.Away.map (Localization.Away (f i)) (Localization.Away (algebraMap A B (f i))) (algebraMap A B) (f i))).toAlgebra), ∀ j : Fin r, E j = Polynomial.C (e i j)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b10ce30c",
+  "group": "NB",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause checked against the node and the recorded dependency declarations (FiberDegree.lean:907 IsFiniteLocallyFreeOfDegree; IsFiniteLocallyFreeOfRank; Mathlib polyEquivTensor at PolynomialAlgebra.lean:169). Tensor iso pinned by explicit formula; IsPullback orientation verified; localization isos alpha/beta uniquely determined by numerator clauses with a correct compatibility square; basis E_j = C(e_ij). Edge cases m=0, r=0, A=0, nilpotent f_i covered with no extra assumptions. lean.statement verbatim; node otherwise unchanged vs live; item not landed elsewhere. Docstrings carry source, blueprint and 8 proof steps; no definitions, sorry-only proof, correct public/plain imports. No compile reproduced, per instruction. Advisories only: Mathlib IsQuasicoherent (recorded under pqf-def-coherent) used without that node in stmt_deps; B_f modelled by ring localization."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T080901-L-1656660",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

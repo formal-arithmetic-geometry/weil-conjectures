@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-qc-space-affine-etale-atlas",
+ "kind": "statement",
+ "title": "Affine etale atlas of a quasi-compact algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Give $|X|$, the field-valued point classes, the quotient topology of a surjective etale scheme atlas [lem-a1-space-affine-etale-cover]. Assume that $|X|$ is quasi-compact, meaning that every open cover has a finite subcover. Then there exist an affine $S$-scheme $W$ and a representable surjective etale morphism $h_W\\to X$. Here affine means isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$, and etale and representable have the meanings of [def-trf-algebraic-space, def-weil-etale-morphism]. No separatedness or quasi-separatedness hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03H6, lemma-quasi-compact-affine-cover, forward implication."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-a1-space-affine-etale-cover",
+  "def-weil-etale-morphism",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Choose the atlas $p:h_U\\to X$ supplied by [lem-a1-space-affine-etale-cover], with $U=\\coprod_{d\\in D}U_d$ and each $U_d$ affine over $S$. Its point map is surjective and its quotient topology is the topology stipulated for $|X|$. Thus this is an atlas to which [lem-a1-space-finite-affine-subatlas] applies.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H6 (lemma-quasi-compact-affine-cover), forward implication; Tag 03FX (lemma-cover-by-union-affines)."
+   }
+  },
+  {
+   "text": "Apply [lem-a1-space-finite-affine-subatlas] to $p$ and the assumed quasi-compact space $|X|$. It gives a finite subset $D_0\\subseteq D$ such that $W=\\coprod_{d\\in D_0}U_d$, an open subscheme of $U$, has a representable surjective etale restriction $p|_W:h_W\\to X$. Its $S$-structure is the restriction of that of $U$. No property of intersections of affine opens is used.",
+   "uses": [
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03H6 (lemma-quasi-compact-affine-cover), finite-subcover step, and 03E4 (lemma-quasi-compact-space), restriction to a finite component subatlas."
+   }
+  },
+  {
+   "text": "For each $d\\in D_0$ write $U_d\\simeq\\operatorname{Spec}A_d$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $W\\simeq\\operatorname{Spec}(\\prod_{d\\in D_0}A_d)$, so $W$ is affine in precisely the absolute sense required in the statement. Together with the restriction from step 2 this proves the conclusion. If $|X|=\\varnothing$, the finite-subatlas lemma permits $D_0=\\varnothing$; the empty product is the zero ring and the same coproduct-spectrum isomorphism gives $W=\\operatorname{Spec}0$.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H6 (lemma-quasi-compact-affine-cover), last sentence, correcting finite surjective to etale surjective; Mathlib/AlgebraicGeometry/Limits.lean, sigmaSpec and its finite-index IsIso instance, lines 604-647."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03H6 (lemma-quasi-compact-affine-cover), forward implication; Tag 03FX (lemma-cover-by-union-affines)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.compact.*affine.*cover|affine.*etale.*surjective",
+   "results": {
+    "t": "2026-10-22T06:30:12Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|quasi.compact.*affine.*cover|affine.*etale.*surjective",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean"
+    ],
+    "digest": "3e532be1ec377545"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compactSpace_iff_exists and exists_hom_isAffine_of_isLocalAtSource apply to schemes; neither gives an affine etale atlas for a general algebraic space. Grep hits are descriptions of scheme coverings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact algebraic space admits a surjective etale map from an affine scheme",
+   "results": {
+    "t": "2026-10-22T06:30:12Z",
+    "tool": "leansearch",
+    "query": "A quasi compact algebraic space admits a surjective etale map from an affine scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_iff_isSpectralMap",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff"
+    ],
+    "digest": "fb1d5a685a31ecc1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compactSpace_iff_exists and exists_hom_isAffine_of_isLocalAtSource apply to schemes; neither gives an affine etale atlas for a general algebraic space. Grep hits are descriptions of scheme coverings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsAffine\"",
+   "results": {
+    "t": "2026-10-22T06:30:13Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"IsAffine\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compactSpace_iff_exists and exists_hom_isAffine_of_isLocalAtSource apply to schemes; neither gives an affine etale atlas for a general algebraic space. Grep hits are descriptions of scheme coverings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic space has an affine scheme mapping surjectively and etale to it",
+   "results": {
+    "t": "2026-10-22T06:30:17Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact algebraic space has an affine scheme mapping surjectively and etale to it",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource",
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.QuasiCompactCover.singleton",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.QuasiCompact"
+    ],
+    "digest": "0dc9d50437b08a79"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compactSpace_iff_exists and exists_hom_isAffine_of_isLocalAtSource apply to schemes; neither gives an affine etale atlas for a general algebraic space. Grep hits are descriptions of scheme coverings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space is quasi compact if and only if it admits a surjective etale affine scheme atlas",
+   "results": {
+    "t": "2026-10-22T06:30:18Z",
+    "tool": "leanfinder",
+    "query": "An algebraic space is quasi compact if and only if it admits a surjective etale affine scheme atlas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.Scheme.quasiCompactCover_iff",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.quasiCompactCover_iff",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource"
+    ],
+    "digest": "18de9a1c85249404"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: compactSpace_iff_exists and exists_hom_isAffine_of_isLocalAtSource apply to schemes; neither gives an affine etale atlas for a general algebraic space. Grep hits are descriptions of scheme coverings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic space over a scheme admits an affine scheme etale surjective atlas",
+   "results": {
+    "t": "2026-10-23T09:27:14Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact algebraic space over a scheme admits an affine scheme etale surjective atlas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+     "AlgebraicGeometry.QuasiCompactCover.singleton",
+     "AlgebraicGeometry.QuasiCompactCover.homCover",
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "AlgebraicGeometry.quasiCompactCover_iff",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact"
+    ],
+    "digest": "9b384c46a158cf23"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme results only; compactSpace_iff_exists is about schemes and does not assert etaleness, and Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource has scheme target, not arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Descent.lean:48-59, Morphisms/QuasiCompact.lean:196-201, and both scheme-cover grep hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace QuasiCompact IsEtale IsSurjective",
+   "results": {
+    "t": "2026-10-23T09:27:14Z",
+    "tool": "loogle",
+    "query": "AlgebraicSpace QuasiCompact IsEtale IsSurjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: Unknown identifier `AlgebraicSpace`",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "unavailable: query rejected with Unknown identifier AlgebraicSpace; this diagnostic is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.compact.*affine.*cover|affine.*etale.*surjective",
+   "results": {
+    "t": "2026-10-23T09:27:15Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|quasi.compact.*affine.*cover|affine.*etale.*surjective",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean"
+    ],
+    "digest": "162d0a3e149f3ee7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme results only; compactSpace_iff_exists is about schemes and does not assert etaleness, and Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource has scheme target, not arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Descent.lean:48-59, Morphisms/QuasiCompact.lean:196-201, and both scheme-cover grep hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact algebraic space admits a surjective etale map from an affine scheme",
+   "results": {
+    "t": "2026-10-23T09:28:11Z",
+    "tool": "leansearch",
+    "query": "A quasi compact algebraic space admits a surjective etale map from an affine scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_iff_isSpectralMap",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff"
+    ],
+    "digest": "fb1d5a685a31ecc1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme results only; compactSpace_iff_exists is about schemes and does not assert etaleness, and Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource has scheme target, not arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Descent.lean:48-59, Morphisms/QuasiCompact.lean:196-201, and both scheme-cover grep hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space is quasi compact if and only if some affine scheme maps etale surjectively to it",
+   "results": {
+    "t": "2026-10-23T09:28:13Z",
+    "tool": "leanfinder",
+    "query": "An algebraic space is quasi compact if and only if some affine scheme maps etale surjectively to it",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.compactSpace_iff_exists",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace"
+    ],
+    "digest": "d1031c57ac78c83e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme results only; compactSpace_iff_exists is about schemes and does not assert etaleness, and Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource has scheme target, not arbitrary algebraic space. Read Mathlib/AlgebraicGeometry/Morphisms/Descent.lean:48-59, Morphisms/QuasiCompact.lean:196-201, and both scheme-cover grep hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-type-fppf-effectivity",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 03H6, choosing an affine etale atlas for each finite-type local space over an affine base.",
+   "via": [
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qc-space-affine-etale-atlas",
+  "worker": "stage1",
+  "summary": "Reuse the existing disjoint-affine atlas, the reviewed finite component subatlas lemma, and the Mathlib finite affine coproduct-spectrum leaf. Three assembly steps, no new nodes and no change to the statement. Checked empty space, zero-ring components, infinite starting atlas, arbitrary nonseparated base, and absence of separatedness/quasi-separatedness assumptions. Report records the Stacks proof typo finite surjective, which must read etale surjective.",
+  "blueprint": "The retained from.place locates this geometric input below det-thm-sf-ctf-stability-direct-images, paragraph (3), through the existing alteration and algebraic-space-effectivity chain. The newest blueprint paragraph (3) is read from literature/blueprint/latest. Steps 1-3 realize the Tag 03H6 affine-atlas prerequisite in that recorded chain; no unit-level route changes. The inherited from.node is null because ancestry crosses the Lean-module-created node lem-sfb-admissible-direct-image; tools/blueprint_refs.py ancestor confirms None.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic scheme-source atlas and quotient topology for any algebraic space; no finiteness or cohomological hypothesis from its filing unit is used."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic finite-component selection for any quasi-compact algebraic-space point space and specified disjoint-affine atlas; no statement of this unit supplies that restriction theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-finite-affine-subatlas"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-04563a63e",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-04563a63e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. Statement and stmt_deps match clones/live and side-live exactly. Source: Stacks spaces-properties.tex Tag 03H6 (lemma-quasi-compact-affine-cover), forward direction, together with 03FX and 03E4. The 'finite surjective' at the end of the source proof is a typo for étale surjective; the report's counterexample A^1 ⊔ G_m → A^1 is correct, and the item never claims finiteness. Step 1: lem-a1-space-affine-etale-cover gives a disjoint-affine representable surjective étale atlas and an atlas-independent quotient topology in which every |t| is continuous. Hence that topology equals the final topology of def-a1-space-point-topology used by the next lemma (the definition node also says so), and |X| quasi-compactness carries over. Step 2: the first clause of lem-a1-space-finite-affine-subatlas has exactly these hypotheses and gives a finite D0 with the restriction representable surjective étale, including D0 = ∅. No intersections of affines are used, so no separatedness is needed. Step 3: the Mathlib leaf lem-weil-pbc-finite-affine-coproduct-spectrum (sigmaSpec, finite IsIso) gives W ≅ Spec of the product of the A_d. The step is correctly elementary, since finitely many disjoint open summands form the coproduct, and the empty case gives Spec 0. proof_deps equals the union of the step uses, and there is no cycle. Small cases checked: empty X, affine X, an infinite atlas over compact |X|, and a non-quasi-separated X. The two off-unit sk-p-real-rankin nodes are generic algebraic-space tools and are declared in tool_uses; accepted. Batch-5 flag: the path reaches only def-trf-algebraic-space, the general definition of an algebraic space, which the item's statement already cites. It is not part of the trace-formula or Poincaré-duality proofs, so it is accepted. Maintainer note: the existing unsplit lem-trf-space-qc-finite-affine-atlas-refinement contains the item's conclusion as an 'in particular' but assumes quasi-compactness via an atlas from a quasi-compact scheme. Neither node was created by this delivery; it is a candidate for a later merge, not a fault here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcSpaceAffineEtaleAtlas",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_etale_atlas_of_compactSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcSpaceAffineEtaleAtlas.lean",
+  "statement": "theorem exists_affine_etale_atlas_of_compactSpace {S : Scheme.{u}} (X : AlgebraicSpace S) (hX : CompactSpace (Point X.obj.obj)) : ∃ (W : Over S) (p : yoneda.obj W ⟶ X.obj.obj), IsAffine W.left ∧ IsRepresentable p ∧ IsSurjective p ∧ IsEtale p",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d1169dbd",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read the item, all 6 stmt_deps, the side-live declarations (AlgebraicSpace IsRepresentableWith/IsEtale/IsSurjective, pointTopologicalSpace as the final topology of étale scheme maps, exists_affine_etale_cover_and_point_topology, exists_finite_affine_subatlas) and Stacks 03H6 (spaces-properties.tex l.747-768; the proof's 'finite surjective' is a typo and the Lean asserts étale). Lean: {S : Scheme.{u}} (X : AlgebraicSpace S) (hX : CompactSpace (Point X.obj.obj)) gives ∃ W : Over S, p with IsAffine W.left ∧ IsRepresentable ∧ IsSurjective ∧ IsEtale. Every clause matches and there are no extra hypotheses. The final topology equals the atlas quotient topology: w is étale, and every |t| is continuous for the atlas topology. Item diff vs side-live: only lean plus the added landed stmt_dep def-a1-space-point-topology, permitted by brief-stage2 l.177 and needed to type CompactSpace. lean.statement is verbatim in the file. No duplicate: points_compactSpace_iff gives a compact atlas only; the SeparatedLqf hits are private with separated/lqf hypotheses; lem-trf-space-qc-finite-affine-atlas-refinement has no Lean. Gates: sorry-only theorem, source/blueprint docstrings with the 3 proof steps, autoImplicit off, no pro-étale substitute. Edge cases: empty X, zero ring, infinite atlas, non-quasi-separated X. No findings; no recompile because there is no FIX."
+ }
+}

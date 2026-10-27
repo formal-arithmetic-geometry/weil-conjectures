@@ -1,0 +1,128 @@
+{
+ "id": "lem-zl-curve-classical-pullback-exists",
+ "kind": "statement",
+ "title": "Existence of normalized classical curve inverse image",
+ "statement": "Fix a finite-field datum $D$ with base $k_0$, algebraic closure $k$ and geometric Frobenius [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega:\\operatorname{Type}(u+1)$ of $\\mathbf Q_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme, $m\\ge1$, $k_m=\\mathbf F_{q^m}\\subset k$, and $h_0:C_0\\hookrightarrow X_0\\times_{k_0}k_m$ a closed immersion with $C_0$ finite type over $k_m$. Use the common-stage constructible Weil heart [def-weil-weil-sheaf-complex; def-weil-constructible-heart], classical lisse Weil sheaves and filtrations [def-zl-classical-weil-filtration-transport-data], and normalized classical realization [def-zl-normalized-classical-weil-realization]. Let $R$ satisfy the constant restriction specification [def-zl-constant-extension-restriction-local-data], and let $R_X,R_C$ be any supplied normalized realizations on $X_0,C_0$. Then there exists a $\\mathrm{ZlCurveClassicalPullback}$ comparison [def-zl-curve-restriction-filtration-data] for these supplied realizations and $R$. For every classical lisse Weil sheaf $H$, the carrier of $R_m(R_XH)$ is common-stage lisse, where $R_m=h_0^*\\circ R$ is the composite curve restriction [def-real-common-stage-lisse]. This asserts no filtration or local Frobenius spectrum formula. The same comparison supplies, at every algebraically closed geometric point $x:\\operatorname{Spec}\\kappa\\to(C_0)_k$ with $\\kappa:\\operatorname{Type}(u)$, a natural isomorphism between the classical fibre functor after $c_{\\rm classical}$ and the original fibre functor at $xh$. These are ordinary geometric fibres, not Frobenius operators.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-punctual-weights",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-fundamental-representation",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-real-common-stage-lisse",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-local-frobenius-trace",
+  "def-wf-iota-real",
+  "def-zl-classical-weil-filtration-transport-data",
+  "def-zl-normalized-classical-weil-realization",
+  "def-per-lisse-completed-system-data",
+  "def-zl-curve-restriction-filtration-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152."
+ },
+ "proof": [
+  {
+   "text": "Pull finite locally free systems back level by level along the geometric composite.\nTheir pulled-back trivializations and reduction maps define the ordinary classical\ninverse image. Apply completed_system_comparison to compare completion and\nrationalization with this inverse image. The normalized rational realization\nidentifies the resulting geometric functor with commonStageDerivedPullback.\nUse hR's normalized constant comparison followed by the immersion pullback\ncompositor for underlying. Its composition equation is underlying_normalization.\nThe composition equations for the completed systems and realization, applied to\ngeometric Frobenius and the ordered m-fold Weil map, define classical on Weil\nobjects and give realization and realization_underlying, naturally on all arrows.\nUse the supplied RX and RC normalizations, rather than choosing new realizations.\nThe same finite locally free models show the realized restricted carriers are\ncommon-stage lisse. Empty schemes and zero ranks use the zero systems. At each geometric point, the ordinary pullback fibre comparison is natural in sheaf maps, at finite level and after completion, rationalization and scalar extension. Compose with c.forget to get the displayed natural isomorphism on classical Weil objects.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-lisse-completed-system-comparison",
+  "lem-tw-lisse-rational-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized ordinary inverse image of classical lisse Weil sheaves along a closed curve after constant field extension, compatible with derived realization",
+   "results": "8 hits: scheme normalizationDiagram and normalizationDiagramMap, toNormalization, and residue-field naturality; none concerns classical lisse inverse image.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement for this normalized classical/common-stage curve interface. General categorical or Frobenius facts do not construct its comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits, including NatIso.ofComponents and its component lemmas. These assemble comparisons but do not supply their components or normalization.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement for this normalized classical/common-stage curve interface. General categorical or Frobenius facts do not construct its comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ZlCurveClassicalPullback|zl_curve_classical_pullback_exists",
+   "results": "0 hits in Mathlib. Local rg on lean/Sheaf finds only the existing data record in the assigned module; no theorem constructing it.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement for this normalized classical/common-stage curve interface. General categorical or Frobenius facts do not construct its comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CurveRestrictionFiltrationSpectrum",
+  "group": "B7",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152.",
+   "via": [
+    "lem-zl-curve-restriction-filtration-spectrum",
+    "lem-zl-two-point-curve-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CurveClassicalPullbackExists",
+  "file": "lean/Sheaf/Paper/CurveClassicalPullbackExists.lean",
+  "declaration": "WeilConjectures.zl_curve_classical_pullback_exists",
+  "declarations": [
+   "WeilConjectures.zl_curve_classical_pullback_exists"
+  ],
+  "statement": "theorem zl_curve_classical_pullback_exists\n    (R : sfCommonStageWeilSheaf D l hl X₀ Ω ⥤\n      sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl\n        (constantExtensionModel D m hm X₀) Ω)\n    (hR : ConstantExtensionRestrictionSpec D m hm X₀ l hl Ω R)\n    (RX : ZlClassicalRealization D l hl Ω X₀)\n    (RC : ZlClassicalRealization (constantExtensionDatum D m hm) l hl Ω C₀)\n    : ∃ c : ZlCurveClassicalPullback D l hl Ω X₀ m hm C₀ h₀ RX RC R,\n      (∀ H : ZlClassicalWeil D l Ω X₀,\n        @IsCommonStageLisse l _ Ω _ _ _\n        ((constantExtensionDatum D m hm).geometricFiber C₀).left\n        (sfWeilPrimeInvertible (constantExtensionDatum D m hm) l hl C₀)\n        ((zlCurveRestriction D l hl Ω X₀ m hm C₀ h₀ R).obj\n          ((RX.weil D l hl Ω X₀).obj H)).obj.carrier) ∧\n      ∀ (κ : Type u) [Field κ] [IsAlgClosed κ]\n        (x : Spec (.of κ) ⟶ ((constantExtensionDatum D m hm).geometricFiber C₀).left),\n      Nonempty (c.classical ⋙\n          IsoAlgebra.forget (lisseAlgebraicAutomorphismPullback\n            ((constantExtensionDatum D m hm).geometricFrobenius C₀) l Ω) ⋙\n          lisseAlgebraicFiberFunctor l\n            ((constantExtensionDatum D m hm).geometricFiber C₀).left x Ω ≅\n        IsoAlgebra.forget (lisseAlgebraicAutomorphismPullback\n            (D.geometricFrobenius X₀) l Ω) ⋙\n          lisseAlgebraicFiberFunctor l (D.geometricFiber X₀).left\n            (x ≫ zlCurveGeometricMap D X₀ m hm C₀ h₀) Ω)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-78654",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T022900-L-494007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-78654",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T022900-L-494007",
+  "kind": "interface",
+  "note": "independent cc review: B7 CurveRestrictionFiltrationSpectrum 7865: compared the moved data (Expr hashes, sandbox vs published) with the published item module, the new sorry statements with node lem-zl-curve-restriction-filtration-spectrum and the blueprint paragraph 2, and the item node with sheaf-dag"
+ }
+}

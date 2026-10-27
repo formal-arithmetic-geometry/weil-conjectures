@@ -1,0 +1,180 @@
+{
+ "id": "def-sfb-scalar-extension-constraint-data",
+ "kind": "definition",
+ "title": "Canonical local pure tensors for sheaf scalar extension",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(C,J)$ be a site [def-weil-pbc-sites-and-cohomology], with object universe $u_C$, morphism universe $v_C$, and $C$ essentially small in the coefficient universe $w$; assume forgetting commutative ring sheaves to ring sheaves preserves the sheaf condition. For a commutative ring sheaf $R$ with values in $w$, let $\\operatorname{ScalarExtensionConstraintModules}(R)$ be the existing category of sheaves of modules over its underlying ring sheaf [def-weil-sheaf-of-modules-category]. For $M,N$ in this category, $U\\in C$, and sections $x\\in M(U)$, $y\\in N(U)$, define $\\operatorname{scalarExtensionConstraintPureTensor}(R,M,N,U,x,y)$ to be the image of $x\\otimes y$ under the module-sheafification unit [def-weil-presheaf-modules-sheafification], then the inverse of the canonical comparison from the existing tensor object to the sheafified sectionwise tensor [def-pur-sheaf-tensor-product]. For a map $\\alpha:A\\to S$ of commutative ring sheaves, an $A$-module sheaf $H$, and $h\\in H(U)$, $s\\in S(U)$, define $\\operatorname{scalarExtensionConstraintTmul}(\\alpha,H,U,h,s)$ to be the image of $s\\otimes_{A(U),\\alpha_U}h$ under the module-sheafification unit into the existing change-of-rings sheaf [def-pur-sheaf-tensor-product]. No flatness hypothesis or scalar-extension coherence theorem is part of this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03DD (section-global), and 03EK (section-tensor-product): module-sheafification unit and sectionwise tensor/change of rings."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Image of pure tensor under sheafification unit for scalar extension of sheaves of modules",
+   "results": {
+    "t": "2026-10-24T11:38:47Z",
+    "tool": "leansearch",
+    "query": "Image of pure tensor under sheafification unit for scalar extension of sheaves of modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+     "ModuleCat.ExtendScalars.map_tmul",
+     "CategoryTheory.toSheafify",
+     "PresheafOfModules.toSheafify",
+     "PresheafOfModules.Sheafify.map_smul",
+     "PresheafOfModules.sheafifyMap",
+     "SheafOfModules.unit",
+     "PresheafOfModules.sheafify"
+    ],
+    "digest": "e127af65f9ef7b48"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies sheafification and tensor ingredients, but not these named section images. Project grep finds the exact helpers in ScalarExtensionConstraintCoherence; DAG grep finds only their theorem owner, so record the plain definitions with existing:true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pure tensor in sheafification of sectionwise change of rings for module sheaves",
+   "results": {
+    "t": "2026-10-24T11:38:49Z",
+    "tool": "leanfinder",
+    "query": "Pure tensor in sheafification of sectionwise change of rings for module sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.Sheafify.SMulCandidate.x",
+     "PresheafOfModules.Sheafify.SMulCandidate",
+     "PresheafOfModules.Sheafify.smul",
+     "PresheafOfModules.Sheafify.smulCandidate",
+     "PresheafOfModules.Sheafify.SMulCandidate.h",
+     "PresheafOfModules.Sheafify.one_smul",
+     "PresheafOfModules.Sheafify.SMulCandidate.mk'",
+     "PresheafOfModules.Sheafify.map_smul_eq"
+    ],
+    "digest": "47f8287737e80ad3"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies sheafification and tensor ingredients, but not these named section images. Project grep finds the exact helpers in ScalarExtensionConstraintCoherence; DAG grep finds only their theorem owner, so record the plain definitions with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionConstraint|changeOfRingsPresheaf|tensorObjIsoSheafification",
+   "results": {
+    "t": "2026-10-24T11:38:47Z",
+    "tool": "grep",
+    "query": "scalarExtensionConstraint|changeOfRingsPresheaf|tensorObjIsoSheafification",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies sheafification and tensor ingredients, but not these named section images. Project grep finds the exact helpers in ScalarExtensionConstraintCoherence; DAG grep finds only their theorem owner, so record the plain definitions with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"scalarExtensionConstraint\" lean/WeilConjectures lean/Sheaf; rg -l \"scalarExtensionConstraint\" dag/nodes; tools/blueprint_refs.py search \"scalar extension constraint\"",
+   "results": "No exact helper in WeilConjectures. Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarExtensionConstraintCoherence.lean contains all three reused definitions. DAG finds only lem-pd-sheaf-scalar-extension-constraint-coherence; no definition owner or blueprint search hit.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing Lean declarations; add only their missing definition-node ownership."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-restriction-geometric-coherence",
+  "date": "2026-10-24",
+  "group": "Q145"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03DD (section-global), and 03EK (section-tensor-product): module-sheafification unit and sectionwise tensor/change of rings.",
+   "via": [
+    "lem-sfb-internal-restriction-geometric-coherence",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionConstraintCoherence",
+  "declaration": "SheafOfModules.ScalarExtensionConstraintModules",
+  "declarations": [
+   "SheafOfModules.ScalarExtensionConstraintModules",
+   "SheafOfModules.scalarExtensionConstraintPureTensor",
+   "SheafOfModules.scalarExtensionConstraintTmul"
+  ],
+  "statement": "abbrev ScalarExtensionConstraintModules\n    {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}\n    [EssentiallySmall.{w} C]\n    [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    (R : Sheaf J CommRingCat.{w})",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of 364e2fece838: records the three plain existing definitions from ScalarExtensionConstraintCoherence, rather than its coherence theorem. The current item uses scalarExtensionConstraintTmul, whose body is the canonical sheafification-unit image and is not constructed from the theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14dfd2aff",
+  "group": "Q145",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14dfd2aff",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of returned 364e2fec (H2/H12). Lean byte-identical (cmp) to the head whose clause matching was accepted; re-read finite limits, identities (ψ≫θ), fixed adjoint (all U⟶V in Cᵒᵖ, all k∈K(V), counit=inclusion), terminal equivalence, presented identities: correct, all sorry, real data. Item change is only stmt_deps: theorem lem-pd-sheaf-scalar-extension-constraint-coherence → def-sfb-scalar-extension-constraint-data + def-sfb-internal-set-actions + def-sfb-internal-action-site-basic; lean.statement verbatim. New existing:true nodes: all 16 resp. 3 declarations exist in side-live; statements verbatim (abbrev SetActions / abbrev ScalarExtensionConstraintModules); TeX matches code (Mod over sectionwise group monoid, label change, precomposition lift, restriction/inflation, ModulePullback/PrecompositionPullback/CoefficientChange fields; sheafification-unit pure tensors, independent universes); stmt_deps all present def nodes, no cycle via parent theorem. No compile (no file changed); worker scompile clean. MAINTAINER NOTE: Q112 d1e299fa (S2 PASS, unlanded) creates the same id def-sfb-internal-set-actions (8 decls, action category only). This node is the near-superset (adds restriction/inflation/precomposition/CoefficientChange; omits only the Prop law lemmas groupOperations_naturality/groupMonoid_laws) → land this first and rebind Q112; if Q112 lands first, Q145 must rebase and extend. Advisory: could also list the law lemmas incl. restrictionSite_laws."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T190016-L-3836449",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.scalarExtension_constraint_coherence"
+  ],
+  "sorry_after": []
+ }
+}

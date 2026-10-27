@@ -1,0 +1,425 @@
+{
+ "id": "lem-sfb-internal-function-vertex-prism",
+ "kind": "statement",
+ "title": "Vertex prism on internal function complexes of profinite parameters",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $M$ be an internal $A$-module [sk-def-sfb-module-objects]. For a profinite set $Z$, including the empty set, let\n$$B_Z^n(M)=\\underline{\\operatorname{Hom}}_A(A[\\underline Z^{n+1}],M),\\qquad n\\geq0,$$\nwith $A[P]$ and generalized evaluation as in [def-sfb-condensed-equivariant-bar-data]. Put $B_Z^n(M)=0$ for $n<0$ and give it differential\n$$(\\delta F)(z_0,\\ldots,z_{n+1})=\\sum_{j=0}^{n+1}(-1)^jF(z_0,\\ldots,\\widehat z_j,\\ldots,z_{n+1}).$$\nFor profinite sets $X,Y$ and continuous maps $u,v:X\\to Y$, coordinatewise pullback gives internal $A$-linear cochain maps $u^*,v^*:B_Y^\\bullet(M)\\to B_X^\\bullet(M)$. Set $P_{u,v,0}=0$ and, for $n\\geq1$, prescribe\n$$(P_{u,v,n}F)(x_0,\\ldots,x_{n-1})=\\sum_{i=0}^{n-1}(-1)^iF(u(x_0),\\ldots,u(x_i),v(x_i),\\ldots,v(x_{n-1})).$$\nThese define internal $A$-linear maps $P_{u,v,n}:B_Y^n(M)\\to B_X^{n-1}(M)$ satisfying\n$$\\delta P_{u,v}+P_{u,v}\\delta=v^*-u^*$$\nin every nonnegative degree. All formulas and identities hold on generalized evaluations after every profinite base change. They commute with every internal $A$-linear coefficient map $M\\to N$. They are also natural in the two parameter maps: for continuous $b:W\\to X$ and $c:Y\\to Z$, one has $b^*P_{u,v}=P_{u\\circ b,v\\circ b}$ and $P_{u,v}c^*=P_{c\\circ u,c\\circ v}$ with the indicated function complexes as domains and codomains. In degree zero the identity reads $(P_{u,v,1}\\delta F)(x)=F(v(x))-F(u(x))$. No group action or resolution is required.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and preceding cancellation: agent contravariant internal-function vertex-prism adaptation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof": [
+  {
+   "text": "For each continuous parameter map q:P→Q, precompose every generalized function by q, over every slice T→S, and apply the inverse of F.evaluate to construct parameterValue. The F.add, F.smul and F.restriction laws show that it is a linear map of section-module sheaves. The fully faithful internal-to-section-module functor gives its internal module morphism. F.map gives coefficient naturality. Injectivity of F.evaluate gives the identity and composition laws; this constructs the actual contravariant parameterFunctor without choosing an unspecified witness.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, equation-homotopy-to-homotopy and the cancellation preceding lemma-homotopy-s-N; contravariant profinite-tuple adaptation."
+   }
+  },
+  {
+   "text": "Form the simplicial profinite object of nonempty tuples. Its right-opposite followed by parameterFunctor is cosimplicial. Mathlib AlternatingCofaceMapComplex.d_squared proves that the alternating deletion maps square to zero. Construct the coefficient functor tupleComplex using CochainComplex.of and CochainComplex.ofHom. Its term identifications are identity isomorphisms. Coordinatewise parameter maps commute with deletion, giving tuplePullback as a natural transformation of complex functors.",
+   "uses": [
+    "lem-sfb-profinite-vertex-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, equation-homotopy-to-homotopy and the cancellation preceding lemma-homotopy-s-N; contravariant profinite-tuple adaptation."
+   }
+  },
+  {
+   "text": "Construct each prism as the finite signed sum of the internal maps induced by continuous vertex insertions. The evaluation is additive, hence respects integer scalar multiplication and finite sums. The parameterMap evaluation formula therefore proves precisely the displayed differential, pullback and vertex-prism formulas on every slice. Naturality of the parameter transformations proves coefficient naturality.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "lem-sfb-profinite-vertex-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, equation-homotopy-to-homotopy and the cancellation preceding lemma-homotopy-s-N; contravariant profinite-tuple adaptation."
+   }
+  },
+  {
+   "text": "Apply the generic preadditive prism_boundary to parameterFunctor and then evaluate at M to obtain identity_succ. The separately proved degree-zero equation prism_boundary_zero is the two deletions of the unique inserted pair, yielding pullback by v minus pullback by u.",
+   "uses": [
+    "lem-sfb-profinite-vertex-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, equation-homotopy-to-homotopy and the cancellation preceding lemma-homotopy-s-N; contravariant profinite-tuple adaptation."
+   }
+  },
+  {
+   "text": "The coordinate identities for insertion imply prism_source and prism_target by contravariant functoriality and bilinearity; evaluate their natural transformations at M. Finally apply additive generalized evaluation to the degree-zero morphism equation and use the two coordinate pullback formulas to obtain degree_zero_formula. The construction has no nonemptiness, resolution or group-action hypothesis.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "lem-sfb-profinite-vertex-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, equation-homotopy-to-homotopy and the cancellation preceding lemma-homotopy-s-N; contravariant profinite-tuple adaptation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "lem-sfb-profinite-vertex-prism-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, equation-homotopy-to-homotopy and the cancellation preceding lemma-homotopy-s-N; contravariant profinite-tuple adaptation.",
+  "note": "Explicit generalized-function precomposition and Mathlib tuple cosimplicial complex; only the pure positive-degree signed cancellation is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two continuous maps of profinite sets the alternating vertex prism on internal sheaf module functions gives natural cochain homotopy of pullback maps",
+   "results": {
+    "t": "2026-10-23T11:50:08Z",
+    "tool": "leanfinder",
+    "query": "For two continuous maps of profinite sets the alternating vertex prism on internal sheaf module functions gives natural cochain homotopy of pullback maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "LightCondSet.hom_naturality_apply",
+     "LightCondMod.hom_naturality_apply"
+    ],
+    "digest": "d68a8ea8ba3ccd4e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial-object Homotopy is abstract homotopy data, not this internal-function prism with its specified parameter formula; topological HomotopicWith concerns interval homotopies, and discrete Rep bar complexes do not specialize to internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingFaceMapComplex\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-23T11:50:09Z",
+    "tool": "loogle",
+    "query": "\"AlternatingFaceMapComplex\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId"
+    ],
+    "digest": "cde7ca657f8f6633"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial-object Homotopy is abstract homotopy data, not this internal-function prism with its specified parameter formula; topological HomotopicWith concerns interval homotopies, and discrete Rep bar complexes do not specialize to internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy|Homotopy",
+   "results": {
+    "t": "2026-10-23T11:50:09Z",
+    "tool": "grep",
+    "query": "homotopy|Homotopy",
+    "sub": "AlgebraicTopology/SimplicialObject",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean"
+    ],
+    "digest": "04d29fd96176a895"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial-object Homotopy is abstract homotopy data, not this internal-function prism with its specified parameter formula; topological HomotopicWith concerns interval homotopies, and discrete Rep bar complexes do not specialize to internal modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prism homotopy between pullbacks of two continuous profinite parameter maps on internal condensed module cochains",
+   "results": {
+    "t": "2026-10-23T11:50:09Z",
+    "tool": "leansearch",
+    "query": "Prism homotopy between pullbacks of two continuous profinite parameter maps on internal condensed module cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.HomotopicWith",
+     "Homotopy",
+     "CochainComplex.mappingCone.descHomotopy",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy",
+     "ContinuousMap.HomotopyWith.instFunLike",
+     "homotopic",
+     "Homotopy.noConfusionType",
+     "CategoryTheory.PreOneHypercover.cylinderHomotopy"
+    ],
+    "digest": "8afca4306b754a08"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial-object Homotopy is abstract homotopy data, not this internal-function prism with its specified parameter formula; topological HomotopicWith concerns interval homotopies, and discrete Rep bar complexes do not specialize to internal modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module Hom from free modules on profinite tuples alternating deletion cochains vertex prism homotopy for continuous parameter maps",
+   "results": {
+    "t": "2026-10-23T11:50:12Z",
+    "tool": "leanfinder",
+    "query": "Internal module Hom from free modules on profinite tuples alternating deletion cochains vertex prism homotopy for continuous parameter maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.d",
+     "inhomogeneousCochains.d",
+     "Rep.standardComplex.d",
+     "ContinuousCohomology.MultiInd.d_succ",
+     "ContinuousCohomology.MultiInd.complex",
+     "AlgebraicTopology.DoldKan.PInfty",
+     "Homotopy.mkCoinductiveAux₂",
+     "Homotopy.mkCoinductiveAux₃"
+    ],
+    "digest": "d93f189846f098af"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: simplicial-object Homotopy is abstract homotopy data, not this internal-function prism with its specified parameter formula; topological HomotopicWith concerns interval homotopies, and discrete Rep bar complexes do not specialize to internal modules"
+  },
+  {
+   "tool": "grep",
+   "query": "prism|homotopy",
+   "results": {
+    "t": "2026-10-23T12:54:56Z",
+    "tool": "grep",
+    "query": "prism|homotopy",
+    "sub": "AlgebraicTopology/SimplicialObject",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean"
+    ],
+    "digest": "04d29fd96176a895"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan homotopies do not state the specified internal profinite-parameter prism. AlternatingCofaceMapComplex.map/objD supply abstract coface complexes only, not this construction or identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two maps of sets induce homotopic cochain maps on homogeneous tuple functions by the alternating prism operator",
+   "results": {
+    "t": "2026-10-23T12:54:56Z",
+    "tool": "leansearch",
+    "query": "Two maps of sets induce homotopic cochain maps on homogeneous tuple functions by the alternating prism operator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "homotopic",
+     "Homotopy",
+     "Homotopy.noConfusionType",
+     "Homotopy.homologyMap_eq",
+     "Homotopy.mk",
+     "Homotopy.nullHomotopicMap'",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy",
+     "CochainComplex.HomComplex.δ_ofHomotopy"
+    ],
+    "digest": "39141db6f6bb9616"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan homotopies do not state the specified internal profinite-parameter prism. AlternatingCofaceMapComplex.map/objD supply abstract coface complexes only, not this construction or identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"alternating\"",
+   "results": {
+    "t": "2026-10-23T12:54:56Z",
+    "tool": "loogle",
+    "query": "\"Homotopy\", \"alternating\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "ChainComplex.alternatingConstHomotopyEquiv",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId",
+     "AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId"
+    ],
+    "digest": "d5268da368b28a43"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan homotopies do not state the specified internal profinite-parameter prism. AlternatingCofaceMapComplex.map/objD supply abstract coface complexes only, not this construction or identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating vertex prism gives cochain homotopy between pullbacks on internal functions from tuples of profinite sets",
+   "results": {
+    "t": "2026-10-23T12:54:57Z",
+    "tool": "leanfinder",
+    "query": "Alternating vertex prism gives cochain homotopy between pullbacks on internal functions from tuples of profinite sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkCoinductiveAux₃",
+     "Homotopy.mkCoinductiveAux₂",
+     "Homotopy.mkCoinductiveAux₁",
+     "Homotopy.mkCoinductive",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "ChainComplex.alternatingConstHomotopyEquiv",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom"
+    ],
+    "digest": "51b63e79425d59b3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan homotopies do not state the specified internal profinite-parameter prism. AlternatingCofaceMapComplex.map/objD supply abstract coface complexes only, not this construction or identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any two functions u v from X to Y the signed sum F(u x0,...,u xi,v xi,...,v xn) defines prism homotopy for alternating deletion cochains",
+   "results": {
+    "t": "2026-10-23T12:55:36Z",
+    "tool": "leanfinder",
+    "query": "For any two functions u v from X to Y the signed sum F(u x0,...,u xi,v xi,...,v xn) defines prism homotopy for alternating deletion cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.AlternatingCofaceMapComplex.map",
+     "Homotopy.mkCoinductiveAux₃",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.objD",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "Homotopy.mkCoinductiveAux₂",
+     "ChainComplex.alternatingConstHomotopyEquiv",
+     "AlgebraicTopology.AlternatingFaceMapComplex.objD",
+     "Homotopy.mkCoinductiveAux₂_add_one"
+    ],
+    "digest": "6889a947194220fb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: abstract homotopy constructors and Dold-Kan homotopies do not state the specified internal profinite-parameter prism. AlternatingCofaceMapComplex.map/objD supply abstract coface complexes only, not this construction or identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-bar-row-finite-index-transfer",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), direct image via the open-coefficient theorem; finite-index transfer auxiliary argument below its scalar tame-kernel input.",
+   "via": [
+    "lem-sfb-internal-bar-row-finite-index-transfer",
+    "lem-sfb-prime-to-ell-scalar-bar-model",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-function-vertex-prism",
+  "worker": "stage1",
+  "summary": "Reused the existing profinite free-Hom section-evaluation theorem; constructed the internal maps by continuous parameter restriction and proved the prism equation by explicit opposite-sign pairings and endpoint telescoping. Verified coefficient and both parameter naturalities, degree zero and empty profinite sets; no new nodes or statement changes.",
+  "blueprint": "The current latest blueprint direct-images proof, paragraph (3), open direct image via the open-coefficient theorem: this is the elementary vertex-prism input to the already chosen finite-index transfer auxiliary route. The ancestor utility returns None; retained the imported from.node and via, and searched the entire blueprint for prism, homotopy, internal function and 019S.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-05100d9cb",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-05100d9cb (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement is the one imported from live, unchanged (live has the item unsplit, with no repair note). It is well-typed: P_n goes from B_Y^n to B_X^{n-1}. I checked by hand, and by my own formal Z-coefficient check in degrees 0-6, that δP+Pδ=v*-u*, including the degree-0 formula. Edge cases hold: u=v, X or Y empty (the empty family covers ∅ in the coherent site), zero ring or module. Step 1: lem-sfb-profinite-free-hom-resolution-evaluation states the iso H_P(N)(S)≅N(S×P) with exactly the restriction, precomposition, A(S)-action and N-naturality the step uses. Only its underived part is used. def-sfb-condensed-equivariant-bar-data gives generalized evaluation; normalization and detection of equality are Yoneda. Step 2: the maps are precompositions with A[d_j], A[u^{n+1}], A[h_i], so they are internal morphisms. Steps 3-5: I checked the δ² pairing, the identities d_j h_i = h_{i-1}d_j (j<i) and h_i d_{j-1} (j>i+1) with opposite signs, the bijection onto the δP_n terms and the diagonal telescoping. They follow Stacks simplicial.tex equation-homotopy-to-homotopy and lemma-homotopy-s-N (Tag 019S, checked in tags/tags), where the sums are left to the reader; here they are written out. proof_origin is agent, which is correct for this adaptation. Step 7: I checked coefficient, parameter (b, c) and base-change naturality directly. proof_deps equals the union of uses; there is no cycle; both cited nodes are in the same unit (sk-thm-sf-ctf-stability), so no tool_uses are needed. No duplicate: the DAG prism/homotopy nodes (simplicial-homotopy-free-chain, coef extra-degeneracy prism, trf coefficient-bar prism, poset interval nullhomotopy, homogeneous-bar normalization) state other things. Batch 5: the flagged path reaches lem-trf-free-module-sheaf-universal-property. It is the generic Stacks 04BL free module-sheaf universal property, not a statement or proof step of the trace formula or Poincaré duality, so this is not a reason to return. No SGA is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalFunctionVertexPrism",
+  "declaration": "CategoryTheory.CondensedBar.internal_function_vertex_prism",
+  "declarations": [
+   "CategoryTheory.CondensedBar.vertexPrismTuple",
+   "CategoryTheory.CondensedBar.vertexPrismValue",
+   "CategoryTheory.CondensedBar.InternalFunctionVertexPrism",
+   "CategoryTheory.CondensedBar.InternalFunctionVertexPrism.integerComplex",
+   "CategoryTheory.CondensedBar.InternalFunctionVertexPrism.prismZero",
+   "CategoryTheory.CondensedBar.internal_function_vertex_prism"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalFunctionVertexPrism.lean",
+  "statement": "theorem internal_function_vertex_prism (A : Ring.{u}) (F : InternalFunctions A) : Nonempty (InternalFunctionVertexPrism A F)",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reviewer FIX: the theorem quantifies over every InternalFunctions datum F of def-sfb-condensed-equivariant-bar-data instead of asserting ∃ F. The node's B_Z^n(M) and its generalized evaluations are those of the bar data; every sibling statement (internal_bar_finite_index_transfer, the citer, exists_internalHomogeneousCochainCoordinates, nonempty_injectiveRows) takes F as a parameter, so the prism must be available for that F. No other change.",
+  "fixed_by": "NT-stage2-cc-a24e2e7f3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a24e2e7f3",
+  "group": "Q02",
+  "result": "fix",
+  "note": "H3: the theorem stated ∃ F : InternalFunctions A, which is weaker than the node and unusable by the citer internal_bar_finite_index_transfer and the siblings, all of which take F as a parameter; InternalFunctions is non-unique (evaluate can be twisted). FIX: the theorem now quantifies over every F (complete module plus lean-record with the verbatim statement). The fixed file compiles cleanly through nt_compile --json (16 s). All other clauses checked: differential, pullbacks, the predAbove prism tuple and signs, identity_zero/identity_succ with orientation v*-u*, coefficient and b/c naturality, the degree-0 formula, extension by zero, empty sets, universe u. Maps are pinned by the bijective evaluation; no hollow defs; docstrings and proof steps present; dependency records unchanged from live."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T083008-L-2247252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

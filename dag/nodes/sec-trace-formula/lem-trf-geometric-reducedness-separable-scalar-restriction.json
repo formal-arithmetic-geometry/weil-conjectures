@@ -30,8 +30,10 @@
    }
   },
   {
-   "text": "Assume condition (1), and let $E/k_1$ be any extension field. Via $k\\subseteq k_1\\subseteq E$, $E$ is an extension field of $k$, so $D:=E\\otimes_kA$ is reduced by condition (1) (and the swap isomorphism). Let $R=k_1\\otimes_k k_1$ act on $D$ through the ring map $\\psi:R\\to D$, $\\lambda\\otimes\\lambda'\\mapsto\\lambda\\otimes\\lambda'$ (that is, $\\lambda\\cdot1_E\\otimes\\lambda'\\cdot1_A$), and let $R$ act on $k_1$ through the multiplication $\\mu(\\lambda\\otimes\\lambda')=\\lambda\\lambda'$. We identify $E\\otimes_{k_1}A\\cong D\\otimes_Rk_1$. Define $\\alpha:E\\otimes_{k_1}A\\to D\\otimes_Rk_1$ by $e\\otimes a\\mapsto(e\\otimes a)\\otimes1$; it is well defined because it is $k$-bilinear in $(e,a)$ and $k_1$-balanced: $(\\lambda e\\otimes a)\\otimes1=\\psi(\\lambda\\otimes1)(e\\otimes a)\\otimes1=(e\\otimes a)\\otimes\\mu(\\lambda\\otimes1)=(e\\otimes a)\\otimes\\lambda=(e\\otimes a)\\otimes\\mu(1\\otimes\\lambda)=(e\\otimes\\lambda a)\\otimes1$. Define $\\beta:D\\otimes_Rk_1\\to E\\otimes_{k_1}A$ by $(e\\otimes a)\\otimes c\\mapsto ce\\otimes a$; the map $D\\times k_1\\to E\\otimes_{k_1}A$, $(x,c)\\mapsto c\\cdot\\bar x$ with $\\bar x$ the image of $x$ under the quotient map $E\\otimes_kA\\to E\\otimes_{k_1}A$, is $R$-balanced since $\\overline{\\psi(\\lambda\\otimes\\lambda')x}=\\lambda\\lambda'\\bar x$ in $E\\otimes_{k_1}A$. Both maps are ring homomorphisms (they respect $1$ and products of pure tensors) and are mutually inverse on generators, using $(e\\otimes a)\\otimes c=(ce\\otimes a)\\otimes1$. By [lem-trf-separable-algebraic-diagonal-localization], $\\mu:R\\to k_1$ is a localization of $R$ at a multiplicative subset $S$. By [lem-weil-pbc-localization-base-change] applied to $\\psi:R\\to D$, the map $D\\to D\\otimes_Rk_1$ is a localization of $D$ at $T=\\psi(S)$. A localization of a reduced ring is reduced: if $(x/t)^n=x^n/t^n=0$, then $ux^n=0$ for some $u\\in T$, so $(ux)^n=u^{n-1}(ux^n)=0$, hence $ux=0$ as $D$ is reduced, and $x/t=ux/(ut)=0$. Therefore $D\\otimes_Rk_1\\cong E\\otimes_{k_1}A$ is reduced, proving condition (2).",
+   "text": "Assume (1) and take a field extension $E/k_1$. Restrict scalars to $k$, so $D=E\\otimes_kA$ is reduced (using the factor swap). Put $R=k_1\\otimes_kk_1$, with $\\psi(\\lambda\\otimes\\lambda\\prime)=(\\lambda1_E)\\otimes(\\lambda\\prime1_A)$ and $\\mu(\\lambda\\otimes\\lambda\\prime)=\\lambda\\lambda\\prime$. Apply [lem-trf-tensor-diagonal-unit-hom] and [lem-trf-tensor-diagonal-evaluation-hom] with $(L,B,C)=(k_1,E,A)$ to obtain ring homomorphisms $\\alpha:E\\otimes_{k_1}A\\to D\\otimes_Rk_1$ and $\\beta$ in the reverse direction, with the stated pure-tensor formulas. Their composite $\\beta\\alpha$ fixes $e\\otimes a$. The other composite sends $(e\\otimes a)\\otimes c$ to $(ce\\otimes a)\\otimes1$, equal to $(e\\otimes a)\\otimes c$ by $R$-balancing with $c\\otimes1\\in R$. Additivity and generation by pure tensors show both composites are identities. Thus these maps give the required ring isomorphism. By [lem-trf-separable-algebraic-diagonal-localization], $\\mu$ is a localization at a multiplicative subset $S\\subseteq R$; [lem-weil-pbc-localization-base-change] applied to $\\psi$ identifies $D\\otimes_Rk_1$ with the localization of $D$ at $T=\\psi(S)$. This localization is reduced: if $(x/t)^n=0$ with $n\\geq1$, some $u\\in T$ kills $x^n$, hence $(ux)^n=u^{n-1}(ux^n)=0$. Reducedness of $D$ gives $ux=0$, so $x/t=0$. Transfer reducedness along the isomorphism and swap factors to obtain (2).",
    "uses": [
+    "lem-trf-tensor-diagonal-unit-hom",
+    "lem-trf-tensor-diagonal-evaluation-hom",
     "lem-trf-separable-algebraic-diagonal-localization",
     "lem-weil-pbc-localization-base-change"
    ],
@@ -48,6 +50,8 @@
   "def-weil-pbc-transcendence-basis",
   "lem-trf-geometrically-reduced-base-change",
   "lem-trf-separable-algebraic-diagonal-localization",
+  "lem-trf-tensor-diagonal-evaluation-hom",
+  "lem-trf-tensor-diagonal-unit-hom",
   "lem-weil-pbc-localization-base-change",
   "lem-weil-pbc-separably-generated-tensor-reduced",
   "lem-weil-pbc-tensor-cancel-base-change"
@@ -145,15 +149,14 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-geometric-reducedness-separable-scalar-restriction",
   "worker": "stage1",
-  "summary": "Split Tag 0C2Y into its two directional arguments. The forward direction uses the existing separably-generated tensor-reduced theorem, the new 034N reduced-base-change node, and tensor cancellation. The reverse direction uses the tensor cancellation identity, the new 0C2X diagonal-localization node, base change of localization, and the elementary fact that localizations of reduced rings are reduced. No statement clause was moved into a child node.",
+  "summary": "Repair of the batch5 re-split: retain the full first-direction argument and replace the two independent balanced-map constructions of the second direction by two new statement-only commutative-algebra lemmas. Their inverse check and the entire localization/reducedness argument remain explicit in the assembly. The statement, existing source/search/Lean records and route are unchanged.",
   "blueprint": {
    "ancestor": "lem-trf-local-term-locality",
    "places": [
-    "the ancestor proof’s separable algebraic constants extension",
-    "Tag 0C2Y scalar-restriction argument"
+    "The inherited separable-algebraic constants-extension input below this ancestor, via the recorded chain; Stacks 0C2Y first paragraph (step 1) and second paragraph tensor identity and localization (step 2)."
    ]
   },
   "tool_uses": [
@@ -167,12 +170,12 @@
   "lem-weil-pbc-separably-generated-tensor-reduced"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q53-9f5f8d819",
-  "group": "Q53",
+  "reviewer": "NT-cc-NF-f5c008d3d",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-9f5f8d819 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks algebra.tex 10080-10285 (030U, 034N, 0C2X, 0C2Y and the definition of geometrically reduced) in full. Item 0C2Y: the statement matches Stacks with nothing added or dropped. Step 1: the empty transcendence basis makes k_1/k separably generated, so the 030U node (K=k_1, S=E) applies, then 034N over k_1 with R=E⊗k_1, then tensor-cancel with k→k_1; hypotheses checked. Step 2: the identity E⊗_{k_1}A≅(E⊗_kA)⊗_{k_1⊗k_1}k_1 cited the tensor-cancel node, which does not state it (C4). The localization-of-reduced argument said 'a power of s kills a power of x', which is imprecise. Both repaired in fixes: explicit balanced maps α,β with inverse check, ux^n=0 ⇒ (ux)^n=0 ⇒ ux=0, and tensor-cancel removed from step 2's uses. New node 034N: correct, tested on R=k, R=0, A=k, a finite product of fields and an inseparable non-example. Repaired B3: def-weil-field added to stmt_deps and reduced defined inline. Mathlib's IsGeometricallyReduced uses the algebraic closure (with a TODO on the equivalence), so the node is not a leaf. New node 0C2X: correct, tested on k_1=k, C/R and the inseparable counterexample; the 'usual kernel criterion' wording is spelled out. No duplicates: lem-weil-pbc-finite-separable-multiplication-etale covers finite extensions and étaleness only, lem-pur-finite-field-derived-tensor-summand covers finite fields only, there is no blueprint same_as, and neither new node restates a clause of the item. Accepted tool use: lem-weil-pbc-separably-generated-tensor-reduced (030U input). No SGA cited; not a target node.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-f5c008d3d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks 0C2Y (algebra.tex, lemma-geometrically-reduced-over-separable-algebraic) in full. The item statement is byte-identical to the live one. It answers the 2026-10-22 batch-5 re-split note: the item is not dropped, no other group has re-split it, and the new ids do not exist in live or side-live. Old vs new proof, argument by argument: step 1 (empty basis, 030U, 034N, cancellation) is kept verbatim and was already an assembly of cited nodes. The two balancing constructions of old step 2 became the new nodes lem-trf-tensor-diagonal-unit-hom (alpha: B⊗_L C → (B⊗_k C)⊗_{L⊗_k L} L) and lem-trf-tensor-diagonal-evaluation-hom (beta in the reverse direction). The parent keeps a written-out 2-line inverse check, the 0C2X and localization-base-change citations, and the full 2-line argument that a localization of a reduced ring is reduced. The only DAG node for that fact covers primes only, so it is not a missing citation. Nothing was shortened. The parent proof is 2430 characters; the nodes are 876 and 903 characters, independent of each other, and restate no clause of the item. Both new statements are true for arbitrary commutative k, L, B, C: I checked the balancing (λb⊗c)⊗1=(b⊗c)⊗λ=(b⊗λc)⊗1 and q(ψ(λ⊗λ')x)=λλ'q(x), and the cases L=k, zero algebras, non-injective k→L and purely inseparable L. Both nodes meet B1-B9: self-contained, stmt_dep is the tensor-product definition, LeanSearch is recorded as unavailable, and the blueprint ancestor is the same as the item's. Batch-5 flag on both citations accepted: they are general commutative-algebra ring maps whose closure is only def-weil-pbc-module-tensor-product. They are not part of the statement or proof of the trace formula or Poincaré duality, and they add nothing trace-formula-related to the batch-5 closure, because the item was already in it on the base. No SGA source is cited, tool_uses is unchanged (inherited 030U), and no fixes were made."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -192,5 +195,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

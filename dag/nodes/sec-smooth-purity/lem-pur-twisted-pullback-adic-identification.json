@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-twisted-pullback-adic-identification",
+ "kind": "statement",
+ "title": "Identification of the twisted scalar component with the ordinary adic source map",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "statement": "Let B be a finite-field datum with coefficient datum C, and let f:X→Y be a smooth separated morphism of relative dimension d between separated finite-type B.k-schemes, with ell invertible in all residue fields. Assume the ordinary integral scalar functors preserve the uniform finite-Tor constructible domains, as expressed by ScalarClosed B C X Y. For each actual finite intermediate coefficient field R⊆C.Qbar, fix ShiftData C.l R.val X d with its normalized tensor-to-termwise beta. Then AdicAgreement B C f d holds for these data: a is localization of integralA, and conjugating that same integralA by the two specified chi maps and shifted beta gives exactly sourceScalarComponent. All the constructions are those of [def-pur-twisted-pullback-adic-agreement] and [def-pur-twisted-pullback-shift-normalization]. This is a one-arrow identification, independent of the square equations or coefficient/shift laws.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Clause (3), coefficient-extension tower comparisons; expanded ordinary pullback/tensor/shift calculation in lem-pur-twisted-pullback-square-scalars."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-twisted-pullback-adic-agreement",
+  "def-pur-twisted-pullback-shift-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Expand integralA into the prescribed integral scalar shift, tensor comparison and roots-line scalar map, followed by D of the completed scalar/pullback map. On a flat K-flat representative use tensorToTermwiseOnGood. The normalization of ShiftData.beta fixes exactly this identification, so it descends independently of the representative.",
+   "uses": [
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert chi to replace strict-system scalar extension by ordinary completed-ring scalar extension. Naturality cancels the chi on the intermediate pullback. The remaining scalar shift, termwise line comparison and pullback balancing, followed by inverse chi on the input, are exactly the definition of sourceScalarComponent. This proves the second HEq of AdicAgreement for the same integralA, without any exceptional comparison.",
+   "uses": [
+    "lem-pur-framework-pbc-pullback-scalar-bridge",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The raw localization functor carries integralQ and integralPullbackScalarComparison to the specified rational q and p and preserves their composite and canonical shifts. Thus a is precisely localization of integralA, the first HEq of AdicAgreement. The argument concerns the full system, so it never infers equality from separate reductions.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-completed-scalar-chain-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-framework-pbc-pullback-scalar-bridge",
+  "lem-pur-adic-purity-scalar-naturality",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-completed-scalar-chain-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Clause (3), coefficient-extension tower comparisons; expanded ordinary pullback/tensor/shift calculation in lem-pur-twisted-pullback-square-scalars."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist derived pullback scalar extension commutative square naturality composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso\", \"naturality\"",
+   "results": "CategoryTheory.NatIso.naturality_1; CategoryTheory.NatIso.naturality_2; CategoryTheory.NatIso.naturality_1'; CategoryTheory.NatIso.naturality_2'; CategoryTheory.NatIso.naturality_1_assoc; CategoryTheory.NatIso.naturality_2_assoc; CategoryTheory.NatIso.naturality_1'_assoc; CategoryTheory.NatIso.naturality_2'_assoc",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "twistedPullbackSquareScalars|TwistedPullbackScalars.*(natur|coher)|rationalPullbackScalarComparison.*comp",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist pullback coefficient extension canonical coherence and rational localization",
+   "results": "Module.Basis.ofIsLocalizedModule_repr_apply; LinearMap.restrictScalars_extendScalarsOfIsLocalization; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv; LinearMap.extendScalarsOfIsLocalization; IsLocalization.mapₐ_coe; ModuleCat.instIsScalarTowerLocalizationCarrierLocalizedModule; instIsScalarTowerLocalizationAlgebraMapSubmonoidPrimeCompl_1",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(twist|pullback)|twist.*scalar in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Localization",
+   "results": "No hits for the specified comparisons; checked the local Mathlib source.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackSquareScalars",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Ordinary scalar/pullback/twist constituents of base-change coherence, as expanded by lem-pur-twisted-pullback-square-scalars",
+   "via": [
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-smooth-exchange-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackAdicIdentification",
+  "file": "lean/Sheaf/Paper/TwistedPullbackAdicIdentification.lean",
+  "declaration": "WeilConjectures.TwistedPullbackScalars.twistedPullbackAdicIdentification",
+  "statement": "theorem twistedPullbackAdicIdentification\n    (hC : AdicPurityScalarNaturality.ScalarClosed B C X Y)\n    (s : ∀ R : Fields C.l C.Qbar, ShiftData C.l R.val X d) :\n    AdicAgreement B C f d hC s",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T181101-L-4074722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T181101-L-4074722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

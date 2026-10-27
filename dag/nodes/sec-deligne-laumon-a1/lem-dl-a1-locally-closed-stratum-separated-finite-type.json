@@ -1,0 +1,232 @@
+{
+ "id": "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+ "kind": "statement",
+ "title": "A reduced locally closed stratum of a separated finite-type scheme over a field is separated of finite type",
+ "statement": "Let $k$ be a field and let $T$ be a scheme [def-pc-scheme] whose structure morphism $T\\to\\operatorname{Spec}k$ is separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism]. Let $S\\subseteq|T|$ be a locally closed subset [def-weil-locally-closed-subset], let $U\\subseteq T$ be an open subscheme [def-weil-open-immersion] containing $S$ in which $S$ is closed, and let $i:S_{\\mathrm{red}}\\to U$ be the reduced induced closed subscheme structure on $S$ in $U$ [lem-weil-pbc-reduced-induced-closed-subscheme]. Put $a=u\\circ i:S_{\\mathrm{red}}\\to T$, where $u:U\\to T$ is the open immersion. Then $a$ is an immersion [def-weil-closed-immersion] with image $S$, and $S_{\\mathrm{red}}$, with the composite structure morphism $S_{\\mathrm{red}}\\xrightarrow{a}T\\to\\operatorname{Spec}k$, is separated and of finite type over $k$. If $S=\\varnothing$ then $S_{\\mathrm{red}}$ is the empty scheme.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma schemes-lemma-separated-permanence (Tag 01KU), part (1): a composition of separated morphisms is separated; literature/stacks-project/morphisms.tex, Lemma morphisms-lemma-immersion-locally-finite-type (Tag 01T5), Lemma morphisms-lemma-composition-finite-type (Tag 01T3), Lemma morphisms-lemma-finite-type-noetherian (Tag 01T6) for quasi-compactness of U; an immersion is a monomorphism, hence separated"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-locally-closed-subset",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\operatorname{vanishingIdeal}(u^{-1}S)$, $i=I.\\mathrm{subscheme\\iota}$, and $a=i\\mathbin{\\gg}u$. Mathlib's closed-immersion instance for subscheme inclusions, together with [def-weil-closed-immersion] and [def-weil-open-immersion], gives that $a$ is an immersion. The constructed subscheme has range $I.\\mathrm{support}=u^{-1}S$ by Mathlib's range_subschemeι and coe_support_vanishingIdeal. Thus range(a) = u(u^{-1}S) = S, using S contained in U. These are direct properties of the construction, without the stronger reduced_induced_closed_subscheme theorem.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A field is Noetherian [def-weil-pbc-noetherian-ring], and therefore its spectrum is locally Noetherian [pqf-def-locnoeth]. Mathlib LocallyOfFiniteType.isLocallyNoetherian, recorded on [pqf-def-locnoeth], applied to the structure morphism gives that T is locally Noetherian. Consequently u is quasi-compact by [lem-sfb-noetherian-open-immersion-qc]. No global compactness of T or Spec(k) is needed for this step.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "lem-sfb-noetherian-open-immersion-qc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open immersion u is locally of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The closed immersion i is locally of finite type: affine-locally its ring map is a quotient, generated as an algebra by the empty set (Mathlib instLocallyOfFiniteTypeOfIsClosedImmersion, Tag 01T5). It is affine by [lem-weil-pbc-closed-immersion-integral-separated-uc], hence quasi-compact. Both immersions are separated by [lem-weil-pbc-separated-cancellation]. Composition instances [lem-weil-pbc-proper-fp-permanence] and [lem-sfb-finite-type-composition-base-change] with the assumed separated, locally finite type, quasi-compact structure morphism give all three properties of i ≫ u ≫ p. These are the inferInstance components of the Lean proof; no separate finite-over-separated-finite-type theorem is used.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If S is empty, the range equality in Step 1 implies that every point of the stratum would map into the empty set. Its underlying space is therefore empty. Mathlib isInitialOfIsEmpty and emptyIsInitial identify the stratum and Scheme.empty as initial objects, giving their unique isomorphism. This is the elementary empty-cover sheaf argument already supplied by Mathlib's scheme limits API.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01T5, 01T6, 01T3, together with properties.tex Tag 01OX and schemes.tex Tags 01J3 and 01KU; implemented directly using Mathlib subscheme, Noetherian, composition, and empty-scheme APIs by A5 on 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsStableUnderComposition @IsSeparated / LocallyOfFiniteType comp / IsImmersion instances in Mathlib/AlgebraicGeometry/Morphisms (Separated.lean, FiniteType.lean, Immersion.lean, Noetherian.lean)",
+   "results": "Morphisms/Separated.lean:71 IsSeparated.stableUnderComposition; :61 isSeparated_of_mono; Morphisms/FiniteType.lean:65,68 LocallyOfFiniteType composition; Morphisms/Immersion.lean:146 IsImmersion.comp, :190 IsImmersion → LocallyOfFiniteType; Noetherian.lean:337 quasiCompact_of_noetherianSpace_source. Several instances combine; no single declaration states the clause for the reduced induced stratum.",
+   "date": "2026-10-23",
+   "verdict": "candidate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsSeparated",
+   "results": "0 hits; inspected: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally closed subscheme of a separated scheme of finite type over a field is separated and of finite type",
+   "results": "8 hits; inspected: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+   "date": "2026-10-23",
+   "verdict": "partial matches only: immersion, separation, and Noetherian permanence facts; no declaration states every clause for the given reduced induced stratum"
+  },
+  {
+   "tool": "grep",
+   "query": "IsImmersion|isSeparated_of_mono|quasiCompact_of_noetherianSpace_source",
+   "results": "19 hits; inspected: Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean (searched AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "partial matches only: immersion, separation, and Noetherian permanence facts; no declaration states every clause for the given reduced induced stratum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally closed subscheme of a scheme finite type over a field is finite type and separated if the ambient scheme is separated",
+   "results": "8 hits; inspected: AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.instResLE, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsSeparated.instMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "partial matches only: immersion, separation, and Noetherian permanence facts; no declaration states every clause for the given reduced induced stratum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion into a Noetherian scheme is quasi compact and locally of finite type; composite of separated morphisms is separated",
+   "results": "8 hits; inspected: AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty, AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.IsPreimmersion.comp, AlgebraicGeometry.IsImmersion.of_comp, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion",
+   "date": "2026-10-23",
+   "verdict": "partial matches only: immersion, separation, and Noetherian permanence facts; no declaration states every clause for the given reduced induced stratum"
+  },
+  {
+   "tool": "grep",
+   "query": "stableUnderComposition|locallyOfFiniteType_comp|isNoetherian_of_isNoetherian|Noetherian",
+   "results": "2 hits; inspected: 71, 76 (searched AlgebraicGeometry/Morphisms/Separated.lean)",
+   "date": "2026-10-23",
+   "verdict": "match for separated-composition subfact only; already carried by lem-weil-pbc-proper-fp-permanence(e); not an exact match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "stableUnderComposition|IsSeparated \\(f ≫ g\\)",
+   "results": "5 hits; inspected: 71, 75, 76, 256, 262 (searched AlgebraicGeometry/Morphisms/Separated.lean)",
+   "date": "2026-10-23",
+   "verdict": "match for separated-composition subfact only; already carried by lem-weil-pbc-proper-fp-permanence(e); not an exact match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of separated morphisms of schemes is separated",
+   "results": "8 hits; inspected: AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsSeparated.of_comp",
+   "date": "2026-10-23",
+   "verdict": "match for separated-composition subfact only; already carried by lem-weil-pbc-proper-fp-permanence(e); not an exact match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated.stableUnderComposition",
+   "results": "1 hits; inspected: AlgebraicGeometry.IsSeparated.stableUnderComposition",
+   "date": "2026-10-23",
+   "verdict": "match for separated-composition subfact only; already carried by lem-weil-pbc-proper-fp-permanence(e); not an exact match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composition of two separated morphisms of schemes is separated",
+   "results": "8 hits; inspected: AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "match for separated-composition subfact only; already carried by lem-weil-pbc-proper-fp-permanence(e); not an exact match for the whole item"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "AlgebraicGeometry.IsSeparated.stableUnderComposition (Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:71), isSeparated_of_mono (:61), AlgebraicGeometry.IsImmersion.comp (Morphisms/Immersion.lean:146) with the LocallyOfFiniteType instance at :190, locallyOfFiniteType_comp (Morphisms/FiniteType.lean:68), quasiCompact_of_noetherianSpace_source (Noetherian.lean:337)",
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-dl-a1-heart-connected-lisse-strata",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-exact",
+ "blueprint": {
+  "from": {
+   "node": "p-dl-a1-exact",
+   "place": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence (geometric-stalk detection): the reduced strata of the connected lisse stratification of lem-dl-a1-heart-connected-lisse-strata, Step 3, are again separated finite-type k-schemes.",
+   "via": [
+    "lem-dl-a1-heart-connected-lisse-strata",
+    "lem-dl-a1-constructible-fibres-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+  "worker": "stage1",
+  "summary": "Proved the immersion/image/empty clauses directly from the given factorization and reduced induced closed subscheme. Made the Noetherian field-base and quasi-compactness of the arbitrary open explicit, then used existing finite-type and separated-composition leaves and the finite closed immersion. No statement change and no new nodes. Checked the live project for an exact closed attachment and searched Mathlib with two formulations; no single declaration covers all clauses of the item.",
+  "blueprint": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence: this auxiliary geometric lemma ensures that the reduced strata used in the geometric-stalk detection reduction of lem-dl-a1-heart-connected-lisse-strata are still separated finite-type k-schemes. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Its closed immersion, reducedness, image, and affine construction identify the stratum assumed in the statement. This is a generic scheme-structure theorem, not a replacement for the fixed-weight exactness route; the unit contains no such construction."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-1ee6f8cb0",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-1ee6f8cb0 (reviewer sub-agent of L); spot-checked: Pure 5-step split of the unchanged reviewer-added item, with 0 new nodes and no re-split note. Step 1: lem-weil-pbc-reduced-induced-closed-subscheme(2) is applied inside U (X=U, T=S), so i is a closed immersion with image S, and a=u∘i is an immersion by the definition in def-weil-closed-immersion; the empty case is elementary. Step 2: elementary proof that k is Noetherian, then Spec k is locally Noetherian (pqf-def-locnoeth) and quasi-compact (affine-scheme-qcqs). Step 3: finite-type-over-noetherian makes T Noetherian, noetherian-open-immersion-qc makes the arbitrary open u quasi-compact, and qc-open-immersion-finite-type makes u of finite type. Step 4: separated-cancellation(a), proper-fp-permanence(e) and finite-type-composition(1) make p∘u separated and of finite type. Step 5: closed-immersion-...-uc(c) makes i finite, and finite-over-separated-finite-type with ν=i, g=p∘u gives p∘a. Every cited statement was read and says what the step takes; all are Mathlib leaves or definitions except the reduced-induced node, which is the item's own stmt_dep and is recorded as a generic tool. I checked the Stacks tags 01J3, 01J4, 01OX (properties.tex:461), 01KU(1) (schemes.tex:4289), 01T3, 01T5, 01T6, 01L7 and 035C against the tags file and the tex. Edge cases (S=∅, S=|T| with U=T, nonreduced T, an open U that is not quasi-compact a priori) all hold, and no hypothesis is added. Duplicate scan found nothing. No SGA cited. Advisory only: step 1's source writes 01IO as 'definition-closed-immersion' while the tag's label is schemes-definition-immersion; the tag is correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedStratumSeparatedFiniteType",
+  "declaration": "AlgebraicGeometry.locallyClosedStratum_separated_finiteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedStratumSeparatedFiniteType.lean",
+  "statement": "theorem locallyClosedStratum_separated_finiteType (k : Type u) [Field k] (T : Scheme.{u}) [T.Over (Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (S : Set T) (hS : IsLocallyClosed S) (U : T.Opens) (hSU : S ⊆ (U : Set T)) (hclosed : IsClosed (U.ι ⁻¹' S)) : IsImmersion ((vanishingIdeal ⟨U.ι ⁻¹' S, hclosed⟩).subschemeι ≫ U.ι) ∧ Set.range ((vanishingIdeal ⟨U.ι ⁻¹' S, hclosed⟩).subschemeι ≫ U.ι) = S ∧ IsSeparated ((vanishingIdeal ⟨U.ι ⁻¹' S, hclosed⟩).subschemeι ≫ U.ι ≫ T ↘ Spec (.of k)) ∧ LocallyOfFiniteType ((vanishingIdeal ⟨U.ι ⁻¹' S, hclosed⟩).subschemeι ≫ U.ι ≫ T ↘ Spec (.of k)) ∧ QuasiCompact ((vanishingIdeal ⟨U.ι ⁻¹' S, hclosed⟩).subschemeι ≫ U.ι ≫ T ↘ Spec (.of k)) ∧ (S = ∅ → Nonempty ((vanishingIdeal ⟨U.ι ⁻¹' S, hclosed⟩).subscheme ≅ Scheme.empty))",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7944018c",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Hypotheses: field k, T.Over (Spec k), IsSeparated and LocallyOfFiniteType+QuasiCompact exactly as the recorded finite-type notion, IsLocallyClosed S, open U with S ⊆ U and S closed in U. Conclusions: canonical vanishingIdeal subscheme from the recorded reduced_induced_closed_subscheme dep, IsImmersion (i ≫ U.ι), range = S, composite to Spec k separated and of finite type, S = ∅ → ≅ Scheme.empty. No extra assumptions; composite parse checked against Mathlib notation precedences. lean.statement verbatim; no new nodes, no statement change, no dep repair; proof_deps are Mathlib matches. Docstrings carry Stacks tags, the blueprint ID and the 5 proof steps; sorry-only, no definitions. Report has Worker report and Second reading by Q96. Edge cases covered: S, U or T empty, S whole space, non-reduced T, arbitrary U, any characteristic. No other Lean for the item and no existing declaration states it. Not recompiled; worker reports clean scompile runs."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261024T184535-L-3064875",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

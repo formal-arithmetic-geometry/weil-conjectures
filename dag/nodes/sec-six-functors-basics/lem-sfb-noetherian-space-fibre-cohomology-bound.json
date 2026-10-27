@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-noetherian-space-fibre-cohomology-bound",
+ "kind": "statement",
+ "title": "Coherent higher-image fibre-dimension bound for proper algebraic spaces",
+ "statement": "Let $Y$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], and let $p:Z\\to Y$ be a proper morphism of algebraic spaces [def-trf-algebraic-space]. Proper means separated, of finite type and universally closed, with the algebraic-space conventions of [lem-sfb-space-flat-proper-fp-locality]. Let $d\\geq0$ be an integer. Assume that every geometric fibre $Z\\times_Y\\operatorname{Spec}\\Omega$, for every algebraically closed field $\\Omega$ and map $\\operatorname{Spec}\\Omega\\to Y$, has dimension at most $d$. Dimension is the supremum of Krull dimensions on affine etale charts, with empty fibre of dimension $-\\infty$ [def-kun-topological-krull-dimension]. Let $F$ be a coherent module on the small etale site of $Z$: $F$ is quasi-coherent [def-trf-space-quasi-coherent-module], and there is a jointly surjective family of etale maps $\\operatorname{Spec}B_k\\to Z$ from affine schemes with each $B_k$ a Noetherian ring [def-weil-pbc-noetherian-ring] such that the restriction of $F$ to $\\operatorname{Spec}B_k$ is associated to a finitely generated $B_k$-module [def-weil-finitely-generated-module] (quasi-coherent of finite type, tested on one etale cover). Then $R^qp_*F=0$ for every integer $q>d$. Higher direct images are the right derived functors of module direct image on small etale ringed sites, computed by injective resolutions in all module sheaves [def-trf-space-etale-module-functors]. No flatness of $p$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0A4T (lemma-higher-direct-images-zero-above-dimension-fibre), applied at every geometric point; empty fibres give zero stalks."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "def-kun-topological-krull-dimension",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Fix $q>d$ and a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ with $\\Omega$ algebraically closed. Apply [lem-sfb-space-formal-functions-geometric-stalk] to $p,F,\\bar y,q$. It supplies the Noetherian local ring $A=\\mathcal O_{Y,\\bar y}$, its maximal ideal $\\mathfrak m$, the spaces $Z_n$, modules $F_n$ and the comparison $\\widehat M\\simeq\\varprojlim_n H^q(Z_n,F_n)$, for $M=(R^qp_*F)_{\\bar y}$. On the surjective etale scheme chart $\\coprod_k\\operatorname{Spec}B_k\\to Z$ the module $F$ is of finite type, since each restriction is associated to a finitely generated $B_k$-module. By [lem-sfb-space-qcoh-affine-chart-calculus] finite type can be tested on that chart, so on every affine etale chart $\\operatorname{Spec}R\\to Z$ the quasi-coherent $F$ is the module sheaf associated to the finitely generated $R$-module $F(\\operatorname{Spec}R)$: this is the every-chart coherence of [lem-sfb-space-proper-coherent-higher-images], which therefore gives that $R^qp_*F$ is coherent. Its finite local generators give finite generators of $M$ over $A$: take a finite generating presentation on an affine etale neighbourhood of $\\bar y$ and take germs; locally lifted sections generate every germ. Thus $M$ is finite. Both inputs apply to algebraic spaces and module direct images, with exactly the properness, locally Noetherian base and coherent-module hypotheses here.",
+   "uses": [
+    "lem-sfb-space-formal-functions-geometric-stalk",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-proper-coherent-higher-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T proof, formal-functions notation and coherence of the higher image; Tags 08B1, 08AR"
+   }
+  },
+  {
+   "text": "Put $k=A/\\mathfrak m$ and choose an algebraic closure $K$ of $k$. By [lem-sfb-space-flat-proper-fp-locality], each $Z_n\\to\\operatorname{Spec}(A/\\mathfrak m^n)$ and $Z_1\\to\\operatorname{Spec}k$ is proper. In particular these total spaces are quasi-compact and separated, hence quasi-separated: the bases are affine, and each absolute diagonal factors through its relative diagonal followed by the base change of the affine base diagonal. Both are closed immersions on scheme tests (quotient ideals add under composition). The fibre $(Z_1)_K$ is a geometric fibre of $p$ covered by the hypothesis. Use [lem-sfb-space-etale-atlas-topological-dimension] to read its chartwise dimension bound as $\\dim|(Z_1)_K|\\leq d$: a quasi-compact scheme atlas can be refined by finitely many affine charts, each having dimension at most $d$. The topological dimension of their finite disjoint union is their maximum, since an irreducible closed subset lies in one summand. Apply [lem-sfb-space-field-extension-dimension] to the separated finite-type $k$-space $Z_1$. It gives $\\dim|Z_1|=\\dim|(Z_1)_K|\\leq d$. This explicitly accounts for the possibly non-algebraically-closed residue field of the etale local ring.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-etale-atlas-topological-dimension",
+    "lem-sfb-space-field-extension-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T proof, fibre X_1; Tag 04NS for the residue-field extension and Tags 0A4H/0A4J for chart dimension"
+   }
+  },
+  {
+   "text": "For each $n\\geq1$, the closed immersion $\\operatorname{Spec}k\\hookrightarrow\\operatorname{Spec}(A/\\mathfrak m^n)$ is a thickening: its defining ideal $\\mathfrak m/\\mathfrak m^n$ has zero $n$th power, so every prime contains it, and the closed-subspace spectrum topology is unchanged. Apply [lem-sfb-space-thickening-base-change] to its pullback along $Z_n\\to\\operatorname{Spec}(A/\\mathfrak m^n)$. The pullback is $Z_1\\hookrightarrow Z_n$, and induces a homeomorphism $|Z_1|\\simeq|Z_n|$. A homeomorphism gives a length-preserving bijection between chains of irreducible closed subsets, so $\\dim|Z_n|=\\dim|Z_1|\\leq d$. This also covers empty fibres: all these point spaces are then empty.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T proof, equality of underlying topological spaces of the infinitesimal neighbourhoods"
+   }
+  },
+  {
+   "text": "Each $F_n=i_n^*F$ is quasi-coherent: $F$ is quasi-coherent and tensor pullback along any morphism of algebraic spaces preserves quasi-coherence, with no flatness hypothesis [lem-sfb-space-module-pullback-quasicoherent]. Step 2 gives quasi-compactness and quasi-separatedness of $Z_n$, and step 3 gives its dimension bound. Consequently [lem-sfb-space-qcoh-vanishing-above-dimension] applies to $Z_n,F_n,d$ and gives $H^q(Z_n,F_n)=0$ for every $n$, since $q>d$. No flatness of $F$ or $p$ has been used.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-qcoh-vanishing-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T proof, application of Tag 0A4R(1) to the pullback modules"
+   }
+  },
+  {
+   "text": "The inverse limit of the zero groups $H^q(Z_n,F_n)$ is zero: a compatible tuple has every coordinate zero. Hence the comparison of [lem-sfb-space-formal-functions-geometric-stalk] gives $\\widehat M=\\varprojlim_n M/\\mathfrak m^nM=0$.",
+   "uses": [
+    "lem-sfb-space-formal-functions-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T proof, vanishing of the completed stalk"
+   }
+  },
+  {
+   "text": "The projection $\\widehat M\\to M/\\mathfrak mM$ is surjective: starting with any class in $M/\\mathfrak mM$, choose recursively a lift through each surjection $M/\\mathfrak m^{n+1}M\\twoheadrightarrow M/\\mathfrak m^nM$, obtaining a compatible tuple. Since $\\widehat M=0$, this quotient is zero, so $\\mathfrak mM=M$. The module $M$ is finite by step 1 and $\\mathfrak m$ is the Jacobson radical of the local ring $A$. Nakayama [lem-weil-pbc-nakayama-jacobson] therefore gives $M=0$. This spells out the completion-reflection argument without assuming that reduction to the fibre commutes with higher direct images.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T proof, final finite-module completion argument; algebra.tex Tag 00DV(2)"
+   }
+  },
+  {
+   "text": "The geometric point was arbitrary, so the underlying abelian etale sheaf of $R^qp_*F$ has all geometric stalks zero. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the morphism from the zero abelian sheaf to this underlying sheaf. Every stalk map is an isomorphism; hence the sheaf itself is zero. Its module sheaf is therefore zero as well. This holds for every $q>d$, giving the assertion.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4T applied at all geometric points; etale-cohomology.tex Tag 03PU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-formal-functions-geometric-stalk",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-etale-atlas-topological-dimension",
+  "lem-sfb-space-field-extension-dimension",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-qcoh-vanishing-above-dimension",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0A4T (lemma-higher-direct-images-zero-above-dimension-fibre), applied at every geometric point; field-extension and completion details supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of algebraic spaces to a locally Noetherian base with geometric fibres of dimension at most d coherent higher direct images vanish above d",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, finite fibres and affine limit sections are not a coherent higher-image dimension vanishing theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"higherDirectImage\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, finite fibres and affine limit sections are not a coherent higher-image dimension vanishing theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*(dim|vanish|zero)|cohomology.*(algebraicSpace|AlgebraicSpace)|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, finite fibres and affine limit sections are not a coherent higher-image dimension vanishing theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of coherent sheaves under a proper morphism of locally Noetherian algebraic spaces vanish in degrees exceeding geometric fibre dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] [LocallyOfFiniteType f] : f.appTop.hom.Finite\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ restrictFunctor f ≅ 𝟭 _\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, finite fibres and affine limit sections are not a coherent higher-image dimension vanishing theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper algebraic space fibre dimension bounds the cohomological degree of coherent module direct images over a locally Noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme properness, finite fibres and affine limit sections are not a coherent higher-image dimension vanishing theorem for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-stack-smooth",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces.",
+   "via": [
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-space-fibre-cohomology-bound",
+  "worker": "stage1",
+  "group": "NE",
+  "summary": "Split the coherent algebraic-space fibre-dimension bound using formal functions and quasi-coherent dimension vanishing. Added precisely these two statement-only inputs, reused proper-image coherence, field-extension dimension invariance, thickening base change, Nakayama and geometric-stalk conservativity. Retained the statement unchanged; treated the strict-local residue field and empty fibres explicitly. No Lean edits or builds. Reviewer repair (NE maintainer reader, 2026-10-23): step 1 cites lem-sfb-space-qcoh-affine-chart-calculus to pass from the one-cover coherence of the statement to the every-chart coherence of lem-sfb-space-proper-coherent-higher-images; step 4 cites the existing pullback lemma lem-sfb-space-module-pullback-quasicoherent (Tag 03GA) instead of re-arguing it.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Realizes the supporting coherent fibre-dimension bound by the seven steps of Stacks Tag 0A4T; the inherited ancestor is null and is retained.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of geometric stalks for abelian etale sheaves, used only to turn stalkwise zero into a zero module sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-jacobson",
+    "why": "Generic finite-module Nakayama theorem, used to reflect vanishing of a completed stalk; the unit does not supply a commutative-algebra replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-8d537e6b5",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-8d537e6b5 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, and Stacks 0A4T, 08B1 (with 08AH), 0A4R(1) with the dimension paragraph before it, and the definition of quasi-separated (absolute). Live and side-live still have the item unsplit and there is no repair note, so this is not a supersession or a re-split. The statement and stmt_deps are unchanged from base, and the item's hypothesis over algebraically closed fibres matches 0A4T once step 2 passes to an algebraic closure. Steps 2, 3, 5, 6 and 7 are correct: properness under base change; absolute separation from the affine base; atlas dimension and field-extension dimension, which handle the separably closed, possibly imperfect residue field; the thickening homeomorphism |Z_1|=|Z_n|; the zero limit; M^ onto M/mM, then Nakayama; conservativity at algebraically closed geometric points. Both new nodes are true, self-contained, statement-only specializations of 08B1 and 0A4R(1). Neither restates the item or duplicates a node (the 02OD, 0E7D, Noetherian-scheme and curve analogues are different). Fixes: (1) C1/E1, step 1. lem-sfb-space-proper-coherent-higher-images needs coherence on every affine chart, but the item gives it on one cover only, and nothing was cited for the passage. Step 1 now cites the existing lem-sfb-space-qcoh-affine-chart-calculus (finite type can be tested on one surjective etale chart). (2) C5/E5, step 4. The step re-argued 'pullback of quasi-coherent is quasi-coherent' without the slice compatibility. It now cites the existing lem-sfb-space-module-pullback-quasicoherent (Tag 03GA). proof_deps is recomputed, and the unused fibre-products tool_use entry is removed. (3) B2. The formal-functions node now names the canonical morphism Spec A -> Y along which X_n is formed. Tool uses accepted: geometric-stalk conservativity and Nakayama, both generic. Batch 5: every flagged citation reaches sec-trace-formula only through the definition def-trf-algebraic-space, or is a sk-i-curve-zero foundation node (quasi-coherent modules, module functors, fibre products). None is the trace formula, Poincare duality or part of their proofs, so all are outside the assumptions. No SGA is cited.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianSpaceFibreCohomologyBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.higherDirectImage_isZero_above_geometricFibreDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianSpaceFibreCohomologyBound.lean",
+  "statement": "theorem higherDirectImage_isZero_above_geometricFibreDimension (Y : Scheme.{u}) [IsLocallyNoetherian Y] (Z : AlgebraicSpace Y) (p : Z ⟶ schemeSpace (Over.mk (𝟙 Y))) (hp : MapIsProper p) (d : ℕ) (hdim : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (CommRingCat.of Ω) ⟶ Y) (U : Over Y) (a : yoneda.obj U ⟶ Limits.pullback p.hom.hom (yoneda.map (Over.homMk y : Over.mk y ⟶ Over.mk (𝟙 Y)))), IsEtale a → IsAffine U.left → topologicalKrullDim U.left ≤ (d : WithBot ℕ∞)) (F : Z.Modules) [F.IsQuasicoherent] (hcoh : ∃ (ι : Type w) (T : ι → Z.EtaleSite), IsJointlySurjective (fun k : ι ↦ (T k).obj.hom) ∧ ∀ k : ι, IsAffine (Z.etaleForget.obj (T k)) ∧ IsNoetherianRing Γ(Z.etaleForget.obj (T k), ⊤) ∧ Module.Finite Γ(Z.etaleForget.obj (T k), ⊤) (F.val.obj (op (T k)))) [HasDerivedCategory.{v} Z.SmallModules] [HasDerivedCategory.{v} (schemeSpace (Over.mk (𝟙 Y))).SmallModules] (q : ℤ) (hq : (d : ℤ) < q) : IsZero ((DerivedCategory.homologyFunctor (schemeSpace (Over.mk (𝟙 Y))).SmallModules q).obj ((derivedDirectImage p).obj ((DerivedCategory.singleFunctor Z.SmallModules 0).obj (Z.smallModuleRestriction.obj F))))",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coherence is quasi-coherence plus finite generation on one jointly surjective Noetherian affine etale cover; an affine chart is canonically Spec of its global sections. Geometric fibres are literal presheaf pullbacks tested on every affine etale chart. The existing small ringed-model equivalence and canonical derived direct image compute higher module direct images without a coefficient lift. Added only the three already-landed definition owners needed for the representable scheme target and canonical derived module operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b2c90831",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Read the item node, the item module, all 12 statement-dependency records (byte-identical to side-live), the dependency declarations in side-live and Stacks 0A4T (spaces-cohomology l.4409). Item node changes only lean and stmt_deps; statement and proof unchanged; lean.statement verbatim in the file; first stage-2 delivery (side-live lean null). The 3 added stmt_deps (def-trf-scheme-algebraic-space, def-sfb-space-small-ringed-model, def-sfb-space-derived-module-calculus) are definition nodes owning schemeSpace, SmallModules/smallModuleRestriction and derivedDirectImage. Clause check: Y locally Noetherian scheme; p : Z ⟶ schemeSpace(Y/Y) with MapIsProper (sep ∧ ft ∧ univ closed); hdim bounds topologicalKrullDim of every affine étale chart of the actual presheaf pullback with Spec Ω, Ω alg. closed in Type u; F quasi-coherent (Mathlib IsQuasicoherent = the def-trf-space-quasi-coherent-module record) plus ∃ jointly surjective étale cover with affine Noetherian charts and Module.Finite sections, equivalent to F|Spec B_k = M~ with M f.g. under quasi-coherence; conclusion IsZero of H^q of the canonical rightDerivedFunctor of the small-model conjugate of moduleDirectImage on F[0], for q:ℤ > d. No flatness or other extra hypothesis; universes u/w/v sound. Edge cases d=0, empty fibres (charts of dim ⊥), empty Z with empty cover, zero ring/module all covered. No defs, sorry only, source and blueprint docstrings, seven-step proof docstring, Worker report and Second reading present. Advisory: MapIsProper and IsJointlySurjective owners reached via base stmt_dep lem-sfb-space-flat-proper-fp-locality (cited in node text) — acceptable. No file changed, no compile run."
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-space-quasicoherent-integral-closure",
+ "kind": "statement",
+ "title": "Integral closure in a quasi-coherent algebra on an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $\\mathcal A$ be a sheaf of commutative $\\mathcal O_X$-algebras on the small etale site $X_{\\mathrm{et}}$ whose underlying module is quasi-coherent [def-trf-space-quasi-coherent-module]. There exists a unique quasi-coherent $\\mathcal O_X$-subalgebra $\\mathcal C\\subseteq\\mathcal A$ such that, for every affine scheme $U$ etale over $X$, $\\mathcal C(U)$ is exactly the set of elements $a\\in\\mathcal A(U)$ satisfying a monic polynomial with coefficients in $\\Gamma(U,\\mathcal O_U)$, acting through the structure map to $\\mathcal A(U)$. The inclusion of this subalgebra is the inclusion into $\\mathcal A$ on each such object.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0820 (lemma-integral-closure), with uniqueness from the values on affine objects of the small etale site."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme object $U\\to X$, restrict $\\mathcal A$ to $U_{\\mathrm{et}}$. The cartesian-chart equivalence makes this a quasi-coherent module with its canonical restriction identifications. The Zariski/etale equivalence identifies it with a quasi-coherent Zariski module $B_U$ on $U$; because the inverse is restriction to open subschemes, $B_U(W)=\\mathcal A(W)$ on open $W\\subseteq U$. Its ring operations and structure map are the restrictions of those of $\\mathcal A$, so it is a Zariski algebra. Apply the scheme integral-closure theorem to obtain the actual subsheaf $D_U\\subseteq B_U$ defined by stalkwise integrality. Its affine sections are the required integral closures. Write $F_U=(D_U)_{\\mathrm{et}}$.",
+   "uses": [
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-quasicoherent-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0820 (lemma-integral-closure), first paragraph of proof; Morphisms Tag 035F."
+   }
+  },
+  {
+   "text": "For a morphism $f:U^{\\prime}\\to U$ over $X$, the scheme-test etale cancellation theorem says $f$ is etale. The cartesian comparison for $\\mathcal A$, transported through the Zariski/etale equivalence, gives $f^*B_U\\simeq B_{U^{\\prime}}$ with the prescribed section maps. If $W\\subseteq U$ and $V\\subseteq f^{-1}W$ are affine opens, put $R=\\Gamma(W,\\mathcal O_U)$ and $T=\\Gamma(V,\\mathcal O_{U^{\\prime}})$. The affine pullback formula identifies $B_{U^{\\prime}}(V)=T\\otimes_R B_U(W)$ and $(f^*D_U)(V)=T\\otimes_R D_U(W)$. Apply ring integral-closure etale base change: the latter maps isomorphically onto the integral closure of $T$ in the former, which is $D_{U^{\\prime}}(V)$. These identifications are the maps $t\\otimes d\\mapsto t\\,f^*d$ into the ambient algebra, not arbitrary abstract isomorphisms.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-integral-closure-etale-base-change",
+    "lem-sfb-scheme-quasicoherent-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0820 (lemma-integral-closure), middle paragraph; affine verification of More on Morphisms Tag 081K (lemma-integral-closure-smooth-pullback), using Algebra Tag 03GE."
+   }
+  },
+  {
+   "text": "The preceding affine maps agree on overlaps: after mapping to $B_{U^{\\prime}}$, both send a local tensor $t\\otimes d$ to $t\\,f^*d$, and $D_{U^{\\prime}}$ is a subsheaf. They therefore glue by the sheaf axiom to a map $f^*D_U\\to D_{U^{\\prime}}$. Its source is quasi-coherent by preservation of quasi-coherence under scheme pullback; its target is quasi-coherent by construction. The affine-cover isomorphism criterion makes this map an isomorphism. For composable $U^{\\prime\\prime}\\xrightarrow{g}U^{\\prime}\\xrightarrow{f}U$, both comparison composites map $s\\otimes(t\\otimes d)$ to $s\\,g^*(t)\\,(fg)^*d$ in $B_{U^{\\prime\\prime}}$. The inclusion of $D_{U^{\\prime\\prime}}$ is injective, so the composites agree. The identity comparison sends $1\\otimes d$ to $d$. Thus the comparisons satisfy the cocycle and identity conditions. The Zariski/etale comparison gives a cartesian family $(F_U)$ on the etale chart sites.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0820, middle paragraph, with the omitted affine-to-sheaf argument in Tag 081K written out."
+   }
+  },
+  {
+   "text": "Apply the cartesian-chart equivalence to $(F_U)$ to obtain a quasi-coherent module $C$ on $X_{\\mathrm{et}}$. The compatible inclusions into the restrictions of $\\mathcal A$ descend to a module map $i:C\\to\\mathcal A$. To check that it is a sheaf inclusion, cover any scheme object by affine opens. On an affine object $U$, the open-section normalization of the Zariski/etale equivalence gives $C(U)=D_U(U)$, and $i_U$ is the literal inclusion of the integral closure into $\\mathcal A(U)$. If two sections of $C$ have the same image, their restrictions to every member of this affine covering agree, so they agree by the sheaf axiom. Hence identify $C$ with its image subsheaf.",
+   "uses": [
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-quasicoherent-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0820 (lemma-integral-closure), final paragraph; Properties of Spaces Tags 03LY and 03LZ."
+   }
+  },
+  {
+   "text": "The image subsheaf is closed under the algebra operations: on every affine scheme object it is the integral-closure subalgebra, hence contains the structural scalars and is closed under addition, additive inverses and multiplication. For any scheme object, restrict two sections to an affine open covering; the sums and products there belong to $C$, agree on overlaps because $C\\to\\mathcal A$ is injective, and glue in $C$. The same reasoning gives the scalar action and unit. Every algebra law and the compatibility of restrictions is inherited from $\\mathcal A$ by injectivity. Its underlying module is the quasi-coherent module already constructed. This proves existence, the asserted affine values, and the specified inclusion.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0820, subsheaf-of-algebras conclusion; ring closure is Tag 00GO (lemma-integral-closure-is-ring)."
+   }
+  },
+  {
+   "text": "For uniqueness, let $C^{\\prime}\\subseteq\\mathcal A$ have the stated affine values. Given an object $U$ and a section $a\\in\\mathcal A(U)$, cover $U$ by affine opens $U_i$. Membership of $a$ in either subsheaf is equivalent to membership of every $a|_{U_i}$: the local lifts are unique since these are subsheaves, agree on overlaps, and glue by the sheaf axiom. On each $U_i$ both membership conditions mean exactly integrality over $\\Gamma(U_i,\\mathcal O_{U_i})$, so they coincide. The two subsheaves, their operations, and their inclusion maps are equal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0820, uniqueness from affine objects and the sheaf axiom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-sfb-integral-closure-etale-base-change",
+  "lem-sfb-scheme-quasicoherent-integral-closure",
+  "lem-sfb-space-qcoh-cartesian-chart-family",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0820 (lemma-integral-closure), with its affine compatibility and uniqueness arguments expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralClosure|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T13:54:55Z\", \"tool\": \"grep\", \"query\": \"integralClosure|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"8c8a4c7a5b3387ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure subalgebra of a quasi coherent algebra on the etale site of an algebraic space",
+   "results": "{\"t\": \"2026-10-23T13:54:55Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure subalgebra of a quasi coherent algebra on the etale site of an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure\", \"integralClosure.isIntegralClosure\", \"IsIntegralClosure.rec\", \"integralClosure\", \"IsIntegralClosure\", \"IsIntegralClosure.isIntegral_algebra\", \"Ring.NormalClosure\", \"integralClosure.isIntegral\"], \"digest\": \"0b9568974428295f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "{\"t\": \"2026-10-23T13:54:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral elements in a sheaf of algebras form a quasi coherent sheaf on an algebraic space",
+   "results": "{\"t\": \"2026-10-23T13:54:57Z\", \"tool\": \"leanfinder\", \"query\": \"Integral elements in a sheaf of algebras form a quasi coherent sheaf on an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"SheafOfModules.QuasicoherentData.I\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"SheafOfModules.QuasicoherentData.X\"], \"digest\": \"f22a6a380a45bee0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of the structure sheaf in a quasi coherent algebra on an algebraic space is quasi coherent and is computed on affine etale charts",
+   "results": "{\"t\": \"2026-10-23T13:54:58Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of the structure sheaf in a quasi coherent algebra on an algebraic space is quasi coherent and is computed on affine etale charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"212324799ddfe3b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of the structure sheaf inside a quasi coherent algebra on an algebraic space",
+   "results": "{\"t\": \"2026-10-23T14:40:50Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of the structure sheaf inside a quasi coherent algebra on an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.ΓRestrictAlgebra\"], \"digest\": \"f5a4e6611f5b62ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations concerns integral-closure subalgebras on algebraic-space etale sites; scheme normalization and ring integral closure are only related inputs"
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure",
+   "results": "{\"t\": \"2026-10-23T14:40:51Z\", \"tool\": \"loogle\", \"query\": \"integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"integralClosure\", \"mem_integralClosure_iff\", \"instMulSemiringActionSubtypeMemSubalgebraIntegralClosure\", \"instSMulDistribClassSubtypeMemSubalgebraIntegralClosure\", \"instSMulCommClassSubtypeMemSubalgebraIntegralClosure\", \"integralClosure.coe_smul\", \"instIsDomainSubtypeMemSubalgebraIntegralClosure\", \"roots_mem_integralClosure\"], \"digest\": \"439d58380a78d086\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations concerns integral-closure subalgebras on algebraic-space etale sites; scheme normalization and ring integral closure are only related inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T14:40:51Z\", \"tool\": \"grep\", \"query\": \"integralClosure|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"8c8a4c7a5b3387ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations concerns integral-closure subalgebras on algebraic-space etale sites; scheme normalization and ring integral closure are only related inputs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of a quasi coherent algebra sheaf on the small etale site",
+   "results": "{\"t\": \"2026-10-23T14:40:51Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of a quasi coherent algebra sheaf on the small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.AlgebraIsIntegral\", \"IsIntegralClosure.rec\", \"completeIntegralClosure\", \"integralClosure.isIntegral\", \"IsIntegralClosure.isIntegral_algebra\", \"IsIntegralClosure\", \"IsIntegralClosure.mk\", \"integralClosure.isIntegralClosure\"], \"digest\": \"ec92f0a22d32f6f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations concerns integral-closure subalgebras on algebraic-space etale sites; scheme normalization and ring integral closure are only related inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure in a quasi coherent algebra is quasi coherent on an algebraic space, determined by integral elements on affine etale schemes",
+   "results": "{\"t\": \"2026-10-23T14:50:11Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure in a quasi coherent algebra is quasi coherent on an algebraic space, determined by integral elements on affine etale schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\"], \"digest\": \"01ac97b17a598e24\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations concerns integral-closure subalgebras on algebraic-space etale sites; scheme normalization and ring integral closure are only related inputs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-integral-factorization-etale-base-change",
+  "date": "2026-10-23",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: extend the integral scheme obtained by induction over the open image V. Supporting input to Tag 0G2D: restriction of relative normalization along the open immersion, via etale base change. Supporting input to the etale restriction argument: Tag 0820 constructs the quasi-coherent integral-closure subalgebra on affine etale objects.",
+   "via": [
+    "lem-sfb-space-integral-factorization-etale-base-change",
+    "lem-sfb-space-integral-extension-qc-open",
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasicoherent-integral-closure",
+  "worker": "stage1",
+  "summary": "Read Tag 0820 and its scheme and chart-comparison inputs. Construct the scheme-chart closures, verify etale compatibility on affine pairs using the existing ring base-change theorem, check cocycles inside the ambient algebra, descend and prove uniqueness. One statement-only scheme integral-closure node; reuse all existing comparison inputs. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: extend the integral scheme obtained by induction over the open image V. Supporting input to Tag 0G2D: restriction of relative normalization along the open immersion, via etale base change. Supporting input to the etale restriction argument: Tag 0820 constructs the quasi-coherent integral-closure subalgebra on affine etale objects. This realizes the integral-closure prerequisite of the relative normalization argument, below the historical direct-image alteration chain. Latest blueprint direct-images proof clause (3) retains the compactification/direct-image context. The ancestor command returns None for this historical created-node chain; no ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme/etale quasi-coherent comparison or affine module calculation, used as a black-box tool in the chart construction of Tag 0820; no direct-image unit route is replaced."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme/etale quasi-coherent comparison or affine module calculation, used as a black-box tool in the chart construction of Tag 0820; no direct-image unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic scheme/etale quasi-coherent comparison or affine module calculation, used as a black-box tool in the chart construction of Tag 0820; no direct-image unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic scheme/etale quasi-coherent comparison or affine module calculation, used as a black-box tool in the chart construction of Tag 0820; no direct-image unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+    "why": "Generic scheme/etale quasi-coherent comparison or affine module calculation, used as a black-box tool in the chart construction of Tag 0820; no direct-image unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-fab18c3e5",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-fab18c3e5 (reviewer sub-agent of L); spot-checked: I read Stacks 0820 (spaces-morphisms l.9718) and 035F (morphisms l.13845) in full. The item statement is unchanged and agrees with 0820; the only addition is a uniqueness clause, proved in step 6. The new node lem-sfb-scheme-quasicoherent-integral-closure states exactly 035F (stalkwise integral sections, quasi-coherent subalgebra, stalks and affine values equal to the integral closure). It is statement-only, self-contained, and its stmt_deps define every notion it uses. I tested it on empty Y, B=O_Y, k[x], k[eps] and B=O_Y/I. I found no duplicate: rg over 035F, 03GE and 'integral closure' in the snapshot, live and side-live gives only the f_*O_T relative-normalization nodes, the componentwise normalization nodes and the stack quasi-finite normalization node. The new node is strictly the scheme case; the item still carries the etale compatibility, cocycle, descent and uniqueness. The cited statements match each step. Step 1: restriction to Zariski opens is the identity on open sections. Step 2: the last clause of the etale scheme-test node gives f etale; the affine pullback formula with naturality and the ring etale base change node (no injectivity hypothesis) give the affine comparison. Step 3: the factorization through the subsheaf D_{U'}, the quasi-coherence of pullbacks, the affine-cover isomorphism criterion and the cocycle check inside B_{U''} are correct, and no affine intersections are assumed. Step 4: the chart-family descent gives C and i:C->A, with injectivity checked by the sheaf axiom on affine covers. Steps 5 and 6 are elementary. The union of the steps' uses equals proof_deps. Batch-5 finding: the chart-family closure reaches only the definition def-trf-algebraic-space, and the two trf nodes (03DX/03LC Zariski/etale quasi-coherent descent; 03EC etale scheme tests) are general foundations, neither given by nor part of the proof of the trace formula or Poincare duality, so I accept them. I accept the five generic scheme/etale module tool_uses in the split_report. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentIntegralClosure",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.existsUnique_quasiCoherent_integralClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQuasiCoherentIntegralClosure.lean",
+  "statement": "theorem existsUnique_quasiCoherent_integralClosure {S : Scheme.{u}} (X : AlgebraicSpace S) (A : X.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) : ∃! C : Subobject A, (C : X.CommAlgebraSheaf).toModule.IsQuasicoherent ∧ ∀ (U : X.EtaleSite), IsAffine (X.etaleForget.obj U) → ∀ a : A.right.obj.obj (op U), a ∈ Set.range ((Subobject.arrow C).right.hom.app (op U)) ↔ (A.hom.hom.app (op U)).hom.IsIntegralElem a",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Subobject in the existing category of commutative algebra sheaves retains the inclusion and identifies equivalent representatives. Its sectionwise image is characterized by RingHom.IsIntegralElem for the given structure map. The added statement dependency is the already landed algebra-sheaf interface, not a new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6ec03b3f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read item node, 5 stmt_dep records (unchanged vs side-live; the item only adds lean + already-landed stmt_dep def-sfb-space-quasi-coherent-algebra), Stacks 0820 (spaces-morphisms l.9718), the dependency Lean (CommAlgebraSheaf = Under commStructureSheaf, toModule, EtaleSite = schemes over S etale over X). Clause match: ∃! C : Subobject A with QC representative and, for all affine U in X_et, image of Subobject.arrow C on U ↔ RingHom.IsIntegralElem for the actual structure map Γ(U,O_U)→A(U). Monos in Under(sheaf of comm rings) are injective on sections, so subobjects are genuine subalgebras and uniqueness is equality as embedded subalgebras. No extra hypotheses or universe restriction. Edge cases (empty X, A=O_X, O_X/I, nilpotents) ok. No duplicate found. Gates: lean.statement verbatim, sorry only, docstrings with source/blueprint/6 proof steps, plain proof_dep imports match records, Worker report + Second reading present. Advisory: partly redundant public imports; second reading by author pass. No compile (no file changed)."
+ }
+}

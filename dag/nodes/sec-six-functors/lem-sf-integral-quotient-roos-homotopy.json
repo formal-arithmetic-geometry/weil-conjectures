@@ -1,0 +1,178 @@
+{
+ "id": "lem-sf-integral-quotient-roos-homotopy",
+ "kind": "statement",
+ "title": "Exact augmented integral quotient Roos functor on homotopy categories",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension], and a scheme T [def-pc-scheme]. Let M be the sheaves of modules over the completed integral coefficient ring on the small pro-etale site of T [def-pur-integral-derived-operations]. Write q: C(M) -> K(M) for the homotopy quotient and Qh: K(M) -> D(M) for the derived quotient [def-weil-abstract-derived-category]. The ordinary quotient Roos functor R and its specified augmentation u [def-pur-integral-derived-operations] have an exact homotopy descent H: K(M) -> D(M), with coherent integer shifts, an isomorphism e: q H -> R Q and a shift-compatible natural transformation beta: Qh -> H. For every complex P, the canonical comparison Q(P) -> Qh(q(P)), followed by beta(q(P)) and e(P), equals Q(u(P)). The site and coefficient universes are independent. This assertion concerns homotopy categories only: it neither asserts that R preserves arbitrary quasi-isomorphisms nor constructs its derived completion.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E (mapping cones), 011G (cochain shifts) and 08TC (Roos fibre); the native homotopy-level part of lem-sf-integral-quotient-completion-exact, original proof steps 1 and 4."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-pur-integral-derived-operations",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct moduleLevel as the specified ordinary quotient reduction followed by scalar restriction. Assemble the actual module transitions into moduleTower, an additive functor to module-valued towers, and the quotient units into its natural augmentation. The tensor-generator uniqueness theorem transition_existsUnique identifies its degreewise transitions with IntegralOnSlice.transition. The generic SequenceComplex comparison then identifies the transposed degreewise module tower with IntegralOnSlice.tower. The arrow-cofiber/cone map identity gives roosComparison between the resulting signed Roos functor and the prescribed ordinary quotient Roos functor.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (mapping cones), 011G (cochain shifts) and 08TC (Roos fibre); the native homotopy-level part of lem-sf-integral-quotient-completion-exact, original proof steps 1 and 4."
+   }
+  },
+  {
+   "text": "Apply the stated compatible-homotopy theorem to the image under moduleTower of a cochain homotopy. Its localized Roos maps are equal, so Quotient.lift constructs H on the homotopy category. Quotient.liftCommShift supplies coherent integer shifts and a shift-compatible factorization isomorphism. The cone-calculus theorem supplies a cone comparison preserving inclusion and the signed last arrow. Combine it with Mathlib mappingCone.mapTriangleIso for the additive module tower. Every distinguished homotopy triangle is isomorphic to such a mapping-cone triangle; the factorization and these two triangle comparisons identify its image under H with a distinguished derived mapping-cone triangle.",
+   "uses": [
+    "lem-pur-strict-roos-homotopy-functor",
+    "lem-pe-roos-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (mapping cones), 011G (cochain shifts) and 08TC (Roos fibre); the native homotopy-level part of lem-sf-integral-quotient-completion-exact, original proof steps 1 and 4."
+   }
+  },
+  {
+   "text": "The module augmentation gives an actual cone over each degreewise tower and hence its zero-second-coordinate Roos augmentation. The stated augmentation naturality and signed shift-augmentation identities show this is a natural transformation commuting with integer shifts. Descend its localization through Quotient.natTransLift, using quotientCompQhIso and the inverse factorization isomorphism. Faithfulness of whiskering with the full homotopy quotient detects the shift identity. For normalization, the tensor-generator formula identifies the transported module augmentation with the specified IntegralOnSlice.augmentation. The naturality calculation for the explicit mapping-cocone lift with zero second cochain identifies the transported Roos augmentation with roosUnit. Cancel the quotient and factorization isomorphisms to obtain the required component equality.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pe-roos-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (mapping cones), 011G (cochain shifts) and 08TC (Roos fibre); the native homotopy-level part of lem-sf-integral-quotient-completion-exact, original proof steps 1 and 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-pur-strict-roos-homotopy-functor",
+  "lem-pe-roos-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E (definition-cone), 011G (cochain shifts), and 08TC (definition-derived-limit); explicit Lean assembly of the native module tower, signed Roos cone comparison, and homotopy quotient descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on homotopy categories descends to a triangulated functor on derived categories, with a shift-compatible natural transformation",
+   "results": "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. Generic functor/localization APIs only; none identifies the native quotient tower, its Roos model, and its specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsTriangulated\"",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift. Generic functor/localization APIs only; none identifies the native quotient tower, its Roos model, and its specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|additive_of_full_essSurj_comp|isTriangulated_of_precomp_iso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/Algebra/Homology/HomotopyCategory.lean; Mathlib/Algebra/Homology/HomotopyCategory.lean. Generic functor/localization APIs only; none identifies the native quotient tower, its Roos model, and its specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The signed Roos construction of a tower of additive quotient functors descends to an exact functor on the homotopy category and its augmentation commutes with shifts",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.quotient; HomotopyCategory.commShiftQuotient; CategoryTheory.Quotient.functor_commShift; CategoryTheory.Functor.mapHomotopyCategory; HomotopyCategory.instAdditiveHomologicalComplexQuotientHomotopicFunctor; HomotopyCategory.homologyFunctorFactors; instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences. Generic functor/localization APIs only; none identifies the native quotient tower, its Roos model, and its specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*(homotopy|CommShift)|mapHomotopyCategory|shift_app_comm",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean; Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean; Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean; Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean; Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean; Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean. These give additive-complex homotopy functors and shifts; none supplies the actual quotient Roos functor with its specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Roos construction of an additive tower descends to an exact functor on homotopy categories with a shift compatible augmentation",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instCommShiftIntUpMapHomotopyCategory; HomotopyCategory.instIsTriangulatedIntUp; HomotopyCategory.instCommShiftHomologicalComplexIntUpHomFunctorMapHomotopyCategoryFactors; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory; CategoryTheory.Functor.leftDerivedToHomotopyCategory; HomotopyCategory.instPretriangulatedIntUp. These give additive-complex homotopy functors and shifts; none supplies the actual quotient Roos functor with its specified augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralQuotientCompletionExact",
+  "date": "2026-10-27",
+  "group": "P6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof paragraph beginning For an admissible exceptional adjoint, evaluation ordinary-to-completed tensor comparison: exact completion and its canonical augmentation.",
+   "via": [
+    "lem-sf-integral-quotient-completion-exact",
+    "lem-fix-bounded-projective-tensor-complete",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientRoosHomotopy",
+  "declaration": "WeilConjectures.integralQuotientRoos_homotopy",
+  "file": "lean/Sheaf/Paper/IntegralQuotientRoosHomotopy.lean",
+  "statement": "theorem integralQuotientRoos_homotopy\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : AlgebraicGeometry.Scheme.{t}) :\n    ∃ (H : HomotopyCategory (Mod l E T none) (.up ℤ) ⥤ D l E T none)\n      (_ : H.CommShift ℤ)\n      (e : HomotopyCategory.quotient (Mod l E T none) (.up ℤ) ⋙ H ≅\n        roos l E T none ⋙ DerivedCategory.Q)\n      (β : DerivedCategory.Qh ⟶ H),\n      H.IsTriangulated ∧ NatTrans.CommShift β ℤ ∧\n        ∀ P : Cx l E T none,\n          (DerivedCategory.quotientCompQhIso (Mod l E T none)).inv.app P ≫\n            β.app ((HomotopyCategory.quotient (Mod l E T none) (.up ℤ)).obj P) ≫\n              e.hom.app P = DerivedCategory.Q.map (roosUnit l E T none P)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-integral-quotient-roos-homotopy",
+  "worker": "stage3",
+  "summary": "Separate the native augmented homotopy functor from the K-flat derived descent and normalization, which are proved in the parent module.",
+  "blueprint": "The native exact completion construction in the ordinary-to-completed tensor comparison paragraph of lem-fix-weil-operations.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Use the generic signed shift and mapping-cone identities for the actual quotient tower; no unit route is replaced."
+   },
+   {
+    "node": "lem-pur-strict-roos-homotopy-functor",
+    "why": "Use the generic compatible-homotopy descent of the signed Roos construction after the ordinary quotient module tower; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T021344-L-2761123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T050622-L-245854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

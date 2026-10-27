@@ -1,0 +1,273 @@
+{
+ "id": "lem-trf-generic-component-etale-local-support",
+ "kind": "statement",
+ "title": "Étale local support above a component generic point",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $\\eta\\in Z$ be the generic point [def-sc-generic-point] of an irreducible component $C$ of $Z$ [def-weil-irreducible-components]. Let $v:W\\to X$ be étale [def-weil-etale-morphism] and let $w\\in W$ satisfy $v(w)=i(\\eta)$. Put $A=\\mathcal O_{X,i(\\eta)}$, $B=\\mathcal O_{W,w}$ and let $I=\\ker(A\\to\\mathcal O_{Z,\\eta})$ [def-weil-pbc-module-stalk]. Write $P=Z\\times_X\\operatorname{Spec}B$ [def-pc-fibre-product], regarded as a closed subscheme of $\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Then $\\dim\\mathcal O_{Z,\\eta}=0$ and $\\dim(B/IB)=0$, with Krull dimension [def-weil-pbc-krull-dimension-ring]. Under $P\\cong\\operatorname{Spec}(B/IB)$, the underlying space of $P$ consists of a single point $t$, whose image in $\\operatorname{Spec}B$ is its closed point $s=V(\\mathfrak m_B)$. Thus $\\{t\\}$ is the only irreducible component of $P$ (no assertion of reducedness is made). Moreover $\\dim B=\\dim A$ and $\\operatorname{codim}(\\{s\\},\\operatorname{Spec}B)=\\dim B$. Here codimension is the supremum of lengths of chains $Y=Y_0\\subsetneq\\cdots\\subsetneq Y_r$ of irreducible closed subsets of the ambient scheme.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QP (lemma-dimension-etale-extension), on affine charts for Z times_X W -> Z and W -> X; properties.tex Tag 02IZ (lemma-codimension-local-ring), at the component generic point and at the closed point of Spec B"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-scheme-stalk-dimension-generalization-chains], the dimension of the stalk of $Z$ at $\\eta$ is its coheight. If $y$ generalizes $\\eta$, then $C=\\overline{\\{\\eta\\}}\\subseteq\\overline{\\{y\\}}$. Maximality of the component [def-weil-irreducible-components] gives the reverse containment. Thus $\\eta$ is maximal in the specialization order, its coheight is zero, and $\\dim\\mathcal O_{Z,\\eta}=0.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 02IZ and 0BA9"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-intersection-etale-stalk-model] to the constant one-member family $D_0=Z$, $i_0=i$, with $J=\\{0\\}$. The cone with point $Z$, base $i$, and identity projection is limiting: every cone factors uniquely through its sole projection. Choose an affine neighbourhood of $i(\\eta)$. The proved source-library lemma Scheme.Hom.ker_stalkMap identifies the extended section ideal with the kernel of the actual stalk map; it is the usual closed-immersion quotient calculation [def-weil-closed-immersion] and [lem-weil-pbc-affine-open-stalk-localization]. The model gives the isomorphism $P\\cong\\operatorname{Spec}(B/IB)$ over $\\operatorname{Spec}B$, nonzero local $B/IB$, a point $p$ of $Z\\times_XW$ over $w$ and $\\eta$, and a ring isomorphism $B/IB\\cong\\mathcal O_{Z\\times_XW,p}$. The transport in the model is the inverse of the stalk-congruence isomorphism; this is exactly the homomorphism defining genericComponentEtaleLocalIdeal.",
+   "uses": [
+    "lem-trf-finite-intersection-etale-stalk-model",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO; schemes.tex Tag 01HV; algebra.tex Tag 00CT"
+   }
+  },
+  {
+   "text": "For any etale morphism $e:V\\to U$ at a point $v$, choose affine opens around $e(v)$ and $v$ with the source open mapping to the target open. The chart homomorphism is etale by [def-weil-etale-morphism] and [lem-weil-pbc-etale-ring-map-iff-etale-affine]. The canonical arrowStalkMapIso identifies the two stalks with the localizations of the section rings at their primes [lem-weil-pbc-affine-open-stalk-localization]. The contraction formula for these primes and [lem-sc-etale-local-dimension] give equality of stalk dimensions. Apply this to $W\\to X$ to obtain $\\dim B=\\dim A$. This uses finite presentation only on the affine chart homomorphism.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP on affine charts; schemes.tex Tag 01HV"
+   }
+  },
+  {
+   "text": "The first projection $Z\\times_XW\\to Z$ is etale by [lem-weil-pbc-etale-scheme-base-change]. Apply the affine-chart stalk dimension argument of step 3 to this projection at $p$. Since it maps to $\\eta$, step 1 and the ring isomorphism supplied in step 2 give $\\dim(B/IB)=\\dim\\mathcal O_{Z\\times_XW,p}=\\dim\\mathcal O_{Z,\\eta}=0$. Thus a separate quotient-chart tensor and localization calculation is unnecessary.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sc-etale-local-dimension",
+    "lem-trf-finite-intersection-etale-stalk-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP; morphisms.tex Tag 02GO"
+   }
+  },
+  {
+   "text": "A nonzero local ring of dimension zero has only its maximal prime [def-weil-pbc-krull-dimension-ring]: any strictly smaller prime would give a chain of length one. Mathlib packages this as PrimeSpectrum.unique_of_ringKrullDimLE_zero. Pull its closed point back along $P\\cong\\operatorname{Spec}(B/IB)$ to get $t$. Every point equals $t$. The quotient homomorphism is local by [lem-weil-pbc-quotient-local-structure], so the isomorphism over $\\operatorname{Spec}B$ sends $t$ to the closed point of $\\operatorname{Spec}B$. Finally, every subset is contained in $\\{t\\}$; maximality of an irreducible component and irreducibility of a singleton show directly that the component set is $\\{\\{t\\}\\}$ [def-weil-irreducible-components].",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-quotient-local-structure",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA9; algebra.tex Tag 00CT; elementary prime-chain argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-scheme-stalk-dimension-generalization-chains] at the closed point of $\\operatorname{Spec}B$. The canonical stalkClosedPointIso identifies this stalk with the local ring $B$ itself: localization at its maximal ideal inverts only units [lem-weil-pbc-affine-open-stalk-localization]. Ring isomorphisms preserve Krull dimension, giving the last coheight equality.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ; schemes.tex Tag 01HV; localization of a local ring at its maximal ideal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-weil-irreducible-components",
+  "lem-trf-finite-intersection-etale-stalk-model",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Q7 Lean assembly: Tag 07QP on ambient and pullback etale charts, existing finite-intersection stalk model, properties.tex Tags 02IZ/0BA9 and the elementary singleton prime-spectrum argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "At a point of an etale scheme mapping to a generic point of an irreducible component of a closed subscheme Z of X, the stalk-local pullback of Z has a single point, dimension zero, and its ambient closed-point codimension equals dim O_X,eta.",
+   "results": "Hits: Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo, AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo' Read the relevant source; these are component tools or definitions, not the stated multi-clause comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, Order.coheight",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*(finrank|ringKrullDim|krullDim|coheight)|[Cc]odim.*[Ee]tale|[Gg]eneric.*[Ee]tale",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local rings above a generic point of a closed subscheme: zero dimensional local quotient and preservation of the ambient local dimension and codimension",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let Z be closed in X and eta a component generic point. For etale W to X with w above eta, Spec O_W,w times_X Z is a one-point scheme and codim of its point in Spec O_W,w equals codim of the closure of eta in X.",
+   "results": "Hits: AlgebraicGeometry.Scheme.height_of_isClosed, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus Read the relevant source; these are component tools or definitions, not the stated multi-clause comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*(ringKrullDim|coheight)|generic.*(local|quotient)",
+   "results": "Search returned 1 hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean. Read the relevant Mathlib source; these give definitions, general pullback point descriptions, and the minimal-prime dimension bound, not this full conjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local pullback of a closed subscheme at a generic component point along an etale map has a singleton spectrum",
+   "results": "Search returned 8 hits: AlgebraicGeometry.Scheme.Pullback.carrierEquiv, Algebra.etaleLocus, AlgebraicGeometry.Scheme.Etale, Algebra.IsEtaleAt, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.range_fromSpecResidueField, IsLocalRing.closedPoint, genericPoints.component. Read the relevant Mathlib source; these give definitions, general pullback point descriptions, and the minimal-prime dimension bound, not this full conjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, ringKrullDim",
+   "results": "Search returned 0 hits: . Read the relevant Mathlib source; these give definitions, general pullback point descriptions, and the minimal-prime dimension bound, not this full conjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphism at a point over a generic point of a closed subscheme gives zero dimensional local quotient and equal ambient local dimensions",
+   "results": "Search returned 8 hits: Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified. Read the relevant Mathlib source; these give definitions, general pullback point descriptions, and the minimal-prime dimension bound, not this full conjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local etale extension preserves the dimension of a closed subscheme at a minimal prime and its spectrum has only the closed point",
+   "results": "Search returned 8 hits: Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, RingHom.Etale.ofLocalizationSpan, Ring.KrullDimLE.of_isLocalization. Read the relevant Mathlib source; these give definitions, general pullback point descriptions, and the minimal-prime dimension bound, not this full conjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-regular-intersection-descent",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof, contracting-local-terms paragraph: specialization to the normal cone (Varshavsky §§1.3–1.4 and 2.1); the inherited geometric refinement branch, through permissible-boundary preservation, uses the local strict-normal-crossings intersection criterion (Gabber VIII, Lemma 4.2.9). The generic-component localization and the two étale dimension equalities; old steps 3–4 of the item.",
+   "via": [
+    "lem-trf-etale-regular-intersection-descent",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-generic-component-etale-local-support",
+  "worker": "stage1",
+  "summary": "Six-step split using existing finite-intersection stalk model, etale local dimension, base change and quotient localization. Proves both dimensions via finite-presentation affine chart maps, singleton support by a prime-chain argument, and closed-point codimension via the existing scheme-stalk theorem. No new nodes or statement changes.",
+  "blueprint": "Inherited geometric refinement branch in the contracting-local-terms paragraph of lem-trf-local-term-locality: generic-component localization and etale dimension equalities in the local strict-normal-crossings criterion, as recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic etale ring-map local dimension invariance (07QP) on ambient and quotient charts; no theorem of sk-i-curve-zero states this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-local-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-21abfbbb7",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-21abfbbb7 (reviewer sub-agent of L); spot-checked: Read the item and all 6 steps in full, every cited statement, and the sources Stacks 07QP (more-algebra l.10831), 02IZ/0BA9 (properties l.1259) and 02GI (morphisms l.8058). The statement is unchanged and true. Small cases checked: V(xy) and V(x^2,xy) at a component point, V(x^2) nonreduced, empty Z. The clauses match what the parent etale-regular-intersection-descent step 1 uses. Steps 1, 2, 5 and 6 are correct: the 02IZ leaf with component maximality gives codim 0; the one-member finite-intersection model gives B/IB nonzero local with maximal ideal m_B/IB; the prime-chain singleton argument holds; at the closed point, B equals B_{m_B}. One fault (C1/E1), repaired: step 3 took arbitrary affines U, V and asserted that R->S is an etale ring map, and step 4 moved between the Spec form of lem-weil-pbc-etale-ring-base-change and the ring-map form that 07QP (lem-sc-etale-local-dimension) needs, in both directions, with no citation. The fix chooses U, V by the 02GI chart of def-weil-etale-morphism and cites the existing Mathlib leaf lem-weil-pbc-etale-ring-map-iff-etale-affine in steps 3 and 4; proof_deps is updated to the union of the step uses. The tool use of lem-sc-etale-local-dimension (sk-thm-br, generic 07QP) is accepted. No duplicate found: lem-sfb-etale-stalk-invariants gives only the dim A = dim B clause. No new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericComponentEtaleLocalSupport",
+  "declaration": "AlgebraicGeometry.genericComponent_etale_local_support",
+  "declarations": [
+   "AlgebraicGeometry.genericComponentEtaleLocalIdeal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericComponentEtaleLocalSupport.lean",
+  "statement": "theorem genericComponent_etale_local_support {X Z W : Scheme.{u}} [IsLocallyNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i] (η : Z) (C : Set Z) (hC : C ∈ irreducibleComponents Z) (hη : IsGenericPoint η C) (v : W ⟶ X) [Etale v] (w : W) (hw : v w = i η) : ringKrullDim (Z.presheaf.stalk η) = 0 ∧ ringKrullDim (W.presheaf.stalk w ⧸ genericComponentEtaleLocalIdeal i η v w hw) = 0 ∧ (∃ e : pullback i (W.fromSpecStalk w ≫ v) ≅ Spec (CommRingCat.of (W.presheaf.stalk w ⧸ genericComponentEtaleLocalIdeal i η v w hw)), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (genericComponentEtaleLocalIdeal i η v w hw))) = pullback.snd i (W.fromSpecStalk w ≫ v) ∧ ∃ t : (pullback i (W.fromSpecStalk w ≫ v) : Scheme.{u}), (∀ p : (pullback i (W.fromSpecStalk w ≫ v) : Scheme.{u}), p = t) ∧ (pullback.snd i (W.fromSpecStalk w ≫ v)) t = IsLocalRing.closedPoint (W.presheaf.stalk w) ∧ irreducibleComponents (pullback i (W.fromSpecStalk w ≫ v) : Scheme.{u}) = {{t}}) ∧ ringKrullDim (W.presheaf.stalk w) = ringKrullDim (X.presheaf.stalk (i η)) ∧ (Order.coheight (@id (Spec (W.presheaf.stalk w)) (IsLocalRing.closedPoint (W.presheaf.stalk w))) : WithBot ℕ∞) = ringKrullDim (W.presheaf.stalk w)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8247ec9ce",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records, the Q59 report (Worker report and Second reading sections present) and the module. lean.statement appears verbatim in the file; one sorry; the node is unchanged from live apart from the new lean record. Clause match: stalks via TopCat.Presheaf.stalk, I = ker(i.stalkMap η), IB = Ideal.map along stalkCongr(hw)≫v.stalkMap w (a canonical construction with real data, listed in lean.declarations with docstring), P = pullback i (W.fromSpecStalk w ≫ v) with an iso e to Spec(B/IB) required to commute with the quotient spectrum map, a single point t mapping to the closed point, irreducibleComponents P = {{t}}, dim B = dim A (07QP), and coheight of the closed point of Spec B in Mathlib's specialization preorder (Scheme.lean:158-160) = ht(m_B) = dim B by Properties.lean:367-391. ringKrullDim(B/IB)=0 also forces B/IB nonzero, which is true. Edge cases: empty Z, V(x^2), V(xy), i = id, closed point of A^1. One universe u, no extra hypotheses, no hollow definition, docstrings carry 07QP/02IZ/0BA9 and all 6 steps, no pro-etale content, no duplicate in Mathlib or side-live. No compile run: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T092345-L-3425310",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -134,7 +134,30 @@
   "thm-sp-half-plane-convergence"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.exists_truncationHypercohomology",
+     "module": "WeilConjectures.CategoryTheory.TruncationHypercohomology",
+     "lines": [
+      51,
+      295
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -375,5 +398,37 @@
   "landing": "20261012T070547-L-3475880",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $K$ be as in [def-sp-truncation-couple]. The spectral sequence of the\ntruncation couple [def-sp-truncation-couple] has\n\n$$\n E_2^{p,q}=R^pv\\bigl(\\mathcal H^q(K)\\bigr)\n \\Longrightarrow\\mathcal H^{p+q}(RvK),\n$$\n\nthe abutment $\\mathcal H^n(RvK)$ carrying the image filtration\n[def-sp-image-filtration] of the maps $\\mathcal H^n(Rv\\,\\tau_{\\leq q}K)\\to\n\\mathcal H^n(RvK)$; in each degree $n$ only $a\\leq q\\leq n$ occurs, so the\ncouple is regular and complete and the convergence is unconditional\n([def-sp-convergence]).\n\nIn particular, in the dictionary [def-sp-etale-dictionary], let\n$K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] have torsion\ncohomology sheaves, choose $a$ with $\\mathcal H^q(K)=0$ for $q<a$, and let\n$f\\circ g'=g\\circ f'$ be a square as in [def-weil-pbc-derived-exchange]. Taking\nfor $v$ the direct images [def-weil-pbc-direct-image] $f_*$, resp. $f'_*$\napplied to $g'^{-1}K$, gives the *hypercohomology spectral sequences*\n\n$$\nE_2^{p,q}=R^pf_*\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Rf_*K),\n\\qquad\n{E'}_2^{p,q}=R^pf'_*g'^{-1}\\mathcal H^q(K)\\Longrightarrow\n\\mathcal H^{p+q}(Rf'_*g'^{-1}K),\n$$\n\nwhose filtrations in total degree $n$ are the image filtrations of\n$\\mathcal H^n(Rf_*\\tau_{\\leq q}K)\\to\\mathcal H^n(Rf_*K)$, resp.\n$\\mathcal H^n(Rf'_*g'^{-1}\\tau_{\\leq q}K)\\to \\mathcal H^n(Rf'_*g'^{-1}K)$.",
+  "proof": [
+   {
+    "text": "The exact couple of [def-sp-truncation-couple] is an exact couple by\n[lem-sp-truncation-couple-exact], and it is the couple of a t-structure\n(\"heart\") filtration, so by the spectral sequence of\n[def-sp-exact-couple] the $E_2$-page is $E_2^{p,q}=R^pv(\\mathcal H^qK)$, the\nidentification of the shifted cohomology being the shift rule\n[lem-sp-shift-identification]. The abutment is $\\mathcal H^{p+q}(RvK)$ with\nthe image filtration of [def-sp-image-filtration]. The $D$-terms vanish for\n$q<a$ because $\\tau_{\\leq q}K=0$. The functor $Rv$ is left t-exact: an object\nwith no cohomology below $b$ has an injective resolution in the sense of\n[def-sp-injective-resolutions] starting in degree $b$, and applying the left\nexact functor does not introduce lower terms. Applied to $\\tau_{>n}K$, this\nshows $D^{0,n}=H^n(Rv\\tau_{\\leq n}K)=H^n(RvK)$. The hypotheses and the\nabutment identification of [thm-sp-half-plane-convergence] therefore hold. In\nparticular the entries stabilize for $r>\\max(q-a+1,p)$, and the stated finite\nfiltration is the one constructed there.",
+    "uses": [
+     "def-sp-truncation-couple",
+     "lem-sp-truncation-couple-exact",
+     "def-sp-exact-couple",
+     "lem-sp-shift-identification",
+     "def-sp-image-filtration",
+     "def-sp-injective-resolutions",
+     "thm-sp-half-plane-convergence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the étale special case, the first sequence is the theorem for $v=f_*$\non $\\operatorname{Ab}(X_{\\Et})$ ([def-sp-etale-dictionary]). The second is the\ntheorem for $v=f'_*$ applied to $g'^{-1}K$: the inverse image $g'^{-1}$ is\nexact, so $\\mathcal H^q(g'^{-1}K)=g'^{-1}\\mathcal H^q(K)$, which vanishes for\n$q<a$, and $g'^{-1}\\tau_{\\leq q}K=\\tau_{\\leq q}g'^{-1}K$. This gives the\ndisplayed ${E'}_2$-page and filtration.",
+    "uses": [
+     "def-sp-etale-dictionary"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

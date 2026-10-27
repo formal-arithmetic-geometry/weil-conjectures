@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-conjugate-composition-components",
+ "kind": "lemma",
+ "title": "Component composition of adjunction mates",
+ "status": "split",
+ "statement": "Let A, B, D, E be categories with adjunctions P:B→A ⊣ R, Q:D→B ⊣ S, H:E→D ⊣ G, T:D→A ⊣ V, F:E→A ⊣ Rf and K:E→B ⊣ Rk. Let α:F→K⋙P, β:K→H⋙Q, γ:F→H⋙T and τ:T→Q⋙P be natural transformations satisfying α followed by whiskerRight(β,P) = γ followed by whiskerLeft(H,τ). Let t:R⋙S→V, a:R⋙Rk→Rf, b:S⋙G→Rk and c:V⋙G→Rf be, respectively, the right-adjoint conjugates of τ, α, β and γ, using the indicated composite adjunctions. Then for every M in A, G(t_M) followed by c_M = b_(RM) followed by a_M.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-written formal adjunction calculation in compact-support condensed realization, Steps 15–16; no geometric assertion from the paper is used."
+ },
+ "proof": [
+  {
+   "text": "Given six adjunctions and a componentwise commuting square α_N followed by P(β_N) = gamma_N followed by τ_(H N), use natural-transformation extensionality to obtain the corresponding whiskered square. Conjugate that equation; the conjugate composition formula reverses the two factors. Formal category and adjunction identities: Mathlib.CategoryTheory.Adjunction.Mates; composed adjunction associativity in the proved source library.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The left and right whiskering formulas identify its edges as the four indicated right-adjoint mates; associativity of composite adjunctions identifies the middle adjunctions. Formal category and adjunction identities: Mathlib.CategoryTheory.Adjunction.Mates; composed adjunction associativity in the proved source library.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Substitute the specified four natural transformations and evaluate at an arbitrary object to obtain G(t_M) followed by c_M = b_(R M) followed by a_M. Formal category and adjunction identities: Mathlib.CategoryTheory.Adjunction.Mates; composed adjunction associativity in the proved source library.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-27",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Formal calculation for Steps 15–16 of def-pur-condensed-compact-support-projection; fully proved in Lean."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates preserve a commuting square of natural transformations and give composition coherence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv_square\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"(α : TwoSquare G₁ L₁ L₃ H₁) (β : TwoSquare H₁ L₂ L₄ K₁) (γ : TwoSquare G₂ L₃ L₅ H₂) (δ : TwoSquare H₂ L₄ L₆ K₂) :\\n  (mateEquiv (adj₁.comp adj₂) (adj₅.comp adj₆)) ((α ≫ᵥ β) ≫ₕ (γ ≫ᵥ δ)) =\\n    ((mateEquiv adj₂ adj₄ β) ≫ₕ (mateEquiv adj₁ adj₃ α)) ≫ᵥ ((mateEquiv adj₄ adj₆ δ) ≫ₕ (mateEquiv adj₃ adj₅ γ))\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, and compatible two-square diagrams between functors, the mate equivalence for the composition of adjunctions and vertically-horizontal composed squares equa\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Mate\", \"type\": \": (g ≫ l₂ ⟶ l₁ ≫ h) ≃ (r₁ ≫ g ⟶ h ≫ r₂)\", \"doc\": \"Given a bicategory $\\\\mathcal{B}$, objects $a,b,c,d \\\\in \\\\mathcal{B}$, 1-cells $l_1: b \\\\to c$, $r_1: c \\\\to b$ forming an adjunction with unit $\\\\eta_1$ and counit $\\\\varepsilon_1$, and 1-cells $l_2: c \\\\to\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv_square\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Mate\", \"type\": \"(α : g₁ ≫ l₃ ⟶ l₁ ≫ h₁) (β : h₁ ≫ l₄ ⟶ l₂ ≫ k₁) (γ : g₂ ≫ l₅ ⟶ l₃ ≫ h₂) (δ : h₂ ≫ l₆ ⟶ l₄ ≫ k₂) :\\n  (mateEquiv (adj₁.comp adj₂) (adj₅.comp adj₆)) (leftAdjointSquare.comp α β γ δ) =\\n    rightAdjointSquare.comp (mateEquiv adj₁ adj₃ α) (mateEquiv adj₂ adj₄ β) (mateEquiv adj₃ adj₅ γ)\\n      (mateEquiv ad\", \"doc\": \"In a bicategory $\\\\mathcal{B}$, given adjunctions $f_1 \\\\dashv g_1$, $f_2 \\\\dashv g_2$, $f_3 \\\\dashv g_3$, and $f_4 \\\\dashv g_4$, along with 2-cells $\\\\alpha: g_1 \\\\circ l_3 \\\\Rightarrow l_1 \\\\circ h_1$, $\\\\bet\"}\n  {\"name\": \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Categorical.Basic\", \"type\": \"(X : Type u₁₀) [Category.{v₁₀} X] (ψ : CatCospanTransform F G F₁ G₁) (ψ' : CatCospanTransform F₁ G₁ F₂ G₂) :\\n  (transform X).obj (ψ.comp ψ') ≅ (transform X).obj ψ ⋙ (transform X).obj ψ'\", \"doc\": \"For categories $\\\\mathcal{A}, \\\\mathcal{B}, \\\\mathcal{C}$ with functors $F : \\\\mathcal{A} \\\\to \\\\mathcal{B}$ and $G : \\\\mathcal{C} \\\\to \\\\mathcal{B}$, and a commutative pullback square $X$ over $\\\\mathcal{B}$, \"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"(α : TwoSquare G L₁ L₂ H) (c : C) :\\n  G.map (adj₁.unit.app c) ≫ (mateEquiv adj₁ adj₂ α).app _ = adj₂.unit.app _ ≫ R₂.map (α.app _)\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ c $ in category $ \\\\mathcal{C} $, the composition of the mate e\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \": F ⋙ H ⊣ I ⋙ G\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, the composite adjun\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \": TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates preserve a commuting square of two whiskered natural transformations and yield associativity on right adjoint components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.mateEquiv_square\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} {X : Type u₇} {Y : Type u₈}\\n  {Z : Type u₉} [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} C] [inst_3 : CategoryTheory.Categor\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, and compatible two-square diagrams between functors, the mate equivalence for the composition of adjunctions and vertically-horizontal composed squares equa\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv_square\", \"module\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate\", \"type\": \"∀ {B : Type u} [inst : CategoryTheory.Bicategory B] {a b c d e f x y z : B} {g₁ : a ⟶ d} {h₁ : b ⟶ e} {k₁ : c ⟶ f}\\n  {g₂ : d ⟶ x} {h₂ : e ⟶ y} {k₂ : f ⟶ z} {l₁ : a ⟶ b} {r₁ : b ⟶ a} {l₂ : b ⟶ c} {r₂ : c ⟶ b} {l₃ : d ⟶ e} {r₃ : e ⟶ d}\\n  {l₄ : e ⟶ f} {r₄ : f ⟶ e} {l₅ : x ⟶ y} {r₅ : y ⟶ x} {l₆ : y ⟶ z}\", \"doc\": \"In a bicategory $\\\\mathcal{B}$, given adjunctions $f_1 \\\\dashv g_1$, $f_2 \\\\dashv g_2$, $f_3 \\\\dashv g_3$, and $f_4 \\\\dashv g_4$, along with 2-cells $\\\\alpha: g_1 \\\\circ l_3 \\\\Rightarrow l_1 \\\\circ h_1$, $\\\\bet\"}\n  {\"name\": \"CategoryTheory.mateEquiv_vcomp\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆}\\n  [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} C] [inst_3 : CategoryTheory.Category.{v₄, u₄} D]\\n  [inst_4 : CategoryTheory.C\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and two two-square diagrams $ α $ and $ β $ between functors involving these adjoints, the mate equivalence commutes with vertical composition. Specifica\"}\n  {\"name\": \"CategoryTheory.mateEquiv_hcomp\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆}\\n  [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  [inst_2 : CategoryTheory.Category.{v₃, u₃} C] [inst_3 : CategoryTheory.Category.{v₄, u₄} D]\\n  [inst_4 : CategoryTheory.C\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, $ L₃ ⊣ R₃ $, and $ L₄ ⊣ R₄ $, and two vertical-composable 2-square diagrams $ α $ and $ β $ between functors involving these adjoints, the mate equivalence \"}\n  {\"name\": \"CategoryTheory.mateEquiv_symm_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ β $ between functors involving these adjoints, applying the inverse of the mate equivalence to $ β $ yields a natural transfor\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ d $ in category $ D $, the composition of $ L₂ $ applied to th\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} A]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} B] [inst_2 : CategoryTheory.Category.{v₃, u₃} C]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, and $ L₃ ⊣ R₃ $, and a two-square diagram $ α $ between functors involving $ L₁, L₂ $, along with a natural transformation $ β: L₃ → L₂ $, the composition o\"}\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateEquiv_comp",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'conjugateEquiv_comp'\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*whisker|conjugateIsoEquiv_assoc",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"140\", \"text\": \"  simp [leftAdjointCompNatTrans, ← conjugateEquiv_whiskerLeft _ _ adj₀₁]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"line\": \"154\", \"text\": \"    ← conjugateEquiv_whiskerRight _ _ adj₂₃, conjugateEquiv_comp, Iso.hom_inv_id_assoc,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"546\", \"text\": \"lemma conjugateEquiv_whiskerLeft\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"549\", \"text\": \"    conjugateEquiv (adj.comp adj₁) (adj.comp adj₂) (whiskerLeft L τ) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"557\", \"text\": \"lemma conjugateEquiv_whiskerRight\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"560\", \"text\": \"    conjugateEquiv (adj₁.comp adj) (adj₂.comp adj) (whiskerRight τ L) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"563\", \"text\": \"  simp only [comp_obj, conjugateEquiv_apply_app, comp_unit_app, Functor.whiskerRight_app,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"476\", \"text\": \"  simp only [conjugateEquiv_apply, Category.assoc, mateEquiv_comp_id_right, id_whiskerLeft,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"483\", \"text\": \"lemma conjugateEquiv_whiskerLeft\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"498\", \"text\": \"lemma conjugateEquiv_whiskerRight\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean\", \"line\": \"161\", \"text\": \"    simp [conjugateEquiv_whiskerLeft, Hom₂.conjugateEquiv_τl]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean\", \"line\": \"170\", \"text\": \"    simp [conjugateEquiv_whiskerRight, Hom₂.conjugateEquiv_τl]\"}\n",
+   "date": "2026-10-27",
+   "verdict": "No exact combined statement; reuse the adjunction mate, naturality and Hom-equivalence identities in the complete Lean proof."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedCompactSupportProjection",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 15–16: composition of the uniquely open-unit-normalized refinement lift and its proper-image mate compositor.",
+   "via": [
+    "def-pur-condensed-compact-support-projection",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConjugateCompositionComponents",
+  "file": "lean/Sheaf/CategoryTheory/ConjugateCompositionComponents.lean",
+  "declaration": "CategoryTheory.conjugateComposition_app",
+  "statement": "theorem conjugateComposition_app\n    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]\n    {P : B ⥤ A} {R : A ⥤ B} {Q : D ⥤ B} {S : B ⥤ D}\n    {H : E ⥤ D} {G : D ⥤ E} {T : D ⥤ A} {V : A ⥤ D}\n    {F : E ⥤ A} {Rf : A ⥤ E} {K : E ⥤ B} {Rk : B ⥤ E}\n    (ap : P ⊣ R) (aq : Q ⊣ S) (ah : H ⊣ G) (ac : T ⊣ V)\n    (af : F ⊣ Rf) (ak : K ⊣ Rk)\n    (α : F ⟶ K ⋙ P) (β : K ⟶ H ⋙ Q) (gamma : F ⟶ H ⋙ T) (τ : T ⟶ Q ⋙ P)\n    (hc : ∀ N, α.app N ≫ P.map (β.app N) =\n      gamma.app N ≫ τ.app (H.obj N))\n    (t : R ⋙ S ⟶ V) (a : R ⋙ Rk ⟶ Rf) (b : S ⋙ G ⟶ Rk) (c : V ⋙ G ⟶ Rf)\n    (ht : conjugateEquiv (aq.comp ap) ac τ = t)\n    (ha : conjugateEquiv (ak.comp ap) af α = a)\n    (hb : conjugateEquiv (ah.comp aq) ak β = b)\n    (hg : conjugateEquiv (ah.comp ac) af gamma = c) (M : A) :\n    @Eq (G.obj (S.obj (R.obj M)) ⟶ Rf.obj M)\n      (G.map (t.app M) ≫ c.app M) (b.app (R.obj M) ≫ a.app M)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1bad5",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T012851-L-2342239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1bad5",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T012851-L-2342239",
+  "kind": "interface",
+  "note": "independent cc review: old CondensedCompactSupportProjection vs Core+item+IdentityCalculus (verbatim moves, footer and identityScalar_flat instance kept); item node vs Lean; 4 direct importers compiled OK against delivered modules"
+ }
+}

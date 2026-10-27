@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-space-affine-pullpush-exchange",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Normalized affine pull-push and the projection-factorization of exchange",
+ "statement": "Let $S$ be a scheme and let $f:X\\to Y$, $g:Y'\\to Y$ be morphisms of algebraic spaces over $S$ [def-pc-scheme, def-trf-algebraic-space], with $g$ affine (representable with affine inverse images of affine scheme tests). Put $X'=X\\times_Y Y'$, $h:X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. Use small etale module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category] and the canonical derived adjunctions and composition comparisons [def-trf-space-etale-module-functors, lem-sfb-space-derived-etale-chart-calculus], computed by flat-term K-flat and K-injective resolutions in the universes of [def-weil-size-convention]. Write $D_{\\mathrm{QCoh}}$ for complexes with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. For every affine morphism $a:V\\to W$ and $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_W)$, put $\\mathcal A_a=a_*\\mathcal O_V$. It is quasi-coherent and the canonical map $\\mathcal A_a[0]\\to Ra_*\\mathcal O_V$ is an isomorphism. The morphism\n$$\\lambda_{a,F}:F\\otimes^{\\mathbf L}\\mathcal A_a[0]\\longrightarrow Ra_*La^*F$$\nadjoint to $La^*F\\otimes^{\\mathbf L}La^*Ra_*\\mathcal O_V\\xrightarrow{1\\otimes\\epsilon_a}La^*F$ is an isomorphism, natural in $F$. Now let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ with $Rf_*E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. Set $\\mathcal A=g_*\\mathcal O_{Y'}$, $\\mathcal B=h_*\\mathcal O_{X'}$. Let $c:Lf^*\\mathcal A[0]\\to\\mathcal B[0]$ be derived-to-ordinary pullback followed by the canonical affine module base-change identification $f^*\\mathcal A\\cong\\mathcal B$ [lem-sfb-space-affine-module-base-change]. Let $\\pi_{f,E,\\mathcal A}:Rf_*E\\otimes^{\\mathbf L}\\mathcal A[0]\\to Rf_*(E\\otimes^{\\mathbf L}Lf^*\\mathcal A[0])$ be the counit-defined projection morphism [lem-weil-pbc-ringed-projection-mate-exact]. Define $\\beta_E:Lg^*Rf_*E\\to Rf'_*Lh^*E$ as the adjoint of $L(f')^*Lg^*Rf_*E\\cong Lh^*Lf^*Rf_*E\\xrightarrow{Lh^*\\epsilon_f}Lh^*E$. Under $Rg_*Rf'_*\\cong Rf_*Rh_*$ one has the equality of morphisms in $D(\\mathcal O_Y)$\n$$Rg_*(\\beta_E)\\circ\\lambda_{g,Rf_*E}=Rf_*(\\lambda_{h,E})\\circ Rf_*(1_E\\otimes^{\\mathbf L}c)\\circ\\pi_{f,E,\\mathcal A}.$$\nThis identity imposes no Tor independence, flatness, boundedness, properness or Noetherian hypothesis; no invertibility of $c$, $\\pi_{f,E,\\mathcal A}$ or $\\beta_E$ is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IJ, lemma-affine-morphism-pull-push, full statement and canonical counit-defined arrow; Tag 08IR, lemma-compare-base-change, proof identifying the pushed-forward exchange arrow with the tensor/projection arrow before using Tor independence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-affine-module-base-change",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-space-module-derived-exchange",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "For an affine $a:V\\to W$, the structure module is quasi-coherent (it has the identity rank-one presentation). Apply affine module base change to $a$ and the identity map of $W$: its statement gives quasi-coherence of $\\mathcal A_a=a_*\\mathcal O_V$. Affine module higher-image vanishing gives $R^qa_*\\mathcal O_V=0$ for $q>0$. Resolving the degree-zero module by an ordinary injective resolution computes its derived direct image, which has no negative cohomology and has degree-zero cohomology $a_*\\mathcal O_V$. Thus the canonical map $\\alpha_a:\\mathcal A_a[0]\\to Ra_*\\mathcal O_V$ induces the identity in degree zero and isomorphisms in every degree, and is invertible. Write $t_a=\\epsilon_{a,\\mathcal O_V}\\circ La^*\\alpha_a:La^*\\mathcal A_a[0]\\to\\mathcal O_V$. The arrow $\\lambda_{a,F}$ in the statement is precisely the adjoint of $1_{La^*F}\\otimes t_a$.",
+   "uses": [
+    "lem-sfb-space-affine-module-base-change",
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IJ, lemma-affine-morphism-pull-push, first paragraph; spaces-cohomology.tex Tag 073H, lemma-affine-vanishing-higher-direct-images."
+   }
+  },
+  {
+   "text": "To test invertibility of this particular $\\lambda$, restrict to a jointly surjective family of affine etale schemes $U\\to W$. The etale chart calculus identifies both derived images and pullbacks with the corresponding ones over $U$, preserving adjunctions; exact restriction also commutes with tensor, since on a slice the same flat-term K-flat tensor complex is used. The ordinary affine base-change identification identifies the restricted algebra with $(a_U)_*\\mathcal O_{V_U}$ and its evaluation with the restricted evaluation. Therefore the restricted arrow is $\\lambda_{a_U,F|_U}$. By affine locality $V_U$ is an affine scheme. A map which is an isomorphism on the covering restrictions is an isomorphism: the cohomology sheaves of its cone restrict to zero, and the sheaf gluing axiom makes each zero. We have reduced the problem to $a:\\operatorname{Spec}B\\to\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IJ, lemma-affine-morphism-pull-push, etale-local reduction; Tag 08F2, lemma-check-quasi-coherence-on-covering."
+   }
+  },
+  {
+   "text": "For these affine schemes use the derived etale--Zariski equivalence and the affine quasi-coherent derived equivalence. The affine tensor/pullback formulas identify $La^*$ with $B\\otimes_A^{\\mathbf L}(-)$ and identify derived tensor of associated complexes with module derived tensor. The etale--Zariski pullback comparison is the scalar-extension comparison, so it preserves this tensor identification (on a common flat-term K-flat representative both pastings multiply the same scalar factors). The direct image has quasi-coherent cohomology by the affine direct-image theorem. Its restricted adjunction on the quasi-coherent subcategories therefore identifies $Ra_*$ with restriction of scalars, the right adjoint of $B\\otimes_A^{\\mathbf L}(-)$. These identifications preserve the counits by uniqueness of adjoints. Choose a module complex representing $F$ and a K-flat module resolution $P$ using the cited source-module resolution theorem. The source and target of $\\lambda$ both become $P\\otimes_A B$ as $A$-complexes. Here $t_a$ is the derived counit of scalar extension on $B[0]$: the augmentation $B\\otimes^{\\mathbf L}_AB\\to B\\otimes_AB$ followed by multiplication. So the transpose of $\\lambda$ is $B\\otimes^{\\mathbf L}_A(P\\otimes_AB)\\to B\\otimes_AP\\otimes_AB\\to B\\otimes_AP$, the augmentation followed by $b\\otimes p\\otimes b'\\mapsto bb'\\otimes p$; the augmentation is not invertible when $\\operatorname{Tor}^A_{>0}(B,B)\\neq0$. The adjunct is this transpose precomposed with the unit $P\\otimes_AB\\to B\\otimes^{\\mathbf L}_A(P\\otimes_AB)$, whose composite with the augmentation is the ordinary unit $x\\mapsto1\\otimes x$. Hence the adjunct is $p\\otimes b'\\mapsto b'\\otimes p$, the tensor symmetry isomorphism. This proves invertibility of the specified arrow, including for unbounded $P$ and nonflat $A\\to B$. Naturality follows from naturality of tensor and of the adjunction bijection, rather than a choice of $P$.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sfb-space-affine-derived-pushforward-conservative",
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pc-source-module-kflat-resolution",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08I9, lemma-affine-morphism-pull-push, affine calculation; Tag 06Z0, lemma-affine-compare-bounded; spaces-perfect.tex Tag 08IJ and Tag 071Q, lemma-derived-quasi-coherent-small-etale-site."
+   }
+  },
+  {
+   "text": "Return to the square. Affine locality makes $h$ affine. Ordinary module base change, applied with affine arrow $g$, base map $f$ and module $\\mathcal O_{Y'}$, gives the specified $d:f^*\\mathcal A\\xrightarrow{\\sim}\\mathcal B$; its transpose is evaluation $h^*f^*\\mathcal A\\cong(f')^*g^*\\mathcal A\\to\\mathcal O_{X'}$. Write $c$ for $Lf^*\\mathcal A[0]\\to f^*\\mathcal A[0]\\xrightarrow d\\mathcal B[0]$. Consequently, after canonical pullback compositions,\n$$t_h\\circ Lh^*c=L(f')^*t_g.$$\nHere this is an identity of derived arrows, not a deduction from equality on cohomology. Indeed compute the derived-to-ordinary augmentations on one flat-term K-flat resolution of $\\mathcal A[0]$. The ordinary transpose identity just displayed commutes with its map to $\\mathcal A[0]$; both composite evaluations send a local iterated scalar tensor $u\\otimes(v\\otimes z)$ to $u\\,h^\\sharp(v)$ times the restriction/evaluation of $z$. The normalized K-flat word comparison descends this equality to the derived category. The derived-image existence theorem normalizes the adjunction on every chain map from a termwise pulled-back complex; applying it to the ordinary evaluation identifies these derived evaluations with the $t_g,t_h$ of step 1. Its small-site and left-exact-inverse-image hypotheses hold for the canonical ringed etale topoi used here. No augmentation is inverted in this argument.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-weil-pbc-ringed-slice-derived-image-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, lemma-compare-base-change, equality of the affine structure algebras; sites-cohomology.tex Tags 0D6D and 07A6, normalized composition and adjunction."
+   }
+  },
+  {
+   "text": "Put $M=Rf_*E$ and $K=M\\otimes^{\\mathbf L}\\mathcal A[0]$. Compare the two proposed arrows $K\\to R(fh)_*Lh^*E$ by the adjunction for $L(fh)^*$. Canonical composition comparisons are mates, so their transpose is computed successively under either $g,f'$ or $f,h$. Expanding the definitions of $\\lambda_g$ and $\\beta_E$, the transpose of the left side is\n$$Lh^*Lf^*M\\otimes^{\\mathbf L}Lh^*Lf^*\\mathcal A[0]\\xrightarrow{1\\otimes L(f')^*t_g}Lh^*Lf^*M\\xrightarrow{Lh^*\\epsilon_{f,E}}Lh^*E.$$\nExpanding the counit definition of $\\pi$, and then those of $c$ and $\\lambda_h$, the transpose of the right side is\n$$Lh^*Lf^*M\\otimes^{\\mathbf L}Lh^*Lf^*\\mathcal A[0]\\xrightarrow{Lh^*\\epsilon_{f,E}\\otimes(t_h\\circ Lh^*c)}Lh^*E\\otimes^{\\mathbf L}\\mathcal O_{X'}\\cong Lh^*E.$$\nStep 4 identifies the second tensor-factor maps; functoriality of tensor and its unit identify these displayed composites. Injectivity of the adjunction bijection proves the required equality. Step 3 applies to $g,M$ and $h,E$ because both inputs have quasi-coherent cohomology by hypothesis. Neither this transpose computation nor steps 1--3 uses an isomorphism for $c$, $\\pi$ or $\\beta$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, lemma-compare-base-change, tensor/projection arrow identification before Tor independence; sites-cohomology.tex Tag 0B56, equation-projection-formula-map, counit formula; expanded adjunction calculation by N5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-module-base-change",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-affine-locality",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-sfb-space-affine-derived-pushforward-conservative",
+  "lem-pc-source-module-kflat-resolution",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-ringed-slice-derived-image-exists",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IJ, lemma-affine-morphism-pull-push, and Tag 08IR, lemma-compare-base-change; affine calculation and equality of adjoint transposes expanded by N5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine base change the pushforward of the canonical derived exchange map equals the projection formula map followed by the derived to ordinary pullback augmentation",
+   "results": "Read returned hits: RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, KaehlerDifferential.isBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine derived pull push identifies canonical base change with the projection formula and the pullback structure algebra comparison",
+   "results": "Read returned hits: AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, KaehlerDifferential.tensorKaehlerEquiv, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"baseChange\"",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|affine.*pull.*push|pull.*push.*affine",
+   "results": "No hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized affine derived pullback pushforward tensor isomorphism and its compatibility with exchange for cartesian squares",
+   "results": "Read returned hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations give underived scheme/module adjunctions, ordinary etale or localization properties, abstract Tor functors, or categorical composition; none states this small-etale algebraic-space assertion or its normalized derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine morphism of algebraic spaces derived pullback pushforward is tensor with pushforward structure sheaf, with counit normalized exchange compatibility",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary scheme/module adjunctions, scalar sections, or sieve comparisons; none states the unbounded small-etale algebraic-space pull-push/exchange theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|affine.*pull.*push|pull.*push.*affine",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary scheme/module adjunctions, scalar sections, or sieve comparisons; none states the unbounded small-etale algebraic-space pull-push/exchange theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward after pullback along affine algebraic space map equals tensor product with its structure algebra",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary scheme/module adjunctions, scalar sections, or sieve comparisons; none states the unbounded small-etale algebraic-space pull-push/exchange theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"pushforward\"",
+   "results": "Read returned hits: PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction, CategoryTheory.Presieve.le_pullback_pushforward, CategoryTheory.Presieve.pushforward_pullback_le, CategoryTheory.Presieve.galoisConnection_pushforward_pullback, CategoryTheory.Presieve.pushforward_le_iff_le_pullback, CategoryTheory.Sieve.le_pushforward_pullback, CategoryTheory.Sieve.pullback_pushforward_le",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary scheme/module adjunctions, scalar sections, or sieve comparisons; none states the unbounded small-etale algebraic-space pull-push/exchange theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived projection formula for affine maps on quasi coherent structure modules and factorization of Beck Chevalley through projection morphism",
+   "results": "Read returned hits: SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.AffineSpace.homOfVector_over_assoc, AlgebraicGeometry.AffineSpace.homOfVector_over, SheafOfModules.generatorsOfIsCokernelFree_π",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary scheme/module adjunctions, scalar sections, or sieve comparisons; none states the unbounded small-etale algebraic-space pull-push/exchange theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-tor-independent-base-change",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Supporting input: Tag 08IR, lemma-compare-base-change: the general qcqs direct-image theorem, before specializing to the closed structure sheaf. Supporting input for Tag 08IR: Tag 08IJ, lemma-affine-morphism-pull-push, full statement and canonical counit-defined arrow; Tag 08IR, lemma-compare-base-change, proof identifying the pushed-forward exchange arrow with the tensor/projection arrow before using Tor independence.",
+   "via": [
+    "lem-sfb-space-tor-independent-base-change",
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-pullpush-exchange",
+  "worker": "stage1",
+  "summary": "Checked the normalized affine pull-push arrow against 08IJ and expanded the 08IR map identification by a counit calculation without Tor independence. Reused existing affine vanishing, base-change and derived chart/coordinate inputs; no new nodes or statement changes.",
+  "blueprint": "Supporting input for 08IR in the existing ancestry from det-thm-sf-ctf-stability-direct-images proof (3); steps 1--3 realize 08IJ, step 4 the affine coefficient comparison, and step 5 its counit-normalized exchange/projection identity. Read current latest direct-images proof (3); no unit-level route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic Isomorphisms in the unbounded derived category detected by cohomology input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Generic Simultaneous K-flat word models and normalized comparison descent input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Derived quasi-coherent modules on an affine scheme input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic Affine computation of derived pullback and derived tensor product input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "Generic Flat K-flat module resolutions from the source library input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Generic Conjugate transformations of adjoint functors input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic Chart-adjunction pullbacks realize normalized ringed tensors input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate input for the affine chart/counit calculation; no unit-specific constructibility or alteration step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-derived-image-exists",
+    "why": "The chain-map normalization of derived adjunction identifies ordinary structure-module evaluation with the derived counit after its augmentation; this is a generic ringed-site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-source-module-kflat-resolution",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-slice-derived-image-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-33792bbae",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-33792bbae (reviewer sub-agent of L); spot-checked: Read spaces-perfect 08IJ and 08IR and perfect 08I9; the item's lambda and the 08IR identity before the Tor step match these sources. One commit, no new nodes. Statement, stmt_deps and blueprint are unchanged from the base, and the item is still unsplit on live, so no parallel split exists. Steps 1, 2, 4 and 5 are correct as written; I recomputed both adjoint transposes in step 5 and the base-change role substitution in step 4. One fault, E4 (wrong object) in step 3: the transpose of lambda was written on B⊗_A P⊗_A B, but its source is La^*(P⊗_A B) = B⊗^L_A(P⊗_A B). These differ whenever Tor^A_{>0}(B,B) ≠ 0, for example Z → F_2, which is the nonflat case the report says it covers. The conclusion still holds because t_a is the augmentation followed by multiplication, and the unit composed with the augmentation is the ordinary unit. The fix rewrites proof[2].text to say this; nothing else changes. Batch 5: the four sfb citations reach sec-trace-formula only through def-trf definitions and generic algebraic-space foundations. lem-trf-ringed-kflat-word-comparison-descent and lem-trf-space-chart-adjunction-tensor-realization are generic normalizations. The full closure contains no trace-formula or Poincaré theorem and no nt-assume node, so all six are accepted. Tool uses accepted as generic. No duplicates: the 15 nodes carrying 08IJ/08IR all have flatness, Tor or perfectness hypotheses or a different conclusion. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffinePullPushExchange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_pullpush_exchange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushAlgebra",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushSingle",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushAlpha",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushLambda",
+   "AlgebraicGeometry.AlgebraicSpace.affine_pullpush_normalized",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushLambda_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushOrdinaryCoefficient",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushOrdinaryCoefficient_isIso",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushCoefficient",
+   "AlgebraicGeometry.AlgebraicSpace.affinePullPushDirectImageSquare",
+   "AlgebraicGeometry.AlgebraicSpace.affine_pullpush_exchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffinePullPushExchange.lean",
+  "statement": "theorem affine_pullpush_exchange (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y') (hg : IsRepresentable g.hom.hom) (hga : MapIsAffine g) (sq : IsPullback h f' f g) (E : X.DerivedModules) (hE : X.derivedQCohProperty E) (hfE : Y.derivedQCohProperty ((derivedDirectImage f).obj E)) : affinePullPushLambda g ((derivedDirectImage f).obj E) ≫ (derivedDirectImage g).map (moduleDerivedExchange f f' g h sq.w E) ≫ (affinePullPushDirectImageSquare f g h f' sq.w).hom.app ((spaceDerivedPullback h).obj E) = derivedProjectionFormulaMate (spaceDerivedPullback f) (derivedDirectImage f) (spaceDerivedAdjunction f) Y.derivedDualityModel.closed.tensor X.derivedDualityModel.closed.tensor (moduleDerivedPullbackTensor f) E (affinePullPushSingle Y (affinePullPushAlgebra g)) ≫ (derivedDirectImage f).map (X.derivedDualityModel.closed.tensor.map (Prod.mkHom (𝟙 E) (affinePullPushCoefficient f g h f' sq.w))) ≫ (derivedDirectImage f).map (affinePullPushLambda h E)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declaration family states all clauses: quasi-coherence of the ordinary structure algebra, invertibility of the canonical degree-zero derived comparison and the counit-normalized affine pull-push map, naturality, the ordinary coefficient identification and the exact pushed-forward exchange/projection equality. Helpers are concrete composites of existing restriction equivalences, derived units/counits and tensor comparisons. No Tor-independence, flatness, finiteness or boundedness assumption is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f3c35b27",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read the node, Stacks 08IJ/08IR (spaces-perfect l.768-798, 4863-4923), the full module and the dependency declarations. Clause-by-clause match: g affine = IsRepresentable + MapIsAffine; any IsPullback square; separate HasDerivedCategory.{w} instances as in the dependency interfaces; A_a = moduleDirectImage of O; alpha is the canonical right-derived unit composite; lambda is the spaceDerivedAdjunction transpose of tensor comparison ≫ 1⊗(La^*alpha≫ε) ≫ unitor (the 08IJ arrow); naturality on D_QCoh; c = derived counit ≫ smallRestrictionPullback ≫ moduleBaseChange g f f' h sq.symm at O ≫ h_*(adjoint of moduleStructureMap f'), roles checked; projection mate is derivedProjectionFormulaMate(E, A[0]); exchange is moduleDerivedExchange; conjugate compositors with eqToIso. The equation matches the node with no extra hypotheses and no IsIso on c, projection or exchange. Edge cases: empty, zero, g=id, unbounded, nonflat Z→F_2. stmt_deps gain only six landed def nodes (allowed); statement verbatim; lines ≤95; defs concrete; 4 sorry theorems with proof docstrings; both report sections. relativeClosedKernelDirectImageComparison is downstream (cycle), so not H4. Note: six used def owners (small-ringed-model, affine-hom-comparison, derived-pullback, derived-tensor-pullback, module-base-change, projection-formula-arrows) are only transitive stmt_deps, with no cycle. No compile (no file changed)."
+ }
+}

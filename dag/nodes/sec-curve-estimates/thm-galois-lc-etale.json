@@ -90,7 +90,51 @@
   "lem-galois-descent"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
+     "lines": [
+      425,
+      438
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv",
+     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
+     "lines": [
+      481,
+      493
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
+     "lines": [
+      345,
+      360
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-galois-lc-etale`, simply transitive actions"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -136,11 +180,16 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the situation of [def-galois-categories], the functor\n\n$$\n\\mathrm{F\\acute Et}(Y)\\longrightarrow\\mathrm{FLC}(Y),\\qquad\nP\\longmapsto\\underline{\\operatorname{Hom}}_Y(-,P),\n$$\n\nwhere $\\underline{\\operatorname{Hom}}_Y(T,P)$ is the set of\n$Y$-morphisms $T\\to P$, is an equivalence of categories. It is\ncompatible with base change and with the fibre functors, and it carries\nfinite etale $Y$-schemes $P$ which are surjective over $Y$ and carry a\nsimply transitive $M$-action ($\\underline M\\times P\\to P\\times_YP$ an\nisomorphism) to the $M$-torsors of [def-weil-pbc-finite-torsors], and\nconversely.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the situation of [def-galois-categories], the functor\n\n$$\n\\mathrm{F\\acute Et}(Y)\\longrightarrow\\mathrm{FLC}(Y),\\qquad\nP\\longmapsto\\underline{\\operatorname{Hom}}_Y(-,P),\n$$\n\nwhere $\\underline{\\operatorname{Hom}}_Y(T,P)$ is the set of\n$Y$-morphisms $T\\to P$, is an equivalence of categories. It is\ncompatible with base change along every morphism $Y'\\to Y$ and with the\nfibre functors at geometric points with algebraically closed field, and,\nfor a finite abelian group $M$, it carries\nfinite etale $Y$-schemes $P$ which are surjective over $Y$ and carry a\nsimply transitive $M$-action ($\\underline M\\times P\\to P\\times_YP$ an\nisomorphism) to the $M$-torsors of [def-weil-pbc-finite-torsors], and\nconversely.",
   "proof": [
    {
-    "text": "We work with the categories $\\mathrm{F\\acute Et}(Y)$ and\n$\\mathrm{FLC}(Y)$ of [def-galois-categories], and with the\n$M$-torsors of [def-weil-pbc-finite-torsors].\nStep 1: the sheaf is finite locally constant. By\n[lem-fet-locally-trivial] there is a surjective etale $Y'\\to Y$\nwith $P\\times_YY'\\cong Y'\\times S$; then\n$\\underline{\\operatorname{Hom}}_Y(Y'\\times S,T)= \\underline S(Y'\\times_YT)$ is constant of value $S$, so the sheaf is\nlocally constant with finite fibres.\nStep 2: full faithfulness. For finite etale $P,Q$ the comparison map\n$\\operatorname{Hom}_Y(P,Q)\\to\\operatorname{Hom}( \\underline{\\operatorname{Hom}}(-,P),\\underline{\\operatorname{Hom}}(-,Q))$\nis injective since a morphism is determined by its graph, a closed\nsubscheme, hence a subsheaf; it is surjective because a morphism of sheaves\nis, after applying Step 1 to $P$ and $Q$ over a common cover, given by\na map of finite sets compatible with the descent data, which descends by\n[lem-galois-descent], Step 1.\nStep 3: essential surjectivity. Let $\\mathcal F\\in\\mathrm{FLC}(Y)$ and\nchoose a surjective etale $Y'\\to Y$ with $\\mathcal F|_{Y'}\\cong \\underline S$. Put $P'=Y'\\times S$, finite etale over $Y'$. The\nglueing isomorphisms of $\\mathcal F$ over $Y''$, transported through\nthe Yoneda bijection of Step 2 over $Y''$, give a descent datum for\n$P'$; by [lem-galois-descent] there is a finite etale $P\\to Y$\nwith $P\\times_YY'\\cong P'$, and then\n$\\underline{\\operatorname{Hom}}(-,P)\\cong\\mathcal F$ because both are\nlocally constant with value $S$ over the cover and the sheaf condition\nglues the identification.\nStep 4: the compatibilities and the torsor statement are as in the\nstatement: the fibre of the sheaf of morphisms is\n$\\operatorname{Hom}_{\\bar y}(\\bar y,P)=|P_{\\bar y}|$, and an $M$-action\non $P$ corresponds to one on the sheaf, the map\n$M\\times P\\to P\\times_YP$ being an isomorphism exactly when the action on\neach fibre is simply transitive, which is condition (1) of\n[def-weil-pbc-finite-torsors]; condition (2), that the sheaf has sections\nlocally, holds exactly when $P\\to Y$ is surjective: a surjective finite\netale $P\\to Y$ is an etale covering of $Y$ over which $P$ acquires the\ndiagonal section, and conversely sections over a covering force\nsurjectivity.",
+    "text": "We work with the categories $\\mathrm{F\\acute Et}(Y)$ and\n$\\mathrm{FLC}(Y)$ of [def-galois-categories], and with the\n$M$-torsors of [def-weil-pbc-finite-torsors].\nStep 1: the sheaf is finite locally constant. By\n[lem-fet-locally-trivial] there is an etale covering $\\{U_i\\to Y\\}$\nwith $P\\times_YU_i\\cong\\coprod_{s\\in S_i}U_i$ for finite sets $S_i$;\nover $U_i$ the sheaf $\\underline{\\operatorname{Hom}}_Y(-,P)$ is\ntherefore the constant sheaf of value $S_i$, so it is locally constant\nwith finite fibres.\nStep 2: full faithfulness. For finite etale $P,Q$ the comparison map\n$\\operatorname{Hom}_Y(P,Q)\\to\\operatorname{Hom}( \\underline{\\operatorname{Hom}}(-,P),\\underline{\\operatorname{Hom}}(-,Q))$\nis injective since a morphism is determined by its graph, a closed\nsubscheme, hence a subsheaf; it is surjective because a morphism of sheaves\nis, after applying Step 1 to $P$ and $Q$ over a common etale covering, given on each member by\na map of finite sets compatible with the descent data, which descends\nbecause the base change functor of [lem-galois-descent] is fully\nfaithful.\nStep 3: essential surjectivity. Let $\\mathcal F\\in\\mathrm{FLC}(Y)$ and\nchoose an etale covering $\\{U_i\\to Y\\}$ with $\\mathcal F|_{U_i}$\nconstant of finite value $S_i$; let $Y'=\\coprod_iU_i$, a surjective etale\n$Y$-scheme, and $P'=\\coprod_i\\coprod_{s\\in S_i}U_i$, finite etale over\n$Y'$, so that $\\mathcal F|_{Y'}$ is represented by $P'$. The\nglueing isomorphisms of $\\mathcal F$ over $Y''$, transported through\nthe Yoneda bijection of Step 2 over $Y''$, give a descent datum for\n$P'$; by [lem-galois-descent] there is a finite etale $P\\to Y$\nwith $P\\times_YY'\\cong P'$, and then\n$\\underline{\\operatorname{Hom}}(-,P)\\cong\\mathcal F$ because both are\nrepresented by $P'$ over $Y'$ and the sheaf condition\nglues the identification.\nStep 4: the compatibilities and the torsor statement are as in the\nstatement: the inverse image along $Y'\\to Y$ of the sheaf represented by\n$P$ is represented by $P\\times_YY'$, the inverse image being left adjoint\nto the direct image; the fibre of the sheaf of morphisms is\n$\\operatorname{Hom}_{\\bar y}(\\bar y,P)=|P_{\\bar y}|$, and an $M$-action\non $P$ corresponds to one on the sheaf, the map\n$M\\times P\\to P\\times_YP$ being an isomorphism exactly when the action on\neach fibre is simply transitive, which is condition (1) of\n[def-weil-pbc-finite-torsors]; condition (2), that the sheaf has sections\nlocally, holds exactly when $P\\to Y$ is surjective: a surjective finite\netale $P\\to Y$ is an etale covering of $Y$ over which $P$ acquires the\ndiagonal section, and conversely sections over a covering force\nsurjectivity.",
     "uses": [
      "def-galois-categories",
      "def-weil-pbc-finite-torsors",
@@ -150,6 +199,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

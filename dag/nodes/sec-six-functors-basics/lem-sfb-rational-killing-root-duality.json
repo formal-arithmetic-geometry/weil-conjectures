@@ -1,0 +1,495 @@
+{
+ "id": "lem-sfb-rational-killing-root-duality",
+ "kind": "statement",
+ "title": "Killing duality for a split rational root decomposition",
+ "statement": "Let $L$ be a finite-dimensional semisimple $\\mathbf Q$-Lie algebra [def-wf-lie-algebra, def-wf-semisimple-lie-algebra]. Let $H\\subseteq L$ be a maximal abelian subalgebra acting diagonally over $\\mathbf Q$, with $L=H\\oplus\\bigoplus_{\\rho\\in R}L_\\rho$, where $R\\subset H^\\vee\\setminus\\{0\\}$ is its reduced crystallographic root system, $L_\\rho=\\{x:[h,x]=\\rho(h)x\\text{ for all }h\\in H\\}$ is one-dimensional, and $h_\\rho\\in[L_\\rho,L_{-\\rho}]\\subseteq H$ is characterized by $\\rho(h_\\rho)=2$. Define $B(x,y)=\\operatorname{tr}_L(\\operatorname{ad}(x)\\operatorname{ad}(y))$, using ordinary trace [def-weil-endomorphism-trace]. Then $B$ is symmetric and invariant: $B([x,y],z)=B(x,[y,z])$. Its restriction to $H$ is positive definite over $\\mathbf Q$, meaning $B(h,h)>0$ for $h\\ne0$. Consequently for each $\\lambda\\in H^\\vee$ there is a unique $t_\\lambda\\in H$ satisfying $B(t_\\lambda,h)=\\lambda(h)$ for all $h\\in H$. The symmetric bilinear form $b(\\lambda,\\mu)=B(t_\\lambda,t_\\mu)$ on $H^\\vee$ is positive definite and satisfies $b(s_\\rho\\lambda,s_\\rho\\mu)=b(\\lambda,\\mu)$ for $s_\\rho(\\lambda)=\\lambda-\\lambda(h_\\rho)\\rho$. For every $\\rho\\in R$, put $d_\\rho=b(\\rho,\\rho)$. Then $d_\\rho>0$, $h_\\rho=2t_\\rho/d_\\rho$, and for every $x\\in L_\\rho$, $y\\in L_{-\\rho}$ one has $[x,y]=B(x,y)t_\\rho$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed pp.503 and 508, split semisimple root decomposition and coroot normalization; agent-formulated Killing-duality input to the local calculation behind Theorem 23.71. Mathlib/Algebra/Lie/Weights/Killing.lean:76--78,232--265 gives related Cartan/nondegenerate-Killing interfaces; positivity and the bridge from these explicit split hypotheses are not asserted there."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [
+  {
+   "text": "In any basis of $L$, the trace definition gives $\\operatorname{tr}(AC)=\\sum_{i,j}A_{ij}C_{ji}=\\operatorname{tr}(CA)$ by exchanging $i,j$. It also gives linearity in each matrix. Since $\\operatorname{ad}$ is linear, $B$ is bilinear; taking $A=\\operatorname{ad}x$, $C=\\operatorname{ad}y$ proves symmetry.",
+   "uses": [
+    "def-weil-endomorphism-trace",
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "Write $A=\\operatorname{ad}x$, $C=\\operatorname{ad}y$, $D=\\operatorname{ad}z$. Jacobi gives $\\operatorname{ad}[x,y]=AC-CA$. The cyclic trace identity of step 1 gives $\\operatorname{tr}(CAD)=\\operatorname{tr}(ADC)$, by applying it to $C$ and $AD$. Thus $B([x,y],z)=\\operatorname{tr}(ACD-CAD)=\\operatorname{tr}(A(CD-DC))=B(x,[y,z])$.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "Choose a basis of $H$ together with one nonzero vector in each one-dimensional $L_\\rho$; the assumed direct sum makes this a basis of $L$. For $h,k\\in H$, the product $\\operatorname{ad}h\\operatorname{ad}k$ is zero on $H$ and multiplication by $\\rho(h)\\rho(k)$ on $L_\\rho$. Reading its diagonal yields $B(h,k)=\\sum_{\\rho\\in R}\\rho(h)\\rho(k)$, in particular $B(h,h)=\\sum_{\\rho\\in R}\\rho(h)^2\\geq0$ in $\\mathbf Q$.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "If every $\\rho(h)=0$, then $[h,H]=0$ and $[h,L_\\rho]=0$ for every root, hence $[h,L]=0$ by the direct sum. The line $\\mathbf Qh$ is then a solvable ideal: $[L,\\mathbf Qh]=0$ and $[\\mathbf Qh,\\mathbf Qh]=0$. Semisimplicity forces $h=0$. Thus for nonzero $h$ some summand in step 3 is strictly positive; all others are nonnegative, so $B(h,h)>0$. In particular $B|_H$ is nondegenerate in both variables: vanishing against every vector implies vanishing against itself.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-wf-semisimple-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "Apply the finite-dimensional perfect-pairing lemma with $K=\\mathbf Q$, $M=N=H$ and $p=B|_H$, whose two separation hypotheses were proved in step 4. The map $\\Phi:H\\to H^\\vee$, $v\\mapsto B(v,-)$ is a linear isomorphism. Set $t_\\lambda=\\Phi^{-1}(\\lambda)$; this proves the required existence and uniqueness and makes $\\lambda\\mapsto t_\\lambda$ linear. Consequently $b(\\lambda,\\mu)=B(t_\\lambda,t_\\mu)$ is symmetric bilinear. If $\\lambda\\ne0$, then $t_\\lambda\\ne0$, so $b(\\lambda,\\lambda)>0$ by step 4.",
+   "uses": [
+    "lem-sfb-finite-dimensional-perfect-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "For $x\\in L_\\rho$, $y\\in L_{-\\rho}$ and $h\\in H$, Jacobi gives $[h,[x,y]]=[[h,x],y]+[x,[h,y]]=\\rho(h)[x,y]-\\rho(h)[x,y]=0$. The common zero eigenspace is exactly $H$: in the assumed decomposition a component in $L_\\sigma$ annihilated by every $h$ vanishes, since $\\sigma\\ne0$ allows an $h$ with $\\sigma(h)\\ne0$. Hence $[x,y]\\in H$. Invariance now gives $B([x,y],h)=B(x,[y,h])=\\rho(h)B(x,y)=B(B(x,y)t_\\rho,h)$. Nondegeneracy on $H$ yields $[x,y]=B(x,y)t_\\rho$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "Step 6 and bilinearity show $[L_\\rho,L_{-\\rho}]\\subseteq\\mathbf Qt_\\rho$: this bracket of subspaces means the span of their brackets. Hence the given $h_\\rho$ equals $c t_\\rho$ for a rational $c$. As $\\rho\\ne0$, step 5 gives $d_\\rho=b(\\rho,\\rho)>0$, and $\\rho(t_\\rho)=B(t_\\rho,t_\\rho)=d_\\rho$. Evaluating $\\rho(h_\\rho)=2$ gives $c=2/d_\\rho$, proving the claimed formula without division by zero.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  },
+  {
+   "text": "By symmetry and duality, $b(\\lambda,\\rho)=B(t_\\lambda,t_\\rho)=\\lambda(t_\\rho)$. Step 7 therefore gives $\\lambda(h_\\rho)=2b(\\lambda,\\rho)/d_\\rho$. Put $a=b(\\lambda,\\rho)$, $c=b(\\mu,\\rho)$ and $d=d_\\rho$. Expanding by bilinearity, $b(s_\\rho\\lambda,s_\\rho\\mu)=b(\\lambda,\\mu)-2ac/d-2ac/d+4ac d/d^2=b(\\lambda,\\mu)$, as $d>0$. This proves reflection invariance for all $\\lambda,\\mu$, including zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-endomorphism-trace",
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-finite-dimensional-perfect-pairing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed pp.503,508 (PDF pp.515,520): split decomposition and coroot normalization; agent calculation from these explicit hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rootLength|rootForm|killingForm.*coroot|coroot.*killingForm|nondegenerate",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"grep\", \"query\": \"rootLength|rootForm|killingForm.*coroot|coroot.*killingForm|nondegenerate\", \"sub\": \"Algebra/Lie/Weights\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\"], \"digest\": \"406be10645c246c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan nondegeneracy, cartanEquivDual, traceForm_coroot and the opposite-root bracket formula are present in Algebra/Lie/Weights/Killing.lean:76--78,232--265. The positive-definite rational restriction and the bridge from the explicit maximal split abelian hypothesis to the Cartan/IsKilling interfaces are additional assertions, so this whole statement is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Killing form restricted to split Cartan nondegenerate invariant positive definite rational roots coroot Killing dual",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"leansearch\", \"query\": \"Killing form restricted to split Cartan nondegenerate invariant positive definite rational roots coroot Killing dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.corootForm_rootSystem_eq_killing\", \"LieAlgebra.IsKilling\", \"LieAlgebra.IsKilling.coroot\", \"LieAlgebra.IsKilling.traceForm_coroot\", \"LieAlgebra.IsKilling.ker_restrict_eq_bot_of_isCartanSubalgebra\", \"LieAlgebra.IsKilling.coe_invtSubmoduleToLieIdeal_eq_iSup\", \"LieAlgebra.IsKilling.cartanEquivDual\", \"LieAlgebra.IsKilling.cartanEquivDual.congr_simp\"], \"digest\": \"a4cbef08c3cdd3da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan nondegeneracy, cartanEquivDual, traceForm_coroot and the opposite-root bracket formula are present in Algebra/Lie/Weights/Killing.lean:76--78,232--265. The positive-definite rational restriction and the bridge from the explicit maximal split abelian hypothesis to the Cartan/IsKilling interfaces are additional assertions, so this whole statement is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.IsKilling.coroot",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.IsKilling.coroot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.coroot\", \"LieAlgebra.IsKilling.coe_coroot_mem_corootSubmodule\", \"LieAlgebra.IsKilling.coroot_eq_iff\", \"LieAlgebra.IsKilling.coroot_eq_zero_iff\", \"LieAlgebra.IsKilling.coroot_neg\", \"LieAlgebra.IsKilling.root_apply_coroot\", \"LieAlgebra.IsKilling.coroot_zero\", \"LieAlgebra.IsKilling.coroot_mem_corootSpace\"], \"digest\": \"1321b3c4765fdbf1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan nondegeneracy, cartanEquivDual, traceForm_coroot and the opposite-root bracket formula are present in Algebra/Lie/Weights/Killing.lean:76--78,232--265. The positive-definite rational restriction and the bridge from the explicit maximal split abelian hypothesis to the Cartan/IsKilling interfaces are additional assertions, so this whole statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Killing form of a split semisimple rational Lie algebra restricts nondegenerately to its Cartan subalgebra and identifies coroots with twice the Killing dual root divided by its squared length",
+   "results": "{\"t\": \"2026-10-23T23:30:45Z\", \"tool\": \"leanfinder\", \"query\": \"The Killing form of a split semisimple rational Lie algebra restricts nondegenerately to its Cartan subalgebra and identifies coroots with twice the Killing dual root divided by its squared length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.corootForm_rootSystem_eq_killing\", \"LieAlgebra.IsKilling.traceForm_coroot\", \"LieAlgebra.IsKilling.coroot\", \"LieAlgebra.IsKilling.root_apply_coroot\", \"LieAlgebra.IsKilling.rootSystem_coroot_apply\", \"LieAlgebra.IsKilling.rootSystem\", \"LieAlgebra.IsKilling.rootSystem_pairing_apply\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\"], \"digest\": \"51364daabf83c1e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan nondegeneracy, cartanEquivDual, traceForm_coroot and the opposite-root bracket formula are present in Algebra/Lie/Weights/Killing.lean:76--78,232--265. The positive-definite rational restriction and the bridge from the explicit maximal split abelian hypothesis to the Cartan/IsKilling interfaces are additional assertions, so this whole statement is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "traceForm_coroot|cartanEquivDual|lie_eq_killingForm_smul|traceForm_cartan_nondegenerate",
+   "results": "{\"t\": \"2026-10-23T23:33:05Z\", \"tool\": \"grep\", \"query\": \"traceForm_coroot|cartanEquivDual|lie_eq_killingForm_smul|traceForm_cartan_nondegenerate\", \"sub\": \"Algebra/Lie/Weights\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\"], \"digest\": \"b94f5b5760db0a75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan nondegeneracy, cartanEquivDual, traceForm_coroot and the opposite-root bracket formula are present in Algebra/Lie/Weights/Killing.lean:76--78,232--265. The positive-definite rational restriction and the bridge from the explicit maximal split abelian hypothesis to the Cartan/IsKilling interfaces are additional assertions, so this whole statement is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Killing form on a rational split Cartan is positive definite and the inverse form identifies root coroots and opposite root vector brackets",
+   "results": "{\"t\": \"2026-10-23T23:33:11Z\", \"tool\": \"leanfinder\", \"query\": \"Killing form on a rational split Cartan is positive definite and the inverse form identifies root coroots and opposite root vector brackets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.rootSystem\", \"LieAlgebra.IsKilling.rootSystem_pairing_apply\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg\", \"LieAlgebra.IsKilling.rootSystem_coroot_apply\", \"LieAlgebra.IsKilling.corootForm_rootSystem_eq_killing\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg_aux\", \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.root_apply_coroot\"], \"digest\": \"d5e50a4d7e035b97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Cartan nondegeneracy, cartanEquivDual, traceForm_coroot and the opposite-root bracket formula are present in Algebra/Lie/Weights/Killing.lean:76--78,232--265. The positive-definite rational restriction and the bridge from the explicit maximal split abelian hypothesis to the Cartan/IsKilling interfaces are additional assertions, so this whole statement is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cartanEquivDual|lie_eq_killingForm|traceForm_coroot|posDef",
+   "sub": "Algebra/Lie/Weights",
+   "results": {
+    "t": "2026-10-23T23:57:03Z",
+    "tool": "grep",
+    "query": "cartanEquivDual|lie_eq_killingForm|traceForm_coroot|posDef",
+    "sub": "Algebra/Lie/Weights",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean"
+    ],
+    "digest": "b111ca0a85f9cbc7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Killing form is positive definite on a split Cartan subalgebra over the rational numbers",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T23:57:03Z",
+    "tool": "leansearch",
+    "query": "The Killing form is positive definite on a split Cartan subalgebra over the rational numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "killingForm",
+     "LieAlgebra.IsKilling.traceForm_cartan_nondegenerate",
+     "LieAlgebra.IsKilling",
+     "LieAlgebra.IsKilling.ker_restrict_eq_bot_of_isCartanSubalgebra",
+     "LieAlgebra.IsKilling.killingForm_nondegenerate",
+     "LieAlgebra.IsKilling.ker_traceForm_eq_bot_of_isCartanSubalgebra",
+     "killingForm_apply_apply",
+     "RootPairing.posRootForm_rootFormIn_posDef"
+    ],
+    "digest": "00de56aa59088858"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.IsKilling.traceForm_coroot",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T23:57:03Z",
+    "tool": "loogle",
+    "query": "LieAlgebra.IsKilling.traceForm_coroot",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "LieAlgebra.IsKilling.traceForm_coroot"
+    ],
+    "digest": "221ab36fa3e137bd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Killing form of a split semisimple Lie algebra over the rationals is positive definite on a split Cartan subalgebra and identifies roots and coroots",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T23:57:05Z",
+    "tool": "leanfinder",
+    "query": "Killing form of a split semisimple Lie algebra over the rationals is positive definite on a split Cartan subalgebra and identifies roots and coroots",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LieAlgebra.IsKilling.rootSystem",
+     "LieAlgebra.IsKilling.corootForm_rootSystem_eq_killing",
+     "LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem",
+     "LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem",
+     "LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem",
+     "LieAlgebra.IsKilling.restrict_killingForm_eq_sum",
+     "LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg",
+     "LieAlgebra.IsKilling.traceForm_cartan_nondegenerate"
+    ],
+    "digest": "60b0d75d44138743"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "toDual|nondegenerate.*[Ee]quiv|[Ee]quiv.*nondegenerate",
+   "sub": "LinearAlgebra/BilinearForm",
+   "results": {
+    "t": "2026-10-24T00:01:48Z",
+    "tool": "grep",
+    "query": "toDual|nondegenerate.*[Ee]quiv|[Ee]quiv.*nondegenerate",
+    "sub": "LinearAlgebra/BilinearForm",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/Properties.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/Properties.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/Properties.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/Properties.lean"
+    ],
+    "digest": "db23aff38e753420"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the auxiliary general duality: BilinForm.toDual (Properties.lean:351), already subsumed by existing lem-sfb-finite-dimensional-perfect-pairing; not a match for the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nondegenerate bilinear form gives an isomorphism from a finite dimensional vector space to its dual",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T00:01:48Z",
+    "tool": "leansearch",
+    "query": "A nondegenerate bilinear form gives an isomorphism from a finite dimensional vector space to its dual",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.BilinForm.toDual",
+     "LinearMap.BilinForm.toDual_def",
+     "LinearMap.BilinForm.toDual.congr_simp",
+     "LinearMap.BilinForm.apply_toDual_symm_apply",
+     "LinearMap.BilinForm.Nondegenerate",
+     "Basis.linearEquiv_dual_iff_finiteDimensional",
+     "LinearMap.BilinForm.dualBasis_dualBasis",
+     "LinearMap.BilinForm.dualBasis"
+    ],
+    "digest": "44c78d399c5b44a0"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the auxiliary general duality: BilinForm.toDual (Properties.lean:351), already subsumed by existing lem-sfb-finite-dimensional-perfect-pairing; not a match for the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.BilinForm.Nondegenerate",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T00:01:48Z",
+    "tool": "loogle",
+    "query": "LinearMap.BilinForm.Nondegenerate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "LinearMap.BilinForm.Nondegenerate",
+     "LinearMap.BilinForm.Nondegenerate.flip",
+     "LinearMap.BilinForm.nondegenerate_flip_iff",
+     "LinearMap.BilinForm.dualBasis",
+     "LinearMap.BilinForm.dualBasis_involutive",
+     "LinearMap.BilinForm.compLeft_injective",
+     "LinearMap.BilinForm.symmCompOfNondegenerate",
+     "LinearMap.BilinForm.dualBasis_injective"
+    ],
+    "digest": "0c8250d8581eb962"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nondegenerate bilinear form on a finite dimensional vector space induces a linear equivalence with the dual space",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T00:01:49Z",
+    "tool": "leanfinder",
+    "query": "A nondegenerate bilinear form on a finite dimensional vector space induces a linear equivalence with the dual space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.BilinForm.toDual",
+     "LinearMap.BilinForm.apply_toDual_symm_apply",
+     "LinearMap.BilinForm.symmCompOfNondegenerate",
+     "LinearMap.BilinForm.toDual_def",
+     "LinearMap.BilinForm.leftAdjointOfNondegenerate",
+     "LinearMap.BilinForm.symmCompOfNondegenerate_left_apply",
+     "LinearMap.BilinForm.Nondegenerate.flip",
+     "LinearMap.BilinForm.dualBasis_involutive"
+    ],
+    "digest": "4f8968ccf04a0adf"
+   },
+   "date": "2026-10-24",
+   "verdict": "match for the auxiliary general duality: BilinForm.toDual (Properties.lean:351), already subsumed by existing lem-sfb-finite-dimensional-perfect-pairing; not a match for the item."
+  },
+  {
+   "tool": "grep",
+   "query": "restrict_killingForm_eq_sum|traceForm_cartan_nondegenerate|lie_eq_killingForm",
+   "sub": "Algebra/Lie/Weights",
+   "results": {
+    "t": "2026-10-24T00:05:00Z",
+    "tool": "grep",
+    "query": "restrict_killingForm_eq_sum|traceForm_cartan_nondegenerate|lie_eq_killingForm",
+    "sub": "Algebra/Lie/Weights",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/Killing.lean",
+     "Mathlib/Algebra/Lie/Weights/RootSystem.lean"
+    ],
+    "digest": "a50cb5fc90ce3da6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a rational split root decomposition the adjoint trace form is a sum of squares on the toral subalgebra and its inverse form makes coroot reflections orthogonal",
+   "sub": "",
+   "results": {
+    "t": "2026-10-24T00:05:02Z",
+    "tool": "leanfinder",
+    "query": "On a rational split root decomposition the adjoint trace form is a sum of squares on the toral subalgebra and its inverse form makes coroot reflections orthogonal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LieAlgebra.IsKilling.traceForm_coroot",
+     "RootPairing.GeckConstruction.trace_toEnd_eq_zero",
+     "LieAlgebra.IsKilling.traceForm_eq_zero_of_mem_ker_of_mem_span_coroot",
+     "LieAlgebra.IsKilling.rootSystem",
+     "LieAlgebra.IsKilling.restrict_killingForm_eq_sum",
+     "LieAlgebra.killingForm_apply_eq_zero_of_mem_rootSpace_of_add_ne_zero",
+     "LieAlgebra.IsKilling.traceForm_cartan_nondegenerate",
+     "LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem"
+    ],
+    "digest": "1670747fdf634542"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: Cartan/IsKilling declarations give related formulas, but not rational positivity from the explicit split hypotheses. Read Killing.lean:76-78,232-285 and PerfectPairing/Basic.lean:116-120. RootPairing positivity concerns a separately constructed root form, not this Killing restriction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-opposition-root-bracket-norm",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, Chevalley bases, printed pp.508--509, especially Theorem 23.71; extending the prescribed simple-root pinning, with rationality from bracket construction over the split rational form. Supporting input: Section 23h, Theorem 23.71, printed pp.508--509: agent-stated conditional local, squared-norm formulation of the root-string calculation. Unlike existence of a Chevalley basis, this assertion takes only two already normalized root vectors as input. Supporting calculation: Section 23h, printed pp.503 and 508, split semisimple root decomposition and coroot normalization; agent-formulated Killing-duality input to the local calculation behind Theorem 23.71. Mathlib/Algebra/Lie/Weights/Killing.lean:76--78,232--265 gives related Cartan/nondegenerate-Killing interfaces; positivity and the bridge from these explicit split hypotheses are not asserted there.",
+   "via": [
+    "lem-sfb-opposition-root-bracket-norm",
+    "lem-sfb-chevalley-root-normalization",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-killing-root-duality",
+  "worker": "stage1",
+  "summary": "Q22: preserved the statement; supplied eight explicit calculation steps, using the existing finite-dimensional perfect-pairing Mathlib leaf. No new nodes. Checked cyclic trace, rational sum-of-squares positivity, the central solvable-line argument, the zero-weight space, coroot normalization and the full reflection expansion.",
+  "blueprint": "Inherited null ancestor and via chain retained (blueprint_refs.py ancestor reports None). Serves the recorded direct-image alteration prerequisite chain through Milne Section 23h and Theorem 23.71: the explicit split rational Killing-duality input for the local root-string norm calculation. The latest unit direct-image proof (3) provides the high-level context, not this calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-973df8729",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-973df8729 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item JSON, the 4 cited nodes, the parent lem-sfb-opposition-root-bracket-norm, and Milne printed pp.503 and 508 (PDF 515, 520). The delivery is one commit containing only the item and the report. It creates no new nodes. It is a first split, not a 2026-10-21 re-split. The statement and stmt_deps are unchanged, and the statement is true. I checked sl_2(Q): B(h,h)=8, B(e,f)=4, t=h/4, d=1/2, 2t/d=h and [e,f]=h. I also checked L=0 and rho -> -rho. Steps 1-2 (cyclic trace, and ad as a representation giving invariance) are correct, with the right order and sign. Step 3 (B(h,k)=sum rho(h)rho(k) in a root basis) is correct. Step 4 is correct: a central h spans a solvable ideal, so semisimplicity forces h=0 and rational squares give positivity. Step 5 correctly applies lem-sfb-finite-dimensional-perfect-pairing (Mathlib leaf, IsPerfPair.of_injective) with M=N=H; both separation hypotheses come from step 4. Step 6 is correct: the zero-weight space is H, the sign [y,h]=rho(h)y is right, and nondegeneracy on H gives [x,y]=B(x,y)t_rho. Step 7 divides only after d_rho>0. Step 8's reflection expansion checks. proof_deps equal the union of the uses. The route stays inside unit sk-thm-sf-ctf-stability with no tool_uses, and there is no SGA. blueprint_refs ancestor prints None, matching the inherited null from.node. The three search kinds are recorded. It is not a duplicate. lem-ag-killing-nondegenerate and sk-lem-walg-killing give nondegeneracy only. The Mathlib leaves lem-sfb-killing-cartan-rank-one-spaces and lem-sfb-killing-cartan-reduced-root-pairing give the Cartan/nondegenerate t_alpha and c_alpha clauses only, under different hypotheses. They lack positivity over Q, the s_rho-invariance of b, and the bracket formula. The report did not mention these two leaves, which is advisory only. The phrase 'reduced crystallographic root system' has no definition node in stmt_deps; it is inherited verbatim from the accepted parent and never used in the proof, so it is advisory. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.RationalKillingRootDuality",
+  "declaration": "LieAlgebra.rational_killing_root_duality",
+  "file": "lean/Sheaf/Algebra/Lie/RationalKillingRootDuality.lean",
+  "statement": "theorem rational_killing_root_duality (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [IsLieAbelian H] (hmax : ∀ K : LieSubalgebra ℚ L, H ≤ K → IsLieAbelian K → K = H) (R : Finset (Module.Dual ℚ H)) (P : RootPairing R ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsReduced] [P.IsCrystallographic] (hpair : ∀ (ℓ : Module.Dual ℚ H) (h : H), P.toLinearMap ℓ h = ℓ h) (hroot : ∀ ρ : R, P.root ρ = ρ.val) (hsplit : DirectSum.IsInternal (fun i : Option R ↦ match i with | none => H.toSubmodule | some ρ => (LieModule.weightSpace L (fun h : H ↦ ρ.val h)).toSubmodule)) (hdim : ∀ ρ : R, Module.finrank ℚ (LieModule.weightSpace L (fun h : H ↦ ρ.val h)) = 1) (hbracket : ∀ ρ : R, Submodule.span ℚ {z : L | ∃ x ∈ LieModule.weightSpace L (fun h : H ↦ ρ.val h), ∃ y ∈ LieModule.weightSpace L (fun h : H ↦ -ρ.val h), ⁅x, y⁆ = z} ≤ H.toSubmodule) (hcoroot : ∀ ρ : R, (P.coroot ρ : L) ∈ Submodule.span ℚ {z : L | ∃ x ∈ LieModule.weightSpace L (fun h : H ↦ ρ.val h), ∃ y ∈ LieModule.weightSpace L (fun h : H ↦ -ρ.val h), ⁅x, y⁆ = z}) : LinearMap.IsSymm (killingForm ℚ L) ∧ (∀ x y z : L, killingForm ℚ L ⁅x, y⁆ z = killingForm ℚ L x ⁅y, z⁆) ∧ (∀ h : H, h ≠ 0 → 0 < killingForm ℚ L h h) ∧ ∃ (t : Module.Dual ℚ H →ₗ[ℚ] H) (b : LinearMap.BilinForm ℚ (Module.Dual ℚ H)), (∀ ℓ : Module.Dual ℚ H, (∀ h : H, killingForm ℚ L (t ℓ) h = ℓ h) ∧ ∀ v : H, (∀ h : H, killingForm ℚ L v h = ℓ h) → v = t ℓ) ∧ (∀ ℓ μ : Module.Dual ℚ H, b ℓ μ = killingForm ℚ L (t ℓ) (t μ)) ∧ LinearMap.IsSymm b ∧ (∀ ℓ : Module.Dual ℚ H, ℓ ≠ 0 → 0 < b ℓ ℓ) ∧ (∀ (ρ : R) (ℓ μ : Module.Dual ℚ H), b (ℓ - ℓ (P.coroot ρ) • ρ.val) (μ - μ (P.coroot ρ) • ρ.val) = b ℓ μ) ∧ ∀ ρ : R, 0 < b ρ.val ρ.val ∧ P.coroot ρ = (2 / b ρ.val ρ.val) • t ρ.val ∧ ∀ (x y : L), x ∈ LieModule.weightSpace L (fun h : H ↦ ρ.val h) → y ∈ LieModule.weightSpace L (fun h : H ↦ -ρ.val h) → ⁅x, y⁆ = killingForm ℚ L x y • (t ρ.val : L)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60c852c12",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim in file. Clause-by-clause match: HasTrivialRadical semisimplicity, hmax maximal abelian, RootPairing on Finset R with evaluation pairing (hpair) and root=inclusion (hroot), coroot = node's h_ρ (node's s_ρ is the root-system reflection; citer calls h_α the coroot; coroots are unique for a reduced root system in char 0), hsplit IsInternal over Option R of plain weightSpace eigenspaces (mem_weightSpace, no nilpotency needed), hdim, bracket span hypotheses; conclusions killingForm symmetric and invariant, positive on H, unique t as linear map, b with defining equation, symmetric and positive definite, reflection invariance, d>0, coroot=(2/d)•t, [x,y]=B(x,y)•t with Mathlib's sign. Edge cases L=0 (R forced empty), R empty, ℓ=0; sl2(Q) check. Dep records match; no defs or hollow constructions; sorry only; Milne source and blueprint docstrings plus 8-step proof plan present; report has Worker and Second reading sections. Not recompiled per instruction. Non-blocking note: Finset root index differs from sibling exists_chevalley_basis_of_pinning's arbitrary I."
+ }
+}

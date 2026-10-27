@@ -1,0 +1,85 @@
+{
+ "id": "det-l-dl-a1-energy",
+ "kind": "statement",
+ "title": "Weight detection by trace energy",
+ "statement": "Let $N\\ne0$ be pure of weight $v$ and lisse on a smooth geometrically\nconnected affine curve $V_0$. Put\n\n$$\nS_n(V_0,N)=\\sum_{x\\in V_0(\\mathbf F_{q^n})}\n|\\iota\\Tr(\\DLAFr_x\\mid N_{\\bar x})|^2,\n$$\n\nwhere $\\DLAFr_x$ means Frobenius relative to $\\mathbf F_{q^n}$.\nIf $S_n(V_0,N)\\le Cq^{nB}$ for every $n\\ge1$, with a constant $C>0$\nindependent of $n$, then $v\\le B-1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-purity-real-sheaves/sk-thm-wrp-l2-dictionary/det-l-dl-a1-energy.md",
+  "place": "node det-l-dl-a1-energy, order 3919"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let $T_v$ be the constant Weil line whose Frobenius has realization\n$q^v$, and set $N^c=N^\\vee\\otimes T_v$. The line $T_v$ has weight\n$2v$, while $N^c$ has weight $v$ and conjugate realized local spectra.\nThus $D=N\\otimes N^c$ has weight $2v$ and point traces\n$|\\iota t_{N,n}(x)|^2$. The trace formula and the determinant identity give\n\n$$\nE_N(T):=\\exp\\left(\\sum_{n\\ge1}S_n(V_0,N)\\frac{T^n}{n}\\right)\n=\\frac{\\iota\\det(1-T\\DLAFr_q\\mid H_c^1(V,D))}\n{\\iota\\det(1-T\\DLAFr_q\\mid H_c^2(V,D))}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "There is a closed point with a nonzero stalk. Some positive power of its\ninvertible Frobenius has nonzero trace; otherwise the determinant\nidentity would make its characteristic polynomial constant. Hence some\n$S_n$ is positive. All $S_n$ are nonnegative, so the exponential has\ninfinitely many nonzero coefficients: a positive coefficient in its\nexponent contributes positively in arbitrarily high powers.\nConsequently the rational function $E_N$ is not a polynomial and has\nat least one surviving finite pole.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "By [sk-lem-wrp-hc2] and [lem-a1-affine-hc2], $H_c^2(V,D)$ is pure of weight $2v+2$,\nso every possible denominator pole has modulus $q^{-(v+1)}$.\nThe assumed energy bound makes the series in the exponential converge\nfor $|T|<q^{-B}$. Its analytic exponential is holomorphic there and\nagrees with the rational germ; therefore the surviving pole cannot lie\nin that disk. Thus $q^{-(v+1)}\\ge q^{-B}$, or $v\\le B-1$.\nThis argument uses no weight estimate for $H_c^1(V,D)$ and requires\nonly one surviving pole, rather than noncancellation of every factor.",
+   "uses": [
+    "sk-lem-wrp-hc2",
+    "lem-a1-affine-hc2"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-wrp-hc2",
+  "lem-a1-affine-hc2",
+  "lem-wf-conjugate-tensor-traces",
+  "cor-rp-euler-product",
+  "lem-zl-log-det-identity",
+  "p-linear-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-purity-real-sheaves/sk-thm-wrp-l2-dictionary/det-l-dl-a1-energy.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3919,
+ "blueprint_uses": [
+  "sk-lem-wrp-hc2",
+  "lem-a1-affine-hc2",
+  "lem-wf-conjugate-tensor-traces",
+  "cor-rp-euler-product",
+  "lem-zl-log-det-identity",
+  "p-linear-spectra"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilSheaf.traceEnergy",
+  "AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.WeilSheaf.traceEnergy",
+  "AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le"
+ ],
+ "uses_not_cited": [
+  "lem-wf-conjugate-tensor-traces",
+  "cor-rp-euler-product",
+  "lem-zl-log-det-identity",
+  "p-linear-spectra"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-l-dl-a1-energy",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-thm-wrp-l2-dictionary"
+}

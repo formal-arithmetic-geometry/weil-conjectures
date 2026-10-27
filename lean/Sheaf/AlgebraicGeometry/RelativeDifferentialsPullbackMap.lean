@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # The canonical pullback map on relative differentials
@@ -63,7 +64,51 @@ theorem existsUnique_relativeDifferentialsPullbackMap {X Y S : Scheme.{u}}
       ∀ (W : Y.Opens) (a : Γ(Y, W)),
         d.val.app (op (h ⁻¹ᵁ W)) (relativeDifferentialsPullbackGenerator g h W a) =
           (h ≫ g).relativeDifferentialsDerivation.d (X := op (h ⁻¹ᵁ W)) (h.app W a) := by
-  sorry
+  let D : ((Modules.pushforward h).obj (h ≫ g).relativeDifferentials).val.Derivation'
+      g.pullbackPresheafToPresheaf :=
+    g.derivationMk
+      (fun {U} ↦ (h ≫ g).relativeDifferentialsDerivation.d.comp
+        (h.app U.unop).hom.toAddMonoidHom)
+      (by
+        intro U a b
+        change (h ≫ g).relativeDifferentialsDerivation.d (h.app U.unop (a * b)) = _
+        rw [map_mul, PresheafOfModules.Derivation.d_mul]
+        rfl)
+      (by
+        intro U V i a
+        change (h ≫ g).relativeDifferentialsDerivation.d
+          (h.app V.unop (Y.presheaf.map i a)) = _
+        rw [← CommRingCat.comp_apply, h.naturality i]
+        exact (h ≫ g).relativeDifferentialsDerivation.d_map _ _)
+      (by
+        intro V a
+        change (h ≫ g).relativeDifferentialsDerivation.d
+          (h.app (g ⁻¹ᵁ V) (g.app V a)) = 0
+        exact (h ≫ g).relativeDifferentialsDerivation.d_app_app V a)
+  obtain ⟨adj, hadj⟩ := Modules.exists_tensorPullbackAdjunction h
+  let e := adj.homEquiv g.relativeDifferentials (h ≫ g).relativeDifferentials
+  let q := (g.relativeDifferentialsHomEquiv _).symm D
+  have he (d : (Modules.tensorPullback h).obj g.relativeDifferentials ⟶
+      (h ≫ g).relativeDifferentials) (W : Y.Opens) (a : Γ(Y, W)) :
+      (e d).val.app (op W) (g.relativeDifferentialsDerivation.d a) =
+        d.val.app (op (h ⁻¹ᵁ W)) (relativeDifferentialsPullbackGenerator g h W a) := by
+    rw [Adjunction.homEquiv_unit]
+    change d.val.app (op (h ⁻¹ᵁ W))
+      ((adj.unit.app g.relativeDifferentials).val.app (op W)
+        (g.relativeDifferentialsDerivation.d a)) = _
+    rw [hadj]
+    rfl
+  refine ⟨e.symm q, ?_, ?_⟩
+  · intro W a
+    rw [← he, Equiv.apply_symm_apply]
+    exact g.relativeDifferentialsHomEquiv_symm_app_d D a
+  · intro d hd
+    apply e.injective
+    rw [Equiv.apply_symm_apply]
+    apply (g.relativeDifferentialsHomEquiv _).injective
+    ext U a
+    exact (he d U.unop a).trans (hd U.unop a) |>.trans
+      (g.relativeDifferentialsHomEquiv_symm_app_d D a).symm
 
 /-- The canonical differential map, uniquely determined by `1 ⊗ da ↦ d(h♯a)`.
 Source: Stacks Project, Morphisms, Section 29.32, Tag 01UV,

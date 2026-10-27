@@ -1,0 +1,394 @@
+{
+ "id": "lem-sf-admissible-hom-substitution",
+ "kind": "statement",
+ "title": "Signed and coefficient-natural substitution in actual derived internal Hom",
+ "statement": "Fix the finite-field and coefficient conventions of [def-fix-six-functor-datum]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and coefficients are $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $\\mathcal O_E$, $E$, or $\\overline{\\mathbf Q}_\\ell$. Integral operations are the specified completed operations, and field operations their rationalized and common-finite-stage forms. Use the actual operation datum, without assuming a full axiomatized six-functor package.\nLet $f:X\\to Y$ be a separated finite-type morphism [def-weil-scheme-morphism-properties] of separated finite-type $k$-schemes, and write $D^b_{ctf}$ for the bounded constructible finite-Tor categories [def-weil-finite-tor-amplitude]. Write $H_A(M,U)=R\\mathcal Hom_{X,A}(M,U)$ for the actual derived internal Hom [def-weil-derived-pullback-tensor-hom] and $J_U(M)=Rf_{A*}H_A(M,U)$, in the ambient derived realization of [def-weil-derived-direct-image]. For $M,U,V\\in D^b_{ctf}(X,A)$ and an isomorphism $c:U\\xrightarrow{\\sim}V$, put $j_c(M)=Rf_{A*}H_A(1_M,c)$. These components form a natural isomorphism of contravariant functors in $M$. With cohomological convention $P[r]^i=P^{i+r}$, $d_{P[r]}=(-1)^r d_P$, use the signed source-shift isomorphism\n$$s_U(M,r):J_U(M[r])\\xrightarrow{\\sim}J_U(M)[-r],$$\nnormalized on a degree-$d$ Hom family by reindexing and multiplier $(-1)^{rd}$, and the derived direct-image shift comparison. Then, for every $r\\in\\mathbf Z$,\n$$s_V(M,r)\\circ j_c(M[r])=j_c(M)[-r]\\circ s_U(M,r).$$\nFor a stipulated coefficient change $A\\to B$, let $C_X,C_Y$ be the actual coefficient functors and\n$$h_{M,U}:C_XH_A(M,U)\\longrightarrow H_B(C_XM,C_XU),\\qquad \\gamma_Z:C_YRf_{A*}Z\\longrightarrow Rf_{B*}C_XZ$$\nits canonical internal-Hom and ordinary-image comparisons. Here $h$ is the transpose of coefficient-changed evaluation with the tensor comparison inserted; $\\gamma$ is the mate of the pullback comparison. Take $U',V'\\in D^b_{ctf}(X,B)$ and isomorphisms $u:C_XU\\to U'$, $v:C_XV\\to V'$, $c':U'\\to V'$ such that $v\\circ C_Xc=c'\\circ u$. Set\n$$\\sigma_{U,u}(M)=Rf_{B*}\\bigl(H_B(1,u)\\circ h_{M,U}\\bigr)\\circ\\gamma_{H_A(M,U)},$$\nand define $\\sigma_{V,v}$ by the same formula. Then\n$$\\sigma_{V,v}(M)\\circ C_Y(j_c(M))=j_{c'}(C_XM)\\circ\\sigma_{U,u}(M).$$\nThis is a commutative square of the specified maps on their stated domains in the ambient derived realization; it does not require $h$ or $\\gamma$ to be isomorphisms. At integral coefficients use completed realizations and at field stages their specified scalar transports. No biduality or full six-functor-package axiom is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-cor-verdier-exchange.proof.md",
+  "place": "Step 2, second arrow applying internal Hom and ordinary direct image to the dualizing-object mate; Step 3, its naturality, coefficient square and shifts (returned steps 3, 4 final paragraph and 5); agent-expanded formal obligation"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "cor-coef-integral-internal-hom",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Write $a^*_U=H_A(a,1_U)$ for a morphism $a:M'\\to M$. Bifunctoriality gives $H_A(a,1_V)H_A(1_M,c)=H_A(1_{M'},c)H_A(a,1_U)$. Apply $Rf_{A*}$ to obtain the naturality square for $j_c$. The inverse component is $Rf_{A*}H_A(1_M,c^{-1})$: both composites are identities by functoriality. These are ambient derived-category maps; this argument does not assert constructibility of their values.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 08J7 (section-internal-hom), 08J9 (lemma-internal-hom); agent expansion of fix-cor-verdier-exchange.proof.md Steps 2-3"
+   }
+  },
+  {
+   "text": "Fix a complex $L$ representing $M$ and use the functorial K-injective representatives $I(U),I(V)$ of derived Hom. For a chain map $b:I(U)\\to I(V)$, the signed reindexing $s$ sends a degree-$d$ family $\\phi$ on $L[r]$ to the family $(-1)^{rd}\\phi^{j-r}$ at index $j$ on $L$. Thus $s(b\\phi)^j=(-1)^{rd}b^{j+d-r}\\phi^{j-r}=b^{j+d-r}(s\\phi)^j$. This is equality after every Hom-product projection. The Hom-complex shift lemma supplies the chain isomorphism, with inverse reindexing and the same sign; this calculation checks its specified normalization and target naturality. Quasi-isomorphism invariance of the representative construction and the localization universal property descend this natural square to every derived morphism $c$, including inverses of quasi-isomorphisms. Consequently $s^H_V H_A(1_{M[r]},c)=H_A(1_M,c)[-r]s^H_U$ for actual derived Hom, over the finite coefficient sheaf or the completed integral coefficient sheaf. The latter Hom is computed in that ambient module category, so no term of the K-injective resolution is required to be constructible.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-complex-shift-left",
+    "lem-pur-rhom-well-defined",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; Tag 08J7, section-internal-hom; Tag 0A95, lemma-RHom-well-defined; signed source reindexing and localization."
+   }
+  },
+  {
+   "text": "Apply $Rf_{A*}$ to the square in step 2 and compose with its natural comparison $Rf_{A*}(Z[-r])\\cong(Rf_{A*}Z)[-r]$. Naturality of this comparison gives precisely $s_V j_c(M[r])=j_c(M)[-r]s_U$. At finite level the right-derived-functor shift lemma gives the comparison. At integral level $Rf_*$ is the specified derived limit of the finite direct images, and the levelwise comparisons are only derived-category isomorphisms, not strict tower maps. The integral direct-image shift lemma gives a comparison $\\theta_{Z,-r}$ natural in every derived morphism $Z\\to Z'$, in particular in $H_A(1_M,c)[-r]$ for the completed integral Hom; its naturality gives the square. At $E$, apply the rationalized operations and their stated bilinear action on morphisms to the same identity; at $\\overline{\\mathbf Q}_\\ell$, represent the finitely many objects and arrows over a common finite field stage and apply the same equation there. The operation's comparison isomorphisms cancel at intermediate objects. Thus every stipulated coefficient stage has the same signed equation.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-integral-direct-image-shift-comparison",
+    "def-weil-derived-direct-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; derived.tex Tag 08TC, definition-derived-limit; the integral shift comparison as stated in lem-sf-integral-direct-image-shift-comparison."
+   }
+  },
+  {
+   "text": "Set $F=C_X$ and $a=H_A(1_M,c)$. Let $\\mathrm{ev}_U:H_A(M,U)\\otimes M\\to U$ be evaluation, with its stipulated tensor convention. If $t_U:FH_A(M,U)\\otimes FM\\to F(H_A(M,U)\\otimes M)$ denotes the tensor comparison inserted in the definition of $h$, its uncurried map is $e_U=F(\\mathrm{ev}_U)t_U$. Evaluation naturality says $\\mathrm{ev}_V(a\\otimes1)=c\\,\\mathrm{ev}_U$. Tensor-comparison naturality therefore gives $e_V(Fa\\otimes1)=F(c)e_U$. Transpose this equality under the tensor-Hom adjunction in the $B$ realization, using the adjunction transpose-square lemma. Since $h$ is this very transpose, it yields\n$$h_{M,V}F(a)=H_B(1_{FM},F(c))h_{M,U}.$$\nThis uses no inverse of $t$ or $h$. The argument takes place on the stipulated domains of these transposes, so also applies to the specified completed evaluation and tensor comparison; it does not replace them by ordinary tensor operations. The representative model supplies the actual ambient evaluation, and transposing its natural square is the same formal calculation in each realization.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sfb-adjunction-transpose-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom (tensor-Hom adjunction); Tag 0A98, lemma-internal-hom-evaluate; transpose naturality in categories.tex, Tag 0036, section-adjoint."
+   }
+  },
+  {
+   "text": "Put $G=Rf_{A*}$ and $G'=Rf_{B*}$. The stipulated $\\gamma:C_YG\\to G'C_X$ is the mate natural transformation. In the component formula for a mate, every factor is a whiskered unit, pullback comparison, or counit, hence a natural transformation. Their naturality squares paste. Evaluating that square at the particular arrow $a=H_A(1_M,c)$ gives\n$$\\gamma_{H_A(M,V)}C_Y(Ga)=G'(C_Xa)\\gamma_{H_A(M,U)}.$$\nThis proves the needed equation for the specified mate, regardless of whether any component is invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change (mate of pullback comparison and counit); general component formula in def-weil-pbc-adjunction-mate."
+   }
+  },
+  {
+   "text": "Abbreviate $h_U=h_{M,U}$, $h_V=h_{M,V}$, and $\\gamma_U=\\gamma_{H_A(M,U)}$. Expand the specified $\\sigma$ and use step 5, then step 4:\n$$\\begin{aligned}\n\\sigma_{V,v}C_Y(j_c(M))\n&=G'(H_B(1,v)h_V)G'(C_Xa)\\gamma_U\\\\\n&=G'(H_B(1,v)H_B(1,C_Xc)h_U)\\gamma_U\\\\\n&=G'(H_B(1,v\\circ C_Xc)h_U)\\gamma_U\\\\\n&=G'(H_B(1,c'\\circ u)h_U)\\gamma_U\\\\\n&=G'H_B(1,c')\\,G'(H_B(1,u)h_U)\\gamma_U\\\\\n&=j_{c'}(C_XM)\\sigma_{U,u}(M).\n\\end{aligned}$$\nThe fourth line is exactly the hypothesis $v\\circ C_Xc=c'\\circ u$; the other rearrangements are functoriality and associativity. This equality is in the given $B$ realization. Completed functors and field-stage scalar transports already occur in its factors, so the same calculation proves their squares without a limit-detection assertion. Neither biduality nor an axiomatized six-functor package occurs.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 08J7 (section-internal-hom), 08J9 (lemma-internal-hom); agent expansion of fix-cor-verdier-exchange.proof.md Steps 2-3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-direct-image",
+  "def-pur-hom-complex",
+  "lem-pur-hom-complex-shift-left",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-integral-direct-image-shift-comparison",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-adjunction-transpose-square",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X (section-hom-complexes), 08J7 (section-internal-hom), 08J9 (lemma-internal-hom); agent expansion of fix-cor-verdier-exchange.proof.md Steps 2-3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of a shifted first argument is the oppositely shifted internal Hom naturally in both variables with signed cochain shift normalization and coefficient comparison",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.HomComplex.Cochain.leftUnshift, CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.HomComplex.Cochain.leftShift, CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv, CochainComplex.HomComplex.Cochain.rightUnshift_v, CochainComplex.HomComplex.Cochain.rightUnshift_comp, CochainComplex.HomComplex.Cocycle.rightUnshift_coe. Inspected relevant Mates/Shift adjunction or HomComplexShift/BifunctorShift source. Generic categorical/cochain infrastructure, not the stated actual pro-etale coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no exact match; actual coefficient-operation normalization remains an obligation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposing derived internal Hom with an isomorphism of target complexes commutes with signed source shifts and with evaluation-defined coefficient change after ordinary derived direct image",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CochainComplex.shiftEval, DerivedCategory.singleFunctorsPostcompQIso_hom_hom, CochainComplex.shiftEval_hom_app, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorsPostcompQIso_inv_hom, CategoryTheory.SingleFunctors.postcompIsoOfIso. Inspected relevant Mates/Shift adjunction or HomComplexShift/BifunctorShift source. Generic categorical/cochain infrastructure, not the stated actual pro-etale coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no exact match; actual coefficient-operation normalization remains an obligation"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"shift\", \"hom\"",
+   "results": "12 hits: DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, DerivedCategory.shift_homologyFunctor, DerivedCategory.shiftMap_homologyFunctor_map_Q, DerivedCategory.shiftMap_homologyFunctor_map_Q_assoc, DerivedCategory.shiftMap_homologyFunctor_map_Qh, DerivedCategory.shiftMap_homologyFunctor_map_Qh_assoc. Inspected relevant Mates/Shift adjunction or HomComplexShift/BifunctorShift source. Generic categorical/cochain infrastructure, not the stated actual pro-etale coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no exact match; actual coefficient-operation normalization remains an obligation"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*(RHom|derivedHom)|((RHom|derivedHom).*(shift|map))",
+   "results": "7 hits: Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean. Inspected relevant Mates/Shift adjunction or HomComplexShift/BifunctorShift source. Generic categorical/cochain infrastructure, not the stated actual pro-etale coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no exact match; actual coefficient-operation normalization remains an obligation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of coefficient change and signed shift comparison for derived internal Hom in its target variable after pushforward",
+   "results": "8 hits: CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app, CochainComplex.ShiftSequence.shiftIso.congr_simp, CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.ShiftSequence.shiftIso_hom_app, CochainComplex.ShiftSequence.shiftIso_inv_app, CochainComplex.ShiftSequence.shiftIso, CochainComplex.HomComplex.Cochain.rightUnshift_v, CochainComplex.mapBifunctorHomologicalComplexShift₂Iso. Inspected relevant Mates/Shift adjunction or HomComplexShift/BifunctorShift source. Generic categorical/cochain infrastructure, not the stated actual pro-etale coefficient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no exact match; actual coefficient-operation normalization remains an obligation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom target substitution is natural in the source and commutes with the signed first variable shift and evaluation defined scalar extension comparison",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihom_map_val_app",
+     "CategoryTheory.coev_expComparison",
+     "CategoryTheory.ihom.coev_naturality_assoc",
+     "CategoryTheory.ihom.coev_naturality",
+     "LightCondensed.ihomPoints_symm_comp",
+     "CategoryTheory.Functor.mapExtLinearMap_apply",
+     "CategoryTheory.Functor.mapExtLinearMap_coe",
+     "CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic categorical or ordinary cochain infrastructure only, not the full actual-coefficient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "leftShift.*comp|leftShift.*natur|commShiftIso.*natur|internalHom.*natur",
+   "results": {
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic categorical or ordinary cochain infrastructure only, not the full actual-coefficient statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed, \"curry\", \"natural\"",
+   "results": {
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'MonoidalClosed'",
+    "top": []
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: MonoidalClosed was unqualified; corrected with CategoryTheory.ihom"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom target substitution commutes with source shifts and canonical coefficient change comparison under derived direct image",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.Cochain.shift",
+     "CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv",
+     "CochainComplex.HomComplex.Cochain.shift_v'",
+     "CategoryTheory.Functor.commShiftMapCochainComplex",
+     "HomRel.IsCompatibleWithShift",
+     "CochainComplex.HomComplex.Cochain.shiftLinearMap_apply",
+     "CategoryTheory.ShiftedHom.map",
+     "CochainComplex.HomComplex.Cochain.rightShift"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic categorical or ordinary cochain infrastructure only, not the full actual-coefficient statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived sheaf Hom with respect to an isomorphism of the second argument and compatibility with shift in the first argument and base change of coefficients",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm",
+     "CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
+     "CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+     "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq",
+     "CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic categorical or ordinary cochain infrastructure only, not the full actual-coefficient statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom, \"naturality\"",
+   "results": {
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "CategoryTheory.ihom.coev_naturality",
+     "CategoryTheory.ihom.ev_naturality",
+     "CategoryTheory.ihom.ev_naturality_assoc",
+     "CategoryTheory.ihom.coev_naturality_assoc"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no exact match; generic categorical or ordinary cochain infrastructure only, not the full actual-coefficient statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-cor-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "fix-cor-verdier-exchange",
+   "place": "Step 2, second arrow applying internal Hom and ordinary direct image to the dualizing-object mate; Step 3, its naturality, coefficient square and shifts (returned steps 3, 4 final paragraph and 5)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-admissible-hom-substitution",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused the actual Hom bifunctor, signed Hom-complex shift and localization, K-injective direct-image shifts and natural Roos shifts, and the general transpose-square lemma. Proved the evaluation-defined coefficient naturality and expanded the final square without assuming any coefficient comparison invertible. Statement and construction conventions unchanged. Review FIX (Q154 maintainer reader, 2026-10-22): step 3's integral clause applied the Roos lemma to strict tower maps that no cited statement provides; it now cites the new statement-only node lem-sf-integral-direct-image-shift-comparison.",
+  "blueprint": "fix-cor-verdier-exchange, Step 2 second arrow (substitution in actual internal Hom and ordinary direct image), and Step 3 (source shifts and coefficient square).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-hom-complex-shift-left",
+    "why": "Generic signed Hom-complex chain isomorphism; the duality unit does not replace this ringed-site calculation."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic quasi-isomorphism invariance of Hom into K-injectives, needed to descend the signed representative identity."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic natural integer-shift comparison for right derived additive functors, applied to finite ordinary direct image."
+   },
+   {
+    "node": "lem-sfb-adjunction-transpose-square",
+    "why": "Generic adjunction square equivalence, applied to coefficient-changed evaluation; it is not a coefficient-change isomorphism theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-hom-complex-shift-left",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-adjunction-transpose-square"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-e2b9e7e7d",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-e2b9e7e7d (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes, statement and stmt_deps byte-identical to Q149's base. I also read every cited statement, the unit, the parent fix-cor-verdier-exchange, and the main-20261015 proof (Steps 2-3); the source place is accurate and no SGA is used. The statement is true. I tested it on c=id, M=0 and r=0,1, and h and γ are not assumed invertible. Step 1 (bifunctoriality) is correct. Step 2: I recomputed the (-1)^{rd} reindexing. It is a chain map (both sides equal (-1)^{rd+r}d_Iφ-(-1)^{rd+d}φd_L) and it commutes with postcomposition by b. It descends to every derived c through rhom-well-defined and localization (2)-(3), over both the finite and the completed sheaf. Step 3 is correct at the finite level (right-derived shift lemma) and at the E and Q̄ stages (the equation is linear in c and has a common stage). Step 4: counit naturality plus tensor-comparison naturality give e_V(Fa⊗1)=F(c)e_U, and the transpose-square lemma with s=h_V, t=h_U, k=Fc gives h_V Fa=H_B(1,Fc)h_U. Step 5 is γ's naturality, and I re-derived each line of Step 6. FIX (C4/E5), step 3, integral level: the Roos lemma was applied to 'actual strict tower maps' that no cited statement provides. Integral Rf_* is defined as a derived limit of a derived-category tower, and its levelwise shift comparisons are only derived isomorphisms. I added the statement-only unsplit node lem-sf-integral-direct-image-shift-comparison: a natural shift isomorphism θ for the integral Rf_* on the ambient D(X,O_E), with θ_0=id. It is not a duplicate of the integral basic-operation, realization-shift or étale D^+ shift nodes, and it creates no cycle. Step 3 now cites it, and lem-pe-roos-cone-calculus is removed from uses, proof_deps and tool_uses. Accepted tool uses: hom-complex-shift-left, rhom-well-defined, right-derived-functor-triangulated, adjunction-transpose-square. Maintainer notes: Q79 lem-sf-derived-hom-substitution-coherence is the stronger-hypothesis twin of this item and should be derived from or merged into it. def-weil-derived-direct-image gives integral Rf_* as a property-type derived limit, not a functor, and should name its functorial model.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdmissibleHomSubstitution",
+  "declaration": "WeilConjectures.AdmissibleHomSubstitution.admissible_hom_substitution",
+  "declarations": [
+   "WeilConjectures.AdmissibleHomSubstitution.imageHom",
+   "WeilConjectures.AdmissibleHomSubstitution.substitution",
+   "WeilConjectures.AdmissibleHomSubstitution.signedImageShift",
+   "WeilConjectures.AdmissibleHomSubstitution.finiteShift",
+   "WeilConjectures.AdmissibleHomSubstitution.integralShift",
+   "WeilConjectures.AdmissibleHomSubstitution.rationalPairPermitted",
+   "WeilConjectures.AdmissibleHomSubstitution.rationalHom",
+   "WeilConjectures.AdmissibleHomSubstitution.commonPairPermitted",
+   "WeilConjectures.AdmissibleHomSubstitution.commonHom",
+   "WeilConjectures.AdmissibleHomSubstitution.integralHom",
+   "WeilConjectures.AdmissibleHomSubstitution.integralConstructibleShift",
+   "WeilConjectures.AdmissibleHomSubstitution.rationalImageComparison_existsUnique",
+   "WeilConjectures.AdmissibleHomSubstitution.rationalImageComparison",
+   "WeilConjectures.AdmissibleHomSubstitution.ImageShifts",
+   "WeilConjectures.AdmissibleHomSubstitution.RationalShiftNormalization",
+   "WeilConjectures.AdmissibleHomSubstitution.rationalShifts_existsUnique",
+   "WeilConjectures.AdmissibleHomSubstitution.rationalShifts",
+   "WeilConjectures.AdmissibleHomSubstitution.includedHomPair",
+   "WeilConjectures.AdmissibleHomSubstitution.includedHomBound",
+   "WeilConjectures.AdmissibleHomSubstitution.inclusionHom",
+   "WeilConjectures.AdmissibleHomSubstitution.commonImageComparison_existsUnique",
+   "WeilConjectures.AdmissibleHomSubstitution.commonImageComparison",
+   "WeilConjectures.AdmissibleHomSubstitution.CommonShiftNormalization",
+   "WeilConjectures.AdmissibleHomSubstitution.ImageShiftNaturality",
+   "WeilConjectures.AdmissibleHomSubstitution.commonShifts_existsUnique",
+   "WeilConjectures.AdmissibleHomSubstitution.commonShifts",
+   "WeilConjectures.AdmissibleHomSubstitution.Realization",
+   "WeilConjectures.AdmissibleHomSubstitution.category",
+   "WeilConjectures.AdmissibleHomSubstitution.categoryCategory",
+   "WeilConjectures.AdmissibleHomSubstitution.domain",
+   "WeilConjectures.AdmissibleHomSubstitution.internalHom",
+   "WeilConjectures.AdmissibleHomSubstitution.directImage",
+   "WeilConjectures.AdmissibleHomSubstitution.pullback",
+   "WeilConjectures.AdmissibleHomSubstitution.imageAdjunction",
+   "WeilConjectures.AdmissibleHomSubstitution.tensor",
+   "WeilConjectures.AdmissibleHomSubstitution.transpose",
+   "WeilConjectures.AdmissibleHomSubstitution.evaluation",
+   "WeilConjectures.AdmissibleHomSubstitution.categoryShift",
+   "WeilConjectures.AdmissibleHomSubstitution.sourceShift",
+   "WeilConjectures.AdmissibleHomSubstitution.admissible_hom_substitution",
+   "WeilConjectures.AdmissibleHomSubstitution.homComparison",
+   "WeilConjectures.AdmissibleHomSubstitution.imageComparison",
+   "WeilConjectures.AdmissibleHomSubstitution.sigma",
+   "WeilConjectures.AdmissibleHomSubstitution.coefficient_square"
+  ],
+  "file": "lean/Sheaf/Paper/AdmissibleHomSubstitution.lean",
+  "statement": "theorem admissible_hom_substitution {n : ℕ} {hn : 1 ≤ n} (S : SixFunctorOperationDatum D C E n hn) {X Y : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (a : Realization) (M U V : category D C E X a) (hM : domain D C E X a M) (hU : domain D C E X a U) (hV : domain D C E X a V) (c : U ≅ V) : (substitution (internalHom D C E X a) (directImage D C E S f a) c).hom.app (op M) = (directImage D C E S f a).map ((internalHom D C E X a).map (Prod.mkHom (𝟙 (op M)) c.hom)) ∧ (substitution (internalHom D C E X a) (directImage D C E S f a) c).inv.app (op M) = (directImage D C E S f a).map ((internalHom D C E X a).map (Prod.mkHom (𝟙 (op M)) c.inv)) ∧ (∀ (N : category D C E X a), domain D C E X a N → ∀ g : N ⟶ M, (imageHom (internalHom D C E X a) (directImage D C E S f a) U).map g.op ≫ (substitution (internalHom D C E X a) (directImage D C E S f a) c).hom.app (op N) = (substitution (internalHom D C E X a) (directImage D C E S f a) c).hom.app (op M) ≫ (imageHom (internalHom D C E X a) (directImage D C E S f a) V).map g.op) ∧ ∀ r : ℤ, (substitution (internalHom D C E X a) (directImage D C E S f a) c).hom.app (op (M⟦r⟧)) ≫ (sourceShift D C E S f a M V r).hom = (sourceShift D C E S f a M U r).hom ≫ ((substitution (internalHom D C E X a) (directImage D C E S f a) c).hom.app (op M))⟦-r⟧'",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main declaration states the component, inverse, contravariant naturality and signed-shift clauses. coefficient_square states the evaluation-transpose / pullback-mate coefficient clause. The helper declarations assemble only the recorded actual operations, including normalized field-stage shifts, without a SixFunctorDatum hypothesis. Stipulated coefficient functors and their tensor/pullback comparisons are explicit parameters; neither resulting comparison is assumed invertible."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e54ade961",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Read item, 9 stmt_dep records (identical to side-live), the 756-line module and the dep sources (SixFunctorOperationDatum[Stages], DerivedPullbackTensorHom, DerivedAutomorphismHomEvaluation, RingedInternalHomShiftOfUniverses, IntegralConstructibleInternalHom). Statement unchanged from base; only lean and stmt_deps changed. Clause match: ctf input domains (finite, integral, field=⊤); recorded Hom and direct image at all four realizations; component, inverse and naturality conjuncts; shift equation j_c(M[r])≫s_V = s_U≫j_c(M)⟦-r⟧' for all r. Finite and integral shifts use RingedHomUniverses.sourceShift (LeftFormula sign (s*k).negOnePow = (−1)^{rd}), integral transported via S.higher.integralDirectImage; rational shift fixed by ∃! with identity-component comparison (satisfiable via rationalModelNormalization); closure shift fixed by ∃! of normalization plus naturality, as in PASSed Q02 00a55c82. Coefficient square: h = transpose(t≫C_X ev), γ = mateEquiv of α (orientation checked), σ as in the node, hc = v∘C_Xc = c'∘u, no invertibility assumed; quantified over all C_X, C_Y, t, α, which is stronger than the node but true (transpose target naturality holds for the pinned pod closed structures). Mechanical finding: pod*Closed and sourceShift are .choose of ∃! theorems, so genuine; cor-coef-integral-internal-hom is genuine because the total Hom functors lift along rationalPairPermitted, which is that theorem's first conjunct (typing needs the conclusion, unlike Q02 residue-tor). No cycle. No H4 duplicate. Only theorems sorry; 45 blueprint tags; statement verbatim once; 44 declarations present; imports exist. Nothing compiled, no file changed. Advisories: stage 3 should prove the two pair-permitted lemmas from integral_constructible_internalHom; unused universe names."
+ }
+}

@@ -1,0 +1,241 @@
+{
+ "id": "lem-pur-flat-roos-functor-descent",
+ "kind": "statement",
+ "title": "Roos realization descends naturally through flat K-flat representatives",
+ "statement": "Let $r\\ge1$ be finite and let $(\\mathcal C_i,R_i)$ for $1\\le i\\le r$ and $(\\mathcal C,R)$ be ringed sites small relative to their module universes [def-weil-pbc-sites-and-cohomology, def-weil-sheaf-of-modules-category]. Write $D(R_i)$ and $D(R)$ for their ordinary unbounded derived categories and $Q_i,Q$ for cochain localization [def-weil-abstract-derived-category]. Let $\\mathcal P_i$ be the full category of K-flat complexes of $R_i$-modules with flat terms, with cochain maps [def-pc-cochain-complex-modules, def-pc-kflat-complex, def-pc-flat-sheaf-modules], and put $q=\\prod_i Q_i|_{\\mathcal P_i}$. Suppose countable products of $R$-module sheaves are exact. Let\n$$Z:\\prod_i\\mathcal P_i\\longrightarrow\\operatorname{Ch}(\\operatorname{Tow}(\\operatorname{Mod}(R)))$$\nbe a functor to complexes of strict inverse towers indexed by $n\\ge1$ [def-weil-inverse-system, lem-weil-tower-category-levelwise-abelian], carrying tuples of quasi-isomorphisms to levelwise quasi-isomorphisms. If $X$ is a strict tower complex, write\n$$\\mathsf C(X)=\\operatorname{Cone}(1-s:\\prod_nX_n\\to\\prod_nX_n)[-1],\\qquad s((x_n))=(t_nx_{n+1}),$$\nand use the natural projection-compatible comparison $\\rho_X:\\mathsf C(X)\\xrightarrow{\\sim}R\\lim X$ with its K-injective normalization [lem-weil-strict-roos-comparison, def-pur-kinjective-complex].\n\nThere exist functors $\\overline Z:\\prod_iD(R_i)\\to D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$ and $\\widehat Z:\\prod_iD(R_i)\\to D(R)$ with natural representative identifications\n$$\\overline Zq\\cong Q_{\\rm Tow}Z,\\qquad \\widehat Zq\\cong Q\\mathsf C Z,$$\nand a natural isomorphism $r_Z:\\widehat Z\\xrightarrow{\\sim}R\\lim\\,\\overline Z$. Its representative component is $\\rho_{Z(P)}$: for a K-injective tower resolution $a:Z(P)\\to I$ with injective terms it is $[\\mathsf C(a)]$ followed by the inverse of $\\lim I\\to\\mathsf C(I)$ with zero shifted coordinate. In particular it preserves the actual total-limit projections. It is natural for all morphisms of the derived inputs, including roofs of good representatives. The functors with their representative identifications, and $r_Z$ with the displayed representative components, are unique up to unique compatible natural isomorphism; replacing choices of good resolutions preserves these comparisons. No uniqueness from equality of level projections alone is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent extraction of original steps 2-3 of lem-pur-completed-primitive-counit-comparison, below the natural coefficient-twist comparison of def-weil-frobenius-coefficient-twists. Tag 0941 (lemma-derived-limit-is-ok), proof, supplies the K-injective inverse-limit comparison; descent on good representatives and its naturality/uniqueness are the extracted agent argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-strict-roos-comparison",
+  "def-pur-kinjective-complex",
+  "def-weil-strict-roos-model",
+  "def-weil-pbc-tensor-descent-representative-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The proved functorial_resolution helper in Sheaf.Algebra.Homology.RingedKFlatSingleTensorComparison supplies functorial flat-term K-flat resolutions with quasi-isomorphic counit. Lift this functor to the full category of TensorFlatRepresentative objects. The inclusion is fully faithful and the quasi-isomorphism class is its inverse image; LocalizerMorphism.isLocalizedEquivalence_of_functorial_left_resolutions and IsLocalizedEquivalence.isLocalization show that its composite with DerivedCategory.Q is a localization. This replaces the cylinder and homotopy-quotient argument.",
+   "uses": [
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Functor.IsLocalization.pi to the finite product of these localizations. HomologicalComplex.quasiIso_iff_evaluation turns the assumed levelwise quasi-isomorphisms of Z into quasi-isomorphisms of tower complexes. Localization.lift and Localization.fac construct Zbar and alpha.",
+   "uses": [
+    "lem-sfb-product-localization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport Grothendieck abelianness to the essentially small ringed site and to its tower category using the proved moduleSheaves_grothendieck and tower_grothendieck helpers in RingedStrictTowerHomotopyLimitIndependentCoefficients. The generic proved roos_map_quasiIso, roos_inclusion_quasiIso, and roos_universal helpers of StrictRoosDerivation give a localization lift CF of roosF and its right-derived universal property in the independent coefficient universe. rightDerivedUnique compares CF with the given RF. The unit equation follows from rightDerivedNatTrans_app. Define theta by composing the lift factorization and this comparison; put e(X,n)=theta(X) inverse followed by Q(roosEval X n).",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-strict-roos-derivation",
+    "def-weil-strict-roos-model",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set Zhat=Zbar followed by RF and rZ to the identity isomorphism. Define beta from alpha whiskered by RF followed by theta inverse whiskered by Z. The component equation follows by cancellation. For any quasi-isomorphic K-injective resolution a:Z(P) to I, take eps=asIso(Q(roosι I)) and d=asIso(eta I) followed by the inverse of asIso(RF(Q(a))). Naturality of theta and its unit equation give the required normalization. Evaluation quasi-isomorphisms give ev; roosι_eval, roosEval_natural, and cancellation by ev prove the actual limit-projection equation.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "def-weil-strict-roos-model",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fully faithful restriction along q lifts alpha followed by alpha-prime inverse, and beta followed by beta-prime inverse, to unique natural isomorphisms u and v. The representative component equations and cancellation by RF(alpha-prime) show compatibility with rZ after q. Localization.natTrans_ext extends this equality to all derived inputs. The two individual uniqueness statements prove uniqueness of the pair, including its compatibility. Since these are natural transformations on the product derived category, the result covers roofs and changes of resolutions.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-product-localization",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-derivation",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 0941. Z9 assembly of existing proved functorial flat resolution and generic Roos derivation helpers with Mathlib product localization and uniqueness of right derived functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "liftNatIso|KFlat|roos",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Category/Quiv.lean, Mathlib/CategoryTheory/Category/Quiv.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean, Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.liftNatIso presupposes a localization and chosen lifts; it does not establish descent from the flat-term K-flat cochain subcategories or the normalized strict-tower Roos/total-limit comparison. ExactFunctor handles termwise exact functors, not arbitrary Z on good representatives."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.liftNatIso presupposes a localization and chosen lifts; it does not establish descent from the flat-term K-flat cochain subcategories or the normalized strict-tower Roos/total-limit comparison. ExactFunctor handles termwise exact functors, not arbitrary Z on good representatives."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit Roos comparison descends along K-flat resolutions naturally in several derived inputs",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.liftNatIso presupposes a localization and chosen lifts; it does not establish descent from the flat-term K-flat cochain subcategories or the normalized strict-tower Roos/total-limit comparison. ExactFunctor handles termwise exact functors, not arbitrary Z on good representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing flat term K-flat representative categories and strict tower valued functors gives resolution independent natural Roos derived inverse limit comparison",
+   "results": "8 hits: CategoryTheory.lan_flat_of_flat, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.RepresentablyFlat",
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.liftNatIso presupposes a localization and chosen lifts; it does not establish descent from the flat-term K-flat cochain subcategories or the normalized strict-tower Roos/total-limit comparison. ExactFunctor handles termwise exact functors, not arbitrary Z on good representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor on flat K-flat sheaf complexes preserving quasi isomorphisms descends to unbounded derived categories together with natural product cone inverse limit comparison",
+   "results": "8 hits: CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.liftNatIso presupposes a localization and chosen lifts; it does not establish descent from the flat-term K-flat cochain subcategories or the normalized strict-tower Roos/total-limit comparison. ExactFunctor handles termwise exact functors, not arbitrary Z on good representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-isomorphism invariant functor on flat K-flat sheaf complexes descends to the unbounded derived category with a natural Roos inverse limit comparison",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor localization assumes an additive functor on abelian categories; generic localization lifts require the good-cochain localization hypothesis and give no normalized Roos comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor localization assumes an additive functor on abelian categories; generic localization lifts require the good-cochain localization hypothesis and give no normalized Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Rr]oos|liftNatIso",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/HomEquiv.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor localization assumes an additive functor on abelian categories; generic localization lifts require the good-cochain localization hypothesis and give no normalized Roos comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the full subcategory of K-flat complexes with flat terms and cochain maps is equivalent to the derived category",
+   "results": "8 hits: DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, HasDerivedCategory.standard, DerivedCategory.Q, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.Qh, HasDerivedCategory, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor localization assumes an additive functor on abelian categories; generic localization lifts require the good-cochain localization hypothesis and give no normalized Roos comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi isomorphism invariant functor on flat K flat complexes descends to derived category and natural transformations extend uniquely",
+   "results": "8 hits: HomologicalComplexUpToQuasiIso.Qh, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso, DerivedCategory.Qh, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.isIso_Qh_map_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor localization assumes an additive functor on abelian categories; generic localization lifts require the good-cochain localization hypothesis and give no normalized Roos comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-primitive-counit-comparison",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "place": "Agent extraction of original steps 2-3 of lem-pur-completed-primitive-counit-comparison, below the natural coefficient-twist comparison of def-weil-frobenius-coefficient-twists. Tag 0941 (lemma-derived-limit-is-ok), proof, supplies the K-injective inverse-limit comparison; descent on good representatives and its naturality/uniqueness are the extracted agent argument."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-flat-roos-functor-descent",
+  "worker": "stage1",
+  "summary": "Retained the statement and all statement dependencies. Explicitly passed arbitrary quasi-isomorphism-inverting cochain functors through homotopy using a good cylinder, then used existing localization, finite product localization, and normalized strict Roos comparison. No new nodes or Lean changes.",
+  "blueprint": "def-weil-frobenius-coefficient-twists, natural Weil isomorphism, expanded DAG clause 5: natural derived tensor/pullback comparison through lem-pur-derived-pullback-tensor-iso, lem-pur-completed-operation-tower-substitution and lem-pur-completed-primitive-counit-comparison. This item realizes the extracted original steps 2-3: descent, normalized Roos realization, naturality on roofs and resolution independence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Its first clause supplies localization on flat-term K-flat homotopy representatives for an arbitrary small ringed site, a generic tool not supplied by the purity conventions unit."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The generic exact-product strict-tower comparison supplies descent, K-injective normalization and actual projections; it does not replace any purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-55c32bcb1",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-55c32bcb1 (reviewer sub-agent of L); spot-checked: I read the 6-step split in full (0 new nodes; statement and stmt_deps unchanged) against every cited statement. The item is not dropped, cites no SGA, and has no repair note of its own (the re-split note belongs to the parent counit-comparison, which Q21 already merged). Step 1: I recomputed the cylinder B(P). d²=0; e0, e1 and p are chain maps; the kernel contraction k(a,c)=(0,a) gives dk+kd=1; H is a chain map exactly when f−g=dh+hd. Terms are flat, and B is K-flat because the contraction survives the signed total tensor. A functor that inverts quasi-isomorphisms identifies homotopic maps without needing additivity. The step is long but written out completely, so I accept it as elementary. Step 2: the equivalence clause of the statement of lem-weil-pbc-site-derived-tensor-descent (not its proof), together with Step 1 and the universal property, makes q_i a cochain localization; the site and commutative-ring hypotheses match. Step 3: lem-sfb-product-localization applies to the finite set {1..r} (identities are in W, no r≤4 limit); levelwise kernels and cokernels make cohomology levelwise, so Q_Tow Z inverts tuples and part (1) gives Z̄ and α. Steps 4-5: the descent, ρ, K-injective normalization, projection and resolution-independence clauses of the statement of lem-weil-strict-roos-comparison give Ẑ=C_D Z̄ and r_Z=ρZ̄, with the component ρ_{Z(P)} by naturality along α; I checked the orientation and the roof squares. Step 6: parts (2) and (3) of lem-weil-pbc-localization-universal-property give uniqueness up to unique compatible isomorphism. Sources checked: Stacks sites-cohomology lemma-K-flat-resolution (line 3207) and lemma-derived-limit-is-ok (line 5067). Edge cases r=1, Z=0, constant towers and unbounded complexes are fine. Accepted tool_uses: strict-roos-comparison and site-derived-tensor-descent, generic tools from other units (C8). No duplicates found among the K-flat/Roos nodes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatRoosFunctorDescent",
+  "declaration": "CategoryTheory.flatRoosFunctorDescent",
+  "file": "lean/Sheaf/CategoryTheory/FlatRoosFunctorDescent.lean",
+  "statement": "theorem flatRoosFunctorDescent (k : ℕ) (_hk : 1 ≤ k) (C : Fin k → Type u) [∀ i, Category.{v} (C i)] [∀ i, EssentiallySmall.{r} (C i)] (J : ∀ i, GrothendieckTopology (C i)) (R : ∀ i, Sheaf (J i) CommRingCat.{r}) [∀ i, HasSheafify (J i) AddCommGrpCat.{r}] [∀ i, (J i).WEqualsLocallyBijective AddCommGrpCat.{r}] [∀ i, HasDerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose (J i) (forget₂ CommRingCat.{r} RingCat.{r})).obj (R i)))] {D : Type uO} [Category.{vO} D] [EssentiallySmall.{rO} D] (K : GrothendieckTopology D) (S : Sheaf K CommRingCat.{rO}) [HasSheafify K AddCommGrpCat.{rO}] [K.WEqualsLocallyBijective AddCommGrpCat.{rO}] [HasDerivedCategory.{wO} (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))] [HasDerivedCategory.{wO} (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))] [HasCountableProducts (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))] [HasLimitsOfShape ℕᵒᵖ (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))] (Z : (∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i)))) ⥤ CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ℤ) (_hZ : ∀ {P P' : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i)))} (f : P ⟶ P'), (∀ i, QuasiIso ((f i).hom)) → ∀ n : ℕ, QuasiIso ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (Z.map f)).app (op n))) (RF : DerivedCategory.{wO} (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ⥤ DerivedCategory.{wO} (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))) (eta : roosLimitFunctor (A := ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ⋙ DerivedCategory.Q.{wO} ⟶ DerivedCategory.Q.{wO} (C := ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ⋙ RF) (_hRF : RF.IsRightDerivedFunctor eta (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) (.up ℤ))) : ∃ (theta : roosF (A := ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ⋙ DerivedCategory.Q.{wO} ≅ DerivedCategory.Q.{wO} (C := ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ⋙ RF) (e : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ℤ) (n : ℕ), RF.obj (DerivedCategory.Q.{wO}.obj X) ⟶ DerivedCategory.Q.{wO}.obj (X.asFunctor.obj (op n))) (Zbar : (∀ i, DerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose (J i) (forget₂ CommRingCat.{r} RingCat.{r})).obj (R i)))) ⥤ DerivedCategory.{wO} (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))) (Zhat : (∀ i, DerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose (J i) (forget₂ CommRingCat.{r} RingCat.{r})).obj (R i)))) ⥤ DerivedCategory.{wO} (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))) (alpha : Functor.pi (fun i ↦ ((ObjectProperty.ι (TensorFlatRepresentative (J := J i) (R := R i))) ⋙ DerivedCategory.Q.{w})) ⋙ Zbar ≅ Z ⋙ DerivedCategory.Q.{wO}) (beta : Functor.pi (fun i ↦ ((ObjectProperty.ι (TensorFlatRepresentative (J := J i) (R := R i))) ⋙ DerivedCategory.Q.{w})) ⋙ Zhat ≅ Z ⋙ roosF ⋙ DerivedCategory.Q.{wO}) (rZ : Zhat ≅ Zbar ⋙ RF), (∀ (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ℤ) [I.IsKInjective] (_hinj : ∀ p : ℤ, Injective (I.X p)), QuasiIso (roosι I) ∧ DerivedCategory.Q.{wO}.map (roosι I) ≫ theta.hom.app I = eta.app I) ∧ (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ℤ) (n : ℕ), theta.hom.app X ≫ e X n = DerivedCategory.Q.{wO}.map (roosEval X n)) ∧ (∀ P : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i))), rZ.hom.app (fun i ↦ DerivedCategory.Q.{w}.obj (P i).obj) ≫ RF.map (alpha.hom.app P) = beta.hom.app P ≫ theta.hom.app (Z.obj P)) ∧ (∀ (P : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i)))) (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S)) ℤ) (a : Z.obj P ⟶ I) [QuasiIso a] [I.IsKInjective] (_hinj : ∀ p : ℤ, Injective (I.X p)), ∃ (eps : DerivedCategory.Q.{wO}.obj (limit I.asFunctor) ≅ DerivedCategory.Q.{wO}.obj (roosF.obj I)) (d : DerivedCategory.Q.{wO}.obj (limit I.asFunctor) ≅ RF.obj (DerivedCategory.Q.{wO}.obj (Z.obj P))), eps.hom = DerivedCategory.Q.{wO}.map (roosι I) ∧ d.hom ≫ RF.map (DerivedCategory.Q.{wO}.map a) = eta.app I ∧ rZ.hom.app (fun i ↦ DerivedCategory.Q.{w}.obj (P i).obj) ≫ RF.map (alpha.hom.app P) = beta.hom.app P ≫ DerivedCategory.Q.{wO}.map (roosF.map a) ≫ eps.inv ≫ d.hom ∧ (∀ n : ℕ, ∃ ev : DerivedCategory.Q.{wO}.obj ((Z.obj P).asFunctor.obj (op n)) ≅ DerivedCategory.Q.{wO}.obj (I.asFunctor.obj (op n)), ev.hom = DerivedCategory.Q.{wO}.map ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map a).app (op n)) ∧ d.hom ≫ e (Z.obj P) n = DerivedCategory.Q.{wO}.map (limit.π I.asFunctor (op n)) ≫ ev.inv)) ∧ (∀ P : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i))), ∀ n : ℕ, rZ.hom.app (fun i ↦ DerivedCategory.Q.{w}.obj (P i).obj) ≫ RF.map (alpha.hom.app P) ≫ e (Z.obj P) n = beta.hom.app P ≫ DerivedCategory.Q.{wO}.map (roosEval (Z.obj P) n)) ∧ (∀ (Zbar' : (∀ i, DerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose (J i) (forget₂ CommRingCat.{r} RingCat.{r})).obj (R i)))) ⥤ DerivedCategory.{wO} (ℕᵒᵖ ⥤ ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))) (Zhat' : (∀ i, DerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose (J i) (forget₂ CommRingCat.{r} RingCat.{r})).obj (R i)))) ⥤ DerivedCategory.{wO} (ringedSiteModules.{rO} ((sheafCompose K (forget₂ CommRingCat.{rO} RingCat.{rO})).obj S))) (alpha' : Functor.pi (fun i ↦ ((ObjectProperty.ι (TensorFlatRepresentative (J := J i) (R := R i))) ⋙ DerivedCategory.Q.{w})) ⋙ Zbar' ≅ Z ⋙ DerivedCategory.Q.{wO}) (beta' : Functor.pi (fun i ↦ ((ObjectProperty.ι (TensorFlatRepresentative (J := J i) (R := R i))) ⋙ DerivedCategory.Q.{w})) ⋙ Zhat' ≅ Z ⋙ roosF ⋙ DerivedCategory.Q.{wO}) (rZ' : Zhat' ≅ Zbar' ⋙ RF) (_hcomp : ∀ P : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i))), rZ'.hom.app (fun i ↦ DerivedCategory.Q.{w}.obj (P i).obj) ≫ RF.map (alpha'.hom.app P) = beta'.hom.app P ≫ theta.hom.app (Z.obj P)), ∃! uv : (Zbar ≅ Zbar') × (Zhat ≅ Zhat'), (∀ P : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i))), uv.1.hom.app (fun i ↦ DerivedCategory.Q.{w}.obj (P i).obj) ≫ alpha'.hom.app P = alpha.hom.app P) ∧ (∀ P : ∀ i, (ObjectProperty.FullSubcategory (TensorFlatRepresentative (J := J i) (R := R i))), uv.2.hom.app (fun i ↦ DerivedCategory.Q.{w}.obj (P i).obj) ≫ beta'.hom.app P = beta.hom.app P) ∧ (∀ x : ∀ i, DerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose (J i) (forget₂ CommRingCat.{r} RingCat.{r})).obj (R i))), rZ.hom.app x ≫ RF.map (uv.1.hom.app x) = uv.2.hom.app x ≫ rZ'.hom.app x))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "H2 repair: uses CategoryTheory.TensorFlatRepresentative, the exact K-flat and degreewise-flat conjunction now owned by the landed definition node def-weil-pbc-tensor-descent-representative-comparison. Drops lem-sf-cochain-tensor-model-rigidity from stmt_deps and its module import. All representative categories and restricted localizations are unchanged definitionally; independent universes, normalization, all resolution formulas, projections and uniqueness are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25fce5364",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery repairing H2 return of 86506601d429. Diff: only the import and 12 predicate uses changed (cochainTensorFlatRepresentatives → TensorFlatRepresentative); stmt_dep lem-sf-cochain-tensor-model-rigidity → def-weil-pbc-tensor-descent-representative-comparison. That node is a live definition node (existing:true, reviewed_lean pass) whose lean.declarations include CategoryTheory.TensorFlatRepresentative = IsKFlatIndependentCoefficients ∧ ∀ i, IsFlatOnSite (plain def, same universes and smallness); no cycle; item not landed live. Node differs from base only in lean/stmt_deps; statement verbatim; single sorry; docstrings with source, blueprint and 6 steps. All clauses re-confirmed (k≥1 Fin k, independent universes, exact countable products, non-additive Z, RF right-derived of roosLimitFunctor, theta pinned by K-injective unit normalization, full representative component, resolution formula orientation, projections, ∃! uniqueness). Advisory: redundant imports; heavy import, worker compile 53.9 s of 60 s. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261023T132600-L-2303370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

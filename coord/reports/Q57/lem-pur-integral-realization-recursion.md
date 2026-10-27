@@ -1,254 +1,115 @@
-## Worker report
+# Q57 stage-1 re-split: lem-pur-integral-realization-recursion
 
-Retained the earlier attempt's module `Sheaf.SixFunctors.IntegralRealizationRecursion`.
-It states `WeilConjectures.IntegralSystemRealization.Recursion.integralRealizationRecursion`
-with one postponed proof, and defines its recursion predicates and actual comparison maps.
-All helper definitions have real data. No node statement or dependency list is changed.
-This is stage 2: the theorem proof remains `sorry`.
+## Files written
 
-Clause correspondence:
+- dag/nodes/sec-smooth-purity/lem-pur-integral-realization-recursion.json: statement and stmt_deps unchanged; 2,464-character assembly proof.
+- dag/nodes/sec-smooth-purity/lem-pur-unary-counit-transpose.json: statement, unsplit; no Mathlib match. Unary coefficient transpose, actual-unit normalization, inverse-factor and naturality identities.
+- dag/nodes/sec-smooth-purity/lem-pur-binary-counit-transpose.json: statement, unsplit; no Mathlib match. Independent-input bifunctor coefficient transpose, inverse-factor and naturality identities.
+- citations.json: verbatim statement excerpts for every citation in every assembly step.
 
-- The algebraic closure and its characteristic are `D : FiniteFieldDatum.{u}`;
-  `l : ℕ`, `[Fact l.Prime]` and `_hl : l ≠ D.p` give the allowed prime.
-  `E`, `[Field E]`, `[Algebra ℚ_[l] E]`, and `[FiniteDimensional ℚ_[l] E]`
-  give the coefficient extension. The existing calculus fixes its valuation ring,
-  quotient rings and positive levels; there is no additional choice of coefficients.
-- `System l E W`, `Integral l E W`, `calculus l E W`, and
-  `coefficientSequenceLimit l E W` are the dependency's actual categories,
-  reduction/limit and adjunction. Every occurrence of `unit` or `counit` is an
-  actual component of that adjunction, rather than a newly assumed isomorphism.
-- Schemes are objects over `Spec (CommRingCat.of D.k)`. `Expression.geometric`
-  imposes finite type at every vertex and separated finite-type pullback maps;
-  the push and shriek constructors carry properness and quasi-compact openness.
-- `Expression.domain` is the existing full domain of constructible integral
-  inputs with normalized reduced systems, retained compatible origins and common
-  finite cohomological/Tor intervals at positive levels. It requires `Good` at
-  every intermediate vertex. `ComparisonFamily` uses precisely that full domain.
-- `OperationLaws.unit` and `.counit` assert invertibility of the actual unit on
-  the prescribed integral domain and actual counit on `Good` systems.
-- `pullA`, `properA`, `openA` and `tensorA` implement the displayed `a` maps:
-  first the inverse of the limit of the operation on the actual counit,
-  then the specified single-operation `d`. `GeneratorReduction.inverseOrZero`
-  gives a real ambient map; `OperationLaws` asserts its factors are isomorphisms
-  where relevant. The arbitrary ambient fallback is never the statement's domain.
-- `pullA` and `tensorA` use the published `GeneratorReduction.pullD` and
-  `GeneratorReduction.tensorD`. `properD` transports the defining proper tower
-  through `r.realizationModel.push`, ending with proper image of the inverse
-  actual unit. `openD` is precisely the recorded open formula using
-  `r.realizationModel.openReduction` and the inverse actual reconstruction unit.
-- The variable branch of `Equations` is exactly the inverse-unit normalization.
-  Unary branches state `c_AV = a_A ≫ A_int(c_V)` in Lean's diagrammatic order.
-  The tensor branch states `c_tensor = a_tensor ≫ tensor.map (c_V,c_T)`.
-  The recursively included child equations cover every vertex.
-- `BasicTree` selects the node's variable/P/S/J/tensor language from the
-  dependency's slightly larger language. Its compact-support abbreviation can
-  be expanded as S J; it does not introduce another operation.
-- Finite `I : Type u` supplies arbitrarily many independent occurrence slots;
-  repeated underlying objects can have distinct indices. Naturality is encoded
-  by the natural isomorphisms in `ComparisonFamily` and `r.comparison`, on the
-  full input categories (thus all input morphisms).
-- The theorem's first conjunction asserts `OperationLaws`; its second asserts
-  the equations for the specified `r.comparison`; its third states uniqueness
-  among natural isomorphism families satisfying the same equations. No shifts
-  are mentioned or imposed.
+## Attachments
 
-Dependency declarations read and used:
+None. Searching the blueprint id and realization-recursion notions in lean/WeilConjectures found no full attachment. lean/Sheaf/SixFunctors/IntegralRealizationRecursion.lean:233 states the item but its proof ends in sorry at line 254; the full declaration is WeilConjectures.IntegralSystemRealization.Recursion.integralRealizationRecursion. It is not a completed proof.
 
-- `Sheaf.SixFunctors.IntegralCompactificationSystemRealization`:
-  `WeilConjectures.IntegralSystemRealization.Realizations`, its `comparison`,
-  `realizationModel`, input and operation normalization fields, and
-  `integralCompactificationSystemRealization`. Its imports supply the existing
-  `Expression`, `Good`, input domains, actual operation functors and ringed models.
-- `Sheaf.SixFunctors.GeneratorReductionStatement`:
-  `WeilConjectures.GeneratorReduction.inverseOrZero`, `pullD`, `tensorD`,
-  and the full signature/docstring of `generatorReductionCoherence`.
-  Its `openD` formula was checked against the helper using the same model.
-- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus`:
-  `WeilConjectures.CoefficientDerivedSystemCalculus`, its inherited actual
-  `adjunction`, and `coefficientDerivedSystemEvaluationCalculus`.
-- Proof dependency `Sheaf.Paper.NormalizedDVREffectivity` is imported privately.
+## WANTED
 
-Source read: current blueprint main-20261015,
-`sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md`, the maps-used
-coefficient-comparison sentence; all seven proof steps in the item's node and
-its three statement dependencies. The theorem docstring retains those seven
-steps, including the actual transposition and inverse-factor calculations.
+None. These are agent-formulated categorical refinements of a blueprint coefficient-transport construction, not purported verbatim literature theorems. No SGA source is used.
 
-Edge cases read against the formulas: a leaf is the actual inverse unit; zero
-inputs and an empty open use the same actual maps; tensors allow independent
-slots even with equal underlying objects; an empty index type has no closed
-expression in the selected language; positive levels use n+1, never a spurious
-n=0 quotient; universe u is explicit and autoImplicit is disabled.
+## Repair order and previous deficiencies
 
-Searches retained in `searches.jsonl` from the earlier attempt:
-LeanFinder query "Recursive canonical realization of derived coefficient-system
-expressions using the actual adjunction unit counit and single-operation
-comparisons" returned unrelated tactic coefficient-extraction declarations.
-Loogle query "CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.unit"
-returned generic equivalence and triangle-identity results. Mathlib grep
-"realization|counit" under CategoryTheory/Adjunction returned only generic
-adjunction calculus. LeanSearch for canonical composite reduction/limit
-realization returned generic adjunction composition. No exact statement matched.
-Current `rg` for `integralRealizationRecursion|realizationRecursion|lem-pur-integral-realization-recursion`
-in the upstream WeilConjectures and published side Sheaf sources returned no hits.
+The released stage-1 keep_plan repair note dated 2026-10-22 overrides the old split/review state and requires at least two comparable new statement-only nodes, preserving the statement and spreading all the original arguments. I extracted the two substantial categorical arguments, rather than duplicating the item or moving it wholesale into another node. The two new statements concern arbitrary categories, arbitrary specified comparison d and arbitrary coefficient arrows q; they contain no expression-tree theorem, no integral scheme domain, no six-functor realization, and no assertion of the item's full conclusion. Invertibility/reconstruction and existence of the coefficient-recursive family already have stronger existing nodes and are cited rather than duplicated. The short residual tree induction is assembly.
 
-Validation is not complete: the authorized scompile wrapper exits 75 before
-checking this module, reporting INFRASTRUCTURE RETRY (stale live olean):
-`Sheaf.SixFunctors.GeneratorReductionStatement.olean` is missing from the
-published live build. `scompile.py --source Sheaf.SixFunctors.GeneratorReductionStatement`
-succeeds and exposes the current source; this is an artifact-publication fault,
-not a missing mathematical interface. No source or compiler wrapper was patched.
+## Not duplicates
 
-## Second reading by Q57
+lem-pur-unary-counit-transpose vs lem-pur-adjoint-equivalence-conjugation-calculus: the latter fixes barred F=LFR and transports an adjunction F⊣G, its counit and transformations; the new statement allows an independently specified barred A and d, and calculates the transpose of A(q)r_A and its inverse-factor naturality.
+lem-pur-unary-counit-transpose vs lem-trf-counit-realization-substitution: that node is about actual scheme pullback/scalar-change model maps and chi-normalized scalar associativity; it does not give the arbitrary categorical specified-d transpose of a coefficient arrow.
+lem-pur-binary-counit-transpose vs lem-pur-expression-counit-substitution-coherence: that node assumes primitive comparison isomorphisms on normalized systems and proves expression substitution/context laws; the new statement calculates the primitive two-input adjunction transpose itself.
+lem-pur-binary-counit-transpose vs lem-sf-integral-expression-recursion: the latter is scheme-specific existence and reduction equality for finite expressions, assumes invertibility on the complete/normalized domains, and has no arbitrary-q bifunctor transpose or inverse-factor naturality formula. The existing expression node is reused for assembly, not recreated.
+lem-pur-unary-counit-transpose vs lem-sf-integral-expression-recursion: the same domain distinction applies, and the unary new statement includes transpose/inverse-factor laws for arbitrary q with no finite expression or coefficient sheaf assumptions.
+lem-pur-binary-counit-transpose vs lem-pur-normalized-tensor-constraint-transport: the latter identifies tensor constraints built on quotient/Roos models; the new statement is about arbitrary bifunctors without a monoidal structure and does not identify those geometric constraints.
 
-The resumed worker reread the retained module against the current item and its
-recorded dependencies, checking the clause mapping above, the direction of each
-composition and the existing domain/normalization fields. This is a same-worker
-reading, not a claimed independent review: the dispatcher explicitly forbids
-starting other agents, and the maintainer supplies the independent review.
-No mathematical statement changes were made in this retry. Compiler validation
-remains pending the published dependency artifact, so this report does not claim
-that the retained draft has been typechecked.
+The whole DAG was searched for transpose, counit substitution, d_A/naturality and binary formulas; blueprint_refs searches 'adjunction transpose', 'expression recursion', 'counit substitution', 'binary functor', and 'counit transport' were read. The six blueprint hits for 'adjunction transpose' concern other geometric maps, not these formulas. The nearest relevant statements above were opened. Neither new node has a Stacks tag: the source is the agent-formulated blueprint refinement, so there are no same-tag duplicate pairs. Their blueprint ancestry retains thm-pur-rational-and-qbar-purity via this item and its two inherited ancestors.
 
-## Resumed validation (2026-10-18 UTC)
+## Review by Q57
 
-Started with the retained packet and the required `deliver2.py Q57
-lem-pur-integral-realization-recursion --no-push`. It failed before checking the
-draft because the published live build lacks
-`Sheaf.SixFunctors.GeneratorReductionStatement.olean`. A direct authorized
-`scompile.py Q57 lem-pur-integral-realization-recursion` of the retained module
-confirmed the same missing-artifact diagnostic (exit 75, INFRASTRUCTURE RETRY).
-`scompile.py --source Sheaf.SixFunctors.GeneratorReductionStatement` succeeded
-(exit 0), confirming that the source is available. No mathematical interface
-repair addresses this missing published build artifact. The packet is retained
-unchanged apart from this validation record; nothing was pushed, and no tool,
-live source or published artifact was modified.
+I read AGENTS.md, worker/brief/stage-1 instructions, GOAL.md, the three blueprint levels in SETUP.md, both copies of delivery-errors B–E, the item and its released repair note, the smooth-purity chapter and compatibility unit, and main-20261015 fix-prop-coherence.proof.md. That proof's maps-used sentence concerns coefficient compatibility of evaluation and actual adjunction units/counits; the explicit recursive interface is an agent expansion, correctly labelled as such. For both new nodes I used the original seven-step argument as the immediate source and checked the equations against the actual categorical definitions. Mathlib Basic.lean:226–266 gives Hom-equivalence naturality; Basic.lean:279–299 gives triangles and unit naturality; Mates.lean:84–131 and 285–295 gives mates/counit formulas. Those are ingredients, not a one-line specialization proving the whole stated conjunction; no searched hit identifies the arbitrary specified d together with transpose, inverse comparison, and input naturality. All search records come from the actual msearch log, including the second phrasings. Completed interrupted searches were recovered from searches.jsonl before any further calls.
 
-## Fourth validation attempt (2026-10-18 UTC)
+Assembly step 1 uses the reconstruction statement's actual invertible unit/counit, without a boundedness restriction; our domain is narrower and satisfies it. The calculus statement supplies the actual reduction functor/adjunction, not just a levelwise assignment. No equality is detected by evaluation. Step 2 uses the expression-recursion statement's explicit r-recursion and reduction equation, and the generator statement's exact r_A=e R(d_A^-1), including the specified open d. All intermediate bounds, origins and completeness are those expressly required in the item. The expression node assumes the same specified primitive identifications; here d is exactly the generator identification, as required by the item and the parent construction.
 
-Started again with the saved report and the required dry run. `deliver2.py Q57
-lem-pur-integral-realization-recursion --no-push` exited 1 before elaborating the
-draft: the published build still lacks
-`Sheaf.SixFunctors.GeneratorReductionStatement.olean`. Direct `scompile.py` of
-`IntegralRealizationRecursion.lean` independently exited 75 with the same
-`INFRASTRUCTURE RETRY (stale live olean)` diagnostic. The authorized
-`scompile.py --source Sheaf.SixFunctors.GeneratorReductionStatement` again
-succeeded (exit 0). This confirms an unavailable published dependency artifact,
-not an absent source declaration or a draft elaboration error. The mathematical
-packet is retained unchanged; compilation and delivery remain unverified, and
-nothing was pushed. No launcher script or published library was modified.
+Step 3 uses the new unary and binary statements verbatim at arbitrary q_V,q_T. Every arrow was type-checked on paper: q:R I→M, b:I→LM, r:R(bar A I)→A(RI), and b_A:bar A I→LA M. In the binary statement the three adjunctions are at the two input schemes and output scheme. The inverse order is correct: inverse of L A(e) d^-1 bar A(b) is bar A(b^-1) d (L A(e))^-1. For tensor the product-category functor preserves inverse pairs; no flatness or exactness is smuggled in. Step 4 uses the existing realization statement for the specified family and the expression node's actual coefficient equality r=e R(c^-1) to identify its transpose. This improves the old argument, which reached into the parent proof to identify its normalization; the required coefficient equation is now an explicit cited statement. Finite-tree induction starts at the actual u and treats both smaller tensor children; uniqueness follows at each parent by the fixed formulas, so no hidden tree theorem is delegated. Step 5 cites the exact new naturality laws; inverse-unit naturality and pasting child squares finish the induction.
 
-## Fifth validation attempt (2026-10-18 UTC)
+Small cases: with all functors and adjunction maps identities the unary and binary transpose identities reduce to functoriality and q=b, without forcing d to be an identity. With q=1 the transpose is the actual unit, so arbitrary automorphism choices are excluded. With f or g identity the two-input naturality reduces to the correct one-slot square; both identity maps give the identity equation. Empty categories make universal assertions vacuous; no objects are chosen. Repeated inputs are allowed. For the geometric assembly zero complexes and empty open extensions give zero maps; the single-leaf tree gives u^-1; one operation on R[0] gives the specified d by the triangle identity. No n=0 or shift assertion is introduced.
 
-Started with the retained report and prescribed dry run. `deliver2.py Q57
-lem-pur-integral-realization-recursion --no-push` exited 1 before checking the
-module, reporting `INFRASTRUCTURE RETRY (stale live olean)` because the published
-live build lacks `Sheaf.SixFunctors.GeneratorReductionStatement.olean`.
-Direct authorized `scompile.py Q57 lem-pur-integral-realization-recursion` of
-`IntegralRealizationRecursion.lean` confirmed the same diagnostic and exited 75.
-`scompile.py --source Sheaf.SixFunctors.GeneratorReductionStatement` succeeded
-(exit 0). The existing source is available, but its published compiled artifact
-is not. No mathematical packet changes can repair artifact publication through
-the permitted worker workflow. Retained the module and node unchanged; neither
-compilation nor delivery is verified, and nothing was pushed. No launcher tool,
-live source or compiled library was modified.
+B–E checks: each new statement introduces all categories, functors, transformations, triangles and maps; each is statement-only with proof=[], proof_deps=[], proof_origin=null, unsplit status, and complete source/blueprint/search metadata. No hollow data, false statement, circular dependency, new coefficient-category identification or added hypothesis is used. Statement dependencies on categories are explicit; other categorical data are defined inline. No new step exceeds 2,000 characters. Existing reconstruction and expression nodes do not reach this item, as checked by dependency traversal. New nodes depend only on the category definition. The inherited reviewed and Lean metadata are retained as history; this delivery requests a fresh stage-1 review, not reuse of the old approval.
 
-## Resumed validation after provider interruption (2026-10-18 UTC)
+## Preservation of all seven original arguments
 
-Started with the retained report and prescribed dry run. `deliver2.py Q57
-lem-pur-integral-realization-recursion --no-push` completed with exit 1 before
-elaborating the module. Direct authorized `scompile.py` completed with exit 75
-and the same `INFRASTRUCTURE RETRY (stale live olean)` diagnostic: the published
-live build lacks `Sheaf.SixFunctors.GeneratorReductionStatement.olean`.
-`scompile.py --source Sheaf.SixFunctors.GeneratorReductionStatement` completed
-successfully (exit 0), confirming source availability. No delivery mutation was
-interrupted by the provider error; no push was attempted. The packet remains
-unchanged except for this validation record. No launcher tool, live source or
-published artifact was modified. Compilation and delivery remain unverified.
+The original argument is reproduced verbatim below so that the split never loses an equation or its justification. These are report notes only, not proof sketches hidden inside unsplit node statements.
 
+Allocation: original step 1 is already the statement of lem-pur-normalized-actual-reconstruction-maps (including actual level counit and completeness); original step 2's triangle/naturality argument is additionally an explicit clause of the unary new node. Original step 3's transposition and basic normalization are in both new nodes (unary and binary), its coefficient recursion in the existing expression node. Step 4 is exactly the unary new node. Step 5 is exactly the binary new node. Step 6's invertibility is supplied by those new nodes, coefficient identification by the existing expression node, and finite-tree uniqueness remains the written short assembly. Step 7's inverse-factor equations and unary/binary naturality are explicit conclusions in the corresponding new nodes; pasting and all edge checks remain in assembly and this report. This allocation avoids creating duplicates for the two arguments that already have their own nodes.
 
-## Retry after provider interruption (2026-10-18 UTC)
+### Original step 1
 
-The interrupted delivery call's completed result was checked before retrying.
-The prescribed `deliver2.py Q57 lem-pur-integral-realization-recursion --no-push`
-was retried once and again exited 1 before elaborating the module. It reports
-`INFRASTRUCTURE RETRY (stale live olean)`: the published live build lacks
-`Sheaf.SixFunctors.GeneratorReductionStatement.olean`. Direct authorized
-`scompile.py` confirmed the same fault (exit 75), while `scompile.py --source
-Sheaf.SixFunctors.GeneratorReductionStatement` succeeded (exit 0). This is a
-missing published artifact, not a missing declaration or a diagnosed statement
-error. The module and node are retained unchanged. No launcher tool, live source
-or published artifact was modified, and no push was attempted. Compilation and
-delivery remain unverified.
+For a normalized system $M$, [lem-coef-normalized-dvr-effectivity] says that the canonical counit comparisons $(\mathcal LM)\otimes^L_R A_n\to M_n$ are isomorphisms and that $\mathcal LM$ is derived complete. These are precisely the evaluations of the actual $e_M$ of [lem-coef-derived-system-evaluation-calculus]. The latter statement detects isomorphisms by derived evaluations, so $e_M$ is invertible in $D(\mathscr S_W)$. This is detection of isomorphisms, with no assertion about detecting equality. Its evaluated isomorphisms identify the reductions of $\mathcal LM$ with the levels of $M$, so they also give constructibility and exactly the assumed common cohomological and Tor bounds. Thus every use of $d_A(\mathcal LM)$ below has the stipulated integral input and normalized-system hypotheses.
 
-## Current dispatcher retry (2026-10-18 UTC)
+Original cited nodes: lem-coef-normalized-dvr-effectivity, lem-coef-derived-system-evaluation-calculus
 
-Read the saved report and started with the prescribed `deliver2.py Q57
-lem-pur-integral-realization-recursion --no-push`. It exited 1 before elaboration:
-`INFRASTRUCTURE RETRY (stale live olean)` reports that the published build lacks
-`Sheaf.SixFunctors.GeneratorReductionStatement.olean`. Direct authorized
-`scompile.py` of the saved module confirmed that diagnostic and exited 75;
-`scompile.py --source Sheaf.SixFunctors.GeneratorReductionStatement` succeeded
-with exit 0. Thus source retrieval works, while the required compiled dependency
-remains unpublished. Retained the Lean module and node unchanged. No push was
-attempted; compilation and delivery remain unverified. No launcher script, live
-source or published artifact was modified.
+### Original step 2
 
+The right triangle identity from [lem-coef-derived-system-evaluation-calculus] gives $\mathcal L(e_M)u_{\mathcal LM}=1$, hence $u_{\mathcal LM}=\mathcal L(e_M)^{-1}$. For an allowed integral $K$, its reduction $\mathcal RK$ is one of the normalized input systems in the hypotheses. The variable-expression case of [lem-sf-integral-compactification-system-realization] supplies an isomorphism $h:\mathcal L\mathcal RK\to K$. Only existence of this isomorphism is used here, not its normalization. Naturality gives $u_Kh=\mathcal L\mathcal R(h)u_{\mathcal L\mathcal RK}$. All factors on the right and $h$ are invertible, so the specified actual unit $u_K$ is invertible. This avoids identifying an arbitrary Roos-triangle lift with the actual unit.
 
-## Current repair and validation (2026-10-18 UTC)
+Original cited nodes: lem-coef-derived-system-evaluation-calculus, lem-sf-integral-compactification-system-realization
 
-Started with the saved report and the prescribed delivery dry run. It again failed
-with exit 1 before elaborating the item because the published live build lacks
-`Sheaf.SixFunctors.GeneratorReductionStatement.olean`.
+### Original step 3
 
-Retrieved the exact current recorded dependency using `scompile.py --source` and
-supplied that unchanged source together with the item to the authorized
-`scompile.py` wrapper. This exposed two actual errors in the saved item: the pull
-branch of `Equations` used `g.the project server`, whose type is the conjunction of
-quasi-compactness and the child's geometric predicate. The full live definition
-`Expression.geometric` in `Sheaf.SixFunctors.IntegralSystemExpressionDomain`
-requires `g.the project server.2` for the child's predicate. Corrected both projections.
-No hypothesis, clause, recursion formula, theorem signature or node statement
-changed.
+Write $I_V=V_{\rm int}(K_i)$ and $M_V=V(\mathcal RK_i)$. Unpack the coefficient construction of the specified realization: at a variable its coefficient map is $q_{K_i}=1_{\mathcal RK_i}$; at a unary or tensor node it is the successive composite of the canonical single-operation coefficient maps:
+$$q_{AV}=A(q_V)r_A(I_V),\qquad q_{V\otimes T}=(q_V\otimes^Lq_T)r_\otimes(I_V,I_T).$$
+These are definitions of the composite comparison, not a claim that finite evaluations determine it. The single-operation maps are the actual system maps $r_A=e_{A\mathcal RI}\mathcal R(d_A(I)^{-1})$ of [lem-sf-generator-reduction-coherence], with its specified localized open comparison. Under the adjunction of [lem-coef-derived-system-evaluation-calculus] the transpose of $q_V:\mathcal RI_V\to M_V$ is
+$$b_V=\mathcal L(q_V)u_{I_V}:I_V\to\mathcal LM_V,$$
+and the inverse transposition formula is $q_V=e_{M_V}\mathcal R(b_V)$. Indeed substitution reduces this equality to naturality of $e$ and $e_{\mathcal RI_V}\mathcal R(u_{I_V})=1$. At a single operation the transpose is $d_A(I)^{-1}$: substitute the displayed $r_A$, move $\mathcal R(d_A^{-1})$ past the unit, and cancel $\mathcal L(e_N)u_{\mathcal LN}=1$ for $N=A\mathcal RI$. This fixes the basic normalization, including $J_j$. At a leaf $b_{K_i}=u_{K_i}$, so the realized comparison there is $b_{K_i}^{-1}=u_{K_i}^{-1}$.
 
-The authorized two-file compile then completed successfully (exit 0), with no
-errors or warnings: the unchanged dependency compiled in 9.8 seconds and the
-corrected item in 4.7 seconds (sandbox) and 4.6 seconds (module). The dependency
-source is retained only under `scratchpad/GeneratorReductionStatement.lean` as a
-compile input, outside the delivery's `lean/` tree; it is not a new declaration,
-a dependency-record repair, or part of the delivery. Its recorded declaration
-and the item's existing import remain unchanged.
+Original cited nodes: lem-sf-generator-reduction-coherence, lem-coef-derived-system-evaluation-calculus
 
-Reran the normal one-file delivery dry run after removing that compile-only copy
-from the delivery tree. It still exits 1 with the same infrastructure diagnostic:
-the published live dependency object file does not exist. Thus the corrected
-module has been checked with the exact recorded source, but the required delivery
-preflight cannot complete against the published artifacts. Nothing was pushed.
-No launcher tool, live source or published artifact was modified.
+### Original step 4
 
-Self-check: reread the retained clause mapping and the affected pull recursion
-against the live expression domain. The extra projection selects precisely the
-child's existing geometric proof; the maps, admissible input full subcategory,
-independent slots, variable normalization, uniqueness and naturality are
-unchanged. Verified that `lean.statement` still matches the theorem signature
-verbatim, all item lines have at most 100 characters, and autoImplicit remains
-disabled. This is a worker self-check; the maintainer provides independent review.
+Suppose the inverse comparison $b_V:I_V\xrightarrow{\sim}\mathcal LM$ has been constructed for a smaller tree, with $M=M_V$. Transpose the unary coefficient composite in step 3. The single-operation transpose calculated there first gives
+$$b_{AV}=\mathcal LA(q_V)d_A(I_V)^{-1}.$$
+Substitute $q_V=e_M\mathcal R(b_V)$ and then use naturality of $d_A$ at $b_V$ to obtain
+$$b_{AV}=\mathcal LA(e_M)\,d_A(\mathcal LM)^{-1}\,A_{\rm int}(b_V).$$
+Each factor is invertible, by steps 1-2 and the stipulated single-operation isomorphism. Inverting this equality, in reverse order, gives
+$$b_{AV}^{-1}=A_{\rm int}(b_V^{-1})\,d_A(\mathcal LM)\bigl(\mathcal LA(e_M)\bigr)^{-1}.$$
+The last two factors are exactly $a_A(M)$ in the statement. The common bounds and compatible origin witnesses are those explicitly required of this intermediate system; $I_V\cong\mathcal LM$ also ensures that $d_A(I_V)$ is used on a complete constructible input. This calculation treats each of $P_v,S_p,J_j$ with its own prescribed $d_A$, without substituting a different open-extension comparison.
 
-## Successful resumed validation (2026-10-18 UTC)
+Original cited nodes: lem-sf-generator-reduction-coherence, lem-coef-derived-system-evaluation-calculus
 
-Checked that no Q57 delivery or compile process remained active before retrying.
-The required `deliver2.py Q57 lem-pur-integral-realization-recursion --no-push`
-completed successfully: `OK (dry run): commit 4e3f3e1ca4 passes the preflight and
-compiles; nothing pushed`. The published dependency-artifact fault recorded in
-the earlier attempts no longer blocks validation.
+### Original step 5
 
-Retained the saved Lean module and node unchanged. Self-check reread the entire
-module against the current node statement and dependency records: the actual
-unit/counit, specified single-operation maps, unary/tensor recursion, independent
-slots, naturality and uniqueness match the clause correspondence above. No
-non-lean node field differs from the current repository; the recorded signature
-is verbatim, all Lean lines are at most 100 characters, autoImplicit is disabled,
-and the only postponed proof is the named main theorem. There is no repair note
-for this item. This is the dispatched worker's self-check; no additional agent
-was started. Earlier statements that validation remains incomplete are historical
-and superseded by this successful dry run.
+For two smaller trees write $M=M_V$, $N=M_T$ and use their independent input slots. Transposing their binary coefficient composite gives
+$$b_{V\otimes T}=\mathcal L(q_V\otimes^Lq_T)d_\otimes(I_V,I_T)^{-1}.$$
+Substitute $q_V=e_M\mathcal R(b_V)$ and $q_T=e_N\mathcal R(b_T)$. Bifunctoriality factors their tensor into $(e_M\otimes^Le_N)(\mathcal R(b_V)\otimes^L\mathcal R(b_T))$. Naturality of the two-input $d_\otimes$ then gives
+$$b_{V\otimes T}=\mathcal L(e_M\otimes^Le_N)d_\otimes(\mathcal LM,\mathcal LN)^{-1}(b_V\widehat\otimes^Lb_T).$$
+Every factor is invertible; in particular tensor sends the inverses of $e_M,e_N$ to the inverse of their tensor. Invert this identity to get
+$$b_{V\otimes T}^{-1}=(b_V^{-1}\widehat\otimes^Lb_T^{-1})d_\otimes(\mathcal LM,\mathcal LN)\bigl(\mathcal L(e_M\otimes^Le_N)\bigr)^{-1}.$$
+This is precisely the claimed tensor recursion with $a_\otimes(M,N)$. All tensors in the system calculation are over the ring system $((A_n)_W)_n$; the tensor on integral objects is the completed tensor specified by $d_\otimes$.
+
+Original cited nodes: lem-sf-generator-reduction-coherence, lem-coef-derived-system-evaluation-calculus
+
+### Original step 6
+
+Induct on the number of operation vertices in the finite well-typed tree. The variable case is step 3, the unary step is step 4, and the binary step is step 5; both immediate subtrees have fewer vertices. These steps construct invertible $b_V$ on exactly the assumed domains. The canonical reduction/limit transport is $c_V=b_V^{-1}$: step 3 starts with the identity comparison of the reduction of a variable, substitutes the prescribed basic coefficient maps, and takes their adjunction transpose. This also agrees directly with the specified construction in [lem-sf-integral-compactification-system-realization]: inserting $e_M^{-1}:M\to\mathcal R\mathcal LM$ before a basic $d_A$ gives exactly the last two factors of step 4, and inserting $e_M^{-1}\otimes^Le_N^{-1}$ gives those of step 5. Thus the calculation identifies the specified comparisons themselves. It does not infer their normalization merely from the existence or generator-intertwining assertion of that node. Finally any other family satisfying the displayed identities equals this one: equality holds at variables, and at a unary or tensor node the fixed $a_A$ or $a_\otimes$ and the induction equalities of the children give equality at that node. This proves the characterization without moving any clause into a new lemma.
+
+Original cited nodes: lem-sf-integral-compactification-system-realization, lem-sf-generator-reduction-coherence, lem-coef-derived-system-evaluation-calculus
+
+### Original step 7
+
+The recursion is natural on the specified input domains. For a system map $f:M\to M'$, counit naturality says $f e_M=e_{M'}\mathcal R\mathcal L(f)$. Apply $\mathcal LA$ and solve for the inverse factors to get
+$$\bigl(\mathcal LA(e_{M'})\bigr)^{-1}\mathcal LA(f)=\mathcal LA\mathcal R\mathcal L(f)\bigl(\mathcal LA(e_M)\bigr)^{-1}.$$
+Naturality of $d_A$ now yields $a_A(M')\mathcal LA(f)=A_{\rm int}(\mathcal Lf)a_A(M)$. For maps $f:M\to M'$ and $g:N\to N'$, tensor the two counit equations and apply the same calculation with the two-input $d_\otimes$; it yields
+$$a_\otimes(M',N')\mathcal L(f\otimes^Lg)=(\mathcal Lf\widehat\otimes^L\mathcal Lg)a_\otimes(M,N).$$
+The inverse-unit leaf comparison is natural because $u$ is natural. Paste these unary and binary squares with the induction squares for the children. This proves naturality of every $c_V$ in all independent leaf slots. A zero input and an empty open give the unique maps on zero objects; a single leaf gives the actual inverse unit, rather than an arbitrary automorphism of its limit. At a point with $K=R[0]$, a one-operation expression specializes to its specified $d_A$ by the triangle calculation in step 3. No level $n=0$ or shift compatibility is used.
+
+Original cited nodes: lem-coef-derived-system-evaluation-calculus, lem-sf-generator-reduction-coherence
+
+## Unfinished work
+
+No Lean is written or compiled. The two extracted nodes intentionally remain statement-only for independent stage-1 work. Delivery validation follows below.

@@ -26,113 +26,42 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal T_T=\\Loc(\\Dbc(T,\\Lambda))$. For the present rational coefficients and qcqs schemes, [det-def-localizing-closure-ctf-equals-bc] gives $\\Dctf(T,\\Lambda)=\\Dbc(T,\\Lambda)$ and equality of the two localizing closures. Thus every use of a localizing $\\Dctf$ statement below has precisely domain $\\mathcal T_T$. By [det-proper-base-change-unbounded-pullback], for every morphism $a:T'\\to T$ in this setting the inverse image $a^*$ is exact, preserves direct sums and bounded constructible objects, and restricts to $\\mathcal T_T\\to\\mathcal T_{T'}$.",
+   "text": "Use the zero-coordinate projection isomorphism and the open compact-support adjunction for the base case. Transport its ambient pullback using the proved zero-power tensor/shift isomorphism.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc",
-    "det-proper-base-change-unbounded-pullback"
+    "lem-sfb-rational-affine-geometry",
+    "lem-sfb-rational-affine-adjunction-calculus",
+    "lem-sfb-rational-affine-tensor-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "First paragraph (domains of the induction) and second paragraph (pullback preservation)."
-   }
+   "elementary": true
   },
   {
-   "text": "For $m\\ge0$ the sheaf $L=\\Lambda_T(m)$ of [sk-def-sp-tate-twist] is locally free of rank one and its dual $L^\\vee$ satisfies $L\\otimes L^\\vee\\simeq\\Lambda_T$: this is the evaluation map, locally multiplication of two copies of $\\Lambda_T$. Consequently $-\\otimes L$ and $-\\otimes L^\\vee$ are inverse equivalences of module sheaves, hence exact and coproduct-preserving. Applied termwise to complexes they preserve acyclic complexes and compute the derived tensor functors; in particular $\\mathcal H^i(K(m))=\\mathcal H^i(K)\\otimes L$. A constructible cohomology sheaf has a finite stratification and finite constant local models as specified in [sk-def-sfb-constructible]. On each stratum refine its pro-etale trivializing cover by one trivializing $L$; tensoring then leaves the same finite constant module on that cover. Thus each $\\mathcal H^i(K(m))$ is constructible and has the same vanishing degrees as $\\mathcal H^i(K)$. Twisting therefore preserves $\\Dbc$. Its exactness, preservation of direct sums and this generator preservation imply preservation of $\\mathcal T_T$: its inverse image of $\\mathcal T_T$ is a replete triangulated coproduct-closed subcategory containing $\\Dbc$, so contains its smallest such closure [sk-def-localizing-closure]. Shifts preserve both $\\Dbc$ and $\\mathcal T_T$, since they merely reindex cohomology and the latter is triangulated.",
+   "text": "Induct uniformly in the base and compactification. Split the last coordinate, apply the affine-line adjunction over affine d-space, and compose first with the coordinate isomorphism and then with the inductive adjunction. Use the two tensor/pullback/shift composition isomorphisms to identify the ambient right adjoint with the specified degree-(d+1) one.",
    "uses": [
-    "sk-def-sp-tate-twist",
-    "sk-def-sfb-constructible",
-    "sk-def-localizing-closure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "Second paragraph: justify the twist and shift assertions directly, including their localizing-category typing."
-   }
-  },
-  {
-   "text": "For $a:T'\\to T$, the Cartesian coefficient and twist identifications of [sk-prop-sfb-cartesian-coefficients] identify $a^*$ with exact inverse image and give $a^*\\Lambda_T(m)\\simeq\\Lambda_{T'}(m)$. The module pullback construction of [def-sfb-module-upper-star] uses the strong monoidal inverse image on abelian sheaves; because the scalar comparison is an isomorphism, its relative tensor comparison is obtained by transporting that monoidal comparison. For tensoring with the line $\\Lambda_T(m)$ this comparison is an isomorphism: on its trivializing cover it is the unit comparison $a^*M\\otimes\\Lambda_{T'}\\simeq a^*M$. Applying this to every term of a complex, using exactness from steps 1 and 2, gives naturally $a^*(K(m)[n])\\simeq(a^*K)(m)[n]$. Also [def-sfb-module-upper-star-comp], applied termwise to the exact pullbacks, identifies $(ba)^*$ with $a^*b^*$. Finally $(K(r)[s])(t)[u]\\simeq K(r+t)[s+u]$ for $r,t\\ge0$: reassociate the tensor powers of $\\Lambda(1)$ in [sk-def-sp-tate-twist] and add the cochain shifts. All these identifications are natural in $K$ and hold on the whole ambient derived categories, hence on their full localizing subcategories.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-module-upper-star",
-    "def-sfb-module-upper-star-comp",
-    "sk-def-sp-tate-twist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "First paragraph: expand “pullback commutes with Tate twists and shifts” and the final pullback composition equality."
-   }
-  },
-  {
-   "text": "We prove the asserted natural functor isomorphism by induction on $d$, uniformly for every separated finite-type base $V$ in the setting. At $d=0$, [def-sbc-affine-space] identifies $\\mathbf A^0_V$ with $V$ and $p_0$ with its identity. By [det-sf-comp-coherence-cocycle], applied with the qcqs target $V$, compare the chosen compactification of the identity with its identity compactification. We may therefore compute $R(p_0)_!$ using the latter: $R(\\mathrm{id})_*\\mathrm{id}_!=\\mathrm{id}$. The adjunction and uniqueness in [sk-prop-sf-existence] therefore give $p_0^!\\simeq\\mathrm{id}$. Since $\\Lambda(0)=\\Lambda$ and $[0]$ is the identity, this is $p_0^!\\simeq p_0^*(0)[0]$.",
-   "uses": [
-    "def-sbc-affine-space",
-    "sk-prop-sf-existence",
-    "sk-def-sp-tate-twist",
-    "det-sf-comp-coherence-cocycle"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "First paragraph: the base case d=0, with identity compactification and zero twist."
-   }
-  },
-  {
-   "text": "For any composable $a:T'\\to T$ and $b:T\\to B$ in the setting, [lem-sfb-localizing-lower-shriek-composition] gives $R(ba)_!\\simeq Rb_!Ra_!$ on the localizing categories. Using the adjunctions of [sk-prop-sf-existence], for $M\\in\\mathcal T_{T'}$, $N\\in\\mathcal T_B$ there are natural bijections\n$$\n\\operatorname{Hom}(Rb_!Ra_!M,N)\\simeq\\operatorname{Hom}(Ra_!M,b^!N)\\simeq\\operatorname{Hom}(M,a^!b^!N).\n$$\nHence $a^!b^!$ is a right adjoint to $R(ba)_!$. Uniqueness of the right adjoint, again in [sk-prop-sf-existence], yields $(ba)^!\\simeq a^!b^!$. This is exactly the composition mate needed for the induction, derived on the present localizing categories without assuming an ambient exceptional right adjoint on all pro-etale complexes.",
-   "uses": [
-    "lem-sfb-localizing-lower-shriek-composition",
-    "sk-prop-sf-existence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "First paragraph: supply the composition mate on the precise rational localizing categories."
-   }
-  },
-  {
-   "text": "Suppose the functor isomorphism is known for dimension $r$. Set $W=\\mathbf A^r_V$ and let $\\pi:\\mathbf A^1_W\\to W$ be its affine-line projection. Let $\\varphi:\\mathbf A^{r+1}_V\\xrightarrow{\\sim}\\mathbf A^1_W$ be the canonical isomorphism over $V$. These are the coordinate identifications of [def-sbc-affine-space]: on $\\operatorname{Spec}R\\subset V$ the ring identity is $R[t_1,\\ldots,t_{r+1}]=(R[t_1,\\ldots,t_r])[t_{r+1}]$, compatible with restriction. In particular $p_{r+1}=p_r\\pi\\varphi$. Since $\\varphi$ is an isomorphism, it is proper and $(\\mathrm{id},\\varphi)$ is a compactification of it; by [det-sf-comp-coherence-cocycle] the chosen $R\\varphi_!$ is isomorphic to $R\\varphi_*=\\varphi_*$, an equivalence with right adjoint $\\varphi^*$, so the uniqueness in [sk-prop-sf-existence] gives $\\varphi^!\\simeq\\varphi^*$. The base $W$ is again separated and finite type over $k$; finite type is visible from these finitely many polynomial generators, and the relative diagonal is cut out by the differences of the two copies of the coordinates, together with the closed diagonal of $V$. Therefore the affine-line theorem [det-cor-affine-space-rational-line] applies over $W$, giving $\\pi^!\\simeq\\pi^*(1)[2]$ on $\\mathcal T_W$. The composition mate of step 5 (applied twice) and the inductive isomorphism give naturally\n$$\np_{r+1}^!\\simeq\\varphi^!\\pi^!p_r^!\\simeq\\varphi^*\\bigl(\\pi^*(p_r^*(-)(r)[2r])(1)[2]\\bigr)\\simeq p_{r+1}^*(r+1)[2r+2].\n$$\nThe last identification is precisely step 3: pull the degree-$r$ twist and $[2r]$ through $\\pi^*$, pull all twists and shifts through $\\varphi^*$, compose the pullbacks $\\varphi^*\\pi^*p_r^*\\simeq(p_r\\pi\\varphi)^*=p_{r+1}^*$, then add the degree-one twist and $[2]$. This proves the induction as a natural isomorphism of functors on the full localizing categories, not only on their bounded generators.",
-   "uses": [
-    "def-sbc-affine-space",
+    "lem-sfb-rational-affine-geometry",
     "det-cor-affine-space-rational-line",
-    "det-sf-comp-coherence-cocycle",
-    "sk-prop-sf-existence"
+    "lem-sfb-rational-affine-adjunction-calculus",
+    "lem-sfb-rational-affine-tensor-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "First paragraph: the induction step, with the base change of the affine-line input and explicit twist/shift addition."
-   }
+   "elementary": false
   },
   {
-   "text": "For $K\\in\\Dbc(V,\\Lambda)$, step 1 gives $p_d^*K\\in\\Dbc(\\mathbf A^d_V,\\Lambda)$. Step 2 then gives $(p_d^*K)(d)\\in\\Dbc$, and its shift by $[2d]$ stays bounded constructible. More explicitly, if $K$ has cohomology in $[a,b]$, exact inverse image and the rank-one tensor in step 2 leave that interval unchanged and the shift gives $[a-2d,b-2d]$. This proves the preservation clause with no assumption about an arbitrary ambient exceptional inverse image.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-    "place": "Second paragraph: combine the already proved pullback, twist and shift preservation."
-   }
+   "text": "The constructed adjunction supplies existence. Uniqueness of a right adjoint compares every other exceptional right adjoint with this one. The ambient tensor-calculus preservation clause supplies bounded constructibility. Specialize the coefficient parameter to each finite subfield and to the closure.",
+   "uses": [
+    "lem-sfb-rational-affine-tensor-calculus"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-def-localizing-closure-ctf-equals-bc",
-  "det-proper-base-change-unbounded-pullback",
-  "sk-def-sp-tate-twist",
-  "sk-def-sfb-constructible",
-  "sk-def-localizing-closure",
-  "sk-prop-sfb-cartesian-coefficients",
-  "def-sfb-module-upper-star",
-  "def-sfb-module-upper-star-comp",
-  "def-sbc-affine-space",
-  "sk-prop-sf-existence",
-  "det-sf-comp-coherence-cocycle",
-  "lem-sfb-localizing-lower-shriek-composition",
+  "lem-sfb-rational-affine-geometry",
+  "lem-sfb-rational-affine-adjunction-calculus",
+  "lem-sfb-rational-affine-tensor-calculus",
   "det-cor-affine-space-rational-line"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
-  "place": "Both paragraphs; explicit adjunction, tensor-line and category-typing arguments supplied by Q20."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.proof.md",
+  "place": "Uniform Lean induction with explicitly composed restricted adjunctions and ambient tensor comparisons, E1."
  },
  "mathlib_searches": [
   {
@@ -252,7 +181,6 @@
   "sk-prop-sfb-cartesian-coefficients",
   "def-sfb-module-upper-star",
   "def-sfb-module-upper-star-comp",
-  "sk-prop-sf-existence",
   "det-sf-comp-coherence-cocycle"
  ],
  "reviewed": {
@@ -263,7 +191,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-173e7a784 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, every cited statement, the main-20261015 sources (sk-cor-affine-space-rational unit, item and proof, the line node, sk-thm-sf-comp-composition clause 1 and its proof, and sk-lem-sf-mate clause 1 with the det-sf-mate-compactification proof), the chapter setting and the unit route. The item statement matches the source and is not weakened; d=0 is kept. The coefficients are module objects over the pulled-back condensed Λ_X for Λ=E or Q̄_ℓ throughout. Loc(Dbc)=Loc(Dctf) holds by det-def-localizing-closure-ctf-equals-bc. Steps 1–5 and 7 check: exact pullback; a rank-one Tate line with an explicit trivializing cover, so twisting preserves Dbc and the hull; the Cartesian twist and pullback comparisons; the d=0 base through det-sf-comp-coherence-cocycle; the Hom-bijection mate with the domains checked; the interval [a-2d,b-2d]. I tested d=0, d=1, an empty V and Λ[n]. The new node lem-sfb-localizing-lower-shriek-composition is the rational case of main-20261015 sk-thm-sf-comp-composition (1) and is true. I tested it with identity, open-then-proper, proper-then-proper and an empty source. It is a smaller input, not a restated clause of the item. A search of all node statements found no duplicate: thm-sf-comp-composition is finite-coefficient on D^+, lem-sf-mate is conditional on def-sf-datum, and the rest are finite-coefficient or about other statements. No SGA is cited. Repairs: (1) Step 6 treated A^{r+1}_V and A^1_W as equal, but under def-sbc-affine-space they are only canonically isomorphic. I added the isomorphism φ with p_{r+1}=p_rπφ, φ^!≃φ^* (from the compactification (id,φ), det-sf-comp-coherence-cocycle and adjoint uniqueness in sk-prop-sf-existence), applied step 5 twice, and cited both nodes. (2) Added det-def-localizing-closure-ctf-equals-bc to stmt_deps, because p^! from sk-prop-sf-existence is defined on Loc(Dctf). A DFS found no cycle. Accepted tool_uses: det-def-localizing-closure-ctf-equals-bc, det-proper-base-change-unbounded-pullback and sk-prop-sfb-cartesian-coefficients, each used as a generic black box. The unit realization is correct.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.AffineSpaceRationalInduction",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.affineSpace_rational_induction",
@@ -289,5 +228,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Re-delivery after RETURN on 536f0d188ae7 (theorem stmt_dep cited only for plain defs). Lean module byte-identical; item stmt_deps now cite new def node def-sfb-rational-localizing-twist (existing:true on the published plain defs rationalLocalizingCategory, rationalLocalizingInclusion, rationalTwistFunctor in Sheaf.Targets.AffineSpaceRationalLine); det-cor-affine-space-rational-line kept in proof_deps. New node: prose matches the three decls; stmt_deps (pulled-back coefficients, constructible, localizing closure, derived tensor) exist live; lean.statement verbatim; no cycle; blueprint.from is the item. Item H3 re-checked: ℓ prime, char k = p > 0 with p ≠ ℓ, V separated finite type, all finite E and Q̄ℓ, 𝔸(ULift (Fin d); V) with d = 0 included, Nagata compactificationOverField lower shriek, existential F ⊣ P with ambient comparisons and right-adjoint uniqueness, spSignedTwist degree-d line from spRationalTwist/spQbarTwist, shift [2d], Dbc preservation for every ambient K. No hollow defs, sorry only in the theorem, docstrings ok, universes bound. nt_compile --json rc 0, item 7.9 s, clean. Maintainer note: the three decls are listed in both the line node's and the new def node's records (the accepted existing:true shape)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6802c",
+  "group": "E1",
+  "result": "fix",
+  "landing": "20261024T214858-L-725923",
+  "kind": "interface",
+  "note": "independent cc review: rationalAffineTensorCalculus (sorry) vs node lem-sfb-rational-affine-tensor-calculus and the RationalP1 line, constructibility and twist definitions; item induction vs det-cor-affine-space-rational-induction; importer RestrictionLocal compiled with the delivered modules (all compiled, exit 0)"
  }
 }

@@ -35,27 +35,25 @@
    }
   },
   {
-   "text": "We prove $X_\\beta=f(D_\\beta)$ for every $\\beta\\leq\\kappa$. If equality failed, choose the least failing ordinal $\\beta$; such a least element exists because these ordinals are well-ordered. The case $\\beta=0$ cannot fail: $X_0=0$ and $D_0=0$. If $\\beta=\\gamma+1$, take $x\\in X_{\\gamma+1}$. By step 1,\n$$x=r_\\gamma(x)+s_\\gamma(q_\\gamma(x)),$$\nwith $X_\\gamma$ viewed as a submodule of $X$. By minimality, $r_\\gamma(x)=f(z)$ for some $z\\in D_\\gamma$. Adding to $z$ the family supported only at $\\gamma$ with component $q_\\gamma(x)$ gives an element of $D_{\\gamma+1}$ mapping to $x$, by [def-weil-pbc-direct-sum-modules] and [def-weil-pbc-quotient-module]. If $\\beta$ is a nonzero limit ordinal, continuity gives, for every $x\\in X_\\beta$, an ordinal $\\gamma<\\beta$ with $x\\in X_\\gamma$. Minimality gives a preimage in $D_\\gamma\\subseteq D_\\beta$. Each case contradicts failure, since step 2 already gives the reverse inclusion. At $\\beta=\\kappa$ we obtain $f(D)=X_\\kappa=X$, so $f$ is surjective.",
+   "text": "Apply [lem-trf-transfinite-successor-generators-surjective] with $A_\\alpha=Q_\\alpha$ and $t_\\alpha=s_\\alpha$. Step 1 gives its successor-generation hypothesis; the zero stage and limit continuity are hypotheses of the item. It yields $f(D_\\beta)=X_\\beta$ for all $\\beta\\leq\\kappa$. Since $D_\\kappa=D$ and $X_\\kappa=X$, $f$ is surjective.",
    "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module"
+    "lem-trf-transfinite-successor-generators-surjective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058V, lemma-direct-sum-devissage, proof: transfinite induction on the images of f_beta (lines 20427–20433); conditions (0)–(2) of Tag 058U."
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof lines 20417–20433: definition of f_beta and transfinite induction identifying its image. Generalized to arbitrary successor-generating maps, without requiring them injective."
    }
   },
   {
-   "text": "To prove injectivity, suppose $z\\in D$ is nonzero and $f(z)=0$. By [def-weil-pbc-direct-sum-modules], its nonzero support $S$ is finite and nonempty. It has a largest ordinal $\\gamma$: enumerate its finitely many elements and at each addition retain the larger one. For every $\\alpha\\in S$ with $\\alpha<\\gamma$, we have $s_\\alpha(z_\\alpha)\\in X_{\\alpha+1}\\subseteq X_\\gamma$. The equation\n$$s_\\gamma(z_\\gamma)=-\\sum_{\\alpha\\in S,\\ \\alpha<\\gamma}s_\\alpha(z_\\alpha)$$\ntherefore puts $s_\\gamma(z_\\gamma)$ in $X_\\gamma$. Apply the quotient map $q_\\gamma:X_{\\gamma+1}\\to X_{\\gamma+1}/X_\\gamma$ of [def-weil-pbc-quotient-module]. Step 1 gives $z_\\gamma=q_\\gamma s_\\gamma(z_\\gamma)=0$, contradicting $\\gamma\\in S$. Thus $\\ker f=0$. This finite-support argument covers a limit endpoint as well: it never assumes that an element has infinitely many nonzero components.",
+   "text": "Apply [lem-trf-filtration-successor-maps-independent] with the same $A_\\alpha$ and $t_\\alpha$. Its hypothesis $s_\\alpha(z)\\in X_\\alpha\\Rightarrow z=0$ was proved in step 1 using $q_\\alpha s_\\alpha=1$. Thus $f$ is injective, including when $\\kappa$ is a limit ordinal.",
    "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module"
+    "lem-trf-filtration-successor-maps-independent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 058V, lemma-direct-sum-devissage, proof: injectivity of the restrictions and the finite-support argument at limit stages (lines 20435–20453), written as a maximal-support argument."
+    "place": "Tag 058V, lemma-direct-sum-devissage, proof lines 20435–20453: injectivity from independence of each new summand from its predecessor; equivalent maximal finite-support formulation, for arbitrary maps injective modulo the preceding stage."
    }
   },
   {
@@ -71,8 +69,10 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-quotient-module",
   "def-weil-pbc-direct-sum-modules",
-  "def-weil-pbc-quotient-module"
+  "lem-trf-transfinite-successor-generators-surjective",
+  "lem-trf-filtration-successor-maps-independent"
  ],
  "proof_origin": {
   "by": "document",
@@ -208,19 +208,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-split-transfinite-module-filtration",
   "worker": "stage1",
-  "summary": "Checked the statement and complete proof against Stacks Tags 058U/058V and retained the endpoint-inclusive ordinal indexing and all hypotheses. Constructed quotient sections explicitly from the successor retractions, constructed the sum map on finite supports, proved surjectivity by a least-failing-ordinal argument with base/successor/limit cases, and proved injectivity by the largest nonzero support index. Only the two existing Mathlib definition leaves are used; no new nodes, no Lean editing or compilation. Retained all inherited searches and added the actual Q96 searches with source-checked verdicts.",
-  "blueprint": "Expands Tag 058V in the inherited algebraic ancestry: the proof of Tag 058Y invokes 058X, whose induced split filtration uses 058V. The nearest imported ancestor is lem-trf-local-term-locality. This helper is not the unit key node, and does not replace or alter the current main-20261015 contracting-correspondence route or the chapter/unit metadata."
+  "summary": "Q80 repair of the returned stage-1 delivery, rebased through deliver.py onto the current server DAG. Preserved the parent statement, statement dependencies, source, blueprint and Lean/review records. The parent retains the quotient section, finite-sum map and linear inverse, and assembles the two complementary statement-only helpers for transfinite generation and finite-support independence in 2712 characters. On 2026-10-23 the first retained-file dry run passed at 69d00d55b81. Compared all current parent fields, reread every cited statement and Stacks 058U/058V, verified all five citation quotes, and reused the unchanged helpers’ logged searches after reading their results. Both helpers are absent from the current DAG, and no changed cited mathematical content requires altering the approved assembly. The report records this attempt’s rebase review and statement fingerprints; live promotion remains L’s action.",
+  "blueprint": "Expands Tag 058V in the inherited algebraic ancestry: the proof of Tag 058Y invokes 058X, whose induced split filtration uses 058V. The nearest imported ancestor is lem-trf-local-term-locality. This helper is not the unit key node, and does not replace or alter the current main-20261015 contracting-correspondence route or the chapter/unit metadata. The two new nodes refine only the 058V helper in this inherited ancestry."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q96-cf3cff23f",
-  "group": "Q96",
+  "reviewer": "NT-cc-Q80-9723104ba",
+  "group": "Q80",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-cf3cff23f (reviewer sub-agent of L); spot-checked: Read the item, report, governing documents, unit route, both cited DAG nodes, and Stacks Tags 058U/058V in full. The statement preserves every hypothesis and endpoint case; the section construction, transfinite surjectivity induction, finite-support injectivity argument, and linear inverse are correct. Mathlib matches and searches were checked; no duplicates, hidden lemmas, route violations, SGA citations, or repairs were found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-9723104ba (reviewer sub-agent of L); spot-checked: This is the 5th head of the same split, and it is mathematically unchanged. Both new nodes are byte-identical to the four earlier heads (b2005f69, d629ee0d, 936906e3, b0b8ff3e). The item differs from those heads only in split_report; its statement, proof steps, proof_deps and source are unchanged. In live and side-live the item still has the old 5-step proof, neither new id exists there, and the released re-split note of 2026-10-22 still applies. I read the full source in Stacks algebra.tex: Definition 058U, conditions (0)-(3), and the whole proof of Lemma 058V. The item's kappa with endpoint X_kappa=X is the Stacks index set S=kappa+1. Item checks: Step 1 builds the section s(q x)=x-jr(x); it is well defined, q s=1, and it gives the decomposition x=jr(x)+sq(x), all using the quotient node's kernel. Step 2 defines the finite-sum map f and shows f(D_b) is contained in X_b, since a<b gives a+1<=b. Step 3 applies the generation child with A=Q and t=s; X_0=0 and continuity come from the item's hypotheses, and successor generation comes from step 1. Step 4 applies the independence child; its hypothesis was proved in step 1. Step 5 builds the linear inverse from unique preimages, and kappa=0 gives X=0=D. The assembly is 2712 characters. New-node checks: the generation child is true by induction (zero stage, successor, limit); X_0=0 and continuity are each needed, and injectivity of t is correctly not assumed. The independence child is true by taking the largest index in a finite nonzero support; no continuity or exhaustion is needed. Edge cases kappa=0, kappa=1 and limit kappa all hold. Each child carries one of the old proof steps 3 and 4, the two are of comparable size, and neither restates the item. Duplicate search over the DAG (transfinite, ordinal, well-ordered, devissage, Kaplansky) found no duplicate: Kaplansky-summand, well-ordered-union projective dimension and devissage-generation are different results. No SGA citation. No fixes. Maintainer note: this is a promotion loop; L should promote the side-DAG completion instead of re-issuing the item."
  },
  "lean": {
   "module": "Sheaf.LinearAlgebra.SplitTransfiniteModuleFiltration",
@@ -240,5 +240,16 @@
   "result": "fix",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, and scompile evidence pass; fixed the missing substantive Second reading by Q91 report section."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

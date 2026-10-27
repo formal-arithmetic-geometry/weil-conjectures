@@ -1,0 +1,138 @@
+{
+ "id": "lem-wf-completed-constant-pullback-normalization",
+ "kind": "statement",
+ "title": "Unique generator-normalized transport of completed constant modules",
+ "statement": "For a scheme X, an adic coefficient datum d over a commutative ring A, and a scheme automorphism e, let C be the completed constant-module functor and H the module pullback using the coefficient comparison conjugated by the finite-quotient presentation of def-wf-tensor-unit-square-data. There is a unique natural isomorphism C ⋙ H ≅ C whose composite with the actual pullback-adjunction unit sends each constant generator 1 tensor x on U to 1 tensor x on e-base-change(U). No freeness, finiteness, or flatness is assumed on the A-module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+ },
+ "stmt_deps": [
+  "def-wf-tensor-unit-square-data"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the completed scalar direct-image square by the finite-quotient ring comparison.",
+   "uses": [
+    "def-wf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "Compose the constant/global-sections adjunction with scalar extension. The unit is the actual generator 1 tensor x. The scalar square identifies direct-image global sections with sections on the base-changed object by identity maps.",
+   "uses": [
+    "lem-weil-pbc-finite-free-constructible-scalar-transport",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "Use uniqueness of left adjoints to construct the comparison. Its unit formula gives normalization at the terminal object; naturality gives normalization on every object. The two adjunction bijections also give uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-tensor-product",
+  "lem-weil-pbc-finite-free-constructible-scalar-transport",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique generator normalized inverse image of constant modules extended to a completed coefficient ring sheaf",
+   "results": "ModuleCat.Tilde.const; SheafOfModules.Presentation.map_generators_I; no completed constant-module comparison",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq; unit_leftAdjointUniq_hom_app; these supply categorical uniqueness, not the coefficient normalization or strict Koszul unit",
+   "date": "2026-10-26",
+   "verdict": "useful construction API, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*lift|tensorPullbackTotal",
+   "results": "Factorizations.CM5a mappingCocone.lift and lift_fst; no normalized augmented Koszul transport",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant module pullback tensor product natural isomorphism mapping cone unit",
+   "results": "8 hits, including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal and generic categorical pullback cones; no completed-constant normalization or augmented Koszul fiber unit transport.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic pullback unit API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WfTensorPullbackCompletionUnitSquare",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-tensor-pullback-completion-unit-square",
+   "place": "Source argument separated into its coefficient-normalization and augmented-tower steps"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WfCompletedConstantPullbackNormalization",
+  "file": "lean/Sheaf/Paper/WfCompletedConstantPullbackNormalization.lean",
+  "declaration": "WeilConjectures.WfTensorUnitSquare.completedConstantPullback_normalized",
+  "declarations": [
+   "WeilConjectures.WfTensorUnitSquare.completedConstantPullback_normalized"
+  ],
+  "statement": "theorem completedConstantPullback_normalized :\n    ∃! k : constants X d ⋙ transport X d e ≅ constants X d,\n      NormalizedConstants X d e k",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2fc77",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T202826-L-2756421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2fc77",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T202826-L-2756421",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/normalization/transport modules vs clone a0aa732 item module (verbatim relocation; tensor/alpha abbrev→def, beta let-form) and item node vs clone node; sorry statement vs IntrinsicCompletionCompleted Koszul defs and ProEtaleCanonicalTensorPullback pure-tensor characterization"
+ }
+}

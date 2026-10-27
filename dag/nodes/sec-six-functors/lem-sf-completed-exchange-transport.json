@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-completed-exchange-transport",
+ "kind": "statement",
+ "title": "Canonical normalization comparing the two completed exchange presentations",
+ "statement": "Fix a prime l and a finite extension E of Q_l, with the adic coefficient datum d = (O_E,(varpi)) in the published lifted coefficient presentation [def-weil-pbc-bounded-constructible-complete]. For any chosen Cartesian square (g-prime,f-prime,f,g) of schemes [def-weil-pbc-cartesian-square] and intrinsically complete K on X, compare the completed adjunction-mate exchange of [lem-sbc-completed-operations-linear-natural-exchange], with the square transposed by [def-sf-chosen-cartesian-square-transpose], to the ordered strict-tower exchange [def-weil-pbc-completed-base-change-map]. The former is precisely sourceTransport.hom followed by completed pullback of pushComparison.hom, then the ordered exchange, then direct image of targetTransport.inv, then pushComparison.inv. Here sourceTransport and targetTransport are the fixed resolving-counit normalized cbcDatumCompletedTransport of [def-sf-completed-pullback-presentation-transport], and pushComparison is eqToIso of equality of the coefficient maps proved there. Thus the comparison specifies the actual arrows, not merely isomorphic endpoints. No properness, smoothness, noetherianity, dimension bound, constructibility or boundedness is assumed.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md; literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Clause (4), completed exchange normalization; Stacks 099N (lemma-pushforward-Noetherian-case), 09C9 (theorem-proper-base-change, construction paragraph), and 07A7 (remark-base-change)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-cartesian-square",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "def-weil-pbc-completed-base-change-map",
+  "def-sf-chosen-cartesian-square-transpose",
+  "def-sf-completed-pullback-presentation-transport"
+ ],
+ "proof": [
+  {
+   "text": "The completed coefficient structure maps agree after all finite quotient projections by def-sf-completed-pullback-presentation-transport. Consequently direct image has the eqToIso comparison displayed in the Lean statement. The universal resolving-counit normalizations identify the two ordinary pullback presentations, and identify their adjunctions and tensor-balanced square comparisons. Taking their ordinary unit-square-counit mates identifies ordinary exchange, with the direct-image comparisons at both ends.",
+   "uses": [
+    "def-sf-completed-pullback-presentation-transport",
+    "def-cbc-completed-pullback-counit-transport",
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the desired equality by the ordinary-to-completed unit at the direct image of K. The completed mate extends the ordinary mate along that unit. Apply the unit equation of the canonical completed presentation transport and naturality of the direct-image comparison. The ordered exchange unit identity gives exactly the same ordinary mate followed by the target completion unit on the other side.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-pbc-completed-exchange-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completed pullback and direct image preserve intrinsic completeness, so the common target is complete. The injective part of the completion reflector Hom bijection cancels the source unit. This proves equality of the specified maps without asserting faithfulness of finite reduction. The construction and cancellation include zero objects and empty schemes.",
+   "uses": [
+    "lem-weil-pbc-completed-pullback-reflection",
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-completed-pullback-presentation-transport",
+  "def-cbc-completed-pullback-counit-transport",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "def-weil-pbc-four-corners",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-completed-exchange-unit",
+  "lem-weil-pbc-completed-pullback-reflection"
+ ],
+ "proof_origin": {
+  "by": "agent Z9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md; literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Clause (4), completed exchange normalization; Stacks 099N (lemma-pushforward-Noetherian-case), 09C9 (theorem-proper-base-change, construction paragraph), and 07A7 (remark-base-change). The comparison argument expands the omitted construction using the existing normalized units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical completed adjunction mate equals the ordered derived inverse limit base change map under coefficient presentation comparisons",
+   "results": "Eight hits including mateEquiv, mateEquiv_apply, mateEquiv_vcomp, constLimAdj and derived adjunctions.",
+   "verdict": "No match: these are generic categorical constructions, not equality of the two project-specific normalized completed exchanges.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived integral proper and smooth base change adjunction mate finite reduction constructible",
+   "results": "Eight hits including Condensed.profiniteSolidCounit, Scheme.Modules.pullbackPushforwardAdjunction and geometric base-change stability instances.",
+   "verdict": "No match for this normalized completed exchange comparison.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*exchange|adic.*base.?change|derived.*complete.*constructible",
+   "results": "msearch Mathlib grep: zero hits. Local source search found PbcActualCompletedExchangeTransport with an existential pair of endpoint comparisons, not these specified comparisons, and SbcCompletedOperations with its ordinary strict-limit realization. Blueprint search completed exchange found eight nodes, none with this fixed normalization.",
+   "verdict": "No exact existing statement; the new statement isolates only the comparison step of the parent.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfBcCompletedMateDomain",
+  "date": "2026-10-25",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (4), passage from finite mates to the specified completed ordinary exchange, identifying the smooth and proper completed presentations.",
+   "via": [
+    "lem-sf-bc-completed-mate-domain",
+    "lem-sf-package-base-change-domain-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCompletedExchangeTransport",
+  "file": "lean/Sheaf/Paper/SfCompletedExchangeTransport.lean",
+  "declaration": "WeilConjectures.sfCompletedExchange_transport",
+  "statement": "theorem sfCompletedExchange_transport (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y X' Y' : Scheme.{u}}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    (sq : ChosenCartesianSquare g' f' f g) (K : PbcComplete l E X) :\n    let pushComparison := fun {V W : Scheme.{u}} (q : V ⟶ W) ↦\n      eqToIso (congrArg (proEtaleRingDerivedDirectImage q\n        (pbcAdicCompletion W (pbcIntegralDatum l E))\n        (pbcAdicCompletion V (pbcIntegralDatum l E)))\n        (Iso.ext (cbcDatumCoefficient_eq (pbcIntegralDatum l E) q)))\n    ((sbcExchangeApp l E (exchangeTransposeSquare sq) K).hom =\n        (cbcDatumCompletedTransport (pbcIntegralDatum l E) g).hom.app\n            ((sbcPush l E f).obj K).obj ≫\n          ((pbcIntegralDatum l E).completedPull g).map\n            ((pushComparison f).hom.app K.obj) ≫\n          (pbcIntegralDatum l E).completedExchange sq K.obj ≫\n          ((pbcIntegralDatum l E).push f').map\n            ((cbcDatumCompletedTransport (pbcIntegralDatum l E) g').inv.app K.obj) ≫\n          (pushComparison f').inv.app ((sbcPull l E g').obj K).obj)",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T124602-L-2076491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T124602-L-2076491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

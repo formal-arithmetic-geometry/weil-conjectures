@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-etale-chart-rational-point-taylor-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "VIII 2.3.11 and 2.3.13, printed pp.93--94; lower local input for the historical modification branch of lem-trf-local-term-locality, proof (1)--(2): the identification of the completed local ring of M_L at a_L with the Taylor ring L[[T_1,...,T_n]] in the chart Taylor homomorphism of lem-trf-taylor-normal-cone-splitting (BM 1997, Definition 3.4).",
+   "via": [
+    "lem-trf-taylor-normal-cone-splitting",
+    "lem-trf-generic-monotone-diagram",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed local ring of an etale chart at a rational point after field extension",
+ "statement": "Let $k$ be a field, let $U$ be a $k$-scheme [def-pc-scheme] with an etale morphism $t=(t_1,\\ldots,t_n):U\\to\\mathbf A^n_k$ [def-weil-etale-morphism] [def-sbc-affine-space] of $k$-schemes, $n\\ge0$, let $L\\supseteq k$ be a field extension, put $U_L=U\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ [def-pc-fibre-product], and let $b\\in U_L$ be a point whose residue field $\\kappa(b)$ [def-weil-residue-field] is $L$, i.e. the map $L\\to\\kappa(b)$ induced by the projection $U_L\\to\\operatorname{Spec}L$ is an isomorphism. Write $t_i$ also for its pullback to $U_L$, $c_i\\in L$ for the value of $t_i$ at $b$ (its image in $\\kappa(b)=L$), $\\mathcal O_{U_L,b}$ for the local ring at $b$ with maximal ideal $\\mathfrak m_b$ [def-weil-pbc-localization-at-prime], and $\\widehat{\\mathcal O}_{U_L,b}=\\varprojlim_r\\mathcal O_{U_L,b}/\\mathfrak m_b^r$ for its completion [def-weil-pbc-adic-completion], an $L$-algebra through the projection to $\\operatorname{Spec}L$. Then there is a unique homomorphism of $L$-algebras $\\theta:L[[T_1,\\ldots,T_n]]\\to\\widehat{\\mathcal O}_{U_L,b}$ [def-weil-pbc-multivariate-power-series] such that, for every $r\\ge1$, the image of $\\theta(\\sum_Ea_ET^E)$ in $\\mathcal O_{U_L,b}/\\mathfrak m_b^r$ is the class of the finite sum $\\sum_{|E|<r}a_E\\prod_i(t_i-c_i)^{e_i}$; and $\\theta$ is an isomorphism of local rings, carrying $(T_1,\\ldots,T_n)$ onto the maximal ideal of $\\widehat{\\mathcal O}_{U_L,b}$ and inducing the identity of residue fields $L$. In particular $\\theta(T_i)=t_i-c_i$. For $n=0$ the statement says that $L\\to\\widehat{\\mathcal O}_{U_L,b}$ (and $L\\to\\mathcal O_{U_L,b}$) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 039M (lemma-characterize-etale-completions) and the remark following it (the rank n of the completion is the residue degree, so the completed map is an isomorphism when the residue extension is trivial), applied to the base change U_L -> A^n_L of the etale chart at the L-rational point b over the L-rational point (c_1,...,c_n); the completion of L[T_1,...,T_n] at (T_1-c_1,...,T_n-c_n) is the power series ring L[[T_1-c_1,...,T_n-c_n]]."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-etale-chart-rational-point-finite-jets] to the given chart and point. It supplies Noetherianity of the actual stalk B, equality I B=m_B for the centered polynomial map f, and quotient isomorphisms P/I^r = B/m_B^r with their formulas on representatives. Identify these isomorphisms with Ideal.quotientMap by quotient induction; Ideal.map_pow then gives the hypothesis of the completion-comparison theorem.",
+   "uses": [
+    "lem-trf-etale-chart-rational-point-finite-jets"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselization-completion-data] to f and I. Rewrite I B=m_B. Compose the resulting completion equivalence with Mathlib MvPowerSeries.toAdicCompletionAlgEquiv (Fin n) L, which identifies power series with the variables-adic completion of polynomials. Its truncation formula and the representative formula of the completion comparison give the asserted finite-level Taylor formula. Its polynomial formula gives the scalar and variable images.",
+   "uses": [
+    "lem-weil-pbc-henselization-completion-data",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adic-completion",
+    "lem-trf-polynomial-variables-adic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Any other expansion agrees in every positive quotient, and the level-zero quotient is a zero ring. AdicCompletion.ext_evalₐ gives equality. Bijectivity is composition of the two equivalences. A surjective ring map from a local ring is local. The variables span the kernel of constant coefficient by [lem-weil-pbc-power-series-kernels]; over a field this is precisely the maximal ideal, by the power-series unit criterion. Surjectivity sends it to the completion maximal ideal, whose local-ring structure follows from [lem-weil-pbc-local-completion-local-ring].",
+   "uses": [
+    "lem-weil-pbc-power-series-kernels",
+    "lem-weil-pbc-local-completion-local-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Truncation at level one is the constant polynomial, proving the residue normalization. If n=0, MvPowerSeries.isEmptyEquiv identifies the series ring with L, so the completed structural scalar map is bijective. The original scalar map is injective since its source is a field. For a in B, surjectivity of the completed scalar map gives c in L with the same completion image as a. The completion map is injective by Krull separation for Noetherian local rings; hence iota(c)=a.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-chart-rational-point-finite-jets",
+  "lem-weil-pbc-henselization-completion-data",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-polynomial-variables-adic-completion",
+  "lem-weil-pbc-power-series-kernels",
+  "lem-weil-pbc-local-completion-local-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 039M and its residue-degree remark; finite jets from the original geometric argument, followed by the proved generic quotient-to-completion theorem, Mathlib polynomial-completion coordinates, and explicit uniqueness/locality/normalization proofs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AdicCompletion in files that mention Etale/etale, Mathlib (whole tree): grep -rln AdicCompletion | xargs grep -ln 'Etale\\|etale'",
+   "results": "0 files",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no statement relating etale maps and adic completions"
+  },
+  {
+   "tool": "grep",
+   "query": "'theorem.*[Ee]tale.*[Cc]ompletion|lemma.*[Ee]tale.*[Cc]ompletion' in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries files mentioning AdicCompletion in Mathlib",
+   "results": "Mathlib/RingTheory/MvPowerSeries/Equiv.lean: MvPowerSeries.toAdicCompletionAlgEquiv (lines 341-344), power series = adic completion of the polynomial ring at the ideal of the variables",
+   "date": "2026-10-22",
+   "verdict": "no match: covers only the completion of a polynomial ring at the origin, not the completed local ring of an etale chart after base change; a candidate ingredient, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed local ring of an etale chart at a rational point over a field is the multivariate power series ring with the coordinates minus their values as variables",
+   "results": "{\"t\": \"2026-10-22T06:45:23Z\", \"tool\": \"leanfinder\", \"query\": \"The completed local ring of an etale chart at a rational point over a field is the multivariate power series ring with the coordinates minus their values as variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsStandardEtaleRing\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instCommRingRing\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.IsStandardEtale.of_isLocalizationAway\"], \"digest\": \"561d7b6ba4cba9cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give etale invariance of completed local rings with specified Taylor coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*complet|complet.*etale|toAdicCompletionAlgEquiv",
+   "results": "{\"t\": \"2026-10-22T06:45:45Z\", \"tool\": \"grep\", \"query\": \"etale.*complet|complet.*etale|toAdicCompletionAlgEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"a5444700caa38970\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial completion equivalence is only an ingredient, not the etale-chart theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms induce an isomorphism of completed local rings at points with identical residue fields",
+   "results": "{\"t\": \"2026-10-22T06:45:46Z\", \"tool\": \"leansearch\", \"query\": \"Etale morphisms induce an isomorphism of completed local rings at points with identical residue fields\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Algebra.Etale",
+   "results": "{\"t\": \"2026-10-22T06:45:46Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give etale invariance of completed local rings with specified Taylor coordinates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of noetherian local rings with equal maximal ideals and isomorphic residue fields induces an isomorphism on adic completions",
+   "results": "{\"t\": \"2026-10-22T06:46:14Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local homomorphism of noetherian local rings with equal maximal ideals and isomorphic residue fields induces an isomorphism on adic completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.ofAlgEquiv\", \"AdicCompletion.ofAlgEquiv_apply\", \"isLocalRing_of_isAdicComplete_maximal\", \"AdicCompletion.congr\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ\"], \"digest\": \"9286b31391d3d2b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not give etale invariance of completed local rings with specified Taylor coordinates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-trf-taylor-normal-cone-splitting",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-etale-chart-rational-point-taylor-iso",
+  "worker": "stage1",
+  "summary": "Q81: retained the full statement; split using existing etale base-change, unramified maximal-ideal, Noetherian permanence, flat-local completion, and monoid coefficient nodes. Made translation, localization inverses, finite truncation, uniqueness, the actual structural residue maps, and n=0 explicit. No new nodes. Searched the project and Mathlib; no full exact match.",
+  "blueprint": "VIII 2.3.11 and 2.3.13, printed pp.93--94; lower local input for the historical modification branch of lem-trf-local-term-locality, proof (1)--(2): the identification of the completed local ring of M_L at a_L with the Taylor ring L[[T_1,...,T_n]] in the chart Taylor homomorphism of lem-trf-taylor-normal-cone-splitting (BM 1997, Definition 3.4).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-completion-iso",
+    "why": "General local-algebra tool for the actual flat stalk map with equal maximal ideals and identical residue fields; the unit has only the algebraically-closed-field special case, which does not apply to arbitrary L."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Local finite type over the locally Noetherian affine space supplies local Noetherianity of U_L without a global quasi-compactness hypothesis; no theorem of this unit replaces this generic permanence result."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-ff97c4a55",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-ff97c4a55 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is word for word the one Q89's reviewer created, and the delivery has no new nodes. Source checks: Stacks 039M and its residue-degree remark, and 0AGX; I read both proofs. Step 1: base change is étale by 02GO, the residue map is identified as L[X] evaluated at c with kernel (X−c) by translation, and A=P_q by stalk-localization (c). Step 2: Noetherianity of A and B comes from finite type, localization and 01T6, using only local finite type. Step 3: flatness, m_A B=m_B from the unramified criterion (i)⇒(ii) with V=U_L, and the identity residue map from step 1; these are exactly the hypotheses of flat-local-completion-iso. Step 4: the monoid-coefficients node with A=L, m=0, P=N^n, ν=|E|; with m=0 its kernel criterion gives exactly the truncation formula. Step 5: the elementary P/J^r≅A/m_A^r via the geometric-series inverse is correct. Steps 6 and 7: the composite formula and uniqueness need no continuity assumption; the maximal ideal and residue identity follow; for n=0, m_B=0 so B=L. Small cases checked: the identity chart at c≠0, ℝ⊂ℂ with n=1, and finite étale n=0. Non-rational points are correctly excluded. The two tool_uses are accepted: flat-local-completion-iso (sk-thm-p1, which is reachable from the unit) and pqf-lem-locnoeth-lft. There is no SGA. The algebraically-closed node, the smooth-rational-point node, power-series-onto-completion and the smooth-augmentation node are weaker or different, so none duplicates the item. No re-split note exists for this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartRationalPointTaylorIso",
+  "declaration": "AlgebraicGeometry.EtaleChartTaylor.exists_unique_taylor_iso",
+  "declarations": [
+   "AlgebraicGeometry.EtaleChartTaylor.baseChange",
+   "AlgebraicGeometry.EtaleChartTaylor.scalarMap",
+   "AlgebraicGeometry.EtaleChartTaylor.residueMap",
+   "AlgebraicGeometry.EtaleChartTaylor.coordinate",
+   "AlgebraicGeometry.EtaleChartTaylor.centeredCoordinate",
+   "AlgebraicGeometry.EtaleChartTaylor.IsExpansion",
+   "AlgebraicGeometry.EtaleChartTaylor.exists_unique_taylor_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartRationalPointTaylorIso.lean",
+  "statement": "theorem exists_unique_taylor_iso {k L : Type u} [Field k] [Field L] [Algebra k L] {U : Scheme.{u}} (p : U ⟶ Spec (.of k)) (n : ℕ) (t : U ⟶ AffineSpace (ULift.{u} (Fin n)) (Spec (.of k))) [Etale t] (ht : t ≫ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of k)) ↘ Spec (.of k)) = p) (b : baseChange p L) (hb : Function.Bijective (residueMap p b)) : ∃ θ : MvPowerSeries (Fin n) L →+* AdicCompletion (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) ((baseChange p L).presheaf.stalk b), IsExpansion (scalarMap p b) (centeredCoordinate p t b hb) θ ∧ (∀ θ' : MvPowerSeries (Fin n) L →+* AdicCompletion (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) ((baseChange p L).presheaf.stalk b), IsExpansion (scalarMap p b) (centeredCoordinate p t b hb) θ' → θ' = θ) ∧ Function.Bijective θ ∧ IsLocalHom θ ∧ (∃ hlocal : IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) ((baseChange p L).presheaf.stalk b)), Ideal.map θ (Ideal.span (Set.range (MvPowerSeries.X (σ := Fin n) (R := L)))) = @IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) ((baseChange p L).presheaf.stalk b)) _ hlocal) ∧ (∀ i : Fin n, θ (MvPowerSeries.X i) = algebraMap ((baseChange p L).presheaf.stalk b) (AdicCompletion (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) ((baseChange p L).presheaf.stalk b)) (centeredCoordinate p t b hb i)) ∧ (∀ f : MvPowerSeries (Fin n) L, AdicCompletion.evalₐ (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) 1 (θ f) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b) ^ 1) (scalarMap p b (MvPowerSeries.constantCoeff f))) ∧ (n = 0 → Function.Bijective (scalarMap p b) ∧ Function.Bijective ((algebraMap ((baseChange p L).presheaf.stalk b) (AdicCompletion (IsLocalRing.maximalIdeal ((baseChange p L).presheaf.stalk b)) ((baseChange p L).presheaf.stalk b))).comp (scalarMap p b)))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e284032b",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node statement: structural pullback base change, rationality via the structural residue map L→κ(b), centred germs t_i−c_i, truncTotal r = sum over |E|<r (Mathlib Trunc.lean:325), uniqueness over all ring homs, bijective + IsLocalHom, (T) maps onto the maximal ideal with locality in the conclusion, θ(X_i), level-1 residue identity, n=0 clauses. lean.statement is verbatim and declarations are complete; no extra hypotheses; universes standard (k, L, U in u); defs are real with Tag 039M + blueprint docstrings and proof steps; proof only sorry; imports are the stmt_dep and proof_dep modules, all present live; not superseded (live node split, lean null). Advisory: the IsExpansion coefficient conjunct is implied by the truncation conjunct. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T092630-L-3449198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

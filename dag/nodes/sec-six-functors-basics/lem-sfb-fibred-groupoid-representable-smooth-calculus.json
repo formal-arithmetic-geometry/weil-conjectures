@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+ "kind": "statement",
+ "title": "Representable smooth and etale calculus for arbitrary fibred groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Categories fibred in groupoids, morphisms, 2-morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. For a morphism $f:\\mathcal F\\to\\mathcal G$ of such categories, representable by algebraic spaces means that every scheme 2-base change $\\mathcal F\\times_{\\mathcal G}T$ is equivalent to an algebraic space over $T$. Call a representable map smooth, respectively etale or surjective, when all these algebraic-space projections to $T$ are smooth, respectively etale or surjective. On algebraic spaces smoothness and etaleness are tested on etale scheme charts, using [def-sbc-smooth-morphisms, def-weil-etale-morphism]; surjectivity is surjectivity on field-valued point classes, where two field-valued points are identified if they agree after a common field extension [def-weil-field]. Then representability by algebraic spaces, and each of the properties smooth, etale and surjective for representable maps, are preserved under arbitrary 2-base change and under composition. Every representable etale map is smooth. A morphism $G\\to F$ of algebraic spaces, viewed as discrete fibred groupoids, is representable by algebraic spaces. If moreover $G\\to F$ is representable in the sense of [def-trf-algebraic-space] (every $h_T\\times_FG$ is a scheme), for instance a scheme chart $h_U\\to F$, then it is etale, respectively surjective, in the sense of [def-trf-algebraic-space] if and only if it is etale, respectively surjective, as a representable map in the above sense. No stack condition, representable diagonal, or atlas for any of $\\mathcal F,\\mathcal G$ or the base-changing category is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 0301 (lemma-composition-representable-by-spaces), 0302 (lemma-base-change-representable-by-spaces), 045A (lemma-map-presheaves-representable-by-spaces-transformation-property), 045B (lemma-composition-representable-transformations-property), 045C (lemma-base-change-representable-transformations-property); smooth and etale specializations with spaces-morphisms.tex Tags 03ZD (lemma-composition-smooth), 03ZE (lemma-base-change-smooth), 04XX (lemma-etale-smooth), spaces-properties.tex Tags 03FT, 03FU, and scheme-test surjectivity. This formulation uses the etale-chart convention, so it also applies without an fppf stack hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-field",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-surjective-moduli-map",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Use the triple description of the 2-fibre product. For $f:\\mathcal F\\to\\mathcal G$, $a:\\mathcal H\\to\\mathcal G$ and a scheme $T\\to\\mathcal H$, the equivalence $(\\mathcal F\\times_{\\mathcal G}\\mathcal H)\\times_{\\mathcal H}T\\simeq\\mathcal F\\times_{\\mathcal G}T$ sends $(x,h,t,\\alpha:f(x)\\simeq a(h),\\beta:h\\simeq t|_{\\mathcal H})$ to $(x,t,a(\\beta)\\alpha)$. Its inverse inserts $h=t|_{\\mathcal H}$ and $\\beta=1$; the given $\\beta$ identifies the other composite with the identity, also on arrows. These formulas commute with restriction. Thus every scheme test of the base-changed map is precisely a scheme test of $f$, up to equivalence over $T$. It is an algebraic space, and its projection has each of the assumed properties of $f$. This proves arbitrary 2-base-change stability, even when $\\mathcal H$ is not a stack.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 0302 (lemma-base-change-representable-by-spaces), 045C (lemma-base-change-representable-transformations-property): formal proofs expanded"
+   }
+  },
+  {
+   "text": "For composable representable maps $f:\\mathcal F\\to\\mathcal G$ and $g:\\mathcal G\\to\\mathcal K$, fix $T\\to\\mathcal K$. Put $B=\\mathcal G\\times_{\\mathcal K}T$, an algebraic space by representability of $g$. Apply the representable-pullback-over-space lemma to $f$ and $B\\to\\mathcal G$: $A=\\mathcal F\\times_{\\mathcal G}B$ is an algebraic space. Identify $A\\simeq\\mathcal F\\times_{\\mathcal K}T$ as follows. A triple $(x,(y,t,\\gamma:g(y)\\simeq t),\\alpha:f(x)\\simeq y)$ goes to $(x,t,\\gamma g(\\alpha))$. The inverse inserts $y=f(x)$ and $\\alpha=1$; $\\alpha$ identifies its composite with the identity. The same formulas on arrows and restrictions give an equivalence over $T$. Therefore $gf$ is representable. No diagonal or atlas of any of the three groupoids was used.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-representable-pullback-over-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 0301 (lemma-composition-representable-by-spaces) and 0300 (lemma-base-change-by-space-representable-by-space)"
+   }
+  },
+  {
+   "text": "Retain $A\\to B\\to T$ from step 2, and let $P$ be smooth or etale, assumed for both $f$ and $g$. The scheme-locality lemma verifies the hypotheses of the presentation criterion for this $P$. Choose an etale surjective scheme atlas $V\\to B$. Then $E=A\\times_BV\\simeq\\mathcal F\\times_{\\mathcal G}V\\to V$ has $P$ by the scheme test of $f$. Choose an etale surjective scheme atlas $U\\to E$. The presentation criterion applied over the scheme $V$ says that $U\\to V$ has $P$. Likewise the test $B\\to T$ of $g$, with source chart $V$ and target chart $T$, gives $P(V\\to T)$. Scheme composition gives $P(U\\to T)$. The map $E\\to A$ is the base change of the etale surjective atlas $V\\to B$, so it is etale surjective; its composite with $U\\to E$ is an etale surjective scheme chart $U\\to A$. The presentation criterion for $A\\to T$, with this chart and target chart $T$, now gives $P(A\\to T)$. This proves both composition assertions on every scheme test.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045B (lemma-composition-representable-transformations-property), scheme-chart proof using spaces-morphisms.tex Tag 03MJ and Tag 03ZD; spaces-properties.tex Tag 03FT"
+   }
+  },
+  {
+   "text": "For surjectivity of the composite, keep the same test $T$, $B$ and $A$. Given a field-valued point $t:\\operatorname{Spec}K\\to T$, surjectivity of $B\\to T$ gives an extension $K\\hookrightarrow L$ and a lift $b\\in B(L)$ of $t|_L$. Apply the surjectivity test of $f$ to the scheme map $\\operatorname{Spec}L\\to B\\to\\mathcal G$. It gives an extension $L\\hookrightarrow M$ and an object $x$ with $f(x)\\simeq b|_M$ in $\\mathcal G(M)$. Together with the $T$-component of $b|_M$, these are an $M$-valued point of $A$ mapping to $t|_M$. Equality in the representing algebraic space is the isomorphism class of this triple. This proves surjectivity on point classes. Only two successive field extensions and the definition of a 2-fibre product are involved; in particular no descent of objects in the original groupoids is asserted.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045B (lemma-composition-representable-transformations-property), surjective specialization; spaces-properties.tex Tag 03BU (definition-points)"
+   }
+  },
+  {
+   "text": "For an etale representable $f$, fix its algebraic-space test $X\\to T$. Choose a presentation of this map with etale surjective source chart $U\\to X$ and etale target chart $V\\to T$. The etale version of the presentation criterion makes $U\\to V$ an etale scheme map. The scheme etale-implies-smooth lemma makes it smooth. The smooth version of the same criterion makes $X\\to T$ smooth. Scheme etale locality and smooth locality are the hypotheses needed for the two applications of that criterion. Since $T$ was arbitrary, $f$ is smooth.",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04XX (lemma-etale-smooth)"
+   }
+  },
+  {
+   "text": "For a morphism $G\\to F$ of algebraic spaces, a scheme test is the sheaf fibre product $G\\times_Fh_T$, an algebraic space by the algebraic-space fibre-product lemma. The groupoids involved are discrete, so its ordinary pairs of sections are exactly the triples of the 2-fibre product: the isomorphism component exists precisely for equal images and is then unique. Hence every such morphism is representable by algebraic spaces. If it is additionally representable by schemes, each test projection $W\\to T$ is a scheme morphism. The presentation criterion and scheme-locality lemma say that its chartwise etaleness is equivalent to its scheme etaleness. Thus the two meanings of etale for this representable map agree test by test.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Lemma morphism-spaces-gives-representable-by-spaces; Tag 045A (lemma-map-presheaves-representable-by-spaces-transformation-property); spaces-morphisms.tex Tag 03MJ"
+   }
+  },
+  {
+   "text": "For the remaining comparison, consider any scheme test projection $W\\to T$ of a scheme-representable map. If it is topologically surjective, for $t:\\operatorname{Spec}K\\to T$ its pullback $W_K\\to\\operatorname{Spec}K$ is surjective by scheme surjectivity under base change. Choose a point $w\\in W_K$; its residue field $L=\\kappa(w)$ gives a $K$-extension and a lift in $W(L)$. Conversely apply field-extension lifting to the canonical point $\\operatorname{Spec}\\kappa(t)\\to T$ of any $t\\in|T|$: a lift over an extension has an image point of $W$ above $t$, proving topological surjectivity. These arguments also cover empty schemes. Therefore the scheme-test definitions of surjectivity agree. A chart $h_U\\to F$ is representable by schemes by definition, so both comparison conclusions apply to it. Every argument above used atlases only for the algebraic spaces produced by tests, never for the original fibred groupoids.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-residue-field",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045A (lemma-map-presheaves-representable-by-spaces-transformation-property), surjective specialization; morphisms.tex Tag 01S1 (lemma-base-change-surjective)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-residue-field",
+  "def-weil-surjective-morphism",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-trf-smooth-composition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 0300-0302, 045A-045C; formal and omitted arguments expanded with scheme chart tests (spaces-morphisms.tex Tag 03MJ)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For categories fibred in groupoids representable smooth surjective morphisms are stable under base change and composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Representable\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D), F.relativelyRepresentable.IsStableUnderBaseChange\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"CategoryTheory.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"module\": \"Mathlib/CategoryTheory/Sites/JointlySurjective\", \"type\": \"CategoryTheory.Types.jointlySurjectivePrecoverage.IsStableUnderBaseChange\", \"doc\": \"The jointly surjective precoverage on the category of types is stable under base change. This means that for any morphism $ f : Y \\to X $ in the category of types and any covering sieve $ S $ on $ X $ \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology\", \"type\": \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage.IsStableUnderBaseChange\", \"doc\": \"The jointly surjective precoverage on the category of schemes is stable under base change. Specifically, if a family of morphisms of schemes has images that jointly cover the target scheme, then the p\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isMultiplicative\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Representable\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D), F.relativelyRepresentable.IsMultiplicative\", \"doc\": \"For any functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the morphism property of being relatively representable with respect to $ F $ is multiplicative. This means that if two composable morphisms $ f $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, etaleness and surjectivity and ordinary relative representability do not give this calculus for groupoid-valued 2-pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean: ordinary categorical pullbacks, not these 2-pullbacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsStableUnderBaseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, etaleness and surjectivity and ordinary relative representability do not give this calculus for groupoid-valued 2-pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean: ordinary categorical pullbacks, not these 2-pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Representable.*Smooth|Smooth.*Representable|Fibred.*Groupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, etaleness and surjectivity and ordinary relative representability do not give this calculus for groupoid-valued 2-pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean: ordinary categorical pullbacks, not these 2-pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change and composition of morphisms of categories fibered in groupoids representable by algebraic spaces preserve smoothness etaleness and surjectivity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsSmooth f] [IsSmooth g] : IsSmooth (f ≫ g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.Smooth.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Smooth R A] : Smooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the tensor product $ B \\\\otimes_R A $ is a smooth algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, etaleness and surjectivity and ordinary relative representability do not give this calculus for groupoid-valued 2-pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean: ordinary categorical pullbacks, not these 2-pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable morphisms of stacks smooth etale or surjective remain so after arbitrary two pullbacks and composites",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, etaleness and surjectivity and ordinary relative representability do not give this calculus for groupoid-valued 2-pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean: ordinary categorical pullbacks, not these 2-pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For categories fibred in groupoids representable smooth etale surjective morphisms are stable under two fibre products and composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean lines 99-115 (definition), Morphisms/Smooth.lean lines 106-123, and Morphisms/Etale.lean lines 40-80: none constructs algebraic-space 2-pullbacks of fibred groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativelyRepresentable\", \"isStableUnderBaseChange\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) : F.relativelyRepresentable.IsStableUnderBaseChange\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean lines 99-115 (definition), Morphisms/Smooth.lean lines 106-123, and Morphisms/Etale.lean lines 40-80: none constructs algebraic-space 2-pullbacks of fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|Fibred.*Groupoid|Fibered.*Groupoid|Representable.*Smooth|Smooth.*Representable",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean lines 99-115 (definition), Morphisms/Smooth.lean lines 106-123, and Morphisms/Etale.lean lines 40-80: none constructs algebraic-space 2-pullbacks of fibred groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of categories fibered in groupoids representable by algebraic spaces smooth etale stable under composition and arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": IsStableUnderBaseChange F.relativelyRepresentable\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.MorphismProperty C},\\n  (∀ {X Y Y' S : C} {f : X ⟶ S} {g : Y ⟶ S} {f' : Y' ⟶ Y} {g' : Y' ⟶ X},\\n      CategoryTheory.IsPullback f' g' g f → P g → P g') →\\n    P.IsStableUnderBaseChange\", \"doc\": \"If for every pullback square involving morphisms $f' : Y' \\\\to Y$, $g' : Y' \\\\to X$, $g : Y \\\\to S$, and $f : X \\\\to S$, the property $P$ holds for $g'$ whenever it holds for $g$, then the morphism proper\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangeAlongCompOfHasPullbacksAlong\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [P.IsStableUnderBaseChangeAlong f] [P.IsStableUnderBaseChangeAlong g]\\n  [P.HasPullbacksAlong g] : P.IsStableUnderBaseChangeAlong (f ≫ g)\", \"doc\": \"In a category $\\\\mathcal{C}$, if a morphism property $P$ is stable under base change along morphisms $f : X \\\\to Y$ and $g : Y \\\\to Z$, and there exist pullbacks along $g$, then $P$ is also stable under \"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderCompositionSchemeOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[W.IsStableUnderComposition] [P.IsStableUnderBaseChange] [P.IsStableUnderComposition] :\\n  (sourceLocalClosure W P).IsStableUnderComposition\", \"doc\": \"If $ W $ is stable under composition and $ P $ is stable under both base change and composition, then the source-local closure of $ W $ and $ P $ is also stable under composition in the category of sc\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean lines 99-115 (definition), Morphisms/Smooth.lean lines 106-123, and Morphisms/Etale.lean lines 40-80: none constructs algebraic-space 2-pullbacks of fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic spaces morphisms tested on schemes smooth composition etale chart descent for groupoid two pullbacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsSmooth f]\\n  [AlgebraicGeometry.IsSmooth g], AlgebraicGeometry.IsSmooth (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks. Read Mathlib/CategoryTheory/MorphismProperty/Representable.lean lines 99-115 (definition), Morphisms/Smooth.lean lines 106-123, and Morphisms/Etale.lean lines 40-80: none constructs algebraic-space 2-pullbacks of fibred groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-fibre-products",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Scheme-base-change test for universal closedness of representable stack maps. Supporting topology and algebraicity inputs to the scheme-base-change test (Stacks 0512), below paragraph (3) of det-thm-sf-ctf-stability-direct-images. Within the algebraicity input, Stacks 04TF final paragraph: the atlas comparison is a composition of base changes of the two smooth surjective atlases, before algebraicity of the target is known.",
+   "via": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-representable-stack-universally-closed-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "worker": "stage1",
+  "summary": "Expanded the formal base-change test, composition via the existing algebraic-space pullback lemma, compatible scheme charts for smooth and etale composition, field-extension lifting for surjectivity, and the discrete-space comparison. No new nodes; every non-elementary input already exists. Statement unchanged.",
+  "blueprint": "Inherited ancestry has no resolvable imported ancestor (blueprint_refs.py ancestor returns None). Supporting calculus for atlas comparison in Stacks 04TF, below the inherited direct-image/alteration-moduli route. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); its current proof delegates open direct images, so the older detailed alteration text is historical ancestry, not a claim about current text.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Algebraic-space fibre products and base change of etale surjective charts, used before algebraicity of the ambient groupoids; a generic spaces tool."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Composition of representable etale surjective charts and scheme comparison; a generic spaces tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Only its etale-implies-smooth clause for scheme chart morphisms; the unit has no separate scheme implication node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-0400592b2",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-0400592b2 (reviewer sub-agent of L); spot-checked: First stage-1 split of lem-sfb-fibred-groupoid-representable-smooth-calculus: one commit, no new nodes, statement and stmt_deps unchanged. Live and side-live still have the item unsplit and there is no repair note, so it is not superseded. Source check: Stacks algebraic.tex 0300, 0301 (details omitted), 0302 (formal) and 045B/045C (proof omitted) assume only categories fibred in groupoids, which matches the item; tags 03ZD/03ZE/04XX/03FT/03FU/03MJ match their labels; no SGA. Step checks: (1) the base-change triple equivalence and its inverse are correct and elementary. (2) Composition of representability applies lem-sfb-representable-pullback-over-space with Z=B=G×_K T, whose hypotheses hold, and the identification A≃F×_K T is correct. (3) Smooth/etale composition: the scheme-locality node supplies the criterion's hypotheses; E=A×_B V is f's test along V; criterion clause (1) with identity target charts gives P(U→V) and P(V→T); scheme composition comes from Mathlib leaves; U→E→A is representable etale surjective by the trf representable-test and fibre-product nodes; clause (2) gives P(A→T). (4) Surjectivity composes by two successive field-extension lifts; this is elementary and matches the jointly-surjective definition. (5) Etale implies smooth through charts, using only the smoothness clause of the zero-dimensional-fibres lemma. (6) For maps of spaces, G×_F h_T is an algebraic space by the fibre-product node, and the scheme clause of the criterion identifies the two meanings of etale. (7) The topological surjectivity comparison uses surjective base change and residue fields; the empty case is covered. Every clause of the statement is proved. Citers (the parent algebraic-stack-fibre-products step) use exactly these clauses. No cycle; no duplicate found by rg -L over the DAG. The three declared tool_uses are accepted as generic. Batch 5: all seven flagged citations are generic algebraic-space definitions, fibre products, representable etale tests or smooth-composition Mathlib leaves. None is a step of the proof of the trace formula or of Poincare duality, so all are accepted. Advisory: step 6 relies on the standing DAG convention that h_T is an algebraic space. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibredGroupoidRepresentableSmoothCalculus",
+  "declaration": "CategoryTheory.fibred_groupoid_representable_baseChange",
+  "declarations": [
+   "CategoryTheory.fibred_groupoid_surjective_iff_space_tests",
+   "CategoryTheory.fibred_groupoid_representable_baseChange",
+   "CategoryTheory.fibred_groupoid_representable_comp",
+   "CategoryTheory.fibred_groupoid_etale_smooth",
+   "CategoryTheory.space_discrete_moduli_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FibredGroupoidRepresentableSmoothCalculus.lean",
+  "statement": "theorem fibred_groupoid_representable_baseChange {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} {H : BasedCategory.{v₃, w₃} (Over S)} (hF : IsFibredInGroupoids F) (hG : IsFibredInGroupoids G) (hH : IsFibredInGroupoids H) (f : BasedFunctor F G) (g : BasedFunctor H G) (hf : IsRepresentableByAlgebraicSpaces f) : IsRepresentableByAlgebraicSpaces (moduliTwoFiberFst g f) ∧ (ModuliSpaceTest @Smooth f → ModuliSpaceTest @Smooth (moduliTwoFiberFst g f)) ∧ (IsEtaleModuliMap f → IsEtaleModuliMap (moduliTwoFiberFst g f)) ∧ (IsSurjectiveModuliMap f → IsSurjectiveModuliMap (moduliTwoFiberFst g f))",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Five theorems jointly state the node: the field-extension-lifting/space-test point-class comparison, arbitrary CFG base change, composition, etale implies smooth, and discrete algebraic-space representability and scheme-test comparisons. Only IsFibredInGroupoids hypotheses; no stack, atlas or diagonal assumptions. Reuses the landed ModuliSpaceTest, IsEtaleModuliMap, IsSurjectiveModuliMap and IsJointlySurjective definitions; their owning nodes are added to stmt_deps. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b00d86f2",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Five sorry theorems match the node clause by clause: point-class surjectivity iff via IsJointlySurjective (checked true both ways), arbitrary CFG 2-base change (only hf), composition f.comp g (f then g, verified), etale=>smooth, discrete-space representability plus etale/surjective comparisons under AlgebraicSpace.IsRepresentable. Only IsFibredInGroupoids hypotheses (Stacks 0302/045A/045B are CFG-only); independent universes; no Nonempty/finiteness. Statement verbatim; node diff vs side-live = lean + 4 added def stmt_deps (owners of ModuliSpaceTest, IsEtaleModuliMap, IsSurjectiveModuliMap, IsJointlySurjective), all present and unchanged in snapshot, no cycle. Existing stack_chartwise_* theorems assume algebraic stacks, so not a duplicate. No defs, no proofs, docstrings OK. No compile run (no file changed)."
+ }
+}

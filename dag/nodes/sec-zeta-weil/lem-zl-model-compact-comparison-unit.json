@@ -33,44 +33,42 @@
    }
   },
   {
-   "text": "By [lem-trf-scheme-frobenius-finite-radicial], $\\Phi$ is finite. To check the iterate rather than assume its properness, induct on $r\\geq1$: the base case is $\\Phi$ itself, and if $\\Phi^r$ is finite, [lem-weil-pbc-finite-composition] applied to $\\Phi^r$ and $\\Phi$ makes $\\Phi^{r+1}$ finite. Thus $h$ is finite and is proper by [lem-weil-pbc-finite-proper]. Also $fh=f$, since $\\Phi$ and all its iterates are morphisms over $s$. These are exactly the geometric conditions needed by the proper comparison and the final equality comparison in the recipe. The model is allowed to be non-reduced and $X$ need not be proper over $s$.",
+   "text": "Install the published IsModelFrobenius.isFinite and IsModelFrobenius.isUniversalHomeomorphism instances for the chosen iterate. The source library proves these by base change of the model Frobenius and induction on the iterate. Finite morphisms are proper by [lem-weil-pbc-finite-proper], and comp_toPoint supplies the final structure-morphism equality. No extra properness hypothesis on X is needed.",
    "uses": [
     "lem-trf-scheme-frobenius-finite-radicial",
-    "lem-weil-pbc-finite-composition",
     "lem-weil-pbc-finite-proper"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01WK (lemma-composition-finite) and 01WN (lemma-finite-proper); the model-Frobenius finiteness is the cited existing node"
+    "document": "lean/WeilConjectures/TraceFormula/Frobenius.lean",
+    "place": "IsModelFrobenius.isFinite and IsModelFrobenius.isUniversalHomeomorphism"
    }
   },
   {
-   "text": "Use the concrete model-Weil compact-support interface named in [nt-assume-trace-formula], without invoking its trace equality. Expand its $\\operatorname{compactCohomologyFrobeniusComparison}$ according to the definition recipe recorded in this item's source field. With $I_s=L\\operatorname{id}_s^*$, its underlying map at $M$ is\n$$I_s(PM)\\xrightarrow{u_{PM}}PM\\xrightarrow{P(\\eta_{h,M})}PRh_*Lh^*M\\xrightarrow{P((c_h)_{Lh^*M})}PRh_!Lh^*M\\xrightarrow{(\\alpha_{f,h})_{Lh^*M}}R(fh)_!Lh^*M\\xrightarrow{(e_h)_{Lh^*M}}PLh^*M.$$\nHere $u$ is precisely the canonical identity-pullback isomorphism (including its unitors). Removing the initial identity pullback means precomposing this displayed map by $u_{PM}^{-1}$. The two adjacent maps $u_{PM}$ and $u_{PM}^{-1}$ cancel. What remains is the four-factor expression of Step 1, in the same order, so $\\Theta_{h,M}=d_{h,M}^{\\mathrm{cond}}$. The only expansion here is of the named implementation definition; in particular the proper and composition comparisons are not replaced by arbitrary isomorphisms having the same endpoints.",
+   "text": "In the actual implementation interface recorded by [nt-assume-trace-formula], specialize weilLowerShriekFrobeniusComparison to the trivial square of toPoint. The published theorem boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusComparison_hom_app identifies its identity-removed component with compactPullback. Expand compactPullback_app and boundedConstructibleLowerShriekCompToPoint_hom_app: the ordered unit, inverse proper comparison, inverse composition comparison, and equality comparison are exactly compactSupportProperUnit. A private proved helper establishes this equality by extensionality of natural transformations. Thus the specified model comparison equals the model proper unit, using the same chosen compactifications.",
    "uses": [
     "nt-assume-trace-formula"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/upstream-pr1473-495bc3883/Statement.lean",
-    "place": "compactCohomologyFrobeniusComparison definition recipe transcribed in the item source record (archive WANTED locally); identity-pullback removal is the explicit cancellation above"
+    "document": "lean/WeilConjectures/TraceFormula/CompactCohomology.lean",
+    "place": "boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusComparison_hom_app; CompactPullback.lean compactPullback_app and boundedConstructibleLowerShriekCompToPoint_hom_app"
    }
   },
   {
-   "text": "For $v:M\\to N$, naturality of the four transformations in Step 1 gives, in order, $Rh_*Lh^*(v)\\eta_{h,M}=\\eta_{h,N}v$ and the three corresponding naturality squares for $c_h,\\alpha_{f,h},e_h$. Whisker the first square by $P$, then compose the four squares. The result is $PLh^*(v)d_{h,M}^{\\mathrm{cond}}=d_{h,N}^{\\mathrm{cond}}P(v)$. This proves the asserted naturality. Finally the Weil compact-support object in [nt-assume-trace-formula] has underlying object $PM$. In the recorded recipe for $\\operatorname{weilCompactCohomology}$, applying $\\operatorname{IsoAlgebra.mapOfNatIso}$ to a Weil structure $w:Lh^*M\\xrightarrow{\\sim}M$ gives the structure arrow $P(w)\\Theta_{h,M}$ after the same identity pullback is removed; $\\operatorname{globalOperator}$ takes this arrow. Substitute Step 3 to obtain $P(w)d_{h,M}^{\\mathrm{cond}}$. This is an expansion of the construction, not an application of a trace formula or an identification with a Galois action.",
+   "text": "Naturality is NatTrans.naturality of modelCompactProperUnit. For the actual global operator in the implementation interface of [nt-assume-trace-formula], apply the proved WeilBoundedConstructible.globalOperator_eq at degree one. Replace iterateStr.hom by frobeniusCoefficientIterate using iterateStr_hom_eq_frobeniusCoefficientIterate, and then apply frobeniusCoefficientIterate_one. Simplify frobeniusIterate_one and the resulting identity cast. The result is compactPullback followed by compact pushforward of K.str.hom. Substitute the private proper-unit identification to obtain the last conjunct. This uses no trace formula, duality, or alternative coefficient category.",
    "uses": [
     "nt-assume-trace-formula"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/upstream-pr1473-495bc3883/Statement.lean",
-    "place": "weilCompactCohomology, IsoAlgebra.mapOfNatIso and WeilBoundedConstructibleOfEnd.globalOperator, as recorded in the item source field; archive WANTED locally"
+    "document": "lean/WeilConjectures/TraceFormula/CompactCohomology.lean",
+    "place": "WeilBoundedConstructible.globalOperator_eq; CompactPullback.lean iterateStr_hom_eq_frobeniusCoefficientIterate and frobeniusCoefficientIterate_one"
    }
   }
  ],
  "proof_deps": [
   "lem-trf-scheme-frobenius-finite-radicial",
-  "lem-weil-pbc-finite-composition",
   "lem-weil-pbc-finite-proper",
   "nt-assume-trace-formula",
   "sk-def-sfb-bounded-constructible",
@@ -80,8 +78,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
-  "place": "Agent-written definitional expansion from the implementation recipe in the item source record. The blueprint supplies the graph/proper-unit recipe in finite coefficients only; the concrete PR1473 source archive is WANTED locally, not claimed to have been read."
+  "document": "lean/WeilConjectures/TraceFormula/CompactCohomology.lean",
+  "place": "Y2: the existing identity-removal and globalOperator_eq theorems implement the same proper-unit argument; naturality and the component expansion are elementary. Source-library declarations and proofs are preserved."
  },
  "mathlib_searches": [
   {
@@ -224,12 +222,33 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.modelCompactComparison_eq_properUnit"
   ],
   "file": "lean/Sheaf/Paper/ModelCompactComparisonUnit.lean",
-  "statement": "theorem modelCompactComparison_eq_properUnit (hΦ : IsModelFrobenius Φ f₀ π) (r : ℕ) (hr : 1 ≤ r) : modelCompactComparisonWithoutIdentity ℓ hΦ r = modelCompactProperUnit ℓ hΦ r ∧ (∀ (M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (v : M ⟶ N), (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map v ≫ (modelCompactProperUnit ℓ hΦ r).app N = (modelCompactProperUnit ℓ hΦ r).app M ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ r)).map v)) ∧ (∀ K : WeilBoundedConstructibleOfEnd ℓ (frobeniusIterate Φ r), modelCompactGlobalOperator ℓ hΦ r K = (modelCompactProperUnit ℓ hΦ r).app K.carrier ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map K.str.hom)",
+  "statement": "theorem modelCompactComparison_eq_properUnit (hΦ : IsModelFrobenius Φ f₀ π) (r : ℕ) (hr : 1 ≤ r) : modelCompactComparisonWithoutIdentity ℓ hΦ r = modelCompactProperUnit ℓ hΦ r ∧ (∀ (M N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (v : M ⟶ N), (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map v ≫ (modelCompactProperUnit ℓ hΦ r).app N = (modelCompactProperUnit ℓ hΦ r).app M ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ r)).map v)) ∧ (∀ K : WeilBoundedConstructible ℓ (frobeniusIterate Φ r), modelCompactGlobalOperator ℓ hΦ r K = (modelCompactProperUnit ℓ hΦ r).app K.carrier ≫ (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map K.str.hom)",
   "branch": "newtargets-dag",
   "by": "NQ",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The finite-field datum is unpacked as finite k₀, its algebraic closure k, prime characteristic and ℓ distinct from it; q is Nat.card k₀, and IsModelFrobenius uses precisely that q-power. X is any specified cartesian geometric fibre. Includes explicit proper-unit, identity-removal and actual-globalOperator helpers, with no new choice of comparisons. The theorem retains algebraic closure and separated quasi-compact finite-type model hypotheses explicitly using include."
+  "note": "The finite-field datum is unpacked as finite k₀, its algebraic closure k, prime characteristic and ℓ distinct from it; q is Nat.card k₀, and IsModelFrobenius uses precisely that q-power. X is any specified cartesian geometric fibre. Includes explicit proper-unit, identity-removal and actual-globalOperator helpers, with no new choice of comparisons. The theorem retains algebraic closure and separated quasi-compact finite-type model hypotheses explicitly using include. Y2 restoration: upstream now calls the same endomorphism Weil category WeilBoundedConstructible. The removed compactCohomologyFrobeniusComparison is represented by the trivial-square specialization of weilLowerShriekFrobeniusComparison used by weilCompactCohomology. All geometric and coefficient hypotheses are retained."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-099aa",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T051027-L-3923214",
+  "kind": "proof",
+  "note": "independent cc review: Restored quarantine module vs delivered file (diff); modelCompactComparisonWithoutIdentity's new body vs upstream weilCompactCohomology definition (identical trivial-square weilLowerShriekFrobeniusComparison); node lean.statement vs Lean signature; unit sk-thm-rationality realized (empty) vs removed import; #print axioms (sorryAx only via upstream compactPullback/globalOperator_eq lemmas)"
+ }
 }

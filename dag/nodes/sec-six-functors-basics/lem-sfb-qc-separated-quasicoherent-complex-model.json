@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-qc-separated-quasicoherent-complex-model",
+ "kind": "statement",
+ "title": "Quasi-coherent termwise models on quasi-compact separated schemes",
+ "statement": "Let $X$ be a quasi-compact scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme] which is separated, meaning that its structure morphism $X\\to\\operatorname{Spec}\\mathbf Z$ has closed-immersion diagonal [def-weil-proper-morphism]. For every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], there exist an integer-indexed cochain complex $F^\\bullet$ of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules], with each $F^i$ quasi-coherent [pqf-def-coherent], and an isomorphism $Q(F^\\bullet)\\simeq K$ in $D(\\mathcal O_X)$, where $Q$ is the localization of [def-weil-abstract-derived-category]. No boundedness assumption is imposed on $K$ or $F^\\bullet$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DB, perfect-proposition-quasi-compact-affine-diagonal, essential surjectivity specialized to a separated scheme; this specialization is used explicitly in Tag 0BQR, perfect-lemma-nonzero-some-cohomology, first paragraph of proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "pqf-def-coherent",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme $T$ let $\\mathcal A_T$ be the full category of quasi-coherent modules. The kernel, cokernel/image, and binary-sum nodes give closure under the corresponding ambient constructions; zero is the associated zero module. Thus the ambient coimage-to-image isomorphism belongs to this full subcategory, which is abelian with the same kernels and cokernels. Its inclusion is exact. Cohomology of a complex in $\\mathcal A_T$ is computed using those same kernels and cokernels, hence is quasi-coherent. The exact-functor factorization therefore gives $I_T:D(\\mathcal A_T)\\to D_{\\mathrm{QCoh}}(\\mathcal O_T)$ and identifies $I_T(Q_{\\mathcal A_T}F)$ with the localization of the underlying sheaf complex.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Section 01LA, item (5), with 01IC and 01ID; induced functor of perfect.tex equation 08DC."
+   }
+  },
+  {
+   "text": "The diagonal of $X$ is a closed immersion. By the affine-local description of closed immersions its inverse image over any affine open of $X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is a spectrum of a quotient ring, hence quasi-compact by the spectrum compactness node. The diagonal is therefore quasi-compact, so $X$ is quasi-separated. For any affine open $U\\subseteq X$, the inclusion $j:U\\to X$ is affine by the affine-source/separated-target lemma. This uses the given absolute separatedness; no finite-type, field, or Noetherian hypothesis is introduced.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-quasi-separated-morphism",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SG (lemma-affine-permanence), applied as in perfect.tex Tag 08DB; closed-immersion description: Tag 01QO."
+   }
+  },
+  {
+   "text": "For this affine $j$, the affine higher-direct-image node gives quasi-coherence of $j_*A$ whenever $A$ is quasi-coherent. For a short exact sequence $0\\to A\\to B\\to C\\to0$ in $\\mathcal A_U$ and an affine open $V\\subseteq X$, its inverse image $W=j^{-1}V$ is affine. The cokernel/image node applied to $A\\to B$ gives $B(W)\\twoheadrightarrow C(W)$ with kernel $A(W)$; here $C$ is its ambient cokernel by step 1. The section formula for pushforward therefore gives exactness after taking sections over each affine $V$, hence exactness as sheaves. Thus $j_*:\\mathcal A_U\\to\\mathcal A_X$ is exact. By the exact-derived-functor node its total right derived functor $\\Phi_j$ is the termwise functor on arbitrary complexes.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D7, perfect-lemma-affine-pushforward: exactness from coherent.tex lemma-relative-affine-vanishing and derived.tex Tag 015F."
+   }
+  },
+  {
+   "text": "Let $F$ be any integer-indexed complex in $\\mathcal A_U$. Choose a functorial ambient K-injective resolution $s:F\\to J$. The affine-pushforward resolution node gives that $j_*s:j_*F\\to j_*J$ is a quasi-isomorphism, with no boundedness assumption. The left side represents $I_X\\Phi_j(QF)$ by step 3 and the right side represents $Rj_*I_U(QF)$ by the definition of derived direct image. Thus the actual derived comparison is invertible: put $c_{QF}=Q(j_*s)\\circ\\varphi_F$ with $\\varphi$ the termwise identification of step 3 (the inverse of the unit $\\eta$); then $c\\circ I_X(\\eta)$ is the canonical map $Q(j_*F)\\to Rj_*(QF)$, as hypothesis (c) of the criterion requires. These are the natural comparison maps induced by the functorial resolution; their invertibility on complex representatives makes the comparison a natural isomorphism on the derived category. This verifies the whole functor comparison required for each affine open, rather than inferring it just from sheaf-level acyclicity.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D7, compatibility square; unbounded affine resolution comparison from the existing 08C2/0AVW node."
+   }
+  },
+  {
+   "text": "Apply the affine-open criterion to $X$: quasi-compactness is assumed, quasi-separatedness is step 2, hypotheses (a) and (b) for every affine open are step 3 (quasi-coherence of $j_*$ and the termwise derived functor $\\Phi_j$ with invertible unit), and hypothesis (c) is step 4. Consequently $I_X$ is an equivalence. Given $K$, choose $A\\in D(\\mathcal A_X)$ and an isomorphism $I_X(A)\\simeq K$. Represent $A$ by an integer-indexed complex $F$ in $\\mathcal A_X$, as in the derived-category construction. By the factorization in step 1 the underlying sheaf complex satisfies $Q(F)\\simeq I_X(A)\\simeq K$. Its terms are quasi-coherent by membership in $\\mathcal A_X$. Every construction used the unbounded derived categories, so neither $K$ nor $F$ acquires a boundedness condition.",
+   "uses": [
+    "lem-sfb-affine-open-derived-qcoh-criterion",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DB, apply Tag 09T6 after checking Tag 08D7; extract essential surjectivity as in Tag 0BQR, first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-pc-affine-morphism-hi",
+  "pqf-def-affine-morphism",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-sfb-affine-open-derived-qcoh-criterion",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DB, perfect-proposition-quasi-compact-affine-diagonal, proof via 09T6 and 08D7; essential-surjectivity consequence used in 0BQR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*derived|derived.*quasi.?coherent|affine.?diagonal",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"equivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every unbounded complex with quasi coherent cohomology on a quasi compact scheme with affine diagonal has a representative consisting of quasi coherent modules",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.isQuasicoherent, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact scheme with affine diagonal the unbounded derived category of quasi coherent modules is equivalent to complexes of sheaves with quasi coherent cohomology",
+   "results": "8 hits: DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.Qh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.Q, HasDerivedCategory.standard, HasDerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicoherent.*[Ee]quivalence|[Ee]quivalence.*Quasicoherent|[Dd]erived.*[Qq]uasicoherent|[Qq]uasicoherent.*[Dd]erived",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of quasi coherent sheaves into sheaves of modules induces an equivalence between unbounded derived categories for quasi compact schemes with affine diagonal",
+   "results": "8 hits: DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, DerivedCategory.quotientCompQhIso, DerivedCategory.Qh, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instEssSurjCochainComplexIntQ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unbounded derived quasi coherent complex on a quasi compact separated scheme is isomorphic to the localization of a cochain complex of quasi coherent modules",
+   "results": "8 hits: DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.Q, DerivedCategory.instIsIsoMapCochainComplexIntQ, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a quasi compact separated scheme every unbounded object with quasi coherent cohomology is isomorphic in the derived category to a complex of quasi coherent sheaves",
+   "results": "8 hits: DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.exists_iso_Q_obj_of_isGE, HasDerivedCategory.standard, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.isIso_Q_map_iff_quasiIso, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract localization essential surjectivity represents objects by arbitrary module sheaves, not by quasi-coherent terms on a scheme; quasicoherence presentation constructors and bounded t-structure representatives do not give this geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unbounded derived object with quasi coherent cohomology on a quasi compact separated scheme has a complex of quasi coherent module sheaves representing it",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.QuasicoherentData.X, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"equivalence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of the unbounded derived category with quasi coherent cohomology on a separated quasi compact scheme can be represented by quasi coherent sheaves in every degree without a boundedness assumption",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.Q, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsGE, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every complex with quasi coherent cohomology on a quasi compact separated scheme admits an unbounded cochain complex of quasi coherent sheaves as a derived representative",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac, DerivedCategory.instIsIsoMapCochainComplexIntQ, DerivedCategory, DerivedCategory.isIso_Q_map_iff_quasiIso, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?coherent.*derived|derived.*quasi.?coherent|coherator",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived localizations and exact functors, sheaf-category abelianness, and local quasicoherence presentations do not give the geometric affine-open comparison criterion or the quasi-coherent termwise model theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-twist-hypercohomology-detection",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB.",
+   "via": [
+    "lem-sfb-ample-twist-hypercohomology-detection",
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qc-separated-quasicoherent-complex-model",
+  "worker": "stage1",
+  "group": "Q77",
+  "summary": "Preserved the unbounded termwise-model statement. Followed the proof of Stacks 08DB, reusing existing affine geometry, quasi-coherent closure, exact-derived-functor and unbounded affine-resolution nodes. Created only the conditional affine-open comparison criterion 09T6, whose hypotheses are verified explicitly. No Lean attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Generic scheme-module or homological-algebra prerequisite in the Stacks 08DB proof; the current unit does not restate this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-affine-pushforward-resolution-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-a1e4b97e1",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-a1e4b97e1 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks perfect.tex: 08D7, 08D8, lemma-affine-coherator, 09T6 (statement and full induction proof), 08DB and the first paragraph of 0BQR. I also read the statement of every cited node. The item statement is unchanged and correct: separated means closed-immersion diagonal, hence affine diagonal, so 08DB applies; 0BQR uses exactly this. The steps are correct. Step 1: the kernel, cokernel/image and sum closure nodes make QCoh abelian with exact inclusion, and the factorization node gives I_T (elementary, accepted). Step 2: the closed-immersion definition gives Spec(R/I) preimages; these are quasi-compact, so X is quasi-separated; the affine-source/separated-target lemma makes j affine. Step 3: the cokernel-image clause (3) on W=j^{-1}V gives exactness of j_*, and the exact-derived-functor node makes Phi_j termwise. Step 4: the unbounded affine-pushforward-resolution node has all its hypotheses met. Step 5: essential surjectivity and representation. Tool uses are generic and declared; I accept them. No SGA source. No repair note exists, so the re-split rule does not apply. The new node (09T6) is statement-only, not a duplicate (rg -L for the tags and a statement sweep found only lem-pc-affine-qcoh-derived-equivalence and lem-pc-dq-coherator-adjunction, which are different; blueprint search returned 0 hits), and not a restatement of the item, since it carries the support induction and 08D8 while the item verifies the hypotheses. Small cases checked: empty X, affine X with U=X, the doubled-origin line. FIX (B2/B3): the new node's hypothesis took for granted that j_* preserves QCoh (01LC and j qcqs, both uncited) and that Phi_j exists (def-sfb-right-derived-functor assumes K-injectives in QCoh, which no node supplies), and it said 'the natural comparison' without naming the map. I rewrote it as clauses: (a) j_* preserves quasi-coherence; (b) (Phi_j, eta) is a derived functor by universal property; (c) an iso c with c∘I_X(eta) equal to the canonical Q(j_*F)→Rj_*(QF). I added def-pc-ringed-spaces-derived-direct-image to stmt_deps. For qcqs X the node is still equivalent to 09T6. Item steps 4–5 now point to clauses (a)–(c); the item's statement and deps are unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QCSeparatedQuasicoherentComplexModel",
+  "declaration": "AlgebraicGeometry.exists_quasicoherent_complex_of_compactSpace_of_isSeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCSeparatedQuasicoherentComplexModel.lean",
+  "statement": "theorem exists_quasicoherent_complex_of_compactSpace_of_isSeparated (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) : ∃ F : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ, (∀ i : ℤ, (F.X i).IsQuasicoherent) ∧ Nonempty (DerivedCategory.Q.obj F ≅ K)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f972227d",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 08DB/0BQR. CompactSpace = quasi-compact; X.IsSeparated = IsSeparated (terminal.from X), the closed-immersion diagonal over Spec Z, which gives the affine diagonal 08DB needs. K plus schemeDerivedQCohProperty (forall n, H^n IsQuasicoherent, read in source) = D_QCoh. Conclusion: exists F : CochainComplex over the same SheafOfModules (moduleRings X.toRingedSpace) carrier with Z index, every F.X i IsQuasicoherent, and Nonempty (Q.obj F ≅ K), an iso in the derived category. No bounds and no extra assumptions; universes u and w independent. lean.statement verbatim; proof is sorry; docstrings carry the source place, blueprint tag and all 5 proof steps. All 7 dep node files byte-identical to live; only the item's lean field changes. All 23 imports exist. No duplicate declaration found by rg; the citer ample-twist-hypercohomology-detection uses the same interface. Edge cases checked: empty X, K=0, affine, non-Noetherian, unbounded; doubled-origin line excluded. No files changed, so no compile."
+ }
+}

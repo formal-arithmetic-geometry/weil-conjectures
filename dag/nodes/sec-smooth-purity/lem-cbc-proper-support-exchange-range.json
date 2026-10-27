@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Pullback preserves proper support, giving the sectionwise map G->b_*H for the two literal support sheaves. Its adjunct beta:b^*G->H has composite with the inclusion equal to the restricted ordinary comparison.",
+   "text": "Use the literal support inclusions, whose component injectivity gives monomorphisms. Apply properSupportPullbackSectionMap to get alpha:G -> b_*H with its unit-restriction formula. Let beta be its adjunct. Adjunction naturality and unit_map_baseChangeMap_app identify beta followed by the target support inclusion with the restricted ordinary exchange. The needed equality of etale maps follows by the pullback universal property on both projections.",
    "uses": [
     "lem-cbc-proper-support-pullback-section-map",
     "lem-cbc-proper-support-adjoint-comparison",
@@ -30,19 +30,17 @@
    "elementary": false
   },
   {
-   "text": "At an algebraically closed geometric point use the proper-support geometric-stalk restriction isomorphisms on both sides. Inverse-image stalk compatibility and the Cartesian identification of the two fibres identify the map beta with the identity on properly supported sections.",
+   "text": "Apply properSupport_fibre_restriction_compatibility at each algebraically closed geometric point. Its final equation expresses the stalk of beta, after two isomorphisms, as the inverse-image stalk isomorphism followed by the source support-stalk isomorphism. Cancel the isomorphisms, proving the stalk of beta invertible.",
    "uses": [
-    "lem-cbc-proper-support-geometric-stalk",
-    "lem-cbc-proper-support-fibre-restriction-compatibility",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-cbc-proper-support-fibre-restriction-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "Geometric stalk detection makes beta an isomorphism. Its composite with the literal support inclusion is therefore sectionwise injective with exactly the stated image.",
+   "text": "Use the algebraic closures of residue fields, and transport their stalk isomorphisms through the universe-lift stalk comparison. Scheme.isIso_of_isIso_sheafFiber_map gives IsIso beta. Every component of beta is bijective. Its composite with the literal support inclusion is injective, and surjectivity of that component identifies its image with the proper-support submodule.",
    "uses": [
     "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-cbc-proper-support-section-calculus"
    ],
    "elementary": true
   }
@@ -51,16 +49,13 @@
   "lem-cbc-proper-support-pullback-section-map",
   "lem-cbc-proper-support-adjoint-comparison",
   "lem-cbc-proper-support-section-calculus",
-  "lem-cbc-proper-support-geometric-stalk",
   "lem-cbc-proper-support-fibre-restriction-compatibility",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F55, 0F76; module coefficients and categorical details expanded in Lean"
+  "place": "Tags 0F55 and 0F76; adjunction, pullback-projection and universe-lift details expanded by Y7 in Lean"
  },
  "mathlib_searches": [
   {
@@ -135,14 +130,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "Y7",
   "result": "pass",
-  "landing": "20261018T092206-L-3361586",
-  "kind": "interface",
+  "landing": "20261025T101950-L-3761946",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

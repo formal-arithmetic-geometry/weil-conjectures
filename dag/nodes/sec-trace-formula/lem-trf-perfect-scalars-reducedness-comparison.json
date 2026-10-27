@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-perfect-scalars-reducedness-comparison",
+ "kind": "statement",
+ "title": "Reducedness after extension to two perfect scalar fields",
+ "statement": "Let $k$ be a field and $E/k$, $F/k$ be field extensions [def-pc-field-extension]. Suppose $E$ and $F$ are perfect: each has characteristic zero, or has characteristic $p>0$ and surjective map $x\\mapsto x^p$. Let $A$ be any commutative $k$-algebra, not necessarily reduced, finitely generated or nonzero. Using tensor products of commutative algebras with multiplication $(a\\otimes e)(b\\otimes e')=ab\\otimes ee'$ [def-weil-pbc-module-tensor-product], one has $$A\\otimes_kE\\text{ is reduced}\\quad\\Longleftrightarrow\\quad A\\otimes_kF\\text{ is reduced}.$$ Here a ring is reduced if every element $x$ with $x^n=0$ for some integer $n\\ge1$ is zero. No embedding between $E$ and $F$, algebraicity over $k$, or perfectness of $k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00I4 (lemma-perfect-reduced), applied over each of E and F, combined with fields.tex Tag 0H7K (lemma-common-extension-field); tensor cancellation and descent of nilpotents implement the comparison."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-common-extension-fields] to choose a field $M$ and $k$-embeddings $i_E:E\\to M$, $i_F:F\\to M$. For $D=E,F$, use $i_D$ as the $D$-algebra structure of $M$, so the composite $k\\to D\\to M$ is the chosen structure map $k\\to M$. Put $B_D=A\\otimes_kD$ and $T=A\\otimes_kM$.",
+   "uses": [
+    "lem-weil-common-extension-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0H7K (lemma-common-extension-field)."
+   }
+  },
+  {
+   "text": "For each $D=E,F$, cancellation [lem-weil-pbc-tensor-cancel-base-change], with $R=k$, $S=D$, its algebra $A=M$ and its algebra $B$ equal to our $A$, gives $M\\otimes_D(D\\otimes_kA)\\simeq M\\otimes_kA$. Flip the tensor factors to obtain a ring isomorphism $\\theta_D:B_D\\otimes_DM\\simeq T$, with $\\theta_D((a\\otimes d)\\otimes m)=a\\otimes i_D(d)m$ and inverse $a\\otimes m\\mapsto(a\\otimes1)\\otimes m$. Here the flips are induced by the bilinear map $(x,y)\\mapsto y\\otimes x$ [def-weil-pbc-module-tensor-product]; their squares fix each pure tensor, and they preserve products because $(y\\otimes x)(y'\\otimes x')=yy'\\otimes xx'$. The ring structures and pure-tensor multiplication are supplied by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Thus these flips and the cancellation give precisely the displayed ring isomorphism.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00D2 (lemma-tensor-with-bimodule), in the cancellation form stated by the cited node; flips checked on pure tensors."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-field-extension-tensor-injective] over the field $D$, to its field extension $M/D$ and its commutative algebra $B_D$. It gives an injective map $B_D\\to B_D\\otimes_DM$, $b\\mapsto b\\otimes1$. Composing with $\\theta_D$ gives an injective ring map $j_D:B_D\\to T$ satisfying $j_D(a\\otimes d)=a\\otimes i_D(d)$. This applies without requiring that $B_D$ be nonzero or reduced.",
+   "uses": [
+    "lem-sfb-field-extension-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Scalar-extension injectivity in the cited Mathlib leaf; composition with the isomorphism of step 2."
+   }
+  },
+  {
+   "text": "Assume $B_E$ is reduced. Since $E$ is perfect and $M$ is a field, hence reduced (a nonzero element is a unit and no power of a unit is zero), [lem-weil-pbc-perfect-reduced-tensor] over $E$ implies that $B_E\\otimes_EM$ is reduced. The isomorphism $\\theta_E$ makes $T$ reduced: if $t^n=0$, then $(\\theta_E^{-1}(t))^n=0$, so $\\theta_E^{-1}(t)=0$ and $t=0$.",
+   "uses": [
+    "lem-weil-pbc-perfect-reduced-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I4 (lemma-perfect-reduced), applied over E; preservation under a ring isomorphism checked explicitly."
+   }
+  },
+  {
+   "text": "If $x\\in B_F$ satisfies $x^n=0$ with $n\\ge1$, then $j_F(x)^n=j_F(x^n)=0$ in the reduced ring $T$. Hence $j_F(x)=0=j_F(0)$, and the injectivity from step 3 implies $x=0$. Thus $B_F$ is reduced. Conversely assume $B_F$ is reduced and apply [lem-weil-pbc-perfect-reduced-tensor] over the perfect field $F$ to $B_F$ and the reduced field $M$. This makes $B_F\\otimes_FM$, and therefore $T$ via $\\theta_F$, reduced. For any nilpotent $x\\in B_E$, the same equation $j_E(x)^n=0$ and injectivity of $j_E$ give $x=0$. This proves both implications.",
+   "uses": [
+    "lem-weil-pbc-perfect-reduced-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00I4 (lemma-perfect-reduced), applied over F; both nilpotent-descent arguments written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-field-extension-tensor-injective",
+  "lem-weil-pbc-perfect-reduced-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tag 00I4 (lemma-perfect-reduced) with fields.tex Tag 0H7K (lemma-common-extension-field), tensor cancellation, and scalar-extension injectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Rr]educed.*[Pp]erfect|[Pp]erfect.*[Rr]educed|isReduced.*tensorProduct|tensorProduct.*isReduced",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"grep\", \"query\": \"[Rr]educed.*[Pp]erfect|[Pp]erfect.*[Rr]educed|isReduced.*tensorProduct|tensorProduct.*isReduced\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\"], \"digest\": \"beeb69b53a8f3d43\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, especially isGeometricallyReduced_field_iff and the algebraic-extension instance: they test the canonical algebraic closure or assume geometric reducedness and algebraicity. They do not compare arbitrary perfect extensions E and F, and the result requires common-overfield ascent and descent. Flat.Basic tensorProduct_of_flat_of_forall_fg is only a finite-generation reduction. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reducedness of a commutative algebra after tensoring with either of two perfect field extensions of the same base field is equivalent",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"leansearch\", \"query\": \"Reducedness of a commutative algebra after tensoring with either of two perfect field extensions of the same base field is equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.IsGeometricallyReduced.mk\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"241fe5210e753ea6\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, especially isGeometricallyReduced_field_iff and the algebraic-extension instance: they test the canonical algebraic closure or assume geometric reducedness and algebraicity. They do not compare arbitrary perfect extensions E and F, and the result requires common-overfield ascent and descent. Flat.Basic tensorProduct_of_flat_of_forall_fg is only a finite-generation reduction. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced, Algebra.TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"loogle\", \"query\": \"IsReduced, Algebra.TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, especially isGeometricallyReduced_field_iff and the algebraic-extension instance: they test the canonical algebraic closure or assume geometric reducedness and algebraicity. They do not compare arbitrary perfect extensions E and F, and the result requires common-overfield ascent and descent. Flat.Basic tensorProduct_of_flat_of_forall_fg is only a finite-generation reduction. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "query error: unknown identifier 'Algebra.TensorProduct'; not evidence of absence. Superseded by the recorded successful query 'IsReduced, TensorProduct'."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let k be a field and E F two perfect field extensions. For any commutative k algebra A, A tensor E is reduced if and only if A tensor F is reduced",
+   "results": "{\"t\": \"2026-10-22T06:47:31Z\", \"tool\": \"leanfinder\", \"query\": \"Let k be a field and E F two perfect field extensions. For any commutative k algebra A, A tensor E is reduced if and only if A tensor F is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.TensorProduct.isField_of_isAlgebraic\"], \"digest\": \"3de8acd26c68d1c5\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, especially isGeometricallyReduced_field_iff and the algebraic-extension instance: they test the canonical algebraic closure or assume geometric reducedness and algebraicity. They do not compare arbitrary perfect extensions E and F, and the result requires common-overfield ascent and descent. Flat.Basic tensorProduct_of_flat_of_forall_fg is only a finite-generation reduction. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:48:01Z\", \"tool\": \"loogle\", \"query\": \"IsReduced, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_field_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"6aedc5d1084cedbf\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, especially isGeometricallyReduced_field_iff and the algebraic-extension instance: they test the canonical algebraic closure or assume geometric reducedness and algebraicity. They do not compare arbitrary perfect extensions E and F, and the result requires common-overfield ascent and descent. Flat.Basic tensorProduct_of_flat_of_forall_fg is only a finite-generation reduction. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any k algebra A and two perfect extensions E and F of k, compare A tensor E and A tensor F using a common overfield and faithful flat descent of nilpotents",
+   "results": "{\"t\": \"2026-10-22T06:48:13Z\", \"tool\": \"leanfinder\", \"query\": \"For any k algebra A and two perfect extensions E and F of k, compare A tensor E and A tensor F using a common overfield and faithful flat descent of nilpotents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_perfectField\", \"Algebra.TensorProduct.isAlgebraic_of_isField\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"Algebra.Extension.baseChange\"], \"digest\": \"ee790a3ebd13dc26\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean, especially isGeometricallyReduced_field_iff and the algebraic-extension instance: they test the canonical algebraic closure or assume geometric reducedness and algebraicity. They do not compare arbitrary perfect extensions E and F, and the result requires common-overfield ascent and descent. Flat.Basic tensorProduct_of_flat_of_forall_fg is only a finite-generation reduction. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isReduced.*tensorProduct|tensorProduct.*isReduced|perfect.*reduced|reduced.*perfect",
+   "results": "{\"t\": \"2026-10-23T14:53:52Z\", \"tool\": \"grep\", \"query\": \"isReduced.*tensorProduct|tensorProduct.*isReduced|perfect.*reduced|reduced.*perfect\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"7e023cc15fbcd138\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean lines 54-105 and RingTheory/Flat/Basic.lean lines 410-415. Geometric reducedness is tested by an algebraic closure; the available field-extension reducedness instance assumes an algebraic extension. These do not give the comparison for two arbitrary perfect extensions as an exact match or one-line specialization. Second semantic phrasing returns perfect closures and formally smooth fields, with extra hypotheses and different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reducedness after scalar extension to either of two perfect field extensions is equivalent",
+   "results": "{\"t\": \"2026-10-23T14:53:53Z\", \"tool\": \"leansearch\", \"query\": \"Reducedness after scalar extension to either of two perfect field extensions is equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.mk\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"IntermediateField.extendScalars.orderIso\"], \"digest\": \"b5bcdd0f266fad7a\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean lines 54-105 and RingTheory/Flat/Basic.lean lines 410-415. Geometric reducedness is tested by an algebraic closure; the available field-extension reducedness instance assumes an algebraic extension. These do not give the comparison for two arbitrary perfect extensions as an exact match or one-line specialization. Second semantic phrasing returns perfect closures and formally smooth fields, with extra hypotheses and different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T14:53:53Z\", \"tool\": \"loogle\", \"query\": \"IsReduced, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_field_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"6aedc5d1084cedbf\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean lines 54-105 and RingTheory/Flat/Basic.lean lines 410-415. Geometric reducedness is tested by an algebraic closure; the available field-extension reducedness instance assumes an algebraic extension. These do not give the comparison for two arbitrary perfect extensions as an exact match or one-line specialization. Second semantic phrasing returns perfect closures and formally smooth fields, with extra hypotheses and different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative k algebra A and two perfect field extensions E and F of k, A tensor E is reduced if and only if A tensor F is reduced",
+   "results": "{\"t\": \"2026-10-23T14:53:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative k algebra A and two perfect field extensions E and F of k, A tensor E is reduced if and only if A tensor F is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"IntermediateField.LinearDisjoint.isDomain\"], \"digest\": \"ba223c57641dccdb\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean lines 54-105 and RingTheory/Flat/Basic.lean lines 410-415. Geometric reducedness is tested by an algebraic closure; the available field-extension reducedness instance assumes an algebraic extension. These do not give the comparison for two arbitrary perfect extensions as an exact match or one-line specialization. Second semantic phrasing returns perfect closures and formally smooth fields, with extra hypotheses and different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare reduced scalar extensions of an algebra to two perfect fields by embedding both fields into a common overfield",
+   "results": "{\"t\": \"2026-10-23T14:54:27Z\", \"tool\": \"leanfinder\", \"query\": \"Compare reduced scalar extensions of an algebra to two perfect fields by embedding both fields into a common overfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgEquiv.perfectClosure\", \"IsPurelyInseparable.instNonemptyAlgHomOfPerfectField\", \"perfectClosure.algEquivOfAlgEquiv\", \"Algebra.FormallySmooth.of_perfectField\", \"instUniqueAlgHomOfIsPurelyInseparable\", \"map_mem_perfectClosure_iff\", \"perfectClosure.map_le_of_algHom\", \"perfectClosure.perfectField\"], \"digest\": \"ead534a035455377\"} Read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean lines 54-105 and RingTheory/Flat/Basic.lean lines 410-415. Geometric reducedness is tested by an algebraic closure; the available field-extension reducedness instance assumes an algebraic extension. These do not give the comparison for two arbitrary perfect extensions as an exact match or one-line specialization. Second semantic phrasing returns perfect closures and formally smooth fields, with extra hypotheses and different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Application of Temkin Remark 3.1.1(i) inside the noetherian reduction for Proposition 3.5.2: identify the good locus after projection from the limit and from every later stage. Returned proof steps 2 and 4--6: common overfield of scalar fields, perfect-field ascent, cancellation, faithfully flat injection and both nilpotent-descent implications.",
+   "via": [
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-trf-geometrically-reduced-fibres-limit-descent",
+    "lem-trf-normal-approximation-finite-eta-modification",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-perfect-scalars-reducedness-comparison",
+  "worker": "stage1",
+  "summary": "Compared the arbitrary-perfect-scalar statement with its two Stacks sources and the project declarations. Reused existing common-extension, tensor-cancellation, tensor algebra, scalar-extension injectivity, and perfect-field reduced-tensor nodes; no new nodes. Wrote the canonical maps and both nilpotent-descent implications explicitly, including zero algebras and non-finite extensions. All searches were run with msearch.py; no Lean was written or compiled.",
+  "blueprint": "Realizes the scalar-field comparison in the inherited from.place: common overfield, perfect-field ascent, tensor cancellation, injectivity, and both nilpotent-descent implications in the approximation subargument below lem-trf-local-term-locality. The current latest blueprint ancestor has no separate statement of this auxiliary algebraic comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic amalgamation of two arbitrary field extensions; the trace-formula unit has no replacement for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-8c1205d14",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-8c1205d14 (reviewer sub-agent of L); spot-checked: Ordinary one-level split, not a re-split: there is no repair note for this item. The delivery is one commit with the item JSON and a report that contains its own review section. It creates no new nodes, leaves the statement unchanged, and proof_deps equals the union of the step uses. The statement is true and I tested it on small cases: A=0, A=k[e]/e^2, the inseparable A=F_p(t^{1/p}) with E a perfect closure and F a larger perfect field, and E=F. Perfectness of E and F is needed and nothing is assumed about k. The citer lem-trf-geometric-reduced-fibre-locus-base-change step 3 uses exactly this form. Step 1: lem-weil-common-extension-fields matches Stacks 0H7K (fields.tex line 395). Step 2: cancelBaseChange (Mathlib Maps.lean:476 and 483-485) with R=k, S=D, A:=M, B:=A. I checked by hand that theta_D((a⊗d)⊗m)=a⊗i_D(d)m and that the stated inverse is correct. The tensor flips are elementary from the module-tensor universal property and the algebra-tensor multiplication node. Step 3: includeLeft_injective (Flat/Basic.lean:410-415) over the field D with K=M and B=B_D. It needs no reducedness or nonzero hypothesis, and j_D is an injective ring map. Step 4: lem-weil-pbc-perfect-reduced-tensor over E with the reduced algebras B_E and M, matching Stacks 00I4 (algebra.tex:10581). That node is Lean-closed: isReduced_tensorProduct_of_perfectField is sorry-free in the live tree, so it counts as a tool, not route. Step 5: both nilpotent descents are written out through j_F and j_E; no hidden faithfully flat descent theorem is used. Duplicate scan: no node states the item. lem-trf-affine-geometric-reducedness-criterion is only an algebraic-closure test, so same_as=[] is right. I accept the declared tool use of lem-weil-common-extension-fields as generic field amalgamation. There are 11 real search records covering grep, leansearch, loogle and leanfinder; the loogle query that errored is recorded as an error and its replacement ran. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PerfectScalarsReducednessComparison",
+  "declaration": "Algebra.isReduced_tensorProduct_iff_of_perfectField",
+  "file": "lean/Sheaf/RingTheory/PerfectScalarsReducednessComparison.lean",
+  "statement": "theorem isReduced_tensorProduct_iff_of_perfectField (k : Type u) (A : Type v) (E : Type w) (F : Type z) [Field k] [CommRing A] [Field E] [Field F] [Algebra k A] [Algebra k E] [Algebra k F] [PerfectField E] [PerfectField F] : IsReduced (A ⊗[k] E) ↔ IsReduced (A ⊗[k] F)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acfe90afe",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement Algebra.isReduced_tensorProduct_iff_of_perfectField matches node clause by clause: Field k; Field E/F with Algebra k E/F (def-pc-field-extension encoding); PerfectField E/F (equivalent to char 0 or surjective Frobenius), no perfectness of k; arbitrary CommRing A with Algebra k A; Mathlib algebra tensor product (tmul_mul_tmul); IsReduced iff (n=0 vs n>=1 equivalent). Four independent bound universes. lean.statement verbatim. Node diff vs live: only lean field. No name clash in Mathlib/Sheaf/WeilConjectures; module not in side-live; no existing equivalent (GeometricallyReduced results are algebraic-closure/perfect-base only). No defs, proof sorry, docstrings with Stacks 00I4/0H7K and blueprint tag carrying the 5 proof steps; proof imports exist. Edge cases A=0, k[e]/e^2, imperfect k, E=F, transcendental covered. No compile needed (no change)."
+ }
+}

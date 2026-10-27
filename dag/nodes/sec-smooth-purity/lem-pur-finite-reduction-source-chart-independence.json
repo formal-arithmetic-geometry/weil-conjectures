@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-finite-reduction-source-chart-independence",
+ "kind": "statement",
+ "title": "Compatible root charts give the same finite reduction comparison",
+ "status": "split",
+ "statement": "Let $P$ be a finite purity setting as in [def-pur-finite-reduction-root-charts], with coefficient prime $\\ell$, positive level $n$, algebraically closed base field $k$, and $1\\le m\\le n$. Let $f:X\\to Y$ be a scheme morphism, with $X$ a $k$-scheme, $d\\in\\mathbb N$, and $K$ an unbounded pro-etale derived $P$-coefficient object on $Y$. Fix any isomorphism $a:\\operatorname{red}_X((P^*fK)[2d])\\cong (P_m^*f(\\operatorname{red}_YK))[2d]$ between the shifted untwisted pullbacks, where $P^*f$ denotes finiteReductionPullback. For two primitive $\\ell^n$-th roots $\\zeta,\\zeta^\\prime$ in $k$, set $\\eta=\\zeta^{\\ell^{n-m}}$ and $\\eta^\\prime=(\\zeta^\\prime)^{\\ell^{n-m}}$, with their primitive $\\ell^m$-th-root proofs. Conjugating $a$ by scalar extension of finiteReductionSourceTrivialization at $\\zeta$ and the inverse reduced trivialization at $\\eta$ gives the same isomorphism as conjugation using $\\zeta^\\prime,\\eta^\\prime$. No finite-type, boundedness, or finite-Tor condition on $K$ is imposed.",
+ "stmt_deps": [
+  "def-pur-finite-reduction-root-charts"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: compatibility with the invertible twist by tensor associativity; compatible primitive-root coordinates"
+ },
+ "proof": [
+  {
+   "text": "Use IsPrimitiveRoot.eq_pow_of_pow_eq_one with the second root to write zeta=zeta_prime^c. The compatible reduced roots then satisfy eta=eta_prime^c by commuting the two natural powers. Apply the explicit source-chart power formula at the original and reduced settings: both new chart homs equal c^d times the old ones. Derived finite reduction is additive, since it is left adjoint to additive scalar restriction. To prove equality of the conjugated isomorphisms, compare homs and postcompose with the new reduced chart hom. Cancel the inverse-chart composites and move natural-number scalar multiplication through compositions and scalar extension. Both sides are c^d times the same fixed hom composite. No inverse scalar or flatness hypothesis is needed.",
+   "uses": [
+    "def-pur-finite-reduction-root-charts",
+    "lem-pur-finite-source-chart-power-transition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-root-charts",
+  "lem-pur-finite-source-chart-power-transition"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "M4",
+  "date": "2026-10-25",
+  "source": "Explicit common power exponent and preadditive scalar cancellation, expanding the existing root-line comparison plan."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tate twist primitive root trivializations and scalar extension independent of root choice",
+   "results": "OK 8 hits: IsPrimitiveRoot.integralPowerBasis.congr_simp, Algebra.Generators.extendScalars_val, IsPrimitiveRoot.powerBasis.congr_simp, IsPrimitiveRoot.associated_map_sub_one_map_sub_one, IsPrimitiveRoot.powerBasis_gen, modularCyclotomicCharacter.toFun_spec'', IsCyclotomicExtension.zeta, RootPairing.restrictScalars_coe_root. No derived Tate root-chart independence statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible primitive root charts for Tate twists give a root independent comparison under extension of scalars",
+   "results": "OK 8 hits: IsPrimitiveRoot.embeddingsEquivPrimitiveRoots, IsPrimitiveRoot.autToPow_eq_modularCyclotomicCharacter, modularCyclotomicCharacter.aux_spec, modularCyclotomicCharacter.toFun_spec'', cyclotomicCharacter.toFun_spec, modularCyclotomicCharacter'.spec', modularCyclotomicCharacter.toFun_spec', modularCyclotomicCharacter.aux. No derived Tate root-chart independence statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteReductionSourceChart|RootTrivialization.*independent|root.*chart.*independen",
+   "results": "OK 0 hits: . No derived Tate root-chart independence statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionComparisons",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: compatibility with pullback and the invertible twist follows from associativity of derived tensor",
+   "via": [
+    "def-pur-finite-reduction-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionSourceChartIndependence",
+  "file": "lean/Sheaf/Paper/FiniteReductionSourceChartIndependence.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionSourceChart_independent",
+  "statement": "theorem finiteReductionSourceChart_independent (P : PurityFiniteSetting.{u})\n    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level)\n    {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))]\n    (f : X ⟶ Y) (d : ℕ) (K : Scheme.proEtaleDerivedCategory Y P.Ring)\n    (a : (P.finiteReduction m hm hmn X).obj\n        (((P.finiteReductionPullback f).obj K)⟦2 * (d : ℤ)⟧) ≅\n      (((P.finiteReductionSetting m hm).finiteReductionPullback f).obj\n        ((P.finiteReduction m hm hmn Y).obj K))⟦2 * (d : ℤ)⟧)\n    (ζ η ζ' η' : P.field.k)\n    (hζ : IsPrimitiveRoot ζ P.diagonalExponent)\n    (hη : IsPrimitiveRoot η (P.finiteReductionSetting m hm).diagonalExponent)\n    (hζ' : IsPrimitiveRoot ζ' P.diagonalExponent)\n    (hη' : IsPrimitiveRoot η' (P.finiteReductionSetting m hm).diagonalExponent)\n    (h : η = ζ ^ (P.coefficients.l ^ (P.level - m)))\n    (h' : η' = ζ' ^ (P.coefficients.l ^ (P.level - m))) :\n    (P.finiteReduction m hm hmn X).mapIso\n        (P.finiteReductionSourceTrivialization f d ζ hζ K) ≪≫ a ≪≫\n      ((P.finiteReductionSetting m hm).finiteReductionSourceTrivialization f d η hη\n        ((P.finiteReduction m hm hmn Y).obj K)).symm =\n    (P.finiteReduction m hm hmn X).mapIso\n        (P.finiteReductionSourceTrivialization f d ζ' hζ' K) ≪≫ a ≪≫\n      ((P.finiteReductionSetting m hm).finiteReductionSourceTrivialization f d η' hη'\n        ((P.finiteReduction m hm hmn Y).obj K)).symm",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T095021-L-3283929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T143650-L-1073566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-multiplicative-extension-action-rigidity",
+ "kind": "statement",
+ "title": "Connected actions preserving a central multiplicative-type extension are trivial",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All group schemes are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. A group scheme is of multiplicative type if it is isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$, with comultiplication $e_m\\mapsto e_m\\otimes e_m$ on the group-algebra basis. Let $q:E\\to Q$ be a homomorphism whose coordinate-ring map is faithfully flat, meaning that extension of scalars is exact and detects zero modules, and let $N=\\ker q$ be its scheme-theoretic kernel. Assume $N$ and $Q$ are of multiplicative type and $N$ is central in $E$: for every commutative $F$-algebra $A$, all $n\\in N(A)$ and $e\\in E(A)$ commute in $E(A)$. Let $G$ be a smooth [def-sbc-smooth-morphisms] connected [def-weil-connected-scheme] affine $F$-group scheme of finite type. Every action $a:G\\times_F E\\to E$ by group-scheme automorphisms that preserves $N$ is trivial: $a$ is the second projection. Here preserving $N$ means that $a$ restricts to an action on $N$, and being an action by group-scheme automorphisms means that for every commutative $F$-algebra $A$ and $x\\in G(A)$, the map $a(x,-):E(A)\\to E(A)$ is a group automorphism, naturally under change of $A$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.41, printed p.244, corrected by the Chapter 12 erratum at the end of this PDF: N must be central in H; faithful-flat quotient formulation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "The map $q$ is an fpqc cover. Indeed, for every affine $T=\\operatorname{Spec}B\\to Q=\\operatorname{Spec}R$, the affine fibre-product formula gives $E_T=\\operatorname{Spec}(B\\otimes_R\\mathcal O(E))$. Faithful flatness survives this base change, hence $E_T\\to T$ is flat by the affine flatness criterion and surjective by the spectrum criterion. For each affine open $V\\subseteq T$, the same formula makes its inverse image affine and surjective onto $V$; this is the defining fpqc covering condition. We will use these covers for products with $G$, and with further copies of $Q$ or $G$. A product of two copies of $q$, such as $G\\times_FE\\times_FE\\to G\\times_FQ\\times_FQ$, is the composite $G\\times_FE\\times_FE\\to G\\times_FQ\\times_FE\\to G\\times_FQ\\times_FQ$ of two such base changes of $q$, hence an fpqc cover by stability of fpqc coverings under composition. The kernel definition also gives $E\\times_F N\\simeq E\\times_QE$: on every algebra the maps are $(e,n)\\mapsto(e,en)$ and $(e,e')\\mapsto(e,e^{-1}e')$, since $q(e)=q(e')$ exactly when $e^{-1}e'\\in N$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-fpqc-covering",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), affine-cover application; flatness and faithful-flat spectrum criteria are Tags 01U5 and 00HQ; kernel-pair calculation is explicit."
+   }
+  },
+  {
+   "text": "Descend $q\\circ a:G\\times_F E\\to Q$ along $p=1_G\\times q$. On its overlap write the two lifts as $e,en$ using step 1. Preservation of $N$ and the homomorphism property give $q(a(g,en))=q(a(g,e)a(g,n))=q(a(g,e))$. Representable fpqc descent therefore gives a unique $F$-morphism $b:G\\times_FQ\\to Q$ with $b(g,q(e))=q(a(g,e))$. It is over $F$ because the two structure maps agree after $p$. The unit law, $b(gg',t)=b(g,b(g',t))$, and $b(g,tt')=b(g,t)b(g,t')$ can each be checked after the corresponding product cover by $E$: substitution of the displayed formula reduces them to the unit, action, and homomorphism laws for $a$. Uniqueness in representable descent proves the identities before pulling back. Thus $b$ is an action by group-scheme automorphisms, with inverse at $g$ given by $g^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); the quotient action used in Milne Corollary 12.41, p.244, with overlap and law checks written out."
+   }
+  },
+  {
+   "text": "Apply connected-action rigidity to the restricted action on $N$ and to $b$ on $Q$. Both target groups are of multiplicative type, and the acting group is the given smooth connected affine finite-type $G$ over the algebraically closed field $F$. No smoothness of $N$ or $Q$ is needed. We obtain $a(g,n)=n$ and $b(g,t)=t$ on all algebra-valued points, hence $q(a(g,e))=q(e)$.",
+   "uses": [
+    "lem-sfb-connected-action-multiplicative-type-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.37 and first sentence of the proof of corrected Corollary 12.41, printed p.244."
+   }
+  },
+  {
+   "text": "Define $c(g,e)=a(g,e)e^{-1}$. By step 3 its composite with $q$ is the identity section, so the kernel fibre product makes $c$ a morphism $G\\times_F E\\to N$. On the overlap, $c(g,en)=a(g,e)n(en)^{-1}=c(g,e)$ because $a(g,n)=n$. Representable descent along $p$ gives an $F$-morphism $d:G\\times_FQ\\to N$ with $d(g,q(e))=c(g,e)$. For any algebra and $g,e,e'$ one has\n$$c(g,ee')=a(g,e)a(g,e')e'^{-1}e^{-1}=c(g,e)e\\,c(g,e')e^{-1}=c(g,e)c(g,e'),$$\nsince $c(g,e')\\in N$ and $N$ is central in $E$. Also $c(g,1)=1$. Pull back the proposed homomorphism identity for $d$ along the fpqc cover $G\\times_F E\\times_F E\\to G\\times_FQ\\times_FQ$ and use this calculation; uniqueness in descent proves it downstairs. Thus $d$ is a family of homomorphisms $Q\\to N$. Finally $d(1_G,-)=1$: this holds after the cover $q$, since $a(1_G,e)=e$, and descends by uniqueness.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corrected Corollary 12.41, printed p.244: the two factorizations apply to the difference a(g,e)e^{-1}, not to a itself. Centrality is used in the displayed multiplicativity calculation; descent is Stacks Tag 023Q."
+   }
+  },
+  {
+   "text": "Use homomorphism-family rigidity with $X=G$, $x_0=1_G$, $D_1=Q$, $D_2=N$, and $\\phi=d$. Its hypotheses hold by the item and step 4: $G$ is affine, connected and of finite type, $N,Q$ are diagonalizable over $F$, and the family consists of homomorphisms on every algebra. It gives $d(g,t)=d(1_G,t)=1$. Consequently $a(g,e)e^{-1}=c(g,e)=d(g,q(e))=1$, so $a(g,e)=e$ on every algebra. This is equality of morphisms: for the affine source $G\\times_FE$, take its own coordinate algebra and its universal point to identify the comorphisms. Hence $a=\\operatorname{pr}_E$.",
+   "uses": [
+    "lem-sfb-diagonalizable-hom-family-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36 and last sentence of the proof of corrected Corollary 12.41, printed pp.243--244."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sfb-connected-action-multiplicative-type-rigidity",
+  "lem-sfb-diagonalizable-hom-family-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.41, printed p.244, with the Chapter 12 erratum (N central in H). Corollary 12.37 and Theorem 12.36 provide the rigidity inputs; fpqc descent makes the two difference-map factorizations explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group acts trivially by group automorphisms on an extension of diagonalizable group schemes while preserving the subgroup",
+   "results": "Available; 8 hits: CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"action\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|[Dd]iagonaliz|[Dd]iagonalis",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every action of a connected algebraic group on an extension of groups of multiplicative type preserving the normal subgroup is trivial",
+   "results": "Available; 8 hits: smul_mem_fixedPoints_of_normal, vadd_mem_fixedPoints_of_normal, GroupExtension.Splitting.conjAct, CategoryTheory.FintypeCat.Action.isConnected_of_transitive, coe_smul_fixedPoints_of_normal, fixedPointsSubMulOfNormal, instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal, ConjAct.Subgroup.conjMulDistribMulAction. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of automorphisms of extensions of diagonalizable affine groups under a connected algebraic parameter group",
+   "results": "Available; 8 hits: CategoryTheory.PreGaloisCategory.autMap_unique, CategoryTheory.PreGaloisCategory.exists_autMap, CategoryTheory.PreGaloisCategory.autMap, CategoryTheory.PreGaloisCategory.autMapHom_apply, CategoryTheory.PreGaloisCategory.toAutMulEquiv, CategoryTheory.PreGaloisCategory.autMapHom, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.autMap_apply_mul. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Galois categories, linear-operator diagonalization or diagonal morphism properties, not diagonalizable affine group schemes and their extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|[Dd]iagonaliz|[Dd]iagonalis",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group extensions or actions, Galois-category connectedness, or scalar centrality; none states rigidity of algebraic families on diagonalizable group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected algebraic group acts trivially by automorphisms on an extension with central multiplicative type kernel and multiplicative type quotient when it preserves the kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GroupExtension.conjAct\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} → [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → E →* MulAut N\", \"doc\": \"The group homomorphism $\\\\phi: E \\\\to \\\\mathrm{Aut}(N)$ defined by conjugation in a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$, where $\\\\phi(x)$ is the automorphism of $N$ given by conjugation by $x \\\\in \"}\n  {\"name\": \"GroupExtension.Splitting.conjAct\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] →\\n        {E : Type u_3} → [inst_2 : Group E] → {S : GroupExtension N E G} → S.Splitting → G →* MulAut N\", \"doc\": \"The group homomorphism $ G \\\\to \\\\mathrm{Aut}(N) $ obtained by composing the splitting $ s : G \\\\to E $ with the conjugation action homomorphism $ E \\\\to \\\\mathrm{Aut}(N) $, where $ \\\\mathrm{Aut}(N) $ denot\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], MulAction.IsPretransitive (CategoryTheory.A\", \"doc\": \"For any connected object $X$ in a pre-Galois category $\\\\mathcal{C}$ and fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, the automorphism group $\\\\mathrm{Aut}(F)$ acts pretransitively on the fini\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [C\", \"doc\": \"If the group homomorphism $\\\\phi: G \\\\to \\\\mathrm{Aut}(F)$ is surjective, then for every connected object $X$ in the pre-Galois category $\\\\mathcal{C}$, the induced action of $G$ on the finite set $F(X)$ \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, establ\"}\n  {\"name\": \"GroupExtension.inl_conjAct_comm\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : Group N] [inst_1 : Group E] [inst_2 : Group G]\\n  (S : GroupExtension N E G) {e : E} {n : N}, S.inl ((S.conjAct e) n) = e * S.inl n * e⁻¹\", \"doc\": \"For any elements $e \\\\in E$ and $n \\\\in N$ in a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$, the inclusion of the conjugated element $\\\\phi(e)(n) \\\\in N$ into $E$ equals the conjugation of the inclusion o\"}\n  {\"name\": \"GroupExtension.ConjClasses\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] → {E : Type u_3} → [inst_2 : Group E] → GroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"The quotient of the set of splittings of the group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ by the conjugacy equivalence relation, where two splittings $s,s':G\\\\to E$ are equivalent if there exists $n\\\\in \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group extensions or actions, Galois-category connectedness, or scalar centrality; none states rigidity of algebraic families on diagonalizable group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rigidity of connected actions preserving a central diagonalizable subgroup with diagonalizable quotient of an affine algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SubAddAction.fixingAddSubgroup_vadd_eq_fixingAddSubgroup_map_conj\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfFixingSubgroup\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : AddGroup M] [inst_1 : AddAction M α] (s : Set α) (g : M),\\n  fixingAddSubgroup M (g +ᵥ s) = AddSubgroup.map (AddEquiv.toAddMonoidHom (AddAut.conj g)) (fixingAddSubgroup M s)\", \"doc\": \"For any additive group $M$ acting on a type $\\\\alpha$, subset $s \\\\subseteq \\\\alpha$, and element $g \\\\in M$, the fixing subgroup of the translated set $g + s$ equals the image of the fixing subgroup of $\"}\n  {\"name\": \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"module\": \"Mathlib.CategoryTheory.Galois.Examples\", \"type\": \"(X : Action FintypeCat G) [IsConnected X] (x : X.V) [Fintype (G ⧸ (MulAction.stabilizer G x))] :\\n  X ≅ G ⧸ₐ MulAction.stabilizer G x\", \"doc\": \"For a connected action $ X $ of a group $ G $ on the category of finite types and any element $ x $ in the underlying type of $ X $, there exists an isomorphism between $ X $ and the quotient $ G / \\te\"}\n  {\"name\": \"AffineMap.isCentralScalar\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \"[DistribMulAction Rᵐᵒᵖ V2] [IsCentralScalar R V2] : IsCentralScalar R (P1 →ᵃ[k] V2)\", \"doc\": \"If the opposite monoid of $ R $ acts distributively on $ V_2 $ and $ R $ acts centrally on $ V_2 $, then $ R $ also acts centrally on the space of affine maps from $ P_1 $ to $ V_2 $. This means scala\"}\n  {\"name\": \"MulAction.QuotientAction.mk\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ {α : Type u} {β : Type v} [inst : Group α] [inst_1 : Monoid β] [inst_2 : MulAction β α] {H : Subgroup α},\\n  (∀ (b : β) {a a' : α}, a⁻¹ * a' ∈ H → (b • a)⁻¹ * b • a' ∈ H) → MulAction.QuotientAction β H\", \"doc\": \"Given a group $\\\\alpha$, a monoid $\\\\beta$, a monoid action of $\\\\beta$ on $\\\\alpha$, and a subgroup $H \\\\subseteq \\\\alpha$, if for every $b \\\\in \\\\beta$ and $a, a' \\\\in \\\\alpha$ the condition $a^{-1}a' \\\\in H$ \"}\n  {\"name\": \"SubMulAction.fixingSubgroup_smul_eq_fixingSubgroup_map_conj\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfFixingSubgroup\", \"type\": \": fixingSubgroup M (g • s) = (fixingSubgroup M s).map (MulAut.conj g).toMonoidHom\", \"doc\": \"For a group $M$ acting on a type $\\\\alpha$ and a subset $s \\\\subseteq \\\\alpha$, the fixing subgroup of the set $g \\\\cdot s$ (obtained by applying the group action of $g$ to each element of $s$) is equal t\"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib.GroupTheory.GroupAction.ConjAct\", \"type\": \": fixedPoints (ConjAct G) G = center G\", \"doc\": \"The set of fixed points of the conjugation action of a group $ G $ on itself is equal to the center of $ G $, i.e., the subgroup consisting of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"Action.instLeftRigidCategory\", \"module\": \"Mathlib.CategoryTheory.Action.Monoidal\", \"type\": \"[LeftRigidCategory V] : LeftRigidCategory (Action V H)\", \"doc\": \"If $\\\\mathcal{V}$ is a left rigid monoidal category, then the category of actions of a monoid $H$ on $\\\\mathcal{V}$ inherits a left rigid category structure via the equivalence with the functor category\"}\n  {\"name\": \"ContinuousAffineMap.instIsCentralScalar\", \"module\": \"Mathlib.Topology.Algebra.ContinuousAffineMap\", \"type\": \"[DistribMulAction Sᵐᵒᵖ W] [IsCentralScalar S W] : IsCentralScalar S (P →ᴬ[R] W)\", \"doc\": \"If a monoid $S$ acts centrally on a topological module $W$ over a ring $R$, then $S$ also acts centrally on the space of continuous affine maps from a torsor $P$ (for an $R$-module) to $W$. This means\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group extensions or actions, Galois-category connectedness, or scalar centrality; none states rigidity of algebraic families on diagonalizable group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"extension\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group extensions or actions, Galois-category connectedness, or scalar centrality; none states rigidity of algebraic families on diagonalizable group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic action of a smooth connected group on a central extension of two diagonalizable group schemes is the second projection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ acting continuously on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, if $G$ is the fun\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ that is the fundamental group of $\\\\mathcal{C}$ with respect to $F$, this prop\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], MulAction.IsPretransitive (CategoryTheory.A\", \"doc\": \"For any connected object $X$ in a pre-Galois category $\\\\mathcal{C}$ and fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, the automorphism group $\\\\mathrm{Aut}(F)$ acts pretransitively on the fini\"}\n  {\"name\": \"GroupExtension.conjAct\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} → [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → E →* MulAut N\", \"doc\": \"The group homomorphism $\\\\phi: E \\\\to \\\\mathrm{Aut}(N)$ defined by conjugation in a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$, where $\\\\phi(x)$ is the automorphism of $N$ given by conjugation by $x \\\\in \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.action_ext_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) {G : Type u_1}\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"In a pre-Galois category, if a group element $g$ acts on an element $x$ of $F(X)$ such that $g \\\\cdot x = t_X(x)$ for a natural transformation $t$ and a Galois object $X$, then this equality extends to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group extensions or actions, Galois-category connectedness, or scalar centrality; none states rigidity of algebraic families on diagonalizable group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|diagonaliz|multiplicative.?type",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonaliz|diagonalis|multiplicative.?type|group.?like",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/SelbergSieve.lean",
+     "Mathlib/NumberTheory/SelbergSieve.lean",
+     "Mathlib/NumberTheory/SelbergSieve.lean",
+     "Mathlib/Algebra/Group/TypeTags/Hom.lean",
+     "Mathlib/Tactic/Translate/ToAdditive.lean",
+     "Mathlib/Tactic/Translate/ToAdditive.lean",
+     "Mathlib/Algebra/GroupWithZero/Action/Hom.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean"
+    ],
+    "digest": "41bd2b396b80686f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphism actions of connected groups on central extensions of multiplicative type algebraic groups are trivial",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Action.ρAut",
+     "GroupExtension.conjAct",
+     "CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier",
+     "Action.ρAut_apply_hom",
+     "GroupExtension.Splitting.conjAct",
+     "AddAut.applyMulAction",
+     "ConjAct.instMulDistribMulAction",
+     "ConjAct.smul_eq_mulAut_conj"
+    ],
+    "digest": "1051fb9b9d093105"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"action\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected algebraic group actions preserving a central extension with diagonalizable kernel and quotient are trivial",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial",
+     "CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'",
+     "groupCohomology.H1ofAutOnUnitsUnique",
+     "CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective",
+     "CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected",
+     "CategoryTheory.FintypeCat.Action.isConnected_of_transitive"
+    ],
+    "digest": "8beb86af8caa8d40"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-isogeny-composition",
+  "date": "2026-10-23",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.41, rigidity of the conjugation action on the kernel extension. The Chapter 12 erratum requires the kernel to be central in the middle group.",
+   "via": [
+    "lem-sfb-multiplicative-isogeny-composition",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-multiplicative-extension-action-rigidity",
+  "worker": "stage1",
+  "group": "N5",
+  "summary": "Kept the statement, including the central-kernel correction already present. Wrote out fpqc descent of the quotient action and of the difference a(g,e)e^{-1}; identified exactly where centrality proves multiplicativity. Reused connected-action rigidity for N and Q and existing fpqc nodes. Added only Milne Theorem 12.36 for general connected homomorphism families, without splitting it. Searched the project library, whole DAG/blueprint, and Mathlib; no exact completed project declaration or Mathlib match.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli/PGL/reductive-cover chain, and its multiplicative-isogeny-composition input. The item supplies corrected Milne 12.41 and the new node supplies its last-sentence invocation of 12.36. blueprint_refs ancestor prints None for this imported created.item chain; the inherited null from.node and via are retained, as for the reviewed sibling connected-action-torus-rigidity. The live latest unit was read; no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic affine flatness criterion converts the explicitly faithfully flat coordinate map into a flat scheme morphism; the unit gives no replacement criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-5bfaed907",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-5bfaed907 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-diagonalizable-hom-family-rigidity and every cited statement in full, and against Milne iAG2017 pp.242-244. The item matches Milne 12.41 with the Chapter 12 erratum (N central); its statement is identical to side-live, which is still unsplit. Milne's printed proof says the action itself factors through H/N, which is literally false; the worker correctly makes the difference c=a(g,e)e^{-1} factor instead. I re-derived each step. Step 2: q(a(g,en))=q(a(g,e)) because a preserves N. Step 3: the connected-action rigidity node (12.37) applies to N and Q. Step 4: c(g,ee')=c(g,e)c(g,e') uses exactly that N is central. Step 5: the new node, applied with X=G and x0=1, forces d=1. The new node is Milne 12.36, specialized to an algebraically closed field and an affine connected X. It is self-contained, statement-only and true. Small cases tested: Spec F; mu_p in characteristic p over Spec F[eps]; a disconnected X with two homomorphisms; t^f(x) for G_m to G_m. It is not a duplicate of the 12.37, torus-rigidity, finite-torsion-hom-parameter, joint-injectivity, antiduality or 12.22 nodes, and it does not restate a clause of the item. No SGA is cited. Every off-unit citation is a Mathlib leaf or a definition. The tool_use on the flat-ring-map leaf is accepted. The null blueprint.from.node is inherited from the base chain; this is a maintainer note, not a delivery fault. FIX (one fault, C1): steps 2 and 4 use G×E×E→G×Q×Q as an fpqc cover. That map is a composite of two base changes of q, and fpqc covers being closed under composition was neither cited nor justified. I added one sentence to step 1 and cited the existing Mathlib leaf lem-weil-pbc-fpqc-covering-axioms (Stacks 022D) in step 1 uses and in proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-multiplicative-extension-action-rigidity.json. Advisory: all six Mathlib search records of the new node carry the same verdict text. The added citation has no quotation in the worker's citations.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MultiplicativeExtensionActionRigidity",
+  "declaration": "AlgebraicGeometry.multiplicativeExtensionAction_eq_snd",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MultiplicativeExtensionActionRigidity.lean",
+  "statement": "theorem multiplicativeExtensionAction_eq_snd {F : Type u} [Field F] [IsAlgClosed F] (E Q G : Over (Spec (.of F))) [GrpObj E] [GrpObj Q] [GrpObj G] [IsAffine E.left] [IsAffine Q.left] [IsAffine G.left] [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] (q : E ⟶ Q) [IsMonHom q] (hflat : q.left.appTop.hom.FaithfullyFlat) (hN : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk (GrpObj.ker q) ≅ diagonalizableGroup F M)) (hQ : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk Q ≅ diagonalizableGroup F M)) (hcentral : ∀ (T : Over (Spec (.of F))) (n : T ⟶ GrpObj.ker q) (e : T ⟶ E), (n ≫ GrpObj.kerι q) * e = e * (n ≫ GrpObj.kerι q)) [ModObj G E] (hmul : ∀ (T : Over (Spec (.of F))) (g : T ⟶ G) (e e' : T ⟶ E), g • (e * e') = (g • e) * (g • e')) (hpreserve : ∀ (T : Over (Spec (.of F))) (g : T ⟶ G) (n : T ⟶ GrpObj.ker q), ∃ n' : T ⟶ GrpObj.ker q, g • (n ≫ GrpObj.kerι q) = n' ≫ GrpObj.kerι q) : ModObj.smul (M := G) (X := E) = snd G E",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf212d3c4",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read node, the 7 stmt_dep records/declarations (GrpObj.ker = pullback of q and unit, diagonalizableGroup = hopfSpec F[M], Mathlib ModObj/Hom.smul), module, report (Worker report + Second reading by Q91). Every clause matches Milne 12.41 with the erratum: IsAlgClosed F; affine and finite type as LocallyOfFiniteType+QuasiCompact for E,Q,G; IsMonHom q; RingHom.FaithfullyFlat on q.left.appTop; hN/hQ as Grp-isos to D(M) with M f.g.; hcentral, hmul and hpreserve over all test schemes, equivalent to affine tests by locality; Smooth+ConnectedSpace on G only; conclusion ModObj.smul = snd G E. No extra hypotheses; mu_p, M=0 and G=Spec F covered. Node diff: only lean and a landed stmt_dep (def-sfb-diagonalizable-group) added; lean.statement verbatim. def-sfb-tori-multiplicative-type exists, but the node defines multiplicative type inline as ≅ D(M) (equivalent over algebraically closed F), so no H4 fault. No definitions, sorry only, source and blueprint docstrings with the 5 proof steps. Not recompiled; worker scompile evidence accepted."
+ }
+}

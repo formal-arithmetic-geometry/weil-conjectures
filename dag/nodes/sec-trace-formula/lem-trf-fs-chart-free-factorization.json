@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Put $G=Q^{\\rm gp}$, $H=g^{\\rm gp}(P^{\\rm gp})$, and let $\\pi:G\\to L=G/H$ be the quotient. Identify $P,Q$ with their images in their group completions, as permitted by integrality in [def-trf-fs-log-blowup]. Set $S=\\pi(Q)\\subseteq L$. Choose finitely many monoid generators of $Q$; their images generate $S$ as a monoid and $L$ as a group, because every element of $G$ is a difference of elements of $Q$. Thus $L$ is a finitely generated abelian group. It is torsion free by hypothesis, so [lem-trf-fg-torsionfree-group-free] supplies a finite $\\mathbf Z$-basis $e_1,\\ldots,e_r$. Use its coordinates to identify $L$ with $\\mathbf Z^r$.",
+   "text": "Put $G=Q^{\\rm gp}$, $H=g^{\\rm gp}(P^{\\rm gp})$, $L=G/H$, $\\pi:G\\to L$, and $S=\\pi(Q)$. By [def-trf-fs-log-blowup], $P,Q$ embed in their completions. Finite monoid generators of $Q$ generate $S$ and generate $L$ as a group, since elements of $G$ are differences from $Q$. Thus [lem-trf-fg-torsionfree-group-free] and the torsion-free hypothesis identify $L$ with $\\mathbf Z^r$.",
    "uses": [
     "def-trf-fs-log-blowup",
     "lem-trf-fg-torsionfree-group-free"
@@ -24,7 +24,7 @@
    }
   },
   {
-   "text": "The image monoid $S$ is saturated in $L$. Indeed, suppose $n\\ell\\in S$ with $n\\geq1$. Choose $x\\in G$ lifting $\\ell$ and $q\\in Q$ with $\\pi(q)=n\\ell$. Since $nx-q\\in H$, there exist $a,b\\in P$ with $nx=q+g(a)-g(b)$. Consequently\n$$n(x+g(b))=q+g(a)+(n-1)g(b)\\in Q.$$\nSaturation of $Q$ in $G$ [def-trf-fs-log-blowup] gives $x+g(b)\\in Q$. Its image is $\\ell$, proving $\\ell\\in S$. This calculation uses no assumption that $g(P)$ is a face and no torsion-freeness of $G$.",
+   "text": "The monoid $S$ is root saturated in $L$: suppose $n\\ell\\in S$ with $n\\geq1$ and $\\ell\\in L$. Lift $\\ell$ to $x\\in G$ and choose $q\\in Q$ with $\\pi(q)=n\\ell$. Since $nx-q\\in H=g^{\\rm gp}(P^{\\rm gp})$ and every element of $P^{\\rm gp}$ is a difference of elements of $P$, there exist $a,b\\in P$ with $nx=q+g(a)-g(b)$. Then $n(x+g(b))=q+g(a)+(n-1)g(b)\\in Q$, using $n-1\\geq0$. Saturation of $Q$ in $G$ [def-trf-fs-log-blowup] gives $x+g(b)\\in Q$, whose image is $\\pi(x)=\\ell$; hence $\\ell\\in S$. No face hypothesis on $g(P)$ and no torsion-freeness of $G$ is used.",
    "uses": [
     "def-trf-fs-log-blowup"
    ],
@@ -35,53 +35,20 @@
    }
   },
   {
-   "text": "If $r=0$, $L=0$ and its empty basis already lies in $S$; proceed to Step 8. Suppose $r>0$. Let $s_1,\\ldots,s_m$ be the chosen generators of $S$ and let $B$ be the $r\\times m$ integer matrix of their coordinates. Since they generate $L$ as a group, express each $e_j$ as an integer combination of the $s_i$. These expressions give an $m\\times r$ integer matrix $C$ with $BC=I_r$. Apply [lem-weil-pbc-cauchy-binet]:\n$$1=\\det(BC)=\\sum_{|T|=r}\\det(B^T)\\det(C_T).$$\nHere $\\det I_r=1$ follows directly from [def-weil-pbc-matrix-determinant]. Some summand is nonzero, so some ordered $r$-tuple of elements of $S$ has nonzero integer determinant. This also shows $m\\geq r$, since otherwise the sum would be empty.",
+   "text": "If $r=0$, take the empty basis. Otherwise [lem-trf-lattice-monoid-minimal-determinant-tuple] gives columns $v_i\\in S$ with least positive $D=|\\det A|$. By [lem-trf-integer-matrix-fractional-lattice-witness] they are rationally independent; if their integer span were proper, choose $y$ outside it and apply that node to obtain $x=Aa\\in\\mathbf Z^r$ with $0\\leq a_i<1$ and $a_j>0$. By [lem-trf-saturated-monoid-fractional-column-descent], replacing column $j$ by $x$ gives columns in $S$ and determinant strictly between $0$ and $D$, a contradiction.",
    "uses": [
-    "lem-weil-pbc-cauchy-binet",
-    "def-weil-pbc-matrix-determinant"
+    "lem-trf-lattice-monoid-minimal-determinant-tuple",
+    "lem-trf-integer-matrix-fractional-lattice-witness",
+    "lem-trf-saturated-monoid-fractional-column-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0F0K, item-cauchy-binet, applied to the integer factorization BC=I; identity determinant from the Leibniz formula."
+    "place": "Assembly of the three agent-supplied lattice lemmas: old steps 3--6; Tag 0F0K (algebra-item-cauchy-binet), Tag 07DQ (algebra-lemma-matrix-left-inverse, adjugate identity)."
    }
   },
   {
-   "text": "Among all integer matrices whose $r$ columns belong to $S$ and whose determinant is nonzero, choose $A$ for which $D=|\\det A|$ is least. Step 3 makes this set nonempty; its absolute determinants are positive integers, so the well-ordering of $\\mathbf N$ supplies the least one. Determinants are integers by the finite sum of signed products in [def-weil-pbc-matrix-determinant]. Write $v_1,\\ldots,v_r\\in S$ for the columns of $A$.",
-   "uses": [
-    "def-weil-pbc-matrix-determinant"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0F0K, item-cauchy-binet, determinant convention; agent-supplied least-positive-determinant argument."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-matrix-adjugate-identity] over $\\mathbf Q$, the matrix $A$ has inverse $\\operatorname{adj}(A)/\\det A$. In particular its columns are independent and every rational vector has unique rational coordinates in these columns. If their integer span were a proper subgroup of $\\mathbf Z^r$, choose $y\\in\\mathbf Z^r$ outside it. Put $b=A^{-1}y\\in\\mathbf Q^r$, let $z_i=\\lfloor b_i\\rfloor\\in\\mathbf Z$ (the unique integer with $z_i\\leq b_i<z_i+1$), and set\n$$a_i=b_i-z_i,\\qquad x=y-Az=Aa\\in\\mathbf Z^r.$$\nThus $0\\leq a_i<1$. Not all $a_i$ vanish, since otherwise $y=Az$ would be in the integer span. Choose $j$ with $0<a_j<1$. These formulas explicitly produce the lattice point; no fundamental-domain theorem is being assumed.",
-   "uses": [
-    "lem-weil-pbc-matrix-adjugate-identity"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07DQ, lemma-matrix-left-inverse, proof (adjugate identity); the rational-coordinate floor calculation is supplied explicitly by the agent."
-   }
-  },
-  {
-   "text": "Choose a positive common denominator $N$ of the finitely many rational numbers $a_i$. Then $Na_i\\in\\mathbf N$ and\n$$Nx=\\sum_i(Na_i)v_i\\in S.$$\nThe saturation proved in Step 2 gives $x\\in S$. Let $E$ be the rational identity matrix with column $j$ replaced by the vector $a$. Then $AE$ is $A$ with column $j$ replaced by $x$. The square case of [lem-weil-pbc-cauchy-binet] gives $\\det(AE)=\\det A\\det E$. In the Leibniz sum [def-weil-pbc-matrix-determinant] for $E$, all columns except $j$ force the permutation to fix their indices, hence also $j$; the only surviving term is $a_j$. Therefore\n$$0<|\\det(AE)|=a_jD<D.$$\nThe matrix $AE$ has integer entries (its columns are $v_i$ and $x$), and all its columns belong to $S$. This contradicts the minimality of $D$. Thus the proper-span alternative of Step 5 is impossible.",
-   "uses": [
-    "lem-weil-pbc-cauchy-binet",
-    "def-weil-pbc-matrix-determinant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0F0K, item-cauchy-binet, square case; the column replacement determinant is computed from the Leibniz formula."
-   }
-  },
-  {
-   "text": "Consequently the $v_i$ generate $\\mathbf Z^r$ over $\\mathbf Z$. They are independent by Step 5, so every element has a unique integer expression in the $v_i$. They are therefore a $\\mathbf Z$-basis of $L$ lying in $S$. For each $i$ choose $q_i\\in Q$ with $\\pi(q_i)=v_i$, which is possible by the definition $S=\\pi(Q)$. In rank zero make no choices. This proves the asserted basis-lifting clause.",
+   "text": "Hence the $v_i$ span $L$ over $\\mathbf Z$ and are independent, so integer coordinates in them are unique. Lift each $v_i$ to $q_i\\in Q$ using $S=\\pi(Q)$; in rank zero no choices are needed.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -90,7 +57,7 @@
    }
   },
   {
-   "text": "Define the group homomorphism\n$$\\Phi:P^{\\rm gp}\\oplus\\mathbf Z^r\\to Q^{\\rm gp},\\qquad(u,(m_i))\\mapsto g^{\\rm gp}(u)+\\sum_i m_iq_i.$$\nIf $\\Phi(u,m)=0$, applying $\\pi$ and using uniqueness of the basis coordinates gives $m=0$; injectivity of $g^{\\rm gp}$ then gives $u=0$. Conversely, for $t\\in Q^{\\rm gp}$, write $\\pi(t)=\\sum_i m_i v_i$. Then $t-\\sum_i m_iq_i\\in H$, so it equals $g^{\\rm gp}(u)$ for some $u$. This proves surjectivity and hence that $\\Phi$ is an isomorphism. If $r=0$, the same argument says precisely that $g^{\\rm gp}$ is an isomorphism, since its cokernel is zero.",
+   "text": "Define $\\Phi(u,m)=g^{\\rm gp}(u)+\\sum_i m_iq_i$. If $\\Phi(u,m)=0$, applying $\\pi$ gives $m=0$ by the basis, then $u=0$ by injectivity of $g^{\\rm gp}$. For $t\\in G$, write $\\pi(t)=\\sum_i m_iv_i$; then $t-\\sum_i m_iq_i\\in H$ equals $g^{\\rm gp}(u)$ for some $u$. Thus $\\Phi:P^{\\rm gp}\\oplus\\mathbf Z^r\\to G$ is an isomorphism, also for $r=0$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -99,7 +66,7 @@
    }
   },
   {
-   "text": "Restrict $\\Phi$ to $P\\oplus\\mathbf N^r$. Its values lie in $Q$, because $g(p)$ and all $q_i$ lie there and the coefficients are nonnegative. The result is exactly $h$ in the statement, and its restriction along $p\\mapsto(p,0)$ is $g$. The inclusions $P\\hookrightarrow P^{\\rm gp}$ and $Q\\hookrightarrow Q^{\\rm gp}$ are injective by integrality [def-trf-fs-log-blowup], as is $\\mathbf N^r\\hookrightarrow\\mathbf Z^r$. Hence equality of two $h$-values gives equality of their $\\Phi$-values and then equality of the inputs, proving that $h$ is injective. Group completion of the product $P\\oplus\\mathbf N^r$ is $P^{\\rm gp}\\oplus\\mathbf Z^r$: a homomorphism from the product into an abelian group is uniquely the sum of its restrictions to $P$ and the $r$ coordinate generators, with the former extending to $P^{\\rm gp}$ and each latter generator allowing integer multiples. Under this identification, the induced $h^{\\rm gp}$ is $\\Phi$, already proved an isomorphism.",
+   "text": "Restrict $\\Phi$ to $P\\oplus\\mathbf N^r$: nonnegative coefficients give values in $Q$, and this is $h$, with $h(p,0)=g(p)$. Equality of $h$-values gives equality under $\\Phi$, hence equality of the inputs, since $P\\hookrightarrow P^{\\rm gp}$ and $Q\\hookrightarrow Q^{\\rm gp}$ are injective [def-trf-fs-log-blowup], as is $\\mathbf N^r\\hookrightarrow\\mathbf Z^r$. Finally a homomorphism $P\\oplus\\mathbf N^r\\to B$ to any abelian group is uniquely the sum of its restriction to $P$ and the images of the coordinate generators. The former extends uniquely to $P^{\\rm gp}$; the latter extend by integer multiples. This proves $(P\\oplus\\mathbf N^r)^{\\rm gp}=P^{\\rm gp}\\oplus\\mathbf Z^r$, under which $h^{\\rm gp}=\\Phi$.",
    "uses": [
     "def-trf-fs-log-blowup"
    ],
@@ -113,9 +80,9 @@
  "proof_deps": [
   "def-trf-fs-log-blowup",
   "lem-trf-fg-torsionfree-group-free",
-  "lem-weil-pbc-cauchy-binet",
-  "def-weil-pbc-matrix-determinant",
-  "lem-weil-pbc-matrix-adjugate-identity"
+  "lem-trf-lattice-monoid-minimal-determinant-tuple",
+  "lem-trf-integer-matrix-fractional-lattice-witness",
+  "lem-trf-saturated-monoid-fractional-column-descent"
  ],
  "proof_origin": {
   "by": "agent",
@@ -236,29 +203,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-fs-chart-free-factorization",
   "worker": "stage1",
-  "group": "Q10",
-  "summary": "Kept the statement, supplied a nine-step algebraic proof: quotient image saturation, a least determinant tuple, explicit rational-coordinate rounding and determinant descent, then the injectivity and group-isomorphism checks. Reused the existing finite torsion-free group, Cauchy–Binet, adjugate and determinant nodes; no new nodes or definitions are needed. Checked the source, all cited statements, edge cases, project attachment searches and fresh logged Mathlib searches.",
+  "group": "Q160",
+  "summary": "Repair of the landing return naming 0cca083f71d: rebuild the retained split over the current DAG, retaining current inherited fields and the unchanged statement. Three statement-only tasks preserve the old nonsingular/minimal tuple, rational floor witness and saturated column-descent arguments; the parent assembles them in less than 3000 characters. Re-read all current cited statements and source passages and checked all seven verbatim quotes. Step 3 now explicitly chooses an integer vector outside the proper column span before applying the universally quantified floor-witness lemma. Retain the actual search log and all earlier arguments in report.md. The initial resumed server dry run passed at 50a4b1e5563; rerun after these changes before pushing.",
   "blueprint": "The historical chart-factorization input in blueprint.from.place beneath lem-trf-local-term-locality (1)–(2), through lem-trf-log-smooth-log-regular and the nodal alteration ancestry. This auxiliary node realizes no new step of the current contracting-correspondence unit and does not change that unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-cauchy-binet",
-    "why": "Generic integer/rational matrix determinant formula used for a nonsingular tuple and a column replacement; the log-chart unit has no such matrix statement."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-cauchy-binet"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q10-d3defdcaa",
-  "group": "Q10",
+  "reviewer": "NT-cc-Q160-d8f5084c0",
+  "group": "Q160",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-d3defdcaa (reviewer sub-agent of L); spot-checked: I read the item and all 9 steps in full, the statements of every cited node (def-trf-fs-log-blowup, lem-trf-fg-torsionfree-group-free, lem-weil-pbc-cauchy-binet, def-weil-pbc-matrix-determinant, lem-weil-pbc-matrix-adjugate-identity) and the parent's citing step (lem-trf-log-smooth-log-regular step 0). Sources: ILO VI Prop 1.9 (pp.70-71) gives only the specific nodal chart with Coker g^gp ≅ Z, and the general basis-lifting claim is correctly marked as an agent refinement. Saturation in VIII 3.1.17 matches the def node's fs clause. Stacks tags 0F0K and 07DQ match their labels. Proof: Step 2's saturation of S = π(Q) via n(x+g(b)) = q+g(a)+(n-1)g(b) is correct. Steps 3-4 use Cauchy-Binet with B (r×m) times C (m×r) = I_r to give a nonsingular tuple in S, then take the least |det|. Steps 5-6 use the adjugate inverse and floor rounding to get x = Aa with a in [0,1)^r. Saturation gives x in S, and det E = a_j by the Leibniz formula, which contradicts minimality. Steps 7-9 (basis lift, Φ an isomorphism, h injective and h^gp = Φ) are all checked. Small cases tested: g = id; P = 0 into N^2; N into N^2 with 1 ↦ (1,1); torsion units N×Z/2. Saturation is necessary (⟨2,3⟩ ⊂ Z) and so is torsion-freeness (N →×2 N). No new nodes. The DAG statement search found no duplicate or generalization (fs-face-sharpening differs). Accepted tool use: lem-weil-pbc-cauchy-binet, a generic matrix identity. No SGA source is cited. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-d8f5084c0 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full: def-trf-fs-log-blowup (the fs clause), lem-trf-fg-torsionfree-group-free and def-weil-pbc-matrix-determinant. This head is the fourth delivery of the human's re-split of 2026-10-22. The three earlier heads, 48cf, 8e3d and 0cca, were each reviewed FIX, and each landing was refused with 'not in the live DAG'. Live and side-live still hold the Q10 9-step split, so this delivery is not superseded. Against 0cca, the three new nodes are byte-identical. The item changes in three places. Step 2 now states n>0. Step 3 now chooses y outside the integer span explicitly before applying the witness node, which quantifies over such a y; this is an improvement. The third change is the split_report text. Coverage of the old proof: old steps 3-4 became lem-trf-lattice-monoid-minimal-determinant-tuple, old step 5 became lem-trf-integer-matrix-fractional-lattice-witness, and old step 6 became lem-trf-saturated-monoid-fractional-column-descent. The three are of comparable size and none restates the item. Old steps 1, 7, 8 and 9 survive in full as parent steps 1, 4, 5 and 6. Step 3 meets every hypothesis of the new nodes: finite generation and spanning come from step 1, det≠0 from the tuple node, root saturation from step 2, and r≥1 holds in that branch. All three statements are true. Small cases: A=[[1,1],[0,2]] with y=(0,1) gives a=(1/2,1/2), x=(1,1) and a replacement determinant of ±1; A=(-2) with y=1 gives x=-1; A=I makes the witness hypothesis vacuous; S=<2,3> shows that the tuple node claims no basis and that the descent node needs saturation. Sources: Stacks 0F0K is at algebra.tex 282-288 and 07DQ (the adjugate identity) at 2685-2691; both match tags/tags. ILO VI 1.9 gives only the special nodal chart, so marking the general argument as agent-supplied is correct. No SGA source is used. My rg -L duplicate search found no duplicate; the Cramer leaf covers only the determinant clause of the descent node. FIX (E5/G): step 2 still drops the old argument for a,b∈P, namely that nx-q lies in H=g^gp(P^gp) and that P^gp=P-P. I re-applied the restored step-2 text from the earlier fixes in fixes/dag/nodes/sec-trace-formula/lem-trf-fs-chart-free-factorization.json, changing only proof[1].text and keeping the head's step 3; the assembly is now 2721 characters. Maintainer note: the merge-owned tool_uses field still lists lem-weil-pbc-cauchy-binet, which the item no longer cites.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -278,5 +240,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

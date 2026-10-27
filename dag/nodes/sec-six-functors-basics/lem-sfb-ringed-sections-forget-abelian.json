@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-ringed-sections-forget-abelian",
+ "kind": "statement",
+ "title": "Unbounded ringed-site sections agree with underlying abelian sections",
+ "statement": "Let $\\mathcal C$ be a site small in the chosen coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and $B$ a sheaf of commutative rings. Use sheaves of $B$-modules [def-weil-sheaf-of-modules-category], the ordinary unbounded derived categories [def-weil-abstract-derived-category], and K-injective total derived sections [def-pur-ringed-site-zeroth-hypercohomology]. For $K\\in D(B)$ write $K_{\\mathrm{ab}}$ for the image under termwise forgetting of the module structure. For every object $U\\in\\mathcal C$, the canonical comparison\n$$R\\Gamma(U,K)\\longrightarrow R\\Gamma(U,K_{\\mathrm{ab}})$$\nis an isomorphism in $D(\\mathbf{Ab})$. Here sections on either side mean derived evaluation at $U$, equivalently global sections on the localized site $\\mathcal C/U$ [def-pur-localized-ringed-site]. The comparison is natural in $K$ and in site arrows $V\\to U$, with the actual restriction maps. For a module K-injective representative $I$ of $K$ and an abelian K-injective replacement $a:I_{\\mathrm{ab}}\\to J$, it is represented by $\\Gamma(U,a):\\Gamma(U,I)\\to\\Gamma(U,J)$. No assertion that forgetting preserves K-injectivity is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6J, lemma-modules-abelian-unbounded (1),(2), including its comparison via a module K-injective and an abelian K-injective replacement; restriction naturality of the displayed Gamma(U,a) maps."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Fix $U$. The slice $\\mathcal C/U$ is small: its objects and arrows are subsets of the corresponding sets of objects and arrows with a map to $U$. Write $B_U=B|_U$ and $\\mathbf Z_U=\\underline{\\mathbf Z}$ on this slice. Integer multiples of $1$ give a ring-sheaf map $\\mathbf Z_U\\to B_U$. Modules over $\\mathbf Z_U$ are precisely abelian sheaves: the integer action is forced to be repeated addition, and for a locally represented integer section the action is obtained by gluing these integer actions; additivity makes every abelian sheaf morphism linear. This identification leaves underlying groups, differentials, kernels and sheafified cokernels unchanged, hence also quasi-isomorphisms and K-injectivity. Restriction of scalars along $\\mathbf Z_U\\to B_U$ is therefore forgetting the $B_U$-action. Restriction to the slice is exact: kernels restrict sectionwise; a section of a cokernel is locally represented by a section of the target, and the same covering families are available in the slice. Thus restriction commutes with cohomology and preserves quasi-isomorphisms.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J, lemma-modules-abelian-unbounded: identification of abelian sheaves with integer-sheaf modules; elementary localization and scalar-action identifications"
+   }
+  },
+  {
+   "text": "Choose a module K-injective representative $I$ for $K$ and an abelian K-injective replacement $a:I_{\\mathrm{ab}}\\to J$. These exist for the small site with ring sheaf $B$, and with ring sheaf $\\underline{\\mathbf Z}$, respectively. For any such choices the localized restriction lemma makes $I|_U$ K-injective over $B_U$ and $J|_U$ K-injective over $\\mathbf Z_U$. Step 1 makes $a|_U$ a quasi-isomorphism from the scalar restriction of $I|_U$ to $J|_U$. In particular it is a K-injective replacement of that scalar restriction; K-injectivity of $I_{\\mathrm{ab}}$ is neither needed nor inferred.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J, lemma-modules-abelian-unbounded, first paragraph of proof; Tag 08FI, lemma-restrict-K-injective-to-open"
+   }
+  },
+  {
+   "text": "Apply the scalar-sections comparison lemma on $\\mathcal C/U$ to $R=\\mathbf Z_U$, $S=B_U$, $L=I|_U$ and the replacement $a|_U$. Its normalization says that $\\Gamma(\\mathcal C/U,a|_U)$ is a quasi-isomorphism representing the canonical natural isomorphism from $B_U$-derived sections to integer-sheaf-derived sections after scalar restriction. The localization comparison identifies both endpoints with the derived evaluations at $U$, by the literal identities $(I|_U)(\\mathrm{id}_U)=I(U)$ and $(J|_U)(\\mathrm{id}_U)=J(U)$. The representing map is consequently exactly $\\Gamma(U,a)$. Since a quasi-isomorphism becomes invertible in the derived category, this proves the claimed canonical isomorphism in $D(\\mathbf{Ab})$, including its representative formula for every allowed $I,a,J$.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence",
+    "lem-sfb-unbounded-sections-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, via the existing general scalar-sections comparison; Tag 0D6F, lemma-unbounded-cohomology-of-open; comparison formula of Tag 0D6J"
+   }
+  },
+  {
+   "text": "Naturality in $K$ follows from naturality in the derived argument of the scalar comparison and both localization isomorphisms. To verify the actual restrictions, use the same $I,a,J$ for every object. For $v:V\\to U$, the equality $J(v)\\,a_U=a_V\\,I_{\\mathrm{ab}}(v)$ holds degreewise because $a$ is a morphism of complexes of sheaves. Hence the square of sections complexes with horizontal maps $\\Gamma(U,a),\\Gamma(V,a)$ and vertical maps the actual restrictions commutes. The localization identifications are sectionwise identities and relocalization is also sectionwise the identity, so this square is exactly the claimed derived restriction square. Its images in $D(\\mathbf{Ab})$ still commute. The canonical resolution identifications from step 3 make this independent of the choices.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence",
+    "lem-sfb-unbounded-sections-localization",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J, displayed Gamma(U,a) representatives: sheaf-morphism naturality; Tag 0D6F, sectionwise localization identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-sfb-unbounded-sections-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6J, 0D6F and 08FI; specialize the existing general scalar-sections comparison (Tag 0D6E) on each localized site instead of repeating the flat-roof proof of 0D6J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "modulesAbelian|modules_abelian|forget.*[Cc]ohomology|[Cc]ohomology.*forget",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: underived forgetful/sections functors and abelian sheaf Ext definitions do not state the unbounded module-to-abelian hypercohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: underived forgetful/sections functors and abelian sheaf Ext definitions do not state the unbounded module-to-abelian hypercohomology comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a complex of sheaves of modules equals cohomology of its underlying abelian sheaf complex",
+   "results": "8 hits: CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.presheaf, AlgebraicGeometry.Scheme.Modules.toPresheaf, SheafOfModules.toSheaf_obj_val, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf, SheafOfModules.toSheaf, SheafOfModules.val, SheafOfModules.forget; digest 19f58ecc17f72866",
+   "date": "2026-10-22",
+   "verdict": "no match: underived forgetful/sections functors and abelian sheaf Ext definitions do not state the unbounded module-to-abelian hypercohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings on a small site derived sections of module sheaves agree canonically with derived sections of the underlying abelian sheaves",
+   "results": "8 hits: SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.sectionsFunctor_obj, SheafOfModules.toSheaf_obj_val, SheafOfModules.unit_val, SheafOfModules.instAbelian, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.sections, SheafOfModules.sectionsFunctor; digest 8f06d97446a5bf00",
+   "date": "2026-10-22",
+   "verdict": "no match: underived forgetful/sections functors and abelian sheaf Ext definitions do not state the unbounded module-to-abelian hypercohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ringed site unbounded hypercohomology is unchanged by forgetting the module structure to abelian sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.H, SheafOfModules.forgetToSheafModuleCat_obj_val, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instAddCommGroupH, instAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAbelian; digest 2b590887d968dca9",
+   "date": "2026-10-22",
+   "verdict": "no match: underived forgetful/sections functors and abelian sheaf Ext definitions do not state the unbounded module-to-abelian hypercohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*(derived|hypercohomology)|(derived|hypercohomology).*forget",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: underived forgetful/sections functors and abelian sheaf Ext definitions do not state the unbounded module-to-abelian hypercohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary small ringed site unbounded derived sections of module sheaves agree with underlying abelian derived sections",
+   "results": "8 hits: SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.sectionsFunctor_obj, SheafOfModules.sections, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.sectionsFunctor, instAbelianCondensedMod, CategoryTheory.Sheaf.H; digest cd8e51c6523d0b35",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived forgetful/sections constructions or ordinary sheaf Ext cohomology, not the unbounded derived scalar-forgetting comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "forget.*(derived|hypercohomology)|(derived|hypercohomology).*forget",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived forgetful/sections constructions or ordinary sheaf Ext cohomology, not the unbounded derived scalar-forgetting comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded hypercohomology of a sheaf of modules agrees with that of its underlying abelian sheaf complex",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.presheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.toSheaf, SheafOfModules.val, SheafOfModules.toSheaf_obj_val, SheafOfModules.isSheaf, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; digest ac39044cd39094bf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived forgetful/sections constructions or ordinary sheaf Ext cohomology, not the unbounded derived scalar-forgetting comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived forgetful/sections constructions or ordinary sheaf Ext cohomology, not the unbounded derived scalar-forgetting comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def toSheaf|def sectionsFunctor",
+   "results": "3 hits: 90, 124, 166; digest a7ecf37c1c2778d8",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived forgetful/sections constructions or ordinary sheaf Ext cohomology, not the unbounded derived scalar-forgetting comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections commute with forgetting scalars from sheaves of modules over a ring sheaf to sheaves of abelian groups",
+   "results": "8 hits: SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.forgetToSheafModuleCat_map_val, SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.toSheaf_map_val, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.pushforwardSections_unitHomEquiv; digest fd8ac080e65ec88f",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived forgetful/sections constructions or ordinary sheaf Ext cohomology, not the unbounded derived scalar-forgetting comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lisse-open-unit-test-descent",
+  "date": "2026-10-22",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), returned torsion-acyclic norm-coefficient test, proof step 8: unit-compatible localization, locally finite free trivializations, and conservative exact contractible evaluations. Underlying-abelian derived sections of an internal-module K-injective representative.",
+   "via": [
+    "lem-sfb-lisse-open-unit-test-descent",
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ringed-sections-forget-abelian",
+  "worker": "stage1",
+  "summary": "Q94: retained the statement; no exact project attachment and no Mathlib match found. Reused the existing general unit-normalized scalar-sections comparison on each slice with integer coefficients, together with K-injective restriction and the sectionwise localization comparison. Checked the Gamma(U,a) formula and actual restriction squares. No new nodes.",
+  "blueprint": "No named blueprint ancestor (blueprint_refs.py ancestor returns None). Serves the inherited paragraph (3) torsion-acyclic norm-coefficient unit test, proof step 8, through lem-sfb-lisse-open-unit-test-descent: forgetting module coefficients in unbounded derived sections.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-sections-scalar-coherence",
+    "why": "Generic unbounded scalar-change theorem, specialized to the integer sheaf on the slice; the unit has no such general tool."
+   },
+   {
+    "node": "lem-sfb-unbounded-sections-localization",
+    "why": "Generic identification of derived evaluation with slice sections, including the literal representative identity."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of module and abelian K-injective resolutions on a small site."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic K-injective preservation by localization, applied to both chosen complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-sfb-unbounded-sections-localization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-beea859e9",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-beea859e9 (reviewer sub-agent of L); spot-checked: Read Stacks 0D6J (sites-cohomology.tex ~l.4453-4547): the item states part (2) exactly, with representative Γ(U,I)→Γ(U,J) and naturality, statement unchanged from base; no repair note, no new nodes, proof_deps = union of uses, no cycle (transitive deps of all 4 cited non-definition nodes checked). Step 1 (Z-modules = abelian sheaves, scalar restriction = forgetting, exactness of slice restriction since coverings of V/U are coverings of V) is genuinely elementary. Step 2: prop-pur-kinjective-resolutions-exist and lem-pur-kinjective-restrict-localized say what is used, and no K-injectivity of I_ab is claimed. Step 3: the 'in particular' clause of lem-coef-derived-sections-scalar-coherence applies with R=Z_U, S=B_U, L=I|_U, j=a|_U with no flatness; Γ(C/U,-)=evaluation at id_U by Yoneda; the degreewise identity clause of lem-sfb-unbounded-sections-localization fixes the representative as Γ(U,a). Step 4: site-arrow naturality from a being a morphism of complexes of sheaves and relocalization being sectionwise identity. Four tool uses accepted as generic. Duplicate search over 0D6J nodes found only scheme-étale part (3) or D⁺ constant-coefficient versions (lem-pe-left-module-derived-evaluation-forget is narrower). Edge cases K=0, B=0, B=Z (σ_{R,R}=1), and unbounded K checked. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RingedSectionsForgetAbelian",
+  "declaration": "CategoryTheory.RingedSectionsForgetAbelian.ringedSectionsForgetAbelian",
+  "declarations": [
+   "CategoryTheory.RingedSectionsForgetAbelian.abelianEvaluation",
+   "CategoryTheory.RingedSectionsForgetAbelian.abelianRestriction",
+   "CategoryTheory.RingedSectionsForgetAbelian.rings",
+   "CategoryTheory.RingedSectionsForgetAbelian.moduleEvaluation",
+   "CategoryTheory.RingedSectionsForgetAbelian.moduleRestriction",
+   "CategoryTheory.RingedSectionsForgetAbelian.ringedSectionsForgetAbelian"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/RingedSectionsForgetAbelian.lean",
+  "statement": "theorem ringedSectionsForgetAbelian : ∃ e : ∀ U : C, (moduleEvaluation B U).rightDerivedFunctor ≅ (SheafOfModules.toSheaf (rings B)).mapDerivedCategory ⋙ (abelianEvaluation J U).rightDerivedFunctor, (∀ (U : C) (I : CochainComplex (ringedSiteModules.{u} (rings B)) ℤ) [I.IsKInjective] (A : CochainComplex (Sheaf J AddCommGrpCat.{u}) ℤ) [A.IsKInjective] (a : ((SheafOfModules.toSheaf (rings B)).mapHomologicalComplex (.up ℤ)).obj I ⟶ A) [QuasiIso a], (e U).hom.app (DerivedCategory.Q.obj I) ≫ (abelianEvaluation J U).rightDerivedFunctor.map ((SheafOfModules.toSheaf (rings B)).mapDerivedCategoryFactors.hom.app I) ≫ (abelianEvaluation J U).rightDerivedFunctor.map (DerivedCategory.Q.map a) ≫ ((abelianEvaluation J U).rightDerivedFunctorObjQIso A).hom = ((moduleEvaluation B U).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map (((abelianEvaluation J U).mapHomologicalComplex (.up ℤ)).map a)) ∧ (∀ (V U : C) (f : V ⟶ U) (K : DerivedCategory (ringedSiteModules.{u} (rings B))), (Functor.rightDerivedFunctorNatTrans (moduleRestriction B f)).app K ≫ (e V).hom.app K = (e U).hom.app K ≫ (Functor.rightDerivedFunctorNatTrans (abelianRestriction J f)).app ((SheafOfModules.toSheaf (rings B)).mapDerivedCategory.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-03e320b44"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03e320b44",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Read item, all 6 stmt_dep records, Stacks 0D6J (2) and its Gamma(U,I)->Gamma(U,J) construction, the delivered module, report.md (Worker report + Second reading present), UnboundedSectionsLocalization and RingedSiteSectionFunctors. Mathematics correct: e U natural iso RGamma_mod(U) ≅ toSheaf.mapDerivedCategory ⋙ RGamma_ab(U), pinned on every module K-injective I / abelian K-injective A / quasi-iso a (types checked, no K-injectivity of I_ab assumed); restriction square uses derived actual restrictions; no extra hypotheses or universe restriction; edge cases K=0, B=0, empty site, unbounded complexes ok; docstrings and steps 1-4 present; sorry only. Finding H2/H4: statement used UnboundedSectionsLocalization.evaluation/derivedEvaluation, plain defs owned by theorem node lem-sfb-unbounded-sections-localization, which is only a proof_dep (owner def-sfb-ringed-site-section-functors is not a stmt_dep and cannot be added in S2). FIX: local abbrev moduleEvaluation := toSheaf ⋙ abelianEvaluation (definitionally the same functor) replaces them in the iso source, the representative equation and moduleRestriction; stmt_deps unchanged; fixes/RingedSectionsForgetAbelian.lean + fixes/lem-sfb-ringed-sections-forget-abelian.lean-record.json (verbatim statement, declarations + moduleEvaluation; refit_record: no notes/refusals). nt_compile --json rc=0, 7.4 s."
+ }
+}

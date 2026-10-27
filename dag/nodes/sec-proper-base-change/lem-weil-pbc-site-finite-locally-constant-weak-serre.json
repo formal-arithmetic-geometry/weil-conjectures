@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-site-finite-locally-constant-weak-serre",
+ "kind": "statement",
+ "title": "Finite locally constant module-valued sheaves on a slice form a weak Serre class",
+ "statement": "Let C be a small category and J a precoverage containing isomorphisms and stable under composition and base change, with pullbacks along its covers [def-weil-pbc-sites-and-cohomology]. Let B be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and U an object of C. For a ModuleCat(B)-valued sheaf F on C/U, let P(F) mean that for every arrow V -> U there is a J-cover {W_i -> V} on which the restriction of F to C/W_i is isomorphic to the constant sheaf associated to a finite B-module [def-weil-pbc-constant-sheaf, def-weil-finitely-generated-module, def-pur-localized-ringed-site]. Then P is closed under kernels and cokernels of morphisms whose source and target satisfy P, and under extensions in the abelian category of ModuleCat(B)-valued sheaves on C/U. This assertion concerns sheaves only, not derived objects, local generator morphisms, cone construction, or cohomological bounds.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (3), weak Serre closure of finite type locally constant modules; constant-ring encoding used in Tag 094G"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finitely-generated-module",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "For an arbitrary small Grothendieck site D, write finiteModels for the covering-sieve predicate of being locally a constant finite B-module sheaf. Apply site_moduleSheaf_restriction_equivalence to the constant ring sheaf and its sheafification unit. For each slice W, its inverse scalar-restriction functor is an equivalence and commutes naturally with restriction. The global constant comparison, followed by the restriction-of-constants isomorphism, identifies a constant ringed module restricted to W with the constant ModuleCat(B)-valued sheaf on D/W. Full faithfulness on this slice therefore identifies finiteModels of a scalar restriction with IsFiniteTypeLocallyConstant of the original ringed module, in both directions.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteTypeLocallyConstant_closedUnder_kernels_cokernels_extensions on D. The inverse scalar-restriction equivalence preserves kernels, cokernels and short exact sequences. Transport its kernel and cokernel comparison isomorphisms using invariance of local trivializations under isomorphism. This proves finiteModels of each kernel and cokernel, hence of every limiting kernel fork and colimiting cokernel cofork by uniqueness of limits and colimits. Map a short exact sequence through the same equivalence and use the ringed-module extension assertion to obtain extension closure for finiteModels.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize to D=C/U. The iterated-slice equivalence (C/U)/(W/U) ≌ C/W induces an equivalence of sheaf categories, identifies restriction of an arbitrary sheaf with overMapPullback along W→U, and commutes with constant sheaves. Thus the two local constant models agree. Given the covering-family predicate P, form the sieve of arrows on V where F has a flat constant finite trivialization. This is a sieve because overMapPullback composes and carries constants to constants. It covers because it contains the supplied J-cover; transport it to C/U by Sieve.overEquiv. Conversely, map a covering sieve on V/U to V and use mem_toGrothendieck_iff_of_isStableUnderComposition to choose a J-cover contained in it. Express that presieve as ofArrows and transport each trivialization back by the iterated-slice equivalence. This proves P=finiteModels on C/U. Rewrite by this equality and apply the preceding three closure properties. No nonempty-cover or nonzero-ring hypothesis occurs.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "lem-weil-pbc-site-constant-restriction",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-locally-constant-derived-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U (3), transported using the proved scalar-restriction equivalence, slice comparisons, and precoverage saturation; complete Lean proof by K1, 2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteTypeLocallyConstant_closedUnder|homologyProperty_isTriangulated|prop_of_exact_of_exact_of_exact",
+   "results": "No hits in Mathlib; local rg finds the proved ringed-module closure theorem and source-library homologyProperty theorem, but no bridge for this flat-slice predicate.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty.IsClosedUnderKernels\"",
+   "results": "Abstract kernel-closure definitions and constructors, not this local predicate.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant module valued sheaves on a slice of a site over a Noetherian ring are closed under kernels cokernels and extensions",
+   "results": "Eight condensed/light-condensed category hits, none for arbitrary-site finite locally constant kernel/cokernel/extension closure.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteFiniteConstantConeStep",
+  "date": "2026-10-26",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-finite-constant-cone-step",
+   "place": "proof step 3: transport finite locally constant weak Serre closure to the module-valued slice encoding"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SiteFiniteLocallyConstantWeakSerre",
+  "file": "lean/Sheaf/Paper/SiteFiniteLocallyConstantWeakSerre.lean",
+  "declaration": "CategoryTheory.site_finiteLocallyConstant_weakSerre",
+  "statement": "theorem site_finiteLocallyConstant_weakSerre\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (B : Type u) [CommRing B] [IsNoetherianRing B] (U : C) :\n    let P : ObjectProperty (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B)) :=\n      fun F ↦ ∀ (V : C) (g : V ⟶ U),\n        ∃ (I : Type u) (W : I → C) (f : ∀ i : I, W i ⟶ V),\n          Presieve.ofArrows W f ∈ J V ∧\n          ∀ i : I, ∃ M : ModuleCat.{u} B, Module.Finite B M ∧ Nonempty\n            ((J.toGrothendieck.overMapPullback (ModuleCat.{u} B) (f i ≫ g)).obj F ≅\n              (constantSheaf (J.toGrothendieck.over (W i)) (ModuleCat.{u} B)).obj M)\n    P.IsClosedUnderKernels ∧ P.IsClosedUnderCokernels ∧ P.IsClosedUnderExtensions",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261026T100354-L-5532",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T105346-L-1169308",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "def-sfb-elliptic-sobolev-realization-data",
+ "kind": "definition",
+ "title": "Geometric data and Hilbert-completion specifications for elliptic Sobolev realization",
+ "statement": "Over $\\mathbf R$ [def-weil-field], use smooth real manifolds [def-sfb-smooth-real-manifold], smooth finite-rank real bundles [def-sfb-smooth-real-vector-bundle] and their smooth sections [def-sfb-smooth-bundle-sections]. For a compact oriented smooth $m$-manifold $N$ without boundary, give a smooth positive Riemannian metric, a finite oriented chart cover and a positive smooth volume form, encoded as a positive smooth multiple of metric volume. Give each rank-$r$ bundle $B$ a smooth positive fibre metric. A localization is a finite family of compatible charts with smooth bundle trivializations and a smooth partition of unity whose compact supports lie in those charts. Define the order-$k$ energy of a smooth section as the sum of the squared Euclidean $L^2$ norms of every localized frame-component derivative of order at most $k$; derivatives use multi-indices in $\\mathbf N^m$. Define the integrated pairing by $\\int_N\\langle s,t\\rangle\\,dV$. An $L^2$ realization means a complete real inner product space with a dense real-linear image of smooth sections preserving that integrated pairing, measurable representatives of finite squared norm, equality exactly when representatives agree almost everywhere, and every square-integrable measurable section represented. Its local distributions are the continuous real-linear functionals on scalar compactly supported smooth chart tests, valued in the model fibre, whose value is the integral of the test times the frame coefficients; the family of local distributions is injective. A Sobolev realization means a complete real inner product space with a dense real-linear image of smooth sections having exactly the order-$k$ energy as squared norm, and a bounded injective map to the $L^2$ realization agreeing with the identity on smooth sections. An elliptic differential operator consists of a real-linear map on smooth sections, smooth matrix coefficients in every pair of compatible charts and frames over the same chart, the local formula $Qs=\\sum_{|\\alpha|\\leq k}b_\\alpha\\partial^\\alpha s$, and bijectivity of $\\sum_{|\\alpha|=k}\\xi^\\alpha b_\\alpha$ for every nonzero real covector. The distributional equation for two $L^2$ realizations is the componentwise identity against every scalar compactly supported smooth chart test $\\phi$: the output pairing equals $\\sum_{\\alpha,l}(-1)^{|\\alpha|}\\int u_l\\partial^\\alpha(\\phi b_{\\alpha,jl})$. These are specifications of completions and canonical maps, with no existence assertion in the definitions. Empty index sums and rank-zero fibres are allowed.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-bundle-sections"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Hilbert completion of smooth vector bundle sections with the integrated L2 norm and finite chart derivative Sobolev norm, with elliptic differential coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalFrameOn.contMDiffOn_of_coeff\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.LocalFrame\", \"type\": \"[FiniteDimensional 𝕜 F] (h : ∀ i, CMDiff[u] n (hs.coeff i t)) : CMDiff[u] n (T% t)\", \"doc\": \"Given a finite-dimensional vector bundle over a nontrivially normed field, if each coefficient function of a section $ T $ with respect to a local frame is $ C^n $-differentiable on a set $ u $, then \"}\n  {\"name\": \"ContMDiffSection.recOn\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_4}\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$, a model with corners $I : H \\\\to E$, a charted space $M$ modeled on $H$, and a fiber bundle $V$ over $M$ with fiber $F$\"}\n  {\"name\": \"ContMDiffSection.ctorIdx\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  {inst : NontriviallyNormedField 𝕜} →\\n    {E : Type u_2} →\\n      {inst_1 : NormedAddCommGroup E} →\\n        {inst_2 : NormedSpace 𝕜 E} →\\n          {H : Type u_3} →\\n            {inst_3 : TopologicalSpace H} →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {M : Type u_4}\", \"doc\": \"The constructor index for the type representing smooth sections of a vector bundle over a manifold with corners, parameterized by a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and\"}\n  {\"name\": \"ContMDiffAt.inner_bundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Riemannian\", \"type\": \"(hv : ContMDiffAt IM (IB.prod 𝓘(ℝ, F)) n (fun m ↦ (v m : TotalSpace F E)) x)\\n  (hw : ContMDiffAt IM (IB.prod 𝓘(ℝ, F)) n (fun m ↦ (w m : TotalSpace F E)) x) :\\n  ContMDiffAt IM 𝓘(ℝ) n (fun b ↦ ⟪v b, w b⟫) x\", \"doc\": \"If two sections $v$ and $w$ of a vector bundle are $C^n$-differentiable at a point $x$ in a manifold with corners, then their inner product $\\\\langle v(b), w(b)\\\\rangle$ is also $C^n$-differentiable at \"}\n  {\"name\": \"ContMDiff.inner_bundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Riemannian\", \"type\": \"(hv : ContMDiff IM (IB.prod 𝓘(ℝ, F)) n (fun m ↦ (v m : TotalSpace F E)))\\n  (hw : ContMDiff IM (IB.prod 𝓘(ℝ, F)) n (fun m ↦ (w m : TotalSpace F E))) : ContMDiff IM 𝓘(ℝ) n (fun b ↦ ⟪v b, w b⟫)\", \"doc\": \"Let $ E $ be a vector bundle over a manifold $ M $ equipped with a Riemannian metric. If $ v $ and $ w $ are $ C^n $-differentiable sections of $ E $, then the function $ M \\to \\\\mathbb{R} $ defined by \"}\n  {\"name\": \"ContMDiffWithinAt.sum_section_of_locallyFinite\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"(ht : LocallyFinite fun i ↦ {x : M | t i x ≠ 0})\\n  (ht' : ∀ i, ContMDiffWithinAt I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (t i x)) u x₀) :\\n  ContMDiffWithinAt I (I.prod 𝓘(𝕜, F)) n (fun x ↦ TotalSpace.mk' F x (∑' i, (t i x))) u x₀\", \"doc\": \"If $\\\\{t_i\\\\}$ is a locally finite family of $C^n$-smooth sections of a vector bundle over a manifold $M$, then the section defined by $x \\\\mapsto \\\\sum t_i(x)$ is also $C^n$-smooth within the domain $u$ \"}\n  {\"name\": \"ContMDiffSection\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              ModelWithCorners 𝕜 E H →\\n                {M : Type u_4} →\\n   \", \"doc\": \"A type representing smooth sections of a vector bundle over a manifold with corners, parameterized by a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{K}$, a mo\"}\n  {\"name\": \"ContMDiffSection.instAddCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.SmoothSection\", \"type\": \": AddCommGroup Cₛ^n⟮I; F, V⟯\", \"doc\": \"The space of $C^k$-smooth sections of a vector bundle over a manifold with corners, parameterized by a nontrivially normed field $\\\\mathbb{K}$, normed vector spaces $E$ and $F$ over $\\\\mathbb{K}$, a mod\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smooth sections, metrics, partitions, Euclidean Sobolev predicates or unrelated elliptic matrices; none defines the finite-chart bundle completion and its distributional realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sobolev completion of sections of a finite rank smooth real vector bundle via partitions of unity, integrated fiber metrics and local distributions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsContMDiffRiemannianBundle.exists_contMDiff\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} {inst : NormedAddCommGroup EB} {inst_1 : NormedSpace ℝ EB} {HB : Type u_2}\\n  {inst_2 : TopologicalSpace HB} {IB : ModelWithCorners ℝ EB HB} {n : WithTop ℕ∞} {B : Type u_3}\\n  {inst_3 : TopologicalSpace B} {inst_4 : ChartedSpace HB B} {F : Type u_4} {inst_5 : NormedAddCommGroup F}\\n  \", \"doc\": \"Let $E \\\\to B$ be a vector bundle over a manifold $B$, with model fiber $F$. Let $n$ be an extended natural number (i.e., $n \\\\in \\\\mathbb{N} \\\\cup \\\\{\\\\infty\\\\}$). Suppose $E$ is a $C^n$ Riemannian bundle, \"}\n  {\"name\": \"exists_contMDiffSection_forall_mem_convex_of_local\", \"module\": \"Mathlib/Geometry/Manifold/PartitionOfUnity\", \"type\": \"∀ {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type uH} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type uM} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [FiniteDimensional ℝ E] [IsManifold I (↑⊤) M] [SigmaCompactSpace M] [T2Space M\", \"doc\": \"Let $ M $ be a manifold with corners modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $, and let $ V \\\\to M $ be a vector bundle with fiber $ F $. Suppose that for each $ x \\\\in M $, there is a \"}\n  {\"name\": \"exists_contMDiffOn_section_forall_mem_convex_of_local\", \"module\": \"Mathlib/Geometry/Manifold/PartitionOfUnity\", \"type\": \"∀ {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type uH} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type uM} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [FiniteDimensional ℝ E] [IsManifold I (↑⊤) M] [SigmaCompactSpace M] [T2Space M\", \"doc\": \"For a sigma-compact, Hausdorff, finite-dimensional manifold $M$ with corners modeled on $H$, equipped with a real vector bundle $V$ with normed fibers, and given convex subsets $t(x) \\\\subseteq V_x$ in\"}\n  {\"name\": \"exists_smooth_section_forall_mem_convex_of_local\", \"module\": \"Mathlib/Geometry/Manifold/PartitionOfUnity\", \"type\": \"∀ {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type uH} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type uM} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [FiniteDimensional ℝ E] [IsManifold I (↑⊤) M] [SigmaCompactSpace M] [T2Space M\", \"doc\": \"Let $ M $ be a finite-dimensional, sigma-compact, Hausdorff manifold with corners modeled on a finite-dimensional normed vector space $ E $ over $ \\\\mathbb{R} $. Let $ V $ be a smooth vector bundle ove\"}\n  {\"name\": \"instIsContMDiffRiemannianBundleOfSomeENatTopOfLEInfty\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} [inst : NormedAddCommGroup EB] [inst_1 : NormedSpace ℝ EB] {HB : Type u_2}\\n  [inst_2 : TopologicalSpace HB] {IB : ModelWithCorners ℝ EB HB} {B : Type u_3} [inst_3 : TopologicalSpace B]\\n  [inst_4 : ChartedSpace HB B] {F : Type u_4} [inst_5 : NormedAddCommGroup F] [inst_6 : NormedSpa\", \"doc\": \"If a vector bundle admits a smooth ($C^\\\\infty$) Riemannian structure, then it also admits a $C^a$ Riemannian structure for any extended natural number $a \\\\leq \\\\infty$.\"}\n  {\"name\": \"ContMDiff.inner_bundle\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} [inst : NormedAddCommGroup EB] [inst_1 : NormedSpace ℝ EB] {HB : Type u_2}\\n  [inst_2 : TopologicalSpace HB] {IB : ModelWithCorners ℝ EB HB} {n : WithTop ℕ∞} {B : Type u_3}\\n  [inst_3 : TopologicalSpace B] [inst_4 : ChartedSpace HB B] {F : Type u_4} [inst_5 : NormedAddCommGroup F]\\n  \", \"doc\": \"Let $ E $ be a vector bundle over a manifold $ M $ equipped with a Riemannian metric. If $ v $ and $ w $ are $ C^n $-differentiable sections of $ E $, then the function $ M \\to \\\\mathbb{R} $ defined by \"}\n  {\"name\": \"instIsContMDiffRiemannianBundleOfNatWithTopENat_2\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} [inst : NormedAddCommGroup EB] [inst_1 : NormedSpace ℝ EB] {HB : Type u_2}\\n  [inst_2 : TopologicalSpace HB] {IB : ModelWithCorners ℝ EB HB} {B : Type u_3} [inst_3 : TopologicalSpace B]\\n  [inst_4 : ChartedSpace HB B] {F : Type u_4} [inst_5 : NormedAddCommGroup F] [inst_6 : NormedSpa\", \"doc\": \"If a vector bundle over a manifold with corners admits a $C^3$-smooth Riemannian structure compatible with its charted space structure, then it also admits a $C^2$-smooth Riemannian structure. This in\"}\n  {\"name\": \"instIsContMDiffRiemannianBundleOfNatWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Riemannian\", \"type\": \"∀ {EB : Type u_1} [inst : NormedAddCommGroup EB] [inst_1 : NormedSpace ℝ EB] {HB : Type u_2}\\n  [inst_2 : TopologicalSpace HB] {IB : ModelWithCorners ℝ EB HB} {B : Type u_3} [inst_3 : TopologicalSpace B]\\n  [inst_4 : ChartedSpace HB B] {F : Type u_4} [inst_5 : NormedAddCommGroup F] [inst_6 : NormedSpa\", \"doc\": \"Every C¹ smooth Riemannian vector bundle over a manifold with corners is also a C⁰ smooth Riemannian vector bundle. This instance asserts that if a vector bundle admits a C¹ smooth Riemannian structur\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smooth sections, metrics, partitions, Euclidean Sobolev predicates or unrelated elliptic matrices; none defines the finite-chart bundle completion and its distributional realization."
+  },
+  {
+   "tool": "grep",
+   "query": "Sobolev|[Rr]ellich|[Ee]lliptic",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"15\", \"text\": \"# Gagliardo-Nirenberg-Sobolev inequality\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"17\", \"text\": \"In this file we prove the Gagliardo-Nirenberg-Sobolev inequality.\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"79\", \"text\": \"Sobolev inequality.\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"108\", \"text\": \"/-- The main inductive step in the grid-lines lemma for the Gagliardo-Nirenberg-Sobolev inequality.\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"293\", \"text\": \"/-! ## The Gagliardo-Nirenberg-Sobolev inequality -/\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean\", \"line\": \"59\", \"text\": \"and are the periods of the elliptic functions we shall construct. -/\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"19\", \"text\": \"- if `g` preserves orientation (i.e., has positive determinant) and is an elliptic matrix,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"121\", \"text\": \"then it's an elliptic matrix. -/\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"122\", \"text\": \"theorem isElliptic_of_exists_smul_eq_self (h : 0 < g.val.det) (hgc : g ∉ Subgroup.center _)\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"123\", \"text\": \"    (hfix : ∃ z : ℍ, g • z = z) : g.IsElliptic := by\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"140\", \"text\": \"/-- The unique fixed point of an orientation-preserving elliptic matrix acting on `ℍ`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"line\": \"24\", \"text\": \"test functions, distributions, tempered distributions, and Sobolev spaces (and other generalized\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"line\": \"11\", \"text\": \"/-! # Sobolev spaces (Bessel potential spaces)\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"line\": \"13\", \"text\": \"In this file we define Sobolev spaces on normed vector spaces via the Fourier transform.\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"line\": \"16\", \"text\": \"tempered distribution `u` belongs to the Sobolev space `H ^ {s, p}` if\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"line\": \"22\", \"text\": \"the definition of the Sobolev spaces.\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"line\": \"28\", \"text\": \"* `TemperedDistribution.memSobolev`: A tempered distribution lies in the Sobolev space of order `s`\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give smooth sections, metrics, partitions, Euclidean Sobolev predicates or unrelated elliptic matrices; none defines the finite-chart bundle completion and its distributional realization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-sobolev-closed-range",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf; the L2 and finite-chart Sobolev completion, elliptic differential expression, and local distributional realization in the statement.",
+   "via": [
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Analysis.EllipticSobolevData",
+  "declaration": "EllipticSobolev.L2Model",
+  "file": "lean/Sheaf/Analysis/EllipticSobolevData.lean",
+  "statement": "structure L2Model [IsManifold (𝓘(ℝ, Model m)) ∞ N] [MeasurableSpace N] (d : Base m N) (B : MetricBundle.{u, v} m r N)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "EllipticSobolev.Model",
+   "EllipticSobolev.coordinateDerivative",
+   "EllipticSobolev.Base",
+   "EllipticSobolev.MetricBundle",
+   "EllipticSobolev.Sections",
+   "EllipticSobolev.FrameChart",
+   "EllipticSobolev.coefficients",
+   "EllipticSobolev.Localization",
+   "EllipticSobolev.sobolevEnergy",
+   "EllipticSobolev.l2Pair",
+   "EllipticSobolev.EllipticOperator",
+   "EllipticSobolev.MeasurableSection",
+   "EllipticSobolev.L2Model",
+   "EllipticSobolev.SobolevModel",
+   "EllipticSobolev.DistributionalEquation"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da6ec4886",
+  "group": "Q01",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da6ec4886",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Lean matches the node clause by clause. Compact T2 boundaryless oriented m>=1 manifold; positive smooth volume pinned per chart (weight*sqrt det g*Lebesgue); equal-rank Mathlib metric bundles. EllipticOperator coefficients pinned by op via formula, smooth on chart targets, degree-k symbol bijective at xi!=0. L2Model = complete inner-product completion (dense smooth image, integrated pairing) with a.e.-quotient measurable identification and regular injective local Mathlib Distributions. SobolevModel = completion with squared norm = literal finite-chart energy, injective continuous toL2. Conclusion: exists T agreeing on smooth sections, unique among all bounded extensions, DistributionalEquation (transpose rule, (-1)^|a|, coefficient inside test derivative), IsClosed range. Existential models are unique up to isometry fixing smooth sections: not hollow or weaker. Edge cases N empty, r=0, k=1, a=0, nontrivial kernel, universes u/v ok. lean.statement verbatim in both files, item changes only lean+stmt_dep, sorry only, docstrings ok, 15 real declarations. Sole fault H11: self-audit second reading -> FIX fixes/lem-sfb-elliptic-sobolev-closed-range.report.md (worker report verbatim + independent reading); no Lean change, no compile. Maintainer note: NO def-sfb-bundle-sobolev-space (BundleSobolev, landed 13:18 CST) is after this base (index 13:08 CST), different namespace, no clash; elliptic chain has parallel EllipticSobolev/BundleSobolev/RealManifold interfaces to consolidate in stage 3."
+ }
+}

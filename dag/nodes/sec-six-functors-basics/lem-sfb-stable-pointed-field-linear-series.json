@@ -1,0 +1,457 @@
+{
+ "id": "lem-sfb-stable-pointed-field-linear-series",
+ "kind": "statement",
+ "title": "Log-canonical linear series on stable pointed curves over a field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] and $C/k$ a proper [def-weil-proper-morphism], nonempty connected reduced nodal curve of pure dimension one [def-trf-nodal-geometric-fibres]. Let $p_1,\\ldots,p_r$ be distinct smooth $k$-points, with $r\\geq0$, and put $D=\\sum_i p_i$ and $M=\\omega_{C/k}\\otimes\\mathcal O_C(D)$, using the canonical nodal adjunction line [def-trf-nodal-dualizing-datum] and divisor twist [def-pc-divisor-line-bundle]. On every normalized reduced irreducible component $V$ [def-weil-pbc-reduced-normalization], assume $2g(V)-2+b_V+m_V>0$, where $b_V$ counts ambient nodal branches and $m_V$ counts markings, and $g(V)=\\dim_k H^1(V,\\mathcal O_V)$ [def-pc-genus]. Then $H^i(C,M^{\\otimes m})=0$ for every $i>0$ and $m\\geq2$; $M^{\\otimes m}$ is globally generated for $m\\geq2$ (the evaluation $H^0(C,M^{\\otimes m})\\otimes_k\\mathcal O_C\\to M^{\\otimes m}$ is surjective). For $m\\geq3$ it is very ample: its complete linear system gives a closed immersion into the projective space of one-dimensional quotients of $H^0(C,M^{\\otimes m})$ [def-trf-projective-bundle-morphism]. It is also normally generated: for every $j\\geq0$ the multiplication map $\\operatorname{Sym}^j_k H^0(C,M^{\\otimes m})\\to H^0(C,M^{\\otimes mj})$ is surjective. Consequently evaluation identifies $C$ with $\\operatorname{Proj}_k\\bigoplus_{j\\geq0}H^0(C,M^{\\otimes mj})$ for $m\\geq3$ [def-nagata-relative-proj], with multiplication given by tensor products of sections [def-weil-pbc-graded-sheaf-structures].",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 1, Theorem 1.8 and Corollary 1.9, printed pp.170--173. This is the positive-degree stable case only, not the deletion or relative-contraction theorem. Higher cohomology above degree one vanishes on a proper curve. Local PDF WANTED; indexed primary scan read online.",
+  "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN35397434X_0052/PPN35397434X_0052.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-trf-nodal-geometric-fibres",
+  "def-trf-nodal-dualizing-datum",
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-reduced-normalization",
+  "def-pc-genus",
+  "def-trf-projective-bundle-morphism",
+  "def-nagata-relative-proj",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "def-sc-invertible-section-ring"
+ ],
+ "proof": [
+  {
+   "text": "Properness includes finite type. A field is Noetherian (its only ideals are $0$ and $k$), so [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. Every reduced closed subcurve $B$ is proper by [lem-weil-pbc-closed-immersion-proper], hence also Noetherian by the same finite-type lemma. The dimension theorem [lem-sc-noetherian-cohomology-above-dimension] gives $H^i(B,F)=0$ for every quasi-coherent $F$ and $i>1$, including $B=C$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 02UZ (cohomology-proposition-vanishing-Noetherian); proper subcurves have dimension one."
+   }
+  },
+  {
+   "text": "Let $V$ be the normalization of a reduced irreducible component $E$ of $C$. The structure map $C\\to\\operatorname{Spec}k$ is proper, flat (over a field) and finitely presented (finite type over the Noetherian $k$), with reduced nodal geometric fibres of pure dimension one, so [lem-sfb-proper-nodal-dualizing-base-change] applies with $S=\\operatorname{Spec}k$ and $\\Omega=k$: the canonical line $\\omega_{C/k}$ of the statement, with its Jacobian-normalized datum, satisfies $\\nu^*\\omega_{C/k}\\simeq\\Omega^1_{V/k}(B_E)$, where $B_E$ has exactly $b_V$ distinct branch points, counting both points over a self-node. By [lem-trf-nodal-normalization-adjunction], $V$ is smooth proper connected and the normalization is an isomorphism over the smooth locus of $E$, in particular at the markings. The closed-point residue-field statement [lem-weil-pbc-closed-point-residue-field-base] makes all branch and marked points rational. On the smooth curve $V$, [lem-sc-smooth-regular] and [lem-sc-regular-dim1-dvr] make the local ring at a closed point a DVR. Its uniformizer cuts out the point as an effective Cartier divisor; the pulled-back marking twist is therefore the divisor of the $m_V$ marked points. The formula of [sk-thm-picard-rr] gives canonical degree $2g(V)-2$, and [lem-pc-degree-base-change] gives degree $b_V+m_V$ for the rational-point divisor and its additivity with the canonical line. Thus $d_V:=\\deg_V M=2g(V)-2+b_V+m_V$ is a positive integer by hypothesis.",
+   "uses": [
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "lem-trf-nodal-normalization-adjunction",
+    "sk-thm-picard-rr",
+    "lem-pc-degree-base-change",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS6 (lemma-rr) and Tag 0AYY (varieties-lemma-degree-effective-Cartier-divisor); normalization-residue adjunction as in the cited nodal lemma."
+   }
+  },
+  {
+   "text": "Fix any nonempty connected reduced union $B$ of components of $C$. It is nodal by [lem-trf-nodal-subcurve-boundary]. Let $v$ be its number of components, $e$ its number of internal nodes (self-nodes counted once), $a$ the number of nodes joining $B$ to its complement, $s$ the number of markings on $B$, and $G$ the sum of the normalized component genera. The same normalized components are smooth proper connected by Step 2. By [lem-trf-nodal-curve-normalization-euler], $\\chi(B,\\mathcal O_B)=v-e-G$. By [lem-weil-pbc-proper-reduced-algclosed-global-sections-product], $H^0(B,\\mathcal O_B)=k$. Step 1 therefore identifies $h:=\\dim_k H^1(B,\\mathcal O_B)=1-v+e+G\\geq0$.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0E38 (lemma-closed-subscheme-nodal-curve), 0C1R (varieties-lemma-prepare-delta-invariant) and 0BUG (varieties-lemma-proper-geometrically-reduced-global-sections)."
+   }
+  },
+  {
+   "text": "By [lem-trf-degree-weighted-irreducible-components], degree on the reduced $B$ is the sum of its component degrees: the generic local rings are fields, of length one. Each normalized component maps birationally to that component and is an isomorphism off its self-nodes (Step 2), so [lem-per-birational-curve-degree-invariance] identifies these degrees with the $d_V$. Summing the branch counts counts every internal node twice and every boundary node once. Consequently\n$$q:=\\deg_B M=\\sum_{V\\subset B}d_V=2G-2v+2e+a+s=2h-2+a+s.$$\nIn particular $q\\geq v\\geq1$ and $q\\geq2h-2$. By repeated application of [lem-trf-curve-degree-tensor-additive], $\\deg_B(M^{\\otimes m})=mq$ for every $m\\geq0$.",
+   "uses": [
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-per-birational-curve-degree-invariance",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0AYW (varieties-lemma-degree-in-terms-of-components), 0AYU (varieties-lemma-degree-birational-pullback), 0AYX (varieties-lemma-degree-tensor-product)."
+   }
+  },
+  {
+   "text": "The two inequalities $q\\geq1$ and $q\\geq2h-2$ imply the required bounds in all genera. For $h=0$, $q\\geq1$ gives $2q\\geq0$ and $3q\\geq1$. For $h=1$, it gives $2q\\geq2h$ and $3q\\geq2h+1$. For $h\\geq2$, $q\\geq2h-2\\geq h$ and $3q\\geq6h-6\\geq2h+1$. Thus, for every such $B$, $mq\\geq2h$ for $m\\geq2$ and $mq\\geq2h+1$ for $m\\geq3$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Elementary integer inequalities after the subcurve degree calculation."
+   }
+  },
+  {
+   "text": "Let $Z\\subset C$ be a zero-dimensional closed subscheme of length $\\ell\\leq1$, allowing the empty subscheme, and $m\\geq2$. By [lem-pc-zero-dimensional-closed-subscheme-finite], $Z$ is affine and finite over $k$. If $H^1(C,I_Z\\otimes M^{\\otimes m})\\ne0$, [lem-sfb-curve-ideal-h1-subcurve-obstruction] produces a connected reduced subcurve $B$. Each one-dimensional irreducible component of $B$ is an ambient component, since it is closed in the one-dimensional $C$. Any additional zero-dimensional irreducible component would be an isolated point disjoint from the one-dimensional components, contradicting connectedness. Thus $B$ is a union of ambient components and Steps 3--5 apply. Its intersection with $Z$ is defined by a quotient of the finite-dimensional algebra $\\Gamma(Z,\\mathcal O_Z)$, so has length at most $\\ell$. Steps 3--5 then give the contradiction\n$$2h\\leq\\deg_B(M^{\\otimes m})\\leq2h-2+\\ell\\leq2h-1.$$\nThus this $H^1$ vanishes. Taking $Z=\\varnothing$ gives $H^1(C,M^{\\otimes m})=0$; Step 1 gives the claimed vanishing in every higher degree.",
+   "uses": [
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), with the empty and length-one subschemes."
+   }
+  },
+  {
+   "text": "Let $m\\geq3$ and let $Z\\subset C$ be a zero-dimensional closed subscheme of length at most two, including the empty subscheme. Suppose $H^1(C,I_Z\\otimes M^{\\otimes m})\\ne0$. Apply [lem-sfb-curve-ideal-h1-subcurve-obstruction] to obtain a nonempty reduced connected closed subcurve $B$ of dimension one. As proved in Step 6, this $B$ is a union of ambient components, so Steps 3--5 apply with $h=\\dim_k H^1(B,\\mathcal O_B)$. By [lem-pc-zero-dimensional-closed-subscheme-finite], $Z$ is finite affine. The closed immersion $Z\\times_C B\\hookrightarrow Z$ presents its coordinate algebra as a quotient of $\\Gamma(Z,\\mathcal O_Z)$; hence its $k$-dimension is at most two. The obstruction therefore contradicts\n$$2h+1\\leq\\deg_B(M^{\\otimes m})\\leq2h-2+\\dim_k\\Gamma(Z\\times_C B,\\mathcal O_{Z\\times_C B})\\leq2h.$$\nThus $H^1(C,I_Z\\otimes M^{\\otimes m})=0$, also when $Z$ is supported at a node and $I_Z$ is not invertible.",
+   "uses": [
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), length-two case; no Cartier hypothesis on Z."
+   }
+  },
+  {
+   "text": "Write $L=M^{\\otimes m}$. Tensoring $0\\to I_Z\\to\\mathcal O_C\\to\\mathcal O_Z\\to0$ with the locally free rank-one $L$ is exact by [lem-sc-ext-tensor-exact]. The global-sections functor is additive left exact by [lem-sc-global-sections-left-exact], and module sheaves have enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives]. The segment of [lem-weil-pbc-derived-functor-long-exact] is\n$$H^0(C,L)\\longrightarrow H^0(C,L\\otimes\\mathcal O_Z)\\longrightarrow H^1(C,I_Z\\otimes L).$$\nSteps 6 and 7 make the first map surjective for length at most one if $m\\geq2$, and length at most two if $m\\geq3$.",
+   "uses": [
+    "lem-sc-ext-tensor-exact",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Restriction exact sequence; Tag 015B (derived-lemma-higher-derived-functors)."
+   }
+  },
+  {
+   "text": "Each closed point $x$ has residue field $k$ by [lem-weil-pbc-closed-point-residue-field-base]. Apply Step 8 to its reduced length-one subscheme. Some section has nonzero value in the one-dimensional fibre $L(x)$. In a local generator of $L$, its coefficient has nonzero residue and is a unit; that section therefore trivializes $L$ on a neighbourhood of $x$. The union of these neighbourhoods has closed complement with no closed point. By [lem-sc-lft-over-field-jacobson-space], a nonempty closed subset would contain a closed point, so the complement is empty. These sections locally generate $L$, proving surjectivity of evaluation for $m\\geq2$.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Global generation from length-one restriction and the Jacobson property over a field."
+   }
+  },
+  {
+   "text": "Assume $m\\geq3$. For two distinct closed points, Step 8 applied to their disjoint union supplies a section with values $(0,1)$ after trivializing the two fibres. For a nonzero tangent vector $\\theta$ at $x$, the corresponding homomorphism $\\mathcal O_{C,x}\\to k[\\epsilon]/(\\epsilon^2)$ is surjective: some element of the maximal ideal has nonzero $\\theta$-value. Choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$. The composite $A\\to\\mathcal O_{C,x}\\to k[\\epsilon]/(\\epsilon^2)$ is still surjective, since constants and a nonzero tangent value span its target. Its kernel defines a length-two closed subscheme of $U$ supported at $x$. On $U\\setminus\\{x\\}$ its ideal is the unit ideal, so it glues with the unit ideal on $C\\setminus\\{x\\}$ to a closed subscheme $Z$ of $C$. Step 8 supplies a section restricting, in a local trivialization, to $\\epsilon$; it vanishes at $x$ with nonzero derivative along $\\theta$. Thus [lem-sc-point-tangent-separation-closed-immersion], with all global sections as $V$, applies to the proper $C$ and the invertible $L$: generation is Step 9, point separation and tangent separation were just checked. It gives a closed immersion by the complete linear system and its hyperplane pullback is $L$. The quotient interpretation and the pulled-back universal quotient in [lem-trf-projective-bundle-quotient-geometry] identify this morphism with the evaluation morphism into the projective space of one-dimensional quotients of $H^0(C,L)$.",
+   "uses": [
+    "lem-sc-point-tangent-separation-closed-immersion",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E8S (varieties-lemma-separate-points-tangent-vectors); length-two restriction argument of Tag 0E8X (lemma-tricanonical)."
+   }
+  },
+  {
+   "text": "Fix $m\\geq3$ and $L=M^{\\otimes m}$. Step 10 makes $C$ projective. For any nonempty reduced union $B$ of components, write it as the disjoint union of its $c\\geq1$ connected components $B_t$. The degree formula of Step 4 applied componentwise and $\\chi$ on a finite disjoint union give\n$$\\deg_B L=\\sum_t\\deg_{B_t}L\\geq\\sum_t(2p_a(B_t)+1)=2p_a(B)+3c-2\\geq2p_a(B)+1.$$\nHere $p_a(B)=\\sum_t p_a(B_t)-c+1$; this calculation also includes $B=C$. Apply [lem-sfb-nodal-numerical-section-multiplication] to the projective reduced nodal $C$ and $L$, with precisely these inequalities. It gives surjectivity of every positive-degree multiplication map in the assertion. For $j=0$, [lem-weil-pbc-proper-reduced-algclosed-global-sections-product] identifies $H^0(C,\\mathcal O_C)=k$ since $C$ is nonempty and connected, and the map $\\operatorname{Sym}^0_k H^0(C,L)=k\\to H^0(C,\\mathcal O_C)$ is the structure isomorphism.",
+   "uses": [
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+    "place": "Franciosi--Tenni, The canonical ring of a 3-connected curve, Section 4, Theorem 4.2, p.49; numerical application to L, not an assumption of stability in the cited theorem."
+   }
+  },
+  {
+   "text": "Let $S=\\bigoplus_{j\\geq0}H^0(C,L^{\\otimes j})$. Step 11 says that $S$ is generated over $S_0=k$ by $S_1$ with its actual tensor-product multiplication. The complete embedding of Step 10 identifies $L$ with the pulled-back hyperplane line, so [lem-pc-very-ample-ample] makes $L$ ample. The same embedding satisfies the polarization hypothesis of [lem-sfb-projective-polarization-section-algebra]; in particular $C_s$ is affine for each homogeneous positive-degree section $s$. Step 9 gives the positive-degree section cover required by [lem-sc-ample-proj-local-chart], whose canonical map $C\\to\\operatorname{Proj}S$ restricts to an isomorphism $C_s\\simeq D_+(s)$. Its inverse-image identity is part of the same cited statement. The opens $D_+(s)$ with $s\\in S_1$ cover $\\operatorname{Proj}S$: a homogeneous prime containing $S_1$ would contain every positive-degree element by generation and thus would not be a Proj point. These local inverse maps glue uniquely on intersections, since they invert the same canonical map. Hence evaluation is an isomorphism $C\\simeq\\operatorname{Proj}_k S$ as asserted. The fraction formula in [lem-sc-ample-proj-canonical-map] sends a constant $a\\in S_0=k$ to the same constant function on every $C_s$. Thus the canonical morphism, and its inverse, are over $k$.",
+   "uses": [
+    "lem-pc-very-ample-ample",
+    "lem-sfb-projective-polarization-section-algebra",
+    "lem-sc-ample-proj-local-chart",
+    "lem-sc-ample-proj-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 01Q1 (properties-lemma-ample-immersion-into-proj) and 0B5T (coherent-lemma-coherent-proper-ample), affineness of section charts; canonical fraction maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-degree-base-change",
+  "lem-pc-very-ample-ample",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-per-birational-curve-degree-invariance",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-sc-ample-proj-local-chart",
+  "lem-sc-ext-tensor-exact",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-smooth-regular",
+  "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "lem-sfb-nodal-numerical-section-multiplication",
+  "lem-sfb-projective-polarization-section-algebra",
+  "lem-sfb-proper-nodal-dualizing-base-change",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "sk-thm-picard-rr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent numerical subcurve proof of the field case of Knudsen Theorem 1.8 and Corollary 1.9; vanishing uses Tag 0E3E, embedding follows the length-two method of Tag 0E8X, multiplication uses Franciosi--Tenni Theorem 4.2 (author text consulted online; local copy WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Powers of the logarithmic canonical sheaf on a stable pointed nodal curve have vanishing higher cohomology and are normally generated and very ample in degree three",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine sections, group normal generation or Weierstrass division polynomials, not log-canonical cohomology, normal generation or very ampleness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"VeryAmple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine sections, group normal generation or Weierstrass division polynomials, not log-canonical cohomology, normal generation or very ampleness."
+  },
+  {
+   "tool": "grep",
+   "query": "normallyGenerated|normal.generation|pluricanonical|logCanonical|stablePointed",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"25\", \"text\": \"* `Subgroup.IsFinitelyNormallyGenerated N`: says that the subgroup `N` is the normal closure of a\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"30\", \"text\": \"* `Subgroup.IsFinitelyNormallyGenerated.map`: Being the normal closure of a finite set is preserved\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"42\", \"text\": \"/-- `N.IsFinitelyNormallyGenerated` says that the subgroup `N` is the normal closure\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"44\", \"text\": \"@[to_additive /-- `N.IsFinitelyNormallyGenerated` says that the additive subgroup `N`\"}\n  {\"file\": \"Mathlib/GroupTheory/FinitelyPresentedGroup.lean\", \"line\": \"46\", \"text\": \"def Subgroup.IsFinitelyNormallyGenerated (N : Subgroup G) : Prop :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine sections, group normal generation or Weierstrass division polynomials, not log-canonical cohomology, normal generation or very ampleness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a stable pointed algebraic curve omega D squared has H1 zero and omega D cubed is projectively normal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"WeierstrassCurve.preΨ'_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Basic\", \"type\": \": W.preΨ' 3 = W.Ψ₃\", \"doc\": \"The third pre-normalized division polynomial $\\\\Psi'_3$ of a Weierstrass curve is equal to the third division polynomial $\\\\Psi_3$, i.e., $\\\\Psi'_3 = \\\\Psi_3$.\"}\n  {\"name\": \"WeierstrassCurve.a₄_of_isCharThreeJNeZeroNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.a₄ = 0\", \"doc\": \"For a Weierstrass curve over a commutative ring of characteristic three with non-zero $ j $-invariant in normal form, the fourth coefficient $ a_4 $ is zero.\"}\n  {\"name\": \"WeierstrassCurve.IsCharThreeJNeZeroNF.a₄\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {W : WeierstrassCurve R} [self : W.IsCharThreeJNeZeroNF], W.a₄ = 0\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $ of characteristic three with non-zero $ j $-invariant that is in normal form, the fourth coefficient $ a_4 $ of $ W $ satisfies $ a_4 = 0 $.\"}\n  {\"name\": \"WeierstrassCurve.isCharNeTwoNF_of_isShortNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.IsCharNeTwoNF\", \"doc\": \"For any Weierstrass curve over a commutative ring $ R $, if the curve is in short normal form, then it is in normal form under the condition that the characteristic of $ R $ is not two.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_Ψ₃\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(h : (3 : R) ≠ 0) : W.Ψ₃.natDegree = 4\", \"doc\": \"For a Weierstrass curve $W$ over a ring $R$, if $3 \\neq 0$ in $R$, then the natural degree of the third division polynomial $\\\\Psi_3$ is 4, i.e., $\\\\deg(\\\\Psi_3) = 4$.\"}\n  {\"name\": \"WeierstrassCurve.isCharNeTwoNF_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (W : WeierstrassCurve R), W.IsCharNeTwoNF ↔ W.a₁ = 0 ∧ W.a₃ = 0\", \"doc\": \"For a Weierstrass curve over a commutative ring $R$ with characteristic not equal to two, the curve is in normal form if and only if its coefficients $a_1$ and $a_3$ in the Weierstrass equation are ze\"}\n  {\"name\": \"WeierstrassCurve.isCharThreeNF_of_isShortNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \"[W.IsShortNF] : W.IsCharThreeNF\", \"doc\": \"If a Weierstrass curve is in short normal form, then it satisfies the normal form conditions specific to characteristic three.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern affine sections, group normal generation or Weierstrass division polynomials, not log-canonical cohomology, normal generation or very ampleness."
+  },
+  {
+   "tool": "grep",
+   "query": "very ample|normally generated|nodal|stable curve",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme normalization, affine sections or cotangent H1, not the stated nodal log-canonical linear series"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable pointed nodal curve logarithmic canonical powers have vanishing H1, global generation, very ampleness and normal generation",
+   "results": "8 hits: Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme normalization, affine sections or cotangent H1, not the stated nodal log-canonical linear series"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, VeryAmple, Nodal",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-22",
+   "verdict": "no usable query: Loogle reported unknown identifier AlgebraicGeometry; repeated with quoted name fragments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log canonical line bundle stable pointed curve normal generation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme normalization, affine sections or cotangent H1, not the stated nodal log-canonical linear series"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"VeryAmple\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme normalization, affine sections or cotangent H1, not the stated nodal log-canonical linear series"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Powers of a sufficiently positive logarithmic dualizing sheaf embed a nodal marked curve and generate its section ring",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Proj.valuativeCriterion_existence_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Scheme.affineBasisCoverRing, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme normalization, affine sections or cotangent H1, not the stated nodal log-canonical linear series"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-log-canonical-deletion-algebra",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field.",
+   "via": [
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stable-pointed-field-linear-series",
+  "worker": "stage1",
+  "summary": "N8: statement unchanged. Derived the full subcurve degree formula from normalization adjunction and Euler characteristics, verified low-genus numerical cases, proved ideal-twisted H1 vanishing for length-one and length-two subschemes, obtained evaluation and the complete quotient-space embedding, applied a generic numerical multiplication theorem, and glued the canonical section-ring Proj charts. Two new independent statement-only inputs (Stacks 0E3E and nodal numerical multiplication); no Mathlib leaf found. Repair after promotion refusal: re-read all current cited statements against the retained full-statement quotes (no statement changed); made finite intersection length explicit in Step 7 and the global length-two subscheme construction explicit in Step 10. The delivery tool rebuilds this split on the current live DAG. Resumption repair of returned head 9ffa7dd33f4: Step 6 now explicitly identifies every subcurve provided by the obstruction with a union of ambient components, justifying the application of the previously proved numerical bounds. Repair of returned head e20e85bfc74: refreshed against the current DAG, rechecked all 33 cited-statement quotes, and made Step 7 a complete contradiction argument by introducing its obstruction subcurve before using the component bounds and the finite intersection algebra. Statement, route, children and logged searches retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Realizes the positive-component field linear-series prerequisite only; inherited null blueprint ancestor retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Generic geometry/coherent-cohomology tool: Degree: base change and tensor products. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-pc-very-ample-ample",
+    "why": "Generic geometry/coherent-cohomology tool: Ample line bundles from projective embeddings. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic geometry/coherent-cohomology tool: A zero-dimensional closed subscheme of a finite-type scheme over a field is finite. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-per-birational-curve-degree-invariance",
+    "why": "Generic geometry/coherent-cohomology tool: Birational pullback preserves line-bundle degree on proper integral curves. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-ample-proj-local-chart",
+    "why": "Generic geometry/coherent-cohomology tool: The canonical Proj map identifies an affine principal chart. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Generic geometry/coherent-cohomology tool: Tensoring by finite locally free module is exact. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic geometry/coherent-cohomology tool: Global sections on scheme modules is additive and left exact. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic geometry/coherent-cohomology tool: Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-point-tangent-separation-closed-immersion",
+    "why": "Generic geometry/coherent-cohomology tool: Sections separating points and tangent vectors give a closed immersion. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic geometry/coherent-cohomology tool: One-dimensional regular local rings. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-smooth-regular",
+    "why": "Generic geometry/coherent-cohomology tool: Smoothness implies regularity. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic geometry/coherent-cohomology tool: Degree is additive on tensor products of invertible modules on proper schemes of dimension at most one. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "Generic geometry/coherent-cohomology tool: Degree as a multiplicity-weighted sum over integral components. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-trf-nodal-curve-normalization-euler",
+    "why": "Generic geometry/coherent-cohomology tool: Euler characteristic of a nodal curve from its normalization. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-trf-nodal-normalization-adjunction",
+    "why": "Generic geometry/coherent-cohomology tool: Normalization adjunction for a component of a nodal curve. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic geometry/coherent-cohomology tool: Reduced nodal subcurves and their reduced boundary intersection. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic geometry/coherent-cohomology tool: Projective bundles of arbitrary quasi-coherent modules classify invertible quotients. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic geometry/coherent-cohomology tool: Long exact sequence of the right derived functors of a left exact functor. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic geometry/coherent-cohomology tool: Global functions on a proper reduced scheme over an algebraically closed field. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Generic geometry/coherent-cohomology tool: Sheaves of modules on a scheme have enough injectives. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "sk-thm-picard-rr",
+    "why": "Generic geometry/coherent-cohomology tool: Riemann–Roch and coherent Serre duality. Used for its stated input in this numerical field-curve proof; no node of this unit supplies that generic fact."
+   },
+   {
+    "node": "lem-sc-ample-proj-canonical-map",
+    "why": "Generic formula for the canonical section-ring morphism on local fractions; verifies that the final chart isomorphisms preserve the structural k-algebra maps. This unit has no separate generic statement of that formula."
+   },
+   {
+    "node": "lem-sfb-proper-nodal-dualizing-base-change",
+    "why": "Reviewer FIX (N8 review): identifies the item's Jacobian-normalized nodal dualizing line [def-trf-nodal-dualizing-datum] on a normalized component with Omega^1_V(B_V); lem-trf-nodal-normalization-adjunction concerns the lci adjunction line K_{C/k}, whose identification with the item's line was not cited."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-degree-base-change",
+  "lem-pc-very-ample-ample",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-per-birational-curve-degree-invariance",
+  "lem-sc-ample-proj-local-chart",
+  "lem-sc-ext-tensor-exact",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-smooth-regular",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "sk-thm-picard-rr",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-sfb-proper-nodal-dualizing-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-af6778dd7",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-af6778dd7 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps, both new nodes and every cited statement in full. The item statement is identical to the live node, which is still unsplit and unreviewed. One fault, fixed: Step 2 used lem-trf-nodal-normalization-adjunction, which concerns the lci adjunction line K_{C/k}, while the item's omega is the Jacobian-normalized line of def-trf-nodal-dualizing-datum, and the identification of the two was not cited. Step 2 now also cites the existing lem-sfb-proper-nodal-dualizing-base-change, applied to C/Spec k (proper, flat, finitely presented, nodal) with Omega=k, which gives nu^*omega = Omega^1_V(B_V); the new citation is added to proof_deps and tool_uses. New node 1 matches Stacks 0E3E (curves.tex lemma-vanishing-on-gorenstein, statement and proof read; no Gorenstein hypothesis, scheme-theoretic intersection). New node 2 matches Franciosi-Tenni Thm 4.2 (p.49; author PDF read, with Section 2 p.39 conventions: any characteristic, subcurves are all unions of components). Neither new node is a duplicate or a restated clause of the item. Checked: q=2h-2+a+s, the genus-by-genus bounds, strict length-1 and length-2 contradictions including at nodes, disconnected subcurves, the j=0 case, and the Proj charts. Batch-5 flags: all are generic curve, degree or projective-geometry facts, not trace-formula or Poincare-duality steps, so they are accepted. Artin-gabber flag: lem-per-birational-curve-degree-invariance is the plain Stacks 0AYU degree invariance, with none of the forbidden Qbar, duality or alteration material, and Step 4 needs it; accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
+}

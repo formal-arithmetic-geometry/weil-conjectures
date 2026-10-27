@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-equicharacteristic-complete-local-presentation",
+ "kind": "statement",
+ "title": "Residue-field power-series presentation of an equicharacteristic complete local ring",
+ "statement": "Let $(C,\\mathfrak n)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], complete for its maximal ideal [def-weil-pbc-adically-complete-ring], and suppose there is a unital ring map from a field $k$ to $C$. Put $F=C/\\mathfrak n$ and let $\\rho:C\\to F$ be the quotient map. For every integer $r\\ge0$ and every tuple $y_1,\\ldots,y_r\\in\\mathfrak n$ generating $\\mathfrak n$, there exist unital ring homomorphisms $\\alpha:F\\to C$ and $\\psi:Q=F[[z_1,\\ldots,z_r]]\\to C$ [def-weil-pbc-multivariate-power-series] such that $\\rho\\alpha=\\operatorname{id}_F$, $\\psi$ restricts on constants to $\\alpha$, $\\psi(z_i)=y_i$, $\\psi$ is surjective, and $\\ker\\psi\\subseteq\\mathfrak l=(z_1,\\ldots,z_r)$. Moreover $Q$ is a Noetherian complete regular local ring [def-weil-regular-scheme] with maximal ideal $\\mathfrak l$. No compatibility between $\\alpha$ and the original map from $k$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 032A (theorem-cohen-structure-theorem), part (1) and final proof paragraph, 0326 (definition-coefficient-ring), field-containing case, and 032C (remark-Noetherian-complete-local-ring-universally-catenary), first sentence; extracted from returned item steps 2 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Let $p\\ge0$ be the characteristic of $F$. The composite $k\\to C\\xrightarrow{\\rho}F$ is unital and hence injective: a nonzero element in its kernel would have an inverse and force $1_F=0$. Thus $k$ has characteristic $p$, and $p\\cdot1_C=0$ (also for $p=0$). Apply [lem-weil-pbc-cohen-coefficient-ring-exists] to the complete local ring $C$, obtaining $\\Lambda\\subseteq C$ with $\\Lambda\\cap\\mathfrak n=p\\Lambda$ and residue isomorphism $\\Lambda/(\\Lambda\\cap\\mathfrak n)\\simeq F$. Since $p\\cdot1_C=0$, it is zero in the subring $\\Lambda$, so $\\Lambda\\cap\\mathfrak n=0$. The residue isomorphism therefore identifies $\\Lambda$ itself with $F$. Compose its inverse with $\\Lambda\\hookrightarrow C$ to obtain a unital map $\\alpha:F\\to C$ satisfying $\\rho\\alpha=\\operatorname{id}_F$. Nothing chooses this section relative to $k$.",
+   "uses": [
+    "lem-weil-pbc-cohen-coefficient-ring-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032A (theorem-cohen-structure-theorem), part (1), and 0326 (definition-coefficient-ring), field-containing case."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coefficient-field-generator-presentation] with its field $F=C/\\mathfrak n$, ring $R=C$, residue-field isomorphism the identity, coefficient section $\\sigma=\\alpha$, and the given tuple $y_1,\\ldots,y_r$. The Noetherianity, completeness, section identity and generator conditions are precisely the hypotheses already in force. Its surjection $\\Phi$, after renaming $T_i$ as $z_i$, is the required $\\psi:Q\\to C$ with the prescribed constants and variables. It also gives $\\psi^{-1}(\\mathfrak n)=\\mathfrak l$, whence $\\ker\\psi\\subseteq\\mathfrak l$ because $0\\in\\mathfrak n$. For $r=0$ the generator condition says $\\mathfrak n=0$; then $Q=F$ and $\\psi=\\alpha$ is inverse to $\\rho$, so its kernel is zero.",
+   "uses": [
+    "lem-trf-coefficient-field-generator-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032A (theorem-cohen-structure-theorem), final proof paragraph; fixed-section form stated in varieties.tex, Tag 0C52 (lemma-complete-local-ring-structure-as-algebra), final proof paragraph."
+   }
+  },
+  {
+   "text": "Apply the field case of [lem-weil-pbc-power-series-field-cohen-regular-complete] to the field $F$ and $d=r$. Its clauses (1), (3) and (4) give that $Q=F[[z_1,\\ldots,z_r]]$ is Noetherian, local with maximal ideal $\\mathfrak l=(z_1,\\ldots,z_r)$, complete for that ideal, and regular local. This includes $r=0$, when $Q=F$ has maximal ideal zero and dimension zero.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), first sentence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-trf-coefficient-field-generator-presentation",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0326, 032A part (1) and final proof paragraph, 032C first sentence; field-containing specialization with the prescribed-generator presentation supplied by the existing 0C52 node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficient.field|equicharacteristic|power[Ss]eries.*[Ss]urject|[Ss]urject.*power[Ss]eries",
+   "results": "{\"t\": \"2026-10-22T06:11:11Z\", \"tool\": \"grep\", \"query\": \"coefficient.field|equicharacteristic|power[Ss]eries.*[Ss]urject|[Ss]urject.*power[Ss]eries\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Basic.lean\", \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\"], \"digest\": \"2c23c85fe1f3b3d5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field identification for an existing power-series ring, Weierstrass preparation, and surjectivity of constants with no variables do not construct a coefficient-field section and presentation of an arbitrary complete local ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete equicharacteristic Noetherian local ring is a quotient of a formal power series ring over its residue field",
+   "results": "{\"t\": \"2026-10-22T06:11:11Z\", \"tool\": \"leansearch\", \"query\": \"A complete equicharacteristic Noetherian local ring is a quotient of a formal power series ring over its residue field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit exceeded"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-22T06:11:11Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field identification for an existing power-series ring, Weierstrass preparation, and surjectivity of constants with no variables do not construct a coefficient-field section and presentation of an arbitrary complete local ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen coefficient field and convergent evaluation of formal power series give a presentation of an equicharacteristic complete local ring",
+   "results": "{\"t\": \"2026-10-22T06:11:35Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen coefficient field and convergent evaluation of formal power series give a presentation of an equicharacteristic complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.residueFieldOfPowerSeries\"], \"digest\": \"f562169957dfe323\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field identification for an existing power-series ring, Weierstrass preparation, and surjectivity of constants with no variables do not construct a coefficient-field section and presentation of an arbitrary complete local ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete Noetherian local ring containing a field has a residue field section and a surjective homomorphism from power series over its residue field sending variables to generators of the maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:11:35Z\", \"tool\": \"leanfinder\", \"query\": \"A complete Noetherian local ring containing a field has a residue field section and a surjective homomorphism from power series over its residue field sending variables to generators of the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"HenselianLocalRing.TFAE\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"dc882f9190d709ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field identification for an existing power-series ring, Weierstrass preparation, and surjectivity of constants with no variables do not construct a coefficient-field section and presentation of an arbitrary complete local ring."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.field|equicharacteristic|cohen.*structure|exists_coefficient",
+   "results": "{\"t\": \"2026-10-23T09:55:28Z\", \"tool\": \"grep\", \"query\": \"coefficient.field|equicharacteristic|cohen.*structure|exists_coefficient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations gives a coefficient section and prescribed-generator presentation of an arbitrary complete local ring. MvPowerSeries.C_surjective assumes no variables; residueFieldOfPowerSeries identifies the residue of an existing one-variable ring; Weierstrass preparation concerns division and quotients within power-series rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every complete equicharacteristic Noetherian local ring is a quotient of power series over its residue field with a coefficient section",
+   "results": "{\"t\": \"2026-10-23T09:55:29Z\", \"tool\": \"leansearch\", \"query\": \"Every complete equicharacteristic Noetherian local ring is a quotient of power series over its residue field with a coefficient section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.isNoetherianRing\"], \"digest\": \"83c99b013f0ba1fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations gives a coefficient section and prescribed-generator presentation of an arbitrary complete local ring. MvPowerSeries.C_surjective assumes no variables; residueFieldOfPowerSeries identifies the residue of an existing one-variable ring; Weierstrass preparation concerns division and quotients within power-series rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-23T09:55:29Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations gives a coefficient section and prescribed-generator presentation of an arbitrary complete local ring. MvPowerSeries.C_surjective assumes no variables; residueFieldOfPowerSeries identifies the residue of an existing one-variable ring; Weierstrass preparation concerns division and quotients within power-series rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem: a complete Noetherian local ring containing a field admits a coefficient field section and a surjective formal power series presentation with prescribed generators",
+   "results": "{\"t\": \"2026-10-23T09:55:40Z\", \"tool\": \"leanfinder\", \"query\": \"Cohen structure theorem: a complete Noetherian local ring containing a field admits a coefficient field section and a surjective formal power series presentation with prescribed generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"HenselianLocalRing\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"HenselianRing\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\"], \"digest\": \"de746191243d334f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations gives a coefficient section and prescribed-generator presentation of an arbitrary complete local ring. MvPowerSeries.C_surjective assumes no variables; residueFieldOfPowerSeries identifies the residue of an existing one-variable ring; Weierstrass preparation concerns division and quotients within power-series rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring complete for its maximal ideal and containing a field has a residue field splitting and is a quotient of a regular local multivariate formal power series ring",
+   "results": "{\"t\": \"2026-10-23T09:55:40Z\", \"tool\": \"leanfinder\", \"query\": \"A ring complete for its maximal ideal and containing a field has a residue field splitting and is a quotient of a regular local multivariate formal power series ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"Field.henselian\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"HenselianLocalRing\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"isLocalRing_of_isAdicComplete_maximal\"], \"digest\": \"1880db47adb27afe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: none of the returned declarations gives a coefficient section and prescribed-generator presentation of an arbitrary complete local ring. MvPowerSeries.C_surjective assumes no variables; residueFieldOfPowerSeries identifies the residue of an existing one-variable ring; Weierstrass preparation concerns division and quotients within power-series rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completion-local-complete-intersection",
+  "date": "2026-10-22",
+  "group": "Q141"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Returned descendant proof steps 2–3: Cohen coefficient field and residue-field power-series surjection used in the local nodal-completion to LCI-neighbourhood passage of Curves 0C4E.",
+   "via": [
+    "lem-trf-completion-local-complete-intersection",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-equicharacteristic-complete-local-presentation",
+  "worker": "stage1",
+  "summary": "Q147: retained the statement and its four notion dependencies; supplied a three-step proof using only existing coefficient-ring, prescribed coefficient-field presentation and regular power-series nodes. Checked equicharacteristic reduction, arbitrary generating tuples and r=0; searched upstream Lean, DAG, current blueprint and Mathlib. No new nodes.",
+  "blueprint": "Realizes the existing descendant local-completion input below lem-trf-local-term-locality, through the recorded nodal-geometry chain: Cohen coefficient field and regular source for the local LCI presentation. The current blueprint ancestor is unchanged; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "why": "Generic Cohen coefficient-ring existence for a complete local ring; the trace-formula unit has no separate coefficient-ring theorem."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic regularity, completeness and Noetherianity of a field power-series ring; the trace-formula unit does not reprove these ring-theoretic properties."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-3f26843a3",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-3f26843a3 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has no new nodes and leaves the statement and its four stmt_deps unchanged. The proof has 3 steps. I checked them against Stacks 0326, 032A (part (1) and the final paragraph of the proof) and 032C (first sentence). Step 1 cites lem-weil-pbc-cohen-coefficient-ring-exists. The map from k to F is injective, so char k = p and p·1_C = 0. Then Λ∩n = pΛ = 0, so Λ ≅ F and the section α follows. This is correct and is where the field k is used. The char-0-only residue-section node does not cover it. Step 2 cites lem-trf-coefficient-field-generator-presentation (same unit, no cycle) with ρ = id and σ = α. Its Φ^{-1}(n) = I gives ker ψ ⊆ l, and r=0 is handled. Step 3 cites the field case of lem-weil-pbc-power-series-field-cohen-regular-complete; its clauses (1), (3) and (4) give the 'Moreover' clause. Cases tested: r=0; F[ε]/(ε²) with kernel (z²) ⊆ (z); zero or redundant generators; imperfect residue field in char p; mixed characteristic is excluded by the field hypothesis. Duplicate candidates read: the pbc Cohen presentation and surjection nodes and the complete-local-map Cohen presentation node. All of them give a Cohen ring in residue char p, not a coefficient field with prescribed generators, so there is no duplicate. I accept the two generic pbc tool_uses (032A(1) and 032C). There is no SGA citation and no repair note, so this is not a re-split. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EquicharacteristicCompleteLocalPresentation",
+  "declaration": "IsLocalRing.exists_equicharacteristic_complete_local_presentation",
+  "file": "lean/Sheaf/RingTheory/EquicharacteristicCompleteLocalPresentation.lean",
+  "statement": "theorem exists_equicharacteristic_complete_local_presentation (k : Type u) [Field k] (C : Type v) [CommRing C] [IsLocalRing C] [IsNoetherianRing C] [IsAdicComplete (maximalIdeal C) C] (_ι : k →+* C) (r : ℕ) (y : Fin r → C) (hy : ∀ i : Fin r, y i ∈ maximalIdeal C) (hgen : Ideal.span (Set.range y) = maximalIdeal C) : (∃ (α : ResidueField C →+* C) (ψ : MvPowerSeries (Fin r) (ResidueField C) →+* C), (residue C).comp α = RingHom.id (ResidueField C) ∧ (∀ a : ResidueField C, ψ (MvPowerSeries.C a) = α a) ∧ (∀ i : Fin r, ψ (MvPowerSeries.X i) = y i) ∧ Function.Surjective ψ ∧ RingHom.ker ψ ≤ Ideal.span (Set.range (MvPowerSeries.X : Fin r → MvPowerSeries (Fin r) (ResidueField C)))) ∧ IsNoetherianRing (MvPowerSeries (Fin r) (ResidueField C)) ∧ IsAdicComplete (maximalIdeal (MvPowerSeries (Fin r) (ResidueField C))) (MvPowerSeries (Fin r) (ResidueField C)) ∧ IsRegularLocalRing (MvPowerSeries (Fin r) (ResidueField C)) ∧ maximalIdeal (MvPowerSeries (Fin r) (ResidueField C)) = Ideal.span (Set.range (MvPowerSeries.X : Fin r → MvPowerSeries (Fin r) (ResidueField C)))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-358167512",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Node unchanged except the added lean record; lean.statement matches the file verbatim. Every hypothesis matches (canonical ResidueField/residue, IsAdicComplete on maximalIdeal, independent universes u/v, plain k→+*C, hy redundant but in the node) and every conclusion clause is present: section, constants, variables, surjective, ker ≤ span X, and the moreover clause (Noetherian, complete, regular local, maximal ideal = span X). Edge cases r=0, redundant generators, non-regular C and char p covered. No duplicate: cohen_structure_power_series_surjection is a different statement (Cohen ring, no prescribed generators). No definitions, proof sorry, docstrings give source place, blueprint id and the proof steps. Not recompiled (no change)."
+ }
+}

@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-smooth-group-field-trait-descent",
+ "kind": "statement",
+ "title": "Effective descent of smooth groups over fields and traits",
+ "statement": "Let $B\\to C$ be a faithfully flat ring homomorphism [def-weil-pbc-faithfully-flat-ring-map] such that either both rings are fields [def-weil-field] or both rings are discrete valuation rings [def-sc-discrete-valuation-ring]. Put $S=\\operatorname{Spec}B$ and $S'=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Let $G'$ be a smooth separated finite-type $S'$-group scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; a group scheme has multiplication, inverse and identity over its base satisfying the group-object diagrams of [def-sc-group-scheme], and separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $G'$ has a descent datum [def-pd-descent-datum] relative to $S'\\to S$ whose isomorphism over $S'\\times_SS'$ is a group isomorphism [def-pc-base-change]. Then there are a smooth separated finite-type $S$-group scheme $G$ and an $S'$-group isomorphism $G\\times_SS'\\simeq G'$ realizing the given datum. Neither affineness nor projectivity of $G'$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "6.5 Theorem 1, printed p.157 (PDF p.163), group-scheme case (take the torsor to be the group itself); primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:S'\\to S$. Faithful flatness of $B\\to C$ gives flatness of $p$ and surjectivity on spectra by the cited ring-to-scheme and spectrum lemmas. Since $p^{-1}(S)=S'$ is affine, the one-member affine cover $\\{S\\}$ of $S$ shows that $p$ is affine by the affine-local-target criterion, so $p$ is quasi-compact by affine-morphism permanence. Thus $\\{p\\}$ is an fpqc covering. This checks the covering hypothesis for every descent theorem below.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.1 covering hypotheses and the cited ring-to-scheme, surjective-spectrum and affine-morphism permanence statements."
+   }
+  },
+  {
+   "text": "If $B,C$ are fields, the finite-type group $G'$ carries an ample module by the field-group ampleness lemma. Apply field ample-scheme datum effectivity; this yields the underlying descended scheme with the prescribed datum. Proceed to the last step. Otherwise let $K=\\operatorname{Frac}B$, $L=\\operatorname{Frac}C$. The generic fibre $G'_L$ is a separated finite-type $L$-group: pull back its three structural maps and their identities, and use separatedness, local finite-type and quasi-compact base-change permanence. Field-group ampleness and field ample-scheme datum effectivity give a $K$-scheme $X_0$ with $X_0\\times_KL\\simeq G'_L$ realizing the generic restriction of the datum.",
+   "uses": [
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-field-ample-scheme-datum-effectivity",
+    "lem-weil-pbc-lft-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Theorem 1 proof, first paragraph, printed p.160; Stacks Tag 0BF7 for the existing field-group ampleness input."
+   }
+  },
+  {
+   "text": "In the DVR case, apply the generic-effectivity affine-open lemma to $X'=G'$ and $X_0$. Obtain an invariant affine open $U'\\subseteq G'$, dense in every geometric fibre, and an affine effective model $U$ over $B$ with $U_K\\hookrightarrow X_0$. Apply the horizontal-boundary lemma to precisely these models and this open. It supplies $D_0$ and its Cartier closure $D'$, supported on $G'\\setminus U'$, together with a cocycle-compatible datum on $M'=\\mathcal O_{G'}(D')$. In particular this is a datum on a specified line bundle, not just invariance of its isomorphism class.",
+   "uses": [
+    "lem-sfb-trait-generic-effective-dense-affine",
+    "lem-sfb-trait-horizontal-boundary-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Theorem 1 proof, final reduction on printed pp.161-162 and boundary construction in case (a), p.160."
+   }
+  },
+  {
+   "text": "The DVR $C$ is Noetherian because each ideal is principal; it has dimension one by the DVR dimension lemma and is integrally closed by valuation-ring normality. Let $H=(G')^0$ be the relative neutral open subgroup. Its fibres are geometrically connected and its geometric orbits on $G'$ are the connected components, by the neutral-open lemma. Since $U'$ is fibrewise dense, it meets every such orbit. Consequently $H\\times_{S'}U'\\to G'$ is surjective on underlying points: after passing to an algebraic closure of a residue field, a point and any point of $U'$ in its component differ by an element of $H$. Apply the Dedekind action-boundary ampleness lemma to the left action of $H$ on $G'$ and to $D'$. Its conclusion says exactly that $M'$ is ample. Polarized affine fpqc effectivity now produces an underlying $S$-scheme $G$ and an isomorphism $G\\times_SS'\\simeq G'$ realizing the given datum.",
+   "uses": [
+    "lem-sfb-smooth-group-relative-neutral-open",
+    "lem-sfb-dedekind-action-boundary-ampleness",
+    "lem-sfb-polarized-affine-fpqc-effectivity",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-valuation-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Theorem 1 proof, case (a), printed p.160, with 6.4 Proposition 2 and the neutral-open paragraph following it; 6.1 Theorem 7."
+   }
+  },
+  {
+   "text": "In either case, transport multiplication, inverse and identity through the effective isomorphism. Their compatibility with the prescribed datum lets the fpqc morphism-descent bijection descend them to $G\\times_SG\\to G$, $G\\to G$ and $S\\to G$. Apply its injectivity to the two sides of each associativity, unit and inverse identity; after pullback they are the given identities of $G'$, so they agree over $S$. Thus $G$ is a group scheme and the effective isomorphism is a group isomorphism. Finally smoothness and separatedness descend by the two cited fpqc locality statements. Local finite type and quasi-compactness descend separately by their cited statements, and together mean finite type. All these tests concern the already constructed scheme $G$; none asserts general effectivity of scheme descent.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 opening discussion and Theorem 1, printed pp.156-157; Stacks Tags 02W0, 02VL, 02KU, 02KX, 02KQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-finite-type-group-ample-line",
+  "lem-sfb-field-ample-scheme-datum-effectivity",
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-trait-generic-effective-dense-affine",
+  "lem-sfb-trait-horizontal-boundary-datum",
+  "lem-sfb-smooth-group-relative-neutral-open",
+  "lem-sfb-dedekind-action-boundary-ampleness",
+  "lem-sfb-polarized-affine-fpqc-effectivity",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Theorem 1 proof, printed pp.160-162, read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED. Assembly follows this proof and the cited existing Stacks nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth separated finite type group schemes have effective descent under a faithfully flat extension of fields or discrete valuation rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent tests properties of already existing schemes; Smooth.exists_finiteType descends affine algebras to finite type subrings. Neither gives effective scheme descent of a possibly nonaffine smooth group with a compatible datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"DescentDatum\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent tests properties of already existing schemes; Smooth.exists_finiteType descends affine algebras to finite type subrings. Neither gives effective scheme descent of a possibly nonaffine smooth group with a compatible datum."
+  },
+  {
+   "tool": "grep",
+   "query": "group.*scheme.*descent|descent.*group.*scheme",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent tests properties of already existing schemes; Smooth.exists_finiteType descends affine algebras to finite type subrings. Neither gives effective scheme descent of a possibly nonaffine smooth group with a compatible datum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent of a smooth finite type group scheme along an extension of discrete valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"IsDiscreteValuationRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {inst_1 : IsDomain R} [self : IsDiscreteValuationRing R], IsLocalRing R\", \"doc\": \"Every discrete valuation ring is a local ring, meaning it has a unique maximal ideal.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"of_isDiscreteValuationRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \": ValuationRing A\", \"doc\": \"Every discrete valuation ring is a valuation ring. That is, if $ A $ is a commutative ring satisfying the discrete valuation ring axioms (a domain with a valuation taking values in the integers), then\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent tests properties of already existing schemes; Smooth.exists_finiteType descends affine algebras to finite type subrings. Neither gives effective scheme descent of a possibly nonaffine smooth group with a compatible datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme with compatible descent datum over a field extension or DVR extension descends as a scheme without assuming it affine or projective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] →\\n    {f : T ⟶ S} →\\n      [CategoryTheory.GrpObj (M.asOver S)] → CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent tests properties of already existing schemes; Smooth.exists_finiteType descends affine algebras to finite type subrings. Neither gives effective scheme descent of a possibly nonaffine smooth group with a compatible datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective faithfully flat descent of smooth separated finite type group schemes over fields or discrete valuation rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonaffine smooth group scheme with compatible fpqc descent datum over a trait is representable over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"DescentDatum\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "group.*scheme.*descent|descent.*group.*scheme",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective faithfully flat descent of smooth separated finite type group schemes over fields or discrete valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Module.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(R : Type u) → (M : Type v) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property that $ M $ is a faithfully flat module over the commutative ring $ R $, meaning it is flat and the functor $ -\\\\otimes_R M $ is faithful.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"[F.IsPrestack J] (hf : Sieve.ofArrows _ f ∈ J S) : (F.toDescentData f).FullyFaithful\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ satisfying the prestack condition, an object $S \\\\\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-birational-law-realization",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 6.5 Corollary 2 proof invokes Theorem 1 for effective descent of the group scheme",
+   "via": [
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-group-field-trait-descent",
+  "worker": "stage1",
+  "summary": "Preserved the exact field/DVR statement. Split the proof along BLR generic effectivity, invariant affine shrinking, horizontal Cartier boundary, neutral-component ampleness and polarized descent; used fpqc full faithfulness to descend group operations and existing fpqc property-locality nodes. Added five statement-only supporting lemmas after DAG, blueprint, project-source and logged Mathlib searches.",
+  "blueprint": "Supports the BLR effective-descent prerequisite in the proof of strict-birational-law realization, below the fixed constructibility unit; generic field descent and case (a), then the general invariant-open reduction in BLR 6.5 Theorem 1. The inherited nearest blueprint ancestor is null.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Generic fpqc descent or base-change tool used with its full stated hypotheses; this unit has no replacement for this scheme-theoretic prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Generic fpqc descent or base-change tool used with its full stated hypotheses; this unit has no replacement for this scheme-theoretic prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Generic fpqc descent or base-change tool used with its full stated hypotheses; this unit has no replacement for this scheme-theoretic prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "why": "Generic fpqc descent or base-change tool used with its full stated hypotheses; this unit has no replacement for this scheme-theoretic prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic algebraic input checking that the DVR base meets the Dedekind hypothesis of the ampleness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme base-change tool used to retain separatedness of the generic group fibre."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-1297b6e93",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-1297b6e93 (reviewer sub-agent of L); spot-checked: Read the item, all five new statement-only nodes and the statement of every cited node. BLR is not in literature/ (WANTED), so I checked the statements against my knowledge of BLR 6.5 Thm 1, 6.1 Thm 7 and 6.4 Prop 2 and of EGA IV 15.6.5 and 21.12.7. The item statement is unchanged and matches BLR 6.5 Thm 1 for a group scheme. One fault, fixed (C1): step 1 said 'a map between affine schemes is affine' without a cited node. I cited pqf-lem-affine-local-target (Stacks 01S8, Mathlib leaf; a one-member affine cover suffices) in the step text, uses and proof_deps (corrected item JSON in fixes/dag/nodes/sec-six-functors-basics/). Steps 2-5 check out: the DVR generic restriction is valid because C⊗_BK=L; the ample line plus the field-effectivity node give X_0; the invariant affine open and horizontal Cartier closure D' come with a datum on O(D') itself; C is Noetherian, of dimension 1 and normal; H=(G')^0 with dense U' makes H×U'→G' surjective, so O(D') is ample and polarized fpqc effectivity applies; group operations descend by 02W0, and smoothness, separatedness, lft and qc descend by 02VL/02KU/02KX/02KQ. All five new nodes are true and were tested on small cases (identity cover, L=k(t), finite purely inseparable extension, G_m, constant Z/2, empty X'). None restates the item, and no duplicate exists: existing neutral-component nodes all assume the open G^0; 0CCJ and the étale-polarized nodes are narrower. Batch 5: the closures of ample-line (lem-trf-smooth-geometrically-normal) and action-boundary-ampleness (Proj twist comparison), and lem-trf-smooth-fpqc-base-descent (02VL), are generic scheme theory, not trace-formula or Poincaré steps, so they are accepted. The generic descent tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGroupFieldTraitDescent",
+  "declaration": "AlgebraicGeometry.exists_smooth_group_field_trait_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGroupFieldTraitDescent.lean",
+  "statement": "theorem exists_smooth_group_field_trait_descent (B C : Type u) [CommRing B] [CommRing C] [IsDomain B] [IsDomain C] (φ : B →+* C) (hφ : φ.FaithfullyFlat) (hbase : (IsField B ∧ IsField C) ∨ (IsDiscreteValuationRing B ∧ IsDiscreteValuationRing C)) (G' : Grp (Over (Spec (.of C)))) [Smooth G'.X.hom] [IsSeparated G'.X.hom] [LocallyOfFiniteType G'.X.hom] [QuasiCompact G'.X.hom] (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom φ)) G'.X) (hmul : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of C)) (h : f₁ ≫ Spec.map (CommRingCat.ofHom φ) = f₂ ≫ Spec.map (CommRingCat.ofHom φ)) (a b : Over.mk f₁ ⟶ G'.X), D.transport f₁ f₂ h (a * b) = D.transport f₁ f₂ h a * D.transport f₁ f₂ h b) : ∃ G : Grp (Over (Spec (.of B))), Smooth G.X.hom ∧ IsSeparated G.X.hom ∧ LocallyOfFiniteType G.X.hom ∧ QuasiCompact G.X.hom ∧ ∃ e : (Over.pullback (Spec.map (CommRingCat.ofHom φ))).mapGrp.obj G ≅ G', ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of C)) (h : f₁ ≫ Spec.map (CommRingCat.ofHom φ) = f₂ ≫ Spec.map (CommRingCat.ofHom φ)) (a : Over.mk f₁ ⟶ G'.X), (D.transport f₁ f₂ h a).left ≫ e.inv.hom.hom.left ≫ pullback.fst G.X.hom (Spec.map (CommRingCat.ofHom φ)) = a.left ≫ e.inv.hom.hom.left ≫ pullback.fst G.X.hom (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5a191b05",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read node, 10 stmt_dep records, DescentDatum.lean, module, report (Worker report + Second reading present). Clause match: hbase field/DVR disjunction (IsDomain implied, needed for DVR typing), RingHom.FaithfullyFlat, G' : Grp (Over Spec C) with Smooth/IsSeparated/LocallyOfFiniteType+QuasiCompact, D : Over.DescentDatum, hmul = transport multiplicative on T-points (Yoneda-equivalent to overlap iso being a group iso), conclusion ∃ G with four properties, Grp-iso e from mapGrp pullback, realization = IsEffective invariance with q = e.inv.left ≫ pullback.fst (pins datum since points over f₂ determined by fst). No affine/projective hypothesis, no hollow def, sorry-only, docstrings with source and 5 proof steps, statement verbatim, imports exist. No compile (no file changed). Note: parallel Q47 delivery b0100091 of same item (different file/name) under review; first lander owns, other rebinds."
+ }
+}

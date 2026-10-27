@@ -1,0 +1,99 @@
+{
+ "id": "lem-trf-compact-support-direct-image-derived-evaluation",
+ "kind": "statement",
+ "title": "Derived direct-image evaluation for compact support",
+ "statement": "theorem compactSupportDirectImageDerivedEvaluation\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y) (ordinary : ∀ n : ℕ,\n      integralComparisonSequenceDirectImage l E p ⋙ coefficientSequenceEvaluation l E Y n ≅\n        coefficientSequenceEvaluation l E Z n ⋙ compactSupportLevelDirectImage l E p n) :\n    ∃ left right, the derived square normalization and the unit and counit equations\n      displayed in the parent direct-image evaluation theorem hold for ordinary, left,\n      and right",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; decomposition of the parent proof into ordinary and derived components"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved sequence-module evaluation theorem to obtain invertibility of the inverse ordinary mate. Localize that inverse-image isomorphism; its derived mate defines the direct-image comparison.",
+   "uses": [
+    "lem-trf-compact-support-evaluation-ordinary-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The general cochain normalization for a localized exact adjunction square identifies the derived mate with the ordinary comparison and canonical right-derived units. On K-injective system complexes the first unit is invertible. The finite direct-image acyclicity lemma makes the other unit invertible, so each component of the derived mate is invertible. Transport across a K-injective representative to obtain a natural isomorphism.",
+   "uses": [
+    "lem-trf-compact-support-evaluation-direct-image-acyclic",
+    "lem-sbc-unbounded-exact-adjunction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary finite K-injective resolution, use naturality of the right-derived unit and cancel the invertible system unit to obtain the specified normalization. The unit-mate and counit-mate identities give the remaining two equations.",
+   "uses": [
+    "lem-sbc-unbounded-exact-adjunction-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-compact-support-evaluation-ordinary-mate",
+  "lem-trf-compact-support-evaluation-direct-image-acyclic",
+  "lem-sbc-unbounded-exact-adjunction-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Q4: Construction 4.1 and Lemma 4.10; localized ordinary mate, cochain normalization, and finite direct-image acyclicity."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportDirectImageEvaluation",
+  "date": "2026-10-27",
+  "group": "F9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-compact-support-direct-image-evaluation",
+   "place": "Strict component decomposition of the direct-image evaluation proof.",
+   "via": [
+    "lem-trf-compact-support-direct-image-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportDirectImageDerivedEvaluation",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportDirectImageDerivedEvaluation.lean",
+  "declaration": "WeilConjectures.compactSupportDirectImageDerivedEvaluation",
+  "statement": "theorem compactSupportDirectImageDerivedEvaluation\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y)\n    [(integralComparisonSequenceDirectImage l E p).Additive]\n    [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E Z)]\n    [∀ n : ℕ, (compactSupportLevelDirectImage l E p n).Additive]\n    [∀ n : ℕ, Abelian.HasKInjectiveResolutions (normalizedDVRModules l E Z n)]\n    [∀ n : ℕ, (compactSupportLevelPullback l E p n).Additive]\n    [∀ n : ℕ, PreservesFiniteLimits (compactSupportLevelPullback l E p n)]\n    [∀ n : ℕ, PreservesFiniteColimits (compactSupportLevelPullback l E p n)]\n    (ordinary : ∀ n : ℕ,\n        integralComparisonSequenceDirectImage l E p ⋙ coefficientSequenceEvaluation l E Y n ≅\n          coefficientSequenceEvaluation l E Z n ⋙ compactSupportLevelDirectImage l E p n) :\n    ∃ (left : ∀ n : ℕ,\n        integralComparisonDerivedSequencePullback l E p ⋙\n            coefficientSequenceDerivedEvaluation l E Z n ≅\n          coefficientSequenceDerivedEvaluation l E Y n ⋙\n            (compactSupportLevelPullback l E p n).mapDerivedCategory)\n      (right : ∀ n : ℕ,\n        (integralComparisonSequenceDirectImage l E p).rightDerivedFunctor ⋙\n            coefficientSequenceDerivedEvaluation l E Y n ≅\n          coefficientSequenceDerivedEvaluation l E Z n ⋙\n            (compactSupportLevelDirectImage l E p n).rightDerivedFunctor),\n      (∀ n : ℕ,\n        letI := coefficientSequenceEvaluation_additiveInstance l E Z n\n        letI := coefficientSequenceEvaluation_additiveInstance l E Y n\n        letI := coefficientSequenceEvaluation_limits l E Z n\n        letI := coefficientSequenceEvaluation_colimits l E Z n\n        letI := coefficientSequenceEvaluation_limits l E Y n\n        letI := coefficientSequenceEvaluation_colimits l E Y n\n        CompactSupportDerivedSquareNormalization\n            (integralComparisonSequenceDirectImage l E p) (compactSupportLevelDirectImage l E p n)\n            (coefficientSequenceEvaluation l E Z n) (coefficientSequenceEvaluation l E Y n)\n            (ordinary n).symm (right n).symm) ∧\n      (∀ (n : ℕ) M,\n          (coefficientSequenceDerivedEvaluation l E Y n).map ((compactSupportCanonicalPAdjunction l\n            E p).unit.app M) ≫\n            (right n).hom.app ((integralComparisonDerivedSequencePullback l E p).obj\n              M) ≫\n            ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor).map\n              ((left n).hom.app M) =\n              (compactSupportCanonicalPLevelAdjunction l E p n).unit.app\n                ((coefficientSequenceDerivedEvaluation l E Y n).obj M)) ∧\n      (∀ (n : ℕ) N,\n          ((compactSupportLevelPullback l E p n).mapDerivedCategory).map\n              ((right n).hom.app N) ≫\n            (compactSupportCanonicalPLevelAdjunction l E p n).counit.app\n              ((coefficientSequenceDerivedEvaluation l E Z n).obj N) =\n              (left n).inv.app (((integralComparisonSequenceDirectImage l E\n                p).rightDerivedFunctor).obj N) ≫\n                (coefficientSequenceDerivedEvaluation l E Z n).map\n                  ((compactSupportCanonicalPAdjunction l E p).counit.app N))",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T050557-L-239550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T084442-L-3681928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -73,42 +73,72 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-kunneth-relative",
  "lean": {
-  "module": "Sheaf.Paper.FiniteOpenProductSwap",
+  "module": "Sheaf.Paper.FiniteOpenProductOperations",
   "declaration": "WeilConjectures.FiniteOpenProduct.tensor",
   "declarations": [
+   "WeilConjectures.FiniteOpenProduct.product",
+   "WeilConjectures.FiniteOpenProduct.first",
+   "WeilConjectures.FiniteOpenProduct.second",
+   "WeilConjectures.FiniteOpenProduct.swap",
+   "WeilConjectures.FiniteOpenProduct.proetSigma",
    "WeilConjectures.FiniteOpenProduct.tensor",
    "WeilConjectures.FiniteOpenProduct.tensorMap",
    "WeilConjectures.FiniteOpenProduct.tensorIsoMap",
    "WeilConjectures.FiniteOpenProduct.pull",
-   "WeilConjectures.FiniteOpenProduct.pullComp",
+   "WeilConjectures.FiniteOpenProduct.coefficientNoetherian",
    "WeilConjectures.FiniteOpenProduct.tensorPullIso",
    "WeilConjectures.FiniteOpenProduct.adj",
+   "WeilConjectures.FiniteOpenProduct.pullComp",
+   "WeilConjectures.FiniteOpenProduct.pullCongr",
    "WeilConjectures.FiniteOpenProduct.comp",
    "WeilConjectures.FiniteOpenProduct.square",
-   "WeilConjectures.FiniteOpenProduct.gamma",
-   "WeilConjectures.FiniteOpenProduct.rho",
-   "WeilConjectures.FiniteOpenProduct.sigma",
-   "WeilConjectures.FiniteOpenProduct.proetSigma",
-   "WeilConjectures.FiniteOpenProduct.coefficientNoetherian",
-   "WeilConjectures.FiniteOpenProduct.pullCongr",
    "WeilConjectures.FiniteOpenProduct.composeEq",
-   "WeilConjectures.FiniteOpenProduct.beta"
+   "WeilConjectures.FiniteOpenProduct.beta",
+   "WeilConjectures.FiniteOpenProduct.gamma",
+   "WeilConjectures.FiniteOpenProduct.sigma",
+   "WeilConjectures.FiniteOpenProduct.rho",
+   "WeilConjectures.FiniteOpenProduct.leftOpen",
+   "WeilConjectures.FiniteOpenProduct.rightOpen",
+   "WeilConjectures.FiniteOpenProduct.leftOpen_open",
+   "WeilConjectures.FiniteOpenProduct.rightOpen_open",
+   "WeilConjectures.FiniteOpenProduct.leftSquare",
+   "WeilConjectures.FiniteOpenProduct.leftBeta",
+   "WeilConjectures.FiniteOpenProduct.projectionTensor",
+   "WeilConjectures.FiniteOpenProduct.extendedProjectionTensor",
+   "WeilConjectures.FiniteOpenProduct.leftComparison",
+   "WeilConjectures.FiniteOpenProduct.rightSquare",
+   "WeilConjectures.FiniteOpenProduct.rightComparison",
+   "WeilConjectures.FiniteOpenProduct.productOpen",
+   "WeilConjectures.FiniteOpenProduct.productOpen_open",
+   "WeilConjectures.FiniteOpenProduct.compTo",
+   "WeilConjectures.FiniteOpenProduct.comparison",
+   "WeilConjectures.FiniteOpenProduct.comparisonOp",
+   "WeilConjectures.FiniteOpenProduct.swapFactors",
+   "WeilConjectures.FiniteOpenProduct.swapSquare",
+   "WeilConjectures.FiniteOpenProduct.transportedReverse",
+   "WeilConjectures.FiniteOpenProduct.restrictionSource",
+   "WeilConjectures.FiniteOpenProduct.settingCoefficientFinite"
   ],
   "statement": "abbrev tensor (Y : Scheme.{u}) (M N : FiniteD A Y) : FiniteD A Y",
   "branch": "sheaf-dag",
   "by": "Q25",
   "date": "2026-10-21",
   "existing": true,
-  "note": "H2 repair requested by independent review of d79810dff23d: this definition node owns the existing plain FiniteOpenProduct operations, not finiteOpenProductSwap. The unchanged published module already gives real constructions and source/blueprint docstrings for every listed declaration (lines 83-223). No new module, alias, theorem or data choice. A : Type (u + 1), CommRing A and Finite A are explicitly bound by its source section. Existing docstrings reference the original theorem-node owner and the precise Stacks sources; this record supplies the missing definition-node ownership without changing that module. Reviewer FIX (c3cab2f32845): stmt_deps extended by the owners of the declarations the listed bodies use (FiniteD/finiteShriek/finiteGamma, ProEtale.derivedTensor, upperStar, leftDerivedUpperStarIsoMapDerivedCategory, upperStarComp, derivedOpenImmersionLowerShriekUpperStarAdjunction, ordinaryOpenExtensionBaseChangeIso)."
+  "note": "H2 repair requested by independent review of d79810dff23d: this definition node owns the existing plain FiniteOpenProduct operations, not finiteOpenProductSwap. The unchanged published module already gives real constructions and source/blueprint docstrings for every listed declaration (lines 83-223). No new module, alias, theorem or data choice. A : Type (u + 1), CommRing A and Finite A are explicitly bound by its source section. Existing docstrings reference the original theorem-node owner and the precise Stacks sources; this record supplies the missing definition-node ownership without changing that module. Reviewer FIX (c3cab2f32845): stmt_deps extended by the owners of the declarations the listed bodies use (FiniteD/finiteShriek/finiteGamma, ProEtale.derivedTensor, upperStar, leftDerivedUpperStarIsoMapDerivedCategory, upperStarComp, derivedOpenImmersionLowerShriekUpperStarAdjunction, ordinaryOpenExtensionBaseChangeIso). Q2 extraction: the original public operations, including product geometry and specified comparison chains, now live in the standalone Operations module and are reexported unchanged by FiniteOpenProductSwap; proetSigma uses the named canonical native braiding.",
+  "file": "lean/Sheaf/Paper/FiniteOpenProductOperations.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -125,5 +155,15 @@
   "group": "Q25",
   "result": "fix",
   "note": "Re-delivery of the d79810 H2 RETURN. Item Lean is byte-identical (sha 41fb9cd3) and was mathematically checked in d79810. The item's stmt_deps now replace theorem lem-pur-finite-open-product-swap with the new def-sf-finite-open-tensor-operations; against the base only that node is added. New node: existing:true on the unchanged FiniteOpenProductSwap; its 17 decls include every FiniteOpenProduct.* the item uses; all are plain defs (no choose, theorem not listed); statement verbatim (l.108); statement matches the bodies (pullComp/comp/square/gamma/rho/sigma directions); check_existing clean. FIX: whole-node fixes/def-sf-finite-open-tensor-operations.json adds the 7 owners of the declarations its bodies use (def-sf-open-normalization-data, def-weil-derived-tensor, def-sfb-finite-upper-star, def-sfb-finite-derived-pullback-iso, def-sfb-finite-upper-star-comp, def-sfb-finite-derived-extension-by-zero-adjunction, lem-cbc-proetale-extension-zero-base-change) to stmt_deps, each cited in the statement; no cycle (closure checked); check_new_node []; no Lean changed, no compile. Advisories: ProEtale.leftDerivedUpperStarTensorIso has no pro-etale owner; the item reaches def-sf-open-normalization-data only through the new node; common-cone swap clause faithful, as accepted earlier."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fc64",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T205537-L-3284109",
+  "kind": "interface",
+  "note": "independent cc review: item finiteOpenProductSwap stmt byte-identical to published; moved operations verbatim vs clone except proetSigma (matched against DerivedBraided braidingNatTrans/braidingCounit = old μ/W/τ lift); new sorries = item clauses 3,4 and consequence of 3+6; 6 direct importers compiled against sandbox build"
  }
 }

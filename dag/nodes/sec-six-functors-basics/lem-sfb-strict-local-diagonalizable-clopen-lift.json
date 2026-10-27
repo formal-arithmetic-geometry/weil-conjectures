@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-strict-local-diagonalizable-clopen-lift",
+ "kind": "statement",
+ "title": "A diagonalizable geometric fibre gives a clopen subgroup over the strict local base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $G\\to S$ an affine [pqf-def-affine-morphism], flat [def-weil-flat-morphism] group scheme of finite presentation, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. A group scheme is a group object in schemes over its base; a homomorphism respects multiplication, identity and inverse. Let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point [def-weil-geometric-point]. Suppose that for some finitely generated additive abelian group $M_0$ there is an isomorphism $G\\times_S\\operatorname{Spec}\\Omega\\simeq D_\\Omega(M_0)$ of $\\Omega$-group schemes. The group algebra spectra $D_R(M)=\\operatorname{Spec}R[M]$ have the Hopf operations of [def-sfb-ring-diagonalizable-group], and products are fibre products [def-pc-fibre-product]. Put $T=S_{(\\bar s)}=\\operatorname{Spec}C$, with $C$ the pointed-etale-neighbourhood coordinate-ring colimit of [def-weil-pbc-strict-henselization-limit]. Write $\\mathfrak m_C$ for the unique maximal ideal of the strictly henselian local ring $C$ [lem-weil-pbc-strict-henselization-local-structure], and $k=C/\\mathfrak m_C$ for its residue field [def-weil-residue-field]. Then there are a finitely generated additive abelian group $M$ and a $T$-group homomorphism\n$$j:D_C(M)\\longrightarrow G\\times_ST$$\nwhich is both an open immersion [def-weil-open-immersion] and a closed immersion [def-weil-closed-immersion], and whose special-fibre homomorphism\n$$j_k:D_k(M)\\longrightarrow G\\times_S\\operatorname{Spec}k$$\nis an isomorphism. No condition on the other geometric fibres, no torsion-order constancy, and no commutativity, smoothness or Noetherian hypothesis is imposed. The algebraically closed field $\\Omega$ need not be algebraic over its image-point residue field.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Theorem B.4.1 proof, printed pp.298-299: the claim constructing an open and closed diagonalizable subgroup lifting the entire special fibre, without the torsion-order hypothesis; the opening of B.4 and Lemma B.1.5 supply field-extension independence and separably closed splitting. WANTED locally as literature/conrad-reductive-group-schemes.pdf; read online. No Stacks tag states this group-scheme lifting result."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fibre-product",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "def-weil-residue-field",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=G\\times_ST$. By [lem-weil-pbc-affine-morphism-permanence], [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence], $H$ is affine, flat and finitely presented over $C$. The local structure theorem in the statement makes $C$ strictly henselian, so $k$ is separably closed. The pointed-map theorem [lem-weil-pbc-strict-henselization-pointed-map] gives a surjection from $C$ to the relative separable closure inside $\\Omega$ with kernel $\\mathfrak m_C$. Thus it gives an embedding $k\\hookrightarrow\\Omega$ and the factorization of the original geometric point through the closed point of $T$ (the pointed-neighbourhood maps have exactly the required composites). Consequently $(H_k)_\\Omega\\simeq G_\\Omega$. Apply [lem-sfb-geometric-diagonalizable-separably-closed-split] to obtain a finitely generated group $M$ and an isomorphism $a:D_k(M)\\simeq H_k$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-pointed-map",
+    "lem-sfb-geometric-diagonalizable-separably-closed-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Theorem B.4.1, printed pp.298-299, strict-local lifting claim; completion is Theorem B.3.2(2)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-henselian-flat-group-split-fibre-model] to $C,H,M,a$. Obtain a local map $A\\to C$ with $A$ a henselian local Noetherian G-ring, $H_A=\\operatorname{Spec}B$ with $B$ flat and finitely presented over $A$, an identification $(H_A)_C\\simeq H$, and an isomorphism $a_A:D_{k_A}(M)\\simeq(H_A)_{k_A}$ inducing $a$. The residue map $k_A\\to k$ is a field embedding because the ring map is local. No assertion about any other fibre is taken from the model theorem.",
+   "uses": [
+    "lem-sfb-henselian-flat-group-split-fibre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, lemma-henselian-local-limit-G-rings, finite-Hopf-data refinement; Tag 04AI, limits.tex, flatness descent."
+   }
+  },
+  {
+   "text": "Set $\\widehat A=\\varprojlim_rA/\\mathfrak m_A^r$. The completion is Noetherian by [lem-weil-pbc-adic-completion-noetherian], local with maximal ideal $\\mathfrak m_A\\widehat A$ and residue field $k_A$ by [lem-weil-pbc-local-completion-local-ring], and complete by [lem-weil-pbc-module-completion-complete] applied to the module $A$. Here the powers of the extended maximal ideal are exactly the extended powers, so module completeness is the required maximal-ideal completeness. By [lem-weil-pbc-fibre-product-affine-spectra] the completed group has coordinate ring $\\widehat A\\otimes_AB$, which is flat by [lem-weil-pbc-flat-module-base-change] and finitely presented by [lem-weil-pbc-finite-presentation-base-change-composition]. Its residue fibre is identified with $D_{k_A}(M)$ by $a_A$. Apply [lem-sfb-complete-local-diagonalizable-fibre-hom-lift] over $\\widehat A$ to $a_A$. It supplies a group homomorphism $\\widehat j:D_{\\widehat A}(M)\\to(H_A)_{\\widehat A}$ that is both open and closed and reduces to $a_A$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-sfb-complete-local-diagonalizable-fibre-hom-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Theorem B.4.1, printed pp.298-299, strict-local lifting claim; completion is Theorem B.3.2(2)."
+   }
+  },
+  {
+   "text": "The structure theorem [lem-sbc-finitely-generated-abelian-group-structure] writes $M$ as a finite product of copies of $\\mathbf Z$ and finite cyclic groups. Accordingly $A[M]$ has a finite presentation with invertible variables for free generators and relations $t_i^{n_i}=1$ for cyclic generators: introduce $u_i$ and $t_i u_i-1$ to express inverses. Thus $D_A(M)$ and $H_A$ satisfy the two finite-presentation hypotheses of [lem-sfb-henselian-clopen-group-hom-approximation]. Apply it to the given $\\widehat j$, using that $A$ is henselian and a G-ring. Obtain a group homomorphism $j_A:D_A(M)\\to H_A$ that is open and closed and whose residue map is exactly $a_A$. Only the residue map, not equality with $\\widehat j$ on the completion, is needed.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-sfb-henselian-clopen-group-hom-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0AH5, lemma-henselian-pair; finite-polynomial-certificate consequence with approximation order one."
+   }
+  },
+  {
+   "text": "Base change $j_A$ along $A\\to C$ and compose with $(H_A)_C\\simeq H$. The resulting $j:D_C(M)\\to H$ is a group homomorphism because base change preserves each group diagram. The identification of its source is the group-algebra map $C\\otimes_AA[M]\\simeq C[M]$, $c\\otimes e_m\\mapsto ce_m$, whose inverse sends $\\sum c_me_m$ to $\\sum c_m\\otimes e_m$; these maps preserve every Hopf operation on the basis. The affine fibre-product identification is [lem-weil-pbc-fibre-product-affine-spectra]. Openness and closedness persist by [lem-weil-pbc-open-immersion-base-change] and [lem-weil-pbc-closed-immersion-base-change]. On the special fibre, associativity of these displayed scalar extensions identifies $j_k$ with $(a_A)_k$ followed by the model isomorphism, hence with $a$ by Step 2. It is therefore an isomorphism, as required.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Theorem B.4.1, printed pp.298-299, strict-local lifting claim; completion is Theorem B.3.2(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "lem-sfb-geometric-diagonalizable-separably-closed-split",
+  "lem-sfb-henselian-flat-group-split-fibre-model",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sfb-henselian-clopen-group-hom-approximation",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad B.4.1, pp.298-299, completion-based strict-local clopen lifting claim. Agent replaces the later all-fibres power-map descent by henselian G-ring approximation (Stacks 0A41 and 0AH5), so the special-fibre-only hypothesis is respected."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lifting a diagonalizable special fibre as an open and closed subgroup over a strictly henselian local ring",
+   "results": "{\"t\": \"2026-10-24T11:42:16Z\", \"tool\": \"leansearch\", \"query\": \"Lifting a diagonalizable special fibre as an open and closed subgroup over a strictly henselian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ULift.sub\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"HenselianLocalRing\", \"OpenSubgroup.hasCoeSubgroup\", \"instHenselianRingMaximalIdeal\", \"Subgroup.instCanLiftSetCoeAndMemOfNatForallForallForallForallHMulForallForallInv\", \"HenselianLocalRing.mk\", \"Field.henselian\"], \"digest\": \"f4b5ba24ea977b61\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general affine morphism properties, Henselian rings, ring lifting, valuation groups, Hopf spectra or linear algebra; none constructs a diagonalizable clopen subgroup or proves the fibral criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T11:42:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general affine morphism properties, Henselian rings, ring lifting, valuation groups, Hopf spectra or linear algebra; none constructs a diagonalizable clopen subgroup or proves the fibral criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a strictly henselian local ring a flat affine group scheme of finite presentation with diagonalizable special fibre has an open and closed split diagonalizable subgroup with the same special fibre",
+   "results": "{\"t\": \"2026-10-24T11:42:17Z\", \"tool\": \"leanfinder\", \"query\": \"Over a strictly henselian local ring a flat affine group scheme of finite presentation with diagonalizable special fibre has an open and closed split diagonalizable subgroup with the same special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"HenselianLocalRing\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"Algebra.FormallySmooth.of_split\"], \"digest\": \"936b58e36e8847f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general affine morphism properties, Henselian rings, ring lifting, valuation groups, Hopf spectra or linear algebra; none constructs a diagonalizable clopen subgroup or proves the fibral criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T11:42:51Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|HopfAlgebra\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"776676081ffd6e9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general affine morphism properties, Henselian rings, ring lifting, valuation groups, Hopf spectra or linear algebra; none constructs a diagonalizable clopen subgroup or proves the fibral criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraizing a split diagonalizable special fibre to an open and closed subgroup of a flat affine finitely presented group over a henselian ring with separably closed residue field",
+   "results": "{\"t\": \"2026-10-24T11:43:15Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraizing a split diagonalizable special fibre to an open and closed subgroup of a flat affine finitely presented group over a henselian ring with separably closed residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.inertiaSubgroup\", \"arithFrobAt\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"HenselianLocalRing.TFAE\", \"Field.henselian\", \"IsArithFrobAt.mul_inv_mem_inertia\"], \"digest\": \"adcf3b665e661505\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general affine morphism properties, Henselian rings, ring lifting, valuation groups, Hopf spectra or linear algebra; none constructs a diagonalizable clopen subgroup or proves the fibral criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|multiplicative.type|strictly.*henselian.*group",
+   "results": "{\"t\": \"2026-10-24T11:45:00Z\", \"tool\": \"grep\", \"query\": \"diagonalizable|multiplicative.type|strictly.*henselian.*group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"Mathlib/Algebra/Group/TypeTags/Hom.lean\"], \"digest\": \"1b8b4155aba585a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern general affine morphism properties, Henselian rings, ring lifting, valuation groups, Hopf spectra or linear algebra; none constructs a diagonalizable clopen subgroup or proves the fibral criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|strictly.*henselian.*group",
+   "results": "{\"t\": \"2026-10-24T12:08:07Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|strictly.*henselian.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a diagonalizable special fibre to an open and closed subgroup of a flat affine group scheme",
+   "results": "{\"t\": \"2026-10-24T12:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Lifting a diagonalizable special fibre to an open and closed subgroup of a flat affine group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ULift.sub\", \"Subgroup.instCanLiftSetCoeAndMemOfNatForallForallForallForallHMulForallForallInv\", \"OpenSubgroup\", \"OpenSubgroup.hasCoeSubgroup\", \"OpenNormalSubgroup\", \"OpenSubgroup.toSubgroup_injective\", \"OpenSubgroup.toSubgroup\", \"SubmodulesBasis.openAddSubgroup\"], \"digest\": \"6dc0372d9df27a1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T12:08:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented affine group over a strictly henselian local ring with diagonalizable special fibre contains a clopen diagonalizable subgroup",
+   "results": "{\"t\": \"2026-10-24T12:08:08Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented affine group over a strictly henselian local ring with diagonalizable special fibre contains a clopen diagonalizable subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"Field.henselian\", \"HenselianRing\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"720bc2d18bc9f574\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-type-fibral-criterion",
+  "date": "2026-10-24",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes. Supporting input: Corollary B.4.2(1), printed pp.299-300; this is descent for fpqc-local forms, not assertion (2) concerning extensions. Fibral criterion used in Corollary B.4.2(1): Theorem B.4.1 and the field-extension convention in the opening paragraph of B.4, printed pp.297-299. Specific subargument: Theorem B.4.1 proof, p.298, the claim constructing j before torsion orders are used; p.299 descends the completed lift on finite torsion. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-multiplicative-type-fibral-criterion",
+    "lem-sfb-multiplicative-type-fpqc-descent",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-local-diagonalizable-clopen-lift",
+  "worker": "stage1",
+  "summary": "Q46 splits the strict-local lifting claim via a split special fibre, a henselian local G-ring model, the existing complete-local Hom lifting theorem, finite-polynomial clopen approximation, and scalar extension. Three statement-only prerequisites. Statement unchanged. Avoids the all-fibres power-map assertion later in the printed proof, which is unavailable under this item's weaker hypotheses. No Lean attachment found.",
+  "blueprint": "Supporting input to the strict-local clopen lifting prerequisite of Conrad Theorem B.4.1, printed pp.298-299; downstream of latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3). No imported blueprint ancestor exists, as confirmed by blueprint_refs.py ancestor. The latest blueprint direct-images proof (3) is only the inherited remote ancestor; no alternative six-functor route is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-pointed-map",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-sbc-finitely-generated-abelian-group-structure",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme, strict-local, completion or scalar-extension tool used for this existing downstream group-scheme prerequisite; no unit proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-28e5eb5f2",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-28e5eb5f2 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full, and the statement of every cited node. The item's statement and stmt_deps are unchanged from the base dagsnaps; on the base it was unsplit with no proof, so there is no old proof to compare step by step. No cycle among the 18 proof_deps (script check). Step 1: the affine, flat and qcqs-permanence base-change lemmas give H=G_T affine, flat and fp over C. strict-henselization-local-structure makes C strictly henselian, so k is separably closed. strict-henselization-pointed-map gives psi:C->K inside Omega with kernel m_C and the factorization of the geometric point, so (H_k)_Omega is G_Omega and new node 1 applies. Step 2: the model node applies because C is henselian. Step 3: the completion of A is Noetherian, local with residue field k_A, and complete for its maximal ideal by module-completion-complete, since the powers of m times the completion are the powers of the extended ideal. The completed coordinate ring is flat and fp. The existing complete-local-diagonalizable-fibre-hom-lift theorem (Conrad B.3.2) then gives the clopen lift of a_A; its hypotheses (B finitely generated and flat, special fibre of multiplicative type) hold. Step 4: A[M] is fp by the Mathlib leaf for the structure theorem plus a Laurent presentation. New node 3 applies because A is a henselian local G-ring, and Noetherian is part of the G-ring definition. Step 5: open and closed immersions are stable under arbitrary base change, and the special fibre is b_k composed with (a_A)_k, which is a. New nodes: (1) separably-closed split is true: spread the isomorphism out and specialize to the algebraic closure, then Conrad B.1.5 gives a finite separable splitting extension, which is trivial over a separably closed field. Checked on mu_p in characteristic p, N_0=0, and a transcendental algebraically closed extension. (2) The henselian G-ring model is true: Stacks 0A41 (more-algebra.tex line 12674) writes C as a filtered colimit of henselizations A_i^h; the Hopf data and a with its inverse descend by finite presentation, and flatness by 04AI. (3) Clopen approximation is true: Stacks 0AH5 (smoothing.tex line 3389), case (2) with N=1, applied to a finite certificate made of the idempotent, the generator images, the inverse map and the ideal-membership witnesses; agreement modulo m preserves the residue map. Checked on the identity and on an empty source. No duplicates: I checked henselian-approximation-alg-hom, the pbc flat-descent nodes, geometrically-diagonal-coalgebra, diagonalizable-geometric-criteria and torus-etale-trivialization. No new node restates the item. Batch-5 check: lem-sfb-complete-local-diagonalizable-fibre-hom-lift reaches lem-trf-fppf-covering-base-change, which is Stacks 021O(3) and a Mathlib leaf (Precoverage.mem_coverings_of_isPullback). It and the other trf nodes in that closure are general algebraic-space and fppf foundations, not steps of the trace formula or of Poincare duality proofs, so I accept the citation. The generic tool_uses in the split_report are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalDiagonalizableClopenLift",
+  "declaration": "AlgebraicGeometry.strictLocalDiagonalizableClopenLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalDiagonalizableClopenLift.lean",
+  "statement": "theorem strictLocalDiagonalizableClopenLift {S : Scheme.{u}} (G : Grp (Over S)) [IsAffineHom G.X.hom] [Flat G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [QuasiSeparated G.X.hom] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barS : Spec (.of Ω) ⟶ S) (M₀ : Type u) [AddCommGroup M₀] [AddGroup.FG M₀] (hgeom : Nonempty ((Over.pullback barS).mapGrp.obj G ≅ ringDiagonalizableGroup Ω M₀)) : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), ∃ j : ringDiagonalizableGroup (Scheme.strictHenselizationRing barS) M ⟶ (Over.pullback (Scheme.strictHenselizationStructuralMap barS)).mapGrp.obj G, IsOpenImmersion j.hom.hom.left ∧ IsClosedImmersion j.hom.hom.left ∧ IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (@IsLocalRing.residue (Scheme.strictHenselizationRing barS) _ (Classical.choose (strictHenselizationLocalStructure barS)))))).map j.hom.hom).left)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88640d02d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean + stmt_deps (+def-weil-pbc-strict-henselization-structural-map, landed 2026-10-17 before base); statement/proof/proof_deps unchanged; lean.statement verbatim in file. Clauses checked: G : Grp (Over S) with IsAffineHom/Flat/LFP/QC/QS (fp per scheme-conventions, not stronger); geometric point Ω:Type u IsAlgClosed; hgeom = Nonempty iso in Grp(Over Spec Ω) to ringDiagonalizableGroup Ω M₀ (hopfSpec of AddMonoidAlgebra, real body); C = strictHenselizationRing, T→S = strictHenselizationStructuralMap; k = IsLocalRing.residue with locality proof from strictHenselizationLocalStructure (Prop; matches landed instance); ∃ fg M, ∃ Grp hom j with IsOpenImmersion ∧ IsClosedImmersion of j.hom.hom.left and IsIso of its pullback along Spec k→Spec C (canonically D_k(M)→G×_S Spec k). Edge cases: trivial M, p-torsion, noncommutative G, transcendental Ω, empty S; single universe u not vacuous. No defs, sorry only, docstrings with source+blueprint and all 5 proof steps; imports exist; no duplicate owner found; report has Worker report and Second reading by Q26 sections. No compile needed (no file changed)."
+ }
+}

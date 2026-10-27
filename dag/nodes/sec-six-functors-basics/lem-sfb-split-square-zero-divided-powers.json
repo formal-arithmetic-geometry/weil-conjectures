@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-split-square-zero-divided-powers",
+ "kind": "statement",
+ "title": "Divided powers on the split square-zero extension of a divided-power ideal",
+ "statement": "Let $C$ be a commutative ring, $I\\subset C$ an ideal with an ordinary divided-power structure $\\gamma$ [def-sfb-ordinary-divided-power-structure], and $M$ a $C$-module. Give $B=C\\oplus M$ multiplication $(c,u)(d,v)=(cd,cv+du)$ and unit $(1,0)$, and put $K=I\\oplus M\\subset B$. There is a unique ordinary divided-power structure $\\delta$ on $K$ such that $\\delta_n(x,0)=(\\gamma_n(x),0)$ for $x\\in I$ and $\\delta_n(0,u)=0$ for $u\\in M$, $n>1$. For $n\\geq1$ it is given by $\\delta_n(x,u)=(\\gamma_n(x),\\gamma_{n-1}(x)u)$. Here an ordinary divided-power structure $\\eta$ on an ideal $L$ of a commutative ring $D$ means maps $\\eta_n:L\\to L$ for $n\\geq1$, with $\\eta_0(z)=1$, satisfying $\\eta_1(z)=z$, $\\eta_n(dz)=d^n\\eta_n(z)$, $\\eta_n(z+w)=\\sum_{i=0}^n\\eta_i(z)\\eta_{n-i}(w)$, $\\eta_n(z)\\eta_m(z)=\\binom{n+m}{n}\\eta_{n+m}(z)$ and $\\eta_n(\\eta_m(z))=\\frac{(nm)!}{n!(m!)^n}\\eta_{nm}(z)$ for $d\\in D$, $z,w\\in L$, and $n,m\\geq1$. The factorial quotients are integer coefficients, not divisions in $D$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PH (example-adjoining-odd), ordinary even-part calculation underlying the displayed formula; expanded split square-zero argument using the axioms of Tag 07GP (lemma-check-on-generators)."
+ },
+ "stmt_deps": [
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use the five axioms of [def-sfb-ordinary-divided-power-structure]. The stated multiplication is associative: the second component of either triple product is $cdw+cev+deu$ for factors $(c,u),(d,v),(e,w)$; commutativity and the unit follow immediately. Moreover $K=I\\oplus M$ is an ideal since $cx\\in I$. Define $\\delta_0(z)=(1,0)$ and, for $n\\geq1$, $\\delta_n(x,u)=(\\gamma_n(x),\\gamma_{n-1}(x)u)$. Its first component lies in $I$, so it maps $K$ into $K$. We have $\\delta_1(x,u)=(x,u)$.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  },
+  {
+   "text": "Two elementary consequences of the cited ordinary axioms will be used explicitly. For every $r\\geq1$, scalar compatibility with scalar zero gives $\\gamma_r(0)=0$. Also $x\\gamma_{r-1}(x)=r\\gamma_r(x)$: for $r=1$ this is $x\\cdot1=x$, and for $r>1$ it is the product axiom with indices $1,r-1$. Thus the constructed operations restrict to $(\\gamma_n(x),0)$ on $(x,0)$, and $\\delta_n(0,u)=0$ for $n>1$, while $\\delta_1(0,u)=(0,u)$.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  },
+  {
+   "text": "Check the scalar axiom for every scalar $b=(c,v)\\in B$, not just for $c\\in C$. For $n=1$ it is immediate. For $n\\geq2$, induction using the multiplication in $B$ gives $b^n=(c^n,nc^{n-1}v)$. For $z=(x,u)$, the first components of $\\delta_n(bz)$ and $b^n\\delta_n(z)$ are $c^n\\gamma_n(x)$. Their second components are respectively $c^n\\gamma_{n-1}(x)u+c^{n-1}x\\gamma_{n-1}(x)v$ and $c^n\\gamma_{n-1}(x)u+nc^{n-1}\\gamma_n(x)v$; these agree by $x\\gamma_{n-1}(x)=n\\gamma_n(x)$, established in step 2. No cancellation in $C$ or $M$ is used.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  },
+  {
+   "text": "Check addition for $z=(x,u)$ and $w=(y,v)$ in $K$. At $n=0$ both sides are $(1,0)$. For $n\\geq1$, the first component of $\\sum_{i=0}^n\\delta_i(z)\\delta_{n-i}(w)$ is $\\sum_{i=0}^n\\gamma_i(x)\\gamma_{n-i}(y)=\\gamma_n(x+y)$. The coefficient of $u$ in its second component is $\\sum_{i=1}^n\\gamma_{i-1}(x)\\gamma_{n-i}(y)=\\gamma_{n-1}(x+y)$, and the coefficient of $v$ is $\\sum_{i=0}^{n-1}\\gamma_i(x)\\gamma_{n-i-1}(y)=\\gamma_{n-1}(x+y)$. These are precisely the two components of $\\delta_n(z+w)$, by the addition axiom for $\\gamma$ (including its tautological degree-zero case).",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  },
+  {
+   "text": "For positive $n,m$, the first component of $\\delta_n(z)\\delta_m(z)$ is $\\binom{n+m}{n}\\gamma_{n+m}(x)$. The second is $(\\gamma_n(x)\\gamma_{m-1}(x)+\\gamma_{n-1}(x)\\gamma_m(x))u$. Apply the product axiom for $\\gamma$, using $\\gamma_0=1$ when an index is zero, to rewrite it as $\\bigl(\\binom{n+m-1}{n}+\\binom{n+m-1}{n-1}\\bigr)\\gamma_{n+m-1}(x)u$. Pascal's identity makes this $\\binom{n+m}{n}\\gamma_{n+m-1}(x)u$, as required for the product axiom for $\\delta$. Pascal's identity here is the integer identity obtained by classifying $n$-element subsets according to whether they contain a fixed element.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  },
+  {
+   "text": "Write $q(a,b)=(ab)!/(a!(b!)^a)$ for the integer coefficient in the iteration axiom, with positive $a,b$. Iteration with outer index $n=1$ is immediate. For $n\\geq2$ and $m\\geq1$, the first component of $\\delta_n(\\delta_m(x,u))$ is $q(n,m)\\gamma_{nm}(x)$. Its second is $\\gamma_{n-1}(\\gamma_m(x))\\gamma_{m-1}(x)u=q(n-1,m)\\gamma_{(n-1)m}(x)\\gamma_{m-1}(x)u$. The product axiom, with its degree-zero case if $m=1$, makes this $q(n-1,m)\\binom{nm-1}{m-1}\\gamma_{nm-1}(x)u$. The integer coefficient equals $q(n,m)$: multiplying the factorial expressions gives $\\frac{(nm-1)!}{(n-1)!(m!)^{n-1}(m-1)!}=\\frac{(nm)!}{n!(m!)^n}$. This equality is verified in $\\mathbf Q$ between integers before mapping them into $C$; it does not divide by any element of $C$. This proves the iteration axiom and completes all five axioms for $\\delta$.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  },
+  {
+   "text": "For uniqueness let $\\eta$ be any ordinary structure with the required restrictions. Its degree-one map is the identity. For $n\\geq2$ apply its addition axiom to $(x,u)=(x,0)+(0,u)$. Since $\\eta_j(0,u)=0$ for $j>1$, only the terms with $j=0,1$ survive, yielding $\\eta_n(x,u)=(\\gamma_n(x),0)+(\\gamma_{n-1}(x),0)(0,u)=(\\gamma_n(x),\\gamma_{n-1}(x)u)$. The zeroth map is fixed by convention. Thus every operation agrees with the constructed one, proving uniqueness.",
+   "uses": [
+    "def-sfb-ordinary-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PH (example-adjoining-odd), displayed extension formula; Tag 07GL (definition-divided-powers), axioms (1)-(5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ordinary-divided-power-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Expansion of Tag 09PH (example-adjoining-odd) into a direct verification of all five ordinary axioms in Tag 07GL; no generator-check lemma is invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Divided powers on a split square zero extension C direct sum M extend a divided power ideal I by gamma n of x m equals gamma n x and gamma n minus one x times m",
+   "results": {
+    "t": "2026-10-23T23:56:45Z",
+    "tool": "leanfinder",
+    "query": "Divided powers on a split square zero extension C direct sum M extend a divided power ideal I by gamma n of x m equals gamma n x and gamma n minus one x times m",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.Quotient.OfSurjective.dpow",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.RatAlgebra.dpow",
+     "DividedPowers.OfSquareZero.dpow_of_two_le",
+     "DividedPowers.dpow",
+     "DividedPowers.dpow_add",
+     "DividedPowers.dpow_comp_from_gens"
+    ],
+    "digest": "577a0095c67763d5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: OfSquareZero.dividedPowers (RatAlgebra.lean:200) gives divided powers only on the square-zero ideal M, not on I plus M, where I need not be nilpotent. Quotient.OfSurjective, IsSubDPIdeal and rational constructions do not extend an arbitrary given structure across this module extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"TrivSqZeroExt\"",
+   "results": {
+    "t": "2026-10-23T23:56:46Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"TrivSqZeroExt\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: OfSquareZero.dividedPowers (RatAlgebra.lean:200) gives divided powers only on the square-zero ideal M, not on I plus M, where I need not be nilpotent. Quotient.OfSurjective, IsSubDPIdeal and rational constructions do not extend an arbitrary given structure across this module extension."
+  },
+  {
+   "tool": "grep",
+   "query": "TrivSqZeroExt|square.zero.*extend|extend.*square.zero",
+   "results": {
+    "t": "2026-10-23T23:56:46Z",
+    "tool": "grep",
+    "query": "TrivSqZeroExt|square.zero.*extend|extend.*square.zero",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: OfSquareZero.dividedPowers (RatAlgebra.lean:200) gives divided powers only on the square-zero ideal M, not on I plus M, where I need not be nilpotent. Quotient.OfSurjective, IsSubDPIdeal and rational constructions do not extend an arbitrary given structure across this module extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical divided powers on I direct sum M in the trivial square zero extension of a ring by a module",
+   "results": {
+    "t": "2026-10-23T23:56:46Z",
+    "tool": "leansearch",
+    "query": "Canonical divided powers on I direct sum M in the trivial square zero extension of a ring by a module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TrivSqZeroExt",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "dividedPowersBot",
+     "instInhabitedDividedPowersBotIdeal",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.mk",
+     "DividedPowers.recOn"
+    ],
+    "digest": "919548aa2376006b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: OfSquareZero.dividedPowers (RatAlgebra.lean:200) gives divided powers only on the square-zero ideal M, not on I plus M, where I need not be nilpotent. Quotient.OfSurjective, IsSubDPIdeal and rational constructions do not extend an arbitrary given structure across this module extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending divided powers from an ideal to its split square zero module extension using the addition formula",
+   "results": {
+    "t": "2026-10-23T23:56:48Z",
+    "tool": "leanfinder",
+    "query": "Extending divided powers from an ideal to its split square zero module extension using the addition formula",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.OfInvertibleFactorial.dpow_add",
+     "DividedPowers.Quotient.OfSurjective.dpow",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.OfInvertibleFactorial.dividedPowers",
+     "DividedPowers.Quotient.dpow",
+     "DividedPowers.OfSquareZero.dpow_of_two_le"
+    ],
+    "digest": "5567416f9b2aefe9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: OfSquareZero.dividedPowers (RatAlgebra.lean:200) gives divided powers only on the square-zero ideal M, not on I plus M, where I need not be nilpotent. Quotient.OfSurjective, IsSubDPIdeal and rational constructions do not extend an arbitrary given structure across this module extension."
+  },
+  {
+   "tool": "grep",
+   "query": "TrivSqZeroExt|square.zero|OfSquareZero",
+   "results": {
+    "t": "2026-10-24T00:33:25Z",
+    "tool": "grep",
+    "query": "TrivSqZeroExt|square.zero|OfSquareZero",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean",
+     "Mathlib/RingTheory/DividedPowers/RatAlgebra.lean"
+    ],
+    "digest": "2dbb6dddd48c735b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/DividedPowers/RatAlgebra.lean:194-207; OfSquareZero.dividedPowers requires the whole ideal to have square zero, unlike I plus M here. RatAlgebra requires a rational algebra; IsSubDPIdeal and quotient constructions do not construct this extension for arbitrary I and M."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"TrivSqZeroExt\"",
+   "results": {
+    "t": "2026-10-24T00:33:26Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"TrivSqZeroExt\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/DividedPowers/RatAlgebra.lean:194-207; OfSquareZero.dividedPowers requires the whole ideal to have square zero, unlike I plus M here. RatAlgebra requires a rational algebra; IsSubDPIdeal and quotient constructions do not construct this extension for arbitrary I and M."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending a divided power ideal I to I direct sum M in the split square zero ring extension C direct sum M",
+   "results": {
+    "t": "2026-10-24T00:33:26Z",
+    "tool": "leansearch",
+    "query": "Extending a divided power ideal I to I direct sum M in the split square zero ring extension C direct sum M",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.IsDPMorphism.recOn",
+     "DividedPowers.mk",
+     "DividedPowers.ofInjective",
+     "DividedPowers.recOn",
+     "PadicInt.dividedPowers_of_injective"
+    ],
+    "digest": "20ea8dc3d13d38bd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/DividedPowers/RatAlgebra.lean:194-207; OfSquareZero.dividedPowers requires the whole ideal to have square zero, unlike I plus M here. RatAlgebra requires a rational algebra; IsSubDPIdeal and quotient constructions do not construct this extension for arbitrary I and M."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided powers on an ideal extended to a trivial square zero extension by a module, with formula gamma n (x,u) = (gamma n x, gamma (n-1) x times u)",
+   "results": {
+    "t": "2026-10-24T00:33:27Z",
+    "tool": "leanfinder",
+    "query": "Divided powers on an ideal extended to a trivial square zero extension by a module, with formula gamma n (x,u) = (gamma n x, gamma (n-1) x times u)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.Quotient.OfSurjective.dpow",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.Quotient.dpow"
+    ],
+    "digest": "c45ceb9153224137"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/DividedPowers/RatAlgebra.lean:194-207; OfSquareZero.dividedPowers requires the whole ideal to have square zero, unlike I plus M here. RatAlgebra requires a rational algebra; IsSubDPIdeal and quotient constructions do not construct this extension for arbitrary I and M."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A divided power structure extends from a commutative ring ideal to the direct sum with any module using first order Taylor expansion",
+   "results": {
+    "t": "2026-10-24T00:34:00Z",
+    "tool": "leanfinder",
+    "query": "A divided power structure extends from a commutative ring ideal to the direct sum with any module using first order Taylor expansion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers.RatAlgebra.dpow",
+     "DividedPowers.Quotient.OfSurjective.dpow"
+    ],
+    "digest": "f9830036db238602"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/DividedPowers/RatAlgebra.lean:194-207; OfSquareZero.dividedPowers requires the whole ideal to have square zero, unlike I plus M here. RatAlgebra requires a rational algebra; IsSubDPIdeal and quotient constructions do not construct this extension for arbitrary I and M."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-divided-power-variable-adjunction",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: the adjunctions of exterior and divided-power variables of Stacks 09PH/09PI and 0F4I that define the polynomial graded divided-power algebras of the item; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3). Supporting argument: Tag 09PH (example-adjoining-odd), ordinary even-part calculation underlying the displayed formula; expanded split square-zero argument using the axioms of Tag 07GP (lemma-check-on-generators).",
+   "via": [
+    "lem-sfb-divided-power-variable-adjunction",
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-square-zero-divided-powers",
+  "worker": "stage1",
+  "summary": "Verified the unchanged formula and uniqueness over any commutative ring and any module by seven explicit algebraic steps. In particular checked arbitrary B-scalars, both module coefficients in addition, Pascal coefficients for multiplication, and the integer factorial identity for iteration. No new lemma is needed; no torsion-freeness, invertibility or annihilation condition is assumed. Searched project Lean, the DAG, current blueprint, and Mathlib.",
+  "blueprint": "Realizes the existing provenance: the ordinary even-part calculation for the odd variable adjunction (Stacks 09PH), supporting the Tate-resolution/local-complete-intersection branch below direct-image step (3) of det-thm-sf-ctf-stability-direct-images. Latest blueprint proof read in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. blueprint_refs ancestor returns None; retained the existing null ancestor and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-dca12dad7",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-dca12dad7 (reviewer sub-agent of L); spot-checked: I read the item and every step in full; all seven steps check by hand. The statement is byte-identical to the one Q50 created, the only citation (def-sfb-ordinary-divided-power-structure) matches the five axioms of Stacks 07GL (dpa.tex lines 36-47), and the formula matches Stacks 09PH (example-adjoining-odd). The statement fits the odd case of the parent lem-sfb-divided-power-variable-adjunction (C = even part, M = A_odd times T). Step 3 handles arbitrary scalars (c,v), using x·gamma_{n-1}(x) = n·gamma_n(x) from step 2. Step 4 handles the addition axiom, including both module coefficients and the degree-zero end terms. Step 5 is the product axiom via Pascal's identity. In step 6 I verified the integer identity q(n-1,m)·C(nm-1,m-1) = q(n,m) for the iteration axiom. Step 7 proves uniqueness by splitting (x,u) = (x,0) + (0,u). Edge cases: M=0, I=0, and C=F_2[t]/(t^2) with M=C, where delta_2(t,1) = (0,t) shows that no condition I·M = 0 is hidden. Every step is a short expansion from the cited definition, so the elementary flags hold under delivery-errors B1/B2, and there are no new nodes. No duplicate exists in the DAG; the nearest Mathlib result, DividedPowers.OfSquareZero, needs the whole ideal to square to zero, so it does not match. No SGA source is used. Advisory only: the item-level source.place, inherited from Q50, attributes the axioms to Tag 07GP, but they are in 07GL; proof_origin is correct."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitSquareZeroDividedPowers",
+  "declaration": "DividedPowers.SplitSquareZero.exists_unique",
+  "declarations": [
+   "DividedPowers.SplitSquareZero.rightModule",
+   "DividedPowers.SplitSquareZero.centralScalar",
+   "DividedPowers.SplitSquareZero.exists_unique"
+  ],
+  "file": "lean/Sheaf/RingTheory/SplitSquareZeroDividedPowers.lean",
+  "statement": "theorem exists_unique (C : Type u) [CommRing C] (I : Ideal C) (γ : DividedPowers I) (M : Type v) [AddCommGroup M] [Module C M] : ∃ δ : DividedPowers (I.comap (TrivSqZeroExt.fstHom C C M).toRingHom), (∀ (n : ℕ) (x : C), x ∈ I → δ.dpow n (TrivSqZeroExt.inl x) = TrivSqZeroExt.inl (γ.dpow n x)) ∧ (∀ (n : ℕ) (u : M), 1 < n → δ.dpow n (TrivSqZeroExt.inr u) = 0) ∧ (∀ (n : ℕ) (x : C) (u : M), 0 < n → x ∈ I → δ.dpow n (TrivSqZeroExt.inl x + TrivSqZeroExt.inr u) = TrivSqZeroExt.inl (γ.dpow n x) + TrivSqZeroExt.inr (γ.dpow (n - 1) x • u)) ∧ ∀ η : DividedPowers (I.comap (TrivSqZeroExt.fstHom C C M).toRingHom), (∀ (n : ℕ) (x : C), x ∈ I → η.dpow n (TrivSqZeroExt.inl x) = TrivSqZeroExt.inl (γ.dpow n x)) → (∀ (n : ℕ) (u : M), 1 < n → η.dpow n (TrivSqZeroExt.inr u) = 0) → η = δ",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The ideal I direct-sum M is the comap under Mathlib's first projection. The two local instances construct the canonical right action from the given left module action; they impose no extra bimodule hypothesis. The existential includes the formula, and the final uniqueness clause quantifies over every structure satisfying just the two restrictions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d1bb6fba",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read the node, the stmt_dep (Mathlib DividedPowers, Basic.lean:78-92), the module and the report (Worker report and Second reading by Q12 present). lean.statement is verbatim in the file. The ring is TrivSqZeroExt C M, with a canonical right action given by Module.compHom and IsCentralScalar rfl (real data, project idiom). K is the comap of I under fstHom. All clauses match: both restrictions, the formula for n≥1, uniqueness over every η satisfying only the two restrictions. Checked by hand: the scalar axiom for B-scalars, addition, Pascal, the iteration identity q(n-1,m)C(nm-1,m-1)=q(n,m), uniqueness. Edge cases n=0/1, M=0, I=0, I=⊤, char p, torsion are covered with no extra hypotheses. No duplicate (OfSquareZero needs the whole ideal to square to zero). No hollow definitions, only the theorem proof is sorry, docstrings OK. No compile, as no file changed."
+ }
+}

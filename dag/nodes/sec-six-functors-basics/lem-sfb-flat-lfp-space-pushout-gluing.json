@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-flat-lfp-space-pushout-gluing",
+ "kind": "statement",
+ "title": "Gluing flat locally finitely presented algebraic spaces over an infinitesimal pushout",
+ "statement": "Algebraic spaces and their morphisms are as in [def-trf-algebraic-space], in the universes of [def-weil-size-convention]; their fibre products are [lem-trf-space-fibre-products-etale-covers]. The topology on an algebraic space is the quotient topology from a surjective etale scheme atlas. Flatness and local finite presentation are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $T\\to T\\prime$ be a thickening of schemes (a closed immersion inducing a homeomorphism) and $T\\to S$ an affine scheme morphism (inverse images of affine opens are affine). Let $P=S\\amalg_TT\\prime$ be the scheme pushout, meaning the universal compatible pair of maps from $S$ and $T\\prime$. For a scheme $B$, let $\\mathcal F(B)$ be the category of flat locally finitely presented algebraic spaces over $B$, with all $B$-morphisms as arrows. The base-change functor $$\\mathcal F(P)\\longrightarrow\\mathcal F(S)\\times_{\\mathcal F(T)}\\mathcal F(T\\prime)$$ is an equivalence of categories. The category on the right has objects $(X,Y,\\phi)$ with $X\\in\\mathcal F(S)$, $Y\\in\\mathcal F(T\\prime)$, and $\\phi:X\\times_ST\\cong Y\\times_{T\\prime}T$; arrows are pairs of morphisms compatible with $\\phi$. In particular it induces a bijection on every Hom set and every such triple is isomorphic to the restrictions of an object of $\\mathcal F(P)$. There is no properness, quasi-compactness, finite-order, or fibre-dimension hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (3) and final equivalence; Tag 07SY, lemma-pushout-along-thickening-schemes, for scheme pushouts."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-proper-curve-moduli",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-scheme-affine-thickening-pushout], the specified scheme pushout $P$ has $S\\to P$ a thickening and $T\\simeq S\\times_P T^+$. Here and below $T^+$ denotes the scheme called $T\\prime$ in the statement. Base change gives the restriction functor $F$. For every scheme mapping to the target of a morphism of algebraic spaces, its pullback is an algebraic space by [lem-trf-space-fibre-products-etale-covers]; hence these morphisms are representable by algebraic spaces. The base-change and composition assertions of [lem-sfb-stack-chartwise-smooth-etale-calculus] therefore apply, with spaces regarded as stacks, and show that both restrictions of a flat locally finitely presented $P$-space are flat and locally finitely presented. Fibre-product functoriality [lem-trf-space-fibre-products-etale-covers] gives the specified identification over $T$ and its action on arrows. Thus $F$ takes values in exactly the category in the statement.",
+   "uses": [
+    "lem-sfb-scheme-affine-thickening-pushout",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, setup; scheme pushout Tag 07RT, lemma-pushout-along-thickening in more-morphisms.tex."
+   }
+  },
+  {
+   "text": "For a triple $a=(X,Y,\\phi)$ set $U=X\\times_S T$, identified with $Y\\times_{T^+}T$ by $\\phi$. By [lem-sfb-space-affine-thickening-pushout], form $G(a)=Z=X\\amalg_U Y$ with its map to $P$. The same statement gives canonical isomorphisms $X\\simeq Z\\times_P S$ and $Y\\simeq Z\\times_P T^+$ with the prescribed compatibility, hence a canonical isomorphism $\\eta_a:a\\simeq F(Z)$ in the unrestricted category of triples. A compatible pair of arrows between triples induces a unique map between their pushouts. Uniqueness on the two pieces proves preservation of identities and composition and naturality of $\\eta$. This defines $G$ on morphisms; flatness of its output is proved next.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tags 07VY and 07W0, pushout functor and its canonical recovery maps."
+   }
+  },
+  {
+   "text": "Choose compatible surjective etale scheme covers $X_1\\to X$ and $Y_1\\to Y$ as in [lem-sfb-space-pushout-compatible-etale-charts]. Put $U_1=X_1\\times_S T$ and $Z_1=X_1\\amalg_{U_1}Y_1$. The cited statement makes $Z_1\\to Z$ a surjective etale scheme atlas. By [lem-sfb-stack-chartwise-smooth-etale-calculus], the composites $X_1\\to S$ and $Y_1\\to T^+$ are flat and locally finitely presented: their first factors are etale, hence smooth, flat and locally finitely presented, and their second factors have these properties by hypothesis. Apply [lem-sfb-scheme-pushout-flat-patching] to these scheme morphisms over the original scheme span. It gives that $Z_1\\to P$ is flat and locally finitely presented. By the chartwise meanings of these properties stipulated in the statement, using [def-weil-flat-morphism] and [def-sbc-locally-finite-presentation] on this atlas, $Z\\to P$ has both properties. Consequently $G$ restricts to the required categories and $\\eta$ gives essential surjectivity.",
+   "uses": [
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-scheme-pushout-flat-patching",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, proof of (1)-(5), specialized to (3), using 07W2 and scheme lemma 07RX."
+   }
+  },
+  {
+   "text": "Let $W\\to P$ be flat and locally finitely presented, put $D_W=G(F(W))$, and let $\\epsilon_W:D_W\\to W$ be induced by the two projections from its pieces. Choose a surjective etale scheme atlas $W_1\\to W$ [def-trf-algebraic-space]. Its composite to $P$ is flat by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The two restrictions $(W_1)_S$ and $(W_1)_{T^+}$ are schemes, since $S,T^+,P,W_1$ are schemes, and form compatible surjective etale covers of $W_S,W_{T^+}$ by [lem-trf-space-chartwise-etale-permanence] and [lem-trf-space-fibre-products-etale-covers]. By [lem-sfb-space-pushout-compatible-etale-charts] their scheme pushout $Q$ has a representable surjective etale map $q:Q\\to D_W$. By the flat-scheme assertion of [lem-sfb-scheme-pushout-flat-patching], its canonical map $Q\\to W_1$ is an isomorphism. The composite $\\epsilon_Wq$ is therefore etale: it equals the isomorphism $Q\\to W_1$ followed by the atlas $W_1\\to W$. The equality follows by restricting both maps to $(W_1)_S$ and $(W_1)_{T^+}$ and using the pushout universal property.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-scheme-pushout-flat-patching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, flat counit proof, choosing W_1 and applying the scheme counit of Tag 07RX."
+   }
+  },
+  {
+   "text": "Here are the source-locality details for $\\epsilon_W$, using only the scheme descent statement [lem-trf-etale-descent-through-source-cover]. For any representable etale scheme chart $C\\to D_W$, put $R=C\\times_{D_W}Q$. Since $q:Q\\to D_W$ is representable surjective etale and $C$ is a scheme, its pullback $R$ is a scheme and $R\\to C$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. The map $R\\to W$ is representable etale: $R\\to Q$ is etale and $Q\\to W$ was etale in the previous step, so use [lem-trf-space-chartwise-etale-permanence]. For any scheme $L\\to W$, the schemes $R_L=R\\times_W L$ and $C_L=C\\times_W L$ exist because the diagonal of $W$ is representable [def-trf-algebraic-space]. The map $R_L\\to C_L$ is the pullback of $q$, hence surjective etale, and $R_L\\to L$ is etale because $R\\to W$ is representable etale. Apply the cited scheme descent with $(T,X,Y)=(L,C_L,R_L)$ to obtain that $C_L\\to L$ is etale. Since $L$ is arbitrary, $C\\to W$ is representable etale. Since $C$ is arbitrary, $\\epsilon_W$ is chartwise etale by [lem-trf-space-chartwise-etale-permanence]. This argument imposes no quasi-compactness on the atlas.",
+   "uses": [
+    "lem-trf-etale-descent-through-source-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, application of Properties of Spaces Tag 03FS, lemma-etale-local; expanded using the scheme-source descent lemma rather than creating a new locality node."
+   }
+  },
+  {
+   "text": "Write $a:W_S\\to D_W$ for the inclusion of the first pushout piece. The recovery statement [lem-sfb-space-affine-thickening-pushout] says that $(a,\\operatorname{pr}_S):W_S\\to D_W\\times_P S$ is an isomorphism. Since $\\epsilon_W a:W_S\\to W$ is the original projection, $F(\\epsilon_W)_S$ composed with this isomorphism is $\\operatorname{id}_{W_S}$. Hence $F(\\epsilon_W)_S$ is an isomorphism. Fibre-product associativity [lem-trf-space-fibre-products-etale-covers] identifies $D_W\\times_W W_S$ with $D_W\\times_P S$: a pair $(d,(w,s))$ with $\\epsilon_W(d)=w$ goes to $(d,s)$, with inverse $(d,s)\\mapsto(d,(\\epsilon_W(d),s))$. Under this identification the projection to $W_S$ is precisely $F(\\epsilon_W)_S$, so the base change of the actual counit to $W_S$ is an isomorphism. The map $W_S\\hookrightarrow W$ is a thickening, as the pullback of $S\\hookrightarrow P$ [lem-sfb-scheme-affine-thickening-pushout]. On scheme charts its ideal is the extended nil ideal of $S$: an element is a finite sum $\\sum_{i=1}^r b_i a_i$ with $a_i^{n_i}=0$, whose power of degree $1+\\sum_i(n_i-1)$ vanishes since every monomial contains some $a_i^{n_i}$. Thus this closed immersion still induces a homeomorphism without a uniform nilpotence bound. Apply [lem-sfb-space-etale-thickening-detects-iso] to the chartwise etale map $\\epsilon_W$ from Step 5 and this thickening. The counit is an isomorphism; uniqueness on its two pushout pieces makes it natural in $W$.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-scheme-affine-thickening-pushout",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-etale-thickening-detects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, final isomorphism argument; spaces-more-morphisms.tex Tag 05ZH applied to W_S inside W."
+   }
+  },
+  {
+   "text": "For the inverse on Hom sets, write $W_i=W\\times_P i$ for $i=S,T^+$, with projections $p_i:W_i\\to W$, inclusions $a_i:W_i\\to D_W$, and analogous primed notation. Given a compatible pair $u_i:W_i\\to W'_i$, the pushout universal property [lem-sfb-space-affine-thickening-pushout] supplies a unique $g:D_W\\to W'$ satisfying $g a_i=p'_i u_i$. Put $h=g\\epsilon_W^{-1}$. Since $\\epsilon_W a_i=p_i$, we have $h p_i=p'_i u_i$. Together with the fixed maps to $i$, this equality says that the base change of $h$ is $u_i$, by the fibre-product universal property. Conversely, for any $h:W\\to W'$ with these restrictions, $(h\\epsilon_W)a_i=h p_i=p'_i u_i$ for both pieces, so $h\\epsilon_W=g$ by pushout uniqueness and $h=g\\epsilon_W^{-1}$. Thus $F$ is bijective on every Hom set. This also verifies naturality of the counit: $\\epsilon_{W'}G(F(h))=h\\epsilon_W$ because the two composites agree on both pieces. Together with Steps 2--3 this proves the asserted equivalence for all morphisms, without any additional properness, quasi-compactness, finite-order or fibre-dimension hypothesis.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, concluding equivalence; the Hom-set inverse is the pushout universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-affine-thickening-pushout",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-affine-thickening-pushout",
+  "lem-sfb-space-pushout-compatible-etale-charts",
+  "lem-sfb-scheme-pushout-flat-patching",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-sfb-space-etale-thickening-detects-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, proof of (3) and flat counit; compatible charts from 07W0 and 07W2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented algebraic spaces glue over pushouts along a thickening and an affine morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"Given gluing data $ D $ for schemes, the glued scheme is defined as the colimit (multicoequalizer) of the diagram constructed from $ D $, which identifies overlapping open subsets via specified isomor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"The function maps the inductive type representing gluing data for schemes (involving open subsets and isomorphisms) to the categorical gluing data structure for the category of schemes, enabling the u\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 →\\n          [Small.{u, u_1} 𝒰.I₀] → [Quiver.IsThin 𝒰.I₀] → Alg\", \"doc\": \"Given a scheme $ S $ with an open cover $ \\\\mathcal{U} $, where the zeroth component $ \\\\mathcal{U}_0 $ forms a small, thin category equipped with a locally directed structure, this is the colimit of th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"doc\": \"The function converts gluing data for schemes into gluing data for locally ringed spaces by applying the forgetful functor that maps each scheme to its underlying locally ringed space structure. This \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between flat algebraic spaces over an infinitesimal pushout and compatible pairs",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {A B C : CommRingCat} (f : A ⟶ B) (g : A ⟶ C),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map (CategoryTheory.Limits.pushout.inl f g))\\n    (AlgebraicGeometry.Spec.map (CategoryTheory.Limits.pushout.inr f g)) (AlgebraicGeometry.Spec.map f)\\n    (AlgebraicGeometry.Spec.map g)\", \"doc\": \"For any ring homomorphisms $f : A → B$ and $g : A → C$ in the category of commutative rings, the square formed by the induced morphisms $\\\\operatorname{Spec}(\\\\text{pushout}(f,g)) → \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {A B C P : CommRingCat} (f : A ⟶ B) (g : A ⟶ C) (inl : B ⟶ P) (inr : C ⟶ P),\\n  CategoryTheory.IsPushout f g inl inr →\\n    CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map inl) (AlgebraicGeometry.Spec.map inr)\\n      (AlgebraicGeometry.Spec.map f) (AlgebraicGeometry.Spec.map g)\", \"doc\": \"Given a pushout square in the category of commutative rings with morphisms $ f: A → B $, $ g: A → C $, $ inl: B → P $, and $ inr: C → P $, the contravariant Spec functor transforms this into a pullbac\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"pushout\"",
+   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"Algebra.codRestrictEqLocusPushoutCocone.bijective_of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.TensorProduct.IncludeLeftSubRight\", \"type\": \" (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Function.Bijective ⇑(Algebra.codRestrictEqLocusPushoutCocone R S)\", \"doc\": \"If `S` is a faithfully flat `R`-algebra, `codRestrictEqLocusPushoutCocone` is bijective.\"}\n  {\"name\": \"CommRingCat.isLimitForkPushoutSelfOfFaithfullyFlat\", \"module\": \"Mathlib.Algebra.Category.Ring.EqualizerPushout\", \"type\": \" {R S : CommRingCat} (f : R ⟶ S) (hf : (CommRingCat.Hom.hom f).FaithfullyFlat) : CategoryTheory.Limits.IsLimit (CategoryTheory.Limits.Fork.ofι f ⋯)\", \"doc\": \"If `f : R ⟶ S` is a faithfully flat map in `CommRingCat`, then the fork\\n```\\n        S ---inl---> pushout f f\\nR --f-->\\n        S ---inr---> pushout f f\\n```\\nis an equalizer diagram.\"}\n  {\"name\": \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isIso_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y S T : AlgebraicGeometry.Scheme} {f : T ⟶ S} {g : Y ⟶ X} {iX : X ⟶ S} {iY : Y ⟶ T} (H : CategoryTheory.IsPullback g iY iX f) {US : S.Opens} {UT : T.Opens} {UX : X.Opens} (hUST : UT ≤ (TopologicalSpace.Opens.map f.base).obj US) (hUSX : UX ≤ (TopologicalSpace.Opens.map iX.base).obj US) {UY : Y.Op\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*pushout|pushout.*flat|AlgebraicSpace",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"206\", \"text\": \"    (hf : Function.Injective f) (hg : g.hom.Flat) : Function.Injective (pushout.inr f g) := by\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"214\", \"text\": \"    (hf : f.hom.Flat) (hg : Function.Injective g) : Function.Injective (pushout.inl f g) := by\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\", \"line\": \"183\", \"text\": \"/-- If `S` is a faithfully flat `R`-algebra, `codRestrictEqLocusPushoutCocone` is bijective. -/\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\", \"line\": \"184\", \"text\": \"lemma codRestrictEqLocusPushoutCocone.bijective_of_faithfullyFlat [Module.FaithfullyFlat R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean\", \"line\": \"188\", \"text\": \"  · exact codRestrictEqLocusPushoutCocone.surjective_of_isEffective _ _ (.of_faithfullyFlat R S)\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"152\", \"text\": \"    [Algebra.IsPushout R S R' S'] [Module.Flat R S] [Module.Finite R S] (x : PrimeSpectrum R') :\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"180\", \"text\": \"    {inl : S ⟶ P} {inr : T ⟶ P} (h : CategoryTheory.IsPushout f g inl inr) (hf : f.hom.Flat)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"104\", \"text\": \"  have := mono_pushoutSection_of_isCompact_of_flat_right\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"209\", \"text\": \"2. `mono_pushoutSection_of_isCompact_of_flat_right`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"211\", \"text\": \"3. `isIso_pushoutSection_of_isQuasiSeparated_of_flat_right`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"213\", \"text\": \"4. `mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"216\", \"text\": \"5. `isIso_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"440\", \"text\": \"lemma mono_pushoutSection_of_isCompact_of_flat_right [Flat f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"69\", \"text\": \"  rw [CommRingCat.finrank_eq_of_isPushout this f.flat_appTop f.finite_appTop (T.isoSpec.hom t),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"619\", \"text\": \"  have := isIso_pushoutSection_of_isQuasiSeparated_of_flat_right\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"628\", \"text\": \"  have := isIso_pushoutSection_of_isQuasiSeparated_of_flat_right\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Limits.lean\", \"line\": \"213\", \"text\": \"/-- `Under.pushout f` preserves finite limits if `f` is flat. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"line\": \"43\", \"text\": \"noncomputable def isLimitForkPushoutSelfOfFaithfullyFlat (hf : f.hom.FaithfullyFlat) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"line\": \"55\", \"text\": \"        (Algebra.codRestrictEqLocusPushoutCocone.bijective_of_faithfullyFlat R S))\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/EqualizerPushout.lean\", \"line\": \"70\", \"text\": \"  isLimit := isLimitForkPushoutSelfOfFaithfullyFlat f hf\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat locally finitely presented algebraic spaces glue over pushouts along a thickening and an affine morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": IsIso 𝒰.fromGlued\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{motive : AlgebraicGeometry.LocallyRingedSpace.GlueData → Sort u} →\\n  (t : AlgebraicGeometry.LocallyRingedSpace.GlueData) →\\n    ((toGlueData : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace) →\\n        (f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersio\", \"doc\": \"A case analysis principle for gluing data structures of locally ringed spaces, which allows defining functions on such gluing data by specifying their behavior on the underlying category-theoretic glu\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-infinitesimal-pushout",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3.",
+   "via": [
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-lfp-space-pushout-gluing",
+  "worker": "stage1",
+  "summary": "Followed Tag 07W3 through compatible scheme pushout charts and scheme flat patching. Separated geometric pushout recovery from flat reconstruction, expanded etale source descent using existing scheme descent, and wrote the inverse on Hom sets. Four statement-only geometric supporting nodes; no statement correction and no added hypotheses. Corrected the overstrong identification of a chosen atlas with the whole base change in the source proof; report.md gives a counterexample. Repair of the 2026-10-22 return at 297df9fa36f: rebased by the delivery tool onto current origin/sheaf-dag, reread all existing cited statements, preserved the approved route and four statement-only supporting nodes, and made the scheme pullback in source descent and the nil-ideal exponent explicit. Current return c20163aa827: reread all current citations (none changed since that head); expanded Step 6 to identify the base change of the actual counit, with explicit inverse to the associativity comparison and its compatibility with the recovery isomorphism. Latest return 86accde2caa: compared that exact returned head and current DAG; all nine existing cited nodes are unchanged. Rechecked their statements and all four supporting inputs, and expanded the Hom-set inverse calculation and counit naturality on the two pushout pieces. The delivery tool refreshes the base on current origin/sheaf-dag. Repair of returned head 44701b938e7: compared the exact returned objects with the retained files and current DAG; re-read both changed cited statements (scheme affine-thickening pushout and stack chartwise calculus), whose used conclusions persist. Updated the two scheme-pushout verbatim excerpts to the current prime notation, strengthened the calculus excerpts, and made representability by algebraic spaces explicit in Step 1. Rechecked four new same-tag comparisons with the current first-order ringed-description and square-zero-realization nodes; these do not state either retained arbitrary-thickening input.",
+  "blueprint": "Realizes the inherited ILO/de Jong/nodal-curve deformation prerequisite, specifically the underlying flat locally finitely presented gluing input from Tag 07W3 used by Tag 0D1J and the curve RS-star argument 0D56. No unit-level route changed; ancestor lookup returns None for this inherited chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products and pullback of etale covering families, used throughout the atlas reduction; it supplies notions and covering calculus, not a replacement unit route."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic scheme etale source descent, used on C_L and R_L to expand 03FS without creating an elementary new node; no node of this unit states that scheme descent."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic chartwise etale composition and base change for algebraic spaces; supplies the atlas base changes and tests in the flat counit, not another proof route for the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-fbccf6ed2",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-fbccf6ed2 (reviewer sub-agent of L); spot-checked: Fifth push of this split. Heads 297df9fa, c20163aa, 86accde2 and 44701b93 were each approved with no fixes. The first three landings were refused because the side completion was not promoted to live. The fourth was refused because the statement of the cited node lem-sfb-scheme-affine-thickening-pushout had changed since the reviewed delivery. That change only rewrites T\\prime as T' (live still writes T\\prime). Its content is the same: arbitrary thickening, T→S affine, j a thickening and T≅S×_P T'. Steps 1 and 6 use exactly that. The other cited statements are identical in the snapshot, live and side-live. Live still has the item unsplit, none of the four new ids exists there, and there is no repair note. Against 44701b93 the new nodes are identical and the item changed only in proof and split_report. I read Stacks spaces-pushouts.tex 1100-1310 (the 07W0 cubes and the full 07W3 proof), more-morphisms 07RX and spaces-more-morphisms 05ZH. The report's source error is confirmed: 07W3's claim 'base change of G to Y'_1 is G_1' fails for an arbitrary V_1, as the two-point example shows, and the proof never uses it. All seven steps hold. S1: restrictions are flat and lfp by the calculus node, with representability via fibre products. S2: G and η come from the 07VX/07SY/07W0 recovery isomorphisms. S3: flat-lfp is tested on the chart Z_1→Z using 07RX(3). S4: Q≅W_1 by the flat counit, so ε_W q is the atlas. S5: 036W descent applies with (L,C_L,R_L), and these hypotheses match the cited statement. S6: the counit restricted to S is an isomorphism via (a,pr_S) and associativity. The nil exponent 1+Σ(n_i−1) is correct; I tested it on k[x_n]/(x_n^{n+1}). The 05ZH detection node then applies. S7: the inverse on Hom sets comes from pushout uniqueness and is genuinely elementary. All four new nodes are true, self-contained and smaller than the item. They are 07RX for schemes; 07VX+07SY+07W0 recovery; the 07W0 chart construction (Y_1 is a scheme by lifting across the thickening, and its squares are cartesian); and 05ZH detection. I searched the DAG by tags 07RX, 07RV, 05ZH, 05ZS, 07W0, 07W2, 07VX, 07SY and 07W3 and found no duplicates. Batch 5: def-trf-algebraic-space is a general definition. The trf nodes for fibre products, chartwise permanence and source descent are foundations whose closures reach no trace-formula or Poincaré-duality theorem. The calculus node reaches the trf chapter only through these and generic projective-bundle nodes. I accept them and the three declared tool_uses. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatLfpSpacePushoutGluing",
+  "declaration": "AlgebraicGeometry.FlatLfpSpaceFamily.infinitesimalPushout",
+  "declarations": [
+   "AlgebraicGeometry.FlatLfpSpaceFamily",
+   "AlgebraicGeometry.FlatLfpSpaceFamily.presentation",
+   "AlgebraicGeometry.FlatLfpSpaceFamily.HasPullback",
+   "AlgebraicGeometry.FlatLfpSpaceFamily.infinitesimalPushout"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatLfpSpacePushoutGluing.lean",
+  "statement": "theorem infinitesimalPushout {B : Scheme.{u}} {T S T' P : Over B} (a : T ⟶ S) (i : T ⟶ T') (j : S ⟶ P) (b : T' ⟶ P) (hi : IsThickening i.left) [IsAffineHom a.left] (h : a ≫ j = i ≫ b) (hp : IsPushout a.left i.left j.left b.left) : (HasPullback j ∧ HasPullback b ∧ HasPullback a ∧ HasPullback i) ∧ (∀ (X : FlatLfpSpaceFamily S) (Y : FlatLfpSpaceFamily T') (φ : (Over.pullback (yoneda.map a)).obj X.presentation ≅ (Over.pullback (yoneda.map i)).obj Y.presentation), ∃ (W : FlatLfpSpaceFamily P) (s : (Over.pullback (yoneda.map j)).obj W.presentation ≅ X.presentation) (t : (Over.pullback (yoneda.map b)).obj W.presentation ≅ Y.presentation), (((Over.pullbackComp (yoneda.map a) (yoneda.map j)).symm ≪≫ eqToIso (congrArg (fun f : yoneda.obj T ⟶ yoneda.obj P ↦ Over.pullback f) (by rw [← Functor.map_comp, ← Functor.map_comp, h])) ≪≫ Over.pullbackComp (yoneda.map i) (yoneda.map b)).app W.presentation) ≪≫ (Over.pullback (yoneda.map i)).mapIso t = (Over.pullback (yoneda.map a)).mapIso s ≪≫ φ) ∧ (∀ (X Y : FlatLfpSpaceFamily P) (s : (Over.pullback (yoneda.map j)).obj X.presentation ⟶ (Over.pullback (yoneda.map j)).obj Y.presentation) (t : (Over.pullback (yoneda.map b)).obj X.presentation ⟶ (Over.pullback (yoneda.map b)).obj Y.presentation), (Over.pullback (yoneda.map a)).map s ≫ (((Over.pullbackComp (yoneda.map a) (yoneda.map j)).symm ≪≫ eqToIso (congrArg (fun f : yoneda.obj T ⟶ yoneda.obj P ↦ Over.pullback f) (by rw [← Functor.map_comp, ← Functor.map_comp, h])) ≪≫ Over.pullbackComp (yoneda.map i) (yoneda.map b)).app Y.presentation).hom = (((Over.pullbackComp (yoneda.map a) (yoneda.map j)).symm ≪≫ eqToIso (congrArg (fun f : yoneda.obj T ⟶ yoneda.obj P ↦ Over.pullback f) (by rw [← Functor.map_comp, ← Functor.map_comp, h])) ≪≫ Over.pullbackComp (yoneda.map i) (yoneda.map b)).app X.presentation).hom ≫ (Over.pullback (yoneda.map i)).map t → ∃! f : X.presentation ⟶ Y.presentation, (Over.pullback (yoneda.map j)).map f = s ∧ (Over.pullback (yoneda.map b)).map f = t)",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Equivalence expressed by preservation of objects under the canonical presheaf pullback functors, essential surjectivity with the specified overlap isomorphism, and unique lifting of every compatible pair of arbitrary slice morphisms. The three helper declarations spell out F(B), its projection in the presheaf slice, and closure under pullback; no properness, quasi-compactness, dimension bound or finite-order hypothesis. Reuses the recorded MapToSchemeIsLocally chart test and IsThickening."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cd33311f",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read node, 07W3(3)+final flat equivalence, all 7 stmt_dep records and exact decls (AlgebraicSpace, MapToSchemeIsLocally, IsThickening=closed immersion∧surjective, IsAffineHom, Over.pullback/pullbackComp, IsPushout). Node diff vs side-live: only lean record + stmt_deps adding the landed owners def-sfb-proper-curve-moduli and def-sbc-first-order-thickening, both used. lean.statement verbatim in file. Statement: HasPullback for j,b,a,i as a conclusion; essential surjectivity keeps the given phi via the canonical associativity/square comparison (same as landed restrictionComparison); unique lift of arbitrary compatible slice maps. Hypotheses no stronger than the node (no nilpotence order, h follows from hp, B relative convention as in Stacks). Edge cases: empty, identity, non-qc, infinite nil ideal, single universe u. No H4 duplicate (MapIsFlat is space-to-space). Docstrings with source/blueprint, 7-step proof plan, only the theorem sorried, imports exist. Not recompiled (no change); worker's server compile clean."
+ }
+}

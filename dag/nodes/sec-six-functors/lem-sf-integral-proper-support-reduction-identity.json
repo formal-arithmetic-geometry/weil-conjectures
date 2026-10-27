@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-integral-proper-support-reduction-identity",
+ "kind": "lemma",
+ "title": "One-input proper support reduction identity",
+ "statement": "Fix D,C,E,n,d,hl,o,z as in [def-fix-six-functor-datum] and the coordinates of [def-sf-integral-proper-projection-coordinates]. For a proper f:X→Y and a constructible integral K on X, supportReduction at the identity-open compactification, followed by system direct image of openIdentity on reduction K, equals reduction of the datum properIdentity component at K, followed by the mate-defined direct comparison at K. There is one input, and neither tensor nor projection occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; proper-coincidence and identity-open unit normalization"
+ },
+ "stmt_deps": [
+  "def-sf-integral-proper-projection-coordinates",
+  "def-fix-six-functor-datum"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved support-reduction normalization to make supportReduction invertible. Its composite with proper image of the canonical open identity is therefore an isomorphism from the reduction of the integral support value. Postcompose both candidate maps with its inverse. They are now maps between reductions of the same constructible integral object.",
+   "uses": [
+    "lem-sf-integral-support-reduction-normalization",
+    "def-sf-integral-proper-projection-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  },
+  {
+   "text": "Reconstruction is the inverse of the actual reduction-limit unit on constructible objects. Unit and counit naturality and the triangle identities give an explicit fully faithful reduction functor on this subcategory. Lift maps between reductions using that unit, limit of the map and inverse reconstruction. Equality after every system evaluation implies equality of every finite reduction of these lifts by naturality of reductionEvaluation. The integral joint-faithfulness theorem then identifies the lifts and hence the system maps.",
+   "uses": [
+    "def-sf-integral-proper-projection-coordinates",
+    "lem-sf-integral-reductions-jointly-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  },
+  {
+   "text": "Paste the integral-to-finite coefficient adjunction comparison with finiteDirectAdjunctionNormalization. The existing unary pullback-evaluation theorem gives the square of left-adjoint comparisons. Transpose under the finite adjunction. Naturality and the two supplied counit equations give the square of right-adjoint comparisons, identifying evaluation of direct with the specified finite direct comparison.",
+   "uses": [
+    "lem-sf-integral-projection-pull-evaluation",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  },
+  {
+   "text": "Finite evaluation of canonical identity-open cancellation gives the proper identity evaluation square. Paste this with the proved finite coordinates of the support adjunct. The coefficient properIdentity equation and finiteProperNormalization give the same endpoint composite for reduction of the integral proper identity followed by the direct mate. Cancel the finite endpoint isomorphism. Apply the detection result to the maps after postcomposition with the inverse support/open isomorphism, and cancel that inverse.",
+   "uses": [
+    "lem-sf-system-identity-open-evaluation",
+    "lem-sf-integral-support-adjunct-finite-coordinates",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-support-reduction-normalization",
+  "def-sf-integral-proper-projection-coordinates",
+  "lem-sf-integral-reductions-jointly-faithful",
+  "lem-sf-integral-projection-pull-evaluation",
+  "def-sf-operation-stages",
+  "lem-sf-system-identity-open-evaluation",
+  "lem-sf-integral-support-adjunct-finite-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence",
+  "note": "P7: finite counit mate calculation and explicit fully faithful reduction; no evaluation-faithfulness assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor compatible natural comparison of left adjoints induces a commuting projection formula square for their right adjoint mates",
+   "results": "Eight general adjunction-square and Kan extension results, including homEquiv_naturality_left_square_iff. No coefficient-system normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the project rightAdjointProjectionMap_mate for the categorical assembly; the concrete coefficient normalizations require separate computations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "Twelve general adjunction declarations, including Adjunction.id, ofIsLeftAdjoint and ofIsRightAdjoint. No specialized coefficient normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing adjunction API, retaining the actual coefficient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|leftAdjointUniq|rightAdjointProjectionMap",
+   "results": "Twenty-five Mathlib hits, including mateEquiv_counit and homEquiv_leftAdjointUniq_hom_app. Local source also supplies rightAdjointProjectionMap_mate in the adopted library.",
+   "date": "2026-10-27",
+   "verdict": "The mate and uniqueness APIs handle categorical glue, but do not assert the concrete tensor or identity-open coefficient normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperProjectionSystemNormalization",
+  "date": "2026-10-27",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility of the specified maps under successive coefficient reductions; proper-coincidence and identity-open unit normalization",
+   "via": [
+    "lem-sf-integral-proper-projection-system-normalization",
+    "lem-sf-integral-projection-reduction-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProperSupportReductionIdentity",
+  "file": "lean/Sheaf/Paper/IntegralProperSupportReductionIdentity.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.integralProperSupportReductionIdentity",
+  "statement": "theorem integralProperSupportReductionIdentity\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E]\n    {n : ℕ} {hn : 1 ≤ n} (d : SixFunctorOperationDatum D C E n hn)\n    (hl : IsUnit (C.l : D.k)) (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left) :\n    supportReduction D C E d.higher hl o z f (.ofIsProper f.hom.left) K ≫\n        (Operations.push C.l E o f.hom.left).map\n          ((openIdentity o z X.obj.left).hom.app ((reduce X).obj K)) =\n      (reduce Y).map ((d.higher.integral.properIdentity f).hom.app K) ≫\n        (direct d.higher hl o z f).app K",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261027T021414-L-2766948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261027T050632-L-247548",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

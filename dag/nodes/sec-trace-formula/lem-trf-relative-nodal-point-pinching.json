@@ -23,9 +23,186 @@
   "def-pc-reduced-scheme",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First verify the affine-neighbourhood hypothesis for pinching. The multipointed-curve hypothesis makes $X$ finitely presented over $k$, hence of finite type. Thus $X$ is Noetherian; every quasi-compact open is Noetherian and has finitely many irreducible components. Fix $f\\in F$ and an affine open $V\\subseteq S$ containing $b(f)$. The open $X_V=s^{-1}V$ is separated over $k$: its diagonal over $V$ is the restriction of the closed diagonal of $s$, and $X_V\\times_VX_V$ is closed in $X_V\\times_kX_V$ since the diagonal of the affine $k$-scheme $V$ is closed (on rings, multiplication is surjective). Since $\\operatorname{Spec}k$ is affine, this also makes $X_V$ separated as a scheme. All points of $a^{-1}(f)$ lie in $X_V$. Their local rings are Noetherian of dimension at most one: chains in their spectra are chains of specializations in the one-dimensional scheme $X$. Apply the common-affine-neighbourhood node to $X_V$ and this finite set. This does not assert that $X$ is separated over $k$.",
+   "uses": [
+    "def-trf-multipointed-curve",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-trf-codimension-one-points-affine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09NN (proposition-finite-set-of-points-of-codim-1-in-affine), applied over an affine open of S"
+   }
+  },
+  {
+   "text": "The map $a$ is integral: on finite discrete spectra it is induced by the diagonal maps $k\\to k^r$, $r=1$ or $2$, which are finite modules. The Ferrand node now gives $Y=X\\amalg_E F$, the cartesian square, the closed immersion $F\\hookrightarrow Y$, the complement isomorphism, and the quotient topology. Since $a$ is surjective, every point of $F$ is already the image of a point of $X$, so $v$ is surjective. Its affine charts have rings $P=A\\times_C B$, where $B=k^m$, $C=k^r$, $A\\twoheadrightarrow C$ is evaluation on the indicated points of $E$, and $B\\hookrightarrow C$ repeats coordinates according to $a$. The pushout property supplies $t$ from $s$ and $b$, and supplies the compatible structural map $Y\\to\\operatorname{Spec}k$.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0E25 (proposition-pushout-along-closed-immersion-and-integral) and 0ECI (situation-pushout-along-closed-immersion-and-integral)"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq Y$ be any affine open. The morphisms $v$, $F\\to Y$ and $E\\to Y$ are affine, so evaluating the structure-sheaf formula of the Ferrand node on $W$ gives $\\mathcal O_Y(W)=P=A\\times_CB$, where $A=\\mathcal O_X(v^{-1}W)$, $B=k^m$ and $C=k^r$ are the rings of the affine schemes $v^{-1}W$, $F\\cap W$ and $E\\cap v^{-1}W$. Here $A\\to C$ is onto by the closed-immersion definition, and $B\\to C$ repeats coordinates according to $a$; this is the form of the charts in the preceding step, now for every affine open. On $W$ the map $P\\to A$ is injective, because $B\\to C$ is injective, and $A/P\\cong C/B$ as $P$-modules. This is a finite-dimensional $k$-vector space. Choose lifts $h_1,\\ldots,h_d\\in A$ of a $k$-basis of $C/B$. For any $h\\in A$, subtract a $k$-linear combination of the $h_i$ to leave an element of $P$. As the scalar copy of $k$ lies in $P$, the finite list $1,h_1,\\ldots,h_d$ generates $A$ as a $P$-module. As $W$ was an arbitrary affine open, the affine morphism $v$ is finite by the definition. The cartesian square from the preceding step gives $v^{-1}(F)=E$ with its scheme structure.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-closed-immersion",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, structure sheaf as fibre product evaluated on an arbitrary affine open; explicit finite-module argument"
+   }
+  },
+  {
+   "text": "Apply the finite-type clause of the Ferrand node over $\\operatorname{Spec}k$: this base is Noetherian, and $X,E,F$ are of finite type over $k$. Hence $Y/k$ is locally of finite type. The quotient of $X\\amalg F$ is quasi-compact: pull an open cover back to this finite union of quasi-compact schemes, take a finite subcover there, and use surjectivity. Thus $Y/k$ is of finite type and is Noetherian. Each finite-type affine $k$-algebra is finitely presented by the Noetherian finite-presentation node. Its Noetherian topological space makes $Y$ quasi-separated, so these local presentations and quasi-compactness show that $Y/k$ is finitely presented.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E27 (lemma-pushout-finite-type); algebra.tex Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation)"
+   }
+  },
+  {
+   "text": "The map $b:F\\to S$ is separated by the affine-source separatedness node, since $F$ is affine. The map $s$ is separated by properness. Apply the relative separatedness clause of the Ferrand node with base $S$ to obtain separatedness of $t$. Since $Y/k$ is locally of finite type, clause (a) of finite-type cancellation applied to $Y\\to S\\to\\operatorname{Spec}k$ makes $t$ locally of finite type, without a finiteness condition on $S$. Finally $s$ is universally closed and $v$ is surjective. Apply the universally-closed-image node to $s=t v$; with the two properties just verified its last sentence says precisely that $t$ is proper.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-ferrand-scheme-pushout",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E26 (lemma-pushout-separated); morphisms.tex Tags 01T8 (lemma-permanence-finite-type), 03GN (lemma-image-proper-is-proper)"
+   }
+  },
+  {
+   "text": "For a singleton fibre $a^{-1}(f)=\\{e\\}$, remove from $Y$ the images of all the other points of $F$. These are closed, and the Ferrand node identifies the restricted square as the pushout of $X$ with the other pinched fibres removed and $\\operatorname{Spec}k$ along $\\operatorname{Spec}k$, whose latter map is an isomorphism. Its pushout is therefore just that open part of $X$. This proves the neighbourhood-isomorphism assertion and shows this point stays smooth.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, compatibility with restriction to opens and the pushout universal property"
+   }
+  },
+  {
+   "text": "Fix now $f\\in F$. Remove the other points of $F$ and choose an affine neighbourhood $W=\\operatorname{Spec}P$ of $f$ in this open. Write $v^{-1}W=\\operatorname{Spec}A$ and $a^{-1}(f)=\\{e_1,\\ldots,e_r\\}$, so $P=A\\times_{k^r}k$. All these rings are finite $P$-modules: $A$ by step 3, $k$ as a quotient, and $k^r$ as a finite sum of that quotient. Also $P$ is Noetherian by step 4. Complete at the maximal ideal of $f$ the exact sequence $0\\to P\\to A\\oplus k\\to k^r\\to0$, whose last arrow is evaluation minus the diagonal and is onto because $A\\to k^r$ is onto. Exactness of finite-module completion identifies $\\widehat{P_f}$ with the kernel after completion. The finite-extension-completion node identifies the completion of $A$ with $\\prod_i\\widehat{\\mathcal O}_{X,e_i}$, compatibly with the induced local maps; the completions of $k$ and $k^r$ are themselves, since the maximal ideal of $f$ acts by zero. The maps to $k^r$ are their residue maps. Componentwise multiplication therefore gives the ring isomorphism $\\widehat{\\mathcal O}_{Y,f}\\cong (\\prod_i\\widehat{\\mathcal O}_{X,e_i})\\times_{k^r}k$. This is the calculation of 0E36, now with every completion comparison cited.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E36 (lemma-complete-local-ring-pushout), proof; algebra.tex Tags 00MB (lemma-completion-flat), 07N9 (lemma-completion-finite-extension)"
+   }
+  },
+  {
+   "text": "For each pinched point $e_i$, take a smooth open neighbourhood in $X$. The smooth-over-field regularity node makes its local ring $R_i$ regular and Noetherian. It has dimension one: it has dimension at most one by the specialization-chain argument of step 1, and a generic point of an irreducible component containing the closed point $e_i$ is distinct from $e_i$ (every component has dimension one), giving a strict chain of length one in $\\operatorname{Spec}R_i$. Completion preserves regularity and dimension by the two completion nodes. The completion-mod-power node with $N=1$ identifies the completed residue field with $R_i/\\mathfrak m_i=k$. For every $N$ the same node gives $\\widehat R_i/\\mathfrak m_i^N\\widehat R_i\\cong R_i/\\mathfrak m_i^N$ through $\\pi^\\wedge_N$, so the canonical map from $\\widehat R_i$ to its own $\\mathfrak m_i\\widehat R_i$-adic completion is $(x)\\mapsto(\\pi^\\wedge_N(x))_N$, the identity of $\\varprojlim_NR_i/\\mathfrak m_i^N$; thus $\\widehat R_i$ is complete for its maximal ideal $\\mathfrak m_i\\widehat R_i$. The coefficient map $k\\to\\widehat R_i$ induces the identity on the residue field $k$. A generator of the maximal ideal exists by the definition of a dimension-one regular local ring. Apply the complete-coefficient-coordinates node with $d=1$ to this generator. It gives a complete local $k$-algebra isomorphism $\\widehat R_i\\cong k[[t_i]]$ carrying the residue map to evaluation at zero.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "def-weil-regular-scheme",
+    "lem-trf-regular-complete-coefficient-coordinates",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2); varieties.tex Tag 056S; more-algebra.tex Tags 07NY and 07NV"
+   }
+  },
+  {
+   "text": "For $r=2$, steps 7--8 give $\\widehat{\\mathcal O}_{Y,f}\\cong k[[u]]\\times_k k[[v]]$. The homomorphism $k[[u,v]]\\to k[[u]]\\times_k k[[v]]$ sends $h$ to $(h(u,0),h(0,v))$. Its image consists of all pairs with equal constant coefficient: a pair $(p,q)$ is the image of $p(u)+q(v)-p(0)$. Its kernel consists of series with no coefficient on either axis, equivalently multiples of $uv$. It therefore induces $k[[u,v]]/(uv)\\cong k[[u]]\\times_k k[[v]]$. In particular this point is an ordinary node. Together with step 6 and the complement isomorphism, this accounts for every point of $Y$ and creates no other singularities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E36 and the ordinary-node model; explicit power-series coefficient calculation"
+   }
+  },
+  {
+   "text": "It remains to check the dimension clause and the geometric-fibre clause of semistability. The structure map $Y\\to\\operatorname{Spec}k$ has the single fibre $Y$, and its geometric fibre is $Y\\times_k\\bar k$ for a chosen algebraic closure $\\iota:k\\to\\bar k$. Since $\\bar k$ is algebraic over $\\iota(k)$ and $k$ is algebraically closed, the minimal polynomial of each element of $\\bar k$ is linear, so $\\iota$ is an isomorphism; hence the geometric fibres of $X$ and $Y$ are $X$ and $Y$ over $k$, up to this isomorphism. The semistability hypothesis thus says that every point of $X$ is smooth over $k$ or an ordinary double point, and it suffices to prove the same for $Y$ over $k$. The points of $F$ are closed, so every non-closed point of $Y$, and every closed point outside $F$, lies in $Y\\setminus F\\simeq X\\setminus E$, where the property is inherited from $X$. At $f\\in F$ the point is smooth by step 6 or an ordinary double point by step 9. Pure dimension one: $X$ is Noetherian of pure dimension one. Each irreducible component $Z$ of $X$ has its generic point outside the closed points $E$; by the quotient topology of the Ferrand node, $v(Z)$ is closed, since its saturation $v^{-1}v(Z)$ adds only finitely many closed points of $E$ and its trace on $F$ is finite. Distinct generic points remain distinct, so the $v(Z)$ are precisely the irreducible components of $Y$. A proper closed subset of $Z$ is a finite set of closed points (a Noetherian space of dimension one); pulling a proper closed subset of $v(Z)$ back to $Z$ shows it is finite as well, so $v(Z)$, which still has its generic point and a distinct closed point, has dimension one. The finite presentation was checked in step 4; flatness over a field follows because every vector space is free. The empty marking is finitely presented, flat, etale and contained in the smooth locus vacuously. These are all clauses of the semistable multipointed-curve definition.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "def-weil-algebraic-closure",
+    "def-trf-multipointed-curve",
+    "def-trf-multipointed-curve-modification",
+    "def-weil-pure-dimension",
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E36 with Example 0C1J; geometric fibre over the algebraically closed field k itself; explicit verification of the multipointed-curve clauses"
+   }
+  },
+  {
+   "text": "Finally let $W\\subseteq Y$ be any affine open, with $\\mathcal O_Y(W)=P=A\\times_C B$ as in step 3, and write $D\\cap\\operatorname{Spec}A=\\operatorname{Spec}(A/I)$. Given $\\bar h\\in A/I$, choose $h\\in A$. Choose one scalar for each fibre of $a$: use $h(e)$ if that fibre meets $D$, and use zero otherwise. This is consistent because each fibre meets $D$ in at most one point. These scalars form $b\\in B$. For each indicated $e_j\\notin D$, choose $q_j\\in I$ with $q_j(e_j)=1$; this exists since $I$ is not contained in its maximal ideal, followed by scaling in $k$. Since $A\\to C$ is onto, choose $\\delta_j\\in A$ with evaluations one at $e_j$ and zero at the other indicated points. Add to $h$ the sum of $(b(a(e_j))-h(e_j))q_j\\delta_j$ over $e_j\\notin D$. This changes no class in $A/I$, changes the desired residues exactly, and leaves residues on $D$ untouched. The resulting $h_1$ satisfies $(h_1,b)\\in P$. Thus $P\\to A/I$ is onto. The affine criterion for a closed immersion proves that $D\\to Y$ is a closed immersion. It identifies $D$ with its image with its given reduced scheme structure, since $D$ is reduced. When $E=F=\\varnothing$, the pushout is $X$, the maps and all clauses are identities or vacuous; when $D$ is empty the argument has the zero ring $A/I$.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, fibre-product rings on every affine open; explicit residue interpolation for the branch restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-multipointed-curve",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-trf-codimension-one-points-affine-neighbourhood",
+  "lem-sfb-ferrand-scheme-pushout",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "def-weil-regular-scheme",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-geometric-fibre",
+  "def-weil-algebraic-closure",
+  "def-trf-multipointed-curve-modification",
+  "def-weil-pure-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0E25--0E27, with curves.tex 0E36 and varieties.tex 09NN; relative-base and branch-restriction calculations written explicitly by Q70."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,10 +238,143 @@
    "results": "8 hits; top=['WeierstrassCurve.Projective.NonsingularLift', 'WeierstrassCurve.Jacobian.NonsingularLift', 'WeierstrassCurve.Affine.Point.add_some', \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", 'WeierstrassCurve.Projective.Point.nonsingular', 'WeierstrassCurve.Affine.nonsingular_add', 'WeierstrassCurve.Affine.Nonsingular', 'WeierstrassCurve.Jacobian.Point.nonsingular']; note=; digest=a89193051ceced2c. Read the returned signatures: none states the finite closed-point pinching or closed-subscheme union theorem; coproducts and gluing along opens do not apply to closed intersections. Grep subdirectory: all Mathlib.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sets of points on a separated locally Noetherian scheme with local rings of dimension at most one are contained in an affine open",
+   "results": "{\"t\": \"2026-10-22T05:21:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite sets of points on a separated locally Noetherian scheme with local rings of dimension at most one are contained in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\"], \"digest\": \"0e48e4734d0c75be\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"grep\", \"query\": \"finite.*(points|set).*affine|affine.*(points|set).*finite|codim.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"8284f0fed80bd1dc\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(pullback|fibreProduct)|pushout.*complet|complet.*pushout",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"grep\", \"query\": \"completion.*(pullback|fibreProduct)|pushout.*complet|complet.*pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite set of points with local dimension at most one in a separated locally Noetherian scheme has a common affine open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"leansearch\", \"query\": \"Every finite set of points with local dimension at most one in a separated locally Noetherian scheme has a common affine open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"4adc77d85f75bfec\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, \"affine\"",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, \\\"affine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsAffineHom.of_comp\"], \"digest\": \"ae23d845bc6cb47e\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T05:21:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a separated algebraic curve any finitely many closed points are contained in a single affine open subscheme",
+   "results": "{\"t\": \"2026-10-22T05:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"On a separated algebraic curve any finitely many closed points are contained in a single affine open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"4c01acc966237e88\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed local ring of a finite pinching of distinct rational closed points is the fibre product of the completed branch local rings over their residue fields",
+   "results": "{\"t\": \"2026-10-22T05:21:23Z\", \"tool\": \"leanfinder\", \"query\": \"The completed local ring of a finite pinching of distinct rational closed points is the fibre product of the completed branch local rings over their residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\"], \"digest\": \"5b54db1f789fcff3\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth|regular).*completion|completion.*(smooth|regular)|powerSeries.*(equiv|iso)",
+   "results": "{\"t\": \"2026-10-22T05:21:29Z\", \"tool\": \"grep\", \"query\": \"(smooth|regular).*completion|completion.*(smooth|regular)|powerSeries.*(equiv|iso)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HahnSeries/PowerSeries.lean\", \"Mathlib/RingTheory/HahnSeries/PowerSeries.lean\", \"Mathlib/RingTheory/HahnSeries/PowerSeries.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/Flat.lean\"], \"digest\": \"02543e6100dd6706\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion at the image of gluing finitely many closed points of an algebraic curve is a fibre product of completed local rings",
+   "results": "{\"t\": \"2026-10-22T05:21:30Z\", \"tool\": \"leansearch\", \"query\": \"The completion at the image of gluing finitely many closed points of an algebraic curve is a fibre product of completed local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AdicCompletion.instCommRing\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType\", \"AlgebraicGeometry.stalkClosedPointIso\"], \"digest\": \"f3a530c2664b51b2\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a smooth k algebra at a rational point of local dimension d is k formal power series in d variables",
+   "results": "{\"t\": \"2026-10-22T05:21:30Z\", \"tool\": \"leansearch\", \"query\": \"Completion of a smooth k algebra at a rational point of local dimension d is k formal power series in d variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.Smooth.of_isLocalization_Away\", \"PowerSeries.instIsLocalRing\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.powerSeriesAlgEquiv\"], \"digest\": \"047f2c63ed728b22\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-22T05:21:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\"], \"digest\": \"718e816e4240a5ea\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a fibre product of finite algebras over a Noetherian local ring is the fibre product of the completions",
+   "results": "{\"t\": \"2026-10-22T05:21:31Z\", \"tool\": \"leanfinder\", \"query\": \"The completion of a fibre product of finite algebras over a Noetherian local ring is the fibre product of the completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\"], \"digest\": \"1a7d0db2116466bc\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed local ring at a rational smooth point of a smooth scheme of dimension d over a field is a power series ring in d variables",
+   "results": "{\"t\": \"2026-10-22T05:21:32Z\", \"tool\": \"leanfinder\", \"query\": \"The completed local ring at a rational smooth point of a smooth scheme of dimension d over a field is a power series ring in d variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\"], \"digest\": \"1234d2bed2e71eca\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal ideal completion of the ring of functions on an affine scheme whose values agree at n rational points is the subring of the product of branch completions with equal residues",
+   "results": "{\"t\": \"2026-10-22T05:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal ideal completion of the ring of functions on an affine scheme whose values agree at n rational points is the subring of the product of branch completions with equal residues\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.FiniteAdeleRing\", \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\"], \"digest\": \"d6826e4b730be826\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|Ferrand|pushout.*[Cc]losed|[Cc]losed.*pushout",
+   "results": "{\"t\": \"2026-10-22T05:23:14Z\", \"tool\": \"grep\", \"query\": \"pinch|Ferrand|pushout.*[Cc]losed|[Cc]losed.*pushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme pushout identifying pairs of smooth rational points on an algebraic curve produces ordinary nodes and preserves properness over the base",
+   "results": "{\"t\": \"2026-10-22T05:23:14Z\", \"tool\": \"leansearch\", \"query\": \"Scheme pushout identifying pairs of smooth rational points on an algebraic curve produces ordinary nodes and preserves properness over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.mk\", \"CategoryTheory.MorphismProperty.pushouts\", \"AlgebraicGeometry.IsProper\", \"CategoryTheory.IsPushout.mk\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"CategoryTheory.Limits.Types.Pushout'\", \"CategoryTheory.Limits.Types.Pushout.Rel.inl_inr\"], \"digest\": \"e1608c1aaffdba58\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T05:23:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite smooth point pinching of a nodal curve proper over a scheme gives a finite surjective nodal quotient and embeds any subcurve meeting each pair at most once",
+   "results": "{\"t\": \"2026-10-22T05:23:16Z\", \"tool\": \"leanfinder\", \"query\": \"Finite smooth point pinching of a nodal curve proper over a scheme gives a finite surjective nodal quotient and embeds any subcurve meeting each pair at most once\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"90ca00d4bbd69d9a\"}; Read returned signatures. No exact finite smooth-point pinching theorem or general 09NN theorem was returned. The completion searches found existing finite-module completion tools, reused through the DAG; smooth charts and formal lifting alone do not assert the completed nodal quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-exceptional-contraction-diamond",
@@ -96,5 +406,78 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-relative-nodal-point-pinching",
+  "worker": "stage1",
+  "summary": "Verified Stacks hypotheses without absolute separatedness, reused the general Ferrand and completion nodes, created only the general 09NN affine-neighbourhood prerequisite, and supplied finite-module, singleton, nodal-completion, geometric-fibre and subcurve-ring calculations. The statement is unchanged.",
+  "blueprint": "Realizes the finite pinching prerequisite for the Appendix B complementary-subcurve contraction in the recorded ancestor chain; no change to the trace-formula unit route. The current ancestor proof itself does not state this auxiliary algebraic-geometric construction.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ferrand-scheme-pushout",
+    "why": "Generic algebraic-geometric tool used only for its stated conclusion in the finite-point pinching argument; this unit has no replacement of this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic algebraic-geometric tool used only for its stated conclusion in the finite-point pinching argument; this unit has no replacement of this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic algebraic-geometric tool used only for its stated conclusion in the finite-point pinching argument; this unit has no replacement of this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic algebraic-geometric tool used only for its stated conclusion in the finite-point pinching argument; this unit has no replacement of this general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic algebraic-geometric tool used only for its stated conclusion in the finite-point pinching argument; this unit has no replacement of this general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ferrand-scheme-pushout",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-1f0d680ea",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-1f0d680ea (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the new node in full against Stacks 0E25-0E27, 09NN (varieties.tex 9141-9146), 0E36/0C1J, 03GN, 00MB, 07N9, 056S, 07NY/07NV, 05GG and 0C0S. The statement is unchanged and correct; I checked the cases E=F=∅, D=∅, a self-node, characteristic 2 and a non-separated S or X.\n\nNew node: lem-trf-codimension-one-points-affine-neighbourhood is exactly Stacks 09NN. It is statement-only, self-contained, not a duplicate (rg -L over dag/nodes: only the item, the citer exceptional-contraction-diamond prose and this node mention 09NN) and not a clause of the item.\n\nSteps 1-2, 4-7, 9 and the residue interpolation of step 11 are correct, and every hypothesis was checked:\n- Step 1: 09NN applied on X_V for V an affine open of S, so absolute separatedness of X or S is never assumed.\n- Step 5: the 03GN hypotheses (separated, locally of finite type) are proved before the node is applied.\n- Step 7: the 0E36 completion goes through 00MB and the last clause of 07N9.\n\nThree minor faults, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-relative-nodal-point-pinching.json:\n- Steps 3 and 11 (C3): finiteness of v and the closed-immersion test were shown only on Ferrand charts, while the definitions ask for every affine open. Now the Ferrand structure-sheaf formula gives O_Y(W)=A×_C B on any affine W.\n- Step 8 (C4): completeness of the completed local ring, which 0C0S requires, was not justified. Now it follows from the mod-power node for all N.\n- Step 10 (E1/E5): it claimed smooth/nodal and pure-dimension clauses for every algebraically closed Ω/k without proving dim O_{X_Ω,e}=1 or pure dimension of X_Ω. Rewritten: the geometric fibre uses the chosen algebraic closure of k, which is k itself (def-weil-geometric-fibre, def-weil-algebraic-closure). The scalar-extension cite is dropped.\nproof_deps were recomputed as the union of step uses.\n\nBatch 5: both flagged cites are generic, not steps of the trace formula or Poincaré duality. codimension-one-points-affine-neighbourhood is 09NN scheme theory and regular-complete-coefficient-coordinates is the Cohen structure theorem 0C0S(2), both statement-only with definition-only closures; accepted.\n\nNeither the item nor its citers are in the drop list, and the item has no re-split note. Its Appendix-B blueprint ancestry is inherited from import, not set by this delivery. The off-unit tool_uses (Ferrand, 07N9, 056S, 07NY and the other pbc nodes) are generic and used only through their statements; accepted for the maintainer to record.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeNodalPointPinching",
+  "declaration": "AlgebraicGeometry.exists_relative_nodal_point_pinching",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeNodalPointPinching.lean",
+  "statement": "theorem exists_relative_nodal_point_pinching (k : Type u) [Field k] [IsAlgClosed k] (S : Over (Spec (.of k))) (P : MultipointedCurve (Spec (.of k))) [IsEmpty P.D] (hP : P.IsSemistable) (s : Over.mk P.x ⟶ S) [IsProper s.left] (E F : Over (Spec (.of k))) (m n : ℕ) (ε : Fin m → (Over.mk (𝟙 (Spec (.of k))) ⟶ E)) (φ : Fin n → (Over.mk (𝟙 (Spec (.of k))) ⟶ F)) (hE : Nonempty (IsColimit (Cofan.mk E.left (fun l ↦ (ε l).left)))) (hF : Nonempty (IsColimit (Cofan.mk F.left (fun l ↦ (φ l).left)))) (i : E ⟶ Over.mk P.x) [IsClosedImmersion i.left] (hi : ∀ e : E.left, i.left e ∈ P.x.smoothLocus) (a : E ⟶ F) [Surjective a.left] (ha : ∀ f : F.left, (a.left ⁻¹' {f}).encard = 1 ∨ (a.left ⁻¹' {f}).encard = 2) (b : F ⟶ S) (hs : i ≫ s = a ≫ b) : ∃ (Q : MultipointedCurve (Spec (.of k))) (v : Over.mk P.x ⟶ Over.mk Q.x) (j : F ⟶ Over.mk Q.x) (t : Over.mk Q.x ⟶ S), IsEmpty Q.D ∧ Q.IsSemistable ∧ IsProper t.left ∧ v ≫ t = s ∧ j ≫ t = b ∧ IsPushout i.left a.left v.left j.left ∧ IsFinite v.left ∧ Surjective v.left ∧ IsClosedImmersion j.left ∧ IsPullback i.left a.left v.left j.left ∧ (∃ (U : P.X.Opens) (V : Q.X.Opens) (e : U.toScheme ≅ V.toScheme), (U : Set P.X) = (Set.range i.left)ᶜ ∧ (V : Set Q.X) = (Set.range j.left)ᶜ ∧ e.hom ≫ V.ι = U.ι ≫ v.left) ∧ (∀ (f : F.left) (z : E.left), (∀ z' : E.left, a.left z' = f ↔ z' = z) → ∃ (U : P.X.Opens) (V : Q.X.Opens) (e : U.toScheme ≅ V.toScheme), i.left z ∈ U ∧ j.left f ∈ V ∧ e.hom ≫ V.ι = U.ι ≫ v.left) ∧ (∀ (f : F.left) (z : Fin 2 → E.left), Function.Injective z → (∀ z' : E.left, a.left z' = f ↔ z' ∈ Set.range z) → ∃ (α : ∀ l : Fin 2, AdicCompletion (IsLocalRing.maximalIdeal (P.X.presheaf.stalk (i.left (z l)))) (P.X.presheaf.stalk (i.left (z l))) ≃+* PowerSeries k) (ρ : ∀ l : Fin 2, (P.X.presheaf.stalk (i.left (z l)) ⧸ IsLocalRing.maximalIdeal (P.X.presheaf.stalk (i.left (z l)))) ≃+* k) (γ : AdicCompletion (IsLocalRing.maximalIdeal (Q.X.presheaf.stalk (j.left f))) (Q.X.presheaf.stalk (j.left f)) ≃+* ↥(pullback (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k))) (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k))))) (δ : ↥(pullback (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k))) (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k)))) ≃+* Orgogozo.nodeRing k), (∀ (l : Fin 2) (c : k), α l (algebraMap (P.X.presheaf.stalk (i.left (z l))) _ (Orgogozo.localScalar P.x (i.left (z l)) c)) = PowerSeries.C c) ∧ (∀ (l : Fin 2) (x : AdicCompletion (IsLocalRing.maximalIdeal (P.X.presheaf.stalk (i.left (z l)))) (P.X.presheaf.stalk (i.left (z l)))), PowerSeries.constantCoeff (α l x) = ρ l (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (P.X.presheaf.stalk (i.left (z l)))) x)) ∧ (∀ (l : Fin 2) (h : v.left (i.left (z l)) = j.left f) (r : Q.X.presheaf.stalk (j.left f)), (if l = 0 then pullback.fst (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k))) (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k))) else pullback.snd (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k))) (CommRingCat.ofHom (PowerSeries.constantCoeff (R := k)))) (γ (algebraMap (Q.X.presheaf.stalk (j.left f)) _ r)) = α l (algebraMap (P.X.presheaf.stalk (i.left (z l))) _ ((v.left.stalkMap (i.left (z l))) ((Q.X.presheaf.stalkCongr (.of_eq h)).inv r)))) ∧ (∀ (c : k), δ (γ (algebraMap (Q.X.presheaf.stalk (j.left f)) _ (Orgogozo.localScalar Q.x (j.left f) c))) = Ideal.Quotient.mk _ (MvPowerSeries.C c))) ∧ (∀ (D : Scheme.{u}) (d : D ⟶ P.X), IsReduced D → IsClosedImmersion d → (∃ C : Set (Set P.X), C ⊆ irreducibleComponents P.X ∧ Set.range d = ⋃₀ C) → (∀ f : F.left, ({z : E.left | a.left z = f ∧ i.left z ∈ Set.range d}).encard ≤ 1) → IsClosedImmersion (d ≫ v.left))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18a63c3ba",
+  "group": "NX",
+  "result": "pass",
+  "note": "Stage-2 statement of lem-trf-relative-nodal-point-pinching matches the node clause by clause: k algebraically closed; S a k-scheme with no finiteness or separatedness; proper s; P semistable with IsEmpty marking; E and F given as Fin-indexed Over-cofans of Spec k (m=n=0 allowed); closed immersion into the smooth locus; encard 1 or 2 fibres; hs. Conclusions: IsPushout, IsFinite and Surjective v, closed immersion j, IsPullback for the scheme-theoretic preimage, complement iso compatible with v, proper induced t, Q semistable with empty marking, singleton local iso, double-fibre completion where alpha keeps localScalar and has residue map constantCoeff, gamma's projections are pinned to the stalk map of v on germs (which determines gamma), delta to nodeRing is k-linear, and the reduced-subcurve closed-immersion clause. Item node changed only in lean; statement verbatim; 13 dependency node files identical to side-live; no new nodes; docstrings carry source, blueprint tag and all 11 steps; lines at most 100; sorry only; not dropped; not landed by another group. I did not recompile; the report records a clean compile (16.1 s and 19.8 s). Advisories: nodeRing and localScalar belong to def-trf-orgogozo-induction-data, which is not in stmt_deps (reached through the IsSemistable dependency; stage 2 cannot add it); 4 Mathlib proof-plan imports for proof_deps without lean records; the singleton clause does not state v^-1(V)=U."
+ }
 }

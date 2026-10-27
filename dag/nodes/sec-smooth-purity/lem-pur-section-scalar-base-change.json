@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-section-scalar-base-change",
+ "kind": "statement",
+ "title": "Coefficient compatibility with exceptional base change and compatible sections",
+ "statement": "Let A,B be finite commutative rings with unital map φ:A→B, killed by a common N>0. Let g:V→S be separated, quasi-compact, compactifiable and smooth of dimension d, with V,S Noetherian and N invertible on S. The canonical exceptional coefficient map satisfies BaseChangeCompatibility [def-pur-exceptional-coefficient-base-change-square] at the unit for every map from a Noetherian S′. Moreover, for every pullback square v:V′→V, g′:V′→S′, b:S′→S, with S′ locally Noetherian and g′ compactifiable and quasi-compact, and compatible sections s,s′ with s′≫v=b≫s, the section coefficient maps [def-pur-dnc-coefficient-section-maps] commute with the canonical section base-change mates [def-pur-noetherian-section-specialization-arrows] and scalar-pullback balancing. No section identity or closedness is assumed on these compatible maps.",
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-base-change-square",
+  "def-pur-dnc-coefficient-section-maps",
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (2), finite coefficient extension of the vector-bundle and deformation constructions, with normalization at t=1."
+ },
+ "proof": [
+  {
+   "text": "transpose the two paths under the primed B compact-support adjunction.\nThe compact-support coefficient comparison is the composite of the ordinary open\ncomparison and proper scalar mate. Their base-change cube commutes on K-flat\nrepresentatives, with the same inverse-image balancing. The counit equations of\nthe exceptional coefficient map and base-change mate identify the transposes.\nThis proves the square at the unit, after its canonical scalar and pullback unit\nidentifications. Whisker by the primed section pullback; inverse-image composition\nand scalar balancing identify s' followed by v with b followed by s, giving the\nsecond equation. These are identities of the specified maps, not choices of\nisomorphisms. For a merely locally Noetherian primed base, restrict to its affine\nopen cover and use canonical inverse-image coherence. This proves the section\nidentity without imposing quasi-compactness on an etale localization.",
+   "uses": [
+    "det-sp-mixed-base-change",
+    "lem-sf-scalar-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-mixed-base-change",
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Detailed specialization of the cited blueprint argument, with explicit canonical ordinary maps."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change commutes with exceptional base change and pulling back to compatible sections",
+   "results": "Eight hits, none states this derived etale coefficient/deformation assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "BaseChangeCompatibility",
+   "results": "Loogle returned zero hits because these names are unknown to its Mathlib environment. This invalid query supplies no negative evidence. Semantic and source searches recorded separately.",
+   "date": "2026-10-26",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "BaseChangeCompatibility|section_scalar_base_change",
+   "results": "Zero Mathlib hits. Local project search finds the cited constituent interfaces but no theorem with this complete signature.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso",
+   "results": "Twelve hits, including Functor.map_isIso and Functor.map_inv. Used for formal preservation and cancellation; none states the scheme-derived coefficient coherence or family constancy.",
+   "date": "2026-10-26",
+   "verdict": "component tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with exceptional base change pulled back to compatible sections of schemes",
+   "results": "Eight hits: module scalar adjunctions, elementary tensor algebra or unrelated affine/normalization facts; no derived etale six-functor or normalized-family assertion. Constituent categorical facts are used in the proof.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.PurityDncCoefficientTransport",
+  "date": "2026-10-26",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (2), finite coefficient extension of the vector-bundle and deformation constructions, with normalization at t=1.",
+   "via": [
+    "lem-pur-dnc-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.SectionScalarBaseChange",
+  "file": "lean/Sheaf/SecSmoothPurity/SectionScalarBaseChange.lean",
+  "declaration": "WeilConjectures.DncCoefficientTransport.section_scalar_base_change",
+  "statement": "theorem section_scalar_base_change\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)\n    {V S : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]\n    (hS : IsUnit (N : Γ(S, ⊤))) (g : V ⟶ S) [HasCompactification g]\n    [IsSeparated g] [QuasiCompact g] (d : ℕ) [SmoothOfRelativeDimension d g] :\n    (∀ {S' : Scheme.{u}} [IsNoetherian S'] (b : S' ⟶ S),\n      Etale.ExceptionalCoefficients.BaseChangeCompatibility φ g b (𝟙_ _)) ∧\n    ∀ {V' S' : Scheme.{u}} [IsLocallyNoetherian S'] (g' : V' ⟶ S')\n      [HasCompactification g'] [QuasiCompact g']\n      (b : S' ⟶ S) (v : V' ⟶ V) (sq : IsPullback v g' g b)\n      (s : S ⟶ V) (s' : S' ⟶ V') (hs : s' ≫ v = b ≫ s),\n      (Etale.scalarPullbackIso φ b).inv.app (Etale.sectionInvariant A g s) ≫\n          (Etale.upperStar (ModuleCat.{u + 1} B) b).leftDerivedFunctor.map\n            (sectionMap φ g s) ≫\n          Etale.NoetherianSectionSpecialization.sectionMap B g g' b v sq s s' hs =\n        (Etale.scalarExtension φ S').map\n            (Etale.NoetherianSectionSpecialization.sectionMap A g g' b v sq s s' hs) ≫\n          sectionMap φ g' s'",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-26"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b6d7e",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261026T002119-L-58326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b6d7e",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261026T002119-L-58326",
+  "kind": "interface",
+  "note": "independent cc review: b6d7 delivered files vs prior reviewed head 54acf (diff -r: only warn.sorry option line + report/change-record text); item proof vs node proof_deps; 4 direct importers compiled against delivered modules (all OK)"
+ }
+}

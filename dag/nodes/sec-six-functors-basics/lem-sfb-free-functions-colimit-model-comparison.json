@@ -1,0 +1,478 @@
+{
+ "id": "lem-sfb-free-functions-colimit-model-comparison",
+ "kind": "statement",
+ "title": "Quasi-isomorphism criterion for colimits of free representable function resolutions",
+ "statement": "Let $\\mathcal C$ be a small subcanonical site with finite products [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], let $R$ be a sheaf of commutative rings, and use ordinary $R$-module sheaves and cochain derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $U$ for the underlying abelian sheaf, $\\iota$ for inclusion of abelian sheaves into presheaves, $a$ for abelian sheafification [def-weil-pbc-sheafification], and $t_P(A)(V)=A(V\\times P)$ for a fixed $P\\in\\mathcal C$. Let $R[P]$ be the free module sheaf on the representable $h_P$ and put $H_P=\\mathcal Hom_R(R[P],-)$ [def-pur-sheaf-hom]. Let $I$ be a small filtered category and $M:I\\to\\operatorname{Mod}(R)$ have colimit $M_\\infty$ [def-weil-pbc-category-colimit]. Supply a compatible diagram $M_i[0]\\to K_i$ of nonnegative injective resolutions, a nonnegative injective resolution $M_\\infty[0]\\to K_\\infty$, and a cocone $k_i:K_i\\to K_\\infty$ whose composites with augmentations equal the original module coprojections followed by the last augmentation [def-sp-injective-resolutions]. Put $c:\\operatorname{colim}_iH_P(K_i)\\to H_P(K_\\infty)$ for the induced chain map. Let $\\delta:\\operatorname{colim}_i R\\iota(UM_i[0])\\to R\\iota(UM_\\infty[0])$ be the derived-presheaf comparison induced by those coprojections. Every filtered colimit here is the localization of a compatible termwise complex colimit, or equivalently its exact derived functor. If $\\delta$ is an isomorphism in $D(\\operatorname{PAb}(\\mathcal C))$, then $c$ is a quasi-isomorphism, and hence $Q(c)$ is invertible in $D(\\operatorname{Mod}(R))$. More precisely, write $h^q(F)=H^q(R\\iota(F[0]))$. The map $H^q(Uc)$ is identified, naturally in the coefficient cocone, with\n$$a\\,t_P\\!\\left(\\operatorname{colim}_i h^q(UM_i)\\longrightarrow h^q(UM_\\infty)\\right).$$\nThe arrow inside parentheses is $H^q(\\delta)$ under the exact filtered-colimit identification; it is induced by the original module coprojections, and negative degrees are zero. The identifications used here are the cohomology of the derived-category isomorphisms of [lem-sfb-free-representable-derived-functions-model], not an assumed lift of those isomorphisms to a diagram of complexes. The criterion and its comparison normalization hold for every augmentation-compatible choice of the supplied resolutions, naturally for compatible coefficient maps and contravariantly in $P$. No finite-cover or cohomological-dimension hypothesis is required, and no assertion that $R\\iota$ always preserves filtered colimits is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J7 (section-internal-hom), injective Hom model; sites.tex Tag 00WJ (lemma-sheafification-exact). Agent extraction of former parent step 4: cohomology calculation using the existing derived free-representable model and exact filtered colimits; a conditional quasi-isomorphism criterion."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-category-colimit",
+  "def-sp-injective-resolutions",
+  "lem-sfb-free-representable-derived-functions-model"
+ ],
+ "proof": [
+  {
+   "text": "The functor $U$ is exact and commutes with small colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful]; $a$ is exact and commutes with colimits by [lem-weil-pbc-sheafification-exact]. Precomposition $t_P$ is exact by [lem-weil-pbc-abelian-presheaves-evaluation-exact], applied at $V\\times P$, and commutes with colimits by [lem-weil-pbc-presheaf-colimits-sectionwise], evaluated at that same object. Filtered colimits of abelian sheaves are exact by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. Filtered colimits of abelian presheaves are exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact] and [lem-weil-pbc-functor-exact-colimits], with functor index $\\mathcal C^{op}$. All these indices are small. Thus [src-weil-homology-preserves-exact-colimits] applies in both abelian categories. Exactness and faithfulness of $U$ also imply exactness of filtered module colimits: their underlying sequences are the exact abelian-sheaf colimits, and zero kernel modulo image is detected by $U$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-functor-exact-colimits",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03CO (lemma-limits-colimits-abelian-sheaves), 03CL (lemma-limits-colimits-abelian-presheaves); exact-colimit homology as in the cited source declaration."
+   }
+  },
+  {
+   "text": "Write $r_i:M_i[0]\\to K_i$ and $r_\\infty:M_\\infty[0]\\to K_\\infty$ for the supplied augmentations; they are quasi-isomorphisms. By [lem-weil-pbc-right-derived-plus-injective](1),(2), the comparison $\\alpha_{K}:Q(H_P(K))\\to RH_P(QK)$ is natural in bounded-below complexes $K$ and invertible on complexes of injectives. Put $\\varepsilon_i=RH_P(Q(r_i))^{-1}\\alpha_{K_i}:Q(H_P(K_i))\\cong RH_P(M_i[0])$ and likewise $\\varepsilon_\\infty$. For a module map $f$ and a supplied chain map $g$ with $g\\circ r=r'\\circ f[0]$ (a transition map of the diagram or a cocone map $k_i$), naturality of $\\alpha$ gives $\\varepsilon'Q(H_P(g))=RH_P(f[0])\\varepsilon$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] $U$ is exact, so [lem-weil-pbc-exact-functor-derived-factorization] gives $D(U)Q(H_P(K_i))\\cong Q(UH_P(K_i))$ naturally; $a$ and $t_P$ are exact (step 1) and the same node with [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^q(D(a)D(t_P)Y)\\cong a t_PH^q(Y)$, first for $Y=QL$ and then for all $Y$, naturally in $Y$ since both sides invert quasi-isomorphisms [def-weil-abstract-derived-category]. Composing these with $H^q(D(U)\\varepsilon_i)$ and $H^q$ of the canonical isomorphism $\\Phi_{M_i}:D(U)RH_P(M_i[0])\\cong D(a)D(t_P)R\\iota(UM_i[0])$ of [lem-sfb-free-representable-derived-functions-model] gives\n$$\\beta_i^q:H^q(UH_P(K_i))\\cong a t_Ph^q(UM_i),$$\nand likewise $\\beta_\\infty^q$. By construction these are the cohomology of the derived isomorphisms of that node, read off its statement; no isomorphism of derived objects is lifted to a complex diagram. The naturality of $\\Phi$ for module maps and the identities above make the $\\beta_i^q$ compatible with the transition maps of the supplied diagram.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-free-representable-derived-functions-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TI (lemma-enough-injectives-right-derived), computation of RH_P on injective resolutions; sites-cohomology.tex Tag 08J7 (section-internal-hom), injective Hom model. Agent assembly through the statement of the cited derived free-representable model."
+   }
+  },
+  {
+   "text": "Use $U$-colimit preservation from [lem-weil-pbc-module-sheaves-colimits-forgetful] and exact-colimit homology from [src-weil-homology-preserves-exact-colimits], with the exactness established in step 1. They give\n$$H^q(U\\operatorname{colim}_iH_P(K_i))\\cong\\operatorname{colim}_iH^q(UH_P(K_i)).$$\nApply the colimit of the maps $\\beta_i^q$ of step 2. Since $a$ commutes with colimits [lem-weil-pbc-sheafification-exact] and $t_P$ does so sectionwise [lem-weil-pbc-presheaf-colimits-sectionwise], the result is\n$$H^q(U\\operatorname{colim}_iH_P(K_i))\\cong a t_P\\operatorname{colim}_ih^q(UM_i).$$\nEvery displayed identification uses the canonical colimit coprojections; no presheaf colimit is being identified with a sheaf colimit without sheafification.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "src-weil-homology-preserves-exact-colimits",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits) and 03CO (lemma-limits-colimits-abelian-sheaves), especially the description of colimits by sheafification."
+   }
+  },
+  {
+   "text": "Let $m_i:M_i\\to M_\\infty$ be a coefficient coprojection. The augmentation condition says $k_i\\circ r_i=r_\\infty\\circ m_i[0]$, so step 2 gives $\\varepsilon_\\infty Q(H_P(k_i))=RH_P(m_i[0])\\varepsilon_i$. By [lem-sfb-free-representable-derived-functions-model], $\\Phi_{M_\\infty}\\circ D(U)RH_P(m_i[0])=D(a)D(t_P)R\\iota(Um_i[0])\\circ\\Phi_{M_i}$. The comparisons $D(U)Q\\cong QU$ of [lem-weil-pbc-exact-functor-derived-factorization] and the cohomology comparisons of step 2, which rest on [lem-weil-pbc-exact-functor-complex-cohomology], are natural. Hence\n$$\\beta_\\infty^q H^q(UH_P(k_i))=a t_PH^q(R\\iota(Um_i[0]))\\beta_i^q.$$\nSince $c$ composed with the $i$-th coprojection is $H_P(k_i)$, step 3 makes $H^q(Uc)$ equal to $a t_P$ of the unique map $\\operatorname{colim}_ih^q(UM_i)\\to h^q(UM_\\infty)$ with components $H^q(R\\iota(Um_i[0]))$: check the equality after every coprojection and use [def-weil-pbc-category-colimit]. This map is $H^q(\\delta)$: $\\delta$ composed with the $i$-th coprojection of the derived colimit is $R\\iota(Um_i[0])$, and [src-weil-homology-preserves-exact-colimits], with the presheaf exactness of step 1, identifies $H^q$ of that colimit with $\\operatorname{colim}_ih^q(UM_i)$ through those coprojections. This proves the requested normalization, including the actual cocone map rather than only its source and target objects.",
+   "uses": [
+    "lem-sfb-free-representable-derived-functions-model",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-category-colimit",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift) for the augmentation-compatible maps; agent cocone calculation through the naturality clause of the cited derived free-representable model."
+   }
+  },
+  {
+   "text": "If $\\delta$ is invertible, every $H^q(\\delta)$ is invertible because cohomology is a functor on the derived category [def-weil-abstract-derived-category]. Step 4 and functoriality of $a t_P$ make $H^q(Uc)$ invertible. Exactness of $U$ [lem-weil-pbc-module-sheaves-colimits-forgetful] and [lem-weil-pbc-exact-functor-complex-cohomology] identify this with $U(H^q(c))$. An inverse to an underlying abelian-sheaf isomorphism of modules is $R$-linear: for $f$ linear, $f(rf^{-1}(y))=ry=f(f^{-1}(ry))$, and injectivity gives equality. Thus each $H^q(c)$ is invertible. By [def-weil-abstract-derived-category], $c$ is a quasi-isomorphism and $Q(c)$ is invertible. Negative degrees vanish because all supplied complexes, their Hom complexes and their termwise colimits are nonnegative. The argument of steps 2-4 applies verbatim to any augmentation-compatible choice of resolutions. For a compatible map of coefficient diagrams, augmentation-compatible lifts exist and are unique up to homotopy by [lem-sfb-module-resolution-derived-presheaf-comparison]; the identity of step 2 for $\\varepsilon$, the covariant naturality of $\\Phi$ in $M$ and its contravariant naturality in $P$ from [lem-sfb-free-representable-derived-functions-model], and the naturality of the cohomology comparisons in the exact functor ($t_P\\to t_{P'}$ is restriction along $1_V\\times u$, which preserves kernels and images) make the $\\beta$ squares commute. Taking cohomology and colimits preserves these equalities, proving all the stated naturalities and choice independence. The argument used no covering finiteness or cohomological bound.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-sfb-free-representable-derived-functions-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05RU (definition-derived-category); homology.tex Tag 010N (lemma-exact-functor); normalization and naturality as in the cited models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-functor-exact-colimits",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-free-representable-derived-functions-model",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-module-resolution-derived-presheaf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J7 and Tag 03FD; agent assembly using existing normalized models and exact filtered colimits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived free representable internal function model commutes with the termwise filtered colimit comparison on arbitrary compatible injective resolutions via exact sheafification and precomposition",
+   "results": {
+    "t": "2026-10-22T06:10:01Z",
+    "tool": "leanfinder",
+    "query": "Derived free representable internal function model commutes with the termwise filtered colimit comparison on arbitrary compatible injective resolutions via exact sheafification and precomposition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.Functor.toRightDerivedZero",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc"
+    ],
+    "digest": "b9dd6018d286da50"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the colim PreservesHomology instance is an ingredient for exact colimits of abelian groups. Right-derived map formulas and underived ihomPoints do not identify the normalized module-Hom comparison with the derived-presheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"colim\"",
+   "results": {
+    "t": "2026-10-22T06:09:49Z",
+    "tool": "loogle",
+    "query": "\"homologyFunctor\", \"colim\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "instPreservesHomologyFunctorAddCommGrpCatColim"
+    ],
+    "digest": "1f6b9d0ca6ac0dd5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the colim PreservesHomology instance is an ingredient for exact colimits of abelian groups. Right-derived map formulas and underived ihomPoints do not identify the normalized module-Hom comparison with the derived-presheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(homology|[Qq]uasi[Ii]so).*(colimit|[Cc]olim)|(colimit|[Cc]olim).*(homology|[Qq]uasi[Ii]so)",
+   "results": {
+    "t": "2026-10-22T06:09:49Z",
+    "tool": "grep",
+    "query": "(homology|[Qq]uasi[Ii]so).*(colimit|[Cc]olim)|(colimit|[Cc]olim).*(homology|[Qq]uasi[Ii]so)",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+     "Mathlib/Algebra/Homology/LocalCohomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean"
+    ],
+    "digest": "16a51d9bedce05b2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the colim PreservesHomology instance is an ingredient for exact colimits of abelian groups. Right-derived map formulas and underived ihomPoints do not identify the normalized module-Hom comparison with the derived-presheaf comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived sheaf internal Hom comparison for free representable modules is identified with sheafification of the filtered colimit of derived cohomology presheaves",
+   "results": {
+    "t": "2026-10-22T06:09:49Z",
+    "tool": "leansearch",
+    "query": "Canonical derived sheaf internal Hom comparison for free representable modules is identified with sheafification of the filtered colimit of derived cohomology presheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "LightCondensed.ihomPoints",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+     "SheafOfModules.freeHomEquiv",
+     "SheafOfModules.free",
+     "PresheafOfModules.sheafifyMap"
+    ],
+    "digest": "3e9076e757a72961"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the colim PreservesHomology instance is an ingredient for exact colimits of abelian groups. Right-derived map formulas and underived ihomPoints do not identify the normalized module-Hom comparison with the derived-presheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the derived inclusion of underlying abelian sheaves into presheaves commutes with a given filtered colimit, then the compatible injective resolution comparison for internal Hom from a free representable is a quasi-isomorphism",
+   "results": {
+    "t": "2026-10-22T06:14:24Z",
+    "tool": "leanfinder",
+    "query": "If the derived inclusion of underlying abelian sheaves into presheaves commutes with a given filtered colimit, then the compatible injective resolution comparison for internal Hom from a free representable is a quasi-isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+     "CategoryTheory.InjectiveResolution.quasiIso",
+     "CategoryTheory.instIsIsoToRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective",
+     "CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self"
+    ],
+    "digest": "209302ea92f58b44"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: injective-resolution quasi-isomorphism and right-derived resolution comparison results are ingredients, not the conditional free-representable colimit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a free representable module sheaf, the colimit comparison on injective resolution internal Hom is a quasi-isomorphism if derived inclusion into abelian presheaves preserves that filtered colimit",
+   "results": {
+    "t": "2026-10-22T12:01:53Z",
+    "tool": "leanfinder",
+    "query": "For a free representable module sheaf, the colimit comparison on injective resolution internal Hom is a quasi-isomorphism if derived inclusion into abelian presheaves preserves that filtered colimit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.mapFree",
+     "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+     "CategoryTheory.InjectiveResolution.quasiIso",
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "PresheafOfModules.sheafificationCompToSheaf",
+     "PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj"
+    ],
+    "digest": "2c04182f2b3aa926"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general resolution naturality, exact-colimit homology or underived free-sheaf adjunctions, not the normalized free-representable derived-presheaf colimit criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(homology|[Qq]uasi[Ii]so).*(colimit|[Cc]olim)|(colimit|[Cc]olim).*(homology|[Qq]uasi[Ii]so)",
+   "results": {
+    "t": "2026-10-22T12:02:56Z",
+    "tool": "grep",
+    "query": "(homology|[Qq]uasi[Ii]so).*(colimit|[Cc]olim)|(colimit|[Cc]olim).*(homology|[Qq]uasi[Ii]so)",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+     "Mathlib/Algebra/Homology/LocalCohomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+     "Mathlib/Algebra/Homology/ExactSequenceFour.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean"
+    ],
+    "digest": "f177fc26ae5f0f1b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general resolution naturality, exact-colimit homology or underived free-sheaf adjunctions, not the normalized free-representable derived-presheaf colimit criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of internal Hom from a free representable module sheaf is sheafification of cohomology presheaves, naturally for filtered colimit comparisons",
+   "results": {
+    "t": "2026-10-22T12:02:57Z",
+    "tool": "leansearch",
+    "query": "Cohomology of internal Hom from a free representable module sheaf is sheafification of cohomology presheaves, naturally for filtered colimit comparisons",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+     "CategoryTheory.Sheaf.isColimitSheafifyCocone",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+     "SheafOfModules.free",
+     "SheafOfModules.freeHomEquiv_comp_apply",
+     "SheafOfModules.ιFree"
+    ],
+    "digest": "a7d5ffc7b72be51e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general resolution naturality, exact-colimit homology or underived free-sheaf adjunctions, not the normalized free-representable derived-presheaf colimit criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"colim\"",
+   "results": {
+    "t": "2026-10-22T12:02:57Z",
+    "tool": "loogle",
+    "query": "\"homologyFunctor\", \"colim\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "instPreservesHomologyFunctorAddCommGrpCatColim"
+    ],
+    "digest": "1f6b9d0ca6ac0dd5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general resolution naturality, exact-colimit homology or underived free-sheaf adjunctions, not the normalized free-representable derived-presheaf colimit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the isomorphism computing right derived functors by an acyclic injective module resolution, with exact filtered colimit homology and sheafification",
+   "results": {
+    "t": "2026-10-22T12:03:45Z",
+    "tool": "leanfinder",
+    "query": "Naturality of the isomorphism computing right derived functors by an acyclic injective module resolution, with exact filtered colimit homology and sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.Functor.rightDerived_map_eq"
+    ],
+    "digest": "6f5bbc7f83581efa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general resolution naturality, exact-colimit homology or underived free-sheaf adjunctions, not the normalized free-representable derived-presheaf colimit criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-derived-functions-filtered-colimit",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic coefficient comparison via profinite derived functions: former continuity proof step 4, colimit/cohomology transport of the free-representable model.",
+   "via": [
+    "lem-sfb-profinite-derived-functions-filtered-colimit",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-free-functions-colimit-model-comparison",
+  "worker": "stage1",
+  "summary": "Proved the conditional criterion and normalized cocone calculation using existing resolution and slice-evaluation nodes and exact filtered colimits. No new nodes or statement changes. No strict lift of derived model isomorphisms is assumed. Repair of the refused side-completion landing: retained the approved split and search log, compared it with the current unsplit DAG item, re-read every cited statement and the now-reviewed four-step derived-functions model, and made beta and its cocone square explicit in steps 2 and 4. The delivery tool rebases split-owned fields onto current origin/sheaf-dag; statement and dependencies are unchanged. Reviewer FIX (re-applied from the lost cbd491a1 FIX): steps 2, 4 and 5 now build beta from the statements of the derived free-representable model (Phi), the right-derived comparison alpha and the exact-functor derived factorization, rather than from the model's proof; slice evaluation is no longer a proof dependency.",
+  "blueprint": "Inherited from.place: paragraph (3), arithmetic coefficient comparison, former continuity step 4. Steps 1 and 3 handle exact colimit/cohomology transport; steps 2 and 4 normalize the actual comparison; step 5 deduces the criterion and naturalities. Ancestor tool reports None, retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic exact-colimit homology theorem, applied to abelian sheaves and abelian presheaves; not a replacement for a geometric unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exactness, faithfulness and colimit preservation of the ordinary module-to-abelian-sheaf forgetful functor; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-d7c63cea2",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-d7c63cea2 (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing was refused because the side completion had not been promoted. I compared it with the earlier head cbd491a1 and with that run's fix file. The statement, stmt_deps, source, blueprint and created fields are identical, and there are still no new nodes. The cited model, slice-evaluation and resolution nodes are byte-identical in the two snapshots. None of the earlier cbd491a1 C3 FIX is in this head. The only changes from the earlier head are that step 2 now writes beta out as (a t_P H^q(gamma_i)) eps H^q(theta-bar_i) and step 4 writes out the slice square. The C3 fault therefore remains. The item statement says the identifications are the cohomology of the isomorphisms of lem-sfb-free-representable-derived-functions-model. Step 2 still justifies this from that node's proof ('obtained from the same slice evaluation'). The model's statement only calls its isomorphism Phi canonical and gives naturality in M and P plus a degree-0 normalization. That does not determine H^q(Phi) for q>=1: a (-1)^q twist has the same properties. I re-applied the cbd491a1 FIX. Step 2 now uses eps_i = RH_P(Qr_i)^{-1} alpha_{K_i}, from lem-weil-pbc-right-derived-plus-injective (1),(2), then D(U)Q≅QU from lem-weil-pbc-exact-functor-derived-factorization, then H^q(Phi_{M_i}), then H^q(D(a)D(t_P)Y)≅a t_P H^q(Y). This also gives compatibility with the transition maps. Step 4 gets the cocone square from the augmentation condition k_i r_i = r_inf m_i[0], naturality of alpha and the M-naturality of Phi. Colimit uniqueness and delta∘coproj_i = Rι(Um_i[0]) then identify H^q(Uc) with a t_P H^q(delta). Step 5's naturalities come from Phi in M and P and from the resolution node's lifts. proof_deps equals the union of uses: the two Mathlib-leaf tools are added and the slice node is dropped. The split_report gains one summary sentence about the fix, and all steps are under 2000 characters. Steps 1 and 3 hold as before: U, a and t_P are exact and preserve colimits, filtered colimits are exact in Ab(C) and PAb(C), and the inverse of an underlying isomorphism of modules is R-linear. Edge cases checked: one-object I, terminal P, R=0, negative degrees. No SGA is used. Stacks places from the earlier run: 03FD, 08J7, 00WJ, sites-modules lemma-limits-colimits, homology lemma-exact-functor, derived 013P and 05TI. The declared tool_uses src-weil-homology-preserves-exact-colimits and lem-weil-pbc-module-sheaves-colimits-forgetful are accepted as generic tools. Maintainer: this FIX was lost once after a landing refusal; please keep it on the next re-push.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeFunctionsColimitModelComparison",
+  "declaration": "CategoryTheory.FreeFunctionsColimitModelComparison.comparison_quasiIso",
+  "declarations": [
+   "CategoryTheory.FreeFunctionsColimitModelComparison.underlying",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.underlyingAdditive",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.underlyingLimits",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.underlyingColimits",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.raw",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.onComplexes",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.abelianComplexes",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.abelianComplexesColimits",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.transform",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.transformAdditive",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.transformLimits",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.transformColimits",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.evaluation",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.evaluationComplex",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.comparison",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.presheafComparison",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.sourceIso",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.sourceHomologyIso",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.targetHomologyIso",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.cohomologyComparison",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.sourceCohomologyIso",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.comparison_homology",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.presheafComparison_homology",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.comparison_quasiIso",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.comparison_naturality",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.parameterMap",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.comparison_parameterNaturality",
+   "CategoryTheory.FreeFunctionsColimitModelComparison.cohomologyComparison_negative"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeFunctionsColimitModelComparison.lean",
+  "statement": "theorem comparison_quasiIso (P : C) (M : I ⥤ modules J R) (K : I ⥤ CochainComplex (modules J R) ℤ) (s : M ⋙ CochainComplex.singleFunctor (modules J R) 0 ⟶ K) (c : Cocone K) (sLimit : (CochainComplex.singleFunctor (modules J R) 0).obj (colimit M) ⟶ c.pt) (hs : ∀ i : I, QuasiIso (s.app i)) (hI : ∀ (i : I) (n : ℤ), Injective ((K.obj i).X n)) (hneg : ∀ i : I, (K.obj i).IsStrictlyGE 0) (hsLimit : QuasiIso sLimit) (hILimit : ∀ n : ℤ, Injective (c.pt.X n)) (hnegLimit : c.pt.IsStrictlyGE 0) (hcompat : ∀ i : I, s.app i ≫ c.ι.app i = (CochainComplex.singleFunctor (modules J R) 0).map (colimit.ι M i) ≫ sLimit) (hδ : IsIso (DerivedCategory.Q.map (presheafComparison J R c))) : QuasiIso (comparison J R P c) ∧ IsIso (DerivedCategory.Q.map (comparison J R P c))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "δ is represented by localization of the ιU-image of the supplied module-injective resolution cocone (03FD acyclicity). comparison_homology and presheafComparison_homology record the normalized cohomology formula, with actual coprojection-induced maps; the remaining theorem declarations record negative vanishing and both naturalities. All auxiliary definitions are canonical composites of the recorded model, exact-functor cohomology and colimit comparison isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4197449d5",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Lean and records correct: node changes only lean; lean.statement verbatim; c = colimit.desc of H_P cocone; hδ on Q(colim ιU K_i → ιU K∞) is exactly 'δ iso' (03FD ι-acyclicity plus the c_r naturality of lem-sfb-module-resolution-derived-presheaf-comparison; node defines derived colimits as localized compatible termwise colimits); comparison_homology and presheafComparison_homology checked on coprojections (true); targetHomologyIso is H^q of the model's θ evaluation (θ pinned by the generator formula), which with comparisonMap gives H^q(E); negative vanishing and coefficient/parameter naturality present; universes u per size convention; no hollow defs, sorry-only, docstrings OK, no duplicate. Only fault H11: dispatcher-placeholder second reading → fixes/lem-sfb-free-functions-colimit-model-comparison.report.md (worker report verbatim plus a real clause-by-clause reading). Advisory: unused auto-included HasDerivedCategory.{wA}/J.Subcanonical section instances. No compile (no Lean change)."
+ }
+}

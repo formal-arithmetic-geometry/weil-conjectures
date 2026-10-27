@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-space-coherent-filtered-union",
+ "kind": "statement",
+ "title": "Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is Noetherian. Modules and quasi-coherence are on the small etale ringed site [def-trf-space-quasi-coherent-module]. Locally Noetherian means that etale scheme charts are locally Noetherian [pqf-def-locnoeth]; Noetherian means locally Noetherian, quasi-compact and quasi-separated (the diagonal is quasi-compact on scheme tests). On a locally Noetherian space, coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. For every quasi-coherent module $F$ on $X$, the poset of coherent submodules $G\\subseteq F$, ordered by inclusion, is a nonempty directed set (in a universe containing the subobjects of $F$), and the canonical map $$\\varinjlim_{G\\subseteq F,\\ G\\ \\mathrm{coherent}}G\\longrightarrow F$$ is an isomorphism of module sheaves. The colimit is in the sense of [def-weil-pbc-category-colimit]. The diagram is indexed by a set, not by the category of all coherent modules.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UV, lemma-directed-colimit-coherent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $p:U\\to X$ with $U$ affine by lem-sfb-qc-space-affine-etale-atlas; its quasi-compactness hypothesis holds since $X$ is Noetherian. Put $R=U\\times_XU$. By lem-sfb-noetherian-affine-atlas-relation this is a groupoid of Noetherian schemes with $s,t$ flat, quasi-compact and quasi-separated. In particular the relation need not be affine, and no separatedness over the base has been assumed.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-noetherian-affine-atlas-relation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UV (lemma-directed-colimit-coherent)"
+   }
+  },
+  {
+   "text": "Under lem-sfb-space-qcoh-groupoid-equivalence send $F$ to its descent module $(p^*F,\\alpha_F)$. Apply lem-sfb-flat-noetherian-groupoid-coherent-approximation: step 1 checked both Noetherian schemes and all three properties of each projection. We get a small filtered diagram of coherent groupoid modules and a colimit cocone to this descent module. Apply the inverse equivalence to obtain a diagram $H_i$ in $\\operatorname{QCoh}(X)$ with coherent terms, and cocone maps $h_i:H_i\\to F$. The equivalence identifies the compatible maps out of these terms on both sides, so the universal property of this cocone gives $F=\\operatorname{colim}_iH_i$ in QCoh. By lem-sfb-space-qcoh-kernels-colimits this is also the colimit in all module sheaves.",
+   "uses": [
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UV (lemma-directed-colimit-coherent)"
+   }
+  },
+  {
+   "text": "Let $P$ be the poset of actual coherent subsheaves of $F$. It is a set in the stipulated universe: on a small skeleton of the site, each subsheaf specifies a subset of each section set of $F$, and the compatible choices form a subset of the product of their power sets. The zero subsheaf is coherent and belongs to $P$. For $G,H\\in P$, their sum $G\\oplus H$ is quasi-coherent by lem-sfb-space-qcoh-kernels-colimits. Its restriction to the atlas corresponds to the sum of the coherent scheme modules $p^*G,p^*H$, which is coherent by lem-weil-pbc-coherent-kernel-cokernel-locnoeth. Coherence detection in lem-sfb-space-qcoh-groupoid-equivalence gives coherence of $G\\oplus H$. Its image in $F$ is quasi-coherent by lem-sfb-space-qcoh-kernels-colimits, and a quotient of the coherent module $G\\oplus H$, hence coherent by lem-sfb-space-noetherian-coherent-support. This image contains both $G$ and $H$, so $P$ is nonempty and directed.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-space-noetherian-coherent-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UV (lemma-directed-colimit-coherent)"
+   }
+  },
+  {
+   "text": "Form $C=\\operatorname{colim}_{G\\in P}G$ with its canonical map $a:C\\to F$. By lem-weil-pbc-module-sheaves-colimits-forgetful it is the module sheafification of the sectionwise colimit. For every site object $V$, the sectionwise colimit of this directed diagram of inclusions is the submodule $\\bigcup_{G\\in P}G(V)\\subseteq F(V)$: two representatives have equal images exactly when their images in a common upper bound agree. Thus this presheaf maps injectively into $F$. Exact module sheafification, as stated by lem-weil-pbc-ringed-site-module-sheafification-exact, preserves its kernel zero. Consequently $a$ is a monomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UV (lemma-directed-colimit-coherent)"
+   }
+  },
+  {
+   "text": "For each $h_i:H_i\\to F$ let $K_i$ be its image. It is quasi-coherent by lem-sfb-space-qcoh-kernels-colimits and coherent by the quotient clause of lem-sfb-space-noetherian-coherent-support, since $H_i$ is coherent. Hence $K_i\\in P$ and $h_i$ factors as $H_i\\twoheadrightarrow K_i\\hookrightarrow F$. Compose the first map with $K_i\\to C$ to obtain $b_i:H_i\\to C$. For any transition $u:i\\to j$, the maps $b_jH(u)$ and $b_i$ have equal composites with $a$, namely $h_i$, and are equal because step 4 proved $a$ monic. Thus the $b_i$ form a cocone. The ambient colimit property from step 2 gives $b:F\\to C$ with $b h_i=b_i$. The equality $ab=1_F$ follows after composition with every $h_i$ and the uniqueness in that colimit property. Since $a$ is monic, $a(ba)=a$ implies $ba=1_C$. Therefore the canonical map $a$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-noetherian-coherent-support",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UV (lemma-directed-colimit-coherent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-noetherian-affine-atlas-relation",
+  "lem-sfb-space-qcoh-groupoid-equivalence",
+  "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UV (lemma-directed-colimit-coherent), both paragraphs; explicit set-sized union and universal-property argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent module on a Noetherian algebraic space is the filtered colimit of its coherent submodules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*[Cc]olimit|[Cc]olimit.*coherent|[Qq]uasicoherent.*[Nn]oetherian",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Condensed/Limits.lean\", \"line\": \"54\", \"text\": \"    [HasWeakSheafify (coherentTopology CompHaus.{u}) A] : HasFiniteColimits (Condensed.{u} A) :=\"}\n  {\"file\": \"Mathlib/Condensed/AB.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"line\": \"170\", \"text\": \"    -- This consists of some coherent family of elements in the various colimits,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"line\": \"237\", \"text\": \"topology (see `Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean`).\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasi coherent module on a Noetherian algebraic space is the filtered colimit of its coherent submodules",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent sheaf on a Noetherian algebraic space is a directed union of coherent subsheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i)))) → AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on a Noetherian algebraic space is the directed union of coherent submodules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"A predicate asserting that, given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, the generating sections of $M$ \"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space coherent approximation theorem; scheme Noetherian facts and quasicoherent definitions do not specialize to the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent sheaf on a Noetherian algebraic space is a filtered colimit of coherent subsheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space coherent approximation theorem; scheme Noetherian facts and quasicoherent definitions do not specialize to the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space coherent approximation theorem; scheme Noetherian facts and quasicoherent definitions do not specialize to the item"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*[Cc]olimit|[Cc]olimit.*coherent|[Aa]lgebraic[Ss]pace",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Condensed/Limits.lean\", \"line\": \"54\", \"text\": \"    [HasWeakSheafify (coherentTopology CompHaus.{u}) A] : HasFiniteColimits (Condensed.{u} A) :=\"}\n  {\"file\": \"Mathlib/Condensed/AB.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"line\": \"237\", \"text\": \"topology (see `Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean`).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FilteredColimitCommutesFiniteLimit.lean\", \"line\": \"170\", \"text\": \"    -- This consists of some coherent family of elements in the various colimits,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space coherent approximation theorem; scheme Noetherian facts and quasicoherent definitions do not specialize to the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module on a Noetherian algebraic space is the directed union of coherent submodules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure, which is established via sheaf composition, weak she\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space coherent approximation theorem; scheme Noetherian facts and quasicoherent definitions do not specialize to the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-finite-affine-descent",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions.",
+   "via": [
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-filtered-union",
+  "worker": "stage1",
+  "summary": "Followed Stacks 07UV through an affine etale presentation and the flat Noetherian groupoid theorem 07TU. Made the Noetherian-relation hypotheses, small-etale descent equivalence, and ambient quasi-coherent colimits explicit; reused the existing atlas, coherent-quotient, scheme coherent-sum, and exact module-sheafification statements. Proved directedness and the canonical union isomorphism explicitly. No mathematical statement correction; the only statement addition below is the definition reference for the displayed colimit.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), the algebraic-space coherent approximation prerequisite of the recorded alteration chain. Current latest blueprint checked. Ancestor command returns None, so inherited null ancestor metadata is preserved.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Generic definition of a colimit and its universal property; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic scheme coherent-sum lemma used only on the atlas; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site colimit construction for the final union; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Generic exact sheafification on a ringed site for injectivity; no step of the unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-6b5b6d9fc",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-6b5b6d9fc (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement. Checked the sources directly: Stacks 07UV (spaces-cohomology l.2649), 07TU (groupoids l.3009), 03LI (l.2622), 03M3 (spaces-properties l.5727, where j=(t,s) so t=pr_0 and s=pr_1), 07UB (l.1877), 03M1 (l.5441) and 03EA (l.4155, which keeps quasi-separatedness). The item statement matches 07UV, and the new nodes match exactly 07TU, 03M3 with 07UB(5), and 03M1(1)-(3); the relation node correctly collects the 03EA/03H6 consequences. Proof steps: step 1's atlas and relation hypotheses check. In step 2 the equivalence carries the colimit cocone, coherence of the H_i follows from detection on the atlas, and the 03M1 node makes the colimit taken in all module sheaves quasi-coherent, so it is also the colimit in QCoh. In step 3, directedness uses G+H, p* additivity, 01Y0 on U, detection, and the quotient clause of the coherent-support node. In step 4, exact sheafification makes the canonical map a monic. Step 5's argument through images and cancelling the monic a is correct. Duplicate candidates checked: lem-sfb-qcoh-presentation-tensor-equivalence and lem-sfb-groupoid-module-descent-tensor-cokernel (stack and big-fppf versions, with no coherence-detection clause), the existing 03M1 nodes, and the 07UC node. None is a duplicate. No new node restates a clause of the item. No cycle (checked over the 248-node closure). No SGA citations. Batch-5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, and the atlas node (03H6) reaches sec-trace-formula only through def-trf-algebraic-space. None is part of the proof of the trace formula or of Poincaré duality, so all are accepted. The tool_uses (category colimit, 01Y0, 03DA/03DB, 03CX) are generic and accepted. Advisory, inherited from sibling nodes: 'quasi-compact' and absolute versus relative quasi-separatedness are not spelled out inline."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentFilteredUnion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherentSubobjects_filtered_colimit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CoherentSubobjects",
+   "AlgebraicGeometry.AlgebraicSpace.coherentSubobjectDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.coherentSubobjectCocone",
+   "AlgebraicGeometry.AlgebraicSpace.coherentSubobjects_filtered_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentFilteredUnion.lean",
+  "statement": "theorem coherentSubobjects_filtered_colimit {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (F : X.Modules) [F.IsQuasicoherent] : Nonempty (CoherentSubobjects F) ∧ IsDirected (CoherentSubobjects F) (· ≤ ·) ∧ ∃ c : ColimitCocone (coherentSubobjectDiagram F), IsIso (c.isColimit.desc (coherentSubobjectCocone F))",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Finite presentation on the small etale ringed site is exactly coherence on a locally Noetherian algebraic space by Stacks 07UB (equivalence (1),(3),(4)). Absolute quasi-separatedness uses the affine-pair test of 0AHR, without imposing quasi-separatedness of the structure morphism alone. The conclusion supplies an actual colimit cocone and asserts that its canonical comparison to F is an isomorphism, so no large-colimit existence is added as a hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d3e0f629",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Clause-by-clause vs node and Stacks 07UV/07UB/0AHR: hln covers all étale charts; hqc compactness of Point X; hqs is absolute quasi-separatedness via the 0AHR(3) affine-pair test; F quasi-coherent on X_et. Coherent subobjects use Mathlib IsFinitePresentation, which equals coherence under hln by 07UB (1)<=>(3)<=>(4); no algebraic-space coherence predicate exists in Mathlib, side-live or upstream, so no duplicate. Nonempty, directed, and the canonical comparison from an actual colimit of the subobject-arrow cocone is an iso; the colimit's existence is in the conclusion. Helpers are real data; only the item theorem uses sorry; source/blueprint docstrings and the 5-step proof docstring are present; lean.statement verbatim; no dependency records, no new nodes, no name clash. Advisory: implicit cover-index universe in the finite-presentation/quasi-coherence predicates is harmless since X is quasi-compact; unused public import of CoherentFiniteType. No compile run (no file changed); worker reports clean compiles and a dry run printing OK."
+ }
+}

@@ -1,0 +1,411 @@
+{
+ "id": "lem-sfb-space-module-hom-affine",
+ "kind": "statement",
+ "title": "Affine representability of module Hom with flat proper target",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and use algebraic spaces [def-trf-algebraic-space] and their sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Use quasi-coherent modules on small etale ringed sites and tensor pullback [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it is the cokernel of a map between finite rank free modules. Relative flatness means flatness of stalks on etale scheme charts over the local rings of the base [def-pc-scheme-module-flat-over]. A finite type module is etale locally finitely generated; support proper over the base means there are a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $N$ on $Z$ with $i_*N\\simeq M$, as in [def-sfb-space-proper-quot-functor]. Let $f:X\\to B$ be of finite presentation [def-sfb-space-morphism-properties], and let $F,G$ be quasi-coherent $\\mathcal O_X$-modules. Suppose that $G$ is finitely presented, flat over $B$, and has support proper over $B$. Flatness over an algebraic-space base is tested after etale scheme charts of that base by the preceding stalkwise convention. For every scheme $T\\to B$ put $X_T=X\\times_BT$, and write $F_T,G_T$ for tensor pullback along $X_T\\to X$. The functor $T\\mapsto\\operatorname{Hom}_{\\mathcal O_{X_T}}(F_T,G_T)$ on schemes over $B$ is represented by an algebraic space $H\\to B$, with bijections natural in every scheme $T\\to B$. This morphism is affine: its pullback to any affine scheme over $B$ is an affine scheme. If $F$ is finitely presented, then $H\\to B$ is of finite presentation. Finite presentation of space morphisms means locally of finite presentation on etale charts, quasi-compact, and quasi-separated. No flatness or properness of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08K6, proposition-hom, with situation-hom."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "For any base change $B'\\to B$ and any scheme $T\\to B'$, the identification $(X\\times_BB')\\times_{B'}T=X\\times_BT$ identifies the tensor pullbacks of $F,G$. Indeed the tensor composition comparison sends $a\\otimes(b\\otimes m)$ to $a\\,b\\otimes m$, with inverse $a\\otimes m\\mapsto a\\otimes(1\\otimes m)$; balancing makes these inverse and compatible with another base change. Consequently the base change of the Hom presheaf is the Hom presheaf for the pulled-back data. Tensor pullback preserves quasi-coherence and finite presentation by the two cited module nodes.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-fp-module-limit-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JW (remark-hom-base-change); tensor composition comparison."
+   }
+  },
+  {
+   "text": "The Hom presheaf is an etale sheaf on schemes over $B$. To spell out map descent, let $\\{T_a\\to T\\}$ be an etale cover and compatible maps $u_a:F_{T_a}\\to G_{T_a}$. For each etale scheme chart $V\\to X_T$, the schemes $V_a=V\\times_TT_a$ cover $V$. Restriction identifies the modules here with quasi-coherent scheme modules by the Zariski/etale equivalence and the tensor-restriction comparison. Full faithfulness of scheme fpqc descent glues the $u_a|_{V_a}$ uniquely on $V$. Etale covers are fppf and hence fpqc. On each map of charts the two proposed restrictions agree after this cover, so uniqueness gives their equality. The cartesian-chart-family equivalence therefore glues the chart maps to a unique map on $X_T$. This proves both existence and uniqueness; no representability of the Hom presheaf was used.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JV (lemma-hom-sheaf), etale-cover specialization; scheme fpqc descent and chartwise assembly explicitly expanded."
+   }
+  },
+  {
+   "text": "First prove affine representability for an affine base $B=\\operatorname{Spec}R$. Finite presentation of $f$ and the affine qcqs property imply that $X$ is qcqs. By the module approximation node choose a small filtered diagram of finitely presented quasi-coherent modules $F_j$ with colimit $F$. Tensor pullback is left adjoint, so preserves this colimit. Its universal property gives, for every $T\\to B$, a bijection $\\operatorname{Hom}(F_T,G_T)=\\varprojlim_j\\operatorname{Hom}((F_j)_T,G_T)$: a map on the colimit is exactly a compatible family of maps. This is natural in $T$ because precomposition with the colimit structure maps commutes with tensor pullback.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-module-fp-directed-approximation",
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, second paragraph; Tag 07V9 (lemma-colimit-finitely-presented)."
+   }
+  },
+  {
+   "text": "If the Hom functors for the $F_j$ are represented by affine $B$-schemes $\\operatorname{Spec}C_j$, each transition is a $B$-morphism and hence corresponds contravariantly to an $R$-algebra map. Put $C=\\varinjlim_j C_j$ in commutative $R$-algebras. The cited small-colimit spectrum lemma says $\\operatorname{Spec}C$ is their inverse limit in schemes; the compatible maps to $B$ make it the limit over $B$ too. A map from any $B$-scheme $T$ into this limit is precisely a compatible family into the $\\operatorname{Spec}C_j$, hence precisely a map $F_T\\to G_T$ by step 3. Thus it suffices to treat finitely presented $F$. The index is the small category of step 3, not the potentially large category of all modules. No finite-presentation conclusion is asserted for this general inverse limit.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, second paragraph, passage from a filtered module colimit to an inverse limit of affine Hom schemes; limits.tex Tag 01YW generalized to small diagrams."
+   }
+  },
+  {
+   "text": "Now assume $B=\\operatorname{Spec}R$ and $F$ finitely presented. Regard the data over $\\operatorname{Spec}\\mathbf Z$; the change-of-base-space node identifies the etale ringed sites and their functors. Write $B=\\varprojlim_i B_i$, with $B_i=\\operatorname{Spec}R_i$ for finitely generated integer subrings of $R$. These form a small nonempty directed set: adjoining the union of two finite generating sets gives an upper bound. Every $R_i$ is Noetherian by the finite-type algebra theorem over $\\mathbf Z$; the latter is Noetherian because any nonzero ideal is generated by its least positive element, by integer division. Thus each affine $B_i$ is Noetherian in the sense of the Noetherian Hom lemma: it is quasi-compact and its diagonal is a closed immersion, hence quasi-compact, by the affine qcqs property; every etale scheme chart $V\\to B_i$ is locally of finite presentation, hence locally of finite type, over the Noetherian $B_i$, so $V$ is locally Noetherian by the locally-finite-type permanence of local Noetherianity and the one-chart definition.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, final paragraph, first two sentences; absolute Noetherian approximation of the affine base."
+   }
+  },
+  {
+   "text": "Descend $X\\to B$ to a finitely presented $X_{i_0}\\to B_{i_0}$ using space descent. Its subsequent base changes $X_i$ are finitely presented and qcqs by finite-presentation permanence, affine-base qcqs, and the qcqs-source lemma. Transitions are affine by affine base-change permanence. The base-change limit clause gives $X=\\varprojlim_{i\\ge i_0}X_i$. Apply module continuity separately to $F$ and $G$ and take a common later stage. We obtain finitely presented modules $F_i,G_i$ on $X_i$ whose tensor pullbacks are the specified $F,G$; finite-presentation modules are quasi-coherent directly from their local finite free cokernel presentations. All later identifications use the tensor composition comparison of step 1.",
+   "uses": [
+    "lem-sfb-fp-space-qcqs-base-limit-descent",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-fp-module-limit-category",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, final paragraph, Tags 07SK and 07V7; spaces-limits.tex Tag 07SF for the source limit."
+   }
+  },
+  {
+   "text": "Apply the eventual-flatness node to the fixed model $G_i$: at some stage and every later stage it is flat over the base. Apply the proper-carrier equivalence to $G$ (finite presentation gives finite type; $f$ is locally finite type) to obtain proper scheme-theoretic support, then the eventual-proper-support node to the same fixed model. Choose the support stage after the flatness stage; the flatness node explicitly guarantees persistence. The carrier equivalence at that stage gives support proper in the stated proper-carrier convention. The flatness conventions agree: on any scheme chart, the Zariski/etale equivalence and geometric-stalk formula identify the geometric module stalk with the ordinary stalk tensored with the strict henselization of the source local ring; that extension is faithfully flat, so the source-cover flatness criterion preserves and reflects flatness over the ordinary base local ring; the strict-henselization module criterion then identifies flatness over that ring with flatness over its strict henselization. These are the corresponding geometric local rings. Thus both the hypothesis and the conclusion of eventual flatness have exactly the required relative meaning.",
+   "uses": [
+    "lem-sfb-space-module-eventually-flat",
+    "lem-sfb-space-module-eventually-proper-support",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-trf-relative-flatness-source-cover",
+    "lem-sfb-strict-henselization-module-flatness",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sfb-etale-zariski-module-geometric-stalk",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, final paragraph, Tags 08K0 and 08K2; support convention Tag 0CZI; ordinary/geometric local flatness comparison expanded."
+   }
+  },
+  {
+   "text": "At this stage $B_i$ is Noetherian, $f_i$ is locally finite type and quasi-separated because it is finitely presented, and $F_i,G_i$ are finite type. The module $G_i$ is flat with proper support. Apply the Noetherian Hom lemma to get $H_i\\to B_i$ affine and finitely presented. Its base change $H_i\\times_{B_i}B$ represents the required functor by step 1, and is affine and finitely presented by the two cited permanence results. This proves the affine-base assertion for finitely presented $F$. Steps 3--4 now give the affine-base assertion for arbitrary $F$, retaining finite presentation precisely in the finitely presented case.",
+   "uses": [
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, last four sentences, applying Tag 08JY then pulling back the representing space."
+   }
+  },
+  {
+   "text": "For the original base choose the small affine-component etale atlas $U=\\coprod_a U_a\\to B$. Its pullback $X_U\\to X$ is etale, and each $X_{U_a}\\to U_a$ is of finite presentation because finite presentation is preserved by arbitrary base change. Tensor restriction preserves finite presentations, and relative flatness is unchanged on corresponding geometric local rings, using the ordinary/geometric comparison of step 7. For proper support pull back a proper closed carrier; properness is stable under arbitrary base change, and tensor pullback makes its defining ideal act by zero, hence gives a finite type module over the quotient on the pulled-back carrier. The carrier criterion shows the same support condition. Thus the hypotheses of the affine-base result hold over every $U_a$. Denote the representing affine schemes there by $H_a$, and put $V=\\coprod_a H_a$. If $F$ was finitely presented, its restrictions still are. The universal maps on $X_{H_a}$ define a natural map $h_V\\to\\mathcal H$, where $\\mathcal H$ is the Hom sheaf of step 2.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-fp-module-limit-category",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-proper-base-change",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, opening etale-localization paragraph; Tag 0CZI for carriers. The bounded atlas is made explicit rather than omitting the size condition."
+   }
+  },
+  {
+   "text": "For every scheme $T$ and every $T\\to\\mathcal H$ specifying $T\\to B$ and a module map, $h_V\\times_{\\mathcal H}h_T$ is $h_{U\\times_BT}$: a point of the left side over a scheme $T'$ is a map $T'\\to T$ together with a point of some $H_a$ with the same image in $\\mathcal H$, i.e. a lift $T'\\to U_a$ of $T'\\to B$ together with the pulled-back module map, uniquely by the representability of $H_a$ on all schemes over $U_a$. Taking $T=U_a$ with the inclusion gives in particular $\\mathcal H\\times_BU_a\\cong H_a$, compatibly with the projections to $U_a$. Thus $V\\to\\mathcal H$ is representable etale surjective. In particular $R=V\\times_{\\mathcal H}V=V\\times_BU$ is a scheme; $R\\to V\\times_SV$ is a monomorphism, with the equivalence relation given by equality of the maps to $\\mathcal H$. Both projections are etale. The etale-relation-quotient theorem produces an algebraic space $V/R$. Its map to $\\mathcal H$ is an isomorphism: locally every section lifts to $V$, and two lifts are identified exactly by $R$. All component indices and schemes are small in the fixed universe, so their displayed coproducts are allowed. Put $H=V/R$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-etale-relation-quotient",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, opening paragraph; explicit etale quotient construction supplying the omitted set-theoretic condition of Bootstrap Tag 04SK."
+   }
+  },
+  {
+   "text": "By step 10, $H\\times_BU=\\coprod_aH_a$ over $U=\\coprod_aU_a$, where $U\\to B$ is a representable surjective etale map from a scheme. Each $H_a\\to U_a$ is a morphism of affine schemes, hence an affine morphism of schemes; an affine open of $U$ is quasi-compact, so it meets finitely many components $U_a$, and its preimage is a finite disjoint union of affine schemes, so $\\coprod_aH_a\\to U$ is an affine morphism of schemes. The etale-local criterion of affine locality now shows that $H\\to B$ is affine, i.e. its pullback to any affine scheme over $B$ is an affine scheme. If $F$ is finitely presented, every $H_a\\to U_a$ is of finite presentation by the affine-base result of step 8 applied over $U_a$, whose hypotheses step 9 verified. Hence for the surjective etale chart $U\\to B$ and the surjective etale chart $\\mathrm{id}:H\\times_BU\\to H\\times_BU$, the chart map $\\coprod_aH_a\\to U$ is locally of finite presentation, and the local-properties chart criterion shows that $H\\to B$ is locally of finite presentation. Finally an affine space morphism is quasi-compact and separated by affine permanence, so its diagonal is a closed immersion and in particular quasi-compact (a closed immersion of schemes is affine, so the diagonal is quasi-compact on affine tests). It is therefore quasi-separated and of finite presentation in exactly the stated sense. The representing bijections were defined by the universal module maps and are natural in every scheme test by steps 1, 4, 8 and 10.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K6, affineness and finite-presentation locality; spaces-morphisms.tex Tags 03WG and 0410, with affine diagonal quasi-compactness written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-fp-module-limit-category",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-qcoh-cartesian-chart-family",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-module-fp-directed-approximation",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-sfb-space-change-base-to-integers",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-sfb-fp-space-qcqs-base-limit-descent",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-module-eventually-flat",
+  "lem-sfb-space-module-eventually-proper-support",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-sfb-strict-henselization-module-flatness",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sfb-etale-zariski-module-geometric-stalk",
+  "lem-sfb-noetherian-module-hom",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-space-proper-base-change",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-etale-relation-quotient",
+  "def-weil-size-convention",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08K6 (proposition-hom), proof, with Tag 08JV map descent and Tag 08JW base-change comparison; omitted size check expanded by an etale relation presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a quasi coherent sheaf to a flat finitely presented sheaf with proper support are represented by an affine algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Hom functor of modules on algebraic spaces is affine and finitely presented when the source module is finitely presented",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M₁ M₂ : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"A morphism of presheaves of modules consists of a family of linear maps which\\nsatisfy the naturality condition.\"}\n  {\"name\": \"PresheafOfModules.instAddCommGroupHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : AddCommGroup (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAddHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Add (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instNegHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Neg (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instSubHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Sub (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instZeroHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Zero (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : (PresheafOfModules.unit R ⟶ M) ≃ M.sections\", \"doc\": \"The bijection `(unit R ⟶ M) ≃ M.sections` for `M : PresheafOfModules R`.\"}\n  {\"name\": \"PresheafOfModules.Hom.app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (self : M₁.Hom M₂) (X : Cᵒᵖ) : M₁.obj X ⟶ M₂.obj X\", \"doc\": \"a family of linear maps `M₁.obj X ⟶ M₂.obj X` for all `X`.\"}\n  {\"name\": \"PresheafOfModules.Hom.ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {x y : M₁.Hom M₂} (app : x.app = y.app) : x = y\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.Hom.ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {x y : M₁.Hom M₂} : x = y ↔ x.app = y.app\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} (h : ∀ (X : Cᵒᵖ), f.app X = g.app X) : f = g\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} : f = g ↔ ∀ (X : Cᵒᵖ), f.app X = g.app X\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "HomFunctor|homFunctor|hom.*representab|AlgebraicSpace",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/Double.lean\", \"line\": \"157\", \"text\": \"`K : HomologicalComplex C c` to `X ⟶ K.X i` is corepresentable by `double (𝟙 X) hi₀₁`. -/\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Finsubgraph.lean\", \"line\": \"31\", \"text\": \"finite subgraphs `G'' ≤ G'`, the inverse system `finsubgraphHomFunctor` restricts homomorphisms\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Finsubgraph.lean\", \"line\": \"147\", \"text\": \"def finsubgraphHomFunctor (G : SimpleGraph V) (F : SimpleGraph W) :\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Finsubgraph.lean\", \"line\": \"159\", \"text\": \"  have : ∀ G' : G.Finsubgraphᵒᵖ, Nonempty ((finsubgraphHomFunctor G F).obj G') := fun G' =>\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Finsubgraph.lean\", \"line\": \"161\", \"text\": \"  have : ∀ G' : G.Finsubgraphᵒᵖ, Fintype ((finsubgraphHomFunctor G F).obj G') := by\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Finsubgraph.lean\", \"line\": \"167\", \"text\": \"  obtain ⟨u, hu⟩ := nonempty_sections_of_finite_inverse_system (finsubgraphHomFunctor G F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"331\", \"text\": \"lemma RepresentableBy.homEquiv_eq {F : Cᵒᵖ ⥤ Type v} {Y : C} (e : F.RepresentableBy Y)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"336\", \"text\": \"lemma CorepresentableBy.homEquiv_eq {F : C ⥤ Type v} {X : C} (e : F.CorepresentableBy X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"595\", \"text\": \"theorem reprW_hom_app (F : Cᵒᵖ ⥤ Type v₁) [F.IsRepresentable]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"606\", \"text\": \"lemma uliftYonedaReprXIso_hom_app (F : Cᵒᵖ ⥤ Type (max v v₁)) [F.IsRepresentable]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"line\": \"645\", \"text\": \"theorem coreprW_hom_app (F : C ⥤ Type v₁) [F.IsCorepresentable] (X : C) (f : F.coreprX ⟶ X) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean\", \"line\": \"62\", \"text\": \"  hom := corepresentableBy F G |>.homEquiv.symm <| braidingHomCorepresenting F G\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"line\": \"130\", \"text\": \"    MonoidalCategory.tensorLeft F ⊣ (eHomFunctor _ _).obj ⟨F⟩ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"line\": \"140\", \"text\": \"  rightAdj := (eHomFunctor _ _).obj ⟨F⟩\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"line\": \"70\", \"text\": \"noncomputable abbrev sHomFunctor : Cᵒᵖ ⥤ C ⥤ SSet.{v} := eHomFunctor _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"line\": \"165\", \"text\": \"def eHomFunctor : Cᵒᵖ ⥤ C ⥤ V where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"line\": \"214\", \"text\": \"abbrev eCoyoneda (X : C) := (eHomFunctor V C).obj (op X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"line\": \"51\", \"text\": \"def diagram : Jᵒᵖ ⥤ J ⥤ V := F₁.op ⋙ eHomFunctor V C ⋙ (whiskeringLeft J C V).obj F₂\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"700\", \"text\": \"      ((IsColimit.precomposeHomEquiv e _).1 (colimitOfRepresentable.{v₁} P))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean\", \"line\": \"37\", \"text\": \"`mkOfHomFunctor`: constructs a `PrelaxFunctor` from a map on objects and functors between the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean\", \"line\": \"128\", \"text\": \"def mkOfHomFunctors (F : B → C) (F' : (a : B) → (b : B) → (a ⟶ b) ⥤ (F a ⟶ F b)) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean\", \"line\": \"156\", \"text\": \"lemma mkOfHomFunctors_mapFunctor (F : B → C) (F' : (a : B) → (b : B) → (a ⟶ b) ⥤ (F a ⟶ F b))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean\", \"line\": \"157\", \"text\": \"    (a b : B) : (mkOfHomFunctors F F').mapFunctor a b = F' a b :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Yoneda.lean\", \"line\": \"91\", \"text\": \"  toPrelaxFunctor := PrelaxFunctor.mkOfHomFunctors (fun y => Cat.of (unop y ⟶ x))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Yoneda.lean\", \"line\": \"125\", \"text\": \"  toPrelaxFunctor := PrelaxFunctor.mkOfHomFunctors (yoneda₀ ·) postcomposing₂\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine representability of the Hom functor of quasi coherent modules with flat proper support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} → [inst_1 : CategoryTheory.Category.{v₂, u₂} D] → CategoryTheory.Functor C D → Prop\", \"doc\": \"A functor $ F $ from category $ C $ to category $ D $ is representably flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"Module.Flat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"(ι : Type v) : Flat R (ι →₀ R)\", \"doc\": \"For any index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is flat over the commutative semiring $R$.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsAffineHom f ↔\\n    ∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is affine if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative module Hom functor with finitely presented flat proper support target is an affine algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  outParam AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_le_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) →\\n    P ≤ @AlgebraicGeometry.IsAffi\", \"doc\": \"If a morphism property $ P $ satisfies the $ \\\\text{affineAnd} \\\\, Q $ condition for morphisms with affine target, then $ P $ is bounded above by the property of being an affine morphism, i.e., $ P \\\\leq\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, finite module presentations, and ordinary Hom types do not represent this relative algebraic-space Hom functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of homomorphisms of quasi coherent modules by an affine scheme over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.Modules → X.Modules → Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).FullyFaithful\", \"doc\": \"The forgetful functor that maps sheaves of modules over the structure sheaf of a scheme $X$ to their underlying presheaves of modules is fully faithful. This means that for any two sheaves of modules \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).Full\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $X$ to the category of presheaves of modules over $X$ is full. This means that every morphism between the underlying preshea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, finite module presentations, and ordinary Hom types do not represent this relative algebraic-space Hom functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M₁ M₂ : PresheafOfModules R) : Type (max u₁ v)\", \"doc\": \"A morphism of presheaves of modules consists of a family of linear maps which\\nsatisfy the naturality condition.\"}\n  {\"name\": \"PresheafOfModules.instAddCommGroupHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : AddCommGroup (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAddHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Add (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instNegHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Neg (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instSubHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Sub (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instZeroHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} : Zero (M₁ ⟶ M₂)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.unitHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} (M : PresheafOfModules R) : (PresheafOfModules.unit R ⟶ M) ≃ M.sections\", \"doc\": \"The bijection `(unit R ⟶ M) ≃ M.sections` for `M : PresheafOfModules R`.\"}\n  {\"name\": \"PresheafOfModules.Hom.app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} (self : M₁.Hom M₂) (X : Cᵒᵖ) : M₁.obj X ⟶ M₂.obj X\", \"doc\": \"a family of linear maps `M₁.obj X ⟶ M₂.obj X` for all `X`.\"}\n  {\"name\": \"PresheafOfModules.Hom.ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {x y : M₁.Hom M₂} (app : x.app = y.app) : x = y\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.Hom.ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {x y : M₁.Hom M₂} : x = y ↔ x.app = y.app\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} (h : ∀ (X : Cᵒᵖ), f.app X = g.app X) : f = g\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hom_ext_iff\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {M₁ M₂ : PresheafOfModules R} {f g : M₁ ⟶ M₂} : f = g ↔ ∀ (X : Cᵒᵖ), f.app X = g.app X\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, finite module presentations, and ordinary Hom types do not represent this relative algebraic-space Hom functor"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|homFunctor|hom.*representab",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, finite module presentations, and ordinary Hom types do not represent this relative algebraic-space Hom functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Hom of quasi coherent modules with a flat finitely presented target of proper support is affine",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffineHom f] [Y.IsQuasiAffine] : X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffine X] [IsAffine Y] : IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffineHom f] : QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, finite module presentations, and ordinary Hom types do not represent this relative algebraic-space Hom functor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quot-representability",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom.",
+   "via": [
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-module-hom-affine",
+  "worker": "stage1",
+  "summary": "Followed Tag 08K6: explicit chartwise sheaf descent and bounded etale presentation, module colimit reduction, absolute Noetherian approximation, eventual flatness and proper support, Noetherian Hom and base change. Reused the existing eventual-flatness/support nodes; created only the strictly smaller Noetherian finite-type-module lemma 08JY. Kept the item statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. The steps realize the relative module Hom input to Quot in the supporting moduli chain; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-relative-flatness-source-cover",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic algebraic-space, module-descent, affine-limit or Noetherian-approximation foundation used exactly as stated in the cited step; this unit has no replacement for this foundational input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-fpqc-descent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-etale-relation-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-348aa9eb0",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-348aa9eb0 (reviewer sub-agent of L); spot-checked: Read in full: quot.tex Situation 08JT, 08JV, 08JW, 08JY and Prop 08K6 with its proof; every cited node's statement; the item (11 steps) and the new node lem-sfb-noetherian-module-hom. The item is unsplit and unchanged on live and side-live. The new node matches 08JY hypothesis by hypothesis (Noetherian B; f lft+qs; F,G finite type; G flat with proper carrier, equivalent by 0CZI; conclusion affine+fp). It is strictly smaller than the item and duplicates nothing: rg for 08JY/08K6 finds no other statement, and 0D1C and 07U7 state other things. Small cases checked: X empty or G=0 gives B; F=O^m, G=O^n gives A^{mn}; F of infinite rank gives an affine scheme that is not fp. Steps 1-4, 6-8 and 10 are correct. Step 7's comparison of geometric and ordinary flatness through 04HX, 07QM, 02JZ and 05VL is valid in both directions. Step 10's explicit etale presentation fills the omitted size check correctly. Faults repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-module-hom-affine.json: (1) E1 in step 11: the delivered step applied the affine-base result over an arbitrary affine T->B without establishing flatness or proper support of G_T. It is replaced by the etale-local affineness criterion of lem-sfb-space-affine-locality, applied to H x_B U = coprod H_a, and by the chart criterion for lfp. (2) C1 in step 9: fp of X_{U_a}->U_a was neither stated nor cited; added with lem-sfb-space-flat-proper-fp-locality. (3) In step 5, Noetherianity of B_i is now checked in the new node's convention (every etale chart locally Noetherian, quasi-compact diagonal), citing pqf-lem-locnoeth-lft (01T6, Mathlib leaf), def-weil-etale-morphism and affine qcqs. Step 10 is reworded. All 29 batch-5 citations are generic foundations of algebraic spaces, modules, descent and limits, and none is part of the trace-formula or Poincare-duality proof, so they are accepted. The nine declared tool uses are accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ }
+}

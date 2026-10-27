@@ -12,22 +12,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.Connected.Basic
 public import Mathlib.Topology.Inseparable
 
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.Mathlib.Topology.NoetherianSpace
-import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
-import WeilConjectures.AlgebraicGeometry.SectionComponentPullback
-import WeilConjectures.AlgebraicGeometry.DescendFlatFinitePresentation
-import WeilConjectures.AlgebraicGeometry.NoetherianSpecializationTrait
-import WeilConjectures.AlgebraicGeometry.ConnectedGenericFibreTrait
+import Sheaf.AlgebraicGeometry.FlatPointedNoetherianComponentModel
+import Sheaf.AlgebraicGeometry.FlatReducedSpecializationTraitData
+import Sheaf.AlgebraicGeometry.FlatTraitTwoSectionConnectedOpen
 
 /-!
 # Generalization stability of a section component in a flat geometrically reduced family
@@ -41,7 +28,7 @@ Source: Stacks Project, More on Morphisms, Tag 055Q,
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits Topology IsLocalRing
 
 namespace AlgebraicGeometry
 
@@ -52,52 +39,21 @@ The topological fibre in the conclusion is the scheme-theoretic fibre through `g
 Source: Stacks Project, Tag 055Q, `lemma-connected-along-section-open-neighbourhood`.
 
 Proof:
-1. Given `p` specializing to `q` in the locus, restrict the base to an affine neighbourhood
-   of `g q`. It also contains `g p`. Flatness and finite presentation persist by
-   `lem-weil-pbc-flat-morphism-base-change` and `lem-weil-pbc-qcqs-morphism-permanence`.
-   Apply geometric reducedness to an algebraic closure of the residue field, then use
-   `lem-trf-geometric-reduced-fibre-locus-base-change` for the restricted geometric fibre.
-   The cartesian component identity `lem-sbc-section-component-cartesian` identifies the
-   restricted component locus with the inverse image of the original one.
-2. Express the affine base as a limit of finite-type integer algebras using
-   `lemma-nagata-noetherian-inverse-system-affine`. The three clauses of
-   `thm-pd-spreading-out` descend the family, its section, and the section identity.
-   The stages are qcqs by `lem-weil-pbc-qcqs-morphism-permanence` and noetherian by
-   `lem-weil-pbc-finite-type-over-noetherian`.
-3. By `lem-weil-pbc-descend-flat-finite-presentation`, advance until the model is flat.
-   Its distinguished geometric fibre is reduced by
-   `lem-trf-geometric-reduced-fibre-locus-base-change`; no condition on other model fibres
-   is needed. The cartesian component identity transfers membership of `q` to its model
-   image and identifies the inverse image of the model locus. Continuity transfers the
-   specialization. Equal model images settle the claim immediately.
-4. Otherwise `lem-sbc-noetherian-specialization-trait` traces the specialization by a DVR.
-   Pull back the model to this trait. Flatness and finite presentation persist, and the
-   geometric closed fibre is reduced by the geometric-reduced-fibre base-change lemma.
-   Its ordinary closed fibre is reduced: on affine charts the scalar extension to the
-   algebraic closure is reduced, by `lem-weil-pbc-open-fibre-product`,
-   `lem-weil-pbc-fibre-product-affine-spectra`, and `lem-weil-pbc-affine-scheme-reduced-iff`.
-   The algebra map is injective by `lem-weil-pbc-field-extension-base-change-faithfully-flat`
-   and `lem-weil-pbc-faithfully-flat-universally-injective`, so nilpotents already vanish
-   before extension. This is reducedness in `def-pc-reduced-scheme`.
-5. The trait family has the original section and a second section tracing the two points.
-   The cartesian component identity places both closed section points in the same closed
-   fibre component `D`. Scheme and topological fibres agree by `def-pc-scheme-fibre`.
-   The DVR is noetherian (`def-sc-discrete-valuation-ring`), hence the total space and
-   closed fibre are noetherian by `lem-weil-pbc-finite-type-over-noetherian`; their spaces
-   are noetherian by `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal`.
-6. By `lem-sfb-noetherian-connected-components-open`, `D` is clopen in the closed fibre.
-   Remove its complement from the total space. In the remaining noetherian open, take
-   the open connected component `W` through the original closed section point. Connectedness
-   of `D` implies `D` is contained in `W`, so the second closed section point lies there too.
-7. Both sections factor through `W`: their inverse images are open in the local trait and
-   contain its closed point, so are the entire trait. These are open-subscheme factorizations
-   (`def-weil-open-immersion`). The restriction stays flat (`def-weil-flat-morphism`),
-   with reduced closed fibre (`def-pc-reduced-scheme`). Now
-   `lem-sbc-connected-generic-fibre-trait` makes its generic fibre connected and nonempty.
-8. Its connected image in the generic topological fibre contains both generic section
-   points, so the second lies in the component of the first. Use
-   `lem-sbc-section-component-cartesian` to return this membership to the model general
-   point and then to `p` in the original family. This includes the equality case of step 3.
+1. Use `exists_flat_pointed_noetherian_component_model` at the specialized point q.
+   Lift both points to the open base change. Its first projection is an open immersion,
+   so it reflects their specialization. The model's component inverse-image identity
+   transfers membership of q. Cartesianness identifies its distinguished reduced
+   geometric fibre with the fibre over the image of q. Equal model images settle the claim.
+2. Otherwise apply `exists_flat_reduced_specialization_trait_data` to the strict model
+   specialization. It supplies a flat finitely presented trait family, a reduced closed
+   fibre, two sections meeting the same closed component, and the component inverse-image
+   identity for the projection to the model.
+3. The generic-component conclusion of `exists_connected_open_two_sections_of_flat_trait`
+   puts the graph section's generic point in the component through the original section.
+   The graph section equation identifies its image in the base with the generic point.
+4. Evaluate the trait component inverse-image identity at that generic section point,
+   then the model component inverse-image identity at the lifted original general point.
+   These return the required membership in the original family.
 
 (blueprint: lem-trf-flat-reduced-section-component-generalization) -/
 theorem stableUnderGeneralization_section_component_of_flat_of_geometricallyReduced_fibers
@@ -106,6 +62,66 @@ theorem stableUnderGeneralization_section_component_of_flat_of_geometricallyRedu
     (hred : ∀ t : T, GeometricallyReduced (g.fiberToSpecResidueField t)) :
     StableUnderGeneralization
       {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))} := by
-  sorry
+  intro q p hpq hq
+  obtain ⟨V, hqV, P₀, T₀, g₀, σ₀, b, ρ, _, hP₀, hT₀, _,
+    hg₀, hfp₀, hqc₀, hqs₀, H, hσ₀, _, hred₀, hcomp⟩ :=
+    exists_flat_pointed_noetherian_component_model g σ hσ q (hred (g q))
+  let : IsNoetherian P₀ := hP₀
+  let : IsNoetherian T₀ := hT₀
+  let : Flat g₀ := hg₀
+  let : LocallyOfFinitePresentation g₀ := hfp₀
+  let : QuasiCompact g₀ := hqc₀
+  let : QuasiSeparated g₀ := hqs₀
+  have hpV : g p ∈ V := (hpq.map g.continuous).mem_open V.isOpen hqV
+  have hqrange : q ∈ Set.range (pullback.fst g V.ι) := by
+    rw [Scheme.Pullback.range_fst, Scheme.Opens.range_ι]
+    exact hqV
+  have hprange : p ∈ Set.range (pullback.fst g V.ι) := by
+    rw [Scheme.Pullback.range_fst, Scheme.Opens.range_ι]
+    exact hpV
+  obtain ⟨qV, hqproj⟩ := hqrange
+  obtain ⟨pV, hpproj⟩ := hprange
+  have hpqV : pV ⤳ qV :=
+    (pullback.fst g V.ι).isOpenEmbedding.isInducing.specializes_iff.mp
+      (by simpa only [hpproj, hqproj] using hpq)
+  have hq₀ : ρ qV ∈ connectedComponentIn
+      (g₀ ⁻¹' {g₀ (ρ qV)}) (σ₀ (g₀ (ρ qV))) := by
+    have h := (Set.ext_iff.mp hcomp qV).mpr
+      (by simpa only [Set.mem_preimage, Set.mem_ofPred_eq, hqproj] using hq)
+    exact h
+  have hqbase : pullback.snd g V.ι qV = ⟨g q, hqV⟩ := by
+    apply Subtype.ext
+    change V.ι (pullback.snd g V.ι qV) = g q
+    rw [← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply, hqproj]
+  have hbase : g₀ (ρ qV) = b ⟨g q, hqV⟩ := by
+    rw [← Scheme.Hom.comp_apply, H.w, Scheme.Hom.comp_apply, hqbase]
+  have hp₀ : ρ pV ∈ connectedComponentIn
+      (g₀ ⁻¹' {g₀ (ρ pV)}) (σ₀ (g₀ (ρ pV))) := by
+    by_cases heq : ρ pV = ρ qV
+    · simpa only [heq] using hq₀
+    obtain ⟨R, hR, hdom, hdvr, a, _, _, hflat, hfp, hqc, hqs, _, _, _, _, _,
+      hred, σR, τ, hσR, hτ, _, _, hη, _, htraitcomp, hclosed⟩ :=
+      exists_flat_reduced_specialization_trait_data g₀ σ₀ hσ₀
+        (hpqV.map ρ.continuous) heq hq₀ (hbase.symm ▸ hred₀)
+    let : Flat (pullback.snd g₀ (a ≫ g₀)) := hflat
+    let : LocallyOfFinitePresentation (pullback.snd g₀ (a ≫ g₀)) := hfp
+    let : QuasiCompact (pullback.snd g₀ (a ≫ g₀)) := hqc
+    let : QuasiSeparated (pullback.snd g₀ (a ≫ g₀)) := hqs
+    let : IsReduced ((pullback.snd g₀ (a ≫ g₀)).fiber (closedPoint R)) := hred
+    have hgeneric := (exists_connected_open_two_sections_of_flat_trait
+      (pullback.snd g₀ (a ≫ g₀)) σR τ hσR hτ hclosed).2
+    let η : Spec (.of R) := ⟨⊥, Ideal.isPrime_bot⟩
+    have hτη : pullback.snd g₀ (a ≫ g₀) (τ η) = η := by
+      rw [← Scheme.Hom.comp_apply, hτ]
+      rfl
+    have hmem : τ η ∈ {x : ↥(pullback g₀ (a ≫ g₀)) |
+        x ∈ connectedComponentIn
+          ((pullback.snd g₀ (a ≫ g₀)) ⁻¹' {pullback.snd g₀ (a ≫ g₀) x})
+          (σR (pullback.snd g₀ (a ≫ g₀) x))} := by
+      simpa only [Set.mem_ofPred_eq, hτη] using hgeneric
+    have h := (Set.ext_iff.mp htraitcomp (τ η)).mp hmem
+    simpa only [Set.mem_preimage, Set.mem_ofPred_eq, η, hη] using h
+  have h := (Set.ext_iff.mp hcomp pV).mp hp₀
+  simpa only [Set.mem_preimage, Set.mem_ofPred_eq, hpproj] using h
 
 end AlgebraicGeometry

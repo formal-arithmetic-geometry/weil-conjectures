@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-base-changed-algebra-differential-generators",
+ "kind": "statement",
+ "title": "A chosen finite algebra generating family and its differentials after scalar extension",
+ "statement": "Let $A_0,B_0,C_0,T$ be commutative rings, let $B_0,C_0,T$ be $A_0$-algebras, and let $\\varphi_0:B_0\\to C_0$ be an $A_0$-algebra map. Fix $m\\ge0$ and $x_1,\\ldots,x_m\\in C_0$ such that every element of $C_0$ is a polynomial in the $x_r$ with coefficients in $B_0$ (acting through $\\varphi_0$). Put $B_T=T\\otimes_{A_0}B_0$, $C_T=T\\otimes_{A_0}C_0$, with $B_T\\to C_T$ given by $t\\otimes b\\mapsto t\\otimes\\varphi_0(b)$, and put $x_{r,T}=1\\otimes x_r$. Tensor products use [def-weil-pbc-module-tensor-product], with the ring multiplication $(t\\otimes c)(u\\otimes c')=tu\\otimes cc'$. Then the $x_{r,T}$ generate $C_T$ as a $B_T$-algebra. More explicitly, if $c=\\sum_e\\varphi_0(b_e)\\prod_r x_r^{e_r}$ is any finite polynomial expression, then $t\\otimes c=\\sum_e(t\\otimes b_e)\\prod_r x_{r,T}^{e_r}$ in $C_T$, where coefficients from $B_T$ act via the displayed map. For the universal differentials of [def-weil-pbc-kahler-differentials], the family $(\\mathrm d x_r)_r$ spans $\\Omega_{C_0/B_0}$ as a $C_0$-module and $(\\mathrm d x_{r,T})_r$ spans $\\Omega_{C_T/B_T}$ as a $C_T$-module. For $y_r=x_r$ over $B_0$, or $y_r=x_{r,T}$ over $B_T$, any coefficient $b$ in the respective base and any $e\\in\\mathbf N^m$ satisfy $\\mathrm d(b\\prod_r y_r^{e_r})=\\sum_{r:e_r>0}e_r b\\prod_{s\\ne r}y_s^{e_s}y_r^{e_r-1}\\,\\mathrm d y_r$, and this formula extends additively to polynomial expressions. The empty family $m=0$ is allowed; both differential modules are then zero.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C4F (lemma-colimit-unramified), proof, algebra generators and their differential generators; Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph, monomial/Leibniz calculation extended to an arbitrary generated algebra."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For each exponent vector $e$, the stated tensor-ring multiplication gives $\\prod_r(1\\otimes x_r)^{e_r}=1\\otimes\\prod_r x_r^{e_r}$: start with the empty product $1\\otimes1$ and multiply by one factor $1\\otimes x_r$ at a time. Multiplying by the image of $t\\otimes b$ gives $t\\otimes(\\varphi_0(b)\\prod_r x_r^{e_r})$. Bilinearity in the second variable then gives exactly the asserted formula for $t\\otimes c$ for any chosen finite expression for $c$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), proof, chosen generators after scalar extension; Tag 00CX (lemma-tensor-product), bilinearity and tensor generators."
+   }
+  },
+  {
+   "text": "Every element of $C_T$ is a finite sum of pure tensors: the tensor-definition node says these generate as an $A_0$-module, and a scalar $a$ is absorbed by $a(t\\otimes c)=(at)\\otimes c$. Choose a polynomial expression for the second factor of each pure tensor and apply step 1. The resulting finite sum is a polynomial in the $x_{r,T}$ with coefficients in $B_T$, proving generation. No flatness or injectivity of any ring map is used.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), proof, chosen generators after scalar extension; Tag 00CX (lemma-tensor-product), bilinearity and tensor generators."
+   }
+  },
+  {
+   "text": "Work in either pair $(R,S,y)=(B_0,C_0,x)$ or $(B_T,C_T,x_T)$, and let $\\mathrm d$ denote its universal derivation. The differential-definition node gives additivity, Leibniz, and $\\mathrm d b=0$ for a coefficient from $R$. Thus $\\mathrm d1=0$ and $\\mathrm d(bz)=b\\,\\mathrm dz$. Induction on $n\\geq1$ gives $\\mathrm d(z^n)=n z^{n-1}\\mathrm dz$: the case $n=1$ is the identity, and Leibniz applied to $z^nz$ changes the coefficient $n$ to $n+1$. For $n=0$ the derivative is zero.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph, Leibniz induction; Tag 07BK (definition-differentials), preceding quotient construction, and Tag 00RO (lemma-universal-omega)."
+   }
+  },
+  {
+   "text": "Apply Leibniz successively to the finite product $\\prod_r y_r^{e_r}$. More explicitly, the product of zero factors has derivative zero; appending a factor $z$ to a product $u$ gives $u\\,\\mathrm dz+z\\,\\mathrm du$, so induction gives one summand for each factor. Insert the power formula of step 3, omit the factors with exponent zero, and multiply by $b$ using $\\mathrm d(bz)=b\\,\\mathrm dz$. This gives the displayed monomial formula with only nonnegative exponents. Additivity gives the formula for any finite polynomial sum.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph, Leibniz induction; Tag 07BK (definition-differentials), preceding quotient construction, and Tag 00RO (lemma-universal-omega)."
+   }
+  },
+  {
+   "text": "The quotient construction in the differential-definition node shows that every element of $\\Omega_{S/R}$ is a finite $S$-linear combination of classes $\\mathrm ds$. Each $s$ is a polynomial in $y$ (the hypothesis for $C_0$, step 2 for $C_T$); step 4 expresses $\\mathrm ds$ as a linear combination of the $\\mathrm dy_r$. Substitution proves both spanning assertions. If $m=0$, each polynomial is a coefficient, so every $\\mathrm ds$ is zero and both modules are zero; the monomial sum is empty as required.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph, Leibniz induction; Tag 07BK (definition-differentials), preceding quotient construction, and Tag 00RO (lemma-universal-omega)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C4F (lemma-colimit-unramified), proof, generator sentences; Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph, with the finite Leibniz calculation written out and the tensor-bilinearity calculation of Tag 00CX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "span.*(range.*[dD]|[dD].*range)|adjoin.*(baseChange|tensor)|(baseChange|tensor).*adjoin",
+   "results": "5 hits in Mathlib/RingTheory/Kaehler: Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-generator base change and cotangent-basis formulas are components, not the chosen-family assertion for simultaneous source/target base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.span_range_derivation",
+   "results": "1 hits: KaehlerDifferential.span_range_derivation",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-generator base change and cotangent-basis formulas are components, not the chosen-family assertion for simultaneous source/target base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra generating family after tensor base change generates the algebra and its differentials generate the Kahler module",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquiv; Algebra.Generators.baseChange; KaehlerDifferential.tensorKaehlerEquivBase; instModuleTensorProductKaehlerDifferential; CommRingCat.KaehlerDifferential; KaehlerDifferential.mapBaseChange; KaehlerDifferential; KaehlerDifferential.D_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-generator base change and cotangent-basis formulas are components, not the chosen-family assertion for simultaneous source/target base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given algebra generators x of C over B, after base change T over A the elements 1 tensor x generate T tensor C over T tensor B and their differentials span the module of Kahler differentials",
+   "results": "8 hits: Algebra.Generators.toKaehler_tmul_D; Algebra.Generators.cotangentSpaceBasis_repr_tmul; Algebra.Generators.cotangentSpaceBasis_apply; Algebra.Generators.cotangentSpaceBasis_repr_one_tmul; Algebra.Generators.toKaehler_cotangentSpaceBasis; Algebra.Presentation.differentials.comm₂₃'; KaehlerDifferential.cotangentComplexBaseChange_tmul; KaehlerDifferential.derivationTensorProduct_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-generator base change and cotangent-basis formulas are components, not the chosen-family assertion for simultaneous source/target base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differentials of a specified finite family of algebra generators span the module of Kahler differentials, and simultaneous tensor base change of source and target preserves this generating family",
+   "results": "8 hits: Algebra.Generators.toKaehler_tmul_D; Algebra.Generators.cotangentSpaceBasis_repr_tmul; Algebra.Generators.cotangentSpaceBasis_repr_one_tmul; Algebra.Presentation.differentials.comm₂₃'; Algebra.Generators.toKaehler_cotangentSpaceBasis; Algebra.Generators.cotangentSpaceBasis_apply; KaehlerDifferential.span_range_map_derivation_of_isLocalization; KaehlerDifferential.span_range_derivation",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-generator base change and cotangent-basis formulas are components, not the chosen-family assertion for simultaneous source/target base change"
+  },
+  {
+   "tool": "grep",
+   "query": "span.*[gG]enerat|[gG]enerat.*span|toKaehler_cotangentSpaceBasis|def baseChange",
+   "results": "12 hits in Mathlib/RingTheory/Extension: Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Basic.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Extension/Presentation/Basic.lean; Mathlib/RingTheory/Extension/Presentation/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: algebra-generator base change and cotangent-basis formulas are components, not the chosen-family assertion for simultaneous source/target base change"
+  },
+  {
+   "tool": "grep",
+   "query": "span_range_derivation|toKaehler_cotangentSpaceBasis|def baseChange|map_prod|map_pow",
+   "results": "25 hits in Mathlib/RingTheory: Mathlib/RingTheory/LocalProperties/Reduced.lean; Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/FractionalIdeal/Basic.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/Localization/Integral.lean; Mathlib/RingTheory/Localization/Integral.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative algebra generated by finitely many chosen elements, scalar extension preserves the generators and their differentials span the module of Kahler differentials, with the Leibniz monomial formula",
+   "results": "8 hits: Algebra.Generators.extendScalars; Algebra.Generators.extendScalars_val; CommRingCat.KaehlerDifferential; Algebra.Generators.toExtendScalars; Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation; KaehlerDifferential.ideal_fg; KaehlerDifferential.finite; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Generators.baseChange, KaehlerDifferential",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a chosen finite family generating a commutative algebra, the elements one tensor x generate the base changed algebra over the base changed coefficient ring, and their universal differentials span the Kahler differential module",
+   "results": "8 hits: Algebra.Generators.toKaehler_tmul_D; Algebra.Generators.toKaehler_cotangentSpaceBasis; Algebra.Generators.cotangentSpaceBasis_repr_one_tmul; Algebra.SubmersivePresentation.basisKaehler_apply; Algebra.Presentation.differentials.comm₂₃'; Algebra.Generators.cotangentSpaceBasis_repr_tmul; Algebra.Generators.cotangentSpaceBasis_apply; Algebra.SubmersivePresentation.free_kaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "span_range_derivation|span.*[dD]eriv|[dD]eriv.*span",
+   "results": "5 hits in Mathlib/RingTheory/Kaehler: Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def baseChange|baseChange_val|toKaehler_cotangentSpaceBasis|toKaehler_surjective",
+   "results": "13 hits in Mathlib/RingTheory/Extension: Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The module of Kahler differentials is spanned by differentials of algebra generators, and derivations of monomials are given by the finite product and power Leibniz rules",
+   "results": "8 hits: Algebra.Generators.toKaehler_cotangentSpaceBasis; KaehlerDifferential.span_range_derivation; Algebra.Generators.H1Cotangent.δAux_monomial; KaehlerDifferential.mvPolynomialBasis_repr_D; KaehlerDifferential.mvPolynomialBasis_apply; Algebra.Generators.toKaehler_tmul_D; KaehlerDifferential.mvPolynomialBasis_repr_D_X; KaehlerDifferential.mvPolynomialBasis_repr_apply",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.span_range_derivation",
+   "results": "1 hits: KaehlerDifferential.span_range_derivation",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole statement: span_range_derivation concerns all differentials; Algebra.Generators.baseChange changes the base B to a B-algebra, while the item changes B and C simultaneously over A and includes explicit tensor and monomial formulas. Cotangent-space basis images and surjectivity require an additional assembly argument, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-colimit-unramified-algebra",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the unramified descent used by the nodal-family approximation (Stacks 0CBY first proof, first paragraph); Limits 0C4W reduces it to the affine algebra statement Algebra 0C4F, which this node states. Extracted from lem-trf-colimit-unramified-algebra old proof steps 1--2: the chosen algebra generators and their universal differentials before and after arbitrary scalar extension.",
+   "via": [
+    "lem-trf-colimit-unramified-algebra",
+    "lem-trf-unramified-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-base-changed-algebra-differential-generators",
+  "worker": "stage1",
+  "summary": "Q51 checked Stacks 0C4F, 00RX, 07BK, 00RO and 00CX, searched the live project and Mathlib, and wrote five elementary calculation steps using only the existing tensor-product and differential definition nodes. The statement is unchanged; no new node is needed. The finite-product and power inductions, pure-tensor coefficient formula, quotient spanning argument and empty-family case are explicit.",
+  "blueprint": "Historical algebraic input below lem-trf-local-term-locality (1)--(2), through the recorded nodal-approximation and colimit-unramified ancestry: the chosen-generator sentences of Stacks 0C4F. The latest blueprint now states the contracting-correspondence route; this split only supplies its existing historical algebra dependency and changes no unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-f4cc40547",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-f4cc40547 (reviewer sub-agent of L); spot-checked: The item's statement, stmt_deps, source, blueprint and created fields are identical to clones/live, where the item is still unsplit with an empty proof. No other group has split it and no re-split note applies, so the delivery only adds the proof and the related split fields. Sources read: Stacks algebra.tex 0C4F (lemma-colimit-unramified, lines 47571-96) and 00RX (lemma-differentials-polynomial-ring, first paragraph); tags 00CX/00RO/00RX/07BK/0C4F checked in tags/tags. The proof has five elementary steps, each citing only the two Mathlib-leaf definition nodes def-weil-pbc-module-tensor-product and def-weil-pbc-kahler-differentials. Step 1: the monomial identity follows from the multiplication fixed in the statement, then additivity in the second factor. Step 2: generation uses the tensor node's pure-tensor clause, with no flatness. Step 3: the power rule is a proper induction (n=1, n to n+1, n=0 separately). Step 4: the product rule is an induction over factors with zero exponents omitted. Step 5: spanning uses the quotient presentation, which is part of the Kähler node's statement (C3 OK); for m=0 every ds is 0. Tested cases: m=0 with C_0=B_0/I; Z[x]/(x^2) base-changed to F_p (spanning but not free); d(x^p)=0 in characteristic p; T=0. The citer lem-trf-colimit-unramified-algebra steps 1 and 4 use exactly the generation and spanning clauses. Duplicate search over dag/nodes found only lem-weil-pbc-polynomial-ring-kahler-basis, which covers polynomial rings only. Mathlib has no one-line match: span_range_derivation spans by all da, and Generators.baseChange changes the base over B. No new nodes, no fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BaseChangedAlgebraDifferentialGenerators",
+  "declaration": "Algebra.baseChanged_algebra_differential_generators",
+  "declarations": [
+   "Algebra.baseChanged_algebra_differential_generators",
+   "KaehlerDifferential.ChosenGeneratorFormulas"
+  ],
+  "file": "lean/Sheaf/RingTheory/BaseChangedAlgebraDifferentialGenerators.lean",
+  "statement": "theorem baseChanged_algebra_differential_generators {A : Type u} {B : Type v} {C : Type w} {T : Type z} [CommRing A] [CommRing B] [CommRing C] [CommRing T] [Algebra A B] [Algebra A C] [Algebra A T] (φ : B →ₐ[A] C) (m : ℕ) (x : Fin m → C) (hx : Function.Surjective (MvPolynomial.eval₂Hom φ.toRingHom x)) : Function.Surjective (MvPolynomial.eval₂Hom (TensorProduct.map (AlgHom.id A T) φ).toRingHom (fun r ↦ (1 : T) ⊗ₜ[A] x r)) ∧ (∀ (t : T) (c : C) (s : Finset (Fin m → ℕ)) (b : (Fin m → ℕ) → B), c = ∑ e ∈ s, φ (b e) * ∏ r, x r ^ e r → t ⊗ₜ[A] c = ∑ e ∈ s, TensorProduct.map (AlgHom.id A T) φ (t ⊗ₜ[A] b e) * ∏ r, ((1 : T) ⊗ₜ[A] x r) ^ e r) ∧ KaehlerDifferential.ChosenGeneratorFormulas φ.toRingHom x ∧ KaehlerDifferential.ChosenGeneratorFormulas (TensorProduct.map (AlgHom.id A T) φ).toRingHom (fun r ↦ (1 : T) ⊗ₜ[A] x r)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "ChosenGeneratorFormulas is a transparent conjunction bundling the differential clauses, using exactly the ring-map-induced algebra structure. No new mathematical notion or alternative differentials are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d369e5729",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Item node changed only in its lean field; the lean.statement matches the file exactly. Lean matches node clause by clause: CommRing A B C T with independent universes, A-algebras, φ : B →ₐ[A] C, x : Fin m → C, hx = surjectivity of eval₂Hom φ x. Conclusions: generation via eval₂Hom over Algebra.TensorProduct.map id φ with 1⊗x_r; the pure-tensor formula t⊗c (checked true); ChosenGeneratorFormulas for (φ,x) and (map id φ, 1⊗x) giving span of D x_r = ⊤ with f.toAlgebra, the monomial Leibniz formula (re-derived), additive extension, and m=0 → Subsingleton Ω (true after base change since φ is then surjective). Edge cases checked: m=0, zero rings, T=0, exponents 0 and 1, empty sums, characteristic p, repeated generators. The helper is a Prop conjunction of the item's own clauses, not hollow, listed in declarations with docstrings. No name collisions in Mathlib or side-live. Docstrings carry Source, blueprint id and all 5 proof steps; proof is sorry only; lines under 100 characters; imports Mathlib only. Stacks 0C4F proof read. Not recompiled (no file changed)."
+ }
+}

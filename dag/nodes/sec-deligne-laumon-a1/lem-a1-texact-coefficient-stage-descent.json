@@ -17,137 +17,86 @@
  ],
  "proof": [
   {
-   "text": "Fix $E$ and write $A=R_E[1/\\pi_E]$. On each Hom module the $R_E$-linear map induced by $F_E^{\\mathrm{int}}$ extends to the $A$-linear map $f\\otimes a\\mapsto F_E^{\\mathrm{int}}(f)\\otimes a$ by [def-weil-module-base-change, def-weil-linear-functor]. In the scalar categories [def-weil-linear-scalar-localization], this preserves identity morphisms and composition, since on pure tensors both sides of the composition law are $F_E^{\\mathrm{int}}(fg)\\otimes ab=F_E^{\\mathrm{int}}(f)F_E^{\\mathrm{int}}(g)\\otimes ab$; bilinearity gives the equality on finite sums. Localize the integral shift comparison $c_K:F_E^{\\mathrm{int}}(K[1])\\simeq F_E^{\\mathrm{int}}(K)[1]$ and its inverse. Naturality on $f\\otimes a$ is the integral naturality equation tensored with $a$, using linearity of the shifts and of $c$. The same calculation preserves the iterated shift comparisons. This gives precisely the specified additive $F_E$ with its shift comparison.",
+   "text": "The fraction extension is already supplied, with a shift-compatible factorization Q_C ⋙ F_E ≅ F_E_int ⋙ Q_D. The stipulated triangle description makes Q_D triangulated. Transport exactness of F_E_int ⋙ Q_D across that factorization, then represent each rational distinguished triangle as a Q_C-image and apply Functor.mapTriangleCompIso. This proves exactness of the specified F_E directly; no construction or uniqueness of a semilinear extension is required.",
    "uses": [
-    "def-weil-module-base-change",
-    "def-weil-linear-functor",
-    "def-weil-linear-scalar-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00CX (algebra-lemma-tensor-product) and 05G4 (algebra-definition-base-change); explicit Hom-module base-change calculation"
-   }
-  },
-  {
-   "text": "A distinguished triangle of $\\mathcal C_E$ is, by hypothesis, isomorphic to $Q_{\\mathcal C}(\\Delta)$ for an integral distinguished triangle $\\Delta$. Step 1 gives $F_EQ_{\\mathcal C}(\\Delta)=Q_{\\mathcal D}F_E^{\\mathrm{int}}(\\Delta)$, including the third arrow composed with the shift comparison. This is distinguished because $F_E^{\\mathrm{int}}$ is exact and the target triangulation is the stipulated localized one. Its isomorphic images are distinguished by [def-weil-triangulated-category]. Thus $F_E$ is exact. If $K$ is in either rational half at zero, choose an isomorphism $K\\simeq Q_{\\mathcal C}(K_0)$ with $K_0$ in the corresponding integral half. Its image is isomorphic to $Q_{\\mathcal D}F_E^{\\mathrm{int}}K_0$, in the corresponding rational half. Hence $F_E$ preserves both halves at zero. The identity $\\mathcal C^{\\le m}=\\mathcal C^{\\le0}[-m]$ and its lower counterpart [def-weil-t-structure], together with the shift comparison, give preservation at every integer $m$.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "def-weil-t-structure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014V (derived-definition-exact-functor-triangulated-categories), applied to the assumed localized distinguished triangles; BBD 1.3.16 for t-exactness"
-   }
-  },
-  {
-   "text": "For objects $(E_i,K_i)$, choose a common field $L$; these fields form a nonempty directed set by [def-weil-finite-subextension-directed-set]. Write $X_i=T^{\\mathcal C}_{L/E_i}K_i$ and $b_i^L=\\beta_{L/E_i,K_i}$. The Hom-group map at $L$ is $h_L(u)=(b_2^L)^{-1}F_L(u)b_1^L$. For $M\\supset L$, the tower law reads $b_i^M=\\beta_{M/L,X_i}\\,T^{\\mathcal D}_{M/L}(b_i^L)$ after the supplied associators. Substitution gives\n$$h_M(T^{\\mathcal C}_{M/L}u)=T^{\\mathcal D}_{M/L}((b_2^L)^{-1})\\,\\beta_{M/L,X_2}^{-1}F_M(T^{\\mathcal C}_{M/L}u)\\beta_{M/L,X_1}\\,T^{\\mathcal D}_{M/L}(b_1^L)=T^{\\mathcal D}_{M/L}(h_L(u)),$$\nwhere the middle equality is naturality of $\\beta_{M/L}$. Thus the $h_L$ are compatible additive Hom maps. The universal property of [def-weil-directed-colimit-abelian-groups] gives well-defined additive maps on the Hom colimits; in particular equal representatives have equal images. This proves independence of the common field without assuming that coefficient transition functors are faithful.",
-   "uses": [
-    "def-weil-finite-subextension-directed-set",
-    "def-weil-directed-colimit-abelian-groups"
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "algebra-lemma-directed-colimit (Tag 00D6), the representative description and universal property, applied to the assumed Hom systems; the beta equation is an agent calculation"
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17; agent transport argument using the existing StageSystem quotient and supplied localization factorization."
    }
   },
   {
-   "text": "At a common field for three objects, cancellation of the middle comparison gives $h_L(v)h_L(u)=(b_3^L)^{-1}F_L(v)b_2^L(b_2^L)^{-1}F_L(u)b_1^L=h_L(vu)$, and $h_L(1)=1$. Any two composable arrow classes admit such representatives by directedness and the representative clause of [def-weil-directed-colimit-abelian-groups]. These equalities prove the functor laws for $F_\\Omega$. Its object assignment and Hom maps are exactly those in the statement. The structural functors $J_E^{\\mathcal C}:K\\mapsto(E,K)$ and $J_E^{\\mathcal D}$ satisfy $F_\\Omega J_E^{\\mathcal C}=J_E^{\\mathcal D}F_E$ on stage objects and arrows, with the identity-field identifications. For later fields the induced identifications are the specified $\\beta_{L/E}$.",
+   "text": "Represent a rational object in either half at zero by a localized integral object. Apply F_E to the representing isomorphism, followed by the supplied localization factorization. Integral half preservation and the target half description prove preservation at zero. Use the specified comparison for shift by every integer to transfer this to all cutoffs.",
    "uses": [
-    "def-weil-directed-colimit-abelian-groups",
-    "def-weil-finite-subextension-directed-set"
+    "def-weil-t-structure"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "algebra-lemma-directed-colimit: representatives at a common upper index; explicit cancellation proves functoriality"
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17; agent transport argument using the existing StageSystem quotient and supplied localization factorization."
    }
   },
   {
-   "text": "Give $F_\\Omega$ the shift comparison represented at $(E,K)$ by that of $F_E$. This is independent of the stage and natural on every common-stage arrow: for a shift-compatible natural isomorphism $\\eta:G\\simeq H$ the required square is $c_{H,K}\\eta_{K[1]}=\\eta_K[1]c_{G,K}$, which is assumed for each $\\beta$; naturality of $c_{F_L}$ gives the other square. Every distinguished triangle in the pair category is isomorphic to $J_E^{\\mathcal C}\\Delta$ for a distinguished triangle $\\Delta$ of $\\mathcal C_E$. Its image is isomorphic, including the shifted third arrow, to $J_E^{\\mathcal D}(F_E\\Delta)$, distinguished by step 2 and the assumed description of pair triangles. This proves exactness in [def-weil-triangulated-category]. Likewise every object in either half is isomorphic to $J_E^{\\mathcal C}K$ for a $K$ in that finite-stage half; its image is isomorphic to $J_E^{\\mathcal D}F_EK$ in the target half. Shifts give all cutoffs as in step 2 [def-weil-t-structure]. This also shows that each $J_E$ is exact and t-exact: it sends a stage triangle to a declared distinguished triangle, commutes with shifts, and sends stage halves into the stipulated pair halves.",
+   "text": "Use the existing StageSystem.Morphism.functor and descNatTrans. The stage shift comparisons form a compatible Hom of stage-system morphisms, by NatTrans.shift_app_comm for beta. Descend them to natural isomorphisms. Their zero and addition equations follow by applying the stage inclusion to the corresponding finite-stage equations, using functor_map_ι and the induced pair-category shift formulas. The inclusion comparison commutes with this shift. Represent a distinguished pair triangle at a stage, apply finite-stage exactness and the inclusion square of mapTriangle, and transport along its isomorphism. For both halves, use the assumed stage presentations. These also prove t-exactness of each inclusion.",
    "uses": [
     "def-weil-triangulated-category",
     "def-weil-t-structure"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014V (derived-definition-exact-functor-triangulated-categories); direct use of the pair-triangle and pair-half hypotheses; BBD 1.3.16"
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17; agent transport argument using the existing StageSystem quotient and supplied localization factorization."
    }
   },
   {
-   "text": "For $F=F_E$ or $F_\\Omega$, preservation of the two halves implies preservation of their intersection, the heart. Apply clause 4 of [lem-weil-heart-short-exact-triangles]: a short exact sequence $0\\to A\\to B\\to C\\to0$ in the source heart has a distinguished triangle $A\\to B\\to C\\to A[1]$. Exactness of $F$ gives a distinguished triangle on $FA,FB,FC$, all in the target heart, so the same clause makes its first two arrows a short exact sequence in that heart. The restricted functor is additive because $F$ is additive, and it preserves every short exact sequence. This is the claimed exact functor of hearts.",
+   "text": "Construct the actual heart restriction by ObjectProperty.lift. T-exactness preserves the intersection of the two halves, and additivity follows from the faithful heart inclusion. Apply the short-exact/distinguished-triangle criterion before and after mapping its triangle by F; the third arrow is F(delta) followed by the specified shift comparison.",
    "uses": [
     "lem-weil-heart-short-exact-triangles"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Theorem 1.3.6 and Proposition 1.3.17(i); apply the short-exact-sequence/distinguished-triangle criterion"
+    "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17; agent transport argument using the existing StageSystem quotient and supplied localization factorization."
    }
   },
   {
-   "text": "The bounded t-structures for both rational stages and pair categories are hypotheses. Steps 2 and 5 verify exactness with specified shifts and preservation of both halves at every cutoff. Thus [lem-pod-texact-truncation-comparison] applies to each $F_E$ and to $F_\\Omega$. It gives both natural isomorphisms $\\alpha^-_{F,m}$ and $\\alpha^+_{F,m}$, their uniqueness, and exactly the equations $\\iota^m_{FK}\\alpha^-_{F,m,K}=F(\\iota^m_K)$ and $\\alpha^+_{F,m,K}F(\\pi^m_K)=\\pi^m_{FK}$. In particular these are comparisons with the canonical maps, rather than unspecified objectwise truncation isomorphisms.",
+   "text": "For each finite functor, transition, inclusion and descended functor use eTruncLTIso and eTruncGEIso. Their counit/unit equations are the existing upstream equations; uniqueness is lem-pod-texact-truncation-comparison. Take q to be truncationCohomologyComparison. Its proved formula is precisely q_formula after expanding truncLE and truncGELE. The square theorem supplies the beta and inclusion squares. For an isomorphism from a composite to a third functor, combine the comparison composition equations with transformation naturality, for both truncations and q. Apply this to the tower associators and transIso.",
    "uses": [
-    "lem-pod-texact-truncation-comparison"
+    "lem-pod-texact-truncation-comparison",
+    "lem-a1-cohomology-comparison-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(i),(ii), pp. 29-30, as packaged in the existing canonical t-exact comparison lemma"
+    "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17; agent transport argument using the existing StageSystem quotient and supplied localization factorization."
    }
   },
   {
-   "text": "Fix $E\\subset L$ and either truncation $\\tau$ at $m$. Both composites $G=T^{\\mathcal D}_{L/E}F_E$ and $H=F_LT^{\\mathcal C}_{L/E}$ are exact and preserve both halves: apply preservation for the two factors in succession. Apply the natural-transformation and composition clauses of [lem-pod-texact-truncation-comparison] to $\\eta=\\beta_{L/E}:G\\simeq H$. Writing the same symbol $\\tau$ for the respective stage truncations, its equality is explicitly\n$$\\alpha_{F_L,T^{\\mathcal C}_{L/E}K}\\,F_L(\\alpha_{T^{\\mathcal C}_{L/E},K})\\,\\beta_{L/E,\\tau K}=\\tau(\\beta_{L/E,K})\\,\\alpha_{T^{\\mathcal D}_{L/E},F_EK}\\,T^{\\mathcal D}_{L/E}(\\alpha_{F_E,K}).$$\nThis proves beta compatibility for each sign. For $E\\subset L\\subset M$, the composition clause identifies the comparison for each composite transition with the successive comparisons; apply the transformation clause also to the supplied tower associators. Substituting the assumed beta tower identity into the displayed equality makes the result for $M/E$ identical to its result first for $L/E$ and then for $M/L$. The identity clause deals with $L=E$.",
+   "text": "The inclusion comparisons are uniquely normalized, so any supplied finite-stage truncation computation respecting the canonical maps equals them. The inclusion square therefore gives the finite-stage representation, and the transIso composite square gives independence of further enlargement, including cohomology. The theorem already records these as SquareCompatible and CompositeCompatible equations.",
    "uses": [
-    "lem-pod-texact-truncation-comparison"
+    "lem-pod-texact-truncation-comparison",
+    "lem-a1-cohomology-comparison-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(i),(ii): natural-transformation, identity and composition clauses of the cited comparison lemma, applied to the supplied beta and tower isomorphisms"
-   }
-  },
-  {
-   "text": "Put $N=\\tau^{\\ge j}\\tau^{\\le j}K$ and let $c^j_{F,N}:F(N[j])\\simeq(FN)[j]$ be the iterated shift comparison. Define\n$$q_{F,j,K}=\\bigl(\\tau^{\\ge j}(\\alpha^-_{F,j,K})\\,\\alpha^+_{F,j,\\tau^{\\le j}K}\\bigr)[j]\\,c^j_{F,N}:F\\mathcal H^jK\\xrightarrow{\\sim}\\mathcal H^jFK.$$\nAll three factors are natural isomorphisms, so this is a natural isomorphism. For a shift-compatible transformation $\\eta:F\\Rightarrow G$, use the transformation equation of [lem-pod-texact-truncation-comparison] first for the lower truncation at $\\tau^{\\le j}K$ and then for the upper truncation at $K$. After shifting their composite and using $c^j_G\\eta_{N[j]}=\\eta_N[j]c^j_F$, the resulting equation is\n$$q_{G,j,K}\\,\\eta_{\\mathcal H^jK}=\\mathcal H^j(\\eta_K)\\,q_{F,j,K}.$$\nThe composition clause for both alpha factors and the composite shift comparison give $q_{HF,j,K}=q_{H,j,FK}\\,H(q_{F,j,K})$. Applying these equations to step 8 proves all beta, identity and successive-extension compatibilities for cohomology. Negative $j$ uses the inverse shift comparisons; the calculation is unchanged.",
-   "uses": [
-    "lem-pod-texact-truncation-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3 and the convention H^j(K)=H^0(K[j]) in 1.3.6; explicit composition of the two canonical comparisons with the specified shift comparison"
-   }
-  },
-  {
-   "text": "For either truncation let $\\gamma_{E,K}^{\\mathcal C}:J_E^{\\mathcal C}\\tau_EK\\simeq\\tau_\\Omega J_E^{\\mathcal C}K$ be its finite-stage computation isomorphism from the hypotheses, and similarly for $\\mathcal D$. These isomorphisms respect the canonical maps by hypothesis, so uniqueness in [lem-pod-texact-truncation-comparison], applied to the exact t-exact $J_E$ of step 5, identifies them with the canonical comparisons for $J_E$. Apply that lemma's composition clause to $F_\\Omega J_E^{\\mathcal C}=J_E^{\\mathcal D}F_E$ from step 4. It gives\n$$\\alpha_{F_\\Omega,J_E^{\\mathcal C}K}\\,F_\\Omega(\\gamma^{\\mathcal C}_{E,K})=\\gamma^{\\mathcal D}_{E,F_EK}\\,J_E^{\\mathcal D}(\\alpha_{F_E,K}).$$\nThus, under the prescribed identifications, the comparison at $(E,K)$ is represented by the comparison at $E$. Replacing $E$ by $L\\supset E$ gives the same morphism: the compatibility equation of step 8 is precisely the equation after the common-stage identifications by beta and the transition-truncation comparisons. Hence it is independent of further enlargement. Naturality for arbitrary pair arrows follows either from step 7 or by putting the arrow and these comparisons at its common field and using their stage naturality. Applying the formula of step 9, with shifts also computed at a stage, proves the identical finite-stage representation and independence assertions for $q$.",
-   "uses": [
-    "lem-pod-texact-truncation-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
-    "place": "Proposition 1.3.3(i),(ii): uniqueness and composition applied to finite-stage inclusions; coefficient context is Bhatt-Scholze Proposition 6.8.14 and Remark 6.8.15"
+    "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17; agent transport argument using the existing StageSystem quotient and supplied localization factorization."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-module-base-change",
-  "def-weil-linear-functor",
-  "def-weil-linear-scalar-localization",
   "def-weil-triangulated-category",
   "def-weil-t-structure",
-  "def-weil-finite-subextension-directed-set",
-  "def-weil-directed-colimit-abelian-groups",
   "lem-weil-heart-short-exact-triangles",
-  "lem-pod-texact-truncation-comparison"
+  "lem-pod-texact-truncation-comparison",
+  "lem-a1-cohomology-comparison-pasting"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.14(1)-(2) and Remark 6.8.15 supply context only. Explicit abstract transport argument under the item's hypotheses; truncation and heart steps use the existing lemmas from BBD 1.3.3, 1.3.6 and 1.3.17. No assertion that Bhatt-Scholze states this abstract lemma."
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "BBD 1.3.3, 1.3.6, 1.3.16 and 1.3.17. Direct localization-factor and existing StageSystem descent proof; Bhatt-Scholze 6.8.14 and Remark 6.8.15 provide coefficient context only."
  },
  "mathlib_searches": [
   {
@@ -244,10 +193,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-a1-texact-coefficient-stage-descent",
   "worker": "stage1",
-  "summary": "Kept the complete abstract statement. Constructed scalar Hom maps and shift comparisons, checked exactness and both halves at rational and common stages, used the existing heart/triangle criterion and canonical truncation-comparison lemma, and wrote beta, tower, cohomology and finite-stage equations explicitly. No new nodes; current logged Mathlib searches found infrastructure only.",
+  "summary": "Q32 repairs the human re-split instruction: unchanged statement; two independent statement-only argument nodes for triangulated t-exact pair descent (old Steps 3-5) and cohomology comparison pasting (old Steps 8-9); old Steps 1-2 are carried by the existing lem-pur-semilinear-scalar-localization (unique fraction extension, localized shift, exactness) plus an elementary half-preservation step; existing heart and canonical truncation lemmas reused. Six assembly steps, every original argument mapped in report.md. Reviewer FIX (Q32 maintainer reader, 2026-10-22): the delivered scalar-descent node restated the existing semilinear localization node (phi=1) plus a few-line argument, so it was dropped and Step 1 re-cites the existing node.",
   "blueprint": "Realizes the abstract coefficient-transport subargument of lem-a1-constructible-pullback-t-exact (returned Steps 7-10), below lem-a1-finite-map-purity, first proof paragraph on restriction to geometric fibres and the finite-stalk formula. The original blueprint does not state this generic lemma.",
   "tool_uses": [
    {
@@ -257,20 +206,25 @@
    {
     "node": "lem-weil-heart-short-exact-triangles",
     "why": "Generic criterion turning distinguished triangles in any t-structure heart into short exact sequences and conversely; no affine-line route is replaced."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic unique additive extension of a linear exact functor to raw scalar localizations, with localized shift comparison and exactness; this unit has no such tool and no route step is replaced."
    }
   ]
  },
  "tool_uses": [
   "lem-pod-texact-truncation-comparison",
-  "lem-weil-heart-short-exact-triangles"
+  "lem-weil-heart-short-exact-triangles",
+  "lem-pur-semilinear-scalar-localization"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q94-fd1462deb",
-  "group": "Q94",
+  "reviewer": "NT-cc-Q32-ec43a9ddc",
+  "group": "Q32",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-fd1462deb (reviewer sub-agent of L); spot-checked: I read the full 10-step split of the unchanged statement-only item. It has no new nodes, and statement, stmt_deps, source and blueprint are byte-identical to side-live. The item is still unsplit with no reviewed field on both live and side-live, it is not in route-pivot-dropped and it has no repair note. Every step's citation states what the step takes from it. Step 1: base change of the linear Hom map, checked on pure tensors. Step 2: localized triangles, and both halves preserved at every cutoff via the shift and strict fullness. Step 3: I checked the types of the tower law b^M=β_{M/L}∘T(b^L), and naturality of β gives h_M∘T=T∘h_L; the colimit universal property then defines the maps without faithfulness. Steps 4-5: functor laws, exactness and t-exactness of F_Ω and of each J_E, with the shift square from the assumed shift-compatibility of β. Step 6: heart exactness from clause 4 of lem-weil-heart-short-exact-triangles in both directions. Steps 7-10: the hypotheses of lem-pod-texact-truncation-comparison hold. I re-derived the β equation and the q formula, including the α⁺_H naturality its composition law needs. Uniqueness for J_E identifies the finite-stage γ with α_{J_E}. Sources: Bhatt–Scholze 6.8.14(1)-(2) and Rem. 6.8.15 are context only, and proof_origin=agent is correct; no SGA. Edge cases tested: zero and identity functors, out-of-range cutoffs, torsion killed by localization, non-faithful transitions, negative j. Batch-5 flag on lem-pod-texact-truncation-comparison: its full closure is itself plus def-weil-triangulated-category and def-weil-t-structure, and it is the generic statement that t-exact functors commute with truncation. Neither the trace-formula nor the Poincaré-duality assumption gives it and it is no step of their proofs, so I accept it. I accept both declared tool_uses as generic black boxes. Advisory: steps 3-4 re-derive lem-sbc-coherent-pair-functor-descent from definitions; this is correct but could cite that node. Step 2 reads the item's 'have distinguished triangles isomorphic to localized integral triangles' as 'exactly those', which is the natural reading."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ec43a9ddc (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and BBD 1.3.3, 1.3.6 and 1.3.16-1.3.17 (pp. 29-30, 36). The released re-split note (2026-10-21/22, at least 3 nodes) reopens stage 1. I compared the delivery with the Q94 base proof (10 steps); the statement is byte-identical. Every old argument has a carrier: old Steps 3-5 go to lem-a1-texact-pair-descent, Steps 8-9 to lem-a1-cohomology-comparison-pasting, Step 6 to the heart lemma clause 4, Step 7 to the pod lemma, and Step 10 is an instance of the pasting square with F=J^C_E, F'=J^D_E, U=F_E, V=F_Omega, b=id (orientation checked). I re-derived the q formula types, its eta law (pod transformation clause plus the eta/c^j compatibility) and its composition law (both alpha composition clauses, naturality of alpha^+_H at alpha^-_F, c^j_{HF}=c^j_H H(c^j_F)). I also checked the types of the pair-node tower equation and of the conjugation formula, and that independence of representatives holds without faithfulness. FAULT (C5/C1): the new lem-a1-linear-texact-scalar-descent restates the PASSed lem-pur-semilinear-scalar-localization with phi=1 (unique fraction extension, localized shift comparison, exactness, FQ=QF); the only new part is a few-line half-preservation argument. Its stmt_deps also missed def-weil-linear-category and def-weil-triangulated-category (B3). FIX: the node is dropped. Step 1 now cites the semilinear node, a new elementary Step 2 carries the half argument (isomorphism closure, strict fullness, T^{<=m}=T^{<=0}[-m]), and I added a tool_use; the new nodes' closures stay acyclic and outside the trace/Poincare chapters. The proof is 2931 characters. Count after the drop is 2 of the required 3, a waiver since every old argument has a carrier. Batch-5 flag on the pasting node citing lem-pod-texact-truncation-comparison: accepted. It is a generic BBD truncation-comparison lemma whose closure is only def-weil-triangulated-category and def-weil-t-structure, not part of the Poincare duality or trace formula. Advisory: the additive clause of the pair node is a special case of lem-sbc-coherent-pair-functor-descent, which its prover should cite; the node is kept for its shift, exactness and t-exactness content. Accepted tool_uses: the pod truncation-comparison lemma, the heart lemma, and the semilinear localization lemma.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.Triangulated.CoefficientStageDescent",
@@ -303,5 +257,27 @@
   "group": "Q103",
   "result": "pass",
   "note": "Read node, 6 stmt_dep records, delivered module and report, and the StageSystem/ScalarLocalization/IsTExact/TExactTruncationComparison sources. lean.statement verbatim; all 11 declarations present; node differs from side-live only in lean. Hypotheses: rationalStage = ScalarLocalization at the recorded uniformizer; IsLocalizedTStructure gives the triangle and half isomorphism closures (iff, stage-1 reading); rational shift determined by Q.CommShift plus the R-linear integral shifts; F_E pinned by FractionExtension (objects, pure tensors, localized shift); beta = M.β with CommShift, M.coh and hbetaId; F_Omega = M.functor (conjugation formula); pair halves are isomorphism closures, truncations computed at a finite stage. Conclusions: ∃ CommShift on F_Omega with a definitionally typed HEq pin; Comparisons gives exactness, t-exactness, the actual heart restriction exact on short exact sequences, unique α± with the canonical counit/unit equations, q matching step 9; Square/CompositeCompatible types checked and true by uniqueness; beta, assoc, ι and transIso squares cover the coherences and finite-stage representation. Edge cases: nonempty index, E=L, zero objects, all integer cutoffs, non-faithful transitions, independent universes. Proof only sorry, docstrings and blueprint tags present. No recompile (no file changed); worker compile clean. Advisories: StageSystem decls owned by non-stmt_dep nodes (inline description matches); heavy FiniteStagePairCategory import with a second Preadditive instance; Comparisons restates the eTrunc isos; second reading by the same worker."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T094951-L-3278416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

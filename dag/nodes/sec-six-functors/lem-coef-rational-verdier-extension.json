@@ -1,0 +1,127 @@
+{
+ "id": "lem-coef-rational-verdier-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized rational Verdier comparison for one coefficient embedding",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$, and a separated finite-type $D.k$-scheme $X$ [def-weil-finite-field-fiber, def-weil-proper-morphism, def-weil-finite-type-morphism]. Use the raw rational constructible categories and canonical coefficient functors [def-weil-rationalization-karoubi], and the normalized rational Verdier data and comparison predicate [def-sf-rational-verdier-data]. Let $E,L$ be finite extensions of $\\mathbf Q_\\ell$, $i:E\\to L$ a $\\mathbf Q_\\ell$-algebra embedding, $w_E,w_L$ coherent integral dualizing data [def-sf-coherent-integral-dualizing-datum], and $A,B$ any normalized rational Verdier data for them whose signed symmetries are natural in both variables (without naturality the symmetry, and with it the biduality map, is fixed only on literal K-flat pairs, so the biduality square can fail by a sign). There exists a scalar comparison $e=(\\overline u,\\overline\\beta)$ from $A$ to $B$ satisfying ExtensionProperties: its components are the localizations of the canonical integral $u$ and $\\beta$, and it preserves completed evaluation and the actual biduality. No unit or composition coherence is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-rationalization-karoubi",
+  "def-sf-rational-verdier-data",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models"
+ ],
+ "proof": [
+  {
+   "text": "For $E\\subset L$ let $S=\\mathcal O_L$ and $T=T_{S/R}$. The exact functor $T$, the dualizing comparison $u:T\\omega_{X,R}\\xrightarrow{\\sim}\\omega_{X,S}$ and the natural duality comparison $\\beta_K:TD_RK\\xrightarrow{\\sim}D_STK$, with their inverses, are supplied by [lem-coef-integral-finite-extension]. Define the rational comparison to be $Q_S(\\beta_K)$. Its source and target are exactly those stated: [def-weil-rationalization-karoubi] defines $-\\otimes_E L$ by $K\\mapsto TK$ and $f\\otimes a\\mapsto T(f)\\otimes a$, $a\\in E\\subset L$, and step 2 defines $D_E,D_L$ on the same representatives. For $f:K\\to M$ integral naturality reads $D_S(Tf)\\beta_M=\\beta_KT(D_Rf)$; its image multiplied by $a$ is the equation for $f\\otimes a$, and additivity gives rational naturality. The localized inverse remains inverse. That lemma's evaluation compatibility uses ordinary tensors and the strong comparison $c^\\circ_{A,B}:TA\\otimes^L_{\\widehat S_X}TB\\xrightarrow{\\sim}T(A\\otimes^L_{\\widehat R_X}B)$; put $c_{A,B}=T(\\chi_{A,B})\\,c^\\circ_{A,B}\\,\\chi_{TA,TB}^{-1}$ with $\\chi$ of [lem-fix-constructible-tensor-completion] over $R$ and $S$. With $\\mathrm{ev}$ as in step 5, naturality of $\\chi$ turns the two supplied compatibilities into\n$$\\mathrm{ev}_{S,TK}\\circ(\\beta_K\\widehat\\otimes1_{TK})=u\\circ T(\\mathrm{ev}_{R,K})\\circ c_{D_RK,K},$$\n$$\\beta_{D_RK}\\circ T(\\delta_{R,K})=D_S(\\beta_K)\\circ\\delta_{S,TK},$$\nfrom $TD_RK\\widehat\\otimes_S^LTK$ to $\\omega_{X,S}$ and from $TK$ to $D_STD_RK$. For the rational scalar extension $\\overline T$ write $\\overline u,\\overline c,\\overline\\beta$ for the images. Applying $Q_S$ gives, with the tensor and evaluation convention of [def-weil-derived-pullback-tensor-hom],\n$$\\mathrm{ev}_{L,\\overline TK}\\circ(\\overline\\beta_K\\otimes1_{\\overline TK})=\\overline u\\circ\\overline T(\\mathrm{ev}_{E,K})\\circ\\overline c_{D_EK,K},$$\n$$\\overline\\beta_{D_EK}\\circ\\overline T(\\delta_{E,K})=D_L(\\overline\\beta_K)\\circ\\delta_{L,\\overline TK},$$\nthe required rational evaluation and biduality compatibilities, since $Q_S$ preserves composites and $\\overline TQ_R=Q_ST$ on these integral arrows.",
+   "uses": [
+    "lem-coef-integral-finite-extension",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-finite-extension",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6; proof written by B6 from the recorded integral rationalization plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization of a contravariant duality with canonical evaluation and coherent scalar extension",
+   "results": "LinearMap.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv (Mathlib.RingTheory.Localization.Module); no constructible-category duality or normalized coherence statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.op",
+   "results": "CategoryTheory.Equivalence.op and its functor/inverse formulas in Mathlib.CategoryTheory.Opposites; no raw scalar localization or normalized Verdier comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|ScalarLocalization|scalar localization",
+   "results": "25 hits in Mathlib, including CategoryTheory/Shift/CommShift.lean, Algebra/Homology/HomotopyCategory/Pretriangulated.lean, CategoryTheory/Localization/Triangulated.lean, CategoryTheory/Triangulated/Subcategory.lean; no normalized rational Verdier comparison. Local rg also found the existing project ScalarLocalization and RationalVerdier definitions, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdier",
+  "date": "2026-10-25",
+  "group": "B6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierExtension",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierExtension.lean",
+  "declaration": "WeilConjectures.RationalVerdier.extension_exists",
+  "statement": "theorem extension_exists\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (i : E →ₐ[Padic l] L)\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (wL : IntegralFiniteExtension.DualizingDatum l X D hl L)\n    (A : Datum D l hl X E wE) (B : Datum D l hl X L wL)\n    (hA : ∀ (K M K' M' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l E X))\n      (f : K ⟶ K') (g : M ⟶ M'),\n      A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' M').hom =\n        (A.symmetry.swap K M).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f))\n    (hB : ∀ (K M K' M' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l L X))\n      (f : K ⟶ K') (g : M ⟶ M'),\n      B.ordinary.tensor.map (Prod.mkHom f g) ≫ (B.symmetry.swap K' M').hom =\n        (B.symmetry.swap K M).hom ≫ B.ordinary.tensor.map (Prod.mkHom g f)) :\n    ∃ e : Extension D l hl X E L i wE wL A B,\n      ExtensionProperties D l hl X E L i wE wL A B e",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalVerdierModels vs clone RationalVerdier.lean (identical except irreducible completionChain via third_exists_first, change-recorded); four split statements vs Conclusion and IntegralVerdier.SignedSymmetry/delta definitions; 12 direct importers compiled against sandboxed delivery (11 ok, VerdierCoefficientRealization pre-existing missing olean)"
+ }
+}

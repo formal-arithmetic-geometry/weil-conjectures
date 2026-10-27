@@ -21,6 +21,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Exact principal completion and its canonical triangle map
 

@@ -1,0 +1,164 @@
+{
+ "id": "lem-per-localized-ordinary-identity",
+ "kind": "statement",
+ "title": "Identity square for a normalized localized edge",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite field extension with ring of integers $A$, and $\\varpi\\in A$. On small pro-etale sites use $B_W=\\varprojlim_n(A/\\mathfrak m^{n+1})_W$, $R_W=B_W[1/\\varpi]$, their actual structural maps, and the normalization predicates [def-per-localized-ordinary-pullback-data]. For any scheme X assume its completed coefficient map for the identity is the specified inverse-image identity comparison on $B_X$. For any fixed normalized Edge a for $\\mathrm{id}_X$, there exists Identity for a: its coefficient map is the inverse-image identity on $R_X$, its ordinary comparison multiplies scalars with the canonical identity-chart restriction, its derived comparison has the stated representative equation, and both delta-identity squares commute.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); finite coefficient composition: sites.tex Tag 03CB (lemma-composition-morphisms-sites); Bhatt–Scholze Remark 6.8.15, p. 62; explicit coefficient/localization normalization supplied by agent"
+ },
+ "stmt_deps": [
+  "def-per-localized-ordinary-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "the supplied completed coefficient identity, inverse-image identity\nnaturality, and the edge coefficient-unit equation identify the coefficient\nmap after precomposition by the localization unit. Its universal property\ngives coefficient_id. The ordinary identity comparison multiplies the\ncoefficient into the module after restriction along pullbackId. Its inverse\ninserts 1. Balancing, the coefficient identity and the identity-site\nadjunction prove the inverse identities and naturality. This is precisely\nthe ordinary_tensor formula.\n\nThe edge ordinary_unit formula and scalar linearity show that both routes\nin ordinary_square send e tensor (b tensor m) to e iota_X(b) tensor m,\nwith the canonical identity-chart restriction. Local inverse-image generators\nand sheafification extend the equality to every module section. Derive the\nordinary identity map using flat-term K-flat representatives; the derived\nidentity comparison has exactly the displayed derived_model equation.\nInsert the Edge model equation and the fixed integral derived identity\nmodel equation. The ordinary identity square and cancellation of the\ninvertible resolving counits prove derived_square on these representatives.\nEvery unbounded object is isomorphic to such a representative. Naturality\ntransports the equality along that isomorphism and makes it independent\nof the choice. No structural coefficient map is assumed invertible.",
+   "uses": [
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); finite coefficient composition: sites.tex Tag 03CB (lemma-composition-morphisms-sites); Bhatt–Scholze Remark 6.8.15, p. 62; explicit coefficient/localization normalization supplied by agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original normalization proof, Steps 1–7; Identity square for a normalized localized edge. Explicit balanced-map calculations retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves of modules commutes with extension of scalars and localization compatibly with composition and identity",
+   "results": "8 hits, headed by SheafOfModules.pullbackComp, pullback_assoc, pullback_comp_id, freeFunctorCompPullbackIso. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. These ordinary pullback comparisons do not provide the normalized comparison between the actual integral and localized derived pullbacks.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "12 hits, beginning with CategoryTheory.Limits.pullbackComparison. They concern categorical pullbacks rather than the scalar-localization comparison of module-sheaf functors.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of constant sheaves is compatible with composition of morphisms of sites",
+   "results": "8 hits, including CategoryTheory.constantCommuteCompose and SheafOfModules.pullbackComp. Read the existing ProfiniteCoefficientInverseImage implementation: its proved constant comparison lemmas are usable for the coefficient proof, but none of these hits states a normalized localized edge or its derived composition square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedFiniteCoefficientMap|completedCoefficientMap",
+   "results": "Remote Mathlib grep returned 0 hits. Local rg in lean/Sheaf and lean/WeilConjectures found CompletedTowerPullback, ProfiniteCoefficientInverseImage, PbcScalarExtension and CompletedCoefficientRingedCoherence. The first three supply the coefficient proof. The last uses a different completed coefficient presentation, and does not provide the normalized localized module comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedOrdinaryPullbackNormalization",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Re-split: old proof Steps 1–2 and the ordinary identity calculation of Step 7. Substep: Identity square for a normalized localized edge.",
+   "via": [
+    "lem-per-localized-ordinary-pullback-normalization",
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalizedOrdinaryIdentity",
+  "file": "lean/Sheaf/Paper/LocalizedOrdinaryIdentity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.LocalizedOrdinary.localizedOrdinaryIdentity_exists",
+  "statement": "theorem localizedOrdinaryIdentity_exists (X : Scheme.{u})\n    (hc : completedCoefficientMap (𝟙 X) (pbcIntegralDatum l E) =\n      (proEtaleRingInverseImageId X).hom.app (B l E X))\n    (a : Edge l E ϖ (𝟙 X)) : Nonempty (Identity l E ϖ X a)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.LocalizedOrdinaryPullbackNormalization",
+  "worker": "E8",
+  "summary": "Identity square for a normalized localized edge; extracted as a strict substep of the original normalization proof.",
+  "blueprint": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Re-split: old proof Steps 1–2 and the ordinary identity calculation of Step 7. Substep: Identity square for a normalized localized edge.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic coefficient, localization or ringed-derived comparison interface, used with its specified constants, units and resolving models; it does not replace the Fourier/perverse unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cafe1",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261027T012824-L-2336455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cafe1",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261027T012824-L-2336455",
+  "kind": "interface",
+  "note": "independent cc review: extracted Data module vs clone item module (verbatim except blueprint tags); item theorem signature vs clone; 3 sorry statements vs their nodes; direct importer RationalScalarMixedUnitCancellation compiled against delivered modules; #print axioms on coherence + item"
+ }
+}

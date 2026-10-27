@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-space-qcoh-vanishing-above-dimension",
+ "kind": "statement",
+ "title": "Quasi-coherent cohomology of a quasi-compact quasi-separated space vanishes above dimension",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], and let $X$ be an algebraic space over $B$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact (it admits a quasi-compact surjective etale scheme atlas) and quasi-separated (its absolute representable diagonal $X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is quasi-compact, meaning that every scheme base change has quasi-compact inverse images of quasi-compact opens). Give $|X|$ the quotient topology from an etale atlas [def-a1-space-point-topology], and let $\\dim|X|$ be its topological Krull dimension [def-kun-topological-krull-dimension], with $\\dim\\varnothing=-\\infty$. Let $d\\geq0$ be an integer with $\\dim|X|\\leq d$. For every quasi-coherent $\\mathcal O_X$-module $G$ on the small etale ringed site [def-trf-space-quasi-coherent-module], one has $H^q(X,G)=0$ for every integer $q>d$. Here $H^q$ is the right derived functor of module global sections, computed by an injective resolution in all module sheaves [def-weil-sheaf-of-modules-category, def-sp-injective-resolutions]. No Noetherian, coherence, separatedness, properness or flatness hypothesis is imposed beyond quasi-compactness and quasi-separatedness.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0A4R (lemma-vanishing-above-dimension), part (1), with the preceding paragraph identifying chart dimension and topological Krull dimension for quasi-compact quasi-separated algebraic spaces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-kun-topological-krull-dimension",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-change-base-to-integers] with $S=B$ and $S\\prime=\\operatorname{Spec}\\mathbf Z$. It retains the scheme charts, fibre products, small etale ringed site and structure sheaf; the same chart quotient gives the same point space. Thus quasi-compactness, the absolute quasi-separatedness hypothesis, dimension and the cohomology in the statement are unchanged. Work over $\\operatorname{Spec}\\mathbf Z$ from now on. By [lem-sfb-qcqs-space-splitting-filtration] choose $n\\geq1$, quasi-compact opens $\\varnothing=U_{n+1}\\subset U_n\\subset\\cdots\\subset U_1=X$, and surjective etale $f_p:V_p\\to U_p$ with $V_p$ quasi-compact separated schemes, isomorphisms over the reduced complements $T_p=U_p\\setminus U_{p+1}$, and $U_n\\simeq V_n$. Put $W_p=U_{p+1}\\times_{U_p}V_p$. The pair $(U_{p+1}\\subset U_p,V_p\\to U_p)$ is an elementary distinguished square by precisely the stated complement isomorphism.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-qcqs-space-splitting-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4R(1), finite filtration paragraph; Tag 07ST (decent-spaces.tex); change of base required by the absolute-base formulation of 07ST"
+   }
+  },
+  {
+   "text": "Every $U_p$ is quasi-separated: its absolute diagonal is the base change of the absolute diagonal of $X$ along $U_p\\times U_p\\to X\\times X$, and quasi-compactness is preserved by base change [lem-sfb-space-quasicompact-affine-tests]. By [lem-a1-space-point-open-calculus] its point space is the corresponding open subspace of $|X|$; hence [lem-weil-pbc-open-subspace-dimension-monotone] gives $\\dim|U_p|\\leq d$. Apply [lem-sfb-space-etale-atlas-topological-dimension] to $U_p\\to\\operatorname{Spec}\\mathbf Z$ and its atlas $V_p$: $\\dim|V_p|=\\dim|U_p|\\leq d$. The open immersion $U_{p+1}\\to U_p$ is quasi-compact by [lem-sfb-space-qcqs-permanence]. Its base change $W_p\\to V_p$ is quasi-compact by [lem-sfb-space-quasicompact-affine-tests]; testing the latter over the quasi-compact scheme $V_p$ shows that $W_p$ is quasi-compact. It is an open subscheme of $V_p$ by the open-subspace chart clause of [lem-a1-space-point-open-calculus]. Its dimension is at most $d$ by open-subspace dimension monotonicity. Since $V_p$ is separated, it is quasi-separated by [lem-pc-separated-quasi-separated]; restriction of its diagonal gives the same for $W_p$. Thus both $V_p$ and $W_p$ are qcqs schemes, and their underlying spaces are spectral by [lem-weil-pbc-qcqs-scheme-spectral].",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-sfb-space-etale-atlas-topological-dimension",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4R(1), initial dimension remarks and scheme-chart hypotheses; Tags 0A4H/0A4J; 073B and 094L for the finiteness and spectral checks"
+   }
+  },
+  {
+   "text": "For $A=U_p,V_p,W_p$ write $G_A$ for etale restriction of $G$. The localized ringed-site identifications of [lem-trf-space-enlarged-etale-ringed-site-model] identify this with tensor pullback, because the structure sheaf is restricted without a change of rings. Each $G_A$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. For a scheme among these objects, [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] gives a quasi-coherent Zariski module $F_A$ whose associated etale module is $G_A$. Its module cohomology on the etale site is canonically $H^q(A,F_A)$ on the Zariski site by [lem-sfb-qcoh-cohomology-etale-pullback-naturality]. By [lem-sc-zariski-module-abelian-cohomology-agree] the latter is the cohomology of the underlying abelian sheaf. Consequently [lem-sfb-spectral-space-cohomology-dimension] applied to the spectral spaces from step 2 gives $H^q(V_p,G_{V_p})=H^q(W_p,G_{W_p})=0$ for $q>d$. The same holds for $U_n\\simeq V_n$. Moreover, apply [lem-sfb-spectral-module-top-degree-restriction] to $(|V_p|,\\mathcal O_{V_p})$, $F_{V_p}$ and its quasi-compact open $W_p$. It makes $H^d(V_p,F_{V_p})\\to H^d(W_p,F_{V_p}|_{W_p})$ surjective. The restriction inverse in the quasi-coherent equivalence identifies $F_{V_p}|_{W_p}$ with $F_{W_p}$, and the displayed pullback-naturality square of the cohomology comparison transports this particular restriction map to $H^d(V_p,G_{V_p})\\to H^d(W_p,G_{W_p})$. Thus this last map is surjective.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "lem-sfb-spectral-space-cohomology-dimension",
+    "lem-sfb-spectral-module-top-degree-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4R(1), scheme comparison and spectral cohomology input; Tags 03DW, 0A3G(1),(2) and 01F1"
+   }
+  },
+  {
+   "text": "For any one of the small etale ringed sites used here, a module map $\\mathcal O\\to I$ is determined by its values on $1$: these are compatible sections of $I$, and conversely such a family defines the map by $a\\mapsto a s$. Thus the complex $\\operatorname{Hom}^{\\bullet}(\\mathcal O[0],I^{\\bullet})$ is exactly $\\Gamma(I^{\\bullet})$, using [def-pur-ringed-site-zeroth-hypercohomology]. The K-injective Hom computation of [lem-sfb-derived-internal-hom-sections-model], with first complex $\\mathcal O[0]$, therefore identifies $\\operatorname{Hom}_{D(\\mathcal O_A)}(\\mathcal O_A,G_A[q])$ with $H^q(A,G_A)$; an ordinary injective resolution is K-injective by [lem-sp-kinjective-computes]. This computation also identifies the restriction maps, since the formula on each complex is restriction of its compatible sections. Specialize [lem-sfb-space-derived-hom-mayer-vietoris] to the distinguished square in step 1 and $E=\\mathcal O_{U_p}[0]$, $F=G_{U_p}[0]$. Its exact etale restrictions of $E$ are the structure sheaves. The resulting long exact sequence contains $$H^{q-1}(U_{p+1},G)\\oplus H^{q-1}(V_p,G)\\longrightarrow H^{q-1}(W_p,G)\\longrightarrow H^q(U_p,G)\\longrightarrow H^q(U_{p+1},G)\\oplus H^q(V_p,G),$$ with the first arrow the difference of the two restrictions. Here the notation suppresses the indicated etale restrictions of $G$.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-sp-kinjective-computes",
+    "lem-sfb-space-derived-hom-mayer-vietoris"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H9 (lemma-mayer-vietoris-hom), specializing E to the structure sheaf; Mayer-Vietoris reformulation of the localization step in Tag 0A4R(1)"
+   }
+  },
+  {
+   "text": "Descend on $p$ from $n$ to $1$, proving the simultaneous assertion $H^q(U_p,G_{U_p})=0$ for all integers $q>d$. The base $p=n$ is step 3. For $p<n$ assume the assertion for $p+1$, and fix $q>d$. The final term of the exact segment in step 4 is zero by the induction hypothesis and step 3. If $q>d+1$, then $H^{q-1}(W_p,G)=0$ by step 3, so exactness gives $H^q(U_p,G)=0$. If $q=d+1$, the restriction from the $V_p$ summand of the first term onto $H^d(W_p,G)$ is surjective by step 3; its negative is still surjective. Hence the boundary into $H^{d+1}(U_p,G)$ is zero, and exactness plus the vanishing of the final term again gives $H^{d+1}(U_p,G)=0$. These two cases exhaust integer $q>d$. At $p=1$ this is the required vanishing on $X$. The argument also covers $d=0$ and empty strata: all restrictions to the empty space have zero target, and the same exact segment applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0A4R(1), descending induction; the q=d+1 localization boundary uses Tag 0A3G(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-qcqs-space-splitting-filtration",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-sfb-space-etale-atlas-topological-dimension",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sfb-spectral-space-cohomology-dimension",
+  "lem-sfb-spectral-module-top-degree-restriction",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sp-kinjective-computes",
+  "lem-sfb-space-derived-hom-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0A4R (lemma-vanishing-above-dimension), part (1), finite splitting filtration and descending induction. The localization argument is written as the equivalent elementary-distinguished-square Mayer-Vietoris sequence (spaces-perfect.tex Tag 08H9); the scheme support-vanishing input is expanded into 0A3G(1),(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-coherent sheaf cohomology of a quasi-compact quasi-separated algebraic space vanishes above its Krull dimension",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"krullDim\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(dimension|krullDim)|AlgebraicSpace|vanishing.above.dimension",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi-coherent cohomology vanishes above dimension for quasi-compact quasi-separated algebraic spaces",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck vanishing for quasi-coherent modules on algebraic spaces with quasi-compact quasi-separated total space of dimension d",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|vanishing.above.dimension|cohomology.*(dimension|krullDim)",
+   "results": {
+    "t": "2026-10-23T19:49:23Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|vanishing.above.dimension|cohomology.*(dimension|krullDim)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme sections, quasi-coherent presentations or abstract derived-category vanishing criteria; none gives quasi-coherent cohomological dimension of arbitrary qcqs algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf cohomology on algebraic spaces vanishes above Krull dimension",
+   "results": {
+    "t": "2026-10-23T19:49:24Z",
+    "tool": "leansearch",
+    "query": "Quasi coherent sheaf cohomology on algebraic spaces vanishes above Krull dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.isQuasicoherent",
+     "SheafOfModules.IsQuasicoherent",
+     "SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+     "SheafOfModules.QuasicoherentData.I",
+     "SheafOfModules.QuasicoherentData.ctorIdx",
+     "SheafOfModules.QuasicoherentData.mk",
+     "SheafOfModules.QuasicoherentData"
+    ],
+    "digest": "1c36f5544a408842"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme sections, quasi-coherent presentations or abstract derived-category vanishing criteria; none gives quasi-coherent cohomological dimension of arbitrary qcqs algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"krullDim\"",
+   "results": {
+    "t": "2026-10-23T19:49:24Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"krullDim\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme sections, quasi-coherent presentations or abstract derived-category vanishing criteria; none gives quasi-coherent cohomological dimension of arbitrary qcqs algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent module cohomology on a quasi compact quasi separated algebraic space vanishes in degrees greater than its topological Krull dimension",
+   "results": {
+    "t": "2026-10-23T19:49:24Z",
+    "tool": "leanfinder",
+    "query": "Quasi coherent module cohomology on a quasi compact quasi separated algebraic space vanishes in degrees greater than its topological Krull dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "DerivedCategory.isZero_of_isGE",
+     "DerivedCategory.isZero_of_isLE",
+     "DerivedCategory.isLE_iff",
+     "CategoryTheory.hasInjectiveDimensionLT_iff",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective"
+    ],
+    "digest": "9b26650b9e080383"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme sections, quasi-coherent presentations or abstract derived-category vanishing criteria; none gives quasi-coherent cohomological dimension of arbitrary qcqs algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck vanishing for quasicoherent sheaves on quasi compact quasi separated algebraic spaces without noetherian assumptions",
+   "results": {
+    "t": "2026-10-23T19:51:21Z",
+    "tool": "leanfinder",
+    "query": "Grothendieck vanishing for quasicoherent sheaves on quasi compact quasi separated algebraic spaces without noetherian assumptions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact"
+    ],
+    "digest": "a92df3b43a3f0559"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme sections, quasi-coherent presentations or abstract derived-category vanishing criteria; none gives quasi-coherent cohomological dimension of arbitrary qcqs algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-fibre-cohomology-bound",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: cohomology of each infinitesimal fibre vanishes above its unchanged dimension (Tag 0A4R(1)).",
+   "via": [
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qcoh-vanishing-above-dimension",
+  "worker": "stage1",
+  "summary": "Retained the statement and all its hypotheses. Followed 0A4R(1) through the existing 07ST filtration, made the chart finiteness and dimension checks explicit, and expressed supported localization by existing 08H9 Mayer-Vietoris. Added only the non-Noetherian spectral ringed-space top-degree restriction input 0A3G(2)/01F1; existing Noetherian restriction nodes do not suffice. Checked both the boundary degree q=d+1 and the higher degrees, the module interpretation, the empty case and d=0. No Lean attachment found.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/moduli prerequisite chain to 0A4T and its 0A4R(1) infinitesimal-fibre cohomology input. Steps 1-5 supply exactly this last prerequisite. blueprint_refs.py ancestor returns None, retained with the inherited via chain; whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic Point images, continuity, and open embeddings for algebraic spaces input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-open-subspace-dimension-monotone",
+    "why": "Generic Krull dimension does not increase on an open subspace input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic A separated morphism of schemes is quasi-separated input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic The underlying space of a quasi-compact quasi-separated scheme is spectral input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic Enlarged etale ringed-site models of algebraic spaces input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "Generic Cohomology of a Zariski module agrees with that of its underlying abelian sheaf input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sfb-spectral-space-cohomology-dimension",
+    "why": "Generic Cohomology of abelian sheaves on a finite-dimensional spectral space input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic Derived internal Hom into a K-injective and its derived global sections input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic K-injective resolutions compute derived functors input used exactly through its stated conclusion in the spectral scheme-chart/Mayer-Vietoris proof of 0A4R(1); no node of this unit supplies the same general foundation. It replaces no step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sfb-spectral-space-cohomology-dimension",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sp-kinjective-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-3f83b532f",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-3f83b532f (reviewer sub-agent of L); spot-checked: Read the item, the new node, all 20 cited statements, Stacks 0A4R(1) with its dimension paragraph, 0A3G(1)-(3), 01F1, and the tags 07ST and 08H9. The statement is unchanged against clones/live and side-live, where the item is still unsplit; there is no repair note and no SGA source. The route is 0A4R(1) with supported-cohomology localisation replaced by 08H9 Mayer-Vietoris on (U_{p+1}⊂U_p, V_p→U_p). This needs exactly 0A3G(1) vanishing on V_p and W_p plus 0A3G(2) surjectivity H^d(V_p)→H^d(W_p), the same content as Stacks' 0A3G(3). Step 1: change-to-integers clause (3) keeps sites and structure sheaf, and the 07ST node gives the filtration over Spec Z. Step 2: U_p quasi-separated by base change of the diagonal, dim via the atlas-dimension node with f quasi-separated, W_p a qc open subscheme, V_p and W_p spectral. Step 3: c^q comparison and its naturality for the open immersion W_p→V_p carry the Zariski surjectivity to étale cohomology, a real transport. Step 4: Hom^•(O,J)=Γ(J) through derived-internal-hom-sections-model, specialised to the MV node. Step 5: induction checked at q=d+1, q>d+1, d=0 and empty strata. The new node (0A3G(2), module form, dim ≤ d) is true: for dim T<d use part (1) on the spectral W; for empty T everything vanishes; 01F1 keeps restriction compatible. It is self-contained and statement-only. It is not a duplicate: the existing spectral-dimension node states only (1), and the other top-degree nodes assume Noetherian. All 11 batch-5 flags are generic algebraic-space or quasi-coherent foundations that reach sec-trace-formula only through def-trf-algebraic-space or the generic 03DX/03G1 trf lemmas, not steps of the trace formula or Poincaré duality; all are accepted, as are the tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCohomologyAboveDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isZero_moduleCohomology_of_dimension_le",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCohomologyAboveDimension.lean",
+  "statement": "theorem isZero_moduleCohomology_of_dimension_le {B : Scheme.{u}} (X : AlgebraicSpace B) (hqc : ∃ (U : Over B) (a : yoneda.obj U ⟶ X.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : IsAbsolutelyQuasiSeparated X) (d : ℤ) (hd : 0 ≤ d) (hdim : topologicalKrullDim (Point X.obj.obj) ≤ (d.toNat : WithBot ℕ∞)) (G : X.QCoh) (I : InjectiveResolution (X.smallModuleRestriction.obj G.obj)) (q : ℤ) (hq : d < q) : IsZero ((((preadditiveCoyoneda.obj (op (SheafOfModules.unit X.smallStructureRings))).mapHomologicalComplex (ComplexShape.up ℤ)).obj (I.cocomplex.extend ComplexShape.embeddingUpNat)).homology q)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Cohomology is computed on every injective resolution in all module sheaves on the existing equivalent small affine etale model, via Hom from its structure module; extension by zero gives integer degrees. The original section universe is retained. Adds only the landed absolute-quasi-separatedness and small-ringed-model nodes to stmt_deps, as authorized for existing interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61a662199",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Stacks 0A4R(1): any B; X:AlgebraicSpace B; qc = ∃ compact étale surjective scheme atlas (def-trf IsEtale/IsSurjective); absolute qs via landed IsAbsolutelyQuasiSeparated (0AHR(3), stmt_dep added); topologicalKrullDim of Point with recorded pointTopologicalSpace ≤ d.toNat with d:ℤ, 0≤d; G:X.QCoh; H^q = homology of Hom(unit, I) on InjectiveResolution in all SmallModules (landed def-sfb-space-small-ringed-model: actual restriction with identity ring map, recorded equivalence, Grothendieck abelian so not vacuous), extended to ℤ; ∀ q>d IsZero. Item diff vs side-live/live = lean record + 2 stmt_deps (both landed 2026-10-23, byte-identical in snapshot). lean.statement verbatim in file; no duplicate declaration; no new defs; sorry only; source/blueprint docstrings with 5 proof steps incl. q=d+1 surjectivity; report sections present. Edge cases (empty X, d=0, q=d excluded, universes u+1/u) fine. No compile (no file changed). Note: node's d≥0 vs source's any d is harmless (d<0 forces X empty)."
+ }
+}

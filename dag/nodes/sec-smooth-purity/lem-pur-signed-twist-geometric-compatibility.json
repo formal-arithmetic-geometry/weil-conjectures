@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-signed-twist-geometric-compatibility",
+ "kind": "statement",
+ "title": "Geometric transport of an evaluation-normalized signed Tate comparison",
+ "statement": "Fix a finite purity setting P of [def-pur-conventions], a natural number n with P.level=n+1, the finite coefficient ring A=O_E/(varpi_E^(n+1)), and a proof that ell^(n+1) annihilates A. For every k-scheme X with structure morphism a, write L_X(r) and M_X(r) for the signed etale and pro-etale A-module sheaves, and nu_X for site comparison, as defined in [def-pur-signed-twist-site-transport-data]. Let b_X(j):nu_X^*L_X(j) ≅ M_X(j), j≥0, satisfy the specified root-tensor normalization [lem-amb-finite-tate-site-descent]. Let q_X(r) be any family of signed comparison isomorphisms agreeing with b in nonnegative degrees and satisfying the actual evaluation equation of [def-pur-signed-twist-site-transport-data]. There is a family tau_(v,a,r):v_pro^* M_X(r) ≅ M_Xprime(r) for every map v:Xprime→X of k-schemes, with the prescribed root-generator formula at all nonnegative degrees, preservation of dual evaluation, and the actual canonical identity and composition constraints. For every negative degree r, v_pro^*q_X(r) followed by tau_(v,a,r) equals the canonical comparison mate [lem-weil-pbc-comparison-pullback], followed by nu_Xprime^* of the prescribed etale pullback isomorphism and q_Xprime(r). Precisely the predicates SignedSiteGeometricLaws and SignedSitePullbackSquare of the cited definition hold; no multiplication or theta normalization is asserted.",
+ "stmt_deps": [
+  "def-pur-signed-twist-site-transport-data",
+  "lem-amb-finite-tate-site-descent",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 0GMX: natural tensor comparison and the evaluation transpose; negative pullback square obtained by the displayed local-basis calculation."
+ },
+ "proof": [
+  {
+   "text": "Let $v:X'\\to X$ and $d>0$. Obtain the positive square from the root-induced etale maps, the same-root site square [lem-amb-finite-root-site-comparison], and the projection-induced theta identification and its scheme square [lem-amb-tate-root-projection-reduction]. Tensor iteration gives the root-normalized nonnegative comparisons of [lem-amb-finite-tate-site-descent], the comparison $k_v$ with its identity/composition laws [lem-weil-pbc-comparison-pullback], and the evaluation-compatible etale pullbacks [lem-asd-etale-finite-twist-pullback]. Pullback of duals is the transpose of pulled evaluation [lem-pur-ringed-site-finite-free-dual-pullback]; relative tensor pullback is natural [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Pair the two proposed maps on degree $-d$ with the common degree $d$ map. Substitution of the two evaluation formulas of Step 2 and the positive pullback square gives the same pulled evaluation on both routes. Explicitly, on a pulled local basis $e_d$ put $f_d=q^+_{X,d}(e_d)$ and $e'_d=\\tau^e_{v,d}(v_e^*e_d)$. The positive square says that both positive routes take $e_d$ to $f'_d=q^+_{X',d}(e'_d)$. Each negative route takes $e_d^\\vee$ to the functional with value $1$ on $f'_d$, hence to $(f'_d)^\\vee$. Here the naturality of $k_v$ applies also to the basis map from the coefficient unit; on constant coefficients its component is the unit identification. Thus the two negative routes agree on a local basis, proving the stated square with exactly the specified dual maps. For an identity or a composite of scheme maps, the two candidate negative maps again pair with the same positive map to the same evaluation; uniqueness gives the identity and composition laws. This also proves the requested compatibility with dual evaluation.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-amb-finite-root-site-comparison",
+    "lem-amb-tate-root-projection-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0GMX: natural tensor comparison and the evaluation transpose; negative pullback square obtained by the displayed local-basis calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-finite-tate-site-descent",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-amb-finite-root-site-comparison",
+  "lem-amb-tate-root-projection-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Separate result in Step 4 of lem-pur-signed-twist-site-transport; its full local proof is in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor for sheaves of modules preserves the dual of a finite locally free line and its evaluation pairing",
+   "results": "8 hits: Scheme.Modules.pullback; SheafOfModules.pullback; pullbackObjFreeIso.congr_simp; pullbackPushforwardAdjunction; Equivalence.sheafCongrPrecoherent_inverse_map_val_app; instIsLeftAdjointPullback; pullbackObjFreeIso_hom_naturality; pullbackObjFreeIso_hom_naturality_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Generic pullback and free-module API, no normalization of the actual signed Tate comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of module sheaves sends a finite locally free line dual to its dual preserving evaluation and uniquely extends a positive Tate comparison to signed powers",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv; ModuleCat.tilde; LightCondensed.free; ModuleCat.Tilde.toOpen; ModuleCat.tildeInModuleCat; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_symm_comp; ModuleCat.Tilde.const.",
+   "date": "2026-10-25",
+   "verdict": "no exact result for the specified root-normalized signed Tate maps; generic free-sheaf and tilde results do not assert the evaluation, product or geometric equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual, CategoryTheory.Functor.Monoidal",
+   "results": "1 hit: CategoryTheory.hasRightDualOfEquivalence, Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "dual transport along an equivalence, not the specified Tate comparison and its local normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|signed.*[Pp]ower",
+   "results": "1 hit: Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean:53, each n is assigned a value, which we use as the coefficients of the power series.",
+   "date": "2026-10-25",
+   "verdict": "unrelated power-series use; no Tate sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedTwistSiteTransport",
+  "date": "2026-10-25",
+  "group": "A6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Opening sheaf-theoretic base-change reduction and final descent, with 'Unit multiples': compatibility of the coefficient identification with scheme pullback. This is source Step 4 of lem-pur-signed-twist-site-transport.",
+   "via": [
+    "lem-pur-signed-twist-site-transport",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedTwistGeometricCompatibility",
+  "file": "lean/Sheaf/Paper/SignedTwistGeometricCompatibility.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.signedTwistGeometricCompatibility",
+  "statement": "theorem signedTwistGeometricCompatibility (P : PurityFiniteSetting.{u}) (n : ℕ)\n    (hlevel : P.level = n + 1)\n    (hA : ((P.coefficients.l ^ (n + 1) : ℕ) : P.signedSiteCoefficient n) = 0)\n    (b : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj\n        (P.signedSiteEtale n hA X (k : ℤ)) ≅ P.signedSitePro n X (k : ℤ))\n    (hb : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      IsFiniteTateSiteComparison P.coefficients.l P.extension n X n hA k (b X a k))\n    (q : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (r : ℤ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj\n        (P.signedSiteEtale n hA X r) ≅ P.signedSitePro n X r)\n    (hq : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      q X a k = b X a k)\n    (he : P.SignedSiteEvaluation n hA q) :\n    ∃ τ : P.SignedSiteGeometric n,\n      P.SignedSiteGeometricLaws n τ ∧ P.SignedSitePullbackSquare n hlevel hA τ q",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "independent cc review: delivered SignedTwistSiteTransportData defs vs clone a25e16ef939 SignedTwistSiteTransport lines 44-284 (byte-identical); theorem signature byte-identical; 3 new sorry statements = item conjuncts (node lean.statement = signature ×3); root_normalized compiled in scratch against live defs, axioms propext/Classical.choice/Quot.sound; 0 importers"
+ }
+}

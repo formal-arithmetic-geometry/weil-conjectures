@@ -1,0 +1,132 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-chain-composition",
+ "kind": "statement",
+ "title": "Composition of the finite ordinary total-tensor pullback comparison",
+ "status": "split",
+ "statement": "Fix l,E,n and composable h:Z→X,f:X→Y. Use the actual ordinary identified-coefficient module pullbacks O_f and their termwise functors U_f. Let b_f(P,Q) be the inverse of the canonical proEtaleTensorPullbackTotalIso, and a:U_(h≫f)≅U_f U_h the termwise lift of the composite of the finite realization for h≫f, sfIntrinsicPullbackComp h f, the inverse realization for f whiskered by intrinsic h*, and the inverse realization for h whiskered by ordinary f*. For all unbounded complexes P,Q of modules over the finite coefficient sheaf on Y, without flatness or invertibility assumptions, b_(h≫f)(P,Q) Tot(a_P⊗a_Q) = a_Tot(P⊗Q) U_h(b_f(P,Q)) b_h(U_f P,U_f Q), in traversal order. This is an equality of ordinary chain maps, before derived localization.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-sp-finite-intrinsic-pullback",
+  "def-pur-finite-pullback-tensor-construction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; ordinary tensor formula in sites-modules.tex, lemma-tensor-product-pullback (03EL); unit and adjunction composition in sites.tex (00YV)."
+ },
+ "proof": [
+  {
+   "text": "For sheaves, the chosen ordinary tensor comparison sends the adjunction unit of m tensor n to the tensor of the two adjunction units. The three finite realization maps preserve these same unit sections. The intrinsic compositor inserts the intermediate realization unit and transports fixed-scalar pullback composition. Its adjunction unit formula therefore identifies the composite unit with the two successive units, including the prescribed fibre-product comparison of test objects.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-sp-finite-intrinsic-pullback",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take adjoints of the two maps from composite pullback. On pure tensors their sections agree by the preceding unit calculation. Pure-tensor extensionality before sheafification and the sheafification adjunction show equality of these adjuncts, hence of the module maps.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each total degree, precompose with every direct-sum tensor injection in bidegree (i,j). The definitions of the inverse total comparison and termwise compositor turn the desired equality into the module equality already proved. Pullback preserves these coproducts as a left adjoint; coproduct extensionality proves equality of the degree maps. All maps already respect the signed differential, so complex morphism extensionality proves the chain equation.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-pur-finite-pullback-tensor-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-sp-finite-intrinsic-pullback",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-pur-finite-pullback-tensor-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit normalization and composition calculation in the proof of Tag 07A4, using the existing unit-normalized finite realizations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "The total tensor comparison for module pullback commutes with composition of inverse image functors",
+   "results": "8 hits: MorphismProperty.Over.pullbackComp formulas, Scheme.Modules.pseudofunctor_mapComp_inv_τl, Limits.pullbackComparison and Over.pullbackComp. These are scheme base-change or ordinary pullback compositors, not the specified signed tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical tensor pullback comparison is compatible with composition of pullback functors",
+   "results": "8 hits: PresheafOfModules.pullbackComp, Over pullback tensor component formulas, and ChosenPullbacksAlong.unit_pullbackComp_hom_assoc. No representative normalization or signed total-tensor composition theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Loogle SheafOfModules.pullbackComp additionally finds ordinary compositor associativity and unit laws only."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]omp|[Cc]omp.*[Tt]ensor in Mathlib; proEtaleCanonicalTensorPullback, cochain_composition_tensor and composition_representatives in the project",
+   "results": "Mathlib hits concern tensor algebra or Over pullback. Project proEtaleCanonicalTensorPullback supplies the ordinary-model representative square. FiniteDerivedComparisonNormalization and cochainPullbackTensorCoherence use a separate generalized-element-normalized presentation; no adapter identifies their comparison and compositor with the fixed finite realization here. The generic categorical square pasting proof is reused as private proved helpers.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate specialized square or chain equation. Latest blueprint sec-smooth-purity search has no additional exact statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorCompositionRepresentatives",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Finite pullback/tensor composition, ordinary total-complex calculation and representative normalization.",
+   "via": [
+    "lem-pur-finite-pullback-tensor-composition-representatives",
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorChainComposition",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorChainComposition.lean",
+  "declaration": "WeilConjectures.FinitePullbackTensorRep.chain_composition",
+  "declarations": [
+   "WeilConjectures.FinitePullbackTensorRep.chain_composition"
+  ],
+  "statement": "theorem chain_composition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)\n    (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :\n    comparison l E (h ≫ f) n P Q ≫\n      (totalTensor l E Z n).map (Prod.mkHom\n        ((complexComp l E f h n).hom.app P) ((complexComp l E f h n).hom.app Q)) =\n    (complexComp l E f h n).hom.app (tensor l E Y n P Q) ≫\n      (pull l E h n).map (comparison l E f n P Q) ≫\n      comparison l E h n ((pull l E f n).obj P) ((pull l E f n).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222735-L-688410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222735-L-688410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

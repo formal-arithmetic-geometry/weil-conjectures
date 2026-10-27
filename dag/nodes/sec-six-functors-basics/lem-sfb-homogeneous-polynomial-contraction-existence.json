@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-homogeneous-polynomial-contraction-existence",
+ "kind": "statement",
+ "title": "Inserted-zero contraction of every pinned polynomial model",
+ "statement": "For a prime $\\ell$, any normed field $F$ with a normed $\\mathbf Q_\\ell$-algebra structure, any $r\\in\\mathbf N$, and every Model $P$ of [def-sfb-homogeneous-polynomial-resolution-data], there exists a Contraction of $P$ in that same specification. Its maps are underlying internal-module maps, with the precise monomial zero-evaluation and insertZero formulas, and satisfy the split, degree-zero and all positive-degree contraction identities. Equivariance of these maps is not claimed. This statement does not construct a Model or assert that its augmentation is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-homogeneous-polynomial-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified monomial coproduct universal property to extend zero evaluation and the finite polynomial insertZero substitution to internal module maps. Their composites with each monomial coprojection are the defining formulas.",
+   "uses": [
+    "def-sfb-homogeneous-polynomial-resolution-data",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  },
+  {
+   "text": "Insertion of the zero tuple gives the displayed $h^n$ by step 2 and is compatible with every parameter restriction. It fixes coefficients, so $h$ is internal $A$-linear after forgetting actions. On constants $h^0a(c)=c$. For $f\\in K^0(S)$, $h^1\\delta^0f(y_0)=\\delta^0f(0,y_0)=f(y_0)-f(0)$ and $ah^0f(y_0)=f(0)$. Adding proves $ah^0+h^1\\delta^0=1$. No action compatibility of $h$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written polynomial-resolution input; inserted-zero contraction in degrees minus one and zero"
+   }
+  },
+  {
+   "text": "For $n>0$, expand the two composites on $f\\in K^n(S)$:\n$$h^{n+1}\\delta^nf(y_0,\\ldots,y_n)=f(y_0,\\ldots,y_n)+\\sum_{j=0}^{n}(-1)^{j+1}f(0,y_0,\\ldots,\\widehat y_j,\\ldots,y_n),$$\n$$\\delta^{n-1}h^nf(y_0,\\ldots,y_n)=\\sum_{j=0}^{n}(-1)^jf(0,y_0,\\ldots,\\widehat y_j,\\ldots,y_n).$$\nEach summand cancels its partner, leaving $f$. These are polynomial identities over every $A(S)$, natural in $S$, hence equalities of internal morphisms. This proves exactly $\\delta^{n-1}h^n+h^{n+1}\\delta^n=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written polynomial-resolution input; inserted-zero contraction in positive degrees"
+   }
+  },
+  {
+   "text": "By uniqueness out of each monomial coproduct, the polynomial identities are internal-map equalities. Assemble h0, h and their formulas into Contraction. The sole rank-zero monomial is constant, so all identities remain valid at r=0.",
+   "uses": [
+    "def-sfb-homogeneous-polynomial-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-homogeneous-polynomial-resolution-data",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The polynomial deletion complex is contracted by insertion of zero and resolves the constants",
+   "results": "Polynomial.contract_C, Polynomial.update_zero_eq_erase, Polynomial.comp_zero, Polynomial.contract, Polynomial.contract_expand, Polynomial.contract_one, Polynomial.erase, Poly.coe_zero. None constructs the internal polynomial complex or inserted-zero contraction.",
+   "date": "2026-10-26",
+   "verdict": "No match for this internal-module construction; polynomial substitution APIs are ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented cochain complex with a contracting homotopy is a quasi-isomorphism from the single coefficient object",
+   "results": "Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.exists_iso_single, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.augmentTruncate, CochainComplex.quasiIsoAt₀_iff, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.truncateAugment, HomotopyCategory.singleFunctorPostcompQuotientIso. Abstract group resolutions do not provide the internal polynomial model or its monomial formulas.",
+   "date": "2026-10-26",
+   "verdict": "No direct construction. The parent proves the formal homological consequence directly from ShortComplex exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(contract|homotop|resolution)|(contract|homotop|resolution).*polynomial; HomogeneousPolynomial in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py search homogeneous polynomial",
+   "results": "Existing HomogeneousPolynomialAugmentedResolution contains precisely the data being relocated; no separate model or contraction construction was found. Mathlib has abstract homotopy and polynomial substitution APIs. Blueprint search returned def-sc-cr-field and lem-sc-p1-monomial, neither the deletion construction.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing definitions verbatim; split the construction and its contraction, not a duplicate of the conclusion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HomogeneousPolynomialAugmentedResolution",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), direct-image stability. This is the inherited agent-formulated polynomial-resolution expansion recorded in lem-sfb-homogeneous-polynomial-augmented-resolution, not a quotation from the current paragraph. Exact literature reference WANTED.",
+   "via": [
+    "lem-sfb-homogeneous-polynomial-augmented-resolution",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HomogeneousPolynomialContractionExistence",
+  "file": "lean/Sheaf/CategoryTheory/HomogeneousPolynomialContractionExistence.lean",
+  "declaration": "Profinite.CondensedAction.HomogeneousPolynomial.contraction_nonempty",
+  "statement": "theorem contraction_nonempty (P : Model ell F r) : Nonempty (Contraction ell F r P)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9227f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T081728-L-2053750",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + split nodes (model/contraction existence, resolution-data def) against verbatim-moved data block, Assertion conjuncts and scratch axioms compile"
+ }
+}

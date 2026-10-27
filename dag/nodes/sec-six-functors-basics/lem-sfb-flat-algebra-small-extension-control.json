@@ -1,0 +1,495 @@
+{
+ "id": "lem-sfb-flat-algebra-small-extension-control",
+ "kind": "statement",
+ "title": "Cotangent obstruction and marked torsor for a small extension of the base",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $C'\\twoheadrightarrow C$ be a surjection of finite-dimensional commutative augmented local $k$-algebras with residue field $k$, respecting the augmentations. Write $\\mathfrak m_{C'}$ for its unique maximal ideal and $I$ for its kernel, and assume $\\mathfrak m_{C'}I=0$. Let $B$ be a flat $C$-algebra [def-weil-pbc-flat-ring-map], put $P=B\\otimes_C k$ and $N=P\\otimes_k I$ [def-weil-pbc-module-tensor-product], and use the full standard polynomial cotangent complex $L_{P/k}$ of [def-trf-cotangent-resolution-data]. Set $T^j(P,N)=\\operatorname{Hom}_{D(P)}(L_{P/k},N[j])$, with $N$ in degree zero and $D(P)$ the derived category of ordinary $P$-modules [def-weil-abstract-derived-category]. A marked flat lift of $B$ is a flat $C'$-algebra $B'$ with a specified $C$-algebra isomorphism $a:B'\\otimes_{C'}C\\cong B$; its isomorphisms must commute with $a$. There is a canonical obstruction $o(B,C'/C)\\in T^2(P,N)$ which vanishes if and only if a marked flat lift exists. If it vanishes, the set of isomorphism classes of marked flat lifts is a torsor under the additive group $T^1(P,N)$: after choosing one class $x$, every other class is uniquely $x+t$. For every multiplicative subset $S\\subset P$, localize $B$ and each lift at the inverse image of $S$ in the respective algebra. Under the canonical cotangent localization maps $T^j(P,N)\\to T^j(S^{-1}P,S^{-1}N)$, the obstruction maps to the obstruction of the localized lifting problem, and localization of marked lifts carries $x+t$ to $x_S+t_S$. The markings and the localized isomorphisms retain the given reduction over $C$. No finite-type, isolated-singularity, or complete-intersection hypothesis on $P$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SP, lemma-find-obstruction, with Tag 08QQ, lemma-flat-base-change-cotangent-complex for B flat over C, and Tag 08SF, lemma-localize; flat lifts are the square-zero solutions with N=I tensor_C B, using algebra.tex Tag 051C, lemma-what-does-it-mean. Marked torsor: defos.tex lemma-choices."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-abstract-derived-category",
+  "def-sfb-flat-algebra-lifting-data",
+  "def-sfb-cotangent-transitivity-triangle-data"
+ ],
+ "proof": [
+  {
+   "text": "The augmentation forces $I\\subset\\mathfrak m_{C\\prime}$, hence $I^2=0$. The $C$-action on $I$ factors through $k$ because $\\mathfrak m_{C\\prime}I=0$. Put $\\widetilde N=I\\otimes_C B$; the quotient-tensor isomorphism of [lem-weil-pbc-tensor-over-quotient-ring], followed by interchange of the factors, identifies it with $N=I\\otimes_k P=P\\otimes_k I$. Explicitly $i\\otimes b\\mapsto\\bar b\\otimes i$, with inverse $\\bar b\\otimes i\\mapsto i\\otimes b$; changing a lift of $\\bar b$ adds an element of $\\mathfrak m_C B$, which tensors to zero. Let $c:I\\to N$ be $i\\mapsto1\\otimes i$.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, setup of section-deformations, with algebra.tex Tag 00D2 and quotient-tensor identification."
+   }
+  },
+  {
+   "text": "A marked flat lift gives a surjection $q:B\\prime\\to B$ using its marking. Tensor $0\\to I\\to C\\prime\\to C\\to0$ with the flat $C\\prime$-module $B\\prime$: [lem-weil-pbc-flat-tensor-exact] identifies its kernel with $I\\otimes_{C\\prime}B\\prime$. By [lem-weil-pbc-tensor-over-quotient-ring] this is $I\\otimes_C B=N$, canonically via $i\\otimes b\\mapsto i b\\prime$ for any lift $b\\prime$ of $b$. It is square zero and the structural map on $I$ is $c$. Thus it gives a square-zero solution with fixed quotient $B$ and kernel $N$. Every marking-preserving $C\\prime$-isomorphism fixes this kernel identification: it sends $i b\\prime$ to $i f(b\\prime)$, reducing to the same $b$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, equation-to-solve; algebra.tex Tag 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "Conversely, let $0\\to N\\xrightarrow{j}E\\xrightarrow{q}B\\to0$ be a square-zero $C\\prime$-algebra solution inducing $c$. Since $N=I\\otimes_C B$, every $j(i\\otimes b)$ equals $i e$ for any $e$ over $b$; consequently $IE=j(N)$ and $E/IE=B$. The quotient-tensor identification gives $I\\otimes_{C\\prime}E=I\\otimes_C B=N$, and its multiplication map to $E$ is exactly $j$, hence injective. Apply [lem-sfb-nilpotent-ideal-flatness-criterion] to $(R,J,M)=(C\\prime,I,E)$: $I^2=0$ and the quotient $B$ is flat over $C$. Thus $E$ is flat over $C\\prime$. Its quotient map supplies the marking. These constructions are inverse on classes and on the allowed isomorphisms, since the kernel identification is forced by multiplication.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-sfb-nilpotent-ideal-flatness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, equation-to-solve; algebra.tex Tag 051C (lemma-what-does-it-mean), nilpotent case."
+   }
+  },
+  {
+   "text": "Let $\\xi=\\mathrm{cl}(0\\to I\\to C\\prime\\to C\\to0)\\in\\operatorname{Hom}_{D(C)}(L_{C/C\\prime},I[1])$, using [lem-sfb-ring-square-zero-extension-classification] with base ring $C\\prime$. Set $\\eta=c_*\\xi$. The same classification, with quotient map $C\\to B$ and coefficient map $c$, says that square-zero solutions are exactly extension classes $z\\in\\operatorname{Hom}_{D(B)}(L_{B/C\\prime},N[1])$ whose restriction is $\\eta$. Indeed the compatible map from the extension $C\\prime$ to the extension $E$ must equal its given structural $C\\prime$-map, because it is a map of $C\\prime$-algebras. There is therefore no additional choice of a structural map or unmarked quotient hidden in this fibre.",
+   "uses": [
+    "lem-sfb-ring-square-zero-extension-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, proof via defos.tex Tag 0GPX (lemma-parametrize-solutions)."
+   }
+  },
+  {
+   "text": "Use the extension/restriction adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] on the one-object site, identified with ordinary modules by [lem-trf-one-point-derived-ring-identification]. It identifies $\\operatorname{Hom}_{D(C)}(L_{C/C\\prime},N[j])$ with $\\operatorname{Hom}_{D(B)}(A_0,N[j])$, where $A_0=L_{C/C\\prime}\\otimes_C^{\\mathbf L}B$. Denote again by $\\eta$ the corresponding degree-one class. By [lem-trf-cotangent-transitivity-triangle], the triple $C\\prime\\to C\\to B$ gives a natural triangle $A_0\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{d}A_0[1]$, with $Y=L_{B/C\\prime}$ and $Z=L_{B/C}$. Thus the map defining the fibre in Step 4 is precomposition with $u$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-trf-cotangent-transitivity-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, displayed long exact sequence; more-algebra.tex Tag 0GMT (lemma-tensor-hom-adjoint)."
+   }
+  },
+  {
+   "text": "Define $o_B=\\eta[1]\\circ d\\in\\operatorname{Hom}_{D(B)}(Z,N[2])$. Apply [lem-weil-pbc-hom-out-of-triangle-exact] to rotations and shifts of the triangle of Step 5. Its exactness says $o_B=0$ exactly when $\\eta=z\\circ u$ for some $z:Y\\to N[1]$. By Steps 3--4 this is exactly existence of a marked flat lift. The triangle, $c$, and the extension class are canonical, so this defines a canonical obstruction. The same exactness says that two such $z$ differ by $t\\circ v$ for a class $t:Z\\to N[1]$.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP (lemma-find-obstruction), proof, connecting image of the base extension class."
+   }
+  },
+  {
+   "text": "This $t$ is unique. To see the needed vanishing, apply [lem-trf-lci-naive-cotangent-model] to the empty-variable polynomial presentation $C\\prime\\twoheadrightarrow C$: its naive complex is $[I/I^2\\to0]$, since the universal differential of a ring over itself is zero. The full complex is nonpositive by [def-trf-cotangent-resolution-data], and this comparison gives $H^0(L_{C/C\\prime})=0$. Thus $L_{C/C\\prime}\\in D^{\\leq-1}(C)$, while $N[0]\\in D^{\\geq0}(C)$. Orthogonality [lem-pc-derived-tstructure-orthogonality] and Step 5 give $\\operatorname{Hom}_{D(B)}(A_0,N)=0$. Exactness of [lem-weil-pbc-hom-out-of-triangle-exact], after rotation, now makes $t\\mapsto t\\circ v$ injective. Addition $z\\mapsto z+t\\circ v$ consequently defines a simply transitive action on the nonempty fibre, hence on marked lifts by Steps 2--4.",
+   "uses": [
+    "lem-trf-lci-naive-cotangent-model",
+    "def-trf-cotangent-resolution-data",
+    "def-weil-pbc-kahler-differentials",
+    "lem-pc-derived-tstructure-orthogonality",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, torsor clause, via the class fibre; Tag 08RB, empty-variable presentation; the vanishing removes the possible kernel in the exact sequence."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cotangent-flat-base-change] to the square $(C\\to B)\\to(k\\to P)$. The required canonical map $B\\otimes_C^{\\mathbf L}k\\to P$ is an isomorphism: $B[0]$ is a bounded-above flat resolution of itself, and [lem-trf-flat-resolution-canonical-tensor-comparison] computes this comparison by its ordinary tensor augmentation. We obtain $Z\\otimes_B^{\\mathbf L}P\\simeq L_{P/k}$. By the adjunction of Step 5, now for $B\\to P$, this yields natural group isomorphisms $\\operatorname{Hom}_{D(B)}(Z,N[j])\\simeq T^j(P,N)$. Define the stated obstruction and action by these isomorphisms. They involve the full cotangent complex and impose no finite-type or lci condition.",
+   "uses": [
+    "lem-trf-cotangent-flat-base-change",
+    "lem-trf-flat-resolution-canonical-tensor-comparison",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-one-point-derived-ring-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), applied using flatness of B over C; Tag 0GMT."
+   }
+  },
+  {
+   "text": "Let $T\\subset B$ be the inverse image of $S$ and let $B_S=T^{-1}B$. Exact localization [lem-weil-pbc-localization-module-exact] sends a square-zero solution to an extension of $B_S$ by $N_S=S^{-1}N$. For a lift $E$, localize at the inverse image of $T$. Fractions reduce to fractions in $B_S$, and its kernel consists of the fractions with numerator in $N$: if $q(e)/q(t)=0$, multiply $e$ by a denominator so its image is zero. Kernel fractions identify with $N\\otimes_B B_S$, since multiplication on $N$ factors through $B$. The reduction is canonically $B_S$, with the localized marking; multiplication still identifies the kernel with $I\\otimes_C B_S$. Localization is flat by [lem-weil-pbc-localization-flat], so [lem-pc-module-flat-transitive] makes $B_S$ flat over $C$ and every localized lift flat over $C\\prime$. These statements include $0\\in S$, when all the localized modules and algebras are zero.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SF (lemma-localize); algebra.tex Tags 00CS and 00HT, applied to the exact extension and flat lifts."
+   }
+  },
+  {
+   "text": "Under the natural triangle for $C\\prime\\to C\\to B_S$, $A_0$ and $Y,Z$ map to the corresponding localized complexes. The class of the localized extension maps back to the coefficient image of its original class by [lem-sfb-ring-square-zero-extension-classification], using the actual map $E\\to E_S$. Thus $\\eta$ maps to $\\eta_S$. Naturality of [lem-trf-cotangent-transitivity-triangle] gives $d_S$ as the image of $d$; hence the image of $\\eta[1]d$ is $\\eta_S[1]d_S$. Similarly the image of $z+t v$ is $z_S+t_S v_S$, since extension classes, cotangent maps and coefficient maps are additive and commute with composition. By [lem-trf-cotangent-augmentation-localization] the canonical cotangent maps identify localized cotangent complexes with those of $B_S/C$ and $S^{-1}P/k$. The adjunctions and square maps in Step 8 are natural, so the resulting maps on $T^j$ are exactly those obtained by localizing derived morphisms and using these cotangent identifications. Consequently $o_B\\mapsto o_{B_S}$ and $x+t\\mapsto x_S+t_S$. This claims natural maps, not an isomorphism from localized Ext without a finiteness hypothesis. All maps of extensions fix the reduction $B\\to B_S$, so the markings and their localized isomorphisms retain the specified reduction over $C$.",
+   "uses": [
+    "lem-sfb-ring-square-zero-extension-classification",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-cotangent-augmentation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SP, connecting-class construction; Tag 08SF, cotangent localization; defos.tex Tags 0GPV--0GPW, functoriality of extension classes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sfb-nilpotent-ideal-flatness-criterion",
+  "lem-sfb-ring-square-zero-extension-classification",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-trf-lci-naive-cotangent-model",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-pbc-kahler-differentials",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-flat-resolution-canonical-tensor-comparison",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-trf-cotangent-augmentation-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SP (lemma-find-obstruction), its extension-class fibre and transitivity proof, with Tags 08QQ and 08SF; flatness supplied by algebra.tex Tag 051C."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat algebra lifts across square zero ring extensions have a canonical Ext two cotangent obstruction and Ext one torsor of choices",
+   "results": {
+    "t": "2026-10-22T06:27:51Z",
+    "tool": "leanfinder",
+    "query": "Flat algebra lifts across square zero ring extensions have a canonical Ext two cotangent obstruction and Ext one torsor of choices",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.tensorH1Cotangent",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Extension.H1Cotangent.map",
+     "Algebra.Extension.tensorCotangentSpace",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.homInfinitesimal",
+     "Algebra.formallySmooth_iff",
+     "KaehlerDifferential.endEquivAuxEquiv"
+    ],
+    "digest": "01e9edd35885efb2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: naive cotangent modules and formal smoothness lifting maps do not give the obstruction and marked flat-algebra deformation torsor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero extensions of commutative algebras classified by cotangent complex Ext groups with localization naturality",
+   "results": {
+    "t": "2026-10-22T06:28:09Z",
+    "tool": "leanfinder",
+    "query": "Square zero extensions of commutative algebras classified by cotangent complex Ext groups with localization naturality",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.cotangentComplex",
+     "Algebra.Extension.CotangentSpace.map_cotangentComplex",
+     "Algebra.Extension.CotangentSpace.map_comp_cotangentComplex",
+     "KaehlerDifferential.endEquivAuxEquiv",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Extension.formallySmooth_iff_split_injection",
+     "Algebra.Extension.homInfinitesimal"
+    ],
+    "digest": "123be082dfda5b3e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: naive cotangent modules and formal smoothness lifting maps do not give the obstruction and marked flat-algebra deformation torsor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"cotangent\"",
+   "results": {
+    "t": "2026-10-22T06:27:41Z",
+    "tool": "loogle",
+    "query": "\"Ext\", \"cotangent\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.Extension.Cotangent",
+     "Algebra.Extension.instAddCommGroupCotangent",
+     "Algebra.Extension.Cotangent.module",
+     "Algebra.Extension.Cotangent.of",
+     "Algebra.Extension.Cotangent.val",
+     "Algebra.Extension.Cotangent.of_val",
+     "Algebra.Extension.instModuleCotangent",
+     "Algebra.Extension.Cotangent.val_of"
+    ],
+    "digest": "06fd845df43d9cf6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: naive cotangent modules and formal smoothness lifting maps do not give the obstruction and marked flat-algebra deformation torsor"
+  },
+  {
+   "tool": "grep",
+   "query": "obstruction|deformation|cotangentComplex",
+   "results": {
+    "t": "2026-10-22T06:27:40Z",
+    "tool": "grep",
+    "query": "obstruction|deformation|cotangentComplex",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+     "Mathlib/RingTheory/Perfectoid/FontaineTheta.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean"
+    ],
+    "digest": "eeb53809225ef8b4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: naive cotangent modules and formal smoothness lifting maps do not give the obstruction and marked flat-algebra deformation torsor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat algebra deformation obstruction in Ext two and torsor under Ext one of the cotangent complex",
+   "results": {
+    "t": "2026-10-22T06:27:41Z",
+    "tool": "leansearch",
+    "query": "Flat algebra deformation obstruction in Ext two and torsor under Ext one of the cotangent complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.H1Cotangent",
+     "Algebra.FormallySmooth.subsingleton_h1Cotangent",
+     "Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective",
+     "Algebra.formallyEtale_iff",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "Algebra.FormallySmooth.iff_subsingleton_and_projective",
+     "Algebra.Extension.H1Cotangent.map"
+    ],
+    "digest": "5ed22eff5a3f8afa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: naive cotangent modules and formal smoothness lifting maps do not give the obstruction and marked flat-algebra deformation torsor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat algebra lifting over a small extension has a cotangent complex obstruction in Ext two and choices form Ext one torsor",
+   "results": {
+    "t": "2026-10-23T09:32:58Z",
+    "tool": "leanfinder",
+    "query": "Flat algebra lifting over a small extension has a cotangent complex obstruction in Ext two and choices form Ext one torsor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.tensorH1Cotangent",
+     "Algebra.Extension.h1Cotangentι_ext_iff",
+     "Algebra.H1Cotangent.map",
+     "Algebra.Extension.H1Cotangent.map",
+     "Algebra.H1Cotangent",
+     "Algebra.Extension.homInfinitesimal",
+     "Algebra.formallySmooth_iff"
+    ],
+    "digest": "1acee0f324001da2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned naive cotangent presentation maps and formal smoothness facts do not state the full derived obstruction and marked lift torsor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent complex obstruction for flat deformations over Artinian small extensions",
+   "results": {
+    "t": "2026-10-23T09:32:48Z",
+    "tool": "leansearch",
+    "query": "cotangent complex obstruction for flat deformations over Artinian small extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.CotangentSpace.map_cotangentComplex",
+     "Algebra.Extension.CotangentSpace",
+     "Algebra.FormallySmooth.subsingleton_h1Cotangent",
+     "Algebra.H1Cotangent",
+     "Algebra.Extension.cotangentComplex_injective_iff",
+     "Algebra.Extension.Cotangent",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField"
+    ],
+    "digest": "681e7a80ab36fa48"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned naive cotangent presentation maps and formal smoothness facts do not state the full derived obstruction and marked lift torsor"
+  },
+  {
+   "tool": "grep",
+   "query": "obstruction|deformation|cotangentComplex",
+   "results": {
+    "t": "2026-10-23T09:42:23Z",
+    "tool": "grep",
+    "query": "obstruction|deformation|cotangentComplex",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean",
+     "Mathlib/RingTheory/Smooth/Local.lean"
+    ],
+    "digest": "28335247a1f2f2fa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned naive cotangent presentation maps and formal smoothness facts do not state the full derived obstruction and marked lift torsor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-isolated-deformation-lift",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: the first arrow of Tag 0DZF: obstruction vanishing and adjustment of a chosen lift, for one small extension",
+   "via": [
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-algebra-small-extension-control",
+  "worker": "stage1",
+  "summary": "Constructed the obstruction as a connecting image of the base extension class, derived the marked torsor from the same class fibre with its vanishing kernel, and checked flatness and localization. Two new statement-only generic inputs; reused existing cotangent and derived-category results. No statement correction.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), alteration input through the recorded smoothing ancestry: affine formal-lifting input in Stacks 0DZP and first arrow of 0DZF, one small extension. Steps 1--3 identify marked flat lifts; Steps 4--8 construct the obstruction and torsor; Steps 9--10 give localization. The existing created.item ancestry currently has no surviving imported ancestor (blueprint_refs ancestor prints None), so new from.node is null as computed; the precise inherited place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-trf-one-point-derived-ring-identification",
+    "why": "Generic Terminal-site evaluation identifies ordinary modules and derived scalar extension used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-trf-cotangent-transitivity-triangle",
+    "why": "Generic Transitivity triangle for ring cotangent complexes used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-trf-lci-naive-cotangent-model",
+    "why": "Generic Natural projection to the two-term naive cotangent truncation used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-trf-cotangent-flat-base-change",
+    "why": "Generic Derived base change for ring cotangent complexes used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-trf-flat-resolution-canonical-tensor-comparison",
+    "why": "Generic Flat-resolution scalar extension with the canonical comparison used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-trf-cotangent-augmentation-localization",
+    "why": "Generic Localization of standard cotangent differential augmentations used for ordinary ring modules in the extension-class proof; no same-unit node states this input, and no unit-level route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-flat-resolution-canonical-tensor-comparison",
+  "lem-trf-cotangent-augmentation-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-72cc8eeb9",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-72cc8eeb9 (reviewer sub-agent of L); spot-checked: Read in full: the item's 10 steps, both new nodes, the report, every cited statement, and Stacks 051C/00M6 and 0GPT/0GPV. The item statement and stmt_deps are byte-identical to live and side-live, where the item is unsplit. This is a first split, not a re-split order. Steps 1-3: tensor-over-quotient clause (2) gives I⊗_C B=I⊗_k P. A flat lift gives a square-zero solution inducing c. Conversely IE=j(N), I⊗_{C'}E=N with injective multiplication, so the nilpotent criterion (J=I, J²=0) gives flatness. Step 4: 0GPV with R=C'; the structure map C'→E is forced, so solutions are the fibre f^*cl=c_*ξ. Steps 5-7: adjunction plus the trf triangle turn f^* into ∘u. hom-out-of-triangle (ii) on the rotation gives obstruction η[1]d, and (i) gives transitivity. The empty-variable presentation in lci-naive-model gives H⁰L_{C/C'}=0, so L_{C/C'}∈D^{≤-1}; orthogonality gives Hom(A_0,N)=0, so ∘v is injective and the action is simply transitive. Step 8: B[0] is a flat resolution, so B⊗^L_C k=P and flat base change gives Z⊗P≅L_{P/k}, then the T^j. Steps 9-10: localization exactness, flatness and transitivity; class functoriality on E→E_S, triangle naturality and augmentation-localization λ give o↦o_S and x+t↦x_S+t_S, with no claim about localizing Ext. New nodes: nilpotent criterion = 051C final sentence via 00M6, true with no finiteness; classification = 0GPT+0GPV with Ext¹(NL)=Hom(L,M[1]) via 08RB, tested on R=A and Z→F_p. No duplicates in snapshot, live or side-live (closest: trf 05CG projective lift, sfb etale-algebra-extension-ext for spaces/NL, sfb space square-zero transfer); no Mathlib match. Batch-5: all 7 trf citations are generic cotangent/derived algebra. Their closure (118 trf nodes) contains no trace-formula, local-term, Frobenius or Poincaré node, so I accept them as generic. Tool uses (pur adjunction + 6 trf) accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatAlgebraSmallExtensionControl",
+  "declaration": "Algebra.FlatLifting.exists_smallExtensionControl",
+  "declarations": [
+   "Algebra.FlatLifting.specialFibreSquare_condition",
+   "Algebra.FlatLifting.specialFibreSquare",
+   "Algebra.FlatLifting.coefficientOverBase",
+   "Algebra.FlatLifting.IsConnectingObstruction",
+   "Algebra.FlatLifting.exists_smallExtensionControl"
+  ],
+  "file": "lean/Sheaf/RingTheory/FlatAlgebraSmallExtensionControl.lean",
+  "statement": "theorem exists_smallExtensionControl [∀ R : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} R)] (K : CotangentResolution.Coherence.{u}) (k : Type u) [Field k] (D : Base k) : ∃ obstruction : ∀ (B : CommAlgCat.{u} D.thin), Module.Flat D.thin B → T K D B 2, ∃ action : ∀ (B : CommAlgCat.{u} D.thin), Module.Flat D.thin B → T K D B 1 → Classes D B → Classes D B, (∀ (B : CommAlgCat.{u} D.thin) (hB : Module.Flat D.thin B), IsConnectingObstruction K D B (obstruction B hB) ∧ (obstruction B hB = 0 ↔ Nonempty (Classes D B)) ∧ (∀ x : Classes D B, action B hB 0 x = x) ∧ (∀ (t v : T K D B 1) (x : Classes D B), action B hB (t + v) x = action B hB t (action B hB v x)) ∧ (∀ x y : Classes D B, ∃! t : T K D B 1, action B hB t x = y)) ∧ (∀ (B : CommAlgCat.{u} D.thin) (hB : Module.Flat D.thin B) (S : Submonoid (fibre D B)) (U : CommAlgCat.{u} D.thin) (f : B →ₐ[D.thin] U) (_hf : @IsLocalization B _ (S.comap (reduction D B).toMonoidHom) U _ f.toRingHom.toAlgebra), ∃ hU : Module.Flat D.thin U, ∃ groupMap : ∀ j : ℤ, T K D B j →+ T K D U j, ∃ liftMap : Classes D B → Classes D U, (∀ (j : ℤ) (t : T K D B j), IsLocalizedClass K D f j t (groupMap j t) ∧ ∀ v : T K D U j, IsLocalizedClass K D f j t v → v = groupMap j t) ∧ (∀ E : Lift D B, ∃ F : Lift D U, IsLocalizedLift S f E F ∧ liftMap (classOf E) = classOf F) ∧ (∀ (E : Lift D B) (F : Lift D U), IsLocalizedLift S f E F → liftMap (classOf E) = classOf F) ∧ groupMap 2 (obstruction B hB) = obstruction U hU ∧ (∀ (t : T K D B 1) (x : Classes D B), liftMap (action B hB t x) = action U hU (groupMap 1 t) (liftMap x)))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d309419cf",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery after H2 return e299ddc95614. Delta = item stmt_deps (theorem nodes lem-trf-cotangent-transitivity-triangle and lem-trf-cotangent-flat-base-change replaced by new def-sfb-cotangent-transitivity-triangle-data) + CotangentFlatBaseChange import made non-public; statement/proof/proof_deps/lean record unchanged; FlatAlgebraLiftingData module and def node unchanged. New def node: existing:true on the nine real defs standardComplex…transitivityTriangle (read in full, no choose), lean.statement verbatim, text matches u/v/first-complex map/arbitrary boundary, source 08PN/08QL/08QX; double listing with the theorem node follows the def-trf-cotangent-resolution-data precedent. Math reread: Base/Lift/Isomorphic/Classes/T match 08SP/08S7; cocycle (red b·ε(c))⊗i verified as the derivation tδ0−tδ1; connecting-image equation pins o via 08QQ adjunction bijection; groupMap existence/uniqueness by 08SF; localized lifts exist in universe u and are unique up to marked iso; edge cases I=0, B=0, 0∈S, S={1}, any char covered. Live def-sfb-marked-flat-algebra-deformations (Q22) is the absolute Art_k groupoid, not the relative lift notion: no H4. Sorry only in theorems; docstrings present. Advisories (∃δ boundary ambiguity, unpinned action sign) carried over, non-blocking. No compile (no change)."
+ }
+}

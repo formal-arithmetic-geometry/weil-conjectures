@@ -2,7 +2,7 @@
  "id": "lem-per-complete-local-rigidification-comparison",
  "kind": "statement",
  "title": "Rigidification independence over complete strictly local regular rings",
- "statement": "Fix the quotient-resolution construction and fan resolution rule described in [lem-per-rigidified-quotient-tower-comparison]. Let $X=\\coprod_{i=1}^m\\operatorname{Spec}A_i$, where $m$ is finite and each $A_i$ is a complete Noetherian regular local ring with separably closed residue field [def-weil-regular-scheme], [def-weil-pbc-adic-completion]. Let a finite group $G$ act tamely on $X$, with abelian geometric inertia and freely outside a $G$-strict strict normal crossings boundary $B$ [def-trf-strict-normal-crossings-boundary]. Let $\\overline B$ and $\\overline B'$ be two invariant normal crossings boundaries containing $B$ such that each enlarged divisorial log structure is very tame [def-trf-fs-log-blowup]. Resolve the log quotients for these two rigidifications by the fixed rule, pull back in fs log schemes, and retain the underlying normalized blowup towers with ordered centers. The two resulting towers on $X$ are equal, including the order and the defining ideal sheaves of all centers. The equality also holds for a finite disjoint union with permuted components; it is not merely equality of contracted towers on each separate component.",
+ "statement": "Fix the quotient-resolution construction of [lem-per-rigidified-quotient-tower-comparison], using the saturated fan rule induced by one normalized characteristic-zero desingularization algorithm functorial for regular morphisms, as in [lem-per-characteristic-zero-log-resolution-independence]. Let $X=\\coprod_{i=1}^m\\operatorname{Spec}A_i$, where $m$ is finite and each $A_i$ is a complete Noetherian regular local ring with separably closed residue field [def-weil-regular-scheme], [def-weil-pbc-adic-completion]. Let a finite group $G$ act tamely on $X$, with abelian geometric inertia and freely outside a $G$-strict strict normal crossings boundary $B$ [def-trf-strict-normal-crossings-boundary]. Let $\\overline B$ and $\\overline B'$ be two invariant normal crossings boundaries containing $B$ such that each enlarged divisorial log structure is very tame [def-trf-fs-log-blowup]. Resolve the log quotients for these two rigidifications by the fixed rule, pull back in fs log schemes, and retain the underlying normalized blowup towers with ordered centers. The two resulting towers on $X$ are equal, including the order and the defining ideal sheaves of all centers. The equality also holds for a finite disjoint union with permuted components; it is not merely equality of contracted towers on each separate component.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114."
@@ -12,11 +12,72 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-adic-completion",
   "def-trf-strict-normal-crossings-boundary",
-  "def-trf-fs-log-blowup"
+  "def-trf-fs-log-blowup",
+  "lem-per-characteristic-zero-log-resolution-independence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the common ambient diagram $X\\xleftarrow{h}U\\xrightarrow{j}Y$ and $E\\subset E_1,E_2$ from [lem-per-simultaneous-cohen-rigidification-lift]. Its hypotheses are exactly the complete-local, tame abelian-inertia and two very-tame rigidification hypotheses here. In particular both maps are strict and inert for each rigidification, and $h$ is a surjective finite union of component isomorphisms. On the single underlying quotient $Q=Y/G$, the two fs log regular structures have characteristic-zero generic points on every log stratum. This diagram is constructed for the entire finite disjoint union, with its permuted components.",
+   "uses": [
+    "lem-per-simultaneous-cohen-rigidification-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.5.2, pp.127--128: simultaneous ambient lift and disjoint-union paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-per-characteristic-zero-log-resolution-independence] on $Q$ with the identity scheme isomorphism and the two quotient log structures. Use precisely the algorithm inducing our fixed fan rule. This gives equal underlying normalized quotient-resolution towers, with the same ordered center ideals, on the whole $Q$. The ambient lemma supplies fs log regularity and characteristic-zero generic stratum points; the independence theorem requires no finite-type hypothesis on $Q$.",
+   "uses": [
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-simultaneous-cohen-rigidification-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.4.15 and the last two paragraphs of 5.5.2, pp.113--114,128."
+   }
+  },
+  {
+   "text": "Pull back the two quotient log towers to $Y$. By the universal property in [def-trf-fs-log-blowup], fs base change of a log blowup is the log blowup of the pulled-back log ideal: maps from any fs test object on either side are exactly maps making that ideal invertible. Apply [lem-trf-log-blowup-normalization] at each stage and on each integral component. The common ambient lemma supplies integral affine components initially; blowing up a nonzero ideal and normalizing in its function field keeps each component integral. For a quotient-stage log ideal $\\mathcal I_r$, put $J_r=\\alpha(\\mathcal I_r)\\mathcal O_{Q_r}$. The ring ideal generated by its pullback on $Y_r$ is exactly $J_r\\mathcal O_{Y_r}$, by compatibility of log structure maps. Thus the next underlying stage is the normalized blowup of this extended ideal. Step 2 identifies $Q_r$ and $J_r$ for both towers. Starting from the same map $Y\\to Q$, induction therefore identifies $Y_r$, its map to $Q_r$, and its next center for both towers. This gives equality of the full ordered centered towers on $Y$, even though their log structures differ. The argument is simultaneous on all components; it never contracts a tower on an individual component.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-blowup-normalization",
+    "lem-per-simultaneous-cohen-rigidification-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.10--5.3.11 and Remark 5.3.9(ii), pp.125--126."
+   }
+  },
+  {
+   "text": "Apply strict inert tower comparison [lem-per-rigidified-quotient-tower-comparison] to $j$ for each lifted boundary; its fixed rule is the smooth-functorial fan rule $\\mathcal R_{\\mathcal F}$ of [lem-per-characteristic-zero-log-resolution-independence]. The same centered tower on $Y$ has the same contracted pullback to $U$, since its pulled-back ideals and hence deleted unit-center stages agree. This proves equality of the two towers constructed on $U$. Apply comparison also to $h:U\\to X$. No stage of either tower on $X$ is a unit-center stage. Indeed, the quotient tower on $X/G$ is $T_{\\mathcal F}$, all of whose centers have nonempty zero locus [lem-per-characteristic-zero-log-resolution-independence], and each stage map $X_r\\to(X/G)_r$ is surjective: $X\\to X/G$ is integral, normalized blowups are universally closed, so inductively $X_r\\to(X/G)_r$ is universally closed, and its image contains the dense complement of the exceptional locus. As $h$ is surjective and $U_r=X_r\\times_XU$, the inverse image of each center in $U_r$ remains nonempty. Thus the uncontracted pullbacks to $U$ agree with their full ordered center ideals. On each component of $X$, at every stage choose any copy in $U$ mapping isomorphically to that component; equality of the pulled-back ideals there is equality of the original ideals. Induction on the synchronized stages gives the required equality on $X$. When $X$ is empty both towers are empty. This argument keeps one common indexing for all permuted components.",
+   "uses": [
+    "lem-per-rigidified-quotient-tower-comparison",
+    "lem-per-simultaneous-cohen-rigidification-lift",
+    "lem-per-characteristic-zero-log-resolution-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Corollary 5.4.4 and Lemma 5.5.2, pp.127--128."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-simultaneous-cohen-rigidification-lift",
+  "lem-per-characteristic-zero-log-resolution-independence",
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-blowup-normalization",
+  "lem-per-rigidified-quotient-tower-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 5.5.2 with Corollary 5.4.4 and Theorem 3.4.15, pp.113--114,127--128. The split-copy cover spells out the inertia induction and the equality of center ideals."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +106,38 @@
    "results": "{\"t\": \"2026-10-18T21:43:22Z\", \"tool\": \"grep\", \"query\": \"rigidification|Cohen.*ring|normalized.*blowup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite disjoint union of complete strictly henselian regular local schemes has identical ordered normalized quotient resolution towers for two very tame boundary rigidifications",
+   "results": "{\"t\": \"2026-10-24T00:29:44Z\", \"tool\": \"leanfinder\", \"query\": \"A finite disjoint union of complete strictly henselian regular local schemes has identical ordered normalized quotient resolution towers for two very tame boundary rigidifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\"], \"digest\": \"04184a29f17b7df6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of auxiliary normal crossings divisors in Gabber modification by lifting eigenparameters to a common Cohen power series ring",
+   "results": "{\"t\": \"2026-10-24T00:29:42Z\", \"tool\": \"leansearch\", \"query\": \"Independence of auxiliary normal crossings divisors in Gabber modification by lifting eigenparameters to a common Cohen power series ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.mod.congr_simp\", \"PerfectRing.liftAux\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"8615215e6ae76649\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cohen\"",
+   "results": "{\"t\": \"2026-10-24T00:29:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cohen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rigidification|desingulari[sz]ation|normalized.*blowup",
+   "results": "{\"t\": \"2026-10-24T00:29:41Z\", \"tool\": \"grep\", \"query\": \"rigidification|desingulari[sz]ation|normalized.*blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-absolute-equivariant-modification",
@@ -76,5 +165,62 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-complete-local-rigidification-comparison",
+  "worker": "stage1",
+  "summary": "Split ILO VIII 5.5.2 into simultaneous Cohen ambient lifting and the general characteristic-zero log-structure independence theorem, followed by centered strict-transform and inert-pullback assembly. Corrected the missing source restriction on the fan rule: it is induced by a regular-functorial characteristic-zero algorithm, not an arbitrary smooth-functorial fan rule. All original geometric hypotheses and the full disjoint-union synchronization conclusion are retained.",
+  "blueprint": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. The split realizes the simultaneous lifting and characteristic-zero comparison in VIII 5.5.2, supporting the ancestor regular-local purity input, without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-log-blowup-normalization",
+    "why": "Generic realization of each saturated log blowup as the normalized ordinary blowup in its generated ideal; used to compare fs pullbacks from identical quotient center ideals. No statement of this perverse unit gives this log blowup calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-log-blowup-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-38dcb54f0",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-38dcb54f0 (reviewer sub-agent of L); spot-checked: Read ILO VIII 2.1.4, 2.3.1-2.3.12, 3.2.19-3.2.21, 3.4.11-3.4.16 (full proof of 3.4.15), 5.3.8-5.3.11, 5.4.1-5.4.5 and 5.5.1-5.5.3 (full proof of 5.5.2 including the m>1 paragraph). ROUTE: the item (drop-list line 1460), its citer gabber-absolute-equivariant-modification and rigidified-quotient-tower-comparison are on the 2026-10-19 drop list. A BFS over dependency fields in side-live still reaches them from nt-target-weil-conjectures via lem-sfb-field-log-smooth-gabber-modification, so I judged the mathematics as in the Q36 precedent; maintainer note to withdraw that sfb chain or un-drop these ids. Dropped-route finding (rigidified-quotient-tower-comparison): accepted; it was already a base stmt_dep, is the source's own Cor 5.4.4, and is reachable; none of the excluded artin-gabber methods is used. Batch-5 findings (def-trf-monoscheme-toric-realization, lem-trf-functorial-fan-desingularization, def-trf-fs-log-blowup, lem-trf-log-blowup-normalization, def-trf-strict-normal-crossings-boundary): all generic log-geometry definitions and lemmas (ILO VIII); their closures contain no thm-trf, trace, nt-assume or Poincare theorem node; tool_use of log-blowup-normalization accepted. Statement narrowing to the rule R_F induced by Temkin's regular-functorial F is a correct source correction: 3.4.15's proof needs regular functoriality on completions, and the arbitrary-rule case is the open conjecture of 3.4.14; the citer's statement is existential, so it can choose R_F (maintainer note). New lift node checked: Cohen coefficients in A^H, eigenparameters, freeness outside E via units chi(h)-1, the induced space G x^H for permuted components, and Q Noetherian with integral components. Small cases: m=0, dim 0, trivial action, D1=D2, t->zeta t, transitive pair. Guidance: the source's 'any lift' can fail in mixed characteristic (t'=p gives a char-p stratum); the node's existence claim is still true. Independence node equals 2.3.10+3.4.15 and is not a duplicate. Steps 1-3 correct. FIXES (two citation faults plus the induced-rule definition): (C4) Step 4 applies rigidified comparison, which needs R_F smooth-functorial (3.2.20/3.1.27); no statement gave it. (C1/C4) Step 4's 'each center has nonempty zero locus' had no cite, and a DAG 'nonempty coherent ideal' may be the whole monoid. (B3) T_F was not defined by its cited nodes. Repaired by restating the independence node's second paragraph (R_F smooth-functorial, induced log tower via lem-trf-log-fan-chart-blowup and lem-trf-functorial-log-blowup-etale-descent, no unit centers per ILO 2.3.2/3.3.15) and rewriting Step 4 to cite it, with surjectivity of X_r->(X/G)_r (integral plus universally closed plus dense image). The two added trf nodes are already in the item's base closure.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteLocalRigidificationComparison",
+  "declaration": "AlgebraicGeometry.completeLocal_rigidification_comparison",
+  "declarations": [
+   "AlgebraicGeometry.RigidifiedQuotient.Construction.UnderlyingIso",
+   "AlgebraicGeometry.completeLocal_rigidification_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteLocalRigidificationComparison.lean",
+  "statement": "theorem completeLocal_rigidification_comparison (F : RegularFunctorialNormalizedResolution.{u}) (D : InducedNormalizedLogResolution F) (P : StrictEtaleLogBlowupProcedure IsLogBlowupInput.{u}) (hP : RigidifiedQuotient.IsFanInduced D.fanRule P) (G : Type v) [Group G] [Finite G] (m : ℕ) (A : Fin m → Type u) [∀ i, CommRing (A i)] [∀ i, IsRegularLocalRing (A i)] [∀ i, IsAdicComplete (IsLocalRing.maximalIdeal (A i)) (A i)] [∀ i, IsSepClosed (IsLocalRing.ResidueField (A i))] (X Y : RigidifiedQuotient.Pair.{u, v} G) (components : X.logScheme.scheme ≅ ∐ fun i ↦ Spec (.of (A i))) (sameScheme : X.logScheme.scheme = Y.logScheme.scheme) (sameAction : HEq X.action.baseAction Y.action.baseAction) (sameBoundary : HEq X.boundary Y.boundary) (C₁ : RigidifiedQuotient.Construction P X) (C₂ : RigidifiedQuotient.Construction P Y) : Nonempty (RigidifiedQuotient.Construction.UnderlyingIso C₁ C₂ (eqToIso sameScheme))",
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a21433971",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Lean exact against node and ILO VIII 5.5.2 (all hypotheses: regular local + IsAdicComplete + IsSepClosed residue field; ∐ Spec A_i with m=0 allowed; Pair extras implied for affine X; sameScheme/sameAction/sameBoundary keep log structures independent; IsFanInduced D.fanRule P with D : InducedNormalizedLogResolution F). Conclusion: Nonempty UnderlyingIso = full ordered towers equal with center ideals by comap, over the identity of X, no contraction; same content as CenterIso/IsIsoOver, needed because Construction towers lack reduced. Construction is unique up to unique iso (fs-Cartesian full pullback), so the ∀ C₁ C₂ form is right. Statement verbatim; char-0 dep record lean-only; 8 header-only module-mode (B) conversions (char-0 + 7 trf algebra modules) with bodies identical to live. Only fault H11: the second reading was the worker's own self-audit → replaced in fixes/lem-per-complete-local-rigidification-comparison.report.md (worker report verbatim + real clause-by-clause reading). Advisories: base-era theorem stmt_deps carry Pair/Construction and route the induced-resolution structures, whose owner def nodes are not in stmt_deps; Q03 15fcd14a competing char-0 module re-delivery needs a rebase at landing. No compile (no Lean changed).; reverted the delivery's change of existing node(s) lem-per-characteristic-zero-log-resolution-independence (--revert-nodes; kept as on sheaf-dag)"
+ }
 }

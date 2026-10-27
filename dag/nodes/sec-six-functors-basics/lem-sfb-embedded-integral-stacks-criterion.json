@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-embedded-integral-stacks-criterion",
+ "kind": "lemma",
+ "title": "Embedded coefficient form of the Stacks integral criterion",
+ "statement": "For prime ell, finite intermediate E in PadicAlgCl ell, a generator pi of the maximal ideal of its embedded integers, and Noetherian X in universe u, an arbitrary complex K of internal continuous integral coefficient modules is constantModelBoundedConstructible if and only if its restriction along the canonical constant-to-continuous map is stacksConstructible. All definitions are the actual maps and predicates of [def-sfb-embedded-integral-model-coefficients]. There is no coefficient-universe equality hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion, transported to embedded coefficients; Stacks Tag 09C1."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Construct the lifted finite-dimensional instance and use the proved integerRingSheafIso from IntegralCoefficientExtComparison. Compose its underlying monoid-object isomorphism with the existing pointComparison between the absolute-value and spectral-norm presentations. Let F be scalar restriction along its inverse after inverse image to X. Exact faithful scalar restriction preserves and reflects boundedness. The generic constantModel_comap_iff, together with the derived homology comparison isomorphism, preserves and reflects constant-model constructibility in every degree. This identifies bounded constant-model constructibility of K with that of F(K).",
+   "uses": [
+    "lem-integral-coefficient-ext-comparison",
+    "sk-def-sfb-constructible",
+    "def-sfb-integral-constant-model-realization",
+    "lem-sf-constant-model-stratification-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+    "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+   }
+  },
+  {
+   "text": "Apply the pointwise iff of integral_models_stacks to F(K). The completeness-transport iff identifies its completeness conjunct; the residue-transport iff identifies the conjunction of constructible residue cohomology and finite Tor amplitude. Combine these iff statements with and_congr, reverse orientation, and compose with the preceding constructibility iff.",
+   "uses": [
+    "det-lem-integral-models-stacks",
+    "lem-sfb-embedded-integral-completeness-transport",
+    "lem-sfb-embedded-integral-residue-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+    "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-integral-coefficient-ext-comparison",
+  "sk-def-sfb-constructible",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sf-constant-model-stratification-transport",
+  "det-lem-integral-models-stacks",
+  "lem-sfb-embedded-integral-completeness-transport",
+  "lem-sfb-embedded-integral-residue-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q9",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.finiteTorAmplitude",
+   "results": "{\"t\": \"2026-10-23T12:31:44Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.finiteTorAmplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DerivedCategory.finiteTorAmplitude'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the embedded coefficient comparison; existing generic statements use a universe-sized field and a small-site ring presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral constructible complexes over a finite extension of the l-adic integers have finite Tor amplitude and restriction from completed coefficients to constant coefficients preserves derived completeness",
+   "results": "{\"t\": \"2026-10-23T12:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"Integral constructible complexes over a finite extension of the l-adic integers have finite Tor amplitude and restriction from completed coefficients to constant coefficients preserves derived completeness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"instCommRingBDeRhamPlus\", \"AdicCompletion.map_exact\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\"], \"digest\": \"0d6104b695ea9c00\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the embedded coefficient comparison; existing generic statements use a universe-sized field and a small-site ring presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars on derived complete sheaves for a flat map with equal quotients",
+   "results": "{\"t\": \"2026-10-23T12:34:48Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars on derived complete sheaves for a flat map with equal quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"CondensedMod.ofSheafCompHaus\", \"SheafOfModules.restrictScalars_obj_val\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"SheafOfModules.forgetToSheafModuleCat\", \"instAbelianCondensedMod\"], \"digest\": \"5e7e706d970de160\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the embedded coefficient comparison; existing generic statements use a universe-sized field and a small-site ring presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "integral_models|integralModels|IsLocallyDerivedRingedIdealComplete",
+   "results": "{\"t\": \"2026-10-23T13:57:23Z\", \"tool\": \"grep\", \"query\": \"integral_models|integralModels|IsLocallyDerivedRingedIdealComplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the embedded coefficient comparison; existing generic statements use a universe-sized field and a small-site ring presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction from continuous embedded l-adic integers to constant coefficients identifies derived complete categories and constructible residue complexes",
+   "results": "{\"t\": \"2026-10-23T13:57:23Z\", \"tool\": \"leansearch\", \"query\": \"Restriction from continuous embedded l-adic integers to constant coefficients identifies derived complete categories and constructible residue complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.instIsAdicCompleteMaximalIdeal\", \"HomologicalComplex.restriction\", \"PadicInt.adicCompletionIntegersEquiv\", \"DerivedCategory\", \"PadicInt.completeSpace\", \"AdicCompletion\", \"ComplexShape.Embedding.restrictionFunctor\", \"AdicCompletion.congr\"], \"digest\": \"76bd0a31439cb37e\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the embedded coefficient comparison; existing generic statements use a universe-sized field and a small-site ring presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport integral Stacks constructibility and local derived completeness along universe lifting and coefficient ring isomorphisms",
+   "results": "{\"t\": \"2026-10-23T13:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"Transport integral Stacks constructibility and local derived completeness along universe lifting and coefficient ring isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1\", \"AlgebraicGeometry.IsIntegralHom.comp_iff\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instCompScheme\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\"], \"digest\": \"aa7321ed1747c8de\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match for the embedded coefficient comparison; existing generic statements use a universe-sized field and a small-site ring presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModels",
+  "date": "2026-10-23",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Displayed criterion, transported to embedded coefficients; Stacks Tag 09C1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralModelsEmbeddedStacksCriterion",
+  "file": "lean/Sheaf/Paper/IntegralModelsEmbeddedStacksCriterion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralModelsEmbeddedStacksCriterion",
+  "statement": "theorem integralModelsEmbeddedStacksCriterion\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (X : Scheme.{u}) [IsNoetherian X] :\n    ∀ K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (integralCoefficientObject X ℓ E)),\n      constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X K ↔\n        IntegralModelsEmbedded.stacksConstructible ℓ E π X\n          ((IntegralModelsEmbedded.restriction ℓ E X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-88e12",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261023T231645-L-3629673",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261025T095749-L-3478983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

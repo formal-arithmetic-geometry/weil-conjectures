@@ -76,7 +76,50 @@
  "uses_not_cited": [
   "def-weil-pbc-qbar-category"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.IsPerverseLE",
+     "module": "WeilConjectures.SixFunctors.Etale.Perverse.Basic",
+     "lines": [
+      137,
+      140
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.IsPerverseGE",
+     "module": "WeilConjectures.SixFunctors.Etale.Perverse.Basic",
+     "lines": [
+      170,
+      173
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.IsPerverseHeartCandidate",
+     "module": "WeilConjectures.SixFunctors.Etale.Perverse.Basic",
+     "lines": [
+      175,
+      178
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
@@ -117,5 +160,15 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-5ff1f3cbc (reviewer sub-agent of L); spot-checked: PASS. Every defining formula is verbatim from main-20261015 and master (the bodies are identical; only the order differs). The formulas are pD^{≤0}={SuppCon}, pD^{≥0}={CosuppCon}, pD^{≤n}=pD^{≤0}[−n], pD^{≥n}=pD^{≥0}[−n] for all n, and Perv^cand = pD^{≤0} ∩ pD^{≥0}. The stmt_deps are unchanged: def-per-support-condition and def-weil-pbc-qbar-category. The only change replaces 'In the setting of' (a B2 fault) with explicit context: ℓ prime, ℓ invertible in k, a chosen Q̄_ℓ, X separated of finite type over k, D^b_c(X,Q̄_ℓ) with its shifts, and the empty-support convention. This is what the two dependencies already require: the Q̄_ℓ category needs a noetherian finite-dimensional base with ℓ invertible, and the dualizing complex needs the ℓ-invertible conventions. No citer is broken; all of them work with ℓ invertible in k or over F_q with ℓ≠p. The shift directions agree with lem-per-qbar-middle-tstructure: K∈pD^{≤n} ⇔ dim Supp H^jK ≤ n−j, and K∈pD^{≥n} ⇔ DK∈pD^{≤−n}. Small cases check out: Q̄_ℓ[0] on a point is in the heart; Q̄_ℓ[1] on a point is in pD^{≤−1} but not pD^{≥0}; Q̄_ℓ[1] on A^1 is perverse; 0 and ∅ fall under the −∞ convention. There are no new nodes and no proof. The searches cover all three kinds. The upstream IsPerverseLE/GE/HeartCandidate (slopmaster2 Perverse/Basic.lean) lives on DerivedCategory(Sheaf X_et A), so refusing to attach it is correct. The item is not on the drop list and has no repair note. Advisory: separated/finite type, Q_ℓ and Q̄_ℓ are cited only through the stmt_deps. Maintainer note: Q21 (fc29ef2229e3) delivered a parallel split of the same item after the 2026-10-21 rework release, and Q29 was also released it; keep only one."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the setting of [def-per-support-condition], inside $\\Dbc(X,\\Qlb)$\n([det-def-sfb-bounded-constructible]), put\n\n$$\n\\begin{aligned}\n{}^pD^{\\le0}(X)&:=\\bigl\\{K:\\ \\operatorname{SuppCon}(K)\\bigr\\},\\\\\n{}^pD^{\\ge0}(X)&:=\\bigl\\{K:\\ \\operatorname{CosuppCon}(K)\\bigr\\},\n\\end{aligned}\n$$\n\nand, for every $n\\in\\mathbf Z$,\n\n$$\n{}^pD^{\\le n}(X):={}^pD^{\\le0}(X)[-n],\\qquad\n{}^pD^{\\ge n}(X):={}^pD^{\\ge0}(X)[-n].\n$$\n\nThe *perverse heart candidate* is\n\n$$\n\\mathrm{Perv}^{\\mathrm{cand}}(X):={}^pD^{\\le0}(X)\\cap{}^pD^{\\ge0}(X).\n$$",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

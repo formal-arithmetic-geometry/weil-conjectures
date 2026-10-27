@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-internal-first-residue-ordinary-comparison",
+ "kind": "statement",
+ "title": "Ordinary flat integral scalar map and common first-residue tensor comparison",
+ "statement": "Let l be prime, E a finite extension of Q_l in universe u and X any scheme in universe u. Write a for the composite of the constant-to-continuous integral map of [def-sfb-integral-models-stacks-data] with the pullback of pointComparison inverse from [def-sfb-integral-constant-model-realization]. There is an isomorphism e from the actual continuous first-residue condensed ring of [sk-def-pe-derived-completion] to the constant first-residue condensed ring such that extension of internal modules along a preserves finite limits, and ordinary restriction along a followed by ordinary extension along the constant residue map is naturally isomorphic to ordinary extension along the actual continuous residue map followed by restriction along the pullback of e inverse. These are functors on ordinary internal modules, with no complexes, localization, boundedness or completeness condition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1)--(2), first quotient comparison; Stacks 099L, 09C1, 08FZ"
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization"
+ ],
+ "proof": [
+  {
+   "text": "Use integralModels_flat_residue for the exact scalarMap to obtain flatness of the restricted regular module on the small site. The existing change_exact theorem gives finite-limit preservation for small-site scalar extension. The section-module/AsSmall equivalences and their scalar restriction square give an extension square by adjunction mates. Reflection through this equivalence proves finite-limit preservation for the original internal scalar map. Compose with extension along pointComparison inverse, which is equivalent to restriction along an isomorphism.",
+   "uses": [
+    "lem-sfb-integral-models-flat-residue",
+    "lem-sfb-embedded-integral-completion",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-sfb-integral-constant-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first-residue ring pushout provides e and the common quotient square on the small site. Apply the already proved ordinaryComparison pushout lemma to the standard scalar-extension cochain models, then identify their ordinary functors with ConstantCompletion.change by their object and map equations. Whisker the restriction and extension transport isomorphisms and cancel the fully faithful smallModules equivalence. This gives the internal ordinary common-quotient comparison.",
+   "uses": [
+    "lem-sfb-internal-first-residue-ring-pushout",
+    "lem-weil-pbc-ordinary-common-quotient-tower",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-embedded-integral-completion",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor extension along the continuous quotient followed by e using extendScalarsComp. Extension along e is restriction along its inverse. Functoriality of coefficientMap and e.hom_inv_id identify that inverse with coefficientMap e.inv.hom X. Compose the natural isomorphisms. This is an actual proof on ordinary module functors, with no new hypotheses or changes to the original signature.",
+   "uses": [
+    "def-sfb-integral-constant-model-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-models-flat-residue",
+  "lem-sfb-embedded-integral-completion",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-internal-first-residue-ring-pushout",
+  "lem-weil-pbc-ordinary-common-quotient-tower",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M8",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1)--(2), first quotient identification; Stacks sites-modules.tex lemma-completion-flat (093M), proetale.tex section-derived-completion-noetherian (099L)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring homomorphism inducing the same residue quotient identifies derived extension after restriction with derived reduction",
+   "results": "{\"t\": \"2026-10-25T13:09:17Z\", \"tool\": \"leanfinder\", \"query\": \"A flat ring homomorphism inducing the same residue quotient identifies derived extension after restriction with derived reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField_1\", \"Ideal.ResidueField.map\\u2090_apply\", \"Ideal.ResidueField.algHom_ext_iff\", \"Ideal.ResidueField.ringHom_ext_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"IsLocalRing.ResidueField.algebraMap_residue\", \"Ideal.ResidueField.algHom_ext\", \"Ideal.ResidueField.ringHom_ext\"], \"digest\": \"b1bbfad9dc859e5e\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib comparison of these internal coefficient presentations. Use the existing normalized constant-completion finite tensor comparison and section-action equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorCompMapDerivedCategoryIso",
+   "results": "{\"t\": \"2026-10-25T13:17:12Z\", \"tool\": \"grep\", \"query\": \"leftDerivedFunctorCompMapDerivedCategoryIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib comparison of these internal coefficient presentations. Use the existing normalized constant-completion finite tensor comparison and section-action equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "{\"t\": \"2026-10-25T13:17:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.leftDerivedNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.Functor.leftDerivedNatIso_inv\"], \"digest\": \"9451af80b3f2358a\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib comparison of these internal coefficient presentations. Use the existing normalized constant-completion finite tensor comparison and section-action equivalences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueReductionComparison",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Proof steps 1 and 2, only the ordinary flat scalar map and common quotient tensor comparison. Derived K-flat computation and localization remain proved in the parent.",
+   "via": [
+    "lem-sfb-internal-first-residue-reduction-comparison",
+    "lem-sfb-internal-residue-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueOrdinaryComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalFirstResidueOrdinaryComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_first_residue_ordinary_comparison",
+  "statement": "theorem internal_first_residue_ordinary_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :\n    let a := IntegralModelsStacks.scalarMap l E X ≫\n      coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X\n    ∃ e : Mon.mk (DerivedNakayama.quotientRing l E 1) ≅\n        Mon.mk (IntegralModelsStacks.discreteObj (Padic.coefficientExtensionRing l E 1)),\n      PreservesFiniteLimits (Mod.extendScalars a) ∧\n      Nonempty\n        (Mod.comap a ⋙ Mod.extendScalars (IntegralModelsStacks.residueMap l E X) ≅\n          Mod.extendScalars (AdicCompletion.quotient l E X 0) ⋙\n            Mod.comap (coefficientMap e.inv.hom X))",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163840-L-862164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261025T202618-L-2733968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "id": "lem-diagonal-finite-scalar-squares",
+ "kind": "statement",
+ "title": "Normalized finite-free and rational direct-image squares on shifted root lines",
+ "statement": "Let l be prime, E a finite intermediate extension of Q_l in its fixed algebraic closure, and f:X -> S a quasi-compact quasi-separated morphism of schemes. For each DiagonalRightDerived model R of Z_l direct image there exists a RestrictionSquare [def-sfb-diagonal-coefficient-scalars] for integralMap with the canonical O_E model [lem-diagonal-canonical-right-derived], whose scalar mate is invertible on zlLine(l,X)[2]. For each model R of O_E direct image there similarly exists a full-unit-normalized RestrictionSquare for O_E -> E whose mate is invertible on spIntegralTwist(X,l,E)[2]. The lines and scalar maps are precisely those of [def-sfb-diagonal-coefficient-maps]. No class, trace, supported-source data or integration identity is part of the assertion.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-maps",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite-free direct-image compatibility, and paragraph (2), rationalization before the finite-field colimit"
+ },
+ "proof": [
+  {
+   "text": "Use the existing finite integral coefficient basis at the bottom finite intermediate field. The existing base coefficient condensed identification identifies its integer ring with Z_l via exactly integralMap at the bottom field. Transport the finite point basis along this ring-object isomorphism. Pulling the basis back to each scheme proves exactness of integral scalar extension. The existing finitePush_of_pointCopower criterion, applied to this finite point basis, proves invertibility of the actual canonical derivedPushHom on every complex. Its proof only uses additivity and finite coproducts.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-finite-free",
+    "lem-sfb-base-coefficient-condensed-identification",
+    "lem-sfb-subfield-push-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any flat coefficient map, use the actual derivedComapLowerStarIso. Its full right-derived-unit equation on homotopy complexes is the existing generic square_fac calculation; convert it to the cochain-unit equation via quotientCompQhIso and exact-functor localization factors. The universal cochain units give the unique isomorphism from the canonical lower-coefficient derived model to the supplied model R. Whisker this isomorphism with restriction and compose with the actual canonical square. Naturality and the unit factorization prove precisely the RestrictionSquare normalization on every complex. The adjunction unit equation and naturality show that its mate component equals scalar extension of the inverse model comparison followed by the canonical derivedPushHom component. Hence canonical mate invertibility transports to R.",
+   "uses": [
+    "lem-diagonal-canonical-right-derived",
+    "def-sfb-derived-comap-lower-star-iso",
+    "def-sfb-derived-push-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For rationalization use the exactness clause of padicIntegers_invertEll and localizedDirectImageComparison_isIso, which proves invertibility of the actual canonical derivedPushHom component on every bounded-below object. The integral Tate line single complex in degree zero shifted by two has lower bound -2, independently of the line and of invertibility of l on X. Apply the flat-square construction and transport just proved. Combine this with the integral assertion as the required conjunction; no further intermediate sorry is introduced.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-sfb-localized-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "lem-sfb-base-coefficient-condensed-identification",
+  "lem-sfb-subfield-push-iso",
+  "lem-diagonal-canonical-right-derived",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-push-hom",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-sfb-localized-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "A9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraphs (1)--(2); existing finite point-basis mate criterion and bounded localization theorem, with explicit full-unit transport to arbitrary models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a diagonal class and trace integration identities under extension of scalars in derived categories of sheaves",
+   "results": "Eight hits, including sheaf cohomology, sheaf-module pushforward, and linearity of exact derived functors. None states the normalized coefficient endpoint or direct-image comparison. Local rg located the proved integration_transport and the generic supported scalar-source theorem.",
+   "date": "2026-10-27",
+   "verdict": "Reuse integration_transport and the supported-source interface; no complete coefficient-comparison match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.integration_transport",
+   "results": "Zero hits: unknown identifier in the Mathlib service. Local source supplies the project's proved integration_transport.",
+   "date": "2026-10-27",
+   "verdict": "Use the project theorem for integration; it does not construct scalar endpoints or squares."
+  },
+  {
+   "tool": "grep",
+   "query": "RestrictionSquare|ScalarCompatibility|Endpoint.shift",
+   "results": "Zero service hits. Local rg in lean/Sheaf and lean/WeilConjectures found the definitions, DiagonalFlatScalarEndpoint, DiagonalSupportedScalarSource and DiagonalUniformizerScalarFrame. The available square theorem concerns uniformizer quotients, not finite integral extension or rationalization.",
+   "date": "2026-10-27",
+   "verdict": "Use those definitions and the proved flat endpoint theorem. Separate the missing integral endpoint and finite/localization direct-image comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free extension of coefficient rings commutes with derived direct image and an inverse limit Tate twist",
+   "results": "Eight hits including ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ordinary direct-limit ring results, and tensor/direct-limit comparisons. The ordinary flatness lemma was read in Mathlib/Algebra/Category/ModuleCat/Descent.lean:42; it does not identify internal root-limit endpoints or full-unit-normalized derived comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No full match for these normalized geometric comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCoefficientFiniteExtension",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite-free direct-image compatibility, and paragraph (2), rationalization before the finite-field colimit",
+   "via": [
+    "lem-sfb-diagonal-finite-coefficient-extension",
+    "lem-diagonal-coefficient-family-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteScalarSquares",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteScalarSquares.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalFinite_scalarSquares",
+  "statement": "theorem diagonalFinite_scalarSquares\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] :\n    (∀ R : DiagonalRightDerived\n        (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f),\n      ∃ s : RestrictionSquare (integralMap l E) f R\n          (canonicalDiagonalRightDerived\n            (CondensedRing.lowerStar (Profinite.padicIntegersRingObj.{u} l E.1) f)),\n        IsIso ((s.mate (integralMap l E)).app\n          (((DerivedCategory.singleFunctor _ 0).obj (zlLine l X))⟦(2 : ℤ)⟧))) ∧\n    (∀ R : DiagonalRightDerived\n        (CondensedRing.lowerStar (Profinite.padicIntegersRingObj.{u} l E.1) f),\n      ∃ s : RestrictionSquare (padicIntegersRingObjToContinuousMapRingObj l E) f R\n          (canonicalDiagonalRightDerived\n            (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} E.1) f)),\n        IsIso ((s.mate (padicIntegersRingObjToContinuousMapRingObj l E)).app\n          (((DerivedCategory.singleFunctor _ 0).obj\n            (spIntegralTwist X l E))⟦(2 : ℤ)⟧)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T235929-L-1471056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T012805-L-2331120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

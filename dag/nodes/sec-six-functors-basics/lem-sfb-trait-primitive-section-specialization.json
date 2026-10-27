@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-trait-primitive-section-specialization",
+ "kind": "statement",
+ "title": "Primitive specialization of a generic line section over a trait",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$ and a uniformizer $\\pi$ [def-sc-discrete-valuation-ring]. Let $f:X\\to\\operatorname{Spec}R$ be a smooth separated morphism of finite presentation [def-pc-scheme, def-weil-affine-spectrum, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with nonempty geometrically connected fibres, meaning that every residue-field fibre remains nonempty and connected after extension to an algebraic closure. Separated means that the diagonal is a closed immersion. Put $X_K=X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}K$ and $X_k=X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}k$ [def-pc-fibre-product]. Let $C$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], with restrictions $C_K,C_k$ defined by tensor inverse image [def-pc-module-pullback]. For every nonzero global section $s_K\\in\\Gamma(X_K,C_K)$, there exist an integer $m\\in\\mathbf Z$ and a global section $s\\in\\Gamma(X,C)$ such that $s|_{X_K}=\\pi^m s_K$ and $s|_{X_k}$ is nonzero. No properness or completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, part (2), applied to local coefficients of a rational line section after subtracting its valuation along the unique special-fibre divisor; descent.tex Tag 036D, lemma-regular-local-smooth, supplies regularity over a DVR. Agent-extracted geometric section lemma, not a verbatim Stacks statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The DVR $R$ is Noetherian since every ideal is principal. Every nonzero denominator in $R$ is a unit times a nonnegative power of $\\pi$, so $K=R[1/\\pi]$. The principal-localization open immersion and its base change identify $X_K\\to X$ with the open $D_X(\\pi)$; on an affine $U=\\operatorname{Spec}A\\subset X$ it is $U\\times_{\\operatorname{Spec}R}\\operatorname{Spec}K=\\operatorname{Spec}(A\\otimes_RK)=\\operatorname{Spec}A[1/\\pi]\\subset U$ by the affine fibre-product lemma. Pullback of modules along this open immersion is restriction, so $C_K=C|_{D_X(\\pi)}$ and $\\Gamma(V_K,C_K)=\\Gamma(D_V(\\pi),C)$ for every open $V\\subset X$. The finite-presentation hypothesis includes quasi-compactness, so $X$ is quasi-compact.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion; schemes.tex Tag 01I3 (lemma-standard-open-affine); morphisms.tex Tag 01TP (definition-finite-presentation)."
+   }
+  },
+  {
+   "text": "The projection $X_{\\overline K}\\to X_K$ is surjective: over an affine chart $\\operatorname{Spec}D\\subset X_K$ it is $\\operatorname{Spec}(D\\otimes_K\\overline K)\\to\\operatorname{Spec}D$ by the affine fibre-product lemma, and this is field-extension faithful flatness followed by surjectivity on prime spectra. A decomposition of $X_K$ into two nonempty disjoint clopen subsets would pull back to such a decomposition of $X_{\\overline K}$, contradicting the fibre hypothesis. Thus $X_K$ is nonempty and connected. Smoothness is preserved by base change, so $X_K$ is regular by smooth-over-a-field regularity. The connected regular scheme lemma now makes $X_K$ integral.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S (lemma-smooth-regular); properties.tex Tags 0569 (lemma-regular-normal), 033N (lemma-normal-locally-Noetherian); algebra.tex faithful flatness under field extension."
+   }
+  },
+  {
+   "text": "For a nonempty affine open $U=\\operatorname{Spec}A\\subset X$, restriction of smoothness and the affine smoothness equivalence make $R\\to A$ a smooth ring map, hence flat and finitely presented. Flat torsion-freeness gives injectivity of multiplication by $\\pi$ on $A$, and hence $A\\hookrightarrow A[1/\\pi]$: a fraction-kernel element is killed by a power of $\\pi$. Since $A\\ne0$, its localization is nonzero. This localization is the coordinate ring of the nonempty affine open $U_K\\subset X_K$, so it is a domain by Step 2. Its subring $A$ is a domain too. This proves $X$ integral. Also $A$ is Noetherian by the finite-type algebra theorem over the Noetherian ring $R$. Thus $X$ is locally Noetherian. In particular, on $X$ and on $X_K$, sections of an invertible module over any nonempty open inject into its generic stalk.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00TA (lemma-smooth-syntomic), 00SL (definition-lci), 00FN (lemma-Noetherian-permanence); more-algebra.tex Tag 0539 (lemma-valuation-ring-torsion-free-flat), flat implies torsion free; properties.tex Tag 01OK (definition-integral)."
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $U_1,\\ldots,U_r$ trivializing $C$, using quasi-compactness from Step 1 and local freeness of rank one. On $U_i$, apply affine basic-open localization of quasi-coherent sections to $s_K|_{(U_i)_K}$ and the coefficient $\\pi$, obtaining $N_i\\ge0$ and $t_i$ with $t_i|_{(U_i)_K}=\\pi^{N_i}s_K$. Set $N=\\max_iN_i$ and replace $t_i$ by $\\pi^{N-N_i}t_i$. These sections agree on every overlap: their restrictions to its generic open agree, hence their germs at the common generic point agree, and injectivity into the generic stalk from Step 3 forces equality (empty overlaps need no check). The sheaf axiom glues them to $t\\in\\Gamma(X,C)$ with $t|_{X_K}=\\pi^Ns_K\\ne0$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IA (lemma-quasi-coherent-affine), 01HV (lemma-spec-sheaves); explicit affine denominator lemma read at lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean:112-144; finite-cover gluing is the sheaf axiom."
+   }
+  },
+  {
+   "text": "Choose $x\\in X_k$, which exists by the nonempty-fibre hypothesis. Put $B=\\mathcal O_{X,x}$. An affine chart from Step 3 has Noetherian coordinate ring, and $B$ is its prime localization; hence $B$ is Noetherian. The module $C_x$ is free of rank one, so finite. The element $\\pi$ belongs to the maximal ideal of $B$, because its image in $\\kappa(x)$ factors through $k=R/(\\pi)$ and is zero. The germ $t_x$ is nonzero: its image in $C_\\eta$ is the nonzero generic germ of $\\pi^Ns_K$, by the injectivity for $C_K$ and $C$ in the generic-stalk lemma. Apply Krull intersection with the ideal $I=\\pi B$ and the finite module $C_x$ to obtain $\\bigcap_{j\\ge0}\\pi^jC_x=0$. Consequently there is $b\\ge0$ with $t_x\\notin\\pi^bC_x$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-invertible-module-generic-stalk",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), part (2), equivalently local form Tag 00IP (lemma-intersect-powers-ideal-module-zero); Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Let $T=\\{j\\in\\mathbf N:\\ t=\\pi^jv\\text{ for some }v\\in\\Gamma(X,C)\\}$. It contains $0$. Every $j\\in T$ has $t_x\\in\\pi^jC_x$, so Step 5 bounds $j<b$. The finite nonempty subset $T$ of the natural numbers therefore has a largest element $a$. Choose $s\\in\\Gamma(X,C)$ with $t=\\pi^as$. Restricting to $X_K$, where $\\pi$ is invertible, gives $s|_{X_K}=\\pi^{N-a}s_K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary maximal-divisibility consequence of Tag 00IQ; finite subsets of the natural numbers and cancellation by the invertible scalar on the generic fibre."
+   }
+  },
+  {
+   "text": "Suppose $s|_{X_k}=0$. On a trivializing affine $U_i=\\operatorname{Spec}A_i$, write $s=c_ie_i$, where $e_i$ is the chosen basis of $C$. By the affine fibre-product lemma $U_i\\cap X_k=U_i\\times_{\\operatorname{Spec}R}\\operatorname{Spec}k=\\operatorname{Spec}(A_i/\\pi A_i)$, with projection $a\\mapsto a\\bmod\\pi$, and $C_k$ restricted there is the tensor inverse image of $C|_{U_i}$ (open-immersion pullback is restriction, and pullbacks compose). Tensor inverse image to $U_i\\cap X_k$ sends this basis to a basis and the coefficient to $c_i\\bmod\\pi$. Vanishing therefore says $c_i=\\pi d_i$ for some $d_i\\in A_i$. Put $v_i=d_ie_i$. On overlaps $\\pi(v_i-v_j)=0$, and multiplication by $\\pi$ is injective locally by Step 3 and local freeness, so $v_i=v_j$. These sections glue to $v$ with $s=\\pi v$. Then $t=\\pi^{a+1}v$, contradicting maximality of $a$. Hence $s|_{X_k}\\ne0$. With the integer $m=N-a$ this is precisely the required section.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IA (lemma-quasi-coherent-affine); coefficient computation of tensor inverse image on the closed fibre, followed by the sheaf axiom. No surjectivity of global sections onto the special fibre is assumed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-invertible-module-generic-stalk",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Alternative elementary denominator/maximal-divisibility proof using Tags 00PD, 00IQ (part (2)), with Schemes 01IA and Varieties 056S; differs from the height-one valuation route suggested by source.place."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "uniformizer.*section|section.*uniformizer|primitive.*section",
+   "results": "{\"t\": \"2026-10-23T22:20:03Z\", \"tool\": \"grep\", \"query\": \"uniformizer.*section|section.*uniformizer|primitive.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary valuation uniformizers, regular functions on basic opens, function fields, and valuative morphisms do not give primitive specialization of a line section on a smooth trait family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clear uniformizer denominators of a generic line bundle section on a smooth connected family over a discrete valuation ring and obtain primitive reduction",
+   "results": "{\"t\": \"2026-10-23T22:20:04Z\", \"tool\": \"leansearch\", \"query\": \"Clear uniformizer denominators of a generic line bundle section on a smooth connected family over a discrete valuation ring and obtain primitive reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.IsUniformizer.not_isUnit\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"Valuation.Uniformizer.ext\", \"Valuation.IsUniformizer\", \"WeierstrassCurve.reduction\", \"Valuation.Uniformizer.mk.inj\", \"Valuation.exists_pow_Uniformizer\", \"Valuation.Uniformizer.mk'\"], \"digest\": \"8a33d3fcea1164d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary valuation uniformizers, regular functions on basic opens, function fields, and valuative morphisms do not give primitive specialization of a line section on a smooth trait family."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T22:20:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary valuation uniformizers, regular functions on basic opens, function fields, and valuative morphisms do not give primitive specialization of a line section on a smooth trait family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero generic fibre section of a line bundle on a smooth scheme with connected fibres over a DVR can be rescaled to have nonzero reduction",
+   "results": "{\"t\": \"2026-10-23T22:20:09Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero generic fibre section of a line bundle on a smooth scheme with connected fibres over a DVR can be rescaled to have nonzero reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\"], \"digest\": \"be528cfa97130a02\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary valuation uniformizers, regular functions on basic opens, function fields, and valuative morphisms do not give primitive specialization of a line section on a smooth trait family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive specialization of a rational section over a discrete valuation ring on a smooth scheme with geometrically integral fibres",
+   "results": "{\"t\": \"2026-10-23T22:20:10Z\", \"tool\": \"leanfinder\", \"query\": \"Primitive specialization of a rational section over a discrete valuation ring on a smooth scheme with geometrically integral fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\"], \"digest\": \"06c4016870d5eacb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary valuation uniformizers, regular functions on basic opens, function fields, and valuative morphisms do not give primitive specialization of a line section on a smooth trait family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic fibre section of a line bundle on a smooth scheme over a discrete valuation ring can be rescaled by a uniformizer to have nonzero specialization",
+   "results": "{\"t\": \"2026-10-23T23:20:37Z\", \"tool\": \"leanfinder\", \"query\": \"A generic fibre section of a line bundle on a smooth scheme over a discrete valuation ring can be rescaled by a uniformizer to have nonzero specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.valuation_uniformizer_ne_zero\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"ModuleCat.Tilde.isUnit_toStalk\"], \"digest\": \"c66c1c23be43b457\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scalar operations, valuations, valuative morphisms or ordinary regular functions; none proves existence of a primitive global line section under the stated hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*section|section.*uniformizer|primitive.*section",
+   "results": "{\"t\": \"2026-10-23T23:21:45Z\", \"tool\": \"grep\", \"query\": \"uniformizer.*section|section.*uniformizer|primitive.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scalar operations, valuations, valuative morphisms or ordinary regular functions; none proves existence of a primitive global line section under the stated hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle section over the generic fibre of a smooth connected scheme over a discrete valuation ring has a scalar multiple extending with nonzero reduction",
+   "results": "{\"t\": \"2026-10-23T23:21:45Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle section over the generic fibre of a smooth connected scheme over a discrete valuation ring has a scalar multiple extending with nonzero reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.smul_section_apply\", \"ModuleCat.Tilde.sections_smul_localizations_def\", \"ContMDiffOn.smul_section\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"Valuation.HasExtension.val_smul\", \"WeierstrassCurve.isGoodReduction_iff\", \"MDifferentiableOn.smul_section_of_tsupport\", \"MDifferentiableOn.smul_const_section\"], \"digest\": \"bb69003349d04c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scalar operations, valuations, valuative morphisms or ordinary regular functions; none proves existence of a primitive global line section under the stated hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T23:21:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scalar operations, valuations, valuative morphisms or ordinary regular functions; none proves existence of a primitive global line section under the stated hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive specialization of a rational line section on a flat family over a discrete valuation ring by clearing denominators and Krull intersection",
+   "results": "{\"t\": \"2026-10-23T23:21:46Z\", \"tool\": \"leanfinder\", \"query\": \"Primitive specialization of a rational line section on a flat family over a discrete valuation ring by clearing denominators and Krull intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\"], \"digest\": \"806701385fd692d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scalar operations, valuations, valuative morphisms or ordinary regular functions; none proves existence of a primitive global line section under the stated hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-symmetric-cubical-specialization",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Special-fibre positivity of a symmetric cubical line over a trait. Q44: Rescaling the generic section to have nonzero closed-fibre restriction, independent of ampleness or group structure.",
+   "via": [
+    "lem-sfb-trait-symmetric-cubical-specialization",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-primitive-section-specialization",
+  "worker": "stage1",
+  "summary": "Q22 proves primitive specialization by a finite affine denominator bound, injectivity on an integral smooth trait family, and Krull intersection at one special-fibre point. Reuses existing nodes throughout; no new nodes or statement changes. Makes the global division/gluing argument explicit and does not assume properness, completeness, or surjectivity of restriction to the special fibre.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof-(3) provenance through the recorded chain: the Q44 primitive-section input to trait symmetric cubical specialization. The latest blueprint has no separate node stating primitive specialization. Existing null from.node and the complete inherited from.place/via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic algebraic-geometry tool used only for its stated Proper and smooth morphisms are stable under base change. It supplies a prerequisite of the trait section argument; it does not replace a unit-level six-functor route step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic algebraic-geometry tool used only for its stated A scheme smooth over a field is regular. It supplies a prerequisite of the trait section argument; it does not replace a unit-level six-functor route step."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic algebraic-geometry tool used only for its stated integrality of a nonempty connected regular scheme. It supplies a prerequisite of the trait section argument; it does not replace a unit-level six-functor route step."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic algebraic-geometry tool used only for its stated A ring map is smooth iff the morphism of spectra is smooth. It supplies a prerequisite of the trait section argument; it does not replace a unit-level six-functor route step."
+   },
+   {
+    "node": "lem-sc-invertible-module-generic-stalk",
+    "why": "Generic algebraic-geometry tool used only for its stated injectivity of line-module sections and stalks into the generic stalk. It supplies a prerequisite of the trait section argument; it does not replace a unit-level six-functor route step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-module-basic-open-localization",
+    "why": "Generic algebraic-geometry tool used only for its stated affine basic-open denominator clearing. It supplies a prerequisite of the trait section argument; it does not replace a unit-level six-functor route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sc-invertible-module-generic-stalk",
+  "lem-weil-pbc-affine-module-basic-open-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-c07fdf716",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-c07fdf716 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the unsplit Q44 node, so the target is not weakened. The statement is true: X is integral and normal and X_k is the prime divisor (π). It has no new nodes, no repair note and no SGA source. I checked each of the 7 steps against the statements of the cited nodes. (1) K=R_π and X_K=D_X(π), and finite presentation gives quasi-compactness. (2) X_{K̄}→X_K is surjective by faithful flatness, so X_K is connected; smooth base change and smooth-over-field-regular make it regular; lem-sc-regular-connected-integral makes it integral. (3) R→A is smooth, hence flat; lem-trf-flat-module-torsionfree-domain makes π injective; A embeds in the domain A_π, so X is integral; A is Noetherian. (4) Basic-open denominator clearing works on a finite trivializing affine cover, and the local extensions glue by injectivity into the generic stalk. (5) Krull's intersection theorem (00IQ(2)) applies with I=πB ⊂ m_x on the free rank-1 stalk C_x, and t_x≠0. (6) The divisibility set is bounded, so it has a maximum a. (7) If s vanished on X_k, the local quotients by π would glue and contradict the maximality of a. Small cases tested: Spec R with negative m; A^1_R with s_K=π^{-d}(π+x); and Spec R ⊔ Spec K, which shows why the connectedness hypothesis is needed. Batch-5 finding: lem-trf-flat-module-torsionfree-domain is a Mathlib leaf (Module.Flat.torsion_eq_bot) of general commutative algebra with empty closure. It is neither part of the trace formula or Poincaré duality nor a step of their proofs, so I accept it. I also accept the six generic tool_uses (smooth clause of proper-base-change, smooth-over-field-regular, regular-connected-integral, smooth-ring-map-iff-affine, invertible-module-generic-stalk, affine basic-open localization). FIX (C1, two missing citations): steps 1, 2 and 7 identify U×_R K, X_K charts and U_i∩X_k with Spec of tensor products, and steps 4 and 7 use C_K=C|_{D(π)}, but neither fact was cited. I added lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-open-immersion-module-pullback-restriction (both Mathlib leaves) to the step uses and proof_deps, with the identifications written out. The full node is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitPrimitiveSectionSpecialization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_trait_primitive_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitPrimitiveSectionSpecialization.lean",
+  "statement": "theorem exists_trait_primitive_section (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [Smooth f] [IsSeparated f] [QuasiCompact f] [GeometricallyConnected f] (C : X.Modules) [C.IsInvertible] (sK : Γ((tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))).obj C, ⊤)) (hsK : sK ≠ 0) : ∃ (m : ℤ) (s : Γ(C, ⊤)), ((tensorPullbackSectionAdjunction (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))).unit.app C).app ⊤ s = (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).appTop ((Scheme.ΓSpecIso (.of K)).inv ((algebraMap R K π) ^ m)) • sK ∧ ((tensorPullbackSectionAdjunction (pullback.fst f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R))))).unit.app C).app ⊤ s ≠ 0",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-726ec2212",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Every clause matches the node: DVR, uniformizer via the maximal-ideal span, fraction field and residue map are canonical. Finite presentation = Smooth (gives lfp) + IsSeparated (gives qs) + QuasiCompact. GeometricallyConnected includes nonemptiness and is equivalent to the node's algebraic-closure condition (Stacks 0389). Both restrictions use the recorded normalized tensorPullbackSectionAdjunction unit (1⊗s); π^m is zpow in K, so negative m is allowed. Statement field verbatim; no definitions; single sorry; docstrings carry the source place, blueprint tag and 7 proof steps; proof imports non-public and present in live; report has both required sections. Live node differs only in the lean field; no live Lean for this item. No compile run because nothing was changed. Non-blocking for stage 3: step 2 cites lem-pc-proper-base-change for smooth base change, which the worker already noted."
+ }
+}

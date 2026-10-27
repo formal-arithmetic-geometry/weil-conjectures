@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-differential-operator-order",
+ "kind": "definition",
+ "title": "Differential order of a linear map between algebra modules",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring and $C$ a commutative $R$-algebra with its structure map $R\\to C$ [def-weil-pbc-algebra-hom-quotient]. Let $M,N$ be $C$-modules, regarded as $R$-modules by restriction of scalars. For an $R$-linear map $T:M\\to N$ and $c\\in C$, its scalar commutator is the $R$-linear map $[T,c]:x\\mapsto T(cx)-cT(x)$. Define recursively, for $n\\in\\mathbb N$, that $T$ has differential order at most $0$ if $T$ is $C$-linear, and that $T$ has differential order at most $n+1$ if $[T,c]$ has differential order at most $n$ for every $c\\in C$.",
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 09CI, definition-differential-operators."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DifferentialOperator|IsDiffOp|differentialOperator|differential.order",
+   "results": "{\"t\": \"2026-10-24T10:36:23Z\", \"tool\": \"grep\", \"query\": \"DifferentialOperator|IsDiffOp|differentialOperator|differential.order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic finite-order differential operator predicate or composition theorem. Semantic hits concern first-order derivations, not arbitrary finite differential order; identifier and Mathlib grep searches have no matches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An R-linear map between modules over an R-algebra is a differential operator of order n if every commutator with multiplication has order n minus one",
+   "results": "{\"t\": \"2026-10-24T10:36:23Z\", \"tool\": \"leansearch\", \"query\": \"An R-linear map between modules over an R-algebra is a differential operator of order n if every commutator with multiplication has order n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.hasCoeToLinearMap\", \"Derivation\", \"ModuleCat.Derivation\", \"KaehlerDifferential.DLinearMap\", \"Algebra.PreSubmersivePresentation.differential\", \"Derivation.mk\", \"Derivation.coe_comp\", \"LinearMap.compDer\"], \"digest\": \"9f0cc78bc056337b\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic finite-order differential operator predicate or composition theorem. Semantic hits concern first-order derivations, not arbitrary finite differential order; identifier and Mathlib grep searches have no matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "DifferentialOperator, LinearMap.comp",
+   "results": "{\"t\": \"2026-10-24T10:36:23Z\", \"tool\": \"loogle\", \"query\": \"DifferentialOperator, LinearMap.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DifferentialOperator'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic finite-order differential operator predicate or composition theorem. Semantic hits concern first-order derivations, not arbitrary finite differential order; identifier and Mathlib grep searches have no matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of algebraic differential operators between modules has order at most the sum of their orders",
+   "results": "{\"t\": \"2026-10-24T10:36:24Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of algebraic differential operators between modules has order at most the sum of their orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.compDer\", \"Derivation.llcomp\", \"Derivation.compAlgebraMap\", \"Derivation.compAlgebraMapL\", \"LinearEquiv.compDer\", \"Derivation.llcomp_apply\", \"Derivation.coe_comp\", \"Derivation.compAlgebraMapL_apply_apply\"], \"digest\": \"867f5978d4a52e6a\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic finite-order differential operator predicate or composition theorem. Semantic hits concern first-order derivations, not arbitrary finite differential order; identifier and Mathlib grep searches have no matches."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n DifferentialOperator|IsDiffOp|differentialOperator|differentialOrder|differential operator in lean/WeilConjectures and lean/Sheaf; rg -l differential.?operator|differential order|09CI in dag/nodes; blueprint_refs.py search differential operator",
+   "results": "No declaration of finite algebraic differential order in WeilConjectures or Sheaf. Sheaf hits concern analytic differential operators and an SL2 representation. DAG hits are theorem statements (including this item and the localization theorem) or analytic notions; no definition node carries the recursive 09CI predicate. Blueprint search: 0 blueprint nodes match differential operator. Proposed names scalarCommutator and IsDifferentialOperatorOfOrderLE also have no match in Mathlib, WeilConjectures, Sheaf or dag/lean_names_upstream.json.",
+   "date": "2026-10-24",
+   "verdict": "A new definition node is needed for the recursive module-map predicate."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-differential-operator-composition-order",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Algebraic subgroup input: homogeneous forms of maximal local order are generated by additive polynomials. Refinement in Q114: finite-order differential operators extend to ordinary prime localizations, used to show Hasse derivatives preserve the maximal-order spaces; Stacks 0G36. Supporting refinement: Stacks 09CJ supplies the order bound for composing with multiplication maps in the localization construction and its algebra-generator test. The finite differential-order predicate of Stacks 09CI used in the 09CJ composition bound.",
+   "via": [
+    "lem-trf-differential-operator-composition-order",
+    "lem-trf-differential-operator-localization",
+    "lem-trf-projective-order-algebra-additive-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DifferentialOperatorOrder",
+  "declaration": "LinearMap.IsDifferentialOperatorOfOrderLE",
+  "file": "lean/Sheaf/RingTheory/DifferentialOperatorOrder.lean",
+  "statement": "def IsDifferentialOperatorOfOrderLE (R : Type u) (C : Type v) [CommRing R] [CommRing C] [Algebra R C] {M : Type w} {N : Type z} [AddCommGroup M] [AddCommGroup N] [Module C M] [Module C N] [Module R M] [Module R N] [IsScalarTower R C M] [IsScalarTower R C N] (n : ℕ) (T : M →ₗ[R] N) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "LinearMap.scalarCommutator",
+   "LinearMap.IsDifferentialOperatorOfOrderLE"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90dda41e5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90dda41e5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Item lem-trf-differential-operator-composition-order: Lean theorem LinearMap.IsDifferentialOperatorOfOrderLE.comp matches node and Stacks 09CJ clause by clause (CommRing R, CommRing C with Algebra R C, C-modules L,M,N with independent universes, R-structure via IsScalarTower = restriction of scalars, k,l : ℕ, conclusion order ≤ k+l for E.comp D). New def node def-trf-differential-operator-order matches Stacks 09CI exactly: order 0 = C-linear, order n+1 = every scalarCommutator has order n; scalarCommutator = T∘lsmul c − lsmul c∘T evaluates by rfl to T(cx)−cT(x). The def has real recursive data, no sorry, and the helper is in lean.declarations. No Mathlib, Sheaf or live-tree duplicate and no parallel owner. Both lean.statement fields match the file signatures verbatim; the only item change is the lean record plus the added stmt_dep. Docstrings carry source and blueprint and all four proof steps; report sections present. Edge cases (k=l=0, (1,0)/(0,1), zero ring or modules, any characteristic) covered. No recompile, since no file changed. No findings."
+ }
+}

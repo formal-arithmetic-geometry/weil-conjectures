@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-homogeneous-polynomial-invariant-coordinates",
+ "kind": "statement",
+ "title": "Consecutive-difference coordinates and invariant polynomial complex",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E/\\mathbf Q_\\ell$, and $F=E$ or $F=\\Omega$. Put $A(S)=C(S,F)$, using all continuous maps on the coherent profinite site [def-sfb-continuous-map-condensed-ring], and $L=\\mathbf Z_\\ell^r$ for $r\\geq0$, with its product topology [def-sfb-ladic-lattice]. Use internal $A$-modules and internal $L$-actions [sk-def-sfb-module-objects, def-sfb-condensed-action-module], in coefficient universes containing the site and every profinite parameter set [def-weil-size-convention].\n\nFor $n\\geq0$, let $K^n$ be the internal direct sum of copies of $A$ on the monomials in the $(n+1)r$ variables $y_0,\\ldots,y_n$, each an $r$-tuple [def-weil-pbc-mv-polynomial-ring]. Give it the diagonal action $(g\\cdot f)(y_0,\\ldots,y_n)=f(y_0-g,\\ldots,y_n-g)$, for every section $g\\in C(S,L)$, and the differential\n$$(\\delta f)(y_0,\\ldots,y_{n+1})=\\sum_{i=0}^{n+1}(-1)^if(y_0,\\ldots,\\widehat y_i,\\ldots,y_{n+1}).$$\nSet $K^n=0$ for $n<0$, and let $a:A[0]\\to K$ include the constants, with trivial action on $A$.\n\nLet $P^n$ be the internal polynomial direct sum on the $nr$ variables $x_1,\\ldots,x_n$, each an $r$-tuple, zero in negative degrees, with differential\n$$(dp)(x_1,\\ldots,x_{n+1})=p(x_2,\\ldots,x_{n+1})+\\sum_{i=1}^n(-1)^ip(x_1,\\ldots,x_i+x_{i+1},\\ldots,x_{n+1})+(-1)^{n+1}p(x_1,\\ldots,x_n).$$\n\nFor each $n\\geq0$ the substitutions $z=y_0$, $x_i=y_i-y_{i-1}$, with inverse $y_i=z+x_1+\\cdots+x_i$, give an equivariant internal-module isomorphism from $K^n$ to the polynomial direct sum in $z,x_1,\\ldots,x_n$, with $L$ translating only $z$ by $z\\mapsto z-g$. Thus this is the translation module with $r$ translation variables and $nr$ fixed spectator variables. Its invariant submodule, where invariance is required after every profinite base change, consists exactly of the polynomials independent of $z$. More precisely, substitution of consecutive differences gives an isomorphism of cochain complexes\n$$\\phi:P^\\bullet\\xrightarrow{\\sim}(K^\\bullet)^L,\\qquad (\\phi^np)(y_0,\\ldots,y_n)=p(y_1-y_0,\\ldots,y_n-y_{n-1}).$$\nIts inverse in degree $n$ is substitution of $(0,x_1,x_1+x_2,\\ldots,x_1+\\cdots+x_n)$. In particular $Q(\\phi)$ is the specified isomorphism in $D(\\operatorname{Mod}_A)$ [def-weil-abstract-derived-category]. The assertions concern sheaf direct sums, including their locally finite sections. They hold also for $n=0$ and $r=0$, for the latter giving the identity on each term $A$ of the unnormalized constant complex. No acyclicity of derived invariants is asserted here.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, agent-formulated homogeneous polynomial reduction: consecutive-difference coordinate change, translated/spectator variables and invariant differential (former parent steps 3-4 and rank-zero identification in step 7). Exact reference WANTED; the blueprint paragraph delegates this input rather than proving it."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-ladic-lattice",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For a finite variable set $V$, write $M_V=\\bigoplus_{\\alpha\\in\\mathbf N^V}A$. Its finite partial sums have sections $A(S)^D$: finite products of abelian sheaves are computed sectionwise by [lem-weil-pbc-sheafification-exact], and coordinatewise scalar action gives its module structure [sk-def-sfb-module-objects]. Coordinate inclusions and projections are linear and satisfy $\\pi_a\\iota_b=\\delta_{ab}$ and $\\sum_a\\iota_a\\pi_a=1$, so this is also the finite coproduct. Apply [lem-sfb-profinite-action-filtered-colimit-creation] with the one-element compact profinite group and the filtered poset of finite subsets $D\\subset\\mathbf N^V$, assigning trivial actions to these partial sums. This poset is small in the stipulated universe. Its colimit is $M_V$: a compatible family of maps out of finite partial sums is exactly one map from each monomial summand. Consequently $M_V(S)=\\bigoplus_{\\alpha\\in\\mathbf N^V}A(S)=A(S)[V]$ by [def-weil-pbc-mv-polynomial-ring], naturally in $S$. For locally finite sections, refine to a finite covering in the coherent topology: the union of its finitely many monomial supports is finite. Thus the calculation includes sheaf direct-sum sections, not just a chosen degree bound.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-profinite-action-filtered-colimit-creation",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections, applied through the cited filtered-colimit node; Tag 00W2, lemma-limit-sheaf; sites-modules.tex Tag 03CO, lemma-limits-colimits-abelian-sheaves (finite sums)."
+   }
+  },
+  {
+   "text": "On the polynomial section rings of step 1, define $\\Theta_n(f)=f(z,z+x_1,\\ldots,z+x_1+\\cdots+x_n)$. Polynomial evaluation in [def-weil-pbc-mv-polynomial-ring] makes this an $A(S)$-linear map. Its inverse substitutes $z=y_0$, $x_i=y_i-y_{i-1}$: the prefix sums telescope to $y_i$, and subtracting adjacent prefix sums recovers $x_i$. Both identities hold on each variable and hence on every polynomial. These formulas commute with restriction of coefficients. For every $g\\in C(S,L)$ they give $\\Theta_n(g\\cdot f)(z,x)=\\Theta_n(f)(z-g,x)$, since every $y_i$ is decreased by the same $g$. Thus $\\Theta_n$ is an equivariant internal-module isomorphism with $r$ translated and $nr$ spectator variables [def-sfb-condensed-action-module].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written homogeneous polynomial coordinate calculation below the delegated open-coefficient input."
+   }
+  },
+  {
+   "text": "Let $q=\\Theta_n(f)$ for an invariant section $f$ over $S$. By [def-sfb-condensed-action-module] it is fixed in particular by the constant lattice vectors $e_j$ [def-sfb-ladic-lattice]. Fix $j$ and regard $q$ as a polynomial in $z_j$ over $B=A(S)[z_k\\ (k\\ne j),x]$. If its degree in $z_j$ is $d>0$, with top coefficient $a_d\\ne0$, the coefficient of $z_j^{d-1}$ in $q(z_j-1)-q(z_j)$ is $-d a_d$: the top term contributes $-d a_d$, the terms of degree $d-1$ cancel, and all smaller terms contribute zero. But $d$ is a unit of $A(S)=C(S,F)$, with inverse the continuous constant function $1/d$ [def-sfb-continuous-map-condensed-ring]. This contradicts translation invariance. Thus $q$ is independent of each $z_j$. The argument uses only a single finite polynomial at a time, as justified by step 1, and remains valid for rings with zero divisors; if $S$ is empty the section ring is zero.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-ladic-lattice",
+    "def-sfb-continuous-map-condensed-ring",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written homogeneous polynomial coordinate calculation below the delegated open-coefficient input."
+   }
+  },
+  {
+   "text": "Conversely a polynomial $q=p(x_1,\\ldots,x_n)$ is fixed under $z\\mapsto z-g$ for every section $g$, including after every $T\\to S$: pullback changes only its coefficients and does not introduce $z$. This verifies the full parameterwise condition of [def-sfb-condensed-action-module], not just invariance under constant lattice vectors. Step 3 and this converse identify the invariant submodule exactly with the spectator polynomial direct sum. In the original variables its inclusion is $\\phi^n(p)=p(y_1-y_0,\\ldots,y_n-y_{n-1})$. Evaluation at $(0,x_1,x_1+x_2,\\ldots,x_1+\\cdots+x_n)$ is its inverse: it sends the consecutive differences to $x_i$ and sends $f$ to $\\Theta_n(f)(0,x)$, whose substitution back is $f$ by independence of $z$. All maps are internal $A$-linear and natural in the parameter set, by polynomial substitution [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written homogeneous polynomial coordinate calculation below the delegated open-coefficient input."
+   }
+  },
+  {
+   "text": "The alternating deletion maps define a cochain differential on $K$. In $\\delta^{n+1}\\delta^n f$, the term deleting original coordinates $i<j$ occurs twice: deleting $i$ first then the coordinate originally at $j$ has sign $(-1)^{i+j-1}$, whereas deleting $j$ first then $i$ has sign $(-1)^{i+j}$. They cancel. Each deletion commutes with diagonal translation, so the differential restricts to the invariant submodules. The substitutions preserve constants; in degree zero $\\delta^0(c)=c-c=0$, so the stated augmentation is an equivariant cochain map. All these identities are polynomial identities [def-weil-pbc-mv-polynomial-ring], hence internal identities by step 1.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written homogeneous polynomial coordinate calculation below the delegated open-coefficient input."
+   }
+  },
+  {
+   "text": "Compute the differential on $\\phi^n(p)$. For a tuple $(y_0,\\ldots,y_{n+1})$ set $x_i=y_i-y_{i-1}$. Deleting $y_0$ leaves differences $(x_2,\\ldots,x_{n+1})$. Deleting an interior $y_i$, $1\\le i\\le n$, replaces the two adjacent differences by $y_{i+1}-y_{i-1}=x_i+x_{i+1}$ and leaves the others unchanged. Deleting $y_{n+1}$ leaves $(x_1,\\ldots,x_n)$. Keeping the respective signs $1,(-1)^i,(-1)^{n+1}$ gives exactly $\\delta^n\\phi^n=\\phi^{n+1}d^n$. These are equalities of polynomials [def-weil-pbc-mv-polynomial-ring], not just equalities of evaluated functions. Since each $\\phi^n$ is an isomorphism and $\\delta^2=0$, also $d^2=0$ and the degreewise inverses form a cochain map. Extend by the unique maps between zero modules in negative degrees to obtain the claimed cochain-complex isomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written homogeneous polynomial coordinate calculation below the delegated open-coefficient input."
+   }
+  },
+  {
+   "text": "For $n=0$ the spectator polynomial ring has no variables, so step 3 identifies $(K^0)^L$ with $A$, and $\\phi^0$ is the constant inclusion with inverse evaluation at $0$. The two faces of $d^0$ cancel. For $r=0$ there are no variables and $L$ is the one-element group [def-sfb-ladic-lattice]; every coordinate substitution is the identity on $A$. In degree $n$, both differentials are multiplication by $\\sum_{i=0}^{n+1}(-1)^i$ (zero for even $n$, the identity for odd $n$), so the unnormalized constant complexes, including their augmentations, agree. Finally the localization functor $Q$ of [def-weil-abstract-derived-category] sends $\\phi$ and its explicit inverse to inverse morphisms, proving the specified derived isomorphism. No resolution or derived-invariant acyclicity enters this calculation.",
+   "uses": [
+    "def-sfb-ladic-lattice",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written homogeneous polynomial coordinate calculation below the delegated open-coefficient input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-profinite-action-filtered-colimit-creation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-condensed-action-module",
+  "def-sfb-ladic-lattice",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; explicit algebraic coordinate calculation for the input delegated there. Sectionwise sheaf-direct-sum reduction uses Stacks Tags 0738, 00W2 and 03CO through existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(translation|invariant).*polynomial|polynomial.*(translation|invariant)",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"grep\", \"query\": \"(translation|invariant).*polynomial|polynomial.*(translation|invariant)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Fixed.lean\", \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\"], \"digest\": \"7779b65a2ef665c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep bar faces, forward differences, scalar polynomial shifts and symmetric-polynomial invariants do not give the invariant internal polynomial complex and its consecutive-difference isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep bar faces, forward differences, scalar polynomial shifts and symmetric-polynomial invariants do not give the invariant internal polynomial complex and its consecutive-difference isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial functions invariant under diagonal translation are functions of consecutive differences with the additive group cochain differential",
+   "results": "{\"t\": \"2026-10-22T06:02:50Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial functions invariant under diagonal translation are functions of consecutive differences with the additive group cochain differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fwdDiff_iter_comp_add\", \"fwdDiff_comp_add\", \"fwdDiff\", \"fwdDiff_aux.coe_fwdDiffₗ\", \"ContinuousCohomology.MultiInd.d\", \"Polynomial.fwdDiff_iter_degree_add_one_eq_zero\", \"CochainComplex.HomComplex.δ_hom\", \"AddSubgroup.leftTransversals.vadd_diff_vadd\"], \"digest\": \"53ff7d3336c5d7b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep bar faces, forward differences, scalar polynomial shifts and symmetric-polynomial invariants do not give the invariant internal polynomial complex and its consecutive-difference isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariants of simultaneous p adic lattice translation on a polynomial direct sum are the polynomials in consecutive differences and the deletion differential becomes the additive bar differential",
+   "results": "{\"t\": \"2026-10-22T06:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"Invariants of simultaneous p adic lattice translation on a polynomial direct sum are the polynomials in consecutive differences and the deletion differential becomes the additive bar differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.d\", \"Rep.barComplex.d_single\", \"Algebra.Generators.H1Cotangent.δAux_X\", \"Rep.standardComplex.d_of\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_P\", \"Rep.barComplex.d_def\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\"], \"digest\": \"45efd149a267e852\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep bar faces, forward differences, scalar polynomial shifts and symmetric-polynomial invariants do not give the invariant internal polynomial complex and its consecutive-difference isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a rational algebra invariance under unit translation forces a polynomial to be constant in the translated variable",
+   "results": "{\"t\": \"2026-10-22T06:03:00Z\", \"tool\": \"leanfinder\", \"query\": \"Over a rational algebra invariance under unit translation forces a polynomial to be constant in the translated variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"denomsClearable_C_mul_X_pow\", \"denomsClearable_natDegree\", \"Polynomial.comp_X_add_C_eq_zero_iff\", \"Polynomial.isUnit_map\", \"denomsClearable_of_natDegree_le\", \"DenomsClearable\", \"Polynomial.dvd_comp_C_mul_X_add_C_iff\", \"RatFunc.taylor_mem_nonZeroDivisors\"], \"digest\": \"496c9d4d92eafca8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Rep bar faces, forward differences, scalar polynomial shifts and symmetric-polynomial invariants do not give the invariant internal polynomial complex and its consecutive-difference isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial over a rational algebra fixed by translation by one is constant",
+   "results": "{\"t\": \"2026-10-22T12:00:15Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial over a rational algebra fixed by translation by one is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.algEquivAevalXAddC\", \"Polynomial.rootMultiplicity_eq_rootMultiplicity\", \"Polynomial.algEquivAevalXAddC_apply\", \"Polynomial.scaleRoots_one\", \"WittVector.verschiebungFun_isPoly\", \"PowerSeries.sub_const_eq_shift_mul_X\", \"Polynomial.taylorAlgHom_apply\", \"FixedPoints.minpoly.ne_one\"], \"digest\": \"40b1a913f0d3cf68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial shift automorphisms, symmetry under variable permutations and abstract group-cochain differentials do not identify invariants of these internal polynomial direct sums; the coordinate and parameterwise invariant calculations are still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal translation invariant homogeneous polynomial cochains are polynomials in consecutive differences",
+   "results": "{\"t\": \"2026-10-22T12:00:25Z\", \"tool\": \"leanfinder\", \"query\": \"Diagonal translation invariant homogeneous polynomial cochains are polynomials in consecutive differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.toMvPolynomial_isHomogeneous\", \"Polynomial.homogenize\", \"Polynomial.homogenizeLM_apply\", \"Polynomial.homogenizeLM\", \"inhomogeneousCochains.d\", \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"Polynomial.homogenize_sub\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\"], \"digest\": \"58852e1b9f3f1056\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial shift automorphisms, symmetry under variable permutations and abstract group-cochain differentials do not identify invariants of these internal polynomial direct sums; the coordinate and parameterwise invariant calculations are still required."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_X_add_C|comp_X_sub_C|fwdDiff.*eq_zero|eq.*C.*of.*comp",
+   "results": "{\"t\": \"2026-10-22T12:01:09Z\", \"tool\": \"grep\", \"query\": \"comp_X_add_C|comp_X_sub_C|fwdDiff.*eq_zero|eq.*C.*of.*comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\"], \"digest\": \"527f1a700b85f168\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial shift automorphisms, symmetry under variable permutations and abstract group-cochain differentials do not identify invariants of these internal polynomial direct sums; the coordinate and parameterwise invariant calculations are still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The only polynomials over a characteristic zero field with period one are the constants; polynomial homogeneous bar differential changes to inhomogeneous cochains",
+   "results": "{\"t\": \"2026-10-22T12:01:19Z\", \"tool\": \"leanfinder\", \"query\": \"The only polynomials over a characteristic zero field with period one are the constants; polynomial homogeneous bar differential changes to inhomogeneous cochains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d\", \"Algebra.Generators.H1Cotangent.δAux_C\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.inhomogeneousCochains.d_def\", \"ContinuousCohomology.MultiInd.d_zero\", \"Algebra.Generators.H1Cotangent.δAux_X\", \"inhomogeneousCochains.d_hom_apply\", \"Differential.mapCoeffs_C\"], \"digest\": \"efd744cb75a7f0aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial shift automorphisms, symmetry under variable permutations and abstract group-cochain differentials do not identify invariants of these internal polynomial direct sums; the coordinate and parameterwise invariant calculations are still required."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_X_add_C|comp_X_sub_C|fwdDiff.*eq_zero",
+   "results": "{\"t\": \"2026-10-22T12:02:26Z\", \"tool\": \"grep\", \"query\": \"comp_X_add_C|comp_X_sub_C|fwdDiff.*eq_zero\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Monic.lean\", \"Mathlib/Algebra/Polynomial/Monic.lean\", \"Mathlib/Algebra/Polynomial/Monic.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/Polynomial/RingDivision.lean\", \"Mathlib/Algebra/Polynomial/AlgebraMap.lean\", \"Mathlib/Algebra/Polynomial/AlgebraMap.lean\"], \"digest\": \"ba44a161d6fd4b3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial shift automorphisms, symmetry under variable permutations and abstract group-cochain differentials do not identify invariants of these internal polynomial direct sums; the coordinate and parameterwise invariant calculations are still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, \"comp_X_add_C\"",
+   "results": "{\"t\": \"2026-10-22T12:02:27Z\", \"tool\": \"loogle\", \"query\": \"Polynomial, \\\"comp_X_add_C\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Polynomial.comp_X_add_C_eq_zero_iff\", \"Polynomial.comp_X_add_C_ne_zero_iff\", \"Polynomial.dvd_comp_X_add_C_iff\", \"Polynomial.Monic.comp_X_add_C\", \"Polynomial.Splits.comp_X_add_C\"], \"digest\": \"ddfb25be2a5b6275\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial shift automorphisms, symmetry under variable permutations and abstract group-cochain differentials do not identify invariants of these internal polynomial direct sums; the coordinate and parameterwise invariant calculations are still required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-derived-bar-comparison",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, dense-lattice analytic input: consecutive-difference coordinate change, translated/spectator variables and invariant differential (former parent steps 3-4 and rank-zero identification in step 7).",
+   "via": [
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-polynomial-invariant-coordinates",
+  "worker": "stage1",
+  "summary": "Kept the entire statement and all imported metadata. Proved the coordinate change, parameterwise invariants, deletion differential, inverse, derived image and both zero-rank/zero-degree boundary cases. Existing filtered-colimit creation and sectionwise limits give the full sheaf polynomial direct sums. The leading-coefficient calculation works over every continuous-function section ring without completeness, density or analytic hypotheses. No new nodes are needed. Searched the project, whole DAG and imported blueprint; Mathlib hits cover polynomial shifts or abstract group cochains, not this internal polynomial invariant complex. Repair of the return at 54e9cb4e65c: re-read all current cited statements, retain the accepted seven-step route, spell out the finite-biproduct identities and finite-cover monomial bound in step 1, and refresh the exact clause quotes. Deliver against the current live DAG through deliver.py; the report records the side-completion promotion refusal.",
+  "blueprint": "main-20261015, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), delegated open-coefficient input: the former polynomial-derived-bar-comparison steps 3-4 and the rank-zero identification in its step 7. The inherited ancestry has from.node=null, as blueprint_refs.py ancestor confirms; its exact from.place and via list are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-799d89fb6",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-799d89fb6 (reviewer sub-agent of L); spot-checked: This is a re-delivery after landing refused to promote the previous head 54e9cb4e65c7 (reviewed PASS) against the live DAG. In the live and side-live clones the item is still unsplit with no proof, so the delivery is not superseded. There is no repair note, so the 2026-10-21 re-split rule does not apply. Compared with 54e9cb4e, only step 1's text and split_report.date/summary changed. Steps 2–7, the statement, stmt_deps, proof_deps, source and blueprint are byte-identical. Compared with live, only the split-owned fields differ. proof_deps is the union of the uses of the 7 steps. There are 0 new nodes, nothing cites SGA, and there are no tool_uses. I re-read the statement of every cited node in this snapshot. Step 1 now adds two things. First, the biproduct identities π_aι_b=δ_ab and Σι_aπ_a=1, which are correct. Second, a finite-cover remark on locally finite sections. That remark is redundant, because lem-sfb-profinite-action-filtered-colimit-creation with J={1} and the small filtered poset of finite subsets already gives M_V(S)=A(S)[V], but it is correct. I re-checked steps 2–7. The prefix-sum and difference substitutions invert each other, and Θ(g·f)=Θ(f)(z−g). The z_j^{d−1} coefficient of the difference is −d·a_d, and d is invertible in C(S,F), so zero divisors are allowed and S=∅ gives the zero ring. The converse uses the full condition over every T→S. The deletion signs cancel, the face computation gives δφ=φd, and the cases n=0 and r=0 hold with Σ(−1)^i. Small case: for n=1 and p=x², dp=−2x_1x_2. Source main-20261015 direct-images (3) only delegates to sk-prop-open-coefficients, so the agent origin with a WANTED line is honest. The parent polynomial-derived-bar-comparison is unchanged and is fully served by the unchanged statement. Maintainer note: side-completion promotion re-delivery of an already PASSed split."
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-diagonal-scalar-endpoint-composition",
+ "kind": "statement",
+ "title": "Composition of normalized scalar arrows",
+ "statement": "Let a:Λ0→Λ1, b:Λ1→Λ2 and c:Λ0→Λ2 be commutative condensed ring-object maps with a≫b=c. For any scheme X form the exact restriction compositor from Mod.comapComp and coefficientMap_comp, and let A:Lc≅La⋙Lb be its conjugate under the actual derived scalar adjunctions of [def-sfb-diagonal-coefficient-endpoints]. For modules M0,M1,M2 and Semilinear structures s01,s12,s02 whose underlying maps satisfy m01≫m12=m02, write scalarHom for the transpose of the single of s.hom followed by the inverse exact restriction/single comparison. Then scalarHom(c,s02)=A_M0≫Lb(scalarHom(a,s01))≫scalarHom(b,s12). The same equation holds after shifting by two, using the left shifts induced by the actual scalar adjunctions. No invertibility, diagram, class, trace, direct-image or flatness assumption is required.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-endpoints"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), scalar associativity and compatibility of coefficient routes"
+ },
+ "proof": [
+  {
+   "text": "Construct exact restriction composition by localizing inverse Mod.comapComp followed by comapCongr for coefficientMap_comp. Its left conjugate is the actual scalar associator. Faithfulness of module forgetting and the underlying composition equation identify the ordinary semilinear insertions.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved exact-degree-zero adjointInsertion_comp to these three exact restriction functors and their actual scalar adjunctions. Its compositor is definitionally the one chosen here. Cancel the inverse left associator to obtain the unshifted equation.",
+   "uses": [
+    "def-sp-exact-degree-zero-adjoint-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact-derived natural-iso and composition comparisons commute with shifts, by the proved source instances in DerivedCategory.Shift.ExactFunctor. Expand inverse conjugation into units, counits, whiskerings and associators: each factor commutes with shifts because the left shifts are induced by the right adjoints. Shift the unshifted equation and use naturality of the second scalar functor shift comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sp-exact-degree-zero-adjoint-interface"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), scalar associativity and compatibility of coefficient routes",
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-27",
+  "note": "Explicit expansion of a step of the assigned triangle, preserving actual adjunction and full-unit normalizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of derived extension of scalars adjunctions and cancellation of normalized semilinear endpoint isomorphisms",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp",
+   "date": "2026-10-27",
+   "verdict": "No complete match. Use uniqueness of the scalar/restriction adjunctions for the formal coherence step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "General adjunction uniqueness is available; the diagram-specific comparison remains a separate step."
+  },
+  {
+   "tool": "grep",
+   "query": "comapComp|mapDerivedCategoryCompIso|pushHomOfComapIso",
+   "results": "Search service returned four unrelated Mathlib hits. Local source searches found Mod.comapComp, the actual scalar adjunctions, exact-single coherence and the proved SheafExactDegreeZero.adjointInsertion_comp. Local source also contains shift compatibility of exact-derived comparison isomorphisms.",
+   "date": "2026-10-27",
+   "verdict": "Reuse existing degree-zero adjunction composition. No full-unit derived restriction/direct-image theorem without flatness was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars commutes with unbounded derived pushforward, with normalized units and composition of coefficient maps",
+   "results": "Eight hits: ordinary PresheafOfModules.pushforward_obj_map_apply, restrictScalarsObj, ModuleCat.restrictScalars and restrictScalarsComp, LinearMap.restrictScalars_comp, SheafOfModules.restrictScalars.",
+   "date": "2026-10-27",
+   "verdict": "These are underived scalar functors, not the required normalized unbounded derived comparison."
+  },
+  {
+   "tool": "blueprint_refs.py search / local rg",
+   "query": "scalar associativity; restriction scalars derived pushforward",
+   "results": "Both blueprint searches returned zero matching imported nodes. The existing triangle node and its sources own this step.",
+   "date": "2026-10-27",
+   "verdict": "The new nodes isolate strictly smaller steps of the assigned triangle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalScalarCompatibilityTriangle",
+  "date": "2026-10-27",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (2), scalar associativity and compatibility of coefficient routes",
+   "via": [
+    "lem-diagonal-scalar-compatibility-triangle",
+    "lem-sfb-diagonal-finite-coefficient-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalScalarEndpointComposition",
+  "file": "lean/Sheaf/Paper/DiagonalScalarEndpointComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarHom_comp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarRestrictionCompIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarCompIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarHom",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarShiftHom",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.Semilinear.comp",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarHom_comp"
+  ],
+  "statement": "theorem scalarHom_comp (hcoeff : a ≫ b = c) {X : Scheme.{u}}\n    {M₀ : Modules Λ₀ X} {M₁ : Modules Λ₁ X} {M₂ : Modules Λ₂ X}\n    {m₀₁ : M₀.X ⟶ M₁.X} {m₁₂ : M₁.X ⟶ M₂.X} {m₀₂ : M₀.X ⟶ M₂.X}\n    (s₀₁ : Semilinear a M₀ M₁ m₀₁) (s₁₂ : Semilinear b M₁ M₂ m₁₂)\n    (s₀₂ : Semilinear c M₀ M₂ m₀₂) (hline : m₀₁ ≫ m₁₂ = m₀₂) :\n    (scalarHom c s₀₂ =\n      (scalarCompIso a b c hcoeff X).hom.app _ ≫\n        (derivedScalars b X).map (scalarHom a s₀₁) ≫ scalarHom b s₁₂) ∧\n    (scalarShiftHom c s₀₂ =\n      (scalarCompIso a b c hcoeff X).hom.app _ ≫\n        (derivedScalars b X).map (scalarShiftHom a s₀₁) ≫ scalarShiftHom b s₁₂)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T012811-L-2332843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T012811-L-2332843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

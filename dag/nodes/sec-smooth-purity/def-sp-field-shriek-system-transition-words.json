@@ -1,0 +1,122 @@
+{
+ "id": "def-sp-field-shriek-system-transition-words",
+ "kind": "definition",
+ "title": "Actual whole-system comparison transition square and its two paths",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the model family $D$ of [def-sp-field-shriek-system-models], the scalar/support evaluation coordinates of [def-sp-field-shriek-system-finite-laws], and the actual quotient reductions and coordinate isomorphisms of [def-sp-field-shriek-system-transitions]. For $E\\le F$, $m\\le n$, a fixed compactification, and a system $M$, with the quotient maps of [def-sp-coefficient-tower-shriek-interfaces], define the first transition word by the balanced scalar reassociation of [det-sp-scalar-extension-functor], evaluation at $n$ of the actual system map $b(M)$, the target compact-support system\\'s own reduction, and target evaluation at $m$. Define the second word by the other balanced reassociation, reduction of the source compact-support system, evaluation at $m$ of $b(M)$, and the same target coordinates. Define the whole-system transition-square predicate by equality of reduction after evaluation at $n$ of $b$ and evaluation at $m$ of $b$ after reduction of its source system. Finally, using the equality of the two coefficient ring maps, define the common finite word as the specified comparison of [det-sp-reduction-direct-image], as defined in [def-sp-reduction-direct-image-comparison], for $R_n\\to S_m$, followed by compact support of scalar extension of the actual input-system reduction $r^M_{n,m}$, with the canonical balanced associator. These are definitions of words, without claiming their equality.",
+ "stmt_deps": [
+  "def-sp-field-shriek-system-models",
+  "def-sp-field-shriek-system-finite-laws",
+  "def-sp-field-shriek-system-transitions",
+  "det-sp-reduction-direct-image",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-sp-reduction-direct-image-comparison",
+  "det-sp-scalar-extension-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), actual whole-system comparison transition square and its two paths, expanded node proof step 8"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transition square for derived compact support coefficient comparison on strict sheaf systems using actual derived reduction and input transition",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.TwoSquare; DerivedCategory.TStructure.t; CategoryTheory.Square.Hom.casesOn; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; TestFunction.coe_ofSupportedIn; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'_toSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc.",
+   "date": "2026-10-25",
+   "verdict": "No specialized system coefficient comparison transition interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans.naturality",
+   "results": "[loogle] OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No exact interface."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep derivedTransition|systemReduction|quotientAfterComparison CategoryTheory",
+   "results": "[grep] OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib specialized transition construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n QuotientRestriction|quotientAfterComparison|comparisonAfterQuotient|commonTransitionComparison|field-shriek-system-transitions|field-shriek-system-transition-words dag/nodes lean/Sheaf lean/WeilConjectures",
+   "results": "No comparison-word matches. Related WeilConjectures.FiniteAdjunctionDiagram.QuotientRestriction and transition in Sheaf.SixFunctors.FiniteAdjunctionSystemData concern normalized DVR completed-coefficient systems, not the ell-power SemilinearSections model here. SemilinearSections.derivedTransition is reused directly.",
+   "date": "2026-10-25",
+   "verdict": "Existing generic derivedTransition reused, no duplicate quotient transition on this model."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search transition compact support coefficient",
+   "results": "12 broad blueprint nodes matched; no interface for these two system-comparison transition words.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate helper notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-field-shriek-system-comparison",
+  "date": "2026-10-25",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), actual whole-system comparison transition square and its two paths, expanded node proof step 8",
+   "via": [
+    "lem-sp-field-shriek-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekSystemTransitionWords",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.quotientAfterComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.quotientAfterComparison",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.comparisonAfterQuotient",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.ComparisonTransitionSquare",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.commonTransitionComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FieldShriekSystemTransitionWords.lean",
+  "statement": "def quotientAfterComparison (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (e : EvaluationLaw P D c) {E F : Index P} (h : E ≤ F) {m n : ℕ} (v : m ≤ n) (q : QuotientRestriction P F Y v) (M : SpTowerShriek.D P.coefficients.l E.val X)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair helper for H3: real definitions built from the actual derivedTransition, normalized scalar adjunction, and EvaluationLaw coordinates. No new theorem, arbitrary map or lift from finite evaluations."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "H3 repair checked: MixedLaw extends EvaluationLaw; quotientAfterComparison/comparisonAfterQuotient contain the actual comparison at n and m with systemReduction (transpose of SemilinearSections.derivedTransition, section-pinned QuotientRestriction); common word = reductionDirectImageComparison(R_n→S_m) then RΓc_{S_m}(assoc⁻¹ ≫ C_{a_m}(input reduction)), as in node step 8; HEq sources equal via coefficientSquare; system_square is the real transition square of b (follows from naturality, advisory). All other modules byte-identical to the accepted 8fa1 version: hypotheses, proper/open comparison, invertibility on N_A with ambient target, evaluation at every n, composition/identity on whole systems; ∃ Models follows the landed tower_shriek_levels pattern. Edge cases m=n, E=F, ramified, n=0, M=0/empty X, d=0, E⊂F⊂L. Gates OK (no hollow defs, only sorry is the theorem, docstrings, report sections). FIX (H12 field part): 7 new def nodes lacked stmt_deps on their def owners def-sp-coefficient-tower-shriek-interfaces (SpTowerCalculus.Coordinates/realization/quotient), def-sp-reduction-direct-image-comparison (reductionCompactSupport/reductionDirectImageComparison), det-sp-scalar-extension-functor (scalarExtensionFunctor/_composition); fixes/<id>.json add them to stmt_deps with bracketed cites in the statement; owners landed 10-16..10-20; no cycle. No Lean changed, so nothing compiled."
+ }
+}

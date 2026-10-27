@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-space-distinguished-derived-gluing",
+ "kind": "statement",
+ "title": "Derived gluing and a compatible map along a distinguished square",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], module sheaves and canonical tensor pullback and direct image [def-trf-space-etale-module-functors], and their unbounded derived categories [def-weil-abstract-derived-category]. Derived pullback $Lh^*$ is computed by K-flat resolutions with flat terms and $Rh_*$ by K-injective resolutions. Let $(U\\subset W,p:V\\to W)$ be an elementary distinguished square: $U$ is an open subspace of $W$ [def-a1-space-open-subspace], $p$ is representable etale, and $V\\times_W Z\\to Z$ is an isomorphism, where $Z$ is the reduced closed subspace with underlying set $|W|\\setminus|U|$ [lem-sfb-space-reduced-closed-support], the point sets carrying the atlas topology [def-a1-space-point-topology]. For any morphism $t:W'\\to W$ of algebraic spaces, the square $(U'=U\\times_WW'\\subset W',V'=V\\times_WW'\\to W')$ is again elementary distinguished, with reduced complement taken on $W'$. Write $T'=U'\\times_{W'}V'$. Given $A\\in D(\\mathcal O_{U'})$, $B\\in D(\\mathcal O_{V'})$ and an isomorphism $c:A|_{T'}\\xrightarrow{\\sim}B|_{T'}$, there exist $F\\in D(\\mathcal O_{W'})$ and isomorphisms $f:F|_{U'}\\xrightarrow{\\sim}A$, $g:F|_{V'}\\xrightarrow{\\sim}B$ such that $g|_{T'}=c\\circ f|_{T'}$. Moreover, for any $M\\in D(\\mathcal O_{W'})$ and morphisms $a:A\\to M|_{U'}$, $b:B\\to M|_{V'}$ satisfying $a|_{T'}=b|_{T'}\\circ c$, these data may be chosen together with $d:F\\to M$ such that $d|_{U'}=a\\circ f$ and $d|_{V'}=b\\circ g$. No boundedness, quasi-coherence, perfectness or quasi-compactness hypothesis is imposed on these objects or spaces.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HB (lemma-glue), both assertions; Tag 08GN (lemma-make-more-elementary-distinguished-squares), clause (2), for arbitrary base change."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-weil-abstract-derived-category",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "def-a1-space-point-topology",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "First verify arbitrary base change, without asserting that the inverse image of a reduced closed subspace is reduced. Write $C=Z\\times_WW'$. Its underlying closed set is the complement of $U'$, by [lem-sfb-space-reduced-closed-support]. Its reduction is therefore the reduced complement $Z'$ in $W'$: on an etale scheme atlas the ideals of $C$ and $Z'$ have the same radical, and the radical ideal defines exactly $C_{\\mathrm{red}}$. In particular $Z'\\to W'$ factors through $C$. Base changing $V\\times_WZ\\simeq Z$ first to $W'$ and then to $Z'$ gives $V'\\times_{W'}Z'\\simeq Z'$. The open subspace property is preserved by taking the defining fibre products [def-a1-space-open-subspace], and etaleness is preserved by arbitrary base change [lem-trf-space-chartwise-etale-permanence]. Thus the primed square has precisely the required properties. From now on rename it $(U\\subset X,p:V\\to X)$ and put $T=U\\times_XV$, with $j:U\\to X$, $k:T\\to V$, $q:T\\to U$ and $l=pk=jq$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "def-a1-space-open-subspace",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GN (lemma-make-more-elementary-distinguished-squares), (2); explicit reduced-complement verification."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-space-derived-etale-chart-calculus] for all etale base-change and composition comparisons, with their specified units and counits. In particular restriction is exact and acts termwise on complexes, so by [lem-weil-pbc-exact-functor-derived-factorization] it is a triangulated functor computed termwise on any representative: it preserves the cone triangles of [def-weil-abstract-derived-category] and the shifts. For an open immersion $i$, base change along $i$ identifies its self-fibre product with its domain; the resulting counit $i^*Ri_*\\to\\mathrm{id}$ is an isomorphism. Set $C=k^*B$. Choose a distinguished triangle\n$$Q\\longrightarrow B\\xrightarrow{u}Rk_*C\\xrightarrow{\\delta}Q[1],$$\nwhere $u$ is the restriction adjunction unit; its existence follows by completing $u$ and rotating as in [def-weil-triangulated-category]. The restriction $k^*u$ is inverse to the open-immersion counit by the triangular identity, hence is an isomorphism. The zero-cone criterion [lem-kun-distinguished-cone-zero], applied after restriction and rotation, gives $k^*Q=0$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-triangulated-category",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HB (lemma-glue), supported-cone argument; Tag 0D6G in sites-cohomology.tex; derived.tex Tag 05QR (lemma-third-object-zero)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-supported-etale-excision] to $Q$, since $k^*Q=0$. With $H=Rp_*Q$, it gives $j^*H=0$ and an isomorphism $e:p^*H\\xrightarrow{\\sim}Q$, specifically the derived counit. Write $J=Rj_*A$. The derived etale base-change comparison gives\n$$v:p^*J\\xrightarrow{\\sim}Rk_*q^*A\\xrightarrow{Rk_*c}Rk_*C.$$\nLet $s:J\\to Rp_*Rk_*C$ be the $p^*\\dashv Rp_*$ transpose of $v$. Explicitly it is the composite of the unit $J\\to Rp_*p^*J$ and $Rp_*v$. These functors and their normalized adjunction are supplied by [lem-sfb-space-derived-etale-chart-calculus]. Define\n$$\\beta:J\\xrightarrow{s}Rp_*Rk_*C\\xrightarrow{Rp_*\\delta}H[1],$$\nincluding the canonical shift comparison. Complete this morphism, using rotation, to a distinguished triangle\n$$H\\longrightarrow F\\xrightarrow{r}J\\xrightarrow{\\beta}H[1].$$\nThis constructs the required global candidate without a boundedness or quasi-coherence assumption.",
+   "uses": [
+    "lem-sfb-space-supported-etale-excision",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GG (lemma-pushforward-with-support-in-open), (2); Tag 08HB (lemma-glue): explicit supported-fibre variant of its construction."
+   }
+  },
+  {
+   "text": "Restrict the last triangle to $U$. Since $j^*H=0$, the map $j^*r:j^*F\\to j^*J$ is an isomorphism by [lem-kun-distinguished-cone-zero] and rotation. Compose it with the open-immersion counit $j^*Rj_*A\\simeq A$ to obtain $f:j^*F\\xrightarrow{\\sim}A$. Restriction preserves this triangle because it is triangulated [lem-weil-pbc-exact-functor-derived-factorization], as in step 2. The vanishing and the counit used here are exactly those in [lem-sfb-space-supported-etale-excision] and [lem-sfb-space-derived-etale-chart-calculus], respectively.",
+   "uses": [
+    "lem-kun-distinguished-cone-zero",
+    "lem-sfb-space-supported-etale-excision",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HB (lemma-glue), restriction to the open part; Tag 08GG, (2); derived.tex Tag 05QR."
+   }
+  },
+  {
+   "text": "The two attaching maps agree over $V$, with the specified endpoint maps. Indeed, write $\\varepsilon_D:p^*Rp_*D\\to D$ for the counit. Naturality and the definition of transpose give\n$$e[1]\\,p^*\\beta=\\varepsilon_{Q[1]}p^*(Rp_*\\delta)p^*s=\\delta\\,\\varepsilon_{Rk_*C}p^*s=\\delta v.$$\nAll expressions include the canonical shift comparison. These equalities are just counit naturality and $\\varepsilon_{Rk_*C}p^*s=v$, not an assumed compatibility of arbitrary triangle completions. Rotate the two triangles $p^*H\\to p^*F\\to p^*J\\to p^*H[1]$ (distinguished since exact etale restriction is triangulated [lem-weil-pbc-exact-functor-derived-factorization]) and $Q\\to B\\to Rk_*C\\to Q[1]$. The displayed equality allows TR3 [def-weil-triangulated-category] to complete the endpoints $(e,v)$ to a morphism of these triangles, with a middle map $g:p^*F\\to B$. The endpoints are isomorphisms by [lem-sfb-space-supported-etale-excision] and the base-change comparison of [lem-sfb-space-derived-etale-chart-calculus]. Consequently $g$ is an isomorphism by [lem-sf-triangle-morphism-iso], and its square says $ug=v\\,p^*r$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-triangulated-category",
+    "lem-sfb-space-supported-etale-excision",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HB (lemma-glue), supported-cone comparison; derived.tex Tag 014A (lemma-third-isomorphism-triangle)."
+   }
+  },
+  {
+   "text": "Restrict the equality $ug=v\\,p^*r$ to $T$ and compose with the counit $k^*Rk_*C\\xrightarrow{\\sim}C$. The left side becomes $g|_T$, since that counit is inverse to $k^*u$. On the right side, the definition of $v$ and the counit-compatible etale base-change and composition comparisons in [lem-sfb-space-derived-etale-chart-calculus] give $c$ followed after the restriction of $j^*r$ and the counit $j^*J\\to A$. The latter composite is $f|_T$ by definition. Thus $g|_T=c\\circ f|_T$, including the prescribed isomorphism $c$, not merely some identification on the overlap.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HB (lemma-glue), compatibility on the overlap; sites-cohomology.tex Tag 0D6G with the normalized adjunction comparisons."
+   }
+  },
+  {
+   "text": "For the map to $M$, derive the required Hom exactness from existing statements. Apply [lem-sfb-space-elementary-shriek-exact] degreewise to a representative of $F$. Each extension-by-zero and restriction is exact, so by [lem-weil-pbc-exact-functor-derived-factorization] it induces a triangulated functor on derived categories which the termwise complex represents, with no resolution. The short exact sequence gives a distinguished triangle\n$$l_!F|_T\\longrightarrow j_!F|_U\\oplus p_!F|_V\\longrightarrow F\\longrightarrow l_!F|_T[1]$$\nby [lem-weil-pbc-complex-ses-triangle]. The ordinary adjunctions $i_!\\dashv i^*$, for $i=j,p,l$, applied termwise to complexes, descend through the localizations to adjunctions between these derived functors by [lem-sfb-adjunction-localization], with unit and counit the images of the termwise unit and counit; both triangular identities hold. Apply [lem-weil-pbc-hom-out-of-triangle-exact] (i), with target $M$, and these adjunctions. It says that a pair of maps $F|_U\\to M|_U$, $F|_V\\to M|_V$ lifts to $F\\to M$ whenever their difference on $T$ is zero. The difference is the precomposition map because the first triangle arrow has the $(+,-)$ signs and the second the two evaluation counits, exactly as specified by [lem-sfb-space-elementary-shriek-exact].",
+   "uses": [
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H9 (lemma-mayer-vietoris-hom), its proof from Tag 08GV (lemma-exact-sequence-lower-shriek); derived.tex Tags 0152 and 0149."
+   }
+  },
+  {
+   "text": "Take the pair $(a\\circ f,b\\circ g)$. Its difference on the overlap is\n$$(a\\circ f)|_T-(b\\circ g)|_T=(a|_T-b|_T\\circ c)\\circ f|_T=0.$$\nStep 7 therefore gives $d:F\\to M$ whose restrictions are precisely $a\\circ f$ and $b\\circ g$. This proves the strengthened assertion for the same $F,f,g$. For the first assertion alone, omit $M,a,b,d$. All constructions were in unbounded module derived categories; the only geometric requirement used for supported excision and the short exact sequence was the elementary distinguished-square hypothesis, verified after arbitrary base change in step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HB (lemma-glue), final paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-closed-support",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-triangulated-category",
+  "lem-kun-distinguished-cone-zero",
+  "lem-sfb-space-supported-etale-excision",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sfb-space-elementary-shriek-exact",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08HB (lemma-glue), 08GG (lemma-pushforward-with-support-in-open), 08H9 (lemma-mayer-vietoris-hom) and 08GN (2). Explicit supported-fibre variant of the gluing assembly; all geometric and derived comparison inputs are existing cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue unbounded derived complexes and compatible morphisms to a fixed complex along an elementary distinguished Nisnevich square of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    {Y : AlgebraicGeometry.Scheme} →\\n      (f : (x : 𝒰.I₀) → 𝒰.X x ⟶ Y) →\\n        (∀ (x y : 𝒰.I₀),\\n            CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f y)) (f x) =\\n              CategoryTheory.CategoryS\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$ and a family of morphisms $f_i: U_i \\\\to Y$ from each open set $U_i$ in the cover to a scheme $Y$ that satisfy compatibility conditions on pairwise int\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) {Y : AlgebraicGeometry.Scheme} (f : (x : 𝒰.I₀) → 𝒰.X x ⟶ Y)\\n  (hf :\\n    ∀ (x y : 𝒰.I₀),\\n      CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f y)) (f x) =\\n        CategoryTheory.CategoryStruct.comp (CategoryTheory.\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, a target scheme $Y$, and a compatible family of morphisms $f_i: U_i \\\\to Y$ from each open set $U_i$ in $\\\\mathcal{U}$, the composition of the inclusion \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {X : CategoryTheory.Over S} →\\n    (𝒰 : X.left.OpenCover) →\\n      [inst : CategoryTheory.Category.{v_2, u_1} 𝒰.I₀] →\\n        [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n          {Y : CategoryTheory.Over S} →\\n            (g : (i : 𝒰.I₀) → 𝒰.X i ⟶ Y\", \"doc\": \"Given a scheme $X$ with an open cover $\\\\mathcal{U}$ equipped with a locally directed structure, and a family of morphisms $g_i: \\\\mathcal{U}.X(i) \\\\to Y$ compatible with the transition maps $\\\\mathcal{U}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.glueDataι_naturality\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [inst_2 : (F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [inst_3 : Quiver.IsThin J]\\n  [ins\", \"doc\": \"For a locally directed gluing system of schemes indexed by a small category $ J $, the inclusion morphisms $ \\\\iota_i: U(i) \\\\to X $ from each component scheme $ U(i) $ into the glued scheme $ X $ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j k : ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {X : CategoryTheory.Over S} (𝒰 : X.left.OpenCover)\\n  [inst : CategoryTheory.Category.{v_2, u_1} 𝒰.I₀] [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰]\\n  {Y : CategoryTheory.Over S} (g : (i : 𝒰.I₀) → 𝒰.X i ⟶ Y.left)\\n  (h :\\n    ∀ {i j : 𝒰.I₀} (hij : i ⟶ j),\\n\", \"doc\": \"Given a scheme $X$ over $S$ with a locally directed open cover $\\\\mathcal{U}$, and a family of morphisms $g_i: \\\\mathcal{U}.X(i) \\\\to Y$ compatible with the transition maps $\\\\mathcal{U}.\\\\text{trans}(i \\\\t\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] {S : J.MayerVietorisSquare}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type v')} (h : S.SheafCondition P) (u : P.obj (Opposite.op S.X₂))\\n  (v : P.obj (O\", \"doc\": \"For a presheaf $ P $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a Mayer-Vietoris square $ S $ satisfying the sheaf condition, applying the presheaf's morphism $ P.\\\\text{map} $\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] {S : J.MayerVietorisSquare}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type v')} (h : S.SheafCondition P) (u : P.obj (Opposite.op S.X₂))\\n  (v : P.obj (O\", \"doc\": \"For a presheaf $ P $ on a category $ \\\\mathcal{C} $ with a Grothendieck topology $ J $, and a Mayer-Vietoris square $ S $ satisfying the sheaf condition, applying the morphism $ P(f_{24}^{\\\\text{op}}) $\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]isnevich|[Dd]istinguished[Ss]quare|[Dd]erived.*[Gg]lu",
+   "results": "[grep] OK 0 hit(s)\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing complexes in derived categories along elementary distinguished squares",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GlueData'.mk\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v, u₁} C] →\\n    (J : Type v) →\\n      (U : J → C) →\\n        (V : (i j : J) → i ≠ j → C) →\\n          (f : (i j : J) → (h : i ≠ j) → V i j h ⟶ U i) →\\n            autoParam (∀ (i j : J) (h : i ≠ j), CategoryTheory.Mono (f i j h))\\n                Categor\", \"doc\": \"Given a category $\\\\mathcal{C}$, an index type $J$, families of objects $U: J \\\\to \\\\mathcal{C}$ and $V: (i \\\\neq j) \\\\to \\\\mathcal{C}$, monomorphisms $f_{ij}: V(i,j) \\\\to U(i)$ for $i \\\\neq j$, and pullback \"}\n  {\"name\": \"CategoryTheory.GlueData.glued\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \": C\", \"doc\": \"Given gluing data $ D $ in a category $ \\\\mathcal{C} $, the glued object is defined as the multicoequalizer of the diagram $ D.\\\\text{diagram} $, which is the colimit of the multispan index diagram cons\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.Q\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplex C c ⥤ HomologicalComplexUpToQuasiIso C c\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"CategoryTheory.CommSq.shortComplex\", \"module\": \"Mathlib.Algebra.Homology.CommSq\", \"type\": \"(sq : CommSq f g inl inr) : ShortComplex C\", \"doc\": \"Given a commutative square in a preadditive category $\\\\mathcal{C}$ with morphisms $f: X_1 \\\\to X_2$, $g: X_1 \\\\to X_3$, and inclusions $\\\\text{inl}: X_2 \\\\to X_4$, $\\\\text{inr}: X_3 \\\\to X_4$ into the bipro\"}\n  {\"name\": \"CategoryTheory.GlueData.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"Sort u →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v, u₁} C] →\\n      CategoryTheory.GlueData C →\\n        {C' : Type u₁} → [inst' : CategoryTheory.Category.{v, u₁} C'] → CategoryTheory.GlueData C' → Sort u\", \"doc\": \"An inductive type constructor that, given a category $\\\\mathcal{C}$, encodes the data required to glue categorical structures. This includes an index type $J$, functors $U,V$, morphisms $f_{ij}$ satisf\"}\n  {\"name\": \"CategoryTheory.CommSq.shortComplex'\", \"module\": \"Mathlib.Algebra.Homology.CommSq\", \"type\": \"(sq : CommSq fst snd f g) : ShortComplex C\", \"doc\": \"Given a commutative square in a preadditive category $\\\\mathcal{C}$ with objects $X_1,X_2,X_3,X_4$ and morphisms $\\\\text{fst}: X_1 \\\\to X_2$, $\\\\text{snd}: X_1 \\\\to X_3$, $f: X_2 \\\\to X_4$, $g: X_3 \\\\to X_4$\"}\n  {\"name\": \"CategoryTheory.GlueData.mk\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v, u₁} C] →\\n    (J : Type v) →\\n      (U : J → C) →\\n        (V : J × J → C) →\\n          (f : (i j : J) → V (i, j) ⟶ U i) →\\n            autoParam (∀ (i j : J), CategoryTheory.Mono (f i j)) CategoryTheory.GlueData.f_mono._autoParam →\\n              (f_h\", \"doc\": \"Given a category $\\\\mathcal{C}$, an index type $J$, functors $U: J \\\\to \\\\mathcal{C}$ and $V: J \\\\times J \\\\to \\\\mathcal{C}$, and morphisms $f_{ij}: V(i,j) \\\\to U(i)$ satisfying: (1) each $f_{ij}$ is a monom\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib.CategoryTheory.Sites.MayerVietorisSquare\", \"type\": \": ShortComplex (Sheaf J AddCommGrpCat.{v})\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category algebraic spaces Mayer Vietoris gluing objects with a map to a fixed target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u (v + 1))\", \"doc\": \"An inductive type encoding the data required to glue sheafed spaces over a category $\\\\mathcal{C}$, parameterized by a category $\\\\mathcal{C}$ in Type $u$ with morphisms in Type $\\\\max(u, v+1)$, ensuring\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"The function maps the inductive type representing gluing data for schemes (involving open subsets and isomorphisms) to the categorical gluing data structure for the category of schemes, enabling the u\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    {Y : AlgebraicGeometry.Scheme} →\\n      (f : (x : 𝒰.I₀) → 𝒰.X x ⟶ Y) →\\n        (∀ (x y : 𝒰.I₀),\\n            CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f y)) (f x) =\\n              CategoryTheory.CategoryS\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$ and a family of morphisms $f_i: U_i \\\\to Y$ from each open set $U_i$ in the cover to a scheme $Y$ that satisfy compatibility conditions on pairwise int\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  (𝒰 : S.OpenCover) →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] → Type (max (max (u + 1) u_1) u_2)\", \"doc\": \"Given a scheme $S$, an open cover $\\\\mathcal{U}$ of $S$, a category structure on the zeroth component $\\\\mathcal{U}_0$, and a locally directed cover structure on $\\\\mathcal{U}$, this defines the type of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝒰 : X.OpenCover) → (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).glued ⟶ X\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, this is the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to the original scheme $X$. It is \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        {S : J.MayerVietorisSquare} →\\n          {P : CategoryTheory.Functor Cᵒᵖ (Type v')} →\\n            S.SheafCondition P →\\n  \", \"doc\": \"Given a presheaf $ P $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a Mayer-Vietoris square $ S $ satisfying the sheaf condition, this constructs the glued section over $ S.X_4 \"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]isnevich|[Dd]istinguished[Ss]quare|[Dd]erived.*[Gg]lu",
+   "results": "Search succeeded; 2 hits: Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean. Read the returned signatures. Generic sheaf/scheme gluing and the free-abelian-sheaf Mayer-Vietoris complex do not glue unbounded structure-sheaf derived objects on algebraic spaces. The grep hits are documentation lines 39–40 of Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing complexes in derived categories along elementary distinguished squares",
+   "results": "Search succeeded; 8 hits: CategoryTheory.GlueData'.mk, CategoryTheory.GlueData.glued, HomologicalComplexUpToQuasiIso.Q, CategoryTheory.CommSq.shortComplex, CategoryTheory.GlueData.noConfusionType, CategoryTheory.CommSq.shortComplex', CategoryTheory.GlueData.mk, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex. Read the returned signatures. Generic sheaf/scheme gluing and the free-abelian-sheaf Mayer-Vietoris complex do not glue unbounded structure-sheaf derived objects on algebraic spaces. The grep hits are documentation lines 39–40 of Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "Search succeeded; 0 hits: . Read the returned signatures. Generic sheaf/scheme gluing and the free-abelian-sheaf Mayer-Vietoris complex do not glue unbounded structure-sheaf derived objects on algebraic spaces. The grep hits are documentation lines 39–40 of Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue unbounded derived objects of structure sheaves on algebraic spaces along a Nisnevich distinguished square, with compatible maps to a fixed object",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.SheafedSpace.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'. Read the returned signatures. Generic sheaf/scheme gluing and the free-abelian-sheaf Mayer-Vietoris complex do not glue unbounded structure-sheaf derived objects on algebraic spaces. The grep hits are documentation lines 39–40 of Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris descent of derived structure sheaf modules by a homotopy pullback over an etale excision square",
+   "results": "Search succeeded; 8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact. Read the returned signatures. Generic sheaf/scheme gluing and the free-abelian-sheaf Mayer-Vietoris complex do not glue unbounded structure-sheaf derived objects on algebraic spaces. The grep hits are documentation lines 39–40 of Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-limit-category",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback). Supporting input: Tag 09RJ, middle paragraph, apply lemma-glue to local models and their adjoint maps; base-changed distinguished squares by Tag 08GN (2).",
+   "via": [
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-distinguished-derived-gluing",
+  "worker": "stage1",
+  "summary": "Checked Tag 08HB and its inputs against the full unbounded statement. Reused existing supported etale excision, etale derived chart calculus, extension-by-zero exact sequence and general triangle lemmas. Constructed the glued object by attaching the supported fibre of B to Rj_*A, checked the attaching counit equation and the prescribed overlap map, and derived the map-to-M clause from the existing exact sequence. No new nodes.",
+  "blueprint": "Serves the existing from.place chain: perfect-object limit descent, Tag 09RJ, gluing local models and maps by Tag 08HB. Current latest blueprint direct-images proof (3) remains the route above this supporting input. Item has no imported blueprint identity; ancestor tool returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic Chartwise etale permanence for algebraic spaces used in the explicit distinguished-square gluing assembly; this does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "Generic Zero cone criterion for a distinguished triangle used in the explicit distinguished-square gluing assembly; this does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic A morphism of distinguished triangles with two isomorphic components is an isomorphism used in the explicit distinguished-square gluing assembly; this does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially used in the explicit distinguished-square gluing assembly; this does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic Hom(-,W) applied to a distinguished triangle: exactness at Y and at Z used in the explicit distinguished-square gluing assembly; this does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-kun-distinguished-cone-zero",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-9437b2881",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-9437b2881 (reviewer sub-agent of L); spot-checked: FIX for one citation fault (C1); the mathematics is correct. Read 08HB (lemma-glue) and 08GN in spaces-perfect.tex, with 08GG, and checked that the tags 0D6G, 08GV, 08H9, 05QR, 014A, 0152 and 0149 exist. The statement matches 08HB plus 08GN(2), and the delivery did not change it. It inherits the DAG's 'representable etale' convention, which only narrows Stacks' 'etale'; the citers apply it only to such squares. The delivery creates no new nodes. Searches with rg over dag/nodes found no duplicate of 08HB. Step checks: (1) the reduced complement after base change is C_red and V'x Z' = (VxZ)x_Z Z' = Z'. (2) The fibre Q of the unit B -> Rk_*k^*B has k^*Q = 0. (3) Supported excision applies to Q and gives j^*H = 0 and the counit isomorphism e; beta = Rp_*delta . s. (5) e[1].p^*beta = delta.v holds by counit naturality and the transpose; TR3 on the rotated triangles (signs consistent on both sides) then gives g, which is an isomorphism by two-of-three. (6) g|_T = c.f|_T follows from the counit/base-change mate compatibility. (7)-(8) The Mayer-Vietoris Hom argument through the shriek exact sequence, the complex SES triangle and Hom-exactness (i) is correct. Edge cases U = X and U empty both work. FIX: steps 2, 4, 5 and 7 used, without citing a node, that exact restriction and extension by zero are triangulated functors computed termwise on D, and step 7 used that the termwise adjunctions descend to D. I added the existing Mathlib leaves lem-weil-pbc-exact-functor-derived-factorization (steps 2, 4, 5, 7) and lem-sfb-adjunction-localization (step 7), and recomputed proof_deps. Batch-5 check: lem-trf-space-chartwise-etale-permanence is generic etale permanence for algebraic spaces and no part of the trace formula or Poincare duality, so accepted. The chart-calculus and shriek-exact nodes reach sec-trace-formula only through the definition def-trf-algebraic-space, so accepted. Accepted tool uses: chartwise-etale-permanence, and the Mathlib-leaf triangle lemmas kun-distinguished-cone-zero, sf-triangle-morphism-iso, weil-pbc-complex-ses-triangle and weil-pbc-hom-out-of-triangle-exact. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDistinguishedDerivedGluing",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_distinguished_derived_gluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDistinguishedDerivedGluing.lean",
+  "statement": "theorem space_distinguished_derived_gluing {S : Scheme.{u}} {W U V : AlgebraicSpace S} (j : U ⟶ W) (p : V ⟶ W) (hj : IsRepresentableWith (fun _ _ r ↦ IsOpenImmersion r.left) j.hom.hom) (hp : IsEtale p.hom.hom) (Z : ClosedSubspace W) (hZ : IsReduced (Z.val : AlgebraicSpace S)) (hSupport : pointImage Z.val.arrow.hom.hom = (pointImage j.hom.hom)ᶜ) (hIso : IsIso (Limits.pullback.snd p.hom Z.val.arrow.hom)) (W' U' V' T' : AlgebraicSpace S) (t : W' ⟶ W) (j' : U' ⟶ W') (p' : V' ⟶ W') (tU : U' ⟶ U) (tV : V' ⟶ V) (hU : IsPullback tU j' j t) (hV : IsPullback tV p' p t) (q : T' ⟶ U') (k : T' ⟶ V') (hT : IsPullback q k j' p') [HasDerivedCategory.{w} W'.SmallModules] [HasDerivedCategory.{w} U'.SmallModules] [HasDerivedCategory.{w} V'.SmallModules] [HasDerivedCategory.{w} T'.SmallModules] : IsRepresentableWith (fun _ _ r ↦ IsOpenImmersion r.left) j'.hom.hom ∧ IsEtale p'.hom.hom ∧ (∃ Z' : ClosedSubspace W', IsReduced (Z'.val : AlgebraicSpace S) ∧ pointImage Z'.val.arrow.hom.hom = (pointImage j'.hom.hom)ᶜ ∧ IsIso (Limits.pullback.snd p'.hom Z'.val.arrow.hom)) ∧ ∀ (A : U'.DerivedModules) (B : V'.DerivedModules) (c : (spaceDerivedPullback q).obj A ≅ (spaceDerivedPullback k).obj B), ∃ (F : W'.DerivedModules) (f : (spaceDerivedPullback j').obj F ≅ A) (g : (spaceDerivedPullback p').obj F ≅ B), ((spaceDerivedPullbackComp j' q).symm ≪≫ eqToIso (congrArg spaceDerivedPullback hT.w) ≪≫ spaceDerivedPullbackComp p' k).hom.app F ≫ (spaceDerivedPullback k).map g.hom = (spaceDerivedPullback q).map f.hom ≫ c.hom ∧ ∀ (M : W'.DerivedModules) (a : A ⟶ (spaceDerivedPullback j').obj M) (b : B ⟶ (spaceDerivedPullback p').obj M), (spaceDerivedPullback q).map a = c.hom ≫ (spaceDerivedPullback k).map b ≫ ((spaceDerivedPullbackComp j' q).symm ≪≫ eqToIso (congrArg spaceDerivedPullback hT.w) ≪≫ spaceDerivedPullbackComp p' k).inv.app M → ∃ d : F ⟶ M, (spaceDerivedPullback j').map d = f.hom ≫ a ∧ (spaceDerivedPullback p').map d = g.hom ≫ b",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-550facd86",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 0c92 (H2). Both uses of spaceDerivedChartPullbackSquare j' p' q k hT.w are replaced by its body verbatim ((spaceDerivedPullbackComp j' q).symm ≪≫ eqToIso (congrArg spaceDerivedPullback hT.w) ≪≫ spaceDerivedPullbackComp p' k), checked against SpaceDerivedEtaleChartCalculus.lean:158-165. The theorem stmt_dep lem-sfb-space-derived-etale-chart-calculus is removed, and the chart-calculus module is now a plain import. A snapshot diff shows no other change. Orientation q*j'* ≅ k*p'* is kept, so g|T'=c∘f|T' and a|T'=b|T'∘c are unchanged. The statement now uses only names owned by definition stmt_deps (def-sfb-space-derived-pullback, def-sfb-space-derived-module-calculus); the theorem stmt_dep lem-sfb-space-reduced-closed-support is inherited from the base node. lean.statement equals the file signature verbatim. The clause-by-clause check of 08HB and 08GN(2), the edge cases and the pilot gates are unchanged and correct. The item has not landed elsewhere. No file changed, so no compile."
+ }
+}

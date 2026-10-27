@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-dominant-affine-germ-comparison",
+ "kind": "statement",
+ "title": "Dominant affine chart and generic germ comparison",
+ "statement": "Let $f:X\\to Y$ be a morphism of integral schemes [def-pc-scheme, def-pc-integral-scheme] with dense image. Write $\\eta_X,\\eta_Y$ for the generic points [def-sc-generic-point] and $k(X)=\\mathcal O_{X,\\eta_X}$, $k(Y)=\\mathcal O_{Y,\\eta_Y}$ for the function fields [def-sc-function-field]. Let $V\\subseteq Y$ be a nonempty affine open whose inverse image $U=f^{-1}V$ is affine. Set $A=\\Gamma(V,\\mathcal O_Y)$, $B=\\Gamma(U,\\mathcal O_X)$ and let $\\varphi:A\\to B$ be pullback of sections [def-weil-locally-ringed-space-morphism]. Then $f(\\eta_X)=\\eta_Y$, the points $\\eta_Y,\\eta_X$ belong to $V,U$, their primes in $A,B$ [def-weil-affine-spectrum] are $(0)$, and $A,B$ are domains. The generic germ maps $j_A:A\\to k(Y)$, $j_B:B\\to k(X)$ are injective and exhibit those fields as fields of fractions: every element is a quotient of two such germs with nonzero denominator. The map $\\varphi$ is injective. With $\\alpha:k(Y)\\to k(X)$ the canonical generic stalk map [def-sfb-dominant-function-field-map], one has $j_B\\varphi=\\alpha j_A$ and\n$$\\alpha(j_A(a)/j_A(a'))=j_B(\\varphi(a))/j_B(\\varphi(a'))\\qquad(a,a'\\in A,\\ a'\\ne0).$$\nPut $\\mathcal F(W)=\\Gamma(f^{-1}W,\\mathcal O_X)$ for each open $W\\subseteq Y$, and $C=\\mathcal F_{\\eta_Y}$ [def-weil-pbc-module-stalk]. Let $\\iota:B\\to C$ be the germ map, $\\sigma:k(Y)\\to C$ the stalk of $f^\\sharp:\\mathcal O_Y\\to\\mathcal F$, and $c:C\\to k(X)$ the ring map sending a germ over $f^{-1}W$ to its germ at $\\eta_X$. These are well defined and satisfy\n$$c\\iota=j_B,\\qquad \\sigma j_A=\\iota\\varphi,\\qquad c\\sigma=\\alpha.$$\nIn particular $\\sigma(j_A(a)/j_A(a'))=\\iota(\\varphi(a))\\iota(\\varphi(a'))^{-1}$ for $a'\\ne0$. No finiteness, Noetherianity, normality or dimension hypothesis is imposed, and no bijectivity of $c$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0CC1, lemma-dominant-between-integral, proof of (1)-(4): generic points, zero primes and injective affine maps; combined with sheaves.tex stalk construction (Tags 0078, 007J) for the explicit germ squares and their fraction formulas."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-affine-spectrum",
+  "def-sfb-dominant-function-field-map",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalkPushforward|functionFieldMap|germToFunctionField",
+   "results": "Actual msearch response: OK; 13 hits; Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPushforward\", \"germ\"",
+   "results": "Actual msearch response: OK; 3 hits; TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkPushforward_germ_assoc, TopCat.Presheaf.stalkPushforward_germ_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine dominant morphism of integral schemes the generic pushforward stalk is the localization of the source affine sections at nonzero target sections and its comparison to the function field respects scalar germs",
+   "results": "Actual msearch response: OK; 8 hits; AlgebraicGeometry.Scheme.germToFunctionField, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk, AlgebraicGeometry.functionField_isScalarTower, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic stalk localization and scalar compatibility for an affine dominant morphism of integral schemes",
+   "results": "Actual msearch response: OK; 8 hits; AlgebraicGeometry.StructureSheaf.localizationToStalk_of, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk', ModuleCat.Tilde.stalkToFiberLinearMap, AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom, AlgebraicGeometry.StructureSheaf.localizationToStalk_mk', AlgebraicGeometry.StructureSheaf.instIsLocalHomCarrierStalkCommRingCatPresheafStructureSheafOfAtPrimeAsIdealRingHomHomStalkToFiberRingHom",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine dominant map between integral schemes induces an injection on affine section rings; at the generic point its pushforward stalk is localization at base nonzero elements with compatible source and target generic germ maps",
+   "results": "Actual msearch response: OK; 8 hits; AlgebraicGeometry.stalkMap_injective_of_isAffine, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.IsAffineOpen.stalkMap_injective, AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.isDominant_of_of_appTop_injective, AlgebraicGeometry.germ_injective_of_isIntegral, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField_isFractionRing|germToFunctionField|genericPoint_eq",
+   "results": "Actual msearch response: OK; 10 hits; Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"germToFunctionField\", \"IsDominant\"",
+   "results": "Actual msearch response: OK; 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a dominant morphism of integral schemes and any affine target open with affine inverse image, generic points correspond to zero primes, affine section pullback is injective, and both the generic field map and the pushforward stalk scalar map commute with germs and fraction expressions",
+   "results": "Actual msearch response: OK; 8 hits; AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.Scheme.germToFunctionField, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.instFieldCarrierFunctionField",
+   "date": "2026-10-22",
+   "verdict": "no match: FunctionField and stalkPushforward_germ supply separate ingredients, but no hit states the joint dominant chart and two canonical germ squares; genericPoint_eq_of_isOpenImmersion assumes an open immersion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-dominant-generic-pushforward-stalk",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Supporting lemma: Degree of an invertible sheaf pulled back along a proper curve map. In the supporting pullback-degree argument (Stacks 0AYZ), first sentence of the proof: identify the generic stalk of the finite direct image with the source function field. Old proof steps 1-3 and 7: dominant affine chart, zero generic primes and compatibility of both specified germ maps.",
+   "via": [
+    "lem-sfb-finite-dominant-generic-pushforward-stalk",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

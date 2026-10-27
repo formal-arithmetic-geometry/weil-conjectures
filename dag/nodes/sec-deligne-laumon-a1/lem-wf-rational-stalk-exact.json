@@ -26,40 +26,23 @@
    }
   },
   {
-   "text": "Let $u:(K,\\theta_K)\\to(L,\\theta_L)$ be either Weil morphism. All its data, the inverse Weil maps and their equations are represented over a common finite coefficient field $E$, after enlarging it: there are finitely many arrows and equations, and equality in [def-weil-algebraically-closed-coefficients] means equality after further finite extension. Work at this rationalized $E$-stage first. Put $T=Lg_Y^*$ and $e=[\\kappa(x):k_0]\\ge1$. By [def-weil-weil-sheaf-complex], $u\\theta_K=\\theta_LT(u)$. Use the iterates of [def-weil-local-frobenius-trace]. Induction gives $u\\theta_K^{[n]}=\\theta_L^{[n]}T^n(u)$: the base $n=1$ is the morphism equation, and the step is\n$$u\\theta_K^{[n+1]}=u\\theta_K^{[n]}T^n(\\theta_K)=\\theta_L^{[n]}T^n(u\\theta_K)=\\theta_L^{[n]}T^n(\\theta_L)T^{n+1}(u)=\\theta_L^{[n+1]}T^{n+1}(u).$$\nIn particular this holds for $n=e$, using the specified pullback-composition comparisons.",
+   "text": "Apply [lem-wf-common-stage-weil-iterate] to the two given Weil arrows, their structure maps and inverses. For $T=Lg_Y^*$ and $e=[\\kappa(x):k_0]\\geq1$, it gives the representative-independent common-stage identities $u\\theta_K^{[e]}=\\theta_L^{[e]}T^e(u)$. Apply [lem-wf-common-stage-point-return] to the $\\mathbf F_{q^e}$-point specified by the chosen residue embedding. For $P=\\operatorname{Fib}_sL\\bar x^*$ it gives $P(T^eu)J_K=J_LP(u)$, including the normalized scalar-extension, identity and tower comparisons. Both results apply to arbitrary Weil morphisms; neither arrow needs to be an isomorphism.",
    "uses": [
-    "def-weil-weil-sheaf-complex",
-    "def-weil-local-frobenius-trace",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-wf-common-stage-weil-iterate",
+    "lem-wf-common-stage-point-return"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
     "place": "Opening punctual-bounds argument; expansion of the local Frobenius definition and the equation for a Weil morphism"
    }
   },
   {
-   "text": "At the $E$-stage put $P=\\operatorname{Fib}_sL\\bar x^*$. For each $K$, let $J_K:P(K)\\to P(T^eK)$ be the iterated point transport followed by the return comparison of [def-weil-local-frobenius-trace]. Thus $F_{x,K}=P(\\theta_K^{[e]})J_K$. Point transport is natural by [lem-weil-frobenius-point-transport-natural] (2), and pullback composition is natural by [lem-pod-integral-pullback-composition], then scalar localization. Composing their squares gives $P(T^eu)J_K=J_LP(u)$. The return is $g_Y^e\\bar x=\\bar xg_s^e$, not literal fixation of $\\bar x$. Consequently\n$$P(u)F_{x,K}=P(u\\theta_K^{[e]})J_K=P(\\theta_L^{[e]})P(T^eu)J_K=P(\\theta_L^{[e]})J_LP(u)=F_{x,L}P(u).$$\nThis is an identity of the rational point-complex morphisms over $E$.",
+   "text": "The definition [def-weil-local-frobenius-trace] gives $F_{x,K}=P(\\theta_K^{[e]})J_K$ at every finite coefficient stage. The two preceding lemmas identify these factors after every further common extension, so this formula defines the same operator in the common-stage point category. For either arrow $u:K\\to L$, functoriality and Step 2 give\n$$P(u)F_{x,K}=P(u\\theta_K^{[e]})J_K=P(\\theta_L^{[e]})P(T^eu)J_K=P(\\theta_L^{[e]})J_LP(u)=F_{x,L}P(u).$$\nApply $H^0$ to this equality. By the fibre convention in the same definition these are exactly the rational fibre maps and the local geometric Frobenius operators in Step 1, proving both equivariance assertions.",
    "uses": [
-    "def-weil-local-frobenius-trace",
-    "lem-weil-frobenius-point-transport-natural",
-    "lem-pod-integral-pullback-composition"
+    "def-weil-local-frobenius-trace"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-upper.proof.md",
-    "place": "Opening punctual-bounds argument; naturality calculation for the normalized local operator, using the existing point-transport and pullback-composition interfaces"
-   }
-  },
-  {
-   "text": "To pass this identity to $\\Qlb$, use the specified comparison families of [lem-trf-integral-pullback-comparison-realization]. Its composition/scalar equation, including equality of scheme maps and arbitrary finite iterations, supplies coefficient compatibility of the return comparison and of $\\theta^{[e]}$. The coefficient equation of [lem-trf-local-frobenius-transport-normalization] applies to $m=e$ and the $\\mathbf F_{q^e}$-point induced by $\\kappa(x)\\hookrightarrow k$. Its map $t_{x,e,K}$ is exactly $J_K$, with those comparison families. For $E\\subset M$, write $b_K:P_EK\\otimes_EM\\xrightarrow{\\sim}P_M(K\\otimes_EM)$ for its point comparison and $d_K:(T_E^eK)\\otimes_EM\\xrightarrow{\\sim}T_M^e(K\\otimes_EM)$. That lemma gives\n$$P_M(d_K)b_{T_E^eK}(J_K\\otimes_EM)=J_{K\\otimes_EM}b_K.$$\nThe composition/scalar equation and naturality of $b$ applied to $\\theta^{[e]}$ therefore give\n$$b_K(F_{x,K}\\otimes_EM)=F_{x,K\\otimes_EM}b_K.$$\nThus the local operators and Step 3's intertwining equation define the same maps after every further common extension, with the identity and tower identifications of these lemmas. This defines the stagewise $\\Qlb$ interpretation of the $E$-coefficient local operator in [def-weil-local-frobenius-trace], rather than treating that definition as already asserting coefficient compatibility. By [def-weil-algebraically-closed-coefficients] the equation holds in the common-stage category. Taking $H^0$ gives commutation for the two fibre maps of Step 1.",
-   "uses": [
-    "def-weil-local-frobenius-trace",
-    "def-weil-algebraically-closed-coefficients",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-trf-local-frobenius-transport-normalization"
-   ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
     "place": "Last sentence about transport of Frobenius; expanded using the existing strict-system comparison and local-transport coefficient equations, not the trace theorem."
@@ -69,13 +52,9 @@
  "proof_deps": [
   "lem-dl-a1-constructible-fibres-exact",
   "def-weil-constructible-heart",
-  "def-weil-weil-sheaf-complex",
-  "def-weil-local-frobenius-trace",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-weil-frobenius-point-transport-natural",
-  "lem-pod-integral-pullback-composition",
-  "lem-trf-integral-pullback-comparison-realization",
-  "lem-trf-local-frobenius-transport-normalization"
+  "lem-wf-common-stage-weil-iterate",
+  "lem-wf-common-stage-point-return",
+  "def-weil-local-frobenius-trace"
  ],
  "proof_origin": {
   "by": "agent",
@@ -174,33 +153,28 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-wf-rational-stalk-exact",
   "worker": "stage1",
-  "summary": "Kept the statement and its coefficient category unchanged. Reused the stronger existing constructible-fibre exactness lemma, avoiding a duplicate. Proved equivariance by induction on the Weil iterate and an explicit naturality calculation for the normalized local operator, retaining Spec(k) reparametrization. No new nodes or Mathlib leaves. Searched the project Lean source by tag and stalk/exactness concepts without finding a full attachment. Maintainer-reader repair: explicitly descended the Weil morphism calculation from a common rational coefficient stage and cited the existing strict-system composition/scalar and point-return coefficient comparisons; the local-operator definition itself is only at E coefficients.",
+  "summary": "Repaired the released stage-1 re-split order without changing the statement or its dependencies. Extracted two comparable statement-only common-stage lemmas: finite realization and natural scalar-compatible Weil iterates; natural normalized point return and its coefficient descent. Reused existing finite-stage naturality and scalar-extension interfaces, and retained every old argument explicitly in the report. The parent is now a short assembly with exact fibres and a displayed intertwining calculation; no Lean edits.",
   "blueprint": "Realizes the exact Frobenius-stable stalk filtration implicit in the opening punctual-bounds sentence of lem-wf-l2-upper.proof.md in main-20261015; no change to the weight-detection unit route.",
   "tool_uses": [
    {
     "node": "lem-dl-a1-constructible-fibres-exact",
     "why": "Generic exactness of rational constructible coefficient fibres, including the Weil forgetful case; the energy unit contains no replacement for this coefficient-category tool."
-   },
-   {
-    "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Generic naturality of point transport at the exact rational/common-stage coefficients used to define local Frobenius; needed to compose the commuting squares."
-   },
-   {
-    "node": "lem-pod-integral-pullback-composition",
-    "why": "Generic natural pullback-composition comparison underlying the normalized local operator, localized stagewise; it is not a replacement for a weight argument."
-   },
-   {
-    "node": "lem-trf-integral-pullback-comparison-realization",
-    "why": "Only the completed-pullback composition/scalar equation and its finite-iteration coherence; this is coefficient calculus outside the trace-formula and Poincare-duality assumptions."
-   },
-   {
-    "node": "lem-trf-local-frobenius-transport-normalization",
-    "why": "Only the scalar-extension equation for the point-transport/return map t; it is a local coefficient-comparison tool, not a use of the trace formula or its proof."
    }
   ]
  },
@@ -212,12 +186,12 @@
   "lem-trf-local-frobenius-transport-normalization"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q10-6ab32a075",
-  "group": "Q10",
+  "reviewer": "NT-cc-Q84-54a0d947e",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-6ab32a075 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited mathematics. Repaired Step 3’s unsupported passage to common coefficient stages using existing pullback/scalar and local-transport comparison lemmas. Statement unchanged; no new nodes. Corrected JSON and detailed source, hypothesis, edge-case, route, and dependency checks are recorded under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-54a0d947e (reviewer sub-agent of L); spot-checked: I read the re-split note, the base and delivered item, both new nodes, every cited statement and the duplicate candidates in full. The statement and stmt_deps are unchanged. Old step 1 (exact fibres via lem-dl-a1-constructible-fibres-exact) stays as a citation. Old step 2 (common-E realization and the induction uθ^[n]=θ^[n]T^n u) and the θ half of old step 4 (θ_M^[r]d_r=θ^[r]⊗M, independence of representatives) became lem-wf-common-stage-weil-iterate. Old step 3 (naturality of J) and the J half of step 4 (P_M(d)b(J⊗M)=J b, descent of P and J to D^b_fd(Ω)) became lem-wf-common-stage-point-return. The parent is a 2124-character assembly; its last step, F=P(θ^[e])J and the 4-term calculation, matches the composite in def-weil-local-frobenius-trace. I checked the return g_Y^e x̄=x̄ g_s^e for the point given by κ(x)↪k (Frob_q^e fixes F_{q^e}), the source and target of J, b and d, the θ_M formula, and the edge cases r=1, E=M, towers, K=0 and noninvertible u. The two nodes are comparable in size and independent, and neither restates the item. Their finite-stage clauses repeat lem-fd-local-frobenius-weil-morphism-naturality, lem-fd-local-frobenius-coefficient-extension and lem-trf-local-frobenius-transport-normalization, but their common-stage descent claims are in no node, so they are not duplicates; their provers should cite those three nodes. Batch 5: both new citations of def-weil-local-frobenius-trace are accepted, because it is a general definition of the local operator and trace, already a stmt_dep of the item, and not part of the trace-formula or Poincaré-duality proofs. The stmt_dep lem-trf-integral-pullback-comparison-realization is generic comparison normalization, as accepted before. No SGA, no cycle, and proof_deps equals the union of the step uses. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.RationalStalkExact",

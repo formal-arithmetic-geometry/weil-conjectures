@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-geometric-fibre-connected-preimage",
+ "kind": "statement",
+ "title": "Connected geometric preimage of a purely inseparable singleton fibre",
+ "statement": "Let $q:X\\to T$ and $r:T\\to U$ be morphisms of schemes [def-pc-scheme], let $p:X\\to U$ satisfy $p=r\\circ q$, and suppose $q$ is geometrically connected [def-pc-geometrically-irreducible]. Let $u\\in U$ and let $V\\subseteq T$ be open. Suppose the open subscheme $V$ has exactly one point $v$ over $u$ and that its residue extension $\\kappa(v)/\\kappa(u)$ [def-weil-residue-field] is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. Put $\\Omega=\\overline{\\kappa(u)}$ [def-weil-algebraic-closure]. In the geometric fibre $X\\times_U\\operatorname{Spec}\\Omega$ [def-weil-geometric-fibre] [def-pc-fibre-product], the inverse image of $q^{-1}(V)$ is connected and nonempty [def-weil-connected-scheme]. No properness, integrality, affine, finite-partition, or etaleness hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, sentence: Then the schemes X_{s_i′} are geometrically connected over κ(s)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-fibre",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put W = V.toScheme, f = V.ι ≫ r and a = W.fromSpecResidueField v. The composite a ≫ f factors as Spec of the given purely inseparable residue-field map followed by U.fromSpecResidueField (f v). The first factor is universally injective by lem-pc-spec-pure-insep-integral-radicial-surjective, and the second is a monomorphism. Hence a ≫ f is universally injective. For any singleton scheme Y → U mapping to f v, the base change of a ≫ f has at most one point. Pullback associativity identifies it with the pullback of a along pullback.fst f g. This latter projection surjects onto pullback f g: every point projects to v by fibre uniqueness, and Scheme.Pullback.exists_preimage_pullback lifts the pair consisting of this point and the residue-field point. Thus pullback f g has at most one point.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-radicial-morphism",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "lem-weil-pbc-scheme-pullback-compatible-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take Y = Spec Ω and g the geometric point at u. Its point has image u = f v, so Scheme.Pullback.exists_preimage_pullback supplies a point z of pullback f g. Therefore pullback f g is a nonempty singleton. The pullback map j from this scheme into pullback r g has range equal to the inverse image of V under pullback.fst r g, by Scheme.Pullback.range_map and Scheme.Opens.range_ι. Consequently that inverse image is the singleton {j z}. No embedding of the residue extension into Ω is required.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-geometric-fibre",
+    "lem-weil-pbc-scheme-pullback-compatible-point",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical map b : pullback (q ≫ r) g → pullback r g is a base change of q, by pullback pasting (IsPullback.of_bot), and hence is geometrically connected. The requested subset is b⁻¹({j z}) by the projection identity and the preceding range calculation. Mathlib Scheme.Hom.isConnected_preimage_singleton gives its connectedness, including nonemptiness. Substitute h to recover the specified structure morphism p.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme",
+    "def-weil-geometric-fibre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "def-weil-geometric-fibre",
+  "def-weil-radicial-morphism",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-scheme-pullback-compatible-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, Stein splitting paragraph; shortened using the residue-field point and Mathlib Scheme.Pullback.exists_preimage_pullback, Scheme.Pullback.range_map, Scheme.Hom.isConnected_preimage_singleton, and the proved source instance Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (Stacks 01S4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The geometric fibre of a morphism with a unique point and purely inseparable residue extension has one point; its inverse image under a geometrically connected morphism is connected and nonempty",
+   "results": "8 hits: Scheme.Hom.fiber, fiberToSpecResidueField_apply, fiberOverSpecResidueField, IsFinite.finite_preimage_singleton, fiberι_asFiber, the Jacobson fibre instance, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable and the canonically-over fibre instance. No complete match.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically connected morphism pulls back a fibre consisting of a single point with purely inseparable residue field to a connected nonempty geometric fibre",
+   "results": "8 hits: fibre definitions and Scheme.Pullback.Triplet tensor identities. No complete match.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isConnected.*geometricFibre|geometricFibre.*preimage|[Pp]urely[Ii]nseparable.*[Cc]onnect",
+   "results": "0 hits. Direct reading finds Mathlib GeometricallyConnected.connectedSpace_of_subsingleton and tfae_universallyInjective as tools; neither states the geometric-subset conclusion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperGeometricFibreClopenPartition",
+  "date": "2026-10-25",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous; Tag 0BUI Stein partition construction; Tag 0BUI sentence identifying the schemes X_{s_i′} as geometrically connected over κ(s)",
+   "via": [
+    "lem-weil-pbc-proper-geometric-fibre-clopen-partition",
+    "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+    "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricFibreConnectedPreimage",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricFibreConnectedPreimage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isConnected_geometricFibre_preimage",
+  "statement": "theorem Scheme.Hom.isConnected_geometricFibre_preimage\n    {X T U : Scheme.{u}} (q : X ⟶ T) [GeometricallyConnected q]\n    (r : T ⟶ U) (p : X ⟶ U) (h : q ≫ r = p) (u : U) (V : T.Opens)\n    (hv : ∃ v : V.toScheme, (V.ι ≫ r) v = u ∧\n      (∀ w : V.toScheme, (V.ι ≫ r) w = u → w = v) ∧\n      @IsPurelyInseparable (U.residueField ((V.ι ≫ r) v))\n        (V.toScheme.residueField v) _ _ ((V.ι ≫ r).residueFieldMap v).hom.toAlgebra) :\n    _root_.IsConnected\n      ((pullback.fst p\n        (Spec.map (CommRingCat.ofHom\n          (algebraMap (U.residueField u) (AlgebraicClosure (U.residueField u)))) ≫\n            U.fromSpecResidueField u)) ⁻¹' (q ⁻¹' (V : Set T)))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T163619-L-726238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T201257-L-2387414",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

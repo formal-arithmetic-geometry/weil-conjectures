@@ -1478,7 +1478,9 @@ theorem power_natural (e : ScalarExtensionTensorCore R S α)
     simp only [Category.assoc]
     rw [← siteSheafTensorSecondMap_naturality]
     slice_lhs 2 3 =>
-      rw [← Functor.map_comp, ih, Functor.map_comp]
+      rw [← Functor.map_comp]
+    erw [ih]
+    rw [Functor.map_comp]
     simp only [Category.assoc]
 
 /-- Extend binary comparisons to every power, with naturality proved by induction.

@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-proper-inertia-stabilizer-preserving-open",
+ "kind": "statement",
+ "title": "Open stabilizer-preserving locus for a representable unramified map",
+ "statement": "Work over a field $k$ [def-weil-field], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], algebraic spaces mean [def-trf-algebraic-space], and stacks, representability and 2-fibre products mean [def-sfb-stable-pointed-moduli-groupoids]. Representable morphism properties are tested after scheme base change on etale scheme charts. Flatness, local finite presentation, etaleness and properness use [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-etale-morphism, def-weil-proper-morphism]. A stack morphism is separated if its relative diagonal is proper. The inertia stack $I_{\\mathcal A}$ has objects $(a,\\alpha)$ with $a\\in\\mathcal A(T)$ and $\\alpha\\in\\operatorname{Aut}(a)$, and arrows given by conjugating isomorphisms. Its projection forgets $\\alpha$. Finite inertia means that every scheme base change of this projection is a finite scheme morphism [def-weil-finite-integral-morphism]. The set $|\\mathcal A|$ consists of field-valued objects up to isomorphism after common field extension, with the atlas topology [lem-sfb-stack-point-topology]. Let $f:\\mathcal A\\to\\mathcal B$ be representable by algebraic spaces and unramified, and suppose $I_{\\mathcal B}\\to\\mathcal B$ is proper. Here unramifiedness uses [def-weil-unramified-morphism] on etale scheme charts. The locus of points $a\\in|\\mathcal A|$ at which $f$ induces an isomorphism of stabilizer group algebraic spaces is an open subset. It defines an open substack $\\mathcal A^\\circ\\subseteq\\mathcal A$, and the natural map $I_{\\mathcal A^\\circ}\\to\\mathcal A^\\circ\\times_{\\mathcal B}I_{\\mathcal B}$ is an isomorphism. In particular, for $f$ representable by algebraic spaces and etale, with finite target inertia, every point where stabilizers agree belongs to such an open substack. An open substack means a strictly full substack (closed under isomorphism) whose scheme base changes are open subschemes.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DUA (lemma-stabilizer-preserving-unramified), including the inertia-isomorphism conclusion; etale implies unramified and finite implies proper for its stated special case."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-stack-point-topology",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For any scheme $T$ and object $a:T\\to\\mathcal A$, let $G_T=\\operatorname{Aut}_{\\mathcal A}(a)$ and $H_T=\\operatorname{Aut}_{\\mathcal B}(f(a))$, as sheaves on $T$-schemes. These are algebraic spaces: $T\\times_{\\mathcal A}T$ and $T\\times_{\\mathcal B}T$ are algebraic spaces by [lem-sfb-stack-diagonal-space-source-representability], and their pullbacks along $\\Delta_T:T\\to T\\times_kT$ give $G_T$ and $H_T$ by [lem-trf-space-fibre-products-etale-covers]. A section of the first pullback is precisely an automorphism of $a$, and the second is the same construction for $f(a)$. This also identifies these spaces with the scheme pullbacks of the two inertia projections. All constructions commute with arbitrary scheme base change, since their sections are the same objects and arrows pulled back in the fibred groupoids [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, first paragraph; Tag 0DU8 (remark-get-property-auts-from-diagonal), explicit automorphism spaces"
+   }
+  },
+  {
+   "text": "Put $X_T=\\mathcal A\\times_{\\mathcal B}T$, using $f(a):T\\to\\mathcal B$. It is an algebraic space, unramified over the scheme $T$, by the hypothesis on $f$. Its section $x$ is $(a,\\mathrm{id}_{f(a)})$. Over $H_T$ there is a second section $x_h=(a,h)$, where $h$ is the universal automorphism of $f(a)$. Equality of $x$ and $x_h$ in the sheaf $X_T$ means the existence of an arrow $v:a\\to a$ with $h=f(v)$ (replace $h$ by its inverse if the opposite comparison convention is chosen). Such an arrow is unique because the base change $X_T$ is equivalent to a discrete groupoid. Thus $j_T:G_T\\to H_T$ identifies with the pullback of $\\Delta_{X_T/T}$ along $(x,x_h):H_T\\to X_T\\times_TX_T$. By [lem-sfb-unramified-space-open-diagonal] this diagonal is a representable open immersion. Its pullback is an open immersion too: on each scheme test it is a further scheme base change of an open immersion, to which [lem-weil-pbc-open-immersion-base-change] applies. Hence $j_T$ identifies $G_T$ with an open subspace of $H_T$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-unramified-space-open-diagonal",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU8 and Tag 0DUA, first paragraph; the open-immersion diagonal gives the representable case directly"
+   }
+  },
+  {
+   "text": "For a field-valued representative $a:\\operatorname{Spec}K\\to\\mathcal A$, $j_K$ is the induced homomorphism of stabilizer group algebraic spaces, by step 1. It is an isomorphism exactly when the complement of its open image is empty, by [lem-a1-space-point-open-calculus]. This condition is unchanged by a field extension $L/K$: an open subspace with full point image equals its target, and a nonempty complement stays nonempty after field extension. For the latter assertion, apply the surjectivity of $|H_K\\times_K\\operatorname{Spec}L|\\to|H_K|\\times_{|\\operatorname{Spec}K|}|\\operatorname{Spec}L|$ in that node to any point of the complement; the pullback open image has the inverse-image point set. Isomorphic objects conjugate both automorphism groups and their comparison, so the condition is also invariant under isomorphism. It therefore defines a subset $W\\subseteq|\\mathcal A|$ independently of the representative.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DTW (remark-identify-automorphism-groups), with the field-extension argument of lemma-iso-automorphism-groups; Tag 0DUA, second paragraph"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:U\\to\\mathcal A$, provided by [def-sfb-algebraic-moduli-stack]. Use $G=G_U$, $H=H_U$, and $q:H\\to U$ from steps 1--2. The assumption that $I_{\\mathcal B}\\to\\mathcal B$ is proper says precisely that this scheme base change $q$ is proper. In particular $|q|$ is closed: properness of algebraic spaces means separated, finite type and universally closed, as explicitly specified in [lem-sfb-space-proper-base-change]. The subset $C=|H|\\setminus|G|$ is closed. By [lem-a1-space-point-open-calculus], its intersection with the inverse image of $u\\in U$ is empty exactly when the open immersion $G_u\\to H_u$ is an isomorphism: the image formula for fibre products identifies the point image of the fibre, and an open subspace with full point image is the whole space. Thus $p^{-1}(W)=V=U\\setminus q(C)$ is open, with no finiteness condition on $C$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-space-proper-base-change",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, closed-image argument in second paragraph; spaces-morphisms.tex Tag 03ZM (definition-proper)"
+   }
+  },
+  {
+   "text": "The atlas criterion in [lem-sfb-stack-point-topology] now shows that $W$ is open in $|\\mathcal A|$. For $R=U\\times_{\\mathcal A}U$ the two maps to $U$ give isomorphic objects of $\\mathcal A$; step 3 shows that the inverse images of $V$ have equal point subsets. They are open subspaces, so they are equal as subfunctors by [lem-a1-space-point-open-calculus]. Consequently [lem-sfb-invariant-open-substack-descent], applied to this smooth atlas and its invariant open $V$, produces the strictly full algebraic open substack $\\mathcal A^\\circ$ with $U\\times_{\\mathcal A}\\mathcal A^\\circ=V$. Its point subset is $W$: atlas point-surjectivity and this pullback equality detect membership on $U$. This uses the invariant-open theorem for general algebraic stacks, rather than its Deligne--Mumford-only variant.",
+   "uses": [
+    "lem-sfb-stack-point-topology",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, construction of the open substack; stacks-properties.tex Tags 04XL, 0507 and 06FJ"
+   }
+  },
+  {
+   "text": "For any scheme $T\\to\\mathcal A^\\circ$, repeat steps 1--2 with its object $a$. Strict fullness identifies $\\operatorname{Aut}_{\\mathcal A^\\circ}(a)$ with $\\operatorname{Aut}_{\\mathcal A}(a)$, so the required inertia comparison pulls back to the open immersion $j_T:G_T\\to H_T$. Every point of $H_T$ maps to a point $t$ of $T$. The object $a_t$ belongs to $W$, since $T$ maps to $\\mathcal A^\\circ$, hence $(j_T)_t$ is an isomorphism by step 3. The fibre-product point-image formula of [lem-a1-space-point-open-calculus] therefore shows that every point of $H_T$ lies in the open image of $j_T$. The full-point-image clause of that node makes $j_T$ an isomorphism. Thus, for every scheme $T$ and every object $a\\in\\mathcal A^\\circ(T)$, every automorphism of $f(a)$ lifts uniquely to an automorphism of $a$, compatibly with pullback. These unique lifts give an inverse to the inertia comparison on objects $(a,h)$ and on conjugating arrows: if $f(v)h=h' f(v)$, uniqueness forces $v\\alpha=\\alpha' v$ for the lifted automorphisms. The constructions are inverse and natural. This proves the asserted isomorphism of inertia stacks without invoking fibrewise isomorphism for arbitrary morphisms.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, last sentence; explicit open-immersion proof of the Tag 0DU9 conclusion in the representable case"
+   }
+  },
+  {
+   "text": "Finally suppose $f$ is etale and $\\mathcal B$ has finite inertia. Each scheme test of $f$ is unramified by the etale clause of [lem-sfb-space-unramified-permanence]. Each scheme base change of $I_{\\mathcal B}\\to\\mathcal B$ is finite by hypothesis and hence proper by [lem-weil-pbc-finite-proper]. Thus the hypotheses already treated hold, and every point where the stabilizers agree lies in the open substack constructed in step 5, with the inertia isomorphism proved in step 6.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DUA, etale/finite specialization; spaces-morphisms.tex Tag 06CR; morphisms.tex Tag 01WN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-unramified-space-open-diagonal",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-a1-space-point-open-calculus",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-stack-point-topology",
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-space-unramified-permanence",
+  "lem-weil-pbc-finite-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DUA (lemma-stabilizer-preserving-unramified), with the representable diagonal pullback of Tag 0DU8 made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stabilizer preserving locus of a representable unramified morphism of algebraic stacks is open if the target has proper inertia",
+   "results": "[leanfinder] OK 8 hit(s); top results: Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_stalk_iso, stabilizer_isOpen, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a representable etale map of stacks with finite inertia the locus where automorphism group schemes are isomorphic is an open substack and inertia agrees there",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyIsOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \": (topologically IsOpenMap).RespectsIso\", \"doc\": \"For any isomorphism of schemes, the underlying continuous map between their topological spaces is an open map. This means that the image of every open subset under this continuous map is an open subse\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale (@LocallyOfFiniteType ⊓ @FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an open immersion if and only if the underlying continuous map is an open embedding and, for every point $ x \\\\in X $, the induced map on stalks at $ x $ is an i\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"[IsIso g] : IsOpenImmersion g\", \"doc\": \"Every isomorphism between schemes is an open immersion. Specifically, if $ g: X \\to Y $ is an isomorphism of schemes, then it satisfies the open immersion condition: the underlying continuous map is a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"IsOpen\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"stabilizer_isOpen\", \"module\": \"Mathlib.Topology.Algebra.MulAction\", \"type\": \" (M : Type u_1) {X : Type u_2} [TopologicalSpace M] [TopologicalSpace X] [Group M] [MulAction M X] [ContinuousSMul M X] [DiscreteTopology X] (x : X) : IsOpen ↑(MulAction.stabilizer M x)\", \"doc\": \"The stabilizer of a continuous group action on a discrete space is an open subgroup.\"}\n  {\"name\": \"continuousSMul_iff_stabilizer_isOpen\", \"module\": \"Mathlib.Topology.Algebra.MulAction\", \"type\": \" {M : Type u_1} {X : Type u_2} [TopologicalSpace M] [TopologicalSpace X] [Group M] [IsTopologicalGroup M] [MulAction M X] [DiscreteTopology X] : ContinuousSMul M X ↔ ∀ (x : X), IsOpen ↑(MulAction.stabilizer M x)\", \"doc\": \"A group action of a topological group on a discrete space is continuous if and only if\\neach stabilizer is an open subgroup.\"}\n  {\"name\": \"stabilizer_isOpen_of_isIntegral\", \"module\": \"Mathlib.FieldTheory.KrullTopology\", \"type\": \" {K : Type u_1} {L : Type u_2} [Field K] [Field L] [Algebra K L] [Algebra.IsIntegral K L] (x : L) : IsOpen ↑(MulAction.stabilizer Gal(L/K) x)\", \"doc\": \"If `L/K` is an algebraic field extension, then the stabilizer\\nin `Gal(L/K)` of any element in `L` is open for the Krull topology.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.preserving|inertia.*locus|locus.*inertia",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern schemes, rings, topological group actions or ordinary categories, not this algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.preserving|inertia.*locus|locus.*inertia",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, unramified ring loci or topological action stabilizers do not state the algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified representable map of stacks induces an open immersion on inertia and proper inertia makes the isomorphism locus open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.of_isIso, AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, unramified ring loci or topological action stabilizers do not state the algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"IsOpen\"",
+   "results": "Actual search: 3 hits; stabilizer_isOpen, continuousSMul_iff_stabilizer_isOpen, stabilizer_isOpen_of_isIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, unramified ring loci or topological action stabilizers do not state the algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable unramified morphism of algebraic stacks with proper target inertia the stabilizer preserving locus is open",
+   "results": "Actual search: 8 hits; Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, unramified ring loci or topological action stabilizers do not state the algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.stack|inertiaStack|stabilizerPreserving|fixed.point.reflecting",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, unramified ring loci or topological action stabilizers do not state the algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed point reflecting locus is open for an unramified representable map of stacks whose target has proper automorphism groups",
+   "results": "Actual search: 8 hits; Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.eq",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme diagonals, unramified ring loci or topological action stabilizers do not state the algebraic-stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-etale-affine-charts",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: second sentence of Tag 0DUE: shrink to the stabilizer-preserving open by Tag 0DUA.",
+   "via": [
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-inertia-stabilizer-preserving-open",
+  "worker": "stage1",
+  "summary": "NF follows Stacks 0DUA by constructing the open inertia comparison from the diagonal on every scheme test, using the proper closed-image argument, descending the invariant atlas open, and proving the inertia isomorphism by the full point image of an open immersion. No new nodes. Stabilizer terminology is made algebraic-space valued and open substacks strictly full.",
+  "blueprint": "Realizes inherited from.place, supporting the stabilizer-preserving shrink in Tag 0DUE. The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the direct-image/compactification ancestor; the inherited longer alteration chain is retained. blueprint_refs.py ancestor returns None; no from.node or via is invented. Whole-blueprint searches stabilizer, inertia and open substack give no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products used to construct automorphism spaces; not a replacement for a unit proof step."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-image and open-subspace calculus for algebraic spaces; the unit has no substitute for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-6d6bbd207",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-6d6bbd207 (reviewer sub-agent of L); spot-checked: Read the item's 7-step split of Stacks 0DUA in full against stacks-morphisms.tex 9752-9883 (0DU8, 0DU9, 0DUA). The delivery adds no new nodes. Step 2 writes G_T→H_T as a pullback of the diagonal of the unramified algebraic space X_T=A×_B T over T. That is the 0DU8 square for representable f, and the open-immersion property comes from lem-sfb-unramified-space-open-diagonal (05W1); this is correct. Step 4 uses the proper q: H=U×_B I_B→U, so q(|H|∖|G|) is closed. Step 5 shows the open is invariant on R by point equality and the subfunctor clause of lem-a1-space-point-open-calculus, then descends it with lem-sfb-invariant-open-substack-descent (0507), which covers general algebraic stacks. Step 6 shows the open immersion has full point image, so it is an isomorphism. Step 7 uses étale⇒unramified (06CR) and finite⇒proper (01WN). The statement differs from the base in two places, both named in the report: 'group schemes' became 'group algebraic spaces', and 'full' became 'strictly full'. Neither weakens the statement, and both citers (dm-stabilizer-isomorphism-open-locus, finite-inertia-etale-affine-charts) still read correctly. No existing node states the general 0DUA; the DM-only node is a citer. Edge cases checked: empty A, f=id, Spec k→BΓ (empty locus), BG with G proper and not étale. All 7 batch-5 flags are generic algebraic-space foundations (045G, 02X2, 05W1, 03H4/03BZ, 04WP, 0507, 06CR) that reach sec-trace-formula only through def-trf-algebraic-space, so none is a trace-formula or Poincaré-duality step. I accepted the worker-written tool_uses for lem-trf-space-fibre-products-etale-covers and lem-a1-space-point-open-calculus. No SGA citation. No changes."
+ }
+}

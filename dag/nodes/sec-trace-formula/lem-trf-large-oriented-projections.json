@@ -1,0 +1,193 @@
+{
+ "id": "lem-trf-large-oriented-projections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the external-product comparison used by lem-trf-trace-specialization; existence and universal property of the oriented product on which the vanishing topos of def-trf-oriented-nearby-cycles is built; ILO XI §1.3; Stacks Tag 00X6",
+   "via": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Site morphisms, associated-representable comparisons and the orientation",
+ "statement": "With the large triple-site data of [def-trf-large-oriented-site-data], a continuous finite-limit-preserving functor H:C→T induces the geometric morphism from Sh(T) to Sh(C), and its inverse image takes U^a naturally to H(U)^a, in independent universes. Suppose geometric projections p1,p2 with their displayed associated-representable comparisons pi1,pi2 are given. If the associated middle-to-first arrows are invertible, there exists an orientation tau:(gp2)_*→(fp1)_* satisfying LargeOrientationFormula. No universality or existence of lifts is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI §1.3; Stacks Tag 00X6; Lean: lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeProjections.lean"
+ },
+ "stmt_deps": [
+  "def-trf-large-oriented-site-data"
+ ],
+ "proof": [
+  {
+   "text": "Representable flatness follows from finite-limit preservation. The continuous sheaf pullback and pushforward have their canonical adjunction; flatness and exact filtered colimits of sets make the inverse image left exact. This constructs largeSiteMorphism with real data.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI §1.3; Stacks Tag 00X6"
+   }
+  },
+  {
+   "text": "Compose the site adjunction with the sheafification adjunction. Its right adjoint is precomposition followed by the sheaf inclusion, equally the right adjoint to left Kan extension followed by sheafification. Uniqueness of left adjoints, and the Kan-extension formula on lifted Yoneda representables, give largeAssociatedComparison. The two possible ULift universe parameters are identified by the explicit up/down isomorphism.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI §1.3; Stacks Tag 00X6"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-large-oriented-representable-comparison] to the transformation on associated representables constructed in the next step. It gives a unique direct-image transformation, and its mate is the specified transformation on each associated representable.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-trf-large-oriented-representable-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI §1.3"
+   }
+  },
+  {
+   "text": "The middle triples and structural arrows are functorial. After association invert the middle-to-first natural transformation and compose with the middle-to-second one. Transport along etaF, etaG, pi1 and pi2. Apply the preceding direct-image construction and its mate calculation. Its component is exactly LargeOrientationFormula.",
+   "uses": [
+    "def-trf-large-oriented-site-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI §1.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-large-oriented-site-data",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-large-oriented-representable-comparison",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI §1.3; Stacks sites.tex Tag 00X6, with the Mathlib continuous site pullback and the adjunction/Yoneda calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Oriented product of topoi: triple category site projections and universal compatible lifts",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.lift₃_p₃; CategoryTheory.CartesianMonoidalCategory.lift; CategoryTheory.Limits.Pi.lift_π; CategoryTheory.Functor.relativelyRepresentable.lift₃_p₃_assoc; CategoryTheory.Localization.Lifting₃; CategoryTheory.Limits.Pi.lift_π_assoc; CategoryTheory.CartesianMonoidalCategory.lift_lift_associator_hom; CategoryTheory.Localization.lift₃",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical projections of the oriented triple site of two morphisms of topoi and their natural transformation",
+   "results": "CategoryTheory.Meq.pullback; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue; CategoryTheory.Presheaf.firstMap; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue; CategoryTheory.Presheaf.secondMap",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafAdjunctionContinuous\"",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.*(product|cone)|compatible.*lift",
+   "results": "Mathlib/MeasureTheory/Measure/Haar/InnerProductSpace.lean; Mathlib/RingTheory/WittVector/Truncated.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"largeCompatibleLift|largeOrientationExists|largeSiteMorphism|largeAssociatedComparison|universalComparison|LargeOrientationFormula\" in Mathlib/CategoryTheory, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search oriented product, compatible lift, universal cone",
+   "results": "No existing declaration with the new names or the corresponding oriented triple-site statements; no matching blueprint node. Existing original node contains the complete construction, not these separate results.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate. The definitions are moved from the assigned item rather than independently restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.OrientedProductLargeSites",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductLargeProjections",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeProjections.lean",
+  "declaration": "CategoryTheory.OrientedProduct.largeOrientationExists",
+  "statement": "theorem largeOrientationExists\n    (hc : ∀ V : D, IsIso ((largeAssociated (largeTopology J₁ J₂ F G)).map\n      (largeToFirst F G (largeMiddle F G V)))) :\n    ∃ τ : (p₂.comp g).direct ⟶ (p₁.comp f).direct,\n      LargeOrientationFormula F G J₁ J₂ K f g ηF ηG p₁ p₂ π₁ π₂ τ",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24",
+  "declarations": [
+   "CategoryTheory.OrientedProduct.largeSiteMorphism",
+   "CategoryTheory.OrientedProduct.largeAssociatedComparison",
+   "CategoryTheory.OrientedProduct.largeOrientationExists"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-large-oriented-projections",
+  "worker": "stage3",
+  "summary": "Site morphisms, associated-representable comparisons and the orientation. This is a separate part of the original ten-step argument, with the precise Lean statement attached. No replacement of the unit normal-cone route.",
+  "blueprint": "ILO XI §1.3; Stacks Tag 00X6 of the oriented-product input to the normal-cone specialization in the ancestor proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Exact set sheafification is the generic input to left exactness of the site pullback; the explicit oriented triple-site route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; 12 moved defs vs live item block (docstring tags only); 2 sorry lift lemmas vs ILO XI 1.5/1.6; 25 direct importers compiled against the delivered modules"
+ }
+}

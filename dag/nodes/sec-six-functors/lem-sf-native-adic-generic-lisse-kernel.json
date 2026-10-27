@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-native-adic-generic-lisse-kernel",
+ "kind": "statement",
+ "title": "Generic lisseness for native adic kernels and cokernels on a quasi-compact scheme",
+ "statement": "Fix a prime $\\ell$, put $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its $\\ell$-adic absolute-value topology, and use the small pro-etale site [def-weil-pbc-proetale-site] and sheaves of modules [def-weil-sheaf-of-modules-category]. For any scheme $X$, let $B_X$ be the sheaf of locally finite continuous $\\Omega$-valued functions: its sections on $U$ are continuous functions $|U|\\to\\Omega$ such that every point has an open neighbourhood on which the values span a finite-dimensional $\\mathbf Q_\\ell$-space. Restrictions are by precomposition. This is the coefficient construction used in [def-sf-native-weil-derived-framework], applied to $X$ itself. Write $\\mathcal A_X=\\operatorname{Mod}(B_X)$. Call an object lisse if it is pro-etale locally isomorphic to $B_U^{\\oplus r_U}$ with $r_U$ a finite nonnegative integer, allowed to vary with the covering member $U$. Let $Y$ be a nonempty quasi-compact scheme [def-weil-pbc-quasi-compact-scheme], let $F,G\\in\\mathcal A_Y$ be lisse, and let $\\varphi:F\\to G$ be a morphism. For a scheme morphism $g:V\\to Y$, write $g^*H=B_V\\otimes_{g^{-1}B_Y}g^{-1}H$ for the module inverse image, with coefficient map given by precomposition [def-weil-proetale-inverse-image, def-pur-sheaf-tensor-product]. There exists a nonempty open subscheme $j:U\\hookrightarrow Y$ [def-weil-open-immersion] such that both $\\ker(j^*\\varphi)$ and $\\operatorname{coker}(j^*\\varphi)$ are lisse in $\\mathcal A_U$.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+  "place": "Lines 228-327, theorem AlgebraicGeometry.ProEtale.exists_nonempty_isAdicLisseSheaf_kernel_cokernel (declaration at line 232). Its proof uses constant-rank matrix normal form (lines 94-134), rank descent (lines 177-210), openness of rank superlevel sets (lines 55-67), and a finite subcover. Bhatt-Scholze Section 6.8 is motivation, not a coefficient-sheaf comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a nonempty quasi compact scheme the kernel and cokernel of a morphism of finite rank lisse sheaves over locally finite continuous algebraic l adic functions are lisse on some nonempty open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor (CategoryTheory.Over Y)ᵒᵖ Y.IdealSheafData\", \"doc\": \"The functor assigns to each object in the opposite category of the over category over a scheme $ Y $ the kernel of its structure morphism as an ideal sheaf on $ Y $. For morphisms, it maps a morphism \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) [AlgebraicGeometry.QuasiCompact f] (𝒰 : X.OpenCover)\\n  (U : ↑Y.affineOpens),\\n  ⨅ i, (AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.CategoryStruct.comp (𝒰.f i) f)).ideal U = f.ker.ideal U\", \"doc\": \"For a quasi-compact morphism $ f: X \\to Y $ of schemes, an open cover $ \\\\mathcal{U} $ of $ X $, and an affine open subset $ U $ of $ Y $, the intersection of the ideals of the kernels of the compositio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) [AlgebraicGeometry.QuasiCompact f] (U : Y.Opens)\\n  (V : ↑(↑U).affineOpens),\\n  (AlgebraicGeometry.Scheme.Hom.ker (f ∣_ U)).ideal V =\\n    f.ker.ideal ⟨(AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj ↑V, ⋯⟩\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact morphism of schemes, and let $U$ be an open subset of $Y$. For any affine open subset $V$ of the open subscheme $Y|_U$, the ideal associated to the kernel of the re\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf modules, ideal sheaves, or general presentations; none asserts generic lisseness for this native continuous coefficient sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicLisseSheaf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf modules, ideal sheaves, or general presentations; none asserts generic lisseness for this native continuous coefficient sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_nonempty_isAdicLisseSheaf_kernel_cokernel|locallyFiniteFunctions|AdicLisse",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf modules, ideal sheaves, or general presentations; none asserts generic lisseness for this native continuous coefficient sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of local systems of modules over continuous l adic functions has locally free kernel and cokernel on a nonempty open of a quasi compact scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree_s\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf $\\\\mathcal{R}$ of rings on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and morphisms $f: \\\\mathcal{F}_\\\\iota \\\\to \\\\mathcal{F}_\\\\sigma$ and $g: \\\\mathcal{F}_\\\\sigma \\\\to \\\\mathcal{M}$\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace → AlgebraicGeometry.LocallyRingedSpace → Type u\", \"doc\": \"A continuous map between the underlying topological spaces together with a morphism of sheaves of commutative rings that induces local ring homomorphisms on stalks\"}\n  {\"name\": \"LocallyConstant.ker_comapₗ\", \"module\": \"Mathlib.Topology.LocallyConstant.Algebra\", \"type\": \"[Semiring R] [AddCommMonoid Z] [Module R Z] (f : C(X, Y)) (hfs : Function.Surjective f) :\\n  LinearMap.ker (comapₗ R f : LocallyConstant Y Z →ₗ[R] LocallyConstant X Z) = ⊥\", \"doc\": \"For a surjective continuous map $ f : X \\to Y $ between topological spaces and an $ R $-module $ Z $, the kernel of the pullback linear map $ f^* : \\text{Loc}(Y,Z) \\to \\text{Loc}(X,Z) $ (defined by precom\"}\n  {\"name\": \"PresheafOfModules.IsLocallyInjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": Prop\", \"doc\": \"A morphism $ f $ between presheaves of modules over a presheaf of rings $ R $ is locally injective if, after applying the forgetful functor to presheaves of abelian groups, the induced natural transfo\"}\n  {\"name\": \"TopModuleCat.coker\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Topology.Homology\", \"type\": \": TopModuleCat R\", \"doc\": \"Given a topological ring $ R $ and a continuous $ R $-linear map $ \\\\varphi : M \\\\to N $ between topological $ R $-modules, the cokernel is the quotient module $ N / \\\\varphi(M) $ equipped with the quoti\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X ⟶ Y) [QuasiCompact f] (𝒰 : X.OpenCover) : ⨅ i, (𝒰.f i ≫ f).ker = f.ker\", \"doc\": \"For a quasi-compact morphism $ f: X \\to Y $ of schemes and an open cover $ \\\\mathcal{U} $ of $ X $, the intersection of the kernels of the compositions $ \\\\mathcal{U}_i \\\\to X \\\\xrightarrow{f} Y $ over all\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"PresheafOfModules.IsLocallySurjective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": Prop\", \"doc\": \"A morphism of presheaves of modules over a presheaf of rings $ R $ is locally surjective if its image under the forgetful functor to presheaves of abelian groups is locally surjective, meaning for eve\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf modules, ideal sheaves, or general presentations; none asserts generic lisseness for this native continuous coefficient sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic local freeness of kernels and cokernels for morphisms of local systems over a nondiscrete topological field on a quasi compact pro etale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree_s\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf $\\\\mathcal{R}$ of rings on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and morphisms $f: \\\\mathcal{F}_\\\\iota \\\\to \\\\mathcal{F}_\\\\sigma$ and $g: \\\\mathcal{F}_\\\\sigma \\\\to \\\\mathcal{M}$\"}\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and morphisms $f: R^{(\\\\iota)} \\\\to R^{(\\\\sigma)}$ and $g: R^{(\\\\sigma)} \\\\to M$ between free sheaves\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        SheafOfModules R →\\n          [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [∀ (X : C), (J.over X\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$, this type represents data providin\"}\n  {\"name\": \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {M₁ M₂ : PresheafOfModules R} →\\n          (f : M₁ ⟶ M₂) →\\n            {N : PresheafOfModules R} →\\n              CategoryTheory.Pr\", \"doc\": \"Given a locally bijective morphism $ f: M_1 \\to M_2 $ between presheaves of modules over a presheaf of rings $ R $, and for any sheaf $ N $ of modules over $ R $, there is an equivalence between the ho\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf modules, ideal sheaves, or general presentations; none asserts generic lisseness for this native continuous coefficient sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-adic-lisse-kernel-strata",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.ProEtale.exists_nonempty_isAdicLisseSheaf_kernel_cokernel",
+   "file": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+   "line": 232,
+   "note": "The source statement is the exact native generic-open assertion. Read-only inspection of lines 232-327 found no sorry in its body. No compilation or independent transitive-closure certification is claimed by this delivery."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native coefficient local calculation for inherited prop-functor-package clause 3 (localization triangle), via the constructible-abelian argument: nonempty maximum-rank open in Abelian.lean:228-327, preceding the finite stratification induction at lines 333-436. The seeded chain has no imported ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-native-adic-lisse-kernel-strata",
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_nonempty_isAdicLisseSheaf_kernel_cokernel"
+  ],
+  "note": "attached by the lead's tool attach.py 2026-10-22 06:47 UTC for group Q22, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_liveb2378f05.jsonl.gz: Under exactly the node’s hypotheses and coefficient, lisseness, and module-pullback definitions, this declaration gives a nonempty open subsc"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.exists_nonempty_isAdicLisseSheaf_kernel_cokernel",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Abelian",
+     "lines": [
+      229,
+      326
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

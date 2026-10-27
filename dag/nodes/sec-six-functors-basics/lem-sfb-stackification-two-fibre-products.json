@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-stackification-two-fibre-products",
+ "kind": "statement",
+ "title": "Stackification commutes with two-fibre products of fibred groupoids",
+ "statement": "Fix the universes of [def-weil-size-convention] and a site $(\\mathcal C,J)$ [def-weil-pbc-topos] small in the larger universe. Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be categories fibred in groupoids over $\\mathcal C$, with fibre groupoids in that universe, and let $f:\\mathcal X\\to\\mathcal Y$ and $g:\\mathcal Z\\to\\mathcal Y$ be functors over $\\mathcal C$ preserving cartesian arrows. Here a cartesian arrow is an arrow with the unique lifting property for factorizations over base arrows; being fibred in groupoids means that such lifts exist with every prescribed target, and every fibre is a groupoid. Form $\\mathcal P=\\mathcal X\\times_{\\mathcal Y}\\mathcal Z$ fibrewise: its objects over $T$ are triples $(x,z,\\alpha:f(x)\\xrightarrow{\\sim}g(z))$ and its arrows are pairs $(a:x\\to x',b:z\\to z')$ satisfying $g(b)\\alpha=\\alpha'f(a)$; pullbacks are induced by those of the factors. Let $a_J$ denote stackification with the arrow-sheafification and local-image properties of [lem-sfb-groupoid-stackification-local-description]. There is an equivalence over $\\mathcal C$\n$$a_J(\\mathcal X\\times_{\\mathcal Y}\\mathcal Z)\\simeq a_J\\mathcal X\\times_{a_J\\mathcal Y}a_J\\mathcal Z,$$\nwhose composite with the stackification map from $\\mathcal P$ is, up to a natural isomorphism over the identity of the base, the functor induced by the three stackification maps. This equivalence commutes with both projections and the comparison isomorphism between their images in $a_J\\mathcal Y$. If a factor is already a $J$-stack (isomorphism presheaves are sheaves and covering descent data for objects are effective), its stackification can be taken to be itself, with the identity map.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories), including its canonical comparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-groupoid-stackification-map",
+  "def-sfb-groupoid-two-fibre-cone"
+ ],
+ "proof": [
+  {
+   "text": "Write $i_X,i_Y,i_Z$ for the stackification maps. Extend $i_Yf$ and $i_Yg$ using [lem-sfb-groupoid-stackification-local-description], obtaining $f^a:a_J\\mathcal X\\to a_J\\mathcal Y$, $g^a:a_J\\mathcal Z\\to a_J\\mathcal Y$ and comparisons $\\epsilon_X:f^ai_X\\cong i_Yf$, $\\epsilon_Z:g^ai_Z\\cong i_Yg$. By [lem-sfb-stack-groupoid-two-fibre-products], $\\mathcal Q=a_J\\mathcal X\\times_{a_J\\mathcal Y}a_J\\mathcal Z$ is a stack. Define $k:\\mathcal P\\to\\mathcal Q$ by $k(x,z,\\alpha)=(i_Xx,i_Zz,\\epsilon_Z^{-1}i_Y(\\alpha)\\epsilon_X)$ and $k(a,b)=(i_Xa,i_Zb)$. Naturality of the comparisons gives the required square for arrows, and their pullback compatibility gives that of $k$. Extend $k$ to $h:\\mathcal W=a_J\\mathcal P\\to\\mathcal Q$ with $h i_P\\cong k$ using the same stackification lemma.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-stack-groupoid-two-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+   }
+  },
+  {
+   "text": "For $p=(x,z,\\alpha)$ and $p'=(x',z',\\alpha')$ over $T$, let $A=\\operatorname{Isom}_{\\mathcal X}(x,x')$, $B=\\operatorname{Isom}_{\\mathcal Z}(z,z')$, $C=\\operatorname{Isom}_{\\mathcal Y}(fx,gz')$ be presheaves on $\\mathcal C/T$. The maps to $C$ are $a\\mapsto\\alpha'f(a)$ and $b\\mapsto g(b)\\alpha$. Thus $\\operatorname{Isom}_{\\mathcal P}(p,p')=A\\times_C B$ by the defining square. The arrow-sheafification clause of [lem-sfb-groupoid-stackification-local-description] identifies $\\operatorname{Isom}_{\\mathcal W}(i_Pp,i_Pp')$ with $(A\\times_C B)^\\#$. The same clause in the three factors identifies $\\operatorname{Isom}_{\\mathcal Q}(kp,kp')$ with $A^\\#\\times_{C^\\#}B^\\#$, using the comparisons $\\epsilon_X,\\epsilon_Z$. By [lem-weil-pbc-sheafification-sets-exact] applied on the small slice site these are canonically isomorphic. This is the map induced by $h$: its composites with both projections are the sheafifications of those induced by $k$, which determine the map into the fibre product.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+   }
+  },
+  {
+   "text": "For arbitrary $w,w'\\in\\mathcal W(T)$, the local-image clause of [lem-sfb-groupoid-stackification-local-description] gives a common covering sieve on which they are isomorphic to $i_Pp,i_Pp'$. A common covering sieve exists by intersection and transitivity of the topology; this uses no fibre products of base objects. The preceding step makes the map of their isomorphism sheaves bijective on every such restriction. To lift an arrow globally, lift its restrictions uniquely; uniqueness makes these lifts agree on every further restriction, so the source isomorphism sheaf glues them. Equality is likewise detected on this covering sieve. Consequently $h_T$ is fully faithful for every $T$.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+   }
+  },
+  {
+   "text": "Let $q=(\\xi,\\zeta,\\gamma)\\in\\mathcal Q(T)$. By [lem-sfb-groupoid-stackification-local-description], after successive coverings choose $x\\in\\mathcal X$, $z\\in\\mathcal Z$ and isomorphisms $s:i_Xx\\to\\xi$, $t:i_Zz\\to\\zeta$. Then $\\delta=\\epsilon_Z g^a(t)^{-1}\\gamma f^a(s)\\epsilon_X^{-1}$ is an isomorphism $i_Yfx\\to i_Ygz$. It is a section of the sheafification of $I=\\operatorname{Isom}_{\\mathcal Y}(fx,gz)$. By [lem-weil-pbc-large-set-sheafification], the unit $I\\to I^\\#$ is locally bijective: its sheafification is an isomorphism by the universal property of sheafification. In particular, after a further covering $\\delta=i_Y(\\alpha)$ for $\\alpha:fx\\to gz$. Thus $(s,t)$ is an isomorphism $k(x,z,\\alpha)\\to q$. Transitivity of $J$ combines the successive coverings. Hence $q$ is locally in the essential image of $k$, and therefore of $h$. The source and target of $h$ are stacks and its fibre functors are fully faithful by the preceding step. Apply [lem-sfb-stack-fully-faithful-local-equivalence] to conclude that $h$ is an equivalence over $\\mathcal C$.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-weil-pbc-large-set-sheafification",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+   }
+  },
+  {
+   "text": "We verify the projection and 2-cell compatibility, including the choice of their extensions. Let $p_X^a:\\mathcal W\\to a_J\\mathcal X$ and $p_Z^a:\\mathcal W\\to a_J\\mathcal Z$ be extensions of $i_Xp_X$ and $i_Zp_Z$. On $i_P(\\mathcal P)$, the isomorphism $hi_P\\cong k$ supplies comparisons $\\operatorname{pr}_Xh\\cong p_X^a$ and $\\operatorname{pr}_Zh\\cong p_Z^a$. For general $w$, take local representatives $w\\cong i_Pp$ and conjugate these components by the representative isomorphisms. On overlaps the change of representative is an arrow between images of objects of $\\mathcal P$; the arrow-sheafification clause makes it locally an image of an arrow of $\\mathcal P$, by [lem-weil-pbc-large-set-sheafification]. Naturality on $\\mathcal P$ therefore makes the components agree locally and hence agree in the target isomorphism sheaf. They glue uniquely. The same argument for arrows proves naturality and for base restriction proves pullback compatibility. Apply this also to $f^ap_X^a$ and $g^ap_Z^a$ to extend the comparison 2-cell. Its equality with the tautological 2-cell after these projection comparisons holds on $i_Pp$ by the formula for $k$, hence holds globally by local representatives and separatedness. Thus the equivalence has all the stipulated compatibilities.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-weil-pbc-large-set-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+   }
+  },
+  {
+   "text": "If a factor $\\mathcal A$ is already a stack, its identity functor has the required stackification properties: its isomorphism presheaves are already sheaves, every object is itself in its image, and every functor $F:\\mathcal A\\to\\mathcal Y$ extends along the identity as $F$. Thus in the preceding construction that factor's stackification and stackification map may be taken to be $\\mathcal A$ and its identity.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-stack-groupoid-two-fibre-products",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-large-set-sheafification",
+  "lem-sfb-stack-fully-faithful-local-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 04Y2 (lemma-stackification-fibre-product-categories-fibred-in-groupoids), proof via Tag 04Y1 (lemma-stackification-fibre-product-fibred-categories)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stackif|stackify|associatedStack",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are predicates and descent functors for existing stacks, or ordinary sheafification; none constructs groupoid stackification or its comparison with 2-fibre products"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stackification preserves two fiber products of categories fibered in groupoids on a site",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_comp, CategoryTheory.GrothendieckTopology.sheafifyCompIso, CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Grothendieck.pre_map_fiber, CategoryTheory.Pseudofunctor.isStackFor, CategoryTheory.Grothendieck.pre_obj_fiber",
+   "date": "2026-10-23",
+   "verdict": "no match: these are predicates and descent functors for existing stacks, or ordinary sheafification; none constructs groupoid stackification or its comparison with 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"pullback\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are predicates and descent functors for existing stacks, or ordinary sheafification; none constructs groupoid stackification or its comparison with 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of categories fibred in groupoids commutes with 2 fibre products",
+   "results": "OK 8 hits: CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.isStackFor, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.Pseudofunctor.isPrestackFor', CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor, CategoryTheory.Pseudofunctor.IsStack",
+   "date": "2026-10-23",
+   "verdict": "no match: these are predicates and descent functors for existing stacks, or ordinary sheafification; none constructs groupoid stackification or its comparison with 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated stack functor preserves finite pseudolimits and homotopy pullbacks of presheaves of groupoids",
+   "results": "OK 8 hits: CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.isStackFor, CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.IsStackFor, CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor",
+   "date": "2026-10-23",
+   "verdict": "no match: these are predicates and descent functors for existing stacks, or ordinary sheafification; none constructs groupoid stackification or its comparison with 2-fibre products"
+  },
+  {
+   "tool": "grep",
+   "query": "stackification|stackify|associatedStack|[Ii]sStack.*[Pp]ullback|[Pp]ullback.*[Ii]sStack",
+   "results": "{\"t\": \"2026-10-23T15:39:19Z\", \"tool\": \"grep\", \"query\": \"stackification|stackify|associatedStack|[Ii]sStack.*[Pp]ullback|[Pp]ullback.*[Ii]sStack\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two fiber product of stacks in groupoids is a stack and stackification preserves it",
+   "results": "{\"t\": \"2026-10-23T15:39:19Z\", \"tool\": \"leansearch\", \"query\": \"The two fiber product of stacks in groupoids is a stack and stackification preserves it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isGroupoidProd\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"FundamentalGroupoidFunctor.preservesProduct\", \"CategoryTheory.groupoidProd\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"CategoryTheory.GrothendieckTopology.sheafifyCompIso\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\"], \"digest\": \"b156614bb0181e79\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T15:39:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStack\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of categories fibered in groupoids commutes with two fiber products",
+   "results": "{\"t\": \"2026-10-23T15:39:20Z\", \"tool\": \"leanfinder\", \"query\": \"Stackification of categories fibered in groupoids commutes with two fiber products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\"], \"digest\": \"bcdff168f0ff7367\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two pullbacks of stacks in groupoids are stacks with effective descent of triples",
+   "results": "{\"t\": \"2026-10-23T15:39:22Z\", \"tool\": \"leanfinder\", \"query\": \"Two pullbacks of stacks in groupoids are stacks with effective descent of triples\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\"], \"digest\": \"232cb6f69fbb3552\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\"",
+   "results": "{\"t\": \"2026-10-23T15:40:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.essSurj\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\"], \"digest\": \"b8afc658ce1201e8\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy pullback of groupoid valued pseudofunctors satisfying descent again satisfies descent",
+   "results": "{\"t\": \"2026-10-23T15:40:32Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy pullback of groupoid valued pseudofunctors satisfying descent again satisfies descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullHom_hom\", \"CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso\"], \"digest\": \"1b42e2f6b5de3b9b\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quotient-map-cartesian-action-groupoid",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite: Tag 04Y4 proof, reduction from quotient stacks to test-point groupoids by Tag 04Y2.",
+   "via": [
+    "lem-sfb-quotient-map-cartesian-action-groupoid",
+    "lem-sfb-open-subgroupoid-etale-quotient",
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stackification-two-fibre-products",
+  "worker": "stage1",
+  "summary": "Kept the statement. Constructed the canonical comparison, computed the two isomorphism sheaves with the correct conjugated maps, checked local representatives and the full projection/2-cell compatibility. Added only the general two-fibre-product stack lemma; reused stackification, set-sheafification and local-equivalence nodes.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli support route through Tag 04Y4 and its use of Tag 04Y2. Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) read; no route change. blueprint_refs ancestor returns null as in the original support chain, which is preserved. Whole-blueprint searches stackification, 026G, 2-fibre, two-fibre, 2-product and stacks in groupoids found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "General set-valued sheafification fact used on isomorphism presheaves on slice sites; this unit has no replacement for this sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-large-set-sheafification",
+    "why": "General set-valued sheafification fact used on isomorphism presheaves on slice sites; this unit has no replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-large-set-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-942c41d95",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-942c41d95 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, and Stacks 04Y1 (with its proof), 04Y2, 026G (with its proof), 02ZL, 02ZP and 0436. The item statement is unchanged from live, and live is still unsplit, so nothing supersedes this split. There is no repair note and no SGA. Steps 1-4 follow the 04Y1 proof. In step 1 the arrow square for k reduces to the P-square by naturality of ε. In step 2 Isom_P = A×_C B with the conjugated maps (checked), and the 00WJ exactness leaf gives (A×_C B)^# ≅ A^#×_{C^#}B^#. Step 3 is local bijectivity glued over common covering sieves. In step 4 I checked δ map by map, and the lifted pair (s,t) satisfies the arrow equation in Q. The large-set node, applied to the unit I→I^#, gives local surjectivity, and the 046N hypotheses (both sides stacks, h pullback-compatible, fibres fully faithful) all hold. Step 5 builds the 2-cell extension by hand using local representatives and separatedness, which is needed because the local-description node states no uniqueness. Step 6 (identity stackification of a stack) is elementary. The new node lem-sfb-stack-groupoid-two-fibre-products (026G/02ZL) is statement-only and self-contained, with correct tags and blueprint.from. It is true: Isom is a fibre product of sheaves, and descent splits into the two factors plus gluing in Isom. I tested it on the trivial topology, a terminal D, an empty factor and the empty covering sieve. It is not a clause of the item. My own grep for 026G/02ZL/04Y*, and a scan of statements on the live DAG, find only 04T2 (algebraic stacks) and unrelated Kerodon-02ZL nodes, so it is no duplicate. Mathlib IsStack has no 2-fibre-product result. I accept the tool_use of lem-weil-pbc-large-set-sheafification as a generic black box. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StackificationTwoFiberProducts",
+  "declaration": "CategoryTheory.Pseudofunctor.stackification_twoFiberProducts",
+  "declarations": [
+   "CategoryTheory.Pseudofunctor.stackification_twoFiberProducts",
+   "CategoryTheory.Pseudofunctor.groupoid_stackification_identity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/StackificationTwoFiberProducts.lean",
+  "statement": "theorem stackification_twoFiberProducts {C : Type w} [SmallCategory C] (J : GrothendieckTopology C) {X Y Z P Xa Ya Za W : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}} {f : StrongTrans X Y} {g : StrongTrans Z Y} (p : GroupoidTwoFiberCone f g P) (hp : p.IsTwoFiberProduct) (iX : StrongTrans X Xa) (iY : StrongTrans Y Ya) (iZ : StrongTrans Z Za) (iP : StrongTrans P W) (hX : IsGroupoidStackification J iX) (hY : IsGroupoidStackification J iY) (hZ : IsGroupoidStackification J iZ) (hP : IsGroupoidStackification J iP) (fa : StrongTrans Xa Ya) (ga : StrongTrans Za Ya) (ef : StrongTrans.Iso (StrongTrans.vcomp iX fa) (StrongTrans.vcomp f iY)) (eg : StrongTrans.Iso (StrongTrans.vcomp iZ ga) (StrongTrans.vcomp g iY)) {Q : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}} (q : GroupoidTwoFiberCone fa ga Q) (hq : q.IsTwoFiberProduct) : Q.IsStack J ∧ ∃ (r : GroupoidTwoFiberCone fa ga W) (er : GroupoidTwoFiberCone.Comparison p r iP iX iY iZ ef eg) (h : StrongTrans W Q) (hinv : StrongTrans Q W), Nonempty (StrongTrans.Iso (StrongTrans.vcomp h hinv) (StrongTrans.id W)) ∧ Nonempty (StrongTrans.Iso (StrongTrans.vcomp hinv h) (StrongTrans.id Q)) ∧ Nonempty (GroupoidTwoFiberCone.SameComparison r q h) ∧ ∃ k : StrongTrans P Q, Nonempty (StrongTrans.Iso (StrongTrans.vcomp iP h) k) ∧ Nonempty (GroupoidTwoFiberCone.Comparison p q k iX iY iZ ef eg)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-df8846d2d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df8846d2d",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Item diff vs live = lean record + two new def stmt_deps. IsGroupoidStackification is token-for-token the conclusion of landed exists_groupoid_stackification_local_description (not hollow). GroupoidTwoFiberCone/fiberComparison/Comparison/SameComparison equations type-checked and match node (k arrow = eg^-1 iY(alpha) ef). Universes w as in dep. Identity-stackification theorem covers the last sentence. No duplicate: IsFppfStackification/GroupoidTwoFiberProduct are BasedCategory/fppf/single-fibre encodings. Docstrings, sorry-only, report sections OK. Finding (H3): conclusion existentially chose extensions fa/ga/ef/eg and the target two-fibre product Q while P was universal; citers with their own Q or extensions would need uniqueness lemmas absent from the DAG. FIX: made them binders (q, hq : q.IsTwoFiberProduct), conclusion Q.IsStack J ∧ ∃ r er h hinv …; fixes/StackificationTwoFiberProducts.lean + lean-record.json (verbatim statement, refit_record clean). nt_compile --json with the two new dep modules: exit 0, 1.2/3.1/1.5 s."
+ }
+}

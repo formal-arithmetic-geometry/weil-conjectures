@@ -1,0 +1,305 @@
+{
+ "id": "lem-trf-valued-finite-ramification-calculus",
+ "kind": "statement",
+ "title": "Finite analytic ramification invariants and residue lifts",
+ "statement": "All fields below are complete fields [def-weil-field] with compatible nontrivial nonarchimedean real absolute values. For such a field $A$, write $A^\\circ=\\{x:|x|\\le1\\}$ for its valuation ring [def-trf-valuation-ring], $\\widetilde A=A^\\circ/\\{x:|x|<1\\}$ and $\\Gamma_A=|A^\\times|$. For a finite extension $B/A$ set $e(B/A)=[\\Gamma_B:\\Gamma_A]$, $f(B/A)=[\\widetilde B:\\widetilde A]$ and $d(B/A)=[B:A]/(e(B/A)f(B/A))$. Call it immediate if its value group and residue field equal those of $A$, unramified if $e=d=1$ and the residue extension is separable, and tame if $d=1$, its residue extension is separable and its ramification index is prime to the residue characteristic (with no index restriction in residue characteristic zero). A field extension is separable if every algebraic element has a minimal polynomial with distinct roots. Finite extensions of a complete field are complete for their extending absolute value, which is unique; their $e,f$ are finite positive integers. The three invariants $e,f,d$ are multiplicative in finite towers, and $d$ is a power of the positive residue characteristic; in residue characteristic zero $d=1$. Tame finite extensions are closed under composition, intermediate fields and base change to finite complete extensions (taking a field compositum). If $B/A$ is finite and $\\widetilde B/\\widetilde A$ is separable, there is an unramified intermediate field $A\\subseteq U\\subseteq B$ with $\\widetilde U=\\widetilde B$; unramified means the numerical and separability condition specified above. If $B/A$ is finite immediate and $A^\\prime/A$ is finite tame, then $BA^\\prime/A^\\prime$ is immediate and $[BA^\\prime:A^\\prime]=[B:A]$. Finally for a complete ground field $k$, passing from a complete extension $A/k$ to a finite extension $B/A$ (complete for the extending absolute value) preserves the transcendence degree of $\\widetilde A/\\widetilde k$ and the rational rank of $\\Gamma_A/\\Gamma_k$ (the transcendence degree of $\\widetilde B/\\widetilde k$ and the rational rank of $\\Gamma_B/\\Gamma_k$ equal them); if the former is zero and $\\widetilde k$ is algebraically closed then $\\widetilde B=\\widetilde A=\\widetilde k$, and a finite-index extension of the divisible group $\\Gamma_k$ inside $\\mathbf R_{>0}$ is still $\\Gamma_k$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§2.1, printed pp. 8–9, ramification discussion and Lemma 2.1.5; §6.2 opening, p. 41 (invariants unchanged by finite extension); immediate/tame base-change consequence of the same ramification calculus.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-trf-analytic-ramification"
+ ],
+ "proof": [
+  {
+   "text": "For every finite extension of $A$, the spectral-norm construction supplies an extending nonarchimedean absolute value. Uniqueness of the extending absolute value identifies it with the given one. Regarding the extension as a finite-dimensional normed $A$-space proves completeness. The complete field's valuation ring is henselian: apply the henselianity assertion of the completion-factors node to this field itself, whose completion is itself. Thus every ground field and every intermediate field to which Hensel lifting is applied below is complete and henselian.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-per-finite-normed-space-complete",
+    "lem-trf-separable-valued-completion-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, analytic fields are henselian; Proposition 2.2.1, completed-field preliminaries"
+   }
+  },
+  {
+   "text": "The fundamental inequality gives positive finite integers $e,f$ and $ef\\le[B:A]$, hence $d\\ge1$. In $A\\subset B\\subset C$, enumerate cosets of $\\Gamma_A$ in $\\Gamma_B$ and of $\\Gamma_B$ in $\\Gamma_C$; their products enumerate cosets of $\\Gamma_A$ in $\\Gamma_C$ exactly once. Products of bases for the two residue-field extensions form a basis for the composite extension, and products of bases for the two field extensions do likewise. Thus $e,f,[C:A]$ multiply, and division of these equalities proves multiplicativity of $d$.",
+   "uses": [
+    "lem-trf-valued-extension-degree-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, fundamental inequality preceding Lemma 2.1.2 and defect notation preceding Lemma 2.1.5"
+   }
+  },
+  {
+   "text": "First take a finite Galois extension $N/A$. The wild-kernel lemma supplies $T=N^P$ with $d(T/A)=1$, and $[N:T]=|P|$, $e(N/T)$ and $f(N/T)$ powers of $p$ when the residue characteristic is $p>0$. Thus $d(N/A)=d(N/T)$ is an integral power of $p$: its exponent is nonnegative by the fundamental inequality. In residue characteristic zero, $P=1$, so $T=N$ and the defect is one. For a finite separable $B/A$, put it inside such a Galois $N/A$. The same argument applies to $N/B$, which is also Galois by the intermediate-field Galois lemma. Dividing $d(N/A)$ by $d(N/B)$ and using $d(B/A)\\ge1$ proves the assertion for $B/A$.",
+   "uses": [
+    "lem-trf-galois-graded-wild-kernel",
+    "lem-trf-valued-extension-degree-bound",
+    "lem-dl-a1-galois-over-intermediate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, Lemma 2.1.5(iv), expanding the Galois wild-kernel input"
+   }
+  },
+  {
+   "text": "For arbitrary finite $B/A$, take its maximal separable subfield $S$. The separable-first theorem gives $B/S$ purely inseparable. In positive field characteristic the cited root tower gives $[B:S]=p^r$ and a common exponent $p^h$ with $x^{p^h}\\in S$ for every $x\\in B$. Consequently the finite group $\\Gamma_B/\\Gamma_S$ is a $p$-group and $\\widetilde B/\\widetilde S$ is finite purely inseparable, so both $e$ and $f$ are powers of $p$. Their product is at most $p^r$, proving that $d(B/S)$ is a nonnegative power of $p$. Multiply by the already proved $d(S/A)$. In field characteristic zero $S=B$; when the field characteristic is positive it equals the residue characteristic, so this covers all cases.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "lem-trf-valued-extension-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, Lemma 2.1.5(iv), inseparable case; Stacks fields.tex, separable/purely-inseparable factorization"
+   }
+  },
+  {
+   "text": "Suppose $\\widetilde B/\\widetilde A$ is separable. Choose a primitive element $\\bar b$ with monic minimal polynomial $\\bar g$ of degree $f$. Lift its coefficients to $A^\\circ$, obtaining monic $g$. In the henselian ring $B^\\circ$, the simple residue root $\\bar b$ lifts to $b$ satisfying $g(b)=0$. Put $U=A(b)$. Its residue field contains $\\widetilde A(\\bar b)=\\widetilde B$, and is contained in $\\widetilde B$, so they agree. On the other hand $[U:A]\\le\\deg g=f$. The fundamental inequality applied to $U/A$ forces $[U:A]=f$ and $e(U/A)=1$. Thus $d(U/A)=1$ and the residue extension is separable, as required. This includes $f=1$, where one may simply take $U=A$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-trf-valued-extension-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, proof of Lemma 2.1.5, first paragraph; direct simple-root realization of the residue lift"
+   }
+  },
+  {
+   "text": "In a tower of finite extensions, defects are positive integers by steps 3--4. If the composite has defect one, multiplicativity forces both defects to be one. Its ramification indices divide the composite index; a separable residue extension has separable intermediate and upper extensions. Hence intermediate fields of a tame extension, and the corresponding upper extensions, are tame. Conversely, if both successive extensions are tame, multiply $e,f,d$ and use transitivity of separability for $\\widetilde A\\subseteq\\widetilde B\\subseteq\\widetilde C$ from the separable-permanence lemma to see that the composite is tame. The prime-to-$p$ condition is preserved under products and divisors. These arguments also work for $p=0$, with that condition omitted.",
+   "uses": [
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, Lemma 2.1.5(iii), tower consequences of the numerical criterion"
+   }
+  },
+  {
+   "text": "Let $B/A$ be tame and $C/A$ finite. The root-envelope lemma puts $B$ inside $R=U(\\alpha_i)$, with $U^\\circ/A^\\circ$ finite etale, $\\alpha_i^{n_i}=a_i\\in U^\\times$, and $n_i$ prime to the residue characteristic. Base change the finite etale algebra to $C^\\circ$. The homomorphism to $(UC)^\\circ$ selects its local factor by the inverse image of the maximal ideal. The henselian valuation etale-factor lemma identifies that factor's fraction field with $UC$ and gives its valuation ring finite etale over $C^\\circ$. The same equations $\\alpha_i^{n_i}=a_i$ now have coefficients in $UC$, and its field still contains all the required roots of unity. The converse direction of the root-envelope lemma, over $C$, shows $RC/C$ is tame. Its intermediate field $BC/C$ is tame by step 6. Completeness of all fields used here is step 1; finiteness of the tensor algebra and its local factor is preserved by finite base change.",
+   "uses": [
+    "lem-trf-tame-root-envelope",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-trf-henselian-valuation-etale-local-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, maximal tame extension; Gabber--Ramero 6.2.14--6.2.18, finite root description and base change"
+   }
+  },
+  {
+   "text": "For the immediate base change, put $L=A'$ and choose $t_i\\in L^\\times$ representing $\\Gamma_L/\\Gamma_A$ and units $u_j\\in L^\\circ$ lifting a $\\widetilde A$-basis of $\\widetilde L$, including $1$. The $t_i u_j$ form an orthogonal $A$-basis: different $i$ have distinct value cosets; for fixed $i$, divide the coefficients by one of maximal absolute value and use residue independence to prevent cancellation. Their number is $ef=[L:A]$. If $B/A$ is immediate, the identical argument over $B$ works because $\\Gamma_B=\\Gamma_A$ and $\\widetilde B=\\widetilde A$. Thus they remain independent over $B$. Their $B$-span is the image of $B\\otimes_A L$, a finite-dimensional domain, hence a field and therefore $BL$; this proves $[BL:B]=[L:A]$ and by tower degrees $[BL:L]=[B:A]$. For each nonzero coefficient $b\\in B$, immediacy gives $a\\in A$ with $|b-a|<|b|$: match its value by an element of $A$ and then match its unit residue. Approximate all the finitely many coefficients in any $x\\in BL$ this way. Orthogonality gives $y\\in L$ with $|x-y|<|x|$. Hence $|x|=|y|$, and if $|x|=1$ then $x$ and $y$ have the same residue. It follows that $BL/L$ is immediate. The argument uses only defectlessness of $L/A$, already part of tameness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 2.1, orthogonal-basis characterization of Cartesian extensions immediately before Lemma 2.1.5; explicit immediate-base-change calculation"
+   }
+  },
+  {
+   "text": "For $k\\subset A\\subset B$, the residue extension $\\widetilde B/\\widetilde A$ is finite and algebraic by the degree bound, so a transcendence basis for $\\widetilde A/\\widetilde k$ is still one for $\\widetilde B/\\widetilde k$: independence is unchanged and algebraicity is transitive. The quotient $\\Gamma_B/\\Gamma_A$ is finite; tensoring the inclusions modulo $\\Gamma_k$ with $\\mathbf Q$ therefore gives an isomorphism. Explicitly, every class upstairs has a positive multiple downstairs, so its rational span is the same, and clearing denominators checks injectivity. This proves the two invariance assertions, in arbitrary cardinal dimension. If the residue transcendence degree is zero and $\\widetilde k$ algebraically closed, both residue fields are algebraic over $\\widetilde k$, hence equal it. Finally if a subgroup $D\\subset\\mathbf R_{>0}$ is divisible and $D\\subset H$ has finite index, each $h\\in H$ has $h^n\\in D$ for some $n>0$. Choose $d\\in D$ with $d^n=h^n$; injectivity of the positive real $n$-th power map gives $h=d$. Thus $H=D$.",
+   "uses": [
+    "lem-trf-valued-extension-degree-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "section 6.2, opening paragraph, invariance of E and F under finite extension; Remark 6.2.2 for divisible value groups"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-per-finite-normed-space-complete",
+  "lem-trf-separable-valued-completion-factors",
+  "lem-trf-valued-extension-degree-bound",
+  "lem-trf-galois-graded-wild-kernel",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-trf-tame-root-envelope",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-trf-henselian-valuation-etale-local-factors",
+  "lem-dl-a1-galois-over-intermediate",
+  "lem-zl-separable-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "section 2.1 and opening of section 6.2, read at https://arxiv.org/html/0707.3953v3; explicit assembly and immediate-base-change argument by Q157; local PDF missing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite extensions of complete nonarchimedean fields have finite ramification and residue degrees and prime power defect with unramified residue lifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Ideal.sum_ramification_inertia\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R]\\n  [inst_7 : Algebra R K] [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S\", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in a commutative ring $R$, with $B$ a Dedekind domain over $R$, and $\\\\mathfrak{P}_1, \\\\ldots, \\\\mathfrak{P}_n$ the prime ideals in $B$ lying over $\\\\mathfrak{p}$, the s\"}\n  {\"name\": \"Ideal.finrank_prime_pow_ramificationIdx\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  [IsDedekindDomain S],\\n  P ≠ ⊥ →\\n    ∀ [p.IsMaximal] [P.IsPrime] (he : Ideal.ramificationIdx (algebraMap R S) p P ≠ 0),\\n      Module.finrank (R ⧸ p) (S ⧸ P ^ Ideal.ramificationId\", \"doc\": \"There exists a canonical algebra structure from the quotient ring $ R/\\\\mathfrak{p} $ to the quotient ring $ S/\\\\mathfrak{P}^e $, where $ e $ is the ramification index of the prime ideal $ \\\\mathfrak{p} \"}\n  {\"name\": \"Ideal.Factors.finrank_pow_ramificationIdx\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] [p.IsMaximal]\\n  (P : ↥(UniqueFactorizationMonoid.factors (Ideal.map (algebraMap R S) p)).toFinset),\\n  Module.finrank (R ⧸ p) (S ⧸ ↑P ^ Ideal.ramificationIdx (alg\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. Then, the finite rank of the quotient ring $ S/P^{e} $ as a module over $ R/p\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame extensions of complete valued fields are defectless and preserve immediate extensions under base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Unramified R A] : Unramified B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.bot\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"[h₁ : IsUnramifiedAtInfinitePlaces k F] [Algebra.IsAlgebraic K F] : IsUnramifiedAtInfinitePlaces k K\", \"doc\": \"If a field extension $ F/k $ is unramified at all infinite places and $ K $ is an algebraic extension of $ F $, then the extension $ K/k $ is also unramified at all infinite places.\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}\n  {\"name\": \"Valued.extension\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": hat K → Γ₀\", \"doc\": \"The valuation $ v $ on a field $ K $ is extended to its uniform space completion $ \\\\hat{K} $ by defining $ \\\\hat{v} : \\\\hat{K} \\\\to \\\\Gamma_0 $ as the unique extension of $ v $ along the dense embedding $\"}\n  {\"name\": \"Valued.completable\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": CompletableTopField K\", \"doc\": \"A valued field $ K $ is completable with respect to its uniform structure induced by the valuation to a linearly ordered commutative group with zero.\"}\n  {\"name\": \"Valued.extensionValuation\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": Valuation (hat K) Γ₀\", \"doc\": \"The valuation $ v $ on a field $ K $ is extended to its uniform space completion $ \\\\hat{K} $ by defining $ \\\\hat{v} : \\\\hat{K} \\\\to \\\\Gamma_0 $ as the unique extension of $ v $ along the dense embedding $\"}\n  {\"name\": \"Valued.extensionValuation_apply_coe\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \"(x : K) : Valued.extensionValuation (x : hat K) = v x\", \"doc\": \"For any element $x$ in the field $K$, the extended valuation $\\\\hat{v}$ on the completion $\\\\hat{K}$ satisfies $\\\\hat{v}(x) = v(x)$, where $x$ is canonically embedded into $\\\\hat{K}$ and $v$ is the origin\"}\n  {\"name\": \"Algebra.IsAlgebraic.perfectField\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"{K L : Type*} [Field K] [Field L] [Algebra K L] [Algebra.IsAlgebraic K L] [PerfectField K] : PerfectField L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is an algebraic field extension of $ K $, then $ L $ is also a perfect field. This means that when every element of $ K $ has a $ p $-th root in $ K $ (for charac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Algebra.IsSeparable",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "defectless|unramified.*residue|tame.*extension|ramification.*defect",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"75\", \"text\": \"theorem IsUnramifiedAt.residueField\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"80\", \"text\": \"    IsUnramifiedAt P.ResidueField Q' := by\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"46\", \"text\": \"instance : FormallyUnramified S (ResidueField S) := .quotient _\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"49\", \"text\": \"    FormallyUnramified (ResidueField R) (ResidueField S) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"50\", \"text\": \"  have : FormallyUnramified R (ResidueField S) := .comp _ S _\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"74\", \"text\": \"  have : FormallyUnramified (ResidueField R) (S ⧸ mR) := .of_restrictScalars R _ _\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"77\", \"text\": \"  have : IsReduced (S ⧸ mR) := FormallyUnramified.isReduced_of_field (ResidueField R) (S ⧸ mR)\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"118\", \"text\": \"  have : IsUnramifiedAt P.ResidueField Q' := .residueField P Q _ (Q'.over_def Q)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicativity of defect and ramification index in towers of henselian valued fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdx_tower\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [IsDedekindDomain S] [IsDedekindDomain T] {f : R →+* S} {g : S →+* T} {p : Ideal R} {P : Ideal S} {Q : Ideal T}\\n  [hpm : P.IsPrime] [hqm : Q.IsPrime],\\n  Ideal.map g P ≠ ⊥ →\\n    Ideal.map \", \"doc\": \"Given Dedekind domains $R, S, T$ with ring homomorphisms $f : R \\\\to S$ and $g : S \\\\to T$, prime ideals $p \\\\subseteq R$, $P \\\\subseteq S$, and $Q \\\\subseteq T$ satisfying $\\\\text{map}(g, P) \\\\subseteq Q$ a\"}\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"Ideal.ramificationIdx_algebra_tower\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] [IsDedekindDomain S]\\n  [IsDedekindDomain T] {p : Ideal R} {P : Ideal S} {Q : Ideal T} [hpm : P.I\", \"doc\": \"In a tower of Dedekind domain extensions $ R \\\\subseteq S \\\\subseteq T $, if $ \\\\mathfrak{p} \\\\subseteq R $, $ \\\\mathfrak{P} \\\\subseteq S $, and $ \\\\mathfrak{Q} \\\\subseteq T $ are prime ideals with $ \\\\mathfra\"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"Ideal.Factors.finrank_pow_ramificationIdx\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] [p.IsMaximal]\\n  (P : ↥(UniqueFactorizationMonoid.factors (Ideal.map (algebraMap R S) p)).toFinset),\\n  Module.finrank (R ⧸ p) (S ⧸ ↑P ^ Ideal.ramificationIdx (alg\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. Then, the finite rank of the quotient ring $ S/P^{e} $ as a module over $ R/p\"}\n  {\"name\": \"Ideal.inertiaDeg_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\to S $ be a ring homomorphism, $ p $ a maximal ideal of $ R $, and $ P $ a prime ideal of $ S $ lying over $ p $. If $ p \\neq 0 $ and there are no zero divisors in the scalar multiplication fro\"}\n  {\"name\": \"Ideal.sum_ramification_inertia\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R]\\n  [inst_7 : Algebra R K] [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S\", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in a commutative ring $R$, with $B$ a Dedekind domain over $R$, and $\\\\mathfrak{P}_1, \\\\ldots, \\\\mathfrak{P}_n$ the prime ideals in $B$ lying over $\\\\mathfrak{p}$, the s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Dedekind rings, proper metric spaces, or unrelated algebra; none gives this complete valued-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extension complete valued field ramification residue degree defect tame base change",
+   "results": "{\"t\": \"2026-10-24T09:24:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finite extension complete valued field ramification residue degree defect tame base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.ramificationIdx_le_finrank\", \"Ideal.finrank_prime_pow_ramificationIdx\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Ideal.ramificationIdx_algebra_tower\", \"Ideal.Factors.finrank_pow_ramificationIdx\", \"Ideal.inertiaDeg_le_finrank\"], \"digest\": \"63d7c565a492fe78\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois ramification filtration for rank one henselian valued fields without discrete valuation",
+   "results": "{\"t\": \"2026-10-24T09:24:01Z\", \"tool\": \"leansearch\", \"query\": \"Galois ramification filtration for rank one henselian valued fields without discrete valuation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"Valuation.RankOne.recOn\", \"Field.Emb.Cardinal.filtration\", \"Field.Emb.Cardinal.filtration_apply\", \"Valuation.IsRankOneDiscrete.generator_mem_range\", \"Valuation.IsRankOneDiscrete.rec\", \"galBasis\", \"Valuation.IsRankOneDiscrete.generator_lt_one\"], \"digest\": \"8e9601e02961455f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, Module.finrank",
+   "results": "{\"t\": \"2026-10-24T09:27:49Z\", \"tool\": \"loogle\", \"query\": \"Valuation, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Valuation.pow_coeff_zero_ne_zero_of_unit\"], \"digest\": \"f8545c7d29675292\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "defectless|ramificationIdx_mul_inertiaDeg",
+   "results": "{\"t\": \"2026-10-24T09:27:49Z\", \"tool\": \"grep\", \"query\": \"defectless|ramificationIdx_mul_inertiaDeg\", \"sub\": \"NumberTheory/RamificationInertia\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Basic.lean\"], \"digest\": \"a6e5b449c16b1128\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valuation-subring inertia is only defined; the other results require Dedekind/discrete hypotheses or concern ring unramifiedness, not the asserted general valued-field theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-type23-stability",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, printed pp. 8–9, ramification discussion and Lemma 2.1.5; §6.2 opening, p. 41 (invariants unchanged by finite extension); immediate/tame base-change consequence of the same ramification calculus.",
+   "via": [
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valued-finite-ramification-calculus",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: imported completeness scope was missing; Q(sqrt(2))/Q inside Q_7 is immediate of degree 2 and defect 2, not a power of residue characteristic 7. Added completeness to all fields, as required by the analytic/henselian source and all current uses. Reused existing norm, completeness, degree-bound and henselian-root nodes. Two structural statement-only children expose the wild-kernel and tame radical inputs; the assembly proves the numerical and base-change clauses, including immediate persistence.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), existing semistable/Temkin auxiliary chain recorded in blueprint.from.place; finite ramification input for analytic-type23-stability. Latest blueprint proof now uses Varshavsky directly; no unit or chapter route changed in this auxiliary split.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "why": "Generic field/etale algebra tool used exactly as stated for the ramification calculation; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic field/etale algebra tool used exactly as stated for the ramification calculation; this unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-6cb99a838",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-6cb99a838 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, both new nodes and every cited statement in full. Statement change (item now says 'complete fields'): valid. In the 7-adic counterexample, 3^2=9≡2 (mod 7), so Q(sqrt2)/Q is immediate of degree 2 and its defect 2 is not a power of 7; the original statement was false. Temkin 0707.3953v3 Lemma 2.1.5 (read online at arxiv.org/html/0707.3953v3; the local PDF is absent) assumes henselian fields and gives (iii) the tame characterization and (iv) d a power of p. Every citer uses complete fields only (analytic-ramification-tower, analytic-type23-stability), so nothing they need is lost. Steps checked: 1 (henselianity from completion-factors applied with E=F); 3 (arithmetic of the p-power defect); 4 (separable part, then a p-power inseparable tail); 5 (Hensel lift, then e=d=1 by the fundamental inequality); 7 (local factor D_n of C°⊗U° identified with (UC)°, then the converse of the root envelope); 8 (orthogonal basis t_i u_j over B, giving immediacy and the degree); 9 (transcendence degree, rational rank, divisible group). Edge cases checked: trivial extension, p=0, mixed characteristic, a purely inseparable extension of degree p, the empty list of roots. Both new nodes are true for complete rank-one fields: the ramification-group theorem, and tame = unramified followed by prime-to-p roots. Neither restates a clause of the item. Duplicate searches over dag/nodes and a cycle check found nothing. Both tool_uses accepted (pth-root-tower, henselian-local-root-lifting from unit sk-thm-p1). Fixes: (C1) step 6 used transitivity of separability uncited, now cites lem-zl-separable-permanence; (C1) step 3 'N/B also Galois' now cites lem-dl-a1-galois-over-intermediate; both added to proof_deps; (B3) wild-kernel node now defines 'normal' inline.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteAnalyticRamification",
+  "declaration": "AnalyticRamification.finite_ramification_invariants",
+  "declarations": [
+   "AnalyticRamification.exists_unique_extending_absoluteValue",
+   "AnalyticRamification.finite_extension_complete",
+   "AnalyticRamification.finite_ramification_invariants",
+   "AnalyticRamification.finite_ramification_tower",
+   "AnalyticRamification.tame_compositum",
+   "AnalyticRamification.exists_unramified_residue_lift",
+   "AnalyticRamification.immediate_tame_compositum",
+   "AnalyticRamification.finite_extension_relative_invariants",
+   "AnalyticRamification.finite_index_divisible_values"
+  ],
+  "file": "lean/Sheaf/FieldTheory/FiniteAnalyticRamification.lean",
+  "statement": "theorem finite_ramification_invariants (K : Type u) (L : Type v) [NontriviallyNormedField K] [CompleteSpace K] [IsUltrametricDist K] [NontriviallyNormedField L] [IsUltrametricDist L] [NormedAlgebra K L] [FiniteDimensional K L] : Finite (values L ⧸ (values K).subgroupOf (values L)) ∧ @Module.Finite (residue K) (residue L) _ _ (residueAlgebra (algebraMap K L) (norm_algebraMap' L)).toModule ∧ 0 < ramificationIndex K L ∧ 0 < residueDegree K L ∧ (ringChar (residue K) = 0 → defect K L = 1) ∧ (ringChar (residue K) ≠ 0 → ∃ n : ℕ, defect K L = (ringChar (residue K) : ℚ) ^ n)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The nine declarations together state all clauses of this composite node. NormedAlgebra records exactly compatible absolute values; relative invariants are cardinal-valued and residue maps are canonical."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-774be3e3a",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read the item, the def-trf-analytic-ramification node and both modules. All 9 theorems match the node: extension/uniqueness/completeness, finite positive e and f with d a p-power (1 in characteristic 0), tower multiplicativity and tame iff both steps, tame compositum base change, unramified residue lift (IntermediateField with surjective residue map), immediate+tame compositum with [D:M]=[L:K], relative trdeg and rational rank with correct universe lifts, divisible subgroup of R>0 equality. Definitions are genuine: valuationSubring of nnnorm, ResidueField, units range, relIndex (= index of Γ_K∩Γ_L in Γ_L), rational defect; reuses AddCommGroup.rationalRank, Algebra.trdeg, Algebra.IsSeparable. No H4 duplicate (sibling analytic/valued nodes have lean null; comapResidueAlgebra has a different domain). The sorried integerMap_isLocalHom helper is owned in lean.declarations with a proof docstring. Item node vs side-live: only lean and the new stmt_dep changed. Statement verbatim; docstrings carry source, blueprint id and proof; no proofs; report sections present. No file changed, so no compile."
+ }
+}

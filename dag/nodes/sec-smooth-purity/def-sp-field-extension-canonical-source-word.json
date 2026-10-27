@@ -1,0 +1,117 @@
+{
+ "id": "def-sp-field-extension-canonical-source-word",
+ "kind": "definition",
+ "title": "Canonical scalar pullback, Tate tensor and shift word",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the global finite-field datum $P$, finite coefficient fields $E\\subset F$, a morphism $f:X\\to Y$ of schemes over its algebraic closure, and $d\\in\\mathbf N$. sourceFunctor is completed derived pullback followed by exact tensor with the signed Tate line $(d)$ and shift $[2d]$. pullbackScalar is the normalized ordinary scalar/pullback balancing comparison transported through the actual ordinary/completed scalar maps. sourceComponent is the canonical scalar/shift comparison followed by the ordinary Tate scalar comparison and the twisted pullback comparison. Its input is an arbitrary intrinsic bounded constructible integral object. It involves no purity map or exceptional functor. Built from [def-pur-conventions], [def-weil-derived-complete-integral-detailed], [def-weil-derived-pullback-tensor-hom], [def-coefficient-twists-detailed], [def-pur-shifted-tate-unit-scalar-data], [lem-weil-integral-twist-derived-scalar], [lem-weil-finite-free-completed-scalar-comparison].",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-pur-shifted-tate-unit-scalar-data",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), pullback/tensor comparison and units; (3), literal rational localization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structure (Laws|InvertibilityLaw)|SourceNormalization|sourceIdentification",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "Generic shift and sheaf tools only; reuse the published normalized source primitives and extract the laws."
+  },
+  {
+   "tool": "leansearch",
+   "query": "comparison laws of compact support coefficient towers normalized pullback twist shift source",
+   "results": "OK 8 hits: HasCompactSupport.norm, hasCompactSupport_norm_iff, CategoryTheory.TwistShiftData.shift_z_app, CochainComplex.isStrictlyGE_shift, TestFunction.coe_ofSupportedIn, CategoryTheory.TwistShiftData.shiftFunctor_map, CategoryTheory.NatTrans.commShiftPullback, TestFunction.coe_ofSupportedInLM",
+   "date": "2026-10-25",
+   "verdict": "Generic shift and sheaf tools only; reuse the published normalized source primitives and extract the laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical scalar pullback Tate twist shift comparison and normalized integral rational source identification",
+   "results": "OK 8 hits: CategoryTheory.pullbackShiftIso, CategoryTheory.Functor.commShiftPullback_iso_eq, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, CategoryTheory.pullbackShiftFunctorAdd'_hom_app, AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+   "date": "2026-10-25",
+   "verdict": "Generic shift and sheaf tools only; reuse the published normalized source primitives and extract the laws."
+  },
+  {
+   "tool": "grep",
+   "query": "field-shriek-system-laws|field-extension-source-normalization|field-extension-canonical-source in dag/nodes, lean/Sheaf and lean/WeilConjectures; AdicOperationSource.sourceComponent|SourceNormalized|FieldShriekSystem.Laws in dag/nodes",
+   "results": "No new IDs or SourceNormalization found. Laws and InvertibilityLaw occur only in FieldShriekSystemComparison. AdicOperationSource.sourceComponent is recorded among the helpers of lem-pur-adic-operation-domains-source-comparison. RealizedTowerPurity.SourceNormalized gives the finite-Tor exact-twist representative formula, which is reused with the full constructible domain here.",
+   "date": "2026-10-25",
+   "verdict": "Move the existing laws verbatim; reuse the existing canonical source word; add only its missing full-domain source normalization."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "field extension",
+   "results": "65 field-extension references including the present blueprint unit and its scalar/shriek-system prerequisites; no separate source-normalization or shriek-law definition node.",
+   "date": "2026-10-25",
+   "verdict": "These are definition owners and coordinates, without any new existence assertion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-field-extension-towers",
+  "date": "2026-10-25",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2)--(3), canonical source comparison and localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.AdicOperationDomainsSourceComparison",
+  "declaration": "WeilConjectures.AdicOperationSource.sourceComponent",
+  "declarations": [
+   "WeilConjectures.AdicOperationSource.sourceComponent",
+   "WeilConjectures.AdicOperationSource.sourceFunctor",
+   "WeilConjectures.AdicOperationSource.pullbackScalar"
+  ],
+  "statement": "def sourceComponent (d : ℕ)\n    (K : sfIntegralConstructibleCategory P.coefficients.l E Y) :\n    (completedDerivedScalarExtension P.coefficients.l E F ι X).obj\n        ((sourceFunctor P E f d).obj K.obj) ≅\n      (sourceFunctor P F f d).obj\n        ((completedDerivedScalarExtension P.coefficients.l E F ι Y).obj K.obj)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-25",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c8eb57fe",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c8eb57fe",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after the 256e8a LAND refusal for duplicate InvertibilityLaw/Laws/iso. diff -r against the PASSed 256e8a snapshot: only the extracted FieldShriekSystemLaws.lean and the replacement FieldShriekSystemComparison.lean are dropped, IntegralModels now imports the published Sheaf.Paper.FieldShriekSystemComparison, and def-sp-field-shriek-system-laws is existing:true on that module (verbatim Laws signature, lines 63-64; statement matches the published defs; stmt_deps models/normalized/mixed/coherence all in live). No delivered module redeclares the names. The item cites the def owner, not the theorem (H2 ok; existing:true def-owner precedent). The other 11 modules and records are byte-identical to the reviewed head. The item record differs from live only in lean and added stmt_deps; the new IDs and modules are absent from live. Re-checked the hypotheses, clauses (1)-(3), the source/strict-limit/purity pinning and the edge cases. Single sorry. Advisory: H11 same-worker second reading; transitive-only scalar citations; theorem record also lists the law names. No compile run (no change); the report's last OK dry run predates the ownership repair, and the landing compiles it again."
+ }
+}

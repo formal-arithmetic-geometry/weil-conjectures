@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-adequate-base-change-affinization",
+ "kind": "statement",
+ "title": "Adequate affinization after arbitrary base change",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\phi:\\mathcal X\\to Y$ be an adequate moduli space [def-sfb-adequate-moduli-space], and let $g:T\\to Y$ be any morphism of algebraic spaces over $k$ [def-trf-algebraic-space]. Put $\\mathcal X_T=\\mathcal X\\times_YT$ and let $f:\\mathcal X_T\\to T$ be the projection. Use the structure sheaves and direct images of [def-sfb-stack-quasi-coherent-algebra], the relative spectrum of [lem-sfb-space-relative-spec-correspondence], and the point spaces of [lem-sfb-smooth-presentation-closed-subsets]. Then $\\mathcal B=f_*\\mathcal O_{\\mathcal X_T}$ is a quasi-coherent $\\mathcal O_T$-algebra. The structural map $\\mathcal O_T\\to\\mathcal B$ defines an affine morphism $h:H=\\operatorname{Spec}_T\\mathcal B\\to T$, and there is a canonical factorization $f=h\\circ a$ with $a:\\mathcal X_T\\to H$ an adequate moduli space. The map $h$ is a universal homeomorphism: for every algebraic-space morphism $T'\\to T$, the induced map $|H\\times_TT'|\\to|T'|$ is a homeomorphism. No flatness, finite-type, Noetherian or diagonal-separation hypothesis on $g$, $T$, or $\\mathcal X$ is imposed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Proposition 5.2.9(3), printed p.509; its adequate homeomorphism implies the stated universal-homeomorphism property by Definition 3.3.1; published primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-smooth-presentation-closed-subsets"
+ ],
+ "proof": [
+  {
+   "text": "The $2$-fibre product $\\mathcal X_T$ is algebraic by [lem-sfb-algebraic-stack-fibre-products]. The adequate-moduli hypothesis includes that $\\phi$ is quasi-compact and quasi-separated. These properties persist under arbitrary base change by [lem-sfb-stack-etale-local-qcqs-homeomorphism], so $f$ is quasi-compact and quasi-separated. Apply [lem-sfb-stack-qcqs-algebra-direct-image] to $f$ and its structure algebra: its smooth-test formula restricts on etale tests exactly to the direct image used in the statement. Thus $\\mathcal B=f_*\\mathcal O_{\\mathcal X_T}$ is quasi-coherent. By [lem-sfb-space-relative-spec-correspondence] it defines the affine space $h:H=\\operatorname{Spec}_T\\mathcal B\\to T$. On each affine etale $W\\to T$, put $D_W=\\Gamma(\\mathcal X_W,\\mathcal O)$. That correspondence identifies $H_W$ with $\\operatorname{Spec}D_W$ and identifies its structural ring map with pullback of functions from $W$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-adequate-moduli-space",
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(3), relative-Spec construction; Stacks Tags 04T2, 050V, 050F, 077A, 0GQQ, 081V, 081W; primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Choose affine etale charts $Y_i\\to Y$. Pull them back to $T$ and choose affine etale charts $W\\to T\\times_Y Y_i$; their composites form a jointly surjective etale family over $T$. Existence and preservation of these covers are [lem-a1-space-affine-etale-cover] and [lem-trf-space-fibre-products-etale-covers]. Each $W$ has a specified map to the affine scheme $Y_i$. By [lem-sfb-adequate-moduli-etale-locality], $\\phi_i:\\mathcal X_i\\to Y_i$ is adequate. Its affine global criterion and [lem-sfb-affine-target-adequacy-criterion] show that $\\phi_i$ is adequately affine. Apply [lem-sfb-adequately-affine-affine-target-base-change] to $\\phi_i$ and $W\\to Y_i$. It gives adequate affineness of $f_W:\\mathcal X_W\\to W$ for every such $W$. Its global power-lifting criterion therefore holds for all quasi-coherent algebra surjections on $\\mathcal X_W$, by [lem-sfb-affine-target-adequacy-criterion].",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-affine-target-adequacy-criterion",
+    "lem-sfb-adequately-affine-affine-target-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(3), first sentence of proof; Proposition 4.2.1(6), Remark 4.1.3 and Lemma 4.1.8(3); Stacks 03FX, 02X2, 041F; primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For a chart $W$ from step 2, the structural map $\\mathcal X_W\\to\\operatorname{Spec}k$ is quasi-compact and quasi-separated: compose the morphism $f_W$ from step 1 with the affine map $W\\to\\operatorname{Spec}k$, using [lem-sfb-stack-qcqs-composition-affine]. Thus [lem-sfb-stack-affinization-qcqs] supplies the canonical quasi-compact quasi-separated map $c_W:\\mathcal X_W\\to\\operatorname{Spec}D_W=H_W$. Its map on global functions is $\\mathrm{id}_{D_W}$. The composites to $W$ coincide with $f_W$: on every scheme object of $\\mathcal X_W$ both correspond to the structural pullback of functions from $W$, so the affine-target correspondence [lem-weil-pbc-morphism-into-affine-scheme] identifies them. Hence $c_W$ is a factorization over $W$.",
+   "uses": [
+    "lem-sfb-stack-qcqs-composition-affine",
+    "lem-sfb-stack-affinization-qcqs",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Remark 5.1.2, the canonical affinization morphism; Stacks 075S, 01I1; primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "These maps glue canonically. Indeed refine each overlap $W\\times_TW'$ by affine etale schemes $V$. The algebra map $D_W\\to D_V$ is restriction of compatible structure sections. Consequently $c_W|_{\\mathcal X_V}$ and the composite of $c_V$ with $H_V\\to H_W$ give exactly the same map $D_W\\to\\Gamma(P,\\mathcal O_P)$ on every scheme object $P\\to\\mathcal X_V$. By [lem-weil-pbc-morphism-into-affine-scheme] they agree on that object. The same calculation with $W'$ proves agreement as maps to $H$. On an arbitrary scheme object $P\\to\\mathcal X_T$, these maps over the etale cover $P\\times_T W$ therefore glue uniquely to a map $P\\to H$, because an algebraic space is an etale sheaf [def-trf-algebraic-space]. The glued maps commute with every arrow of scheme objects, by uniqueness, and so define a morphism $a:\\mathcal X_T\\to H$. The equalities over $W$ show $ha=f$. The formula on scheme objects makes the factorization independent of the chosen covers.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-stack-affinization-qcqs",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Remark 5.1.2, construction of the natural relative-Spec morphism, with the overlap equality written out; Stacks 081V, 081W, 01I1; primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For each $W$, step 2 gives the global power-lifting property on $\\mathcal X_W$; step 3 gives that $c_W$ is quasi-compact and quasi-separated and that $D_W\\to\\Gamma(\\mathcal X_W,\\mathcal O)$ is the identity. The affine criterion of [lem-sfb-adequate-moduli-etale-locality] therefore shows that $c_W$ is an adequate moduli space. The maps $H_W=H\\times_TW\\to H$ form a jointly surjective etale cover, and $a\\times_HH_W$ identifies with $c_W$, since $a$ is over $T$. By [lem-sfb-stack-etale-local-qcqs-homeomorphism], $a$ is quasi-compact and quasi-separated. Now apply the etale-local equivalence of [lem-sfb-adequate-moduli-etale-locality] to $a$ and the cover $(H_W\\to H)$: $a$ is an adequate moduli space. This application first establishes the qcqs hypothesis required by that equivalence.",
+   "uses": [
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(3), adequacy of the canonical relative affinization; Remark 5.1.2 and Lemma 4.1.8(3); primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix one lifted chart $W=\\operatorname{Spec}C\\to Y_i=\\operatorname{Spec}R$ from step 2. The projection $q:\\mathcal X_W\\to\\mathcal X_i$ is affine, by the final clause of [lem-sfb-stack-affine-algebra-direct-image]. On every smooth scheme chart $P\\to\\mathcal X_i$, its base change is $P\\times_{\\operatorname{Spec}R}\\operatorname{Spec}C\\to P$. Ordinary affine pushforward of its structure algebra is $\\mathcal O_P\\otimes_R C$. The chart characterization in the same node thus identifies $q_{\\mathrm{QCoh},*}\\mathcal O_{\\mathcal X_W}$ with $\\mathcal O_{\\mathcal X_i}\\otimes_R C$. Its global-section isomorphism gives\n$$D_W=\\Gamma(\\mathcal X_W,\\mathcal O)\\cong\\Gamma(\\mathcal X_i,\\mathcal O_{\\mathcal X_i}\\otimes_R C).$$\nUnder this identification the map $C\\to D_W$ defining $h_W$ sends $c$ to the compatible sections $1\\otimes c$, because both are pullback of the regular function $c$ from $W$. This identifies the actual structural map, not merely its source and target rings.",
+   "uses": [
+    "lem-sfb-stack-affine-algebra-direct-image",
+    "lem-sfb-space-relative-spec-correspondence",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(3), identification of the algebra adjunction unit with the affine-base-change structure map; Stacks 0GQY, 081V; primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adequate-algebra-unit-power-kernel] to the adequate space $\\phi_i:\\mathcal X_i\\to\\operatorname{Spec}R$ and the $R$-algebra $C$ of step 6. For every commutative $C$-algebra $C'$ the map $C'\\to C'\\otimes_C D_W$ has nilpotent kernel and a positive power of every target element in its image, so [lem-pur-all-element-powers-spectrum-homeomorphism] makes $|\\operatorname{Spec}(C'\\otimes_C D_W)|\\to|\\operatorname{Spec}C'|$ a homeomorphism. By the arbitrary-base-change clause of [lem-sfb-space-relative-spec-correspondence] this is the base change of $h_W$ along $\\operatorname{Spec}C'\\to W$. Hence, componentwise, $|H_W\\times_WV|\\to|V|$ is a homeomorphism for every scheme $V\\to W$ that is a disjoint union of affine schemes. Now let $\\mathcal T\\to W$ be any algebraic stack and $p:\\mathcal T_H=H_W\\times_W\\mathcal T\\to\\mathcal T$; all fibre products here are algebraic by [lem-sfb-algebraic-stack-fibre-products]. Choose a smooth surjective scheme atlas $V\\to\\mathcal T$ [def-sfb-algebraic-moduli-stack], refined so that $V$ is a disjoint union of affine schemes; its base change $V_H=H_W\\times_WV\\to\\mathcal T_H$ is again a smooth surjective atlas. By [lem-sfb-smooth-presentation-closed-subsets], $|p|$ is continuous, $|V|\\to|\\mathcal T|$ and $|V_H|\\to|\\mathcal T_H|$ are open surjections inducing the quotient topologies, the fibres of $|V|\\to|\\mathcal T|$ are the classes given by $|R|$ with $R=V\\times_{\\mathcal T}V$, and points of $2$-fibre products surject onto fibre products of point sets. Surjectivity: a point $\\tau\\in|\\mathcal T|$ lifts to $v\\in|V|$, and the point of $|V_H|$ over $v$ maps to a point over $\\tau$. Injectivity: let $z_1,z_2\\in|\\mathcal T_H|$ lie over $\\tau$; lift them to $e_1,e_2\\in|V_H|$ lying over $v_1,v_2\\in|V|$. Since $v_1,v_2$ lie over $\\tau$, some $r\\in|R|$ has $s(r)=v_1$, $t(r)=v_2$, and some point of $|H_W\\times_WR|$ lies over $r$. Its images under the two projections to $|V_H|$ lie over $v_1$ and $v_2$, hence equal $e_1$ and $e_2$, because the fibres of $|V_H|\\to|V|$ are singletons; the two composites $H_W\\times_WR\\to\\mathcal T_H$ are $2$-isomorphic, so $z_1=z_2$. Closedness: for closed $Z\\subseteq|\\mathcal T_H|$ its inverse image in $|V_H|$ is closed, so its image in $|V|$ is closed; by the bijectivity just shown this image is the inverse image of $|p|(Z)$, which is therefore closed in the quotient topology. Thus $|p|$ is a continuous closed bijection, a homeomorphism, for every $\\mathcal T$: $h_W$ is a universal homeomorphism in the sense of [lem-sfb-stack-etale-local-qcqs-homeomorphism]. No non-flat section-base-change isomorphism is asserted: the tensor extension here is the base change of the already constructed affine space $H_W$.",
+   "uses": [
+    "lem-sfb-adequate-algebra-unit-power-kernel",
+    "lem-pur-all-element-powers-spectrum-homeomorphism",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(3), last two sentences of proof; Lemma 5.2.6, Definition 3.3.1, Proposition 3.3.5; Stacks 0BR8, 081V, 0DTQ; primary published PDF read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "The family $(W\\to T)$ is jointly surjective and etale, and step 7 proves that every $h_W:H_W\\to W$ is a universal homeomorphism. By [lem-sfb-stack-etale-local-qcqs-homeomorphism], $h$ is a universal homeomorphism. Its base change by every algebraic-space morphism $T'\\to T$ therefore induces the required homeomorphism of point spaces. Together with steps 1, 4 and 5, this proves every clause of the item. The construction used only arbitrary-base-change stability of qcqs, adequate affineness over affine targets, and tensor extensions in the algebra-unit lemma; there was no flatness, finite-type, Noetherian or absolute diagonal-separation restriction.",
+   "uses": [
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Proposition 5.2.9(3), etale-local descent of the asserted universal-homeomorphism property; Stacks 0DTQ, 0CI8; primary published PDF read online, local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-adequate-moduli-space",
+  "lem-sfb-stack-etale-local-qcqs-homeomorphism",
+  "lem-sfb-stack-qcqs-algebra-direct-image",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-adequate-moduli-etale-locality",
+  "lem-sfb-affine-target-adequacy-criterion",
+  "lem-sfb-adequately-affine-affine-target-base-change",
+  "lem-sfb-stack-qcqs-composition-affine",
+  "lem-sfb-stack-affinization-qcqs",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-affine-algebra-direct-image",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-adequate-algebra-unit-power-kernel",
+  "lem-pur-all-element-powers-spectrum-homeomorphism",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-smooth-presentation-closed-subsets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Assembly following the published Proposition 5.2.9(3), with affine-chart and adjunction identifications expanded. Primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary base change of an adequate moduli space factors through an adequate moduli space followed by an integral universal homeomorphism",
+   "results": "{\"t\": \"2026-10-23T11:51:34Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary base change of an adequate moduli space factors through an adequate moduli space followed by an integral universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\"], \"digest\": \"77af65fa71acfa2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affinization of any base change of an adequate moduli space is an integral universal homeomorphism of the new base",
+   "results": "{\"t\": \"2026-10-23T11:53:28Z\", \"tool\": \"leanfinder\", \"query\": \"The affinization of any base change of an adequate moduli space is an integral universal homeomorphism of the new base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"e81a5e59bf8f4d01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T11:53:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"UniversallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderComposition\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"8b3682762c602207\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|adequateHomeomorphism",
+   "results": "{\"t\": \"2026-10-23T11:53:22Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|adequateHomeomorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of an adequate moduli morphism factors through the spectrum of its direct image structure algebra by an integral universal homeomorphism",
+   "results": "{\"t\": \"2026-10-23T11:53:22Z\", \"tool\": \"leansearch\", \"query\": \"Base change of an adequate moduli morphism factors through the spectrum of its direct image structure algebra by an integral universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.isBaseChange\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\"], \"digest\": \"e5eaaa67dd476b83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the actual hits concern schemes, affine spectra or integral scheme morphisms; none states the adequate-moduli factorization for algebraic stacks or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After any algebraic space base change an adequate moduli space factors canonically through an adequate moduli space and an affine universal homeomorphism",
+   "results": "{\"t\": \"2026-10-23T13:00:18Z\", \"tool\": \"leanfinder\", \"query\": \"After any algebraic space base change an adequate moduli space factors canonically through an adequate moduli space and an affine universal homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.HasAffineProperty\", \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"af8870c285a32939\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme or module adjunctions, formal unramifiedness, affine spectra, or general descent; none asserts the power and nilpotent-kernel property for an adequate moduli space. The adequate-name searches return no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-moduli-universal-closed-topology",
+  "date": "2026-10-23",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Proposition 5.2.9(3), replacing the invalid citation of the downstream topological-images node.",
+   "via": [
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-base-change-affinization",
+  "worker": "stage1",
+  "summary": "Preserved the statement; wrote the canonical factorization and adequate-moduli argument on affine etale charts and the universal-homeomorphism argument via the actual algebra unit. Reused existing qcqs, adequate-affine and spectrum results; created only the missing algebra adjunction power/kernel input (Alper 5.2.6). No Lean declaration states the item. Local Alper PDF is WANTED, so the assembly is agent-origin.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/GIT prerequisite chain. The latest direct-images proof (3) only states the proper/open preservation reduction and has no explicit adequate-moduli assertion; this is a supporting lower-level topology calculation, not a replacement of a unit step. Blueprint searches for adequate, affinization, universally adequate, adequately affine, algebra adjunction, power kernel, power-lifting and nilpotent kernel found no matching imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "steps 2 and 4 take only the existence of affine etale scheme charts of an algebraic space; generic algebraic-space foundation, no node of sk-thm-sf-ctf-stability states it"
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "steps 2, 4 and 5 take only that fibre products of algebraic spaces exist and that base changes of jointly surjective etale families are jointly surjective etale; generic foundation, not part of the trace-formula argument"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-862fa24b6",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-862fa24b6 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-sfb-adequate-algebra-unit-power-kernel and the statements of all 20 cited nodes. The statement keeps Alper Prop. 5.2.9(3) in its topological form; the Alper PDF is not stored locally and the worker filed it as WANTED, so proof_origin=agent is correct. One fault, C2/E5, in step 7: the old text treated only algebraic-space base changes and then appealed to the target-locality clause of lem-sfb-stack-etale-local-qcqs-homeomorphism. That clause works with base changes by algebraic stacks and already needs universal homeomorphisms on the pieces, so the step was circular and never covered stack base changes. FIX: I rewrote step 7 to give the homeomorphism over disjoint unions of affine schemes, then for any stack T over W used a smooth atlas V and R=VxV to prove surjectivity, injectivity and closedness. The new text cites lem-sfb-smooth-presentation-closed-subsets, def-sfb-algebraic-moduli-stack and lem-sfb-algebraic-stack-fibre-products, and proof_deps is updated. Steps 1-6 and 8 check out against the cited statements. The qcqs property of a is proved before adequacy locality is applied; the base change X_i x_{Y_i} W equals X_W; D_W = Gamma(X_i, O tensor_R C) holds by the affine pushforward node; step 4 is a correct elementary gluing. The new node is true (Alper Lemma 5.2.6 with Prop. 3.3.5 and Remark 3.3.2). It carries the statement only, its searches have real tool-log records, and it is not a duplicate of the adequate-algebra-pushforward, relative-spectrum, global-power-lifting or flat-base-change nodes. It is the algebraic core over an affine target, not a restatement of the item. Tests: identity, empty stack, F_p[z] to F_p[x] with z to x^p, and a field base (gives D nonzero, as the parent needs). Batch-5 check: every listed trf/a1/sfb citation is a generic definition or foundation lemma for algebraic spaces and stacks, not a step of the trace formula or of Poincare duality, so none needs the assumption leaf. I accepted lem-a1-space-affine-etale-cover and lem-trf-space-fibre-products-etale-covers as tool uses and declared them in split_report.tool_uses. No SGA citation, no cycle, statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateBaseChangeAffinization",
+  "declaration": "CategoryTheory.adequate_base_change_affinization",
+  "declarations": [
+   "CategoryTheory.adequateBaseChangeCategory",
+   "CategoryTheory.adequateBaseChangeProjection",
+   "CategoryTheory.adequate_base_change_affinization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateBaseChangeAffinization.lean",
+  "statement": "theorem adequate_base_change_affinization {k : Type u} [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (Y T : AlgebraicSpace (Spec (.of k))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace F hF Y φ) (g : T ⟶ Y) : ∃ (hFT : IsAlgebraicModuliStack (adequateBaseChangeCategory φ g)) (B : T.QCAlg) (e : ∀ W : T.EtaleSite, B.obj.right.obj.obj (op W) ≃+* (moduliDirectImage hFT.1.1 T (adequateBaseChangeProjection φ g) (moduliStructureSheaf (adequateBaseChangeCategory φ g) hFT.1.1)).obj.obj (op W)), (∀ (W V : T.EtaleSite) (j : W ⟶ V) (s : B.obj.right.obj.obj (op V)), e W (B.obj.right.obj.map j.op s) = (moduliDirectImage hFT.1.1 T (adequateBaseChangeProjection φ g) (moduliStructureSheaf (adequateBaseChangeCategory φ g) hFT.1.1)).obj.map j.op (e V s)) ∧ (∀ (W : T.EtaleSite) (s : Scheme.Γ.obj (op (T.etaleForget.obj W))), e W (B.obj.hom.hom.app (op W) s) = moduliStructureMapApp hFT.1.1 T (adequateBaseChangeProjection φ g) W s) ∧ ∃ (C : RelativeSpecData T), C.HasChartFormula ∧ ∃ a : BasedFunctor (adequateBaseChangeCategory φ g) (discreteModuli (C.relativeSpec B).obj.left.obj.obj), Nonempty (ModuliTwoIso (a.comp (discreteModuliMap (C.relativeSpec B).obj.hom.hom.hom)) (adequateBaseChangeProjection φ g)) ∧ IsAdequateModuliSpace (adequateBaseChangeCategory φ g) hFT (C.relativeSpec B).obj.left a ∧ (∀ (T' : AlgebraicSpace (Spec (.of k))) (t : T' ⟶ T), @IsHomeomorph _ _ (moduliSmoothPointTopology (moduliTwoFiberProduct (discreteModuliMap (C.relativeSpec B).obj.hom.hom.hom) (discreteModuliMap t.hom.hom))) (moduliSmoothPointTopology (discreteModuli T'.obj.obj)) (moduliPointMap (moduliTwoFiberSnd (discreteModuliMap (C.relativeSpec B).obj.hom.hom.hom) (discreteModuliMap t.hom.hom)))) ∧ ∀ (W : T.EtaleSite) (q : ModuleChart (C.relativeSpec B).obj.hom W) (i : ModuliPushforwardIndex T (adequateBaseChangeProjection φ g) W) (r : ModuliPushforwardIndex (C.relativeSpec B).obj.left a q.left) (b : i.left ⟶ r.left), (moduliSchemeForget (adequateBaseChangeCategory φ g)).map b ≫ moduliChartSchemeMap (C.relativeSpec B).obj.left a q.left r ≫ q.hom.left.left = moduliChartSchemeMap T (adequateBaseChangeProjection φ g) W i → ∀ s : B.obj.right.obj.obj (op W), (e W s).1 (op i) = ULift.up ((Scheme.Γ.map ((moduliSchemeForget (adequateBaseChangeCategory φ g)).map b ≫ moduliChartSchemeMap (C.relativeSpec B).obj.left a q.left r).op) (((C.directImage (C.relativeSpec B)).projection W q) (((C.counitAlgebra B).hom.right.hom.app (op W)) s)))",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two abbreviations are the actual 2-fibre product and projection. The direct-image ring sheaf is identified with a small-universe QCAlg by chart ring equivalences preserving restriction and the structural map. The relative-Spec counit and chart projections normalize the canonical factorization on all scheme objects. Universal homeomorphism uses the recorded smooth point topology on actual 2-base changes; no extra hypothesis on g is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d226e2ff3",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Every clause matches the node and Alper Prop 5.2.9(3). Hypotheses: phi is IsAdequateModuliSpace exactly; g is arbitrary with no extra binders; universes u/v/w are independent. Base change: the abbrevs are the existing moduliTwoFiberProduct/Snd (moduliSpaceBaseChange only covers étale charts, so no duplicate). B: a QCAlg with ring equivalences to moduliDirectImage that commute with restriction and moduliStructureMapApp, so it is the actual algebra. H: relativeSpec through the dependency's own ∃ C with HasChartFormula; AffineOver gives affine h. f = h∘a via ModuliTwoIso into a discrete target; a is IsAdequateModuliSpace. The final section equation pins a's map on functions (q = H×_T W charts are affine, i/r/b exist fppf-locally), so it is not vacuous. Universal homeomorphism: for all algebraic spaces T' and t, IsHomeomorph of moduliPointMap with moduliSmoothPointTopology. lean.statement is verbatim in the file. No hollow definitions, only sorry. Docstrings have source, blueprint and 8 proof steps. Plain imports are proof-dependency modules. The node differs from live only in the lean field. Report has the Worker report and Second reading by Q17 sections (second reading by the same worker, stated openly). Not recompiled (no change); worker's scompile was clean. Advisory: no copyright header."
+ }
+}

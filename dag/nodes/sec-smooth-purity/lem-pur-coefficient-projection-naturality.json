@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-coefficient-projection-naturality",
+ "kind": "statement",
+ "title": "Naturality of inverse coefficient-first bundle projections",
+ "statement": "Let l be prime, E a finite extension of Q_l, n natural, A the coefficient quotient at level n+1, and S Noetherian with l invertible. Let r≤s with both prime powers killing A, F a rank d vector bundle and K any ordinary etale derived A-complex. Let D and Dprime be IntegrationTransposeData at r and s as in [def-pur-integration-exponent-transport-data]. Write j:W_s→W_r for integrationVectorTransition.hom and i:J_s→J_r for integrationTensorTransition.hom, with i=identity on the pulled-back K tensor j. Then F_e(i) followed by D.data.pe.hom equals Dprime.data.pe.hom followed by tensor(K,F_e(j)). Likewise F_p(C(i)) followed by D.data.pp.hom equals Dprime.data.pp.hom followed by tensor(C(K),F_p(C(j))). Both pe and pp are the actual inverse coefficient-first projections fixed by ordinary_projection and pro_projection. No trace, coefficient integration, transpose or inverse-purity equation is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 8 and 11: naturality of the canonical coefficient-first projection and cancellation of its inverse. Blueprint paragraph 1, projection formula defining integration for each K; Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints."
+ },
+ "stmt_deps": [
+  "def-pur-integration-exponent-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the ordinary compact-support projection in W gives P_s followed by F_e(i) = tensor(K,F_e(j)) followed by P_r. The two coefficient-first signed symmetries preserve this square by their own naturality. Identify P_r and P_s with the inverses of D.pe and Dprime.pe, then multiply by those isomorphisms on the left and right. This is the first displayed equation. On the pro-etale site apply the same naturality to moduleProjection and use naturality of tensorPullbackComparison to pass to comparedModuleProjection. pro_projection identifies D.pp.inv and Dprime.pp.inv; invert that square in exactly the same way.",
+   "uses": [
+    "def-pur-finite-site-tensor-projection",
+    "def-pur-vector-tensor-site-equations",
+    "def-pur-integration-exponent-transport-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-site-tensor-projection",
+  "def-pur-vector-tensor-site-equations",
+  "def-pur-integration-exponent-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Accepted parent proof Steps 8 and 11: naturality of the canonical coefficient-first projection and cancellation of its inverse. Blueprint paragraph 1, projection formula defining integration for each K; Stacks categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of integration under a morphism of finite Tate lines, inverse projection formula, and adjunction transpose",
+   "results": "8 hits, including TopCat.Presheaf.pushforwardToOfIso, ContinuousLinearMap.integral_id_map, Module.Dual.transpose and transpose_dualTensorHom. None states finite-site coefficient integration transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv, homEquiv_unit, homEquiv_counit. These supply generic Hom calculus but not the geometric root-transition equations or their coefficient integration data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*[Ee]xponent|[Ee]xponent.*[Cc]ounit|[Tt]ensor.*[Ii]ntegrat",
+   "results": "0 hits in Mathlib. Local Sheaf search finds vectorTensorComparison and vectorExponentIndependence in VectorIntegrationSiteComparison; they are reused through separate acyclic statement records.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegrationExponentTransposeTransport",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Proof, inverse diagonal identification: root-normalized vector-bundle integration at the normal-bundle endpoint; Vector trace transport implies naturality of coefficient integration",
+   "via": [
+    "lem-pur-integration-exponent-transpose-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegrationCoefficientProjectionNaturality",
+  "file": "lean/Sheaf/Paper/IntegrationCoefficientProjectionNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.integrationCoefficientProjectionNaturality",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "statement": "theorem integrationCoefficientProjectionNaturality (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (l : Γ(S, ⊤))) (r s : ℕ) (hrs : r ≤ s)\n    (hr : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (hs : ((l ^ (s + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (K : Etale.DerivedCategoryModule (Scheme.finiteTateCoefficient l E n) S)\n    (D : IntegrationTransposeData (Scheme.finiteTateCoefficient l E n)\n      (l ^ (r + 1)) (pow_pos (Fact.out : l.Prime).pos _) hr S\n      (by simpa only [Nat.cast_pow] using hS.pow (r + 1)) d F K\n      (vectorIntegration l E n S r hr d F hS) (vectorSite l E n S r hr d F hS))\n    (D' : IntegrationTransposeData (Scheme.finiteTateCoefficient l E n)\n      (l ^ (s + 1)) (pow_pos (Fact.out : l.Prime).pos _) hs S\n      (by simpa only [Nat.cast_pow] using hS.pow (s + 1)) d F K\n      (vectorIntegration l E n S s hs d F hS) (vectorSite l E n S s hs d F hS))\n    :\n    (integrationLower (Scheme.finiteTateCoefficient l E n) S d F).map\n      (integrationTensorTransition l E n S hS r s hrs hr hs d F K).hom ≫\n        D.data.pe.hom = D'.data.pe.hom ≫\n      ((Etale.derivedTensor (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n)) S).obj K).map\n        ((integrationLower (Scheme.finiteTateCoefficient l E n) S d F).map\n          (integrationVectorTransition l E n S hS r s hrs hr hs d F).hom) ∧\n    (integrationProLower (Scheme.finiteTateCoefficient l E n) S d F).map\n      ((comparison (Scheme.finiteTateCoefficient l E n) _).map\n        (integrationTensorTransition l E n S hS r s hrs hr hs d F K).hom) ≫\n      D.data.pp.hom = D'.data.pp.hom ≫\n      ((derivedTensor (ModuleCat.{u + 1} (Scheme.finiteTateCoefficient l E n)) S).obj\n        ((comparison (Scheme.finiteTateCoefficient l E n) S).obj K)).map\n          ((integrationProLower (Scheme.finiteTateCoefficient l E n) S d F).map\n            ((comparison (Scheme.finiteTateCoefficient l E n) _).map\n              (integrationVectorTransition l E n S hS r s hrs hr hs d F).hom))"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-eece6",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T195212-L-2863799",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/new-module Lean and node JSONs (incl. head-commit nodes missing from snapshot) vs clone sheaf-dag item, VectorIntegrationSiteComparison and the owner nodes of the declarations used"
+ }
+}

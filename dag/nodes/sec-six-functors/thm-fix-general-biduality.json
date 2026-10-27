@@ -29,68 +29,46 @@
  ],
  "proof": [
   {
-   "text": "Work at the finite coefficient stage $A=A_{E,n}$ with $n\\ge1$ and $\\ell\\ne\\operatorname{char}k$. On the etale site, [lem-weil-verdier-preservation-strata] carries $D^b_{ctf}$ into itself; applying it to the constant free rank-one sheaf $A_Y$ of Tor interval $[0,0]$ gives bounded constructibility and finite Tor amplitude for $\\omega_{Y,\\mathrm{et}}=D_{Y,\\mathrm{et}}A_Y$. The natural double-dual map is an isomorphism and the duality is an exact anti-equivalence by [thm-weil-etale-geometric-biduality]. Here $A_Y$ is constructible with Tor interval $[0,0]$ because it is the constant finite coefficient ring and tensoring over $A_Y$ with $A_Y$ is the identity. In the K-injective model of [def-pur-derived-internal-hom], the termwise maps $\\mathcal Hom_A(A_Y,I^j)\\cong I^j$ commute with differentials, giving $D_{Y,\\mathrm{et}}A_Y\\cong\\omega_{Y,\\mathrm{et}}$.",
+   "text": "Apply thm-weil-etale-geometric-biduality with the given structure morphism to obtain the unchanged ordinary-etale conclusion. Equip Y with the Over structure whose structure morphism is exactly aY.",
    "uses": [
-    "lem-weil-verdier-preservation-strata",
-    "thm-weil-etale-geometric-biduality",
-    "def-pur-derived-internal-hom"
+    "thm-weil-etale-geometric-biduality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
-    "place": "Sole proof paragraph: etale duality, descent, and evaluation-compatible comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $F=\\nu_Y^*$. Clause (ii) of [lem-sf-proetale-constructible-origin] gives a bounded constructible etale representative $K'$ of every bounded constructible pro-etale $K$. Clause (ii) of [lem-sf-comparison-tor-amplitude] reflects the finite Tor interval from $K$ to $K'$, while clause (i) preserves that interval under $F$. Therefore the comparison equivalence restricts to the two finite-Tor constructible categories. The representative $K'$ is bounded and therefore bounded below, as required by reflection; $\\ell$ is invertible on $Y$ since $\\ell\\ne p$ and $Y$ is a $k$-scheme.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
-    "place": "Sole proof paragraph: etale duality, descent, and evaluation-compatible comparison"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-finite-duality-site-comparison] to $K'$ and $\\omega_{Y,\\mathrm{et}}$. Its dualizing-object and evaluation-compatible comparison gives a natural isomorphism $c_{K'}:F D_{\\mathrm{et}}K'\\xrightarrow{\\sim}D_{\\mathrm{proet}}F K'$. Since the etale dual is finite-Tor constructible and $F$ preserves finite Tor amplitude, the pro-etale dual is finite-Tor constructible as well; applying the same comparison to $D_{\\mathrm{et}}K'$ gives the corresponding comparison for the second dual.",
+   "text": "Specialize lem-weil-finite-duality-site-comparison at Y. Unpack its fixed dualizing-object comparison data to obtain the pro-etale ambient pairing hPro, the anti-equivalence d on the finite-Tor constructible full subcategory, its natural inclusion comparison c with the specified ambient internal-Hom functor, and invertibility of its specified bidualityMap. These are clauses of the existing comparison statement; no new transport theorem is assumed.",
    "uses": [
     "lem-weil-finite-duality-site-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
-    "place": "Sole proof paragraph: etale duality, descent, and evaluation-compatible comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "The comparison lemma's compatibility with evaluation and transposes identifies the pro-etale double-dual map with the composite\n$$F K'\\xrightarrow{F\\delta_{K'}}F D_{\\mathrm{et}}D_{\\mathrm{et}}K'\\xrightarrow{c_{D_{\\mathrm{et}}K'}}D_{\\mathrm{proet}}F D_{\\mathrm{et}}K'\\xrightarrow{D_{\\mathrm{proet}}(c_{K'}^{-1})}D_{\\mathrm{proet}}D_{\\mathrm{proet}}F K'.$$\nEvery arrow is invertible, so naturality gives the result for $K\\cong F K'$. The comparison statement then transports the exact contravariant anti-equivalence from the etale category to the pro-etale category; its exceptional inverse image is the specified comparison-class transport, so no ambient pro-etale adjoint or boundary-duality hypothesis is used.",
+   "text": "Finite-Tor constructibility is invariant under isomorphism: map the isomorphism through the canonical intrinsic realization; use the existing finite-torsion constructibility isomorphism-closure instance, and keep the same Tor interval. For the Tor clause compose every representative isomorphism Q(M) ≅ L with the inverse of K ≅ L, so the unchanged tests reduce to those for K. For each K in the full subcategory, the component c_K identifies the underlying object d(K) with its ambient Verdier dual, giving preservation.",
    "uses": [
-    "lem-weil-finite-duality-site-comparison",
-    "thm-weil-etale-geometric-biduality",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude"
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
-    "place": "Sole proof paragraph: etale duality, descent, and evaluation-compatible comparison"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-weil-native-internal-hom-contravariant-exact to the Grothendieck abelian category of fixed-scalar pro-etale module sheaves and to the specified pro-etale dualizing object. Its coherent shift structure and IsTriangulated assertion give the required explicit image distinguished triangle by Functor.map_distinguished. Pair this exactness with d and c, and retain hPro and its canonical biduality-map invertibility unchanged.",
+   "uses": [
+    "lem-weil-native-internal-hom-contravariant-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-sf-proetale-constructible-origin",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
   "lem-weil-finite-duality-site-comparison",
-  "lem-weil-verdier-preservation-strata",
+  "lem-weil-native-internal-hom-contravariant-exact",
   "thm-weil-etale-geometric-biduality"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
-  "place": "Sole proof paragraph, expanded using the current five cited statements"
+  "by": "K4 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
+  "place": "Etale biduality and evaluation-compatible site comparison, with native contravariant exactness (Stacks Tag 08JC) and explicit categorical extraction."
  },
  "mathlib_searches": [
   {
@@ -276,7 +254,18 @@
   "thm-weil-etale-geometric-biduality"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -301,8 +290,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-comparison-tor-amplitude",
   "lem-weil-finite-duality-site-comparison"
  ],
  "reviewed": {
@@ -339,21 +326,35 @@
   "note": "Both small sites, actual finite quotient coefficients, exact anti-equivalence, and invertibility of the canonical evaluation transpose. Reuses the published FiniteEtaleGeometricBiduality conclusion and sfFiniteExceptionalFixed with the existing NagataCompactification; no duplicate etale conclusion or exceptional functor. The pro-etale domain is the canonical fixed-scalar presentation of intrinsic finiteTorConstructible. The current published canonical pairing and bidualityMap projections are retained with a definitionally identical pro-etale import adaptation for the finite-coefficient framework."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $Y$ be a separated finite-type scheme over\n$k=\\overline{\\mathbf F}_q$, and let $A=A_{E,n}$.\nOn either the small etale site or the small pro-etale site,\n\n$$\nD_Y=R\\mathcal Hom_A(-,\\omega_Y),\\qquad \\omega_Y=Ra_Y^!A,\n$$\n\nis a contravariant exact anti-equivalence of $D^b_{ctf}(Y,A)$,\nand the natural map $\\delta_K:K\\to D_YD_YK$ is an isomorphism.",
   "proof": [
    {
-    "text": "Etale preservation and biduality are\n[lem-weil-verdier-preservation-strata], [thm-weil-etale-geometric-biduality].\nEvery pro-etale constructible finite-Tor complex descends to the etale\ncategory by [lem-sf-proetale-constructible-origin], [lem-sf-comparison-tor-amplitude].\nThe evaluation-compatible comparison of\n[lem-weil-finite-duality-site-comparison] transports both assertions\nand the natural double-dual isomorphism to that category.",
+    "text": "Etale preservation and biduality are\n[lem-weil-verdier-preservation-strata], [thm-weil-etale-geometric-biduality].\nEvery pro-etale constructible finite-Tor complex descends to the etale\ncategory by [lem-sf-proetale-constructible-origin], [lem-exc-comparison-tor-interval].\nThe evaluation-compatible comparison of\n[lem-weil-finite-duality-site-comparison] transports both assertions\nand the natural double-dual isomorphism to that category.",
     "uses": [
      "lem-weil-verdier-preservation-strata",
      "thm-weil-etale-geometric-biduality",
      "lem-sf-proetale-constructible-origin",
-     "lem-sf-comparison-tor-amplitude",
+     "lem-exc-comparison-tor-interval",
      "lem-weil-finite-duality-site-comparison"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T033921-L-166703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

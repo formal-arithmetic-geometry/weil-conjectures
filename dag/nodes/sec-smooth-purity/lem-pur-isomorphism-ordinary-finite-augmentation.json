@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-isomorphism-ordinary-finite-augmentation",
+ "kind": "statement",
+ "title": "Finite quotient augmentation under normalized module and tower comparisons",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme isomorphism g:X→Y, and an arbitrary unbounded completed-coefficient complex P on Y. Let F be sectionwise inverse image, L ordinary module pullback, η its adjunction unit, and ε the counit of the postcomposition/base-change site adjunction. Suppose b:L≅F satisfies b_M(η_M(V)(x))=M(ε_V)(x) on every pro-etale V and section x. Suppose a:(tower P)⋙F ≅ integralOperationsPullbackTowerFunctor g P is a tower isomorphism whose nth component is exactly QuotientTensor.insertion g n at the nth strict finite reduction of P. For every exponent n and cochain degree i, b_(P^i), followed by F of the quotient augmentation in degree i and a_n^i, equals ordinaryQuotientAugmentation(P)_n^i. Constructions are those of [def-fix-qcqs-completion-ordinary-models, def-pur-integral-derived-operations, def-trf-isomorphism-strict-quotient-models, lem-trf-quotient-tensor-insertion]. This is only a finite-level equality, with no Roos or completion conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL, specializing the adjunction and quotient insertion to expanded clause 4 of def-weil-frobenius-coefficient-twists."
+ },
+ "stmt_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "def-trf-isomorphism-strict-quotient-models",
+  "lem-trf-quotient-tensor-insertion"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary module adjunction to test equality on its unit sections. The hypothesis on b converts its value into restriction along the site counit. Naturality of the quotient augmentation moves this restriction onto the reduced section.",
+   "uses": [
+    "def-fix-qcqs-completion-ordinary-models",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the insertion formula. Naturality of the finite pullback adjunction unit moves the remaining restriction through the finite generator. The right triangle of the site adjunction cancels the two restrictions; use PresheafOfModules.map_comp_apply since restriction maps are semilinear.",
+   "uses": [
+    "lem-trf-quotient-tensor-insertion",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source quotient augmentation sends x to the unit tensor, and the ordinary quotient augmentation is uniquely normalized to its finite pullback generator. Their defining normalization equations finish the equality.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "lem-trf-quotient-tensor-insertion",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D5",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL; expanded coefficient-twist clause 4.",
+  "note": "Fully proved helper factored from the ordinary completion-chain argument after profiling and simplifying equality transports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the unit of an adjunction and the right triangle identity cancel inverse image and direct image restrictions",
+   "results": "8 hits concerning restriction adjunction units and fully faithful restrictions; none states the finite completed-coefficient augmentation equality.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.right_triangle_components",
+   "results": "One hit, the right triangle identity used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp_apply",
+   "results": "25 generic hits; direct source inspection locates PresheafOfModules.map_comp_apply in Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, used for the varying-ring restrictions.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismOrdinaryCompletionChain",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-isomorphism-ordinary-completion-chain",
+   "place": "Proof steps 1–2: ordinary module normalization, strict quotient insertion and finite augmentation compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismOrdinaryFiniteAugmentation",
+  "file": "lean/Sheaf/Paper/IsomorphismOrdinaryFiniteAugmentation.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.isomorphismOrdinaryFiniteAugmentation",
+  "statement": "theorem isomorphismOrdinaryFiniteAugmentation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (b : ordinaryPull l E g ≅ inverseImageIntegralModules l E g)\n    (hb :\n    ∀ (M : integralTowerModules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)),\n      (b.hom.app M).val.app (op ((proEtaleBaseChange g).obj V))\n        (((ordinaryAdjunction l E g).unit.app M).val.app (op V) x) =\n      M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g\n        (inferInstance : WeaklyEtale g) trivial).counit.app V).op x)\n    (P : Cx l E Y none) (n : ℕ)\n    (a : (tower l E Y none).obj P ⋙ trfInverseImageComplex l E g ≅\n      (integralOperationsPullbackTowerFunctor l E g).obj P)\n    (ha : ∀ k : ℕ, a.hom.app (op k) = QuotientTensor.insertion l E g k\n      ((unrestrictedIntegralFiniteComplex l E Y k).obj P)) (i : ℤ) :\n    b.hom.app (P.X i) ≫ (inverseImageIntegralModules l E g).map\n        ((((augmentation l E Y none).app P).app (op n)).f i) ≫\n          (a.hom.app (op n)).f i =\n      (((ordinaryQuotientAugmentation l E g).app P).app (op n)).f i",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T181513-L-3467157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T181513-L-3467157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

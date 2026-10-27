@@ -41,108 +41,81 @@
  ],
  "proof": [
   {
-   "text": "Write $R_W=\\widehat{\\mathcal O}_{E,W}$ and $B_{n,W}=(A_{E,n})_W$. Write $f_n$ for $f$ acting with the finite coefficient sheaves $B_{n,Y},B_{n,X}$. Put $U=Lf^*K(d)[2d]$ and $U_n=Lf_n^*K_n(d)[2d]$. Integral pullback and completed tensor preserve bounded constructibility and have the stated canonical reductions by [lem-pur-integral-operations-preserve-constructible]. By [prop-weil-twist-preserves] the integral twist is a locally free rank-one invertible $R_X$-module; hence locally it is the coefficient sheaf and tensoring by it preserves the same cohomological and Tor intervals. The integral twist's reductions are the finite twists by [def-coefficient-twists-detailed]; for its positive power $d$, trivializing the rank-one sheaf reduces both this assertion and the tensor comparison to $R_X\\otimes_{R_X}B_{n,X}=B_{n,X}$. If $[a,b]$ is the common Tor interval of the $K_n$ from [def-weil-finite-tor-amplitude], [lem-sf-pullback-tor-amplitude] gives that interval for every $Lf_n^*K_n$. Tensoring by the locally free twist leaves it unchanged, and shifting by $[2d]$ changes it to $[a-2d,b-2d]$, since $\\mathcal H^i(C[2d])=\\mathcal H^{i+2d}(C)$. Finite pullback is the exact module inverse image in [def-pur-integral-derived-operations], so it preserves the input cohomological window. The rank-one twist also preserves it; the shift changes its endpoints by minus $2d$. Thus $U\\in D^b_{ctf}(X,\\mathcal O_E)$ and its canonical reduction is $U_n$ at every level. This proves the finiteness actually needed; it does not infer common integral local models from boundedness alone.",
+   "text": "Apply purAdicSource_finiteness_reductions to the actual source U. Retain its integral finite-Tor constructibility and the isomorphisms bU_n. Apply normalized_purity_lift to obtain the actual restricted strict-tower morphism G and its prescribed finite-purity evaluation equations, and invertibility of every finite purity arrow.",
    "uses": [
-    "lem-pur-integral-operations-preserve-constructible",
-    "prop-weil-twist-preserves",
-    "def-coefficient-twists-detailed",
-    "def-weil-finite-tor-amplitude",
-    "lem-sf-pullback-tor-amplitude",
-    "def-pur-integral-derived-operations"
+    "lem-pur-adic-source-finiteness-reductions",
+    "lem-pur-adic-normalized-purity-lift"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-    "place": "Proof; unit sk-thm-purity-transport, Step 2, with the explicit unit-error correction in split_report.unit_error"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Part (1): actual tower realization, normalized equivalence, and recovery of finite purity; retained normalized-DVR refinement in split_report.unit_error"
    }
   },
   {
-   "text": "Let $\\mathcal U_\\bullet$ be the derived reduction tower of $U$. Its normalization maps are those of [def-weil-pbc-adic-coefficient-datum]. Put $V_n=Rf_n^!K_n$ and let $\\mathcal V_\\bullet$ be the coherent tower used to define $V=Rf^!K=R\\lim\\mathcal V_\\bullet$ in [def-weil-exceptional-inverse-image]. For $m\\geq n$, its normalization is the finite-reduction comparison $\\operatorname{red}_{m,n,X}(Rf_m^!K_m)\\simeq Rf_n^!(\\operatorname{red}_{m,n,Y}K_m)$ of [thm-pur-finite-reduction-of-purity], followed by $Rf_n^!$ of the normalization $\\operatorname{red}_{m,n,Y}K_m\\simeq K_n$. The compatible finite-level functors in the exceptional-inverse-image definition supply the coherent transitions; the original quotient cocycle identifies successive reductions with direct reduction. In the notation of [def-coef-normalized-dvr-tower], both $\\mathcal U_\\bullet$ and $\\mathcal V_\\bullet$ are normalized DVR towers over $R_X$. No common local model or preservation of a common stratification by $Rf^!$ is assumed.",
+   "text": "Identify the restricted evaluation comparisons by their definitions. The source comparisons, finite purity arrows and exceptional evaluation comparisons are invertible, hence each evaluation of G is invertible. Exact tower evaluation commutes with homology; componentwise invertibility makes every homology map of G invertible. The derived-category isomorphism criterion therefore makes G invertible, and the total constant-tower limit functor preserves its invertibility.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-finite-reduction-of-purity",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-    "place": "Proof; unit sk-thm-purity-transport, Step 2, with the explicit unit-error correction in split_report.unit_error"
-   }
-  },
-  {
-   "text": "Set $g_n=\\gamma_{f,K_n}:U_n\\to V_n$. The commuting square of [thm-pur-finite-reduction-of-purity] says $\\rho^V_{m,n}\\circ\\operatorname{red}_{m,n,X}(g_m)=g_n\\circ\\rho^U_{m,n}$. Applying the normalization of $K$ uses naturality of the purity map in its coefficient object: in the composite defining it in [def-pur-smooth-purity-map], twist reassociation is natural, the isomorphism from the fixed dualizing object to the twist is independent of $K$, and the final canonical tensor-formula map is natural. Precompose the displayed equation with the scalar-extension unit and restrict coefficients to $R_X$; this gives $t^V_n\\circ\\operatorname{Res}_{n+1}(g_{n+1})=\\operatorname{Res}_n(g_n)\\circ t^U_n$. Thus it is a morphism of the evaluated inverse sequences. By [lem-weil-pbc-sequential-tower-evaluation-full] choose a lift $G:\\mathcal U_\\bullet\\to\\mathcal V_\\bullet$ whose evaluations are these maps. Every $g_n$ is an isomorphism by [thm-pur-finite-coefficient-smooth-purity]. The lifting theorem asserts existence, not uniqueness of $G$.",
-   "uses": [
-    "thm-pur-finite-reduction-of-purity",
-    "def-pur-smooth-purity-map",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "def-coef-normalized-dvr-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-    "place": "Proof; unit sk-thm-purity-transport, Step 2, with the explicit unit-error correction in split_report.unit_error"
-   }
-  },
-  {
-   "text": "Apply the total derived inverse-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to $G$, and write $F=R\\lim G:R\\lim\\mathcal U_\\bullet\\to V$. Its natural Roos triangles give a morphism of triangles with second and third components $\\prod_n\\operatorname{Res}_n(g_n)$. The hypothesis of [lem-weil-derived-limit-levelwise-iso] therefore holds, so $F$ is an isomorphism. Since $U$ is derived complete, [def-weil-derived-complete] supplies a Roos triangle starting with the scalar-extension units $c^U_n$. Rotate this triangle and the Roos triangle of $R\\lim\\mathcal U_\\bullet$, apply the triangulated axiom TR3 to the identity maps on both product terms, and rotate back. The triangle isomorphism criterion [lem-weil-derived-limit-levelwise-iso] gives an isomorphism $e:U\\to R\\lim\\mathcal U_\\bullet$ with $p^U_n\\circ e=c^U_n$ for every $n$. No unique comparison is needed. Define $\\gamma=F\\circ e:U\\to V$. It is an isomorphism. The integral constructible and finite-Tor categories are full and invariant under isomorphism by [lem-weil-integral-ctf-triangulated]; Step 1 consequently places $V$ as well as $U$ in $D^b_{ctf}(X,\\mathcal O_E)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-derived-limit-levelwise-iso",
-    "def-weil-derived-complete",
-    "lem-weil-integral-ctf-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-    "place": "Proof; unit sk-thm-purity-transport, Step 2, with the explicit unit-error correction in split_report.unit_error"
-   }
-  },
-  {
-   "text": "Apply [lem-coef-normalized-dvr-effectivity] to $\\mathcal V_\\bullet$. Its canonical isomorphism $b^V_n:V\\otimes^L_{R_X}B_{n,X}\\to V_n$ is the counit comparison, adjoint to the tower projection $p^V_n$. Projection naturality from [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and Step 4 give $p^V_n\\circ\\gamma=\\operatorname{Res}_n(g_n)\\circ c^U_n$. For the completed coefficient projection $\\pi_n:R_X\\to B_{n,X}$, ordinary extension of scalars is left adjoint to restriction: a module map $h:N\\to\\operatorname{Res}_n P$ corresponds to $x\\otimes b\\mapsto b h(x)$, with inverse $x\\mapsto h(x\\otimes1)$. Restriction is exact by [lem-weil-restriction-of-scalars-exact], hence is its own everywhere-defined right derived functor. The left derived extension is everywhere defined by [lem-pur-derived-change-of-rings]. Therefore [lem-pc-derived-adjoint-functors] gives $-\\otimes^L_{R_X}B_{n,X}\\dashv\\operatorname{Res}_n$. Under this completed-coefficient derived adjunction, the left side is adjoint to $b^V_n\\circ(\\gamma\\otimes^L_{R_X}B_{n,X})$, and the right side is adjoint to $g_n\\circ b^U_n$, where $b^U_n:U\\otimes^L_{R_X}B_{n,X}\\simeq U_n$ is the canonical reduction identification of Step 1. Equality of adjoints proves $b^V_n\\circ(\\gamma\\otimes^L B_{n,X})=g_n\\circ b^U_n$ in $D(B_{n,X})$. This is exactly the required reduction identity, with its quotient-coefficient action retained. Effectivity also supplies compatibility of the $b^V_n$ with all normalization maps. The proof neither detects equality of derived morphisms from their stalks nor deduces uniqueness from conservativity.",
-   "uses": [
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "def-coef-normalized-dvr-tower",
-    "lem-weil-restriction-of-scalars-exact",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-adjoint-functors"
+    "lem-pur-adic-normalized-purity-lift"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-    "place": "Proof; unit sk-thm-purity-transport, Step 2, with the explicit unit-error correction in split_report.unit_error"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Part (1): actual tower realization, normalized equivalence, and recovery of finite purity; retained normalized-DVR refinement in split_report.unit_error"
+   }
+  },
+  {
+   "text": "Transport source completeness to the coefficient presentation used by purNormalizedReconstruction using purCoefficientModel_predicates and the counit of purCoefficientModel. The existing normalized reconstruction theorem makes the actual completion unit invertible. Define gamma to be that unit followed by the total-limit image of G. This is exactly the required lift formula and is an isomorphism.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Part (1): actual tower realization, normalized equivalence, and recovery of finite purity; retained normalized-DVR refinement in split_report.unit_error"
+   }
+  },
+  {
+   "text": "Apply the injective finite scalar-adjunction Hom equivalence to the required quotient-linear equation. The counit_projection field identifies the transpose of the specified target reduction with the actual limit projection followed by exceptional evaluation. Naturality of the constant-tower projection and the evaluation equation for G rewrite this as the source completion unit followed by its projection and the restricted finite arrow. The unit_projection field identifies this with the scalar-adjunction unit followed by restriction of bU_n and finite purity: inverse and forward reductionEvaluation cancel. This is the transpose of the right side. Injectivity proves the exact equation in quotient coefficients. Since reduction of gamma and bU_n and finite purity are isomorphisms, the target reduction is an isomorphism.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-adic-normalized-purity-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Part (1): actual tower realization, normalized equivalence, and recovery of finite purity; retained normalized-DVR refinement in split_report.unit_error"
+   }
+  },
+  {
+   "text": "Transport sfIntegralConstructible along gamma using its existing isomorphism-closure theorem. Retain the source uniform Tor interval: for any representative of a target reduction compose its isomorphism with inverse reduction of gamma, so the same vanishing condition follows from the source interval. This proves finiteTorConstructibleIntegral of the target. Assemble gamma, the finiteness and reduction clauses, and G with its evaluation equations.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Part (1): actual tower realization, normalized equivalence, and recovery of finite purity; retained normalized-DVR refinement in split_report.unit_error"
    }
   }
  ],
  "proof_deps": [
   "def-coef-normalized-dvr-tower",
-  "def-coefficient-twists-detailed",
-  "def-pur-integral-derived-operations",
-  "def-pur-smooth-purity-map",
-  "def-weil-derived-complete",
-  "def-weil-exceptional-inverse-image",
   "def-weil-finite-tor-amplitude",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-weil-derived-limit-levelwise-iso",
-  "lem-weil-integral-ctf-triangulated",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-sequential-tower-evaluation-full",
-  "lem-weil-restriction-of-scalars-exact",
-  "prop-weil-twist-preserves",
-  "thm-pur-finite-coefficient-smooth-purity",
-  "thm-pur-finite-reduction-of-purity"
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-adic-normalized-purity-lift",
+  "lem-pur-adic-source-finiteness-reductions",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-integral-coefficient-completeness-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
-  "place": "Proof; unit sk-thm-purity-transport, Step 2, with the explicit unit-error correction in split_report.unit_error"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "S2 Lean assembly using the existing actual-unit normalized reconstruction theorem and scalar adjunction projection equations; no new statements"
  },
  "mathlib_searches": [
   {
@@ -222,59 +195,30 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "thm-pur-adic-reconstruction",
   "worker": "stage1",
-  "summary": "Repair of the E1 / Stage 1 §§5–6 return: explicitly record the ill-typed unrestricted geometric domain and the exact failed common-local-model inference in unit Step 2. The repair brief authorizes correcting an ill-typed imported statement faithfully to its source intent; retain separated finite-type schemes as the domain of the source finite-purity and exceptional-inverse-image interfaces, rather than claiming this is the unchanged imported statement. Record the replacement normalized-DVR route for maintainer review. Correct the unit realization fields by clause/step, repair the completed-coefficient derived-adjunction citation in Step 5, and explain the comparison to the selected Roos limit in Step 4. No new nodes and no Lean changes.",
-  "blueprint": "Realizes unit sk-thm-purity-transport Step 2 through five steps: source and bounds; normalized towers; compatible finite-purity maps and a coherent lift; inverse limit and isomorphy; exact finite reductions. This replaces, rather than merely renames, the unsupported uniform-local-model application. The precise source/unit error and replacement are recorded under unit_error for review. Steps 1, 3 and 4 of the unit are assigned to their own finite, rational and dualizing-complex carriers in the unit record; they are not claimed as proofs supplied by this item.",
+  "summary": "Q66 repair of the 2026-10-21 human re-split return: retain the item statement and all previously reviewed source/unit corrections. Extract the returned source-finiteness argument, normalized finite-purity tower/lift argument, and general Roos-realization/exact-reduction argument into three statement-only unsplit nodes. Preserve the complete old argument verbatim in report.md for their future workers. The item now assembles these facts and transports finiteness by its existing isomorphism-closure lemma. No Lean or unit change.",
+  "blueprint": "Current main-20261015 adic proof: source node realizes common bounds and the d-shift; tower node realizes transition compatibility and the morphism of normalized systems; Roos node realizes inverse-limit isomorphy and exact finite reductions. These refine only transport unit Step 2, retaining the previously recorded source error and its normalized-DVR replacement.",
   "tool_uses": [
    {
-    "node": "lem-pur-integral-operations-preserve-constructible",
-    "why": "Integral pullback/completed-tensor preservation and canonical reduction formulas, used to type the source; the transport unit supplies no separate operation-preservation statement."
-   },
-   {
-    "node": "prop-weil-twist-preserves",
-    "why": "The general invertible rank-one twist preservation theorem supplies finite and integral twist bounds."
-   },
-   {
-    "node": "lem-sf-pullback-tor-amplitude",
-    "why": "General finite-level pullback preservation of the input uniform Tor interval; no alternate purity argument."
-   },
-   {
-    "node": "lem-weil-pbc-sequential-tower-evaluation-full",
-    "why": "Generic existence of a coherent lift of compatible derived level maps, absent from the unit and not supplied by object-only reconstruction."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic total derived inverse-limit functor with natural projections and Roos triangles, realizing the unit limit construction."
-   },
-   {
-    "node": "lem-weil-derived-limit-levelwise-iso",
-    "why": "Existing Mathlib leaf for isomorphy of the induced Roos-triangle map."
-   },
-   {
     "node": "lem-weil-integral-ctf-triangulated",
-    "why": "Generic isomorphism invariance of the integral finite-Tor subcategory."
-   },
-   {
-    "node": "lem-coef-normalized-dvr-effectivity",
-    "why": "Generic effectivity with canonical coherent counits for normalized DVR towers; unlike common-local-model reconstruction it applies to precisely the systems supplied by the integral definitions."
-   },
-   {
-    "node": "lem-weil-restriction-of-scalars-exact",
-    "why": "Exactness of restriction along the completed-to-finite coefficient projection, for the derived adjunction used in Step 5."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Everywhere-defined derived scalar extension along that projection, preserving the quotient coefficient action."
-   },
-   {
-    "node": "lem-pc-derived-adjoint-functors",
-    "why": "Derives the explicitly written tensor/restriction adjunction in Step 5; it does not reconstruct adic purity."
+    "why": "Generic isomorphism closure transports source finiteness to the exceptional target; it does not replace the adic transport route."
    }
   ],
   "statement_correction": {
@@ -303,26 +247,13 @@
    "review_handoff": "For the second reader/maintainer to confirm and record in coord/HUMAN.md with this replacement, as SETUP and Stage 1 §5 require. The worker is forbidden to write coord/HUMAN.md and does not assert that this escalation has already occurred. The current repair brief authorizes continuing after the documented statement correction; the fixed chapter statement and route are not edited."
   }
  },
- "tool_uses": [
-  "lem-pur-integral-operations-preserve-constructible",
-  "prop-weil-twist-preserves",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-weil-pbc-sequential-tower-evaluation-full",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-derived-limit-levelwise-iso",
-  "lem-weil-integral-ctf-triangulated",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-weil-restriction-of-scalars-exact",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-derived-adjoint-functors"
- ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NH-cb38571f7",
-  "group": "NH",
+  "reviewer": "NT-cc-Q66-fdfe222c0",
+  "group": "Q66",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-cb38571f7 (reviewer sub-agent of L); spot-checked: Fresh review completed and written to review.md. Read all required DAG, unit, chapter, report, dependency statements, and cited sources. Confirmed the corrected finite-type hypotheses, five-step normalized-DVR reconstruction route, exact coefficient categories/base-change maps, edge cases, searches, and accepted tool uses. No new nodes or repair faults. The original unrestricted statement and unit Step 2 common-local-model inference are correctly recorded as source errors with authorized replacements."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-fdfe222c0 (reviewer sub-agent of L); spot-checked: Re-split for the 2026-10-21/22 human note on the live 5-step proof (6366 characters). The live item is still split on its old proof, the statement is byte-identical, and nothing supersedes the delivery. Old Step 1 becomes lem-pur-adic-source-finiteness-reductions: membership in D^b_ctf, bounds [r-2d,s-2d] and [a-2d,b-2d], invertible and cocycle-compatible b^U_n. Old Steps 2-3 become lem-pur-adic-normalized-purity-lift: the normalized towers U• and V•, the square from thm-pur-finite-reduction-of-purity plus naturality of gamma in K, and the lift G from sequential evaluation fullness. Old Steps 4-5 become lem-pur-adic-roos-realization-reductions, a generic statement with no geometry: TR3 comparison e with p∘e=c, R lim G invertible by the triangle criterion, effectivity counits b^T, and the projection equation transposed into the D(B_n) reduction equation. Old Step 4's isomorphism closure stays as item Step 4. No argument was dropped, the nodes are of comparable size (about 1.6k, 2.0k and 2.7k characters), none restates the item, and the item is a 4-step, 1817-character assembly. I checked every Step 3 hypothesis against Steps 1-2; b^T matches the target identification of def-pur-adic-exceptional-reduction. Edge cases checked: K=0, d=0, f=id, n=1, m=n, zero tower. Duplicate candidates read: dvr-effectivity, dvr-roos-finite-reduction, completed-primitive-counit-comparison, sequence-roos-model, derived-limit-levelwise-iso, integral-operations-preserve-constructible, scalar-extension-tor-bound; none is a duplicate. The prior unit_error and statement correction are retained. No SGA source is used. Tool use lem-weil-integral-ctf-triangulated (isomorphism closure, ell invertible on a k-scheme) accepted. FIX (B3/B2): lem-pur-adic-normalized-purity-lift used an uncited 'canonical finite change-of-coefficients comparison' and undefined red_{m,n,X} and t^U_n, t^V_n. The corrected node at fixes/dag/nodes/sec-smooth-purity/lem-pur-adic-normalized-purity-lift.json defines red via lem-pur-derived-change-of-rings, names the comparison of thm-pur-finite-reduction-of-purity, defines the evaluated transitions, and adds both ids to stmt_deps. No cycle.; 1 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -362,5 +293,15 @@
   "group": "N0",
   "result": "fix",
   "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d8a11",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T123721-L-1892271",
+  "kind": "interface",
+  "note": "independent cc review: delivered PurAdicReconstruction.lean + node vs live b2561f43020 (signature byte-identical, node diff only proof/proof_deps/proof_origin/tool_uses), unit sk-thm-purity-transport realized nodes (all split, lean null), #print axioms (sorryAx only via sorried purAdicSource_finiteness_reductions), both direct importers compiled with the fixed module"
  }
 }

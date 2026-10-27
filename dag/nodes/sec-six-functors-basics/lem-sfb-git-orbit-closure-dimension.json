@@ -1,0 +1,425 @@
+{
+ "id": "lem-sfb-git-orbit-closure-dimension",
+ "kind": "statement",
+ "title": "Semistable orbit closures and algebraic orbit dimensions",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], $r\\geq2$, and $G=\\operatorname{PGL}_{r,k}$. Let $Z$ be a projective finite-type $k$-scheme [def-kun-projective, def-weil-finite-type-morphism] with a $G$-action and an ample $G$-linearized invertible module $A$, with semistable locus as in [lem-sfb-hilbert-plucker-pgl-linearization]. For every $z\\in Z^{ss}(A)(k)$ the orbit $Gz$ is locally closed and\n$$\\dim(Gz)=\\dim G-\\dim G_z,$$\nwhere $G_z$ is the scheme-theoretic stabilizer. Its closure inside $Z^{ss}(A)$ contains a unique orbit closed in $Z^{ss}(A)$. Every orbit contained in $\\overline{Gz}\\setminus Gz$ has strictly smaller dimension than $Gz$. The assertions hold also for nonreduced $Z$ and nonreduced stabilizers, with dimension the Krull dimension of the underlying schemes. The scheme, invertible-module, projective and ample conventions are [def-pc-scheme, def-sc-invertible-module, def-kun-projective, def-weil-pbc-ample-invertible-module]. The orbit is the image of the action map from G at z, and the stabilizer represents the group elements fixing z. Dimension is [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.3, proof of Corollary 11(3), printed p.17, semistable orbit boundary with larger stabilizer. General orbit-dimension and unique closed orbit facts: Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Chapter 1. Local references WANTED.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-group-scheme-linearization",
+  "def-sfb-projective-linear-quotient"
+ ],
+ "proof": [
+  {
+   "text": "First obtain a projective polarization in the embedding convention needed below. The projective-to-proper theorem makes $Z$ proper over $k$. The ample-to-very-ample immersion theorem, over $\\operatorname{Spec}k$, gives $i:Z\\to\\mathbf P^n_k$ with $A^{\\otimes d}\\simeq i^*\\mathcal O(1)$ for some $d>0$. Projective space is separated (it is proper by the same projective-to-proper theorem). The proper-to-separated-target theorem makes $i$ proper, so its image is closed. The immersion-with-closed-image theorem therefore makes $i$ a closed immersion. Thus the hypotheses of the projective-polarization section-algebra theorem apply to $(Z,A)$, including when $Z$ is nonreduced.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VS/01VT (ample immersion), 01W6 (proper source to separated target), and schemes.tex Tag 01IQ (lemma-immersion-when-closed)."
+   }
+  },
+  {
+   "text": "Use the matrix model $G=D_+(\\det)\\subset\\mathbf P(\\operatorname{Mat}_r)$. Locally, a projective invertible matrix has a generator which is an invertible matrix; changing that generator multiplies it by a unit. Conversely invertible matrices modulo this scalar change glue to the same projective matrix. These inverse descriptions identify this open scheme with $\\operatorname{PGL}_r$. The projective-polarization chart theorem applied to $\\mathbf P^{r^2-1}$, $\\mathcal O(1)$ and the degree-$r$ determinant makes $G$ affine of finite type. Its standard projective charts are polynomial rings localized at the nonzero determinant polynomial, hence reduced domains; their pairwise intersections are nonempty principal opens. Consequently $G$ is integral. The finite-type-over-Noetherian theorem makes $Z$ and $G$ Noetherian (a field is Noetherian). The minimal-closed-subset theorem gives the descending-chain condition on their closed subsets: the members of an infinite strict descending chain would have no minimal member. The compact-subsets theorem then makes every subset quasi-compact. In particular their open subschemes have finite affine covers and remain finite type over $k$.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 5, Example 5.49 (PGL quotient); explicit projective matrix charts. Auxiliary Stacks Tags 0EKE (affine polarization chart), 01T6, 04ZA. Also Tag 01OZ (properties.tex, lemma-Noetherian-topology)."
+   }
+  },
+  {
+   "text": "We will use rational-point detection as follows. In a nonempty locally closed subscheme of a finite-type $k$-scheme, choose a nonempty affine open $V$. It is quasi-compact and $T_0$, so the closed-point theorem gives a closed point of $V$. The closed-point residue-field theorem makes it $k$-rational. Thus every such nonempty locally closed subset has a $k$-point. In particular $k$-points are dense: if the complement of their closure were nonempty, apply this argument to that open complement. A nonempty fibre over a rational point also has a rational point, since it is finite type over $k$.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TB (lemma-jacobson-finite-type-points); topology.tex Tag 005E (lemma-quasi-compact-closed-point)."
+   }
+  },
+  {
+   "text": "Fix $z\\in Z^{ss}(k)$ and write $a_z:G\\to Z$, $g\\mapsto gz$, and $O=a_z(|G|)$. Over affine charts the coordinate map is finite type because generators over $k$ also generate over the target algebra; quasi-compact inverse images are supplied by Step 2. Thus $a_z$ and its fibres over rational points are finite type. Its image is constructible: over each affine open $W\\subset Z$, the inverse image has a finite affine cover by Step 2, and each chart maps to the affine finite-type scheme $W$. Apply the affine Chevalley theorem to each of these finitely many maps and take their union; this gives constructibility on every member of a finite affine cover of $Z$. Let $C=\\overline O$ in $Z$, with the reduced induced closed subscheme structure. It is finite type, since its affine coordinate rings are quotients of those of $Z$. It is irreducible: a cover of $C$ by two closed subsets pulls back to a cover of the irreducible $G$, so one contains $O$, hence all of $C$. For each $g\\in G(k)$, the identity $g a_z(h)=a_z(gh)$ shows $gO=O$ and therefore $gC=C$.",
+   "uses": [
+    "lem-wf-affine-constructible-open",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(b), printed p.27; constructible-image argument. Reduced induced structure: Stacks Tag 01J3 (schemes.tex, lemma-reduced-closed-subscheme)."
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $W\\subset C$. The constructible set $O\\cap W$ is dense in $W$, so the constructible-open theorem supplies a nonempty open $V\\subset C$ contained in $O$. Choose $v\\in V(k)$ by Step 3; its fibre under $a_z$ is nonempty, so Step 3 also gives $h\\in G(k)$ with $hz=v$. Put $T=\\bigcup_{g\\in G(k)}gV$, an open subset of $C$ contained in $O$. It contains all rational points of $O$: any such point lifts to $G(k)$ by the same fibre argument, and hence is a translate of $v$. The closed subset $a_z^{-1}(C\\setminus T)$ of $G$ has no rational point; Step 3 makes it empty. Thus $O=T$ is open in its closure, proving local closedness. This argument applies to every rational point of $Z$, without using semistability.",
+   "uses": [
+    "lem-wf-affine-constructible-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.65(b), printed p.27, translate-cover argument, with the rational-point detection of Step 3 made explicit."
+   }
+  },
+  {
+   "text": "The scheme-theoretic stabilizer $H=G_z$ is the fibre $a_z^{-1}(z)$: for every $k$-algebra $R$ its points are exactly those $h\\in G(R)$ with $hz_R=z_R$. Since $Z$ is separated, this equalizer with the constant map is a closed subscheme of $G$: it is the pullback of the closed diagonal of $Z$ along $g\\mapsto(gz,z)$, and the closed-immersion base-change theorem makes it closed. It is a subgroup by $hz=z$, $h'z=z\\Rightarrow hh'z=z$ and $hz=z\\Rightarrow h^{-1}z=z$. In particular $H$ is finite type. For $g\\in G(k)$, left multiplication by $g$ gives an isomorphism $H\\simeq a_z^{-1}(gz)$, with inverse left multiplication by $g^{-1}$: over every $R$, $(gh)z=gz$ if and only if $hz=z$. This identifies the fibre schemes, including all nilpotents.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 1, group actions, orbit map on printed p.27; fibre translation checked on all algebra-valued points."
+   }
+  },
+  {
+   "text": "Apply the irreducible fibre-dimension theorem to $a_z:G\\to Z$. Both schemes are finite type, and $G$ is nonempty irreducible. It gives $n\\ge0$ with $\\dim G=\\dim C+n$ and a nonempty dense open of $G$ where the local topological fibre dimension is $n$. Choose a rational $g$ in this open by Step 3. By Step 6 its fibre at $gz$ is $gH$, with $g$ corresponding to the identity of $H$. The rational-point stalk/topological-dimension comparison identifies this local fibre dimension with $\\dim\\mathcal O_{H,e}$. The group-identity dimension theorem gives $\\dim\\mathcal O_{H,e}=\\dim H$, without smoothness or reducedness of $H$. Finally $O$ is a nonempty open in the irreducible locally finite-type $C$, so the open-dimension theorem gives $\\dim O=\\dim C$. Finite-type dimensions are finite. Consequently $\\dim(Gz)=\\dim G-\\dim G_z$ as an equality of finite integers.",
+   "uses": [
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "lem-ag-rational-point-stalk-topological-local-dimension",
+    "lem-ag-group-identity-local-dimension",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L (lemma-dimension-fibres-locally-algebraic), (2)(a),(b); Tag 0A21 (lemma-dimension-locally-algebraic), (3). groupoids.tex Tag 045X (lemma-group-scheme-finite-type-field) and algebra.tex Tag 00OU supply the stabilizer comparison."
+   }
+  },
+  {
+   "text": "Put $S=Z^{ss}(A)$ and $C_S=C\\cap S$. By definition $S$ is the union of the nonvanishing opens of positive-degree invariant sections of powers of $A$. The linearization makes each such open invariant, so $O\\subset S$, and likewise $Gy\\subset S$ for every $y\\in S(k)$. Thus $C_S$ is the closure of $O$ in $S$, is irreducible, and $O$ is open in $C$ (Step 5) and in $C_S$. Set $B=C\\setminus O$, the boundary of $O$ in its closure in $Z$; its part $B\\cap S=C_S\\setminus O$ is the boundary inside $S$. $B$ is closed in $C$, proper, and stable under $G(k)$. For $y\\in B(k)$, $a_y^{-1}(C)$ is closed in $G$ and contains $G(k)$, as $gC=C$; density from Step 3 makes it all of $G$. Since $O$ is open in $C$, $a_y^{-1}(B)=G\\setminus a_y^{-1}(O)$ is closed in $G$, and it contains $G(k)$ as $gB=B$; so it is all of $G$ and $Gy\\subset B$. For any chain of irreducible closed subsets of $B$ (closed in $C$, as $B$ is), adjoining the irreducible $C$ adds a strict step. Therefore $\\dim B<\\dim C$ when $B$ is nonempty, and $\\dim C=\\dim O$ by Step 7. Since $O\\subset C_S\\subset C$, subspace monotonicity also gives $\\dim C_S=\\dim O$. Consequently every orbit in $\\overline{Gz}\\setminus Gz$, with the closure taken in $Z$ or in $S$, has dimension at most $\\dim B<\\dim O$. Subspace monotonicity here follows directly by taking closures of a chain in the larger space: their intersections with the original subspace recover the original chain, so all inclusions remain strict.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.66 (Orbit Lemma), printed pp.27--28; explicit chain argument for the boundary dimension drop. Semistability is the convention in the item."
+   }
+  },
+  {
+   "text": "The set of dimensions of orbits of rational points of $C_S$ is a nonempty set of nonnegative integers (it contains $\\dim O$). Choose $y\\in C_S(k)$ whose orbit has least dimension. If $Gy$ were not closed in $S$, its boundary in its closure in $S$ would be a nonempty locally closed subset of a finite-type scheme and hence would contain $w\\in S(k)$ by Step 3. Its closure lies in the closed subset $C_S\\subset S$, so $w\\in C_S$. Applying Step 8 with $y$ in place of $z$ gives $\\dim Gw<\\dim Gy$, contradicting minimality. Thus $C_S$ contains an orbit closed in $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.66, printed pp.27--28, minimum-dimension orbit proof, applied inside the invariant closure $C_S$."
+   }
+  },
+  {
+   "text": "For uniqueness suppose $O_1=Gy_1$ and $O_2=Gy_2$ are distinct orbits in $C_S$ closed in $S$. Semistability gives invariant sections $s_i\\in H^0(Z,A^{\\otimes d_i})$, $d_i>0$, nonzero at $y_i$. Replace them by $s_1^{d_2}$ and $s_2^{d_1}$ to give both degree $d_1d_2$. At each of the two rational points the equation $s_1^{d_2}+c s_2^{d_1}=0$ excludes at most one $c\\in k$, since the relevant one of these sections is nonzero. An algebraically closed field is infinite: if it were finite, $1+\\prod_{a\\in k}(T-a)$ would have no root. Choose $c$ avoiding both exceptions and put $s=s_1^{d_2}+c s_2^{d_1}$. Then $U=Z_s$ is an invariant affine finite-type open by Step 1 and the polarization chart theorem, and it contains $y_1,y_2$. It also contains $z$: otherwise the invariant closed zero set of $s$ would contain $O$ and $C$, contradicting $y_1\\in C\\cap U$. Invariance then gives $O\\subset U$.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0EKE (lemma-proper-ample-delete-affine), affine charts as packaged in the polarization node. Common section is an explicit elementary linear combination."
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spec}E$. Each $O_i$ is closed in $U$, because it is closed in $S$ and $U\\subset S$. Give it the reduced induced closed structure $Y_i=\\operatorname{Spec}(E/I_i)$, with $I_i$ radical. Distinct orbits have disjoint rational points. If $Y_1\\cap Y_2$ were nonempty, Step 3 would give a rational point in it. Its two nonempty orbit-map fibres would have rational points, making $y_1$ and $y_2$ translates of one another, a contradiction. Thus $Y_1\\cap Y_2=\\varnothing$, whence $I_1+I_2=E$: a proper sum would lie in a maximal ideal and give a point in the intersection. The Chinese remainder theorem now makes $E\\to E/I_1\\times E/I_2$ surjective.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme); algebra.tex Tag 00U3, Chinese-remainder factorization."
+   }
+  },
+  {
+   "text": "The quotient in Step 11 is equivariant for the full group scheme. Indeed $G$ and $Y_i$ are reduced affine finite-type schemes over the algebraically closed $k$, so their product is reduced by the reduced-product theorem. For $b\\in I_i$, pull back $b$ along $G\\times Y_i\\to U$. Its value at every pair $(g,y)\\in G(k)\\times Y_i(k)$ is $b(gy)=0$, because $O_i$ is an orbit. The product vanishing principle therefore makes this pulled-back function zero. In coordinates the composite $E\\to E\\otimes_k k[G]\\to (E/I_i)\\otimes_k k[G]$ kills $I_i$, which is exactly the condition for the coaction to descend. The coactions consequently descend to each $E/I_i$ and to their product; the quotient map is equivariant. This argument does not require $E$ reduced.",
+   "uses": [
+    "lem-wf-affine-product-reduced"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Group action stability, printed pp.26--27; affine verification using the existing product vanishing principle (blueprint lem-wf-affine-product-reduced)."
+   }
+  },
+  {
+   "text": "In $F=E/I_1\\times E/I_2$, the element $b=(0,1)$ is invariant: the action preserves each of the two factors and their scalar constants. Apply the PGL geometric-reductivity power-lifting statement to the surjective equivariant map $E\\twoheadrightarrow F$. Both are finitely generated $k$-algebras (a finite product of the two quotients is generated by their generators and $(1,0)$). It gives $N>0$ and $f\\in E^G$ mapping to $b^N=b$. Thus $f$ is zero on $Y_1$ and one on $Y_2$. Only the lifting of a power is used; exactness of taking invariants is not assumed.",
+   "uses": [
+    "lem-sfb-pgl-geometric-reductivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Introduction, printed p.2, geometric reductivity as lifting powers of invariant functions; Sections 9.1--9.2 and Theorem 9.7.6. Read online at https://arxiv.org/pdf/1005.2398; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Set $a=f(z)\\in k$. Invariance says that the pullback of $f$ along the orbit map $a_z:G\\to U$ is the constant $a$: restrict the coaction identity $\\rho(f)=f\\otimes1$ at $z$. Hence $O$ lies in the closed zero set $V(f-a)$ in $U$. Its closure in $U$ is $C\\cap U$, so both $y_1,y_2$ lie in that zero set. Evaluation at $y_1$ gives $a=0$, and evaluation at $y_2$ gives $a=1$, a contradiction. Thus the closed orbit from Step 9 is unique.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Agent affine separation argument using the power-lifting property in the introduction, printed p.2; no adequate-moduli-space existence theorem is invoked."
+   }
+  },
+  {
+   "text": "Every construction above used only the underlying topology of $Z$ for orbit closures and dimensions, but used the actual scheme fibres in Step 6. The stabilizer in Step 7 was never replaced by its reduced subgroup: its identity local-ring dimension equals its full scheme dimension by the cited group theorem even when it is nonreduced. In Step 12 reduced structures were put only on the two closed orbit subsets to test invariance of their ideals; the ambient algebra $E$ and the geometric-reductivity map were allowed to be nonreduced. Consequently all conclusions proved above hold for nonreduced $Z$ and nonreduced stabilizers, as stated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent hypothesis audit of Steps 1--14; compare Proposition 1.65 (arbitrary algebraic schemes), pp.26--27, and Stacks groupoids.tex lemma-group-scheme-finite-type-field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-kun-dimension-finite-type",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sfb-pgl-geometric-reductivity",
+  "lem-sfb-projective-polarization-section-algebra",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-wf-affine-constructible-open",
+  "lem-wf-affine-product-reduced",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lemma-nagata-proper-to-separated-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent assembly: Propositions 1.65(b), 1.66, printed pp.27--28, expanded with Stacks 0B2L and the existing PGL power-lifting input from Alper. Morrison Corollary 11(3), printed p.17, motivates the requested application but does not supply a proof of all clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semistable orbit closure contains a closed orbit and every boundary orbit has strictly smaller dimension so a closed invariant subspace with finite stabilizers consists of stable points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α] (c : M) (x : α), c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : SMul Γ T] [ProperlyDiscontinuousSMul Γ T] (x : T),\\n  {γ | γ • x = x}.Finite\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $T$, then for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is finite\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"MulAction.IsMinimal\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"(M : Type u_1) → (α : Type u_2) → [inst : Monoid M] → [TopologicalSpace α] → [MulAction M α] → Prop\", \"doc\": \"A monoid action of $M$ on a topological space $\\\\alpha$ is minimal if the only closed subsets of $\\\\alpha$ invariant under the action are the empty set and $\\\\alpha$ itself.\"}\n  {\"name\": \"vadd_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : AddMonoid M] [inst_2 : AddAction M α]\\n  [ContinuousConstVAdd M α] (c : M) (x : α), c +ᵥ closure (AddAction.orbit M x) ⊆ closure (AddAction.orbit M x)\", \"doc\": \"For any additive monoid $ M $ acting continuously on a topological space $ \\\\alpha $, and for any $ c \\\\in M $ and $ x \\\\in \\\\alpha $, the additive action of $ c $ on the closure of the orbit of $ x $ und\"}\n  {\"name\": \"isMinimal_iff_isClosed_smul_invariant\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α],\\n  MulAction.IsMinimal M α ↔ ∀ (s : Set α), IsClosed s → (∀ (c : M), c • s ⊆ s) → s = ∅ ∨ s = Set.univ\", \"doc\": \"A monoid action $ M $ on a topological space $ \\\\alpha $ is minimal if and only if every closed subset $ s \\\\subseteq \\\\alpha $ invariant under the action (i.e., $ c \\\\cdot s \\\\subseteq s $ for all $ c \\\\in\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : Group Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : MulAction Γ T]\\n  [ProperlyDiscontinuousSMul Γ T] (x : T), (↑(MulAction.stabilizer Γ x)).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: topological orbit-closure invariance and finite stabilizers of properly discontinuous actions give neither algebraic orbit dimensions nor GIT closed orbits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic group action orbit closures have smaller dimensional boundary orbits and the unique closed semistable orbit criterion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"smul_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α] (c : M) (x : α), c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x)\", \"doc\": \"For any element $c$ in a monoid $M$ and any $x$ in a topological space $\\\\alpha$, the scalar multiplication of $c$ on the closure of the orbit of $x$ under $M$ is contained within the closure of the or\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"exists_smul_notMem_of_subset_orbit_closure\", \"module\": \"Mathlib/GroupTheory/Perm/ClosureSwap\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α] (S : Set G) (T : Set α) {a : α},\\n  (∀ g ∈ S, g⁻¹ ∈ S) → T ⊆ MulAction.orbit (↥(Subgroup.closure S)) a → a ∉ T → T.Nonempty → ∃ σ ∈ S, ∃ a ∈ T, σ • a ∉ T\", \"doc\": \"Let $ G $ be a group acting on a set $ \\\\alpha $, let $ S \\\\subseteq G $ be a subset closed under inverses, and let $ T \\\\subseteq \\\\alpha $ be a non-empty subset contained in the orbit of the subgroup ge\"}\n  {\"name\": \"vadd_closure_orbit_subset\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : AddMonoid M] [inst_2 : AddAction M α]\\n  [ContinuousConstVAdd M α] (c : M) (x : α), c +ᵥ closure (AddAction.orbit M x) ⊆ closure (AddAction.orbit M x)\", \"doc\": \"For any additive monoid $ M $ acting continuously on a topological space $ \\\\alpha $, and for any $ c \\\\in M $ and $ x \\\\in \\\\alpha $, the additive action of $ c $ on the closure of the orbit of $ x $ und\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"isMinimal_iff_isClosed_smul_invariant\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [ContinuousConstSMul M α],\\n  MulAction.IsMinimal M α ↔ ∀ (s : Set α), IsClosed s → (∀ (c : M), c • s ⊆ s) → s = ∅ ∨ s = Set.univ\", \"doc\": \"A monoid action $ M $ on a topological space $ \\\\alpha $ is minimal if and only if every closed subset $ s \\\\subseteq \\\\alpha $ invariant under the action (i.e., $ c \\\\cdot s \\\\subseteq s $ for all $ c \\\\in\"}\n  {\"name\": \"MulAction.IsMinimal\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"(M : Type u_1) → (α : Type u_2) → [inst : Monoid M] → [TopologicalSpace α] → [MulAction M α] → Prop\", \"doc\": \"A monoid action of $M$ on a topological space $\\\\alpha$ is minimal if the only closed subsets of $\\\\alpha$ invariant under the action are the empty set and $\\\\alpha$ itself.\"}\n  {\"name\": \"MulAction.dense_orbit\", \"module\": \"Mathlib/Dynamics/Minimal\", \"type\": \"∀ (M : Type u_1) {α : Type u_3} [inst : Monoid M] [inst_1 : TopologicalSpace α] [inst_2 : MulAction M α]\\n  [MulAction.IsMinimal M α] (x : α), Dense (MulAction.orbit M x)\", \"doc\": \"In a minimal monoid action on a topological space, the orbit of any element is dense in the space.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: topological orbit-closure invariance and finite stabilizers of properly discontinuous actions give neither algebraic orbit dimensions nor GIT closed orbits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"orbit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: topological orbit-closure invariance and finite stabilizers of properly discontinuous actions give neither algebraic orbit dimensions nor GIT closed orbits."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*(closure|dimension)|stabilizer.*dimension|semistab",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"line\": \"205\", \"text\": \"    c • closure (MulAction.orbit M x) ⊆ closure (MulAction.orbit M x) :=\"}\n  {\"file\": \"Mathlib/Dynamics/Minimal.lean\", \"line\": \"107\", \"text\": \"    (nonempty_orbit _).closure.ne_empty]\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/ClosureSwap.lean\", \"line\": \"46\", \"text\": \"theorem exists_smul_notMem_of_subset_orbit_closure (S : Set G) (T : Set α) {a : α}\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/ClosureSwap.lean\", \"line\": \"47\", \"text\": \"    (hS : ∀ g ∈ S, g⁻¹ ∈ S) (subset : T ⊆ orbit (closure S) a) (notMem : a ∉ T)\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/ClosureSwap.lean\", \"line\": \"84\", \"text\": \"    swap x y ∈ closure S ↔ x ∈ orbit (closure S) y := by\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/ClosureSwap.lean\", \"line\": \"87\", \"text\": \"  have := exists_smul_notMem_of_subset_orbit_closure S {x | swap x y ∈ closure S}\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/ClosureSwap.lean\", \"line\": \"102\", \"text\": \"    f ∈ closure S ↔ (fixedBy α f)ᶜ.Finite ∧ ∀ x, f x ∈ orbit (closure S) x := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: topological orbit-closure invariance and finite stabilizers of properly discontinuous actions give neither algebraic orbit dimensions nor GIT closed orbits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "GIT orbit closure dimension drop implies a closed semistable invariant locus with finite stabilizers has only stable orbits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : AddGroup Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : AddAction Γ T]\\n  [ProperlyDiscontinuousVAdd Γ T] (x : T), (↑(AddAction.stabilizer Γ x)).Finite\", \"doc\": \"For any point $x$ in a topological space $T$ under a properly discontinuous additive action by an additive group $\\\\Gamma$, the stabilizer subgroup of $x$ is finite, i.e., $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\ga\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T] (x : T),\\n  {γ | γ +ᵥ x = x}.Finite\", \"doc\": \"For any properly discontinuous additive action of a group $\\\\Gamma$ on a topological space $T$, and for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is\"}\n  {\"name\": \"AddAction.stabilizer_finite\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {s : Set G}, s.Nonempty → s.Finite → (↑(AddAction.stabilizer G s)).Finite\", \"doc\": \"Let $ G $ be an additive group acting on a type $ \\\\alpha $, and let $ s \\\\subseteq G $ be a non-empty finite subset. Then the stabilizer subgroup of $ s $, consisting of all elements $ g \\\\in G $ satisf\"}\n  {\"name\": \"AddAction.ofQuotientStabilizer_mem_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β) (g : α ⧸ AddAction.stabilizer α x),\\n  AddAction.ofQuotientStabilizer α x g ∈ AddAction.orbit α x\", \"doc\": \"For any additive group $\\\\alpha$ acting on a type $\\\\beta$, and for any element $x \\\\in \\\\beta$, applying the induced action of any coset in the quotient group $\\\\alpha / \\\\text{Stab}(x)$ (where $\\\\text{Stab\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \": {γ : Γ | γ • x = x}.Finite\", \"doc\": \"If a discrete group $\\\\Gamma$ acts properly discontinuously on a topological space $T$, then for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is finite\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"[ProperlyDiscontinuousSMul Γ T] (x : T) : (MulAction.stabilizer Γ x : Set Γ).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n  {\"name\": \"MulAction.stabilizer_finite\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"(hs₀ : s.Nonempty) (hs : s.Finite) : (stabilizer G s : Set G).Finite\", \"doc\": \"If a group $ G $ acts on a set $ \\\\alpha $, and $ s \\\\subseteq \\\\alpha $ is a non-empty finite subset, then the stabilizer subgroup of $ s $ in $ G $ is finite.\"}\n  {\"name\": \"AddAction.stabilizer_orbit_eq\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {X : Type u_2} [inst_1 : AddAction G X] {a : X} {H : AddSubgroup G},\\n  AddAction.stabilizer G a ≤ H → AddAction.stabilizer G (AddAction.orbit (↥H) a) = H\", \"doc\": \"For an additive group $G$ acting on a type $X$, if the stabilizer subgroup $\\\\text{Stab}(a)$ of an element $a \\\\in X$ is contained in a subgroup $H \\\\leq G$, then the stabilizer of the orbit $H \\\\cdot a$ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: topological orbit-closure invariance and finite stabilizers of properly discontinuous actions give neither algebraic orbit dimensions nor GIT closed orbits."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*(dimension|locallyClosed)|stabilizer.*(dim|krull)|semistab|geometric.*reductiv",
+   "results": "[grep] OK 0 hit(s). Returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "No match: zero hits for algebraic orbit dimensions, locally closed orbits, semistability or geometric reductivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group acting on a finite type scheme has locally closed orbits, dimension equal to group dimension minus stabilizer dimension and a unique closed orbit in each semistable orbit closure",
+   "results": "[leansearch] OK 8 hit(s). Returned names/files: MulAction.stabilizer, AddAction.orbitEquivQuotientStabilizer, MulAction.index_stabilizer, MulAction.IsPartition.of_orbits, MulAction.orbitProdStabilizerEquivGroup, MulAction.instElemOrbit_1, AddAction.index_stabilizer, MulAction.IsFixedBlock.orbit",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract orbit/stabilizer equivalences, cardinality/index and partition facts do not give Krull dimensions or closed semistable orbits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"orbit\"",
+   "results": "[loogle] OK 0 hit(s). Returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "No match: zero hits for the joint AlgebraicGeometry/orbit search."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a projective scheme with an ample linearization under PGL over an algebraically closed field, orbits are locally closed with dimension group minus stabilizer, boundary orbits have smaller dimension, and each semistable orbit closure contains a unique closed orbit",
+   "results": "[leanfinder] OK 8 hit(s). Returned names/files: AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "No match: the first query returned Proj construction and affine-cover results, and the second returned topological orbit/minimal-action results. Neither supplies algebraic orbit fibre dimensions or GIT uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic geometry orbit closure for a reductive group action: strict decrease of Krull dimension on the boundary and uniqueness of a closed orbit from separation by invariant regular functions",
+   "results": "[leanfinder] OK 8 hit(s). Returned names/files: MeasureTheory.fundamentalFrontier, exists_smul_notMem_of_subset_orbit_closure, smul_closure_orbit_subset, isMinimal_iff_isClosed_smul_invariant, t2Space_quotient_mulAction_of_properSMul, MeasureTheory.disjoint_fundamentalInterior_fundamentalFrontier, MulAction.IsPretransitive.t1Space_iff, MulAction.IsMinimal",
+   "date": "2026-10-22",
+   "verdict": "No match: the first query returned Proj construction and affine-cover results, and the second returned topological orbit/minimal-action results. Neither supplies algebraic orbit fibre dimensions or GIT uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(3), printed p.17, semistable orbit boundary with larger stabilizer. General orbit-dimension and unique closed orbit facts: Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Chapter 1. Local references WANTED.",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-git-orbit-closure-dimension",
+  "worker": "stage1",
+  "summary": "Complete orbit-map proof from existing affine constructibility, finite-type fibre dimensions and PGL geometric reductivity. Proves local closedness by translating an open piece, the dimension identity with the full stabilizer fibre, strict boundary dimension drop, existence by minimum dimension, and uniqueness by a common invariant affine chart and a lifted separating idempotent. Statement unchanged; no new nodes.",
+  "blueprint": "Inherited non-imported prerequisite chain: det-thm-sf-ctf-stability-direct-images proof (3), stable-curve alteration input, through the ten-canonical stability argument and Morrison Corollary 11(3), printed p.17. Steps 4--9 realize the orbit-boundary/stabilizer argument; Steps 10--14 supply its general unique-closed-orbit clause. No change to the chapter or unit route. The ancestor tool returns None, as in the inherited blueprint field.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic geometry tool used in Steps 7; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   },
+   {
+    "node": "lem-ag-rational-point-stalk-topological-local-dimension",
+    "why": "Generic geometry tool used in Steps 7; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic geometry tool used in Steps 1; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic geometry tool used in Steps 7; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   },
+   {
+    "node": "lem-wf-affine-constructible-open",
+    "why": "Generic geometry tool used in Steps 4, 5; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   },
+   {
+    "node": "lem-wf-affine-product-reduced",
+    "why": "Generic geometry tool used in Steps 12; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   },
+   {
+    "node": "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "why": "Generic geometry tool used in Steps 7; supplies only the quoted auxiliary statement, not a replacement for the constructible-six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-wf-affine-constructible-open",
+  "lem-wf-affine-product-reduced",
+  "lem-zl-irreducible-fibre-dimension-lower-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-f8e6979cf",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-f8e6979cf (reviewer sub-agent of L); spot-checked: FIX: the mathematics is sound, and I fixed two faults in the corrected item file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-git-orbit-closure-dimension.json. The delivery creates no new nodes, and the statement and stmt_deps are byte-identical to the live node, which is still unsplit. The item is not on the dropped list and nothing cites SGA. I read all 15 steps and all 22 cited statements, and checked them against Milne iAG Prop. 1.65(b) on p.27 and Prop. 1.66 on pp.27-28; 0B2L, 0A21(3) and 045X were checked through the cited node statements. Each step's argument is correct. Local closedness: translates of a dense open, then rational-point emptiness of a_z^{-1}(C\\T). Dimension formula: 0B2L at a rational point of the dense equality locus, the rational-point stalk comparison, then dim O_{H,e}=dim H with no reducedness assumption. Existence: the minimum-dimension orbit. Uniqueness: a common invariant chart Z_s, CRT, equivariance through the reduced-product vanishing principle, and lifting the idempotent (0,1) with PGL power lifting, which forces 0=f(z)=1. Edge cases checked: fixed point, closed orbit, nonreduced stabilizer, empty Z^ss. Fault 1 (E, clause coverage): Step 8 proved the strict dimension drop only for orbits in C_S\\O, the boundary inside Z^ss. The statement's closure has no qualifier, and Milne takes it in the ambient space, so orbits in C\\S were not covered. I rewrote Step 8 with B=C\\O, which covers both readings, so the citer's step 13 still holds. Fault 2 (C1): Step 6 used base change of the closed diagonal without a citation; I added the Mathlib leaf lem-weil-pbc-closed-immersion-base-change. I accept the split_report tool_uses (Chevalley, reduced product, 0A21, 0B2L, local dimension, projective implies proper) as generic black-box tools; none replaces a unit step. I found no duplicates: the affine and projective PGL quotient nodes and the semistable-replacement node state different things.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemistableOrbitClosureDimension",
+  "declaration": "AlgebraicGeometry.semistable_orbit_closure_dimension",
+  "declarations": [
+   "AlgebraicGeometry.GITOrbitGeometry.orbitMap",
+   "AlgebraicGeometry.GITOrbitGeometry.orbit",
+   "AlgebraicGeometry.GITOrbitGeometry.semistableLocus",
+   "AlgebraicGeometry.GITOrbitGeometry.semistableOrbit",
+   "AlgebraicGeometry.semistable_orbit_closure_dimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemistableOrbitClosureDimension.lean",
+  "statement": "theorem semistable_orbit_closure_dimension {k : Type u} [Field k] [IsAlgClosed k] (r : ℕ) (hr : 2 ≤ r) (G : Grp (Over (Spec (.of k)))) (hG : IsProjectiveLinearQuotient k r G.X) (Z : Over (Spec (.of k))) [IsHProjective Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (a : ModObj G.X Z) (A : Z.left.Modules) [A.IsInvertible] (hA : Scheme.Modules.IsAmple Z.left A) (D : GroupSchemeLinearization.Linearization a A) (z : PGLLinearization.fieldTest k k ⟶ Z) (hz : D.IsSemistable k z) : IsLocallyClosed (GITOrbitGeometry.orbit a z) ∧ topologicalKrullDim (GITOrbitGeometry.orbit a z) + topologicalKrullDim (GroupSchemeLinearization.stabilizer a k z) = topologicalKrullDim G.X.left ∧ (∃! O : Set (GITOrbitGeometry.semistableLocus D), (∃ y : PGLLinearization.fieldTest k k ⟶ Z, D.IsSemistable k y ∧ O = GITOrbitGeometry.semistableOrbit D y) ∧ IsClosed O ∧ O ⊆ closure (GITOrbitGeometry.semistableOrbit D z)) ∧ (∀ y : PGLLinearization.fieldTest k k ⟶ Z, GITOrbitGeometry.orbit a y ⊆ closure (GITOrbitGeometry.orbit a z) \\ GITOrbitGeometry.orbit a z → topologicalKrullDim (GITOrbitGeometry.orbit a y) < topologicalKrullDim (GITOrbitGeometry.orbit a z))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned a7bcf8276c95: the PGL hypothesis is the landed definition IsProjectiveLinearQuotient, not the lemma-owned ProjectiveMatrixCentralCover.Presentation. No matrix quotient map or SL kernel inclusion is required. The theorem node and its module are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df3864cac",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN a7bcf8276c95: the theorem-owned ProjectiveMatrixCentralCover.Presentation and the free π/j binders are replaced by hG : IsProjectiveLinearQuotient k r G.X. stmt_dep lem-sfb-projective-matrix-central-cover is replaced by the landed def-sfb-projective-linear-quotient (snapshot def node identical to side-live). The definition is the fppf scalar-quotient characterization of PGL_r, exactly the node's G, with no extra assumption, any characteristic and r≥2 kept. The unused HilbertPluckerPGLLinearization import is removed. The snapshot diff shows no other change to the module (one docstring sentence) or the node (statement, proof, proof_deps identical to live). lean.statement matches the file verbatim. Conclusions, helpers and edge cases are unchanged and rechecked. The base theorem stmt_dep hilbert-plucker is retained as advisory. Worker report and Second reading by NL are present. No file changed, so no compile."
+ }
+}

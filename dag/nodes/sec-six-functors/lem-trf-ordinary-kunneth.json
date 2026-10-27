@@ -356,7 +356,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-lem-sf-kunneth-star",
  "split_report": {
@@ -522,5 +533,38 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-4acc22548 (reviewer sub-agent of L); spot-checked: FIX with one statement-precision repair; I read the whole delivery. The item statement is unchanged and matches main-20261015 word for word. Old steps 1-5 and old step 8 are verbatim new steps 1-5 and new step 10. The old over-long steps 6 (2092 chars) and 7 (2554 chars) became steps 6-9, the longest 960 chars, so the human's long-step return is answered. Step 4: I checked the substitution into 0F1N (etale-cohomology.tex l.20878-20937): X:=Z, S':=Y, T:=X, g:=f, n=ell, which gives alpha_{F_ell} up to symmetry for unbounded complexes. Steps 6-9: the new triangle helper applies to the bounded flat model P. triangle-morphism-iso, truncation-triangle and complex-ses-triangle carry the reduction down the varpi-filtration, with no Tor condition on the quotients. coef-finite-direct-image applies with B=kappa. The new site helper applies with H=p_Y^*Rf_*L or p_X^*L and N the pullbacks of M. The sbc restriction comparisons get D+ inputs. The transpose normalization plus step 5 give the kappa case. New nodes: lem-trf-external-comparison-triangles is true; F needs the ambient category because A/ell tensor^L A/ell is unbounded below over Z/ell^2. It is not a duplicate of ringed-projection-mate-exact (PF only) or of sf-finite-exchange-projection-commshift (Rf_!). lem-trf-site-derived-tensor-restriction is true by K-flat P with P tensor_R S K-flat; I tested identity and nonflat quotient rings, unbounded H, N=0 and the one-point site. It is not a duplicate of kun-change-of-rings-tensor (modules only) or the scalar adjunction nodes. Both new nodes are statement-only and assert less than the item. FIX: the triangle helper composed exchange tensor 1 with PF_h, whose target contains h^{-1}p_Z'^{-1}Q, while G is written with p_Z^*Q. I made the composition isomorphism explicit, citing lem-weil-pbc-inverse-image-composition-module-linear (added to stmt_deps). Six entries in split_report.tool_uses are no longer cited by any step; they are stale and not accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Use the finite coefficient ring $A=A_{E,n}$ of\n[def-trf-coefficient-conventions]. Let $f:X\\to Y$ be a morphism of\nseparated finite-type\nschemes, let $Z$ be an auxiliary such scheme, and let $L\\in D^b_{ctf}(X,A)$, $Q\\in D^b_{ctf}(Z,A)$ in the\nfinite-Tor constructible\ncategory. Then the canonical comparison\n\n$$\nRf_*L\\boxtimes_A^{\\mathrm L} Q\n\\xrightarrow{\\ \\sim\\ }\nR(f\\times\\operatorname{id}_Z)_*\\bigl(L\\boxtimes_A^{\\mathrm L} Q\\bigr)\n$$\n\nis an isomorphism, natural in $L$ and $Q$.",
+  "proof": [
+   {
+    "text": "Consider the Cartesian square\n\n$$\n\\begin{gathered}\nX\\times Z \\xrightarrow{f\\times\\operatorname{id}_Z} Y\\times Z,\\\\\np_X:X\\times Z\\to X,\\qquad p_Y:Y\\times Z\\to Y,\\qquad\np_Z:X\\times Z\\to Z,\\qquad p'_Z:Y\\times Z\\to Z,\n\\end{gathered}\n$$\n\nwith $p_Z=p'_Z\\circ(f\\times\\operatorname{id}_Z)$. Writing the external\nproduct as\n$L\\boxtimes_A^{\\mathrm L}Q=p_X^*L\\otimes_A^{\\mathrm L}p_Z^*Q =p_X^*L\\otimes_A^{\\mathrm L}(f\\times\\operatorname{id}_Z)^*\\bigl(p'_Z{}^*Q\\bigr)$,\nthe canonical comparison is the composite\n\n$$\n\\begin{aligned}\nRf_*L\\boxtimes_A^{\\mathrm L}Q\n= p_Y^*Rf_*L\\otimes_A^{\\mathrm L}p'_Z{}^*Q\n&\\longrightarrow\nR(f\\times\\operatorname{id}_Z)_*\\bigl(p_X^*L\\bigr)\n\\otimes_A^{\\mathrm L}p'_Z{}^*Q\\\\\n&\\longrightarrow\nR(f\\times\\operatorname{id}_Z)_*\\bigl(L\\boxtimes_A^{\\mathrm L}Q\\bigr)\n\\end{aligned}\n$$\n\nof the base-change map along $p_Y$ and the projection map for the ordinary\ndirect image $R(f\\times\\operatorname{id}_Z)_*$. Neither map is an isomorphism\nby a general theorem: $Z$ is an arbitrary finite-type scheme, so $p_Y$ is\nsmooth only when $Z$ is and smooth base change does not apply, and the\nprojection formula for $Rf_*$ (as opposed to $Rf_!$) is not an isomorphism in\ngeneral.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 1: $\\mathbf Z/N$-coefficients.* Put $N=\\ell^n$, so that $A$ is a\n$\\mathbf Z/N$-algebra. With $K=k$, $X\\leftarrow X'\\leftarrow Y$ and\n$\\Spec K\\leftarrow S'\\leftarrow T$ of [lem-kun-0f1n] taken to be\n$Z\\leftarrow Z\\times Y\\leftarrow Z\\times X$ and\n$\\Spec k\\leftarrow Y\\xleftarrow{f}X$, that lemma says precisely that for\nevery $E\\in D(Z_{\\Et},\\mathbf Z/N)$ and $F\\in D(X_{\\Et},\\mathbf Z/N)$ the\ncanonical map\n\n$$\np'_Z{}^{*}E\\otimes^{\\mathrm L}_{\\mathbf Z/N}p_Y^*Rf_*F\n\\longrightarrow\nR(f\\times\\operatorname{id}_Z)_*\\bigl(p_Z^*E\\otimes^{\\mathrm L}_{\\mathbf Z/N}p_X^*F\\bigr)\n$$\n\nis an isomorphism (its bounded form is [lem-kun-0f1j]). This is the\nassertion for $\\mathbf Z/N$-coefficients, up to the symmetry of the tensor\nproduct.",
+    "uses": [
+     "lem-kun-0f1n",
+     "lem-kun-0f1j"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: coefficient transport to $A$.* Let $P$ be the bounded flat\n$A$-model of $L$ given by [lem-sf-flat-model]. Both sides of the\ncomparison are exact in $Q$, so the finite $\\pi_E$-adic filtration\n$Q\\supseteq\\pi_EQ\\supseteq\\dots$ of a bounded complex (equivalently, the\ntriangles $\\pi_E^{i+1}\\mathcal H^q\\to\\pi_E^{i}\\mathcal H^q\\to\n\\pi_E^{i}\\mathcal H^q/\\pi_E^{i+1}\\mathcal H^q$ on the cohomology\nsheaves, together with the truncation triangles) reduces the assertion to\nthe case where $Q$ is a single sheaf of $\\kappa$-modules,\n$\\kappa=A/(\\pi_E)$. For such $Q$,\n$P\\otimes_A Q=(P\\otimes_A\\kappa)\\otimes_\\kappa Q$ with $P\\otimes_A\\kappa$ a\ncomplex of flat $\\kappa$-module sheaves, and the comparison for\n$(L,Q)$ over $A$ is the comparison for $(P\\otimes_A\\kappa,Q)$ over the\nfinite field $\\kappa$. Step 1 and the proof of [lem-kun-0f1j] are linear\nover the coefficient field — truncations, flat resolutions, filtered colimits\nof constructible sheaves, the embedding of a constructible sheaf into a\nfinite sum of $\\pi_{i*}$ of constant sheaves for finite $\\pi_i$, and dimension\nshifting — and apply verbatim with the finite field $\\kappa$ in place of\n$\\mathbf F_\\ell$; alternatively, $\\kappa$ is a finite free\n$\\mathbf F_\\ell$-module, so $\\kappa$-linear constructible sheaves are\n$\\mathbf F_\\ell$-constructible sheaves with a $\\kappa$-action and the\n$\\kappa$-linear comparison is a direct summand of the $\\mathbf F_\\ell$-linear\none.\n\nThe composite is the canonical comparison, since both maps are natural in\ntheir variables; naturality in $L$ and $Q$ follows from the functoriality of\nthe base-change and projection maps.\n(*Provenance:* Stacks Project, Étale Cohomology, Lemma 59.97.8,\n[Tag `0F1N`](https://stacks.math.columbia.edu/tag/0F1N), which is\n[lem-kun-0f1n] here, together with SGA 5, III, 1.1 and 1.6.4 for the\ncoefficient and site generality used here.)",
+    "uses": [
+     "lem-sf-flat-model",
+     "lem-kun-0f1j",
+     "lem-kun-0f1n"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

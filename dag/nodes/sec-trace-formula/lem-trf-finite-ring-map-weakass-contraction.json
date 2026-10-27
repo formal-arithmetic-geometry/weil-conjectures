@@ -10,9 +10,113 @@
  "stmt_deps": [
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $m\\in P$ such that $\\mathfrak q$ is minimal over $J=\\operatorname{Ann}_S(m)$, and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Then $J\\subseteq\\mathfrak q$. By [lem-weil-pbc-minimal-prime-localization-radical], $\\sqrt{JS_{\\mathfrak q}}=\\mathfrak qS_{\\mathfrak q}$. Also $m/1\\ne0$ in $P_{\\mathfrak q}$: otherwise the zero criterion of [def-weil-pbc-module-localization] gives $v\\notin\\mathfrak q$ with $vm=0$, contradicting $J\\subseteq\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-localization-radical",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, lemma-weakly-ass-finite-ring-map, contraction inclusion, proof"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-finite-ring-map-finite], the map $f=\\operatorname{Spec}(\\varphi)$ is finite. Its fibre over $\\mathfrak p$ is finite by clause (2) of [lem-weil-pbc-finite-closed-map-finite-fibres]. The spectrum convention [def-weil-affine-spectrum] identifies this fibre with the primes of $S$ whose contraction is $\\mathfrak p$. Enumerate them without repetition as $\\mathfrak q_1=\\mathfrak q,\\mathfrak q_2,\\ldots,\\mathfrak q_l$, with $l\\ge1$. The map $R\\to S$ is integral by [lem-weil-pbc-finite-algebra-is-integral]. Hence [pqf-lem-incomparability] shows that these distinct primes are pairwise incomparable.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "pqf-lem-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, first proof paragraph; Tag 05DR, lemma-finite-finite-fibres; Tag 00GT, lemma-integral-no-inclusion"
+   }
+  },
+  {
+   "text": "If $l>1$, apply [lem-weil-pbc-prime-avoidance] with the ideal $\\mathfrak q$ and the prime ideals $\\mathfrak q_2,\\ldots,\\mathfrak q_l$. The noncontainment hypotheses follow from step 2. Obtain $x\\in\\mathfrak q$ with $x\\notin\\mathfrak q_i$ for every $i>1$. If $l=1$, take $x=0$; the avoidance condition is empty.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, choice of x using Tag 00DS, lemma-silly"
+   }
+  },
+  {
+   "text": "Step 1 gives $(x/1)^t\\in JS_{\\mathfrak q}$ for some $t\\ge1$. Thus $x^tm/1=0$ in $P_{\\mathfrak q}$, and [def-weil-pbc-module-localization] gives $y\\notin\\mathfrak q$ with $yx^tm=0$ in $P$. Put $z=ym$. Since $y$ is invertible in $S_{\\mathfrak q}$ and $m/1\\ne0$, we have $z/1\\ne0$ in $P_{\\mathfrak q}$. For $i>1$, $x$ is invertible in $S_{\\mathfrak q_i}$ and $x^tz=0$, so $z/1=0$ in $P_{\\mathfrak q_i}$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, lemma-weakly-ass-finite-ring-map, contraction inclusion, proof"
+   }
+  },
+  {
+   "text": "Put $T=R\\setminus\\mathfrak p$, $A=T^{-1}R=R_{\\mathfrak p}$, $B=\\varphi(T)^{-1}S$ and $N=\\varphi(T)^{-1}P$. These fractions and their actions are those of [def-weil-pbc-module-localization]. The map $A\\to B$ is $r/t\\mapsto\\varphi(r)/\\varphi(t)$, well defined by the fraction relations. If $s_1,\\ldots,s_d$ generate $S$ over $R$, they generate $B$ over $A$: $s/\\varphi(t)=\\sum_j(a_j/t)(s_j/1)$ whenever $s=\\sum_j\\varphi(a_j)s_j$. Thus $B$ is finite over the local ring $A$, whose maximal ideal is $\\mathfrak pA$ by [def-weil-pbc-localization-at-prime]. For every maximal ideal $\\mathfrak n$ of $B$, [lem-weil-pbc-finite-algebra-local-radical] gives its contraction $\\mathfrak pA$ in $A$. By [lem-weil-pbc-localization-spectrum-embedding], its contraction $Q$ in $S$ is prime. For $r\\in R$, $\\varphi(r)\\in Q$ iff $r/1\\in\\mathfrak pA$ iff $r\\in\\mathfrak p$ (the last equivalence is the fraction criterion and primality of $\\mathfrak p$). Consequently $Q=\\mathfrak q_i$ for some $i$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-algebra-local-radical",
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, lemma-weakly-ass-finite-ring-map, contraction inclusion, proof"
+   }
+  },
+  {
+   "text": "Fix $r\\in\\mathfrak p$. By step 1, $(\\varphi(r)/1)^k\\in JS_{\\mathfrak q}$ for some $k\\ge1$. Hence $\\varphi(r)^kz/1=0$ in $P_{\\mathfrak q}$; by step 4 it is also zero in every $P_{\\mathfrak q_i}$ for $i>1$. Let $w=\\varphi(r)^kz/1\\in N$. If $w\\ne0$, its annihilator $H=\\operatorname{Ann}_B(w)$ is proper. Choose a maximal ideal $\\mathfrak n\\supseteq H$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. Step 5 identifies its contraction in $S$ with some $\\mathfrak q_i$. Since $\\varphi(r)^kz/1=0$ in $P_{\\mathfrak q_i}$, [def-weil-pbc-module-localization] gives $u\\notin\\mathfrak q_i$ with $u\\varphi(r)^kz=0$ in $P$. Then $u/1\\in H\\subseteq\\mathfrak n$, contradicting the description of the contraction. Thus $w=0$ in $N$, and the same zero criterion yields $a\\in R\\setminus\\mathfrak p$ with $\\varphi(a)\\varphi(r)^kz=0$. In other words, $ar^k\\in\\operatorname{Ann}_R(z)$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, second proof paragraph; element detection of Tag 00HN, lemma-characterize-zero-local, written out using an annihilator"
+   }
+  },
+  {
+   "text": "Write $I=\\operatorname{Ann}_R(z)$. If $b\\in I\\setminus\\mathfrak p$, then $\\varphi(b)\\notin\\mathfrak q$ is invertible in $S_{\\mathfrak q}$ and kills $z/1$, contradicting step 4; hence $I\\subseteq\\mathfrak p$. Let $\\mathfrak p_0\\subseteq\\mathfrak p$ be a prime containing $I$. For each $r\\in\\mathfrak p$, step 6 gives $a\\notin\\mathfrak p$ and $k\\ge1$ with $ar^k\\in I\\subseteq\\mathfrak p_0$. As $a\\notin\\mathfrak p_0$, primality implies $r\\in\\mathfrak p_0$. Thus $\\mathfrak p\\subseteq\\mathfrak p_0$, and equality follows. This proves that $\\mathfrak p$ is minimal over the annihilator of the actual element $z\\in P$, which is exactly $\\mathfrak p\\in\\operatorname{WeakAss}_R(P)$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05E1, lemma-weakly-ass-finite-ring-map, contraction inclusion, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-minimal-prime-localization-radical",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "pqf-lem-incomparability",
+  "lem-weil-pbc-prime-avoidance",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05E1, lemma-weakly-ass-finite-ring-map, contraction inclusion, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +152,38 @@
    "results": "{\"t\": \"2026-10-18T23:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"Weakly associated primes of any module contract under a finite homomorphism of commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg\", \"Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule\", \"associatedPrimes.finite\", \"Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule\", \"Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule\", \"Algebra.QuasiFinite.finite_primesOver\", \"associatedPrimes.subset_of_injective\", \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\"], \"digest\": \"ee4a29f3569fd8d7\"}; Read AssociatedPrime/Basic.lean:62-115 and Localization.lean:35-114: associatedPrimes uses prime radicals of annihilators; localization contraction additionally assumes finite generation of the contracted prime. These do not give contraction of primes minimal over annihilators under a general finite algebra. Ideal.exists_minimalPrimes_comap_eq gives lifting of minimal primes, the opposite direction. Module.comap_annihilator only identifies annihilator ideals; associatedPrimes.finite requires Noetherianity. No exact match or one-line specialization.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly associated primes contract under a finite ring homomorphism without Noetherian hypotheses",
+   "results": "Associated-prime localization requires finite generation of the contracted prime, or Noetherianity. Algebra.QuasiFinite.finite_primesOver and finite_comap_preimage_singleton supply only fibre finiteness. Read AssociatedPrime/Basic.lean:60-85 and Localization.lean:78-103. No exact contraction theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"Finite\"",
+   "results": "associatedPrimes.finite; requires IsNoetherianRing and Module.Finite for the module; not the present arbitrary-module theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.associated|weakAss|associatedPrimes.*(comap|restrict)",
+   "results": "Five hits in Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean at lines 20,40,74,81,122; read lines 78-103: contraction theorem assumes FG of the contracted prime.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal primes over element annihilators descend along finite algebras by restriction of scalars",
+   "results": "Ideal.minimal_primes_comap_of_surjective, Ideal.minimalPrimes_eq_comap, Module.comap_annihilator, IsAssociatedPrime, and related definitions. Surjective contraction is insufficient for a general finite ring map, and annihilator equality does not prove minimality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-weakass-invariance",
@@ -86,5 +218,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-ring-map-weakass-contraction",
+  "worker": "stage1",
+  "summary": "Checked the contraction inclusion of Stacks 05E1 without Noetherian or module-finiteness assumptions; expanded prime isolation, finite-algebra localization, local element detection, and global minimality. Reused existing DAG nodes throughout, creating no new nodes. The statement is unchanged.",
+  "blueprint": "Supporting finite-algebra contraction argument in the historical semistable-overlap branch of lem-trf-local-term-locality, Proof (1)--(2), as recorded in blueprint.from.place. The current latest blueprint uses the Varshavsky normal-cone route, so this supporting algebra is historical rather than a new claimed blueprint sentence; the existing from.node and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-687f48f5d",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-687f48f5d (reviewer sub-agent of L); spot-checked: Read the item in full, against Stacks algebra.tex Tag 05E1 (lemma-weakly-ass-finite-ring-map) and both paragraphs of its proof. The tags in the step sources map to the right labels in tags/tags: 05DR, 00DS, 00GT, 00HN. The statement is unchanged and correct for the inclusion f(WeakAss_S) ⊆ WeakAss_R, with an arbitrary S-module and no Noetherian hypothesis; the inline WeakAss definition matches Stacks. There are no new nodes. All 12 proof_deps are Mathlib leaves and equal the union of uses; I read each statement for what its step uses. Step 1: radical node for an arbitrary ring, and m/1≠0 via the zero criterion. Step 2: finite Spec map, finite fibre by clause (2), incomparability via integrality. The fibre identification rests on the comap convention of def-weil-affine-spectrum, which that node does not spell out; acceptable. Step 3: prime avoidance with q⊄q_i from incomparability; l=1 handled by x=0. Step 4: x^t/1∈JS_q kills m/1, giving y and z=ym, nonzero at q and zero at q_i for i>1. Step 5: B=φ(T)^{-1}S is finite over the local ring R_p with explicit generators; maximal ideals contract to pA and therefore to fibre primes; r/1∈pA⇔r∈p checked. Step 6: the 00HN local detection is written out with an annihilator and a maximal ideal; the element a and exponent k depend on r, with no uniformity assumed. Step 7: Ann_R(z)⊆p, and minimality follows from a r^k∈p0. Small cases checked: k→k×k with P=S, a surjective φ, and P=0. Duplicate search over all chapters (05E1, label, WeakAss): only the item and its citer lem-trf-etale-weakass-invariance; def-sc-weakly-associated-primes is ring-only. No SGA reference. Blueprint fields are retained. No tool_uses. The report's mention of a citations.json that is not in the commit is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeaklyAssociatedFiniteRingMap",
+  "declaration": "Module.weakly_associated_comap_of_finite",
+  "file": "lean/Sheaf/RingTheory/WeaklyAssociatedFiniteRingMap.lean",
+  "statement": "theorem weakly_associated_comap_of_finite {R : Type u} [CommRing R] {S : Type v} [CommRing S] (φ : R →+* S) (hfinite : @Module.Finite R S _ _ (Module.compHom S φ)) (P : Type w) [AddCommGroup P] [Module S P] (q : Ideal S) (hq : ∃ x : P, q ∈ ((⊥ : Submodule S P).colon {x}).minimalPrimes) : ∃ x : P, q.comap φ ∈ (@Submodule.colon R P _ _ (Module.compHom P φ) ⊥ {x}).minimalPrimes",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c62b1aa7",
+  "group": "Q116",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause: φ is explicit; finiteness is Module.Finite of S through compHom S φ; P is an arbitrary S-module with R-action compHom P φ; WeakAss is written as ∃ x, q ∈ (⊥.colon {x}).minimalPrimes on both sides, with a fresh witness in the conclusion. No Noetherian hypothesis or finiteness of P. Universes u, v, w are independent and the recorded statement is verbatim. The node is unchanged except lean; the live node has no lean record and no module clash. Edge cases P=0, zero ring S, non-injective φ and k[x]→k[x]×k behave correctly. No Mathlib or project duplicate (Ideal.WeakAss is ring-only; associatedPrimes is a different notion). Proof is sorry only; the docstrings carry the 05E1 source, the blueprint id and all 7 proof steps; plain imports correspond to the proof_deps. No compile: no file changed; the worker's scompile was clean. No findings."
+ }
 }

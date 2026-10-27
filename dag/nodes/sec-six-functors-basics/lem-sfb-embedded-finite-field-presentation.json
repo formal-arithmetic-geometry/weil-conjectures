@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-embedded-finite-field-presentation",
+ "kind": "lemma",
+ "title": "Common heart presentation for embedded finite-field coefficients",
+ "statement": "Let X be a Noetherian scheme in universe u and A a finite discrete topological field in Type 0. Use the embedded discrete coefficients and specified realization of [def-sfb-embedded-finite-coefficient-realization], constant-model constructibility of [sk-def-sfb-constructible], intrinsic constant-ring module sheaves and constructibility of [def-weil-pbc-proetale-modules, def-weil-proetale-constructible-sheaf], and the coefficient-sized small pro-etale site of [def-weil-proetale-tor-amplitude]. Let R be the constant commutative ring sheaf with coefficient field ULift A on that small site. There are additive equivalences E from embedded discrete internal modules to R-module sheaves and H from intrinsic constant-ring module sheaves to R-module sheaves, such that E is strong monoidal for the existing relative tensor structures, the specified finiteRealization followed by D(H) is naturally isomorphic to D(E), and E(M) isomorphic to H(N) implies that M is constant-model constructible if and only if N is intrinsically constructible. This statement is about modules and the compatibility of their actual derived functors; it contains no Tor-amplitude or boundedness assertion.\n\nExact Lean assertion:\ntheorem finiteFieldPresentation\n    (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]\n    [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :\n    letI : HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=\n      CategoryTheory.siteAbelianHasSheafify.{u + 1, u, u + 1} _\n    letI : (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=\n      CategoryTheory.siteAbelianWEqualsLocallyBijective.{u + 1, u, u + 1} _\n    let R := ConstantCompletion.constant\n      (Scheme.coefficientProEtaleModelTopology.{u, u} X) (ULift.{u + 1, 0} A)\n    letI := SheafOfModules.monoidalCategory R\n    letI : HasDerivedCategory (ConstantCompletion.Mod R) := HasDerivedCategory.standard _\n    letI : HasDerivedCategory (Scheme.proEtaleRingModules X\n        (Scheme.proEtaleConstantRing X (ULift.{u, 0} A))) := HasDerivedCategory.standard _\n    ∃ E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (discreteObj A) X) ≌ ConstantCompletion.Mod R,\n      ∃ H : Scheme.proEtaleRingModules X\n          (Scheme.proEtaleConstantRing X (ULift.{u, 0} A)) ≌ ConstantCompletion.Mod R,\n        ∃ (_ : E.functor.Additive) (_ : H.functor.Additive),\n          Nonempty E.functor.Monoidal ∧\n          Nonempty (finiteRealization X A ⋙ H.functor.mapDerivedCategory ≅\n            E.functor.mapDerivedCategory) ∧\n          ∀ (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n              (condensedRingObj (discreteObj A) X))\n            (N : Scheme.proEtaleRingModules X\n              (Scheme.proEtaleConstantRing X (ULift.{u, 0} A))),\n            (E.functor.obj M ≅ H.functor.obj N) →\n            (IsConstantModelConstructible (discreteObj A) X M ↔\n              Scheme.IsConstructibleProEtaleModuleSheaf X (ULift.{u, 0} A) N)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-finite-coefficient-realization",
+  "sk-def-sfb-constructible",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Prove invertibility of the specified finite scalar map by the finite clopen fibre covering, and identify its scalar extension with inverse restriction. Let S denote that scalar extension and I the existing intrinsic realization. Their actual composite is finiteHeartRealization.",
+   "uses": [
+    "lem-sfb-embedded-finite-heart-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the equivalence of I and an additive H whose composite with finiteHeartRealization is monoidal. Define E as the equivalence (S followed by I) followed by H; its forward functor is literally that composite.",
+   "uses": [
+    "lem-sfb-embedded-finite-heart-monoidal-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equivalences are exact. Replace the specified left-derived S and right-derived I by their mapDerivedCategory functors using leftDerivedFunctorIsoMapDerivedCategory and rightDerivedFunctorIsoMapDerivedCategory. Whisker these isomorphisms with D(H), then apply mapDerivedCategoryCompIso twice. This gives the required compatibility with the unchanged finiteRealization.",
+   "uses": [
+    "lem-sfb-embedded-finite-heart-realization",
+    "lem-sfb-embedded-finite-heart-monoidal-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For E(M) isomorphic to H(N), full faithfulness of H lifts the isomorphism to finiteHeartRealization(M) isomorphic to N. Apply finiteHeartConstructibility to M and transport across this intrinsic isomorphism. Restriction to constant scalars and isConstructible_of_iso prove both transport directions, including the empty scheme.",
+   "uses": [
+    "lem-sfb-embedded-finite-heart-constructibility",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G9",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence of abelian categories preserves finite Tor amplitude and commutes with derived homology",
+   "results": "{\"t\": \"2026-10-25T13:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"An exact monoidal equivalence of abelian categories preserves finite Tor amplitude and commutes with derived homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\"], \"digest\": \"c843003a7e343114\"}",
+   "date": "2026-10-25",
+   "verdict": "The search found generic exact-functor/module-sheaf APIs, not the normalized embedded-to-intrinsic finite-coefficient comparison stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude|isZero.*homology|IsConstantModelConstructible",
+   "results": "{\"t\": \"2026-10-25T13:08:05Z\", \"tool\": \"grep\", \"query\": \"finiteTorAmplitude|isZero.*homology|IsConstantModelConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean\"], \"digest\": \"1f4939e6830a17ef\"}",
+   "date": "2026-10-25",
+   "verdict": "The search found generic exact-functor/module-sheaf APIs, not the normalized embedded-to-intrinsic finite-coefficient comparison stated here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of internal modules over a finite constant field on a site is equivalent to ordinary module sheaves, preserving tensor products and finite locally constant models",
+   "results": "{\"t\": \"2026-10-25T13:25:04Z\", \"tool\": \"leansearch\", \"query\": \"The category of internal modules over a finite constant field on a site is equivalent to ordinary module sheaves, preserving tensor products and finite locally constant models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instCategory\", \"SheafOfModules\", \"SheafOfModules.Finite.hasFiniteLimits\", \"CompHausLike.LocallyConstantModule.functor\", \"SheafOfModules.mk\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf\"], \"digest\": \"de53d36cbb8a0f8d\"}",
+   "date": "2026-10-25",
+   "verdict": "The search found generic exact-functor/module-sheaf APIs, not the normalized embedded-to-intrinsic finite-coefficient comparison stated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EmbeddedFiniteFieldCohomologyCriterion",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Proof, first paragraph: the constant-sheaf coefficient comparison in clauses (1) and (2), before the sentence applying the field Tor-dimension criterion.",
+   "via": [
+    "lem-sfb-embedded-finite-field-cohomology-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedFiniteFieldPresentation",
+  "file": "lean/Sheaf/Paper/EmbeddedFiniteFieldPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.finiteFieldPresentation",
+  "statement": "theorem finiteFieldPresentation\n    (X : Scheme.{u}) [IsNoetherian X] (A : Type) [Field A]\n    [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :\n    letI : HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} :=\n      CategoryTheory.siteAbelianHasSheafify.{u + 1, u, u + 1} _\n    letI : (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=\n      CategoryTheory.siteAbelianWEqualsLocallyBijective.{u + 1, u, u + 1} _\n    let R := ConstantCompletion.constant\n      (Scheme.coefficientProEtaleModelTopology.{u, u} X) (ULift.{u + 1, 0} A)\n    letI := SheafOfModules.monoidalCategory R\n    letI : HasDerivedCategory (ConstantCompletion.Mod R) := HasDerivedCategory.standard _\n    letI : HasDerivedCategory (Scheme.proEtaleRingModules X\n        (Scheme.proEtaleConstantRing X (ULift.{u, 0} A))) := HasDerivedCategory.standard _\n    ∃ E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (discreteObj A) X) ≌ ConstantCompletion.Mod R,\n      ∃ H : Scheme.proEtaleRingModules X\n          (Scheme.proEtaleConstantRing X (ULift.{u, 0} A)) ≌ ConstantCompletion.Mod R,\n        ∃ (_ : E.functor.Additive) (_ : H.functor.Additive),\n          Nonempty E.functor.Monoidal ∧\n          Nonempty (finiteRealization X A ⋙ H.functor.mapDerivedCategory ≅\n            E.functor.mapDerivedCategory) ∧\n          ∀ (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n              (condensedRingObj (discreteObj A) X))\n            (N : Scheme.proEtaleRingModules X\n              (Scheme.proEtaleConstantRing X (ULift.{u, 0} A))),\n            (E.functor.obj M ≅ H.functor.obj N) →\n            (IsConstantModelConstructible (discreteObj A) X M ↔\n              Scheme.IsConstructibleProEtaleModuleSheaf X (ULift.{u, 0} A) N)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "lem-sfb-embedded-finite-heart-realization",
+  "lem-sfb-embedded-finite-heart-monoidal-presentation",
+  "lem-sfb-embedded-finite-heart-constructibility",
+  "lem-weil-pbc-proetale-constant-module-constructibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T144052-L-1169046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T162527-L-470718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

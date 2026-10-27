@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-cocharacter-limit-functors",
+ "kind": "definition",
+ "title": "Cocharacter orbit extensions and limit subfunctors",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $G$ a $k$-group scheme [def-sc-group-scheme], and $\\lambda:\\mathbf G_m\\to G$ a group-scheme homomorphism, with $\\mathbf G_m$ and the affine line as in [def-sc-gm-ga]. For a commutative $k$-algebra $A$ and $g\\in G(A)$, an orbit extension is an $A$-morphism $q:\\mathbf A^1_A\\to G_A$ whose restriction along $\\mathbf G_{m,A}\\hookrightarrow\\mathbf A^1_A$ is $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$; scalar extensions use the fibre product [def-pc-fibre-product]. Define $P_\\lambda(A)$ as the subset of $G(A)$ of points admitting an orbit extension. Define $U_\\lambda(A)$ as the subset admitting such an extension with $q(0)=1$. Define $Z_\\lambda(A)$ as the subset of points $g$ such that, for every commutative $k$-algebra $B$, every $k$-algebra map $f:A\\to B$, and every $s\\in B^\\times$, the image $g_B$ commutes with $\\lambda(s)$. These are subfunctors of the functor of points of $G$ under the usual scalar-extension maps; no reducedness, finite-type, smoothness, connectedness, or algebraic-closedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 13.21 and Proposition 13.24, pp.261--262 (orbit extension); Proposition 13.29 and definitions of P(lambda), U(lambda), Z(lambda), pp.263--264."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cocharacter conjugation orbit extending to affine line parabolic unipotent centralizer functors",
+   "results": "OK 8 hits: Matrix.isParabolic_conj'_iff, Matrix.isParabolic_conj_iff, Matrix.GeneralLinearGroup.isParabolic_conj_iff', Subgroup.centralizer_eq_comap_stabilizer, ConjAct.stabilizer_eq_centralizer, Equiv.Perm.OnCycleFactors.Subgroup.Centralizer.toConjAct_smul_mem_cycleFactorsFinset, ConjAct.fixedPoints_eq_center, Equiv.Perm.OnCycleFactors.Subgroup.Centralizer.cycleFactorsFinset_mulAction.",
+   "date": "2026-10-24",
+   "verdict": "No scheme-theoretic cocharacter limit functors among these results; use the four existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cocharacter parabolic functor algebra points affine line orbit extension",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace.functor, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.functor_obj_map, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.reindex, AlgebraicGeometry.AffineSpace.homOfVector.",
+   "date": "2026-10-24",
+   "verdict": "No limit subfunctor definition; the existing project CocharacterLimit definitions are exact."
+  },
+  {
+   "tool": "grep",
+   "query": "IsOrbitExtension|parabolicPoints|unipotentPoints|centralizerPoints",
+   "results": "Mathlib: OK 0 hits. Direct rg of lean/WeilConjectures and lean/Sheaf finds the four exact definitions at CocharacterLimitSmoothStructure.lean lines 38,50,60,69; the general centralizerPoints in ReductiveTorusCentralizerTerminology is a related general notion. DAG rg finds the four declarations only in the theorem node lem-sfb-cocharacter-limit-smooth-structure; no definition node owns them. blueprint_refs.py search cocharacter limit: 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "Reuse all four published definitions with existing:true; add only their missing definition-node ownership record."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The definitions of P_lambda, U_lambda and Z_lambda and the orbit extension used to characterize r_lambda in lem-sfb-reductive-cocharacter-parabolic-geometry; Milne pp.261--264, before Theorem 13.33.",
+   "via": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CocharacterLimitSmoothStructure",
+  "declaration": "AlgebraicGeometry.CocharacterLimit.IsOrbitExtension",
+  "declarations": [
+   "AlgebraicGeometry.CocharacterLimit.IsOrbitExtension",
+   "AlgebraicGeometry.CocharacterLimit.parabolicPoints",
+   "AlgebraicGeometry.CocharacterLimit.unipotentPoints",
+   "AlgebraicGeometry.CocharacterLimit.centralizerPoints"
+  ],
+  "statement": "def IsOrbitExtension {k : Type u} [Field k]\n    {G : Grp (Over (Spec (.of k)))}\n    (lam : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ G)\n    (A : CommAlgCat.{u} k) (g : StandardGroupSchemes.affine k A ⟶ G.X)\n    (q : StandardGroupSchemes.affine k A ⊗ StandardGroupSchemes.additive k ⟶ G.X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The four plain definitions precede and do not depend on smooth_connected_structure. This new definition node records the existing unrestricted test-algebra orbit-extension and P/U/Z predicates without copying or changing Lean. The theorem remains a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9aece86ed",
+  "group": "Q141",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9aece86ed",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Re-delivery of 8a616f7a8131, which was returned only for H2 (a theorem node in stmt_deps used just for plain defs). Lean module is byte-identical to the one already reviewed as mathematically correct (single sorry; lean.statement appears exactly in the file). Item stmt_deps now cites the new def-sfb-cocharacter-limit-functors in place of lem-sfb-cocharacter-limit-smooth-structure, which stays in proof_deps. The new node's existing:true record lists IsOrbitExtension, parabolicPoints, unipotentPoints and centralizerPoints, with the signature copied exactly from side-live CocharacterLimitSmoothStructure.lean. The definitions match Milne Def 13.21, Prop 13.24 and pp.263-264 and do not depend on the theorem. Its stmt_deps (field, group scheme, gm-ga, fibre product) are sufficient, and no other node owns these definitions. The item record differs from live only in stmt_deps and lean; the item is not landed yet. Worker report and Second reading sections are present. Cosmetic only: the live docstrings name the theorem node as blueprint, and blueprint.from.node is null. No compile, since no file was changed."
+ }
+}

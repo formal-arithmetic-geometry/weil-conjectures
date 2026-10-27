@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-intrinsic-semilinear-compositor-coherence",
+ "kind": "statement",
+ "title": "Associativity of the intrinsic semilinear compositors",
+ "statement": "For every inverse sequence of commutative rings, the specified intrinsic inverse-image compositors, their right-adjoint direct-image compositors, and the open-extension compositors [def-sf-semilinear-proper-open-comparisons] satisfy the three associativity equations of compositor_associativity on the entire unbounded derived categories. The equations include the equality transport from (f ≫ g) ≫ h to f ≫ (g ≫ h), and are componentwise equalities of the actual selected comparisons, without a faithfulness-of-evaluation assumption.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C--0F7F: the proper/open compositor associativity argument in the existing intrinsic mate-pasting node."
+ },
+ "stmt_deps": [
+  "def-sf-semilinear-proper-open-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "On ordinary modules, evaluate the two composites on a section of a test object. The direct-image formulas restrict along the same iterated pullback map, by restriction_pasting and site_pasting of [lem-cbc-strict-tower-direct-image-coherence].",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Adjunction.leftAdjointCompIso_assoc to the chosen ordinary adjunctions and the proved push coherence. Equality elimination gives the transport term for the associativity of scheme morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply descend_coherence of [lem-cbc-strict-tower-direct-image-coherence] to exact localization of the inverse-image functors; its transport formula identifies the chosen derived comparison.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the derived inverse-image associativity along the proper and open adjunctions. The conjugate_triangle_assoc calculation of [lem-cbc-strict-tower-direct-image-coherence], and Mathlib leftAdjointCompIso_assoc, prove the two remaining equations. Cancel the invertible terminal transport maps.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-direct-image-coherence"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C--0F7F: the proper/open compositor associativity argument in the existing intrinsic mate-pasting node.",
+  "note": "Unchanged original theorem and proof moved into a support module after profiling the artifact-writing compile of the assigned module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of canonical inverse image direct image and open extension compositors from chosen adjunctions",
+   "results": "8 hits for open-immersion and Opens.mapComp associativity formulas.",
+   "date": "2026-10-27",
+   "verdict": "The intrinsic derived compositor theorem is already proved in the assigned module; retain its proof verbatim."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "1 hit: Mathlib.CategoryTheory.Adjunction.CompositionIso, leftAdjointCompIso_assoc.",
+   "date": "2026-10-27",
+   "verdict": "The unchanged proof already uses this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_assoc|conjugate_triangle_assoc|descend_coherence",
+   "results": "3 Mathlib hits, including the canonical adjunction composition theorem and its sheaf pullback applications.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing adjunction theorem and the proved strict-tower localization calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits: intrinsic proper/open mate and pasting argument (parent step 2); Supporting compositor associativity retained verbatim from the intrinsic proper/open mate proof.",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SemilinearProperOpenCoherence",
+  "file": "lean/Sheaf/SixFunctors/SemilinearProperOpenCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.compositor_associativity",
+  "statement": "theorem compositor_associativity :\n    (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\n      (M : Derived C τ T),\n      (pComp C τ (f ≫ g) h).hom.app M ≫\n        (pComp C τ f g).hom.app ((P C τ h).obj M) =\n      (eqToIso (congrArg (P C τ) (Category.assoc f g h))).hom.app M ≫\n        (pComp C τ f (g ≫ h)).hom.app M ≫\n        (P C τ f).map ((pComp C τ g h).hom.app M)) ∧\n    (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\n      (M : Derived C τ X),\n      (R C τ h).map ((sComp C τ f g).hom.app M) ≫\n        (sComp C τ (f ≫ g) h).hom.app M =\n      (sComp C τ g h).hom.app ((R C τ f).obj M) ≫\n        (sComp C τ f (g ≫ h)).hom.app M ≫\n        (eqToIso (congrArg (R C τ) (Category.assoc f g h))).inv.app M) ∧\n    (∀ {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\n      [IsOpenImmersion f] [IsOpenImmersion g] [IsOpenImmersion h]\n      (M : Derived C τ X),\n      (J C τ h).map ((jComp C τ f g).hom.app M) ≫\n        (jComp C τ (f ≫ g) h).hom.app M =\n      (jComp C τ g h).hom.app ((J C τ f).obj M) ≫\n        (jComp C τ f (g ≫ h)).hom.app M ≫\n        (jCongr C τ (Category.assoc f g h)).inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27",
+  "note": "Existing proved declaration and private supporting calculations moved without changing their headers or proof text. No new proof obligation or hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

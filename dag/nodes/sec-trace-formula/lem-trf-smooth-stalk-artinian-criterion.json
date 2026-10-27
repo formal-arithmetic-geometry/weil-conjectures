@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-smooth-stalk-artinian-criterion",
+ "kind": "statement",
+ "title": "Smoothness from Artinian lifting of local stalk homomorphisms",
+ "statement": "Let $f:Z\\to T$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], with $T$ locally Noetherian [pqf-def-locnoeth]. Fix $z\\in Z$, put $t=f(z)$, and let $\\varphi=f_z^\\sharp:A=\\mathcal O_{T,t}\\to B=\\mathcal O_{Z,z}$ be its actual stalk homomorphism. The rings $A,B$ are nonzero Noetherian local rings [def-weil-pbc-noetherian-ring]. Local means having a unique maximal ideal, denoted $\\mathfrak m_R$ for a local ring $R$, and a local homomorphism has inverse image of the target maximal ideal equal to the source maximal ideal. A small extension is a surjective homomorphism $q:C'\\to C$ of nonzero commutative Artinian local rings, meaning that every descending chain of ideals stabilizes, whose kernel is annihilated by $\\mathfrak m_{C'}$ and is one-dimensional over $C'/\\mathfrak m_{C'}$. Suppose that, for every small extension $q$ and every pair of local homomorphisms $a:A\\to C'$ and $b:B\\to C$ with $qa=b\\varphi$, there is a local homomorphism $c:B\\to C'$ satisfying $qc=b$ and $c\\varphi=a$. Then there is an open subscheme $U\\subseteq Z$ containing $z$ such that $f|_U:U\\to T$ is smooth [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HX (lemma-lifting-along-artinian-at-point), implication (3) to (1), expressed using the local rings at the prescribed points rather than scheme test diagrams, together with the Noetherian stalk setup."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "The stated Noetherian stalk setup follows from the hypotheses. Choose an affine neighbourhood $V=\\operatorname{Spec}R$ of $t$ from the Noetherian affine cover in [pqf-def-locnoeth]. From the affine cover in [def-weil-finite-type-morphism], choose $U=\\operatorname{Spec}S\\subseteq f^{-1}(V)$ containing $z$, with $S$ a finitely generated $R$-algebra. The ring $S$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. The germ maps identify $A$ and $B$ with localizations of $R$ and $S$ by [lem-weil-pbc-affine-open-stalk-localization], so both are Noetherian by [lem-weil-pbc-localization-noetherian]. Scheme stalks are local and $\\varphi$ is local by [def-weil-locally-ringed-space-morphism]; having a maximal ideal makes these rings nonzero.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HX (lemma-lifting-along-artinian-at-point), affine-neighbourhood reduction; Algebra Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Use the scheme criterion [lem-weil-pbc-smooth-artinian-lifting-at-point]. Its small extensions are exactly those in the hypothesis: a length-one kernel $I$ is isomorphic to $C'/\\mathfrak m_{C'}$, as that statement specifies. Conversely, if $\\mathfrak m_{C'}I=0$ and $I$ is one-dimensional over that field, its $C'$-submodules are precisely its vector subspaces, so $0\\subsetneq I$ is its only strict submodule chain and its length is one. Every surjection $q:C'\\to C$ between the nonzero local rings here is local: the inverse image of the maximal ideal of $C$ is a maximal ideal, hence equals $\\mathfrak m_{C'}$. In particular $i=\\operatorname{Spec}q$ sends the closed point of $\\operatorname{Spec}C$ to that of $\\operatorname{Spec}C'$, using the inverse-image formula in [lem-weil-pbc-spec-map-stalk-localization].",
+   "uses": [
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HS (definition-small-extension); comparison with the explicit kernel description following that definition."
+   }
+  },
+  {
+   "text": "Take arbitrary test data for condition (2) of [lem-weil-pbc-smooth-artinian-lifting-at-point]: a small extension $q:C'\\to C$, $\\alpha:\\operatorname{Spec}C\\to Z$ centred at $z$, and $\\beta:\\operatorname{Spec}C'\\to T$ satisfying $f\\alpha=\\beta i$. Since $i$ sends closed point to closed point, $\\beta$ is centred at $t=f(z)$. By [lem-weil-pbc-morphism-from-spec-local-ring], these morphisms give local maps $b:B\\to C$ and $a:A\\to C'$. Under its germ isomorphisms $\\varepsilon_C,\\varepsilon_{C'}$, the stalk map of $i$ is $q$: explicitly $i^\\sharp\\varepsilon_{C'}=\\varepsilon_C q$ by [lem-weil-pbc-spec-map-stalk-localization]. The composition formula [lem-weil-pbc-scheme-stalk-map-composition] therefore says that the pairs corresponding to $f\\alpha$ and $\\beta i$ are $(t,b\\varphi)$ and $(t,qa)$. Equality of the morphisms gives $qa=b\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-scheme-stalk-map-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6 (lemma-morphism-from-spec-local-ring), with Tag 01I1 (lemma-morphism-into-affine) for Spec(q); Sheaves Tag 008M (lemma-compose-f-maps-stalks)."
+   }
+  },
+  {
+   "text": "Apply the assumed local lifting property to these $a,b,q$ to obtain a local $c:B\\to C'$ with $qc=b$ and $c\\varphi=a$. The bijection [lem-weil-pbc-morphism-from-spec-local-ring] supplies the morphism $\\gamma:\\operatorname{Spec}C'\\to Z$ corresponding to $(z,c)$. The composition formula [lem-weil-pbc-scheme-stalk-map-composition] identifies $f\\gamma$ with the pair $(t,c\\varphi)=(t,a)$, hence $f\\gamma=\\beta$ by injectivity of the bijection. By [lem-weil-pbc-spec-map-stalk-localization], the pair of $\\gamma i$ is $(z,qc)=(z,b)$; the same injectivity gives $\\gamma i=\\alpha$. Thus every test square of step 3 has the required lift, with both equalities for the original scheme morphisms.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6 (lemma-morphism-from-spec-local-ring); Sheaves Tag 008M (lemma-compose-f-maps-stalks)."
+   }
+  },
+  {
+   "text": "We have proved condition (2) of [lem-weil-pbc-smooth-artinian-lifting-at-point] at the prescribed point $z$. Its hypotheses are exactly that $f$ is locally of finite type and $T$ locally Noetherian, both given. Its implication (2) to (1) produces an open subscheme containing $z$ on which the original $f:Z\\to T$ is smooth. This is the required conclusion.",
+   "uses": [
+    "lem-weil-pbc-smooth-artinian-lifting-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HX (lemma-lifting-along-artinian-at-point), (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-scheme-stalk-map-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HX (lemma-lifting-along-artinian-at-point), (3) implies (1), translating the test squares by Schemes Tag 01J6 and Sheaves Tag 008M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a point of a locally finite type morphism over a locally Noetherian scheme is equivalent to lifting compatible local homomorphisms from its stalk rings through small Artinian extensions",
+   "results": "{\"t\": \"2026-10-22T06:13:13Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness at a point of a locally finite type morphism over a locally Noetherian scheme is equivalent to lifting compatible local homomorphisms from its stalk rings through small Artinian extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff\"], \"digest\": \"e86d8a2050ac299a\"}; [leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Artinian infinitesimal lifting criterion for smooth morphisms can be tested on local ring maps out of the stalks at one point and those stalks are Noetherian",
+   "results": "{\"t\": \"2026-10-22T06:13:12Z\", \"tool\": \"leanfinder\", \"query\": \"The Artinian infinitesimal lifting criterion for smooth morphisms can be tested on local ring maps out of the stalks at one point and those stalks are Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"RingHom.Smooth.propertyIsLocal\"], \"digest\": \"0c94b66b771dc661\"}; [leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"RingHom.smooth_iff_locally_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth) f\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is locally standard smooth, meaning that smoothness (flatness and locally free differentials) is equivalent to being locally isomorphic \"}\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of a ring homomorphism between commutative rings being smooth (i.e., flat with the module of differentials $\\\\Omega_{S/R}$ locally free of finite rank) is local, meaning it can be checked \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, IsArtinianRing",
+   "results": "{\"t\": \"2026-10-22T06:12:42Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, IsArtinianRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; [loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\n",
+   "date": "2026-10-22",
+   "verdict": "no match; inconclusive Loogle query: unknown identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]mooth.*([Aa]rtinian|stalk)|([Aa]rtinian|stalk).*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-22T06:12:41Z\", \"tool\": \"grep\", \"query\": \"[Ss]mooth.*([Aa]rtinian|stalk)|([Aa]rtinian|stalk).*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"3556bc7ae675f3bc\"}; [grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"246\", \"text\": \"lemma formallySmooth_stalkMap_iff {f : X ⟶ Y} {x : X} (U : Y.Opens)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"250\", \"text\": \"    (f.stalkMap x).hom.FormallySmooth ↔\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"266\", \"text\": \"lemma exists_smooth_of_formallySmooth_stalk\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"268\", \"text\": \"    (x : X) (H : (f.stalkMap x).hom.FormallySmooth) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"277\", \"text\": \"  have : Algebra.IsSmoothAt _ _ := (formallySmooth_stalkMap_iff U hU V hV hVU hxV).mp H\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is smooth at a point if every compatible pair of local homomorphisms from the two stalk rings lifts through a small extension of Artinian local rings",
+   "results": "{\"t\": \"2026-10-22T06:12:42Z\", \"tool\": \"leansearch\", \"query\": \"A scheme morphism is smooth at a point if every compatible pair of local homomorphisms from the two stalk rings lifts through a small extension of Artinian local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"RingHom.FormallySmooth\", \"RingHom.Smooth\", \"RingHom.smooth_def\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\"], \"digest\": \"702b2edf8d724e8f\"}; [leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $n \\\\in \\\\mathbb{N}$. If for every point $x \\\\in X$, there exist open subsets $V \\\\subseteq X$ and $U \\\\subseteq Y$ such that $x \\\\in V$, $V \\\\subseteq f^{-1}(U)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally of finite type over a locally Noetherian scheme is smooth near a point when compatible local maps from its stalk rings lift through every small extension of Artinian local rings",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension.  Smooth loci, standard smooth neighbourhoods and formal-smoothness definitions do not assert the Artinian testing converse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(artinian.*(smooth|lift))|((smooth|lift).*artinian)",
+   "results": "0 hits: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local Artinian infinitesimal lifting criterion for smoothness of a scheme morphism at a point",
+   "results": "8 hits: Algebra.FormallySmooth.exists_lift, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.FormallySmooth.lift, Algebra.Smooth.formallySmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.mk.  The lifting results assume formal smoothness and give the forward implication, not the converse from Artinian tests.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsArtinianRing",
+   "results": "0 hits: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective Artinian local ring maps with one-dimensional square-zero kernel detect smoothness at a stalk",
+   "results": "8 hits: Algebra.IsSmoothAt, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.smoothLocus, RingHom.Smooth.locally_isStandardSmooth, RingHom.IsStandardSmooth.smooth, RingHom.smooth_iff_locally_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth.  Smooth loci, standard smooth neighbourhoods and formal-smoothness definitions do not assert the Artinian testing converse.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-stalk-isomorphism-etale",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The local criterion in the first paragraph of the proof of Tag 0CAV, used by Tag 0GDX in the nodal local-model branch of lem-trf-local-term-locality: the already constructed morphism is etale once its completed stalk map is an isomorphism. Extraction of returned split steps 1, 4 and the scheme part of step 7: Noetherian setup and stalk/scheme lifting comparison.",
+   "via": [
+    "lem-trf-completed-stalk-isomorphism-etale",
+    "lem-trf-isomorphism-completion-approximation",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-stalk-artinian-criterion",
+  "worker": "stage1",
+  "summary": "Reused the existing scheme Artinian lifting criterion and the local-spectrum/stalk bijection. Checked the Noetherian stalk setup, the equivalence of the small-extension conventions, and both composition equalities explicitly. No new nodes are needed. The statement is unchanged.",
+  "blueprint": "Makes precise the Artinian local criterion in the inherited nodal-model/completed-stalk branch beneath lem-trf-local-term-locality, at the exact extraction place already recorded in blueprint.from.place. Read the current latest blueprint; this item is a generic scheme-theoretic tool within that inherited branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "why": "Generic scheme smoothness criterion (Stacks 02HX), used only after the explicit stalk-to-test-square translation; the trace-formula unit contains no replacement scheme criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-artinian-lifting-at-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-f0e84d58a",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-f0e84d58a (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps, no new nodes, statement unchanged, no re-split note. Source checked: Stacks more-morphisms 02HX (lemma-lifting-along-artinian-at-point, line 3575), (3)=>(1), with its affine-reduction proof, and Algebra 02HS (small extension); the hypotheses agree and the target is not weakened. Step 1 gets the Noetherian local stalks and the locality of phi from the Noetherian affine cover, the finite-type cover, 00FN and the stalk-localization node (c). Step 2 is genuinely elementary: the two small-extension conventions agree (the length-1 kernel isomorphism is stated in the cited node), surjections of local rings are local, and Spec q sends the closed point to the closed point. Steps 3 and 4 use the 01J6 bijection, the identity i^#eps_{C'}=eps_C q from the spec-map node and 008M(b). I recomputed the pairs by hand: f alpha=(t,b phi), beta i=(t,qa), f gamma=(t,c phi)=(t,a), gamma i=(z,qc)=(z,b); injectivity gives both scheme equalities. Step 5 applies (2)=>(1) of lem-weil-pbc-smooth-artinian-lifting-at-point with the same hypotheses. Small cases: Spec k->Spec k[eps] correctly fails the hypothesis; the identity and open immersions satisfy it; residue fields are never forced to agree. No duplicate of the local-stalk form: checked lem-sfb-smooth-fixed-residue-artinian-test, the sfb finite-type-tests node and the pbc 02HT pair. No cycle; proof_deps is the union of the step uses; no SGA. I accept the tool use of the pbc 02HX node (generic criterion on the source's own route)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothStalkArtinianCriterion",
+  "declaration": "AlgebraicGeometry.noetherian_stalks_and_smooth_near_of_artinian_local_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStalkArtinianCriterion.lean",
+  "statement": "theorem noetherian_stalks_and_smooth_near_of_artinian_local_lifting {Z T : Scheme.{u}} (f : Z ⟶ T) [LocallyOfFiniteType f] [IsLocallyNoetherian T] (z : Z) : IsNoetherianRing (T.presheaf.stalk (f z)) ∧ IsNoetherianRing (Z.presheaf.stalk z) ∧ ((∀ (C' C : Type u) [CommRing C'] [CommRing C] [IsArtinianRing C'] [IsArtinianRing C] [IsLocalRing C'] [IsLocalRing C] (q : C' →+* C), Function.Surjective q → (∀ r ∈ IsLocalRing.maximalIdeal C', ∀ x ∈ RingHom.ker q, r * x = 0) → Nonempty ((RingHom.ker q) ≃ₗ[C'] IsLocalRing.ResidueField C') → ∀ (a : T.presheaf.stalk (f z) →+* C') (b : Z.presheaf.stalk z →+* C), IsLocalHom a → IsLocalHom b → q.comp a = b.comp (f.stalkMap z).hom → ∃ c : Z.presheaf.stalk z →+* C', IsLocalHom c ∧ q.comp c = b ∧ c.comp (f.stalkMap z).hom = a) → ∃ U : Z.Opens, z ∈ U ∧ Smooth (U.ι ≫ f))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d72a244e",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Only the lean record of the item node changed; one new module with a single sorried theorem and no definitions. Clause by clause the Lean matches the node and Stacks 02HX (3)=>(1) with 02HS: LocallyOfFiniteType f and IsLocallyNoetherian T; A, B and phi are the actual stalks and (f.stalkMap z).hom; the two IsNoetherianRing conjuncts are unconditional; small extension = surjective map of nonzero Artinian local rings in Type u whose kernel is killed by the maximal ideal and C'-isomorphic to the residue field (equivalent to dimension one); IsLocalHom on a, b and c; both lift equations; conclusion is an open U containing z with Smooth (U.ι ≫ f), Mathlib's AlgebraicGeometry.Smooth being the recorded smooth-morphism declaration. Type u tests match the upstream criterion smooth_near_iff_artinian_lifting_at_point and only make the theorem stronger. No duplicate in Mathlib, Sheaf or WeilConjectures. lean.statement matches the file verbatim (script check). Docstrings carry source and blueprint and the 5 proof steps; report has Worker report and Second reading by Q59. No fix made, so no compile; the worker reports a clean 2.0 s per-file compile. No findings."
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-scalar-evaluation-direct-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof, ordinary scalar direct-image comparison: native-carrier form of the existing evaluation normalization",
+   "via": [
+    "lem-sf-semilinear-scalar-adjunctions",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Native section normalization for semilinear direct-image evaluation",
+ "statement": "For a varying sequence R of commutative coefficient rings and transition maps φ, a scheme map f:X -> Y, a level n, an actual semilinear system M on X, an opposite pro-etale object H of Y, and a section x in the native carrier of eval n (push f M) at H, the specified moduleEvalP comparison takes x to a section heterogeneously equal to x. This uses the actual chosen section-normalized evaluation comparison of def-sp-varying-ring-operations, without introducing any new functor or choosing any arbitrary witness.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, coefficient-system evaluation and ordinary direct image; native-carrier form of the normalized comparison in def-sp-varying-ring-operations"
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "Unfold moduleEvalP to the unique comparison chosen by moduleEvalP_existsUnique. Its defining normalization identifies its map with the identity on the fibre-product sections. Both native continuous-module carriers have these same underlying sections; apply that normalization at H.unop and use heq_of_eq to retain the native source and target carrier presentations.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, coefficient-system evaluation and ordinary direct image; native-carrier form of the normalized comparison in def-sp-varying-ring-operations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, coefficient-system evaluation and ordinary direct image; native-carrier form of the normalized comparison in def-sp-varying-ring-operations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a semilinear sheaf system commutes with direct image and is the identity on sections",
+   "results": "8 hits including eval_app, sheafSectionsNatIsoEvaluation, and SheafOfModules.pushforwardSections_coe; none concerns the project-specific semilinear moduleEvalP comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HEq, _ = _",
+   "results": "12 hits, including heq_of_eq and eq_of_heq. Use heq_of_eq after the existing project normalization.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equality of sections gives heterogeneous equality after restricting scalar actions without changing the underlying carrier",
+   "results": "8 hits including ModuleCat.restrictScalarsCongr and LinearEquiv.restrictScalars_apply; no native semilinear evaluation statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleEvalP",
+   "results": "0 Mathlib hits. The project defines moduleEvalP_existsUnique and moduleEvalP in VaryingRingOperations; the lemma directly reuses their normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearScalarAdjunctions",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearEvaluationDirectSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearEvaluationDirectSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalP_sections_heq",
+  "statement": "theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M : Modules R φ X) (n : ℕ) (H : Y.ProEtᵒᵖ)\n    (x : ((eval R φ Y n).obj ((push R φ f).obj M)).val.obj H) :\n    HEq (((moduleEvalP R φ f n).hom.app M).val.app H x) x",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearScalarAdjunctions",
+  "worker": "stage3",
+  "summary": "Fully proved native-carrier view of the existing evaluation normalization; no new sorry. Extracted after adding private section APIs to avoid repeated expensive continuous-module carrier normalization.",
+  "blueprint": "Inherited ordinary scalar direct-image comparison in fix-prop-coherence.",
+  "tool_uses": [
+   {
+    "node": "def-sp-varying-ring-operations",
+    "why": "Uses only its actual unique normalized ordinary evaluation/direct-image isomorphism as a generic construction; no six-functor unit step is bypassed."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194319-L-2318044",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194319-L-2318044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

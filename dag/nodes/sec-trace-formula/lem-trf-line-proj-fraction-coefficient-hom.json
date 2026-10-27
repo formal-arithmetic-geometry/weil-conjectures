@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-line-proj-fraction-coefficient-hom",
+ "kind": "statement",
+ "title": "Homogeneous coefficient homomorphisms and unique fraction charts",
+ "statement": "Let f:W→T be a scheme morphism, A a quasi-coherent graded commutative O_T-algebra, L an invertible O_W-module, and psi_n:f^*A_n→L^n degreewise linear maps preserving the tensor unit and products. For every affine V, d>0 and a in A_d(V), let G_a be the generator open of psi(a) [def-trf-line-proj-fraction-chart-data]. There is a unital ring homomorphism A(V)_(a),0→O_W(G_a) characterized by rho(b/a^m)psi(a)^m=psi(b)|G_a for every m≥0 and b in A_(md)(V). It induces a unique chart G_a→Spec A(V)_(a),0; on every smaller source open its fraction equation characterizes the restricted chart. In any frame e of L with psi(a)=alpha_a e^d, G_a intersect B=D(alpha_a), and rho(b/a^m)alpha_a^m=alpha_b whenever psi(b)=alpha_b e^(md). Tensor powers, scalar maps and the fraction equation commute with source restriction. The construction includes m=0 and requires no reducedness or finite generation.",
+ "stmt_deps": [
+  "def-trf-line-proj-fraction-chart-data",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-nagata-relative-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-scheme",
+  "def-sc-local-free-generator",
+  "def-sc-section-generating-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "proof": [
+  {
+   "text": "Use the ambient generating-locus membership and local-to-global free-generator theorems from [lem-trf-line-proj-generation-locus], imported rather than duplicated. The image section s of a is a free generator on its generator open G: the defining local generator neighbourhoods cover G, and the free-generator property is local. Tensor products and the tensor-power comparison isomorphisms show s^m is a basis, including the tensor unit for m=0. In a frame e on B, unique coefficients in e^n give additive maps on each homogeneous piece. The unit and product laws identify their value on 1 and products, so the graded direct-sum universal property makes them a ring homomorphism phi:A(V) to O(B).",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-sc-section-generating-locus",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-graded-sheaf-structures",
+    "lem-trf-line-proj-generation-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "On B contained in G, phi(a) times the frame e^d is a basis. The ratio between two bases is a unit, so phi(a) is invertible. Extend phi to the ordinary localization A(V)[1/a] and restrict to the degree-zero homogeneous subring. The localization fraction relation gives rho(b/a^m) phi(a)^m=phi(b); multiplying by e^(md) gives the tensor fraction formula. This does not assume a is a non-zero-divisor.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-sc-local-free-generator",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "Every homogeneous fraction has a representative b/a^m, with b corresponding to an actual homogeneous sheaf section by the direct-sum decomposition. Assign it the unique coefficient of psi(b) in s^m on G. On every frame open this coefficient equals the local localization homomorphism by cancellation. It is therefore independent of the representative; the sheaf condition proves all ring laws locally. The affine-spectrum adjunction constructs the chart from this global ring homomorphism. All smaller-source uniqueness follows by cancelling s^m for every homogeneous fraction.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-sc-local-free-generator",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "Restriction commutes with tensor powers and scalar maps, so the fraction equation persists under source restriction. In any frame, substitute psi(a)=alpha_a e^d and psi(b)=alpha_b e^(md), then cancel the frame to obtain rho(b/a^m)alpha_a^m=alpha_b. A section alpha_a e^d generates exactly on D(alpha_a): the ratio of bases is a unit in one direction, and alpha_a is invertible on its basic open in the other.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sc-local-free-generator",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-local-free-generator",
+  "def-sc-section-generating-locus",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-graded-sheaf-structures",
+  "lem-trf-line-proj-generation-locus",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|Away.map_mk|exists_tensorPullback_stalk_iso",
+   "results": {
+    "t": "2026-10-23T14:42:03Z",
+    "tool": "grep",
+    "query": "fromOfGlobalSections|Away.map_mk|exists_tensorPullback_stalk_iso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean"
+    ],
+    "digest": "e61a3817b6acdf83"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded algebra map into tensor powers of an invertible sheaf defines a ring map from degree zero homogeneous localization on a generating open",
+   "results": {
+    "t": "2026-10-23T14:42:03Z",
+    "tool": "leansearch",
+    "query": "A graded algebra map into tensor powers of an invertible sheaf defines a ring map from degree zero homogeneous localization on a generating open",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomogeneousLocalization.fromZeroRingHom",
+     "HomogeneousLocalization.map",
+     "HomogeneousLocalization.algebraMap_eq",
+     "HomogeneousLocalization.awayMapₐ_apply",
+     "HomogeneousLocalization.map_mk",
+     "TensorPower.galgebra_toFun_def",
+     "HomogeneousLocalization.awayMap_mk",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection"
+    ],
+    "digest": "7d2b50076127b7ef"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded map into tensor powers of a line bundle induces unique degree zero homogeneous fraction maps to functions on generating opens compatible with local trivializations",
+   "results": {
+    "t": "2026-10-23T14:43:05Z",
+    "tool": "leanfinder",
+    "query": "A graded map into tensor powers of a line bundle induces unique degree zero homogeneous fraction maps to functions on generating opens compatible with local trivializations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+     "AlgebraicGeometry.Proj.awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection",
+     "AlgebraicGeometry.openToLocalization",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "AlgebraicGeometry.sectionInBasicOpen",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection_assoc"
+    ],
+    "digest": "3e0ffb520b071352"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.LineProjAffineChartAtlas",
+  "date": "2026-10-23",
+  "group": "S4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local homogeneous-fraction construction and gluing of the graded line-module relative-Proj map in the polarized-descent argument.",
+   "via": [
+    "lem-trf-line-proj-affine-chart-atlas",
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.LineProjFractionCoefficientHom",
+  "file": "lean/Sheaf/TraceFormula/LineProjFractionCoefficientHom.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_lineProj_fraction_coefficient_hom",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineProj_chart_generator",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_frame_generator",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_power_generator",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_frame_restrict",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_power_restrict",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_power_frame",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_power_smul",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_local_coefficient_hom",
+   "AlgebraicGeometry.Scheme.Modules.exists_lineProj_fraction_coefficient_hom",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_scalar_restrict",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_fraction_restrict",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_fraction_unique",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_exists_chart",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_open_basic",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_trivialization_formula"
+  ],
+  "statement": "theorem exists_lineProj_fraction_coefficient_hom {W T : Scheme.{u}} (f : W ⟶ T)\n    (A : RelativeProjAlgebra T) (L : W.Modules) [L.IsInvertible]\n    (ψ : ∀ n : ℕ, (tensorPullback f).obj (A.piece n) ⟶ L.tensorPow n)\n    (hunit : ∀ (V : T.Opens) (r : Γ(T, V)),\n      lineProjImage f A L ψ V 0 (A.graded.unit.val.app (op V) (unitSectionsEquiv V r)) =\n        unitSectionsEquiv (f ⁻¹ᵁ V) (f.app V r))\n    (hmul : ∀ (V : T.Opens) (m n : ℕ) (a : Γ(A.piece m, V)) (b : Γ(A.piece n, V)),\n      lineProjImage f A L ψ V (m + n) (A.graded.mul m n V a b) =\n        (L.tensorPowAddIso m n).inv.app (f ⁻¹ᵁ V)\n          (tmulSection (lineProjImage f A L ψ V m a) (lineProjImage f A L ψ V n b)))\n    (V : T.affineOpens) (d : ℕ) (_hd : 0 < d) (a : Γ(A.piece d, V.1)) :\n    ∃ ρ : HomogeneousLocalization.Away (A.grade V) (lineProjElement A V d a).val →+*\n        Γ(W, lineProjGeneratorOpen f A L ψ V d a),\n      ∀ (m : ℕ) (b : Γ(A.piece (m • d), V.1)),\n        ρ (HomogeneousLocalization.Away.mk (A.grade V)\n          (lineProjElement A V d a).property m\n          (lineProjElement A V (m • d) b).val\n          (lineProjElement A V (m • d) b).property) •\n          lineProjPower L (lineProjGeneratorOpen f A L ψ V d a) d\n            ((L.tensorPow d).presheaf.map (homOfLE inf_le_left).op\n              (lineProjImage f A L ψ V.1 d a)) m =\n          (L.tensorPow (m • d)).presheaf.map (homOfLE inf_le_left).op\n            (lineProjImage f A L ψ V.1 (m • d) b)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "independent cc review: 13 moved chart defs byte-identical to clone base; item statement unchanged; 3 new proved modules vs their nodes' lean.statement; importer LineProjChartPullback compiled against delivered modules; #print axioms traced sorryAx to pre-existing RelativeProjAlgebra.gradeRing"
+ }
+}

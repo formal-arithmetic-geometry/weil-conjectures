@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-proper-generic-radicial-etale-factorization",
+ "kind": "statement",
+ "title": "Generic radicial-etale factorization of a proper generically finite map",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ and $S$ be nonempty integral separated finite-type $k$-schemes [def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $f:X\\to S$ be a proper dominant $k$-morphism inducing a finite extension $L=k(X)$ of $K=k(S)$ [def-sfb-dominant-function-field-map, def-pc-field-extension]. Then $f$ is surjective [def-weil-surjective-morphism], and there exists a nonempty dense affine open subscheme $S_0\\subseteq S$ [def-weil-open-immersion, def-weil-affine-spectrum] such that $f_0:X_0=X\\times_S S_0\\to S_0$ [def-pc-fibre-product] is finite [def-weil-finite-integral-morphism] and has a factorization\n$$X_0\\xrightarrow{u}T_0\\xrightarrow{e}S_0.$$\nHere $T_0$ is integral, $u$ is finite and a universal homeomorphism [def-weil-universal-homeomorphism] (a homeomorphism after every scheme base change), and $e$ is finite etale surjective [def-weil-etale-morphism] of constant degree $d\\geq1$, meaning $e_*\\mathcal O_{T_0}$ is a finite locally free $\\mathcal O_{S_0}$-module of constant rank $d$ [def-sc-finite-locally-free-sheaf]. Under the induced function-field inclusions, $k(T_0)$ is the subfield $K_s=\\{z\\in L:z\\text{ is separable over }K\\}$ [def-weil-pbc-relative-separable-closure], and $d=[K_s:K]$. Thus purely inseparable and degree-one extensions are included, and no normality, regularity, or separability of $L/K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02NW (lemma-generically-finite), (1) iff (4); literature/stacks-project/fields.tex Tags 030K (lemma-separable-first), 030N (lemma-primitive-element); literature/stacks-project/algebra.tex Tags 00UB (definition-standard-etale), 00UC (lemma-standard-etale). Spreading the purely inseparable part uses Tags 00GQ, 0BR5, 01S2 as in lem-weil-pbc-spread-purely-inseparable-factors. Agent assembly of original steps 5--7 of the returned parent proof; full generic-fibre and finite-algebra calculations are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-dominant-function-field-map",
+  "def-pc-field-extension",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-universal-homeomorphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-relative-separable-closure",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The image of $f$ is closed by [lem-weil-pbc-proper-closed-image] and dense by dominance, hence equals $S$. Properness gives quasi-compactness, quasi-separatedness and finite type by [pqf-lem-proper-basic]. The field $k$ is Noetherian (its only ideals are $0$ and $k$), so [lem-weil-pbc-finite-type-over-noetherian] makes $S$ Noetherian.",
+   "uses": [
+    "lem-weil-pbc-proper-closed-image",
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper); Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the generic point of $S$. Choose an affine neighbourhood $\\operatorname{Spec}A$ of $\\eta$ and cover its inverse image by nonempty affine opens $\\operatorname{Spec}B_i$. By [lem-sc-integral-function-field-affine-fraction], $A\\subset K$, $B_i\\subset L$ are domains with the indicated fraction fields, compatibly with the generic stalk map [def-sfb-dominant-function-field-map]. Put $C_i=(A\\setminus\\{0\\})^{-1}B_i\\subset L$. It is a $K$-linear subspace of the finite-dimensional space $L$, hence finite-dimensional. By [lem-weil-pbc-finite-dimensional-domain-is-field] it is a field; since it contains $B_i$ it contains every fraction of $B_i$, so $C_i=L$. The generic fibre of each chart is $\\operatorname{Spec}C_i$: maps to this affine fibre are precisely ring maps out of $B_i$ inverting every nonzero element of $A$, by the affine-spectrum and fibre-product universal properties. Its sole point projects to the zero prime of $B_i$, namely the generic point of $X$. Thus the whole set-theoretic fibre over $\\eta$ is that one point.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sfb-dominant-function-field-map",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW (lemma-generically-finite), verification of condition (1); affine localization calculation. Agent argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] using Step 1 and the singleton fibre of Step 2; $S$ has only one irreducible component. Obtain a dense open on which $f$ is finite and choose a nonempty affine open $\\operatorname{Spec}A$ inside it. Its inverse image is $\\operatorname{Spec}B$, with $B$ finite over $A$, by [def-weil-finite-integral-morphism]. Both are domains with fraction fields $K,L$ by [lem-sc-integral-function-field-affine-fraction]. Restricting further to $D(a)$ replaces $A,B$ by $A[1/a],B[1/a]$: the affine-spectrum universal property identifies the inverse image with the spectrum of the localized ring. Module generators localize, so finiteness persists.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-affine-spectrum",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW (lemma-generically-finite), (1) implies (4)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-first-purely-inseparable], $K_s/K$ is separable algebraic and $L/K_s$ purely inseparable. As a $K$-subspace of $L$, $K_s$ has finite dimension. Choose $\\alpha$ generating $K_s/K$ by [lem-weil-pbc-finite-separable-extension-primitive-element]. Its monic minimal polynomial $P$ is separable by [def-weil-pbc-separable-algebraic-extension]. The isomorphism $K[T]/(P)\\simeq K_s$ of [lem-weil-pbc-minimal-polynomial-quotient-field-iso], together with the power basis of [lem-weil-pbc-monic-quotient-free], gives $d=\\deg P=[K_s:K]\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030K (lemma-separable-first), 030N (lemma-primitive-element), 09GN (lemma-degree-minimal-polynomial)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localized-separable-polynomial-model] to $A,K,K_s,\\alpha$. After inverting a nonzero element of $A$, $P$ descends to a monic $Q\\in A[T]$ with $UQ+VQ^{\\prime}=1$ for some $U,V\\in A[T]$. Also $\\alpha\\in B[1/a]$ for some nonzero $a\\in A$: the same calculation as Step 2 shows $(A\\setminus\\{0\\})^{-1}B=L$, and an element of this localization has a single denominator in $A$. Invert this additional $a$; polynomial identities and module generators remain valid. Set $C=A[T]/(Q)$ and send $T$ to $\\alpha\\in B$. This embeds $C$ in $B$: by the power basis [lem-weil-pbc-monic-quotient-free], every element has degree less than $d$; an element evaluating to zero in $L$ has all coefficients zero, since $P$ is the degree-$d$ minimal polynomial and $A\\hookrightarrow K$. Thus $C=A[\\alpha]$ is a domain, and its fraction field is $K(\\alpha)=K_s$.",
+   "uses": [
+    "lem-weil-pbc-localized-separable-polynomial-model",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UB (definition-standard-etale) and 00UC (lemma-standard-etale); denominator and power-basis calculation."
+   }
+  },
+  {
+   "text": "The same power basis makes $C$ free of rank $d$ and finite over $A$. In $C$, $VQ^{\\prime}=1$, so adjoining the inverse of $Q^{\\prime}$ changes nothing. Apply [lem-weil-pbc-standard-etale-monic-derivative] to conclude that $e:\\operatorname{Spec}C\\to\\operatorname{Spec}A$ is etale. It is surjective by [lem-weil-pbc-integral-injective-lying-over]: $A\\to C$ is injective and each element of the finite algebra $C$ is integral. This integrality is supplied by [lem-weil-pbc-finite-algebra-is-integral], applied to the finite ring map $A\\to C$. The map $C\\to B$ is finite: a set generating $B$ as an $A$-module also generates it as a $C$-module. Hence we have $\\operatorname{Spec}B\\to\\operatorname{Spec}C\\to\\operatorname{Spec}A$ with composite $f$ on this open.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UB (definition-standard-etale), 00UC (lemma-standard-etale), 00GQ (lemma-integral-overring-surjective)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spread-purely-inseparable-factors] with $A\\prime=C$, $E=B$, $K\\prime=K_s$. Here $A$ is a Noetherian domain: $\\operatorname{Spec}A$ is an affine open of the Noetherian scheme $S$ of Step 1, so [pqf-lem-affine-open-locnoeth] applies, $C$ is a finite etale domain of fraction field $K_s$, $B$ is finite over $C$ with fraction field $L$, and $L/K_s$ is finite purely inseparable by Step 4. Invert the resulting nonzero $s\\in A$. Take $S_0=\\operatorname{Spec}A[1/s]$, $T_0=\\operatorname{Spec}C[1/s]$ and $X_0=\\operatorname{Spec}B[1/s]$. The lemma gives the universal homeomorphism $u$; the original module generators show it is finite. The localized polynomial $Q$ and its Bezout identity give finite etaleness of $e$ by Step 6 again, and lying over [lem-weil-pbc-integral-injective-lying-over], with integrality from [lem-weil-pbc-finite-algebra-is-integral], gives surjectivity. The localized power basis has $d$ elements, so $e_*\\mathcal O_{T_0}$ is free of rank $d$. Localization of a domain at a nonzero element preserves its fraction field, so [lem-weil-pbc-spec-domain-stalks-function-field] makes $T_0$ integral with $k(T_0)=K_s$ and the required inclusions. The nonempty open $S_0$ is dense in integral $S$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-spread-purely-inseparable-factors",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01OW (properties.tex, lemma-locally-Noetherian: affine opens of a locally Noetherian scheme), 00GQ (algebra.tex, lemma-integral-overring-surjective), 01S4 (lemma-universally-injective), 04DF (lemma-universal-homeomorphism)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-closed-image",
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sfb-dominant-function-field-map",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "def-weil-finite-integral-morphism",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-localized-separable-polynomial-model",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-spread-purely-inseparable-factors",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Tag 02NW, Fields Tags 030K and 030N, Algebra Tags 00UB and 00UC, and the existing purely inseparable spreading lemma; explicit affine calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper dominant morphism of integral finite type schemes with finite function field extension becomes finite over a dense open and factors as a finite universal homeomorphism followed by a finite etale surjection of constant positive degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shrink an integral base so a generically finite proper morphism factors through the model of the maximal separable subextension with finite radicial first map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSeparable.isIntegral\", \"module\": \"Mathlib.FieldTheory.Separable\", \"type\": \"{x : K} (h : IsSeparable F x) : IsIntegral F x\", \"doc\": \"If an element $ x $ in the field $ K $ is separable over $ F $, then $ x $ is integral over $ F $.\"}\n  {\"name\": \"IsPurelyInseparable.mk\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} [inst : CommRing F] [inst_1 : Ring E] [inst_2 : Algebra F E],\\n  Algebra.IsIntegral F E → (∀ (x : E), IsSeparable F x → x ∈ (algebraMap F E).range) → IsPurelyInseparable F E\", \"doc\": \"If $ E $ is an integral extension of $ F $ and every separable element of $ E $ over $ F $ lies in $ F $, then $ E $ is purely inseparable over $ F $.\"}\n  {\"name\": \"separableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": IntermediateField F E\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is the intermediate field consisting of all elements of $ E $ that are separable over $ F $. An element is separable over $ F $ if it\"}\n  {\"name\": \"Field.sepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(F : Type u) → (E : Type v) → [inst : Field F] → [inst_1 : Field E] → [Algebra F E] → Cardinal.{v}\", \"doc\": \"The separable degree of a field extension $ E/F $ is defined as the dimension of the separable closure of $ F $ in $ E $ as an $ F $-vector space. The separable closure consists of all elements of $ E\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Unramified.Field\", \"type\": \"(L : Type u) [Field L] [Algebra K L] [EssFiniteType K L] : FormallyUnramified K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For any commutative ring $ K $ and field $ L $ equipped with a $ K $-algebra structure such that $ L $ is finitely generated as a $ K $-algebra, the algebra $ L $ is formally unramified over $ K $ if \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"Ideal.IsMaximal.under\", \"module\": \"Mathlib.RingTheory.Ideal.GoingUp\", \"type\": \"[P.IsMaximal] : (P.under A).IsMaximal\", \"doc\": \"If $ B $ is an integral extension of $ A $, then the contraction of a maximal ideal $ P $ in $ B $ under the algebra homomorphism $ A \\to B $ is a maximal ideal in $ A $.\"}\n  {\"name\": \"Field.finInsepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": ℕ\", \"doc\": \"The finite inseparable degree of the field extension $ E $ over $ F $, defined as the finite rank of $ E $ as a module over the separable closure of $ F $ in $ E $, where infinite ranks are assigned t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPurelyInseparable\", \"IsSeparable\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"IsPurelyInseparable.surjective_algebraMap_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u_1) (E : Type u_2) [CommRing F] [Ring E] [Algebra F E] [IsPurelyInseparable F E] [Algebra.IsSeparable F E] : Function.Surjective ⇑(algebraMap F E)\", \"doc\": \"If `E / F` is both purely inseparable and separable, then `algebraMap F E` is surjective.\"}\n  {\"name\": \"IsPurelyInseparable.bijective_algebraMap_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" (F : Type u_1) (E : Type u_2) [CommRing F] [Ring E] [Algebra F E] [Nontrivial E] [IsDomain F] [Module.IsTorsionFree F E] [IsPurelyInseparable F E] [Algebra.IsSeparable F E] : Function.Bijective ⇑(algebraMap F E)\", \"doc\": \"If `E / F` is both purely inseparable and separable, then `algebraMap F E` is bijective.\"}\n  {\"name\": \"Subalgebra.eq_bot_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u_1} {E : Type u_2} [CommRing F] [Ring E] [Algebra F E] (L : Subalgebra F E) [IsPurelyInseparable F ↥L] [Algebra.IsSeparable F ↥L] : L = ⊥\", \"doc\": \"If a subalgebra of `E / F` is both purely inseparable and separable, then it is equal\\nto `F`.\"}\n  {\"name\": \"IntermediateField.eq_bot_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E] (L : IntermediateField F E) [IsPurelyInseparable F ↥L] [Algebra.IsSeparable F ↥L] : L = ⊥\", \"doc\": \"If an intermediate field of `E / F` is both purely inseparable and separable, then it is equal\\nto `F`.\"}\n  {\"name\": \"Field.sepDegree_eq_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \" (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] (K : Type w) [Field K] [Algebra F K] [Algebra E K] [IsScalarTower F E K] [IsPurelyInseparable F E] [Algebra.IsSeparable E K] : Field.sepDegree F K = Module.rank E K\", \"doc\": \"If `K / E / F` is a field extension tower, such that `E / F` is purely inseparable and `K / E`\\nis separable, then the separable degree of `K / F` is equal to the degree of `K / E`.\\nIt is a special cas\"}\n  {\"name\": \"minpoly.map_eq_of_isSeparable_of_isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \" {F : Type u} (E : Type v) [Field F] [Field E] [Algebra F E] {K : Type w} [Field K] [Algebra F K] [Algebra E K] [IsScalarTower F E K] (x : K) (hsep : IsSeparable F x) [IsPurelyInseparable F E] : Polynomial.map (algebraMap F E) (minpoly F x) = minpoly E x\", \"doc\": \"If `K / E / F` is a field extension tower, such that `E / F` is purely inseparable, then\\nfor any element `x` of `K` separable over `F`, it has the same minimal polynomials over `F` and\\nover `E`.\"}\n  {\"name\": \"LinearIndependent.map_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \" {F : Type u} (E : Type v) [Field F] [Field E] [Algebra F E] {K : Type w} [Field K] [Algebra F K] [Algebra E K] [IsScalarTower F E K] [IsPurelyInseparable F E] {ι : Type u_1} {v : ι → K} (hsep : ∀ (i : ι), IsSeparable F (v i)) (h : LinearIndependent F v) : LinearIndependent E v\", \"doc\": \"If `K / E / F` is a field extension tower such that `E / F` is purely inseparable,\\nif `{ u_i }` is a family of separable elements of `K` which is `F`-linearly independent,\\nthen it is also `E`-linearly\"}\n  {\"name\": \"IntermediateField.linearDisjoint_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \" {F : Type u} (E : Type v) [Field F] [Field E] [Algebra F E] {K : Type w} [Field K] [Algebra F K] [Algebra E K] [IsScalarTower F E K] [IsPurelyInseparable F E] (S : IntermediateField F K) [Algebra.IsSeparable F ↥S] : S.LinearDisjoint E\", \"doc\": \"If `K / E / F` is a field extension tower such that `E / F` is purely inseparable,\\nif `S` is an intermediate field of `K / F` which is separable over `F`, then `S` and `E` are\\nlinearly disjoint over `\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "generically.*finite|purely[Ii]nseparable.*[Ee]tale|[Ee]tale.*purely[Ii]nseparable",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper dominant morphism between integral schemes with finite extension of function fields factors over a dense open as a finite universal homeomorphism followed by a finite etale morphism",
+   "results": "finite_appTop_of_universallyClosed; Scheme.Hom normalization and Scheme.RationalMap constructions: partial ingredients only.",
+   "date": "2026-10-22",
+   "verdict": "no match: neither the full conclusion nor a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically finite morphism of integral schemes becomes finite over an affine open and its maximal separable function subfield spreads to a finite etale algebra",
+   "results": "IsFinite.recOn, IsFinite.finite_app, Scheme.Hom.finite_app, LocallyOfFiniteType.finiteType_appLE, isFinite_iff: definitions and consequences of finiteness, not the generic factorization.",
+   "date": "2026-10-22",
+   "verdict": "no match: neither the full conclusion nor a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsUniversalHomeomorphism\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: neither the full conclusion nor a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "generically.*finite|radicial.*etale|etale.*radicial",
+   "results": "0 hits in AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: neither the full conclusion nor a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nested-open-regular-alteration",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), coefficient-independent alteration/tame-boundary reduction; original steps 5--7: generic-fibre finiteness and separable-first polynomial spreading. No imported blueprint ancestor exists.",
+   "via": [
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proper-generic-radicial-etale-factorization",
+  "worker": "stage1",
+  "summary": "Assembled existing general lemmas with the singleton generic-fibre argument, explicit polynomial embedding and localized power basis. No new nodes. Corrected the curve-only function-field citation to the existing general dominant-function-field convention without changing the mathematical assertion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), coefficient-independent alteration/tame-boundary reduction; original steps 5--7: generic-fibre finiteness and separable-first polynomial spreading. No imported blueprint ancestor exists.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic scheme/commutative algebra tool for the prescribed separable-first generic factorization, not a replacement of the constructible-direct-image unit route; no statement in this unit supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic scheme/commutative algebra tool for the prescribed separable-first generic factorization, not a replacement of the constructible-direct-image unit route; no statement in this unit supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-localized-separable-polynomial-model",
+    "why": "Generic scheme/commutative algebra tool for the prescribed separable-first generic factorization, not a replacement of the constructible-direct-image unit route; no statement in this unit supplies this general input."
+   },
+   {
+    "node": "lem-weil-pbc-spread-purely-inseparable-factors",
+    "why": "Generic scheme/commutative algebra tool for the prescribed separable-first generic factorization, not a replacement of the constructible-direct-image unit route; no statement in this unit supplies this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-localized-separable-polynomial-model",
+  "lem-weil-pbc-spread-purely-inseparable-factors"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-e7e948ed7",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-e7e948ed7 (reviewer sub-agent of L); spot-checked: I read the whole item. This is a one-level split with no new nodes; live and side-live have the item unsplit and there is no re-split note. The only statement change is the citation def-sc-function-field -> def-sfb-dominant-function-field-map. That node pins k(S)->k(X) as the generic stalk map and gives f(eta_X)=eta_S; the meaning is unchanged and nothing is weakened. I checked steps 1-7 against Stacks 02NW (morphisms.tex 13192-13217, (1)<=>(4) under qcqs), 030K, 030N, 00UB/00UC, 00GQ, 01S4, 04DF and 01OW (properties.tex 436), and against the statement of every cited node; I also read the proofs of the localized-polynomial-model, spreading and 02NW nodes. The singleton generic fibre ((A\\0)^{-1}B_i is a finite-dimensional domain, hence a field equal to L) is correct. The injectivity of A[T]/(Q)->B through the power basis and the minimal degree is correct. All hypotheses of the spreading lemma are met with A'=C, E=B, K'=K_s. Edge cases checked: L=K, purely inseparable L/K, characteristic 0, non-normal X and S, positive-dimensional special fibres. No duplicate: the generic-finite splitting nodes are etale-local splittings with no integral T_0 having k(T_0)=K_s. I accept the four declared generic tool uses. Three faults, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-generic-radicial-etale-factorization.json: (1) C1, Step 7 used 'affine open of a Noetherian scheme has a Noetherian ring' (Stacks 01OW) uncited; it now cites the leaf pqf-lem-affine-open-locnoeth. (2) C4, Steps 6-7 took the integrality of the finite ring map A->C from pqf-lem-finite-integral-lft, which is about morphisms; both steps now cite lem-weil-pbc-finite-algebra-is-integral. (3) B3, 'locally free of rank d' in the statement had no definition; the statement now cites def-sc-finite-locally-free-sheaf (constant rank d), added to stmt_deps. proof_deps is the union of uses, each step is at most 2000 characters, no cycle is introduced, and no SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GenericRadicialEtaleFactorization",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_generic_radicial_etale_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GenericRadicialEtaleFactorization.lean",
+  "statement": "theorem Scheme.Hom.exists_generic_radicial_etale_factorization (k : Type u) [Field k] {X S : Scheme.{u}} [IsIntegral X] [IsIntegral S] (pX : X ⟶ Spec (CommRingCat.of k)) (pS : S ⟶ Spec (CommRingCat.of k)) [IsSeparated pX] [IsSeparated pS] [LocallyOfFiniteType pX] [QuasiCompact pX] [LocallyOfFiniteType pS] [QuasiCompact pS] (f : X ⟶ S) (hf : f ≫ pS = pX) [IsProper f] [IsDominant f] (hfinite : @FiniteDimensional S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f).toModule) : Surjective f ∧ ∃ (U : S.Opens), (U : Set S).Nonempty ∧ Dense (U : Set S) ∧ IsAffineOpen U ∧ IsFinite (pullback.snd f U.ι) ∧ ∃ (hX₀ : IsIntegral (pullback f U.ι)) (T : Scheme.{u}) (hT : IsIntegral T) (a : pullback f U.ι ⟶ T) (e : T ⟶ U.toScheme), a ≫ e = pullback.snd f U.ι ∧ IsFinite a ∧ (topologically IsHomeomorph).universally a ∧ IsFinite e ∧ Etale e ∧ Surjective e ∧ ∃ (d : ℕ), 1 ≤ d ∧ SheafOfModules.IsFiniteLocallyFreeOfRank ((Scheme.Modules.pushforward e).obj (SheafOfModules.unit T.ringCatSheaf)) d ∧ d = @Module.finrank S.functionField (@separableClosure S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f)) _ _ (@Submodule.module S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f).toModule ((@Subalgebra.toSubmodule S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f)) (@IntermediateField.toSubalgebra S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f) (@separableClosure S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f))))) ∧ ∃ (hj : (pullback.fst f U.ι) (genericPoint (pullback f U.ι : Scheme.{u})) = genericPoint X) (ha : a (genericPoint (pullback f U.ι : Scheme.{u})) = genericPoint T) (φ : T.functionField ≃+* (@separableClosure S.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f))), ∀ t : T.functionField, ((pullback.fst f U.ι).functionFieldMap hj).hom (φ t : X.functionField) = (a.functionFieldMap ha).hom t",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b144873e0",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean; lean.statement verbatim; single sorry theorem with source/blueprint docstrings and all 7 proof steps; report has Worker report + Second reading by Q66. Clause check: k field; IsIntegral X,S; actual structure maps pX,pS with IsSeparated + LocallyOfFiniteType∧QuasiCompact (recorded finite-type form); hf k-morphism; IsProper, IsDominant; FiniteDimensional via canonical dominantFunctionFieldAlgebra; conclusion Surjective f, U nonempty dense IsAffineOpen, IsFinite(pullback.snd f U.ι), integral T with a≫e = snd, IsFinite a + (topologically IsHomeomorph).universally a (dep record form), IsFinite/Etale/Surjective e, 1≤d with IsFiniteLocallyFreeOfRank of pushforward e of the unit (fixed-rank class in the def-sc-finite-locally-free-sheaf module), d = finrank K (separableClosure K L), φ: k(T)≃+*K_s pinned by j^*(φ t)=a^*(t) (not abstract). Auxiliary hX0/hj/ha are true consequences. Edge cases L=K, purely inseparable (d=1), char 0, non-normal covered; universe u shared as Spec k requires. No duplicate found; no hollow def, no extra assumptions, no pro-etale. Not recompiled per instructions; worker compile clean. No findings."
+ }
+}

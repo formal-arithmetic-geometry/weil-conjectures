@@ -1,0 +1,118 @@
+{
+ "id": "lem-coef-etale-lisse-hom-coefficient-invertible-exponent",
+ "kind": "statement",
+ "title": "Positive coefficient quotients have invertible exponent over the field",
+ "statement": "Let F_q⊂k be the finite-field datum with algebraic closure k of characteristic p [def-weil-finite-field-fiber], l≠p a prime, E/Q_l finite and A=O_E/(ϖ_E^(n+1)) [def-weil-l-adic-coefficient-extension]. Then l^(n+1) annihilates A and is a unit in Γ(Spec k), i.e. A has invertible exponent on Spec k.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "proof": [
+  {
+   "text": "The extended absolute value of l is less than one, so l lies in the maximal ideal (ϖ_E) of O_E [lem-weil-l-adic-extension-integers-dvr]; hence l^(n+1)∈(ϖ_E^(n+1)) and l^(n+1)=0 in A.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "F_q has characteristic p because its cardinality is a power of p, and k is an F_q-algebra, so char k=p≠l. Thus l≠0 in k, l^(n+1) is a unit of k, and its image under Γ(Spec k)≅k is a unit.",
+   "uses": [
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etaleLisseHomCoefficientInvertibleExponent",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived category coefficient Hom",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLisseHomCoefficientInvertibleExponent",
+   "results": "Only this local declaration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Lisse Hom reduction proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLisseHomReduction",
+  "file": "lean/Sheaf/Paper/EtaleLisseHomReduction.lean",
+  "declaration": "WeilConjectures.etaleLisseHomCoefficientInvertibleExponent",
+  "statement": "theorem etaleLisseHomCoefficientInvertibleExponent (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (n : ℕ) : HasInvertibleExponent (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (Spec (.of D.k))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

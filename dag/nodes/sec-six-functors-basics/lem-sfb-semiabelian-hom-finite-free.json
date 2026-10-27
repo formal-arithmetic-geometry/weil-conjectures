@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-semiabelian-hom-finite-free",
+ "kind": "statement",
+ "title": "Semiabelian homomorphism groups are free of finite rank",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. A semiabelian $k$-group algebraic space means a smooth separated finite-type commutative group object $G$ in algebraic spaces [def-trf-algebraic-space] admitting an exact sequence $0\\to T\\to G\\to A\\to0$ of fppf sheaves [def-pc-fppf-site], where $T\\simeq\\mathbf G_m^t$ for some integer $t\\geq0$ and $A/k$ is an abelian variety [def-sc-abelian-variety]. Here $\\mathbf G_m(U)=\\Gamma(U,\\mathcal O_U)^\\times$, group-object operations induce functorial group operations on $U$-points, and exactness means that $T$ is the kernel and sections of $A$ locally lift to $G$ for fppf coverings. Smoothness and finite type are tested on etale scheme charts, and separated means that the diagonal is a closed immersion. Let $G,H$ be two such spaces. Then the group $\\operatorname{Hom}_{k\\text{-grp}}(G,H)$ of homomorphisms of $k$-group algebraic spaces, with pointwise addition, is a free abelian group of finite rank [def-weil-pbc-free-module]. In particular $R=\\operatorname{End}_{k\\text{-grp}}(G)$, with pointwise addition and composition as multiplication, is a unital associative ring whose additive group has a finite $\\mathbf Z$-basis, and $1_R=\\operatorname{id}_G$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Theorem 10.15, printed p.49, for the abelian quotient; the semiabelian Hom extension of this fact uses the torus/abelian filtration in Deligne, Le lemme de Gabber, proof of Lemma 3.5.1, pp.139–140, Milne Algebraic Groups Theorem 12.9 (split tori), pp.233–234, and §8(e), p.151 (no homomorphisms from abelian varieties to affine groups). Over a field group algebraic spaces are schemes, as recalled in Deligne §1.1(a), p.131. This general semiabelian assertion is an agent-derived supporting lemma, not a claim that Milne 10.15 alone states it. The vanishing of torus-to-abelian homomorphisms uses Milne Algebraic Groups Proposition 8.1(b) and Example 8.4, p.149; the affine image inside a proper abelian variety is finite and is trivial when smooth connected.",
+  "external": [
+   {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§8(e), p.151; Theorem 12.9, pp.233–234"
+   },
+   {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "§1.1(a), p.131, and Lemma 3.5.1 proof, pp.139–140",
+    "url": "https://numdam.org/item/AST_1985__127__131_0.pdf"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sc-abelian-variety",
+  "def-weil-pbc-free-module",
+  "def-sfb-semiabelian-group-space"
+ ],
+ "proof": [
+  {
+   "text": "Write the given extensions as $0\\to T_G\\xrightarrow{i_G}G\\xrightarrow{q_G}A_G\\to0$ and similarly for $H$. Morphisms are natural transformations of their fppf sheaves [def-trf-algebraic-space]. Pointwise sums and negatives of homomorphisms are homomorphisms since $H$ is commutative, so $M=\\operatorname{Hom}(G,H)$ is an abelian group. For $f\\in M$, [lem-sfb-torus-abelian-hom-vanishing] gives $q_Hfi_G=0$. The kernel property defines $f_T:T_G\\to T_H$. The map $q_Hf$ therefore descends to $f_A:A_G\\to A_H$: lift a section $a$ fppf locally to $g$, and set $f_A(a)=q_Hf(g)$. Two lifts differ by a section of $T_G$, so these values agree and glue uniquely in the sheaf $A_H$. This also proves naturality and additivity. Natural transformations between the represented torus or abelian sheaves are scheme morphisms: evaluate the transformation on the identity map of its source and use naturality. Thus $\\Phi(f)=(f_T,f_A)$ is an additive map $M\\to\\operatorname{Hom}(T_G,T_H)\\oplus\\operatorname{Hom}(A_G,A_H)$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-torus-abelian-hom-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§8(b)–(e), pp.149–151; agent assembly using the assumed exact fppf sequences"
+   }
+  },
+  {
+   "text": "If $\\Phi(f)=0$, then $q_Hf=f_Aq_G=0$, so the kernel property gives a unique $u:G\\to T_H$ with $f=i_Hu$. Its restriction to $T_G$ is zero because $fi_G=i_Hf_T=0$ and $i_H$ is a monomorphism. For $a\\in A_G(U)$, choose local lifts $g$ and glue $u(g)$: their differences are zero because $u$ vanishes on $T_G$. This yields a natural group homomorphism $v:A_G\\to T_H$ with $u=vq_G$. By [lem-sfb-torus-abelian-hom-vanishing], $v=0$, hence $f=0$. Therefore $\\Phi$ is injective, by applying this to the difference of two maps with the same image. This argument uses the exact sequences as sheaves and does not require a scheme representability theorem for $G$ or $H$.",
+   "uses": [
+    "lem-sfb-torus-abelian-hom-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§8(e), p.151; agent kernel argument"
+   }
+  },
+  {
+   "text": "Choose the split-torus coordinates in the hypotheses. By [lem-sfb-split-torus-hom-matrices], the torus Hom group is a finite power of $\\mathbf Z$. By [lem-sfb-abelian-hom-finite-free], the abelian-variety Hom group has a finite integer basis. Combining these two coordinate lists identifies their direct sum with $\\mathbf Z^J$ for a finite set $J$. The injection $\\Phi$ identifies $M$ with its image subgroup. Apply [lem-weil-subgroup-finite-free-abelian-group-free] to that subgroup to conclude that $M$ is free of finite rank.",
+   "uses": [
+    "lem-sfb-split-torus-hom-matrices",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 10.15, pp.49–50, for the abelian factor; Milne Algebraic Groups Theorem 12.9, pp.233–234, for the torus factor; agent subgroup argument"
+   }
+  },
+  {
+   "text": "Take $H=G$. Composition of natural transformations is associative and has identity $\\operatorname{id}_G$. For group homomorphisms, $(f+g)h=fh+gh$ pointwise and $f(g+h)=fg+fh$ because $f$ preserves the group law. Thus composition is distributive over the abelian group structure already constructed, and gives a unital associative ring. Its additive group has the finite basis just proved. This includes the trivial group, whose endomorphism ring is the zero ring with $1=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§10, pp.42–43, endomorphism-ring convention; elementary group-object identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-torus-abelian-hom-vanishing",
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§8(b)–(e), pp.149–151 and Theorem 12.9, pp.233–234, combined with Milne AV I Theorem 10.15, pp.49–50; fppf extension argument written by Q91"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The group of homomorphisms between two semiabelian varieties is a free abelian group of finite rank",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Free.addMonoidHom\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Matrix\", \"type\": \"∀ (M : Type v) (N : Type w) [inst : AddCommGroup M] [Module.Finite ℤ M] [Module.Free ℤ M] [inst_3 : AddCommGroup N]\\n  [Module.Free ℤ N], Module.Free ℤ (M →+ N)\", \"doc\": \"Given an additive monoid $ M $ with zero and an additive commutative group $ N $, the set of additive monoid homomorphisms $ M →+ N $ forms an additive commutative group under pointwise addition. For \"}\n  {\"name\": \"Module.Finite.addMonoidHom\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Matrix\", \"type\": \"∀ (M : Type v) (N : Type w) [inst : AddCommGroup M] [Module.Finite ℤ M] [Module.Free ℤ M] [inst_3 : AddCommGroup N]\\n  [Module.Finite ℤ N], Module.Finite ℤ (M →+ N)\", \"doc\": \"If $ N $ is a finitely generated $ \\\\mathbb{Z} $-module, then the $ \\\\mathbb{Z} $-module of additive monoid homomorphisms from $ M $ to $ N $ is also finitely generated. This instance asserts that the s\"}\n  {\"name\": \"CharacterModule.instAddCommGroup\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"(A : Type uA) → [inst : AddCommGroup A] → AddCommGroup (CharacterModule A)\", \"doc\": \"The character module of an additive commutative group $ A $, consisting of homomorphisms from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $, forms an additive commutative group under pointwis\"}\n  {\"name\": \"AddCommGrpCat.instAddCommGroupHom\", \"module\": \"Mathlib/Algebra/Category/Grp/Preadditive\", \"type\": \"(P Q : AddCommGrpCat) → AddCommGroup (P ⟶ Q)\", \"doc\": \"For any two additive commutative groups $P$ and $Q$, the set of group homomorphisms $\\\\text{Hom}(P, Q)$ forms an additive commutative group under pointwise addition. Specifically, for homomorphisms $f,\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"AddCommGrpCat.enoughInjectives\", \"module\": \"Mathlib/Algebra/Category/Grp/EnoughInjectives\", \"type\": \"CategoryTheory.EnoughInjectives AddCommGrpCat\", \"doc\": \"The category of additive commutative groups (abelian groups) has enough injective objects, meaning every object can be embedded into an injective object within the category.\"}\n  {\"name\": \"AddCommGrpCat.instAbelian\", \"module\": \"Mathlib/Algebra/Category/Grp/Abelian\", \"type\": \"CategoryTheory.Abelian AddCommGrpCat\", \"doc\": \"The category of additive commutative groups with group homomorphisms forms an abelian category, meaning it is preadditive, has all kernels and cokernels, and satisfies the additional exactness propert\"}\n  {\"name\": \"AddCommGrpCat.int_hom_ext\", \"module\": \"Mathlib/Algebra/Category/Grp/Basic\", \"type\": \"∀ {G : AddCommGrpCat} (f g : AddCommGrpCat.of ℤ ⟶ G),\\n  (CategoryTheory.ConcreteCategory.hom f) 1 = (CategoryTheory.ConcreteCategory.hom g) 1 → f = g\", \"doc\": \"Let $ G $ be an additive commutative group. If two group homomorphisms $ f, g : \\\\mathbb{Z} \\\\to G $ satisfy $ f(1) = g(1) $, then $ f = g $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hom\", \"Free\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Tt]orus|[Tt]ori|abelianVariety|AbelianVariety",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic.lean\", \"line\": \"245\", \"text\": \"public import Mathlib.Tactic.NormNum.NatFactorial\"}\n  {\"file\": \"Mathlib/NumberTheory/Modular.lean\", \"line\": \"343\", \"text\": \"-- If `c = 1`, then `g` factorises into a product terms involving only `T` and `S`.\"}\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"17\", \"text\": \"import Mathlib.Data.Nat.Prime.Factorial\"}\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"220\", \"text\": \"theorem factorization_lcmUpto (n : ℕ) {p : ℕ} (hp : p.Prime) :\"}\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"221\", \"text\": \"    (lcmUpto n).factorization p = p.log n := by\"}\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"222\", \"text\": \"  rw [lcmUpto, Finset.factorization_lcm (fun _ _ ↦ by grind)]\"}\n  {\"file\": \"Mathlib/NumberTheory/Chebyshev.lean\", \"line\": \"233\", \"text\": \"theorem lcmUpto_dvd_factorial (n : ℕ) : lcmUpto n ∣ n ! := by\"}\n  {\"file\": \"Mathlib/NumberTheory/MaricaSchoenheim.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Combinatorics.SetFamily.FourFunctions\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"22\", \"text\": \"factorisations of `I * S` and `f mod I` have the same shape, i.e. they have the same number of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"64\", \"text\": \"open Ideal Polynomial DoubleQuot UniqueFactorizationMonoid Algebra RingHom\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"83\", \"text\": \"    ((Algebra.adjoin.powerBasis' hx').quotientEquivQuotientMinpolyMap I).toRingEquiv.trans <|\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"154\", \"text\": \"    UniqueFactorizationMonoid.normalize_normalized_factor _ hJ,\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"155\", \"text\": \"    UniqueFactorizationMonoid.normalize_normalized_factor, Nat.cast_inj] at this\"}\n  {\"file\": \"Mathlib/Lean/Expr/Basic.lean\", \"line\": \"130\", \"text\": \"  | ctorInfo   info, v => ctorInfo   {info with toConstantVal := v}\"}\n  {\"file\": \"Mathlib/Lean/Expr/Basic.lean\", \"line\": \"173\", \"text\": \"  | ctorInfo   _ => panic! \\\"toDeclaration for ctorInfo not implemented\\\"\"}\n  {\"file\": \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"line\": \"492\", \"text\": \"a coprimality condition and `n / p ^ n.factorization p` with the largest factor of `n` coprime\"}\n  {\"file\": \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"line\": \"496\", \"text\": \"  (annihilator R (n := n / p ^ n.factorization p)\"}\n  {\"file\": \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"line\": \"503\", \"text\": \"  have : NeZero (n / p ^ n.factorization p) := ⟨(Nat.ordCompl_pos p (NeZero.ne n)).ne'⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"line\": \"512\", \"text\": \"  · have hdvd : χ.conductor ∣ n / p ^ n.factorization p := by\"}\n  {\"file\": \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"line\": \"517\", \"text\": \"    · rw [show (p : ZMod (n / p ^ n.factorization p))\"}\n  {\"file\": \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"line\": \"201\", \"text\": \"### Characterization in terms of the prime factorization\"}\n  {\"file\": \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"line\": \"208\", \"text\": \"every prime `q` such that `q % 4 = 3` in the prime factorization of `n` is even.\"}\n  {\"file\": \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"line\": \"226\", \"text\": \"    have : b.factorization q = 1 := by grind [Squarefree.natFactorization_le_one,\"}\n  {\"file\": \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"line\": \"227\", \"text\": \"      Prime.dvd_iff_one_le_factorization, prime_of_mem_primeFactors, dvd_of_mem_primeFactors]\"}\n  {\"file\": \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"line\": \"228\", \"text\": \"    grind [factorization_def, prime_of_mem_primeFactors, padicValNat.mul, padicValNat.pow]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Endomorphisms of an extension of an abelian variety by an algebraic torus form a finite free integer module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Finite.addMonoidHom\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.Finite.Matrix\", \"type\": \"[Module.Finite ℤ N] : Module.Finite ℤ (M →+ N)\", \"doc\": \"If $ N $ is a finitely generated $ \\\\mathbb{Z} $-module, then the $ \\\\mathbb{Z} $-module of additive monoid homomorphisms from $ M $ to $ N $ is also finitely generated. This instance asserts that the s\"}\n  {\"name\": \"Finite.algHom\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.Finite.Matrix\", \"type\": \": Finite (M →ₐ[K] L)\", \"doc\": \"The endomorphism ring of a finite free module of rank 1 over a commutative ring is a commutative ring.\"}\n  {\"name\": \"Module.End.isIntegral\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"{M : Type*} [AddCommGroup M] [Module R M] [Module.Finite R M] : Algebra.IsIntegral R (Module.End R M)\", \"doc\": \"For any commutative semiring $ R $ and finitely generated $ R $-module $ M $, every $ R $-linear endomorphism of $ M $ is integral over $ R $. This means that each such endomorphism satisfies a monic \"}\n  {\"name\": \"AddMonoid.End.instModule\", \"module\": \"Mathlib.Algebra.Module.Hom\", \"type\": \"[Semiring R] [AddCommMonoid A] [Module R A] : Module R (AddMonoid.End A)\", \"doc\": \"For any semiring $ R $ and $ R $-module $ A $ that is an additive commutative monoid, the set of additive monoid endomorphisms $ A →+ A $ forms an $ R $-module under pointwise addition and scalar mult\"}\n  {\"name\": \"instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \"[IsDomain A] [IsDomain B] [IsIntegrallyClosed B] [Module.Finite A B] [IsTorsionFree A B] : Fintype (B ≃ₐ[A] B)\", \"doc\": \"If $ A $ and $ B $ are integral domains with $ B $ integrally closed, finitely generated as an $ A $-module, and torsion-free over $ A $, then the group of $ A $-algebra automorphisms of $ B $ is fini\"}\n  {\"name\": \"Module.End.instRing\", \"module\": \"Mathlib.Algebra.Module.LinearMap.End\", \"type\": \": Ring (Module.End R N₁)\", \"doc\": \"For any semiring $ R $ and $ R $-module $ N_1 $, the set of endomorphisms $ \\\\mathrm{End}_R(N_1) $ forms a ring under pointwise addition and composition of maps. This structure includes additive invers\"}\n  {\"name\": \"Module.End\", \"module\": \"Mathlib.Algebra.Module.LinearMap.End\", \"type\": \"(R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M]\", \"doc\": \"The type of linear endomorphisms of an $ R $-module $ M $, i.e., linear maps from $ M $ to itself that preserve the $ R $-module structure.\"}\n  {\"name\": \"Module.Finite.toModuleEnd_moduleEnd_surjective\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"[Module.Finite (End R M) M] : Function.Surjective (Module.toModuleEnd (End R M) (S := R) M)\", \"doc\": \"If the module $ M $ is finitely generated over its endomorphism ring $ \\\\mathrm{End}_R(M) $, then the induced ring homomorphism from $ \\\\mathrm{End}_R(M) $ to the endomorphism ring of $ M $ as an $ R $-\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphism groups of semi abelian algebraic groups are finitely generated torsion free abelian groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Finite.addMonoidHom\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Matrix\", \"type\": \"∀ (M : Type v) (N : Type w) [inst : AddCommGroup M] [Module.Finite ℤ M] [Module.Free ℤ M] [inst_3 : AddCommGroup N]\\n  [Module.Finite ℤ N], Module.Finite ℤ (M →+ N)\", \"doc\": \"If $ N $ is a finitely generated $ \\\\mathbb{Z} $-module, then the $ \\\\mathbb{Z} $-module of additive monoid homomorphisms from $ M $ to $ N $ is also finitely generated. This instance asserts that the s\"}\n  {\"name\": \"AddCommGrpCat.instIsSerreClassIsFinite\", \"module\": \"Mathlib/Algebra/Category/Grp/IsFinite\", \"type\": \"AddCommGrpCat.isFinite.IsSerreClass\", \"doc\": \"The collection of finite additive commutative groups forms a Serre class in the category of additive commutative groups. This means the class is closed under subobjects, quotients, extensions, and fin\"}\n  {\"name\": \"AddCommGrpCat.instAddCommGroupHom\", \"module\": \"Mathlib/Algebra/Category/Grp/Preadditive\", \"type\": \"(P Q : AddCommGrpCat) → AddCommGroup (P ⟶ Q)\", \"doc\": \"For any two additive commutative groups $P$ and $Q$, the set of group homomorphisms $\\\\text{Hom}(P, Q)$ forms an additive commutative group under pointwise addition. Specifically, for homomorphisms $f,\"}\n  {\"name\": \"FiniteAddGrp.ofHom\", \"module\": \"Mathlib/Algebra/Category/Grp/FiniteGrp\", \"type\": \"{X Y : Type u} →\\n  [inst : AddGroup X] →\\n    [inst_1 : Finite X] →\\n      [inst_2 : AddGroup Y] → [inst_3 : Finite Y] → (X →+ Y) → (FiniteAddGrp.of X ⟶ FiniteAddGrp.of Y)\", \"doc\": \"Given finite additive groups $X$ and $Y$, this function converts an additive group homomorphism $f : X →+ Y$ (preserving addition and zero) into a morphism between the corresponding objects $\\\\text{Fin\"}\n  {\"name\": \"AddCommGrpCat.enoughInjectives\", \"module\": \"Mathlib/Algebra/Category/Grp/EnoughInjectives\", \"type\": \"CategoryTheory.EnoughInjectives AddCommGrpCat\", \"doc\": \"The category of additive commutative groups (abelian groups) has enough injective objects, meaning every object can be embedded into an injective object within the category.\"}\n  {\"name\": \"Module.Free.addMonoidHom\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Matrix\", \"type\": \"∀ (M : Type v) (N : Type w) [inst : AddCommGroup M] [Module.Finite ℤ M] [Module.Free ℤ M] [inst_3 : AddCommGroup N]\\n  [Module.Free ℤ N], Module.Free ℤ (M →+ N)\", \"doc\": \"Given an additive monoid $ M $ with zero and an additive commutative group $ N $, the set of additive monoid homomorphisms $ M →+ N $ forms an additive commutative group under pointwise addition. For \"}\n  {\"name\": \"CharacterModule.instAddCommGroup\", \"module\": \"Mathlib/Algebra/Module/CharacterModule\", \"type\": \"(A : Type uA) → [inst : AddCommGroup A] → AddCommGroup (CharacterModule A)\", \"doc\": \"The character module of an additive commutative group $ A $, consisting of homomorphisms from $ A $ to the additive circle $ \\\\mathbb{Q}/\\\\mathbb{Z} $, forms an additive commutative group under pointwis\"}\n  {\"name\": \"AddCommGrpCat.instAbelian\", \"module\": \"Mathlib/Algebra/Category/Grp/Abelian\", \"type\": \"CategoryTheory.Abelian AddCommGrpCat\", \"doc\": \"The category of additive commutative groups with group homomorphisms forms an abelian category, meaning it is preadditive, has all kernels and cokernels, and satisfies the additional exactness propert\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group/module Hom, abelianization and quotient groups, cyclotomic characters, Galois-category faithfulness and Weierstrass coordinates do not state the required semiabelian or stable-curve theorem. Module.Finite.addMonoidHom and Module.Free.addMonoidHom require finitely generated underlying abelian groups; they do not establish finite freeness of algebraic-group morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|\\btorus\\b|\\btori\\b|[Aa]belian[Vv]ariety",
+   "results": "[grep] OK 8 hit(s); recorded top results: Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean, Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/MeasureTheory/Integral/TorusIntegral.lean, Mathlib/MeasureTheory/Integral/TorusIntegral.lean, Mathlib/MeasureTheory/Integral/TorusIntegral.lean, Mathlib/MeasureTheory/Integral/TorusIntegral.lean, Mathlib/MeasureTheory/Integral/TorusIntegral.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: analytic tori and abstract addMonoidHom instances do not identify scheme/group-space Hom. Read Mathlib/LinearAlgebra/FreeModule/Finite/Matrix.lean:98–107: the addMonoidHom instances assume the domain is finitely generated and free over the integers; semiabelian k-points need not be finitely generated."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Finite.addMonoidHom|Module.Free.addMonoidHom",
+   "results": "[grep] OK 2 hit(s); recorded top results: Mathlib/LinearAlgebra/FreeModule/Finite/Matrix.lean, Mathlib/LinearAlgebra/FreeModule/Finite/Matrix.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: analytic tori and abstract addMonoidHom instances do not identify scheme/group-space Hom. Read Mathlib/LinearAlgebra/FreeModule/Finite/Matrix.lean:98–107: the addMonoidHom instances assume the domain is finitely generated and free over the integers; semiabelian k-points need not be finitely generated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-torsion-faithfulness",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension.",
+   "via": [
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semiabelian-hom-finite-free",
+  "worker": "stage1",
+  "summary": "Proved the semiabelian Hom assertion by an explicit injective map to torus Hom plus abelian-quotient Hom, with both fppf descent arguments written out. Reused abelian Hom finite freeness and the subgroup Mathlib leaf. Created only the independent torus character computation and torus/abelian vanishing inputs. Statement unchanged; no scheme representability of the semiabelian spaces is assumed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. The latest direct-images proof uses proper base change and open-coefficient stability; this inherited supporting branch is split without changing that unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-84c4f6721",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-84c4f6721 (reviewer sub-agent of L); spot-checked: I read the whole split; no fixes needed. The item's statement is unchanged; its four steps are below. Step 1: homomorphisms from the torus T_G to the abelian quotient A_H vanish. This gives f_T by the kernel property and f_A by fppf-local lift and glue, so Phi=(f_T,f_A) is additive. Step 2: Phi is injective. f factors as i_H u, u descends to some v:A_G->T_H, and v=0 because maps from an abelian variety to a torus also vanish. Step 3 bounds the target by Z^J: torus Hom by lem-sfb-split-torus-hom-matrices, abelian-variety Hom by lem-sfb-abelian-hom-finite-free (valid over any field). Then the Mathlib subgroup leaf gives that Hom(G,H) is free of finite rank. Step 4 (ring axioms) is elementary, including the zero ring. Every cited statement says what its step takes from it. Both new nodes are statement-only, true, and do not restate the item. split-torus-hom-matrices matches Milne Algebraic Groups Thm 12.9(a), printed pp.233-234; I checked r=0, s=0, r=s=1 and characteristic p. torus-abelian-hom-vanishing matches Milne Prop 8.1(b) and Ex 8.4 (p.149) and §8e (p.151); I checked r=0 and dim A=0. My DAG search (split torus, G_m^, diagonalizable, anti-affine, rigidity) found no duplicate; the toric trf nodes do not classify Hom groups. Route: everything is in unit sk-thm-sf-ctf-stability, plus a Mathlib leaf and a definition; there is no SGA citation. Batch 5: the flagged path runs through lem-sfb-abelian-hom-finite-free to lem-trf-torsionfree-rationalization-injective. That node only says a torsion-free abelian group injects into G tensor Q. It is generic algebra, given by neither the trace formula nor Poincare duality and not a step of either proof, so it is outside the assumptions. blueprint.from is inherited from the item's existing null-ancestor provenance."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianHomFiniteFree",
+  "declaration": "AlgebraicGeometry.semiabelian_hom_finite_free",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianHomFiniteFree.lean",
+  "statement": "theorem semiabelian_hom_finite_free {k : Type u} [Field k] [IsAlgClosed k] (G H : SemiabelianGroupSpace k) : (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (G.additivePoints ⟶ H.additivePoints))) ∧ (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (End G.additivePoints))) ∧ (∀ f g : End G.additivePoints, f * g = g ≫ f) ∧ (1 : End G.additivePoints) = 𝟙 G.additivePoints",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Hom is the type of natural transformations of the additive point functors of the two semiabelian spaces (landed AlgebraicSpace + CommutativeSpaceGroup), i.e. group-preserving space morphisms with pointwise addition. End uses Mathlib's canonical preadditive Ring instance, whose multiplication and unit are specified in the conclusion. Reviewer fix (H4) reuses the landed group-space and morphism-property notions.",
+  "fixed_by": "NT-stage2-cc-6ea7d705d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ea7d705d",
+  "group": "Q119",
+  "result": "fix",
+  "note": "H4: delivered IsSemiabelianGroupSpace re-encodes landed notions (AddCommGrpCat functor + atlas tests instead of AlgebraicSpace.CommutativeSpaceGroup from def-sfb-smooth-integral-group-space and MapIsLocally Smooth/MapIsSeparated/MapIsFiniteType from def-sfb-space-morphism-properties). Mathematics otherwise correct: k alg. closed, split torus via relativeSplitTorusFunctor (r=0 ok), IsAbelianVariety+GrpObj, kernel/injectivity/fppf local surjectivity exactness, Hom = natural transformations with pointwise addition, finite Fin n Z-basis, End ring with f*g=g≫f and 1=𝟙; edge cases (pure torus, pure abelian, G=0, any char) covered; proof sorry; docstrings ok. Fix: new module adds commutativeSpaceGroupPoints (real functor data), predicate via landed Map* tests, bundled SemiabelianGroupSpace k + additivePoints; item takes G H : SemiabelianGroupSpace k with Hom = additivePoints ⟶ additivePoints; new node statement/stmt_deps cite the two landed defs; item lean-record updated (statement verbatim checked). nt_compile --json on both fixed files: exit 0, no errors/warnings."
+ }
+}

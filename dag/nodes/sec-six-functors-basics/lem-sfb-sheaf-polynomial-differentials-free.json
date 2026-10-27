@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-sheaf-polynomial-differentials-free",
+ "kind": "statement",
+ "title": "Polynomial sheaf differentials after evaluation are free on the generators",
+ "statement": "Let $\\mathcal C$ be a small site in the chosen universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], let $A\\to B$ be a map of sheaves of commutative rings, and let $\\alpha:E\\to B$ be a map of sheaves of sets. Let $P_E=A[E]$ be the sheafification [def-weil-pbc-sheafification] of the presheaf $U\\mapsto A(U)[E(U)]$ of polynomial algebras [def-weil-pbc-mv-polynomial-ring], with evaluation $[e]\\mapsto\\alpha(e)$. Use sheaf differentials $\\Omega_{P_E/A}$ obtained by sheafifying the sectionwise universal modules [def-weil-pbc-kahler-differentials], module sheaves [def-weil-sheaf-of-modules-category], and sheaf tensor products [def-pur-sheaf-tensor-product]. Write $B^{(E)}$ for the free module sheaf on $E$ of [lem-trf-free-module-sheaf-universal-property], to distinguish it from a polynomial algebra. There is a canonical $B$-linear isomorphism\n$$\\Phi_E:B^{(E)}\\xrightarrow{\\sim}\\Omega_{P_E/A}\\otimes_{P_E}B,\\qquad [e]\\longmapsto\\mathrm d[e]\\otimes1.$$\nFor every map $v:E'\\to E$ over $B$, the induced differential map $F(v):\\Omega_{P_{E'}/A}\\otimes_{P_{E'}}B\\to\\Omega_{P_E/A}\\otimes_{P_E}B$ satisfies $F(v)\\Phi_{E'}=\\Phi_E B^{(v)}$, where $B^{(v)}$ sends $[e']$ to $[v(e')]$. No surjectivity assumption on evaluation is imposed.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof, first paragraph: description of Omega as the sheaf associated to the sectionwise free B-modules. Naturality is for the indicated maps of polynomial generators."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-free-module-sheaf-universal-property",
+  "def-sfb-sheaf-differentials",
+  "def-sfb-sheaf-polynomial-cotangent-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q(U)=A(U)[E(U)]$, $D(U)=\\Omega_{Q(U)/A(U)}$, $T(U)=D(U)\\otimes_{Q(U)}B(U)$ and $L(U)=\\bigoplus_{e\\in E(U)}B(U)[e]$, with coefficient and generator restriction maps. Apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] to $R=A(U)$, the arbitrary set $E(U)$ and the $Q(U)$-algebra $B(U)$ given by evaluation. It gives the $B(U)$-linear isomorphism $\\phi_U:L(U)\\to T(U)$ sending $[e]$ to $\\mathrm dX_e\\otimes1$. Its inverse sends $(\\sum_e q_e\\mathrm dX_e)\\otimes b$ to $\\sum_e\\operatorname{ev}(q_e)b[e]$. The tensor symmetry needed to put the cited basis in this tensor order is $b\\otimes m\\mapsto m\\otimes b$, with inverse the same flip, well-defined by balancing [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX, lemma-differentials-polynomial-ring, polynomial differential basis and its scalar extension; used in defos.tex Tag 08UJ, first proof paragraph."
+   }
+  },
+  {
+   "text": "For an arrow $V\\to U$, define $D(U)\\to D(V)$ semilinearly over $Q(U)\\to Q(V)$ by $\\mathrm dq\\mapsto\\mathrm d(q|_V)$. This is the unique map supplied by the universal property in [def-weil-pbc-kahler-differentials], since $q\\mapsto\\mathrm d(q|_V)$ is an $A(U)$-derivation. Uniqueness proves identity and composition. Evaluation commutes with restriction because $\\alpha$ is a sheaf map; hence the restrictions of $T$ take $\\mathrm dX_e\\otimes b$ to $\\mathrm dX_{e|_V}\\otimes b|_V$. Thus both composites in the restriction square for $\\phi_U$ take $b[e]$ to $\\mathrm dX_{e|_V}\\otimes b|_V$. They agree by the basis in step 1. Consequently $\\phi:L\\to T$ is an isomorphism of presheaves of $B$-modules, with inverse given objectwise by $\\phi_U^{-1}$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, sectionwise differential presheaf; universal derivations as in Tag 04BN, definition-module-differentials."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-sheafified-module-differentials-cokernel] to the map of ring presheaves $A\\to Q$. Since $A$ is already a sheaf and $Q^\\#=P_E$, it identifies $D^\\#$ with $\\Omega_{P_E/A}$, carrying the image of $\\mathrm dq$ to the differential of the image of $q$ in $P_E$. Apply [lem-pc-sites-module-sheafification-tensor] with ring presheaf $Q$ and module presheaves $D,B$, where $B$ has its evaluation action. Its sheafification is the original sheaf $B$, with the action of $Q^\\#=P_E$ induced by evaluation. We obtain a canonical comparison $c:T^\\#\\xrightarrow{\\sim}\\Omega_{P_E/A}\\otimes_{P_E}B$, taking the sheafification image of $\\mathrm dq\\otimes b$ to $\\mathrm d(\\eta_Q(q))\\otimes b$. This comparison is $B$-linear: multiplying $b$ by a local coefficient on either side gives the same displayed tensor, and the module sheafification universal property [lem-pc-sites-module-sheafification-interface] extends this equality uniquely.",
+   "uses": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify; Tag 0GMW, lemma-sheafification-tensor; Tag 03CY, lemma-sheafification-presheaf-modules."
+   }
+  },
+  {
+   "text": "Sheafify the inverse presheaf maps $\\phi$ and $\\phi^{-1}$ of step 2. Functoriality of module sheafification [lem-pc-sites-module-sheafification-interface] shows that their sheafifications are inverse. By the construction in [lem-trf-free-module-sheaf-universal-property], $L^\\#=B^{(E)}$. Define $\\Phi_E=c\\phi^\\#:B^{(E)}\\to\\Omega_{P_E/A}\\otimes_{P_E}B$. Steps 1 and 3 give $\\Phi_E([e])=\\mathrm d[e]\\otimes1$, and both factors are $B$-linear isomorphisms. The same free module universal property says a $B$-linear map out of $B^{(E)}$ is uniquely determined by these generator values, so this is the asserted canonical isomorphism.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ, lemma-NL-represent-ext-class-ringed-topoi, first proof paragraph; free module construction in sites-modules.tex Tag 04BL, lemma-universal-module."
+   }
+  },
+  {
+   "text": "Let $v:E^{\\prime}\\to E$ be over $B$. On each object the polynomial map sends $X_{e^{\\prime}}$ to $X_{v(e^{\\prime})}$ and commutes with evaluation. The universal derivation property [def-weil-pbc-kahler-differentials] therefore induces the differential map $\\mathrm dq\\mapsto\\mathrm d(v(q))$; tensoring and module sheafification give the indicated $B$-linear $F(v)$ by [def-weil-pbc-module-tensor-product, lem-pc-sites-module-sheafification-interface]. In particular, $F(v)(\\mathrm d[e^{\\prime}]\\otimes1)=\\mathrm d[v(e^{\\prime})]\\otimes1$. The two maps $F(v)\\Phi_{E^{\\prime}}$ and $\\Phi_E B^{(v)}$ thus have identical values on every generator $[e^{\\prime}]$. They are equal by [lem-trf-free-module-sheaf-universal-property]. All steps used arbitrary evaluation homomorphisms, never a surjection; the proof applies to empty and infinite variable sets as well.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ, lemma-NL-represent-ext-class-ringed-topoi, first paragraph and the subsequent change of generators E-prime to E; generator calculation using sites-modules.tex Tag 04BL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-trf-free-module-sheaf-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 08UJ, lemma-NL-represent-ext-class-ringed-topoi, first paragraph; sectionwise construction justified by sites-modules.tex Tags 08TP, 0GMW and 03CY, and algebra.tex Tag 00RX. Naturality is the explicit universal-derivation calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maps from polynomial sheaf differentials tensored to a ring sheaf into a module are arbitrary maps of the variable sheaf into its underlying sheaf",
+   "results": "8 hits; recorded top results: PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.Derivation.d, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.Derivation.Universal.desc, PresheafOfModules.Derivation.Universal",
+   "date": "2026-10-23",
+   "verdict": "no match: mvPolynomialEquiv and mvPolynomialBasis identify ring differentials, and relativeDifferentials' and isUniversal' construct presheaf differentials. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-62 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-218. None identifies the differentials of a sheafified polynomial algebra on an arbitrary sheaf of sets, after coefficient extension, with the free module sheaf naturally in its generators. The sheafification comparison is a further theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of rings the differentials of a polynomial algebra on a sheaf of sets form the free module sheaf on those generators after tensoring with any algebra",
+   "results": "8 hits; recorded top results: PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.isUniversal', instFreeMvPolynomialKaehlerDifferential, Algebra.Generators.H1Cotangent.δAux_monomial, Algebra.Generators.H1Cotangent.δAux_C, Algebra.Generators.toKaehler_tmul_D, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: mvPolynomialEquiv and mvPolynomialBasis identify ring differentials, and relativeDifferentials' and isUniversal' construct presheaf differentials. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-62 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-218. None identifies the differentials of a sheafified polynomial algebra on an arbitrary sheaf of sets, after coefficient extension, with the free module sheaf naturally in its generators. The sheafification comparison is a further theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, KaehlerDifferential",
+   "results": "12 hits; recorded top results: instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialBasis, KaehlerDifferential.mvPolynomialEquiv, KaehlerDifferential.mvPolynomialBasis_apply, KaehlerDifferential.mvPolynomialBasis_repr_D_X, KaehlerDifferential.mvPolynomialBasis_repr_apply, KaehlerDifferential.mvPolynomialBasis_repr_symm_single, KaehlerDifferential.mvPolynomialBasis_repr_D",
+   "date": "2026-10-23",
+   "verdict": "no match: mvPolynomialEquiv and mvPolynomialBasis identify ring differentials, and relativeDifferentials' and isUniversal' construct presheaf differentials. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-62 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-218. None identifies the differentials of a sheafified polynomial algebra on an arbitrary sheaf of sets, after coefficient extension, with the free module sheaf naturally in its generators. The sheafification comparison is a further theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential.*(MvPolynomial|basis)|(polynomial|free).*differential",
+   "results": "17 hits; recorded top results: Mathlib/RingTheory/Derivation/MapCoeffs.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: mvPolynomialEquiv and mvPolynomialBasis identify ring differentials, and relativeDifferentials' and isUniversal' construct presheaf differentials. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-62 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-218. None identifies the differentials of a sheafified polynomial algebra on an arbitrary sheaf of sets, after coefficient extension, with the free module sheaf naturally in its generators. The sheafification comparison is a further theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial algebra sheaf Kahler differentials are the sheafification of the free module on the variable sheaf",
+   "results": "8 hits; recorded top results: PresheafOfModules.DifferentialsConstruction.relativeDifferentials', instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.polynomial_D_apply, KaehlerDifferential, CommRingCat.KaehlerDifferential, KaehlerDifferential.mvPolynomialEquiv, Algebra.Presentation.differentials, KaehlerDifferential.mvPolynomialBasis_repr_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: mvPolynomialEquiv and mvPolynomialBasis identify ring differentials, and relativeDifferentials' and isUniversal' construct presheaf differentials. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-62 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-218. None identifies the differentials of a sheafified polynomial algebra on an arbitrary sheaf of sets, after coefficient extension, with the free module sheaf naturally in its generators. The sheafification comparison is a further theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "mvPolynomialEquiv|mvPolynomialBasis|sheafification.*[Dd]ifferential|[Dd]ifferential.*sheafification",
+   "results": "10 hits: Mathlib/Algebra/MvPolynomial/Equiv.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/Algebra/Module/Presentation/Differentials.lean, Mathlib/RingTheory/Smooth/Quotient.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial ring differentials and presheaf universal differentials only; the sheafification and change-of-scalars comparison requires the separate existing DAG lemmas. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-96 and Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-222."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differentials of polynomial sheaves are free module sheaves naturally in the variable sheaf",
+   "results": "8 hits: instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialEquiv, CommRingCat.KaehlerDifferential, Algebra.IsStandardSmooth.free_kaehlerDifferential, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', KaehlerDifferential, Algebra.SubmersivePresentation.free_kaehlerDifferential, KaehlerDifferential.mvPolynomialBasis_repr_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial ring differentials and presheaf universal differentials only; the sheafification and change-of-scalars comparison requires the separate existing DAG lemmas. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-96 and Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-222."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, KaehlerDifferential",
+   "results": "12 hits: instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.mvPolynomialBasis, KaehlerDifferential.mvPolynomialEquiv, KaehlerDifferential.mvPolynomialBasis_apply, KaehlerDifferential.mvPolynomialBasis_repr_D_X, KaehlerDifferential.mvPolynomialBasis_repr_apply, KaehlerDifferential.mvPolynomialBasis_repr_symm_single, KaehlerDifferential.mvPolynomialBasis_repr_D",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial ring differentials and presheaf universal differentials only; the sheafification and change-of-scalars comparison requires the separate existing DAG lemmas. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-96 and Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-222."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differentials of a sheafified polynomial algebra on a sheaf of sets after extension of scalars are the free module sheaf on its generators",
+   "results": "8 hits: PresheafOfModules.DifferentialsConstruction.instHasDifferentials, Algebra.Generators.toKaehler_tmul_D, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, instFreeMvPolynomialKaehlerDifferential, Algebra.Presentation.differentials, PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.DifferentialsConstruction.isUniversal'",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial ring differentials and presheaf universal differentials only; the sheafification and change-of-scalars comparison requires the separate existing DAG lemmas. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-96 and Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-222."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of presheaf Kahler differentials commutes with tensor base extension and yields free modules for polynomial ring sheaves",
+   "results": "8 hits: Algebra.IsStandardSmooth.free_kaehlerDifferential, instFreeMvPolynomialKaehlerDifferential, KaehlerDifferential.tensorKaehlerEquivBase, Algebra.Generators.toKaehler_tmul_D, KaehlerDifferential.moduleBaseChange, tensorKaehlerQuotKerSqEquiv_tmul_D, KaehlerDifferential.polynomialEquiv, instModuleTensorProductKaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial ring differentials and presheaf universal differentials only; the sheafification and change-of-scalars comparison requires the separate existing DAG lemmas. Read Mathlib/RingTheory/Kaehler/Polynomial.lean:31-96 and Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:190-222."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-cotangent-ext-representative",
+  "date": "2026-10-23",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos. Supporting input: Conormal representatives of sheaf cotangent Ext classes after changing generators. Tag 08UJ proof, first paragraph: polynomial differentials after evaluation are the free module on the sheaf of generators.",
+   "via": [
+    "lem-sfb-sheaf-cotangent-ext-representative",
+    "lem-sfb-etale-algebra-extension-ext",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sheaf-polynomial-differentials-free",
+  "worker": "stage1",
+  "summary": "Q85: retained the statement and all inherited metadata/searches. Split the sectionwise polynomial basis, restriction compatibility, sheafified differential/tensor comparisons, assembly and generator naturality using existing DAG nodes only. No attachment, no new nodes, no Lean writes or compiles. Checked arbitrary, empty and infinite generator sheaves and nonsurjective evaluation.",
+  "blueprint": "Inherited supporting place: det-thm-sf-ctf-stability-direct-images, alteration reduction via nodal-curve deformation theory, ending in Tag 08UJ first paragraph. The ancestor command returns None, retained as in the live node. Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3) read for route context; this lower algebraic tool does not replace a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Generic 08TP comparison for arbitrary ring presheaves, needed to compare the actual sheafified polynomial algebra with sectionwise differentials; no same-unit replacement."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic 0GMW comparison for module presheaves over a ring presheaf, needed for evaluation scalar extension; no same-unit replacement."
+   },
+   {
+    "node": "lem-trf-free-module-sheaf-universal-property",
+    "why": "Generic free module sheaf construction and generator uniqueness, needed to identify the result and prove naturality; no same-unit replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-trf-free-module-sheaf-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-401e4ad87",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-401e4ad87 (reviewer sub-agent of L); spot-checked: First stage-1 split, 5 steps, no new nodes. Statement and stmt_deps are identical to the live and side-live clones, where the item is still unsplit; there is no repair note and no parallel group has split it. proof_deps equal the union of the step uses. Source: defos.tex 4136-4175 (Tag 08UJ, proof, first paragraph) says Omega tensored with B is the sheaf for U->sum over E(U) of B(U). The source assumes a surjective evaluation, but freeness does not need it, so the item may drop that hypothesis. Step 1: basis node 00RX for any variable set and any P-algebra applied to A(U), E(U), B(U), plus the tensor flip. Step 2: semilinear restriction from the Kähler universal property; restriction square checked on b[e]. Step 3: 08TP applied to the presheaf ring map A->Q (A#=A, Q#=P_E), then 0GMW with O=Q and G=B through evaluation. B#=B as a sheaf, with the P_E-action through evaluation. B-linearity follows from the uniqueness clause of 03CY. Step 4: L#=B^(E) by the free-module node's construction; Phi_E sends [e] to d[e] tensor 1; canonical by generator uniqueness. Step 5: v over B commutes with evaluation; both composites agree on generators, so they are equal by the free-module universal property. Checked E empty, B=0, a singleton E, infinite E, a v merging two variables and a non-surjective evaluation; all hold. No duplicate found: rg hits are ring-level or presentation-site lemmas only. No SGA. Batch-5 flag on lem-trf-sheafified-module-differentials-cokernel (08TP, unit sk-i-curve-zero): its 129-node closure has only generic sk-i-curve-zero trf lemmas and no trace-formula theorem or Poincaré-duality node, so it is outside both assumptions and the citation is accepted. The three tool_uses (08TP, 0GMW, free module sheaf) are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafPolynomialDifferentialsFree",
+  "declaration": "CategoryTheory.SheafPolynomialDifferentials.sheaf_polynomial_differentials_free",
+  "declarations": [
+   "CategoryTheory.SheafPolynomialDifferentials.term",
+   "CategoryTheory.SheafPolynomialDifferentials.tensorD",
+   "CategoryTheory.SheafPolynomialDifferentials.variableSection",
+   "CategoryTheory.SheafPolynomialDifferentials.sheaf_polynomial_differentials_free"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafPolynomialDifferentialsFree.lean",
+  "statement": "theorem sheaf_polynomial_differentials_free (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (A B : Sheaf J.toGrothendieck CommRingCat.{u}) (f : A ⟶ B) : ∃ Φ : ∀ (E : Sheaf J.toGrothendieck (Type u)) (α : E ⟶ sets B), (SheafFreeModule.free B).obj E ≅ term f E α, (∀ (E : Sheaf J.toGrothendieck (Type u)) (α : E ⟶ sets B) (U : Cᵒᵖ) (e : E.obj.obj U), (Φ E α).hom.val.app U ((SheafFreeModule.generatorRaw B E).hom.app U e) = tensorD f E α U 1 (variableSection A E U e)) ∧ (∀ (E E' : Sheaf J.toGrothendieck (Type u)) (α : E ⟶ sets B) (α' : E' ⟶ sets B) (v : E' ⟶ E), v ≫ α = α' → (∃! F : term f E' α' ⟶ term f E α, ∀ (U : Cᵒᵖ) (b : B.obj.obj U) (p : (polynomialSheaf A E').obj.obj U), F.val.app U (tensorD f E' α' U b p) = tensorD f E α U b ((polynomialMap A v).hom.app U p)) ∧ (∀ F : term f E' α' ⟶ term f E α, (∀ (U : Cᵒᵖ) (b : B.obj.obj U) (p : (polynomialSheaf A E').obj.obj U), F.val.app U (tensorD f E' α' U b p) = tensorD f E α U b ((polynomialMap A v).hom.app U p)) → (Φ E' α').hom ≫ F = (SheafFreeModule.free B).map v ≫ (Φ E α).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 2091695a211d: polynomial helpers are cited through def-sfb-sheaf-polynomial-cotangent-presentation, whose lean-only update also owns polynomialMapPresheaf/polynomialMap; the comparison theorem is not a statement dependency. SheafDifferentials.omega and derivation use def-sfb-sheaf-differentials. The induced differential map exists uniquely by its pure-tensor formula alone; a separate conjunct gives the naturality square for every map satisfying that formula. Arbitrary evaluation, generator normalization, and the existing free-module and scalar-extension constructions are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7561a72fc",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Re-delivery of 2091695a211d fixes both returned points. H2: theorem stmt_dep lem-sfb-sheaf-polynomial-cotangent-comparison replaced by def nodes def-sfb-sheaf-polynomial-cotangent-presentation and def-sfb-sheaf-differentials; item differs from side-live only in stmt_deps and lean, live lean is null. Dep record of def-sfb-sheaf-polynomial-cotangent-presentation is lean-only: polynomialMapPresheaf and polynomialMap (SheafPolynomialCotangentComparison.lean:221/240) added with a lean.note; statement unchanged. F clause is now (∃! F, pure-tensor formula) ∧ (∀ F, formula → Φ' ≫ F = free.map v ≫ Φ), the only module change vs the prior snapshot. lean.statement verbatim in file, single sorry. Maths, edge cases, docstrings, no hollow defs and no surjectivity re-checked. Notes, non-blocking: the def node's text does not describe renaming maps; polynomialMap is also still listed under the theorem node; inherited theorem stmt_dep lem-trf-free-module-sheaf-universal-property has def owner def-trf-free-module-sheaf-construction. No compile: no file changed."
+ }
+}

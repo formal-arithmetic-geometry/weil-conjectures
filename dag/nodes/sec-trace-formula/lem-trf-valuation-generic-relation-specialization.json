@@ -1,0 +1,223 @@
+{
+ "id": "lem-trf-valuation-generic-relation-specialization",
+ "kind": "statement",
+ "title": "Specializing a generic algebraic dependence over a valuation ring",
+ "statement": "Let $A$ be a valuation ring: an integral domain such that, for $K=\\operatorname{Frac}(A)$ and every $x\\in K\\setminus\\{0\\}$, either $x\\in A$ or $x^{-1}\\in A$. Put $k=A/\\mathfrak m_A$. Let $B$ be an integral domain containing $A$, let $n\\ge0$ be an integer, and let $\\alpha:A[t_1,\\ldots,t_n]\\to B$ be an $A$-algebra map [def-weil-pbc-mv-polynomial-ring]. Put $H=B\\otimes_AK$, with the usual tensor algebra multiplication [def-weil-pbc-module-tensor-product], and let $L=\\operatorname{Frac}(H)$; $H$ is a nonzero domain. If $\\operatorname{trdeg}_KL<n$ [def-kun-transcendence-degree], then there is $h\\in A[t_1,\\ldots,t_n]$ with $\\alpha(h)=0$ and at least one coefficient equal to $1$. For the induced map $\\alpha_k:k[t_1,\\ldots,t_n]\\to B\\otimes_Ak$, the coefficientwise reduction $\\bar h$ of $h$ is nonzero and belongs to $\\ker\\alpha_k$. No finite type or quasi-finiteness hypothesis on $B$ or on $\\alpha$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), nonzero generic polynomial kernel and division by a coefficient of minimal valuation, followed by reduction to the residue field."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-generic-fibre-localization-domain-irreducible] to $A\\subset B$. Thus $H=B\\otimes_AK$ is the nonzero domain obtained by inverting $A\\setminus\\{0\\}$ in $B$ (interchanging tensor factors sends $b\\otimes c$ to $c\\otimes b$). The map $B\\to H\\to L$ is injective: $b/1=0$ in the localization means $sb=0$ for some $0\\ne s\\in A$, hence $b=0$ since $B$ is a domain; the same fraction calculation applies to $H\\to\\operatorname{Frac}(H)$. Write $y_i$ for the image of $\\alpha(t_i)$ in $L$.",
+   "uses": [
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, lemma-finite-type-domain-over-valuation-ring-dim-fibres, proof: generic kernel, division by a nonzero coefficient of minimal valuation, and reduction modulo the maximal ideal."
+   }
+  },
+  {
+   "text": "By [def-kun-transcendence-degree], the inequality $\\operatorname{trdeg}_KL<n$ gives a nonzero $f\\in K[t_1,\\ldots,t_n]$ with $f(y_1,\\ldots,y_n)=0$. Indeed, if no such relation existed, the $y_i$ would be distinct (otherwise $t_i-t_j$ is a nonzero relation), and the set $\\{y_1,\\ldots,y_n\\}$ would be algebraically independent of cardinality $n$, contrary to the definition of transcendence degree as a supremum. For $n=0$ the hypothesis is impossible, since that supremum is at least $0$. Write $f=\\sum_{I\\in F}c_It^I$ with $F$ finite nonempty and every $c_I\\ne0$, using [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-kun-transcendence-degree",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, lemma-finite-type-domain-over-valuation-ring-dim-fibres, proof: generic kernel, division by a nonzero coefficient of minimal valuation, and reduction modulo the maximal ideal."
+   }
+  },
+  {
+   "text": "For the finite nonempty coefficient list, select a coefficient $c$ such that $c_I/c\\in A$ for every $I$. Here is the finite induction directly from the valuation-ring hypothesis: a singleton works; given a selected coefficient $c$ and a new nonzero coefficient $d$, retain $c$ if $d/c\\in A$, and otherwise replace it by $d$. In the latter case $c/d\\in A$, and every previous ratio $c_I/d=(c_I/c)(c/d)$ lies in $A$. In both cases the selected element remains a coefficient of $f$. Thus $h=\\sum_{I\\in F}(c_I/c)t^I$ is an element of $A[t_1,\\ldots,t_n]$, and its coefficient at the selected index is exactly $1$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, lemma-finite-type-domain-over-valuation-ring-dim-fibres, proof: generic kernel, division by a nonzero coefficient of minimal valuation, and reduction modulo the maximal ideal."
+   }
+  },
+  {
+   "text": "In $L$, evaluation of $h$ at the $y_i$ is $c^{-1}f(y_1,\\ldots,y_n)=0$. By the evaluation formula of [def-weil-pbc-mv-polynomial-ring], this is the image of $\\alpha(h)\\in B$. The injectivity established in step 1 therefore gives $\\alpha(h)=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, lemma-finite-type-domain-over-valuation-ring-dim-fibres, proof: generic kernel, division by a nonzero coefficient of minimal valuation, and reduction modulo the maximal ideal."
+   }
+  },
+  {
+   "text": "Reduce each coefficient of $h=\\sum a_It^I$ to $\\bar a_I\\in k$. Its selected coefficient is $\\bar1=1\\ne0$, so $\\bar h\\ne0$ by coefficientwise equality of polynomials [def-weil-pbc-mv-polynomial-ring]. Put $b_i=\\alpha(t_i)$. Bilinearity of [def-weil-pbc-module-tensor-product] gives $\\alpha_k(\\bar h)=\\sum_I(\\prod_i b_i^{I_i})\\otimes\\bar a_I=(\\sum_I a_I\\prod_i b_i^{I_i})\\otimes1=\\alpha(h)\\otimes1=0$. This also covers $B\\otimes_Ak=0$; no injectivity into that ring is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK, lemma-finite-type-domain-over-valuation-ring-dim-fibres, proof: generic kernel, division by a nonzero coefficient of minimal valuation, and reduction modulo the maximal ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "def-weil-pbc-module-tensor-product",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK, lemma-finite-type-domain-over-valuation-ring-dim-fibres, proof: generic kernel, division by a nonzero coefficient of minimal valuation, and reduction modulo the maximal ideal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a domain B over a valuation ring A a polynomial map in n variables with generic transcendence degree less than n has a relation over A with a coefficient one and nonzero reduction in the residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.cond\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (self : StandardEtalePair R),\\n  ∃ p₁ p₂ n, Polynomial.derivative self.f * p₁ + self.f * p₂ = self.g ^ n\", \"doc\": \"For any commutative ring $ R $ and any standard étale pair $ (f, g) $ over $ R $, there exist polynomials $ p_1, p_2 $ and a natural number $ n $ such that $ f' \\\\cdot p_1 + f \\\\cdot p_2 = g^n $, where \"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_relation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (a : Fin (Nat.succ 1)),\\n  P.toPresentation.relation a =\\n    ![(Polynomial.Bivariate.equivMvPolynomial R) (Polynomial.C P.f),\\n        (Polynomial.Bivariate.equivMvPol\", \"doc\": \"For a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, the relations defining the quotient ring are given by the polynomial $ f $ and the equation $ Yg - 1 $, where $ Y $\"}\n  {\"name\": \"MvPolynomial.isAlgebraic_of_mem_vars_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] {a : ι → K}\\n  {F : MvPolynomial ι k},\\n  (∀ (F' : MvPolynomial ι k), F' ≠ 0 → (MvPolynomial.aeval a) F' = 0 → F.totalDegree ≤ F'.totalDegree) →\\n    (MvPolynomial.aeval a) F = 0 → ∀ i ∈ F.vars, Is\", \"doc\": \"Let $ F $ be a multivariate polynomial that vanishes at the tuple $ a $, and suppose that the variable $ i $ is among the variables of $ F $. Then, the element $ a_i $ is algebraic over the subalgebra\"}\n  {\"name\": \"MvPolynomial.irreducible_toPolynomialAdjoinImageCompl\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] {a : ι → K}\\n  {F : MvPolynomial ι k},\\n  Irreducible F → ∀ (i : ι), (AlgebraicIndependent k fun x => a ↑x) → Irreducible (F.toPolynomialAdjoinImageCompl a i)\", \"doc\": \"If $ F $ is an irreducible multivariate polynomial over a field $ k $, and the images of the variables excluding $ i $ under a given function $ a $ are algebraically independent over $ k $, then the p\"}\n  {\"name\": \"denomsClearable_of_natDegree_le\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"∀ {R : Type u_1} {K : Type u_2} [inst : Semiring R] [inst_1 : CommSemiring K] {i : R →+* K} {b : R} {bi : K} (N : ℕ)\\n  (a : R), bi * i b = 1 → ∀ (f : Polynomial R), f.natDegree ≤ N → DenomsClearable a b N f i\", \"doc\": \"For a polynomial $ f $ with natural degree $ \\\\leq N $, there exist elements $ D \\\\in R $ and $ \\\\beta \\\\in K $ such that $ \\\\beta \\\\cdot i(b) = 1 $ and $ i(D) = i(b)^N \\\\cdot \\\\text{eval}_{i(a)\\\\beta}(f^i) $,\"}\n  {\"name\": \"Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree_le\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {f : Polynomial R} {S : Type v} [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : R}\\n  {x : S},\\n  (Polynomial.aeval x) f = 0 →\\n    f.Monic →\\n      f.IsWeaklyEisensteinAt (R ∙ p) →\\n        ∀ (i : ℕ),\\n          (Polynomial.map (algebraMap R S) f).natDegree ≤ i → ∃ y \", \"doc\": \"Let $ R $ be a commutative semiring, $ S $ an $ R $-algebra, and $ f \\\\in R[X] $ a monic polynomial that is weakly Eisenstein at the ideal generated by $ p \\\\in R $. If $ x \\\\in S $ satisfies $ f(x) = 0 \"}\n  {\"name\": \"DenomsClearable\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"{R : Type u_1} →\\n  {K : Type u_2} → [inst : Semiring R] → [inst_1 : CommSemiring K] → R → R → ℕ → Polynomial R → (R →+* K) → Prop\", \"doc\": \"For elements $a, b \\\\in R$, a natural number $N$, a polynomial $f \\\\in R[X]$, and a ring homomorphism $i : R \\\\to K$, this proposition asserts the existence of elements $D \\\\in R$ and $\\\\beta \\\\in K$ such t\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.map_eq_X_pow\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R} {I : Ideal R},\\n  f.IsDistinguishedAt I → Polynomial.map (Ideal.Quotient.mk I) f = Polynomial.X ^ f.natDegree\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and a polynomial $ f \\\\in R[X] $ that is distinguished at $ I $, the image of $ f $ under the canonical quotient map $ R \\\\to R/I $ is the monomial\"}\nAlgebraic-independence, denominator clearing, and Weierstrass hits neither normalize a multivariable relation over an arbitrary valuation ring nor descend its vanishing and give a nonzero residue relation. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, MvPolynomial",
+   "results": "[loogle] OK 0 hit(s)\nAlgebraic-independence, denominator clearing, and Weierstrass hits neither normalize a multivariable relation over an arbitrary valuation ring nor descend its vanishing and give a nonzero residue relation. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Vv]aluation.*[Pp]olynomial|[Pp]olynomial.*[Vv]aluation|[Vv]aluation.*[Pp]rimitive",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/FunctionField.lean\", \"line\": \"179\", \"text\": \"@[deprecated RatFunc.inftyValuation.polynomial (since := \\\"2026-04-14\\\")]\"}\n  {\"file\": \"Mathlib/NumberTheory/FunctionField.lean\", \"line\": \"180\", \"text\": \"alias inftyValuation.polynomial := RatFunc.inftyValuation.polynomial\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"35\", \"text\": \"open Polynomial Valuation\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"61\", \"text\": \"open IsDedekindDomain HeightOneSpectrum Set Valuation Polynomial\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"63\", \"text\": \"lemma setOfPred_polynomial_valuation_lt_one_and_ne_zero_nonempty [v.IsNontrivial] [v.IsTrivialOn K]\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"74\", \"text\": \"      ⟨Polynomial.valuation_le_one_of_valuation_X_le_one _ hle r, hr⟩, hr0⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"77\", \"text\": \"alias setOf_polynomial_valuation_lt_one_and_ne_zero_nonempty :=\"}\n  {\"file\": \"Mathlib/NumberTheory/Transcendental/Liouville/Basic.lean\", \"line\": \"170\", \"text\": \"    -- As the evaluation of the polynomial vanishes, we found a root of `fR` that is rational.\"}\n  {\"file\": \"Mathlib/NumberTheory/Transcendental/Liouville/Basic.lean\", \"line\": \"213\", \"text\": \"  -- this branch of the proof exploits the \\\"integrality\\\" of evaluations of polynomials\"}\n  {\"file\": \"Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean\", \"line\": \"19\", \"text\": \"the polynomial evaluation `p(a)` is 0.\"}\n  {\"file\": \"Mathlib/RingTheory/Binomial.lean\", \"line\": \"33\", \"text\": \"integers is injective, and demand that the evaluation of the ascending Pochhammer polynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Polynomial.lean\", \"line\": \"169\", \"text\": \"/-- Evaluation in the `MvPolynomial.R` subtype. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"line\": \"347\", \"text\": \"  -- express `A` as an evaluation of a polynomial in n^2 variables, and solve in the polynomial ring\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"line\": \"500\", \"text\": \"  -- express `A` as an evaluation of a polynomial in n^2 variables, and solve in the polynomial ring\"}\n  {\"file\": \"Mathlib/Algebra/Tropical/BigOperators.lean\", \"line\": \"19\", \"text\": \"for expressing that evaluation of tropical polynomials are the minimum over a finite piecewise\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/MvPolynomial.lean\", \"line\": \"12\", \"text\": \"# Polynomial identities from evaluation at invertible matrices\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/MvPolynomial.lean\", \"line\": \"45\", \"text\": \"/-- Any matrix `A` can be expressed as the evaluation of `Matrix.mvPolynomialX`.\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Valuation.lean\", \"line\": \"49\", \"text\": \"Explicitly, if `f/g ∈ F(t)` is a nonzero quotient of polynomials, its valuation at infinity is\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Valuation.lean\", \"line\": \"107\", \"text\": \"theorem inftyValuation.polynomial {p : F[X]} (hp : p ≠ 0) :\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Valuation.lean\", \"line\": \"109\", \"text\": \"  rw [inftyValuationDef, if_neg (by simpa), RatFunc.intDegree_polynomial]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"line\": \"249\", \"text\": \"/-- Any matrix polynomial `p` is equivalent under evaluation to `p %ₘ M.charpoly`; that is, `p`\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"line\": \"300\", \"text\": \"theorem valuation_of_mk (f : Polynomial K) {g : Polynomial K} (hg : g ≠ 0) :\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"line\": \"301\", \"text\": \"    (Polynomial.idealX K).valuation _ (RatFunc.mk f g) =\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"line\": \"302\", \"text\": \"      (Polynomial.idealX K).intValuation f / (Polynomial.idealX K).intValuation g := by\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"line\": \"321\", \"text\": \"/-- If a valuation `v` is trivial on constants and `1 < v RatFunc.X` then for every polynomial `p`,\"}\nAlgebraic-independence, denominator clearing, and Weierstrass hits neither normalize a multivariable relation over an arbitrary valuation ring nor descend its vanishing and give a nonzero residue relation. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalize a nonzero polynomial relation over the fraction field of a valuation ring by a minimal valuation coefficient to obtain a primitive integral relation",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\nservice unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic dependence among n elements of a domain over a valuation ring specializes to a nonzero polynomial relation over its residue field by scaling coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.isAlgebraic_of_mem_vars_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] {a : ι → K}\\n  {F : MvPolynomial ι k},\\n  (∀ (F' : MvPolynomial ι k), F' ≠ 0 → (MvPolynomial.aeval a) F' = 0 → F.totalDegree ≤ F'.totalDegree) →\\n    (MvPolynomial.aeval a) F = 0 → ∀ i ∈ F.vars, Is\", \"doc\": \"Let $ F $ be a multivariate polynomial that vanishes at the tuple $ a $, and suppose that the variable $ i $ is among the variables of $ F $. Then, the element $ a_i $ is algebraic over the subalgebra\"}\n  {\"name\": \"Algebra.SubmersivePresentation.linearIndependent_aeval_val_pderiv_relation\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  LinearIndependent S fun i j => (MvPolynomial.aeval P.val) ((MvPolynomial.pderiv (P.map j)) (P.relation i))\", \"doc\": \"The family of elements in $ S $ obtained by evaluating the partial derivatives of the relations in a submersive presentation $ P $ at the generators of $ S $ is linearly independent over $ S $. Specif\"}\n  {\"name\": \"algebraicIndependent_comp_subtype\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/Basic\", \"type\": \"∀ {ι : Type u} {R : Type u_2} {A : Type v} {x : ι → A} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  {s : Set ι},\\n  AlgebraicIndependent R (x ∘ Subtype.val) ↔ ∀ p ∈ MvPolynomial.supported R s, (MvPolynomial.aeval x) p = 0 → p = 0\", \"doc\": \"A subset $ s $ of an $ R $-algebra $ A $ is algebraically independent over $ R $ if and only if every polynomial in the variables indexed by $ s $ that evaluates to zero under the evaluation homomorph\"}\n  {\"name\": \"algebraicIndependent_subtype\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/Basic\", \"type\": \"∀ {R : Type u_2} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {s : Set A},\\n  AlgebraicIndependent R Subtype.val ↔ ∀ p ∈ MvPolynomial.supported R s, (MvPolynomial.aeval id) p = 0 → p = 0\", \"doc\": \"A set $ s $ in an $ R $-algebra $ A $ is algebraically independent over $ R $ if and only if every polynomial in the variables of $ s $ (i.e., supported on $ s $) that evaluates to zero in $ A $ must \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization.map_ne_zero\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] {g : PowerSeries A} {f : Polynomial A}\\n  {h : PowerSeries A}, g.IsWeierstrassFactorization f h → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0\", \"doc\": \"The image of the power series $ g $ under the residue homomorphism of the local ring $ A $ is non-zero in the residue field of $ A $.\"}\n  {\"name\": \"MvPolynomial.exists_dvd_map_of_isAlgebraic\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [alg : Algebra.IsAlgebraic R S] {σ : Type u_4} [NoZeroDivisors S] {f : MvPolynomial σ S},\\n  f ≠ 0 → ∃ g, g ≠ 0 ∧ f ∣ (MvPolynomial.map (algebraMap R S)) g\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a commutative ring with no zero divisors equipped with an $ R $-algebra structure, and $ \\\\sigma $ a type. For any nonzero polynomial $ f \\\\in R[\\\\sigma] \\\\otimes_R \"}\n  {\"name\": \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (p : ℕ),\\n  Nat.Prime p →\\n    (∀ (s : Finset K), LinearIndepOn k id ↑s → LinearIndepOn k (fun x => x ^ p) ↑s) →\\n      ∀ {a : ι → K} {F : MvPolynomial ι k},\\n        (∀ (F' : MvPolynomial ι k), F' \", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ a type of variables, and $ p $ a prime number. If $ F \\\\in R[\\\\sigma] $ is a nonzero multivariate polynomial such that $ F(a) = 0 $ for some assignment $ \"}\n  {\"name\": \"IsAlgebraic.exists_nonzero_coeff_and_aeval_eq_zero\", \"module\": \"Mathlib/RingTheory/Algebraic/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S] {s : S},\\n  IsAlgebraic R s → s ∈ nonZeroDivisors S → ∃ q, q.coeff 0 ≠ 0 ∧ (Polynomial.aeval s) q = 0\", \"doc\": \"For any nonzero element $ s $ in $ S $ that is algebraic over $ R $, there exists a polynomial $ q \\\\in R[X] $ with nonzero constant coefficient such that $ q(s) = 0 $.\"}\nAlgebraic-independence, denominator clearing, and Weierstrass hits neither normalize a multivariable relation over an arbitrary valuation ring nor descend its vanishing and give a nonzero residue relation. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|exists.*coeff",
+   "results": "[grep] OK 0 hit(s)\n\nNo exact match: the hits concern one-variable denominator clearing, Weierstrass coordinate changes, algebraic independence or residue maps; none gives the valuation-normalized multivariable relation and its descent and residue clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonzero polynomial relation over a valuation ring with a unit coefficient from algebraic dependence over its fraction field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAlgebraic.exists_nonzero_coeff_and_aeval_eq_zero\", \"module\": \"Mathlib.RingTheory.Algebraic.Basic\", \"type\": \"{s : S} (hRs : IsAlgebraic R s) (hs : s ∈ S⁰) : ∃ q : R[X], q.coeff 0 ≠ 0 ∧ aeval s q = 0\", \"doc\": \"For any nonzero element $ s $ in $ S $ that is algebraic over $ R $, there exists a polynomial $ q \\\\in R[X] $ with nonzero constant coefficient such that $ q(s) = 0 $.\"}\n  {\"name\": \"MonomialOrder.isUnit_leadingCoeff\", \"module\": \"Mathlib.RingTheory.MvPolynomial.MonomialOrder\", \"type\": \"{f : MvPolynomial σ R} : IsUnit (m.leadingCoeff f) ↔ f ≠ 0\", \"doc\": \"For a multivariate polynomial $ f $ over a commutative ring $ R $, the leading coefficient of $ f $ under a monomial order $ m $ is a unit in $ R $ if and only if $ f $ is not the zero polynomial.\"}\n  {\"name\": \"IsAlgebraic.of_aeval\", \"module\": \"Mathlib.RingTheory.Algebraic.Basic\", \"type\": \"{r : A} (f : R[X]) (hf : f.natDegree ≠ 0) (hf' : f.leadingCoeff ∈ R⁰) (H : IsAlgebraic R (aeval r f)) : IsAlgebraic R r\", \"doc\": \"For any element $ r $ in an $ R $-algebra $ A $, if there exists a non-constant polynomial $ f \\\\in R[X] $ with leading coefficient in the set of non-zero divisors of $ R $, such that the evaluation $ \"}\n  {\"name\": \"Valuation.IsUniformizer.not_isUnit\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{π : v.integer} (hπ : IsUniformizer v π) : ¬IsUnit π\", \"doc\": \"If $\\\\pi$ is a uniformizer for a rank one discrete valuation $v$, then $\\\\pi$ is not a unit in the valuation ring $v.\\\\text{integer}$.\"}\n  {\"name\": \"algebraicIndependent_iff\", \"module\": \"Mathlib.RingTheory.AlgebraicIndependent.Defs\", \"type\": \": AlgebraicIndependent R x ↔ ∀ p : MvPolynomial ι R, MvPolynomial.aeval (x : ι → A) p = 0 → p = 0\", \"doc\": \"A set $ x $ in an $ R $-algebra $ A $ is algebraically independent over $ R $ if and only if for every multivariate polynomial $ p $ with coefficients in $ R $, the evaluation of $ p $ at $ x $ being \"}\n  {\"name\": \"ValuativeRel.isNontrivial_iff_nontrivial_units\", \"module\": \"Mathlib.RingTheory.Valuation.ValuativeRel.Basic\", \"type\": \": IsNontrivial R ↔ Nontrivial (ValueGroupWithZero R)ˣ\", \"doc\": \"For a commutative ring $ R $ equipped with a valuative relation, the valuative relation is non-trivial if and only if the group of units in the value group with zero of $ R $ is non-trivial.\"}\n  {\"name\": \"Valuation.ne_zero_of_isUnit\", \"module\": \"Mathlib.RingTheory.Valuation.Basic\", \"type\": \"[Nontrivial Γ₀] (v : Valuation K Γ₀) (x : K) (hx : IsUnit x) : v x ≠ (0 : Γ₀)\", \"doc\": \"Let $ K $ be a division ring and $ \\\\Gamma_0 $ a nontrivial linearly ordered commutative monoid with zero. For any valuation $ v : K \\\\to \\\\Gamma_0 $ and any unit $ x \\\\in K $, it holds that $ v(x) \\\\neq 0\"}\n  {\"name\": \"Polynomial.isUnit_or_eq_zero_of_isUnit_integerNormalization_primPart\", \"module\": \"Mathlib.RingTheory.Polynomial.GaussLemma\", \"type\": \"[NormalizedGCDMonoid R] {p : K[X]} (h0 : p ≠ 0) (h : IsUnit (integerNormalization R⁰ p).primPart) : IsUnit p\", \"doc\": \"For a non-zero polynomial $ p $ over the fraction field $ K $ of a normalized GCD monoid $ R $, if the primitive part of the integer normalization of $ p $ is a unit in $ R[X] $, then $ p $ is a unit \"}\n\nNo exact match: the hits concern one-variable denominator clearing, Weierstrass coordinate changes, algebraic independence or residue maps; none gives the valuation-normalized multivariable relation and its descent and residue clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, MvPolynomial",
+   "results": "[loogle] OK 0 hit(s)\n\nNo exact match: the hits concern one-variable denominator clearing, Weierstrass coordinate changes, algebraic independence or residue maps; none gives the valuation-normalized multivariable relation and its descent and residue clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial relation over the fraction field of a valuation ring can be scaled to have integral coefficients and one coefficient equal to one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"DenomsClearable\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"{R : Type u_1} →\\n  {K : Type u_2} → [inst : Semiring R] → [inst_1 : CommSemiring K] → R → R → ℕ → Polynomial R → (R →+* K) → Prop\", \"doc\": \"For elements $a, b \\\\in R$, a natural number $N$, a polynomial $f \\\\in R[X]$, and a ring homomorphism $i : R \\\\to K$, this proposition asserts the existence of elements $D \\\\in R$ and $\\\\beta \\\\in K$ such t\"}\n  {\"name\": \"IsLocalization.coeffIntegerNormalization\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (M : Submonoid R) →\\n      {S : Type u_2} → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [IsLocalization M S] → Polynomial S → ℕ → R\", \"doc\": \"For a polynomial $ p $ over the localization $ S $ of a commutative ring $ R $ at a submonoid $ M $, this function returns an element of $ R $ corresponding to the $ i $-th coefficient of $ p $ under \"}\n  {\"name\": \"IsLocalization.integerNormalization_spec\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Submonoid R) {S : Type u_2} [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalization M S] (p : Polynomial S),\\n  ∃ b, ∀ (i : ℕ), (algebraMap R S) ((IsLocalization.integerNormalization M p).coeff i) = ↑b • p.coeff i\", \"doc\": \"Let $R$ be a commutative ring, $M$ a submonoid of $R$, and $S$ the localization of $R$ at $M$. Let $p$ be a polynomial with coefficients in $S$. The function `IsLocalization.integerNormalization M p` \"}\n  {\"name\": \"IsLocalization.integerNormalization\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (M : Submonoid R) →\\n      {S : Type u_2} →\\n        [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [IsLocalization M S] → Polynomial S → Polynomial R\", \"doc\": \"Given a polynomial $ p $ over the localization $ S $ of a commutative ring $ R $ at a submonoid $ M $, this function constructs a polynomial in $ R[X] $ by replacing each coefficient of $ p $ with an \"}\n  {\"name\": \"denomsClearable_natDegree\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"∀ {R : Type u_1} {K : Type u_2} [inst : Semiring R] [inst_1 : CommSemiring K] {b : R} {bi : K} (i : R →+* K)\\n  (f : Polynomial R) (a : R), bi * i b = 1 → DenomsClearable a b f.natDegree f i\", \"doc\": \"For a ring homomorphism $ i : R \\\\to K $, polynomial $ f \\\\in R[X] $, and elements $ a, b \\\\in R $, if $ \\\\beta \\\\cdot i(b) = 1 $, then there exist $ D \\\\in R $ and $ \\\\beta \\\\in K $ such that $ i(D) = i(b)^{\"}\n  {\"name\": \"IsFractionRing.integerNormalization_eq_zero_iff\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {A : Type u_3} {K : Type u_4} [inst : CommRing A] [IsDomain A] [inst_2 : Field K] [inst_3 : Algebra A K]\\n  [inst_4 : IsFractionRing A K] {p : Polynomial K},\\n  IsLocalization.integerNormalization (nonZeroDivisors A) p = 0 ↔ p = 0\", \"doc\": \"For any polynomial $ p $ over the fraction ring $ K $ of a commutative semiring $ A $, the integer normalization of $ p $ with respect to the non-zero divisors of $ A $ yields the zero polynomial in $\"}\n  {\"name\": \"denomsClearable_of_natDegree_le\", \"module\": \"Mathlib/Algebra/Polynomial/DenomsClearable\", \"type\": \"∀ {R : Type u_1} {K : Type u_2} [inst : Semiring R] [inst_1 : CommSemiring K] {i : R →+* K} {b : R} {bi : K} (N : ℕ)\\n  (a : R), bi * i b = 1 → ∀ (f : Polynomial R), f.natDegree ≤ N → DenomsClearable a b N f i\", \"doc\": \"For a polynomial $ f $ with natural degree $ \\\\leq N $, there exist elements $ D \\\\in R $ and $ \\\\beta \\\\in K $ such that $ \\\\beta \\\\cdot i(b) = 1 $ and $ i(D) = i(b)^N \\\\cdot \\\\text{eval}_{i(a)\\\\beta}(f^i) $,\"}\n\nNo exact match: the hits concern one-variable denominator clearing, Weierstrass coordinate changes, algebraic independence or residue maps; none gives the valuation-normalized multivariable relation and its descent and residue clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic dependence specializes from the fraction field of a valuation ring to its residue field by dividing polynomial coefficients by a minimal valuation coefficient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"∀ {K : outParam (Type u_5)} {L : outParam (Type u_6)} {Γ₀ : outParam (Type u_7)} {Γ₁ : outParam (Type u_8)}\\n  [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [inst_3 : LinearOrderedCommGroupWithZero Γ₀]\\n  [inst_4 : LinearOrderedCommGroupWithZero Γ₁] (vK : Valuation K Γ₀) (vL : Valuation L\", \"doc\": \"For any element $x$ in the valuation subring $K_0$, the composition of the algebra map from the residue field of $K_0$ to the residue field of $L_0$ with the residue map of $K_0$ equals the compositio\"}\n  {\"name\": \"Polynomial.residueFieldMapCAlgEquiv\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Polynomial\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      [inst_1 : I.IsPrime] →\\n        (J : Ideal (Polynomial R)) →\\n          [inst_2 : J.IsPrime] →\\n            [inst_3 : J.LiesOver I] →\\n              J = Ideal.map Polynomial.C I → J.ResidueField ≃ₐ[I.ResidueField] RatFunc I.ResidueField\", \"doc\": \"Given prime ideals $ I \\\\subseteq R $ and $ J \\\\subseteq R[X] $ such that $ J $ lies over $ I $ (i.e., $ J \\\\cap R = I $) and $ J $ is the extension of $ I $ under the constant polynomial embedding $ C :\"}\n  {\"name\": \"instIsAlgebraicQuotientIdealResidueField\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances\", \"type\": \"∀ {A : Type u_2} [inst : CommRing A] (p : Ideal A) [inst_1 : p.IsPrime], Algebra.IsAlgebraic (A ⧸ p) p.ResidueField\", \"doc\": \"For any commutative ring $ A $ and a prime ideal $ p $ in $ A $, the residue field of $ p $ is algebraic over the quotient ring $ A/p $. This means every element in the residue field satisfies a polyn\"}\n  {\"name\": \"Polynomial.residueFieldMapCAlgEquiv_algebraMap\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Polynomial\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [inst_1 : I.IsPrime] (J : Ideal (Polynomial R)) [inst_2 : J.IsPrime]\\n  [inst_3 : J.LiesOver I] (hJ : J = Ideal.map Polynomial.C I) (p : Polynomial R),\\n  (Polynomial.residueFieldMapCAlgEquiv I J hJ) ((algebraMap (Polynomial R) J.ResidueField) p) =\\n  \", \"doc\": \"Given prime ideals $ I \\\\subseteq R $ and $ J \\\\subseteq R[X] $ where $ J $ lies over $ I $ and is the extension of $ I $ under the constant polynomial embedding $ C : R \\\\to R[X] $, the canonical $ I $-\"}\n  {\"name\": \"instIsAlgebraicResidueFieldOfIsIntegral\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances\", \"type\": \"∀ {A : Type u_2} {B : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (q : Ideal B) [inst_3 : q.LiesOver p] [inst_4 : p.IsPrime] [inst_5 : q.IsPrime] [Algebra.IsIntegral A B],\\n  Algebra.IsAlgebraic p.ResidueField q.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if $B$ is an integral algebra over $A$, then the residue field of $\\\\mathfrak\"}\n  {\"name\": \"AlgebraicIndependent.aevalEquivField_apply_coe\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/Adjoin\", \"type\": \"∀ {ι : Type u_1} {F : Type u_2} {E : Type u_3} {x : ι → E} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  (hx : AlgebraicIndependent F x) (a : FractionRing (MvPolynomial ι F)),\\n  ↑(hx.aevalEquivField a) = (IsFractionRing.lift ⋯) a\", \"doc\": \"For an algebraically independent set $ x $ over a field $ F $, the evaluation homomorphism from the multivariate polynomial ring $ F[\\\\iota] $ to the $ F $-algebra $ A $ extends to an isomorphism betwe\"}\n  {\"name\": \"AlgebraicIndepOn\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/Defs\", \"type\": \"{ι : Type u_1} →\\n  (R : Type u_3) → {A : Type u_5} → (ι → A) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set ι → Prop\", \"doc\": \"The set $ s $ is algebraically independent over $ R $, meaning that no non-zero polynomial with coefficients in $ R $ evaluates to zero when applied to elements of $ s $.\"}\n  {\"name\": \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A] [inst_2 : IsDiscreteValuationRing A]\\n  [inst_3 : Field K] [inst_4 : Algebra A K] [inst_5 : IsFractionRing A K] {x : K},\\n  (IsDedekindDomain.HeightOneSpectrum.valuation K (IsDiscreteValuationRing.maximalIdeal A)) x ≤ 1 →\\n    ∃ \", \"doc\": \"For any element $ x $ in the fraction field $ K $ of a discrete valuation ring $ A $, if the valuation of $ x $ with respect to the maximal ideal of $ A $ is at most $ 1 $, then $ x $ belongs to $ A $\"}\n\nNo exact match: the hits concern one-variable denominator clearing, Weierstrass coordinate changes, algebraic independence or residue maps; none gives the valuation-normalized multivariable relation and its descent and residue clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-domain-fibre-dimensions",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Re-split of the valuation-domain dimension argument: old proof steps 5–6 and the reduction at the start of step 7 (algebraic dependence and valuation coefficient normalization).",
+   "via": [
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-valuation-generic-relation-specialization",
+  "worker": "stage1",
+  "summary": "Checked Stacks 00QK and the latest blueprint ancestry; supplied the finite coefficient-selection induction, generic localization injection, and explicit residue evaluation. The proof uses existing nodes only; no finite type or quasi-finiteness hypothesis is needed. No exact completed project declaration was found.",
+  "blueprint": "The valuation-domain fibre-dimension subargument of the semistable-alteration input serving lem-trf-local-term-locality (1)--(2), as recorded by the existing blueprint.from chain; the generic kernel, coefficient normalization and residue reduction are Stacks 00QK. No change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-0ca840fac",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-0ca840fac (reviewer sub-agent of L); spot-checked: Read the full source: Stacks algebra.tex Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres, line 31380, statement and proof; tag mapping checked in tags/tags). The item statement, stmt_deps, source and blueprint field are byte-identical to the node created in Q55 1c93. Only the proof fields and split_report are new. There are no new nodes and no re-split note applies. Parent step 3 of lem-trf-valuation-domain-fibre-dimensions uses exactly the conclusions given (h in ker alpha with a coefficient 1, reduction nonzero in ker alpha_k), under the same hypotheses. Step 1: the Mathlib leaf lem-weil-pbc-generic-fibre-localization-domain-irreducible applies because A is contained in B. Swapping the tensor factors is elementary, and both injections B->H->Frac H are proved by explicit fraction arguments. Step 2: trdeg<n gives a nonzero K-relation (distinct y_i, otherwise t_i-t_j is a relation); the case n=0 is void. Step 3: the finite induction is correct in any rank; d/c not in A implies c/d in A. Step 4: evaluation plus injectivity gives alpha(h)=0. Step 5: the coefficient 1 reduces to 1 in k, so the reduction is nonzero, and alpha_k(h-bar)=alpha(h) tensor 1=0, also when B tensor k=0. Tested: A a field; Z_(p)[1/p] with h=1-pt; Z_(p)[x,x^2/p] with h=pt_2-t_1^2; n=0; B=A[t]. rg over dag/nodes for 00QK, 'minimal valuation', and coefficient/primitive normalization over valuation rings found no duplicate. All three kinds of search are recorded. The route is fine: the only cited statement is a Mathlib leaf. No tool_uses and no SGA. Notation m_A presupposes A is local (standard; the parent proves it), not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationGenericRelationSpecialization",
+  "declaration": "ValuationRing.exists_relation_coeff_one_and_residue_relation",
+  "file": "lean/Sheaf/RingTheory/ValuationGenericRelationSpecialization.lean",
+  "statement": "theorem exists_relation_coeff_one_and_residue_relation (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] (B : Type v) [CommRing B] [IsDomain B] [Algebra A B] (hAB : Function.Injective (algebraMap A B)) (n : ℕ) (α : MvPolynomial (Fin n) A →ₐ[A] B) : IsDomain (B ⊗[A] K) ∧ ((@Algebra.trdeg K (FractionRing (B ⊗[A] K)) _ _ (RingHom.toAlgebra ((algebraMap (B ⊗[A] K) (FractionRing (B ⊗[A] K))).comp (Algebra.TensorProduct.includeRight (R := A) (A := B) (B := K)).toRingHom))) < (n : Cardinal) → ∃ h : MvPolynomial (Fin n) A, α h = 0 ∧ (∃ I : Fin n →₀ ℕ, MvPolynomial.coeff I h = 1) ∧ MvPolynomial.map (IsLocalRing.residue A) h ≠ 0 ∧ MvPolynomial.eval₂Hom (Algebra.TensorProduct.includeRight (R := A) (A := B) (B := IsLocalRing.ResidueField A)).toRingHom (fun i ↦ α (MvPolynomial.X i) ⊗ₜ[A] (1 : IsLocalRing.ResidueField A)) (MvPolynomial.map (IsLocalRing.residue A) h) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e7da2d9a",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Lean exact against node and Stacks 00QK: valuation domain A, any IsFractionRing K, B domain with injective algebraMap, arbitrary α; IsDomain(B⊗K) unconditional conclusion; L=FractionRing with canonical K-structure includeRight≫algebraMap; trdeg<n → ∃h, α h=0 ∧ coeff 1 ∧ residue map ≠0 ∧ eval₂Hom includeRight (α X_i⊗1) h̄=0 (=α⊗k). Edge cases n=0, A field, any rank, B⊗k=0 OK; universes independent; sorry only; docstrings/blueprint/5 proof steps present; lean.statement verbatim; no duplicate; only lean record changed. Sole fault H11: second reading was the worker's self-check → fixes/lem-trf-valuation-generic-relation-specialization.report.md (worker report verbatim + independent second reading). Lean unchanged, not recompiled."
+ }
+}

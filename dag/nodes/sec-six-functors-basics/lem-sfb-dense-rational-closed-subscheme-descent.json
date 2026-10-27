@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-dense-rational-closed-subscheme-descent",
+ "kind": "statement",
+ "title": "A reduced closed subscheme with dense rational points descends",
+ "statement": "Let $F\\subseteq L$ be any extension of fields [def-pc-field-extension, def-weil-field], and let $X$ be a scheme of finite type over $F$ [def-pc-scheme, def-weil-finite-type-morphism]. Write $X_L=X\\times_F L$ [def-pc-base-change]. Let $Z\\hookrightarrow X_L$ be a closed subscheme [def-weil-closed-immersion] that is reduced (all its local rings have no nonzero nilpotents). Suppose $S\\subseteq X(F)$ is a set of rational points [def-pc-rational-point] such that each base-changed point $s_L$ factors through $Z$, and the images of these points are Zariski dense in $Z$ (every closed subset of $Z$ containing them is all of $Z$). Then there is a unique reduced closed subscheme $Z_F\\hookrightarrow X$ for which $(Z_F)_L=Z$ as closed subschemes of $X_L$. The empty subscheme and $S=\\varnothing$ are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.24 and A.28 (closed subschemes and sections of reduced schemes), pp.571–572, and A.65, pp.580–581 (uniqueness of a field model). Agent coefficient-basis argument extending these observations; its full argument is recorded in report.md, not assumed from A.65."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "def-pc-rational-point"
+ ],
+ "proof": [
+  {
+   "text": "Let $T$ be the closure in $X$ of the images of $S$, and let $Y=T_{\\mathrm{red}}\\hookrightarrow X$ be the reduced induced closed subscheme supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. For an affine open $U=\\operatorname{Spec}A\\subseteq X$, write $S_U$ for the members of $S$ landing in $U$, and $I_U$ for the ideal of $Y$ on $U$. The cited node identifies $I_U$ with the functions vanishing at all points of $T\\cap U$. Hence $I_U=\\bigcap_{s\\in S_U}\\ker(\\operatorname{ev}_s:A\\to F)$: one inclusion is immediate; for the other, the zero set of $a\\in A$ is closed in $U$ by [lem-weil-pbc-basic-open-function], and contains $S_U$, so it contains its closure $T\\cap U$. Here closure commutes with restriction to an open, because each neighbourhood of a point of $U$ can be intersected with $U$. The evaluations are $F$-algebra maps, since a rational point is a section and morphisms between affine schemes correspond to ring maps.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-basic-open-function",
+    "def-pc-rational-point",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), explicit vanishing ideal; Tag 01HZ (lemma-f-open); Milne Appendix A.24 and A.28"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-chart-base-change-iso], $U_L=\\operatorname{Spec}B$ with $B=L\\otimes_F A$ and projection induced by $a\\mapsto1\\otimes a$. Write $Z\\cap U_L=\\operatorname{Spec}(B/J_U)$ using [def-weil-closed-immersion]. For $s\\in S_U$ its base-changed evaluation is $\\operatorname{ev}_{s,L}(\\lambda\\otimes a)=\\lambda\\operatorname{ev}_s(a)$ by the tensor pushout universal property. The ideal $J_U$ is exactly the intersection of their kernels. Indeed $J_U$ vanishes on these points by the factorization hypothesis. Conversely, if $b$ vanishes on all these points, its nonvanishing open on $Z\\cap U_L$ is empty by density and [lem-weil-pbc-basic-open-function]. Consequently its image lies in every prime of $B/J_U$, so is nilpotent by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] with ideal zero; it is zero since this affine open is reduced, by [lem-weil-pbc-affine-scheme-reduced-iff]. Reducedness here follows directly by restricting the local-ring hypothesis on $Z$. Density restricts to this open by the same neighbourhood argument as in step 1.",
+   "uses": [
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JR (lemma-open-fibre-product), 01HZ (lemma-f-open), 01J2 (lemma-affine-reduced); algebra.tex Tag 00E0 (lemma-Zariski-topology); Milne A.28"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-common-linear-kernel-field-extension] to the $F$-vector space $A$ and the family $(\\operatorname{ev}_s)_{s\\in S_U}$. Interchanging the tensor factors gives $J_U=\\operatorname{span}_L\\{1\\otimes a:a\\in I_U\\}$. This span is precisely the ideal generated by $1\\otimes I_U$ in $B$: every element of $B$ is a finite sum of pure tensors, and $(\\lambda\\otimes a)(1\\otimes i)=\\lambda\\otimes ai$ with $ai\\in I_U$. Conversely any such $L$-linear combination is in the generated ideal. These multiplication and generation rules are [lem-weil-pbc-algebra-tensor-pushout-universal-property] and [def-weil-pbc-module-tensor-product]; the interchange is the linear isomorphism $a\\otimes\\lambda\\mapsto\\lambda\\otimes a$, with inverse the same formula, obtained from their bilinear universal property.",
+   "uses": [
+    "lem-sfb-common-linear-kernel-field-extension",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-basis argument following Tag 00CX (lemma-tensor-product); compare Tags 059R and 059M for free-module tensor/product injectivity"
+   }
+  },
+  {
+   "text": "By [lem-pc-ideal-sheaf-comap-affine-extension], the ideal of $Y_L$ on each $U_L$ is generated by $1\\otimes I_U$. Thus step 3 identifies it with the ideal $J_U$ of $Z$. These opens cover $X_L$, because they are inverse images of an affine open cover of $X$. The ideal sheaves therefore agree: equality of subsheaves can be checked after restriction to a cover, by the sheaf locality axiom. The affine ideal descriptions and their associated ideal subsheaves are given by [def-sbc-closed-immersion-ideal-sheaf]. Apply [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic] to obtain the unique isomorphism $Y_L\\cong Z$ over $X_L$, which is equality of closed subschemes. Take $Z_F=Y$, already reduced by step 1.",
+   "uses": [
+    "lem-pc-ideal-sheaf-comap-affine-extension",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.24 and A.65, pp.571 and 581; affine ideal extension by schemes.tex Tag 01I4 and closed-subscheme uniqueness by Tag 01HO"
+   }
+  },
+  {
+   "text": "For uniqueness, the projection $W_L\\to W$ is surjective for every $F$-scheme $W$: [lem-pc-field-extension-surjective] gives surjectivity of $\\operatorname{Spec}L\\to\\operatorname{Spec}F$ and [lem-weil-pbc-surjective-base-change] preserves it. If another reduced closed subscheme $Y^{\\prime}\\hookrightarrow X$ has $Y^{\\prime}_L=Z=Y_L$, projecting these two equal images to $X$ gives $|Y^{\\prime}|=p(|Z|)=|Y|=T$. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] gives $Y^{\\prime}=Y$ as closed subschemes. If $S=\\varnothing$, density forces $Z$ empty, $T$ is empty and its reduced induced subscheme is empty, so all the preceding steps still apply (intersections over empty families are the whole ring). No separability, perfection, separatedness of $X$, or finite degree of $L/F$ was used.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), uniqueness; morphisms.tex Tag 01S1 (lemma-base-change-surjective); Milne A.65, uniqueness paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-basic-open-function",
+  "def-pc-rational-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-sfb-common-linear-kernel-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix A.24, A.28, A.65; coefficient-basis argument supplies arbitrary-field existence (not claimed to follow from the Galois part of A.65). Stacks Tags 01J3, 01I4, 01JR and 00E0 supply geometric interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced closed subscheme of a scalar extension having a Zariski dense set of points rational over the smaller field descends to that field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, Algebra.IsGeometricallyReduced, AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.IsDominant, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a closed reduced subscheme over a field extension has dense points with coordinates in the base field then its defining ideal is generated over the base field",
+   "results": "8 hits: MvPolynomial.IsPrime.vanishingIdeal_zeroLocus, AlgebraicGeometry.Scheme.default_asIdeal, Algebra.IsGeometricallyReduced, MvPolynomial.vanishingIdeal_zeroLocus_eq_radical, Algebra.ZariskisMainProperty.of_isIntegral, ax_grothendieck_zeroLocus, MvPolynomial.instIsPrimeVanishingIdealSingletonForallSet, Algebra.IsGeometricallyReduced.of_forall_fg",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced closed subscheme with dense rational points over a subfield descends to that subfield",
+   "results": "8 hits: AlgebraicGeometry.IsReduced.mk, Algebra.IsGeometricallyReduced.casesOn, AlgebraicGeometry.IsReduced.casesOn, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.recOn, AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"descend\"",
+   "results": "12 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(closed|subscheme)|rational.*dens|dens.*rational",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"descend\"",
+   "results": "{\"t\": \"2026-10-23T14:29:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"descend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"e671ba0a95c4d4fa\"}; Read returned hits: reducedness definitions, geometric reducedness, dominant-morphism extensionality, and fpqc descent of morphism properties do not state this subscheme-descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(closed|subscheme)|rational.*dens|dens.*rational",
+   "results": "{\"t\": \"2026-10-23T14:29:31Z\", \"tool\": \"grep\", \"query\": \"descen.*(closed|subscheme)|rational.*dens|dens.*rational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"7945c9b34291809d\"}; Read returned hits: reducedness definitions, geometric reducedness, dominant-morphism extensionality, and fpqc descent of morphism properties do not state this subscheme-descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced closed subscheme after a field extension with dense base field rational points descends uniquely to the base field",
+   "results": "{\"t\": \"2026-10-23T14:29:32Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced closed subscheme after a field extension with dense base field rational points descends uniquely to the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"Algebra.isGeometricallyReduced_iff\"], \"digest\": \"3b23e3698b98a463\"}; Read returned hits: reducedness definitions, geometric reducedness, dominant-morphism extensionality, and fpqc descent of morphism properties do not state this subscheme-descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Pp]i|[Pp]i.*tensor|baseChange.*iInf|iInf.*baseChange|map_iInf|map_sInf",
+   "results": "{\"t\": \"2026-10-23T14:31:42Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Pp]i|[Pp]i.*tensor|baseChange.*iInf|iInf.*baseChange|map_iInf|map_sInf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/HierarchyDesign.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/MulOpposite.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/MulOpposite.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/MulOpposite.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/MulOpposite.lean\", \"Mathlib/NumberTheory/Height/NumberField.lean\", \"Mathlib/NumberTheory/Height/NumberField.lean\"], \"digest\": \"e4179de671b08006\"}; Read returned hits: reducedness definitions, geometric reducedness, dominant-morphism extensionality, and fpqc descent of morphism properties do not state this subscheme-descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced closed subscheme with dense points rational over a smaller field descends to that field",
+   "results": "{\"t\": \"2026-10-23T14:32:20Z\", \"tool\": \"leansearch\", \"query\": \"A reduced closed subscheme with dense points rational over a smaller field descends to that field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.mk\", \"Algebra.IsGeometricallyReduced.casesOn\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.IsReduced.recOn\", \"AlgebraicGeometry.IsReduced.casesOn\", \"AlgebraicGeometry.IsReduced.rec\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.IsReduced\"], \"digest\": \"ec683c05542a3bf2\"}; Read returned hits: reducedness definitions, geometric reducedness, dominant-morphism extensionality, and fpqc descent of morphism properties do not state this subscheme-descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed reduced subscheme with dense base field valued points is defined by equations over that base field",
+   "results": "{\"t\": \"2026-10-23T14:32:22Z\", \"tool\": \"leanfinder\", \"query\": \"A closed reduced subscheme with dense base field valued points is defined by equations over that base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"AlgebraicGeometry.affine_isReduced_iff\"], \"digest\": \"9bce392b9ed64ca6\"}; Read returned hits: reducedness definitions, geometric reducedness, dominant-morphism extensionality, and fpqc descent of morphism properties do not state this subscheme-descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-subvariety-separable-definition",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field. Supporting lemma: Geometric abelian subvarieties have a finite separable field of definition. Coefficient-basis descent for the closed subscheme recovered from dense separable torsion points.",
+   "via": [
+    "lem-sfb-abelian-subvariety-separable-definition",
+    "lem-sfb-abelian-kernel-abelian-part",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dense-rational-closed-subscheme-descent",
+  "worker": "stage1",
+  "summary": "Q71 retains the full statement and proves arbitrary-field descent by taking the reduced closure of the base rational points and comparing affine evaluation ideals. One genuine linear algebra lemma is stated separately; all geometric inputs reuse existing nodes. Empty, nonreduced ambient, infinite and inseparable cases checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field. Supporting lemma: Geometric abelian subvarieties have a finite separable field of definition. Coefficient-basis descent for the closed subscheme recovered from dense separable torsion points.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced closed subset construction and uniqueness used to construct the model; the coefficient-stability unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine scalar-extension chart with its projection maps."
+   },
+   {
+    "node": "lem-pc-ideal-sheaf-comap-affine-extension",
+    "why": "Generic affine ideal extension identifies the defining ideal after scalar extension."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+    "why": "Generic equality-of-ideal criterion for equality of closed subschemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-f153d5ab6",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-f153d5ab6 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the new node in full; no changes. Not a re-split: there is no repair note and the base item had no proof. The statement is true and unchanged, and the citer lem-sfb-abelian-subvariety-separable-definition step 2 uses it as stated. Milne iAG A.65 (p.581) gives only uniqueness, plus the Galois case and the affine a=a'∩A criterion; A.24/A.27/A.28/A.30 (pp.571-572) are checked; existence for an arbitrary extension is honestly marked as an agent argument. Step 1: the reduced-induced node (1) and the closed zero set from basic-open give I_U=∩ker ev_s. Step 2: the affine chart gives U_L=Spec(L⊗A); s_L has ring map λ⊗a↦λev_s(a) by pushout uniqueness; a dense set misses no nonempty open D(b̄), so b̄ is nilpotent by the radical node and zero by reducedness. Step 3: the new lemma with V=A, E=S_U plus the factor swap; the L-span of 1⊗I_U is the ideal it generates. Step 4: ideal-sheaf-comap-affine-extension, cover by U_L, then equal ideals give Y_L≅Z. Step 5: surjective base change gives |Y'|=|Y|=T, then reduced-induced uniqueness (3). S=∅ forces Z=∅; reducedness and density are both needed (double-point and extra-point examples). New node lem-sfb-common-linear-kernel-field-extension is true (coefficient-basis proof; checked on F², F[t] with infinite E, E=∅, V=0), statement-only, self-contained, sourced by Stacks 00CX/059R/059M with tags verified. It is not a clause of the item. No duplicate: two-term kernel base change lacks product injectivity for infinite E; the Galois descent nodes need invariance, not dense points; no blueprint node found. Accepted tool_uses: reduced-induced-closed-subscheme, affine-chart-base-change-iso, ideal-sheaf-comap-affine-extension (generic). No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DenseRationalClosedSubschemeDescent",
+  "declaration": "AlgebraicGeometry.existsUnique_reduced_closedSubscheme_of_dense_rational_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/DenseRationalClosedSubschemeDescent.lean",
+  "statement": "theorem existsUnique_reduced_closedSubscheme_of_dense_rational_points (F L : Type u) [Field F] [Field L] [Algebra F L] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of F)) [LocallyOfFiniteType f] [QuasiCompact f] (Z : Scheme.{u}) (i : Z ⟶ pullback f (Spec.map (CommRingCat.ofHom (algebraMap F L)))) [IsClosedImmersion i] [IsReduced Z] (S : Set (f.fieldPoints F)) (hfactor : ∀ p ∈ S, ∃ q : Spec (CommRingCat.of L) ⟶ Z, q ≫ i = (f.baseChangeFieldPoint L p).1) (hdense : Dense (i ⁻¹' ((fun p : f.fieldPoints F ↦ (f.baseChangeFieldPoint L p).1.base default) '' S))) : ∃! I : X.IdealSheafData, IsReduced I.subscheme ∧ I.comap (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap F L)))) = i.ker",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09eb043cc",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: any field ext [Field F][Field L][Algebra F L]; finite type = LocallyOfFiniteType+QuasiCompact; X_L = pullback f (Spec.map algebraMap) with pullback.fst; Z closed immersion + IsReduced; S : Set (f.fieldPoints F); hfactor via baseChangeFieldPoint; density in Z via i-preimage (exact since i injective + hfactor); ∃! over X.IdealSheafData with IsReduced I.subscheme ∧ I.comap pullback.fst = i.ker (Mathlib comap = ker of fibre-product projection, so full closed-subscheme equality). S=∅ forces Z=∅, unit ideal; no extra assumptions; universe u forced by Spec/pullback/fieldPoints. Node diff vs side-live: only lean record added; statement verbatim in file; docstrings carry Milne source place, blueprint id and 5 proof steps; proof sorry only; no new defs; no duplicate (Descent.lean fpqc ideal descent is a different statement). Not recompiled per instructions; no fixes."
+ }
+}

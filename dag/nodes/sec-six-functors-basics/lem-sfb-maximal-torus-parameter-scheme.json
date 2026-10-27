@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-maximal-torus-parameter-scheme",
+ "kind": "statement",
+ "title": "Smooth surjective parameter scheme of maximal tori",
+ "statement": "Let $A$ be a nonzero commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $G$ a reductive $S$-group scheme in [def-sfb-pinned-split-root-realization]. For an $S$-scheme $U$ [def-pc-scheme], let $\\mathcal T_G(U)$ be the set of closed subgroup schemes $T\\hookrightarrow G\\times_S U$ [def-weil-closed-immersion, def-pc-fibre-product] such that $T$ is a $U$-torus and $T_{\\bar u}$ is a maximal torus of $G_{\\bar u}$ for every geometric point $\\bar u\\to U$. Here a $U$-torus is a relative torus in the sense of [def-sfb-relative-torus], that is, a group scheme which on an fppf covering is isomorphic to $\\mathbf G_m^{r_i}$ for finite ranks $r_i\\geq0$, where $\\mathbf G_m(V)=\\Gamma(V,\\mathcal O_V)^\\times$ and fppf coverings are [def-pc-fppf-site]. A geometric point is a morphism from the spectrum of an algebraically closed field; maximal means maximal for inclusion among tori over that field. Pullback of subgroup schemes makes $\\mathcal T_G$ a contravariant functor on $S$-schemes. There is an $S$-scheme $Q$ with a natural bijection $\\operatorname{Hom}_S(U,Q)\\simeq\\mathcal T_G(U)$ for every $U$. Its structural morphism $Q\\to S$ is smooth [def-sbc-smooth-morphisms] and surjective [def-weil-surjective-morphism]. No Noetherian or connectedness hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative reductive-group structural theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sfb-pinned-split-root-realization",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-surjective-morphism",
+  "def-sfb-relative-torus"
+ ],
+ "proof": [
+  {
+   "text": "First verify the fppf sheaf condition for $\\mathcal T_G$. For compatible closed torus subgroups over a covering of $U$, their quasi-coherent ideal sheaves in $G_U$ have the canonical overlap identifications. Convert the covering to an fpqc covering and apply quasi-coherent module descent, including its full faithfulness, to the ideals and their inclusions into $\\mathcal O_{G_U}$. The descended submodule is an ideal: its multiplication into $\\mathcal O_{G_U}/\\mathcal I$ is zero because its pullback is zero and descent is faithful. The cited ideal-to-closed-subscheme construction gives $T\\hookrightarrow G_U$ with exactly these pullbacks. Multiplication, inverse and unit restrict to $T$: their composites into the quotient ideal vanish on the covering, hence vanish by the same faithful descent. Their group identities and uniqueness are tested on the covering. The relative-torus condition holds because the covering followed by the given splitting coverings is still an fppf covering. For any geometric point of $U$, base change of the covering is surjective, so a geometric point above it tests the same geometric-maximality condition. If its fibre at the original geometric point lay in a strictly larger torus, the inclusion would remain strict after that faithfully flat field extension, contradicting maximality upstairs. Thus $T$ is geometrically maximal. This proves existence and uniqueness of gluing, without assuming $U$ affine or Noetherian.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descent",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "lem-pc-closed-imm-base-change",
+    "def-sfb-relative-torus",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.2.6 proof, first sentence (fppf sheaf); ideal descent is Stacks descent.tex Tag 023T (proposition-fpqc-descent-quasi-coherent)."
+   }
+  },
+  {
+   "text": "For each $s\\in S$, choose a split maximal torus of $G_{\\bar s}$ using the existence assertion of the Borel-pair node. Apply the geometric-torus lifting node to obtain a split torus in $G$ over an affine flat locally finitely presented neighborhood $S'\\to S$ of $s$. The torus is maximal at the marked point. Apply the split-torus maximality-openness clause and restrict to an affine open neighborhood of that point; call it $V_s$. Then the split torus $T_s\\subseteq G_{V_s}$ is geometrically maximal everywhere on $V_s$. These maps are flat and locally finitely presented, and their images cover $S$, since each contains the chosen $s$; they therefore form an fppf covering. Use the finite-affine-refinement clause for fppf coverings on the affine scheme $S$ to obtain finitely many affine $V_i\\to S$ covering $S$, each with a split geometrically maximal torus $T_i$. Let $V=\\coprod_iV_i$. This is a singleton fpqc cover: it is flat componentwise, and the finitely many affine open summands cover its image $S$, as required by the definition of fpqc covering. The ranks of the $T_i$ need not agree.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-geometric-torus-fppf-lift",
+    "lem-sfb-reductive-torus-fibre-openness",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.2.6 proof, first paragraph; use Proposition 3.1.9 and its fppf lifting argument, before choosing a maximal torus globally."
+   }
+  },
+  {
+   "text": "Fix $i$. Apply the normalizer-quotient node to $G_{V_i}$ and its split torus $T_i$, obtaining $X_i=G_{V_i}/N(T_i)$ smooth and quasi-affine over $V_i$. Its structure map is surjective: for every point of $V_i$, the identity section of $G_{V_i}$ followed by $G_{V_i}\\to X_i$ supplies a point over it. For any $V_i$-scheme $W$, conjugation sends $g\\in G(W)$ to the closed maximal torus $g(T_i)_Wg^{-1}$. This is unchanged on a right coset of $N(T_i)(W)$. Step 1 therefore extends this map to the fppf coset sheaf represented by $X_i$. It is injective: locally lift two sections to $g,h$; equality of their subgroup functors is equivalent to $h^{-1}g\\in N(T_i)$ by the defining normalizer formula, hence to equality of their right cosets. Equality of the sections then follows from the sheaf condition. Local lifting to cosets and local detection of equality use the cited set-valued sheafification-sections theorem. This constructs a natural injection $\\operatorname{Hom}_{V_i}(W,X_i)\\hookrightarrow\\mathcal T_G(W)$.",
+   "uses": [
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.2.6 proof, second paragraph: quotient by the normalizer and the stabilizer calculation."
+   }
+  },
+  {
+   "text": "Given any $T'\\in\\mathcal T_G(W)$, apply the fppf conjugacy node to $(T_i)_W$ and $T'$ in $G_W$. Both are closed relative tori and geometrically maximal on every fibre. There is an fppf covering $W_a\\to W$ and $g_a\\in G(W_a)$ with $g_a(T_i)_{W_a}g_a^{-1}=T'_{W_a}$. On an overlap, $g_b^{-1}g_a$ belongs to the normalizer because both conjugates equal the same subgroup $T'$. The right cosets therefore agree and glue to a section of $X_i$ over $W$, using that representable functors are fpqc sheaves and fppf coverings are fpqc. Its image is $T'$ by step 1, and it is unique by step 3. Pulling back the local $g_a$ pulls back this coset section, so the bijection is natural for every $W\\to V_i$. No global conjugating element is asserted.",
+   "uses": [
+    "lem-sfb-relative-maximal-tori-fppf-conjugacy",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.2.6 proof, second paragraph and the entire two-maximal-tori argument on printed p.95."
+   }
+  },
+  {
+   "text": "Put $X'=\\coprod_iX_i$ over $V=\\coprod_iV_i$ using scheme coproducts. It is quasi-affine over $V$ by quasi-affineness on the affine open cover $\\{V_i\\}$ of the target. Steps 3-4 identify its functor over $V$ with $\\mathcal T_G$ restricted to $V$ (sections over a scheme over $V$ are specified on its disjoint open-and-closed inverse images of the summands). On $V\\times_SV$, the two pullbacks of $X'$ consequently represent the same functor. Full faithfulness of Yoneda gives the unique comparison isomorphism that preserves the torus section. On $V\\times_SV\\times_SV$, both composites preserve that same section, so faithfulness gives the cocycle. Apply effective fpqc descent for quasi-affine schemes to the singleton covering $V\\to S$, giving an $S$-scheme $Q$ with $Q\\times_SV\\simeq X'$ and this specified datum. For any $S$-scheme $U$, maps $U\\to Q$ are the compatible local maps on $U\\times_SV$ by representable fpqc descent. Their local torus sections are compatible by the defining comparison, and step 1 identifies them with precisely $\\mathcal T_G(U)$. This gives the required natural bijection for all $U$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-a1-quasi-affine-target-locality",
+    "lem-galois-yoneda-fully-faithful",
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.2.6 proof, opening descent reduction; Stacks descent.tex Tag 0247 (lemma-quasi-affine)."
+   }
+  },
+  {
+   "text": "Each restriction $X_i\\to V_i$ of $X'\\to V$ is smooth, so $X'\\to V$ is smooth by the local definition. The singleton fpqc covering $V\\to S$ is flat, surjective and quasi-compact (it is a finite disjoint union of morphisms between affine schemes). Apply smooth fpqc base descent to $Q\\to S$ and obtain smoothness. Finally, for $s\\in S$, choose $v\\in V$ above it. The corresponding $X_i\\to V_i$ is surjective by step 3, hence some $x\\in X'$ lies above $v$. Its image in $Q$ lies above $s$. Thus $Q\\to S$ is surjective as well.",
+   "uses": [
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 3.2.6 proof, descent of the smooth local quotients and surjectivity; compare the opening sentence of Corollary 3.2.7 proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "lem-pc-closed-imm-base-change",
+  "def-sfb-relative-torus",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-geometric-torus-fppf-lift",
+  "lem-sfb-reductive-torus-fibre-openness",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sfb-relative-maximal-tori-fppf-conjugacy",
+  "lem-a1-quasi-affine-target-locality",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 3.2.6, printed pp.94-95, quotient-and-descent argument read online and expanded using the cited existing descent statements; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reductive group schemes have a split maximal torus etale locally on any base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth surjective scheme of maximal tori and etale local triviality of algebraic tori",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Torus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*torus|torus.*[Ee]tale|[Ee]tale.*torus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale covering splits a maximal torus of a reductive group scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern etale morphisms, abstract root pairings or Lie algebras, not relative reductive groups, their maximal tori or root-line/coroot structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme representing geometrically maximal tori in a reductive group scheme is smooth and surjective",
+   "results": "{\"t\": \"2026-10-24T10:23:14Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme representing geometrically maximal tori in a reductive group scheme is smooth and surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\"], \"digest\": \"a6fded7252877fbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.IsSmooth; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth; AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*torus|scheme.*tori|tori.*scheme",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"grep\", \"query\": \"maximal.*torus|scheme.*tori|tori.*scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\"], \"digest\": \"df68ca4b499a44a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/Artinian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Noetherian.lean; Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/AffineSpace.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor of maximal tori of a reductive group scheme is representable smooth surjective",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"leansearch\", \"query\": \"Functor of maximal tori of a reductive group scheme is representable smooth surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"CategoryTheory.Functor.IsRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"CategoryTheory.Functor.IsRepresentedBy.representableBy\", \"CategoryTheory.Functor.representableBy\", \"CategoryTheory.Functor.reprx\", \"CategoryTheory.Functor.IsRepresentedBy.mk\"], \"digest\": \"adf51efce77f043e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.IsSmooth.casesOn; CategoryTheory.Functor.IsRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; CategoryTheory.Functor.IsRepresentedBy.representableBy; CategoryTheory.Functor.representableBy; CategoryTheory.Functor.reprx; CategoryTheory.Functor.IsRepresentedBy.mk; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli functor of maximal tori of a reductive algebraic group over a base scheme",
+   "results": "{\"t\": \"2026-10-24T10:27:11Z\", \"tool\": \"leanfinder\", \"query\": \"The moduli functor of maximal tori of a reductive algebraic group over a base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.over\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"CategoryTheory.GaloisCategory.hasFiberFunctor\"], \"digest\": \"c1298a0e62e48ff9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.AffineSpace.functor; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.AffineSpace.functor_obj_obj; AlgebraicGeometry.AffineSpace.over; CategoryTheory.PreGaloisCategory.IsFundamentalGroup; CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.autGaloisSystem; CategoryTheory.GaloisCategory.hasFiberFunctor; none states this relative group-scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-pinned-splitting",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-maximal-torus-parameter-scheme",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed the maximal-torus parameter scheme from local normalizer quotients, proved their functor-of-points identification by fppf conjugacy, and descended with the canonical torus-preserving cocycle. Reused existing torus lifting, maximality openness and generic descent nodes. Added two statement-only structural inputs, searched by all four tools and a second phrasing. No Lean declaration of the project gives this item.",
+  "blueprint": "The latest blueprint is main-20261024. This item supports the inherited direct-image/alteration/moduli/geometric-reductivity branch of sk-thm-sf-ctf-stability through lem-sfb-reductive-etale-pinned-splitting. The scheme-of-maximal-tori construction is the existing from.place prerequisite before etale sections. blueprint_refs.py ancestor returns None: keep inherited from.node=null, with the existing via chain; the latest blueprint has no matching torus or normalizer node. Steps 1 and 5-6 realize the descent reduction; steps 2-4 realize the quotient and orbit identification.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Use fppf coverings for fpqc module and scheme descent and obtain a finite affine refinement."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Descend quasi-coherent ideals and their inclusions; the unit has no separate ideal-descent equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "why": "Turn the descended ideal into the actual closed subgroup scheme."
+   },
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Identify local subgroup ideals with flat pullbacks of the descended ideal."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Pull the covering back to a geometric point to test maximality."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Base change the covering to arbitrary test schemes in the functor-of-points argument."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glue quotient sections and identify maps into the descended scheme."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Combine finitely many local charts and their quotients into one covering and one descent datum."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Obtain local right-coset representatives of quotient sections; set-valued sheafification is essential here."
+   },
+   {
+    "node": "lem-a1-quasi-affine-target-locality",
+    "why": "Check the disjoint-union quotient is quasi-affine over its disjoint-union base."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Produce the unique torus-preserving scheme isomorphisms on overlaps and their cocycle."
+   },
+   {
+    "node": "lem-trf-quasi-affine-fpqc-effective-descent",
+    "why": "Effectively descend the local quotient scheme along the fpqc cover; this is the generic scheme-descent tool used by Conrad."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Descend smoothness of the assembled quotient scheme."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Check quasi-compactness of the finite affine covering used for smoothness descent."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Check quasi-compactness of affine covering members."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "lem-pc-closed-imm-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-a1-quasi-affine-target-locality",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-938420611",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-938420611 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all six steps in full, with the statement of every cited node. Source: Conrad, Reductive group schemes, read in the extracted online text since there is no local PDF; no SGA. Places checked: Thm 2.3.1 and its proof pp.67-69, Rem 2.3.5 p.71, Def 3.2.1, Lemma 3.2.5, Thm 3.2.6 with proof pp.94-95, Cor 3.2.7. The item statement is unchanged and is Conrad 3.2.6 for reductive G over Spec A. Step 1 (fppf sheaf condition) descends the ideals with full faithfulness (023T and the closed-ideal nodes); geometric maximality descends through a geometric point upstairs. Composing fppf coverings is elementary. Step 2 checks the hypotheses of the Borel-pair node (split maximal torus), torus-fppf-lift (smooth affine fp G, kappa(s') inside Omega) and the second clause of fibre-openness (fibres connected, so G0=G). The finite affine refinement comes from the 022C clause, so V is affine and V->S is fpqc. Step 3: gN maps to gTg^-1 on right cosets, and injectivity is checked against the node's normalizer formula. Step 4 (conjugacy) gives local conjugators that glue by 023Q. Step 5: 01SM gives quasi-affineness, Yoneda gives the canonical descent datum and its cocycle, 0247 gives effectivity, and representable descent gives Hom(U,Q)=T_G(U). Step 6: 02VL applies (V->S is flat, quasi-compact, surjective); surjectivity comes from the identity section. New node split-torus-normalizer-quasi-affine-quotient is Conrad 2.3.1 specialised to a split torus, with Rem 2.3.5 for smoothness of G->X; tested on r=0, G=T and diagonal T in SL2; not a duplicate of relative-torus-centralizer-normalizer (which gives no quotient). New node relative-maximal-tori-fppf-conjugacy is the conjugacy half of the proof of 3.2.6, valid for smooth affine G; tested on the empty base, trivial group, k[eps] and varying ranks; the existing conjugacy nodes are over a field and the item states no conjugacy, so it is no restatement. Batch-5 flags are all generic scheme theory and accepted: lem-trf-fppf-covering-is-fpqc (022C); quasi-affine fpqc effective descent (0247); smooth fpqc base descent (02VL); and via closures fppf covering base change (021O), Artin approximation (0CAR), component openness (057K) and the quasi-affine embedding (01P9). None is a step of the trace formula or Poincare duality. The off-unit tools in split_report.tool_uses are generic descent and Yoneda tools and are accepted. No fixes."
+ }
+}

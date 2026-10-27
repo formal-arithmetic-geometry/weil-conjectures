@@ -1,0 +1,359 @@
+{
+ "id": "sk-thm-groth-ss",
+ "blueprint": {
+  "is": "sk-thm-groth-ss",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Grothendieck spectral sequence and its Leray specialization",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories,\n$\\mathcal C$ an abelian category, and $\\Phi:\\mathcal A\\to\\mathcal B$,\n$\\Psi:\\mathcal B\\to\\mathcal C$ additive left exact functors forming a\ncomposable pair with acyclicity in the sense of [sk-def-groth-ss]\n($\\Phi$ sends injective objects to $\\Psi$-acyclic objects). Then for\nevery $A\\in\\mathcal A$ there is a first-quadrant cohomological spectral\nsequence\n\n$$\nE_2^{p,q}\\cong R^p\\Psi\\bigl(R^q\\Phi(A)\\bigr)\\ \\Longrightarrow\\ R^{p+q}(\\Psi\\circ\\Phi)(A).\n$$\n\nIn particular, let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of sites (or\nschemes with their étale or small Zariski sites). For an abelian\nsheaf $F$ on $X$, since $f_*$ carries injectives\nto $h_*$-acyclics ($f_*$ is right adjoint to the exact $f^{-1}$, so\nit preserves injectives), there is a spectral sequence\n\n$$\nE_2^{p,q}=R^ph_*R^qf_*F\\ \\Longrightarrow\\ R^{p+q}(hf)_*F.\n$$\n\nFor $Z$ the punctual site, so that $h_*=\\Gamma(Y,-)$, this is the\n*Leray* spectral sequence\n\n$$\nE_2^{p,q}=H^p(Y,R^qf_*F)\\ \\Longrightarrow\\ H^{p+q}(X,F).\n$$\n\nIn particular this includes $Y_{\\mathrm{zar}}$ and $X_{\\mathrm{zar}}$\nfor a morphism of schemes. For proper $f$ and coherent $F$ the\nZariski sequence is the spectral sequence of\n$\\Gamma(Y,-)\\circ f_*$ on $\\cO$-modules.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-groth-ss/_section.md",
+  "place": "node sk-thm-groth-ss, order 716",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0732"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0733"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F2"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-groth-ss",
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-spectral-sequence",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonnegative injective resolution $A\\to I^\\bullet$ in $\\mathcal A$, using [lem-sp-grothendieck-enough-injectives] and [def-sp-injective-resolutions]. Put $C^s=\\Phi(I^s)$ with differential $\\Phi(d_I^s)$. Additivity sends zero morphisms to zero, so $d_C^{s+1}d_C^s=\\Phi(d_I^{s+1}d_I^s)=0$; it also sends zero objects to zero. Hence $C$ is a nonnegative complex and $H^q(C)=R^q\\Phi(A)$ by [def-sp-left-exact-additive]. The category $\\mathcal B$ likewise has enough injectives. Apply [lem-sp-cartan-eilenberg-exists] to this nonnegative $C$, obtaining a first-quadrant CE resolution $C\\to J^{\\bullet,\\bullet}$, with original degree $s$ and resolution degree $t$. Set $D^{s,t}=\\Psi(J^{s,t})$ with the two differentials obtained by applying $\\Psi$. Functoriality and additivity preserve their commuting relation and zero squares. Thus [def-sp-double-complex-total] applies: its signed differential is $d_s+(-1)^s d_t$, whose square is zero by the cross-term cancellation written in that definition. For total degree $n\\ge0$ there are precisely $n+1$ possible summands, indexed by $s=0,\\ldots,n$; for $n<0$ there are none. Therefore this construction uses only finite biproducts in the abelian target $\\mathcal C$, requiring neither infinite coproducts nor enough injectives there. The same cited definition gives the two decreasing filtrations by subcomplexes, with $F^0\\operatorname{Tot}(D)^n=\\operatorname{Tot}(D)^n$ and $F^{n+1}\\operatorname{Tot}(D)^n=0$ for $n\\ge0$, exactly the filtrations to which the next step applies.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive",
+    "lem-sp-cartan-eilenberg-exists",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015H (definition-cartan-eilenberg), 015I (lemma-cartan-eilenberg), 015N (lemma-grothendieck-spectral-sequence), construction"
+   }
+  },
+  {
+   "text": "The composite $\\Psi\\circ\\Phi$ preserves finite biproducts and kernels: apply the preservation by $\\Phi$, then that by $\\Psi$. It is therefore additive left exact by [def-sp-left-exact-additive], so its right derived functors may be computed using $I^\\bullet$ from step 1. Apply [thm-sp-double-complex-spectral-sequences] to $D$. Its first spectral sequence has ${}'E_1^{s,t}=H^t(\\Psi J^{s,\\bullet})=R^t\\Psi(C^s)$, because each augmented column of $J$ is an injective resolution; this is precisely the derived-functor computation in [def-sp-left-exact-additive]. The graded-column differential is $(-1)^s\\Psi(d_t)$ by [def-sp-double-complex-total]. Its kernels and image subobjects equal those of $\\Psi(d_t)$: postcomposition with the target sign automorphism preserves the kernel, and $(-1)^s\\Psi(d_t)=\\Psi(d_t)(-1)^s$, so precomposition with the source sign automorphism preserves the image. Thus its cohomology is the displayed derived object. The $d_1$ maps are induced by $d_C$. For $t>0$ these terms vanish: $C^s=\\Phi(I^s)$ is $\\Psi$-acyclic by the hypothesis [sk-def-groth-ss]. In degree $t=0$, left exactness identifies the column kernel with $\\Psi(C^s)$. To check its differential, write $\\epsilon_s:C^s\\to J^{s,0}$ for the augmentation. The augmentation is a chain map, so $d_J^{s,0}\\epsilon_s=\\epsilon_{s+1}d_C^s$. Applying $\\Psi$ gives the same square. The kernel identifications use $\\Psi(\\epsilon_s)$, so this square identifies the induced $d_1$ with $\\Psi(d_C^s)$. Therefore ${}'E_2^{s,0}=H^s(\\Psi\\Phi(I^\\bullet))=R^s(\\Psi\\circ\\Phi)(A)$ and ${}'E_2^{s,t}=0$ for $t>0$. The last equality again uses the chosen injective resolution in $\\mathcal A$; it does not assert that $\\Phi(I^\\bullet)$ resolves $\\Phi(A)$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-left-exact-additive",
+    "sk-def-groth-ss",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), first spectral sequence; Tag 015N; homology.tex Tag 0130, signed graded-column differential"
+   }
+  },
+  {
+   "text": "Starting at ${}'E_2$, induct on $r\\ge2$: the page is supported on $t=0$, and its differentials are zero. The outgoing differential from $(s,0)$ targets $(s+r,1-r)$, whose second degree is negative; the incoming differential starts at $(s-r,r-1)$, which is zero by the positive second degree (or lies outside the first quadrant); every other term is already zero. For zero incoming and outgoing differentials, the kernel is the whole object and the incoming image is zero. Thus page homology identifies each entry with itself, and the spectral sequence page isomorphism gives $E_r^{s,t}\\cong E_{r+1}^{s,t}$. This preserves the row and its zero complement, proving the induction step. For each $n\\ge0$, compose the page-homology isomorphisms $E_r\\cong E_{r+1}$ for $r=2,\\ldots,n+1$ (the empty composite when $n=0$). They identify ${}'E_2^{n,0}$ with ${}'E_{n+2}^{n,0}$; the latter is the stable entry because $n+2>\\max(n,1)$ in [thm-sp-double-complex-spectral-sequences]. Thus ${}'E_\\infty^{n,0}\\cong{}'E_2^{n,0}$ by a finite composite, without taking a limit of pages. For every $0\\le s<n$, $s\\le n-1$ and $n-s+1\\le n+1$, so $n+2>\\max(s,n-s+1)$. Thus the cited stabilization bound gives ${}'E_\\infty^{s,n-s}={}'E_{n+2}^{s,n-s}=0$: the row-support induction applies since $n-s>0$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex), 0132 (lemma-first-quadrant-ss); elementary one-row collapse"
+   }
+  },
+  {
+   "text": "For total degree $n$, [thm-sp-double-complex-spectral-sequences] gives a finite image filtration on $H=H^n(\\operatorname{Tot}D)$, with $F^0H=H$, $F^{n+1}H=0$, and $F^sH/F^{s+1}H\\cong{}'E_\\infty^{s,n-s}$. Step 3 makes these quotients zero for $s<n$. Each inclusion $i_s:F^{s+1}H\\hookrightarrow F^sH$ is a monomorphism with zero cokernel. If $a,b:F^sH\\to T$ satisfy $ai_s=bi_s$, then $a-b$ factors through that zero cokernel and vanishes; hence $a=b$ and $i_s$ is an epimorphism. A morphism that is both mono and epi in an abelian category is an isomorphism. Define $c_n=i_0\\circ i_1\\circ\\cdots\\circ i_{n-1}:F^nH\\xrightarrow{\\sim}H$, taking $c_0=\\mathrm{id}_H$. Its inverse is the reverse composite $i_{n-1}^{-1}\\circ\\cdots\\circ i_0^{-1}$, since adjacent inverse pairs cancel. The quotient map $q_n:F^nH\\to F^nH/F^{n+1}H$ is an isomorphism because $F^{n+1}H=0$. Indeed the identity of $F^nH$ annihilates the zero subobject, so the cokernel property gives $a_n:F^nH/F^{n+1}H\\to F^nH$ with $a_n q_n=1$. Then $(q_n a_n)q_n=q_n$; since a cokernel is epi, $q_n a_n=1$. Thus $a_n=q_n^{-1}$. Let $e_n:F^nH/F^{n+1}H\\xrightarrow{\\sim}{}'E_\\infty^{n,0}$ be convergence, and let $b_n:{}'E_\\infty^{n,0}\\xrightarrow{\\sim}R^n(\\Psi\\circ\\Phi)(A)$ be the finite page identification of step 3 followed by step 2. Thus $u_n=b_n\\circ e_n\\circ q_n\\circ c_n^{-1}:H^n(\\operatorname{Tot}D)\\xrightarrow{\\sim}R^n(\\Psi\\circ\\Phi)(A)$. Put $v_n=c_n\\circ q_n^{-1}\\circ e_n^{-1}\\circ b_n^{-1}$. Associativity and the adjacent inverse identities give $u_nv_n=b_ne_ne_n^{-1}b_n^{-1}=1$ and $v_nu_n=c_nq_n^{-1}q_nc_n^{-1}=1$, so $v_n$ is its inverse. For $n=0$ the composites defining $c_n$ and its inverse are empty and the quotient is $H/0$; no filtration inclusion has to be inverted.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex), 0132 (lemma-first-quadrant-ss); elementary one-row collapse"
+   }
+  },
+  {
+   "text": "For the other filtration use [lem-sp-cartan-eilenberg-properties] with exchanged indices: its $C^{p,q}$ is our $J^{q,p}$, so the resolution degree is its first index. It gives, in every fixed resolution degree $t$, $H^q(\\Psi(J^{\\bullet,t}))\\cong\\Psi(H^q(J^{\\bullet,t}))$, and the complexes $t\\mapsto H^q(J^{\\bullet,t})$ are injective resolutions of $H^q(C)$. Write $v_t:H^q(\\Psi J^{\\bullet,t})\\to\\Psi(H^qJ^{\\bullet,t})$ for the identification induced by cycles and boundaries. Commuting differentials carry horizontal cycles to cycles and boundaries to boundaries. Their inclusion and quotient squares give $\\Psi(H^q d_t)v_t=v_{t+1}H^q(\\Psi d_t)$: both composites agree after the cycle inclusion and boundary quotient defining cohomology. Thus the $v_t$ identify the corresponding complexes. With the raw total differential of step 1, the second-page computation has resolution differential $(-1)^q\\Psi(d_t)$; multiplication by $(-1)^{pq}$ in resolution degree $p$ identifies this complex with the one with differential $\\Psi(d_t)$, since $(-1)^{(p+1)q}(-1)^q=(-1)^{pq}$. Consequently the second spectral sequence of [thm-sp-double-complex-spectral-sequences], indexed by resolution degree first, has ${}''E_2^{p,q}=H^p_t\\Psi(H^q_s(J))\\cong R^p\\Psi(H^q(C))=R^p\\Psi(R^q\\Phi(A))$, by [def-sp-left-exact-additive]. It converges to the same $H^{p+q}(\\operatorname{Tot}D)$ with its finite image filtration. The last identification applies $R^p\\Psi$ to $H^q(C)\\cong R^q\\Phi(A)$ from step 1; applying it also to the inverse gives the inverse map, by functoriality. For fixed $q$, write $a_p=(-1)^{pq}\\mathrm{id}$ and $\\delta_p=(-1)^q\\Psi(d_t)$. The displayed identity says $a_{p+1}\\delta_p=\\Psi(d_t)a_p$, and $a_p^2=\\mathrm{id}$, so the same maps give the inverse chain map. They therefore induce inverse maps on kernels modulo images, identifying the two cohomology objects. At $p=0$, $a_0=\\mathrm{id}$; in characteristic two every $a_p$ is the identity.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-properties",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), second spectral sequence; Tag 015N; homology.tex Tag 0130, second-filtration differential sign"
+   }
+  },
+  {
+   "text": "Use the isomorphism $u_n$ of step 4 to put the second spectral sequence's filtration on $R^n(\\Psi\\circ\\Phi)(A)$. If $j_p:F^pH^n\\hookrightarrow H^n$ is its image-filtration inclusion and $i_p:F^{p+1}H^n\\hookrightarrow F^pH^n$ its transition, set $\\widetilde j_p=u_n\\circ j_p$. These are monomorphisms, and $\\widetilde j_p\\circ i_p=u_n\\circ j_p\\circ i_p=u_n\\circ j_{p+1}=\\widetilde j_{p+1}$. Thus the same objects and transition maps represent a decreasing filtration on the new abutment. Its zeroth subobject is the whole object because $u_n$ is an isomorphism, and its $(n+1)$st subobject is zero. Its successive quotients are the cokernels of the unchanged $i_p$. Write $Q_p=\\operatorname{coker}(i_p)$ and $e_{p,q}:Q_p\\xrightarrow{\\sim}{}''E_\\infty^{p,q}$ for the convergence isomorphism of [thm-sp-double-complex-spectral-sequences], where $p+q=n$. The new successive quotient is this same $Q_p$, so take $e_{p,q}$ itself as its graded-piece isomorphism; its inverse is unchanged as well. For $p+q=n$ with $p,q\\ge0$, $n+2>\\max(p,q+1)$, so its page $n+2$ is stable by [thm-sp-double-complex-spectral-sequences]. This is exactly the convention $E_\\infty^{p,q}=E_{p+q+2}^{p,q}$ of [sk-def-groth-ss], giving its required abutment. No injectives or infinite sums in the target category were used: steps 1--6 require only enough injectives in the two source categories and an abelian target. Define the required witness by $E_r^{p,q}={}''E_r^{p,q}$ for $r\\ge2$, with exactly the same differentials and page-homology isomorphisms. This satisfies [def-sp-spectral-sequence] with starting page 2: every required page and transition is retained. Step 5 gives its stated $E_2$-isomorphisms, and its finite abutment filtration is the one just constructed; the stable page $p+q+2$ is retained even for $p=q=0$.",
+   "uses": [
+    "sk-def-groth-ss",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), second spectral sequence; Tag 015N; homology.tex Tag 0130, second-filtration differential sign"
+   }
+  },
+  {
+   "text": "Now take abelian sheaves on the sites $X,Y,Z$ of the statement, in a common universe in which the sites are small. These categories are abelian with enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives], so the construction in steps 1--6 applies (the Grothendieck hypothesis there was used only to obtain enough injectives). By [def-weil-pbc-sites-and-cohomology], the inverse and direct images are adjoint and the direct image is precomposition. For sheaf morphisms $a,b$, its action satisfies $(f_*(a+b))_U=(a+b)_{u(U)}=a_{u(U)}+b_{u(U)}$, so it is additive; the same calculation applies to $h_*$. Since kernels and finite products of abelian sheaves are sectionwise by [lem-weil-pbc-sheafification-exact], precomposition preserves them; hence $f_*,h_*$ are left exact. The inverse image $f^{-1}$ is exact by [lem-weil-pbc-site-pullback-abelian-exact]. Apply [lem-sp-right-adjoint-preserves-injectives] to the exact functor $f^{-1}:\\operatorname{Ab}(Y)\\to\\operatorname{Ab}(X)$ with right adjoint $f_*$. Explicitly, for a monomorphism $M\\hookrightarrow N$ on $Y$, exactness gives a monomorphism $f^{-1}M\\hookrightarrow f^{-1}N$. Injectivity of $I$ on $X$ makes restriction into $I$ surjective; adjunction identifies that restriction with $\\operatorname{Hom}(N,f_*I)\\to\\operatorname{Hom}(M,f_*I)$. Thus $f_*I$ is injective on $Y$. The zero object is injective: every restriction map into it is a map between singleton Hom sets and is surjective. An injective $J$ is $h_*$-acyclic directly: its injective resolution $J\\xrightarrow{1}J\\to0\\to\\cdots$ has zero positive cohomology after any additive functor, by [def-sp-injective-resolutions] and [def-sp-left-exact-additive]. Therefore the required acyclicity condition holds.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), abelian inverse image; Tag 03CN (lemma-abelian-abelian); sites-cohomology.tex Tag 0734 (lemma-relative-Leray), specialized to abelian sheaves"
+   }
+  },
+  {
+   "text": "Apply steps 1--6 with $(\\Phi,\\Psi)=(f_*,h_*)$. By [lem-weil-pbc-site-morphism-composition], $(hf)_*=h_*f_*$ on abelian sheaves, so its right derived functors are the abutment $R^n(hf)_*$. This yields the asserted relative sequence. For the punctual target, $h_*$ is global sections by its definition, and the same composition identifies $(hf)_*$ with global sections on $X$. The derived-functor convention therefore gives $R^ph_*=H^p(Y,-)$ and $R^n(hf)_*=H^n(X,-)$, so substituting these identifications into the relative sequence gives the Leray formula. The site cohomology convention is [def-weil-pbc-sites-and-cohomology]; if a site has no final object, global sections here means sections of the whole topos, namely direct image to the punctual topos, as in the statement, not evaluation at an object assumed to exist. The small Zariski sites [def-sc-zariski-site] and the small etale sites [def-weil-pbc-etale-site] are instances of the sites to which this argument applies, independently of the punctual specialization. For one injective resolution $F\\to I^\\bullet$ on $X$, put $K^k=(hf)_*I^k=h_*f_*I^k$. Its differential is $(hf)_*(d_I^k)=h_*f_*(d_I^k)$, since the cited functor equality holds on morphisms too. By [def-sp-left-exact-additive], both derived functors are computed as $H^n(K^\\bullet)$. Thus the abutment identification is computed on a single identical complex, including its differential.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sc-zariski-site",
+    "def-weil-pbc-etale-site",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0732 (lemma-Leray), 0734 (lemma-relative-Leray); sites.tex Tag 03CB (lemma-composition-morphisms-sites)"
+   }
+  },
+  {
+   "text": "For morphisms of schemes $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ with their small etale sites [def-weil-pbc-etale-site] or small Zariski sites [def-sc-zariski-site], the inputs of step 7 come from the following nodes. *Etale sites.* By [lem-weil-pbc-sets-etale-inverse-image-exact], base change $V\\mapsto V\\times_YX$ defines a morphism of sites $X_{\\Et}\\to Y_{\\Et}$ in the sense of [def-weil-pbc-sites-and-cohomology] (3), with $f_*F(V)=F(V\\times_YX)$; the same holds for $h$ and $hf$, so step 7 applies verbatim. The composite morphism $h\\circ f$ of [lem-weil-pbc-site-morphism-composition] is given by $W\\mapsto(W\\times_ZY)\\times_YX$, and the canonical isomorphisms $(W\\times_ZY)\\times_YX\\cong W\\times_ZX$, natural in $W$, identify it with the base-change functor of $hf$. Hence $(hf)_*\\cong h_*f_*$ naturally, and isomorphic left exact functors have isomorphic derived functors (apply the isomorphism termwise to one injective resolution, [def-sp-left-exact-additive]). *Zariski sites.* An abelian sheaf on $X_{\\rm Zar}$ is an abelian sheaf on the underlying space of $X$, and $f_*F(V)=F(f^{-1}V)$ is the direct image along the continuous map $f$. By [lem-sc-topological-pushforward-injective], $f^{-1}$ is exact and left adjoint to $f_*$, and $f_*$ sends injectives to injectives. The remaining inputs of step 7 (enough injectives, left exactness from sectionwise kernels, acyclicity of injectives) are as there. Here $(hf)^{-1}W=f^{-1}(h^{-1}W)$, so $(hf)_*=h_*f_*$ holds exactly. *Leray formula for schemes.* For both kinds of site, $Y$ (resp. $\\mathrm{id}_Y$) is a final object, and $\\Gamma(Y,-)$ is evaluation there. By [def-weil-pbc-sites-and-cohomology] (2) it is additive and left exact, and $H^p(Y,\\mathcal I)=0$ for injective $\\mathcal I$ and $p>0$. Moreover $\\Gamma(Y,f_*F)=F(X)=\\Gamma(X,F)$, since $Y\\times_YX=X$ and $f^{-1}Y=X$. Since $f_*$ preserves injectives, steps 1--6 applied to $(f_*,\\Gamma(Y,-))$ give $H^p(Y,R^qf_*F)\\Rightarrow H^{p+q}(X,F)$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-sp-left-exact-additive",
+    "lem-sc-topological-pushforward-injective",
+    "def-weil-pbc-etale-site",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0732 (lemma-Leray), 0734 (lemma-relative-Leray), applied to the morphisms of small etale and Zariski sites induced by morphisms of schemes"
+   }
+  },
+  {
+   "text": "Take the categories of all $\\mathcal O_X$-modules and all $\\mathcal O_Y$-modules; they are Grothendieck abelian by [lem-pc-scheme-modules-grothendieck-abelian]. Module direct image has the sectionwise formula of [def-pc-ringed-spaces-derived-direct-image], with scalars acting through $f^\\sharp$; its action on morphisms preserves sums. Kernels are sectionwise by [def-weil-sheaf-of-modules-category]. The product sheaf $U\\mapsto M(U)\\times N(U)$ has componentwise restrictions and scalar action: pairs glue uniquely since each component does. Precomposition preserves this product, the zero sheaf and sectionwise kernels. Thus module direct image is additive left exact. So is $\\Gamma(Y,-)$ to abelian groups by [lem-sc-global-sections-left-exact]. By [lem-weil-pbc-module-pushforward-injective-acyclic] with $V=Y$, $f_*I$ is section-acyclic for injective $\\mathcal O_X$-modules $I$. This vanishing is stated in $\\mathcal O_Y(Y)$-modules. Compute module-valued and group-valued sections on the same injective resolution in $\\operatorname{Mod}(\\mathcal O_Y)$. Forgetting scalars keeps its kernel groups, image groups and hence cohomology quotient groups; the vanishing therefore holds for group-valued sections too. On objects and morphisms, $\\Gamma(Y,f_*M)=M(f^{-1}Y)=M(X)=\\Gamma(X,M)$. Apply steps 1--6. For an injective resolution $F\\to I^\\bullet$, this equality identifies both composite complexes, including $\\Gamma(Y,f_*d_I^k)=\\Gamma(X,d_I^k)$ in each degree $k$. Their cohomology objects are consequently the same. By [pqf-def-cohomology] the result is $H^p(Y,R^qf_*F)\\Rightarrow H^{p+q}(X,F)$. This applies to every module, in particular coherent $F$ and proper $f$; neither coherence nor properness supplies acyclicity. Exact tensor pullback $f^*$ is not used.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EX (lemma-pushforward-injective), part (2); Tag 01F2 (lemma-Leray); Tag 01F6 (lemma-relative-Leray)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-sp-cartan-eilenberg-exists",
+  "def-sp-double-complex-total",
+  "thm-sp-double-complex-spectral-sequences",
+  "sk-def-groth-ss",
+  "lem-sp-cartan-eilenberg-properties",
+  "def-sp-spectral-sequence",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-sc-topological-pushforward-injective",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015H, 015I, 015J, 015N; Homology 0130 and 0132; site specializations in sites-cohomology.tex 0732 and 0734; module specialization in cohomology.tex 01EX and 01F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral sequence for a composite of left exact functors sending injectives to acyclic objects",
+   "results": "mapDerivedCategoryFactorsh, mapDerivedCategoryFactors, isZero_rightDerived_obj_injective_succ, rightDerived: derived functor infrastructure, not the sequence or the site/module specializations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerived",
+   "results": "Loogle answered unknown identifier 'Functor.rightDerived'; retried with the full namespace.",
+   "date": "2026-10-21",
+   "verdict": "query error: unknown identifier; corrected and rerun with full namespace"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckSpectral|Cartan.Eilenberg|spectral.sequence",
+   "results": "CategoryTheory/Abelian: no hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Leray spectral sequence for higher direct image functors on sheaves",
+   "results": "TopCat.Sheaf.pushforward, SheafOfModules.pushforwardComp and pushforwardSections, Scheme.Modules.pullbackPushforwardAdjunction and instAdditivePushforward; these construct the functors but do not give a spectral sequence.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two spectral sequences of a first quadrant double complex computing derived functors of composition",
+   "results": "HasGoodTrifunctor objects, mapDerivedCategoryFactors, NatTrans.rightDerived_comp_assoc and mapHomologicalComplexUpToQuasiIsoFactors; none supplies the asserted pages and abutment.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "rightDerived, rightDerivedZeroIsoSelf, isZero_rightDerived_obj_injective_succ and natural transformations; source read in Mathlib/CategoryTheory/Abelian/RightDerived.lean:110-155. These compute or manipulate single derived functors, not the composition spectral sequence.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck|spectralSequence",
+   "results": "Algebra/Homology/SpectralSequence: ComplexShape.lean:34 and Basic.lean:37 provide shapes and spectral-sequence structures; source read at Basic.lean:30-62. No Grothendieck or Leray construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 716,
+ "blueprint_uses": [
+  "sk-def-groth-ss"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-groth-ss",
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "sk-thm-groth-ss",
+  "worker": "stage1",
+  "summary": "Repair of returned head 14ee54f1cae768bd09654e4798a06f656118a7d4. Compared the retained delivery against that exact head and the current read-only DAG: the retained item is identical to the return, and all 29 supporting records are unchanged. Refreshed the current imported record with only its eight split-owned fields and refreshed the unit with only realized/realized_by. In step 7, explicitly verified injectivity of the zero terms of the length-zero resolution by surjectivity of maps between singleton Hom sets, completing the stated acyclicity computation. Statement, hypotheses, route, dependencies and all seven actual searches are retained. Initial dry run passed at 653df27bd84. No new nodes or Mathlib leaves. Live completion promotion remains L's operation; no maintainer metadata is changed. Reviewer (maintainer reader, 2026-10-22, head 83112f5072d8): re-inserted the scheme-to-site step 9 (etale sites via lem-weil-pbc-sets-etale-inverse-image-exact, Zariski sites via lem-sc-topological-pushforward-injective, Gamma(Y,-) as evaluation at the final object Y) dropped by this push; the module case is step 10.",
+  "blueprint": "Current main-20261015 companion proof: step 1 -> delivery step 1; step 2 -> delivery steps 2--4; step 3 -> delivery steps 5--6; step 4 -> delivery steps 7--9; step 5 -> delivery step 10. Legacy dag/units text has an additional functoriality/base-change clause, realized separately by its existing carriers as documented in report.md.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-cartan-eilenberg-exists",
+    "why": "The unit explicitly chooses a Cartan--Eilenberg resolution; this generic existence lemma provides precisely that input in any abelian category with enough injectives."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The unit uses both filtrations of a first-quadrant double complex; this generic theorem supplies their pages and finite image-filtration convergence in an arbitrary abelian target."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Supplies the enough-injectives hypothesis for arbitrary small sites, rather than only the etale dictionary of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Only its statement clause (1), sectionwise limits of abelian sheaves, is used to check left exactness of precomposition."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Supplies exactness of abelian inverse image for a general morphism of sites, the acyclicity step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Only the statement equality of composed abelian direct images is used to identify the abutment."
+   },
+   {
+    "node": "lem-pc-scheme-modules-grothendieck-abelian",
+    "why": "Supplies the ambient category hypothesis for the Zariski module specialization; no coherent-subcategory injectivity is asserted."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Supplies additivity and left exactness for module global sections in the last specialization."
+   },
+   {
+    "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "why": "Supplies exactly the unit last steps required acyclicity for global sections, correcting the faulty attempted proof using j_! I|_U -> I; no alternative spectral-sequence construction is substituted."
+   },
+   {
+    "node": "lem-sp-cartan-eilenberg-properties",
+    "why": "The unit uses the cohomology-resolutions and split-exactness properties of a Cartan--Eilenberg resolution. This generic lemma supplies exactly the commutation of the additive left exact functor with horizontal cohomology; its exchanged indices are specified in delivery step 5."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Step 9: a morphism of schemes induces a morphism of small etale sites (exact inverse image), the hypothesis of step 7 for the etale instance of the statement; no node of this unit gives it."
+   },
+   {
+    "node": "lem-sc-topological-pushforward-injective",
+    "why": "Step 9: for the Zariski instance, exact topological inverse image left adjoint to f_*, so f_* preserves injectives; no node of this unit gives it."
+   }
+  ]
+ }
+}

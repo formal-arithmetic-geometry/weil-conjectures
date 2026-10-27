@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-separated-lqf-affine-finite-set",
+ "kind": "statement",
+ "title": "Finite sets have affine neighbourhoods over an affine locally quasi-finite target",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], with $Y$ affine [def-weil-affine-spectrum]. Suppose $f$ is separated, meaning its diagonal $X\\to X\\times_YX$ is a closed immersion [def-weil-proper-morphism, def-pc-fibre-product], and locally quasi-finite [pqf-def-quasifinite]. For every finite subset $E\\subseteq |X|$, there is an affine open subscheme $W\\subseteq X$ [def-weil-open-immersion] containing $E$. No quasi-compactness, Noetherianity or finite-type hypothesis on $X$ is imposed; $E=\\varnothing$ and $X=\\varnothing$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07S0, lemma-separated-locally-quasi-finite-over-affine."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "pqf-def-quasifinite",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If $E=\\varnothing$, take the empty open subscheme of $X$. It is affine: the basic open $D_Y(0)$ in the given affine scheme $Y$ is empty (every prime contains $0$) and affine by [lem-weil-pbc-affine-open-section-vanishing-prime](b); all empty open subschemes have the same empty structure sheaf. This includes $X=\\varnothing$. Henceforth enumerate $E=\\{x_1,\\ldots,x_n\\}$ with $n\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3, lemma-standard-open-affine, applied to 0; empty case of Tag 07S0."
+   }
+  },
+  {
+   "text": "For each $x_i$, choose an affine open $U_i\\subseteq X$ containing it by [lem-weil-pbc-affine-opens-basis]. Put $U=\\bigcup_{i=1}^n U_i$. Each $U_i$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Any open cover of $U$ restricts to a cover of each $U_i$; taking their finitely many finite subcovers gives a finite subcover of $U$. Thus $U$ is a quasi-compact open subscheme containing $E$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07S0, lemma-separated-locally-quasi-finite-over-affine, first sentence of proof; affine basis Tag 01IT."
+   }
+  },
+  {
+   "text": "Write $h=f|_U:U\\to Y$. It is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens], using the target open $Y$ itself. It is separated: the universal property [def-pc-fibre-product] identifies the pullback of $\\Delta_f$ along $U\\times_YU\\to X\\times_YX$ with $\\Delta_h:U\\to U\\times_YU$. Indeed a test morphism to this pullback is a pair of maps into $U$ with identical images in $X$; the open inclusion is a monomorphism by [def-weil-open-immersion], so the two maps into $U$ coincide. Since $\\Delta_f$ is closed, [lem-weil-pbc-closed-immersion-base-change] makes $\\Delta_h$ closed.",
+   "uses": [
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY, lemma-base-change-immersion, applied to the restricted diagonal; local quasi-finiteness: Morphisms Tag 01TH, lemma-quasi-finite-at-point-characterize (4)."
+   }
+  },
+  {
+   "text": "The affine scheme $Y$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Since $U$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $h:U\\to Y$ quasi-compact. By [lem-weil-pbc-lqf-locally-finite-type], $h$ is locally of finite type. Thus $h$ has all four hypotheses of [lemma-nagata-quasi-affine-morphism-of-quasi-finite]: separated, quasi-compact, locally quasi-finite and locally of finite type. That lemma makes $h$ quasi-affine. By [def-nagata-quasi-affine-morphism], evaluating at the affine open $Y$ shows that $U$ is a quasi-affine scheme: there are a ring $A$ and an isomorphism $j:U\\xrightarrow{\\sim}O$ onto a quasi-compact open $O\\subseteq\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07S0, second sentence, applying Tag 02LR, lemma-quasi-finite-separated-quasi-affine; quasi-compactness over a quasi-separated target: Schemes Tag 03GI."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p_i=j(x_i)\\in O\\subseteq\\operatorname{Spec}A$. By [lem-weil-pbc-spec-localization-away-basic-open](i), choose $a_i\\in A$ with $\\mathfrak p_i\\in D(a_i)\\subseteq O$. Set $J=(a_1,\\ldots,a_n)$. For each $i$, $a_i\\in J\\setminus\\mathfrak p_i$, so $J\\not\\subseteq\\mathfrak p_i$. Apply [lem-weil-pbc-prime-avoidance] to these $n\\geq1$ prime ideals to obtain $a\\in J$ lying in none of them. Then $j(E)\\subseteq D(a)$. If $\\mathfrak q\\notin O$, all $a_i$ belong to $\\mathfrak q$ because $D(a_i)\\subseteq O$; hence $J\\subseteq\\mathfrak q$ and $a\\in\\mathfrak q$. Therefore $D(a)\\subseteq O$. This writes out the finite-set shrinking inside the ambient affine scheme.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DS, lemma-silly, its first slogan and prime avoidance statement; Tag 00E0, lemma-Zariski-topology. This is the direct proof of case (1) of Properties Tag 01ZY used by Tag 07S0."
+   }
+  },
+  {
+   "text": "The principal open $D(a)$ of $\\operatorname{Spec}A$ is affine by [lem-weil-pbc-affine-open-section-vanishing-prime](b). Set $W=j^{-1}(D(a))\\subseteq U$. Since $D(a)\\subseteq O$, the isomorphism $j:U\\cong O$ restricts to an isomorphism $W\\cong D(a)$, so $W$ is affine. Moreover $E\\subseteq W$, and $W$ is open in $X$ because it is open in the open subscheme $U$. Its structure sheaf is the restriction of $\\mathcal O_X$, as follows directly from [def-weil-open-immersion]. Thus $W$ is the required affine open subscheme of $X$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 07S0, final sentence; affineness of a principal open: Schemes Tag 01I3, lemma-standard-open-affine."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "def-nagata-quasi-affine-morphism",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07S0, lemma-separated-locally-quasi-finite-over-affine; final invocation of Properties Tag 01ZY expanded using the elementary affine special case of Algebra Tag 00DS (first slogan)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite set of points of a scheme separated locally quasi finite over an affine scheme is contained in an affine open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [X.IsQuasiAffine] → X.OpenCover\", \"doc\": \"Given a quasi-affine scheme $X$, this function constructs an open cover of $X$ consisting of basic open subsets $X_f$ (for sections $f$ of the structure sheaf) that collectively cover the entire topol\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  IsCompact ↑U →\\n    ∃ n f V,\\n      (∀ (i : Fin n), AlgebraicGeometry.IsAffineOpen (V i)) ∧\\n        ⋃ i, ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f (f i)).base) '' ↑(V i\", \"doc\": \"For any quasi-compact hypercover $\\\\mathcal{U}$ of a scheme $S$ and a compact open subset $U \\\\subseteq S$, there exist a natural number $n$, elements $f_1, \\\\ldots, f_n$ in the zeroth component $\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both compact and open if and only if there exists a finite set $ s $ of affine open subsets of $ X $ such that $ U $ is the union of these affine open subsets.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"LocallyQuasiFinite\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[aA]ffine|[aA]ffine.*finite|[qQ]uasi[Aa]ffine",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated locally quasi finite scheme over affine admits affine neighborhoods of finite sets of points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{I : Type*} (U : I → X.Opens) (hU : IsOpenCover U) (hU₁ : ∀ i, IsAffineOpen (U i))\\n  (hU₂ : ∀ i j, IsCompact (X := X) (U i ∩ U j)) : QuasiSeparatedSpace X\", \"doc\": \"If a scheme $X$ has an open cover consisting of affine open subsets such that the intersection of any two elements of the cover is quasi-compact, then $X$ is a quasi-separated space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a quasi affine scheme lies in one affine open subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [X.IsQuasiAffine] → X.OpenCover\", \"doc\": \"Given a quasi-affine scheme $X$, this function constructs an open cover of $X$ consisting of basic open subsets $X_f$ (for sections $f$ of the structure sheaf) that collectively cover the entire topol\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U → ∃ W, AlgebraicGeometry.IsAffineOpen W ∧ x ∈ W ∧ W.carrier ⊆ ↑U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X],\\n  (∀ (x : ↥X), ∃ r, AlgebraicGeometry.IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) → X.IsQuasiAffine\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, AlgebraicGeometry.IsAffineOpen U → IsQuasiSeparated ↑U\", \"doc\": \"Every affine open subset $ U $ of a scheme $ X $ is quasi-separated, meaning that the intersection of any two quasi-compact open subsets of $ U $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : X.IsQuasiAffine] (i : { r // AlgebraicGeometry.IsAffineOpen (X.basicOpen r) }),\\n  X.openCoverBasicOpenTop.f i = (X.basicOpen ↑i).ι\", \"doc\": \"For a quasi-affine scheme $X$, the open cover constructed by basic open subsets $X_f$ (for sections $f$ of the structure sheaf) has inclusion maps given by the canonical morphisms $X_f \\to X$ associate\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, categorical groupoids, or ring actions do not state this assertion for the objects and hypotheses given."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[aA]ffine|[aA]ffine.*finite|[qQ]uasi[Aa]ffine",
+   "results": "[grep] OK 25 hit(s). Read the output: finite affine coproducts in Limits.lean:651,664,676,685,700; AffineTransitionLimit.lean:12,57,346,413,594; QuasiFinite.lean:19,55,80,91,92; FiniteType.lean:18,39,51,58,122; Affine.lean:340; Flat.lean:142,443. None gives an affine neighbourhood of an arbitrary finite set for a separated locally quasi-finite map.",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary affine covers and quasi-affine scheme criteria, no finite-set neighbourhood theorem under these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"LocallyQuasiFinite\"",
+   "results": "{\"t\": \"2026-10-23T12:02:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparated\\\", \\\"LocallyQuasiFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, single-point affine neighbourhoods, finite morphism criteria and affine transition-limit lemmas do not give the finite-set conclusion for arbitrary separated locally quasi-finite schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Aa]ffine|[Qq]uasi[Aa]ffine",
+   "results": "{\"t\": \"2026-10-23T12:02:00Z\", \"tool\": \"grep\", \"query\": \"exists.*[Aa]ffine|[Qq]uasi[Aa]ffine\", \"sub\": \"AlgebraicGeometry/QuasiAffine.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"18\", \"34\", \"39\", \"41\"], \"digest\": \"4ca16f771809dfbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, single-point affine neighbourhoods, finite morphism criteria and affine transition-limit lemmas do not give the finite-set conclusion for arbitrary separated locally quasi-finite schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separated locally quasi finite morphism to an affine scheme every finite set of points has an affine open neighborhood",
+   "results": "{\"t\": \"2026-10-23T12:02:01Z\", \"tool\": \"leansearch\", \"query\": \"For a separated locally quasi finite morphism to an affine scheme every finite set of points has an affine open neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\"], \"digest\": \"0a0d368238a14fac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, single-point affine neighbourhoods, finite morphism criteria and affine transition-limit lemmas do not give the finite-set conclusion for arbitrary separated locally quasi-finite schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a scheme separated and locally quasi finite over an affine scheme has an affine open neighborhood",
+   "results": "{\"t\": \"2026-10-23T12:02:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite subset of a scheme separated and locally quasi finite over an affine scheme has an affine open neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\"], \"digest\": \"b884f2a6e836eabf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, single-point affine neighbourhoods, finite morphism criteria and affine transition-limit lemmas do not give the finite-set conclusion for arbitrary separated locally quasi-finite schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*finite.*set|finite.*set.*affine|exists.*[Aa]ffine.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-23T12:12:04Z\", \"tool\": \"grep\", \"query\": \"affine.*finite.*set|finite.*set.*affine|exists.*[Aa]ffine.*[Ff]inite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"dd127636b620fa22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, single-point affine neighbourhoods, finite morphism criteria and affine transition-limit lemmas do not give the finite-set conclusion for arbitrary separated locally quasi-finite schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any finite collection of points of a locally quasi finite separated scheme over Spec R is contained in a single affine open",
+   "results": "{\"t\": \"2026-10-23T12:12:07Z\", \"tool\": \"leanfinder\", \"query\": \"Any finite collection of points of a locally quasi finite separated scheme over Spec R is contained in a single affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\"], \"digest\": \"8242bfcea26355cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, single-point affine neighbourhoods, finite morphism criteria and affine transition-limit lemmas do not give the finite-set conclusion for arbitrary separated locally quasi-finite schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Invariant-ring quotient of a stack with a finite flat affine cover. Supporting input: Finite sets have affine neighbourhoods over an affine locally quasi-finite target.",
+   "via": [
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separated-lqf-affine-finite-set",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 07S0 using existing affine basis, compactness, restriction, relative Zariski main and prime avoidance nodes. No new nodes. Kept the statement, all inherited searches and blueprint ancestry. The affine finite-set shrink is explicit, including arbitrary nonclosed points and the empty case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Invariant-ring quotient of a stack with a finite flat affine cover. Supporting input: Finite sets have affine neighbourhoods over an affine locally quasi-finite target.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic restriction of local quasi-finiteness, required for the chosen quasi-compact open; this unit has no version."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic implication needed to verify the local finite-type hypothesis of the existing Zariski main lemma; not a replacement for a unit step."
+   },
+   {
+    "node": "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "why": "Generic Zariski main input exactly corresponding to Stacks 02LR in the proof of 07S0; this unit has no version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a3dfa9830",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a3dfa9830 (reviewer sub-agent of L); spot-checked: I read the whole item (6 steps, no new nodes) against Stacks 07S0 (more-morphisms.tex l.12662), 02LR (l.12429) and Properties 01P6 (l.2407). Compared with the live node, the statement, stmt_deps, source and blueprint are identical; the base search records are kept and 6 are appended. There is no repair note, so this is not a re-split. Step 1: the empty case is handled with D_Y(0) via section-vanishing-prime(b). Step 2: the finite union of affine U_i is quasi-compact, and no intersection of affines is used. Step 3: local quasi-finiteness restricts to U by lqf-restriction-to-opens (V=Y). Separatedness of U->Y was checked: the pullback of Delta_f along UxU->XxX is Delta_h because the open inclusion is a monomorphism, and closed-immersion-base-change then applies. Step 4: qcqs-permanence(1) gives quasi-compactness (U qc, Y qs) and lqf-locally-finite-type gives finite type, so the Nagata ZMT lemma makes h quasi-affine. The quasi-affine definition at X'=Y makes U a qc open O of Spec A, matching 01P6. Step 5: prime avoidance on the n>=1 primes j(x_i) with J=(a_i), D(a_i)⊆O, gives a; D(a)⊆O was verified (q outside O implies J⊆q). Step 6: D(a) is affine and j restricts to W≅D(a). proof_deps is exactly the union of the uses lists. Edge cases tested: empty set or empty X, an infinite disjoint union, generic plus closed point of a DVR, and the doubled origin (excluded, which shows separatedness is needed). No duplicate of 07S0 in the DAG (lem-sc-ample-finite-set-affine has an ampleness hypothesis). The three generic tool_uses (lqf restriction, lqf⇒lft, Nagata 02LR lemma) are accepted. No SGA. Maintainer note: blueprint.from.node=null is inherited from the base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedLqfAffineFiniteSet",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_of_finite_of_isLocallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedLqfAffineFiniteSet.lean",
+  "statement": "theorem exists_isAffineOpen_of_finite_of_isLocallyQuasiFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y] [IsSeparated f] (hf : f.IsLocallyQuasiFinite) (E : Set X) (hE : E.Finite) : ∃ W : X.Opens, IsAffineOpen W ∧ E ⊆ W",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c84a8e7d4",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 07S0 (more-morphisms.tex 12661-12675) clause by clause: Scheme.{u}, [IsAffine Y], [IsSeparated f], hf : f.IsLocallyQuasiFinite (recorded pqf-def-quasifinite, Stacks 01TD with local finite type, read at QuasiFiniteMorphism.lean:55), E : Set X finite, ∃ W : X.Opens, IsAffineOpen W ∧ E ⊆ W; no extra hypotheses; empty E/X, Y=∅, non-closed points, non-qc X covered. Node diff vs live: only lean field. lean.statement verbatim. No existing declaration or name collision (grep Sheaf/WeilConjectures/Mathlib). Theorem sorry only, no defs; docstrings carry source and blueprint id and the node's 6 proof steps; imports exist; report has both required sections. No compile needed (no change)."
+ }
+}

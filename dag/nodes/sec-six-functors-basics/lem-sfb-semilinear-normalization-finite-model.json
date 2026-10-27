@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-semilinear-normalization-finite-model",
+ "kind": "statement",
+ "title": "The finite equivariant normalization model of a prescribed separable field extension",
+ "statement": "Let $k$ be a field, let $S$ be a normal integral projective finite-type $k$-scheme, and let a finite group $H$ act on $S$ and $k$ compatibly, allowing nonfaithful actions. Put $K=k(S)$ and let $A_h=(h^{-1})^*$ be the induced left action on $K$. Let $M/K$ be a prescribed finite separable extension. Suppose given a finite group $J$, a surjective homomorphism $\\rho:J\\to H$, and a homomorphism $\\sigma:J\\to\\operatorname{Aut}(M)$ such that $\\sigma_j|_K=A_{\\rho(j)}$. Let $a:W\\to S$ be the normalization of $S$ in $M$, defined by [def-fin-normalization-extension]. Then $W$ is normal integral projective and of finite type over $k$, its function field is canonically $M$, and $a$ is finite and surjective. There exists a dense open $V\\subset S$ such that $a^{-1}V\\to V$ is etale. For every nonempty affine open $U=\\operatorname{Spec}B\\subset S$, its inverse image is $\\operatorname{Spec}\\overline B^{\\,M}$, with $\\overline B^{\\,M}$ the integral closure of $B$ in $M$, and its generic fibre is $\\operatorname{Spec}M$. There is a $J$-action on $W$ whose generic geometric action is $\\operatorname{Spec}(\\sigma_j^{-1})$ and for which $a\\circ j=\\rho(j)\\circ a$. The action on $k$ is the original one composed with $\\rho$, and the induced left field action on $k(W)=M$ is exactly $\\sigma$.\n\nNormal means that local rings are integrally closed domains; integral closure consists of elements satisfying a monic polynomial over the base ring. Field, integral scheme, projectivity (a closed embedding in a finite projective space), finite type, finite morphism, surjectivity, etaleness, function field and field extensions use [def-weil-field], [def-pc-integral-scheme], [def-kun-projective], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism], [def-sc-function-field], [def-pc-field-extension] and [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.6 and Situation 5.3, printed pp.613--614, prescribed equivariant normalization model; Stacks Morphisms 0AVK (lemma-nagata-normalization-finite-general). Agent elaboration including action gluing and generic-etale spreading preserved as old steps 9--12 in the delivery report.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-fin-normalization-extension",
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-normalization-model-functoriality] to $V=S$, $H=K$ and the prescribed finite extension $M/K$. Its hypotheses require only integrality and finite type over the field, both assumed here. For the very normalization $W$ in the statement it gives normality, integrality, finite type over $k$, the canonical identification $k(W)=M$, finiteness and surjectivity of $a$, and Noetherianity of $S$ and $W$. Apply [lem-fin-finite-over-projective] with its base equal to $\\operatorname{Spec}k$, its $T$ equal to our $S$, and $h=a$. A field is Noetherian since its only ideals are $0$ and the whole field; this base is affine. The structure morphism $S\\to\\operatorname{Spec}k$ is projective in the convention of the cited node: it has the closed immersion into $\\mathbf P^N_k$ given by the assumed projectivity of $S$ over $k$, and it is quasi-compact because finite type includes quasi-compactness. Its final clause therefore gives a closed immersion of $W$ into a finite projective space over $k$, precisely the projectivity asserted here.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality",
+    "lem-fin-finite-over-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0AVK (lemma-nagata-normalization-finite-general), 035L (lemma-normal-normalization), and the finite/projective argument of varieties.tex Tag 0GK4 (lemma-normalize-projective); projectivity used only over the affine field base."
+   }
+  },
+  {
+   "text": "For any nonempty affine open $U=\\operatorname{Spec}B$ in $S$, [def-fin-normalization-extension] gives $a^{-1}U=\\operatorname{Spec}C$ with $C=\\overline B^{\\,M}$. By [lem-sc-integral-function-field-affine-fraction], $B$ is a domain with fraction field $K$, and $U$ contains the generic point. The affine fibre-product formula and localization base change identify the generic fibre ring with $C\\otimes_B K=(B\\setminus\\{0\\})^{-1}C$. By [lem-weil-pbc-integral-closure-commutes-localization], this is the integral closure of $K$ in $M$: localization of $M$ at the nonzero elements of $B$ is $M$ itself. Every element of the finite extension $M/K$ satisfies its monic minimal polynomial over $K$, so that closure is all of $M$. Thus the generic fibre is canonically $\\operatorname{Spec}M$, with its specified map to $\\operatorname{Spec}K$. The identifications use the inclusions into $M$, so agree for different choices of $U$.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize), and Tag 00DK (lemma-tensor-localization); affine generic-fibre interpretation: schemes.tex Tags 01I4 and 01JQ."
+   }
+  },
+  {
+   "text": "By the Noetherianity of $S$ from Step 1, $S$ is covered by affine opens $\\operatorname{Spec}B$ with $B$ a Noetherian ring; since $S$ is nonempty, choose one such nonempty member $U=\\operatorname{Spec}B$ of this cover. Step 2 applies to it. With fraction field $K$ as in Step 2 and the given finite separable extension $M/K$, [lem-weil-pbc-spread-finite-separable-extension] supplies $0\\ne c\\in B$ and a finite etale $B[c^{-1}]$-algebra $D$ which is a domain with fraction field the prescribed $M$. Put $V=D_U(c)$ and $P=\\operatorname{Spec}D$. Then $V$ is nonempty since it contains the generic point, hence dense in the integral $S$. It is normal because its local rings are the local rings of $S$ at its points. The domain $D$ makes $P$ nonempty and irreducible, hence connected. The supplied map $P\\to V$ is finite etale and its function field is $M$ compatibly over $K$.",
+   "uses": [
+    "lem-weil-pbc-spread-finite-separable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "Proof, paragraph beginning \"A primitive element for K′/K\": invert the coefficient denominators and discriminant to get the finite free etale domain. Here the prescribed extension is M/K."
+   }
+  },
+  {
+   "text": "Apply [lem-fin-normalization-extends-cover] with $X=S$, the nonempty normal open $V$ of Step 3 and its connected finite etale cover $P$. All its hypotheses were verified in Steps 1 and 3. Since the supplied identification $k(P)=M$ is one of $K$-extensions, its normalization of $S$ in $k(P)$ is our $W$: on each affine chart the two integral-closure subrings in the identified field coincide. The cited theorem identifies $a^{-1}V\\to V$ with $P\\to V$, proving the required dense-open etaleness. No invariance of this chosen $V$ under a group is asserted or needed.",
+   "uses": [
+    "lem-fin-normalization-extends-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL (lemma-finite-etale-covering-normal-unramified), its normalization comparison; restriction to the open: morphisms.tex Tag 035K (lemma-normalization-localization)."
+   }
+  },
+  {
+   "text": "Let $h_j$ denote the automorphism of $S$ given by $\\rho(j)$, and give $k$ the corresponding action. Then $j\\mapsto h_j$ is an action since $\\rho$ is a homomorphism. The compatibility $\\sigma_j|_K=(h_{j^{-1}})^*$ says equivalently that $\\sigma_j^{-1}|_K=h_j^*$. Thus the semilinear isomorphism clause of [lem-sfb-finite-normalization-model-functoriality], applied to $h_j$ with contravariant field pullback $\\sigma_j^{-1}$, gives an isomorphism $b_j:W\\to W$ over $h_j$ whose pullback on $M$ is $\\sigma_j^{-1}$. Its identity and composition clause gives $b_1=1$ and $b_jb_l=b_{jl}$: contravariantly the composite pulls back by $\\sigma_l^{-1}\\sigma_j^{-1}=\\sigma_{jl}^{-1}$. These equations also follow from uniqueness of that compatible lift. Hence the $b_j$ form a $J$-action and $a b_j=h_j a$. This use allows nonfaithful actions and movement of $k$, exactly as the cited statement specifies.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H (definition-normalization-X-in-Y), 035I (lemma-characterize-normalization), 035K (lemma-normalization-localization): semilinear transport and uniqueness as in the cited functoriality node."
+   }
+  },
+  {
+   "text": "On the generic fibre the pullback of $b_j$ is $\\sigma_j^{-1}$, so its geometric action is $\\operatorname{Spec}(\\sigma_j^{-1})$. The induced left field action is defined using inverse scheme automorphisms: $(b_{j^{-1}})^*=\\sigma_{j^{-1}}^{-1}=\\sigma_j$. Finally, the $k$-structure of $W$ is the composite through $a$, so $a b_j=h_j a$ and the given compatibility on $S$ imply compatibility on $W$ with the original action on $k$ composed with $\\rho$. This proves the last two clauses with precisely the original action convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035H (definition-normalization-X-in-Y); elementary evaluation of the inverse-pullback left-action convention after Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "lem-fin-finite-over-projective",
+  "lem-fin-normalization-extends-cover",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-spread-finite-separable-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of existing finite-normalization functoriality, affine integral-closure localization and the finite-etale spreading/normalization comparison. Tags 035H, 035I, 035K, 035L and 0AVK; pione.tex 0BQL. de Jong Lemma 5.6 local PDF unavailable: report records WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a normal projective variety in a prescribed finite separable extension of its function field with a compatible semilinear finite group action to obtain a finite surjective projective generically etale equivariant cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and integral-closure restriction are ingredients; no one-line specialization gives the prescribed finite projective semilinear model and dense-open etaleness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme\", \"doc\": \"Given `f : X ⟶ Y`, `f.normalization` is the relative normalization of `Y` in `X`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"This is the open cover of `f.normalization` by `Spec` of integral closures of `Γ(Y, U)`\\nin `Γ(X, f ⁻¹ U)` where `U` ranges over all affine opens.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X] : AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X] : AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"[Stacks Tag 0AXN](https://stacks.math.columbia.edu/tag/0AXN)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The morphism from the relative normalization to itself. This map is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The dominant morphism into the relative normalization.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f] : AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"[Stacks Tag 03GP](https://stacks.math.columbia.edu/tag/03GP)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and integral-closure restriction are ingredients; no one-line specialization gives the prescribed finite projective semilinear model and dense-open etaleness"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|integralClosure",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.RingTheory.Smooth.IntegralClosure\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"15\", \"text\": \"# Relative Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"17\", \"text\": \"Given a qcqs morphism `f : X ⟶ Y`, we define the relative normalization `f.normalization`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"19\", \"text\": \"- `f.toNormalization : X ⟶ f.normalization`: a dominant morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"20\", \"text\": \"- `f.fromNormalization : f.normalization ⟶ Y`: an integral morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.AlgebraicGeometry.Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"21\", \"text\": \"`f` to the relative normalization `X'` of `Y` in `X` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"- If `f` is itself quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"29\", \"text\": \"  If `f` is proper and quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an isomorphism,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"119\", \"text\": \"lemma Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and integral-closure restriction are ingredients; no one-line specialization gives the prescribed finite projective semilinear model and dense-open etaleness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semilinear group action on a finite separable function field extension extends to the finite normalization of a projective variety and is etale on a dense open",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization in a finite separable extension is finite projective surjective and functorial for semilinear automorphisms of the extension field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"prod_galRestrict_eq_norm\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"For a Galois extension $ L/K $ and an integrally closed ring $ A $, the product of the Galois group $ \\\\text{Gal}(L/K) $ acting on an element $ x $ of the integral closure $ B $ of $ A $ in $ L $ equal\"}\n  {\"name\": \"galRestrict\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"A group isomorphism between the Galois group $ \\\\text{Gal}(L/K) $ and the group of $ A $-algebra automorphisms of $ B $, constructed by restricting automorphisms of $ L $ to the integral closure $ B $ \"}\n  {\"name\": \"galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ with $K$ as the fraction field of $A$, and $L$, $L_2$ as algebraic extensions of $K$, if $B$ and $B_2$ are the integral closures\"}\n  {\"name\": \"Algebra.norm_eq_prod_embeddings\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"∀ {L : Type u_6} (K : Type u_7) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (E : Type u_9)\\n  [inst_3 : Field E] [inst_4 : Algebra K E] [inst_5 : FiniteDimensional K L] [Algebra.IsSeparable K L] [IsAlgClosed E]\\n  (x : L), (algebraMap K E) ((Algebra.norm K) x) = ∏ σ, σ x\", \"doc\": \"The set of F-algebra homomorphisms from a finite free F-module $ E $ to a field $ K $ is finite. This follows because each homomorphism is uniquely determined by its action on a finite basis of $ E $,\"}\n  {\"name\": \"galRestrictHom\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"The structure defines a group isomorphism between the automorphism group of $ L $ over $ K $ and the automorphism group of the integral closure $ B $ of $ A $ in $ L $, constructed by restricting auto\"}\n  {\"name\": \"galRestrict'\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  {K : Type u_2} →\\n    {L : Type u_3} →\\n      {L₂ : Type u_4} →\\n        (B : Type u_6) →\\n          (B₂ : Type u_7) →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given a K-algebra homomorphism $ f : L → L_2 $, this constructs an A-algebra homomorphism from the integral closure $ B $ of $ A $ in $ L $ to the integral closure of $ A $ in $ L_2 $. The constructio\"}\n  {\"name\": \"galRestrict'_galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} (K : Type u_2) (L : Type u_3) (L₂ : Type u_4) {B : Type u_6} {B₂ : Type u_7} [inst : CommRing A]\\n  [inst_1 : CommRing B] [inst_2 : CommRing B₂] [inst_3 : Algebra A B] [inst_4 : Algebra A B₂] [inst_5 : Field K]\\n  [inst_6 : Field L] [inst_7 : Field L₂] [inst_8 : Algebra A K] [inst_9 :\", \"doc\": \"For any $A$-algebra homomorphism $\\\\sigma: B \\\\to B_2$ between the integral closures $B$ of $A$ in $L$ and $B_2$ of $A$ in $L_2$, applying the $K$-algebra homomorphism lifting (galLift) followed by rest\"}\n  {\"name\": \"Algebra.norm_eq_prod_automorphisms\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"∀ {L : Type u_6} (K : Type u_7) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : FiniteDimensional K L] [IsGalois K L] (x : L), (algebraMap K L) ((Algebra.norm K) x) = ∏ σ, σ x\", \"doc\": \"For any element $x$ in a Galois extension $L/K$, the field norm $\\\\operatorname{N}_{L/K}(x)$ is equal to the product of $\\\\sigma(x)$ over all automorphisms $\\\\sigma$ in the Galois group $\\\\operatorname{Ga\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and integral-closure restriction are ingredients; no one-line specialization gives the prescribed finite projective semilinear model and dense-open etaleness"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|normalLocus|etaleLocus",
+   "results": "Recorded command returned 10 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization API and base-fixed integral-closure automorphism restrictions do not give the complete prescribed semilinear finite-projective model and dense-open etaleness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "Recorded command returned 12 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization. ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization API and base-fixed integral-closure automorphism restrictions do not give the complete prescribed semilinear finite-projective model and dense-open etaleness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable extension of the function field of a projective variety has a finite normal projective normalization with compatible semilinear group action and etale restriction over a dense open",
+   "results": "Recorded command returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage. ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization API and base-fixed integral-closure automorphism restrictions do not give the complete prescribed semilinear finite-projective model and dense-open etaleness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a projective integral scheme in a finite separable extension of its function field is finite projective and etale over a dense open",
+   "results": "Recorded command returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization. ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization API and base-fixed integral-closure automorphism restrictions do not give the complete prescribed semilinear finite-projective model and dense-open etaleness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure normalization functoriality for automorphisms moving the base field and a generically separable finite cover",
+   "results": "Recorded command returned 8 hits: galRestrict_apply, algebraMap_galRestrict_apply, galRestrict, galRestrictHom_apply, algebraMap_galRestrictHom_apply, galRestrict', galRestrictHom, coe_galRestrict_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative-normalization API and base-fixed integral-closure automorphism restrictions do not give the complete prescribed semilinear finite-projective model and dense-open etaleness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-finite-residue-domination",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, second paragraph, application of Lemma 5.6 at the maximal points of the nonsplit locus. Extraction of old steps 9--12: equivariant normalization and generic etaleness.",
+   "via": [
+    "lem-sfb-equivariant-finite-residue-domination",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semilinear-normalization-finite-model",
+  "worker": "stage1",
+  "summary": "Preserved the prescribed-field statement and all inherited fields; supplied six explicit steps using only existing DAG nodes. Checked generic fibre by integral-closure localization, obtained the dense etale open by spreading the given separable extension and applying normalization-extends-cover, and checked inverse-pullback conventions for the nonfaithful semilinear action. No new nodes.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X Lemma 2.2; de Jong Lemma 5.7 application of Lemma 5.6. Steps 1-2 realize the prescribed normalization model; Steps 3-4 its generic-etale spreading; Steps 5-6 its equivariant semilinear lift. The inherited null ancestor and via chain are retained, as blueprint_refs.py ancestor reports None.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Finite-over-projective tool applied over the affine Noetherian field base to obtain finite-projective-space projectivity; no alteration route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spread-finite-separable-extension",
+    "why": "Generic commutative-algebra spreading tool for the specified M/K; the unit has no replacement for separable-polynomial spreading."
+   },
+   {
+    "node": "lem-fin-normalization-extends-cover",
+    "why": "Generic normalization comparison with the supplied connected finite etale model on a normal open; it does not replace the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-over-projective",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "lem-fin-normalization-extends-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-c1f423b75",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-c1f423b75 (reviewer sub-agent of L); spot-checked: I read the whole split: no new nodes, statement unchanged against live, which is unsplit. The six steps check out against every cited statement. Step 1 functoriality gives W normal integral of finite type, k(W)=M, a finite and surjective, S and W Noetherian; finite-over-projective over Spec k makes W projective. Step 2 gets the generic fibre Spec M from def-fin-normalization-extension, the affine fraction field, the affine fibre product, localization base change and integral closure commuting with localization (0307). Step 3 spreads M/K to a finite etale domain over B[1/c]. Step 4 applies normalization-extends-cover (Stacks 0BQL) with V=D(c), which is normal. Steps 5-6 check the semilinear inverse-pullback conventions: (b_j b_l)^*=σ_{jl}^{-1} and (b_{j^{-1}})^*=σ_j. Two repairs, both in the item's proof text only. (1) Step 3 said B is Noetherian for an arbitrary affine U, but the Noetherian clause only gives some Noetherian affine cover; every affine being Noetherian is 01OX with no node cited (C1). Now U is a member of that cover. (2) Step 1 did not check that S→Spec k satisfies def-pc-projective-morphism (H-projective and quasi-compact); I added the sentence. De Jong 5.6 is unavailable (WANTED), proof by agent, no SGA. I accept tool_uses finite-over-projective, spread-finite-separable and normalization-extends-cover as generic tools. Edge cases checked: M=K, dim 0, ker ρ, inseparable M/K, H moving k. Maintainer note: the unsplit lem-sfb-semilinear-finite-normalization-model (Q141) overlaps the item but is not a duplicate: it lacks normal S, separability and dense etaleness.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearNormalizationFiniteModel",
+  "declaration": "AlgebraicGeometry.Scheme.semilinear_normalization_finite_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearNormalizationFiniteModel.lean",
+  "statement": "theorem semilinear_normalization_finite_model {k : Type u} [Field k] (S : Scheme.{u}) [IsIntegral S] [S.Over (Spec (.of k))] [IsHProjective (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) {H : Type v} [Group H] [Finite H] (aS : H →* Aut S) (ak : H →* (k ≃+* k)) (hbase : ∀ h : H, (aS h).hom ≫ (S ↘ Spec (.of k)) = (S ↘ Spec (.of k)) ≫ Spec.map (CommRingCat.ofHom (ak h⁻¹).toRingHom)) (M : Type u) [Field M] [Algebra S.functionField M] [FiniteDimensional S.functionField M] [Algebra.IsSeparable S.functionField M] {J : Type w} [Group J] [Finite J] (ρ : J →* H) (hρ : Function.Surjective ρ) (σ : J →* (M ≃+* M)) (hσ : ∀ (j : J) (x : S.functionField), σ j (algebraMap S.functionField M x) = algebraMap S.functionField M ((functionFieldAut (aS (ρ j)⁻¹)).hom x)) : (∀ z : S.normalizationIn M, IsDomain ((S.normalizationIn M).presheaf.stalk z) ∧ IsIntegrallyClosed ((S.normalizationIn M).presheaf.stalk z)) ∧ IsIntegral (S.normalizationIn M) ∧ IsHProjective (S.fromNormalizationIn M ≫ (S ↘ Spec (.of k))) ∧ LocallyOfFiniteType (S.fromNormalizationIn M ≫ (S ↘ Spec (.of k))) ∧ QuasiCompact (S.fromNormalizationIn M ≫ (S ↘ Spec (.of k))) ∧ IsFinite (S.fromNormalizationIn M) ∧ Surjective (S.fromNormalizationIn M) ∧ (∃ V : S.Opens, Dense (V : Set S) ∧ Etale (S.fromNormalizationIn M ∣_ V)) ∧ (∀ (U : S.Opens) [Nonempty U] (hU : IsAffineOpen U) [Algebra Γ(S, U) M] [IsScalarTower Γ(S, U) S.functionField M], ∃ e : (S.fromNormalizationIn M ⁻¹ᵁ U).toScheme ≅ Spec (.of (integralClosure Γ(S, U) M)), e.inv ≫ (S.fromNormalizationIn M ⁻¹ᵁ U).ι ≫ S.fromNormalizationIn M = Spec.map (CommRingCat.ofHom (algebraMap Γ(S, U) (integralClosure Γ(S, U) M))) ≫ hU.fromSpec) ∧ (∃ e : Spec (.of M) ≅ pullback (S.fromNormalizationIn M) S.fromSpecFunctionField, e.hom ≫ pullback.fst _ _ = (S.fromSpecOfAlgebraFunctionField M).toNormalization ∧ e.hom ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom (algebraMap S.functionField M))) ∧ ∃ (e : (S.normalizationIn M).functionField ≃+* M) (aW : J →* Aut (S.normalizationIn M)), Spec.map (CommRingCat.ofHom e.toRingHom) ≫ (S.normalizationIn M).fromSpecFunctionField = (S.fromSpecOfAlgebraFunctionField M).toNormalization ∧ (∀ j : J, (aW j).hom ≫ S.fromNormalizationIn M = S.fromNormalizationIn M ≫ (aS (ρ j)).hom) ∧ (∀ j : J, Spec.map (CommRingCat.ofHom (σ j).symm.toRingHom) ≫ (S.fromSpecOfAlgebraFunctionField M).toNormalization = (S.fromSpecOfAlgebraFunctionField M).toNormalization ≫ (aW j).hom) ∧ (∀ j : J, (aW j).hom ≫ S.fromNormalizationIn M ≫ (S ↘ Spec (.of k)) = (S.fromNormalizationIn M ≫ (S ↘ Spec (.of k))) ≫ Spec.map (CommRingCat.ofHom (ak (ρ j)⁻¹).toRingHom)) ∧ ∀ (j : J) (x : (S.normalizationIn M).functionField), e ((functionFieldAut (aW j⁻¹)).hom x) = σ j (e x)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abf2af948",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read node, 12 stmt_dep records, module, report, and upstream normalizationIn/fromSpecOfAlgebraFunctionField/functionFieldAut (=E^* stalk pullback)/IsHProjective. Hypotheses match (normal via stalks, H-projective, LOFT+QC, compatible left actions via Spec(ak h⁻¹), hσ = ((ρj)⁻¹)^*, finite separable M). Conclusions complete and pinned: k(W)≅M via the Spec M lift, affine iso over hU.fromSpec, generic fibre with both projections, dense etale V, J-action with Spec(σ_j⁻¹) generic action, equivariance, k-action through ρ, left field action σ (checked consistent with the generic clause). Edge cases M=K, ker ρ, nonfaithful, moving k, non-Galois, empty U fine; shared universe u forced by the API and harmless. Statement verbatim; live node differs only in lean; sorry-only, no new defs, docstrings OK; no duplicate declaration. No fixes, no compile needed."
+ }
+}

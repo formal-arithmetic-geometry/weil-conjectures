@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-monoid-principal-open-face",
+ "kind": "statement",
+ "title": "Principal faces, trivial basic-open covers, and localization restrictions",
+ "statement": "Let $P$ be a fine commutative monoid, written additively, and let $X=\\operatorname{Spec}_{\\mathrm{mon}}P$ with basic opens $D(a)$ and localizations $P_a=P-\\mathbf N a\\subset P^{\\mathrm{gp}}$ [def-trf-fine-fan-blowup]. For $a\\in P$ set\n$$F_a=\\{c\\in P:\\exists d\\in P,\\ n\\in\\mathbf N,\\ c+d=na\\},\\qquad \\mathfrak m_a=P\\setminus F_a.$$\nThen $F_a$ is a face: it contains $0,a$, is closed under addition, and $c+e\\in F_a$ implies $c,e\\in F_a$. The set $\\mathfrak m_a$ is a proper prime ideal in $D(a)$, and every $\\mathfrak q\\in D(a)$ satisfies $\\mathfrak q\\subseteq\\mathfrak m_a$. Every open neighborhood of $\\mathfrak m_a$ contains $D(a)$. In particular every open cover of $D(a)$ contains $D(a)$ itself as a member. For $a=0$ one has $F_0=P^\\times$ and $D(0)=X$.\nFor $a,c\\in P$ one has\n$$D(c)\\subseteq D(a)\\quad\\Longleftrightarrow\\quad a\\in F_c\\quad\\Longleftrightarrow\\quad \\exists d\\in P,\\ n\\in\\mathbf N,\\ a+d=nc.$$\nUnder these equivalent conditions the identity of $P^{\\mathrm{gp}}$ induces the localization homomorphism $P_a\\to P_c$, carrying $p-ma$ to the same group-completion element. It sends units to units, and its map on sharpenings sends $\\operatorname{cl}_{P_a}(p-ma)$ to $\\operatorname{cl}_{P_c}(p-ma)$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.1.2--3.1.4(i),(iii), printed p.98: principal-face calculation, trivial covers, and localization transition maps; old proof steps 1--2 and the algebra in step 7."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "For $F_a$, the witnesses $(d,n)=(0,0)$ and $(0,1)$ give $0,a\\in F_a$. If $x+d=na$ and $y+e=ma$, then $(x+y)+(d+e)=(n+m)a$. If $(x+y)+d=na$, then $x+(y+d)=na$ and $y+(x+d)=na$. These identities give exactly closure under addition and the face condition.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.2--3.1.3, p.98: explicit additive principal-face calculation"
+   }
+  },
+  {
+   "text": "The complement $\\mathfrak m_a$ is an ideal: if $x\\notin F_a$ and $p\\in P$, then $x+p\\notin F_a$ by the face condition. It is proper since $0\\in F_a$, and prime since its complement is closed under addition. Since $a\\in F_a$, it belongs to $D(a)$. For any $\\mathfrak q\\in D(a)$, its complement contains $0,a$ and is closed under addition, hence contains every $na$. If $x\\in F_a$ and $x\\in\\mathfrak q$, a witness $x+d=na$ contradicts the ideal property. Thus $\\mathfrak q\\subseteq\\mathfrak m_a$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.3--3.1.4(i),(iii), p.98: greatest prime of a basic open"
+   }
+  },
+  {
+   "text": "Every generated open is downward closed for inclusion of prime ideals: this holds for D(b), since b outside a larger ideal is outside a smaller one, and is preserved by intersections and arbitrary unions. Formal induction on GenerateOpen proves the assertion for the specified generated topology, without a separate basis theorem. Apply it to q contained in m_a for q in D(a) to see that every open neighborhood of m_a contains D(a). If a set S of opens contained in D(a) has supremum D(a), membership of m_a in this supremum supplies U in S containing m_a. The neighborhood result and U contained in D(a) give U = D(a), so D(a) is in S.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 3.1.4(iii), p.98: triviality of open covers"
+   }
+  },
+  {
+   "text": "For $a=0$, the condition $x+d=n0=0$ says exactly that $x$ is a unit, so $F_0=P^\\times$. No proper ideal contains $0$, because $0+P=P$; therefore $D(0)=X$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.1--3.1.4(i), p.98: identity and unit cases"
+   }
+  },
+  {
+   "text": "If $D(c)\\subseteq D(a)$, apply this to $\\mathfrak m_c\\in D(c)$: then $a\\notin\\mathfrak m_c$, so $a\\in F_c$. Conversely, if $a+d=nc$ and $\\mathfrak q\\in D(c)$ contained $a$, the ideal property would put $nc\\in\\mathfrak q$, whereas $c\\notin\\mathfrak q$ and the complement is closed under addition and contains $0$. Thus $\\mathfrak q\\in D(a)$. The equivalence with existence of $d,n$ is the displayed definition of $F_c$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.2--3.1.3, p.98: containment criterion"
+   }
+  },
+  {
+   "text": "Given $a+d=nc$, in $P^{\\mathrm{gp}}$ one has $-a=d-nc$ and hence $p-ma=(p+md)-(mn)c\\in P_c$ for every $p\\in P$, $m\\in\\mathbf N$. Thus $P_a\\subseteq P_c$. Restricting the group identity gives the asserted homomorphism, independent of fraction representatives since both monoids are subsets of the same group. It fixes $P$ and sends $-a$ to the inverse of $a$, so it is precisely the localization homomorphism (these elements generate $P_a$).",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.2--3.1.3, p.98: localization restriction"
+   }
+  },
+  {
+   "text": "If $u+v=0$ in $P_a$, their images in $P_c$ still sum to $0$; thus units map to units. If $x,y\\in P_a$ differ by a unit, their images differ by its unit image. The map therefore descends to the quotient by units that defines sharpening, and on each representative it sends $\\operatorname{cl}_{P_a}(p-ma)$ to $\\operatorname{cl}_{P_c}(p-ma)$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.1--3.1.3 and Remark 3.1.4(iii), p.98: sharpening of restrictions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.1.1--3.1.4(i),(iii), printed p.98; additive details of the principal-face and restriction calculations written out. Stage-3 Lean proof by B9 follows all seven calculations; the neighborhood step uses induction on the generated topology instead of a separate basis result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidPrime|KatoFan|principalFace",
+   "results": "{\"t\": \"2026-10-22T06:00:37Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidPrime|KatoFan|principalFace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A basic open of a monoid prime spectrum has a greatest prime and every open covering contains that whole open",
+   "results": "{\"t\": \"2026-10-22T06:00:37Z\", \"tool\": \"leansearch\", \"query\": \"A basic open of a monoid prime spectrum has a greatest prime and every open covering contains that whole open\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidPrime\"",
+   "results": "{\"t\": \"2026-10-22T06:00:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidPrime\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.instIsDomainLocalizationAlgebraMapSubmonoidPrimeComplOfFaithfulSMul\", \"Localization.instIsTorsionFreeAtPrimeAlgebraMapSubmonoidPrimeComplOfIsDomain\", \"Module.Finite.instAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"instAddCommMonoidPrimeMultiset\", \"instIsOrderedCancelAddMonoidPrimeMultiset\", \"instIsDedekindDomainLocalizationAlgebraMapSubmonoidPrimeCompl\", \"instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing\"], \"digest\": \"8e265f8c557dabf0\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the spectrum of a fine commutative monoid, the face of divisors of powers of a defines the greatest prime in D(a); all covers of D(a) are trivial and inclusions of basic opens induce localization inclusions",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"leanfinder\", \"query\": \"For the spectrum of a fine commutative monoid, the face of divisors of powers of a defines the greatest prime in D(a); all covers of D(a) are trivial and inclusions of basic opens induce localization inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"PrimeSpectrum.basicOpen_eq_zeroLocus_of_mul_add\", \"PrimeSpectrum.zeroLocus_eq_basicOpen_of_mul_add\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.isPrime_carrier\", \"PrimeSpectrum.basicOpen\", \"AlgebraicGeometry.basicOpen_eq_of_affine\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\"], \"digest\": \"4d6b411ffb16c12d\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidPrime|KatoFan|faceLocalization",
+   "results": "{\"t\": \"2026-10-22T06:00:59Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidPrime|KatoFan|faceLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"basicOpen\"",
+   "results": "{\"t\": \"2026-10-22T06:01:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"basicOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PrimeSpectrum.basicOpen\", \"PrimeSpectrum.basicOpen_injOn_isIdempotentElem\", \"PrimeSpectrum.isCompact_basicOpen\", \"PrimeSpectrum.isConstructible_basicOpen\", \"PrimeSpectrum.isOpen_basicOpen\", \"PrimeSpectrum.isRetrocompact_basicOpen\", \"PrimeSpectrum.basicOpen_pow\", \"PrimeSpectrum.basicOpen_eq_zeroLocus_compl\"], \"digest\": \"a34a920c1dfad784\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divisors of powers generate the smallest face containing an element of a commutative monoid, and their complementary prime has basic open as minimal neighborhood",
+   "results": "{\"t\": \"2026-10-22T06:01:11Z\", \"tool\": \"leanfinder\", \"query\": \"Divisors of powers generate the smallest face containing an element of a commutative monoid, and their complementary prime has basic open as minimal neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.basicOpen_mul_le_right\", \"PrimeSpectrum.basicOpen_eq_zeroLocus_of_mul_add\", \"PrimeSpectrum.basicOpen_mul_le_left\", \"AlgebraicGeometry.iSup_basicOpen_of_span_eq_top\", \"PrimeSpectrum.basicOpen\", \"PrimeSpectrum.iSup_basicOpen_eq_top_iff\", \"PrimeSpectrum.basicOpen_pow\", \"PrimeSpectrum.zeroLocus_eq_basicOpen_of_mul_add\"], \"digest\": \"e85cb677044d1522\"} Read hits: PrimeSpectrum.basicOpen and associated cover lemmas require a CommSemiring and additive ring ideals; no monoid-spectrum principal-face, greatest-prime, or trivial-cover statement. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidPrime|KatoFan|principalFace",
+   "results": "{\"t\": \"2026-10-23T09:29:06Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidPrime|KatoFan|principalFace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every open cover of a principal open subset of the prime spectrum of a commutative monoid contains the whole principal open",
+   "results": "{\"t\": \"2026-10-23T09:29:06Z\", \"tool\": \"leansearch\", \"query\": \"Every open cover of a principal open subset of the prime spectrum of a commutative monoid contains the whole principal open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.iSup_basicOpen_eq_top_iff\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"PrimeSpectrum.basicOpen\", \"PrimeSpectrum.iSup_basicOpen_eq_top_iff'\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"PrimeSpectrum.isCompact_basicOpen\", \"PrimeSpectrum.basicOpen_mul_le_right\", \"AlgebraicGeometry.IsAffineOpen.self_le_iSup_basicOpen_iff\"], \"digest\": \"acc5cffe43b57676\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidPrime\", \"basicOpen\"",
+   "results": "{\"t\": \"2026-10-23T09:29:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidPrime\\\", \\\"basicOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the spectrum of an integral commutative monoid, divisors of powers form a face whose complementary prime is greatest in the principal open, and principal open inclusions induce localization homomorphisms",
+   "results": "{\"t\": \"2026-10-23T09:29:16Z\", \"tool\": \"leanfinder\", \"query\": \"In the spectrum of an integral commutative monoid, divisors of powers form a face whose complementary prime is greatest in the principal open, and principal open inclusions induce localization homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.localization_away_comap_range\", \"PrimeSpectrum.basicOpen_le_basicOpen_iff_algebraMap_isUnit\", \"IsLocalization.primeSpectrumOrderIso\", \"PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton\", \"IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"IsLocalization.AtPrime.primeSpectrumOrderIso\", \"IsLocalization.AtPrime.coe_orderIsoOfPrime_symm_apply_coe\", \"IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal\"], \"digest\": \"eb22934970a80f54\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidPrime|KatoFan|faceLocalization|principalFace",
+   "results": "{\"t\": \"2026-10-23T09:29:44Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidPrime|KatoFan|faceLocalization|principalFace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"basicOpen\"",
+   "results": "{\"t\": \"2026-10-23T09:29:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"basicOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PrimeSpectrum.basicOpen\", \"PrimeSpectrum.basicOpen_injOn_isIdempotentElem\", \"PrimeSpectrum.isCompact_basicOpen\", \"PrimeSpectrum.isConstructible_basicOpen\", \"PrimeSpectrum.isOpen_basicOpen\", \"PrimeSpectrum.isRetrocompact_basicOpen\", \"PrimeSpectrum.basicOpen_pow\", \"PrimeSpectrum.basicOpen_eq_zeroLocus_compl\"], \"digest\": \"a34a920c1dfad784\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The set of divisors of multiples of an element is the smallest face of an additive commutative monoid containing that element",
+   "results": "{\"t\": \"2026-10-23T09:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"The set of divisors of multiples of an element is the smallest face of an additive commutative monoid containing that element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Nat.exists_mem_closure_of_ge\", \"Nat.setGcd_dvd_of_mem_closure\", \"Nat.dvd_of_mem_finMulAntidiag\", \"DivisibleBy\", \"Finset.nsmul_piAntidiag\", \"Finset.nsmul_piAntidiag_univ\", \"Finset.map_nsmul_piAntidiag_univ\", \"Finset.map_nsmul_piAntidiag\"], \"digest\": \"05f7597d540ba983\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def basicOpen|theorem iSup_basicOpen_eq_top_iff|theorem basicOpen_le_basicOpen_iff_algebraMap_isUnit",
+   "results": "{\"t\": \"2026-10-23T09:30:26Z\", \"tool\": \"grep\", \"query\": \"def basicOpen|theorem iSup_basicOpen_eq_top_iff|theorem basicOpen_le_basicOpen_iff_algebraMap_isUnit\", \"sub\": \"RingTheory/Spectrum/Prime\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\"], \"digest\": \"e021449f0c553087\"}; Read returned types: ring/semiring prime spectra require additive ideals and CommSemiring structure; Frobenius-number closure and antidiagonal divisibility results do not state monoid faces or their spectrum. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-fan-localization-sections",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, p.109, paragraph beginning Choose a point y, restricted to strict morphisms; affine fan interpretation: 3.1.8(ii), 3.1.10(ii). Supporting affine-target comparison: ILO VIII 3.1.8(ii), invoked in the final sentence of the point-local comparison paragraph in the proof of 3.3.15, printed p.109. Supporting localization description of the sharp affine model in VIII 3.1.3 and Remark 3.1.4(iii), used in the proof of 3.1.8(ii). VIII 3.1.2--3.1.4(i),(iii), printed p.98: principal-face calculation, trivial covers, and localization transition maps; old proof steps 1--2 and the algebra in step 7.",
+   "via": [
+    "lem-trf-affine-fan-localization-sections",
+    "lem-trf-affine-fan-hom-universal",
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-principal-open-face",
+  "worker": "stage1",
+  "summary": "Expanded the direct principal-face calculation, greatest-prime and trivial-cover arguments, basic-open containment criterion, explicit localization inclusion and descent modulo units. All seven steps are elementary consequences of the cited definition; no new nodes. Preserved the statement and historical ancestry. Repeated logged Mathlib searches in two phrasings; ring-spectrum results do not specialize to monoid spectra.",
+  "blueprint": "Supporting principal-open calculation in the historical ILO VIII branch recorded by blueprint.from, through lem-trf-affine-fan-localization-sections, for lem-trf-local-term-locality. Steps 1--5 realize VIII 3.1.3--3.1.4(i),(iii), and steps 6--7 realize VIII 3.1.1--3.1.3. Current latest blueprint uses the contracting-correspondence route; this delivery changes neither the unit nor that route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-9a230021b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-9a230021b (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and its metadata in full, the only cited node def-trf-fine-fan-blowup, the parent lem-trf-affine-fan-localization-sections (which uses only the trivial-cover clause and the P_a->P_c clause) and the source ILO Travaux de Gabber VIII 3.1.1-3.1.4, printed p.98 (PDF p.104): localization M[S^-1] inside M^gp, empty ideal counted as prime, basis D(f), trivial covers in 3.1.4(iii). The statement is byte-identical to side-live, where the item is still unsplit. There is no repair note, no new node, no cycle, no SGA citation, and no route or tool_uses question since only a definition is cited. All seven steps are correct and elementary: (1) F_a is a face, with witnesses (0,0),(0,1), sums, and x+(y+d)=na; (2) m_a is a proper prime ideal in D(a), and every q in D(a) lies in m_a because 0 and na are not in q; (3) any open containing m_a contains D(a), so every relative cover of D(a) has D(a) as a member, where 'stipulated basis' matches ILO 3.1.3 and D(a) meet D(b) = D(a+b); (4) F_0 is the unit group and D(0)=X; (5) D(c) contained in D(a) iff a is in F_c, via m_c and nc not in q; (6) p-ma=(p+md)-(mn)c, inside P^gp because P is integral; (7) units and sharpening descend. Edge cases checked: P={0} or a finite group, N, N^2, Z/2+N with a torsion unit, c=0, a=0. Searches cover grep, LeanSearch, Loogle and LeanFinder; the earlier LeanSearch is honestly marked unavailable and was rerun. The Mathlib PrimeSpectrum basic-open results need a ring and exclude the empty ideal, so they do not match. Not a target node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonoidPrincipalOpenFace",
+  "declaration": "AlgebraicGeometry.FineFan.monoid_principalOpen_face",
+  "declarations": [
+   "AlgebraicGeometry.FineFan.principalFace",
+   "AlgebraicGeometry.FineFan.monoid_principalOpen_face"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoidPrincipalOpenFace.lean",
+  "statement": "theorem monoid_principalOpen_face (P : Type u) [CommMonoid P] (hP : IsFine P) : (∀ a : P, 1 ∈ principalFace a ∧ a ∈ principalFace a ∧ (∀ x y : P, x ∈ principalFace a → y ∈ principalFace a → x * y ∈ principalFace a) ∧ (∀ x y : P, x * y ∈ principalFace a → x ∈ principalFace a ∧ y ∈ principalFace a) ∧ (∃ m : MonoidPrime P, m.carrier = (principalFace a)ᶜ ∧ m ∈ basicOpen a ∧ (∀ q : MonoidPrime P, q ∈ basicOpen a → q.carrier ⊆ m.carrier) ∧ (∀ U : Opens (MonoidPrime P), m ∈ U → basicOpen a ≤ U)) ∧ (∀ S : Set (Opens (MonoidPrime P)), (∀ U ∈ S, U ≤ basicOpen a) → sSup S = basicOpen a → basicOpen a ∈ S)) ∧ principalFace (1 : P) = {p : P | IsUnit p} ∧ basicOpen (1 : P) = ⊤ ∧ (∀ a c : P, ((basicOpen c ≤ basicOpen a) ↔ a ∈ principalFace c) ∧ ((a ∈ principalFace c) ↔ ∃ (d : P) (n : ℕ), a * d = c ^ n) ∧ (basicOpen c ≤ basicOpen a → ∃ h : Algebra.faceLocalization P (Submonoid.powers a) ≤ Algebra.faceLocalization P (Submonoid.powers c), (∀ q : Algebra.faceLocalization P (Submonoid.powers a), IsUnit q → IsUnit (Submonoid.inclusion h q)) ∧ (∀ (q : Algebra.faceLocalization P (Submonoid.powers a)) (r : Algebra.faceLocalization P (Submonoid.powers c)), r.val = q.val → sharpenMap (Submonoid.inclusion h) (Associates.mk q) = Associates.mk r)))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-321758fd7",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Lean statement matches every node clause: F_a face properties; m_a = (principalFace a)ᶜ as a MonoidPrime in D(a), greatest prime there, minimal-neighbourhood clause; covers via a set S with sSup S = D(a) → D(a) ∈ S; F_1 = units and D(1) = ⊤; D(c) ≤ D(a) ↔ a ∈ F_c ↔ ∃ d n, a*d = c^n; P_a ⊆ P_c via Submonoid.inclusion of faceLocalization (powers), the identity on GrothendieckGroup values; units preserved; sharpening formula through r.val = q.val. Only CommMonoid + IsFine assumed, single universe u. Dependency (IsFine, MonoidPrime with empty prime, basicOpen, sharpenMap, faceLocalization) read and conventions consistent with citer affineFan_localization_sections. principalFace is a real definition with no duplicate in the project or Mathlib. Docstrings carry source and blueprint, the theorem docstring has the 7 steps, proof is sorry only, sole import is FineFanBlowup, lean.statement verbatim in the file, node record otherwise identical to side-live, report has Worker report and Second reading by Q40. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T081147-L-1842345",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,270 @@
+{
+ "id": "lem-sf-site-local-generators-relations-iso",
+ "kind": "statement",
+ "title": "A local generators and relations criterion for an inverse-image comparison",
+ "statement": "Let $(\\mathcal C,J)$ and $(\\mathcal D,K)$ be sites [def-weil-pbc-sites-and-cohomology] small in a universe, with sheaves valued in a larger universe [def-weil-size-convention]. Let $P:\\mathcal C\\to\\mathcal D$ be a functor for which precomposition $P_*H=H\\circ P^{\\mathrm{op}}$ sends sheaves of abelian groups to sheaves. Assume $\\mathcal C$ has binary products and $P$ preserves them. Let $L:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{Ab}(\\mathcal D)$ be left adjoint to $P_*$, and let $F,G$ be abelian sheaves on $\\mathcal C,\\mathcal D$, respectively, with a morphism $\\eta:F\\to P_*G$. Assume the following two conditions. (i) For every $U\\in\\mathcal D$ and $s\\in G(U)$ there is a covering family $(v_i:U_i\\to U)$ and, for each $i$, an object $V_i\\in\\mathcal C$, a section $t_i\\in F(V_i)$ and a morphism $\\phi_i:U_i\\to P(V_i)$ such that $G(v_i)(s)=G(\\phi_i)(\\eta_{V_i}(t_i))$. (ii) For every $V\\in\\mathcal C$, $t\\in F(V)$ and $\\phi:U\\to P(V)$ with $G(\\phi)(\\eta_V(t))=0$, there is a covering family $(v_i:U_i\\to U)$ and morphisms $a_i:V_i\\to V$ in $\\mathcal C$ and $\\phi_i:U_i\\to P(V_i)$ such that $F(a_i)(t)=0$ and $P(a_i)\\circ\\phi_i=\\phi\\circ v_i$. Then the morphism $LF\\to G$ adjoint to $\\eta$ is an isomorphism. Here $F(a)$ and $G(v)$ denote restriction maps, so their directions are contravariant.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+  "place": "Lines 244-284, theorem isIso_homEquiv_symm_of_locally_generated, specialized from fixed-ring module sheaves to abelian sheaves. The local hypotheses are SectionsLocallyPulledBack and RelationsLocal, lines 58-71."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-sf-sheaf-precomposition"
+ ],
+ "proof": [
+  {
+   "text": "Fix an abelian sheaf $H$ on $\\mathcal D$ and a morphism $\\psi:F\\to P_*H$. By [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets], the underlying sets of $H$ satisfy the sheaf equalizer condition; in particular equality of sections can be checked on a covering. Suppose $G(\\phi)(\\eta_V(t))=0$. Apply (ii), obtaining $v_i,a_i,\\phi_i$. Naturality of $\\psi$ and contravariance give\n$$H(v_i)H(\\phi)(\\psi_V(t))=H(\\phi_i)H(P(a_i))(\\psi_V(t))=H(\\phi_i)\\psi_{V_i}(F(a_i)t)=0.$$\nThe injective first arrow of the sheaf equalizer for this cover then implies $H(\\phi)(\\psi_V(t))=0$. This is a direct use of hypothesis (ii), naturality and the sheaf condition, not an additional zero-relation theorem.",
+   "uses": [
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.map_eq_zero, lines 89-97; underlying-set sheaf criterion: Stacks sites.tex Section 00YR, property (alpha), and Definition 00VM (definition-sheaf-sets)."
+   }
+  },
+  {
+   "text": "Suppose $G(\\phi_1)(\\eta_{V_1}t_1)=G(\\phi_2)(\\eta_{V_2}t_2)$ on $U$. Put $V=V_1\\times V_2$ with projections $p_1,p_2$. As $P$ preserves this product, its universal property gives $\\phi:U\\to P(V)$ with $P(p_j)\\phi=\\phi_j$. Set $t=F(p_1)t_1-F(p_2)t_2$. Naturality and additivity give $G(\\phi)(\\eta_Vt)=0$; step 1 gives $H(\\phi)(\\psi_Vt)=0$. Expanding the latter difference proves\n$$H(\\phi_1)(\\psi_{V_1}t_1)=H(\\phi_2)(\\psi_{V_2}t_2).$$\nThus equal presentations give equal proposed $H$-sections, including after arbitrary restrictions. The only product used here is in $\\mathcal C$ and its preserved image; no product of arbitrary objects of $\\mathcal D$ is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.hasPairLifts_of_preservesLimitsOfShape, lines 69-75, and map_eq_map, lines 100-112; the product lift and subtraction are written out."
+   }
+  },
+  {
+   "text": "For $s\\in G(U)$ choose the cover and presentations of (i), and put $x_i=H(\\phi_i)(\\psi_{V_i}t_i)\\in H(U_i)$. On $U_i\\times_U U_j$, with projections $q_i,q_j$, the presentations $(t_i,\\phi_i q_i)$ and $(t_j,\\phi_j q_j)$ have the same $G$-value, namely the restriction of $s$. Step 2 therefore gives $H(q_i)x_i=H(q_j)x_j$. These fibre products exist because one is pulling back members of a covering family, by the site axioms [def-weil-pbc-sites-and-cohomology]. Apply the underlying-set sheaf equalizer of [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] to this compatible family. It gives a unique $x\\in H(U)$ restricting to every $x_i$. For the moment denote this chosen amalgamation by $h_U(s)$. This is one application of the sheaf gluing criterion to an explicitly constructed matching family.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.exists_section, lines 115-134 (compatible family and amalgamation); Stacks sites.tex Definitions 00VM/00VR, labels definition-sheaf-sets/definition-sheaf, and Section 00YR (alpha)."
+   }
+  },
+  {
+   "text": "The amalgamation has a formula on every presentation, not merely on the chosen cover: if $u:T\\to U$ and $G(u)s=G(\\phi)(\\eta_Vt)$, then\n$$H(u)h_U(s)=H(\\phi)(\\psi_Vt). \\tag{*}$$\nIndeed pull back the chosen covering $\\{U_i\\to U\\}$ to $T$, obtaining the covering $\\{T\\times_U U_i\\to T\\}$ by [def-weil-pbc-sites-and-cohomology]. On each member, the restriction of the left side is the proposed value for the restricted chosen presentation; step 2 identifies it with the restriction of the right side. The injectivity in the sheaf equalizer of [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] proves (*). If a different cover or different presentations were chosen, (*) on the original cover identifies the two amalgamations by the same injectivity. Thus $h_U$ is well defined independently of all such choices.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.exists_section, lines 135-140, and map_liftApp, lines 150-156; arbitrary-presentation formula and independence of choices."
+   }
+  },
+  {
+   "text": "The maps $h_U$ are additive. Choose local presentations for $s_1,s_2\\in G(U)$ on covers $\\{U_i\\to U\\}$ and $\\{W_j\\to U\\}$. Their common cover $\\{U_i\\times_U W_j\\to U\\}$ is covering: pull back the second cover to each $U_i$, then compose coverings, using [def-weil-pbc-sites-and-cohomology]. On a member $T$, write the two presentations as $(t_1,\\phi_1)$ and $(t_2,\\phi_2)$. With the product $V=V_1\\times V_2$ and the lift $\\phi:T\\to P(V)$ of step 2, put $t=F(p_1)t_1+F(p_2)t_2$. Naturality gives $G(\\phi)\\eta_V(t)=G(\\phi_1)\\eta_{V_1}(t_1)+G(\\phi_2)\\eta_{V_2}(t_2)$. Formula (*) for these three presentations and additivity of $\\psi$ show that the restrictions of $h_U(s_1+s_2)$ and $h_U(s_1)+h_U(s_2)$ agree on this cover. The sheaf equalizer of [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] gives equality on $U$. Substituting $s_1=s_2=0$ and cancelling gives $h_U(0)=0$, so $h_U$ is a group homomorphism.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.liftApp_add, lines 159-177; scalar multiplication is unnecessary for abelian groups. Common cover supplied by Stacks site axioms 00VH."
+   }
+  },
+  {
+   "text": "For $f:T\\to U$ and $s\\in G(U)$, take any covering of $T$ on which $G(f)s$ has presentations $(t_i,\\phi_i)$, as in (i). For a covering arrow $v_i:T_i\\to T$, formula (*) applied first on $T$ with $u=v_i$ and then on $U$ with $u=fv_i$ gives\n$$H(v_i)h_T(G(f)s)=H(\\phi_i)\\psi(t_i)=H(v_i)H(f)h_U(s).$$\nThe sheaf equalizer injectivity of [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] proves $h_TG(f)=H(f)h_U$. Together with step 5, this makes $h:G\\to H$ a morphism of abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.liftApp_map and lift, lines 193-215; naturality follows by applying (*) twice on a presentation cover."
+   }
+  },
+  {
+   "text": "Applying (*) to $s=\\eta_V(t)$, $U=P(V)$, $u=\\mathrm{id}_{P(V)}$ and $\\phi=\\mathrm{id}_{P(V)}$ gives $h_{P(V)}(\\eta_Vt)=\\psi_Vt$. Hence $(P_*h)\\eta=\\psi$. For uniqueness, suppose $b,c:G\\to H$ have $(P_*b)\\eta=(P_*c)\\eta$. Given $s\\in G(U)$, choose its presentations from (i). On each covering member, naturality gives $H(v_i)b_U(s)=H(\\phi_i)b_{P(V_i)}\\eta_{V_i}(t_i)$, and the same expression for $c$. These are equal by the assumed equality after $\\eta$. The sheaf equalizer injectivity of [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] gives $b_U(s)=c_U(s)$. Thus for every $H$, $b\\mapsto(P_*b)\\eta$ is bijective from $\\operatorname{Hom}(G,H)$ to $\\operatorname{Hom}(F,P_*H)$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "LocallyGenerated.lift_fac and hom_ext, lines 225-242; existence and uniqueness of the extension, computed on sections."
+   }
+  },
+  {
+   "text": "Let $\\alpha:LF\\to G$ be adjoint to $\\eta$, and write $A_H:\\operatorname{Hom}(LF,H)\\simeq\\operatorname{Hom}(F,P_*H)$ for the given adjunction. Naturality in $H$ says $A_H(b\\alpha)=(P_*b)\\eta$. By step 7 and bijectivity of $A_H$, precomposition with $\\alpha$ is bijective for every $H$. Explicitly, taking $H=LF$ supplies $\\beta:G\\to LF$ with $\\beta\\alpha=\\mathrm{id}_{LF}$. For $H=G$, injectivity of precomposition with $\\alpha$ and the identity $(\\alpha\\beta)\\alpha=\\alpha(\\beta\\alpha)=\\alpha=\\mathrm{id}_G\\alpha$ imply $\\alpha\\beta=\\mathrm{id}_G$. These two identities exhibit $\\beta$ as the inverse of $\\alpha$. This last argument uses only the natural hom-bijection defining the assumed adjunction and category identities; it does not invoke a separate Yoneda theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+    "place": "Theorem isIso_homEquiv_symm_of_locally_generated, lines 267-284; the coyoneda isomorphism criterion is replaced by its two-line explicit inverse argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/Sites/PullbackIsoOfLocallyGenerated.lean",
+  "place": "Abelian-group adaptation of LocallyGenerated.map_eq_zero, map_eq_map, exists_section, liftApp_add, liftApp_map, lift_fac, hom_ext and the final adjunction argument, lines 69-284; sheaf gluing justified by Stacks 00VM, 00VR and Section 00YR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous functor of sites preserving binary products, a sheaf morphism adjoint to a coefficient map is invertible if sections lift locally and zero relations descend locally",
+   "results": "{\"t\": \"2026-10-22T05:35:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous functor of sites preserving binary products, a sheaf morphism adjoint to a coefficient map is invertible if sections lift locally and zero relations descend locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.homEquivOfIsLocallyBijective\", \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.Functor.IsCoverDense.presheafIso\", \"CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso\"], \"digest\": \"5e4f39e955f85c24\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: W_iff_isIso_map_of_adjunction concerns sheafification on one site, and homEquivOfIsLocallyBijective assumes an already locally bijective presheaf map. Neither constructs the comparison across P from the stated presentation-and-relation hypotheses. Dense-subsite presheafIso instead assumes P locally full and cover dense, which are not hypotheses here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_homEquiv_symm_of_locally_generated\"",
+   "results": "{\"t\": \"2026-10-22T05:35:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"isIso_homEquiv_symm_of_locally_generated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: W_iff_isIso_map_of_adjunction concerns sheafification on one site, and homEquivOfIsLocallyBijective assumes an already locally bijective presheaf map. Neither constructs the comparison across P from the stated presentation-and-relation hypotheses. Dense-subsite presheafIso instead assumes P locally full and cover dense, which are not hypotheses here."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_of_locally_generated|SectionsLocallyPulledBack|RelationsLocal",
+   "results": "{\"t\": \"2026-10-22T05:35:45Z\", \"tool\": \"grep\", \"query\": \"homEquiv_symm_of_locally_generated|SectionsLocallyPulledBack|RelationsLocal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: W_iff_isIso_map_of_adjunction concerns sheafification on one site, and homEquivOfIsLocallyBijective assumes an already locally bijective presheaf map. Neither constructs the comparison across P from the stated presentation-and-relation hypotheses. Dense-subsite presheafIso instead assumes P locally full and cover dense, which are not hypotheses here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjoint pullback sheaf comparison is an isomorphism when sections are locally generated and relations vanish locally",
+   "results": "{\"t\": \"2026-10-22T05:35:45Z\", \"tool\": \"leansearch\", \"query\": \"An adjoint pullback sheaf comparison is an isomorphism when sections are locally generated and relations vanish locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"7541db1c24e0d35b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: W_iff_isIso_map_of_adjunction concerns sheafification on one site, and homEquivOfIsLocallyBijective assumes an already locally bijective presheaf map. Neither constructs the comparison across P from the stated presentation-and-relation hypotheses. Dense-subsite presheafIso instead assumes P locally full and cover dense, which are not hypotheses here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyBijective\"",
+   "results": "{\"t\": \"2026-10-22T05:35:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyBijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W_of_isLocallyBijective\", \"CategoryTheory.GrothendieckTopology.W_iff_isLocallyBijective\", \"CategoryTheory.Sheaf.isLocallyBijective_iff_isIso\", \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\"], \"digest\": \"76120c1c25230407\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: W_iff_isIso_map_of_adjunction concerns sheafification on one site, and homEquivOfIsLocallyBijective assumes an already locally bijective presheaf map. Neither constructs the comparison across P from the stated presentation-and-relation hypotheses. Dense-subsite presheafIso instead assumes P locally full and cover dense, which are not hypotheses here."
+  },
+  {
+   "tool": "grep",
+   "query": "map_eq_map|map_eq_zero|HasPairLifts",
+   "results": "{\"t\": \"2026-10-22T06:27:32Z\", \"tool\": \"grep\", \"query\": \"map_eq_map|map_eq_zero|HasPairLifts\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\"], \"digest\": \"f9ecdb20d043419b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "locally_generated|RelationsLocal|SectionsLocallyPulledBack",
+   "results": "{\"t\": \"2026-10-22T06:27:32Z\", \"tool\": \"grep\", \"query\": \"locally_generated|RelationsLocal|SectionsLocallyPulledBack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyBijective\"",
+   "results": "{\"t\": \"2026-10-22T06:27:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyBijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W_of_isLocallyBijective\", \"CategoryTheory.GrothendieckTopology.W_iff_isLocallyBijective\", \"CategoryTheory.Sheaf.isLocallyBijective_iff_isIso\", \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\"], \"digest\": \"76120c1c25230407\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relations that vanish locally ensure independence of local presentations when constructing a morphism of abelian sheaves",
+   "results": "{\"t\": \"2026-10-22T06:27:33Z\", \"tool\": \"leansearch\", \"query\": \"Relations that vanish locally ensure independence of local presentations when constructing a morphism of abelian sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.W\", \"SheafOfModules.Presentation.mk.injEq\", \"SheafOfModules.Presentation.mapRelations\", \"SheafOfModules.Presentation.relations\", \"PresheafOfModules.sheafifyMap.congr_simp\", \"SheafOfModules.Presentation.mk.inj\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\", \"SheafOfModules.presentationOfIsCokernelFree_relations\"], \"digest\": \"ddfd8385fd970015\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local generators and relations criterion for an isomorphism from an adjoint pullback sheaf",
+   "results": "{\"t\": \"2026-10-22T06:27:33Z\", \"tool\": \"leansearch\", \"query\": \"Local generators and relations criterion for an isomorphism from an adjoint pullback sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.ctorIdx\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.Presentation.mk.injEq\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.generators\"], \"digest\": \"a5fc9e1c0bba3a71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\"",
+   "results": "{\"t\": \"2026-10-22T06:27:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.IsSeparatedFor\", \"CategoryTheory.Presieve.IsSheafFor.isSeparatedFor\", \"CategoryTheory.Presieve.isSeparatedFor_iff_generate\", \"CategoryTheory.Presieve.isSeparatedFor_iso\", \"CategoryTheory.Presieve.IsSeparatedFor.of_singleton_comp\", \"CategoryTheory.Presieve.IsSeparatedFor.isSheafFor\", \"CategoryTheory.Presieve.isSeparatedFor_and_exists_isAmalgamation_iff_isSheafFor\", \"CategoryTheory.Presieve.IsSeparatedFor.of_mono\"], \"digest\": \"f1cfb6679e31660f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For abelian presheaves and a product-preserving functor, a local zero relation condition implies that two equal pulled-back presentations induce equal sections in any separated target presheaf",
+   "results": "{\"t\": \"2026-10-22T06:27:44Z\", \"tool\": \"leanfinder\", \"query\": \"For abelian presheaves and a product-preserving functor, a local zero relation condition implies that two equal pulled-back presentations induce equal sections in any separated target presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presieve.firstMap_eq_secondMap\", \"CategoryTheory.Presieve.IsSeparatedFor.ext\", \"CategoryTheory.Meq.congr_apply\", \"CategoryTheory.Presheaf.IsSeparated\", \"CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff\", \"CategoryTheory.PresheafHom.IsSheafFor.app_cond\", \"CategoryTheory.Equalizer.Presieve.Arrows.SecondObj.ext_iff\", \"CategoryTheory.Equalizer.Presieve.Arrows.SecondObj.ext\"], \"digest\": \"c6e62b529e8799e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjoint inverse image comparison of abelian sheaves is an isomorphism if sections lift locally and all zero relations lift locally along a binary-product-preserving functor",
+   "results": "{\"t\": \"2026-10-22T06:27:44Z\", \"tool\": \"leanfinder\", \"query\": \"An adjoint inverse image comparison of abelian sheaves is an isomorphism if sections lift locally and all zero relations lift locally along a binary-product-preserving functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"CategoryTheory.GrothendieckTopology.instIsIsoSheafAppFunctorOppositeSheafComposeNatTransPlusPlusAdjunction\", \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"CategoryTheory.GrothendieckTopology.instIsIsoFunctorOppositeSheafSheafComposeNatTransPlusPlusAdjunction\", \"CategoryTheory.instIsIsoFunctorOppositeSheafToPresheafToSheafCompComposeAndSheafify\", \"CategoryTheory.sheafComposeNatIso\"], \"digest\": \"9cb0e7103dcf5d9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of an abelian sheaf is identified by local presentations of sections and local lifting of relations",
+   "results": "{\"t\": \"2026-10-22T06:28:11Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse image of an abelian sheaf is identified by local presentations of sections and local lifting of relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\", \"SheafOfModules.Presentation\", \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"CategoryTheory.sheafIsAbelian\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"SheafOfModules.instAbelian\", \"PresheafOfModules.IsLocallyInjective\", \"SheafOfModules.IsQuasicoherent\"], \"digest\": \"f5adc51dd1f5437c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local bijectivity/sheafification statements apply to a morphism on one site; the present statement derives the comparison across P from two sectionwise hypotheses. Separation/equalizer results are the sheaf criterion already cited, and hypercover homotopy and quasicoherent presentation equality do not state this criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-adic-pullback-exact-lisse",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native coefficient calculation serving inherited prop-functor-package clause 3: the local generators and relations criterion explicitly invoked in UpperStar.lean:273-303.",
+   "via": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-site-local-generators-relations-iso",
+  "worker": "stage1",
+  "summary": "Wrote the local-presentation gluing proof directly for abelian sheaves, with no strengthening of the hypothesis that precomposition preserves abelian sheaves. Explicit product/subtraction, common-cover, additivity, restriction and adjunction-inverse calculations replace uncited black boxes. Reused the existing underlying-set sheaf criterion; created no duplicate or elementary nodes. The fixed-ring module declaration is not an exact attachment to this weaker abelian statement.",
+  "blueprint": "This is an auxiliary native-coefficient calculation in the inherited prop-functor-package clause 3 chain recorded in blueprint.from.place, used by lem-sf-native-adic-pullback-exact-lisse. The ancestor command returns None for the inherited created.item chain; that lineage and its precise place are retained. No blueprint node matched the local generators/relations statement; the unit assembly route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-b6c282d32",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b6c282d32 (reviewer sub-agent of L); spot-checked: First split of an inherited node whose proof was empty. It answers no re-split note, creates no new nodes, and leaves the statement, stmt_deps, source and blueprint unchanged. I checked all 8 steps by hand against the project Lean source PullbackIsoOfLocallyGenerated.lean (lines 52-75 and 89-284: map_eq_zero, map_eq_map, exists_section, liftApp_add, liftApp_map, lift_fac, hom_ext, theorem at 250) and against the cited statements of def-weil-pbc-sites-and-cohomology (axioms (ii) composition and (iii) fibre products of covering members, used in steps 3-5) and lem-weil-pbc-algebraic-sheaf-iff-underlying-sets (set equalizer: injectivity plus amalgamation). Step 1 has the correct contravariant naturality: H(v_i)H(phi)psi t = H(phi_i)psi(F(a_i)t). Step 2 lifts through P(V1xV2), which P preserves, and only products in C are used. Step 4's formula (*) checks on T x_U U_i via step 2. Additivity, naturality, factorisation with u=phi=id, uniqueness, and the explicit adjunction inverse (beta alpha=id from H=LF, alpha beta=id by injectivity at H=G) are all correct. Edge cases hold: empty C or empty covers make G=0, the identity site gives the expected local bijectivity, and zero sheaves are fine. The Lean theorem is not an exact attachment (ModuleCat R and P.IsContinuous versus Ab sheaves with only preservation of Ab sheaves assumed), so splitting is legitimate under B10. Searching the DAG found no duplicate. Advisory only: source.place says lines 244-284, but the docstring starts at 245 and the theorem at 250. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteLocalGeneratorsRelationsIso",
+  "declaration": "CategoryTheory.isIso_homEquiv_symm_of_abelian_local_generators_relations",
+  "file": "lean/Sheaf/CategoryTheory/SiteLocalGeneratorsRelationsIso.lean",
+  "statement": "theorem isIso_homEquiv_symm_of_abelian_local_generators_relations {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D] (J : Precoverage C) (K : Precoverage D) (_hJ : J.IsSiteForCoverings) (_hK : K.IsSiteForCoverings) (P : C ⥤ D) [HasBinaryProducts C] [PreservesLimitsOfShape (Discrete WalkingPair) P] (hP : ∀ H : Sheaf K.toGrothendieck AddCommGrpCat.{max uC vC uD vD w}, Presheaf.IsSheaf J.toGrothendieck (P.op ⋙ H.obj)) (L : Sheaf J.toGrothendieck AddCommGrpCat.{max uC vC uD vD w} ⥤ Sheaf K.toGrothendieck AddCommGrpCat.{max uC vC uD vD w}) (adj : L ⊣ Sheaf.precompositionOfSheafPreservation P hP) (F : Sheaf J.toGrothendieck AddCommGrpCat.{max uC vC uD vD w}) (G : Sheaf K.toGrothendieck AddCommGrpCat.{max uC vC uD vD w}) (η : F ⟶ (Sheaf.precompositionOfSheafPreservation P hP).obj G) (_hgen : ∀ (U : D) (s : G.obj.obj (op U)), ∃ (I : Type (max uD vD)) (U' : I → D) (v : ∀ i, U' i ⟶ U), Presieve.ofArrows U' v ∈ K U ∧ ∀ i, ∃ (V : C) (t : F.obj.obj (op V)) (φ : U' i ⟶ P.obj V), G.obj.map (v i).op s = G.obj.map φ.op (η.hom.app (op V) t)) (_hrel : ∀ (V : C) (t : F.obj.obj (op V)) (U : D) (φ : U ⟶ P.obj V), G.obj.map φ.op (η.hom.app (op V) t) = 0 → ∃ (I : Type (max uD vD)) (U' : I → D) (v : ∀ i, U' i ⟶ U), Presieve.ofArrows U' v ∈ K U ∧ ∀ i, ∃ (V' : C) (a : V' ⟶ V) (φ' : U' i ⟶ P.obj V'), F.obj.map a.op t = 0 ∧ φ' ≫ P.map a = v i ≫ φ) : IsIso ((adj.homEquiv F G).symm η)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96228648a",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery repairs the prior H2/H12 RETURN: new def node def-sf-sheaf-precomposition owns Sheaf.precompositionOfSheafPreservation (genuine ObjectProperty.lift, needs only hP, no monoidal/sheafify/continuity binders; no existing node or Mathlib match). Item node differs from live only in lean and the added stmt_dep; statement/proof/source verbatim. Clause check ok: universes independent (Category.{vC}/{vD}, coefficients AddCommGrpCat.{max uC vC uD vD w}, per the size convention); hP, products in C only, adj, η, (i), (ii) with φ'≫P.map a = v i≫φ, IsIso of homEquiv.symm η. Cover index Type (max uD vD) is equivalent to unrestricted. Both lean.statement fields verbatim; docstrings carry source, blueprint and 8 steps; proof is sorry only. Edge cases ok. No compile run (no fix). Advisory: source.place 244-284 vs theorem at 250."
+ }
+}

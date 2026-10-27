@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-constant-module-ordinary-tensor-square",
+ "kind": "statement",
+ "title": "The ordinary mate preserves the constant-module tensor comparison",
+ "statement": "For geometric inverse-image data d and an ordinary adjoint identification o and normalized fixed tensor data t [def-sfb-constant-module-geometric-comparison-data], any strong monoidal structure m on d.pullR whose oplax tensorator is exactly d.ringTensor.mu satisfies TensorSquare with d.pullA, scalar restriction on J and K, their canonical ordinary monoidal structures [lem-sfb-constant-scalar-restriction-tensor], t.monoidal and o.left [def-sfb-derived-projection-comparison-squares]. This assertion concerns ordinary module sheaves only and constructs no derived structure.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-module-geometric-comparison-data",
+  "def-sfb-derived-projection-comparison-squares",
+  "lem-sfb-constant-scalar-restriction-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The adjoint Hom normalization of o.left identifies its inverse on underlying sheaves with the geometric insertion, followed by the scalar-extension unit. Identify the insertion defined by t.underlying.inv with this mate using t.hom; equality of the adjoint transposes gives equality of the maps.",
+   "uses": [
+    "lem-sfb-constant-module-ordinary-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Apply both tensor-square composites to generalized pure tensors. The tensor_hom equations for scalar restriction retain these tensors; d.ringTensor.pure and t.pure give the same pair of geometric inverse images. The preceding insertion equality identifies their input and output arrows.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Inverse image preserves products, so arbitrary pairs of input generalized sections are covered by the preceding test. The balanced tensor universal property and sheafification extend the equality from pure tensors to all sheaves. Substitute hm for the tensorator of m.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-module-ordinary-realization",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-sfb-constant-scalar-restriction-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5. Original tensor-square descent proof step 1, ordinary compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact monoidal square between categories of sheaves of modules descends to the unbounded derived categories with its tensor maps normalized on K-flat resolutions",
+   "results": "8 hits; ordinary flat-module exactness and sheaf monoidal structures, no representative-normalized derived square.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mate between geometric inverse image of sheaves of modules over a constant ring and scalar restriction preserves the canonical tensor comparison",
+   "results": "Pullback and free-adjunction results; no constant-scalar tensor square.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMonoidal\", \"mapHomologicalComplex\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorSquare|normalized_exact_tensor_square|constant_module_ordinary_tensor_square",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-27",
+   "verdict": "The comparison predicates and their representative equations are project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantModuleTensorSquareDescent",
+  "date": "2026-10-27",
+  "group": "Y3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3), canonical projection map: transport the etale projection formula through the constant-module realization, retaining its ordinary inverse-image tensor map and derived counit transpose. Substep: Original tensor-square descent proof step 1, ordinary compatibility.",
+   "via": [
+    "lem-sfb-constant-module-tensor-square-descent",
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantModuleOrdinaryTensorSquare",
+  "file": "lean/Sheaf/CategoryTheory/ConstantModuleOrdinaryTensorSquare.lean",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.constant_module_ordinary_tensor_square",
+  "statement": "theorem constant_module_ordinary_tensor_square\n    {C D : Type u} [Category.{v} C] [Category.{v} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {A : Type (max u v)} [CommRing A]\n    (d : GeometricData J K A) (o : OrdinaryIdentification d) (t : FixedTensorData d)\n    (m : d.pullR.Monoidal)\n    (hm : ∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ d.pullR\n      m.toOplaxMonoidal M N = (d.ringTensor.mu M N).hom) :\n    TensorSquare d.pullR d.pullA (restriction J A) (restriction K A)\n      m t.monoidal (restrictionBraided J A).toMonoidal\n        (restrictionBraided K A).toMonoidal o.left",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

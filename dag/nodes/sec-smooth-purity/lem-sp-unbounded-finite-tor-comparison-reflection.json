@@ -1,0 +1,271 @@
+{
+ "id": "lem-sp-unbounded-finite-tor-comparison-reflection",
+ "kind": "statement",
+ "title": "Unbounded site comparison reflects bounded constructibility and Tor intervals",
+ "statement": "Let $T$ be a quasi-compact quasi-separated scheme and $R$ a finite discrete commutative ring [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Use ordinary unbounded constant-$R$ module derived categories [def-weil-pbc-derived-categories] [def-weil-pbc-proetale-modules] and the exact derived comparison $N_T=\\nu_T^*:D(T_{\\rm et},R)\\to D(T_{\\rm proet},R)$ [def-weil-pbc-site-comparison-morphism]. Let $C\\in D(T_{\\rm et},R)$ be arbitrary, and let $c\\le d$ and $a\\le b$ be integers. Suppose $H^q(N_TC)=0$ for $q\\notin[c,d]$, each $H^q(N_TC)$ is intrinsically constructible [def-weil-proetale-constructible-sheaf], and $N_TC$ has Tor amplitude in $[a,b]$, meaning that its derived tensor with every degree-zero pro-etale $R$-module sheaf has cohomology only in $[a,b]$ [def-weil-proetale-tor-amplitude] [def-sf-categorical-proetale-tor-amplitude]. Then $H^q(C)=0$ for $q\\notin[c,d]$, every $H^q(C)$ is a constructible etale $R$-module sheaf [def-weil-pbc-etale-constructible-sheaf], and $C$ has etale Tor amplitude in $[a,b]$ [def-kun-tor-amplitude]. In particular $C$ is bounded constructible and bounded below [def-weil-pbc-bounded-derived-subcategories]. No boundedness, bounded-below condition, or constructibility is assumed on $C$ before applying this assertion. Here bounded constructibility is understood as in [def-weil-pbc-constructible-complexes].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AK (lemma-compare-constructible), with exact fully faithful comparison and det-pe-finite-tor-comparison-noetherian. The unbounded cohomology-reflection consequence is the explicit argument in returned finite-compact-support-domains proof Steps 4 and 6, not a verbatim claim of 09AK."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-constructible-complexes",
+  "def-sf-categorical-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Let F be the canonical comparison on fixed-coefficient module sheaves. The existing exactness and full-faithfulness instances realize det-pe-classical-sheaves-modules directly in the source library. Its mapDerivedCategoryHomologyFunctorIso identifies F(H^q(C)) with H^q(D(F)(C)) for every q, without boundedness. Use IsZero.of_full_of_faithful_of_isZero and this isomorphism to reflect the assumed vanishing outside [c,d].",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix q. Unpack the intrinsic fixed-module constructibility partition of H^q(D(F)(C)). On each stratum, finite_models_of_fixed_lisse converts local constancy and finite geometric stalks into finite constant models. This is precisely the source predicate ProEtale.IsConstructible. Apply the existing fixed-module constructible-origin theorem to obtain a constructible etale sheaf G and an isomorphism F(G) with this image cohomology sheaf.",
+   "uses": [
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-fixed-module-constructible-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the resulting isomorphism with the inverse cohomology comparison to obtain F(G) isomorphic to F(H^q(C)). Functor.preimageIso lifts this along the fully faithful sheaf functor. IsConstructibleSheaf.of_iso transports constructibility to H^q(C). Apply isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf to obtain the precise etale predicate of the conclusion.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing source-library fixed-module theorem ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff (HomComparison.lean), the underlying fixed-coefficient comparison used in lem-exc-comparison-tor-interval. Its forward implication reflects the assumed Tor interval directly for the arbitrary unbounded C. The proved source lemma Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn converts to the explicit etale homology-vanishing tests. No transport to coefficient site models, bounded flat model constructed here, or Noetherian comparison theorem is needed.",
+   "uses": [
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reflected constructibility in every degree and vanishing outside the same ordered interval [c,d] are exactly isBoundedConstructible. Finally DerivedCategory.isGE_iff applied to the vanishing below c yields C.IsGE c, and the witness c proves t.plus C. Combine these with the reflected Tor bound to obtain the five conclusions.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-sheaves-modules",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-exc-comparison-tor-interval",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099T, 099Y and 09AK, implemented by existing source-library exact comparison and fixed-module constructible origin; Tor reflection uses WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/HomComparison.lean, torAmplitudeIn_mapDerivedCategory_iff, whose general exact faithful monoidal argument is in CategoryTheory/DerivedCategory/TorAmplitudeMapDerivedCategory.lean. F5 stage-3 proof uses no coefficient-model comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs scheme and a Noetherian ring, exact etale to proetale comparison reflects bounded constructible finite Tor amplitude for an arbitrary unbounded complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the finite-coefficient etale/pro-etale derived comparison or its constructibility and Tor consequences; the derived-category and module-category hits are generic supporting infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Faithful, DerivedCategory",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] : ((CategoryTheory.Functor.whiskeringLeft (HomotopyCategory C (ComplexShape.up ℤ)) (DerivedCategory C) D).obj DerivedCategory.Qh).Faithful\", \"doc\": \"\"}\n  {\"name\": \"DerivedCategory.instFaithfulSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] [HasDerivedCategory C] (n : ℤ) : (DerivedCategory.singleFunctor C n).Faithful\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the finite-coefficient etale/pro-etale derived comparison or its constructibility and Tor consequences; the derived-category and module-category hits are generic supporting infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ro[Ee]tale|reflect.*[Cc]onstructib|[Tt]orAmplitude",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Sites.Proetale\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"39\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"61\", \"text\": \"[Definition 6.8.1.][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"65\", \"text\": \"  ((ProEt.forget X ⋙ Over.forget _).sheafPushforwardContinuous _ _ proetaleTopology).obj\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"66\", \"text\": \"    ⟨continuousMapPresheafAb (ℤ_[ℓ]), .of_le proetaleTopology_le_fpqcTopology <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"34\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"50\", \"text\": \"[Definition 4.1.1][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"52\", \"text\": \"def proetalePrecoverage : Precoverage Scheme.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"57\", \"text\": \"lemma proetalePrecoverage_le_precoverage_weaklyEtale :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"58\", \"text\": \"    proetalePrecoverage ≤ MorphismProperty.precoverage @WeaklyEtale :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the finite-coefficient etale/pro-etale derived comparison or its constructibility and Tor consequences; the derived-category and module-category hits are generic supporting infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If inverse image of an unbounded etale complex has bounded constructible cohomology and Tor amplitude a b then the original complex has the same bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.isZero_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  i < n → ∀ [hX : X.IsGE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ belongs to the family $\\\\mathcal{G}_n$ of the T-structure (i.e., is isomorphic to a complex strictly supported in \"}\n  {\"name\": \"DerivedCategory.isZero_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  n < i → ∀ [hX : X.IsLE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"If an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $ (i.e., is isomorphic to a cochain complex strictly supported in degrees $ \\\\leq n $), then for every integer $ i \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the finite-coefficient etale/pro-etale derived comparison or its constructibility and Tor consequences; the derived-category and module-category hits are generic supporting infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact fully faithful etale proetale inverse image reflects bounded constructibility and finite Tor amplitude",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|rightDerivedLowerShriek|TorAmplitude|IsConstructibleProEtale",
+   "results": "[grep] OK 0 hit(s) in AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ro[Ee]tale.*[Cc]onstruct|[Cc]onstruct.*[Pp]ro[Ee]tale|[Tt]orAmplitude",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide generic category theory, etale ring algebra, or condensed-module infrastructure, not the asserted site-comparison reflection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale comparison reflects bounded constructibility of arbitrary unbounded complexes",
+   "results": "Hits: Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.comp, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.of_equiv, Algebra.FormallyEtale.comp, Algebra.Etale.of_equiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide generic category theory, etale ring algebra, or condensed-module infrastructure, not the asserted site-comparison reflection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact etale to proetale inverse image reflects cohomology bounds constructible cohomology and Tor amplitude for an unbounded complex",
+   "results": "Hits: CochainComplex.isLE_iff, CochainComplex.isGE_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CochainComplex.exactAt_of_isLE, CochainComplex.exactAt_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide generic category theory, etale ring algebra, or condensed-module infrastructure, not the asserted site-comparison reflection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful functor on module sheaves detects vanishing of cohomology and reflects constructible sheaves under etale proetale site comparison",
+   "results": "Hits: LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.profiniteSolid, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide generic category theory, etale ring algebra, or condensed-module infrastructure, not the asserted site-comparison reflection theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-finite-compact-support-domains",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts and Locality: finiteness of the etale representatives in the coefficient-counit identity; returned domain proof Steps 4 and 6, reflection through unbounded exact comparison before invoking the Noetherian Tor theorem.",
+   "via": [
+    "lem-sp-finite-compact-support-domains",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-unbounded-finite-tor-comparison-reflection",
+  "worker": "stage1",
+  "group": "Q130",
+  "summary": "Split the reflection argument into exact cohomology comparison, elementary faithful zero reflection, constructible sheaf descent with explicit inverse lifting, bounded-category membership, and the existing Noetherian Tor comparison. No new nodes. No bounded-below hypothesis is smuggled into the initial steps.",
+  "blueprint": "det-sp-reduction-exceptional, Charts and Locality: finiteness of etale representatives used to type the finite-level coefficient-counit comparison; the present reflection discharges the unbounded representative domain check before the bounded Noetherian Tor theorem.",
+  "tool_uses": [
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Ambient exact fully faithful module comparison, used to reflect zero and lift sheaf isomorphisms; a generic comparison tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Unbounded termwise exact comparison and cohomology identification, with no initial boundedness hypothesis."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Sheaf-level constructible comparison for discrete Noetherian coefficients after checking R is finite and T is qcqs."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Specified Tor-interval reflection only after proving C lies in the required bounded constructible domain."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-classical-sheaves-modules",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-edafd5747",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-edafd5747 (reviewer sub-agent of L); spot-checked: I read all five steps and they are correct; no new nodes. Step 1: det-pe-classical-sheaves-modules (exact, fully faithful ν^* for discrete Λ) and lem-sf-comparison-pullback-exact(3) (H^i(ν^*K)≅ν^*H^i(K) for any complex, finite Λ) give F(H^qC)≅H^q(N_TC) with no boundedness. Step 2: faithfulness reflects zero, so C is in D^b ⊂ D^+. Step 3: a finite ring is Noetherian. The Stacks 09AK equivalence (proetale.tex l.5239, proof read), stated for qcqs X in sk-thm-pe-constructible-comparison, gives G_q with FG_q≅FG. The item's pro-étale constructibility hypothesis implies that node's notion, since finite stalks mean finite-type modules. Full faithfulness lifts the iso, and étale constructibility over finite R matches def-weil-pbc-etale-constructible-sheaf. Step 4: these are exactly the conditions of def-weil-pbc-constructible-complexes. Step 5: the detection direction of det-pe-finite-tor-comparison-noetherian (main-20261015 statement and proof read) keeps the same [a,b], and all its hypotheses are met. Edge cases C=0, R=0, T=∅, a=b and Z/4 behave correctly. The citer lem-sp-finite-compact-support-domains Steps 4-5 applies it on qcqs U,V with finite R, which matches. The route is covered by the unit's uses (sec-proetale-coefficients, sk-def-sf-operations); I accept the four declared tool_uses. No SGA citations. Not a re-split note case: first split of a node created 10-22. Maintainer note: the item strictly generalizes lem-sf-bounded-below-ctf-reflection (Q42, which needs D^+, finite-type T and A=O_E/ϖ^n). It is not a duplicate and not a fault of this delivery. review_split.py reports 'no such node' for every citation because the chapter directories are symlinks; all cited nodes exist."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnboundedFiniteTorComparisonReflection",
+  "declaration": "AlgebraicGeometry.unbounded_finiteTor_comparison_reflection",
+  "file": "lean/Sheaf/Paper/UnboundedFiniteTorComparisonReflection.lean",
+  "statement": "theorem unbounded_finiteTor_comparison_reflection (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] (R : Type (u + 1)) [CommRing R] [Finite R] [TopologicalSpace R] [DiscreteTopology R] (C : Etale.DerivedCategoryModule R T) (c d a b : ℤ) (_hcd : c ≤ d) (_hab : a ≤ b) (_hVanishing : ∀ q : ℤ, q < c ∨ d < q → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R)) q).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory.obj C))) (_hConstructible : ∀ q : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf T R ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R)) q).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory.obj C))) (_hTor : ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} R) T a b ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory.obj C)) : (∀ q : ℤ, q < c ∨ d < q → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj C)) ∧ (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj C)) ∧ Etale.DerivedCategory.hasTorAmplitudeIn R T a b C ∧ Etale.DerivedCategory.isBoundedConstructible R T C ∧ _root_.DerivedCategory.TStructure.t.plus C",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69bef25f6",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 1c232a4adb7e. H13 resolved: all 12 dep records identical to side-live, def-weil-proetale-tor-amplitude Q28 7-declaration record restored. H4 resolved: citation-only statement_change adds [def-sf-categorical-proetale-tor-amplitude] (owner of torAmplitudeIn) to statement and stmt_deps; node_fields.check_statement_change returns no errors; citers list complete (only lem-sp-finite-compact-support-domains), holds true. Lean module and lean record byte-identical to prior delivery; re-read clause by clause against comparisonUpperStar, IsConstructibleProEtaleFixedModuleSheaf, ProEtale torAmplitudeIn (= generic DerivedCategory.torAmplitudeIn, every degree-zero test sheaf), Etale hasTorAmplitudeIn, isBoundedConstructible, t.plus: all hypotheses and conclusions match the node with the same c,d,a,b, no extra assumptions or universe restriction. Edge cases C=0, R=0, T empty, c=d, a=b ok. Body sorry, no definitions, docstrings carry source place, blueprint id and the 5 proof steps; lean.statement verbatim; both report sections present. Advisory: the def-weil-proetale-tor-amplitude module is not imported (not needed). No compile run, no file changed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "Q49 stage 2",
+  "old_statement": "Let $T$ be a quasi-compact quasi-separated scheme and $R$ a finite discrete commutative ring [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Use ordinary unbounded constant-$R$ module derived categories [def-weil-pbc-derived-categories] [def-weil-pbc-proetale-modules] and the exact derived comparison $N_T=\\nu_T^*:D(T_{\\rm et},R)\\to D(T_{\\rm proet},R)$ [def-weil-pbc-site-comparison-morphism]. Let $C\\in D(T_{\\rm et},R)$ be arbitrary, and let $c\\le d$ and $a\\le b$ be integers. Suppose $H^q(N_TC)=0$ for $q\\notin[c,d]$, each $H^q(N_TC)$ is intrinsically constructible [def-weil-proetale-constructible-sheaf], and $N_TC$ has Tor amplitude in $[a,b]$, meaning that its derived tensor with every degree-zero pro-etale $R$-module sheaf has cohomology only in $[a,b]$ [def-weil-proetale-tor-amplitude]. Then $H^q(C)=0$ for $q\\notin[c,d]$, every $H^q(C)$ is a constructible etale $R$-module sheaf [def-weil-pbc-etale-constructible-sheaf], and $C$ has etale Tor amplitude in $[a,b]$ [def-kun-tor-amplitude]. In particular $C$ is bounded constructible and bounded below [def-weil-pbc-bounded-derived-subcategories]. No boundedness, bounded-below condition, or constructibility is assumed on $C$ before applying this assertion. Here bounded constructibility is understood as in [def-weil-pbc-constructible-complexes].",
+  "what": "Citation/interface ownership repair requested by the independent review of 1c232a4adb7e (H13/H4). The old statement cited only the ringed-site Tor-amplitude node, whose live seven-declaration record must be preserved. The fixed-module categorical predicate actually used by _hTor is already owned by def-sf-categorical-proetale-tor-amplitude. Add that citation and statement dependency; all mathematical hypotheses, conclusions, intervals, and the Lean signature remain identical. No dependency record is replaced.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tag 09AK (lemma-compare-constructible), with exact fully faithful comparison and det-pe-finite-tor-comparison-noetherian. The unbounded cohomology-reflection consequence is the explicit argument in returned finite-compact-support-domains proof Steps 4 and 6, not a verbatim claim of 09AK."
+  },
+  "citers": [
+   {
+    "id": "lem-sp-finite-compact-support-domains",
+    "holds": true,
+    "note": "Its Steps 4 and 5 apply the unchanged unbounded reflection assertion; adding the owner citation for the same Tor predicate changes no premise or conclusion."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-pbc-scheme-conventions",
+   "def-weil-pbc-derived-categories",
+   "def-weil-pbc-proetale-modules",
+   "def-weil-pbc-site-comparison-morphism",
+   "def-weil-proetale-constructible-sheaf",
+   "def-weil-proetale-tor-amplitude",
+   "def-weil-pbc-etale-constructible-sheaf",
+   "def-kun-tor-amplitude",
+   "def-weil-pbc-bounded-derived-subcategories",
+   "def-weil-pbc-constructible-complexes"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261022T143607-L-1199071",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

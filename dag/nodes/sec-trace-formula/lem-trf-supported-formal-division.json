@@ -1,0 +1,286 @@
+{
+ "id": "lem-trf-supported-formal-division",
+ "kind": "statement",
+ "title": "Supported division for arbitrary finite formal divisors",
+ "statement": "Let $L$ be a field [def-weil-field], let $n,s\\ge0$, and let $G_1,\\ldots,G_s$ be nonzero elements of $L[[T_1,\\ldots,T_n]]$ [def-weil-pbc-multivariate-power-series]. Order exponents by ascending lexicographic order of $(|\\alpha|,\\alpha_1,\\ldots,\\alpha_n)$, and let $\\alpha_i$ be the least exponent with nonzero coefficient in $G_i$. Put $E_i=(\\alpha_i+\\mathbf N^n)\\setminus\\bigcup_{j<i}(\\alpha_j+\\mathbf N^n)$, $\\Delta_i=\\{\\beta:\\alpha_i+\\beta\\in E_i\\}$ and $E_0=\\mathbf N^n\\setminus\\bigcup_i E_i$. For every $F\\in L[[T_1,\\ldots,T_n]]$ there exist unique $Q_1,\\ldots,Q_s,R$ in that ring satisfying $F=\\sum_i Q_iG_i+R$, $\\operatorname{supp}Q_i\\subseteq\\Delta_i$, and $\\operatorname{supp}R\\subseteq E_0$. The support of a series is the set of its exponents with nonzero coefficient. If $F$ has no term of total degree less than $q$, then $R$ has none either, and $Q_i$ has no term of total degree less than $q-|\\alpha_i|$ whenever this bound is positive. For $s=0$ the conclusion is $R=F$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997, Theorem 3.17 and Remark 3.18, printed p.238, referred to by the local-presentation route of VIII 2.3.11--2.3.13. No Stacks tag states this supported multivariate formal division theorem; the BM paper is WANTED in literature/."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-initial-diagram",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mu\\prec\\nu$ for the order in the statement. The exponents of total degree at most $d$ form a finite set: each coordinate lies between $0$ and $d$. Thus each exponent has finitely many predecessors. Every nonempty set of exponents has a least element: first minimize total degree in $\\mathbf N$, then choose the lexicographically least element of that finite degree. Translation preserves strict order: $\\mu\\prec\\nu$ implies $\\mu+\\beta\\prec\\nu+\\beta$, since either the total degrees differ or the first differing coordinate remains the same. These arguments include $n=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 1."
+   }
+  },
+  {
+   "text": "The sets $E_0,E_1,\\ldots,E_s$ are pairwise disjoint and cover $\\mathbf N^n$. Indeed, an exponent in some orthant belongs to the first orthant containing it; all other exponents belong to $E_0$. If $\\mu\\in E_i$, the unique componentwise difference $\\beta=\\mu-\\alpha_i$ lies in $\\Delta_i$, and conversely $\\beta\\in\\Delta_i$ gives $\\mu=\\alpha_i+\\beta\\in E_i$. Consequently there is exactly one slot for each exponent: a remainder slot for $\\mu\\in E_0$ or an $(i,\\beta)$ quotient slot. This holds even if some $E_i$ are empty or some $\\alpha_i$ coincide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 2."
+   }
+  },
+  {
+   "text": "Put $c_i=[T^{\\alpha_i}]G_i\\ne0$; it has an inverse by [def-weil-field]. For each exponent define a series $C_\\mu$: set $C_\\mu=T^\\mu$ for $\\mu\\in E_0$, and $C_\\mu=c_i^{-1}T^\\beta G_i$ for $\\mu=\\alpha_i+\\beta\\in E_i$. By the multiplication formula of [def-weil-pbc-multivariate-power-series], the exponents in the latter series are $\\beta+\\gamma$ with $\\gamma\\in\\operatorname{supp}G_i$. All such $\\gamma$ satisfy $\\alpha_i\\preceq\\gamma$, and Step 1 gives $\\mu\\preceq\\beta+\\gamma$. Hence in both cases $[T^\\nu]C_\\mu=0$ for $\\nu\\prec\\mu$ and $[T^\\mu]C_\\mu=1$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 3."
+   }
+  },
+  {
+   "text": "Let $f_\\nu=[T^\\nu]F$. Define scalars successively by the explicit formula $a_\\nu=f_\\nu-\\sum_{\\mu\\prec\\nu}a_\\mu[T^\\nu]C_\\mu$. The sum is finite by Step 1. To construct the family, process degrees $d=0,1,\\ldots$; within degree $d$, process its finite exponent list in ascending lexicographic order. At the first exponent the sum is empty, and at every subsequent exponent all scalars on the right have already been assigned. This is ordinary recursion on the degree, with finite recursion inside each degree, and defines exactly one scalar at every exponent. Induction in this same order shows that any family obeying the formula equals this one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 4."
+   }
+  },
+  {
+   "text": "Define the actual series by their coefficient families as in [def-weil-pbc-multivariate-power-series]: put $[T^\\beta]Q_i=c_i^{-1}a_{\\alpha_i+\\beta}$ when $\\beta\\in\\Delta_i$, and put it equal to zero otherwise; put $[T^\\nu]R=a_\\nu$ on $E_0$ and zero off $E_0$. These are arbitrary coefficient families, so the definition supplies series without a convergence or completeness theorem. Their supports have precisely the required containments. For each fixed exponent $\\nu$, the finite convolution formula and the slot bijection of Step 2 give $[T^\\nu](\\sum_i Q_iG_i+R)=\\sum_{\\mu\\preceq\\nu}a_\\mu[T^\\nu]C_\\mu$. To check the reindexing, a quotient coefficient at $\\beta$ contributes $c_i^{-1}a_{\\alpha_i+\\beta}[T^{\\nu-\\beta}]G_i$ when $\\beta\\le\\nu$ componentwise; if it is nonzero then Step 3 implies $\\alpha_i+\\beta\\preceq\\nu$. Terms with $\\beta\\not\\le\\nu$ or with a later slot have zero coefficient in $C_\\mu$. Remainder slots contribute only at their own exponent.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 5."
+   }
+  },
+  {
+   "text": "By Step 3 the last sum equals $a_\\nu+\\sum_{\\mu\\prec\\nu}a_\\mu[T^\\nu]C_\\mu=f_\\nu$, by the defining recursion. Thus $F$ and $\\sum_i Q_iG_i+R$ have the same coefficient at every exponent. They are equal because formal series are coefficient families [def-weil-pbc-multivariate-power-series]. This proves existence of the supported expression.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 6."
+   }
+  },
+  {
+   "text": "For any other supported expression $F=\\sum_i Q'_iG_i+R'$, encode its coefficients in slots: set $b_\\mu=[T^\\mu]R'$ on $E_0$ and $b_{\\alpha_i+\\beta}=c_i[T^\\beta]Q'_i$ on $E_i$. The convolution computation in Step 5, using [def-weil-pbc-multivariate-power-series], gives $f_\\nu=b_\\nu+\\sum_{\\mu\\prec\\nu}b_\\mu[T^\\nu]C_\\mu$. Thus $b$ obeys the recursion of Step 4 and equals $a$ by induction. On each quotient slot division by $c_i\\ne0$ is valid by [def-weil-field], so all coefficients of $Q'_i$ equal those of $Q_i$; the supports force the other coefficients to be zero. The same argument gives $R'=R$. This proves uniqueness without assuming the $G_i$ are a standard basis or generators of any specified ideal.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 7."
+   }
+  },
+  {
+   "text": "Suppose $f_\\nu=0$ whenever $|\\nu|<q$. Induct in the recursion order over those exponents. Every predecessor $\\mu\\prec\\nu$ has $|\\mu|\\le|\\nu|<q$, hence its scalar is zero by the induction hypothesis. The displayed formula therefore gives $a_\\nu=0$. The coefficients of $R$ below degree $q$ vanish. If $|\\beta|<q-|\\alpha_i|$, then $|\\alpha_i+\\beta|<q$; on a quotient slot its coefficient is $c_i^{-1}a_{\\alpha_i+\\beta}=0$, and off its slots it was defined to be zero. This gives exactly the asserted positive quotient bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 8."
+   }
+  },
+  {
+   "text": "If $s=0$, every slot is a remainder slot and $C_\\mu=T^\\mu$. The recursion then reads $a_\\nu=f_\\nu$, so $R=F$. If $n=0$, there is only the empty exponent: for $s>0$ the first orthant occupies it and all later $E_i$ are empty. The formulas give $Q_1=F/G_1$, $Q_i=0$ for $i>1$, and $R=0$; each $G_i$ is a nonzero scalar. For arbitrary $n$, an empty $E_i$ similarly forces $Q_i=0$. These verify the empty-variable, scalar-unit and repeated-initial-exponent cases directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED. Agent proof, step 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13, printed pp.93--94, for the historical BM route only; the following coefficient proof is written by Q88, not quoted from this document. BM 1997, Theorem 3.17 and Remark 3.18, remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "division|remainder|quotient",
+   "results": "{\"t\": \"2026-10-22T04:37:39Z\", \"tool\": \"grep\", \"query\": \"division|remainder|quotient\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"76ce4f75d225d3e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/Basic.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean; these hits do not state this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"div\"",
+   "results": "{\"t\": \"2026-10-22T04:37:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"div\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.instNoZeroDivisors\", \"MvPowerSeries.X_mem_nonZeroDivisors\", \"MvPowerSeries.X_mem_nonzeroDivisors\", \"MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff\", \"MvPowerSeries.mem_nonZeroDivisorsRight_of_constantCoeff\", \"MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff\", \"MvPowerSeries.monomial_mem_nonZeroDivisors\", \"MvPowerSeries.monomial_mem_nonZeroDivisorsLeft\"], \"digest\": \"21afc7fabea98082\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.instNoZeroDivisors, MvPowerSeries.X_mem_nonZeroDivisors, MvPowerSeries.X_mem_nonzeroDivisors, MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff, MvPowerSeries.mem_nonZeroDivisorsRight_of_constantCoeff, MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff, MvPowerSeries.monomial_mem_nonZeroDivisors, MvPowerSeries.monomial_mem_nonZeroDivisorsLeft; these hits do not state this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-supported-formal-division: unique division by finitely many formal series with prescribed supports of quotients and remainder",
+   "results": "{\"t\": \"2026-10-22T04:37:39Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-supported-formal-division: unique division by finitely many formal series with prescribed supports of quotients and remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision.elim\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.term_/ʷ_\", \"div_eq_quo_add_sum_rem_div\", \"Polynomial.div_eq_quo_add_rem_div\"], \"digest\": \"4a7ba678ed7e0b74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PowerSeries.IsWeierstrassDivision.elim, PowerSeries.IsWeierstrassDivision.unique, PowerSeries.weierstrassDiv, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod, PowerSeries.exists_isWeierstrassDivision, PowerSeries.term_/ʷ_, div_eq_quo_add_sum_rem_div, Polynomial.div_eq_quo_add_rem_div; these hits do not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-formal-division: Hironaka formal power series division with quotients in disjoint monomial regions and unique remainder",
+   "results": "{\"t\": \"2026-10-22T04:37:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-supported-formal-division: Hironaka formal power series division with quotients in disjoint monomial regions and unique remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision.elim\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\"], \"digest\": \"8bde76edbb6bba3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PowerSeries.IsWeierstrassDivision.elim, PowerSeries.IsWeierstrassDivision.unique, PowerSeries.IsWeierstrassDivision, PowerSeries.weierstrassDiv, PowerSeries.IsWeierstrassDivisionAt, PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod, PowerSeries.exists_isWeierstrassDivision, PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod; these hits do not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-formal-division: multivariate formal power series standard basis division unique disjoint support cones",
+   "results": "{\"t\": \"2026-10-22T04:38:21Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-supported-formal-division: multivariate formal power series standard basis division unique disjoint support cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv.aux\", \"MvPowerSeries.X_pow_dvd_iff\", \"MvPowerSeries.X_dvd_iff\", \"PowerSeries.IsWeierstrassDivisionAt\", \"MvPolynomial.support_divMonomial\", \"PowerSeries.divXPowOrder\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.IsWeierstrassDivision.elim\"], \"digest\": \"48aeeb156c4581fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.inv.aux, MvPowerSeries.X_pow_dvd_iff, MvPowerSeries.X_dvd_iff, PowerSeries.IsWeierstrassDivisionAt, MvPolynomial.support_divMonomial, PowerSeries.divXPowOrder, PowerSeries.IsWeierstrassDivision.unique, PowerSeries.IsWeierstrassDivision.elim; these hits do not state this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "def div|theorem div|div_set",
+   "results": "{\"t\": \"2026-10-22T04:39:45Z\", \"tool\": \"grep\", \"query\": \"def div|theorem div|div_set\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\"], \"digest\": \"0e6bbeb15b1e1a22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/RingTheory/MvPolynomial/Groebner.lean, Mathlib/RingTheory/MvPolynomial/Groebner.lean, Mathlib/RingTheory/MvPolynomial/Groebner.lean, Mathlib/RingTheory/MvPolynomial/Groebner.lean, Mathlib/RingTheory/MvPolynomial/Groebner.lean; these hits do not state this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "division|remainder|quotient",
+   "results": "{\"t\": \"2026-10-22T05:35:14Z\", \"tool\": \"grep\", \"query\": \"division|remainder|quotient\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"76ce4f75d225d3e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source hits concern quotients, coefficient maps and truncations, not this division theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem div|def div|div_set",
+   "results": "{\"t\": \"2026-10-22T05:35:14Z\", \"tool\": \"grep\", \"query\": \"theorem div|def div|div_set\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\"], \"digest\": \"0e6bbeb15b1e1a22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MonomialOrder.div (Groebner.lean:128) divides polynomials by leading terms and gives neither formal-series coefficients nor this unique supported quotient partition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-supported-formal-division: Hironaka formal division theorem for arbitrary finite lists of nonzero series and degree bounds",
+   "results": "{\"t\": \"2026-10-22T05:35:14Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-supported-formal-division: Hironaka formal division theorem for arbitrary finite lists of nonzero series and degree bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivisionAt.recOn\", \"PowerSeries.term_/ʷ_\", \"PowerSeries.isWeierstrassDivisionAt_iff\", \"PowerSeries.isWeierstrassDivisionAt_zero\", \"PowerSeries.IsWeierstrassDivisionAt.add\"], \"digest\": \"82929bfc79b6aaf6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Weierstrass declarations (PowerSeries/WeierstrassPreparation.lean:504,579,594) are univariate division by one distinguished series, not arbitrary finite multivariate supported division"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"div\"",
+   "results": "{\"t\": \"2026-10-22T05:35:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"div\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.instNoZeroDivisors\", \"MvPowerSeries.X_mem_nonZeroDivisors\", \"MvPowerSeries.X_mem_nonzeroDivisors\", \"MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff\", \"MvPowerSeries.mem_nonZeroDivisorsRight_of_constantCoeff\", \"MvPowerSeries.mem_nonZeroDivisors_of_constantCoeff\", \"MvPowerSeries.monomial_mem_nonZeroDivisors\", \"MvPowerSeries.monomial_mem_nonZeroDivisorsLeft\"], \"digest\": \"21afc7fabea98082\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern non-zero-divisors, not supported multivariate division"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-formal-division: unique multivariate formal power series division with quotients and remainder supported in disjoint initial monomial cones",
+   "results": "{\"t\": \"2026-10-22T05:35:16Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-supported-formal-division: unique multivariate formal power series division with quotients and remainder supported in disjoint initial monomial cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.IsWeierstrassDivision.elim\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"MvPowerSeries.X_pow_dvd_iff\", \"MvPowerSeries.X_dvd_iff\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"239b43cf3fe662da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Weierstrass declarations (PowerSeries/WeierstrassPreparation.lean:504,579,594) are univariate division by one distinguished series, not arbitrary finite multivariate supported division"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-supported-formal-division: solve triangular coefficient equations degree by degree for multivariate power series with prescribed supports",
+   "results": "{\"t\": \"2026-10-22T05:35:17Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-supported-formal-division: solve triangular coefficient equations degree by degree for multivariate power series with prescribed supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv.aux\", \"MvPowerSeries.coeff_inv_aux\", \"MvPowerSeries.coeff_inv\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.HasSubst\", \"MvPowerSeries.coeff_subst_finite\", \"MvPowerSeries.X_pow_dvd_iff\", \"MvPowerSeries.HasSubst.coeff_zero\"], \"digest\": \"7d05548f82226f33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inv.aux (MvPowerSeries/Inverse.lean:65) handles an inverse with unit constant coefficient; substitution and monomial-divisibility hits do not solve arbitrary finite supported division"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-monotone-diagram",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "VIII 2.3.11 and 2.3.13, printed pp.93--94; lower local input for the historical modification branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-regular-hilbert-coefficient-data. BM 1997, Theorem 3.17 and Remark 3.18, printed p.238, referred to by the local-presentation route of VIII 2.3.11--2.3.13. No Stacks tag states this supported multivariate formal division theorem; the BM paper is WANTED in literature/.",
+   "via": [
+    "lem-trf-generic-monotone-diagram",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-supported-formal-division",
+  "worker": "stage1",
+  "summary": "Q88 supplies an explicit coefficient recursion with one slot per exponent, proves its finite triangular coefficient identities, constructs the quotient and remainder families, and proves uniqueness and degree bounds. The statement is unchanged. No new nodes: all steps are finite coefficient calculations or explicit ordinary induction from the two existing definition nodes. BM 1997 remains WANTED and the proof is honestly marked agent-written.",
+  "blueprint": "Historical local-presentation input below lem-trf-local-term-locality through the recorded via chain; specifically lem-trf-generic-monotone-diagram step 6. The current main-20261015 locality proof instead uses contracting correspondences; this delivery changes neither that unit nor its route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-f79f30316",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-f79f30316 (reviewer sub-agent of L); spot-checked: I read the whole split. The statement is unchanged and correct: Hironaka-type supported division in L[[T]] for the degree-lex order, which is a well-order of type ω and compatible with translation. I checked all 9 steps myself. Step 3 gives each normalized column C_μ the leading term T^μ with coefficient 1. Step 4 is a finite triangular recursion. I re-derived the Step 5 reindexing term by term: terms with β≰ν vanish, and terms with α_i+β≻ν vanish because ν−β≺α_i. Step 7 proves uniqueness by encoding any other solution in the same slots. Step 8's degree bounds are proved by induction over exponents of degree <q. The n=0, s=0 and repeated-exponent edge cases hold. I also tested the small cases G=T+T², a unit divisor and repeated exponents. Each step uses only what def-weil-field (inverses) and def-weil-pbc-multivariate-power-series (coefficient families, finite convolution) state, and each is a few lines, so the elementary labels are justified. The ILO VIII 2.3.10–2.3.13 text (PDF pp. 99–100) contains no division theorem, as the report says. BM 1997 is absent from literature/, and the proof is honestly marked agent-written with the paper WANTED. The item has no repair note; only the parent generic-monotone-diagram has one. Neither the item, its parent nor its via chain is in route-pivot-dropped.txt. 0 new nodes with elementary steps is acceptable for a first split. The parent's step 6 uses exactly the remainder-support clause. An rg -L search of the DAG finds no duplicate: def-trf-supported-homogeneous-division is a different, homogeneous polynomial notion. The blueprint fields and searches are in order. Note for the maintainer: citations.json and searches.jsonl, which the report mentions, are not in the commit; they are worker-side files. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SupportedFormalDivision",
+  "declaration": "MonomialDiagram.exists_unique_supported_formal_division",
+  "file": "lean/Sheaf/RingTheory/SupportedFormalDivision.lean",
+  "statement": "theorem exists_unique_supported_formal_division {L : Type u} [Field L] {n s : ℕ} (G : Fin s → MvPowerSeries (Fin n) L) (α : Fin s → Fin n →₀ ℕ) (hα : ∀ i : Fin s, IsFirstExponent (G i) (α i)) (F : MvPowerSeries (Fin n) L) : ∃ (Q : Fin s → MvPowerSeries (Fin n) L) (R : MvPowerSeries (Fin n) L), F = (∑ i : Fin s, Q i * G i) + R ∧ (∀ i : Fin s, Function.support (Q i) ⊆ quotientSupport α i) ∧ Function.support R ⊆ (generated α)ᶜ ∧ (∀ (Q' : Fin s → MvPowerSeries (Fin n) L) (R' : MvPowerSeries (Fin n) L), F = (∑ i : Fin s, Q' i * G i) + R' → (∀ i : Fin s, Function.support (Q' i) ⊆ quotientSupport α i) → Function.support R' ⊆ (generated α)ᶜ → Q' = Q ∧ R' = R) ∧ (∀ q : ℕ, (∀ β : Fin n →₀ ℕ, β.degree < q → MvPowerSeries.coeff β F = 0) → (∀ β : Fin n →₀ ℕ, β.degree < q → MvPowerSeries.coeff β R = 0) ∧ (∀ (i : Fin s) (β : Fin n →₀ ℕ), β.degree < q - (α i).degree → MvPowerSeries.coeff β (Q i) = 0)) ∧ (s = 0 → R = F)",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Adds two already landed definition dependencies to reuse IsFirstExponent, generated and quotientSupport. The first-exponent binder includes divisor nonzeroness; uniqueness applies to every supported decomposition, independently of the degree estimates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c2c5db56",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Item differs from side-live only in lean + stmt_deps; the 2 added deps (def-trf-formal-initial-diagram, def-trf-supported-homogeneous-division) are landed with lean records (brief-stage2 l.177); their dep records are identical to live. Lean statement verbatim in file, single sorry, docstrings carry source place/blueprint/9 proof steps, report has both sections. Clause check: Field L at universe u; IsFirstExponent with Finsupp.DegLex (<)(<) = ascending lex of (|α|,α_1..α_n), includes G_i≠0; quotientSupport = Δ_i exactly; (generated α)ᶜ = E_0; Function.support = nonzero coefficients; joint uniqueness without degree premises; degree bounds with ℕ-subtraction match 'whenever positive'; s=0→R=F. No extra hypotheses. Edge cases s=0, n=0, repeated/covered α_i, unit divisor, q≤|α_i| checked; the proof is correct (DegLex well-order, unitriangular columns). Reuses landed defs, no clash. Not compiled (no file changed)."
+ }
+}

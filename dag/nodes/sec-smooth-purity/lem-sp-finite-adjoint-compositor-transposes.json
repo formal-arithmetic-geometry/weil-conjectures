@@ -1,0 +1,242 @@
+{
+ "id": "lem-sp-finite-adjoint-compositor-transposes",
+ "kind": "statement",
+ "title": "Counit transposes for finite exceptional composition",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p>0$, separated finite-type $k$-schemes $X,Y,Z$, and smooth $k$-morphisms $X\\xrightarrow fY\\xrightarrow gZ$ of pure relative dimensions $d,e\\geq0$ [sk-def-sfb-dc-setting, def-sbc-smooth-morphisms]. For a finite commutative $\\ell$-primary ring $R$, use ordinary uncompleted constant-ring module derived categories [def-weil-pbc-proetale-modules]. Write $\\mathcal C_{T,R}=\\Dctf(T_{\\mathrm{proét}},R)$ for bounded intrinsically constructible finite-Tor complexes [def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude], and $F_{h,R}=Rh_{!,R}\\dashv H_{h,R}=h_R^!$ with counit $\\varepsilon_{h,R}$ for $h=f,g,gf$ [sk-prop-sf-rf-shriek-preservation]. Compactifications are coefficient independent.\n\nFor $R=A,B$ let $\\alpha_R:F_{g,R}F_{f,R}\\xrightarrow{\\sim}F_{gf,R}$ be the proper/open normalized compact-support compositor, namely the transport of the etale compositor through the canonical proper counit mates and open-extension site comparisons [lem-amb-unbounded-compact-support-comparisons, lem-sp-finite-compact-site-coherence]. Let $A\\to B$ be any unital homomorphism of finite commutative $\\ell$-primary rings, and put $S_T=-\\otimes^L_{A_T}B_T$ [det-sp-scalar-extension-functor]. Let $b_h:S F_{h,A}\\xrightarrow{\\sim}F_{h,B}S$ and $c_h:S H_{h,A}\\xrightarrow{\\sim}H_{h,B}S$ be the specified maps of [det-sp-reduction-direct-image, det-sp-reduction-exceptional], so that\n$$\\varepsilon_{h,B}(S K)\\circ F_{h,B}(c_h(K))=S(\\varepsilon_{h,A}(K))\\circ b_h(H_{h,A}K)^{-1}.$$\nAssume the compact-support coefficient identity\n$$b_{gf}\\circ S\\alpha_A=\\alpha_B S\\circ F_{g,B}(b_f)\\circ b_gF_{f,A}.$$\n\nThere is a unique natural isomorphism $\\theta_R:H_{gf,R}\\xrightarrow{\\sim}H_{f,R}H_{g,R}$ identifying the given adjunction with the composite one via $\\alpha_R$. Its normalization is\n$$\\varepsilon^{\\mathrm{comp}}_R(K)=\\varepsilon_{g,R}(K)\\circ F_{g,R}(\\varepsilon_{f,R}(H_{g,R}K)),\\qquad\n\\varepsilon^{\\mathrm{comp}}_R(K)\\circ F_{g,R}F_{f,R}(\\theta_R(K))=\\varepsilon_{gf,R}(K)\\circ\\alpha_R(H_{gf,R}K).$$\nFor $K\\in\\mathcal C_{Z,A}$ put $N=H_{f,A}H_{g,A}K$ and $D=H_{f,B}(c_g(K))\\circ c_f(H_{g,A}K)$. Under the composite $B$-adjunction the transpose of $D$ is exactly\n$$S_Z(\\varepsilon^{\\mathrm{comp}}_A(K))\\circ\\bigl[F_{g,B}(b_f(N))\\circ b_g(F_{f,A}N)\\bigr]^{-1}.$$\nConsequently\n$$\\theta_B(S_ZK)\\circ c_{gf}(K)=H_{f,B}(c_g(K))\\circ c_f(H_{g,A}K)\\circ S_X(\\theta_A(K)).$$\nThese are equalities of actual $B$-linear derived morphisms for arbitrary $A\\to B$, with no flatness or finite projective-dimension hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "(1)-(2), composite Hom bijections and the explicit exceptional coefficient transpose; returned proof steps 3 and 6"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "sk-prop-sf-rf-shriek-preservation",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-finite-compact-site-coherence",
+  "det-sp-scalar-extension-functor",
+  "det-sp-reduction-direct-image",
+  "det-sp-reduction-exceptional"
+ ],
+ "proof": [
+  {
+   "text": "Put $L_R=F_{g,R}F_{f,R}$ and $J_R=H_{f,R}H_{g,R}$. The composite adjunction [def-weil-pbc-composite-adjunction] gives $L_R\\dashv J_R$ with counit $E_R(K)=\\varepsilon_{g,R}(K)\\circ F_{g,R}(\\varepsilon_{f,R}(H_{g,R}K))$. The given adjunction $F_{gf,R}\\dashv H_{gf,R}$ also gives $L_R\\dashv H_{gf,R}$: its Hom bijection sends $u:L_RM\\to K$ to the given transpose of $u\\circ\\alpha_R(M)^{-1}$. Its counit is therefore $\\varepsilon_{gf,R}(K)\\circ\\alpha_R(H_{gf,R}K)$. Apply [det-sp-unique-right-adjoint] to these two right adjoints of $L_R$. It supplies the unique natural isomorphism $\\theta_R:H_{gf,R}\\to J_R$ satisfying $E_R(K)\\circ L_R(\\theta_R(K))=\\varepsilon_{gf,R}(K)\\circ\\alpha_R(H_{gf,R}K)$. This is exactly the asserted normalization, for $R=A,B$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(1): compose the adjunctions, transport the Hom bijection along alpha, and use counit-compatible uniqueness"
+   }
+  },
+  {
+   "text": "Fix $K$, and abbreviate $U=H_{g,A}K$, $N=H_{f,A}U$, $a=\\varepsilon_{f,A}(U)$, and $u=c_g(K):S_YU\\to H_{g,B}S_ZK$. The composite-adjunction transpose of $D=H_{f,B}(u)\\circ c_f(U)$ is $T=E_B(S_ZK)\\circ L_B(D)$. Naturality of $\\varepsilon_{f,B}$ at $u$ says\n$$\\varepsilon_{f,B}(H_{g,B}S_ZK)\\circ F_{f,B}H_{f,B}(u)=u\\circ\\varepsilon_{f,B}(S_YU).$$\nSubstitution followed by the assumed counit identity for $c_f(U)$ yields\n$$T=\\varepsilon_{g,B}(S_ZK)\\circ F_{g,B}(u)\\circ F_{g,B}(S_Ya)\\circ F_{g,B}(b_f(N)^{-1}).$$\nThis uses only functoriality and the displayed hypotheses, and all four factors have their indicated sources and targets in the $B$-module categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(2), exceptional comparison: first expand the composite counit and use the f counit equation"
+   }
+  },
+  {
+   "text": "Define the natural isomorphism $\\beta_M=F_{g,B}(b_f(M))\\circ b_g(F_{f,A}M):S_ZL_AM\\to L_BS_XM$. Apply the assumed $g$ counit identity at $K$ to the first two factors of $T$. Naturality of $b_g$ at $a:F_{f,A}N\\to U$ gives\n$$b_g(U)^{-1}\\circ F_{g,B}(S_Ya)=S_Z(F_{g,A}a)\\circ b_g(F_{f,A}N)^{-1}.$$\nConsequently\n$$T=S_Z(\\varepsilon_{g,A}(K))\\circ S_Z(F_{g,A}a)\\circ b_g(F_{f,A}N)^{-1}\\circ F_{g,B}(b_f(N)^{-1})=S_Z(E_A(K))\\circ\\beta_N^{-1}.$$\nThe inverse of a composite is the reversed composite of inverses, and a functor preserves inverses. This proves the exact transpose formula in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(2), exceptional comparison: g counit equation and naturality of b_g give the explicit iterated transpose"
+   }
+  },
+  {
+   "text": "Let $H=H_{gf,A}K$, $v=\\theta_A(K):H\\to N$, and $R_K=D\\circ S_Xv$. The transpose formula just proved and naturality of $\\beta$ at $v$ give\n$$\\begin{aligned}\nE_B(S_ZK)\\circ L_B(R_K)\n&=S_Z(E_A(K))\\circ\\beta_N^{-1}\\circ L_B(S_Xv)\\\\\n&=S_Z(E_A(K)\\circ L_Av)\\circ\\beta_H^{-1}\\\\\n&=S_Z(\\varepsilon_{gf,A}(K))\\circ S_Z(\\alpha_A(H))\\circ\\beta_H^{-1}\\\\\n&=S_Z(\\varepsilon_{gf,A}(K))\\circ b_{gf}(H)^{-1}\\circ\\alpha_B(S_XH).\n\\end{aligned}$$\nThe third line uses the normalization of $\\theta_A$ established in step 1. The last line is precisely the assumed compact-support coefficient identity $b_{gf}(H)\\circ S_Z\\alpha_A(H)=\\alpha_B(S_XH)\\circ\\beta_H$, multiplied by the displayed inverses. Thus the direction of each compositor is fixed explicitly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(2), exceptional comparison: insert theta_A and rewrite using the assumed compact-support coefficient identity"
+   }
+  },
+  {
+   "text": "For $L_K=\\theta_B(S_ZK)\\circ c_{gf}(K)$, step 1 and naturality of $\\alpha_B$ at $c_{gf}(K):S_XH\\to H_{gf,B}S_ZK$ give\n$$\\begin{aligned}\nE_B(S_ZK)\\circ L_B(L_K)\n&=\\varepsilon_{gf,B}(S_ZK)\\circ\\alpha_B(H_{gf,B}S_ZK)\\circ L_B(c_{gf}(K))\\\\\n&=\\varepsilon_{gf,B}(S_ZK)\\circ F_{gf,B}(c_{gf}(K))\\circ\\alpha_B(S_XH)\\\\\n&=S_Z(\\varepsilon_{gf,A}(K))\\circ b_{gf}(H)^{-1}\\circ\\alpha_B(S_XH).\n\\end{aligned}$$\nThe last line is the assumed counit identity for $c_{gf}$. This equals the transpose of $R_K$ computed in step 4. The composite Hom correspondence is a bijection [def-weil-pbc-composite-adjunction], hence $L_K=R_K$, the required coefficient identity. Every operation above takes place in the given $B$-module derived categories. Only naturality, functoriality, the given isomorphisms and their counit equations were used, so no flatness or projective-dimension assumption has entered.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+    "place": "(2), exceptional comparison: compute the other transpose and use injectivity of the composite Hom bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "(1)-(2), expanded formal counit calculation; composite adjunction from Stacks Tag 0DV0 (categories.tex, lemma-compose-counits), and uniqueness through the existing Mathlib leaf det-sp-unique-right-adjoint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary finite commutative torsion coefficient rings, exceptional inverse image composition and coefficient change commute by their counit transposes",
+   "results": "{\"t\": \"2026-10-22T06:56:55Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary finite commutative torsion coefficient rings, exceptional inverse image composition and coefficient change commute by their counit transposes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.Generators.CotangentSpace.compEquiv\", \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"Algebra.Generators.CotangentSpace.fst_compEquiv\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_zero\", \"Polynomial.UniversalCoprimeFactorizationRing.homEquiv_comp_snd\"], \"digest\": \"702cc3d880dcf73b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "{\"t\": \"2026-10-22T06:56:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.rightAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|def comp",
+   "results": "{\"t\": \"2026-10-22T06:56:45Z\", \"tool\": \"grep\", \"query\": \"rightAdjointUniq|def comp\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"f6ee78c5f66b6484\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of right adjoints with counit normalized scalar extension comparison",
+   "results": "{\"t\": \"2026-10-22T06:56:45Z\", \"tool\": \"leansearch\", \"query\": \"Composition of right adjoints with counit normalized scalar extension comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightKanExtensionCounit\", \"CategoryTheory.Functor.isRightAdjoint_comp\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison\", \"CategoryTheory.comonadicAdjunction\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Monad.comparison_obj_a\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\"], \"digest\": \"66df1876ca694fae\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of a composite smooth morphism commutes with change of finite coefficients without flatness",
+   "results": "{\"t\": \"2026-10-22T06:56:55Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of a composite smooth morphism commutes with change of finite coefficients without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_comp\", \"RingHom.Smooth.stableUnderComposition\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.IsStandardSmoothOfRelativeDimension.comp\"], \"digest\": \"6ee296d37f19963a\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: generic adjunction/equivalence or unrelated algebraic results do not state the specified pro-etale coefficient, derived-tower, and counit-normalized comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|rightAdjointUniq|mateEquiv_hcomp",
+   "results": "{\"t\": \"2026-10-24T00:13:09Z\", \"tool\": \"grep\", \"query\": \"comp_counit_app|rightAdjointUniq|mateEquiv_hcomp\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"cc1f1744ff6bffb4\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "{\"t\": \"2026-10-24T00:13:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.rightAdjointUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite adjunction coefficient comparisons commute with counit-normalized right adjoint composition",
+   "results": "{\"t\": \"2026-10-24T00:13:09Z\", \"tool\": \"leansearch\", \"query\": \"Composite adjunction coefficient comparisons commute with counit-normalized right adjoint composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.comp_unit\", \"CategoryTheory.Adjunction.CommShift.commShift_counit\"], \"digest\": \"5271cb145304e760\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit transpose of a composite of two right-adjoint coefficient comparisons and naturality under a left-adjoint composition isomorphism",
+   "results": "{\"t\": \"2026-10-24T00:13:11Z\", \"tool\": \"leanfinder\", \"query\": \"Counit transpose of a composite of two right-adjoint coefficient comparisons and naturality under a left-adjoint composition isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans_app\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom_app\", \"CategoryTheory.Adjunction.comp_counit_app_assoc\", \"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app\"], \"digest\": \"aa9b1201724a7b60\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_counit|comp_homEquiv|ofNatIsoLeft|rightAdjointUniq_hom_app_counit",
+   "results": "{\"t\": \"2026-10-24T00:14:18Z\", \"tool\": \"grep\", \"query\": \"homEquiv_counit|comp_homEquiv|ofNatIsoLeft|rightAdjointUniq_hom_app_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Comma.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\"], \"digest\": \"fb271141eeb72c26\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "{\"t\": \"2026-10-24T00:14:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\"], \"digest\": \"7deb50fb1122da8a\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of adjunction mates gives the mate of a composite natural transformation",
+   "results": "{\"t\": \"2026-10-24T00:14:20Z\", \"tool\": \"leanfinder\", \"query\": \"Horizontal pasting of adjunction mates gives the mate of a composite natural transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.Bicategory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.Bicategory.mateEquiv_hcomp\", \"CategoryTheory.Bicategory.toNatTrans_mateEquiv\"], \"digest\": \"34c2e4d67b8ea9cb\"}",
+   "date": "2026-10-24",
+   "verdict": "Related Mathlib categorical API; not an exact match or one-line specialization of the entire item, which also requires the explicit two-counit transpose calculation and the alpha-normalized coefficient equation. Existing DAG leaves cover composite adjunctions and counit-compatible uniqueness; the remaining steps are written calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-comparisons",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-comparisons",
+   "place": "(1)-(2), composite Hom bijections and the explicit exceptional coefficient transpose; returned proof steps 3 and 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-finite-adjoint-compositor-transposes",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the finite-coefficient counit argument into five steps: construct and normalize theta by composite adjunction and counit-compatible uniqueness, compute the iterated transpose by two counit equations and naturality, then compare both coefficient composites with all alpha and beta factors retained. Reused two existing Mathlib leaves; no new nodes. All computations are in the ordinary B-module derived categories and impose no flatness.",
+  "blueprint": "Realizes det-sp-composition-comparisons.proof.md (1) and the c portion of (2), specifically the two finite exceptional counit-transpose claims extracted into this item. The b identity is a hypothesis here; the tower and integral parts remain in the parent split.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-77cbb555f",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-77cbb555f (reviewer sub-agent of L); spot-checked: I read the item in full: the base copy (statement-only, unsplit) against the head. The statement, stmt_deps, created, blueprint and source are verbatim; there are no new nodes; proof_deps = union of step uses = {def-weil-pbc-composite-adjunction, det-sp-unique-right-adjoint}, both Mathlib leaves. The route follows main-20261015 sk-prop-sp-composition-comparisons.proof.md (1)-(2), c-part, and keeps the compositor α explicit, which the source suppresses. I typed and checked every step. Step 1: the counit of F_gf ⊣ H_gf transported along α is ε_gf∘α(H_gf−), and det-sp-unique-right-adjoint then gives θ_R with E_R∘L_R(θ_R)=ε_gf∘α_R. Step 2: naturality of ε_f at c_g(K), then the c_f counit identity at U. Step 3: the g counit identity and naturality of b_g at a=ε_{f,A}(U) give T=S_Z(E_A K)∘β_N^{-1}. Step 4: naturality of β at θ_A(K), the A-normalization, then the b-hypothesis rearranged. Step 5: the B-normalization, naturality of α_B at c_gf(K) and the c_gf counit identity give the same transpose; the composite hom bijection is injective, so the identity follows. All elementary marks are honest. Edge cases checked: f=id, A=B with S=id, non-flat Z/ℓ²→Z/ℓ (exactness of S is never used), zero objects. No cycle: the parent is not cited and the b-identity is a hypothesis. rg -L for duplicates found only the parent and its tower sibling. No SGA, no tool_uses. Maintainer note: Q30 (dd6b912d) delivered the same item in parallel and was reviewed PASS; live is still unsplit, so only one of the two should land."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteAdjointCompositorTransposes",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteAdjointCompositorTransposes",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteAdjointCompositorTransposes"
+  ],
+  "statement": "theorem finiteAdjointCompositorTransposes\n    (ℓ p : ℕ) [Fact ℓ.Prime] [Fact p.Prime] (_hpℓ : p ≠ ℓ)\n    (k : Type u) [Field k] [CharP k p]\n    {X Y Z : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]\n    [IsSeparated (Z ↘ Spec (.of k))]\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]\n    (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]\n    [QuasiCompact f] [QuasiCompact g]\n    (cf : Compactification f) (cg : Compactification g)\n    (ch : Compactification (f ≫ g))\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (_hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)\n    (_hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B)\n    (DA : FiniteAdjointCompositorDatum A cf cg ch)\n    (DB : FiniteAdjointCompositorDatum B cf cg ch)\n    (hSX : ∀ M : spFiniteConstructibleTorCategory X A,\n      spFiniteConstructibleTor X B ((scalarExtensionFunctor φ X).obj M.obj))\n    (hSY : ∀ M : spFiniteConstructibleTorCategory Y A,\n      spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj M.obj))\n    (hSZ : ∀ M : spFiniteConstructibleTorCategory Z A,\n      spFiniteConstructibleTor Z B ((scalarExtensionFunctor φ Z).obj M.obj))\n    (bf : finiteAdjointSupport A cf DA.hFf ⋙ reductionCtfScalar φ Y hSY ≅\n      reductionCtfScalar φ X hSX ⋙ finiteAdjointSupport B cf DB.hFf)\n    (bg : finiteAdjointSupport A cg DA.hFg ⋙ reductionCtfScalar φ Z hSZ ≅\n      reductionCtfScalar φ Y hSY ⋙ finiteAdjointSupport B cg DB.hFg)\n    (bh : finiteAdjointSupport A ch DA.hFh ⋙ reductionCtfScalar φ Z hSZ ≅\n      reductionCtfScalar φ X hSX ⋙ finiteAdjointSupport B ch DB.hFh)\n    (_hbf : ∀ M, (bf.hom.app M).hom =\n      (reductionDirectImageComparison φ cf.i cf.g).app M.obj)\n    (_hbg : ∀ M, (bg.hom.app M).hom =\n      (reductionDirectImageComparison φ cg.i cg.g).app M.obj)\n    (_hbh : ∀ M, (bh.hom.app M).hom =\n      (reductionDirectImageComparison φ ch.i ch.g).app M.obj)\n    (cfCoeff : DA.Hf ⋙ reductionCtfScalar φ X hSX ≅ reductionCtfScalar φ Y hSY ⋙ DB.Hf)\n    (cgCoeff : DA.Hg ⋙ reductionCtfScalar φ Y hSY ≅ reductionCtfScalar φ Z hSZ ⋙ DB.Hg)\n    (chCoeff : DA.Hh ⋙ reductionCtfScalar φ X hSX ≅ reductionCtfScalar φ Z hSZ ⋙ DB.Hh)\n    (hfCounit : ∀ K,\n      (finiteAdjointSupport B cf DB.hFf).map (cfCoeff.hom.app K) ≫\n          DB.adjf.counit.app ((reductionCtfScalar φ Y hSY).obj K) =\n        bf.inv.app (DA.Hf.obj K) ≫ (reductionCtfScalar φ Y hSY).map (DA.adjf.counit.app K))\n    (hgCounit : ∀ K,\n      (finiteAdjointSupport B cg DB.hFg).map (cgCoeff.hom.app K) ≫\n          DB.adjg.counit.app ((reductionCtfScalar φ Z hSZ).obj K) =\n        bg.inv.app (DA.Hg.obj K) ≫ (reductionCtfScalar φ Z hSZ).map (DA.adjg.counit.app K))\n    (hhCounit : ∀ K,\n      (finiteAdjointSupport B ch DB.hFh).map (chCoeff.hom.app K) ≫\n          DB.adjh.counit.app ((reductionCtfScalar φ Z hSZ).obj K) =\n        bh.inv.app (DA.Hh.obj K) ≫ (reductionCtfScalar φ Z hSZ).map (DA.adjh.counit.app K))\n    (hbComp : ∀ M,\n      (reductionCtfScalar φ Z hSZ).map (DA.alpha.hom.app M) ≫ bh.hom.app M =\n        bg.hom.app ((finiteAdjointSupport A cf DA.hFf).obj M) ≫\n          (finiteAdjointSupport B cg DB.hFg).map (bf.hom.app M) ≫\n          DB.alpha.hom.app ((reductionCtfScalar φ X hSX).obj M)) :\n    ∃ thetaA : DA.Hh ≅ DA.Hg ⋙ DA.Hf,\n      ∃ thetaB : DB.Hh ≅ DB.Hg ⋙ DB.Hf,\n        (∀ K, (finiteAdjointSupport A cf DA.hFf ⋙ finiteAdjointSupport A cg DA.hFg).map\n            (thetaA.hom.app K) ≫ (DA.adjf.comp DA.adjg).counit.app K =\n          DA.alpha.hom.app (DA.Hh.obj K) ≫ DA.adjh.counit.app K) ∧\n        (∀ K, (finiteAdjointSupport B cf DB.hFf ⋙ finiteAdjointSupport B cg DB.hFg).map\n            (thetaB.hom.app K) ≫ (DB.adjf.comp DB.adjg).counit.app K =\n          DB.alpha.hom.app (DB.Hh.obj K) ≫ DB.adjh.counit.app K) ∧\n        (∀ t : DA.Hh ≅ DA.Hg ⋙ DA.Hf,\n          (∀ K, (finiteAdjointSupport A cf DA.hFf ⋙ finiteAdjointSupport A cg DA.hFg).map\n              (t.hom.app K) ≫ (DA.adjf.comp DA.adjg).counit.app K =\n            DA.alpha.hom.app (DA.Hh.obj K) ≫ DA.adjh.counit.app K) → t = thetaA) ∧\n        (∀ t : DB.Hh ≅ DB.Hg ⋙ DB.Hf,\n          (∀ K, (finiteAdjointSupport B cf DB.hFf ⋙ finiteAdjointSupport B cg DB.hFg).map\n              (t.hom.app K) ≫ (DB.adjf.comp DB.adjg).counit.app K =\n            DB.alpha.hom.app (DB.Hh.obj K) ≫ DB.adjh.counit.app K) → t = thetaB) ∧\n        (∀ K : spFiniteConstructibleTorCategory Z A,\n          (finiteAdjointSupport A cg DA.hFg).map\n              (DA.adjf.counit.app (DA.Hg.obj K)) ≫ DA.adjg.counit.app K =\n            (DA.adjf.comp DA.adjg).counit.app K) ∧\n        (∀ K : spFiniteConstructibleTorCategory Z B,\n          (finiteAdjointSupport B cg DB.hFg).map\n              (DB.adjf.counit.app (DB.Hg.obj K)) ≫ DB.adjg.counit.app K =\n            (DB.adjf.comp DB.adjg).counit.app K) ∧\n        (∀ K : spFiniteConstructibleTorCategory Z A,\n          ((DB.adjf.comp DB.adjg).homEquiv _ _).symm\n              (cfCoeff.hom.app (DA.Hg.obj K) ≫ DB.Hf.map (cgCoeff.hom.app K)) =\n            (finiteAdjointSupport B cg DB.hFg).map\n                (bf.inv.app (DA.Hf.obj (DA.Hg.obj K))) ≫\n              bg.inv.app\n                ((finiteAdjointSupport A cf DA.hFf).obj (DA.Hf.obj (DA.Hg.obj K))) ≫\n              (reductionCtfScalar φ Z hSZ).map ((DA.adjf.comp DA.adjg).counit.app K)) ∧\n        (∀ K : spFiniteConstructibleTorCategory Z A,\n          chCoeff.hom.app K ≫ thetaB.hom.app ((reductionCtfScalar φ Z hSZ).obj K) =\n            (reductionCtfScalar φ X hSX).map (thetaA.hom.app K) ≫\n              cfCoeff.hom.app (DA.Hg.obj K) ≫ DB.Hf.map (cgCoeff.hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Repair of H2 and duplicate return at 9e84b5c8390b: reuse the live theorem and its unchanged module. Its auxiliary definition declarations are bound to def-sp-adjoint-compositor-data by an existing:true record, not redefined in another module. This theorem node lists only its own theorem. No theorem conclusion is used merely to obtain a statement-level definition; the item cites the definition owner separately. Only lean changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3080536c",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Re-delivery after 9e84 landing refusal. Item Lean byte-identical to 7dd0/9e84 except imports; re-read: setting, arbitrary φ:A→+*B (no flatness), (1) α pinned via datum normalization, θ unique + composite counits, (2) b/c equations in diagrammatic order, (3) tower Laws and integral ULift Q_l realization all match; lean.statement verbatim; only theorem proofs sorry. H2 repaired: def-sp-adjoint-compositor-data existing:true on live TowerAdjointCompositorRealization (+public FiniteAdjointCompositorTransposes), 13 decls verified present. F1 (H12) FIX: re-applied lost 9e84 fix — new node stmt_deps/statement add owners def-sp-reduction-direct-image-comparison (reductionCompactSupport/reductionDirectImageComparison) and def-pur-chosen-compactification-compositors (coherenceEtaleCompositor); JSON-only, no compile needed. M1: theorem-node records flipped existing:false→true (file dropped, by changed; both already stage-3 proved) — accept as Q121 f08de or --revert-nodes; not fixable by FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T143401-L-988448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.finiteAdjointCompositorTransposes"
+  ],
+  "sorry_after": []
+ }
+}

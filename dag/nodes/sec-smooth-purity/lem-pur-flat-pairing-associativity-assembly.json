@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-flat-pairing-associativity-assembly",
+ "kind": "statement",
+ "title": "Abstract associativity assembly for pairings with a partial tensorator",
+ "statement": "Let C,D be monoidal categories, S:C to D a functor, and P a predicate closed under tensor product. For each P-object L and arbitrary M let mu(L,M):S(L) tensor S(M) to S(L tensor M) be natural in arrows between P-objects on the left and arbitrary arrows on the right. Suppose these comparisons satisfy the canonical associator square with specified arrows A(L,M,N). For arbitrary ordinary pairings f,g,h,k,a with P(L),P(M),P(K) and f tensor 1;g;a = associator;1 tensor h;k, the pairings mu;S(f), etc. satisfy the corresponding equation with A. No invertibility or exactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, functorial coherence of tensor pairings; elementary categorical assembly of the canonical comparison squares."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use tensorator naturality on f tensor identity and identity tensor h. Replace the canonical initial composite by the assumed associator square. The remaining tails are S of the given ordinary associativity equation, so functoriality and that equation finish the proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Use tensorator naturality on f tensor identity and identity tensor h. Replace the canonical initial composite by the assumed associator square. The remaining tails are S of the given ordinary associativity equation, so functoriality and that equation finish the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and associativity of a tensor comparison on flat objects imply associativity of arbitrary pairings and naturality of pullback pairings",
+   "results": "8 hits, about closed functor comparisons and rigid tensor-hom naturality; none states assembly for a tensorator defined on a predicate of objects.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorHom\", \"map_comp\"",
+   "results": "One linear-algebra hit TensorProduct.homTensorHomMap_comp_map_lcomp, not a categorical partial tensorator assembly statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxMonoidal.*associativity|braiding_naturality|tensorHom_comp_tensorHom",
+   "results": "25 hits include graded-object tensor bifunctoriality and multifunctor coherence constructors. The generic tensorHom_comp_tensorHom_assoc identity is used in the pullback proof; none gives the whole predicate-restricted assembly.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and the associator equation for a tensor comparison on a predicate of objects imply associativity for arbitrary pairings",
+   "results": "8 hits include MonoidalCategory.associator_naturality, its reassociated version, NatTrans.IsMonoidal.tensor_assoc and Cartesian/graded associator naturality. None states the predicate-restricted partial-tensorator pairing assembly; the proved theorem supplies that elementary diagram chase.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "The associativity diagram-chasing part of the canonical flat single tensorator compatibility argument.",
+   "via": [
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FlatPairingAssociativityAssembly",
+  "file": "lean/Sheaf/CategoryTheory/FlatPairingAssociativityAssembly.lean",
+  "declaration": "CategoryTheory.flatPairing_associativity_assembly",
+  "statement": "theorem flatPairing_associativity_assembly\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    (S : C ⥤ D) (P : C → Prop)\n    (μ : ∀ L M : C, P L → (S.obj L ⊗ S.obj M ⟶ S.obj (L ⊗ M)))\n    (A : ∀ L M N : C,\n      (S.obj L ⊗ S.obj M) ⊗ S.obj N ⟶ S.obj L ⊗ (S.obj M ⊗ S.obj N))\n    (h_tensor : ∀ {L M : C}, P L → P M → P (L ⊗ M))\n    (h_natural : ∀ {L L' M M' : C} (f : L ⟶ L') (g : M ⟶ M')\n      (hL : P L) (hL' : P L'),\n      (S.map f ⊗ₘ S.map g) ≫ μ L' M' hL' = μ L M hL ≫ S.map (f ⊗ₘ g))\n    (h_assoc : ∀ (L M N : C) (hL : P L) (hM : P M),\n      μ L M hL ▷ S.obj N ≫ μ (L ⊗ M) N (h_tensor hL hM) ≫\n          S.map (α_ L M N).hom =\n        A L M N ≫ S.obj L ◁ μ M N hM ≫ μ L (M ⊗ N) hL)\n    {L M N K Q R T : C} (hL : P L) (hM : P M) (hK : P K)\n    (f : L ⊗ M ⟶ K) (g : K ⊗ N ⟶ R) (h : M ⊗ N ⟶ Q)\n    (k : L ⊗ Q ⟶ T) (a : R ⟶ T)\n    (w : f ▷ N ≫ g ≫ a = (α_ L M N).hom ≫ L ◁ h ≫ k) :\n    (μ L M hL ≫ S.map f) ▷ S.obj N ≫\n        (μ K N hK ≫ S.map g) ≫ S.map a =\n      A L M N ≫ S.obj L ◁ (μ M N hM ≫ S.map h) ≫ (μ L Q hL ≫ S.map k)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 8 new nodes vs Lean; moved data decls byte-identical to clone item; axioms via scratch #print axioms; 3 SLOW importers vs published baselines; original FTSPP vs delivered build"
+ }
+}

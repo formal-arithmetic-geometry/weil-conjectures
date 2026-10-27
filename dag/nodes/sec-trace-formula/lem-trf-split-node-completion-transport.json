@@ -1,0 +1,152 @@
+{
+ "id": "lem-trf-split-node-completion-transport",
+ "kind": "statement",
+ "title": "Transport of split nodal completions with their scalar maps",
+ "statement": "Let k,F,G be fields, A,B commutative local rings, α:k→A, β:k→B, ρ:k→F and σ:k→G ring maps. Let e_A:A≃B and e_F:F≃G be ring isomorphisms with e_A∘α=β and e_F∘ρ=σ. If the maximal-ideal completion of A [def-weil-pbc-adic-completion] is isomorphic to F[[u,v]]/(uv) [def-weil-pbc-multivariate-power-series] by e with e(α(a))=C(ρ(a)) after completing and quotienting, then the completion of B is isomorphic to G[[u,v]]/(uv) with the corresponding identity e′(β(a))=C(σ(a)). No Noetherianity is required.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "A ring equivalence between local rings identifies their maximal ideals since it preserves units. The completion-equivalence theorem gives the induced equivalence between their maximal-ideal completions and its equation on the canonical maps.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-ring-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  },
+  {
+   "text": "Map power-series coefficients through e_F and its inverse. These maps are inverse ring maps, fix the variables, and carry (uv) to (uv); hence they descend to inverse quotient maps. Compose with the inverse completion equivalence and e. The two scalar-compatibility equations give the required equation.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of local rings and their residue fields transports a split nodal completion with its scalar map",
+   "results": "{\"t\": \"2026-10-23T12:44:38Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism of local rings and their residue fields transports a split nodal completion with its scalar map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField.mapEquiv\", \"IsLocalRing.ResidueField.mapEquiv_apply\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"IsLocalRing.ResidueField.mapEquiv_trans\", \"AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr\", \"IsLocalRing.ResidueField.mapEquiv_refl\", \"AlgebraicGeometry.Scheme.residueFieldCongr\", \"AlgebraicGeometry.Scheme.residueFieldCongr_inv\"], \"digest\": \"6a9dd23010ae4474\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingEquiv",
+   "results": "{\"t\": \"2026-10-23T11:09:19Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, RingEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local ring and residue field isomorphisms transport a split nodal power series quotient completion",
+   "results": "{\"t\": \"2026-10-23T12:56:42Z\", \"tool\": \"leansearch\", \"query\": \"Local ring and residue field isomorphisms transport a split nodal power series quotient completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.ResidueField\", \"IsLocalRing.residue\", \"IsLocalRing.ResidueField.map\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"IsLocalRing.instInhabitedResidueField\", \"IsLocalRing.instCommRingResidueField\", \"IsLocalRing.instIsLocalHomResidueFieldRingHomResidue\", \"IsLocalRing.ResidueField.field\"], \"digest\": \"062b9468b8300cbc\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*[Rr]ingEquiv|[Rr]ingEquiv.*AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T12:44:35Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*[Rr]ingEquiv|[Rr]ingEquiv.*AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\"], \"digest\": \"a0ee037818245630\"}; Component finiteness, formal smoothness, or residue-field results do not give the complete assertion; used the relevant ones in the Lean proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StacksNodalClosedSubcurve",
+  "date": "2026-10-23",
+  "group": "U1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0E38 subcurve input: Transport of split nodal completions with their scalar maps",
+   "via": [
+    "lem-trf-stacks-nodal-closed-subcurve",
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SplitNodeCompletionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitNodeCompletionTransport.lean",
+  "declaration": "AlgebraicGeometry.split_node_completion_transport",
+  "statement": "theorem split_node_completion_transport\n    {k : Type u} [Field k] {A : Type v} {B : Type w}\n    [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B]\n    {F G : Type u} [Field F] [Field G]\n    (α : k →+* A) (β : k →+* B) (ρ : k →+* F) (σ : k →+* G)\n    (eA : A ≃+* B) (eF : F ≃+* G)\n    (hA : ∀ a, eA (α a) = β a) (hF : ∀ a, eF (ρ a) = σ a)\n    (e : AdicCompletion (maximalIdeal A) A ≃+*\n      (MvPowerSeries (Fin 2) F ⧸\n        Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) F) * MvPowerSeries.X 1}))\n    (he : ∀ a : k, e (AdicCompletion.of (maximalIdeal A) A (α a)) =\n      Ideal.Quotient.mk _ (MvPowerSeries.C (ρ a))) :\n    ∃ e' : AdicCompletion (maximalIdeal B) B ≃+*\n        (MvPowerSeries (Fin 2) G ⧸\n          Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) G) * MvPowerSeries.X 1}),\n      ∀ a : k, e' (AdicCompletion.of (maximalIdeal B) B (β a)) =\n        Ideal.Quotient.mk _ (MvPowerSeries.C (σ a))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

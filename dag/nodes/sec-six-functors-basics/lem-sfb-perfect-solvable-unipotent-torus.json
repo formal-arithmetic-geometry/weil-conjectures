@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-perfect-solvable-unipotent-torus",
+ "kind": "statement",
+ "title": "Unipotent part and torus quotient of a smooth connected solvable group over a perfect field",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. A group scheme is solvable if it has a finite descending series of closed subgroup schemes, each normal in its predecessor, with commutative group-scheme quotients. A torus is a group scheme becoming $(\\mathbf G_m)^d$ over $\\bar k$ for some integer $d\\geq0$, where $\\mathbf G_m$ is as in [def-sc-gm-ga]. A smooth affine group is unipotent if in a faithful finite-dimensional matrix representation all its geometric points are unipotent matrices, meaning $(u-I)^N=0$ for some $N\\geq1$. Assume $k$ is perfect, meaning that every algebraic extension of $k$ is separable. Let $H$ be smooth, connected and solvable. There is a smooth connected normal unipotent subgroup $H_u\\subseteq H$ such that the fppf quotient $H/H_u$ is a torus. The subgroup $H_u$ contains every smooth unipotent subgroup of $H$, and its formation commutes with field extension; it is preserved by every automorphism after every field extension. If $H$ is a normal subgroup of a smooth group scheme $G$, then $H_u$ is normal in $G$. The fppf quotient is the sheafification of $A\\mapsto H(A)/H_u(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.33(a)--(c), printed pp.335--336; Proposition 1.90, printed p.33, for normality of a weakly characteristic subgroup of a normal subgroup in a smooth group; geometric-point interpretation of unipotence in Corollary 14.12 and Section 14(c), printed pp.283, 286--287."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\bar k$. By [lem-sfb-solvable-normal-subgroup-products], $H_F$ is smooth, connected and solvable. Apply [lem-sfb-lie-kolchin-triangular-embedding] to obtain $H_F\\hookrightarrow B_n$, and put $V=H_F\\cap U_n$. By [lem-sfb-triangular-diagonal-kernel], $V$ is smooth, connected, normal and unipotent, and $D=H_F/V$ is a smooth connected closed subgroup of $(\\mathbf G_m)^n$. The smooth-connected clause of [lem-sfb-multiplicative-type-largest-subtorus] makes $D$ a torus.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33 proof, through Theorem 16.30, Proposition 16.2 and Note 16.10, printed pp.325–326,334–336."
+   }
+  },
+  {
+   "text": "The same kernel characterization works over any field: if $N\\triangleleft J$ is unipotent and $J/N$ is of multiplicative type, every unipotent subgroup $W\\subseteq J$ maps trivially to $J/N$ by [lem-sfb-unipotent-to-multiplicative-trivial]. The scheme-theoretic kernel assertion of [lem-sfb-affine-normal-quotient-geometry] then gives $W\\subseteq N$. For two such kernels, apply this argument in both directions; they are equal as subgroup schemes. In particular $V$ from step 1 is independent of the chosen triangular representation.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.6 proof, first paragraph, and Note 16.8, printed p.326."
+   }
+  },
+  {
+   "text": "Since $k$ is perfect, $F/k$ is Galois. For every $\\sigma\\in\\operatorname{Gal}(F/k)$ the conjugate $\\sigma(V)$ is again normal and unipotent in $H_F$ with torus quotient: scalar transport carries the subgroup, quotient and displayed matrix properties to their $\\sigma$-transforms. Step 2 forces $\\sigma(V)=V$. Thus its defining ideal is Galois-stable. Apply [lem-sfb-galois-descent-affine-subgroups] to obtain $H_u\\subseteq H$ with $(H_u)_F=V$, and to descend normality. Smoothness descends by [lem-trf-smooth-fpqc-base-descent], using the flat quasi-compact surjection $\\operatorname{Spec}F\\to\\operatorname{Spec}k$. Connectedness descends because a disconnection of $H_u$ into two nonempty clopen subsets would pull back to one of $V$. Unipotence is detected after extension by [lem-sfb-unipotent-to-multiplicative-trivial]. By [lem-sfb-affine-normal-quotient-geometry], the fppf quotient $Q=H/H_u$ is represented and $Q_F=H_F/V=D$. Consequently $Q$ becomes a product of copies of $\\mathbf G_m$ over $F$, exactly the definition of a $k$-torus.",
+   "uses": [
+    "lem-sfb-galois-descent-affine-subgroups",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.6 proof of (a)⇒(b), Section 1.54(b), Notes 16.8–16.10 and Theorem 16.33, printed pp.21–22,326,335–336."
+   }
+  },
+  {
+   "text": "Let $K/k$ be any field extension, including an imperfect transcendental extension. The base-changed subgroup $(H_u)_K$ is normal, smooth and connected by [lem-sfb-solvable-normal-subgroup-products], and unipotent by [lem-sfb-unipotent-to-multiplicative-trivial]. By [lem-sfb-affine-normal-quotient-geometry] its quotient is $Q_K$, a group of multiplicative type by the scalar-extension assertion of [lem-sfb-unipotent-to-multiplicative-trivial]. Apply step 2 over $K$: $(H_u)_K$ contains every smooth unipotent subgroup of $H_K$ and is the unique normal unipotent kernel with multiplicative-type quotient. This proves field-extension compatibility without assuming $K$ perfect. Taking $K=k$ proves the requested maximality as well.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Note 16.8 and Theorem 16.33(b), printed pp.326,336."
+   }
+  },
+  {
+   "text": "For an automorphism $a$ of $H_K$, the subgroup $a((H_u)_K)$ is smooth, connected and unipotent (the faithful representation can be precomposed with $a^{-1}$), normal in $H_K$, and has quotient isomorphic to $Q_K$. Both it and $(H_u)_K$ therefore satisfy the characterization of step 2, so they are equal. Equivalently, maximality in step 4 applied to $a$ and $a^{-1}$ gives the two subgroup inclusions. This is invariance under automorphisms after every field extension; it makes no claim of invariance under automorphisms over arbitrary nonreduced base algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Note 16.8, printed p.326, and Definition 1.89, printed p.33."
+   }
+  },
+  {
+   "text": "Finally assume $H\\triangleleft G$ with $G$ smooth. For every $g\\in G(F)$, conjugation restricts to an automorphism of $H_F$, since normality holds after scalar extension. Step 5 gives $\\operatorname{Int}(g)((H_u)_F)=(H_u)_F$ as subgroup schemes. The criterion [lem-sfb-smooth-ambient-normality-geometric] applies to the closed subgroup $H_u\\subseteq G$ and yields $H_u\\triangleleft G$. The ambient smoothness hypothesis is exactly the one required by that criterion.",
+   "uses": [
+    "lem-sfb-smooth-ambient-normality-geometric"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.90 and Corollary 1.85, printed pp.32–33."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-triangular-diagonal-kernel",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-galois-descent-affine-subgroups",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sfb-smooth-ambient-normality-geometric"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.33(a)–(c), using the proof of Theorem 16.6, Notes 16.8–16.10 and Proposition 1.90. Algebraic-closure descent spells out the same separable-descent argument without choosing a finite splitting extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected solvable affine algebraic group over a perfect field is an extension of a torus by its characteristic smooth connected unipotent subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.IsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"(L : Type v) → [LieRing L] → Prop\", \"doc\": \"A Lie ring $\\\\mathfrak{g}$ is solvable if its derived series terminates at the zero subring after finitely many steps, i.e., there exists $n \\\\geq 0$ such that the $n$-th derived Lie algebra $\\\\mathfrak{\"}\n  {\"name\": \"LieAlgebra.abelian_radical_iff_solvable_is_abelian\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  IsLieAbelian ↥(LieAlgebra.radical R L) ↔ ∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → IsLieAbelian ↥I\", \"doc\": \"In a Noetherian Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is abelian if and only if every solvable ideal of $\\\\mathfrak{g}$ is abelian.\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable_int\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {L : Type v} {inst : LieRing L} [self : LieAlgebra.IsSolvable L], ∃ k, LieAlgebra.derivedSeries ℤ L k = ⊥\", \"doc\": \"Every solvable Lie algebra $\\\\mathfrak{g}$ over the integers $\\\\mathbb{Z}$ has a derived series $\\\\mathfrak{g}^{(k)}$ that terminates at the zero submodule $\\\\{0\\\\}$ after finitely many steps, i.e., there \"}\n  {\"name\": \"LieAlgebra.isSolvable_iff_int\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (L : Type v) [inst : LieRing L], LieAlgebra.IsSolvable L ↔ ∃ k, LieAlgebra.derivedSeries ℤ L k = ⊥\", \"doc\": \"For any Lie ring $\\\\mathfrak{g}$, $\\\\mathfrak{g}$ is solvable if and only if there exists $k \\\\geq 0$ such that the $k$-th term of the derived series of $\\\\mathfrak{g}$ viewed as a $\\\\mathbb{Z}$-Lie algebr\"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSolvable L], ∃ k, LieAlgebra.derivedSeries R L k = ⊥\", \"doc\": \"For a solvable Lie algebra $ L $ over a commutative ring $ R $, there exists a non-negative integer $ k $ such that the $ k $-th term of the derived series of $ L $ is the zero submodule, i.e., $ L^{(\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (L : Type v) [inst : LieRing L] [IsLieAbelian L], LieAlgebra.IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract upper central series and Lie-algebra solvability do not give the unipotent subgroup and torus quotient of a group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unipotent part of a connected solvable linear algebraic group is normal in any smooth group normalizing it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"normalizerCondition_of_isNilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [h : Group.IsNilpotent G], NormalizerCondition G\", \"doc\": \"For any group $ G $, if $ G $ is nilpotent, then $ G $ satisfies the normalizer condition, meaning every proper subgroup $ H $ of $ G $ is properly contained in its normalizer $ N_G(H) $.\"}\n  {\"name\": \"upperCentralSeries_normal\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ (G : Type u_1) [inst : Group G] (n : ℕ), (upperCentralSeries G n).Normal\", \"doc\": \"For any group $ G $, each term in the upper central series of $ G $ is a normal subgroup of $ G $. The upper central series is recursively defined by starting with the trivial subgroup and taking the \"}\n  {\"name\": \"instNormalUpperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal], (upperCentralSeriesStep H).Normal\", \"doc\": \"For any group $G$ and a subgroup $H$ of $G$, the upper central series step starting at $H$ is a normal subgroup of $G$. This asserts that each term in the upper central series construction is invarian\"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"upperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"{G : Type u_1} → [inst : Group G] → (H : Subgroup G) → [H.Normal] → Subgroup G\", \"doc\": \"The subgroup of elements $ x \\\\in G $ such that for all $ y \\\\in G $, the commutator $ [x, y] = xyx^{-1}y^{-1} $ lies in $ H $. This defines a step in the upper central series of a group, where $ H $ is\"}\n  {\"name\": \"mem_upperCentralSeriesStep\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [inst_1 : H.Normal] (x : G),\\n  x ∈ upperCentralSeriesStep H ↔ ∀ (y : G), x * y * x⁻¹ * y⁻¹ ∈ H\", \"doc\": \"An element $x$ belongs to the upper central series step $H$ if and only if for every element $y$ in the group, the commutator $[x, y] = x y x^{-1} y^{-1}$ lies in $H$.\"}\n  {\"name\": \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  (LieAlgebra.zeroRootSubalgebra R L H).normalizer = LieAlgebra.zeroRootSubalgebra R L H\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ and a nilpotent Lie subalgebra $ \\\\mathfrak{h} \\\\subseteq L $, the normalizer of the zero root subalgebra $ \\\\mathfrak{g}_0(\\\\mathfrak{h}) $ in $ L $ \"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract upper central series and Lie-algebra solvability do not give the unipotent subgroup and torus quotient of a group scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"IsSolvable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract upper central series and Lie-algebra solvability do not give the unipotent subgroup and torus quotient of a group scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*torus|solvable.*algebraic",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/AbelRuffini.lean\", \"line\": \"218\", \"text\": \"theorem solvableByRad_le_algClosure : solvableByRad F E ≤ algebraicClosure F E := by\"}\n  {\"file\": \"Mathlib/FieldTheory/AbelRuffini.lean\", \"line\": \"227\", \"text\": \"theorem isAlgebraic_solvableByRad : (solvableByRad F E).IsAlgebraic :=\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract upper central series and Lie-algebra solvability do not give the unipotent subgroup and torus quotient of a group scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected solvable affine algebraic group over a perfect field is an extension of a torus by its characteristic smooth connected unipotent subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}\n  {\"name\": \"IsSolvable.recOn\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] →\\n    {motive : IsSolvable G → Sort u} →\\n      (t : IsSolvable G) → ((solvable : ∃ n, derivedSeries G n = ⊥) → motive ⋯) → motive t\", \"doc\": \"The recursor for solvable groups allows defining functions on solvable groups by induction on the solvability witness. Given a type family $ P : \\\\text{IsSolvable } G \\\\to \\\\text{Type} $, it suffices to \"}\n  {\"name\": \"IsNilpotent.to_isSolvable\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"[h : IsNilpotent G] : IsSolvable G\", \"doc\": \"Every nilpotent group is solvable.\"}\n  {\"name\": \"IsSolvable.mk\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G], (∃ n, derivedSeries G n = ⊥) → IsSolvable G\", \"doc\": \"If there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ is the trivial subgroup $ \\\\{e\\\\} $, then $ G $ is solvable.\"}\n  {\"name\": \"IsSolvable.solvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"∀ {G : Type u_1} {inst : Group G} [self : IsSolvable G], ∃ n, derivedSeries G n = ⊥\", \"doc\": \"For any solvable group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ equals the trivial subgroup $\\\\{e\\\\}$, i.e., $\\\\mathrm{derivedSeries}(G, n) = \"}\n  {\"name\": \"isSolvable_of_top_eq_bot\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(h : (⊤ : Subgroup G) = ⊥) : IsSolvable G\", \"doc\": \"If a group $ G $ has no nontrivial subgroups, then $ G $ is solvable.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsLieAbelian L] : IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract upper central series and Lie-algebra solvability do not give the unipotent subgroup and torus quotient of a group scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|torus|centralizer|solvable|groupScheme|GroupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract upper central series and Lie-algebra solvability do not give the unipotent subgroup and torus quotient of a group scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unipotent radical of a smooth connected solvable algebraic group over a perfect field has a torus quotient and commutes with field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.abelian_radical_iff_solvable_is_abelian\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  IsLieAbelian ↥(LieAlgebra.radical R L) ↔ ∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → IsLieAbelian ↥I\", \"doc\": \"In a Noetherian Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is abelian if and only if every solvable ideal of $\\\\mathfrak{g}$ is abelian.\"}\n  {\"name\": \"of_quotient_center_nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Group.IsNilpotent (G ⧸ Subgroup.center G) → Group.IsNilpotent G\", \"doc\": \"If the quotient group $ G / Z(G) $, where $ Z(G) $ is the center of $ G $, is nilpotent, then the group $ G $ itself is nilpotent.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.radicalIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  LieAlgebra.IsSolvable ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ is Noetherian (i.e., every submodule is finitely generated), then its radical—the sum of all solvable ideals in $ L $—is itself a solvable ideal.\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group solvability and Lie-algebra radicals do not provide a smooth unipotent subgroup scheme or its torus quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Solvable algebraic group over a perfect field has a largest smooth unipotent subgroup which is weakly characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSolvable.solvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"∀ {G : Type u_1} {inst : Group G} [self : IsSolvable G], ∃ n, derivedSeries G n = ⊥\", \"doc\": \"For any solvable group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ equals the trivial subgroup $\\\\{e\\\\}$, i.e., $\\\\mathrm{derivedSeries}(G, n) = \"}\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}\n  {\"name\": \"isSolvable_of_top_eq_bot\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(h : (⊤ : Subgroup G) = ⊥) : IsSolvable G\", \"doc\": \"If a group $ G $ has no nontrivial subgroups, then $ G $ is solvable.\"}\n  {\"name\": \"IsSolvable.mk\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G], (∃ n, derivedSeries G n = ⊥) → IsSolvable G\", \"doc\": \"If there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ is the trivial subgroup $ \\\\{e\\\\} $, then $ G $ is solvable.\"}\n  {\"name\": \"IsNilpotent.to_isSolvable\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \"[h : IsNilpotent G] : IsSolvable G\", \"doc\": \"Every nilpotent group is solvable.\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"IsSimpleGroup.comm_iff_isSolvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \": (∀ a b : G, a * b = b * a) ↔ IsSolvable G\", \"doc\": \"A simple group $G$ is abelian if and only if it is solvable.\"}\n  {\"name\": \"IsSolvable.recOn\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] →\\n    {motive : IsSolvable G → Sort u} →\\n      (t : IsSolvable G) → ((solvable : ∃ n, derivedSeries G n = ⊥) → motive ⋯) → motive t\", \"doc\": \"The recursor for solvable groups allows defining functions on solvable groups by induction on the solvability witness. Given a type family $ P : \\\\text{IsSolvable } G \\\\to \\\\text{Type} $, it suffices to \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group solvability and Lie-algebra radicals do not provide a smooth unipotent subgroup scheme or its torus quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"IsSolvable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group solvability and Lie-algebra radicals do not provide a smooth unipotent subgroup scheme or its torus quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*torus|solvable.*algebraic",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/AbelRuffini.lean\", \"line\": \"218\", \"text\": \"theorem solvableByRad_le_algClosure : solvableByRad F E ≤ algebraicClosure F E := by\"}\n  {\"file\": \"Mathlib/FieldTheory/AbelRuffini.lean\", \"line\": \"227\", \"text\": \"theorem isAlgebraic_solvableByRad : (solvableByRad F E).IsAlgebraic :=\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group solvability and Lie-algebra radicals do not provide a smooth unipotent subgroup scheme or its torus quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-solvable-unipotent-torus",
+  "worker": "stage1",
+  "summary": "Read Milne Theorem 16.33 and its prerequisites. Construct the diagonal kernel after Lie–Kolchin, prove uniqueness by vanishing of maps to multiplicative type, descend its Galois-stable ideal, and deduce arbitrary field-extension compatibility, weak characteristicness and normality in a smooth ambient group. Five statement-only auxiliary nodes; reuse four existing group-scheme tools and the existing Mathlib fpqc-smooth-descent leaf. Only statement change is removal of inherited doubled TeX backslashes, with no mathematical change.",
+  "blueprint": "The ancestry command returns None, as in the inherited blueprint.from.node; retain that provenance and via chain. The inherited place identifies det-thm-sf-ctf-stability-direct-images proof (3), through the reductive radical/PGL/moduli/alteration prerequisites. This split realizes its perfect-solvable-group structure input by Milne 16.33 and 1.90. Whole-current-blueprint searches for unipotent, trigonalizable, triangular, normalizer, Galois descent and multiplicative type found no equivalent group-scheme statement; same_as remains empty. No chapter/unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-07667127e",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-07667127e (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, the 5 new nodes and the 4 cited existing statements in full, and checked them against Milne iAG2017: 1.54(a)(b), which allows infinite Galois extensions and requires ideal stability; 1.85, 1.89–1.91; 14.12 and the μ_p remark after it; 14.18; 16.2; 16.6, 16.8–16.10; 16.26(a), where the splitting over an algebraically closed field holds with no smoothness assumed, so the arbitrary-closed-J section clause of triangular-diagonal-kernel is true; 16.30 and 16.33. Step 1: products node (smooth, connected and solvable persist under field extension), Lie–Kolchin, kernel node, then the smooth-connected-subgroup-of-torus clause. Step 2: the 14.18 node plus the scheme-theoretic kernel gives the uniqueness and maximality characterization over any field. Step 3: k̄/k is Galois because k is perfect; σ(V)=V by step 2; descent; 02VL along Spec k̄→Spec k (flat, quasi-compact, surjective); the clopen argument for connectedness; Q_F=D. Step 4 handles imperfect K without reusing perfectness, and smooth W is covered by the 14.12 equivalence. Step 5 is genuinely elementary. Step 6 is 1.85/1.90 with the smooth ambient G hypothesis in force. Weak characteristicness matches Def. 1.89, and Rem. 1.91 is respected. No new node restates a clause of the item. Duplicate check: lem-sfb-galois-closed-subscheme-descent (NU) covers finite Galois only; the new node strictly generalizes it to infinite Galois and adds inclusion and normality detection. Noted for the maintainer, not a fault. Batch-5: lem-trf-smooth-fpqc-base-descent is the generic Mathlib-backed Stacks 02VL leaf with no proof deps, and lem-sfb-multiplicative-type-largest-subtorus reaches the trace-formula chapter only through it. Neither is a trace-formula or Poincaré-duality step, so both are accepted. No SGA citation. stmt_deps and proof_deps match the citations; the only extra is def-weil-algebraic-closure in the kernel node's stmt_deps, which is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectSolvableUnipotentTorus",
+  "declaration": "AlgebraicGeometry.perfect_solvable_unipotent_torus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectSolvableUnipotentTorus.lean",
+  "statement": "theorem perfect_solvable_unipotent_torus {k : Type u} [Field k] [PerfectField k] (H : Grp (Over (Spec (.of k)))) (hH : IsAlgebraic H) (hsm : Smooth H.X.hom) (hc : ConnectedSpace H.X.left) (hs : IsSolvable H) : ∃ (U : Grp (Over (Spec (.of k)))) (i : U ⟶ H) (Q : Grp (Over (Spec (.of k)))) (q : H ⟶ Q), IsAlgebraic U ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ IsUnipotent U ∧ IsClosedSubgroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ IsAlgebraic Q ∧ IsTorus Q ∧ IsFppfQuotient i.hom.hom q ∧ (∀ (W : Grp (Over (Spec (.of k)))) (j : W ⟶ H), IsAlgebraic W → IsUnipotent W → IsClosedSubgroupScheme j.hom.hom → ∃ l : W ⟶ U, l ≫ i = j) ∧ (∀ (K : Type u) [Field K] [Algebra k K], IsUnipotent ((extend K).obj U) ∧ ConnectedSpace ((extend K).obj U).X.left ∧ IsClosedSubgroupScheme ((extend K).map i).hom.hom ∧ IsNormalSubgroupScheme ((extend K).map i).hom.hom ∧ IsTorus ((extend K).obj Q) ∧ IsFppfQuotient ((extend K).map i).hom.hom ((extend K).map q) ∧ (∀ (W : Grp (Over (Spec (.of K)))) (j : W ⟶ (extend K).obj H), IsAlgebraic W → IsUnipotent W → IsClosedSubgroupScheme j.hom.hom → ∃ l : W ⟶ (extend K).obj U, l ≫ (extend K).map i = j) ∧ (∀ a : (extend K).obj H ≅ (extend K).obj H, ∃ b : (extend K).obj U ≅ (extend K).obj U, b.hom ≫ (extend K).map i = (extend K).map i ≫ a.hom)) ∧ (∀ (G : Grp (Over (Spec (.of k)))) (j : H ⟶ G), IsAlgebraic G → Smooth G.X.hom → IsClosedSubgroupScheme j.hom.hom → IsNormalSubgroupScheme j.hom.hom → IsNormalSubgroupScheme (i ≫ j).hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae592d975",
+  "group": "Q116",
+  "result": "fix",
+  "note": "Item statement matches node/Milne 16.33(a)-(c)+1.90 clause by clause (hypotheses, existence, maximality, all-field-extension compatibility incl. imperfect K, automorphism invariance after extension, smooth-ambient normality); statement verbatim; sorry only; docstrings OK. New defs IsAlgebraic/IsUnipotent/IsSolvable/IsFppfQuotient real and correct. H4/H12: extend/splitTorus/IsTorus duplicated N8's def-sfb-tori-multiplicative-type (MultiplicativeType.baseChange/splitTorus/IsTorus, landed 13:57 UTC, on base at 14:00 UTC). FIX: SolvableGroupStructure.lean imports ToriMultiplicativeType, extend/IsTorus become rfl abbrev aliases, splitTorus dropped; new-node JSON adds stmt_dep def-sfb-tori-multiplicative-type, cites it, drops splitTorus from declarations. Item module unchanged. nt_compile --json clean (Tori 10.4s, SGS 9.1s, item 11.3s, exit 0); check_new_node no failures."
+ }
+}

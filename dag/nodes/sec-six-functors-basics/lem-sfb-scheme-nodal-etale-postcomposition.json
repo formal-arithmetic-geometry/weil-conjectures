@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-scheme-nodal-etale-postcomposition",
+ "kind": "statement",
+ "title": "Scheme nodal families are preserved and reflected by etale postcomposition",
+ "statement": "Let $C,T,S$ be schemes [def-pc-scheme], let $g:C\\to T$ be a morphism and let $e:T\\to S$ be etale [def-weil-etale-morphism], without any surjectivity assumption on $e$. Call a morphism of schemes nodal of relative dimension one if it is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and for every algebraically closed field $\\Omega$ [def-weil-field, def-weil-algebraic-closure] and every geometric point $\\operatorname{Spec}\\Omega$ of the target [def-weil-geometric-point], its fibre [def-weil-geometric-fibre, def-pc-fibre-product] is empty or pure of dimension one [def-weil-pure-dimension], with every point either smooth over $\\Omega$ [def-sbc-smooth-morphisms] or an ordinary node. Here an ordinary node is a closed point [def-weil-closed-points] whose maximal-ideal-adic completed local $\\Omega$-algebra [def-weil-pbc-adic-completion] is isomorphic to $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series]. Then $g$ is nodal of relative dimension one if and only if $e\\circ g:C\\to S$ is nodal of relative dimension one. Empty schemes and empty fibres are allowed, and no properness, connectedness, quasi-compactness or Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CD8 (lemma-nodal-family-postcompose-etale), forward implication; reverse implication by base change Tag 0C5B (lemma-base-change-nodal-family) and the open graph of a morphism to an etale scheme; definition-nodal-family, Tag 0C5A."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-points",
+  "def-weil-etale-morphism",
+  "def-weil-field",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-geometric-point",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $h=e\\circ g$. First assume $g$ is nodal. By [def-weil-etale-morphism], $e$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Since $g$ is flat and $e$ is flat, [lem-pc-flat-compose] (with $X=C$, $Y=T$, $Z=S$) makes $h=e\\circ g$ flat. Since $g$ and $e$ are locally of finite presentation, [lem-sbc-locally-finite-presentation-composition] (with $U=C$, $X=T$, $a=g$, $f=e$) makes $h$ locally of finite presentation.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD8, lemma-nodal-family-postcompose-etale, first paragraph; expand composition of affine presentations"
+   }
+  },
+  {
+   "text": "Fix any algebraically closed field $\\Omega$ and $s:\\operatorname{Spec}\\Omega\\to S$. Put $T_s=T\\times_S\\operatorname{Spec}\\Omega$ and $C_s=C\\times_S\\operatorname{Spec}\\Omega$. The map $T_s\\to\\operatorname{Spec}\\Omega$ is etale by [lem-weil-pbc-etale-base-change-finite-limits](1), hence unramified by [def-weil-etale-morphism]. Apply [lem-trf-unramified-field-fibre-decomposition] over the field $\\Omega$: $T_s$ is a possibly empty disjoint union of open and closed spectra $\\operatorname{Spec}L_i$, with $L_i/\\Omega$ finite separable. Each $L_i=\\Omega$ as an $\\Omega$-algebra: the minimal polynomial of every element is irreducible and splits into linear factors over an algebraically closed field, so has degree one. Consequently the pieces give geometric points $t_i:\\operatorname{Spec}\\Omega\\to T$ above $s$. No finiteness of the set of pieces is used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-algebraic-closure",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-trf-unramified-field-fibre-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD8, geometric-fibre expansion of the second paragraph; Morphisms Tag 02G7, lemma-unramified-over-field (1)"
+   }
+  },
+  {
+   "text": "Take inverse images of the open and closed pieces $\\operatorname{Spec}\\Omega\\subset T_s$ under $C_s\\to T_s$. This partitions $C_s$ into open and closed subschemes $D_i$. By [def-pc-fibre-product], $D_i\\cong C\\times_{T,t_i}\\operatorname{Spec}\\Omega$ over $\\Omega$: both schemes represent pairs $(c,a)$ with $g(c)=t_i(a)$, and the inverse maps are the unique maps with these projections. Since $g$ is nodal, each nonempty $D_i$ is pure of dimension one and its points are smooth or ordinary nodes. Every irreducible component of a disjoint open partition lies in one piece: an irreducible subset meeting two pieces would be the union of two disjoint nonempty relatively open subsets. Its maximality as an irreducible closed subset is then exactly maximality within that closed piece. Thus the components and their dimensions in [def-weil-pure-dimension] agree. Local rings, their maximal ideals and completions are identical on an open subscheme; smoothness at a point means smoothness on an open neighbourhood. A point closed in $D_i$ is closed in $C_s$ since $D_i$ is closed. Hence $C_s$ has exactly the required fibre property. This proves that $h$ is nodal.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pure-dimension",
+    "def-weil-open-immersion",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD8, second paragraph, after geometric splitting: explicit clopen-piece argument"
+   }
+  },
+  {
+   "text": "Conversely assume $h$ is nodal. Form $P=C\\times_ST$ with projection $p:P\\to T$ and graph $j=(1_C,g):C\\to P$. Since $p$ is the base change of $h$, [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] show that $p$ is flat and locally of finite presentation. By [def-weil-etale-morphism] and [def-weil-unramified-morphism], $\\Delta_e:T\\to T\\times_ST$ is an open immersion. The graph $j$ is its base change along $P\\to T\\times_ST$, $(c,t)\\mapsto(g(c),t)$: the two projections and the relation $g(c)=t$ give inverse maps by [def-pc-fibre-product]. Thus [lem-weil-pbc-open-immersion-base-change] makes $j$ an open immersion. It is etale by [lem-weil-pbc-etale-composition-cancellation](1), hence flat and locally of finite presentation by [def-weil-etale-morphism]. Since $p\\circ j=g$ with $j$ and $p$ both flat and locally of finite presentation, [lem-pc-flat-compose] makes $g$ flat and [lem-sbc-locally-finite-presentation-composition] (with $a=j$, $f=p$) makes $g$ locally of finite presentation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reverse implication: open graph of a morphism to an etale target; Tag 01JY and the defining open diagonal of an unramified morphism"
+   }
+  },
+  {
+   "text": "For any $t:\\operatorname{Spec}\\Omega\\to T$ over an algebraically closed field, set $s=e\\circ t$. Repeat step 2 for this $s$. The lift $t$ gives a section $\\operatorname{Spec}\\Omega\\to T_s$. Its image is one of the point-spectrum pieces: a map from a one-point spectrum selects one piece, and the only $\\Omega$-algebra endomorphism of $\\Omega$ is the identity. The corresponding piece of $C_s$ is, by the projection argument of step 3, exactly $C_t=C\\times_{T,t}\\operatorname{Spec}\\Omega$. Since $h$ is nodal, $C_s$ is empty or pure of dimension one with smooth points and ordinary nodes. A clopen piece has the same component dimensions, local rings and completions, by the explicit arguments of step 3. A closed point of $C_s$ in that piece stays closed there. Thus $C_t$ has the required fibre property. Together with step 4 this proves $g$ nodal. All arguments allow empty pieces and empty schemes, and never require $e$ surjective, proper, quasi-compact or separated.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pure-dimension",
+    "def-weil-open-immersion",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Reverse implication: apply the same geometric-fibre decomposition to the chosen lift t"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-algebraic-closure",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pure-dimension",
+  "def-weil-unramified-morphism",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CD8, lemma-nodal-family-postcompose-etale; forward argument with geometric fibres instead of residue-field extensions, reverse by open graph and the same fibre splitting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|Nodal|AtWorstNodal",
+   "results": "{\"t\": \"2026-10-22T07:13:34Z\", \"tool\": \"grep\", \"query\": \"nodal|Nodal|AtWorstNodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T07:13:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nodal scheme morphisms of relative dimension one are preserved and reflected by postcomposition with an etale morphism",
+   "results": "{\"t\": \"2026-10-22T07:13:34Z\", \"tool\": \"leansearch\", \"query\": \"Nodal scheme morphisms of relative dimension one are preserved and reflected by postcomposition with an etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\"], \"digest\": \"c29abbb932f6c2f2\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms g C to T and an etale map e T to S, g is a nodal family of relative dimension one if and only if e composed with g is nodal",
+   "results": "{\"t\": \"2026-10-22T07:13:44Z\", \"tool\": \"leanfinder\", \"query\": \"For scheme morphisms g C to T and an etale map e T to S, g is a nodal family of relative dimension one if and only if e composed with g is nodal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"cf07e9dad3f3743a\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented family of curves with only smooth points and ordinary nodes remains nodal when its structural morphism is composed with an etale map of bases, and conversely",
+   "results": "{\"t\": \"2026-10-22T07:14:20Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented family of curves with only smooth points and ordinary nodes remains nodal when its structural morphism is composed with an etale map of bases, and conversely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"9605b71841d29474\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|comp|IsStableUnderBaseChange|HasOfPostcompProperty",
+   "results": "{\"t\": \"2026-10-23T09:39:38Z\", \"tool\": \"grep\", \"query\": \"of_comp|comp|IsStableUnderBaseChange|HasOfPostcompProperty\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"27\", \"63\", \"64\", \"70\"], \"digest\": \"17b03fff0b0339ec\"}; Read Etale.lean:35-157, Flat.lean:38-99 and FinitePresentation.lean:42-106. Hits give permanence of etale, smooth, flat or locally finitely presented morphisms, not ordinary-node geometric fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T09:42:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Etale.lean:35-157, Flat.lean:38-99 and FinitePresentation.lean:42-106. Hits give permanence of etale, smooth, flat or locally finitely presented morphisms, not ordinary-node geometric fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nodal families of curves and etale postcomposition",
+   "results": "{\"t\": \"2026-10-23T09:42:27Z\", \"tool\": \"leansearch\", \"query\": \"Nodal families of curves and etale postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.respectsIso\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.comp\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"52342d8f29c03a6e\"}; Read Etale.lean:35-157, Flat.lean:38-99 and FinitePresentation.lean:42-106. Hits give permanence of etale, smooth, flat or locally finitely presented morphisms, not ordinary-node geometric fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|Nodal|AtWorstNodal",
+   "results": "{\"t\": \"2026-10-23T09:42:28Z\", \"tool\": \"grep\", \"query\": \"nodal|Nodal|AtWorstNodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Etale.lean:35-157, Flat.lean:38-99 and FinitePresentation.lean:42-106. Hits give permanence of etale, smooth, flat or locally finitely presented morphisms, not ordinary-node geometric fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nodal scheme morphisms of relative dimension one are preserved and reflected by postcomposition with an etale morphism",
+   "results": "{\"t\": \"2026-10-23T09:42:29Z\", \"tool\": \"leanfinder\", \"query\": \"Nodal scheme morphisms of relative dimension one are preserved and reflected by postcomposition with an etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"af1ccd5df52acce1\"}; Read Etale.lean:35-157, Flat.lean:38-99 and FinitePresentation.lean:42-106. Hits give permanence of etale, smooth, flat or locally finitely presented morphisms, not ordinary-node geometric fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented family of curves with smooth points and ordinary nodes remains nodal after an etale change of target and conversely",
+   "results": "{\"t\": \"2026-10-23T09:46:08Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented family of curves with smooth points and ordinary nodes remains nodal after an etale change of target and conversely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"22423d0dbf058273\"}; Read Etale.lean:35-157, Flat.lean:38-99 and FinitePresentation.lean:42-106. Hits give permanence of etale, smooth, flat or locally finitely presented morphisms, not ordinary-node geometric fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-nodal-chart-locality",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal. Chartwise nodal descent in the proof of Tag 0DSH: the application of lemma-nodal-local after taking the open image of the nodal chart locus. Scheme input: postcomposition with an etale target morphism, used in comparing two chart diagrams.",
+   "via": [
+    "lem-sfb-space-nodal-chart-locality",
+    "lem-sfb-space-nodal-locus-base-change",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-nodal-etale-postcomposition",
+  "worker": "stage1",
+  "summary": "Q87: retained the statement; no finished project declaration or Mathlib match. Proved both directions using existing ring and scheme permanence nodes, an open graph, and disjoint geometric point spectra. No new nodes are needed.",
+  "blueprint": "The existing from.place records the ancestry to det-thm-sf-ctf-stability-direct-images (3); the latest blueprint direct-image proof is read. This split supplies exactly the scheme etale-postcomposition prerequisite of lem-sfb-space-nodal-chart-locality, without changing that route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-unramified-field-fibre-decomposition",
+    "why": "Generic description of an unramified scheme over a field, applied over an algebraically closed field to split the target geometric fibre; no nodal or alteration input is taken from the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-unramified-field-fibre-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-261323868",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-261323868 (reviewer sub-agent of L); spot-checked: Read the item in full (statement unchanged vs live; 0 new nodes, no re-split note) against Stacks curves.tex 0C5A (l.4687), 0C5B (l.4715) and 0CD8 (l.4801). Both directions are correct. Forward: T_s is etale over Spec Omega (021D clause 1), so by 02G7 it is a disjoint union of Spec Omega pieces with an arbitrary index set; the projection check gives D_i = C x_{T,t_i} Spec Omega, and the clopen argument for components, completions, smoothness and closed points holds. Reverse: the graph j is the base change of the open diagonal Delta_e (checked by hand; no separatedness of e needed) and p is flat and lfp by 01U9 and 01TS. The fibre C_t is the clopen piece of C_s selected by (t,id). Small cases checked: empty C or T, non-surjective open immersion e, infinite disjoint union of copies of T, the split node, a non-separated etale T. FIX (C5): steps 1 and 4 re-derived the composition of flat and of lfp morphisms from ring lemmas 00HC/00F4. The finite-presentation sketch omitted the choice of a common principal open. The existing Mathlib leaves lem-pc-flat-compose (01U7) and lem-sbc-locally-finite-presentation-composition (01TR), which Stacks 0CD8 itself cites, are now cited, and proof_deps = union of the step uses. Batch-5: the closure of lem-trf-unramified-field-fibre-decomposition (Stacks 02G7, 40 nodes) contains no other trace-formula or Poincare node. It is a generic field-scheme fact, not part of either assumed statement or its proof, so the flag does not force a RETURN. The declared tool_use is accepted: no node of the unit gives the decomposition, and lem-weil-pbc-unramified-over-field-discrete is too weak. No duplicate of the item exists in the DAG; 0C5D source-locality is a different statement. No SGA source used.; 1 file(s) fixed by the reviewer"
+ }
+}

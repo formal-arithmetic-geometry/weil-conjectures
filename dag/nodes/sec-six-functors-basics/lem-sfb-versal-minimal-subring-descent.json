@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-versal-minimal-subring-descent",
+ "kind": "statement",
+ "title": "Minimal complete subring of definition of a versal object",
+ "statement": "Let $R$ be a commutative Noetherian ring and $l$ a field finite as an $R$-module [def-weil-pbc-noetherian-ring, def-weil-field]. Use the test category, predeformation categories, formal objects and versality of [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be a predeformation category on $\\mathcal C_{R,l}$. All complete local algebras below are Noetherian, are complete for their maximal ideals, and have specified residue field $l$ [def-weil-pbc-adic-completion]. A morphism from a formal object $\\alpha$ over $A$ to $\\beta$ over $B$ consists of a local residue-preserving $R$-map $f:A\\to B$ and compatible isomorphisms between the evaluations of $\\alpha$ along $A\\to B/\\mathfrak m_B^n$ and $\\beta_n$, for every $n\\geq1$. Assume the following property (S1): for every $A_1\\to A\\leftarrow A_2$ in the test category with $A_2\\to A$ surjective, every $x_i\\in\\mathcal F(A_i)$ and specified isomorphism between their evaluations over $A$ come from an object of $\\mathcal F(A_1\\times_A A_2)$ with isomorphisms to the $x_i$ inducing the specified isomorphism. Let $\\xi$ over $C$ be versal. There exist a complete local algebra $B$, an injective local residue-preserving $R$-map $i:B\\hookrightarrow C$, a formal object $\\eta$ over $B$, and a morphism $\\eta\\to\\xi$ over $i$, with the following properties. For every test algebra $A$ and local residue-preserving $R$-map $f:C\\to A$, let $x=\\xi_f$ and let $x\\prime$ be the evaluation of $\\eta$ over the image subring $f(i(B))\\subseteq A$. The induced morphism $x\\prime\\to x$ is minimal: if $A\\prime\\subseteq f(i(B))$ is an $R$-subalgebra which is an object of the test category and $z\\to x\\prime$ is a morphism over its inclusion, then $A\\prime=f(i(B))$. Moreover, For every formal object $\\theta$ over a complete local algebra $E$ and every morphism $\\theta\\to\\eta$, the underlying map $E\\to B$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06T2, lemma-smallest-where-descends-versal, clauses (1) and (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak p=\\ker(R\\to l)$ and $\\Lambda=R_{\\mathfrak p}$. The test-algebra lemma identifies the test categories and complete local algebras over $R$ and $\\Lambda$, with $\\Lambda$ Noetherian local and $l$ finite over $\\Lambda$. Transport $\\mathcal F$ through this identification; its (S1) and versality conditions are identical because they quantify over the same maps and diagrams. Work over $\\Lambda$ until the end. Set $C_n=C/\\mathfrak m_C^n$. The quotient lemma makes $C_n$ Artinian local, with residue field $l$ and nilpotent maximal ideal, so $C_n$ is a test algebra. The maps $C_{n+1}\\to C_n$ are surjective.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2 (lemma-smallest-where-descends-versal), initial setup; localization uses the coefficient-base identification of the cited test-algebra lemma"
+   }
+  },
+  {
+   "text": "Construct minimal objects $\\eta_n\\to\\xi_n$ over $B_n\\subseteq C_n$, together with commuting squares over $C_{n+1}\\to C_n$, by induction. Start with $B_1=l=C_1$ and $\\eta_1=\\xi_1$; no proper residue-preserving subalgebra of $l$ exists. Having chosen $\\eta_n\\to\\xi_n$, apply clause (2) of the Artinian minimal-descent lemma to $\\xi_{n+1}\\to\\xi_n$ and this chosen minimal object. It supplies a minimal $\\eta_{n+1}\\to\\xi_{n+1}$ whose image is isomorphic over $\\xi_n$ to $\\eta_n\\to\\xi_n$. Compose with that isomorphism to obtain the transition arrow $\\eta_{n+1}\\to\\eta_n$ and its commuting square. Its ring map $B_{n+1}\\to B_n$ is surjective. Composites supply all longer transition arrows and their compatibility.",
+   "uses": [
+    "lem-sfb-artin-minimal-descent-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2, first proof paragraph, applying Tag 06T1 (2)"
+   }
+  },
+  {
+   "text": "Define $B=\\varprojlim_n B_n$ as the ring of compatible sequences. The inclusions $B_n\\subseteq C_n$ give an injective map $i:B\\hookrightarrow\\varprojlim_n C_n=C$: a compatible sequence whose every image is zero has every coordinate zero. The last equality is precisely completeness of $C$. This constructs the candidate subring without assuming its Noetherianity.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2, end of the first proof paragraph"
+   }
+  },
+  {
+   "text": "For each $n$, $B_n$ is Artinian local, hence Noetherian with nilpotent maximal ideal; its completion is therefore itself. Regard $\\eta_n$ as the formal object obtained by its evaluations on $B_n/\\mathfrak m_{B_n}^r$. Quasi-initiality of the versal $\\xi$ gives a morphism $\\xi\\to\\eta_n$ over a local map $h_n:C\\to B_n$. Choose $M$ large enough that $h_n(\\mathfrak m_C^M)=0$. Evaluate this morphism to get $\\xi_M\\to\\eta_n$. If $D=h_n(C)$, transport $\\xi_M$ to $D$; the resulting arrow $z\\to\\eta_n$, followed by $\\eta_n\\to\\xi_n$, is an arrow to the chosen minimal object in $\\mathcal S_{\\xi_n}$. Here $D$ is a test algebra: it is the quotient image of $C_M$. Minimality forces $D=B_n$, so $h_n$ is surjective. Choose $d$ ideal generators of $\\mathfrak m_C$, using Noetherianity. Their images generate $\\mathfrak m_{B_n}$ because $h_n$ is local and surjective. Modulo $\\mathfrak m_{B_n}^2$ their classes span over $l$ by reducing coefficients modulo $\\mathfrak m_{B_n}$. Thus $\\dim_l(\\mathfrak m_{B_n}/\\mathfrak m_{B_n}^2)\\leq d$ for every $n$. No compatibility among the maps $h_n$ is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-versal-formal-object-quasi-initial",
+    "def-sfb-artin-deformation-test-category",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2, second proof paragraph, through the bounded-cotangent assertion; Tag 06HT supplies quasi-initiality"
+   }
+  },
+  {
+   "text": "Apply the bounded-cotangent Artinian-limit theorem to the sequence $B_n$ from step 2 with the bound from step 4. It makes the explicitly constructed $B$ a complete Noetherian local $\\Lambda$-algebra with residue field $l$, gives surjective coordinate maps $p_n:B\\to B_n$, and makes $I_n=\\ker p_n$ cofinal with the maximal-ideal powers. The map $i:B\\to C$ is local and residue-preserving: the residue of a compatible sequence is its first coordinate in $B_1=l$, agreeing with the residue of its image in $C_1=l$. The canonical bijection $B/I_n\\to B_n$ identifies the compatible $\\eta_n$ with objects over $B/I_n$. Apply formal-filtration comparison to obtain a formal object $\\eta$ over $B$ whose evaluation at $p_n$ is compatibly $\\eta_n$. For every $n$, evaluating $\\eta$ along $B\\xrightarrow{i}C\\to C_n$ is therefore the transport of $\\eta_n$ along $B_n\\subseteq C_n$, hence isomorphic to $\\xi_n$. The commuting squares of step 2 show compatibility of these isomorphisms, giving the required morphism $\\eta\\to\\xi$ over $i$.",
+   "uses": [
+    "lem-sfb-bounded-cotangent-artinian-limit",
+    "lem-sfb-artin-formal-filtration-comparison",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2, second proof paragraph, applying Tags 06SF and 06H6"
+   }
+  },
+  {
+   "text": "Let $f:C\\to A$ be a test-algebra map. By nilpotence of $\\mathfrak m_A$, choose $n$ with $\\mathfrak m_A^n=0$; locality gives $f(\\mathfrak m_C^n)=0$, so $f$ factors through $g:C_n\\to A$. Since $p_n$ is surjective, $f(i(B))=g(B_n)$. The evaluations from step 5 identify the arrow in the statement with the image under $g_*$ of $\\eta_n\\to\\xi_n$. Clause (1) of the Artinian minimal-descent lemma says that this image is minimal in $\\mathcal S_{\\xi_f}$. Consequently any arrow $z\\to x'$ over a test subalgebra $A'\\subseteq g(B_n)$, after composition with $x'\\to\\xi_f$, has $A'=g(B_n)$. This proves the first asserted property, including nonsurjective $f$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-artin-minimal-descent-transport",
+    "lem-sfb-artin-formal-filtration-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2, third proof paragraph, applying Tag 06T1 (1)"
+   }
+  },
+  {
+   "text": "Let $\\theta\\to\\eta$ lie over $h:E\\to B$. For each $n$, evaluate at $B\\to B_n$ and use the comparisons of step 5 to get a morphism $\\theta\\to\\eta_n$. Choose $M$ with $\\mathfrak m_{B_n}^M=0$. It yields an arrow $\\theta_M\\to\\eta_n$ over $E/\\mathfrak m_E^M\\to B_n$. Its image subring $D_n=h_n(E)\\subseteq B_n$, where $h_n=p_nh$, is a test algebra, since it is a quotient of the test algebra $E/\\mathfrak m_E^M$. Transporting $\\theta_M$ to $D_n$ gives an arrow to $\\eta_n\\to\\xi_n$ in $\\mathcal S_{\\xi_n}$. Minimality of that chosen object forces $D_n=B_n$. Hence every composite $p_nh:E\\to B_n$ is surjective. Choose $n$ with $I_n\\subseteq\\mathfrak m_B^2$, using the cofinality from step 5. For $b\\in\\mathfrak m_B$, choose $e\\in E$ with $h(e)-b\\in I_n$; residue preservation forces $e\\in\\mathfrak m_E$. Thus the cotangent map $\\mathfrak m_E/\\mathfrak m_E^2\\to\\mathfrak m_B/\\mathfrak m_B^2$ is surjective. The complete-local cotangent-surjectivity criterion applies to the complete Noetherian local rings $E,B$ with their common residue field $l$, and gives surjectivity of $h$. Finally undo the coefficient-base identification from step 1: all constructions and morphisms are $R$-linear, proving both properties as stated.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-bounded-cotangent-artinian-limit",
+    "lem-sfb-complete-local-cotangent-graded-rigidity",
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T2, final proof paragraph; its surjectivity-detection sentence is expanded using Tag 06GZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-artin-local-test-algebra",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-sfb-artin-minimal-descent-transport",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-sfb-versal-formal-object-quasi-initial",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-bounded-cotangent-artinian-limit",
+  "lem-sfb-artin-formal-filtration-comparison",
+  "lem-sfb-complete-local-cotangent-graded-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06T2 (lemma-smallest-where-descends-versal), proof; the final detection of nonsurjectivity is made explicit by Tag 06GZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A versal formal deformation satisfying Schlessinger S1 descends to a minimal complete Noetherian local subring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring formal smoothness, general categorical universal properties, or coefficient subrings of power series, not this deformation-theoretic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal subring of definition for a versal formal object every incoming morphism induces a surjective ring map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subring.instMin\", \"module\": \"Mathlib.Algebra.Ring.Subring.Basic\", \"type\": \": Min (Subring R)\", \"doc\": \"For any ring $ R $, the subrings of $ R $ form a meet-semilattice under inclusion, where the minimal element is the trivial subring containing only the additive identity $ 0 $. The intersection of any\"}\n  {\"name\": \"Subring.instInhabited\", \"module\": \"Mathlib.Algebra.Ring.Subring.Basic\", \"type\": \": Inhabited (Subring R)\", \"doc\": \"Every ring $ R $ has a minimal subring, called the bottom subring, which is the image of the canonical ring homomorphism from the integers $ \\\\mathbb{Z} $ to $ R $. This subring consists precisely of a\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks\", \"module\": \"Mathlib.RingTheory.SurjectiveOnStalks\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is surjective on stalks if for every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $, the induced map on localizations $ R_{f^{-1}(\\\\mathfrak{p})}\"}\n  {\"name\": \"RingHom.FormallyUnramified.of_surjective\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"{f : R →+* S} (hf : Function.Surjective f) : f.FormallyUnramified\", \"doc\": \"A surjective ring homomorphism between commutative semirings is formally unramified, meaning there are no nontrivial derivations from the codomain to modules over the domain.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"RingHom.FormallyUnramified\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative semirings is formally unramified if the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formally unramified condition, meani\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Ideal.minimalPrimes_map_of_surjective\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \"{S : Type*} [CommRing S] {f : R →+* S} (hf : Function.Surjective f) (I : Ideal R) :\\n  (I.map f).minimalPrimes = Ideal.map f '' (I ⊔ (RingHom.ker f)).minimalPrimes\", \"doc\": \"Let $ f : R \\\\to S $ be a surjective ring homomorphism between commutative rings, and let $ I $ be an ideal of $ R $. The minimal prime ideals of $ S $ containing the image $ f(I) $ are exactly the ima\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring formal smoothness, general categorical universal properties, or coefficient subrings of power series, not this deformation-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\", \"IsNoetherianRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring formal smoothness, general categorical universal properties, or coefficient subrings of power series, not this deformation-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "smallest.*descend|minimal.*versal|versal.*subring",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"577\", \"text\": \"/-- The nilpotency class of a nilpotent `G` is equal to the smallest `n` for which the descending\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"17\", \"text\": \"map `stoneCechUnit : α → StoneCech α` which is minimal in the sense of the following universal\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring formal smoothness, general categorical universal properties, or coefficient subrings of power series, not this deformation-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of minimal Artinian rings of definition inside a versal deformation ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime], IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"IsArtinianRing.quotNilradicalEquivPi\", \"module\": \"Mathlib/RingTheory/Artinian/Module\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] → [IsArtinianRing R] → R ⧸ nilradical R ≃+* ((I : MaximalSpectrum R) → R ⧸ I.asIdeal)\", \"doc\": \"In a commutative Artinian ring $ R $, the quotient ring $ R $ modulo its nilradical is ring-isomorphic to the product of the quotient rings $ R/\\\\mathfrak{m} $ for each maximal ideal $ \\\\mathfrak{m} $. \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring formal smoothness, general categorical universal properties, or coefficient subrings of power series, not this deformation-theoretic assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-minimal-versal-power-series",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T2, lemma-smallest-where-descends-versal, clauses (1) and (2).",
+   "via": [
+    "lem-sfb-stack-minimal-versal-power-series",
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-versal-minimal-subring-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed a compatible tower of minimal Artinian descents, bounded its cotangent dimensions by versality, and obtained the actual complete Noetherian subring and formal object by the inverse-limit and filtration theorems. Both minimality properties are proved, with the final adic surjectivity inference expanded. Two new statement-only lemmas (06T1 and 06SF); reused 06HT, 06H6 and the absolute complete-local cotangent criterion. No Lean changes or compilation.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, through the stable-curve moduli/versal-ring prerequisites; the exact subsidiary passage is Tag 06T2 clauses (1)-(2), used by lem-sfb-stack-minimal-versal-power-series. Read the latest blueprint direct-image proof and kept this existing deformation-theoretic prerequisite route. The inherited nearest blueprint ancestor is null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "why": "Generic commutative algebra for Artinian quotients and nilpotence, needed to apply the formal-deformation statements to genuine test algebras; this is not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "why": "Generic commutative algebra for Artinian quotients and nilpotence, needed to apply the formal-deformation statements to genuine test algebras; this is not a replacement for a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-5454c4d31",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-5454c4d31 (reviewer sub-agent of L); spot-checked: I read Stacks formal-defos: the S_x/minimal-object paragraph, 06T1 (smallest-where-descends) statement and proof, 06T2 (smallest-where-descends-versal) statement and full proof, 06SF (limit-artinian) and 06GZ. The item statement and stmt_deps are identical to the live and side-live copies, and the item is still unsplit there, so this is not a supersession and no re-split note applies. New node lem-sfb-artin-minimal-descent-transport is 06T1 (both clauses) plus the finite-length existence remark, with (S1) and S_x/f_* defined in the node; I tested it on representable Hom(D,-) and on a constant F. New node lem-sfb-bounded-cotangent-artinian-limit is 06SF. Its Λ is only Noetherian local with l finite over Λ, and I checked that the Stacks proof via the completion of Λ[z] and 06SE still works. Its cofinality goes both ways; edge cases: a constant tower gives l, l[t]/(t^n) gives l[[t]], and dropping the bound gives a non-Noetherian limit. Neither new node duplicates an existing one: grep over the DAG for 06T1/06SF/06SE/06T2 found only 06SE, 06SG, 06T3 and other unrelated nodes. Neither restates an item clause. Steps 1-7 check against the cited statements: localization via lem-sfb-artin-local-test-algebra (finite module implies finite type); compatible minimal tower by 06T1(2); B ⊆ C by completeness; surjectivity of h_n and the uniform cotangent bound from 06HT plus minimality; Noetherian adic B and η via 06SF and 06H6 (the comparison node's more-general clause); clause (1) for arbitrary f via 06T1(1); clause (2) via surjectivity of p_n h, a lift modulo I_n ⊆ m_B^2, and the 06GZ cotangent criterion, which makes the step Stacks leaves implicit explicit. Batch-5 finding: lem-sfb-complete-local-cotangent-graded-rigidity reaches lem-trf-vector-space-quotient-dimension, a Mathlib rank-nullity leaf. That is generic linear algebra, not part of the trace formula or Poincaré duality, so it is accepted. I accept the worker's two tool_uses, both generic Mathlib-status commutative algebra. No SGA. No fixes."
+ }
+}

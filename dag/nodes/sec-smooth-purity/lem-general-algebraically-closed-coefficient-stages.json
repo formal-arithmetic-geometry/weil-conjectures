@@ -1,0 +1,184 @@
+{
+ "id": "lem-general-algebraically-closed-coefficient-stages",
+ "kind": "statement",
+ "title": "Normalized finite coefficient scalar stages for the intrinsic common-stage category",
+ "statement": "Let l be prime, Ω an algebraic closure of Padic l, and Y any scheme. For each finite coefficient subfield E of Ω, use the intrinsic rational constructible category from [def-weil-rationalization-karoubi]. The proof-only characteristic parameter can be fixed to zero, since l is nonzero. The tensor scalar transitions for inclusions E ≤ L are additive and exact for their uniquely integral-image-normalized coherent integer-shift comparisons. Parameter independence identifies these functors and their normalized shifts with every permitted finite-field specialization. The canonical tensor associators satisfy the cocycle, hence the given scalar functors and associators uniquely specify a StageSystem in the sense of [def-weil-pbc-finite-stage-pair-category]. No hypothesis on a structure map from Y to a finite field is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Scalar-extension diagram underlying clauses (2) and (4); the retained order-1462 common-stage construction, scalar-stage portion."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Lift the integral scalar shift through the fully faithful intrinsic inclusion using normalized_shift_existsUnique, as in the preceding P7 proof. The normalization fixes all components and hence the CommShift datum.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport transitionExact across the defining equality of the stage transition, transporting its CommShift datum along the same equality. This proves stageTransition_exact without choosing a new shift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For specialization_transitionShift, uniqueness of the ordinary-to-integral normalized shift identifies the two integral CommShift witnesses: their characteristic parameters occur only in proof fields. The rational normalization then specifies the same integral image at shift one. The uniqueness clauses of the rational shift specifications identify their full coherent CommShift structures.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For transitionCommShift_existsUnique, choose a prime p greater than l and construct the finite-field datum with base ZMod p and its algebraic closure. The existing specialization_transition equality identifies the rational functors. Parameter independence identifies the integral functors, and uniqueness of their ordinary-to-integral normalization identifies the integral CommShift structures. For any heterogeneous-equal rational CommShift structures, equality transport of components and of their integral images identifies the two normalization predicates at shift one. Transport the retained finite-field transitionCommShift_existsUnique theorem along this functor equality and predicate equivalence. No characteristic condition is imposed on the scheme.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For transitionExact, use the same concrete auxiliary finite-field datum of prime characteristic greater than l. specialization_transition identifies the functors and specialization_transitionShift identifies their prescribed CommShift structures. A private abstract-category equality-induction lemma transports the retained finite-field transitionExact assertion along both identifications, so exactness is for the required normalized shift, not for an arbitrary existential comparison. The two already proved specialization lemmas are moved earlier with their signatures and proofs preserved.",
+   "uses": [
+    "lem-weil-scalar-extension-exact-triangulated",
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For associator_cocycle, the proved private scalarAssociator_pentagon handles arbitrary finite coefficient fields and six algebra maps: substitute the three composite maps using their four composition equalities, identify the remaining associativity equality cast with the identity component, and apply the pentagon clause of sfRationalScalar_coherence and the category identity law. Natural-transformation extensionality packages its component equations as the scalarAssociator_pentagon_nat equality. Specialize this equality to the coefficient inclusions using coefficientInclusion_laws, with a private concrete normalizedAssociator whose type records the stage endpoints. The existing exists-unique normalization identifies each chosen associator with this concrete one. Rewrite those four equalities at the level of whole natural transformations, then evaluate at K and remove the identity component of the functor associator. This avoids large functor-object conversions between proof-irrelevant inclusion witnesses, without changing any definition. Repeated fields and identity inclusions are included, and no scheme hypothesis is used. Together with the specified scalar functors and associators, the cocycle constructs stageSystem_existsUnique: coherence supplies its proof field and extensionality of the two data fields proves uniqueness. Equality transport gives the published stage transition and its exactness and additivity instances.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retain the normalized scalar-stage route and the existing shift/exactness proofs. P1 closes the retained associator_cocycle by equality induction on composite coefficient maps and the pentagon clause of sfRationalScalar_coherence. Natural-transformation extensionality packages the component equations; the existing uniqueness specifications identify the chosen associators, and evaluation gives the required cocycle without changing any definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized exact scalar-extension stage system on finite subextensions of an algebraic closure of a p-adic field",
+   "results": "8 hits, chiefly PadicAlgCl and PadicComplex field constructions.",
+   "date": "2026-10-27",
+   "verdict": "No coefficient-category stage-system theorem; retain the project scalar-stage interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 hits, including CommShift.ofIso, CommShift.ofHasShiftOfFullyFaithful, and generic integer-shift comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Generic transport tools support the proof but do not give its integral normalization or exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|transitionCommShift_existsUnique",
+   "results": "0 hits. Local source search finds the retained finite-field interface used by the proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project finite-field normalization and exactness declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients",
+  "date": "2026-10-27",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "def-weil-algebraically-closed-coefficients"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficientStages",
+  "file": "lean/Sheaf/Paper/GeneralAlgebraicallyClosedCoefficientStages.lean",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+  "declarations": [
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.Stage",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageCategory",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stagePreadditive",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageZero",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageShift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageShiftAdditive",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stagePretriangulated",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageTriangulated",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.scalarExtension_parameter_independent",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transition",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.integralTransition",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.integralScalarCommShift_existsUnique",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_transition",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionCommShift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_transitionShift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionExact",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionAdditive",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.scalarAssociator",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.associator_existsUnique",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.associator",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.unitor",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.associator_cocycle",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageSystem",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageTransition",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageTransition_exact",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageTransition_additive"
+  ],
+  "statement": "theorem stageSystem_existsUnique\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (Y : AlgebraicGeometry.Scheme.{u})\n    :\n    ∃! S : StageSystem (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y),\n      (∀ (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L), S.T h =\n          GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E L h) ∧\n      (∀ (E L M : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) (k : L ≤ M),\n        HEq (S.assoc h k) (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E L M h k))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-27",
+  "note": "The relocated scalar-stage interface and all existing signatures and definition bodies are preserved. P1 proves the final associator_cocycle obligation from the intrinsic scalar pentagon and coefficient-inclusion laws; no sorry remains in this module."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-25fce",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261026T235952-L-1474688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T021341-L-2760130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

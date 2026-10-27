@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedRlimFunctor
 public import Sheaf.Paper.IntrinsicCompletion
-public import Sheaf.Paper.CompletedTowerPullback
+public import Sheaf.Paper.CompletedReductionUnit
 public import Sheaf.Paper.ConstantCompletionEquivalence
 public import Sheaf.Paper.WeilCompletedKoszulRoosComparison
 public import Sheaf.Paper.CompletedQuotientUnitNormalization

@@ -1,0 +1,137 @@
+{
+ "id": "lem-zl-component-lisse-equivalence",
+ "kind": "statement",
+ "title": "Lisse equivalence assembled from contractible evaluations",
+ "statement": "For a commutative condensed coefficient sheaf and w-contractible affine T with the component inverse image structures of [def-zl-condensed-lisse-evaluation-model], fix a coefficient isomorphism alpha. Given an isomorphism a of terminal section rings and a natural realization square identifying F_S followed by componentDerived with derived scalar extension along a followed by F_T, componentDerived restricts, up to the stated inclusion isomorphism, to an equivalence of the actual lisse full subcategories.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "sk-def-pe-wlocal"
+ ],
+ "proof": [
+  {
+   "text": "The affine spectrum homeomorphism identifies component spaces. W-contractibility makes the spectrum component space extremally disconnected, so both profinite and affine contractible evaluation theorems apply.",
+   "uses": [
+    "sk-def-pe-wlocal",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-contractible-lisse-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  },
+  {
+   "text": "Conjugate perfect scalar transport along a by the two evaluation equivalences. Whisker their inclusion isomorphisms with the realization square and cancel the profinite equivalence counit; this gives the required inclusion comparison.",
+   "uses": [
+    "lem-zl-ring-iso-perfect-scalar-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-wlocal",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-zl-contractible-derived-sections-tensor",
+  "lem-zl-contractible-lisse-evaluation",
+  "lem-zl-ring-iso-perfect-scalar-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a ring isomorphism preserves perfect complexes and induces an equivalence of their derived full subcategories",
+   "results": "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; no restricted perfect derived equivalence.",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the fixed functors; reuse the stated library comparison interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a ring isomorphism preserves perfect complexes and induces an equivalence of their derived full subcategories",
+   "results": "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv and restriction-of-scalars definitions; no perfect-derived-subcategory theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use module equivalence termwise, then restrict using finite-projective representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact braided monoidal functors preserve the derived Koszul braiding on unbounded complexes",
+   "results": "Functor.mapDerivedCategory, its shift instance, and Functor.map_braiding; no automatic braided derived functor.",
+   "date": "2026-10-25",
+   "verdict": "Use the exact derived functor API and construct or invoke normalized tensor comparisons separately."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMonNatIso|mapMonCompIso|mapModNatIso",
+   "results": "Mathlib CategoryTheory/Monoidal/Mon.lean contains mapMonNatIso and mapMonCompIso.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the monoid lifting API in the coefficient-isomorphism assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedComponentPullbackCompatibility",
+  "date": "2026-10-25",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Construction (4.1), Proposition 4.3(3), Remark 3.2; substep: Lisse equivalence assembled from contractible evaluations",
+   "via": [
+    "lem-zl-condensed-component-pullback-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentLisseEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentLisseEquivalence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_lisse_equivalence",
+  "statement": "theorem component_lisse_equivalence\n    (a : Evaluation.A ((coherentTopology Profinite.{u}).over (affineComponentSpace T))\n      (profiniteCoefficient Λ (affineComponentSpace T)) (Over.mk (𝟙 (affineComponentSpace T))) ≅\n      Evaluation.A (Scheme.ProEt.topology T) (condensedRingObj Λ T)\n        (Scheme.ProEt.mk (𝟙 T)))\n    (square : Nonempty (Evaluation.F\n        ((coherentTopology Profinite.{u}).over (affineComponentSpace T))\n        (profiniteCoefficient Λ (affineComponentSpace T)) (Over.mk (𝟙 (affineComponentSpace T)))\n        Over.mkIdTerminal ⋙ componentDerived Λ T α ≅\n      RingDerivedScalarExtension.moduleDerivedExtension a.hom.hom ⋙\n        Evaluation.F (Scheme.ProEt.topology T) (condensedRingObj Λ T)\n          (Scheme.ProEt.mk (𝟙 T))\n          (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.WeaklyEtale T))) :\n    ∃ e : (Evaluation.lisse ((coherentTopology Profinite.{u}).over (affineComponentSpace T))\n        (profiniteCoefficient Λ (affineComponentSpace T))).FullSubcategory ≌\n      (Evaluation.lisse (Scheme.ProEt.topology T) (condensedRingObj Λ T)).FullSubcategory,\n      Nonempty (e.functor ⋙ (Evaluation.lisse (Scheme.ProEt.topology T)\n          (condensedRingObj Λ T)).ι ≅\n        (Evaluation.lisse ((coherentTopology Profinite.{u}).over (affineComponentSpace T))\n          (profiniteCoefficient Λ (affineComponentSpace T))).ι ⋙ componentDerived Λ T α)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T095038-L-3286008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T095038-L-3286008",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

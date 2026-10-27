@@ -1,0 +1,192 @@
+{
+ "id": "lem-sp-nilpotent-koszul-coordinates",
+ "kind": "statement",
+ "title": "Signed strict exact sequence of the right principal Koszul tensor tower",
+ "statement": "Let $\\mathcal C$ be a site essentially small in the coefficient universe, $R$ a sheaf of commutative rings, $t$ a global section, and $\\mathcal A=\\operatorname{Mod}(R)$ with sheafification [def-weil-sheaf-of-modules-category]. Form the right total tensor tower $V(Q)_m=Q\\otimes L_{m+1}$, where $L_{m+1}=\\operatorname{Cone}(t^{m+1}:R[0]\\to R[0])$ [def-pc-tensor-complex-sheaves, def-pur-principal-koszul-quotient-towers]. There are a functor $Z$ on all unbounded cochain complexes $Q$, natural maps $i:\\operatorname{const}(Q)\\to V(Q)$ and $p:V(Q)\\to Z(Q)$ with $ip=0$, level isomorphisms $\\zeta_{Q,m}:Z(Q)_m\\cong Q[1]$, and isomorphisms $\\chi_{Q,m,k}:V(Q)_m^k\\cong Q^k\\oplus Q^{k+1}$. The inverse of $\\chi$ is exactly the sum of the two total tensor inclusions, using the right unitor and the degree-zero target and degree-minus-one source of the cone. The sequence $0\\to\\operatorname{const}(Q)\\xrightarrow{i}V(Q)\\xrightarrow{p}Z(Q)\\to0$ is short exact. In these coordinates $i(x)=(x,0)$, $p(x,y)=(-1)^ky$, $d(x,y)=(dx+(-1)^{k+1}t^{m+1}y,dy)$, the transition of $V$ is $(x,y)\\mapsto(x,ty)$, and the transition of $Z$, transported through $\\zeta$ and the canonical shift coordinates, is multiplication by $t$. No exactness of products, derived category, nilpotence, or boundedness assumption is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone transition; Stacks 012Z, homology.tex definition-associated-simple-complex. Completeness sentence of sk-lem-sp-tower, algebraic steps 1--2 of lem-sp-nilpotent-action-koszul-unit."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $V_j=Q\\otimes_RL_j$. By the total-tensor convention, only the summands $Q^k\\otimes R$ and $Q^{k+1}\\otimes R$ occur in degree $k$, so $V_j^k=Q^k\\oplus Q^{k+1}$ and $d(x,y)=(dx+(-1)^{k+1}t^jy,dy)$. In particular $d^2=0$: the two mixed terms have coefficients $(-1)^{k+1}+(-1)^{k+2}=0$, and $d$ commutes with the scalar $t^j$. The inclusion $i_j(x)=(x,0)$ is a chain map. The map $p_j^k(x,y)=(-1)^ky$ is a chain map to $Q[1]$, since $p_j^{k+1}d(x,y)=(-1)^{k+1}dy=-d_Q((-1)^ky)$. Its kernel is exactly the first summand, and its degreewise section is $z\\mapsto(0,(-1)^kz)$. Thus $0\\to Q\\xrightarrow{i_j}V_j\\xrightarrow{p_j}Q[1]\\to0$ is degreewise split exact.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-principal-koszul-quotient-towers",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone tower; explicit chain-coordinate refinement using Stacks 012Z (homology-definition-associated-simple-complex) and 0941 (sites-cohomology-lemma-derived-limit-is-ok)."
+   }
+  },
+  {
+   "text": "The Koszul transition on these coordinates is $a_j(x,y)=(x,ty)$. It is a chain map because $t^j(ty)=t^{j+1}y$; furthermore $a_ji_{j+1}=i_j$ and $p_ja_j=t p_{j+1}$. These equations give the asserted strict short exact sequence $0\\to\\operatorname{const}(Q)\\xrightarrow{i}V\\xrightarrow{p}Z\\to0$ of tower complexes, with $Z_j=Q[1]$ and transition $t$. The sections from step 1 need not be tower maps, and no such splitting is asserted.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone tower; explicit chain-coordinate refinement using Stacks 012Z (homology-definition-associated-simple-complex) and 0941 (sites-cohomology-lemma-derived-limit-is-ok)."
+   }
+  },
+  {
+   "text": "For a chain map b, the total tensor map acts as (b^k,b^(k+1)) on the two summands. Thus the displayed inclusion and signed projection commute with b, giving natural transformations on all complexes. All zero and invertible scalar cases obey the same formulas.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone transition; Stacks 012Z, homology.tex definition-associated-simple-complex. Completeness sentence of sk-lem-sp-tower, algebraic steps 1--2 of lem-sp-nilpotent-action-koszul-unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a complex with the principal two term Koszul complex has a natural short exact sequence with quotient the shifted complex and scalar transition",
+   "results": {
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.tensor_unit_d₂",
+     "HomologicalComplex.unit_tensor_d₁",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "rTensor_exact",
+     "lTensor_exact",
+     "Algebra.Generators.H1Cotangent.exact_δ_map"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: general tensor, homology and augmentation APIs do not state this signed strict tower calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\"",
+   "results": {
+    "count": 12,
+    "hits": [
+     "CategoryTheory.GradedObject.mapBifunctor",
+     "CategoryTheory.GradedObject.mapBifunctorMapObj",
+     "CategoryTheory.GradedObject.mapBifunctor_obj_obj",
+     "CategoryTheory.GradedObject.mapBifunctorMap",
+     "CategoryTheory.GradedObject.ιMapBifunctorMapObj",
+     "CategoryTheory.GradedObject.mapBifunctorMapObjDesc",
+     "CategoryTheory.GradedObject.mapBifunctorMap_obj_obj",
+     "CategoryTheory.GradedObject.mapBifunctor_obj_map"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: general tensor, homology and augmentation APIs do not state this signed strict tower calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(shortExact|ShortExact)|shortExact.*koszul",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: general tensor, homology and augmentation APIs do not state this signed strict tower calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The principal Koszul tensor has only two canonical summands in each degree with a shifted quotient and scalar transition",
+   "results": {
+    "count": 8,
+    "hits": [
+     "TensorProduct.gradedComm",
+     "tensorKaehlerQuotKerSqEquiv",
+     "tensorKaehlerQuotKerSqEquiv_symm_tmul_D",
+     "tensorKaehlerQuotKerSqEquiv_tmul_D",
+     "MvPolynomial.rTensor",
+     "KaehlerDifferential.D_tensorProductTo",
+     "tensorKaehlerQuotKerSqEquiv.congr_simp",
+     "derivationQuotKerSq_mk"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: general tensor, homology and augmentation APIs do not state this signed strict tower calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NilpotentActionKoszulUnit",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone transition; Stacks 012Z, homology.tex definition-associated-simple-complex. Completeness sentence of sk-lem-sp-tower, algebraic steps 1--2 of lem-sp-nilpotent-action-koszul-unit.",
+   "via": [
+    "lem-sp-nilpotent-action-koszul-unit",
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.NilpotentKoszulCoordinates",
+  "file": "lean/Sheaf/Algebra/Homology/NilpotentKoszulCoordinates.lean",
+  "declaration": "CategoryTheory.nilpotentKoszulCoordinates",
+  "statement": "theorem nilpotentKoszulCoordinates\n    (t : (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj\n      R)).sections) :\n    ∃ (Z : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ ⥤ CochainComplex (ℕᵒᵖ ⥤\n      (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ℤ)\n      (ζ : ∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ),\n        (Z.obj Q).asFunctor.obj (op m) ≅ Q⟦(1 : ℤ)⟧)\n      (i : (Functor.const ℕᵒᵖ : (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⥤ (ℕᵒᵖ ⥤ (ringedSiteModules.{r}\n      ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)))).mapHomologicalComplex\n          (ComplexShape.up ℤ) ⟶ spKoszulRightTower R t)\n      (p : spKoszulRightTower R t ⟶ Z)\n      (hi : i ≫ p = 0)\n      (χ : ∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        (((spKoszulRightTower R t).obj Q).X k).obj (op m) ≅ Q.X k ⊞ Q.X (k + 1)),\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        (χ Q m k).inv = spKoszulRightCoordinatesInv R t Q m k) ∧\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ),\n        (ShortComplex.mk (i.app Q) (p.app Q) (NatTrans.congr_app hi Q)).ShortExact) ∧\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        ((i.app Q).f k).app (op m) ≫ (χ Q m k).hom = biprod.inl) ∧\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        ((p.app Q).f k).app (op m) ≫ (ζ Q m).hom.f k ≫\n          (Q.shiftFunctorObjXIso (1 : ℤ) k (k + 1) rfl).hom =\n        (χ Q m k).hom ≫ (k.negOnePow • biprod.snd)) ∧\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        (((spKoszulRightTower R t).obj Q).d k (k + 1)).app (op m) ≫\n            (χ Q m (k + 1)).hom =\n          (χ Q m k).hom ≫ biprod.desc\n            (Q.d k (k + 1) ≫ biprod.inl)\n            (((k + 1).negOnePow •\n                endoPow (spKoszulScalar R t (Q.X (k + 1))) (m + 1)) ≫ biprod.inl +\n              Q.d (k + 1) ((k + 1) + 1) ≫ biprod.inr)) ∧\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        (((spKoszulRightTower R t).obj Q).X k).map\n            (homOfLE (Nat.le_succ m)).op ≫ (χ Q m k).hom =\n          (χ Q (m + 1) k).hom ≫\n            biprod.map (𝟙 _) (spKoszulScalar R t (Q.X (k + 1)))) ∧\n      (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J\n      (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ),\n        ((Z.obj Q).X k).map (homOfLE (Nat.le_succ m)).op ≫\n            (ζ Q m).hom.f k ≫ (Q.shiftFunctorObjXIso (1 : ℤ) k (k + 1) rfl).hom =\n          (ζ Q (m + 1)).hom.f k ≫\n            (Q.shiftFunctorObjXIso (1 : ℤ) k (k + 1) rfl).hom ≫\n              spKoszulScalar R t (Q.X (k + 1)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.spKoszulRightTensor",
+   "CategoryTheory.spKoszulRearrange",
+   "CategoryTheory.spKoszulRightTower",
+   "CategoryTheory.spKoszulRightCoordinatesInv",
+   "CategoryTheory.spKoszulScalar",
+   "CategoryTheory.nilpotentKoszulCoordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c920",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T163612-L-717281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c920",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T163612-L-717281",
+  "kind": "interface",
+  "note": "independent cc review: item proof of nilpotentActionKoszulUnit vs node lem-sp-nilpotent-action-koszul-unit; moved defs diffed verbatim vs clone; new sorried statements nilpotentKoszulCoordinates / roosNilpotentExactAugmentation checked true against Mathlib sign conventions, principalKoszulTransition, and their node lean.statement records"
+ }
+}

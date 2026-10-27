@@ -1,0 +1,668 @@
+{
+ "id": "lem-coef-system-enriched-projection-adjunction",
+ "kind": "statement",
+ "title": "Enriched system adjunction from the actual counit and projection",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated finite type between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. For $W=X,Y,\\overline X$ and $\\tau=\\mathrm{et},\\mathrm{proet}$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], let $\\mathscr S_W^\\tau$ be the category of strict systems of $(A_n)_W$-module sheaves with semilinear quotient transitions and componentwise morphisms [lem-pur-coefficient-system-derived-comparison]; use its ordinary unbounded derived category [def-weil-abstract-derived-category], exact evaluations $e_n$ and, for $m\\ge n\\ge1$, derived quotient functors $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ [def-weil-derived-tensor]. Write $t^M_{m,n}:T^W_{m,n}M_m\\to M_n$ for the scalar-extension adjunct of the actual transition. \nWork first on etale systems and let $s=\\operatorname{Spec}k$ with $a_W:W\\to s$. Suppose $F=Rp_{*,\\bullet}j_{!,\\bullet}\\dashv G$ is an actual adjunction, with unit $\\eta$ and counit $\\epsilon$, and suppose the canonical system maps $a_Y^*P\\otimes^LFM\\to F(a_X^*P\\otimes^LM)$ are invertible for every coefficient-system test $P$. Let $M$ on $X$ and $N$ on $Y$ be normalized systems with bounded constructible finite-Tor levels [def-coef-normalized-dvr-tower, def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude], and assume $FM,GN$ have these same properties. Use derived internal Hom [def-pur-derived-internal-hom] and the mapping-system notation of [lem-coef-derived-system-evaluation-calculus]. Define $\\widehat{\\mathcal H}_W(U,V)=Ra_{W,*,\\bullet}^{\\mathrm{et}}R\\mathcal Hom_{\\mathscr S_W^{\\mathrm{et}}}(U,V)$, representing $P\\mapsto\\operatorname{Hom}(a_W^*P\\otimes^LU,V)$.\nThe tensor-Hom/projection/adjunction bijections for all $P$ define a natural isomorphism in $D(\\mathscr S_s^{\\mathrm{et}})$\n$$\\widehat\\Phi_{M,N}:\\widehat{\\mathcal H}_Y(FM,N)\\xrightarrow{\\sim}\\widehat{\\mathcal H}_X(M,GN).$$\nWith the transpose convention of [def-weil-pbc-adjunction-mate], its defining adjunction transpose uses the actual counit $FGN\\to N$. Its inverse equations hold as coefficient-system morphism equations. If evaluation identifies $F\\dashv G$ counit-compatibly with the finite adjunctions, each evaluation of $\\widehat\\Phi$ is the finite derived mapping-complex adjunction. On degree-zero Hom the forward and inverse maps are $h\\mapsto G(h)\\eta_M$ and $g\\mapsto\\epsilon_NF(g)$. Under the canonical identifications of the underlying towers of $\\widehat{\\mathcal H}_Y(FM,N)$ and $\\widehat{\\mathcal H}_X(M,GN)$ with the pro-etale mapping systems $\\mathcal H_Y(\\nu_Y^*FM,\\nu_Y^*N)$ and $\\mathcal H_X(\\nu_X^*M,\\nu_X^*GN)$ of [lem-coef-system-internal-hom-representability], it gives an isomorphism between these in $D(\\operatorname{Tow}(\\operatorname{Ab}))$. Applying $R\\lim$ gives inverse isomorphisms in $D(\\operatorname{Ab})$, with the same naturality and projection identities. Neither the inverse equations nor the transposes are inferred solely from finite evaluations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second proof paragraph, middle RHom isomorphism, and final paragraph, triangle identities before derived limit: representing adjunction and its evaluations; returned steps 13-15. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-coef-normalized-dvr-tower",
+  "def-pur-derived-internal-hom",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-system-internal-hom-representability",
+  "def-pur-etale-system-projection-data",
+  "def-coef-semilinear-system-models",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\widehat{\\mathcal H}_Y(FM,N)$ and $B=\\widehat{\\mathcal H}_X(M,GN)$. By [lem-coef-system-internal-hom-representability], for every $P\\in D(\\mathscr S_s^{\\mathrm{et}})$ these represent the indicated tensor-Hom functors. Write $\\theta_P:\\operatorname{Hom}(P,A)\\to\\operatorname{Hom}(a_Y^*P\\otimes^L FM,N)$ and $\\lambda_P:\\operatorname{Hom}(P,B)\\to\\operatorname{Hom}(a_X^*P\\otimes^L M,GN)$ for their natural representing bijections. Let $\\pi_{P,M}$ be the canonical invertible projection in the hypothesis; [lem-coef-system-compact-support-projection] identifies it as an actual natural system map with the canonical finite evaluations. Define\n$$J_P=\\lambda_P^{-1}\\circ\\Psi\\circ(-\\circ\\pi_{P,M}^{-1})\\circ\\theta_P,$$\nwhere $\\Psi$ is the actual $F\\dashv G$ Hom bijection [lem-weil-pbc-adjunction-of-natural-bijection], applied to $a_X^*P\\otimes^LM$ and $N$. All four arrows are bijections. Their naturality in $P$, in $M$ contravariantly and in $N$ covariantly follows from naturality of their stated factors.",
+   "uses": [
+    "lem-coef-system-internal-hom-representability",
+    "lem-coef-system-compact-support-projection",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, middle RHom isomorphism: all coefficient-system tests, before inverse limit."
+   }
+  },
+  {
+   "text": "Apply [lem-galois-yoneda-fully-faithful] in $D(\\mathscr S_s^{\\mathrm{et}})$ to the natural transformations $J$ and $J^{-1}$. They give unique maps $\\widehat\\Phi:A\\to B$ and $\\widehat\\Psi:B\\to A$ satisfying $J_P(x)=\\widehat\\Phi x$ and $J_P^{-1}(y)=\\widehat\\Psi y$. Thus postcomposition by $\\widehat\\Psi\\widehat\\Phi$ and by $1_A$ has the same effect for every $P$, and likewise on $B$. Injectivity in that cited bijection gives $\\widehat\\Psi\\widehat\\Phi=1_A$ and $\\widehat\\Phi\\widehat\\Psi=1_B$. For maps $M'\\to M$, $N\\to N'$, naturality of $J_P$ from step 1 gives the two naturality squares after postcomposition with every $P\\to A$; the same injectivity proves the squares in the coefficient-system category.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Second and final paragraphs: representing isomorphism and inverse equations in the system category."
+   }
+  },
+  {
+   "text": "Let $v_X:a_X^*B\\otimes^LM\\to GN$ correspond to $1_B$ under $\\lambda_B$. Reading $J_B^{-1}(1_B)$ from right to left shows that $\\widehat\\Psi$ is represented by\n$$a_Y^*B\\otimes^LFM\\xrightarrow{\\pi_{B,M}}F(a_X^*B\\otimes^LM)\\xrightarrow{F(v_X)}FGN\\xrightarrow{\\epsilon_N}N.$$\nHere [lem-weil-pbc-adjunction-of-natural-bijection] gives exactly $\\Psi^{-1}(g)=\\epsilon_NF(g)$, so this uses the specified counit. Conversely, if $v_Y:a_Y^*A\\otimes^LFM\\to N$ represents $1_A$, then $\\widehat\\Phi$ is represented by $G(v_Y\\pi_{A,M}^{-1})\\eta_{a_X^*A\\otimes^LM}$. These are the two transposes of the bijections used in step 1, rather than independently chosen maps with those evaluations.",
+   "uses": [
+    "lem-coef-system-internal-hom-representability",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, middle RHom isomorphism: explicit inverse transpose through the actual counit."
+   }
+  },
+  {
+   "text": "Under the conditional counit-compatible identification with $F_n\\dashv G_n$, evaluate the explicit inverse composite of step 3. By [lem-coef-semilinear-derived-sections], tensor, derived pushforward, closed evaluation and their specified transposes evaluate to the finite constructions; the internal-Hom evaluation applies because the first inputs $M$ and $FM$ are normalized. The representing objects have these evaluation identifications by [lem-coef-system-internal-hom-representability]. The projection evaluates to $\\pi_{n}$ by [lem-coef-system-compact-support-projection]. Consequently $e_n\\widehat\\Psi$ is the finite transpose of $\\epsilon_{n,N_n}F_n(v_{X,n})\\pi_{n}$. This is precisely the inverse finite derived mapping-complex adjunction. Since evaluation preserves the inverse equations already proved in step 2, $e_n\\widehat\\Phi$ is its inverse, the forward finite adjunction. No equality in step 2 was inferred from evaluation.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-system-internal-hom-representability",
+    "lem-coef-system-compact-support-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, finite RHom isomorphism: evaluation of the constructed inverse."
+   }
+  },
+  {
+   "text": "Take $P=\\mathbf1$ in step 1. The canonical $\\pi_{\\mathbf1,M}$ is the identity after tensor-unit identifications: for its proper part this is the unit formula of [lem-weil-pbc-ringed-projection-mate-exact], applied to the ringed sequence sites; its open tensor part sends $m\\otimes1$ to $m\\otimes1$, hence is the identity under the unit identifications. The ordinary adjunction formulas of [lem-weil-pbc-adjunction-of-natural-bijection] therefore give $h\\mapsto G(h)\\eta_M$ and $g\\mapsto\\epsilon_NF(g)$ on degree-zero Hom. The projection identities for arbitrary $P$ are exactly the defining equations $\\lambda_P(\\widehat\\Phi x)=\\Psi(\\theta_P(x)\\pi_{P,M}^{-1})$ and $\\theta_P(\\widehat\\Psi y)=\\epsilon_NF(\\lambda_P(y))\\pi_{P,M}$ from steps 1 and 3; both hold as actual system equations.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second and final paragraphs: degree-zero adjunction and the projection equations."
+   }
+  },
+  {
+   "text": "For $(FM,N)$ on $Y$ and $(M,GN)$ on $X$, all four inputs are normalized with bounded constructible finite-Tor levels by hypothesis. Thus [lem-coef-system-internal-hom-representability] supplies natural, evaluation- and transpose-preserving isomorphisms $c_Y:UA\\xrightarrow{\\sim}\\mathcal H_Y(\\nu_Y^*FM,\\nu_Y^*N)$ and $c_X:UB\\xrightarrow{\\sim}\\mathcal H_X(\\nu_X^*M,\\nu_X^*GN)$ in $D(\\operatorname{Tow}(\\operatorname{Ab}))$, where $U$ takes the underlying abelian tower. Put $\\Phi^{\\mathrm{Tow}}=c_XU(\\widehat\\Phi)c_Y^{-1}$ and $\\Psi^{\\mathrm{Tow}}=c_YU(\\widehat\\Psi)c_X^{-1}$. Their products are identities by cancellation and step 2. Naturality and the two projection equations of step 5 are carried to the corresponding equations under these stated natural comparisons.",
+   "uses": [
+    "lem-coef-system-internal-hom-representability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second paragraph, both ends of the finite RHom comparison: etale representing objects to pro-etale mapping towers."
+   }
+  },
+  {
+   "text": "Apply the actual functor $R\\lim:D(\\operatorname{Tow}(\\operatorname{Ab}))\\to D(\\operatorname{Ab})$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], specialized to modules over $\\mathbf Z$ on the one-point site. Functoriality sends the two products in step 6 to $R\\lim(1)=1$, so $R\\lim\\Phi^{\\mathrm{Tow}}$ and $R\\lim\\Psi^{\\mathrm{Tow}}$ are inverse. Applying that same functor to each naturality or projection equation preserves it. This uses total derived limit on the ordinary derived tower category, not a choice of morphisms between homotopy-limit triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Final paragraph: triangle/inverse identities before the derived limit, then functorial passage to it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-system-compact-support-projection",
+  "lem-coef-system-internal-hom-representability",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second paragraph middle RHom isomorphism and final paragraph; explicit representing-system refinement using Stacks 001P, 07A6, 08J9, 0B56 and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact support projection formula and an ordinary adjunction induce an isomorphism of derived coefficient mapping systems before derived inverse limit with counit normalized finite evaluations",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "Condensed.isoLocallyConstantOfIsColimit_inv",
+      "module": "Mathlib/Condensed/Discrete/Colimit",
+      "type": "∀ (X : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\n  (hX : (S : Profinite) → CategoryTheory.Limits.IsColimit (X.mapCocone S.asLimitCone.op)),\n  (Condensed.isoLocallyConstantOfIsColimit X hX).inv = CompHausLike.LocallyConstant.counitApp ",
+      "doc": "Given a functor $ F : \text{Profinite}^{\text{op}} \to \text{Type} $ that preserves finite products and satisfies the condition that for every profinite space $ S $, the image of the limit cone $ S.asLimi"
+     },
+     {
+      "name": "LightCondensed.isoLocallyConstantOfIsColimit_inv",
+      "module": "Mathlib/Condensed/Discrete/Colimit",
+      "type": "∀ (X : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\n  (hX :\n    (S : LightProfinite) →\n      CategoryTheory.Limits.IsColimit (X.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\n  (LightCondensed.isoLocallyConstantOfI",
+      "doc": "For a contravariant functor $ F : \text{LightProfinite}^{\text{op}} \to \text{Type} $ preserving finite products, if every light profinite space $ S $ satisfies the colimit condition for the cocone constr"
+     },
+     {
+      "name": "Condensed.profiniteSolidCounit",
+      "module": "Mathlib/Condensed/Solid",
+      "type": "(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R",
+      "doc": "The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,"
+     },
+     {
+      "name": "CondensedMod.IsSolid.isIso_solidification_map",
+      "module": "Mathlib/Condensed/Solid",
+      "type": "∀ {R : Type (u + 1)} {inst : Ring R} {A : CondensedMod R} [self : CondensedMod.IsSolid R A] (X : Profinite),\n  CategoryTheory.IsIso ((CategoryTheory.yoneda.obj A).map ((Condensed.profiniteSolidification R).app X).op)",
+      "doc": "For any profinite space $X$ and solid condensed $R$-module $A$, the morphism induced by the profinite solidification natural transformation at $X$, when mapped through the Yoneda embedding of $A$ (in "
+     },
+     {
+      "name": "LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+      "module": "Mathlib/Condensed/Discrete/Module",
+      "type": "∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\n  CategoryTheory.IsIso\n    ((LightCondensed.forget R).map\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\n        ((LightCondMod.LocallyConstant.functor R).obj M)))",
+      "doc": "For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction "
+     },
+     {
+      "name": "LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction",
+      "module": "Mathlib/Condensed/Light/TopCatAdjunction",
+      "type": "CategoryTheory.IsIso LightCondSet.sequentialAdjunction.counit",
+      "doc": "The counit of the adjunction between the category of sequential topological spaces and the category of light condensed sets is an isomorphism."
+     },
+     {
+      "name": "HomologicalComplex.forgetEval",
+      "module": "Mathlib/Algebra/Homology/HomologicalComplex",
+      "type": "{ι : Type u_1} →\n  (V : Type u) →\n    [inst : CategoryTheory.Category.{v, u} V] →\n      [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] →\n        (c : ComplexShape ι) →\n          (i : ι) →\n            (HomologicalComplex.forget V c).comp (CategoryTheory.GradedObject.eval i) ≅ HomologicalComplex.",
+      "doc": "The composition of the forgetful functor from homological complexes to graded objects with the evaluation functor at index $i$ is naturally isomorphic to the direct evaluation functor at index $i$. Fo"
+     },
+     {
+      "name": "Condensed.profiniteSolidification",
+      "module": "Mathlib/Condensed/Solid",
+      "type": "(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R",
+      "doc": "The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid "
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: abstract mate and enriched Yoneda results do not give the coefficient-system representing isomorphism together with its finite derived evaluations and counit-defined normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda applied to tensor projection and an adjunction gives an enriched mapping tower adjunction and inverse identities as actual derived system maps",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv",
+      "module": "Mathlib/CategoryTheory/Sites/Monoidal",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {A : Type u₃} →\n      [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\n        [inst_2 : CategoryTheory.MonoidalCategory A] →\n          [inst_3 : CategoryTheory.MonoidalClosed A] →\n            (M : A) →\n              (F G : CategoryT",
+      "doc": "For a monoidal closed category $\\mathcal{A}$, presheaves $F, G: \\mathcal{C}^{\\text{op}} \\to \\mathcal{A}$, and objects $M \\in \\mathcal{A}$, $X \\in \\mathcal{C}$, this establishes a natural equivalence b"
+     },
+     {
+      "name": "CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π",
+      "module": "Mathlib/CategoryTheory/Enriched/FunctorCategory",
+      "type": "∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] {F₁ F₂ : Categor",
+      "doc": "For any natural transformation $\\tau: F_1 \\Rightarrow F_2$ between functors $F_1, F_2: \\mathcal{J} \\to \\mathcal{C}$ and any object $j \\in \\mathcal{J}$, applying the natural equivalence $\\text{homEquiv"
+     },
+     {
+      "name": "CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality",
+      "module": "Mathlib/CategoryTheory/Sites/Monoidal",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {A : Type u₃} [inst_1 : CategoryTheory.Category.{v₃, u₃} A]\n  [inst_2 : CategoryTheory.MonoidalCategory A] [inst_3 : CategoryTheory.MonoidalClosed A] {M : A}\n  {F G : CategoryTheory.Functor Cᵒᵖ A} {X Y : C} (f : X ⟶ Y)\n  [inst_4 : CategoryT",
+      "doc": "The natural equivalence between the enriched hom-functor composed with the Coyoneda construction and the presheaf hom-functor involving tensoring with the constant functor is natural in the objects $X"
+     },
+     {
+      "name": "CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_comp",
+      "module": "Mathlib/CategoryTheory/Enriched/FunctorCategory",
+      "type": "∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] {F₁ F₂ F₃ : Cate",
+      "doc": "Given a monoidal category $\\mathcal{V}$ and an ordinary category $\\mathcal{C}$ enriched over $\\mathcal{V}$, for any small category $\\mathcal{J}$ and functors $F_1, F_2, F_3: \\mathcal{J} \\to \\mathcal{C"
+     },
+     {
+      "name": "CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π_assoc",
+      "module": "Mathlib/CategoryTheory/Enriched/FunctorCategory",
+      "type": "∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] {F₁ F₂ : Categor",
+      "doc": "For a monoidal category $\\mathcal{V}$, an ordinary category $\\mathcal{C}$ enriched over $\\mathcal{V}$, and small category $\\mathcal{J}$, the natural equivalence between natural transformations $F_1 \\R"
+     },
+     {
+      "name": "CategoryTheory.Enriched.FunctorCategory.homEquiv",
+      "module": "Mathlib/CategoryTheory/Enriched/FunctorCategory",
+      "type": "(V : Type u₁) →\n  [inst : CategoryTheory.Category.{v₁, u₁} V] →\n    [inst_1 : CategoryTheory.MonoidalCategory V] →\n      {C : Type u₂} →\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} C] →\n          {J : Type u₃} →\n            [inst_3 : CategoryTheory.Category.{v₃, u₃} J] →\n              [inst_4",
+      "doc": "Given a monoidal category $\\mathcal{V}$ and an ordinary category $\\mathcal{C}$ enriched over $\\mathcal{V}$, for any small category $\\mathcal{J}$ and functors $F_1, F_2: \\mathcal{J} \\to \\mathcal{C}$, t"
+     },
+     {
+      "name": "CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans",
+      "module": "Mathlib/CategoryTheory/Enriched/Basic",
+      "type": "{C : Type v} →\n  [inst : CategoryTheory.EnrichedCategory (Type v) C] →\n    {D : Type v} →\n      [inst_1 : CategoryTheory.EnrichedCategory (Type v) D] →\n        (F G : CategoryTheory.EnrichedFunctor (Type v) C D) →\n          CategoryTheory.enrichedNatTransYoneda F G ≅\n            CategoryTheory.yoned",
+      "doc": "Given enriched categories $\\mathcal{C}, \\mathcal{D}$ over the Cartesian monoidal category $\\mathrm{Type}\\, v$, and enriched functors $F, G: \\mathcal{C} \\to \\mathcal{D}$, this natural isomorphism estab"
+     },
+     {
+      "name": "CategoryTheory.eHomEquiv_comp",
+      "module": "Mathlib/CategoryTheory/Enriched/Ordinary/Basic",
+      "type": "∀ (V : Type u') [inst : CategoryTheory.Category.{v', u'} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u}\n  [inst_2 : CategoryTheory.Category.{v, u} C] [inst_3 : CategoryTheory.EnrichedOrdinaryCategory V C] {X Y Z : C}\n  (f : X ⟶ Y) (g : Y ⟶ Z),\n  (CategoryTheory.eHomEquiv V) (CategoryTh",
+      "doc": "For a category $\\mathcal{C}$ enriched over a monoidal category $\\mathcal{V}$, the natural equivalence $\\text{eHomEquiv}$ between hom-sets satisfies $\\text{eHomEquiv}(f \\circ g) = \\lambda^{-1} \\circ (\\"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: abstract mate and enriched Yoneda results do not give the coefficient-system representing isomorphism together with its finite derived evaluations and counit-defined normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact support projection formula and an ordinary adjunction induce an isomorphism of derived coefficient mapping systems before derived inverse limit with counit normalized finite evaluations",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CondensedSet.compactlyGeneratedAdjunctionCounitIso",
+      "module": "Mathlib.Condensed.TopCatAdjunction",
+      "type": "(X : CompactlyGenerated.{u, u + 1}) : condensedSetToCompactlyGenerated.obj (compactlyGeneratedToCondensedSet.obj X) ≅ X",
+      "doc": "For any compactly generated space $X$, the counit of the adjunction provides an isomorphism between the space obtained by converting $X$ to a condensed set and back to a compactly generated space (via"
+     },
+     {
+      "name": "CompHausLike.LocallyConstant.counit_app_val",
+      "module": "Mathlib.Condensed.Discrete.LocallyConstant",
+      "type": "∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\n  (hs :\n    ∀ ⦃X Y : CompHausLike P",
+      "doc": "For a sheaf $X$ over compact Hausdorff-like spaces with a coherent Grothendieck topology, the counit of the adjunction between the sheaf of locally constant functions and the presheaf construction eva"
+     },
+     {
+      "name": "CompHausLike.LocallyConstant.counit",
+      "module": "Mathlib.Condensed.Discrete.LocallyConstant",
+      "type": "[HasExplicitFiniteCoproducts.{u} P] :\n  haveI := CompHausLike.preregular hs\n  (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩ ⋙ functor.{u, w} P hs ⟶\n    𝟭 (Sheaf (coherentTopology (CompHausLike.{u} P)) (Type (max u w)))",
+      "doc": "A natural transformation from the composition of the sheaf sections functor (evaluated at the terminal object PUnit) with a finite-product-preserving functor to the identity functor on sheaves over co"
+     },
+     {
+      "name": "CondensedSet.compactlyGeneratedAdjunction",
+      "module": "Mathlib.Condensed.TopCatAdjunction",
+      "type": ": condensedSetToCompactlyGenerated ⊣ compactlyGeneratedToCondensedSet",
+      "doc": "The adjunction between the category of compactly generated spaces and the category of condensed sets, obtained by restricting the adjunction between topological spaces and condensed sets through the f"
+     },
+     {
+      "name": "CompHausLike.LocallyConstant.counitApp",
+      "module": "Mathlib.Condensed.Discrete.LocallyConstant",
+      "type": "[HasExplicitFiniteCoproducts.{u} P] (Y : (CompHausLike.{u} P)ᵒᵖ ⥤ Type max u w) [PreservesFiniteProducts Y] :\n  (functorToPresheaves.obj (Y.obj (op (CompHausLike.of P PUnit.{u + 1})))) ⟶ Y",
+      "doc": "A natural transformation from the presheaf of locally constant functions on compact Hausdorff-like spaces (evaluated at the terminal object) to a finite-product-preserving functor $ Y $, defined by co"
+     },
+     {
+      "name": "CondensedSet.compactlyGeneratedAdjunctionCounitHomeo",
+      "module": "Mathlib.Condensed.TopCatAdjunction",
+      "type": "(X : TopCat.{u + 1}) [UCompactlyGeneratedSpace.{u} X] : X.toCondensedSet.toTopCat ≃ₜ X",
+      "doc": "For any compactly generated topological space $X$, the counit of the adjunction provides a homeomorphism between the space obtained by converting $X$ to a condensed set and back to a topological space"
+     },
+     {
+      "name": "CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
+      "module": "Mathlib.Condensed.TopCatAdjunction",
+      "type": ": IsIso compactlyGeneratedAdjunction.counit",
+      "doc": "The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed"
+     },
+     {
+      "name": "CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app",
+      "module": "Mathlib.CategoryTheory.Limits.FunctorCategory.Basic",
+      "type": "[HasLimitsOfShape J C] (F : J ⥤ K ⥤ C) (j : J) (k : K) :\n  (limitObjIsoLimitCompEvaluation F k).inv ≫ (limit.π F j).app k = limit.π (F ⋙ (evaluation K C).obj k) j",
+      "doc": "For a diagram $F : \\mathcal{J} \\to [\\mathcal{K}, \\mathcal{C}]$ and objects $j \\in \\mathcal{J}, k \\in \\mathcal{K}$, the composition of the inverse of the evaluation limit isomorphism $\\text{lim}(F)(k) "
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: abstract mate and enriched Yoneda results do not give the coefficient-system representing isomorphism together with its finite derived evaluations and counit-defined normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": {
+    "summary": "[loogle] OK 12 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.mateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "Suppose we have a square of functors (where the top and bottom are adjunctions `L₁ ⊣ R₁`\nand `L₂ ⊣ R₂` respectively).\n\n```\n      C ↔ D\n    G ↓   ↓ H\n      E ↔ F\n```\n\nThen we have a bijection between n"
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_counit",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_counit_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the inverse mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.unit_mateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.unit_mateEquiv_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the inverse mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor ",
+      "doc": "The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor ",
+      "doc": "The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, ",
+      "doc": "The mates equivalence commutes with vertical composition."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_hcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, ",
+      "doc": "The mates equivalence commutes with horizontal composition of squares."
+     },
+     {
+      "name": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo",
+      "doc": "When all four functors in a square are left adjoints, the mates operation can be iterated:\n\n```\n         L₁                  R₁                  R₁\n      C --→ D             C ←-- D             C ←-- "
+     },
+     {
+      "name": "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo",
+      "doc": ""
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_apply",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": ""
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: abstract mate and enriched Yoneda results do not give the coefficient-system representing isomorphism together with its finite derived evaluations and counit-defined normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHomAdjunction|mateEquiv_counit|derived.*[Aa]djunction",
+   "results": {
+    "summary": "[grep] OK 13 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+      "line": "43",
+      "text": "  ParametrizedAdjunction.hasLiftingProperty_iff MonoidalClosed.internalHomAdjunction₂"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean",
+      "line": "58",
+      "text": "  ParametrizedAdjunction.hasLiftingProperty_iff MonoidalClosed.internalHomAdjunction₂"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "123",
+      "text": "theorem mateEquiv_counit (α : TwoSquare G L₁ L₂ H) (d : D) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "128",
+      "text": "theorem mateEquiv_counit_symm (α : TwoSquare R₁ H G R₂) (d : D) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "132",
+      "text": "  exact (mateEquiv_counit adj₁ adj₂ ((mateEquiv adj₁ adj₂).symm α) d)"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+      "line": "17",
+      "text": "(See `MonoidalClosed.internalHomAdjunction₂` in the file"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+      "line": "12",
+      "text": "# Derived adjunction"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+      "line": "95",
+      "text": "/-- The unit of the derived adjunction, see `Adjunction.derived`. -/"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+      "line": "117",
+      "text": "/-- The counit of the derived adjunction, see `Adjunction.derived`. -/"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+      "line": "88",
+      "text": "  convert! mateEquiv_counit _ _ (prodComparisonNatIso F A).inv B using 2"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Arrow.lean",
+      "line": "164",
+      "text": "    adj := LeibnizAdjunction.adj _ _ (MonoidalClosed.internalHomAdjunction₂) X }"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+      "line": "305",
+      "text": "def internalHomAdjunction₂ [MonoidalClosed C] :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean",
+      "line": "35",
+      "text": "  MonoidalClosed.internalHomAdjunction₂.preservesLimitsOfShape_flip_obj _ _"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: abstract mate and enriched Yoneda results do not give the coefficient-system representing isomorphism together with its finite derived evaluations and counit-defined normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*[Aa]djunction|[Aa]djunction.*enriched|conjugateIso",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/closed tensor and Yoneda primitives do not state the full varying-coefficient-system theorem with its site and finite-evaluation comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction and an invertible tensor projection map induce an isomorphism of global derived Hom coefficient systems compatible with counit and finite evaluations",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.FunctorToTypes.adj",
+     "CategoryTheory.Adjunction.counitAsIsoOfIso",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp",
+     "ModuleCat.monoidalClosedHomEquiv",
+     "CategoryTheory.Types.tensorProductAdjunction",
+     "CategoryTheory.tensorRightAdjunction",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso",
+     "CategoryTheory.Adjunction.derived_counit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/closed tensor and Yoneda primitives do not state the full varying-coefficient-system theorem with its site and finite-evaluation comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.mk'_homEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/closed tensor and Yoneda primitives do not state the full varying-coefficient-system theorem with its site and finite-evaluation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction and an invertible tensor projection map induce an isomorphism of global derived Hom coefficient systems compatible with counit and finite evaluations",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints_symm_apply",
+     "CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit",
+     "CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/closed tensor and Yoneda primitives do not state the full varying-coefficient-system theorem with its site and finite-evaluation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda natural bijections from tensor projection and adjunction represent an isomorphism of mapping objects in the derived category of semilinear inverse coefficient sequences",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.ihomPoints_symm_apply",
+     "ModuleCat.monoidalClosedHomEquiv",
+     "LightCondensed.ihomPoints_symm_comp",
+     "groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+     "LightCondensed.ihomPoints",
+     "CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+     "CategoryTheory.Adjunction.compPreadditiveYonedaIso_inv_app_app_apply",
+     "groupCohomology.inhomogeneousCochainsIso"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/closed tensor and Yoneda primitives do not state the full varying-coefficient-system theorem with its site and finite-evaluation comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Second proof paragraph, middle RHom isomorphism, and final paragraph, triangle identities before derived limit: representing adjunction and its evaluations; returned steps 13-15.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-system-enriched-projection-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the all-test representing bijection and its inverse, proved both inverse equations by system-level Yoneda, specified the actual-counit transpose, evaluated it conditionally, and passed through the existing pro-etale tower comparison and total derived limit. Reuses existing nodes; no new nodes and no statement change.",
+  "blueprint": "Second proof paragraph of prop-coef-integral-exceptional-adjoint: middle RHom isomorphism; final paragraph: specified units/counits and identities before derived inverse limit. Steps 1-3 construct the representing-system isomorphism; 4-5 fix its evaluations and normalization; 6-7 give the mapping-tower and derived-limit forms.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only the tensor-unit normalization of the proper projection mate, applied to ringed sequence sites; the unit route does not replace this generic ringed-topos normalization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Only existence of the actual total derived inverse-limit functor on strict abelian towers; not any geometric proper-base-change result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-2c9e4e987",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-2c9e4e987 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the 7 cited statements in full; the delivery has no new nodes and leaves the statement and stmt_deps unchanged. Source: the blueprint proof of prop-coef-integral-exceptional-adjoint, main-20261015 (the middle RHom isomorphism in its second paragraph, and the triangle identities before Rlim in its last paragraph). The proof is correctly marked by:agent. Step 1: J_P = λ^{-1} Ψ (−∘π^{-1}) θ. The types and the direction of π match lem-coef-system-compact-support-projection, and all four factors are bijections natural in P. Naturality in M,N relies on the canonical representing bijection; this is advisory only. Step 2: Yoneda full faithfulness (Mathlib leaf) gives Φ̂ and Ψ̂, and injectivity gives the inverse equations in D(S_s), not by evaluation. Step 3: I recomputed both maps, J_B^{-1}(1_B) = θ^{-1}(ε_N F(v_X) π) and J_A(1_A) = λ^{-1}(G(v_Y π^{-1}) η); this is the actual counit. Step 4: the transpose is fixed levelwise by the finite tensor-Hom bijection; M and FM are normalized, as the internal-Hom evaluation in semilinear-derived-sections requires. Step 5: the open comparison is the identity at the unit, and α_{R_Y} = 1 from lem-weil-pbc-ringed-projection-mate-exact applies to the sequence ringed topos. Step 6: the tower comparison of representability is applied to (FM,N) and (M,GN), all of them normalized bounded ctf by hypothesis. Step 7: the exact Rlim functor from the strict-tower node, on the one-point site with ring Z. Small cases checked: identity adjunction, M=0, P=0. No cycle (checked by transitive closure), and nothing cited is missing or merged. Not a duplicate of lem-per-finite-exceptional-system-adjunction, which is a finite-level adjunction only. No SGA cited, and no re-split note applies. Accepted tool_uses: lem-weil-pbc-ringed-projection-mate-exact (unit normalization only) and lem-weil-pbc-ringed-strict-tower-homotopy-limit (existence of the Rlim functor only)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemEnrichedProjectionAdjunction",
+  "declaration": "WeilConjectures.SystemEnrichedProjection.systemEnrichedProjectionAdjunction",
+  "declarations": [
+   "WeilConjectures.SystemEnrichedProjection.actionSource",
+   "WeilConjectures.SystemEnrichedProjection.actionTarget",
+   "WeilConjectures.SystemEnrichedProjection.structureSiteIso",
+   "WeilConjectures.SystemEnrichedProjection.PullTensor",
+   "WeilConjectures.SystemEnrichedProjection.ProjectionData",
+   "WeilConjectures.SystemEnrichedProjection.ProjectionData.component",
+   "WeilConjectures.SystemEnrichedProjection.testEquiv",
+   "WeilConjectures.SystemEnrichedProjection.forward",
+   "WeilConjectures.SystemEnrichedProjection.backward",
+   "WeilConjectures.SystemEnrichedProjection.representingMap",
+   "WeilConjectures.SystemEnrichedProjection.towerForward",
+   "WeilConjectures.SystemEnrichedProjection.towerBackward",
+   "WeilConjectures.SystemEnrichedProjection.finiteObject",
+   "WeilConjectures.SystemEnrichedProjection.finiteEquiv",
+   "WeilConjectures.SystemEnrichedProjection.finitePullComp",
+   "WeilConjectures.SystemEnrichedProjection.finiteProjection",
+   "WeilConjectures.SystemEnrichedProjection.finiteBackward",
+   "WeilConjectures.SystemEnrichedProjection.FiniteAdjunction",
+   "WeilConjectures.SystemEnrichedProjection.FiniteCompatibility",
+   "WeilConjectures.SystemEnrichedProjection.pointUnit",
+   "WeilConjectures.SystemEnrichedProjection.UnitCompatibility",
+   "WeilConjectures.SystemEnrichedProjection.Conclusion",
+   "WeilConjectures.SystemEnrichedProjection.systemEnrichedProjectionAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/SystemEnrichedProjectionAdjunction.lean",
+  "statement": "theorem systemEnrichedProjectionAdjunction (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (RX : Representability l E (X ↘ Spec (CommRingCat.of D.k))) (RY : Representability l E (Y ↘ Spec (CommRingCat.of D.k))) (support : Etale.SystemProjection.Support c (coefficients l E)) (G : Et l E Y ⥤ Et l E X) (adj : support.F ⊣ G) : Nonempty (ProjectionData l E RX RY c (comp_over f _).symm support) ∧ ∀ (d : ProjectionData l E RX RY c (comp_over f _).symm support) (π : actionSource l E RY support.F ≅ actionTarget l E RX support.F) (_canonical : ∀ (P : Et l E (Spec (CommRingCat.of D.k))) (U : Et l E X), π.hom.app (P, U) = ProjectionData.component l E RX RY d P U) (M : Et l E X) (N : Et l E Y) (hM : EtNormalized l E RX.etale M) (hN : EtNormalized l E RY.etale N) (hFM : EtNormalized l E RY.etale (support.F.obj M)) (hGN : EtNormalized l E RX.etale (G.obj N)) (fM : EtFinite l E X RX.levels M) (fN : EtFinite l E Y RY.levels N) (fFM : EtFinite l E Y RY.levels (support.F.obj M)) (fGN : EtFinite l E X RX.levels (G.obj N)), Conclusion l E RX RY support.F G adj π c (comp_over f _).symm M N hM hN hFM hGN fM fN fFM fGN",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual compactification support, pure-tensor and K-flat normalized projection presentation, all-test Yoneda maps with explicit inverse, finite counit-compatible evaluation, degree-zero formulas, and canonical tower/derived-limit transports. ProjectionData existence is asserted, not assumed. Helper declarations belong to this node and are listed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab7111a6d",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 5d47 (H2). The only node change is the requested one: stmt_dep lem-sf-ringed-derived-closed-symmetric-monoidal replaced by the definition node def-zl-ringed-derived-closed-symmetric-monoidal-data (existing:true, owns CategoryTheory.ringedTensorUnitComplex, the def used by pointUnit at line 413; its snapshot record equals live). The Lean module is byte-identical to 5d47. The report has Worker report, Second reading by Q38 and the repair section. Independent re-read of all 613 lines: hypotheses (FiniteFieldDatum, l≠p, finite E, separated finite-type X/Y/f, Compactification, support.F = j_! then Rp_*, actual adj) match the node. π is pinned to ProjectionData.component (PullTensor model/pure, open_transpose, composition_termwise/sections), and Nonempty ProjectionData is a conclusion. hM..fGN match EtNormalized and per-level EtFinite, and Representability.mapping_iso takes exactly those hypotheses. All conclusion clauses match: system iso and inverses, tests, unit/counit transposes, naturality, conditional finite counit-compatible evaluation via projectionMapOfCompactification, degree-zero G(h)η and εF(g), tower and Rlim images. Edge cases and universes OK. H5/H6 (single sorry)/H8/H9 OK, statement verbatim, 23 declarations present. No compile: no FIX, Lean unchanged and worker-compiled. Advisory only: the ambient field is constrained only via PullTensor.model."
+ }
+}

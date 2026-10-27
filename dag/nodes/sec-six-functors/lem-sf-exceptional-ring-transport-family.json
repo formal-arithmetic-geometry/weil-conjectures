@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-exceptional-ring-transport-family",
+ "kind": "statement",
+ "title": "Coherent finite and integral exceptional adjunctions before scalar comparisons",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a prime $l$, an algebraic closure $\\Omega$ of $\\mathbf Q_l$, a finite-field datum $D$ with $l\\ne D.p$, finite-type $D.k$-schemes $X,Y$, a separated finite-type $D.k$-morphism $f:X\\to Y$, and a compactification $c$ [def-sf-ring-stage-assembly-data, def-sf-constructible-exceptional-assembly-data]. There exist operations $A_s$ and ambient compact-support left realizations $r_s$ for all finite and integral ring stages $s$. They admit the following normalized system transport data: for each finite extension $E/\\mathbf Q_l$ and each endpoint, the actual reduction/total-limit adjunction restricts to an equivalence between the complete integral constructible finite-Tor category and normalized coefficient systems with common cohomological and Tor bounds; its actual unit and counit are the specified reconstruction maps. There are system functors $F_E,G_E$ with an adjunction, where $F_E$ is the actual system open extension followed by proper image, and integral realization isomorphisms identify $A_E$ with the conjugated adjunction. These isomorphisms retain the displayed reduction comparisons and their exact unit/counit evaluation identities at every positive finite level. On inputs and their open extensions, the required realization domains hold. The integral left realization agrees with the proper system realization composed with the normalized open realization and the inverse reconstruction unit, as the equality integral_system_normalized in ExceptionalIntegralScalar.Transported specifies. Thus the family satisfies precisely that record, whose data are only operation, reconstruction and realization data; no scalar restriction, scalar comparison, or scalar mate invertibility is asserted. No separatedness of $X$ or $Y$ over $D.k$ is assumed.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26; ring canonical scalar invertibility, proof step 1"
+ },
+ "proof": [
+  {
+   "text": "Choose the finite compact-support adjunctions with uniform coefficient-independent bounds. Use the actual strict-system adjunction, including finite evaluation unit and counit, supplied by exceptionalSystemTransport. Where its field universe is higher, lift the coefficient field and transport through the induced coefficient-ring equivalences, retaining the actual evaluation, unit and counit comparisons.",
+   "uses": [
+    "lem-sf-exceptional-finite-operations",
+    "lem-sf-exceptional-system-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict to normalized constructible systems with uniform cohomological and Tor intervals. The actual reduction/total-limit equivalence and its adjunction-conjugation calculus construct the integral adjunctions and all reduction and evaluation comparison equations.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-exceptional-system-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use simultaneous proper/open system realization, followed by the inverse reconstruction unit, for the integral left realization. Its whole-system normalization gives integral_system_normalized without any assertion that finite evaluation is faithful. Assemble the disjoint finite and integral constructors. Empty schemes use the zero adjunction, and finite exponents are n+1.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-finite-operations",
+  "lem-sf-exceptional-system-transport",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22, Propositions 5.24 and 5.26; the operations/reconstruction part of the original ring scalar proof, excluding scalar comparisons."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized strict system adjunction for proper pushforward and extension by zero transports through the reduction inverse limit equivalence to integral constructible finite Tor categories",
+   "results": "Eight ordinary sheaf adjunction and triangulated adjunction results, including SheafOfModules.PullbackConstruction.adjunction and CategoryTheory.Adjunction.IsTriangulated.mk'. No normalized integral finite-Tor reconstruction family.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose coherent finite coefficient adjunctions and integral adjunctions whose units and counits are given by evaluation and normalized reconstruction",
+   "results": "Eight algebraic free-ring adjunction and polynomial counit results; no coefficient-system reconstruction family.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_exceptional_ring_transport_family|ExceptionalIntegralScalar.Transported|exceptionalSystemTransport",
+   "results": "Remote grep returned zero hits. Local rg found Transported as a record and as supplied input to exceptionalIntegralScalarMates_core, and exceptionalSystemTransport in its own module. No theorem constructs a Transported family.",
+   "date": "2026-10-27",
+   "verdict": "The family-construction step is not already stated."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingCanonicalScalarInvertibility",
+  "date": "2026-10-27",
+  "group": "Y9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Coefficient-stage construction: system adjunction reconstruction before scalar maps, step 2",
+   "via": [
+    "lem-sf-ring-canonical-scalar-invertibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportFamily",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportFamily.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_exceptional_ring_transport_family",
+  "statement": "theorem exists_exceptional_ring_transport_family\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) :\n    ∃ operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l),\n      ∃ left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s),\n        Nonempty (ExceptionalIntegralScalar.Transported l Ω D hl c operation left)",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T123556-L-2321662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T123556-L-2321662",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

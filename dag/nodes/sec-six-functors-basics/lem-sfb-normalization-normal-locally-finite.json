@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-normalization-normal-locally-finite",
+ "kind": "statement",
+ "title": "Trivial normalization of a normal scheme with locally finite components",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] such that every quasi-compact open has finitely many irreducible components [def-weil-irreducible-components]. If each local ring of $X$ is an integrally closed domain [def-weil-pbc-normal-ring], then the componentwise normalization morphism $\\nu_X:X^\\nu\\to X$ [def-weil-pbc-reduced-normalization] is an isomorphism. No local Noetherianity, quasi-compactness, excellence, or finite-type hypothesis is imposed. The empty scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0H7D, label lemma-normalization-trivial; Tag 0CDV, label lemma-normalization-in-terms-of-components. The quasi-compact-open formulation of local finiteness is the hypothesis used in Properties Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, invoked in the proof of 0H7D."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-normal-locally-finite-components] with exactly the given local-finiteness and normal-stalk hypotheses. Write $X=\\coprod_{i\\in I}Z_i$, with each $Z_i$ its reduced induced component, also an open normal integral subscheme. By [def-weil-pbc-reduced-normalization], $X^\\nu=\\coprod_i Z_i^\\nu$ and $\\nu_X$ on the $i$th summand is $Z_i^\\nu\\xrightarrow{\\nu_i}Z_i\\hookrightarrow X$. It remains to construct inverse morphisms for these component maps.",
+   "uses": [
+    "lem-sfb-normal-locally-finite-components",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H7D, lemma-normalization-trivial, reduction to integral schemes by Properties Tag 0357; Tag 0CDV, lemma-normalization-in-terms-of-components"
+   }
+  },
+  {
+   "text": "Fix $i$ and a nonempty affine open $V\\subseteq Z_i$. Put $A=\\Gamma(V,\\mathcal O_{Z_i})$ and $K=k(Z_i)$. By [lem-sc-integral-function-field-affine-fraction], $A$ is a domain and its generic germ identifies $K$ with its field of fractions. For every maximal ideal $\\mathfrak m\\subset A$, the corresponding point $z\\in V$ has $A_{\\mathfrak m}\\cong\\mathcal O_{Z_i,z}$ by [lem-weil-pbc-affine-open-stalk-localization](c). This is a normal domain by Step 1. Hence [lem-weil-pbc-normal-domain-of-local-normal] applies to the domain $A$ and shows that $A$ is integrally closed in $K$. No finiteness condition on $A$ is needed.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H7D via Tag 0AB1, lemma-finite-birational-over-normal, affine normal-domain calculation; Properties Tag 033L, lemma-integral-normal; Algebra Tag 030B, lemma-normality-is-local"
+   }
+  },
+  {
+   "text": "Let $\\eta_i$ be the generic point and $j_i:\\operatorname{Spec}K\\to Z_i$ the canonical local-scheme morphism of [lem-weil-pbc-spec-local-ring-canonical-morphism]. Its image is the generic point, since $\\mathcal O_{Z_i,\\eta_i}=K$ is a field. Its source has one point by [def-weil-affine-spectrum]. Thus every inverse image of an affine open under $j_i$ is empty or a singleton, hence quasi-compact directly from the open-cover definition [def-weil-pbc-quasi-compact-scheme]. The same argument applies to its diagonal, whose source is also this one-point scheme. Consequently $j_i$ is quasi-compact by the affine-preimage definition in [def-weil-finite-type-morphism], and quasi-separated by [def-weil-quasi-separated-morphism]. For the nonempty $V$ in Step 2 the generic point belongs to $V$ and $j_i^{-1}(V)=\\operatorname{Spec}K$, with section ring $K$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035H, definition-normalization-X-in-Y; equation-generic-points before definition-normalization, specialized to an integral scheme"
+   }
+  },
+  {
+   "text": "For every nonempty open $W\\subseteq Z_i$, irreducibility and the generic-point property give $j_i^{-1}(W)=\\operatorname{Spec}K$. Thus $(j_{i*}\\mathcal O)(W)=K$, its restrictions between nonempty opens are identities, and its structural map sends a section to its generic germ. On the empty open both sheaves have the zero ring. This identifies $j_{i*}\\mathcal O$ with the constant function-field sheaf, including its $\\mathcal O_{Z_i}$-algebra structure. Hence [def-sc-normalization] and the construction in [lem-weil-pbc-relative-normalization] use the same integral-closure algebra, the same relative spectrum $Z_i^\\nu$, and the same morphism $\\nu_i$. Apply [lem-weil-pbc-relative-normalization](iii), whose quasi-compact and quasi-separated hypotheses were checked in Step 3. It identifies $\\nu_i^{-1}(V)$ with $\\operatorname{Spec}A^\\prime$, where $A^\\prime$ is the integral closure of $A$ in $\\Gamma(j_i^{-1}(V),\\mathcal O)=K$, and identifies the map to $V$ with the spectrum of the structural inclusion $A\\to A^\\prime$. This identifies the actual normalization morphism, rather than just its source up to an abstract isomorphism.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035H, definition-normalization-X-in-Y, and Tag 035I, lemma-characterize-normalization, affine description; Tag 035P, lemma-description-normalization, integral case"
+   }
+  },
+  {
+   "text": "Every $b\\in A^\\prime$ is an element of $K$ integral over $A$, so Step 2 and [def-weil-pbc-normal-ring] give $b\\in A$. Conversely every $a\\in A$ is integral over $A$, as witnessed by the monic polynomial $T-a$. Thus $A\\to A^\\prime$ is bijective: the inverse sends the integral element $b$ to the unique $a$ with the same image in $K$. Both composites are the identity, since $A\\to K$ is injective. Applying the contravariant spectrum functor [def-weil-affine-spectrum] to this ring isomorphism gives an inverse to $\\nu_i$ over $V$.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, lemma-finite-birational-over-normal, integral-closure equality on affine opens, as used in Tag 0H7D"
+   }
+  },
+  {
+   "text": "The nonempty affine opens $V$ cover $Z_i$. The local inverses from Step 5 agree on overlaps: at a point of $V\\cap W$ the inverse of $\\nu_i|_V$ lands in $\\nu_i^{-1}(W)$ because its composite with $\\nu_i$ is the identity. Its restriction is therefore an inverse to the same map over $V\\cap W$ as the restriction of the inverse over $W$. Two inverses to a morphism are equal, since $s=s(\\nu_i t)=(s\\nu_i)t=t$. Their maps of spaces and structure sheaves consequently glue to a scheme morphism $s_i:Z_i\\to Z_i^\\nu$. For each covering affine $V$, the glued map restricts to the chosen inverse on $V$. Thus $\\nu_i s_i=1$ on $V$ and $s_i\\nu_i=1$ on $\\nu_i^{-1}(V)$. These opens cover their respective schemes, so equality of the continuous maps and of the structure-sheaf maps gives both identities globally. The empty open contributes the unique morphism of empty schemes.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, lemma-finite-birational-over-normal, final sentence: affine equalities imply the morphism is an isomorphism"
+   }
+  },
+  {
+   "text": "Using the coproduct mapping property [lem-weil-pbc-scheme-coproduct-family], the maps $s_i$ followed by the coprojections into $X^\\nu$ give $s:X\\to X^\\nu$ under the decomposition of Step 1. On each summand $Z_i$, $\\nu_Xs$ is $\\nu_i s_i=1_{Z_i}$ followed by its inclusion; on each $Z_i^\\nu$, $s\\nu_X$ is $s_i\\nu_i=1_{Z_i^\\nu}$ followed by its coprojection. The same mapping property gives $\\nu_Xs=1_X$ and $s\\nu_X=1_{X^\\nu}$. When $X$ is empty both families are empty, and uniqueness in the mapping property gives the same identities. Thus $\\nu_X$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CDV, lemma-normalization-in-terms-of-components, together with Tag 0H7D, lemma-normalization-trivial"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-locally-finite-components",
+  "def-weil-pbc-reduced-normalization",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-sc-normalization",
+  "lem-weil-pbc-relative-normalization",
+  "def-weil-pbc-normal-ring",
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0H7D, lemma-normalization-trivial; component reduction by Properties Tag 0357, lemma-normal-locally-finite-nr-irreducibles, and Tag 0CDV, lemma-normalization-in-terms-of-components. The integral case expands the affine argument of Tag 0AB1 using the construction in Tags 035H/035I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The absolute normalization of a normal scheme with locally finitely many irreducible components is isomorphic to itself",
+   "results": "{\"t\": \"2026-10-22T05:42:06Z\", \"tool\": \"leanfinder\", \"query\": \"The absolute normalization of a normal scheme with locally finitely many irreducible components is isomorphic to itself\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\"], \"digest\": \"5f259a523a7cca1a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegrallyClosed\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|IsNormal|normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:03Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|IsNormal|normalization\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"17\", \"19\", \"20\", \"24\"], \"digest\": \"e2f17bf45c1b6886\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization morphism of a normal scheme is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T05:42:04Z\", \"tool\": \"leansearch\", \"query\": \"The normalization morphism of a normal scheme is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"b6015c765fa3ca44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with integrally closed domain stalks and locally finite irreducible components equals its absolute normalization",
+   "results": "{\"t\": \"2026-10-22T05:42:42Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with integrally closed domain stalks and locally finite irreducible components equals its absolute normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\"], \"digest\": \"73fed6fc93162d41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern relative normalization of a supplied morphism, not this absolute componentwise normalization theorem; source Normalization.lean:365-458 read."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Nn]ormalization|[Nn]ormalization.*[Ii]sIso",
+   "results": "{\"t\": \"2026-10-22T06:43:04Z\", \"tool\": \"grep\", \"query\": \"isIso.*[Nn]ormalization|[Nn]ormalization.*[Ii]sIso\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"6a505537b44fcc41\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied morphism (notably the map toNormalization under IsIntegralHom of that supplied morphism), coproduct compatibility, and normalizationDesc do not state triviality of absolute componentwise normalization; Normalization.lean definitions and hypotheses were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The absolute normalization morphism of a normal scheme is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:43:04Z\", \"tool\": \"leansearch\", \"query\": \"The absolute normalization morphism of a normal scheme is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"ea7b771fe05afdbf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied morphism (notably the map toNormalization under IsIntegralHom of that supplied morphism), coproduct compatibility, and normalizationDesc do not state triviality of absolute componentwise normalization; Normalization.lean definitions and hypotheses were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-22T06:43:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied morphism (notably the map toNormalization under IsIntegralHom of that supplied morphism), coproduct compatibility, and normalizationDesc do not state triviality of absolute componentwise normalization; Normalization.lean definitions and hypotheses were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The componentwise normalization of a scheme with normal domain local rings and locally finitely many irreducible components is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:43:12Z\", \"tool\": \"leanfinder\", \"query\": \"The componentwise normalization of a scheme with normal domain local rings and locally finitely many irreducible components is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"ab402f6b222fdb86\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied morphism (notably the map toNormalization under IsIntegralHom of that supplied morphism), coproduct compatibility, and normalizationDesc do not state triviality of absolute componentwise normalization; Normalization.lean definitions and hypotheses were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integrally closed scheme is equal to the disjoint union of the function-field normalizations of its irreducible components",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"leanfinder\", \"query\": \"An integrally closed scheme is equal to the disjoint union of the function-field normalizations of its irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"67fa43a7dc1702fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization of a supplied morphism (notably the map toNormalization under IsIntegralHom of that supplied morphism), coproduct compatibility, and normalizationDesc do not state triviality of absolute componentwise normalization; Normalization.lean definitions and hypotheses were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-normal-generic-recognition",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Trivial normalization of a normal scheme with locally finite components.",
+   "via": [
+    "lem-sfb-integral-normal-generic-recognition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalization-normal-locally-finite",
+  "worker": "stage1",
+  "summary": "Split Stacks 0H7D by its normal integral component reduction (new statement-only 0357 node), the existing local-normality criterion and affine stalk/function-field nodes, and an explicit equality of the affine integral closure with its normal domain. Wrote out qcqs of the one-point generic morphism, agreement of local inverses, both coproduct inverse identities, and the empty case. Statement unchanged. Repair of the refused side completion: retained the approved component/affine route against the current live unsplit item, re-read every cited statement, and made the generic-point direct-image algebra identification explicit in Step 4 before applying relative normalization. On resumed repair, rebased again with deliver.py against the current server DAG, revalidated all 17 statement quotations, and expanded Step 6 to check each inverse identity on its own covering scheme. Current-DAG repair on 2026-10-23: re-read all dependency statements and made Step 3 cite the quasi-compact-morphism definition explicitly, distinguishing it from quasi-compactness of its source opens; retained the statement and approved proof route.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Trivial normalization of a normal scheme with locally finite components. Realizes the trivial-normalization prerequisite by Stacks 0357 and the affine integral-closure calculation; the inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-839d2d6eb",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-839d2d6eb (reviewer sub-agent of L); spot-checked: Fourth delivery; the previous three heads were returned only at promotion/rebase. I diffed it against the f82627e7 snapshot. The only change is that Step 3 now cites def-weil-finite-type-morphism for the quasi-compactness of a morphism, which resolves the earlier advisory. The new node and the item statement are unchanged, and there is no repair note. I re-read everything in full. Sources: Stacks properties.tex 0357 (lemma-normal-locally-finite-nr-irreducibles) and morphisms.tex 0H7D (lemma-normalization-trivial). New node lem-sfb-normal-locally-finite-components is 0357 (1)=>(2) made precise, and it is true: domain stalks put each point on a unique component, local finiteness makes components clopen, and each component is integral with normal stalks. Its open structure equals the reduced induced one because a clopen subscheme of a reduced scheme is reduced (01J3 uniqueness). This is what lets Step 1 match def-weil-pbc-reduced-normalization. Edge cases checked: empty X, a non-Noetherian valuation ring, Spec(AxB), an infinite disjoint union, and Spec k[x,y]/(xy) (excluded). It does not restate the item and is not a duplicate: rem-pc-regular-normal(2) and lem-trf-normal-topologically-noetherian-components are Noetherian special cases. Steps: (2) the affine section ring A is normal via the fraction-field node, the stalk-localization node (c) and the local-normal criterion, with no finiteness needed. (3) qcqs of the one-point Spec K -> Z_i and of its diagonal. (4) j_*O equals the constant sheaf K, so def-sc-normalization agrees with relative normalization, and clause (iii) gives Spec A' with its structure map. (5) A'=A by normality. (6)-(7) gluing and the coproduct assembly, including the empty case. Accepted tool use: lem-weil-pbc-spec-local-ring-canonical-morphism. Advisory for the maintainer: lem-per-componentwise-normalization-properties(2) is the locally Noetherian special case of this item; it is not a duplicate. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationNormalLocallyFinite",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_fromReducedNormalization_of_normal_locally_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationNormalLocallyFinite.lean",
+  "statement": "theorem isIso_fromReducedNormalization_of_normal_locally_finite (X : Scheme.{u}) (hfinite : ∀ U : X.Opens, IsCompact (U : Set X) → (irreducibleComponents U).Finite) (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) : IsIso X.fromReducedNormalization",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67cef5e38",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and Stacks 0H7D/0CDV/0357: hfinite (∀ U : X.Opens, IsCompact U → (irreducibleComponents U).Finite) = 0357 qc-open local finiteness; hnormal = IsDomain ∧ IsIntegrallyClosed stalks (recorded inline normal-domain form); conclusion IsIso X.fromReducedNormalization = the canonical Sigma.desc (fromNormalization ≫ subschemeι) of live ReducedNormalization.lean. No extra Noetherian/qc/excellence hypotheses or universe restriction. Edge cases ok: empty X, empty U, infinite coproducts, non-Noetherian valuation rings, Spec(A×B); Spec k[x,y]/(xy) excluded. Item node equals live except the lean record; lean.statement verbatim; sorry-only; docstrings carry source place, blueprint tag and all 7 steps; report has both sections. H4: Mathlib toNormalization IsIso, private normal_self_normalization, existsUnique_iso_reducedNormalization_of_integral_normal_generic and ComponentwiseNormalizationProperties are all locally Noetherian or different maps, so none duplicates the item. No files changed, so no recompile."
+ }
+}

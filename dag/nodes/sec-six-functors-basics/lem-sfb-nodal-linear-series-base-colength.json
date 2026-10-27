@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-nodal-linear-series-base-colength",
+ "kind": "statement",
+ "title": "Base ideal and boundary colength of a nodal linear series",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure] and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-weil-pure-dimension]. Assume $X$ is smooth except at ordinary nodes, meaning that at every singular closed point its completed local $k$-algebra is $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Write $h^i(X,F)=\\dim_kH^i(X,F)$ for Zariski module cohomology [def-sc-ringed-space-module-cohomology]. Let $L$ be an invertible module [def-sc-invertible-module] and let $V\\subseteq H^0(X,L)$ be a finite-dimensional $k$-subspace containing a section nonzero at every component generic point [def-weil-irreducible-components]. Define $\\mathcal B\\subseteq\\mathcal O_X$ by $L\\otimes\\mathcal B=\\operatorname{im}(V\\otimes_k\\mathcal O_X\\to L)$, the evaluation image [def-pur-sheaf-tensor-product]. Then $\\mathcal B$ is a coherent ideal [pqf-def-coherent], its closed subscheme $Z$ is zero-dimensional, and $b=\\dim_k\\Gamma(Z,\\mathcal O_Z)$ is finite. If $\\mathcal P$ is a partition of the irreducible components such that $V$ is the direct sum of its subspaces consisting of sections supported on the respective blocks (support here means vanishing at every component generic point outside the block), let $E_{\\mathcal P}$ be the reduced finite subscheme consisting of nodes joining two different blocks. For each block $A$, its scheme-theoretic intersection with the reduced union of the other blocks is a disjoint union of reduced $k$-points, precisely the nodes on that boundary; its $k$-length is their number [def-pc-fibre-product]. Then $\\mathcal B\\subseteq I_{E_{\\mathcal P}}$ and $b\\ge |E_{\\mathcal P}|$, the number of those nodes [def-sbc-closed-immersion-ideal-sheaf].\nIf $V=H^0(X,L)$, the inclusion induces $H^0(X,L\\otimes\\mathcal B)=H^0(X,L)$ inside $H^0(X,L)$. If moreover $L=I_T\\otimes\\omega_X$ for an effective Cartier zero-dimensional subscheme $T$ [def-nagata-effective-cartier-ideal, lem-sfb-nodal-line-serre-riemann-roch], the coherent product ideal $I_{\\bar T}=I_T\\mathcal B$ defines a zero-dimensional subscheme $\\bar T\\supseteq T$ satisfying\n$$\\ell(\\bar T)=\\ell(T)+b,\\qquad H^0(X,I_{\\bar T}\\otimes\\omega_X)=H^0(X,I_T\\otimes\\omega_X),$$\nwhere $\\ell(U)=\\dim_k\\Gamma(U,\\mathcal O_U)$.",
+ "source": {
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Theorem 3.9 proof, printed p.247, base-locus and colength argument; local evaluation formulation. For the length additivity use Stacks varieties.tex Tag 0AYT (lemma-chi-tensor-finite); local PDF WANTED, author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "lem-sfb-nodal-line-serre-riemann-roch",
+  "pqf-def-coherent",
+  "def-sfb-reduced-curve-dualizing-pair"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity implies properness. The proper-field preparation gives that $X$ is Noetherian and $L$ and $\\mathcal O_X$ are coherent. Choose a basis $s_1,\\ldots,s_d$ of $V$. On an affine open trivializing $L$, write $s_i=f_i e$. Then $\\mathcal B$ is the ideal $(f_1,\\ldots,f_d)$; changing $e$ multiplies all generators by a unit, so these local ideals glue to the stated evaluation ideal. More intrinsically it is the image of $\\mathcal O_X^{\\oplus d}\\to L$, tensored by $L^{-1}$. The coherence lemma gives coherence of the finite sum, its cokernel, and the kernel of $L\\to\\operatorname{coker}(\\mathrm{ev})$, hence of the image. Tensoring by a line is locally the identity, so $\\mathcal B$ and $\\mathcal O_X/\\mathcal B$ are coherent.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BY (lemma-coherent-abelian), coherence of finite sums, kernels and cokernels; coherent.tex Tag 01XZ (lemma-coherent-Noetherian)"
+   }
+  },
+  {
+   "text": "Let $s\\in V$ be nonzero at every component generic point. At such a point the reduced local ring is a field, so $s$ generates $L$ there and $\\mathcal B_\\eta=\\mathcal O_{X,\\eta}$. Thus $Z=V(\\mathcal B)$ misses all component generic points and is nowhere dense. Apply the dimension-drop node to this closed subscheme of the finite-type scheme $X$ of dimension one. It gives $\\dim Z\\le0$, and the finite-subscheme node gives that $Z$ is affine and $b=\\dim_k\\Gamma(Z,\\mathcal O_Z)$ is finite. The empty scheme is allowed throughout.",
+   "uses": [
+    "lem-pc-nowhere-dense-dim-zero",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0AYY (lemma-degree-effective-Cartier-divisor), dimension-drop argument, and 06LH (lemma-algebraic-scheme-dim-0)"
+   }
+  },
+  {
+   "text": "For a block $A$, give its component union and its complementary union $C$ their reduced structures. They are reduced closed subschemes of pure dimension one when nonempty. The scheme-theoretic closure of $X\\setminus A$ is $C$: on a reduced affine chart, a function vanishes on that open precisely when it vanishes in the domains at all complementary component generic points; intersecting their minimal prime ideals is the ideal of $C$. Apply the closed-subcurve node with $Y=A$. Its hypotheses hold because $X$ is finite type, reduced, pure one-dimensional, and has the specified split completed nodes; $k$ algebraically closed makes the residue extensions trivial. It gives $A\\times_X C$ as a finite disjoint union of reduced $k$-points, all nodes. Its underlying set is exactly the points lying on a component in $A$ and one outside $A$, hence exactly this block's boundary nodes. Its section algebra is the product of one copy of $k$ per point, proving the asserted boundary length. For a single block the complement and boundary are empty. Taking the union over the finitely many blocks gives the finite reduced subscheme $E_{\\mathcal P}$.",
+   "uses": [
+    "lem-trf-stacks-nodal-closed-subcurve",
+    "def-pc-reduced-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), (2)(a),(b) and its minimal-prime description of complementary subcurves"
+   }
+  },
+  {
+   "text": "For $v_A\\in V$ supported on a block $A$, its restriction to the reduced complementary union is zero: in a local trivialization each coefficient vanishes in all component fraction fields of that union, so lies in the intersection of its minimal primes, which is zero. At a node joining two different blocks, every summand $v_A$ therefore has zero residue (at least one incident component is outside $A$). Since $V$ is the sum of these subspaces, every $v\\in V$ has zero residue at each such node. The local generators $f_i$ of $\\mathcal B$ consequently lie in its maximal ideal. As $E_{\\mathcal P}$ is reduced, its ideal is exactly the kernel of restriction to these residue fields. Hence $\\mathcal B\\subseteq I_{E_{\\mathcal P}}$. In the coherent exact sequence\n$$0\\to I_{E_{\\mathcal P}}/\\mathcal B\\to\\mathcal O_X/\\mathcal B\\to\\mathcal O_{E_{\\mathcal P}}\\to0,$$\nall supports have dimension at most zero. Euler additivity and the zero-support formula turn this into $b=\\dim_k\\Gamma(X,I_{E_{\\mathcal P}}/\\mathcal B)+|E_{\\mathcal P}|\\ge |E_{\\mathcal P}|$. Coherence of the kernel follows from the coherence lemma; the finite reduced closed subscheme has coherent structure sheaf locally given by finite modules over Noetherian rings.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Proposition 2.17(ii), printed p.233, and Theorem 3.9 proof, printed p.247; length calculation by Stacks Tags 08AA and 0AYT"
+   }
+  },
+  {
+   "text": "Suppose $V=H^0(X,L)$. Every section $s\\in V$ factors through the evaluation image: use the global element $s\\otimes1$ of $V\\otimes_k\\mathcal O_X$. Thus it is a section of $L\\otimes\\mathcal B$. Conversely a section of this subsheaf is a section of $L$, and the inclusion is injective on sections. These two inclusions prove the claimed equality inside $H^0(X,L)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.9 proof, printed p.247, equality of section spaces after adjoining the base locus"
+   }
+  },
+  {
+   "text": "Finally suppose $L=I_T\\otimes\\omega_X$ as in the statement. Locally $I_T=(t)$ with $t$ a nonzerodivisor. Multiplication $a\\mapsto ta$ identifies $\\mathcal O_X$ with $I_T$ on that open; hence $I_T$ is a line, and $I_T\\otimes\\mathcal B\\to I_T\\mathcal B$ is an isomorphism, given locally by $t\\otimes a\\mapsto ta$. The product is a coherent ideal (locally isomorphic to $\\mathcal B$). Away from $T\\cup Z$ it is the unit ideal, so its zero scheme $\\bar T$ is zero-dimensional; the finite-subscheme node makes its length finite. Since $I_T\\mathcal B\\subseteq I_T$, it contains $T$. The coherent exact sequence is\n$$0\\to I_T/I_T\\mathcal B\\to\\mathcal O_X/I_T\\mathcal B\\to\\mathcal O_X/I_T\\to0.$$\nLocally multiplication by $t$ identifies its left term with $I_T\\otimes(\\mathcal O_X/\\mathcal B)$. The zero-support formula, with the invertible module $I_T$, gives $\\chi(X,I_T/I_T\\mathcal B)=b$. Euler additivity and the same zero-support formula on the other two terms yield $\\ell(\\bar T)=\\ell(T)+b$. The inclusions into $\\omega_X$ agree locally with multiplication by $t$ and by elements of $\\mathcal B$, so $I_{\\bar T}\\otimes\\omega_X=L\\otimes\\mathcal B$ inside $L$. Step 5 now gives the final equality of canonical section subspaces. No Cartier property of $\\bar T$ is asserted or used.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08AA (lemma-euler-characteristic-additive) and 0AYT (lemma-chi-tensor-finite), (3)--(5); Cartier local multiplication calculation written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "def-sc-invertible-module",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-trf-stacks-nodal-closed-subcurve",
+  "def-pc-reduced-scheme",
+  "def-pc-fibre-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pc-euler-additive",
+  "lem-pc-chi-zero-dim-support",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Proposition 2.17(ii) and Theorem 3.9 proof, printed pp.233 and 247; evaluation-ideal assembly using Stacks 0E38, 01BY, 06LH, 08AA and 0AYT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseIdeal|base.ideal|base.locus|nodal|ordinaryDoublePoint",
+   "results": "{\"t\": \"2026-10-23T13:34:47Z\", \"tool\": \"grep\", \"query\": \"baseIdeal|base.ideal|base.locus|nodal|ordinaryDoublePoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base ideal of sections of a line bundle on a nodal curve vanishes at nodes separating their support pieces",
+   "results": "{\"t\": \"2026-10-23T13:34:47Z\", \"tool\": \"leansearch\", \"query\": \"Base ideal of sections of a line bundle on a nodal curve vanishes at nodes separating their support pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"AlgebraicGeometry.Scheme.zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\"], \"digest\": \"b17c48fa4aa09df8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T13:34:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.algebra_section_section_basicOpen\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_sectionsOfPresieve\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sectionsOfPresieve\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.generate_presieveOfSections\"], \"digest\": \"bd23f47550522782\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a nodal projective reduced curve with a line bundle L and a generically generating vector space V of sections the evaluation image L times B has finite colength at least the number of nodes joining a partition supporting a direct sum decomposition of V",
+   "results": "{\"t\": \"2026-10-23T13:34:48Z\", \"tool\": \"leanfinder\", \"query\": \"On a nodal projective reduced curve with a line bundle L and a generically generating vector space V of sections the evaluation image L times B has finite colength at least the number of nodes joining a partition supporting a direct sum decomposition of V\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"ClassGroup.ne_bot_of_prod_finsetApprox_mem\", \"Ideal.exist_integer_multiples_notMem\"], \"digest\": \"5ef8aa5072c83b7c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base point scheme of a linear series split into sections supported on disjoint sets of irreducible components contains all boundary nodes",
+   "results": "{\"t\": \"2026-10-23T13:34:49Z\", \"tool\": \"leanfinder\", \"query\": \"The base point scheme of a linear series split into sections supported on disjoint sets of irreducible components contains all boundary nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.Embedding.AreComplementary.Boundary.snd\", \"ComplexShape.Embedding.AreComplementary.Boundary.fst\", \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE\", \"AlgebraicGeometry.isCompl_range_inl_inr\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.disjoint_opensRange_sigmaι\", \"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\"], \"digest\": \"d14110ffaf237dc7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general submodule sums, simplicial splittings, Clifford algebras, Weierstrass equations, or scheme zero loci, not this curve statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base ideal of a generically generated line bundle on a reduced projective nodal curve has finite colength and contains the boundary nodes of a decomposition of its section space",
+   "results": "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal; WeierstrassCurve.Affine.CoordinateRing.XYIdeal'; WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq; WeierstrassCurve.Affine.CoordinateRing.XIdeal; WeierstrassCurve.Affine.CoordinateRing.XYIdeal; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant; WeierstrassCurve.Affine.CoordinateRing.YIdeal; WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ideal-sheaf, basic-open and Weierstrass declarations do not state the finite-colength nodal linear-series theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"section\"",
+   "results": "AlgebraicGeometry.Scheme.algebra_section_section_basicOpen; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.pushoutSection; AlgebraicGeometry.isIso_pushoutSection_of_isAffineOpen; AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left; AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right; AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ideal-sheaf, basic-open and Weierstrass declarations do not state the finite-colength nodal linear-series theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "baseIdeal|base.ideal|base.locus|nodal",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ideal-sheaf, basic-open and Weierstrass declarations do not state the finite-colength nodal linear-series theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base ideal of a linear series on a projective curve and length of its base scheme",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop; AlgebraicGeometry.Scheme.IdealSheafData.mk.sizeOf_spec; AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support; AlgebraicGeometry.Scheme.IdealSheafData.supportSet; AlgebraicGeometry.Scheme.IdealSheafData.instOrderBot; RootPairing.Base.height_one_of_mem_support",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ideal-sheaf, basic-open and Weierstrass declarations do not state the finite-colength nodal linear-series theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sections of an invertible sheaf supported on complementary components of a nodal curve, the evaluation ideal vanishes on their reduced intersection; multiplying by a Cartier ideal adds colengths",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen; AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ideal-sheaf, basic-open and Weierstrass declarations do not state the finite-colength nodal linear-series theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-two-connected-clifford",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.9 proof, printed p.247, base-locus and colength argument; local evaluation formulation. For the length additivity use Stacks varieties.tex Tag 0AYT (lemma-chi-tensor-finite)",
+   "via": [
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-linear-series-base-colength",
+  "worker": "stage1",
+  "summary": "Six proof steps, no new nodes. Reused the exact 0E38 boundary statement and existing coherence, finite-subscheme, dimension-drop and Euler-characteristic tools. Wrote the reduced-ring support and Cartier multiplication arguments explicitly. Statement unchanged. Repaired the null blueprint ancestor using the extant direct-image node named in the inherited provenance.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.9 proof, printed p.247, base-locus and colength argument; local evaluation formulation. For the length additivity use Stacks varieties.tex Tag 0AYT (lemma-chi-tensor-finite)",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-to-proper implication used only to establish the base hypotheses. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic Noetherianity/coherence preparation for proper schemes over a field; no input from the trace-formula route is used. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Generic closure of coherent modules under finite sums, kernels and cokernels. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-pc-nowhere-dense-dim-zero",
+    "why": "Generic dimension drop for a nowhere dense closed subscheme of a finite-type curve. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic finiteness and section-dimension theorem for a zero-dimensional closed subscheme. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-trf-stacks-nodal-closed-subcurve",
+    "why": "Stacks 0E38 complementary-subcurve boundary calculation; the present unit has no statement of that calculation. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Generic Euler additivity for coherent exact sequences. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic zero-support cohomology and invariance under tensoring by a line. These are mathematical tools below the unit route, not replacements for a unit step."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic affine finite-module criterion for coherence of finite closed-subscheme structure sheaves. These are mathematical tools below the unit route, not replacements for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-trf-stacks-nodal-closed-subcurve",
+  "lem-pc-euler-additive",
+  "lem-pc-chi-zero-dim-support",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-dbab4d202",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-dbab4d202 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes, and the statement and stmt_deps are unchanged against live/side-live, where the item is still unsplit with no repair note, so it is not superseded. The item's from.node, which was null, now names det-thm-sf-ctf-stability-direct-images, a valid imported blueprint lemma. No SGA is cited. Franciosi–Tenni is absent locally: the report has a WANTED line and proof_origin is agent. Stacks 0AYT (varieties.tex l.6208–6222) matches lem-pc-chi-zero-dim-support. Steps: (1) the evaluation image is coherent via 01BY kernel/cokernel/sum after proper⇒Noetherian. (2) A reduced generic stalk is a field, so Z misses the generic points and is nowhere dense; the dimension-drop node and the 06LH node then give b finite. (3) The scheme-theoretic closure of X∖A is the reduced complement C. The 0E38 node's hypotheses hold because k is algebraically closed and the nodes are split, so A×_X C is |boundary| reduced k-points. (4) In a reduced ring ker(R→R_p)=p for minimal p, so every block summand vanishes at the inter-block nodes and B⊆I_E. Euler additivity plus the zero-support χ formula then give b=h^0(I_E/B)+|E|. (5) Elementary. (6) I_T is locally (t) with t a nonzerodivisor, so I_T⊗B≅I_T·B and I_T/I_T·B≅I_T⊗O/B. The zero-support formula (3) with N=I_T gives χ=b and hence ℓ(T̄)=ℓ(T)+b. The final section equality uses ω invertible from the stmt_dep lem-sfb-nodal-line-serre-riemann-roch, which the step leaves implicit; this is advisory. This matches how the parent two-connected-Clifford node uses the lemma. Small cases checked: P^1 with a base-point-free V; two P^1's with L of bidegree (1,1), where the full H^0 is not a block direct sum and V_1⊕V_2 gives B=m, b=1=|E|; a nodal cubic with one block; T empty. No duplicate was found (rg -L for 0E38, base ideal/locus, evaluation image, Franciosi). All 9 declared tool_uses are accepted as generic. Batch 5: lem-trf-proper-field-invertible-coherent (generic 01XZ/01T6) and lem-trf-stacks-nodal-closed-subcurve (generic 0E38 local nodal geometry) sit in sec-trace-formula only by location and are neither the trace formula, Poincaré duality, nor steps of their proofs. lem-pc-euler-additive reaches only the definition def-trf-schematically-dense-open. All three are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalLinearSeriesBaseColength",
+  "declaration": "AlgebraicGeometry.exists_nodal_linear_series_base_colength",
+  "declarations": [
+   "AlgebraicGeometry.nodalSeriesGenericValue",
+   "AlgebraicGeometry.nodalSeriesUnionIdeal",
+   "AlgebraicGeometry.nodalSeriesBoundary",
+   "AlgebraicGeometry.nodalSeriesBlockBoundary",
+   "AlgebraicGeometry.nodalSeriesBoundaryIdeal",
+   "AlgebraicGeometry.nodalSeriesCoordinateSpace",
+   "AlgebraicGeometry.nodalSeriesLength",
+   "AlgebraicGeometry.exists_nodal_linear_series_base_colength"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLinearSeriesBaseColength.lean",
+  "statement": "theorem exists_nodal_linear_series_base_colength (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsHProjective (X ↘ Spec (.of k))] [ConnectedSpace X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, IsClosed ({x} : Set X) → x ∉ (X ↘ Spec (.of k)).smoothLocus → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) (X.presheaf.germ ⊤ x trivial (Scheme.globalSectionsRingHom k a))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) (L : X.Modules) [L.IsInvertible] (V : Submodule k (Scheme.Modules.unit X ⟶ L)) [FiniteDimensional k V] (hgeneric : ∃ s ∈ V, ∀ C : irreducibleComponents X, nodalSeriesGenericValue L s C ≠ 0) : ∃ B : X.IdealSheafData, (∀ U : X.affineOpens, B.ideal U • (⊤ : Submodule Γ(X, U.1) Γ(L, U.1)) = Submodule.span Γ(X, U.1) {t | ∃ s ∈ V, s.app U.1 (1 : Γ(X, U.1)) = t}) ∧ RingedSpace.IsCoherent X.toRingedSpace B.toModules ∧ topologicalKrullDim B.subscheme ≤ 0 ∧ FiniteDimensional k (nodalSeriesCoordinateSpace k B) ∧ (∀ (P : Setoid (irreducibleComponents X)) (W : Quotient P → Submodule k V), (∀ (a : Quotient P) (s : V), s ∈ W a ↔ ∀ C : irreducibleComponents X, Quotient.mk P C ≠ a → nodalSeriesGenericValue L s.1 C = 0) → iSupIndep W → (⨆ a, W a) = ⊤ → (nodalSeriesBoundary P).Finite ∧ ((nodalSeriesBoundaryIdeal P).support : Set X) = nodalSeriesBoundary P ∧ (∀ x ∈ nodalSeriesBoundary P, IsClosed ({x} : Set X) ∧ x ∉ (X ↘ Spec (.of k)).smoothLocus) ∧ IsReduced (nodalSeriesBoundaryIdeal P).subscheme ∧ FiniteDimensional k (nodalSeriesCoordinateSpace k (nodalSeriesBoundaryIdeal P)) ∧ B ≤ nodalSeriesBoundaryIdeal P ∧ (nodalSeriesBoundary P).ncard ≤ nodalSeriesLength k B ∧ (∀ a : Quotient P, ∃ (A C : X.IdealSheafData), A = nodalSeriesUnionIdeal {D | Quotient.mk P D = a} ∧ C = nodalSeriesUnionIdeal {D | Quotient.mk P D ≠ a} ∧ ((A + C).support : Set X) = nodalSeriesBlockBoundary P a ∧ (nodalSeriesBlockBoundary P a).Finite ∧ nodalSeriesLength k (A + C) = (nodalSeriesBlockBoundary P a).ncard ∧ ∃ (n : ℕ) (e : (∐ fun _ : Fin n ↦ Spec (.of k)) ≅ pullback A.subschemeι C.subschemeι), n = (nodalSeriesBlockBoundary P a).ncard ∧ ∀ i : Fin n, Sigma.ι (fun _ : Fin n ↦ Spec (.of k)) i ≫ e.hom ≫ pullback.fst A.subschemeι C.subschemeι ≫ A.subschemeι ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))) ∧ (V = ⊤ → Function.Bijective ((L ◁ B.toModulesι ≫ (ρ_ L).hom).app ⊤) ∧ ∀ (D : ReducedCurveDualizingPair k X) (T : X.IdealSheafData), T.IsInvertible → topologicalKrullDim T.subscheme ≤ 0 → Nonempty (L ≅ T.toModules ⊗ D.omega) → RingedSpace.IsCoherent X.toRingedSpace (T * B).toModules ∧ topologicalKrullDim (T * B).subscheme ≤ 0 ∧ FiniteDimensional k (nodalSeriesCoordinateSpace k (T * B)) ∧ T * B ≤ T ∧ nodalSeriesLength k (T * B) = nodalSeriesLength k T + nodalSeriesLength k B ∧ Set.range (((T * B).toModulesι ▷ D.omega ≫ (λ_ D.omega).hom).app ⊤) = Set.range ((T.toModulesι ▷ D.omega ≫ (λ_ D.omega).hom).app ⊤))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The seven auxiliary definitions name only constructions in this node: generic germs, reduced component unions and partition boundaries, and the coordinate vector space and length of a closed subscheme. The base ideal itself is existentially characterized by its evaluation span on every affine open. Sections are canonically Hom(O_X,L); equalities are ranges of the canonical tensor inclusions. The already landed definition node def-sfb-reduced-curve-dualizing-pair (Q86) owns the existing dualizing-pair structure and scalar cohomology abbreviation used here; no conclusion of the reduced-curve existence theorem is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf958b175",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read node, all 18 stmt_dep records, module, report; node differs from side-live only in lean + stmt_dep def-sfb-reduced-curve-dualizing-pair (landed Q86, on base); lean.statement verbatim. Clause check: k-compatible completed-node hypothesis; L invertible; V ⊆ Hom(O,L)=Γ(L) fin-dim; single generically nonzero section; B pinned uniquely by B(U)·L(U)=span on all affines; IsCoherent; dim ≤0 and finite Γ(Z,O_Z); Setoid partition with W pinned by membership iff plus iSupIndep and ⨆=⊤; E_P finite reduced, support exact, closed nonsmooth points; per-block reduced unions, (A+C) support/length = boundary count, ∐Fin n Spec k ≅ pullback over k; B ≤ I_E, |E| ≤ b; V=⊤ → canonical L⊗B→L bijective on Γ; Cartier T (IsInvertible, dim ≤0), L≅T⊗ω for any ReducedCurveDualizingPair (genuine representing pair): T*B (product ideal) coherent, dim ≤0, finite, ≤T, ℓ additive, Γ-ranges into ω equal. Sheafified monoidal instance; helpers real with docstrings; sorry only; no clashes; imports exist. Edge cases empty Z/E, single block, T=⊤ covered. No compile (no change). Advisory: subscheme-length helper has no shared owner."
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-finite-proper-site-ambient-normalization",
+ "kind": "statement",
+ "title": "The included bounded site mate equals the ambient mate after realization",
+ "statement": "Let A be a finite commutative ring, g:Z -> Y a quasi-compact quasi-separated morphism of schemes, and H a bounded-below etale A-complex. Let N be the exact derived etale-to-pro-etale comparison, E the intrinsic realization, I the intrinsic site functor, a:I isomorphic to N followed by E its specified comparison, P intrinsic derived direct image, Q fixed-scalar pro-etale derived direct image, R etale derived direct image, d:P E_Z isomorphic to E_Y Q the normalized realization/direct-image comparison, and beta:N_Y R -> Q N_Z the ambient counit mate. Then properSiteIso(A,g,H).hom equals a_Y at R(H), followed by E_Y(beta_H), d inverse at N_Z(H), and P(a_Z inverse at H). This uses exactly the existing specified comparisons, with no replacement of definitions. The specified D+ mate and its counit normalization are those of [lem-weil-pbc-comparison-direct-image-canonical-mate]; the intrinsic coordinates and ambient mate are those of [def-finite-compact-scalar-coordinates] and [def-sf-etale-proetale-ambient-direct-image-comparison].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5, proper factor: identification of the D+ mate after inclusion; original proper scalar transport proof Step 3; Stacks 099R"
+ },
+ "stmt_deps": [
+  "def-finite-compact-scalar-coordinates",
+  "def-sf-etale-proetale-ambient-direct-image-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the included-site calculation sp_comparison_hom, whose only mathematical input is the specified D+ direct-image counit normalization of lem-weil-pbc-comparison-direct-image-canonical-mate. The D+ inclusion compatibility for exact functors, right-derived functors and their adjunction counits identifies the included morphism with the ambient counit mate. The BoundaryComparison definitions in that private proof are aliases for the exact derived pullback square, not uses of exceptional inverse image or the later projection theorem.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-sf-etale-proetale-ambient-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the equality by intrinsic realization and the source and target site-functor identifications. Unfold properSiteIso and spDirectImageComparisonIso; the resulting composites agree factor by factor.",
+   "uses": [
+    "def-finite-compact-scalar-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-sf-etale-proetale-ambient-direct-image-comparison",
+  "def-finite-compact-scalar-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent A5",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5, proper factor: identification of the D+ mate after inclusion; original proper scalar transport proof Step 3; Stacks 099R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension mate for direct image commutes with equivalences of module categories and comparison of etale and pro etale sheaves",
+   "results": "Eight generic sheaf pullback and pushforward results; none gives this normalized derived compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve generic mate identities including horizontal and vertical composition and iterated mates; these do not identify the specified realization and site comparisons.",
+   "date": "2026-10-27",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(conjugate|hcomp)|fixedComparisonDirectImageMatePlus",
+   "results": "Mathlib generic mate identities; project search found sp_comparison_hom, the proved included-site normalization used in the new ambient comparison lemma.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing site normalization; no realization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Including a bounded below derived adjunction counit into the unbounded derived category identifies its canonical comparison mate",
+   "results": "Eight hits, including Adjunction.counit, derived_counit, derivedε and its congruence lemma. These provide generic localization and adjunction identities, not the specified etale/pro-etale included-site normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic machinery only; reuse the existing normalized included-site calculation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperScalarTransport",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-finite-proper-scalar-transport",
+   "place": "Step 5, proper factor: identification of the D+ mate after inclusion; original proper scalar transport proof Step 3; Stacks 099R and 0B65",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProperSiteAmbientNormalization",
+  "file": "lean/Sheaf/Paper/FiniteProperSiteAmbientNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.properSiteIso_hom_ambient",
+  "statement": "theorem properSiteIso_hom_ambient\n    (A : Type u) [CommRing A] [Finite A]\n    {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]\n    (H : DerivedCategory.Plus\n      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :\n    (properSiteIso A g H).hom =\n      (intrinsicSiteFunctorIso A Y).hom.app _ ≫\n        (sfIntrinsicDerivedEquivalence Y A).functor.map\n          ((ProEtale.directImageComparisonAmbient (ULift.{u + 1, u} A) g).app H.obj) ≫\n        (sfIntrinsicDerivedDirectImageComparison g A).inv.app\n          ((ProEtale.comparisonUpperStar\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Z).mapDerivedCategory.obj H.obj) ≫\n        (proEtaleConstantDerivedDirectImage g A).map\n          ((intrinsicSiteFunctorIso A Z).inv.app H.obj)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T034612-L-3664543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T034612-L-3664543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

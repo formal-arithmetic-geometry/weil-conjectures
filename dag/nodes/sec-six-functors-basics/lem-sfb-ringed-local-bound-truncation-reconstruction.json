@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-ringed-local-bound-truncation-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruction from lower truncations under ringed-site local bounds",
+ "statement": "Let $\\mathcal C$ be a site small relative to the coefficient universe [def-weil-size-convention], [def-weil-pbc-sites-and-cohomology], let $\\mathcal O$ be a sheaf of commutative rings, and use module sheaves and their ordinary unbounded derived category [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category]. Let $\\mathcal S\\subseteq\\operatorname{Mod}(\\mathcal O)$ be a weak Serre subcategory: it is strictly full, contains zero, and is closed under kernels and cokernels of maps between its objects and under extensions. Write $D_{\\mathcal S}(\\mathcal O)$ for complexes whose every cohomology sheaf lies in $\\mathcal S$, and $D^+_{\\mathcal S}(\\mathcal O)$ for its bounded-below part. Suppose there is a set $\\mathcal V\\subseteq\\operatorname{Ob}(\\mathcal C)$ such that every object has a covering by members of $\\mathcal V$. For every $V\\in\\mathcal V$ suppose there are an integer $d_V$ and a cofinal collection of covering families $\\{V_i\\to V\\}$ such that $H^p(V_i,F)=0$ for every $p>d_V$ and $F\\in\\mathcal S$. Cofinal means every covering has a refinement in the collection, and $H^p(V_i,F)$ is the right derived functor of sections. Use the resolution-derived inverse limit on strict inverse sequences, whose underlying object has the Roos triangle [lem-weil-pbc-ringed-strict-tower-homotopy-limit], [def-weil-derived-limit]. For every $E\\in D_{\\mathcal S}(\\mathcal O)$, the canonical lower-truncation maps [def-kun-truncations] induce an isomorphism in $D(\\mathcal O)$\n$$E\\xrightarrow{\\sim}R\\varprojlim_{n\\geq0}\\tau_{\\geq-n}E.$$\nThis isomorphism is compatible with every canonical projection to $\\tau_{\\geq-n}E$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6S, lemma-olsson-laszlo, statement and proof; local bound hypotheses spelled out from situation-olsson-laszlo"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-limit",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex $A^\\bullet$ representing $E$ and form the strict tower $T_n=\\tau_{\\geq-n}A^\\bullet$ using the kernel/cokernel formulas of [def-kun-truncations]. Its quotient maps $c_n:A^\\bullet\\to T_n$ and transitions $u_n:T_{n+1}\\to T_n$ satisfy $u_nc_{n+1}=c_n$ degreewise. Truncation gives $H^j(T_n)=0$ for $j<-n$ and $H^j(c_n)$ an isomorphism for $j\\geq-n$. Thus $T_n\\in D^+_{\\mathcal S}(\\mathcal O)$: its cohomology is zero or isomorphic to a cohomology sheaf of $E$, and $\\mathcal S$ contains zero and is strictly full. For $n_j=\\max(0,-j)$ and $n\\geq n_j$, the equality $H^j(u_n)H^j(c_{n+1})=H^j(c_n)$ makes $H^j(u_n)$ an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6R (situation-olsson-laszlo), 0D6S (lemma-olsson-laszlo), and 0D6T (lemma-olsson-laszlo-modified)"
+   }
+  },
+  {
+   "text": "Let $L=R\\varprojlim_nT_n$ be the resolution-derived limit in the statement. The strict-tower theorem gives its natural Roos triangle $L\\xrightarrow{p}P\\xrightarrow{1-s}P\\to L[1]$, with $P=\\prod_n^D T_n$. Set $p_n=\\operatorname{pr}_np$. The product property gives $a:E\\to P$ with $\\operatorname{pr}_na=c_n$. Compatibility gives $\\operatorname{pr}_n(1-s)a=c_n-u_nc_{n+1}=0$ for every $n$, hence $(1-s)a=0$. Exactness of $\\operatorname{Hom}(E,-)$ in this triangle supplies $c:E\\to L$ with $pc=a$, hence $p_nc=c_n$ for every $n$. This also verifies existence of a comparison with all the required projections. The following argument proves invertibility for every such comparison, in particular for the one obtained from the stipulated resolution construction.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-category-product",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0H72, remark-map-into-derived-limit-truncations; the Roos triangle is supplied by the strict resolution construction"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-local-bound-stationary-limit-cohomology] to the strict tower $(T_n,u_n)$. Its site, ring sheaf, weak Serre subcategory, covering set, cofinal collections and integers $d_V$ are exactly those of the item; step 1 verifies bounded-below membership separately for every $n$ and stabilization in each degree $j$ at $n_j$. Therefore the actual projection induces an isomorphism $H^j(p_n):H^j(L)\\to H^j(T_n)$ for every $n\\geq n_j$. No uniform lower bound on the tower and no exactness of products is required by that cited statement.",
+   "uses": [
+    "lem-sfb-ringed-local-bound-stationary-limit-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6R (situation-olsson-laszlo), 0D6S (lemma-olsson-laszlo), and 0D6T (lemma-olsson-laszlo-modified)"
+   }
+  },
+  {
+   "text": "Fix $j$ and take $n=n_j$. Applying the cohomology functor to $p_nc=c_n$ gives $H^j(p_n)H^j(c)=H^j(c_n)$. Both $H^j(p_n)$ and $H^j(c_n)$ are isomorphisms by steps 1 and 3, so $H^j(c)=H^j(p_n)^{-1}H^j(c_n)$ is an isomorphism. This calculation concerns the specified comparison $c$, rather than merely an unspecified isomorphism between its source and target.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0H72, remark-map-into-derived-limit-truncations, displayed cohomology composite"
+   }
+  },
+  {
+   "text": "The module-sheaf category is abelian by [def-weil-sheaf-of-modules-category], using precisely the coefficient-relative smallness assumption in the item. Since $H^j(c)$ is an isomorphism for every integer $j$, [lem-weil-pbc-unbounded-derived-iso-cohomology] makes $c$ an isomorphism in the ordinary unbounded derived category. The identities $p_nc=c_n$ from step 2 hold for every $n$, including those below the stabilization index, and give the asserted compatibility with every canonical projection.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic; Tag 0H72, remark-map-into-derived-limit-truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-ringed-local-bound-stationary-limit-cohomology",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6S, proved by applying the independently stated stationary-tower lemma 0D6T to the truncation tower; comparison-map construction and final calculation from derived.tex Tag 0H72. This is an assembly from these source statements, not a claim to reproduce verbatim the 0D6S proof through 0D6N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "olsson|laszlo|left.?complete|trunc.*[Ll]imit|[Ll]imit.*trunc",
+   "results": "14 hits; Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean, Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves is recovered as homotopy inverse limit of its Postnikov truncations under local cohomological bounds",
+   "results": "8 hits; TopCat.isSheaf_of_isLimit, HomologicalComplex.instHasLimit, HomologicalComplex.instHasLimitsOfShape, TopCat.instHasLimitsOfShapeSheaf, TopCat.instHasLimitsOfSizeSheafOfHasLimits, SheafOfModules.hasLimit, HomologicalComplex.instHasFiniteLimits, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"truncGE\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site with local finite cohomological dimension for a weak Serre subcategory, every complex with cohomology in the subcategory is the derived inverse limit of its good lower truncations",
+   "results": "8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "olsson|laszlo|left.?complete|trunc.*[Ll]imit|[Ll]imit.*trunc",
+   "results": "14 hits; Mathlib/Data/PFunctor/Univariate/M.lean, Mathlib/MeasureTheory/Measure/Prokhorov.lean, Mathlib/MeasureTheory/Measure/Prokhorov.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/RingTheory/WittVector/Truncated.lean, Mathlib/RingTheory/WittVector/Truncated.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary limits, finite truncations, cohomological support or derived-category fractions, not the local-bound reconstruction theorem for ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves on a ringed site is the homotopy inverse limit of its canonical lower truncations under local cohomological bounds",
+   "results": "8 hits; HomologicalComplex.shortComplexTruncLE, HomologicalComplex.instHasLimit, SheafOfModules.hasLimitsOfSize, HomologicalComplex.instHasLimitsOfShape, SheafOfModules.hasLimit, TopCat.instHasLimitsOfShapeSheaf, TopCat.instHasLimitsOfSizeSheafOfHasLimits, CochainComplex.truncLE",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary limits, finite truncations, cohomological support or derived-category fractions, not the local-bound reconstruction theorem for ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"truncGE\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary limits, finite truncations, cohomological support or derived-category fractions, not the local-bound reconstruction theorem for ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site with local finite cohomological dimension for a weak Serre subcategory every complex with cohomology in that subcategory is recovered from the derived inverse limit of its lower truncations",
+   "results": "8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.quasiIso_πTruncGE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary limits, finite truncations, cohomological support or derived-category fractions, not the local-bound reconstruction theorem for ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff.*homology|isIso_of.*homology|isIso_iff.*quasi|isIso_of.*quasi",
+   "results": "No hits. Search subdirectory: Algebra/Homology/DerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary limits, finite truncations, cohomological support or derived-category fractions, not the local-bound reconstruction theorem for ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left completeness of the unbounded derived category of sheaves: the canonical map from a complex to the homotopy limit of its Postnikov tower is an isomorphism",
+   "results": "8 hits; DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, HasDerivedCategory.standard, DerivedCategory.left_fac, DerivedCategory.Q, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary limits, finite truncations, cohomological support or derived-category fractions, not the local-bound reconstruction theorem for ringed sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-local-bound-direct-image-truncation",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: apply the general truncation-stability lemma with N = 0; supporting input: source-site reconstruction from lower truncations (Stacks 0D6S)",
+   "via": [
+    "lem-sfb-ringed-local-bound-direct-image-truncation",
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-local-bound-truncation-reconstruction",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Five assembly steps construct the strict good-truncation tower, lift its compatible maps through the resolution Roos triangle, apply the existing same-unit stationary-limit cohomology theorem, and detect invertibility on cohomology. No new nodes; all non-elementary inputs already exist. Both exact-product and global-uniform-bound assumptions are avoided.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain through the ringed unbounded descent criterion, exactly the source-site reconstruction input of Stacks 0D6U. Read the current latest blueprint unit and direct-images proof (3). blueprint_refs.py ancestor returns None; the inherited explicit place and via list are retained. Searches for lower truncations, Spaltenstein, 0D6L, weak Serre and cohomology detection found no imported statement equivalent to the item.",
+  "tool_uses": [
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Representatives, localization and cohomology functors are generic definitions; this unit has no alternate derived-category convention."
+   },
+   {
+    "node": "def-kun-truncations",
+    "why": "The generic good-truncation formulas supply the strict tower and its retained cohomology; this unit has no separate definition."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The generic strict ringed-site tower theorem supplies the resolution-derived limit and its actual Roos projections without exact-products hypotheses."
+   },
+   {
+    "node": "def-weil-category-product",
+    "why": "The product universal property constructs the compatible family map and tests its vanishing componentwise."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic Hom exactness in a distinguished triangle constructs a comparison compatible with all projections."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Its generic abelianness clause verifies the coefficient-universe hypothesis needed for the derived isomorphism criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-category-product",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-430ebba26",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-430ebba26 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with only the item and its report, zero new nodes, and the statement and stmt_deps byte-identical to the Q45 creation snapshots. No re-split note exists for this item. Source checks: Stacks 0D6R, 0D6S, 0D6T and derived 0H72. The 0D6T proof (spectral sequence, RΓ commuting with Rlim, sheafification) does not use 0D6S, so the route of 0D6T applied to τ≥-n E is not circular and is correct. Step 1: the good-truncation tower lies in D^+_S, and H^j(u_n) is an isomorphism for n≥max(0,-j), checked. Step 2: the product map a satisfies (1-s)a=0 because pr_n s=u_n pr_{n+1}, and Hom-exactness clause (ii) gives c with p_n c=c_n for every n. This is exactly 0H72. Step 3: the existing same-unit node lem-sfb-ringed-local-bound-stationary-limit-cohomology has text-identical hypotheses and states that the canonical projection gives an isomorphism on H^j for n≥n_j. Step 4: elementary cancellation. Step 5: Mod(O) is abelian, and the Mathlib criterion 05RT (isIso_iff) over all j finishes. Edge cases checked: E=0, a single sheaf, bounded-below E, unbounded E with n_j depending on j, and the n≥0 versus n≥1 reindexing. 0D6T is a more general statement with its own proof, not a restatement of the item (D1/D2 ok). The closure check finds no cycle, and Q04's parallel split of the stationary node does not cite the item. The declared tool_uses are all generic definitions or black boxes; I accept them. No SGA is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedLocalBoundTruncationReconstruction",
+  "declaration": "CategoryTheory.ringed_local_bound_truncation_reconstruction",
+  "file": "lean/Sheaf/CategoryTheory/RingedLocalBoundTruncationReconstruction.lean",
+  "statement": "theorem ringed_local_bound_truncation_reconstruction {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) [HasSheafify J.toGrothendieck AddCommGrpCat.{r}] [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{r}] (R : Sheaf J.toGrothendieck RingCat.{r}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{w} (ringedSiteModules.{r, r, vC, uC} R)] (S : ObjectProperty (ringedSiteModules.{r, r, vC, uC} R)) [S.IsClosedUnderIsomorphisms] [S.ContainsZero] [S.IsClosedUnderKernels] [S.IsClosedUnderCokernels] [S.IsClosedUnderExtensions] (B : Set C) (_hcover : ∀ U : C, ∃ P : Presieve U, P ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), P f → V ∈ B) (_hlocal : ∀ V : C, V ∈ B → ∃ d : ℤ, ∀ P : Presieve V, P ∈ J V → ∃ T : Presieve V, T ∈ J V ∧ (∀ (W : C) (f : W ⟶ V), T f → ∃ (U : C) (g : U ⟶ V) (a : W ⟶ U), P g ∧ a ≫ g = f) ∧ ∀ (W : C) (f : W ⟶ V), T f → ∀ (p : ℤ), d < p → ∀ F : ringedSiteModules.{r, r, vC, uC} R, S F → ∀ (I : CochainComplex (ringedSiteModules.{r, r, vC, uC} R) ℤ) (ι : (CochainComplex.singleFunctor (ringedSiteModules.{r, r, vC, uC} R) 0).obj F ⟶ I), I.IsKInjective → QuasiIso ι → IsZero ((((SheafOfModules.toSheaf R ⋙ sheafToPresheaf J.toGrothendieck AddCommGrpCat.{r} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{r}).obj (op W)).mapHomologicalComplex (ComplexShape.up ℤ)).obj I).homology p)) (E : DerivedCategory (ringedSiteModules.{r, r, vC, uC} R)) (_hE : DerivedCategory.homologyProperty S E) [HasProduct (fun n : ℕ ↦ (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)] (L : DerivedCategory (ringedSiteModules.{r, r, vC, uC} R)) (π : L ⟶ ∏ᶜ (fun n : ℕ ↦ (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)) (δ : (∏ᶜ (fun n : ℕ ↦ (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)) ⟶ L⟦(1 : ℤ)⟧) (_hL : IsDerivedLimitTriangle (fun n : ℕ ↦ (DerivedCategory.TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (Int.neg_le_neg (Int.ofNat_le.mpr (Nat.le_succ n)))).app E) L π δ) : (∃ e : E ≅ L, ∀ n : ℕ, e.hom ≫ π ≫ Pi.π (fun n : ℕ ↦ (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n = (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E) ∧ ∀ c : E ⟶ L, (∀ n : ℕ, c ≫ π ≫ Pi.π (fun n : ℕ ↦ (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n = (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E) → IsIso c",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2daf2b28d",
+  "group": "N9",
+  "result": "pass",
+  "note": "Only change is the item's lean record; the statement is verbatim in the file. All hypotheses match Stacks 0D6R/0D6S and the node: per-V d before the covering quantifier, refinement by factorization through a covering member, vanishing uniform over F and p>d, all five weak Serre conditions, homologyProperty, cohomology as sections of a K-injective resolution. Truncations are the DerivedCategory.TStructure.t truncGE maps named in the def-kun-truncations docstring, with transitions n+1→n. Conclusion: an isomorphism E≅L compatible with every projection, and every compatible comparison c is invertible. Quantifying over any derived-limit triangle instead of only the resolution-built one is slightly more general and still true (0H72; such limits are isomorphic compatibly with the projections). Edge cases E=0, S=0, n=0, negative d, empty coverings and independent universes checked; no extra hypotheses; no duplicate (0D6P uniform-bound and pointwise variants differ). Docstrings carry the source place, blueprint tag and proof plan; only proof is sorry. No FIX made, nothing compiled."
+ }
+}

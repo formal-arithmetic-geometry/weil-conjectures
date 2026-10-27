@@ -1,0 +1,168 @@
+{
+ "id": "lem-pur-etale-proper-open-cube-normalization",
+ "kind": "statement",
+ "title": "Arbitrary-base-change cube for unit-normalized proper/open comparisons",
+ "statement": "Let A be a finite commutative ring. Work with ordinary constant-A module sheaves on the small etale sites of arbitrary schemes and their unbounded derived categories [def-weil-pbc-derived-categories]. For every commutative square Q with top open immersion k:U→V, bottom open immersion i:W→Z and proper vertical maps r:U→W and p:V→Z, fix natural isomorphisms theta_Q:r_*⋙i_! ≅ k_!⋙p_* and Gamma_Q:Rr_*⋙Di_! ≅ Dk_!⋙Rp_*. Assume the support normalization: theta_Q,F followed by p_*(k_!F→k_*F) and the direct-image compositor equals i_!r_*F→i_*r_*F followed by the compositor into (ir)_*F=(pk)_*F [lem-cbc-proper-support-sheaf-composition]. Assume also right-derived-unit normalization. For every homotopy object X on U, Di_!(eta_r,X) followed by Gamma_Q at Qh(X) equals the exact factorization for i_!, followed by Qh of theta_Q on X, the derived unit for p_* at k_!X, and Rp_* of the inverse exact factorization for k_!. Here eta denotes the right-derived unit and all exact factorizations are the canonical termwise localization isomorphisms [lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-extension-by-zero-exact]. For a cube of such squares Q and Q1 with all four side faces cartesian, write a:V1→V, b:Z1→Z, c:W1→W and d:U1→U. Then b^*Gamma_Q followed by Ex_(p,b) on Dk_!K and Rp1_* of the inverse open-extension base-change comparison equals the inverse open-extension base-change comparison for i at Rr_*K, followed by Di1_!Ex_(r,c) and Gamma_Q1 at d^*K. The exchanges are the fixed unbounded exact adjunction mates and the open-extension comparisons are the specified termwise descents [def-kun-unbounded-exchange, lem-cbc-extension-zero-base-change]. No cartesian condition is imposed on Q itself, and no base-change exchange is cancelled.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-cbc-proper-support-sheaf-composition",
+  "def-pc-fibre-product",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-cbc-extension-zero-base-change"
+ ],
+ "proof": [
+  {
+   "text": "First prove the ordinary sheaf cube. Postcompose both paths with the open-to-direct-image comparison for k1 and its direct-image compositors. This comparison is monic. The support normalizations replace both theta maps by their inclusions into the same direct image. Compatibility of open base change with the open units and vertical pasting of ordinary baseChangeMap identify the two remaining words. Cancel only the monic inclusion.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-extension-zero-base-change",
+    "lemma-weil-pbc-underived-exchange-naturality",
+    "lem-weil-pbc-underived-exchange-module-linear",
+    "lem-amb-unbounded-proper-open-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove a generic cube identity for additive functors with exact horizontal functors. The source Rr_* followed by two exact derived functors is a right-derived functor: on K-injectives its unit is an isomorphism, since exact functors preserve isomorphisms. Right-derived transformation extensionality reduces the cube to precomposition with this unit. Insert the four assumed unit-normalization equations, the exact factorization equations for both open base-change maps, and the naturality of the units and factorizations. The remaining expression is the termwise homotopy-category image of the ordinary cube. The quotient functor is surjective on objects, so the ordinary equality in each degree proves it.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified exactDerivedBaseChangeMap satisfies the required unit equation by the derived adjunction mate formula and square_factors from DerivedExchangeModuleTermwise. The inverses of the specified derived open-base-change isomorphisms satisfy the required exact factorization by the same square_factors API. Apply the generic cube with these specified transformations and the ordinary sheaf cube. Neither derived exchange is inverted or cancelled; no inverse image is claimed to preserve K-injectives.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-module-termwise",
+    "def-kun-unbounded-exchange",
+    "lem-cbc-extension-zero-base-change",
+    "lem-pur-etale-proper-open-horizontal-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-extension-zero-base-change",
+  "lemma-weil-pbc-underived-exchange-naturality",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "lem-amb-unbounded-proper-open-composition",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-derived-exchange-module-termwise",
+  "def-kun-unbounded-exchange",
+  "lem-pur-etale-proper-open-horizontal-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F; arbitrary schemes as in the parent, without the unnecessary Noetherian restrictions in lem-amb-unbounded-proper-open-base-change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived natural transformations preserve horizontal pasting of normalized proper direct image and exact extension by zero comparisons",
+   "results": "8 generic derived-comparison and rightDerivedNatTrans_comp hits; no geometric normalized statement.",
+   "date": "2026-10-24",
+   "verdict": "Use localization and mate APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 mate, counit, unit and pasting API hits, including mateEquiv_hcomp and mateEquiv_vcomp.",
+   "date": "2026-10-24",
+   "verdict": "Useful generic APIs; no proper/open normalized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*cube|mateEquiv.*derived|proper.*open.*horizontal",
+   "results": "0 Mathlib matches. Library has analogous Noetherian statements and generic private helpers, but no arbitrary-scheme theorem.",
+   "date": "2026-10-24",
+   "verdict": "Separate result required for arbitrary schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived natural transformations preserve a commutative cube with exact horizontal functors",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedNatTrans; CategoryTheory.Functor.rightDerivedNatTrans_app; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp; CategoryTheory.Functor.rightDerivedNatTrans_app_assoc; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory.",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-transformation APIs only; prove the geometric support equality and lift it by right-derived uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProperOpenExchangeCube",
+  "date": "2026-10-24",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): compatibility of proper/open comparisons under base change; proof steps 8–10, Stacks Tag 0F7F",
+   "via": [
+    "lem-pur-etale-proper-open-exchange-cube",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperOpenCubeNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperOpenCubeNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleProperOpenCubeNormalization",
+  "statement": "theorem etaleProperOpenCubeNormalization (A : Type (u + 1)) [CommRing A] [Finite A]\n    (θ : ∀ {U V W Z : Scheme.{u}}\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k]\n        (_sq : CommSq k r p i),\n        (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅\n          (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])\n    (Γ : ∀ {U V W Z : Scheme.{u}}\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k]\n        (_sq : CommSq k r p i),\n        R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅\n          D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]))\n    (hθ : (∀ {U V W Z : Scheme.{u}}\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        (sq : CommSq k r p i)\n        (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)),\n        (θ k r p i sq).hom.app F ≫\n            (p)_*[ModuleCat.{u + 1} A].map\n              ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫\n            (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F =\n          (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app\n              ((r)_*[ModuleCat.{u + 1} A].obj F) ≫\n            (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq.w).hom.app F))\n    (hΓ : ∀ {U V W Z : Scheme.{u}}\n      (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n      [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n      (sq : CommSq k r p i),\n      ProperOpenUnitNormalized\n        (r)_*[ModuleCat.{u + 1} A] (p)_*[ModuleCat.{u + 1} A]\n        (k)_!open[ModuleCat.{u + 1} A] (i)_!open[ModuleCat.{u + 1} A]\n        (θ k r p i sq).hom (Γ k r p i sq).hom) :\n    (∀ {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}\n        (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n        (k₁ : U₁ ⟶ V₁) (r₁ : U₁ ⟶ W₁) (p₁ : V₁ ⟶ Z₁) (i₁ : W₁ ⟶ Z₁)\n        [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]\n        [IsOpenImmersion k₁] [IsOpenImmersion i₁] [IsProper r₁] [IsProper p₁]\n        (sq : CommSq k r p i) (sq₁ : CommSq k₁ r₁ p₁ i₁)\n        (a : V₁ ⟶ V) (b : Z₁ ⟶ Z) (c : W₁ ⟶ W) (d : U₁ ⟶ U)\n        (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c)\n        (si : IsPullback c i₁ i b) (sk : IsPullback d k₁ k a)\n        (K : DerivedCategoryModule A U),\n        D((b)^*[ModuleCat.{u + 1} A]).map ((Γ k r p i sq).hom.app K) ≫\n            (exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sp.toCommSq).app\n              (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫\n            R((p₁)_*[ModuleCat.{u + 1} A]).map\n              ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso\n                (ModuleCat.{u + 1} A) sk).inv.app K) =\n          (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso\n              (ModuleCat.{u + 1} A) si).inv.app\n                (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫\n            D((i₁)_!open[ModuleCat.{u + 1} A]).map\n              ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} A) sr.toCommSq).app K) ≫\n            (Γ k₁ r₁ p₁ i₁ sq₁).hom.app (D((d)^*[ModuleCat.{u + 1} A]).obj K))",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261024T185855-L-3744288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261024T185855-L-3744288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

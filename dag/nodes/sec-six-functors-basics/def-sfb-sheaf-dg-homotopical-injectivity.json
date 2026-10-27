@@ -1,0 +1,165 @@
+{
+ "id": "def-sfb-sheaf-dg-homotopical-injectivity",
+ "kind": "definition",
+ "title": "Homotopical injectivity of sheaf dg modules",
+ "statement": "Let $S$ be a sheaf of commutative rings on a small site, and let $A$ be a sheaf dg $S$-algebra. Use the signed left dg module conventions of [def-sfb-sheaf-dg-module-localization], interpreted sheafwise on this site: $A$ is an integer cochain complex of $S$-module sheaves on this site [def-weil-sheaf-of-modules-category] with associative unital $S$-bilinear multiplication and $d_A(ab)=d_A(a)b+(-1)^{|a|}a\\,d_A(b)$; a left dg $A$-module $M$ is such a complex with a unital associative $S$-bilinear action and $d_M(am)=d_A(a)m+(-1)^{|a|}a\\,d_M(m)$. For left dg modules $M,I$, write $\\operatorname{Hom}_A^r(M,I)$ for the abelian group of families of $S$-linear sheaf maps $h^i:M^i\\to I^{i+r}$, for all $i\\in\\mathbb Z$, satisfying $h(am)=(-1)^{r|a|}a\\,h(m)$ on homogeneous local sections. These are global sheaf morphisms, compatible with restriction on every object of the site, with no finite-support condition in $i$. Give these groups the differential $\\delta_r(h)=d_Ih-(-1)^rhd_M$. A left dg $A$-module $I$ is homotopically injective if, for every left dg $A$-module $M$ whose underlying cohomology sheaves all vanish, the complex $\\operatorname{Hom}_A^\\bullet(M,I)$ is acyclic. Explicitly, for every $r\\in\\mathbb Z$ and $h\\in\\operatorname{Hom}_A^r(M,I)$ with $\\delta_r(h)=0$, there exists $g\\in\\operatorname{Hom}_A^{r-1}(M,I)$ with $\\delta_{r-1}(g)=h$. Here vanishing cohomology sheaves means $\\ker(d_M^i)=\\operatorname{im}(d_M^{i-1})$ as subsheaves for every $i$, not exactness on sections over every object. No boundedness, graded injectivity, or exactness of global sections is part of this predicate.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "definition-K-injective and Tag 0FSY (lemma-better-set-of-monos), signed left-module convention; extracted without changing the predicate from unmerged delivery 4de8aa9c6fba32f4ebcfc94f814a9f06659c3d78."
+ },
+ "stmt_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HomotopicallyInjective|homotopically.injective in Mathlib/Algebra/Homology",
+   "results": "No matches in the pinned Mathlib source. The ordinary CochainComplex.IsKInjective predicate does not impose signed dg A-linearity.",
+   "date": "2026-10-25",
+   "verdict": "Extract the existing sheaf-dg predicate; do not replace it by ordinary K-injectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "IsHomotopicallyInjective|SheafDgInjectivityTests in live lean/Sheaf and dag/nodes/sec-six-functors-basics/def-*.json",
+   "results": "The live library has the distinct CategoryTheory.DgAlgebra.IsHomotopicallyInjective for modules over a dg ring. No live CategoryTheory.SheafDg.IsHomotopicallyInjective and no definition-node owner for sheaf dg homotopical injectivity.",
+   "date": "2026-10-25",
+   "verdict": "An independent definition owner is needed for the sheaf-dg predicate."
+  },
+  {
+   "tool": "git show",
+   "query": "4de8aa9c6fb:lean/Sheaf/CategoryTheory/SheafDgInjectivityTests.lean; 616b3f549c2c:lean/Sheaf/CategoryTheory/FlatRingedDgPushpull.lean",
+   "results": "Both unmerged delivery modules define CategoryTheory.SheafDg.IsHomotopicallyInjective. The tests module uses GradedMap (the subtype of signed GradedLinear cochains), while pushpull spells out the same cocycle/boundary condition with GradedLinear. Neither module exists on live main.",
+   "date": "2026-10-25",
+   "verdict": "Extract the tests predicate verbatim into a shared module. Both consumers import it; no theorem is proved or weakened."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|IsHomotopicallyInjective|homotopically.injective",
+   "results": "{\"t\": \"2026-10-24T16:40:01Z\", \"tool\": \"grep\", \"query\": \"IsKInjective|IsHomotopicallyInjective|homotopically.injective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"09609921b16923cd\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42-44) and its consequences do not define the signed A-linear Hom predicate for modules over a sheaf dg algebra. Read lines 30-51; the dg action is not an objectwise action in an abelian category of ordinary module sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K injective differential graded modules of sheaves signed homogeneous maps",
+   "results": "{\"t\": \"2026-10-24T16:40:01Z\", \"tool\": \"leansearch\", \"query\": \"K injective differential graded modules of sheaves signed homogeneous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"SheafOfModules.Hom.mk.injEq\", \"CochainComplex.IsKInjective.Qh_map_bijective\", \"CategoryTheory.DifferentialObject.Hom.mk.injEq\", \"HomologicalComplex.hom_f_injective\", \"CategoryTheory.ShortComplex.LeftHomologyMapData.mk.inj\", \"CochainComplex.HomComplex.Cochain.ofHom_injective\"], \"digest\": \"0010db28e93ea35c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42-44) and its consequences do not define the signed A-linear Hom predicate for modules over a sheaf dg algebra. Read lines 30-51; the dg action is not an objectwise action in an abelian category of ordinary module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "{\"t\": \"2026-10-24T16:40:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKInjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX\", \"CochainComplex.instIsKInjectiveObjIntShiftFunctor\", \"CochainComplex.isKInjective_shift_iff\"], \"digest\": \"71ee57824409744c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42-44) and its consequences do not define the signed A-linear Hom predicate for modules over a sheaf dg algebra. Read lines 30-51; the dg action is not an objectwise action in an abelian category of ordinary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopically injective sheaf differential graded left module acyclic signed global Hom complex",
+   "results": "{\"t\": \"2026-10-24T16:40:02Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopically injective sheaf differential graded left module acyclic signed global Hom complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.cm5b.I\", \"CochainComplex.IsKInjective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.IsKInjective.homotopyZero\"], \"digest\": \"999e72909efe012e\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42-44) and its consequences do not define the signed A-linear Hom predicate for modules over a sheaf dg algebra. Read lines 30-51; the dg action is not an objectwise action in an abelian category of ordinary module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|DgModule|GradedLinear",
+   "results": "{\"t\": \"2026-10-24T16:40:26Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|DGModule|DgModule|GradedLinear\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42-44) and its consequences do not define the signed A-linear Hom predicate for modules over a sheaf dg algebra. Read lines 30-51; the dg action is not an objectwise action in an abelian category of ordinary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded algebra module K injective acyclic mapping complex sheaves of modules",
+   "results": "{\"t\": \"2026-10-24T16:40:27Z\", \"tool\": \"leanfinder\", \"query\": \"Differential graded algebra module K injective acyclic mapping complex sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.instInjectiveXIntMappingConeIdI\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.isKInjective_iff_rightOrthogonal\"], \"digest\": \"da88dc7ada09f504\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary CochainComplex.IsKInjective (Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:42-44) and its consequences do not define the signed A-linear Hom predicate for modules over a sheaf dg algebra. Read lines 30-51; the dg action is not an objectwise action in an abelian category of ordinary module sheaves."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "maintenance",
+  "item": "lem-sfb-flat-ringed-dg-pushpull",
+  "date": "2026-10-25",
+  "group": "NL"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence.; shared definition of homotopical injectivity used by injectivity tests and flat ringed dg push-pull.",
+   "via": [
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgHomotopicalInjectivity",
+  "declaration": "CategoryTheory.SheafDg.IsHomotopicallyInjective",
+  "file": "lean/Sheaf/CategoryTheory/SheafDgHomotopicalInjectivity.lean",
+  "statement": "def IsHomotopicallyInjective (A : Algebra S) (I : LeftModule A) : Prop",
+  "branch": "sheaf-dag",
+  "by": "NL maintenance",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Canonical shared definition extracted verbatim from unmerged Q125 delivery 4de8aa9c6fb, with the same independently variable site universes. Contains no theorem or sorry."
+ },
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "def-sfb-sheaf-dg-homotopical-injectivity",
+  "worker": "stage1",
+  "summary": "Audited this definition against Stacks 0FSU (sdga-definition-K-injective), section-dgm-dg-cat, and the existing signed left dg module definition. Expanded the global homogeneous maps, their signed linearity, and acyclicity of underlying sheaves explicitly. Primitive module formulas are given on the small site itself, since the dependency is phrased for a topological space. No predicate, hypotheses, boundedness condition, or graded injectivity condition changed. This definition has no proof and needs no new nodes. Searches of the current project, DAG, whole blueprint and Mathlib were read; the existing Sheaf declaration is not an eligible upstream attachment.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.md and its proof, especially (3). This is the shared homotopical-injectivity prerequisite of the inherited flat ringed dg push-pull chain, not a new unit-level route. blueprint_refs.py ancestor returned None: preserve the inherited null ancestor, exact prerequisite place and via chain. Whole-blueprint searches for homotopically injective (0 hits) and K-injective (77 ordinary-complex nodes) found no equivalent sheaf dg definition; same_as remains empty.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6fd385d47",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6fd385d47 (reviewer sub-agent of L); spot-checked: Read the item, its report and the dependency def-sfb-sheaf-dg-module-localization in full. Checked against Stacks sdga.tex 0FSU definition-K-injective (l.3735), section-dgm-dg-cat (l.1344, Hom^n and d(f)=d f-(-1)^n f d) and 0FSY (l.3845, which adds graded injectivity; the item correctly leaves it out). The left/Koszul convention h(am)=(-1)^{r|a|}a h(m) is preserved by delta_r: checked by hand, the d_A(a) terms cancel and the rest is (-1)^{(r+1)p}a delta(h)(m). Acyclicity of Hom^•(M,I) for every acyclic M is equivalent to Stacks' Hom_K(M,I)=0, because M[-r] is acyclic exactly when M is. Acyclic means vanishing cohomology sheaves (sheaf image), not sectionwise exactness. Small cases checked: I=0, M=0, empty site, A=S in degree 0, r=-1 and odd/odd signs. The Lean IsHomotopicallyInjective (read only) is the same predicate. Duplicate search: the dg-bimodule and dg-injective-resolution nodes are right modules over Z-dgas, and the K-injective nodes concern ordinary complexes, so neither is a duplicate; the injectivity-tests and flat-pushpull nodes only use the predicate. No new nodes, no proof steps, no tool_uses. FIX (B3): the statement works with S-module sheaves on a general site, but its only dependency is the topological-space convention node. I added the citation [def-weil-sheaf-of-modules-category] in the statement and stmt_deps; the predicate is unchanged. Advisory: source.place gives definition-K-injective by label, not tag 0FSU.; 1 file(s) fixed by the reviewer"
+ }
+}

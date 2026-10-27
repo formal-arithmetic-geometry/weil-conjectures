@@ -111,7 +111,32 @@
   "thm-weil-pbc-universal-homeomorphism-invariance"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      447,
+      547
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -156,11 +181,16 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $C$ be a proper curve over an algebraically closed field $k$ (separated\nof finite type, $\\dim C\\leq1$), and suppose that for every prime $r$ and every\nconstructible sheaf $G$ of $\\mathbf F_r$-modules on the reduction\n$C_{\\mathrm{red}}$, assertion $\\mathcal C_7(C_{\\mathrm{red}},G)$ of\n[def-weil-pbc-eight-curve-assertions] holds. Then $\\mathcal C_7(C,F)$ holds for\nevery torsion sheaf $F$ on $C_{\\Et}$: for every algebraically closed\nextension $k'/k$ and every $q$, the pullback map\n$H^q(C,F)\\to H^q(C_{k'},F_{k'})$ is an isomorphism.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be an algebraically closed field. Suppose that for every reduced\nproper curve $X$ over $k$ (separated of finite type, $\\dim X\\leq1$), every\nprime $r$ and every constructible sheaf $G$ of $\\mathbf F_r$-modules on\n$X_{\\Et}$, assertion $\\mathcal C_7(X,G)$ of\n[def-weil-pbc-eight-curve-assertions] holds. Then $\\mathcal C_7(C,F)$ holds\nfor every proper curve $C$ over $k$ and every torsion sheaf $F$ on $C_{\\Et}$:\nfor every algebraically closed extension $k'/k$ and every $q$, the pullback\nmap $H^q(C,F)\\to H^q(C_{k'},F_{k'})$ is an isomorphism.",
   "proof": [
    {
-    "text": "Let $C$ be a proper finite-type curve and $F$ a torsion sheaf. The reduction\n$C_{\\mathrm{red}}\\hookrightarrow C$ is a universal homeomorphism, so by\ninvariance of the etale site under universal homeomorphisms we may replace $C$\nby its reduction. The sheaf $F$ is the filtered colimit of its constructible\ntorsion subsheaves (the constructible approximation on a quasi-compact\nquasi-separated scheme), so [lemma-weil-pbc-curve-filtered-cohomology] and the\nnaturality of the maps $\\rho^q_{k'/k}$ reduce $\\mathcal C_7(C,F)$ to its\ninstances for constructible $F$; the finite primary decomposition and the\nexact sequences $0\\to F[r]\\to F\\to F/F[r]\\to0$ (iterated over the prime factors\nof the torsion orders) reduce constructible $F$ to the instances with $\\mathbf\nF_r$-coefficients, since by [lemma-weil-pbc-eight-curve-devissage] (the five\nlemma on the two long exact cohomology sequences, linked by the pullback maps)\n$\\mathcal C_7$ passes from the outer terms of a short exact sequence to the\nmiddle term. The reduction step is compatible with the field extension,\nbecause $(C_{\\mathrm{red}})_{k'}\\to C_{k'}$ is again a universal\nhomeomorphism.",
+    "text": "Let $C$ be a proper finite-type curve and $F$ a torsion sheaf. The reduction\n$C_{\\mathrm{red}}\\hookrightarrow C$ is a universal homeomorphism, so by\ninvariance of the etale site under universal homeomorphisms we may replace $C$\nby its reduction, which is again a proper curve, now reduced. The sheaf\n$F$ is the filtered colimit of its constructible\ntorsion subsheaves (the constructible approximation on a quasi-compact\nquasi-separated scheme), so [lemma-weil-pbc-curve-filtered-cohomology] and the\nnaturality of the maps $\\rho^q_{k'/k}$ reduce $\\mathcal C_7(C,F)$ to its\ninstances for constructible $F$; the finite primary decomposition and the\nexact sequences $0\\to F[r]\\to F\\to F/F[r]\\to0$ (iterated over the prime factors\nof the torsion orders) reduce constructible $F$ to the instances with $\\mathbf\nF_r$-coefficients on the reduced proper curve, which hold by hypothesis, since by [lemma-weil-pbc-eight-curve-devissage] (the five\nlemma on the two long exact cohomology sequences, linked by the pullback maps)\n$\\mathcal C_7$ passes from the outer terms of a short exact sequence to the\nmiddle term. The reduction step is compatible with the field extension,\nbecause $(C_{\\mathrm{red}})_{k'}\\to C_{k'}$ is again a universal\nhomeomorphism.",
     "uses": [
      "lemma-weil-pbc-curve-filtered-cohomology",
      "lemma-weil-pbc-eight-curve-devissage"
@@ -168,6 +198,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

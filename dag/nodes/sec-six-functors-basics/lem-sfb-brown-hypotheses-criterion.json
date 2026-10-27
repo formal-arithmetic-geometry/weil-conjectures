@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-brown-hypotheses-criterion",
+ "kind": "statement",
+ "title": "Brown hypotheses are equivalent to the geometric thickness, size and compactness inputs",
+ "statement": "For any scheme X and any commutative condensed coefficient ring Λ, put S = Dctf(X,Λ) and L = Loc(S) as in [sk-def-localizing-closure], with all sizes and coproducts in the fixed universe. The following conditions are equivalent. (1) L is locally small, has its inherited triangulation, is replete and idempotent complete; S is triangulated, replete, retract-closed and essentially small; and there is a coproduct structure on L for which every small presentation G equivalent to S and every lift of its representatives into L consists of compact objects [def-pc-compact-object] and is a triangulated generating family [def-pc-generators]. (2) S is triangulated, replete, retract-closed and essentially small, and there is a coproduct structure on L for which every object of L lying in S is compact. This is a formal criterion and does not assert the compactness input over arbitrary fields.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-pc-compact-object",
+  "def-pc-generators"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: structural clauses, small representatives, compactness and generation"
+ },
+ "proof": [
+  {
+   "text": "Unpack the Brown bundle. Choose a small category equivalent to the essentially small constructible finite-Tor subcategory. Minimality places its representatives in the localizing closure. Apply the bundle to this presentation. Every constructible finite-Tor object is isomorphic to one representative by the unit of the equivalence, and the canonical direct-sum Hom map is conjugate under that isomorphism, so it too is compact. Retain thickness, smallness and the supplied coproduct structure.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conversely, apply the coefficient-independent structural theorem for local smallness, the inherited triangulation, isomorphism closure and split idempotents. For every small presentation of the constructible finite-Tor subcategory, the objectwise hypothesis gives compactness of its representatives. The representatives cover every object up to isomorphism, so localizingClosure_generatingFamily gives generation. Assemble precisely the Brown bundle, retaining the supplied coproduct structure and canonical inherited shifts. Reuse the actual triangulation and repleteness witnesses returned by the structural theorem directly in the bundle. The separate private intersection-localizing proof and one-way assembly helper are redundant and removed.",
+   "uses": [
+    "h1-brown-hypotheses-structural",
+    "lem-sfb-localizing-closure-generators"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "h1-brown-hypotheses-structural",
+  "lem-sfb-localizing-closure-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2; M1 reuses the structural witnesses directly and assembles compactness and generation in the reverse criterion proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible finite Tor amplitude complexes are compact in the localizing derived category of pro etale modules over a field",
+   "results": "8 hits about derived-category bounds and representatives; none states this Brown-bundle criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\"",
+   "results": "0 hits. Local source inspection finds the project compactness definition and coefficient-specific compactness theorems, but no equivalent Brown-bundle criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "BrownHypotheses|brownHypotheses|compactlyGenerates_of_isCompactObj",
+   "results": "No Mathlib search hits. Local rg finds the existing one-way private assembly, finite-field specialization and generic generation theorem in the item; these are used. No existing equivalence states the criterion.",
+   "date": "2026-10-24",
+   "verdict": "no existing criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-24",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraphs 1--2, separating the geometric inputs from the formal Brown assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.brownHypothesesFor_iff",
+  "statement": "theorem brownHypothesesFor_iff\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :\n    BrownHypothesesFor Λ X ↔\n      let S := constantModelBoundedConstructible Λ X ⊓\n        fun K ↦ DerivedCategory.finiteTorAmplitude _ K\n      S.IsTriangulated ∧ S.IsClosedUnderIsomorphisms ∧ S.IsStableUnderRetracts ∧\n        ObjectProperty.EssentiallySmall.{u + 1} S ∧\n        ∃ hSums : HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory,\n          letI := hSums\n          ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,\n            S K.obj → IsCompactObject K",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261024T190642-L-4180066",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

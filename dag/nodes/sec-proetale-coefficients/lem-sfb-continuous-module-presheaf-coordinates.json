@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-continuous-module-presheaf-coordinates",
+ "kind": "statement",
+ "title": "Continuous-module presheaf actions and finite coordinates",
+ "statement": "Let $R$ be a commutative topological ring, and work with profinite sets in a fixed universe large enough for its continuous-map groups [sk-def-sfb-condensed-ring]. Write $B(S)=C(S,R)$ with pointwise ring operations and precomposition restrictions. A sectionwise $B$-module presheaf means an abelian presheaf $P$ with a $B(S)$-module structure on each $P(S)$ such that $u^*(ax)=u^*(a)u^*(x)$ for every $u:T\\to S$; its morphisms are natural additive maps linear over every $B(S)$. Let $M$ be an $R$-module with continuous addition, negation and scalar multiplication. Then $P_M(S)=C(S,M)$, with precomposition restrictions, is such a presheaf for the action $(ah)(s)=a(s)h(s)$. With $\\otimes_p$ denoting objectwise $\\otimes_{\\mathbf Z}$, this action is equivalently a natural abelian-presheaf morphism\n$$\\beta_M:B\\otimes_pP_M\\longrightarrow P_M,\\qquad a\\otimes h\\longmapsto(s\\mapsto a(s)h(s)).$$\nFor the pointwise multiplication $\\mu^p$ of $B$ and unit $e^p(n)=n\\cdot1$, it satisfies $\\beta_M(e^p(n)\\otimes h)=nh$ and $\\beta_M(ab\\otimes h)=\\beta_M(a\\otimes\\beta_M(b\\otimes h))$, as equalities of the corresponding tensor-presheaf morphisms after the usual unitors and associators. Postcomposition by continuous $R$-linear maps defines an additive functor to sectionwise $B$-module presheaves; in particular $P_f\\beta_M=\\beta_N(\\mathrm{id}_B\\otimes_pP_f)$ and it preserves identities, composition and sums. For every finite family $(M_i)_{i\\in I}$, the module $\\prod_iM_i$ with product topology has continuous operations, and the maps\n$$P_{\\prod_iM_i}(S)\\longrightarrow\\prod_iP_{M_i}(S),\\quad h\\longmapsto(\\operatorname{pr}_i\\circ h)_i,\\qquad (h_i)_i\\longmapsto(s\\mapsto(h_i(s))_i)$$\nare inverse natural $B(S)$-linear bijections. With their coordinate projections they exhibit $P_{\\prod_iM_i}$ as a product of the $P_{M_i}$ in sectionwise $B$-module presheaves. The empty family gives the zero presheaf. For $M=R$ the presheaf is $B$ and $\\beta_R=\\mu^p$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "First two sentences of lem-sfb-subfield-flat.proof.md: continuous linear coordinates and inverse, before sheafification; extracted original steps 2, presheaf part of 4, coordinate-product part of 5 and presheaf normalization of 6."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "We use the point-site and the pointwise ring presheaf $B(S)=C(S,R)$ specified by [sk-def-sfb-condensed-ring], forgetting its sheaf condition. Here are the continuity checks for the module-valued sections. If $v:X\\to Y$ and $w:Y\\to Z$ are continuous, $(wv)^{-1}(U)=v^{-1}(w^{-1}(U))$ is open for every open $U\\subseteq Z$. If $v:X\\to Y$ and $w:X\\to Z$ are continuous, the inverse image of a basic rectangle under $(v,w)$ is $v^{-1}(U)\\cap w^{-1}(V)$, so $(v,w)$ is continuous. Consequently $h+k=+\\circ(h,k)$, $-h=(-)\\circ h$, and $ah=\\operatorname{act}\\circ(a,h)$ are continuous for $h,k:S\\to M$ and $a:S\\to R$. The constant zero map is continuous. Thus all the stated pointwise operations are well-defined; no separation, compact-open topology on a mapping space, or discreteness of $M$ is used.",
+   "uses": [
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "The abelian group and module axioms hold after evaluation at every $s\\in S$, since they are the corresponding axioms in $M$. For example, $((a+b)h)(s)=(a(s)+b(s))h(s)=a(s)h(s)+b(s)h(s)$ and $((ab)h)(s)=a(s)(b(s)h(s))$; the other distributivity, unit and zero identities are evaluated the same way. For a continuous $u:T\\to S$, define $u^*h=h\\circ u$, which is continuous by step 1. It is additive and satisfies $(u^*(ah))(t)=a(u(t))h(u(t))=((u^*a)(u^*h))(t)$. Also $\\mathrm{id}^*h=h$ and $v^*u^*h=h\\circ u\\circ v=(uv)^*h$. These are exactly the abelian-presheaf and semilinear restriction axioms in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-module-tensor-product] with scalar ring $\\mathbf Z$, regarding abelian groups as $\\mathbf Z$-modules. For abelian presheaves $A,P$, define $(A\\otimes_pP)(S)=A(S)\\otimes_{\\mathbf Z}P(S)$. Along $u:T\\to S$ its restriction is the unique additive map sending $a\\otimes x$ to $u^*a\\otimes u^*x$: the displayed pairing is additive in both variables, hence $\\mathbf Z$-bilinear. Identities and composites have those formulas on each pure tensor, and therefore on every element, since pure tensors generate. The same construction defines $f\\otimes_pg$ for natural additive maps $f,g$ by $a\\otimes x\\mapsto f(a)\\otimes g(x)$. Naturality, identities and composition of these maps are checked on pure tensors by the same generation statement. This constructs the tensor presheaves and maps used below, without imposing a sheaf condition.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "The pointwise pairing $B(S)\\times P_M(S)\\to P_M(S)$ is additive in both variables by step 2, so [def-weil-pbc-module-tensor-product] supplies a unique additive map $\\beta_{M,S}$ with $\\beta_{M,S}(a\\otimes h)(s)=a(s)h(s)$. This applies to ordinary algebraic tensor products: no continuity on a tensor product is requested. For $u:T\\to S$, the maps $u^*\\beta_{M,S}$ and $\\beta_{M,T}(u^*\\otimes u^*)$ agree on $a\\otimes h$, since their values at $t$ are both $a(u(t))h(u(t))$. Pure-tensor generation makes them equal. Thus the section maps assemble to the asserted natural abelian-presheaf morphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "For clarity, the usual tensor constraints in the statement have the following formulas on sections. The unit presheaf is constant $\\mathbf Z$, the left unitor sends $n\\otimes h$ to $nh$ with inverse $h\\mapsto1\\otimes h$, and the associator sends $(a\\otimes b)\\otimes h$ to $a\\otimes(b\\otimes h)$, with inverse given by reverse bracketing. Applying the universal property of [def-weil-pbc-module-tensor-product] in each variable defines these maps, since the formulas are $\\mathbf Z$-multilinear. Their composites are identities on generators and hence everywhere; they commute with restrictions by their formulas on generators. Likewise $e^p_S:\\mathbf Z\\to B(S)$ sends $n$ to the constant function $n1_R$, and $\\mu^p_S$ is induced by the biadditive pairing $(a,b)\\mapsto ab$. These are natural maps by evaluation and pure-tensor generation.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "On $n\\otimes h$, the composite $\\beta_M(e^p\\otimes\\mathrm{id})$ evaluates at $s$ to $(n1_R)h(s)=nh(s)$, which is the unitor formula in step 5. On $(a\\otimes b)\\otimes h$, the two associative-action composites evaluate to $(a(s)b(s))h(s)$ and $a(s)(b(s)h(s))$, equal by the module axiom. The iterated pure tensors generate the iterated tensor products by applying the generation assertion of [def-weil-pbc-module-tensor-product] twice. These checks therefore establish the unit and associativity equalities as equalities of tensor-presheaf morphisms, with precisely the associator and unitor specified in step 5.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "This also explains the word “equivalently”. Given such a natural additive tensor action satisfying the unit and associativity identities, set $ax=\\beta_S(a\\otimes x)$. The tensor pairing and the additivity of $\\beta_S$ give both distributivity identities; its unit identity at $n=1$ gives $1x=x$, and associativity gives $(ab)x=a(bx)$. These are the module axioms. Its naturality gives $u^*(ax)=u^*a\\,u^*x$. Conversely, any sectionwise module action with that restriction law gives the tensor map by step 4 and its two identities by step 6. The constructions are inverse, since their values agree on every $a\\otimes x$, which determines the additive tensor map by [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "Let $f:M\\to N$ be continuous and $R$-linear. Define $P_f(S)(h)=f\\circ h$, continuous by step 1. At $s$ it satisfies $f(h(s)+k(s))=f(h(s))+f(k(s))$ and $f(a(s)h(s))=a(s)f(h(s))$, so it is additive and $B(S)$-linear. Naturality is the identity $f\\circ(h\\circ u)=(f\\circ h)\\circ u$. The maps for identities and composites have respectively the values $h(s)$ and $g(f(h(s)))$. The sum of continuous linear maps is continuous by the pairing and composition checks in step 1, and $P_{f+g}(h)(s)=f(h(s))+g(h(s))=(P_f+P_g)(h)(s)$. Thus the construction is an additive functor. Finally $P_f\\beta_M$ and $\\beta_N(\\mathrm{id}_B\\otimes_pP_f)$ both send $a\\otimes h$ to $s\\mapsto a(s)f(h(s))$, hence agree by [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "Give $L=\\prod_{i\\in I}M_i$ its coordinatewise $R$-module operations and product topology. A map $q:X\\to L$ is continuous exactly when every $\\operatorname{pr}_iq$ is continuous: necessity follows because the projections pull opens back to open cylinders; for sufficiency the inverse image of the subbasic open cylinder $\\operatorname{pr}_i^{-1}(U)$ is $(\\operatorname{pr}_iq)^{-1}(U)$, and inverse images preserve arbitrary unions and finite intersections. Apply this criterion to addition, negation and the action on $L$. Their $i$th coordinates are $(x,y)\\mapsto x_i+y_i$, $x\\mapsto-x_i$, and $(r,x)\\mapsto rx_i$. Each is a continuous operation on $M_i$ composed with the continuous projections and pairings of step 1. Thus $L$ has all the required continuous operations. This argument works for the stated finite $I$, including $I=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "The coordinate-continuity criterion of step 9 proves that $\\Psi_S((h_i)_i)(s)=(h_i(s))_i$ is continuous; conversely the components of every $h:S\\to L$ are continuous. The displayed forward map $\\Phi_S(h)=(\\operatorname{pr}_ih)_i$ and $\\Psi_S$ are inverse because their composites evaluated at each $i,s$ are $h(s)_i$ and $h_i(s)$. They are additive and $B(S)$-linear: their $i$th coordinates on $h+k$ and $ah$ are $h_i+k_i$ and $ah_i$. For $u:T\\to S$, both orders of restriction and $\\Phi$ send $h$ to $(t\\mapsto h(u(t))_i)_i$; both orders with $\\Psi$ send $(h_i)$ to $t\\mapsto(h_i(u(t)))_i$. Thus these are the specified inverse natural linear bijections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "The coordinate projections $L\\to M_i$ are continuous and $R$-linear, so step 8 makes their postcompositions morphisms $P_L\\to P_{M_i}$. To check the product universal property in the specified category, let $Q$ be any sectionwise $B$-module presheaf and let $q_i:Q\\to P_{M_i}$ be morphisms. Define $q_S(x)=\\Psi_S((q_{i,S}(x))_i)$. It is additive and $B(S)$-linear by step 10. For $u:T\\to S$, its $i$th coordinate on $u^*x$ is $q_{i,T}(u^*x)=u^*q_{i,S}(x)$, which proves naturality. Its composite with the $i$th projection is $q_i$. Any other cone factor has these same coordinates on every $x$, hence is equal to $q$. This proves the product assertion directly, rather than assuming a limit-creation theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  },
+  {
+   "text": "For the empty family, $L$ has one element, its zero. There is exactly one continuous map $S\\to L$ for every $S$, so $P_L(S)$ is the zero group with its unique scalar action. This is the zero presheaf (the same conclusion holds for each $P_M(\\varnothing)$). For $M=R$ with its regular module structure, $P_R(S)=C(S,R)=B(S)$ with identical restrictions and operations. The pairing defining $\\beta_R$ is $(a,h)\\mapsto ah$, exactly the pairing defining $\\mu^p$. Their equality follows from uniqueness in [def-weil-pbc-module-tensor-product] at each $S$ and hence as natural transformations.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: continuous linear coordinates and their inverse, before sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Expanded the continuous-coordinate assertion in the first two sentences into presheaf, tensor-action, functoriality, and product-cone checks; tensor universal property is Stacks Tag 00CX (algebra.tex, lemma-tensor-product)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions on profinite sets with values in a topological module form an abelian sheaf with natural pointwise module actions and additive postcomposition maps",
+   "results": "8 hits: LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functorToPresheaves, CondensedMod.ofSheafProfinite, Condensed.profiniteFree, instAbelianCondensedMod, CondensedMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isAddCommGroup; note: ; digest 29063f5872ad786c",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete presheaf construction: ContinuousMap.module′ (Topology/ContinuousMap/Algebra.lean:826) gives the module on one section group and ContinuousMap.piEquiv (Topology/ContinuousMap/Basic.lean:261) the underlying coordinate equivalence. Neither gives the variable-ring presheaf functor, natural tensor action, and product cone with these formulas. LocallyConstant functors concern fixed scalars and discrete targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, Module",
+   "results": "12 hits: Path.eqOn_extend_segment, ContinuousMap.instSMul', ContinuousMap.module, ContinuousMap.module', ContinuousLinearMap.const, ContinuousMap.evalCLM, ContinuousMap.coeFnLinearMap, ContinuousMap.coeFnCLM; note: ; digest 81bf1070febfe99d",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete presheaf construction: ContinuousMap.module′ (Topology/ContinuousMap/Algebra.lean:826) gives the module on one section group and ContinuousMap.piEquiv (Topology/ContinuousMap/Basic.lean:261) the underlying coordinate equivalence. Neither gives the variable-ring presheaf functor, natural tensor action, and product cone with these formulas. LocallyConstant functors concern fixed scalars and discrete targets."
+  },
+  {
+   "tool": "grep",
+   "query": "module\\x27|comp.*[Ll]inear|pi.*[Ee]quiv|pi.*[Hh]omeomorph|ContinuousMap.pi",
+   "results": "17 hits: Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/Basic.lean, Mathlib/Topology/ContinuousMap/Compact.lean, Mathlib/Topology/ContinuousMap/Compact.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean; note: ; digest dc0d77e282b17c91; subdirectory Topology/ContinuousMap",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete presheaf construction: ContinuousMap.module′ (Topology/ContinuousMap/Algebra.lean:826) gives the module on one section group and ContinuousMap.piEquiv (Topology/ContinuousMap/Basic.lean:261) the underlying coordinate equivalence. Neither gives the variable-ring presheaf functor, natural tensor action, and product cone with these formulas. LocallyConstant functors concern fixed scalars and discrete targets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous scalar functions act pointwise on continuous module valued functions, naturally in profinite spaces and continuous linear maps and compatibly with products",
+   "results": "8 hits: ContinuousMap.instSMul', ContinuousMap.instSMul, ContinuousMap.smul_apply', ContinuousMap.instContinuousSMul, ContinuousMap.coe_smul', ContinuousLinearMap.continuousConstSMul, ContinuousMap.instContinuousConstSMul, ContinuousMap.instSMul.congr_simp; note: ; digest c6ad431f29e64720",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete presheaf construction: ContinuousMap.module′ (Topology/ContinuousMap/Algebra.lean:826) gives the module on one section group and ContinuousMap.piEquiv (Topology/ContinuousMap/Basic.lean:261) the underlying coordinate equivalence. Neither gives the variable-ring presheaf functor, natural tensor action, and product cone with these formulas. LocallyConstant functors concern fixed scalars and discrete targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological modules map additively to presheaves of modules over the ring presheaf of continuous scalar functions; pointwise tensor action and coordinatewise finite products are natural",
+   "results": "8 hits: CondensedMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves_map_app, CompHausLike.LocallyConstantModule.functor_map_val, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, LightCondMod.LocallyConstant.functorToPresheaves, PresheafOfModules.ofPresheaf_map; note: ; digest ce863c71f24b2a77",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete presheaf construction: ContinuousMap.module′ (Topology/ContinuousMap/Algebra.lean:826) gives the module on one section group and ContinuousMap.piEquiv (Topology/ContinuousMap/Basic.lean:261) the underlying coordinate equivalence. Neither gives the variable-ring presheaf functor, natural tensor action, and product cone with these formulas. LocallyConstant functors concern fixed scalars and discrete targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions into a topological module form a presheaf of modules over continuous scalar functions, with a natural integer tensor action, additive postcomposition, and finite products",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, ContinuousMap.module', CompHausLike.LocallyConstantModule.functorToPresheaves, TopCat.commRingYoneda, ContinuousMap.module, CondensedMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier; note: ; digest edc8965ec66d7a43",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement. Source read: ContinuousMap.module′ at Mathlib/Topology/ContinuousMap/Algebra.lean:826 supplies the pointwise section module only; ContinuousMap.piEquiv at Topology/ContinuousMap/Basic.lean:261 the underlying product equivalence. CompHausLike.LocallyConstantModule.functorToPresheaves at Condensed/Discrete/Module.lean:42 uses locally constant maps and fixed scalars, not the continuous variable-ring tensor-action package."
+  },
+  {
+   "tool": "grep",
+   "query": "module.|piEquiv|compRightLinearMap|smul_apply",
+   "results": "25 hits: Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean; note: ; digest da42ce850035ae1e; subdirectory Topology/ContinuousMap",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement. Source read: ContinuousMap.module′ at Mathlib/Topology/ContinuousMap/Algebra.lean:826 supplies the pointwise section module only; ContinuousMap.piEquiv at Topology/ContinuousMap/Basic.lean:261 the underlying product equivalence. CompHausLike.LocallyConstantModule.functorToPresheaves at Condensed/Discrete/Module.lean:42 uses locally constant maps and fixed scalars, not the continuous variable-ring tensor-action package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous scalar functions act on continuous functions into topological modules and the resulting presheaf functor preserves finite products",
+   "results": "8 hits: ContinuousMap.instSMul', ContinuousMap.instContinuousSMul, ContinuousMap.instSMul, ContinuousMap.instContinuousConstSMul, ContinuousLinearMap.continuousSMul, ContinuousMap.smul_apply', ContinuousMap.instPreservesFiniteProductsOppositeTopCatYonedaPresheaf', ContinuousSMul; note: ; digest 1cedd3cb868c8221",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement. Source read: ContinuousMap.module′ at Mathlib/Topology/ContinuousMap/Algebra.lean:826 supplies the pointwise section module only; ContinuousMap.piEquiv at Topology/ContinuousMap/Basic.lean:261 the underlying product equivalence. CompHausLike.LocallyConstantModule.functorToPresheaves at Condensed/Discrete/Module.lean:42 uses locally constant maps and fixed scalars, not the continuous variable-ring tensor-action package."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, Module",
+   "results": "12 hits: Path.eqOn_extend_segment, ContinuousMap.instSMul', ContinuousMap.module, ContinuousMap.module', ContinuousLinearMap.const, ContinuousMap.evalCLM, ContinuousMap.coeFnLinearMap, ContinuousMap.coeFnCLM; note: ; digest 81bf1070febfe99d",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement. Source read: ContinuousMap.module′ at Mathlib/Topology/ContinuousMap/Algebra.lean:826 supplies the pointwise section module only; ContinuousMap.piEquiv at Topology/ContinuousMap/Basic.lean:261 the underlying product equivalence. CompHausLike.LocallyConstantModule.functorToPresheaves at Condensed/Discrete/Module.lean:42 uses locally constant maps and fixed scalars, not the continuous variable-ring tensor-action package."
+  },
+  {
+   "tool": "grep",
+   "query": "instance module|def piEquiv|def compRightLinearMap|theorem smul_apply",
+   "results": "7 hits: Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/Basic.lean, Mathlib/Topology/ContinuousMap/Algebra.lean, Mathlib/Topology/ContinuousMap/Algebra.lean, Mathlib/Topology/ContinuousMap/Algebra.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/Bounded/Basic.lean; note: ; digest 25d892661ec5f33a; subdirectory Topology/ContinuousMap",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement. Source read: ContinuousMap.module′ at Mathlib/Topology/ContinuousMap/Algebra.lean:826 supplies the pointwise section module only; ContinuousMap.piEquiv at Topology/ContinuousMap/Basic.lean:261 the underlying product equivalence. CompHausLike.LocallyConstantModule.functorToPresheaves at Condensed/Discrete/Module.lean:42 uses locally constant maps and fixed scalars, not the continuous variable-ring tensor-action package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological modules give an additive functor to modules over the ring presheaf S maps to C(S,R), naturally preserving finite products and its objectwise tensor module action",
+   "results": "8 hits: CondensedMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, CondensedMod, PresheafOfModules.unit, Condensed.free, CondensedMod.LocallyConstant.functor, PresheafOfModules.ofPresheaf; note: ; digest d6a7d5b9e592c8fa",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete statement. Source read: ContinuousMap.module′ at Mathlib/Topology/ContinuousMap/Algebra.lean:826 supplies the pointwise section module only; ContinuousMap.piEquiv at Topology/ContinuousMap/Basic.lean:261 the underlying product equivalence. CompHausLike.LocallyConstantModule.functorToPresheaves at Condensed/Discrete/Module.lean:42 uses locally constant maps and fixed scalars, not the continuous variable-ring tensor-action package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-topological-module-condensation",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-subfield-flat",
+   "place": "First two sentences of lem-sfb-subfield-flat.proof.md: continuous linear coordinates and inverse, before sheafification; extracted original steps 2, presheaf part of 4, coordinate-product part of 5 and presheaf normalization of 6.",
+   "via": [
+    "lem-sfb-topological-module-condensation",
+    "lem-sfb-condensed-subfield-basis"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-continuous-module-presheaf-coordinates",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Gave twelve explicit proof steps, including open-set continuity checks, objectwise tensor construction, tensor constraints, the converse action encoding, additive functoriality, and the product universal property for arbitrary test presheaves. Reused the existing Mathlib tensor-product node (Stacks 00CX); every other check is written out as an elementary consequence of the definitions. No new nodes or attachments.",
+  "blueprint": "Realizes the first two sentences of lem-sfb-subfield-flat.proof.md, namely continuous coordinate functions and the inverse coordinate assembly before sheafification, through the existing ancestor chain lem-sfb-topological-module-condensation and lem-sfb-condensed-subfield-basis. The finite-free condensed and pulled-back assertions remain with those parents."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-1d9f3331f",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-1d9f3331f (reviewer sub-agent of L); spot-checked: I read the item in full, including all 12 steps, and found no faults, so no fixes were written. The delivery makes no new nodes. The statement is byte-identical to the live and side-live copies, where the item is still unsplit with no repair note, so this is its first split and nothing has superseded it. The only stmt_dep added is def-weil-pbc-module-tensor-product, which the objectwise ⊗_Z in the statement needs. proof_deps is exactly the union of the step uses: sk-def-sfb-condensed-ring and the tensor Mathlib leaf. The item uses no statement from another unit, has no cycle and cites no SGA. Source: the first two sentences of main-20261015 lem-sfb-subfield-flat.proof.md, which give continuous coordinates and their inverse, and unit sk-prop-sfb-cartesian-coefficients step 3. The item supplies the presheaf part of that step and leaves sheafification to the parent lem-sfb-topological-module-condensation. Each clause the parent uses is a clause of the item: β_M, the unit and associativity identities, the additive postcomposition functor, Φ/Ψ, the empty family, P_R=B and β_R=μ^p. Step checks: (1) continuity uses rectangles and composites with the jointly continuous action. (2) The module axioms are checked pointwise, and restriction along u is semilinear. (3)-(6) The tensor presheaf, f⊗g, β, the unitor (n⊗h↦nh ↦1⊗nh=n⊗h), the associator, and the unit and associativity identities are each checked on pure tensors and extended by the leaf's generation and uniqueness clauses. (7) The equivalence between the β description and the action description is proved in both directions. (8) Postcomposition is B(S)-linear, natural and additive, and P_fβ_M=β_N(id⊗P_f). (9)-(11) The product-topology criterion gives Φ and Ψ, and step 11 proves the product universal property directly against an arbitrary sectionwise module presheaf Q. (12) The empty family gives the zero presheaf, and M=R gives μ^p. Edge cases tested: S=∅, I=∅, a singleton I, R=0 and M=R. The product clause even holds for infinite I. Duplicates checked and ruled out: lem-sfb-continuous-abelian-profinite-sheaf (weaker: no action, tensor or product), def-sfb-continuous-map-condensed-ring, def-sfb-bundled-continuous-scalar-ring, def-sfb-continuous-representation-condensation (a different object) and lem-sfb-condensed-subfield-basis (an ancestor). Mathlib has only components (ContinuousMap.module', piEquiv), so the item is not a leaf. Steps marked elementary while citing the tensor leaf are applications of its universal property to explicit formulas, which I accept."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ContinuousModulePresheafCoordinates",
+  "declaration": "Profinite.continuousModulePresheaf_coordinates",
+  "declarations": [
+   "Profinite.continuousModulePresheaf_coordinates",
+   "Profinite.continuousModulePresheaf_action_iff"
+  ],
+  "file": "lean/Sheaf/Topology/ContinuousModulePresheafCoordinates.lean",
+  "statement": "theorem continuousModulePresheaf_coordinates : ∃ (F : TopModuleCat.{u} R ⥤ PresheafOfModules.{u + 1} (continuousMapRingPresheafOfUniverse.{u, u} R)), ∃ (e : ∀ (M : TopModuleCat.{u} R) (S : Profinite.{u}), (F.obj M).obj (op S) ≃+ C(S, M)), ∃ (β : ∀ (M : TopModuleCat.{u} R), (continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) ⊗ (F.obj M).presheaf ⟶ (F.obj M).presheaf), F.Additive ∧ (∀ (M : TopModuleCat.{u} R) (S T : Profinite.{u}) (q : T ⟶ S) (h : (F.obj M).obj (op S)), e M T ((F.obj M).map q.op h) = (e M S h).comp q.hom.hom) ∧ (∀ (M : TopModuleCat.{u} R) (S : Profinite.{u}) (a : C(S, R)) (h : (F.obj M).obj (op S)) (s : S), e M S ((ULift.up a : (continuousMapRingPresheafOfUniverse R).obj (op S)) • h) s = a s • e M S h s) ∧ (∀ (M : TopModuleCat.{u} R) (S : Profinite.{u}) (a : (continuousMapRingPresheafOfUniverse R).obj (op S)) (h : (F.obj M).obj (op S)), (β M).app (op S) (TensorProduct.tmul ℤ a h) = a • h) ∧ (∀ (M : TopModuleCat.{u} R) (g : (continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) ⊗ (F.obj M).presheaf ⟶ (F.obj M).presheaf), (∀ (S : Profinite.{u}) (a : (continuousMapRingPresheafOfUniverse R).obj (op S)) (h : (F.obj M).obj (op S)), g.app (op S) (TensorProduct.tmul ℤ a h) = a • h) → g = β M) ∧ (∀ (M : TopModuleCat.{u} R), (η[continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab] ▷ (F.obj M).presheaf) ≫ β M = (λ_ (F.obj M).presheaf).hom) ∧ (∀ (M : TopModuleCat.{u} R), (μ[continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab] ▷ (F.obj M).presheaf) ≫ β M = (α_ (continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) (continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) (F.obj M).presheaf).hom ≫ ((continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) ◁ β M) ≫ β M) ∧ (∀ (M N : TopModuleCat.{u} R) (f : M ⟶ N) (S : Profinite.{u}) (h : (F.obj M).obj (op S)) (s : S), e N S ((F.map f).app (op S) h) s = f.hom (e M S h s)) ∧ (∀ (M N : TopModuleCat.{u} R) (f : M ⟶ N), β M ≫ (PresheafOfModules.toPresheaf (continuousMapRingPresheafOfUniverse R)).map (F.map f) = ((continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) ◁ (PresheafOfModules.toPresheaf (continuousMapRingPresheafOfUniverse R)).map (F.map f)) ≫ β N) ∧ (∀ (I : Type u) [Finite I] (M : I → TopModuleCat.{u} R), ∃ (c : ∀ (S : Profinite.{u}), (F.obj (TopModuleCat.of R (∀ i, M i))).obj (op S) ≃ₗ[ (continuousMapRingPresheafOfUniverse R).obj (op S)] (∀ i, (F.obj (M i)).obj (op S))), (∀ (S : Profinite.{u}) (h : (F.obj (TopModuleCat.of R (∀ i, M i))).obj (op S)) (i : I) (s : S), e (M i) S (c S h i) s = e (TopModuleCat.of R (∀ i, M i)) S h s i) ∧ (∀ (S : Profinite.{u}) (h : ∀ i, (F.obj (M i)).obj (op S)) (s : S) (i : I), e (TopModuleCat.of R (∀ i, M i)) S ((c S).symm h) s i = e (M i) S (h i) s) ∧ (∀ (S T : Profinite.{u}) (q : T ⟶ S) (h : (F.obj (TopModuleCat.of R (∀ i, M i))).obj (op S)) (i : I), c T ((F.obj (TopModuleCat.of R (∀ i, M i))).map q.op h) i = (F.obj (M i)).map q.op (c S h i)) ∧ (∀ (i : I) (S : Profinite.{u}) (h : (F.obj (TopModuleCat.of R (∀ i, M i))).obj (op S)), (F.map (TopModuleCat.ofHom (ContinuousLinearMap.proj i))).app (op S) h = c S h i) ∧ Nonempty (IsLimit (Fan.mk (F.obj (TopModuleCat.of R (∀ i, M i))) (fun i ↦ F.map (TopModuleCat.ofHom (ContinuousLinearMap.proj i)))))) ∧ (∀ (I : Type u) [IsEmpty I] (M : I → TopModuleCat.{u} R), IsZero (F.obj (TopModuleCat.of R (∀ i, M i)))) ∧ (∃ (r : F.obj (TopModuleCat.of R R) ≅ PresheafOfModules.unit (continuousMapRingPresheafOfUniverse R)), (∀ (S : Profinite.{u}) (h : (F.obj (TopModuleCat.of R R)).obj (op S)), ((r.hom.app (op S)) h).down = e (TopModuleCat.of R R) S h) ∧ β (TopModuleCat.of R R) ≫ (PresheafOfModules.toPresheaf (continuousMapRingPresheafOfUniverse R)).map r.hom = ((continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab) ◁ (PresheafOfModules.toPresheaf (continuousMapRingPresheafOfUniverse R)).map r.hom) ≫ μ[continuousMapRingPresheafOfUniverse R ⋙ forget₂ RingCat Ab])",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8de00d946",
+  "group": "N5",
+  "result": "pass",
+  "note": "Node clauses all rendered: R comm top ring (Type u, Profinite.{u}, sections u+1 = CondensedRing convention, matches citer lem-sfb-topological-module-condensation); B = recorded continuousMapRingPresheafOfUniverse.{u,u}; sectionwise modules = PresheafOfModules B; F pinned by e ≃+ C(S,M) with restriction/action/postcomposition formulas; β via objectwise ℤ-tensor with pure-tensor formula + uniqueness; unit/assoc as morphism equalities (checked true on pure tensors); action_iff true both ways; F.Additive + naturality square P_fβ_M=β_N(id⊗P_f); finite products: B(S)-linear c with both coordinate formulas, naturality, proj identification, IsLimit Fan in PresheafOfModules; IsEmpty → IsZero; M=R: r to unit B pinned by .down = e, β_R conjugates to μ. Edge cases S=∅, I=∅/singleton, R=0, non-Hausdorff M, n≤0 ok. No defs/hollowness, sorry only, docstrings with source+blueprint+steps, statement verbatim, lines ≤100. Advisories: continuousMapRingPresheafOfUniverse owner def-sfb-continuous-map-condensed-ring is only transitively a stmt_dep (via sk-def-sfb-condensed-ring); possibly redundant imports; second reading is an author self-audit. No compile (no change); worker reports clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T071236-L-156915",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Profinite.continuousModulePresheaf_action_iff",
+   "Profinite.continuousModulePresheaf_coordinates"
+  ],
+  "sorry_after": []
+ }
+}

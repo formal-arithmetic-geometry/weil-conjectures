@@ -1,0 +1,115 @@
+{
+ "id": "def-pur-completed-coefficient-ordinary-strict-image-data",
+ "kind": "definition",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Ordinary strict coefficient-system direct-image data",
+ "statement": "For prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme morphism $f:X\\to Y$ and coefficient comparison data $C$ of [def-pur-completed-pushforward-models], OrdinaryStrictImageData consists of an additive functor $F$ from the strict coefficient systems on $X$ to those on $Y$, the evaluation isomorphisms $F e_{Y,n}\\,\\mathrm{model}_{Y,n}\\cong e_{X,n}\\,\\mathrm{model}_{X,n}\\,f_{n,*}$ which are identity on sections, and an ordinary natural isomorphism $F C_Y.\\mathrm{systemRestriction}\\cong C_X.\\mathrm{systemRestriction}\\,f_*^{\\mathbf N^{op}}$ which is identity on underlying sections in each degree. It includes neither a derived image nor a derived comparison or acyclicity assertion. The site and coefficient universes are independent.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; ordinary sheaf-module pushforward: literature/stacks-project/sites-modules.tex, lemma-pushforward-module and definition-pushforward; completed coefficient compatibility in Stacks 0D6E."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pushforward-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right derived direct image of module sheaves commutes with restriction of scalars on strict inverse systems",
+   "results": "Eight hits: ordinary presheaf pushforward and restriction, ModuleCat restriction adjunction and limit preservation. None states the section-normalized strict-system construction or acyclicity in the completed coefficient presentation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of sheaves of modules on strict inverse systems with varying quotient coefficients commutes with restriction of scalars",
+   "results": "Eight hits including SheafOfModules.restrictScalars, its object and map equations, and localCohomology.diagram. These provide ordinary APIs, not the completed strict-system transport.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedUnique",
+   "results": "Service reports unknown identifier; local Mathlib contains the declaration.",
+   "date": "2026-10-27",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCoefficientComparison|totalDerivedData|strictRingSystem_isGrothendieckAbelian|coefficientSystemEquivalence",
+   "results": "Local Sheaf sources provide a proved generic normalized derived square, total derived data for additive functors, and Grothendieck strict-system categories. WeilConjectures and Mathlib provide the underlying sheaf pushforward and scalar restriction APIs. None specializes the ordinary section identities or restricted-system acyclicity to CompletedCoefficientPushforwardModels. The generic derived square is reused in the parent.",
+   "date": "2026-10-27",
+   "verdict": "partial match; reuse generic derived construction"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientStrictImage",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1: integral derived adjunction; completed coefficient transport, strict finite-reduction towers and direct image. Ordinary strict-system construction and restricted-system acyclicity, before the derived comparison.",
+   "via": [
+    "lem-pur-completed-coefficient-strict-image",
+    "lem-pur-completed-coefficient-direct-image-diagrams",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientOrdinaryStrictImage",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientOrdinaryStrictImage.lean",
+  "declaration": "WeilConjectures.CompletedCoefficientPushforward.OrdinaryStrictImageData",
+  "statement": "structure OrdinaryStrictImageData {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (C : CoefficientComparisonData l E f)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T222747-L-692634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T012909-L-2344760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.CompletedCoefficientPushforward.ordinaryStrictImage_exists"
+  ],
+  "sorry_after": []
+ }
+}

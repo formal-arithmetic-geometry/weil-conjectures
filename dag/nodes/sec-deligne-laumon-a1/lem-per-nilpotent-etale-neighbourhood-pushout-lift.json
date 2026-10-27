@@ -1,0 +1,315 @@
+{
+ "id": "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+ "kind": "statement",
+ "title": "Nilpotent lifting of an etale neighbourhood pushout",
+ "statement": "Let $A$ be a commutative Noetherian ring, $I,J\\subseteq A$ ideals with $J^N=0$ for some $N\\geq1$, and $A_0=A/J$ [def-weil-pbc-noetherian-ring, def-weil-pbc-algebra-hom-quotient]. Let $C$ be a finite type commutative $A$-algebra and $B_0$ a finite type commutative $A_0$-algebra [def-weil-pbc-finite-type-algebra]. Put $C_0=C/JC$. Suppose $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ is etale over $\\operatorname{Spec}A\\setminus V(I)$, $\\operatorname{Spec}B_0\\to\\operatorname{Spec}A_0$ is etale over $\\operatorname{Spec}A_0\\setminus V(IA_0)$ [def-weil-affine-spectrum, def-weil-etale-morphism], and $h_0:B_0\\to C_0$ is an etale $A_0$-algebra map inducing an isomorphism $B_0/IB_0\\xrightarrow{\\sim}C_0/IC_0$. Then there exist a finite type commutative $A$-algebra $B$, an etale $A$-algebra map $h:B\\to C$, and an $A_0$-algebra isomorphism $\\beta:B/JB\\xrightarrow{\\sim}B_0$ such that the reduction of $h$ equals $h_0\\circ\\beta$ and $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale over $\\operatorname{Spec}A\\setminus V(I)$.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0ALT (lemma-lift-approximation), full statement and displayed diagrams; nilpotent ideal J is in the base ring A."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}A$, $X_0=\\operatorname{Spec}A_0$, $Z=\\operatorname{Spec}C$, $Z_0=\\operatorname{Spec}C_0$ and $Y_0=\\operatorname{Spec}B_0$. Let $U=X\\setminus V(I)$, and put $U_0=U\\times_XX_0$, $W=Z\\times_XU$, $W_0=Z_0\\times_XU$ and $V_0=Y_0\\times_{X_0}U_0$. The quotient base-change statement identifies $Z\\times_XX_0=Z_0$. Choose $N\\ge1$ with $J^N=0$. Every prime contains $J$, so $X_0\\to X$ is a thickening; its base change $U_0\\to U$ is again a thickening. The square $W_0\\to Z_0$, $W_0\\to V_0$, $Z_0\\to Y_0$, $V_0\\to Y_0$ is cartesian, its lower map is open, and its right map is etale by the hypothesis on $h_0$. The isomorphism $B_0/IB_0\\simeq C_0/IC_0$ says that $Z_0\\to Y_0$ is an isomorphism over the closed subscheme cut out by $I$, hence also over its reduced closed complement of $V_0$. Thus it is an elementary distinguished square with exactly the conditions stated in the universal-pushout lemma.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-sfb-space-thickening-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT (lemma-lift-approximation), setup through the first elementary distinguished square; quotient base change as cited."
+   }
+  },
+  {
+   "text": "By the hypotheses, $W\\to U$ and $V_0\\to U_0$ are etale. Apply thickening invariance of etale scheme objects to $U_0\\hookrightarrow U$ to choose an etale scheme $V\\to U$ with a specified isomorphism $V\\times_UU_0\\simeq V_0$. The same equivalence is fully faithful on $W,V$: the given $U_0$-map $W_0\\to V_0$ lifts uniquely to a $U$-map $q:W\\to V$. Since both source and target are etale over $U$, etale cancellation makes $q$ etale. Regard $V$ as an $X$-scheme through the open subscheme $U$.",
+   "uses": [
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT, topological invariance paragraph; etale.tex Tag 039R (theorem-remarkable-equivalence), also spaces-more-morphisms.tex Tag 05ZS (lemma-thickening-equivalence)."
+   }
+  },
+  {
+   "text": "The affine-source separatedness lemma makes $Z_0\\to Y_0$ separated. Since $W_0=Z_0\\times_{Y_0}V_0$, separated base change makes $q_0:W_0\\to V_0$ separated. The maps $W_0\\hookrightarrow W$ and $V_0\\hookrightarrow V$ are base changes of the thickening $U_0\\hookrightarrow U$. Consequently the thickening invariance of separatedness applies to the morphism of thickenings $(q_0,q)$ and proves that $q$ is separated. No affineness of the punctured opens $W_0,V_0$ and no flatness of $Z\\to X$ is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-space-thickening-topological-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT, separatedness sentence; spaces-more-morphisms.tex Tag 09ZY (lemma-thicken-property-morphisms), part (6)."
+   }
+  },
+  {
+   "text": "Apply the open/separated-etale pushout theorem over $X$ to $W\\hookrightarrow Z$ and $q:W\\to V$. It gives an algebraic space $Y/X$ with $V\\hookrightarrow Y$ open, $a:Z\\to Y$ etale, $Z\\times_YV=W$, and an isomorphism over the reduced complement. Apply the universal-pushout lemma to its base change $Y_{X_0}=Y\\times_XX_0\\to Y$. Its three other vertices are $Z_0,V_0,W_0$, using the specified lift isomorphism. The square with fourth vertex $Y_0$ from Step 1 is also a pushout by the same lemma. The two universal properties give mutually inverse maps $Y_{X_0}\\rightleftarrows Y_0$, commuting with the maps from $Z_0$ and $V_0$: their composites restrict to the identity on both legs and so are identities by uniqueness. In particular $a$ reduces to the given map $\\operatorname{Spec}h_0$ under this specified isomorphism.",
+   "uses": [
+    "lem-per-open-separated-etale-pushout",
+    "lem-per-elementary-distinguished-universal-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT, pushout construction and comparison after base change; spaces-pushouts.tex Tags 0DVJ and 0DVI; spaces-perfect.tex Tag 08GN."
+   }
+  },
+  {
+   "text": "Thickening base change makes $Y_{X_0}\\hookrightarrow Y$ a representable closed immersion inducing a homeomorphism. Its source is the affine scheme $Y_0$ by Step 4. For every scheme test $T\\to Y$ its pullback is a closed immersion of schemes, hence finite by the closed-immersion finiteness lemma. It is also surjective on point classes by the thickening assertion. Thus the finite-surjective affine-source descent lemma for algebraic spaces applies and shows that $Y$ is represented by an affine scheme. Write $Y=\\operatorname{Spec}B$ over $X$.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT, affineness sentence; spaces-limits.tex Tag 07VS (lemma-affine), the finite closed-immersion case of the cited Tag 07VT (proposition-affine)."
+   }
+  },
+  {
+   "text": "Affine contravariance gives $A\\to B$ and $h:B\\to C$. The quotient base-change formula and the isomorphism of Step 4 give a specified $A_0$-algebra isomorphism $\\beta:B/JB\\simeq B_0$. Commutation on the $Z_0$ leg says exactly $\\overline h=h_0\\circ\\beta$. Since $a:Z\\to Y$ is etale and both spaces are now schemes, $h$ is an etale algebra map. To prove finite type, choose finitely many $A_0$-algebra generators of $B_0$ and lift them via $\\beta$ to $b_1,\\ldots,b_r\\in B$. Let $D=A[b_1,\\ldots,b_r]\\subseteq B$. Surjectivity modulo $JB$ gives $B=D+JB$. For every $n\\ge1$, this implies $J^nB\\subseteq D+J^{n+1}B$, since the coefficients in $J^n\\subseteq A$ preserve $D$. Induction gives $B=D+J^nB$ for every $n$, and $J^NB=0$ gives $B=D$. This proves finite type, including an empty generator list.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "def-weil-etale-morphism",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT, final sentence, with finite-generation lifting through the nilpotent base ideal written out."
+   }
+  },
+  {
+   "text": "Finally base change the pushout of Step 4 along $Y_U=Y\\times_XU\\to Y$. The universal-pushout lemma says that the resulting square is a pushout. Since $Z\\times_XU=W$, $W\\times_XU=W$, and $V\\times_XU=V$ (all maps of $W,V$ to $X$ factor through $U$), this is the pushout of $W\\xrightarrow{\\mathrm{id}}W$ and $q:W\\to V$. Its fourth vertex is canonically $V$: a compatible pair of maps out of $W,V$ is uniquely its map out of $V$. Hence $Y_U\\simeq V$ over $U$. The chosen map $V\\to U$ is etale, proving that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale over $X\\setminus V(I)$, as required.",
+   "uses": [
+    "lem-per-elementary-distinguished-universal-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0ALT, final assertion on etaleness away from V(I), expanded by base change of the constructed square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-space-thickening-topological-properties",
+  "lem-per-open-separated-etale-pushout",
+  "lem-per-elementary-distinguished-universal-pushout",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sfb-finite-surjective-affine-space-target",
+  "def-weil-etale-morphism",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0ALT (lemma-lift-approximation), complete pushout proof; last sentence expanded by nilpotent generator lifting and base change to U."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given a nilpotent base quotient lift an etale map from a fixed algebra to the reduction of another algebra using an affine pushout",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  ∃ f : A →ₐ[R] B, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Function.Surjective g)\\n  (hg' : IsNilpotent <| RingHom.ker (g : B →+* C)) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Function.Surjective g) (hg' : IsNilpotent <| RingHom.ker g)\\n  (x : A) : g (FormallySmooth.liftOfSurjective f g hg hg' x) = f x\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.comp_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) :\\n  (Ideal.Quotient.mkₐ R I).comp (FormallySmooth.lift I hI g) = g\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a ring $ B $ and an $ R $-algebra homomorphism $ g: A \\\\to B/I $, the composition of the canonical qu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X.Hom (Spec A)) (I : Ideal A) (hI : I ≤ RingHom.ker ((Scheme.ΓSpecIso A).inv ≫ f.appTop).hom) :\\n  f.liftQuotient I hI ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) = f\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $f^\\\\sharp: A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ be the corresponding ring homomorphism on glo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X.Hom (Spec A)) (I : Ideal A) (hI : I ≤ RingHom.ker ((Scheme.ΓSpecIso A).inv ≫ f.appTop).hom) :\\n  X ⟶ Spec <| .of (A ⧸ I)\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"Algebra.FormallySmooth.mk_lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) (x : A) :\\n  Ideal.Quotient.mk I (FormallySmooth.lift I hI g x) = g x\", \"doc\": \"For a formally smooth algebra $ A $ over a commutative ring $ R $, given a nilpotent ideal $ I $ of a commutative ring $ B $ and an algebra homomorphism $ g : A \\\\to B/I $, the image of the lift of any\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsNilpotent, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Ideal.IsNilpotent'",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement; Loogle rejected the identifier Ideal.IsNilpotent; corrected query IsNilpotent, Algebra.Etale also ran and returned no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*pushout|pushout.*etale|lift.*approximation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization pushout lifting with prescribed algebra reduction and etale morphism to another algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.pushoutDesc\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  {S : Type v₃} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u_6} →\\n            (S' : Type u_7) →\\n              [inst_3 : CommSemiring R'] →\\n                [inst_4 : CommSemiring S'] →\\n                  [ins\", \"doc\": \"Given commutative semirings $ R, S, R', S' $ with compatible algebra structures and a pushout algebra $ S' $, for any $ R $-algebra $ A $ with commuting algebra homomorphisms $ f : S → A $ and $ g : R\"}\n  {\"name\": \"Algebra.pushoutDesc_apply\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {S : Type v₃} [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] {R' : Type u_6}\\n  (S' : Type u_7) [inst_3 : CommSemiring R'] [inst_4 : CommSemiring S'] [inst_5 : Algebra R R'] [inst_6 : Algebra S S']\\n  [inst_7 : Algebra R' S'] [inst_8 : Algebra R S'] [inst_9 :\", \"doc\": \"Given commutative semirings $ R, S, R', S' $ with compatible $ R $-algebra structures and a pushout algebra $ S' $, for any $ R $-algebra $ A $ with commuting algebra homomorphisms $ f : S → A $ and $\"}\n  {\"name\": \"Algebra.IsPushout\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type v₃) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          (R' : Type u_6) →\\n            (S' : Type u_7) →\\n              [inst_3 : CommSemiring R'] →\\n                [inst_4 : CommSemiring S'] →\\n                  [ins\", \"doc\": \"Given commutative semirings $ R, S, R', S' $ with algebra structures $ R \\to S $, $ R \\to R' $, and compatible scalar tower conditions, $ S' $ satisfies the universal property of a pushout in the catego\"}\n  {\"name\": \"Algebra.IsPushout.comp_iff\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type v₃) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] {T : Type u_4}\\n  [inst_3 : CommSemiring T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (R' : Type u_6)\\n  (S' : Type u_7) [inst_7 : CommSemiring R'] [inst_8 : CommSemiring S\", \"doc\": \"Given commutative semirings $ R, S, R', S', T' $ with compatible algebra structures $ R \\\\to S $, $ R \\\\to R' $, and scalar tower conditions between all relevant pairs, the pushout property $ S' $ in th\"}\n  {\"name\": \"Algebra.IsAlgebraic.instIsPushout\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (R' : Type u_4)\\n  (S' : Type u_5) [inst_3 : CommRing S'] [FaithfulSMul R S] [alg : Algebra.IsAlgebraic R S] [NoZeroDivisors S]\\n  [inst_6 : Algebra S S'] [IsFractionRing S S'] [inst_8 : Algebra R S'] [ins\", \"doc\": \"Given commutative semirings $ R, S, R', S' $ with algebra structures $ R \\\\to S $, $ R \\\\to R' $, and compatible scalar tower conditions, if the algebras are algebraic, then $ S' $ satisfies the univers\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"CommRingCat.isPushout_iff_isPushout\", \"module\": \"Mathlib/Algebra/Category/Ring/Constructions\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' S' : Type u}\\n  [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R R'] [inst_6 : Algebra S S'] [inst_7 : Algebra R' S']\\n  [inst_8 : Algebra R S'] [inst_9 : IsScalarTower R R' S'] [inst_10 : IsScalarTo\", \"doc\": \"A square diagram in the category of commutative rings forms a pushout if and only if the corresponding diagram in the category of $ R $-algebras satisfies the universal property of a pushout, given co\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an etale neighbourhood pushout diagram of finite type algebras etale away from an ideal across a nilpotent quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an etale neighbourhood of an affine scheme across a nilpotent quotient of its Noetherian base by a pushout",
+   "results": "{\"t\": \"2026-10-24T08:37:54Z\", \"tool\": \"leanfinder\", \"query\": \"Lift an etale neighbourhood of an affine scheme across a nilpotent quotient of its Noetherian base by a pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"31118cb271f8a615\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary infinitesimal smooth lifting and scheme etale permanence do not construct the prescribed etale-neighbourhood model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting etale neighbourhoods of affine schemes over a nilpotent quotient with prescribed reduction and etaleness away from an ideal",
+   "results": "{\"t\": \"2026-10-24T08:40:05Z\", \"tool\": \"leansearch\", \"query\": \"Lifting etale neighbourhoods of affine schemes over a nilpotent quotient with prescribed reduction and etaleness away from an ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.FormallySmooth.lift\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"StandardEtalePair.lift\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"91f98c6a5793ad62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary infinitesimal smooth lifting and scheme etale permanence do not construct the prescribed etale-neighbourhood model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraize a nilpotent deformation of an etale neighbourhood by gluing algebraic spaces along an open immersion",
+   "results": "{\"t\": \"2026-10-24T08:40:14Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraize a nilpotent deformation of an etale neighbourhood by gluing algebraic spaces along an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.toAlgebra\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"70371a243d911bb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary infinitesimal smooth lifting and scheme etale permanence do not construct the prescribed etale-neighbourhood model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-etale-compatible-model-tower",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, final application of lemma-lift-approximation to C-prime_m and the already chosen C_(m-1).",
+   "via": [
+    "lem-per-rig-etale-compatible-model-tower",
+    "lem-per-rig-etale-principal-reduction",
+    "lem-per-rig-etale-jacobian-algebraization",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+  "worker": "stage1",
+  "summary": "Checked Tag 0ALT and all cited statements. Seven-step geometric pushout proof; two general statement-only pushout inputs. Reuses thickening invariance, separatedness, and affine descent; writes out the specified reduction, finite type, and etaleness away from I. Corrected only doubled TeX escaping in the item statement.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, final application of lemma-lift-approximation to C-prime_m and the already chosen C_(m-1). Realizes the 0ALT supporting input in the compatible model tower; current latest blueprint ancestor proof read, with no unit-route replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "why": "Identifies nilpotent base changes with the specified quotient algebras and their maps."
+   },
+   {
+    "node": "lem-sfb-space-thickening-base-change",
+    "why": "Preserves the thickening under the scheme and algebraic-space base changes in the pushout construction."
+   },
+   {
+    "node": "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "why": "Lifts the etale scheme V0 over the thickening U0 -> U, including the map from W; no within-unit node supplies this generic infinitesimal equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Shows the lifted map W -> V is etale since both schemes are etale over U."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Gives separatedness of the affine map Spec C0 -> Spec B0 before restriction."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Preserves that separatedness on the punctured opens."
+   },
+   {
+    "node": "lem-sfb-space-thickening-topological-properties",
+    "why": "Reflects separatedness across thickenings; used solely to meet the geometric pushout hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Checks finiteness on every scheme test of the closed immersion Y0 -> Y."
+   },
+   {
+    "node": "lem-sfb-finite-surjective-affine-space-target",
+    "why": "Descends affineness from the specified affine nilpotent reduction; a generic algebraic-space theorem."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Identifies chartwise etaleness with scheme etaleness once the pushout has been proved affine."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-space-thickening-topological-properties",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sfb-finite-surjective-affine-space-target",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NL-10ae0dcbc",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-10ae0dcbc (reviewer sub-agent of L); spot-checked: I read Stacks 0ALT (restricted.tex, lemma-lift-approximation) in full, along with 0DVI, 0DVJ, 08GM, 08GN(2,3), 07VS and 07VT at their labels. The item statement matches 0ALT hypothesis by hypothesis; the only change is the TeX escaping. All 7 steps check out against the cited statements. S1: W_0 = Z_0 x_{Y_0} V_0, and the isomorphism over the reduced complement comes from B_0/IB_0 = C_0/IC_0. S2: the thickening-equivalence lift q is etale by cancellation. S3: q is separated by thickening invariance applied to (q_0,q). S4: the 0DVJ dictionary (V,V',U,W)<->(Z,W,V,Y) holds, and the base change along Y x_X X_0 has the same span as the Y_0 square, so uniqueness gives the inverse isomorphisms. S5: thickening base change plus closed immersion is finite plus 07VS gives Y affine. S6: Spec full faithfulness gives beta and h-bar = h_0 o beta; h is etale by chartwise permanence; the finite-type proof B=D+JB => B=D+J^NB=D is correct and elementary. S7: base change to U gives the span (id,q), whose pushout is V, so B is etale over D(I). The two new nodes (0DVJ construction; 0DVI + 08GN universal pushout) are true and self-contained. I checked the reduced-complement base change and edge cases including W empty, q the identity and a fold map. Neither node restates the item. I found no duplicate after an rg -L search for the tags and for every algebraic-space pushout node. Mathlib searches were recorded with real hits; Mathlib has no algebraic spaces, so 'no match' is right. I accept all 10 tool_uses as generic AG tools. Batch 5: every flagged citation is a general algebraic-space definition or a foundational fact (fibre products, reduced closed subspaces, thickenings, 07VS, chartwise etale permanence). None is the trace formula, Poincare duality or a step of their proofs, so I kept them. Minor: the new nodes lack a lean_audit field; preflight accepted this. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NilpotentEtaleNeighbourhoodPushoutLift",
+  "declaration": "AlgebraicGeometry.exists_nilpotent_etale_neighbourhood_pushout_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/NilpotentEtaleNeighbourhoodPushoutLift.lean",
+  "statement": "theorem exists_nilpotent_etale_neighbourhood_pushout_lift (A : Type u) [CommRing A] [IsNoetherianRing A] (I J : Ideal A) (hJ : ∃ N : ℕ, 1 ≤ N ∧ J ^ N = ⊥) (C : Type u) [CommRing C] [Algebra A C] (hCft : (algebraMap A C).FiniteType) (B₀ : Type u) [CommRing B₀] [Algebra (A ⧸ J) B₀] (hB₀ft : (algebraMap (A ⧸ J) B₀).FiniteType) (hC : Etale ((Spec.map (CommRingCat.ofHom (algebraMap A C))) ∣_ ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus _).isOpen_compl⟩)) (hB₀ : Etale ((Spec.map (CommRingCat.ofHom (algebraMap (A ⧸ J) B₀))) ∣_ ⟨(PrimeSpectrum.zeroLocus (I.map (Ideal.Quotient.mk J) : Set (A ⧸ J)))ᶜ, (PrimeSpectrum.isClosed_zeroLocus _).isOpen_compl⟩)) (h₀ : B₀ →ₐ[A ⧸ J] C ⧸ J.map (algebraMap A C)) (hh₀ : Etale (Spec.map (CommRingCat.ofHom h₀.toRingHom))) (hI : ∃ e : (B₀ ⧸ (I.map (Ideal.Quotient.mk J)).map (algebraMap (A ⧸ J) B₀)) ≃ₐ[A ⧸ J] ((C ⧸ J.map (algebraMap A C)) ⧸ (I.map (Ideal.Quotient.mk J)).map (algebraMap (A ⧸ J) (C ⧸ J.map (algebraMap A C)))), ∀ b : B₀, e (Ideal.Quotient.mk _ b) = Ideal.Quotient.mk _ (h₀ b)) : ∃ (B : Type u) (_ : CommRing B) (_ : Algebra A B), (algebraMap A B).FiniteType ∧ ∃ (h : B →ₐ[A] C) (β : (B ⧸ J.map (algebraMap A B)) ≃ₐ[A ⧸ J] B₀), Etale (Spec.map (CommRingCat.ofHom h.toRingHom)) ∧ (∀ b : B, Ideal.Quotient.mk (J.map (algebraMap A C)) (h b) = h₀ (β (Ideal.Quotient.mk (J.map (algebraMap A B)) b))) ∧ Etale ((Spec.map (CommRingCat.ofHom (algebraMap A B))) ∣_ ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus _).isOpen_compl⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e0df752a",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0ALT (restricted.tex:1933-1962) clause by clause. Nilpotent J (N≥1); finite type via RingHom.FiniteType; etale away from V(I) and V(IA0) as Etale of morphismRestrict to the zeroLocus complement; h0 etale via Spec.map; the mod-I isomorphism is pinned to the map induced by h0 (mk surjective). Conclusion: B finite type, h etale, beta : B/JB ≃ₐ[A/J] B0, mk∘h = h0∘beta∘mk, Spec B etale over the complement of V(I). Single universe u forced by Spec.map (Mathlib convention). Dep records: IsNoetherianRing, RingHom.FiniteType, Spec, Etale (current Mathlib name); algebra-hom-quotient is mathlib status. Node diff vs live: only the lean field. Statement verbatim in file; sorry-only; source and blueprint docstrings with 7 proof steps; plain imports of the recorded proof-dep modules (QuotientBaseChangeIdeal, ChartwiseEtalePermanence); lines ≤93. No findings; no compile needed."
+ }
+}

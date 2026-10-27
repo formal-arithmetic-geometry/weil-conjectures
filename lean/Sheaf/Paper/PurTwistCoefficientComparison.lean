@@ -20,7 +20,7 @@ Source: coefficient-twist blueprint, proof step 6.
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-universe u
+universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
@@ -34,21 +34,21 @@ Proof: the sectionwise balanced tensor map is bijective. It identifies the usual
 commutative-ring tensor pushout with the square of sections. These sectionwise
 pushouts imply a pushout among sheaves. The canonical map between its vertex and
 the chosen categorical pushout is consequently an isomorphism. -/
-theorem purTwistCoefficientComparison_isIso (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+theorem purTwistCoefficientComparison_isIso (S : Scheme.{t}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsIso (purTwistCoefficientComparison S l E) := by
   classical
   have hp : IsPushout (purTwistConstantIntegersMap S l E)
-      (purTwistZlCompletionMap S l) (purTwistIntegralCompletionMap S l E)
+      (purTwistZlCompletionMapOfUniverses.{t, u} S l) (purTwistIntegralCompletionMap S l E)
       (purTwistCompletedScalarMap S l E) := by
     apply sheaf_isPushout_of_sectionwise (ProEt.topology S) _ _ _ _
       (purTwistCoefficientSquare S l E).symm
     intro U
-    let R := (purTwistZlConstant S l).obj.obj U
+    let R := (purTwistZlConstantOfUniverses.{t, u} S l).obj.obj U
     let A := (purTwistIntegralConstant S l E).obj.obj U
-    let B := (purTwistZlCompletion S l).obj.obj U
+    let B := (purTwistZlCompletionOfUniverses.{t, u} S l).obj.obj U
     let : Algebra R A := ((purTwistConstantIntegersMap S l E).hom.app U).hom.toAlgebra
-    let : Algebra R B := ((purTwistZlCompletionMap S l).hom.app U).hom.toAlgebra
+    let : Algebra R B := ((purTwistZlCompletionMapOfUniverses.{t, u} S l).hom.app U).hom.toAlgebra
     let e := (RingEquiv.ofBijective (purTwistCoefficientTensorMap S l E U)
       (purTwistCoefficientTensor S l E U)).toCommRingCatIso
     apply (CommRingCat.isPushout_tensorProduct R A B).of_iso

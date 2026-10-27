@@ -1,0 +1,119 @@
+{
+ "id": "lem-trf-exact-filtered-localization",
+ "kind": "statement",
+ "title": "Localization descent of the exact filtered object action",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with derived categories and let $H:\\mathcal A\\to\\mathcal B$ be additive and exact. Then the record $\\operatorname{FilteredTermwiseLift}(H)$ [def-trf-filtered-operation-lift-structures] is inhabited: the termwise action of $H$ on finite filtered objects descends to every finite filtered derived localization, with the specified total, graded, step-inclusion and localization comparisons.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015Q (lemma-filtered-localization-functor), 015S (equation-filtered-derived-functor), 05U2 (equation-definition-filtered-derived-functor), and the following equations equation-commute-gr / equation-commute-forget. Canonical operation/adjunction lifts: literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf, Lemma 5.1.4 and §§5.2.1–5.2.2; the pro-etale compactification-relative formulation is assembled from the same filtered-injective construction."
+ },
+ "stmt_deps": [
+  "def-trf-filtered-operation-lift-structures"
+ ],
+ "proof": [
+  {
+   "text": "Take the additive action and its total/graded comparisons from lem-trf-exact-filtered-object-action. The homotopy comparisons identify a graded map after the action with H of the original graded map. Since H is exact, its ordinary derived functor shows this image is a quasi-isomorphism. Localize the homotopy action, descend its shift compatibility, and use essential surjectivity on arrows to descend triangulatedness. Descend the total/graded homotopy comparison isomorphisms by the fully faithful precomposition functor for localization. Retain the object and step comparisons to fill the full termwise lift record.",
+   "uses": [
+    "lem-trf-exact-filtered-object-action",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015Q (lemma-filtered-localization-functor), 015S (equation-filtered-derived-functor), 05U2 (equation-definition-filtered-derived-functor), and the following equations equation-commute-gr / equation-commute-forget. Canonical operation/adjunction lifts: literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf, Lemma 5.1.4 and §§5.2.1–5.2.2; the pro-etale compactification-relative formulation is assembled from the same filtered-injective construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-exact-filtered-object-action",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Parent lem-trf-filtered-derived-operation-lifts: Step 1, localization descent; Lean proof written by C8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor induces a functor on filtered objects and finite filtered derived categories, preserving associated graded objects.",
+   "results": "8 hits: ordinary Functor.mapDerivedCategory, exactFunctor and additive-functor APIs. None constructs the finite filtered object action or the normalized filtered operation package.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor induces a functor on finite filtered derived categories and a left exact functor has a filtered right derived functor",
+   "results": "8 hits: ordinary mapDerivedCategory and its factorization isomorphisms; useful for localization descent, but no filtered object or operation construction.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerivedOperationLift|FilteredTermwiseLift|ProEtaleFilteredOperationPackage|filteredDerivedAdjunction",
+   "results": "msearch Mathlib grep: 0 hits. Direct rg of lean/Sheaf and lean/WeilConjectures finds these structures only in the assigned module, and no separate construction theorem. Existing filtered model and comparison theorems were read.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredDerivedOperationLifts",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Steps 3–4 of the imported proof: filtered compact cohomology, canonical operation lifts and identification of graded operators.",
+   "via": [
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredExactLocalization",
+  "file": "lean/Sheaf/CategoryTheory/FilteredExactLocalization.lean",
+  "declaration": "CategoryTheory.exactFilteredLocalization",
+  "statement": "theorem exactFilteredLocalization (H : A ⥤ B) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H] : Nonempty (FilteredTermwiseLift H)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-41e21",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261026T081333-L-1923179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-41e21",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261026T081333-L-1923179",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + 29 moved structures (verbatim vs clone) + 3 new holes and their nodes against lem-trf-filtered-derived-operation-lifts; axioms via scratch --all compile"
+ }
+}

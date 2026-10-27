@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-central-diagonalizable-derived-intersection-finite",
+ "kind": "statement",
+ "title": "Finite intersection of a central diagonalizable subgroup with the derived group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $C\\subseteq G$ be a central closed subgroup scheme [def-sc-group-scheme-subgroup], where central means commuting with every element after every commutative $F$-algebra extension. Assume that $C$ is diagonalizable: $C\\simeq D_F(M)=\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$ [def-weil-affine-spectrum]. Here $F[M]$ has basis $e_m$, multiplication $e_me_n=e_{m+n}$, and Hopf operations $\\Delta(e_m)=e_m\\otimes e_m$, $\\epsilon(e_m)=1$, $\\iota(e_m)=e_{-m}$. Let $G^{\\mathrm{der}}$ be the smallest closed subgroup through which the commutator morphism $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors [lem-sfb-smooth-connected-derived-subgroup]. Then the scheme-theoretic intersection $C\\cap G^{\\mathrm{der}}$ is finite over $F$, meaning that its coordinate algebra is finite-dimensional over $F$. Neither reductivity of $G$ nor smoothness or connectedness of $C$ is assumed; the conclusion holds also for nonreduced $C$ in positive characteristic.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.46(a), printed pp.245--246, its faithful-representation weight-block determinant argument extended from a central torus to a central diagonalizable subgroup; Theorem 12.12 and Remark 12.13, pp.234--235, supply arbitrary diagonalizable weight decompositions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-central-torus-faithful-weight-blocks] to $H=G$ and its trivial central subgroup $T=\\mathbf G_m^0$. This is a closed subgroup: on affine coordinates its identity inclusion is the surjective counit $F[G]\\to F$. Its centrality is the identity law. The node applies to every affine finite-type $H$, hence gives a nonzero finite-dimensional $V$ and a closed-immersion homomorphism $\\rho:G\\hookrightarrow\\operatorname{GL}(V)$. Keep only this conclusion, not its torus weight blocks.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9 and Corollary 4.10, p.87; Proposition 12.46(a), p.246, first choice of a faithful representation."
+   }
+  },
+  {
+   "text": "Restrict $\\rho$ to $C\\simeq D_F(M)$ and apply [lem-sfb-diagonalizable-representation-weight-grading]. Enumerate its nonzero weight spaces as $V_1,\\ldots,V_s$, with characters $\\chi_i$; put $d_i=\\dim_F V_i>0$. For $g\\in G(A)$, centrality of $C$ says that $\\rho_A(g)$ commutes with $C(B)$ for every $A$-algebra $B$. The commutant clause of that node implies that it preserves each $V_i\\otimes_F A$; the same holds for $g^{-1}$. Choosing bases of the $V_i$ therefore makes $\\rho$ block diagonal over every $A$. Restriction to the $i$th block gives a group-scheme homomorphism $\\rho_i:G\\to\\operatorname{GL}(V_i)$: its entries are the corresponding entries of $\\rho$, and its inverse is the block of $\\rho(g^{-1})$. On $C$, this block is $\\chi_i$ times the identity.",
+   "uses": [
+    "lem-sfb-diagonalizable-representation-weight-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, pp.234–235; Proposition 12.46(a), p.246, centrality and weight blocks, using all algebra-valued points."
+   }
+  },
+  {
+   "text": "The determinant homomorphism of [def-sc-general-linear-group] defines $\\delta_i=\\det\\circ\\rho_i:G\\to\\mathbf G_m$. By [lem-sfb-smooth-connected-derived-subgroup], $\\delta_i$ is trivial on $G^{\\mathrm{der}}$, since $G$ has exactly the smoothness, connectedness and affine finite-type hypotheses of that node and $\\mathbf G_m$ is commutative affine. On $C$ its value is $\\chi_i^{d_i}$, by the determinant formula for a scalar $d_i\\times d_i$ matrix. Thus on the scheme-theoretic intersection $K=C\\cap G^{\\mathrm{der}}$ the restricted invertible function $a_i=\\chi_i|_K$ satisfies $a_i^{d_i}=1$. This is an identity of functions, not merely an equality on $F$-points.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(a), p.246, determinant-one argument; replace its point argument by the scheme-level character-vanishing property of the derived group."
+   }
+  },
+  {
+   "text": "The intersection $K$ is the closed subscheme of $G$ cut out by the sum of the ideals of $C$ and $G^{\\mathrm{der}}$ [def-sc-group-scheme-subgroup, def-weil-closed-immersion]. Consequently the coordinate map $F[\\operatorname{GL}(V)]\\to F[K]$ is surjective: first use the closed immersion $\\rho$, then quotient by this sum of ideals. In the block basis, every matrix coordinate restricts to $0$ or one of the $a_i$. The determinant restricts to $\\prod_i a_i^{d_i}=1$, so its inverse restricts to $1$ [def-sc-general-linear-group]. Thus the $a_i$ generate $F[K]$ as an $F$-algebra. The relations from step 3 yield a surjection\n$$F[t_1,\\ldots,t_s]/(t_i^{d_i}-1:1\\le i\\le s)\\longrightarrow F[K],\\qquad t_i\\longmapsto a_i.$$\nReduce every exponent modulo its positive $d_i$. The finitely many monomials $\\prod_i t_i^{b_i}$ with $0\\le b_i<d_i$ span the source, hence their images span $F[K]$. It is therefore finite-dimensional (indeed of dimension at most $\\prod_i d_i$), proving finiteness. No division by $d_i$, reducedness of $C$ or $K$, or reductivity of $G$ occurred.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.46(a), p.246, final scalar-matrix bound; explicit coordinate quotient retaining nonreduced roots of unity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-diagonalizable-representation-weight-grading",
+  "def-sc-general-linear-group",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.46(a), p.246, extended to arbitrary central diagonalizable subgroup schemes by Theorem 12.12 and Remark 12.13, pp.234–235; coordinate quotient replaces finiteness of rational points."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A central diagonalizable closed subgroup of a smooth connected affine algebraic group has finite scheme theoretic intersection with the derived subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.finiteIndex_center\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite ↑(commutatorSet G)] [Group.FG G], (Subgroup.center G).FiniteIndex\", \"doc\": \"For any group $G$, the center of $G$ (the subgroup consisting of all elements that commute with every element of $G$) has finite index in $G$. This means the set of left (or right) cosets of the cente\"}\n  {\"name\": \"Subgroup.index_center_le_pow\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [Finite ↑(commutatorSet G)] [inst_2 : Group.FG G],\\n  (Subgroup.center G).index ≤ Nat.card ↑(commutatorSet G) ^ Group.rank G\", \"doc\": \"For a finitely generated group $ G $, the index of the center of $ G $ is less than or equal to the cardinality of the commutator set of $ G $ raised to the power of the rank of $ G $. This inequality\"}\n  {\"name\": \"upperCentralSeriesAux\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"(G : Type u_1) → [inst : Group G] → ℕ → (H : Subgroup G) ×' H.Normal\", \"doc\": \"The function that recursively defines the upper central series of a group $ G $, where the 0th term is the trivial subgroup and each subsequent term is constructed by taking the centralizer of the pre\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"commutator_centralizer_commutator_le_center\", \"module\": \"Mathlib/GroupTheory/Commutator/Basic\", \"type\": \"∀ (G : Type u_1) [inst : Group G],\\n  ⁅Subgroup.centralizer ↑(commutator G), Subgroup.centralizer ↑(commutator G)⁆ ≤ Subgroup.center G\", \"doc\": \"The centralizer of the commutator subgroup $[G, G]$ of a group $G$ is contained in the center of $G$, i.e., every element that commutes with all commutators of $G$ must commute with all elements of $G\"}\n  {\"name\": \"Sylow.le_center_or_le_commutator\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {p : ℕ} [Fact (Nat.Prime p)] [Finite G] (P : Sylow p G) [IsCyclic ↥↑P] [(↑P).Normal],\\n  ↑P ≤ Subgroup.center G ∨ ↑P ≤ commutator G\", \"doc\": \"If $ P $ is a normal Sylow $ p $-subgroup of a group $ G $, then $ P $ is contained in the center $ Z(G) $ of $ G $ or in the commutator subgroup $ [G, G] $ of $ G $.\"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"lowerCentralSeries_succ_eq_bot\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {n : ℕ}, lowerCentralSeries G n ≤ Subgroup.center G → lowerCentralSeries G (n + 1) = ⊥\", \"doc\": \"If the $n$th term $\\\\gamma_n(G)$ of the lower central series of a group $G$ is contained in the center $Z(G)$ of $G$, then the $(n+1)$th term $\\\\gamma_{n+1}(G)$ is the trivial subgroup.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract commutator finiteness and characteristic-zero Lie algebra results do not give finiteness of this scheme-theoretic intersection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"center\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddSubgroup.addCommutator_center_left\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) : ⁅AddSubgroup.center G, H⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.addCommutator_center_right\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) : ⁅H, AddSubgroup.center G⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_center_left\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) : ⁅Subgroup.center G, H⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_center_right\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) : ⁅H, Subgroup.center G⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"addCommutator_eq_bot_iff_center_eq_top\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [AddGroup G] : addCommutator G = ⊥ ↔ AddSubgroup.center G = ⊤\", \"doc\": \"\"}\n  {\"name\": \"commutator_eq_bot_iff_center_eq_top\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [Group G] : commutator G = ⊥ ↔ Subgroup.center G = ⊤\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.addCommutator_top_left_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] {H : AddSubgroup G} : ⁅⊤, H⁆ = ⊥ ↔ H ≤ AddSubgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.addCommutator_top_right_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] {H : AddSubgroup G} : ⁅H, ⊤⁆ = ⊥ ↔ H ≤ AddSubgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_top_left_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] {H : Subgroup G} : ⁅⊤, H⁆ = ⊥ ↔ H ≤ Subgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_top_right_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] {H : Subgroup G} : ⁅H, ⊤⁆ = ⊥ ↔ H ≤ Subgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"addCommutator_centralizer_addCommutator_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [AddGroup G] : ⁅AddSubgroup.centralizer ↑(addCommutator G), AddSubgroup.centralizer ↑(addCommutator G)⁆ ≤ AddSubgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"commutator_centralizer_commutator_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [Group G] : ⁅Subgroup.centralizer ↑(commutator G), Subgroup.centralizer ↑(commutator G)⁆ ≤ Subgroup.center G\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract commutator finiteness and characteristic-zero Lie algebra results do not give finiteness of this scheme-theoretic intersection"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable.*(derived|commutator)|(derived|commutator).*diagonalizable",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract commutator finiteness and characteristic-zero Lie algebra results do not give finiteness of this scheme-theoretic intersection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intersection of the derived group of a connected linear algebraic group with any central group of multiplicative type is finite",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instFiniteElemSubtypeMemSubgroupClosureCommutatorRepresentativesCommutatorSet\", \"module\": \"Mathlib.GroupTheory.Commutator.Finite\", \"type\": \": Finite (commutatorSet (closureCommutatorRepresentatives G))\", \"doc\": \"The set of commutators in the subgroup generated by commutator representatives of a group $ G $ is finite. Specifically, this refers to the commutator set of the subgroup generated by all elements tha\"}\n  {\"name\": \"Subgroup.finiteIndex_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Finite\", \"type\": \": FiniteIndex (center G)\", \"doc\": \"For any group $G$, the center of $G$ (the subgroup consisting of all elements that commute with every element of $G$) has finite index in $G$. This means the set of left (or right) cosets of the cente\"}\n  {\"name\": \"Subgroup.instFiniteSubtypeMemCommutatorOfElemCommutatorSet\", \"module\": \"Mathlib.GroupTheory.Schreier\", \"type\": \"[Finite (commutatorSet G)] : Finite (_root_.commutator G)\", \"doc\": \"If the set of commutators in a group $ G $ is finite, then the commutator subgroup $[G, G]$ generated by these commutators is also finite.\"}\n  {\"name\": \"Subgroup.subgroupOf\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Map\", \"type\": \"(H K : Subgroup G) : Subgroup K\", \"doc\": \"The subgroup of K consisting of elements that are in both H and K\"}\n  {\"name\": \"Subgroup.finiteIndex_iInf'\", \"module\": \"Mathlib.GroupTheory.Index\", \"type\": \"{ι : Type*} {s : Finset ι} (f : ι → Subgroup G) (hs : ∀ i ∈ s, (f i).FiniteIndex) : (⨅ i ∈ s, f i).FiniteIndex\", \"doc\": \"If $G$ is a group and $\\\\{H_i\\\\}_{i \\\\in I}$ is a finite family of subgroups of $G$ each having finite index, then the intersection $\\\\bigcap_{i \\\\in I} H_i$ also has finite index in $G$.\"}\n  {\"name\": \"Subgroup.instHasDetOneMinGeneralLinearGroup\", \"module\": \"Mathlib.NumberTheory.ModularForms.ArithmeticSubgroups\", \"type\": \"(Γ' : Subgroup (GL n R)) [HasDetOne Γ] : HasDetOne (Γ ⊓ Γ')\", \"doc\": \"The intersection of a subgroup with determinant one and another subgroup also has determinant one. Specifically, if $\\\\Gamma$ is a subgroup of $GL(n, R)$ where every element has determinant one, then t\"}\n  {\"name\": \"Subgroup.instFGSubtypeMemCommutator\", \"module\": \"Mathlib.GroupTheory.Commutator.Finite\", \"type\": \": Group.FG (_root_.commutator G)\", \"doc\": \"The commutator subgroup of a finite group is finitely generated. This follows because the set of commutators in a finite group is finite, and any subgroup generated by a finite set in a group is finit\"}\n  {\"name\": \"AddSubgroup.normal_iInf_normal\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {ι : Sort u_6} {a : ι → AddSubgroup G}, (∀ (i : ι), (a i).Normal) → (iInf a).Normal\", \"doc\": \"The intersection of any family of normal subgroups of an additive group is itself a normal subgroup. Specifically, if $\\\\{N_i\\\\}_{i \\\\in I}$ is a collection of normal subgroups of an additive group $G$, \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract commutator finiteness and characteristic-zero Lie algebra results do not give finiteness of this scheme-theoretic intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine group and a central subgroup of multiplicative type the kernel of its map to the abelianization is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Abelianization.ker_of\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ (G : Type u) [inst : Group G], Abelianization.of.ker = commutator G\", \"doc\": \"The kernel of the canonical group homomorphism $\\\\pi: G \\\\to G^{\\\\text{ab}}$ from a group $G$ to its abelianization $G^{\\\\text{ab}} = G/[G, G]$ is equal to the commutator subgroup $[G, G]$. In symbols, $\\\\\"}\n  {\"name\": \"instFiniteAbelianization\", \"module\": \"Mathlib/GroupTheory/Abelianization/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite G], Finite (Abelianization G)\", \"doc\": \"If $ G $ is a finite group, then its abelianization $ G^{\\text{ab}} $ is also finite.\"}\n  {\"name\": \"Subgroup.finiteIndex_center\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite ↑(commutatorSet G)] [Group.FG G], (Subgroup.center G).FiniteIndex\", \"doc\": \"For any group $G$, the center of $G$ (the subgroup consisting of all elements that commute with every element of $G$) has finite index in $G$. This means the set of left (or right) cosets of the cente\"}\n  {\"name\": \"instFintypeAbelianizationOfDecidablePredMemSubgroupCommutator\", \"module\": \"Mathlib/GroupTheory/Abelianization/Finite\", \"type\": \"{G : Type u_1} → [inst : Group G] → [Fintype G] → [DecidablePred fun x => x ∈ commutator G] → Fintype (Abelianization G)\", \"doc\": \"For any finite group $G$, if membership in the commutator subgroup $[G, G]$ is decidable, then the abelianization $G^{\\\\text{ab}} = G/[G, G]$ is a finite group.\"}\n  {\"name\": \"IsZGroup.isCyclic_abelianization\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite G] [IsZGroup G], IsCyclic (Abelianization G)\", \"doc\": \"If $ G $ is a finite group isomorphic to the additive group of integers $ \\\\mathbb{Z} $, then the abelianization of $ G $ is a cyclic group.\"}\n  {\"name\": \"Abelianization.commutator_subset_ker\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A), commutator G ≤ f.ker\", \"doc\": \"The commutator subgroup $[G, G]$ is contained in the kernel of the group homomorphism $f$.\"}\n  {\"name\": \"Subgroup.index_center_le_pow\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [Finite ↑(commutatorSet G)] [inst_2 : Group.FG G],\\n  (Subgroup.center G).index ≤ Nat.card ↑(commutatorSet G) ^ Group.rank G\", \"doc\": \"For a finitely generated group $ G $, the index of the center of $ G $ is less than or equal to the cardinality of the commutator set of $ G $ raised to the power of the rank of $ G $. This inequality\"}\n  {\"name\": \"commutative_of_cyclic_center_quotient\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/Cyclic\", \"type\": \"∀ {G : Type u_2} {G' : Type u_3} [inst : Group G] [inst_1 : Group G'] [IsCyclic G'] (f : G →* G'),\\n  f.ker ≤ Subgroup.center G → ∀ (a b : G), a * b = b * a\", \"doc\": \"Let $ G $ and $ G' $ be groups with $ G' $ cyclic. If there exists a group homomorphism $ f : G \\\\to G' $ such that the kernel of $ f $ is contained in the center of $ G $, then $ G $ is abelian (i.e.,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract commutator finiteness and characteristic-zero Lie algebra results do not give finiteness of this scheme-theoretic intersection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central diagonalizable subgroup scheme of a connected smooth affine group meets its derived subgroup in a finite group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.finiteIndex_center\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite ↑(commutatorSet G)] [Group.FG G], (Subgroup.center G).FiniteIndex\", \"doc\": \"For any group $G$, the center of $G$ (the subgroup consisting of all elements that commute with every element of $G$) has finite index in $G$. This means the set of left (or right) cosets of the cente\"}\n  {\"name\": \"Sylow.le_center_or_le_commutator\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {p : ℕ} [Fact (Nat.Prime p)] [Finite G] (P : Sylow p G) [IsCyclic ↥↑P] [(↑P).Normal],\\n  ↑P ≤ Subgroup.center G ∨ ↑P ≤ commutator G\", \"doc\": \"If $ P $ is a normal Sylow $ p $-subgroup of a group $ G $, then $ P $ is contained in the center $ Z(G) $ of $ G $ or in the commutator subgroup $ [G, G] $ of $ G $.\"}\n  {\"name\": \"Subgroup.index_center_le_pow\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [Finite ↑(commutatorSet G)] [inst_2 : Group.FG G],\\n  (Subgroup.center G).index ≤ Nat.card ↑(commutatorSet G) ^ Group.rank G\", \"doc\": \"For a finitely generated group $ G $, the index of the center of $ G $ is less than or equal to the cardinality of the commutator set of $ G $ raised to the power of the rank of $ G $. This inequality\"}\n  {\"name\": \"IsZGroup.commutator_lt\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [Finite G] [IsZGroup G] [Nontrivial G], commutator G < ⊤\", \"doc\": \"For any finite, nontrivial group $ G $ isomorphic to the additive group of integers $ \\\\mathbb{Z} $, the commutator subgroup $[G, G]$ is a proper subgroup of $ G $.\"}\n  {\"name\": \"IsSolvable.commutator_lt_top_of_nontrivial\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [hG : IsSolvable G] [Nontrivial G], commutator G < ⊤\", \"doc\": \"For any nontrivial solvable group $G$, the commutator subgroup $[G, G]$ is a proper subgroup of $G$, i.e., $[G, G] \\\\subsetneq G$.\"}\n  {\"name\": \"IsZGroup.isCyclic_commutator\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [Finite G] [IsZGroup G], IsCyclic ↥(commutator G)\", \"doc\": \"The commutator subgroup of a finite cyclic group is cyclic. Specifically, if $ G $ is a finite group isomorphic to the additive group of integers $ \\\\mathbb{Z} $, then its commutator subgroup $ [G, G] \"}\n  {\"name\": \"lowerCentralSeries_succ_eq_bot\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {n : ℕ}, lowerCentralSeries G n ≤ Subgroup.center G → lowerCentralSeries G (n + 1) = ⊥\", \"doc\": \"If the $n$th term $\\\\gamma_n(G)$ of the lower central series of a group $G$ is contained in the center $Z(G)$ of $G$, then the $(n+1)$th term $\\\\gamma_{n+1}(G)$ is the trivial subgroup.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group commutators or Lie algebras, not this scheme-theoretic finiteness theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"center\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddSubgroup.addCommutator_center_left\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) : ⁅AddSubgroup.center G, H⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.addCommutator_center_right\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) : ⁅H, AddSubgroup.center G⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_center_left\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) : ⁅Subgroup.center G, H⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_center_right\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) : ⁅H, Subgroup.center G⁆ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"addCommutator_eq_bot_iff_center_eq_top\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [AddGroup G] : addCommutator G = ⊥ ↔ AddSubgroup.center G = ⊤\", \"doc\": \"\"}\n  {\"name\": \"commutator_eq_bot_iff_center_eq_top\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [Group G] : commutator G = ⊥ ↔ Subgroup.center G = ⊤\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.addCommutator_top_left_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] {H : AddSubgroup G} : ⁅⊤, H⁆ = ⊥ ↔ H ≤ AddSubgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.addCommutator_top_right_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [AddGroup G] {H : AddSubgroup G} : ⁅H, ⊤⁆ = ⊥ ↔ H ≤ AddSubgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_top_left_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] {H : Subgroup G} : ⁅⊤, H⁆ = ⊥ ↔ H ≤ Subgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.commutator_top_right_eq_bot_iff_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" {G : Type u_1} [Group G] {H : Subgroup G} : ⁅H, ⊤⁆ = ⊥ ↔ H ≤ Subgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"addCommutator_centralizer_addCommutator_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [AddGroup G] : ⁅AddSubgroup.centralizer ↑(addCommutator G), AddSubgroup.centralizer ↑(addCommutator G)⁆ ≤ AddSubgroup.center G\", \"doc\": \"\"}\n  {\"name\": \"commutator_centralizer_commutator_le_center\", \"module\": \"Mathlib.GroupTheory.Commutator.Basic\", \"type\": \" (G : Type u_1) [Group G] : ⁅Subgroup.centralizer ↑(commutator G), Subgroup.centralizer ↑(commutator G)⁆ ≤ Subgroup.center G\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group commutators or Lie algebras, not this scheme-theoretic finiteness theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable|diagonalisable|derivedSubgroup",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group commutators or Lie algebras, not this scheme-theoretic finiteness theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the map from a central multiplicative type subgroup of an algebraic group to its abelianization is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instFiniteAbelianization\", \"module\": \"Mathlib/GroupTheory/Abelianization/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite G], Finite (Abelianization G)\", \"doc\": \"If $ G $ is a finite group, then its abelianization $ G^{\\text{ab}} $ is also finite.\"}\n  {\"name\": \"Subgroup.finiteIndex_center\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite ↑(commutatorSet G)] [Group.FG G], (Subgroup.center G).FiniteIndex\", \"doc\": \"For any group $G$, the center of $G$ (the subgroup consisting of all elements that commute with every element of $G$) has finite index in $G$. This means the set of left (or right) cosets of the cente\"}\n  {\"name\": \"Abelianization.ker_of\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ (G : Type u) [inst : Group G], Abelianization.of.ker = commutator G\", \"doc\": \"The kernel of the canonical group homomorphism $\\\\pi: G \\\\to G^{\\\\text{ab}}$ from a group $G$ to its abelianization $G^{\\\\text{ab}} = G/[G, G]$ is equal to the commutator subgroup $[G, G]$. In symbols, $\\\\\"}\n  {\"name\": \"instFintypeAbelianizationOfDecidablePredMemSubgroupCommutator\", \"module\": \"Mathlib/GroupTheory/Abelianization/Finite\", \"type\": \"{G : Type u_1} → [inst : Group G] → [Fintype G] → [DecidablePred fun x => x ∈ commutator G] → Fintype (Abelianization G)\", \"doc\": \"For any finite group $G$, if membership in the commutator subgroup $[G, G]$ is decidable, then the abelianization $G^{\\\\text{ab}} = G/[G, G]$ is a finite group.\"}\n  {\"name\": \"IsZGroup.isCyclic_abelianization\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite G] [IsZGroup G], IsCyclic (Abelianization G)\", \"doc\": \"If $ G $ is a finite group isomorphic to the additive group of integers $ \\\\mathbb{Z} $, then the abelianization of $ G $ is a cyclic group.\"}\n  {\"name\": \"Subgroup.index_center_le_pow\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [Finite ↑(commutatorSet G)] [inst_2 : Group.FG G],\\n  (Subgroup.center G).index ≤ Nat.card ↑(commutatorSet G) ^ Group.rank G\", \"doc\": \"For a finitely generated group $ G $, the index of the center of $ G $ is less than or equal to the cardinality of the commutator set of $ G $ raised to the power of the rank of $ G $. This inequality\"}\n  {\"name\": \"instFiniteElemProdCommutatorRepresentatives\", \"module\": \"Mathlib/GroupTheory/Commutator/Finite\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite ↑(commutatorSet G)], Finite ↑(commutatorRepresentatives G)\", \"doc\": \"For any finite group $ G $, the set of commutator representatives in $ G $ is finite.\"}\n  {\"name\": \"Abelianization.commutator_subset_ker\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A), commutator G ≤ f.ker\", \"doc\": \"The commutator subgroup $[G, G]$ is contained in the kernel of the group homomorphism $f$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group commutators or Lie algebras, not this scheme-theoretic finiteness theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-central-pushout-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Definition 19.26, Proposition 19.27, Example 19.25 and Remark 19.30, printed pp.404--405. Use the simply connected covering in Remark 19.30, allowing a noninjective homomorphism on centres; Proposition 19.27 identifies the derived subgroup and torus quotient. Supporting input: Proposition 12.46(a), printed pp.245--246, its faithful-representation weight-block determinant argument extended from a central torus to a central diagonalizable subgroup; Theorem 12.12 and Remark 12.13, pp.234--235, supply arbitrary diagonalizable weight decompositions.",
+   "via": [
+    "lem-sfb-reductive-central-pushout-reconstruction",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-central-diagonalizable-derived-intersection-finite",
+  "worker": "stage1",
+  "summary": "Retained the statement in full. Used the existing faithful matrix realization with trivial central torus, isolated arbitrary-diagonalizable weight grading as one statement-only node, and proved the determinant and finite coordinate quotient arguments in four steps, retaining nonreduced intersections in all characteristics. Checked project attachments, DAG/blueprint duplicates, actual Mathlib search hits, and every cited statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Definition 19.26, Proposition 19.27, Example 19.25 and Remark 19.30, printed pp.404--405. Use the simply connected covering in Remark 19.30, allowing a noninjective homomorphism on centres; Proposition 19.27 identifies the derived subgroup and torus quotient. Supporting input: Proposition 12.46(a), printed pp.245--246, its faithful-representation weight-block determinant argument extended from a central torus to a central diagonalizable subgroup; Theorem 12.12 and Remark 12.13, pp.234--235, supply arbitrary diagonalizable weight decompositions. The four steps realize the indicated faithful-representation weight-block determinant argument and its finite scalar kernel, extending the torus input to D_F(M).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-f4be81578",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-f4be81578 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Thm 12.12 (a)=>(b),(d), Rem 12.13 (printed pp.234-235) and Prop 12.46(a) with its proof (pp.245-246). Milne's 12.46(a) is for a central torus and argues by rational points. The delivery replaces that with a coordinate-algebra argument, which is valid for nonreduced C. The item statement is unchanged and true; I tested C trivial, G_m in GL_n (K=mu_n) and mu_p in SL_p in characteristic p. Step 1: the faithful-weight-blocks node is used with r=0, which its statement allows, and only its closed-immersion faithful representation is taken; no cycle. Step 2: the item's all-extensions centrality is exactly the new node's commutant hypothesis, so G is block diagonal and C acts by chi_i on each nonzero block, with d_i>=1. Step 3: det from def-sc-general-linear-group; the smooth-connected-derived-subgroup node says maps to the commutative affine G_m are trivial on G^der; this gives a_i^{d_i}=1 as functions on K. Step 4 (elementary): F[GL(V)] surjects onto F[K]=F[G]/(I_C+I_der), and the coordinates map to 0, a_i or 1, so F[t]/(t_i^{d_i}-1) surjects onto F[K] and dim F[K]<=prod d_i. New node diagonalizable-representation-weight-grading: statement-only and self-contained. I checked it is true by the comodule projection argument, including base change and the commutant clause via the universal point in A[M], and on M=0, V=0 and M=Z/p in characteristic p. DAG search (diagonalizable, multiplicative type, D(M), group-like, weight space) found no duplicate. The nearest node, split-torus-representation-weight-decomposition, covers only (G_m)^r. The new node is strictly smaller than the item. No SGA; same-unit theorem citations only; no tool_uses; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CentralDiagonalizableDerivedIntersection",
+  "declaration": "AlgebraicGeometry.central_diagonalizable_derived_intersection_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralDiagonalizableDerivedIntersection.lean",
+  "statement": "theorem central_diagonalizable_derived_intersection_finite {F : Type u} [Field F] [IsAlgClosed F] (G C D : Grp (Over (Spec (.of F)))) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (i : C ⟶ G) (hi : IsClosedSubgroupScheme i.hom.hom) (hcentral : ∀ (R : Type u) [CommRing R] [Algebra F R] (c : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F R))) ⟶ C.X) (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F R))) ⟶ G.X), Commute (c ≫ i.hom.hom) g) (hdiag : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (C ≅ diagonalizableGroup F M)) (j : D ⟶ G) (hderived : IsDerivedGroupScheme j.hom.hom) : IsFinite (pullback i.hom.hom j.hom.hom).hom",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7d70ed39",
+  "group": "NY",
+  "result": "pass",
+  "note": "Node differs from live only by the lean record and an added stmt_dep on def-sfb-diagonalizable-group, a definition node landed 2026-10-23 by Q34, on the base and used. Clause by clause: F algebraically closed; G smooth, connected, affine, LOFT+QC; C is i with IsClosedSubgroupScheme; centrality over all R : Type u including nonreduced; hdiag gives a group-object iso to the canonical Hopf spectrum of F[M] with M f.g.; D is any representative satisfying IsDerivedGroupScheme (closed, commutator factors, minimal), no choice; conclusion IsFinite of the fibre product over G = finite-dimensional coordinate algebra, not F-points. No extra assumptions or universe restriction; statement field verbatim. Edge cases checked: M=0, commutative G, mu_n in GL_n in char p, p-torsion M. No duplicate or name clash in side-live Sheaf/WeilConjectures. IsDerivedGroupScheme comes from def-sfb-semisimple-group-scheme through the theorem stmt_dep lem-sfb-smooth-connected-derived-subgroup, which was already in the stage-1 node, not added here. No defs, sorry only, source and blueprint docstrings with the 4 proof steps, report sections present. Not recompiled (2026-10-21 rule); no fixes."
+ }
+}

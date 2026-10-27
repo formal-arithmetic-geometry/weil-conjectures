@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-affine-open-finite-cover-cohomology-bound",
+ "kind": "statement",
+ "title": "A finite affine cover bounds quasi-coherent cohomology on an open of an affine scheme",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], let $U\\subseteq Y$ be an open subscheme, and let $s\\ge0$ be an integer. Suppose $U=\\bigcup_{i=1}^{s}U_i$ with every $U_i$ affine. For every quasi-coherent $\\mathcal O_U$-module $\\mathcal F$ [pqf-def-coherent] and every integer $p\\ge s$, one has $H^p(U,\\mathcal F)=0$, where $H^p(U,-)=R^p\\Gamma(U,-)$ is module-sheaf cohomology [def-sc-ringed-space-module-cohomology]. The empty cover $s=0$, and thus $U=\\varnothing$, is allowed. No field, Noetherian, finite-type or minimal-cover hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XI, lemma-vanishing-nr-affines, specialized to an open subscheme of an affine scheme; a cover with s members gives t(U) <= s. For s=0 use the zero module category on the empty scheme."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For $s=0$ the covering equality forces $U=\\varnothing$. A sheaf of abelian groups has exactly one section over the empty open, by the sheaf axiom for the empty covering. Consequently every module sheaf on $U$ has zero global sections, as does every term of any injective resolution. The section complex is therefore the zero complex, whose kernel modulo image in every degree is zero. By the definition of module cohomology this proves $H^p(U,\\mathcal F)=0$ for every $p\\ge0$, including $p=0$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, section-cohomology-sheaves; elementary empty-space case supplementing Tag 01XI"
+   }
+  },
+  {
+   "text": "Choose an affine presentation $Y\\cong\\operatorname{Spec}A$. The resulting isomorphism $f:Y\\to\\operatorname{Spec}A$ is separated: the projection $Y\\times_{\\operatorname{Spec}A}Y\\to Y$ has the diagonal as its inverse, so the diagonal is an isomorphism; an isomorphism is a homeomorphism onto the whole (closed) target with an isomorphism, hence a surjection, on structure sheaves. Thus it is a closed immersion by definition. Apply [lem-weil-pbc-separated-affine-open-intersection] to $f$. Every pair of affine opens of $Y$ has affine intersection. Every affine open of $U$ is also an affine open of $Y$, since the composite of the two open inclusions identifies it with the same open subscheme of $Y$. This supplies the intersection assertion for all affine opens used below, without any field hypothesis.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KP, lemma-characterize-separated (1)(a), applied to an affine presentation of Y"
+   }
+  },
+  {
+   "text": "For every open inclusion $j:W\\hookrightarrow U$, the pullback formula identifies $j^*\\mathcal F$ with $\\mathcal F|_W$: the inverse image along an open inclusion is restriction, $j^{-1}\\mathcal O_U=\\mathcal O_W$, and $\\mathcal O_W\\otimes_{\\mathcal O_W}(-)$ is the identity. By [lem-weil-pbc-module-pullback-quasi-coherent] this restricted module is quasi-coherent. Use [lem-pc-open-restriction-module-cohomology] whenever comparing the ambient derived evaluation $R^p\\Gamma_W(\\mathcal F)$ with the module cohomology $H^p(W,\\mathcal F|_W)$ on the open scheme. Its natural isomorphism after forgetting scalar actions suffices for vanishing. Thus the affine-vanishing and Mayer--Vietoris statements below use precisely the cohomology of the item, not an unproved identification with Ext of an underlying abelian sheaf.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-open-restriction-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 01BG, lemma-pullback-quasi-coherent; Tag 01E1, lemma-cohomology-of-open (2)"
+   }
+  },
+  {
+   "text": "Prove the assertion by strong induction on the given cover size $s$, simultaneously for all opens of an affine scheme and all quasi-coherent modules on them. The case $s=0$ is step 1. If $s=1$, then $U=U_1$ is affine and $p\\ge1$, so [pqf-lem-affine-vanishing], with ambient scheme $U$, gives the assertion. Now let $s\\ge2$ and assume the assertion for smaller cover sizes. Put $V=\\bigcup_{i=1}^{s-1}U_i$ and $W=U_s$. The opens $V,W$ cover $U$, and $V\\cap W=\\bigcup_{i=1}^{s-1}(U_i\\cap W)$. Step 2 makes each member of this latter cover affine. Apply the induction hypothesis at size $s-1$ to the opens $V$ and $V\\cap W$ of the same affine scheme $Y$, with the quasi-coherent restrictions from step 3. For $p\\ge s$ it gives $H^p(V,\\mathcal F|_V)=0$ and $H^{p-1}(V\\cap W,\\mathcal F|_{V\\cap W})=0$, since $p-1\\ge s-1$. The affine vanishing lemma also gives $H^p(W,\\mathcal F|_W)=0$, since $p>0$.",
+   "uses": [
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XI, lemma-vanishing-nr-affines, first proof; Tag 01XB, lemma-quasi-coherent-affine-cohomology-zero"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-mayer-vietoris-ringed-space] to the ringed space $U$, its two-open cover $V\\cup W$, and the $\\mathcal O_U$-module $\\mathcal F$. The segment in degree $p$ is exact:\n$$H^{p-1}(V\\cap W,\\mathcal F|_{V\\cap W})\\longrightarrow H^p(U,\\mathcal F)\\longrightarrow H^p(V,\\mathcal F|_V)\\oplus H^p(W,\\mathcal F|_W).$$\nThe outer groups vanish by step 4, with the open/global identifications of step 3. For any element $x$ of the middle group its image on the right is zero, so exactness writes $x$ as the image of an element of the zero group on the left; hence $x=0$. This completes the induction for the supplied cover size. No minimality of the cover or nonemptiness of its members was used.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 01XI, lemma-vanishing-nr-affines, first proof; Tag 01EB, lemma-mayer-vietoris"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-open-restriction-module-cohomology",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XI, lemma-vanishing-nr-affines, first proof; induction on the supplied cover rather than the minimal cover, with the empty case written out from Tag 01DZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a quasi coherent sheaf on a separated scheme covered by s affine open subschemes vanishes in degree at least s",
+   "results": "{\"t\": \"2026-10-23T18:52:45Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a quasi coherent sheaf on a separated scheme covered by s affine open subschemes vanishes in degree at least s\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"SheafOfModules.QuasicoherentData.coversTop\"], \"digest\": \"521abda3ed799800\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-cover and eventual-zero section lemmas do not bound higher cohomology of arbitrary quasi-coherent module sheaves by the number of affine opens."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"H\"",
+   "results": "{\"t\": \"2026-10-23T18:52:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"H\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.OverPresheafAux.unitBackward\", \"CategoryTheory.OverPresheafAux.unitForward\", \"CategoryTheory.OverPresheafAux.unitAuxAuxAux\", \"CategoryTheory.OverPresheafAux.unitAuxAux\", \"CategoryTheory.OverPresheafAux.YonedaCollection\", \"CategoryTheory.OverPresheafAux.yonedaCollectionPresheaf\", \"CategoryTheory.OverPresheafAux.YonedaCollection.yonedaEquivFst\", \"CategoryTheory.OverPresheafAux.YonedaCollection.map₂\"], \"digest\": \"0920e27f6f47f9f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-cover and eventual-zero section lemmas do not bound higher cohomology of arbitrary quasi-coherent module sheaves by the number of affine opens."
+  },
+  {
+   "tool": "grep",
+   "query": "(affine|Affine).*(cohomolog|Cohomolog)|(cohomolog|Cohomolog).*(affine|Affine)",
+   "results": "{\"t\": \"2026-10-23T18:52:48Z\", \"tool\": \"grep\", \"query\": \"(affine|Affine).*(cohomolog|Cohomolog)|(cohomolog|Cohomolog).*(affine|Affine)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-cover and eventual-zero section lemmas do not bound higher cohomology of arbitrary quasi-coherent module sheaves by the number of affine opens."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent cohomology vanishes above the number of affine opens in a finite affine cover of a separated scheme",
+   "results": "{\"t\": \"2026-10-23T18:52:49Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent cohomology vanishes above the number of affine opens in a finite affine cover of a separated scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"], \"digest\": \"516c9f07be8a34e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-cover and eventual-zero section lemmas do not bound higher cohomology of arbitrary quasi-coherent module sheaves by the number of affine opens."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Zariski cohomological dimension of quasi coherent modules on an open subset of an affine scheme covered by s affines is at most s minus one",
+   "results": "{\"t\": \"2026-10-23T18:55:02Z\", \"tool\": \"leanfinder\", \"query\": \"The Zariski cohomological dimension of quasi coherent modules on an open subset of an affine scheme covered by s affines is at most s minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover\"], \"digest\": \"dcb935686ae6d709\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-cover and eventual-zero section lemmas do not bound higher cohomology of arbitrary quasi-coherent module sheaves by the number of affine opens."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"Cech\"",
+   "results": "{\"t\": \"2026-10-23T20:14:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomology\\\", \\\"Cech\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: section/cover, Cech infrastructure and affine-intersection declarations do not state the module cohomology bound including the empty cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf cohomology vanishes above the number of affine open subsets in a finite covering",
+   "results": "{\"t\": \"2026-10-23T20:14:19Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent sheaf cohomology vanishes above the number of affine open subsets in a finite covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"SheafOfModules.QuasicoherentData.mk\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.rec\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"SheafOfModules.QuasicoherentData.presentation\"], \"digest\": \"9df512c988327039\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: section/cover, Cech infrastructure and affine-intersection declarations do not state the module cohomology bound including the empty cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-coherent sheaf cohomology on a scheme with a finite affine open cover and affine intersections vanishes in degrees at least the size of the cover",
+   "results": "{\"t\": \"2026-10-23T20:14:20Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi-coherent sheaf cohomology on a scheme with a finite affine open cover and affine intersections vanishes in degrees at least the size of the cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"], \"digest\": \"866fc9966a6999d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: section/cover, Cech infrastructure and affine-intersection declarations do not state the module cohomology bound including the empty cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An alternating Cech complex for a cover of s open sets is zero in degree at least s and computes sheaf cohomology for an acyclic cover",
+   "results": "{\"t\": \"2026-10-23T20:14:21Z\", \"tool\": \"leanfinder\", \"query\": \"An alternating Cech complex for a cover of s open sets is zero in degree at least s and computes sheaf cohomology for an acyclic cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CochainComplex.cm5b.I\", \"CochainComplex.IsKInjective\", \"CochainComplex.IsKProjective\"], \"digest\": \"9cd6b6e9db2ad6ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: section/cover, Cech infrastructure and affine-intersection declarations do not state the module cohomology bound including the empty cover"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffineOpen.*inf|isAffineHom_diagonal_iff|isSeparated.*[Ii]so",
+   "results": "{\"t\": \"2026-10-23T20:34:18Z\", \"tool\": \"grep\", \"query\": \"IsAffineOpen.*inf|isAffineHom_diagonal_iff|isSeparated.*[Ii]so\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"eeb49064e9b4536c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: section/cover, Cech infrastructure and affine-intersection declarations do not state the module cohomology bound including the empty cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived global sections of quasi coherent modules on a finite union of affine opens vanish by Mayer Vietoris induction",
+   "results": "{\"t\": \"2026-10-23T20:34:19Z\", \"tool\": \"leanfinder\", \"query\": \"Right derived global sections of quasi coherent modules on a finite union of affine opens vanish by Mayer Vietoris induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.coversTop\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"f4229ef6741402ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: section/cover, Cech infrastructure and affine-intersection declarations do not state the module cohomology bound including the empty cover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-supported-class-lift",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X. The affine base case of Tag 08ES. Tag 08EQ proof: lift each generator of the highest cohomology by the closed-support cohomology-class construction, Tag 08E3; distinguish the number of affine opens from the number of ideal generators. Tag 08E3, first sentence: the given s-affine cover bounds quasi-coherent cohomology on the complement.",
+   "via": [
+    "lem-sfb-affine-supported-class-lift",
+    "lem-sfb-affine-supported-perfect-approximation",
+    "lem-sfb-pseudocoherent-perfect-approximation",
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-open-finite-cover-cohomology-bound",
+  "worker": "stage1",
+  "summary": "Checked Tag 01XI and its first proof, Tag 01XB, Tag 01KP, Tag 01BG, and Tags 01E1/01EB. Kept the statement exactly, handled s=0 directly, and supplied strong induction on the given cover size with all geometric and cohomology-comparison inputs cited. All inputs already have nodes, so no new nodes were created. The previous attachment was rejected and is not reused.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), through the existing created.item chain to the supported perfect approximation route; specifically the first sentence of Stacks Tag 08E3, whose cohomology bound this item supplies. Steps 1--5 realize that auxiliary bound by the first proof of Tag 01XI. blueprint_refs.py ancestor reports None for this pre-existing chain, so the inherited null from.node is retained; no new node requires an invented ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-36860710c",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-36860710c (reviewer sub-agent of L); spot-checked: PASS: the item is unchanged except for its proof fields, has no new nodes, and its 5 steps carry the whole first proof of Stacks 01XI (coherent.tex lemma-vanishing-nr-affines, lines 590-627). (1) Case s=0: U is empty, so the section complex is zero; elementary, citing the module-sheaf and module-cohomology definitions. (2) The isomorphism Y→Spec A has an isomorphism as diagonal, hence a closed-immersion diagonal, so it is separated; lem-weil-pbc-separated-affine-open-intersection then applies verbatim (no quasi-separated slip, E1). (3) Restriction is quasi-coherent via the pullback-quasi-coherent node; the open-restriction cohomology comparison is cited, which is not strictly needed but harmless. (4) Strong induction over all (affine Y, open U, cover, quasi-coherent F) is set up properly: s=1 by pqf-lem-affine-vanishing (01XB); for s>=2, V and the intersection of V with W have covers of size s-1 by step 2, and the degrees p and p-1 are both at least s-1. (5) The H^{p-1}(V∩W) → H^p(U) → H^p(V)⊕H^p(W) segment of the lem-sc-mayer-vietoris-ringed-space sequence (01EB) is exact with zero outer terms. Small cases checked: s=0 with p=0; s=1 with U affine or empty; s=2 with p=2; repeated or empty members; Spec 0; F=0. No duplicate: the only other 01XI node, lem-sc-picard-qcoh-finite-cd, is over a field with an unspecified bound. No cycle and no SGA citation. The item is not split in live or side-live, and there is no re-split note. Accepted tool_uses from other units, all generic scheme cohomology for the maintainer to record (C8): pqf-lem-affine-vanishing, lem-sc-mayer-vietoris-ringed-space, lem-pc-open-restriction-module-cohomology, lem-weil-pbc-module-pullback-quasi-coherent."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenFiniteCoverCohomologyBound",
+  "declaration": "AlgebraicGeometry.subsingleton_moduleCohomology_of_affine_open_finite_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenFiniteCoverCohomologyBound.lean",
+  "statement": "theorem subsingleton_moduleCohomology_of_affine_open_finite_cover (Y : Scheme.{u}) [IsAffine Y] (U : Y.Opens) (s : ℕ) (V : Fin s → U.toScheme.Opens) (hV : ∀ i : Fin s, IsAffineOpen (V i)) (hcover : iSup V = ⊤) (F : U.toScheme.Modules) [F.IsQuasicoherent] (p : ℕ) (hp : s ≤ p) : Subsingleton ((RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f11a65c7",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: affine Y, open U, Fin s affine opens of U covering U (iSup = ⊤), quasi-coherent F on U, s ≤ p, Subsingleton of the recorded RingedSpace.moduleCohomology (module-sheaf derived Γ, not abelian H); no extra hypotheses, one universe u. Edge cases: s=0 forces U=∅ incl. p=0; s=1 is affine vanishing; repeated/empty/non-minimal members, Spec 0, F=0 all admitted. No duplicate (subsingleton_H_of_card_le and the private finite_affine_cover_cohomology_bound use abelian H; exists_quasicoherent_cohomology_bound is over a field with an existential bound; item not landed or delivered elsewhere). Node copy differs from live only by the lean field; statement verbatim; public imports = stmt_dep modules, plain imports = proof_dep modules (all present in side-live); docstrings carry Stacks 01XI/01DZ/01E1/01EB, blueprint tag and all 5 steps; sorry only, no definitions, no pro-étale; report has both required sections. No recompile (no file changed); worker reports a clean compile, and the landed subsingleton_openModuleCohomology_of_isAffineOpen uses the same typing."
+ }
+}

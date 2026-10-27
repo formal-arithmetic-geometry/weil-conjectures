@@ -1,0 +1,111 @@
+{
+ "id": "lem-pd-final-ringed-unit-mate-isiso",
+ "kind": "statement",
+ "title": "Normalized ringed direct image has invertible regular-unit mate on final sites",
+ "statement": "Let v:C→D be a continuous final functor of sites small relative to the module universe, R and S commutative ring sheaves and c:R→v_*S a ring-sheaf map. Let L be any specified left adjoint of the scalar-restricted sheaf-module direct image P. If P carries a lax monoidal structure normalized on local pure tensors as in [lem-pd-ringed-direct-image-pairing-lax], the regular-unit map of its left-adjoint oplax mate is invertible. No condition on the tensor components or on c being invertible is imposed.",
+ "stmt_deps": [
+  "lem-pd-ringed-direct-image-pairing-lax",
+  "lem-sfb-adjunction-oplax-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7; Mathlib Algebra/Category/ModuleCat/Sheaf/PullbackFree canonical regular-unit adjunct"
+ },
+ "proof": [
+  {
+   "text": "Uniqueness in the normalized direct-image theorem identifies the chosen lax structure with its constructed one. Its regular-unit equation therefore gives epsilon=unitToPushforwardObjUnit c, checked componentwise.",
+   "uses": [
+    "lem-pd-ringed-direct-image-pairing-lax"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The oplax unit is the adjunct of epsilon. Compare the specified adjunction with Mathlib’s pullbackPushforwardAdjunction by leftAdjointUniq. Its unit equation and the canonical pullbackObjUnitToUnit homEquiv equation identify this adjunct with the component of the uniqueness isomorphism followed by pullbackObjUnitToUnit c. Finality makes the latter an isomorphism by Mathlib; the composite is invertible. This includes zero rings and empty sites admitting the stated hypotheses.",
+   "uses": [
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-ringed-direct-image-pairing-lax",
+  "lem-sfb-adjunction-oplax-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7, Mathlib PullbackFree and uniqueness of left adjoints. K9 restores the C4 companion source removed with the reverted landing; the existing Lean signature and dependency attachment are preserved, with a complete proof and no holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pullback sheaf module regular unit isomorphism final functor",
+   "results": "Found SheafOfModules.pullbackObjUnitToUnit and instIsIsoPullbackObjUnitToUnitOfFinal in PullbackFree.",
+   "date": "2026-10-25",
+   "verdict": "Use canonical map after explicit adjunction uniqueness comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "leftAdjointUniq unit",
+   "results": "Adjunction.unit_leftAdjointUniq_hom_app gives the unit compatibility.",
+   "date": "2026-10-25",
+   "verdict": "Used."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "results": "Mathlib PullbackFree gives precisely the canonical adjunct equation.",
+   "date": "2026-10-25",
+   "verdict": "Used."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleSectionModuleFunctors",
+  "date": "2026-10-26",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-pull-eta-isiso",
+   "place": "General regular-unit adjunct argument for final ringed sites",
+   "via": [
+    "def-pd-proetale-section-module-functors"
+   ]
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FinalRingedUnitMate",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FinalRingedUnitMate.lean",
+  "declaration": "SheafOfModules.normalized_unit_mate_isIso",
+  "statement": "theorem normalized_unit_mate_isIso\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (v : C ⥤ D) [v.IsContinuous J K] [v.Final]\n    (R : Sheaf J CommRingCat.{u + 1}) (S : Sheaf K CommRingCat.{u + 1})\n    (c : (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R ⟶\n      (v.sheafPushforwardContinuous RingCat.{u + 1} J K).obj\n        ((sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S))\n    {L : SheafOfModules ((sheafCompose J\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) ⥤\n      SheafOfModules ((sheafCompose K\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)}\n    (a : L ⊣ pushforward.{u + 1} c)\n    (m : (pushforward.{u + 1} c).LaxMonoidal)\n    (hm : RingedPushforwardPureTensor.{uC, vC, uD, vD, u + 1} v R S c m) :\n    letI := m\n    IsIso (a.leftAdjointOplaxMonoidal.η)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T201551-L-2580218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e75a5",
+  "group": "K9",
+  "result": "fix",
+  "landing": "20261026T070233-L-3486174",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FinalRingedUnitMate vs published clone ec62da3, nodes def-pd-proetale-section-module-functors / lem-pd-section-pull-delta-isiso / lem-pd-final-ringed-unit-mate-isiso, change records, and all 11 direct importers compiled against the corrected item"
+ }
+}

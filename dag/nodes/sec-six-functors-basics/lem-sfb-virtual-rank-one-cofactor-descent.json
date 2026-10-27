@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-virtual-rank-one-cofactor-descent",
+ "kind": "statement",
+ "title": "Descent and derived naturality of the virtual-rank-one cofactor map",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $L\\in D(\\mathcal O_X)$ [def-pc-derived-category] be locally represented in degrees $-1,0$ by complexes $E_i=[P_i\\xrightarrow{u_i}Q_i]$ of finite locally free modules [def-amb-finite-locally-free-module], of ranks $c_i,c_i+1$, with specified derived isomorphisms $\\lambda_i:E_i\\simeq L|_{U_i}$ on an open cover $(U_i)$. The nonnegative integer $c_i$ may vary between models. Let $D=\\det L$ and $d_i:D(E_i)\\xrightarrow{\\sim}D|_{U_i}$ be the determinant comparisons of [lem-trf-two-term-perfect-determinant], normalized by the kernel-first convention of [lem-sfb-two-term-cofactor-naturality], with $D(E_i)=(\\bigwedge^{c_i}P_i)^\\vee\\otimes\\bigwedge^{c_i+1}Q_i$, $(-)^\\vee=\\mathcal Hom(-,\\mathcal O_X)$, and exterior powers as in [def-sc-sheaf-exterior-power]. Let $w_i:\\operatorname{coker}u_i\\to D(E_i)$ be the locally defined wedge map\n$$\\bar v\\longmapsto(p_1\\wedge\\cdots\\wedge p_{c_i})^\\vee\\otimes(u_i(p_1)\\wedge\\cdots\\wedge u_i(p_{c_i})\\wedge v),$$\nfor a local basis $(p_a)$ and any lift $v$. On every overlap, with $t_{ij}=d_j^{-1}d_i$, these maps satisfy\n$$t_{ij}w_i=w_jH^0(\\lambda_j^{-1}\\lambda_i).$$\nConsequently there is a unique $\\mathcal O_X$-linear morphism $w_L:H^0(L)\\to D$ whose expression through every specified model is $d_iw_i$. It has this expression in every further two-term finite locally free model of the same rank difference, even one absent from the given cover. These assertions hold on arbitrary overlaps without separatedness of $X$ or affineness of intersections. For every derived isomorphism $b:L\\simeq M$ between two such objects, $\\det(b)w_L=w_MH^0(b)$. The construction commutes with restriction to open subschemes, refinements, and transport through isomorphisms of schemes, using the canonical cohomology and determinant comparisons. No cotangent origin, smoothness, flatness or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), wedge map; more-algebra.tex Tag 0FJM (lemma-determinant-two-term-complexes), intrinsic good-diagram comparison. Agent-formulated sheaf descent of the cofactor naturality statement. Extracts old proof step 4 and the comparison/restriction argument of step 7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-amb-finite-locally-free-module",
+  "def-sc-sheaf-exterior-power",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-sfb-two-term-cofactor-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Work first on an affine open $V=\\operatorname{Spec}A\\subset U_i$ on which $P_i,Q_i$ are free; such opens cover $U_i$ by finite local freeness. The affine tilde adjunction identifies the differential with an $A$-linear map $A^{c_i}\\to A^{c_i+1}$ and its sheaf cokernel with the associated sheaf of the module cokernel, since tilde preserves cokernels. Apply [lem-sfb-cofactor-local-descent]. It gives the linear cofactor map, independent of basis and lift, and its compatibility with all further localizations. On a free chart the sheaf exterior power is identified with the associated module exterior power by sending a basis wedge to that same wedge; the dual basis and tensor factors give the corresponding identification of $D(E_i)$. These identifications respect restriction by the definition of sheaf exterior powers and the localization comparisons of the cited cofactor lemma. Let $V=\\operatorname{Spec}A$ and $V'=\\operatorname{Spec}A'$ be two such charts. By [lem-sc-affine-inter-principal-both] every point of $V\\cap V'$ lies in an open $W=D_V(f)=D_{V'}(g)$ that is principal in both charts, so $\\mathcal O(W)=A_f=A'_g$ is a localization of each ring. On $W$ both chart maps are the scalar extensions of the two module cofactor maps to this common localization; by [lem-sfb-cofactor-local-descent], applied over $A$ and over $A'$, each is given there by the wedge formula for any basis of $P_i|_W$, and this formula does not depend on the basis, so the two maps agree on $W$. Such opens $W$ cover $V\\cap V'$. Sheaf-morphism uniqueness then gives equality on the intersection, and sheaf-morphism gluing gives $w_i:\\operatorname{coker}u_i\\to D(E_i)$ on all of $U_i$. No assertion that an intersection of affine opens is affine is used.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sfb-cofactor-local-descent",
+    "lem-sc-affine-inter-principal-both",
+    "def-sc-sheaf-exterior-power",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), wedge formula; localization and well-definedness supplied by the cited cofactor lemma; sites-modules.tex Tag 03EM (lemma-internal-hom), sites.tex Tag 04TQ (lemma-glue-maps). Opens principal in two affine charts: schemes.tex Tag 01IW (lemma-standard-open-two-affines)."
+   }
+  },
+  {
+   "text": "On an overlap $W=U_i\\cap U_j$, choose affine opens $V\\subset W$ trivializing all four terms of $E_i,E_j$. Restriction is exact, so $H^0(E_i)|_V=\\operatorname{coker}(u_i|_V)$ and likewise for $j$; it also takes the derived isomorphism $a=\\lambda_j^{-1}\\lambda_i$ to a derived isomorphism on $V$. The termwise-tilde equivalence of [lem-pc-affine-qcoh-derived-equivalence] is fully faithful into the full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_V)$, hence represents this restricted isomorphism by an isomorphism of the two corresponding module complexes in $D(A)$. The normalization in the statement and determinant restriction compatibility identify its determinant map with $t_{ij}|_V$. Apply [lem-sfb-two-term-cofactor-naturality] over $A$: it gives $t_{ij}w_i=w_jH^0(a)$ on $V$. The cohomology identification here is the one induced by termwise tilde and its preservation of cokernels; the maps $w_i,w_j$ are those of step 1 by their formula. Equality holds on all of $W$ by uniqueness for sheaf morphisms on a cover. The algebraic input allows $c_i\\ne c_j$, so no equality of the negative ranks has been assumed.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), derived comparison; perfect.tex Tag 06Z0 (lemma-affine-compare-bounded), affine equivalence; cohomology.tex Tag 08BS, open restriction."
+   }
+  },
+  {
+   "text": "Put $h_i=H^0(\\lambda_i)$ and $\\phi_i=d_iw_i h_i^{-1}:H^0(L)|_{U_i}\\to D|_{U_i}$. On $U_i\\cap U_j$, step 2 and $H^0(\\lambda_j^{-1}\\lambda_i)=h_j^{-1}h_i$ give $d_iw_i=d_jw_jh_j^{-1}h_i$, hence $\\phi_i=\\phi_j$. Apply [lem-pur-sheaf-hom-cover-gluing] on the Zariski site with $F=H^0(L)$ and $G=D$. The fibre products in that lemma are intersections of opens, which exist without separatedness. It gives a unique $\\mathcal O_X$-linear $w_L$ restricting to $\\phi_i$. In particular $w_Lh_i=d_iw_i$, which is the stipulated expression in each model. If the cover is empty, $X$ is empty and the same sheaf gluing statement gives the unique morphism.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM (lemma-internal-hom), with sites.tex Tag 04TQ (lemma-glue-maps); algebraic substitution of step 2."
+   }
+  },
+  {
+   "text": "Let $E\\simeq L|_T$ be any additional two-term model. Apply the comparison argument of step 2 on each $T\\cap U_i$ to this model and $E_i$. It says that the transported map from $E$ equals $w_L|_T$ locally, hence everywhere by sheaf-morphism uniqueness. Thus enlarging or refining the cover gives the same map. Next let $b:L\\simeq M$. On a common refinement choose a model $E$ of $L$ and a model $F$ of $M$, with model isomorphisms $\\lambda,\\mu$. Apply step 2's affine argument to $a=\\mu^{-1}b\\lambda$. Its cofactor identity, multiplied by the model comparisons and using determinant functoriality, reads\n$$\\det(b)\\,d_Ew_E=d_Fw_F H^0(\\mu)^{-1}H^0(b)H^0(\\lambda).$$\nUse the model formulas for $w_L,w_M$ and cancel the invertible $H^0(\\lambda)$ to get $\\det(b)w_L=w_MH^0(b)$ locally. Uniqueness for sheaf morphisms gives the equality on $X$.",
+   "uses": [
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, functorial determinant comparisons; perfect.tex Tags 0FJX and 0FJY; sites-modules.tex Tag 03EM. Reapplication and cancellation of the comparison proved in step 2."
+   }
+  },
+  {
+   "text": "For an open subscheme $T\\subset X$, restrict the specified models and their maps. Exactness of restriction identifies the restricted cokernels with $H^0(L|_T)$. Determinant restriction compatibility identifies their targets with $\\det(L|_T)$. Their wedge formulas restrict term by term, so uniqueness from step 3 identifies the restricted $w_L$ with the construction on $T$. Finally let $s:X'\\xrightarrow{\\sim}X$ be a scheme isomorphism. Pull a free chart and its model back along $s$. On affine charts this is a ring isomorphism $A\\to B$; scalar extension is therefore an exact equivalence, and identifies the module cokernels and their cohomology maps. By [lem-trf-projective-exterior-scalar-comparisons] the exterior and dual comparisons send the basis wedge and its dual to the pulled-back basis wedge and dual. Thus the scalar extension of $w(\\bar v)$ is exactly\n$$(p'_1\\wedge\\cdots\\wedge p'_c)^\\vee\\otimes\\bigl(u'(p'_1)\\wedge\\cdots\\wedge u'(p'_c)\\wedge v'\\bigr).$$\nThe determinant pullback comparison is the one in [lem-trf-two-term-perfect-determinant]. The local formulas therefore coincide, and sheaf-morphism uniqueness gives the asserted transport compatibility globally. This argument uses only a ring isomorphism for transport and exact open restriction; no additional geometric hypotheses enter.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det); more-algebra.tex Tag 0FJ9 (section-determinants), pure wedge and dual comparisons; sites-modules.tex Tag 03EM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sfb-cofactor-local-descent",
+  "lem-sc-affine-inter-principal-both",
+  "def-sc-sheaf-exterior-power",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-sfb-two-term-cofactor-naturality",
+  "lem-trf-projective-exterior-scalar-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y wedge formula, extended using the existing algebraic cofactor lemmas; affine derived comparison via perfect.tex Tag 06Z0, determinant comparison via more-algebra.tex Tag 0FJM, and sheaf descent via sites-modules.tex Tag 03EM. This sheaf-derived naturality theorem is an agent assembly, not quoted verbatim from Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect two term complex on a scheme of virtual rank one the local conormal cofactor maps glue to a canonical morphism from degree zero cohomology to its determinant, natural under derived isomorphisms",
+   "results": "{\"t\": \"2026-10-22T07:37:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a perfect two term complex on a scheme of virtual rank one the local conormal cofactor maps glue to a canonical morphism from degree zero cohomology to its determinant, natural under derived isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\\u03b9\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_\\u03b9\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\\u03b9_\\u03b9\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_id\", \"Algebra.Extension.H1Cotangent.map\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\"], \"digest\": \"564d8f527c1e8436\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: semantic hits concern ideal-sheaf scheme gluing or presentations of cokernels; no determinant-valued cofactor map or derived naturality. The grep finds no cofactor construction for scheme complexes. Scalar matrix adjugate identities do not state sheaf-model comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T07:37:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"det\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: semantic hits concern ideal-sheaf scheme gluing or presentations of cokernels; no determinant-valued cofactor map or derived naturality. The grep finds no cofactor construction for scheme complexes. Scalar matrix adjugate identities do not state sheaf-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor.*(sheaf|complex)|determinant.*cohomology|cohomology.*determinant",
+   "results": "{\"t\": \"2026-10-22T07:37:06Z\", \"tool\": \"grep\", \"query\": \"cofactor.*(sheaf|complex)|determinant.*cohomology|cohomology.*determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: semantic hits concern ideal-sheaf scheme gluing or presentations of cokernels; no determinant-valued cofactor map or derived naturality. The grep finds no cofactor construction for scheme complexes. Scalar matrix adjugate identities do not state sheaf-model comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of the determinant valued cofactor morphism from local two term projective models of a perfect complex on a scheme",
+   "results": "{\"t\": \"2026-10-22T07:37:06Z\", \"tool\": \"leansearch\", \"query\": \"Descent of the determinant valued cofactor morphism from local two term projective models of a perfect complex on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.det_eq_sum_mul_adjugate_col\", \"Matrix.det_eq_sum_mul_adjugate_row\", \"LinearMap.det\", \"LinearMap.coe_det\", \"LinearMap.associated_det_comp_equiv\", \"Module.Basis.det_basis\", \"CategoryTheory.RegularEpi.desc'\", \"LinearEquiv.coe_det\"], \"digest\": \"eff57460cff54889\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: semantic hits concern ideal-sheaf scheme gluing or presentations of cokernels; no determinant-valued cofactor map or derived naturality. The grep finds no cofactor construction for scheme complexes. Scalar matrix adjugate identities do not state sheaf-model comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of two term presentations of a canonical morphism from cokernel of a differential to the determinant line of a perfect complex of Euler rank one",
+   "results": "{\"t\": \"2026-10-22T07:37:09Z\", \"tool\": \"leanfinder\", \"query\": \"Independence of two term presentations of a canonical morphism from cokernel of a differential to the determinant line of a perfect complex of Euler rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.presentationOfIsCokernelFree_relations\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"Module.Presentation.ofExact_var\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_\\u03c0\", \"SheafOfModules.presentationOfIsCokernelFree_generators\", \"exteriorPower.presentation.isPresentationCore\"], \"digest\": \"b3ea366dee82cacf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: semantic hits concern ideal-sheaf scheme gluing or presentations of cokernels; no determinant-valued cofactor map or derived naturality. The grep finds no cofactor construction for scheme complexes. Scalar matrix adjugate identities do not state sheaf-model comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor|determinant",
+   "results": "{\"t\": \"2026-10-22T07:37:09Z\", \"tool\": \"grep\", \"query\": \"cofactor|determinant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: semantic hits concern ideal-sheaf scheme gluing or presentations of cokernels; no determinant-valued cofactor map or derived naturality. The grep finds no cofactor construction for scheme complexes. Scalar matrix adjugate identities do not state sheaf-model comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical determinant valued cofactor map from degree zero cohomology of two term perfect complexes on a scheme glues and is natural for derived isomorphisms",
+   "results": "{\"t\": \"2026-10-23T11:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical determinant valued cofactor map from degree zero cohomology of two term perfect complexes on a scheme glues and is natural for derived isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.isoCocycles₁_inv_comp_iCocycles\", \"groupCohomology.cocyclesIso₀_inv_comp_iCocycles\", \"groupCohomology.isoCocycles₁_inv_comp_iCocycles_apply\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.isoCocycles₁_hom_comp_i_apply\", \"groupCohomology.inhomogeneousCochainsIso\", \"groupCohomology.dArrowIso₀₁\", \"groupCohomology.cocyclesIso₀_hom_comp_f_apply\"], \"digest\": \"1b6fa8e2bfe12713\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern group cohomology, presentations of cokernels, basis invariance of square determinants, or individual exterior powers; none constructs or compares the determinant-valued cofactor map for scheme-derived objects. Read the hit signatures and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:92-118 and Mathlib/LinearAlgebra/Determinant.lean:119-123. The grep and Loogle have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor.*(sheaf|complex)|determinant.*cohomology|cohomology.*determinant",
+   "results": "{\"t\": \"2026-10-23T11:01:58Z\", \"tool\": \"grep\", \"query\": \"cofactor.*(sheaf|complex)|determinant.*cohomology|cohomology.*determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern group cohomology, presentations of cokernels, basis invariance of square determinants, or individual exterior powers; none constructs or compares the determinant-valued cofactor map for scheme-derived objects. Read the hit signatures and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:92-118 and Mathlib/LinearAlgebra/Determinant.lean:119-123. The grep and Loogle have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of a two term presentation for the wedge map from cokernel to determinant line on a scheme",
+   "results": "{\"t\": \"2026-10-23T11:01:58Z\", \"tool\": \"leansearch\", \"query\": \"Independence of a two term presentation for the wedge map from cokernel to determinant line on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Presentation.cokernel\", \"LinearMap.det_toMatrix_eq_det_toMatrix\", \"exteriorPower.linearMap_ext\", \"exteriorPower.map_apply_ιMulti_family\", \"ModuleCat.exteriorPower.hom_ext_iff\", \"ExteriorAlgebra.ιMulti\", \"exteriorPower.presentation_var\", \"ExteriorAlgebra.ι_add_mul_swap\"], \"digest\": \"a5cd828d6a776d0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern group cohomology, presentations of cokernels, basis invariance of square determinants, or individual exterior powers; none constructs or compares the determinant-valued cofactor map for scheme-derived objects. Read the hit signatures and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:92-118 and Mathlib/LinearAlgebra/Determinant.lean:119-123. The grep and Loogle have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T11:01:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"det\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern group cohomology, presentations of cokernels, basis invariance of square determinants, or individual exterior powers; none constructs or compares the determinant-valued cofactor map for scheme-derived objects. Read the hit signatures and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:92-118 and Mathlib/LinearAlgebra/Determinant.lean:119-123. The grep and Loogle have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf morphism from cokernel of a rectangular differential to its top exterior determinant compatible with quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-23T11:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf morphism from cokernel of a rectangular differential to its top exterior determinant compatible with quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"SheafOfModules.Presentation.map_π_eq\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.presentationOfIsCokernelFree\"], \"digest\": \"500ebc861b0bf8bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern group cohomology, presentations of cokernels, basis invariance of square determinants, or individual exterior powers; none constructs or compares the determinant-valued cofactor map for scheme-derived objects. Read the hit signatures and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:92-118 and Mathlib/LinearAlgebra/Determinant.lean:119-123. The grep and Loogle have zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-curve-fundamental-class",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; comparison on affine covers of arbitrary overlaps and isomorphism/restriction compatibility: old steps 4 and 7.",
+   "via": [
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-virtual-rank-one-cofactor-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies unchanged. Used existing algebraic cofactor construction/naturality, affine derived equivalence, determinant comparisons and sheaf morphism gluing. Proved arbitrary-overlap descent, independence of additional models, derived naturality and restriction/isomorphism compatibility in five steps. No new nodes; no Lean declaration attachment. Checked C1/C4 quotations, unequal ranks, empty scheme, rank zero, noninjective differentials and nonseparated overlaps.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; comparison on affine covers of arbitrary overlaps and isomorphism/restriction compatibility: old steps 4 and 7. The present split supplies only the cofactor descent/comparison prerequisite for the already recorded lci curve fundamental-class input. The latest blueprint direct-images proof (3) retains the direct-image route; no unit/chapter route is changed. The inherited from.node is null, as reported by blueprint_refs.py ancestor; it is retained rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-two-term-perfect-determinant",
+    "why": "Generic determinant functor with normalized model comparisons and restriction/pullback compatibility; the current unit has no determinant functor."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine fully faithful termwise-tilde equivalence turns the specified sheaf-derived isomorphism into the ring-derived isomorphism required by algebraic cofactor naturality."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine sheaf/module adjunction and preservation of cokernels identify the cofactor maps and their cohomology sources."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic gluing and uniqueness of sheaf module morphisms on the Zariski site, needed on arbitrary overlaps."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Generic exactness of open restriction identifies cohomology sheaves and cokernels on charts."
+   },
+   {
+    "node": "lem-trf-projective-exterior-scalar-comparisons",
+    "why": "Generic pure-wedge and dual scalar comparisons verify the formula under isomorphisms of schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-two-term-perfect-determinant",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-trf-projective-exterior-scalar-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-6814d42f3",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-6814d42f3 (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps, no new nodes, statement and stmt_deps byte-identical to live. Live still has it unsplit, so no other group superseded it, and there is no re-split repair note. No cycle (cofactor-local-descent names the item only in its report text). Fault, now repaired (E1/C1): step 1 compared the two affine-chart cofactor maps 'on principal opens taken inside either chart'. lem-sfb-cofactor-local-descent gives the formula only on localizations S^-1A, and an open principal in V is not in general a localization of A'. FIX: step 1 now cites the existing Mathlib leaf lem-sc-affine-inter-principal-both (Stacks 01IW, schemes.tex lemma-standard-open-two-affines), so every point of V∩V' lies in an open principal in both charts, where both maps follow the basis-independent formula. uses, source place and proof_deps (union of uses) are updated in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-virtual-rank-one-cofactor-descent.json. Steps 2-5 check out. Step 2: open restriction is exact; D(A)≃D_QCoh(O_V) gives a preimage of the restricted derived isomorphism; t_ij|_V=D(a) follows from functoriality, restriction compatibility and the pinned kernel-first normalization; two-term-cofactor-naturality (which allows c≠c' and noninjective u) then gives the identity, glued by sheaf-morphism uniqueness. Steps 3 and 4: I verified the algebra of the gluing and of det(b)w_L=w_M H^0(b), with a=μ^-1bλ and cancelling H^0(λ). Step 5 uses projective-exterior-scalar-comparisons for the transport. It relies on the determinant node's pullback comparison being the pure-wedge one on models: the NL statement says 'canonically' and the Lean record pins it (IsCanonical.pullback, Q116). Accepted, with a maintainer note to state this in the NL statement of lem-trf-two-term-perfect-determinant. Small cases checked: c=0 (identity Q→∧^1Q); u=0 (w=0); contractible summand [O→O^2]→[0→O] (kernel-first sign +1, consistent); empty X; nonseparated overlaps. Batch-5: lem-trf-projective-exterior-scalar-comparisons and lem-sfb-cofactor-local-descent (which reaches it) are generic commutative algebra about scalar extension of exterior powers and duals. They are not the trace formula, Poincaré duality, or any step of their proofs, so both are accepted. The 6 declared tool_uses (determinant functor, affine derived equivalence, tilde adjunction, sheaf-hom gluing, open-restriction exactness, exterior scalar comparisons) are generic and accepted. Duplicate search over all ~30 nodes mentioning 'cofactor' and over the blueprint found nothing; same_as=[] stands. No SGA source is used. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VirtualRankOneCofactorDescent",
+  "declaration": "AlgebraicGeometry.virtualRankOne_cofactor_descent",
+  "declarations": [
+   "AlgebraicGeometry.IsVirtualRankOne",
+   "AlgebraicGeometry.TwoTermDeterminantModel.cofactorClass",
+   "AlgebraicGeometry.TwoTermDeterminantModel.IsSheafCofactor",
+   "AlgebraicGeometry.cofactorRestriction",
+   "AlgebraicGeometry.cofactorRestriction_additive",
+   "AlgebraicGeometry.cofactorTensorRestrictionIso",
+   "AlgebraicGeometry.cofactorRestrictionChainMap",
+   "AlgebraicGeometry.CofactorRestrictionComparison",
+   "AlgebraicGeometry.CofactorRestrictionComparison.h0Iso",
+   "AlgebraicGeometry.cofactorDetRestrictionIso",
+   "AlgebraicGeometry.cofactorModelExpression",
+   "AlgebraicGeometry.IsVirtualRankOneCofactor",
+   "AlgebraicGeometry.virtualRankOne_cofactor_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VirtualRankOneCofactorDescent.lean",
+  "statement": "theorem virtualRankOne_cofactor_descent (T : TwoTermPerfectDeterminantData.{u, w}) (hT : T.IsCanonical) : ∃ B : ∀ {X Y : Scheme.{u}} (g : Y ⟶ X) [IsOpenImmersion g], CofactorRestrictionComparison g, ∃ W : ∀ (X : Scheme.{u}) (L : schemeDerivedCategory X) (hL : isTwoTermPerfect X L) (_hR : IsVirtualRankOne X L), (DerivedCategory.homologyFunctor _ 0).obj L ⟶ twoTermDeterminantValue (T.functor X) L hL, (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X) (hL : isTwoTermPerfect X L) (hR : IsVirtualRankOne X L), IsVirtualRankOneCofactor T B X L hL (W X L hL hR) ∧ ∀ f, IsVirtualRankOneCofactor T B X L hL f → f = W X L hL hR) ∧ (∀ (X : Scheme.{u}) (L M : schemeDerivedCategory X) (hL : isTwoTermPerfect X L) (hM : isTwoTermPerfect X M) (hR : IsVirtualRankOne X L) (hS : IsVirtualRankOne X M) (b : L ≅ M), W X L hL hR ≫ (twoTermDeterminantIso (T.functor X) hL hM b).hom = (DerivedCategory.homologyFunctor _ 0).map b.hom ≫ W X M hM hS) ∧ (∀ (X Y : Scheme.{u}) (g : Y ⟶ X) [IsOpenImmersion g] (L : schemeDerivedCategory X) (hL : isTwoTermPerfect X L) (hR : IsVirtualRankOne X L), ∃ hS : IsVirtualRankOne Y ((derivedPullback g).obj L), (cofactorRestriction g).map (W X L hL hR) ≫ (cofactorDetRestrictionIso T g L hL).hom = ((B g).h0Iso L).inv ≫ W Y ((derivedPullback g).obj L) (T.pullback_mem g L hL) hS) ∧ (∀ (X : Scheme.{u}) (P : TwoTermDeterminantModel X) (hr : P.nonnegRank = P.negRank + 1), ∃! f, P.IsSheafCofactor hr f) ∧ (∀ (X : Scheme.{u}) (P Q : TwoTermDeterminantModel X) (hr : P.nonnegRank = P.negRank + 1) (hs : Q.nonnegRank = Q.negRank + 1) (a : DerivedCategory.Q.obj P.complex ≅ DerivedCategory.Q.obj Q.complex) (f : (DerivedCategory.homologyFunctor _ 0).obj (DerivedCategory.Q.obj P.complex) ⟶ P.line) (f' : (DerivedCategory.homologyFunctor _ 0).obj (DerivedCategory.Q.obj Q.complex) ⟶ Q.line), P.IsSheafCofactor hr f → Q.IsSheafCofactor hs f' → f ≫ (T.modelIso P).inv ≫ (twoTermDeterminantIso (T.functor X) (T.model_mem P) (T.model_mem Q) a).hom ≫ (T.modelIso Q).hom = (DerivedCategory.homologyFunctor _ 0).map a.hom ≫ f') ∧ (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X) (hL : isTwoTermPerfect X L) (hR : IsVirtualRankOne X L) (I : Type v) (U : I → X.Opens) (_hcover : iSup U = ⊤) (P : ∀ i, TwoTermDeterminantModel (U i).toScheme) (hr : ∀ i, (P i).nonnegRank = (P i).negRank + 1) (e : ∀ i, DerivedCategory.Q.obj (P i).complex ≅ (derivedPullback (U i).ι).obj L) (f : (DerivedCategory.homologyFunctor _ 0).obj L ⟶ twoTermDeterminantValue (T.functor X) L hL), (∀ i, (P i).IsSheafCofactor (hr i) (cofactorModelExpression T (B (U i).ι) L hL f (P i) (e i))) ↔ f = W X L hL hR)",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4ade683c",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_deps' Lean (TwoTermDeterminantModel/line/isTwoTermPerfect/TwoTermPerfectDeterminantData, IsCanonical, signed IsFlatLCIDeterminantComparison, pullbackCounit/pullbackComplex, TwoTermCofactorNaturality) and the 297-line module. Only lean changed; statement verbatim; no duplicate module or other S2 delivery. Clauses: IsVirtualRankOne (per-point models, rank diff 1, varying c); T+hT IsCanonical pins kernel-first d_i; IsSheafCofactor = p^vee⊗(u(p)∧…∧z) for every open/basis/normalized ρ/lift, cofactorClass = real coker projection, no injectivity; local ∃!; two-model overlap identity for arbitrary derived iso and unequal ranks; ∃ W with all-further-models characterization + uniqueness; cover iff for any I:Type v, iSup U=⊤; naturality W_L≫det b = H0 b≫W_M; restriction along every open immersion (covers isos), with B pinned on K-flat reps by pullbackCounit (unique, no scalar) and det restriction via T.pullbackIso. Hand sign check [O→O²]→[0→O]: det M=-1, sign (-1)^1, t=+1, consistent. Edge cases: empty X/cover, c=0, u=0, non-injective u, unequal ranks, independent universes. No hollow defs, sorry only in main theorem, docstrings carry source/blueprint and the 5 proof steps. Notes: self-done second reading, explicitly stated; loose helper tags 08DW/0095; Classical.choose of the unit-pinned exists_tensorPullbackAdjunction (equals tensorPullbackSectionAdjunction). Not recompiled per instructions."
+ }
+}

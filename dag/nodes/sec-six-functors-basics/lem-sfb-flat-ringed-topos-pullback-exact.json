@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-flat-ringed-topos-pullback-exact",
+ "kind": "statement",
+ "title": "Exact tensor pullback along a flat morphism of ringed topoi",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be sites small relative to the module-sheaf universe, let $A,B$ be sheaves of commutative rings on them, and let $f:(\\operatorname{Sh}(\\mathcal C),A)\\to(\\operatorname{Sh}(\\mathcal D),B)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with structural ring map $f^\\sharp:f^{-1}B\\to A$. Suppose $A$ is flat as an $f^{-1}B$-module sheaf [def-pc-flat-sheaf-modules]. On module sheaves [def-weil-sheaf-of-modules-category] form the tensor pullback $f^*M=A\\otimes_{f^{-1}B}f^{-1}M$ [def-pur-sheaf-tensor-product]. Then $f^*:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$ is additive and exact: it preserves kernels and cokernels and carries every short exact sequence to a short exact sequence. The geometric morphism need not be induced by a functor between the chosen presenting sites.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04JC (lemma-flat-pullback-exact), second assertion; flatness is definition-flat immediately preceding it."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-ringed-topos-morphism-of-universes"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=f^{-1}B$. The ringed-topos hypothesis gives a geometric morphism, so apply [lem-trf-geometric-inverse-image-exact] with source $\\mathcal D$, target $\\mathcal C$ and ring sheaf $B$. Its transported module functor $I:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(R)$ is exact, including kernels and cokernels. It is additive: transported addition is $f^{-1}$ of addition under the finite-product comparison, and a sum of maps is addition after their product with the diagonal. This uses no functor between the presenting sites.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), proof; Tag 03ER (definition-flat), item (3); Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)"
+   }
+  },
+  {
+   "text": "By [def-pc-flat-sheaf-modules], flatness of $A$ as an $R$-module says exactly that $T:N\\mapsto N\\otimes_R A$ is exact as an endofunctor of $\\operatorname{Mod}(R)$. Let $E(N)=A\\otimes_R N$ with $A$ acting on the first factor. The maps $a\\otimes n\\mapsto n\\otimes a$ and $n\\otimes a\\mapsto a\\otimes n$ respect balancing, since $(ra)\\otimes n=a\\otimes(rn)$, and are mutually inverse on pure tensors. They therefore induce natural inverse sheaf maps for the sheafified tensors [def-pur-sheaf-tensor-product], identifying the underlying $R$-module of $E(N)$ with $T(N)$. Moreover $E(u+v)(a\\otimes n)=a\\otimes u(n)+a\\otimes v(n)$ and $E(0)=0$, proving additivity.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), proof; Tag 03ER (definition-flat), item (3); Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-sheaves-colimits-forgetful] to $R$ and $A$ on $\\mathcal C$; its sheafification hypothesis holds for the small site in the stipulated universe. Both scalar-forgetting functors preserve kernels and cokernels. Thus the underlying abelian-sheaf maps of the kernel and cokernel comparisons for $E$ are the comparisons for the exact functor $T$, hence isomorphisms. An $A$-linear map invertible on underlying sheaves has $A$-linear inverse: if $u(x)=y$, then $u(ax)=ay$, so $u^{-1}(ay)=a u^{-1}(y)$. Hence the comparison maps are isomorphisms in $\\operatorname{Mod}(A)$, and $E$ preserves kernels and cokernels.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), proof; Tag 03ER (definition-flat), item (3); Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)"
+   }
+  },
+  {
+   "text": "The given tensor pullback is $f^*=E\\circ I$. Its kernel comparison is the composite of the kernel comparisons for $I$ and $E$; the same holds for cokernels, so both are isomorphisms. The composite is additive. For a short exact sequence $0\\to M_1\\xrightarrow{u}M_2\\xrightarrow{v}M_3\\to0$, $u$ is a kernel of $v$ and $v$ is a cokernel of $u$ in the abelian module categories [def-weil-sheaf-of-modules-category]. Their images have these same two properties and form a short exact sequence. This proves every asserted clause.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), proof; Tag 03ER (definition-flat), item (3); Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04JC (lemma-flat-pullback-exact), proof; Tag 03ER (definition-flat), item (3); Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(flat|Flat).*(pullback|Pullback)|(pullback|Pullback).*(flat|Flat)",
+   "results": "15 hits; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean. Read Sheaf/PullbackContinuous.lean:43-65, Sites/Pullback.lean:105-121 and ModuleCat/Descent.lean:42-46 for the candidates.",
+   "date": "2026-10-24",
+   "verdict": "no match: site-functor pullbacks and ordinary-ring flat extension of scalars do not state exactness for arbitrary geometric morphisms with a flat target ring sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact extension of scalars after geometric inverse image for a flat morphism of ringed topoi",
+   "results": "8 hits; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, PresheafOfModules.pullback, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearEquiv.extendScalarsOfSurjective_symm, PresheafOfModules.pullbackPushforwardAdjunction, Algebra.FormallyUnramified.flat_of_restrictScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv, ModuleCat.extendScalarsId_inv_app_apply. Read Sheaf/PullbackContinuous.lean:43-65, Sites/Pullback.lean:105-121 and ModuleCat/Descent.lean:42-46 for the candidates.",
+   "date": "2026-10-24",
+   "verdict": "no match: site-functor pullbacks and ordinary-ring flat extension of scalars do not state exactness for arbitrary geometric morphisms with a flat target ring sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "0 hits; . Read Sheaf/PullbackContinuous.lean:43-65, Sites/Pullback.lean:105-121 and ModuleCat/Descent.lean:42-46 for the candidates.",
+   "date": "2026-10-24",
+   "verdict": "no match: site-functor pullbacks and ordinary-ring flat extension of scalars do not state exactness for arbitrary geometric morphisms with a flat target ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of module sheaves along a flat morphism of ringed topoi is exact",
+   "results": "8 hits; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, SheafOfModules.pullback, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.rTensor_reflects_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact. Read Sheaf/PullbackContinuous.lean:43-65, Sites/Pullback.lean:105-121 and ModuleCat/Descent.lean:42-46 for the candidates.",
+   "date": "2026-10-24",
+   "verdict": "no match: site-functor pullbacks and ordinary-ring flat extension of scalars do not state exactness for arbitrary geometric morphisms with a flat target ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat sheaf of algebras over a ring sheaf makes extension of scalars exact on sheaves of modules",
+   "results": "8 hits; ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact. Read Sheaf/PullbackContinuous.lean:43-65, Sites/Pullback.lean:105-121 and ModuleCat/Descent.lean:42-46 for the candidates.",
+   "date": "2026-10-24",
+   "verdict": "no match: site-functor pullbacks and ordinary-ring flat extension of scalars do not state exactness for arbitrary geometric morphisms with a flat target ring sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_extendScalars_of_flat|def pullback|IsLeftAdjoint.*pullback",
+   "results": "13 hits; Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. Read Sheaf/PullbackContinuous.lean:43-65, Sites/Pullback.lean:105-121 and ModuleCat/Descent.lean:42-46 for the candidates.",
+   "date": "2026-10-24",
+   "verdict": "no match: site-functor pullbacks and ordinary-ring flat extension of scalars do not state exactness for arbitrary geometric morphisms with a flat target ring sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-space-groupoid-kernels-cokernels",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Quasi-coherent algebra image factorization on smooth tests; module prerequisite: Exact smooth pullback of quasi-coherent modules on algebraic stacks; Q23 split, atlas exactness: underlying kernels and cokernels in flat algebraic-space groupoid modules (06VZ). Supporting input for 06VZ: exact tensor pullback along a flat ringed-topos morphism, sites-modules 04JC.",
+   "via": [
+    "lem-sfb-flat-space-groupoid-kernels-cokernels",
+    "lem-sfb-stack-smooth-qcoh-exact",
+    "lem-sfb-stack-algebra-smooth-image",
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-ringed-topos-pullback-exact",
+  "worker": "stage1",
+  "summary": "Verified Stacks 04JC for arbitrary geometric morphisms. Reused the existing exact transported inverse-image theorem, expanded the flat tensor and scalar-forgetting argument, and explicitly checked additivity, kernel/cokernel comparisons and short exact sequences. No statement change and no new nodes. Mathlib searches returned only site-presented pullbacks or ordinary-ring scalar extension.",
+  "blueprint": "Supports the existing ancestry to det-thm-sf-ctf-stability-direct-images, proof (3), through the flat groupoid module kernel/cokernel input: the 04JC flat tensor pullback tool. The latest blueprint does not state this generic ringed-topos lemma separately. Retained the inherited null from.node and full via/place lineage (blueprint_refs.py ancestor also returns None).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exact inverse-image theorem for arbitrary geometric morphisms and variable commutative ring sheaves; the local groupoid-module argument needs this without a presenting-site functor."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic scalar-forgetting theorem for module sheaves on a small site, used to transfer kernel and cokernel preservation from underlying abelian sheaves to the new ring action."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-a83ac57df",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-a83ac57df (reviewer sub-agent of L); spot-checked: I read the item against Stacks 04JC (sites-modules.tex:5540) and 03ER(3). The statement is unchanged and true. Restricting to commutative rings is forced by def-pur-sheaf-tensor-product and matches the only citer. Steps 1-4 are sound. Step 1: the ringed-topos datum is a geometric morphism as in def-trf-geometric-morphism; with the sites swapped, lem-trf-geometric-inverse-image-exact gives the exact transported functor Mod(B)->Mod(f^{-1}B). Step 2: flatness is by definition exactness of N ⊗_R A; the flip A⊗N ≅ N⊗A is elementary. Step 3: scalar forgetting (03DA/03DB node, clause 1) shows the comparisons are isomorphisms, and the inverse of an A-linear bijection is A-linear. Step 4: the comparisons compose, and short exact sequences go to short exact sequences in the abelian categories. Small cases: f=id on a point is ordinary flat base change; A=0 and an empty site are fine; for Z->Z/2, multiplication by 2 becomes the zero map, so flatness is really used. There are no new nodes. The candidates found by rg are all narrower and none is a duplicate: prop-weil-pbc-inverse-image-modules-exact, lem-sf-comparison-pullback-exact, lem-weil-pbc-site-pullback-abelian-exact (needs a site functor), lem-sc-affine-algebra-tensor-pullback-exact. Batch-5 check: I accept lem-trf-geometric-inverse-image-exact. It is the generic first assertion of 04JC, not part of the trace formula or Poincaré duality. Its 132-node closure contains only two other trf nodes, both general definitions (def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation), and no trace-formula, Poincaré or batch-4 node. I accept both tool_uses as generic. No SGA, no repair note, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatRingedToposPullbackExact",
+  "declaration": "SheafOfModules.flat_ringedTopos_pullback_exact",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatRingedToposPullbackExact.lean",
+  "statement": "theorem flat_ringedTopos_pullback_exact {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J CommRingCat.{w}) (B : Sheaf K CommRingCat.{w}) (f : RingedToposMorphismOfUniverses ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A) ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj B)) (RI : Sheaf J CommRingCat.{w}) (I : AlgebraicInverseImage f.inverse B RI) (c : RI ⟶ A) (hc : I.ringUnderlying.hom ≫ (sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map c = f.ringMap) (hflat : IsFlatOnSite.{uC, vC, w, w} (J := J) (R := RI) ((restrictScalars.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map c)).obj (unit ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A)))) : ∃ (F : ringedSiteModules.{w} ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj B) ⥤ ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A)) (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj B), F.obj M = changeOfRingsOfUniverses c (I.modules.obj M)) (_ : ∀ {M N : ringedSiteModules.{w} ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj B)} (a : M ⟶ N), F.map a = eqToHom (hobj M) ≫ changeOfRingsHomOfUniverses c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm) (hadd : F.Additive), exactFunctor _ _ F ∧ ∀ S : ShortComplex (ringedSiteModules.{w} ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj B)), S.ShortExact → (@ShortComplex.map _ _ _ _ _ _ S F (@Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ F hadd)).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The canonical tensor functor is specified on objects by changeOfRingsOfUniverses and on maps by changeOfRingsHomOfUniverses; the existential packages these prescribed data into a functor, not an arbitrary lift. Ring and module transport use the existing AlgebraicInverseImage exported by the recorded algebraic-inverse-image module. All site universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1092e2d2b",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of c4cbc2bb3da8 (H13/H4/H2). Snapshot diff: def-weil-pbc-ringed-topos-morphism now byte-identical to live and side-live (NH record restored); landed def-pur-ringed-topos-morphism-of-universes (Q111, existing:true owner of RingedToposMorphismOfUniverses) added to stmt_deps; Dependency-modules report claim removed; Lean module unchanged. Independent recheck vs 04JC/03ER(3): independent site universes with EssentiallySmall.{w}; f a geometric morphism with no site functor; RI/I : AlgebraicInverseImage fixed by ringUnderlying/moduleUnderlying and operation-transport fields; c tied to f.ringMap by hc; IsFlatOnSite of A restricted along c; F fixed on objects and maps by changeOfRingsOfUniverses/HomOfUniverses; Additive + exactFunctor + short exact to short exact; edge cases f=id, A=0, empty site, Z->Z/2 fine. Verbatim statement, sorry only, docstrings with source and blueprint, no duplicate, no dependency record modified. No compile (no file changed); worker reports clean 4.0 s compiles."
+ }
+}

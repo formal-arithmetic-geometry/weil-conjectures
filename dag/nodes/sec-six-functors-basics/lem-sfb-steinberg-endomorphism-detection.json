@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-steinberg-endomorphism-detection",
+ "kind": "statement",
+ "title": "Steinberg endomorphisms detect a nonzero fixed vector",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]. Semisimple means smooth, affine, connected and of finite type, with no nontrivial smooth connected solvable normal subgroup, where solvable means that the successive commutator subgroup schemes eventually become trivial. Simply connected means that every surjective homomorphism $S'\\to S$ from a semisimple group scheme with finite central kernel is an isomorphism; finite means finite-dimensional coordinate algebra and central means commuting with every element after every scalar extension. A finite-dimensional rational $S$-module is a finite-dimensional $F$-vector space $U$ with linear coaction $\\rho_U:U\\to U\\otimes_F F[S]$ satisfying coassociativity and the counit identity. Write $U^S=\\{u:\\rho_U(u)=u\\otimes1\\}$. For every such $U$ and every $0\\ne x\\in U^S$, there exist a nonzero finite-dimensional rational $S$-module $E$ and an equivariant $F$-linear map\n$$\\varphi:U\\longrightarrow\\operatorname{End}_F(E)$$\nsuch that\n$$\\varphi(x)\\ne0,\\qquad \\operatorname{End}_F(E)^S=F\\cdot\\operatorname{id}_E.$$\nHere $\\operatorname{End}_F(E)$ is the vector space of linear endomorphisms with conjugation action: for every commutative $F$-algebra $A$, $s\\in S(A)$ acts on $a\\in\\operatorname{End}_A(E\\otimes_F A)$ by $a\\mapsto s a s^{-1}$. Equivariance and invariance are identities of coactions, not just identities for $F$-points. The statement includes characteristic zero and every positive characteristic, as well as $S=1$.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Lemmas 9.7.2(1),(2), Remark 9.7.3 and Lemma 9.7.4; the endomorphism construction in Theorem 9.7.5, printed pp.49--50. Field version obtained by applying the lemmas to the constant split group and module over F[[t]] and reducing modulo t, choosing m large and, in characteristic p, m=p^nu-1. Read online https://arxiv.org/html/1005.2398v3#S9.SS7; local PDF WANTED. The detection assertion is used only for x nonzero modulo the maximal ideal."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-rational-representation-gzero",
+  "def-sfb-hopf-action-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-rho-section-modules] to $S/F$. Choose its split maximal torus $T$ and Borel subgroup $B$, and use its character $\\rho$ and concrete regular-function modules $W_m$. They are finite-dimensional rational $S$-modules. This supplies the split data needed in the representation-theoretic lemmas over the given algebraically closed field, without assuming a split form as an extra hypothesis.",
+   "uses": [
+    "lem-sfb-rho-section-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "§9.7 setup before Lemma 9.7.2; split-data existence from Milne 19.22 and §17b."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rho-tensor-square-eventual-detection] to $V=U$ and $v=x$. Its hypotheses hold since $U$ is finite-dimensional rational and $x\\ne0$ is invariant. Obtain $M\\ge1$ and maps $a_m:U\\to W_m\\otimes_F W_m$ for every $m\\ge M$, with $a_m(x)\\ne0$.",
+   "uses": [
+    "lem-sfb-rho-tensor-square-eventual-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 9.7.2(2), with nonzero v; constant F[[t]] specialization and reduction."
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}F=0$, choose $m=M$. If $\\operatorname{char}F=p>0$, choose $\\nu\\ge1$ with $p^\\nu-1\\ge M$ (for example $\\nu=M+1$ works since $p\\ge2$). In both cases [lem-sfb-rho-section-self-duality] supplies an equivariant isomorphism $d:E\\to E^\\vee$, where $E=W_m$. The bound gives $a=a_m$ from Step 2; the section-module lemma ensures $0\\ne E$ and finite dimension. Thus the detection and self-duality use the same index $m$; no assertion for arbitrary weights in characteristic $p$ is needed.",
+   "uses": [
+    "lem-sfb-rho-section-self-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 9.7.4(1),(2) combined with the all-sufficiently-large quantifier in Lemma 9.7.2(2)."
+   }
+  },
+  {
+   "text": "Define $\\Theta:E\\otimes_F E\\to\\operatorname{End}_F(E)$ by $\\Theta(u\\otimes v)(w)=d(v)(w)u$. For a basis $e_i$ with dual basis $e_i^*$ its inverse sends $A$ to $\\sum_i A(e_i)\\otimes d^{-1}(e_i^*)$: composing on $w$ gives $\\sum_i e_i^*(w)A(e_i)=A(w)$, and composing on $u\\otimes v$ gives $\\sum_i d(v)(e_i)u\\otimes d^{-1}(e_i^*)=u\\otimes v$. For every $F$-algebra $C$ and $s\\in S(C)$, equivariance of $d$ gives $d(sv)(w)=d(v)(s^{-1}w)$, so $\\Theta(su\\otimes sv)(w)=s\\Theta(u\\otimes v)(s^{-1}w)$. Therefore $\\Theta$ is equivariant for the diagonal action and conjugation action. Put $\\varphi=\\Theta\\circ a$. It is equivariant and $\\varphi(x)\\ne0$ because $a(x)\\ne0$ and $\\Theta$ is injective. All displayed identities also hold at the universal point of $S$, hence are coaction identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 9.7.5, tensor-to-endomorphism identification; agent-written basis inverse and universal-point equivariance."
+   }
+  },
+  {
+   "text": "By [lem-sfb-rho-tensor-square-invariant-line], $(E\\otimes_F E)^S$ has dimension one. The equivariant isomorphism $\\Theta$ and its equivariant inverse restrict to inverse linear maps on invariant subspaces, so $\\operatorname{End}_F(E)^S$ also has dimension one. The identity is invariant since $s\\operatorname{id}_E s^{-1}=\\operatorname{id}_E$ after every scalar extension, and is nonzero since $E\\ne0$. A one-dimensional vector space is spanned by any nonzero vector, hence $\\operatorname{End}_F(E)^S=F\\operatorname{id}_E$. Together with Step 4 this proves every clause.",
+   "uses": [
+    "lem-sfb-rho-tensor-square-invariant-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 9.7.2(1), Remark 9.7.3 and the scalar-identity conclusion in Theorem 9.7.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-rho-tensor-square-eventual-detection",
+  "lem-sfb-rho-section-self-duality",
+  "lem-sfb-rho-tensor-square-invariant-line"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "§9.7 Lemmas 9.7.2 and 9.7.4, Remark 9.7.3 and Theorem 9.7.5; local PDF unavailable, HTML checked; explicit field assembly and tensor-Hom formulas by Q51."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a simply connected semisimple algebraic group every nonzero invariant vector in a finite dimensional rational module is detected by an equivariant map to endomorphisms of a Steinberg module whose invariant endomorphisms are scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.IsIrreducible],\\n  IsSimpleModule (MonoidAlgebra R ↥P.weylGroup) P.weylGroupRootRep.asModule\", \"doc\": \"If a root pairing $ P $ is irreducible, then the module associated with the Weyl group representation of $ P $ over the group ring $ R[P.\\text{WeylGroup}] $ is a simple module, meaning its only submodu\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"LieModule.exists_isRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"If $ R $ is an infinite commutative ring, then there exists an element $ x $ in the Lie algebra $ L $ over $ R $ such that $ x $ is a regular element in the Lie module $ M $. Here, a regular element $\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"LieModule.exists_isRegular_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ a finitely generated $ R $-module. If the finite rank of $ M $ satisfies $ \\\\operatorname{finrank}_R(M) \\\\leq |R| $, then there exists an element $ x \\\\in L \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur lemmas and finite-group character theory do not construct a rational algebraic-group representation detecting the specified invariant vector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Haboush theorem proof Steinberg representation tensor square self duality invariant vector maps to nonzero scalar identity endomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Fintype G] [inst_3 : DecidableEq G] {X : FDRep k G}\\n  (v : ↑X.V), ∑ s, Pi.single 1 1 s • (X.ρ s⁻¹) v = v\", \"doc\": \"Let $G$ be a finite group and $k$ be a commutative ring. Let $X$ be a representation of $G$ on a finitely generated $k$-module, with representation map $\\\\rho$. Then for any element $v$ in $X$, the fol\"}\n  {\"name\": \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (x : V) (g : G) (r : k),\\n  ρ.ofCoinvariantsTprodLeftRegular\\n      ((Representation.Coinvariants.mk (ρ.tprod (Representation.leftRegular k\", \"doc\": \"Let `k` be a commutative ring, `G` a group, and `V` a `k`-module with a representation `ρ`. Let `Φ` be the canonical linear map `ofCoinvariantsTprodLeftRegular ρ` from the coinvariants module `(V ⊗_k \"}\n  {\"name\": \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [inst_2 : Fintype G]\\n  [inst_3 : Invertible ↑(Fintype.card G)] (V W : FDRep k G),\\n  ⅟↑(Fintype.card G) • ∑ g, W.character g * V.character g⁻¹ = ↑(Module.finrank k (V ⟶ W))\", \"doc\": \"For finite-dimensional representations $V$ and $W$ of a finite group $G$ over a field $k$, the scalar product $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_W(g) \\\\cdot \\\\chi_V(g^{-1})$ equals the finite rank (dime\"}\n  {\"name\": \"Rep.norm\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → [Fintype G] → (A : Rep k G) → CategoryTheory.End A\", \"doc\": \"For any commutative ring $ k $, finite group $ G $, and representation $ V $ of $ G $ over $ k $, the norm is the $ k $-linear endomorphism of $ V $ defined as $ \\\\sum_{g \\\\in G} \\\\rho(g) $, which commut\"}\n  {\"name\": \"FDRep.char_tensor\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Monoid G] (V W : FDRep k G),\\n  (CategoryTheory.MonoidalCategoryStruct.tensorObj V W).character = V.character * W.character\", \"doc\": \"For any two finitely generated representations $V$ and $W$ of a monoid $G$ over a commutative ring $k$, the character of the tensor product representation $V \\\\otimes W$ is equal to the product of the \"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"Rep.diagonalSuccIsoTensorTrivial_hom_hom_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} (f : Fin (n + 1) → G) (a : k),\\n  (ModuleCat.Hom.hom (Rep.diagonalSuccIsoTensorTrivial k G n).hom.hom) (Finsupp.single f a) =\\n    Finsupp.single (f 0) 1 ⊗ₜ[k] Finsupp.single (fun i => (f i.castSucc)⁻¹ * f i.succ) a\", \"doc\": \"For a group $ G $, commutative ring $ k $, and natural number $ n $, the homomorphism component of the diagonal successor isomorphism maps a finite support function $ f : \\\\mathrm{Fin}(n+1) \\\\to G $ wit\"}\n  {\"name\": \"Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} {α : Type u} [inst_2 : DecidableEq α] (x : ↑A.V)\\n  (i : α) (g : G) (r : k),\\n  (A.coinvariantsTensorFreeToFinsupp α)\\n      ((Representation.Coinvariants.mk (A.ρ.tprod (Representation.free k G α)))\\n        (x ⊗ₜ[k] Finsupp.single i \", \"doc\": \"For a representation $ A $ of a monoid $ G $ over a commutative ring $ k $, index type $ \\\\alpha $, element $ x \\\\in A $, index $ i \\\\in \\\\alpha $, group element $ g \\\\in G $, and scalar $ r \\\\in k $, the l\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur lemmas and finite-group character theory do not construct a rational algebraic-group representation detecting the specified invariant vector"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Steinberg\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur lemmas and finite-group character theory do not construct a rational algebraic-group representation detecting the specified invariant vector"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|Haboush|geometric.{0,5}reductiv",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur lemmas and finite-group character theory do not construct a rational algebraic-group representation detecting the specified invariant vector"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero fixed vector for a simply connected semisimple algebraic group maps equivariantly to a nonzero scalar endomorphism of a finite dimensional representation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.linHom.invariantsEquivFDRepHom\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {G : Type u} → [inst_1 : Group G] → (X Y : FDRep k G) → ↥(Representation.linHom X.ρ Y.ρ).invariants ≃ₗ[k] X ⟶ Y\", \"doc\": \"For a field $k$ and group $G$, the invariant elements of the linear maps between two finitely generated representations $X$ and $Y$ (fixed by the $G$-action) are linearly equivalent to the space of mo\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib.RepresentationTheory.FDRep\", \"type\": \"[IsAlgClosed k] (V W : FDRep k G) [Simple V] [Simple W] : finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"Representation.mem_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(v : V) : v ∈ invariants ρ ↔ ∀ g : G, ρ g v = v\", \"doc\": \"For a commutative semiring $k$, a group $G$, and a $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, an element $v \\\\in V$ belongs to the invariant submodule $V^G$ if and o\"}\n  {\"name\": \"Representation.invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : CommSemiring k] →\\n        [inst_1 : Group G] → [inst_2 : AddCommMonoid V] → [inst_3 : Module k V] → Representation k G V → Submodule k V\", \"doc\": \"For a commutative semiring $k$, group $G$, and $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, this is the submodule of $V$ consisting of all elements $v \\\\in V$ such tha\"}\n  {\"name\": \"Module.End.HasEigenvalue\", \"module\": \"Mathlib.LinearAlgebra.Eigenspace.Basic\", \"type\": \"(f : End R M) (a : R) : Prop\", \"doc\": \"The endomorphism $ f $ has an eigenvalue $ a $ if the kernel of $ f - a \\\\cdot \\\\text{id}_M $ is non-trivial, i.e., there exists a non-zero vector $ v \\\\in M $ such that $ f(v) = a \\\\cdot v $.\"}\n  {\"name\": \"Representation.asGroupHom\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \": G →* Units (V →ₗ[k] V)\", \"doc\": \"The group homomorphism from the monoid $ G $ to the group of invertible $ k $-linear endomorphisms of $ V $, obtained by mapping each element of $ G $ to its corresponding invertible linear transforma\"}\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(g : G) : (invariants <| ρ.comp S.subtype) ≤ (invariants <| ρ.comp S.subtype).comap (ρ g)\", \"doc\": \"For every group element $ g \\\\in G $, the submodule of vectors invariant under the action of subgroup $ S $ is contained within the preimage under $ \\\\rho(g) $ of itself, i.e., $ V^S \\\\subseteq (\\\\rho(g))\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \": (invariants ρ).carrier = ⋂ g : G, Function.fixedPoints (ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Schur lemmas and finite-group character theory do not construct a rational algebraic-group representation detecting the specified invariant vector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semisimple simply connected algebraic group nonzero invariant vector detected by equivariant map to endomorphisms with scalar invariant endomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"Representation.IsIrreducible\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] → [inst_2 : AddCommGroup V] → [inst_3 : Module k V] → Representation k G V → Prop\", \"doc\": \"A representation of a monoid $ G $ on a vector space $ V $ over a field $ k $ is irreducible if the only $ G $-invariant subspaces of $ V $ are the trivial subspace $ \\\\{0\\\\} $ and $ V $ itself.\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"jacobson_density\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsSemisimpleModule R M]\\n  (f : Module.End (Module.End R M) M) (s : Finset M), ∃ r, ∀ m ∈ s, f m = r • m\", \"doc\": \"For any endomorphism $ f $ of the $ R $-module $ M $ (viewed as a module over its endomorphism ring $ \\\\mathrm{End}_R(M) $) and any finite subset $ s \\\\subseteq M $, there exists an element $ r \\\\in R $ \"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"LieModule.exists_isRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"If $ R $ is an infinite commutative ring, then there exists an element $ x $ in the Lie algebra $ L $ over $ R $ such that $ x $ is a regular element in the Lie module $ M $. Here, a regular element $\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, finite-group semisimplicity or invariants definitions and do not give rational algebraic-group detection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Steinberg\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, finite-group semisimplicity or invariants definitions and do not give rational algebraic-group detection"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|Haboush|geometric.{0,5}reductiv",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, finite-group semisimplicity or invariants definitions and do not give rational algebraic-group detection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Haboush Steinberg modules detect nonzero invariant vectors of rational algebraic group representations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.mem_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(v : V) : v ∈ invariants ρ ↔ ∀ g : G, ρ g v = v\", \"doc\": \"For a commutative semiring $k$, a group $G$, and a $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, an element $v \\\\in V$ belongs to the invariant submodule $V^G$ if and o\"}\n  {\"name\": \"Representation.invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : CommSemiring k] →\\n        [inst_1 : Group G] → [inst_2 : AddCommMonoid V] → [inst_3 : Module k V] → Representation k G V → Submodule k V\", \"doc\": \"For a commutative semiring $k$, group $G$, and $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, this is the submodule of $V$ consisting of all elements $v \\\\in V$ such tha\"}\n  {\"name\": \"Representation.invariants_eq_top\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"[ρ.IsTrivial] : invariants ρ = ⊤\", \"doc\": \"If the representation $\\\\rho$ is trivial, then the submodule of invariants $V^G$ is equal to the entire module $V$.\"}\n  {\"name\": \"Representation.invariants_eq_inter\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \": (invariants ρ).carrier = ⋂ g : G, Function.fixedPoints (ρ g)\", \"doc\": \"The underlying set of the invariant submodule $ V^G $ is equal to the intersection of the fixed points of each group element's action, i.e., $ V^G = \\\\bigcap_{g \\\\in G} \\\\{ v \\\\in V \\\\mid \\\\rho(g)(v) = v \\\\}\"}\n  {\"name\": \"Representation.mem_invtSubmodule\", \"module\": \"Mathlib.RepresentationTheory.Submodule\", \"type\": \"{p : Submodule k V} : p ∈ ρ.invtSubmodule ↔ ∀ g, p ∈ Module.End.invtSubmodule (ρ g)\", \"doc\": \"A submodule $ p $ belongs to the sublattice of invariant submodules under a representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $ if and only if for every $ g \\\\in G $, the submodule $ p $ is invariant unde\"}\n  {\"name\": \"Rep.invariantsFunctor\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.Functor (Rep k G) (ModuleCat k)\", \"doc\": \"The functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of $ k $-modules, which sends each representation to its submodule of $ G $-invariant el\"}\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(g : G) : (invariants <| ρ.comp S.subtype) ≤ (invariants <| ρ.comp S.subtype).comap (ρ g)\", \"doc\": \"For every group element $ g \\\\in G $, the submodule of vectors invariant under the action of subgroup $ S $ is contained within the preimage under $ \\\\rho(g) $ of itself, i.e., $ V^S \\\\subseteq (\\\\rho(g))\"}\n  {\"name\": \"Representation.averageMap_invariant\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(v : V) : averageMap ρ v ∈ invariants ρ\", \"doc\": \"For any commutative semiring $k$, finite group $G$ with invertible cardinality $\\\\#G$ in $k$, and representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, the image of the averaging map $v \\\\mapsto \\\\frac{1}{\\\\#G}\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract groups, finite-group semisimplicity or invariants definitions and do not give rational algebraic-group detection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-haboush-symmetric-power-lift",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector.",
+   "via": [
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-steinberg-endomorphism-detection",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the source construction into Borel/rho section modules, the invariant-line computation, eventual tensor-square detection and characteristic-dependent self-duality. The assembly chooses a common index and proves tensor-Hom equivariance and nonvanishing by formulas. Checked the nonzero-vector qualification missing in the printed detection lemma and did not assume invariants commute with arbitrary reduction.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), Rj_* constructibility through sk-prop-open-coefficients: inherited alteration/moduli/GIT/Haboush prerequisite chain. This item supplies its representation-theoretic detection input. The inherited blueprint ancestor is null; no new blueprint anchor is invented."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-b2f67c6da",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-b2f67c6da (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, the citer lem-sfb-haboush-symmetric-power-lift and Milne iAG2017 (Def 17.6, Thm 17.9, Def 22.21, Prop 22.27/22.28, read locally). Alper §9.7 is not local; WANTED is recorded correctly. The item statement is unchanged. Its 5 steps assemble the 4 nodes correctly. Step 3: one m serves both detection and self-duality (char 0: m=M; char p: nu=M+1 gives p^nu-1>=M). Step 4: rechecked the tensor-Hom formula, its inverse and conjugation equivariance (d(sv)=d(v)∘s^-1); this is genuinely elementary. Step 5: invariant subspaces match under the isomorphism, and id_E spans. New nodes are all true. section-modules: the SL2 test gives W_m=Sym^m (positive exponent needed), which agrees with Milne E(-mρ)≠0; rho is integral because S is simply connected. invariant-line: Hom_S(W^∨,W)=Hom(V(mρ),H^0(mρ))=F holds for every m and every characteristic. eventual-detection: the s1-extension argument on G/B×G/B works because s1's non-vanishing locus is the open orbit G/T with fibre weight 0, so it holds for all m>=M; the v≠0 qualification is a correct source error. self-duality: char 0 for all m, and the Steinberg weights (p^nu-1)ρ in char p, including p=2. Each node is self-contained, statement-only and has recorded searches. None restates a clause of the item: these are four distinct Seshadri/Haboush inputs. A grep of the DAG for Steinberg/Borel/highest weight/maximal torus finds no duplicate. No SGA, no tool_uses, route untouched. Edge cases S=1, trivial U and x=0 (excluded) checked. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SteinbergEndomorphismDetection",
+  "declaration": "AlgebraicGeometry.exists_steinberg_endomorphism_detection",
+  "declarations": [
+   "AlgebraicGeometry.HasSteinbergEndomorphismDetection",
+   "AlgebraicGeometry.exists_steinberg_endomorphism_detection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SteinbergEndomorphismDetection.lean",
+  "statement": "theorem exists_steinberg_endomorphism_detection {F : Type u} [Field F] [IsAlgClosed F] (S : Over (Spec (.of F))) [GrpObj S] (hS : IsSemisimpleGroupScheme S) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F A))) ⟶ GrpObj.ker f) (s : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F A))) ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) : @HasSteinbergEndomorphismDetection F _ S _ hS.2.2.1",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper unfolds the entire detection conclusion using existing rational coordinate comodules. Evaluation equivariance expresses the canonical conjugation action without introducing an arbitrary endomorphism action; fixed endomorphisms are exactly coaction intertwiners. The theorem obtains the affine instance from semisimplicity, with no extra hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a802973d",
+  "group": "NA",
+  "result": "pass",
+  "note": "Clause-by-clause match to node/Alper §9.7: alg-closed F; S GrpObj over Spec F; IsSemisimpleGroupScheme (recorded owner; hS.2.2.1 = IsAffine verified against conjunct order); hsc same simply-connected encoding as landed exists_rho_section_modules (Over.mk Spec.map vs StandardGroupSchemes.affine: same object); U,E : Representation F S (finite rational comodules), x≠0 with coaction x = x⊗1, Nontrivial E; φ : U →ₗ End E, φ x ≠ 0; conjugation equivariance via evaluation U⊗E→E tensorCoefficients coaction identity, equivalent at the universal point since g is invertible on E⊗F[S]; End^S = F·id via IsRepresentationMap ↔ ∃c, a = c•id (both inclusions). No extra hypotheses, universes bound, edge cases S=1/U=0/x=0/E=0/all characteristics OK. Helper is a Prop unfolding only the conclusion, with source/blueprint docstrings; only sorry; statement verbatim; added stmt_deps are landed def nodes; other dep nodes unchanged vs side-live; no End/Hom rational-rep def to reuse; report has both sections. No recompile (per instructions); no fixes."
+ }
+}

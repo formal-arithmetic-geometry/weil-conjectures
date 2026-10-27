@@ -1,0 +1,218 @@
+{
+ "id": "lem-sp-integral-level-transition-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [],
+   "place": "the Lean of det-prop-sfb-cartesian-coefficients-twists (Sheaf.Paper.CartesianCoefficientTwists) uses spIntegralLevelTransition_existsUnique (the transitions of the integral twist system of sk-def-sp-tate-twist, u ⊗ a ↦ u^ℓ ⊗ ā)"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The transition maps of the finite-level integral twists are O_E-linear and unique",
+ "statement": "Let $\\ell$ be a prime, $X$ a scheme with small pro-étale site [def-weil-pbc-proetale-site], $E\\subseteq\\overline{\\mathbf Q}_\\ell$ a finite extension of $\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and $n\\ge0$. For $m\\ge1$ let $B_m=\\mathcal O_E/\\ell^m$ and let $T_m$ be the free $B_{m,X}$-module object on the sheaf $\\mu_{\\ell^m}$ of $\\ell^m$-th roots of unity [def-pur-roots-of-unity-sheaf], regarded as an $\\mathcal O_{E,X}$-module [sk-def-sfb-module-objects] by restriction of scalars along the reduction $\\mathcal O_{E,X}\\to B_{m,X}$ of pulled-back coefficients [sk-def-sfb-pulled-back-coefficients]. Here $\\mathcal O_E$ carries its valuation topology [def-sfb-coefficient-extension-integers-topology] and $B_m$ the discrete topology, $\\underline{\\mathcal O_E}$ and $\\underline{B_m}$ are the continuous-map condensed rings [def-sfb-continuous-map-condensed-ring], $\\mathcal O_{E,X}$ and $B_{m,X}$ are their pullbacks, and the reductions $\\mathcal O_{E,X}\\to B_{m,X}$ and $B_{n+2,X}\\to B_{n+1,X}$ are the pullbacks of the maps $\\underline{\\mathcal O_E}\\to\\underline{B_m}$ and $\\underline{B_{n+2}}\\to\\underline{B_{n+1}}$ given on each profinite set by composing continuous maps with the quotient ring homomorphisms. Then there is exactly one morphism of $\\mathcal O_{E,X}$-modules $T_{n+2}\\to T_{n+1}$ whose underlying morphism of abelian sheaves is the tensor product of the reduction $B_{n+2,X}\\to B_{n+1,X}$ with the power map $\\mu_{\\ell^{n+2}}\\to\\mu_{\\ell^{n+1}}$, $\\zeta\\mapsto\\zeta^\\ell$. Here the free module object means $T_m=B_{m,X}\\otimes_{\\mathbf Z}\\mu_{\\ell^m}$, with the sheaf tensor product of [sk-def-sfb-sheaf-tensor] and action by multiplication on the first factor; restriction of scalars is the action obtained by precomposing that factor with the reduction map, as in [sk-def-sfb-change-of-scalars] (1).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.md",
+  "place": "det-prop-sfb-cartesian-coefficients-twists: the Lean of det-prop-sfb-cartesian-coefficients-twists (Sheaf.Paper.CartesianCoefficientTwists) uses spIntegralLevelTransition_existsUnique (the transitions of the integral twist system of sk-def-sp-tate-twist, u ⊗ a ↦ u^ℓ ⊗ ā); Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spIntegralLevelTransition_existsUnique (module Sheaf.Paper.ProEtaleTateTwists, lines 208-220, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-coefficient-extension-integers-topology",
+  "def-sfb-continuous-map-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathcal O_{E,X}$, $B_+=B_{n+2,X}$, $B_-=B_{n+1,X}$, and let $q_\\pm:R\\to B_\\pm$ and $r:B_+\\to B_-$ be the specified reductions. Reduction modulo $\\ell^{n+1}$ after reduction modulo $\\ell^{n+2}$ equals direct reduction, since both send $a$ to its residue class. Thus $r q_+=q_-$. At the condensed point these maps are postcomposition of continuous functions with the quotient ring maps, so, the ring operations of the continuous-map condensed rings being pointwise, they preserve one and multiplication on every profinite set. The ring-object statement and the pulled-back-coefficients functor therefore give ring-object morphisms $q_\\pm,r$ with the same composition identity on $X$. In particular $r\\mu_+=\\mu_-\\circ(r\\otimes r)$, where $\\mu_\\pm$ are the multiplications of $B_\\pm$.",
+   "uses": [
+    "sk-def-sfb-ring-object",
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral-twist paragraph: coefficient actions and Kummer transitions; explicit action calculation for the normalized transition in Sheaf.Paper.ProEtaleTateTwists, spIntegralLevelTransition_existsUnique. Roots: Stacks Tag 03PK (etale-cohomology-section-kummer); tensor construction: Tag 03EK (sites-modules-section-tensor-product)."
+   }
+  },
+  {
+   "text": "Put $U_+=\\mu_{\\ell^{n+2}}$ and $U_-=\\mu_{\\ell^{n+1}}$. The roots-of-unity definition gives the abelian-sheaf map $v:U_+\\to U_-$, $u\\mapsto u^\\ell$: $(u^\\ell)^{\\ell^{n+1}}=u^{\\ell^{n+2}}=1$, the power map is multiplicative on the commutative unit groups, and ring restrictions preserve powers. The sheaf tensor bifunctor therefore gives $h=r\\otimes v:B_+\\otimes U_+\\to B_-\\otimes U_-$. This is exactly the underlying morphism specified in the conclusion; its second factor has exponent quotient $\\ell^{n+2}/\\ell^{n+1}=\\ell$.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral-twist paragraph: coefficient actions and Kummer transitions; explicit action calculation for the normalized transition in Sheaf.Paper.ProEtaleTateTwists, spIntegralLevelTransition_existsUnique. Roots: Stacks Tag 03PK (etale-cohomology-section-kummer); tensor construction: Tag 03EK (sites-modules-section-tensor-product)."
+   }
+  },
+  {
+   "text": "Write $a_\\pm:R\\otimes(B_\\pm\\otimes U_\\pm)\\to B_\\pm\\otimes U_\\pm$ for the restricted free actions. Expanding multiplication on the first factor and restriction of scalars gives $a_\\pm=(\\mu_\\pm\\otimes\\mathrm{id}_{U_\\pm})\\circ((q_\\pm\\otimes\\mathrm{id}_{B_\\pm})\\otimes\\mathrm{id}_{U_\\pm})\\circ\\alpha^{-1}_{R,B_\\pm,U_\\pm}$. Bifunctoriality and naturality of the associator give\n$$h\\circ a_+=\\bigl((r\\circ\\mu_+\\circ(q_+\\otimes\\mathrm{id}_{B_+}))\\otimes v\\bigr)\\circ\\alpha^{-1}_{R,B_+,U_+}=\\bigl((\\mu_-\\circ(q_-\\otimes r))\\otimes v\\bigr)\\circ\\alpha^{-1}_{R,B_+,U_+}=a_-\\circ(\\mathrm{id}_R\\otimes h).$$\nThe middle equality is precisely the multiplicativity and reduction identity of step 1. This is the defining equation for a morphism of $R$-module objects, so $h$, together with this equation, defines the required $f$. This calculation is in abelian sheaves and does not assume their tensor product is computed on sections.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral-twist paragraph: coefficient actions and Kummer transitions; explicit action calculation for the normalized transition in Sheaf.Paper.ProEtaleTateTwists, spIntegralLevelTransition_existsUnique. Roots: Stacks Tag 03PK (etale-cohomology-section-kummer); tensor construction: Tag 03EK (sites-modules-section-tensor-product)."
+   }
+  },
+  {
+   "text": "If $g:T_{n+2}\\to T_{n+1}$ is another module morphism with the prescribed underlying abelian-sheaf map, then both underlying maps equal $h$, hence equal one another. Faithfulness of the forgetful functor from module objects gives $g=f$. The constructed $f$ has underlying map $h$ by construction, proving existence and uniqueness.",
+   "uses": [
+    "det-def-sfb-module-objects-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral-twist paragraph: coefficient actions and Kummer transitions; explicit action calculation for the normalized transition in Sheaf.Paper.ProEtaleTateTwists, spIntegralLevelTransition_existsUnique. Roots: Stacks Tag 03PK (etale-cohomology-section-kummer); tensor construction: Tag 03EK (sites-modules-section-tensor-product)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-ring-object",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-objects",
+  "det-def-sfb-module-objects-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral-twist paragraph: coefficient actions and Kummer transitions; explicit action calculation for the normalized transition in Sheaf.Paper.ProEtaleTateTwists, spIntegralLevelTransition_existsUnique. Roots: Stacks Tag 03PK (etale-cohomology-section-kummer); tensor construction: Tag 03EK (sites-modules-section-tensor-product)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transition map of roots of unity mu_{l^(n+1)} to mu_l^n given by raising to the l-th power",
+   "results": "IsPrimitiveRoot.primitiveRootsPowEquivOfCoprime(_apply_coe), cyclotomicCharacter.spec: roots of unity of a ring, not sheaves",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring homomorphism Z/l^(n+2) to Z/l^(n+1) induces transition of roots of unity tensor",
+   "results": "cyclotomicCharacter.toZModPow(_toFun), cyclotomicCharacter.toFun_spec: no sheaf-level transition",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'rootsOfUnity.*Transition|proEtaleRoots' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spIntegralLevelTransition|proEtaleRootsOfUnityTransition|def free|def comap|lemma hom_ext",
+   "results": "Mathlib/CategoryTheory/Monoidal/Bimod.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Ring.lean; Mathlib/CategoryTheory/Monoidal/Ring.lean; Mathlib/CategoryTheory/Monoidal/CommComon_.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean; Mathlib/CategoryTheory/Monoidal/Mod.lean (subdirectory CategoryTheory/Monoidal).",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; generic module definitions/faithfulness are reused through existing nodes, not a theorem about this quotient/root tensor map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor product of a quotient ring map and an abelian sheaf map is linear after restriction of scalars, and its lift to module objects is unique",
+   "results": "LinearMap.restrictScalarsRange; PiTensorProduct.lift.unique'; PiTensorProduct.lift.unique; TensorProduct.AlgebraTensorModule.map; TensorProduct.lift.unique; TensorProduct.AlgebraTensorModule.restrictScalars_lTensor; TensorProduct.liftAux; TensorProduct.map",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; algebraic tensor maps or presheaf/module constructions do not state the specified pulled-coefficient/root transition theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.Hom.mk, CategoryTheory.Mod.hom_ext",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; algebraic tensor maps or presheaf/module constructions do not state the specified pulled-coefficient/root transition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of a quotient ring map and an abelian sheaf map is linear after restriction of scalars, and its lift to module objects is unique",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; SheafOfModules.Presentation.map_π_eq; PresheafOfModules.Monoidal.tensorObj; SheafOfModules.map_ιFree_mapFree_hom; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; PresheafOfModules.Monoidal.tensorHom; rTensor.toFun",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; algebraic tensor maps or presheaf/module constructions do not state the specified pulled-coefficient/root transition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Mm]od|[Mm]od.*tensor|IsModHom|Hom.mk",
+   "results": "187; 191; 194; 197; 202 (subdirectory CategoryTheory/Monoidal/Mod.lean).",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; generic module definitions/faithfulness are reused through existing nodes, not a theorem about this quotient/root tensor map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from internal modules is faithful and a morphism is a module morphism if it commutes with the action",
+   "results": "CategoryTheory.Mod_.forget; CategoryTheory.Mod_.forget_map; ModuleCat.forget₂_map_homMk; ModuleCat.forget_map; FGModuleCat.instLinearModuleCatForget₂; CategoryTheory.Mod_.forget_obj; ModuleCat.instConcreteCategoryLinearMapIdCarrier; CategoryTheory.Mod_.Hom.hom",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; generic module definitions/faithfulness are reused through existing nodes, not a theorem about this quotient/root tensor map."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.Hom.mk'",
+   "results": "CategoryTheory.Mod.Hom.mk'; CategoryTheory.Mod.Hom.mk'_hom",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-level item; module-morphism constructor is already covered by sk-def-sfb-module-objects; the action equation still has to be checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistLevels",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistLevels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spIntegralLevelTransition_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spIntegralLevelTransition_existsUnique"
+  ],
+  "statement": "theorem spIntegralLevelTransition_existsUnique (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (n : ℕ) :\n    ∃! f : spIntegralTwistLevel X ℓ E (n + 1) ⟶ spIntegralTwistLevel X ℓ E n,\n      f.hom = coefficientMap.{u} (spEllPointTransition ℓ E n) X ⊗ₘ\n        Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2))\n          (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)\n          (pow_dvd_pow ℓ (Nat.le_succ (n + 1))) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sp-integral-level-transition-unique",
+  "worker": "stage1",
+  "summary": "Explicit quotient/power tensor map, categorical action-compatibility calculation, and faithful-forgetful uniqueness. All facts are supplied by existing nodes; no new nodes. Clarified the already specified free module by its underlying tensor/action, without changing hypotheses or conclusion. Checked the sorried SHEAF statement and absence of an exact finished upstream declaration.",
+  "blueprint": "Nearest ancestor det-prop-sfb-cartesian-coefficients-twists, integral-twist paragraph: compatibility of the coefficient actions and Kummer transitions. The normalized transition is the one constructing the inverse system in sk-def-sp-tate-twist; no purity theorem or invertibility assumption is used.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-3e8284bf9",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-3e8284bf9 (reviewer sub-agent of L); spot-checked: Read the item in full; it adds no new nodes. Live and side-live still have the item unsplit, and there is no repair note for it, so nothing supersedes this split and the re-split rule does not apply. Checked against the source (main-20261015 sk-prop-sfb-cartesian-coefficients-twists.proof.md, integral-twist paragraph; the latest/ copy is identical) and against the Lean (ProEtaleTateTwists.lean 100-225). spIntegralTwistLevel is Mod.comap of Mod.free(B_{n+1}) on mu_{l^{n+1}}, and the theorem maps level n+1 to level n, i.e. l^{n+2} to l^{n+1}. That is the same indexing and the same coefficient category as the node's T_{n+2}->T_{n+1}. The appended sentence describing the free module (B tensor mu, action on the first factor, restriction by precomposition) is exactly Mathlib's Mod.free/Mod.comap and does not change the meaning, so I accept it. I rechecked the step-3 action calculation term by term: naturality of alpha^{-1}, bifunctoriality, and r mu_+ (q_+ tensor 1) = mu_- (q_- tensor r) from step 1. Step 2's v is the def-pur-roots-of-unity-sheaf transition, and no l-invertibility is used. Step 4 is faithfulness from det-def-sfb-module-objects-category (2), a Mathlib leaf. Edge cases checked: n=0, X empty, characteristic l, ramified E. FIX (B3/C1): the statement never said which condensed rings O_E and B_m are, yet step 1 uses the continuous-map model without citing it. I added a statement sentence giving O_E its valuation topology and B_m the discrete topology, with the pullbacks of the continuous-map condensed rings and the postcomposition reductions, exactly as the Lean has them. stmt_deps gain def-sfb-coefficient-extension-integers-topology and def-sfb-continuous-map-condensed-ring; step 1 uses and proof_deps gain def-sfb-continuous-map-condensed-ring. Advisory: lem-sp-ell-point-reduction-ring-map states the q half of step 1, but it belongs to unit sk-def-sp-tate-twist, which is off this unit's route, so I kept the elementary inline argument. No tool_uses; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

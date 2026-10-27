@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-scheme-derived-coherator-adjunction",
+ "kind": "statement",
+ "title": "The derived coherator is right adjoint to termwise quasi-coherent inclusion",
+ "statement": "Let $T$ be any scheme [def-pc-scheme]. On its small Zariski ringed site let $\\mathcal M_T=\\operatorname{Mod}(\\mathcal O_T)$ [def-weil-sheaf-of-modules-category] and let $\\mathcal A_T$ be its full category of quasi-coherent modules [pqf-def-coherent], with the induced abelian structure [lem-sfb-qcoh-grothendieck-generators]. The inclusion $i_T:\\mathcal A_T\\to\\mathcal M_T$ has an additive left exact right adjoint $q_T:\\mathcal M_T\\to\\mathcal A_T$, called the coherator. The total right derived functor $C_T=Rq_T:D(\\mathcal M_T)\\to D(\\mathcal A_T)$ exists on unbounded derived categories [def-weil-abstract-derived-category, def-sfb-right-derived-functor]. It is right adjoint to the termwise derived inclusion $I_T:D(\\mathcal A_T)\\to D(\\mathcal M_T)$ [lem-weil-pbc-exact-functor-derived-factorization]. These are triangulated functors, with their canonical integer-shift comparisons; the unit $e_T:\\operatorname{id}\\to C_TI_T$ and counit $d_T:I_TC_T\\to\\operatorname{id}$ commute with those comparisons. The adjunction is the one induced from $i_T\\dashv q_T$: for a complex $B$ of $\\mathcal A_T$ and a K-injective complex $J$ of $\\mathcal M_T$, its Hom bijection on their localizations sends a chain map $i_TB\\to J$ to its termwise underived adjunct $B\\to q_TJ$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D6, perfect-section-coherator, opening paragraphs through the derived adjunction; underived existence is Tag 077P, properties-proposition-coherator (2). The shift and representative normalization specifies the induced derived adjunction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "lem-sfb-qcoh-grothendieck-generators",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-qcoh-grothendieck-generators], $\\mathcal A_T$ is Grothendieck abelian and $i_T$ is exact and preserves every small colimit. Apply [lem-sfb-grothendieck-colimit-functor-right-adjoint] to $F=i_T$ and $\\mathcal B=\\mathcal M_T$. The ambient module category is locally small in the fixed sheaf universe. This gives $i_T\\dashv q_T$, with natural bijections $\\operatorname{Hom}(i_TA,M)\\cong\\operatorname{Hom}(A,q_TM)$. Thus $q_T$ is the underived coherator. This is the representability construction of Tag 077P(2), packaged by the general functor form of Tag 07D7; no finiteness condition on $T$ is required.",
+   "uses": [
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-sfb-grothendieck-colimit-functor-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 077P, proposition-coherator, proof of (2); its input is injectives.tex Tag 07D7, lemma-grothendieck-brown."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-right-adjoint-preserves-limits], $q_T$ preserves finite limits, so it is left exact. It preserves the zero object and finite products. Under the canonical product comparisons its images of the biproduct projections are the projections; its images of the injections are therefore the injections, since their components are identities and zero maps. Hence it preserves diagonal and codiagonal maps. Applying it to $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$ gives $q_T(f+g)=q_T(f)+q_T(g)$. Thus it is additive.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D6, section-coherator, opening: the coherator is left exact as a right adjoint; the additive biproduct argument is expanded here."
+   }
+  },
+  {
+   "text": "The category $\\mathcal M_T$ is Grothendieck abelian by [lem-pc-scheme-modules-grothendieck-abelian]. Consequently [lem-sfb-grothendieck-k-injective] supplies unbounded K-injective resolutions in it. The functor $K(q_T)$ is triangulated by [lem-trf-additive-homotopy-triangulated], and localization $Q_{\\mathcal A_T}$ is triangulated by [lem-pur-homotopy-category-triangulated]. Apply [lem-weil-pbc-kinjective-total-derived] to $Q_{\\mathcal A_T}K(q_T)$: its total right derived functor $C_T$ exists and $C_T(Q_{\\mathcal M_T}J)\\cong Q_{\\mathcal A_T}(q_TJ)$ for every K-injective $J$. This is $Rq_T$ with the comparison of [def-sfb-right-derived-functor]. Since $i_T$ is exact, [lem-weil-pbc-exact-functor-derived-factorization] gives the triangulated termwise derived inclusion $I_T$, including its canonical shifts.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-trf-additive-homotopy-triangulated",
+    "lem-pur-homotopy-category-triangulated",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 070Y (lemma-K-injective-defined), and 070K (lemma-enough-K-injectives-implies); Tag 015F for the exact inclusion; used in perfect.tex Tag 08D6."
+   }
+  },
+  {
+   "text": "For a K-injective complex $J$ of $\\mathcal M_T$, [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to the exact left adjoint $i_T$ and shows that $q_TJ$ is K-injective in $\\mathcal A_T$. For every complex $B$ of $\\mathcal A_T$, the two applications of [lem-weil-pbc-kinjective-hom-derived] and the termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy] give natural bijections\n$$\\operatorname{Hom}_{D(\\mathcal M_T)}(I_TQB,QJ)\\cong\\operatorname{Hom}_{K(\\mathcal M_T)}(i_TB,J)\\cong\\operatorname{Hom}_{K(\\mathcal A_T)}(B,q_TJ)\\cong\\operatorname{Hom}_{D(\\mathcal A_T)}(QB,C_TQJ).$$\nThe middle map sends $[f]$ to $[q_T(f)\\circ\\eta_B]$, where $\\eta$ is the underived unit. The first map is the termwise representative isomorphism $I_TQB\\cong Q(i_TB)$ of [lem-weil-pbc-exact-functor-derived-factorization] followed by the inverse of the localization bijection; the last is localization followed by the K-injective derived comparison $Q_{\\mathcal A_T}(q_TJ)\\cong C_TQJ$ from step 3. Every ambient derived object has such a representative $J$; morphisms between such representatives are homotopy classes by the same Hom lemma. Thus these bijections are natural on both derived categories and define $I_T\\dashv C_T$. They give exactly the requested chain-map normalization.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), and 09T5 (lemma-derived-adjoint-functors); explicit Hom calculation realizing the adjunction in perfect.tex Tag 08D6."
+   }
+  },
+  {
+   "text": "The adjunction in step 4 is induced from $i_T\\dashv q_T$ on K-injective representatives, so [lem-sp-canonical-right-derived-adjunction-shift] applies: $i_T$ is additive and exact, $q_T$ is additive, and $\\mathcal M_T$ has K-injective resolutions. It says that its actual unit $e_T$ and counit $d_T$ commute with the fixed canonical integer-shift comparisons of $I_T$ and $C_T$. Since $I_T$ is triangulated by step 3, [lem-sf-triangulated-right-adjoint] now shows that $C_T$ is triangulated with this same shift structure. This proves all the claimed compatibilities.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; canonical right-derived shift normalization is supplied by lem-sp-canonical-right-derived-adjunction-shift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcoh-grothendieck-generators",
+  "lem-sfb-grothendieck-colimit-functor-right-adjoint",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-trf-additive-homotopy-triangulated",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sf-triangulated-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D6, section-coherator, opening paragraphs; underived construction in properties.tex Tag 077P(2), injectives.tex Tag 07D7; explicit K-injective Hom and canonical shift normalization are supplied by the cited generic nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherator|QCoh.*[Aa]djoint|[Aa]djoint.*QCoh",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsRightAdjoint\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived right adjoint coherator of the inclusion of quasi coherent sheaves",
+   "results": "8 hits: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafToPresheaf_isRightAdjoint, CategoryTheory.sheafificationAdjunction, CategoryTheory.Adjunction.derivedε, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData.I, CategoryTheory.rightAdjointOfCostructuredArrowTerminals, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exact inclusion of quasi coherent modules on a scheme has a right adjoint coherator and the unbounded derived inclusion has right adjoint the derived coherator",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, CategoryTheory.Adjunction.derived, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CondensedMod.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|QCoh.*[Aa]djoint|[Aa]djoint.*QCoh",
+   "results": "{\"t\": \"2026-10-23T20:45:11Z\", \"tool\": \"grep\", \"query\": \"coherator|QCoh.*[Aa]djoint|[Aa]djoint.*QCoh\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire scheme-specific statement: sheafification, restriction/pushforward adjoints and abstract derived adjunctions do not construct the arbitrary-scheme coherator. The general Grothendieck adjoint specialization is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint to quasi coherent inclusion on schemes",
+   "results": "{\"t\": \"2026-10-23T20:45:11Z\", \"tool\": \"leansearch\", \"query\": \"Right adjoint to quasi coherent inclusion on schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"SheafOfModules.isQuasicoherent\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.instIsRightAdjointSheafΓ\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"CategoryTheory.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\"], \"digest\": \"c2d9a77080480d1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire scheme-specific statement: sheafification, restriction/pushforward adjoints and abstract derived adjunctions do not construct the arbitrary-scheme coherator. The general Grothendieck adjoint specialization is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"IsRightAdjoint\"",
+   "results": "{\"t\": \"2026-10-23T20:45:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasicoherent\\\", \\\"IsRightAdjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire scheme-specific statement: sheafification, restriction/pushforward adjoints and abstract derived adjunctions do not construct the arbitrary-scheme coherator. The general Grothendieck adjoint specialization is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of quasi coherent modules on any scheme has a right adjoint coherator and its unbounded right derived functor is right adjoint to the derived inclusion",
+   "results": "{\"t\": \"2026-10-23T20:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of quasi coherent modules on any scheme has a right adjoint coherator and its unbounded right derived functor is right adjoint to the derived inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\"], \"digest\": \"42ea24a1e3873ae0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire scheme-specific statement: sheafification, restriction/pushforward adjoints and abstract derived adjunctions do not construct the arbitrary-scheme coherator. The general Grothendieck adjoint specialization is separately recorded as a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-open-derived-qcoh-criterion",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB. Prerequisite of the 08DB argument: Tag 09T6, affine-open derived-pushforward comparison criterion. Tag 09T6 proof: Tag 08D6, perfect-section-coherator, opening paragraphs through the derived adjunction; underived existence is Tag 077P, properties-proposition-coherator (2). The shift and representative normalization specifies the induced derived adjunction.",
+   "via": [
+    "lem-sfb-affine-open-derived-qcoh-criterion",
+    "lem-sfb-qc-separated-quasicoherent-complex-model",
+    "lem-sfb-ample-twist-hypercohomology-detection",
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-derived-coherator-adjunction",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-scheme statement and all normalization clauses. Constructed the underived adjunction using a single Mathlib Grothendieck-category adjoint leaf, proved additivity from biproducts, and reused existing general K-injective, termwise Hom and canonical shift statements. No new clause-restatement or elementary node is created.",
+  "blueprint": "Realizes the assigned Tag 08D6 prerequisite of the affine-open derived QCoh criterion in the inherited direct-image branch of det-thm-sf-ctf-stability-direct-images. Read the latest sk-thm-sf-ctf-stability unit and its adjunction proof. The inherited created.item chain is detached: blueprint_refs.py ancestor prints None; the new leaf retains that computed null ancestor and extends the existing via list. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic categorical input for the ordinary coherator adjunction and its K-injective derivation; the assigned unit has no replacement for this abstract statement."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic categorical input for the ordinary coherator adjunction and its K-injective derivation; the assigned unit has no replacement for this abstract statement."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic categorical input for the ordinary coherator adjunction and its K-injective derivation; the assigned unit has no replacement for this abstract statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-5441b0d7a",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-5441b0d7a (reviewer sub-agent of L); spot-checked: Read Stacks perfect.tex 08D6 (lines 1324-1355), properties.tex 077P(1),(2) with proof, and injectives.tex 07D7 with proof. The item keeps the 08D6 content for an arbitrary scheme with unbounded D(QCoh) and adds the induced shift and representative normalization; it is not weakened, and the statement and stmt_deps are kept. New node lem-sfb-grothendieck-colimit-functor-right-adjoint is a true one-line Mathlib leaf (special adjoint functor theorem): isLeftAdjoint_of_preservesColimits_of_isSeparating at AdjointFunctorTheorems.lean:116-123. The Grothendieck instances it needs (hasColimits :99, wellPowered :106, Abelian.wellPowered_opposite Subobject.lean:67, separator Basic.lean:74 and Generator/Basic.lean:887) are present as claimed. I tested it on the zero category, the identity on Mod(R) and the empty scheme. An rg -L search of dag/nodes found only infinity-categorical and Brown-representability nodes, so it is not a duplicate, and it is not a clause of the item. Steps 1-5: every cited statement says what the step takes and every hypothesis holds. i_T is exact and preserves colimits by the generator node; q_T is additive by an elementary biproduct argument from preservation of limits; Mod(O_T) is Grothendieck, so it has unbounded K-injective resolutions; Q composed with K(q_T) is exact, so kinjective-total-derived applies; right-adjoint-preserves-kinjective applies with v=i_T exact; termwise-adjunction-homotopy (b) gives the [q(f) composed with eta_B] normalization; lem-sp-canonical-right-derived-adjunction-shift and lem-sf-triangulated-right-adjoint then give shift compatibility and exactness of C_T. FIX (C1/C3, minor): step 4's first bijection uses I_T QB isomorphic to Q(i_T B), the phi of lem-weil-pbc-exact-functor-derived-factorization, which step 4 did not cite. I added that citation to step 4's uses and text; proof_deps is unchanged and still equals the union of the uses. Batch-5 check: lem-trf-additive-homotopy-triangulated is a generic Mathlib leaf (Stacks 014X, Pretriangulated.lean:596) that is neither assumption nor a step of their proofs, so it is accepted. The three tool_uses are generic categorical tools and are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedCoheratorAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_schemeDerivedCoheratorAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.DerivedCoheratorAdjunctionData",
+   "AlgebraicGeometry.Scheme.Modules.exists_schemeDerivedCoheratorAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedCoheratorAdjunction.lean",
+  "statement": "theorem exists_schemeDerivedCoheratorAdjunction (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} X.ringCatSheaf)] : Nonempty (DerivedCoheratorAdjunctionData (SheafOfModules.isQuasicoherent X.ringCatSheaf).ι)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The structure packages this node’s simultaneous existence claims. It introduces no new module category or derived-functor construction. The derived coherator is exactly the recorded rightDerivedFunctorOfQuasiIsoResolutions; its shift comparison is canonically characterized by compatibility of its universal derived unit with termwise shifts. The chain-map equation uses the ordinary termwise adjunct, with all localization comparisons explicit. The ambient derived-category binder is infrastructure for an arbitrary chosen localization universe; no geometric or boundedness hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3da81a6ad",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Delivery changes only the item's lean record plus new module SchemeDerivedCoheratorAdjunction; lean.statement is verbatim. Every node clause is rendered for an arbitrary Scheme.{u}: QCoh full subcategory of SheafOfModules X.ringCatSheaf (same predicate and category as pqf-def-coherent and qcoh-grothendieck-generators); concluded Abelian/exactness fields; coherator with additive, left-exact and adjunction fields; C_T = recorded rightDerivedFunctorOfQuasiIsoResolutions; I_T = Mathlib mapDerivedCategory. Nothing in the package is free: C_T's shift is pinned by NatTrans.CommShift of the derived unit (invertible on K-injectives); Adjunction.CommShift is genuine content; the derived adjunction is fully determined by the normalization clause (termwise adjunct via Adjunction.mapHomologicalComplex, then the localization comparisons and the unit at K-injective J; types checked). No extra hypotheses; ambient derived universe w independent of u; D(QCoh) concluded at u+1. The existing D_QCoh coherator results assume compactness and are not duplicates. Docstrings carry source places, blueprint ids and the 5 proof steps. Report has Worker report and Second reading sections. Not recompiled (no file changed). Advisory: RingedSiteModules import is not used directly."
+ }
+}

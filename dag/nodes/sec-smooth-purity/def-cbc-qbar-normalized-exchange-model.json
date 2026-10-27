@@ -1,0 +1,101 @@
+{
+ "id": "def-cbc-qbar-normalized-exchange-model",
+ "kind": "definition",
+ "title": "Normalized compact-support coefficient exchange model",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and schemes $X,X',Y,Y'$ with compactifications $c$ of $f:X\\to Y$ and $c'$ of $f':X'\\to Y'$, a proper Cartesian square and an open-immersion square between their factors [def-cbc-compact-support-square]. Assume $f$ quasi-compact and $X,Y'$ noetherian of finite dimension with $\\ell$ invertible. Use the integral and rational stages and scalar systems of [def-weil-pbc-finite-stage-pair-category]. A normalized exchange model consists of two ambient completed scalar/pullback maps fixed by their ordinary-to-completed unit equations; preservation witnesses for the source $Lg^*Rp_*j_!$ and target $Rp'_*j'_!Lg'^*$ composites; two coherent exact stage-system morphisms with these integral localizations; inverse scalar-comparison equations identifying their beta inverses with the localized open-unit/proper-counit mate composites; and a compatible transformation whose every integral component is the localization of the specified completed compact-support exchange [def-cbc-completed-exchange-map], for every finite generating tuple of the adic ideal. The membership witnesses are proofs only. No invertibility of this exchange is imposed. This is precisely the existing CbcQbarExchangeModel and its scalar-comparison definitions, extracted without changing any data or signature.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/_section.md",
+  "place": "Adic/rational/algebraically closed coefficient clause; normalized finite-stage realization expanded in thm-cbc-qbar proof steps 2--3."
+ },
+ "stmt_deps": [
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-cbc-completed-exchange-map",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent compact support and completed pullback coefficient families form a normalized composite exchange model",
+   "results": "8 hits, including CategoryTheory.Precoherent.pullback and compactly supported continuous-map facts; none gives normalized completed coefficient families.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent compact support and completed pullback coefficient families form a normalized composite exchange model",
+   "results": "8 hits, including CompHausLike.pullback.condition, TopCat.GlueData.MkCore.t' and FormalMultilinearSeries.applyComposition; none concerns coefficient descent.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CbcQbarExchangeModel|CbcCompactSupportCoefficientFamily|CbcCompletedPullCoefficientFamily",
+   "results": "0 Mathlib hits. Local rg found the existing model in the item and normalized constituent families in NormalizedCoefficientFamilies.",
+   "date": "2026-10-25",
+   "verdict": "no Mathlib match; reuse constituent families and extract the existing model unchanged"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QbarCompactSupportBaseChange",
+  "date": "2026-10-25",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Proof steps 2--3: normalized coefficient comparisons and construction of the composite descent model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QbarCompactSupportExchangeModel",
+  "file": "lean/Sheaf/Paper/QbarCompactSupportExchangeModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CbcQbarExchangeModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcScalarOrdinaryIso",
+   "AlgebraicGeometry.Scheme.CbcCompletedScalarComparison",
+   "AlgebraicGeometry.Scheme.cbcScalarOpenInverse",
+   "AlgebraicGeometry.Scheme.cbcScalarSourceInverse",
+   "AlgebraicGeometry.Scheme.cbcScalarTargetInverse",
+   "AlgebraicGeometry.Scheme.CbcScalarInverseBetaSpec",
+   "AlgebraicGeometry.Scheme.CbcQbarExchangeModel"
+  ],
+  "statement": "structure CbcQbarExchangeModel",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66069",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T163938-L-913472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66069",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T163938-L-913472",
+  "kind": "interface",
+  "note": "independent cc review: qbarCompactSupportBaseChange statement (byte-identical to clone) and moved model/scalar defs (bodies identical, re-exported) against thm-cbc-qbar + new nodes def-cbc-qbar-normalized-exchange-model / lem-cbc-qbar-exchange-model-exists; 6 of 7 direct importers compiled with the delivery"
+ }
+}

@@ -1,0 +1,316 @@
+{
+ "id": "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+ "kind": "statement",
+ "title": "Kiehl finiteness for relatively pseudo-coherent complexes",
+ "statement": "Let $h:Z\\to T$ be a proper morphism of arbitrary schemes [def-pc-scheme, def-weil-proper-morphism], and let $E\\in D(\\mathcal O_Z)$ [def-pc-derived-category]. Suppose that $E$ is pseudo-coherent relative to $T$ [def-sfb-relative-pseudo-coherent-complex]. Then $Rh_*E$ [def-pc-derived-direct-image] is pseudo-coherent on $T$ [def-pur-pseudo-coherent-complex]. Neither flatness nor local finite presentation of $h$ is assumed; there is no Noetherian or global quasi-compactness or quasi-separatedness assumption on $Z,T$, and no global lower cohomological bound on $E$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general: unnumbered paragraph immediately after the lemma statement, beginning \"More generally\", citing Kiehl. This is the general relative assertion in that paragraph, not the flat lemma itself."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-direct-image",
+  "def-pur-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $V=\\operatorname{Spec}A\\subset T$, put $X=h^{-1}V$, $f=h|_X$, and $F=E|_X$. The definition of properness gives that $f$ is separated and finite type; its universal-closedness tests are a subset of the tests for $h$, so $f$ is proper. By the all-affine-charts criterion, the relative pseudo-coherence tests for $F$ over $V$ are among those for $E$ over $T$, for every integer $m$. Thus $F$ is pseudo-coherent relative to $V$. Open restriction of derived direct image identifies $(Rh_*E)|_V$ with $Rf_*F$. It is enough to prove pseudo-coherence of this object for every $V$, since the conclusion is local by its definition.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, unnumbered general assertion following lemma-flat-proper-pseudo-coherent-direct-image-general; agent assembly"
+   }
+  },
+  {
+   "text": "Set $C=R\\Gamma(X,F)$. The finite-degree Noetherian approximation lemma gives that $F$ has quasi-coherent cohomology. Since $f$ is quasi-compact and quasi-separated (finite type and separated), $Rf_*F$ has quasi-coherent cohomology. Computing $Rf_*F$ by a K-injective resolution $I$ of $F$, the global-sections acyclicity of $f_*I$ (with $\\varphi=\\mathrm{id}_A$) gives $R\\Gamma(\\operatorname{Spec}A,Rf_*F)\\cong\\Gamma(X,I)=C$ in $D(A)$. The affine derived equivalence therefore identifies $Rf_*F$ with $\\widetilde C$. For each integer $m$, apply the approximation lemma with $n=m$. It supplies $A_0$, a proper $f_0:X_0\\to\\operatorname{Spec}A_0$, bounded coherent $F_0$, and $\\alpha:A\\otimes^{\\mathbf L}_{A_0}C_0\\to C$, where $C_0=R\\Gamma(X_0,F_0)$; $H^i(\\alpha)$ is an isomorphism for $i>m$ and is surjective for $i=m$. Properness is used here only to choose $f_0$ proper.",
+   "uses": [
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "def-pc-morphism-conventions",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-global-sections-direct-image-kinjective-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, unnumbered general assertion following lemma-flat-proper-pseudo-coherent-direct-image-general; agent assembly"
+   }
+  },
+  {
+   "text": "The ring $A_0$ is Noetherian, and $f_0$ is proper. Apply the Noetherian proper bounded-coherent-image theorem to $F_0$. It gives bounded coherent cohomology for $Rf_{0*}F_0$. This object is pseudo-coherent by the Noetherian bounded-coherent criterion. By the same global-sections acyclicity for $f_{0*}$ of a K-injective resolution of $F_0$, $R\\Gamma(\\operatorname{Spec}A_0,Rf_{0*}F_0)\\cong C_0$ in $D(A_0)$, so under the affine derived equivalence it corresponds to $C_0$. The affine pseudo-coherence criterion therefore gives a bounded-above finite free $A_0$-complex $P_0^\\bullet$ representing $C_0$. No flatness or finite Tor dimension of $f_0$ or $F_0$ is required.",
+   "uses": [
+    "lem-pc-noetherian-proper-bounded-coherent-image",
+    "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-global-sections-direct-image-kinjective-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, unnumbered general assertion following lemma-flat-proper-pseudo-coherent-direct-image-general; agent assembly"
+   }
+  },
+  {
+   "text": "The bounded-above finite free complex $P_0^\\bullet$ is termwise flat and hence K-flat by the bounded-above flat K-flat lemma. Consequently $P^\\bullet=A\\otimes_{A_0}P_0^\\bullet$ represents $A\\otimes^{\\mathbf L}_{A_0}C_0$. Its term in degree $i$ is finite free over $A$, of exactly the rank of $P_0^i$, and it vanishes above the same bound. This is a computation on the chosen resolution, so no flatness of $A$ over $A_0$ is needed.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0650, lemma-pull-pseudo-coherent: compute on a bounded-above finite free model"
+   }
+  },
+  {
+   "text": "Let $Q^\\bullet=\\sigma_{\\ge m}P^\\bullet$ be the stupid truncation, with terms $P^i$ for $i\\ge m$ and zero terms below $m$. It is bounded finite free and has its evident map $Q^\\bullet\\to P^\\bullet$. In degrees $i>m$, boundaries and cycles are unchanged, so this map induces isomorphisms on cohomology. In degree $m$, it induces the quotient map $\\ker d^m\\to\\ker d^m/\\operatorname{im}d^{m-1}$, hence a surjection. Compose with the isomorphism to $A\\otimes^{\\mathbf L}_{A_0}C_0$ and with $\\alpha$. The resulting $Q^\\bullet\\to C$ is an isomorphism on cohomology above $m$ and a surjection in degree $m$. This is precisely $m$-pseudo-coherence of $C$.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Q, definition-pseudo-coherent: explicit finite free approximation"
+   }
+  },
+  {
+   "text": "The integer $m$ was arbitrary, so $C$ is $m$-pseudo-coherent for every $m$. The all-$m$ criterion makes $C$ pseudo-coherent. The affine pseudo-coherence criterion then makes $\\widetilde C\\simeq Rf_*F$ pseudo-coherent. This holds on every affine open $V$ in Step 1; the local definition gives that $Rh_*E$ is pseudo-coherent on $T$. The argument chooses its bounds and approximation data separately on each $V$ and for each $m$, and therefore needs no global quasi-compactness, quasi-separatedness, or lower cohomological bound.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, unnumbered general assertion following lemma-flat-proper-pseudo-coherent-direct-image-general; agent assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+  "def-pc-morphism-conventions",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-noetherian-proper-bounded-coherent-image",
+  "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "def-pc-ring-m-pseudo-coherent",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-global-sections-direct-image-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSD unnumbered Kiehl assertion; agent assembly using a statement-only finite-degree Noetherian descente prerequisite. The primary Kiehl proof is not locally obtained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kiehl finiteness theorem: derived direct image along a proper morphism of schemes takes a relatively pseudo coherent complex to a pseudo coherent complex on the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsFinite\", \"doc\": \"For schemes $X$, $Y$, and $Z$, if $f : X \\\\to Y$ and $g : Y \\\\to Z$ are finite morphisms, then their composition $g \\\\circ f : X \\\\to Z$ is also a finite morphism. This asserts that the property of being \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.IsFinite f]\\n  [AlgebraicGeometry.IsFinite g], AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsFinite g],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsFinite f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes, where $ g $ is finite. Then the composition $ f \\\\circ g $ is a finite morphism if and only if $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is locally quasi-finite, then the morphism $ f $ itself is locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyQuasiFinite f]\\n  [AlgebraicGeometry.LocallyQuasiFinite g],\\n  AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two locally quasi-finite morphisms of schemes is again a locally quasi-finite morphism.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned types; the hits concern properness and finite-type morphism properties, ordinary sheaf pushforward, pseudofunctors, or relative gluing of quasi-coherent algebras, not derived pseudo-coherence or Kiehl finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper scheme morphism f X to Y and E pseudo coherent relative to Y the derived pushforward Rf_* E is pseudo coherent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"{F : X.Presheaf C} (h : F.IsSheaf) : (f _* F).IsSheaf\", \"doc\": \"Given a continuous map $ f : X \\to Y $ and a sheaf $ F $ on $ X $, the pushforward sheaf $ f_*F $ on $ Y $ satisfies the sheaf condition.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"TopCat.Sheaf.pushforward\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : X.Sheaf C ⥤ Y.Sheaf C\", \"doc\": \"The pushforward functor induced by a continuous map $ f: X \\to Y $, which maps the category of sheaves on $ X $ to the category of sheaves on $ Y $ by taking each sheaf on $ X $ to its direct image she\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : Y.Opens) : Γ((pushforward f).obj M, U) = Γ(M, f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned types; the hits concern properness and finite-type morphism properties, ordinary sheaf pushforward, pseudofunctors, or relative gluing of quasi-coherent algebras, not derived pseudo-coherence or Kiehl finiteness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned types; the hits concern properness and finite-type morphism properties, ordinary sheaf pushforward, pseudofunctors, or relative gluing of quasi-coherent algebras, not derived pseudo-coherence or Kiehl finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|Kiehl|relative.*coherent",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"297\", \"text\": \"/-- The relative gluing data associated to a quasi-coherent `𝒪ₓ` algebra. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned types; the hits concern properness and finite-type morphism properties, ordinary sheaf pushforward, pseudofunctors, or relative gluing of quasi-coherent algebras, not derived pseudo-coherence or Kiehl finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image preserves relative pseudo coherence over an arbitrary ring without noetherian hypotheses",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned types; the hits concern properness and finite-type morphism properties, ordinary sheaf pushforward, pseudofunctors, or relative gluing of quasi-coherent algebras, not derived pseudo-coherence or Kiehl finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kiehl finiteness derived direct image of a relatively pseudo coherent complex under proper morphism",
+   "results": "Hits read: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper morphism sends relatively pseudo coherent complexes to pseudo coherent derived direct images",
+   "results": "Hits read: AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.recOn, AlgebraicGeometry.IsProper.instRespectsIsoScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "Hits read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Kiehl",
+   "results": "Hits read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free approximations to derived global sections of complexes relative pseudo coherent on proper schemes",
+   "results": "Hits read: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general.",
+   "via": [
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-scheme Kiehl assertion. Localized on the target, isolated one finite-degree Noetherian descente lemma (statement only, no claimed whole-complex descent), reused Noetherian coherent-image finiteness and affine pseudo-coherence, and wrote the scalar-extension and stupid-truncation arguments explicitly. Primary Kiehl source requested in report; assembly marked agent-written.",
+  "blueprint": "Read the current literature/blueprint/latest direct-images proof (3) of sk-thm-sf-ctf-stability and the inherited coherent-duality prerequisite chain. This split supplies the Kiehl input for perfect direct images between flat families; the inherited from.place/via and null ancestor are preserved; no chapter or unit route is changed. Blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-noetherian-proper-bounded-coherent-image",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic coherent derived-category or affine algebra tool used in the Kiehl assembly; no node in this unit supplies its general statement."
+   },
+   {
+    "node": "lem-pc-global-sections-direct-image-kinjective-acyclic",
+    "why": "Generic derived-category tool (review FIX): identifies derived global sections on the affine base of a derived direct image with derived global sections on the source, as Steps 2 and 3 use; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-noetherian-proper-bounded-coherent-image",
+  "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-global-sections-direct-image-kinjective-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-259303eb2",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-259303eb2 (reviewer sub-agent of L); spot-checked: Verdict FIX: one missing citation added; statements unchanged, no drop.\n\nSource: the item is the unnumbered general 'More generally … see Kiehl' paragraph after Stacks 0CSD (perfect.tex ll.7545-7567). The flat 0CSD proof cannot give the item, so an agent-written assembly is legitimate. The Kiehl paper is not in literature and is listed as WANTED.\n\nSplit shape: the split mirrors Kiehl's descente lemma + Noetherian projection theorem. The new node lem-sfb-relative-complex-noetherian-cohomology-approximation draws no pseudo-coherence conclusion and also covers non-proper maps, so it is neither a restatement of the item nor of a clause of it (D1/D2 OK).\n\nSteps 1-6, read against every cited statement:\n- Step 1: proper restriction; the all-affine-charts iff restricts relative pseudo-coherence to V; open restriction of Rf_*; locality of pseudo-coherence.\n- Step 2: qcqs gives Rf_*F in QCoh; affine equivalence.\n- Step 3: Noetherian proper bounded-coherent image on Spec A0, then the bounded-coherent and affine pseudo-coherence criteria give a bounded-above finite free P0.\n- Step 4: bounded-above flat ⇒ K-flat.\n- Step 5: the stupid truncation σ≥m gives exactly 064Q m-pseudo-coherence.\n- Step 6: the all-m criterion.\n\nFIX (C1): Steps 2 and 3 used RΓ(Spec A, Rf_*F) ≅ RΓ(X,F) without a node. They now cite lem-pc-global-sections-direct-image-kinjective-acyclic with φ=id. It is added to proof_deps and tool_uses, and its closure has no trace-formula or Poincaré-duality node.\n\nNew node: statement-only, self-contained, agent-formulated with the source WANTED, no SGA.\n- It is true: quasi-coherence and the upper bound come from 09UI/0CSU. The degree-n approximation comes from Noetherian approximation of X into X0×A, almost-perfect descent of order-n truncations over the derived fibre product, D^-_coh = D^-(Coh) on X0, and a stupid truncation.\n- Small cases checked: Spec A; A^1_A; Spec k→Spec k[t]; a non-flat X0 handled by choosing A0.\n- No duplicate found: rg -L over the DAG for kiehl, relative pseudo-coherence and Noetherian approximation found only flat or locality nodes.\n\nBatch-5 check: lem-pc-noetherian-proper-bounded-coherent-image reaches def-trf-schematically-dense-open (a definition), lem-trf-affine-open-limit-descent (Mathlib limit leaf) and lem-pod-separated-finite-type-base-change (Mathlib leaf), via the Chow/Nagata route of Grothendieck's coherence theorem. That theorem is a general finiteness result, not a step of the trace formula or of Poincaré duality, so the citation is accepted.\n\nThe off-unit tool_uses (generic picard-framework coherent/derived tools) are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KiehlRelativePseudoCoherentDirectImage",
+  "declaration": "AlgebraicGeometry.Scheme.isPseudoCoherent_derivedDirectImage_of_relative",
+  "file": "lean/Sheaf/AlgebraicGeometry/KiehlRelativePseudoCoherentDirectImage.lean",
+  "statement": "theorem isPseudoCoherent_derivedDirectImage_of_relative [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {Z T : Scheme.{u}} [∀ U : T.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))] (h : Z ⟶ T) [IsProper h] (E : schemeDerivedCategory Z) (_hE : IsPseudoCoherentRelativeTo h E) : IsPseudoCoherent T ((schemeDerivedDirectImage h).obj E)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1af7608a",
+  "group": "NB",
+  "result": "pass",
+  "note": "Checked against Stacks perfect.tex ll.7545-7567 (unnumbered Kiehl paragraph after 0CSD): proper h, E relatively pseudo-coherent (all m, per-m charts) => Rh_*E pseudo-coherent; no base-change claim. Lean: {Z T : Scheme.{u}} (h) [IsProper h] (E : schemeDerivedCategory Z) (IsPseudoCoherentRelativeTo h E) ⊢ IsPseudoCoherent T ((schemeDerivedDirectImage h).obj E). IsProper supplies the LocallyOfFiniteType the relative def needs; no flat/lfp/Noetherian/qcqs/bound hypotheses; the two HasDerivedCategory.{w} families are exactly those required by IsPseudoCoherentRelativeTo and IsPseudoCoherent, from one instance source. lean.statement verbatim; node diff vs side-live only `lean`; all proof-dep modules exist and match records; docstrings carry source and blueprint tag plus all 6 proof steps; theorem only, by sorry; no duplicate found (only flat space theorem); report has Worker report and Second reading by NB. No findings; no file changed, so no compile."
+ }
+}

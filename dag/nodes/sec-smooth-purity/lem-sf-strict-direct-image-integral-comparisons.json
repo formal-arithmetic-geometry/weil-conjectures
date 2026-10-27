@@ -1,0 +1,156 @@
+{
+ "id": "lem-sf-strict-direct-image-integral-comparisons",
+ "kind": "statement",
+ "title": "Integral scalar conjugates for supplied strict models",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, $\\Omega/\\mathbf Q_\\ell$ an algebraic closure, and $f:Z\\to X$ a morphism of separated finite-type $k$-schemes. For every specified family $I_E$ of IntegralModels [def-sf-strict-direct-image-scalar-data] indexed by finite subextensions of $\\Omega$, there are tensor-generator-normalized ordinary and universal-unit-normalized ambient scalar/direct-image comparisons, and natural isomorphisms $I_L S^Z_{L/E}\\cong S^X_{L/E}I_E$. They satisfy HasIntegralLaws and HasIntegralCoherence [def-sf-strict-direct-image-integral-coherence]. The strict models are supplied, not constructed, and no rational functor is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Agent-expanded strict scalar comparison argument, original DAG Steps 1--8; current blueprint retains only the underlying closed-immersion argument."
+ },
+ "stmt_deps": [
+  "def-sf-strict-direct-image-scalar-data",
+  "def-sf-strict-direct-image-integral-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Write $C^W_{L/E}=-\\otimes^L_{\\widehat R_{E,W}}\\widehat R_{L,W}$, and let $\\beta_{L/E}:C^X_{L/E}F_E\\xrightarrow{\\sim}F_LC^Z_{L/E}$ be exactly the ambient comparison of [prop-weil-pbc-scalar-extension]. The natural maps $\\chi^W:C^W\\to S^W$ are isomorphisms on complete inputs by [lem-weil-finite-free-completed-scalar-comparison]. Define\n$$N_{L/E,K}=\\chi^X_{L/E,F_EK}\\circ\\beta_{L/E,K}^{-1}\\circ F_L((\\chi^Z_{L/E,K})^{-1}),$$\nand\n$$d_{L/E,K}=S^X_{L/E}(\\psi_{E,K})\\circ N_{L/E,K}\\circ(\\psi_{L,S^Z_{L/E}K})^{-1}.$$\nThese formulas give the asserted direction $I_LS^Z_{L/E}\\to S^X_{L/E}I_E$. Every factor is a natural isomorphism; Step 1 supplies all its complete constructible inputs and outputs. Thus they define natural isomorphisms on the full categories in the statement, with the required normalization.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$, abbreviate the extensions by $a=L/E$, $b=M/L$, $c=M/E$. Write $A_C^W:C_b^WC_a^W\\to C_c^W$ for ordinary tensor associativity and $A_S^W:S_b^WS_a^W\\to S_c^W$ for its strict-tower counterpart. By [lem-fix-scalar-completion-associator], with\n$$h^W_K=S_b^W(\\chi^W_{a,K})\\circ\\chi^W_{b,C_a^WK},$$\none has $A^W_{S,K}h^W_K=\\chi^W_{c,K}A^W_{C,K}$. This is the associator that rationalizes to the prescribed $a^W$: [lem-pur-completed-line-tensor-coherence] identifies its scalar associators with those of [lem-weil-scalar-extension-composition]. Expand the three $N$'s in Step 3. Naturality of $\\chi_b$ moves it past $\\beta_a^{-1}$, and the displayed equation replaces $A_Sh$ by $\\chi_cA_C$ on each site. Precompose with the isomorphism $F_M(h^Z_K)$ and cancel the common final $\\chi^X_{c,F_EK}$. The required equation becomes exactly\n$$A^X_CF_E\\circ C_b^X(\\beta_a^{-1})\\circ\\beta_{b,C_a^Z}^{-1}=\\beta_c^{-1}\\circ F_M(A_C^Z),$$\nthe successive-extension coherence of [prop-weil-pbc-scalar-extension], with its comparisons inverted. Cancelling the precomposition back gives\n$$A^X_SF_E\\circ S_b^X(N_a)\\circ N_{b,S_a^Z}=N_c\\circ F_M(A_S^Z).$$\nFor a repeated field the same calculation uses the multiplication/completeness units instead of $h$; the unit normalization of $\\chi_{E/E}$ and the ambient unit comparison give $N_{E/E}=\\operatorname{id}$ under those units.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "lem-pur-completed-line-tensor-coherence",
+    "lem-weil-scalar-extension-composition",
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  },
+  {
+   "text": "Substitute $d_a=S_a^X(\\psi_E)N_a\\psi_L^{-1}$ and $d_b=S_b^X(\\psi_L)N_b\\psi_M^{-1}$ into $A_S^X I_E\\circ S_b^X(d_a)\\circ d_{b,S_a^Z}$. The adjacent factors $S_b^X(\\psi_L^{-1})S_b^X(\\psi_L)$ cancel. Naturality of $A_S^X$ then gives\n$$S_c^X(\\psi_E)\\circ A_S^XF_E\\circ S_b^X(N_a)\\circ N_{b,S_a^Z}\\circ\\psi_{M,S_b^ZS_a^Z}^{-1}.$$\nUse Step 4, then naturality of $\\psi_M$ for $A_S^Z$, in the form $F_M(A_S^Z)\\psi_{M,S_b^ZS_a^Z}^{-1}=\\psi_{M,S_c^Z}^{-1}I_M(A_S^Z)$. The result is $d_c\\circ I_M(A_S^Z)$, the integral cocycle. For $L=E$, Step 4 makes $N$ the identity under the scalar unit; naturality of $\\psi_E$ for that unit cancels the remaining $\\psi_E$ and its inverse. Thus $d_{E/E}$ is the identity under the prescribed units.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  },
+  {
+   "text": "The specified quotient-completion map $\\chi$ commutes with ordinary tensor shifts and the native product-cone shifts by [lem-weil-completed-scalar-chain-shift]. The ambient $\\beta$ commutes with shifts by [prop-weil-pbc-scalar-extension]. Hence the formula of Step 3 for $d$ is shift compatible: Step 6 supplies that property for $\\psi$, and inverses of shift-compatible isomorphisms satisfy the reversed shift square by cancellation. Composition and whiskering preserve these squares by [lem-weil-pbc-commshift-nattrans-comp-whisker].",
+   "uses": [
+    "lem-weil-completed-scalar-chain-shift",
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+    "place": "Rational-stage paragraph and algebraically closed-stage scalar comparison; returned proof steps 4-5 (comparison normalization), 8 (linearity) and 9 first paragraph (comparison transport and coherence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-fix-scalar-completion-associator",
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-smooth-purity/lem-sf-strict-direct-image-scalar-comparison.json",
+  "place": "Expansion of its normalized strict-model, integral conjugation and raw rationalization proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent integral direct image scalar comparison and raw rational localization",
+   "results": "8 hits: isIntegral_localization', Algebra.intNorm_eq_of_isLocalization, Localization.AtPrime.instIsScalarTower, IsLocalizedModule.isInteger_smul, instIsScalarTowerAtPrimeFractionRing_1, IsLocalization.instIsScalarTowerAtPrimeFractionRing, IsLocalization.isInteger_smul, IsLocalization.Away.isIntegral_of_isIntegral_map",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict integral derived direct image has a functorial normalized reconstruction and coherent scalar comparisons",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*comparison|direct.*image",
+   "results": "25 hits: Mathlib/Geometry/Euclidean/Volume/Measure.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Topology/Order/ScottTopology.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfStrictDirectImageScalarComparison",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-closed-unit-all-stages",
+   "place": "Original rational-stage and algebraically closed scalar-comparison expansion: Integral scalar conjugates for supplied strict models",
+   "via": [
+    "lem-sf-strict-direct-image-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfStrictDirectImageIntegralComparisons",
+  "file": "lean/Sheaf/Paper/SfStrictDirectImageIntegralComparisons.lean",
+  "declaration": "WeilConjectures.SfStrictDirectImageScalar.strictDirectImageIntegralComparisons",
+  "declarations": [
+   "WeilConjectures.SfStrictDirectImageScalar.strictDirectImageIntegralComparisons"
+  ],
+  "statement": "theorem strictDirectImageIntegralComparisons (k : Type u) [Field k] (hl : IsUnit (l : k)) {Z X : Scheme.{u}} [Z.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (f : Z ⟶ X) [f.IsOver (Spec (.of k))] (I : ∀ E : Index l Ω, IntegralModel l (Coefficient.{u} l Ω E) f) : ∃ (A : ∀ (E L : Index l Ω) (h : E ≤ L), AmbientComparison l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f) (c : ∀ (E L : Index l Ω) (h : E ≤ L), integralTransition l Ω Z E L h ⋙ (I L).image ≅ (I E).image ⋙ integralTransition l Ω X E L h), HasIntegralLaws l Ω f ⟨A, I, c⟩ ∧ HasIntegralCoherence l Ω f ⟨A, I, c⟩",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations, diffed against the published item module (byte-identical, re-exported by public import); the three new sorry statements read against their nodes and the published rational associator/unitor; all 7 delivered modules and the 5 direct importers compiled in a sandbox; axioms traced to upstream sorryAx"
+ }
+}

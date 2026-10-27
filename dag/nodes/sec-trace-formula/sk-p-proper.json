@@ -1,0 +1,132 @@
+{
+ "id": "sk-p-proper",
+ "kind": "statement",
+ "title": "Proper pushforward and Lefschetz–Verdier",
+ "statement": "Let $u:c_2^*K\\to c_1^!K$ be a cohomological correspondence on $(X,K)$ for a\ncorrespondence $c=(c_1,c_2):C\\to X\\times X$, with $K\\in\\Dctf(X,A)$. Recall\nthat when $c_2$ is proper, $u$ acts on $R\\Gamma_c(X,K)$ by the endomorphism\n$T_c(u)$ in $D(A)$, the composite of the ordinary unit\n$R\\Gamma_c(X,K)\\to R\\Gamma_c(C,c_2^*K)$ (using $Rc_{2*}=Rc_{2!}$), of $u$, of\nthe identification $R\\Gamma_c(C,c_1^!K)\\simeq R\\Gamma_c(X,Rc_{1!}c_1^!K)$ and\nof the exceptional counit $\\varepsilon_{c_1}$.\n\nLet $f:X\\to Y$ and $g:C\\to D$ be proper, and let $b=(b_1,b_2):D\\to Y\\times Y$\nsatisfy $b_ig=fc_i$. Set $K'=Rf_*K$, and let $u'$ be the pushed correspondence\non $(Y,K')$ of Definition [sk-d-proper-pushforward]. With the induced proper\nmap $h:F_c\\to F_b$ one has\n\n$$\n\\operatorname{Tr}_b(u')=h_*\\operatorname{Tr}_c(u).\n$$\n\nIf $X$ and $C$ are proper over $k$, this gives\n\n$$\n\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma(X,K))\n=\\int_{F_c}\\operatorname{Tr}_c(u)\n=\\sum_B\\operatorname{LT}_B(u),\n$$\n\nfor any finite open-and-closed decomposition $F_c=\\coprod B$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-p-proper/_section.md",
+  "place": "node sk-p-proper, order 2617",
+  "external": [
+   {
+    "document": "SGA 5",
+    "place": "This proves the first formula; compare (SGA 5, III, Theorem 4.4 and Corollary 4.7)."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-d-proper-pushforward",
+  "sk-d-corr",
+  "sk-d-integral",
+  "sk-d-trace-class",
+  "sk-def-sf-kv-maps"
+ ],
+ "proof": [
+  {
+   "text": "The squares $b_ig=fc_i$ are only required to commute, so in general\n$F_c\\ne C\\times_DF_b$; this is why the proof compares the fixed loci through an\nintermediate scheme.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The proof identifies the kernel class of $u'$ with the pushforward of the\nkernel class of $u$, checks that evaluation is compatible with pushforward, and\nfinally compares the fixed loci; together these identify the two trace\nclasses.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Trace compatibility is a calculation on the diagonal. Let $P_X=K\\boxtimes\\mathbb D_XK$\nand $e_K:P_X\\to R\\Delta_{X*}\\omega_X$ be as in [sk-thm-sf-kunneth-verdier]. Put $q=f\\times f$,\n$P_Y=K'\\boxtimes \\mathbb D_YK'$ and let $\\tau_f:Rf_*\\omega_X\\to\\omega_Y$ be the\ncounit. Proper Verdier duality and proper Künneth identify\n\n$$\n\\rho_f:Rq_*P_X\\xrightarrow{\\sim}P_Y.\n$$",
+   "uses": [
+    "sk-thm-sf-kunneth-verdier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A cohomological correspondence $u$ has a kernel class $[u]_P:Rc_!A_C\\to P_X$,\nobtained by exceptional adjunction from the section $A_C\\to c^!P_X$. Under\n$Rb_!Rg_*\\simeq Rq_*Rc_!$, the class of the pushforward is\n\n$$\n[u']_P=\n\\rho_f\\,Rq_*[u]_P\\,\n(Rb_!Rg_*\\simeq Rq_*Rc_!)\\,Rb_!\\eta_g.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "To verify this identity, apply tensor–Hom adjunction and then the exceptional\nadjunction for $b_1$. Both sides become $Rb_{1!}\\gamma$, followed by\n$Rf_*Rc_{1!}u$ and $Rf_*\\varepsilon_{c_1}$; the projection formulas combine by\ntheir composition compatibility. Evaluation is compatible with $\\rho_f$:\n\n$$\ne_{K'}\\rho_f=\nR\\Delta_{Y*}\\tau_f\\,Rq_*e_K,\n\\qquad q\\Delta_X=\\Delta_Yf.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "After restricting to the diagonal and taking tensor–Hom adjoints, this asserts\nthat proper Verdier duality identifies evaluation against $Rf_*K$ with\npushforward of evaluation against $K$, followed by $\\tau_f$; this is the\ndefining counit normalization of that duality.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The fixed loci are the separate Cartesian diagonal pullbacks\n$F_c=C\\times_{X\\times X}X$ and $F_b=D\\times_{Y\\times Y}Y$. For their comparison\nput $E=C\\times_DF_b$. The map $h$ factors as\n\n$$\nF_c\\xrightarrow{a}E\\xrightarrow{\\pi}F_b,\n$$\n\nwhere $a$ is the closed pullback of $X\\to X\\times_YX$ and $\\pi$ is the proper\nbase change of $g$. Use proper base change for the square defining $E$, and the\nexceptional counit for $a$. Composition of counits identifies the resulting\nintegration with $\\tau_h=\\tau_\\pi R\\pi_*\\tau_a$. Applying the two kernel\nidentities with these specified exchanges identifies the map\n$A_D\\to Ri_{b*}\\omega_{F_b}$ defining the left-hand trace with\n\n$$\nA_D\\xrightarrow{\\eta_g}Rg_*A_C\n\\longrightarrow Rg_*Ri_{c*}\\omega_{F_c}\n=Ri_{b*}Rh_*\\omega_{F_c}\n\\xrightarrow{Ri_{b*}\\tau_h}Ri_{b*}\\omega_{F_b}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "In taking the $i_b^*$-adjoint, use the composite-unit identity\n$Rg_*\\eta_{i_c}\\,\\eta_g=Ri_{b*}\\eta_h\\,\\eta_{i_b}$. This proves the first\nformula; compare (SGA 5, III, Theorem 4.4 and Corollary 4.7).",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For proper $X,C$ push to the point correspondence on $s$, using $f=a_X$ and\n$g=a_C$. The pushed cohomological correspondence is $T_c(u)$.\nLemma [sk-p-pairing] identifies its local term with its categorical trace, and\n$h_*$ is integration over $F_c$. Integration over a disjoint union is the sum\nof integrations, proving the second assertion.",
+   "uses": [
+    "sk-p-pairing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-sf-kunneth-verdier",
+  "sk-p-pairing",
+  "sk-thm-sf-package"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-p-proper/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2617,
+ "blueprint_uses": [
+  "sk-d-corr",
+  "sk-d-integral",
+  "sk-d-proper-pushforward",
+  "sk-d-trace-class",
+  "sk-def-sf-kv-maps",
+  "sk-p-pairing",
+  "sk-thm-sf-comp-composition",
+  "sk-thm-sf-kunneth-verdier",
+  "sk-thm-sf-package"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_traceClass"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_traceClass"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-d-corr",
+  "sk-d-integral",
+  "sk-d-trace-class",
+  "sk-def-sf-kv-maps",
+  "sk-thm-sf-package"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-p-proper",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-proper"
+}

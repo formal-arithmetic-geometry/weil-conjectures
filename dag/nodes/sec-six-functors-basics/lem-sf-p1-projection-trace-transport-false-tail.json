@@ -1,0 +1,246 @@
+{
+ "id": "lem-sf-p1-projection-trace-transport-false-tail",
+ "kind": "statement",
+ "title": "False projection chart trace tail",
+ "statement": "Let $A$ be a finite commutative ring, $N\\in\\mathbf N$ with $NA=0$, and $t$ normalized finite twist transport [def-asd-ordinary-finite-p1-arrows]. Let $f:X\\to S$ be proper, $P=\\mathbf P^1_S$ with structure map $q$, and $i:X\\xrightarrow{\\sim}P$ with $i;q=f$. Assume $N$ is invertible in $\\Gamma(S,\\mathcal O_S)$. Write $L_T=A_T(1)[2]$, $\\mathbf1_T$ for the ordinary constant coefficient complex, $M=\\mathrm{middleComparison}(f,i,\\mathrm{false})$, and $C=\\mathrm{constantComparison}(i)$, with the explicit maps of [def-sf-p1-integral-transport-data]. Write $D=\\mathrm{ordinaryFiniteP1DiagonalChartMap}(S,\\mathrm{false})$ [lem-sf-p1-chart-exchange] and $B^{-1}=\\mathrm{falseProjectionChartFactorInv}(S)$ for the displayed inverse chart factor [lem-sf-p1-projection-trace-transport-false-factor-cancel]. Explicitly, if $r:\\mathbf P^1_P\\to P$ and $m:\\mathbf P^1_P\\to P$ is the projective-space map induced by $q$, then $B^{-1}=Rr_*(l_m^{-1});\\mathrm{ordinaryFiniteP1Exchange}(q,L_P)^{-1}$, where $l_m:m^*L_P\\simeq L_{\\mathbf P^1_P}$ is normalized shifted-line transport. For every arbitrary morphism $\\tau:Rq_*L_P\\to\\mathbf1_S$, the false coordinate trace obeys the following equality, in application order:\n$$M; i^*(D);i^*(B^{-1});i^*\\bigl(q^*(\\tau);\\mathrm{ordinaryFiniteUnitPullback}(q)\\bigr);C=\\mathrm{coordinateTrace}(f,i,\\tau,\\mathrm{false}).$$\nThere is no trace-normalization or trace-base-change assumption on $\\tau$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "the paragraphs identifying the composite-adjunction counit, normalized twists, and constant-unit comparison"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-sf-p1-integral-transport-data",
+  "lem-sf-p1-chart-exchange",
+  "lem-sf-p1-projection-trace-transport-false-factor-cancel"
+ ],
+ "proof": [
+  {
+   "text": "Use chartExchange and cancellation of falseProjectionChartFactor with its inverse to remove chart normalization.",
+   "uses": [
+    "lem-sf-p1-chart-exchange",
+    "lem-sf-p1-projection-trace-transport-false-factor-cancel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply middle_exchange, which separates the normalized coefficient square from coefficient-independent exchange pasting.",
+   "uses": [
+    "lem-sf-p1-middle-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of inverse supported self-exchange and proper forget-supports carries the inverse line comparison through the resulting composite. Naturality of the pullback compositor carries the arbitrary trace tau to the base.",
+   "uses": [
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply ordinaryFiniteUnitPullback_comp to i;q=f. The constantUnit_pullback equation identifies the resulting final unit path. The abstract trace-tail naturality helper folds the ordered trace factors into traceComposite, using the presentationTrace_assoc equation for the two direct-image factors. Specialize this folded equation and expand only coordinateTrace and trace, so no concrete shifted-line comparison needs to be normalized.",
+   "uses": [
+    "lem-amb-ordinary-finite-unit-pullback-comp",
+    "lem-sf-p1-constant-unit-pullback",
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-chart-exchange",
+  "lem-sf-p1-projection-trace-transport-false-factor-cancel",
+  "lem-sf-p1-middle-exchange",
+  "def-sf-p1-integral-transport-data",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-sf-p1-constant-unit-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "N2: coefficient square, trace naturality and constant-unit normalization; A2 repair: fold traceComposite in the abstract helper and use presentationTrace_assoc at specialization to match the current factored trace definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under an isomorphism of schemes of projective line trace transport after inverse proper base change and normalized Tate twist comparison",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_naturality",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc",
+     "AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Equivalence",
+   "results": {
+    "hits": 2,
+    "top": [
+     "CategoryTheory.Equivalence.toAdjunction_counit",
+     "CategoryTheory.Adjunction.toEquivalence"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "pushPull|falseProjectionChartTail|derived.*[Bb]ase[Cc]hange.*[Ii]so",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A trace morphism transported across a projective line presentation commutes with self product inverse exchange after cancellation of chart factors",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.GlueData.t'_jii",
+     "CategoryTheory.GlueData.t'_iji",
+     "CategoryTheory.GlueData.t'_comp_eq_pullbackSymmetry",
+     "CategoryTheory.GlueData.t'_inv",
+     "TopCat.GlueData.MkCore.cocycle",
+     "AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst",
+     "AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd",
+     "AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf or generic categorical ingredients do not identify these specified unbounded etale derived comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line presentation arbitrary trace inverse proper exchange transported across isomorphism equals coordinate trace",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Algebra.trace_eq_of_algEquiv",
+     "LinearMap.trace_map",
+     "LinearMap.trace_conj'",
+     "OnePoint.smul_some_eq_ite",
+     "Trivialization.symm_coordChangeL",
+     "LinearMap.trace_conj",
+     "LinearMap.transvection.congr",
+     "LinearEquiv.transvection.inv_eq'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "no match: algebra and linear-map traces in the hits are not derived trace morphisms on etale module categories"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportFalse",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "First triangle: \"the exchange map is obtained from the same pullback counits on the Cartesian square\" and \"Both expressions use the same counit once in each coordinate\"; false-projection trace tail.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseTail",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ProjectionTraceFalseTail.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.falseProjectionChartTail",
+  "statement": "theorem falseProjectionChartTail (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f) (hS : IsUnit (N : Γ(S, ⊤))) (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S) : middleComparison A N hA t f i hi hS false ≫ (ordinaryFinitePullback A i.hom).map (ordinaryFiniteP1DiagonalChartMap A N hA t S hS false) ≫ (ordinaryFinitePullback A i.hom).map (falseProjectionChartFactorInv A N hA t S hS) ≫ (ordinaryFinitePullback A i.hom).map ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).map τ ≫ (ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom) ≫ (constantComparison A i).hom = coordinateTrace A N hA t f i hi hS τ false",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-5a72bcf2f",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-5a72bcf2f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, thm-amb-p1-adjunction.proof.md (first triangle, lines 26-81) and the Lean definitions in SfP1IntegralTransportData.lean (lines 119-313), FalseTail:30, FactorCancel:25 and CoordinateCoefficientUnitBaseChange:60. Item statement and Lean agree exactly; no hypothesis is added or weakened. N=0 forces S empty and N=1 forces A=0; both are handled. Step 1: false-factor-cancel (with e=Ex(q,L_P), c=l_m, v=P1(q)) gives B;B^-1=1, and chart exchange gives D=projEx;B, so the chart factors cancel. Step 2: e=l_j;l_v^-1 and the composition law give e^-1;F_j(l_vP^-1)=F_v(l_i^-1);a^-1 (re-derived by hand). Step 3: types checked. E_X, E_P and E_j are invertible by proper base change (A finite, so torsion); the j-square is Cartesian because i is an isomorphism. The presentation-square mate R_q(eta_i) has inverse kappa;R_q(pushPull) by the new node. Mate pasting and the composite-counit statement are used as stated. Step 4: c_p;E^-1=beta^-1;F_f(c_f) follows from the new forget-supports node; exchangeFirst is beta_1, the flipped self-square exchange. Step 5: naturality at an arbitrary tau, unit-pullback composition, and lem-trf unit base change. constantUnit differs from singleFunctorObjUnitIso only by the constant-sheaf unit, and that compatibility is a few lines (every map sends 1 to 1), so the elementary mark is fine. The result is exactly coordinateTrace false. New nodes: both are statement-only, self-contained and true (conjugate-compositor coherence; compact-support exchange compatible with proper base change through forget-supports). Tested on f=id, i=id and empty X. No duplicates found by rg over the DAG; candidates checked include source-proper-projection-coincidence, proper-ordered-projection-exchange, raw-trace-adjustment and unbounded-compact-support-proper-composition. Neither new node restates the item. Accepted tool_uses (all generic): twist-pullback, twist-uniqueness, unit-on-pullback, ringed-derived-monoidal-comparisons, kun-proper-base-change-torsion-ring, unit-pullback-comp, trf-coordinate-coefficient-unit-base-change. Batch 5: no flagged citation is the trace formula, Poincare duality or a step of their proofs. Proper base change gives neither assumption and was already in the item's closure through def-sf-p1-integral-transport-data. Its PD-chapter reach, lem-pod-lisse-module-sheaves-as-module-objects, is a generic lisse-sheaf lemma. The trf unit-base-change node is a pure monoidal-unit coherence filed in the trace-formula chapter. No SGA citations. Advisory only: blueprint.from.node is null, whereas the landed sibling uses thm-amb-p1-adjunction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T070925-L-2675208",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-p1-projection-trace-transport-false-tail",
+  "worker": "stage1",
+  "summary": "Expanded the fixed-false trace-tail identity with all hypotheses, cancelled chart factors, wrote the twist-square equation and presentation mate-pasting identity, isolated proper self-exchange forget-support compatibility and normalization of geometric pushPull against the adjunction unit, then used naturality for arbitrary tau and constant-unit coherence. No trace normalization is assumed. New nodes are statement-only. Repair of returned head ecbd19b4198: revalidated all cited statements against the current DAG; only the factor-cancellation statement changed. Step 1 now explicitly matches its factors and all hypotheses, and citations.json quotes the new statement.",
+  "blueprint": "thm-amb-p1-adjunction.proof.md, first triangle: canonical exchange, qp1=qp2, direct-image composition and common pullback counits. The inherited created.item chain terminates at a module name, so blueprint_refs ancestor returns None; from.node is null with the exact latest-source paragraph retained.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-sp-finite-p1-unit-on-pullback",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-amb-ordinary-finite-unit-pullback-comp",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   },
+   {
+    "node": "lem-trf-coordinate-coefficient-unit-base-change",
+    "why": "Generic comparison/normalization tool for the specified ordinary unbounded module functors; no projective-line integral or exceptional adjunction is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-sp-finite-p1-unit-on-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-trf-coordinate-coefficient-unit-base-change"
+ ]
+}

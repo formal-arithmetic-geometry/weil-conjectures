@@ -1,0 +1,284 @@
+{
+ "id": "lem-a1-completed-scalar-exact-base-change",
+ "kind": "statement",
+ "title": "Exact completed scalar realization and ordinary balanced pullback",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subset R$ an ideal, and $g:T'\\to T$ any scheme morphism [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] write $\\underline N_W$ for constant module sheaves [def-weil-pbc-constant-sheaf] and $B_W=\\varprojlim_n\\underline{R/I^n}_W$, with canonical constant scalar maps and quotient projections [def-pur-sheaf-inverse-limit], for $W=T,T'$. Use module sheaves [def-weil-sheaf-of-modules-category] and the canonical constant-section comparisons for $g^{-1}$ [def-weil-proetale-inverse-image].\n\nThe constant-section direct-image maps for the rings $R/I^n$ commute with all quotient maps. Their limits define a unique ring-sheaf map $B_T\\to g_*B_{T'}$ with those projections. Its adjoint $c_g:g^{-1}B_T\\to B_{T'}$ agrees with the projection-induced map, and the square of constant scalar maps from $\\underline R_{T'}\\cong g^{-1}\\underline R_T$ commutes. The module direct image along this map is a right adjoint. Its left adjoint is ordinary ringed pullback $g_B^*F=B_{T'}\\otimes_{g^{-1}B_T}g^{-1}F$. These assertions hold in independently enlarged site and coefficient universes satisfying the smallness convention [def-weil-size-convention].\n\nThe functor $S_W:N\\mapsto B_W\\otimes_{\\underline R_W}\\underline N_W$ [def-pur-sheaf-tensor-product] on all $R$-modules is additive and exact. For every cochain complex $P^\\bullet$ of $R$-modules, it induces the canonical natural isomorphism\n$$\\mathcal H^j(S_W(P^\\bullet))\\xrightarrow{\\sim}S_W(H^j(P^\\bullet))$$\nfor all $j\\in\\mathbf Z$ [def-weil-abstract-derived-category, def-weil-derived-cohomology-sheaves], induced by the cycle and boundary identifications. For every $R$-module $N$, with no finiteness assumption, there is a natural isomorphism of sheaves\n$$g_B^*S_T(N)\\xrightarrow{\\sim}S_{T'}(N).$$\nAfter the canonical inverse-image constant-module and tensor comparisons, its balanced-tensor formulas are $b'\\otimes(b\\otimes n)\\mapsto b'c_g(b)\\otimes n$ and $b'\\otimes n\\mapsto b'\\otimes(1\\otimes n)$. They are well-defined mutually inverse sheaf morphisms and are natural in every $R$-linear map $N\\to N'$. No flatness of $B_{T'}$ over $g^{-1}B_T$ and no identification of those two rings is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 093J (sites-modules.tex, lemma-constant-exact), 093M (sites-modules.tex, lemma-completion-flat), 03EL (sites-modules.tex, lemma-tensor-product-pullback); returned parent Steps 7-8, exact scalar realization, coefficient-map adjunction and balanced pullback."
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-size-convention",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q_n=R/I^n$, write $q_{mn}:Q_m\\to Q_n$ for $m\\geq n$, and let $\\rho_A:\\underline A_T\\to g_*\\underline A_{T'}$ be the constant-section map of [def-weil-proetale-inverse-image]. For every ring homomorphism $a:A\\to A'$, the maps $g_*\\underline a\\circ\\rho_A$ and $\\rho_{A'}\\circ\\underline a$ agree: after precomposition with the constant-presheaf sheafification unit both send a scalar $x$ to the constant section $a(x)$, so uniqueness in sheafification makes them equal. Apply this to $q_{mn}$ and to $R\\to Q_n$. The canonical isomorphism $g^{-1}\\underline R_T\\cong\\underline R_{T'}$ is that of [lem-pe-constant-left-module-inverse-image], which preserves constant scalars; its adjunct is $\\rho_R$ by the same uniqueness argument.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (constant sheaves) and 03D2 (lemma-pullback-module); constant-section naturality from the sheafification unit"
+   }
+  },
+  {
+   "text": "Write $\\pi_{W,n}:B_W\\to\\underline{Q_n}_W$. By the sectionwise inverse-limit description [def-pur-sheaf-inverse-limit], on every site object $U$ one has $(g_*B_{T'})(U)=\\lim_n\\underline{Q_n}_{T'}(u_gU)$. Thus the compatible maps $\\rho_{Q_n}\\circ\\pi_{T,n}$ define a ring-sheaf map $d_g:B_T\\to g_*B_{T'}$, uniquely determined by $(g_*\\pi_{T',n})d_g=\\rho_{Q_n}\\pi_{T,n}$. Restrictions and all ring operations commute with this map coordinatewise. Let $c_g$ be its ring-adjunct using [def-weil-proetale-inverse-image]. Adjunction naturality gives\n$$\\pi_{T',n}c_g=c_{Q_n}\\,g^{-1}(\\pi_{T,n}),$$\nwhere $c_{Q_n}$ is the adjunct of $\\rho_{Q_n}$. Hence it is exactly the projection-induced map; uniqueness is tested by the projections of the target $B_{T'}$. If $\\eta_W:\\underline R_W\\to B_W$ is the scalar map, each projection of $d_g\\eta_T$ is that of $g_*\\eta_{T'}\\rho_R$ by step 1. These maps are equal by coordinatewise uniqueness. Taking adjuncts yields $c_g g^{-1}(\\eta_T)=\\eta_{T'}c_R$, the required scalar square.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits) and 03CO (lemma-limits-colimits-abelian-sheaves), sectionwise limit; ring adjunction and projection calculation"
+   }
+  },
+  {
+   "text": "The geometric morphism of [def-weil-proetale-inverse-image], equipped with $c_g$, satisfies exactly the hypotheses of [lem-weil-pbc-ringed-topoi-module-adjunction]. Apply its natural Hom bijection with source ring $B_T$ and target ring $B_{T'}$. It identifies the direct image with its action through $d_g$ as a right adjoint, whose left adjoint is $F\\mapsto B_{T'}\\otimes_{g^{-1}B_T}g^{-1}F$. No condition on $c_g$ other than being a ring map occurs in that theorem.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules"
+   }
+  },
+  {
+   "text": "For each $W$, apply [lem-weil-pbc-completed-constant-algebra-flat-quotients] with $A=R$, ideal $I$, and the identity presentation $S=B_W$. Its map $c$ is $\\eta_W$ because its composites are the quotient projections. Its indexing $n+1$ gives the same positive-power tower (including a zeroth quotient would merely add its forced zero coordinate). The hypotheses are precisely that $R$ is commutative Noetherian; neither $I$ nor a module has further restrictions. It states that extension along $\\eta_W$ is exact. Compose with the exact constant module functor of [lem-weil-pbc-finite-type-constant-exact], whose statement applies to every module despite its title. The composite is $S_W$. It is additive by [def-sfb-flat-scalar-realization] and preserves finite limits and finite colimits as the composite of two such functors. This proves exactness on all $R$-modules.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-weil-pbc-finite-type-constant-exact",
+    "def-sfb-flat-scalar-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093M, lemma-completion-flat, and 093J, lemma-constant-exact"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to the additive exact functor $S_W$ established in step 4 and the arbitrary complex $P^\\bullet$. It gives $\\mathcal H^j(S_WP^\\bullet)\\cong S_W(H^jP^\\bullet)$ for every integer $j$, natural in chain maps. The cited statement explicitly identifies cycles with $S_W(\\ker d^j)$ and boundaries with $S_W(\\operatorname{im}d^{j-1})$, and specifies compatibility with their inclusions and quotient projections. Thus its isomorphism is the canonical one required here; boundedness is not used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, on cycles, boundaries and their quotient"
+   }
+  },
+  {
+   "text": "Use the ordinary inverse-image/scalar comparison $\\chi_g^{AB}$ of [lem-sfb-scalar-inverse-image-tower-diagram] for $A=\\underline R_T$, $B=B_T$ (take the third ring there to be $B_T$ with identity map). This identifies $g^{-1}(B_T\\otimes_{\\underline R_T}\\underline N_T)$ with $g^{-1}B_T\\otimes_{g^{-1}\\underline R_T}g^{-1}\\underline N_T$, including its actual coefficient action. By [lem-sfb-geometric-inverse-image-constant-module], $g^{-1}\\underline N_T\\cong\\underline N_{T'}$ canonically and naturally for every module $N$. Under the constant-ring identification of step 1, set $A=\\underline R_{T'}$, $C=g^{-1}B_T$, $D=B_{T'}$, and $M=\\underline N_{T'}$. The scalar square in step 2 makes $A\\to C\\xrightarrow{c_g}D$ equal to the given scalar map $A\\to D$. Consequently the pullback in step 3 is canonically $D\\otimes_C(C\\otimes_A M)$.",
+   "uses": [
+    "lem-sfb-scalar-inverse-image-tower-diagram",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, and Tag 03EK, section-tensor-product, ordinary inverse image of the balanced coequalizer"
+   }
+  },
+  {
+   "text": "On the tensors of step 6 define $\\Phi(d\\otimes(c\\otimes m))=d\\,c_g(c)\\otimes m$ and $\\Psi(d\\otimes m)=d\\otimes(1\\otimes m)$. These descend by the sheafified tensor universal property [def-pur-sheaf-tensor-product]. Indeed the inner $A$-relation $ca\\otimes m=c\\otimes am$ is respected since $c_g(ca)=c_g(c)\\eta_{T'}(a)$; the outer $C$-relation is respected since $dc_g(c_0)c_g(c)=dc_g(c_0c)$. For $\\Psi$, the $A$-relation follows from\n$$d\\eta_{T'}(a)\\otimes(1\\otimes m)=d\\otimes(a\\otimes m)=d\\otimes(1\\otimes am).$$\nBoth rules are additive and $D$-linear and commute with restrictions. Thus the presheaf balanced pairings extend uniquely to sheaf morphisms, also when sections of the tensor sheaf are only locally represented by sums of pure tensors. On local pure tensors $\\Phi\\Psi(d\\otimes m)=d\\otimes m$, and\n$$\\Psi\\Phi(d\\otimes(c\\otimes m))=dc_g(c)\\otimes(1\\otimes m)=d\\otimes(c\\otimes m).$$\nTheir composites are identities by the same universal property. A linear map $h:N\\to N'$ replaces $m$ by $\\underline h(m)$ in both formulas, so both squares commute. With step 6 this proves the specified natural pullback isomorphism for every $N$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: bilinear universal property; explicit scalar balancing and inverse calculation"
+   }
+  },
+  {
+   "text": "Choose a common ambient universe containing the two site skeletons, the coefficient ring, the countable towers and all modules in question, as in [def-weil-size-convention]. The adjunction node in step 3 and the geometric constant-module node in step 6 require only that the sites be small in that ambient coefficient universe. These conditions hold after independently enlarging the site and coefficient universes subject to this convention. The limit construction is coordinatewise, flatness in step 4 is supplied for the original site by the cited theorem, and the remaining maps are given by the same constant-section and balanced-tensor formulas. Repeating the argument there proves every assertion in those universes. No step has required preservation of the infinite limit by $g^{-1}$ or flatness of $D$ over $C$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Independent smallness convention and the small-site hypotheses of the two cited general statements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "def-sfb-flat-scalar-realization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J, 093M, 03D7 and 03EL; explicit assembly with projection, scalar and balanced-generator normalizations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed constant scalar realization of modules is exact and its cohomology and ordinary ringed pullback are canonically compatible without flatness of the coefficient map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"KaehlerDifferential.exact_mapBaseChange_map\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [inst_6 : IsScalarTower R A B],\\n  Function.Exact ⇑(KaehlerDifferential.mapBaseChange R A B) ⇑(KaehlerDifferential.map R \", \"doc\": \"The image of the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is equal to the kernel of the Kähler differentials map $\\\\Omega_{A/R} \\\\to \\\\Omega_{B/S}$, establishing an exact sequence in t\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic completion and abstract homology preservation do not state exact completed constant realization and balanced pullback over the projection-induced ring-sheaf map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (S : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (PresheafOfModules S)\", \"doc\": \"The pullback by the identity morphism identifies to the identity functor of the\\ncategory of presheaves of modules.\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) : CategoryTheory.ObjectProperty (PresheafOfModules S)\", \"doc\": \"Given a morphism of presheaves of rings `φ : S ⟶ F.op ⋙ R`, this is the property\\nthat the (partial) left adjoint functor of `pushforward φ` is defined\\non a certain object `M : PresheafOfModules S`.\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Categor\", \"doc\": \"The pullback functor `PresheafOfModules S ⥤ PresheafOfModules R` induced by\\na morphism of presheaves of rings `S ⟶ F.op ⋙ R`, defined as the left adjoint\\nfunctor to the pushforward, when it exists.\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C D : Type u} [CategoryTheory.SmallCategory C] [CategoryTheory.SmallCategory D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) : PresheafOfModules.pullbackObjIsDefined φ = ⊤\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C D : Type u} [CategoryTheory.SmallCategory C] [CategoryTheory.SmallCategory D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) (X : C) : PresheafOfModules.pullbackObjIsDefined φ ((PresheafOfModules.free S).ob\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"Given a morphism of presheaves of rings `S ⟶ F.op ⋙ R`, this is the adjunction\\nbetween associated pullback and pushforward functors on the categories\\nof presheaves of modules.\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) {G : Cate\", \"doc\": \"The composition of two pullback functors on presheaves of modules identifies\\nto the pullback for the composition.\"}\n  {\"name\": \"PresheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {E' : Type u₄} [CategoryTheory.Category.{v₄, u₄} E'] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModulesOfCommRing.pushforward φ).IsRight\", \"doc\": \"The pullback functor induced by a morphism of presheaves of commutative rings.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModulesOfCommRing.pushforward φ).IsRight\", \"doc\": \"The adjunction between pullback and pushforward for modules over presheaves of\\ncommutative rings.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic completion and abstract homology preservation do not state exact completed constant realization and balanced pullback over the projection-induced ring-sheaf map."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*flat|flat.*completion|[Pp]ullback.*[Tt]ensor",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"31\", \"text\": \"- `flat_of_isNoetherian`: the adic completion of a Noetherian ring `R` is `R`-flat.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"378\", \"text\": \"/-- Adic completion of a Noetherian ring `R` is flat over `R`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"379\", \"text\": \"instance flat_of_isNoetherian : Module.Flat R (AdicCompletion I R) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"85\", \"text\": \"lemma isPullback_SpecMap_tensor (T : Triplet f g) : CategoryTheory.IsPullback\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"142\", \"text\": \"  pullback.lift (Spec.map T.tensorInl ≫ X.fromSpecResidueField T.x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"149\", \"text\": \"    pullback.fst f g (T.SpecTensorTo p) = T.x := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"157\", \"text\": \"    pullback.snd f g (T.SpecTensorTo p) = T.y := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"164\", \"text\": \"    T.SpecTensorTo ≫ pullback.fst f g = Spec.map T.tensorInl ≫ X.fromSpecResidueField T.x :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"24\", \"text\": \"  Since `R` is Noetherian, `AdicCompletion I R` is `R`-flat so `A` is a retract\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"44\", \"text\": \"  have : Module.Flat R (AdicCompletion (RingHom.ker f) S) := .trans _ S _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"326\", \"text\": \"  haveI : IsPullback ((isTerminalTensorUnit.ofIso (powZero i).symm).from _) (𝟙 _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"330\", \"text\": \"    (pullback.hom_ext ((isTerminalTensorUnit.ofIso (powZero i).symm).hom_ext ..) (by simp)))\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic completion and abstract homology preservation do not state exact completed constant realization and balanced pullback over the projection-induced ring-sheaf map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of completed constant coefficients tensored with a constant module cancels balanced tensors, and exact completed scalar extension commutes with complex cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \":\\n  (AlgebraTensorModule.map LinearMap.id f) =\\n    (ofTensorProductEquivOfFiniteNoetherian I N).symm.toLinearMap ∘ₗ\\n      map I f ∘ₗ (ofTensorProductEquivOfFiniteNoetherian I M).toLinearMap\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] : ofTensorProductEquivOfFiniteNoetherian I M = ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] (x : AdicCompletion I R ⊗[R] M) :\\n  ofTensorProductEquivOfFiniteNoetherian I M x = ofTensorProduct I M x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"(r : AdicCompletion I R) (x : M) : ofTensorProduct I M (r ⊗ₜ x) = r • of I M x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"LocallyConstant.comapₗ\", \"module\": \"Mathlib.Topology.LocallyConstant.Algebra\", \"type\": \"(R : Type*) [Semiring R] [AddCommMonoid Z] [Module R Z] (f : C(X, Y)) : LocallyConstant Y Z →ₗ[R] LocallyConstant X Z\", \"doc\": \"Given a continuous function $ f : X \\to Y $ between topological spaces and an $ R $-module $ Z $, this defines the linear map from the space of locally constant functions $ Y \\to Z $ to the space of loc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic completion and abstract homology preservation do not state exact completed constant realization and balanced pullback over the projection-induced ring-sheaf map."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesHomology|mapHomologyIso|homologyIso",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/Grp/AB.lean\", \"line\": \"37\", \"text\": \"    (colim (J := J) (C := AddCommGrpCat.{u})).PreservesHomology :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/AB.lean\", \"line\": \"38\", \"text\": \"  Functor.preservesHomology_of_map_exact _ (fun S hS ↦ by\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/AB.lean\", \"line\": \"56\", \"text\": \"  apply Functor.preservesFiniteLimits_of_preservesHomology\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean\", \"line\": \"218\", \"text\": \"  (leftHomologyData K L n).homologyIso.addCommGroupIsoToAddEquiv\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Localization.lean\", \"line\": \"342\", \"text\": \"  [F.Additive] [F.PreservesHomology]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Localization.lean\", \"line\": \"350\", \"text\": \"  map _ _ f (_ : QuasiIso f) := HomologicalComplex.quasiIso_map_of_preservesHomology _ _\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/Abelian.lean\", \"line\": \"213\", \"text\": \"noncomputable def homologyIsoImageICyclesCompPOpcycles :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/Abelian.lean\", \"line\": \"218\", \"text\": \"lemma homologyIsoImageICyclesCompPOpcycles_ι :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/Abelian.lean\", \"line\": \"219\", \"text\": \"    S.homologyIsoImageICyclesCompPOpcycles.hom ≫ image.ι (S.iCycles ≫ S.pOpcycles) =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/Abelian.lean\", \"line\": \"255\", \"text\": \"  isoImage S hkf hcc fac ≪≫ S.homologyIsoImageICyclesCompPOpcycles.symm\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/Abelian.lean\", \"line\": \"261\", \"text\": \"  simp [← cancel_mono (S.homologyIsoImageICyclesCompPOpcycles.hom),\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"line\": \"17\", \"text\": \"This typeclass is named `[F.PreservesHomology]`, and is automatically\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"line\": \"20\", \"text\": \"If `S : ShortComplex C` and `[F.PreservesHomology]`, then there is an\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"line\": \"21\", \"text\": \"isomorphism `S.mapHomologyIso F : (S.map F).homology ≅ F.obj S.homology`, which\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"line\": \"40\", \"text\": \"class PreservesHomology (F : C ⥤ D) [PreservesZeroMorphisms F] : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"line\": \"51\", \"text\": \"lemma PreservesHomology.preservesKernel [F.PreservesHomology] {X Y : C} (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"line\": \"32\", \"text\": \"noncomputable instance : (forget₂ (ModuleCat.{v} R) Ab).PreservesHomology where\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"line\": \"177\", \"text\": \"noncomputable def moduleCatHomologyIso :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"line\": \"179\", \"text\": \"  S.moduleCatLeftHomologyData.homologyIso\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"line\": \"183\", \"text\": \"    S.homologyπ ≫ S.moduleCatHomologyIso.hom =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"line\": \"185\", \"text\": \"  S.moduleCatLeftHomologyData.homologyπ_comp_homologyIso_hom\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean\", \"line\": \"24\", \"text\": \"- `Functor.preservesFiniteLimits_of_preservesHomology`: if `F` preserves homology,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean\", \"line\": \"26\", \"text\": \"- `Functor.preservesFiniteColimits_of_preservesHomology`: if `F` preserves homology, then `F`\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic adic completion and abstract homology preservation do not state exact completed constant realization and balanced pullback over the projection-induced ring-sheaf map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension from constant modules to a completed ring sheaf and ordinary pullback with arbitrary modules",
+   "results": "AdicCompletion.map_exact (algebraic completion, finite-module hypotheses); SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom and SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal (free/unit pullbacks only); no theorem for the full item.",
+   "date": "2026-10-22",
+   "verdict": "no match: the full statement requires the site completion construction, normalized scalar map and ordinary balanced comparison; these hits cover only general or algebraic components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "PresheafOfModules.pullback and PresheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; presheaf abstract adjunction only, not the completed sheaf and normalized formulas.",
+   "date": "2026-10-22",
+   "verdict": "no match: the full statement requires the site completion construction, normalized scalar map and ordinary balanced comparison; these hits cover only general or algebraic components."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*flat|flat.*completion|pullbackPushforwardAdjunction",
+   "results": "AdicCompletion.flat_of_isNoetherian, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:379, read lines 370-385; SheafOfModules.pullbackPushforwardAdjunction, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60, read lines 1-90. Algebraic flatness and the general adjunction do not state all clauses of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match: the full statement requires the site completion construction, normalized scalar map and ordinary balanced comparison; these hits cover only general or algebraic components."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed constant ring sheaf is flat over the constant Noetherian ring and scalar extension commutes with cohomology",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Mathlib.Algebra.Category.ModuleCat.Descent; RingHom.Flat and algebraic flatness/localization results. No completed constant sheaf theorem with the required geometric coefficient map.",
+   "date": "2026-10-22",
+   "verdict": "no match: the full statement requires the site completion construction, normalized scalar map and ordinary balanced comparison; these hits cover only general or algebraic components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-completed-perfect-scalar-pullback",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Master snapshot proof of lem-a1-finite-map-purity, first paragraph: 'the geometric stalk of the direct image is the direct sum over all geometric points above'; coefficient realization for the restriction to the geometric fibre. More precisely, the descendant lem-a1-completed-perfect-scalar-pullback, returned Steps 7-8: exact completed scalar realization and its ordinary balanced geometric pullback.",
+   "via": [
+    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-completed-scalar-exact-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the statement and inherited searches; supplied an eight-step proof using existing general site tools. Constructed the coefficient map by target-limit projections, identified its scalar square, applied ordinary ringed adjunction and completed flatness, and verified the balanced-tensor inverse and module naturality. No new nodes or Lean files.",
+  "blueprint": "Realizes the ordinary coefficient realization and pullback subargument of lem-a1-completed-perfect-scalar-pullback Steps 7-8, beneath the first paragraph of the master lem-a1-finite-map-purity proof. The main-20261015 version retains the statement but omits that proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Provides the normalized constant-ring isomorphism for the geometric morphism; no affine-line node states this general site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Provides the ordinary tensor/direct-image adjunction for the constructed coefficient map, without flatness."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "why": "Provides 093M flatness and exact scalar extension for a general Noetherian completed constant ring on the given site."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Provides exactness of constant module sheafification on arbitrary modules."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Provides normalized cycle/boundary cohomology comparison for an exact functor on arbitrary complexes."
+   },
+   {
+    "node": "lem-sfb-scalar-inverse-image-tower-diagram",
+    "why": "Provides the ordinary inverse-image comparison for sheafified scalar tensors with their actual actions."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Provides constant-module inverse image for arbitrary modules, naturally in all linear maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-sfb-geometric-inverse-image-constant-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-5d06fdc52",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-5d06fdc52 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, statement unchanged. I also read all 13 cited statements and Stacks 093J (lemma-constant-exact), 093M (lemma-completion-flat) and 03EL (lemma-tensor-product-pullback). Step 1: rho_A is the unique sheaf extension in def-weil-proetale-inverse-image, so g_*a∘rho_A=rho_A'∘a, and lem-pe's scalar-preserving isomorphism equals c_R. Step 2: g_* and the limit are both sectionwise, so d_g is unique; the adjunct computation pi'_n c_g = c_{Q_n} g^{-1}pi_n is correct, and the scalar square follows from step 1. g^{-1} is never claimed to commute with the limit. Step 3: ringed-topoi-module-adjunction takes arbitrary commutative R,S and a ring map, with no flatness, matching g_B^*. Step 4: the flat-quotients node (Noetherian A, any I, n+1 indexing is the same tower, c=eta_W) and finite-type-constant-exact (constant functor exact on all modules) compose to S_W, the same construction as def-sfb-flat-scalar-realization. Step 5: exact-functor-complex-cohomology has no boundedness and gives the cycle/boundary identification. Step 6: chi of scalar-inverse-image-tower-diagram (A=R_T, B=C=B_T) plus geometric-inverse-image-constant-module (any N, natural) gives D⊗_C(C⊗_A M). Step 7: I checked the Phi/Psi balancing relations, including c_g(ca)=c_g(c)eta(a) from the step-2 square, and both composites on local pure tensors; this is elementary. Step 8: size conditions are only smallness of the sites. Edge cases I=0, I=R, zero ring, N=0, infinite free N, g=id and empty T all hold, and finite presentation of N is never needed. Duplicate check: lem-sfb-admissible-scalar-realization-exact covers only special condensed Lambda; completed-constant-sheaf-reduction, completed-constant-module-model (finite modules only), lem-tw-ordinary-completed-integral-pullback (derived completion comparison) and coefficient-pullback-linearity (automorphisms) are not duplicates. No cycle and no SGA. I accept the 8 generic tool_uses listed in split_report. No fixes."
+ }
+}

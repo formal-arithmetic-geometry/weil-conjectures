@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-connected-proper-fibres-proper",
+ "kind": "statement",
+ "title": "Properness of flat separated families with connected proper fibres",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme] and let $h:Y\\to S$ be a separated flat morphism of finite presentation of algebraic spaces [def-trf-algebraic-space]. Assume that for every geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-point] the fibre $Y_{\\bar s}$ is nonempty, connected and proper over $\\Omega$. Then $h$ is proper. Separated means that the diagonal is a closed immersion. Flatness and local finite presentation are tested on etale scheme charts, and finite presentation additionally requires quasi-compactness and quasi-separatedness. Proper means separated, of finite type and universally closed, with universal closedness tested after every base change. Locally Noetherian has the meaning of [pqf-def-locnoeth]; the chartwise and topological morphism-property conventions are [def-sfb-space-morphism-properties].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 1.1, final paragraph, printed pp.131--132 (flat separated finite-presentation spaces with connected proper geometric fibres), invoking EGA III-1 Section 5.5. Local Deligne PDF WANTED; primary Numdam PDF read online. For schemes the criterion is EGA IV-3 (literature/ega/EGA-IV-3_PMIHES-28-1966.pdf), Corollaire 15.7.10 with Proposition 15.7.9, printed pp.245--247: separated of finite type, universally submersive (here: flat, finitely presented and surjective, hence universally open and surjective), geometrically connected fibres, proper fibre at y implies proper at y."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-geometric-point",
+  "pqf-def-locnoeth",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "By the strict-local properness test it suffices to prove properness after base change along each $T=S_{(\\bar s)}\\to S$. Write $T=\\operatorname{Spec}A$ and $q:X=Y\\times_ST\\to T$. The strict-henselization functoriality statement says that $A$ is strictly henselian local and identifies its closed point. Base-change permanence makes $q$ flat and of finite presentation, and separatedness persists: its diagonal is a base change of the original closed-immersion diagonal. Every geometric point of $T$, composed with $T\\to S$, is a geometric point of $S$; associativity of sheaf fibre products identifies its fibre with the original geometric fibre. Thus all geometric fibres of $q$ are nonempty, connected and proper.",
+   "uses": [
+    "lem-sfb-space-proper-strict-local-test",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 and strict-local test; flat and finite-presentation base change: Tags 03MO, 03XR; strict local ring: etale-cohomology.tex Tag 04HX."
+   }
+  },
+  {
+   "text": "Let $k=A/\\mathfrak m_A$, and choose an algebraic closure $\\Omega/k$. Its spectrum is an fpqc cover of $\\operatorname{Spec}k$ by the field-extension-cover lemma. The base change of $X_k\\to\\operatorname{Spec}k$ to this cover is a geometric fibre of $q$, hence proper by Step 1. Fpqc descent of properness therefore gives that the entire closed fibre $X_k$ is proper over $k$. It is nonempty, since its geometric base change is nonempty.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-sfb-space-proper-fpqc-descent",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0422, properness descent along a field extension; field spectra: topologies.tex fpqc covering."
+   }
+  },
+  {
+   "text": "The pair $(A,\\mathfrak m_A)$ is henselian because $A$ is strictly henselian. The map $q$ is separated and of finite type, since finite presentation implies finite type. Apply henselian proper-clopen lifting with $I=\\mathfrak m_A$ and $Z=X_k$, the whole closed fibre (which is open and closed in itself). It gives an open and closed $W\\subseteq X$, proper over $T$, whose closed fibre is all of $X_k$. All hypotheses are now available; properness of $X$ has not been assumed.",
+   "uses": [
+    "lem-sfb-space-henselian-proper-clopen-lift",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, applied to the entire proper closed fibre."
+   }
+  },
+  {
+   "text": "The flat locally finitely presented map $q$ is open. Since $W$ is open in $X$, its image $q(W)$ is open in $T$ and contains the closed point by nonemptiness of $X_k$. Every open subset of the spectrum of a local ring containing the closed point is the entire spectrum: it contains a principal open $D(a)$ around that point, where $a\\notin\\mathfrak m_A$ is a unit. Consequently $W$ meets every fibre of $q$. Fix any geometric point $\\bar t$ of $T$. A point of $W$ over its image and the representative of $\\bar t$ have a common field extension; the fibre-product universal property gives a point of $W_{\\bar t}$. This is the field-point meaning of surjectivity, so $W_{\\bar t}$ is nonempty. It is clopen in connected $X_{\\bar t}$, hence equals $X_{\\bar t}$.",
+   "uses": [
+    "lem-sfb-flat-lfp-space-universally-open",
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 042S; elementary local-spectrum and connected-clopen argument, using field-valued point classes."
+   }
+  },
+  {
+   "text": "If $X\\setminus W$ had a point, choose a field-valued representative of it and extend that field to an algebraic closure. Its composite with $q$ is a geometric point $\\bar t$ of $T$, and the representative defines a point of $X_{\\bar t}\\setminus W_{\\bar t}$, contrary to Step 4. Thus the open subspace $W$ has all points of $X$ and equals $X$, including its restricted structure sheaf. Since $W\\to T$ is proper, $q$ is proper. This holds for every $S_{(\\bar s)}$, so the strict-local test gives properness of $h$. If $S$ is empty the same test has no geometric points and gives the assertion directly.",
+   "uses": [
+    "lem-sfb-space-proper-strict-local-test",
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI followed by the elementary complement argument; global assembly by the strict-local properness test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-strict-local-test",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-sfb-space-proper-fpqc-descent",
+  "lem-sfb-space-henselian-proper-clopen-lift",
+  "def-weil-pbc-henselian-terminology",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CWI combined with Tag 042S and strict-local descent. Algebraic-space expansion of the EGA IV-3 15.7.9--15.7.10 criterion; argument assembled by NQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat finitely presented morphism of algebraic spaces with geometrically connected proper fibres is proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes and $ g: Y \\\\to Z $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat separated morphism of finite presentation with proper geometrically connected fibres is proper",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*connected.*(fibre|fiber)|(fibre|fiber).*proper.*connected",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat finitely presented morphism with nonempty geometrically connected proper fibres is proper",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsProper\nAlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\nAlgebraicGeometry.instIsProperOfIsFinite\nAlgebraicGeometry.isProper_eq\nAlgebraicGeometry.isProper_iff\nAlgebraicGeometry.IsProper.instOfIsFinite\nAlgebraicGeometry.Scheme.Hom.isProperMap\nAlgebraicGeometry.IsProper.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally open separated morphism of finite presentation with proper geometrically connected fibres is proper",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.IsProper\nAlgebraicGeometry.IsProper.mk\nAlgebraicGeometry.IsProper.instOfIsFinite\nAlgebraicGeometry.Scheme.Hom.isProperMap\nAlgebraicGeometry.isProper_iff\nAlgebraicGeometry.isProper_eq\nAlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\nAlgebraicGeometry.UniversallyOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*connected.*(fibre|fiber)|(fibre|fiber).*proper.*connected",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-relative-picard-kummer",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Properness of flat separated families with connected proper fibres.",
+   "via": [
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-connected-proper-fibres-proper",
+  "worker": "stage1",
+  "group": "NQ",
+  "summary": "Expanded fibrewise properness through the algebraic-space henselian proper-clopen lifting lemma. Properness of the closed fibre is descended from a geometric fibre using fpqc descent; flatness makes the lifted part meet every fibre, and geometric connectedness removes the complement. Three smaller statement-only inputs, no clause relabelling, no Lean attachment or Mathlib leaf. Preserved hypotheses and conclusion, adding only explicit existing definition references.",
+  "blueprint": "The inherited from.node is null (blueprint_refs.py ancestor reports None). Retained the inherited route and via. Serves the relative Picard properness input within the alteration/moduli prerequisites of direct-image stability, paragraph (3). Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the enclosing proper-direct-image/compactification route; this is a supporting geometry lemma, not a change of that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Its clause (1) supplies the strictly henselian local ring and closed point; this is a general strict-localization construction, not a different proof route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre products and field-point calculus for algebraic spaces, not trace-formula content."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Needed to descend properness of the ordinary closed fibre from an algebraic closure; the unit has no field-extension cover statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-pc-field-extension-fpqc-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-2077aa5bb",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-2077aa5bb (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full against Stacks 0CWI (spaces-more-morphisms lines 8483-8496), 0422 with 03YH (spaces-descent lines 1666 and 992), 08K1 with 084W (spaces-limits) and 083R. The five steps are correct. Step 1: the strict-local test applies because h is finitely presented; clause (1) of the strict-henselization functoriality node gives a strictly henselian local ring; flatness and finite presentation pass to the base change; the separated diagonal is a base change; geometric fibres are identified by associativity of fibre products. Step 2: Spec Omega -> Spec k is an fpqc cover, the scheme-target/space-source fpqc node gives that the closed fibre X_k is proper, and X_k is nonempty. Step 3: 0CWI with I=m_A and Z=X_k; every hypothesis holds. Step 4: q is an open map, an open subset of Spec A containing the closed point is everything, a common field extension gives a point of W over each geometric point, and the clopen W_tbar fills the connected fibre. Step 5: there are no points outside W, so W=X and the strict-local test gives h proper. Properness of X is never assumed. Local Noetherianity of S is never used; that is a harmless surplus hypothesis, and the parent's use (Picard step 4) is matched. New nodes: the clopen-lift node matches 0CWI exactly (edge cases Z empty, I=0) and is not the scheme node lem-per (0CT9). The fpqc node is not a duplicate: the existing nodes are scheme-only and the fppf locality node does not cover Omega/k. The strict-local test is a true agent corollary (08K1 = lem-sfb-space-eventually-proper on an affine etale neighbourhood, then 083R or fppf descent over a surjective etale family; the converse is base change), is more than a few lines, and restates no clause of the item. DAG searches (0CWI, 0CT9, 0422, 08K1, 083R, 15.7.10, fpqc+proper, connected+clopen) found no duplicate. Batch-5 flags: def-trf-algebraic-space, the jointly-surjective-family definition, trf fibre products, sfb morphism-property definitions, fppf locality and universal openness are all general definitions or generic tools. None is part of the trace formula or Poincare duality, so they are not a RETURN reason. Tool uses accepted: strict-henselization functoriality (sk-thm-p1), trf fibre products (sk-i-curve-zero), field-extension fpqc cover (sk-thm-picard-rr). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedProperFibresProper",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_of_flat_of_connected_proper_geometricFibres",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.geometricPointSpaceMap",
+   "AlgebraicGeometry.AlgebraicSpace.proper_of_flat_of_connected_proper_geometricFibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedProperFibresProper.lean",
+  "statement": "theorem proper_of_flat_of_connected_proper_geometricFibres {S : Scheme.{u}} [IsLocallyNoetherian S] (Y : AlgebraicSpace S) (h : Y ⟶ schemeSpace (Over.mk (𝟙 S))) (hsep : MapIsSeparated h) (hflat : MapIsFlat h) (hqc : MapIsQuasiCompact h.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal h.hom.hom)) (hlfp : MapIsLocallyOfFinitePresentation h) (hfibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (barS : Spec (.of Ω) ⟶ S), ConnectedSpace (Point (enlargedFibreProduct (geometricPointSpaceMap barS) h).obj.obj) ∧ MapIsProper (enlargedFibreProductFst (geometricPointSpaceMap barS) h)) : MapIsProper h",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper is the canonical Yoneda map of the specified field-valued point. The fibre is the existing enlargedFibreProduct, owned together with enlargedFibreProductFst by def-sfb-space-sheaf-fibre-product; ConnectedSpace on its existing Point topology includes nonemptiness. Finite presentation is quasi-compactness, quasi-compact diagonal and MapIsLocallyOfFinitePresentation. The theorem node for the enlarged ringed site is not used as an owner of these plain definitions. No source statement or Lean source changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1f3c6a5b",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 4c5d7549a45c (H2 RETURN). Item Lean byte-identical (sha256 16b057fe…); item diff only stmt_deps lem-trf-space-enlarged-etale-ringed-site-model -> new def-sfb-space-sheaf-fibre-product plus lean.note. New node: sheaf pullback of algebraic spaces + first projection, existing:true on unchanged Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite, declarations enlargedFibreProduct/enlargedFibreProductFst, statement verbatim (side-live l.230-231), plain defs (Limits.pullback / pullback.fst), source tags 04T9/02X2/03G2 verified, stmt_deps def-pc-scheme/def-trf-algebraic-space/def-pc-fppf-site exist; no duplicate def owner in side-live (def-pc-fibre-product is the scheme notion); co-ownership with theorem record mirrors landed def-trf-scheme-algebraic-space/schemeSpace. Clause check unchanged and correct (loc. Noetherian base; sep/flat/qc/qs/lfp; geometric points Ω : Type u alg. closed; ConnectedSpace incl. nonempty; MapIsProper fibre projection; conclusion MapIsProper h); edge cases empty S/empty fibre ok; sorry only; docstrings OK; item not stated by another group. No compile (no file changed). Advisory: hqs redundant with hsep; second reading is a self-check."
+ }
+}

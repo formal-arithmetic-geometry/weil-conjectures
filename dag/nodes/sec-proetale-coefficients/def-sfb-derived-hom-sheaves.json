@@ -54,7 +54,126 @@
   "existing": true,
   "note": "Exact upstream definition, confirmed against the current scompile.py --source output. In the same scheme/coefficient context as the recorded def-sfb-derived-tensor-sheaves declaration, this is MonoidalClosed.internalHom on the unbounded derived category of A-valued sheaves on Scheme.ProEt.topology X. The accompanying derivedTensorHomAdjunction₂ identifies it as the internal Hom for that very derivedTensor. No new module or duplicate definition is introduced."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.derivedHom",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Hom",
+     "lines": [
+      67,
+      75
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction₂",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Hom",
+     "lines": [
+      80,
+      83
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": true
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+     "lines": [
+      164,
+      170
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "DerivedCategory.hasDerivedMonoidalCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory",
+     "lines": [
+      70,
+      76
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-derived-monoidal",
+      "sk-def-sfb-derived-tensor-hom"
+     ],
+     "below": true
+    },
+    {
+     "name": "DerivedCategory.monoidalClosedOfMonoidalClosedBraidedCategorg",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory",
+     "lines": [
+      46,
+      47
+     ],
+     "kind": "instance",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.derivedHom",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom",
+     "lines": [
+      67,
+      79
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction₂",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom",
+     "lines": [
+      84,
+      87
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-tensor-hom",
  "reviewed_lean": {
@@ -64,5 +183,15 @@
   "group": "Q89",
   "result": "pass",
   "note": "Node diff changes only lean (existing: AlgebraicGeometry.ProEtale.derivedHom, side Hom.lean:85-89, with derivedTensorHomAdjunction₂); lean.statement verbatim equals the signature. Hypotheses equal the recorded derivedTensor context (Grothendieck abelian, MonoidalPreadditive, Symmetric, MonoidalClosed, HasFunctorialFlatResolution, X : Scheme), with nothing stronger and u' free. D is the unbounded DerivedCategory of Sheaf (Scheme.ProEt.topology X) A, curried as Dᵒᵖ ⥤ D ⥤ D. nt_compile --json probe compiled side Tensor/Hom and the probe cleanly: derivedHom = MonoidalClosed.internalHom by rfl, derivedTensor = curriedTensor by rfl, derivedTensor ⊣₂ derivedHom typechecks, axioms are propext/choice/Quot.sound only. The DerivedCategory MonoidalClosed instance is a real construction. No duplicate pro-étale derived Hom. Report has Worker report and Second reading by Q89. Only a cosmetic line-number reference to the slopmaster2 copy."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the situation of [def-weil-derived-tensor], the *derived internal hom*\n$$\n\\RHom(-,-)\\colon D(X_{\\mathrm{proét}},\\mathcal A)^{\\mathrm{op}}\\times D(X_{\\mathrm{proét}},\\mathcal A)\\to D(X_{\\mathrm{proét}},\\mathcal A)\n$$\nis the internal hom of the closed monoidal structure on\n$(D(X_{\\mathrm{proét}},\\mathcal A),\\otimes^{\\mathrm L})$ [lem-sfb-derived-monoidal-closed].",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

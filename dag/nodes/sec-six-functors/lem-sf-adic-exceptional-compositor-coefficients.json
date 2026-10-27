@@ -1,0 +1,380 @@
+{
+ "id": "lem-sf-adic-exceptional-compositor-coefficients",
+ "kind": "statement",
+ "title": "Coherent adic realization and coefficient compatibility of exceptional composition",
+ "statement": "Fix the finite-field and coefficient datum of [sk-def-sf-setting]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$. Let $X,Y,Z$ be separated finite-type $k$-schemes and let $f:X\\to Y$, $g:Y\\to Z$ be separated finite-type $k$-morphisms; put $x=g\\circ f$. Use the constructible finite-Tor categories $\\mathcal C_{T,\\Lambda}=\\Dctf(T,\\Lambda)$ and the specified operations of [sk-def-sf-operations], with derived-complete integral, raw rationalized and common-finite-stage coefficients. Write $F_{h,\\Lambda}=Rh_{!,\\Lambda}$, $G_{h,\\Lambda}=Rh^!_\\Lambda$ and $\\epsilon_{h,\\Lambda}$ for the counits of their constructible adjunctions $F_{h,\\Lambda}\\dashv G_{h,\\Lambda}$ at every stage [lem-sf-constructible-exceptional-adjunction-coefficients], for $h=f,g,x$. For a finite extension $E\\subset E'$ the same notation at the target coefficient stages uses $E'$ in place of $E$, as in that node.\n\nWrite $\\alpha_\\Lambda:F_{g,\\Lambda}F_{f,\\Lambda}\\xrightarrow{\\sim}F_{x,\\Lambda}$ for the canonical compactification compositor: at finite level the composition isomorphism of [thm-sf-comp-composition], restricted to the finite-Tor constructible categories, and at the integral, rational and common stages its completed integral form and its rationalized/common-stage forms. Let $c_\\Lambda:G_{f,\\Lambda}G_{g,\\Lambda}\\to G_{x,\\Lambda}$ denote the conjugate of $\\alpha_\\Lambda^{-1}$ under the composite adjunction and $F_{x,\\Lambda}\\dashv G_{x,\\Lambda}$, in the sense of [def-weil-pbc-adjunction-conjugate].\n\nA strict coefficient system on $T$ means module sheaves $M_n$ on the small pro-etale site with semilinear transition maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and their ordinary derived category. It is normalized if $M_m\\otimes^L_{A_m}A_n\\to M_n$ is invertible for every $m\\ge n$. Restrict to normalized systems of constructible finite-Tor levels with compatible etale-origin witnesses and common finite cohomological and Tor intervals. For $h:U\\to V$ among $f,g,x$ write $\\mathfrak F_h$ for the system compact-support functor on these normalized systems and $\\mathfrak G_h$ for its right adjoint, with the evaluation identifications $e_n\\mathfrak F_h\\cong F_{h,A_n}e_n$ and $e_n\\mathfrak G_h\\cong G_{h,A_n}e_n$ preserving the counits [lem-coef-cartesian-section-adjoint-mates], and use the total derived inverse-limit realization of the system compact-support expressions and their composition maps [lem-sf-integral-compactification-system-realization].\n\nConjugating the inverse of the canonical system compact-support compositor $\\mathfrak F_g\\mathfrak F_f\\xrightarrow{\\sim}\\mathfrak F_x$ gives an actual natural isomorphism of normalized derived systems $\\mathfrak c:\\mathfrak G_f\\mathfrak G_g\\xrightarrow{\\sim}\\mathfrak G_x$; it evaluates to $c_{A_n}$ with the specified counits. Its total-limit realization is exactly $c_R$, including the completed proper/open interchange and nested compact-support composition maps, rather than just objectwise identifications.\n\nFor integral reduction $R\\to A_n$, completed scalar extension $R\\to R'$, rationalization $R\\to E$, rational scalar extension $E\\to E'$, and common-finite-stage passage to $\\overline{\\mathbf Q}_\\ell$, let $C_T:\\mathcal C_{T,\\Lambda}\\to\\mathcal C_{T,\\Lambda'}$ and $b_h:C_UG_{h,\\Lambda}\\xrightarrow{\\sim}G_{h,\\Lambda'}C_V$ be the coefficient functors and counit-normalized comparisons of [lem-sf-constructible-exceptional-adjunction-coefficients]. Then\n$$b_{x,L}\\circ C_X(c_{\\Lambda,L})=c_{\\Lambda',C_ZL}\\circ G_{f,\\Lambda'}(b_{g,L})\\circ b_{f,G_{g,\\Lambda}L}\\qquad(L\\in\\mathcal C_{Z,\\Lambda}).$$\nFor integral changes this is the realization of an equality of actual derived-system maps before total inverse limit. Scalar extension uses the finite-free systems $R'/\\varpi^nR'=A_{E',en}$ and their cofinal common-stage identifications. The rational and algebraically closed assertions concern the rationalized and common-stage maps themselves on objects and morphisms. At field stages finite reduction means reduction of chosen integral representatives before rationalization. No faithfulness of finite evaluation on derived morphisms, or lift of an arbitrary family of finite-level derived arrows, is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Final compatibility sentence: coherent integral realization, ramified systems and field transport; returned proof step 7; agent-expanded obligation, not a verbatim theorem of Stacks"
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sf-operations",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "thm-sf-comp-composition",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-sf-integral-compactification-system-realization",
+  "def-sf-adic-exceptional-compositor-realization-data",
+  "def-sf-exceptional-compositor-coefficient-data",
+  "def-sf-ramified-system-scalar-realization-data",
+  "def-sf-ramified-scalar-cochain-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Work in the full subcategories of normalized systems specified in the statement. The actual reduction/total-limit adjunction restricts to an equivalence, with unit $u$ and counit $e$, by [lem-pur-normalized-reconstruction-adjunction-calculus]. The system adjunctions and counit-preserving finite evaluations are supplied by [lem-coef-cartesian-section-adjoint-mates]. All intermediate compact-support expressions are on the domain of [lem-sf-integral-compactification-system-realization]. Exceptional images also have common bounds: reconstruct the input by the equivalence and apply [prop-coef-integral-exceptional-adjoint], whose reduction identification gives the system image and whose interval $[a-2d_U,b+2d_V]$ is independent of $n$ for $h:U\\to V$. Choose nonnegative dimension bounds (zero for an empty scheme). Thus the adjunctions and their composites restrict to precisely the domains in question.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-sf-integral-compactification-system-realization",
+    "prop-coef-integral-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Domain and uniform bounds; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "Form the canonical system compact-support transformation $\\mathfrak a:\\mathfrak F_g\\mathfrak F_f\\to\\mathfrak F_x$ using the proper/open interchange and direct-image/open compositors of [lem-sf-integral-compactification-system-realization]. That statement includes the intrinsic semilinear pasting and refinement identities, so these are actual transformations independent of the compatible compactification refinement. Its evaluated map is the specified $\\alpha_{A_n}$ of [thm-sf-comp-composition]. Each evaluated map is invertible; [lem-coef-derived-system-evaluation-calculus] therefore makes $\\mathfrak a$ invertible. This uses conservativity for isomorphisms only, not faithfulness for equality of arrows.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "thm-sf-comp-composition",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Step 1: system compact-support compositor; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "Put $\\mathfrak B=\\mathfrak G_f\\mathfrak G_g$ and let $\\mathfrak\\beta=\\mathfrak\\epsilon_g\\circ\\mathfrak F_g(\\mathfrak\\epsilon_f\\mathfrak G_g)$ be the composite counit. By [lem-weil-pbc-mate-pasting](2), $\\mathfrak F_g\\mathfrak F_f\\dashv\\mathfrak B$ with exactly this counit. Conjugate $\\mathfrak a^{-1}$ using [def-weil-pbc-adjunction-conjugate]. It gives the invertible system transformation $\\mathfrak c:\\mathfrak B\\to\\mathfrak G_x$, characterized by\n$$\\mathfrak\\epsilon_x\\circ\\mathfrak F_x(\\mathfrak c)=\\mathfrak\\beta\\circ\\mathfrak a^{-1}_{\\mathfrak B}.$$\nThe conjugation bijection also supplies its inverse, not merely an objectwise inverse. Evaluation preserves these adjunctions, counits and mates by [lem-coef-cartesian-section-adjoint-mates], so $e_n\\mathfrak c=c_{A_n}e_n$ under the specified identifications.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-coef-cartesian-section-adjoint-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Step 1: conjugation on actual systems; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "Transport the preceding counit identity through reduction/total-limit equivalence. By [lem-pur-normalized-reconstruction-adjunction-calculus], the transpose of a realized system map is the realization of its system transpose, and the comparison for a composite inserts precisely $\\mathcal L\\mathfrak F_g(e_{\\mathfrak F_f\\mathcal R(-)})$. The left transformation thereby realized is the prescribed integral $\\alpha_R$, not a freely chosen comparison: [lem-sf-integral-compactification-system-realization] intertwines the proper/open interchange and nested composition, and [lem-sf-integral-compactification-comparison-bridge] identifies this semilinear counit formula with the specified completed compactification compositor. The right functors are the prescribed ones by [prop-coef-integral-exceptional-adjoint]. Their counits are the transported ones: the identity-extension case $E=L$ of [lem-coef-ramified-scalar-counit-limit] says that the total limit of the system counit $\\mathfrak\\epsilon_h$, with the intermediate reconstruction-counit comparison, is exactly the integral counit $\\epsilon_{h,R}$ of [prop-coef-integral-exceptional-adjoint], compatibly with the descended adjunction of [lem-pur-normalized-reconstruction-adjunction-calculus]. Equality of reductions alone is not used. Hence the realized $\\mathfrak c$ has transpose $\\beta_R\\alpha_{R,G_{f,R}G_{g,R}}^{-1}$, and equals $c_R$ by the adjunction bijection. This identifies natural maps, including all nesting comparisons.",
+   "uses": [
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-ramified-scalar-counit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Integral realization of Step 1; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "For any coefficient change write $q_h:C_VF_{h,\\Lambda}\\cong F_{h,\\Lambda'}C_U$, and put $q_{g,f}=(F_{g,\\Lambda'}q_f)(q_gF_{f,\\Lambda})$. Suppose its left composition square is\n$$q_x C_Z(\\alpha_\\Lambda)=\\alpha_{\\Lambda'}C_X\\,q_{g,f}.$$\nSet $U=G_{f,\\Lambda}G_{g,\\Lambda}L$, $\\beta_\\Lambda=\\epsilon_{g,\\Lambda}F_{g,\\Lambda}(\\epsilon_{f,\\Lambda})$. The transpose of $b_x C_X(c_\\Lambda)$ is\n$$C_Z(\\beta_{\\Lambda,L})C_Z(\\alpha_{\\Lambda,U}^{-1})q_{x,U}^{-1}\n=C_Z(\\beta_{\\Lambda,L})q_{g,f,U}^{-1}\\alpha_{\\Lambda',C_XU}^{-1}.$$\nHere use the counit equations of [lem-sf-constructible-exceptional-adjunction-coefficients] and naturality of $q_x$. For the other side first apply the conjugate counit identity for $c_{\\Lambda'}$, then naturality of $\\alpha_{\\Lambda'}^{-1}$. The remaining composite counit with $G_{f,\\Lambda'}(b_g)b_f$ is $C_Z(\\beta_{\\Lambda,L})q_{g,f,U}^{-1}$: this is exactly pasting the two counit-normalized coefficient mates, [lem-weil-pbc-mate-pasting](2). Thus both sides have the displayed same transpose. The bijection [lem-weil-pbc-adjunct-counit-identity] proves the required equation. This calculation applies in the derived system categories as well.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Coefficient square: explicit common transpose; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "For integral reduction, apply the counit-preserving evaluation of the actual system adjunction to Step 3. Step 4 identifies its integral source with $c_R$; its evaluated target is $c_{A_n}$. The reduction comparisons $b_h$ are the specified ones since their counit normalizations agree [lem-sf-constructible-exceptional-adjunction-coefficients]. Coherence before limit follows by naturality of the actual reconstruction counit $e:\\mathcal R\\mathcal L\\to1$: $e_N\\mathcal R\\mathcal L(a)=a e_M$ for each system arrow $a:M\\to N$. Apply this to $\\mathfrak c$ and its source/target system functors. The resulting whole-system identity evaluates to all the reduction equations, and uses no claim that evaluated equalities detect equality of maps.",
+   "uses": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Integral reduction, before total limit; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "For $R\\to R'$ use $B_n=R'/\\varpi^nR'$. The left square needed in Step 5 is an equality of actual semilinear-system maps by [lem-coef-finite-free-compact-composition], using one $R$-basis of $R'$ at every level. The coefficient right comparisons are actual coherent counit transposes and realize to the integral comparisons by [lem-coef-finite-scalar-mate-realization]. Apply the Step 5 transpose calculation in these system categories, then apply total limit. Step 4 identifies the composition mates, while [lem-weil-finite-free-completed-scalar-comparison] identifies finite-free scalar tensor with completed scalar extension naturally on arrows. Consequently the resulting equality is the integral scalar equation in the statement. If $e=e(E'/E)$, $B_n=A_{E',en}$ as in the stated coefficient-adjunction theorem; its cofinal common-stage identifications are exactly those used by the scalar-mate realization. No unramified assumption and no flatness of quotient reduction are used.",
+   "uses": [
+    "lem-coef-finite-free-compact-composition",
+    "lem-coef-finite-scalar-mate-realization",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Ramified scalar extension of the system equation; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "Rationalize these equalities. By [def-weil-rationalization-karoubi], objects are integral representatives and morphisms are $\\operatorname{Hom}_R\\otimes_RE$. The operation on a representative $h\\otimes a$ is the integral operation on $h$, multiplied by $a$; for exceptional operations this is part of [def-weil-exceptional-inverse-image]. Compact-support operations on all such arrows have the normalization stated in [lem-sf-constructible-exceptional-coefficient-coherence]. Thus applying raw localization to the integral counit identity gives the actual rational counit identity. Its unique transpose is $c_E$, and localization of the integral coefficient equation gives the equations for $R\\to E$ and $E\\to E'$. Naturality on arbitrary localized arrows follows by linearity from naturality on $h\\otimes1$. Equivalently this is the natural-transformation transport of [prop-weil-pbc-rational-transport]; no faithfulness of localization is needed.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-constructible-exceptional-coefficient-coherence",
+    "prop-weil-pbc-rational-transport",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Rationalization on objects and arrows; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  },
+  {
+   "text": "Finally use the pair category of [def-weil-algebraically-closed-coefficients]. Every arrow is represented over a common finite coefficient field, and equality is tested after a further common finite field. Apply the finite-field composition mate to each object $(E,L)$. Its compatibility with field extension, just proved, identifies these components under every transition. For an arrow represented at $M\\supset E,E'$, naturality is the naturality equation over $M$ transported by those comparisons. Independence of the representative follows by extending to one further common field. The compact-support functor really acts on these representatives by the formula in [lem-sf-constructible-exceptional-coefficient-coherence], and the exceptional functor does so by [def-weil-exceptional-inverse-image]. Therefore the descended counit identity characterizes the actual $c_{\\overline{\\mathbf Q}_\\ell}$, and the same represented equation is exactly its common-stage coefficient equation. Finite reduction at either field stage refers throughout to an integral representative before this localization.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-sf-constructible-exceptional-coefficient-coherence",
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+    "place": "Common-stage descent on morphism representatives; agent-expanded categorical argument for the final compatibility sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-free-compact-composition",
+  "lem-coef-finite-scalar-mate-realization",
+  "lem-coef-ramified-scalar-counit-limit",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-constructible-exceptional-coefficient-coherence",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-weil-pbc-mate-pasting",
+  "prop-coef-integral-exceptional-adjoint",
+  "prop-weil-pbc-rational-transport",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Step 1 and final compatibility sentence; explicit system conjugation and coefficient counit calculation, Q10"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent derived systems realize exceptional inverse image composition comparisons with integral reduction and rational scalar extension",
+   "results": "localCohomology.diagramComp; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; CategoryTheory.Functor.mapDerivedCategoryFactors; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp; localCohomology.isoOfFinal; CategoryTheory.Functor.mapDerivedCategoryFactorsh; AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete l adic constructible sheaves exceptional pullback compositor scalar extension compatibility",
+   "results": "PresheafOfModules.pullback; SheafOfModules.pullbackComp; AdicCompletion.instIsScalarTower; SheafOfModules.pullback; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.sheafificationCompPullback; IsAdicComplete.StrictMono.of_lift; PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_unit_app_assoc; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.comp_unit; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.conjugateEquiv_leftUnitor_hom; CategoryTheory.conjugateEquiv_rightUnitor_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Cc]ompos|[Ee]xceptional.*[Cc]omplet|[Ss]hriek.*[Rr]ational",
+   "results": "Mathlib/RingTheory/AdicCompletion/Algebra.lean:130: This is `AdicCompletion.eval` postcomposed with the algebra isomorphism; Mathlib/Topology/Category/Compactum.lean:486: TODO: `forget CompHaus` is monadic, as it is isomorphic to the composition; Mathlib/FieldTheory/IsPerfectClosure.lean:48: - `IsPRadical.trans`: composition of `p`-radical ring homomorphisms is also `p`-radical.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint composition mate descends from strict coefficient towers through total derived inverse limit and common finite fields",
+   "results": "Condensed.profiniteSolidCounit; Condensed.profiniteSolidification; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit; CondensedMod.LocallyConstant.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent composition of exceptional inverse images on derived coefficient systems compatible with total derived inverse limit and scalar extension",
+   "results": "localCohomology.diagramComp; localCohomology.diagram; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction, exact-functor or adic algebra infrastructure does not state geometric exceptional system composition and its coefficient realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, CategoryTheory.Adjunction.comp",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction, exact-functor or adic algebra infrastructure does not state geometric exceptional system composition and its coefficient realization"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Cc]ompos|[Ee]xceptional.*[Cc]omplet|[Ss]hriek.*[Rr]ational",
+   "results": "Mathlib/FieldTheory/IsPerfectClosure.lean; Mathlib/Topology/Category/Compactum.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction, exact-functor or adic algebra infrastructure does not state geometric exceptional system composition and its coefficient realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic constructible exceptional pullback composition coefficient extension compatibility",
+   "results": "SheafOfModules.pullbackComp; AdicCompletion.map_comp_apply; MvPolynomial.comap_comp; IsAdicComplete.StrictMono.of_lift; IsAdicComplete.StrictMono.factorPow_comp_extend; CategoryTheory.ChosenPullbacksAlong.comp; AdicCompletion.AdicCauchySequence.map_comp_apply; AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction, exact-functor or adic algebra infrastructure does not state geometric exceptional system composition and its coefficient realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint conjugate of compact support composition commutes with scalar localization of integral sheaves",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; CompHausLike.LocallyConstant.adjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.sheafificationCompPullback; SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adjunction, exact-functor or adic algebra infrastructure does not state geometric exceptional system composition and its coefficient realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-sf-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Final compatibility sentence: coherent integral realization, ramified systems and field transport; returned proof step 7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-exceptional-compositor-coefficients",
+  "worker": "stage1",
+  "summary": "Constructed the actual system conjugate, compared its realization with the prescribed completed compositor, and computed a common coefficient transpose; ramified, rational and common-stage map compatibility use existing supporting nodes. No new nodes.",
+  "blueprint": "sk-thm-sf-verdier-exchange.proof.md Step 1 (mate of compact-support composition) and final sentence (finite reduction and scalar compatibility).",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cartesian-section-adjoint-mates",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-coef-finite-free-compact-composition",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-coef-finite-scalar-mate-realization",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-coefficient-coherence",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-sf-integral-compactification-comparison-bridge",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "prop-coef-integral-exceptional-adjoint",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic supporting statement for coherent coefficient-system adjunction, compactification realization or coefficient transport; used exactly as quoted in citations.json, without replacing the unit composition-mate route."
+   },
+   {
+    "node": "lem-coef-ramified-scalar-counit-limit",
+    "why": "Step 4 needs the integral counit of prop-coef-integral-exceptional-adjoint to equal the total limit of the system counit with the reconstruction-counit comparison (its E=L case); no node of the Verdier-exchange unit states this, and that proposition only identifies the counits after reduction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-free-compact-composition",
+  "lem-coef-finite-scalar-mate-realization",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-constructible-exceptional-coefficient-coherence",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-coef-integral-exceptional-adjoint",
+  "prop-weil-pbc-rational-transport",
+  "thm-sf-comp-composition",
+  "lem-coef-ramified-scalar-counit-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-bc370b44b",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-bc370b44b (reviewer sub-agent of L); spot-checked: I read the item, all 19 cited statements, the sibling nodes and the unit sk-thm-sf-verdier-exchange (main-20261015 Step 1 and the final compatibility sentence). Zero new nodes. The statement and stmt_deps are unchanged from base. Live is still unsplit and there is no repair note, so this is not superseded and the re-split rule does not apply. No SGA. The route is the unit's mate of the composition law.\n\nOne fault, fixed in Step 4. The step claimed that the integral counits are the transported ones by prop-coef-integral-exceptional-adjoint. That statement only identifies the counits after reduction. An automorphism of G that reduces to 1 at every level (possible through lim^1) would change c_R, and the item itself excludes faithfulness of finite evaluation. The identity-extension case E=L of the existing node lem-coef-ramified-scalar-counit-limit states exactly the missing identification: the total limit of the system counit, with the reconstruction-counit comparison, is the prop's integral counit. I added it to the Step 4 text and uses, to proof_deps and to split_report.tool_uses. It creates no cycle and adds no node to the closure.\n\nThe other steps check out. I redid the Step 5 transpose algebra myself: both sides have transpose C(beta) q_{g,f}^{-1} alpha'^{-1}, and the argument works for any counit-normalized b. The bridge formula matches the reconstruction-calculus comparison L H(e_{F R}). The Step 1 bounds [a-2d_X,b+2d_Y] match the prop. Steps 7-9 use explicit system-level, rational MORPHISM and common-stage MORPHISM normalizations and are ramified-safe. Emptying same_as is defensible: the det- nodes concern ambient Loc f^! or unspecified compatibility.\n\nBatch 5: the delivery adds 5 nodes to the closure (16362 to 16367), none of them trf or pod. No nt-assume leaf, trace-formula or Poincare-duality theorem, sk-thm-trace-transport or batch-4 target is reached. The four flagged terminals are generic and already in the base closure: functorial flat resolutions, regularity of the uniformizer on completed sections, a pure-category adjunction coherence, and derived exact-square composition. All are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicExceptionalCompositorCoefficients",
+  "declaration": "WeilConjectures.AdicExceptionalCompositor.adicExceptionalCompositorCoefficients",
+  "declarations": [
+   "WeilConjectures.AdicExceptionalCompositor.SystemChange",
+   "WeilConjectures.AdicExceptionalCompositor.Coherence",
+   "WeilConjectures.AdicExceptionalCompositor.adicExceptionalCompositorCoefficients"
+  ],
+  "file": "lean/Sheaf/Paper/AdicExceptionalCompositorCoefficients.lean",
+  "statement": "theorem adicExceptionalCompositorCoefficients : RingEquations B f g P Q R S A cf cg cx ∧ FieldEquations B f g P Q R S A cf cg cx ∧ Nonempty (Coherence B f g P Q R S A cf cg cx)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc11fa891",
+  "group": "NG",
+  "result": "fix",
+  "note": "Re-delivery after ee56 RETURN H2+H3; both repaired. H2: item keeps base 7 stmt_deps plus 4 new def nodes and drops the theorem edge. New existing:true owners def-sf-exceptional-compositor-coefficient-data (LeftCompositors/integralAlpha/integralLeft/LeftCoefficientEquation), def-coef-system-compact-support-compositor (FiniteFreeCompactComposition.*) and def-sf-integral-compact-support-realization-map (directIdentification); before this delivery each was recorded only by a theorem node. H3: OperationNormalization pins U.F/U.G (equal to cartesian.F/G), adj unit/counit (HEq), U.left = cartesian.supportIso ≫ canonical supportPresentation (leftAdjointUniq/rightAdjointUniq), finiteLeft/finiteRight via cartesian.supportEvaluation/exceptionalEvaluation with P.ring.left/finiteImageIso/P.ring.finiteRight, and integralLeft = lim U.left ≫ inverse operationSupportPresentation ≫ inverse reconstruction counit ≫ directIdentification. integralRight is unique by integralCounit. The −α counterexample no longer changes the statement. SystemScalar is pinned by actual_eq/eqToIso/limit_canonical; SystemComparison left/right are determined by leftLimit/rightLimit. Clauses, edge cases (ℕ+, e=1, identities, empty schemes), universes, docstrings and the sorry-only proof are OK; lean.statement is verbatim. FIX H4/H12: new existing:true def-pur-finite-compact-support-realization-map duplicates PurCompactSupport.finiteImageIso, already owned by landed def-pur-finite-compact-support-scalar-data (N6, on base). Fix: drop it, and in fixes/def-sf-adic-exceptional-compositor-realization-data.json repoint its stmt_dep and citation to def-pur-finite-compact-support-scalar-data, adding the direct owners def-weil-exceptional-inverse-image and def-sf-finite-exceptional-compositor-maps with citations. fixes/def-sf-ramified-system-scalar-realization-data.json adds def-pur-finite-compact-support-scalar-data (Ramification/finiteChange). Citations equal stmt_deps; no cycle; the item closure does not grow. No Lean change, no compile. Advisory: H11 self-audit second reading.; dropped duplicate new node(s) def-pur-finite-compact-support-realization-map (--drop-nodes; not merged, the item points at the landed declaration)"
+ }
+}

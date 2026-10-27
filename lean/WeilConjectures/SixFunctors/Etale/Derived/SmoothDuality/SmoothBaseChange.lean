@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
+import Sheaf.SixFunctors.ProjectiveLineExceptionalBaseChange
 
 /-!
 # Arbitrary base change for smooth ambient duality
@@ -56,6 +57,56 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+/-- Restrict the projective-line model to its standard affine chart. -/
+private theorem affineLineBaseChangeModel (S : Scheme.{u}) [HasInvertibleExponent Λ S]
+    ⦃S' P' : Scheme.{u}⦄ {g : S' ⟶ S} {p' : P' ⟶ S'}
+    {g' : P' ⟶ 𝔸(ULift.{u} (Fin 1); S)}
+    (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin 1); S) ↘ S) g)
+    [HasCompactification p'] [QuasiCompact p'] :
+    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
+  have : QuasiCompact (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S ≫
+      ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) := by
+    rw [AffineSpace.toRelativeProjectiveSpace_over]
+    infer_instance
+  have : QuasiCompact (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S) :=
+    .of_comp _ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)
+  have : HasCompactification (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S) :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
+  exact isIso_rightDerivedUpperShriekBaseChangeMap_of_comp
+    (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S)
+    (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) (AffineSpace.toRelativeProjectiveSpace_over _ S) sq
+    (fun _ _ _ _ _ sq' _ _ ↦
+      isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq')
+    (fun _ _ _ _ _ sq' _ _ ↦ projectiveLineExceptionalBaseChange Λ S sq')
+
+/-- Iterate the affine-line model over arbitrary bases. The projections in the tower
+are quasi-compact even when the base is not quasi-separated. -/
+private theorem affineSpaceBaseChangeModel (d : ℕ) (S : Scheme.{u})
+    [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
+    {g : S' ⟶ S} {p' : P' ⟶ S'} {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)}
+    (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g)
+    [HasCompactification p'] [QuasiCompact p'] :
+    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
+  induction d generalizing S' P' with
+  | zero => exact isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq
+  | succ d ih =>
+    set φ : 𝔸(ULift.{u} (Fin (d + 1)); S) ≅ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); S)) :=
+      AffineSpace.reindexIso S ((Equiv.sumCongr Equiv.ulift Equiv.ulift).trans
+        (finSumFinEquiv.trans Equiv.ulift.symm)) ≪≫ AffineSpace.sumIso S
+    set q := 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); S)) ↘ 𝔸(ULift.{u} (Fin d); S)
+    set p := 𝔸(ULift.{u} (Fin d); S) ↘ S
+    have : HasCompactification (φ.hom ≫ q) := HasCompactification.comp_of_isOpenImmersion q φ.hom
+    have h : (φ.hom ≫ q) ≫ p = 𝔸(ULift.{u} (Fin (d + 1)); S) ↘ S := by
+      rw [Category.assoc, Iso.trans_hom, Category.assoc, AffineSpace.sumIso_hom_over_over,
+        AffineSpace.reindexIso_hom, AffineSpace.reindex_over]
+    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin d); S) := .of_hom p
+    refine isIso_rightDerivedUpperShriekBaseChangeMap_of_comp (φ.hom ≫ q) p h sq
+      (fun _ _ _ _ _ sq' _ _ ↦ ?_) (fun _ _ _ _ _ sq' _ _ ↦ ih sq')
+    exact isIso_rightDerivedUpperShriekBaseChangeMap_of_comp φ.hom q rfl sq'
+      (fun _ _ _ _ _ sq'' _ _ ↦
+        isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq'')
+      (fun _ _ _ _ _ sq'' _ _ ↦ affineLineBaseChangeModel Λ _ sq'')
+
 /-- Blueprint `sk-lem-geo-affine-local`: Affine space and étale localization, clause 1.
 
 "For the projection `a : 𝔸^d_S ⟶ S`, the right adjoint `a^!` of
@@ -85,8 +136,12 @@ theorem affineSpaceAdjunction_baseChange (d : ℕ) (S : Scheme.{u}) [HasInvertib
     ∀ ⦃S' P' : Scheme.{u}⦄ {g : S' ⟶ S} {p' : P' ⟶ S'}
       {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)} (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g)
       [HasCompactification p'] [QuasiCompact p'],
-      IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
-  sorry
+      IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
+  constructor
+  · intro _ _
+    exact nonempty_rightDerivedLowerShriek_adjunction_affineSpace Λ d S
+  · intro S' P' g p' g' sq _ _
+    exact affineSpaceBaseChangeModel Λ d S sq
 
 /-- **Base change for the affine-line projections**, the elementary case (a) of the proof of
 blueprint `prop-asd-smooth-base-change`: the case `d = 1` of

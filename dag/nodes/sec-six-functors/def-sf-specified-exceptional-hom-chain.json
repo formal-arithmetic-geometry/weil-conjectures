@@ -1,0 +1,99 @@
+{
+ "id": "def-sf-specified-exceptional-hom-chain",
+ "kind": "definition",
+ "title": "Specified-compactification normalized exceptional Hom chain",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a finite commutative ring in the coefficient universe, let $f:X\\to Y$ be a quasi-compact morphism of schemes with $Y$ quasi-compact, and fix a compactification $c$ [def-weil-compactifications-refinements]. Suppose the ordinary etale compact-support functor at $c$ is equipped with its IsLeftAdjoint instance. For $M\\in D^+(X_{\\mathrm{proet}},\\Lambda)$ equipped with a retained etale origin $W=(M_e,\\alpha)$ [def-weil-pbc-etale-origin-witness], and $L\\in D^+(Y_{\\mathrm{proet}},\\Lambda)$, define the canonical equivalence $\\operatorname{Hom}(Rp_{c,*}j_!M,L)\\simeq\\operatorname{Hom}(M,\\nu_X^*f^\\times_{c,\\Lambda}R\\nu_{Y,*}L)$ [def-sfb-finite-derived-lower-shriek-compactification] [def-weil-exceptional-inverse-image] by composing, in order: the inverse of the isomorphism induced by $Rp_{c,*}j_!\\alpha$; the normalized proper/open compact-support comparison at $M_e$; the derived comparison adjunction at $Y$; the specified ordinary etale adjunction at $c$; the fully faithful comparison Hom map at $X$ on the bounded-below target; and the isomorphism induced by $\\alpha$. This defines a particular chain of canonical maps and makes no arbitrary choice of a Hom equivalence.",
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sfb-finite-derived-lower-shriek-compactification",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "finite-level adjunction on bounded-below etale-origin inputs, transported by compact-support comparison and comparison full faithfulness"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Hom equivalence from ordinary etale compact support adjunction transported to pro etale etale-origin complexes",
+   "results": "OK 8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, ComplexShape.Embedding.homEquiv, ComplexShape.Embedding.homEquiv_apply_coe, CategoryTheory.Equivalence.mapHomologicalComplex_functor, HomotopyEquiv.quasiIsoAt_hom, CategoryTheory.Abelian.Ext.homEquiv, CochainComplex.homotopyOpEquiv, CategoryTheory.Comonad.ComonadicityInternal.comparisonRightAdjointHomEquiv",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; generic Hom equivalences only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "OK 12 hits; the generic CategoryTheory.Adjunction.homEquiv and its unit, counit, composition and constructor formulae",
+   "date": "2026-10-24",
+   "verdict": "generic factors only; the existing project definition is AlgebraicGeometry.ProEtale.specifiedExceptionalHomEquiv"
+  },
+  {
+   "tool": "grep",
+   "query": "specifiedExceptionalHomEquiv|compactSupport.*HomEquiv",
+   "results": "Mathlib CategoryTheory: OK 0 hits. rg in WeilConjectures: no hit. rg in Sheaf: SpecifiedExceptionalClassHom.lean defines specifiedExceptionalHomEquiv. DAG and blueprint_refs search found no standalone definition node for this chain; thm-sf-ambient-adjoint-class records it as a theorem interface.",
+   "date": "2026-10-24",
+   "verdict": "reuse the exact published definition with existing:true; no duplicate module"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exceptional-finite-operations",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "finite-level adjunction on bounded-below etale-origin inputs, transported by compact-support comparison and comparison full faithfulness",
+   "via": [
+    "lem-sf-exceptional-finite-operations",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom",
+  "declaration": "AlgebraicGeometry.ProEtale.specifiedExceptionalHomEquiv",
+  "statement": "def specifiedExceptionalHomEquiv\n    (M : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))\n    (W : Scheme.FixedEtaleOriginWitness X Λ M)\n    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :\n    ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).obj M.obj ⟶ K.obj) ≃\n      (M.obj ⟶ (sfFiniteExceptionalAt Λ c).obj K.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership of the published canonical Hom chain requested by the return; no theorem is assumed as a statement prerequisite and no code is duplicated."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcc263f03",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcc263f03",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 65b3; all faults fixed. H3: eF/eG pin F, G to the restrictions of sfIntrinsicCompactSupport c A and of e_Y⁻¹⋙sfFiniteExceptionalAt c⋙e_X. rF/rG are fixed to canonical maps (sfIntrinsicCompactSupportComparison via inverseCompIso/compInverseIso; compInverseIso(Iso.refl) unit⁻¹), both with CommShift; the realization is fully faithful, so the Hom clause determines adj and the −1 witness no longer works. H4: sfIntrinsicCompactSupport is used. H2: owners added (proetale-tor-amplitude, constructible-intervals, etale-origin-witness, lower-shriek, intrinsic-compact-support-realization, intrinsic-direct-adjunction, new existing:true def-sf-specified-exceptional-hom-chain); no theorem stmt_dep. New node statement checked against the def body and blueprint def-weil-exceptional-inverse-image; lean.statement verbatim; only the theorem node also records the declaration. Hypotheses, universes, n:ℕ+, 2d Tor bound, uniform G bounds before ∀E n, adjoint shift and edge cases OK; item statement verbatim; no dep record changes; no live supersession; only the main theorem is sorry. Advisory: the new node lacks stmt_deps for two body factors (fixedCompactSupportComparisonIso, comparison adjunction); H11 self second reading. No file changed, no compile run."
+ }
+}

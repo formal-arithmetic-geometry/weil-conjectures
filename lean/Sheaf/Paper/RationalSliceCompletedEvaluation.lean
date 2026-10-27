@@ -21,23 +21,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.Paper.RationalThickEvaluation
 public import Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose
 
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.CategoryTheory.RingedCechKoszulDualLimit
-import Sheaf.Paper.ExtendedCechCompletionModel
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Algebra.Homology.SitePerfectModelRestriction
 
 /-!
 # Restriction of completed integral operations and rational evaluation
@@ -89,6 +73,7 @@ def restrictionModules {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
   | some _, none, a => PEmpty.elim a
   | some _, some _, a => SheafOfModules.overMap (rings l E X none) a
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Sectionwise restriction is additive and exact, including relocalization.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation).
 Proof: restriction preserves kernels and products sectionwise. Coverings of an object
@@ -99,7 +84,23 @@ theorem restrictionModules_exact {U V : Option X.ProEt} (a : RestrictionArrow X 
     (restrictionModules l E X a).Additive ∧
       PreservesFiniteLimits (restrictionModules l E X a) ∧
       PreservesFiniteColimits (restrictionModules l E X a) := by
-  sorry
+  cases U with
+  | none =>
+    cases V with
+    | none =>
+      change (𝟭 (Mod l E X none)).Additive ∧
+        PreservesFiniteLimits (𝟭 (Mod l E X none)) ∧
+        PreservesFiniteColimits (𝟭 (Mod l E X none))
+      exact ⟨inferInstance, inferInstance, inferInstance⟩
+    | some B =>
+      exact ⟨SheafOfModules.sitePerfectOverFunctor_additive (rings l E X none) B,
+        SheafOfModules.overFunctor_exact_ofUniverses (rings l E X none) B⟩
+  | some B =>
+    cases V with
+    | none => exact PEmpty.elim a
+    | some C =>
+      exact ⟨SheafOfModules.sitePerfectOverMap_additive (rings l E X none) a,
+        SheafOfModules.overMap_exact_ofUniverses (rings l E X none) a⟩
 
 /-- The additive structure supplied by exact sectionwise restriction.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
@@ -129,6 +130,7 @@ Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
 def restrictionDerived {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
     D l E X U ⥤ D l E X V := (restrictionModules l E X a).mapDerivedCategory
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The termwise additive functor remains additive after quasi-isomorphism localization.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation).
 Proof: termwise restriction preserves sums of chain maps. The additive localization
@@ -136,7 +138,8 @@ universal property descends this identity, equivalently use the derived adjuncti
 with exact extension by zero. Thus the induced derived functor preserves addition. -/
 theorem restrictionDerived_additive {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
     (restrictionDerived l E X a).Additive := by
-  sorry
+  change (restrictionModules l E X a).mapDerivedCategory.Additive
+  exact Functor.additive_of_preserves_binary_products _
 
 /-- The additive structure from termwise restriction and additive localization.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
@@ -359,17 +362,31 @@ def restrictionCompletionEquiv
 /-- Derived internal Hom into a complete target is complete on the same site.
 Source: Stacks 099A, Bhatt--Scholze 3.4.11
 (blueprint: lem-sf-rational-slice-completed-evaluation).
-Proof: the Roos condition implies local completeness by the Cech/Koszul comparison.
-On any further slice, curry and interchange the two tensor factors to identify
-Hom(B[1/f],Hom(L,M)) with Hom(L,Hom(B[1/f],M)). The latter vanishes for every
-f in the uniformizer ideal. Thus Hom(L,M) is locally complete. The same
-Cech/Koszul comparison identifies this condition with the stated quotient Roos
-condition. No constructibility or boundedness of L on the slice is required. -/
+Proof: apply the internal-Hom completeness clause of rationalThickEvaluation on
+this very site. Its auxiliary rational-category structures are provided by the
+triangulation theorem for scalar localization. The clause says that psi(M)(L),
+which is the ordinary ambient internal Hom from L to M, is complete whenever M
+is complete. No constructibility or boundedness of L on the slice is required. -/
 theorem restrictionHom_complete
     (_hInv : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (U : Option X.ProEt)
     (L M : D l E X U) (_hM : IsComplete l E X U M) :
     IsComplete l E X U ((hom l E X U).obj (op L, M)) := by
-  sorry
+  obtain ⟨z, hz⟩ := ScalarLocalization.exists_triangulated_scalarLocalization
+    (Padic.coefficientExtensionIntegers l E) (D l E X U)
+    (Padic.coefficientExtensionUniformizer l E)
+  let := z
+  obtain ⟨s, hs⟩ := hz
+  let := s
+  obtain ⟨hshift, a, ha⟩ := hs
+  let := a
+  obtain ⟨c, hc⟩ := ha
+  let := c
+  obtain ⟨hQshift, tr, ht⟩ := hc
+  let := tr
+  obtain ⟨htri, hqtri, htriangles⟩ := ht
+  let := htri
+  let := hqtri
+  exact (rationalThickEvaluation l E X U hshift hQshift htriangles _hInv M _hM).2.2.2.2.1 L
 
 /-- The completed evaluation is the unique extension of the actual ordinary evaluation
 along the normalized completion unit; no arbitrary map or lift is chosen.
@@ -485,6 +502,72 @@ def CompletedRestrictionComparisons.GlobalModel (B : X.ProEt)
     (∀ L M : D l E X none, d.ordinaryTensorIso.hom.app (L, M) = (e.rho L M).hom) ∧
     (∀ L M : D l E X none, d.homIso.hom.app (op L, M) = (e.eta L M).hom)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem scalarDerived_on_complex (U : Option X.ProEt)
+    (c : Padic.coefficientExtensionIntegers l E) (P : Cx l E X U) :
+    (scalarDerived l E X U c).app (DerivedCategory.Q.obj P) =
+      DerivedCategory.Q.map ((scalarChain l E X U c).app P) := by
+  exact congrArg (fun α ↦ α.app P)
+    ((Localization.fullyFaithfulWhiskeringLeft
+      (DerivedCategory.Q : Cx l E X U ⥤ D l E X U)
+      (HomologicalComplex.quasiIso (Mod l E X U) (.up ℤ)) (D l E X U)).map_preimage
+        (X := 𝟭 (D l E X U)) (Y := 𝟭 (D l E X U))
+        (Functor.whiskerRight (scalarChain l E X U c) DerivedCategory.Q))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restriction_scalarChain {U V : Option X.ProEt} (a : RestrictionArrow X U V)
+    (c : Padic.coefficientExtensionIntegers l E) (P : Cx l E X U) :
+    (restrictionComplex l E X a).map ((scalarChain l E X U c).app P) =
+      (scalarChain l E X V c).app ((restrictionComplex l E X a).obj P) := by
+  have h (W : Option X.ProEt) := (scalarChain_existsUnique l E X W c).exists.choose_spec
+  cases U with
+  | none =>
+    cases V with
+    | none => rfl
+    | some B =>
+      ext n W x
+      change (((scalarChain l E X none c).app P).f n).val.app (op W.unop.left) x = _
+      exact (h none P n (op W.unop.left) x).trans
+        (h (some B) ((restrictionComplex l E X a).obj P) n W x).symm
+  | some B =>
+    cases V with
+    | none => exact PEmpty.elim a
+    | some C =>
+      ext n W x
+      change (((scalarChain l E X (some B) c).app P).f n).val.app
+        ((Over.map a).op.obj W) x = _
+      exact (h (some B) P n ((Over.map a).op.obj W) x).trans
+        (h (some C) ((restrictionComplex l E X a).obj P) n W x).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restriction_scalarDerived {U V : Option X.ProEt} (a : RestrictionArrow X U V)
+    (c : Padic.coefficientExtensionIntegers l E) :
+    Functor.whiskerRight (scalarDerived l E X U c) (restrictionDerived l E X a) =
+      Functor.whiskerLeft (restrictionDerived l E X a) (scalarDerived l E X V c) := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso (Mod l E X U) (.up ℤ))
+  intro P
+  apply (cancel_mono ((restrictionLocalization l E X a).hom.app P)).mp
+  change (restrictionDerived l E X a).map
+      ((scalarDerived l E X U c).app (DerivedCategory.Q.obj P)) ≫ _ = _
+  rw [scalarDerived_on_complex]
+  change (restrictionDerived l E X a).map
+      (DerivedCategory.Q.map ((scalarChain l E X U c).app P)) ≫
+      (restrictionLocalization l E X a).hom.app P =
+    (scalarDerived l E X V c).app ((restrictionDerived l E X a).obj
+      (DerivedCategory.Q.obj P)) ≫ (restrictionLocalization l E X a).hom.app P
+  calc
+    _ = (restrictionLocalization l E X a).hom.app P ≫
+        DerivedCategory.Q.map ((restrictionComplex l E X a).map
+          ((scalarChain l E X U c).app P)) :=
+      (restrictionLocalization l E X a).hom.naturality ((scalarChain l E X U c).app P)
+    _ = (restrictionLocalization l E X a).hom.app P ≫
+        (scalarDerived l E X V c).app
+          (DerivedCategory.Q.obj ((restrictionComplex l E X a).obj P)) := by
+      rw [restriction_scalarChain, scalarDerived_on_complex]
+    _ = _ := (scalarDerived l E X V c).naturality
+      ((restrictionLocalization l E X a).hom.app P)
+
 /-- Restriction retains the constant-section coefficient scalar action.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation).
 Proof: multiplication by each integral constant restricts to multiplication by the
@@ -493,7 +576,13 @@ whiskering by quasi-isomorphism localization descends it to derived morphisms,
 including those represented by roofs. This is the asserted linearity. -/
 theorem restrictionDerived_linear {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
     (restrictionDerived l E X a).Linear (Padic.coefficientExtensionIntegers l E) := by
-  sorry
+  constructor
+  intro A B f c
+  have hU := (linear_existsUnique l E X U).exists.choose_spec
+  have hV := (linear_existsUnique l E X V).exists.choose_spec
+  rw [hU, Functor.map_comp, hV]
+  have h := congrArg (fun α ↦ α.app A) (restriction_scalarDerived l E X a c)
+  exact congrArg (fun z ↦ z ≫ (restrictionDerived l E X a).map f) h
 
 /-- Use the canonical scalar-action preservation just stated.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
@@ -530,7 +619,27 @@ theorem restrictionRationalHom_laws {U V : Option X.ProEt} (a : RestrictionArrow
           ((restrictionDerived l E X a).obj N.obj)
           (restrictionRationalHom l E X a M.obj N.obj g)
           (restrictionRationalHom l E X a L.obj M.obj f)) := by
-  sorry
+  constructor
+  · intro L
+    change ((restrictionDerived l E X a).mapLinearMap
+      (Padic.coefficientExtensionIntegers l E)).baseChange
+        (Localization.Away (Padic.coefficientExtensionUniformizer l E))
+          ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ[_] 𝟙 L) =
+      (1 : Localization.Away (Padic.coefficientExtensionUniformizer l E)) ⊗ₜ[_]
+        𝟙 ((restrictionDerived l E X a).obj L)
+    simp
+  · intro L M N f g
+    change restrictionRationalHom l E X a L.obj N.obj
+        (ScalarLocalization.composition _ _ _ _ _ _ g f) = _
+    induction g using TensorProduct.induction_on with
+    | zero => simp
+    | tmul c g =>
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul b f =>
+        simp [restrictionRationalHom, ScalarLocalization.composition_tmul]
+      | add f f' hf hf' => simp [map_add, hf, hf']
+    | add g g' hg hg' => simp [map_add, hg, hg']
 
 /-- The induced functor between the two actual scalar localizations.
 Source: blueprint, scalar localization

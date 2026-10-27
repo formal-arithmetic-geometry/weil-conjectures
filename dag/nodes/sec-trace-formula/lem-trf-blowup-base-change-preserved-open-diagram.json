@@ -1,0 +1,257 @@
+{
+ "id": "lem-trf-blowup-base-change-preserved-open-diagram",
+ "kind": "statement",
+ "title": "The flat blowup comparison identifies preserved opens and ambient closed-immersion diagrams",
+ "statement": "Let $X,Z,W$ be schemes [def-pc-scheme], $i:Z\\hookrightarrow X$ a closed immersion [def-weil-closed-immersion], $v:W\\to X$ flat [def-weil-flat-morphism], and $\\mathcal I\\subseteq\\mathcal O_X$ a finite-type quasi-coherent ideal [pqf-def-coherent]. Put $U=X\\setminus V(\\mathcal I)$, $\\mathcal I_W=\\mathcal I\\mathcal O_W$ [def-nagata-extended-ideal], $U_W=W\\setminus V(\\mathcal I_W)$, $P=\\operatorname{Bl}_{\\mathcal I}(X)$, $Q=\\operatorname{Bl}_{\\mathcal I_W}(W)$ [def-nagata-global-blowup], $P_W=P\\times_XW$, $Z_W=Z\\times_XW$, $T=Z\\times_XP$, $T_W=T\\times_XW$, and $\\widehat T=Z_W\\times_WQ$ [def-pc-fibre-product]. Let $c:Q\\to P_W$ be the comparison [def-nagata-blowup-flat-base-change-map] followed by exchange of its two target factors. Then $c$ is an isomorphism over $W$, and $U_W=v^{-1}(U)$ as open subschemes. The restrictions $P\\times_XU\\to U$ and $Q\\times_WU_W\\to U_W$ of the structure maps are isomorphisms, and $c$ identifies their base-changed restrictions over $U_W$. The induced isomorphism $\\theta:\\widehat T\\xrightarrow{\\sim}T_W$ identifies $\\widehat T\\times_WU_W$ with $(T\\times_XU)\\times_XW$. Its restrictions to these opens identify both with $Z_W\\times_WU_W$, and commute with the projections to $Z_W$ and to $U_W$. If $p:T_W\\to P_W$ and $\\widehat p:\\widehat T\\to Q$ are the projections, then $p$ and $\\widehat p$ are closed immersions and $p\\circ\\theta=c\\circ\\widehat p$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-pc-fibre-product",
+  "def-nagata-blowup-flat-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify the preserved open using Mathlib AlgebraicGeometry.Scheme.IdealSheafData.support_comap for the extended ideal [def-nagata-extended-ideal]. Taking complements of its equality of closed subsets gives U_W = v^{-1}(U) as opens. The restriction-scheme equality is implemented by Scheme.isoOfEq followed by pullbackRestrictIsoRestrict and pullbackSymmetry.",
+   "uses": [
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JU, lemma-fibre-product-immersion (1), and 01IN, lemma-closed-subspace-scheme (3)-(4); affine prime-contraction calculation"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-blowup-flat-base-change] to obtain the specified isomorphism c over W, with pr_W c = b. By [thm-nagata-global-blowup-complement] both restricted blowup maps are invertible. Using the restriction pullback isomorphism [lem-weil-pbc-open-preimage-fibre-product] transfers these instances to their displayed pullback projections. Base changing c to U_W gives delta, whose projection formulas follow from pullback.lift. Since delta and the Q-complement projection are invertible, the P_W-complement projection is invertible as well.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "def-pc-fibre-product",
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor (1)"
+   }
+  },
+  {
+   "text": "Construct theta by base changing c along Z_W to obtain Z_W times_W Q isomorphic to Z_W times_W P_W, then paste the W pullback [def-pc-fibre-product]. Replace the map pr_W followed by v by pr_P followed by a using pullback.condition, and apply the inverse pullback associator to obtain T_W. The projection lemmas for these isomorphisms give its Z, W, and P components explicitly.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JX, definition-base-change; explicit universal-property calculation with the isomorphism from the preceding step"
+   }
+  },
+  {
+   "text": "Use the open identification of Step 1 and pullback pasting/associativity [def-pc-fibre-product], equivalently [lem-weil-pbc-open-preimage-fibre-product], to exchange the open restriction with base change by W. Base change theta and compose with this exchange isomorphism to obtain epsilon. The complement isomorphism of Step 2, pullback associativity, and pullback of its invertible projection identify the source open with R = Z_W times_W U_W; call this rhohat. Define rho = epsilon inverse followed by rhohat. The source projection equations follow from the associator, and all target projection equations follow by cancelling epsilon and using the defining Z and W projections of theta. Thus epsilon followed by rho equals rhohat.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, lemma-open-fibre-product; explicit restriction of the preceding projection formulas"
+   }
+  },
+  {
+   "text": "The displayed ambient projection is an isomorphism followed by the pullback of the closed immersion Z times_X P to P [lem-weil-pbc-closed-immersion-base-change]. The other projection is an iterated pullback of i and hence closed. For compatibility, check the P and W projections of p theta and c phat; the theta projection equations and pullback.condition give equality by pullback.hom_ext [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QR, lemma-base-change-closed-immersion; Schemes Tag 01JY, lemma-base-change-immersion, with explicit projection equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "thm-nagata-blowup-flat-base-change",
+  "def-pc-fibre-product",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0805 and 02OS (1), assembled using Mathlib support_comap, pullback associativity/pasting, Schemes Tags 01JU/01JR/01JX, and Morphisms Tag 01QR; explicit Lean projection calculations by Q8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical flat base change isomorphism of blowups identifies the preserved open in a pulled back closed subscheme and commutes with its ambient closed immersion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.comapIso, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι. The returned comapIso/projection and flatness declarations do not describe blowups or the specified comparison on the preserved open. Mathlib has no blowup/strictTransform hit; the project has blowup comparison tools but no declaration for the complete diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"Flat\"",
+   "results": "0 hits: none. The returned comapIso/projection and flatness declarations do not describe blowups or the specified comparison on the preserved open. Mathlib has no blowup/strictTransform hit; the project has blowup comparison tools but no declaration for the complete diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|BlowUp|strictTransform",
+   "results": "0 hits: none. The returned comapIso/projection and flatness declarations do not describe blowups or the specified comparison on the preserved open. Mathlib has no blowup/strictTransform hit; the project has blowup comparison tools but no declaration for the complete diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical flat base change of blowups preserves the open complement of the center and the ambient closed immersion",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, Module.Flat.isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.instOfIsOpenImmersion. The returned comapIso/projection and flatness declarations do not describe blowups or the specified comparison on the preserved open. Mathlib has no blowup/strictTransform hit; the project has blowup comparison tools but no declaration for the complete diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat blowup comparison identifies the two fiber products of a closed subscheme and the open complement of its center with compatible projections",
+   "results": "8 hits: AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc. The returned comapIso/projection and flatness declarations do not describe blowups or the specified comparison on the preserved open. Mathlib has no blowup/strictTransform hit; the project has blowup comparison tools but no declaration for the complete diagram.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical flat blowup base change identifies the complement of the center and closed immersion fiber product diagrams",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instSndScheme.  Read the returned candidates: flatness stability and affine Proj/ideal-comap comparisons do not state the blowup preserved-open diagram. The grep hits concern tactic complexity or a future Rees-algebra blowup application.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|BlowUp|strictTransform",
+   "results": "6 hits: Mathlib/Algebra/HierarchyDesign.lean, Mathlib/Tactic/ITauto.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/Tactic/GRewrite/Core.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean, Mathlib/RingTheory/ReesAlgebra.lean.  Read the returned candidates: flatness stability and affine Proj/ideal-comap comparisons do not state the blowup preserved-open diagram. The grep hits concern tactic complexity or a future Rees-algebra blowup application.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup flat base change isomorphism over the complement of its ideal center",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.comapIso, RingHom.Flat.isStableUnderBaseChange, Module.Flat.isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono.  Read the returned candidates: flatness stability and affine Proj/ideal-comap comparisons do not state the blowup preserved-open diagram. The grep hits concern tactic complexity or a future Rees-algebra blowup application.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"Flat\"",
+   "results": "0 hits: .  Read the returned candidates: flatness stability and affine Proj/ideal-comap comparisons do not state the blowup preserved-open diagram. The grep hits concern tactic complexity or a future Rees-algebra blowup application.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up commutes with flat pullback and is an isomorphism outside the vanishing locus of the ideal",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instFstScheme.  Read the returned candidates: flatness stability and affine Proj/ideal-comap comparisons do not state the blowup preserved-open diagram. The grep hits concern tactic complexity or a future Rees-algebra blowup application.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-flat-etale-base-change",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Ancestor coordinate-chart strict-transform argument, via lem-trf-permissible-boundary-preservation step 3; extracted item old step 1 and old step 5 fibre-product and ambient-closed-immersion identifications.",
+   "via": [
+    "lem-trf-strict-transform-flat-etale-base-change",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-blowup-base-change-preserved-open-diagram",
+  "worker": "stage1",
+  "summary": "No new nodes: reuse the flat blowup comparison theorem, complement theorem, affine comap/zero-locus formulas, open-preimage interface, and closed-immersion base-change lemma. Give explicit inverse maps on the ambient fibre products and their preserved opens, and check both projection compatibilities. The statement is unchanged.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality; inherited from.place locates the intervening strict-transform chart argument via lem-trf-permissible-boundary-preservation step 3. This item supplies old steps 1 and 5 of lem-trf-strict-transform-flat-etale-base-change: the ambient flat comparison, preserved-open identification and commutative closed-immersion diagram. The latest ancestor proof itself has no separate blowup claim.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ideal-sheaf-comap-affine-extension",
+    "why": "Generic affine formula for the ideal of a base-changed closed subscheme; the trace-formula unit has no such commutative-algebra interface."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-1c40fcd7f",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-1c40fcd7f (reviewer sub-agent of L); spot-checked: I read the item and all 14 nodes it cites. There are no new nodes and the statement is unchanged; this is a first split of the item, not a re-split. Stacks 0805 (divisors l.8351) and 02OS(1) were read, and the six schemes/morphisms tags in the steps resolve. Step 1: V(I_W) is the zero locus of the closed immersion W x_X V(I) -> W, whose ideal is I_W by def-nagata-extended-ideal. On affines B_0 inside v^-1(A_0), I_W(B_0)=(phi(I)) by lem-pc-ideal-sheaf-comap-affine-extension, and (phi(I)) is in q iff I is in phi^-1(q)=p_{v(w)}, by the zero-locus lemma and Spec phi; no qcqs assumption is needed. Step 2: c is swap after bc_v, the specified comparison, over W (pr_W c=b). The complement theorem needs only a quasi-coherent ideal, and I_W is one. I checked the inverse of a_{U,W}: it sends u to (a_U^-1(v u),u,u). Since c_{U_W} keeps the U_W component, a_{U,W}c_{U_W}=b_{U_W}. Step 3: theta sends (z,w,q) to ((z,pr_P c q),w) and its inverse uses c^-1; both are well defined because a pr_P=v pr_W and b c^-1=pr_W, and they are mutually inverse by uniqueness. Step 4: the preserved opens are identified with Z_W x_W U_W via b_{U_W}^-1 and a_U^-1. Step 5: T_W with (pr_Z,p) is Z x_X P_W, so p is a closed immersion, and so is p-hat as a base change of Z_W->W; p theta(z,w,q)=(pr_P c q,w)=c p-hat(z,w,q). Edge cases I=O_X, I=0, Z or W empty, v=id and the generic point of A^1 all behave correctly. The inherited finite-type hypothesis on I is unused and harmless. No duplicate found: blowup-square-pullback-quotient-data, admissible-blowup-over-open and etale-blowup-chart-descent state other facts. Accepted tool_use: lem-pc-ideal-sheaf-comap-affine-extension, a generic affine formula that is Lean-closed as ideal_comap_appLE. The other off-unit cites are Lean-closed or mathlib-status. No SGA is used. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupPreservedOpenDiagram",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.flat_baseChange_preserved_open_diagram",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.ambientMap",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.ambientBase",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.ambientProjection",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.pulledAmbient",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.pulledAmbientMap",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.sourceOpen",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.restrictedAmbientMap",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.targetOpen",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.commonOpen",
+   "AlgebraicGeometry.Scheme.IdealSheafData.BlowupPreservedOpenDiagram.flat_baseChange_preserved_open_diagram"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupPreservedOpenDiagram.lean",
+  "statement": "theorem flat_baseChange_preserved_open_diagram {X Z W : Scheme.{u}} (I : X.IdealSheafData) (_hI : I.ofFiniteType) (i : Z ⟶ X) [IsClosedImmersion i] (v : W ⟶ X) [Flat v] : IsIso (I.blowupFlatBaseChange v) ∧ I.blowupFlatBaseChange v ≫ pullback.snd I.blowupMap v = (I.comap v).blowupMap ∧ (I.comap v).support.compl = v ⁻¹ᵁ I.support.compl ∧ IsIso (pullback.snd I.blowupMap (Scheme.Opens.ι I.support.compl)) ∧ IsIso (pullback.snd (I.comap v).blowupMap (Scheme.Opens.ι (I.comap v).support.compl)) ∧ IsIso (pullback.snd (pullback.snd I.blowupMap v) (Scheme.Opens.ι (I.comap v).support.compl)) ∧ (∃ δ : pullback (I.comap v).blowupMap (Scheme.Opens.ι (I.comap v).support.compl) ≅ pullback (pullback.snd I.blowupMap v) (Scheme.Opens.ι (I.comap v).support.compl), δ.hom ≫ pullback.fst (pullback.snd I.blowupMap v) (Scheme.Opens.ι (I.comap v).support.compl) = pullback.fst (I.comap v).blowupMap (Scheme.Opens.ι (I.comap v).support.compl) ≫ I.blowupFlatBaseChange v ∧ δ.hom ≫ pullback.snd (pullback.snd I.blowupMap v) (Scheme.Opens.ι (I.comap v).support.compl) = pullback.snd (I.comap v).blowupMap (Scheme.Opens.ι (I.comap v).support.compl)) ∧ IsClosedImmersion (ambientProjection I i v) ∧ IsClosedImmersion (pullback.snd (pullback.snd i v) (I.comap v).blowupMap) ∧ ∃ θ : pulledAmbient I i v ≅ ambientBase I i v, θ.hom ≫ pullback.fst (ambientMap I i) v ≫ pullback.fst i I.blowupMap = pullback.fst (pullback.snd i v) (I.comap v).blowupMap ≫ pullback.fst i v ∧ θ.hom ≫ pullback.snd (ambientMap I i) v = pulledAmbientMap I i v ∧ θ.hom ≫ ambientProjection I i v = pullback.snd (pullback.snd i v) (I.comap v).blowupMap ≫ I.blowupFlatBaseChange v ∧ ∃ (ε : sourceOpen I i v ≅ targetOpen I i v) (ρhat : sourceOpen I i v ≅ commonOpen I i v) (ρ : targetOpen I i v ≅ commonOpen I i v), ε.hom ≫ pullback.fst (restrictedAmbientMap I i) v ≫ pullback.fst (ambientMap I i) (Scheme.Opens.ι I.support.compl) = pullback.fst (pulledAmbientMap I i v) (Scheme.Opens.ι (I.comap v).support.compl) ≫ θ.hom ≫ pullback.fst (ambientMap I i) v ∧ ε.hom ≫ pullback.snd (restrictedAmbientMap I i) v = pullback.snd (pulledAmbientMap I i v) (Scheme.Opens.ι (I.comap v).support.compl) ≫ Scheme.Opens.ι (I.comap v).support.compl ∧ ε.hom ≫ ρ.hom = ρhat.hom ∧ ρhat.hom ≫ pullback.fst (pullback.snd i v) (Scheme.Opens.ι (I.comap v).support.compl) = pullback.fst (pulledAmbientMap I i v) (Scheme.Opens.ι (I.comap v).support.compl) ≫ pullback.fst (pullback.snd i v) (I.comap v).blowupMap ∧ ρhat.hom ≫ pullback.snd (pullback.snd i v) (Scheme.Opens.ι (I.comap v).support.compl) = pullback.snd (pulledAmbientMap I i v) (Scheme.Opens.ι (I.comap v).support.compl) ∧ ρ.hom ≫ pullback.fst (pullback.snd i v) (Scheme.Opens.ι (I.comap v).support.compl) ≫ pullback.fst i v = pullback.fst (restrictedAmbientMap I i) v ≫ pullback.fst (ambientMap I i) (Scheme.Opens.ι I.support.compl) ≫ pullback.fst i I.blowupMap ∧ ρ.hom ≫ pullback.fst (pullback.snd i v) (Scheme.Opens.ι (I.comap v).support.compl) ≫ pullback.snd i v = pullback.snd (restrictedAmbientMap I i) v ∧ ρ.hom ≫ pullback.snd (pullback.snd i v) (Scheme.Opens.ι (I.comap v).support.compl) ≫ Scheme.Opens.ι (I.comap v).support.compl = pullback.snd (restrictedAmbientMap I i) v",
+  "branch": "sheaf-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdcb6b07d",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_deps, Stacks 0805/02OS, module and upstream blowupFlatBaseChange (target pullback I.blowupMap g = P×_X W, so the node's factor exchange is absorbed by the Lean order) and ofFiniteType. Every clause matches. c is iso over W; U_W = v⁻¹U as Opens; the three open structure maps are isos; δ pinned as the restriction of c; p (pasting-iso projection T_W→P_W) and p̂ closed immersions; θ pinned by Z, W and p∘θ = c∘p̂; ε, ρ̂, ρ pinned by Z_W/U_W components with ε≫ρ=ρ̂. No extra hypotheses; one universe u. Edge cases I=0, I=𝒪_X, empty schemes, v=id ok. 9 non-hollow abbrevs with docstrings; proof docstring carries 5 steps; sorry only; node changes only the lean record and lean.statement is verbatim; no duplicate in side-live; report sections present. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261026T092355-L-3427771",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

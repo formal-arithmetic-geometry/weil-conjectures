@@ -17,96 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Put $F=D_K$, $E=D_k$. By [lem-weil-pbc-generic-fibre-localization-domain-irreducible], $F$ is the localization of $D$ at the nonzero elements of $A$, and is a nonzero domain. If $d_1,\\ldots,d_r$ generate $D$ over $A$, their tensor images generate $F$ over $K$ and $E$ over $k$: expand each pure tensor using its polynomial expression in the $d_i$ and use tensor balancing. The dimension/transcendence-degree theorem [lem-weil-pbc-finite-type-domain-dimension-trdeg] gives a finite integer $d=\\dim F=\\operatorname{trdeg}_K L$, where $L=\\operatorname{Frac}(F)$. By [lem-weil-pbc-dimension-at-point-components], applied to the finite type domain $F$, its local topological dimension at every prime is $d$, since its spectrum has the single component $\\operatorname{Spec}F$; the spectrum/ring comparison identifies the two dimensions.",
+   "text": "Put $F=D\\otimes_AK$ and $E=D\\otimes_Ak$. By [lem-trf-domain-generic-local-fibre-bound], $F$ is a nonzero finite type domain and $d=\\dim F=\\operatorname{trdeg}_K\\operatorname{Frac}(F)$ is a finite integer; $E$ is finite type over $k$. Fix any prime $Q$ of $E$. The ring $A$ is local with maximal ideal $\\mathfrak m_A$: if $a,b\\in A$ are non-units and both nonzero (otherwise $a+b$ is one of them), after swapping $a/b\\in A$, so $a+b=b(1+a/b)$ is a non-unit; hence the non-units form an ideal. Localizing at $\\mathfrak m_A$ therefore inverts only units, so $\\kappa(\\mathfrak m_A)=k$. The same node with this prime gives the finite integer $n=\\dim_Q\\operatorname{Spec}E$ and $d\\le n$.",
    "uses": [
-    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "lem-weil-pbc-dimension-at-point-components",
-    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+    "lem-trf-domain-generic-local-fibre-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, first paragraph of proof; dimension finiteness and the generic local dimension expanded with Tag 00P0 and Tag 00OT"
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), first inequality"
    }
   },
   {
-   "text": "Fix a prime $Q$ of $E$. By [lem-weil-pbc-fibre-ring-primes-bijection] its contraction $\\mathfrak q\\subset D$ lies over $\\mathfrak m_A$, with $Q$ the corresponding fibre prime. By [lem-weil-pbc-dimension-at-point-components], $n=\\dim_Q\\operatorname{Spec}E$ is a finite nonnegative integer. Apply [lem-weil-pbc-fibre-dimension-bounded-open-upstairs] at $\\mathfrak q$ to get an open neighbourhood $V$ where every local fibre dimension is at most $n$. A nonempty open in the spectrum of the domain $D$ contains $(0)$: its closed complement cannot contain $(0)$ without containing its closure $V_D(0)=\\operatorname{Spec}D$. At $(0)$ the base prime is $(0)$ and the fibre prime in $F$ is $(0)$, since the localization $D\\hookrightarrow F$ is injective. Step 1 evaluates this local dimension as $d$. Thus $d\\le n$.",
+   "text": "Apply [lem-trf-localized-polynomial-chart-fibres] to $A,D,Q,n$. It supplies $g$, $B=D_g$, $\\alpha:A[t_1,\\ldots,t_n]\\to B$, and its two field-fibre maps $\\alpha_K$ and $\\alpha_k$, finite type and quasi-finite. Here $B$ contains $A$ and is a domain, $H=B\\otimes_AK$ has fraction field identified over $K$ with $\\operatorname{Frac}(F)$, and $T=B\\otimes_Ak$ is finite type over $k$ with a point $Q_g$ of local dimension $n$.",
    "uses": [
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "lem-weil-pbc-dimension-at-point-components",
-    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+    "lem-trf-localized-polynomial-chart-fibres"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, proof, first inequality using Tag 00QH"
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), quasi-finite chart and its two fibres"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-quasi-finite-over-polynomial-algebra] to $A\\to D$, $\\mathfrak q$ and $n$. It gives $g\\notin\\mathfrak q$ and a finite type, everywhere quasi-finite $A$-algebra map $\\alpha:A[t_1,\\ldots,t_n]\\to B=D_g$. Since $g\\ne0$, $B$ is a domain containing $A$. Write $H=B\\otimes_AK$ and $T=B\\otimes_Ak$. For $c=K,k$, identify $(D\\otimes_Ac)\\otimes_DB$ with $B\\otimes_Ac$ by $(d\\otimes c_0)\\otimes b\\mapsto db\\otimes c_0$, inverse $b\\otimes c_0\\mapsto(1\\otimes c_0)\\otimes b$; tensor balancing verifies these inverse maps. Applying [lem-weil-pbc-localization-base-change] to $D\\to D_g$ shows that $H$ and $T$ are the away localizations of $F$ and $E$ at the respective images of $g$. By [lem-weil-pbc-spec-localization-away-basic-open], $\\operatorname{Spec}T$ is the open $D_E(\\bar g)$ containing $Q$. The open-subspace local-dimension theorem therefore gives $\\dim_{Q_g}\\operatorname{Spec}T=n$ at the corresponding point $Q_g$. In particular $T\\ne0$.",
+   "text": "If $d<n$, then $\\operatorname{trdeg}_K\\operatorname{Frac}(H)=d<n$ by steps 1–2. Apply [lem-trf-valuation-generic-relation-specialization] to $\\alpha$, with $A\\subset B$ the domain inclusion from step 2. It gives $h\\in\\ker\\alpha$ with a coefficient $1$, whose reduction $\\bar h$ is nonzero and satisfies $\\alpha_k(\\bar h)=0$. Apply [lem-trf-quasi-finite-polynomial-kernel-dimension-drop] to $\\alpha_k:k[t_1,\\ldots,t_n]\\to T$: its target and map are finite type and the map is quasi-finite at every prime by step 2. Thus $\\dim\\operatorname{Spec}T<n$. But $n=\\dim_{Q_g}\\operatorname{Spec}T\\le\\dim\\operatorname{Spec}T$: the whole spectrum is one open neighbourhood in the defining minimum [def-kun-topological-dimension-at-point]. This contradiction gives $n\\le d$, hence $n=d$.",
    "uses": [
-    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, proof, quasi-finite polynomial chart from Tag 00QE; the fibre localization and local-dimension invariance are made explicit"
-   }
-  },
-  {
-   "text": "For $c=K$ and $c=k$, tensor $\\alpha$ with $c$ and use [lem-weil-pbc-polynomial-scalar-extension] to obtain $\\alpha_c:c[t_1,\\ldots,t_n]\\to B\\otimes_Ac$. This map is finite type and quasi-finite at every prime by [lem-weil-pbc-quasi-finite-four-rings]: the square has top rings $A[t_1,\\ldots,t_n]$, $B$, and bottom rings $c[t_1,\\ldots,t_n]$, $B\\otimes_Ac$; each element of the last ring is a sum $\\sum_i b_i\\otimes c_i=\\sum_i(b_i\\otimes1)\\alpha_c(c_i)$. This is precisely the finite-sum hypothesis of that node. Both fibre algebras are finite type over their fields, generated by the images of $d_1,\\ldots,d_r,g^{-1}$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-quasi-finite-four-rings",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, proof, the induced polynomial maps on the two fibres; scalar extension and quasi-finiteness justified by Tag 00PN"
-   }
-  },
-  {
-   "text": "Suppose for a contradiction that $d<n$. The localization $H=F_g$ embeds in $L$ and has fraction field $L$: every fraction of elements of $F$ is already a fraction of elements of $H$, and conversely $H\\subset L$. If $\\alpha_K$ were injective, its variable images in $L$ would be algebraically independent, since evaluating any nonzero polynomial would remain nonzero. They would then be $n$ distinct elements and would give $\\operatorname{trdeg}_KL\\ge n$ by [def-kun-transcendence-degree], contradicting step 1. Hence choose a nonzero $f=\\sum_Ia_It^I\\in\\ker\\alpha_K$.",
-   "uses": [
-    "def-kun-transcendence-degree"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, proof, existence of a nonzero generic-fibre polynomial kernel when the dimension is less than n"
-   }
-  },
-  {
-   "text": "Among the finitely many nonzero coefficients $a_I$ choose $b=a_J$ such that $a_I/b\\in A$ for every $I$. Here is the finite induction that gives this choice without a rank or discreteness assumption: start with one coefficient $b$; for the next nonzero coefficient $a$, either $a/b\\in A$ and keep $b$, or $b/a\\in A$ and replace $b$ by $a$. Previously admitted coefficients $c$ then satisfy $c/a=(c/b)(b/a)\\in A$. Thus $h=b^{-1}f$ has all coefficients in $A$ and its $J$-coefficient is $1$. Its image in $H$ is zero. Since $B$ is a domain containing $A$, [lem-weil-pbc-generic-fibre-localization-domain-irreducible] applied to $A\\to B$ shows that $B\\to H$ is the localization of $B$ at the nonzero elements of $A$; this map is injective: an element killed in the localization is killed by some nonzero $s\\in A$, hence was zero. Therefore $\\alpha(h)=0$ in $B$.",
-   "uses": [
-    "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, proof, coefficient of minimal valuation; finite divisibility induction and torsion cancellation written out"
-   }
-  },
-  {
-   "text": "Reduce the coefficients of $h$ modulo $\\mathfrak m_A$. The resulting $\\bar h\\in k[t_1,\\ldots,t_n]$ is nonzero because its $J$-coefficient is $1$. Tensoring the equality $\\alpha(h)=0$ with $k$ gives $\\alpha_k(\\bar h)=0$. Apply [lem-trf-quasi-finite-polynomial-kernel-dimension-drop] to this map, whose finite type and quasi-finiteness were checked in step 4: $\\dim\\operatorname{Spec}T<n$. But $Q_g$ belongs to this spectrum, and its local dimension $n$ is at most the global dimension, since the entire spectrum is an open neighbourhood of $Q_g$ in the defining minimum [def-kun-topological-dimension-at-point]. This contradicts step 3. We conclude $n\\le d$, and together with step 2, $n=d$.",
-   "uses": [
+    "lem-trf-valuation-generic-relation-specialization",
     "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
     "def-kun-topological-dimension-at-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QK, proof, nonzero residue-fibre relation and strict dimension-drop contradiction"
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), residue relation and strict dimension-drop contradiction"
    }
   },
   {
-   "text": "The prime $Q$ was arbitrary, so every point of $\\operatorname{Spec}E$ has local dimension $d$. The dimension-as-supremum-of-local-dimensions theorem [lem-weil-pbc-dimension-supremum-local-dimensions] gives global dimension $d$; this is a nonempty supremum because $E\\ne0$: [def-weil-pbc-krull-dimension-ring] states that absence of prime ideals is equivalent to being the zero ring. The spectrum/ring comparison then gives $\\dim E=d=\\dim F$. For equidimensionality, [lem-weil-pbc-spec-irreducible-components-minimal-primes] writes each component as $V(\\mathfrak p)$ for a minimal prime $\\mathfrak p$ of $E$. At the point $\\mathfrak p$, this is the unique component containing it: a component $V(\\mathfrak r)$ through it has $\\mathfrak r\\subseteq\\mathfrak p$, hence $\\mathfrak r=\\mathfrak p$ by minimality. The dimension-at-point/components theorem now identifies the dimension of that component with $\\dim_{\\mathfrak p}\\operatorname{Spec}E=d$. This proves every clause.",
+   "text": "The prime $Q$ was arbitrary, so every point of $\\operatorname{Spec}E$ has local dimension $d$. The dimension-as-supremum-of-local-dimensions theorem [lem-weil-pbc-dimension-supremum-local-dimensions] gives global dimension $d$; this is a nonempty supremum because $E\\ne0$: [def-weil-pbc-krull-dimension-ring] states that absence of prime ideals is equivalent to being the zero ring. [lem-weil-pbc-spec-topological-krull-dimension-ring] then gives $\\dim E=d=\\dim F$. For equidimensionality, [lem-weil-pbc-spec-irreducible-components-minimal-primes] writes each component as $V(\\mathfrak p)$ for a minimal prime $\\mathfrak p$ of $E$. At the point $\\mathfrak p$, this is the unique component containing it: a component $V(\\mathfrak r)$ through it has $\\mathfrak r\\subseteq\\mathfrak p$, hence $\\mathfrak r=\\mathfrak p$ by minimality. Since $E$ is finite type over the field $k$ by step 1, [lem-weil-pbc-dimension-at-point-components] identifies the dimension of that component with $\\dim_{\\mathfrak p}\\operatorname{Spec}E=d$. This proves every clause.",
    "uses": [
     "lem-weil-pbc-dimension-supremum-local-dimensions",
     "lem-weil-pbc-spec-topological-krull-dimension-ring",
@@ -122,24 +68,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-  "lem-weil-pbc-dimension-at-point-components",
-  "lem-weil-pbc-spec-topological-krull-dimension-ring",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
-  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
-  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-quasi-finite-four-rings",
-  "def-kun-transcendence-degree",
+  "lem-trf-domain-generic-local-fibre-bound",
+  "lem-trf-localized-polynomial-chart-fibres",
+  "lem-trf-valuation-generic-relation-specialization",
   "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
   "def-kun-topological-dimension-at-point",
   "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
   "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-dimension-at-point-components",
   "def-weil-pbc-krull-dimension-ring"
  ],
  "proof_origin": {
@@ -237,35 +174,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-valuation-domain-fibre-dimensions",
   "worker": "stage1",
-  "summary": "Retained the statement and source. Expanded 00QK into eight steps: finite local dimensions, upper-semicontinuity lower bound, quasi-finite polynomial chart, scalar extension, generic polynomial relation, explicit finite divisibility normalization, nonzero residue relation with strict dimension-drop contradiction, and the component conclusion. One new statement-only general polynomial-kernel dimension lemma; no Lean attachment or Mathlib leaf.",
+  "summary": "Continued the retained three-node re-split after the landing refusal. Compared the current repository item with the retained original: no baseline fields changed; the three new IDs remain absent. Re-read all assembly citations and their current statements, the new statement dependencies, Stacks 00QK/00QE/00QH/00OT, and retained logged search results. Initial fresh-server dry run 906f8976a7b passed. Made the normalized polynomial and its nonzero residue reduction explicit in step 3 and the field/finite-type hypotheses explicit at the component formula in step 4. Retained the statement, three independent statement-only tasks, full former argument, blueprint route, citations and search records. Delivery is rebuilt on the freshly fetched server DAG with maintainer metadata preserved; report documents the repair and B–E review.",
   "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "why": "Computes the finite generic dimension and transcendence degree; generic field-algebra tool, not a change to the valuation-ring argument."
-   },
-   {
     "node": "lem-weil-pbc-dimension-at-point-components",
     "why": "Makes local dimensions finite and computes the component dimensions at minimal primes; generic finite-type field-algebra tool."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
-    "why": "Exactly the upper-semicontinuity input invoked by 00QK to get the first inequality; no same-unit substitute."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
-    "why": "Exactly the polynomial chart input invoked by 00QK; generic local algebra, not a replacement for its valuation argument."
-   },
-   {
-    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
-    "why": "Keeps the selected special-fibre local dimension after principal localization; a generic topological tool."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-finite-four-rings",
-    "why": "Checks quasi-finiteness on both scalar-extended polynomial charts; a generic algebraic base-change tool."
    },
    {
     "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
@@ -283,12 +200,12 @@
   "lem-weil-pbc-dimension-supremum-local-dimensions"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q140-5bf897492",
-  "group": "Q140",
+  "reviewer": "NT-cc-Q55-1c93afef6",
+  "group": "Q55",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-5bf897492 (reviewer sub-agent of L); spot-checked: Read the full item, the new helper, all the required files (AGENTS.md, stages/1-dag.md, brief-stage1.md, GOAL.md, dag-sync.md, delivery-errors.md A–G, packet.md, report), the statement of every cited node, the unit record sk-i-curve-zero, and Stacks Algebra Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), statement and proof. The item matches 00QK hypothesis by hypothesis, including equidimensionality; nothing is weakened. It is not a target node, so there is no base-change morphism to compare. Steps 1–8 check against the statements they cite: 00P0 and 00OT give d; 00QH gives d<=n, through the open containing (0) of the domain D; 00QE gives the chart B=D_g; 00DK localization plus the D(g) homeomorphism keep the local dimension n on T; 00PN gives quasi-finiteness of both scalar-extended charts, with the finite-sum hypothesis checked explicitly; the trdeg argument gives a nonzero generic kernel; the finite valuation normalization is right for any rank; the residue relation with the helper gives n<=d; 0B7I, 00ES and 00OT give both clauses. The new helper lem-trf-quasi-finite-polynomial-kernel-dimension-drop is true: phi factors through P/I with I=ker phi nonzero and dim P/I<=n-1, then 00QF applies. I tested it on T=0, n=0, k[x,y]/(xy) and the identity map. It is not a clause of the item and not a specialization of the 00QG or 00QF nodes. rg over dag/nodes and the main-20261015 blueprint found no duplicate. Form B1–B5 is fine, searches are recorded and blueprint.from/via are set. I accepted the seven declared sk-thm-p1 tool_uses (the 00P0, 00OT, 00QH, 00QE, open-subspace, 00PN and 0B7I nodes): they are generic algebra lemmas that the proof of 00QK itself invokes. No SGA is used. Fix (C1): step 6 used that B->H is the localization at A\\{0} without citing the node that states it. Its uses now has lem-weil-pbc-generic-fibre-localization-domain-irreducible, and the text names it. This is the only change, in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-domain-fibre-dimensions.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-1c93afef6 (reviewer sub-agent of L); spot-checked: I read the full re-split against the 8-step base proof, which the report retains verbatim, and against Stacks algebra.tex Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), statement and proof. The item statement matches 00QK hypothesis by hypothesis, including equidimensionality, and is unchanged. It is not a target node, so there is no base-change morphism to compare. No SGA is used and the route is unchanged. Every old argument has a home. Old steps 1-2 went to lem-trf-domain-generic-local-fibre-bound. It is true for any domain base: the 00QH open is a nonempty open of the irreducible Spec D, so it contains (0), whose fibre dimension is d. Tested on Z[x] at (p) and on an empty fibre. Old steps 3-4 and the Frac H = Frac F part of step 5 went to lem-trf-localized-polynomial-chart-fibres. It is true: the 00QE chart, base change along any field c, (D⊗c)_{g⊗1}, D_E(g⊗1) containing Q with local dimension n, and g≠0. The rest of step 5, step 6 and the reduction in step 7 went to lem-trf-valuation-generic-relation-specialization. It is true for any rank and without finite type. Tested on n=0, h=t-a, and Z_(p)[x,x^2/p] with h=pt_2-t_1^2. The parent assembles these nodes with the dimension-drop node (its hypotheses are checked in step 3), the local≤global inequality from the minimum in def-kun-topological-dimension-at-point, and old step 8 (components through minimal primes). The new nodes are of comparable size and statement-only, and none restates a parent clause. rg found no duplicates beyond the nodes already distinguished in the report. The existing tool_uses are accepted. The three new nodes are byte-identical to heads de47ec31, cb602ec4 and d526aff1. FIX (C2): step 1 still only says 'Since A is local', and the chart node applied in step 2 requires A local. No DAG node states that valuation rings are local. The same fix was made at de47, cb60 and d526 and was lost all three times. I re-applied the inline proof (non-units are closed under addition by a+b=b(1+a/b)) in step 1 of this head and kept this head's improved steps 3-4. File: fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-domain-fibre-dimensions.json, proof 2922 characters. Maintainer: please make sure this FIX is carried into the landed item.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.ValuationDomainFibreDimensions",
@@ -308,5 +225,16 @@
   "result": "pass",
   "note": "Wrote review.md. Checked the immutable node, six statement dependencies, Stacks 00QK, exact declarations, report sections, edge cases, universes, verbatim signature, and route-pivot exclusions. Per-file scompile.py reproduction passed without diagnostics. No fixes needed; branch head unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

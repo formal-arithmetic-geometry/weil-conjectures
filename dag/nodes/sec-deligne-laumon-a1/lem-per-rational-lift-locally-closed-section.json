@@ -249,19 +249,36 @@
   "declaration": "AlgebraicGeometry.rationalLift_iff_locallyClosed_section",
   "file": "lean/Sheaf/AlgebraicGeometry/RationalLiftLocallyClosedSection.lean",
   "statement": "theorem rationalLift_iff_locallyClosed_section {X Y : Scheme.{u}} [IsNoetherian X] (f : Y ⟶ X) [LocallyOfFiniteType f] (x : X) : (∃ y : Y, f y = x ∧ IsIso (f.residueFieldMap y)) ↔ ∃ (Z : Scheme.{u}) (j : Z ⟶ X), IsImmersion j ∧ x ∈ Set.range j ∧ ∃ s : Z ⟶ Y, s ≫ f = j",
-  "branch": "newtargets-dag",
-  "by": "N5",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RationalLiftLocallyClosedSection deleted (dead: no target reaches it); this node is not reached either."
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-6e9879077",
-  "group": "N5",
+  "reviewer": "NT-stage2-cc-72f719e2e",
+  "group": "NN",
   "result": "pass",
-  "note": "Clause-by-clause match with the node and ILO II 2.2.3: [IsNoetherian X] = finite affine Noetherian cover; [LocallyOfFiniteType f], no qc/separation; IsIso (f.residueFieldMap y) is the induced map; IsImmersion j ∧ x ∈ range j ∧ ∃ s, s ≫ f = j matches the immersion definition in def-weil-closed-immersion (isImmersion_iff_exists). Edge cases (empty X/Y, closed and non-locally-closed points, nonreduced X, identity f, universe u) are fine. Only the item's lean field was added; the 5 stmt_dep records are identical to live; lean.statement is verbatim in the file; no duplicate in Mathlib or live Sheaf; docstrings carry the source place, blueprint tag and 5 proof steps; one sorry. nt_compile --json: clean, 2.2 s, exit 0. Advisory only: unused proof-only imports kept for stage 3."
+  "note": "Clause-by-clause match with node and ILO II 2.2.3: [IsNoetherian X] (Mathlib scheme class, = finite affine Noetherian cover), [LocallyOfFiniteType f], no qc/separation; IsIso (f.residueFieldMap y) is the canonical induced map; IsImmersion j ∧ x ∈ Set.range j ∧ ∃ s, s ≫ f = j matches def-weil-closed-immersion's immersion (isImmersion_iff_exists). Single universe u, nothing unbound; edge cases (empty Y/Z, closed and non-locally-closed points, nonreduced X, non-separated Y) fine. Item node differs from side-live only in the lean field (live lean null after lean_removed dead-module deletion); node is cited by two live nodes; 5 stmt_dep records byte-identical to live; lean.statement verbatim; module absent live, no duplicate; docstrings carry source place, blueprint tag and the 5 proof steps; single sorry; private import ClosedImmersionResidueFieldIso exists live; report has Worker report and Second reading by NN. Not recompiled (no change); worker compile clean and identical signature previously passed N5 stage-2 review. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/RationalLiftLocallyClosedSection.lean",
+  "module": "Sheaf.AlgebraicGeometry.RationalLiftLocallyClosedSection",
+  "declaration": "AlgebraicGeometry.rationalLift_iff_locallyClosed_section",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

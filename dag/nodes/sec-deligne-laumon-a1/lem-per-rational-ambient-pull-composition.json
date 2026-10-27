@@ -1,0 +1,151 @@
+{
+ "kind": "statement",
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived pullback is computed on K-flat complexes",
+   "results": "HasDerivedCategory.standard, CategoryTheory.Abelian.DoldKan.N, AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Idempotents.DoldKan.N, HomologicalComplexUpToQuasiIso.Q, AlgebraicGeometry.Flat.instSndScheme, CategoryTheory.Idempotents.DoldKan.N_obj",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of derived inverse image functors for sheaves of modules",
+   "results": "SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|IsLeftDerivedFunctor",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized continuous-coefficient assertion; generic ordinary free and derived-functor APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search: finite free pullback; single flat; derived pullback composition; K-flat counit",
+   "results": "All four searches returned zero blueprint nodes. Existing generic source nodes were inspected; none states these exact continuous-rational normalization transports.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "group": "U1",
+  "item": "Sheaf.Paper.RationalStratumPullbackModels",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-per-rational-ambient-pull-composition",
+ "title": "RationalAmbientPullComposition",
+ "statement": "For composable arbitrary scheme maps g:Y $\\to$ X and h:Z $\\to$ Y, continuous-rational coefficient maps cg,ch normalized on continuous functions, and supplied normalized universal Pull models pg,ph,pc for g,h and their composite [def-per-rational-stratum-pullback-data], there exists their Composition: the coefficient equation, ordinary tensor-unit-normalized isomorphism, degreewise complex isomorphism, and derived isomorphism with its flat-term K-flat counit equation. The composite coefficient map is the actual continuous-function pullback. No coefficient map is required to be invertible.",
+ "stmt_deps": [
+  "def-per-rational-stratum-pullback-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, proof; ordinary tensor comparison uses Modules on Sites Section 03EK."
+ },
+ "proof": [
+  {
+   "text": "the continuous coefficient adjunct is precomposition. Successive\nprecomposition agrees with composite precomposition, giving coefficients.\nThe ordinary comparison inserts the intermediate tensor unit; its inverse\nmultiplies the two scalar factors. Balancing proves that these maps are inverse.\nThe unit formula uses the actual fibre-product associator and follows by inserting\none twice. Apply this map termwise to obtain complex and components. Exact inverse\nimage preserves K-flat complexes, and extension of scalars preserves K-flat complexes\nwith flat terms. Thus both factorizations compute derived pullback on flat-term\nK-flat resolutions. Descend the termwise map through the universal counits. The\nnormalizations of the supplied counits identify this descended map with the displayed\nnormalization equation. Uniqueness of left derived functors extends the isomorphism\nto arbitrary complexes. These operations apply on arbitrary chart schemes.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof; ordinary tensor comparison uses Modules on Sites Section 03EK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-per-continuous-rational-derived-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, proof; ordinary tensor comparison uses Modules on Sites Section 03EK."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Step 3 and chart step 4: normalized ambient composition on arbitrary schemes.",
+   "via": [
+    "lem-per-rational-stratum-pullback-models",
+    "lem-per-adic-stratified-pullback-texact",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalAmbientPullComposition",
+  "file": "lean/Sheaf/Paper/RationalAmbientPullComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RationalStratumPullback.rational_ambient_pull_composition",
+  "statement": "theorem rational_ambient_pull_composition {X Y Z : Scheme.{u}}\n    (g : Y ⟶ X) (h : Z ⟶ Y)\n    (cg : (adicTowerInverseImage g).obj (rationalCoefficientSheaf l X E) ⟶\n      rationalCoefficientSheaf l Y E)\n    (ch : (adicTowerInverseImage h).obj (rationalCoefficientSheaf l Y E) ⟶\n      rationalCoefficientSheaf l Z E)\n    (hg : rationalCoefficientRestrictionNormalized l E g cg)\n    (hh : rationalCoefficientRestrictionNormalized l E h ch)\n    (pg : Pull l E g cg) (ph : Pull l E h ch)\n    (pc : Pull l E (h ≫ g) (coefficient l E (h ≫ g))) :\n    Nonempty (Composition l E g h cg ch pg ph pc)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-per-rational-ambient-pull-composition",
+  "worker": "U1",
+  "summary": "Strictly smaller supporting step extracted from the unchanged stratum pullback theorem. The complete proof in words is also in the declaration docstring.",
+  "blueprint": "Step 3 and chart step 4: normalized ambient composition on arbitrary schemes.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ambient ringed-topos or module-sheaf tool used only for this normalization/computation step, without replacing any unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ambient ringed-topos or module-sheaf tool used only for this normalization/computation step, without replacing any unit route."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Generic ambient ringed-topos or module-sheaf tool used only for this normalization/computation step, without replacing any unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b9c09",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164433-L-1013788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b9c09",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164433-L-1013788",
+  "kind": "interface",
+  "note": "independent cc review: the 16 relocated data declarations against the old item module (identical); the item statement against the clone (unchanged); the four new sorry statements against the ContinuousRational, pbc and continuous-coefficient definitions (all true and smaller than the item); the item node diff (only proof, proof_deps, proof_origin, tool_uses and lean changed)"
+ }
+}

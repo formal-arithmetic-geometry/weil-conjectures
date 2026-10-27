@@ -1,0 +1,467 @@
+{
+ "id": "lem-sfb-dg-tensor-hom-homotopy-calculus",
+ "kind": "statement",
+ "title": "Tensor and Hom of a DG bimodule on homotopy categories",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. For right DG modules $X,Y$ write $\\underline{\\operatorname{Hom}}_A(X,Y)^r$ for degree-$r$ graded right $A$-linear maps, with differential $df=d_Yf-(-1)^rfd_X$. Write $K(A,d)$ for DG modules with morphisms $H^0\\underline{\\operatorname{Hom}}_A(X,Y)$; its localization functor is $Q_A:K(A,d)\\to D(A,d)$. Let $(B,d)$ be another DG algebra over $\\mathbf Z$ and $N$ a DG $(A,B)$-bimodule: its unital left and right graded actions commute and satisfy $d(an)=d(a)n+(-1)^{|a|}a\\,d(n)$ and $d(nb)=d(n)b+(-1)^{|n|}n\\,d(b)$. For a right DG $A$-module $M$ put $F_NM=M\\otimes_A N$, the quotient of the graded tensor over $\\mathbf Z$ by $ma\\otimes n=m\\otimes an$, with $d(m\\otimes n)=dm\\otimes n+(-1)^{|m|}m\\otimes dn$. For a right DG $B$-module $Y$ put $G_NY=\\underline{\\operatorname{Hom}}_B(N,Y)$ with right $A$-action $(fa)(n)=f(an)$. These constructions induce exact functors [def-weil-triangulated-category] $F_N:K(A,d)\\to K(B,d)$ and $G_N:K(B,d)\\to K(A,d)$, for the mapping-cone triangulated structures: the shift below, and as distinguished triangles those isomorphic to $U\\xrightarrow{u}V\\xrightarrow{i}C(u)\\xrightarrow{-p}U[1]$ for degree-zero chain maps $u$, where $C(u)^i=V^i\\oplus U^{i+1}$ with $d(v,x)=(dv+u(x),-dx)$ and componentwise right action, $i(v)=(v,0)$ and $p(v,x)=x$. Currying defines an isomorphism of complexes of abelian groups, natural in $M,Y$, $$\\underline{\\operatorname{Hom}}_B(F_NM,Y)\\xrightarrow{\\sim}\\underline{\\operatorname{Hom}}_A(M,G_NY),\\qquad g\\longmapsto(m\\longmapsto(n\\longmapsto g(m\\otimes n))).$$ Its inverse evaluates $f$ at $m,n$. Use the shift $X[k]^i=X^{i+k}$ with differential $(-1)^kd_X$ and unchanged right graded action. The shift comparisons $F_N(M[k])\\cong(F_NM)[k]$ and $G_N(Y[k])\\cong(G_NY)[k]$ are the identity on the underlying elements and graded maps. The induced $H^0$ currying bijection is compatible with simultaneous shifts of $M$ and $Y$ under these comparisons. No quasi-isomorphism preservation or derived-functor assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09LN, lemma-tensor-hom-adjunction; 09LM, lemma-tensor; 0FQQ, lemma-hom; 09LR, lemma-bc-homotopy; 09LH, lemma-restriction-homotopy; 0FQN, remark-shift-tensor-no-sign; 0FQR, remark-shift-hom-no-sign."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dg-homotopy-acyclic-localization] separately to $A$ and $B$. Its triangulation clause gives exactly the homotopy categories and shifts in the statement. We use its cone convention $C(u)^i=V^i\\oplus U^{i+1}$, $d(v,x)=(d_Vv+u(x),-d_Ux)$ for $u:U\\to V$, with cone triangle $U\\to V\\to C(u)\\xrightarrow{-p}U[1]$. Its assertions about acyclics and localization are not needed here. In the calculations below write $\\delta h=d h-(-1)^{|h|}h d$ for a Hom differential.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KJ, proposition-homotopy-category-triangulated; cone convention as in Tag 09KF, lemma-the-same-up-to-isomorphisms."
+   }
+  },
+  {
+   "text": "The tensor differential is well defined on the stated quotient. For $|m|=p$, $|a|=s$, its values on $ma\\otimes n$ and $m\\otimes an$ both reduce to\n$$dm\\otimes an+(-1)^p m\\otimes da\\,n+(-1)^{p+s}m\\otimes a\\,dn.$$\nThe right $B$-action is $(m\\otimes n)b=m\\otimes nb$; commuting actions on $N$ preserve the balancing relations. Expanding twice gives $d^2(m\\otimes n)=d^2m\\otimes n+((-1)^{p+1}+(-1)^p)dm\\otimes dn+m\\otimes d^2n=0$. Expanding $d(m\\otimes nb)$ gives $d(m\\otimes n)b+(-1)^{p+|n|}(m\\otimes n)db$. Thus this is a right DG $B$-module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LM, lemma-tensor, preceding construction in section-bimodules-tensor."
+   }
+  },
+  {
+   "text": "For $f:N\\to Y$ of degree $r$, $\\delta f$ is right $B$-linear: expansion at $nb$ cancels the two terms $(-1)^{r+|n|}f(n)db$. Moreover $\\delta^2 f=d_Y^2f-fd_N^2=0$. Precomposition gives $(fa)b=f(ab)$ for $a,b\\in A$, and $(fa)(nb)=f(an)b$ for $b\\in B$, so it defines the stated graded right $A$-action. For $|a|=s$ the differential identity is\n$$(\\delta(fa))(n)=d_Yf(an)-(-1)^{r+s}f(a\\,dn)=((\\delta f)a+(-1)^r f\\,da)(n),$$\nwhere the last equality expands $d_N(an)=da\\,n+(-1)^s a\\,dn$. This verifies the right DG $A$-module Leibniz rule, with no sign in the action itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0FQQ, lemma-hom, preceding construction in section-bimodules-hom."
+   }
+  },
+  {
+   "text": "On any homogeneous right $A$-linear map $h:M\\to M'$ of degree $r$, set $F_N(h)(m\\otimes n)=h(m)\\otimes n$. Balancing follows from $h(ma)=h(m)a$. On a homogeneous $m$ of degree $p$ one has\n$$\\delta(F_Nh)(m\\otimes n)=d_{M'}h(m)\\otimes n+(-1)^{p+r}h(m)\\otimes dn-(-1)^rh(dm)\\otimes n-(-1)^{p+r}h(m)\\otimes dn=F_N(\\delta h)(m\\otimes n).$$\nIdentities, composition and addition are preserved on every generator $m\\otimes n$. Hence $F_N$ acts by chain maps on all Hom complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LM, lemma-tensor, proof."
+   }
+  },
+  {
+   "text": "For a homogeneous right $B$-linear map $h:Y\\to Y'$ of degree $r$, set $G_N(h)(f)=h\\circ f$. This is $A$-linear since $(h\\circ(fa))(n)=h(f(an))$. For $|f|=q$, expansion gives\n$$\\delta(G_Nh)(f)=d_{Y'}hf-(-1)^{r+q}hf d_N-(-1)^rh(d_Yf-(-1)^q f d_N)=(\\delta h)f.$$\nAgain identities, composition and addition are preserved. Both constructions therefore send closed degree-zero maps to such maps and boundaries $\\delta h$, $|h|=-1$, to boundaries. Thus $[u]\\mapsto[F_Nu]$ and $[v]\\mapsto[G_Nv]$ are well-defined additive functors on the respective $H^0$ homotopy categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0FQQ, lemma-hom, proof; Tag 09LM, lemma-tensor, last assertion."
+   }
+  },
+  {
+   "text": "For a degree-$r$ map $g:F_NM\\to Y$ define $\\Phi(g)(m)(n)=g(m\\otimes n)$. For $|m|=p$, $\\Phi(g)(m)$ has degree $p+r$. It is $B$-linear because $g$ is, and $\\Phi(g)(ma)(n)=g(ma\\otimes n)=g(m\\otimes an)=(\\Phi(g)(m)a)(n)$, giving $A$-linearity. Conversely $f\\mapsto((m,n)\\mapsto f(m)(n))$ is additive in each variable and balanced since $f(ma)(n)=f(m)(an)$; it therefore extends uniquely from the generators of the tensor quotient to a degree-$r$ $B$-linear map $\\Psi(f)$. Evaluation gives $\\Psi\\Phi(g)(m\\otimes n)=g(m\\otimes n)$ and $\\Phi\\Psi(f)(m)(n)=f(m)(n)$. These formulas give inverse additive maps in every degree, without any boundedness assumption: an element of the tensor has finite support, whereas a homogeneous Hom map is an unrestricted family over the source degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, omitted proof and bilinear-map hint, expanded explicitly."
+   }
+  },
+  {
+   "text": "For $|g|=r$ and $|m|=p$, expanding either differential gives exactly\n$$(\\delta\\Phi(g))(m)(n)=d_Yg(m\\otimes n)-(-1)^{p+r}g(m\\otimes dn)-(-1)^rg(dm\\otimes n)=\\Phi(\\delta g)(m)(n).$$\nThus $\\Phi$ and its inverse are isomorphisms of complexes. For degree-zero chain maps $u:M'\\to M$ and $v:Y\\to Y'$, both sides of the naturality square send $g$ to the family $(m',n)\\mapsto v(g(u(m')\\otimes n))$. This proves naturality in both variables. The inverse chain maps restrict to inverse maps on degree-zero kernels and degree-zero boundaries, hence induce the claimed natural $H^0$ bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, differential-graded assertion and proof hint."
+   }
+  },
+  {
+   "text": "The tensor shift comparison sends $m\\otimes n$ to the same tensor. If $m$ has original degree $p$, the differential in $F_N(M[k])$ is $(-1)^kdm\\otimes n+(-1)^{p-k}m\\otimes dn$, which equals $(-1)^k d_{F_NM}(m\\otimes n)$ since $p-k$ and $p+k$ have the same parity. For a degree-$r$ element $f$ of $G_N(Y[k])$, its original degree as a map to $Y$ is $r+k$, and\n$$\\delta_{G_N(Y[k])}f=(-1)^kd_Yf-(-1)^rf d_N=(-1)^k(d_Yf-(-1)^{r+k}f d_N).$$\nThese are precisely the shifted differentials on the other sides. The identity comparisons respect the unchanged right actions and are inverse degreewise; on morphisms their naturality follows by evaluating $h(m)\\otimes n$ and $h\\circ f$. They are compatible with iterated shifts because their underlying maps are identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 0FQN, remark-shift-tensor-no-sign, and 0FQR, remark-shift-hom-no-sign."
+   }
+  },
+  {
+   "text": "For a chain map $u:U\\to V$ of right DG $A$-modules the map\n$$F_NC(u)\\longrightarrow C(F_Nu),\\qquad (v,x)\\otimes n\\longmapsto(v\\otimes n,x\\otimes n)$$\nis a graded $B$-linear isomorphism. Its inverse sends $(v\\otimes n,0)$ to $(v,0)\\otimes n$ and $(0,x\\otimes n)$ to $(0,x)\\otimes n$, extending additively; the balancing relations make these assignments well defined. For $(v,x)\\in C(u)^p$, both differentials under this comparison give\n$$(dv\\otimes n+u(x)\\otimes n+(-1)^pv\\otimes dn,\\ -dx\\otimes n+(-1)^px\\otimes dn).$$\nThe second sign uses $|x|=p+1$. The comparison intertwines inclusion and projection and uses exactly the shift comparison of the preceding step on $U[1]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LR, lemma-bc-homotopy, with the cone computation underlying lemma-functor-between-ABC written out."
+   }
+  },
+  {
+   "text": "For a chain map $u:U\\to V$ of right DG $B$-modules, projecting to the two coordinates gives a graded $A$-linear isomorphism $G_NC(u)\\to C(G_Nu)$. A degree-$r$ map into $C(u)$ has components $(a,b)$ where $|a|=r$ and $|b|=r+1$, and its differential has components\n$$(\\delta a+u b,\\ -\\delta b),$$\nby expanding $d_{C(u)}(a,b)-(-1)^r(a,b)d_N$. Conversely $(a,b)$ defines the map $n\\mapsto(a(n),b(n))$, so no preservation of infinite sums or products is required. This comparison also intertwines inclusion and projection, with the shift comparison of step 8. Consequently both functors carry the cone triangles specified in step 1, including their third arrows $-p$, to cone triangles. Every distinguished triangle is isomorphic to one of these by [lem-sfb-dg-homotopy-acyclic-localization]; a functor takes an isomorphism and its inverse to inverse maps. Thus both additive, shift-compatible functors preserve distinguished triangles and are exact.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LH, lemma-restriction-homotopy; Tag 09LR, lemma-bc-homotopy; their cone argument from lemma-functor-between-ABC."
+   }
+  },
+  {
+   "text": "Finally, a closed degree-zero $g:F_NM\\to Y$ shifted simultaneously in source and target represents $g[k]:F_N(M[k])\\to Y[k]$ by the same underlying rule, using step 8. Its curry sends $(m,n)$ to $g(m\\otimes n)$, which is also the rule for $\\Phi(g)[k]:M[k]\\to(G_NY)[k]\\cong G_N(Y[k])$. Thus the shift square agrees already on closed representatives. If $g-g'=\\delta h$ with $|h|=-1$, then after simultaneous shift $g[k]-g'[k]=\\delta((-1)^kh[k])$, since both source and target differentials acquired $(-1)^k$. The chain isomorphism of step 7 carries this boundary to the corresponding boundary on the curried side. Hence the square is well defined and commutes on $H^0$ classes, proving the last compatibility clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, with Tags 0FQN and 0FQR, the canonical no-sign shift comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-homotopy-acyclic-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09LM and 0FQQ, proofs; Tag 09LN, bilinear-map proof hint expanded; Tags 0FQN and 0FQR; Tags 09LR and 09LH, with their cited cone argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom currying over differential graded algebras gives an adjunction of homotopy categories preserving mapping cones and shifts",
+   "results": {
+    "t": "2026-10-24T00:36:21Z",
+    "tool": "leanfinder",
+    "query": "Tensor Hom currying over differential graded algebras gives an adjunction of homotopy categories preserving mapping cones and shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomotopyCategory.singleFunctors",
+     "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+     "CategoryTheory.NatTrans.leftDerivedToHomotopyCategory",
+     "CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq",
+     "DerivedCategory.singleFunctorsPostcompQhIso",
+     "CategoryTheory.NatTrans.rightDerivedToHomotopyCategory",
+     "DerivedCategory.Qh_obj_singleFunctors_obj",
+     "CategoryTheory.Tor'_obj_obj"
+    ],
+    "digest": "2df9434a46b9a260"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.monoidalClosedHomEquiv concerns ordinary modules over a commutative ring; HomologicalComplex.tensorHom and the rigid tensor Hom equivalences do not construct balanced DG bimodule tensor, its Hom action, and their cone/shift-compatible currying."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"homEquiv\"",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "loogle",
+    "query": "\"tensor\", \"homEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.tensorLeftHomEquiv",
+     "CategoryTheory.tensorRightHomEquiv",
+     "CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft",
+     "CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight",
+     "CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation",
+     "CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation",
+     "CategoryTheory.tensorLeftHomEquiv_naturality",
+     "CategoryTheory.tensorRightHomEquiv_naturality"
+    ],
+    "digest": "82eba880d4e8fdbe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.monoidalClosedHomEquiv concerns ordinary modules over a commutative ring; HomologicalComplex.tensorHom and the rigid tensor Hom equivalences do not construct balanced DG bimodule tensor, its Hom action, and their cone/shift-compatible currying."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|tensor.*[Aa]djunction|[Aa]djunction.*tensor|DGModule",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "grep",
+    "query": "tensorHom|tensor.*[Aa]djunction|[Aa]djunction.*tensor|DGModule",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean"
+    ],
+    "digest": "3a13c818cc313579"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.monoidalClosedHomEquiv concerns ordinary modules over a commutative ring; HomologicalComplex.tensorHom and the rigid tensor Hom equivalences do not construct balanced DG bimodule tensor, its Hom action, and their cone/shift-compatible currying."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded bimodule tensor Hom adjunction compatible with chain homotopies",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "leansearch",
+    "query": "Differential graded bimodule tensor Hom adjunction compatible with chain homotopies",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.monoidalClosedHomEquiv",
+     "lTensorHomEquivHomLTensor",
+     "HomologicalComplex.tensorHom",
+     "dualTensorHomEquiv",
+     "HomologicalComplex.mapBifunctorMapHomotopy₂",
+     "CochainComplex.HomComplex.δ_ofHomotopy",
+     "Homotopy",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy"
+    ],
+    "digest": "72461e6d39a1bc34"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.monoidalClosedHomEquiv concerns ordinary modules over a commutative ring; HomologicalComplex.tensorHom and the rigid tensor Hom equivalences do not construct balanced DG bimodule tensor, its Hom action, and their cone/shift-compatible currying."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a differential graded bimodule over arbitrary noncommutative DG algebras tensor and internal Hom induce exact functors on homotopy categories with enriched currying and no sign shift comparisons",
+   "results": {
+    "t": "2026-10-24T01:21:13Z",
+    "tool": "leanfinder",
+    "query": "For a differential graded bimodule over arbitrary noncommutative DG algebras tensor and internal Hom induce exact functors on homotopy categories with enriched currying and no sign shift comparisons",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "DerivedCategory.instLinearHomotopyCategoryIntUpQh",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "HomologicalComplex.HasTensor",
+     "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+     "HomologicalComplex.instHasTensorXTensorUnit"
+    ],
+    "digest": "ee7e71f313706560"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned complex tensor and ordinary closed-monoidal adjunction declarations do not supply the balanced DG bimodule constructions, their right DG actions and cone/shift-compatible enriched currying. Read HomologicalComplex.tensorHom (Monoidal.lean:60) and ModuleCat.monoidalClosedHomEquiv (Closed.lean:29); neither states this item."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|tensorHom|tensor.*[Aa]djunction",
+   "results": {
+    "t": "2026-10-24T01:21:48Z",
+    "tool": "grep",
+    "query": "DGModule|DifferentialGraded|tensorHom|tensor.*[Aa]djunction",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean"
+    ],
+    "digest": "3a13c818cc313579"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned complex tensor and ordinary closed-monoidal adjunction declarations do not supply the balanced DG bimodule constructions, their right DG actions and cone/shift-compatible enriched currying. Read HomologicalComplex.tensorHom (Monoidal.lean:60) and ModuleCat.monoidalClosedHomEquiv (Closed.lean:29); neither states this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Balanced tensor and internal Hom for noncommutative differential graded algebras form an adjunction on homotopy categories",
+   "results": {
+    "t": "2026-10-24T01:21:49Z",
+    "tool": "leansearch",
+    "query": "Balanced tensor and internal Hom for noncommutative differential graded algebras form an adjunction on homotopy categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.monoidalClosedHomEquiv",
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+     "CategoryTheory.exp.adjunction",
+     "Rep.homEquiv",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+     "CategoryTheory.Closed.adj",
+     "CategoryTheory.ihom.instIsLeftAdjointTensorLeft"
+    ],
+    "digest": "190d31daf2f983c6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned complex tensor and ordinary closed-monoidal adjunction declarations do not supply the balanced DG bimodule constructions, their right DG actions and cone/shift-compatible enriched currying. Read HomologicalComplex.tensorHom (Monoidal.lean:60) and ModuleCat.monoidalClosedHomEquiv (Closed.lean:29); neither states this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"homEquiv\"",
+   "results": {
+    "t": "2026-10-24T01:21:49Z",
+    "tool": "loogle",
+    "query": "\"tensor\", \"homEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.tensorLeftHomEquiv",
+     "CategoryTheory.tensorRightHomEquiv",
+     "CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft",
+     "CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight",
+     "CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation",
+     "CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation",
+     "CategoryTheory.tensorLeftHomEquiv_naturality",
+     "CategoryTheory.tensorRightHomEquiv_naturality"
+    ],
+    "digest": "82eba880d4e8fdbe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the rigid-category tensorLeftHomEquiv and tensorRightHomEquiv require duality data and do not construct modules over arbitrary DG algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|dgModule|differential graded",
+   "results": {
+    "t": "2026-10-24T01:22:27Z",
+    "tool": "grep",
+    "query": "DifferentialGraded|DGModule|dgModule|differential graded",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean"
+    ],
+    "digest": "b00540e86065b3f2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DifferentialObject.lean identifies complexes with differential objects, not DG algebra modules or balanced bimodule tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a differential graded module with a bimodule preserves chain homotopies and mapping cones",
+   "results": {
+    "t": "2026-10-24T01:22:28Z",
+    "tool": "leansearch",
+    "query": "Tensoring a differential graded module with a bimodule preserves chain homotopies and mapping cones",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.tensorObj",
+     "CategoryTheory.GradedObject.Monoidal.tensorHom",
+     "CochainComplex.mappingCone.descHomotopy",
+     "HomologicalComplex.tensorHom",
+     "CochainComplex.mappingCone.mapOfHomotopy",
+     "CochainComplex.mappingCone.map_eq_mapOfHomotopy",
+     "CochainComplex.mappingCone.mapHomologicalComplexIso",
+     "CochainComplex.mappingCone.triangleMapOfHomotopy_comm₂"
+    ],
+    "digest": "dd93fc70d8603612"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned complex tensor and ordinary closed-monoidal adjunction declarations do not supply the balanced DG bimodule constructions, their right DG actions and cone/shift-compatible enriched currying. Read HomologicalComplex.tensorHom (Monoidal.lean:60) and ModuleCat.monoidalClosedHomEquiv (Closed.lean:29); neither states this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential graded right modules over a graded ring with differential balanced tensor product with a DG bimodule enriched tensor Hom adjunction",
+   "results": {
+    "t": "2026-10-24T01:22:28Z",
+    "tool": "leanfinder",
+    "query": "Differential graded right modules over a graded ring with differential balanced tensor product with a DG bimodule enriched tensor Hom adjunction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.instHasTensorXTensorUnit_1",
+     "HomologicalComplex.tensorHom",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.instHasTensorOfHasTensorX",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "GradedTensorProduct.instModule",
+     "HomologicalComplex.tensorObj"
+    ],
+    "digest": "5fc0ed819e4c4957"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned complex tensor and ordinary closed-monoidal adjunction declarations do not supply the balanced DG bimodule constructions, their right DG actions and cone/shift-compatible enriched currying. Read HomologicalComplex.tensorHom (Monoidal.lean:60) and ModuleCat.monoidalClosedHomEquiv (Closed.lean:29); neither states this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-bimodule-derived-adjunction",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09LN, lemma-tensor-hom-adjunction; 09LM, lemma-tensor; 0FQQ, lemma-hom; 09LR, lemma-bc-homotopy; 09LH, lemma-restriction-homotopy; 0FQN, remark-shift-tensor-no-sign; 0FQR, remark-shift-hom-no-sign.",
+   "via": [
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-tensor-hom-homotopy-calculus",
+  "worker": "stage1",
+  "summary": "Expanded the DG tensor and Hom actions, differential identities, currying, shift comparisons and cone matrices. Reused the existing DG homotopy triangulation node; the remaining steps are explicit finite calculations from the definitions, so no clause was repackaged as a new node. No change to the statement.",
+  "blueprint": "Inherited proof (3) of det-thm-sf-ctf-stability-direct-images: the prerequisite chain through derived DG tensor-Hom adjunction, Tag 09LT. This item supplies its homotopy-level input: Tags 09LN, 09LM, 0FQQ, 09LR, 09LH, 0FQN and 0FQR. The current latest blueprint direct-images proof was read; the inherited from.node is null and its populated place and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-e13a1197f",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-e13a1197f (reviewer sub-agent of L); spot-checked: FIX: one small B3 fault in the base statement; the mathematics passes. I read the item in full: all 11 steps, the cited lem-sfb-dg-homotopy-acyclic-localization (same unit, unsplit, no cycle; its homotopy relation, shift, cone convention, -p triangles and triangulation clause match steps 1 and 10), and the Stacks dga.tex sources: 09LM, 0FQQ, 09LN (proof omitted, hint expanded in steps 6-7), 0FQN, 0FQR, 09LR, 09LH and lemma-functor-between-ABC. The last one is replaced by explicit cone isomorphisms in steps 9-10, which I accept. I recomputed by hand every sign: tensor balancing, d^2 and B-Leibniz; B-linearity of the Hom differential and the A-action Leibniz (fa) with the left Leibniz on N; the chain-map property of F_N(h) and G_N(h); the currying differential; the no-sign shifts for all k; both cone differentials (with |x|=p+1 and |b|=r+1); and the homotopy sign (-1)^k h[k] in step 11. I tested Z in degree 0, zero modules, u=0 and u=id, k=-1,0,1, odd-degree elements and characteristic 2; nothing fails. The delivery adds no new nodes. The DAG duplicate search (trf currying, coef dg-category base-change and cone triangulation, abc triangulation) finds nothing that states the item. No tool_uses are needed, no SGA is used, the base and live item is still unsplit, and there is no re-split note. The Mathlib searches are recorded with logs. Fault (B3): the statement asserts 'exact functors ... for the mapping-cone triangulated structures' with stmt_deps only def-weil-size-convention, so 'exact' has no definition node and the cone convention is not stated. The fix cites [def-weil-triangulated-category] in the statement and adds it to stmt_deps. It also spells out the shift and the distinguished triangles (those isomorphic to U->V->C(u)->U[1] with third arrow -p, C(u)^i=V^i+U^{i+1}, d(v,x)=(dv+u(x),-dx)), copying the convention of the cited node. The assertion is neither weakened nor strengthened. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dg-tensor-hom-homotopy-calculus.json.; 1 file(s) fixed by the reviewer"
+ }
+}

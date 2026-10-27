@@ -1,0 +1,149 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-finite-tor-ordinary-tensor-complete",
+ "kind": "statement",
+ "title": "Completeness of the ordinary tensor of finite-Tor integral inputs",
+ "statement": "For any scheme X and two finite-Tor constructible integral inputs K,L, the ordinary tensor of the fixed reconstruction calculus is derived complete. No completion comparison or pullback assertion is included.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, Lemmas 6.5.5 and 6.5.9; Stacks proetale.tex Tag 099N, ordinary-operation completeness step"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "For every affine open apply finiteTorAffineProjectiveCharts to both inputs. Its finite tree and common finite pro-etale chart family provide bounded finite-free-retract models P,Q for each input restriction.",
+   "uses": [
+    "lem-sf-finite-tor-affine-projective-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each chart apply projectiveChartOrdinaryTensorModel to obtain a bounded finite-free-retract complex V representing the ordinary restriction of the specified tensor. This is only the K-flat representative comparison and finite totalization calculation.",
+   "uses": [
+    "lem-sf-projective-chart-ordinary-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply boundedProjectiveComplex_complete to V. Transfer completeness through the representative isomorphism: the canonical-unit criterion converts it to invertibility, and naturality and cancellation of isomorphisms transfer that invertibility to the tensor restriction.",
+   "uses": [
+    "lem-sf-bounded-projective-complex-complete-unrestricted",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting chart completeness assertions satisfy affineTreeCompleteDetection. Its finite open-closed induction and affine open descent give completeness on X. The scheme may be non-qcqs and ell need not be invertible in its residue fields.",
+   "uses": [
+    "lem-sf-affine-tree-complete-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-tor-affine-projective-charts",
+  "lem-sf-projective-chart-ordinary-tensor-model",
+  "lem-sf-bounded-projective-complex-complete-unrestricted",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-sf-affine-tree-complete-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5: affine common models, finite totalization, projective devissage and locality, without additional residue-characteristic assumptions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completeness is preserved by ordinary tensor and ordinary pullback for constructible finite Tor complexes",
+   "results": "Eight generic tensor-complex, Tor and flat-module matches; no sheaf quotient-completeness statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion unit is an isomorphism for derived complete complexes and tensor products of constructible finite Tor complexes",
+   "results": "Eight Tor and module adic-completion matches. No ordinary completed-coefficient sheaf tensor/pullback completeness result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans.app",
+   "results": "Naturality and natural-isomorphism component lemmas supply the elementary comparison composition, not operation completeness.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorConstructibleIntegral; completionUnit; ordinaryIntegralDerivedPull; tensorUnit_complete; ordinary tensor complete / ordinary pullback complete",
+   "results": "The source library and Mathlib have no matching ordinary-operation completeness theorem. Project ConstructibleTensorCompletion has additional qcqs and coefficient-invertibility hypotheses; OrdinaryCompletedIntegralPullback requires Noetherian hypotheses. OpenReconstructionEffectivity proves scalar tensor-unit completeness. Blueprint phrase searches find no duplicate node.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PrimitiveCompletionEffectivity",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Completeness of the ordinary tensor of finite-Tor integral inputs in the primitive completion argument",
+   "via": [
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteTorOrdinaryTensorComplete",
+  "file": "lean/Sheaf/SixFunctors/FiniteTorOrdinaryTensorComplete.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.finiteTorOrdinaryTensorComplete",
+  "statement": "theorem finiteTorOrdinaryTensorComplete (X : Scheme.{u})\n    (K L : DerivedCategory (scalarReductionSource l E X))\n    (hK : finiteTorConstructibleIntegral l E X K)\n    (hL : finiteTorConstructibleIntegral l E X L) :\n    IntegralOnSlice.IsComplete l E X none\n      ((IntegralSystemRealization.calculus l E X).integralClosed.tensor.obj (K, L))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T204538-L-2973394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T235909-L-1466849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

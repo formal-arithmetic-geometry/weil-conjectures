@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-diagonal-trace-line-identification",
+ "kind": "statement",
+ "title": "Tensor-unit identification of the finite root tower",
+ "statement": "For a prime l, scheme T, Chern data c for ULift Q_l [def-sp-tower-class-chern], and a section-preserving residue Restriction r [def-sfb-diagonal-trace-models], the additive tower underlying r applied to lineModule c is isomorphic to the actual roots tower. For each original root-module section x and its identified forgotten section x-prime, the isomorphism sends scalarExtensionSection(x) to c.rootForget(x-prime). This assertion constructs no completed root-limit projection, coefficient-unit comparison or restriction functor.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+ },
+ "proof": [
+  {
+   "text": "Use the proved coefficientMap_iso helper in DiagonalTraceCoefficientIdentification: the lifted valuation ring of Q_l is Z_l, and its quotient by l^(n+1) is Z/l^(n+1). The component characterization of systemMap shows coefficientSystemMap is sectionwise an isomorphism, hence an isomorphism of sheaves of rings.",
+   "uses": [
+    "def-sp-tower-class-coefficients",
+    "def-coef-semilinear-system-models",
+    "lem-sfb-diagonal-trace-coefficient-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along this ring-sheaf isomorphism is an equivalence, realized by Mathlib pushforwardPushforwardEquivalence on the identity site equivalence. Thus the unit of c.scalar.ordinaryAdjunction is invertible. Its unit_section equation identifies its section map with scalarExtensionSection, by cancellation of the specified obj_eq transport.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the comparison of r(M) with c.reduction.forget(res(M)) by the section equalities. The restrictions and transitions equations give naturality of these component identity transports, so they give a tower isomorphism. For M = lineModule, compose this with the inverse of the forgotten ordinary unit and c.rootForget. The morphisms equation of c.reduction.forget and the unit_section formula show the specified pure tensor is sent to the identified original root section, proving the asserted normalization.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-coefficients",
+  "def-coef-semilinear-system-models",
+  "lem-sfb-diagonal-trace-coefficient-identification",
+  "def-sp-tower-class-chern",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), ordinary finite scalar restriction; invert the normalized ordinary adjunction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of sheaves of rings is an equivalence and sends a scalar extension pure tensor with one to the original section",
+   "results": "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalarsCongr and generic scalar restriction declarations.",
+   "date": "2026-10-27",
+   "verdict": "Generic ring/module ingredients; no section-preserving strict tower or normalized coefficient/root comparison for these presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules is exact and preserves sections",
+   "results": "SheafOfModules.restrictScalars, obj_val/map_val, instAdditiveRestrictScalars, PresheafOfModules.restrictScalars and restrictScalarsObj.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary scalar restriction ingredients only; no specialization for the project coefficient towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val and restrictScalars_map_val.",
+   "date": "2026-10-27",
+   "verdict": "No complete project-specific statement."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Cc]olimit|[Cc]olimit.*restrictScalars",
+   "results": "ModuleCat/ChangeOfRingsExact.lean: preserves finite colimits; Presheaf/Colimits.lean: component restriction in colimit construction. Also read RingHoms.lean: PadicInt.toZModPow and ker_toZModPow. Searched project declarations and blueprint nodes for normalized coefficient, residue restriction and finite Tate-line identification; the existing parent combines all three with completed cones.",
+   "date": "2026-10-27",
+   "verdict": "Ingredients only; no duplicate of the separated finite construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceCoefficientRestriction",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), finite scalar restriction before the completed projection cones",
+   "via": [
+    "lem-sfb-diagonal-trace-coefficient-restriction",
+    "lem-sfb-diagonal-trace-ordinary-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceLineIdentification",
+  "file": "lean/Sheaf/Paper/DiagonalTraceLineIdentification.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceLineIdentification",
+  "statement": "theorem exists_diagonalTraceLineIdentification (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) (c : Chern l (ULift.{u} (Padic l)) T)\n    (r : Restriction l (ULift.{u} (Padic l)) T) :\n    ∃ e : r.F.obj (lineModule l (ULift.{u} (Padic l)) c) ⋙\n        diagonalForget l T ≅ roots l T,\n      ∀ (n : ℕ) (U : T.ProEtᵒᵖ)\n        (x : c.rootModule.val.obj (op (n, U.unop)))\n        (x' : ((c.reduction.forget.F.obj c.rootModule).obj (op n)).obj.obj U)\n        (v : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U),\n        HEq x x' →\n        HEq v (SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}\n          (coefficientSystemMap l (ULift.{u} (Padic l)) T) c.scalar c.rootModule\n          (op (n, U.unop)) x) →\n        (e.hom.app (op n)).hom.app U v =\n          (c.rootForget.hom.app (op n)).hom.app U x'",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T050535-L-234389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T084404-L-3674634",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

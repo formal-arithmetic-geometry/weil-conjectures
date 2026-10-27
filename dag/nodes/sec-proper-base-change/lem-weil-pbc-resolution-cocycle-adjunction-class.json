@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-resolution-cocycle-adjunction-class",
+ "kind": "statement",
+ "title": "Sheafifying a resolution section cocycle gives its derived-adjunction class",
+ "statement": "Let $f:X\\to S$ be a scheme morphism, $q\\in\\mathbf N$, $F$ an abelian etale sheaf on $X$, $I$ any injective resolution of $F$, and $V\\to S$ etale. Use the prescribed sectionwise homology and cocycle sheafification maps of [def-weil-pbc-raw-restricted-normalization-data]. Set $A=f^{-1}\\mathbf Z[V]$, $J=I[q]$, and let $a:F[0][q]\\xrightarrow{\\sim}QJ$ be the shifted augmentation. Let $e$ be the sections shift and homology evaluation isomorphism of [lem-weil-pbc-raw-restricted-resolution-cocycle]. For every chain map $c:A[0]\\to J$, the image of $e(\\mathrm{chainEvaluation}(c))$ under normalizationResolutionClass at $V$ is $\\mathrm{abelianHigherDirectImageClass}(Q(c)\\gg a^{-1})$, the explicit derived-adjunction class of [def-weil-pbc-abelian-higher-image-class]. This is a statement about the section cocycle and its sheafified class; it contains no rawRestrictedCohomologyComparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 072W, lemma-higher-direct-images; Tags 0DVC and 09T5, lemma-pre-derived-adjoint-functors and lemma-derived-adjoint-functors. Chain-level expansion of the parent proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "def-weil-pbc-abelian-higher-image-class",
+  "lem-weil-pbc-raw-restricted-resolution-cocycle"
+ ],
+ "proof": [
+  {
+   "text": "Form the ordinary termwise adjunct d of c. The proved private unit_single calculation in DerivedAdjunctionSingleZero identifies the derived-adjunction unit on a single object with the ordinary unit and right-derived single unit. Expand the latter, cancel its quotient/single identity comparison, and use naturality of rightDerivedFunctorPlusUnit along c. The result is Q(d) followed by the right-derived unit on I[q].",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-adjunction-single-zero",
+    "def-weil-pbc-ordinary-complex-adjunct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 072W, lemma-higher-direct-images; Tags 0DVC and 09T5, lemma-pre-derived-adjoint-functors and lemma-derived-adjoint-functors. Chain-level expansion of the parent proof."
+   }
+  },
+  {
+   "text": "Apply zeroth homology. Expanding the single/quotient homology comparisons gives singleHomology.inv followed by homology of d and the inverse quotient-homology comparison. Naturality of derived adjunction under postcomposition moves the inverse shifted augmentation to the right. Apply the shifted-unit homology identity, replacing that tail by the complex shift comparison and the two inverse classical resolution comparisons.",
+   "uses": [
+    "lem-weil-pbc-resolution-shifted-unit-homology",
+    "def-weil-pbc-resolution-cocycle-homology-tail"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 072W, lemma-higher-direct-images; Tags 0DVC and 09T5, lemma-pre-derived-adjoint-functors and lemma-derived-adjoint-functors. Chain-level expansion of the parent proof."
+   }
+  },
+  {
+   "text": "Apply the section-cocycle sheafification identity, whose ordinary homology formula is postcomposed with the two prescribed inverse classical resolution comparisons. Evaluate the previous sheaf-morphism equality at the represented identity generator. Expand abelianHigherDirectImageClass and use transitivity with that section identity. All derived-adjunction, localization and single-homology comparisons in this combination are proved in the item module.",
+   "uses": [
+    "lem-weil-pbc-resolution-section-cocycle-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 072W, lemma-higher-direct-images; Tags 0DVC and 09T5, lemma-pre-derived-adjoint-functors and lemma-derived-adjoint-functors. Chain-level expansion of the parent proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-adjunction-single-zero",
+  "def-weil-pbc-ordinary-complex-adjunct",
+  "lem-weil-pbc-resolution-shifted-unit-homology",
+  "def-weil-pbc-resolution-cocycle-homology-tail",
+  "lem-weil-pbc-resolution-section-cocycle-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Ordinary/derived adjunct identity proved using existing unit_single, faithful inclusion and chain-map composition; single/quotient homology identity proved by expanding the canonical comparison factors. Separate ordinary sheafification and shifted resolution-unit comparisons, combined by evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation on a shifted injective chain representative commutes with the augmentation and the cohomology shift isomorphism",
+   "results": "OK 8 hits, including InjectiveResolution.extMk_hom, extEquivCohomologyClass_symm_mk_hom and CochainComplex.liftCycles_shift_homologyπ.",
+   "date": "2026-10-25",
+   "verdict": "Generic Ext and shift identities; none compares the prescribed etale section maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "OK 8 hits, including isoRightDerivedObj, rightDerived_app_eq, and hom/inv naturality.",
+   "date": "2026-10-25",
+   "verdict": "Resolution comparisons exist, but not the chain-evaluation normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso",
+   "results": "OK 8 hits, including ShortComplex.PreservesHomology.mapHomologyIso and LeftHomologyData.mapHomologyIso_eq.",
+   "date": "2026-10-25",
+   "verdict": "Generic homology comparisons, no etale evaluation or derived-adjunction class formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The class of a section cocycle of an injective resolution agrees with the canonical derived adjunction class of the corresponding chain map.",
+   "results": "OK 8 hits, including InjectiveResolution.extEquivCohomologyClass_extMk and extMk.",
+   "date": "2026-10-25",
+   "verdict": "Generic Ext/cocycle comparison; no match for the prescribed sectionwise sheafification and adjunction maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionClass",
+  "date": "2026-10-25",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Sheafifying a resolution section cocycle gives its derived-adjunction class; fixed-resolution part of the canonical class normalization in the direct-image finiteness argument.",
+   "via": [
+    "lem-weil-pbc-raw-restricted-resolution-class",
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionCocycleAdjunctionClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionCocycleAdjunctionClass.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionCocycle_adjunction_class",
+  "statement": "theorem resolutionCocycle_adjunction_class {X S : Scheme.{u}} (f : X ⟶ S)\n    (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution F) (V : S.Etale)\n    (c : (CochainComplex.singleFunctor _ 0).obj\n      ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V)) ⟶\n        (normalizationShiftedResolution F I q).obj) :\n    (normalizationResolutionClass f q F I).app (op V)\n      ((normalizationResolutionCocycleIso f q F I V).hom\n        (RawRestrictedComparison.chainEvaluation f V _ c)) =\n      abelianHigherDirectImageClass f q F V\n        (DerivedCategory.Plus.ι.preimage\n          (X := (DerivedCategory.Plus.singleFunctor _ 0).obj\n            ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V)))\n          (Y := DerivedCategory.Plus.Q.obj (normalizationShiftedResolution F I q))\n          (DerivedCategory.Q.map c) ≫\n          (normalizationShiftedAugmentation F I q).inv) ",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T095515-L-3431351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T002143-L-61660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

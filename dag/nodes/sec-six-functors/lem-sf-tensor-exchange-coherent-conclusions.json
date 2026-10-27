@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-tensor-exchange-coherent-conclusions",
+ "kind": "statement",
+ "title": "Coherent tensor exchange on a normalized presentation",
+ "statement": "Fix a finite-field datum $D$, coefficient datum $A$, finite extension $E/\\mathbf Q_\\ell$, positive $n$, a six-functor operation datum six, a separated finite-type morphism $f:X\\to Y$ between finite-type schemes over $D.k$, a constructible exceptional-adjunction System $S$, a compactification $c$, and a Presentation $p$ with NormalizedDatum(six,S,c,p) [def-fix-six-functor-datum, def-sf-tensor-exchange-presentation]. For every stage $s$ and its exceptional-admissibility proof $h$ there are Conclusions $q(s,h)$ for $p.stage(s)$: the exchange is a natural isomorphism with inverse equal to the five-arrow evaluation transpose and commuting with both signed Hom shifts. These Conclusions can be chosen together so that (i) every finite coefficient stage has RingShifts for its specified ringed model; (ii) every Change between the stage models satisfies Compatible, the equation between the two actual inverse-exchange routes; and (iii) CoefficientComparisons holds for these same Conclusions and the four specified System coefficient witnesses, including their shift compatibility and the existing field-comparison invertibility clauses. No construction or existence of normalized presentations is asserted.",
+ "stmt_deps": [
+  "def-sf-tensor-exchange-presentation",
+  "def-fix-six-functor-datum",
+  "def-sf-tensor-hom-transposition-data",
+  "def-weil-exceptional-inverse-image",
+  "def-nagata-compactification"
+ ],
+ "proof": [
+  {
+   "text": "On the normalized presentation form the five Hom bijections. Transposing identities produces inverse representatives; test-object naturality proves both composites are identities. Uncurrying the identity gives evaluation, hence the inverse component is precisely Model.inverseComponent. Naturality of the five arrows in M,N proves bifunctor naturality. The finite stalk test is an equivalent detection of invertibility; integrally use completeness and derived Nakayama, rationally the exact integral-generation argument, and at common coefficients descend the pair to one finite field.",
+   "uses": [
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula",
+    "lem-sf-ambient-completed-tensor-adjunction",
+    "lem-sf-tensor-exchange-ctf-domains",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose both inverse-exchange coefficient routes. The projection comparison, evaluation transposes and exceptional counit equation identify them for every Change. The actual System coefficient functors provide the four coefficient witnesses with the specified normalization and the field-stage invertibility clauses. The coefficient-transposition and localization/common-stage equations descend exactly these morphisms.",
+   "uses": [
+    "lem-sf-tensor-hom-coefficient-transposes",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the signed source and unsigned target shift equations through the five adjunction bijections. The ringed signed transpositions pin the finite RingShifts. Exact completion and coefficient descent carry the shift structures to the other stages. Retain shift compatibility only on the four specified coefficient witnesses; arbitrary tensor comparisons are not required to commute with shifts.",
+   "uses": [
+    "lem-sf-tensor-hom-signed-transposes",
+    "lem-sf-tensor-hom-coefficient-transposes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-sf-ambient-completed-tensor-adjunction",
+  "lem-sf-tensor-exchange-ctf-domains",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sf-tensor-hom-coefficient-transposes",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-tensor-hom-signed-transposes"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 (five adjunction bijections), Step 2, coefficient compatibility and the integral, rational and common-stage paragraphs"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 (five adjunction bijections), Step 2, coefficient compatibility and the integral, rational and common-stage paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom exchange for an exceptional adjunction from a projection formula",
+   "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.coev_expComparison, CategoryTheory.exp.adjunction, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.exponentialIdealReflective, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.bijection, CategoryTheory.ExponentiableMorphism.coev_def",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Iso",
+   "results": "12 hits: CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIso|CoefficientClosedStructure|inverseComponent",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor internal Hom exchange isomorphism from an exceptional adjunction and projection formula with coefficient and shift compatibility",
+   "results": "8 hits: CategoryTheory.exp.adjunction, CategoryTheory.ihom.adjunction, dualTensorHomEquivOfBasis, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, lTensorHomEquivHomLTensor, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.Types.tensorProductAdjunction",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction/closed-category results only; no exact normalized geometric coefficient-stage statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorAdjunctionExchange",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Step 1 (five adjunction bijections), Step 2, coefficient compatibility and the integral, rational and common-stage paragraphs",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.TensorExchangeCoherentConclusions",
+  "file": "lean/Sheaf/SixFunctors/TensorExchangeCoherentConclusions.lean",
+  "declaration": "WeilConjectures.TensorAdjunctionExchange.coherent_conclusions",
+  "declarations": [
+   "WeilConjectures.TensorAdjunctionExchange.coherent_conclusions"
+  ],
+  "statement": "theorem coherent_conclusions (D : FiniteFieldDatum.{u}) (A : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic A.l) E] [FiniteDimensional (Padic A.l) E] (n : ℕ) (hn : 1 ≤ n) (six : SixFunctorOperationDatum D A E n hn) {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (S : System A.l A.Qbar D A.different (f := f.hom.left)) (c : Compactification f.hom.left) (core : Presentation A.l A.Qbar D A.different f.hom.left S c) (_normalized : NormalizedDatum D A E n hn six f S c core) : ∃ conclusion : ∀ (s : Stage.{u} A.l) (_h : Admissible A.l A.Qbar D f.hom.left c s), Conclusion A.l A.Qbar (core.stage s), (∀ (L : FieldStage.{u} A.l) (m : ℕ+) (h : Admissible A.l A.Qbar D f.hom.left c (.finite L m)), Nonempty (RingShifts A.l A.Qbar (core.ring (.finite L m)) (conclusion (.finite L m) h))) ∧ (∀ {s t : Stage.{u} A.l} {TX : C.{u} A.l A.Qbar X.obj.left s ⥤ C.{u} A.l A.Qbar X.obj.left t} {TY : C.{u} A.l A.Qbar Y.obj.left s ⥤ C.{u} A.l A.Qbar Y.obj.left t} (a : Change A.l A.Qbar (core.stage s) (core.stage t) TX TY), Compatible A.l A.Qbar a) ∧ Nonempty (CoefficientComparisons A.l A.Qbar D A.different f.hom.left S c core.stage conclusion)",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d65d2",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162044-L-231227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d65d2",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162044-L-231227",
+  "kind": "interface",
+  "note": "independent cc review: pp.all #print of the 19 moved decls + tensor_adjunction (clone S1 item compiled in base sandbox) vs delivered Presentation/item: identical; sorry halves read against Model/RingModel/Projection/NormalizedDatum pinning; importer VerdierHomChainComposition rc 0"
+ }
+}

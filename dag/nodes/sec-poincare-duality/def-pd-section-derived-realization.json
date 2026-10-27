@@ -20,9 +20,47 @@
   "def-pc-kflat-complex",
   "def-pd-section-derived-tensor-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the existence-and-uniqueness theorem for section tensor representatives. Select its unique q as qTensor. Its three clauses give exactly the termwise-equivalence normalization, invertibility when either argument is K-flat, and existence of the degree-zero regular-unit identification required by this definition. The named existence-and-uniqueness theorem determines this construction completely.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "06YU definition-derived-tor; existing SectionDerivedRealization.lean:94-99, 178-185"
+   }
+  },
+  {
+   "text": "For each f, apply the existence-and-uniqueness theorem for the tensor-pullback representative comparison, using the q fixed in the preceding step. Select its unique d as tensorPullComparison. Its displayed all-complex square is exactly TensorPullRepresentativeCondition, so this selects the specified isomorphism without an additional choice of normalization. All other definitions, their statements, and their existing constructions remain as recorded; the two existence-and-uniqueness inputs determine these objects uniquely. The totalPullComparison definition is directly the signed mapBifunctorComparison for the fixed ordinary oplax mate. Its former leading and trailing transports through totalTensor_obj are identities; their removal preserves the comparison and representative condition.",
+   "uses": [
+    "lem-pd-section-tensor-pull-representatives-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "07A4 lemma-pullback-tensor-product; existing SectionDerivedRealization.lean:207-244"
+   }
+  },
+  {
+   "text": "Name the normalization, either-argument K-flat invertibility and regular-unit clauses separately, and define TensorRepresentativeCondition as their original right-associated conjunction. The cached internal localization tensorator has exactly the original native components. Unfolding the predicates and using that component equation recovers the previous formulas, with no change of quantifiers or mathematical condition.",
+   "uses": [
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-tensor-representatives-exists-unique",
+  "lem-pd-section-tensor-pull-representatives-exists-unique",
+  "def-pd-section-derived-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Assembly of the fixed localization and ringed-operation constructions, the uniquely normalized tensor and tensor-pullback comparisons, and unchanged representative clauses. D7 (2026-10-26): Stacks 06YU and 07A4; remove identity transports and use named normalization, K-flatness and regular-unit predicates."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -86,7 +124,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-thm-sf-verdier-exchange",
  "lean": {
@@ -112,7 +161,10 @@
    "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_hasExactSequentialColimits",
    "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedOpenAdjunction",
    "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedPullbackComposition"
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedPullbackComposition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.TensorRepresentativeNormalization",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.TensorRepresentativeIsIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.TensorRepresentativeUnit"
   ],
   "file": "lean/Sheaf/Paper/SectionDerivedRealization.lean",
   "statement": "def tensorPullComparison {X Y : Scheme.{u}} (f : X ⟶ Y) : tensor Λ Y ⋙ derivedPullback Λ f ≅ ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X",
@@ -123,12 +175,12 @@
   "note": "Builds on the separately owned canonical tensor-data module. The representative conditions retain the complete local normalization and K-flat/unit clauses. derivedAdjunction derives the ordinary ringed adjunction independently of D(E), using its canonical exact-left-derived comparison; derived_homEquiv remains a separate compatibility theorem in the comparison node."
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a2d2e275d",
-  "group": "NF",
+  "reviewer": "NT-cc-NH-bf2c0fec8",
+  "group": "NH",
   "result": "pass",
-  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bf2c0fec8 (reviewer sub-agent of L); spot-checked: Read item, both new unsplit nodes, cited statements (def-pd-section-derived-tensor-data, def-pd-proetale-section-module-functors, def-pc-kflat-complex, sk-def-sfb-derived-tensor-hom) and the exact Lean sources: SectionDerivedRealization.lean 58-99 and 187-237, SectionDerivedTensorData (κ=mapDerivedCategoryFactors, c=tensorComparison, ℓ=localizedTotalComparison, LF=mapDerivedCategory) and KFlatIndependentCoefficients:150. Node 1 matches TensorRepresentativeCondition clause by clause, with composition directions verified: (1) holds on all E-images, (2) gives invertibility when either factor is independent-coefficient K-flat with no flat terms required, (3) asserts only that a unit iso exists; the ∃! is per scheme. Node 2 matches TensorPullRepresentativeCondition: LF(q_Y)≫ε≫Q_X(b) = d≫T(ε,ε)≫q_X, b is totalPullComparison built from the oplax δ, and it holds for all complex pairs. Both statements are true by Stacks 06YU/07A4: uniqueness on flat-term K-flat resolutions plus naturality, and the all-complex square by precomposing with an isomorphism. Checked small cases (empty scheme, Λ=0, zero complexes, f=id). Neither node depends on the item, so there is no cycle. The item's statement is unchanged and its two assembly steps are exactly the qTensor/tensorPullComparison choices. No duplicate found: the existing comparison nodes all depend on the item. The extraction was mandated by the human. Batch-5 check: both cited nodes are general foundational tensor/pullback normalization extracted from the item's own construction, outside the trace-formula and Poincaré-duality assumption statements and not steps of their proofs, so they are accepted. Maintainer note: packaging stripped the required lean bindings; set them to Sheaf.Paper.SectionDerivedRealization tensor_representatives and tensorPullComparison_existsUnique, both still sorry."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -139,22 +191,20 @@
   "note": "Re-delivery after RETURN (e3bb1be5). F1 fixed: derivedAdjunction is now ((adjunction Λ f).derivedAdjunction).ofNatIsoLeft (pullback.leftDerivedFunctorIsoMapDerivedCategory), the canonical derived ringed adjunction (Adjunction.lean:173), so derived_homEquiv has content and projection is the α of lem-weil-pbc-ringed-projection-mate-exact. F2 fixed: new def node def-pd-section-module-operations-data (module SectionModuleOperationsData, 17 transparent abbrevs, 0 sorry, only def stmt_deps) replaces the two theorem nodes in the stmt_deps of the item and def-pd-proetale-section-module-functors; the theorems are now proof_deps. Aliasing rather than moving is accepted (no landed module rewritten, no duplicate construction). F3 fixed: clause-by-clause second reading. §1(C) statement_change only makes the canonical ringed adjunction explicit (Stacks 07A6/0B56); citers lem-pd-condensed-proper-projection-formula and det-thm-sf-pf-adic-projection checked, holds:true correct. All five modules compile clean with nt_compile --json (9.6/22.4/25.0/32.4/22.3 s). lean.statement verbatim for all five nodes; all declarations present; no sorry in definition bodies; docstrings with source and blueprint tags; no extra assumptions or universe restrictions. Minor: conjugatePullIso and conjugatePushIso are now unused."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "T8",
+  "reviewer": "C-13f07",
+  "group": "D7",
   "result": "pass",
-  "landing": "20261019T005431-L-2770861",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_hasExactSequentialColimits",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.tensorPullComparison_existsUnique",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.tensor_representatives"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.tensorPullComparison_existsUnique",
-   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.tensor_representatives"
-  ]
+  "landing": "20261026T130328-L-3449208",
+  "kind": "interface",
+  "note": "independent cc review: section_tensor_representative_exists proof and the refactored TensorRepresentativeCondition/totalTensor/tensorUnit/localizedTotalComparison/totalPullComparison against their published bodies (probe equalities and ↔) and the node statements; 17-module cone incl. transitive users compiled against the delivery"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-pd-section-derived-realization",
+  "worker": "stage1",
+  "summary": "NH repair: read the restored exact Lean signatures and both normalization predicates; expose tensor_representatives and tensorPullComparison_existsUnique as separate statement-only unsplit nodes with the required declaration bindings. Keep the item statement and all definitions unchanged; two short assembly steps cite the new obligations. New nodes avoid dependence on this definition, so no construction cycle is introduced.",
+  "blueprint": "No imported blueprint ancestor exists for this seeded-target construction (ancestor query returns None). The extraction serves the q and tensor-pullback normalization clauses in this node, under the recorded Verdier-exchange unit; no chapter or unit route is changed."
  }
 }

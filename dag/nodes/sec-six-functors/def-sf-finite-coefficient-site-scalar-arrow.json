@@ -13,9 +13,49 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
   "place": "last paragraph: transport the specified internal-Hom comparison to the pro-etale site; Stacks 00YV, 06YN, 07A4, 08J9"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the sequence-system coefficient quotient with the direct constant-sheaf quotient using compactSupportQuotient_eq. Its scalar-unit naturality constructs the identity-on-underlying-sections square for the constant-module encoding equivalence.",
+   "uses": [
+    "lem-weil-compact-support-coefficient-transition",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification adjunction unit canonically identifies intrinsic realization followed by encoding with the identity. Conjugate the fixed-coefficient comparison/restriction square by these units, and reflect it through the fully faithful encoding. Its action on local generators follows from the comparison adjunction unit equation. Transposing through the two inverse-image adjunctions shows these generators determine every morphism, proving uniqueness.",
+   "uses": [
+    "lem-sf-intrinsic-realization-origin-comparison",
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization preserves the preceding encoding/restriction compatibility. This follows from the compositor associativity and naturality laws for exact derived functors. The scalar adjunction mate of the encoding square is invertible because both encoding functors are equivalences.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the mate-normalization identity to the derived comparison and encoding squares. All factors other than the encoded beta are isomorphisms, including the proved fixed-ring site scalar mate pbcComparisonReductionMap. Cancel these factors and reflect isomorphisms through the derived encoding equivalence.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-witness-compatibility",
+  "lem-sf-intrinsic-realization-origin-comparison",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-weil-pbc-proetale-constant-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final site-transport paragraph. Use the already proved fixed-ring site mate and the canonical constant-module encoding; compositor associativity and mate normalization give the intrinsic comparison."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -120,7 +160,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "lean": {
@@ -163,5 +214,15 @@
   "group": "Q59",
   "result": "pass",
   "note": "Read all 5 modules, all 5 node records (chain-tensor node missing from snapshot; read from commit 5470a8b8 by read-only git show), dependency declarations and blueprint source. All node clauses rendered on both sites, ends checked: evaluation-defined v (étale etaleFiniteHomCanonical and pro-étale finiteIntrinsicReductionHom unfold to coefficientBaseChangeHom with the uniqueness clause's data), both ends in ctf plus IsIso, FiniteHomEvaluation identity and uniqueness, CoefficientEvaluationCompatible, both r<=m cocycles, beta/nu site square. Hypotheses exact (separated finite type over k, l != p, n>=m>=1 via n+1, m+1); single universe; edge cases (empty X, n=m, residue field, zero objects) covered. No sorry data in defs, no Nonempty.some, published étale and intrinsic pro-étale categories used, new files only; records, verbatim statements, declaration lists, H12 fields, report sections OK. nt_compile.py on all 5 files: exit 0, no messages (EtaleFiniteCoefficientHomArrow 42-49 s, near the 60 s limit). Notes: snapshot omitted the chain-tensor node; stage 3 needs a lemma identifying the thick-locus lemma's tensor comparison with ExceptionalCoefficients.tensorIso."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261025T033933-L-175859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

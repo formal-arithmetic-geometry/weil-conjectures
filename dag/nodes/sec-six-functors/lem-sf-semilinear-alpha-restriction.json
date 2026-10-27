@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-semilinear-alpha-restriction",
+ "kind": "statement",
+ "title": "Restriction of intrinsic semilinear alpha to the target open",
+ "statement": "For arbitrary strict semilinear coefficient systems and a proper/open commutative square k p = r i, the restriction of the intrinsic ordinary alpha along k, followed by the inverse open unit for k, is the inverse canonical pullback-square comparison followed by r-star of the inverse open unit for i. No cartesianness of the square is assumed. Use the actual normalized operations of [def-sp-varying-ring-operations] and [def-sp-varying-ring-proper-open-arrows].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7F, ordinary alpha-level open restriction; agent-written extension to strict semilinear systems"
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "For the cartesian open beta, apply the open adjunction Hom equivalence to its specified inverse. Its transpose is the pullback of the original open unit followed by the inverse square comparison. Invert this equality of isomorphisms to obtain the restriction formula for beta.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a clopen s, regard extension, pullback and pushforward as an adjunction triple. The specified moduleOpenToP is the triple comparison. Its value on an object pulled back along s is the open counit followed by the direct-image unit. Postcompose the restriction of modulePi with this invertible comparison, and use the open right triangle identity. Thus pull(s) of modulePi is the open unit on pull(s) of the object.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open composition comparison is the left-adjoint comparison conjugate to the inverse-image compositor. Its unit-conjugation identity, inverted, computes pull(s b) of the comparison followed by the inverse composite open unit. Naturality and the projector restriction formula then compute the restriction of the entire section-projection factor. Equality transport gives the same formula with independently named k=s b and r=s a.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved ordinary inverse-image associativity calculation ordinary_coherence in SemilinearCompositorCoherence, allowing independently named intermediate and total composites by equality transport. Apply it to s,b,p and s,a,i. Expand each square comparison using moduleSquareG_eq. Cancel the common total-composition comparison and the mutually inverse intermediate compositors. This proves that the pullback-factored square comparison is the original square comparison.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-sf-semilinear-compositor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "First prove the naturality word for arbitrary functors, and apply it to an arbitrary clopen factorization with its beta-projector-compositor word. Then take a and b to be the second and first projections of V times_Z W and s the canonical clopen lift. Expand the defining word for moduleAlpha. Apply the section-factor restriction formula, move the incoming inverse-image compositor past beta by naturality, and substitute beta restriction. Naturality of the outgoing pullback comparison moves the inverse open unit for i to the far right. The factored square identity from the previous step leaves exactly the asserted inverse square followed by pull(r) of the inverse open unit.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-cbc-strict-tower-proper-open-arrows"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-sp-varying-ring-operations",
+  "lem-sf-semilinear-compositor-coherence",
+  "def-cbc-strict-tower-proper-open-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7F; adjunction-triple and unit-conjugation calculation by J8, using the existing ordinary compositor associativity proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the clopen alpha open extension inverse image map equals the inverse open adjunction unit",
+   "results": "8 hits: topological Opens adjunction and inclusion identities; no match for the intrinsic moduleAlpha restriction formula.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "1 hit: CategoryTheory.Adjunction.leftAdjointCompIso_assoc, Mathlib.CategoryTheory.Adjunction.CompositionIso.",
+   "date": "2026-10-24",
+   "verdict": "partial: supplies adjoint composition coherence once section-normalized direct-image associativity is proved; does not directly state the moduleSquareG cube"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleSquareG.*cube|moduleAlpha.*restriction",
+   "results": "0 hits in the search service. Local rg finds moduleSquareG_eq and moduleBetaInvApp, but no existing public alpha restriction or ordinary cube-coherence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the clopen alpha open extension inverse image map equals the inverse open adjunction unit",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app in Mathlib.AlgebraicGeometry.Modules.Sheaf and open-map adjunctions in Mathlib.Topology.Category.TopCat.Opens. These concern Zariski module restriction and topological opens, not intrinsic alpha on semilinear pro-etale module systems.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearAlphaPullback",
+  "date": "2026-10-24",
+  "group": "R7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sf-semilinear-alpha-pullback",
+   "place": "Proof, step 4",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearAlphaRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearAlphaRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.moduleAlpha_restriction",
+  "statement": "theorem moduleAlpha_restriction\n    {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (w : k ≫ p = r ≫ i) (M : Modules R φ W) :\n    (pull R φ k).map ((moduleAlpha R φ k r p i w).app M) ≫\n        inv ((moduleJAdj R φ k).unit.app ((pull R φ r).obj M)) =\n      (moduleSquareG R φ k r p i w).inv.app ((extension R φ i).obj M) ≫\n        (pull R φ r).map (inv ((moduleJAdj R φ i).unit.app M))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T020102-L-2538403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T064454-L-2184809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

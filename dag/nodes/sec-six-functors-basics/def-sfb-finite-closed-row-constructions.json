@@ -1,0 +1,182 @@
+{
+ "id": "def-sfb-finite-closed-row-constructions",
+ "kind": "definition",
+ "title": "Shared finite closed restriction and signed-row constructions",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $A$ be a sheaf of commutative rings on its small pro-etale site [def-weil-pbc-proetale-site], and write $\\mathcal M_X=\\operatorname{Mod}(A)$ [def-weil-sheaf-of-modules-category]. Use the compatible small models and coefficient universes of that site. For any scheme morphism $i:Z\\to X$, put $E_i=i_*i^*:\\mathcal M_X\\to\\mathcal M_X$, using the actual module inverse image with coefficients $i^{-1}A$ and its direct image [def-weil-proetale-inverse-image, def-weil-pbc-proetale-operations]. Put $\\eta_i:\\mathrm{id}\\to E_i$ equal to the unit of the normalized adjunction [def-sfb-proetale-unit-normalized-adjunction].\n\nFor $m\\geq0$ and an ordered family $(W_a\\to X)_{a\\in\\{0,\\ldots,m-1\\}}$, set $W_s=\\prod_{a\\in s,X}W_a$ for every subset $s$, with its structural morphism $i_s:W_s\\to X$. This is the iterated fibre product [def-pc-fibre-product]; the empty product is $X\\xrightarrow{\\mathrm{id}}X$. Put $I_p=\\{t:\\{0,\\ldots,p\\}\\hookrightarrow_{\\mathrm{ord}}\\{0,\\ldots,m-1\\}\\}$ for $p\\geq0$. Define the row term endofunctor by the pointwise finite product $D^p=\\prod_{t\\in I_p} E_{i_{\\mathrm{im}(t)}}$, with projections $\\pi_t$. It is the finite biproduct in the additive module category [def-weil-additive-category]; the empty product is the zero functor. Given natural transformations $r_{s,u}:E_{i_s}\\to E_{i_u}$ for all pairs of subsets, define $d^p:D^p\\to D^{p+1}$ by its components\n$$\\pi_t\\circ d^p=\\sum_{j=0}^{p+1}(-1)^j r_{\\mathrm{im}(t\\circ\\delta_j),\\mathrm{im}(t)}\\circ\\pi_{t\\circ\\delta_j},$$\nwhere $\\delta_j:\\{0,\\ldots,p\\}\\hookrightarrow_{\\mathrm{ord}}\\{0,\\ldots,p+1\\}$ skips $j$. Thus $D^p=0$ for $p\\geq m$. This defines the signed morphisms for supplied $r$; the construction of a row functor below takes an actual complex-valued functor as input.\n\nIndependently, let $R:\\mathcal M_X\\to\\mathrm{CoCh}(\\mathcal M_X)$ be additive [def-weil-pbc-additive-functor], with integer cochain complexes as in [def-weil-abstract-derived-category]. For $K\\in\\mathrm{CoCh}(\\mathcal M_X)$ define $B_R(K)^{p,q}=R(K^q)^p$, with horizontal differential $d_{R(K^q)}^p$ and vertical differential $R(d_K^q)^p$. This is the termwise double complex with horizontal row degree first, in the commuting convention [def-sp-double-complex-total]. Define\n$$\\operatorname{Tot}_R(K)^n=\\bigoplus_{p+q=n}R(K^q)^p,\\qquad d|_{(p,q)}=d_{R(K^q)}^p+(-1)^pR(d_K^q)^p.$$\nOn a morphism $h:K\\to L$ the double-complex map at $(p,q)$ is $R(h^q)^p$, and the total map is induced by these maps on diagonal coproduct inclusions. Use the ordinary coproduct total, also for unbounded $R,K$; the coproducts exist in module sheaves [lem-pur-ringed-site-grothendieck-abelian]. For a finite row supported in $0\\leq p<m$, each diagonal has at most $m$ nonzero summands.\n\nFor $g:Y\\to X$ define $g^*_{\\mathrm{CoCh}}(K)^q=g^*(K^q)$, with differential $g^*(d_K^q)$ and the same termwise rule on morphisms, in module sheaves over $g^{-1}A$ [def-weil-pbc-proetale-operations]. Define the pulled-back ordered family by $(Y\\times_XW_a\\to Y)_a$. Equip these prolongations with zero-morphism preservation from the actual inverse/direct-image adjunction [def-sfb-proetale-unit-normalized-adjunction, lem-sfb-adjoint-functors-preserve-zero-morphisms]; the composite $E_i$ preserves zero morphisms by applying its two factors successively. These are construction conventions; covering, exactness, and base-change comparison assertions belong to their separate statement nodes.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "def-pc-fibre-product",
+  "def-weil-additive-category",
+  "def-weil-pbc-additive-functor",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sfb-adjoint-functors-preserve-zero-morphisms"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, for actual closed units; signed closed-row construction in the displayed statement of lem-sfb-closed-restriction-total-pullback; homology.tex Tag 0133 for the termwise total convention. Relocation of the original helpers of lem-sfb-finite-closed-cover-resolution, as required by return F1/F2 on immutable head 19766f6117ab."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed row of module sheaves on a finite closed family with actual adjunction unit augmentation and finite total complex",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.Sheaf.adjunction_unit_app_val, SheafOfModules.unit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit.",
+   "date": "2026-10-24",
+   "verdict": "generic ingredients exist and are reused; no complete signed closed-row construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"mapIso\"",
+   "results": "3 hits: HomologicalComplex₂.total.mapIso, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex₂.total.mapIso_inv.",
+   "date": "2026-10-24",
+   "verdict": "generic total construction exists and is reused"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteClosedRestriction|finiteClosedUnit|finiteClosedTerms; Mathlib Algebra/Homology, project WeilConjectures and Sheaf; blueprint_refs search finite closed row",
+   "results": "Mathlib: 0 hits. WeilConjectures: 0 hits. Sheaf: the exact existing helpers in FiniteClosedCoverResolution.lean. blueprint_refs: 0 blueprint nodes. DAG: cover-resolution theorem owns helpers but depends on this item.",
+   "date": "2026-10-24",
+   "verdict": "relocate existing helpers under a definition owner; do not duplicate them or cite the downstream theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered closed restriction endofunctors on proetale module sheaves, alternating face maps, and direct sum total complex",
+   "results": "8 hits: AlgebraicTopology.DoldKan.PInfty, CategoryTheory.Abelian.DoldKan.N, CategoryTheory.Idempotents.DoldKan.N, AlgebraicTopology.DoldKan.N₁, AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, AlgebraicTopology.DoldKan.N₂, AlgebraicTopology.DoldKan.Γ₀.obj, CategoryTheory.Idempotents.DoldKan.Γ_obj_obj",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: no complete finite closed-row construction"
+  },
+  {
+   "tool": "grep",
+   "query": "def totalFunctor|def mapHomologicalComplex|HasColimits|HasFiniteBiproducts",
+   "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: no complete finite closed-row construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite closed Cech row of module sheaves with alternating differential and total cochain complex",
+   "results": "8 hits: HomologicalComplex.alternatingConst, CochainComplex.of, AlgebraicTopology.alternatingCofaceMapComplex, AlgebraicTopology.AlternatingCofaceMapComplex.obj, AlgebraicTopology.AlternatingCofaceMapComplex.objD, CochainComplex.of_d, Rep.FiniteCyclicGroup.moduleCatCochainComplex, CochainComplex.cm5b.I",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: no complete finite closed-row construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.totalFunctor, Functor.mapHomologicalComplex",
+   "results": "0 hits: . loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+   "date": "2026-10-24",
+   "verdict": "query rejected: unknown identifier; corrected by the later totalFunctor name search"
+  },
+  {
+   "tool": "grep",
+   "query": "def totalFunctor|def mapHomologicalComplex|def flipFunctor|def total|d₁|d₂",
+   "results": "5 hits: 61, 67, 73, 74, 75 Subdirectory: Algebra/Homology/TotalComplex.lean",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: no complete finite closed-row construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalFunctor\"",
+   "results": "3 hits: HomologicalComplex₂.totalFunctor, HomologicalComplex₂.totalFunctor_obj, HomologicalComplex₂.totalFunctor_map",
+   "date": "2026-10-24",
+   "verdict": "generic totalFunctor found and read; it does not define the closed restriction family or signed matrix"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Apply an additive functor to a cochain complex termwise, flip double complexes, and form the coproduct total with horizontal differential first",
+   "results": "8 hits: CochainComplex.ιMapBifunctor, CategoryTheory.Functor.map₂CochainComplex, CochainComplex.mapBifunctor, CochainComplex.instHasMapBifunctorObjIntShiftFunctor, CochainComplex.instHasMapBifunctorObjIntShiftFunctor_1, CochainComplex.HasMapBifunctor, HomologicalComplex.ιMapBifunctor, CategoryTheory.Functor.map₂HomologicalComplex",
+   "date": "2026-10-24",
+   "verdict": "ingredients only: no complete finite closed-row construction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-restriction-total-pullback",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; technical support-resolution subargument: Tag 09AH, lemma-ses-associated-to-open, supplies epimorphic closed units; the comparison and totalization identities are agent deductions, not assertions of this tag. Extracted from old step 8 of lem-sfb-finite-closed-cover-resolution and its existing Lean docstring, with finite totalization as in homology.tex Tag 0133, lemma-double-complex-gives-resolution.",
+   "via": [
+    "lem-sfb-closed-restriction-total-pullback",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedRowConstructions",
+  "declaration": "AlgebraicGeometry.finiteClosedRestriction",
+  "declarations": [
+   "AlgebraicGeometry.finiteClosedRestriction",
+   "AlgebraicGeometry.finiteClosedRestriction_zero",
+   "AlgebraicGeometry.finiteClosedUnit",
+   "AlgebraicGeometry.finiteClosedIntersection",
+   "AlgebraicGeometry.finiteClosedTerms",
+   "AlgebraicGeometry.finiteClosedTermProjection",
+   "AlgebraicGeometry.finiteClosedDifferential",
+   "AlgebraicGeometry.finiteClosedAllTotal",
+   "AlgebraicGeometry.finiteClosedDouble",
+   "AlgebraicGeometry.finiteClosedTotal",
+   "AlgebraicGeometry.finiteClosedInverseZero",
+   "AlgebraicGeometry.finiteClosedPullbackComplex",
+   "AlgebraicGeometry.finiteClosedPullbackFamily"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedRowConstructions.lean",
+  "statement": "def finiteClosedRestriction {X Z : Scheme.{u}} (i : Z ⟶ X) (A : Sheaf (ProEt.topology X)\n  CommRingCat.{u + 1})",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Return F1/F2: 13 existing helpers/instances relocated unchanged in name, type and executable data from FiniteClosedCoverResolution; their old declarations are removed from that module. This definition module imports neither the cover theorem nor the pullback theorem."
+ },
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-finite-closed-row-constructions",
+  "worker": "stage1",
+  "summary": "Definition split: retain the actual restriction/unit helpers; specify the finite products, projections, signed component formula, termwise functor and unbounded coproduct total explicitly. Add existing owners for additive functors, double complexes, general ring-sheaf operations and coproduct existence; add one exact Mathlib leaf for adjoints preserving zero morphisms. Keep the separate arbitrary signed-map and actual complex-valued row-functor inputs distinct. No Lean changed.",
+  "blueprint": [
+   "Technical support construction below paragraph (3), quasi-compact open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; the current blueprint invokes sk-prop-open-coefficients here. The closed row is an auxiliary agent construction, not a statement of the blueprint or of Tag 09AH. Stacks homology.tex Tags 012Y and 012Z fix the double-complex/total convention; Tag 0133 is a later resolution theorem, not the definition."
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-310a9bcbe",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-310a9bcbe (reviewer sub-agent of L); spot-checked: I read the full item, the one new node, every cited statement, the Lean module FiniteClosedRowConstructions.lean (read only, not compiled) and the sources. Shape: one commit; files are the report, the item and the new node. The base item already had status split and an existing Lean record. The delivery expands its statement, adds 6 stmt_deps and adds a split_report. It leaves lean and source untouched. No cycle: 213 nodes are reachable from the item and the item is not among them. I checked every clause against the 13 Lean helpers, and the expanded text matches them. (1) E_i=i_*i^* uses actual i^* and i_* for any i. Citing def-weil-pbc-proetale-operations with R_U=i^{-1}A and c=id is correct, because def-weil-proetale-inverse-image gives the module formula only for constant rings. The unit comes from def-sfb-proetale-unit-normalized-adjunction. (2) W_s is the product in Over X, so the empty product is X→X. (3) D^p is a product over t:Fin(p+1)↪o Fin m, with the projections. (4) π_t∘d^p=Σ(-1)^j r_{im(tδ_j),im t}∘π_{tδ_j} matches finiteClosedDifferential (succAboveOrderEmb). Small cases: m=0 gives all D^p zero; m=1 gives D^0=E_{W_0}; for m=2, p=0 it gives r π_1 − r π_0, the Čech sign. d²=0 is rightly not asserted, since r is arbitrary. (5) In the Lean, B^{p,q}=R(K^q)^p comes from mapHomologicalComplex followed by flipFunctor. (6) The total uses Mathlib's ε₂=(-1)^p (ComplexShapeSigns.lean:156-159). This is Stacks homology.tex 012Y (line 4121) and 012Z (line 4195), which I read. The coproducts come from lem-pur-ringed-site-grothendieck-abelian; def-sp-double-complex-total is cited only for the commuting double-complex notion. (7) The pulled-back complex and family match finiteClosedPullbackComplex and finiteClosedPullbackFamily. Tag 09AH (needs closed Z and quasi-compact j) is not imported, and no exactness or base-change claim is made. New node lem-sfb-adjoint-functors-preserve-zero-morphisms is correct and self-contained. It is an exact Mathlib leaf: Zero.lean:73 preservesZeroMorphisms_of_isLeftAdjoint and :87 preservesZeroMorphisms_of_isRightAdjoint, needing only HasZeroMorphisms. An rg duplicate search over the snapshot found no node stating this fact. It does not restate a clause of the item; it is the zero-preservation claim moved out of the definition, as stages/1-dag.md §2 requires. Its blueprint fields are right: from.node is null like the item's, and via starts with the item. Minor, not repaired: the item's source.place still cites 0133 rather than 012Y/012Z; the report notes this. No fixes, no tool_uses."
+ }
+}

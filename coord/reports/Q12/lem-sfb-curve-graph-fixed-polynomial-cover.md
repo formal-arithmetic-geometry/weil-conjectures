@@ -1,0 +1,21 @@
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-curve-graph-fixed-polynomial-cover.json`: statement node, split using existing DAG dependencies only; Mathlib searches found no direct theorem.
+- `citations.json`: 25 verbatim citation records, covering every node used by every proof step.
+- `report.md`: this report.
+
+Attachments: none. No declaration in `lean/WeilConjectures/` carries the item tag or states this complete numerical-cover conclusion. No new nodes were needed: the DAG already contains the Euler-local-constancy, curve-degree, Segre, coordinate-tail, scalar-extension-dimension, and graph-family statements.
+
+WANTED: none.
+
+What I corrected or checked: the imported item was unsplit and had the complete statement but no proof. I retained its hypotheses and conclusions, including arbitrary locally Noetherian bases, nonreduced and disconnected fibres, the empty-fibre convention, and the condition that the coordinate quotient assertion hold for every defining homogeneous ideal. I did not introduce a node that merely restates the item. I recorded fresh `leanfinder`, `loogle`, `grep`, and `leansearch` searches in the item record; their hits concern generic flatness/base change, combinatorial Hilbert polynomials, or Weierstrass curves and do not state this theorem.
+
+## Review by Q12
+
+I read the source paragraph in `literature/stacks-project/moduli-curves.tex` at Tag 0DSQ and the exact source statements of every cited DAG node. Step 1 uses `lem-sfb-flat-projective-twist-base-change-data` for properness, flatness, finite presentation, invertibility, and arbitrary pullback of the two twists, and `lem-sfb-hilbert-graph-family-base-change` for graph closed immersions and stability under base change; both statements explicitly provide these properties. Step 2 uses `lem-sfb-proper-flat-sheaf-euler-local-constancy` for local constancy and the base-change equality of Euler characteristics, `pqf-def-locnoeth` for affine Noetherian neighborhoods, and the Mathlib leaf `lem-weil-pbc-noetherian-open-subscheme-noetherian` for Noetherian affine refinements. I verified that each sheaf in this step is finite presentation and flat by step 1.
+
+Step 3 uses the matching affine scalar-extension cover from `lem-pc-dim-base-change-affine-covers`, dimension invariance from `lem-pc-dim-base-change`, and the two affine-cover/local-ring dimension formulas `lem-pc-dimension-affine-open-cover` and `lem-pc-scheme-dimension-local-rings`. I checked the empty case separately and checked that every field-valued fibre is a scalar extension of the residue-field fibre, whose dimension agrees with that of the geometric fibre, so the stated dimension bound is available where the degree lemma is applied. Step 4 uses exactly the degree definition, `lem-trf-curve-degree-tensor-additive`, and Euler characteristic; its induction on tensor powers is elementary once those statements are cited. It applies equally to zero-dimensional and nonreduced proper fibres, and gives zero on empty fibres.
+
+Step 5 uses `lem-weil-pbc-closed-immersion-base-change` for the product embedding, `lem-chow-segre` and `def-chow-segre` for the Segre closed immersion and coordinates, and `def-pc-projective-space-twist` for the transition-function calculation. I wrote that calculation explicitly, so the identification of the pulled-back degree-one module with `M` is supported by the cited definitions. Step 6 uses `lem-sfb-hilbert-graph-family-base-change` for the graph and `lem-weil-pbc-invertible-pullback-tensor` for pullback/tensor compatibility; the graph projection is an isomorphism, so cohomology and Euler characteristic transfer to the source fibre. This yields `c_X=c_Y`, the graph formula, and the displayed identity for `R`.
+
+Step 7 uses the closed-immersion base-change statement and `lem-sfb-projective-coordinate-ring-euler-polynomial`. I checked that the latter explicitly allows arbitrary homogeneous defining ideals, does not require saturation, and treats the empty subscheme. The proof therefore gives the eventual coordinate quotient dimension for every defining ideal exactly as the item states. I also tested the formulas on an empty fibre, a zero-dimensional finite fibre, a reduced projective line, a nonreduced curve, and a disconnected union; no hypothesis or conclusion changes were needed.

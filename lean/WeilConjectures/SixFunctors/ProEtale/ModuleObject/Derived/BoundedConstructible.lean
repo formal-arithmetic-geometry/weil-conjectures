@@ -17,50 +17,18 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
-import WeilConjectures.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CondensedQcqsPushforwardContinuity
-import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
-import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
-import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.ProEtalePointPullback
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Paper.CompletedCondensedCoefficients
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.IntegralLfpConstantModelComparison
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.Paper.PerfectProjectionFormula
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.SfIntegralDirectImageConstructible
 
 
+import Sheaf.AlgebraicGeometry.BoundedConstructibleHomSingle
+import Sheaf.AlgebraicGeometry.BoundedConstructibleHomPreservation
 import Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
-import Sheaf.Paper.DerivedInternalHomFilteredColimit
-import Sheaf.Paper.IntegralHomReduction
-import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import Sheaf.AlgebraicGeometry.BoundedConstructibleDevissage
+import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageSingleBound
+import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 
@@ -252,8 +220,18 @@ lemma boundedConstructible_rightDerivedLowerStar_obj [IsFinitenessCoefficient �
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj Λ X.left)))
     (hK : boundedConstructible (condensedRingObj Λ X.left) K) :
-    boundedConstructible (condensedRingObj Λ Y.left) ((R((f.left)_*⟦Λ⟧)).obj K) :=
-  sorry
+    boundedConstructible (condensedRingObj Λ Y.left) ((R((f.left)_*⟦Λ⟧)).obj K) := by
+  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  have : IsNoetherian Y.left := ⟨⟩
+  let P := boundedConstructible (condensedRingObj Λ Y.left)
+  have : P.IsTriangulated := isTriangulated_boundedConstructible (ℓ := ℓ) Λ Y.left
+  apply prop_of_boundedConstructibleModule
+    (P.inverseImage R((f.left)_*⟦Λ⟧)) ?_ hK
+  intro F hF
+  obtain ⟨b, hb⟩ := finiteTypeDirectImage_single_boundedAbove Λ ℓ f F hF
+  exact ⟨⟨⟨0, ((f.left)_*⟦Λ⟧).isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
+    ⟨b, hb⟩⟩, finiteTypeDirectImage_single_constructible Λ ℓ f F hF⟩
 
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
 the restriction of `R((f)_*⟦Λ⟧)`. -/
@@ -484,8 +462,8 @@ are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X}
 `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidalClosed_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
-    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
-  sorry
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed := by
+  exact boundedConstructible_hom_closure Λ X (boundedConstructible_hom_single Λ X)
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory

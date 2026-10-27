@@ -318,17 +318,21 @@ theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u
   exact preservesColimitsOfShape_of_natIso (Functor.associator _ _ _).symm
 
 /-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
-direct image, for filtered categories in `Type`
-(`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`). -/
+direct image, for filtered categories of any size
+(`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`).
+
+For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
+`F ↦ R^q h_* F` commutes with colimits over every essentially small (in the universe of the
+coefficients) filtered category `J`. -/
 theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
-    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type) [SmallCategory J] [IsFiltered J] :
+    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type*) [Category* J]
+    [EssentiallySmall.{u + 1} J] [IsFiltered J] :
     PreservesColimitsOfShape J
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) :=
-  have := Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h q
-  have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-    (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q)
-  inferInstance
+  have : IsFiltered (SmallModel.{u + 1} J) := IsFiltered.of_equivalence (equivSmallModel J)
+  have := (Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h q)
+    |>.preserves_filtered_colimits (SmallModel.{u + 1} J)
+  preservesColimitsOfShape_of_equiv (equivSmallModel J).symm _
 
 end AlgebraicGeometry

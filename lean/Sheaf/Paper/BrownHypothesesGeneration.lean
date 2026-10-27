@@ -18,6 +18,7 @@ import Sheaf.Paper.IntegralConstructibleExt
 import Sheaf.SixFunctors.FiniteCompactProetale
 import Mathlib.Algebra.CharP.CharAndCard
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # A small skeleton of constructible finite-Tor complexes generates its localizing closure

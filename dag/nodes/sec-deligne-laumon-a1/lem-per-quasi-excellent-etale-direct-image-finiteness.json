@@ -330,16 +330,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-fcfed8a3d (reviewer sub-agent of L); spot-checked: PASS: read the item, both new nodes and the 23 nodes it cites in full; no fixes. Item statement checked against ILO XIII Thm 1.1.1/1.1.2 (bound per constructible sheaf; uniform bound only in finite dimension, ILO 2.3) and BS Thm 6.7.1 with R/m=B. The uniform bound 2e is kept only for proper g (Stacks 095U + 0A3V). The statement is unchanged from the base and covers what the citer lem-per-finite-exceptional-preservation uses (Steps 1, 2, 4). The split follows ILO XIII 3.1.2: Nagata, then Rp_*Rj_*, then proper finiteness (Stacks 0GL0 with the identity compactification, which the definition names explicitly), then the open-immersion input, then explicit two-open Cech/Mayer-Vietoris gluing (split exact rows of injectives, restrictions stay injective) and induction on affine covers. Each cited statement covers its step: Serre closure holds for any scheme and finite ring; open restriction holds for finite rings in D^+; lft⇒lfp holds over a Noetherian base; qs-intersection gives the qc overlaps. New open node = ILO 1.1.1 with f=j; it is strictly smaller and is the source's own reduction (not D1). New stability node = 07QU + locality (EGA IV 7.8.3, ILO I 5.1), true. Neither duplicates an existing node: lem-trf-excellent-scheme-affine-cover is about excellence locality only; cor-fin-deligne-open-* and lem-sf-adic-dense-open-* are over a field. Cases tested: ℓ=p excluded on A^1; U=T; U=∅; zero sheaf; g=id. No SGA cited. All 16 declared tool_uses are generic and accepted. Batch-5: lem-kun-proper-torsion-cd-bound (095U, proper cohomological dimension; closure reaches PD only via the generic 0DV5 module-object lemma) and lem-weil-pbc-etale-compactification-constructibility (0GL0, finiteness of Rf_!, a trace-formula hypothesis; closure reaches sec-trace-formula only via a generic D^+ adjunction lemma) are outside both assumed statements and are not steps of their proofs; kept."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/QuasiExcellentEtaleDirectImageFiniteness.lean",
   "module": "Sheaf.AlgebraicGeometry.QuasiExcellentEtaleDirectImageFiniteness",
   "declaration": "AlgebraicGeometry.Etale.quasiExcellent_etale_direct_image_finiteness",
-  "file": "lean/Sheaf/AlgebraicGeometry/QuasiExcellentEtaleDirectImageFiniteness.lean",
-  "statement": "theorem quasiExcellent_etale_direct_image_finiteness (ell : ℕ) [Fact ell.Prime] (B : Type (u + 1)) [Field B] [Finite B] [CharP B ell] {V T : Scheme.{u}} [CompactSpace V] [QuasiSeparatedSpace V] [CompactSpace T] [QuasiSeparatedSpace T] (g : V ⟶ T) [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (hcase : IsProper g ∨ ((∀ U : T.affineOpens, IsQuasiExcellent Γ(T, U.1)) ∧ ∀ t : T, IsUnit (ell : T.presheaf.stalk t))) : (∀ K : _root_.DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} B)), DerivedCategory.isBoundedConstructible B V K.obj → DerivedCategory.isBoundedConstructible B T ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} B) g).obj K).obj) ∧ (IsProper g → ∃ d : ℕ, ∀ (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} B)) (q : ℤ), (d : ℤ) < q → IsZero ((_root_.DerivedCategory.Plus.homologyFunctor (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} B) g).obj ((_root_.DerivedCategory.Plus.singleFunctor (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} B)) 0).obj M))))",
-  "branch": "newtargets-dag",
-  "by": "N7",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.QuasiExcellentEtaleDirectImageFiniteness deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -349,5 +346,16 @@
   "result": "pass",
   "note": "Statement matches the node clause by clause: ℓ prime; B a finite field of characteristic ℓ in the u+1 coefficient universe that the derived-category records fix; qcqs V, T; g of finite presentation (LocallyOfFinitePresentation ∧ QuasiCompact ∧ QuasiSeparated); disjunction of IsProper and (IsQuasiExcellent on every affine open ∧ ℓ a unit in every stalk); D^b_c preservation over D⁺ via rightDerivedLowerStarPlus (ModuleCat B) and isBoundedConstructible; uniform ∃ d : ℕ chosen before M, for all module sheaves M, under properness only. No extra hypotheses or pro-étale objects. All 6 stmt_dep declarations read, none hollow; every plain import matches a proof-dep record or Mathlib match. No duplicate: side proper/open-immersion finiteness theorems are over a field. Docstrings give the source places and the blueprint tag, plus all 8 proof steps; the only declaration is one theorem proved by sorry; lean.statement matches the file exactly; item node unchanged apart from lean. Edge cases checked: empty schemes, empty affine (zero ring is quasi-excellent), g=id, K=0, d=0, ℓ equal to a residue characteristic. nt_compile --json: clean, exit 0, 3.7 s; #check probe confirmed signatures; only standard axioms plus sorryAx."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

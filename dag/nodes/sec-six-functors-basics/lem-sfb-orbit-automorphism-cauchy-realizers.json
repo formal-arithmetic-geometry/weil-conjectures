@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-orbit-automorphism-cauchy-realizers",
+ "kind": "statement",
+ "title": "Finite orbit-coordinate realizers form a two-sided Cauchy net",
+ "statement": "Let $G$ be a Hausdorff topological group whose identity has a basis of open subgroups. Let $\\mathcal O_G$, $i_G$, $\\omega_G$ and $F_G$ be the open-orbit category, its inclusion into discrete continuous left $G$-sets, and the two underlying-set functors [def-sfb-open-orbit-functor]. Give natural automorphism groups the pointwise topology [def-sfb-set-functor-aut-pointwise-topology]. Work in compatible universes. Fix $\\alpha\\in\\operatorname{Aut}(\\omega_G)$ and put $D=\\coprod_{U\\text{ open}}G/U$, with elements tagged by their subgroup. There exists a family $(g_F)_{F\\subseteq D\\text{ finite}}$ in $G$, indexed by inclusion, such that $g_Fx=\\alpha_U(x)$ for each tagged $x\\in F\\cap G/U$, including a choice for $F=\\varnothing$. For each tagged $x\\in G/U$ the set $C_x=\\{g\\in G:gx=\\alpha_U(x)\\}$ is a nonempty closed coset, and every finite intersection of these sets is nonempty, with the empty intersection equal to $G$. For every open subgroup $U$, if $F$ and $F\\prime$ both contain the tagged coordinates $U\\in G/U$ and $\\alpha_U^{-1}(U)\\in G/U$, then $g_F^{-1}g_{F\\prime}\\in U$ and $g_Fg_{F\\prime}^{-1}\\in U$. In particular this net is Cauchy for the two-sided uniformity: for every identity neighborhood $W$, both differences lie in $W$ for all sufficiently large $F,F\\prime$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 7.1.5, printed p. 64, finite intersection and two-sided Cauchy coset-filter argument; returned item proof steps 4–6 in finite-coordinate net form."
+ },
+ "stmt_deps": [
+  "def-sfb-open-orbit-functor",
+  "def-sfb-set-functor-aut-pointwise-topology"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite tagged set $F$. For each $x\\in F\\cap G/U_x$, choose $a_x\\in G$ with $x=a_xU_x$ and put $H_x=a_xU_xa_x^{-1}$. The equation $hx=x$ is equivalent to $a_x^{-1}ha_x\\in U_x$, so $H_x$ is its stabilizer. Conjugation and its inverse are continuous, hence $H_x$ is open. Put $V=\\bigcap_{x\\in F}H_x$, an open subgroup (take $V=G$ for $F=\\varnothing$). By [def-sfb-open-orbit-functor], $G/V$ is an orbit object and $q_x:G/V\\to G/U_x$, $hV\\mapsto hx$, is an arrow: if $hV=kV$, then $k^{-1}h\\in V\\subseteq H_x$, so $hx=kx$; also $q_x(thV)=tq_x(hV)$.",
+   "uses": [
+    "def-sfb-open-orbit-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, projections from smaller open subgroups and the conjugate-orbit maps T_g; explicit common stabilizer for finite tagged coordinates."
+   }
+  },
+  {
+   "text": "Apply naturality of $\\alpha$ to each arrow $q_x$ of [def-sfb-open-orbit-functor]. Choose a representative $g\\in G$ of the coset $\\alpha_V(V)\\in G/V$. Then $gx=q_x(gV)=q_x(\\alpha_V(V))=\\alpha_{U_x}(q_x(V))=\\alpha_{U_x}(x)$ for every $x\\in F$. Thus the set of realizers for each finite $F$ is nonempty. Choose one $g_F$ for each nonempty $F$, and set $g_{\\varnothing}=1$. This gives the required family without imposing any compatibility between its choices.",
+   "uses": [
+    "def-sfb-open-orbit-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, compatibility of the automorphism with projection and conjugate-orbit maps; choosing representatives of its identity-coset values."
+   }
+  },
+  {
+   "text": "For a coordinate $x$, step 2 with $F=\\{x\\}$ gives a realizer $r$. The equation $gx=rx$ is equivalent to $r^{-1}g\\in H_x$, so $C_x=rH_x$. An open subgroup $H$ is closed: its complement is the union of the open cosets $bH$ for $b\\notin H$, since distinct left cosets are disjoint. Translations are homeomorphisms, so $C_x$ is closed and nonempty. For a finite family of coordinates its intersection contains $g_F$ by step 2, and the empty intersection is $G$, containing $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, finite intersection property of prescribed-value cosets; closedness written out using open cosets."
+   }
+  },
+  {
+   "text": "Fix an open subgroup $U$ and write $y=\\alpha_U^{-1}(U)\\in G/U$. If $F,F\\prime$ contain both tagged coordinates $U,y$, put $a=g_F$ and $b=g_{F\\prime}$. The prescriptions give $aU=\\alpha_U(U)=bU$, hence $a^{-1}b\\in U$. They also give $ay=\\alpha_U(y)=U=by$. Applying $b^{-1}$ to $by=U$ yields $y=b^{-1}U$, and therefore $ab^{-1}U=ay=U$, hence $ab^{-1}\\in U$. These computations use left cosets; $U$ need not be normal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, inverse-coordinate argument using hU=phi_U^{-1}(U) and the map T_h; two-sided finite-coordinate calculation."
+   }
+  },
+  {
+   "text": "The finite subsets of $D$ form a directed set under inclusion: $F_1\\cup F_2$ is an upper bound and $\\varnothing$ is an index. Given an identity neighborhood $W$, choose an open subgroup $U\\subseteq W$ by the assumed basis. Take $F_0=\\{(U,U),(U,\\alpha_U^{-1}(U))\\}\\subseteq D$. For every $F,F\\prime\\supseteq F_0$, step 4 puts both differences in $U\\subseteq W$. This is exactly the two-sided Cauchy condition stated in the item; if the two tagged coordinates coincide, $F_0$ is simply a singleton.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, Cauchy filter condition rewritten as the eventual condition for the directed set of finite tagged coordinates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-orbit-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 7.1.5, printed p. 64: explicit finite-coordinate net reformulation of the projection/conjugate-orbit coset-filter proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural automorphism of the open orbit forgetful functor admits simultaneous finite coordinate realizers forming a two sided Cauchy net",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, TopCat.partialSections.nonempty, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, InverseSystem.globalEquiv, TopCat.partialSections, AlgebraicGeometry.exists_map_eq_top, CategoryTheory.PreGaloisCategory.functorToContAction, InverseSystem.pEquivOnGlue",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cauchy\", \"MulAction\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Cauchy.*[Aa]ut|[Aa]ut.*Cauchy|finite.*coordinate.*orbit|orbit.*interpolat",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite values of a natural automorphism on all open subgroup coset sets are realized by elements of the group in a two sided Cauchy net",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace, Action.FintypeCat.toEndHom, Subgroup.finiteIndex_of_leftCoset_cover_const, AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace, QuotientGroup.automorphize, Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Cauchy.*[Aa]ut|[Aa]ut.*Cauchy|orbit.*interpolat|finite.*coordinate.*orbit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern finite-fibre Galois functors, compact/profinite reconstruction, unrelated dense orbits or TwoSidedIdeal; none gives arbitrary open-orbit finite-coordinate realizers with both Cauchy differences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural automorphisms of the open orbit forgetful functor have finite coordinate realizers that form a two sided Cauchy net",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.mulAction_naturality, CategoryTheory.PreGaloisCategory.AutGalois, CategoryTheory.PreGaloisCategory.instCompactSpaceAutFunctorFintypeCat, Rep.coinvariantsMk, AddCommMonCat.coyonedaForget, AddMonCat.coyonedaObjIsoForget, AddCommMonCat.coyonedaObjIsoForget",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern finite-fibre Galois functors, compact/profinite reconstruction, unrelated dense orbits or TwoSidedIdeal; none gives arbitrary open-orbit finite-coordinate realizers with both Cauchy differences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cauchy\", \"Aut\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern finite-fibre Galois functors, compact/profinite reconstruction, unrelated dense orbits or TwoSidedIdeal; none gives arbitrary open-orbit finite-coordinate realizers with both Cauchy differences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural automorphism of the forgetful functor on open subgroup coset actions is simultaneously realized on any finite set of coordinates by a group element",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, CategoryTheory.PreGaloisCategory.IsNaturalSMul, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.ActionCategory.endMulEquivSubgroup, CategoryTheory.PreGaloisCategory.toAut_hom_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern finite-fibre Galois functors, compact/profinite reconstruction, unrelated dense orbits or TwoSidedIdeal; none gives arbitrary open-orbit finite-coordinate realizers with both Cauchy differences."
+  },
+  {
+   "tool": "grep",
+   "query": "Noohi|orbitForget|orbit.*[Aa]ut|[Aa]ut.*orbit|cauchy.*[Rr]ight|[Tt]wo[Ss]ided",
+   "results": "13 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean, Mathlib/CategoryTheory/Triangulated/Yoneda.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern finite-fibre Galois functors, compact/profinite reconstruction, unrelated dense orbits or TwoSidedIdeal; none gives arbitrary open-orbit finite-coordinate realizers with both Cauchy differences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Density of the translation action of a nonarchimedean topological group in natural automorphisms of its discrete orbit functor using intersections of conjugate open subgroups",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, ProfiniteGrp.denseRange_toLimit, denseRange_smul, denseRange_zsmul_iff_nsmul, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, IsOpen.dense_iUnion_preimage_smul, denseRange_zpow_iff_pow, IsOpen.dense_iUnion_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern finite-fibre Galois functors, compact/profinite reconstruction, unrelated dense orbits or TwoSidedIdeal; none gives arbitrary open-orbit finite-coordinate realizers with both Cauchy differences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-group-forgetful-automorphisms",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Proposition 7.1.5, pp. 63–64, with Example 7.1.6 for the compact case; orbit-category formulation from the proof (the objects G/U determine a natural automorphism on all disjoint unions). Proposition 7.1.5, printed p. 64, finite intersection and two-sided Cauchy coset-filter argument; returned item proof steps 4–6 in finite-coordinate net form.",
+   "via": [
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-orbit-automorphism-cauchy-realizers",
+  "worker": "stage1",
+  "summary": "Read Bhatt–Scholze Proposition 7.1.5 (printed p. 64), both definition-node statements and the existing parent split. Expanded the common conjugate stabilizer, equivariant quotient maps, naturality calculation, representative choices including the empty set, closed coordinate cosets and both ordered Cauchy differences. The five elementary steps require no new lemma nodes; the statement and statement dependencies are unchanged. No completed upstream declaration states the item.",
+  "blueprint": "The existing ancestry through lem-sfb-complete-group-forgetful-automorphisms reaches det-thm-sf-ctf-stability-direct-images paragraph (3), the continuous-monodromy compatibility obligation. These steps realize precisely the returned parent proof steps 4–6 identified in the item source: finite coordinate realizability and the two-sided Cauchy net; no unit route is replaced. The ancestor command returns None and the existing null ancestor/via chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-e931990af",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-e931990af (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes. Statement and stmt_deps are unchanged, the proof was previously empty and now has 5 steps, and proof_deps = {def-sfb-open-orbit-functor} = the union of the step uses. There is no repair-notes record, so the re-split rule does not apply, and no SGA source is used. Source check against Bhatt-Scholze Prop. 7.1.5, pp. 63-64: the finite intersection property comes from projection compatibility, which steps 1-2 reproduce with the common conjugate stabilizer V and q_x: G/V -> G/U_x, an arrow because Hom in O_G is all equivariant maps. The Cauchy property comes from h with hU = phi_U^{-1}(U) and T_h, which step 4 reproduces as two prescribed coordinates; proof_origin=agent honestly marks the net reformulation. Step checks: Stab(aU) = aUa^{-1} is open. Naturality alpha_{U_x} q_x = q_x alpha_V gives gx = alpha(x). C_x = rH_x is closed because an open subgroup is closed; the finite intersection over F contains g_F and the empty intersection is G. aU = bU gives a^{-1}b in U, and ay = by = U gives ab^{-1} in U, with no normality and no equivariance of alpha used. Step 5 uses the open-subgroup basis and F_0 = {U, alpha_U^{-1}(U)}. Tested on S_3 with a non-normal order-2 subgroup, on discrete Z (infinite G/V), on alpha = Phi(g0) and on coinciding coordinates. The Hausdorff hypothesis is unused but harmless. Advisory: the unsplit sibling lem-sfb-orbit-translation-topological-embedding also states the clopen stabilizer-coset fact; the item re-derives it in one line, which is not a duplicate node. Mathlib searches cover all three kinds and no match was found (Mathlib's Galois reconstruction is for FintypeCat fibres). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.OrbitAutomorphismCauchyRealizers",
+  "declaration": "TopologicalGroup.orbitAutomorphismCauchyRealizers",
+  "file": "lean/Sheaf/GroupTheory/OrbitAutomorphismCauchyRealizers.lean",
+  "statement": "theorem orbitAutomorphismCauchyRealizers (G : Type u) [Group G] [TopologicalSpace G] [T2Space G] [NonarchimedeanGroup G] (α : Aut (openOrbitForget G)) : ∃ g : Finset (Σ U : OpenSubgroup G, G ⧸ U.toSubgroup) → G, (∀ (F : Finset (Σ U : OpenSubgroup G, G ⧸ U.toSubgroup)) (x : Σ U : OpenSubgroup G, G ⧸ U.toSubgroup), x ∈ F → g F • x.2 = α.hom.app x.1 x.2) ∧ (∀ x : Σ U : OpenSubgroup G, G ⧸ U.toSubgroup, {a : G | a • x.2 = α.hom.app x.1 x.2}.Nonempty ∧ IsClosed {a : G | a • x.2 = α.hom.app x.1 x.2} ∧ ∃ r : G, {a : G | a • x.2 = α.hom.app x.1 x.2} = r • (MulAction.stabilizer G x.2 : Set G)) ∧ (∀ F : Finset (Σ U : OpenSubgroup G, G ⧸ U.toSubgroup), (⋂ x ∈ F, {a : G | a • x.2 = α.hom.app x.1 x.2}).Nonempty) ∧ (⋂ x ∈ (∅ : Finset (Σ U : OpenSubgroup G, G ⧸ U.toSubgroup)), {a : G | a • x.2 = α.hom.app x.1 x.2}) = Set.univ ∧ (∀ (U : OpenSubgroup G) (F F' : Finset (Σ V : OpenSubgroup G, G ⧸ V.toSubgroup)), (⟨U, QuotientGroup.mk (1 : G)⟩ : Σ V : OpenSubgroup G, G ⧸ V.toSubgroup) ∈ F → (⟨U, α.inv.app U (QuotientGroup.mk (1 : G))⟩ : Σ V : OpenSubgroup G, G ⧸ V.toSubgroup) ∈ F → (⟨U, QuotientGroup.mk (1 : G)⟩ : Σ V : OpenSubgroup G, G ⧸ V.toSubgroup) ∈ F' → (⟨U, α.inv.app U (QuotientGroup.mk (1 : G))⟩ : Σ V : OpenSubgroup G, G ⧸ V.toSubgroup) ∈ F' → (g F)⁻¹ * g F' ∈ U ∧ g F * (g F')⁻¹ ∈ U) ∧ (∀ W ∈ 𝓝 (1 : G), ∃ F₀ : Finset (Σ U : OpenSubgroup G, G ⧸ U.toSubgroup), ∀ (F F' : Finset (Σ U : OpenSubgroup G, G ⧸ U.toSubgroup)), F₀ ⊆ F → F₀ ⊆ F' → (g F)⁻¹ * g F' ∈ W ∧ g F * (g F')⁻¹ ∈ W)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4fdf801fb",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read the node, both stmt_dep records, the OpenOrbitFunctor source, the delivered module and Mathlib InducedCategory/NonarchimedeanGroup. T2+NonarchimedeanGroup render the hypotheses with nothing stronger; G : Type u matches the orbit functor's universe. α : Aut (openOrbitForget G); D = Σ U : OpenSubgroup G, G ⧸ U. All clauses match the node: realization for every Finset including ∅; C_x nonempty, closed and equal to r • stabilizer (a left coset, step 3); finite intersections nonempty and the empty one = univ; the two premises (U,[1]) and (U, α.inv.app U [1]) give (gF)⁻¹gF' ∈ U and gF(gF')⁻¹ ∈ U (checked by hand, no normality needed); Cauchy as ∀ W ∈ 𝓝 1, ∃ F₀, F₀ ⊆ F, F' → both differences in W. The lean.statement is verbatim in the file; the node differs from side-live only in lean and is not landed elsewhere. One sorry, no definitions, docstrings carry source, blueprint tag and proof steps; both report sections present. No compile (no fixes). Advisories: T2 unused; the second reading was by the same worker."
+ }
+}

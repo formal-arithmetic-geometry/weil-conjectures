@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-normalized-dvr-flat-cokernel",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-adic-cone-model",
+   "place": "Strict flat-model normalization: only the scalar-cokernel quasi-isomorphism field",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar cokernels of strict finite flat DVR models",
+ "statement": "Let T be a normalized DVR tower [def-coef-normalized-dvr-tower]. Choose finite-coefficient complexes P_j with flat terms, K-flat in the sense of [def-pc-kflat-complex], isomorphisms Q(P_j) ≅ T.M j, and semilinear successor chain maps representing its transitions. Restrict P_j to completed coefficients, insert zero at exponent zero, and form the strict tower U by composing successors. Let v be the compatible completed uniformizer section [def-sp-completed-uniformizer-section], and suppose v^j annihilates U_j. For every n ≤ m, the map coker(v^n:U_m→U_m)→U_n induced by U_m→U_n is a quasi-isomorphism. No existence or cone-limit assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Strict flat-model normalization: only the scalar-cokernel quasi-isomorphism field"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pc-kflat-complex",
+  "def-sp-completed-uniformizer-section"
+ ],
+ "proof": [
+  {
+   "text": "Compose the finite semilinear successor chain maps inductively, with the canonical restriction comparison. The successor representation equations transport the normalization Hom bijections through the representative isomorphisms. Compose universal arrows and use the exact derived-restriction comparison to obtain the universal Hom bijection for each composite. This part is proved in Lean by finiteChainComp_universal.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality and associativity of restriction comparisons identify the restriction of a composite semilinear chain map with the composite of its restrictions. A proved generic sequence-map recursion then identifies these completed restrictions with the actual strict tower maps. For positive unequal exponents, apply the single-map scalar cokernel comparison to this composite and its universal Hom bijection.",
+   "uses": [
+    "lem-coef-normalized-dvr-scalar-cokernel-comparison",
+    "def-pc-kflat-complex",
+    "lem-coef-strict-restriction-tower-composites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At exponent zero the scalar is the identity, and both its cokernel and the inserted level zero are zero. At equal exponents the scalar vanishes by the given annihilation and the transition is the identity; its cokernel descent has the cokernel projection as inverse. Both edge cases are proved directly in Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-normalized-dvr-scalar-cokernel-comparison",
+  "def-pc-kflat-complex",
+  "lem-coef-strict-restriction-tower-composites"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "W6: compose the represented universal arrows, identify their strict maps, and apply the single-map coefficient comparison; edge cases directly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat K-flat complexes over finite quotients of a DVR: normalized semilinear transition induces a quasi-isomorphism on the scalar cokernel",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, Rep.standardComplex.instQuasiIsoNatεToSingle₀, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, Module.Flat.tfae_equational_criterion, AdicCompletion.flat_of_isNoetherian, Module.flat_of_isLocalized_span, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement; this is a strictly smaller source step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel.desc\", \"QuasiIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement; this is a strictly smaller source step."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedAdicTower|quasiIso_cokernelDesc|tensor.*homotopy.*limit",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement; this is a strictly smaller source step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRAdicConeModel",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRFlatCokernel",
+  "file": "lean/Sheaf/Paper/NormalizedDVRFlatCokernel.lean",
+  "declaration": "WeilConjectures.normalizedDVR_flat_cokernel",
+  "statement": "theorem normalizedDVR_flat_cokernel\n    (T : NormalizedDVRTower l E X D hl)\n    (eP : ∀ j : ℕ, (@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).obj\n      (P j) ≅ T.M j)\n    (hrep : ∀ j : ℕ,\n      DerivedCategory.Q.map (g j) ≫\n        (normalizedDVRModuleRes l E X j.le_succ).mapDerivedCategoryFactors.inv.app (P j) ≫\n        (normalizedDVRRes l E X j.le_succ).map (eP j).hom =\n      (eP (j + 1)).hom ≫ T.tau j.le_succ)\n    (hflat : ∀ (j : ℕ) (i : ℤ), exactFunctor _ _\n      (@MonoidalCategory.tensorRight _ _\n        (SheafOfModules.monoidalCategory (integralCoefficientCommRingSheaf l E X j))\n        ((P j).X i)))\n    (hkflat : ∀ j : ℕ, CochainComplex.IsKFlatIndependentCoefficients (P j))\n    (hzero : ∀ j : ℕ, normalizedDVRUniformizer l E X ^ j •\n      𝟙 ((normalizedDVRFlatTower l E X D hl P g).obj (op j)) = 0)\n    {m n : ℕ} (h : n ≤ m) :\n    QuasiIso (cokernel.desc\n      (normalizedDVRUniformizer l E X ^ n •\n        𝟙 ((normalizedDVRFlatTower l E X D hl P g).obj (op m)))\n      ((normalizedDVRFlatTower l E X D hl P g).map (homOfLE h).op) (by\n        rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id\n          ((normalizedDVRFlatTower l E X D hl P g).map (homOfLE h).op),\n          ← Linear.comp_smul, hzero n, comp_zero]))",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T124306-L-1968354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cd8a3",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261026T121136-L-2760628",
+  "kind": "interface",
+  "note": "independent cc review: normalizedDVR_flat_cokernel proof + StrictRestrictionTower against nodes lem-coef-normalized-dvr-flat-cokernel / lem-coef-strict-restriction-tower-composites; Dl adaptation against published (published >120s NOT compiled, delivered 14.3s); BoundedFreeCone FAIL re-checked via rebuilt chain Tower→FlatCokernel→Roos→BoundedFreeCone all OK"
+ }
+}

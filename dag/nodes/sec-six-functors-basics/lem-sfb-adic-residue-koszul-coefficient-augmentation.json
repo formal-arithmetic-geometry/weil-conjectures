@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-adic-residue-koszul-coefficient-augmentation",
+ "kind": "statement",
+ "title": "Coefficient Koszul augmentation before tensoring",
+ "statement": "Let X be a scheme, A a commutative ring, J an ideal, U a small pro-etale site object, and a:Fin r to A a finite list with span(range a) contained in J. Write R for the completed coefficient sheaf restricted to U and b for the completed slice sections associated to a [def-sfb-adic-residue-lift-comparisons, lem-weil-pbc-constant-completion-equivalence]. There exists a strict natural transformation epsilon from the dual ordered Koszul tower Hom(K_positive(b^(n+1)),R[0]) [def-weil-pbc-ringed-koszul-system] to the actual coefficient quotient tower B_n[0] [def-sfb-adic-residue-quotient-tensor-tower]. Its composite with the dual degree-zero unit R[0] to Hom(K_positive,R[0]) is the actual coefficient quotient R[0] to B_n[0], for each n. No Noetherian, K-flat, or derived pro-zero assertion is included. The same module constructs the tensor augmentation from epsilon by functorial tensoring and degreewise transposition, with the differential comparison proved.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-sfb-adic-residue-quotient-tensor-tower",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-naive-completion (099M), strict coefficient tensor calculation; algebraization.tex, lemma-derived-completion-koszul (0A0E); more-algebra.tex, lemma-sequence-Koszul-complexes."
+ },
+ "proof": [
+  {
+   "text": "Define the module quotient projection by the section 1. Applying unitHomEquiv reduces compatibility with the quotient successor to map_one. For a in J, composing coefficientMap with the nth completion projection is the constant quotient map. Naturality of toSheafify and Ideal.pow_mem_pow show that its slice projection kills the completed a^(n+1). Evaluating the power of ringedKoszulScalar on a section x gives x times the scalar power, so its composite with the module quotient projection is zero.",
+   "uses": [
+    "def-sfb-adic-residue-quotient-tensor-tower",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two-term coordinate calculation lem-sfb-negative-koszul-low-degrees to each actual negative Koszul complex, and the existing negative-to-positive-dual isomorphism (including the rank-zero duality). Precomposing with the degree-minus-one coordinate isomorphism and every finite biproduct inclusion reduces the last differential followed by the quotient to the scalar annihilation just proved. Transfer this vanishing through duality and use HomologicalComplex.mkHomToSingle to construct the actual chain map to the finite quotient in degree zero.",
+   "uses": [
+    "lem-sfb-negative-koszul-low-degrees",
+    "lem-weil-pbc-ringed-negative-koszul-duality",
+    "def-weil-pbc-ringed-negative-koszul-transitions",
+    "def-sfb-adic-residue-quotient-tensor-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The empty-basis normalization of duality identifies the degree-zero dual unit with the composite of the single-complex isomorphism, the inverse degree-zero coordinates, and the degree-zero duality isomorphism. Thus this component is invertible and the constructed augmentation composed with the unit is precisely the actual coefficient quotient. Dualizing naturality of the positive projections gives naturality of the dual units. Compare consecutive augmentation squares in degree zero after precomposing with this invertible unit: both are the compatible quotient projections from step 1. Maps to a degree-zero complex are determined by their zero components, so every successor square commutes. NatTrans.ofOpSequence assembles the maps and retains the normalization.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-sfb-adic-residue-quotient-tensor-tower",
+    "lem-weil-pbc-ringed-negative-koszul-duality",
+    "lem-sfb-negative-koszul-low-degrees"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adic-residue-quotient-tensor-tower",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-sfb-negative-koszul-low-degrees",
+  "lem-weil-pbc-ringed-negative-koszul-duality",
+  "def-weil-pbc-ringed-negative-koszul-transitions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "lemma-derived-completion-koszul (0A0E), the finite free dual calculation; proetale.tex, lemma-naive-completion (099M), strict coefficient quotient map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite free dual Koszul complex has a chain augmentation to a quotient ring annihilating the powers of its generators, compatible with power transitions",
+   "results": "8 hits, all on presentations and cotangent modules; no Koszul augmentation.",
+   "verdict": "No match for the ringed coefficient chain maps.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringedKoszulDualTower\"",
+   "results": "0 hits.",
+   "verdict": "No matching Mathlib declaration.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*pro.?zero|[Kk]oszul.*augmentation",
+   "results": "0 hits.",
+   "verdict": "No matching Mathlib augmentation.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free dual Koszul complex has a chain augmentation to a quotient ring annihilating the powers of its generators, compatible with power transitions",
+   "results": "8 hits: generic ChainComplex.augment and toSingle constructions, dual finiteness, and truncation comparisons.",
+   "verdict": "No ringed dual Koszul quotient augmentation or transition normalization is supplied by these generic constructors.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueStrictKoszulAugmentation",
+  "date": "2026-10-26",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), the application of Stacks 099M: Coefficient Koszul augmentation before tensoring.",
+   "via": [
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueKoszulCoefficientAugmentation",
+  "file": "lean/Sheaf/Paper/AdicResidueKoszulCoefficientAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_koszul_coefficient_augmentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_koszul_coefficient_augmentation",
+   "AlgebraicGeometry.Scheme.adicResidueKoszulTensorTranspose_comm",
+   "AlgebraicGeometry.Scheme.adicResidueKoszulTensorTranspose",
+   "AlgebraicGeometry.Scheme.adicResidueKoszulTensorAugmentation"
+  ],
+  "statement": "theorem adicResidue_koszul_coefficient_augmentation\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) ≤ J) :\n    let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let b := fun i ↦ ringedKoszulSliceSection\n      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)\n      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)\n        (a i)) U\n    ∃ ε : ringedKoszulDualTower R r b ⟶ adicResidueQuotientCoefficientTower X J U,\n      ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =\n        adicResidueQuotientCoefficientUnit X J U n",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261026T100438-L-30686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T114141-L-2268861",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

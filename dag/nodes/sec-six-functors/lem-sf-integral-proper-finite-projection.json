@@ -1,0 +1,184 @@
+{
+ "id": "lem-sf-integral-proper-finite-projection",
+ "kind": "statement",
+ "title": "Proper finite projection in scalar coordinates",
+ "statement": "Fix a prime l, a finite extension E/Q_l, Operations o and a RealizationModel model [def-strict-coefficient-system-realization-data] and [def-strict-coefficient-system-operation-data], an arbitrary morphism f:X→Y of schemes, a system M in System(X) and n≥0. Write F_W for scalarReductionDerivedExtension at n, L_W for coefficientSequenceLimit, and P_f for Operations.push(o,f). Define properFiniteReduction(f,n) from scalar reduction of completed-ring direct image to finite constant-ring direct image of scalar reduction by the composite: finiteReductionIso(Y,n) inverse, PurCompactSupport.properComparison for reduction modulo exponent n+1, the separately derived equality finiteDirectImage_eq(f,n), and finite direct image of finiteReductionIso(X,n). These are the coefficient comparisons of [lem-strict-coefficient-finite-geometric-coordinates]. For W=X,Y define μ_W(N) to be reductionEvaluation(n) inverse at L_W N followed by evaluation of the reconstruction counit at N [lem-coef-derived-system-evaluation-calculus]. Then F_Y(model.push(f)_M) followed by properFiniteReduction(f,n) at L_X M followed by finite direct image of μ_X(M) equals μ_Y(P_f M) followed by the specified proper evaluation of o. No open extension, compactification, constructibility or invertible reconstruction unit is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons of evaluation and adjunction units/counits; proper projection component of the original node plan, Step 1; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+ },
+ "stmt_deps": [
+  "def-strict-coefficient-system-realization-data",
+  "def-strict-coefficient-system-operation-data",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-strict-coefficient-finite-geometric-coordinates",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "use the sectionwise projection equation of model.ordinary as an equality\nof ordinary module maps. Apply it to simultaneous K-injective representatives of\nM and to their direct images. The universal right-derived comparison carries this\nordinary square to the derived projection square. The comparison on its integral\nside is model.push: transpose under the two composite adjunctions, compute on\nflat-term K-flat representatives, and use model.model to identify its transpose\nwith the localization of ordinary.reductionPullComplex. The ordinary conjugacy\nand the adjunction triangles recover ordinary.comparison on K-injectives, so\nuniqueness of right derivation identifies these whole derived transformations.\nThe finite proper scalar comparison is the scalar-adjunction mate of the\nrestriction/direct-image square by its definition. The normalized\nfiniteReductionIso and finiteDirectImage_eq transport that mate to\nproperFiniteReduction. Finally counit_projection identifies the scalar adjunct\nof each total-limit projection with reductionEvaluation inverse followed by the\nevaluated reconstruction counit. Substitution at source and target gives exactly\nthe displayed equality. Only ordinary section maps and universal derived\ncomparisons are used, never faithfulness of derived evaluation. Zero systems\nsatisfy the same equation.",
+   "uses": [
+    "def-strict-coefficient-system-realization-data",
+    "def-strict-coefficient-system-operation-data",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-strict-coefficient-finite-geometric-coordinates",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons of evaluation and adjunction units/counits; proper projection component of the original node plan, Step 1; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-strict-coefficient-system-realization-data",
+  "def-strict-coefficient-system-operation-data",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-strict-coefficient-finite-geometric-coordinates",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "X8: finite left-adjoint normalization, finite geometric mate counit, and explicit adjunction calculation. The top theorem is assembled from two strictly separate normalization steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient evaluation of an adjunction mate for proper direct image and open extension",
+   "results": "{\"t\": \"2026-10-27T01:47:23Z\", \"tool\": \"leansearch\", \"query\": \"Derived coefficient evaluation of an adjunction mate for proper direct image and open extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"CategoryTheory.Adjunction.derived\\u03b5\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"CategoryTheory.Adjunction.derived\\u03b5.congr_simp\", \"CategoryTheory.Adjunction.derived\\u03b7\", \"Topology.IsInducing.adjunction\"], \"digest\": \"ecb84607325d937c\"}",
+   "date": "2026-10-27",
+   "verdict": "No theorem for this normalized coefficient-system square; the returned general adjunction results do not supply its geometric normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "{\"t\": \"2026-10-27T01:47:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv_naturality_left\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_naturality_left\"], \"digest\": \"e5336c4ff17a2a39\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction naturality lemma is used in assembly, but does not identify the normalized geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "properFiniteReduction|openFiniteReduction|integralProperFiniteProjection|integralOpenFiniteEvaluation",
+   "results": "{\"t\": \"2026-10-27T01:47:24Z\", \"tool\": \"grep\", \"query\": \"properFiniteReduction|openFiniteReduction|integralProperFiniteProjection|integralOpenFiniteEvaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No theorem for this normalized coefficient-system square; the returned general adjunction results do not supply its geometric normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSupportProjectionTransport",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Preservation of coefficient comparisons for evaluation and adjunction units/counits; proper direct-image factor",
+   "via": [
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralProperFiniteProjection",
+  "file": "lean/Sheaf/SixFunctors/IntegralProperFiniteProjection.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralProperFiniteProjection",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.properFiniteReduction",
+   "WeilConjectures.IntegralSystemRealization.integralProperFiniteProjection"
+  ],
+  "statement": "theorem integralProperFiniteProjection (o : Operations l E)\n    (model : RealizationModel l E o) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M : System l E X) (n : ℕ) :\n    (scalarReductionDerivedExtension l E Y n).map ((model.push l E f).hom.app M) ≫\n      (properFiniteReduction l E f n).app ((coefficientSequenceLimit l E X).obj M) ≫\n      (proEtaleConstantDerivedDirectImage f\n        (Padic.coefficientExtensionRing l E (n + 1))).map\n          (((calculus l E X).reductionEvaluation n).inv.app\n              ((coefficientSequenceLimit l E X).obj M) ≫\n            (coefficientSequenceDerivedEvaluation l E X n).map\n              ((calculus l E X).adjunction.counit.app M)) =\n    ((calculus l E Y).reductionEvaluation n).inv.app\n        ((coefficientSequenceLimit l E Y).obj ((Operations.push l E o f).obj M)) ≫\n      (coefficientSequenceDerivedEvaluation l E Y n).map\n        ((calculus l E Y).adjunction.counit.app ((Operations.push l E o f).obj M)) ≫\n      ((o.evaluation f).evaluation n).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T034625-L-3666864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261027T103518-L-1094397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "V8 stage 2",
+  "old_statement": "Fix a prime l, a finite extension E/Q_l, Operations o and a RealizationModel model [def-sf-integral-system-canonical-bridge] and [def-sf-integral-system-operations], an arbitrary morphism f:X→Y of schemes, a system M in System(X) and n≥0. Write F_W for scalarReductionDerivedExtension at n, L_W for coefficientSequenceLimit, and P_f for Operations.push(o,f). Define properFiniteReduction(f,n) from scalar reduction of completed-ring direct image to finite constant-ring direct image of scalar reduction by the composite: finiteReductionIso(Y,n) inverse, PurCompactSupport.properComparison for reduction modulo exponent n+1, the separately derived equality finiteDirectImage_eq(f,n), and finite direct image of finiteReductionIso(X,n). These are the coefficient comparisons of [lem-pur-compact-support-integral-coefficient-comparison]. For W=X,Y define μ_W(N) to be reductionEvaluation(n) inverse at L_W N followed by evaluation of the reconstruction counit at N [lem-coef-derived-system-evaluation-calculus]. Then F_Y(model.push(f)_M) followed by properFiniteReduction(f,n) at L_X M followed by finite direct image of μ_X(M) equals μ_Y(P_f M) followed by the specified proper evaluation of o. No open extension, compactification, constructibility or invertible reconstruction unit is assumed.",
+  "what": "Dependency-interface refinement only: replace a broad owner containing later compact-support/completion realization by the existing lower geometric or strict-system declarations actually used. The Lean statement, hypotheses, conclusion and proof stay verbatim. This prevents the lower ordinary construction from acquiring a circular dependency on strict proper reduction.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+   "place": "Coefficient comparisons of evaluation and adjunction units/counits; proper projection component of the original node plan, Step 1; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-support-projection-transport",
+    "holds": true,
+    "note": "Identical Lean declaration and mathematical assertion; only the cited interface is narrowed."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sf-integral-system-canonical-bridge",
+   "def-sf-integral-system-operations",
+   "lem-weil-derived-scalar-extension-restriction-adjunction",
+   "lem-pur-compact-support-integral-coefficient-comparison",
+   "lem-coef-derived-system-evaluation-calculus"
+  ],
+  "old_proof": [
+   {
+    "text": "use the sectionwise projection equation of model.ordinary as an equality\nof ordinary module maps. Apply it to simultaneous K-injective representatives of\nM and to their direct images. The universal right-derived comparison carries this\nordinary square to the derived projection square. The comparison on its integral\nside is model.push: transpose under the two composite adjunctions, compute on\nflat-term K-flat representatives, and use model.model to identify its transpose\nwith the localization of ordinary.reductionPullComplex. The ordinary conjugacy\nand the adjunction triangles recover ordinary.comparison on K-injectives, so\nuniqueness of right derivation identifies these whole derived transformations.\nThe finite proper scalar comparison is the scalar-adjunction mate of the\nrestriction/direct-image square by its definition. The normalized\nfiniteReductionIso and finiteDirectImage_eq transport that mate to\nproperFiniteReduction. Finally counit_projection identifies the scalar adjunct\nof each total-limit projection with reductionEvaluation inverse followed by the\nevaluated reconstruction counit. Substitution at source and target gives exactly\nthe displayed equality. Only ordinary section maps and universal derived\ncomparisons are used, never faithfulness of derived evaluation. Zero systems\nsatisfy the same equation.",
+    "uses": [
+     "def-sf-integral-system-canonical-bridge",
+     "def-sf-integral-system-operations",
+     "lem-weil-derived-scalar-extension-restriction-adjunction",
+     "lem-pur-compact-support-integral-coefficient-comparison",
+     "lem-coef-derived-system-evaluation-calculus"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+     "place": "Coefficient comparisons of evaluation and adjunction units/counits; proper projection component of the original node plan, Step 1; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-sf-integral-system-canonical-bridge",
+   "def-sf-integral-system-operations",
+   "lem-weil-derived-scalar-extension-restriction-adjunction",
+   "lem-pur-compact-support-integral-coefficient-comparison",
+   "lem-coef-derived-system-evaluation-calculus"
+  ]
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "id": "lem-sfb-descent-data-refinement-hom",
+ "kind": "statement",
+ "title": "Compatible arrows of descent data descend from a universally descending refinement",
+ "statement": "Work with quasi-separated schemes [def-pc-scheme, def-weil-quasi-separated-morphism] and their fibre products [def-pc-fibre-product] in the universes of [def-weil-size-convention]. Let $\\mathcal G$ be a contravariant category-valued pseudofunctor: it assigns a category $\\mathcal G(V)$ to each such scheme, pullback functors $h^*$ to maps, and natural isomorphisms $(hk)^*\\cong k^*h^*$ and $\\mathrm{id}^*\\cong\\mathrm{id}$ satisfying the associativity and unit identities. Its fibres need not be groupoids. For $p:U\\to S$, let $\\operatorname{Desc}_{\\mathcal G}(p)$ have objects $(A,\\alpha)$ with $A\\in\\mathcal G(U)$ and $\\alpha:\\mathrm{pr}_1^*A\\xrightarrow{\\sim}\\mathrm{pr}_2^*A$ on $U\\times_SU$, identity on the diagonal and satisfying $\\alpha_{23}\\alpha_{12}=\\alpha_{13}$ on $U\\times_SU\\times_SU$; an arrow $u:(A,\\alpha)\\to(B,\\beta)$ is an arrow $u:A\\to B$ satisfying $\\beta\\,\\mathrm{pr}_1^*u=\\mathrm{pr}_2^*u\\,\\alpha$, with all comparisons inserted. Call $p$ universal descent if the canonical functor $\\mathcal G(V)\\to\\operatorname{Desc}_{\\mathcal G}(U\\times_SV\\to V)$ is fully faithful for every quasi-separated $V\\to S$. Let $U\\xrightarrow{a}Y\\xrightarrow{b}S$ be maps of quasi-separated schemes, and suppose $ba$ is universal descent. Then restriction along $a$ induces a fully faithful functor\n$$a^*:\\operatorname{Desc}_{\\mathcal G}(b)\\longrightarrow\\operatorname{Desc}_{\\mathcal G}(ba).$$\nThus for every two $b$-data, every compatible arrow between their restrictions lifts to a unique compatible arrow between the original data. No descent or surjectivity assumption is imposed on $a$, and no object-effectivity hypothesis is imposed on $ba$.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Proposition (5.6), printed p.19: supporting Hom descent for the refinement assertion; construction supplied by Q09, not stated separately in the paper. Read online; local copy WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $p=ba$ and $W=U\\times_SY$, with projections $t:W\\to U$ and $q:W\\to Y$. All products and the graph $s=(\\mathrm{id}_U,a):U\\to W$ exist by [def-pc-fibre-product]. They stay in the quasi-separated domain: a map from a quasi-separated scheme is quasi-separated, this property survives base change, and a quasi-separated map to a quasi-separated scheme has quasi-separated source, by clauses (1)-(3) of [lem-weil-pbc-qcqs-morphism-permanence], using the scheme convention in [def-weil-quasi-separated-morphism]. Apply this successively to the products below. For each quasi-separated $V\\to S$, the assumed fully faithful comparison for $U\\times_SV\\to V$ says exactly: an arrow between pullbacks of two objects of $\\mathcal G(V)$ lifts uniquely if its two pullbacks to the kernel pair agree. In particular pullback along this projection is injective on arrows between these objects. This is the assumed Hom bijection, with no effectiveness assertion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), printed p.19, Hom-only refinement input; explicit argument by Q112 (not a separately stated result of the paper)"
+   }
+  },
+  {
+   "text": "Fix two $b$-data $(A,\\alpha),(B,\\beta)$ and an arrow $v:a^*A\\to a^*B$ of their restricted $p$-data. For maps $x,y:T\\to Y$ with $bx=by$, write $\\alpha_{x,y}:x^*A\\to y^*A$ for pullback of $\\alpha$ along $(x,y)$, and likewise $\\beta_{x,y}$. Products written as tuples below denote projection maps of schemes, not evaluations on geometric points. Insert the given pseudofunctor comparison isomorphisms in every composite; their associativity and unit identities allow reassociation of these expressions. Thus $\\alpha_{y,z}\\alpha_{x,y}=\\alpha_{x,z}$ and $\\alpha_{x,x}=1$, and likewise for $\\beta$. On $W$, define the actual arrow\n$$h=\\beta_{at,q}\\,t^*v\\,\\alpha_{at,q}^{-1}:q^*A\\longrightarrow q^*B.$$\nThe isomorphisms inverted here are descent isomorphisms; the arrow $v$ itself need not be invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), printed p.19, Hom-only refinement input; explicit argument by Q112 (not a separately stated result of the paper)"
+   }
+  },
+  {
+   "text": "Check the kernel-pair condition for $h$ over $Y$. On $W\\times_YW=U\\times_SU\\times_SY$, label the projections $(u_1,u_2,y)$ and abbreviate $\\alpha_{a u_i,y}$ to $\\alpha_{iy}$ and $\\alpha_{a u_1,a u_2}$ to $\\alpha_{12}$; use analogous notation for $\\beta$ and put $v_i=u_i^*v$. The compatibility of $v$ pulled back from $U\\times_SU$ is $\\beta_{12}v_1=v_2\\alpha_{12}$. Consequently\n$$h_2=\\beta_{2y}v_2\\alpha_{2y}^{-1}=\\beta_{2y}\\beta_{12}v_1\\alpha_{12}^{-1}\\alpha_{2y}^{-1}=\\beta_{1y}v_1\\alpha_{1y}^{-1}=h_1.$$\nThe last equality uses the two displayed cocycle identities of step 2. Hence $h$ is an arrow between the canonical $q$-descent data of $A,B$. Step 1 with $V=Y$ supplies a unique $f:A\\to B$ with $q^*f=h$. Pull back this equality along the graph $s$: since $qs=a$, $ts=\\mathrm{id}_U$ and both diagonal descent isomorphisms are identities, it yields $a^*f=v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), printed p.19, Hom-only refinement input; explicit argument by Q112 (not a separately stated result of the paper)"
+   }
+  },
+  {
+   "text": "It remains to verify that $f$ is a $b$-datum arrow. Put $Z=Y\\times_SY$. The projection $r:U\\times_SZ\\to Z$ is a base change of $p$, so is injective on arrows by step 1. On its source use projection labels $(u,y_1,y_2)$; the maps $(u,y_i)$ to $W$ pull $q^*f=h$ back to $f_i=\\beta_{u i}v_u\\alpha_{u i}^{-1}$, where the index $u$ in a descent isomorphism means $a(u)$. The two sides of the desired equation satisfy\n$$\\beta_{12}f_1=\\beta_{12}\\beta_{u1}v_u\\alpha_{u1}^{-1}=\\beta_{u2}v_u\\alpha_{u1}^{-1},$$\n$$f_2\\alpha_{12}=\\beta_{u2}v_u\\alpha_{u2}^{-1}\\alpha_{12}=\\beta_{u2}v_u\\alpha_{u1}^{-1}.$$\nHere $\\beta_{12}\\beta_{u1}=\\beta_{u2}$ and $\\alpha_{12}\\alpha_{u1}=\\alpha_{u2}$ are the cocycles on $Y\\times_SY\\times_SY$, pulled back along $(a(u),y_1,y_2)$. Faithfulness for $r$ gives $\\beta\\,\\mathrm{pr}_1^*f=\\mathrm{pr}_2^*f\\,\\alpha$ on $Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), printed p.19, Hom-only refinement input; explicit argument by Q112 (not a separately stated result of the paper)"
+   }
+  },
+  {
+   "text": "For uniqueness, any compatible $g:A\\to B$ with $a^*g=v$ satisfies, on $W$,\n$$\\beta_{at,q}\\,t^*(a^*g)=q^*g\\,\\alpha_{at,q}.$$\nThus $q^*g=\\beta_{at,q}t^*v\\alpha_{at,q}^{-1}=h=q^*f$. Injectivity in step 1 for $V=Y$ gives $g=f$. This proves bijectivity on each Hom set. Restriction is a functor because pullback preserves identities and composition, and pulling the datum equation back along $a\\times_Sa$ preserves it. Therefore the restriction functor is fully faithful. The only inverses used were $\\alpha^{-1},\\beta^{-1}$, so this argument applies to arbitrary fibre categories and arbitrary arrows. All appeals to universal descent were at $V=Y$ or $V=Y\\times_SY$; no property of $a$ and no realization of any object was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Proposition (5.6), printed p.19, Hom-only refinement input; explicit argument by Q112 (not a separately stated result of the paper)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Rydh Proposition (5.6), printed p.19, supporting refinement assertion; explicit Hom descent and cocycle calculation by Q112, since this supporting lemma is not stated or proved separately there. Paper read online; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of descent data along a refinement is fully faithful if the finer morphism is universally of descent for a category fibred over a category with pullbacks",
+   "results": "{\"t\": \"2026-10-23T21:58:43Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of descent data along a refinement is fully faithful if the finer morphism is universally of descent for a category fibred over a category with pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_hom\"], \"digest\": \"440bdad4bc66dc85\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor requires a chosen topology and an IsPrestack instance. The present hypothesis is only universal descent for the single finer map, with no such topology or instance. Establishing that interface is an additional argument, not a one-line specialization. The other hits state canonical comparison, Hom extensionality or definitions of pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A refinement map between Cech descent categories is fully faithful whenever its composite to the base is universally a morphism of descent, without any topology or prestack assumption",
+   "results": "{\"t\": \"2026-10-23T22:00:36Z\", \"tool\": \"leanfinder\", \"query\": \"A refinement map between Cech descent categories is fully faithful whenever its composite to the base is universally a morphism of descent, without any topology or prestack assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.GrothendieckTopology.fullyFaithfulUliftYoneda\", \"CategoryTheory.fullyFaithfulSheafCompose\"], \"digest\": \"a12a45a263a42a19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor requires a chosen topology and an IsPrestack instance. The present hypothesis is only universal descent for the single finer map, with no such topology or instance. Establishing that interface is an additional argument, not a one-line specialization. The other hits state canonical comparison, Hom extensionality or definitions of pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulPullFunctor\"",
+   "results": "{\"t\": \"2026-10-23T21:58:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"fullyFaithfulPullFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.fullyFaithfulPullFunctor\"], \"digest\": \"43b7929d2971428b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor requires a chosen topology and an IsPrestack instance. The present hypothesis is only universal descent for the single finer map, with no such topology or instance. Establishing that interface is an additional argument, not a one-line specialization. The other hits state canonical comparison, Hom extensionality or definitions of pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulPullFunctor|faithful_pullFunctor|full_pullFunctor",
+   "results": "{\"t\": \"2026-10-23T21:58:41Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulPullFunctor|faithful_pullFunctor|full_pullFunctor\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"03c4b57f7e1ffa14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor requires a chosen topology and an IsPrestack instance. The present hypothesis is only universal descent for the single finer map, with no such topology or instance. Establishing that interface is an additional argument, not a one-line specialization. The other hits state canonical comparison, Hom extensionality or definitions of pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally fully faithful descent comparison for a composite morphism implies that restriction from descent data for the right factor to descent data for the composite is fully faithful",
+   "results": "{\"t\": \"2026-10-23T21:58:42Z\", \"tool\": \"leansearch\", \"query\": \"A universally fully faithful descent comparison for a composite morphism implies that restriction from descent data for the right factor to descent data for the composite is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Functor.FullyFaithful.ofCompFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.mk\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Functor.Full.comp\"], \"digest\": \"a8484750fac5ca03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor requires a chosen topology and an IsPrestack instance. The present hypothesis is only universal descent for the single finer map, with no such topology or instance. Establishing that interface is an additional argument, not a one-line specialization. The other hits state canonical comparison, Hom extensionality or definitions of pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of descent data along a refinement is fully faithful if the refined covering morphism is universally of descent",
+   "results": "{\"t\": \"2026-10-23T22:27:32Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of descent data along a refinement is fully faithful if the refined covering morphism is universally of descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Meq.pullback_refine\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Over.faithful_pullback\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullHom_hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\"], \"digest\": \"0cfd5ecbb3d874b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor (Precoverage.lean lines 49-55, 323-327) assumes a Grothendieck topology, IsPrestack and covering membership. The single-map universal-descent hypothesis does not directly supply those interfaces. The project variant bijective_pullFunctor_map_of_isSheaf likewise assumes a topology and sheaf hypotheses. Other hits give definitions, canonical comparison functors or presieve-prestack equivalences, not the present refinement conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction between Cech descent data categories is fully faithful when the composite map is universally of descent for morphisms",
+   "results": "{\"t\": \"2026-10-23T22:27:33Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction between Cech descent data categories is fully faithful when the composite map is universally of descent for morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf\"], \"digest\": \"cf475bb89069fc83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor (Precoverage.lean lines 49-55, 323-327) assumes a Grothendieck topology, IsPrestack and covering membership. The single-map universal-descent hypothesis does not directly supply those interfaces. The project variant bijective_pullFunctor_map_of_isSheaf likewise assumes a topology and sheaf hypotheses. Other hits give definitions, canonical comparison functors or presieve-prestack equivalences, not the present refinement conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible morphism of descent data descends from a refinement if the finer morphism universally descends arrows in a category valued pseudofunctor without prestack hypotheses",
+   "results": "{\"t\": \"2026-10-23T22:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible morphism of descent data descends from a refinement if the finer morphism universally descends arrows in a category valued pseudofunctor without prestack hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.hom\", \"CategoryTheory.Pseudofunctor.DescentData.Hom\", \"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj_hom\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.DescentData.hom_comp\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\"], \"digest\": \"a54db269c922449b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fullyFaithfulPullFunctor (Precoverage.lean lines 49-55, 323-327) assumes a Grothendieck topology, IsPrestack and covering membership. The single-map universal-descent hypothesis does not directly supply those interfaces. The project variant bijective_pullFunctor_map_of_isSheaf likewise assumes a topology and sheaf hypotheses. Other hits give definitions, canonical comparison functors or presieve-prestack equivalences, not the present refinement conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Pseudofunctor.DescentData.fullyFaithfulPullFunctor",
+  "file": "Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean",
+  "note": "Lines 323-327, with topology and IsPrestack hypotheses at lines 49-56. Related theorem; constructing a suitable topology/prestack from single-map universal descent is not supplied by this declaration."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-descent-composition-refinement-calculus",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited direct-image alteration/moduli support route: Rydh Proposition (5.6), printed p.19, descent of a compatible arrow along a refinement; the Hom input to the second assertion.",
+   "via": [
+    "lem-sfb-etale-descent-composition-refinement-calculus",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-descent-data-refinement-hom",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its hypotheses. Constructed h on U times_S Y by conjugating the given restricted arrow with the two descent isomorphisms, checked its kernel-pair equation explicitly, descended it using the assumed Hom bijection, and checked compatibility and uniqueness after base changes of ba. Quasi-separatedness of all test bases uses the existing permanence leaf. No new nodes.",
+  "blueprint": "Supports the inherited direct-image alteration/moduli route under det-thm-sf-ctf-stability-direct-images, current latest proof paragraph (3), through the existing Rydh refinement support chain. Implements the Hom-only input to Proposition (5.6), second assertion. blueprint_refs ancestor returned null; retained the base null ancestor and complete via chain, with no chapter or unit route change."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-214c150eb",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-214c150eb (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement, stmt_deps, source and blueprint are byte-identical to live, where the node is still unsplit. There are no new nodes and no repair note. The proof is new and I re-derived every step. Step 1 cites three Mathlib leaves (fibre products, qs permanence (1)-(3), qs definition) to keep every test scheme quasi-separated: W, U×U×Y, Z=Y×_S Y, U×Z and Y×Y×Y. Steps 2-3: h=β_{at,q} t^*v α_{at,q}^{-1} on W=U×_S Y. Its kernel-pair equation h_2=h_1 follows from v's compatibility and the cocycles α_{2y}α_{12}=α_{1y} and β_{2y}β_{12}=β_{1y}. Universal descent at V=Y applies because q is the base change of ba along b; it gives f with q^*f=h, and pulling back along s=(id,a) gives a^*f=v. Step 4: f is compatible on Z, using injectivity of r^* (r is the base change of ba along Z→S); both sides reduce to β_{u2}v_uα_{u1}^{-1}. Step 5: uniqueness follows from injectivity at V=Y, and functoriality is checked. Edge cases a=id, b=id, a non-surjective with Y=S⊔S, empty schemes and non-groupoid fibres all behave correctly. The only citer, step 1 of lem-sfb-etale-descent-composition-refinement-calculus, needs exactly this instance. The fpqc refinement lemmas lem-galois-fpqc-refinement-fully-faithful and lem-galois-fpqc-singleton-fully-faithful-0241 are not duplicates: they require fpqc covers and schemes over schemes. The Mathlib candidate fullyFaithfulPullFunctor needs a topology and IsPrestack, so it is not a one-line specialization. Rydh is not in literature (WANTED), and proof_origin is correctly set to agent. There is no SGA citation and no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescentDataRefinementHom",
+  "declaration": "AlgebraicGeometry.fullyFaithful_descentData_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentDataRefinementHom.lean",
+  "statement": "theorem fullyFaithful_descentData_refinement (G : Pseudofunctor (LocallyDiscrete (ObjectProperty.FullSubcategory (fun X : Scheme.{u} ↦ QuasiSeparatedSpace X))ᵒᵖ) Cat.{v, w}) {U Y S : ObjectProperty.FullSubcategory (fun X : Scheme.{u} ↦ QuasiSeparatedSpace X)} (a : U ⟶ Y) (b : Y ⟶ S) (h : ∀ (V W : ObjectProperty.FullSubcategory (fun X : Scheme.{u} ↦ QuasiSeparatedSpace X)) (s : V ⟶ S) (t : W ⟶ U) (q : W ⟶ V), IsPullback t.hom q.hom (a.hom ≫ b.hom) s.hom → Nonempty (G.toDescentData (fun _ : Unit ↦ q)).FullyFaithful) : Nonempty (Pseudofunctor.DescentData.pullFunctor G (f := fun _ : Unit ↦ b) (f' := fun _ : Unit ↦ a ≫ b) (p := 𝟙 S) (α := fun _ : Unit ↦ ()) (p' := fun _ : Unit ↦ a) (fun _ : Unit ↦ (Category.comp_id (a ≫ b)).symm)).FullyFaithful",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-553d37389",
+  "group": "Q149",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause. Base category is FullSubcategory of Scheme.{u} with QuasiSeparatedSpace. G is any Pseudofunctor (LocallyDiscrete Cᵒᵖ) to Cat.{v,w}, so fibres need not be groupoids. Desc is Mathlib DescentData for a Unit-indexed family, equivalent to (A, α) with the cocycle and diagonal conditions since pullbacks exist. The universal-descent hypothesis quantifies over all IsPullback squares of a≫b against s; this is equivalent to the chosen fibre product via pullFunctorEquivalence, and W is automatically quasi-separated. The conclusion is pullFunctor with p = 𝟙 S, p' = a and w = (comp_id (a≫b)).symm, which is restriction along a; Nonempty FullyFaithful is the unique lifting of compatible arrows. No assumption on a, no effectivity, no topology; universes independent. Edge cases covered: empty schemes, a = id, b = id, non-surjective a, non-groupoid fibres. lean.statement is verbatim in the file; the node diff against live is only the lean field; stmt_deps unchanged; docstrings give the Rydh (5.6) source place, the blueprint id and the 5 proof steps; proof is sorry only; no new definitions; both report sections present; no duplicate in Mathlib or the project. Minor: an unused private FinitePresentation import, harmless. Not recompiled, per instructions."
+ }
+}

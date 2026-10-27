@@ -1,0 +1,206 @@
+{
+ "id": "lem-sfb-space-lfp-formally-etale-criterion",
+ "kind": "statement",
+ "title": "Local finite presentation and unique first order lifting imply etaleness",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Assume that $f$ is locally of finite presentation, meaning that its maps on etale scheme charts are locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose that for every first order thickening $j:T_0\\hookrightarrow T$ of affine $S$-schemes [def-sbc-first-order-thickening], every $a_0:T_0\\to X$ and $b:T\\to Y$ satisfying $f a_0=b j$ admit exactly one $a:T\\to X$ with $a j=a_0$ and $f a=b$. Then $f$ is etale, meaning that the induced morphisms on etale scheme charts are etale scheme morphisms [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0616 (lemma-etale-formally-etale), implication (2) to (1), with Tag 04GC (definition-formally-etale) and definition-formally-smooth-etale-unramified."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "def-weil-etale-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix any commutative chart diagram $v h=f u$, with $U,V$ schemes over $S$, $u:U\\to X$ and $v:V\\to Y$ representable etale, and $h:U\\to V$ an $S$-morphism. The local finite presentation hypothesis gives that $h$ is locally of finite presentation. The lifting hypothesis is exactly $P(f)$ in [lem-sfb-formally-etale-space-chart-locality]. Its forward implication gives $P(h)$ for this diagram: every compatible affine first order lifting problem over $S$ has a unique solution in $U$.",
+   "uses": [
+    "lem-sfb-formally-etale-space-chart-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0616 (lemma-etale-formally-etale), (2) implies (1), via Tag 04GD (lemma-formally-etale), (1) implies (2)."
+   }
+  },
+  {
+   "text": "The property $P(h)$ also tests all affine scheme lifting problems required by the scheme criterion, without a preassigned $S$-structure. Indeed, given $j:T_0\\hookrightarrow T$, $a_0:T_0\\to U$ and $b:T\\to V$ with $h a_0=bj$, give $T$ the structure morphism $T\\xrightarrow{b}V\\to S$ and $T_0$ its composite with $j$. Since $h$ is over $S$, the equation makes $a_0$ an $S$-morphism. Apply $P(h)$ to obtain its unique lift $a$. Any scheme lift with $ha=b$ is automatically over $S$, since its composite to $S$ equals $(V\\to S)ha=(V\\to S)b$. Thus uniqueness among $S$-morphisms is uniqueness among all scheme lifts.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04GD (lemma-formally-etale), scheme-chart lifting condition; explicit unpacking of the base convention in definition-formally-smooth-etale-unramified."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-lfp-unique-infinitesimal-lifts-etale] to the scheme morphism $c=h:U\\to V$. Step 1 supplies local finite presentation and step 2 supplies existence and uniqueness for every affine first order thickening, exactly its hypotheses. Hence $h$ is etale. The chart diagram was arbitrary, so every induced morphism on etale scheme charts is etale. This is precisely the meaning of etaleness of $f$ stipulated in the statement, and proves the conclusion.",
+   "uses": [
+    "lem-sfb-lfp-unique-infinitesimal-lifts-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM (lemma-etale-formally-etale), (2) implies (1), as used in spaces-more-morphisms.tex Tag 0616."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-formally-etale-space-chart-locality",
+  "lem-sfb-lfp-unique-infinitesimal-lifts-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0616 (lemma-etale-formally-etale), proof of (2) implies (1), using chart locality Tag 04GD and the scheme criterion more-morphisms.tex Tag 02HM; the base-structure check is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is etale if and only if it is locally of finite presentation and has unique lifts across all square zero thickenings of affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme morphism and ring formal-etaleness declarations do not state the infinitesimal criterion for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented formally etale morphisms of algebraic spaces are etale",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme morphism and ring formal-etaleness declarations do not state the infinitesimal criterion for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal lifting criterion for etale morphisms of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap (Ideal.Quotient.mk I x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \": Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R A ↔ FormallyUnramified R A ∧ FormallySmooth R A\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally étale if and only if it is both formally unramified and formally smooth over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme morphism and ring formal-etaleness declarations do not state the infinitesimal criterion for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyEtale\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme morphism and ring formal-etaleness declarations do not state the infinitesimal criterion for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "formallyEtale|formally_etale|FormallyEtale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme morphism and ring formal-etaleness declarations do not state the infinitesimal criterion for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|formallyEtale|formally_etale",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: none. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 38-48, and Mathlib/RingTheory/Etale/Basic.lean, lines 79-99: these concern schemes or ring algebras, not algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the algebraic-space infinitesimal criterion; reducing to schemes requires the chart-locality theorem, not a one-line specialization.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces with local finite presentation and unique square zero lifts is etale",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.FormallyEtale.mk, AlgebraicGeometry.IsEtale.of_comp. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 38-48, and Mathlib/RingTheory/Etale/Basic.lean, lines 79-99: these concern schemes or ring algebras, not algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the algebraic-space infinitesimal criterion; reducing to schemes requires the chart-locality theorem, not a one-line specialization.",
+   "digest": "b9829665efcbf20a"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyEtale\", \"FinitePresentation\"",
+   "results": "0 hits: none. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 38-48, and Mathlib/RingTheory/Etale/Basic.lean, lines 79-99: these concern schemes or ring algebras, not algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the algebraic-space infinitesimal criterion; reducing to schemes requires the chart-locality theorem, not a one-line specialization.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented formally etale morphisms of algebraic spaces are etale",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 38-48, and Mathlib/RingTheory/Etale/Basic.lean, lines 79-99: these concern schemes or ring algebras, not algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the algebraic-space infinitesimal criterion; reducing to schemes requires the chart-locality theorem, not a one-line specialization.",
+   "digest": "f80ebc741ded6e8d"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal criterion for an etale map of algebraic spaces using affine first order thickenings",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.of_comp. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 38-48, and Mathlib/RingTheory/Etale/Basic.lean, lines 79-99: these concern schemes or ring algebras, not algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states the algebraic-space infinitesimal criterion; reducing to schemes requires the chart-locality theorem, not a one-line specialization.",
+   "digest": "041d80f279537357"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-invertible-multiplication",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Invertible multiplication on a smooth commutative group space. Supporting infinitesimal input: Local finite presentation and unique first order lifting imply etaleness.",
+   "via": [
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-lfp-formally-etale-criterion",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0616 through existing chart-locality 04GD and scheme criterion 02HM nodes. Wrote out the conversion from S-scheme affine tests to arbitrary scheme tests, including uniqueness. No new nodes; statement and statement dependencies unchanged. Project-source attachment searches and five fresh logged Mathlib searches found no algebraic-space match.",
+  "blueprint": "Supporting infinitesimal criterion in the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli/Picard route, at invertible multiplication on a smooth group space. The current latest blueprint unit and direct-image proof were read; no unit route or chapter is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-2a8c18269",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-2a8c18269 (reviewer sub-agent of L); spot-checked: Read the item's 3-step split and its two cited nodes in full. The statement is faithful to Stacks 0616 (2)=>(1): spaces-more-morphisms.tex l.3641-3661, whose proof is the scheme case 02HM plus etale localization 04GD, and the lifting hypothesis is 04GC. Step 1: the item's hypothesis is exactly P(f) of lem-sfb-formally-etale-space-chart-locality (04GD), so P(h) holds on every chart diagram; lfp of h comes from the chartwise hypothesis, and no surjective atlas is assumed. Step 2 is correct elementary base bookkeeping. T gets its structure through V->S after b. a0 is over S because (U->S)a0=(V->S)b j. Any lift with h a=b is over S, so uniqueness transfers as well as existence. Step 3: the hypotheses of lem-sfb-lfp-unique-infinitesimal-lifts-etale (02HM) are exactly what steps 1 and 2 supply, so h is etale on an arbitrary chart, which is the stipulated meaning of f etale. Edge cases checked: empty X; k[eps]->k fails uniqueness; a closed point in A^1 fails existence. Duplicate search over nodes mentioning both algebraic spaces and first order thickenings found only the 04GD node and the converse lem-sfb-etale-space-infinitesimal-lifting, so there is no duplicate. No new nodes, no SGA, no route change, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLfpFormallyEtaleCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_on_charts_of_lfp_of_unique_affine_thickening_lifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLfpFormallyEtaleCriterion.lean",
+  "statement": "theorem etale_on_charts_of_lfp_of_unique_affine_thickening_lifts {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hlfp : MapIsLocallyOfFinitePresentation f) (hlift : ∀ (T₀ T : Over S) [IsAffine T₀.left] [IsAffine T.left] (j : T₀ ⟶ T), IsFirstOrderThickening j.left → ∀ (a₀ : yoneda.obj T₀ ⟶ X.obj.obj) (b : yoneda.obj T ⟶ Y.obj.obj), a₀ ≫ f.hom.hom = yoneda.map j ≫ b → ∃! a : yoneda.obj T ⟶ X.obj.obj, yoneda.map j ≫ a = a₀ ∧ a ≫ f.hom.hom = b) : MapIsLocally (@Etale) f",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed MapIsLocallyOfFinitePresentation and MapIsLocally chart tests from def-sfb-space-morphism-properties, added to stmt_deps. The affine first order lifting condition is written explicitly using the recorded algebraic-space and thickening definitions. The two proof dependencies have no Lean declarations at delivery time, so no proof imports are available."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d9bdcf4e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0616 (2)=>(1) with 04GC lifting: S, X Y : AlgebraicSpace S, hlfp = MapIsLocally LocallyOfFinitePresentation (all compatible etale charts, def-sfb-space-morphism-properties), hlift over T0 T : Over S affine, IsFirstOrderThickening j.left (closed immersion, ker^2=bot), a0/b as S-maps from yoneda, square a0≫f = yoneda.map j≫b, ∃! a with both equations; conclusion MapIsLocally (@Etale) f (Mathlib Etale, no shadowing). No extra hypotheses or universe restriction; edge cases (empty X, k[eps]->k, point in A1, identity thickening) correct. Node diff vs live: only lean and stmt_deps += def-sfb-space-morphism-properties, which is on the base with a lean record (§5 allows it). lean.statement verbatim; sorry-only proof; docstrings carry source, blueprint and 3 proof steps; report has both sections. No duplicate formally-etale criterion for spaces; advisory: IsChartwiseEtale (lemma-owned, different formulation) is not a duplicate; redundant Mathlib imports are advisory only. No compile (no file changed)."
+ }
+}

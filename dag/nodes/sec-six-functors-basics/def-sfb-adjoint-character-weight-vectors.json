@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-adjoint-character-weight-vectors",
+ "kind": "definition",
+ "title": "Functorial adjoint character-weight vectors over an arbitrary field",
+ "statement": "Let $k$ be a field [def-weil-field] and $T,G$ be $k$-group schemes with a homomorphism $i:T\\to G$ [def-sc-group-scheme]. Characters $\\chi:T\\to\\mathbf G_m$ use [def-sc-gm-ga]. Write $\\mathfrak g=\\operatorname{Lie}(G)$ and $v_\\epsilon\\in G(k[\\epsilon])$ for the actual tangent point of $v\\in\\mathfrak g$ [sk-d-tangent, def-wf-lie-algebra-derivation], using the dual numbers [def-sc-dual-numbers]. For every commutative $k$-algebra $A$ and $c\\in A$, define $v_{A,c}\\in G(A[\\epsilon])$ by pushing $v_\\epsilon$ along the $k$-algebra map $k[\\epsilon]\\to A[\\epsilon]$ that sends $\\epsilon$ to $c\\epsilon$. For $s\\in T(A)$, let $s_\\epsilon$ be its constant extension to $A[\\epsilon]$ and evaluate $\\chi(s)\\in A$ by the Laurent coordinate as in [def-sfb-rho-section-module-data]. Define the functorial adjoint character-weight vector set\n$$W_i(\\chi)=\\{v\\in\\mathfrak g:\\ i(s_\\epsilon)v_{A,1}i(s_\\epsilon)^{-1}=v_{A,\\chi(s)}\\text{ for every commutative }k\\text{-algebra }A\\text{ and every }s\\in T(A)\\}.$$\nFor a split torus this is the usual character-weight space, expressed as its set of vectors. This definition uses all test algebras, rather than just rational points, and imposes no restriction on the characteristic or cardinality of $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.12 and Remark 12.13, pp.234--235, character weight spaces; Definition 21.26, p.433, adjoint roots and regular cocharacters. The dual-number formulation uses the actual tangent-point construction of sk-d-tangent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "sk-d-tangent",
+  "def-sc-dual-numbers",
+  "def-sfb-rho-section-module-data",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The character weight vectors of the adjoint representation of a split algebraic torus are defined by conjugation on dual numbers over every test algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FDRep.char_dual\", \"module\": \"Mathlib.RepresentationTheory.Character\", \"type\": \"(V : FDRep k G) (g : G) : (of (dual V.ρ)).character g = V.character g⁻¹\", \"doc\": \"For any finitely generated representation $V$ of a monoid $G$ over a field $k$ and for any element $g \\\\in G$, the character of the dual representation $V^*$ evaluated at $g$ is equal to the character \"}\n  {\"name\": \"LieModule.weightSpace.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  (χ χ_1 : L → R), χ = χ_1 → LieModule.weightSpace M χ = LieModule.weightSpace M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, if two Lie algebra homomorphisms $ \\\\chi, \\\\chi_1: \\\\mathfrak{g} \\\\to R $ are equal, then their corresponding weig\"}\n  {\"name\": \"LieAlgebra.lieCharacterEquivLinearDual\", \"module\": \"Mathlib.Algebra.Lie.Character\", \"type\": \"[IsLieAbelian L] : LieCharacter R L ≃ Module.Dual R L\", \"doc\": \"For an abelian Lie algebra $L$ over a commutative ring $R$, this definition establishes a canonical equivalence between the Lie characters on $L$ and the dual $R$-module of $L$. A Lie character is a L\"}\n  {\"name\": \"LieModule.weight_vector_multiplication\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(M₁ M₂ M₃ : Type*) [AddCommGroup M₁] [Module R M₁] [LieRingModule L M₁] [LieModule R L M₁] [AddCommGroup M₂]\\n  [Module R M₂] [LieRingModule L M₂] [LieModule R L M₂] [AddCommGroup M₃] [Module R M₃] [LieRingModule L M₃]\\n  [LieModule R L M₃] (g : M₁ ⊗[R] M₂ →ₗ⁅R,L⁆ M₃) (χ₁ χ₂ : R) (x : L) :\\n  LinearMap\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $M_1, M_2, M_3$ are $\\\\mathfrak{g}$-modules with weight spaces $W(M_1, \\\\chi_1, x)$, $W(M_2, \\\\chi_2, x)$, and $W(M_3, \\\\chi_1 + \\\\chi_2, x)\"}\n  {\"name\": \"LieAlgebra.mapsTo_toEnd_genWeightSpace_add_of_mem_rootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"(α χ : H → R) {x : L} (hx : x ∈ rootSpace H α) : MapsTo (toEnd R L M x) (genWeightSpace M χ) (genWeightSpace M (α + χ))\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a Cartan subalgebra $\\\\mathfrak{h}$, if $x$ belongs to the root space $\\\\mathfrak{g}_\\\\alpha$ corresponding to root $\\\\alpha : \\\\mathfrak{h\"}\n  {\"name\": \"RootPairing.Base.toWeightBasis_apply\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Base\", \"type\": \"(i : b.support) : b.toWeightBasis i = P.root i\", \"doc\": \"For a given index $i$ in the finite support set of the base structure, the $i$-th element of the weight basis of the $R$-module $M$ constructed from the root vectors $\\\\{\\\\alpha_i\\\\}$ is equal to the cor\"}\n  {\"name\": \"LieModule.Weight.toFun\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"The function associated to a weight in a Lie module over a nilpotent Lie ring, mapping elements of the Lie algebra $ L $ to the commutative ring $ R $. This constructs the canonical linear map corresp\"}\n  {\"name\": \"LieModule.Weight.mk\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"Given a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and a weight function $ \\\\chi : \\\\mathfrak{g} \\\\to R $, this constructor for\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match for scheme-theoretic adjoint character-weight vectors on all test algebras; search hits are abstract Lie weights or abstract representations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoint character eigenspace of a torus acting on the tangent space of an algebraic group tested on all commutative algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {H : LieSubalgebra R L} →\\n            [LieRing.IsNilpotent ↥H] → [H.IsCartanSubalgebra] → [IsNoetherian R L] → (↥H → R) → LieIdeal R ↥H\", \"doc\": \"The coroot space associated to a weight $\\\\alpha : \\\\mathfrak{h} \\\\to R$ is the image of the composition of maps from the tensor product of root spaces $\\\\mathfrak{g}_\\\\alpha \\\\otimes_R \\\\mathfrak{g}_{-\\\\alph\"}\n  {\"name\": \"LieAlgebra.IsRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"(R : Type u_1) →\\n  {L : Type u_3} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → [Module.Finite R L] → [Module.Free R L] → L → Prop\", \"doc\": \"An element $ x $ in a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is called regular if the adjoint action $ \\\\text{ad}_x : \\\\mathfrak{g} \\\\to \\\\mathfrak{g} $ defined by $ \\\\text{ad}_x(y) = [\"}\n  {\"name\": \"LieAlgebra.rootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          (H : LieSubalgebra R L) → [LieRing.IsNilpotent ↥H] → (↥H → R) → LieSubmodule R (↥H) L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $\\\\mathfrak{h}$, and a root $\\\\chi : \\\\mathfrak{h} \\\\to R$, the root space is the generalized weight space $\\\\bigcap_{x \\\\in \\\\m\"}\n  {\"name\": \"LieSubalgebra.engel\", \"module\": \"Mathlib/Algebra/Lie/EngelSubalgebra\", \"type\": \"(R : Type u_1) →\\n  {L : Type u_2} → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → L → LieSubalgebra R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ and an element $x \\\\in \\\\mathfrak{g}$, the Engel subalgebra associated to $x$ is the maximal generalized eigenspace of the adjoint representa\"}\n  {\"name\": \"LieModule.lie_mem_maxGenEigenspace_toEnd\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] {χ₁ χ₂ : R}\\n  {x y : L} {m : M},\\n  y ∈ ((LieModule.toEnd R L L) x).maxGenEigensp\", \"doc\": \"For a commutative ring $ R $, Lie algebra $ L $ over $ R $, and Lie module $ M $ over $ L $, if $ y $ belongs to the maximal generalized eigenspace of $ L $ associated to eigenvalue $ \\\\chi_1 $ and ele\"}\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"LieModule.IsTriangularizable.maxGenEigenspace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  {inst_3 : AddCommGroup M} {inst_4 : Module R M} {inst_5 : LieRingModule L M} {inst_6 : LieModule R L M}\\n  [self : LieModule.IsTriangularizable R L M] (x : L), ⨆ φ, ((LieModule.toEnd R \", \"doc\": \"For a triangularizable Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ with commutative ring $ R $, every element $ x \\\\in \\\\mathfrak{g} $ satisfies the property that the supremum of its maximal ge\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} →\\n              [inst_4 : H.IsCartanSubalgebra] →\\n                [LieAlgebra.IsKilling K L] →\\n         \", \"doc\": \"Given a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a non-degenerate Killing form and a non-zero weight $\\\\alpha$, this constructs the $\\\\mathfrak{sl}_2$-submodule of $\\\\mathfrak{g}$ generated by th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match for scheme-theoretic adjoint character-weight vectors on all test algebras; search hits are abstract Lie weights or abstract representations."
+  },
+  {
+   "tool": "grep",
+   "query": "weightSpace|weightVectors|tangentPoint|cocharacter",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No match for scheme-theoretic adjoint character-weight vectors on all test algebras; search hits are abstract Lie weights or abstract representations."
+  },
+  {
+   "tool": "grep",
+   "query": "Local project/source/DAG searches for universal adjoint weights and existing helper names; blueprint_refs.py search character-tangent-weights",
+   "results": "$ rg -n scaledTangentPoint|namespace AlgebraicGeometry.AdjointCharacter|splitTorus_solvable_cocharacter_containment /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf\n\n$ rg -l weight.*test algebras|test algebras.*weight|adjoint character weight|functorial.*weight /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-zeta-weil/thm-weil-deligne-purity.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-zeta-weil/prop-arithmetic-roots.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-zeta-weil/prop-weight-purity.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-zeta-weil/lem-weil-smooth-proper-purity-hypotheses.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-zeta-weil/prop-weight-purity-ordinary.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-finite-algebra-units-affine-chart.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-relative-canonical-root-exponential.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-a1/lem-zl-finite-restriction-coefficient-descent.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-double-flag-invariant-boundary.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-complex-extension.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-general/lem-zl-sheaves-to-complexes.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-reductive-centre-root-quotient.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-chevalley-unipotent-polynomial-coordinates.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-compatible-rank-one-graph-geometry.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-sumihiro-normal-torus-affine-neighbourhood.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-rational-projective-attracting-cells.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-flag-torus-fixed-geometry.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-pullback-completed-comparison.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/lem-coef-linear-monad-tensor-enrichment.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-rank-one-normalized-gauss-chart.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-gm-affine-action-grading.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-projective-torus-fixed-weight-schemes.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-a1/def-weil-complex-weights.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-split-torus-solvable-cocharacter-containment.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-proj-graded-sheafification-exact.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-reductive-frobenius-twist.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-unipotent-root-intersection-products.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-maximal-parabolic-reflections.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-torus-regular-semisimple-element.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-minimal-parabolic-split-centralizers.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-cocharacter-limit-smooth-structure.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-fixed-point-homogeneous-cotangent-lifts.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-borel-root-product-coordinates.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-chevalley-exponential-big-cell.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-torus-positive-ray-subgroup.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/lem-coef-discrete-weight-coherent-cocones.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-pur-supported-source-system-cup-calculus.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/prop-ag-det-weight-two-factor-tensor.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/cor-mg-central-determinant-weight.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-algebraic-groups-lie-algebras/prop-ag-det-weight-exterior.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/lem-coef-truncated-coend-skeleton-image.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors/lem-coef-cone-straightening-coherent-evaluation.json\n\n$ python3 /home/ubuntu/weil-conjectures-sheaf-shared/tools/blueprint_refs.py search character-tangent-weights\n0 blueprint nodes match 'character-tangent-weights'\n",
+   "date": "2026-10-24",
+   "verdict": "The existing def-sfb-torus-character-tangent-weights tests only k-points and explicitly agrees with character weights only over algebraically closed fields. No existing definition tests the adjoint eigenvector equation over all algebras. Other hits use weight terminology but do not define this set."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-solvable-cocharacter-containment",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Character-weight spaces in the regular-cocharacter containment input; Milne Definition 21.26, p.433. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion, On Linearization of Line Bundles, Lemma 2.3 proof, printed p.118, the Pic(G/B) and root-datum paragraph, citing Iversen 1976 Proposition 5.2 and Theorem 5.3. The explicit split Schubert-boundary basis and its scalar-extension form are the geometric input unpacked here; also Milne Lemma 18.21, printed p.392, the split affine-cell argument. The statement concerns split groups over arbitrary fields, not only algebraically closed fields. Supporting geometry: the split Bruhat stratification before the boundary-divisor argument; Milne Theorems 21.73 and 21.80. Supporting input: Chapter 21 standing arbitrary field, printed p.424; Proposition 21.1, p.424 (constant Weyl group and rational representatives); Summary 21.41, p.436; the fixed-scheme paragraph immediately before Proposition 21.70, p.446. Scalar-extension stability of split Borel pairs is used throughout Section 21h. The fixed-scheme assertion is scheme-theoretic, not just a statement about rational points. Supporting substep: Theorem 21.32 and Corollary 21.33, printed pp.434-435, together with Proposition 21.29, pp.433-434. Applied to a Borel containing the scalar extension of V to an algebraic closure: all geometric Borels through the split torus descend and are regular cocharacter limit subgroups. This is a containment input without a Borel or maximality hypothesis on V.",
+   "via": [
+    "lem-sfb-split-torus-solvable-cocharacter-containment",
+    "lem-sfb-split-flag-rational-fixed-scheme",
+    "lem-sfb-split-bruhat-affine-stratification",
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdjointCharacterWeightVectors",
+  "declaration": "AlgebraicGeometry.AdjointCharacter.weightVectors",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdjointCharacterWeightVectors.lean",
+  "statement": "def weightVectors {k : Type u} [Field k] {T G : Grp (Over (Spec (.of k)))} (i : T ⟶ G) (chi : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)) : Set (GrpObj.Lie G.X)",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AdjointCharacter.scaledTangentPoint",
+   "AlgebraicGeometry.AdjointCharacter.weightVectors"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d1f29f63",
+  "group": "Q102",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d1f29f63",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Re-delivery after the fe9c H2 return. The new existing:true node def-sfb-cocharacter-limit-subfunctors records CocharacterLimit.IsOrbitExtension and parabolicPoints; its signature matches parabolicPoints verbatim and its statement matches the bodies and Milne pp.262-264. The item now cites it instead of theorem node lem-sfb-cocharacter-limit-smooth-structure. def-wf-lie-algebra-derivation was added to the stmt_deps of the item and of def-sfb-adjoint-character-weight-vectors. Both Lean files are byte-identical to fe9c. Re-read: hypotheses match the node and are no stronger; Phi uses the universal adjoint weight equation; conclusion = regular lambda, V in P_lambda on all algebras, lambda trivial when Phi is empty; edge cases OK; lean.statement equals the signature; no hollow definitions; only sorry. No compile, since no file was changed. Race: NP ee38, Q142 a1a5 and Q25 d73a deliver the same node id; Q27 d0c4 and Q141 9aec deliver def-sfb-cocharacter-limit-functors; none has landed. The first lander owns the node; the others drop their copy or rebind."
+ }
+}

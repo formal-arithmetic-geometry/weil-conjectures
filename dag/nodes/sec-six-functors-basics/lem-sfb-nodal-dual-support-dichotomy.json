@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-nodal-dual-support-dichotomy",
+ "kind": "statement",
+ "title": "Full dual support or a proper subcurve carrying first cohomology",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-kun-topological-krull-dimension, def-weil-pure-dimension]. Assume $X$ is smooth except at ordinary nodes with completed local $k$-algebras $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Cohomology means Zariski module-sheaf cohomology [def-sc-ringed-space-module-cohomology], and $h^i(X,F)=\\dim_k H^i(X,F)$. Let $M$ be an invertible module [def-sc-invertible-module] with $H^1(X,M)\\ne0$. Let $\\omega_X$ be the duality module of [lem-sfb-nodal-line-serre-riemann-roch]. At least one of the following holds:\n(1) there exists a map $M\\to\\omega_X$ nonzero at the generic point of every irreducible component;\n(2) there is a nonempty proper reduced union $i:Y\\hookrightarrow X$ of irreducible components, allowed to be disconnected, such that\n$$h^1(X,M)=h^1(Y,i^*M).$$\nHere the reduced union, closed immersion and restriction use [def-weil-irreducible-components, def-weil-closed-immersion, def-pc-module-pullback]. Irreducible components have the meaning of [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Section 4, Proposition 4.1 proof, printed p.48, first two cohomological-support cases; explicit alternative reconstructed from Serre duality and the annihilator adjunction (Stacks curves.tex Tag 0E33, lemma-closed-immersion-dim-1-CM). Local PDF WANTED; author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-pc-module-pullback",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "lem-sfb-nodal-line-serre-riemann-roch"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity makes $X$ proper. Proper-field coherence gives that $X$ is Noetherian and $M$ is coherent; hence $X$ has finitely many irreducible components $C_1,\\ldots,C_r$, with generic points $\\eta_j$. Nodal Serre duality identifies $V=\\operatorname{Hom}_X(M,\\omega_X)$ with $H^1(X,M)^\\vee$. Thus $0<\\dim_k V=h^1(X,M)<\\infty$. The field $k$ is infinite: if its underlying set were finite, the positive-degree polynomial $\\prod_{a\\in k}(T-a)-1$ would have no root, contradicting algebraic closedness.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sfb-nodal-line-serre-riemann-roch"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2 (lemma-duality-dim-1), (5); properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components); preparation for the support argument."
+   }
+  },
+  {
+   "text": "For each $j$, let $K_j=\\{\\varphi\\in V:\\varphi_{\\eta_j}=0\\}$. Taking stalks respects addition and $k$-scalars, so these are linear subspaces of $V$. If every $K_j$ is proper, finite linear avoidance gives $\\varphi\\in V\\setminus\\bigcup_j K_j$. Its generic stalk is nonzero on every component, proving alternative (1). Otherwise put $S=\\{j:K_j\\ne V\\}$; then $S$ is a proper subset of $\\{1,\\ldots,r\\}$, and every map in $V$ vanishes at $\\eta_j$ for $j\\notin S$.",
+   "uses": [
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Support case separation by finite linear avoidance; explicit reconstruction of the inference in Franciosi--Tenni Proposition 4.1, printed p.48."
+   }
+  },
+  {
+   "text": "If $S$ were empty, each $\\varphi:M\\to\\omega_X$ would have zero stalk map at all component generic points. Reduced-curve duality's generic detection, applied to the coherent source $M$, would give $\\varphi=0$. This contradicts $V\\ne0$. Thus the reduced union $i:Y=\\bigcup_{j\\in S}C_j\\hookrightarrow X$ is nonempty and proper. The nodal-subcurve theorem gives that $Y$ is projective, reduced, pure of dimension one and nodal, allowing disconnectedness. Projectivity makes $Y$ proper. Pullback preserves invertibility, so $i^*M$ is invertible; proper-field coherence makes it coherent. No connectedness of $Y$ has been used.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-nodal-subcurve-dualizing-annihilator",
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-proper-field-invertible-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2 (lemma-duality-dim-1), 0BS3 (lemma-duality-dim-1-CM), and 0E38 (lemma-closed-subscheme-nodal-curve); choice of the collective support subcurve."
+   }
+  },
+  {
+   "text": "Let $J=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Y)$. The defining-ideal theorem makes $J$ quasi-coherent. The ideal-product theorem makes $JM\\subseteq M$ quasi-coherent, and the coherent-submodule theorem makes $JM$ coherent because $X$ is locally Noetherian and $M$ coherent. At a selected generic point $\\eta_j$, remove the finitely many other components of $X$. On the resulting neighbourhood $Y$ and $X$ have the same underlying space and both are reduced; the ideal defining $Y$ there has radical zero, hence is zero in the reduced structure sheaf. Thus $J_{\\eta_j}=0$ for $j\\in S$. For $j\\notin S$ the complement of $Y$ is a neighbourhood of $\\eta_j$, so $J_{\\eta_j}=\\mathcal O_{X,\\eta_j}$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E33 (lemma-closed-immersion-dim-1-CM), (2), annihilator input; coherent.tex Tag 01Y1 (lemma-coherent-Noetherian-quasi-coherent-sub-quotient)."
+   }
+  },
+  {
+   "text": "Choose $\\omega_Y$ with its representing duality from the reduced-curve theorem. Its uniqueness also identifies the chosen nodal $\\omega_X$ with the representing module used in closed-subcurve adjunction. For $\\varphi\\in V$, restrict it to the coherent submodule $JM$. At a selected generic point the source is zero since $J_{\\eta_j}=0$; at an unselected one $\\varphi_{\\eta_j}=0$. Reduced-curve generic detection gives $\\varphi(JM)=0$, equivalently $J\\varphi(M)=0$. Closed-subcurve adjunction identifies $i_*\\omega_Y$ with $\\operatorname{Ann}_{\\omega_X}(J)$. Thus every $\\varphi$ factors uniquely through $i_*\\omega_Y$. This gives a $k$-linear isomorphism $\\operatorname{Hom}_Y(i^*M,\\omega_Y)\\simeq V$: on a trivialization $M|_U=\\mathcal O_U m$, a map to the annihilator with $m\\mapsto w$ gives the map on $Y$ sending $\\bar a\\,i^*m$ to the section corresponding to $aw$. It is well-defined since $Jw=0$; uniqueness makes these formulas glue and gives the inverse of composition with the annihilator inclusion.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-closed-subcurve-dualizing-adjunction",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS3 (lemma-duality-dim-1-CM) and 0E33 (lemma-closed-immersion-dim-1-CM), (2); annihilator factorization of every dual map."
+   }
+  },
+  {
+   "text": "The reduced-curve duality theorem applies on $Y$ to the coherent module $i^*M$, without a connectedness hypothesis. Proper coherent-cohomology finiteness applies as well, so $H^1(Y,i^*M)$ is finite-dimensional. Duality on $Y$, the isomorphism of step 5, and duality on $X$ give\n$$h^1(Y,i^*M)=\\dim_k\\operatorname{Hom}_Y(i^*M,\\omega_Y)=\\dim_k V=h^1(X,M).$$\nFor a finite-dimensional vector space, its dual has the same dimension (use the dual basis). This is alternative (2) for the nonempty proper $Y$ of step 3.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2 (lemma-duality-dim-1), (5), and coherent.tex Tag 02O6 (lemma-proper-over-affine-cohomology-finite); dimension conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sfb-nodal-line-serre-riemann-roch",
+  "lem-pc-finite-linear-avoidance",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-sfb-nodal-subcurve-dualizing-annihilator",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "def-pc-reduced-scheme",
+  "lem-sfb-closed-subcurve-dualizing-adjunction",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-pc-euler-characteristic-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0BS2 (lemma-duality-dim-1), 0BS3 (lemma-duality-dim-1-CM), 0E33 (lemma-closed-immersion-dim-1-CM); explicit collective-support reconstruction of Franciosi--Tenni Proposition 4.1, printed p.48 (author-hosted PDF read online)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizing|subcurve|SerreDuality",
+   "results": "{\"t\": \"2026-10-23T11:28:17Z\", \"tool\": \"grep\", \"query\": \"dualizing|subcurve|SerreDuality\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-subspace avoidance is only one input; none of the hits states the duality and proper-subcurve alternative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Duality and finite union of subspaces give a proper support subcurve carrying all first cohomology",
+   "results": "{\"t\": \"2026-10-23T11:28:17Z\", \"tool\": \"leansearch\", \"query\": \"Duality and finite union of subspaces give a proper support subcurve carrying all first cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subspace.exists_eq_top_of_iUnion_eq_univ\", \"ProperCone.dual_iUnion\", \"ProperCone.dual_sUnion\", \"PointedCone.dual_sUnion\", \"ProperCone.dual_union\", \"Subspace.dualAnnihilator_iInf_eq\", \"PointedCone.dual_union\", \"ProperCone.innerDual_union\"], \"digest\": \"ddf4ba6ec50c6a50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-subspace avoidance is only one input; none of the hits states the duality and proper-subcurve alternative"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dual\"",
+   "results": "{\"t\": \"2026-10-23T11:28:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-subspace avoidance is only one input; none of the hits states the duality and proper-subcurve alternative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invertible sheaf M on a nodal projective curve either H1(M) equals H1 on a proper union of components or there is a generically nonzero map M to the dualizing sheaf",
+   "results": "{\"t\": \"2026-10-23T11:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"For an invertible sheaf M on a nodal projective curve either H1(M) equals H1 on a proper union of components or there is a generically nonzero map M to the dualizing sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"WeierstrassCurve.Affine.Point.toClass_eq_zero\", \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"8a45443fbef90256\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-subspace avoidance is only one input; none of the hits states the duality and proper-subcurve alternative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A vector space of sections of a line bundle either contains a section nonzero on every component or every section vanishes on one fixed component",
+   "results": "{\"t\": \"2026-10-23T11:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"A vector space of sections of a line bundle either contains a section nonzero on every component or every section vanishes on one fixed component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.exists_forall_mem_ne_zero_of_forall_exists\", \"Module.Dual.exists_forall_ne_zero_of_forall_exists\", \"Module.exists_dual_forall_apply_ne_zero\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"Pretrivialization.linearMapAt_eq_zero\", \"Trivialization.linearMapAt_def_of_notMem\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen\", \"Trivialization.localFrame_apply_of_notMem\"], \"digest\": \"a05892b8ac6bb277\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-subspace avoidance is only one input; none of the hits states the duality and proper-subcurve alternative"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|subcurve|SerreDuality",
+   "results": "{\"t\": \"2026-10-23T12:58:22Z\", \"tool\": \"grep\", \"query\": \"dualizing|subcurve|SerreDuality\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass curves, scalar sections or ideals, not duality and the proper-subcurve alternative."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre duality nodal curve proper subcurve first cohomology support",
+   "results": "{\"t\": \"2026-10-23T12:58:22Z\", \"tool\": \"leansearch\", \"query\": \"Serre duality nodal curve proper subcurve first cohomology support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"Algebra.Extension.h1Cotangentι\", \"HomologicalComplex.IsSupported.mk\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι\"], \"digest\": \"98b31842e82d3242\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass curves, scalar sections or ideals, not duality and the proper-subcurve alternative."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dual\"",
+   "results": "{\"t\": \"2026-10-23T12:58:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass curves, scalar sections or ideals, not duality and the proper-subcurve alternative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invertible sheaf on a nodal projective curve either a dual map is nonzero on every component or a proper subcurve carries all first cohomology",
+   "results": "{\"t\": \"2026-10-23T12:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"For an invertible sheaf on a nodal projective curve either a dual map is nonzero on every component or a proper subcurve carries all first cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"WeierstrassCurve.Projective.nonsingular_iff\", \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"WeierstrassCurve.Affine.Point.some_ne_zero\", \"WeierstrassCurve.Affine.Point.toClass_eq_zero\"], \"digest\": \"3da854f300981bbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass curves, scalar sections or ideals, not duality and the proper-subcurve alternative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A space of sections on a reduced curve has a general member with full collective generic support",
+   "results": "{\"t\": \"2026-10-23T12:58:25Z\", \"tool\": \"leanfinder\", \"query\": \"A space of sections on a reduced curve has a general member with full collective generic support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"92f87dfac3eb123f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass curves, scalar sections or ideals, not duality and the proper-subcurve alternative."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-general-section-cluster-strict-bound",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 4, Proposition 4.1 proof, printed p.48, first two cohomological-support cases; explicit alternative reconstructed from Serre duality and the annihilator adjunction (Stacks curves.tex Tag 0E33, lemma-closed-immersion-dim-1-CM).",
+   "via": [
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-dual-support-dichotomy",
+  "worker": "stage1",
+  "summary": "Q132 gives an explicit six-step collective generic-support proof, reusing finite linear avoidance, nodal-subcurve annihilator adjunction, and reduced-curve duality. No statement change and no new nodes. The annihilation step uses the coherent submodule JM, so generic detection is applied within its actual hypotheses. Disconnected subcurves are handled by the connectedness-free duality statement.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) plurinodal/stable-curve supporting branch, specifically the first two cohomological-support cases in the numerical section multiplication input. The latest blueprint proof (3) is read as context; it contains no independent duplicate of this auxiliary. Existing blueprint ancestry has from.node null, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projective-implies-proper is used only to verify properness for curve duality and coherent finiteness. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic proper-field Noetherianity and invertible-module coherence; no trace-formula construction is used. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic Noetherian component finiteness supplies the finite family for linear avoidance. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Only preservation of invertibility by pullback to the chosen subcurve is used. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "why": "Ordinary ideal-times-module quasi-coherence supplies the coherent source for generic detection. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "The generic coherent-submodule theorem makes JM coherent; this unit has no replacement for this foundational module fact. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Only proper coherent-cohomology finite dimensionality, valid for disconnected Y, is used. It is a generic tool for this supporting curve argument, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-euler-characteristic-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-7f5cf476a",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-7f5cf476a (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and every cited statement. The statement and stmt_deps are unchanged and use the same hypotheses as lem-sfb-nodal-line-serre-riemann-roch. Live and side-live still have the item unsplit, so this is the first delivery, with no repair note and no SGA. Steps: (1) properness, proper-field coherence, finitely many components (Mathlib leaf) and nodal Serre duality give 0<dim V=h1<inf, and k is infinite. (2) The kernels of generic stalk maps are subspaces; finite linear avoidance gives (1) when all are proper, otherwise S is a proper subset. (3) S is nonempty by the generic-detection clause of lem-sfb-reduced-curve-dualizing-module (source M coherent; the nodal omega_X is identified with the reduced-curve omega by representing uniqueness). The nodal-subcurve node gives Y projective/reduced/pure/nodal, possibly disconnected, and i*M is invertible and coherent. (4) J is quasi-coherent and JM coherent (ideal-times, 01Y1 node); J vanishes at the generic points of selected components (reduced, other components removed) and equals O at unselected ones. (5) phi restricted to JM has zero generic stalks, so phi(JM)=0; closed-subcurve adjunction (0E33(2), curves.tex l.759) gives Ann(J)=i_*omega_Y, and the i*/i_* adjunction gives Hom_Y(i*M,omega_Y)=V. (6) Duality on Y plus finiteness give h1(Y)=dim V=h1(X). Small cases: irreducible X always gives (1); P1 u P1 with bidegree (-2,0) gives h1=1 with every dual map zero on the degree-0 component, so (2) is needed. The parent's step 5 uses exactly alternative (2). No duplicate found (only hit lem-trf-curve-integral-closed-tests, a different statement); no new nodes. The 7 declared tool_uses are generic and accepted. Batch-5: proper-field-invertible-coherent, reduced-curve duality, subcurve annihilator, closed-subcurve adjunction and Euler-characteristic finiteness are coherent algebraic geometry. Their closure hits (field-complex splitting, nodal-subcurve boundary, schematically-dense-open definition) are generic linear algebra, local geometry and definitions. Neither the trace formula nor Poincare duality nor their proofs give any of these, so all are outside the assumptions. Franciosi-Tenni is correctly WANTED; proof_origin by agent."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalDualSupportDichotomy",
+  "declaration": "AlgebraicGeometry.nodal_dual_support_dichotomy",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalDualSupportDichotomy.lean",
+  "statement": "theorem nodal_dual_support_dichotomy (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsHProjective (X ↘ Spec (.of k))] [ConnectedSpace X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, x ∉ (X ↘ Spec (.of k)).smoothLocus → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) (X.presheaf.Γgerm x (Scheme.Modules.scalarMap (X ↘ Spec (.of k)) ⊤ a))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) (M : X.Modules) [M.IsInvertible] (hM : Nontrivial (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 1)) (ω : X.Modules) [ω.IsInvertible] (duality : ∀ (F : X.Modules), F.IsQuasiCoherentFiniteType → (F ⟶ ω) ≃ₗ[k] Module.Dual k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1)) (hduality : ∀ (F G : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (hG : G.IsQuasiCoherentFiniteType) (a : F ⟶ G) (φ : G ⟶ ω) (x : Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) F 1), duality F hF (a ≫ φ) x = duality G hG φ (Scheme.Modules.scalarCohomologyMap (X ↘ Spec (.of k)) a 1 x)) : (∃ φ : M ⟶ ω, ∀ (C : Set X), C ∈ irreducibleComponents X → ∀ η : X, IsGenericPoint η C → (RingedSpace.moduleStalkFunctor X.toRingedSpace η).map φ ≠ 0) ∨ (∃ (Y : Scheme.{u}) (i : Y ⟶ X), IsClosedImmersion i ∧ IsReduced Y ∧ Nonempty Y ∧ Set.range i ≠ Set.univ ∧ (∃ S : Set (Set X), S ⊆ irreducibleComponents X ∧ Set.range i = ⋃₀ S) ∧ Module.finrank k (Scheme.Modules.scalarCohomology (X ↘ Spec (.of k)) M 1) = Module.finrank k (Scheme.Modules.scalarCohomology (i ≫ X ↘ Spec (.of k)) ((Scheme.Modules.tensorPullback i).obj M) 1))",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57929d8bf",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Item node unchanged except the lean record; one new module, proof sorry only, no definitions; lean.statement verbatim. Field and curve binders match exists_nodal_line_serre_riemann_roch. hnodal covers all non-smooth points (closed automatically for a reduced curve over perfect k), k-compatible, and implies the dependency's hypothesis. omega and its duality are taken as hypotheses copied verbatim from the dependency's existential, unique by its uniqueness clause; same pattern as landed SubcanonicalClusterData. (1) stalk map nonzero at every component generic point; (2) closed immersion, reduced, nonempty, range not univ, range a union of components, Y not required connected, finrank H1 equal with k through the composite. Edge cases irreducible, P1 u P1 bidegree (-2,0), empty excluded. Docstrings carry sources, blueprint tag and 6 proof steps; imports exist; no H4 duplicate. Advisory: scalarCohomology/scalarMap/moduleStalkFunctor owners not in stmt_deps (unchanged from base). No compile (no change)."
+ }
+}

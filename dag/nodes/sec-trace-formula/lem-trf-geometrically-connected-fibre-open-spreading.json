@@ -22,141 +22,46 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open neighbourhood $S_0\\subseteq S$ of $s$ using [lem-weil-pbc-affine-opens-basis], and replace $Y$ by $Y_0=Y\\times_SS_0$. The morphism $h_0:Y_0\\to S_0$ is flat by [lem-weil-pbc-flat-morphism-base-change] and of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Its fibres over points of $S_0$ are the original fibres, since the open inclusion preserves the residue fields and the iterated fibre products agree [def-pc-base-change]. In particular $T$ is unchanged. An elementary etale neighbourhood constructed over $S_0$ is also one over $S$: the local affine charts and local ring maps defining etaleness [def-weil-etale-morphism] are unchanged by the open inclusion. In what follows rename $S_0,Y_0,h_0$ as $S,Y,h$.",
+   "text": "Apply [lem-trf-fibre-open-affine-reduction] to obtain an affine open S₀ containing s and a quasi-compact open W in Y ×_S S₀ with the prescribed embedded special fibre T. Write g:W→S₀ and j:W→Y. The fibre map for the open immersion j has image (h.fiberι s)⁻¹(j.opensRange)=T and is an open immersion; identify it with T by the isomorphism of open immersions with equal range. Its structure map is therefore geometrically connected. The square with horizontal map id_W and bottom open immersion S₀→S is cartesian, so base change along its residue-field map gives geometric connectedness of g at s₀=(s,hs).",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-pc-base-change",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, first paragraph: affine localization of the base"
-   }
-  },
-  {
-   "text": "The fibre $Y_s$ has a finite affine cover by spectra of finitely generated $\\kappa(s)$-algebras: use the finite-presentation charts of $h$ [def-sbc-locally-finite-presentation], quasi-compactness of its fibre from clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], and the affine quasi-compactness of [lem-weil-pbc-affine-scheme-qcqs] to select finitely many such charts. Each chart is a Noetherian topological space by [lem-wf-affine-noetherian-components]. Every open in such a space is quasi-compact: otherwise successively adjoining members of an open cover with no finite subcover yields a strictly increasing chain of open subsets, contradicting stabilization of their closed complements. The intersections of $T$ with the finitely many charts are therefore quasi-compact, so $T$ is quasi-compact. By the fibre homeomorphism in [def-pc-scheme-fibre] there is an open $O\\subseteq Y$ with $O_s=T$. Cover $T$ by affine opens of $Y$ contained in $O$, using [lem-weil-pbc-affine-opens-basis], and take finitely many of them covering $T$. Their union $W\\subseteq O$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], and $W_s=T$ as open subschemes, because both have the induced open subscheme structure [def-weil-open-immersion].",
-   "uses": [
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-wf-affine-noetherian-components",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, first paragraph: existence of the quasi-compact lift of the prescribed fibre open"
-   }
-  },
-  {
-   "text": "The open subscheme $W$ inherits flatness from $h$: the local ring map at each point is the same [def-weil-flat-morphism, def-weil-open-immersion]. For local finite presentation, refine the affine presentation charts by principal opens lying in $W$: if $B=A[t_1,\\ldots,t_n]/(f_1,\\ldots,f_m)$, then $B_b=B[u]/(bu-1)$ is still finitely presented over $A$ [def-sbc-locally-finite-presentation]. The affine base is quasi-separated [lem-weil-pbc-affine-scheme-qcqs], so $Y$ is quasi-separated by clause (2) of [lem-weil-pbc-qcqs-morphism-permanence]. Any two affine opens of $W$ are affine opens of $Y$ and have quasi-compact intersection by clause (1) of [lem-weil-pbc-quasi-separated-affine-cover-criterion]. The converse clause makes $W$ quasi-separated. Since $W$ is quasi-compact, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $W\\to S$ quasi-compact and quasi-separated, hence of finite presentation. Every field extension of a fibre of $W$ is an open in the corresponding field extension of a fibre of $Y$ [def-pc-base-change]; its local rings are the same reduced local rings [def-pc-reduced-scheme]. Thus its fibres are geometrically reduced [def-pc-geometrically-irreducible]. Replace $Y$ by $W$, retaining that it is an open in the original family and that its whole designated fibre is $T$.",
-   "uses": [
-    "def-weil-flat-morphism",
+    "lem-trf-fibre-open-affine-reduction",
     "def-weil-open-immersion",
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "def-pc-base-change",
-    "def-pc-reduced-scheme",
     "def-pc-geometrically-irreducible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, first paragraph: checking the restricted family hypotheses"
+    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, first paragraph"
    }
   },
   {
-   "text": "Let $C\\subseteq Y$ be the fibrewise Cohen–Macaulay locus. It is open by [lem-sbc-fibre-cohen-macaulay-locus-open], and its intersection with $Y_s$ is dense by [lem-trf-flat-lfp-cm-locus-fibre-dense]. The fibre $Y_s=T$ is nonempty by geometric connectedness [def-pc-geometrically-irreducible, def-weil-connected-scheme], so $C\\cap Y_s$ is a nonempty open of $Y_s$. This fibre is locally of finite type over $\\kappa(s)$, as is immediate from its finitely presented affine charts. Apply [lem-sc-lft-over-field-jacobson-space] with the closed subset equal to all of $Y_s$: its closed points are dense, hence this nonempty open contains a point $y$ closed in $Y_s$. Its fibre local ring is Cohen–Macaulay. This verifies both the flatness and fibre-local-ring conditions at $y$, without asserting smoothness or separability of its residue field.",
+   "text": "The geometrically connected fibre g_s₀ is nonempty. Apply [lem-trf-affine-etale-finite-free-multisection] to g. This supplies an affine elementary étale neighbourhood a:U→S₀ with a(u₀)=s₀, a finite locally free p:E→U with nonempty singleton fibre, and σ:E→W_U over U. Register the flat, locally finitely presented, quasi-compact and quasi-separated base-changed family supplied by this declaration. Its geometric reducedness and the geometric connectedness of its u₀-fibre are also supplied there.",
    "uses": [
-    "lem-sbc-fibre-cohen-macaulay-locus-open",
-    "lem-trf-flat-lfp-cm-locus-fibre-dense",
     "def-pc-geometrically-irreducible",
     "def-weil-connected-scheme",
-    "lem-sc-lft-over-field-jacobson-space"
+    "lem-trf-affine-etale-finite-free-multisection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, second paragraph: choice of the closed Cohen–Macaulay point"
+    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, second paragraph through the base-change checks"
    }
   },
   {
-   "text": "Apply [lem-trf-cm-closed-point-flat-quasifinite-slice] at $y$. It gives $i:Z\\to Y$ with $q=h\\circ i$ flat and locally of finite presentation and with $Z_s$ a singleton $\\{z\\}$ mapping to $y$. In particular $q$ is locally of finite type (a finite presentation gives finite generators [def-sbc-locally-finite-presentation]) and $z$ is isolated in its fibre. Thus [lem-weil-pbc-etale-local-finite-at-point-elementary] applies to $(q,z)$: obtain an etale $U\\to S$, a point $u$ over $s$ with $\\kappa(s)\\simeq\\kappa(u)$, and an open $E\\subseteq Z\\times_SU$ finite over $U$, with exactly one point over $u$. The latter assertion makes $E_u$ nonempty.",
-   "uses": [
-    "lem-trf-cm-closed-point-flat-quasifinite-slice",
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-etale-local-finite-at-point-elementary"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, second paragraph: slicing and the elementary-etale finite piece"
-   }
-  },
-  {
-   "text": "Choose an affine open neighbourhood of $u$ in $U$ by [lem-weil-pbc-affine-opens-basis] and restrict $E$ to it. The restriction is still finite and still has exactly one point above $u$ by [lem-weil-pbc-elementary-etale-finite-piece-persistence], applied to the open inclusion, whose residue map at $u$ is the identity. Rename the affine neighbourhood $U$ and the restricted piece $E$. Etaleness of $U\\to S$ is unchanged on these source-local charts [def-weil-etale-morphism]. The base change $Z_U\\to U$ is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Its open restriction $E\\to U$ has the same local ring maps and inherits the finite-presentation charts, so it is flat and locally of finite presentation [def-weil-open-immersion, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Together with finiteness this is precisely finite locally free [def-pc-finite-locally-free]. Restricting $i_U$ gives the required map $\\sigma:E\\to Y_U$ over $U$.",
-   "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-elementary-etale-finite-piece-persistence",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, second paragraph: affine refinement and finite locally freeness"
-   }
-  },
-  {
-   "text": "The family $Y_U\\to U$ is flat and of finite presentation by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). For $t\\in U$ and every field extension $L/\\kappa(t)$, its fibre extended to $L$ is $Y_{a(t)}\\times_{\\kappa(a(t))}L$, by the iterated-base-change identity [def-pc-base-change], and is reduced by the original geometric-reducedness hypothesis [def-pc-geometrically-irreducible]. The whole fibre at $u$ is $Y_s\\times_{\\kappa(s)}\\kappa(u)=T\\times_{\\kappa(s)}\\kappa(u)$ and is geometrically connected: every extension of $\\kappa(u)$ is also an extension of $\\kappa(s)$, and the same iterated-base-change identity identifies its extension with that of $T$. We have also retained $E_u\\ne\\varnothing$.",
-   "uses": [
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-pc-base-change",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, second paragraph: hypotheses for connected-fibre descent"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-finite-locally-free-multisection-connected-open] with $X=Y_U$, $B=U$, $Z=E$, the map $\\sigma$ just constructed and the point $b_0=u$. Its finite-locally-free, nonempty designated fibre, flat finite-presentation, geometrically reduced, and geometrically connected designated fibre hypotheses were all checked in steps 6–7. It gives a quasi-compact open $V^0\\subseteq Y_U$ with $V^0_u=(Y_U)_u$ as open subschemes and geometrically connected fibres wherever nonempty. Empty fibres away from $u$ are allowed at this stage.",
+   "text": "Apply [lem-trf-finite-locally-free-multisection-connected-open] to the base-changed family, p and σ. A point of the nonempty fibre of p explicitly witnesses that the range of its fibre inclusion is nonempty. Obtain a compact open immersion i:X0→W_U inducing an isomorphism on the u₀-fibre, with every nonempty fibre geometrically connected.",
    "uses": [
     "lem-trf-finite-locally-free-multisection-connected-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, second paragraph: application of connected-fibre descent"
+    "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, application of lemma-descent-connected-fibres"
    }
   },
   {
-   "text": "The open restriction $V^0\\to U$ is flat and locally of finite presentation by the unchanged local ring maps and restricted affine charts [def-weil-open-immersion, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Hence its image $I\\subseteq U$ is open by [lem-weil-pbc-flat-lfp-open]. It contains $u$ since $V^0_u=T_{\\kappa(u)}$ is nonempty. Choose an affine open $S_1\\subseteq I$ containing $u$ by [lem-weil-pbc-affine-opens-basis], put $s_1=u$ and $V=V^0\\times_US_1$. This remains quasi-compact: $V^0\\to U$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), since $V^0$ is quasi-compact and $U$ is affine and thus quasi-separated [lem-weil-pbc-affine-scheme-qcqs]; the inverse image of the quasi-compact affine open $S_1$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. Every fibre of $V\\to S_1$ is nonempty, because $S_1\\subseteq I$, and equals the corresponding fibre of $V^0\\to U$, so is geometrically connected. Its designated fibre is exactly $T\\times_{\\kappa(s)}\\kappa(s_1)$ by [def-pc-base-change]. Since all source restrictions were opens, $V$ is an open subscheme of the original $Y\\times_SS_1$. The map $S_1\\to S$ remains etale on the same local charts [def-weil-etale-morphism], and its residue map at $s_1$ is the isomorphism already obtained. These are all the claimed properties.",
+   "text": "Apply [lem-trf-connected-open-etale-refinement] to h,g,j,S₀→S, the equality specifying T, the elementary étale neighbourhood a, and the open immersion i. The original g and its base changes are flat and locally of finite presentation. The original geometrically connected u₀-fibre is nonempty. The refinement theorem shrinks U to an affine neighbourhood in the open image of X0→U, preserves compactness, composes the elementary étale base maps, and proves the displayed equality of opens using the canonical fibre map. Its result is exactly the claimed neighbourhood and V.",
    "uses": [
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
-    "def-pc-base-change",
-    "def-weil-etale-morphism"
+    "lem-trf-connected-open-etale-refinement"
    ],
    "elementary": false,
    "source": {
@@ -166,36 +71,18 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-pc-base-change",
-  "def-weil-etale-morphism",
-  "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-wf-affine-noetherian-components",
-  "def-pc-scheme-fibre",
+  "lem-trf-fibre-open-affine-reduction",
   "def-weil-open-immersion",
-  "def-weil-flat-morphism",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "def-pc-reduced-scheme",
   "def-pc-geometrically-irreducible",
-  "lem-sbc-fibre-cohen-macaulay-locus-open",
-  "lem-trf-flat-lfp-cm-locus-fibre-dense",
   "def-weil-connected-scheme",
-  "lem-sc-lft-over-field-jacobson-space",
-  "lem-trf-cm-closed-point-flat-quasifinite-slice",
-  "lem-weil-pbc-etale-local-finite-at-point-elementary",
-  "lem-weil-pbc-elementary-etale-finite-piece-persistence",
-  "def-pc-finite-locally-free",
+  "lem-trf-affine-etale-finite-free-multisection",
   "lem-trf-finite-locally-free-multisection-connected-open",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+  "lem-trf-connected-open-etale-refinement"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, proof"
+  "place": "Tag 055W, proof of lemma-fibre-geometrically-connected-reduced; Lean assembly of the affine reduction, multisection, connected-open, and final refinement steps"
  },
  "mathlib_searches": [
   {
@@ -302,38 +189,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-geometrically-connected-fibre-open-spreading",
   "worker": "stage1",
-  "summary": "Followed the proof of Stacks 055W. Wrote out quasi-compact fibre-open lifting, inheritance of finite presentation, the closed CM point choice, etale finite-piece refinement, verification of the 057I multisection hypotheses, and the final quasi-compact affine restriction. Added only the fibre-density input of 045U, the CM slice of 0570, and the finite-locally-free connected descent of 057I; kept the statement unchanged.",
-  "blueprint": "Realizes the 055W step of 057J used in the 057K/057S horizontal curve reduction beneath lem-trf-local-term-locality, at the precise place recorded in blueprint.from. No unit or chapter route changes.",
-  "tool_uses": [
-   {
-    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
-    "why": "Generic openness theorem for the fibrewise CM locus, used together with its separate density assertion to select a closed point; this geometric tool does not replace any step of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-local-finite-at-point-elementary",
-    "why": "The elementary-etale finite-piece theorem used verbatim by 055W on the quasi-finite CM slice; the unit has no replacement for this local geometric tool."
-   },
-   {
-    "node": "lem-weil-pbc-elementary-etale-finite-piece-persistence",
-    "why": "Refines the elementary-etale finite piece to an affine base while retaining its singleton nonempty designated fibre, as required before connected-fibre descent."
-   }
-  ]
+  "summary": "Current-DAG repair after repeated side-completion landing refusal: rebuild from the current node preserving all metadata, reread all cited statements and verify their exact quotations. Make the singleton-fibre witness of the 057I nonemptiness hypothesis explicit in step 3. Retain the two independent statement-only constructions, all allocated original arguments and logged searches. Assembly: 2993 characters. Promotion to the live queue remains the maintainer operation named by the return.",
+  "blueprint": "Realizes the 055W step of 057J used in the 057K/057S horizontal curve reduction beneath lem-trf-local-term-locality, at the precise place recorded in blueprint.from. No unit or chapter route changes. The two packages isolate the first paragraph and the construction/base-change part of the second paragraph of 055W; its connected-open application and final shrinking remain here.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-sbc-fibre-cohen-macaulay-locus-open",
-  "lem-weil-pbc-etale-local-finite-at-point-elementary",
-  "lem-weil-pbc-elementary-etale-finite-piece-persistence"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q09-7729a96ac",
-  "group": "Q09",
+  "reviewer": "NT-cc-Q71-eaff277ae",
+  "group": "Q71",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-7729a96ac (reviewer sub-agent of L); spot-checked: Read the complete item, all three new nodes, cited statements and Stacks sources 055W, 045U, 0570, 057I and 02LK. All nine steps preserve the hypotheses and recover the entire prescribed fibre open. No duplicates, circular dependencies, prohibited machinery or steps exceeding 2000 characters found. Accepted three declared geometric tool uses. Detailed checks written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-eaff277ae (reviewer sub-agent of L); spot-checked: Q71 lem-trf-geometrically-connected-fibre-open-spreading @eaff277a is the 12th push of the same re-split. Every earlier reader run passed, and the 3799 and 570b heads were then refused at landing because the side completion was not promoted. Compared with 570b, both new nodes are byte-identical. The item's statement, stmt_deps, proof_deps and uses are unchanged. Only step 1's wording changed, plus a parenthetical in step 3 saying the unique point of E_u witnesses that E_u is nonempty; this is correct because node 2 asserts that E_u has exactly one point. The split_report summary also changed. All 26 cited existing statements are identical to clones/live, and 057I's hypotheses are each supplied by step 2. Live and side-live still hold the old 9-step proof, the re-split note is still released, and neither new id exists live. I reread both proof paragraphs of Stacks 055W and checked them against the split. Node 1 (affine reduction, old steps 1-3) is true: the fibre Y_s has finite type over a field, so it is Noetherian and T is quasi-compact; T lifts through the induced topology to a quasi-compact W that is qcqs over the affine S_0, hence of finite presentation. Empty or disconnected T and a non-Noetherian base are all fine. Node 2 (multisection, old steps 4-7) is true for nonempty Y_s: 045U with density and the Jacobson property gives a closed CM point; the 0570 slice and 02LK give a finite piece with one point over u; persistence survives the affine shrink; finite+flat+lfp gives finite locally free; and kappa(u)=kappa(s) transfers geometric connectedness. It uses no smoothness or separability. Neither node restates the item, and the smooth-only 055W node is not a duplicate. Step 4 (open image, affine shrink, quasi-compactness via the qc morphism, residue isomorphism of the composite) matches 055W's last sentences. The assembly is about 2990 characters with no step over 2000, and no SGA source is used. The tool_uses (CM locus, 02LK, finite-piece persistence) are generic and now belong to node 2's future proof. No fixes. Maintainer: this promotion loop has unchanged mathematics and needs a manual landing or promotion."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -353,5 +223,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261026T100348-L-1945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

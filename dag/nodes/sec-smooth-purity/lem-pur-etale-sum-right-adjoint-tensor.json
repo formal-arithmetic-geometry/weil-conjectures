@@ -35,148 +35,76 @@
  ],
  "proof": [
   {
-   "text": "Abbreviate $T=e^*$, $S=S_e$, $F=F_e$, $G=G_e$, $d=d_e$, and write $J_F,J_S$ for the adjunction Hom bijections. Conjugacy applied to the isomorphism $d^{-1}:S\\to F$ makes $\\rho:G\\to T$ a natural isomorphism. The defining mate equation is $\\operatorname{ev}_K\\circ S(\\rho_K)=\\varepsilon_K\\circ d_{GK}^{-1}$; composing with $d_{GK}$ gives the equation in the statement. Conversely that equation says that each component is the unique $S\\dashv T$ transpose of $\\varepsilon_K\\circ d_{GK}^{-1}$, so it characterizes $\\rho$. More generally, for $a:FN\\to K$, naturality of $d$ and this equation give\n$$J_S(a\\circ d_N^{-1})=\\rho_K\\circ J_F(a).\\tag{1}$$\nIndeed the inverse transpose of the right side is $\\operatorname{ev}_K S(\\rho_K)S(J_F(a))=\\varepsilon_K F(J_F(a))d_N^{-1}=a d_N^{-1}$.",
+   "text": "Use the support-map compatibility family to prove that the specified compactification projection is invertible: its composite with the comparison is the tensor of an isomorphism followed by the sum projection. Cancel the comparison. This argument does not identify the existential comparison with the canonical graph map.",
    "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "def-weil-pbc-adjunction-mate"
+    "lem-pur-etale-support-map-compatibility"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: the canonical etale normalization; defining conjugate formula and adjunction triangles"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, etale normalization; formal expansion using Stacks Tags 0GKF and 0GL5"
    }
   },
   {
-   "text": "First compute with sheaves. Write $\\mathbf1=A_X$, and $u:T\\mathbf1\\xrightarrow{\\sim}A_U$ for the coefficient-unit comparison. For a sheaf $H$ on $X$, put $a_H=\\lambda_{TH}\\circ(u\\otimes1):T\\mathbf1\\otimes TH\\to TH$. The specified sheaf sum projection $p^0$ satisfies\n$$\\operatorname{ev}^0_H\\circ e_{\\Sigma!}(a_H)\\circ p^0_{T\\mathbf1,H}=\\lambda_H\\circ(\\operatorname{ev}^0_{\\mathbf1}\\otimes1_H).\\tag{2}$$\nOn a lift-indexed tensor generator $(s,b)\\otimes h$, both sides give $b h$ in $H(W)$: the first forms $(s,b\\otimes s^*h)$ and evaluates that lift, while the second evaluates $(s,b)$ and multiplies by $h$. Here $TH$ on $(W,s)$ is restriction of $H$ to $W$, so the evaluation has this meaning; the restriction identification applies to the underlying abelian sheaf and respects the constant-$A$ action. Equality on finite sums follows by linearity; the universal property of tensor and module sheafification then gives equality of the sheaf maps. This checks maps before sheafification, without identifying all sheaf sections with presheaf sums.",
+   "text": "Assemble a normalization whose data is exactly canonicalEtaleCompactSupportCore. The graph coherence theorem supplies base-change, refinement and identity proof fields; vertical pasting and conjugate-adjunction uniqueness supply the remaining proof fields. Apply compactSupportGraph_tensor_evaluation to the reverse sum projection mate, transpose under the proper adjunction, and cancel the invertible comparisons and reverse projection. This proves the projection compatibility square for the actual canonical comparison used by the item, rather than an unidentified existential witness.",
    "uses": [
-    "lem-pur-etale-sheaf-projection-map",
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), expanded sum/evaluation calculation"
-   }
-  },
-  {
-   "text": "Let now $K$ be arbitrary and choose a flat-term K-flat representative $H$. The complex $T\\mathbf1$ is the constant coefficient sheaf in degree zero, hence flat and K-flat: tensor with it is the identity. Pullback preserves flat-term K-flat complexes, and so does sum extension; thus $TH$ and $S(T\\mathbf1)$ have the flatness needed to compute the two derived tensors in (2). The totalization comparison identifies $p^\\Sigma_{T\\mathbf1,K}$ with the degreewise generator map of Step 2. The exact sum/restriction adjunction is termwise on the unbounded categories; its counit is the termwise evaluation, as follows by applying the termwise adjunction and localization to its unit, counit and triangles. Consequently (2) is an equality of maps of total complexes: its unit factor has degree zero, and both sides send the degree-$q$ tensor to $b h$ with differential $b\\,d_Hh$. Tensor descent and faithfulness of precomposition with localization extend the equality from these representatives, naturally in $K$. We obtain\n$$\\operatorname{ev}_K S(a_K)p^\\Sigma_{T\\mathbf1,K}=\\lambda_K(\\operatorname{ev}_{\\mathbf1}\\otimes1_K),\\quad a_K=\\lambda_{TK}(u\\otimes1).\\tag{3}$$",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-etale-sum-flat-kflat",
-    "lem-pur-etale-sum-tensor-totalization",
-    "lem-amb-etale-adjoint-locality",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-asd-compact-support-graph-coherence",
+    "lem-pur-compact-support-graph-tensor-evaluation",
+    "lem-pur-etale-support-map-compatibility"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), expanded sum/evaluation calculation"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, etale normalization; formal expansion using Stacks Tags 0GKF and 0GL5"
    }
   },
   {
-   "text": "Put $W=G\\mathbf1$, $N=TK\\otimes W$, and let $q_F:FN\\to K$ be the displayed inverse transpose defining $\\tau_K$. The proper-support/projection compatibility gives\n$$d_{W\\otimes TK}P_{W,K}=p^\\Sigma_{W,K}(d_W\\otimes1_K).$$\nUse this identity to replace $P_{W,K}^{-1}$, and use naturality $F(\\mathrm{sym})d_N^{-1}=d_{W\\otimes TK}^{-1}S(\\mathrm{sym})$. The result is the following equality of maps $SN\\to K$:\n$$q_Fd_N^{-1}=\\lambda_K((\\varepsilon_{\\mathbf1}d_W^{-1})\\otimes1_K)(p^\\Sigma_{W,K})^{-1}S(\\mathrm{sym}).\\tag{4}$$\nIn particular this uses precisely the specified compactification projection, not an independently chosen projection isomorphism.",
+   "text": "The sum projection inverse is the unit-defined projection mate. The direct termwise-localization adjunction and mapDerivedCategoryAdjunction coincide: first prove the counit formula on complexes for abstract abelian categories by expanding the homotopy-level factorization and cancelling the identity quotient comparisons, then compare counits after precomposition with the complex localization. Keeping the localization calculation abstract avoids expensive unfolding of concrete sheaf constructions. Transpose its counit equation using the Hom bijection: naturality of the exact-pullback tensorator and the right triangle identity identify both transposes. Transport the proved left-unit law of derived pullback through L(e*) isomorphic to D(e*). Composing the counit equation with the left unitor gives exactly the evaluation hypothesis of adjointProjectionTensorTransfer. Thus a separate sheaf-generator or K-flat unit-evaluation argument is unnecessary. The native derived symmetric structure uses the same canonical Koszul braiding as derivedTensorSymmetry.",
    "uses": [
-    "lem-pur-etale-support-map-compatibility",
-    "lem-kun-tensor-sym"
+    "lem-asd-derived-category-symmetric"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), expanded sum/evaluation calculation"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, etale normalization; formal expansion using Stacks Tags 0GKF and 0GL5"
    }
   },
   {
-   "text": "By Step 1 at $\\mathbf1$, $\\varepsilon_{\\mathbf1}d_W^{-1}=\\operatorname{ev}_{\\mathbf1}S(\\rho_{\\mathbf1})$. Naturality of $p^\\Sigma$ in its first variable gives\n$$(S(\\rho_{\\mathbf1})\\otimes1)(p^\\Sigma_{W,K})^{-1}=(p^\\Sigma_{T\\mathbf1,K})^{-1}S(\\rho_{\\mathbf1}\\otimes1).$$\nSubstitute both equations into (4), then use (3) followed by cancellation of $p^\\Sigma_{T\\mathbf1,K}$. We obtain\n$$q_Fd_N^{-1}=\\operatorname{ev}_K S(a_K\\circ(\\rho_{\\mathbf1}\\otimes1)\\circ\\mathrm{sym}).\\tag{5}$$\nSince $\\eta=u\\rho_{\\mathbf1}$, the arrow inside $S$ is $\\lambda_{TK}(\\eta\\otimes1)\\mathrm{sym}=\\operatorname{unitor}_{TK}(1\\otimes\\eta)$. The last equality is naturality of the signed symmetry and its unit constraint; it does not discard a Koszul sign. All maps have degree zero and the coefficient unit is in degree zero.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), expanded sum/evaluation calculation"
-   }
-  },
-  {
-   "text": "Apply $J_S$ to (5). The right side transposes to $\\operatorname{unitor}_{TK}(1\\otimes\\eta)$, by the inverse-transpose formula. By (1) and the definition $J_F(q_F)=\\tau_K$, the left side transposes to $\\rho_K\\tau_K$. This proves the required equality. Every ingredient used above is natural in $K$, so the equality is one of derived natural transformations. In particular, this argument compares actual maps in the derived category; it never deduces equality of derived morphisms from equality of their stalk cohomology maps.",
+   "text": "Apply adjointProjectionTensorTransfer with the specified projection isomorphisms, the canonical graph comparison and the exact sum/evaluation adjunction. Joint naturality of the sum projection follows from its curried natural isomorphism; that of the compactification projection follows by cancellation in the comparison square. The transfer theorem gives the displayed tau normalization and naturality. The conjugacy counit identity and injectivity of the sum Hom bijection prove the stated iff characterization of rho.",
    "uses": [
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: theta is the identity after canonical etale normalization, expanded by counit transposition"
-   }
-  },
-  {
-   "text": "For a refinement or comparison of compactifications let $t:F^c\\xrightarrow{\\sim}F^{c'}$ be its canonical left comparison. The quasi-finite comparison gives $d^{c'}t=d^c$, and the support-map compatibility says that $t$ also intertwines the specified projections. Define the right comparison $r:G^c\\xrightarrow{\\sim}G^{c'}$ by conjugacy of $t^{-1}$. Its counit equation and $d^{c'}t=d^c$ show, by the uniqueness in Step 1, that $\\rho^{c'}r=\\rho^c$. At $\\mathbf1$ this gives $\\eta^{c'}r_{\\mathbf1}=\\eta^c$. Substitution in the inverse-transpose formula, using the projection compatibility, gives $r_K\\tau^c_K=\\tau^{c'}_K(1\\otimes r_{\\mathbf1})$. These formulas prove independence under the canonical comparisons. They agree through a common refinement because left comparisons satisfy their cocycle, and conjugacy respects composition.",
-   "uses": [
-    "lem-sfb-quasifinite-compact-support-exact",
-    "lem-pur-etale-support-map-compatibility",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-pur-adjoint-projection-tensor-transfer"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), expanded sum/evaluation calculation"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, etale normalization; formal expansion using Stacks Tags 0GKF and 0GL5"
    }
   },
   {
-   "text": "Let $g:X'\\hookrightarrow X$ be open and $U'=U\\times_XX'$ with open projection $h:U'\\hookrightarrow U$ and etale projection $e':U'\\to X'$. On an etale test object over $X'$, lifts to $U'$ correspond bijectively to lifts to $U$, by the fibre-product property. Hence restriction of the sum/evaluation counit and the generator map in (2) is exactly the corresponding counit and generator map for $e'$. The compact-support exchange identifies the restriction of $d_e$ with $d_{e'}$ by clause (1) of support-map compatibility. To specify the right comparison, use\n$$\\chi_K=(\\rho_{e',g^*K})^{-1}\\circ(h^*e^*K\\cong e'^*g^*K)\\circ h^*\\rho_{e,K}:h^*G_eK\\xrightarrow{\\sim}G_{e'}g^*K.$$\nThis is the canonical right-adjoint restriction comparison: the left composites $F_eD(h_{\\Sigma!})$ and $D(g_{\\Sigma!})F_{e'}$ compare by compact-support composition for $eh=ge'$. Under $d$ their comparison is the nested-summand identification for sum extension. Conjugating this equality, the mate-pasting rule gives the displayed formula for $\\chi$, since the right adjoints of the two open sum extensions are $h^*,g^*$.",
+   "text": "Use comparison-coherence refinement clauses for rho and eta; cancel rho at K and use tau normalization twice to obtain the refinement equation. For an open subsquare, identify the equality-transport spelling of beta with the upperStarComp spelling by equality elimination. The comparison-coherence open clauses identify chi and the coefficient transport. Package tau as natural transformations using its already-proved naturality, apply tensor_open, and cancel the exact pullback tensor isomorphism to obtain the requested formula.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-pur-etale-support-map-compatibility",
-    "lem-sfb-quasifinite-compact-support-exact",
-    "lem-amb-etale-adjoint-locality",
-    "lem-weil-pbc-mate-pasting"
+    "lem-pur-etale-normalization-comparison-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF generator formula; etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change); sum-composition normalization"
-   }
-  },
-  {
-   "text": "The unit comparison identifies $h^*\\eta_e$ with $\\eta_{e'}\\chi_{A_X}$ under $g^*A_X=A_{X'}$. Pulling back the equality of Step 6 along $h$ and using $h^*e^*=e'^*g^*$ therefore gives\n$$\\rho_{e',g^*K}\\chi_K h^*\\tau_{e,K}=\\operatorname{unitor}(1\\otimes\\eta_{e'}\\chi_{A_X}).$$\nThe already proved equality for $e'$ makes the right side $\\rho_{e',g^*K}\\tau_{e',g^*K}(1\\otimes\\chi_{A_X})$. Cancel the isomorphism $\\rho_{e',g^*K}$ to obtain the tensor-map restriction identity. The restrictions of the projection normalization agree because their generator maps agree on every test object as checked in Step 8, and the compactification comparison intertwines them. This proves the last assertion, including the specified maps.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF and etale-cohomology.tex Tag 03S6, after the explicit comparisons in Step 8"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, etale normalization; formal expansion using Stacks Tags 0GKF and 0GL5"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate",
-  "lem-pur-etale-sheaf-projection-map",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pur-etale-sum-tensor-totalization",
-  "lem-amb-etale-adjoint-locality",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-localization-universal-property",
   "lem-pur-etale-support-map-compatibility",
-  "lem-kun-tensor-sym",
-  "lem-sfb-quasifinite-compact-support-exact",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-etale-inverse-image-restriction"
+  "lem-asd-compact-support-graph-coherence",
+  "lem-pur-compact-support-graph-tensor-evaluation",
+  "lem-asd-derived-category-symmetric",
+  "lem-pur-adjoint-projection-tensor-transfer",
+  "lem-pur-etale-normalization-comparison-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-  "place": "Step 1; expanded using Stacks Tag 0GKF (lemma-f-shriek-projection) and the specified sum/evaluation adjunction"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 1, etale normalization; formal expansion using Stacks Tags 0GKF and 0GL5",
+  "note": "U5: canonical graph normalization and the formal projection-mate counit/unit calculation; all four original theorem holes closed without new statements."
  },
  "mathlib_searches": [
   {
@@ -252,67 +180,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-etale-sum-right-adjoint-tensor",
   "worker": "stage1",
-  "summary": "Kept the statement and all normalizations unchanged. Expanded conjugacy, the coefficient-unit sum/evaluation calculation, its unbounded K-flat descent, transfer through the specified compactification projection, and the final tensor transpose. Checked refinement and Cartesian-open restriction with explicit right comparisons. Reused existing DAG statements; no new nodes.",
-  "blueprint": "Ancestor thm-pur-composition-coherence, current proof Step 1: compatibility of the remaining co-projection factors, via lem-pur-diagonal-section-pasting and lem-pur-finite-etale-dualizing-normalization; the local source lem-pur-co-smooth-etale-locality Step 1 is realized by Steps 1–6, refinement and restriction by Steps 7–9.",
+  "summary": "Q98 repair rebased on the current DAG after the side-completion promotion return. Statement and all unrelated current item fields retained. Three statement-only unsplit nodes retain the original nine arguments, with a short assembly; the unit/symmetry specialization is now explicit. Re-read all 33 current external cited statements and distinguished the newly present arbitrary-base graph/projection node. Logged searches, citations and the full original proof remain in the retained report. No Lean written or compiled.",
+  "blueprint": "Ancestor thm-pur-composition-coherence proof Step 1, remaining co-projection compatibility, via lem-pur-diagonal-section-pasting and lem-pur-finite-etale-dualizing-normalization. Source locality proof Step 1: derived sum evaluation, conditional categorical tensor calculation, and explicit comparison coherence now have separate nodes.",
   "tool_uses": [
    {
-    "node": "lem-pur-etale-sheaf-projection-map",
-    "why": "Generator formula for the ordinary sheaf projection, used to calculate the sum/evaluation counit."
-   },
-   {
-    "node": "lem-weil-pbc-etale-restriction-injectives",
-    "why": "Exact sheaf sum-extension/restriction adjunction used for its evaluation on summands."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Existence of flat-term K-flat representatives, a generic homological tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Preservation of K-flat representatives and canonical tensor pullback comparison."
-   },
-   {
-    "node": "lem-pur-etale-sum-flat-kflat",
-    "why": "Preservation of flat and K-flat representatives needed for the derived evaluation identity."
-   },
-   {
-    "node": "lem-pur-etale-sum-tensor-totalization",
-    "why": "Unbounded chain-level totalization of that generator map."
-   },
-   {
-    "node": "lem-amb-etale-adjoint-locality",
-    "why": "Generic categorical or sheaf-theoretic tool for the stated sum/evaluation calculation; it replaces no step of the purity route."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Termwise unit and counit of the sum/restriction adjunction on complexes and homotopy categories."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Resolving-class localization computes derived tensor; no geometric route is replaced."
-   },
-   {
     "node": "lem-pur-etale-support-map-compatibility",
-    "why": "Specified proper-support projection and exchange normalization, used as a black box in the counit calculation, with no purity argument replaced."
+    "why": "Specified compactification projection and proper-support square are the geometric inputs to the generic transfer lemma; no purity step is replaced."
    },
    {
-    "node": "lem-kun-tensor-sym",
-    "why": "Generic categorical or sheaf-theoretic tool for the stated sum/evaluation calculation; it replaces no step of the purity route."
-   },
-   {
-    "node": "lem-sfb-quasifinite-compact-support-exact",
-    "why": "Generic categorical or sheaf-theoretic tool for the stated sum/evaluation calculation; it replaces no step of the purity route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
-    "why": "Canonical sum-extension open base-change comparison, used only for the final restriction normalization."
-   },
-   {
-    "node": "lem-weil-pbc-etale-inverse-image-restriction",
-    "why": "Identifies etale inverse image with test-object restriction, including its unit, in the elementary evaluation calculation; the constant-ring action is preserved."
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site unbounded derived symmetric monoidal constraints supply the categories and signed unit/symmetry conventions for the formal tensor-transfer argument."
    }
   ]
  },
@@ -330,15 +210,16 @@
   "lem-kun-tensor-sym",
   "lem-sfb-quasifinite-compact-support-exact",
   "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-etale-inverse-image-restriction"
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q18-5554ffafd",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q98-1c787e4ce",
+  "group": "Q98",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-5554ffafd (reviewer sub-agent of L); spot-checked: I read all 9 steps and every cited statement in full. There are 0 new nodes, and the statement and stmt_deps are identical to the base. The item is unsplit live, has no re-split note, is not dropped and creates no cycle. Sources: blueprint main-20261015 lem-pur-co-smooth-etale-locality proof Step 1, whose 'immediate' étale normalization is written out here; Stacks 0GKF (more-etale.tex l.1808) for the pure-tensor projection rule. Steps 1 and 6: I re-derived (1) from the conjugate and mate definitions, and the final map equality follows by transposition. Steps 2 and 3: the generator formula of lem-pur-etale-sheaf-projection-map plus inverse-image-restriction (2) give bh on both sides. Unbounded descent uses the flat/K-flat preservation, totalization, termwise-adjunction and descent nodes. Steps 4 and 5: I solved support-map-compatibility (2) at M=W and got (4) exactly, then (5) by naturality of p^Σ and (3). The final symmetry identity needs no sign because W is in degree 0. Step 7: ρ^c=ρ^{c'}r by conjugate composition. Steps 8 and 9: open bases are Noetherian. χ is the conjugate of the nested-summand comparison via mate-pasting 3(a)/(b), and τ=ρ⁻¹r(1⊗η) restricts. Edge cases checked: e=id, empty U, U=X⊔X, extension by zero, shifts of K. The 14 declared tool_uses are generic and accepted. Batch-5 flag: the newly cited lem-pur-etale-sheaf-projection-map reaches lem-pod-etale-stalk-tensor-scalar, which is generic stalk-of-tensor sheaf algebra, not a Poincaré duality proof step, and the item uses only the generator formula. Accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-1c787e4ce (reviewer sub-agent of L); spot-checked: This answers the human's re-split note of 2026-10-21 (released, stage 1; the new ids are not live, so it is not superseded). It re-delivers the PASSed 8b121a9d after a landing refusal. The three new nodes are byte-identical to that head. The item changed only in step 1, which now checks λ_B∘σ_{B,1}=r_B explicitly; that is correct because A_X sits in degree 0, so there is no Koszul sign. None of the 36 cited statements changed. The item proof is a 3-step assembly of 2050 characters. The new nodes (2.2k, 2.2k and 4.1k characters) each take whole old steps: transfer takes old steps 1 and 4-6, unit-evaluation steps 2-3, coherence steps 7-9; nothing was blurred. I re-derived the transfer node: the conjugate direction ρ=(d⁻¹)^c:G→T, the counit characterization, J_S(b d⁻¹)=ρJ_F(b), both forms of q d⁻¹ (from naturality of p, the unit-evaluation hypothesis and λσ=r), and ρτ=r(1⊗η). Unit-evaluation: both sides send a generator (s,b)⊗h to bh, using the Stacks 0GKF pure-tensor rule (more-etale lemma-f-shriek-projection); the derived clause holds on flat K-flat models, and the arbitrary-A hypotheses match lem-pur-etale-sheaf-projection-map. Coherence: (1) ρ^c=ρ^{c'}r because conjugation reverses composition, and the P square follows from d^{c'}t=d^c plus support-map (2); (2) χ has type h*G_e→G_{e'}g* and ξ lands in W_{e'}; (3) follows by cancelling ρ'. Item step 1 matches support-map (2) exactly. Edge cases checked: e=id, empty U, U=X⊔X, open immersion, K=0 and shifts, g=id. No SGA is used; Stacks 03S6 is cited for the open sum comparison. The new lem-sf-etale-graph-projection-arbitrary-base (finite A, P⁻¹a=(a⊗1)κ) duplicates none of the new nodes. lem-pur-unit-adjunct-tensor-action overlaps unit-evaluation only as an advisory, since it needs p^Σ=κ⁻¹. Batch 5: the base item already cited all three flagged nodes, and their chains end in lem-pod-etale-stalk-tensor-scalar and lem-pod-lisse-module-sheaves-as-module-objects. Both are generic sheaf algebra, not steps of Poincaré duality or of the trace formula, so I accept them. I accept the declared tool_uses (support-map-compatibility and the ringed derived symmetric monoidal lemma) as generic inputs. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleSumRightAdjointTensor",
@@ -371,5 +252,27 @@
   "group": "NP",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of f15896b1. Lean file byte-identical (sha256 fae2b548), so the prior clause-by-clause check of hypotheses, rho conjugate direction, counit iff, projection from support-map (2), tau composite, rho∘tau=unitor∘(1⊗eta), naturality, refinement and open restriction stands. Item record changed only in stmt_deps: dropped the coherence and unbounded-comparisons theorem nodes, added def-pur-etale-exact-pullback-unit-composition-comparisons. The new node's clauses (1)/(2) match the plain defs etaleSumPullbackUnitIso and unboundedEtaleUpperStarCompIso; existing:true on unchanged modules, the recorded module publicly imports the second, statement starts at def; its stmt_deps exist live and no other def node owns these decls. Mechanical finding: canonicalEtaleCompactSupportComparison is asIso via isIso_compactSupportGraphDerivedComparison (the theorem constructs the object) and derivedTensorSymmetry is lem-kun-tensor-sym's own recorded def, so PASS on that point; other dropped-module names appear only in attribute [local irreducible]. Q107's earlier PASS was refused at landing and never landed, no repair note, report sections present, sorry-only proofs, no hollow defs. Not compiled (unchanged file). Advisory: two nodes now record etaleSumPullbackUnitIso and its docstring still names the theorem node."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261024T224945-L-1834322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

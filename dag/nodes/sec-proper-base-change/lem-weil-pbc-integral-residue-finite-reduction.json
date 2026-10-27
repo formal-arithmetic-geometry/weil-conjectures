@@ -1,0 +1,158 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-integral-residue-finite-reduction",
+ "kind": "statement",
+ "title": "Finite quotient tensor comparison under normalized residue coefficients",
+ "statement": "Let T and S be schemes, g:S→T any morphism, ell prime and E/Q_ell finite. Let d be an adic datum on O_E and c an IntegralResidueCoefficientModel on S [lem-weil-pbc-integral-residue-coefficient-model]. For every n≥0 define integralResidueFiniteModel by scalar restriction on the canonical localization representative along the inverse of finiteRingComparison inverse, integralDetailedLevelComparison, and c.finite n. Let K be a completed-coefficient derived object on T and let C be a complex over the large finite coefficient ring with the displayed realization eC of the n-th reduction of K. Then the n-th actual completedAdicQuotientReduction of raw inverse image of K restricted along the inverse composite integralRingIso, purCoefficientIso, c.completed inverse is isomorphic to integralResidueFiniteModel applied to the finite coefficient derived inverse image of Q(C). This is a comparison of the two finite reductions and makes no completeness or perfectness assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-integral-residue-coefficient-model",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Lift the finite ring-sheaf isomorphism integralDetailedLevelComparison followed by c.finite to commutative ring sheaves. Compose purCoefficientIso with c.completed inverse. Faithfulness of forgetting commutativity, the detailed coefficient projection normalization, and c.completed_projection give the commutative square between the actual completed and finite projections.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "lem-weil-pbc-integral-residue-coefficient-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalar-adjunction comparison under coefficient equivalences to this square. Normalize raw pullback using the inverse coefficient restriction and its identity round trip. This identifies actual quotient reduction after normalized raw pullback with the original quotient reduction of datum pullback followed by finite coefficient restriction.",
+   "uses": [
+    "lem-pbc-scalar-coefficient-equivalence",
+    "lem-weil-pbc-integral-pullback-scalar-comparison",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare finite continuous-function module pullback with the published large finite-coefficient pullback. The constant-section square identifies realization followed by restriction with the inverse constant-ring encoding: restrict the module sheafification adjunction along its fully faithful module embedding, then use uniqueness of left adjoints. The constant-ring pullback encoding follows from the sectionwise direct-image comparison and the same uniqueness. Cancel the realization equivalences. Apply exact derived localization and the coefficient restriction/pullback square, and reflect the resulting isomorphism through restriction along the finite constant comparison.",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse of the existing four-corners chi isomorphism to move reduction past datum pullback. Apply finite pullback to the supplied reduction realization eC, using the exact localization factor to identify its source. Compose with the finite presentation comparison, the scalar restriction compositor, and localization of the canonical representative isomorphism. The endpoint is exactly integralResidueFiniteModel. All functors and isomorphisms allow arbitrary objects, positive quotient exponents, the empty scheme and zero objects.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-weil-pbc-integral-residue-coefficient-model",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-weil-pbc-integral-pullback-scalar-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-constructible-coefficient-serre",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-four-corners"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1 and Lemma 6.5.8(1); normalized coefficient projection squares and exact change of presentation. R2 uses the existing four-corners comparison and uniqueness of left adjoints rather than reproving its K-flat tensor argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant perfect complexes of sheaves remain constant perfect after a ring equivalence and restriction to a slice site",
+   "results": "Sheaf.isConstant_congr, Sheaf.isConstant_of_iso, Sheaf.isConstant_iff_of_equivalence and ordinary constant-section lemmas; no derived finite coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; ordinary constancy is insufficient for the normalized derived module presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact change of coefficient rings for sheaves preserves intrinsic adic completeness and constant perfect complexes",
+   "results": "AdicCompletion.map_exact, IsAdicComplete, isAdicComplete_iff, AdicCompletion.module and condensed-category instances.",
+   "date": "2026-10-27",
+   "verdict": "No sheaf Koszul-unit or finite constant-perfect comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcDerivedRestrictComp|finiteCoefficientDerivedPullback|IsCompletedAdicDerivedComplete",
+   "results": "msearch Mathlib grep: zero hits. Local source search found the existing scalar compositor, DVR intrinsic criterion and slice-isomorphism propagation; their precise signatures were read.",
+   "date": "2026-10-27",
+   "verdict": "Use the project APIs for completeness and further slice restriction; the finite presentation comparisons remain separate obligations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueStratumInput",
+  "date": "2026-10-27",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The integral-lattice step: normalize the completed coefficients and residue models on the fixed stratum before applying the perfect residue lifting theorem.",
+   "via": [
+    "lem-weil-pbc-integral-residue-stratum-input",
+    "lem-weil-pbc-integral-residue-stratum-lift",
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueFiniteReduction",
+  "file": "lean/Sheaf/Paper/IntegralResidueFiniteReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralResidueFiniteReduction",
+  "statement": "theorem integralResidueFiniteReduction\n    (T S : Scheme.{u}) (g : S ⟶ T) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (c : IntegralResidueCoefficientModel l E d S) (n : ℕ)\n    (K : PbcCompletedDerived T (pbcIntegralDatum l E))\n    (C : CochainComplex\n      (FiniteCoefficientModules T (PbcQuotient (pbcIntegralDatum l E) n)) ℤ)\n    (eC : Nonempty\n      (DerivedCategory.Q.obj (((SheafOfModules.restrictScalars\n        (AdicCoefficients.finiteRingComparison T\n          (PbcQuotient (pbcIntegralDatum l E) n)).hom).mapHomologicalComplex (.up ℤ)).obj C) ≅\n        (pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K)) :\n    Nonempty\n      ((completedAdicQuotientReduction S d n).obj\n          ((adicTowerPullback g (pbcAdicCompletion T (pbcIntegralDatum l E)) ⋙\n            pbcDerivedRestrict ((pbcIntegralDatum l E).integralRingIso g ≪≫\n              WeilConjectures.purCoefficientIso l E S ≪≫ c.completed.symm).inv).obj K) ≅\n        integralResidueFiniteModel S l E d c n\n          ((finiteCoefficientDerivedPullback T (PbcQuotient (pbcIntegralDatum l E) n) g).obj\n            (DerivedCategory.Q.obj C)))",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralResidueFiniteModel",
+   "AlgebraicGeometry.Scheme.integralResidueFiniteReduction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034706-L-3674777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T064505-L-2188795",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,301 @@
+{
+ "id": "lem-trf-cotangent-isomorphism-coordinate-lift",
+ "kind": "statement",
+ "title": "Lift compatible etale coordinates through cotangent-fibre isomorphisms",
+ "statement": "Let $k$ be a field, $X,M_1,M_2$ finite-type $k$-schemes with $M_1,M_2$ smooth, $i_a:X\\hookrightarrow M_a$ closed immersions, and $x\\in X$. Put $L=\\kappa(x)$ and suppose both canonical maps\n$$\\Omega_{M_a/k,i_a(x)}\\otimes_{\\mathcal O_{M_a,i_a(x)}}L\\longrightarrow\\Omega_{X/k,x}\\otimes_{\\mathcal O_{X,x}}L$$\nare isomorphisms. There is an integer $d=\\dim_L(\\Omega_{X/k,x}\\otimes L)$ and, after restricting $X$ and the $M_a$ to affine neighbourhoods of the marked points, etale $k$-maps $e_a:M_a\\to\\mathbf A^d_k$ such that $e_1i_1=e_2i_2$ as morphisms on the restricted $X$. More precisely, any supplied etale coordinate chart $e_2$ to $\\mathbf A^d_k$ near $i_2(x)$ can be used: its coordinate functions restrict to $X$ and admit lifts $g_1,\\ldots,g_d$ on an affine neighbourhood in $M_1$; their differential classes form an $L$-basis of the ambient differential fibre, and the map $e_1=(g_j)$ is etale after further restriction. Thus the agreement is on the scheme $X$, including nilpotents, and not only on its residue field. The scheme notions, differential fibres and affine space are those of [def-weil-field], [def-weil-finite-type-morphism], [def-sbc-smooth-morphisms], [def-weil-closed-immersion], [def-weil-etale-morphism], [def-sc-relative-differential-sheaf], [def-weil-pbc-kahler-differentials], [def-weil-residue-field], [def-weil-module-base-change], [def-sbc-affine-space].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent compatible-coordinate consequence of Tag 054L, lemma-smooth-etale-over-affine-space, and Tag 02GU, lemma-etale-at-point; algebra.tex Tag 0H93, lemma-formally-etale-omega, for the differential basis of an etale chart. Retains old item Step 4."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-residue-field",
+  "def-weil-module-base-change",
+  "def-sbc-affine-space",
+  "def-pc-module-stalk-functor",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof": [
+  {
+   "text": "If no chart is supplied, apply [sbc-thm-etale-local-normal-form] to $M_2\\to\\operatorname{Spec}k$ at $i_2(x)$, obtaining an affine neighbourhood $V_2$ and an etale chart $e_2:V_2\\to\\mathbf A^n_k$. Otherwise take an affine neighbourhood $V_2$ of $i_2(x)$ inside the domain of the supplied chart and let $e_2$ be its restriction to $V_2$, which is etale by open-immersion etaleness and composition in [lem-weil-pbc-etale-composition-cancellation]. In both cases $V_2$ is a finite-type $k$-scheme: it is affine, hence quasi-compact, and covered by principal opens of the finitely generated affine charts of $M_2$. Write $t_j=e_2^*T_j$. By [lem-trf-etale-coordinate-derivations-jacobian], the $dt_j$ are a basis of $\\Omega_{\\Gamma(V_2)/k}$. The affine description of the differential sheaf identifies its stalk with the localization of this free module, so its fibre at $i_2(x)$ has the basis $dt_j\\otimes1$. A closed immersion identifies the residue fields at corresponding points (localize $B\\twoheadrightarrow B/I$ and take residue fields). Thus this is an $L$-basis. The assumed second fibre isomorphism makes its images a basis of $\\Omega_{X/k,x}\\otimes L$, proving $n=d$. This also shows that any supplied chart has the required number of coordinates.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-trf-etale-coordinate-derivations-jacobian",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L, lemma-smooth-etale-over-affine-space; algebra.tex Tags 0H93, lemma-formally-etale-omega, and 00RX, lemma-differentials-polynomial-ring; affine free-module fibre calculation."
+   }
+  },
+  {
+   "text": "Put $X_2=i_2^{-1}(V_2)$. Since $i_1$ is a closed immersion, $i_1(X\\setminus X_2)$ is closed in $M_1$ and misses $i_1(x)$. Choose an affine neighbourhood $U_1$ of $i_1(x)$ in its complement. Then $X_1=i_1^{-1}(U_1)$ is contained in $X_2$ and is affine: by [def-weil-closed-immersion], write $U_1=\\operatorname{Spec}B$ and $X_1=\\operatorname{Spec}(B/I)$. Restrict each $t_j$ to $X_1$ and choose $g_j\\in B$ mapping to this section under $B\\twoheadrightarrow B/I$. Define $h:U_1\\to\\mathbf A^d_k$ by $T_j\\mapsto g_j$. Its restriction to $X_1$ is $e_2i_2|_{X_1}$, since their ring maps have identical values on constants and every polynomial variable. This equality takes place in $B/I$, without reducing it.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion, affine quotient characterization; elementary polynomial universal property."
+   }
+  },
+  {
+   "text": "Let $\\alpha_a:\\Omega_{M_a/k,i_a(x)}\\otimes L\\to\\Omega_{X/k,x}\\otimes L$ be the stipulated isomorphisms. The universal derivation gives the canonical map on differentials under a ring map, by $db\\mapsto d\\bar b$; these maps agree on restrictions and germs. Hence $\\alpha_1(dg_j\\otimes1)=d(g_j|_{X_1})\\otimes1=d(t_j|_{X_1})\\otimes1=\\alpha_2(dt_j\\otimes1)$. The right-hand family is a basis by Step 1. Applying the inverse of $\\alpha_1$ proves that the $dg_j\\otimes1$ are an $L$-basis of the first ambient differential fibre. Restriction to $U_1$ has not changed this stalk or residue field.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section on differentials, canonical functorial map (equation-functorial-omega); universal derivation and elementary transport of a basis through an isomorphism."
+   }
+  },
+  {
+   "text": "The affine open $U_1$ is smooth and finite type over $k$: smoothness is local on the source, and it is affine, hence quasi-compact, and covered by principal opens of the finitely generated affine charts of $M_1$, so it is of finite type over $k$. Apply [lem-pur-etale-at-point-from-differentials] to the specified functions $g_j$ and their basis from Step 3. There is an open neighbourhood $E\\subset U_1$ of $i_1(x)$ on which $h$ is etale. Choose a principal neighbourhood $U'_1=D(b)\\subset E$ in the affine $U_1$. It is affine by [lem-weil-pbc-principal-localization-open-immersion], and the restricted map remains etale by open-immersion etaleness and composition in [lem-weil-pbc-etale-composition-cancellation]. Set $X'_1=i_1^{-1}(U'_1)$; it is an affine open of $X$, contained in $X_2$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-finite-type-morphism",
+    "lem-pur-etale-at-point-from-differentials",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GU, lemma-etale-at-point (8), chosen-coordinate consequence; schemes.tex Tag 01I3, lemma-standard-open-affine; open restrictions of etale maps."
+   }
+  },
+  {
+   "text": "Here is the common affine restriction, without an affineness assumption on intersections. For the affine opens $X'_1,X_2$ containing $x$, choose a principal open $D_{X_2}(f)$ containing $x$ and contained in $X'_1$; then choose a principal $D_{X'_1}(g)$ containing $x$ and contained in $D_{X_2}(f)$. Write $g|_{D_{X_2}(f)}=a/f^N$ in $\\Gamma(X_2)_f$. Then $W=D_{X'_1}(g)=D_{X_2}(f)\\cap D_{X_2}(a)=D_{X_2}(fa)$, since the first principal open was chosen inside $D_{X_2}(f)$. Thus $W$ is principal in both. Lift its defining functions $g$ and $fa$ through the respective quotient maps $\\Gamma(U'_1)\\twoheadrightarrow\\Gamma(X'_1)$ and $\\Gamma(V_2)\\twoheadrightarrow\\Gamma(X_2)$. Their principal opens $U''_1\\subset U'_1$ and $V'_2\\subset V_2$ are affine neighbourhoods whose inverse images under $i_1,i_2$ are exactly the open subscheme $W$, including its structure sheaf. The last assertion follows by localizing the quotient: $(B/I)_{\\bar c}=B_c/IB_c$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IW, lemma-standard-open-two-affines, explicit two-principal-open proof; Tag 01I3, lemma-standard-open-affine; quotient localization calculation."
+   }
+  },
+  {
+   "text": "Replace $X$ by $W$, $M_1$ by $U''_1$ and $M_2$ by $V'_2$. The restricted immersions are closed, by the quotient-localization description in Step 5. Define $e_1=h|_{U''_1}$ and keep the restriction of the original $e_2$ on $V'_2$. Both are etale by [lem-weil-pbc-etale-composition-cancellation]. Step 2 already gave their agreement on $X_1$, so it gives $e_1i_1=e_2i_2$ on $W$. The restricted $g_j$ are the required lifts, and their differential classes are still the basis of Step 3. All neighbourhoods contain the marked points. For $d=0$ the list is empty and the same differential criterion applies; no smoothness, reducedness or separability assumption on $X$ has been used.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GK and 02GN, open immersions are etale and composition of etale morphisms; assembly of the coordinate construction."
+   }
+  },
+  {
+   "text": "Lean assembly of the compatible-chart clause from the supplied-chart clause (the latter retains the proof plan in Steps 1--6): choose an affine neighbourhood of i_2(x) and apply sbc-thm-etale-local-normal-form to the smooth map q_2. Compose the resulting chart with AffineSpace.map of the target-open inclusion. This map is etale by base change of the open inclusion; AffineSpace.map_over and resLE_comp_ι identify its projection with V_2.ι ≫ q_2. Apply the existing exists_lift_of_etale_coordinates_of_cotangent_isomorphisms to this supplied chart. Retain its n=d, affine opens, membership and inverse-image equalities, and define e_1=homOfVector(g), e_2'=homOfLE(hV_2) ≫ e_2. Open-immersion composition proves etaleness of the second restriction; homOfVector_over proves the first projection equation, and homOfLE_ι proves the second. Associativity turns the supplied-chart equality into the required agreement on W. No coordinate basis or residue-field transport is reproved in this assembly.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L for the initial chart; Tags 02GK and 02GN for open restrictions; assembly from the existing supplied-chart clause by Y6, 2026-10-26."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-trf-etale-coordinate-derivations-jacobian",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-sbc-affine-space",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "lem-pur-etale-at-point-from-differentials",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Compatible-coordinate argument assembled from Tags 054L and 02GU, with algebra.tex Tags 0H93 and 00RX for the chart basis and schemes.tex Tags 01IW and 01I3 for common affine restrictions. Y6 (2026-10-26): Steps 1--6 remain the plan for the still-unproved supplied-chart clause; added Step 7 is the compiled deduction of compatible charts from that existing clause. No new theorem or hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-cotangent-isomorphism-coordinate-lift: lift an etale coordinate map across two closed embeddings whose cotangent fibres agree to get compatible etale ambient charts",
+   "results": "{\"t\": \"2026-10-23T12:11:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-cotangent-isomorphism-coordinate-lift: lift an etale coordinate map across two closed embeddings whose cotangent fibres agree to get compatible etale ambient charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.lift\", \"StandardEtalePair.lift_X\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.lift_X_left\", \"StandardEtalePresentation.lift_bijective\"], \"digest\": \"c0fdd93b187d202d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T12:12:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.subsingleton_kaehlerDifferential\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\"], \"digest\": \"62262afa55990dab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_mvPolynomial|of_basis_kaehlerDifferential",
+   "results": "{\"t\": \"2026-10-23T12:13:30Z\", \"tool\": \"grep\", \"query\": \"exists_etale_mvPolynomial|of_basis_kaehlerDifferential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\"], \"digest\": \"6ce89e045518872e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-cotangent-isomorphism-coordinate-lift: two embeddings with isomorphic cotangent fibres allow etale affine space coordinates to be lifted compatibly with a quotient",
+   "results": "{\"t\": \"2026-10-23T12:13:30Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-cotangent-isomorphism-coordinate-lift: two embeddings with isomorphic cotangent fibres allow etale affine space coordinates to be lifted compatibly with a quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.cotangentEquivIdeal_symm_apply\", \"Ideal.cotangentEquivIdeal\", \"Ideal.mapCotangent\", \"TangentBundle.symmL_trivializationAt_eq_core\", \"Algebra.Extension.tensorCotangent\", \"Algebra.SubmersivePresentation.cotangentEquiv\", \"Ideal.cotangentEquivIdeal_apply\", \"inCoordinates_tangent_bundle_core_model_space\"], \"digest\": \"eae513c3016b1587\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; these give ordinary smooth/etale charts, cotangent modules, base-change stability or polynomial root lifts, not the specified compatible coordinate/closed-pair/henselization conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two smooth ambient schemes of a closed subscheme with isomorphic differential fibres admit compatible etale coordinate charts by lifting functions",
+   "results": "{\"t\": \"2026-10-23T13:02:04Z\", \"tool\": \"leansearch\", \"query\": \"Two smooth ambient schemes of a closed subscheme with isomorphic differential fibres admit compatible etale coordinate charts by lifting functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"960258e1b8f22f03\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures. Smooth-chart existence and formally etale differential equivalences are constituent facts only; no hit states compatible coordinate lifts on two ambient schemes. The grep in AlgebraicGeometry had no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T13:02:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"29c4cb60d87f5b73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures. Smooth-chart existence and formally etale differential equivalences are constituent facts only; no hit states compatible coordinate lifts on two ambient schemes. The grep in AlgebraicGeometry had no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-cotangent-isomorphism-coordinate-lift: lift coordinate functions across a closed immersion with isomorphic cotangent fibres to obtain compatible etale maps from two smooth schemes to affine space",
+   "results": "{\"t\": \"2026-10-23T13:02:05Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-cotangent-isomorphism-coordinate-lift: lift coordinate functions across a closed immersion with isomorphic cotangent fibres to obtain compatible etale maps from two smooth schemes to affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.lift\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.homEquiv\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"e26386f2d379869d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures. Smooth-chart existence and formally etale differential equivalences are constituent facts only; no hit states compatible coordinate lifts on two ambient schemes. The grep in AlgebraicGeometry had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*coord|compatible.*etale|exists.*etale.*affine|etale.*kaehler",
+   "results": "{\"t\": \"2026-10-23T13:02:46Z\", \"tool\": \"grep\", \"query\": \"cotangent.*coord|compatible.*etale|exists.*etale.*affine|etale.*kaehler\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures. Smooth-chart existence and formally etale differential equivalences are constituent facts only; no hit states compatible coordinate lifts on two ambient schemes. The grep in AlgebraicGeometry had no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-cotangent-isomorphism-coordinate-lift: A prescribed list of regular functions on a smooth variety whose differentials form a basis defines an etale morphism near that point, and functions on an affine closed subscheme lift to the ambient ring",
+   "results": "{\"t\": \"2026-10-23T13:03:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-cotangent-isomorphism-coordinate-lift: A prescribed list of regular functions on a smooth variety whose differentials form a basis defines an etale morphism near that point, and functions on an affine closed subscheme lift to the ambient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.lift\", \"Algebra.etaleLocus\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus_eq_compl_support\", \"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.toPresentation_σ'\"], \"digest\": \"d9265eaff884a5d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures. Smooth-chart existence and formally etale differential equivalences are constituent facts only; no hit states compatible coordinate lifts on two ambient schemes. The grep in AlgebraicGeometry had no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-embedding-etale-comparison",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Minimal smooth envelopes and etale comparisons; Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2, minimal-embedding paragraph; BM, Desingularization algorithms I (2003), section 6.1.2; comparison argument supplied by agent from smooth local coordinates. No Stacks tag states the full minimal-envelope comparison. Re-split: old Step 4: lift coordinates of the second ambient chart through the closed quotient.",
+   "via": [
+    "lem-trf-smooth-embedding-etale-comparison",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-isomorphism-coordinate-lift",
+  "worker": "stage1",
+  "summary": "Q141: unchanged statement; six explicit steps, no new nodes. Reuse smooth-chart existence, etale-coordinate differential basis and the chosen-coordinate differential criterion. Lift actual sections in an affine closed quotient and synchronize final affine ambient restrictions with a written common-principal-open argument. Audited every used statement and recorded verbatim citation quotes.",
+  "blueprint": "The existing historical auxiliary branch recorded in blueprint.from.place, via lem-trf-smooth-embedding-etale-comparison, old Step 4: lift the coordinates of the second ambient chart through the closed quotient. Steps 1--4 supply precisely that compatible-coordinate argument; Steps 5--6 make the common affine restriction explicit. The current latest lem-trf-local-term-locality proof uses Varshavsky and does not assert this auxiliary lemma; no alteration of that unit route is proposed.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic smooth local-coordinate existence, Stacks 054L; this unit has no equally general chart existence statement. It initializes the ambient comparison, not a replacement trace-formula route."
+   },
+   {
+    "node": "lem-pur-etale-at-point-from-differentials",
+    "why": "Generic chosen-coordinate etale criterion for arbitrary fields and smooth finite-type schemes, Stacks 02GU. It is applied only after the quotient lifts and fibre basis are proved here; no node of this unit states this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-pur-etale-at-point-from-differentials"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-74d6146f4",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-74d6146f4 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct; I repaired one missing citation and one weak justification. I read the item in full (6 steps, 0 new nodes, statement and stmt_deps unchanged). I checked every cited statement: sbc-thm-etale-local-normal-form (054L, morphisms.tex l.8543), lem-trf-etale-coordinate-derivations-jacobian (n>=0, any field), lem-pur-etale-at-point-from-differentials (02GU; every hypothesis checked), principal-localization, etale-composition, and the closed-immersion clause of 01QO. Step 2: the choice of U_1 is valid because i_1 is closed, and h i_1 = e_2 i_2 on the affine X_1 because the ring maps agree on generators in B/I. Step 3: transporting the basis through alpha_1 and alpha_2 is correct. Step 5: the 01IW argument W = D(fa) is correct and assumes no affine intersections. Step 6: agreement holds on W inside X_1. Small cases tested: k[t]/t^2 in A^1 twice, d=0, and non-closed points. The parent lem-trf-smooth-embedding-etale-comparison Step 2 uses exactly this conclusion. No duplicate: lem-pur-smooth-closed-coordinate-lift and lem-pur-smooth-pair-local-coordinates need regular-sequence or smooth-pair hypotheses. No cycle (closure of 187 nodes does not reach the item). No SGA. Tool uses accepted: 054L chart existence and the 02GU chosen-coordinate criterion, both generic. FIX (C1): Step 1 restricted a supplied chart to an affine open without citing that the restriction is étale; I added lem-weil-pbc-etale-composition-cancellation to Step 1's uses. I also replaced the inexact finite-type justification of V_2 (Step 1) and U_1 (Step 4) with: affine, hence quasi-compact, and covered by principal opens of finitely generated charts. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-cotangent-isomorphism-coordinate-lift.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CotangentIsomorphismCoordinateLift",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_compatible_etale_coordinates_of_cotangent_isomorphisms",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.exists_compatible_etale_coordinates_of_cotangent_isomorphisms",
+   "AlgebraicGeometry.Scheme.Hom.exists_lift_of_etale_coordinates_of_cotangent_isomorphisms"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CotangentIsomorphismCoordinateLift.lean",
+  "statement": "theorem Scheme.Hom.exists_compatible_etale_coordinates_of_cotangent_isomorphisms (k : Type u) [Field k] {X M₁ M₂ : Scheme.{u}} (p : X ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] (q₁ : M₁ ⟶ Spec (.of k)) [LocallyOfFiniteType q₁] [QuasiCompact q₁] [Smooth q₁] (q₂ : M₂ ⟶ Spec (.of k)) [LocallyOfFiniteType q₂] [QuasiCompact q₂] [Smooth q₂] (i₁ : X ⟶ M₁) [IsClosedImmersion i₁] (i₂ : X ⟶ M₂) [IsClosedImmersion i₂] (hi₁ : i₁ ≫ q₁ = p) (hi₂ : i₂ ≫ q₂ = p) (x : X) (hα₁ : IsIso ((ModuleCat.extendScalars (X.residue x).hom).map ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map (q₁.relativeDifferentialsPullbackMap i₁)))) (hα₂ : IsIso ((ModuleCat.extendScalars (X.residue x).hom).map ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map (q₂.relativeDifferentialsPullbackMap i₂)))) : ∃ (d : ℕ) (V₁ : M₁.Opens) (V₂ : M₂.Opens) (W : X.Opens) (hW₁ : W ≤ i₁ ⁻¹ᵁ V₁) (hW₂ : W ≤ i₂ ⁻¹ᵁ V₂) (e₁ : V₁.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) (Spec (.of k))) (e₂ : V₂.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) (Spec (.of k))), d = Module.finrank (X.residueField x) ((ModuleCat.extendScalars (X.residue x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj p.relativeDifferentials)) ∧ IsAffineOpen V₁ ∧ IsAffineOpen V₂ ∧ IsAffineOpen W ∧ x ∈ W ∧ W = i₁ ⁻¹ᵁ V₁ ∧ W = i₂ ⁻¹ᵁ V₂ ∧ Etale e₁ ∧ Etale e₂ ∧ e₁ ≫ (AffineSpace (ULift.{u} (Fin d)) (Spec (.of k)) ↘ Spec (.of k)) = V₁.ι ≫ q₁ ∧ e₂ ≫ (AffineSpace (ULift.{u} (Fin d)) (Spec (.of k)) ↘ Spec (.of k)) = V₂.ι ≫ q₂ ∧ i₁.resLE V₁ W hW₁ ≫ e₁ = i₂.resLE V₂ W hW₂ ≫ e₂",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Two clauses of the unchanged node: compatible affine etale chart existence, and lifting any supplied etale chart with its actual coordinate functions and differential basis. Uses the existing canonical differential pullback map, its stalk and residue extension; no new definitions. The basis in the second theorem is over the restricted ambient residue field, canonically kappa(x) by the closed immersion. Added the two already-landed definition nodes for the stalk functor and canonical differential map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1aa61c571",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Read node, 12 stmt_dep records, module and report. Theorem 1 matches the node: field k; finite type = LocallyOfFiniteType+QuasiCompact; Smooth ambient schemes; closed immersions over k; hypotheses are IsIso of extendScalars(residue) of the stalk of the landed relativeDifferentialsPullbackMap, i.e. the canonical Ω_M⊗L→Ω_X⊗L map; d = finrank of the fibre; affine V1,V2,W with W the full inverse image; Etale k-charts; agreement as an equality of scheme morphisms on W. Theorem 2 covers the supplied-chart clause: n = d; lifts g as sections; Basis with b j = 1⊗germ(d g_j), same convention as the landed lem-pur-etale-at-point-from-differentials; Etale homOfVector g; e2 only restricted. Edge cases d=0, nilpotents, non-closed x, char p: fine. No defs; both proofs are sorry; docstrings carry the source and blueprint id; statement verbatim; only lean and two landed stmt_deps differ from live; no name clash. Advisories: the second reading is a self-audit; two plain imports are at most redundant. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261026T093101-L-3519191",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

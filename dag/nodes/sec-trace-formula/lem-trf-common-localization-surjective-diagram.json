@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-common-localization-surjective-diagram",
+ "kind": "statement",
+ "title": "Compatible surjective local maps from a common prime localization",
+ "statement": "Let $D$ be a commutative ring and let $P,Q,A$ be commutative local rings, each with exactly one maximal ideal, denoted $\\mathfrak m_P,\\mathfrak m_Q,\\mathfrak m_A$. Let $u:P\\twoheadrightarrow A$ and $v:Q\\twoheadrightarrow A$ be surjective local ring homomorphisms, where local means carrying the maximal ideal into the maximal ideal. Suppose ring maps $f:D\\to P$ and $g:D\\to Q$ satisfy $u\\circ f=v\\circ g=:h$. Assume that for every $p\\in P$ there exist $a,t\\in D$ with $f(t)$ a unit and $p f(t)=f(a)$, and that for every $q\\in Q$ there exist $c,z\\in D$ with $g(z)$ a unit and $q g(z)=g(c)$. Then $\\mathfrak n=h^{-1}(\\mathfrak m_A)$ is a prime ideal, and $\\mathfrak n=f^{-1}(\\mathfrak m_P)=g^{-1}(\\mathfrak m_Q)$. Put $T=D_{\\mathfrak n}$ with canonical map $\\iota:D\\to T$ [def-weil-pbc-localization-at-prime]. There are unique ring maps $\\alpha:T\\to P$, $\\beta:T\\to Q$, $\\gamma:T\\to A$ with $\\alpha\\iota=f$, $\\beta\\iota=g$, and $\\gamma\\iota=h$. All three maps are surjective and local, and $u\\circ\\alpha=\\gamma=v\\circ\\beta$. For $d\\in D$ and $t\\notin\\mathfrak n$ their values are $\\alpha(d/t)=f(d)f(t)^{-1}$, $\\beta(d/t)=g(d)g(t)^{-1}$, and $\\gamma(d/t)=h(d)h(t)^{-1}$. No Noetherian, regularity or completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00CP (proposition-universal-property-localization), existence, uniqueness and formula for the extensions; agent refinement establishing the common prime, locality and surjectivity under unit-denominator hypotheses, abstracted from returned proof steps 2 (last sentence), 3 and 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "For $x\\in P$, locality gives $x\\in\\mathfrak m_P\\Rightarrow u(x)\\in\\mathfrak m_A$. Conversely, if $x\\notin\\mathfrak m_P$, the unit criterion makes $x$ invertible; applying $u$ to an inverse makes $u(x)$ invertible, hence outside $\\mathfrak m_A$. Thus $u^{-1}(\\mathfrak m_A)=\\mathfrak m_P$. The identical argument with $v$ gives $v^{-1}(\\mathfrak m_A)=\\mathfrak m_Q$. Taking inverse images along $f$ and $g$ and using $uf=vg=h$ proves both asserted equalities for $\\mathfrak n$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (lemma-characterize-local-ring), unit criterion; Tag 07BJ (lemma-characterize-local-ring-map), elementary inverse-image argument"
+   }
+  },
+  {
+   "text": "The inverse image $\\mathfrak n$ is an ideal and does not contain $1$, since $h(1)=1\\notin\\mathfrak m_A$. To check primality directly, suppose $ab\\in\\mathfrak n$ and $a\\notin\\mathfrak n$. Then $h(a)\\notin\\mathfrak m_A$ is a unit by the unit criterion; multiplying $h(a)h(b)\\in\\mathfrak m_A$ by its inverse gives $h(b)\\in\\mathfrak m_A$, so $b\\in\\mathfrak n$. Consequently $D\\setminus\\mathfrak n$ contains $1$ and is closed under multiplication.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (lemma-characterize-local-ring), unit criterion applied to A"
+   }
+  },
+  {
+   "text": "Form $T=D_{\\mathfrak n}$ with its canonical map $\\iota$. If $t\\notin\\mathfrak n$, step 1 gives $f(t)\\notin\\mathfrak m_P$ and $g(t)\\notin\\mathfrak m_Q$, and the definition of $\\mathfrak n$ gives $h(t)\\notin\\mathfrak m_A$. The unit criterion makes all three images units. Apply the localization universal property separately to $f,g,h$: it supplies unique extensions $\\alpha,\\beta,\\gamma$ and gives exactly $\\alpha(d/t)=f(d)f(t)^{-1}$, $\\beta(d/t)=g(d)g(t)^{-1}$, and $\\gamma(d/t)=h(d)h(t)^{-1}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), statement and fraction formula; Tag 00E9 (lemma-characterize-local-ring)"
+   }
+  },
+  {
+   "text": "The maps $u\\alpha$ and $\\gamma$ agree after precomposition with $\\iota$, since $(u\\alpha)\\iota=uf=h=\\gamma\\iota$. The uniqueness clause of the universal property therefore gives $u\\alpha=\\gamma$. Likewise $(v\\beta)\\iota=vg=h$ gives $v\\beta=\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), uniqueness"
+   }
+  },
+  {
+   "text": "For $p\\in P$, choose the assumed $a,t\\in D$ with $f(t)$ a unit and $p f(t)=f(a)$. The unit criterion and step 1 give $t\\notin\\mathfrak n$, so $a/t\\in T$, and the fraction formula gives $\\alpha(a/t)=f(a)f(t)^{-1}=p$. For $q\\in Q$, choose $c,z$ with $g(z)$ a unit and $qg(z)=g(c)$; again $z\\notin\\mathfrak n$ and $\\beta(c/z)=q$. Thus $\\alpha$ and $\\beta$ are surjective. For $b\\in A$, surjectivity of $u$ supplies $p$ with $u(p)=b$; the preceding construction supplies $w\\in T$ with $\\alpha(w)=p$, hence $\\gamma(w)=u\\alpha(w)=b$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent fraction-preimage argument using Tag 00CP and Tag 00E9"
+   }
+  },
+  {
+   "text": "The prime-localization definition says that $T$ is local with maximal ideal $\\mathfrak nT$, the ideal generated by the elements $\\iota(a)$ for $a\\in\\mathfrak n$. For each such generator, step 1 gives $\\alpha(\\iota(a))=f(a)\\in\\mathfrak m_P$ and $\\beta(\\iota(a))=g(a)\\in\\mathfrak m_Q$, while $\\gamma(\\iota(a))=h(a)\\in\\mathfrak m_A$ by definition. Every element of $\\mathfrak nT$ is a finite sum $\\sum_i w_i\\iota(a_i)$; its image under each map is the corresponding sum of multiples of elements of the target maximal ideal. Hence each image lies in that maximal ideal. This proves locality of all three maps.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BI (definition-local-ring), following paragraph on the maximal ideal of a prime localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CP (proposition-universal-property-localization), 00E9 (lemma-characterize-local-ring), 07BJ (lemma-characterize-local-ring-map), and the paragraph following 07BI (definition-local-ring); explicit elementary diagram and fraction argument by Q68."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjective.*lift|lift.*surjective|surjective.*map|map.*surjective",
+   "results": "{\"t\": \"2026-10-22T06:46:52Z\", \"tool\": \"grep\", \"query\": \"surjective.*lift|lift.*surjective|surjective.*map|map.*surjective\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/InvSubmonoid.lean\"], \"digest\": \"967bdd9422152906\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give surjectivity for an already surjective source map, or a single localization lift. Read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88), and IsLocalHom.of_surjective (Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:118). None supplies the prime-preimage equalities and the compatible three-map local diagram from the stated fraction hypotheses in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a fraction generating ring map at the inverse image of a local maximal ideal gives a surjective local homomorphism compatible with a common quotient",
+   "results": "{\"t\": \"2026-10-22T06:46:53Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a fraction generating ring map at the inverse image of a local maximal ideal gives a surjective local homomorphism compatible with a common quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.surjective_quotientMap_of_maximal_of_localization\", \"RingHom.surjective_localRingHom_of_surjective\", \"RingHom.surjective_localizationPreserves\", \"IsLocalHom.of_surjective\", \"IsLocalization.mapₐ_surjective_of_surjective\", \"IsLocalization.of_surjective\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"IsLocalization.map_surjective_of_surjective\"], \"digest\": \"7fcf1b04598c1148\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give surjectivity for an already surjective source map, or a single localization lift. Read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88), and IsLocalHom.of_surjective (Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:118). None supplies the prime-preimage equalities and the compatible three-map local diagram from the stated fraction hypotheses in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Function.Surjective, IsLocalHom",
+   "results": "{\"t\": \"2026-10-22T06:46:53Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, Function.Surjective, IsLocalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give surjectivity for an already surjective source map, or a single localization lift. Read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88), and IsLocalHom.of_surjective (Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:118). None supplies the prime-preimage equalities and the compatible three-map local diagram from the stated fraction hypotheses in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let D map to local rings P and Q with surjective local maps to A and equal composites. If every element of P and Q is a fraction of images with unit denominator, localizing D at the inverse image of the maximal ideal of A gives surjective local maps to both P and Q",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"leanfinder\", \"query\": \"Let D map to local rings P and Q with surjective local maps to A and equal composites. If every element of P and Q is a fraction of images with unit denominator, localizing D at the inverse image of the maximal ideal of A gives surjective local maps to both P and Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_of_isLocalization_isMaximal\", \"RingHom.surjective_localRingHom_iff\", \"RingHom.surjective_localRingHom_of_surjective\", \"RingHom.surjective_localizationPreserves\", \"IsLocalization.map_surjective_of_surjective\", \"RingHom.surjectiveOnStalks_iff_forall_maximal\", \"surjective_of_isLocalization_of_span_eq_top\", \"IsLocalization.mapₐ_surjective_of_surjective\"], \"digest\": \"169bb55d41ca9724\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give surjectivity for an already surjective source map, or a single localization lift. Read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88), and IsLocalHom.of_surjective (Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:118). None supplies the prime-preimage equalities and the compatible three-map local diagram from the stated fraction hypotheses in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity and locality of the induced homomorphism from a prime localization when the target local ring consists of fractions of source images",
+   "results": "{\"t\": \"2026-10-22T06:47:04Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity and locality of the induced homomorphism from a prime localization when the target local ring consists of fractions of source images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.surjective_localRingHom_iff\", \"RingHom.surjective_localRingHom_of_surjective\", \"RingHom.surjective_localizationPreserves\", \"RingHom.surjectiveOnStalks_of_isLocalization\", \"RingHom.SurjectiveOnStalks\", \"IsLocalization.map_surjective_of_surjective\", \"IsLocalization.mapₐ_surjective_of_surjective\", \"IsLocalization.Away.mapₐ_surjective_of_surjective\"], \"digest\": \"3147525a3c046d4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give surjectivity for an already surjective source map, or a single localization lift. Read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88), and IsLocalHom.of_surjective (Mathlib/RingTheory/LocalRing/RingHom/Basic.lean:118). None supplies the prime-preimage equalities and the compatible three-map local diagram from the stated fraction hypotheses in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lift_surjective_iff|comap_maximalIdeal|isUnit_iff",
+   "results": "{\"t\": \"2026-10-23T09:27:02Z\", \"tool\": \"grep\", \"query\": \"lift_surjective_iff|comap_maximalIdeal|isUnit_iff\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Algebra.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Localization/Pi.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\"], \"digest\": \"a3f0282120c749ed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_iff (Mathlib/RingTheory/SurjectiveOnStalks.lean:44), and RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88). These supply individual extension or surjectivity results, not the whole compatible three-map diagram and prime-preimage assertions in one specialization. Existing DAG leaves are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a prime localization onto a local ring is surjective if every element of the target is a fraction of images with unit denominator",
+   "results": "{\"t\": \"2026-10-23T09:27:03Z\", \"tool\": \"leansearch\", \"query\": \"A map from a prime localization onto a local ring is surjective if every element of the target is a fraction of images with unit denominator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.surjectiveOnStalks_of_exists_div\", \"IsLocalization.surj\", \"RingHom.surjective_localRingHom_of_surjective\", \"RingHom.surjective_localRingHom_iff\", \"IsLocalization.map_surjective_of_surjective\", \"IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective\", \"RingHom.surjectiveOnStalks_of_surjective\", \"RingHom.surjective_localizationPreserves\"], \"digest\": \"b4a21ea70eb181e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_iff (Mathlib/RingTheory/SurjectiveOnStalks.lean:44), and RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88). These supply individual extension or surjectivity results, not the whole compatible three-map diagram and prime-preimage assertions in one specialization. Existing DAG leaves are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Function.Surjective, IsLocalHom",
+   "results": "{\"t\": \"2026-10-23T09:27:03Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, Function.Surjective, IsLocalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_iff (Mathlib/RingTheory/SurjectiveOnStalks.lean:44), and RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88). These supply individual extension or surjectivity results, not the whole compatible three-map diagram and prime-preimage assertions in one specialization. Existing DAG leaves are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible surjective local homomorphisms from a common prime localization to two local rings with a common quotient and unit denominator fraction representations",
+   "results": "{\"t\": \"2026-10-23T09:27:07Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible surjective local homomorphisms from a common prime localization to two local rings with a common quotient and unit denominator fraction representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.surjective_localRingHom_iff\", \"Localization.localRingHom_unique\", \"IsLocalization.mapₐ_surjective_of_surjective\", \"IsLocalization.Away.map_surjective_iff\", \"IsLocalization.Away.mapₐ_surjective_of_surjective\", \"RingHom.surjective_localRingHom_of_surjective\", \"surjective_of_isLocalization_of_span_eq_top\", \"surjective_of_isLocalization_isMaximal\"], \"digest\": \"ab45e78f52777a76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_iff (Mathlib/RingTheory/SurjectiveOnStalks.lean:44), and RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88). These supply individual extension or surjectivity results, not the whole compatible three-map diagram and prime-preimage assertions in one specialization. Existing DAG leaves are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a ring mapping to two fraction generated local rings with equal maps to a common local quotient, construct surjective compatible local maps from the localization at the pulled back maximal ideal",
+   "results": "{\"t\": \"2026-10-23T09:28:06Z\", \"tool\": \"leanfinder\", \"query\": \"Given a ring mapping to two fraction generated local rings with equal maps to a common local quotient, construct surjective compatible local maps from the localization at the pulled back maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_of_isLocalization_isMaximal\", \"IsLocalization.mapₐ_surjective_of_surjective\", \"RingHom.surjective_localRingHom_of_surjective\", \"RingHom.surjective_localRingHom_iff\", \"IsLocalization.Away.mapₐ_surjective_of_surjective\", \"IsLocalization.surjective_quotientMap_of_maximal_of_localization\", \"surjective_of_isLocalization_of_span_eq_top\", \"RingHom.surjectiveOnStalks_iff_forall_maximal\"], \"digest\": \"070cec248bb5b8fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read IsLocalization.lift_surjective_iff (Mathlib/RingTheory/Localization/Defs.lean:573), RingHom.surjective_localRingHom_iff (Mathlib/RingTheory/SurjectiveOnStalks.lean:44), and RingHom.surjective_localRingHom_of_surjective (Mathlib/RingTheory/RingHom/Surjective.lean:88). These supply individual extension or surjectivity results, not the whole compatible three-map diagram and prime-preimage assertions in one specialization. Existing DAG leaves are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-essentially-finite-type-ci-kernel-invariance",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The affine-local complete-intersection input used below the nodal chart: Morphisms Tag 01UG (lemma-local-complete-intersection), together with Algebra Tag 00SH (lemma-lci-global), characterizes the condition by complete-intersection local rings. Supporting algebra for the pointwise criterion: replace the regular-local quotient witnessing the local complete-intersection condition by the localization of a chosen polynomial presentation, using Algebra Tag 00SF (1) implies (2). Re-split of lem-trf-essentially-finite-type-ci-kernel-invariance: returned step 2 (the common prime), step 3 (local extensions and compatibility), and step 4 (surjectivity by fractions).",
+   "via": [
+    "lem-trf-essentially-finite-type-ci-kernel-invariance",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-lci-affine-open-locality",
+    "lem-trf-syntomic-geometric-fibres-affine-criterion",
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-common-localization-surjective-diagram",
+  "worker": "stage1",
+  "summary": "Q68 preserves the statement and all existing metadata and searches. Six explicit steps prove the common prime, three unique fraction extensions, compatibility, fraction-witness surjectivity, and locality. Reuses the existing unit-criterion, localization-universal-property and prime-localization nodes; creates no nodes. Read latest blueprint, Stacks sources and live Lean/Mathlib declarations; no exact project attachment or single Mathlib specialization found.",
+  "blueprint": "Supports the existing from.place chain under lem-trf-local-term-locality: common prime, local extensions, compatibility and surjectivity needed by lem-trf-essentially-finite-type-ci-kernel-invariance. The latest blueprint ancestor has no separate statement of this elementary algebra refinement. No unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-d1f93c418",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-d1f93c418 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and its report (which has ## Review by Q68). No new nodes. The statement is byte-identical to live, where the item is still unsplit; there is no repair note and no other group has superseded it. Six steps cite three Mathlib-leaf tools, and proof_deps equals the union of the steps' uses. The tools are lem-weil-pbc-local-ring-unit-criterion (Stacks 00E9 (1)<=>(3), algebra.tex:3367), def-weil-pbc-localization-at-prime (paragraph after 07BI, algebra.tex:3333: R_p local with maximal ideal pR_p) and lem-weil-pbc-ring-localization-universal-property (00CP, algebra.tex:1084; the node's statement contains the formula and the uniqueness clause). I read all three sources. Step 1: u^{-1}m_A=m_P via the unit criterion (07BJ (2)=>(3) written out), so n=f^{-1}m_P=g^{-1}m_Q. Step 2: primality proved directly. Step 3: t not in n makes f(t), g(t), h(t) units, and the universal property gives unique alpha, beta, gamma with the fraction formulas. Step 4: u alpha=gamma=v beta by uniqueness after precomposition with iota. Step 5: the fraction witnesses give t not in n and alpha(a/t)=p; beta likewise; gamma=u alpha is surjective by surjectivity of u (surjectivity of v is redundant). Step 6: generators iota(a), a in n, land in the target maximal ideals, so all three maps are local. All steps are correct and no absent hypothesis is used. Tested on k[e]/(e^2)->k, k[x]->k with x->0, Z->Z_(p), and zero rings excluded. Without the witness hypothesis alpha need not be surjective (D=k, P=k[t]_(t)), so the hypothesis is not idle. No duplicate in dag/nodes; the only citer, lem-trf-essentially-finite-type-ci-kernel-invariance, uses exactly the stated clauses. No SGA source; all cited nodes are Mathlib-leaf tools, so no tool_uses are needed. Spot-checked search records: the Mathlib lines Defs.lean:573 and Surjective.lean:88 exist. Minor: the report calls main-20261023-1620 the latest blueprint, which is irrelevant since the item has no blueprint statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CommonLocalizationSurjectiveDiagram",
+  "declaration": "Localization.exists_commonLocalization_surjective_diagram",
+  "file": "lean/Sheaf/RingTheory/CommonLocalizationSurjectiveDiagram.lean",
+  "statement": "theorem exists_commonLocalization_surjective_diagram {D : Type uD} {P : Type uP} {Q : Type uQ} {A : Type uA} [CommRing D] [CommRing P] [CommRing Q] [CommRing A] [IsLocalRing P] [IsLocalRing Q] [IsLocalRing A] (u : P →+* A) (v : Q →+* A) [IsLocalHom u] [IsLocalHom v] (hu : Function.Surjective u) (hv : Function.Surjective v) (f : D →+* P) (g : D →+* Q) (hcomm : u.comp f = v.comp g) (hf : ∀ p : P, ∃ a t : D, IsUnit (f t) ∧ p * f t = f a) (hg : ∀ q : Q, ∃ c z : D, IsUnit (g z) ∧ q * g z = g c) : ∃ n : PrimeSpectrum D, n.asIdeal = (IsLocalRing.maximalIdeal A).comap (u.comp f) ∧ n.asIdeal = (IsLocalRing.maximalIdeal P).comap f ∧ n.asIdeal = (IsLocalRing.maximalIdeal Q).comap g ∧ ∃ (α : Localization.AtPrime n.asIdeal →+* P) (β : Localization.AtPrime n.asIdeal →+* Q) (γ : Localization.AtPrime n.asIdeal →+* A), α.comp (algebraMap D (Localization.AtPrime n.asIdeal)) = f ∧ β.comp (algebraMap D (Localization.AtPrime n.asIdeal)) = g ∧ γ.comp (algebraMap D (Localization.AtPrime n.asIdeal)) = u.comp f ∧ Function.Surjective α ∧ Function.Surjective β ∧ Function.Surjective γ ∧ IsLocalHom α ∧ IsLocalHom β ∧ IsLocalHom γ ∧ u.comp α = γ ∧ v.comp β = γ ∧ (∀ α' : Localization.AtPrime n.asIdeal →+* P, α'.comp (algebraMap D (Localization.AtPrime n.asIdeal)) = f → α' = α) ∧ (∀ β' : Localization.AtPrime n.asIdeal →+* Q, β'.comp (algebraMap D (Localization.AtPrime n.asIdeal)) = g → β' = β) ∧ (∀ γ' : Localization.AtPrime n.asIdeal →+* A, γ'.comp (algebraMap D (Localization.AtPrime n.asIdeal)) = u.comp f → γ' = γ) ∧ (∀ (d : D) (t : n.asIdeal.primeCompl), α (IsLocalization.mk' (Localization.AtPrime n.asIdeal) d t) = f d * Ring.inverse (f t)) ∧ (∀ (d : D) (t : n.asIdeal.primeCompl), β (IsLocalization.mk' (Localization.AtPrime n.asIdeal) d t) = g d * Ring.inverse (g t)) ∧ (∀ (d : D) (t : n.asIdeal.primeCompl), γ (IsLocalization.mk' (Localization.AtPrime n.asIdeal) d t) = (u.comp f) d * Ring.inverse ((u.comp f) t))",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cda77a25",
+  "group": "NX",
+  "result": "pass",
+  "note": "Only the item's lean record is added; the statement field is verbatim the file signature, which starts at `theorem`. Clause by clause the Lean matches the node: IsLocalRing on P, Q, A only; IsLocalHom plus surjectivity for u and v; hcomm; hf and hg verbatim; ∃ n : PrimeSpectrum D with its ideal pinned to comap (u.comp f) and equal to the f and g preimages; α, β, γ extend f, g, h, with uniqueness over all ring maps; all three surjective and local; uα = γ = vβ; fraction formulas via mk' and Ring.inverse. The node's 6-step proof was checked against Stacks 00CP and the statement is true. Edge cases: zero rings excluded as in the source; fields covered; D need not be a domain or local; universes independent. No name collision in side-live; no definitions; proof is a single sorry; source and blueprint docstrings present; the stmt_dep def-weil-pbc-localization-at-prime is used. Not recompiled because nothing was changed. No findings."
+ }
+}

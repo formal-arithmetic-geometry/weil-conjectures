@@ -566,9 +566,14 @@ def main():
             else:
                 # 2026-10-18 (s1loop): say which copy disagrees; a completion only in this project's copy is L's to promote
                 q = dag_queue.queue_node(item)
-                why = ("completed in this project's DAG but not in the live DAG the queue reads (side completion never "
-                       "promoted; L promotes it)" if q is not None and not dag_queue.stage1_completed(q)
-                       else "no longer stage-1-open; live completion takes priority")
+                # 2026-10-25 (deliverfix): one repository since 2026-10-19 (no side copy to promote). A node that is not
+                # completed but outside Dag.stage1() is not open for progress: no open target route needs its split.
+                # The packet is archived like a superseded one, instead of a return that restarted the item forever.
+                if q is not None and not dag_queue.stage1_completed(q) and retire_completed(g, item, head, not_open=True):
+                    results[head] = res(0, f"SUPERSEDED {item}: no longer open for progress (no open target route needs "
+                                           "its split); stage-1 delivery archived; stale handoff retired\n")
+                    continue
+                why = "no longer stage-1-open; live completion takes priority"
                 results[head] = res(1, f"NOT MERGED {item}: {item}: {why}\n")
         except Exception as e:  # noqa: BLE001
             if "HEAD MOVED" in str(e):

@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-complete-reduction-sections-model",
+ "kind": "definition",
+ "title": "Ordinary sections and the normalized strict section fibre",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and a scheme $U$. Let $\\mathcal M$ be the internal-module category of the pulled-back continuous integral coefficient ring [sk-def-pe-derived-completion]. Define $\\Gamma:\\mathcal M\\to\\mathbf{Ab}$ by forgetting the action and evaluating the underlying sheaf at the identity pro-etale object. Put $R\\Gamma=\\Gamma^{\\mathrm{right\\ derived}}$. For a cochain complex $I$ of strict inverse systems in $\\mathcal M$, let $\\Gamma^{\\mathrm{Tow}}I$ be termwise sections and define $\\lambda_I:\\Gamma(\\lim I)\\to\\operatorname{Roos}(\\Gamma^{\\mathrm{Tow}}I)$ by the strict Roos augmentation [def-weil-strict-roos-model] of the family $\\Gamma(\\lim I\\to I_n)$, with zero nullhomotopy. The definitions are ordinary, uncompleted sections, and the index $n$ represents exponent $n+1$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of a tower of complexes with cohomology zero above h has cohomology zero above h+1",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CochainComplex.isZero_of_isLE, DerivedCategory.isLE_iff, CochainComplex.isZero_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Limits.limit",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "milnor_shortExact|rightDerivedFunctorUnit.*roos|limitToRoos",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Milnor exact sequence for sections of the inverse limit of a strict tower of module complexes",
+   "results": "8 hits: SheafOfModules.sections, Module.DirectLimit.module, PresheafOfModules.sections, groupCohomology.H1InfRes, PresheafOfModules.sectionsMk, AdicCompletion, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CategoryTheory.Abelian.Ext.covariantSequence_exact",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteReductionRgammaUpperBound",
+  "date": "2026-10-25",
+  "group": "T5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Current det-sf-comp-coherence-cocycle proof, Refinement isomorphisms paragraph: the use of det-sf-comp-coherence-refinement (2) on the localizing closure. This descendant supplies the scalar complete-reduction sections bound used below the proper direct-image coproduct argument; the ancestor does not itself state this estimate. This node isolates the ordinary sections and the normalized strict section fibre.",
+   "via": [
+    "lem-sfb-complete-reduction-rgamma-upper-bound",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompleteReductionSectionsModel",
+  "file": "lean/Sheaf/Paper/CompleteReductionSectionsModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteReductionSections.sections",
+  "statement": "abbrev sections : AdicCompletion.Modules l E U ⥤ Ab.{u + 1}",
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompleteReductionSections.sections",
+   "AlgebraicGeometry.ProEtale.CompleteReductionSections.rgamma",
+   "AlgebraicGeometry.ProEtale.CompleteReductionSections.sectionTower",
+   "AlgebraicGeometry.ProEtale.CompleteReductionSections.limitToRoos"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 4 moved decls verbatim vs change record; new sorried statements read against their nodes and Stacks 0D6K/0941/BS products-exact; unit realized list vs removed imports; node proof_deps vs Lean"
+ }
+}

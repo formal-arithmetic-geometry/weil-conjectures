@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-scalar-roos-comparison-unique",
+ "kind": "statement",
+ "title": "Unique scalar Roos comparison normalized by the universal derived unit",
+ "statement": "For a scheme W and the constant integral coefficient ring of a finite extension E of Q_l, there is a unique natural isomorphism from the localized strict Roos complex to the actual total right-derived inverse limit [def-pur-compact-support-scalar-limit-maps, def-weil-strict-roos-model]. Its composite with the localized ordinary limit inclusion is the canonical limit-cone isomorphism followed by the universal derived-limit unit. All coefficient hypotheses and the normalization equation are exactly those of the attached Lean statement.",
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-weil-strict-roos-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, computation of derived inverse limits by the strict Roos complex; universal normalization of the comparison in Step 3 of lem-pur-compact-support-scalar-limit-reduction."
+ },
+ "proof": [
+  {
+   "text": "The canonical right-derived-limit unit is a right-derived functor unit. Transport it through the canonical isomorphism between the limit of tower complexes and degreewise limits [lem-sf-strict-roos-derived-limit-comparison]. Exact products in the coefficient module category follow from [det-pe-products-exact] via the existing scalarRoos_exactProducts theorem of [def-pur-compact-support-scalar-limit-maps].",
+   "uses": [
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "det-pe-products-exact",
+    "def-pur-compact-support-scalar-limit-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the right-derived functor represented by the strict Roos complex [lem-weil-strict-roos-derivation]. Uniqueness of right-derived functors gives its comparison with the actual total right-derived limit. The defining equation for rightDerivedNatTrans proves its normalization on every complex. The canonical derived-unit API used for transport is the proved helper of [lem-pur-derived-square-normalization-naturality].",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-pur-derived-square-normalization-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For another normalized comparison, compose it with the inverse Roos comparison and lift the resulting natural isomorphism through localization. Its composition with the Roos-derived unit agrees with that of the canonical comparison by the assumed normalization. Right-derived-functor extensionality makes the lifted comparison equal to the canonical one. Localized component equations then give equality of the original natural isomorphisms. This argument includes zero complexes and uses no arbitrary choices beyond the uniquely normalized derived comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "det-pe-products-exact",
+  "def-pur-compact-support-scalar-limit-maps",
+  "lem-weil-strict-roos-derivation",
+  "lem-pur-derived-square-normalization-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stage 3 B2, 2026-10-27: existing fully proved scalarRoosComparison_existsUnique moved verbatim from its parent to a self-contained module after the parent reached the 60-second runtime gate. Its statement and proof are unchanged; only its docstring node tag and module location change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"ext\"",
+   "results": "{\"t\": \"2026-10-26T22:28:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension\", \"CategoryTheory.Functor.rightDerived_ext\", \"CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasPointwiseRightDerivedFunctor\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfHasPointwiseRightDerivedFunctor\"], \"digest\": \"43334cbec818c3b8\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing rightDerived_ext and localization natural-isomorphism APIs supply the uniqueness argument. This node extracts the already proved project theorem verbatim; no new comparison is postulated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural cofinal restriction map of Roos complexes agrees with the canonical map on right derived limits of inverse towers",
+   "results": "{\"t\": \"2026-10-26T22:28:25Z\", \"tool\": \"leanfinder\", \"query\": \"The natural cofinal restriction map of Roos complexes agrees with the canonical map on right derived limits of inverse towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.isoOfFinal\", \"InverseSystem.globalEquiv_naturality\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.arrowMap_limit\", \"localCohomology.diagramComp\", \"CategoryTheory.Functor.WellOrderInductionData.Extension.map_limit\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.mkOfLimit.arrowMap_functor_to_top\", \"CategoryTheory.Functor.IsEventuallyConstantTo.cone\\u03c0App_eq\", \"CategoryTheory.Functor.IsEventuallyConstantTo.cone\\u03c0App\"], \"digest\": \"a3ff5346ab80122e\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing rightDerived_ext and localization natural-isomorphism APIs supply the uniqueness argument. This node extracts the already proved project theorem verbatim; no new comparison is postulated."
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*[Rr]estrict|[Rr]estrict.*roos",
+   "results": "{\"t\": \"2026-10-26T22:28:25Z\", \"tool\": \"grep\", \"query\": \"roos.*[Rr]estrict|[Rr]estrict.*roos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "The existing rightDerived_ext and localization natural-isomorphism APIs supply the uniqueness argument. This node extracts the already proved project theorem verbatim; no new comparison is postulated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "date": "2026-10-27",
+  "group": "B2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 (Qbar-stage), independence of finite coefficient-extension models; Proof Step 3: existence and uniqueness of the unit-normalized Roos comparison.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarRoosComparisonUnique",
+  "file": "lean/Sheaf/Paper/ScalarRoosComparisonUnique.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarRoosComparison_existsUnique",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.scalarRoosComparison_existsUnique"
+  ],
+  "statement": "theorem scalarRoosComparison_existsUnique (W : Scheme.{u}) :\n    ∃! κ : roosF (A := Modules\n        (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ⋙\n          DerivedCategory.Q ≅ DerivedCategory.Q ⋙ scalarLimit l E W,\n      ∀ K : CochainComplex (Towers\n        (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ,\n        DerivedCategory.Q.map (roosι K) ≫ κ.hom.app K =\n          DerivedCategory.Q.map\n            (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval K.asFunctor,\n              HomologicalComplex.isLimitConeOfHasLimitEval K.asFunctor⟩).hom ≫\n            derivedUnit\n              (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤ _)\n              K",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-42efb",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261027T050536-L-234734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-42efb",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261027T050536-L-234734",
+  "kind": "interface",
+  "note": "independent cc review: moved scalarRoosComparison_existsUnique vs clone (verbatim); scalarRoosNormalization statement vs clone (unchanged); 3 delivered modules + 10 direct importers compiled together (all OK); axioms clean; new node stmt_deps vs definition owners"
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-special-linear-picard-zero",
+ "kind": "statement",
+ "title": "Triviality of line bundles on special linear matrix schemes",
+ "statement": "Let $k$ be a field [def-weil-field] and let $n\\geq1$. Put $A=k[x_{ij}:1\\leq i,j\\leq n]/(\\det(x_{ij})-1)$ and $X=\\operatorname{Spec}A$, where determinant and affine spectrum are [def-weil-pbc-matrix-determinant, def-weil-affine-spectrum]. Every invertible $\\mathcal O_X$-module [def-sc-invertible-module] is isomorphic to $\\mathcal O_X$. Equivalently, $\\operatorname{Pic}(X)=0$, where $\\operatorname{Pic}(X)$ means isomorphism classes of invertible modules, with tensor product as its group operation. There is no restriction on the characteristic of $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 20.30, printed p.417; the scheme product decomposition of 2.42, printed p.53."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-affine-spectrum",
+  "def-sc-invertible-module",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Write $P=k[x_{ij}]$, $d=\\det(x_{ij})$, $A=P/(d-1)$ and $B=P[1/d]$. The $n^2$ variables identify $\\operatorname{Spec}P$ with affine $n^2$-space. By [lem-weil-pbc-affine-open-section-vanishing-prime](b), its basic open $D(d)$ is affine and has ring $B$; thus identify $G=\\operatorname{Spec}B$ with that open subscheme. Here [def-weil-ring-localization-away] supplies $d^{-1}\\in B$. We will construct a retraction $r:G\\to X$ of a morphism $j:X\\to G$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV, lemma-spec-sheaves (3), and 01I3, lemma-standard-open-affine; Milne Proposition 20.30."
+   }
+  },
+  {
+   "text": "Let $\\bar x_{ij}\\in A$ denote the residue classes. Evaluation $P\\to A$, $x_{ij}\\mapsto\\bar x_{ij}$, sends $d$ to $1$, so [lem-weil-pbc-ring-localization-universal-property] extends it to $q:B\\to A$, with $q(d^{-1})=1$. In $B$ put $y_{i1}=d^{-1}x_{i1}$ and $y_{ij}=x_{ij}$ for $j>1$. Every monomial of the Leibniz determinant contains exactly one entry from the first column, so [def-weil-pbc-matrix-determinant] gives $\\det(y_{ij})=d^{-1}d=1$. Evaluation $P\\to B$ at the $y_{ij}$ exists by [def-weil-pbc-mv-polynomial-ring] and kills $d-1$. It therefore induces $s:A\\to B$, $[f]\\mapsto f(y_{ij})$: if $f-f'=(d-1)h$, their evaluations agree. This uses the quotient in [def-weil-pbc-algebra-hom-quotient]. Now $q(s(\\bar x_{ij}))=\\bar x_{ij}$ for every $i,j$ and both maps fix $k$, so $q\\circ s=\\mathrm{id}_A$. By the contravariant functoriality in [def-weil-affine-spectrum], $j=\\operatorname{Spec}q$ and $r=\\operatorname{Spec}s$ satisfy $r\\circ j=\\mathrm{id}_X$. This is the retraction implicit in Milne's map $(M,t)\\mapsto M\\operatorname{diag}(t,1,\\ldots,1)$: its inverse divides the first column by $\\det M$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.30, printed p.417, and 2.42, printed p.53; explicit coordinate and pullback argument."
+   }
+  },
+  {
+   "text": "Let $L$ be any invertible $\\mathcal O_X$-module. Set $M=r^*L$ by [def-pc-module-pullback]. On each inverse image $r^{-1}(U)$ of an open trivialization $L|_U\\cong\\mathcal O_U$ from [def-sc-invertible-module], tensor pullback identifies $M$ with $\\mathcal O_{r^{-1}(U)}$: multiplication $a\\otimes b\\mapsto a\\,r^\\sharp(b)$ has inverse $a\\mapsto a\\otimes1$. These opens cover $G$, so $M$ is locally free of rank one (hence an invertible module). The same multiplication formula, without choosing $U$, identifies $j^*\\mathcal O_G$ with $\\mathcal O_X$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8L, lemma-pullback-invertible; local rank-one tensor calculation written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-space-open-invertible-trivial] with the field $k$, dimension $n^2$, open $G=D(d)$ from Step 1 and invertible module $M$ from Step 3. Its statement gives an isomorphism $a:r^*L\\xrightarrow{\\sim}\\mathcal O_G$ without any restriction on $k$. Pulling back $a$ by $j$ preserves its inverse because pullback is a functor. By [def-pc-module-pullback] and $r\\circ j=\\mathrm{id}_X$, we have $L\\cong\\mathrm{id}_X^*L\\cong j^*r^*L\\xrightarrow{j^*a}j^*\\mathcal O_G\\cong\\mathcal O_X$, the last map being Step 3's multiplication isomorphism. Thus every class in the Picard group as defined in the statement equals the identity class. For $n=1$, $A=k[x]/(x-1)\\cong k$, $s(\\bar x)=x/x=1$, and the same retraction works. All formulas hold in every characteristic.",
+   "uses": [
+    "lem-sfb-affine-space-open-invertible-trivial",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.30, printed p.417, and 2.42, printed p.53; explicit coordinate and pullback argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-sfb-affine-space-open-invertible-trivial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 20.30, printed p.417, and 2.42, printed p.53; explicit coordinate and pullback argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of the special linear algebraic group scheme SLn over a field is zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.instInhabited\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup V] → [inst_2 : Module R V] → Inhabited (SpecialLinearGroup R V)\", \"doc\": \"The special linear group over a commutative ring $ R $ and an $ R $-module $ V $ has an identity element given by the identity linear transformation, which has determinant $ 1 $ in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V],\\n  Module.finrank R V = 1 → Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (M : Type u_5) [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M] [Module.Free R M], CommRing.Pic.mk R M = 1\", \"doc\": \"If $ M $ is a free $ R $-module, then the corresponding element in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element, i.e., $ \\\\mathrm{Pic.mk}(R, M) = 1 $.\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"(R : Type u_1) → (V : Type u_2) → [inst : CommRing R] → [inst_1 : AddCommGroup V] → [Module R V] → Type (max 0 u_2)\", \"doc\": \"The special linear group $\\\\text{SL}(V)$ over a commutative ring $ R $, consisting of all invertible linear transformations of the $ R $-module $ V $ with determinant equal to 1. This is the kernel of \"}\n  {\"name\": \"instCommGroupPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → CommGroup (CommRing.Pic R)\", \"doc\": \"For any commutative semiring $ R $, its Picard group $ \\\\mathrm{Pic}(R) $, which consists of isomorphism classes of invertible semimodules over $ R $ under tensor product, forms an abelian group. The g\"}\n  {\"name\": \"CommRing.relPic_eq_top\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [Subsingleton (CommRing.Pic A)], CommRing.relPic R A = ⊤\", \"doc\": \"If the Picard group of $ A $ is a subsingleton (i.e., contains only the trivial invertible module), then the relative Picard subgroup $ \\\\mathrm{relPic}(R,A) $ of $ R $ with respect to $ A $ coincides \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix groups and general Picard-group facts do not establish triviality of line bundles on this scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PicardGroup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix groups and general Picard-group facts do not establish triviality of line bundles on this scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*(SpecialLinear|SL)|((SpecialLinear|SL).*Picard)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix groups and general Picard-group facts do not establish triviality of line bundles on this scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every line bundle on the determinant one affine matrix scheme is trivial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max 0 u v)\", \"doc\": \"The special linear group of n×n matrices over a commutative ring R, consisting of all invertible matrices with determinant equal to 1.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.subsingleton_of_subsingleton\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \"[Subsingleton n] : Subsingleton (SpecialLinearGroup n R)\", \"doc\": \"The special linear group of $ n \\times n $ matrices over a commutative ring $ R $ is equipped with a commutative ring structure.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.det_coe\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \": det ↑ₘA = 1\", \"doc\": \"For any matrix $ A $ in the special linear group $ \\\\text{SL}_n(R) $ over a commutative ring $ R $, the determinant of $ A $ satisfies $ \\\\det(A) = 1 $.\"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"[Module.Free R V] (d1 : Module.finrank R V = 1) : Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"Subgroup.HasDetOne.mk\", \"module\": \"Mathlib.NumberTheory.ModularForms.ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {R : Type u_2} [inst_2 : CommRing R]\\n  {Γ : Subgroup (GL n R)}, (∀ {g : GL n R}, g ∈ Γ → Matrix.GeneralLinearGroup.det g = 1) → Γ.HasDetOne\", \"doc\": \"Given a subgroup $\\\\Gamma$ of the general linear group $\\\\mathrm{GL}(n, R)$ over a commutative ring $R$, and a proof that every element $g \\\\in \\\\Gamma$ satisfies $\\\\det(g) = 1$, this constructor establish\"}\n  {\"name\": \"SpecialLinearGroup.det_eq_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(u : SpecialLinearGroup R V) : LinearMap.det (u : V →ₗ[R] V) = 1\", \"doc\": \"For any element $ u $ in the special linear group $ \\\\operatorname{SL}(R, V) $, the determinant of $ u $ is equal to 1, i.e., $ \\\\det(u) = 1 $.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.range_toGL\", \"module\": \"Mathlib.Topology.Instances.Matrix\", \"type\": \"{A : Type*} [CommRing A] : Set.range (toGL : SL n A → GL n A) = GeneralLinearGroup.det ⁻¹' { 1 }\", \"doc\": \"For any commutative ring $A$, the image of the inclusion homomorphism from the special linear group $\\\\text{SL}(n, A)$ to the general linear group $\\\\text{GL}(n, A)$ is equal to the preimage of the set \"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasOne\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \": One (SpecialLinearGroup n R)\", \"doc\": \"The special linear group of $ n \\times n $ matrices over a commutative ring $ R $ has the identity matrix as its multiplicative identity element. This instance asserts that the identity matrix, whose d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix groups and general Picard-group facts do not establish triviality of line bundles on this scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible modules on the coordinate ring of SLn are free of rank one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.instFreeAsModuleOfNat\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], Module.Free R (CommRing.Pic.AsModule 1)\", \"doc\": \"The trivial element $1$ in the Picard group $\\\\mathrm{Pic}(R)$ of a commutative semiring $R$ is a free $R$-module.\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R],\\n  Subsingleton (CommRing.Pic R) ↔\\n    ∀ (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M], Module.Invertible R M → Module.Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iffₛ\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R],\\n  Subsingleton (CommRing.Pic R) ↔\\n    ∀ (M : Type u) [inst_1 : AddCommMonoid M] [inst_2 : Module R M], Module.Invertible R M → Module.Free R M\", \"doc\": \"For a commutative semiring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is a subsingleton (i.e., trivial) if and only if every invertible $ R $-module is free. This equivalence characterizes the trivia\"}\n  {\"name\": \"CommRing.Pic.instFreeOfSubsingleton\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [Module.Invertible R M] [Subsingleton (CommRing.Pic R)], Module.Free R M\", \"doc\": \"If the Picard group of a commutative semiring $ R $ is trivial (i.e., has at most one element), then every invertible $ R $-module is a free module. This means that when the group of isomorphism class\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff_free\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M], CommRing.Pic.mk R M = 1 ↔ Module.Free R M\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-semimodule $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element if and only if $ M $ is a free $ \"}\n  {\"name\": \"CommRing.Pic.mk_eq_one\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (M : Type u_5) [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M] [Module.Free R M], CommRing.Pic.mk R M = 1\", \"doc\": \"If $ M $ is a free $ R $-module, then the corresponding element in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element, i.e., $ \\\\mathrm{Pic.mk}(R, M) = 1 $.\"}\n  {\"name\": \"Module.Invertible.exists_linearEquiv_ideal\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u_5) (M : Type u_6) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.Invertible R M] [Subsingleton (CommRing.Pic (FractionRing R))], ∃ I, Nonempty (M ≃ₗ[R] ↥I)\", \"doc\": \"If the Picard group of the fraction ring of a commutative ring $ R $ is a subsingleton (i.e., trivial), then every invertible $ R $-module $ M $ is isomorphic to an ideal $ I $ of $ R $ as an $ R $-mo\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Module.Invertible R M], CommRing.Pic.mk R M = 1 ↔ Nonempty (M ≃ₗ[R] R)\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-module $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is the identity element if and only if $ M $ is isomorphic to $ R $ as\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix groups and general Picard-group facts do not establish triviality of line bundles on this scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*SpecialLinear|SpecialLinear.*Pic",
+   "results": "{\"t\": \"2026-10-23T22:40:31Z\", \"tool\": \"grep\", \"query\": \"Pic.*SpecialLinear|SpecialLinear.*Pic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/PicardGroup.lean:478-535 and Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:64-70; general ring Picard criteria and matrix groups do not give sheaf Picard vanishing on this quotient scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard group of the special linear algebraic group scheme over a field is zero",
+   "results": "{\"t\": \"2026-10-23T22:40:32Z\", \"tool\": \"leansearch\", \"query\": \"The Picard group of the special linear algebraic group scheme over a field is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic\", \"CommRing.Pic.mk\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup\", \"SpecialLinearGroup.det_eq_one\", \"SpecialLinearGroup.instCoeFunForall\", \"CommRing.Pic.subsingleton_iff\"], \"digest\": \"28aee64884ee6bd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/PicardGroup.lean:478-535 and Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:64-70; general ring Picard criteria and matrix groups do not give sheaf Picard vanishing on this quotient scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRing.Pic, Matrix.SpecialLinearGroup",
+   "results": "{\"t\": \"2026-10-23T22:40:32Z\", \"tool\": \"loogle\", \"query\": \"CommRing.Pic, Matrix.SpecialLinearGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/PicardGroup.lean:478-535 and Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:64-70; general ring Picard criteria and matrix groups do not give sheaf Picard vanishing on this quotient scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on the determinant one matrix scheme SLn over a field is trivial",
+   "results": "{\"t\": \"2026-10-23T22:40:32Z\", \"tool\": \"leanfinder\", \"query\": \"Every invertible sheaf on the determinant one matrix scheme SLn over a field is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_eq_one\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"CommRing.Pic.mk_eq_one_iff\", \"CommRing.relPic_eq_top\", \"CommRing.Pic.instFreeAsModuleOfNat\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.subsingleton_iffₛ\"], \"digest\": \"4091aca3515575aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/PicardGroup.lean:478-535 and Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:64-70; general ring Picard criteria and matrix groups do not give sheaf Picard vanishing on this quotient scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible modules on the quotient polynomial ring by determinant minus one are free of rank one",
+   "results": "{\"t\": \"2026-10-23T22:41:47Z\", \"tool\": \"leanfinder\", \"query\": \"Invertible modules on the quotient polynomial ring by determinant minus one are free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.instFreeAsModuleOfNat\", \"Module.Free.of_det_ne_one\", \"CommRing.Pic.instFreeOfSubsingleton\", \"LinearMap.free_of_det_ne_one\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.mk_eq_one_iff_free\", \"CommRing.Pic.subsingleton_iffₛ\", \"CommRing.Pic.mk_eq_one\"], \"digest\": \"2badff378c7ffa92\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/RingTheory/PicardGroup.lean:478-535 and Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:64-70; general ring Picard criteria and matrix groups do not give sheaf Picard vanishing on this quotient scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-universal-multiplicative-cover",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Proposition 20.31, printed p.418; definition of universal covering in 18.7 and the lifting property in Proposition 18.8. The scalar centre is computed by commuting a matrix with the two unit transvections. Supporting prerequisite: Proposition 20.31 refers back to Example 18.20; the Picard-vanishing input to Proposition 18.19 is supplied by Proposition 20.30.",
+   "via": [
+    "lem-sfb-sl2-universal-multiplicative-cover",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-special-linear-picard-zero",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 20.30 and 2.42. Reuse the existing affine-space-open invertible-triviality lemma, construct the determinant-normalizing retraction on coordinate algebras, and pull back the trivialization along its section. No new nodes; elementary local tensor computations are written in the proof. Added the polynomial and quotient notions to statement dependencies.",
+  "blueprint": "The ancestor tool returns None. Retain the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain through the rank-one SL2 universal cover; this expands its terminal Milne Proposition 20.30 prerequisite, using 2.42 exactly as the source does. Latest blueprint unit and general-linear-group definition read; no equivalent Picard-vanishing blueprint statement found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-3346d5bcf",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-3346d5bcf (reviewer sub-agent of L); spot-checked: I read Milne Prop 20.30 (PDF p.429) and 2.42 (PDF p.65). The item statement matches the SL_n clause over any field, and the statement text is unchanged from live, where the item is still unsplit with no repair note. The proof makes Milne's route precise as a retraction X=SL_n -> G=GL_n=D(det) in affine n^2-space. Step 1 uses clause (b) of the affine-open-section-vanishing Mathlib leaf: D(d) is affine with ring P_d. Step 2 builds q:B->A by the localization universal property and s:A->B by evaluation at the matrix with first column scaled by d^{-1}. I checked det y=1 from the Leibniz formula, since each term has exactly one first-column factor, and q∘s=id, so r∘j=id. Step 3 is elementary: r^*L is locally O, hence invertible, and j^*O_G≅O_X. Step 4 applies the same-unit node lem-sfb-affine-space-open-invertible-trivial (Stacks 0BDA: any open of A^n over any field) and pulls back along j using id^* and composition isomorphisms that def-pc-module-pullback states. Edge cases n=1, n=2 and char 2 work. There are no new nodes and no duplicate in the DAG (rg -L search). proof_deps equals the union of uses, and there is no cycle. Batch-5 flag: the closure of the cited node reaches lem-trf-ufd-height-one (Stacks 0AFT) and lem-trf-quasi-affine-canonical-affine-embedding (Stacks 01P9). Both are generic Mathlib leaves, not statements or proof steps of the trace formula or Poincare duality, so they are outside the assumptions and the citation is accepted. No tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecialLinearPicardZero",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_specialLinear",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecialLinearPicardZero.lean",
+  "statement": "theorem nonempty_iso_unit_specialLinear (k : Type u) [Field k] (n : ℕ) (hn : 1 ≤ n) (L : (LinearGroupSchemes.specialLinear k n).left.Modules) [L.IsInvertible] : Nonempty (L ≅ Scheme.Modules.unit (LinearGroupSchemes.specialLinear k n).left)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed special-linear scheme, whose underlying scheme is exactly Spec of the matrix polynomial ring modulo det - 1; its finite matrix indices are ULift (Fin n). The added statement dependency def-sc-general-linear-group records this existing construction. The equivalent Picard-vanishing formulation is rendered directly as triviality of every invertible sheaf."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87879ac2a",
+  "group": "Q51",
+  "result": "pass",
+  "note": "The item node changes only in lean and in stmt_deps, which gains def-sc-general-linear-group (landed on newtargets-dag, record LinearGroupSchemes.specialLinear); no dependency record changes. The lean.statement matches the file verbatim. The statement reuses specialLinear k n = Spec(MvPolynomial(ULift(Fin n)^2) k / (det-1)), the same object as the node. The binders are Field k (any characteristic) and 1 ≤ n. The conclusion is that every IsInvertible L is isomorphic to Scheme.Modules.unit, which is the node's conclusion. Edge cases n=1, n=0 (excluded as in the node) and char 2 are correct, and there is no universe restriction. The proof is sorry only and no definitions are introduced. Docstrings give the source (Milne Prop 20.30, 2.42), the blueprint id and the 4 proof steps. The report has both required sections. No compile, since no fix was needed."
+ }
+}

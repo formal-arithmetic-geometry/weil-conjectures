@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-space-ample-fibre-section-lifting",
+ "kind": "statement",
+ "title": "Lifting high-power fibre sections on a proper algebraic space",
+ "statement": "Let $T$ be a Noetherian scheme [def-pc-scheme], meaning one with a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Let $f:X\\to T$ be a proper morphism of algebraic spaces [def-trf-algebraic-space]; proper means separated, of finite type and universally closed [def-sfb-space-morphism-properties]. Let $L$ be a line module on $X$, an $\\mathcal O_X$-module on its small etale site locally isomorphic to $\\mathcal O_X$ [def-trf-algebraic-space]. Pullback along $a:Z\\to W$ means $a^*M=\\mathcal O_Z\\otimes_{a^{-1}\\mathcal O_W}a^{-1}M$ in the canonical ringed etale topoi [lem-trf-space-enlarged-etale-ringed-site-model]; tensor powers use tensor product of module sheaves [def-pur-sheaf-tensor-product], with $L^{\\otimes0}=\\mathcal O_X$. Fix $t\\in T$, put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$, and write $L_t$ for the pulled-back line. Suppose $X_t$ is a scheme and the corresponding ordinary invertible module is ample [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. There is an integer $d_0\\geq0$ such that for every integer $d\\geq d_0$ and every $v\\in\\Gamma(X_t,L_t^{\\otimes d})$ there are an open neighbourhood $U\\subseteq T$ of $t$ and $\\widetilde v\\in\\Gamma(X_U,L^{\\otimes d}|_{X_U})$ whose pullback is $v$, under the canonical tensor-pullback identification $(L^{\\otimes d})_t\\cong L_t^{\\otimes d}$. Here $X_U=X\\times_TU$, and $\\Gamma$ denotes sections of the module sheaf (ordinary sections under the scheme comparison). The neighbourhood may depend on $d$ and $v$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D39 (lemma-ample-on-fibre), final surjectivity assertion specialized to F = O_X and expressed by representatives of direct-image germs on open neighbourhoods of t."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-trf-space-line-module-proj-input"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{T,t}$, with maximal ideal $\\mathfrak m$ and residue field $k=\\kappa(t)$, and use the canonical flat morphism $c:\\operatorname{Spec}A\\to T$. An affine Noetherian neighbourhood identifies $A$ with a localization of its Noetherian coordinate ring, so $A$ is Noetherian. Set $Z=X\\times_T\\operatorname{Spec}A$, with projections $h:Z\\to X$ and $g:Z\\to\\operatorname{Spec}A$, and $N=h^*L$. Properness is preserved by this base change. Tensor pullback carries a local frame of $L$ to a frame of $N$; its tensor-power comparison sends a tensor of pulled-back sections to the pullback of their tensor. Thus $N$ is a line and its closed fibre with its line is canonically $(X_t,L_t)$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sfb-space-proper-base-change",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+   }
+  },
+  {
+   "text": "Let $J=\\mathfrak m\\mathcal O_Z$. The uniform conormal-vanishing input gives one $d_0\\geq0$ with $H^1(Z,(J^n/J^{n+1})\\otimes N^{\\otimes d})=0$ for every $n\\geq0$ and $d\\geq d_0$. Its schematic closed-fibre and ampleness assumptions hold by the preceding identification. Fix such a $d$, and put $E=N^{\\otimes d}$ and $Q_n=E/J^nE$ for $n\\geq1$.",
+   "uses": [
+    "lem-sfb-space-conormal-uniform-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+   }
+  },
+  {
+   "text": "For every $n\\geq1$ there is a short exact sequence\n$$0\\to (J^n/J^{n+1})\\otimes E\\to Q_{n+1}\\to Q_n\\to0.$$\nIndeed, on a frame of $E$ this is the elementary quotient sequence $0\\to J^n/J^{n+1}\\to\\mathcal O_Z/J^{n+1}\\to\\mathcal O_Z/J^n\\to0$; changes of frame multiply all three terms by the same unit, so these sequences agree on overlaps. The closed fibre is cut out by $J$: on every affine etale chart $\\operatorname{Spec}B\\to Z$, base change to $k$ has ring $B\\otimes_Ak=B/\\mathfrak m B$. Hence $Q_1=i_*i^*E$, where $i:X_t\\to Z$ is the closed immersion. The closed-immersion module statement identifies the quotient structure sheaf, and tensoring a frame gives this identification for $E$. In particular $\\Gamma(Z,Q_1)=\\Gamma(X_t,L_t^{\\otimes d})$, by the definition of direct image and the tensor-power comparison.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+   }
+  },
+  {
+   "text": "Apply the long exact sequence of right derived global sections on the etale topos to each sequence above. Abelian sheaves have enough injectives; global sections is additive and left exact since kernels are computed sectionwise. The zero $H^1$ of the first term makes $\\Gamma(Z,Q_{n+1})\\to\\Gamma(Z,Q_n)$ surjective. For any finite $r\\geq1$, composing the $r-1$ surjections gives a surjection $\\tau_{r,1}$; at $r=1$ it is the identity. No assertion about choosing an infinite compatible sequence is needed.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sfb-space-conormal-uniform-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+   }
+  },
+  {
+   "text": "Apply section-image stabilization to the proper local-base space $g:Z\\to\\operatorname{Spec}A$ and the line $E$. For some finite $r\\geq1$, $\\operatorname{Im}(\\rho_1)=\\operatorname{Im}(\\tau_{r,1})$. The latter is all of $\\Gamma(Z,Q_1)$ by the preceding step. Therefore every prescribed fibre section $v$ has a preimage $w\\in\\Gamma(Z,E)$. This uses only stabilization in degree zero; it requires neither completeness of $A$ nor flatness of $g$.",
+   "uses": [
+    "lem-sfb-space-infinitesimal-section-image-stabilization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+   }
+  },
+  {
+   "text": "Write $M=L^{\\otimes d}$. It is quasi-coherent because locally it is free of rank one. The direct image $f_*M$ is quasi-coherent, and flat base change along $c$ identifies $c^*f_*M$ with $g_*E$ by the canonical adjunction-mate map. Regard $f_*M$ as its ordinary quasi-coherent module $G$ on $T$ by the scheme comparison, which preserves pullback and sections on opens. The canonical local-morphism statement identifies $G_t$ with $(c^*G)_{\\mathfrak m}$. Every open neighbourhood of the closed point in $\\operatorname{Spec}A$ is the whole scheme: a basic open containing $\\mathfrak m$ is defined by a unit. Thus this stalk equals global sections and, by base change, $\\Gamma(Z,E)$. Represent the germ corresponding to $w$ by $\\widetilde v\\in G(U)=\\Gamma(X_U,M)$ on an open $U\\ni t$. The base-change map is the adjunction mate, so it takes this germ to the pullback of $\\widetilde v$ on $Z$ (its formula is unit followed by the pulled-back counit). Restricting further to $X_t$ gives the image of $w$, namely $v$.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-flat-direct-image-base-change",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-pbc-module-stalk",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sfb-space-proper-base-change",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-space-conormal-uniform-vanishing",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-sfb-space-infinitesimal-section-image-stabilization",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-flat-direct-image-base-change",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 0D39 (lemma-ample-on-fibre), proof with F = O_X, local-base reduction and final degree-zero argument via Tag 08AY(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space over a Noetherian scheme, sections of sufficiently high powers of a line bundle ample on a schematic fibre lift near that fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity from direct image stalk to global sections of the fibre for high powers of an ample invertible sheaf on a proper algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Surjective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $ R_f $ of a commutative ring $ R $ at an element $ f $ to the ring of sections $ \\\\mathcal{O}(D(f)) $ in the structure sheaf over the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.SurjectiveOnStalks fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.SurjectiveOnStalks\", \"doc\": \"The property of being surjective on stalks for ring homomorphisms defines a morphism property in the category of schemes. Specifically, for any commutative rings $ R $ and $ S $, and a ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.surj_on_stalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.SurjectiveOnStalks f] (x : ↥X),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If $f$ is surjective on stalks, then for any point $x \\\\in X$, the induced ring homomorphism on stalks $f_x^\\\\#: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stalkMap_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.SurjectiveOnStalks f] (x : ↥X),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is surjective on stalks, the induced map on the stalk at each point $ x \\\\in X $ is surjective. Specifically, for every $ x \\\\in X $, the morphism $ \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U))\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the canonical morphism $\\\\iota: Z \\\\to X$ from the closed subscheme $Z$ defined by an ideal sheaf $\\\\mathcal{I}$ induces a surjective map $\\\\iota_U: \\\\mathca\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stalk\", \"surjective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v} [(X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [instCC : CategoryTheory.ConcreteCategory C FC] [CategoryTheory.Limits.HasColimits C] [CategoryTheory.Limits.HasLimits C] [CategoryTheory.Limits.PreservesLimits (Ca\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"The class of morphisms `f : X ⟶ Y` between schemes such that\\n`𝒪_{Y, f x} ⟶ 𝒪_{X, x}` is surjective for all `x : X`.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.SurjectiveOnStalks fun {R S} [CommRing R] [CommRing S] => RingHom.SurjectiveOnStalks\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" {R S : CommRingCat} {φ : R ⟶ S} : AlgebraicGeometry.SurjectiveOnStalks (AlgebraicGeometry.Spec.map φ) ↔ (CommRingCat.Hom.hom φ).SurjectiveOnStalks\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.SurjectiveOnStalks (CategoryTheory.CategoryStruct.comp f g)] : AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.SurjectiveOnStalks f] [AlgebraicGeometry.SurjectiveOnStalks g] : AlgebraicGeometry.SurjectiveOnStalks (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.eq_stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \" : @AlgebraicGeometry.SurjectiveOnStalks = AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] x => Function.Surjective ⇑x\", \"doc\": \"\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*fibre|ample.*fiber|base.?change.*surject|section.*lift",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"line\": \"48\", \"text\": \"  isStableUnderBaseChange_comap_jointlySurjectivePrecoverage _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"line\": \"55\", \"text\": \"variable [P.IsStableUnderBaseChange] [IsJointlySurjectivePreserving P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"line\": \"178\", \"text\": \"def Cover.pullbackHom [P.IsStableUnderBaseChange] [IsJointlySurjectivePreserving P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"line\": \"184\", \"text\": \"lemma Cover.pullbackHom_map [P.IsStableUnderBaseChange] [IsJointlySurjectivePreserving P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"436\", \"text\": \"instance : MorphismProperty.IsStableUnderBaseChange @Surjective := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean\", \"line\": \"60\", \"text\": \"variable [W.IsStableUnderBaseChange] [Scheme.IsJointlySurjectivePreserving W]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"93\", \"text\": \"    MorphismProperty.IsStableUnderBaseChange @SurjectiveOnStalks := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"16\", \"text\": \"for all base changes `Y' ⟶ Y`. This is equivalent to the diagonal morphism being surjective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"66\", \"text\": \"  · rw [← universally_eq_iff.mpr (inferInstance : IsStableUnderBaseChange (diagonal @Surjective)),\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift fibre sections of large powers of an ample line bundle on a proper algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme.{u}} {U : TopologicalSpace.Opens X} (hU : IsCompact U.carrier) (hU' : IsQuasiSeparated U.carrier)\\n  {f g s : Γ(X, U)} (hfg : f |_ X.basicOpen s = g |_ X.basicOpen s) : ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.Proj.pow_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(n : ℕ) : (s ^ n).1 x = s.1 x ^ n\", \"doc\": \"For any natural number $ n $ and section $ s $ of the structure sheaf on the projective spectrum, the equality $ (s^n)(x) = (s(x))^n $ holds for all points $ x $, where $ s^n $ denotes the $ n $-th po\"}\n  {\"name\": \"Bundle.Pullback.lift_snd\", \"module\": \"Mathlib.Data.Bundle\", \"type\": \"∀ {B : Type u_1} {F : Type u_2} {E : B → Type u_3} {B' : Type u_4} (f : B' → B) (a : Bundle.TotalSpace F (f *ᵖ E)),\\n  (Bundle.Pullback.lift f a).snd = a.snd\", \"doc\": \"For any element $a$ in the total space of the pullback bundle, the fiber component of the canonical lift map applied to $a$ is equal to the fiber component of $a$ itself, i.e., $\\\\text{snd}(\\\\text{lift}\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme.{u}) (U : X.Opens) (hU : IsCompact U.1) (hU' : IsQuasiSeparated U.1) (f : Γ(X, U))\\n  (x : Γ(X, X.basicOpen f)) : ∃ (n : ℕ) (y : Γ(X, U)), y |_ X.basicOpen f = (f |_ X.basicOpen f) ^ n * x\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) (U : X.Opens) (hU : IsAffineOpen U) (f : Γ(X, U)) (x : Γ(X, X.basicOpen f)) :\\n  ∃ (n : ℕ) (y : Γ(X, U)), y |_ X.basicOpen f = (f |_ X.basicOpen f) ^ n * x\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y U : Scheme.{u}} (f : U ⟶ Y) (g : X ⟶ Y) [IsOpenImmersion f] (H) (V : U.Opens) :\\n  (lift f g H).app V =\\n    (f.appIso V).inv ≫\\n      g.app (f ''ᵁ V) ≫ X.presheaf.map (eqToHom <| app_eq_invApp_app_of_comp_eq_aux _ _ _ (lift_fac ..).symm V).op\", \"doc\": \"Let $f: U \\\\to Y$ be an open immersion of schemes and $g: X \\\\to Y$ be a morphism of schemes whose image is contained in the image of $f$. Let $h: X \\\\to U$ be the unique morphism lifting $g$ along $f$, \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"{x : X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A)\\n  (φRX : R ⟶ Γ(X, U)) (hφRA : RingHom.FiniteType φRA.hom) (e : φRA ≫ φ = φRX ≫ X.presheaf.germ U x hxU) :\\n  ∃ (V : X.Opens) (hxV : x ∈ V) (φ' : A ⟶ Γ(X, V)) (i : V ≤ U),\\n    IsAffineOpen V ∧ φ = φ'\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(H' : Set.range g.base ⊆ Set.range f.base) (l : Y ⟶ X) (hl : l ≫ f = g) : l = lift f g H'\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of locally ringed spaces, and let $g: Z \\\\to Y$ be a morphism of locally ringed spaces. Suppose the image of the underlying continuous map of $g$ is contained in t\"}\nRead the hits: these concern schemes, structure-sheaf sections, scheme Proj maps, or ordinary morphism properties; none states the algebraic-space assertion with a line module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*fibre|ample.*fiber|fibre.*ample|fiber.*ample",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme structure-sheaf localization, Proj, algebraic local cohomology and abstract Mittag-Leffler systems do not assert this algebraic-space coherent-cohomology statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of high powers of an ample line bundle on a schematic fibre of a proper algebraic space lift to an open neighbourhood",
+   "results": "Actual returned names/files: AlgebraicGeometry.Scheme.basicOpen_pow, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.RingedSpace.basicOpen_pow, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme structure-sheaf localization, Proj, algebraic local cohomology and abstract Mittag-Leffler systems do not assert this algebraic-space coherent-cohomology statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ample\", \"section\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; scheme structure-sheaf localization, Proj, algebraic local cohomology and abstract Mittag-Leffler systems do not assert this algebraic-space coherent-cohomology statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-noetherian-ample-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q113"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3A: the Noetherian stage of the ampleness spreading argument, after schematic and ample fibre descent. First paragraph of the proof of 0D3A: lifting the chosen fibre coordinates by 0D39.",
+   "via": [
+    "lem-sfb-space-noetherian-ample-neighbourhood",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-ample-fibre-section-lifting",
+  "worker": "stage1",
+  "summary": "Followed 0D39 with F = O_X. Isolated uniform conormal H1 vanishing and the independent 08AY(3) degree-zero image-stabilization theorem for algebraic spaces; wrote the finite-thickening lift, local-base comparison and germ representative argument. Kept the statement unchanged and reused existing canonical flat base change and scheme comparison nodes.",
+  "blueprint": "The existing created-item chain serves det-thm-sf-ctf-stability-direct-images proof (3), through the recorded stable-moduli/relative-ampleness input. The split realizes the first paragraph of 0D3A by the 0D39 lifting argument, without changing the unit route. Current blueprint: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic local-ring, module/topos comparison, or derived-cohomology input for the 0D39 proof; this unit does not state it and its use does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic local-ring, module/topos comparison, or derived-cohomology input for the 0D39 proof; this unit does not state it and its use does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic local-ring, module/topos comparison, or derived-cohomology input for the 0D39 proof; this unit does not state it and its use does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic local-ring, module/topos comparison, or derived-cohomology input for the 0D39 proof; this unit does not state it and its use does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic local-ring, module/topos comparison, or derived-cohomology input for the 0D39 proof; this unit does not state it and its use does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-d7c05d95b",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-d7c05d95b (reviewer sub-agent of L); spot-checked: Read 0D39 (spaces-divisors 3140-3267) with its full proof, and Situation 08AV with 08AY(3) (spaces-cohomology 4026, 4094). The item statement is unchanged from the base and agrees with 0D39 for F=O_X. Live and side-live still show the item unsplit and the new ids absent, so the delivery is not superseded; there is no repair note. Steps: (1) Spec O_{T,t} is Noetherian (localization node); canonical-morphism clauses (2)-(5) and space proper base change identify (Z_0,i^*N) with (X_t,L_t). (2) The new conormal node applies; all its hypotheses hold. (3) Elementary: E is flat, J is the fibre ideal on charts (B/mB), and Q_1=i_*i^*E by the closed-immersion node. (4) The long exact sequence plus enough injectives make each finite transition onto. (5) 08AY(3) at n=1 gives a w in Gamma(Z,E) lifting v. (6) f_* is quasi-coherent, flat base change along c is the explicit mate, the Zariski/etale comparison and the stalk at the closed point (equal to global sections on local Spec A) give the germ, and a representative of the germ lifts v. New nodes: both are statement-only, self-contained and true. The conormal node is the H^1 case of the 0D39 graded vanishing; the stabilization node is 08AY(3) at p=0 for a line, which is coherent since Z is Noetherian. Tested on n=0, empty fibre, A a field and nilpotent m. Not duplicates: the trf and weil-pbc analogues are for schemes only. Neither node restates a clause of the item. Batch-5 flags: every listed citation is a definition or a generic space/module tool, outside the trace formula and Poincare duality; accepted. No SGA citation. The tool_uses are generic and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAmpleFibreSectionLifting",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_lift_section_of_schematic_fiber_isAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAmpleFibreSectionLifting.lean",
+  "statement": "theorem exists_lift_section_of_schematic_fiber_isAmple (T : Scheme.{u}) [IsNoetherian T] (X : AlgebraicSpace T) (f : X ⟶ schemeSpace (Over.mk (𝟙 T))) (hf : MapIsProper f) (L : X.Modules) (hL : X.IsLineModule L) (t : T) (F : SchemeTests X.obj.obj) (p : F.left ⟶ Over.mk (T.fromSpecResidueField t)) (hF : IsPullback F.hom (yoneda.map p) f.hom.hom (yoneda.map (Over.homMk (T.fromSpecResidueField t) : Over.mk (T.fromSpecResidueField t) ⟶ Over.mk (𝟙 T)))) (hample : Scheme.Modules.IsAmple F.left.left ((lineTestFamily X L hL).module F)) : ∃ d₀ : ℕ, ∀ (d : ℕ), d₀ ≤ d → ∀ v : Γ(((lineTestFamily X L hL).module F).tensorPow d, ⊤), ∃ (U : T.Opens) (_ : t ∈ U) (hFU : Set.range F.left.hom ⊆ (U : Set T)) (s : ∀ W : SchemeTests X.obj.obj, Set.range W.left.hom ⊆ (U : Set T) → Γ(((lineTestFamily X L hL).module W).tensorPow d, ⊤)), (∀ (W V : SchemeTests X.obj.obj) (j : W ⟶ V) (hW : Set.range W.left.hom ⊆ (U : Set T)) (hV : Set.range V.left.hom ⊆ (U : Set T)), s W hW = (lineTestFamily X L hL).powerMap j d (s V hV)) ∧ s F hFU = v",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing canonical lineTestFamily realization of the given small-etale line module. Sections over X_U are compatible families on all scheme tests whose structural map lands in U; the cartesian descent property identifies these with the actual sheaf sections. Evaluation at the scheme representing the fibre is the canonical restriction, with tensor pullback normalized by TestLineFamily.powerMap. The added landed statement dependency supplies this realization; no new construction or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f040a5c8",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Lean exact vs Tag 0D39 (F=O_X): IsNoetherian T; MapIsProper f to schemeSpace(Over.mk 𝟙T); IsLineModule L; canonical lineTestFamily (.choose of exists_linePresentation, pinned up to the unique etale-compatible TestLineIso) with powerMap (unit pinned by 1⊗η via exists_tensorPullbackAdjunction + boundary pow isos); fibre as presheaf IsPullback with Spec κ(t), any representative; absolute IsAmple on the pulled-back line; ∃d₀ ∀d≥d₀ ∀v ∃U∋t; the lift is a compatible family on all scheme tests over U = Γ(X_U,L^d) by descent; hFU automatic; edge cases empty T/empty fibre/d=0 kept; single universe u. Node statement unchanged; added stmt_dep def-trf-space-line-module-proj-input is a definition node landed 2026-10-17, before the base: OK; lean.statement verbatim; no defs; sorry only; docstrings OK; no name clash with the scheme-case exists_lift_section_of_fiber_isAmple. Only fault H11: same-worker self-check second reading → FIX fixes/lem-sfb-space-ample-fibre-section-lifting.report.md (worker report verbatim + independent second reading). No Lean changed, not compiled; relied on the worker's clean per-file compile."
+ }
+}

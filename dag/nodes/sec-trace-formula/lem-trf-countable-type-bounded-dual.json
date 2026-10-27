@@ -1,0 +1,390 @@
+{
+ "id": "lem-trf-countable-type-bounded-dual",
+ "kind": "statement",
+ "title": "Countable-type nonarchimedean normed spaces have a separating bounded dual",
+ "statement": "Let $k$ be a field [def-weil-field] complete for a nontrivial real-valued multiplicative nonarchimedean absolute value $|\\cdot|$. Let $V$ be a $k$-vector space with a norm $\\|\\cdot\\|:V\\to\\mathbf R_{\\ge0}$ satisfying $\\|v\\|=0$ exactly when $v=0$, $\\|av\\|=|a|\\|v\\|$, and $\\|v+w\\|\\le\\max(\\|v\\|,\\|w\\|)$. Suppose there is an at most countable set $D\\subseteq V$ whose $k$-linear span is dense for the metric $d(v,w)=\\|v-w\\|$; this is the meaning of countable type. Then for every $0\\ne v\\in V$ there exist a $k$-linear map $h:V\\to k$ and a real constant $C>0$ such that $h(v)\\ne0$ and $|h(w)|\\le C\\|w\\|$ for every $w\\in V$. Completeness of $V$ and spherical completeness of $k$ are not assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Definition 2.7.1/1 and Proposition 2.7.1/2, printed p.110 (scan PDF p.118), bounded-separation consequence; standing assumptions immediately above 2.7.1: k complete with nontrivial valuation. Primary scan read online 2026-10-25; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $v\\ne0$. Enumerate a countable generating set of dense span, adjoining $v$ and padding finite sets by zero, as $(d_n)_{n\\ge0}$. Put $U_n=\\operatorname{span}_k(v,d_0,\\ldots,d_{n-1})$, $c_n=(2-2^{-n})/\\|v\\|$, and $r_n=c_n/c_{n+1}\\in(0,1)$. On $U_0=kv$ define $g_0(av)=a$. This is well-defined and linear, $g_0(v)=1$, and $|g_0(av)|=\\|av\\|/\\|v\\|=c_0\\|av\\|$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent proof of the bounded-separation consequence of Proposition 2.7.1/2; archival copy absent, WANTED. Countable induction with controlled bounds, followed by dense extension."
+   }
+  },
+  {
+   "text": "Inductively suppose $g_n:U_n\\to k$ is linear, agrees with the earlier maps, takes $v$ to $1$, and satisfies $|g_n(u)|\\le c_n\\|u\\|$. The finite spanning tuple makes $U_n$ finite-dimensional; it is closed in the Hausdorff norm topology by [lem-sfb-finite-dimensional-subspace-closed], since $k$ is complete and its absolute value nontrivial. If $d_n\\notin U_n$, apply [lem-trf-ultrametric-one-vector-approximate-projection] to $U_n$, $d_n$ and $r_n$, obtaining $P_n:U_{n+1}\\to U_n$. Define $g_{n+1}=g_n\\circ P_n$. Then it extends $g_n$ and $|g_{n+1}(w)|\\le c_n r_n^{-1}\\|w\\|=c_{n+1}\\|w\\|$. If $d_n\\in U_n$, take $g_{n+1}=g_n$ on $U_{n+1}=U_n$ and use $c_n\\le c_{n+1}$. This proves the inductive claim for every $n$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-subspace-closed",
+    "lem-trf-ultrametric-one-vector-approximate-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent proof of the bounded-separation consequence of Proposition 2.7.1/2; archival copy absent, WANTED. Countable induction with controlled bounds, followed by dense extension."
+   }
+  },
+  {
+   "text": "The increasing union $M=\\bigcup_nU_n$ is a linear subspace: any two members lie in a common $U_n$. Define $g(w)=g_n(w)$ for any $n$ with $w\\in U_n$; compatibility makes this independent of $n$ and linear by moving finite expressions to a common stage. All $d_n$ lie in $M$, so $M$ is dense. Also $g(v)=1$, and $c_n\\le C:=2/\\|v\\|$ gives $|g(w)|\\le C\\|w\\|$ for every $w\\in M$, with $C>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Agent proof of the bounded-separation consequence of Proposition 2.7.1/2; archival copy absent, WANTED. Countable induction with controlled bounds, followed by dense extension."
+   }
+  },
+  {
+   "text": "Give $V$ the rescaled norm $N(w)=C\\|w\\|$. Since $C>0$, this is a definite homogeneous norm, and its balls are the original balls with radii divided by $C$; thus $M$ remains dense. On $M$, $|g(w)|\\le N(w)$. Apply [lem-sfb-dense-subspace-contractive-extension] with this norm and the complete codomain $k$. Its extension $h:V\\to k$ is linear, agrees with $g$ on $M$, and satisfies $|h(w)|\\le N(w)=C\\|w\\|$ on $V$. In particular $h(v)=g(v)=1\\ne0$.",
+   "uses": [
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Operator/Extend.lean",
+    "place": "LinearMap.extendOfNorm, extendOfNorm_eq and norm_extendOfNorm_apply_le, lines 190–203; existing contractive-extension leaf applied to a positive rescaling of the domain norm."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-dimensional-subspace-closed",
+  "lem-trf-ultrametric-one-vector-approximate-projection",
+  "lem-sfb-dense-subspace-contractive-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent proof of the bounded-separation consequence of Proposition 2.7.1/2; archival copy absent, WANTED. Countable induction with controlled bounds, followed by dense extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.type|countableType|[Ss]eparating[Dd]ual|exists.*[Cc]ontinuous[Ll]inear",
+   "results": {
+    "t": "2026-10-24T16:20:27Z",
+    "tool": "grep",
+    "query": "countable.type|countableType|[Ss]eparating[Dd]ual|exists.*[Cc]ontinuous[Ll]inear",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/CStarAlgebra/Basic.lean",
+     "Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/SeparatingDual.lean"
+    ],
+    "digest": "aa1c537e7b7b9933"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Banach space of countable type over a complete nonarchimedean field has a separating bounded dual",
+   "results": {
+    "t": "2026-10-24T16:20:27Z",
+    "tool": "leansearch",
+    "query": "A Banach space of countable type over a complete nonarchimedean field has a separating bounded dual",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "separatingDual_def",
+     "SeparatingDual.mk",
+     "SeparatingDual",
+     "instSeparatingDualRealOfIsTopologicalAddGroupOfContinuousSMulOfLocallyConvexSpaceOfT1Space",
+     "instSeparatingDual",
+     "WeakDual.exists_countable_separating",
+     "BaireSpace.instBarrelledSpace",
+     "IsNonarchimedeanLocalField.instCompleteSpace"
+    ],
+    "digest": "34b42abd8240142f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousLinearMap\", \"Countable\"",
+   "results": {
+    "t": "2026-10-24T16:20:27Z",
+    "tool": "loogle",
+    "query": "\"ContinuousLinearMap\", \"Countable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "instSecondCountableTopologyContinuousLinearMapIdOfFiniteDimensional"
+    ],
+    "digest": "566e768f2d4abaf6"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean Banach vector space of countable type over a complete valued field has bounded linear functionals separating nonzero points",
+   "results": {
+    "t": "2026-10-24T16:20:29Z",
+    "tool": "leanfinder",
+    "query": "A nonarchimedean Banach vector space of countable type over a complete valued field has bounded linear functionals separating nonzero points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instSeparatingDual",
+     "SeparatingDual.exists_eq_one",
+     "WeakDual.exists_countable_separating",
+     "SeparatingDual.exists_ne_zero'",
+     "SeparatingDual.exists_ne_zero",
+     "SeparatingDual.exists_separating_of_ne",
+     "SeparatingDual.exists_eq_one_ne_zero_of_ne_zero_pair",
+     "separatingDual_def"
+    ],
+    "digest": "9abde59ab8a58fde"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normed vector space with a countable dense linear span over a complete ultrametric field has a separating continuous dual",
+   "results": {
+    "t": "2026-10-24T16:20:31Z",
+    "tool": "leanfinder",
+    "query": "A normed vector space with a countable dense linear span over a complete ultrametric field has a separating continuous dual",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instSeparatingDual",
+     "WeakDual.exists_countable_separating",
+     "SeparatingDual",
+     "StrongDual.NormedSpace.dualPairing_separatingLeft",
+     "separatingDual_def",
+     "SeparatingDual.exists_eq_one",
+     "instSeparatingDualRealOfIsTopologicalAddGroupOfContinuousSMulOfLocallyConvexSpaceOfT1Space",
+     "SeparatingDual.exists_separating_of_ne"
+    ],
+    "digest": "5f57d07d646e064a"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.type|CountableType|SeparatingDual.*IsUltrametric|IsUltrametric.*SeparatingDual",
+   "results": {
+    "t": "2026-10-24T16:30:12Z",
+    "tool": "grep",
+    "query": "countable.type|CountableType|SeparatingDual.*IsUltrametric|IsUltrametric.*SeparatingDual",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonzero vector in a normed vector space of countable type over a complete nonarchimedean valued field is detected by a bounded scalar linear functional",
+   "results": {
+    "t": "2026-10-24T16:30:13Z",
+    "tool": "leansearch",
+    "query": "Every nonzero vector in a normed vector space of countable type over a complete nonarchimedean valued field is detected by a bounded scalar linear functional",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SeparatingDual.exists_eq_one",
+     "SeparatingDual.exists_ne_zero",
+     "instSeparatingDualRealOfIsTopologicalAddGroupOfContinuousSMulOfLocallyConvexSpaceOfT1Space",
+     "exists_dual_vector'",
+     "instSeparatingDual",
+     "exists_dual_vector",
+     "exists_dual_vector''",
+     "Module.Dual.exists_forall_ne_zero_of_forall_exists"
+    ],
+    "digest": "c730c8e4673de72d"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: SeparatingDual.exists_ne_zero assumes the separating-dual property; the available automatic instance at SeparatingDual.lean:54 requires RCLike, not an arbitrary complete ultrametric field. Countable families on a weak dual do not supply scalar functionals on the original space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero vector in a normed space with countable dense linear span over a complete nonarchimedean field is separated by a bounded scalar linear functional",
+   "results": {
+    "t": "2026-10-24T17:04:46Z",
+    "tool": "leanfinder",
+    "query": "Every nonzero vector in a normed space with countable dense linear span over a complete nonarchimedean field is separated by a bounded scalar linear functional",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SeparatingDual.exists_eq_one",
+     "instSeparatingDual",
+     "SeparatingDual.exists_ne_zero'",
+     "SeparatingDual.exists_ne_zero",
+     "WeakDual.exists_countable_separating",
+     "SeparatingDual.exists_eq_one_ne_zero_of_ne_zero_pair",
+     "SeparatingDual.exists_separating_of_ne",
+     "SeparatingDual"
+    ],
+    "digest": "6175a3e26c1e33be"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: separating-dual results assume the conclusion as a typeclass or require RCLike. Countable weak-dual families do not prove separation over arbitrary complete ultrametric fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable type ultrametric normed space over complete field separating bounded dual no spherical completeness",
+   "results": {
+    "t": "2026-10-24T17:04:46Z",
+    "tool": "leansearch",
+    "query": "Countable type ultrametric normed space over complete field separating bounded dual no spherical completeness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instSeparatingDual",
+     "isUltrametricDist_iff_forall_norm_natCast_le_one",
+     "instTotallySeparatedSpaceOfIsUltrametricDist",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "IsUltrametricDist.isOpen_sphere",
+     "IsUltrametricDist.isUltrametricDist_of_forall_norm_sub_one_of_norm_le_one",
+     "IsUltrametricDist.isClopen_sphere",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "2fdee807bffa9e51"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: separating-dual results assume the conclusion as a typeclass or require RCLike. Countable weak-dual families do not prove separation over arbitrary complete ultrametric fields."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.type|countableType|separating.*dual|bounded.*functional",
+   "results": {
+    "t": "2026-10-24T17:07:18Z",
+    "tool": "grep",
+    "query": "countable.type|countableType|separating.*dual|bounded.*functional",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/SpecificLimits/Basic.lean",
+     "Mathlib/Analysis/LocallyConvex/Polar.lean",
+     "Mathlib/Analysis/LocallyConvex/Polar.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean",
+     "Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean"
+    ],
+    "digest": "93a3f547e945bfef"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: separating-dual results assume the conclusion as a typeclass or require RCLike. Countable weak-dual families do not prove separation over arbitrary complete ultrametric fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"Countable\"",
+   "results": {
+    "t": "2026-10-24T17:07:19Z",
+    "tool": "loogle",
+    "query": "\"LinearMap\", \"Countable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "instSecondCountableTopologyContinuousLinearMapIdOfFiniteDimensional"
+    ],
+    "digest": "566e768f2d4abaf6"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: separating-dual results assume the conclusion as a typeclass or require RCLike. Countable weak-dual families do not prove separation over arbitrary complete ultrametric fields."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-root-finite-rank-bseparation",
+  "date": "2026-10-25",
+  "group": "Q18"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Lemma 5.3.1/2 and its proof, printed pp.212-213 (scan PDF pp.218-219); bounded separation is the expanded meaning of b-separable. BGR 5.3.1/2 proof, printed p.213: the complete coefficient subfield is of countable type, and Proposition 2.7.1/2 separates its points by bounded scalar functionals.",
+   "via": [
+    "lem-trf-tate-root-finite-rank-bseparation",
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-countable-type-bounded-dual",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. The proof constructs compatible functionals on finite-dimensional spans with bounds c_n=(2-2^(-n))/norm(v), takes their union, then uses the existing contractive dense-extension Mathlib leaf after rescaling the domain norm. One new statement-only auxiliary records an approximate projection from U+kx onto a closed U, without scalar completeness or spherical completeness. Source archival copy is WANTED and the proof is explicitly agent-written.",
+  "blueprint": "Preserves the inherited historical analytic input under lem-trf-local-term-locality: BGR 5.3.1/2 proof, printed p.213, invokes countable-type bounded separation from Proposition 2.7.1/2. The current blueprint local-term proof itself contains the contracting-correspondence route, not this analytic sublemma; no unit step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-8c24dc430",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-8c24dc430 (reviewer sub-agent of L); spot-checked: I read the item, the new node in full, and the statements of every cited node: lem-sfb-finite-dimensional-subspace-closed (mathlib), lem-sfb-dense-subspace-contractive-extension (mathlib) and def-weil-field. I also read the citing step of lem-trf-tate-root-finite-rank-bseparation. There is no repair note for this item. BGR is absent from literature, and both nodes are honestly marked as agent-written with WANTED. The imported item source.place still says 'scan read online', which conflicts with the report; that field is not split-owned, so this is advisory. The item statement is unchanged and correct. Step 1: c_n=(2-2^-n)/||v||, r_n is in (0,1), and g_0(av)=a is well defined. Step 2: U_n is finite-dimensional and closed by the leaf (k complete and nontrivial; the norm topology is a Hausdorff TVS); the new node gives P_n with g_{n+1}=g_n∘P_n bounded by c_n/r_n=c_{n+1}; the dependent case is handled separately. Step 3: the union M contains span D and so is dense, with C=2/||v||. Step 4: the contractive leaf applies to the rescaled norm C||·||, with complete codomain k, and h(v)=1. The new node is statement-only, self-contained, with three search kinds and correct blueprint.from/via. I checked it true by the distance-infimum argument: delta>0 from closedness; pick y=x-u0 with ||y||<delta/r; then |a|·||y||<=||w||/r and ultrametricity gives the bound. It holds for trivial or incomplete k and U=0, and closedness is necessary. It is not a relabelling of the item. It does not duplicate lem-sfb-ultrametric-one-vector-extension or lem-sfb-admissible-scalar-balls (compact balls), lem-sfb-ultrametric-orthogonal-extension or lem-sfb-countable-normed-orthogonal-basis (E/Q_l), lem-trf-finite-ultrametric-almost-orthogonal-basis (its basis need not extend U_n), or the cartesian-criterion nodes. No route issue: the cited nodes are Mathlib leaves and the new node is in the same unit. No fixes and no tool_uses."
+ }
+}

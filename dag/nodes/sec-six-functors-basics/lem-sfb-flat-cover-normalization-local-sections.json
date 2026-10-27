@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-flat-cover-normalization-local-sections",
+ "kind": "statement",
+ "title": "A flat finite type cover has local sections after a finite normalization of a semi-trait",
+ "statement": "Let $R$ be a commutative Noetherian integrally closed domain of Krull dimension one with finitely many maximal ideals [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-weil-pbc-krull-dimension-ring], put $K=\\operatorname{Frac}R$ and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $f:T\\to S$ be a flat surjective morphism of finite presentation between affine schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-surjective-morphism, def-sbc-locally-finite-presentation]. There exists a finite field extension $L/K$ [def-pc-field-extension] such that, writing $R_L$ for the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure] and $S_L=\\operatorname{Spec}R_L$, there is a finite Zariski open covering $S_L=\\bigcup_{j=1}^n U_j$ [def-weil-open-immersion] and an $S$-morphism $u_j:U_j\\to T$ for each $j$. Equivalently, the base change $T\\times_SS_L\\to S_L$ has a section over each $U_j$ [def-pc-fibre-product]. No separability of $L/K$ or module-finiteness of $R_L/R$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X, the integral quasi-section input; fields.tex Tag 09DT, lemma-normal-closure; integral-closure prime conjugacy as in more-algebra.tex Tag 0BRI, lemma-one-orbit (with the purely inseparable part retained). These give the geometric construction in Anantharaman Lemma 4.2.1, second paragraph, printed p.56; local Anantharaman archive WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $T=\\operatorname{Spec}B$. By definition a morphism of finite presentation is locally of finite presentation [def-sbc-locally-finite-presentation], so by [lem-weil-pbc-lfp-affine-opens-finite-presentation] the ring map $\\mathcal O_S(V)\\to\\mathcal O_T(U)$ is of finite presentation, in particular of finite type, for every pair of affine opens $U\\subseteq T$, $V\\subseteq S$ with $f(U)\\subseteq V$. Hence $f$ is locally of finite type [def-weil-finite-type-morphism] by [lem-weil-pbc-lft-affine-pairs], and ($U=T$, $V=S$) $B$ is finitely generated over $R$. The affine flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] makes $B$ flat over $R$. For each maximal ideal $m$ of $R$, surjectivity makes $T_m$ nonempty. Its affine coordinate ring is $B\\otimes_R R/m=B/mB$ [lem-sbc-affine-fibre-sections-tensor]. This ring is nonzero, since the nonempty scheme $T_m$ has nonzero global sections. Choose a maximal ideal $\\bar n$ of $B/mB$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]; its preimage $n\\subset B$ is a maximal ideal of $B$ containing $mB$ (as $B/n\\cong(B/mB)/\\bar n$ is a field), so $n\\cap R=m$. Its point $x_m\\in T$ lies over $m$ and is closed in $T$, hence closed in the fibre $T_m$. Finally $\\{\\eta\\}$ is open in $S$: choose $0\\ne r_m\\in m$ for each of the finitely many maximal ideals and set $r=\\prod_mr_m\\ne0$. Since $R$ is a one-dimensional domain, every nonzero prime is maximal, and $D(r)=\\{\\eta\\}$. Thus $T_\\eta$ is an open subscheme of $T$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sbc-affine-fibre-sections-tensor",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU: preparation for the nearby-open quasi-section; affine fibre and prime-ideal argument written out."
+   }
+  },
+  {
+   "text": "Fix $m$. By [lem-sc-flat-going-down], the prime of $x_m$ in $B$ contains a prime contracting to $(0)\\subset R$. Its point $x'_m$ lies in $T_\\eta$ and specializes to $x_m$. The scheme $S$ is locally Noetherian by its single affine chart [pqf-def-locnoeth]. Apply [lem-sfb-quasi-section-nearby-open] to $T\\to S$, $x_m$ and the open $T_\\eta$: the finite-type hypothesis, the closed-fibre-point hypothesis and the distinct-image nearby point have all been supplied. It gives an integral closed subscheme $Z_m\\subseteq T$ through $x_m$, whose generic point maps to $\\eta$, with $Z_m\\to S$ quasi-finite at $x_m$.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "pqf-def-locnoeth",
+    "lem-sfb-quasi-section-nearby-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X; flat going down is algebra.tex Tag 00HS."
+   }
+  },
+  {
+   "text": "The quasi-finite locus in $Z_m$ is open [lem-sc-quasi-finite-points-open]. Since $T=\\operatorname{Spec}B$, the closed immersion $Z_m\\subset T$ gives $Z_m=\\operatorname{Spec}(B/I_m)$ [def-weil-closed-immersion]. Choose a principal affine neighbourhood $W_m=D(h_m)=\\operatorname{Spec}D_m$ of $x_m$ inside the quasi-finite locus [lem-weil-pbc-spec-localization-away-basic-open, lem-weil-pbc-principal-localization-open-immersion], and restrict the locally quasi-finite map to it [lem-weil-pbc-lqf-restriction-to-opens]. Explicitly $D_m=(B/I_m)[1/h_m]$ is generated over $R$ by the images of generators of $B$ and by $1/h_m$, so is finite type. Because $Z_m$ is integral and dominates $S$, [lem-sc-integral-function-field-affine-fraction] makes $D_m$ a domain, and $R\\to D_m$ is injective: a nonzero kernel would force the whole image into a proper $V(a)\\subset S$. Its generic fibre algebra $D_m\\otimes_RK=(R\\setminus0)^{-1}D_m$ [lem-sbc-affine-fibre-sections-tensor] is a nonzero domain, finite-dimensional over $K$ by [lem-weil-pbc-lqf-qc-source-bounded-fibres], since $W_m$ is affine and quasi-compact [lem-weil-pbc-affine-scheme-qcqs]. It is therefore a field $E_m$ by [lem-weil-pbc-finite-dimensional-domain-is-field], and is the fraction field of $D_m$. Thus $E_m/K$ is finite.",
+   "uses": [
+    "lem-sc-quasi-finite-points-open",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sbc-affine-fibre-sections-tensor",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TI, lemma-quasi-finite-points-open; Tag 03JA, lemma-locally-quasi-finite-qc-source; affine fibre localization and finite-domain field argument."
+   }
+  },
+  {
+   "text": "Let $C_m$ be the integral closure of $R$ in $D_m$, and $A_m$ its integral closure in $E_m$. Since $W_m$ is affine, the map $W_m\\to S$ is separated [lem-weil-pbc-affine-source-morphism-separated]; it is of finite type, and everywhere quasi-finite; $S$ is affine, hence quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs]. Apply [pqf-lem-normalization-open] and the affine description [lem-weil-pbc-relative-normalization]: the factorization $W_m\\to\\operatorname{Spec}C_m\\to S$ identifies $W_m$ with an open subscheme, and its ring map is the inclusion $C_m\\subseteq D_m$. We have $C_m\\subseteq A_m\\subseteq E_m$. Every element of $A_m$ satisfies a monic equation over $R\\subset C_m$, so $C_m\\hookrightarrow A_m$ is integral. Let $c_m$ be the prime in $C_m$ corresponding to $x_m$ in that open chart. Lying over [pqf-lem-lying-over] gives a prime $a_m$ of $A_m$ above $c_m$, hence above $m$. The inverse image $V_m\\subset\\operatorname{Spec}A_m$ of the open $W_m\\subset\\operatorname{Spec}C_m$ contains $a_m$ and has an $S$-map $v_m:V_m\\to W_m\\to T$. Here $A_m$ is a domain integral over $R$ with fraction field $E_m$ by [lem-weil-pbc-integral-closure-algebraic-extension-normal]; module-finiteness is never used.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-normalization-open",
+    "lem-weil-pbc-relative-normalization",
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LR, lemma-quasi-finite-separated-quasi-affine; morphisms.tex Tags 035F, 035H, 035I give the affine integral-closure description; algebra.tex Tag 00GU gives lying over."
+   }
+  },
+  {
+   "text": "The nonzero one-dimensional ring $R$ has a nonempty finite set of maximal ideals. Apply [lem-sfb-common-normal-compatible-groups] with base field $K$, fields $E_m$, and trivial groups $J_m$. Retain its finite normal extension $L/K$, embeddings $E_m\\hookrightarrow L$ and finiteness of $G=\\operatorname{Aut}_K(L)$. Identify each $E_m$ with its image. Put $A=R_L\\subset L$. The integral-closure theorem [lem-weil-pbc-integral-closure-algebraic-extension-normal] says that $A$ is a domain integral over $R$ with fraction field $L$. There are compatible inclusions $C_m\\subset A_m\\subset A$; again $A_m\\to A$ is integral since each element of $A$ is integral already over $R$. By [pqf-lem-lying-over], $a_m$ lifts to a prime $b_m\\subset A$. The inverse image $O_m$ of $V_m$ under $\\operatorname{Spec}A\\to\\operatorname{Spec}A_m$ contains $b_m$, lies over $m$ there, and carries the composite $S$-map $w_m:O_m\\to V_m\\to T$.",
+   "uses": [
+    "lem-sfb-common-normal-compatible-groups",
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "pqf-lem-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09DT, lemma-normal-closure, finite normal common envelope as supplied by the existing simultaneous-envelope node; algebra.tex Tag 00GU for lifting the chart point."
+   }
+  },
+  {
+   "text": "For each $m$, $R_m$ is a DVR by [lem-sc-dedekind-localization-dvr]. Its integral closure in $L$ is $A^{(m)}=(R\\setminus m)^{-1}A$. Here is the localization calculation: every $a/s$ with $a\\in A$, $s\\notin m$, is integral over $R_m$ by dividing a monic equation for $a$ by the corresponding powers of $s$. Conversely, if $z\\in L$ satisfies $z^d+c_1z^{d-1}+\\cdots+c_d=0$ over $R_m$, choose $s\\in R\\setminus m$ clearing the finitely many coefficient denominators. Then $sz$ satisfies the monic equation with coefficients $s^ic_i\\in R$, so $sz\\in A$ and $z\\in A^{(m)}$. Primes of $A$ contracting to $m$ correspond exactly to maximal ideals of $A^{(m)}$: extend such a prime by fractions and contract back, which are inverse because its denominators avoid the prime. The extension is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal]; conversely a maximal ideal contracts to the maximal ideal of $R_m$ by [lem-weil-pbc-integral-maximal-contracts-maximal], and thence to $m$.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034X, lemma-characterize-Dedekind; Tag 0307, lemma-integral-closure-localize, whose denominator argument is written out here; integral prime/maximal correspondence."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normal-coefficient-branch-conjugacy] with the identity local map of DVRs $R_m\\to R_m$, both fraction fields $K$, and normal extension $N=L$. The reduced tensor algebra $(K\\otimes_KL)_{\\mathrm{red}}$ is $L$, and both integral closures in that statement are $A^{(m)}$ by step 6. Its conclusion therefore makes $G$ transitive on the maximal ideals of $A^{(m)}$, hence on the primes of $A$ above $m$. The action really is global on $A$: a $K$-automorphism carries any monic equation over $R$ to the same equation, so preserves $A$; on $A^{(m)}$ its action is the localization of this one, fixing the denominators in $R$. In particular, for every prime $b\\subset A$ above $m$ there is a scheme automorphism $g$ of $\\operatorname{Spec}A$ over $S$, induced by an element of $G$, with $g(b)=b_m$. Thus $b\\in g^{-1}(O_m)$, and $w_m\\circ g$ on this open is an $S$-morphism to $T$. No equality $L^G=K$ is asserted: the cited conjugacy result explicitly allows inseparable normal extensions.",
+   "uses": [
+    "lem-sfb-normal-coefficient-branch-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EU, lemma-galois-relative, specialized to the identity DVR extension; use the corrected possibly inseparable formulation of the cited node, rather than the erroneous fixed-field equality in the printed proof."
+   }
+  },
+  {
+   "text": "There are only finitely many opens $g^{-1}(O_m)$, since the set of $m$ and the group $G$ are finite. They cover every maximal ideal $b$ of $A$: its contraction to $R$ is maximal by [lem-weil-pbc-integral-maximal-contracts-maximal], and step 7 covers its fibre. Every prime $p$ of $A$ is contained in a maximal ideal $b$ [lem-weil-pbc-proper-ideal-contained-in-maximal]. The basic-open basis [lem-weil-pbc-spec-localization-away-basic-open] shows that an open containing $b$ also contains $p$: a basic open $D(h)$ containing $b$ has $h\\notin b$, hence $h\\notin p$. Therefore the displayed finite family covers $S_L$. Enumerate it as $U_1,\\ldots,U_n$ and take the maps $u_j$ constructed in step 7. By the fibre-product universal property [def-pc-fibre-product], pairing $u_j$ with $U_j\\hookrightarrow S_L$ gives a section $U_j\\to T\\times_SS_L$ of its projection. Conversely composing a section with the projection to $T$ gives $u_j$. This proves both formulations with the original hypotheses.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Agent assembly of the conjugate charts; compare Anantharaman Lemma 4.2.1, printed p.56, second paragraph. Covering and section equivalence written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sc-flat-going-down",
+  "pqf-def-locnoeth",
+  "lem-sfb-quasi-section-nearby-open",
+  "lem-sc-quasi-finite-points-open",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "pqf-lem-normalization-open",
+  "lem-weil-pbc-relative-normalization",
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-sfb-common-normal-compatible-groups",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-sfb-normal-coefficient-branch-conjugacy",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Assembly of Tags 05GU and 02LR with finite normal envelopes and corrected Tag 09EU prime conjugacy; follows the quasi-section/conjugate-subtrait argument of Anantharaman Lemma 4.2.1, printed p.56."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?section|normaliz.*section|section.*normaliz",
+   "results": "{\"t\": \"2026-10-24T12:36:26Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|normaliz.*section|section.*normaliz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"194500843e379b24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions and flatness criteria do not supply sections of a given flat cover after a finite fraction-field extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finite type surjective schemes over Dedekind rings admit local sections after a finite extension of the function field and normalization",
+   "results": "{\"t\": \"2026-10-24T12:36:26Z\", \"tool\": \"leansearch\", \"query\": \"Flat finite type surjective schemes over Dedekind rings admit local sections after a finite extension of the function field and normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"059d6e116c146ed8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions and flatness criteria do not supply sections of a given flat cover after a finite fraction-field extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-24T12:36:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions and flatness criteria do not supply sections of a given flat cover after a finite fraction-field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat finite type scheme over a semilocal Dedekind domain has Zariski local sections after normalization in a finite normal extension of the fraction field",
+   "results": "{\"t\": \"2026-10-24T12:36:27Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat finite type scheme over a semilocal Dedekind domain has Zariski local sections after normalization in a finite normal extension of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"dc43bcd8134d0366\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions and flatness criteria do not supply sections of a given flat cover after a finite fraction-field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi sections and normal closures of finite field extensions give sections over open subtraits of a normalized Dedekind scheme",
+   "results": "{\"t\": \"2026-10-24T12:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi sections and normal closures of finite field extensions give sections over open subtraits of a normalized Dedekind scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\"], \"digest\": \"4fdeb01c75191f34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization constructions and flatness criteria do not supply sections of a given flat cover after a finite fraction-field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat finitely presented algebra over a semilocal Dedekind domain admits local sections after integral closure in a finite field extension",
+   "results": "{\"t\": \"2026-10-24T13:23:52Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat finitely presented algebra over a semilocal Dedekind domain admits local sections after integral closure in a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"Algebra.ZariskisMainProperty\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.IsIntegral.isLocalHom\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"IsIntegralClosure.isDedekindDomain\"], \"digest\": \"ec8c7c5be064487d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, flatness and integral closure, not local sections of a prescribed flat cover after finite field extension"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?section|normaliz.*section|section.*normaliz",
+   "results": "{\"t\": \"2026-10-24T13:25:05Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|normaliz.*section|section.*normaliz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"194500843e379b24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, flatness and integral closure, not local sections of a prescribed flat cover after finite field extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local sections of a flat surjective morphism after normalization in a finite extension of the fraction field",
+   "results": "{\"t\": \"2026-10-24T13:25:05Z\", \"tool\": \"leansearch\", \"query\": \"Local sections of a flat surjective morphism after normalization in a finite extension of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"Module.Flat.of_isLocalizedModule\", \"AlgebraicGeometry.Flat.casesOn\"], \"digest\": \"81d62cdd5b331a3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, flatness and integral closure, not local sections of a prescribed flat cover after finite field extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Flat",
+   "results": "{\"t\": \"2026-10-24T13:25:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, flatness and integral closure, not local sections of a prescribed flat cover after finite field extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi sections of finite type morphisms and conjugate primes of an integral closure give sections locally on the normalized base",
+   "results": "{\"t\": \"2026-10-24T13:28:53Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi sections of finite type morphisms and conjugate primes of an integral closure give sections locally on the normalized base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\"], \"digest\": \"fe8cf1ac79e0800f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, flatness and integral closure, not local sections of a prescribed flat cover after finite field extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fpqc-finite-presentation-normalization-model",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Lemma 4.2.1, printed pp.55-56, flat separated specialization; Krull-Akizuki gives the normalized semi-trait. Model properties are preserved by fpqc base change/descent (Stacks Tags 02KU, 02KY, 02L0, 02L2). Independent prerequisite: Anantharaman 4.2.1, second paragraph: quasi-sections and conjugate normalization charts cover the normalized base.",
+   "via": [
+    "lem-sfb-fpqc-finite-presentation-normalization-model",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-cover-normalization-local-sections",
+  "worker": "stage1",
+  "summary": "Eight-step quasi-section/conjugate-chart proof. Reuses all existing DAG inputs; no new node. Distinguishes the relative integral closure in the quasi-section coordinate ring from the full field normalization, lifting points by lying over. Retains inseparability and never assumes module-finiteness. Reviewed every cited statement and recorded verbatim quotations.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images (3), inherited strict-local trait descent input, Anantharaman Lemma 4.2.1 second paragraph: construct a nearby quasi-section, lift its open chart to a common normal field normalization, and cover by conjugates. Current latest blueprint direct-image proof and chapter/unit route read; this is a lower-level algebraic prerequisite, not a replacement of the unit route. The ancestry tool returns None for this existing created chain, preserved unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-affine-fibre-sections-tensor",
+    "why": "Generic input in the quasi-section/normalization argument: Sections on an affine open in a scheme-theoretic fibre; this is a general algebraic tool and does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "Generic input in the quasi-section/normalization argument: restrict the chosen quasi-section to its open quasi-finite locus; this is a general algebraic tool and does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic input in the quasi-section/normalization argument: retain local quasi-finiteness on the chosen affine neighbourhood; this is a general algebraic tool and does not replace a step of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "why": "Generic input in the quasi-section/normalization argument: make the affine generic fibre finite-dimensional; this is a general algebraic tool and does not replace a step of the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-affine-fibre-sections-tensor",
+  "lem-sc-quasi-finite-points-open",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-a5b2c4f94",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-a5b2c4f94 (reviewer sub-agent of L); spot-checked: First split of the formerly unsplit item. Statement and stmt_deps are unchanged against clones/live, and there are no new nodes. I read all 8 steps in full against the cited statements, checking each hypothesis. The quasi-section node is Stacks 05GU (read at more-morphisms.tex l.14994, statement and proof). The common normal envelope uses trivial groups. Step 6 writes out the localization of the integral closure (z↦sz, coefficients s^i c_i). Branch conjugacy is applied to the identity R_m→R_m with N=L, which allows inseparable extensions, so L^G=K is never claimed. Edge cases checked: DVR, inseparable E_m, non-Japanese R, nonreduced T. Two C4 citation faults, both fixed. Step 1: 'lfp ⇒ lft by discarding relations' gave finite type only on some affine pairs. It now cites lem-weil-pbc-lfp-affine-opens-finite-presentation (01TQ) for every affine pair, then lem-weil-pbc-lft-affine-pairs, which gives f lft (needed by the quasi-section node) and B finitely generated. The closed point x_m is now written out. Step 4: 'affine, hence separated' cited lem-weil-pbc-affine-morphism-permanence without the morphism being shown affine. It now cites lem-weil-pbc-affine-source-morphism-separated (01KN). Batch-5 flag: lem-sfb-quasi-section-nearby-open reaches lem-trf-spectrum-constructible-generalization-open, which is the mathlib leaf for Stacks 00I0(2) (a constructible set stable under generalization is open). That is generic commutative algebra, given by neither assumption and no step of their proofs, so the flag is accepted. The worker's four tool_uses are generic scheme/commutative-algebra inputs and are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatCoverNormalizationLocalSections",
+  "declaration": "AlgebraicGeometry.exists_flat_cover_normalization_local_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatCoverNormalizationLocalSections.lean",
+  "statement": "theorem exists_flat_cover_normalization_local_sections (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (hdim : ringKrullDim R = 1) (hmax : Set.Finite {m : Ideal R | m.IsMaximal}) (T : Scheme.{u}) [IsAffine T] (f : T ⟶ Spec (CommRingCat.of R)) [Flat f] [Surjective f] [LocallyOfFinitePresentation f] : ∃ (L : Type u) (_ : Field L) (_ : Algebra (FractionRing R) L) (_ : Algebra R L) (_ : IsScalarTower R (FractionRing R) L) (_ : Module.Finite (FractionRing R) L) (n : ℕ) (U : Fin n → (Spec (CommRingCat.of (integralClosure R L))).Opens), (⨆ j, U j) = ⊤ ∧ ∃ u : ∀ j, (U j).toScheme ⟶ T, ∀ j, u j ≫ f = (U j).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L)))",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-287958803",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read node, all 12 stmt_dep records, module, report. Lean matches node clause by clause: Noetherian integrally closed domain, ringKrullDim R = 1, finitely many maximal ideals, affine T with Flat/Surjective/LocallyOfFinitePresentation (= finite presentation for affine-to-affine); exists finite L/FractionRing R with Algebra R L fixed by IsScalarTower, integralClosure R L, finite Fin n open cover with supremum = top, maps u j over Spec R in the correct direction. Equivalent fibre-product formulation explained, not omitted. No extra assumptions; universes fine; edge cases (zero ring, field, empty T, n=0, inseparable L) checked. lean.statement verbatim in file; node differs from side-live only in lean. Proof-dep imports exist; the 2 unrecorded proof deps correctly not imported. Docstrings have sources, blueprint id and 8 proof steps; only sorry; no definitions. Worker report and second-reading sections present (second reading is a self-check). No existing declaration found. No file changed, so no recompile."
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-geometric-native-proper-base-change",
+ "kind": "statement",
+ "title": "Proper base change for geometric native bounded constructible complexes",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and the native coefficient sheaves and module operations of [def-sf-native-weil-derived-framework], now without Frobenius structures. Let $v:Z'\\to Z$, $p':Z'\\to T'$, $p:Z\\to T$, $g:T'\\to T$ be a chosen Cartesian square [def-weil-pbc-cartesian-square] of $k_0$-schemes and $k_0$-maps, with $p$ proper [def-weil-proper-morphism] and $T,T'$ quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type [def-weil-finite-type-morphism] over $k_0$. Put $\\bar S=S\\times_{k_0}\\overline{k_0}$. Let $M$ be any bounded object of the ordinary unbounded derived category of native adic modules on $\\bar Z$, whose cohomology sheaves are native constructible in every degree. Form the exact derived pullback comparison $\\bar p'^*\\bar g^*\\cong\\bar v^*\\bar p^*$ by localizing the actual adic pullback composition isomorphism, and take its unit-square-counit mate [def-weil-pbc-adjunction-mate] for the ordinary derived adjunctions. Then its component\n$$\\beta^A_M:\\bar g^*R\\bar p_*M\\longrightarrow R\\bar p'_*\\bar v^*M$$\nis invertible. This assertion requires no Frobenius structure on M, no absolute separatedness of T or T', and no condition on g.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism; parent native natural base change, steps 5--7 and geometric part of step 8"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adjunction-mate",
+  "def-sf-native-derived-exchange-map"
+ ],
+ "proof": [
+  {
+   "text": "Base change the chosen Cartesian square to the fixed algebraic closure in the over category. Right adjoint base change preserves pullbacks; the forgetful functor creates these pullbacks. Properness and local finite type are preserved by base change. Cover the geometric base Y by its affine cover and refine the inverse-image cover on Y′ by the affine covers of its members. These opens cover Y′. This works without absolute separatedness or a condition on g.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "For a pair of affine charts A of Y and B of Y′ lying over A, equip the canonical chart pullback square with structure maps over the algebraic closure. Exact restriction preserves boundedness and commutes with cohomology; native constructible pullback gives the constructibility of the restricted input. Apply native affine proper base change to this chart square.",
+   "uses": [
+    "lem-sf-native-affine-proper-base-change",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-native-adic-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "The open-chart compatibility isomorphism identifies restriction of the specified global mate with that chart mate in the arrow category. Transport invertibility along it for every member of the refined affine cover. The already-proved native derived cover conservativity theorem makes the original mate invertible.",
+   "uses": [
+    "lem-sf-native-derived-exchange-open-chart",
+    "lem-sf-native-adic-derived-cover-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sf-native-affine-proper-base-change",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-sf-native-adic-constructible-pullback",
+  "lem-sf-native-derived-exchange-open-chart",
+  "lem-sf-native-adic-derived-cover-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived proper base change map is invertible on bounded constructible native algebraic l adic module sheaves on geometric fibers",
+   "results": "8 hits, including IsProper.isStableUnderBaseChange and TwoSquare.isIso_lanBaseChange_app; none concerns the native derived adic mate.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits: mateEquiv and its component and composition identities. The mates correspondence constructs the map but does not assert invertibility.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange.*IsIso|IsIso.*derivedBaseChange|adicDerived",
+   "results": "0 hits in Mathlib. Separate rg searches read the native source adjunction and composition constructions and found no derived native base-change theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeProperNaturalBaseChange",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Constructibility and the isomorphism; parent native natural base change, steps 5--7 and geometric part of step 8; blueprint_refs search for forgetting Weil and native proper found no matching node.",
+   "via": [
+    "lem-sf-native-weil-proper-natural-base-change",
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.GeometricProperBaseChange",
+  "file": "lean/Sheaf/WeilSheaf/GeometricProperBaseChange.lean",
+  "declaration": "AlgebraicGeometry.NativeBaseChange.geometric_proper_baseChange_isIso",
+  "statement": "theorem geometric_proper_baseChange_isIso [Fact (ringChar k₀ ≠ l)]\n    (sq : ChosenCartesianSquare v p' p g) [IsProper p]\n    [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (T ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (T' ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (T' ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (T' ↘ Spec (CommRingCat.of k₀))]\n    (M : _root_.DerivedCategory\n      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber))\n    (hM : _root_.DerivedCategory.TStructure.t.bounded M)\n    (hc : ∀ n : ℤ, ProEtale.IsAdicConstructibleSheaf\n      ((_root_.DerivedCategory.homologyFunctor _ n).obj M)) :\n    IsIso ((ProEtale.adicDerivedBaseChange l (geometricSquare k₀ sq.toCommSq)).app M)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.NativeBaseChange.geometricMap",
+   "AlgebraicGeometry.NativeBaseChange.geometricSquare",
+   "AlgebraicGeometry.NativeBaseChange.geometric_proper_baseChange_isIso"
+  ],
+  "note": "W3: the two unchanged native derived exchange constructions are publicly reexported from NativeDerivedBaseChange to avoid a cycle with the chart comparison modules. The theorem is proved by affine-chart descent and the affine rational-coefficient argument; two strictly structural map-compatibility lemmas remain in new modules."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222737-L-689151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cbdd2",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261027T050651-L-251723",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 7 node files against the clone (sheaf-dag) and their node statements; sole direct importer NativeBaseChangeForgetComparison compiled with the delivered set (all 6 OK)"
+ }
+}

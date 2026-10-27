@@ -2,7 +2,7 @@
  "id": "lem-per-valuation-normalization-localizations",
  "kind": "statement",
  "title": "Normalization of a valuation ring and its prolongations",
- "statement": "Let $K\\subseteq L$ be a finite algebraic extension of fields [def-pc-field-extension], and let $V\\subseteq K$ be a valuation ring with fraction field $K$ [def-trf-valuation-ring]. Let $C=\\{x\\in L:x\\text{ satisfies a monic polynomial over }V\\}$ be the integral closure of $V$ in $L$ [def-weil-pbc-integral-closure]. Then $C$ is a nonzero integral domain integral over $V$, with fraction field $L$. Its set of maximal ideals is nonempty. For every maximal ideal $\\mathfrak n$ of $C$, the subring $C_{\\mathfrak n}\\subseteq L$ [def-weil-pbc-localization-at-prime] is a valuation ring and $C_{\\mathfrak n}\\cap K=V$. Conversely, every valuation ring $W\\subseteq L$ with $W\\cap K=V$ is $C_{\\mathfrak n}$ for a unique maximal ideal $\\mathfrak n$ of $C$. No henselian, Noetherian, separability, rank, or module-finiteness assumption on $C/V$ is made.",
+ "statement": "Let $K\\subseteq L$ be a finite algebraic extension of fields [def-pc-field-extension], and let $V\\subseteq K$ be a valuation ring with fraction field $K$ [def-trf-valuation-ring]. Let $C=\\{x\\in L:x\\text{ satisfies a monic polynomial over }V\\}$ be the integral closure of $V$ in $L$ [def-weil-pbc-integral-closure]. Then $C$ is a nonzero integral domain integral over $V$, with fraction field $L$. Its set of maximal ideals is nonempty. For every maximal ideal $\\mathfrak n$ of $C$, the subring $C_{\\mathfrak n}\\subseteq L$ [def-weil-pbc-localization-at-prime] is a valuation ring and $C_{\\mathfrak n}\\cap K=V$. Conversely, every valuation ring $W\\subseteq L$ with fraction field $L$ and $W\\cap K=V$ is $C_{\\mathfrak n}$ for a unique maximal ideal $\\mathfrak n$ of $C$. No henselian, Noetherian, separability, rank, or module-finiteness assumption on $C/V$ is made.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "XX 4.4, printed p.374: valued-field background for the reference to Bourbaki, A.C., VI, §8. Normalization/prolongation input before Krasner; full normalization theorem is background, not asserted explicitly in ILO. Bourbaki, Commutative Algebra VI §8, extensions of valuations, WANTED. Local Stacks algebra.tex Tag 00I8 (section-valuation-rings), especially Tag 00IA (lemma-dominate) and Tag 00IC (lemma-valuation-ring-normal), supplies background but not this full assertion."
@@ -13,9 +13,27 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-valuation-normalization-localizations] to the given inclusion $K\\subseteq L$ and valuation ring $V$. Its normalization is literally our $C$, since both consist of the elements of $L$ satisfying monic polynomials over $V$. Its first two assertions give that $C$ is a nonzero integral domain integral over $V$, has fraction field $L$, and has a maximal ideal. Its localization assertion gives, for every maximal $\\mathfrak n$, that $C_{\\mathfrak n}$ is a valuation ring with $C_{\\mathfrak n}\\cap K=V$. Its converse applies to every valuation ring of $L$ restricting to $V$ and gives the required unique maximal ideal. Here a valuation ring of $L$ has fraction field $L$, made explicit in our statement. The cited theorem assumes exactly the same finite algebraic extension and valuation-ring hypotheses, with none of the extra assumptions excluded in the final sentence. This is reuse of a pre-existing independently split theorem, not a new lemma restating the item.",
+   "uses": [
+    "lem-trf-valuation-normalization-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Normalization/prolongation background: reuse of the existing independent theorem lem-trf-valuation-normalization-localizations, whose nine-step algebraic reconstruction uses Tags 00IA (lemma-dominate), 00IC (lemma-valuation-ring-normal), 00GQ, 00GS, 00GT, 00GY, 052K and 090P. The complete assertion is background for ILO XX 4.4, printed p.374; it is not claimed to be stated in ILO or in any one of these tags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-valuation-normalization-localizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly by reuse of the existing reviewed normalization/prolongation theorem lem-trf-valuation-normalization-localizations. ILO XX 4.4, printed p.374 supplies the valued-field context; the full normalization theorem is reconstructed algebraically in the cited node, not attributed to ILO."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +76,52 @@
    "results": "{\"t\": \"2026-10-18T23:57:20Z\", \"tool\": \"grep\", \"query\": \"IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|integral.closure|localization",
+   "results": "{\"t\": \"2026-10-24T11:14:35Z\", \"tool\": \"grep\", \"query\": \"integralClosure|integral.closure|localization\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\"], \"digest\": \"ee29cf9c82452432\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned integral-closedness and integral-closure intersection results in Valuation/Integral.lean:35-85, AlgebraInstances.lean:31-91, and LocalSubring.lean:198-227; none classifies localizations and all prolongations of an arbitrary-rank normalization. The second phrasing returns Dedekind/discrete special cases, which do not cover this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prolongations of a valuation ring to a finite algebraic extension are the localizations of its integral closure",
+   "results": "{\"t\": \"2026-10-24T11:14:35Z\", \"tool\": \"leansearch\", \"query\": \"Prolongations of a valuation ring to a finite algebraic extension are the localizations of its integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.ofComapInteger\", \"Valuation.Integers.isIntegrallyClosed\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"iInf_valuationSubring_superset\", \"Valuation.HasExtension.val_algebraMap\", \"ValuationSubring.integralClosure_algebraMap_injective\"], \"digest\": \"1019db960e900d32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned integral-closedness and integral-closure intersection results in Valuation/Integral.lean:35-85, AlgebraInstances.lean:31-91, and LocalSubring.lean:198-227; none classifies localizations and all prolongations of an arbitrary-rank normalization. The second phrasing returns Dedekind/discrete special cases, which do not cover this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, integralClosure",
+   "results": "{\"t\": \"2026-10-24T11:14:35Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"iInf_valuationSubring_superset\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"ValuationSubring.algebra\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"ValuationSubring.equiv\", \"ValuationSubring.integralClosure_algebraMap_injective\"], \"digest\": \"15b43cd1526db971\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned integral-closedness and integral-closure intersection results in Valuation/Integral.lean:35-85, AlgebraInstances.lean:31-91, and LocalSubring.lean:198-227; none classifies localizations and all prolongations of an arbitrary-rank normalization. The second phrasing returns Dedekind/discrete special cases, which do not cover this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a valuation ring in a finite algebraic field extension has valuation rings as its localizations at maximal ideals",
+   "results": "{\"t\": \"2026-10-24T11:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a valuation ring in a finite algebraic field extension has valuation rings as its localizations at maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"Valuation.Integers.integrallyClosed\", \"Valuation.Integers.isIntegrallyClosed\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"Valuation.Integers.integralClosure\", \"instIsIntegrallyClosedSubtypeMemSubring\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\"], \"digest\": \"e65fda1aa90aac87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned integral-closedness and integral-closure intersection results in Valuation/Integral.lean:35-85, AlgebraInstances.lean:31-91, and LocalSubring.lean:198-227; none classifies localizations and all prolongations of an arbitrary-rank normalization. The second phrasing returns Dedekind/discrete special cases, which do not cover this item."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing",
+   "results": "{\"t\": \"2026-10-24T11:15:02Z\", \"tool\": \"grep\", \"query\": \"IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned integral-closedness and integral-closure intersection results in Valuation/Integral.lean:35-85, AlgebraInstances.lean:31-91, and LocalSubring.lean:198-227; none classifies localizations and all prolongations of an arbitrary-rank normalization. The second phrasing returns Dedekind/discrete special cases, which do not cover this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a valuation ring in an algebraic field extension is a Prufer domain and valuation prolongations correspond to maximal ideals",
+   "results": "{\"t\": \"2026-10-24T11:15:03Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a valuation ring in an algebraic field extension is a Prufer domain and valuation prolongations correspond to maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"NumberField.RingOfIntegers.instIsDedekindDomainWithVal\", \"instIsPrincipalIdealRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"Set.integer\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\"], \"digest\": \"1a8b8f8a4799714c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned integral-closedness and integral-closure intersection results in Valuation/Integral.lean:35-85, AlgebraInstances.lean:31-91, and LocalSubring.lean:198-227; none classifies localizations and all prolongations of an arbitrary-rank normalization. The second phrasing returns Dedekind/discrete special cases, which do not cover this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-henselian-finite-extension-topology",
@@ -91,5 +151,72 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-valuation-normalization-localizations",
+  "worker": "stage1",
+  "summary": "Reconstructed the released interface using the already reviewed exact duplicate lem-trf-valuation-normalization-localizations (no new nodes). Checked every hypothesis and clause, the independent dependency closure, current blueprint and ILO XX 4.4. Clarified the converse to valuation rings with fraction field L; without that ambient-field requirement its literal reading has an explicit counterexample. Retained source, stmt_deps, prior searches and blueprint provenance; appended actual logged searches.",
+  "blueprint": "Inherited lem-per-artin-gabber-affine-curve proof Step 3, normalization/prolongation background in the strict-completion/dense henselian field subroute authorized by the Q112 release. This is a generic commutative-algebra input; it changes no chapter or unit step. Latest blueprint ancestor and current chapter/unit read.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-valuation-normalization-localizations",
+    "why": "The pre-existing reviewed statement is the same general commutative-algebra normalization/prolongation theorem, with an independent 22-node closure not using this item. It is used as a generic valued-field tool in the Q112-authorized ILO XX 4.4 reconstruction. No theorem of the Fourier/perverse unit supplies a different proof of this background algebra theorem; duplicating its proof or creating its clauses as nodes would defeat the duplicate rule."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-valuation-normalization-localizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-5c5a46088",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-5c5a46088 (reviewer sub-agent of L); spot-checked: I read the item in full, together with the one cited node lem-trf-valuation-normalization-localizations: its statement and all 9 proof steps, rechecked by hand (the c_i/xc_i tail identities and the unit dichotomy c_{k-1}−xc_k=1). I also read its 4 stmt_dep definitions and the citers' uses. The only statement change adds 'with fraction field L' to the converse. This is right: read literally, the old converse is false because Z_(3)⊂Q(i) is a counterexample under the abstract def-trf-valuation-ring. The L/Q65 reviewer of the cited node recorded the same convention. The citer lem-per-henselian-finite-extension-topology (steps 1, 2, 5) applies the converse only to valuation rings of E, so it still works. Step 1 is a literal specialization of the cited statement, with the same hypotheses and the same C. The cited node's closure has 22 commutative-algebra nodes and does not contain the item, so there is no cycle. Small cases L=K, V=K, inseparable and higher rank were checked. Batch-5 flag: I accept the citation as genuinely outside the assumed statements. It is a general valuation-theory theorem (unit sk-i-curve-zero), and its whole closure is pure algebra (Stacks 00IA/00IC/090P/052K), with no trace-formula or duality node. Neither assumption leaf gives it, and it imports nothing of their proofs. The tool_use in split_report is accepted as a generic cross-unit tool. Sources: ILO XX 4.4 is correctly given only as background for Bourbaki VI §8; Bourbaki remains WANTED; no SGA is cited. Maintainer: the item now duplicates the trf node exactly (consider merging the two ids). The trf node's own statement should get the same 'with fraction field L' clarification; that node is not owned by this split, so I made no fix."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationNormalizationLocalizations",
+  "declaration": "ValuationSubring.integralClosure_maximal_localizations",
+  "file": "lean/Sheaf/RingTheory/ValuationNormalizationLocalizations.lean",
+  "statement": "theorem integralClosure_maximal_localizations (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] (V : ValuationSubring K) : Nontrivial (integralClosure V L) ∧ IsDomain (integralClosure V L) ∧ Algebra.IsIntegral V (integralClosure V L) ∧ IsFractionRing (integralClosure V L) L ∧ Nonempty (MaximalSpectrum (integralClosure V L)) ∧ (∀ n : MaximalSpectrum (integralClosure V L), ∃ W : ValuationSubring L, W.toSubring = (@Localization.subalgebra.ofField (integralClosure V L) L _ n.asIdeal.primeCompl n.asIdeal.primeCompl_le_nonZeroDivisors _ _ (integralClosure.isFractionRing_of_finite_extension K L)).toSubring ∧ W.comap (algebraMap K L) = V) ∧ (∀ W : ValuationSubring L, W.comap (algebraMap K L) = V → ∃! n : MaximalSpectrum (integralClosure V L), W.toSubring = (@Localization.subalgebra.ofField (integralClosure V L) L _ n.asIdeal.primeCompl n.asIdeal.primeCompl_le_nonZeroDivisors _ _ (integralClosure.isFractionRing_of_finite_extension K L)).toSubring)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-26",
+  "existing": true,
+  "declarations": [
+   "ValuationSubring.integralClosure_maximal_localizations"
+  ],
+  "note": "Correct stale attachment to normalization_localizations/normalizationLocalization, neither of which exists in the current module. The unchanged normalization/prolongation statement is realized by the existing integralClosure_maximal_localizations declaration, also attached to the trf node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f3d4552f",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read item node, 4 stmt_deps, module, report (Worker report + Second reading by Q67), live trf proof dep (no lean) and Mathlib sources (subalgebra.ofField carrier {a/s: s∉n} + IsLocalization; integralClosure.isFractionRing_of_finite_extension; Algebra.ofSubsemiring gives the canonical V→K→L algebraMap so IsScalarTower V K L is inferred). Every clause matches: K⊆L finite via FiniteDimensional (no separability); V : ValuationSubring K (fraction field K); C = integralClosure V L; Nontrivial/IsDomain/IsIntegral/IsFractionRing C L; Nonempty MaximalSpectrum; for each maximal n, ValuationRing C_n and comap to K = V; converse W : ValuationSubring L (fraction field L), ∃! n with subring equality in L. Helper normalizationLocalization is real Mathlib data with docstrings. Edge cases L=K, V=K, inseparable, higher rank covered; universes u,v independent. lean.statement verbatim; node differs from live only in lean; single sorry. Maintainer note: twin trf node delivery Q129 9c95 (not landed) uses the same file/declaration ValuationSubring.normalization_localizations; a later trf delivery should rebind existing:true. No recompile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T082828-L-2228360",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

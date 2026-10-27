@@ -1,0 +1,332 @@
+{
+ "id": "lem-per-regular-morphism-formal-completion",
+ "kind": "statement",
+ "title": "Regular morphisms remain regular after formal completion",
+ "statement": "Let $f:Y\\to X$ be a regular morphism between Noetherian quasi-excellent schemes over $\\mathbf Q$ [pqf-def-locnoeth, def-exc-excellent-ring]: regular means flat [def-weil-flat-morphism] with geometrically regular fibres: for every point $x\\in X$ and every finite extension $k'$ of $\\kappa(x)$, the base change $Y_x\\times_{\\kappa(x)}\\operatorname{Spec}k'$ of the fibre [def-pc-scheme-fibre] is regular [def-weil-regular-scheme]. Let $I\\subseteq\\mathcal O_X$ and $J\\subseteq\\mathcal O_Y$ be coherent ideals [pqf-def-coherent] such that $I\\mathcal O_Y\\subseteq J$. Write $\\widehat X_I$ and $\\widehat Y_J$ for the adic formal completions with rings $\\varprojlim_n B/I^n$ on affine charts [def-weil-pbc-adic-completion]. A Noetherian scheme means one with a finite affine cover by spectra of Noetherian rings. A Noetherian adic formal scheme is a ringed space admitting a finite open cover by spaces of the form $\\operatorname{Spf}B$, the space of open prime ideals of a Noetherian ring $B$ complete and separated for powers of a finitely generated ideal, with its completed structure sheaf. Such a formal scheme is reduced when its affine chart rings are reduced. Quasi-excellence means quasi-excellence of its affine chart rings [def-exc-excellent-ring]. Then the induced formal morphism $\\widehat f:\\widehat Y_J\\to\\widehat X_I$ is regular. More explicitly, for formal affine opens $\\operatorname{Spf}A\\subseteq\\widehat X_I$ and $\\operatorname{Spf}B\\subseteq\\widehat Y_J$ with the latter mapping into the former, the ring homomorphism $A\\to B$ is a regular ring map [def-weil-pbc-g-ring]: flat, with every fibre ring Noetherian and geometrically regular over its residue field (regular after every finite extension of that field). No finite-type condition on $f$ is required.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Corollary 2.4.5 and Lemma 2.4.6, printed pp.16--17, using Lemma 2.4.4. No Stacks tag is being used as a substitute for this simultaneous-completion theorem. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-adic-completion",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-g-ring",
+  "def-per-adic-formal-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine opens $U=\\operatorname{Spec}A\\subseteq X$ and $V=\\operatorname{Spec}B\\subseteq f^{-1}(U)$ covering $X$ and $Y$. By [lem-weil-pbc-flat-morphism-affine-criterion], $A\\to B$ is flat. By [lem-weil-pbc-fibre-product-affine-spectra], its fibre $B\\otimes_A\\kappa(\\mathfrak p)$, and its finite residue-field extensions, are the coordinate rings of the corresponding affine open fibres of $f$. These rings are regular by the hypothesis and the affine regularity convention in [def-weil-regular-scheme]. Thus $A\\to B$ is regular. Put $C=\\widehat A_I$ and $D=\\widehat B_J$. By [lem-per-quasi-excellent-formal-affines], these completions and every affine formal open in them have Noetherian quasi-excellent rings. They cover $\\widehat X_I$ and $\\widehat Y_J$. All ideals here are the restrictions of the given coherent ideals, so their generators are finite.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-pc-scheme-fibre",
+    "def-weil-regular-scheme",
+    "pqf-def-coherent",
+    "lem-per-quasi-excellent-formal-affines",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Corollary 2.4.5 affine reduction; sections 2.1.8, 2.4.1, 2.4.3"
+   }
+  },
+  {
+   "text": "Since $B$ is quasi-excellent, it is a G-ring by [def-exc-excellent-ring]. Thus $B\\to D$ is regular by [lem-weil-pbc-g-ring-completion-regular]. Compose with the regular map $A\\to B$ using [lem-weil-pbc-regular-composition]. Its Noetherian-fibre hypothesis holds: for a prime $\\mathfrak p\\subset A$, $D\\otimes_A\\kappa(\\mathfrak p)$ is a localization of the quotient $D/\\mathfrak pD$, hence Noetherian because $D$ is Noetherian. Consequently $A\\to D$ is regular.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Corollary 2.4.5, sentence A to B to completed B is regular"
+   }
+  },
+  {
+   "text": "The containment $IB\\subseteq J$ gives compatible maps $A/I^n\\to B/J^n$. Passing to compatible sequences defines $u:C\\to D$ and gives the commuting triangle $A\\to C\\to D=A\\to B\\to D$. Reduction modulo $J$ shows $u(IC)D\\subseteq JD$. The ring $D$ is complete for $JD$ by [lem-weil-pbc-adic-completion-mod-ideal]. Apply [lem-per-completed-base-regularity] with base $A$, ideal $I$, target $D$ and ideal of definition $JD$. Step 2 supplies regularity of $A\\to D$, so $C\\to D$ is regular. The maps glue since their restrictions are the same maps of compatible sequences. Thus the completed morphism has regular ring maps on the chosen covering pairs.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-per-completed-base-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Corollary 2.4.5, use of Lemma 2.4.4"
+   }
+  },
+  {
+   "text": "Check stability under principal refinement. Let $v:C\\to D$ be one of the regular chart maps and suppose the formal principal $t$-open maps into the formal principal $s$-open. Replace $t$ by $tv(s)$: its formal principal open is unchanged, because every open prime avoiding $t$ already avoids $v(s)$. Thus, with this replacement, $C_s\\to D_t$ exists as an ordinary localization map. The maps $D\\to D_t$ and $D_t\\to D_{\\{t\\}}$ are regular by [lem-weil-pbc-localization-regular] and [lem-weil-pbc-g-ring-completion-regular]. To verify the latter hypothesis, $D_t=D[T]/(tT-1)$ is finite type over $D$, so [lem-weil-pbc-finite-type-over-g-ring] makes it a G-ring. It is J-2 because every finite type $D_t$-algebra is finite type over $D$ (combine their finite lists of generators), and [def-exc-excellent-ring] supplies openness of its regular locus. It is Noetherian by [lem-weil-pbc-localization-noetherian]. The same argument makes $C_s$ quasi-excellent. Composition and [lem-weil-pbc-regular-through-localization] give regularity of $C_s\\to D_{\\{t\\}}$; now [lem-per-completed-base-regularity] gives regularity of $C_{\\{s\\}}\\to D_{\\{t\\}}$. Extended original ideals still satisfy containment, and $D_{\\{t\\}}$ is complete for $JD_{\\{t\\}}$ by [lem-weil-pbc-adic-completion-mod-ideal]; final rings are Noetherian, so the composition fibre condition holds as in Step 2 by [lem-weil-pbc-surjective-image-noetherian] and [lem-weil-pbc-localization-noetherian]. The section identifications in [lem-per-formal-affine-principal-refinement] show this is exactly the formal restriction, including the replacement of $t$.",
+   "uses": [
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-regular-through-localization",
+    "lem-per-completed-base-regularity",
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 2.4.6 first paragraph, with Corollary 2.4.5 expanded into its ring argument"
+   }
+  },
+  {
+   "text": "Let $\\operatorname{Spf}E$ and $\\operatorname{Spf}F$ now be arbitrary affine formal opens with the source mapping into the target. They have Noetherian quasi-excellent rings by Step 1. At each source point $y$, choose a covering pair $\\operatorname{Spf}C,\\operatorname{Spf}D$ from Step 3 containing its image and $y$. By [lem-per-formal-affine-principal-refinement] choose a neighbourhood of the image principal in both $\\operatorname{Spf}E$ and $\\operatorname{Spf}C$, then a neighbourhood of $y$ principal in both $\\operatorname{Spf}F$ and $\\operatorname{Spf}D$ and contained in its inverse image. Step 4 proves regularity between these smaller chart rings, say $E_{\\{a\\}}\\to F_{\\{b\\}}$. The map $E\\to E_{\\{a\\}}$ is a localization followed by completion of a quasi-excellent localization, so the G-ring and J-2 argument of Step 4, followed by localization/completion/composition, gives its regularity. Therefore $E\\to F_{\\{b\\}}$ is regular; the fibre condition of each composition holds as in Step 2 by [lem-weil-pbc-surjective-image-noetherian] and [lem-weil-pbc-localization-noetherian], all rings being Noetherian. These principal source opens cover $\\operatorname{Spf}F$.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 2.4.6, reduction to formal principal refinements"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m\\subset F$. By [lem-per-formal-affine-principal-refinement] it is a point of $\\operatorname{Spf}F$, so one of the Step-5 principal opens contains it, with $b\\notin\\mathfrak m$. That node supplies a prime $\\mathfrak n\\subset F_{\\{b\\}}$ over $\\mathfrak m$ and a faithfully flat map $F_{\\mathfrak m}\\to(F_{\\{b\\}})_{\\mathfrak n}$. Set $\\mathfrak p=\\mathfrak m\\cap E$. Apply [lem-weil-pbc-regular-local-maximal] to the regular map $E\\to F_{\\{b\\}}$ to obtain regularity of $E_{\\mathfrak p}\\to(F_{\\{b\\}})_{\\mathfrak n}$. Descent [lem-weil-pbc-regular-permanence] applied to $E_{\\mathfrak p}\\to F_{\\mathfrak m}\\to(F_{\\{b\\}})_{\\mathfrak n}$ gives regularity of $E_{\\mathfrak p}\\to F_{\\mathfrak m}$. As $\\mathfrak m$ was arbitrary, the maximal-ideal criterion in [lem-weil-pbc-regular-local-maximal] gives regularity of $E\\to F$. This proves the requested assertion on every affine formal chart. Nothing in the argument assumed finite type of $f$.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-weil-pbc-regular-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 2.4.6, descent paragraph; local faithful-flat descent instead of a global nonregular-locus argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-pc-scheme-fibre",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-regular-scheme",
+  "lem-per-completed-base-regularity",
+  "lem-per-formal-affine-principal-refinement",
+  "lem-per-quasi-excellent-formal-affines",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-regular-permanence",
+  "lem-weil-pbc-regular-through-localization",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Corollary 2.4.5 and Lemma 2.4.6, printed pp.16--17. Read online; archival copy WANTED. Expanded ring proof and maximal-local descent written by Q07; no SGA source used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-morphism-formal-completion: Formal completion of a regular morphism between quasi excellent schemes is a regular morphism of formal schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Type u_4\", \"doc\": \"The completion of a module with respect to an ideal.\\n\\nThis is Hausdorff but not necessarily complete: a classical sufficient condition for\\ncompleteness is that `I` be finitely generated [Stacks, 05GG]\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Type u_4\", \"doc\": \"The type of `I`-adic Cauchy sequences.\"}\n  {\"name\": \"AdicCompletion.IsAdicCauchy\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] (f : ℕ → M) : Prop\", \"doc\": \"A sequence `ℕ → M` is an `I`-adic Cauchy sequence if for every `m ≤ n`,\\n`f m ≡ f n` modulo `I ^ m • ⊤`.\"}\n  {\"name\": \"AdicCompletion.instAdd\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Add (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : AddCommGroup (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instNeg\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Neg (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instSub\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Sub (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instZero\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Zero (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instAdd\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Add (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : AddCommGroup (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instNeg\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Neg (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instSub\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Sub (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*completion|completion.*regular|FormallySmooth.*completion",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Nonarchimedean/Completion.lean\", \"line\": \"31\", \"text\": \"    /- Since `Completion G` is regular, there is a closed neighborhood `C` of `0` which is\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"line\": \"53\", \"text\": \"are significantly harder. They rely on the completion-regularity of the standard regular Haar\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/EverywherePos.lean\", \"line\": \"37\", \"text\": \"  compactly supported functions. This property is also known as completion-regularity of Haar\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/EverywherePos.lean\", \"line\": \"280\", \"text\": \"/-- **Halmos' theorem: Haar measure is completion regular.** More precisely, any finite measure\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/EverywherePos.lean\", \"line\": \"283\", \"text\": \"/-- **Halmos' theorem: Haar measure is completion regular.** More precisely, any finite measure\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-regular-morphism-formal-completion: Formal completion of a regular morphism between quasi excellent schemes is a regular morphism of formal schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-morphism-formal-completion: Regular ring homomorphisms remain regular after compatible adic completion of source and target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          [IsAdicComplete I S] →\\n            (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n              (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n            (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R →+* AdicCompletion I S\", \"doc\": \"Given a non-associative semiring $ R $, a commutative ring $ S $, an ideal $ I $ of $ S $, and a compatible family of ring homomorphisms $ f_n : R → S/I^n $ satisfying $ \\\\text{factorPow}_{I}(m,n) \\\\cir\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"IsAdicComplete.ofAlgEquiv_comp_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m),\\n  (↑(AdicCompletion.ofAlgEquiv I)).comp (IsAdicComple\", \"doc\": \"For a commutative ring $ S $, an ideal $ I $, and an $ I $-adically complete commutative ring $ S $, the composition of the canonical $ S $-algebra equivalence between $ S $ and its $ I $-adic complet\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smoothness, normalization, ring completion/lifting, ideal subschemes or unrelated categorical resolutions; none states this formal-geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-morphism-formal-completion: regular ring homomorphisms between quasi excellent rings remain regular after compatible adic completions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          [IsAdicComplete I S] →\\n            (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n              (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"AdicCompletion.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n            (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R →+* AdicCompletion I S\", \"doc\": \"Given a non-associative semiring $ R $, a commutative ring $ S $, an ideal $ I $ of $ S $, and a compatible family of ring homomorphisms $ f_n : R → S/I^n $ satisfying $ \\\\text{factorPow}_{I}(m,n) \\\\cir\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned completion, smoothness, regular-sequence and ordinary Noetherian-scheme declarations do not state this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Type u_4\", \"doc\": \"The completion of a module with respect to an ideal.\\n\\nThis is Hausdorff but not necessarily complete: a classical sufficient condition for\\ncompleteness is that `I` be finitely generated [Stacks, 05GG]\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Type u_4\", \"doc\": \"The type of `I`-adic Cauchy sequences.\"}\n  {\"name\": \"AdicCompletion.IsAdicCauchy\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] (f : ℕ → M) : Prop\", \"doc\": \"A sequence `ℕ → M` is an `I`-adic Cauchy sequence if for every `m ≤ n`,\\n`f m ≡ f n` modulo `I ^ m • ⊤`.\"}\n  {\"name\": \"AdicCompletion.instAdd\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Add (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : AddCommGroup (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instNeg\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Neg (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instSub\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Sub (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instZero\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Zero (AdicCompletion I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instAdd\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Add (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instAddCommGroup\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : AddCommGroup (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instNeg\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Neg (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.instSub\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_4) [AddCommGroup M] [Module R M] : Sub (AdicCompletion.AdicCauchySequence I M)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned completion, smoothness, regular-sequence and ordinary Noetherian-scheme declarations do not state this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*completion|completion.*regular|Spf|FormalScheme",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"20\", \"text\": \"- `Order.IsPFilter P`: a predicate for when a `Set P` is a filter.\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"51\", \"text\": \"def IsPFilter [Preorder P] (F : Set P) : Prop :=\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"54\", \"text\": \"theorem IsPFilter.of_def [Preorder P] {F : Set P} (nonempty : F.Nonempty)\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"56\", \"text\": \"    IsPFilter F :=\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"60\", \"text\": \"`Order.IsPFilter`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean\", \"line\": \"15\", \"text\": \"defining `ModularForm` and `CuspForm`. We prove several instances for such spaces, in particular\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"74\", \"text\": \"private theorem cuspFunction_eqOn_const_of_nonpos_wt (hk : k ≤ 0) (f : F) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"75\", \"text\": \"    Set.EqOn (cuspFunction 1 f) (const ℂ (cuspFunction 1 f 0)) (Metric.ball 0 1) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"77\", \"text\": \"  · exact (ModularFormClass.differentiableAt_cuspFunction f one_pos one_mem_strictPeriods_SL\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"86\", \"text\": \"        by simpa [← SlashInvariantFormClass.eq_cuspFunction f _ one_mem_strictPeriods_SL\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"90\", \"text\": \"    f = Function.const ℍ (cuspFunction 1 f 0) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.CuspFormSubmodule\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"21\", \"text\": \"* `CuspForm.discriminantEquiv`: `CuspForm 𝒮ℒ k ≃ₗ[ℂ] ModularForm 𝒮ℒ (k - 12)`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"22\", \"text\": \"* `ModularForm.rank_eq_one_add_rank_cuspForm`: `rank M_k = 1 + rank S_k` for even `k ≥ 3`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"34\", \"text\": \"  CuspFormClass MatrixGroups OnePoint Filter EisensteinSeries Asymptotics\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"44\", \"text\": \"namespace CuspForm\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"46\", \"text\": \"private lemma E₄CubeSubE₆SqForm_isCuspForm : IsCuspForm E₄CubeSubE₆SqForm := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"47\", \"text\": \"  simp [isCuspForm_iff_coeffZero_eq_zero, E₄CubeSubE₆SqForm_qExpansion_eq,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"61\", \"text\": \"  obtain ⟨g, hg⟩ := E₄CubeSubE₆SqForm_isCuspForm\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"62\", \"text\": \"  obtain ⟨c, hc⟩ := CuspForm.exists_smul_discriminant_of_weight_eq_twelve g\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"65\", \"text\": \"    have hcΔ : (c • CuspForm.discriminant : ℍ → ℂ) = g := congrArg DFunLike.coe hc\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"13\", \"text\": \"# Cusp form submodule and IsCuspForm predicate\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"16\", \"text\": \"submodule of modular forms, and the `IsCuspForm` predicate. It also provides a direct constructor\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"17\", \"text\": \"`ModularForm.toCuspForm` for building cusp forms from modular forms with vanishing constant\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"22\", \"text\": \"* `CuspForm.toModularFormₗ`: the inclusion `CuspForm Γ k →ₗ[ℂ] ModularForm Γ k`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned completion, smoothness, regular-sequence and ordinary Noetherian-scheme declarations do not state this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-regular-morphism-formal-completion: completion of a regular morphism of quasi excellent formal schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) :\\n  ∃ (g : A →ₐ[R] AdicCompletion (ker f) S), (AdicCompletion.kerProj hf).comp g = AlgHom.id R A\", \"doc\": \"Let `R` be a commutative ring, and let `A` be a formally smooth `R`-algebra. For any `R`-algebra `S` and any surjective `R`-algebra homomorphism `f : S \\\\to A`, let `\\\\hat{S}` be the adic completion of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned completion, smoothness, regular-sequence and ordinary Noetherian-scheme declarations do not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-morphism-formal-completion: flat morphisms with geometrically regular fibres and completion along two compatible ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned completion, smoothness, regular-sequence and ordinary Noetherian-scheme declarations do not state this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bSpf\\b|\\bFormalScheme\\b|regular.*completion|completion.*regular",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-small-singular-locus-resolution",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity; Temkin small-singular-locus construction, Corollary 2.4.5 and Lemma 2.4.6, printed pp.16--17, using Lemma 2.4.4. No Stacks tag is being used as a substitute for this simultaneous-completion theorem.",
+   "via": [
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-morphism-formal-completion",
+  "worker": "stage1",
+  "summary": "Proved simultaneous completion on covering affines using the completed-base criterion, then wrote principal-refinement invariance and maximal-local faithful-flat descent for all formal affine opens. Added three independent, statement-only supporting lemmas after DAG/blueprint/Lean/Mathlib searches. Statement unchanged.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, Step 3 (duality direction), via the existing small-singular-locus resolution chain; this split realizes the completion input cited in that descendant, following Temkin Corollary 2.4.5 and Lemma 2.4.6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-localization-regular",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-regular-permanence",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-regular-through-localization",
+    "why": "Generic commutative-algebra or affine-scheme criterion used only with its stated hypotheses in the formal-completion argument; the perverse-curve unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-regular-permanence",
+  "lem-weil-pbc-regular-through-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-7ec9ec1de",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-7ec9ec1de (reviewer sub-agent of L); spot-checked: Read the item, the three new nodes, every cited statement and ILO I Th 9.2 (local, PDF p.23). Temkin is not local: WANTED is recorded and proof_origin is agent, so the Temkin-based steps were checked mathematically, not against the text. The item's statement is unchanged and equals the Q21 reviewer's FIXed text (finite extensions, regular ring maps in the sense of def-weil-pbc-g-ring). It gives the citer lem-per-small-singular-locus-resolution step 3 what it uses. No SGA. Steps: (1) 01U5 flatness and affine fibres; quasi-excellence of all formal charts via the new QE node, under the chapter convention that every affine open ring is quasi-excellent. (2) B is a G-ring, so B→D is regular by 0AH2; composition 07QI holds, with fibres Noetherian as localizations of quotients. (3) u(IC)D⊆JD; D is JD-complete by 05GG; completed-base-regularity applies with quasi-excellent base A. (4) The t→t·v(s) replacement is correct. D_t is a G-ring by 07PV and J-2 by finite type over D. Composition, regular-through-localization and then completed-base-regularity over the quasi-excellent C_s give C_{s}→D_{t} regular. (5) The principal-refinement node is used twice, and the canonical identifications of sections reduce to step 4. (6) A maximal m lies in a principal open; the faithfully flat F_m→(F_{b})_n, 07C0 and 07NT give E_p→F_m regular, then the maximal-ideal criterion. New nodes are true and not duplicates: completed-base-regularity is Temkin 2.4.4 and is not 0AH2. The QE-formal-affines node follows from Gabber ILO I 9.2 and is a formal-chart generalization of lem-per-qe-complete-pair-lifting; restricting it to Q would let its split reuse that node (advisory). Principal-refinement is 0AHY/01IW plus completion flatness. All three are statement-only and none restates the item. Accepted tool_uses: the seven sk-thm-p1 regularity/G-ring lemmas. FIX, C1: step 4 used, without citing them, Noetherianity of the localization, JD_{t}-completeness (05GG, needed by completed-base-regularity) and the Noetherian-fibre condition for composition; step 5 used the same fibre condition uncited. Added lem-weil-pbc-localization-noetherian, lem-weil-pbc-adic-completion-mod-ideal and lem-weil-pbc-surjective-image-noetherian to their uses and text; proof_deps is unchanged and equals the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularMorphismFormalCompletion",
+  "declaration": "AlgebraicGeometry.regularMorphism_formalCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularMorphismFormalCompletion.lean",
+  "statement": "theorem regularMorphism_formalCompletion {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (_qX : X ⟶ Spec (CommRingCat.of (ULift.{u} ℚ))) (f : Y ⟶ X) [Flat f] (_hX : ∀ U : X.affineOpens, IsQuasiExcellent Γ(X, U)) (_hY : ∀ V : Y.affineOpens, IsQuasiExcellent Γ(Y, V)) (_hf : ∀ (x : X) (K : Type u) [Field K] [Algebra (X.residueField x) K] [Module.Finite (X.residueField x) K], IsRegularScheme (pullback (f.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) K))))) (I : X.IdealSheafData) (J : Y.IdealSheafData) (_hI : RingedSpace.IsCoherent X.toRingedSpace I.toModules) (_hJ : RingedSpace.IsCoherent Y.toRingedSpace J.toModules) (hIJ : I.comap f ≤ J) : IsRegularOnAdicFormalAffines (adicFormalCompletionMap f I J hIJ)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4580d083",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read the item, the new node def-per-adic-formal-geometry, all statement-dependency records (identical to the live clone), both delivered modules and the declarations used (Mathlib IdealSheafData.comap = I·O_Y, pow, subschemeMap; IsQuasiExcellent; RingHom.IsRegular; IsRegularScheme; RingedSpace.IsCoherent). Every clause matches: Noetherian, over ℚ, quasi-excellent on every affine open, Flat plus a regular fibre after every finite extension in Type u, coherent I and J, comap ≤ J; the conclusion is regularity of the section map for every pair of formal affine opens V ⊆ f̂⁻¹U. The completion is the ringed-space colimit of V(I^n) (space V(I), sections lim B/I^n); f̂ is the colimit map of the canonical subschemeMaps; the formal-affine predicate uses the isomorphism only as a property, and the adic topology is recovered from the ringed space. No hollow definitions, no duplicate node, only sorry, docstrings and verbatim statements correct, both report sections present. Advisories: live def-per-regular-scheme-morphism is literally the unfolding of the item's hypotheses; some unused proof-only imports; Mathlib comap/subschemeMap have no node record. No compile run (no file changed)."
+ }
+}

@@ -73,9 +73,20 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.NormalizedBlowupCalculus",
+  "module": "Sheaf.AlgebraicGeometry.NormalizedBlowup",
   "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.normalizedBlowup",
   "declarations": [
    "AlgebraicGeometry.Scheme.IdealSheafData.normalizedBlowup",
@@ -83,10 +94,11 @@
   ],
   "statement": "def normalizedBlowup {S : Scheme.{u}} (J : S.IdealSheafData) : Scheme.{u}",
   "branch": "newtargets-dag",
-  "by": "Q25",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "Reuse the two actual definitions already published with lem-trf-normalized-blowup-calculus. Their data is J.blowup.reducedNormalization and J.blowup.fromReducedNormalization ≫ J.blowupMap; no calculus theorem or finite-type-over-Q hypothesis is assumed."
+  "by": "D5",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The same two definitions, with verbatim bodies and signatures, moved to the definition-only module to break the calculus/finality import cycle.",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedBlowup.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -103,5 +115,15 @@
   "group": "Q25",
   "result": "pass",
   "note": "Re-delivery after RETURN of 084029194154. R1 fixed: theorem stmt_dep replaced by new existing:true def node def-trf-normalized-blowup (normalizedBlowup/normalizedBlowupMap in NormalizedBlowupCalculus; statement verbatim from live line 48; plain defs = blowup.reducedNormalization and fromReducedNormalization ≫ blowupMap; stmt_deps def-nagata-global-blowup + def-weil-pbc-reduced-normalization; no competing node in live or runs/2). R2 fixed: ToricComponent M is an actual connected-component class of an arbitrary M with per-component torsion-freeness; generic point from a true named ∃! (affine charts nonempty, T0); torus Spec k[L] acting on the actual open componentRealization ⊆ realization k M by a chart-pinned ∃!-choose action; IsTorusEquivariant k M J compares comaps of an ideal of k[M] through componentι for every torsion-free component, which covers the three citers. Rest of the module unchanged from the reviewed head. Node diff vs live: only lean and stmt_deps. 71 declarations match the record; 10 sorry, all named theorems with docstring proofs; no sorry data. nt_compile --json exit 0 (6.1 s); broken control fails. Advisory: def-sc-normalization is reached only transitively."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-3ce69",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261023T230629-L-3453249",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clones/live (byte-identical); moved defs vs old bodies (verbatim); the 4 newly public helpers vs their private originals (identical); name-clash grep over the 93 transitive importers; 5 delivered modules + 3 other direct calculus importers compiled in a sandbox (all OK); #print axioms; 18 single-import removals; node proof_deps vs Lean uses"
  }
 }

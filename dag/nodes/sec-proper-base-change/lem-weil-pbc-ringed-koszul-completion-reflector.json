@@ -56,18 +56,54 @@
     "lem-weil-pbc-completed-fiber-cech-comparison"
    ],
    "elementary": true
+  },
+  {
+   "text": "For the general ringed-site companion ringedKoszulCompletionReflector, choose finite generating sections of I on every slice from hgen. They give LocalGeneratorsData on the covering family of all site objects; the equivalences with Fin r make this family finite type.",
+   "uses": [
+    "def-weil-pbc-ringed-ideal-generators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the global extended Cech model K for I. On each slice its local-description clause compares both any generating list and the prescribed list b with K restricted to the slice. Restriction of the actual augmented Cech complex for b gives an arrow isomorphism. Normalize its right component to the canonical ring-complex restriction isomorphism: any derived automorphism t of O[0] lifts through the fully faithful degree-zero embedding to an automorphism of O, hence to a chain automorphism of O[0]. On the Cech complex X, conjugating t tensor id_X by the left unitor gives an automorphism s with s followed by augmentation equal to augmentation followed by t. Use the inverse discrepancy to correct the left component of the arrow isomorphism. Compose these normalized comparisons to prove HasLocalExtendedCechDescription for the actual augmented Cech complex of b.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-global-model",
+    "lem-weil-pbc-ringed-augmented-cech-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the extended Cech reflector properties to that local description. Obtain the single-site strict Koszul presentation D and its unit-compatible comparison theta. Completeness is invariant under derived isomorphism, by applying restriction and internal Hom to an isomorphism. Thus theta transports completeness of Cech outputs to D.completion outputs.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-reflector-properties",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-on-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the general ringed-site companion, transport the Cech Hom bijection explicitly: injectivity follows by precomposing with theta.hom and the unit equation, and the preimage of a map a is theta.inv followed by its Cech extension. Completeness of N makes the Cech unit, and hence the strict unit, invertible. Conversely an invertible strict unit transfers output completeness to N. Naturality of theta and of the Cech unit gives the displayed strict-unit naturality equation.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-reflector-properties",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-on-site"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-completed-fiber-cech-comparison",
   "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
-  "lem-weil-pbc-ringed-completion-unit-naturality"
+  "lem-weil-pbc-ringed-completion-unit-naturality",
+  "def-weil-pbc-ringed-ideal-generators",
+  "lem-weil-pbc-extended-cech-global-model",
+  "lem-weil-pbc-ringed-augmented-cech-restriction",
+  "lem-weil-pbc-extended-cech-reflector-properties",
+  "lem-weil-pbc-ringed-cech-koszul-comparison-on-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
   "place": "Tag 099B, unit idempotence and universal mapping property; Tag 0A0E, unit-compatible Koszul/Cech comparison.",
-  "note": "This is the proof of the attached wfCompletionReflector specialization with completeness defined by invertibility of its actual intrinsic unit. Its categorical assembly is fully proved. The general ringed-site companion remains publicly reexported and is not claimed to have been proved by this delivery."
+  "note": "This is the proof of the attached wfCompletionReflector specialization with completeness defined by invertibility of its actual intrinsic unit. Its categorical assembly is fully proved. K4 additionally proves the original general ringed-site companion with the unchanged local-completeness predicate, using the single-site comparison and the global-model local description. The earlier specialization proof and its attachment are retained."
  },
  "mathlib_searches": [
   {
@@ -138,7 +174,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-c58dfbfd6 (reviewer sub-agent of L); spot-checked: Mathematics and citations pass full review. Repaired missing created.worker/date and lean_audit metadata in all three new unsplit nodes; see review.md.; 3 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
@@ -171,12 +218,12 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D8",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261019T192713-L-1857039",
+  "landing": "20261025T095558-L-3450107",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

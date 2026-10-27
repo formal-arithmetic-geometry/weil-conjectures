@@ -1,0 +1,175 @@
+{
+ "id": "lem-pd-section-resolving-oplax-closure",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Resolving closure for nested section tensors",
+ "statement": "Let Λ be a commutative condensed ring and f:X→Y a morphism of schemes. Assume the derived categories of the section-module categories exist. Let P,Q,H be flat-term K-flat integer-indexed section cochain complexes on Y, that is, KFlatSectionComparison.sectionResolving Λ Y holds for each of them. With the fixed section tensor and pullback of [def-pd-section-resolving-oplax-constraint-data], ResolvingClosure Λ f P Q H holds: the four totals P⊗Q, Q⊗H, (P⊗Q)⊗H and P⊗(Q⊗H) are resolving, and the pullbacks of P,Q,H and these four totals are resolving.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E; split from lem-pd-section-resolving-oplax-model-edges"
+ },
+ "stmt_deps": [
+  "def-pd-section-resolving-oplax-constraint-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply kFlat_total_tensor_model over the section ring first to P,Q and Q,H and then to P⊗Q,H and P,Q⊗H. Its K-flatness and flat-term projections give resolving membership for the four specified totals.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the algebraic inverse-image presentation with coefficient map the inverse of condensedPullbackHom. Extension along that isomorphism is restriction along its inverse, and pullComparison together with the section-equivalence counit identifies the presented module functor with the fixed section pullback. The pro-etale set-sheaf pullback is left exact, since the base-change functor is flat and sheafification is left exact.",
+   "uses": [
+    "lem-c2-proetale-section-module-algebraic-inverse-image",
+    "def-sfb-modobj-extension-along-iso",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Remove the redundant ULift in the presentation (the unliftInverseImage helper of the algebraic inverse-image K-flatness module). Apply the ringed-topos K-flat preservation theorem to inverse image followed by identity scalar extension, and cancel that scalar extension via its identity comparison (the existing isKFlat_inverseImage helper of the pullback resolving computation). Apply algebraic inverse-image flatness separately in each degree. Transfer the two properties along the module comparison and its termwise complex isomorphism; for K-flatness tensor that isomorphism with every acyclic test complex, and for flatness transport exactness through siteSheafTensorRightIso.",
+   "uses": [
+    "lem-sfb-algebraic-inverse-image-kflat",
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Split the two finite-list membership assertions into their four and seven cases. Use the four total closure results for the first assertion, and the pullback preservation result applied to the three inputs and four totals for the second.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-c2-proetale-section-module-algebraic-inverse-image",
+  "def-sfb-modobj-extension-along-iso",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-algebraic-inverse-image-kflat",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+  "def-pur-site-sheaf-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A2 (lemma-tensor-product-K-flat), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); direct specialization of existing closure and algebraic inverse-image theorems",
+  "note": "Complete Lean proof; no new holes. The resolving hypotheses omitted by the earlier split are restored from its parent and the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "resolving K-flat tensor closure and pullback preservation for section complexes",
+   "results": "No exact project-specific combined theorem found; generic tensor and pullback APIs only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlatIndependentCoefficients",
+   "results": "Generic K-flat declarations found, but no theorem with the prescribed section closure conclusion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "section_resolving_oplax|ResolvingClosure|SectionEdges",
+   "results": "Only the assigned modules and their parent use these predicates.",
+   "date": "2026-10-27",
+   "verdict": "no existing match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxModelEdges",
+  "date": "2026-10-27",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-resolving-oplax-model-edges",
+   "place": "Strict decomposition of its resolving-closure and edge-identification conjuncts",
+   "via": [
+    "lem-pd-section-resolving-oplax-model-edges"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionResolvingOplaxClosure",
+  "file": "lean/Sheaf/Paper/SectionResolvingOplaxClosure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_resolving_oplax_closure",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_resolving_oplax_closure"
+  ],
+  "statement": "theorem section_resolving_oplax_closure {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P Q H : CochainComplex (modules Λ Y) ℤ)\n    (hP : KFlatSectionComparison.sectionResolving Λ Y P)\n    (hQ : KFlatSectionComparison.sectionResolving Λ Y Q)\n    (hH : KFlatSectionComparison.sectionResolving Λ Y H) :\n    ResolvingClosure Λ f P Q H",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261027T012942-L-2351326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-74c34",
+  "group": "N1",
+  "result": "fix",
+  "landing": "20261027T034714-L-3677009",
+  "kind": "interface",
+  "note": "independent cc review: delivered SectionResolvingOplaxClosure.lean/ModelEdges.lean and node lem-pd-section-resolving-oplax-closure against the clone, ResolvingClosure def, owner nodes of used declarations, #print axioms scratch compile"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "N1 stage 2",
+  "old_statement": "ResolvingClosure Λ f P Q H",
+  "what": "The earlier split dropped the three resolving hypotheses. For f the identity, its second conjunct would force every input complex to have flat terms. With Λ the discrete condensed integers and a nonempty geometric point as scheme, the degree-zero complex of the constant Z/2 module is a counterexample: tensoring the injection multiplication by 2 on Z with Z/2 is not injective. The source and the only parent quantify flat-term K-flat inputs. Restoring those explicit hypotheses corrects the false split; it does not restrict any use by the parent.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 0G7E, lemma-pullback-K-flat, hypotheses; Tag 07A4, lemma-pullback-tensor-product, proof replacing both inputs by flat-term K-flat complexes"
+  },
+  "citers": [
+   {
+    "id": "lem-pd-section-resolving-oplax-model-edges",
+    "holds": true,
+    "note": "Its inputs lie in sectionResolving.FullSubcategory; pass P.property, Q.property and H.property. Its statement remains verbatim."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the K-flat total-tensor model theorem to the two inner pairs and then to the two outer pairs; use the flat-term clauses for every degree. Apply the ringed-topos pullback preservation theorem to each original complex and each total, obtaining the second conjunction of ResolvingClosure.",
+    "uses": [
+     "lem-pd-section-kflat-tensor-comparison",
+     "lem-weil-pbc-ringed-topos-kflat-pullback",
+     "lem-weil-pbc-site-derived-tensor-descent"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pd-section-kflat-tensor-comparison",
+   "lem-weil-pbc-ringed-topos-kflat-pullback",
+   "lem-weil-pbc-site-derived-tensor-descent"
+  ]
+ }
+}

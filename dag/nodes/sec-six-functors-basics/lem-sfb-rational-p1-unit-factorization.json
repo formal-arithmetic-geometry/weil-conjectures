@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-rational-p1-unit-factorization",
+ "kind": "statement",
+ "title": "Factor the normalized projective-line unit before trace evaluation",
+ "statement": "For l,c,k,p,hpl,Y with the geometric, Noetherian and diagonal-localization hypotheses in the attached Lean declaration, let family be a coefficient Family, M an object over P1_Y, and eta a proposed unit arrow satisfying UnitComponentNormalized for the selected diagram and secondLineComparison. There exist proofs hb,hp of invertibility of the fixed exchange and second twisted projection such that eta is firstKernelInsertion at the selected diagram delta followed by Rp2_* of tensorShiftIso.hom, inverse twistProjectionMap and twist applied to inverse ambient exchange. The equality is exactly the attached Lean statement. There is no counit, trace functional, diagonal integral, completed reference, localizing hypothesis on M. The equality holds before applying Rq_* to eta.",
+ "stmt_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-projective-diagonal-pullback",
+  "lem-sfb-rational-p1-section-evaluation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the unit as section, diagonal tensor comparison and class, followed by inverse projection and exchange; ambient unit clause 2."
+ },
+ "proof": [
+  {
+   "text": "Open UnitComponentNormalized to obtain invertibility of the two fixed maps and its HEq with the literal unit. Express these invertibility proofs in the native interfaces used in the displayed conclusion; the maps agree definitionally. These are proof witnesses only. Proof irrelevance identifies the uses of the fixed inverses. No counit or trace is involved.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand unitComponent and diagonalClassMap. Use the second direct-image functor map_comp to split the diagonal tensor map and supported class from tensorShiftIso.hom. Associativity identifies the section and first factor with the constructed firstKernelInsertion of [lem-sfb-rational-p1-section-evaluation]. The remaining tensor-shift, inverse projection and inverse exchange arrows are the displayed tail. This is an equality before applying Rq_*, with no integration equation.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "lem-sfb-rational-p1-section-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "lem-sfb-rational-p1-section-evaluation"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity, the unit as section, diagonal tensor comparison and class, followed by inverse projection and exchange; ambient unit clause 2.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Functor.map_comp\"",
+   "results": "12 hits, including CategoryTheory.Functor.map_comp and map_comp_assoc in Mathlib.CategoryTheory.Functor.Basic. These give the functoriality used after opening the native normalized unit.",
+   "date": "2026-10-27",
+   "verdict": "Map preservation is available; no declaration identifies the entire normalized native unit with the supported-kernel insertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized projective-line unit factors as kernel insertion followed by inverse projection and exchange; functor map preserves composition",
+   "results": "8 hits, including ProjectiveResolution.iso_inv_naturality, iso_hom_naturality, DoldKan comparison component formulas and Functor.mapProjectiveResolution_pi. None states a derived geometric normalized unit factorization.",
+   "date": "2026-10-27",
+   "verdict": "No match; the literal ambient formula and Functor.map_comp give the source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "unitComponent.*=|map_comp in RationalP1AmbientComposites and WeilConjectures/CategoryTheory",
+   "results": "RationalP1AmbientComposites defines the four-arrow unit and its HEq normalization, but contains no factorization equality. The source category-theory tree has many uses of map_comp, but no equation about this native unit.",
+   "date": "2026-10-27",
+   "verdict": "Retain the ambient unit definition and use its defining paste; no existing native factorization lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1FirstAmbientContraction",
+  "date": "2026-10-27",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "First identity, the unit as section, diagonal tensor comparison and class, followed by inverse projection and exchange; ambient unit clause 2.",
+   "via": [
+    "lem-sfb-rational-p1-first-ambient-contraction",
+    "lem-rational-p1-kernel-contractions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1UnitFactorization",
+  "file": "lean/Sheaf/Paper/RationalP1UnitFactorization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.rationalP1_unit_factorization",
+  "statement": "theorem rationalP1_unit_factorization\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (family : Family l Y)\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (η : M ⟶ (twist (coefficient l c).X (ProjectiveLine Y)\n      (line l c (ProjectiveLine Y))).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n          ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)))\n    (hη : UnitComponentNormalized (coefficient l c).X Y (line l c) (diagram l c Y family)\n      (secondLineComparison l c k p hpl Y) M η)\n    :\n    ∃ (hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M))\n    (hp : IsIso (twistProjectionMap (coefficient l c).X (secondProjection Y)\n      (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n      (secondLineComparison l c k p hpl Y)\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M))),\n    η = firstKernelInsertion (coefficient l c).X Y M\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n      (diagram l c Y family).delta ≫\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map\n        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)\n            (line l c (diagonalSurface Y))\n            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫\n        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫\n        (twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).map\n          (by\n            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward\n            exact @inv _ _ _ _\n              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb))",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261027T034653-L-3672781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261027T034653-L-3672781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-dual-isogeny-degree",
+ "kind": "statement",
+ "title": "Dualizing an isogeny preserves its scheme-theoretic degree",
+ "statement": "Let $k$ be any field [def-weil-field], and let $A,B/k$ be abelian varieties [def-sc-abelian-variety] equipped with normalized dual Poincare data $(A^\\vee,\\mathcal P_A)$ and $(B^\\vee,\\mathcal P_B)$ [def-sfb-abelian-dual-poincare-datum]. Let $u:A\\to B$ be an isogeny [def-sc-isogeny], that is, a surjective group-scheme homomorphism with finite scheme-theoretic kernel [def-sc-group-scheme]. Let $u^\\vee:B^\\vee\\to A^\\vee$ be the homomorphism classifying the rigidified family $(u\\times1)^*\\mathcal P_B$, so that $(1\\times u^\\vee)^*\\mathcal P_A\\simeq(u\\times1)^*\\mathcal P_B$ respecting the identity-axis rigidification; pullbacks are tensor inverse images [def-pc-module-pullback]. Then $u^\\vee$ is an isogeny and\n$$\\deg(u^\\vee)=\\deg(u).$$\nHere the degree is the order of the scheme-theoretic kernel, namely $\\deg(v)=\\dim_k\\Gamma(\\ker v,\\mathcal O_{\\ker v})$. No perfection of $k$, separability of $u$, or restriction on the characteristic is assumed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Theorem 9.1, printed p.41: the kernel of the dual isogeny is the Cartier dual of the kernel. Its coordinate algebra is the linear dual of the original finite-dimensional Hopf algebra, so its order is unchanged. This is the degree consequence, not an assertion about only geometric kernel points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sc-isogeny",
+  "def-sc-group-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=\\ker u$ and $H=\\Gamma(N,\\mathcal O_N)$. The kernel is finite by hypothesis and commutative because $A$ is commutative. The isogeny-degree theorem makes $u$ finite flat; its surjectivity therefore makes it an fpqc cover. Abelian varieties are geometrically integral, so $H^0(A,\\mathcal O_A)=k$. For every affine test $S=\\operatorname{Spec}R$, flat coherent base change along the $k$-algebra $R$ gives $\\Gamma(A\\times S,\\mathcal O)=R$ (every $k$-module is flat). These identifications restrict compatibly, hence hold for every scheme $S$ by gluing its affine opens. This verifies the universal global-functions hypothesis of pointed torsor descent, including when $S$ is nonreduced.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sc-av-commutative",
+    "lem-sc-isogeny-degree",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-h0-proper-variety",
+    "lem-sc-flat-base-change-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1, p.41: preparing finite-kernel descent; global functions are the proper-variety input"
+   }
+  },
+  {
+   "text": "The group-law formulas $(a,n)\\mapsto(a,a+n)$ and $(a,a')\\mapsto(a,a'-a)$ are inverse scheme maps $A\\times N\\simeq A\\times_BA$: the equation $u(a)=u(a')$ says exactly $a'-a\\in N$, functorially over every test algebra. Take $X=A$, $Y=B$, $G=N$, $q=u$, $x_0=0_A$, and $y_0=0_B$ in pointed torsor descent. For every $T$, it identifies characters $N_T\\to\\mathbf G_{m,T}$ with rigidified invertible modules $L$ on $B_T$ whose pullbacks to $A_T$ are trivial. Their normalized descent multipliers on $A_T\\times_TN_T$ are exactly the characters, independent of the $A$ coordinate.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sfb-pointed-torsor-line-character-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1, p.41: descent along the isogeny; Stacks 023T provides effective module descent"
+   }
+  },
+  {
+   "text": "Every line $L$ obtained in step 2 has algebraically trivial geometric fibres. Indeed, fix an algebraically closed geometric test field $\\Omega$ and $b\\in B(\\Omega)$. The nonempty finite fibre $u_\\Omega^{-1}(b)$ has an $\\Omega$-point $a$: choose a maximal ideal in its nonzero finite-dimensional coordinate algebra; its residue field is finite over $\\Omega$, hence is $\\Omega$. Translation by $a$ on $A_\\Omega$ commutes with the $N_\\Omega$-action. The descent multiplier $\\chi(n)$ is unchanged by that translation. Thus the identity between the two trivial lines upstairs respects descent, and full faithfulness of fpqc descent gives $t_b^*L_\\Omega\\simeq L_\\Omega$. The homogeneous-line criterion now gives $L_\\Omega\\sim_{\\rm alg}\\mathcal O_{B_\\Omega}$. This holds for every geometric fibre, exactly the condition in the normalized Poincare datum.",
+   "uses": [
+    "lem-sfb-pointed-torsor-line-character-descent",
+    "lem-pc-finite-extension-alg-closed",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-abelian-homogeneous-line-algebraic-triviality",
+    "def-sfb-abelian-dual-poincare-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1 and Proposition 8.4(b), pp.35–36,41: the descended characters lie in Pic^0"
+   }
+  },
+  {
+   "text": "By the normalized Poincare universal property, a $T$-point of $\\ker(u^\\vee)$ is exactly a rigidified algebraically trivial family on $B_T$ whose pullback to $A_T$ is the rigidified trivial family: the defining equality for $u^\\vee$ identifies its pullback family, and the zero map classifies the trivial family. Steps 2–3 show that these are precisely all the objects $K_u(T)$, hence precisely the characters of $N_T$. The identifications are natural in $T$ and take tensor products to multiplication. Cartier representability therefore identifies the group scheme $\\ker(u^\\vee)$ with $N^D=\\operatorname{Spec}(H^*)$ (the natural maps are inverse by evaluating at the identity maps of the representing schemes). In particular this kernel is finite as a scheme.",
+   "uses": [
+    "def-sfb-abelian-dual-poincare-datum",
+    "lem-sfb-pointed-torsor-line-character-descent",
+    "lem-sfb-finite-commutative-cartier-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1, p.41; Milne Algebraic Groups Theorem 11.12, pp.213–214"
+   }
+  },
+  {
+   "text": "Choose $n\\geq1$ and $v:B\\to A$ with $vu=[n]_A$ and $uv=[n]_B$ by the quasi-inverse lemma. The family $(v\\times1)^*\\mathcal P_A$ is fibrewise algebraically trivial (pullback carries a connected parameter family witnessing algebraic equivalence to such a family) and rigidified; it thus defines $v^\\vee:A^\\vee\\to B^\\vee$. Uniqueness in the Poincare universal property and composition of tensor inverse images give $(vu)^\\vee=u^\\vee v^\\vee$. On every test scheme, multiplicativity of algebraically trivial lines, iterated along the diagonal, gives $[n]_A^*M\\simeq M^{\\otimes n}$. This can be normalized at zero: any discrepancy there is multiplication by a unit on the test scheme, which is removed by rescaling the isomorphism. The tensor law in the Poincare datum then gives $([n]_A)^\\vee=[n]_{A^\\vee}$. Thus $u^\\vee v^\\vee=[n]_{A^\\vee}$.",
+   "uses": [
+    "lem-sfb-abelian-isogeny-quasi-inverse",
+    "def-sfb-abelian-dual-poincare-datum",
+    "def-sfb-line-algebraic-equivalence",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sfb-algebraically-trivial-line-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.6, p.36, I §9 opening, p.41; I Proposition 8.4(c) and Corollary 8.5, pp.35–36"
+   }
+  },
+  {
+   "text": "Since $A^\\vee$ is an abelian variety and $n\\geq1$, multiplication $[n]_{A^\\vee}$ is surjective. Its factorization $[n]_{A^\\vee}=u^\\vee v^\\vee$ makes $u^\\vee$ surjective on underlying points: any preimage under the composite gives a preimage under $u^\\vee$. The hypothesis already makes $u^\\vee$ a group-scheme homomorphism, and step 4 supplies its finite scheme-theoretic kernel. Hence it is an isogeny by definition.",
+   "uses": [
+    "lem-sc-mult-n-isogeny",
+    "def-sc-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1, p.41: surjectivity; I Remark 8.6 and multiplication isogenies"
+   }
+  },
+  {
+   "text": "By step 4 and the definition of degree,\n$$\\deg(u^\\vee)=\\dim_k\\Gamma(N^D,\\mathcal O)=\\dim_k H^*.$$\nChoose a $k$-basis $h_1,\\ldots,h_d$ of $H$; the coefficient functionals $h_1^*,\\ldots,h_d^*$ form a basis of $H^*$, because $f=\\sum_i f(h_i)h_i^*$ for every linear functional $f$. Therefore $\\dim_kH^*=d=\\dim_kH=\\deg(u)$. This computation uses coordinate algebras, so it retains the length of nonreduced kernels.",
+   "uses": [
+    "def-sc-isogeny",
+    "lem-sfb-finite-commutative-cartier-representability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 9.1, p.41: degree consequence of Cartier duality; Milne Algebraic Groups §11c, p.212"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-isogeny",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sfb-line-algebraic-equivalence",
+  "lem-pc-finite-extension-alg-closed",
+  "lem-pc-fpqc-descent",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-av-commutative",
+  "lem-sc-flat-base-change-coherent",
+  "lem-sc-isogeny-degree",
+  "lem-sc-kernel-subgroup",
+  "lem-sc-mult-n-isogeny",
+  "lem-sfb-abelian-homogeneous-line-algebraic-triviality",
+  "lem-sfb-abelian-isogeny-quasi-inverse",
+  "lem-sfb-algebraically-trivial-line-multiplicativity",
+  "lem-sfb-finite-commutative-cartier-representability",
+  "lem-sfb-pointed-torsor-line-character-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Theorem 9.1, printed p.41: explicit character-descent proof supplied by NH, since Milne gives a reference rather than a proof; Stacks 023T for descent and Milne Algebraic Groups §11c for Cartier representability."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isogeny|Poincare|dualAbelian",
+   "results": "0 hits. Mathlib subdirectory: AlgebraicGeometry. Read signatures: general module duality, scheme ideal-sheaf kernels, and categorical pullbacks do not state duality of abelian-variety isogenies or equality of their finite-kernel orders.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback on dual abelian varieties preserves the degree of isogenies including inseparable isogenies",
+   "results": "8 hits: CategoryTheory.IsPullback.of_iso', AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct, AlgebraicGeometry.Scheme.Modules.pullbackCongr, CategoryTheory.MorphismProperty.instRespectsIsoPullbacks, Seminorm.pullback, IsBaseChange.toDual_apply, CategoryTheory.Limits.instIsIsoPullbackComparison. Read signatures: general module duality, scheme ideal-sheaf kernels, and categorical pullbacks do not state duality of abelian-variety isogenies or equality of their finite-kernel orders.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "0 hits. Read signatures: general module duality, scheme ideal-sheaf kernels, and categorical pullbacks do not state duality of abelian-variety isogenies or equality of their finite-kernel orders.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of an isogeny of abelian varieties is an isogeny of the same degree in every characteristic",
+   "results": "8 hits: IsBaseChange.dual, IsBaseChange.toDual_apply, CharacterModule.dual_comp, CharacterModule.congr, LinearEquiv.dualMap_trans, CharacterModule.dual_bijective_iff_bijective, LinearEquiv.dualMap_apply, LinearEquiv.dualMap. Read signatures: general module duality, scheme ideal-sheaf kernels, and categorical pullbacks do not state duality of abelian-variety isogenies or equality of their finite-kernel orders.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the dual homomorphism of an isogeny has the same scheme theoretic length as the original kernel",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso, AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.Hom.ker_comp, RootPairing.ker_copolarization_eq_ker_corootForm, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.Hom.le_ker_comp. Read signatures: general module duality, scheme ideal-sheaf kernels, and categorical pullbacks do not state duality of abelian-variety isogenies or equality of their finite-kernel orders.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*isogen|isogen.*dual|CartierDual|AbelianVariety",
+   "results": "0 hits. Read signatures: general module duality, scheme ideal-sheaf kernels, and categorical pullbacks do not state duality of abelian-variety isogenies or equality of their finite-kernel orders.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual isogeny of abelian varieties has the same degree including inseparable kernels",
+   "results": "8 hits: IsBaseChange.dual, CharacterModule.congr, IsBaseChange.toDual_apply, LinearEquiv.dualMap_trans, LinearMap.finrank_range_dualMap_eq_finrank_range, CharacterModule.dual_comp, Subspace.dual_finrank_eq, RootPairing.Hom.weight_coweight_transpose_apply. Module duality and pullback functors do not state dual abelian variety isogeny degree equality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of line bundles along an isogeny induces an isogeny of dual abelian varieties of equal scheme theoretic degree",
+   "results": "8 hits: Bundle.Pullback, VectorField.mpullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp, Bundle.Pullback.lift, AlgebraicGeometry.pullbackRestrictIsoRestrict. Module duality and pullback functors do not state dual abelian variety isogeny degree equality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "0 hits: none. Module duality and pullback functors do not state dual abelian variety isogeny degree equality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*isogen|isogen.*dual|CartierDual",
+   "results": "0 hits: none. Module duality and pullback functors do not state dual abelian variety isogeny degree equality.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-poincare-biduality",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree.",
+   "via": [
+    "lem-sfb-abelian-poincare-biduality",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dual-isogeny-degree",
+  "worker": "stage1",
+  "summary": "Read Milne I Theorem 9.1 and its reference-only proof. Wrote the scheme-valued character-descent argument, checked geometric algebraic triviality and all-parameter rigidifications, and proved surjectivity via an integer quasi-inverse; degree is a dual-basis calculation. Added three independent structural prerequisites, not the dual-isogeny theorem itself. No statement change.",
+  "blueprint": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree. Realizes the degree cancellation input in the biduality auxiliary below the current direct-image stability proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic input to the finite-group character-descent proof: FPQC descent for quasi-coherent modules. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Generic input to the finite-group character-descent proof: Global sections of a proper scheme. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic input to the finite-group character-descent proof: Identity and composition for tensor-formula module pullback. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic input to the finite-group character-descent proof: Abelian varieties are the complete group varieties. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Generic input to the finite-group character-descent proof: Abelian varieties are commutative. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "Generic input to the finite-group character-descent proof: Flat base change for coherent cohomology. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "Generic input to the finite-group character-descent proof: The degree of an isogeny. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic input to the finite-group character-descent proof: Kernels are closed subgroup schemes. The current stability unit contains no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-mult-n-isogeny",
+    "why": "Generic input to the finite-group character-descent proof: Multiplication by $n$ is surjective with finite kernel. The current stability unit contains no replacement for this algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-av-commutative",
+  "lem-sc-flat-base-change-coherent",
+  "lem-sc-isogeny-degree",
+  "lem-sc-kernel-subgroup",
+  "lem-sc-mult-n-isogeny"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NH-cbbc50e8b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-cbbc50e8b (reviewer sub-agent of L); spot-checked: Read in full: the item's 7 steps, the 3 new nodes, every cited statement, and the sources. Milne AV I Th 9.1 p.41 defines α^∨ the same way the item does and gives the Cartier-dual kernel; Milne gives only a reference for the proof, so proof_origin=agent is right. Remark 8.6 p.36 together with AG 11.32 p.221 gives the quasi-inverse node. AG §11c Lemma 11.11 and Th 11.12 match the Cartier node's transposed Hopf structure exactly. Stacks 023T: the descent.tex label exists. Step checks: (1) flat base change for the k-algebra R plus H^0(A,O)=k gives the universal global-functions hypothesis. (2) The torsor map (a,n)->(a,a+n) checked on points. (3) The Ω-point in the fibre, t_a commuting with the N-action, full faithfulness, and the homogeneous-line criterion give the Poincaré geometric-fibre condition. (4) ker u^∨(T)=K_u(T)=Hom(N_T,G_m)=N^D(T), natural and multiplicative, then Yoneda. (5) (vu)^∨=u^∨v^∨ checked by the pullback chain; multiplicativity iterated with a unit rescale gives [n]^∨=[n]. (6) Surjectivity, using A^∨ an abelian variety from the datum. (7) Dual basis, correctly marked elementary. The new nodes are true and tested on small cases (trivial G, μ_p/Z/p, α_p, identity and [p]). None restates the item. No duplicates found: the Cartier-dual, annihilator, character-Picard and biduality hits were inspected. No cycle (14600-node closure). No SGA citation. Batch-5: lem-pc-h0-proper-variety, lem-sc-mult-n-isogeny, lem-sfb-abelian-homogeneous-line-algebraic-triviality and lem-sfb-algebraically-trivial-line-multiplicativity are general abelian-variety and algebraic-geometry facts. Their closures reach only generic trf definitions and lemmas, not steps of the LTF or PD proofs, so they are accepted. Generic tool_uses accepted. FIX (B3): lem-sfb-pointed-torsor-line-character-descent cites [def-weil-surjective-morphism] in its statement but not in stmt_deps; added in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.DualIsogenyDegree",
+  "declaration": "AlgebraicGeometry.IsIsogeny.dual_isogenyDegree_eq",
+  "declarations": [
+   "AlgebraicGeometry.abelianSourceRigidificationPullback",
+   "AlgebraicGeometry.IsIsogeny.dual_isogenyDegree_eq"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/DualIsogenyDegree.lean",
+  "statement": "theorem IsIsogeny.dual_isogenyDegree_eq {k : Type u} [Field k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (DA : AbelianDualPoincareDatum A) (DB : AbelianDualPoincareDatum B) (u : A ⟶ B) [IsIsogeny u] (uDual : DB.dual ⟶ DA.dual) [IsMonHom uDual] (hDual : ∃ i : (Scheme.Modules.pullback (A ◁ uDual).left).obj DA.poincare ≅ (Scheme.Modules.pullback (u ▷ DB.dual).left).obj DB.poincare, (Scheme.Modules.pullback (abelianIdentityAxis A DB.dual).left).map i.hom ≫ (abelianSourceRigidificationPullback u DB.dual DB.poincare DB.rigidification).hom = (abelianRigidificationPullback A DA.dual DB.dual DA.poincare DA.rigidification uDual).hom) : IsIsogeny uDual ∧ isogenyDegree uDual = isogenyDegree u",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f8fbbf1fb",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, Milne AV I Th 9.1/§9, all 6 stmt_deps and live DualPoincareDatum/GroupScheme.Defs/AbelianVariety.Defs. Lean matches clause by clause: field k, abelian A,B with GrpObj, AbelianDualPoincareDatum DA DB, IsIsogeny u, uDual : DB.dual ⟶ DA.dual hom, hDual = exactly the datum's universal clause for (u×1)^*P_B with pulled-back rigidification (pins uDual uniquely; satisfiable), conclusions IsIsogeny uDual ∧ isogenyDegree (finrankΓ of scheme kernel) equal. Helper abelianSourceRigidificationPullback canonical (pullbackComp, congr via lift_whiskerRight+IsMonHom.one_hom, r), not hollow. lean.statement verbatim; only item lean field changed; docstrings with source+blueprint+7 steps; proof sorry; report sections present. Edge cases: identity, inseparable/nonreduced kernels, imperfect k, single universe. H4: ClassifiesAbelianDualHom in PoincareBiduality is the same predicate but biduality cites this item (cycle), so inline restatement correct – advisory. Advisory: def-pc-module-pullback recorded as tensorPullback vs Scheme.Modules.pullback used consistently with the datum; redundant IsAlgClosed import. No compile (no change)."
+ }
+}

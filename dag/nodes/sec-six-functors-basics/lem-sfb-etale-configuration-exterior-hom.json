@@ -1,0 +1,437 @@
+{
+ "id": "lem-sfb-etale-configuration-exterior-hom",
+ "kind": "statement",
+ "title": "Exterior free etale sheaf represents alternating configuration sections",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], let $X$ be an algebraic space over $S$ with its small etale site [def-trf-algebraic-space], and let $f:U\\to X$ be a representable surjective etale morphism from a scheme [def-weil-etale-morphism]. Assume that $f$ is separated, meaning its diagonal is a closed immersion [def-weil-closed-immersion]. Let $E$ be the free abelian sheaf on $U/X$: the sheafification of the presheaf $V\\mapsto\\bigoplus_{a\\in\\operatorname{Hom}_X(V,U)}\\mathbf Z e_a$ on etale scheme objects $V\\to X$, with restriction $e_a\\mapsto e_{a|_{V\\prime}}$ [def-weil-pbc-sheafification]. Let $\\epsilon:E\\to\\underline{\\mathbf Z}$ send each $e_a$ to $1$. Write $\\bigwedge^nE$ for the sheafification of sectionwise exterior powers over $\\underline{\\mathbf Z}$, with exterior powers as in [def-weil-pbc-exterior-algebra] and tensor as in [def-pur-sheaf-tensor-product]. For $p\\geq0$ put $W_p=U^{\\times_X(p+1)}\\setminus\\bigcup_{i<j}\\{u_i=u_j\\}$ [lem-trf-space-fibre-products-etale-covers]; each equality locus is the pullback of the diagonal. Then $W_p$ is an open and closed subscheme, etale over $X$, and coordinate permutation gives a free action of $\\mathfrak S_{p+1}$ on it. For every abelian sheaf $F$ on $X_{\\mathrm{et}}$ there is a natural isomorphism of abelian groups $$\\operatorname{Hom}_{\\operatorname{Ab}(X_{\\mathrm{et}})}(\\bigwedge^{p+1}E,F)\\cong\\{s\\in\\Gamma(W_p,F|_{W_p}):\\sigma^*s=\\operatorname{sgn}(\\sigma)s\\text{ for all }\\sigma\\in\\mathfrak S_{p+1}\\}.$$ Here restriction and sections on etale algebraic spaces have their small-site meaning [def-trf-algebraic-space, def-weil-pbc-sites-and-cohomology]. The isomorphism sends $h$ to evaluation on the wedge of the $p+1$ tautological lifts of $U$ over $W_p$. It commutes with every morphism $F\\to F\\prime$; in particular it identifies the cochain maps obtained by applying either side to a complex of abelian sheaves. No division by $(p+1)!$ is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0726, lemma-compute, including its open-and-closed distinct-locus assertion and its functorial Hom identification."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=p+1$ and $T=U^{\\times_X n}$. Repeatedly use [lem-trf-space-fibre-products-etale-covers] to represent $T$ by a scheme (each new factor is the base change of the representable etale $U\\to X$ to a scheme). Its map to $X$ is etale by base change and composition in [lem-trf-space-chartwise-etale-permanence]. The diagonal of $U\\to X$ is open and closed by [lem-sfb-space-separated-etale-diagonal-complement]. For each pair $i<j$, pull it back along $T\\to U\\times_X U$. The scheme base-change statements [lem-weil-pbc-open-immersion-base-change, lem-weil-pbc-closed-immersion-base-change] make the equality locus $D_{ij}$ open and closed in $T$. Thus $W_p=T\\setminus\\bigcup_{i<j}D_{ij}$ is an open and closed subscheme. On every scheme test over $X$, its map is an open restriction of an etale scheme map and hence etale by [lem-a1-etale-open-restriction]. Permutations preserve the excluded union. If a nonidentity permutation fixes a tuple, choose a moved index: equality of that coordinate and the moved coordinate forces the tuple into some $D_{ij}$. Its fixed subspace in $W_p$ is therefore empty. This proves freeness, including $n=1$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-separated-etale-diagonal-complement",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-a1-etale-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0726 (lemma-compute), proof: clopen diagonal, distinct-tuple quotient and its universal sign relations; expanded here by sectionwise evaluation and gluing."
+   }
+  },
+  {
+   "text": "Let $P(V)=\\mathbf Z^{(\\operatorname{Hom}_X(V,U))}$, so $E=P^\\#$. Apply [lem-sfb-alternating-sheafification-universal-property] to the constant presheaf of rings $\\mathbf Z$, its sheafification $\\underline{\\mathbf Z}$, $P$ and the integer $n$. Abelian sheaves are modules over $\\underline{\\mathbf Z}$: on locally constant integer sections the action is integer multiplication locally, glued uniquely by the sheaf axiom [def-weil-pbc-sites-and-cohomology]; every additive morphism preserves this action. Thus a morphism $h:\\bigwedge^n E\\to F$ is equivalent to a restriction-compatible family of alternating $\\mathbf Z$-multilinear maps $P(V)^n\\to F(V)$, with precisely the wedge evaluation formula in that node. No local freeness or finite fibre hypothesis is needed.",
+   "uses": [
+    "lem-sfb-alternating-sheafification-universal-property",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0726 (lemma-compute), proof: clopen diagonal, distinct-tuple quotient and its universal sign relations; expanded here by sectionwise evaluation and gluing."
+   }
+  },
+  {
+   "text": "Given $h$, evaluate its corresponding alternating family on the $n$ tautological generators over $W_p$ to obtain $t_h\\in F(W_p)$. Pullback along a coordinate permutation permutes these generators. The exterior relations in [def-weil-pbc-exterior-algebra] give multiplication by $\\operatorname{sgn}(\\sigma)$ (write a permutation as transpositions), so $t_h$ is anti-invariant. Conversely let $t\\in F(W_p)$ be anti-invariant. For a tuple $a=(a_1,\\ldots,a_n)$ of maps $V\\to U$ over $X$, let $V_a=V\\times_T W_p$, an open and closed subscheme by step 1 and the immersion base-change statements [lem-weil-pbc-open-immersion-base-change, lem-weil-pbc-closed-immersion-base-change]. Define $c_V(a)\\in F(V)$ by pulling back $t$ on $V_a$ and taking zero on its open complement. The two sections glue uniquely by the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology], since their intersection is empty and $F(\\varnothing)=0$. Base change of this decomposition proves compatibility with restriction. Permuting $a$ leaves $V_a$ unchanged and changes the map to $W_p$ by that permutation, so $c_V(a\\circ\\sigma)=\\operatorname{sgn}(\\sigma)c_V(a)$. If $a_i=a_j$ as maps, $V_a$ is empty and $c_V(a)=0$.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0726 (lemma-compute), proof: clopen diagonal, distinct-tuple quotient and its universal sign relations; expanded here by sectionwise evaluation and gluing."
+   }
+  },
+  {
+   "text": "For $x_i=\\sum_a m_{i,a}e_a\\in P(V)$ define\n$$b_V(x_1,\\ldots,x_n)=\\sum_{a_1,\\ldots,a_n}\\left(\\prod_{i=1}^n m_{i,a_i}\\right)c_V(a_1,\\ldots,a_n).$$\nAll sums are finite and the coefficients of a free abelian group element are unique. This is multilinear by distributivity. If $x_i=x_j$, partition the summands by exchanging $a_i,a_j$. A summand fixed by this exchange has $a_i=a_j$ and is zero. The remaining summands pair with equal integer coefficients and opposite values of $c_V$, hence cancel. Thus $b_V$ is alternating, even when $F(V)$ has 2-torsion. Under restriction, distinct basis labels may coalesce, but expansion and distributivity collect their coefficients to give exactly the restriction of this same finite sum. Thus $(b_V)_V$ is restriction-compatible. The bijection of [lem-sfb-alternating-sheafification-universal-property] now gives a unique $h_t:\\bigwedge^nE\\to F$ with $h_t(e_{a_1}\\wedge\\cdots\\wedge e_{a_n})=c_V(a)$.",
+   "uses": [
+    "lem-sfb-alternating-sheafification-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0726 (lemma-compute), proof: clopen diagonal, distinct-tuple quotient and its universal sign relations; expanded here by sectionwise evaluation and gluing."
+   }
+  },
+  {
+   "text": "The map $W_p\\to T$ defined by its tautological tuple factors through $W_p$ itself, so its distinct part is all of $W_p$. The construction therefore gives $t_{h_t}=t$. For the other composite start with $h$ and a tuple $a$ over $V$. On $V_a$, restriction of $h$ evaluated on the basis wedge is the pullback of $t_h$. On the complement of $V_a$, the open equality loci $a_i=a_j$ form a finite cover; on each one the wedge is zero by [def-weil-pbc-exterior-algebra]. The sheaf axiom [def-weil-pbc-sites-and-cohomology] therefore makes the evaluation zero throughout this complement. Thus it is exactly $c_V(a)$. Multilinearity gives equality on every tuple in $P(V)^n$, and the uniqueness assertion of [lem-sfb-alternating-sheafification-universal-property] gives $h_{t_h}=h$. Both constructions preserve addition, so the inverse bijections are isomorphisms of abelian groups.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-alternating-sheafification-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0726 (lemma-compute), proof: clopen diagonal, distinct-tuple quotient and its universal sign relations; expanded here by sectionwise evaluation and gluing."
+   }
+  },
+  {
+   "text": "For a morphism $\\phi:F\\to F'$ the evaluation formula gives $t_{\\phi\\circ h}=\\phi_{W_p}(t_h)$ directly. In the inverse construction $\\phi$ commutes with restriction, sends zero to zero, and preserves each finite integer linear combination, so the same identity also respects the constructed inverse. Hence the isomorphism is natural in every abelian sheaf. Applying it to each differential $F^q\\to F^{q+1}$ gives the claimed equality of cochain maps. Every formula used only integer multiplication, finite addition, restriction and gluing; no factorial was inverted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0726 (lemma-compute), proof: clopen diagonal, distinct-tuple quotient and its universal sign relations; expanded here by sectionwise evaluation and gluing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-a1-etale-open-restriction",
+  "lem-sfb-alternating-sheafification-universal-property",
+  "lem-sfb-space-separated-etale-diagonal-complement",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0726 (lemma-compute), explicit expansion of its sign-quotient proof using clopen zero extension instead of a stalkwise quotient argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from an exterior power of the free abelian sheaf of an etale cover is alternating sections on the locus of pairwise distinct tuples",
+   "results": {
+    "t": "2026-10-23T22:07:53Z",
+    "tool": "leanfinder",
+    "query": "Hom from an exterior power of the free abelian sheaf of an etale cover is alternating sections on the locus of pairwise distinct tuples",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "PresheafOfModules.DifferentialsConstruction.instHasDifferentials",
+     "ModuleCat.exteriorPower.desc_mk",
+     "ModuleCat.exteriorPower.mk",
+     "PresheafOfModules.DifferentialsConstruction.isUniversal'",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+     "PresheafOfModules.DifferentialsConstruction.derivation'"
+    ],
+    "digest": "f1cec856b1e00691"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections transforming by the sign character on distinct configurations represent Hom from exterior powers of an etale free sheaf",
+   "results": {
+    "t": "2026-10-23T22:08:02Z",
+    "tool": "leanfinder",
+    "query": "Sections transforming by the sign character on distinct configurations represent Hom from exterior powers of an etale free sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.freeMap",
+     "SheafOfModules.Presentation.mapGenerators",
+     "SheafOfModules.sectionMap_freeMap_freeSection",
+     "SheafOfModules.GeneratingSections.π",
+     "ModuleCat.exteriorPower",
+     "ModuleCat.exteriorPower.functor",
+     "exteriorPower.presentation.relationsSolutionEquiv",
+     "ModuleCat.exteriorPower.desc_mk"
+    ],
+    "digest": "a1c1347cf374a003"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"Sheaf\"",
+   "results": {
+    "t": "2026-10-23T22:08:03Z",
+    "tool": "loogle",
+    "query": "\"exteriorPower\", \"Sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "anti.invariant|alternating.*[Ss]heaf|[Ss]heaf.*exterior",
+   "results": {
+    "t": "2026-10-23T22:08:03Z",
+    "tool": "grep",
+    "query": "anti.invariant|alternating.*[Ss]heaf|[Ss]heaf.*exterior",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exterior powers of the free abelian sheaf of an etale covering represent alternating sections on distinct tuples",
+   "results": {
+    "t": "2026-10-23T22:08:03Z",
+    "tool": "leansearch",
+    "query": "Exterior powers of the free abelian sheaf of an etale covering represent alternating sections on distinct tuples",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.exteriorPower",
+     "ModuleCat.exteriorPower.iso₀",
+     "ModuleCat.exteriorPower",
+     "term_[⋀^_]→ₗ[_]_",
+     "exteriorPower.alternatingMapLinearEquiv_apply_ιMulti",
+     "ModuleCat.exteriorPower.mk",
+     "exteriorPower.presentation",
+     "exteriorPower.toTensorPower"
+    ],
+    "digest": "27e161deedb64c55"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from exterior powers of a free abelian etale sheaf equals alternating sections on pairwise distinct configurations",
+   "results": {
+    "t": "2026-10-23T22:30:54Z",
+    "tool": "leanfinder",
+    "query": "Hom from exterior powers of a free abelian etale sheaf equals alternating sections on pairwise distinct configurations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.exteriorPower.desc_mk",
+     "ModuleCat.exteriorPower.desc",
+     "exteriorPower.alternatingMapLinearEquiv_apply_ιMulti",
+     "ModuleCat.exteriorPower.mk",
+     "ExteriorAlgebra.liftAlternating_apply_ιMulti",
+     "exteriorPower.ιMulti",
+     "ExteriorAlgebra.liftAlternating_comp_ιMulti",
+     "exteriorPower.alternatingMapLinearEquiv"
+    ],
+    "digest": "5994a0c06479fb14"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module exterior powers or free sheaves on a fixed index set; none states the configuration-section identification"
+  },
+  {
+   "tool": "grep",
+   "query": "anti.invariant|alternating.*[Ss]heaf|[Ss]heaf.*exterior",
+   "results": {
+    "t": "2026-10-23T22:32:37Z",
+    "tool": "grep",
+    "query": "anti.invariant|alternating.*[Ss]heaf|[Ss]heaf.*exterior",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module exterior powers or free sheaves on a fixed index set; none states the configuration-section identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exterior powers of free abelian sheaves represent alternating sections on distinct tuples",
+   "results": {
+    "t": "2026-10-23T22:32:37Z",
+    "tool": "leansearch",
+    "query": "Exterior powers of free abelian sheaves represent alternating sections on distinct tuples",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.exteriorPower",
+     "ModuleCat.exteriorPower.iso₀",
+     "ModuleCat.exteriorPower.mk",
+     "ModuleCat.exteriorPower",
+     "exteriorPower.alternatingMapLinearEquiv_symm_apply",
+     "exteriorPower.alternatingMapLinearEquiv_apply_ιMulti",
+     "term_[⋀^_]→ₗ[_]_",
+     "exteriorPower.presentation"
+    ],
+    "digest": "f37dbd377c624b8a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module exterior powers or free sheaves on a fixed index set; none states the configuration-section identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"Sheaf\"",
+   "results": {
+    "t": "2026-10-23T22:32:38Z",
+    "tool": "loogle",
+    "query": "\"exteriorPower\", \"Sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module exterior powers or free sheaves on a fixed index set; none states the configuration-section identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sign equivariant sections on ordered configurations are homomorphisms out of the wedge of a free sheaf",
+   "results": {
+    "t": "2026-10-23T22:33:56Z",
+    "tool": "leanfinder",
+    "query": "Sign equivariant sections on ordered configurations are homomorphisms out of the wedge of a free sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.GeneratingSections.π",
+     "SheafOfModules.freeSection",
+     "SheafOfModules.ιFree",
+     "SheafOfModules.sectionMap_freeMap_freeSection",
+     "SheafOfModules.freeMap",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "SheafOfModules.Presentation.mapGenerators",
+     "SheafOfModules.freeHomEquiv"
+    ],
+    "digest": "b67e6ab13ab4aa73"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module exterior powers or free sheaves on a fixed index set; none states the configuration-section identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-alternating-sign-cohomology-spectral",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, displayed E_1 page supplied by Tag 0728, using the unordered distinct-tuple quotients and sign line of Tag 0727. Supporting input: Tag 0726, lemma-compute, including its open-and-closed distinct-locus assertion and its functorial Hom identification.",
+   "via": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral",
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-configuration-exterior-hom",
+  "worker": "stage1",
+  "summary": "Checked 0726 against the full item, retained the statement and all imported provenance, reused the existing clopen diagonal and scheme permanence nodes, and expanded the sign quotient into mutually inverse tuple evaluation and clopen zero-extension maps. The only new node is the general finite-variable alternating universal property through module sheafification; it is stated only and searched with logged services. Explicit cancellation handles arbitrary torsion coefficients.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, displayed E_1 page supplied by Tag 0728, using the unordered distinct-tuple quotients and sign line of Tag 0727. Supporting input: Tag 0726, lemma-compute, including its open-and-closed distinct-locus assertion and its functorial Hom identification. This split realizes the whole 0726 supporting input without changing the unit route; no blueprint node duplicates the item or the new general multilinear statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic base-change and composition of etale morphisms, used only to show finite products are etale; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-606f21823",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-606f21823 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-alternating-sheafification-universal-property and every cited statement in full. The item agrees with Stacks 0726 (lemma-compute, spaces-cohomology.tex) hypothesis by hypothesis: surjective etale separated f, the free sheaf equal to f_!Z, Ab(X_et) coefficients, the wedge taken over constant Z; no coefficient change. Step 1: T is a scheme via trf-space-fibre-products; T->X is etale via chartwise permanence; the diagonal is clopen by sfb-diagonal-complement; each D_ij is clopen by the open/closed base-change leaves; W_p->X is etale by a1-etale-open-restriction; freeness checked on T-points. Step 2: abelian sheaves are Z-module sheaves via the sheaf axiom. Steps 3-5: the clopen zero extension c_V(a) is correct; I checked the alternating cancellation, including 2-torsion; both composites hold, using the cover of the complement by equality loci and uniqueness in the new node. Step 6 is elementary naturality. proof_deps equal the union of uses. Edge cases tested: p=0 (Yoneda), empty W_p, 2F=0, merging labels. The new node is a true general algebraic lemma, checked by local lifting through sheafification, with n=0 given by global sections; it is statement-only and has all three search kinds. It is not a duplicate: the def-sc-sheaf-exterior-power family is Zariski and lem-trf-free-module-sheaf-universal-property is linear only. It does not restate the item, whose geometry stays in the item. Both batch-5 flags are generic algebraic-space foundations, outside the trace-formula and Poincare-duality assumptions, so I accepted them: chartwise etale permanence is a declared tool use, and the diagonal-complement node reaches the trace-formula chapter only through def-trf-algebraic-space. lem-trf-space-fibre-products-etale-covers (already a stmt_dep on the base) is a generic tool used in step 1; it is not declared in split_report.tool_uses, a non-blocking route note. No SGA. blueprint.from.node is null, inherited from the parent chain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleConfigurationExteriorHom",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_configuration_exterior_hom",
+  "declarations": [
+   "AddCommGrpCat.integralExteriorPower",
+   "AlgebraicGeometry.AlgebraicSpace.configurationFreeSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.configurationAugmentation",
+   "AlgebraicGeometry.AlgebraicSpace.configurationExteriorSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.configurationGenerator",
+   "AlgebraicGeometry.AlgebraicSpace.configurationWedge",
+   "AlgebraicGeometry.AlgebraicSpace.configurationDistinctSet",
+   "AlgebraicGeometry.AlgebraicSpace.configurationAntiInvariant",
+   "AlgebraicGeometry.AlgebraicSpace.etale_configuration_exterior_hom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleConfigurationExteriorHom.lean",
+  "statement": "theorem etale_configuration_exterior_hom {S : Scheme.{u}} (X : AlgebraicSpace S) (U : X.EtaleSite) (hsurj : IsSurjective U.obj.hom) (hsep : IsSeparatedPresheafMap U.obj.hom) (p : ℕ) : ∃ (T : X.EtaleSite) (pr : Fin (p + 1) → (T ⟶ U)), Nonempty (IsLimit (Fan.mk T pr)) ∧ ∃ (W : X.EtaleSite) (j : W ⟶ T) (ρ : Equiv.Perm (Fin (p + 1)) →* Aut W), IsOpenImmersion ((X.etaleForget).map j) ∧ IsClosedImmersion ((X.etaleForget).map j) ∧ Set.range ((X.etaleForget).map j).base = configurationDistinctSet X U T (p + 1) pr ∧ (∀ (σ : Equiv.Perm (Fin (p + 1))) (i : Fin (p + 1)), (ρ σ).hom ≫ j ≫ pr i = j ≫ pr (σ.symm i)) ∧ (∀ (V : Scheme.{u}) (a : V ⟶ (X.etaleForget).obj W) (σ : Equiv.Perm (Fin (p + 1))), Nonempty V → a ≫ (X.etaleForget).map (ρ σ).hom = a → σ = 1) ∧ ∃ e : ∀ F : Sheaf X.etaleTopology AddCommGrpCat.{u + 1}, (configurationExteriorSheaf X U (p + 1) ⟶ F) ≃+ configurationAntiInvariant X W (p + 1) ρ F, (∀ (F : Sheaf X.etaleTopology AddCommGrpCat.{u + 1}) (h : configurationExteriorSheaf X U (p + 1) ⟶ F), (e F h).val = h.hom.app (op W) (configurationWedge X U W (p + 1) (fun i ↦ j ≫ pr i))) ∧ (∀ (F G : Sheaf X.etaleTopology AddCommGrpCat.{u + 1}) (φ : F ⟶ G) (h : configurationExteriorSheaf X U (p + 1) ⟶ F), (e G (h ≫ φ)).val = φ.hom.app (op W) (e F h).val)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The theorem jointly specifies the scheme fibre product by its product cone in the small etale site, its clopen distinct locus, the free coordinate action, and the additive Hom equivalences with tautological-wedge evaluation and naturality. The helper definitions construct the free sheaf, augmentation, integral exterior sheaf, generators, wedge, equality-locus complement and sign subgroup from Mathlib functors; no data are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9154641db",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node and Stacks 0726. Hypotheses: U : X.EtaleSite, IsSurjective, IsSeparatedPresheafMap (diagonal representable by closed immersions). E = sheafified ulift-Yoneda free presheaf. The wedge over Z gives the same sheafification as over the constant Z, since the kernel is locally zero. T is a Fan limit in the etale site, equivalent to the fibre product. The distinct set uses Scheme equalizers, which equal the pulled-back relative diagonal. W is pinned as clopen by open+closed immersion and range. rho has a coordinate formula consistent with Aut_mul_def and is unique. Freeness holds on nonempty scheme points. e is pinned by tautological-wedge evaluation. Naturality holds; sign anti-invariance holds with 2-torsion; p=0 and empty W are fine. Universe u+1 coefficients are standard. No name clashes, no duplicate notions, no hollow helpers; H8 docstrings OK; the only change against live is the lean field. Advisories: the second-reading section is not a reading (dispatcher policy); IsSeparatedPresheafMap owner def-sfb-presheaf-map-separated-diagonal is not in stmt_deps; the CochainTensorUniverses import is unused."
+ }
+}

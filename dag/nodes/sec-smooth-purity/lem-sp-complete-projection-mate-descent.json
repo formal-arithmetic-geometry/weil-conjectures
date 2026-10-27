@@ -1,0 +1,388 @@
+{
+ "id": "lem-sp-complete-projection-mate-descent",
+ "kind": "statement",
+ "title": "Descent of the actual compact-support projection mate along completion",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$ [def-weil-l-adic-coefficient-extension]. On each small pro-etale site put $A_{n,T}=(O/\\ell^n)_T$ and $R_T=\\varprojlim_n A_{n,T}$, identified with the pulled-back integral coefficient sheaf [sk-def-sp-coefficient-towers, sk-prop-sfb-qlbar-colimit-x]. Write $r_TN=(N\\otimes^L_{R_T}A_{n,T})_n$ for derived reduction [det-sp-reduction-tower-normalized], and $L_T=R\\varprojlim_n\\operatorname{Res}_n$ for total derived inverse limit of strict towers after restriction of scalars to $R_T$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. All derived categories are ordinary unbounded module derived categories; tower operations are the simultaneous section-model operations of [lem-coef-semilinear-derived-sections], with exact evaluations [det-sp-coefficient-towers-abelian].\n\nUse the normalized descent-map presentation [def-sp-complete-projection-descent-maps]. Let $k$ be a field of characteristic $p>0$ with $p\\ne\\ell$ and let $f:X\\to Y$ be a morphism of separated finite-type $k$-schemes [sk-def-sfb-dc-setting] with compactification $c=(j:X\\hookrightarrow\\bar X,p:\\bar X\\to Y)$ [def-weil-compactifications-refinements]. Put $F_R=Rp_{*,R}j_{!,R}$, $F_\\bullet=Rp_{*,\\bullet}j_{!,\\bullet}$, and use ordinary derived module pullback and tensor [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom, sk-def-sfb-module-derived-lower-shriek]. Let $M\\in D(R_X)$ and $K\\in D(R_Y)$ be derived complete with bounded-below reduction towers. Put $U=F_R(M\\otimes^Lf_R^*K)$ and $V=(F_RM)\\otimes^LK$. Assume $M\\otimes^Lf_R^*K,U,V$ are derived complete with bounded-below reduction towers. Assume the canonical compactification/limit comparisons identify $F_RN$ with $L_YF_\\bullet r_XN$ and the canonical reconstruction counits identify $r_YF_RN$ with $F_\\bullet r_XN$, for $N=M$ and $N=M\\otimes^Lf_R^*K$; comparisons and augmentations here have the strict-diagram normalization of total derived limit, not chosen level isomorphisms.\n\nLet $\\theta:F_\\bullet(r_XM)\\otimes^Lr_YK\\to F_\\bullet(r_XM\\otimes^Lf_\\bullet^*r_YK)$ be the proper counit projection mate followed by the inverse open unit projection mate on these systems. Suppose both system projection mates are invertible. The canonical tensor/scalar and pullback/scalar comparisons and the specified reconstruction counits identify its source with $r_YV$ and its target with $r_YU$ as derived systems. Write $\\widetilde\\theta:r_YV\\to r_YU$ for this composite.\n\nThe ordinary integral compact-support projection transformation $\\pi_R:V\\to U$, formed from the same proper counit and inverse open unit projection mates, satisfies the equality of derived morphisms\n$$\\pi_R=\\eta_U^{-1}\\circ L_Y(\\widetilde\\theta)\\circ\\eta_V.$$\nThis equality is natural in $M,K$ and is normalized by those actual units, counits and quotient augmentations. Consequently $\\pi_R$ is invertible, with inverse obtained by replacing $\\widetilde\\theta$ by $\\widetilde\\theta^{-1}$ in this formula. No monoidality of $L_Y$, faithfulness of level evaluations, or finite-field hypothesis on $k$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), tower projection formula followed by derived inverse limit; old step 8 and actual-mate normalization"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-sp-reduction-tower-normalized",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sfb-dc-setting",
+  "def-weil-compactifications-refinements",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-def-pe-derived-completion",
+  "def-sp-varying-ring-operations",
+  "det-sp-normalized-equivalence",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-integral-ringed-projection-maps",
+  "def-weil-derived-complete",
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models",
+  "def-sfb-proetale-tensor-model",
+  "lem-pur-system-ringed-sequence-site",
+  "def-sp-projection-reduction-presentation",
+  "def-weil-pbc-proetale-operations",
+  "def-sp-complete-projection-descent-maps"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sp-complete-projection-reduction-square]. The target coordinate is invertible by the reconstruction hypothesis and the specified tensor/scalar and pullback/scalar isomorphisms. Postcompose the square with its inverse to obtain r_Y(pi_R)=transportedProjection.",
+   "uses": [
+    "lem-sp-complete-projection-reduction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual composed reduction/limit adjunction. The unit of the normalized completed reduction adjunction is invertible on complete U and V by [det-sp-normalized-equivalence]. The other unit factor belongs to the derived strict-tower equivalence, so it and its image under total limit are invertible. Adjunction.comp_unit_app therefore makes the actual units eta_U and eta_V invertible.",
+   "uses": [
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper projection and inverse open projection are invertible by hypothesis. Functors preserve their isomorphisms and the pullback compositor, so the transported projection is invertible. Unit naturality gives pi_R;eta_U=eta_V;L(r_Y(pi_R)). Substitute the first step and postcompose eta_U inverse. Define the requested integral isomorphism as eta_V, L of the transported system isomorphism, eta_U inverse. Its hom and inverse have exactly the asserted formulas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry the proper counit tensor projection natural transformation to get its two-variable naturality square. Paste the naturality of the integral open projection and the pullback compositor; tensor functoriality and pushforward functoriality give the requested naturality equation for the actual compact-support projection.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-complete-projection-reduction-square",
+  "det-sp-normalized-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3): reduce the projection square to the new lemma, then formal unit descent, inverse construction and naturality, written in Lean by C8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper counit and open unit projection formula maps for integral complete constructible sheaves reduce to projection maps of finite coefficient towers and are detected by derived completeness",
+   "subdirectory": "",
+   "results": "; 8 hits: Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.counitAppApp, Condensed.profiniteSolidification, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitApp_app, LightCondensed.isoLocallyConstantOfIsColimit_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.*[Mm]orphism|[Cc]omplete.*[Cc]onservative",
+   "subdirectory": "",
+   "results": "; 25 hits: Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/Pi.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Algebra/Star/StarAlgHom.lean, Mathlib/Algebra/Star/StarAlgHom.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "subdirectory": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper counit and open unit projection formula maps for integral complete constructible sheaves reduce to projection maps of finite coefficient towers and are detected by derived completeness",
+   "subdirectory": "",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, CategoryTheory.constantSheafAdj_counit_app, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counitApp_app, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.counitApp, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compactification projection mates agree with derived limits of finite coefficient projection mates under strict reduction tensor and pullback comparisons",
+   "subdirectory": "",
+   "results": "; 8 hits: LightProfinite.proj_comp_transitionMapLE, LightProfinite.proj_comp_transitionMap, LightProfinite.proj_comp_transitionMapLE', Profinite.NobelingProof.GoodProducts.square_commutes, LightProfinite.proj_comp_transitionMap', LightProfinite.lightToProfinite_map_proj_eq, Profinite.NobelingProof.GoodProducts.smaller_factorization, CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived sheaves, ordinary modules or unrelated limits; none states this coherent derived coefficient-system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit reconstruction of complete module sheaves preserves the actual proper and open projection formula mates on strict coefficient systems",
+   "subdirectory": "",
+   "results": "; 8 hits: PresheafOfModules.limitPresheafOfModules, PresheafOfModules.limitCone, IsAdicComplete.StrictMono.of_comp_lift, PresheafOfModules.limitCone_π_app_app, IsAdicComplete.of_comp_lift, AdicCompletion.eval_lift, AdicCompletion.pi_apply_coe, AdicCompletion.eval_lift_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completion, presheaf limits, or abstract monoidal-adjunction facts do not give the stated strict derived projection comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "subdirectory": "",
+   "results": "; 12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completion, presheaf limits, or abstract monoidal-adjunction facts do not give the stated strict derived projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionTensorMap|projectionMap_mate",
+   "subdirectory": "CategoryTheory",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completion, presheaf limits, or abstract monoidal-adjunction facts do not give the stated strict derived projection comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula morphism for sheaves commutes with reduction to an inverse system of quotient coefficient rings and derived completion",
+   "subdirectory": "",
+   "results": "; 8 hits: IsAdicComplete.mk_liftAlgHom, LightProfinite.proj_comp_transitionMapLE', AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.kerProj, AdicCompletion.pi_apply_coe, AdicCompletion.kerProj.congr_simp, AdicCompletion.pi, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completion, presheaf limits, or abstract monoidal-adjunction facts do not give the stated strict derived projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the counit tensor projection morphism with extension of scalars on a ringed topos of inverse sequences",
+   "subdirectory": "",
+   "results": "; 8 hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.RestrictionCoextensionAdj.counit', LightCondensed.ihomPoints_symm_comp, ModuleCat.RestrictionCoextensionAdj.counit'_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completion, presheaf limits, or abstract monoidal-adjunction facts do not give the stated strict derived projection comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-direct-image-tower",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraph (3), tower projection formula followed by derived inverse limit; old step 8 and actual-mate normalization",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-complete-projection-mate-descent",
+  "worker": "NZ",
+  "summary": "Kept the statement and supplied the coherent system proof: ringed sequence reduction/limit adjunction, proper exchange-tensor square, unit-normalized open scalar square, reconstruction-transpose comparison, pasting, and unit naturality. All mathematical ingredients already have DAG nodes; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes det-sp-integral-direct-image-tower proof paragraph (3), with paragraph (2) used only through the assumed normalized compactification/limit comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-sequence-projection-derived-adjunction",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   },
+   {
+    "node": "lem-coef-sequence-pushforward-limit-projections",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ringed-site/sequence-site adjunction or tensor comparison, applied to the fixed compactification and its quotient system; it does not replace the integral-adjunction unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-07cefebba",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-07cefebba (reviewer sub-agent of L); spot-checked: Item read in full against blueprint main-20261015 det-sp-integral-direct-image-tower, paragraphs (2)-(3), and every cited statement. Steps 1-5 are correct. Step 1: the sequence-projection adjunction with Lq^*=r_T, and Rq_*=L_T with the actual unit and counit. Step 2: lem-weil-pbc-ringed-exchange-tensor-coherence applied to the square p∘q_Z≅q_Y∘p_•, which needs no cartesianness and uses counit-defined projections. Step 3: the ringed-diagram clause of lem-sf-open-tensor-normalization with g=id and ΔR_Z→A_•, so d=β; the inverse maps leave j_!, so the j_!⊣j^* bijection detects them. Step 4: I recomputed b_N=Rp_•(d_N)h from the adjunction-compatibility of κ, naturality of h and the triangle identities. Step 5: I checked the algebra, including μ'(a^p)^{-1}=(1⊗ν_p)^{-1} and Rp_•(d)h=b_M. Step 6: η naturality, with the right directions. C2 fault, fixed: Step 6 was marked elementary with no uses, but 'units invertible because U,V are derived complete' needs the passage from uniformizer completeness (sk-def-pe-derived-completion) to invertibility of the ℓ-power unit, which is the content of det-sp-normalized-equivalence (same unit, cofinality for ramified E). Step 6 now cites sk-def-pe-derived-completion, def-weil-derived-complete and det-sp-normalized-equivalence (T=Y, ℓ invertible), plus the uniqueness of units up to automorphism. It is now non-elementary and proof_deps were updated; no cycle. B4: in the statement, p\\ne\\ell was stored as a newline escape and is restored; no other change to the statement. Not superseded: the statement is unchanged from the base and the item is unsplit in the newest dagsnaps. No SGA. tool_uses accepted as generic calculus. Edge cases checked: j=id, X empty, non-flat quotients, ramified E. Maintainer note: the statement's 'canonical compactification/limit comparisons' are those of lem-sp-complete-compactification-limit-realization; this is inherited base wording.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteProjectionMateDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.complete_projection_mate_descent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.complete_projection_mate_descent"
+  ],
+  "file": "lean/Sheaf/Paper/CompleteProjectionMateDescent.lean",
+  "statement": "theorem complete_projection_mate_descent (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l) (X Y : Over (Scheme.Spec.obj (op (CommRingCat.of k)))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (c : Compactification f.left) (AX : SpNormalizedEquivalence l E X.left (m.abelian X.left) (m.red X.left)) (AZ : SpNormalizedEquivalence l E c.Z (m.abelian c.Z) (m.red c.Z)) (AY : SpNormalizedEquivalence l E Y.left (m.abelian Y.left) (m.red Y.left)) (M : Integral l E X.left) (K : Integral l E Y.left) (_hM : IntegralOnSlice.IsComplete l E X.left none M) (_hK : IntegralOnSlice.IsComplete l E Y.left none K) (_hMplus : ∃ a : ℤ, ((red l E m X.left).obj M).IsGE a) (_hKplus : ∃ a : ℤ, ((red l E m Y.left).obj K).IsGE a) (_hH : IntegralOnSlice.IsComplete l E X.left none (inputTensor l E m f.left M K)) (_hHplus : ∃ a : ℤ, ((red l E m X.left).obj (inputTensor l E m f.left M K)).IsGE a) (_hU : IntegralOnSlice.IsComplete l E Y.left none ((integralImage l E c).obj (inputTensor l E m f.left M K))) (_hUplus : ∃ a : ℤ, ((red l E m Y.left).obj ((integralImage l E c).obj (inputTensor l E m f.left M K))).IsGE a) (_hV : IntegralOnSlice.IsComplete l E Y.left none ((m.integral.tensor Y.left).ordinary.tensor.obj ((integralImage l E c).obj M, K))) (_hVplus : ∃ a : ℤ, ((red l E m Y.left).obj ((m.integral.tensor Y.left).ordinary.tensor.obj ((integralImage l E c).obj M, K))).IsGE a) (_hAlphaM : IsIso (compactificationLimit l E m c AX AZ AY M)) (_hAlphaH : IsIso (compactificationLimit l E m c AX AZ AY (inputTensor l E m f.left M K))) (hbM : IsIso (reconstruction l E m c AX AZ AY M)) (hbH : IsIso (reconstruction l E m c AX AZ AY (inputTensor l E m f.left M K))) (hOpen : IsIso (systemOpenInverse l E m c.i ((red l E m X.left).obj M) ((VaryingRing.G (rings l E) (transitions l E) c.g).obj ((red l E m Y.left).obj K)))) (_hProper : IsIso (((systemProperProjection l E m c.g).app ((VaryingRing.J (rings l E) (transitions l E) c.i).obj ((red l E m X.left).obj M))).app ((red l E m Y.left).obj K))) : let U := (integralImage l E c).obj (inputTensor l E m f.left M K) let V := (m.integral.tensor Y.left).ordinary.tensor.obj ((integralImage l E c).obj M, K) let theta := transportedProjection l E m c AX AZ AY M K hbM hbH hOpen let pi := ringedCompactificationProjection l E m.integral m.openIntegral c M K (red l E m Y.left).map pi = theta ∧ ∃ (etaU : U ≅ (lim l E m Y.left AY).obj ((red l E m Y.left).obj U)) (etaV : V ≅ (lim l E m Y.left AY).obj ((red l E m Y.left).obj V)) (t : (red l E m Y.left).obj V ≅ (red l E m Y.left).obj U) (e : V ≅ U), etaU.hom = (adj l E m Y.left AY).unit.app U ∧ etaV.hom = (adj l E m Y.left AY).unit.app V ∧ t.hom = theta ∧ e.hom = pi ∧ pi = etaV.hom ≫ (lim l E m Y.left AY).map theta ≫ etaU.inv ∧ e.inv = etaU.hom ≫ (lim l E m Y.left AY).map t.inv ≫ etaV.inv ∧ ∀ (M' : Integral l E X.left) (K' : Integral l E Y.left) (v : M ⟶ M') (w : K ⟶ K'), (m.integral.tensor Y.left).ordinary.tensor.map (Prod.mkHom ((integralImage l E c).map v) w) ≫ ringedCompactificationProjection l E m.integral m.openIntegral c M' K' = pi ≫ (integralImage l E c).map ((m.integral.tensor X.left).ordinary.tensor.map (Prod.mkHom v ((ringedPull l E f.left).map w)))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Uses the fixed ell-power strict system via exact uncurrying. Canonical comparison presentations are constrained on whole quotient complexes and augmentation generators. The compactification/limit map and its reconstruction counit are constructed from the actual adjunctions; the integral mate is the published ringedCompactificationProjection."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69bcc2fa5",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Re-delivery of 540a RETURN. Item node differs from base only in stmt_deps/lean (statement, proof, proof_deps unchanged). H2 done: theorem stmt_deps swapped to def-pur-integral-ringed-projection-maps and def-sfb-proetale-tensor-model. The remaining theorem stmt_deps det-sp-normalized-equivalence (sole owner of SpNormalizedEquivalence/r/L/adjunction) and lem-pur-system-ringed-sequence-site (declaration = constructed strictSystemSequenceEquivalence) are constructed objects used by the statement, so PASS on that point. H12 done: new node def-sp-projection-reduction-presentation cites all six owners in TeX = stmt_deps; all are landed def nodes on base. F3: def-weil-pbc-proetale-operations cited. F4: DescentModels forall-T reconstruction field replaced by explicit AX/AZ/AY on X.left, c.Z, Y.left; satisfiable since char p != ell; checked by hand that openLimit, properLimit, compactificationLimit, reconstruction, theta and the eta formula are invariant under an automorphism twist of the unpinned adjunction. F5 extra conjunct noted in report and true by proof step 5. Second module byte-identical to 540a. lean.statement verbatim in both files, single sorry, docstrings present, no name clash. No file changed, so no compile."
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "C8 stage 2",
+  "old_statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$ [def-weil-l-adic-coefficient-extension]. On each small pro-etale site put $A_{n,T}=(O/\\ell^n)_T$ and $R_T=\\varprojlim_n A_{n,T}$, identified with the pulled-back integral coefficient sheaf [sk-def-sp-coefficient-towers, sk-prop-sfb-qlbar-colimit-x]. Write $r_TN=(N\\otimes^L_{R_T}A_{n,T})_n$ for derived reduction [det-sp-reduction-tower-normalized], and $L_T=R\\varprojlim_n\\operatorname{Res}_n$ for total derived inverse limit of strict towers after restriction of scalars to $R_T$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. All derived categories are ordinary unbounded module derived categories; tower operations are the simultaneous section-model operations of [lem-coef-semilinear-derived-sections], with exact evaluations [det-sp-coefficient-towers-abelian].\n\nLet $k$ be a field of characteristic $p>0$ with $p\\ne\\ell$ and let $f:X\\to Y$ be a morphism of separated finite-type $k$-schemes [sk-def-sfb-dc-setting] with compactification $c=(j:X\\hookrightarrow\\bar X,p:\\bar X\\to Y)$ [def-weil-compactifications-refinements]. Put $F_R=Rp_{*,R}j_{!,R}$, $F_\\bullet=Rp_{*,\\bullet}j_{!,\\bullet}$, and use ordinary derived module pullback and tensor [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom, sk-def-sfb-module-derived-lower-shriek]. Let $M\\in D(R_X)$ and $K\\in D(R_Y)$ be derived complete with bounded-below reduction towers. Put $U=F_R(M\\otimes^Lf_R^*K)$ and $V=(F_RM)\\otimes^LK$. Assume $M\\otimes^Lf_R^*K,U,V$ are derived complete with bounded-below reduction towers. Assume the canonical compactification/limit comparisons identify $F_RN$ with $L_YF_\\bullet r_XN$ and the canonical reconstruction counits identify $r_YF_RN$ with $F_\\bullet r_XN$, for $N=M$ and $N=M\\otimes^Lf_R^*K$; comparisons and augmentations here have the strict-diagram normalization of total derived limit, not chosen level isomorphisms.\n\nLet $\\theta:F_\\bullet(r_XM)\\otimes^Lr_YK\\to F_\\bullet(r_XM\\otimes^Lf_\\bullet^*r_YK)$ be the proper counit projection mate followed by the inverse open unit projection mate on these systems. Suppose both system projection mates are invertible. The canonical tensor/scalar and pullback/scalar comparisons and the specified reconstruction counits identify its source with $r_YV$ and its target with $r_YU$ as derived systems. Write $\\widetilde\\theta:r_YV\\to r_YU$ for this composite.\n\nThe ordinary integral compact-support projection transformation $\\pi_R:V\\to U$, formed from the same proper counit and inverse open unit projection mates, satisfies the equality of derived morphisms\n$$\\pi_R=\\eta_U^{-1}\\circ L_Y(\\widetilde\\theta)\\circ\\eta_V.$$\nThis equality is natural in $M,K$ and is normalized by those actual units, counits and quotient augmentations. Consequently $\\pi_R$ is invertible, with inverse obtained by replacing $\\widetilde\\theta$ by $\\widetilde\\theta^{-1}$ in this formula. No monoidality of $L_Y$, faithfulness of level evaluations, or finite-field hypothesis on $k$ is assumed.",
+  "what": "Citation and dependency ownership repair only: the existing normalized models and constructed descent maps are extracted verbatim to their own definition node, which is now cited. No mathematical hypothesis, conclusion, definition body or Lean theorem signature changes. The proof route is separately reduced to the normalized square and formal completion-unit descent.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+   "place": "Paragraph (3): reduce the projection square to the new lemma, then formal unit descent, inverse construction and naturality, written in Lean by C8."
+  },
+  "citers": [
+   {
+    "id": "det-sp-integral-direct-image-tower",
+    "holds": true,
+    "note": "The Lean statement and all normalized maps are unchanged; only the maps declaration ownership and its citation change. The descent theorem remains available at the same name and signature."
+   },
+   {
+    "id": "lem-pur-compactification-b-projection-reduction",
+    "holds": true,
+    "note": "The Lean statement and all normalized maps are unchanged; only the maps declaration ownership and its citation change. The descent theorem remains available at the same name and signature."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "sk-def-sp-coefficient-towers",
+   "sk-prop-sfb-qlbar-colimit-x",
+   "det-sp-reduction-tower-normalized",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "lem-coef-semilinear-derived-sections",
+   "det-sp-coefficient-towers-abelian",
+   "sk-def-sfb-dc-setting",
+   "def-weil-compactifications-refinements",
+   "sk-def-sfb-module-derived-pushpull",
+   "sk-def-sfb-derived-tensor-hom",
+   "sk-def-sfb-module-derived-lower-shriek",
+   "sk-def-pe-derived-completion",
+   "def-sp-varying-ring-operations",
+   "det-sp-normalized-equivalence",
+   "def-sf-integral-system-canonical-bridge",
+   "def-pur-integral-ringed-projection-maps",
+   "def-weil-derived-complete",
+   "def-coef-semilinear-derived-calculus",
+   "def-coef-semilinear-system-models",
+   "def-sfb-proetale-tensor-model",
+   "lem-pur-system-ringed-sequence-site",
+   "def-sp-projection-reduction-presentation",
+   "def-weil-pbc-proetale-operations"
+  ],
+  "old_proof": [
+   {
+    "text": "For each $T$ let $q_T:(T^{\\mathbf N},A_{\\bullet,T})\\to(T,R_T)$ be the ringed sequence projection. By [lem-coef-sequence-projection-derived-adjunction] its derived pullback is exactly $r_T$, computed by the one strict quotient complex of a flat-term K-flat representative. By [lem-coef-sequence-pushforward-limit-projections], $Rq_{T*}=L_T$ with the prescribed total-limit projections. Thus $r_T\\dashv L_T$ has actual unit $\\eta$ and counit $e$ with the normalization in the question. The ringed sequence sites and their operations are those of [lem-coef-semilinear-derived-sections]. Use $\\mu:r(A\\otimes^LB)\\cong rA\\otimes^LrB$ and $\\nu_u:rLu_R^*\\cong Lu_\\bullet^*r$ from [lem-sp-reduction-derived-monoidal-tower]. Their compatibility with quotient augmentations fixes all the tensor and pullback coordinates used below.",
+    "uses": [
+     "lem-coef-sequence-projection-derived-adjunction",
+     "lem-coef-sequence-pushforward-limit-projections",
+     "lem-coef-semilinear-derived-sections",
+     "lem-sp-reduction-derived-monoidal-tower"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+     "place": "Paragraph (3), simultaneous reduction and the actual total-limit unit"
+    }
+   },
+   {
+    "text": "Put $Z=\\bar X$. For the commutative square with vertical edges $p:Z\\to Y$, $p_\\bullet:Z^{\\mathbf N}\\to Y^{\\mathbf N}$ and horizontal edges $q_Z,q_Y$, let $h_B:r_YRp_{*,R}B\\to Rp_{*,\\bullet}r_ZB$ be the mate of the canonical pullback square. In particular $h_B$ is the transpose under $Lp_\\bullet^*\\dashv Rp_{*,\\bullet}$ of $r_Z$ of the proper counit, after $\\nu_p$. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to this square, with arbitrary $B\\in D(R_Z)$ and $K\\in D(R_Y)$. It gives\n$$Rp_{*,\\bullet}(a^p_{B,K})h_{B\\otimes^LLp_R^*K}\\,r_Y(\\pi^p_R)=\\pi^p_\\bullet(h_B\\otimes1)\\mu_{Rp_{*,R}B,K},$$\nwhere $a^p=(1\\otimes\\nu_p)\\mu$. This is an equality in the derived category of systems, for the counit-defined projections $\\pi^p$; the cited theorem allows arbitrary ringed topoi and arbitrary structural ring maps. No invertibility of $h$ or $\\pi^p$ is used here.",
+    "uses": [
+     "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+     "place": "Paragraph (3), compatibility of the proper counit projection with reduction"
+    }
+   },
+   {
+    "text": "Let $d_N:r_Zj_{!,R}N\\xrightarrow{\\sim}j_{!,\\bullet}r_XN$ be the canonical open scalar comparison. The localized ringed-site and ringed-diagram assertions of [lem-sf-open-tensor-normalization] apply to the constant sequence ring $\\Delta R_Z\\to A_{\\bullet,Z}$ and its restriction to $X$. On quotient representatives $d$ is $[x]\\otimes a\\mapsto[x\\otimes a|_X]$. It carries the open unit to the system open unit: after restriction both sides are $x\\otimes a\\mapsto x\\otimes a$. This identity is simultaneous in the quotient diagram by [lem-coef-semilinear-derived-sections]; the scalar tensor and restriction comparisons are $\\mu,\\nu$ of Step 1.\n\nWrite $\\gamma_R:j_!N\\otimes^LJ\\to j_!(N\\otimes^Lj^*J)$ and $\\gamma_\\bullet$ for the inverse-unit open projection maps. Their inverses are the open adjuncts of unit tensor identity by [lem-sf-open-tensor-normalization]. Taking these adjuncts, the two routes in\n$$j_{!,\\bullet}(a^j_{N,J})\\,d_{N\\otimes^Lj^*J}\\,r_Z(\\gamma_R)=\\gamma_\\bullet(d_N\\otimes1)\\mu_{j_!N,J}$$\nrestrict to the same unit tensor identity, by the displayed formula for $d$ and the unit-compatible $\\mu,\\nu$. The open adjunction Hom bijection therefore gives the equality before evaluating the systems. Here $a^j=(1\\otimes\\nu_j)\\mu$.",
+    "uses": [
+     "lem-sf-open-tensor-normalization",
+     "lem-coef-semilinear-derived-sections"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+     "place": "Paragraph (3), compatibility of the inverse open unit projection with reduction"
+    }
+   },
+   {
+    "text": "For $N=M,H:=M\\otimes^Lf_R^*K$, denote the assumed compactification/limit isomorphism by $\\alpha_N:F_RN\\to L_YF_\\bullet r_XN$. Its reconstruction transpose is\n$$b_N=e_{F_\\bullet r_XN}\\,r_Y(\\alpha_N):r_YF_RN\\xrightarrow{\\sim}F_\\bullet r_XN.$$\nWe check which comparison this is. The assumed normalization writes $\\alpha_N$ as $Rp_{*,R}j_{!,R}(\\eta_N)$ followed by the open/limit and proper/limit comparisons and scalar restrictions. The proper/limit comparison is the direct-image composition comparison for $pq_Z=q_Yp_\\bullet$; by [lem-sfb-ringed-derived-monoidal-comparisons] that composition comparison is adjunction-compatible. Its conjugate is the proper mate $h$ in Step 2. The open/limit comparison is conjugate to $d$ in Step 3: its transpose is the open scalar map whose restriction is the same open unit, hence equals $d$ by the open adjunction Hom bijection. Pasting these squares by [lem-weil-pbc-mate-pasting], and cancelling $L_X(e)\\eta_{L_X}=1$ and $e_{r_X}r_X(\\eta)=1$, gives\n$$b_N=Rp_{*,\\bullet}(d_N)\\,h_{j_{!,R}N}.$$\nThese cancellations use the actual reduction/limit adjunction of Step 1. Thus this is the comparison specified in the question, not an identification inferred only from finite projections.",
+    "uses": [
+     "lem-sfb-ringed-derived-monoidal-comparisons",
+     "lem-weil-pbc-mate-pasting",
+     "lem-sf-open-tensor-normalization"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+     "place": "Paragraphs (2)-(3), normalization by the compactification/limit comparisons and reconstruction counits"
+    }
+   },
+   {
+    "text": "Apply Step 2 with $B=j_{!,R}M$ and Step 3 with $N=M$, $J=Lp_R^*K$, using $j^*Lp_R^*K\\cong Lf_R^*K$. The canonical pullback-composition comparisons are monoidal and adjunction-compatible by [lem-sfb-ringed-derived-monoidal-comparisons], so $a^j,a^p$ combine to the specified scalar tensor/pullback identification for $H$. Compose the proper equality with $Rp_{*,\\bullet}$ of the open equality. Naturality of $h$ moves $\\gamma_R$ past $h$; Step 4 then identifies each $Rp_{*,\\bullet}(d_N)h_{j_!N}$ with $b_N$. The result is\n$$b_H\\,r_Y(\\pi_R)=\\theta\\,(b_M\\otimes1)\\mu_{F_RM,K},$$\nwith the input tensor/pullback coordinates understood. By definition, conjugating the right side by these same coordinates and $b_H$ is $\\widetilde\\theta:r_YV\\to r_YU$. Hence $r_Y(\\pi_R)=\\widetilde\\theta$. This uses equalities of whole-system transformations from Steps 2-4, without detecting equality by finite evaluations.",
+    "uses": [
+     "lem-sfb-ringed-derived-monoidal-comparisons"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+     "place": "Paragraph (3), pasting the proper and open factor identities"
+    }
+   },
+   {
+    "text": "Naturality of the actual unit of $r_Y\\dashv L_Y$ gives $\\eta_U\\pi_R=L_Y(r_Y\\pi_R)\\eta_V$. The units $\\eta_U,\\eta_V$ are invertible: $U,V\\in D(R_Y)$ are derived complete [sk-def-pe-derived-completion], so their canonical maps to the derived limits of their uniformizer reductions are isomorphisms, and transporting the Roos triangle of that limit along this isomorphism makes the canonical map the first map of a Roos triangle, which is derived completeness in the sense of [def-weil-derived-complete]. Apply [det-sp-normalized-equivalence] with $T=Y$: $\\ell$ is invertible on $Y$ since $p\\ne\\ell$, its coefficient sheaf is our $R_Y$, its functors are the same $r_Y$ and $L_Y$, and it handles the cofinality of the powers of $\\ell$ and of the uniformizer. Its unit $M\\to L_Yr_YM$ is invertible on derived-complete objects. Two adjunctions with the same functors $r_Y\\dashv L_Y$ have units differing by a natural automorphism of $L_Yr_Y$, so the actual unit $\\eta$ of Step 1 is invertible at $U$ and $V$ as well. Substituting Step 5 and multiplying by $\\eta_U^{-1}$ proves the asserted formula. Both system projection mates are invertible by hypothesis, and all coordinate comparisons are isomorphisms, so $\\widetilde\\theta$ is invertible. Functoriality shows that $\\eta_V^{-1}L_Y(\\widetilde\\theta^{-1})\\eta_U$ composes with the asserted map in both orders to the identity. All the squares used above are natural in both inputs; inversion of a natural family of isomorphisms is natural. This proves the stated naturality and normalization, using neither monoidality of $L_Y$ nor any restriction on $k$ beyond the stated hypotheses.",
+    "uses": [
+     "sk-def-pe-derived-completion",
+     "def-weil-derived-complete",
+     "det-sp-normalized-equivalence"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+     "place": "Paragraph (3), derived inverse limit and completeness"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-coef-sequence-projection-derived-adjunction",
+   "lem-coef-sequence-pushforward-limit-projections",
+   "lem-coef-semilinear-derived-sections",
+   "lem-sp-reduction-derived-monoidal-tower",
+   "lem-weil-pbc-ringed-exchange-tensor-coherence",
+   "lem-sf-open-tensor-normalization",
+   "lem-sfb-ringed-derived-monoidal-comparisons",
+   "lem-weil-pbc-mate-pasting",
+   "sk-def-pe-derived-completion",
+   "def-weil-derived-complete",
+   "det-sp-normalized-equivalence"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-98066",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T180546-L-4003932",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone (verbatim relocation of 22 defs with public re-export; item theorem statement byte-identical); projection_reduction_square vs stage-2 conjunct 1 multiplied by targetComparison.hom and node lem-sp-complete-projection-reduction-square; item node proof_deps vs Lean; both direct importers compiled against delivered modules"
+ }
+}

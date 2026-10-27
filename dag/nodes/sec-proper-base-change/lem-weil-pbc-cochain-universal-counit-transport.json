@@ -1,0 +1,251 @@
+{
+ "id": "lem-weil-pbc-cochain-universal-counit-transport",
+ "kind": "statement",
+ "title": "Universal cochain counit transported from homotopy localization",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with chosen unbounded derived categories [def-weil-abstract-derived-category]. Write $p_{\\mathcal A}:C(\\mathcal A)\\to K(\\mathcal A)$ for quotient by chain homotopy, $Q^h_{\\mathcal A}:K(\\mathcal A)\\to D(\\mathcal A)$ for homotopy localization, and $Q_{\\mathcal A}:C(\\mathcal A)\\to D(\\mathcal A)$ for complex localization, and likewise for $\\mathcal B$. Let $F:\\mathcal A\\to\\mathcal B$ be additive, with termwise functors $F^c,F^h$. Suppose $L:D(\\mathcal A)\\to D(\\mathcal B)$ and $\\epsilon:LQ^h_{\\mathcal A}\\to Q^h_{\\mathcal B}F^h$ exhibit a right Kan extension: for every $G:D(\\mathcal A)\\to D(\\mathcal B)$ and $a:GQ^h_{\\mathcal A}\\to Q^h_{\\mathcal B}F^h$ there is a unique $b:G\\to L$ with $\\epsilon(bQ^h_{\\mathcal A})=a$.\nLet $\\beta:LQ_{\\mathcal A}\\to Q_{\\mathcal B}F^c$ be the canonical cochain comparison [def-derived-cochain-counit], formed by whiskering $\\epsilon$ by $p_{\\mathcal A}$ and conjugating by the canonical localization factorization isomorphisms [def-derived-cochain-comparison-factors]. Then $(L,\\beta)$ is a right Kan extension of $Q_{\\mathcal B}F^c$ along $Q_{\\mathcal A}$. Explicitly, for every natural $a:GQ_{\\mathcal A}\\to Q_{\\mathcal B}F^c$ there is a unique $b:G\\to L$ with $\\beta(bQ_{\\mathcal A})=a$. For every complex $P$, $\\beta_P$ is invertible if and only if $\\epsilon_{p_{\\mathcal A}P}$ is invertible. Thus the same functor, with the specified cochain counit, retains both universality and every resolving-class computation; no exactness of $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (proetale-lemma-naive-completion), construction of the canonical completion map; agent-written categorical refinement of the Q1 argument in the live constant-completion proof, evaluation of the strict reduction tower and its completion-map normalization: old step 3, Q1 passage from homotopy universality to the prescribed cochain counit"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-derived-cochain-counit",
+  "def-derived-cochain-comparison-factors"
+ ],
+ "proof": [
+  {
+   "text": "Let p be the homotopy quotient, H = F.mapHomotopyCategory (.up ℤ) ⋙ Qh, and s = quotientCompQhIso A. Unfolding derivedCochainCounit identifies beta with (isoWhiskerRight s L).inv followed by the associator, whiskerLeft p epsilon, and (derivedCochainComparisonFactors F).inv. These are exactly the specified comparison maps; no replacement counit is chosen.",
+   "uses": [
+    "def-derived-cochain-comparison-factors",
+    "def-derived-cochain-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/def-weil-pbc-completed-pullback.md",
+    "place": "The n-th evaluation of total left derived tower pullback and the final sentence identifying the comparison with the completion map; homotopy-to-cochain universal counit normalization in the constant-completion equivalence. Agent-written categorical argument; Stacks Tag 099M (proetale-lemma-naive-completion) supplies the completion context, not this categorical transport theorem."
+   }
+  },
+  {
+   "text": "Precomposition with p is full and faithful on natural transformations (Mathlib HomotopyCategory instances, obtained by descent through the quotient). Consequently RightExtension.precomp Qh H p is an equivalence: apply CostructuredArrow.isEquivalenceMap₂ to this fully faithful whiskering functor and the identity functor on candidate extensions. Transport the terminal object supplied by the assumed right Kan property through this equivalence, then use CostructuredArrow.isoMk with the identity on L to identify the resulting counit with associator.hom followed by whiskerLeft p epsilon. This is the quotient descent and uniqueness argument of the original plan, expressed in the category of right extensions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/def-weil-pbc-completed-pullback.md",
+    "place": "The n-th evaluation of total left derived tower pullback and the final sentence identifying the comparison with the completion map; homotopy-to-cochain universal counit normalization in the constant-completion equivalence. Agent-written categorical argument; Stacks Tag 099M (proetale-lemma-naive-completion) supplies the completion context, not this categorical transport theorem."
+   }
+  },
+  {
+   "text": "Transport this terminal right extension along (Functor.rightExtensionEquivalenceOfIso₁ s (p ⋙ H)).functor. The resulting counit is (isoWhiskerRight s L).inv followed by the counit of step 2; the object is still L, and the identification uses the identity natural isomorphism on L. Finally apply Functor.isRightKanExtension_iff_of_iso₂ with (derivedCochainComparisonFactors F).symm and Iso.refl L. Its compatibility equation is the defining formula in step 1, after reassociating composition. This proves the right Kan property for the prescribed beta.",
+   "uses": [
+    "def-derived-cochain-comparison-factors",
+    "def-derived-cochain-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/def-weil-pbc-completed-pullback.md",
+    "place": "The n-th evaluation of total left derived tower pullback and the final sentence identifying the comparison with the completion map; homotopy-to-cochain universal counit normalization in the constant-completion equivalence. Agent-written categorical argument; Stacks Tag 099M (proetale-lemma-naive-completion) supplies the completion context, not this categorical transport theorem."
+   }
+  },
+  {
+   "text": "For a complex P, unfold derivedCochainCounit and derivedCochainComparisonFactors. In the chosen localization and homotopy quotient implementations, every comparison component outside epsilon is an identity. The formula reduces to L.map (𝟙 _) ≫ epsilon.app (p.obj P) ≫ Qh.map (𝟙 _) ≫ 𝟙 _. Functor.map_id and the category identity laws therefore give beta.app P = epsilon.app (p.obj P). Rewrite by this equality to obtain the IsIso equivalence in both directions. No exactness assumption is used.",
+   "uses": [
+    "def-derived-cochain-comparison-factors",
+    "def-derived-cochain-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/def-weil-pbc-completed-pullback.md",
+    "place": "The n-th evaluation of total left derived tower pullback and the final sentence identifying the comparison with the completion map; homotopy-to-cochain universal counit normalization in the constant-completion equivalence. Agent-written categorical argument; Stacks Tag 099M (proetale-lemma-naive-completion) supplies the completion context, not this categorical transport theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-derived-cochain-comparison-factors",
+  "def-derived-cochain-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/def-weil-pbc-completed-pullback.md",
+  "place": "The n-th evaluation of total left derived tower pullback and the final sentence identifying the comparison with the completion map; homotopy-to-cochain universal counit normalization in the constant-completion equivalence. Agent-written categorical argument; Stacks Tag 099M (proetale-lemma-naive-completion) supplies the completion context, not this categorical transport theorem. Lean implementation by J9, 2026-10-23: quotient precomposition and localization comparison preserve terminal right extensions; identity components give the componentwise equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering a homotopy-category universal derived counit to cochain complexes preserves its universal property and its specified components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"Given additive functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories and a natural transformation $\\\\alpha : F \\\\Rightarrow G$, this constructs the induced natural transformation betw\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"For additive functors $F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories and natural transformations $\\\\alpha : F \\\\Rightarrow G$, $\\\\beta : G \\\\Rightarrow H$, the right-derived natural tr\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, the $ n $-th right-derived natural transformation i\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"In an abelian category with injective resolutions, the composition of natural transformations between additive functors, when lifted to their right-derived functors mapping to the homotopy category of\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, this constructs the induced natural transformat\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H $, the left-derived n\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\", \"mapHomotopyCategory\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "grep",
+   "query": "isUniversalPrecompEquiv|IsRightKanExtension.*[Pp]recomp",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"480\", \"text\": \"noncomputable def LeftExtension.isUniversalPrecompEquiv (e : LeftExtension L F) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"486\", \"text\": \"noncomputable def RightExtension.isUniversalPrecompEquiv (e : RightExtension L F) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"499\", \"text\": \"    (LeftExtension.isUniversalPrecompEquiv L F G _).trans\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"507\", \"text\": \"lemma isRightKanExtension_iff_precomp (α : L ⋙ F' ⟶ F) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean\", \"line\": \"512\", \"text\": \"    (RightExtension.isUniversalPrecompEquiv L F G _).trans\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy quotient precomposition transports universal derived counits with the canonical cochain localization factor isomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \":\\n  HomologicalComplexUpToQuasiIso.Qh ⋙ F.mapHomologicalComplexUpToQuasiIso c ≅\\n    F.mapHomotopyCategory c ⋙ HomologicalComplexUpToQuasiIso.Qh\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \":\\n  HomologicalComplexUpToQuasiIso.Q ⋙ F.mapHomologicalComplexUpToQuasiIso c ≅\\n    F.mapHomologicalComplex c ⋙ HomologicalComplexUpToQuasiIso.Q\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \"(K : CochainComplex C₁ ℤ) :\\n  F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj K) =\\n    F.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C₁).hom.app K) ≫\\n      F.mapDerivedCategoryFactors.hom.app K ≫\\n        (DerivedCategory.quotientCompQhIso C₂).inv.app _ ≫\\n    \", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat C ⥤ D\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \":\\n  Localization.Lifting HomologicalComplexUpToQuasiIso.Qh (HomotopyCategory.quasiIso C c)\\n    (F.mapHomotopyCategory c ⋙ HomologicalComplexUpToQuasiIso.Qh) (F.mapHomologicalComplexUpToQuasiIso c)\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, there exists a natural isomorphism between the composition of the de\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": IsIso (HoCat.resolutionCompToLocalizationNatTrans L)\", \"doc\": \"The natural transformation from the composition of the resolution functor (sending objects to cofibrant replacements) and the localization functor (inverting weak equivalences) to the direct localizat\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.quotientCompQhIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomotopyCategory.quotient C c ⋙ Qh ≅ Q\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category followed by the functor to the derived category is naturally isomorphic to the direct localization\"}\n  {\"name\": \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] : IsIso (Q.map f)\", \"doc\": \"In the derived category of an abelian category, the localization functor $ Q $ maps quasi-isomorphisms between cochain complexes to isomorphisms. Specifically, for any quasi-isomorphism $ f: K \\to L $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact match or one-line specialization; retrieved declarations supply separate categorical APIs, not this normalized construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.EssSurj",
+   "results": "{\"t\": \"2026-10-22T09:34:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Full, CategoryTheory.Functor.EssSurj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essSurj_of_comp_fully_faithful\", \"CategoryTheory.Functor.full_of_comp_essSurj\", \"CategoryTheory.Functor.IsEquivalence.mk\", \"CategoryTheory.Comma.instEssSurjCompPostOfFull\", \"CategoryTheory.Comma.essSurj_map\", \"CategoryTheory.Functor.essSurj_mapArrow\", \"CategoryTheory.MorphismProperty.map_top_eq_top_of_essSurj_of_full\", \"CategoryTheory.CostructuredArrow.instEssSurjCompObjPostOfFull\"], \"digest\": \"ee7c93cf146a73a5\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "grep",
+   "query": "full_whiskeringLeft|faithful_whiskeringLeft|whiskeringLeft.*[Ff]ull|whiskeringLeft.*EssSurj",
+   "results": "{\"t\": \"2026-10-22T09:34:59Z\", \"tool\": \"grep\", \"query\": \"full_whiskeringLeft|faithful_whiskeringLeft|whiskeringLeft.*[Ff]ull|whiskeringLeft.*EssSurj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\", \"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Shift/Induced.lean\"], \"digest\": \"8900273f684ee694\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition with a full essentially surjective functor is fully faithful on functor categories; natural transformations descend uniquely through the homotopy quotient",
+   "results": "{\"t\": \"2026-10-22T09:35:00Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition with a full essentially surjective functor is fully faithful on functor categories; natural transformations descend uniquely through the homotopy quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quotient.full_whiskeringLeft_functor\", \"CategoryTheory.CostructuredArrow.instFullCompPre\", \"HomotopicalAlgebra.CofibrantObject.instFullHoCatToHoCat\", \"CategoryTheory.CostructuredArrow.instEssSurjCompObjPostOfFull\", \"CategoryTheory.Functor.Full.toEssImage\", \"SSet.Truncated.HomotopyCategory.instFullFreeReflOneTruncation₂QuotientFunctor\", \"ComplexShape.Embedding.instFullHomotopyCategoryExtendHomotopyFunctor\", \"HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient\"], \"digest\": \"3208dc25693c7ec3\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "grep",
+   "query": "whiskerLeft|whiskeringLeft|Full|EssSurj",
+   "results": "{\"t\": \"2026-10-22T09:35:34Z\", \"tool\": \"grep\", \"query\": \"whiskerLeft|whiskeringLeft|Full|EssSurj\", \"sub\": \"Algebra/Homology/HomotopyCategory.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"66\", \"68\", \"89\", \"90\", \"92\"], \"digest\": \"7d23594910976672\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Precomposition with the homotopy category quotient is fully faithful on functor categories",
+   "results": "{\"t\": \"2026-10-22T09:35:35Z\", \"tool\": \"leansearch\", \"query\": \"Precomposition with the homotopy category quotient is fully faithful on functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.fullyFaithfulInducedFunctor\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"CategoryTheory.Functor.FullyFaithful.ofCompFaithful\", \"HomotopyCategory.instFaithfulFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"CategoryTheory.Functor.FullyFaithful.comp\", \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"HomotopyCategory.quotient\", \"HomotopyCategory.homologyFunctorFactors\"], \"digest\": \"dba6b9fb585563f1\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "grep",
+   "query": "whiskeringLeft.*[Ff]ull|full_whiskering|faithful_whiskering|full_whisker|faithful_whisker",
+   "results": "{\"t\": \"2026-10-22T09:35:35Z\", \"tool\": \"grep\", \"query\": \"whiskeringLeft.*[Ff]ull|full_whiskering|faithful_whiskering|full_whisker|faithful_whisker\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/LeftResolution/Reduced.lean\", \"Mathlib/Algebra/Homology/LeftResolution/Reduced.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"e43967c993c05ea7\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right Kan extension on homotopy categories remains universal after precomposition with the quotient from cochain complexes and conjugation by localization comparison isomorphisms",
+   "results": "{\"t\": \"2026-10-22T09:36:34Z\", \"tool\": \"leanfinder\", \"query\": \"A right Kan extension on homotopy categories remains universal after precomposition with the quotient from cochain complexes and conjugation by localization comparison isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.hasPointwiseRightKanExtension_of_hasPointwiseLeftDerivedFunctor\", \"CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension'\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory\", \"CategoryTheory.Functor.totalRightDerived\"], \"digest\": \"e2bc298d3ecd729a\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightKanExtension\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-22T09:36:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightKanExtension\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between arbitrary functors from the homotopy category of cochain complexes correspond bijectively to natural transformations after precomposition with the quotient functor",
+   "results": "{\"t\": \"2026-10-22T09:37:04Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between arbitrary functors from the homotopy category of cochain complexes correspond bijectively to natural transformations after precomposition with the quotient functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.mapHomotopyCategory_app\", \"CategoryTheory.NatTrans.mapHomotopyCategory\", \"HomotopyCategory.singleFunctorsPostcompQuotientIso\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory\", \"HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"CategoryTheory.Functor.mapHomotopyCategoryFactors\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\"], \"digest\": \"dd5a63d32a20cf83\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyCategory\", \"whiskeringLeft\"",
+   "results": "{\"t\": \"2026-10-22T09:37:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopyCategory\\\", \\\"whiskeringLeft\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"HomotopyCategory.instFaithfulFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\"], \"digest\": \"b2f1c397a77c72cc\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*whiskeringLeft|Quotient.*whiskeringLeft",
+   "results": "{\"t\": \"2026-10-22T09:37:28Z\", \"tool\": \"grep\", \"query\": \"instance.*whiskeringLeft|Quotient.*whiskeringLeft\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\"], \"digest\": \"1c4c5f8139150d14\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between functors on a homotopy category lift uniquely from cochain complexes because quotient precomposition is full and faithful",
+   "results": "{\"t\": \"2026-10-22T09:37:28Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations between functors on a homotopy category lift uniquely from cochain complexes because quotient precomposition is full and faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quotient.natTransLift\", \"CategoryTheory.NatTrans.mapHomotopyCategory\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"CategoryTheory.NatTrans.mapHomotopyCategory_app\", \"HomotopyCategory.homologyFunctorFactors\", \"HomotopyCategory.instFaithfulFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\"], \"digest\": \"9db5ae682f29b551\"}",
+   "date": "2026-10-22",
+   "verdict": "The exact normalized item is not supplied by these hits. Quotient precomposition full/faithful is available in Mathlib; its same-component, representative-map argument is elementary here and is written directly in step 2; KanExtension.Basic precomp equivalence requires an equivalence and cannot be applied to p."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constant-completion-equivalence",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "evaluation of the strict reduction tower and its completion-map normalization: old step 3, Q1 passage from homotopy universality to the prescribed cochain counit",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-cochain-universal-counit-transport",
+  "worker": "stage1",
+  "group": "Q45",
+  "summary": "Kept the statement and all statement dependencies. Proved normalized cochain universality by explicit conjugation, descending the same components to the homotopy quotient, and applying the assumed Kan property. Wrote the representative-map naturality argument, equality detection, conjugation equation and both component inverses in full. Self-review folded the proposed quotient-precomposition leaf into an elementary step; no new nodes are needed. No exactness or boundedness hypotheses are added.",
+  "blueprint": "The n-th evaluation of total left derived tower pullback and the final sentence identifying the comparison with the completion map; homotopy-to-cochain universal counit normalization in the constant-completion equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-80b139c8c",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-80b139c8c (reviewer sub-agent of L); spot-checked: I read the whole delivery: item JSON and report, with zero new nodes. The snapshot has no repair note for this item, so the 2026-10-21 re-split rules do not apply. The statement and stmt_deps are unchanged, and proof_deps equals the union of the step uses. Checked against the cited statements: def-derived-cochain-comparison-factors gives the natural iso from Q_B∘F^c to Q^h_B∘F^h∘p_A, and the item uses its inverse t (direction checked). def-derived-cochain-counit defines β by conjugating ε. That definition says the component equals ε at the homotopy quotient; this holds only up to the isos s and t. The proof correctly uses the conjugation formula β_P = t_P ε_{pP} L(s_P^{-1}) instead of a literal equality. I recomputed every step. Step 1: the types of β_P and of the transported map ã_P = t^{-1} a_P G(s_P) check out. Step 2: p is the identity on objects and full, so ã descends to a natural a^h on K(A), and transformations on K(A) are detected after p. The homotopy right-Kan hypothesis then gives a unique b. Step 3: naturality of an arbitrary c at s_P^{-1} gives t^{-1} β_P c G(s_P) = ε c, so β(cQ_A) = a is equivalent to ε(cQ^h) = a^h. Uniqueness therefore holds for every c, and ε is never cancelled. Step 4: β_P and ε_{pP} differ only by isomorphisms, and the stated inverses are correct. All four steps are elementary. Edge cases checked: non-exact additive F, a non-invertible ε, s and t not identities, the zero category, and F = L = ε = id. No added hypotheses. Duplicate search: lem-pur-cochain-homotopy-derived-comparison goes the other way (cochain to homotopy), and no node states this homotopy-to-cochain transport with the specified β. The citer, lem-weil-pbc-constant-completion-equivalence step 3, uses exactly this conclusion. No SGA citation; proof_origin.by = agent is accurate because Stacks 099M is only context. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CochainUniversalCounitTransport",
+  "declaration": "CategoryTheory.cochainUniversalCounitTransport",
+  "file": "lean/Sheaf/CategoryTheory/CochainUniversalCounitTransport.lean",
+  "statement": "theorem cochainUniversalCounitTransport {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] (F : A ⥤ B) [F.Additive] (L : DerivedCategory A ⥤ DerivedCategory B) (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) [L.IsRightKanExtension ε] : L.IsRightKanExtension (derivedCochainCounit F L ε) ∧ ∀ P : CochainComplex A ℤ, IsIso ((derivedCochainCounit F L ε).app P) ↔ IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj P))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a214c36b9",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: abelian A,B with HasDerivedCategory at independent universes; additive F with no exactness; ε : Qh⋙L ⟶ F^h⋙Qh with [L.IsRightKanExtension ε], which is Mathlib terminality, i.e. the node's unique-b property. Conclusion: L.IsRightKanExtension (derivedCochainCounit F L ε) ∧ ∀ P, IsIso β_P ↔ IsIso ε_{pP}. β is the recorded canonical conjugate (ExactEquivalenceDerivedSquares l.317), not an arbitrary map; dependency universes are free. Docstring has all 4 proof steps; β formula and both inverse formulas re-derived. Source place and blueprint tag present; statement field verbatim in file; only lean field changed vs live node; no other delivery of the item; only private helpers exist (no H4 duplicate); sorry only; report has Worker report and Second reading sections. No compile (no FIX). Advisory: no copyright header; redundant Abelian.Basic import."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261023T041830-L-1702076",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
